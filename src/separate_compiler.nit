@@ -26,6 +26,9 @@ redef class ToolContext
 	# --no-inline-intern
 	var opt_no_inline_intern: OptionBool = new OptionBool("Do not inline call to intern methods", "--no-inline-intern")
 
+	# --no-union-attribute
+	var opt_no_union_attribute: OptionBool = new OptionBool("But primitive attibutes in a box instead of an union", "--no-union-attribute")
+
 	# --inline-coloring-numbers
 	var opt_inline_coloring_numbers: OptionBool = new OptionBool("Inline colors and ids", "--inline-coloring-numbers")
 
@@ -46,6 +49,7 @@ redef class ToolContext
 		super
 		self.option_context.add_option(self.opt_separate)
 		self.option_context.add_option(self.opt_no_inline_intern)
+		self.option_context.add_option(self.opt_no_union_attribute)
 		self.option_context.add_option(self.opt_inline_coloring_numbers)
 		self.option_context.add_option(self.opt_bm_typing)
 		self.option_context.add_option(self.opt_phmod_typing)
@@ -61,6 +65,7 @@ redef class ModelBuilder
 		self.toolcontext.info("*** COMPILING TO C ***", 1)
 
 		var compiler = new SeparateCompiler(mainmodule, runtime_type_analysis, self)
+		compiler.compile_header
 
 		# compile class structures
 		for m in mainmodule.in_importation.greaters do
@@ -137,7 +142,7 @@ class SeparateCompiler
 
 	redef fun compile_header_structs do
 		self.header.add_decl("typedef void(*nitmethod_t)(void); /* general C type representing a Nit method. */")
-		self.header.add_decl("typedef void* nitattribute_t; /* general C type representing a Nit attribute. */")
+		self.compile_header_attribute_structs
 		self.header.add_decl("struct class \{ int box_kind; nitmethod_t vft[1]; \}; /* general C type representing a Nit class. */")
 
 		if modelbuilder.toolcontext.opt_generic_tree.value then
@@ -156,6 +161,21 @@ class SeparateCompiler
 
 
 		self.header.add_decl("typedef struct \{ struct type *type; struct class *class; nitattribute_t attrs[1]; \} val; /* general C type representing a Nit instance. */")
+	end
+
+	fun compile_header_attribute_structs
+	do
+		if modelbuilder.toolcontext.opt_no_union_attribute.value then
+			self.header.add_decl("typedef void* nitattribute_t; /* general C type representing a Nit attribute. */")
+		else
+			self.header.add_decl("typedef union \{")
+			self.header.add_decl("void* val;")
+			for c, v in self.box_kinds do
+				var t = c.mclass_type
+				self.header.add_decl("{t.ctype} {t.ctypename};")
+			end
+			self.header.add_decl("\} nitattribute_t; /* general C type representing a Nit attribute. */")
+		end
 	end
 
 	redef fun compile_class_names do
@@ -1231,7 +1251,27 @@ class SeparateCompilerVisitor
 	do
 		self.check_recv_notnull(recv)
 		var res = self.new_var(bool_type)
-		self.add("{res} = {recv}->attrs[{a.const_color}] != NULL; /* {a} on {recv.inspect}*/")
+
+		# What is the declared type of the attribute?
+		var mtype = a.intro.static_mtype.as(not null)
+		var intromclassdef = a.intro.mclassdef
+		mtype = mtype.resolve_for(intromclassdef.bound_mtype, intromclassdef.bound_mtype, intromclassdef.mmodule, true)
+
+		if mtype isa MNullableType then
+			self.add("{res} = 1; /* easy isset: {a} on {recv.inspect} */")
+			return res
+		end
+
+		if self.compiler.modelbuilder.toolcontext.opt_no_union_attribute.value then
+			self.add("{res} = {recv}->attrs[{a.const_color}] != NULL; /* {a} on {recv.inspect}*/")
+		else
+
+			if mtype.ctype == "val*" then
+				self.add("{res} = {recv}->attrs[{a.const_color}].val != NULL; /* {a} on {recv.inspect} */")
+			else
+				self.add("{res} = 1; /* NOT YET IMPLEMENTED: isset of primitives: {a} on {recv.inspect} */")
+			end
+		end
 		return res
 	end
 
@@ -1244,22 +1284,37 @@ class SeparateCompilerVisitor
 		var intromclassdef = a.intro.mclassdef
 		ret = ret.resolve_for(intromclassdef.bound_mtype, intromclassdef.bound_mtype, intromclassdef.mmodule, true)
 
-		# Get the attribute or a box (ie. always a val*)
-		var cret = self.object_type.as_nullable
-		var res = self.new_var(cret)
-		res.mcasttype = ret
-		self.add("{res} = {recv}->attrs[{a.const_color}]; /* {a} on {recv.inspect} */")
+		if self.compiler.modelbuilder.toolcontext.opt_no_union_attribute.value then
+			# Get the attribute or a box (ie. always a val*)
+			var cret = self.object_type.as_nullable
+			var res = self.new_var(cret)
+			res.mcasttype = ret
 
-		# Check for Uninitialized attribute
-		if not ret isa MNullableType and not self.compiler.modelbuilder.toolcontext.opt_no_check_initialization.value then
-			self.add("if ({res} == NULL) \{")
-			self.add_abort("Uninitialized attribute {a.name}")
-			self.add("\}")
+			self.add("{res} = {recv}->attrs[{a.const_color}]; /* {a} on {recv.inspect} */")
+
+			# Check for Uninitialized attribute
+			if not ret isa MNullableType and not self.compiler.modelbuilder.toolcontext.opt_no_check_initialization.value then
+				self.add("if ({res} == NULL) \{")
+				self.add_abort("Uninitialized attribute {a.name}")
+				self.add("\}")
+			end
+
+			# Return the attribute or its unboxed version
+			# Note: it is mandatory since we reuse the box on write, we do not whant that the box escapes
+			return self.autobox(res, ret)
+		else
+			var res = self.new_var(ret)
+			self.add("{res} = {recv}->attrs[{a.const_color}].{ret.ctypename}; /* {a} on {recv.inspect} */")
+
+			# Check for Uninitialized attribute
+			if ret.ctype == "val*" and not ret isa MNullableType and not self.compiler.modelbuilder.toolcontext.opt_no_check_initialization.value then
+				self.add("if ({res} == NULL) \{")
+				self.add_abort("Uninitialized attribute {a.name}")
+				self.add("\}")
+			end
+
+			return res
 		end
-
-		# Return the attribute or its unboxed version
-		# Note: it is mandatory since we reuse the box on write, we do not whant that the box escapes
-		return self.autobox(res, ret)
 	end
 
 	redef fun write_attribute(a, recv, value)
@@ -1273,20 +1328,25 @@ class SeparateCompilerVisitor
 
 		# Adapt the value to the declared type
 		value = self.autobox(value, mtype)
-		var attr = "{recv}->attrs[{a.const_color}]"
-		if mtype.ctype != "val*" then
-			assert mtype isa MClassType
-			# The attribute is primitive, thus we store it in a box
-			# The trick is to create the box the first time then resuse the box
-			self.add("if ({attr} != NULL) \{")
-			self.add("((struct instance_{mtype.c_name}*){attr})->value = {value}; /* {a} on {recv.inspect} */")
-			self.add("\} else \{")
-			value = self.autobox(value, self.object_type.as_nullable)
-			self.add("{attr} = {value}; /* {a} on {recv.inspect} */")
-			self.add("\}")
+
+		if self.compiler.modelbuilder.toolcontext.opt_no_union_attribute.value then
+			var attr = "{recv}->attrs[{a.const_color}]"
+			if mtype.ctype != "val*" then
+				assert mtype isa MClassType
+				# The attribute is primitive, thus we store it in a box
+				# The trick is to create the box the first time then resuse the box
+				self.add("if ({attr} != NULL) \{")
+				self.add("((struct instance_{mtype.c_name}*){attr})->value = {value}; /* {a} on {recv.inspect} */")
+				self.add("\} else \{")
+				value = self.autobox(value, self.object_type.as_nullable)
+				self.add("{attr} = {value}; /* {a} on {recv.inspect} */")
+				self.add("\}")
+			else
+				# The attribute is not primitive, thus store it direclty
+				self.add("{attr} = {value}; /* {a} on {recv.inspect} */")
+			end
 		else
-			# The attribute is not primitive, thus store it direclty
-			self.add("{attr} = {value}; /* {a} on {recv.inspect} */")
+			self.add("{recv}->attrs[{a.const_color}].{mtype.ctypename} = {value}; /* {a} on {recv.inspect} */")
 		end
 	end
 

@@ -39,6 +39,7 @@ redef class ModelBuilder
 		self.toolcontext.info("*** COMPILING TO C ***", 1)
 
 		var compiler = new SeparateErasureCompiler(mainmodule, runtime_type_analysis, self)
+		compiler.compile_header
 
 		# compile class structures
 		for m in mainmodule.in_importation.greaters do
@@ -111,7 +112,7 @@ class SeparateErasureCompiler
 
 	redef fun compile_header_structs do
 		self.header.add_decl("typedef void(*nitmethod_t)(void); /* general C type representing a Nit method. */")
-		self.header.add_decl("typedef void* nitattribute_t; /* general C type representing a Nit attribute. */")
+		self.compile_header_attribute_structs
 		self.header.add_decl("struct class \{ int id; const char *name; int box_kind; int color; struct vts_table *vts_table; struct type_table *type_table; nitmethod_t vft[1]; \}; /* general C type representing a Nit class. */")
 		self.header.add_decl("struct type_table \{ int size; int table[1]; \}; /* colorized type table. */")
 		self.header.add_decl("struct vts_entry \{ short int is_nullable; struct class *class; \}; /* link (nullable or not) between the vts and is bound. */")
@@ -122,7 +123,7 @@ class SeparateErasureCompiler
 			self.header.add_decl("struct vts_table \{ struct vts_entry vts[1]; \}; /* vts list of a C type representation. */")
 		end
 
-		self.header.add_decl("typedef struct \{ struct class *class; nitattribute_t attrs[1]; \} val; /* general C type representing a Nit instance. */")
+		self.header.add_decl("typedef struct val \{ struct class *class; nitattribute_t attrs[1]; \} val; /* general C type representing a Nit instance. */")
 	end
 
 	redef fun compile_class_to_c(mclass: MClass)

@@ -74,6 +74,7 @@ redef class ModelBuilder
 		self.toolcontext.info("*** COMPILING TO C ***", 1)
 
 		var compiler = new GlobalCompiler(mainmodule, runtime_type_analysis, self)
+		compiler.compile_header
 		var v = compiler.header
 
 		for t in runtime_type_analysis.live_types do
@@ -246,12 +247,9 @@ class GlobalCompiler
 				self.live_primitive_types.add(t)
 			end
 		end
-
-		# Header declarations
-		self.compile_header
 	end
 
-	protected fun compile_header do
+	fun compile_header do
 		var v = self.header
 		self.header.add_decl("#include <stdlib.h>")
 		self.header.add_decl("#include <stdio.h>")
@@ -587,6 +585,11 @@ redef class MType
 		return "val*"
 	end
 
+	fun ctypename: String
+	do
+		return "val"
+	end
+
 	# Return the name of the C structure associated to a Nit live type
 	# FIXME: move to GlobalCompiler so we can check that self is a live type
 	fun c_name: String is abstract
@@ -622,6 +625,28 @@ redef class MClassType
 			return "void*"
 		else
 			return "val*"
+		end
+	end
+
+	redef fun ctypename: String
+	do
+		if mclass.name == "Int" then
+			return "l"
+		else if mclass.name == "Bool" then
+			return "s"
+		else if mclass.name == "Char" then
+			return "c"
+		else if mclass.name == "Float" then
+			return "d"
+		else if mclass.name == "NativeString" then
+			return "str"
+		else if mclass.name == "NativeArray" then
+			#return "{self.arguments.first.ctype}*"
+			return "val"
+		else if mclass.kind == extern_kind then
+			return "ptr"
+		else
+			return "val"
 		end
 	end
 end
