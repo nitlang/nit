@@ -21,7 +21,7 @@
   --no-check-other            Disable implicit tests: unset attribute, null receiver (dangerous)
   --separate                  Use separate compilation
   --no-inline-intern          Do not inline call to intern methods
-  --no-union-attribute        But primitive attibutes in a box instead of an union
+  --no-union-attribute        Put primitive attibutes in a box instead of an union
   --inline-coloring-numbers   Inline colors and ids
   --bm-typing                 Colorize items incrementaly, used to simulate binary matrix typing
   --phmod-typing              Replace coloration by perfect hashing (with mod operator)

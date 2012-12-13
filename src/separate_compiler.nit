@@ -27,7 +27,7 @@ redef class ToolContext
 	var opt_no_inline_intern: OptionBool = new OptionBool("Do not inline call to intern methods", "--no-inline-intern")
 
 	# --no-union-attribute
-	var opt_no_union_attribute: OptionBool = new OptionBool("But primitive attibutes in a box instead of an union", "--no-union-attribute")
+	var opt_no_union_attribute: OptionBool = new OptionBool("Put primitive attibutes in a box instead of an union", "--no-union-attribute")
 
 	# --inline-coloring-numbers
 	var opt_inline_coloring_numbers: OptionBool = new OptionBool("Inline colors and ids", "--inline-coloring-numbers")
