@@ -850,10 +850,12 @@ class SeparateCompiler
 			v.add("if(type == NULL) \{")
 			v.add_abort("type null")
 			v.add("\}")
-			v.add("if(type->unanchored_table == NULL) \{")
-			v.add("fprintf(stderr, \"Insantiation of a dead type: %s\\n\", type->name);")
-			v.add_abort("type dead")
-			v.add("\}")
+			if not v.compiler.modelbuilder.toolcontext.opt_generic_tree.value then
+				v.add("if(type->unanchored_table == NULL) \{")
+				v.add("fprintf(stderr, \"Insantiation of a dead type: %s\\n\", type->name);")
+				v.add_abort("type dead")
+				v.add("\}")
+			end
 		end
 		v.add("{res}->class = (struct class*) &class_{c_name};")
 
