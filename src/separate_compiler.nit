@@ -29,6 +29,9 @@ redef class ToolContext
 	# --no-union-attribute
 	var opt_no_union_attribute: OptionBool = new OptionBool("Put primitive attibutes in a box instead of an union", "--no-union-attribute")
 
+	# --no-shortcut-equate
+	var opt_no_shortcut_equate: OptionBool = new OptionBool("Always call == in a polymorphic way", "--no-shortcut-equal")
+
 	# --inline-coloring-numbers
 	var opt_inline_coloring_numbers: OptionBool = new OptionBool("Inline colors and ids", "--inline-coloring-numbers")
 
@@ -50,6 +53,7 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_separate)
 		self.option_context.add_option(self.opt_no_inline_intern)
 		self.option_context.add_option(self.opt_no_union_attribute)
+		self.option_context.add_option(self.opt_no_shortcut_equate)
 		self.option_context.add_option(self.opt_inline_coloring_numbers)
 		self.option_context.add_option(self.opt_bm_typing)
 		self.option_context.add_option(self.opt_phmod_typing)
@@ -1168,6 +1172,22 @@ class SeparateCompilerVisitor
 				self.add_abort("Reciever is null")
 			end
 			self.add("\} else \{")
+		end
+		if not self.compiler.modelbuilder.toolcontext.opt_no_shortcut_equate.value and (mmethod.name == "==" or mmethod.name == "!=") then
+			assert res != null
+			# Recv is not null, thus is arg is, it is easy to conclude (and respect the invariants)
+			var arg = arguments[1]
+			if arg.mcasttype isa MNullType then
+				if mmethod.name == "==" then
+					self.add("{res} = 0; /* arg is null but recv is not */")
+				else
+					self.add("{res} = 1; /* arg is null and recv is not */")
+				end
+				if maybenull then
+					self.add("\}")
+				end
+				return res
+			end
 		end
 
 		var r

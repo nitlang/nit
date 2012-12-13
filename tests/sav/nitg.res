@@ -22,6 +22,7 @@
   --separate                  Use separate compilation
   --no-inline-intern          Do not inline call to intern methods
   --no-union-attribute        Put primitive attibutes in a box instead of an union
+  --no-shortcut-equal         Always call == in a polymorphic way
   --inline-coloring-numbers   Inline colors and ids
   --bm-typing                 Colorize items incrementaly, used to simulate binary matrix typing
   --phmod-typing              Replace coloration by perfect hashing (with mod operator)
