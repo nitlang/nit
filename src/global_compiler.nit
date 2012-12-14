@@ -978,12 +978,14 @@ class GlobalCompilerVisitor
 			mtype = self.anchor(mtype)
 			res = self.autobox(res, mtype)
 		end
+		res = autoadapt(res, nexpr.mtype.as(not null))
 		var implicit_cast_to = nexpr.implicit_cast_to
 		if implicit_cast_to != null and not self.compiler.modelbuilder.toolcontext.opt_no_check_autocast.value then
 			var castres = self.type_test(res, implicit_cast_to)
 			self.add("if (!{castres}) \{")
 			self.add_abort("Cast failed")
 			self.add("\}")
+			res = autoadapt(res, implicit_cast_to)
 		end
 		self.current_node = old
 		return res
