@@ -958,7 +958,11 @@ do
 	scene.player.nbmissiles = 5
 	# play
 	print "Play"
-	for i in [0..10[ do
+	var turns = 10
+	if args.length > 0 then
+		turns = args.first.to_i
+	end
+	for i in [0..turns[ do
 		for j in [0..10000[ do
 			scene.update
 		end
