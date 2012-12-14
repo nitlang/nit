@@ -196,14 +196,26 @@ function run_compiler()
 {
 	local title=$1
 	shift
-	run_command "$@" nitg.nit -o "nitg.$title.bin"
-	bench_command "nitg" "nitg test_parser.nit" "./nitg.$title.bin" -v test_parser.nit
-	run_command "$@" nit.nit -o "nit.$title.bin"
-	bench_command "nit" "nit test_parser.nit test_parser.nit" "./nit.$title.bin" -v test_parser.nit -- -n rapid_type_analysis.nit
-	run_command "$@" ../examples/shoot/shoot_logic.nit -o "shoot.$title.bin"
-	bench_command "shoot" "shoot_logic" "./shoot.$title.bin"
-	run_command "$@" ../tests/bench_bintree_gen.nit -o "bintrees.$title.bin"
-	bench_command "bintrees" "bench_bintree_gen 17" "./bintrees.$title.bin" 17
+	if test -n "$fast"; then
+		run_command "$@" nitg.nit -o "nitg.$title.bin"
+		bench_command "nitg" "nitg test_parser.nit" "./nitg.$title.bin" -v test_parser.nit
+		run_command "$@" nit.nit -o "nit.$title.bin"
+		bench_command "nit" "nit test_parser.nit location.nit" "./nit.$title.bin" -v test_parser.nit -- -n location.nit
+		run_command "$@" ../examples/shoot/shoot_logic.nit -o "shoot.$title.bin"
+		bench_command "shoot" "shoot_logic" "./shoot.$title.bin"
+		run_command "$@" ../tests/bench_bintree_gen.nit -o "bintrees.$title.bin"
+		bench_command "bintrees" "bench_bintree_gen 16" "./bintrees.$title.bin" 16
+	else
+		run_command "$@" nitg.nit -o "nitg.$title.bin"
+		bench_command "nitg" "nitg --no-cc nitstats.nit" "./nitg.$title.bin" -v --no-cc nitstats.nit
+		bench_command "nitg-s" "nitg --separate nitg.nit" "./nitg.$title.bin" -v --separate nitg.nit
+		run_command "$@" nit.nit -o "nit.$title.bin"
+		bench_command "nit" "nit test_parser.nit rapid_type_analysis.nit" "./nit.$title.bin" -v test_parser.nit -- -n rapid_type_analysis.nit
+		run_command "$@" ../examples/shoot/shoot_logic.nit -o "shoot.$title.bin"
+		bench_command "shoot" "shoot_logic 30" "./shoot.$title.bin" 30
+		run_command "$@" ../tests/bench_bintree_gen.nit -o "bintrees.$title.bin"
+		bench_command "bintrees" "bench_bintree_gen 18" "./bintrees.$title.bin" 18
+	fi
 }
 
 ## HANDLE OPTIONS ##
@@ -214,6 +226,7 @@ function usage()
 	echo "  -v: verbose mode"
 	echo "  -n count: number of execution for each bar (default: $count)"
 	echo "  --dry: Do not run the commands, just reuse the data and generate the graph"
+	echo "  --fast: Run less and faster tests"
 	echo "  -h: this help"
 }
 
@@ -224,6 +237,7 @@ while [ "$stop" = false ]; do
 		-h) usage; exit;;
 		-n) count="$2"; shift; shift;;
 		--dry) dry_run=true; shift;;
+		--fast) fast=true; shift;;
 		*) stop=true
 	esac
 done
