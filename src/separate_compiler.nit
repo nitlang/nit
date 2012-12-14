@@ -1468,6 +1468,15 @@ class SeparateCompilerVisitor
 			ntype = ntype.mtype
 		end
 
+		if value.mcasttype.is_subtype(self.frame.mpropdef.mclassdef.mmodule, self.frame.mpropdef.mclassdef.bound_mtype, mtype) then
+			self.add("{res} = 1; /* easy {value.inspect} isa {mtype}*/")
+			if compiler.modelbuilder.toolcontext.opt_typing_test_metrics.value then
+				self.compiler.count_type_test_skipped[tag] += 1
+				self.add("count_type_test_skipped_{tag}++;")
+			end
+			return res
+		end
+
 		if ntype.need_anchor then
 			var type_struct = self.get_name("type_struct")
 			self.add_decl("struct type* {type_struct};")
