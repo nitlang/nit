@@ -99,6 +99,8 @@ redef class ModelBuilder
 			end
 		end
 
+		compiler.display_stats
+
 		write_and_make(compiler)
 	end
 end
@@ -1444,7 +1446,7 @@ class SeparateCompilerVisitor
 	end
 
 
-	redef fun type_test(value, mtype)
+	redef fun type_test(value, mtype, tag)
 	do
 		self.add("/* {value.inspect} isa {mtype} */")
 		var compiler = self.compiler.as(SeparateCompiler)
@@ -1499,6 +1501,10 @@ class SeparateCompilerVisitor
 				else
 					self.add("{type_struct} = {recv_type_info}->unanchored_table->types[{ntype.const_color}];")
 				end
+				if compiler.modelbuilder.toolcontext.opt_typing_test_metrics.value then
+					self.compiler.count_type_test_unresolved[tag] += 1
+					self.add("count_type_test_unresolved_{tag}++;")
+				end
 			end
 			self.add("{cltype} = {type_struct}->color;")
 			self.add("{idtype} = {type_struct}->id;")
@@ -1508,6 +1514,10 @@ class SeparateCompilerVisitor
 			self.add("{cltype} = type_{mtype.c_name}.color;")
 			self.add("{idtype} = type_{mtype.c_name}.id;")
 			self.add("{is_nullable} = type_{mtype.c_name}.is_nullable;")
+			if compiler.modelbuilder.toolcontext.opt_typing_test_metrics.value then
+				self.compiler.count_type_test_resolved[tag] += 1
+				self.add("count_type_test_resolved_{tag}++;")
+			end
 		else
 			self.add("printf(\"NOT YET IMPLEMENTED: type_test(%s, {mtype}).\\n\", \"{value.inspect}\"); exit(1);")
 		end

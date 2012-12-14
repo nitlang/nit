@@ -56,6 +56,8 @@ redef class ModelBuilder
 			compiler.compile_module_to_c(m)
 		end
 
+		compiler.display_stats
+
 		write_and_make(compiler)
 	end
 end
@@ -324,7 +326,7 @@ class SeparateErasureCompilerVisitor
 			var mtype = callsite.msignature.return_mtype
 			assert mtype != null
 			self.add("/* Erasure cast for return {res} isa {mtype} */")
-			var cond = self.type_test(res, mtype)
+			var cond = self.type_test(res, mtype, "erasure")
 			self.add("if (!{cond}) \{")
 			#var x = self.class_name_string(res)
 			#var y = self.class_name_string(arguments.first)
@@ -340,7 +342,7 @@ class SeparateErasureCompilerVisitor
 		return self.new_expr("NEW_{mtype.mclass.c_name}()", mtype)
 	end
 
-	redef fun type_test(value, mtype)
+	redef fun type_test(value, mtype, tag)
 	do
 		self.add("/* type test for {value.inspect} isa {mtype} */")
 
@@ -381,6 +383,10 @@ class SeparateErasureCompilerVisitor
 
 		if value.mcasttype.is_subtype(self.frame.mpropdef.mclassdef.mmodule, self.frame.mpropdef.mclassdef.bound_mtype, mtype) then
 			self.add("{res} = 1; /* easy {value.inspect} isa {mtype}*/")
+			if compiler.modelbuilder.toolcontext.opt_typing_test_metrics.value then
+				self.compiler.count_type_test_skipped[tag] += 1
+				self.add("count_type_test_skipped_{tag}++;")
+			end
 			return res
 		end
 
@@ -400,6 +406,10 @@ class SeparateErasureCompilerVisitor
 			self.add("{idtype} = class_{mtype.mclass.c_name}.id;")
 			if maybe_null == 0 then
 				self.add("{is_nullable} = 0;")
+			end
+			if compiler.modelbuilder.toolcontext.opt_typing_test_metrics.value then
+				self.compiler.count_type_test_resolved[tag] += 1
+				self.add("count_type_test_resolved_{tag}++;")
 			end
 		else if mtype isa MVirtualType then
 			var recv = self.frame.arguments.first
@@ -421,6 +431,10 @@ class SeparateErasureCompilerVisitor
 			self.add("{idtype} = {entry}.class->id;")
 			if maybe_null == 0 then
 				self.add("{is_nullable} = {entry}.is_nullable;")
+			end
+			if compiler.modelbuilder.toolcontext.opt_typing_test_metrics.value then
+				self.compiler.count_type_test_unresolved[tag] += 1
+				self.add("count_type_test_unresolved_{tag}++;")
 			end
 		else
 			self.debug("type_test({value.inspect}, {mtype})")

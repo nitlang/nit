@@ -20,6 +20,7 @@
   --no-check-assert           Disable the evaluation of explicit 'assert' and 'as' (dangerous)
   --no-check-autocast         Disable implicit casts on unsafe expression usage (dangerous)
   --no-check-other            Disable implicit tests: unset attribute, null receiver (dangerous)
+  --typing-test-metrics       Enable static and dynamic count of all type tests
   --separate                  Use separate compilation
   --no-inline-intern          Do not inline call to intern methods
   --no-union-attribute        Put primitive attibutes in a box instead of an union

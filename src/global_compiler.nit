@@ -59,11 +59,15 @@ redef class ToolContext
 	# --no-check-other
 	var opt_no_check_other: OptionBool = new OptionBool("Disable implicit tests: unset attribute, null receiver (dangerous)", "--no-check-other")
 
+	# --typing-test-metrics
+	var opt_typing_test_metrics: OptionBool = new OptionBool("Enable static and dynamic count of all type tests", "--typing-test-metrics")
+
 	redef init
 	do
 		super
 		self.option_context.add_option(self.opt_output, self.opt_no_cc, self.opt_make_flags, self.opt_hardening, self.opt_no_shortcut_range)
 		self.option_context.add_option(self.opt_no_check_covariance, self.opt_no_check_initialization, self.opt_no_check_assert, self.opt_no_check_autocast, self.opt_no_check_other)
+		self.option_context.add_option(self.opt_typing_test_metrics)
 	end
 end
 
@@ -106,6 +110,8 @@ redef class ModelBuilder
 			m.compile_to_c(compiler)
 		end
 		self.toolcontext.info("Total methods to compile to C: {compiler.visitors.length}", 2)
+
+		compiler.display_stats
 
 		var time1 = get_time
 		self.toolcontext.info("*** END VISITING: {time1-time0} ***", 2)
@@ -494,6 +500,20 @@ class GlobalCompiler
 	# Initialize a visitor specific for a compiler engine
 	fun new_visitor: GlobalCompilerVisitor do return new GlobalCompilerVisitor(self)
 
+	var count_type_test_tags: Array[String] = ["isa", "as", "auto", "covariance", "erasure"]
+	var count_type_test_resolved: HashMap[String, Int] = init_count_type_test_tags
+	var count_type_test_unresolved: HashMap[String, Int] = init_count_type_test_tags
+	var count_type_test_skipped: HashMap[String, Int] = init_count_type_test_tags
+
+	private fun init_count_type_test_tags: HashMap[String, Int]
+	do
+		var res = new HashMap[String, Int]
+		for tag in count_type_test_tags do
+			res[tag] = 0
+		end
+		return res
+	end
+
 	# Generate the main C function.
 	# This function:
 	# allocate the Sys object if it exists
@@ -505,6 +525,17 @@ class GlobalCompiler
 		v.add_decl("int glob_argc;")
 		v.add_decl("char **glob_argv;")
 		v.add_decl("val *glob_sys;")
+
+		if self.modelbuilder.toolcontext.opt_typing_test_metrics.value then
+			for tag in count_type_test_tags do
+				v.add_decl("long count_type_test_resolved_{tag};")
+				v.add_decl("long count_type_test_unresolved_{tag};")
+				v.add_decl("long count_type_test_skipped_{tag};")
+				v.compiler.header.add_decl("extern long count_type_test_resolved_{tag};")
+				v.compiler.header.add_decl("extern long count_type_test_unresolved_{tag};")
+				v.compiler.header.add_decl("extern long count_type_test_skipped_{tag};")
+			end
+		end
 		v.add_decl("int main(int argc, char** argv) \{")
 		v.add("glob_argc = argc; glob_argv = argv;")
 		var main_type = mainmodule.sys_type
@@ -521,9 +552,72 @@ class GlobalCompiler
 				v.send(main_method, [glob_sys])
 			end
 		end
+
+		if self.modelbuilder.toolcontext.opt_typing_test_metrics.value then
+			v.add_decl("long count_type_test_resolved_total = 0;")
+			v.add_decl("long count_type_test_unresolved_total = 0;")
+			v.add_decl("long count_type_test_skipped_total = 0;")
+			v.add_decl("long count_type_test_total_total = 0;")
+			for tag in count_type_test_tags do
+				v.add_decl("long count_type_test_total_{tag};")
+				v.add("count_type_test_total_{tag} = count_type_test_resolved_{tag} + count_type_test_unresolved_{tag} + count_type_test_skipped_{tag};")
+				v.add("count_type_test_resolved_total += count_type_test_resolved_{tag};")
+				v.add("count_type_test_unresolved_total += count_type_test_unresolved_{tag};")
+				v.add("count_type_test_skipped_total += count_type_test_skipped_{tag};")
+				v.add("count_type_test_total_total += count_type_test_total_{tag};")
+			end
+			v.add("printf(\"# dynamic count_type_test: total %l\\n\");")
+			v.add("printf(\"\\tresolved\\tunresolved\\tskipped\\ttotal\\n\");")
+			var tags = count_type_test_tags.to_a
+			tags.add("total")
+			for tag in tags do
+				v.add("printf(\"{tag}\");")
+				v.add("printf(\"\\t%ld (%.2f%%)\", count_type_test_resolved_{tag}, 100.0*count_type_test_resolved_{tag}/count_type_test_total_total);")
+				v.add("printf(\"\\t%ld (%.2f%%)\", count_type_test_unresolved_{tag}, 100.0*count_type_test_unresolved_{tag}/count_type_test_total_total);")
+				v.add("printf(\"\\t%ld (%.2f%%)\", count_type_test_skipped_{tag}, 100.0*count_type_test_skipped_{tag}/count_type_test_total_total);")
+				v.add("printf(\"\\t%ld (%.2f%%)\\n\", count_type_test_total_{tag}, 100.0*count_type_test_total_{tag}/count_type_test_total_total);")
+			end
+		end
 		v.add("return 0;")
 		v.add("\}")
 
+	end
+
+	fun div(a,b:Int):String
+	do
+		if b == 0 then return "n/a"
+		return ((a*10000/b).to_f / 100.0).to_precision(2)
+	end
+
+	fun display_stats
+	do
+		if self.modelbuilder.toolcontext.opt_typing_test_metrics.value then
+			print "# static count_type_test"
+			print "\tresolved:\tunresolved\tskipped\ttotal"
+			var count_type_test_total = init_count_type_test_tags
+			count_type_test_resolved["total"] = 0
+			count_type_test_unresolved["total"] = 0
+			count_type_test_skipped["total"] = 0
+			count_type_test_total["total"] = 0
+			for tag in count_type_test_tags do
+				count_type_test_total[tag] = count_type_test_resolved[tag] + count_type_test_unresolved[tag] + count_type_test_skipped[tag]
+				count_type_test_resolved["total"] += count_type_test_resolved[tag]
+				count_type_test_unresolved["total"] += count_type_test_unresolved[tag]
+				count_type_test_skipped["total"] += count_type_test_skipped[tag]
+				count_type_test_total["total"] += count_type_test_total[tag]
+			end
+			var count_type_test = count_type_test_total["total"]
+			var tags = count_type_test_tags.to_a
+			tags.add("total")
+			for tag in tags do
+				printn tag
+				printn "\t{count_type_test_resolved[tag]} ({div(count_type_test_resolved[tag],count_type_test)}%)"
+				printn "\t{count_type_test_unresolved[tag]} ({div(count_type_test_unresolved[tag],count_type_test)}%)"
+				printn "\t{count_type_test_skipped[tag]} ({div(count_type_test_skipped[tag],count_type_test)}%)"
+				printn "\t{count_type_test_total[tag]} ({div(count_type_test_total[tag],count_type_test)}%)"
+				print ""
+			end
+		end
 	end
 
 	private var collect_types_cache: HashMap[MType, Array[MClassType]] = new HashMap[MType, Array[MClassType]]
@@ -984,7 +1078,7 @@ class GlobalCompilerVisitor
 		res = autoadapt(res, nexpr.mtype.as(not null))
 		var implicit_cast_to = nexpr.implicit_cast_to
 		if implicit_cast_to != null and not self.compiler.modelbuilder.toolcontext.opt_no_check_autocast.value then
-			var castres = self.type_test(res, implicit_cast_to)
+			var castres = self.type_test(res, implicit_cast_to, "auto")
 			self.add("if (!{castres}) \{")
 			self.add_abort("Cast failed")
 			self.add("\}")
@@ -1604,7 +1698,7 @@ class GlobalCompilerVisitor
 	end
 
 	# Generate a polymorphic subtype test
-	fun type_test(value: RuntimeVariable, mtype: MType): RuntimeVariable
+	fun type_test(value: RuntimeVariable, mtype: MType, tag: String): RuntimeVariable
 	do
 		mtype = self.anchor(mtype)
 		var mclasstype = mtype
@@ -1898,7 +1992,7 @@ redef class MMethodDef
 			# generate the cast
 			# note that v decides if and how to implements the cast
 			v.add("/* Covariant cast for argument {i} ({self.msignature.mparameters[i].name}) {arguments[i+1].inspect} isa {mtype} */")
-			var cond = v.type_test( arguments[i+1], mtype)
+			var cond = v.type_test(arguments[i+1], mtype, "covariance")
 			v.add("if (!{cond}) \{")
 			#var x = v.class_name_string(arguments[i+1])
 			#var y = v.class_name_string(arguments.first)
@@ -2783,7 +2877,7 @@ redef class AIsaExpr
 	redef fun expr(v)
 	do
 		var i = v.expr(self.n_expr, null)
-		return v.type_test(i, self.cast_type.as(not null))
+		return v.type_test(i, self.cast_type.as(not null), "isa")
 	end
 end
 
@@ -2793,7 +2887,7 @@ redef class AAsCastExpr
 		var i = v.expr(self.n_expr, null)
 		if v.compiler.modelbuilder.toolcontext.opt_no_check_assert.value then return i
 
-		var cond = v.type_test(i, self.mtype.as(not null))
+		var cond = v.type_test(i, self.mtype.as(not null), "as")
 		v.add("if (!{cond}) \{")
 		v.add_abort("Cast failed")
 		v.add("\}")
