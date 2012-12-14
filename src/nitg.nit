@@ -39,6 +39,11 @@ if arguments.is_empty then
 	toolcontext.option_context.usage
 	return
 end
+if arguments.length > 1 then
+	print "Too much arguments: {arguments.join(" ")}"
+	toolcontext.option_context.usage
+	return
+end
 var progname = arguments.first
 
 # Here we load an process all modules passed on the command line
