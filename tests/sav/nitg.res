@@ -14,6 +14,7 @@
   --no-cc                     Do not invoke C compiler
   --make-flags                Additional options to make
   --hardening                 Generate contracts in the C code against bugs in the compiler
+  --no-shortcut-range         Always insantiate a range and its iterator on 'for' loops
   --no-check-covariance       Disable type tests of covariant parameters (dangerous)
   --no-check-initialization   Disable isset tests at the end of constructors (dangerous)
   --no-check-assert           Disable the evaluation of explicit 'assert' and 'as' (dangerous)
