@@ -461,6 +461,22 @@ function bench_cc_nitg-e()
 }
 bench_cc_nitg-e
 
+function bench_policy()
+{
+	name="$FUNCNAME"
+	skip_test "$name" && return
+	prepare_res "$name-nitg-s.dat" "nitg-s" "nitg with --separate"
+	run_compiler "nitg-s" ./nitg --separate
+	prepare_res "$name-nitg-su" "nitg-su" "nitg with --separate --no-check-covariance"
+	run_compiler "nitg-su" ./nitg --separate --no-check-covariance
+	prepare_res "$name-nitg-e.dat" "nitg-e" "nitg with --erasure"
+	run_compiler "nitg-e" ./nitg --erasure
+	prepare_res "$name-nitg-eu" "nitg-eu" "nitg with --erasure --no-check-covariance --no-check-erasure-cast"
+	run_compiler "nitg-eu" ./nitg --erasure --no-check-covariance --no-check-erasure-cast
+	plot "$name.gnu"
+}
+bench_policy
+
 function bench_compilation_time
 {
 	name="$FUNCNAME"
