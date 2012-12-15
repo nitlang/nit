@@ -944,7 +944,6 @@ class MVirtualType
 
 	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual)
 	do
-		if not cleanup_virtual then return self
 		# self is a virtual type declared (or inherited) in mtype
 		# The point of the function it to get the bound of the virtual type that make sense for mtype
 		# But because mtype is maybe a virtual/formal type, we need to get a real receiver first
@@ -953,9 +952,25 @@ class MVirtualType
 		# Now, we can get the bound
 		var verbatim_bound = lookup_bound(mmodule, resolved_reciever)
 		# The bound is exactly as declared in the "type" property, so we must resolve it again
-		var res = verbatim_bound.resolve_for(mtype, anchor, mmodule, true)
+		var res = verbatim_bound.resolve_for(mtype, anchor, mmodule, cleanup_virtual)
 		#print "{class_name}: {self}/{mtype}/{anchor} -> {self}/{resolved_reciever}/{anchor} -> {verbatim_bound}/{mtype}/{anchor} -> {res}"
-		return res
+
+		# What to return here? There is a bunch a special cases:
+		# If 'cleanup_virtual' we must return the resolved type, since we cannot return self
+		if cleanup_virtual then return res
+		# If the reciever is a intern class, then the virtual type cannot be redefined since there is no possible subclass. self is just fixed. so simply return the resolution
+		if resolved_reciever isa MNullableType then resolved_reciever = resolved_reciever.mtype
+		if resolved_reciever.as(MClassType).mclass.kind == enum_kind then return res
+		# If the resolved type isa MVirtualType, it means that self was bound to it, and cannot be unbound. self is just fixed. so return the resolution.
+		if res isa MVirtualType then return res
+		# It the resolved type isa intern class, then there is no possible valid redefinition is any potentiel subclass. self is just fixed. so simply return the resolution
+		if res isa MClassType and res.mclass.kind == enum_kind then return res
+		# TODO: Add 'fixed' virtual type in the specification.
+		# TODO: What if bound to a MParameterType?
+		# Note that Nullable types can always be redefined by the non nullable version, so there is no specific case on it.
+
+		# If anything apply, then `self' cannot be resolved, so return self
+		return self
 	end
 
 	redef fun to_s do return self.mproperty.to_s
