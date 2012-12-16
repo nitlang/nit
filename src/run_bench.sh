@@ -168,7 +168,7 @@ function skip_test()
 	fi
 	if test "$NOTSKIPED" = "all"; then
 		: # Execute anyway
-	elif echo "$1" | grep "$NOTSKIPED" >/dev/null 2>&1; then
+	elif echo "$1" | egrep "$NOTSKIPED" >/dev/null 2>&1; then
 		: # Found one to execute
 	else
 		return 0
@@ -510,6 +510,87 @@ function bench_compilation_time
 	plot "$name.gnu"
 }
 bench_compilation_time
+
+function bench_typetest_languages()
+{
+	name="$FUNCNAME"
+	skip_test "$name" && return
+
+	t=t
+	s=20
+	seq="w2_h2 w50_h2 w2_h25 w50_h25"
+	for b in $seq; do
+		run_command ./nitg benchs/gen.nit
+		run_command ./gen.bin "${t}_$b" "$b"
+	done
+
+	prepare_res "$name-g++.dat" "g++" "g++"
+	for b in $seq; do
+		run_command g++ "${t}_$b.cpp" -O2 -o "${t}_$b.g++.bin"
+		bench_command "$b" "" "./${t}_$b.g++.bin" $s
+	done
+
+	prepare_res "$name-clang++.dat" "clang++" "clang++"
+	for b in $seq; do
+		run_command clang++ "${t}_$b.cpp" -O2 -o "${t}_$b.clang++.bin"
+		bench_command "$b" "" "./${t}_$b.clang++.bin" $s
+	done
+
+	prepare_res "$name-java.dat" "java" "java"
+	for b in $seq; do
+		run_command javac ${t}_$b.java
+		bench_command "$b" "" java "${t}_$b" $s
+	done
+
+	prepare_res "$name-es.dat" "es" "es"
+	for b in $seq; do
+		run_command ec -clean -finalize ${t}_$b/app${t}_$b.e
+		chmod +x app${t}_$b
+		mv app${t}_$b  ${t}_$b.es.bin
+		bench_command "$b" "" "./${t}_$b.es.bin" $s
+	done
+
+	prepare_res "$name-se.dat" "se" "se"
+	for b in $seq; do
+		run_command se compile -no_check app${t}_${b}_se.e -loadpath ${t}_${b}_se -o ${t}_$b.se.bin
+		bench_command "$b" "" "./${t}_$b.se.bin" $s
+	done
+
+	#too slow
+	#prepare_res "$name-nitg.dat" "nitg" "nitg"
+	#for b in $seq; do
+	#	run_command ./nitg "${t}_$b.nit" -o "${t}_$b.nitg.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+	#	bench_command "$b" "" "./${t}_$b.nitg.bin" $s
+	#done
+
+	prepare_res "$name-nitg-s.dat" "nitg-s" "nitg-s"
+	for b in $seq; do
+		run_command ./nitg ${t}_$b.nit --separate -o "${t}_$b.nitg-s.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+		bench_command "$b" "" "./${t}_$b.nitg-s.bin" $s
+	done
+
+	prepare_res "$name-nitg-su.dat" "nitg-su" "nitg-su"
+	for b in $seq; do
+		run_command ./nitg ${t}_$b.nit --separate --no-check-covariance -o "${t}_$b.nitg-su.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+		bench_command "$b" "" "./${t}_$b.nitg-su.bin" $s
+	done
+
+
+	prepare_res "$name-nitg-e.dat" "nitg-e" "nitg-e"
+	for b in $seq; do
+		run_command ./nitg ${t}_$b.nit --erasure -o "${t}_$b.nitg-e.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+		bench_command "$b" "" "./${t}_$b.nitg-e.bin" $s
+	done
+
+	prepare_res "$name-nitg-eu.dat" "nitg-eu" "nitg-eu"
+	for b in $seq; do
+		run_command ./nitg ${t}_$b.nit --erasure --no-check-covariance --no-check-erasure-cast -o "${t}_$b.nitg-eu.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+		bench_command "$b" "" "./${t}_$b.nitg-eu.bin" $s
+	done
+
+	plot "$name.gnu"
+}
+bench_typetest_languages
 
 if test -n "$died"; then
 	echo "Some commands failed"

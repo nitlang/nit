@@ -1,5 +1,6 @@
 *.bak
 *~
+EIFGENs
 
 .nit_compile*
 *.orig
