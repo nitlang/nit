@@ -79,14 +79,17 @@ redef class ModelBuilder
 		end
 
 		# The main function of the C
+		compiler.new_file
 		compiler.compile_main_function
 
 		# compile methods
 		for m in mainmodule.in_importation.greaters do
+			compiler.new_file
 			compiler.compile_module_to_c(m)
 		end
 
 		# compile live & cast type structures
+		compiler.new_file
 		var mtypes = compiler.do_type_coloring
 		for t in mtypes do
 			compiler.compile_type_to_c(t)

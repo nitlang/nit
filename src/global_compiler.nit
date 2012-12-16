@@ -149,7 +149,7 @@ redef class ModelBuilder
 		var i = 0
 		for vis in compiler.visitors do
 			count += vis.lines.length
-			if file == null or count > 10000 then
+			if file == null or count > 10000 or vis.file_break then
 				i += 1
 				if file != null then file.close
 				var cfilename = ".nit_compile/{mainmodule.name}.{i}.c"
@@ -256,6 +256,14 @@ class GlobalCompiler
 				self.live_primitive_types.add(t)
 			end
 		end
+	end
+
+	# Force the creation of a new file
+	# The point is to avoid contamination between must-be-compiled-separately files
+	fun new_file
+	do
+		var v = self.new_visitor
+		v.file_break = true
 	end
 
 	fun compile_header do
@@ -1015,6 +1023,8 @@ class GlobalCompilerVisitor
 		self.compiler = compiler
 		compiler.visitors.add(self)
 	end
+
+	var file_break: Bool = false
 
 	# Alias for self.compiler.mainmodule.object_type
 	fun object_type: MClassType do return self.compiler.mainmodule.object_type

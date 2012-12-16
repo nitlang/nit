@@ -42,6 +42,7 @@ redef class ModelBuilder
 		compiler.compile_header
 
 		# compile class structures
+		compiler.new_file
 		for m in mainmodule.in_importation.greaters do
 			for mclass in m.intro_mclasses do
 				compiler.compile_class_to_c(mclass)
@@ -49,10 +50,12 @@ redef class ModelBuilder
 		end
 
 		# The main function of the C
+		compiler.new_file
 		compiler.compile_main_function
 
 		# compile methods
 		for m in mainmodule.in_importation.greaters do
+			compiler.new_file
 			compiler.compile_module_to_c(m)
 		end
 
