@@ -1463,12 +1463,13 @@ class SeparateCompilerVisitor
 		self.add_decl("int {cltype};")
 		var idtype = self.get_name("idtype")
 		self.add_decl("int {idtype};")
-		var is_nullable = self.get_name("is_nullable")
-		self.add_decl("short int {is_nullable};")
 
+		var maybe_null = self.maybe_null(value)
+		var accept_null = "0"
 		var ntype = mtype
 		if ntype isa MNullableType then
 			ntype = ntype.mtype
+			accept_null = "1"
 		end
 
 		if value.mcasttype.is_subtype(self.frame.mpropdef.mclassdef.mmodule, self.frame.mpropdef.mclassdef.bound_mtype, mtype) then
@@ -1520,12 +1521,16 @@ class SeparateCompilerVisitor
 			end
 			self.add("{cltype} = {type_struct}->color;")
 			self.add("{idtype} = {type_struct}->id;")
-			self.add("{is_nullable} = {type_struct}->is_nullable;")
+			if maybe_null and accept_null == "0" then
+				var is_nullable = self.get_name("is_nullable")
+				self.add_decl("short int {is_nullable};")
+				self.add("{is_nullable} = {type_struct}->is_nullable;")
+				accept_null = is_nullable.to_s
+			end
 		else if ntype isa MClassType then
 			compiler.undead_types.add(mtype)
 			self.add("{cltype} = type_{mtype.c_name}.color;")
 			self.add("{idtype} = type_{mtype.c_name}.id;")
-			self.add("{is_nullable} = type_{mtype.c_name}.is_nullable;")
 			if compiler.modelbuilder.toolcontext.opt_typing_test_metrics.value then
 				self.compiler.count_type_test_resolved[tag] += 1
 				self.add("count_type_test_resolved_{tag}++;")
@@ -1534,14 +1539,10 @@ class SeparateCompilerVisitor
 			self.add("printf(\"NOT YET IMPLEMENTED: type_test(%s, {mtype}).\\n\", \"{value.inspect}\"); exit(1);")
 		end
 
-		if mtype isa MNullableType then
-			self.add("{is_nullable} = 1;")
-		end
-
 		# check color is in table
-		if self.maybe_null(value) then
+		if maybe_null then
 			self.add("if({value} == NULL) \{")
-			self.add("{res} = {is_nullable};")
+			self.add("{res} = {accept_null};")
 			self.add("\} else \{")
 		end
 		var value_type_info = self.type_info(value)
@@ -1553,7 +1554,7 @@ class SeparateCompilerVisitor
 		self.add("\} else \{")
 		self.add("{res} = {value_type_info}->type_table[{cltype}] == {idtype};")
 		self.add("\}")
-		if self.maybe_null(value) then
+		if maybe_null then
 			self.add("\}")
 		end
 

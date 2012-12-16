@@ -355,33 +355,20 @@ class SeparateErasureCompilerVisitor
 		self.add_decl("int {cltype};")
 		var idtype = self.get_name("idtype")
 		self.add_decl("int {idtype};")
-		var is_nullable = self.get_name("is_nullable")
-		self.add_decl("short int {is_nullable};")
-		var is_null = self.get_name("is_null")
-		self.add_decl("short int {is_null};")
 
-		var maybe_null = 0
+		var maybe_null = self.maybe_null(value)
+		var accept_null = "0"
 		if mtype isa MNullableType then
 			mtype = mtype.mtype
-			maybe_null = 1
-			self.add("{is_nullable} = 1;")
+			accept_null = "1"
 		end
 		if mtype isa MParameterType then
 			# Here we get the bound of the the formal type (eh, erasure...)
 			mtype = mtype.resolve_for(self.frame.mpropdef.mclassdef.bound_mtype, self.frame.mpropdef.mclassdef.bound_mtype, self.frame.mpropdef.mclassdef.mmodule, false)
 			if mtype isa MNullableType then
 				mtype = mtype.mtype
-				maybe_null = 1
-				self.add("{is_nullable} = 1;")
+				accept_null = "1"
 			end
-		end
-		if mtype isa MVirtualType then
-			# FIXME virtual types should not be erased but got from the class table of the current receiver (self.frame.arguments.first)
-			#mtype = mtype.resolve_for(self.frame.mpropdef.mclassdef.bound_mtype, self.frame.mpropdef.mclassdef.bound_mtype, self.frame.mpropdef.mclassdef.mmodule, true)
-			#if mtype isa MNullableType then
-			#	mtype = mtype.mtype
-			#	maybe_null = true
-			#end
 		end
 
 		if value.mcasttype.is_subtype(self.frame.mpropdef.mclassdef.mmodule, self.frame.mpropdef.mclassdef.bound_mtype, mtype) then
@@ -397,19 +384,14 @@ class SeparateErasureCompilerVisitor
 		var type_table
 		if value.mtype.ctype == "val*" then
 			class_ptr = "{value}->class->"
-			self.add("{is_null} = {value} == NULL;")
 		else
 			var mclass = value.mtype.as(MClassType).mclass
 			class_ptr = "class_{mclass.c_name}."
-			self.add("{is_null} = 0;")
 		end
 
 		if mtype isa MClassType then
 			self.add("{cltype} = class_{mtype.mclass.c_name}.color;")
 			self.add("{idtype} = class_{mtype.mclass.c_name}.id;")
-			if maybe_null == 0 then
-				self.add("{is_nullable} = 0;")
-			end
 			if compiler.modelbuilder.toolcontext.opt_typing_test_metrics.value then
 				self.compiler.count_type_test_resolved[tag] += 1
 				self.add("count_type_test_resolved_{tag}++;")
@@ -432,8 +414,11 @@ class SeparateErasureCompilerVisitor
 			end
 			self.add("{cltype} = {entry}.class->color;")
 			self.add("{idtype} = {entry}.class->id;")
-			if maybe_null == 0 then
+			if maybe_null and accept_null == "0" then
+				var is_nullable = self.get_name("is_nullable")
+				self.add_decl("short int {is_nullable};")
 				self.add("{is_nullable} = {entry}.is_nullable;")
+				accept_null = is_nullable.to_s
 			end
 			if compiler.modelbuilder.toolcontext.opt_typing_test_metrics.value then
 				self.compiler.count_type_test_unresolved[tag] += 1
@@ -445,9 +430,11 @@ class SeparateErasureCompilerVisitor
 		end
 
 		# check color is in table
-		self.add("if({is_null}) \{")
-		self.add("{res} = {is_nullable};")
-		self.add("\} else \{")
+		if maybe_null then
+			self.add("if({value} == NULL) \{")
+			self.add("{res} = {accept_null};")
+			self.add("\} else \{")
+		end
 		if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
 			self.add("{cltype} = HASH({class_ptr}color, {idtype});")
 		end
@@ -456,7 +443,9 @@ class SeparateErasureCompilerVisitor
 		self.add("\} else \{")
 		self.add("{res} = {class_ptr}type_table->table[{cltype}] == {idtype};")
 		self.add("\}")
-		self.add("\}")
+		if maybe_null then
+			self.add("\}")
+		end
 
 		return res
 	end
