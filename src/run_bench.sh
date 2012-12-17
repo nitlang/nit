@@ -387,7 +387,7 @@ function bench_nitc_gc()
 	name="$FUNCNAME"
 	skip_test "$name" && return
 	for gc in nitgc boehm malloc large; do
-		prepare_res "$name-$gc".dat "$gc" "nitc with gc=$gc"
+		prepare_res "$name-$gc.dat" "$gc" "nitc with gc=$gc"
 		export NIT_GC_OPTION="$gc"
 		run_compiler "nitc" ./nitc_3 -O
 	done
@@ -483,9 +483,9 @@ function bench_policy()
 	run_compiler "nitg-s" ./nitg --separate
 	prepare_res "$name-nitg-e.dat" "nitg-e" "nitg with --erasure"
 	run_compiler "nitg-e" ./nitg --erasure
-	prepare_res "$name-nitg-su" "nitg-su" "nitg with --separate --no-check-covariance"
+	prepare_res "$name-nitg-su.dat" "nitg-su" "nitg with --separate --no-check-covariance"
 	run_compiler "nitg-su" ./nitg --separate --no-check-covariance
-	prepare_res "$name-nitg-eu" "nitg-eu" "nitg with --erasure --no-check-covariance --no-check-erasure-cast"
+	prepare_res "$name-nitg-eu.dat" "nitg-eu" "nitg with --erasure --no-check-covariance --no-check-erasure-cast"
 	run_compiler "nitg-eu" ./nitg --erasure --no-check-covariance --no-check-erasure-cast
 	plot "$name.gnu"
 }
