@@ -129,7 +129,7 @@ function prepare_res()
 		plots="$plots replot '$1' using 4:2:3 ti '$2';"
 	fi
 	if [ "$dry_run" = "true" ]; then return; fi
-	echo "# [$2] $3" > "$res"
+	echo "# [$2] $3 ; count=$count" > "$res"
 	echo "# first min max avg title" >> "$res"
 }
 
@@ -147,7 +147,7 @@ set style fill solid 0.3 border -1;
 set bars front;
 set boxwidth 0.9;
 set xtic nomirror rotate by -45 scale 0 font ',8';
-set title "$1"
+set title "$1 ; avg. on $count-1 runs"
 set ylabel "time (s)"
 $plots
 END
