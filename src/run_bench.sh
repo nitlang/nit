@@ -208,7 +208,7 @@ function run_compiler()
 	else
 		run_command "$@" nitg.nit -o "nitg.$title.bin"
 		bench_command "nitg" "nitg --no-cc nitstats.nit" "./nitg.$title.bin" -v --no-cc nitstats.nit
-		bench_command "nitg-s" "nitg --separate nitg.nit" "./nitg.$title.bin" -v --no--cc --separate nitg.nit
+		bench_command "nitg-s" "nitg --separate nitg.nit" "./nitg.$title.bin" -v --no-cc --separate nitg.nit
 		run_command "$@" nit.nit -o "nit.$title.bin"
 		bench_command "nit" "nit test_parser.nit rapid_type_analysis.nit" "./nit.$title.bin" -v test_parser.nit -- -n rapid_type_analysis.nit
 		run_command "$@" ../examples/shoot/shoot_logic.nit -o "shoot.$title.bin"
