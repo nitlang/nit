@@ -354,7 +354,7 @@ function bench_nitg-s_options()
 bench_nitg-s_options "slower" --hardening --no-inline-intern --generic-resolution-tree --no-union-attribute --no-shortcut-equal --no-shortcut-range
 bench_nitg-s_options "nocheck" --no-check-covariance --no-check-initialization --no-check-assert --no-check-autocast --no-check-other
 bench_nitg-s_options "faster" --inline-coloring-numbers
-bench_nitg-s_options "typing" --bm-typing --phmod-typing --phand-typing
+bench_nitg-s_options "typing" --bm-typing --phand-typing --phmod-typing
 
 function bench_nitg-e_options()
 {
@@ -380,7 +380,7 @@ function bench_nitg-e_options()
 bench_nitg-e_options "slower" --hardening --no-inline-intern --no-union-attribute --no-shortcut-equal --no-shortcut-range
 bench_nitg-e_options "nocheck" --no-check-covariance --no-check-initialization --no-check-assert --no-check-autocast --no-check-other --no-check-erasure-cast
 bench_nitg-e_options "faster" --inline-coloring-numbers
-bench_nitg-e_options "typing" --bm-typing --phmod-typing --phand-typing
+bench_nitg-e_options "typing" --bm-typing --phand-typing --phmod-typing
 
 function bench_nitc_gc()
 {
@@ -481,10 +481,10 @@ function bench_policy()
 	skip_test "$name" && return
 	prepare_res "$name-nitg-s.dat" "nitg-s" "nitg with --separate"
 	run_compiler "nitg-s" ./nitg --separate
-	prepare_res "$name-nitg-su" "nitg-su" "nitg with --separate --no-check-covariance"
-	run_compiler "nitg-su" ./nitg --separate --no-check-covariance
 	prepare_res "$name-nitg-e.dat" "nitg-e" "nitg with --erasure"
 	run_compiler "nitg-e" ./nitg --erasure
+	prepare_res "$name-nitg-su" "nitg-su" "nitg with --separate --no-check-covariance"
+	run_compiler "nitg-su" ./nitg --separate --no-check-covariance
 	prepare_res "$name-nitg-eu" "nitg-eu" "nitg with --erasure --no-check-covariance --no-check-erasure-cast"
 	run_compiler "nitg-eu" ./nitg --erasure --no-check-covariance --no-check-erasure-cast
 	plot "$name.gnu"
