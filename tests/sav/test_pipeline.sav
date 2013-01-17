@@ -1,0 +1,16 @@
+../lib/pipeline.nit:44,10--33: Warning: Expression is already a Iterator[Object] since it is a Iterator[E].
+../lib/pipeline.nit:61,10--33: Warning: Expression is already a Iterator[Object] since it is a Iterator[E].
+../lib/pipeline.nit:169,17--36: Warning: Expression is already a Object since it is a E.
+../lib/pipeline.nit:171,40--61: Warning: Expression is already a Object since it is a E.
+1111223
+123
+12132
+123451211132
+102030405
+232
+12
+345
+345
+45
+123
+3
