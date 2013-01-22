@@ -10,4 +10,14 @@
   -I, --path              Set include path for loaders (may be used more than once)
   --only-parse            Only proceed to parse step of loaders
   --only-metamodel        Stop after meta-model processing
+  --all                   Compute all metrics
+  --inheritance           Compute metrics about inheritance usage
+  --refinement            Compute metrics about refinement usage
+  --self                  Compute metrics about the usage of explicit and implicit self
+  --nullables             Compute metrics on nullables send
+  --static-types          Compute explicit static types metrics
+  --tables                Compute tables metrics
+  --rta                   Compute RTA metrics
+  --generate-csv          Generate CVS format metrics
+  --generate_hyperdoc     Generate Hyperdoc
   -d, --dir               Directory where some statistics files are generated
