@@ -36,7 +36,7 @@ abstract class NiVariable
 	fun needs_preparation : Bool
 	do
 		return ni_type.local_class.primitive_info == null or
-			ni_type.local_class.primitive_info.tagged or
+			not ni_type.local_class.primitive_info.tagged or
 			ni_type.is_nullable
 	end
 
