@@ -47,6 +47,9 @@ redef class ToolContext
 	# --generic-resolution-tree
 	var opt_generic_tree: OptionBool = new OptionBool("Use tree representation for live generic types instead of flattened representation", "--generic-resolution-tree")
 
+	# --generic-resolution-tree
+	var opt_typing_table_metrics: OptionBool = new OptionBool("Enable static size measuring of tables used for typing and resolution", "--typing-table-metrics")
+
 	redef init
 	do
 		super
@@ -59,6 +62,7 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_phmod_typing)
 		self.option_context.add_option(self.opt_phand_typing)
 		self.option_context.add_option(self.opt_generic_tree)
+		self.option_context.add_option(self.opt_typing_table_metrics)
 	end
 end
 
@@ -890,6 +894,40 @@ class SeparateCompiler
 	end
 
 	redef fun new_visitor do return new SeparateCompilerVisitor(self)
+
+	redef fun display_stats
+	do
+		super
+		if self.modelbuilder.toolcontext.opt_typing_table_metrics.value then
+			display_sizes
+		end
+	end
+
+	fun display_sizes
+	do
+		print "# size of tables"
+		print "\trs size\trs hole\tst size\tst hole"
+		var rt_table = 0
+		var rt_holes = 0
+		var st_table = 0
+		var st_holes = 0
+		var rtables = unanchored_types_tables
+		if rtables != null then
+			for unanch, table in rtables do
+				rt_table += table.length
+				for e in table do if e == null then rt_holes += 1
+			end
+		end
+
+		var ttables = type_tables
+		if ttables != null then
+			for t, table in ttables do
+				st_table += table.length
+				for e in table do if e == null then st_holes += 1
+			end
+		end
+		print "\t{rt_table}\t{rt_holes}\t{st_table}\t{st_holes}"
+	end
 end
 
 # The C function associated to a methoddef separately compiled

@@ -316,6 +316,28 @@ class SeparateErasureCompiler
 	end
 
 	redef fun new_visitor do return new SeparateErasureCompilerVisitor(self)
+
+	redef fun display_sizes
+	do
+		print "# size of tables"
+		print "\trs size\trs hole\tst size\tst hole"
+		var rt_table = 0
+		var rt_holes = 0
+		var st_table = 0
+		var st_holes = 0
+		var rtables = vt_tables
+		for unanch, table in rtables do
+			rt_table += table.length
+			for e in table do if e == null then rt_holes += 1
+		end
+
+		var ttables = class_tables
+		for t, table in ttables do
+			st_table += table.length
+			for e in table do if e == null then st_holes += 1
+		end
+		print "\t{rt_table}\t{rt_holes}\t{st_table}\t{st_holes}"
+	end
 end
 
 class SeparateErasureCompilerVisitor
