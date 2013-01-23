@@ -1104,5 +1104,4 @@ do
 end
 
 # TODO Third-Party metrics
-# TODO CSV generation
 # TODO gnu-plot generation
