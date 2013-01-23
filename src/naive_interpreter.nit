@@ -341,13 +341,37 @@ private class NaiveInterpreter
 		var mproperty = mpropdef.mproperty
 		if self.modelbuilder.mpropdef2npropdef.has_key(mpropdef) then
 			var npropdef = self.modelbuilder.mpropdef2npropdef[mpropdef]
+			self.parameter_check(npropdef, mpropdef, args)
 			return npropdef.call(self, mpropdef, args)
 		else if mproperty.name == "init" then
 			var nclassdef = self.modelbuilder.mclassdef2nclassdef[mpropdef.mclassdef]
+			self.parameter_check(nclassdef, mpropdef, args)
 			return nclassdef.call(self, mpropdef, args)
 		else
 			fatal("Fatal Error: method {mpropdef} not found in the AST")
 			abort
+		end
+	end
+
+	# Generate type checks in the C code to check covariant parameters
+	fun parameter_check(node: ANode, mpropdef: MMethodDef, args: Array[Instance])
+	do
+		var msignature = mpropdef.msignature
+		for i in [0..msignature.arity[ do
+			# skip test for vararg since the array is instantiated with the correct polymorphic type
+			if msignature.vararg_rank == i then continue
+
+			# skip if the cast is not required
+			var origmtype =  mpropdef.mproperty.intro.msignature.mparameters[i].mtype
+			if not origmtype.need_anchor then continue
+
+			# get the parameter type
+			var mtype = msignature.mparameters[i].mtype
+			var anchor = args.first.mtype.as(MClassType)
+			mtype = mtype.anchor_to(self.mainmodule, anchor)
+			if not args[i+1].mtype.is_subtype(self.mainmodule, anchor, mtype) then
+				node.fatal(self, "Cast failed")
+			end
 		end
 	end
 
