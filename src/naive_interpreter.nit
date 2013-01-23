@@ -1602,6 +1602,7 @@ redef class AAttrExpr
 	do
 		var recv = v.expr(self.n_expr)
 		if recv == null then return null
+		if recv.mtype isa MNullType then fatal(v, "Reciever is null")
 		var mproperty = self.mproperty.as(not null)
 		return v.read_attribute(mproperty, recv)
 	end
@@ -1612,6 +1613,7 @@ redef class AAttrAssignExpr
 	do
 		var recv = v.expr(self.n_expr)
 		if recv == null then return
+		if recv.mtype isa MNullType then fatal(v, "Reciever is null")
 		var i = v.expr(self.n_value)
 		if i == null then return
 		var mproperty = self.mproperty.as(not null)
@@ -1625,6 +1627,7 @@ redef class AAttrReassignExpr
 	do
 		var recv = v.expr(self.n_expr)
 		if recv == null then return
+		if recv.mtype isa MNullType then fatal(v, "Reciever is null")
 		var value = v.expr(self.n_value)
 		if value == null then return
 		var mproperty = self.mproperty.as(not null)
@@ -1641,6 +1644,7 @@ redef class AIssetAttrExpr
 	do
 		var recv = v.expr(self.n_expr)
 		if recv == null then return null
+		if recv.mtype isa MNullType then fatal(v, "Reciever is null")
 		var mproperty = self.mproperty.as(not null)
 		assert recv isa MutableInstance
 		return v.bool_instance(recv.attributes.has_key(mproperty))
