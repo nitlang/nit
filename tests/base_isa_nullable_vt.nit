@@ -32,12 +32,6 @@ class B[T]
 	redef type U: Bool
 end
 
-class C[T]
-	super A[T]
-
-	redef type U: nullable Bool
-end
-
 var a = new A[Object]
 assert a.test(true)
 assert not a.test(null)
@@ -50,10 +44,5 @@ var b = new B[Object]
 assert not b.test(new Something)
 assert b.test(false)
 assert not b.test(null)
-
-var c = new C[Object]
-assert not c.test(new Something)
-assert c.test(false)
-assert c.test(null)
 
 true.output
