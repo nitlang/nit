@@ -237,15 +237,17 @@ private class TypeVisitor
 		end
 
 		var propdefs = mproperty.lookup_definitions(self.mmodule, unsafe_type)
+		var mpropdef
 		if propdefs.length == 0 then
 			self.modelbuilder.error(node, "Type error: no definition found for property {name} in {unsafe_type}")
 			return null
-		else if propdefs.length > 1 then
-			self.modelbuilder.error(node, "Error: confliting property definitions for property {name} in {unsafe_type}: {propdefs.join(" ")}")
-			return null
+		else if propdefs.length == 1 then
+			mpropdef = propdefs.first
+		else
+			self.modelbuilder.warning(node, "Warning: confliting property definitions for property {name} in {unsafe_type}: {propdefs.join(" ")}")
+			mpropdef = mproperty.intro
 		end
 
-		var mpropdef = propdefs.first
 
 		var msignature = self.resolve_signature_for(mpropdef, recvtype, recv_is_self)
 
