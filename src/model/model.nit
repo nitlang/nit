@@ -1580,17 +1580,22 @@ abstract class MPropDef
 	fun is_intro: Bool do return mproperty.intro == self
 
 	# Return the next definition in linearization of `mtype`.
-	# If there is no next method then null is returned.
 	#
 	# This method is used to determine what method is called by a super.
 	#
-	# FIXME: NOT YET IMPLEMENTED
+	# FIXME: IMPLEMENTED AS A static designation, it is ugly
 	#
 	# REQUIRE: not mtype.need_anchor
-	fun lookup_next_definition(mmodule: MModule, mtype: MType): nullable MPROPDEF
+	fun lookup_next_definition(mmodule: MModule, mtype: MType): MPROPDEF
 	do
 		assert not mtype.need_anchor
-		return null
+
+		var mpropdefs = self.mproperty.lookup_super_definitions(self.mclassdef.mmodule, self.mclassdef.bound_mtype)
+		assert not mpropdefs.is_empty
+		if mpropdefs.length > 1 then
+			print "BADLINEXT chose next {mpropdefs.first} in: {mpropdefs.join(", ")}"
+		end
+		return mpropdefs.first
 	end
 end
 

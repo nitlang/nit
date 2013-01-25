@@ -1554,11 +1554,7 @@ redef class ASuperExpr
 		# stantard call-next-method
 		var mpropdef = v.frame.mpropdef
 		# FIXME: we do not want an ugly static call!
-		var mpropdefs = mpropdef.mproperty.lookup_super_definitions(mpropdef.mclassdef.mmodule, mpropdef.mclassdef.bound_mtype)
-		if mpropdefs.length != 1 then
-			debug("Warning: NOT YET IMPLEMENTED: multiple MPRODFEFS for super {mpropdef} for {recv}: {mpropdefs.join(", ")}")
-		end
-		mpropdef = mpropdefs.first
+		mpropdef = mpropdef.lookup_next_definition(v.mainmodule, recv.mtype)
 		assert mpropdef isa MMethodDef
 		var res = v.call(mpropdef, args)
 		return res
