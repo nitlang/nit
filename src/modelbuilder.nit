@@ -567,13 +567,18 @@ class ModelBuilder
 	end
 
 	# Check the validity of the specialization heirarchy
-	# FIXME Stub implementation
 	private fun check_supertypes(nmodule: AModule, nclassdef: AClassdef)
 	do
 		var mmodule = nmodule.mmodule.as(not null)
 		var objectclass = try_get_mclass_by_name(nmodule, mmodule, "Object")
 		var mclass = nclassdef.mclass.as(not null)
 		var mclassdef = nclassdef.mclassdef.as(not null)
+
+		for s in mclassdef.supertypes do
+			if s.is_subtype(mmodule, mclassdef.bound_mtype, mclassdef.bound_mtype) then
+				error(nclassdef, "Error: Inheritance loop for class {mclass} with type {s}")
+			end
+		end
 	end
 
 	# Build the classes of the module `nmodule'.
@@ -612,6 +617,11 @@ class ModelBuilder
 		for nclassdef in nmodule.n_classdefs do
 			var mclassdef = nclassdef.mclassdef.as(not null)
 			mclassdef.add_in_hierarchy
+		end
+
+		# Check inheritance
+		for nclassdef in nmodule.n_classdefs do
+			self.check_supertypes(nmodule, nclassdef)
 		end
 
 		# Check unchecked ntypes
