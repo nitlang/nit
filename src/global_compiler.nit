@@ -1480,6 +1480,62 @@ class GlobalCompilerVisitor
 		return rm.call(self, args)
 	end
 
+	# Generate a super call from a method definition
+	fun supercall(m: MMethodDef, recvtype: MClassType, args: Array[RuntimeVariable]): nullable RuntimeVariable
+	do
+		var types = self.collect_types(args.first)
+
+		var res: nullable RuntimeVariable
+		var ret = m.mproperty.intro.msignature.return_mtype
+		if ret == null then
+			res = null
+		else
+			ret = self.resolve_for(ret, args.first)
+			res = self.new_var(ret)
+		end
+
+		self.add("/* super {m} on {args.first.inspect} */")
+		if args.first.mtype.ctype != "val*" then
+			var mclasstype = args.first.mtype.as(MClassType)
+			if not self.compiler.runtime_type_analysis.live_types.has(mclasstype) then
+				self.add("/* skip, no method {m} */")
+				return res
+			end
+			var propdef = m.lookup_next_definition(self.compiler.mainmodule, mclasstype)
+			var res2 = self.call(propdef, mclasstype, args)
+			if res != null then self.assign(res, res2.as(not null))
+			return res
+		end
+
+		if types.is_empty then
+			self.add("\{")
+			self.add("/*BUG: no live types for {args.first.inspect} . {m}*/")
+			self.bugtype(args.first)
+			self.add("\}")
+			return res
+		end
+
+		self.add("switch({args.first}->classid) \{")
+		var last = types.last
+		for t in types do
+			var propdef = m.lookup_next_definition(self.compiler.mainmodule, t)
+			if not self.compiler.hardening and t == last then
+				self.add("default: /* test {t} */")
+			else
+				self.add("case {self.compiler.classid(t)}: /* test {t} */")
+			end
+			var res2 = self.call(propdef, t, args)
+			if res != null then self.assign(res, res2.as(not null))
+			self.add "break;"
+		end
+		if self.compiler.hardening then
+			self.add("default: /* bug */")
+			self.bugtype(args.first)
+		end
+		self.add("\}")
+		return res
+	end
+
 	fun adapt_signature(m: MMethodDef, args: Array[RuntimeVariable])
 	do
 		var recv = args.first
@@ -2981,17 +3037,7 @@ redef class ASuperExpr
 		end
 
 		# stantard call-next-method
-		var mpropdef = v.frame.mpropdef
-		# FIXME: we do not want an ugly static call!
-		var mpropdefs = mpropdef.mproperty.lookup_super_definitions(mpropdef.mclassdef.mmodule, mpropdef.mclassdef.bound_mtype)
-		if mpropdefs.length != 1 then
-			v.add("printf(\"NOT YET IMPLEMENTED {class_name} {mpropdef} at {location.to_s}\\n\");")
-			debug("MPRODFEFS for super {mpropdef} for {recv}: {mpropdefs.join(", ")}")
-		end
-		mpropdef = mpropdefs.first
-		assert mpropdef isa MMethodDef
-		var res = v.call(mpropdef, recv.mtype.as(MClassType), args)
-		return res
+		return v.supercall(v.frame.mpropdef.as(MMethodDef), recv.mtype.as(MClassType), args)
 	end
 end
 

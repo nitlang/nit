@@ -1255,6 +1255,13 @@ class SeparateCompilerVisitor
 		return res
 	end
 
+	redef fun supercall(m: MMethodDef, recvtype: MClassType, args: Array[RuntimeVariable]): nullable RuntimeVariable
+	do
+		# FIXME implements a polymorphic access in tables
+		m = m.lookup_next_definition(m.mclassdef.mmodule, m.mclassdef.bound_mtype)
+		return self.call(m, recvtype, args)
+	end
+
 	redef fun vararg_instance(mpropdef, recv, varargs, elttype)
 	do
 		# A vararg must be stored into an new array
