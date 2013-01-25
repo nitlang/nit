@@ -1461,18 +1461,25 @@ abstract class MProperty
 	end
 
 	# Return the most specific definition in the linearization of `mtype`.
-	# If mtype does not know mproperty then null is returned.
 	#
 	# If you want to know the next properties in the linearization,
 	# look at `MPropDef::lookup_next_definition`.
 	#
-	# FIXME: NOT YET IMPLEMENTED
+	# FIXME: the linearisation is still unspecified
 	#
 	# REQUIRE: not mtype.need_anchor
-	fun lookup_first_definition(mmodule: MModule, mtype: MType): nullable MPROPDEF
+	# REQUIRE: mtype.has_mproperty(mmodule, self)
+	fun lookup_first_definition(mmodule: MModule, mtype: MType): MPROPDEF
 	do
 		assert not mtype.need_anchor
-		return null
+		assert mtype.has_mproperty(mmodule, self)
+
+		var candidates = self.lookup_definitions(mmodule, mtype)
+		if candidates.length == 1 then return candidates.first
+		assert candidates.length > 0
+
+		print "BADLINEXT chose {candidates.first} in: {candidates.join(", ")}"
+		return candidates.first
 	end
 end
 
