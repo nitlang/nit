@@ -1371,13 +1371,7 @@ class GlobalCompilerVisitor
 				self.add("/* skip, no method {m} */")
 				return res
 			end
-			var propdefs = m.lookup_definitions(self.compiler.mainmodule, mclasstype)
-			if propdefs.length == 0 then
-				self.add("/* skip, no method {m} */")
-				return res
-			end
-			assert propdefs.length == 1
-			var propdef = propdefs.first
+			var propdef = m.lookup_first_definition(self.compiler.mainmodule, mclasstype)
 			var res2 = self.call(propdef, mclasstype, args)
 			if res != null then self.assign(res, res2.as(not null))
 			return res
@@ -1421,15 +1415,7 @@ class GlobalCompilerVisitor
 		var last = types.last
 		var defaultpropdef: nullable MMethodDef = null
 		for t in types do
-			var propdefs = m.lookup_definitions(self.compiler.mainmodule, t)
-			if propdefs.length == 0 then
-				self.add("/* skip {t}, no method {m} */")
-				continue
-			end
-			if propdefs.length > 1 then
-				self.debug("NOT YET IMPLEMENTED conflict for {t}.{m}: {propdefs.join(" ")}. choose the first")
-			end
-			var propdef = propdefs.first
+			var propdef = m.lookup_first_definition(self.compiler.mainmodule, t)
 			if propdef.mclassdef.mclass.name == "Object" and t.ctype == "val*" then
 				defaultpropdef = propdef
 				continue
@@ -1459,14 +1445,7 @@ class GlobalCompilerVisitor
 	fun monomorphic_send(m: MMethod, t: MType, args: Array[RuntimeVariable]): nullable RuntimeVariable
 	do
 		assert t isa MClassType
-		var propdefs = m.lookup_definitions(self.compiler.mainmodule, t)
-		if propdefs.length == 0 then
-			abort
-		end
-		if propdefs.length > 1 then
-			self.debug("NOT YET IMPLEMENTED conflict for {t}.{m}: {propdefs.join(" ")}. choose the first")
-		end
-		var propdef = propdefs.first
+		var propdef = m.lookup_first_definition(self.compiler.mainmodule, t)
 		return self.call(propdef, t, args)
 	end
 

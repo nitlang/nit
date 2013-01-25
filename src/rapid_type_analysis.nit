@@ -173,10 +173,9 @@ class RapidTypeAnalysis
 	fun add_monomorphic_send(mtype: MClassType, mmethod: MMethod)
 	do
 		assert self.live_types.has(mtype)
-		var defs = mmethod.lookup_definitions(self.mainmodule, mtype)
-		if defs.is_empty then return
-		assert defs.length == 1 else print "conflict on {mtype} for {mmethod}: {defs.join(" ")}"
-		self.add_static_call(mtype, defs.first)
+		if not mtype.has_mproperty(self.mainmodule, mmethod) then return
+		var def = mmethod.lookup_first_definition(self.mainmodule, mtype)
+		self.add_static_call(mtype, def)
 	end
 
 	# Add a customized_methoddefs to the pool

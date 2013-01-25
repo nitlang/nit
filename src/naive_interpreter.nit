@@ -415,16 +415,7 @@ private class NaiveInterpreter
 			fatal("Reciever is null")
 			abort
 		end
-		var propdefs = mproperty.lookup_definitions(self.mainmodule, mtype)
-		if propdefs.length > 1 then
-			fatal("NOT YET IMPLEMETED ERROR: Property conflict: {propdefs.join(", ")}")
-			abort
-		end
-		assert propdefs.length == 1 else
-			fatal("Fatal Error: No property '{mproperty}' for '{recv}'")
-			abort
-		end
-		var propdef = propdefs.first
+		var propdef = mproperty.lookup_first_definition(self.mainmodule, mtype)
 		return self.call(propdef, args)
 	end
 
