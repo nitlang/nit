@@ -120,3 +120,7 @@ ga2.e = b
 #alt8#ggbee = ggbe.e
 #alt8#ggbee.foo
 #alt8#ggbee.bar
+
+# make the funtions live
+if false then (new C).function_never_called
+if false then (new C).foo
