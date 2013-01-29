@@ -15,13 +15,12 @@
 # Separate compilation of a Nit program with generic type erasure
 module separate_erasure_compiler
 
-
 import separate_compiler
 
+# Add separate erased compiler specific options
 redef class ToolContext
 	# --erasure
 	var opt_erasure: OptionBool = new OptionBool("Erase generic types", "--erasure")
-
 	# --no-check-erasure-cast
 	var opt_no_check_erasure_cast: OptionBool = new OptionBool("Disable implicit casts on unsafe return with erasure-typing policy (dangerous)", "--no-check-erasure-cast")
 
@@ -38,7 +37,7 @@ redef class ModelBuilder
 		var time0 = get_time
 		self.toolcontext.info("*** COMPILING TO C ***", 1)
 
-		var compiler = new SeparateErasureCompiler(mainmodule, runtime_type_analysis, self)
+		var compiler = new SeparateErasureCompiler(mainmodule, self, runtime_type_analysis)
 		compiler.compile_header
 
 		# compile class structures
@@ -72,7 +71,9 @@ class SeparateErasureCompiler
 	private var class_colors: Map[MClass, Int]
 	private var class_tables: Map[MClass, Array[nullable MClass]]
 
-	init(mainmodule: MModule, runtime_type_analysis: RapidTypeAnalysis, mmbuilder: ModelBuilder) do
+	init(mainmodule: MModule, mmbuilder: ModelBuilder, runtime_type_analysis: RapidTypeAnalysis) do
+		super
+
 		var mclasses = new HashSet[MClass]
 		mclasses.add_all(mmbuilder.model.mclasses)
 
@@ -317,6 +318,8 @@ class SeparateErasureCompiler
 
 	redef fun new_visitor do return new SeparateErasureCompilerVisitor(self)
 
+	# Stats
+
 	redef fun display_sizes
 	do
 		print "# size of tables"
@@ -362,10 +365,7 @@ class SeparateErasureCompilerVisitor
 		return res
 	end
 
-	redef fun init_instance(mtype)
-	do
-		return self.new_expr("NEW_{mtype.mclass.c_name}()", mtype)
-	end
+	redef fun init_instance(mtype) do return self.new_expr("NEW_{mtype.mclass.c_name}()", mtype)
 
 	redef fun type_test(value, mtype, tag)
 	do

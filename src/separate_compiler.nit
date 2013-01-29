@@ -15,38 +15,29 @@
 # Separate compilation of a Nit program
 module separate_compiler
 
-
-import global_compiler # TODO better separation of concerns
+import abstract_compiler
 import coloring
 
+# Add separate compiler specific options
 redef class ToolContext
 	# --separate
 	var opt_separate: OptionBool = new OptionBool("Use separate compilation", "--separate")
-
 	# --no-inline-intern
 	var opt_no_inline_intern: OptionBool = new OptionBool("Do not inline call to intern methods", "--no-inline-intern")
-
 	# --no-union-attribute
 	var opt_no_union_attribute: OptionBool = new OptionBool("Put primitive attibutes in a box instead of an union", "--no-union-attribute")
-
 	# --no-shortcut-equate
 	var opt_no_shortcut_equate: OptionBool = new OptionBool("Always call == in a polymorphic way", "--no-shortcut-equal")
-
 	# --inline-coloring-numbers
 	var opt_inline_coloring_numbers: OptionBool = new OptionBool("Inline colors and ids", "--inline-coloring-numbers")
-
 	# --use-naive-coloring
 	var opt_bm_typing: OptionBool = new OptionBool("Colorize items incrementaly, used to simulate binary matrix typing", "--bm-typing")
-
 	# --use-mod-perfect-hashing
 	var opt_phmod_typing: OptionBool = new OptionBool("Replace coloration by perfect hashing (with mod operator)", "--phmod-typing")
-
 	# --use-and-perfect-hashing
 	var opt_phand_typing: OptionBool = new OptionBool("Replace coloration by perfect hashing (with and operator)", "--phand-typing")
-
 	# --generic-resolution-tree
 	var opt_generic_tree: OptionBool = new OptionBool("Use tree representation for live generic types instead of flattened representation", "--generic-resolution-tree")
-
 	# --generic-resolution-tree
 	var opt_typing_table_metrics: OptionBool = new OptionBool("Enable static size measuring of tables used for typing and resolution", "--typing-table-metrics")
 
@@ -72,7 +63,7 @@ redef class ModelBuilder
 		var time0 = get_time
 		self.toolcontext.info("*** COMPILING TO C ***", 1)
 
-		var compiler = new SeparateCompiler(mainmodule, runtime_type_analysis, self)
+		var compiler = new SeparateCompiler(mainmodule, self, runtime_type_analysis)
 		compiler.compile_header
 
 		# compile class structures
@@ -114,7 +105,13 @@ end
 
 # Singleton that store the knowledge about the separate compilation process
 class SeparateCompiler
-	super GlobalCompiler # TODO better separation of concerns
+	super AbstractCompiler
+
+	# Cache for classid
+	protected var classids: HashMap[MClassType, String] = new HashMap[MClassType, String]
+
+	# The result of the RTA (used to know live types and methods)
+	var runtime_type_analysis: RapidTypeAnalysis
 
 	private var undead_types: Set[MType] = new HashSet[MType]
 	private var partial_types: Set[MType] = new HashSet[MType]
@@ -148,7 +145,10 @@ class SeparateCompiler
 	private var ft_tables: nullable Map[MClass, Array[nullable MParameterType]]
 	private var ft_masks: nullable Map[MClass, Int]
 
-	init(mainmodule: MModule, runtime_type_analysis: RapidTypeAnalysis, mmbuilder: ModelBuilder) do
+	init(mainmodule: MModule, mmbuilder: ModelBuilder, runtime_type_analysis: RapidTypeAnalysis) do
+		super
+		self.header = new_visitor
+		self.runtime_type_analysis = runtime_type_analysis
 		self.do_property_coloring
 		self.compile_box_kinds
 	end
@@ -189,10 +189,6 @@ class SeparateCompiler
 			end
 			self.header.add_decl("\} nitattribute_t; /* general C type representing a Nit attribute. */")
 		end
-	end
-
-	redef fun compile_class_names do
-		abort # There is no class name compilation since the name is stored in the type structure
 	end
 
 	fun compile_box_kinds
@@ -895,6 +891,8 @@ class SeparateCompiler
 
 	redef fun new_visitor do return new SeparateCompilerVisitor(self)
 
+	# Stats
+
 	redef fun display_stats
 	do
 		super
@@ -930,172 +928,13 @@ class SeparateCompiler
 	end
 end
 
-# The C function associated to a methoddef separately compiled
-class SeparateRuntimeFunction
-	super AbstractRuntimeFunction
-
-	redef fun build_c_name: String
-	do
-		return "{mmethoddef.c_name}"
-	end
-
-	redef fun to_s do return self.mmethoddef.to_s
-
-	redef fun compile_to_c(compiler)
-	do
-		var mmethoddef = self.mmethoddef
-
-		var recv = self.mmethoddef.mclassdef.bound_mtype
-		var v = compiler.new_visitor
-		var selfvar = new RuntimeVariable("self", recv, recv)
-		var arguments = new Array[RuntimeVariable]
-		var frame = new Frame(v, mmethoddef, recv, arguments)
-		v.frame = frame
-
-		var msignature = mmethoddef.msignature.resolve_for(mmethoddef.mclassdef.bound_mtype, mmethoddef.mclassdef.bound_mtype, mmethoddef.mclassdef.mmodule, true)
-
-		var sig = new Buffer
-		var comment = new Buffer
-		var ret = msignature.return_mtype
-		if ret != null then
-			sig.append("{ret.ctype} ")
-		else if mmethoddef.mproperty.is_new then
-			ret = recv
-			sig.append("{ret.ctype} ")
-		else
-			sig.append("void ")
-		end
-		sig.append(self.c_name)
-		sig.append("({selfvar.mtype.ctype} {selfvar}")
-		comment.append("(self: {selfvar}")
-		arguments.add(selfvar)
-		for i in [0..msignature.arity[ do
-			var mtype = msignature.mparameters[i].mtype
-			if i == msignature.vararg_rank then
-				mtype = v.get_class("Array").get_mtype([mtype])
-			end
-			comment.append(", {mtype}")
-			sig.append(", {mtype.ctype} p{i}")
-			var argvar = new RuntimeVariable("p{i}", mtype, mtype)
-			arguments.add(argvar)
-		end
-		sig.append(")")
-		comment.append(")")
-		if ret != null then
-			comment.append(": {ret}")
-		end
-		compiler.header.add_decl("{sig};")
-
-		v.add_decl("/* method {self} for {comment} */")
-		v.add_decl("{sig} \{")
-		if ret != null then
-			frame.returnvar = v.new_var(ret)
-		end
-		frame.returnlabel = v.get_name("RET_LABEL")
-
-		if recv != arguments.first.mtype then
-			#print "{self} {recv} {arguments.first}"
-		end
-		mmethoddef.compile_inside_to_c(v, arguments)
-
-		v.add("{frame.returnlabel.as(not null)}:;")
-		if ret != null then
-			v.add("return {frame.returnvar.as(not null)};")
-		end
-		v.add("\}")
-	end
-end
-
-# The C function associated to a methoddef on a primitive type, stored into a VFT of a class
-# The first parameter (the reciever) is always typed by val* in order to accept an object value
-class VirtualRuntimeFunction
-	super AbstractRuntimeFunction
-
-	redef fun build_c_name: String
-	do
-		return "VIRTUAL_{mmethoddef.c_name}"
-	end
-
-	redef fun to_s do return self.mmethoddef.to_s
-
-	redef fun compile_to_c(compiler)
-	do
-		var mmethoddef = self.mmethoddef
-
-		var recv = self.mmethoddef.mclassdef.bound_mtype
-		var v = compiler.new_visitor
-		var selfvar = new RuntimeVariable("self", v.object_type, recv)
-		var arguments = new Array[RuntimeVariable]
-		var frame = new Frame(v, mmethoddef, recv, arguments)
-		v.frame = frame
-
-		var sig = new Buffer
-		var comment = new Buffer
-
-		# Because the function is virtual, the signature must match the one of the original class
-		var intromclassdef = self.mmethoddef.mproperty.intro.mclassdef
-		var msignature = mmethoddef.mproperty.intro.msignature.resolve_for(intromclassdef.bound_mtype, intromclassdef.bound_mtype, intromclassdef.mmodule, true)
-		var ret = msignature.return_mtype
-		if ret != null then
-			sig.append("{ret.ctype} ")
-		else if mmethoddef.mproperty.is_new then
-			ret = recv
-			sig.append("{ret.ctype} ")
-		else
-			sig.append("void ")
-		end
-		sig.append(self.c_name)
-		sig.append("({selfvar.mtype.ctype} {selfvar}")
-		comment.append("(self: {selfvar}")
-		arguments.add(selfvar)
-		for i in [0..msignature.arity[ do
-			var mtype = msignature.mparameters[i].mtype
-			if i == msignature.vararg_rank then
-				mtype = v.get_class("Array").get_mtype([mtype])
-			end
-			comment.append(", {mtype}")
-			sig.append(", {mtype.ctype} p{i}")
-			var argvar = new RuntimeVariable("p{i}", mtype, mtype)
-			arguments.add(argvar)
-		end
-		sig.append(")")
-		comment.append(")")
-		if ret != null then
-			comment.append(": {ret}")
-		end
-		compiler.header.add_decl("{sig};")
-
-		v.add_decl("/* method {self} for {comment} */")
-		v.add_decl("{sig} \{")
-		if ret != null then
-			frame.returnvar = v.new_var(ret)
-		end
-		frame.returnlabel = v.get_name("RET_LABEL")
-
-		if recv != arguments.first.mtype then
-			#print "{self} {recv} {arguments.first}"
-		end
-		mmethoddef.compile_inside_to_c(v, arguments)
-
-		v.add("{frame.returnlabel.as(not null)}:;")
-		if ret != null then
-			v.add("return {frame.returnvar.as(not null)};")
-		end
-		v.add("\}")
-	end
-
-	redef fun call(v, arguments)
-	do
-		abort
-		# TODO ?
-	end
-end
-
 # A visitor on the AST of property definition that generate the C code of a separate compilation process.
 class SeparateCompilerVisitor
-	super GlobalCompilerVisitor # TODO better separation of concerns
+	super AbstractCompilerVisitor
 
-	redef fun adapt_signature(m: MMethodDef, args: Array[RuntimeVariable])
+	redef type COMPILER: SeparateCompiler
+
+	redef fun adapt_signature(m, args)
 	do
 		var msignature = m.msignature.resolve_for(m.mclassdef.bound_mtype, m.mclassdef.bound_mtype, m.mclassdef.mmodule, true)
 		var recv = args.first
@@ -1111,9 +950,7 @@ class SeparateCompilerVisitor
 		end
 	end
 
-	# Box or unbox a value to another type iff a C type conversion is needed
-	# ENSURE: result.mtype.ctype == mtype.ctype
-	redef fun autobox(value: RuntimeVariable, mtype: MType): RuntimeVariable
+	redef fun autobox(value, mtype)
 	do
 		if value.mtype == mtype then
 			return value
@@ -1416,11 +1253,11 @@ class SeparateCompilerVisitor
 	end
 
 	# Build livetype structure retrieving
-	#ENSURE: mtype.need_anchor
+	# ENSURE: mtype.need_anchor
 	fun retrieve_anchored_livetype(mtype: MGenericType, buffer: Buffer) do
 		assert mtype.need_anchor
 
-		var compiler = self.compiler.as(SeparateCompiler)
+		var compiler = self.compiler
 		for ft in mtype.arguments do
 
 			var ntype = ft
@@ -1458,7 +1295,7 @@ class SeparateCompilerVisitor
 
 	redef fun init_instance(mtype)
 	do
-		var compiler = self.compiler.as(SeparateCompiler)
+		var compiler = self.compiler
 		if mtype isa MGenericType and mtype.need_anchor then
 			if compiler.modelbuilder.toolcontext.opt_generic_tree.value then
 				var buff = new Buffer
@@ -1486,11 +1323,10 @@ class SeparateCompilerVisitor
 		self.add("CHECK_NEW_{mtype.mclass.c_name}({value});")
 	end
 
-
 	redef fun type_test(value, mtype, tag)
 	do
 		self.add("/* {value.inspect} isa {mtype} */")
-		var compiler = self.compiler.as(SeparateCompiler)
+		var compiler = self.compiler
 
 		var recv = self.frame.arguments.first
 		var recv_type_info = self.type_info(recv)
@@ -1712,7 +1548,7 @@ class SeparateCompilerVisitor
 		else if can_be_primitive(value1) and can_be_primitive(value2) then
 			test.add("{value1}->class == {value2}->class")
 			var s = new Array[String]
-			for t, v in self.compiler.as(SeparateCompiler).box_kinds do
+			for t, v in self.compiler.box_kinds do
 				s.add "({value1}->class->box_kind == {v} && ((struct instance_{t.c_name}*){value1})->value == ((struct instance_{t.c_name}*){value2})->value)"
 			end
 			test.add("({s.join(" || ")})")
@@ -1762,7 +1598,7 @@ class SeparateCompilerVisitor
 	do
 		var mtype = self.get_class("NativeArray").get_mtype([elttype])
 		assert mtype isa MGenericType
-		var compiler = self.compiler.as(SeparateCompiler)
+		var compiler = self.compiler
 		if mtype.need_anchor then
 			if compiler.modelbuilder.toolcontext.opt_generic_tree.value then
 				var buff = new Buffer
@@ -1812,7 +1648,7 @@ class SeparateCompilerVisitor
 
 	fun link_unanchored_type(mclassdef: MClassDef, mtype: MType) do
 		assert mtype.need_anchor
-		var compiler = self.compiler.as(SeparateCompiler)
+		var compiler = self.compiler
 		if not compiler.live_unanchored_types.has_key(self.frame.mpropdef.mclassdef) then
 			compiler.live_unanchored_types[self.frame.mpropdef.mclassdef] = new HashSet[MType]
 		end
@@ -1820,64 +1656,162 @@ class SeparateCompilerVisitor
 	end
 end
 
-redef class MClass
-	# Return the name of the C structure associated to a Nit class
-	fun c_name: String do
-		var res = self.c_name_cache
-		if res != null then return res
-		res = "{intro_mmodule.name.to_cmangle}__{name.to_cmangle}"
-		self.c_name_cache = res
-		return res
+# The C function associated to a methoddef separately compiled
+class SeparateRuntimeFunction
+	super AbstractRuntimeFunction
+
+	redef fun build_c_name: String do return "{mmethoddef.c_name}"
+
+	redef fun to_s do return self.mmethoddef.to_s
+
+	redef fun compile_to_c(compiler)
+	do
+		var mmethoddef = self.mmethoddef
+
+		var recv = self.mmethoddef.mclassdef.bound_mtype
+		var v = compiler.new_visitor
+		var selfvar = new RuntimeVariable("self", recv, recv)
+		var arguments = new Array[RuntimeVariable]
+		var frame = new Frame(v, mmethoddef, recv, arguments)
+		v.frame = frame
+
+		var msignature = mmethoddef.msignature.resolve_for(mmethoddef.mclassdef.bound_mtype, mmethoddef.mclassdef.bound_mtype, mmethoddef.mclassdef.mmodule, true)
+
+		var sig = new Buffer
+		var comment = new Buffer
+		var ret = msignature.return_mtype
+		if ret != null then
+			sig.append("{ret.ctype} ")
+		else if mmethoddef.mproperty.is_new then
+			ret = recv
+			sig.append("{ret.ctype} ")
+		else
+			sig.append("void ")
+		end
+		sig.append(self.c_name)
+		sig.append("({selfvar.mtype.ctype} {selfvar}")
+		comment.append("(self: {selfvar}")
+		arguments.add(selfvar)
+		for i in [0..msignature.arity[ do
+			var mtype = msignature.mparameters[i].mtype
+			if i == msignature.vararg_rank then
+				mtype = v.get_class("Array").get_mtype([mtype])
+			end
+			comment.append(", {mtype}")
+			sig.append(", {mtype.ctype} p{i}")
+			var argvar = new RuntimeVariable("p{i}", mtype, mtype)
+			arguments.add(argvar)
+		end
+		sig.append(")")
+		comment.append(")")
+		if ret != null then
+			comment.append(": {ret}")
+		end
+		compiler.header.add_decl("{sig};")
+
+		v.add_decl("/* method {self} for {comment} */")
+		v.add_decl("{sig} \{")
+		if ret != null then
+			frame.returnvar = v.new_var(ret)
+		end
+		frame.returnlabel = v.get_name("RET_LABEL")
+
+		if recv != arguments.first.mtype then
+			#print "{self} {recv} {arguments.first}"
+		end
+		mmethoddef.compile_inside_to_c(v, arguments)
+
+		v.add("{frame.returnlabel.as(not null)}:;")
+		if ret != null then
+			v.add("return {frame.returnvar.as(not null)};")
+		end
+		v.add("\}")
 	end
-	private var c_name_cache: nullable String
+end
+
+# The C function associated to a methoddef on a primitive type, stored into a VFT of a class
+# The first parameter (the reciever) is always typed by val* in order to accept an object value
+class VirtualRuntimeFunction
+	super AbstractRuntimeFunction
+
+	redef fun build_c_name: String do return "VIRTUAL_{mmethoddef.c_name}"
+
+	redef fun to_s do return self.mmethoddef.to_s
+
+	redef fun compile_to_c(compiler)
+	do
+		var mmethoddef = self.mmethoddef
+
+		var recv = self.mmethoddef.mclassdef.bound_mtype
+		var v = compiler.new_visitor
+		var selfvar = new RuntimeVariable("self", v.object_type, recv)
+		var arguments = new Array[RuntimeVariable]
+		var frame = new Frame(v, mmethoddef, recv, arguments)
+		v.frame = frame
+
+		var sig = new Buffer
+		var comment = new Buffer
+
+		# Because the function is virtual, the signature must match the one of the original class
+		var intromclassdef = self.mmethoddef.mproperty.intro.mclassdef
+		var msignature = mmethoddef.mproperty.intro.msignature.resolve_for(intromclassdef.bound_mtype, intromclassdef.bound_mtype, intromclassdef.mmodule, true)
+		var ret = msignature.return_mtype
+		if ret != null then
+			sig.append("{ret.ctype} ")
+		else if mmethoddef.mproperty.is_new then
+			ret = recv
+			sig.append("{ret.ctype} ")
+		else
+			sig.append("void ")
+		end
+		sig.append(self.c_name)
+		sig.append("({selfvar.mtype.ctype} {selfvar}")
+		comment.append("(self: {selfvar}")
+		arguments.add(selfvar)
+		for i in [0..msignature.arity[ do
+			var mtype = msignature.mparameters[i].mtype
+			if i == msignature.vararg_rank then
+				mtype = v.get_class("Array").get_mtype([mtype])
+			end
+			comment.append(", {mtype}")
+			sig.append(", {mtype.ctype} p{i}")
+			var argvar = new RuntimeVariable("p{i}", mtype, mtype)
+			arguments.add(argvar)
+		end
+		sig.append(")")
+		comment.append(")")
+		if ret != null then
+			comment.append(": {ret}")
+		end
+		compiler.header.add_decl("{sig};")
+
+		v.add_decl("/* method {self} for {comment} */")
+		v.add_decl("{sig} \{")
+		if ret != null then
+			frame.returnvar = v.new_var(ret)
+		end
+		frame.returnlabel = v.get_name("RET_LABEL")
+
+		if recv != arguments.first.mtype then
+			#print "{self} {recv} {arguments.first}"
+		end
+		mmethoddef.compile_inside_to_c(v, arguments)
+
+		v.add("{frame.returnlabel.as(not null)}:;")
+		if ret != null then
+			v.add("return {frame.returnvar.as(not null)};")
+		end
+		v.add("\}")
+	end
+
+	# TODO ?
+	redef fun call(v, arguments) do abort
 end
 
 redef class MType
 	fun const_color: String do return "COLOR_{c_name}"
 end
 
-redef class MParameterType
-	redef fun c_name
-	do
-		var res = self.c_name_cache
-		if res != null then return res
-		res = "{self.mclass.c_name}_FT{self.rank}"
-		self.c_name_cache = res
-		return res
-	end
-end
-
-redef class MVirtualType
-	redef fun c_name
-	do
-		var res = self.c_name_cache
-		if res != null then return res
-		res = "{self.mproperty.intro.mclassdef.mclass.c_name}_VT{self.mproperty.name}"
-		self.c_name_cache = res
-		return res
-	end
-end
-
-redef class MNullableType
-	redef fun c_name
-	do
-		var res = self.c_name_cache
-		if res != null then return res
-		res = "nullable_{self.mtype.c_name}"
-		self.c_name_cache = res
-		return res
-	end
-end
-
 redef class MProperty
-	fun c_name: String do
-		var res = self.c_name_cache
-		if res != null then return res
-		res = "{self.intro.c_name}"
-		self.c_name_cache = res
-		return res
-	end
-	private var c_name_cache: nullable String
-
 	fun const_color: String do return "COLOR_{c_name}"
 end
