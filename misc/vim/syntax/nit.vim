@@ -18,8 +18,14 @@
 " See the License for the specific language governing permissions and
 " limitations under the License.
 
-if exists("b:current_syntax")
-	finish
+if !exists("main_syntax")
+  if version < 600
+    syntax clear
+  elseif exists("b:current_syntax")
+    finish
+  endif
+  " we define it here so that included files can test for it
+  let main_syntax='nit'
 endif
 
 " Expression Substitution and Backslash Notation
@@ -109,5 +115,22 @@ hi def link NITExprSubstError		Error
 
 hi def link NITComment			Comment
 hi def link NITTodo			Todo
+
+" FFI Section
+syn match NITFFIDelimiters "\<\(`{\|`}\)\>"
+hi def link NITFFIDelimiters		Keyword
+" FFI Python
+syntax include @FFIPython syntax/python.vim
+unlet b:current_syntax
+syn match NITFFILanguage	'"Python"' nextgroup=NITFFIBlockPython skipwhite
+syn region NITFFIBlockPython matchgroup=NITFFI start='`{' matchgroup=NITFFI end='`}' keepend fold contains=@FFIPython
+
+" FFI C (the last one is the default)
+syntax include @FFIC syntax/c.vim
+unlet b:current_syntax
+syn match NITFFILanguage		'"C\(\| header\| body\)"'	nextgroup=NITFFIBlockC skipwhite
+syn region NITFFIBlockC matchgroup=NITFFI start='`{' matchgroup=NITFFI end='`}' keepend fold contains=@FFIC
+
+hi def link NITFFILanguage		Define
 
 let b:current_syntax = "Nit"
