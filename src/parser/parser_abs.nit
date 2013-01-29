@@ -299,6 +299,9 @@ end
 class TBadString
 	super Token
 end
+class TExternCodeSegment
+	super Token
+end
 class EOF
 	super Token
 private init noinit do end
@@ -332,6 +335,8 @@ class AClosureId super Prod end
 class AModuleName super Prod end
 class AExternCalls super Prod end
 class AExternCall super Prod end
+class AInLanguage super Prod end
+class AExternCodeBlock super Prod end
 class AQualified super Prod end
 class ADoc super Prod end
 
@@ -339,6 +344,7 @@ class AModule
 	super AModule
     readable var _n_moduledecl: nullable AModuledecl = null
     readable var _n_imports: List[AImport] = new List[AImport]
+    readable var _n_extern_code_blocks: List[AExternCodeBlock] = new List[AExternCodeBlock]
     readable var _n_classdefs: List[AClassdef] = new List[AClassdef]
 end
 class AModuledecl
@@ -382,6 +388,7 @@ class AStdClassdef
     readable var _n_classkind: AClasskind
     readable var _n_id: nullable TClassid = null
     readable var _n_formaldefs: List[AFormaldef] = new List[AFormaldef]
+    readable var _n_extern_code_block: nullable AExternCodeBlock = null
     readable var _n_superclasses: List[ASuperclass] = new List[ASuperclass]
     readable var _n_propdefs: List[APropdef] = new List[APropdef]
     readable var _n_kwend: TKwend
@@ -475,6 +482,7 @@ class AExternMethPropdef
     readable var _n_signature: ASignature
     readable var _n_extern: nullable TString = null
     readable var _n_extern_calls: nullable AExternCalls = null
+    readable var _n_extern_code_block: nullable AExternCodeBlock = null
 end
 class AConcreteMethPropdef
 	super APropdef
@@ -506,6 +514,7 @@ class AExternInitPropdef
     readable var _n_signature: ASignature
     readable var _n_extern: nullable TString = null
     readable var _n_extern_calls: nullable AExternCalls = null
+    readable var _n_extern_code_block: nullable AExternCodeBlock = null
 end
 class AMainMethPropdef
 	super APropdef
@@ -1150,6 +1159,16 @@ class AAsNotNullableExternCall
     readable var _n_kwas: TKwas
     readable var _n_kwnot: TKwnot
     readable var _n_kwnullable: TKwnullable
+end
+class AInLanguage
+	super AInLanguage
+    readable var _n_kwin: TKwin
+    readable var _n_string: TString
+end
+class AExternCodeBlock
+	super AExternCodeBlock
+    readable var _n_in_language: nullable AInLanguage = null
+    readable var _n_extern_code_segment: TExternCodeSegment
 end
 class AQualified
 	super AQualified
