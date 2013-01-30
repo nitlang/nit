@@ -27,9 +27,6 @@ int stream_FDStream_FDStream_native_read_char_1(void *s, int fd) {
 	return result;
 }
 #ifndef NONITCNI
-void stream_FDStream_FDStream_write_char_1(FDStream s, int fd, int c) {
-	write(fd, &c, 1);
-}
 
 /*
 C implementation of stream::Object::intern_poll
