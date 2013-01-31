@@ -1411,10 +1411,8 @@ redef class ASuperExpr
 			end
 			v.error(self, "Error: No super method to call for {mproperty}.")
 			return
-		else if superprops.length > 1 then
-			v.modelbuilder.warning(self, "Warning: NOT YET IMPLEMENTED: Conflicting super method to call for {mproperty}: {superprops.join(", ")}.")
-			return
 		end
+		# FIXME: covariance of return type in linear extension?
 		var superprop = superprops.first
 		assert superprop isa MMethodDef
 
