@@ -1522,16 +1522,43 @@ abstract class MProperty
 	# REQUIRE: mtype.has_mproperty(mmodule, self)
 	fun lookup_first_definition(mmodule: MModule, mtype: MType): MPROPDEF
 	do
-		assert not mtype.need_anchor
-		assert mtype.has_mproperty(mmodule, self)
-
-		var candidates = self.lookup_definitions(mmodule, mtype)
-		if candidates.length == 1 then return candidates.first
-		assert candidates.length > 0
-
-		print "BADLINEXT chose {candidates.first} in: {candidates.join(", ")}"
-		return candidates.first
+		return lookup_all_definitions(mmodule, mtype).first
 	end
+
+	# Return all definitions in a linearisation order
+	# Most speficic first, most general last
+	fun lookup_all_definitions(mmodule: MModule, mtype: MType): Array[MPROPDEF]
+	do
+		assert not mtype.need_anchor
+		if mtype isa MNullableType then mtype = mtype.mtype
+
+		var cache = self.lookup_all_definitions_cache[mmodule, mtype]
+		if cache != null then return cache
+
+		#print "select prop {mproperty} for {mtype} in {self}"
+		# First, select all candidates
+		var candidates = new Array[MPROPDEF]
+		for mpropdef in self.mpropdefs do
+			# If the definition is not imported by the module, then skip
+			if not mmodule.in_importation <= mpropdef.mclassdef.mmodule then continue
+			# If the definition is not inherited by the type, then skip
+			if not mtype.is_subtype(mmodule, null, mpropdef.mclassdef.bound_mtype) then continue
+			# Else, we keep it
+			candidates.add(mpropdef)
+		end
+		# Fast track for only one candidate
+		if candidates.length <= 1 then
+			self.lookup_all_definitions_cache[mmodule, mtype] = candidates
+			return candidates
+		end
+
+		mmodule.linearize_mpropdefs(candidates)
+		candidates = candidates.reversed
+		self.lookup_all_definitions_cache[mmodule, mtype] = candidates
+		return candidates
+	end
+
+	private var lookup_all_definitions_cache: HashMap2[MModule, MType, Array[MPROPDEF]] = new HashMap2[MModule, MType, Array[MPROPDEF]]
 end
 
 # A global method
@@ -1641,12 +1668,13 @@ abstract class MPropDef
 	do
 		assert not mtype.need_anchor
 
-		var mpropdefs = self.mproperty.lookup_super_definitions(self.mclassdef.mmodule, self.mclassdef.bound_mtype)
-		assert not mpropdefs.is_empty
-		if mpropdefs.length > 1 then
-			print "BADLINEXT chose next {mpropdefs.first} in: {mpropdefs.join(", ")}"
-		end
-		return mpropdefs.first
+		var mpropdefs = self.mproperty.lookup_all_definitions(mmodule, mtype)
+		var i = mpropdefs.iterator
+		while i.is_ok and i.item != self do i.next
+		assert has_property: i.is_ok
+		i.next
+		assert has_next_property: i.is_ok
+		return i.item
 	end
 end
 
