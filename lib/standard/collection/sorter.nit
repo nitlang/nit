@@ -18,13 +18,14 @@ package sorter
 import array
 
 # This abstract class generalizes ways to sort an array
+# TODO: rename *Sorter to *Comparator
 interface AbstractSorter[E: Object]
 	# Compare `a' and `b'.
 	# Returns:
 	# 	-1 if a < b
 	#	0  if a = b
 	#	1  if a > b
-	protected fun compare(a: E, b: E): Int is abstract
+	fun compare(a: E, b: E): Int is abstract
 
 	# Sort `array' using the `compare' function.
 	fun sort(array: Array[E]) do sub_sort(array, 0, array.length-1)
