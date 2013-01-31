@@ -148,6 +148,31 @@ redef class MModule
 		return res
 	end
 
+	# Sort a given array of classes using the linerarization order of the module
+	# The most general is first, the most specific is last
+	fun linearize_mclasses(mclasses: Array[MClass])
+	do
+		self.flatten_mclass_hierarchy.sort(mclasses)
+	end
+
+	# Sort a given array of class definitions using the linerarization order of the module
+	# the refinement link is stronger than the specialisation link
+	# The most general is first, the most specific is last
+	fun linearize_mclassdefs(mclassdefs: Array[MClassDef])
+	do
+		var sorter = new MClassDefSorter(self)
+		sorter.sort(mclassdefs)
+	end
+
+	# Sort a given array of property definitions using the linerarization order of the module
+	# the refinement link is stronger than the specialisation link
+	# The most general is first, the most specific is last
+	fun linearize_mpropdefs(mpropdefs: Array[MPropDef])
+	do
+		var sorter = new MPropDefSorter(self)
+		sorter.sort(mpropdefs)
+	end
+
 	private var flatten_mclass_hierarchy_cache: nullable POSet[MClass] = null
 
 	# The primitive type Object, the root of the class hierarchy
@@ -216,6 +241,32 @@ redef class MModule
 			end
 		end
 		return res
+	end
+end
+
+private class MClassDefSorter
+	super AbstractSorter[MClassDef]
+	var mmodule: MModule
+	redef fun compare(a, b)
+	do
+		var ca = a.mclass
+		var cb = b.mclass
+		if ca != cb then return mmodule.flatten_mclass_hierarchy.compare(ca, cb)
+		return mmodule.model.mclassdef_hierarchy.compare(a, b)
+	end
+end
+
+private class MPropDefSorter
+	super AbstractSorter[MPropDef]
+	var mmodule: MModule
+	redef fun compare(pa, pb)
+	do
+		var a = pa.mclassdef
+		var b = pb.mclassdef
+		var ca = a.mclass
+		var cb = b.mclass
+		if ca != cb then return mmodule.flatten_mclass_hierarchy.compare(ca, cb)
+		return mmodule.model.mclassdef_hierarchy.compare(a, b)
 	end
 end
 
