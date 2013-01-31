@@ -24,6 +24,7 @@ module poset
 #  * transitivity: `self.has_edge(e,f)' and `self.has_edge(f,g)' implies `self.has_edge(e,g)'
 class POSet[E: Object]
 	super NaiveCollection[E]
+	super AbstractSorter[E]
 
 	redef fun iterator do return nodes.iterator
 
@@ -154,7 +155,7 @@ class POSet[E: Object]
 	# if a == b then return 0
 	# else return -1 or 1
 	# The total order is stable unless a new node or a new edge is added
-	fun compare(a, b: E): Int
+	redef fun compare(a, b: E): Int
 	do
 		var res = tos[a].length <=> tos[b].length
 		if res != 0 then return res
