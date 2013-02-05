@@ -88,7 +88,7 @@ private class FlowVisitor
 				file.write "F{f.object_id} -> F{f.when_false.object_id}[label=FALSE,style=dotted];\n"
 			end
 		end
-		file.write("\n")
+		file.write("\}\n")
 		file.close
 	end
 
