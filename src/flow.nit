@@ -62,7 +62,7 @@ private class FlowVisitor
 
 	fun visit_expr(node: AExpr): FlowContext
 	do
-		self.visit(node)
+		self.enter_visit(node)
 		return node.after_flow_context.as(not null)
 	end
 
