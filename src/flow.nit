@@ -49,8 +49,10 @@ private class FlowVisitor
 			if node isa AExpr then
 				var flow = self.current_flow_context
 				node.after_flow_context = flow
+				# Force the creation of a specific merge after the analysis of the node.
 				if flow.when_true != flow or flow.when_false != flow then
-					#self.make_sub_flow
+					self.make_sub_flow
+					self.current_flow_context.name = "AUTOSUB"
 				end
 			end
 
