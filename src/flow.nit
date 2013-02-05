@@ -449,8 +449,7 @@ end
 redef class AAssertExpr
 	redef fun accept_flow_visitor(v)
 	do
-		v.enter_visit(self.n_expr)
-		var after_expr = v.current_flow_context
+		var after_expr = v.visit_expr(self.n_expr)
 
 		v.current_flow_context = after_expr.when_false
 		v.enter_visit(n_else)
