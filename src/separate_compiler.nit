@@ -37,8 +37,6 @@ redef class ToolContext
 	# --use-and-perfect-hashing
 	var opt_phand_typing: OptionBool = new OptionBool("Replace coloration by perfect hashing (with and operator)", "--phand-typing")
 	# --generic-resolution-tree
-	var opt_generic_tree: OptionBool = new OptionBool("Use tree representation for live generic types instead of flattened representation", "--generic-resolution-tree")
-	# --generic-resolution-tree
 	var opt_typing_table_metrics: OptionBool = new OptionBool("Enable static size measuring of tables used for typing and resolution", "--typing-table-metrics")
 
 	redef init
@@ -52,7 +50,6 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_bm_typing)
 		self.option_context.add_option(self.opt_phmod_typing)
 		self.option_context.add_option(self.opt_phand_typing)
-		self.option_context.add_option(self.opt_generic_tree)
 		self.option_context.add_option(self.opt_typing_table_metrics)
 	end
 end
@@ -90,13 +87,6 @@ redef class ModelBuilder
 			compiler.compile_type_to_c(t)
 		end
 
-		if self.toolcontext.opt_generic_tree.value then
-			# compile live generic types selection structures
-			for mclass in model.mclasses do
-				compiler.compile_live_gentype_to_c(mclass)
-			end
-		end
-
 		compiler.display_stats
 
 		write_and_make(compiler)
@@ -120,9 +110,6 @@ class SeparateCompiler
 	private var type_colors: Map[MType, Int] = typeids
 	private var type_tables: nullable Map[MType, Array[nullable MType]] = null
 
-	private var livetypes_colors: nullable Map[MType, Int]
-	private var livetypes_tables: nullable Map[MClass, Array[nullable Object]]
-	private var livetypes_tables_sizes: nullable Map[MClass, Array[Int]]
 	private var live_unanchored_types: Map[MClassDef, Set[MType]] = new HashMap[MClassDef, HashSet[MType]]
 
 	private var unanchored_types_colors: nullable Map[MType, Int]
@@ -158,20 +145,14 @@ class SeparateCompiler
 		self.compile_header_attribute_structs
 		self.header.add_decl("struct class \{ int box_kind; nitmethod_t vft[1]; \}; /* general C type representing a Nit class. */")
 
-		if modelbuilder.toolcontext.opt_generic_tree.value then
-			# With generic_tree, only ft and vt resolution is stored in the type
-			self.header.add_decl("struct type \{ int id; const char *name; int color; short int is_nullable; int livecolor; struct types *vts_table; struct types *fts_table; int table_size; int type_table[1]; \}; /* general C type representing a Nit type. */")
-		else
-			# With unanchored_table, all live type resolution are stored in a big table: unanchored_table
-			self.header.add_decl("struct type \{ int id; const char *name; int color; short int is_nullable; struct types *unanchored_table; int table_size; int type_table[1]; \}; /* general C type representing a Nit type. */")
-		end
+		# With unanchored_table, all live type resolution are stored in a big table: unanchored_table
+		self.header.add_decl("struct type \{ int id; const char *name; int color; short int is_nullable; struct types *unanchored_table; int table_size; int type_table[1]; \}; /* general C type representing a Nit type. */")
 
 		if modelbuilder.toolcontext.opt_phmod_typing.value or modelbuilder.toolcontext.opt_phand_typing.value then
 			self.header.add_decl("struct types \{ int mask; struct type *types[1]; \}; /* a list types (used for vts, fts and unanchored lists). */")
 		else
 			self.header.add_decl("struct types \{ struct type *types[1]; \}; /* a list types (used for vts, fts and unanchored lists). */")
 		end
-
 
 		self.header.add_decl("typedef struct \{ struct type *type; struct class *class; nitattribute_t attrs[1]; \} val; /* general C type representing a Nit instance. */")
 	end
@@ -312,43 +293,8 @@ class SeparateCompiler
 			end
 		end
 
-		if modelbuilder.toolcontext.opt_generic_tree.value then
-			# fts coloration for non-erased compilation
-			if modelbuilder.toolcontext.opt_bm_typing.value then
-				var ft_coloring = new NaiveFTColoring(self.class_coloring)
-				self.ft_colors = ft_coloring.colorize
-				self.ft_tables = ft_coloring.build_ft_tables
-			else if modelbuilder.toolcontext.opt_phmod_typing.value then
-				var ft_coloring = new FTModPerfectHashing(self.class_coloring)
-				self.ft_colors = ft_coloring.colorize
-				self.ft_masks = ft_coloring.compute_masks
-				self.ft_tables = ft_coloring.build_ft_tables
-			else if modelbuilder.toolcontext.opt_phand_typing.value then
-				var ft_coloring = new FTAndPerfectHashing(self.class_coloring)
-				self.ft_colors = ft_coloring.colorize
-				self.ft_masks = ft_coloring.compute_masks
-				self.ft_tables = ft_coloring.build_ft_tables
-			else
-				var ft_coloring = new FTColoring(self.class_coloring)
-				self.ft_colors = ft_coloring.colorize
-				self.ft_tables = ft_coloring.build_ft_tables
-			end
-			self.compile_color_consts(self.ft_colors.as(not null))
-
-			# colorize live entries
-			var entries_coloring
-			if modelbuilder.toolcontext.opt_bm_typing.value then
-				entries_coloring = new NaiveLiveEntryColoring
-			else
-				entries_coloring = new LiveEntryColoring
-			end
-			self.livetypes_colors = entries_coloring.colorize(mtypes)
-			self.livetypes_tables = entries_coloring.build_livetype_tables(mtypes)
-			self.livetypes_tables_sizes = entries_coloring.livetypes_tables_sizes
-		else
-			# VT and FT are stored with other unresolved types in the big unanchored_tables
-			self.compile_unanchored_tables(mtypes)
-		end
+		# VT and FT are stored with other unresolved types in the big unanchored_tables
+		self.compile_unanchored_tables(mtypes)
 
 		# colorize types
 		if modelbuilder.toolcontext.opt_bm_typing.value then
@@ -466,46 +412,6 @@ class SeparateCompiler
 		end
 	end
 
-	# declare live generic types tables selection
-	private fun compile_live_gentype_to_c(mclass: MClass) do
-		if mclass.arity > 0 then
-			if self.livetypes_tables.has_key(mclass) then
-				var table = self.livetypes_tables[mclass]
-				var sign = self.livetypes_tables_sizes[mclass]
-				var table_buffer = new Buffer.from("const struct type *livetypes_{mclass.c_name}[{sign.join("][")}] = \{\n")
-				compile_livetype_table(table, table_buffer, 1, mclass.arity)
-				table_buffer.append("\};")
-
-				var v = new SeparateCompilerVisitor(self)
-				self.header.add_decl("extern const struct type *livetypes_{mclass.c_name}[{sign.join("][")}];")
-				v.add_decl(table_buffer.to_s)
-			else
-				var sign = new Array[Int].filled_with(0, mclass.arity)
-				var v = new SeparateCompilerVisitor(self)
-				self.header.add_decl("extern const struct type *livetypes_{mclass.c_name}[{sign.join("][")}];")
-				v.add_decl("const struct type *livetypes_{mclass.c_name}[{sign.join("][")}];")
-			end
-		end
-	end
-
-	private fun compile_livetype_table(table: Array[nullable Object], buffer: Buffer, depth: Int, max: Int) do
-		for obj in table do
-			if obj == null then
-				if depth == max then
-					buffer.append("NULL,\n")
-				else
-					buffer.append("\{\},\n")
-				end
-			else if obj isa MClassType then
-				buffer.append("(struct type*) &type_{obj.c_name}, /* {obj} */\n")
-			else if obj isa Array[nullable Object] then
-				buffer.append("\{\n")
-				compile_livetype_table(obj, buffer, depth + 1, max)
-				buffer.append("\},\n")
-			end
-		end
-	end
-
 	# Separately compile all the method definitions of the module
 	fun compile_module_to_c(mmodule: MModule)
 	do
@@ -540,13 +446,7 @@ class SeparateCompiler
 		self.header.add_decl("const char *name;")
 		self.header.add_decl("int color;")
 		self.header.add_decl("short int is_nullable;")
-		if modelbuilder.toolcontext.opt_generic_tree.value then
-			self.header.add_decl("int livecolor;")
-			self.header.add_decl("const struct vts_table_{c_name} *vts_table;")
-			self.header.add_decl("const struct fts_table_{c_name} *fts_table;")
-		else
-			self.header.add_decl("const struct types *unanchored_table;")
-		end
+		self.header.add_decl("const struct types *unanchored_table;")
 		self.header.add_decl("int table_size;")
 		self.header.add_decl("int type_table[{self.type_tables[mtype].length}];")
 		self.header.add_decl("\};")
@@ -561,24 +461,10 @@ class SeparateCompiler
 		else
 			v.add_decl("0,")
 		end
-		if modelbuilder.toolcontext.opt_generic_tree.value then
-			v.add_decl("{self.livetypes_colors[mtype]},")
-			if compile_type_vts_table(mtype) then
-				v.add_decl("&vts_table_{c_name},")
-			else
-				v.add_decl("NULL,")
-			end
-			if compile_type_fts_table(mtype) then
-				v.add_decl("&fts_table_{c_name},")
-			else
-				v.add_decl("NULL,")
-			end
+		if compile_type_unanchored_table(mtype) then
+			v.add_decl("(struct types*) &unanchored_table_{c_name},")
 		else
-			if compile_type_unanchored_table(mtype) then
-				v.add_decl("(struct types*) &unanchored_table_{c_name},")
-			else
-				v.add_decl("NULL,")
-			end
+			v.add_decl("NULL,")
 		end
 		v.add_decl("{self.type_tables[mtype].length},")
 		v.add_decl("\{")
@@ -859,12 +745,10 @@ class SeparateCompiler
 			v.add("if(type == NULL) \{")
 			v.add_abort("type null")
 			v.add("\}")
-			if not v.compiler.modelbuilder.toolcontext.opt_generic_tree.value then
-				v.add("if(type->unanchored_table == NULL) \{")
-				v.add("fprintf(stderr, \"Insantiation of a dead type: %s\\n\", type->name);")
-				v.add_abort("type dead")
-				v.add("\}")
-			end
+			v.add("if(type->unanchored_table == NULL) \{")
+			v.add("fprintf(stderr, \"Insantiation of a dead type: %s\\n\", type->name);")
+			v.add_abort("type dead")
+			v.add("\}")
 		end
 		v.add("{res}->class = (struct class*) &class_{c_name};")
 
@@ -1297,20 +1181,13 @@ class SeparateCompilerVisitor
 	do
 		var compiler = self.compiler
 		if mtype isa MGenericType and mtype.need_anchor then
-			if compiler.modelbuilder.toolcontext.opt_generic_tree.value then
-				var buff = new Buffer
-				retrieve_anchored_livetype(mtype, buff)
-				mtype = self.anchor(mtype).as(MClassType)
-				return self.new_expr("NEW_{mtype.mclass.c_name}((struct type *) livetypes_{mtype.mclass.c_name}{buff.to_s})", mtype)
+			link_unanchored_type(self.frame.mpropdef.mclassdef, mtype)
+			var recv = self.frame.arguments.first
+			var recv_type_info = self.type_info(recv)
+			if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
+				return self.new_expr("NEW_{mtype.mclass.c_name}((struct type *) {recv_type_info}->unanchored_table->types[HASH({recv_type_info}->unanchored_table->mask, {mtype.const_color})])", mtype)
 			else
-				link_unanchored_type(self.frame.mpropdef.mclassdef, mtype)
-				var recv = self.frame.arguments.first
-				var recv_type_info = self.type_info(recv)
-				if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
-					return self.new_expr("NEW_{mtype.mclass.c_name}((struct type *) {recv_type_info}->unanchored_table->types[HASH({recv_type_info}->unanchored_table->mask, {mtype.const_color})])", mtype)
-				else
-					return self.new_expr("NEW_{mtype.mclass.c_name}((struct type *) {recv_type_info}->unanchored_table->types[{mtype.const_color}])", mtype)
-				end
+				return self.new_expr("NEW_{mtype.mclass.c_name}((struct type *) {recv_type_info}->unanchored_table->types[{mtype.const_color}])", mtype)
 			end
 		end
 		compiler.undead_types.add(mtype)
@@ -1359,39 +1236,16 @@ class SeparateCompilerVisitor
 			var type_struct = self.get_name("type_struct")
 			self.add_decl("struct type* {type_struct};")
 
-			# For unresolved types, there is two implementations
-			if compiler.modelbuilder.toolcontext.opt_generic_tree.value then
-				# Either with the generic_tree and the construction of a type
-				if ntype isa MParameterType then
-					if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
-						self.add("{type_struct} = {recv_type_info}->fts_table->types[HASH({recv_type_info}->fts_table->mask, {ntype.const_color})];")
-					else
-						self.add("{type_struct} = {recv_type_info}->fts_table->types[{ntype.const_color}];")
-					end
-				else if ntype isa MVirtualType then
-					var vtcolor = ntype.mproperty.const_color
-					if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
-						self.add("{type_struct} = {recv_type_info}->vts_table->types[HASH({recv_type_info}->vts_table->mask, {vtcolor})];")
-					else
-						self.add("{type_struct} = {recv_type_info}->vts_table->types[{vtcolor}];")
-					end
-				else if ntype isa MGenericType then
-					var buff = new Buffer
-					retrieve_anchored_livetype(ntype, buff)
-					self.add("{type_struct} = (struct type*)livetypes_{ntype.mclass.c_name}{buff.to_s};")
-				end
+			# Either with unanchored_table with a direct resolution
+			link_unanchored_type(self.frame.mpropdef.mclassdef, ntype)
+			if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
+				self.add("{type_struct} = {recv_type_info}->unanchored_table->types[HASH({recv_type_info}->unanchored_table->mask, {ntype.const_color})];")
 			else
-				# Either with unanchored_table with a direct resolution
-				link_unanchored_type(self.frame.mpropdef.mclassdef, ntype)
-				if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
-					self.add("{type_struct} = {recv_type_info}->unanchored_table->types[HASH({recv_type_info}->unanchored_table->mask, {ntype.const_color})];")
-				else
-					self.add("{type_struct} = {recv_type_info}->unanchored_table->types[{ntype.const_color}];")
-				end
-				if compiler.modelbuilder.toolcontext.opt_typing_test_metrics.value then
-					self.compiler.count_type_test_unresolved[tag] += 1
-					self.add("count_type_test_unresolved_{tag}++;")
-				end
+				self.add("{type_struct} = {recv_type_info}->unanchored_table->types[{ntype.const_color}];")
+			end
+			if compiler.modelbuilder.toolcontext.opt_typing_test_metrics.value then
+				self.compiler.count_type_test_unresolved[tag] += 1
+				self.add("count_type_test_unresolved_{tag}++;")
 			end
 			self.add("{cltype} = {type_struct}->color;")
 			self.add("{idtype} = {type_struct}->id;")
@@ -1600,20 +1454,13 @@ class SeparateCompilerVisitor
 		assert mtype isa MGenericType
 		var compiler = self.compiler
 		if mtype.need_anchor then
-			if compiler.modelbuilder.toolcontext.opt_generic_tree.value then
-				var buff = new Buffer
-				retrieve_anchored_livetype(mtype, buff)
-				mtype = self.anchor(mtype).as(MClassType)
-				return self.new_expr("NEW_{mtype.mclass.c_name}({length}, (struct type *) livetypes_{mtype.mclass.c_name}{buff.to_s})", mtype)
+			link_unanchored_type(self.frame.mpropdef.mclassdef, mtype)
+			var recv = self.frame.arguments.first
+			var recv_type_info = self.type_info(recv)
+			if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
+				return self.new_expr("NEW_{mtype.mclass.c_name}({length}, (struct type *) {recv_type_info}->unanchored_table->types[HASH({recv_type_info}->unanchored_table->mask, {mtype.const_color})])", mtype)
 			else
-				link_unanchored_type(self.frame.mpropdef.mclassdef, mtype)
-				var recv = self.frame.arguments.first
-				var recv_type_info = self.type_info(recv)
-				if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
-					return self.new_expr("NEW_{mtype.mclass.c_name}({length}, (struct type *) {recv_type_info}->unanchored_table->types[HASH({recv_type_info}->unanchored_table->mask, {mtype.const_color})])", mtype)
-				else
-					return self.new_expr("NEW_{mtype.mclass.c_name}({length}, (struct type *) {recv_type_info}->unanchored_table->types[{mtype.const_color}])", mtype)
-				end
+				return self.new_expr("NEW_{mtype.mclass.c_name}({length}, (struct type *) {recv_type_info}->unanchored_table->types[{mtype.const_color}])", mtype)
 			end
 		end
 		compiler.undead_types.add(mtype)
