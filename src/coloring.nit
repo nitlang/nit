@@ -24,32 +24,15 @@ abstract class AbstractColoring[E: Object]
 	private var border: Set[E] = new HashSet[E]
 
 	private var coloration_result: Map[E, Int] = new HashMap[E, Int]
-	private var conflicts_graph_cache: nullable HashMap[E, Set[E]]
 
 	init do end
 
 	fun colorize(elements: Set[E]): Map[E, Int] do
-		# tag each element as part of group core, crown or border
-		for e in elements do
-			tag_element(e)
-		end
-
-		#print "core: {core.join(", ")}"
-		#print "border: {border.join(", ")}"
-		#print "crown: {crown.join(", ")}"
-
-		#print "conflicts"
-		#for k, v in conflicts_graph do
-		#	if k isa MType then
-		#		print "{k}: {v.join(", ")}"
-		#	end
-		#end
-
-		# colorize graph
+		tag_elements(elements)
+		build_conflicts_graph
 		colorize_elements(core)
 		colorize_elements(border)
 		colorize_elements(crown)
-
 		return coloration_result
 	end
 
@@ -81,66 +64,67 @@ abstract class AbstractColoring[E: Object]
 		return true
 	end
 
-	# Tag element as core, crown or border
-	private fun tag_element(element: E) do
-		# Check if sub elements are all in single inheritance
-		var all_subelements_si = true
-		for subelem in self.sub_elements(element) do
-			if self.is_element_mi(subelem) then
-				all_subelements_si = false
-				break
+	# Tag elements as core, crown or border
+	private fun tag_elements(elements: Set[E]) do
+		for element in elements do
+			# Check if sub elements are all in single inheritance
+			var all_subelements_si = true
+			for subelem in self.sub_elements(element) do
+				if self.is_element_mi(subelem) then
+					all_subelements_si = false
+					break
+				end
 			end
-		end
 
-		# Tag as core, crown or border
-		if self.is_element_mi(element) then
-			core.add_all(self.super_elements(element))
-			core.add(element)
-			if all_subelements_si then
-				border.add(element)
+			# Tag as core, crown or border
+			if self.is_element_mi(element) then
+				core.add_all(self.super_elements(element))
+				core.add(element)
+				if all_subelements_si then
+					border.add(element)
+				end
+			else if not all_subelements_si then
+				core.add_all(self.super_elements(element))
+				core.add(element)
+			else
+				crown.add(element)
 			end
-		else if not all_subelements_si then
-			core.add_all(self.super_elements(element))
-		 	core.add(element)
-		else
-			crown.add(element)
 		end
 	end
 
 	# Conflicts graph of elements hierarchy (two types are in conflict if they have common subelements)
-	private fun conflicts_graph: Map[E, Set[E]] do
-		if self.conflicts_graph_cache == null then
-			self.conflicts_graph_cache = new HashMap[E, HashSet[E]]
-			var core = reverse_linearize(self.core)
-			for t in core do
-				for i in self.linear_extension(t) do
-					if t == i then continue
+	private fun build_conflicts_graph do
+		self.conflicts_graph = new HashMap[E, HashSet[E]]
+		var core = reverse_linearize(self.core)
+		for t in core do
+			for i in self.linear_extension(t) do
+				if t == i then continue
 
-					var lin_i = self.linear_extension(i)
+				var lin_i = self.linear_extension(i)
 
-					for j in self.linear_extension(t) do
-						if i == j or j == t then continue
-						var lin_j = self.linear_extension(j)
+				for j in self.linear_extension(t) do
+					if i == j or j == t then continue
+					var lin_j = self.linear_extension(j)
 
-						var d_ij = lin_i - lin_j
-						var d_ji = lin_j - lin_i
+					var d_ij = lin_i - lin_j
+					var d_ji = lin_j - lin_i
 
-						for ed1 in d_ij do
-							if not conflicts_graph_cache.has_key(ed1) then conflicts_graph_cache[ed1] = new HashSet[E]
-							# add ed1 x ed2 to conflicts graph
-							for ed2 in d_ji do conflicts_graph_cache[ed1].add(ed2)
-						end
-						for ed1 in d_ij do
-							if not conflicts_graph_cache.has_key(ed1) then conflicts_graph_cache[ed1] = new HashSet[E]
-							# add ed1 x ed2 to conflicts graph
-							for ed2 in d_ji do conflicts_graph_cache[ed1].add(ed2)
-						end
+					for ed1 in d_ij do
+						if not conflicts_graph.has_key(ed1) then conflicts_graph[ed1] = new HashSet[E]
+						# add ed1 x ed2 to conflicts graph
+						for ed2 in d_ji do conflicts_graph[ed1].add(ed2)
+					end
+					for ed1 in d_ij do
+						if not conflicts_graph.has_key(ed1) then conflicts_graph[ed1] = new HashSet[E]
+						# add ed1 x ed2 to conflicts graph
+						for ed2 in d_ji do conflicts_graph[ed1].add(ed2)
 					end
 				end
 			end
 		end
-		return conflicts_graph_cache.as(not null)
 	end
+
+	private var conflicts_graph: nullable HashMap[E, Set[E]]
 
 	# cache for linear_extensions
 	private var linear_extensions_cache: Map[E, Array[E]] = new HashMap[E, Array[E]]
