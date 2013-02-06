@@ -159,6 +159,9 @@ abstract class MMModule
 	# extern class declaration
 	var is_extern_hybrid : Bool writable = false
 
+	# Uses foreign function interface
+	fun uses_ffi : Bool is abstract
+
 	protected init(name: Symbol, dir: MMDirectory, context: MMContext, loc: Location)
 	do
 		_name = name
