@@ -22,9 +22,9 @@ abstract class AbstractColoring[E: Object]
 	private var sorter: AbstractSorter[E]
 	private var reverse_sorter: AbstractSorter[E]
 
-	private var core: OrderedSet[E] = new OrderedSet[E]
-	private var crown: OrderedSet[E] = new OrderedSet[E]
-	private var border: OrderedSet[E] = new OrderedSet[E]
+	private var core: Set[E] = new HashSet[E]
+	private var crown: Set[E] = new HashSet[E]
+	private var border: Set[E] = new HashSet[E]
 
 	private var coloration_result: Map[E, Int] = new HashMap[E, Int]
 	private var conflicts_graph_cache: nullable HashMap[E, Set[E]]
@@ -45,8 +45,11 @@ abstract class AbstractColoring[E: Object]
 		#print "crown: {crown.join(", ")}"
 
 		# sort by reverse linearization order
+		var core = new Array[E].from(self.core)
 		reverse_sorter.sort(core)
+		var border = new Array[E].from(self.border)
 		reverse_sorter.sort(border)
+		var crown = new Array[E].from(self.crown)
 		reverse_sorter.sort(crown)
 
 		#print "conflicts"
@@ -152,12 +155,12 @@ abstract class AbstractColoring[E: Object]
 	end
 
 	# cache for linear_extensions
-	private var linear_extensions_cache: Map[E, OrderedSet[E]] = new HashMap[E, OrderedSet[E]]
+	private var linear_extensions_cache: Map[E, Array[E]] = new HashMap[E, Array[E]]
 
 	# Return a linear_extension of super_elements of the element
-	private fun linear_extension(element: E): OrderedSet[E] do
+	private fun linear_extension(element: E): Array[E] do
 		if not self.linear_extensions_cache.has_key(element) then
-			var lin = new OrderedSet[E]
+			var lin = new Array[E]
 			lin.add(element)
 			lin.add_all(self.super_elements(element))
 			self.sorter.sort(lin)
@@ -627,7 +630,7 @@ class PropertyColoring
 		for mclass in self.class_coloring.coloration_result.keys do
 			var table = new Array[nullable MPROPDEF]
 			# first, fill table from parents by reverse linearization order
-			var parents = new OrderedSet[MClass]
+			var parents = new Array[MClass]
 			parents.add_all(self.class_coloring.super_elements(mclass))
 			self.class_coloring.reverse_sorter.sort(parents)
 			for parent in parents do
@@ -848,7 +851,7 @@ abstract class VTPerfectHashing
 		for mclass in self.class_coloring.coloration_result.keys do
 			var table = new Array[nullable MPROPDEF]
 			# first, fill table from parents by reverse linearization order
-			var parents = new OrderedSet[MClass]
+			var parents = new Array[MClass]
 			parents.add_all(self.class_coloring.super_elements(mclass))
 			self.class_coloring.reverse_sorter.sort(parents)
 			for parent in parents do
@@ -1491,31 +1494,21 @@ end
 
 # Utils
 
-# An ordered set
-class OrderedSet[E: Object]
-	super Array[E]
+redef class HashSet[E]
+	init from(elements: Collection[E]) do
+		self.add_all(elements)
+	end
+end
 
-	init do end
-
-	init from(elements: Set[E]) do
+redef class Array[E]
+	init from(elements: Collection[E]) do
 		self.add_all(elements)
 	end
 
-	redef fun add(e) do
-		if not self.has(e) then
-			super(e)
-		end
-	end
-
-	# Return a new OrderedSet with the elements only contened in 'self' and not in 'o'
-	fun -(o: OrderedSet[E]): OrderedSet[E] do
-		var res = new OrderedSet[E]
+	# Return a new Array with the elements only contened in 'self' and not in 'o'
+	fun -(o: Array[E]): Array[E] do
+		var res = new Array[E]
 		for e in self do if not o.has(e) then res.add(e)
 		return res
-	end
-
-	# Linearize a set of elements
-	fun linearize(sorter: AbstractSorter[E]) do
-		sorter.sort(self)
 	end
 end

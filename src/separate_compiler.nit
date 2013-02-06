@@ -282,8 +282,9 @@ class SeparateCompiler
 
 		# set type unique id
 		if modelbuilder.toolcontext.opt_phmod_typing.value or modelbuilder.toolcontext.opt_phand_typing.value then
-			var sorted_mtypes = new OrderedSet[MType].from(mtypes)
-			sorted_mtypes.linearize(new ReverseTypeSorter(self.mainmodule))
+			var sorted_mtypes = new Array[MType].from(mtypes)
+			var sorter = new ReverseTypeSorter(self.mainmodule)
+			sorter.sort(sorted_mtypes)
 			for mtype in sorted_mtypes do
 				self.typeids[mtype] = self.typeids.length + 1
 			end
