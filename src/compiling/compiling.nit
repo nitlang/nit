@@ -115,6 +115,12 @@ redef class MMModule
 				native_body = native_name + "_nit.c"
 				if native_body.file_exists then	cprogram.files.add(native_body)
 			end
+			if uses_ffi then
+				var ffi_header_name = "{cname}._ffi.h"
+				v.add_decl("#include \"{ffi_header_name}\"")
+				var ffi_body_name = "{cname}._ffi.c"
+				cprogram.files.add( "{cprogram.compdir}/{ffi_body_name}" )
+			end
 		end
 
 		declare_class_tables_to_c(v)

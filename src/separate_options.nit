@@ -22,6 +22,7 @@ import compiling
 
 # only to order correctly redefs of compile_separate_module
 import native_interface
+import ffi
 
 redef class ToolContext
 	# all ops precised in .ops files

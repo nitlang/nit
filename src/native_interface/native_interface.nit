@@ -27,8 +27,6 @@ redef class MMSrcModule
 			var visitor = new FrontierVisitor( self, cprogram )
 			compile_frontier( visitor )
 
-			visitor.compile_cached
-
 			var base_path = "{cprogram.compdir}/{name}"
 			visitor.write_to_files( base_path )
 		end

@@ -146,6 +146,9 @@ redef class MMSrcModule
 			v.body.add( "#include \"{path}\"\n" )
 			v.header.add( "#include \"{path}\"\n" )
 		end
+		if uses_ffi then
+			v.header.add( "#include <{cname}._ffi.h>\n" )
+		end
 
 		for local_class in local_classes do
 			### extern methods
@@ -158,6 +161,8 @@ redef class MMSrcModule
 				end
 			end
 		end
+
+		v.compile_cached
 
 		v.header.add( "#endif\n" )
 	end
@@ -374,6 +379,7 @@ class FrontierVisitor
 
 	var cprogram : CProgram
 
+	# compiles cached types and callbacks
 	fun compile_cached
 	do
 		# types
