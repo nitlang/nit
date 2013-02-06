@@ -19,9 +19,6 @@ import rapid_type_analysis # for type coloration
 
 abstract class AbstractColoring[E: Object]
 
-	private var sorter: AbstractSorter[E]
-	private var reverse_sorter: AbstractSorter[E]
-
 	private var core: Set[E] = new HashSet[E]
 	private var crown: Set[E] = new HashSet[E]
 	private var border: Set[E] = new HashSet[E]
@@ -29,10 +26,7 @@ abstract class AbstractColoring[E: Object]
 	private var coloration_result: Map[E, Int] = new HashMap[E, Int]
 	private var conflicts_graph_cache: nullable HashMap[E, Set[E]]
 
-	init(sorter: AbstractSorter[E], reverse_sorter: AbstractSorter[E]) do
-		self.sorter = sorter
-		self.reverse_sorter = reverse_sorter
-	end
+	init do end
 
 	fun colorize(elements: Collection[E]): Map[E, Int] do
 		# tag each element as part of group core, crown or border
@@ -43,14 +37,6 @@ abstract class AbstractColoring[E: Object]
 		#print "core: {core.join(", ")}"
 		#print "border: {border.join(", ")}"
 		#print "crown: {crown.join(", ")}"
-
-		# sort by reverse linearization order
-		var core = new Array[E].from(self.core)
-		reverse_sorter.sort(core)
-		var border = new Array[E].from(self.border)
-		reverse_sorter.sort(border)
-		var crown = new Array[E].from(self.crown)
-		reverse_sorter.sort(crown)
 
 		#print "conflicts"
 		#for k, v in conflicts_graph do
@@ -68,10 +54,11 @@ abstract class AbstractColoring[E: Object]
 	end
 
 	# Colorize a collection of elements
-	private fun colorize_elements(elements: Collection[E]) do
+	private fun colorize_elements(elements: Set[E]) do
 		var min_color = 0
 
-		for element in elements do
+		var lin = reverse_linearize(elements)
+		for element in lin do
 			var color = min_color
 			while not self.is_color_free(element, color) do
 				color += 1
@@ -124,7 +111,8 @@ abstract class AbstractColoring[E: Object]
 	private fun conflicts_graph: Map[E, Set[E]] do
 		if self.conflicts_graph_cache == null then
 			self.conflicts_graph_cache = new HashMap[E, HashSet[E]]
-			for t in self.core do
+			var core = reverse_linearize(self.core)
+			for t in core do
 				for i in self.linear_extension(t) do
 					if t == i then continue
 
@@ -160,23 +148,19 @@ abstract class AbstractColoring[E: Object]
 	# Return a linear_extension of super_elements of the element
 	private fun linear_extension(element: E): Array[E] do
 		if not self.linear_extensions_cache.has_key(element) then
-			var lin = new Array[E]
-			lin.add(element)
-			lin.add_all(self.super_elements(element))
-			self.sorter.sort(lin)
-			self.linear_extensions_cache[element] = lin
+			var supers = new HashSet[E]
+			supers.add(element)
+			supers.add_all(self.super_elements(element))
+			self.linear_extensions_cache[element] = self.linearize(supers)
 		end
 		return self.linear_extensions_cache[element]
 	end
 
-	# Return all super elements (directs and indirects) of an element
-	private fun super_elements(element: E): Collection[E] is abstract
-
-	# Return all sub elements (directs and indirects) of an element
-	private fun sub_elements(element: E): Collection[E] is abstract
-
-	# Is the element in multiple inheritance ?
+	private fun super_elements(element: E): Set[E] is abstract
+	private fun sub_elements(element: E): Set[E] is abstract
 	private fun is_element_mi(element: E): Bool is abstract
+	private fun linearize(elements: Set[E]): Array[E] is abstract
+	private fun reverse_linearize(elements: Set[E]): Array[E] is abstract
 end
 
 # MClassType coloring
@@ -188,12 +172,7 @@ class TypeColoring
 	private var mmodule: MModule
 	private var mtypes: Set[T]
 
-	# caches
-	private var super_elements_cache: Map[T, Set[T]] = new HashMap[T, Set[T]]
-	private var sub_elements_cache: Map[T, Set[T]] = new HashMap[T, Set[T]]
-
 	init(mainmodule: MModule, mtypes: Set[T]) do
-		super(new TypeSorter(mainmodule), new ReverseTypeSorter(mainmodule))
 		self.mmodule = mainmodule
 		self.mtypes = mtypes
 	end
@@ -221,39 +200,11 @@ class TypeColoring
 		return tables
 	end
 
-	redef fun super_elements(element) do
-		if not self.super_elements_cache.has_key(element) then
-			var supers = new HashSet[T]
-			for mtype in self.mtypes do
-				if element == mtype then continue
-				if element.is_subtype(self.mmodule, null, mtype) then
-					supers.add(mtype)
-				end
-			end
-			self.super_elements_cache[element] = supers
-		end
-		return self.super_elements_cache[element]
-	end
-
-	# Return all direct super elements of an element
-	redef fun is_element_mi(element) do
-		return self.super_elements(element).length > 1
-	end
-
-	# Return all sub elements (directs and indirects) of an element
-	redef fun sub_elements(element) do
-		if not self.sub_elements_cache.has_key(element) then
-			var subs = new HashSet[T]
-			for mtype in self.mtypes do
-				if element == mtype then continue
-				if mtype.is_subtype(self.mmodule, null, element) then
-					subs.add(mtype)
-				end
-			end
-			self.sub_elements_cache[element] = subs
-		end
-		return self.sub_elements_cache[element]
-	end
+	redef fun super_elements(element) do return self.mmodule.super_mtypes(element, mtypes)
+	redef fun is_element_mi(element) do return self.super_elements(element).length > 1
+	redef fun sub_elements(element) do do return self.mmodule.sub_mtypes(element, mtypes)
+	redef fun linearize(elements) do return self.mmodule.linearize_mtypes(elements)
+	redef fun reverse_linearize(elements) do return self.mmodule.reverse_linearize_mtypes(elements)
 end
 
 class NaiveTypeColoring
@@ -365,10 +316,7 @@ class ClassColoring
 	private var parent_elements_cache: Map[T, Set[T]] = new HashMap[T, Set[T]]
 	private var sub_elements_cache: Map[T, Set[T]] = new HashMap[T, Set[T]]
 
-	init(mainmodule: MModule) do
-		super(new ClassSorter(mainmodule), new ReverseClassSorter(mainmodule))
-		self.mmodule = mainmodule
-	end
+	init(mainmodule: MModule) do self.mmodule = mainmodule
 
 	# Build type tables
 	fun build_type_tables(mclasses: Array[T], colors: Map[T, Int]): Map[T, Array[nullable T]] do
@@ -393,53 +341,12 @@ class ClassColoring
 		return tables
 	end
 
-	redef fun super_elements(element) do
-		if not self.super_elements_cache.has_key(element) then
-			var supers = new HashSet[T]
-			if self.mmodule.flatten_mclass_hierarchy.has(element) then
-				for sup in self.mmodule.flatten_mclass_hierarchy[element].greaters do
-					if element == sup then continue
-					supers.add(sup)
-				end
-			end
-			self.super_elements_cache[element] = supers
-		end
-		return self.super_elements_cache[element]
-	end
-
-	private fun parent_elements(element: T): Set[T] do
-		if not self.parent_elements_cache.has_key(element) then
-			var parents = new HashSet[T]
-			if self.mmodule.flatten_mclass_hierarchy.has(element) then
-				for parent in self.mmodule.flatten_mclass_hierarchy[element].direct_greaters do
-					if element == parent then continue
-					parents.add(parent)
-				end
-			end
-			self.parent_elements_cache[element] = parents
-		end
-		return self.parent_elements_cache[element]
-	end
-
-	# Return all sub elements (directs and indirects) of an element
-	redef fun sub_elements(element) do
-		if not self.sub_elements_cache.has_key(element) then
-			var subs = new HashSet[T]
-			if self.mmodule.flatten_mclass_hierarchy.has(element) then
-				for sub in self.mmodule.flatten_mclass_hierarchy[element].smallers do
-					subs.add(sub)
-				end
-			end
-			self.sub_elements_cache[element] = subs
-		end
-		return self.sub_elements_cache[element]
-	end
-
-	# Return all direct super elements of an element
-	redef fun is_element_mi(element) do
-		if not self.mmodule.flatten_mclass_hierarchy.has(element) then return false
-		return self.mmodule.flatten_mclass_hierarchy[element].direct_greaters.length > 1
-	end
+	redef fun super_elements(element) do return self.mmodule.super_mclasses(element)
+	fun parent_elements(element: MClass): Set[MClass] do return self.mmodule.parent_mclasses(element)
+	redef fun is_element_mi(element) do return self.parent_elements(element).length > 1
+	redef fun sub_elements(element) do do return self.mmodule.sub_mclasses(element)
+	redef fun linearize(elements) do return self.mmodule.linearize_mclasses(elements)
+	redef fun reverse_linearize(elements) do return self.mmodule.reverse_linearize_mclasses(elements)
 end
 
 # incremental coloring (very naive)
@@ -451,7 +358,7 @@ class NaiveClassColoring
 	end
 
 	# naive coloring that use incremental coloring
-	redef fun colorize_elements(elements: Collection[MClass]) do
+	redef fun colorize_elements(elements) do
 		for e in elements do
 			self.coloration_result[e] = self.coloration_result.length
 		end
@@ -564,10 +471,9 @@ class PropertyColoring
 		for mclass in self.class_coloring.coloration_result.keys do
 			var table = new Array[nullable MPROPDEF]
 			# first, fill table from parents by reverse linearization order
-			var parents = new Array[MClass]
-			parents.add_all(self.class_coloring.super_elements(mclass))
-			self.class_coloring.reverse_sorter.sort(parents)
-			for parent in parents do
+			var parents = self.class_coloring.super_elements(mclass)
+			var lin = self.class_coloring.reverse_linearize(parents)
+			for parent in lin do
 				for mproperty in self.properties(parent) do
 					var color = self.coloration_result[mproperty]
 					if table.length <= color then
@@ -785,10 +691,9 @@ abstract class VTPerfectHashing
 		for mclass in self.class_coloring.coloration_result.keys do
 			var table = new Array[nullable MPROPDEF]
 			# first, fill table from parents by reverse linearization order
-			var parents = new Array[MClass]
-			parents.add_all(self.class_coloring.super_elements(mclass))
-			self.class_coloring.reverse_sorter.sort(parents)
-			for parent in parents do
+			var parents = self.class_coloring.super_elements(mclass)
+			var lin = self.class_coloring.reverse_linearize(parents)
+			for parent in lin do
 				for mproperty in self.properties(parent) do
 					var color = phash(self.coloration_result[mproperty], masks[mclass])
 					if table.length <= color then
