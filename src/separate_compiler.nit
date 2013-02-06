@@ -222,8 +222,9 @@ class SeparateCompiler
 	fun do_property_coloring do
 
 		# classes coloration
+		var mclasses = new HashSet[MClass].from(modelbuilder.model.mclasses)
 		self.class_coloring = new ClassColoring(mainmodule)
-		class_coloring.colorize(modelbuilder.model.mclasses)
+		class_coloring.colorize(mclasses)
 
 		# methods coloration
 		var method_coloring = new MethodColoring(self.class_coloring)
@@ -239,7 +240,7 @@ class SeparateCompiler
 
 		if modelbuilder.toolcontext.opt_bm_typing.value then
 			self.class_coloring = new NaiveClassColoring(mainmodule)
-			self.class_coloring.colorize(modelbuilder.model.mclasses)
+			self.class_coloring.colorize(mclasses)
 		end
 
 		# vt coloration

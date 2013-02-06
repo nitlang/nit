@@ -74,8 +74,7 @@ class SeparateErasureCompiler
 	init(mainmodule: MModule, mmbuilder: ModelBuilder, runtime_type_analysis: RapidTypeAnalysis) do
 		super
 
-		var mclasses = new HashSet[MClass]
-		mclasses.add_all(mmbuilder.model.mclasses)
+		var mclasses = new HashSet[MClass].from(mmbuilder.model.mclasses)
 
 		# classes coloration
 		if modelbuilder.toolcontext.opt_phmod_typing.value then
@@ -111,7 +110,7 @@ class SeparateErasureCompiler
 			for mclass in mclasses do
 				self.class_ids[mclass] = self.class_ids.length + 1
 			end
-			self.class_colors = class_coloring.colorize(modelbuilder.model.mclasses)
+			self.class_colors = class_coloring.colorize(mclasses)
 			self.class_tables = class_coloring.build_type_tables(modelbuilder.model.mclasses, class_colors)
 		end
 	end

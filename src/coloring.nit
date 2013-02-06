@@ -28,7 +28,7 @@ abstract class AbstractColoring[E: Object]
 
 	init do end
 
-	fun colorize(elements: Collection[E]): Map[E, Int] do
+	fun colorize(elements: Set[E]): Map[E, Int] do
 		# tag each element as part of group core, crown or border
 		for e in elements do
 			tag_element(e)
