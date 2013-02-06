@@ -157,13 +157,6 @@ redef class MMSrcModule
 					prop.compile_extern_to_frontier( v )
 				end
 			end
-
-			### extern classes
-			# if class is extern and defined here first
-			if local_class.global.intro == local_class and
-			   local_class.global.is_extern then
-				local_class.compile_defaut_extern_type( v )
-			end
 		end
 
 		v.header.add( "#endif\n" )
@@ -323,17 +316,6 @@ redef class MMSrcMethod
 		v.body.append( fc.to_writer )
 	end
 
-end
-
-redef class MMLocalClass
-	# Defines a defaut type for special of pointers in frontier.
-	# Can be overriden in the custime .nit.h file, as seen with nits.
-	fun compile_defaut_extern_type( v : FrontierVisitor )
-	do
-		v.header.add( "#ifndef {get_type.friendly_extern_name}\n" )
-		v.header.add( "\ttypedef void* {get_type.friendly_extern_name};\n" )
-		v.header.add( "#endif\n\n" )
-	end
 end
 
 redef class MMSignature

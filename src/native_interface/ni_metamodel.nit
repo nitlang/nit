@@ -32,8 +32,6 @@ redef class MMType
 			return "nullable_{local_class.name.to_s}"
 		else if pi == null then
 			return local_class.name.to_s
-		else if local_class.global.is_extern then
-			return local_class.name.to_s
 		else
 			return pi.cname
 		end

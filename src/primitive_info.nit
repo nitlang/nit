@@ -22,6 +22,9 @@ package primitive_info
 import metamodel
 
 redef class MMLocalClass
+	# extern type of extern classes
+	fun extern_c_type : String is abstract
+
 	# Cached primitive_info result
 	var _primitive_info_cache: nullable PrimitiveInfo = null
 
@@ -37,6 +40,12 @@ redef class MMLocalClass
 		var ctypes = once primitive_ctypes
 		if ctypes.has_key(name) then
 			_primitive_info_cache = ctypes[name]
+			_primitive_info_b = true
+			return _primitive_info_cache
+		end
+		if global.is_extern then
+			var pi = new PrimitiveInfo( name, false, extern_c_type )
+			_primitive_info_cache = pi
 			_primitive_info_b = true
 			return _primitive_info_cache
 		end
