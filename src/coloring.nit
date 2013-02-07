@@ -34,6 +34,8 @@ class PHTypeLayout
 	var hashes: Map[MType, Map[MType, Int]] = new HashMap[MType, Map[MType, Int]]
 end
 
+# Builders
+
 abstract class TypeLayoutBuilder
 
 	type LAYOUT: TypeLayout
@@ -123,7 +125,9 @@ class PHTypeLayoutBuilder
 	end
 end
 
-abstract class AbstractColoring[E: Object]
+# Colorers
+
+abstract class AbstractColorer[E: Object]
 
 	private var core: Set[E] = new HashSet[E]
 	private var crown: Set[E] = new HashSet[E]
@@ -255,9 +259,7 @@ end
 
 # MType coloring
 private class MTypeColorer
-	super AbstractColoring[MType]
-
-	type T: MType
+	super AbstractColorer[MType]
 
 	var mmodule: MModule
 
@@ -269,6 +271,8 @@ private class MTypeColorer
 	redef fun linearize(elements) do return self.mmodule.linearize_mtypes(elements)
 	redef fun reverse_linearize(elements) do return self.mmodule.reverse_linearize_mtypes(elements)
 end
+
+# Perfect hashers
 
 # MType Perfect Hashing
 private class MTypeHasher
@@ -350,7 +354,7 @@ end
 
 # MClass coloring
 class ClassColoring
-	super AbstractColoring[MClass]
+	super AbstractColorer[MClass]
 
 	type T: MClass
 
