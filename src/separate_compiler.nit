@@ -231,11 +231,7 @@ class SeparateCompiler
 
 	# colorize classe properties
 	fun do_property_coloring do
-
-		# classes coloration
 		var mclasses = new HashSet[MClass].from(modelbuilder.model.mclasses)
-		var class_coloring = new ClassColoring(mainmodule)
-		class_coloring.colorize(mclasses)
 
 		# methods coloration
 		var method_coloring = new CLPropertyLayoutBuilder[MMethod](mainmodule)
