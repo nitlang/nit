@@ -242,34 +242,34 @@ class SeparateCompiler
 		class_coloring.colorize(mclasses)
 
 		# methods coloration
-		var method_coloring = new MethodColoring(class_coloring)
+		var method_coloring = new MethodColoring(mainmodule, class_coloring)
 		self.method_colors = method_coloring.colorize
 		self.method_tables = method_coloring.build_property_tables
 		self.compile_color_consts(self.method_colors)
 
 		# attributes coloration
-		var attribute_coloring = new AttributeColoring(class_coloring)
+		var attribute_coloring = new AttributeColoring(mainmodule, class_coloring)
 		self.attr_colors = attribute_coloring.colorize
 		self.attr_tables = attribute_coloring.build_property_tables
 		self.compile_color_consts(self.attr_colors)
 
 		# vt coloration
 		if modelbuilder.toolcontext.opt_bm_typing.value then
-			var vt_coloring = new NaiveVTColoring(class_coloring)
+			var vt_coloring = new NaiveVTColoring(mainmodule, class_coloring)
 			self.vt_colors = vt_coloring.colorize
 			self.vt_tables = vt_coloring.build_property_tables
 		else if modelbuilder.toolcontext.opt_phmod_typing.value then
-			var vt_coloring = new VTModPerfectHashing(class_coloring)
+			var vt_coloring = new VTModPerfectHashing(mainmodule, class_coloring)
 			self.vt_colors = vt_coloring.colorize
 			self.vt_masks = vt_coloring.compute_masks
 			self.vt_tables = vt_coloring.build_property_tables
 		else if modelbuilder.toolcontext.opt_phand_typing.value then
-			var vt_coloring = new VTAndPerfectHashing(class_coloring)
+			var vt_coloring = new VTAndPerfectHashing(mainmodule, class_coloring)
 			self.vt_colors = vt_coloring.colorize
 			self.vt_masks = vt_coloring.compute_masks
 			self.vt_tables = vt_coloring.build_property_tables
 		else
-			var vt_coloring = new VTColoring(class_coloring)
+			var vt_coloring = new VTColoring(mainmodule, class_coloring)
 			self.vt_colors = vt_coloring.colorize
 			self.vt_tables = vt_coloring.build_property_tables
 		end

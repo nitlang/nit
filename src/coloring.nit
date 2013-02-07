@@ -527,10 +527,12 @@ class PropertyColoring
 	type MPROP: MProperty
 	type MPROPDEF: MPropDef
 
+	private var mmodule: MModule
 	private var class_coloring: ClassColoring
 	private var coloration_result: Map[MPROP, Int] = new HashMap[MPROP, Int]
 
-	init(class_coloring: ClassColoring) do
+	init(mmodule: MModule, class_coloring: ClassColoring) do
+		self.mmodule = mmodule
 		self.class_coloring = class_coloring
 	end
 
@@ -639,29 +641,13 @@ class PropertyColoring
 		return max_color
 	end
 
-	# properties cache
-	private var properties_cache: Map[MClass, Set[MPROP]] = new HashMap[MClass, Set[MPROP]]
-
 	# All 'mproperties' associated to all 'mclassdefs' of the class
 	private fun properties(mclass: MClass): Set[MPROP] do
-		if not self.properties_cache.has_key(mclass) then
-			var properties = new HashSet[MPROP]
-			var parents = self.class_coloring.mmodule.super_mclasses(mclass)
-			for parent in parents do
-				properties.add_all(self.properties(parent))
-			end
-
-			for mclassdef in mclass.mclassdefs do
-				for mpropdef in mclassdef.mpropdefs do
-					var mproperty = mpropdef.mproperty
-					if mproperty isa MPROP then
-						properties.add(mproperty)
-					end
-				end
-			end
-			self.properties_cache[mclass] = properties
+		var properties = new HashSet[MPROP]
+		for mprop in self.mmodule.properties(mclass) do
+			if mprop isa MPROP then properties.add(mprop)
 		end
-		return properties_cache[mclass]
+		return properties
 	end
 end
 
@@ -671,7 +657,7 @@ class MethodColoring
 
 	redef type MPROP: MMethod
 	redef type MPROPDEF: MMethodDef
-	init(class_coloring: ClassColoring) do end
+	init(mmodule: MModule, class_coloring: ClassColoring) do super
 end
 
 # MAttribute coloring
@@ -680,7 +666,7 @@ class AttributeColoring
 
 	redef type MPROP: MAttribute
 	redef type MPROPDEF: MAttributeDef
-	init(class_coloring: ClassColoring) do end
+	init(mmodule: MModule, class_coloring: ClassColoring) do super
 end
 
 # MVirtualTypeProp coloring
@@ -689,13 +675,13 @@ class VTColoring
 
 	redef type MPROP: MVirtualTypeProp
 	redef type MPROPDEF: MVirtualTypeDef
-	init(class_coloring: ClassColoring) do end
+	init(mmodule: MModule, class_coloring: ClassColoring) do super
 end
 
 class NaiveVTColoring
 	super VTColoring
 
-	init(class_coloring: ClassColoring) do end
+	init(mmodule: MModule, class_coloring: ClassColoring) do super
 
 	redef fun colorize: Map[MPROP, Int] do
 		var mclasses = new HashSet[MClass]
@@ -716,7 +702,7 @@ abstract class VTPerfectHashing
 
 	private var masks: Map[MClass, Int] = new HashMap[MClass, Int]
 
-	init(class_coloring: ClassColoring) do end
+	init(mmodule: MModule, class_coloring: ClassColoring) do super
 
 	redef fun colorize: Map[MPROP, Int] do
 		var mclasses = new HashSet[MClass]
@@ -810,13 +796,13 @@ end
 
 class VTModPerfectHashing
 	super VTPerfectHashing
-	init(class_coloring: ClassColoring) do end
+	init(mmodule: MModule, class_coloring: ClassColoring) do super
 	redef fun op(mask, id) do return mask % id
 end
 
 class VTAndPerfectHashing
 	super VTPerfectHashing
-	init(class_coloring: ClassColoring) do end
+	init(mmodule: MModule, class_coloring: ClassColoring) do super
 	redef fun op(mask, id) do return mask.bin_and(id)
 end
 
