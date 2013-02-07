@@ -152,7 +152,7 @@ class SeparateCompiler
 		else if modelbuilder.toolcontext.opt_phand_typing.value then
 			self.type_layout_builder = new TypeAndPerfectHashing(self.mainmodule)
 		else
-			self.type_layout_builder = new TypeColoring(self.mainmodule)
+			self.type_layout_builder = new CLTypeLayoutBuilder(self.mainmodule)
 		end
 	end
 
@@ -316,12 +316,7 @@ class SeparateCompiler
 
 		# colorize types
 		var type_coloring = self.type_layout_builder
-		if type_coloring isa BMTypeLayoutBuilder then
-			var result = type_coloring.build_layout(mtypes)
-			self.typeids = result.ids
-			self.type_colors = result.pos
-			self.type_tables = self.build_type_tables(mtypes, type_colors, type_coloring)
-		else if type_coloring isa TypeModPerfectHashing then
+		if type_coloring isa TypeModPerfectHashing then
 			self.type_colors = type_coloring.compute_masks(mtypes, typeids)
 			self.type_tables = self.hash_type_tables(mtypes, typeids, type_colors, type_coloring)
 			self.header.add_decl("#define HASH(mask, id) ((mask)%(id))")
@@ -329,8 +324,10 @@ class SeparateCompiler
 			self.type_colors = type_coloring.compute_masks(mtypes, typeids)
 			self.type_tables = self.hash_type_tables(mtypes, typeids, type_colors, type_coloring)
 			self.header.add_decl("#define HASH(mask, id) ((mask)&(id))")
-		else if type_coloring isa TypeColoring then
-			self.type_colors = type_coloring.colorize(mtypes)
+		else
+			var result = type_coloring.build_layout(mtypes)
+			self.typeids = result.ids
+			self.type_colors = result.pos
 			self.type_tables = self.build_type_tables(mtypes, type_colors, type_coloring)
 		end
 

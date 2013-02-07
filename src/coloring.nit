@@ -20,6 +20,19 @@ import typing
 abstract class TypeLayoutBuilder
 	private var mmodule: MModule
 	init(mmodule: MModule) do self.mmodule = mmodule
+
+	# Compute mtypes ids and position
+	fun build_layout(mtypes: Set[MType]): TypeLayout is abstract
+
+	# Give each MType a unic id using a descending linearization of the `mtypes` set
+	private fun compute_ids(mtypes: Set[MType]): Map[MType, Int] do
+		var ids = new HashMap[MType, Int]
+		var lin = self.mmodule.reverse_linearize_mtypes(mtypes)
+		for mtype in lin do
+			ids[mtype] = ids.length
+		end
+		return ids
+	end
 end
 
 class TypeLayout
@@ -36,21 +49,31 @@ class BMTypeLayoutBuilder
 	init(mmodule: MModule) do super
 
 	# Compute mtypes ids and position using BM
-	fun build_layout(mtypes: Set[MType]): TypeLayout do
+	redef fun build_layout(mtypes: Set[MType]): TypeLayout do
 		var result = new TypeLayout
 		result.ids = self.compute_ids(mtypes)
 		result.pos = result.ids
 		return result
 	end
+end
 
-	# Give each MType a unic id using a descending linearization of the `mtypes` set
-	private fun compute_ids(mtypes: Set[MType]): Map[MType, Int] do
-		var ids = new HashMap[MType, Int]
-		var lin = self.mmodule.reverse_linearize_mtypes(mtypes)
-		for mtype in lin do
-			ids[mtype] = ids.length
-		end
-		return ids
+# Layout builder for MType using Coloring (CL)
+class CLTypeLayoutBuilder
+	super TypeLayoutBuilder
+
+	private var colorer: MTypeColorer
+
+	init(mmodule: MModule) do
+		super
+		self.colorer = new MTypeColorer(mmodule)
+	end
+
+	# Compute mtypes ids and position using BM
+	redef fun build_layout(mtypes: Set[MType]): TypeLayout do
+		var result = new TypeLayout
+		result.ids = self.compute_ids(mtypes)
+		result.pos = self.colorer.colorize(mtypes)
+		return result
 	end
 end
 
@@ -184,12 +207,13 @@ abstract class AbstractColoring[E: Object]
 	private fun reverse_linearize(elements: Set[E]): Array[E] is abstract
 end
 
-# MClassType coloring
-class TypeColoring
+# MType coloring
+private class MTypeColorer
 	super AbstractColoring[MType]
-	super TypeLayoutBuilder
 
 	type T: MType
+
+	var mmodule: MModule
 
 	init(mmodule: MModule) do self.mmodule = mmodule
 
@@ -201,9 +225,12 @@ class TypeColoring
 end
 
 abstract class TypePerfectHashing
-	super TypeColoring
+	super TypeLayoutBuilder
+	super AbstractColoring[MType]
 
-	init(mainmodule: MModule) do super
+	type T: MType
+
+	init(mmodule: MModule) do self.mmodule = mmodule
 
 	fun compute_masks(elements: Set[T], ids: Map[T, Int]): Map[T, Int] do
 		for e in elements do
@@ -237,6 +264,12 @@ abstract class TypePerfectHashing
 
 	private fun op(mask: Int, id:Int): Int is abstract
 	private fun phash(id: Int, mask: Int): Int do return op(mask, id)
+
+	redef fun super_elements(element, elements) do return self.mmodule.super_mtypes(element, elements)
+	redef fun is_element_mi(element, elements) do return self.super_elements(element, elements).length > 1
+	redef fun sub_elements(element, elements) do do return self.mmodule.sub_mtypes(element, elements)
+	redef fun linearize(elements) do return self.mmodule.linearize_mtypes(elements)
+	redef fun reverse_linearize(elements) do return self.mmodule.reverse_linearize_mtypes(elements)
 end
 
 class TypeModPerfectHashing
