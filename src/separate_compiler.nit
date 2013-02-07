@@ -302,47 +302,27 @@ class SeparateCompiler
 		self.compile_unanchored_tables(mtypes)
 
 		# colorize types
-		var type_layout = self.type_layout_builder.build_layout(mtypes)
-		if type_layout isa PHTypeLayout then
-			self.type_tables = self.hash_type_tables(mtypes, type_layout.hashes)
-		else
-			self.type_tables = self.build_type_tables(mtypes, type_layout.pos)
-		end
-		self.type_layout = type_layout
+		self.type_layout = self.type_layout_builder.build_layout(mtypes)
+		self.type_tables = self.build_type_tables(mtypes)
 		return mtypes
 	end
 
 	# Build type tables
-	fun build_type_tables(mtypes: Set[MType], colors: Map[MType, Int]): Map[MType, Array[nullable MType]] do
+	fun build_type_tables(mtypes: Set[MType]): Map[MType, Array[nullable MType]] do
 		var tables = new HashMap[MType, Array[nullable MType]]
-
+		var layout = self.type_layout
 		for mtype in mtypes do
 			var table = new Array[nullable MType]
 			var supers = new HashSet[MType]
 			supers.add_all(self.mainmodule.super_mtypes(mtype, mtypes))
 			supers.add(mtype)
 			for sup in supers do
-				var color = colors[sup]
-				if table.length <= color then
-					for i in [table.length .. color[ do
-						table[i] = null
-					end
+				var color: Int
+				if layout isa PHTypeLayout then
+					color = layout.hashes[mtype][sup]
+				else
+					color = layout.pos[sup]
 				end
-				table[color] = sup
-			end
-			tables[mtype] = table
-		end
-		return tables
-	end
-
-	# Build type tables
-	fun hash_type_tables(mtypes: Set[MType], hashes: Map[MType, Map[MType, Int]]): Map[MType, Array[nullable MType]] do
-		var tables = new HashMap[MType, Array[nullable MType]]
-
-		for mtype in mtypes do
-			var table = new Array[nullable MType]
-			var supers = hashes[mtype]
-			for sup, color in supers do
 				if table.length <= color then
 					for i in [table.length .. color[ do
 						table[i] = null
