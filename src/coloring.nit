@@ -17,12 +17,32 @@ module coloring
 
 import typing
 
+# Layouts
+
+class TypeLayout
+	# Unic ids or each Mtype
+	var ids: Map[MType, Int] = new HashMap[MType, Int]
+	# Fixed positions of each MType in all tables
+	var pos: Map[MType, Int] = new HashMap[MType, Int]
+end
+
+class PHTypeLayout
+	super TypeLayout
+	# Masks used by hash function
+	var masks: Map[MType, Int] = new HashMap[MType, Int]
+	# Positions of each MType for each tables
+	var hashes: Map[MType, Map[MType, Int]] = new HashMap[MType, Map[MType, Int]]
+end
+
 abstract class TypeLayoutBuilder
+
+	type LAYOUT: TypeLayout
+
 	private var mmodule: MModule
 	init(mmodule: MModule) do self.mmodule = mmodule
 
 	# Compute mtypes ids and position
-	fun build_layout(mtypes: Set[MType]): TypeLayout is abstract
+	fun build_layout(mtypes: Set[MType]): LAYOUT is abstract
 
 	# Give each MType a unic id using a descending linearization of the `mtypes` set
 	private fun compute_ids(mtypes: Set[MType]): Map[MType, Int] do
@@ -33,13 +53,6 @@ abstract class TypeLayoutBuilder
 		end
 		return ids
 	end
-end
-
-class TypeLayout
-	# Unic ids or each Mtype
-	var ids: Map[MType, Int] = new HashMap[MType, Int]
-	# Fixed positions of each MType in all tables
-	var pos: Map[MType, Int] = new HashMap[MType, Int]
 end
 
 # Layout builder for MType using Binary Matrix (BM)
@@ -69,11 +82,44 @@ class CLTypeLayoutBuilder
 	end
 
 	# Compute mtypes ids and position using BM
-	redef fun build_layout(mtypes: Set[MType]): TypeLayout do
+	redef fun build_layout(mtypes) do
 		var result = new TypeLayout
 		result.ids = self.compute_ids(mtypes)
 		result.pos = self.colorer.colorize(mtypes)
 		return result
+	end
+end
+
+# Layout builder for MType using Perfect Hashing (PH)
+class PHTypeLayoutBuilder
+	super TypeLayoutBuilder
+
+	redef type LAYOUT: PHTypeLayout
+
+	private var hasher: MTypeHasher
+
+	init(mmodule: MModule, operator: PHOperator) do
+		super
+		self.hasher = new MTypeHasher(mmodule, operator)
+	end
+
+	# Compute mtypes ids and position using BM
+	redef fun build_layout(mtypes) do
+		var result = new PHTypeLayout
+		result.ids = self.compute_ids(mtypes)
+		result.masks = self.hasher.compute_masks(mtypes, result.ids)
+		result.hashes = self.hasher.compute_hashes(mtypes, result.ids, result.masks)
+		return result
+	end
+
+	# Ids start from 1 instead of 0
+	redef fun compute_ids(mtypes) do
+		var ids = new HashMap[MType, Int]
+		var lin = self.mmodule.reverse_linearize_mtypes(mtypes)
+		for mtype in lin do
+			ids[mtype] = ids.length + 1
+		end
+		return ids
 	end
 end
 
@@ -224,63 +270,81 @@ private class MTypeColorer
 	redef fun reverse_linearize(elements) do return self.mmodule.reverse_linearize_mtypes(elements)
 end
 
-abstract class TypePerfectHashing
-	super TypeLayoutBuilder
-	super AbstractColoring[MType]
+# MType Perfect Hashing
+private class MTypeHasher
 
-	type T: MType
+	var mmodule: MModule
+	var operator: PHOperator
 
-	init(mmodule: MModule) do self.mmodule = mmodule
-
-	fun compute_masks(elements: Set[T], ids: Map[T, Int]): Map[T, Int] do
-		for e in elements do
-			# Create super type list
-			var supers = new HashSet[T]
-			supers.add_all(self.super_elements(e, elements))
-			supers.add(e)
-			# Compute the hashing 'mask'
-			self.coloration_result[e] = compute_mask(supers, ids)
-		end
-		return self.coloration_result
+	init(mmodule: MModule, operator: PHOperator) do
+		self.mmodule = mmodule
+		self.operator = operator
 	end
 
-	private fun compute_mask(mtypes: Set[T], ids: Map[T, Int]): Int do
+	fun compute_masks(mtypes: Set[MType], ids: Map[MType, Int]): Map[MType, Int] do
+		var masks = new HashMap[MType, Int]
+		for mtype in mtypes do
+			var supers = new HashSet[MType]
+			supers.add_all(self.mmodule.super_mtypes(mtype, mtypes))
+			supers.add(mtype)
+			masks[mtype] = compute_mask(supers, ids)
+		end
+		return masks
+	end
+
+	private fun compute_mask(supers: Set[MType], ids: Map[MType, Int]): Int do
 		var mask = 0
 		loop
 			var used = new List[Int]
-			for sup in mtypes do
-				var res = op(mask, ids[sup])
+			for sup in supers do
+				var res = operator.op(mask, ids[sup])
 				if used.has(res) then
 					break
 				else
 					used.add(res)
 				end
 			end
-			if used.length == mtypes.length then break
+			if used.length == supers.length then break
 			mask += 1
 		end
 		return mask
 	end
 
-	private fun op(mask: Int, id:Int): Int is abstract
-	private fun phash(id: Int, mask: Int): Int do return op(mask, id)
-
-	redef fun super_elements(element, elements) do return self.mmodule.super_mtypes(element, elements)
-	redef fun is_element_mi(element, elements) do return self.super_elements(element, elements).length > 1
-	redef fun sub_elements(element, elements) do do return self.mmodule.sub_mtypes(element, elements)
-	redef fun linearize(elements) do return self.mmodule.linearize_mtypes(elements)
-	redef fun reverse_linearize(elements) do return self.mmodule.reverse_linearize_mtypes(elements)
+	fun compute_hashes(mtypes: Set[MType], ids: Map[MType, Int], masks: Map[MType, Int]): Map[MType, Map[MType, Int]] do
+		var hashes = new HashMap[MType, Map[MType, Int]]
+		for mtype in mtypes do
+			var supers = new HashSet[MType]
+			supers.add_all(self.mmodule.super_mtypes(mtype, mtypes))
+			supers.add(mtype)
+			var inhashes = new HashMap[MType, Int]
+			var mask = masks[mtype]
+			for sup in supers do
+				inhashes[sup] = operator.op(mask, ids[sup])
+			end
+			hashes[mtype] = inhashes
+		end
+		return hashes
+	end
 end
 
-class TypeModPerfectHashing
-	super TypePerfectHashing
-	init(mainmodule: MModule) do super
+# Abstract operator used for perfect hashing
+abstract class PHOperator
+	fun op(mask: Int, id:Int): Int is abstract
+end
+
+# Hashing using modulo (MOD) operator
+# slower but compact
+class PHModOperator
+	super PHOperator
+	init do end
 	redef fun op(mask, id) do return mask % id
 end
 
-class TypeAndPerfectHashing
-	super TypePerfectHashing
-	init(mainmodule: MModule) do super
+# Hashing using binary and (AND) operator
+# faster but sparse
+class PHAndOperator
+	super PHOperator
+	init do end
 	redef fun op(mask, id) do return mask.bin_and(id)
 end
 

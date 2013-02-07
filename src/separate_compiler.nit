@@ -136,8 +136,8 @@ class SeparateCompiler
 
 	init(mainmodule: MModule, mmbuilder: ModelBuilder, runtime_type_analysis: RapidTypeAnalysis) do
 		super
-		self.init_layout_builders
 		self.header = new_visitor
+		self.init_layout_builders
 		self.runtime_type_analysis = runtime_type_analysis
 		self.do_property_coloring
 		self.compile_box_kinds
@@ -148,9 +148,11 @@ class SeparateCompiler
 		if modelbuilder.toolcontext.opt_bm_typing.value then
 			self.type_layout_builder = new BMTypeLayoutBuilder(self.mainmodule)
 		else if modelbuilder.toolcontext.opt_phmod_typing.value then
-			self.type_layout_builder = new TypeModPerfectHashing(self.mainmodule)
+			self.type_layout_builder = new PHTypeLayoutBuilder(self.mainmodule, new PHModOperator)
+			self.header.add_decl("#define HASH(mask, id) ((mask)%(id))")
 		else if modelbuilder.toolcontext.opt_phand_typing.value then
-			self.type_layout_builder = new TypeAndPerfectHashing(self.mainmodule)
+			self.type_layout_builder = new PHTypeLayoutBuilder(self.mainmodule, new PHAndOperator)
+			self.header.add_decl("#define HASH(mask, id) ((mask)&(id))")
 		else
 			self.type_layout_builder = new CLTypeLayoutBuilder(self.mainmodule)
 		end
@@ -297,41 +299,22 @@ class SeparateCompiler
 		end
 		mtypes.add_all(self.partial_types)
 
-		# set type unique id
-		if modelbuilder.toolcontext.opt_phmod_typing.value or modelbuilder.toolcontext.opt_phand_typing.value then
-			var sorted_mtypes = new Array[MType].from(mtypes)
-			var sorter = new ReverseTypeSorter(self.mainmodule)
-			sorter.sort(sorted_mtypes)
-			for mtype in sorted_mtypes do
-				self.typeids[mtype] = self.typeids.length + 1
-			end
-		else
-			for mtype in mtypes do
-				self.typeids[mtype] = self.typeids.length
-			end
-		end
-
 		# VT and FT are stored with other unresolved types in the big unanchored_tables
 		self.compile_unanchored_tables(mtypes)
 
 		# colorize types
 		var type_coloring = self.type_layout_builder
-		if type_coloring isa TypeModPerfectHashing then
-			self.type_colors = type_coloring.compute_masks(mtypes, typeids)
-			self.type_tables = self.hash_type_tables(mtypes, typeids, type_colors, type_coloring)
-			self.header.add_decl("#define HASH(mask, id) ((mask)%(id))")
-		else if type_coloring isa TypeAndPerfectHashing then
-			self.type_colors = type_coloring.compute_masks(mtypes, typeids)
-			self.type_tables = self.hash_type_tables(mtypes, typeids, type_colors, type_coloring)
-			self.header.add_decl("#define HASH(mask, id) ((mask)&(id))")
+		if type_coloring isa PHTypeLayoutBuilder then
+			var result = type_coloring.build_layout(mtypes)
+			self.typeids = result.ids
+			self.type_colors = result.masks
+			self.type_tables = self.hash_type_tables(mtypes, result.hashes)
 		else
 			var result = type_coloring.build_layout(mtypes)
 			self.typeids = result.ids
 			self.type_colors = result.pos
 			self.type_tables = self.build_type_tables(mtypes, type_colors, type_coloring)
 		end
-
-
 		return mtypes
 	end
 
@@ -359,17 +342,13 @@ class SeparateCompiler
 	end
 
 	# Build type tables
-	fun hash_type_tables(mtypes: Set[MType], ids: Map[MType, Int], masks: Map[MType, Int], colorer: TypePerfectHashing): Map[MType, Array[nullable MType]] do
+	fun hash_type_tables(mtypes: Set[MType], hashes: Map[MType, Map[MType, Int]]): Map[MType, Array[nullable MType]] do
 		var tables = new HashMap[MType, Array[nullable MType]]
 
 		for mtype in mtypes do
 			var table = new Array[nullable MType]
-			var supers = new HashSet[MType]
-			supers.add_all(colorer.super_elements(mtype, mtypes))
-			supers.add(mtype)
-
-			for sup in supers do
-				var color = colorer.phash(ids[sup], masks[mtype])
+			var supers = hashes[mtype]
+			for sup, color in supers do
 				if table.length <= color then
 					for i in [table.length .. color[ do
 						table[i] = null
