@@ -303,25 +303,72 @@ class SeparateCompiler
 		if modelbuilder.toolcontext.opt_bm_typing.value then
 			var type_coloring = new NaiveTypeColoring(self.mainmodule)
 			self.type_colors = type_coloring.colorize(mtypes)
-			self.type_tables = type_coloring.build_type_tables(mtypes, type_colors)
+			self.type_tables = self.build_type_tables(mtypes, type_colors, type_coloring)
 		else if modelbuilder.toolcontext.opt_phmod_typing.value then
 			var type_coloring = new TypeModPerfectHashing(self.mainmodule)
 			self.type_colors = type_coloring.compute_masks(mtypes, typeids)
-			self.type_tables = type_coloring.hash_type_tables(mtypes, typeids, type_colors)
+			self.type_tables = self.hash_type_tables(mtypes, typeids, type_colors, type_coloring)
 			self.header.add_decl("#define HASH(mask, id) ((mask)%(id))")
 		else if modelbuilder.toolcontext.opt_phand_typing.value then
 			var type_coloring = new TypeAndPerfectHashing(self.mainmodule)
 			self.type_colors = type_coloring.compute_masks(mtypes, typeids)
-			self.type_tables = type_coloring.hash_type_tables(mtypes, typeids, type_colors)
+			self.type_tables = self.hash_type_tables(mtypes, typeids, type_colors, type_coloring)
 			self.header.add_decl("#define HASH(mask, id) ((mask)&(id))")
 		else
 			var type_coloring = new TypeColoring(self.mainmodule)
 			self.type_colors = type_coloring.colorize(mtypes)
-			self.type_tables = type_coloring.build_type_tables(mtypes, type_colors)
+			self.type_tables = self.build_type_tables(mtypes, type_colors, type_coloring)
 		end
 
 
 		return mtypes
+	end
+
+	# Build type tables
+	fun build_type_tables(mtypes: Set[MType], colors: Map[MType, Int], colorer: TypeColoring): Map[MType, Array[nullable MType]] do
+		var tables = new HashMap[MType, Array[nullable MType]]
+
+		for mtype in mtypes do
+			var table = new Array[nullable MType]
+			var supers = new HashSet[MType]
+			supers.add_all(colorer.super_elements(mtype, mtypes))
+			supers.add(mtype)
+			for sup in supers do
+				var color = colors[sup]
+				if table.length <= color then
+					for i in [table.length .. color[ do
+						table[i] = null
+					end
+				end
+				table[color] = sup
+			end
+			tables[mtype] = table
+		end
+		return tables
+	end
+
+	# Build type tables
+	fun hash_type_tables(mtypes: Set[MType], ids: Map[MType, Int], masks: Map[MType, Int], colorer: TypePerfectHashing): Map[MType, Array[nullable MType]] do
+		var tables = new HashMap[MType, Array[nullable MType]]
+
+		for mtype in mtypes do
+			var table = new Array[nullable MType]
+			var supers = new HashSet[MType]
+			supers.add_all(colorer.super_elements(mtype, mtypes))
+			supers.add(mtype)
+
+			for sup in supers do
+				var color = colorer.phash(ids[sup], masks[mtype])
+				if table.length <= color then
+					for i in [table.length .. color[ do
+						table[i] = null
+					end
+				end
+				table[color] = sup
+			end
+			tables[mtype] = table
+		end
+		return tables
 	end
 
 	protected fun compile_unanchored_tables(mtypes: Set[MType]) do
