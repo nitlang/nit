@@ -17,6 +17,9 @@ module coloring
 
 import typing
 
+abstract class TypeLayoutBuilder
+end
+
 abstract class AbstractColoring[E: Object]
 
 	private var core: Set[E] = new HashSet[E]
@@ -150,6 +153,7 @@ end
 # MClassType coloring
 class TypeColoring
 	super AbstractColoring[MType]
+	super TypeLayoutBuilder
 
 	type T: MType
 
