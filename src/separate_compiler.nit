@@ -300,21 +300,21 @@ class SeparateCompiler
 
 		# colorize types
 		if modelbuilder.toolcontext.opt_bm_typing.value then
-			var type_coloring = new NaiveTypeColoring(self.mainmodule, mtypes)
+			var type_coloring = new NaiveTypeColoring(self.mainmodule)
 			self.type_colors = type_coloring.colorize(mtypes)
 			self.type_tables = type_coloring.build_type_tables(mtypes, type_colors)
 		else if modelbuilder.toolcontext.opt_phmod_typing.value then
-			var type_coloring = new TypeModPerfectHashing(self.mainmodule, mtypes)
+			var type_coloring = new TypeModPerfectHashing(self.mainmodule)
 			self.type_colors = type_coloring.compute_masks(mtypes, typeids)
 			self.type_tables = type_coloring.hash_type_tables(mtypes, typeids, type_colors)
 			self.header.add_decl("#define HASH(mask, id) ((mask)%(id))")
 		else if modelbuilder.toolcontext.opt_phand_typing.value then
-			var type_coloring = new TypeAndPerfectHashing(self.mainmodule, mtypes)
+			var type_coloring = new TypeAndPerfectHashing(self.mainmodule)
 			self.type_colors = type_coloring.compute_masks(mtypes, typeids)
 			self.type_tables = type_coloring.hash_type_tables(mtypes, typeids, type_colors)
 			self.header.add_decl("#define HASH(mask, id) ((mask)&(id))")
 		else
-			var type_coloring = new TypeColoring(self.mainmodule, mtypes)
+			var type_coloring = new TypeColoring(self.mainmodule)
 			self.type_colors = type_coloring.colorize(mtypes)
 			self.type_tables = type_coloring.build_type_tables(mtypes, type_colors)
 		end

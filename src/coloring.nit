@@ -29,7 +29,7 @@ abstract class AbstractColoring[E: Object]
 
 	fun colorize(elements: Set[E]): Map[E, Int] do
 		tag_elements(elements)
-		build_conflicts_graph
+		build_conflicts_graph(elements)
 		colorize_elements(core)
 		colorize_elements(border)
 		colorize_elements(crown)
@@ -43,7 +43,7 @@ abstract class AbstractColoring[E: Object]
 		var lin = reverse_linearize(elements)
 		for element in lin do
 			var color = min_color
-			while not self.is_color_free(element, color) do
+			while not self.is_color_free(element, elements, color) do
 				color += 1
 			end
 			coloration_result[element] = color
@@ -52,13 +52,13 @@ abstract class AbstractColoring[E: Object]
 	end
 
 	# Check if a related element to the element already use the color
-	private fun is_color_free(element: E, color: Int): Bool do
+	private fun is_color_free(element: E, elements: Set[E], color: Int): Bool do
 		if conflicts_graph.has_key(element) then
 			for st in conflicts_graph[element] do
 				if coloration_result.has_key(st) and coloration_result[st] == color then return false
 			end
 		end
-		for st in self.super_elements(element) do
+		for st in self.super_elements(element, elements) do
 			if coloration_result.has_key(st) and coloration_result[st] == color then return false
 		end
 		return true
@@ -69,22 +69,22 @@ abstract class AbstractColoring[E: Object]
 		for element in elements do
 			# Check if sub elements are all in single inheritance
 			var all_subelements_si = true
-			for subelem in self.sub_elements(element) do
-				if self.is_element_mi(subelem) then
+			for subelem in self.sub_elements(element, elements) do
+				if self.is_element_mi(subelem, elements) then
 					all_subelements_si = false
 					break
 				end
 			end
 
 			# Tag as core, crown or border
-			if self.is_element_mi(element) then
-				core.add_all(self.super_elements(element))
+			if self.is_element_mi(element, elements) then
+				core.add_all(self.super_elements(element, elements))
 				core.add(element)
 				if all_subelements_si then
 					border.add(element)
 				end
 			else if not all_subelements_si then
-				core.add_all(self.super_elements(element))
+				core.add_all(self.super_elements(element, elements))
 				core.add(element)
 			else
 				crown.add(element)
@@ -93,18 +93,18 @@ abstract class AbstractColoring[E: Object]
 	end
 
 	# Conflicts graph of elements hierarchy (two types are in conflict if they have common subelements)
-	private fun build_conflicts_graph do
+	private fun build_conflicts_graph(elements: Set[E]) do
 		self.conflicts_graph = new HashMap[E, HashSet[E]]
 		var core = reverse_linearize(self.core)
 		for t in core do
-			for i in self.linear_extension(t) do
+			for i in self.linear_extension(t, elements) do
 				if t == i then continue
 
-				var lin_i = self.linear_extension(i)
+				var lin_i = self.linear_extension(i, elements)
 
-				for j in self.linear_extension(t) do
+				for j in self.linear_extension(t, elements) do
 					if i == j or j == t then continue
-					var lin_j = self.linear_extension(j)
+					var lin_j = self.linear_extension(j, elements)
 
 					var d_ij = lin_i - lin_j
 					var d_ji = lin_j - lin_i
@@ -130,19 +130,19 @@ abstract class AbstractColoring[E: Object]
 	private var linear_extensions_cache: Map[E, Array[E]] = new HashMap[E, Array[E]]
 
 	# Return a linear_extension of super_elements of the element
-	private fun linear_extension(element: E): Array[E] do
+	private fun linear_extension(element: E, elements: Set[E]): Array[E] do
 		if not self.linear_extensions_cache.has_key(element) then
 			var supers = new HashSet[E]
 			supers.add(element)
-			supers.add_all(self.super_elements(element))
+			supers.add_all(self.super_elements(element, elements))
 			self.linear_extensions_cache[element] = self.linearize(supers)
 		end
 		return self.linear_extensions_cache[element]
 	end
 
-	private fun super_elements(element: E): Set[E] is abstract
-	private fun sub_elements(element: E): Set[E] is abstract
-	private fun is_element_mi(element: E): Bool is abstract
+	private fun super_elements(element: E, elements: Set[E]): Set[E] is abstract
+	private fun sub_elements(element: E, elements: Set[E]): Set[E] is abstract
+	private fun is_element_mi(element: E, elements: Set[E]): Bool is abstract
 	private fun linearize(elements: Set[E]): Array[E] is abstract
 	private fun reverse_linearize(elements: Set[E]): Array[E] is abstract
 end
@@ -154,12 +154,8 @@ class TypeColoring
 	type T: MType
 
 	private var mmodule: MModule
-	private var mtypes: Set[T]
 
-	init(mainmodule: MModule, mtypes: Set[T]) do
-		self.mmodule = mainmodule
-		self.mtypes = mtypes
-	end
+	init(mainmodule: MModule) do self.mmodule = mainmodule
 
 	# Build type tables
 	fun build_type_tables(mtypes: Set[T], colors: Map[T, Int]): Map[T, Array[nullable T]] do
@@ -168,7 +164,7 @@ class TypeColoring
 		for mtype in mtypes do
 			var table = new Array[nullable T]
 			var supers = new HashSet[T]
-			supers.add_all(self.super_elements(mtype))
+			supers.add_all(self.super_elements(mtype, mtypes))
 			supers.add(mtype)
 			for sup in supers do
 				var color = colors[sup]
@@ -184,9 +180,9 @@ class TypeColoring
 		return tables
 	end
 
-	redef fun super_elements(element) do return self.mmodule.super_mtypes(element, mtypes)
-	redef fun is_element_mi(element) do return self.super_elements(element).length > 1
-	redef fun sub_elements(element) do do return self.mmodule.sub_mtypes(element, mtypes)
+	redef fun super_elements(element, elements) do return self.mmodule.super_mtypes(element, elements)
+	redef fun is_element_mi(element, elements) do return self.super_elements(element, elements).length > 1
+	redef fun sub_elements(element, elements) do do return self.mmodule.sub_mtypes(element, elements)
 	redef fun linearize(elements) do return self.mmodule.linearize_mtypes(elements)
 	redef fun reverse_linearize(elements) do return self.mmodule.reverse_linearize_mtypes(elements)
 end
@@ -194,9 +190,7 @@ end
 class NaiveTypeColoring
 	super TypeColoring
 
-	init(mainmodule: MModule, mtypes: Set[T]) do
-		super(mainmodule, mtypes)
-	end
+	init(mainmodule: MModule) do super
 
 	# naive coloring that use incremental coloring
 	redef fun colorize_elements(elements) do
@@ -209,15 +203,13 @@ end
 abstract class TypePerfectHashing
 	super TypeColoring
 
-	init(mainmodule: MModule, mtypes: Set[T]) do
-		super(mainmodule, mtypes)
-	end
+	init(mainmodule: MModule) do super
 
 	fun compute_masks(elements: Set[T], ids: Map[T, Int]): Map[T, Int] do
 		for e in elements do
 			# Create super type list
 			var supers = new HashSet[T]
-			supers.add_all(self.super_elements(e))
+			supers.add_all(self.super_elements(e, elements))
 			supers.add(e)
 			# Compute the hashing 'mask'
 			self.coloration_result[e] = compute_mask(supers, ids)
@@ -232,7 +224,7 @@ abstract class TypePerfectHashing
 		for mtype in mtypes do
 			var table = new Array[nullable T]
 			var supers = new HashSet[T]
-			supers.add_all(self.super_elements(mtype))
+			supers.add_all(self.super_elements(mtype, mtypes))
 			supers.add(mtype)
 
 			for sup in supers do
@@ -273,17 +265,13 @@ end
 
 class TypeModPerfectHashing
 	super TypePerfectHashing
-	init(mainmodule: MModule, mtypes: Set[T]) do
-		super(mainmodule, mtypes)
-	end
+	init(mainmodule: MModule) do super
 	redef fun op(mask, id) do return mask % id
 end
 
 class TypeAndPerfectHashing
 	super TypePerfectHashing
-	init(mainmodule: MModule, mtypes: Set[T]) do
-		super(mainmodule, mtypes)
-	end
+	init(mainmodule: MModule) do super
 	redef fun op(mask, id) do return mask.bin_and(id)
 end
 
@@ -303,13 +291,13 @@ class ClassColoring
 	init(mainmodule: MModule) do self.mmodule = mainmodule
 
 	# Build type tables
-	fun build_type_tables(mclasses: Array[T], colors: Map[T, Int]): Map[T, Array[nullable T]] do
+	fun build_type_tables(mclasses: Set[T], colors: Map[T, Int]): Map[T, Array[nullable T]] do
 		var tables = new HashMap[T, Array[nullable T]]
 
 		for mclasse in mclasses do
 			var table = new Array[nullable T]
 			var supers = new HashSet[T]
-			supers.add_all(self.super_elements(mclasse))
+			supers.add_all(self.super_elements(mclasse, mclasses))
 			supers.add(mclasse)
 			for sup in supers do
 				var color = colors[sup]
@@ -325,10 +313,10 @@ class ClassColoring
 		return tables
 	end
 
-	redef fun super_elements(element) do return self.mmodule.super_mclasses(element)
+	redef fun super_elements(element, elements) do return self.mmodule.super_mclasses(element)
 	fun parent_elements(element: MClass): Set[MClass] do return self.mmodule.parent_mclasses(element)
-	redef fun is_element_mi(element) do return self.parent_elements(element).length > 1
-	redef fun sub_elements(element) do do return self.mmodule.sub_mclasses(element)
+	redef fun is_element_mi(element, elements) do return self.parent_elements(element).length > 1
+	redef fun sub_elements(element, elements) do do return self.mmodule.sub_mclasses(element)
 	redef fun linearize(elements) do return self.mmodule.linearize_mclasses(elements)
 	redef fun reverse_linearize(elements) do return self.mmodule.reverse_linearize_mclasses(elements)
 end
@@ -360,7 +348,7 @@ abstract class ClassPerfectHashing
 		for e in elements do
 			# Create super type list
 			var supers = new HashSet[T]
-			supers.add_all(self.super_elements(e))
+			supers.add_all(self.super_elements(e, elements))
 			supers.add(e)
 			# Compute the hashing 'mask'
 			self.coloration_result[e] = compute_mask(supers, ids)
@@ -375,7 +363,7 @@ abstract class ClassPerfectHashing
 		for mtype in mtypes do
 			var table = new Array[nullable T]
 			var supers = new HashSet[T]
-			supers.add_all(self.super_elements(mtype))
+			supers.add_all(self.super_elements(mtype, mtypes))
 			supers.add(mtype)
 
 			for sup in supers do
@@ -451,11 +439,11 @@ class PropertyColoring
 
 	fun build_property_tables: Map[MClass, Array[nullable MPROPDEF]] do
 		var tables = new HashMap[MClass, Array[nullable MPROPDEF]]
-
-		for mclass in self.class_coloring.coloration_result.keys do
+		var mclasses = self.class_coloring.coloration_result.keys
+		for mclass in mclasses do
 			var table = new Array[nullable MPROPDEF]
 			# first, fill table from parents by reverse linearization order
-			var parents = self.class_coloring.super_elements(mclass)
+			var parents = self.class_coloring.mmodule.super_mclasses(mclass)
 			var lin = self.class_coloring.reverse_linearize(parents)
 			for parent in lin do
 				for mproperty in self.properties(parent) do
@@ -555,7 +543,7 @@ class PropertyColoring
 	private fun properties(mclass: MClass): Set[MPROP] do
 		if not self.properties_cache.has_key(mclass) then
 			var properties = new HashSet[MPROP]
-			var parents = self.class_coloring.super_elements(mclass)
+			var parents = self.class_coloring.mmodule.super_mclasses(mclass)
 			for parent in parents do
 				properties.add_all(self.properties(parent))
 			end
@@ -675,7 +663,7 @@ abstract class VTPerfectHashing
 		for mclass in self.class_coloring.coloration_result.keys do
 			var table = new Array[nullable MPROPDEF]
 			# first, fill table from parents by reverse linearization order
-			var parents = self.class_coloring.super_elements(mclass)
+			var parents = self.class_coloring.mmodule.super_mclasses(mclass)
 			var lin = self.class_coloring.reverse_linearize(parents)
 			for parent in lin do
 				for mproperty in self.properties(parent) do
@@ -823,7 +811,8 @@ class FTColoring
 			var table = new Array[nullable MParameterType]
 
 			# first, fill table from parents
-			for parent in self.class_coloring.super_elements(mclass) do
+			var parents = self.class_coloring.mmodule.super_mclasses(mclass)
+			for parent in parents do
 				for ft in self.fts(parent) do
 					var color = self.coloration_result[ft]
 					if table.length <= color then
@@ -896,7 +885,8 @@ abstract class FTPerfectHashing
 		mclasses.add_all(self.class_coloring.crown)
 		for mclass in mclasses do
 			var fts = new HashSet[MParameterType]
-			for parent in self.class_coloring.super_elements(mclass) do
+			var parents = self.class_coloring.mmodule.super_mclasses(mclass)
+			for parent in parents do
 				fts.add_all(self.fts(parent))
 			end
 			fts.add_all(self.fts(mclass))
@@ -930,7 +920,8 @@ abstract class FTPerfectHashing
 			var table = new Array[nullable MParameterType]
 
 			# first, fill table from parents
-			for parent in self.class_coloring.super_elements(mclass) do
+			var parents = self.class_coloring.mmodule.super_mclasses(mclass)
+			for parent in parents do
 				for ft in self.fts(parent) do
 					var color = phash(self.coloration_result[ft], masks[mclass])
 					if table.length <= color then

@@ -111,7 +111,7 @@ class SeparateErasureCompiler
 				self.class_ids[mclass] = self.class_ids.length + 1
 			end
 			self.class_colors = class_coloring.colorize(mclasses)
-			self.class_tables = class_coloring.build_type_tables(modelbuilder.model.mclasses, class_colors)
+			self.class_tables = class_coloring.build_type_tables(mclasses, class_colors)
 		end
 	end
 
