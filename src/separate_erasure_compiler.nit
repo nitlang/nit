@@ -297,7 +297,7 @@ class SeparateErasureCompiler
 				v.add_decl("\{-1, NULL\}, /* empty */")
 			else
 				var is_null = 0
-				var bound = retrieve_vt_bound(mclass.intro.bound_mtype, vt.bound)
+				var bound = retrieve_vt_bound(mclass.intro.bound_mtype, vt.as(MVirtualTypeDef).bound)
 				while bound isa MNullableType do
 					bound = retrieve_vt_bound(mclass.intro.bound_mtype, bound.mtype)
 					is_null = 1

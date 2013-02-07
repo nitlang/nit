@@ -520,49 +520,6 @@ class PropertyColoring
 		return self.coloration_result
 	end
 
-	fun build_property_tables: Map[MClass, Array[nullable MPROPDEF]] do
-		var tables = new HashMap[MClass, Array[nullable MPROPDEF]]
-		var mclasses = self.class_coloring.coloration_result.keys
-		for mclass in mclasses do
-			var table = new Array[nullable MPROPDEF]
-			# first, fill table from parents by reverse linearization order
-			var parents = self.class_coloring.mmodule.super_mclasses(mclass)
-			var lin = self.class_coloring.reverse_linearize(parents)
-			for parent in lin do
-				for mproperty in self.properties(parent) do
-					var color = self.coloration_result[mproperty]
-					if table.length <= color then
-						for i in [table.length .. color[ do
-							table[i] = null
-						end
-					end
-					for mpropdef in mproperty.mpropdefs do
-						if mpropdef.mclassdef.mclass == parent then
-							table[color] = mpropdef
-						end
-					end
-				end
-			end
-
-			# then override with local properties
-			for mproperty in self.properties(mclass) do
-				var color = self.coloration_result[mproperty]
-				if table.length <= color then
-					for i in [table.length .. color[ do
-						table[i] = null
-					end
-				end
-				for mpropdef in mproperty.mpropdefs do
-					if mpropdef.mclassdef.mclass == mclass then
-						table[color] = mpropdef
-					end
-				end
-			end
-			tables[mclass] = table
-		end
-		return tables
-	end
-
 	# Colorize properties of the core hierarchy
 	private fun colorize_core_properties do
 		var mclasses = self.class_coloring.core
@@ -724,7 +681,7 @@ abstract class VTPerfectHashing
 		return mask
 	end
 
-	redef fun build_property_tables do
+	fun build_property_tables: Map[MClass, Array[nullable MPROPDEF]] do
 		var tables = new HashMap[MClass, Array[nullable MPROPDEF]]
 
 		for mclass in self.class_coloring.coloration_result.keys do

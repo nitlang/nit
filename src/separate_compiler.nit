@@ -118,13 +118,13 @@ class SeparateCompiler
 	private var unanchored_types_masks: nullable Map[MClassType, Int]
 
 	protected var method_colors: Map[MMethod, Int]
-	protected var method_tables: Map[MClass, Array[nullable MMethodDef]]
+	protected var method_tables: Map[MClass, Array[nullable MPropDef]]
 
 	protected var attr_colors: Map[MAttribute, Int]
-	protected var attr_tables: Map[MClass, Array[nullable MAttributeDef]]
+	protected var attr_tables: Map[MClass, Array[nullable MPropDef]]
 
 	protected var vt_colors: Map[MVirtualTypeProp, Int]
-	protected var vt_tables: Map[MClass, Array[nullable MVirtualTypeDef]]
+	protected var vt_tables: Map[MClass, Array[nullable MPropDef]]
 	protected var vt_masks: nullable Map[MClass, Int]
 
 	private var ft_colors: nullable Map[MParameterType, Int]
@@ -244,36 +244,79 @@ class SeparateCompiler
 		# methods coloration
 		var method_coloring = new MethodColoring(mainmodule, class_coloring)
 		self.method_colors = method_coloring.colorize
-		self.method_tables = method_coloring.build_property_tables
+		self.method_tables = build_property_tables(method_coloring, class_coloring)
 		self.compile_color_consts(self.method_colors)
 
 		# attributes coloration
 		var attribute_coloring = new AttributeColoring(mainmodule, class_coloring)
 		self.attr_colors = attribute_coloring.colorize
-		self.attr_tables = attribute_coloring.build_property_tables
+		self.attr_tables = build_property_tables(method_coloring, class_coloring)
 		self.compile_color_consts(self.attr_colors)
 
 		# vt coloration
 		if modelbuilder.toolcontext.opt_bm_typing.value then
 			var vt_coloring = new NaiveVTColoring(mainmodule, class_coloring)
 			self.vt_colors = vt_coloring.colorize
-			self.vt_tables = vt_coloring.build_property_tables
+			self.vt_tables = build_property_tables(vt_coloring, class_coloring)
 		else if modelbuilder.toolcontext.opt_phmod_typing.value then
 			var vt_coloring = new VTModPerfectHashing(mainmodule, class_coloring)
 			self.vt_colors = vt_coloring.colorize
 			self.vt_masks = vt_coloring.compute_masks
-			self.vt_tables = vt_coloring.build_property_tables
+			self.vt_tables = build_property_tables(vt_coloring, class_coloring)
 		else if modelbuilder.toolcontext.opt_phand_typing.value then
 			var vt_coloring = new VTAndPerfectHashing(mainmodule, class_coloring)
 			self.vt_colors = vt_coloring.colorize
 			self.vt_masks = vt_coloring.compute_masks
-			self.vt_tables = vt_coloring.build_property_tables
+			self.vt_tables = build_property_tables(vt_coloring, class_coloring)
 		else
 			var vt_coloring = new VTColoring(mainmodule, class_coloring)
 			self.vt_colors = vt_coloring.colorize
-			self.vt_tables = vt_coloring.build_property_tables
+			self.vt_tables = build_property_tables(vt_coloring, class_coloring)
 		end
 		self.compile_color_consts(self.vt_colors)
+	end
+
+	fun build_property_tables(prop_coloring: PropertyColoring, class_coloring: ClassColoring): Map[MClass, Array[nullable MPropDef]] do
+		var tables = new HashMap[MClass, Array[nullable MPropDef]]
+		var mclasses = class_coloring.coloration_result.keys
+		for mclass in mclasses do
+			var table = new Array[nullable MPropDef]
+			# first, fill table from parents by reverse linearization order
+			var parents = class_coloring.mmodule.super_mclasses(mclass)
+			var lin = class_coloring.reverse_linearize(parents)
+			for parent in lin do
+				for mproperty in prop_coloring.properties(parent) do
+					var color = prop_coloring.coloration_result[mproperty]
+					if table.length <= color then
+						for i in [table.length .. color[ do
+							table[i] = null
+						end
+					end
+					for mpropdef in mproperty.mpropdefs do
+						if mpropdef.mclassdef.mclass == parent then
+							table[color] = mpropdef
+						end
+					end
+				end
+			end
+
+			# then override with local properties
+			for mproperty in prop_coloring.properties(mclass) do
+				var color = prop_coloring.coloration_result[mproperty]
+				if table.length <= color then
+					for i in [table.length .. color[ do
+						table[i] = null
+					end
+				end
+				for mpropdef in mproperty.mpropdefs do
+					if mpropdef.mclassdef.mclass == mclass then
+						table[color] = mpropdef
+					end
+				end
+			end
+			tables[mclass] = table
+		end
+		return tables
 	end
 
 	# colorize live types of the program
@@ -413,7 +456,7 @@ class SeparateCompiler
 		# add virtual types to mtypes
 		for vt in self.vt_tables[mclass_type.mclass] do
 			if vt != null then
-				var anchored = vt.bound.anchor_to(self.mainmodule, mclass_type)
+				var anchored = vt.as(MVirtualTypeDef).bound.anchor_to(self.mainmodule, mclass_type)
 				self.partial_types.add(anchored)
 			end
 		end
@@ -570,7 +613,7 @@ class SeparateCompiler
 			if vt == null then
 				v.add_decl("NULL, /* empty */")
 			else
-				var bound = vt.bound
+				var bound = vt.as(MVirtualTypeDef).bound
 				if bound == null then
 					#FIXME how can a bound be null here ?
 					print "No bound found for virtual type {vt} ?"
