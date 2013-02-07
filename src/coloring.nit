@@ -34,6 +34,11 @@ class PHTypingLayout[E]
 	var hashes: Map[E, Map[E, Int]] = new HashMap[E, Map[E, Int]]
 end
 
+class PropertyLayout[E]
+	# Fixed positions of each element in all tables
+	var pos: Map[E, Int] = new HashMap[E, Int]
+end
+
 # Builders
 
 abstract class TypingLayoutBuilder[E]
@@ -207,6 +212,36 @@ class PHClassLayoutBuilder
 	redef fun reverse_linearize(elements) do return self.mmodule.reverse_linearize_mclasses(elements)
 end
 
+abstract class PropertyLayoutBuilder[E: MProperty]
+
+	type LAYOUT: PropertyLayout[E]
+
+	private var mmodule: MModule
+	init(mmodule: MModule) do self.mmodule = mmodule
+
+	# Compute properties ids and position
+	fun build_layout(mclasses: Set[MClass]): LAYOUT is abstract
+end
+
+# Layout builder for MProperty using Coloring (CL)
+class CLPropertyLayoutBuilder[E: MProperty]
+	super PropertyLayoutBuilder[E]
+
+	private var colorer: MPropertyColorer[E]
+
+	init(mmodule: MModule) do
+		super
+		self.colorer = new MPropertyColorer[E](mmodule)
+	end
+
+	# Compute mclasses ids and position using BM
+	redef fun build_layout(mclasses) do
+		var result = new PropertyLayout[E]
+		result.pos = self.colorer.colorize(mclasses)
+		return result
+	end
+end
+
 # Colorers
 
 abstract class AbstractColorer[E: Object]
@@ -368,6 +403,88 @@ private class MClassColorer
 	redef fun sub_elements(element, elements) do do return self.mmodule.sub_mclasses(element)
 	redef fun linearize(elements) do return self.mmodule.linearize_mclasses(elements)
 	redef fun reverse_linearize(elements) do return self.mmodule.reverse_linearize_mclasses(elements)
+end
+
+# MProperty coloring
+private class MPropertyColorer[E: MProperty]
+
+	private var mmodule: MModule
+	private var class_colorer: MClassColorer
+	private var coloration_result: Map[E, Int] = new HashMap[E, Int]
+
+	init(mmodule: MModule) do
+		self.mmodule = mmodule
+		self.class_colorer = new MClassColorer(mmodule)
+	end
+
+	fun colorize(mclasses: Set[MClass]): Map[E, Int] do
+		self.class_colorer.tag_elements(mclasses)
+		self.class_colorer.build_conflicts_graph(mclasses)
+		self.colorize_core(self.class_colorer.core)
+		self.colorize_crown(self.class_colorer.crown)
+		return self.coloration_result
+	end
+
+	# Colorize properties of the core hierarchy
+	private fun colorize_core(mclasses: Set[MClass]) do
+		var min_color = 0
+		for mclass in mclasses do
+			var color = min_color
+
+			# if the class is root, get the minimal color
+			if self.mmodule.parent_mclasses(mclass).length == 0 then
+				colorize_elements(self.properties(mclass), color)
+			else
+				# check last color used by parents
+				color = max_color(color, self.mmodule.parent_mclasses(mclass))
+				# check max color used in conflicts
+				if self.class_colorer.conflicts_graph.has_key(mclass) then
+					color = max_color(color, self.class_colorer.conflicts_graph[mclass])
+				end
+				colorize_elements(self.properties(mclass), color)
+			end
+		end
+	end
+
+	# Colorize properties of the crown hierarchy
+	private fun colorize_crown(mclasses: Set[MClass]) do
+		for mclass in mclasses do
+			colorize_elements(self.properties(mclass), max_color(0, self.mmodule.parent_mclasses(mclass)))
+		end
+	end
+
+	# Colorize a collection of mproperties given a starting color
+	private fun colorize_elements(elements: Collection[E], start_color: Int) do
+		for element in elements do
+			if self.coloration_result.has_key(element) then continue
+			self.coloration_result[element] = start_color
+			start_color += 1
+		end
+	end
+
+	private fun max_color(min_color: Int, mclasses: Collection[MClass]): Int do
+		var max_color = min_color
+
+		for mclass in mclasses do
+			for mproperty in self.properties(mclass) do
+				var color = min_color
+				if self.coloration_result.has_key(mproperty) then
+					color = self.coloration_result[mproperty]
+					if color >= max_color then max_color = color + 1
+				end
+			end
+		end
+		return max_color
+	end
+
+	# Filter properties
+	private fun properties(mclass: MClass): Set[E] do
+		var properties = new HashSet[E]
+		for mprop in self.mmodule.properties(mclass) do
+			if mprop isa E then properties.add(mprop)
+		end
+		return properties
+	end
 end
 
 # Perfect hashers
