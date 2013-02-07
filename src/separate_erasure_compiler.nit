@@ -15,7 +15,7 @@
 # Separate compilation of a Nit program with generic type erasure
 module separate_erasure_compiler
 
-import separate_compiler
+intrude import separate_compiler
 
 # Add separate erased compiler specific options
 redef class ToolContext
@@ -85,7 +85,7 @@ class SeparateErasureCompiler
 
 			var class_coloring = new ClassModPerfectHashing(mainmodule)
 			self.class_colors = class_coloring.compute_masks(mclasses, class_ids)
-			self.class_tables = class_coloring.hash_type_tables(mclasses, class_ids, class_colors)
+			self.class_tables = self.hash_class_typing_tables(mclasses, class_ids, class_colors, class_coloring)
 
 			self.header.add_decl("#define HASH(mask, id) ((mask)%(id))")
 		else if modelbuilder.toolcontext.opt_phand_typing.value then
@@ -96,7 +96,7 @@ class SeparateErasureCompiler
 
 			var class_coloring = new ClassAndPerfectHashing(mainmodule)
 			self.class_colors = class_coloring.compute_masks(mclasses, class_ids)
-			self.class_tables = class_coloring.hash_type_tables(mclasses, class_ids, class_colors)
+			self.class_tables = self.hash_class_typing_tables(mclasses, class_ids, class_colors, class_coloring)
 
 			self.header.add_decl("#define HASH(mask, id) ((mask)&(id))")
 		else
@@ -111,8 +111,55 @@ class SeparateErasureCompiler
 				self.class_ids[mclass] = self.class_ids.length + 1
 			end
 			self.class_colors = class_coloring.colorize(mclasses)
-			self.class_tables = class_coloring.build_type_tables(mclasses, class_colors)
+			self.class_tables = self.build_class_typing_tables(mclasses, class_colors, class_coloring)
 		end
+	end
+
+	# Build type tables
+	fun build_class_typing_tables(mclasses: Set[MClass], colors: Map[MClass, Int], colorer: ClassColoring): Map[MClass, Array[nullable MClass]] do
+		var tables = new HashMap[MClass, Array[nullable MClass]]
+
+		for mclasse in mclasses do
+			var table = new Array[nullable MClass]
+			var supers = new HashSet[MClass]
+			supers.add_all(colorer.super_elements(mclasse, mclasses))
+			supers.add(mclasse)
+			for sup in supers do
+				var color = colors[sup]
+				if table.length <= color then
+					for i in [table.length .. color[ do
+						table[i] = null
+					end
+				end
+				table[color] = sup
+			end
+			tables[mclasse] = table
+		end
+		return tables
+	end
+
+	# Build type tables
+	fun hash_class_typing_tables(mtypes: Set[MClass], ids: Map[MClass, Int], masks: Map[MClass, Int], colorer: ClassPerfectHashing): Map[MClass, Array[nullable MClass]] do
+		var tables = new HashMap[MClass, Array[nullable MClass]]
+
+		for mtype in mtypes do
+			var table = new Array[nullable MClass]
+			var supers = new HashSet[MClass]
+			supers.add_all(colorer.super_elements(mtype, mtypes))
+			supers.add(mtype)
+
+			for sup in supers do
+				var color = colorer.phash(ids[sup], masks[mtype])
+				if table.length <= color then
+					for i in [table.length .. color[ do
+						table[i] = null
+					end
+				end
+				table[color] = sup
+			end
+			tables[mtype] = table
+		end
+		return tables
 	end
 
 	redef fun compile_header_structs do

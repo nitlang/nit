@@ -243,29 +243,6 @@ class ClassColoring
 
 	init(mainmodule: MModule) do self.mmodule = mainmodule
 
-	# Build type tables
-	fun build_type_tables(mclasses: Set[T], colors: Map[T, Int]): Map[T, Array[nullable T]] do
-		var tables = new HashMap[T, Array[nullable T]]
-
-		for mclasse in mclasses do
-			var table = new Array[nullable T]
-			var supers = new HashSet[T]
-			supers.add_all(self.super_elements(mclasse, mclasses))
-			supers.add(mclasse)
-			for sup in supers do
-				var color = colors[sup]
-				if table.length <= color then
-					for i in [table.length .. color[ do
-						table[i] = null
-					end
-				end
-				table[color] = sup
-			end
-			tables[mclasse] = table
-		end
-		return tables
-	end
-
 	redef fun super_elements(element, elements) do return self.mmodule.super_mclasses(element)
 	fun parent_elements(element: MClass): Set[MClass] do return self.mmodule.parent_mclasses(element)
 	redef fun is_element_mi(element, elements) do return self.parent_elements(element).length > 1
@@ -307,30 +284,6 @@ abstract class ClassPerfectHashing
 			self.coloration_result[e] = compute_mask(supers, ids)
 		end
 		return self.coloration_result
-	end
-
-	# Build type tables
-	fun hash_type_tables(mtypes: Set[T], ids: Map[T, Int], masks: Map[T, Int]): Map[T, Array[nullable T]] do
-		var tables = new HashMap[T, Array[nullable T]]
-
-		for mtype in mtypes do
-			var table = new Array[nullable T]
-			var supers = new HashSet[T]
-			supers.add_all(self.super_elements(mtype, mtypes))
-			supers.add(mtype)
-
-			for sup in supers do
-				var color = phash(ids[sup], masks[mtype])
-				if table.length <= color then
-					for i in [table.length .. color[ do
-						table[i] = null
-					end
-				end
-				table[color] = sup
-			end
-			tables[mtype] = table
-		end
-		return tables
 	end
 
 	private fun compute_mask(mtypes: Set[T], ids: Map[T, Int]): Int do
