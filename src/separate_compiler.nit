@@ -107,7 +107,7 @@ class SeparateCompiler
 	private var undead_types: Set[MType] = new HashSet[MType]
 	private var partial_types: Set[MType] = new HashSet[MType]
 
-	private var type_layout_builder: TypeLayoutBuilder
+	private var type_layout_builder: TypingLayoutBuilder[MType]
 	private var type_layout: nullable TypingLayout[MType]
 	private var type_tables: nullable Map[MType, Array[nullable MType]] = null
 

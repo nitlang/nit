@@ -75,7 +75,7 @@ class SeparateErasureCompiler
 
 		var mclasses = new HashSet[MClass].from(mmbuilder.model.mclasses)
 
-		var layout_builder: ClassLayoutBuilder
+		var layout_builder: TypingLayoutBuilder[MClass]
 		if modelbuilder.toolcontext.opt_phmod_typing.value then
 			layout_builder = new PHClassLayoutBuilder(mainmodule, new PHModOperator)
 			self.header.add_decl("#define HASH(mask, id) ((mask)%(id))")
