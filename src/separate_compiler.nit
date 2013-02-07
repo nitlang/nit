@@ -106,7 +106,7 @@ class SeparateCompiler
 
 	private var undead_types: Set[MType] = new HashSet[MType]
 	private var partial_types: Set[MType] = new HashSet[MType]
-	protected var typeids: HashMap[MType, Int] protected writable = new HashMap[MType, Int]
+	protected var typeids: Map[MType, Int] protected writable = new HashMap[MType, Int]
 
 	private var type_layout_builder: TypeLayoutBuilder
 	private var type_colors: Map[MType, Int] = typeids
@@ -146,7 +146,7 @@ class SeparateCompiler
 	protected fun init_layout_builders do
 		# Typing Layout
 		if modelbuilder.toolcontext.opt_bm_typing.value then
-			self.type_layout_builder = new NaiveTypeColoring(self.mainmodule)
+			self.type_layout_builder = new BMTypeLayoutBuilder(self.mainmodule)
 		else if modelbuilder.toolcontext.opt_phmod_typing.value then
 			self.type_layout_builder = new TypeModPerfectHashing(self.mainmodule)
 		else if modelbuilder.toolcontext.opt_phand_typing.value then
@@ -316,8 +316,10 @@ class SeparateCompiler
 
 		# colorize types
 		var type_coloring = self.type_layout_builder
-		if type_coloring isa NaiveTypeColoring then
-			self.type_colors = type_coloring.colorize(mtypes)
+		if type_coloring isa BMTypeLayoutBuilder then
+			var result = type_coloring.build_layout(mtypes)
+			self.typeids = result.ids
+			self.type_colors = result.pos
 			self.type_tables = self.build_type_tables(mtypes, type_colors, type_coloring)
 		else if type_coloring isa TypeModPerfectHashing then
 			self.type_colors = type_coloring.compute_masks(mtypes, typeids)
@@ -337,13 +339,13 @@ class SeparateCompiler
 	end
 
 	# Build type tables
-	fun build_type_tables(mtypes: Set[MType], colors: Map[MType, Int], colorer: TypeColoring): Map[MType, Array[nullable MType]] do
+	fun build_type_tables(mtypes: Set[MType], colors: Map[MType, Int], colorer: TypeLayoutBuilder): Map[MType, Array[nullable MType]] do
 		var tables = new HashMap[MType, Array[nullable MType]]
 
 		for mtype in mtypes do
 			var table = new Array[nullable MType]
 			var supers = new HashSet[MType]
-			supers.add_all(colorer.super_elements(mtype, mtypes))
+			supers.add_all(colorer.mmodule.super_mtypes(mtype, mtypes))
 			supers.add(mtype)
 			for sup in supers do
 				var color = colors[sup]

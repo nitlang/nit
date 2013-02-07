@@ -18,6 +18,40 @@ module coloring
 import typing
 
 abstract class TypeLayoutBuilder
+	private var mmodule: MModule
+	init(mmodule: MModule) do self.mmodule = mmodule
+end
+
+class TypeLayout
+	# Unic ids or each Mtype
+	var ids: Map[MType, Int] = new HashMap[MType, Int]
+	# Fixed positions of each MType in all tables
+	var pos: Map[MType, Int] = new HashMap[MType, Int]
+end
+
+# Layout builder for MType using Binary Matrix (BM)
+class BMTypeLayoutBuilder
+	super TypeLayoutBuilder
+
+	init(mmodule: MModule) do super
+
+	# Compute mtypes ids and position using BM
+	fun build_layout(mtypes: Set[MType]): TypeLayout do
+		var result = new TypeLayout
+		result.ids = self.compute_ids(mtypes)
+		result.pos = result.ids
+		return result
+	end
+
+	# Give each MType a unic id using a descending linearization of the `mtypes` set
+	private fun compute_ids(mtypes: Set[MType]): Map[MType, Int] do
+		var ids = new HashMap[MType, Int]
+		var lin = self.mmodule.reverse_linearize_mtypes(mtypes)
+		for mtype in lin do
+			ids[mtype] = ids.length
+		end
+		return ids
+	end
 end
 
 abstract class AbstractColoring[E: Object]
@@ -157,28 +191,13 @@ class TypeColoring
 
 	type T: MType
 
-	private var mmodule: MModule
-
-	init(mainmodule: MModule) do self.mmodule = mainmodule
+	init(mmodule: MModule) do self.mmodule = mmodule
 
 	redef fun super_elements(element, elements) do return self.mmodule.super_mtypes(element, elements)
 	redef fun is_element_mi(element, elements) do return self.super_elements(element, elements).length > 1
 	redef fun sub_elements(element, elements) do do return self.mmodule.sub_mtypes(element, elements)
 	redef fun linearize(elements) do return self.mmodule.linearize_mtypes(elements)
 	redef fun reverse_linearize(elements) do return self.mmodule.reverse_linearize_mtypes(elements)
-end
-
-class NaiveTypeColoring
-	super TypeColoring
-
-	init(mainmodule: MModule) do super
-
-	# naive coloring that use incremental coloring
-	redef fun colorize_elements(elements) do
-		for e in elements do
-			self.coloration_result[e] = self.coloration_result.length
-		end
-	end
 end
 
 abstract class TypePerfectHashing
