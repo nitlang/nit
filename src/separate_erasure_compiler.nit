@@ -67,8 +67,7 @@ end
 class SeparateErasureCompiler
 	super SeparateCompiler
 
-	private var class_ids: HashMap[MClass, Int] = new HashMap[MClass, Int]
-	private var class_colors: Map[MClass, Int]
+	private var class_layout: nullable ClassLayout
 	private var class_tables: Map[MClass, Array[nullable MClass]]
 
 	init(mainmodule: MModule, mmbuilder: ModelBuilder, runtime_type_analysis: RapidTypeAnalysis) do
@@ -76,56 +75,38 @@ class SeparateErasureCompiler
 
 		var mclasses = new HashSet[MClass].from(mmbuilder.model.mclasses)
 
-		# classes coloration
+		var layout_builder: ClassLayoutBuilder
 		if modelbuilder.toolcontext.opt_phmod_typing.value then
-			# set type unique id
-			for mclass in mclasses do
-				self.class_ids[mclass] = self.class_ids.length + 1
-			end
-
-			var class_coloring = new ClassModPerfectHashing(mainmodule)
-			self.class_colors = class_coloring.compute_masks(mclasses, class_ids)
-			self.class_tables = self.hash_class_typing_tables(mclasses, class_ids, class_colors, class_coloring)
-
+			layout_builder = new PHClassLayoutBuilder(mainmodule, new PHModOperator)
 			self.header.add_decl("#define HASH(mask, id) ((mask)%(id))")
 		else if modelbuilder.toolcontext.opt_phand_typing.value then
-			# set type unique id
-			for mclass in mclasses do
-				self.class_ids[mclass] = self.class_ids.length + 1
-			end
-
-			var class_coloring = new ClassAndPerfectHashing(mainmodule)
-			self.class_colors = class_coloring.compute_masks(mclasses, class_ids)
-			self.class_tables = self.hash_class_typing_tables(mclasses, class_ids, class_colors, class_coloring)
-
+			layout_builder = new PHClassLayoutBuilder(mainmodule, new PHAndOperator)
 			self.header.add_decl("#define HASH(mask, id) ((mask)&(id))")
+		else if modelbuilder.toolcontext.opt_bm_typing.value then
+			layout_builder = new BMClassLayoutBuilder(mainmodule)
 		else
-			var class_coloring
-			if modelbuilder.toolcontext.opt_bm_typing.value then
-				class_coloring = new NaiveClassColoring(mainmodule)
-			else
-				class_coloring = new ClassColoring(mainmodule)
-			end
-			# set type unique id
-			for mclass in mclasses do
-				self.class_ids[mclass] = self.class_ids.length + 1
-			end
-			self.class_colors = class_coloring.colorize(mclasses)
-			self.class_tables = self.build_class_typing_tables(mclasses, class_colors, class_coloring)
+			layout_builder = new CLClassLayoutBuilder(mainmodule)
 		end
+		self.class_layout = layout_builder.build_layout(mclasses)
+		self.class_tables = self.build_class_typing_tables(mclasses)
 	end
 
-	# Build type tables
-	fun build_class_typing_tables(mclasses: Set[MClass], colors: Map[MClass, Int], colorer: ClassColoring): Map[MClass, Array[nullable MClass]] do
+	# Build class tables
+	fun build_class_typing_tables(mclasses: Set[MClass]): Map[MClass, Array[nullable MClass]] do
 		var tables = new HashMap[MClass, Array[nullable MClass]]
-
-		for mclasse in mclasses do
+		var layout = self.class_layout
+		for mclass in mclasses do
 			var table = new Array[nullable MClass]
 			var supers = new HashSet[MClass]
-			supers.add_all(colorer.super_elements(mclasse, mclasses))
-			supers.add(mclasse)
+			supers.add_all(self.mainmodule.super_mclasses(mclass))
+			supers.add(mclass)
 			for sup in supers do
-				var color = colors[sup]
+				var color: Int
+				if layout isa PHClassLayout then
+					color = layout.hashes[mclass][sup]
+				else
+					color = layout.pos[sup]
+				end
 				if table.length <= color then
 					for i in [table.length .. color[ do
 						table[i] = null
@@ -133,31 +114,7 @@ class SeparateErasureCompiler
 				end
 				table[color] = sup
 			end
-			tables[mclasse] = table
-		end
-		return tables
-	end
-
-	# Build type tables
-	fun hash_class_typing_tables(mtypes: Set[MClass], ids: Map[MClass, Int], masks: Map[MClass, Int], colorer: ClassPerfectHashing): Map[MClass, Array[nullable MClass]] do
-		var tables = new HashMap[MClass, Array[nullable MClass]]
-
-		for mtype in mtypes do
-			var table = new Array[nullable MClass]
-			var supers = new HashSet[MClass]
-			supers.add_all(colorer.super_elements(mtype, mtypes))
-			supers.add(mtype)
-
-			for sup in supers do
-				var color = colorer.phash(ids[sup], masks[mtype])
-				if table.length <= color then
-					for i in [table.length .. color[ do
-						table[i] = null
-					end
-				end
-				table[color] = sup
-			end
-			tables[mtype] = table
+			tables[mclass] = table
 		end
 		return tables
 	end
@@ -207,10 +164,15 @@ class SeparateErasureCompiler
 
 		# Build class vft
 		v.add_decl("const struct class_{c_name} class_{c_name} = \{")
-		v.add_decl("{self.class_ids[mclass]},")
+		v.add_decl("{self.class_layout.ids[mclass]},")
 		v.add_decl("\"{mclass.name}\", /* class_name_string */")
 		v.add_decl("{self.box_kind_of(mclass)}, /* box_kind */")
-		v.add_decl("{self.class_colors[mclass]},")
+		var layout = self.class_layout
+		if layout isa PHClassLayout then
+			v.add_decl("{layout.masks[mclass]},")
+		else
+			v.add_decl("{layout.pos[mclass]},")
+		end
 		if build_class_vts_table(mclass) then
 			v.add_decl("(const struct vts_table*) &vts_table_{c_name},")
 		else
@@ -247,7 +209,7 @@ class SeparateErasureCompiler
 			if msuper == null then
 				v.add_decl("-1, /* empty */")
 			else
-				v.add_decl("{self.class_ids[msuper]}, /* {msuper} */")
+				v.add_decl("{self.class_layout.ids[msuper]}, /* {msuper} */")
 			end
 		end
 		v.add_decl("\}")
