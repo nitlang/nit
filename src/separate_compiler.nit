@@ -106,10 +106,9 @@ class SeparateCompiler
 
 	private var undead_types: Set[MType] = new HashSet[MType]
 	private var partial_types: Set[MType] = new HashSet[MType]
-	protected var typeids: Map[MType, Int] protected writable = new HashMap[MType, Int]
 
 	private var type_layout_builder: TypeLayoutBuilder
-	private var type_colors: Map[MType, Int] = typeids
+	private var type_layout: nullable TypeLayout
 	private var type_tables: nullable Map[MType, Array[nullable MType]] = null
 
 	private var live_unanchored_types: Map[MClassDef, Set[MType]] = new HashMap[MClassDef, HashSet[MType]]
@@ -303,29 +302,24 @@ class SeparateCompiler
 		self.compile_unanchored_tables(mtypes)
 
 		# colorize types
-		var type_coloring = self.type_layout_builder
-		if type_coloring isa PHTypeLayoutBuilder then
-			var result = type_coloring.build_layout(mtypes)
-			self.typeids = result.ids
-			self.type_colors = result.masks
-			self.type_tables = self.hash_type_tables(mtypes, result.hashes)
+		var type_layout = self.type_layout_builder.build_layout(mtypes)
+		if type_layout isa PHTypeLayout then
+			self.type_tables = self.hash_type_tables(mtypes, type_layout.hashes)
 		else
-			var result = type_coloring.build_layout(mtypes)
-			self.typeids = result.ids
-			self.type_colors = result.pos
-			self.type_tables = self.build_type_tables(mtypes, type_colors, type_coloring)
+			self.type_tables = self.build_type_tables(mtypes, type_layout.pos)
 		end
+		self.type_layout = type_layout
 		return mtypes
 	end
 
 	# Build type tables
-	fun build_type_tables(mtypes: Set[MType], colors: Map[MType, Int], colorer: TypeLayoutBuilder): Map[MType, Array[nullable MType]] do
+	fun build_type_tables(mtypes: Set[MType], colors: Map[MType, Int]): Map[MType, Array[nullable MType]] do
 		var tables = new HashMap[MType, Array[nullable MType]]
 
 		for mtype in mtypes do
 			var table = new Array[nullable MType]
 			var supers = new HashSet[MType]
-			supers.add_all(colorer.mmodule.super_mtypes(mtype, mtypes))
+			supers.add_all(self.mainmodule.super_mtypes(mtype, mtypes))
 			supers.add(mtype)
 			for sup in supers do
 				var color = colors[sup]
@@ -493,9 +487,14 @@ class SeparateCompiler
 
 		# const struct type_X
 		v.add_decl("const struct type_{c_name} type_{c_name} = \{")
-		v.add_decl("{self.typeids[mtype]},")
+		v.add_decl("{self.type_layout.ids[mtype]},")
 		v.add_decl("\"{mtype}\", /* class_name_string */")
-		v.add_decl("{self.type_colors[mtype]},")
+		var layout = self.type_layout
+		if layout isa PHTypeLayout then
+			v.add_decl("{layout.masks[mtype]},")
+		else
+			v.add_decl("{layout.pos[mtype]},")
+		end
 		if mtype isa MNullableType then
 			v.add_decl("1,")
 		else
@@ -512,7 +511,7 @@ class SeparateCompiler
 			if stype == null then
 				v.add_decl("-1, /* empty */")
 			else
-				v.add_decl("{self.typeids[stype]}, /* {stype} */")
+				v.add_decl("{self.type_layout.ids[stype]}, /* {stype} */")
 			end
 		end
 		v.add_decl("\},")
@@ -555,7 +554,7 @@ class SeparateCompiler
 				else
 					ntype = ft.anchor_to(self.mainmodule, mclass_type)
 				end
-				if self.typeids.has_key(ntype) then
+				if self.type_layout.ids.has_key(ntype) then
 					v.add_decl("(struct type*)&type_{ntype.c_name}, /* {ft} ({ntype}) */")
 				else
 					v.add_decl("NULL, /* empty ({ft} not a live type) */")
@@ -621,7 +620,7 @@ class SeparateCompiler
 						abort
 					end
 
-					if self.typeids.has_key(bound) then
+					if self.type_layout.ids.has_key(bound) then
 						v.add_decl("(struct type*)&type_{is_nullable}{bound.c_name}, /* {bound} */")
 					else
 						v.add_decl("NULL, /* dead type {bound} */")
@@ -670,7 +669,7 @@ class SeparateCompiler
 				# the value stored is tv.
 				var tv = t.resolve_for(mclass_type, mclass_type, self.mainmodule, true)
 				# FIXME: What typeids means here? How can a tv not be live?
-				if self.typeids.has_key(tv) then
+				if self.type_layout.ids.has_key(tv) then
 					v.add_decl("(struct type*)&type_{tv.c_name}, /* {t}: {tv} */")
 				else
 					v.add_decl("NULL, /* empty ({t}: {tv} not a live type) */")
