@@ -73,6 +73,7 @@ redef class AModule
     init init_amodule (
             n_moduledecl: nullable AModuledecl,
             n_imports: Collection[Object], # Should be Collection[AImport]
+            n_extern_code_blocks: Collection[Object], # Should be Collection[AExternCodeBlock]
             n_classdefs: Collection[Object] # Should be Collection[AClassdef]
     )
     do
@@ -84,6 +85,11 @@ redef class AModule
 	for n in n_imports do
 		assert n isa AImport
 		_n_imports.add(n)
+		n.parent = self
+	end
+	for n in n_extern_code_blocks do
+		assert n isa AExternCodeBlock
+		_n_extern_code_blocks.add(n)
 		n.parent = self
 	end
 	for n in n_classdefs do
@@ -117,6 +123,18 @@ redef class AModule
                 return
             end
         end
+        for i in [0.._n_extern_code_blocks.length[ do
+            if _n_extern_code_blocks[i] == old_child then
+                if new_child != null then
+		    assert new_child isa AExternCodeBlock
+                    _n_extern_code_blocks[i] = new_child
+                    new_child.parent = self
+                else
+                    _n_extern_code_blocks.remove_at(i)
+                end
+                return
+            end
+        end
         for i in [0.._n_classdefs.length[ do
             if _n_classdefs[i] == old_child then
                 if new_child != null then
@@ -137,6 +155,9 @@ redef class AModule
             v.enter_visit(_n_moduledecl.as(not null))
         end
             for n in _n_imports do
+                v.enter_visit(n)
+	    end
+            for n in _n_extern_code_blocks do
                 v.enter_visit(n)
 	    end
             for n in _n_classdefs do
@@ -444,6 +465,7 @@ redef class AStdClassdef
             n_classkind: nullable AClasskind,
             n_id: nullable TClassid,
             n_formaldefs: Collection[Object], # Should be Collection[AFormaldef]
+            n_extern_code_block: nullable AExternCodeBlock,
             n_superclasses: Collection[Object], # Should be Collection[ASuperclass]
             n_propdefs: Collection[Object], # Should be Collection[APropdef]
             n_kwend: nullable TKwend
@@ -470,6 +492,10 @@ redef class AStdClassdef
 		assert n isa AFormaldef
 		_n_formaldefs.add(n)
 		n.parent = self
+	end
+        _n_extern_code_block = n_extern_code_block
+	if n_extern_code_block != null then
+		n_extern_code_block.parent = self
 	end
 	for n in n_superclasses do
 		assert n isa ASuperclass
@@ -549,6 +575,16 @@ redef class AStdClassdef
                 return
             end
         end
+        if _n_extern_code_block == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa AExternCodeBlock
+                _n_extern_code_block = new_child
+	    else
+		_n_extern_code_block = null
+            end
+            return
+	end
         for i in [0.._n_superclasses.length[ do
             if _n_superclasses[i] == old_child then
                 if new_child != null then
@@ -601,6 +637,9 @@ redef class AStdClassdef
             for n in _n_formaldefs do
                 v.enter_visit(n)
 	    end
+        if _n_extern_code_block != null then
+            v.enter_visit(_n_extern_code_block.as(not null))
+        end
             for n in _n_superclasses do
                 v.enter_visit(n)
 	    end
@@ -1484,7 +1523,8 @@ redef class AExternMethPropdef
             n_methid: nullable AMethid,
             n_signature: nullable ASignature,
             n_extern: nullable TString,
-            n_extern_calls: nullable AExternCalls
+            n_extern_calls: nullable AExternCalls,
+            n_extern_code_block: nullable AExternCodeBlock
     )
     do
         empty_init
@@ -1511,6 +1551,10 @@ redef class AExternMethPropdef
         _n_extern_calls = n_extern_calls
 	if n_extern_calls != null then
 		n_extern_calls.parent = self
+	end
+        _n_extern_code_block = n_extern_code_block
+	if n_extern_code_block != null then
+		n_extern_code_block.parent = self
 	end
     end
 
@@ -1596,6 +1640,16 @@ redef class AExternMethPropdef
             end
             return
 	end
+        if _n_extern_code_block == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa AExternCodeBlock
+                _n_extern_code_block = new_child
+	    else
+		_n_extern_code_block = null
+            end
+            return
+	end
     end
 
     redef fun visit_all(v: Visitor)
@@ -1615,6 +1669,9 @@ redef class AExternMethPropdef
         end
         if _n_extern_calls != null then
             v.enter_visit(_n_extern_calls.as(not null))
+        end
+        if _n_extern_code_block != null then
+            v.enter_visit(_n_extern_code_block.as(not null))
         end
     end
 end
@@ -1887,7 +1944,8 @@ redef class AExternInitPropdef
             n_methid: nullable AMethid,
             n_signature: nullable ASignature,
             n_extern: nullable TString,
-            n_extern_calls: nullable AExternCalls
+            n_extern_calls: nullable AExternCalls,
+            n_extern_code_block: nullable AExternCodeBlock
     )
     do
         empty_init
@@ -1916,6 +1974,10 @@ redef class AExternInitPropdef
         _n_extern_calls = n_extern_calls
 	if n_extern_calls != null then
 		n_extern_calls.parent = self
+	end
+        _n_extern_code_block = n_extern_code_block
+	if n_extern_code_block != null then
+		n_extern_code_block.parent = self
 	end
     end
 
@@ -2001,6 +2063,16 @@ redef class AExternInitPropdef
             end
             return
 	end
+        if _n_extern_code_block == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa AExternCodeBlock
+                _n_extern_code_block = new_child
+	    else
+		_n_extern_code_block = null
+            end
+            return
+	end
     end
 
     redef fun visit_all(v: Visitor)
@@ -2022,6 +2094,9 @@ redef class AExternInitPropdef
         end
         if _n_extern_calls != null then
             v.enter_visit(_n_extern_calls.as(not null))
+        end
+        if _n_extern_code_block != null then
+            v.enter_visit(_n_extern_code_block.as(not null))
         end
     end
 end
@@ -8322,6 +8397,100 @@ redef class AAsNotNullableExternCall
         v.enter_visit(_n_kwas)
         v.enter_visit(_n_kwnot)
         v.enter_visit(_n_kwnullable)
+    end
+end
+redef class AInLanguage
+    private init empty_init do end
+
+    init init_ainlanguage (
+            n_kwin: nullable TKwin,
+            n_string: nullable TString
+    )
+    do
+        empty_init
+        _n_kwin = n_kwin.as(not null)
+	n_kwin.parent = self
+        _n_string = n_string.as(not null)
+	n_string.parent = self
+    end
+
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+    do
+        if _n_kwin == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TKwin
+                _n_kwin = new_child
+	    else
+		abort
+            end
+            return
+	end
+        if _n_string == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TString
+                _n_string = new_child
+	    else
+		abort
+            end
+            return
+	end
+    end
+
+    redef fun visit_all(v: Visitor)
+    do
+        v.enter_visit(_n_kwin)
+        v.enter_visit(_n_string)
+    end
+end
+redef class AExternCodeBlock
+    private init empty_init do end
+
+    init init_aexterncodeblock (
+            n_in_language: nullable AInLanguage,
+            n_extern_code_segment: nullable TExternCodeSegment
+    )
+    do
+        empty_init
+        _n_in_language = n_in_language
+	if n_in_language != null then
+		n_in_language.parent = self
+	end
+        _n_extern_code_segment = n_extern_code_segment.as(not null)
+	n_extern_code_segment.parent = self
+    end
+
+    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+    do
+        if _n_in_language == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa AInLanguage
+                _n_in_language = new_child
+	    else
+		_n_in_language = null
+            end
+            return
+	end
+        if _n_extern_code_segment == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TExternCodeSegment
+                _n_extern_code_segment = new_child
+	    else
+		abort
+            end
+            return
+	end
+    end
+
+    redef fun visit_all(v: Visitor)
+    do
+        if _n_in_language != null then
+            v.enter_visit(_n_in_language.as(not null))
+        end
+        v.enter_visit(_n_extern_code_segment)
     end
 end
 redef class AQualified

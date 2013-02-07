@@ -25,6 +25,7 @@ import compiling
 import syntax
 import native_interface
 import separate_options
+import ffi
 
 # The main class of the nitcompiler program
 class NitCompiler

@@ -4,6 +4,7 @@ init_linext
 inline
 test_extern
 test_ni_
+test_ffi_
 nitc
 nitdoc
 nits

@@ -16,6 +16,13 @@
 #include <stdarg.h>
 #include "gc.h"
 
+#ifdef ANDROID
+	#include <android/log.h>
+	#define PRINT_ERROR(...) ((void)__android_log_print(ANDROID_LOG_WARN, "nit", __VA_ARGS__))
+#else
+	#define PRINT_ERROR(...) ((void)fprintf(stderr, __VA_ARGS__))
+#endif
+
 bigint object_id_counter = 1000000;
 enum gc_option { large, gc_opt_malloc, boehm, nitgc } gc_option;
 
@@ -76,7 +83,7 @@ char **glob_argv;
 val_t G_sys;
 
 void exithandler(int s) {
-	fprintf(stderr, "Recieved signal %d\n", s);
+	PRINT_ERROR( "Recieved signal %d\n", s);
 	nit_exit(1);
 }
 void initialize_gc_option(void) {
@@ -92,7 +99,7 @@ void initialize_gc_option(void) {
 #ifdef WITH_LIBGC
 			gc_option = boehm;
 #else
-		fprintf(stderr, "Compiled without Boehm GC support. Using default '%s'.\n", def);
+		PRINT_ERROR( "Compiled without Boehm GC support. Using default '%s'.\n", def);
 #endif
 		} else if (strcmp(opt, "nitgc")==0) {
 			gc_option = nitgc;
@@ -101,14 +108,14 @@ void initialize_gc_option(void) {
 		} else if (strcmp(opt, "large")==0) {
 			gc_option = large;
 		} else if (strcmp(opt, "help")==0) {
-			fprintf(stderr, "NIT_GC_OPTION accepts 'nitgc'"
+			PRINT_ERROR( "NIT_GC_OPTION accepts 'nitgc'"
 #ifdef WITH_LIBGC
 					", 'boehm'"
 #endif
 					", 'large', 'malloc'. Default is '%s'.\n", def);
 			exit(1);
 		} else {
-			fprintf(stderr, "Invalid GC option in NIT_GC_OPTION environment variable. Using default '%s'.\n", def);
+			PRINT_ERROR( "Invalid GC option in NIT_GC_OPTION environment variable. Using default '%s'.\n", def);
 		}
 	}
 
@@ -139,23 +146,23 @@ struct stack_frame_t *stack_frame_head = NULL;
 void nit_exit(int i) {
 	char *opt=getenv("NIT_NO_STACK");
 	if (opt == NULL || strcmp(opt, "0")==0) {
-		fprintf(stderr, ",---- Stack trace -- - -  -\n");
+		PRINT_ERROR( ",---- Stack trace -- - -  -\n");
 		while(stack_frame_head != NULL) {
-			fprintf(stderr, "| %s (%s:%d)\n", stack_frame_head->meth, stack_frame_head->file, stack_frame_head->line);
+			PRINT_ERROR( "| %s (%s:%d)\n", stack_frame_head->meth, stack_frame_head->file, stack_frame_head->line);
 			if (stack_frame_head == stack_frame_head->prev) break;
 			stack_frame_head = stack_frame_head->prev;
 		}
-		fprintf(stderr, "`------------------- - -  -\n");
+		PRINT_ERROR( "`------------------- - -  -\n");
 	}
 	exit(i);
 }
 
 void nit_abort(const char* s, const char* msg, const char* loc, int line) {
-	fprintf(stderr, "Runtime error: ");
-	fprintf(stderr, s, msg);
-	fprintf(stderr, " (%s", loc);
-	if (line != 0) fprintf(stderr, ":%d", line);
-	fprintf(stderr, ")\n");
+	PRINT_ERROR( "Runtime error: ");
+	PRINT_ERROR( s, msg);
+	PRINT_ERROR( " (%s", loc);
+	if (line != 0) PRINT_ERROR( ":%d", line);
+	PRINT_ERROR( ")\n");
 	nit_exit(1);
 }
 

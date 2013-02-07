@@ -40,6 +40,12 @@ str_char
 	;
 str_body = str_char*;
 
+extern_code_char
+	= [all - ['`' + '\']]
+	| '\' all
+	;
+extern_code_body = extern_code_char*;
+
 eol_helper = cr lf | cr | lf; // This takes care of different platforms
 
 /*****************************************************************************/
@@ -151,6 +157,7 @@ end_string = '}' str_body '"';
 bad_char = ''' '\'? any;
 bad_string = ('"'|'}') str_body;
 
+extern_code_segment = '`' '{' extern_code_body '`' '}';
 
 /*****************************************************************************/
 Ignored Tokens
@@ -164,7 +171,7 @@ Productions
 
 /* MODULES *******************************************************************/
 module
-	= moduledecl? [imports]:import* [classdefs]:classdef* implicit_top_class? implicit_main_class? {-> New module(moduledecl, [imports.import],[classdefs.classdef,implicit_top_class.classdef,implicit_main_class.classdef])};
+	= moduledecl? [imports]:import* [extern_bodies]:extern_code_body* [classdefs]:classdef* implicit_top_class? implicit_main_class? {-> New module(moduledecl, [imports.import], [extern_bodies.extern_code_block], [classdefs.classdef,implicit_top_class.classdef,implicit_main_class.classdef])};
 
 moduledecl
 	= [doc]:no kwmodule no module_name [n2]:n1 {-> New moduledecl(doc.doc, kwmodule, module_name)};
@@ -188,7 +195,7 @@ implicit_main_meth {-> propdef}
 
 /* CLASSES *******************************************************************/
 classdef
-	= [doc]:no redef visibility classkind no classid formaldefs? [specials]:special* propdefs* [n2]:no kwend {-> New classdef.std(doc.doc, redef.kwredef, visibility, classkind, classid, [formaldefs.formaldef], [specials.superclass], [propdefs.propdef], kwend)};
+	= [doc]:no redef visibility classkind no classid formaldefs? extern_code_block? [specials]:special* propdefs* [n2]:no kwend {-> New classdef.std(doc.doc, redef.kwredef, visibility, classkind, classid, [formaldefs.formaldef], extern_code_block, [specials.superclass], [propdefs.propdef], kwend)};
 redef {-> kwredef?}
 	= kwredef? {-> kwredef};
 classkind
@@ -219,14 +226,16 @@ propdef~toplevel {-> propdef}
 	| {assign_return} [doc]:no redef visibility kwmeth methid signature_withret assign no assign_return {-> New propdef.concrete_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature_withret.signature, assign_return.expr)}
 !toplevel| {deferred} [doc]:no redef visibility kwmeth methid signature kwis kwabstract {-> New propdef.deferred_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature.signature)}
 !toplevel| {intern} [doc]:no redef visibility kwmeth methid signature kwis kwintern {-> New propdef.intern_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature.signature)}
-	| {extern} [doc]:no redef visibility kwmeth methid signature kwis kwextern string? extern_calls? {-> New propdef.extern_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature.signature, string, extern_calls)}
+	| {extern} [doc]:no redef visibility kwmeth methid signature kwis kwextern string? extern_calls? extern_code_block? {-> New propdef.extern_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature.signature, string, extern_calls, extern_code_block)}
+	| {extern_implicit} [doc]:no redef visibility kwmeth methid signature extern_calls? extern_code_block {-> New propdef.extern_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature.signature, Null, extern_calls, extern_code_block)}
 !toplevel| {var} [doc]:no readable? writable? redef visibility kwvar attrid typing? {-> New propdef.attr(doc.doc, readable.able, writable.able, redef.kwredef, visibility, kwvar, attrid, Null, typing.type, Null)}
 !toplevel| {var2} [doc]:no readable? writable? redef visibility kwvar attrid typing? assign [n2]:no expr {-> New propdef.attr(doc.doc, readable.able, writable.able, redef.kwredef, visibility, kwvar, attrid, Null, typing.type, expr)}
 !toplevel| {var3} [doc]:no redef visibility kwvar id typing? writable2? {-> New propdef.attr(doc.doc, Null, writable2.able, redef.kwredef, visibility, kwvar, Null, id, typing.type, Null)}
 !toplevel| {var4} [doc]:no redef visibility kwvar id typing? writable2? assign [n2]:no expr {-> New propdef.attr(doc.doc, Null, writable2.able, redef.kwredef, visibility, kwvar, Null, id, typing.type, expr)}
 !toplevel| {init} [doc]:no redef visibility kwinit methid? signature kwdo stmtso kwend? {-> New propdef.concrete_init(doc.doc, redef.kwredef, visibility, kwinit, methid, signature, stmtso.expr)}
 !toplevel| {type} [doc]:no redef visibility kwtype classid typing {-> New propdef.type(doc.doc, redef.kwredef, visibility, kwtype, classid, typing.type)}
-!toplevel| {extern_init} [doc]:no redef visibility kwnew methid? signature kwis kwextern string? extern_calls? {-> New propdef.extern_init(doc.doc, redef.kwredef, visibility, kwnew, methid, signature, string, extern_calls)}
+!toplevel| {extern_init} [doc]:no redef visibility kwnew methid? signature kwis kwextern string? extern_calls? extern_code_block? {-> New propdef.extern_init(doc.doc, redef.kwredef, visibility, kwnew, methid, signature, string, extern_calls, extern_code_block)}
+!toplevel| {extern_init_implicit} [doc]:no redef visibility kwnew methid? signature string? extern_calls? extern_code_block {-> New propdef.extern_init(doc.doc, redef.kwredef, visibility, kwnew, methid, signature, string, extern_calls, extern_code_block)}
 	;
 readable {-> able}
 	= redef kwreadable {-> New able.read(redef.kwredef, kwreadable)}
@@ -321,6 +330,9 @@ extern_call_cast {-> extern_call}
 	| {as_not_nullable} type kwas [n2]:no kwnot [n3]:no kwnullable {-> New extern_call.as_not_nullable( type, kwas, kwnot, kwnullable)}
 	;
 
+in_language = kwin string;
+extern_code_block = in_language? extern_code_segment;
+extern_code_body {-> extern_code_block} = no extern_code_block {-> extern_code_block};
 
 /* TYPES *********************************************************************/
 type~nobra {-> type}
@@ -618,7 +630,7 @@ n2
 Abstract Syntax Tree
 /*****************************************************************************/
 
-module	= moduledecl? [imports]:import* [classdefs]:classdef*;
+module	= moduledecl? [imports]:import* [extern_code_blocks]:extern_code_block* [classdefs]:classdef*;
 
 moduledecl
 	= doc? kwmodule [name]:module_name;
@@ -634,7 +646,7 @@ visibility
 	| {intrude} kwintrude
 	;
 
-classdef= {std} doc? kwredef? visibility classkind [id]:classid? [formaldefs]:formaldef* [superclasses]:superclass* [propdefs]:propdef* kwend
+classdef= {std} doc? kwredef? visibility classkind [id]:classid? [formaldefs]:formaldef* extern_code_block? [superclasses]:superclass* [propdefs]:propdef* kwend
 	| {top} [propdefs]:propdef*
 	| {main} [propdefs]:propdef*
 	;
@@ -650,13 +662,13 @@ superclass = kwspecial? kwsuper? type;
 
 
 propdef = {attr} doc? [readable]:able? [writable]:able? kwredef? visibility kwvar [id]:attrid? [id2]:id? type? expr?
-	| {meth} doc? kwredef? visibility methid signature 
-	| {deferred_meth} doc? kwredef? visibility kwmeth methid signature 
-	| {intern_meth} doc? kwredef? visibility kwmeth methid signature 
-	| {extern_meth} doc? kwredef? visibility kwmeth methid signature [extern]:string? extern_calls?
+	| {meth} doc? kwredef? visibility methid signature
+	| {deferred_meth} doc? kwredef? visibility kwmeth methid signature
+	| {intern_meth} doc? kwredef? visibility kwmeth methid signature
+	| {extern_meth} doc? kwredef? visibility kwmeth methid signature [extern]:string? extern_calls? extern_code_block?
 	| {concrete_meth} doc? kwredef? visibility kwmeth methid signature [block]:expr?
 	| {concrete_init} doc? kwredef? visibility kwinit methid? signature [block]:expr?
-	| {extern_init} doc? kwredef? visibility kwnew methid? signature [extern]:string? extern_calls?
+	| {extern_init} doc? kwredef? visibility kwnew methid? signature [extern]:string? extern_calls? extern_code_block?
 	| {main_meth} kwredef? [block]:expr?
 	| {type} doc? kwredef? visibility kwtype [id]:classid type
 	;
@@ -785,6 +797,8 @@ extern_call =
 	| {as_nullable} type kwas kwnullable
 	| {as_not_nullable} type kwas kwnot kwnullable
 	;
+in_language = kwin string;
+extern_code_block = in_language? extern_code_segment;
 
 qualified = id* classid? ;
 

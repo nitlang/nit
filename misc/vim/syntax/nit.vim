@@ -18,8 +18,14 @@
 " See the License for the specific language governing permissions and
 " limitations under the License.
 
-if exists("b:current_syntax")
-	finish
+if !exists("main_syntax")
+  if version < 600
+    syntax clear
+  elseif exists("b:current_syntax")
+    finish
+  endif
+  " we define it here so that included files can test for it
+  let main_syntax='nit'
 endif
 
 " Expression Substitution and Backslash Notation
@@ -53,7 +59,7 @@ syn match Error "\<end\>"
 
 " Declarations, definitions and blocks
 syn region NITModuleDecl matchgroup=NITDefine start="\<\(import\|module\|package\)\>\s*" matchgroup=NONE end="\ze\(\s\|:\|(\|$\)"  oneline
-syn region NITClassBlock matchgroup=NITDefine start="\<\(class\|enum\|universal\|interface\)\>" matchgroup=NITDefine end="\<end\>" contains=ALL fold
+syn region NITClassBlock matchgroup=NITDefine start="\<\(class\|enum\|universal\|interface\|extern\)\>" matchgroup=NITDefine end="\<end\>" contains=ALL fold
 syn region NITFunctionDecl matchgroup=NITDefine start="\<fun\>\s*" matchgroup=NONE end="\ze\(\<do\>\|\s\|:\|(\|$\)"  oneline
 syn region NITTypeDecl matchgroup=NITDefine start="\<type\>\s*" matchgroup=NONE end="\ze\(\<do\>\|\s\|:\|(\|$\)"  oneline contained containedin=NITClassBlock
 syn region NITAttrDecl matchgroup=NITDefine start="\<var\>\s*\ze_" matchgroup=NONE end="\ze\(\<do\>\|\s\|:\|(\|$\)"  oneline contained containedin=NITClassBlock
@@ -73,7 +79,7 @@ syn match  NITSharpBang	"\%^#!.*"
 syn match  NITComment	"#.*" contains=NITTodo
 
 " Keywords
-syn keyword NITKeyword	 is abstract intern extern new
+syn keyword NITKeyword	 is abstract intern new
 syn keyword NITDefine	 private public protected intrude readable writable redef
 syn keyword NITControl   if while for assert and or in as isa once break continue return abort
 syn keyword NITClass     nullable
@@ -109,5 +115,22 @@ hi def link NITExprSubstError		Error
 
 hi def link NITComment			Comment
 hi def link NITTodo			Todo
+
+" FFI Section
+syn match NITFFIDelimiters "\<\(`{\|`}\)\>"
+hi def link NITFFIDelimiters		Keyword
+" FFI Python
+syntax include @FFIPython syntax/python.vim
+unlet b:current_syntax
+syn match NITFFILanguage	'"Python"' nextgroup=NITFFIBlockPython skipwhite
+syn region NITFFIBlockPython matchgroup=NITFFI start='`{' matchgroup=NITFFI end='`}' keepend fold contains=@FFIPython
+
+" FFI C (the last one is the default)
+syntax include @FFIC syntax/c.vim
+unlet b:current_syntax
+syn match NITFFILanguage		'"C\(\| header\| body\)"'	nextgroup=NITFFIBlockC skipwhite
+syn region NITFFIBlockC matchgroup=NITFFI start='`{' matchgroup=NITFFI end='`}' keepend fold contains=@FFIC
+
+hi def link NITFFILanguage		Define
 
 let b:current_syntax = "Nit"

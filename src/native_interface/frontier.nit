@@ -146,6 +146,9 @@ redef class MMSrcModule
 			v.body.add( "#include \"{path}\"\n" )
 			v.header.add( "#include \"{path}\"\n" )
 		end
+		if uses_ffi then
+			v.header.add( "#include <{cname}._ffi.h>\n" )
+		end
 
 		for local_class in local_classes do
 			### extern methods
@@ -157,14 +160,9 @@ redef class MMSrcModule
 					prop.compile_extern_to_frontier( v )
 				end
 			end
-
-			### extern classes
-			# if class is extern and defined here first
-			if local_class.global.intro == local_class and
-			   local_class.global.is_extern then
-				local_class.compile_defaut_extern_type( v )
-			end
 		end
+
+		v.compile_cached
 
 		v.header.add( "#endif\n" )
 	end
@@ -325,17 +323,6 @@ redef class MMSrcMethod
 
 end
 
-redef class MMLocalClass
-	# Defines a defaut type for special of pointers in frontier.
-	# Can be overriden in the custime .nit.h file, as seen with nits.
-	fun compile_defaut_extern_type( v : FrontierVisitor )
-	do
-		v.header.add( "#ifndef {get_type.friendly_extern_name}\n" )
-		v.header.add( "\ttypedef void* {get_type.friendly_extern_name};\n" )
-		v.header.add( "#endif\n\n" )
-	end
-end
-
 redef class MMSignature
 	var recv_ni_variable : ReceiverVariable
 	var return_ni_variable : nullable ReturnVariable
@@ -392,6 +379,7 @@ class FrontierVisitor
 
 	var cprogram : CProgram
 
+	# compiles cached types and callbacks
 	fun compile_cached
 	do
 		# types

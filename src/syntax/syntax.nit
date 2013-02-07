@@ -22,6 +22,8 @@ import mmloader
 import mmbuilder
 import typing
 import icode_generation
+import extern_inline
+import extern_type_inheritance
 
 # Loader of nit source files
 class SrcModuleLoader
