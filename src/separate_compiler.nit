@@ -117,15 +117,11 @@ class SeparateCompiler
 	private var unanchored_types_tables: nullable Map[MClassType, Array[nullable MType]]
 	private var unanchored_types_masks: nullable Map[MClassType, Int]
 
-	protected var method_colors: Map[MMethod, Int]
+	protected var method_layout: nullable PropertyLayout[MMethod]
 	protected var method_tables: Map[MClass, Array[nullable MPropDef]]
 
-	protected var attr_colors: Map[MAttribute, Int]
+	protected var attr_layout: nullable PropertyLayout[MAttribute]
 	protected var attr_tables: Map[MClass, Array[nullable MPropDef]]
-
-	protected var vt_colors: Map[MVirtualTypeProp, Int]
-	protected var vt_tables: Map[MClass, Array[nullable MPropDef]]
-	protected var vt_masks: nullable Map[MClass, Int]
 
 	init(mainmodule: MModule, mmbuilder: ModelBuilder, runtime_type_analysis: RapidTypeAnalysis) do
 		super
@@ -211,6 +207,7 @@ class SeparateCompiler
 
 	fun compile_color_consts(colors: Map[Object, Int]) do
 		for m, c in colors do
+			if color_consts_done.has(m) then continue
 			if m isa MProperty then
 				if modelbuilder.toolcontext.opt_inline_coloring_numbers.value then
 					self.header.add_decl("#define {m.const_color} {c}")
@@ -226,8 +223,11 @@ class SeparateCompiler
 					self.header.add("const int {m.const_color} = {c};")
 				end
 			end
+			color_consts_done.add(m)
 		end
 	end
+
+	private var color_consts_done = new HashSet[Object]
 
 	# colorize classe properties
 	fun do_property_coloring do
@@ -238,51 +238,31 @@ class SeparateCompiler
 		class_coloring.colorize(mclasses)
 
 		# methods coloration
-		var method_coloring = new MethodColoring(mainmodule, class_coloring)
-		self.method_colors = method_coloring.colorize
-		self.method_tables = build_property_tables(method_coloring, class_coloring)
-		self.compile_color_consts(self.method_colors)
+		var method_coloring = new CLPropertyLayoutBuilder[MMethod](mainmodule)
+		var method_layout = method_coloring.build_layout(mclasses)
+		self.method_tables = build_method_tables(mclasses, method_layout)
+		self.compile_color_consts(method_layout.pos)
+		self.method_layout = method_layout
 
 		# attributes coloration
-		var attribute_coloring = new AttributeColoring(mainmodule, class_coloring)
-		self.attr_colors = attribute_coloring.colorize
-		self.attr_tables = build_property_tables(method_coloring, class_coloring)
-		self.compile_color_consts(self.attr_colors)
-
-		# vt coloration
-		if modelbuilder.toolcontext.opt_bm_typing.value then
-			var vt_coloring = new NaiveVTColoring(mainmodule, class_coloring)
-			self.vt_colors = vt_coloring.colorize
-			self.vt_tables = build_property_tables(vt_coloring, class_coloring)
-		else if modelbuilder.toolcontext.opt_phmod_typing.value then
-			var vt_coloring = new VTModPerfectHashing(mainmodule, class_coloring)
-			self.vt_colors = vt_coloring.colorize
-			self.vt_masks = vt_coloring.compute_masks
-			self.vt_tables = build_property_tables(vt_coloring, class_coloring)
-		else if modelbuilder.toolcontext.opt_phand_typing.value then
-			var vt_coloring = new VTAndPerfectHashing(mainmodule, class_coloring)
-			self.vt_colors = vt_coloring.colorize
-			self.vt_masks = vt_coloring.compute_masks
-			self.vt_tables = build_property_tables(vt_coloring, class_coloring)
-		else
-			var vt_coloring = new VTColoring(mainmodule, class_coloring)
-			self.vt_colors = vt_coloring.colorize
-			self.vt_tables = build_property_tables(vt_coloring, class_coloring)
-		end
-		self.compile_color_consts(self.vt_colors)
+		var attribute_coloring = new CLPropertyLayoutBuilder[MAttribute](mainmodule)
+		var attr_layout = attribute_coloring.build_layout(mclasses)
+		self.attr_tables = build_attr_tables(mclasses, attr_layout)
+		self.compile_color_consts(attr_layout.pos)
+		self.attr_layout = attr_layout
 	end
 
-	fun build_property_tables(prop_coloring: PropertyColoring, class_coloring: ClassColoring): Map[MClass, Array[nullable MPropDef]] do
+	fun build_method_tables(mclasses: Set[MClass], layout: PropertyLayout[MProperty]): Map[MClass, Array[nullable MPropDef]] do
 		var tables = new HashMap[MClass, Array[nullable MPropDef]]
-		var mclasses = class_coloring.coloration_result.keys
 		for mclass in mclasses do
 			var table = new Array[nullable MPropDef]
 			# first, fill table from parents by reverse linearization order
-			var parents = class_coloring.mmodule.super_mclasses(mclass)
-			var lin = class_coloring.reverse_linearize(parents)
+			var parents = self.mainmodule.super_mclasses(mclass)
+			var lin = self.mainmodule.reverse_linearize_mclasses(parents)
 			for parent in lin do
-				for mproperty in prop_coloring.properties(parent) do
-					var color = prop_coloring.coloration_result[mproperty]
+				for mproperty in self.mainmodule.properties(parent) do
+					if not mproperty isa MMethod then continue
+					var color = layout.pos[mproperty]
 					if table.length <= color then
 						for i in [table.length .. color[ do
 							table[i] = null
@@ -297,8 +277,53 @@ class SeparateCompiler
 			end
 
 			# then override with local properties
-			for mproperty in prop_coloring.properties(mclass) do
-				var color = prop_coloring.coloration_result[mproperty]
+			for mproperty in self.mainmodule.properties(mclass) do
+				if not mproperty isa MMethod then continue
+				var color = layout.pos[mproperty]
+				if table.length <= color then
+					for i in [table.length .. color[ do
+						table[i] = null
+					end
+				end
+				for mpropdef in mproperty.mpropdefs do
+					if mpropdef.mclassdef.mclass == mclass then
+						table[color] = mpropdef
+					end
+				end
+			end
+			tables[mclass] = table
+		end
+		return tables
+	end
+
+	fun build_attr_tables(mclasses: Set[MClass], layout: PropertyLayout[MProperty]): Map[MClass, Array[nullable MPropDef]] do
+		var tables = new HashMap[MClass, Array[nullable MPropDef]]
+		for mclass in mclasses do
+			var table = new Array[nullable MPropDef]
+			# first, fill table from parents by reverse linearization order
+			var parents = self.mainmodule.super_mclasses(mclass)
+			var lin = self.mainmodule.reverse_linearize_mclasses(parents)
+			for parent in lin do
+				for mproperty in self.mainmodule.properties(parent) do
+					if not mproperty isa MAttribute then continue
+					var color = layout.pos[mproperty]
+					if table.length <= color then
+						for i in [table.length .. color[ do
+							table[i] = null
+						end
+					end
+					for mpropdef in mproperty.mpropdefs do
+						if mpropdef.mclassdef.mclass == parent then
+							table[color] = mpropdef
+						end
+					end
+				end
+			end
+
+			# then override with local properties
+			for mproperty in self.mainmodule.properties(mclass) do
+				if not mproperty isa MAttribute then continue
+				var color = layout.pos[mproperty]
 				if table.length <= color then
 					for i in [table.length .. color[ do
 						table[i] = null
@@ -450,9 +475,9 @@ class SeparateCompiler
 		end
 
 		# add virtual types to mtypes
-		for vt in self.vt_tables[mclass_type.mclass] do
-			if vt != null then
-				var anchored = vt.as(MVirtualTypeDef).bound.anchor_to(self.mainmodule, mclass_type)
+		for vt in self.mainmodule.properties(mclass_type.mclass) do
+			if vt isa MVirtualTypeProp then
+				var anchored = vt.mvirtualtype.lookup_bound(self.mainmodule, mclass_type).anchor_to(self.mainmodule, mclass_type)
 				self.partial_types.add(anchored)
 			end
 		end

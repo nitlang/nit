@@ -70,6 +70,9 @@ class SeparateErasureCompiler
 	private var class_layout: nullable TypingLayout[MClass]
 	private var class_tables: Map[MClass, Array[nullable MClass]]
 
+	protected var vt_layout: nullable PropertyLayout[MVirtualTypeProp]
+	protected var vt_tables: Map[MClass, Array[nullable MPropDef]]
+
 	init(mainmodule: MModule, mmbuilder: ModelBuilder, runtime_type_analysis: RapidTypeAnalysis) do
 		super
 
@@ -89,6 +92,57 @@ class SeparateErasureCompiler
 		end
 		self.class_layout = layout_builder.build_layout(mclasses)
 		self.class_tables = self.build_class_typing_tables(mclasses)
+
+		# vt coloration
+		var vt_coloring = new CLPropertyLayoutBuilder[MVirtualTypeProp](mainmodule)
+		var vt_layout = vt_coloring.build_layout(mclasses)
+		self.vt_tables = build_vt_tables(mclasses, vt_layout)
+		self.compile_color_consts(vt_layout.pos)
+		self.vt_layout = vt_layout
+	end
+
+	fun build_vt_tables(mclasses: Set[MClass], layout: PropertyLayout[MProperty]): Map[MClass, Array[nullable MPropDef]] do
+		var tables = new HashMap[MClass, Array[nullable MPropDef]]
+		for mclass in mclasses do
+			var table = new Array[nullable MPropDef]
+			# first, fill table from parents by reverse linearization order
+			var parents = self.mainmodule.super_mclasses(mclass)
+			var lin = self.mainmodule.reverse_linearize_mclasses(parents)
+			for parent in lin do
+				for mproperty in self.mainmodule.properties(parent) do
+					if not mproperty isa MVirtualTypeProp then continue
+					var color = layout.pos[mproperty]
+					if table.length <= color then
+						for i in [table.length .. color[ do
+							table[i] = null
+						end
+					end
+					for mpropdef in mproperty.mpropdefs do
+						if mpropdef.mclassdef.mclass == parent then
+							table[color] = mpropdef
+						end
+					end
+				end
+			end
+
+			# then override with local properties
+			for mproperty in self.mainmodule.properties(mclass) do
+				if not mproperty isa MVirtualTypeProp then continue
+				var color = layout.pos[mproperty]
+				if table.length <= color then
+					for i in [table.length .. color[ do
+						table[i] = null
+					end
+				end
+				for mpropdef in mproperty.mpropdefs do
+					if mpropdef.mclassdef.mclass == mclass then
+						table[color] = mpropdef
+					end
+				end
+			end
+			tables[mclass] = table
+		end
+		return tables
 	end
 
 	# Build class tables
@@ -287,9 +341,10 @@ class SeparateErasureCompiler
 
 		var v = new_visitor
 		v.add_decl("const struct vts_table_{mclass.c_name} vts_table_{mclass.c_name} = \{")
-		if modelbuilder.toolcontext.opt_phmod_typing.value or modelbuilder.toolcontext.opt_phand_typing.value then
-			v.add_decl("{vt_masks[mclass]},")
-		end
+		#TODO redo this once PHMPropertyLayoutBuilder will be implemented
+		#if modelbuilder.toolcontext.opt_phmod_typing.value or modelbuilder.toolcontext.opt_phand_typing.value then
+			#v.add_decl("{vt_masks[mclass]},")
+		#end
 		v.add_decl("\{")
 
 		for vt in self.vt_tables[mclass] do
