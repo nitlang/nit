@@ -19,41 +19,26 @@ import typing
 
 # Layouts
 
-class TypeLayout
-	# Unic ids or each Mtype
-	var ids: Map[MType, Int] = new HashMap[MType, Int]
-	# Fixed positions of each MType in all tables
-	var pos: Map[MType, Int] = new HashMap[MType, Int]
+class TypingLayout[E]
+	# Unic ids or each element
+	var ids: Map[E, Int] = new HashMap[E, Int]
+	# Fixed positions of each element in all tables
+	var pos: Map[E, Int] = new HashMap[E, Int]
 end
 
-class PHTypeLayout
-	super TypeLayout
+class PHTypingLayout[E]
+	super TypingLayout[E]
 	# Masks used by hash function
-	var masks: Map[MType, Int] = new HashMap[MType, Int]
-	# Positions of each MType for each tables
-	var hashes: Map[MType, Map[MType, Int]] = new HashMap[MType, Map[MType, Int]]
-end
-
-class ClassLayout
-	# Unic ids or each MClass
-	var ids: Map[MClass, Int] = new HashMap[MClass, Int]
-	# Fixed positions of each MClass in all tables
-	var pos: Map[MClass, Int] = new HashMap[MClass, Int]
-end
-
-class PHClassLayout
-	super ClassLayout
-	# Masks used by hash function
-	var masks: Map[MClass, Int] = new HashMap[MClass, Int]
-	# Positions of each MClass for each tables
-	var hashes: Map[MClass, Map[MClass, Int]] = new HashMap[MClass, Map[MClass, Int]]
+	var masks: Map[E, Int] = new HashMap[E, Int]
+	# Positions of each element for each tables
+	var hashes: Map[E, Map[E, Int]] = new HashMap[E, Map[E, Int]]
 end
 
 # Builders
 
 abstract class TypeLayoutBuilder
 
-	type LAYOUT: TypeLayout
+	type LAYOUT: TypingLayout[MType]
 
 	private var mmodule: MModule
 	init(mmodule: MModule) do self.mmodule = mmodule
@@ -79,8 +64,8 @@ class BMTypeLayoutBuilder
 	init(mmodule: MModule) do super
 
 	# Compute mtypes ids and position using BM
-	redef fun build_layout(mtypes: Set[MType]): TypeLayout do
-		var result = new TypeLayout
+	redef fun build_layout(mtypes) do
+		var result = new TypingLayout[MType]
 		result.ids = self.compute_ids(mtypes)
 		result.pos = result.ids
 		return result
@@ -100,7 +85,7 @@ class CLTypeLayoutBuilder
 
 	# Compute mtypes ids and position using BM
 	redef fun build_layout(mtypes) do
-		var result = new TypeLayout
+		var result = new TypingLayout[MType]
 		result.ids = self.compute_ids(mtypes)
 		result.pos = self.colorer.colorize(mtypes)
 		return result
@@ -111,7 +96,7 @@ end
 class PHTypeLayoutBuilder
 	super TypeLayoutBuilder
 
-	redef type LAYOUT: PHTypeLayout
+	redef type LAYOUT: PHTypingLayout[MType]
 
 	private var hasher: MTypeHasher
 
@@ -122,7 +107,7 @@ class PHTypeLayoutBuilder
 
 	# Compute mtypes ids and position using BM
 	redef fun build_layout(mtypes) do
-		var result = new PHTypeLayout
+		var result = new PHTypingLayout[MType]
 		result.ids = self.compute_ids(mtypes)
 		result.masks = self.hasher.compute_masks(mtypes, result.ids)
 		result.hashes = self.hasher.compute_hashes(mtypes, result.ids, result.masks)
@@ -142,7 +127,7 @@ end
 
 abstract class ClassLayoutBuilder
 
-	type LAYOUT: ClassLayout
+	type LAYOUT: TypingLayout[MClass]
 
 	private var mmodule: MModule
 	init(mmodule: MModule) do self.mmodule = mmodule
@@ -168,8 +153,8 @@ class BMClassLayoutBuilder
 	init(mmodule: MModule) do super
 
 	# Compute mclasses ids and position using BM
-	redef fun build_layout(mclasses: Set[MClass]): LAYOUT do
-		var result = new ClassLayout
+	redef fun build_layout(mclasses) do
+		var result = new TypingLayout[MClass]
 		result.ids = self.compute_ids(mclasses)
 		result.pos = result.ids
 		return result
@@ -189,7 +174,7 @@ class CLClassLayoutBuilder
 
 	# Compute mclasses ids and position using BM
 	redef fun build_layout(mclasses) do
-		var result = new ClassLayout
+		var result = new TypingLayout[MClass]
 		result.ids = self.compute_ids(mclasses)
 		result.pos = self.colorer.colorize(mclasses)
 		return result
@@ -200,7 +185,7 @@ end
 class PHClassLayoutBuilder
 	super ClassLayoutBuilder
 
-	redef type LAYOUT: PHClassLayout
+	redef type LAYOUT: PHTypingLayout[MClass]
 
 	private var hasher: MClassHasher
 
@@ -211,7 +196,7 @@ class PHClassLayoutBuilder
 
 	# Compute mclasses ids and position using BM
 	redef fun build_layout(mclasses) do
-		var result = new PHClassLayout
+		var result = new PHTypingLayout[MClass]
 		result.ids = self.compute_ids(mclasses)
 		result.masks = self.hasher.compute_masks(mclasses, result.ids)
 		result.hashes = self.hasher.compute_hashes(mclasses, result.ids, result.masks)

@@ -108,7 +108,7 @@ class SeparateCompiler
 	private var partial_types: Set[MType] = new HashSet[MType]
 
 	private var type_layout_builder: TypeLayoutBuilder
-	private var type_layout: nullable TypeLayout
+	private var type_layout: nullable TypingLayout[MType]
 	private var type_tables: nullable Map[MType, Array[nullable MType]] = null
 
 	private var live_unanchored_types: Map[MClassDef, Set[MType]] = new HashMap[MClassDef, HashSet[MType]]
@@ -311,7 +311,7 @@ class SeparateCompiler
 			supers.add(mtype)
 			for sup in supers do
 				var color: Int
-				if layout isa PHTypeLayout then
+				if layout isa PHTypingLayout[MType] then
 					color = layout.hashes[mtype][sup]
 				else
 					color = layout.pos[sup]
@@ -463,7 +463,7 @@ class SeparateCompiler
 		v.add_decl("{self.type_layout.ids[mtype]},")
 		v.add_decl("\"{mtype}\", /* class_name_string */")
 		var layout = self.type_layout
-		if layout isa PHTypeLayout then
+		if layout isa PHTypingLayout[MType] then
 			v.add_decl("{layout.masks[mtype]},")
 		else
 			v.add_decl("{layout.pos[mtype]},")

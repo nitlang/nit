@@ -67,7 +67,7 @@ end
 class SeparateErasureCompiler
 	super SeparateCompiler
 
-	private var class_layout: nullable ClassLayout
+	private var class_layout: nullable TypingLayout[MClass]
 	private var class_tables: Map[MClass, Array[nullable MClass]]
 
 	init(mainmodule: MModule, mmbuilder: ModelBuilder, runtime_type_analysis: RapidTypeAnalysis) do
@@ -102,7 +102,7 @@ class SeparateErasureCompiler
 			supers.add(mclass)
 			for sup in supers do
 				var color: Int
-				if layout isa PHClassLayout then
+				if layout isa PHTypingLayout[MClass] then
 					color = layout.hashes[mclass][sup]
 				else
 					color = layout.pos[sup]
@@ -168,7 +168,7 @@ class SeparateErasureCompiler
 		v.add_decl("\"{mclass.name}\", /* class_name_string */")
 		v.add_decl("{self.box_kind_of(mclass)}, /* box_kind */")
 		var layout = self.class_layout
-		if layout isa PHClassLayout then
+		if layout isa PHTypingLayout[MClass] then
 			v.add_decl("{layout.masks[mclass]},")
 		else
 			v.add_decl("{layout.pos[mclass]},")
