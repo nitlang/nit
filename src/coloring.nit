@@ -274,29 +274,25 @@ end
 
 # Perfect hashers
 
-# MType Perfect Hashing
-private class MTypeHasher
+# Abstract Perfect Hashing
+private abstract class AbstractHasher[E: Object]
 
-	var mmodule: MModule
 	var operator: PHOperator
 
-	init(mmodule: MModule, operator: PHOperator) do
-		self.mmodule = mmodule
-		self.operator = operator
-	end
+	init(operator: PHOperator) do self.operator = operator
 
-	fun compute_masks(mtypes: Set[MType], ids: Map[MType, Int]): Map[MType, Int] do
-		var masks = new HashMap[MType, Int]
-		for mtype in mtypes do
-			var supers = new HashSet[MType]
-			supers.add_all(self.mmodule.super_mtypes(mtype, mtypes))
-			supers.add(mtype)
-			masks[mtype] = compute_mask(supers, ids)
+	fun compute_masks(elements: Set[E], ids: Map[E, Int]): Map[E, Int] do
+		var masks = new HashMap[E, Int]
+		for element in elements do
+			var supers = new HashSet[E]
+			supers.add_all(self.super_elements(element, elements))
+			supers.add(element)
+			masks[element] = compute_mask(supers, ids)
 		end
 		return masks
 	end
 
-	private fun compute_mask(supers: Set[MType], ids: Map[MType, Int]): Int do
+	fun compute_mask(supers: Set[E], ids: Map[E, Int]): Int do
 		var mask = 0
 		loop
 			var used = new List[Int]
@@ -314,21 +310,23 @@ private class MTypeHasher
 		return mask
 	end
 
-	fun compute_hashes(mtypes: Set[MType], ids: Map[MType, Int], masks: Map[MType, Int]): Map[MType, Map[MType, Int]] do
-		var hashes = new HashMap[MType, Map[MType, Int]]
-		for mtype in mtypes do
-			var supers = new HashSet[MType]
-			supers.add_all(self.mmodule.super_mtypes(mtype, mtypes))
-			supers.add(mtype)
-			var inhashes = new HashMap[MType, Int]
-			var mask = masks[mtype]
+	fun compute_hashes(elements: Set[E], ids: Map[E, Int], masks: Map[E, Int]): Map[E, Map[E, Int]] do
+		var hashes = new HashMap[E, Map[E, Int]]
+		for element in elements do
+			var supers = new HashSet[E]
+			supers.add_all(self.super_elements(element, elements))
+			supers.add(element)
+			var inhashes = new HashMap[E, Int]
+			var mask = masks[element]
 			for sup in supers do
 				inhashes[sup] = operator.op(mask, ids[sup])
 			end
-			hashes[mtype] = inhashes
+			hashes[element] = inhashes
 		end
 		return hashes
 	end
+
+	fun super_elements(element: E, elements: Set[E]): Set[E] is abstract
 end
 
 # Abstract operator used for perfect hashing
@@ -350,6 +348,20 @@ class PHAndOperator
 	super PHOperator
 	init do end
 	redef fun op(mask, id) do return mask.bin_and(id)
+end
+
+# MType Perfect Hashing
+private class MTypeHasher
+	super AbstractHasher[MType]
+
+	var mmodule: MModule
+
+	init(mmodule: MModule, operator: PHOperator) do
+		super(operator)
+		self.mmodule = mmodule
+	end
+
+	redef fun super_elements(element, elements) do return self.mmodule.super_mtypes(element, elements)
 end
 
 # MClass coloring
