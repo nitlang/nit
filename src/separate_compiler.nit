@@ -127,10 +127,6 @@ class SeparateCompiler
 	protected var vt_tables: Map[MClass, Array[nullable MPropDef]]
 	protected var vt_masks: nullable Map[MClass, Int]
 
-	private var ft_colors: nullable Map[MParameterType, Int]
-	private var ft_tables: nullable Map[MClass, Array[nullable MParameterType]]
-	private var ft_masks: nullable Map[MClass, Int]
-
 	init(mainmodule: MModule, mmbuilder: ModelBuilder, runtime_type_analysis: RapidTypeAnalysis) do
 		super
 		self.header = new_visitor
