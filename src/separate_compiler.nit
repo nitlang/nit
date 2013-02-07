@@ -16,7 +16,8 @@
 module separate_compiler
 
 import abstract_compiler
-import coloring
+intrude import coloring
+import rapid_type_analysis
 
 # Add separate compiler specific options
 redef class ToolContext

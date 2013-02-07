@@ -15,7 +15,7 @@
 # Graph coloring tools
 module coloring
 
-import rapid_type_analysis # for type coloration
+import typing
 
 abstract class AbstractColoring[E: Object]
 
