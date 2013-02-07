@@ -34,6 +34,21 @@ class PHTypeLayout
 	var hashes: Map[MType, Map[MType, Int]] = new HashMap[MType, Map[MType, Int]]
 end
 
+class ClassLayout
+	# Unic ids or each MClass
+	var ids: Map[MClass, Int] = new HashMap[MClass, Int]
+	# Fixed positions of each MClass in all tables
+	var pos: Map[MClass, Int] = new HashMap[MClass, Int]
+end
+
+class PHClassLayout
+	super ClassLayout
+	# Masks used by hash function
+	var masks: Map[MClass, Int] = new HashMap[MClass, Int]
+	# Positions of each MClass for each tables
+	var hashes: Map[MClass, Map[MClass, Int]] = new HashMap[MClass, Map[MClass, Int]]
+end
+
 # Builders
 
 abstract class TypeLayoutBuilder
@@ -120,6 +135,95 @@ class PHTypeLayoutBuilder
 		var lin = self.mmodule.reverse_linearize_mtypes(mtypes)
 		for mtype in lin do
 			ids[mtype] = ids.length + 1
+		end
+		return ids
+	end
+end
+
+abstract class ClassLayoutBuilder
+
+	type LAYOUT: ClassLayout
+
+	private var mmodule: MModule
+	init(mmodule: MModule) do self.mmodule = mmodule
+
+	# Compute mclasses ids and position
+	fun build_layout(mclasses: Set[MClass]): LAYOUT is abstract
+
+	# Give each MClass a unic id using a descending linearization of the `mclasses` set
+	private fun compute_ids(mclasses: Set[MClass]): Map[MClass, Int] do
+		var ids = new HashMap[MClass, Int]
+		var lin = self.mmodule.reverse_linearize_mclasses(mclasses)
+		for mclass in lin do
+			ids[mclass] = ids.length
+		end
+		return ids
+	end
+end
+
+# Layout builder for MClass using Binary Matrix (BM)
+class BMClassLayoutBuilder
+	super ClassLayoutBuilder
+
+	init(mmodule: MModule) do super
+
+	# Compute mclasses ids and position using BM
+	redef fun build_layout(mclasses: Set[MClass]): LAYOUT do
+		var result = new ClassLayout
+		result.ids = self.compute_ids(mclasses)
+		result.pos = result.ids
+		return result
+	end
+end
+
+# Layout builder for MClass using Coloring (CL)
+class CLClassLayoutBuilder
+	super ClassLayoutBuilder
+
+	private var colorer: MClassColorer
+
+	init(mmodule: MModule) do
+		super
+		self.colorer = new MClassColorer(mmodule)
+	end
+
+	# Compute mclasses ids and position using BM
+	redef fun build_layout(mclasses) do
+		var result = new ClassLayout
+		result.ids = self.compute_ids(mclasses)
+		result.pos = self.colorer.colorize(mclasses)
+		return result
+	end
+end
+
+# Layout builder for MClass using Perfect Hashing (PH)
+class PHClassLayoutBuilder
+	super ClassLayoutBuilder
+
+	redef type LAYOUT: PHClassLayout
+
+	private var hasher: MClassHasher
+
+	init(mmodule: MModule, operator: PHOperator) do
+		super
+		self.hasher = new MClassHasher(mmodule, operator)
+	end
+
+	# Compute mclasses ids and position using BM
+	redef fun build_layout(mclasses) do
+		var result = new PHClassLayout
+		result.ids = self.compute_ids(mclasses)
+		result.masks = self.hasher.compute_masks(mclasses, result.ids)
+		result.hashes = self.hasher.compute_hashes(mclasses, result.ids, result.masks)
+		return result
+	end
+
+	# Ids start from 1 instead of 0
+	redef fun compute_ids(mclasses) do
+		var ids = new HashMap[MClass, Int]
+		var lin = self.mmodule.reverse_linearize_mclasses(mclasses)
+		for mclass in lin do
+			ids[mclass] = ids.length + 1
 		end
 		return ids
 	end
@@ -272,6 +376,22 @@ private class MTypeColorer
 	redef fun reverse_linearize(elements) do return self.mmodule.reverse_linearize_mtypes(elements)
 end
 
+# MClass coloring
+private class MClassColorer
+	super AbstractColorer[MClass]
+
+	private var mmodule: MModule
+
+	init(mmodule: MModule) do self.mmodule = mmodule
+
+	redef fun super_elements(element, elements) do return self.mmodule.super_mclasses(element)
+	fun parent_elements(element: MClass): Set[MClass] do return self.mmodule.parent_mclasses(element)
+	redef fun is_element_mi(element, elements) do return self.parent_elements(element).length > 1
+	redef fun sub_elements(element, elements) do do return self.mmodule.sub_mclasses(element)
+	redef fun linearize(elements) do return self.mmodule.linearize_mclasses(elements)
+	redef fun reverse_linearize(elements) do return self.mmodule.reverse_linearize_mclasses(elements)
+end
+
 # Perfect hashers
 
 # Abstract Perfect Hashing
@@ -362,6 +482,20 @@ private class MTypeHasher
 	end
 
 	redef fun super_elements(element, elements) do return self.mmodule.super_mtypes(element, elements)
+end
+
+# MClass Perfect Hashing
+private class MClassHasher
+	super AbstractHasher[MClass]
+
+	private var mmodule: MModule
+
+	init(mmodule: MModule, operator: PHOperator) do
+		super(operator)
+		self.mmodule = mmodule
+	end
+
+	redef fun super_elements(element, elements) do return self.mmodule.super_mclasses(element)
 end
 
 # MClass coloring
