@@ -113,9 +113,8 @@ class SeparateCompiler
 
 	private var live_unanchored_types: Map[MClassDef, Set[MType]] = new HashMap[MClassDef, HashSet[MType]]
 
-	private var unanchored_types_colors: nullable Map[MType, Int]
-	private var unanchored_types_tables: nullable Map[MClassType, Array[nullable MType]]
-	private var unanchored_types_masks: nullable Map[MClassType, Int]
+	private var resolution_layout: nullable ResolutionLayout
+	private var resolution_tables: nullable Map[MClassType, Array[nullable MType]]
 
 	protected var method_layout: nullable PropertyLayout[MMethod]
 	protected var method_tables: Map[MClass, Array[nullable MPropDef]]
@@ -351,12 +350,13 @@ class SeparateCompiler
 		end
 		mtypes.add_all(self.partial_types)
 
-		# VT and FT are stored with other unresolved types in the big unanchored_tables
-		self.compile_unanchored_tables(mtypes)
-
 		# colorize types
 		self.type_layout = self.type_layout_builder.build_layout(mtypes)
 		self.type_tables = self.build_type_tables(mtypes)
+
+		# VT and FT are stored with other unresolved types in the big unanchored_tables
+		self.compile_unanchored_tables(mtypes)
+
 		return mtypes
 	end
 
@@ -408,25 +408,18 @@ class SeparateCompiler
 		end
 
 		# Compute the table layout with the prefered method
+		var resolution_builder: ResolutionLayoutBuilder
 		if modelbuilder.toolcontext.opt_bm_typing.value then
-			var unanchored_type_coloring = new NaiveUnanchoredTypeColoring
-			self.unanchored_types_colors = unanchored_type_coloring.colorize(mtype2unanchored)
-			self.unanchored_types_tables = self.build_resolution_tables(mtype2unanchored)
+			resolution_builder = new BMResolutionLayoutBuilder
 		else if modelbuilder.toolcontext.opt_phmod_typing.value then
-			var unanchored_type_coloring = new UnanchoredTypeModPerfectHashing
-			self.unanchored_types_colors = unanchored_type_coloring.colorize(mtype2unanchored)
-			self.unanchored_types_masks = unanchored_type_coloring.compute_masks(mtype2unanchored)
-			self.unanchored_types_tables = self.hash_resolution_tables(mtype2unanchored, unanchored_type_coloring)
+			resolution_builder = new PHResolutionLayoutBuilder(new PHModOperator)
 		else if modelbuilder.toolcontext.opt_phand_typing.value then
-			var unanchored_type_coloring = new UnanchoredTypeAndPerfectHashing
-			self.unanchored_types_colors = unanchored_type_coloring.colorize(mtype2unanchored)
-			self.unanchored_types_masks = unanchored_type_coloring.compute_masks(mtype2unanchored)
-			self.unanchored_types_tables = self.hash_resolution_tables(mtype2unanchored,  unanchored_type_coloring)
+			resolution_builder = new PHResolutionLayoutBuilder(new PHAndOperator)
 		else
-			var unanchored_type_coloring = new UnanchoredTypeColoring
-			self.unanchored_types_colors = unanchored_type_coloring.colorize(mtype2unanchored)
-			self.unanchored_types_tables = self.build_resolution_tables(mtype2unanchored)
+			resolution_builder = new CLResolutionLayoutBuilder
 		end
+		self.resolution_layout = resolution_builder.build_layout(mtype2unanchored)
+		self.resolution_tables = self.build_resolution_tables(mtype2unanchored)
 
 		# Compile a C constant for each collected unanchored type.
 		# Either to a color, or to -1 if the unanchored type is dead (no live receiver can require it)
@@ -436,8 +429,8 @@ class SeparateCompiler
 		end
 		var all_unanchored_types_colors = new HashMap[MType, Int]
 		for t in all_unanchored do
-			if unanchored_types_colors.has_key(t) then
-				all_unanchored_types_colors[t] = unanchored_types_colors[t]
+			if self.resolution_layout.pos.has_key(t) then
+				all_unanchored_types_colors[t] = self.resolution_layout.pos[t]
 			else
 				all_unanchored_types_colors[t] = -1
 			end
@@ -453,30 +446,16 @@ class SeparateCompiler
 
 	fun build_resolution_tables(elements: Map[MClassType, Set[MType]]): Map[MClassType, Array[nullable MType]] do
 		var tables = new HashMap[MClassType, Array[nullable MType]]
-
+		var layout = self.resolution_layout
 		for mclasstype, mtypes in elements do
 			var table = new Array[nullable MType]
 			for mtype in mtypes do
-				var color = self.unanchored_types_colors[mtype]
-				if table.length <= color then
-					for i in [table.length .. color[ do
-						table[i] = null
-					end
+				var color: Int
+				if layout isa PHResolutionLayout then
+					color = layout.hashes[mclasstype][mtype]
+				else
+					color = layout.pos[mtype]
 				end
-				table[color] = mtype
-			end
-			tables[mclasstype] = table
-		end
-		return tables
-	end
-
-	fun hash_resolution_tables(elements: Map[MClassType, Set[MType]], colorer: UnanchoredTypePerfectHashing): Map[MClassType, Array[nullable MType]] do
-		var tables = new HashMap[MClassType, Array[nullable MType]]
-
-		for mclasstype, mtypes in elements do
-			var table = new Array[nullable MType]
-			for mtype in mtypes do
-				var color = colorer.phash(self.unanchored_types_colors[mtype], self.unanchored_types_masks[mclasstype])
 				if table.length <= color then
 					for i in [table.length .. color[ do
 						table[i] = null
@@ -597,26 +576,27 @@ class SeparateCompiler
 		else
 			mclass_type = mtype.as(MClassType)
 		end
-		if not self.unanchored_types_tables.has_key(mclass_type) then return false
+		if not self.resolution_tables.has_key(mclass_type) then return false
+
+		var layout = self.resolution_layout
 
 		# extern const struct unanchored_table_X unanchored_table_X
 		self.header.add_decl("extern const struct unanchored_table_{mtype.c_name} unanchored_table_{mtype.c_name};")
-
 		self.header.add_decl("struct unanchored_table_{mtype.c_name} \{")
-		if modelbuilder.toolcontext.opt_phmod_typing.value or modelbuilder.toolcontext.opt_phand_typing.value then
+		if layout isa PHResolutionLayout then
 			self.header.add_decl("int mask;")
 		end
-		self.header.add_decl("struct type *types[{self.unanchored_types_tables[mclass_type].length}];")
+		self.header.add_decl("struct type *types[{self.resolution_tables[mclass_type].length}];")
 		self.header.add_decl("\};")
 
 		# const struct fts_table_X fts_table_X
 		var v = new_visitor
 		v.add_decl("const struct unanchored_table_{mtype.c_name} unanchored_table_{mtype.c_name} = \{")
-		if modelbuilder.toolcontext.opt_phmod_typing.value or modelbuilder.toolcontext.opt_phand_typing.value then
-			v.add_decl("{self.unanchored_types_masks[mclass_type]},")
+		if layout isa PHResolutionLayout then
+			v.add_decl("{layout.masks[mclass_type]},")
 		end
 		v.add_decl("\{")
-		for t in self.unanchored_types_tables[mclass_type] do
+		for t in self.resolution_tables[mclass_type] do
 			if t == null then
 				v.add_decl("NULL, /* empty */")
 			else
@@ -788,7 +768,7 @@ class SeparateCompiler
 		var rt_holes = 0
 		var st_table = 0
 		var st_holes = 0
-		var rtables = unanchored_types_tables
+		var rtables = resolution_tables
 		if rtables != null then
 			for unanch, table in rtables do
 				rt_table += table.length
