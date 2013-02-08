@@ -411,21 +411,21 @@ class SeparateCompiler
 		if modelbuilder.toolcontext.opt_bm_typing.value then
 			var unanchored_type_coloring = new NaiveUnanchoredTypeColoring
 			self.unanchored_types_colors = unanchored_type_coloring.colorize(mtype2unanchored)
-			self.unanchored_types_tables = unanchored_type_coloring.build_tables(mtype2unanchored)
+			self.unanchored_types_tables = self.build_resolution_tables(mtype2unanchored)
 		else if modelbuilder.toolcontext.opt_phmod_typing.value then
 			var unanchored_type_coloring = new UnanchoredTypeModPerfectHashing
 			self.unanchored_types_colors = unanchored_type_coloring.colorize(mtype2unanchored)
 			self.unanchored_types_masks = unanchored_type_coloring.compute_masks(mtype2unanchored)
-			self.unanchored_types_tables = unanchored_type_coloring.build_tables(mtype2unanchored)
+			self.unanchored_types_tables = self.hash_resolution_tables(mtype2unanchored, unanchored_type_coloring)
 		else if modelbuilder.toolcontext.opt_phand_typing.value then
 			var unanchored_type_coloring = new UnanchoredTypeAndPerfectHashing
 			self.unanchored_types_colors = unanchored_type_coloring.colorize(mtype2unanchored)
 			self.unanchored_types_masks = unanchored_type_coloring.compute_masks(mtype2unanchored)
-			self.unanchored_types_tables = unanchored_type_coloring.build_tables(mtype2unanchored)
+			self.unanchored_types_tables = self.hash_resolution_tables(mtype2unanchored,  unanchored_type_coloring)
 		else
 			var unanchored_type_coloring = new UnanchoredTypeColoring
 			self.unanchored_types_colors = unanchored_type_coloring.colorize(mtype2unanchored)
-			self.unanchored_types_tables = unanchored_type_coloring.build_tables(mtype2unanchored)
+			self.unanchored_types_tables = self.build_resolution_tables(mtype2unanchored)
 		end
 
 		# Compile a C constant for each collected unanchored type.
@@ -449,6 +449,44 @@ class SeparateCompiler
 		#	print "{k}: {v.join(", ")}"
 		#end
 		#print ""
+	end
+
+	fun build_resolution_tables(elements: Map[MClassType, Set[MType]]): Map[MClassType, Array[nullable MType]] do
+		var tables = new HashMap[MClassType, Array[nullable MType]]
+
+		for mclasstype, mtypes in elements do
+			var table = new Array[nullable MType]
+			for mtype in mtypes do
+				var color = self.unanchored_types_colors[mtype]
+				if table.length <= color then
+					for i in [table.length .. color[ do
+						table[i] = null
+					end
+				end
+				table[color] = mtype
+			end
+			tables[mclasstype] = table
+		end
+		return tables
+	end
+
+	fun hash_resolution_tables(elements: Map[MClassType, Set[MType]], colorer: UnanchoredTypePerfectHashing): Map[MClassType, Array[nullable MType]] do
+		var tables = new HashMap[MClassType, Array[nullable MType]]
+
+		for mclasstype, mtypes in elements do
+			var table = new Array[nullable MType]
+			for mtype in mtypes do
+				var color = colorer.phash(self.unanchored_types_colors[mtype], self.unanchored_types_masks[mclasstype])
+				if table.length <= color then
+					for i in [table.length .. color[ do
+						table[i] = null
+					end
+				end
+				table[color] = mtype
+			end
+			tables[mclasstype] = table
+		end
+		return tables
 	end
 
 	fun retieve_live_partial_types(mtype: MType) do

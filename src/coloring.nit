@@ -607,25 +607,6 @@ class UnanchoredTypeColoring
 		return coloration_result
 	end
 
-	fun build_tables(elements: Map[MClassType, Set[MType]]): Map[MClassType, Array[nullable MType]] do
-		var tables = new HashMap[MClassType, Array[nullable MType]]
-
-		for mclasstype, mtypes in elements do
-			var table = new Array[nullable MType]
-			for mtype in mtypes do
-				var color = self.coloration_result[mtype]
-				if table.length <= color then
-					for i in [table.length .. color[ do
-						table[i] = null
-					end
-				end
-				table[color] = mtype
-			end
-			tables[mclasstype] = table
-		end
-		return tables
-	end
-
 	# Colorize a collection of elements
 	fun colorize_elements(elements: Map[MClassType, Set[MType]]) do
 		var min_color = 0
@@ -729,25 +710,6 @@ abstract class UnanchoredTypePerfectHashing
 			mask += 1
 		end
 		return mask
-	end
-
-	redef fun build_tables(elements: Map[MClassType, Set[MType]]): Map[MClassType, Array[nullable MType]] do
-		var tables = new HashMap[MClassType, Array[nullable MType]]
-
-		for mclasstype, mtypes in elements do
-			var table = new Array[nullable MType]
-			for mtype in mtypes do
-				var color = phash(self.coloration_result[mtype], masks[mclasstype])
-				if table.length <= color then
-					for i in [table.length .. color[ do
-						table[i] = null
-					end
-				end
-				table[color] = mtype
-			end
-			tables[mclasstype] = table
-		end
-		return tables
 	end
 
 	private fun op(mask: Int, id:Int): Int is abstract
