@@ -1093,47 +1093,6 @@ class SeparateCompilerVisitor
 		end
 	end
 
-	# Build livetype structure retrieving
-	# ENSURE: mtype.need_anchor
-	fun retrieve_anchored_livetype(mtype: MGenericType, buffer: Buffer) do
-		assert mtype.need_anchor
-
-		var compiler = self.compiler
-		for ft in mtype.arguments do
-
-			var ntype = ft
-			var s: String = ""
-			if ntype isa MNullableType then
-				ntype = ntype.mtype
-			end
-
-			var recv = self.frame.arguments.first
-			var recv_type_info = self.type_info(recv)
-			if ntype isa MParameterType then
-				if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
-					buffer.append("[{recv_type_info}->fts_table->types[HASH({recv_type_info}->fts_table->mask, {ntype.const_color})]->livecolor]")
-				else
-					buffer.append("[{recv_type_info}->fts_table->types[{ntype.const_color}]->livecolor]")
-				end
-			else if ntype isa MVirtualType then
-				if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
-					buffer.append("[{recv_type_info}->vts_table->types[HASH({recv_type_info}->vts_table->mask, {ntype.mproperty.const_color})]->livecolor]")
-				else
-					buffer.append("[{recv_type_info}->vts_table->types[{ntype.mproperty.const_color}]->livecolor]")
-				end
-			else if ntype isa MGenericType and ntype.need_anchor then
-				var bbuff = new Buffer
-				retrieve_anchored_livetype(ntype, bbuff)
-				buffer.append("[livetypes_{ntype.mclass.c_name}{bbuff.to_s}->livecolor]")
-			else if ntype isa MClassType then
-				compiler.undead_types.add(ft)
-				buffer.append("[type_{ft.c_name}.livecolor]")
-			else
-				self.add("printf(\"NOT YET IMPLEMENTED: init_instance(%s, {mtype}).\\n\", \"{ft}\"); exit(1);")
-			end
-		end
-	end
-
 	redef fun init_instance(mtype)
 	do
 		var compiler = self.compiler
