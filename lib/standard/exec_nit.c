@@ -15,6 +15,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
+#include <stdio.h>
 
 se_exec_data_t* exec_Process_Process_basic_exec_execute_4(void *s, char *prog, char *args, int len, int pipeflag) {
 	se_exec_data_t* result = NULL;
