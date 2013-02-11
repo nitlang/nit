@@ -14,6 +14,8 @@
 #include "exec_nit.h"
 #include <stdlib.h>
 #include <string.h>
+#include <errno.h>
+#include <stdio.h>
 
 se_exec_data_t* exec_Process_Process_basic_exec_execute_4(void *s, char *prog, char *args, int len, int pipeflag) {
 	se_exec_data_t* result = NULL;
@@ -21,12 +23,27 @@ se_exec_data_t* exec_Process_Process_basic_exec_execute_4(void *s, char *prog, c
 	int in_fd[2];
 	int out_fd[2];
 	int err_fd[2];
-	if (pipeflag & 1)
-		pipe(in_fd);
-	if (pipeflag & 2)
-		pipe(out_fd);
-	if (pipeflag & 4)
-		pipe(err_fd);
+	if (pipeflag & 1) {
+		int res = pipe(in_fd);
+		if ( res == -1 ) {
+			fprintf( stderr, "Pipe init failed in Process:basic_exec_execute: %s\n", strerror( errno ) );
+			exit(1);
+		}
+	}
+	if (pipeflag & 2) {
+		int res = pipe(out_fd);
+		if ( res == -1 ) {
+			fprintf( stderr, "Pipe init failed in Process:basic_exec_execute: %s\n", strerror( errno ) );
+			exit(1);
+		}
+	}
+	if (pipeflag & 4) {
+		int res = pipe(err_fd);
+		if ( res == -1 ) {
+			fprintf( stderr, "Pipe init failed in Process:basic_exec_execute: %s\n", strerror( errno ) );
+			exit(1);
+		}
+	}
 					
 	id = fork();
 	if (id == 0)
@@ -96,6 +113,7 @@ se_exec_data_t* exec_Process_Process_basic_exec_execute_4(void *s, char *prog, c
 		} else
 			result->err_fd = -1;
 	}
+
 	return result;
 }
 

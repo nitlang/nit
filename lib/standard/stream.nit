@@ -221,6 +221,7 @@ abstract class FDStream
 	private fun native_read_char(i: Int): Int is extern "stream_FDStream_FDStream_native_read_char_1"
 	private fun native_read(i: Int, buf: NativeString, len: Int): Int is extern "stream_FDStream_FDStream_native_read_3"
 	private fun native_write(i: Int, buf: NativeString, len: Int): Int is extern "stream_FDStream_FDStream_native_write_3"
+	private fun native_write_char(i: Int, c: Char): Int is extern "stream_FDStream_FDStream_native_write_char_2"
 
 	init(fd: Int) do self.fd = fd
 end
