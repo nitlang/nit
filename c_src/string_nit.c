@@ -12,28 +12,3 @@
  */
 
 #include "string_nit.h"
-
-/*
-C implementation of string::String::to_f
-
-Imported methods signatures:
-	char * String_to_cstring( String recv ) for string::String::to_cstring
-*/
-float String_to_f___impl( String recv )
-{
-    float value;
-    char *str;
-    int read;
-
-    str = String_to_cstring( recv );
-
-    read = sscanf( str, "%f", &value );
-
-    if ( read <= 0 )
-    {
-        fprintf( stderr, "Failed to convert string \"\" to float." );
-        abort();
-    }
-
-    return value;
-}

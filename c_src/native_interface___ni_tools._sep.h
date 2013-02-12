@@ -5,7 +5,7 @@
 #include <nit_common.h>
 
 extern const classtable_elt_t VFT_native_interface___ni_tools___FunctionCompiler[];
-extern const char *LOCATE_native_interface___ni_tools;
+extern const char LOCATE_native_interface___ni_tools[];
 extern const int SFT_native_interface___ni_tools[];
 #define ID_native_interface___ni_tools___FunctionCompiler (SFT_native_interface___ni_tools[0])
 #define COLOR_native_interface___ni_tools___FunctionCompiler (SFT_native_interface___ni_tools[1])
@@ -21,28 +21,20 @@ extern const int SFT_native_interface___ni_tools[];
 #define CALL_native_interface___ni_tools___FunctionCompiler___exprs__eq(recv) ((native_interface___ni_tools___FunctionCompiler___exprs__eq_t)CALL((recv), (SFT_native_interface___ni_tools[3] + 6)))
 #define CALL_native_interface___ni_tools___FunctionCompiler___to_writer(recv) ((native_interface___ni_tools___FunctionCompiler___to_writer_t)CALL((recv), (SFT_native_interface___ni_tools[3] + 7)))
 #define CALL_native_interface___ni_tools___FunctionCompiler___init(recv) ((native_interface___ni_tools___FunctionCompiler___init_t)CALL((recv), (SFT_native_interface___ni_tools[3] + 8)))
-static const char * const LOCATE_native_interface___ni_tools___FunctionCompiler___signature = "ni_tools::FunctionCompiler::signature";
 val_t native_interface___ni_tools___FunctionCompiler___signature(val_t p0);
 typedef val_t (*native_interface___ni_tools___FunctionCompiler___signature_t)(val_t p0);
-static const char * const LOCATE_native_interface___ni_tools___FunctionCompiler___signature__eq = "ni_tools::FunctionCompiler::signature=";
 void native_interface___ni_tools___FunctionCompiler___signature__eq(val_t p0, val_t p1);
 typedef void (*native_interface___ni_tools___FunctionCompiler___signature__eq_t)(val_t p0, val_t p1);
-static const char * const LOCATE_native_interface___ni_tools___FunctionCompiler___decls = "ni_tools::FunctionCompiler::decls";
 val_t native_interface___ni_tools___FunctionCompiler___decls(val_t p0);
 typedef val_t (*native_interface___ni_tools___FunctionCompiler___decls_t)(val_t p0);
-static const char * const LOCATE_native_interface___ni_tools___FunctionCompiler___decls__eq = "ni_tools::FunctionCompiler::decls=";
 void native_interface___ni_tools___FunctionCompiler___decls__eq(val_t p0, val_t p1);
 typedef void (*native_interface___ni_tools___FunctionCompiler___decls__eq_t)(val_t p0, val_t p1);
-static const char * const LOCATE_native_interface___ni_tools___FunctionCompiler___exprs = "ni_tools::FunctionCompiler::exprs";
 val_t native_interface___ni_tools___FunctionCompiler___exprs(val_t p0);
 typedef val_t (*native_interface___ni_tools___FunctionCompiler___exprs_t)(val_t p0);
-static const char * const LOCATE_native_interface___ni_tools___FunctionCompiler___exprs__eq = "ni_tools::FunctionCompiler::exprs=";
 void native_interface___ni_tools___FunctionCompiler___exprs__eq(val_t p0, val_t p1);
 typedef void (*native_interface___ni_tools___FunctionCompiler___exprs__eq_t)(val_t p0, val_t p1);
-static const char * const LOCATE_native_interface___ni_tools___FunctionCompiler___to_writer = "ni_tools::FunctionCompiler::to_writer";
 val_t native_interface___ni_tools___FunctionCompiler___to_writer(val_t p0);
 typedef val_t (*native_interface___ni_tools___FunctionCompiler___to_writer_t)(val_t p0);
-static const char * const LOCATE_native_interface___ni_tools___FunctionCompiler___init = "ni_tools::FunctionCompiler::init";
 void native_interface___ni_tools___FunctionCompiler___init(val_t p0, val_t p1, int* init_table);
 typedef void (*native_interface___ni_tools___FunctionCompiler___init_t)(val_t p0, val_t p1, int* init_table);
 val_t NEW_FunctionCompiler_native_interface___ni_tools___FunctionCompiler___init(val_t p0);

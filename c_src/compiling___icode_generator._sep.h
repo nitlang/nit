@@ -6,7 +6,7 @@
 #include <nit_common.h>
 
 extern const classtable_elt_t VFT_compiling___icode_generator___FileICodeDumper[];
-extern const char *LOCATE_compiling___icode_generator;
+extern const char LOCATE_compiling___icode_generator[];
 extern const int SFT_compiling___icode_generator[];
 #define CALL_compiling___icode_generator___Program___generate_icode_files(recv) ((compiling___icode_generator___Program___generate_icode_files_t)CALL((recv), (SFT_compiling___icode_generator[0] + 0)))
 #define ID_compiling___icode_generator___FileICodeDumper (SFT_compiling___icode_generator[1])
@@ -16,20 +16,16 @@ extern const int SFT_compiling___icode_generator[];
 #define CALL_compiling___icode_generator___FileICodeDumper___init(recv) ((compiling___icode_generator___FileICodeDumper___init_t)CALL((recv), (SFT_compiling___icode_generator[4] + 1)))
 #define CALL_compiling___icode_generator___MMLocalClass___generate_icode_file(recv) ((compiling___icode_generator___MMLocalClass___generate_icode_file_t)CALL((recv), (SFT_compiling___icode_generator[5] + 0)))
 #define CALL_compiling___icode_generator___MMMethod___generate_icode(recv) ((compiling___icode_generator___MMMethod___generate_icode_t)CALL((recv), (SFT_compiling___icode_generator[6] + 0)))
-static const char * const LOCATE_compiling___icode_generator___Program___generate_icode_files = "icode_generator::Program::generate_icode_files";
 void compiling___icode_generator___Program___generate_icode_files(val_t p0);
 typedef void (*compiling___icode_generator___Program___generate_icode_files_t)(val_t p0);
   void OC_compiling___icode_generator___Program___generate_icode_files_1(struct stack_frame_t *closctx, val_t p0);
   typedef void (*OC_compiling___icode_generator___Program___generate_icode_files_1_t)(struct stack_frame_t *closctx, val_t p0);
 val_t NEW_Program_program___Program___init(val_t p0, val_t p1);
-static const char * const LOCATE_compiling___icode_generator___FileICodeDumper___init = "icode_generator::FileICodeDumper::init";
 void compiling___icode_generator___FileICodeDumper___init(val_t p0, val_t p1, int* init_table);
 typedef void (*compiling___icode_generator___FileICodeDumper___init_t)(val_t p0, val_t p1, int* init_table);
 val_t NEW_FileICodeDumper_compiling___icode_generator___FileICodeDumper___init(val_t p0);
-static const char * const LOCATE_compiling___icode_generator___FileICodeDumper___write = "icode_generator::FileICodeDumper::(icode_dump::ICodeDumper::write)";
 void compiling___icode_generator___FileICodeDumper___write(val_t p0, val_t p1);
 typedef void (*compiling___icode_generator___FileICodeDumper___write_t)(val_t p0, val_t p1);
-static const char * const LOCATE_compiling___icode_generator___MMLocalClass___generate_icode_file = "icode_generator::MMLocalClass::generate_icode_file";
 void compiling___icode_generator___MMLocalClass___generate_icode_file(val_t p0, val_t p1);
 typedef void (*compiling___icode_generator___MMLocalClass___generate_icode_file_t)(val_t p0, val_t p1);
     typedef void (*CLOS_OC_compiling___icode_generator___MMLocalClass___generate_icode_file_8_0)(struct stack_frame_t *);
@@ -39,7 +35,6 @@ typedef void (*compiling___icode_generator___MMLocalClass___generate_icode_file_
   void OC_compiling___icode_generator___MMLocalClass___generate_icode_file_13(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
   typedef void (*OC_compiling___icode_generator___MMLocalClass___generate_icode_file_13_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
 val_t NEW_MMLocalClass_metamodel___abstractmetamodel___MMLocalClass___init(val_t p0, val_t p1, val_t p2);
-static const char * const LOCATE_compiling___icode_generator___MMMethod___generate_icode = "icode_generator::MMMethod::generate_icode";
 void compiling___icode_generator___MMMethod___generate_icode(val_t p0, val_t p1);
 typedef void (*compiling___icode_generator___MMMethod___generate_icode_t)(val_t p0, val_t p1);
 val_t NEW_MMMethod_metamodel___abstractmetamodel___MMLocalProperty___init(val_t p0, val_t p1);

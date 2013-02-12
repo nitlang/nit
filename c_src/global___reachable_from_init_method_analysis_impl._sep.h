@@ -9,7 +9,7 @@ extern const classtable_elt_t VFT_global___reachable_from_init_method_analysis_i
 extern const classtable_elt_t VFT_global___reachable_from_init_method_analysis_impl___RFIMAContext[];
 
 extern const classtable_elt_t VFT_global___reachable_from_init_method_analysis_impl___RFIMAVisitor[];
-extern const char *LOCATE_global___reachable_from_init_method_analysis_impl;
+extern const char LOCATE_global___reachable_from_init_method_analysis_impl[];
 extern const int SFT_global___reachable_from_init_method_analysis_impl[];
 #define ID_global___reachable_from_init_method_analysis_impl___RFIMABuilder (SFT_global___reachable_from_init_method_analysis_impl[0])
 #define COLOR_global___reachable_from_init_method_analysis_impl___RFIMABuilder (SFT_global___reachable_from_init_method_analysis_impl[1])
@@ -36,17 +36,13 @@ extern const int SFT_global___reachable_from_init_method_analysis_impl[];
 #define CALL_global___reachable_from_init_method_analysis_impl___RFIMAVisitor___init(recv) ((global___reachable_from_init_method_analysis_impl___RFIMAVisitor___init_t)CALL((recv), (SFT_global___reachable_from_init_method_analysis_impl[11] + 3)))
 #define CALL_global___reachable_from_init_method_analysis_impl___RFIMAVisitor___process_call(recv) ((global___reachable_from_init_method_analysis_impl___RFIMAVisitor___process_call_t)CALL((recv), (SFT_global___reachable_from_init_method_analysis_impl[11] + 4)))
 #define CALL_SUPER_global___reachable_from_init_method_analysis_impl___RFIMAVisitor___visit_icode(recv) ((global___reachable_from_init_method_analysis_impl___RFIMAVisitor___visit_icode_t)CALL((recv), (SFT_global___reachable_from_init_method_analysis_impl[11] + 5)))
-static const char * const LOCATE_global___reachable_from_init_method_analysis_impl___RFIMABuilder___program = "reachable_from_init_method_analysis_impl::RFIMABuilder::program";
 val_t global___reachable_from_init_method_analysis_impl___RFIMABuilder___program(val_t p0);
 typedef val_t (*global___reachable_from_init_method_analysis_impl___RFIMABuilder___program_t)(val_t p0);
-static const char * const LOCATE_global___reachable_from_init_method_analysis_impl___RFIMABuilder___context = "reachable_from_init_method_analysis_impl::RFIMABuilder::context";
 val_t global___reachable_from_init_method_analysis_impl___RFIMABuilder___context(val_t p0);
 typedef val_t (*global___reachable_from_init_method_analysis_impl___RFIMABuilder___context_t)(val_t p0);
-static const char * const LOCATE_global___reachable_from_init_method_analysis_impl___RFIMABuilder___init = "reachable_from_init_method_analysis_impl::RFIMABuilder::init";
 void global___reachable_from_init_method_analysis_impl___RFIMABuilder___init(val_t p0, val_t p1, int* init_table);
 typedef void (*global___reachable_from_init_method_analysis_impl___RFIMABuilder___init_t)(val_t p0, val_t p1, int* init_table);
 val_t NEW_RFIMABuilder_global___reachable_from_init_method_analysis_impl___RFIMABuilder___init(val_t p0);
-static const char * const LOCATE_global___reachable_from_init_method_analysis_impl___RFIMABuilder___work = "reachable_from_init_method_analysis_impl::RFIMABuilder::work";
 void global___reachable_from_init_method_analysis_impl___RFIMABuilder___work(val_t p0);
 typedef void (*global___reachable_from_init_method_analysis_impl___RFIMABuilder___work_t)(val_t p0);
   void OC_global___reachable_from_init_method_analysis_impl___RFIMABuilder___work_1(struct stack_frame_t *closctx, val_t p0);
@@ -54,33 +50,24 @@ typedef void (*global___reachable_from_init_method_analysis_impl___RFIMABuilder_
     typedef void (*CLOS_OC_global___reachable_from_init_method_analysis_impl___RFIMABuilder___work_2_0)(struct stack_frame_t *);
     void OC_global___reachable_from_init_method_analysis_impl___RFIMABuilder___work_2(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
     typedef void (*OC_global___reachable_from_init_method_analysis_impl___RFIMABuilder___work_2_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-static const char * const LOCATE_global___reachable_from_init_method_analysis_impl___RFIMAContext___reachable_from_init_iroutines = "reachable_from_init_method_analysis_impl::RFIMAContext::reachable_from_init_iroutines";
 val_t global___reachable_from_init_method_analysis_impl___RFIMAContext___reachable_from_init_iroutines(val_t p0);
 typedef val_t (*global___reachable_from_init_method_analysis_impl___RFIMAContext___reachable_from_init_iroutines_t)(val_t p0);
-static const char * const LOCATE_global___reachable_from_init_method_analysis_impl___RFIMAContext___is_iroutine_reachable_from_init = "reachable_from_init_method_analysis_impl::RFIMAContext::(reachable_from_init_method_analysis::ReachableFromInitMethodAnalysis::is_iroutine_reachable_from_init)";
 val_t global___reachable_from_init_method_analysis_impl___RFIMAContext___is_iroutine_reachable_from_init(val_t p0, val_t p1);
 typedef val_t (*global___reachable_from_init_method_analysis_impl___RFIMAContext___is_iroutine_reachable_from_init_t)(val_t p0, val_t p1);
-static const char * const LOCATE_global___reachable_from_init_method_analysis_impl___RFIMAContext___is_method_reachable_from_init = "reachable_from_init_method_analysis_impl::RFIMAContext::(reachable_from_init_method_analysis::ReachableFromInitMethodAnalysis::is_method_reachable_from_init)";
 val_t global___reachable_from_init_method_analysis_impl___RFIMAContext___is_method_reachable_from_init(val_t p0, val_t p1);
 typedef val_t (*global___reachable_from_init_method_analysis_impl___RFIMAContext___is_method_reachable_from_init_t)(val_t p0, val_t p1);
-static const char * const LOCATE_global___reachable_from_init_method_analysis_impl___RFIMAContext___init = "reachable_from_init_method_analysis_impl::RFIMAContext::init";
 void global___reachable_from_init_method_analysis_impl___RFIMAContext___init(val_t p0, int* init_table);
 typedef void (*global___reachable_from_init_method_analysis_impl___RFIMAContext___init_t)(val_t p0, int* init_table);
 val_t NEW_RFIMAContext_global___reachable_from_init_method_analysis_impl___RFIMAContext___init();
-static const char * const LOCATE_global___reachable_from_init_method_analysis_impl___RFIMAVisitor___context = "reachable_from_init_method_analysis_impl::RFIMAVisitor::context";
 val_t global___reachable_from_init_method_analysis_impl___RFIMAVisitor___context(val_t p0);
 typedef val_t (*global___reachable_from_init_method_analysis_impl___RFIMAVisitor___context_t)(val_t p0);
-static const char * const LOCATE_global___reachable_from_init_method_analysis_impl___RFIMAVisitor___program = "reachable_from_init_method_analysis_impl::RFIMAVisitor::program";
 val_t global___reachable_from_init_method_analysis_impl___RFIMAVisitor___program(val_t p0);
 typedef val_t (*global___reachable_from_init_method_analysis_impl___RFIMAVisitor___program_t)(val_t p0);
-static const char * const LOCATE_global___reachable_from_init_method_analysis_impl___RFIMAVisitor___init = "reachable_from_init_method_analysis_impl::RFIMAVisitor::init";
 void global___reachable_from_init_method_analysis_impl___RFIMAVisitor___init(val_t p0, val_t p1, val_t p2, int* init_table);
 typedef void (*global___reachable_from_init_method_analysis_impl___RFIMAVisitor___init_t)(val_t p0, val_t p1, val_t p2, int* init_table);
 val_t NEW_RFIMAVisitor_global___reachable_from_init_method_analysis_impl___RFIMAVisitor___init(val_t p0, val_t p1);
-static const char * const LOCATE_global___reachable_from_init_method_analysis_impl___RFIMAVisitor___process_call = "reachable_from_init_method_analysis_impl::RFIMAVisitor::process_call";
 void global___reachable_from_init_method_analysis_impl___RFIMAVisitor___process_call(val_t p0, val_t p1);
 typedef void (*global___reachable_from_init_method_analysis_impl___RFIMAVisitor___process_call_t)(val_t p0, val_t p1);
-static const char * const LOCATE_global___reachable_from_init_method_analysis_impl___RFIMAVisitor___visit_icode = "reachable_from_init_method_analysis_impl::RFIMAVisitor::(icode_tools::ICodeVisitor::visit_icode)";
 void global___reachable_from_init_method_analysis_impl___RFIMAVisitor___visit_icode(val_t p0, val_t p1);
 typedef void (*global___reachable_from_init_method_analysis_impl___RFIMAVisitor___visit_icode_t)(val_t p0, val_t p1);
         typedef void (*CLOS_OC_global___reachable_from_init_method_analysis_impl___RFIMAVisitor___visit_icode_1_0)(struct stack_frame_t *);

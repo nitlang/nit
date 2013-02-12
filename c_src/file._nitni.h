@@ -3,6 +3,15 @@
 #ifndef FILE_NITNI_H
 #define FILE_NITNI_H
 
+#ifndef STDIN_TYPE
+#define STDIN_TYPE
+struct s_Stdin{
+		struct nitni_ref ref; /* real ref struct, must be first */
+};
+typedef struct s_Stdin *Stdin;
+#define Stdin_incr_ref( x ) nitni_global_ref_incr( (struct nitni_ref*)(x) )
+#define Stdin_decr_ref( x ) nitni_global_ref_decr( (struct nitni_ref*)(x) )
+#endif
 #ifndef STRING_TYPE
 #define STRING_TYPE
 struct s_String{
@@ -50,6 +59,9 @@ typedef struct s_HashSet *HashSet;
 #endif
 #include "file_nit.h"
 
+/* out/indirect function for file::Stdin::poll_in */
+val_t Stdin_poll_in___out( val_t recv );
+
 /* out/indirect function for file::String::files */
 val_t String_files___out( val_t recv );
 
@@ -79,10 +91,6 @@ val_t FileStat_mtime___out( val_t recv );
 
 /* out/indirect function for file::FileStat::size */
 val_t FileStat_size___out( val_t recv );
-#ifndef FileStat
-	typedef void* FileStat;
-#endif
-
 
 /* out/indirect function for file::NativeFile::io_read */
 val_t NativeFile_io_read___out( val_t recv, val_t buf, val_t len );
@@ -110,11 +118,6 @@ val_t NEW_NativeFile_standard___file___NativeFile___native_stdout(  );
 
 /* out/indirect function for file::NativeFile::native_stderr */
 val_t NEW_NativeFile_standard___file___NativeFile___native_stderr(  );
-#ifndef NativeFile
-	typedef void* NativeFile;
-#endif
-
-#endif
 /* friendly for hash_collection::HashSet::init */
 HashSet file_new_HashSet(  );
 #ifndef new_HashSet
@@ -158,4 +161,5 @@ int file_String_is_a_Object( String value );
 Object file_String_as_Object( String value );
 #ifndef String_as_Object
 #define String_as_Object file_String_as_Object
+#endif
 #endif

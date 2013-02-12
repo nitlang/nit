@@ -13,10 +13,7 @@
  * another product.
  */
 
-#include <string._nitni.h>
-
 #define kernel_Sys_Sys_native_argc_0(self) (glob_argc)
 #define kernel_Sys_Sys_native_argv_1(self, p0) (glob_argv[(p0)])
-float String_to_f___impl( String recv );
 
 #endif

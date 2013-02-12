@@ -17,6 +17,15 @@ typedef struct s_Object *Object;
 /* out/indirect function for math::Int::rand */
 val_t Int_rand___out( val_t recv );
 
+/* out/indirect function for math::Int::bin_and */
+val_t Int_bin_and___out( val_t recv, val_t i );
+
+/* out/indirect function for math::Int::bin_or */
+val_t Int_bin_or___out( val_t recv, val_t i );
+
+/* out/indirect function for math::Int::bin_xor */
+val_t Int_bin_xor___out( val_t recv, val_t i );
+
 /* out/indirect function for math::Float::sqrt */
 val_t Float_sqrt___out( val_t recv );
 

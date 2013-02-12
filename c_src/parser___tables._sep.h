@@ -6,7 +6,7 @@
 #include "tables._nitni.h"
 
 extern const classtable_elt_t VFT_parser___tables___TablesCapable[];
-extern const char *LOCATE_parser___tables;
+extern const char LOCATE_parser___tables[];
 extern const int SFT_parser___tables[];
 #define ID_parser___tables___TablesCapable (SFT_parser___tables[0])
 #define COLOR_parser___tables___TablesCapable (SFT_parser___tables[1])
@@ -15,16 +15,12 @@ extern const int SFT_parser___tables[];
 #define CALL_parser___tables___TablesCapable___lexer_accept(recv) ((parser___tables___TablesCapable___lexer_accept_t)CALL((recv), (SFT_parser___tables[2] + 2)))
 #define CALL_parser___tables___TablesCapable___parser_goto(recv) ((parser___tables___TablesCapable___parser_goto_t)CALL((recv), (SFT_parser___tables[2] + 3)))
 #define CALL_parser___tables___TablesCapable___parser_action(recv) ((parser___tables___TablesCapable___parser_action_t)CALL((recv), (SFT_parser___tables[2] + 4)))
-static const char * const LOCATE_parser___tables___TablesCapable___lexer_goto = "tables::TablesCapable::lexer_goto";
 val_t parser___tables___TablesCapable___lexer_goto(val_t p0, val_t p1, val_t p2);
 typedef val_t (*parser___tables___TablesCapable___lexer_goto_t)(val_t p0, val_t p1, val_t p2);
-static const char * const LOCATE_parser___tables___TablesCapable___lexer_accept = "tables::TablesCapable::lexer_accept";
 val_t parser___tables___TablesCapable___lexer_accept(val_t p0, val_t p1);
 typedef val_t (*parser___tables___TablesCapable___lexer_accept_t)(val_t p0, val_t p1);
-static const char * const LOCATE_parser___tables___TablesCapable___parser_goto = "tables::TablesCapable::parser_goto";
 val_t parser___tables___TablesCapable___parser_goto(val_t p0, val_t p1, val_t p2);
 typedef val_t (*parser___tables___TablesCapable___parser_goto_t)(val_t p0, val_t p1, val_t p2);
-static const char * const LOCATE_parser___tables___TablesCapable___parser_action = "tables::TablesCapable::parser_action";
 val_t parser___tables___TablesCapable___parser_action(val_t p0, val_t p1, val_t p2);
 typedef val_t (*parser___tables___TablesCapable___parser_action_t)(val_t p0, val_t p1, val_t p2);
 #endif

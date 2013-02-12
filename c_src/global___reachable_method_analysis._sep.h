@@ -7,7 +7,7 @@
 extern const classtable_elt_t VFT_global___reachable_method_analysis___ReachableMethodAnalysis[];
 
 extern const classtable_elt_t VFT_global___reachable_method_analysis___DefaultReachableMethodAnalysis[];
-extern const char *LOCATE_global___reachable_method_analysis;
+extern const char LOCATE_global___reachable_method_analysis[];
 extern const int SFT_global___reachable_method_analysis[];
 #define ATTR_global___reachable_method_analysis___Program____rma(recv) ATTR(recv, (SFT_global___reachable_method_analysis[0] + 0))
 #define CALL_global___reachable_method_analysis___Program___rma(recv) ((global___reachable_method_analysis___Program___rma_t)CALL((recv), (SFT_global___reachable_method_analysis[1] + 0)))
@@ -23,36 +23,27 @@ extern const int SFT_global___reachable_method_analysis[];
 #define COLOR_global___reachable_method_analysis___DefaultReachableMethodAnalysis (SFT_global___reachable_method_analysis[6])
 #define INIT_TABLE_POS_global___reachable_method_analysis___DefaultReachableMethodAnalysis (SFT_global___reachable_method_analysis[7] + 0)
 #define CALL_global___reachable_method_analysis___DefaultReachableMethodAnalysis___init(recv) ((global___reachable_method_analysis___DefaultReachableMethodAnalysis___init_t)CALL((recv), (SFT_global___reachable_method_analysis[7] + 1)))
-static const char * const LOCATE_global___reachable_method_analysis___Program___rma = "reachable_method_analysis::Program::rma";
 val_t global___reachable_method_analysis___Program___rma(val_t p0);
 typedef val_t (*global___reachable_method_analysis___Program___rma_t)(val_t p0);
-static const char * const LOCATE_global___reachable_method_analysis___Program___rma__eq = "reachable_method_analysis::Program::rma=";
 void global___reachable_method_analysis___Program___rma__eq(val_t p0, val_t p1);
 typedef void (*global___reachable_method_analysis___Program___rma__eq_t)(val_t p0, val_t p1);
-static const char * const LOCATE_global___reachable_method_analysis___Program___dump_reachable_methods = "reachable_method_analysis::Program::dump_reachable_methods";
 void global___reachable_method_analysis___Program___dump_reachable_methods(val_t p0, val_t p1, val_t p2);
 typedef void (*global___reachable_method_analysis___Program___dump_reachable_methods_t)(val_t p0, val_t p1, val_t p2);
   void OC_global___reachable_method_analysis___Program___dump_reachable_methods_5(struct stack_frame_t *closctx, val_t p0);
   typedef void (*OC_global___reachable_method_analysis___Program___dump_reachable_methods_5_t)(struct stack_frame_t *closctx, val_t p0);
-static const char * const LOCATE_global___reachable_method_analysis___Program___dump_unreachable_methods = "reachable_method_analysis::Program::dump_unreachable_methods";
 void global___reachable_method_analysis___Program___dump_unreachable_methods(val_t p0, val_t p1, val_t p2);
 typedef void (*global___reachable_method_analysis___Program___dump_unreachable_methods_t)(val_t p0, val_t p1, val_t p2);
   void OC_global___reachable_method_analysis___Program___dump_unreachable_methods_5(struct stack_frame_t *closctx, val_t p0);
   typedef void (*OC_global___reachable_method_analysis___Program___dump_unreachable_methods_5_t)(struct stack_frame_t *closctx, val_t p0);
 val_t NEW_Program_program___Program___init(val_t p0, val_t p1);
-static const char * const LOCATE_global___reachable_method_analysis___ReachableMethodAnalysis___is_iroutine_reachable = "reachable_method_analysis::ReachableMethodAnalysis::is_iroutine_reachable";
 val_t global___reachable_method_analysis___ReachableMethodAnalysis___is_iroutine_reachable(val_t p0, val_t p1);
 typedef val_t (*global___reachable_method_analysis___ReachableMethodAnalysis___is_iroutine_reachable_t)(val_t p0, val_t p1);
-static const char * const LOCATE_global___reachable_method_analysis___ReachableMethodAnalysis___is_method_reachable = "reachable_method_analysis::ReachableMethodAnalysis::is_method_reachable";
 val_t global___reachable_method_analysis___ReachableMethodAnalysis___is_method_reachable(val_t p0, val_t p1);
 typedef val_t (*global___reachable_method_analysis___ReachableMethodAnalysis___is_method_reachable_t)(val_t p0, val_t p1);
-static const char * const LOCATE_global___reachable_method_analysis___DefaultReachableMethodAnalysis___is_iroutine_reachable = "reachable_method_analysis::DefaultReachableMethodAnalysis::(reachable_method_analysis::ReachableMethodAnalysis::is_iroutine_reachable)";
 val_t global___reachable_method_analysis___DefaultReachableMethodAnalysis___is_iroutine_reachable(val_t p0, val_t p1);
 typedef val_t (*global___reachable_method_analysis___DefaultReachableMethodAnalysis___is_iroutine_reachable_t)(val_t p0, val_t p1);
-static const char * const LOCATE_global___reachable_method_analysis___DefaultReachableMethodAnalysis___is_method_reachable = "reachable_method_analysis::DefaultReachableMethodAnalysis::(reachable_method_analysis::ReachableMethodAnalysis::is_method_reachable)";
 val_t global___reachable_method_analysis___DefaultReachableMethodAnalysis___is_method_reachable(val_t p0, val_t p1);
 typedef val_t (*global___reachable_method_analysis___DefaultReachableMethodAnalysis___is_method_reachable_t)(val_t p0, val_t p1);
-static const char * const LOCATE_global___reachable_method_analysis___DefaultReachableMethodAnalysis___init = "reachable_method_analysis::DefaultReachableMethodAnalysis::init";
 void global___reachable_method_analysis___DefaultReachableMethodAnalysis___init(val_t p0, int* init_table);
 typedef void (*global___reachable_method_analysis___DefaultReachableMethodAnalysis___init_t)(val_t p0, int* init_table);
 val_t NEW_DefaultReachableMethodAnalysis_global___reachable_method_analysis___DefaultReachableMethodAnalysis___init();

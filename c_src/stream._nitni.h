@@ -79,9 +79,11 @@ val_t FDStream_native_read___out( val_t recv, val_t i, val_t buf, val_t len );
 /* out/indirect function for stream::FDStream::native_write */
 val_t FDStream_native_write___out( val_t recv, val_t i, val_t buf, val_t len );
 
+/* out/indirect function for stream::FDStream::native_write_char */
+val_t FDStream_native_write_char___out( val_t recv, val_t i, val_t c );
+
 /* out/indirect function for stream::Object::intern_poll */
 val_t Object_intern_poll___out( val_t recv, val_t in_fds, val_t out_fds );
-#endif
 /* friendly for array::AbstractArrayRead::(abstract_collection::Collection::length) */
 bigint stream_Array_length( Array recv );
 #ifndef Array_length
@@ -109,4 +111,5 @@ bigint stream_nullable_Object_as_Int( nullable_Object value );
 nullable_Int stream_Int_as_nullable( bigint value );
 #ifndef Int_as_nullable
 #define Int_as_nullable stream_Int_as_nullable
+#endif
 #endif

@@ -20,10 +20,11 @@
 #include <sys/types.h>
 #include <string.h>
 #include <dirent.h>
+#include <poll.h>
 
 #include "file_nit.h"
 
-
+#ifndef NONITCNI
 /*
 C implementation of file::String::files
 
@@ -65,6 +66,7 @@ Set String_files___impl( String recv )
 		return HashSet_as_Set( results );
 	}
 }
+#endif
 
 int string_NativeString_NativeString_file_exists_0(char *f){
 	FILE *hdl = fopen(f,"r");
@@ -96,4 +98,14 @@ void *file_NativeFile_NativeFile_file_stat_0(FILE *f){
 
 extern int string_NativeString_NativeString_file_delete_0(char *f){
   return (remove(f) == 0);
+}
+
+int file_stdin_poll_in_(void) {
+	struct pollfd fd = {0, POLLIN, 0};
+	int res = poll(&fd, 1, 0);
+	if (res == -1) {
+		perror("Error poll stdin");
+		exit(EXIT_FAILURE);
+	}
+	return res > 0;
 }

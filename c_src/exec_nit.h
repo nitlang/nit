@@ -19,7 +19,9 @@
 #include <sys/wait.h>
 #include <signal.h>
 
+#ifndef NONITCNI
 #include <exec._nitni.h>
+#endif
 
 typedef struct se_exec_data se_exec_data_t;
 struct se_exec_data {
@@ -30,6 +32,8 @@ struct se_exec_data {
 	int out_fd;
 	int err_fd;
 };
+
+se_exec_data_t* exec_Process_Process_basic_exec_execute_4(void *, char *, char *, int, int);
 
 #define string_NativeString_NativeString_system_0(self) (system(self))
 
@@ -42,6 +46,5 @@ struct se_exec_data {
 
 int exec_NativeProcess_NativeProcess_is_finished_0(void*);
 void exec_NativeProcess_NativeProcess_wait_0(void*);
-se_exec_data_t* exec_Process_Process_basic_exec_execute_4(Process, char *, char *, int, int);
 
 #endif

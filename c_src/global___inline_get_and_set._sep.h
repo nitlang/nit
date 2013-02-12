@@ -6,7 +6,7 @@
 #include <nit_common.h>
 
 extern const classtable_elt_t VFT_global___inline_get_and_set___InlineGetSetVisitor[];
-extern const char *LOCATE_global___inline_get_and_set;
+extern const char LOCATE_global___inline_get_and_set[];
 extern const int SFT_global___inline_get_and_set[];
 #define ATTR_global___inline_get_and_set___Program____number_getter_setter_inlined(recv) ATTR(recv, (SFT_global___inline_get_and_set[0] + 0))
 #define CALL_global___inline_get_and_set___Program___dump_inline_get_set(recv) ((global___inline_get_and_set___Program___dump_inline_get_set_t)CALL((recv), (SFT_global___inline_get_and_set[1] + 0)))
@@ -19,22 +19,17 @@ extern const int SFT_global___inline_get_and_set[];
 #define CALL_global___inline_get_and_set___InlineGetSetVisitor___number_inlined(recv) ((global___inline_get_and_set___InlineGetSetVisitor___number_inlined_t)CALL((recv), (SFT_global___inline_get_and_set[5] + 1)))
 #define CALL_SUPER_global___inline_get_and_set___InlineGetSetVisitor___visit_icode(recv) ((global___inline_get_and_set___InlineGetSetVisitor___visit_icode_t)CALL((recv), (SFT_global___inline_get_and_set[5] + 2)))
 #define CALL_global___inline_get_and_set___InlineGetSetVisitor___init(recv) ((global___inline_get_and_set___InlineGetSetVisitor___init_t)CALL((recv), (SFT_global___inline_get_and_set[5] + 3)))
-static const char * const LOCATE_global___inline_get_and_set___Program___dump_inline_get_set = "inline_get_and_set::Program::dump_inline_get_set";
 void global___inline_get_and_set___Program___dump_inline_get_set(val_t p0, val_t p1);
 typedef void (*global___inline_get_and_set___Program___dump_inline_get_set_t)(val_t p0, val_t p1);
-static const char * const LOCATE_global___inline_get_and_set___Program___inline_get_set = "inline_get_and_set::Program::inline_get_set";
 void global___inline_get_and_set___Program___inline_get_set(val_t p0);
 typedef void (*global___inline_get_and_set___Program___inline_get_set_t)(val_t p0);
   void OC_global___inline_get_and_set___Program___inline_get_set_1(struct stack_frame_t *closctx, val_t p0, val_t p1);
   typedef void (*OC_global___inline_get_and_set___Program___inline_get_set_1_t)(struct stack_frame_t *closctx, val_t p0, val_t p1);
 val_t NEW_Program_program___Program___init(val_t p0, val_t p1);
-static const char * const LOCATE_global___inline_get_and_set___InlineGetSetVisitor___number_inlined = "inline_get_and_set::InlineGetSetVisitor::number_inlined";
 val_t global___inline_get_and_set___InlineGetSetVisitor___number_inlined(val_t p0);
 typedef val_t (*global___inline_get_and_set___InlineGetSetVisitor___number_inlined_t)(val_t p0);
-static const char * const LOCATE_global___inline_get_and_set___InlineGetSetVisitor___visit_icode = "inline_get_and_set::InlineGetSetVisitor::(icode_tools::ICodeVisitor::visit_icode)";
 void global___inline_get_and_set___InlineGetSetVisitor___visit_icode(val_t p0, val_t p1);
 typedef void (*global___inline_get_and_set___InlineGetSetVisitor___visit_icode_t)(val_t p0, val_t p1);
-static const char * const LOCATE_global___inline_get_and_set___InlineGetSetVisitor___init = "inline_get_and_set::InlineGetSetVisitor::init";
 void global___inline_get_and_set___InlineGetSetVisitor___init(val_t p0, val_t p1, val_t p2, int* init_table);
 typedef void (*global___inline_get_and_set___InlineGetSetVisitor___init_t)(val_t p0, val_t p1, val_t p2, int* init_table);
 val_t NEW_InlineGetSetVisitor_global___inline_get_and_set___InlineGetSetVisitor___init(val_t p0, val_t p1);

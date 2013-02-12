@@ -6,7 +6,7 @@
 #include <nit_common.h>
 
 extern const classtable_elt_t VFT_nitc___NitCompiler[];
-extern const char *LOCATE_nitc;
+extern const char LOCATE_nitc[];
 extern const int SFT_nitc[];
 #define ID_nitc___NitCompiler (SFT_nitc[0])
 #define COLOR_nitc___NitCompiler (SFT_nitc[1])
@@ -32,48 +32,34 @@ extern const int SFT_nitc[];
 #define CALL_nitc___NitCompiler___init(recv) ((nitc___NitCompiler___init_t)CALL((recv), (SFT_nitc[3] + 10)))
 #define CALL_SUPER_nitc___NitCompiler___process_options(recv) ((nitc___NitCompiler___process_options_t)CALL((recv), (SFT_nitc[3] + 11)))
 #define CALL_SUPER_nitc___ToolContext___init(recv) ((nitc___ToolContext___init_t)CALL((recv), (SFT_nitc[4] + 0)))
-static const char * const LOCATE_nitc___NitCompiler___opt_output = "nitc::NitCompiler::opt_output";
 val_t nitc___NitCompiler___opt_output(val_t p0);
 typedef val_t (*nitc___NitCompiler___opt_output_t)(val_t p0);
-static const char * const LOCATE_nitc___NitCompiler___opt_boost = "nitc::NitCompiler::opt_boost";
 val_t nitc___NitCompiler___opt_boost(val_t p0);
 typedef val_t (*nitc___NitCompiler___opt_boost_t)(val_t p0);
-static const char * const LOCATE_nitc___NitCompiler___opt_no_cc = "nitc::NitCompiler::opt_no_cc";
 val_t nitc___NitCompiler___opt_no_cc(val_t p0);
 typedef val_t (*nitc___NitCompiler___opt_no_cc_t)(val_t p0);
-static const char * const LOCATE_nitc___NitCompiler___opt_cc_no_link = "nitc::NitCompiler::opt_cc_no_link";
 val_t nitc___NitCompiler___opt_cc_no_link(val_t p0);
 typedef val_t (*nitc___NitCompiler___opt_cc_no_link_t)(val_t p0);
-static const char * const LOCATE_nitc___NitCompiler___opt_clibdir = "nitc::NitCompiler::opt_clibdir";
 val_t nitc___NitCompiler___opt_clibdir(val_t p0);
 typedef val_t (*nitc___NitCompiler___opt_clibdir_t)(val_t p0);
-static const char * const LOCATE_nitc___NitCompiler___opt_bindir = "nitc::NitCompiler::opt_bindir";
 val_t nitc___NitCompiler___opt_bindir(val_t p0);
 typedef val_t (*nitc___NitCompiler___opt_bindir_t)(val_t p0);
-static const char * const LOCATE_nitc___NitCompiler___opt_compdir = "nitc::NitCompiler::opt_compdir";
 val_t nitc___NitCompiler___opt_compdir(val_t p0);
 typedef val_t (*nitc___NitCompiler___opt_compdir_t)(val_t p0);
-static const char * const LOCATE_nitc___NitCompiler___opt_extension_prefix = "nitc::NitCompiler::opt_extension_prefix";
 val_t nitc___NitCompiler___opt_extension_prefix(val_t p0);
 typedef val_t (*nitc___NitCompiler___opt_extension_prefix_t)(val_t p0);
-static const char * const LOCATE_nitc___NitCompiler___opt_output_format = "nitc::NitCompiler::opt_output_format";
 val_t nitc___NitCompiler___opt_output_format(val_t p0);
 typedef val_t (*nitc___NitCompiler___opt_output_format_t)(val_t p0);
-static const char * const LOCATE_nitc___NitCompiler___init = "nitc::NitCompiler::init";
 void nitc___NitCompiler___init(val_t p0, int* init_table);
 typedef void (*nitc___NitCompiler___init_t)(val_t p0, int* init_table);
 val_t NEW_NitCompiler_nitc___NitCompiler___init();
-static const char * const LOCATE_nitc___NitCompiler___process_options = "nitc::NitCompiler::(toolcontext::ToolContext::process_options)";
 void nitc___NitCompiler___process_options(val_t p0);
 typedef void (*nitc___NitCompiler___process_options_t)(val_t p0);
-static const char * const LOCATE_nitc___NitCompiler___perform_work = "nitc::NitCompiler::(abstracttool::AbstractCompiler::perform_work)";
 void nitc___NitCompiler___perform_work(val_t p0, val_t p1);
 typedef void (*nitc___NitCompiler___perform_work_t)(val_t p0, val_t p1);
-static const char * const LOCATE_nitc___ToolContext___init = "nitc::ToolContext::(toolcontext::ToolContext::init)";
 void nitc___ToolContext___init(val_t p0, int* init_table);
 typedef void (*nitc___ToolContext___init_t)(val_t p0, int* init_table);
 val_t NEW_ToolContext_toolcontext___ToolContext___init();
-static const char * const LOCATE_nitc___Sys___main = "nitc::Sys::(kernel::Sys::main)";
 void nitc___Sys___main(val_t p0);
 typedef void (*nitc___Sys___main_t)(val_t p0);
 val_t NEW_Sys_standard___kernel___Sys___init();

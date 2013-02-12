@@ -6,7 +6,7 @@
 #include <nit_common.h>
 
 extern const classtable_elt_t VFT_mmloader___ModuleLoader[];
-extern const char *LOCATE_mmloader;
+extern const char LOCATE_mmloader[];
 extern const int SFT_mmloader[];
 #define ATTR_mmloader___ToolContext____paths(recv) ATTR(recv, (SFT_mmloader[0] + 0))
 #define ATTR_mmloader___ToolContext____loaders(recv) ATTR(recv, (SFT_mmloader[0] + 1))
@@ -38,62 +38,44 @@ extern const int SFT_mmloader[];
 #define CALL_mmloader___ModuleLoader___load_module(recv) ((mmloader___ModuleLoader___load_module_t)CALL((recv), (SFT_mmloader[4] + 7)))
 #define CALL_mmloader___ModuleLoader___parse_file(recv) ((mmloader___ModuleLoader___parse_file_t)CALL((recv), (SFT_mmloader[4] + 8)))
 #define CALL_mmloader___ModuleLoader___process_metamodel(recv) ((mmloader___ModuleLoader___process_metamodel_t)CALL((recv), (SFT_mmloader[4] + 9)))
-static const char * const LOCATE_mmloader___ToolContext___paths = "mmloader::ToolContext::paths";
 val_t mmloader___ToolContext___paths(val_t p0);
 typedef val_t (*mmloader___ToolContext___paths_t)(val_t p0);
-static const char * const LOCATE_mmloader___ToolContext___opt_path = "mmloader::ToolContext::opt_path";
 val_t mmloader___ToolContext___opt_path(val_t p0);
 typedef val_t (*mmloader___ToolContext___opt_path_t)(val_t p0);
-static const char * const LOCATE_mmloader___ToolContext___opt_only_metamodel = "mmloader::ToolContext::opt_only_metamodel";
 val_t mmloader___ToolContext___opt_only_metamodel(val_t p0);
 typedef val_t (*mmloader___ToolContext___opt_only_metamodel_t)(val_t p0);
-static const char * const LOCATE_mmloader___ToolContext___opt_only_parse = "mmloader::ToolContext::opt_only_parse";
 val_t mmloader___ToolContext___opt_only_parse(val_t p0);
 typedef val_t (*mmloader___ToolContext___opt_only_parse_t)(val_t p0);
-static const char * const LOCATE_mmloader___ToolContext___init = "mmloader::ToolContext::(toolcontext::ToolContext::init)";
 void mmloader___ToolContext___init(val_t p0, int* init_table);
 typedef void (*mmloader___ToolContext___init_t)(val_t p0, int* init_table);
 val_t NEW_ToolContext_toolcontext___ToolContext___init();
-static const char * const LOCATE_mmloader___ToolContext___process_options = "mmloader::ToolContext::(toolcontext::ToolContext::process_options)";
 void mmloader___ToolContext___process_options(val_t p0);
 typedef void (*mmloader___ToolContext___process_options_t)(val_t p0);
-static const char * const LOCATE_mmloader___ToolContext___try_to_load = "mmloader::ToolContext::try_to_load";
 val_t mmloader___ToolContext___try_to_load(val_t p0, val_t p1, val_t p2);
 typedef val_t (*mmloader___ToolContext___try_to_load_t)(val_t p0, val_t p1, val_t p2);
   typedef void (*CLOS_OC_mmloader___ToolContext___try_to_load_1_0)(struct stack_frame_t *);
   void OC_mmloader___ToolContext___try_to_load_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
   typedef void (*OC_mmloader___ToolContext___try_to_load_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-static const char * const LOCATE_mmloader___ToolContext___get_module_from_filename = "mmloader::ToolContext::get_module_from_filename";
 val_t mmloader___ToolContext___get_module_from_filename(val_t p0, val_t p1);
 typedef val_t (*mmloader___ToolContext___get_module_from_filename_t)(val_t p0, val_t p1);
-static const char * const LOCATE_mmloader___ToolContext___get_module = "mmloader::ToolContext::get_module";
 val_t mmloader___ToolContext___get_module(val_t p0, val_t p1, val_t p2);
 typedef val_t (*mmloader___ToolContext___get_module_t)(val_t p0, val_t p1, val_t p2);
-static const char * const LOCATE_mmloader___ToolContext___directory_for = "mmloader::ToolContext::directory_for";
 val_t mmloader___ToolContext___directory_for(val_t p0, val_t p1);
 typedef val_t (*mmloader___ToolContext___directory_for_t)(val_t p0, val_t p1);
-static const char * const LOCATE_mmloader___ToolContext___register_loader = "mmloader::ToolContext::register_loader";
 void mmloader___ToolContext___register_loader(val_t p0, val_t p1);
 typedef void (*mmloader___ToolContext___register_loader_t)(val_t p0, val_t p1);
-static const char * const LOCATE_mmloader___ModuleLoader___file_type = "mmloader::ModuleLoader::file_type";
 val_t mmloader___ModuleLoader___file_type(val_t p0);
 typedef val_t (*mmloader___ModuleLoader___file_type_t)(val_t p0);
-static const char * const LOCATE_mmloader___ModuleLoader___try_to_load_dir = "mmloader::ModuleLoader::try_to_load_dir";
 val_t mmloader___ModuleLoader___try_to_load_dir(val_t p0, val_t p1, val_t p2);
 typedef val_t (*mmloader___ModuleLoader___try_to_load_dir_t)(val_t p0, val_t p1, val_t p2);
-static const char * const LOCATE_mmloader___ModuleLoader___can_handle = "mmloader::ModuleLoader::can_handle";
 val_t mmloader___ModuleLoader___can_handle(val_t p0, val_t p1, val_t p2);
 typedef val_t (*mmloader___ModuleLoader___can_handle_t)(val_t p0, val_t p1, val_t p2);
-static const char * const LOCATE_mmloader___ModuleLoader___load_and_process_module = "mmloader::ModuleLoader::load_and_process_module";
 val_t mmloader___ModuleLoader___load_and_process_module(val_t p0, val_t p1, val_t p2, val_t p3);
 typedef val_t (*mmloader___ModuleLoader___load_and_process_module_t)(val_t p0, val_t p1, val_t p2, val_t p3);
-static const char * const LOCATE_mmloader___ModuleLoader___load_module = "mmloader::ModuleLoader::load_module";
 val_t mmloader___ModuleLoader___load_module(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
 typedef val_t (*mmloader___ModuleLoader___load_module_t)(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
-static const char * const LOCATE_mmloader___ModuleLoader___parse_file = "mmloader::ModuleLoader::parse_file";
 val_t mmloader___ModuleLoader___parse_file(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5);
 typedef val_t (*mmloader___ModuleLoader___parse_file_t)(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5);
-static const char * const LOCATE_mmloader___ModuleLoader___process_metamodel = "mmloader::ModuleLoader::process_metamodel";
 void mmloader___ModuleLoader___process_metamodel(val_t p0, val_t p1, val_t p2);
 typedef void (*mmloader___ModuleLoader___process_metamodel_t)(val_t p0, val_t p1, val_t p2);
 #endif

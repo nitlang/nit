@@ -8,6 +8,6 @@
 #include "standard___math._sep.h"
 #include "standard___gc._sep.h"
 #include <nit_common.h>
-extern const char *LOCATE_standard;
+extern const char LOCATE_standard[];
 extern const int SFT_standard[];
 #endif

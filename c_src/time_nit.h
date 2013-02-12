@@ -15,5 +15,6 @@
 
 #include <time.h>
 #define kernel_Any_Any_get_time_0(self) time(NULL)
-
+#define std_nanosleep(self, sec, nanosec) std_nanosleep_(sec, nanosec);
+void std_nanosleep_(long sec, long nanosec);
 #endif

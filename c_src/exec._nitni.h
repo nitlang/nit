@@ -40,8 +40,4 @@ val_t NativeProcess_out_fd___out( val_t recv );
 
 /* out/indirect function for exec::NativeProcess::err_fd */
 val_t NativeProcess_err_fd___out( val_t recv );
-#ifndef NativeProcess
-	typedef void* NativeProcess;
-#endif
-
 #endif

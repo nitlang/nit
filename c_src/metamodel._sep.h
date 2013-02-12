@@ -4,6 +4,6 @@
 #include "metamodel___vararg._sep.h"
 #include "metamodel___virtualtype._sep.h"
 #include <nit_common.h>
-extern const char *LOCATE_metamodel;
+extern const char LOCATE_metamodel[];
 extern const int SFT_metamodel[];
 #endif

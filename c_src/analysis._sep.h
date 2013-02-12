@@ -5,10 +5,9 @@
 #include "program._sep.h"
 #include "analysis___inline_methods._sep.h"
 #include <nit_common.h>
-extern const char *LOCATE_analysis;
+extern const char LOCATE_analysis[];
 extern const int SFT_analysis[];
 #define CALL_analysis___IRoutine___optimize(recv) ((analysis___IRoutine___optimize_t)CALL((recv), (SFT_analysis[0] + 0)))
-static const char * const LOCATE_analysis___IRoutine___optimize = "analysis::IRoutine::optimize";
 void analysis___IRoutine___optimize(val_t p0, val_t p1);
 typedef void (*analysis___IRoutine___optimize_t)(val_t p0, val_t p1);
 val_t NEW_IRoutine_icode___icode_base___IRoutine___init(val_t p0, val_t p1);

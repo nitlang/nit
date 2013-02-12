@@ -4,9 +4,12 @@
 #include "standard___collection._sep.h"
 #include <nit_common.h>
 #include "math._nitni.h"
-extern const char *LOCATE_standard___math;
+extern const char LOCATE_standard___math[];
 extern const int SFT_standard___math[];
 #define CALL_standard___math___Int___rand(recv) ((standard___math___Int___rand_t)CALL((recv), (SFT_standard___math[0] + 0)))
+#define CALL_standard___math___Int___bin_and(recv) ((standard___math___Int___bin_and_t)CALL((recv), (SFT_standard___math[0] + 1)))
+#define CALL_standard___math___Int___bin_or(recv) ((standard___math___Int___bin_or_t)CALL((recv), (SFT_standard___math[0] + 2)))
+#define CALL_standard___math___Int___bin_xor(recv) ((standard___math___Int___bin_xor_t)CALL((recv), (SFT_standard___math[0] + 3)))
 #define CALL_standard___math___Float___sqrt(recv) ((standard___math___Float___sqrt_t)CALL((recv), (SFT_standard___math[1] + 0)))
 #define CALL_standard___math___Float___cos(recv) ((standard___math___Float___cos_t)CALL((recv), (SFT_standard___math[1] + 1)))
 #define CALL_standard___math___Float___sin(recv) ((standard___math___Float___sin_t)CALL((recv), (SFT_standard___math[1] + 2)))
@@ -24,60 +27,49 @@ extern const int SFT_standard___math[];
 #define CALL_standard___math___Object___pi(recv) ((standard___math___Object___pi_t)CALL((recv), (SFT_standard___math[3] + 1)))
 #define CALL_standard___math___Object___srand_from(recv) ((standard___math___Object___srand_from_t)CALL((recv), (SFT_standard___math[3] + 2)))
 #define CALL_standard___math___Object___srand(recv) ((standard___math___Object___srand_t)CALL((recv), (SFT_standard___math[3] + 3)))
-static const char * const LOCATE_standard___math___Int___rand = "math::Int::rand";
 val_t standard___math___Int___rand(val_t p0);
 typedef val_t (*standard___math___Int___rand_t)(val_t p0);
-static const char * const LOCATE_standard___math___Float___sqrt = "math::Float::sqrt";
+val_t standard___math___Int___bin_and(val_t p0, val_t p1);
+typedef val_t (*standard___math___Int___bin_and_t)(val_t p0, val_t p1);
+val_t standard___math___Int___bin_or(val_t p0, val_t p1);
+typedef val_t (*standard___math___Int___bin_or_t)(val_t p0, val_t p1);
+val_t standard___math___Int___bin_xor(val_t p0, val_t p1);
+typedef val_t (*standard___math___Int___bin_xor_t)(val_t p0, val_t p1);
 val_t standard___math___Float___sqrt(val_t p0);
 typedef val_t (*standard___math___Float___sqrt_t)(val_t p0);
-static const char * const LOCATE_standard___math___Float___cos = "math::Float::cos";
 val_t standard___math___Float___cos(val_t p0);
 typedef val_t (*standard___math___Float___cos_t)(val_t p0);
-static const char * const LOCATE_standard___math___Float___sin = "math::Float::sin";
 val_t standard___math___Float___sin(val_t p0);
 typedef val_t (*standard___math___Float___sin_t)(val_t p0);
-static const char * const LOCATE_standard___math___Float___tan = "math::Float::tan";
 val_t standard___math___Float___tan(val_t p0);
 typedef val_t (*standard___math___Float___tan_t)(val_t p0);
-static const char * const LOCATE_standard___math___Float___acos = "math::Float::acos";
 val_t standard___math___Float___acos(val_t p0);
 typedef val_t (*standard___math___Float___acos_t)(val_t p0);
-static const char * const LOCATE_standard___math___Float___asin = "math::Float::asin";
 val_t standard___math___Float___asin(val_t p0);
 typedef val_t (*standard___math___Float___asin_t)(val_t p0);
-static const char * const LOCATE_standard___math___Float___atan = "math::Float::atan";
 val_t standard___math___Float___atan(val_t p0);
 typedef val_t (*standard___math___Float___atan_t)(val_t p0);
-static const char * const LOCATE_standard___math___Float___pow = "math::Float::pow";
 val_t standard___math___Float___pow(val_t p0, val_t p1);
 typedef val_t (*standard___math___Float___pow_t)(val_t p0, val_t p1);
-static const char * const LOCATE_standard___math___Float___log = "math::Float::log";
 val_t standard___math___Float___log(val_t p0);
 typedef val_t (*standard___math___Float___log_t)(val_t p0);
-static const char * const LOCATE_standard___math___Float___exp = "math::Float::exp";
 val_t standard___math___Float___exp(val_t p0);
 typedef val_t (*standard___math___Float___exp_t)(val_t p0);
-static const char * const LOCATE_standard___math___Float___rand = "math::Float::rand";
 val_t standard___math___Float___rand(val_t p0);
 typedef val_t (*standard___math___Float___rand_t)(val_t p0);
-static const char * const LOCATE_standard___math___Float___hypot_with = "math::Float::hypot_with";
 val_t standard___math___Float___hypot_with(val_t p0, val_t p1);
 typedef val_t (*standard___math___Float___hypot_with_t)(val_t p0, val_t p1);
-static const char * const LOCATE_standard___math___Collection___rand = "math::Collection::rand";
 val_t standard___math___Collection___rand(val_t p0);
 typedef val_t (*standard___math___Collection___rand_t)(val_t p0);
-  void OC_standard___math___Collection___rand_2(struct stack_frame_t *closctx, val_t p0);
-  typedef void (*OC_standard___math___Collection___rand_2_t)(struct stack_frame_t *closctx, val_t p0);
-static const char * const LOCATE_standard___math___Object___atan2 = "math::Object::atan2";
+  typedef void (*CLOS_OC_standard___math___Collection___rand_2_0)(struct stack_frame_t *);
+  void OC_standard___math___Collection___rand_2(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*OC_standard___math___Collection___rand_2_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
 val_t standard___math___Object___atan2(val_t p0, val_t p1, val_t p2);
 typedef val_t (*standard___math___Object___atan2_t)(val_t p0, val_t p1, val_t p2);
-static const char * const LOCATE_standard___math___Object___pi = "math::Object::pi";
 val_t standard___math___Object___pi(val_t p0);
 typedef val_t (*standard___math___Object___pi_t)(val_t p0);
-static const char * const LOCATE_standard___math___Object___srand_from = "math::Object::srand_from";
 void standard___math___Object___srand_from(val_t p0, val_t p1);
 typedef void (*standard___math___Object___srand_from_t)(val_t p0, val_t p1);
-static const char * const LOCATE_standard___math___Object___srand = "math::Object::srand";
 void standard___math___Object___srand(val_t p0);
 typedef void (*standard___math___Object___srand_t)(val_t p0);
 #endif

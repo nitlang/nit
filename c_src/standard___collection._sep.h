@@ -6,6 +6,6 @@
 #include "standard___collection___sorter._sep.h"
 #include "standard___collection___hash_collection._sep.h"
 #include <nit_common.h>
-extern const char *LOCATE_standard___collection;
+extern const char LOCATE_standard___collection[];
 extern const int SFT_standard___collection[];
 #endif

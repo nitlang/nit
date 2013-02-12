@@ -10,7 +10,7 @@ extern const classtable_elt_t VFT_global___reachable_as_init_impl___ReachableAsI
 extern const classtable_elt_t VFT_global___reachable_as_init_impl___ReachableAsInitAnalysisImpl[];
 
 extern const classtable_elt_t VFT_global___reachable_as_init_impl___RAIVisitor[];
-extern const char *LOCATE_global___reachable_as_init_impl;
+extern const char LOCATE_global___reachable_as_init_impl[];
 extern const int SFT_global___reachable_as_init_impl[];
 #define ID_global___reachable_as_init_impl___ReachableAsInitBuilder (SFT_global___reachable_as_init_impl[0])
 #define COLOR_global___reachable_as_init_impl___ReachableAsInitBuilder (SFT_global___reachable_as_init_impl[1])
@@ -33,35 +33,26 @@ extern const int SFT_global___reachable_as_init_impl[];
 #define CALL_global___reachable_as_init_impl___RAIVisitor___builder(recv) ((global___reachable_as_init_impl___RAIVisitor___builder_t)CALL((recv), (SFT_global___reachable_as_init_impl[11] + 1)))
 #define CALL_SUPER_global___reachable_as_init_impl___RAIVisitor___visit_icode(recv) ((global___reachable_as_init_impl___RAIVisitor___visit_icode_t)CALL((recv), (SFT_global___reachable_as_init_impl[11] + 2)))
 #define CALL_global___reachable_as_init_impl___RAIVisitor___init(recv) ((global___reachable_as_init_impl___RAIVisitor___init_t)CALL((recv), (SFT_global___reachable_as_init_impl[11] + 3)))
-static const char * const LOCATE_global___reachable_as_init_impl___ReachableAsInitBuilder___context = "reachable_as_init_impl::ReachableAsInitBuilder::context";
 val_t global___reachable_as_init_impl___ReachableAsInitBuilder___context(val_t p0);
 typedef val_t (*global___reachable_as_init_impl___ReachableAsInitBuilder___context_t)(val_t p0);
-static const char * const LOCATE_global___reachable_as_init_impl___ReachableAsInitBuilder___program = "reachable_as_init_impl::ReachableAsInitBuilder::program";
 val_t global___reachable_as_init_impl___ReachableAsInitBuilder___program(val_t p0);
 typedef val_t (*global___reachable_as_init_impl___ReachableAsInitBuilder___program_t)(val_t p0);
-static const char * const LOCATE_global___reachable_as_init_impl___ReachableAsInitBuilder___work = "reachable_as_init_impl::ReachableAsInitBuilder::work";
 void global___reachable_as_init_impl___ReachableAsInitBuilder___work(val_t p0);
 typedef void (*global___reachable_as_init_impl___ReachableAsInitBuilder___work_t)(val_t p0);
   void OC_global___reachable_as_init_impl___ReachableAsInitBuilder___work_1(struct stack_frame_t *closctx, val_t p0, val_t p1);
   typedef void (*OC_global___reachable_as_init_impl___ReachableAsInitBuilder___work_1_t)(struct stack_frame_t *closctx, val_t p0, val_t p1);
-static const char * const LOCATE_global___reachable_as_init_impl___ReachableAsInitBuilder___init = "reachable_as_init_impl::ReachableAsInitBuilder::init";
 void global___reachable_as_init_impl___ReachableAsInitBuilder___init(val_t p0, val_t p1, int* init_table);
 typedef void (*global___reachable_as_init_impl___ReachableAsInitBuilder___init_t)(val_t p0, val_t p1, int* init_table);
 val_t NEW_ReachableAsInitBuilder_global___reachable_as_init_impl___ReachableAsInitBuilder___init(val_t p0);
-static const char * const LOCATE_global___reachable_as_init_impl___ReachableAsInitAnalysisImpl___is_method_reachable_as_init = "reachable_as_init_impl::ReachableAsInitAnalysisImpl::(reachable_as_init::ReachableAsInitAnalysis::is_method_reachable_as_init)";
 val_t global___reachable_as_init_impl___ReachableAsInitAnalysisImpl___is_method_reachable_as_init(val_t p0, val_t p1, val_t p2);
 typedef val_t (*global___reachable_as_init_impl___ReachableAsInitAnalysisImpl___is_method_reachable_as_init_t)(val_t p0, val_t p1, val_t p2);
-static const char * const LOCATE_global___reachable_as_init_impl___ReachableAsInitAnalysisImpl___init = "reachable_as_init_impl::ReachableAsInitAnalysisImpl::init";
 void global___reachable_as_init_impl___ReachableAsInitAnalysisImpl___init(val_t p0, int* init_table);
 typedef void (*global___reachable_as_init_impl___ReachableAsInitAnalysisImpl___init_t)(val_t p0, int* init_table);
 val_t NEW_ReachableAsInitAnalysisImpl_global___reachable_as_init_impl___ReachableAsInitAnalysisImpl___init();
-static const char * const LOCATE_global___reachable_as_init_impl___RAIVisitor___builder = "reachable_as_init_impl::RAIVisitor::builder";
 val_t global___reachable_as_init_impl___RAIVisitor___builder(val_t p0);
 typedef val_t (*global___reachable_as_init_impl___RAIVisitor___builder_t)(val_t p0);
-static const char * const LOCATE_global___reachable_as_init_impl___RAIVisitor___visit_icode = "reachable_as_init_impl::RAIVisitor::(icode_tools::ICodeVisitor::visit_icode)";
 void global___reachable_as_init_impl___RAIVisitor___visit_icode(val_t p0, val_t p1);
 typedef void (*global___reachable_as_init_impl___RAIVisitor___visit_icode_t)(val_t p0, val_t p1);
-static const char * const LOCATE_global___reachable_as_init_impl___RAIVisitor___init = "reachable_as_init_impl::RAIVisitor::init";
 void global___reachable_as_init_impl___RAIVisitor___init(val_t p0, val_t p1, int* init_table);
 typedef void (*global___reachable_as_init_impl___RAIVisitor___init_t)(val_t p0, val_t p1, int* init_table);
 val_t NEW_RAIVisitor_global___reachable_as_init_impl___RAIVisitor___init(val_t p0);

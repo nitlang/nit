@@ -3,12 +3,16 @@
 /* out/indirect function for environ::NativeString::get_environ */
 val_t NativeString_get_environ___out( val_t recv )
 {
-char * recv___nitni;
-char * return___nitni;
-val_t return___nit;
-recv___nitni = UNBOX_NativeString(recv);
-return___nitni = string_NativeString_NativeString_get_environ_0( recv___nitni );
-return___nit = BOX_NativeString(return___nitni);
+char * orig_return;
+val_t trans_return;
+orig_return = string_NativeString_NativeString_get_environ_0( UNBOX_NativeString(recv) );
+trans_return = BOX_NativeString(orig_return);
 nitni_local_ref_clean(  );
-return return___nit;
+return trans_return;
+}
+/* out/indirect function for environ::NativeString::setenv */
+void NativeString_setenv___out( val_t recv, val_t v )
+{
+string_NativeString_NativeString_setenv_1( UNBOX_NativeString(recv), UNBOX_NativeString(v) );
+nitni_local_ref_clean(  );
 }

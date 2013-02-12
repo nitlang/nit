@@ -16,7 +16,7 @@
 #include <poll.h>
 #include <errno.h>
 
-int stream_FDStream_FDStream_native_read_char_1(FDStream s, int fd) {
+int stream_FDStream_FDStream_native_read_char_1(void *s, int fd) {
 	int result;
 	char buf;
 	ssize_t r = read(fd, &buf, 1);
@@ -26,11 +26,7 @@ int stream_FDStream_FDStream_native_read_char_1(FDStream s, int fd) {
 		result = buf;
 	return result;
 }
-
-void stream_FDStream_FDStream_write_char_1(FDStream s, int fd, int c) {
-	write(fd, &c, 1);
-}
-
+#ifndef NONITCNI
 
 /*
 C implementation of stream::Object::intern_poll
@@ -59,8 +55,9 @@ nullable_Int Object_intern_poll___impl( Object recv, Array in_fds, Array out_fds
 
 	/* input streams */
 	for ( i=0; i<in_len; i ++ ) {
+		int fd;
 		tmp_nit_obj = Array__index( in_fds, i );
-		int fd = nullable_Object_as_Int( tmp_nit_obj );
+		fd = nullable_Object_as_Int( tmp_nit_obj );
 
 		c_fds[i].fd = fd;
 		c_fds[i].events = POLLIN;
@@ -68,8 +65,9 @@ nullable_Int Object_intern_poll___impl( Object recv, Array in_fds, Array out_fds
 
 	/* output streams */
 	for ( i=0; i<out_len; i ++ ) {
+		int fd;
 		tmp_nit_obj = Array__index( out_fds, i );
-		int fd = nullable_Object_as_Int( tmp_nit_obj );
+		fd = nullable_Object_as_Int( tmp_nit_obj );
 
 		c_fds[i].fd = fd;
 		c_fds[i].events = POLLOUT;
@@ -95,3 +93,4 @@ nullable_Int Object_intern_poll___impl( Object recv, Array in_fds, Array out_fds
 
 	return null_Int();
 }
+#endif

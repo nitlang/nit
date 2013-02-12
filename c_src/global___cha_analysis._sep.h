@@ -9,7 +9,7 @@ extern const classtable_elt_t VFT_global___cha_analysis___ChaContext[];
 extern const classtable_elt_t VFT_global___cha_analysis___ChaBuilder[];
 
 extern const classtable_elt_t VFT_global___cha_analysis___ChaVisitor[];
-extern const char *LOCATE_global___cha_analysis;
+extern const char LOCATE_global___cha_analysis[];
 extern const int SFT_global___cha_analysis[];
 #define ID_global___cha_analysis___ChaContext (SFT_global___cha_analysis[0])
 #define COLOR_global___cha_analysis___ChaContext (SFT_global___cha_analysis[1])
@@ -36,33 +36,24 @@ extern const int SFT_global___cha_analysis[];
 #define CALL_global___cha_analysis___ChaVisitor___builder(recv) ((global___cha_analysis___ChaVisitor___builder_t)CALL((recv), (SFT_global___cha_analysis[11] + 1)))
 #define CALL_SUPER_global___cha_analysis___ChaVisitor___visit_icode(recv) ((global___cha_analysis___ChaVisitor___visit_icode_t)CALL((recv), (SFT_global___cha_analysis[11] + 2)))
 #define CALL_global___cha_analysis___ChaVisitor___init(recv) ((global___cha_analysis___ChaVisitor___init_t)CALL((recv), (SFT_global___cha_analysis[11] + 3)))
-static const char * const LOCATE_global___cha_analysis___ChaContext___reachable_iroutines = "cha_analysis::ChaContext::reachable_iroutines";
 val_t global___cha_analysis___ChaContext___reachable_iroutines(val_t p0);
 typedef val_t (*global___cha_analysis___ChaContext___reachable_iroutines_t)(val_t p0);
-static const char * const LOCATE_global___cha_analysis___ChaContext___is_iroutine_reachable = "cha_analysis::ChaContext::(reachable_method_analysis::ReachableMethodAnalysis::is_iroutine_reachable)";
 val_t global___cha_analysis___ChaContext___is_iroutine_reachable(val_t p0, val_t p1);
 typedef val_t (*global___cha_analysis___ChaContext___is_iroutine_reachable_t)(val_t p0, val_t p1);
-static const char * const LOCATE_global___cha_analysis___ChaContext___is_method_reachable = "cha_analysis::ChaContext::(reachable_method_analysis::ReachableMethodAnalysis::is_method_reachable)";
 val_t global___cha_analysis___ChaContext___is_method_reachable(val_t p0, val_t p1);
 typedef val_t (*global___cha_analysis___ChaContext___is_method_reachable_t)(val_t p0, val_t p1);
-static const char * const LOCATE_global___cha_analysis___ChaContext___init = "cha_analysis::ChaContext::init";
 void global___cha_analysis___ChaContext___init(val_t p0, int* init_table);
 typedef void (*global___cha_analysis___ChaContext___init_t)(val_t p0, int* init_table);
 val_t NEW_ChaContext_global___cha_analysis___ChaContext___init();
-static const char * const LOCATE_global___cha_analysis___ChaBuilder___iroutine_to_search = "cha_analysis::ChaBuilder::iroutine_to_search";
 val_t global___cha_analysis___ChaBuilder___iroutine_to_search(val_t p0);
 typedef val_t (*global___cha_analysis___ChaBuilder___iroutine_to_search_t)(val_t p0);
-static const char * const LOCATE_global___cha_analysis___ChaBuilder___context = "cha_analysis::ChaBuilder::context";
 val_t global___cha_analysis___ChaBuilder___context(val_t p0);
 typedef val_t (*global___cha_analysis___ChaBuilder___context_t)(val_t p0);
-static const char * const LOCATE_global___cha_analysis___ChaBuilder___program = "cha_analysis::ChaBuilder::program";
 val_t global___cha_analysis___ChaBuilder___program(val_t p0);
 typedef val_t (*global___cha_analysis___ChaBuilder___program_t)(val_t p0);
-static const char * const LOCATE_global___cha_analysis___ChaBuilder___init = "cha_analysis::ChaBuilder::init";
 void global___cha_analysis___ChaBuilder___init(val_t p0, val_t p1, int* init_table);
 typedef void (*global___cha_analysis___ChaBuilder___init_t)(val_t p0, val_t p1, int* init_table);
 val_t NEW_ChaBuilder_global___cha_analysis___ChaBuilder___init(val_t p0);
-static const char * const LOCATE_global___cha_analysis___ChaBuilder___add_search = "cha_analysis::ChaBuilder::add_search";
 void global___cha_analysis___ChaBuilder___add_search(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
 typedef void (*global___cha_analysis___ChaBuilder___add_search_t)(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
       typedef void (*CLOS_OC_global___cha_analysis___ChaBuilder___add_search_1_0)(struct stack_frame_t *);
@@ -71,16 +62,12 @@ typedef void (*global___cha_analysis___ChaBuilder___add_search_t)(val_t p0, val_
       typedef void (*CLOS_OC_global___cha_analysis___ChaBuilder___add_search_2_0)(struct stack_frame_t *);
       void OC_global___cha_analysis___ChaBuilder___add_search_2(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
       typedef void (*OC_global___cha_analysis___ChaBuilder___add_search_2_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
-static const char * const LOCATE_global___cha_analysis___ChaBuilder___work = "cha_analysis::ChaBuilder::work";
 void global___cha_analysis___ChaBuilder___work(val_t p0);
 typedef void (*global___cha_analysis___ChaBuilder___work_t)(val_t p0);
-static const char * const LOCATE_global___cha_analysis___ChaVisitor___builder = "cha_analysis::ChaVisitor::builder";
 val_t global___cha_analysis___ChaVisitor___builder(val_t p0);
 typedef val_t (*global___cha_analysis___ChaVisitor___builder_t)(val_t p0);
-static const char * const LOCATE_global___cha_analysis___ChaVisitor___visit_icode = "cha_analysis::ChaVisitor::(icode_tools::ICodeVisitor::visit_icode)";
 void global___cha_analysis___ChaVisitor___visit_icode(val_t p0, val_t p1);
 typedef void (*global___cha_analysis___ChaVisitor___visit_icode_t)(val_t p0, val_t p1);
-static const char * const LOCATE_global___cha_analysis___ChaVisitor___init = "cha_analysis::ChaVisitor::init";
 void global___cha_analysis___ChaVisitor___init(val_t p0, val_t p1, int* init_table);
 typedef void (*global___cha_analysis___ChaVisitor___init_t)(val_t p0, val_t p1, int* init_table);
 val_t NEW_ChaVisitor_global___cha_analysis___ChaVisitor___init(val_t p0);

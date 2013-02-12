@@ -7,7 +7,7 @@
 extern const classtable_elt_t VFT_metamodel___virtualtype___MMTypeProperty[];
 
 extern const classtable_elt_t VFT_metamodel___virtualtype___MMVirtualType[];
-extern const char *LOCATE_metamodel___virtualtype;
+extern const char LOCATE_metamodel___virtualtype[];
 extern const int SFT_metamodel___virtualtype[];
 #define CALL_metamodel___virtualtype___MMGlobalProperty___is_virtual_type(recv) ((metamodel___virtualtype___MMGlobalProperty___is_virtual_type_t)CALL((recv), (SFT_metamodel___virtualtype[0] + 0)))
 #define ID_metamodel___virtualtype___MMTypeProperty (SFT_metamodel___virtualtype[1])
@@ -26,43 +26,31 @@ extern const int SFT_metamodel___virtualtype[];
 #define CALL_metamodel___virtualtype___MMVirtualType___init(recv) ((metamodel___virtualtype___MMVirtualType___init_t)CALL((recv), (SFT_metamodel___virtualtype[8] + 3)))
 #define CALL_metamodel___virtualtype___MMLocalClass___virtual_type(recv) ((metamodel___virtualtype___MMLocalClass___virtual_type_t)CALL((recv), (SFT_metamodel___virtualtype[9] + 0)))
 #define CALL_metamodel___virtualtype___MMLocalClass___select_virtual_type(recv) ((metamodel___virtualtype___MMLocalClass___select_virtual_type_t)CALL((recv), (SFT_metamodel___virtualtype[9] + 1)))
-static const char * const LOCATE_metamodel___virtualtype___MMGlobalProperty___is_virtual_type = "virtualtype::MMGlobalProperty::is_virtual_type";
 val_t metamodel___virtualtype___MMGlobalProperty___is_virtual_type(val_t p0);
 typedef val_t (*metamodel___virtualtype___MMGlobalProperty___is_virtual_type_t)(val_t p0);
 val_t NEW_MMGlobalProperty_metamodel___abstractmetamodel___MMGlobalProperty___init(val_t p0);
-static const char * const LOCATE_metamodel___virtualtype___MMTypeProperty___stype_for = "virtualtype::MMTypeProperty::stype_for";
 val_t metamodel___virtualtype___MMTypeProperty___stype_for(val_t p0, val_t p1);
 typedef val_t (*metamodel___virtualtype___MMTypeProperty___stype_for_t)(val_t p0, val_t p1);
-static const char * const LOCATE_metamodel___virtualtype___MMTypeProperty___real_stype_for = "virtualtype::MMTypeProperty::real_stype_for";
 val_t metamodel___virtualtype___MMTypeProperty___real_stype_for(val_t p0, val_t p1);
 typedef val_t (*metamodel___virtualtype___MMTypeProperty___real_stype_for_t)(val_t p0, val_t p1);
 val_t NEW_MMTypeProperty_metamodel___abstractmetamodel___MMLocalProperty___init(val_t p0, val_t p1);
-static const char * const LOCATE_metamodel___virtualtype___MMVirtualType___property = "virtualtype::MMVirtualType::property";
 val_t metamodel___virtualtype___MMVirtualType___property(val_t p0);
 typedef val_t (*metamodel___virtualtype___MMVirtualType___property_t)(val_t p0);
-static const char * const LOCATE_metamodel___virtualtype___MMVirtualType___recv = "virtualtype::MMVirtualType::recv";
 val_t metamodel___virtualtype___MMVirtualType___recv(val_t p0);
 typedef val_t (*metamodel___virtualtype___MMVirtualType___recv_t)(val_t p0);
-static const char * const LOCATE_metamodel___virtualtype___MMVirtualType___init = "virtualtype::MMVirtualType::init";
 void metamodel___virtualtype___MMVirtualType___init(val_t p0, val_t p1, val_t p2, int* init_table);
 typedef void (*metamodel___virtualtype___MMVirtualType___init_t)(val_t p0, val_t p1, val_t p2, int* init_table);
 val_t NEW_MMVirtualType_metamodel___virtualtype___MMVirtualType___init(val_t p0, val_t p1);
-static const char * const LOCATE_metamodel___virtualtype___MMVirtualType___mmmodule = "virtualtype::MMVirtualType::(static_type::MMType::mmmodule)";
 val_t metamodel___virtualtype___MMVirtualType___mmmodule(val_t p0);
 typedef val_t (*metamodel___virtualtype___MMVirtualType___mmmodule_t)(val_t p0);
-static const char * const LOCATE_metamodel___virtualtype___MMVirtualType___for_module = "virtualtype::MMVirtualType::(static_type::MMType::for_module)";
 val_t metamodel___virtualtype___MMVirtualType___for_module(val_t p0, val_t p1);
 typedef val_t (*metamodel___virtualtype___MMVirtualType___for_module_t)(val_t p0, val_t p1);
-static const char * const LOCATE_metamodel___virtualtype___MMVirtualType___not_for_self = "virtualtype::MMVirtualType::(static_type::MMType::not_for_self)";
 val_t metamodel___virtualtype___MMVirtualType___not_for_self(val_t p0);
 typedef val_t (*metamodel___virtualtype___MMVirtualType___not_for_self_t)(val_t p0);
-static const char * const LOCATE_metamodel___virtualtype___MMVirtualType___adapt_to = "virtualtype::MMVirtualType::(static_type::MMType::adapt_to)";
 val_t metamodel___virtualtype___MMVirtualType___adapt_to(val_t p0, val_t p1);
 typedef val_t (*metamodel___virtualtype___MMVirtualType___adapt_to_t)(val_t p0, val_t p1);
-static const char * const LOCATE_metamodel___virtualtype___MMLocalClass___virtual_type = "virtualtype::MMLocalClass::virtual_type";
 val_t metamodel___virtualtype___MMLocalClass___virtual_type(val_t p0, val_t p1);
 typedef val_t (*metamodel___virtualtype___MMLocalClass___virtual_type_t)(val_t p0, val_t p1);
-static const char * const LOCATE_metamodel___virtualtype___MMLocalClass___select_virtual_type = "virtualtype::MMLocalClass::select_virtual_type";
 val_t metamodel___virtualtype___MMLocalClass___select_virtual_type(val_t p0, val_t p1);
 typedef val_t (*metamodel___virtualtype___MMLocalClass___select_virtual_type_t)(val_t p0, val_t p1);
 val_t NEW_MMLocalClass_metamodel___abstractmetamodel___MMLocalClass___init(val_t p0, val_t p1, val_t p2);

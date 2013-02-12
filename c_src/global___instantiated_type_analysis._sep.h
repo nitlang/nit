@@ -7,7 +7,7 @@
 extern const classtable_elt_t VFT_global___instantiated_type_analysis___InstantiatedTypeAnalysis[];
 
 extern const classtable_elt_t VFT_global___instantiated_type_analysis___DefaultInstantiatedTypeAnalysis[];
-extern const char *LOCATE_global___instantiated_type_analysis;
+extern const char LOCATE_global___instantiated_type_analysis[];
 extern const int SFT_global___instantiated_type_analysis[];
 #define ATTR_global___instantiated_type_analysis___Program____ita(recv) ATTR(recv, (SFT_global___instantiated_type_analysis[0] + 0))
 #define CALL_global___instantiated_type_analysis___Program___ita(recv) ((global___instantiated_type_analysis___Program___ita_t)CALL((recv), (SFT_global___instantiated_type_analysis[1] + 0)))
@@ -22,38 +22,30 @@ extern const int SFT_global___instantiated_type_analysis[];
 #define COLOR_global___instantiated_type_analysis___DefaultInstantiatedTypeAnalysis (SFT_global___instantiated_type_analysis[6])
 #define INIT_TABLE_POS_global___instantiated_type_analysis___DefaultInstantiatedTypeAnalysis (SFT_global___instantiated_type_analysis[7] + 0)
 #define CALL_global___instantiated_type_analysis___DefaultInstantiatedTypeAnalysis___init(recv) ((global___instantiated_type_analysis___DefaultInstantiatedTypeAnalysis___init_t)CALL((recv), (SFT_global___instantiated_type_analysis[7] + 1)))
-static const char * const LOCATE_global___instantiated_type_analysis___Program___ita = "instantiated_type_analysis::Program::ita";
 val_t global___instantiated_type_analysis___Program___ita(val_t p0);
 typedef val_t (*global___instantiated_type_analysis___Program___ita_t)(val_t p0);
-static const char * const LOCATE_global___instantiated_type_analysis___Program___ita__eq = "instantiated_type_analysis::Program::ita=";
 void global___instantiated_type_analysis___Program___ita__eq(val_t p0, val_t p1);
 typedef void (*global___instantiated_type_analysis___Program___ita__eq_t)(val_t p0, val_t p1);
-static const char * const LOCATE_global___instantiated_type_analysis___Program___dump_instantiated_types = "instantiated_type_analysis::Program::dump_instantiated_types";
 void global___instantiated_type_analysis___Program___dump_instantiated_types(val_t p0, val_t p1);
 typedef void (*global___instantiated_type_analysis___Program___dump_instantiated_types_t)(val_t p0, val_t p1);
   void OC_global___instantiated_type_analysis___Program___dump_instantiated_types_4(struct stack_frame_t *closctx, val_t p0);
   typedef void (*OC_global___instantiated_type_analysis___Program___dump_instantiated_types_4_t)(struct stack_frame_t *closctx, val_t p0);
-static const char * const LOCATE_global___instantiated_type_analysis___Program___dump_not_instantiated_types = "instantiated_type_analysis::Program::dump_not_instantiated_types";
 void global___instantiated_type_analysis___Program___dump_not_instantiated_types(val_t p0, val_t p1);
 typedef void (*global___instantiated_type_analysis___Program___dump_not_instantiated_types_t)(val_t p0, val_t p1);
   typedef void (*CLOS_OC_global___instantiated_type_analysis___Program___dump_not_instantiated_types_4_0)(struct stack_frame_t *);
   void OC_global___instantiated_type_analysis___Program___dump_not_instantiated_types_4(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
   typedef void (*OC_global___instantiated_type_analysis___Program___dump_not_instantiated_types_4_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
 typedef void (*CLOS_global___instantiated_type_analysis___Program___with_each_live_local_classes_0)(struct stack_frame_t *, val_t);
-static const char * const LOCATE_global___instantiated_type_analysis___Program___with_each_live_local_classes = "instantiated_type_analysis::Program::(program::Program::with_each_live_local_classes)";
 void global___instantiated_type_analysis___Program___with_each_live_local_classes(val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
 typedef void (*global___instantiated_type_analysis___Program___with_each_live_local_classes_t)(val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
   typedef void (*CLOS_OC_global___instantiated_type_analysis___Program___with_each_live_local_classes_1_0)(struct stack_frame_t *);
   void OC_global___instantiated_type_analysis___Program___with_each_live_local_classes_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
   typedef void (*OC_global___instantiated_type_analysis___Program___with_each_live_local_classes_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
 val_t NEW_Program_program___Program___init(val_t p0, val_t p1);
-static const char * const LOCATE_global___instantiated_type_analysis___InstantiatedTypeAnalysis___is_class_instantiated = "instantiated_type_analysis::InstantiatedTypeAnalysis::is_class_instantiated";
 val_t global___instantiated_type_analysis___InstantiatedTypeAnalysis___is_class_instantiated(val_t p0, val_t p1);
 typedef val_t (*global___instantiated_type_analysis___InstantiatedTypeAnalysis___is_class_instantiated_t)(val_t p0, val_t p1);
-static const char * const LOCATE_global___instantiated_type_analysis___DefaultInstantiatedTypeAnalysis___is_class_instantiated = "instantiated_type_analysis::DefaultInstantiatedTypeAnalysis::(instantiated_type_analysis::InstantiatedTypeAnalysis::is_class_instantiated)";
 val_t global___instantiated_type_analysis___DefaultInstantiatedTypeAnalysis___is_class_instantiated(val_t p0, val_t p1);
 typedef val_t (*global___instantiated_type_analysis___DefaultInstantiatedTypeAnalysis___is_class_instantiated_t)(val_t p0, val_t p1);
-static const char * const LOCATE_global___instantiated_type_analysis___DefaultInstantiatedTypeAnalysis___init = "instantiated_type_analysis::DefaultInstantiatedTypeAnalysis::init";
 void global___instantiated_type_analysis___DefaultInstantiatedTypeAnalysis___init(val_t p0, int* init_table);
 typedef void (*global___instantiated_type_analysis___DefaultInstantiatedTypeAnalysis___init_t)(val_t p0, int* init_table);
 val_t NEW_DefaultInstantiatedTypeAnalysis_global___instantiated_type_analysis___DefaultInstantiatedTypeAnalysis___init();

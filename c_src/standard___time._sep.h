@@ -4,10 +4,13 @@
 #include "standard___kernel._sep.h"
 #include <nit_common.h>
 #include "time._nitni.h"
-extern const char *LOCATE_standard___time;
+extern const char LOCATE_standard___time[];
 extern const int SFT_standard___time[];
 #define CALL_standard___time___Object___get_time(recv) ((standard___time___Object___get_time_t)CALL((recv), (SFT_standard___time[0] + 0)))
-static const char * const LOCATE_standard___time___Object___get_time = "time::Object::get_time";
+#define CALL_standard___time___Sys___nanosleep(recv) ((standard___time___Sys___nanosleep_t)CALL((recv), (SFT_standard___time[1] + 0)))
 val_t standard___time___Object___get_time(val_t p0);
 typedef val_t (*standard___time___Object___get_time_t)(val_t p0);
+void standard___time___Sys___nanosleep(val_t p0, val_t p1, val_t p2);
+typedef void (*standard___time___Sys___nanosleep_t)(val_t p0, val_t p1, val_t p2);
+val_t NEW_Sys_standard___kernel___Sys___init();
 #endif
