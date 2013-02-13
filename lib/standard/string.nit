@@ -64,10 +64,10 @@ abstract class AbstractString
 		return substring(from, length - from)
 	end
 
-	# Is `self' a substring of the `str' string from pos `pos'
+	# Does self have a substring 'str' starting from position 'pos
 	#
-	# "bc".is_substring("abcd",1) 	# --> true
-	# "bc".is_substring("abcd",2) 	# --> false
+	# "abcd".has_substring("bc",1) 	# --> true
+	# "abcd".has_substring("bc",2) 	# --> false
 	fun has_substring(str: String, pos: Int): Bool
 	do
 		var itsindex = str.length - 1
@@ -229,10 +229,10 @@ class String
 		return substring(from, _length)
 	end
 
-	# Is `self' a substring of the `str' string from pos `pos'
+	# Does self have a substring 'str' starting from position 'pos
 	#
-	# "bc".is_substring("abcd",1) 	# --> true
-	# "bc".is_substring("abcd",2) 	# --> false
+	# "abcd".has_substring("bc",1) 	# --> true
+	# "abcd".has_substring("bc",2) 	# --> false
 	redef fun has_substring(str: String, pos: Int): Bool
 	do
 		var itsindex = str._length - 1
