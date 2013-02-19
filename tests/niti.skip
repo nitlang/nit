@@ -6,6 +6,7 @@ test_ni_
 test_ffi_
 test_math
 test_mem
+test_gtk
 shoot_logic
 bench_
 nit_args1

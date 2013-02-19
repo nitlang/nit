@@ -1,0 +1,73 @@
+# This file is part of NIT ( http://www.nitlanguage.org ).
+#
+# Copyright 2011-2013 Alexis Laferrière <alexis.laf@xymus.net>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import gtk
+
+class MyApp
+	super GtkCallable
+
+	var win : GtkWindow
+
+	var container : GtkContainer
+
+	var lbl : GtkLabel
+	var but_ok : GtkButton
+	var but_cancel : GtkButton
+
+	redef fun signal( sender, user_data )
+	do
+		if user_data != null then print "Userdata: {user_data}"
+
+		if sender == but_ok then
+			print "ok!"
+			quit_gtk
+		else if sender == but_cancel then
+			print "cancel!"
+			quit_gtk
+		else
+			print sender
+		end
+		
+	end
+
+	init
+	do
+		init_gtk
+
+		win = new GtkWindow( 0 )
+
+		container = new GtkGrid(2,1,true)
+		win.add( container )
+
+		lbl = new GtkLabel( "Hello world" )
+		container.add( lbl )
+
+		but_ok = new GtkButton.from_stock( "OK" )
+		but_ok.signal_connect( "clicked", self, "ok" )
+		container.add( but_ok )
+
+		but_cancel = new GtkButton.from_stock( "Cancel" )
+		but_cancel.signal_connect( "clicked", self, null )
+		container.add( but_cancel )
+
+		win.show_all
+	end
+end
+
+if "NIT_TESTING".environ != "true" then
+	var app = new MyApp
+	run_gtk
+end
