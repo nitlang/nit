@@ -15,7 +15,7 @@
 # limitations under the License.
 
 extern A
-special Pointer
+super Pointer
 	new is extern
 
 	redef fun to_s : String is extern import String::from_cstring

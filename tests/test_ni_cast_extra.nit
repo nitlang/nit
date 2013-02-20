@@ -23,13 +23,13 @@ class B
 end
 
 class C
-special A
+super A
     fun isa_a : Bool is extern import C as(A)
 end
 
 class D # triangle
-special A
-special B
+super A
+super B
     init do end
     fun as_a : A is extern import D as(A)
 end

@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-extern A special Pointer
+extern A super Pointer
 	new is extern import p
 	new with_args( x : Int, a : A ) is extern
 

@@ -20,7 +20,7 @@ class A
 end
 
 class B
-special A
+super A
 	redef fun extern_echo is extern
 	redef fun echo do print "B"
 end
