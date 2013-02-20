@@ -69,7 +69,6 @@ kwclass = 'class';
 kwabstract = 'abstract';
 kwinterface = 'interface';
 kwenum = 'universal'|'enum';
-kwspecial = 'special';
 kwend = 'end';
 kwmeth = 'fun';
 kwtype = 'type';
@@ -195,7 +194,7 @@ implicit_main_meth {-> propdef}
 
 /* CLASSES *******************************************************************/
 classdef
-	= [doc]:no redef visibility classkind no classid formaldefs? extern_code_block? [specials]:special* propdefs* [n2]:no kwend {-> New classdef.std(doc.doc, redef.kwredef, visibility, classkind, classid, [formaldefs.formaldef], extern_code_block, [specials.superclass], [propdefs.propdef], kwend)};
+	= [doc]:no redef visibility classkind no classid formaldefs? extern_code_block? [superclasses]:superclass* propdefs* [n2]:no kwend {-> New classdef.std(doc.doc, redef.kwredef, visibility, classkind, classid, [formaldefs.formaldef], extern_code_block, [superclasses.superclass], [propdefs.propdef], kwend)};
 redef {-> kwredef?}
 	= kwredef? {-> kwredef};
 classkind
@@ -213,9 +212,8 @@ formaldefs_tail {-> formaldef}
 formaldef
 	= classid typing? {-> New formaldef(classid, typing.type)};
 
-special {-> superclass}
-	= {special} no kwspecial [n2]:no type {-> New superclass(kwspecial, Null, type)}
-	| {super} no kwsuper [n2]:no type {-> New superclass(Null, kwsuper, type)}
+superclass {-> superclass}
+	= {super} no kwsuper [n2]:no type {-> New superclass(kwsuper, type)}
 	;
 
 propdefs~toplevel {-> propdef}
@@ -658,7 +656,7 @@ classkind
 	| {extern} kwextern
 	;
 formaldef = [id]:classid type?;
-superclass = kwspecial? kwsuper? type;
+superclass = kwsuper type;
 
 
 propdef = {attr} doc? [readable]:able? [writable]:able? kwredef? visibility kwvar [id]:attrid? [id2]:id? type? expr?

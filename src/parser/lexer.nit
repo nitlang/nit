@@ -116,7 +116,7 @@ redef class TKwenum
     end
 end
 
-redef class TKwspecial
+redef class TKwend
     redef fun parser_index: Int
     do
 	return 8
@@ -128,7 +128,7 @@ redef class TKwspecial
     end
 end
 
-redef class TKwend
+redef class TKwmeth
     redef fun parser_index: Int
     do
 	return 9
@@ -140,7 +140,7 @@ redef class TKwend
     end
 end
 
-redef class TKwmeth
+redef class TKwtype
     redef fun parser_index: Int
     do
 	return 10
@@ -152,7 +152,7 @@ redef class TKwmeth
     end
 end
 
-redef class TKwtype
+redef class TKwinit
     redef fun parser_index: Int
     do
 	return 11
@@ -164,7 +164,7 @@ redef class TKwtype
     end
 end
 
-redef class TKwinit
+redef class TKwredef
     redef fun parser_index: Int
     do
 	return 12
@@ -176,7 +176,7 @@ redef class TKwinit
     end
 end
 
-redef class TKwredef
+redef class TKwis
     redef fun parser_index: Int
     do
 	return 13
@@ -188,7 +188,7 @@ redef class TKwredef
     end
 end
 
-redef class TKwis
+redef class TKwdo
     redef fun parser_index: Int
     do
 	return 14
@@ -200,7 +200,7 @@ redef class TKwis
     end
 end
 
-redef class TKwdo
+redef class TKwreadable
     redef fun parser_index: Int
     do
 	return 15
@@ -212,7 +212,7 @@ redef class TKwdo
     end
 end
 
-redef class TKwreadable
+redef class TKwwritable
     redef fun parser_index: Int
     do
 	return 16
@@ -224,7 +224,7 @@ redef class TKwreadable
     end
 end
 
-redef class TKwwritable
+redef class TKwvar
     redef fun parser_index: Int
     do
 	return 17
@@ -236,7 +236,7 @@ redef class TKwwritable
     end
 end
 
-redef class TKwvar
+redef class TKwintern
     redef fun parser_index: Int
     do
 	return 18
@@ -248,7 +248,7 @@ redef class TKwvar
     end
 end
 
-redef class TKwintern
+redef class TKwextern
     redef fun parser_index: Int
     do
 	return 19
@@ -260,7 +260,7 @@ redef class TKwintern
     end
 end
 
-redef class TKwextern
+redef class TKwprotected
     redef fun parser_index: Int
     do
 	return 20
@@ -272,7 +272,7 @@ redef class TKwextern
     end
 end
 
-redef class TKwprotected
+redef class TKwprivate
     redef fun parser_index: Int
     do
 	return 21
@@ -284,7 +284,7 @@ redef class TKwprotected
     end
 end
 
-redef class TKwprivate
+redef class TKwintrude
     redef fun parser_index: Int
     do
 	return 22
@@ -296,7 +296,7 @@ redef class TKwprivate
     end
 end
 
-redef class TKwintrude
+redef class TKwif
     redef fun parser_index: Int
     do
 	return 23
@@ -308,7 +308,7 @@ redef class TKwintrude
     end
 end
 
-redef class TKwif
+redef class TKwthen
     redef fun parser_index: Int
     do
 	return 24
@@ -320,7 +320,7 @@ redef class TKwif
     end
 end
 
-redef class TKwthen
+redef class TKwelse
     redef fun parser_index: Int
     do
 	return 25
@@ -332,7 +332,7 @@ redef class TKwthen
     end
 end
 
-redef class TKwelse
+redef class TKwwhile
     redef fun parser_index: Int
     do
 	return 26
@@ -344,7 +344,7 @@ redef class TKwelse
     end
 end
 
-redef class TKwwhile
+redef class TKwloop
     redef fun parser_index: Int
     do
 	return 27
@@ -356,7 +356,7 @@ redef class TKwwhile
     end
 end
 
-redef class TKwloop
+redef class TKwfor
     redef fun parser_index: Int
     do
 	return 28
@@ -368,7 +368,7 @@ redef class TKwloop
     end
 end
 
-redef class TKwfor
+redef class TKwin
     redef fun parser_index: Int
     do
 	return 29
@@ -380,7 +380,7 @@ redef class TKwfor
     end
 end
 
-redef class TKwin
+redef class TKwand
     redef fun parser_index: Int
     do
 	return 30
@@ -392,7 +392,7 @@ redef class TKwin
     end
 end
 
-redef class TKwand
+redef class TKwor
     redef fun parser_index: Int
     do
 	return 31
@@ -404,7 +404,7 @@ redef class TKwand
     end
 end
 
-redef class TKwor
+redef class TKwnot
     redef fun parser_index: Int
     do
 	return 32
@@ -416,7 +416,7 @@ redef class TKwor
     end
 end
 
-redef class TKwnot
+redef class TKwreturn
     redef fun parser_index: Int
     do
 	return 33
@@ -428,7 +428,7 @@ redef class TKwnot
     end
 end
 
-redef class TKwreturn
+redef class TKwcontinue
     redef fun parser_index: Int
     do
 	return 34
@@ -440,7 +440,7 @@ redef class TKwreturn
     end
 end
 
-redef class TKwcontinue
+redef class TKwbreak
     redef fun parser_index: Int
     do
 	return 35
@@ -452,7 +452,7 @@ redef class TKwcontinue
     end
 end
 
-redef class TKwbreak
+redef class TKwabort
     redef fun parser_index: Int
     do
 	return 36
@@ -464,7 +464,7 @@ redef class TKwbreak
     end
 end
 
-redef class TKwabort
+redef class TKwassert
     redef fun parser_index: Int
     do
 	return 37
@@ -476,7 +476,7 @@ redef class TKwabort
     end
 end
 
-redef class TKwassert
+redef class TKwnew
     redef fun parser_index: Int
     do
 	return 38
@@ -488,7 +488,7 @@ redef class TKwassert
     end
 end
 
-redef class TKwnew
+redef class TKwisa
     redef fun parser_index: Int
     do
 	return 39
@@ -500,7 +500,7 @@ redef class TKwnew
     end
 end
 
-redef class TKwisa
+redef class TKwonce
     redef fun parser_index: Int
     do
 	return 40
@@ -512,7 +512,7 @@ redef class TKwisa
     end
 end
 
-redef class TKwonce
+redef class TKwsuper
     redef fun parser_index: Int
     do
 	return 41
@@ -524,7 +524,7 @@ redef class TKwonce
     end
 end
 
-redef class TKwsuper
+redef class TKwself
     redef fun parser_index: Int
     do
 	return 42
@@ -536,7 +536,7 @@ redef class TKwsuper
     end
 end
 
-redef class TKwself
+redef class TKwtrue
     redef fun parser_index: Int
     do
 	return 43
@@ -548,7 +548,7 @@ redef class TKwself
     end
 end
 
-redef class TKwtrue
+redef class TKwfalse
     redef fun parser_index: Int
     do
 	return 44
@@ -560,7 +560,7 @@ redef class TKwtrue
     end
 end
 
-redef class TKwfalse
+redef class TKwnull
     redef fun parser_index: Int
     do
 	return 45
@@ -572,7 +572,7 @@ redef class TKwfalse
     end
 end
 
-redef class TKwnull
+redef class TKwas
     redef fun parser_index: Int
     do
 	return 46
@@ -584,7 +584,7 @@ redef class TKwnull
     end
 end
 
-redef class TKwas
+redef class TKwnullable
     redef fun parser_index: Int
     do
 	return 47
@@ -596,7 +596,7 @@ redef class TKwas
     end
 end
 
-redef class TKwnullable
+redef class TKwisset
     redef fun parser_index: Int
     do
 	return 48
@@ -608,7 +608,7 @@ redef class TKwnullable
     end
 end
 
-redef class TKwisset
+redef class TKwlabel
     redef fun parser_index: Int
     do
 	return 49
@@ -620,7 +620,7 @@ redef class TKwisset
     end
 end
 
-redef class TKwlabel
+redef class TKwdebug
     redef fun parser_index: Int
     do
 	return 50
@@ -632,7 +632,7 @@ redef class TKwlabel
     end
 end
 
-redef class TKwdebug
+redef class TOpar
     redef fun parser_index: Int
     do
 	return 51
@@ -644,7 +644,7 @@ redef class TKwdebug
     end
 end
 
-redef class TOpar
+redef class TCpar
     redef fun parser_index: Int
     do
 	return 52
@@ -656,7 +656,7 @@ redef class TOpar
     end
 end
 
-redef class TCpar
+redef class TObra
     redef fun parser_index: Int
     do
 	return 53
@@ -668,7 +668,7 @@ redef class TCpar
     end
 end
 
-redef class TObra
+redef class TCbra
     redef fun parser_index: Int
     do
 	return 54
@@ -680,7 +680,7 @@ redef class TObra
     end
 end
 
-redef class TCbra
+redef class TComma
     redef fun parser_index: Int
     do
 	return 55
@@ -692,7 +692,7 @@ redef class TCbra
     end
 end
 
-redef class TComma
+redef class TColumn
     redef fun parser_index: Int
     do
 	return 56
@@ -704,7 +704,7 @@ redef class TComma
     end
 end
 
-redef class TColumn
+redef class TQuad
     redef fun parser_index: Int
     do
 	return 57
@@ -716,7 +716,7 @@ redef class TColumn
     end
 end
 
-redef class TQuad
+redef class TAssign
     redef fun parser_index: Int
     do
 	return 58
@@ -728,7 +728,7 @@ redef class TQuad
     end
 end
 
-redef class TAssign
+redef class TPluseq
     redef fun parser_index: Int
     do
 	return 59
@@ -740,7 +740,7 @@ redef class TAssign
     end
 end
 
-redef class TPluseq
+redef class TMinuseq
     redef fun parser_index: Int
     do
 	return 60
@@ -752,7 +752,7 @@ redef class TPluseq
     end
 end
 
-redef class TMinuseq
+redef class TDotdotdot
     redef fun parser_index: Int
     do
 	return 61
@@ -764,7 +764,7 @@ redef class TMinuseq
     end
 end
 
-redef class TDotdotdot
+redef class TDotdot
     redef fun parser_index: Int
     do
 	return 62
@@ -776,7 +776,7 @@ redef class TDotdotdot
     end
 end
 
-redef class TDotdot
+redef class TDot
     redef fun parser_index: Int
     do
 	return 63
@@ -788,7 +788,7 @@ redef class TDotdot
     end
 end
 
-redef class TDot
+redef class TPlus
     redef fun parser_index: Int
     do
 	return 64
@@ -800,7 +800,7 @@ redef class TDot
     end
 end
 
-redef class TPlus
+redef class TMinus
     redef fun parser_index: Int
     do
 	return 65
@@ -812,7 +812,7 @@ redef class TPlus
     end
 end
 
-redef class TMinus
+redef class TStar
     redef fun parser_index: Int
     do
 	return 66
@@ -824,7 +824,7 @@ redef class TMinus
     end
 end
 
-redef class TStar
+redef class TSlash
     redef fun parser_index: Int
     do
 	return 67
@@ -836,7 +836,7 @@ redef class TStar
     end
 end
 
-redef class TSlash
+redef class TPercent
     redef fun parser_index: Int
     do
 	return 68
@@ -848,7 +848,7 @@ redef class TSlash
     end
 end
 
-redef class TPercent
+redef class TEq
     redef fun parser_index: Int
     do
 	return 69
@@ -860,7 +860,7 @@ redef class TPercent
     end
 end
 
-redef class TEq
+redef class TNe
     redef fun parser_index: Int
     do
 	return 70
@@ -872,7 +872,7 @@ redef class TEq
     end
 end
 
-redef class TNe
+redef class TLt
     redef fun parser_index: Int
     do
 	return 71
@@ -884,7 +884,7 @@ redef class TNe
     end
 end
 
-redef class TLt
+redef class TLe
     redef fun parser_index: Int
     do
 	return 72
@@ -896,7 +896,7 @@ redef class TLt
     end
 end
 
-redef class TLe
+redef class TLl
     redef fun parser_index: Int
     do
 	return 73
@@ -908,7 +908,7 @@ redef class TLe
     end
 end
 
-redef class TLl
+redef class TGt
     redef fun parser_index: Int
     do
 	return 74
@@ -920,7 +920,7 @@ redef class TLl
     end
 end
 
-redef class TGt
+redef class TGe
     redef fun parser_index: Int
     do
 	return 75
@@ -932,7 +932,7 @@ redef class TGt
     end
 end
 
-redef class TGe
+redef class TGg
     redef fun parser_index: Int
     do
 	return 76
@@ -944,7 +944,7 @@ redef class TGe
     end
 end
 
-redef class TGg
+redef class TStarship
     redef fun parser_index: Int
     do
 	return 77
@@ -956,7 +956,7 @@ redef class TGg
     end
 end
 
-redef class TStarship
+redef class TBang
     redef fun parser_index: Int
     do
 	return 78
@@ -968,7 +968,7 @@ redef class TStarship
     end
 end
 
-redef class TBang
+redef class TClassid
     redef fun parser_index: Int
     do
 	return 79
@@ -980,7 +980,7 @@ redef class TBang
     end
 end
 
-redef class TClassid
+redef class TId
     redef fun parser_index: Int
     do
 	return 80
@@ -992,7 +992,7 @@ redef class TClassid
     end
 end
 
-redef class TId
+redef class TAttrid
     redef fun parser_index: Int
     do
 	return 81
@@ -1004,7 +1004,7 @@ redef class TId
     end
 end
 
-redef class TAttrid
+redef class TNumber
     redef fun parser_index: Int
     do
 	return 82
@@ -1016,7 +1016,7 @@ redef class TAttrid
     end
 end
 
-redef class TNumber
+redef class TFloat
     redef fun parser_index: Int
     do
 	return 83
@@ -1028,7 +1028,7 @@ redef class TNumber
     end
 end
 
-redef class TFloat
+redef class TChar
     redef fun parser_index: Int
     do
 	return 84
@@ -1040,7 +1040,7 @@ redef class TFloat
     end
 end
 
-redef class TChar
+redef class TString
     redef fun parser_index: Int
     do
 	return 85
@@ -1052,7 +1052,7 @@ redef class TChar
     end
 end
 
-redef class TString
+redef class TStartString
     redef fun parser_index: Int
     do
 	return 86
@@ -1064,7 +1064,7 @@ redef class TString
     end
 end
 
-redef class TStartString
+redef class TMidString
     redef fun parser_index: Int
     do
 	return 87
@@ -1076,7 +1076,7 @@ redef class TStartString
     end
 end
 
-redef class TMidString
+redef class TEndString
     redef fun parser_index: Int
     do
 	return 88
@@ -1088,7 +1088,7 @@ redef class TMidString
     end
 end
 
-redef class TEndString
+redef class TBadChar
     redef fun parser_index: Int
     do
 	return 89
@@ -1100,7 +1100,7 @@ redef class TEndString
     end
 end
 
-redef class TBadChar
+redef class TBadString
     redef fun parser_index: Int
     do
 	return 90
@@ -1112,22 +1112,10 @@ redef class TBadChar
     end
 end
 
-redef class TBadString
-    redef fun parser_index: Int
-    do
-	return 91
-    end
-
-    init init_tk(loc: Location)
-    do
-		_location = loc
-    end
-end
-
 redef class TExternCodeSegment
     redef fun parser_index: Int
     do
-	return 92
+	return 91
     end
 
     init init_tk(loc: Location)
@@ -1140,7 +1128,7 @@ end
 redef class EOF
     redef fun parser_index: Int
     do
-	return 93
+	return 92
     end
 
     init(loc: Location)
@@ -1339,258 +1327,255 @@ class Lexer
 						return new TKwenum.init_tk(location)
 					end
 					if accept_token == 9 then
-						return new TKwspecial.init_tk(location)
-					end
-					if accept_token == 10 then
 						return new TKwend.init_tk(location)
 					end
-					if accept_token == 11 then
+					if accept_token == 10 then
 						return new TKwmeth.init_tk(location)
 					end
-					if accept_token == 12 then
+					if accept_token == 11 then
 						return new TKwtype.init_tk(location)
 					end
-					if accept_token == 13 then
+					if accept_token == 12 then
 						return new TKwinit.init_tk(location)
 					end
-					if accept_token == 14 then
+					if accept_token == 13 then
 						return new TKwredef.init_tk(location)
 					end
-					if accept_token == 15 then
+					if accept_token == 14 then
 						return new TKwis.init_tk(location)
 					end
-					if accept_token == 16 then
+					if accept_token == 15 then
 						return new TKwdo.init_tk(location)
 					end
-					if accept_token == 17 then
+					if accept_token == 16 then
 						return new TKwreadable.init_tk(location)
 					end
-					if accept_token == 18 then
+					if accept_token == 17 then
 						return new TKwwritable.init_tk(location)
 					end
-					if accept_token == 19 then
+					if accept_token == 18 then
 						return new TKwvar.init_tk(location)
 					end
-					if accept_token == 20 then
+					if accept_token == 19 then
 						return new TKwintern.init_tk(location)
 					end
-					if accept_token == 21 then
+					if accept_token == 20 then
 						return new TKwextern.init_tk(location)
 					end
-					if accept_token == 22 then
+					if accept_token == 21 then
 						return new TKwprotected.init_tk(location)
 					end
-					if accept_token == 23 then
+					if accept_token == 22 then
 						return new TKwprivate.init_tk(location)
 					end
-					if accept_token == 24 then
+					if accept_token == 23 then
 						return new TKwintrude.init_tk(location)
 					end
-					if accept_token == 25 then
+					if accept_token == 24 then
 						return new TKwif.init_tk(location)
 					end
-					if accept_token == 26 then
+					if accept_token == 25 then
 						return new TKwthen.init_tk(location)
 					end
-					if accept_token == 27 then
+					if accept_token == 26 then
 						return new TKwelse.init_tk(location)
 					end
-					if accept_token == 28 then
+					if accept_token == 27 then
 						return new TKwwhile.init_tk(location)
 					end
-					if accept_token == 29 then
+					if accept_token == 28 then
 						return new TKwloop.init_tk(location)
 					end
-					if accept_token == 30 then
+					if accept_token == 29 then
 						return new TKwfor.init_tk(location)
 					end
-					if accept_token == 31 then
+					if accept_token == 30 then
 						return new TKwin.init_tk(location)
 					end
-					if accept_token == 32 then
+					if accept_token == 31 then
 						return new TKwand.init_tk(location)
 					end
-					if accept_token == 33 then
+					if accept_token == 32 then
 						return new TKwor.init_tk(location)
 					end
-					if accept_token == 34 then
+					if accept_token == 33 then
 						return new TKwnot.init_tk(location)
 					end
-					if accept_token == 35 then
+					if accept_token == 34 then
 						return new TKwreturn.init_tk(location)
 					end
-					if accept_token == 36 then
+					if accept_token == 35 then
 						return new TKwcontinue.init_tk(location)
 					end
-					if accept_token == 37 then
+					if accept_token == 36 then
 						return new TKwbreak.init_tk(location)
 					end
-					if accept_token == 38 then
+					if accept_token == 37 then
 						return new TKwabort.init_tk(location)
 					end
-					if accept_token == 39 then
+					if accept_token == 38 then
 						return new TKwassert.init_tk(location)
 					end
-					if accept_token == 40 then
+					if accept_token == 39 then
 						return new TKwnew.init_tk(location)
 					end
-					if accept_token == 41 then
+					if accept_token == 40 then
 						return new TKwisa.init_tk(location)
 					end
-					if accept_token == 42 then
+					if accept_token == 41 then
 						return new TKwonce.init_tk(location)
 					end
-					if accept_token == 43 then
+					if accept_token == 42 then
 						return new TKwsuper.init_tk(location)
 					end
-					if accept_token == 44 then
+					if accept_token == 43 then
 						return new TKwself.init_tk(location)
 					end
-					if accept_token == 45 then
+					if accept_token == 44 then
 						return new TKwtrue.init_tk(location)
 					end
-					if accept_token == 46 then
+					if accept_token == 45 then
 						return new TKwfalse.init_tk(location)
 					end
-					if accept_token == 47 then
+					if accept_token == 46 then
 						return new TKwnull.init_tk(location)
 					end
-					if accept_token == 48 then
+					if accept_token == 47 then
 						return new TKwas.init_tk(location)
 					end
-					if accept_token == 49 then
+					if accept_token == 48 then
 						return new TKwnullable.init_tk(location)
 					end
-					if accept_token == 50 then
+					if accept_token == 49 then
 						return new TKwisset.init_tk(location)
 					end
-					if accept_token == 51 then
+					if accept_token == 50 then
 						return new TKwlabel.init_tk(location)
 					end
-					if accept_token == 52 then
+					if accept_token == 51 then
 						return new TKwdebug.init_tk(location)
 					end
-					if accept_token == 53 then
+					if accept_token == 52 then
 						return new TOpar.init_tk(location)
 					end
-					if accept_token == 54 then
+					if accept_token == 53 then
 						return new TCpar.init_tk(location)
 					end
-					if accept_token == 55 then
+					if accept_token == 54 then
 						return new TObra.init_tk(location)
 					end
-					if accept_token == 56 then
+					if accept_token == 55 then
 						return new TCbra.init_tk(location)
 					end
-					if accept_token == 57 then
+					if accept_token == 56 then
 						return new TComma.init_tk(location)
 					end
-					if accept_token == 58 then
+					if accept_token == 57 then
 						return new TColumn.init_tk(location)
 					end
-					if accept_token == 59 then
+					if accept_token == 58 then
 						return new TQuad.init_tk(location)
 					end
-					if accept_token == 60 then
+					if accept_token == 59 then
 						return new TAssign.init_tk(location)
 					end
-					if accept_token == 61 then
+					if accept_token == 60 then
 						return new TPluseq.init_tk(location)
 					end
-					if accept_token == 62 then
+					if accept_token == 61 then
 						return new TMinuseq.init_tk(location)
 					end
-					if accept_token == 63 then
+					if accept_token == 62 then
 						return new TDotdotdot.init_tk(location)
 					end
-					if accept_token == 64 then
+					if accept_token == 63 then
 						return new TDotdot.init_tk(location)
 					end
-					if accept_token == 65 then
+					if accept_token == 64 then
 						return new TDot.init_tk(location)
 					end
-					if accept_token == 66 then
+					if accept_token == 65 then
 						return new TPlus.init_tk(location)
 					end
-					if accept_token == 67 then
+					if accept_token == 66 then
 						return new TMinus.init_tk(location)
 					end
-					if accept_token == 68 then
+					if accept_token == 67 then
 						return new TStar.init_tk(location)
 					end
-					if accept_token == 69 then
+					if accept_token == 68 then
 						return new TSlash.init_tk(location)
 					end
-					if accept_token == 70 then
+					if accept_token == 69 then
 						return new TPercent.init_tk(location)
 					end
-					if accept_token == 71 then
+					if accept_token == 70 then
 						return new TEq.init_tk(location)
 					end
-					if accept_token == 72 then
+					if accept_token == 71 then
 						return new TNe.init_tk(location)
 					end
-					if accept_token == 73 then
+					if accept_token == 72 then
 						return new TLt.init_tk(location)
 					end
-					if accept_token == 74 then
+					if accept_token == 73 then
 						return new TLe.init_tk(location)
 					end
-					if accept_token == 75 then
+					if accept_token == 74 then
 						return new TLl.init_tk(location)
 					end
-					if accept_token == 76 then
+					if accept_token == 75 then
 						return new TGt.init_tk(location)
 					end
-					if accept_token == 77 then
+					if accept_token == 76 then
 						return new TGe.init_tk(location)
 					end
-					if accept_token == 78 then
+					if accept_token == 77 then
 						return new TGg.init_tk(location)
 					end
-					if accept_token == 79 then
+					if accept_token == 78 then
 						return new TStarship.init_tk(location)
 					end
-					if accept_token == 80 then
+					if accept_token == 79 then
 						return new TBang.init_tk(location)
 					end
-					if accept_token == 81 then
+					if accept_token == 80 then
 						return new TClassid.init_tk(location)
 					end
-					if accept_token == 82 then
+					if accept_token == 81 then
 						return new TId.init_tk(location)
 					end
-					if accept_token == 83 then
+					if accept_token == 82 then
 						return new TAttrid.init_tk(location)
 					end
-					if accept_token == 84 then
+					if accept_token == 83 then
 						return new TNumber.init_tk(location)
 					end
-					if accept_token == 85 then
+					if accept_token == 84 then
 						return new TFloat.init_tk(location)
 					end
-					if accept_token == 86 then
+					if accept_token == 85 then
 						return new TChar.init_tk(location)
 					end
-					if accept_token == 87 then
+					if accept_token == 86 then
 						return new TString.init_tk(location)
 					end
-					if accept_token == 88 then
+					if accept_token == 87 then
 						return new TStartString.init_tk(location)
 					end
-					if accept_token == 89 then
+					if accept_token == 88 then
 						return new TMidString.init_tk(location)
 					end
-					if accept_token == 90 then
+					if accept_token == 89 then
 						return new TEndString.init_tk(location)
 					end
-					if accept_token == 91 then
+					if accept_token == 90 then
 						return new TBadChar.init_tk(location)
 					end
-					if accept_token == 92 then
+					if accept_token == 91 then
 						return new TBadString.init_tk(location)
 					end
-					if accept_token == 93 then
+					if accept_token == 92 then
 						return new TExternCodeSegment.init_tk(location)
 					end
 				else

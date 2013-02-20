@@ -947,43 +947,26 @@ redef class ASuperclass
     private init empty_init do end
 
     init init_asuperclass (
-            n_kwspecial: nullable TKwspecial,
             n_kwsuper: nullable TKwsuper,
             n_type: nullable AType
     )
     do
         empty_init
-        _n_kwspecial = n_kwspecial
-	if n_kwspecial != null then
-		n_kwspecial.parent = self
-	end
-        _n_kwsuper = n_kwsuper
-	if n_kwsuper != null then
-		n_kwsuper.parent = self
-	end
+        _n_kwsuper = n_kwsuper.as(not null)
+	n_kwsuper.parent = self
         _n_type = n_type.as(not null)
 	n_type.parent = self
     end
 
     redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
-        if _n_kwspecial == old_child then
-            if new_child != null then
-                new_child.parent = self
-		assert new_child isa TKwspecial
-                _n_kwspecial = new_child
-	    else
-		_n_kwspecial = null
-            end
-            return
-	end
         if _n_kwsuper == old_child then
             if new_child != null then
                 new_child.parent = self
 		assert new_child isa TKwsuper
                 _n_kwsuper = new_child
 	    else
-		_n_kwsuper = null
+		abort
             end
             return
 	end
@@ -1001,12 +984,7 @@ redef class ASuperclass
 
     redef fun visit_all(v: Visitor)
     do
-        if _n_kwspecial != null then
-            v.enter_visit(_n_kwspecial.as(not null))
-        end
-        if _n_kwsuper != null then
-            v.enter_visit(_n_kwsuper.as(not null))
-        end
+        v.enter_visit(_n_kwsuper)
         v.enter_visit(_n_type)
     end
 end

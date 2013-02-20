@@ -88,9 +88,6 @@ end
 class TKwenum
 	super TokenKeyword
 end
-class TKwspecial
-	super TokenKeyword
-end
 class TKwend
 	super TokenKeyword
 end
@@ -483,8 +480,7 @@ class AFormaldef
 end
 class ASuperclass
 	super Prod
-    readable var _n_kwspecial: nullable TKwspecial = null
-    readable var _n_kwsuper: nullable TKwsuper = null
+    readable var _n_kwsuper: TKwsuper
     readable var _n_type: AType
 end
 abstract class APropdef super Prod
