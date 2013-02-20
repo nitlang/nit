@@ -418,6 +418,7 @@ end
 class AExternClasskind
 	super AClasskind
     readable var _n_kwextern: TKwextern
+    readable var _n_kwclass: nullable TKwclass = null
 end
 class AFormaldef
 	super AFormaldef

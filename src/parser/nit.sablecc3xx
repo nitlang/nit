@@ -202,7 +202,7 @@ classkind
 	| {abstract} kwabstract kwclass
 	| {interface} kwinterface
 	| {enum} kwenum
-	| {extern} kwextern
+	| {extern} kwextern kwclass?
 	;
 
 formaldefs {-> formaldef*}
@@ -653,7 +653,7 @@ classkind
 	| {abstract} kwabstract kwclass
 	| {interface} kwinterface
 	| {enum} kwenum
-	| {extern} kwextern
+	| {extern} kwextern kwclass?
 	;
 formaldef = [id]:classid type?;
 superclass = kwsuper type;
