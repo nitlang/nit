@@ -62,6 +62,10 @@ class Debugger
 	# Triggers a step over an instruction in a nit program
 	var stop_after_step_over_trigger = true
 
+	#######################################################################
+	##                  Execution of statement function                  ##
+	#######################################################################
+
 	# Main loop, every call to a debug command is done here
 	redef fun stmt(n: nullable AExpr)
 	do
@@ -118,6 +122,10 @@ class Debugger
 		end
 		return true
 	end
+
+	#######################################################################
+	##               Processing specific command functions               ##
+	#######################################################################
 
 	# Sets the flags to step-over an instruction in the current file
 	fun step_over: Bool
