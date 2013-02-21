@@ -106,6 +106,9 @@ class Debugger
 		# Step-over command
 		else if command == "n" then
 			return step_over
+		# Continues execution until the end
+		else if command == "c" then
+			return continue_exec
 		else
 			var parts_of_command = command.split_with(' ')
 			# Shows the value of a variable in the current frame
@@ -121,6 +124,13 @@ class Debugger
 	do
 		self.step_stack_count = frames.length
 		self.stop_after_step_over_trigger = true
+		return false
+	end
+
+	# Sets the flags to continue execution
+	fun continue_exec: Bool
+	do
+		self.stop_after_step_over_trigger = false
 		return false
 	end
 
