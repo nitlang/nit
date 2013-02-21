@@ -17,6 +17,7 @@
 # Debugging of a nit program using the NaiveInterpreter
 module debugger
 
+import breakpoint
 intrude import naive_interpreter
 
 redef class ToolContext
@@ -68,6 +69,8 @@ class Debugger
 	# Triggers a step in a instruction (enters a function
 	# if the instruction is a function call)
 	var step_in_trigger = false
+
+	var breakpoints = new HashMap[String, HashSet[Breakpoint]]
 
 	#######################################################################
 	##                  Execution of statement function                  ##
@@ -312,6 +315,27 @@ class Debugger
 		else
 			return variable.attributes[attribute]
 		end
+	end
+
+	#######################################################################
+	##                  Breakpoint searching functions                   ##
+	#######################################################################
+
+	# Finds a breakpoint for 'file' and 'line' in the class HashMap
+	fun find_breakpoint(file: String, line: Int): nullable Breakpoint
+	do
+		if self.breakpoints.keys.has(file)
+		then
+			for i in self.breakpoints[file]
+			do
+				if i.line == line
+				then
+					return i
+				end
+			end
+		end
+
+		return null
 	end
 
 end
