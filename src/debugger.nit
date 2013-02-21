@@ -55,6 +55,24 @@ end
 class Debugger
 	super NaiveInterpreter
 
+	# Gets a variable 'variable_name' contained in the frame 'frame'
+	private fun get_variable_in_frame(variable_name: String, frame: Frame): nullable Instance
+	do
+		if variable_name == "self" then
+			if frame.arguments.length >= 1 then return frame.arguments.first
+		end
+
+		var map_of_instances = frame.map
+
+		for key in map_of_instances.keys do
+			if key.to_s == variable_name then
+				return map_of_instances[key]
+			end
+		end
+
+		return null
+	end
+
 	# Gets an attribute 'attribute_name' contained in variable 'variable'
 	fun get_attribute_in_mutable_instance(variable: MutableInstance, attribute_name: String): nullable MAttribute
 	do
