@@ -170,6 +170,9 @@ class Debugger
 			else if parts_of_command[0] == "break" or parts_of_command[0] == "b"
 			then
 				process_place_break_fun(parts_of_command)
+			# Removes a breakpoint on line x of file y
+			else if parts_of_command[0] == "d" or parts_of_command[0] == "delete" then
+				process_remove_break_fun(parts_of_command)
 			end
 		end
 		return true
@@ -262,6 +265,16 @@ class Debugger
 			return new Breakpoint(parts_of_command[2].to_i, parts_of_command[1])
 		else
 			return null
+		end
+	end
+
+	# Processes the command of removing a breakpoint on specified line and file
+	fun process_remove_break_fun(parts_of_command: Array[String])
+	do
+		if parts_of_command[1].is_numeric then
+			remove_breakpoint(self.curr_file, parts_of_command[1].to_i)
+		else if parts_of_command.length >= 3 and parts_of_command[2].is_numeric then
+			remove_breakpoint(parts_of_command[1], parts_of_command[2].to_i)
 		end
 	end
 
@@ -379,6 +392,26 @@ class Debugger
 		else
 			print "Breakpoint already present on line {breakpoint.line} for file {breakpoint.file}"
 		end
+	end
+
+	#######################################################################
+	##                  Breakpoint removing functions                    ##
+	#######################################################################
+
+	# Removes a breakpoint on line 'line_to_break' for file 'file_to_break'
+	fun remove_breakpoint(file_to_break: String, line_to_break: Int)
+	do
+		if self.breakpoints.keys.has(file_to_break) then
+			var bp = find_breakpoint(file_to_break, line_to_break)
+
+			if bp != null then
+				self.breakpoints[file_to_break].remove(bp)
+				print "Breakpoint removed on line {line_to_break} for file {file_to_break}"
+				return
+			end
+		end
+
+		print "No breakpoint existing on line {line_to_break} for file {file_to_break}"
 	end
 
 	#######################################################################
