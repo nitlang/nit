@@ -173,6 +173,9 @@ class Debugger
 			# Removes a breakpoint on line x of file y
 			else if parts_of_command[0] == "d" or parts_of_command[0] == "delete" then
 				process_remove_break_fun(parts_of_command)
+			# Lists all the commands available
+			else
+				list_commands
 			end
 		end
 		return true
@@ -243,6 +246,8 @@ class Debugger
 			if instance != null
 			then
 				print_instance(instance)
+			else
+				print "Cannot find variable {parts_of_command[1]}"
 			end
 		end
 	end
@@ -253,6 +258,8 @@ class Debugger
 		var bp = get_breakpoint_from_command(parts_of_command)
 		if bp != null then
 			place_breakpoint(bp)
+		else
+			list_commands
 		end
 	end
 
@@ -275,6 +282,8 @@ class Debugger
 			remove_breakpoint(self.curr_file, parts_of_command[1].to_i)
 		else if parts_of_command.length >= 3 and parts_of_command[2].is_numeric then
 			remove_breakpoint(parts_of_command[1], parts_of_command[2].to_i)
+		else
+			list_commands
 		end
 	end
 
@@ -433,6 +442,26 @@ class Debugger
 		end
 
 		return null
+	end
+
+	#######################################################################
+	##                     Command listing function                      ##
+	#######################################################################
+
+	# Lists the commands available when using the debugger
+	fun list_commands
+	do
+		print "\nCommand not recognized\n"
+		print "Commands accepted : \n"
+		print "[break/b] line : Adds a breakpoint on line *line_nb* of the current file\n"
+		print "[break/b] file_name line_nb : Adds a breakpoint on line *line_nb* of file *file_name* \n"
+		print "[p/print] variable : [p/print] * shows the status of all the variables\n"
+		print "s : steps in on the current function\n"
+		print "n : steps-over the current instruction\n"
+		print "finish : steps out of the current function\n"
+		print "[d/delete] line_nb : Removes a breakpoint on line *line_nb* of the current file \n"
+		print "[d/delete] file_name line_nb : Removes a breakpoint on line *line_nb* of file *file_name* \n"
+		print "kill : kills the current program (Exits with an error and stack trace)\n"
 	end
 
 end
