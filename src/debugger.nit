@@ -65,6 +65,10 @@ class Debugger
 	# Triggers a step out of an instruction
 	var stop_after_step_out_trigger= false
 
+	# Triggers a step in a instruction (enters a function
+	# if the instruction is a function call)
+	var step_in_trigger = false
+
 	#######################################################################
 	##                  Execution of statement function                  ##
 	#######################################################################
@@ -97,6 +101,9 @@ class Debugger
 				n.debug("Execute stmt {n.to_s}")
 				while process_debug_command(gets) do end
 			end
+		else if step_in_trigger then
+			n.debug("Execute stmt {n.to_s}")
+			while process_debug_command(gets) do end
 		end
 	end
 
@@ -120,6 +127,10 @@ class Debugger
 		else if command == "finish"
 		then
 			return step_out
+		# Step-in command
+		else if command == "s"
+		then
+			return step_in
 		# Step-over command
 		else if command == "n" then
 			return step_over
@@ -146,6 +157,7 @@ class Debugger
 		self.step_stack_count = frames.length
 		self.stop_after_step_over_trigger = true
 		self.stop_after_step_out_trigger = false
+		self.step_in_trigger = false
 		return false
 	end
 
@@ -154,7 +166,17 @@ class Debugger
 	do
 		self.stop_after_step_over_trigger = false
 		self.stop_after_step_out_trigger = true
+		self.step_in_trigger = false
 		self.step_stack_count = frames.length
+		return false
+	end
+
+	# Sets the flags to step-in an instruction
+	fun step_in: Bool
+	do
+		self.step_in_trigger = true
+		self.stop_after_step_over_trigger = false
+		self.stop_after_step_out_trigger = false
 		return false
 	end
 
@@ -163,6 +185,7 @@ class Debugger
 	do
 		self.stop_after_step_over_trigger = false
 		self.stop_after_step_out_trigger = false
+		self.step_in_trigger = false
 		return false
 	end
 
