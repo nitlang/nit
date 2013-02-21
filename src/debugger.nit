@@ -55,4 +55,18 @@ end
 class Debugger
 	super NaiveInterpreter
 
+	# Gets an attribute 'attribute_name' contained in variable 'variable'
+	fun get_attribute_in_mutable_instance(variable: MutableInstance, attribute_name: String): nullable MAttribute
+	do
+		var map_of_attributes = variable.attributes
+
+		for key in map_of_attributes.keys do
+			if key.to_s.substring_from(1) == attribute_name then
+				return key
+			end
+		end
+
+		return null
+	end
+
 end
