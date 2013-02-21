@@ -145,6 +145,10 @@ class Debugger
 			# Shows the value of a variable in the current frame
 			if parts_of_command[0] == "p" or parts_of_command[0] == "print" then
 				print_command(parts_of_command)
+			# Places a breakpoint on line x of file y
+			else if parts_of_command[0] == "break" or parts_of_command[0] == "b"
+			then
+				process_place_break_fun(parts_of_command)
 			end
 		end
 		return true
@@ -216,6 +220,27 @@ class Debugger
 			then
 				print_instance(instance)
 			end
+		end
+	end
+
+	# Processes the input string to know where to put a breakpoint
+	fun process_place_break_fun(parts_of_command: Array[String])
+	do
+		var bp = get_breakpoint_from_command(parts_of_command)
+		if bp != null then
+			place_breakpoint(bp)
+		end
+	end
+
+	# Returns a breakpoint containing the informations stored in the command
+	fun get_breakpoint_from_command(parts_of_command: Array[String]): nullable Breakpoint
+	do
+		if parts_of_command[1].is_numeric then
+			return new Breakpoint(parts_of_command[1].to_i, curr_file)
+		else if parts_of_command.length >= 3 and parts_of_command[2].is_numeric then
+			return new Breakpoint(parts_of_command[2].to_i, parts_of_command[1])
+		else
+			return null
 		end
 	end
 
@@ -314,6 +339,24 @@ class Debugger
 			end
 		else
 			return variable.attributes[attribute]
+		end
+	end
+
+	#######################################################################
+	##                   Breakpoint placing functions                    ##
+	#######################################################################
+
+	# Places a breakpoint on line 'line_to_break' for file 'file_to_break'
+	fun place_breakpoint(breakpoint: Breakpoint)
+	do
+		if not self.breakpoints.keys.has(breakpoint.file) then
+			self.breakpoints[breakpoint.file] = new HashSet[Breakpoint]
+		end
+		if find_breakpoint(breakpoint.file, breakpoint.line) == null then
+			self.breakpoints[breakpoint.file].add(breakpoint)
+			print "Breakpoint added on line {breakpoint.line} for file {breakpoint.file}"
+		else
+			print "Breakpoint already present on line {breakpoint.line} for file {breakpoint.file}"
 		end
 	end
 
