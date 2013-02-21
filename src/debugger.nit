@@ -62,6 +62,9 @@ class Debugger
 	# Triggers a step over an instruction in a nit program
 	var stop_after_step_over_trigger = true
 
+	# Triggers a step out of an instruction
+	var stop_after_step_out_trigger= false
+
 	#######################################################################
 	##                  Execution of statement function                  ##
 	#######################################################################
@@ -81,10 +84,16 @@ class Debugger
 		frame.current_node = old
 	end
 
+	# Encpasulates the behaviour for step over/out
 	private fun steps_fun_call(n: AExpr)
 	do
 		if self.stop_after_step_over_trigger then
 			if self.frames.length <= self.step_stack_count then
+				n.debug("Execute stmt {n.to_s}")
+				while process_debug_command(gets) do end
+			end
+		else if self.stop_after_step_out_trigger then
+			if frames.length < self.step_stack_count then
 				n.debug("Execute stmt {n.to_s}")
 				while process_debug_command(gets) do end
 			end
@@ -107,6 +116,10 @@ class Debugger
 		# Kills the current program
 		if command == "kill" then
 			abort
+		# Step-out command
+		else if command == "finish"
+		then
+			return step_out
 		# Step-over command
 		else if command == "n" then
 			return step_over
@@ -132,6 +145,16 @@ class Debugger
 	do
 		self.step_stack_count = frames.length
 		self.stop_after_step_over_trigger = true
+		self.stop_after_step_out_trigger = false
+		return false
+	end
+
+	#Sets the flags to step-out of a function
+	fun step_out: Bool
+	do
+		self.stop_after_step_over_trigger = false
+		self.stop_after_step_out_trigger = true
+		self.step_stack_count = frames.length
 		return false
 	end
 
@@ -139,6 +162,7 @@ class Debugger
 	fun continue_exec: Bool
 	do
 		self.stop_after_step_over_trigger = false
+		self.stop_after_step_out_trigger = false
 		return false
 	end
 
