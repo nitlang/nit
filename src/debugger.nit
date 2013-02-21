@@ -55,6 +55,23 @@ end
 class Debugger
 	super NaiveInterpreter
 
+	# Prints an object instance and its attributes if it has some
+	#
+	# If it is a primitive type, its value is directly printed
+	fun print_instance(instance: Instance)
+	do
+		if instance isa MutableInstance then
+			var attributes = instance.attributes
+			print "Object : {instance}"
+
+			for current_attribute in attributes.keys do
+				print "Attribute : {current_attribute.to_s} \nValeur : {attributes[current_attribute].to_s}"
+			end
+		else
+			print "Found variable {instance}"
+		end
+	end
+
 	# Seeks a variable from the current frame called 'variable_path', can introspect complex objects using function get_variable_in_mutable_instance
 	private fun seek_variable(variable_path: String, frame: Frame): nullable Instance
 	do
