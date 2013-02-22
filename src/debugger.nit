@@ -722,6 +722,22 @@ class Debugger
 	##                   Variable generator functions                    ##
 	#######################################################################
 
+	# Returns a new variable of the type 'type_of_variable' with a value of 'value'
+	fun get_variable_of_type_with_value(type_of_variable: String, value: String): nullable Instance
+	do
+		if type_of_variable == "Int" then
+			return get_int(value)
+		else if type_of_variable == "Float" then
+			return get_float(value)
+		else if type_of_variable == "Bool" then
+			return get_bool(value)
+		else if type_of_variable == "Char" then
+			return get_char(value)
+		end
+
+		return null
+	end
+
 	# Returns a new int instance with value 'value'
 	fun get_int(value: String): nullable Instance
 	do
