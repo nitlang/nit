@@ -732,6 +732,16 @@ class Debugger
 		end
 	end
 
+	# Returns a new float instance with value 'value'
+	fun get_float(value:String): nullable Instance
+	do
+		if value.is_numeric then
+			return float_instance(value.to_f)
+		else
+			return null
+		end
+	end
+
 	#######################################################################
 	##                     Command listing function                      ##
 	#######################################################################
