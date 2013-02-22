@@ -739,6 +739,18 @@ class Debugger
 		end
 	end
 
+	# Modifies the value of a variable contained in a MutableInstance
+	fun modify_argument_of_complex_type(papa: MutableInstance, attribute: MAttribute, value: String)
+	do
+		var final_variable = papa.attributes[attribute]
+		var type_of_variable = final_variable.mtype.to_s
+		var new_variable = get_variable_of_type_with_value(type_of_variable, value)
+		if new_variable != null
+		then
+			papa.attributes[attribute] = new_variable
+		end
+	end
+
 	#######################################################################
 	##                   Variable generator functions                    ##
 	#######################################################################
