@@ -443,6 +443,28 @@ class Debugger
 	end
 
 	#######################################################################
+	##                     Array exploring functions                     ##
+	#######################################################################
+
+	# Gets the length of a collection
+	# Used by the debugger, else if we call Collection.length, it returns the capacity instead
+	fun get_collection_instance_real_length(collection: MutableInstance): nullable Int
+	do
+		var collection_length_attribute = get_attribute_in_mutable_instance(collection, "length")
+
+		var real_collection_length: nullable Int = null
+
+		if collection_length_attribute != null then
+			var primitive_length_instance = collection.attributes[collection_length_attribute]
+			if primitive_length_instance isa PrimitiveInstance[Int] then
+				return primitive_length_instance.val
+			end
+		end
+
+		return null
+	end
+
+	#######################################################################
 	##                   Breakpoint placing functions                    ##
 	#######################################################################
 
