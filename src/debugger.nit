@@ -365,6 +365,55 @@ class Debugger
 		end
 	end
 
+	# Prints the attributes demanded in a SequenceRead
+	# Used recursively to print nested collections
+	fun print_nested_collection(instance: Instance, indexes: Array[Array[Int]], depth: Int, variable_name: String, depth_string: String)
+	do
+		var collection: nullable SequenceRead[Object] = null
+		var real_collection_length: nullable Int = null
+
+		if instance isa MutableInstance then
+			real_collection_length = get_collection_instance_real_length(instance)
+			collection = get_primary_collection(instance)
+		end
+
+		if collection != null and real_collection_length != null then
+			for i in indexes[depth] do
+				if i >= 0 and i < real_collection_length then
+					if depth == indexes.length-1 then
+						print "{variable_name}{depth_string}[{i}] = {collection[i]}"
+					else
+						var item_i = collection[i]
+
+						if item_i isa MutableInstance then
+							print_nested_collection(item_i, indexes, depth+1, variable_name, depth_string+"[{i}]")
+						else
+							print "The item at {variable_name}{depth_string}[{i}] is not a collection"
+							print item_i
+						end
+					end
+				else
+					print "Out of bounds exception : i = {i} and collection_length = {real_collection_length.to_s}"
+
+					if i < 0 then
+						continue
+					else if i >= real_collection_length then
+						break
+					end
+				end
+			end
+		else
+			if collection == null then
+				print "Cannot find {variable_name}{depth_string}"
+			else if real_collection_length != null then
+				print "Cannot find attribute length in {instance}"
+			else
+				print "Unknown error."
+				abort
+			end
+		end
+	end
+
 	#######################################################################
 	##                  Variable Exploration functions                   ##
 	#######################################################################
