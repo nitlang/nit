@@ -742,6 +742,16 @@ class Debugger
 		end
 	end
 
+	# Returns a new char instance with value 'value'
+	fun get_char(value: String): nullable Instance
+	do
+		if value.length >= 1 then
+			return char_instance(value[0])
+		else
+			return null
+		end
+	end
+
 	#######################################################################
 	##                     Command listing function                      ##
 	#######################################################################
