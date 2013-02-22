@@ -503,6 +503,24 @@ class Debugger
 		return null
 	end
 
+	# Gets a collection in a MutableInstance
+	fun get_primary_collection(container: MutableInstance): nullable SequenceRead[Object]
+	do
+		var items_of_array = get_attribute_in_mutable_instance(container, "items")
+		if items_of_array != null then
+			var array = container.attributes[items_of_array]
+
+			if array isa PrimitiveInstance[Object] then
+				var sequenceRead_final = array.val
+				if sequenceRead_final isa SequenceRead[Object] then
+					return sequenceRead_final
+				end
+			end
+		end
+
+		return null
+	end
+
 	#######################################################################
 	##                   Breakpoint placing functions                    ##
 	#######################################################################
