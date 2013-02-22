@@ -719,6 +719,27 @@ class Debugger
 	end
 
 	#######################################################################
+	##                  Runtime modification functions                   ##
+	#######################################################################
+
+	# Modifies the value of a variable contained in a frame
+	fun modify_in_frame(variable: Instance, value: String)
+	do
+		var new_variable = get_variable_of_type_with_value(variable.mtype.to_s, value)
+		if new_variable != null
+		then
+			var keys = frame.map.keys
+			for key in keys
+			do
+				if frame.map[key] == variable
+				then
+					frame.map[key] = new_variable
+				end
+			end
+		end
+	end
+
+	#######################################################################
 	##                   Variable generator functions                    ##
 	#######################################################################
 
