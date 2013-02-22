@@ -464,6 +464,45 @@ class Debugger
 		return null
 	end
 
+	# Processes the indexes of a print array call
+	# Returns an array containing all the indexes demanded
+	fun process_index(index_string: String): nullable Array[Int]
+	do
+		var from_end_index = index_string.index_of('.')
+		var to_start_index = index_string.last_index_of('.')
+
+		if from_end_index != -1 and to_start_index != -1 then
+			var index_from_string = index_string.substring(0,from_end_index)
+			var index_to_string = index_string.substring_from(to_start_index+1)
+
+			if index_from_string.is_numeric and index_to_string.is_numeric then
+				var result_array = new Array[Int]
+
+				var index_from = index_from_string.to_i
+				var index_to = index_to_string.to_i
+
+				for i in [index_from..index_to] do
+					result_array.push(i)
+				end
+
+				return result_array
+			end
+		else
+			if index_string.is_numeric
+			then
+				var result_array = new Array[Int]
+
+				result_array.push(index_string.to_i)
+
+				return result_array
+			else
+				return null
+			end
+		end
+
+		return null
+	end
+
 	#######################################################################
 	##                   Breakpoint placing functions                    ##
 	#######################################################################
