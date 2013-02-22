@@ -752,6 +752,19 @@ class Debugger
 		end
 	end
 
+	# Returns a new bool instance with value 'value'
+	fun get_bool(value: String): nullable Instance
+	do
+		if value.to_lower == "true" then
+			return self.true_instance
+		else if value.to_lower == "false" then
+			return self.false_instance
+		else
+			print "Invalid value, a boolean must be set at \"true\" or \"false\""
+			return null
+		end
+	end
+
 	#######################################################################
 	##                     Command listing function                      ##
 	#######################################################################
