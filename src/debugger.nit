@@ -719,6 +719,20 @@ class Debugger
 	end
 
 	#######################################################################
+	##                   Variable generator functions                    ##
+	#######################################################################
+
+	# Returns a new int instance with value 'value'
+	fun get_int(value: String): nullable Instance
+	do
+		if value.is_numeric then
+			return int_instance(value.to_i)
+		else
+			return null
+		end
+	end
+
+	#######################################################################
 	##                     Command listing function                      ##
 	#######################################################################
 
