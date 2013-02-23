@@ -231,13 +231,12 @@ void nitni_global_ref_list_init() {
 void nitni_global_ref_add( struct nitni_ref *ref ) {
 	if ( nitni_global_ref_list->head == NULL ) {
 		nitni_global_ref_list->head = ref;
-		nitni_global_ref_list->tail = ref;
-
 		ref->prev = NULL;
 	} else {
 		nitni_global_ref_list->tail->next = ref;
 		ref->prev = nitni_global_ref_list->tail;
 	}
+	nitni_global_ref_list->tail = ref;
 
 	ref->next = NULL;
 }
