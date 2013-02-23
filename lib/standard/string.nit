@@ -488,22 +488,35 @@ redef class Int
 end
 
 redef class Float
-	redef fun to_s do return to_precision(6)
+	# Pretty print self, print needed decimals up to a max of 6.
+	redef fun to_s do
+		var str = to_precision( 6 )
+		var len = str.length
+		for i in [0..len-1] do
+			var j = len-1-i
+			var c = str[j]
+			if c == '0' then
+				continue
+			else if c == '.' then
+				return str.substring( 0, j+2 )
+			else
+				return str.substring( 0, j+1 )
+			end
+		end
+		return str
+	end
 
 	# `self' representation with `nb' digits after the '.'.
-	fun to_precision(nb: Int): String
-	do
-		if nb == 0 then return to_i.to_s
+	fun to_precision(nb: Int): String import String::from_cstring `{
+		int size;
+		char *str;
 
-		var i = to_i
-		var dec = 1.0
-		while nb > 0 do
-			dec = dec * 10.0
-			nb -= 1
-		end
-		var d = ((self-i.to_f)*dec).to_i
-		return "{i}.{d}"
-	end
+		size = snprintf(NULL, 0, "%.*f", (int)nb, recv);
+		str = malloc(size + 1);
+		sprintf(str, "%.*f", (int)nb, recv );
+
+		return new_String_from_cstring( str );
+	`}
 end
 
 redef class Char

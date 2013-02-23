@@ -1,5 +1,5 @@
 144
 sleeping 1 second...
-0.463647
+0.463648
 from C: self + fib(self) = 29
 from Nit: self + fib(self) = 29
