@@ -258,6 +258,12 @@ class CLPropertyLayoutBuilder[E: MProperty]
 	end
 end
 
+# Layout builder for MProperty using Perfect Hashing (PH)
+# TODO implement this class without sublcassing CL builder
+class PHPropertyLayoutBuilder[E: MProperty]
+	super CLPropertyLayoutBuilder[E]
+end
+
 abstract class ResolutionLayoutBuilder
 
 	type LAYOUT: ResolutionLayout

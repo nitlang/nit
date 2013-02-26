@@ -180,7 +180,7 @@ class SeparateErasureCompiler
 		self.header.add_decl("struct type_table \{ int size; int table[1]; \}; /* colorized type table. */")
 		self.header.add_decl("struct vts_entry \{ short int is_nullable; struct class *class; \}; /* link (nullable or not) between the vts and is bound. */")
 
-		if modelbuilder.toolcontext.opt_phmod_typing.value or modelbuilder.toolcontext.opt_phand_typing.value then
+		if self.vt_layout isa PHPropertyLayoutBuilder[MVirtualTypeProp] then
 			self.header.add_decl("struct vts_table \{ int mask; struct vts_entry vts[1]; \}; /* vts list of a C type representation. */")
 		else
 			self.header.add_decl("struct vts_table \{ struct vts_entry vts[1]; \}; /* vts list of a C type representation. */")
@@ -333,7 +333,7 @@ class SeparateErasureCompiler
 
 		self.header.add_decl("extern const struct vts_table_{mclass.c_name} vts_table_{mclass.c_name};")
 		self.header.add_decl("struct vts_table_{mclass.c_name} \{")
-		if modelbuilder.toolcontext.opt_phmod_typing.value or modelbuilder.toolcontext.opt_phand_typing.value then
+		if self.vt_layout isa PHPropertyLayoutBuilder[MVirtualTypeProp] then
 			self.header.add_decl("int mask;")
 		end
 		self.header.add_decl("struct vts_entry vts[{self.vt_tables[mclass].length}];")
@@ -341,10 +341,10 @@ class SeparateErasureCompiler
 
 		var v = new_visitor
 		v.add_decl("const struct vts_table_{mclass.c_name} vts_table_{mclass.c_name} = \{")
-		#TODO redo this once PHMPropertyLayoutBuilder will be implemented
-		#if modelbuilder.toolcontext.opt_phmod_typing.value or modelbuilder.toolcontext.opt_phand_typing.value then
+		if self.vt_layout isa PHPropertyLayoutBuilder[MVirtualTypeProp] then
+			#TODO redo this when PHPropertyLayoutBuilder will be implemented
 			#v.add_decl("{vt_masks[mclass]},")
-		#end
+		end
 		v.add_decl("\{")
 
 		for vt in self.vt_tables[mclass] do
@@ -492,7 +492,7 @@ class SeparateErasureCompilerVisitor
 			end
 			var entry = self.get_name("entry")
 			self.add("struct vts_entry {entry};")
-			if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
+			if self.compiler.as(SeparateErasureCompiler).vt_layout isa PHPropertyLayoutBuilder[MVirtualTypeProp] then
 				self.add("{entry} = {recv_ptr}vts_table->vts[HASH({recv_ptr}vts_table->mask, {mtype.mproperty.const_color})];")
 			else
 				self.add("{entry} = {recv_ptr}vts_table->vts[{mtype.mproperty.const_color}];")
@@ -520,7 +520,7 @@ class SeparateErasureCompilerVisitor
 			self.add("{res} = {accept_null};")
 			self.add("\} else \{")
 		end
-		if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
+		if self.compiler.as(SeparateErasureCompiler).vt_layout isa PHPropertyLayoutBuilder[MVirtualTypeProp] then
 			self.add("{cltype} = HASH({class_ptr}color, {idtype});")
 		end
 		self.add("if({cltype} >= {class_ptr}type_table->size) \{")
