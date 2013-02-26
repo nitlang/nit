@@ -98,9 +98,6 @@ end
 class SeparateCompiler
 	super AbstractCompiler
 
-	# Cache for classid
-	protected var classids: HashMap[MClassType, String] = new HashMap[MClassType, String]
-
 	# The result of the RTA (used to know live types and methods)
 	var runtime_type_analysis: RapidTypeAnalysis
 
@@ -630,10 +627,6 @@ class SeparateCompiler
 		var v = new_visitor
 
 		v.add_decl("/* runtime class {c_name} */")
-		var idnum = classids.length
-		var idname = "ID_" + c_name
-		self.classids[mtype] = idname
-		#self.header.add_decl("#define {idname} {idnum} /* {c_name} */")
 
 		self.header.add_decl("struct class_{c_name} \{")
 		self.header.add_decl("int box_kind;")

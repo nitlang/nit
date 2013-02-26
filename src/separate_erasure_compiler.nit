@@ -200,10 +200,6 @@ class SeparateErasureCompiler
 		var v = self.new_visitor
 
 		v.add_decl("/* runtime class {c_name} */")
-		var idnum = classids.length
-		var idname = "ID_" + c_name
-		self.classids[mtype] = idname
-		#self.header.add_decl("#define {idname} {idnum} /* {c_name} */")
 
 		self.header.add_decl("extern const struct class_{c_name} class_{c_name};")
 		self.header.add_decl("struct class_{c_name} \{")
