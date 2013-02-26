@@ -81,10 +81,8 @@ class SeparateErasureCompiler
 		var layout_builder: TypingLayoutBuilder[MClass]
 		if modelbuilder.toolcontext.opt_phmod_typing.value then
 			layout_builder = new PHClassLayoutBuilder(mainmodule, new PHModOperator)
-			self.header.add_decl("#define HASH(mask, id) ((mask)%(id))")
 		else if modelbuilder.toolcontext.opt_phand_typing.value then
 			layout_builder = new PHClassLayoutBuilder(mainmodule, new PHAndOperator)
-			self.header.add_decl("#define HASH(mask, id) ((mask)&(id))")
 		else if modelbuilder.toolcontext.opt_bm_typing.value then
 			layout_builder = new BMClassLayoutBuilder(mainmodule)
 		else
@@ -184,6 +182,12 @@ class SeparateErasureCompiler
 			self.header.add_decl("struct vts_table \{ int mask; struct vts_entry vts[1]; \}; /* vts list of a C type representation. */")
 		else
 			self.header.add_decl("struct vts_table \{ struct vts_entry vts[1]; \}; /* vts list of a C type representation. */")
+		end
+
+		if modelbuilder.toolcontext.opt_phmod_typing.value then
+			self.header.add_decl("#define HASH(mask, id) ((mask)%(id))")
+		else if modelbuilder.toolcontext.opt_phand_typing.value then
+			self.header.add_decl("#define HASH(mask, id) ((mask)&(id))")
 		end
 
 		self.header.add_decl("typedef struct val \{ struct class *class; nitattribute_t attrs[1]; \} val; /* general C type representing a Nit instance. */")

@@ -104,7 +104,6 @@ class SeparateCompiler
 	private var undead_types: Set[MType] = new HashSet[MType]
 	private var partial_types: Set[MType] = new HashSet[MType]
 
-	private var type_layout_builder: TypingLayoutBuilder[MType]
 	private var type_layout: nullable TypingLayout[MType]
 	private var type_tables: nullable Map[MType, Array[nullable MType]] = null
 
@@ -122,25 +121,9 @@ class SeparateCompiler
 	init(mainmodule: MModule, mmbuilder: ModelBuilder, runtime_type_analysis: RapidTypeAnalysis) do
 		super
 		self.header = new_visitor
-		self.init_layout_builders
 		self.runtime_type_analysis = runtime_type_analysis
 		self.do_property_coloring
 		self.compile_box_kinds
-	end
-
-	protected fun init_layout_builders do
-		# Typing Layout
-		if modelbuilder.toolcontext.opt_bm_typing.value then
-			self.type_layout_builder = new BMTypeLayoutBuilder(self.mainmodule)
-		else if modelbuilder.toolcontext.opt_phmod_typing.value then
-			self.type_layout_builder = new PHTypeLayoutBuilder(self.mainmodule, new PHModOperator)
-			self.header.add_decl("#define HASH(mask, id) ((mask)%(id))")
-		else if modelbuilder.toolcontext.opt_phand_typing.value then
-			self.type_layout_builder = new PHTypeLayoutBuilder(self.mainmodule, new PHAndOperator)
-			self.header.add_decl("#define HASH(mask, id) ((mask)&(id))")
-		else
-			self.type_layout_builder = new CLTypeLayoutBuilder(self.mainmodule)
-		end
 	end
 
 	redef fun compile_header_structs do
@@ -155,6 +138,12 @@ class SeparateCompiler
 			self.header.add_decl("struct types \{ int mask; struct type *types[1]; \}; /* a list types (used for vts, fts and unanchored lists). */")
 		else
 			self.header.add_decl("struct types \{ struct type *types[1]; \}; /* a list types (used for vts, fts and unanchored lists). */")
+		end
+
+		if modelbuilder.toolcontext.opt_phmod_typing.value then
+			self.header.add_decl("#define HASH(mask, id) ((mask)%(id))")
+		else if modelbuilder.toolcontext.opt_phand_typing.value then
+			self.header.add_decl("#define HASH(mask, id) ((mask)&(id))")
 		end
 
 		self.header.add_decl("typedef struct \{ struct type *type; struct class *class; nitattribute_t attrs[1]; \} val; /* general C type representing a Nit instance. */")
@@ -347,8 +336,20 @@ class SeparateCompiler
 		end
 		mtypes.add_all(self.partial_types)
 
+		# Typing Layout
+		var layout_builder: TypingLayoutBuilder[MType]
+		if modelbuilder.toolcontext.opt_bm_typing.value then
+			layout_builder = new BMTypeLayoutBuilder(self.mainmodule)
+		else if modelbuilder.toolcontext.opt_phmod_typing.value then
+			layout_builder = new PHTypeLayoutBuilder(self.mainmodule, new PHModOperator)
+		else if modelbuilder.toolcontext.opt_phand_typing.value then
+			layout_builder = new PHTypeLayoutBuilder(self.mainmodule, new PHAndOperator)
+		else
+			layout_builder = new CLTypeLayoutBuilder(self.mainmodule)
+		end
+
 		# colorize types
-		self.type_layout = self.type_layout_builder.build_layout(mtypes)
+		self.type_layout = layout_builder.build_layout(mtypes)
 		self.type_tables = self.build_type_tables(mtypes)
 
 		# VT and FT are stored with other unresolved types in the big unanchored_tables
