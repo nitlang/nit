@@ -125,19 +125,30 @@ class PHTypeLayoutBuilder
 
 	redef type LAYOUT: PHTypingLayout[MType]
 
-	private var hasher: MTypeHasher
+	private var hasher: PerfectHasher[MType, MType]
 
 	init(mmodule: MModule, operator: PHOperator) do
 		super
-		self.hasher = new MTypeHasher(mmodule, operator)
+		self.hasher = new PerfectHasher[MType, MType](operator)
+	end
+
+	private fun build_conflicts(mtypes: Set[MType]): Map[MType, Set[MType]] do
+		var conflicts = new HashMap[MType, Set[MType]]
+		for mtype in mtypes do
+			var supers = self.mmodule.super_mtypes(mtype, mtypes)
+			supers.add(mtype)
+			conflicts[mtype] = supers
+		end
+		return conflicts
 	end
 
 	# Compute mtypes ids and position using BM
 	redef fun build_layout(mtypes) do
 		var result = new PHTypingLayout[MType]
+		var conflicts = build_conflicts(mtypes)
 		result.ids = self.compute_ids(mtypes)
-		result.masks = self.hasher.compute_masks(mtypes, result.ids)
-		result.hashes = self.hasher.compute_hashes(mtypes, result.ids, result.masks)
+		result.masks = self.hasher.compute_masks(conflicts, result.ids)
+		result.hashes = self.hasher.compute_hashes(conflicts, result.ids, result.masks)
 		return result
 	end
 
@@ -199,19 +210,30 @@ class PHClassLayoutBuilder
 
 	redef type LAYOUT: PHTypingLayout[MClass]
 
-	private var hasher: MClassHasher
+	private var hasher: PerfectHasher[MClass, MClass]
 
 	init(mmodule: MModule, operator: PHOperator) do
 		super
-		self.hasher = new MClassHasher(mmodule, operator)
+		self.hasher = new PerfectHasher[MClass, MClass](operator)
+	end
+
+	private fun build_conflicts(mclasses: Set[MClass]): Map[MClass, Set[MClass]] do
+		var conflicts = new HashMap[MClass, Set[MClass]]
+		for mclass in mclasses do
+			var supers = self.mmodule.super_mclasses(mclass)
+			supers.add(mclass)
+			conflicts[mclass] = supers
+		end
+		return conflicts
 	end
 
 	# Compute mclasses ids and position using BM
 	redef fun build_layout(mclasses) do
 		var result = new PHTypingLayout[MClass]
+		var conflicts = build_conflicts(mclasses)
 		result.ids = self.compute_ids(mclasses)
-		result.masks = self.hasher.compute_masks(mclasses, result.ids)
-		result.hashes = self.hasher.compute_hashes(mclasses, result.ids, result.masks)
+		result.masks = self.hasher.compute_masks(conflicts, result.ids)
+		result.hashes = self.hasher.compute_hashes(conflicts, result.ids, result.masks)
 		return result
 	end
 
@@ -324,9 +346,9 @@ class PHResolutionLayoutBuilder
 
 	redef type LAYOUT: PHResolutionLayout
 
-	private var hasher: ResolutionHasher
+	private var hasher: PerfectHasher[MClassType, MType]
 
-	init(operator: PHOperator) do self.hasher = new ResolutionHasher(operator)
+	init(operator: PHOperator) do self.hasher = new PerfectHasher[MClassType, MType](operator)
 
 	# Compute resolved types masks and hashes
 	redef fun build_layout(elements) do
@@ -659,63 +681,6 @@ class ResolutionColorer
 	end
 end
 
-# Perfect hashers
-
-# Abstract Perfect Hashing
-private abstract class AbstractHasher[E: Object]
-
-	var operator: PHOperator
-
-	init(operator: PHOperator) do self.operator = operator
-
-	fun compute_masks(elements: Set[E], ids: Map[E, Int]): Map[E, Int] do
-		var masks = new HashMap[E, Int]
-		for element in elements do
-			var supers = new HashSet[E]
-			supers.add_all(self.super_elements(element, elements))
-			supers.add(element)
-			masks[element] = compute_mask(supers, ids)
-		end
-		return masks
-	end
-
-	fun compute_mask(supers: Set[E], ids: Map[E, Int]): Int do
-		var mask = 0
-		loop
-			var used = new List[Int]
-			for sup in supers do
-				var res = operator.op(mask, ids[sup])
-				if used.has(res) then
-					break
-				else
-					used.add(res)
-				end
-			end
-			if used.length == supers.length then break
-			mask += 1
-		end
-		return mask
-	end
-
-	fun compute_hashes(elements: Set[E], ids: Map[E, Int], masks: Map[E, Int]): Map[E, Map[E, Int]] do
-		var hashes = new HashMap[E, Map[E, Int]]
-		for element in elements do
-			var supers = new HashSet[E]
-			supers.add_all(self.super_elements(element, elements))
-			supers.add(element)
-			var inhashes = new HashMap[E, Int]
-			var mask = masks[element]
-			for sup in supers do
-				inhashes[sup] = operator.op(mask, ids[sup])
-			end
-			hashes[element] = inhashes
-		end
-		return hashes
-	end
-
-	fun super_elements(element: E, elements: Set[E]): Set[E] is abstract
-end
-
 # Perfect Hashing (PH)
 # T = type of holder
 # U = type of elements to hash
@@ -784,79 +749,4 @@ class PHAndOperator
 	super PHOperator
 	init do end
 	redef fun op(mask, id) do return mask.bin_and(id)
-end
-
-# MType Perfect Hashing
-private class MTypeHasher
-	super AbstractHasher[MType]
-
-	var mmodule: MModule
-
-	init(mmodule: MModule, operator: PHOperator) do
-		super(operator)
-		self.mmodule = mmodule
-	end
-
-	redef fun super_elements(element, elements) do return self.mmodule.super_mtypes(element, elements)
-end
-
-# MClass Perfect Hashing
-private class MClassHasher
-	super AbstractHasher[MClass]
-
-	private var mmodule: MModule
-
-	init(mmodule: MModule, operator: PHOperator) do
-		super(operator)
-		self.mmodule = mmodule
-	end
-
-	redef fun super_elements(element, elements) do return self.mmodule.super_mclasses(element)
-end
-
-# Resolution tables Perfect Hashing (PH)
-private class ResolutionHasher
-
-	var operator: PHOperator
-
-	init(operator: PHOperator) do self.operator = operator
-
-	fun compute_masks(elements: Map[MClassType, Set[MType]], ids: Map[MType, Int]): Map[MClassType, Int] do
-		var masks = new HashMap[MClassType, Int]
-		for mclasstype, mtypes in elements do
-			masks[mclasstype] = compute_mask(mtypes, ids)
-		end
-		return masks
-	end
-
-	private fun compute_mask(mtypes: Set[MType], ids: Map[MType, Int]): Int do
-		var mask = 0
-		loop
-			var used = new List[Int]
-			for mtype in mtypes do
-				var res = operator.op(mask, ids[mtype])
-				if used.has(res) then
-					break
-				else
-					used.add(res)
-				end
-			end
-			if used.length == mtypes.length then break
-			mask += 1
-		end
-		return mask
-	end
-
-	fun compute_hashes(elements: Map[MClassType, Set[MType]], ids: Map[MType, Int], masks: Map[MClassType, Int]): Map[MClassType, Map[MType, Int]] do
-		var hashes = new HashMap[MClassType, Map[MType, Int]]
-		for mclasstype, mtypes in elements do
-			var mask = masks[mclasstype]
-			var inhashes = new HashMap[MType, Int]
-			for mtype in mtypes do
-				inhashes[mtype] = operator.op(mask, ids[mtype])
-			end
-			hashes[mclasstype] = inhashes
-		end
-		return hashes
-	end
 end
