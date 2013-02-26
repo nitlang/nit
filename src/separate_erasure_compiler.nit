@@ -520,7 +520,7 @@ class SeparateErasureCompilerVisitor
 			self.add("{res} = {accept_null};")
 			self.add("\} else \{")
 		end
-		if self.compiler.as(SeparateErasureCompiler).vt_layout isa PHPropertyLayoutBuilder[MVirtualTypeProp] then
+		if self.compiler.as(SeparateErasureCompiler).class_layout isa PHTypingLayout[MClass] then
 			self.add("{cltype} = HASH({class_ptr}color, {idtype});")
 		end
 		self.add("if({cltype} >= {class_ptr}type_table->size) \{")
