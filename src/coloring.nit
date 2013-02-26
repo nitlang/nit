@@ -716,6 +716,55 @@ private abstract class AbstractHasher[E: Object]
 	fun super_elements(element: E, elements: Set[E]): Set[E] is abstract
 end
 
+# Perfect Hashing (PH)
+# T = type of holder
+# U = type of elements to hash
+private class PerfectHasher[T, U]
+
+	var operator: PHOperator
+
+	init(operator: PHOperator) do self.operator = operator
+
+	fun compute_masks(conflicts: Map[T, Set[U]], ids: Map[U, Int]): Map[T, Int] do
+		var masks = new HashMap[T, Int]
+		for mclasstype, mtypes in conflicts do
+			masks[mclasstype] = compute_mask(mtypes, ids)
+		end
+		return masks
+	end
+
+	private fun compute_mask(mtypes: Set[U], ids: Map[U, Int]): Int do
+		var mask = 0
+		loop
+			var used = new List[Int]
+			for mtype in mtypes do
+				var res = operator.op(mask, ids[mtype])
+				if used.has(res) then
+					break
+				else
+					used.add(res)
+				end
+			end
+			if used.length == mtypes.length then break
+			mask += 1
+		end
+		return mask
+	end
+
+	fun compute_hashes(elements: Map[T, Set[U]], ids: Map[U, Int], masks: Map[T, Int]): Map[T, Map[U, Int]] do
+		var hashes = new HashMap[T, Map[U, Int]]
+		for mclasstype, mtypes in elements do
+			var mask = masks[mclasstype]
+			var inhashes = new HashMap[U, Int]
+			for mtype in mtypes do
+				inhashes[mtype] = operator.op(mask, ids[mtype])
+			end
+			hashes[mclasstype] = inhashes
+		end
+		return hashes
+	end
+end
+
 # Abstract operator used for perfect hashing
 abstract class PHOperator
 	fun op(mask: Int, id:Int): Int is abstract
