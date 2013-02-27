@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Graph coloring tools
-module coloring
+# Table layout builders
+module layout_builders
 
 import abstract_compiler
 

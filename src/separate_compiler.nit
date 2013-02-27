@@ -16,7 +16,7 @@
 module separate_compiler
 
 import abstract_compiler
-intrude import coloring
+import layout_builders
 import rapid_type_analysis
 
 # Add separate compiler specific options
