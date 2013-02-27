@@ -254,9 +254,6 @@ abstract class PropertyLayoutBuilder[E: MProperty]
 
 	type LAYOUT: PropertyLayout[E]
 
-	private var mmodule: MModule
-	init(mmodule: MModule) do self.mmodule = mmodule
-
 	# Compute properties ids and position
 	fun build_layout(mclasses: Set[MClass]): LAYOUT is abstract
 end
@@ -267,9 +264,8 @@ class CLPropertyLayoutBuilder[E: MProperty]
 
 	private var colorer: MPropertyColorer[E]
 
-	init(mmodule: MModule) do
-		super
-		self.colorer = new MPropertyColorer[E](mmodule)
+	init(colorer: MPropertyColorer[E]) do
+		self.colorer = colorer
 	end
 
 	# Compute mclasses ids and position using BM
@@ -538,7 +534,7 @@ private class MClassColorer
 end
 
 # MProperty coloring
-private class MPropertyColorer[E: MProperty]
+abstract class MPropertyColorer[E: MProperty]
 
 	private var mmodule: MModule
 	private var class_colorer: MClassColorer
@@ -610,10 +606,49 @@ private class MPropertyColorer[E: MProperty]
 	end
 
 	# Filter properties
-	private fun properties(mclass: MClass): Set[E] do
-		var properties = new HashSet[E]
+	private fun properties(mclass: MClass): Set[E] is abstract
+end
+
+# Coloring for MMethods
+class MMethodColorer
+	super MPropertyColorer[MMethod]
+
+	init(mmodule: MModule) do super
+
+	redef fun properties(mclass) do
+		var properties = new HashSet[MMethod]
 		for mprop in self.mmodule.properties(mclass) do
-			if mprop isa E then properties.add(mprop)
+			if mprop isa MMethod then properties.add(mprop)
+		end
+		return properties
+	end
+end
+
+# Coloring for MMAttributes
+class MAttributeColorer
+	super MPropertyColorer[MAttribute]
+
+	init(mmodule: MModule) do super
+
+	redef fun properties(mclass) do
+		var properties = new HashSet[MAttribute]
+		for mprop in self.mmodule.properties(mclass) do
+			if mprop isa MAttribute then properties.add(mprop)
+		end
+		return properties
+	end
+end
+
+# Coloring for MVirtualTypeProps
+class MVirtualTypePropColorer
+	super MPropertyColorer[MVirtualTypeProp]
+
+	init(mmodule: MModule) do super
+
+	redef fun properties(mclass) do
+		var properties = new HashSet[MVirtualTypeProp]
+		for mprop in self.mmodule.properties(mclass) do
+			if mprop isa MVirtualTypeProp then properties.add(mprop)
 		end
 		return properties
 	end

@@ -89,7 +89,7 @@ class SeparateErasureCompiler
 		self.class_tables = self.build_class_typing_tables(mclasses)
 
 		# vt coloration
-		var vt_coloring = new CLPropertyLayoutBuilder[MVirtualTypeProp](mainmodule)
+		var vt_coloring = new CLPropertyLayoutBuilder[MVirtualTypeProp](new MVirtualTypePropColorer(mainmodule))
 		var vt_layout = vt_coloring.build_layout(mclasses)
 		self.vt_tables = build_vt_tables(mclasses, vt_layout)
 		self.compile_color_consts(vt_layout.pos)
