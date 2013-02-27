@@ -68,10 +68,7 @@ class SeparateErasureCompiler
 	super SeparateCompiler
 
 	private var class_layout: nullable TypingLayout[MClass]
-	private var class_tables: Map[MClass, Array[nullable MClass]]
-
 	protected var vt_layout: nullable PropertyLayout[MVirtualTypeProp]
-	protected var vt_tables: Map[MClass, Array[nullable MPropDef]]
 
 	init(mainmodule: MModule, mmbuilder: ModelBuilder, runtime_type_analysis: RapidTypeAnalysis) do
 		super
@@ -383,26 +380,50 @@ class SeparateErasureCompiler
 
 	# Stats
 
+	private var class_tables: Map[MClass, Array[nullable MClass]]
+	private var vt_tables: Map[MClass, Array[nullable MPropDef]]
+
 	redef fun display_sizes
 	do
-		print "# size of tables"
-		print "\trs size\trs hole\tst size\tst hole"
-		var rt_table = 0
-		var rt_holes = 0
-		var st_table = 0
-		var st_holes = 0
-		var rtables = vt_tables
-		for unanch, table in rtables do
-			rt_table += table.length
-			for e in table do if e == null then rt_holes += 1
+		print "# size of subtyping tables"
+		print "\ttotal \tholes"
+		var total = 0
+		var holes = 0
+		for t, table in class_tables do
+			total += table.length
+			for e in table do if e == null then holes += 1
 		end
+		print "\t{total}\t{holes}"
 
-		var ttables = class_tables
-		for t, table in ttables do
-			st_table += table.length
-			for e in table do if e == null then st_holes += 1
+		print "# size of resolution tables"
+		print "\ttotal \tholes"
+		total = 0
+		holes = 0
+		for t, table in vt_tables do
+			total += table.length
+			for e in table do if e == null then holes += 1
 		end
-		print "\t{rt_table}\t{rt_holes}\t{st_table}\t{st_holes}"
+		print "\t{total}\t{holes}"
+
+		print "# size of methods tables"
+		print "\ttotal \tholes"
+		total = 0
+		holes = 0
+		for t, table in method_tables do
+			total += table.length
+			for e in table do if e == null then holes += 1
+		end
+		print "\t{total}\t{holes}"
+
+		print "# size of attributes tables"
+		print "\ttotal \tholes"
+		total = 0
+		holes = 0
+		for t, table in attr_tables do
+			total += table.length
+			for e in table do if e == null then holes += 1
+		end
+		print "\t{total}\t{holes}"
 	end
 end
 

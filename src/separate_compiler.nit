@@ -37,8 +37,8 @@ redef class ToolContext
 	var opt_phmod_typing: OptionBool = new OptionBool("Replace coloration by perfect hashing (with mod operator)", "--phmod-typing")
 	# --use-and-perfect-hashing
 	var opt_phand_typing: OptionBool = new OptionBool("Replace coloration by perfect hashing (with and operator)", "--phand-typing")
-	# --generic-resolution-tree
-	var opt_typing_table_metrics: OptionBool = new OptionBool("Enable static size measuring of tables used for typing and resolution", "--typing-table-metrics")
+	# --tables-metrics
+	var opt_tables_metrics: OptionBool = new OptionBool("Enable static size measuring of tables used for vft, typing and resolution", "--tables-metrics")
 
 	redef init
 	do
@@ -51,7 +51,7 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_bm_typing)
 		self.option_context.add_option(self.opt_phmod_typing)
 		self.option_context.add_option(self.opt_phand_typing)
-		self.option_context.add_option(self.opt_typing_table_metrics)
+		self.option_context.add_option(self.opt_tables_metrics)
 	end
 end
 
@@ -103,20 +103,12 @@ class SeparateCompiler
 
 	private var undead_types: Set[MType] = new HashSet[MType]
 	private var partial_types: Set[MType] = new HashSet[MType]
-
-	private var type_layout: nullable TypingLayout[MType]
-	private var type_tables: nullable Map[MType, Array[nullable MType]] = null
-
 	private var live_unanchored_types: Map[MClassDef, Set[MType]] = new HashMap[MClassDef, HashSet[MType]]
 
+	private var type_layout: nullable TypingLayout[MType]
 	private var resolution_layout: nullable ResolutionLayout
-	private var resolution_tables: nullable Map[MClassType, Array[nullable MType]]
-
 	protected var method_layout: nullable PropertyLayout[MMethod]
-	protected var method_tables: Map[MClass, Array[nullable MPropDef]]
-
 	protected var attr_layout: nullable PropertyLayout[MAttribute]
-	protected var attr_tables: Map[MClass, Array[nullable MPropDef]]
 
 	init(mainmodule: MModule, mmbuilder: ModelBuilder, runtime_type_analysis: RapidTypeAnalysis) do
 		super
@@ -746,38 +738,60 @@ class SeparateCompiler
 
 	# Stats
 
+	private var type_tables: Map[MType, Array[nullable MType]] = new HashMap[MType, Array[nullable MType]]
+	private var resolution_tables: Map[MClassType, Array[nullable MType]] = new HashMap[MClassType, Array[nullable MType]]
+	protected var method_tables: Map[MClass, Array[nullable MPropDef]] = new HashMap[MClass, Array[nullable MPropDef]]
+	protected var attr_tables: Map[MClass, Array[nullable MPropDef]] = new HashMap[MClass, Array[nullable MPropDef]]
+
 	redef fun display_stats
 	do
 		super
-		if self.modelbuilder.toolcontext.opt_typing_table_metrics.value then
+		if self.modelbuilder.toolcontext.opt_tables_metrics.value then
 			display_sizes
 		end
 	end
 
 	fun display_sizes
 	do
-		print "# size of tables"
-		print "\trs size\trs hole\tst size\tst hole"
-		var rt_table = 0
-		var rt_holes = 0
-		var st_table = 0
-		var st_holes = 0
-		var rtables = resolution_tables
-		if rtables != null then
-			for unanch, table in rtables do
-				rt_table += table.length
-				for e in table do if e == null then rt_holes += 1
-			end
+		print "# size of subtyping tables"
+		print "\ttotal \tholes"
+		var total = 0
+		var holes = 0
+		for t, table in type_tables do
+			total += table.length
+			for e in table do if e == null then holes += 1
 		end
+		print "\t{total}\t{holes}"
 
-		var ttables = type_tables
-		if ttables != null then
-			for t, table in ttables do
-				st_table += table.length
-				for e in table do if e == null then st_holes += 1
-			end
+		print "# size of resolution tables"
+		print "\ttotal \tholes"
+		total = 0
+		holes = 0
+		for t, table in resolution_tables do
+			total += table.length
+			for e in table do if e == null then holes += 1
 		end
-		print "\t{rt_table}\t{rt_holes}\t{st_table}\t{st_holes}"
+		print "\t{total}\t{holes}"
+
+		print "# size of methods tables"
+		print "\ttotal \tholes"
+		total = 0
+		holes = 0
+		for t, table in method_tables do
+			total += table.length
+			for e in table do if e == null then holes += 1
+		end
+		print "\t{total}\t{holes}"
+
+		print "# size of attributes tables"
+		print "\ttotal \tholes"
+		total = 0
+		holes = 0
+		for t, table in attr_tables do
+			total += table.length
+			for e in table do if e == null then holes += 1
+		end
+		print "\t{total}\t{holes}"
 	end
 end
 
