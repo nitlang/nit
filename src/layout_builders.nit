@@ -356,7 +356,7 @@ end
 
 # Colorers
 
-abstract class AbstractColorer[E: Object]
+abstract class TypingColorer[E: Object]
 
 	private var core: Set[E] = new HashSet[E]
 	private var crown: Set[E] = new HashSet[E]
@@ -488,7 +488,7 @@ end
 
 # MType coloring
 private class MTypeColorer
-	super AbstractColorer[MType]
+	super TypingColorer[MType]
 
 	var mmodule: MModule
 
@@ -503,7 +503,7 @@ end
 
 # MClass coloring
 private class MClassColorer
-	super AbstractColorer[MClass]
+	super TypingColorer[MClass]
 
 	private var mmodule: MModule
 
