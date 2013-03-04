@@ -105,7 +105,7 @@ class SeparateCompiler
 	private var partial_types: Set[MType] = new HashSet[MType]
 	private var live_unresolved_types: Map[MClassDef, Set[MType]] = new HashMap[MClassDef, HashSet[MType]]
 
-	private var type_layout: nullable TypingLayout[MType]
+	private var type_layout: nullable Layout[MType]
 	private var resolution_layout: nullable ResolutionLayout
 	protected var method_layout: nullable PropertyLayout[MMethod]
 	protected var attr_layout: nullable PropertyLayout[MAttribute]

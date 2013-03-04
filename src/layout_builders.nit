@@ -19,15 +19,15 @@ import abstract_compiler
 
 # Layouts
 
-class TypingLayout[E: Object]
-	# Unic ids or each element
+class Layout[E: Object]
+	# Ids or each element
 	var ids: Map[E, Int] = new HashMap[E, Int]
 	# Fixed positions of each element in all tables
 	var pos: Map[E, Int] = new HashMap[E, Int]
 end
 
 class PHTypingLayout[E: Object]
-	super TypingLayout[E]
+	super Layout[E]
 	# Masks used by hash function
 	var masks: Map[E, Int] = new HashMap[E, Int]
 	# Positions of each element for each tables
@@ -59,7 +59,7 @@ end
 
 abstract class TypingLayoutBuilder[E: Object]
 
-	type LAYOUT: TypingLayout[E]
+	type LAYOUT: Layout[E]
 
 	private var mmodule: MModule
 	init(mmodule: MModule) do self.mmodule = mmodule
@@ -88,7 +88,7 @@ class BMTypeLayoutBuilder
 
 	# Compute mtypes ids and position using BM
 	redef fun build_layout(mtypes) do
-		var result = new TypingLayout[MType]
+		var result = new Layout[MType]
 		result.ids = self.compute_ids(mtypes)
 		result.pos = result.ids
 		return result
@@ -110,7 +110,7 @@ class CLTypeLayoutBuilder
 
 	# Compute mtypes ids and position using BM
 	redef fun build_layout(mtypes) do
-		var result = new TypingLayout[MType]
+		var result = new Layout[MType]
 		result.ids = self.compute_ids(mtypes)
 		result.pos = self.colorer.colorize(mtypes)
 		return result
@@ -173,7 +173,7 @@ class BMClassLayoutBuilder
 
 	# Compute mclasses ids and position using BM
 	redef fun build_layout(mclasses) do
-		var result = new TypingLayout[MClass]
+		var result = new Layout[MClass]
 		result.ids = self.compute_ids(mclasses)
 		result.pos = result.ids
 		return result
@@ -195,7 +195,7 @@ class CLClassLayoutBuilder
 
 	# Compute mclasses ids and position using BM
 	redef fun build_layout(mclasses) do
-		var result = new TypingLayout[MClass]
+		var result = new Layout[MClass]
 		result.ids = self.compute_ids(mclasses)
 		result.pos = self.colorer.colorize(mclasses)
 		return result

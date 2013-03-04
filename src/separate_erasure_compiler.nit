@@ -67,7 +67,7 @@ end
 class SeparateErasureCompiler
 	super SeparateCompiler
 
-	private var class_layout: nullable TypingLayout[MClass]
+	private var class_layout: nullable Layout[MClass]
 	protected var vt_layout: nullable PropertyLayout[MVirtualTypeProp]
 
 	init(mainmodule: MModule, mmbuilder: ModelBuilder, runtime_type_analysis: RapidTypeAnalysis) do
