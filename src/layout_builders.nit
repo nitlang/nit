@@ -128,7 +128,7 @@ class PHTypeLayoutBuilder
 	private var hasher: PerfectHasher[MType, MType]
 
 	init(mmodule: MModule, operator: PHOperator) do
-		super
+		super(mmodule)
 		self.hasher = new PerfectHasher[MType, MType](operator)
 	end
 
@@ -213,7 +213,7 @@ class PHClassLayoutBuilder
 	private var hasher: PerfectHasher[MClass, MClass]
 
 	init(mmodule: MModule, operator: PHOperator) do
-		super
+		super(mmodule)
 		self.hasher = new PerfectHasher[MClass, MClass](operator)
 	end
 

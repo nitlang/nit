@@ -88,7 +88,7 @@ class GlobalCompiler
 
 	init(mainmodule: MModule, modelbuilder: ModelBuilder, runtime_type_analysis: RapidTypeAnalysis)
 	do
-		super
+		super(mainmodule, modelbuilder)
 		self.header = new_visitor
 		self.runtime_type_analysis = runtime_type_analysis
 		self.live_primitive_types = new Array[MClassType]

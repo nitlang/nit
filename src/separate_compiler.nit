@@ -111,7 +111,7 @@ class SeparateCompiler
 	protected var attr_layout: nullable PropertyLayout[MAttribute]
 
 	init(mainmodule: MModule, mmbuilder: ModelBuilder, runtime_type_analysis: RapidTypeAnalysis) do
-		super
+		super(mainmodule, mmbuilder)
 		self.header = new_visitor
 		self.runtime_type_analysis = runtime_type_analysis
 		self.do_property_coloring
