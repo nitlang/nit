@@ -361,7 +361,7 @@ class SeparateCompiler
 			supers.add(mtype)
 			for sup in supers do
 				var color: Int
-				if layout isa PHTypingLayout[MType] then
+				if layout isa PHLayout[MType] then
 					color = layout.hashes[mtype][sup]
 				else
 					color = layout.pos[sup]
@@ -530,7 +530,7 @@ class SeparateCompiler
 		v.add_decl("{self.type_layout.ids[mtype]},")
 		v.add_decl("\"{mtype}\", /* class_name_string */")
 		var layout = self.type_layout
-		if layout isa PHTypingLayout[MType] then
+		if layout isa PHLayout[MType] then
 			v.add_decl("{layout.masks[mtype]},")
 		else
 			v.add_decl("{layout.pos[mtype]},")

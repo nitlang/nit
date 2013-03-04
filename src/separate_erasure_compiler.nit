@@ -151,7 +151,7 @@ class SeparateErasureCompiler
 			supers.add(mclass)
 			for sup in supers do
 				var color: Int
-				if layout isa PHTypingLayout[MClass] then
+				if layout isa PHLayout[MClass] then
 					color = layout.hashes[mclass][sup]
 				else
 					color = layout.pos[sup]
@@ -219,7 +219,7 @@ class SeparateErasureCompiler
 		v.add_decl("\"{mclass.name}\", /* class_name_string */")
 		v.add_decl("{self.box_kind_of(mclass)}, /* box_kind */")
 		var layout = self.class_layout
-		if layout isa PHTypingLayout[MClass] then
+		if layout isa PHLayout[MClass] then
 			v.add_decl("{layout.masks[mclass]},")
 		else
 			v.add_decl("{layout.pos[mclass]},")
@@ -541,7 +541,7 @@ class SeparateErasureCompilerVisitor
 			self.add("{res} = {accept_null};")
 			self.add("\} else \{")
 		end
-		if self.compiler.as(SeparateErasureCompiler).class_layout isa PHTypingLayout[MClass] then
+		if self.compiler.as(SeparateErasureCompiler).class_layout isa PHLayout[MClass] then
 			self.add("{cltype} = HASH({class_ptr}color, {idtype});")
 		end
 		self.add("if({cltype} >= {class_ptr}type_table->size) \{")

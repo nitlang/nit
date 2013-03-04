@@ -26,7 +26,7 @@ class Layout[E: Object]
 	var pos: Map[E, Int] = new HashMap[E, Int]
 end
 
-class PHTypingLayout[E: Object]
+class PHLayout[E: Object]
 	super Layout[E]
 	# Masks used by hash function
 	var masks: Map[E, Int] = new HashMap[E, Int]
@@ -115,7 +115,7 @@ end
 class PHTypeLayoutBuilder
 	super TypingLayoutBuilder[MType]
 
-	redef type LAYOUT: PHTypingLayout[MType]
+	redef type LAYOUT: PHLayout[MType]
 
 	private var hasher: PerfectHasher[MType, MType]
 
@@ -136,7 +136,7 @@ class PHTypeLayoutBuilder
 
 	# Compute mtypes ids and position using BM
 	redef fun build_layout(mtypes) do
-		var result = new PHTypingLayout[MType]
+		var result = new PHLayout[MType]
 		var conflicts = build_conflicts(mtypes)
 		result.ids = self.compute_ids(mtypes)
 		result.masks = self.hasher.compute_masks(conflicts, result.ids)
@@ -200,7 +200,7 @@ end
 class PHClassLayoutBuilder
 	super TypingLayoutBuilder[MClass]
 
-	redef type LAYOUT: PHTypingLayout[MClass]
+	redef type LAYOUT: PHLayout[MClass]
 
 	private var hasher: PerfectHasher[MClass, MClass]
 
@@ -221,7 +221,7 @@ class PHClassLayoutBuilder
 
 	# Compute mclasses ids and position using BM
 	redef fun build_layout(mclasses) do
-		var result = new PHTypingLayout[MClass]
+		var result = new PHLayout[MClass]
 		var conflicts = build_conflicts(mclasses)
 		result.ids = self.compute_ids(mclasses)
 		result.masks = self.hasher.compute_masks(conflicts, result.ids)
