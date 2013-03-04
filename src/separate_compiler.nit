@@ -103,7 +103,7 @@ class SeparateCompiler
 
 	private var undead_types: Set[MType] = new HashSet[MType]
 	private var partial_types: Set[MType] = new HashSet[MType]
-	private var live_unanchored_types: Map[MClassDef, Set[MType]] = new HashMap[MClassDef, HashSet[MType]]
+	private var live_unresolved_types: Map[MClassDef, Set[MType]] = new HashMap[MClassDef, HashSet[MType]]
 
 	private var type_layout: nullable TypingLayout[MType]
 	private var resolution_layout: nullable ResolutionLayout
@@ -123,13 +123,13 @@ class SeparateCompiler
 		self.compile_header_attribute_structs
 		self.header.add_decl("struct class \{ int box_kind; nitmethod_t vft[1]; \}; /* general C type representing a Nit class. */")
 
-		# With unanchored_table, all live type resolution are stored in a big table: unanchored_table
-		self.header.add_decl("struct type \{ int id; const char *name; int color; short int is_nullable; struct types *unanchored_table; int table_size; int type_table[1]; \}; /* general C type representing a Nit type. */")
+		# With resolution_table_table, all live type resolution are stored in a big table: resolution_table
+		self.header.add_decl("struct type \{ int id; const char *name; int color; short int is_nullable; struct types *resolution_table; int table_size; int type_table[1]; \}; /* general C type representing a Nit type. */")
 
 		if modelbuilder.toolcontext.opt_phmod_typing.value or modelbuilder.toolcontext.opt_phand_typing.value then
-			self.header.add_decl("struct types \{ int mask; struct type *types[1]; \}; /* a list types (used for vts, fts and unanchored lists). */")
+			self.header.add_decl("struct types \{ int mask; struct type *types[1]; \}; /* a list types (used for vts, fts and unresolved lists). */")
 		else
-			self.header.add_decl("struct types \{ struct type *types[1]; \}; /* a list types (used for vts, fts and unanchored lists). */")
+			self.header.add_decl("struct types \{ struct type *types[1]; \}; /* a list types (used for vts, fts and unresolved lists). */")
 		end
 
 		if modelbuilder.toolcontext.opt_phmod_typing.value then
@@ -344,8 +344,8 @@ class SeparateCompiler
 		self.type_layout = layout_builder.build_layout(mtypes)
 		self.type_tables = self.build_type_tables(mtypes)
 
-		# VT and FT are stored with other unresolved types in the big unanchored_tables
-		self.compile_unanchored_tables(mtypes)
+		# VT and FT are stored with other unresolved types in the big resolution_tables
+		self.compile_resolution_tables(mtypes)
 
 		return mtypes
 	end
@@ -378,23 +378,23 @@ class SeparateCompiler
 		return tables
 	end
 
-	protected fun compile_unanchored_tables(mtypes: Set[MType]) do
-		# Unanchored_tables is used to perform a type resolution at runtime in O(1)
+	protected fun compile_resolution_tables(mtypes: Set[MType]) do
+		# resolution_tables is used to perform a type resolution at runtime in O(1)
 
-		# During the visit of the body of classes, live_unanchored_types are collected
+		# During the visit of the body of classes, live_unresolved_types are collected
 		# and associated to
-		# Collect all live_unanchored_types (visited in the body of classes)
+		# Collect all live_unresolved_types (visited in the body of classes)
 
 		# Determinate fo each livetype what are its possible requested anchored types
-		var mtype2unanchored = new HashMap[MClassType, Set[MType]]
+		var mtype2unresolved = new HashMap[MClassType, Set[MType]]
 		for mtype in self.runtime_type_analysis.live_types do
 			var set = new HashSet[MType]
 			for cd in mtype.collect_mclassdefs(self.mainmodule) do
-				if self.live_unanchored_types.has_key(cd) then
-					set.add_all(self.live_unanchored_types[cd])
+				if self.live_unresolved_types.has_key(cd) then
+					set.add_all(self.live_unresolved_types[cd])
 				end
 			end
-			mtype2unanchored[mtype] = set
+			mtype2unresolved[mtype] = set
 		end
 
 		# Compute the table layout with the prefered method
@@ -408,27 +408,27 @@ class SeparateCompiler
 		else
 			resolution_builder = new CLResolutionLayoutBuilder
 		end
-		self.resolution_layout = resolution_builder.build_layout(mtype2unanchored)
-		self.resolution_tables = self.build_resolution_tables(mtype2unanchored)
+		self.resolution_layout = resolution_builder.build_layout(mtype2unresolved)
+		self.resolution_tables = self.build_resolution_tables(mtype2unresolved)
 
-		# Compile a C constant for each collected unanchored type.
-		# Either to a color, or to -1 if the unanchored type is dead (no live receiver can require it)
-		var all_unanchored = new HashSet[MType]
-		for t in self.live_unanchored_types.values do
-			all_unanchored.add_all(t)
+		# Compile a C constant for each collected unresolved type.
+		# Either to a color, or to -1 if the unresolved type is dead (no live receiver can require it)
+		var all_unresolved = new HashSet[MType]
+		for t in self.live_unresolved_types.values do
+			all_unresolved.add_all(t)
 		end
-		var all_unanchored_types_colors = new HashMap[MType, Int]
-		for t in all_unanchored do
+		var all_unresolved_types_colors = new HashMap[MType, Int]
+		for t in all_unresolved do
 			if self.resolution_layout.pos.has_key(t) then
-				all_unanchored_types_colors[t] = self.resolution_layout.pos[t]
+				all_unresolved_types_colors[t] = self.resolution_layout.pos[t]
 			else
-				all_unanchored_types_colors[t] = -1
+				all_unresolved_types_colors[t] = -1
 			end
 		end
-		self.compile_color_consts(all_unanchored_types_colors)
+		self.compile_color_consts(all_unresolved_types_colors)
 
 		#print "tables"
-		#for k, v in unanchored_types_tables.as(not null) do
+		#for k, v in unresolved_types_tables.as(not null) do
 		#	print "{k}: {v.join(", ")}"
 		#end
 		#print ""
@@ -520,7 +520,7 @@ class SeparateCompiler
 		self.header.add_decl("const char *name;")
 		self.header.add_decl("int color;")
 		self.header.add_decl("short int is_nullable;")
-		self.header.add_decl("const struct types *unanchored_table;")
+		self.header.add_decl("const struct types *resolution_table;")
 		self.header.add_decl("int table_size;")
 		self.header.add_decl("int type_table[{self.type_tables[mtype].length}];")
 		self.header.add_decl("\};")
@@ -540,8 +540,8 @@ class SeparateCompiler
 		else
 			v.add_decl("0,")
 		end
-		if compile_type_unanchored_table(mtype) then
-			v.add_decl("(struct types*) &unanchored_table_{c_name},")
+		if compile_type_resolution_table(mtype) then
+			v.add_decl("(struct types*) &resolution_table_{c_name},")
 		else
 			v.add_decl("NULL,")
 		end
@@ -558,7 +558,7 @@ class SeparateCompiler
 		v.add_decl("\};")
 	end
 
-	fun compile_type_unanchored_table(mtype: MType): Bool do
+	fun compile_type_resolution_table(mtype: MType): Bool do
 
 		var mclass_type: MClassType
 		if mtype isa MNullableType then
@@ -570,9 +570,9 @@ class SeparateCompiler
 
 		var layout = self.resolution_layout
 
-		# extern const struct unanchored_table_X unanchored_table_X
-		self.header.add_decl("extern const struct unanchored_table_{mtype.c_name} unanchored_table_{mtype.c_name};")
-		self.header.add_decl("struct unanchored_table_{mtype.c_name} \{")
+		# extern const struct resolution_table_X resolution_table_X
+		self.header.add_decl("extern const struct resolution_table_{mtype.c_name} resolution_table_{mtype.c_name};")
+		self.header.add_decl("struct resolution_table_{mtype.c_name} \{")
 		if layout isa PHResolutionLayout then
 			self.header.add_decl("int mask;")
 		end
@@ -581,7 +581,7 @@ class SeparateCompiler
 
 		# const struct fts_table_X fts_table_X
 		var v = new_visitor
-		v.add_decl("const struct unanchored_table_{mtype.c_name} unanchored_table_{mtype.c_name} = \{")
+		v.add_decl("const struct resolution_table_{mtype.c_name} resolution_table_{mtype.c_name} = \{")
 		if layout isa PHResolutionLayout then
 			v.add_decl("{layout.masks[mclass_type]},")
 		end
@@ -706,7 +706,7 @@ class SeparateCompiler
 			v.add("if(type == NULL) \{")
 			v.add_abort("type null")
 			v.add("\}")
-			v.add("if(type->unanchored_table == NULL) \{")
+			v.add("if(type->resolution_table == NULL) \{")
 			v.add("fprintf(stderr, \"Insantiation of a dead type: %s\\n\", type->name);")
 			v.add_abort("type dead")
 			v.add("\}")
@@ -1002,7 +1002,7 @@ class SeparateCompilerVisitor
 		# A vararg must be stored into an new array
 		# The trick is that the dymaic type of the array may depends on the receiver
 		# of the method (ie recv) if the static type is unresolved
-		# This is more complex than usual because the unanchored type must not be resolved
+		# This is more complex than usual because the unresolved type must not be resolved
 		# with the current receiver (ie self).
 		# Therefore to isolate the resolution from self, a local Frame is created.
 		# One can see this implementation as an inlined method of the receiver whose only
@@ -1123,13 +1123,13 @@ class SeparateCompilerVisitor
 	do
 		var compiler = self.compiler
 		if mtype isa MGenericType and mtype.need_anchor then
-			link_unanchored_type(self.frame.mpropdef.mclassdef, mtype)
+			link_unresolved_type(self.frame.mpropdef.mclassdef, mtype)
 			var recv = self.frame.arguments.first
 			var recv_type_info = self.type_info(recv)
 			if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
-				return self.new_expr("NEW_{mtype.mclass.c_name}((struct type *) {recv_type_info}->unanchored_table->types[HASH({recv_type_info}->unanchored_table->mask, {mtype.const_color})])", mtype)
+				return self.new_expr("NEW_{mtype.mclass.c_name}((struct type *) {recv_type_info}->resolution_table->types[HASH({recv_type_info}->resolution_table->mask, {mtype.const_color})])", mtype)
 			else
-				return self.new_expr("NEW_{mtype.mclass.c_name}((struct type *) {recv_type_info}->unanchored_table->types[{mtype.const_color}])", mtype)
+				return self.new_expr("NEW_{mtype.mclass.c_name}((struct type *) {recv_type_info}->resolution_table->types[{mtype.const_color}])", mtype)
 			end
 		end
 		compiler.undead_types.add(mtype)
@@ -1178,12 +1178,12 @@ class SeparateCompilerVisitor
 			var type_struct = self.get_name("type_struct")
 			self.add_decl("struct type* {type_struct};")
 
-			# Either with unanchored_table with a direct resolution
-			link_unanchored_type(self.frame.mpropdef.mclassdef, ntype)
+			# Either with resolution_table with a direct resolution
+			link_unresolved_type(self.frame.mpropdef.mclassdef, ntype)
 			if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
-				self.add("{type_struct} = {recv_type_info}->unanchored_table->types[HASH({recv_type_info}->unanchored_table->mask, {ntype.const_color})];")
+				self.add("{type_struct} = {recv_type_info}->resolution_table->types[HASH({recv_type_info}->resolution_table->mask, {ntype.const_color})];")
 			else
-				self.add("{type_struct} = {recv_type_info}->unanchored_table->types[{ntype.const_color}];")
+				self.add("{type_struct} = {recv_type_info}->resolution_table->types[{ntype.const_color}];")
 			end
 			if compiler.modelbuilder.toolcontext.opt_typing_test_metrics.value then
 				self.compiler.count_type_test_unresolved[tag] += 1
@@ -1396,13 +1396,13 @@ class SeparateCompilerVisitor
 		assert mtype isa MGenericType
 		var compiler = self.compiler
 		if mtype.need_anchor then
-			link_unanchored_type(self.frame.mpropdef.mclassdef, mtype)
+			link_unresolved_type(self.frame.mpropdef.mclassdef, mtype)
 			var recv = self.frame.arguments.first
 			var recv_type_info = self.type_info(recv)
 			if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
-				return self.new_expr("NEW_{mtype.mclass.c_name}({length}, (struct type *) {recv_type_info}->unanchored_table->types[HASH({recv_type_info}->unanchored_table->mask, {mtype.const_color})])", mtype)
+				return self.new_expr("NEW_{mtype.mclass.c_name}({length}, (struct type *) {recv_type_info}->resolution_table->types[HASH({recv_type_info}->resolution_table->mask, {mtype.const_color})])", mtype)
 			else
-				return self.new_expr("NEW_{mtype.mclass.c_name}({length}, (struct type *) {recv_type_info}->unanchored_table->types[{mtype.const_color}])", mtype)
+				return self.new_expr("NEW_{mtype.mclass.c_name}({length}, (struct type *) {recv_type_info}->resolution_table->types[{mtype.const_color}])", mtype)
 			end
 		end
 		compiler.undead_types.add(mtype)
@@ -1435,13 +1435,13 @@ class SeparateCompilerVisitor
 		self.ret(res)
 	end
 
-	fun link_unanchored_type(mclassdef: MClassDef, mtype: MType) do
+	fun link_unresolved_type(mclassdef: MClassDef, mtype: MType) do
 		assert mtype.need_anchor
 		var compiler = self.compiler
-		if not compiler.live_unanchored_types.has_key(self.frame.mpropdef.mclassdef) then
-			compiler.live_unanchored_types[self.frame.mpropdef.mclassdef] = new HashSet[MType]
+		if not compiler.live_unresolved_types.has_key(self.frame.mpropdef.mclassdef) then
+			compiler.live_unresolved_types[self.frame.mpropdef.mclassdef] = new HashSet[MType]
 		end
-		compiler.live_unanchored_types[self.frame.mpropdef.mclassdef].add(mtype)
+		compiler.live_unresolved_types[self.frame.mpropdef.mclassdef].add(mtype)
 	end
 end
 
