@@ -19,14 +19,14 @@ import abstract_compiler
 
 # Layouts
 
-class TypingLayout[E]
+class TypingLayout[E: Object]
 	# Unic ids or each element
 	var ids: Map[E, Int] = new HashMap[E, Int]
 	# Fixed positions of each element in all tables
 	var pos: Map[E, Int] = new HashMap[E, Int]
 end
 
-class PHTypingLayout[E]
+class PHTypingLayout[E: Object]
 	super TypingLayout[E]
 	# Masks used by hash function
 	var masks: Map[E, Int] = new HashMap[E, Int]
@@ -34,7 +34,7 @@ class PHTypingLayout[E]
 	var hashes: Map[E, Map[E, Int]] = new HashMap[E, Map[E, Int]]
 end
 
-class PropertyLayout[E]
+class PropertyLayout[E: Object]
 	# Fixed positions of each element in all tables
 	var pos: Map[E, Int] = new HashMap[E, Int]
 end
@@ -57,7 +57,7 @@ end
 
 # Builders
 
-abstract class TypingLayoutBuilder[E]
+abstract class TypingLayoutBuilder[E: Object]
 
 	type LAYOUT: TypingLayout[E]
 
@@ -719,7 +719,7 @@ end
 # Perfect Hashing (PH)
 # T = type of holder
 # U = type of elements to hash
-private class PerfectHasher[T, U]
+private class PerfectHasher[T: Object, U: Object]
 
 	var operator: PHOperator
 
