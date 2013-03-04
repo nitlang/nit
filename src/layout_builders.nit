@@ -45,30 +45,19 @@ abstract class TypingLayoutBuilder[E: Object]
 
 	type LAYOUT: Layout[E]
 
-	private var mmodule: MModule
-	init(mmodule: MModule) do self.mmodule = mmodule
-
 	# Compute elements ids and position
 	fun build_layout(elements: Set[E]): LAYOUT is abstract
-
-	# Give each MType a unic id using a descending linearization of the `mtypes` set
-	private fun compute_ids(elements: Set[E]): Map[E, Int] do
-		var ids = new HashMap[E, Int]
-		var lin = self.reverse_linearize(elements)
-		for element in lin do
-			ids[element] = ids.length
-		end
-		return ids
-	end
-
-	private fun reverse_linearize(elements: Set[E]): Array[E] is abstract
 end
 
 # Layout builder for MType using Binary Matrix (BM)
 class BMTypeLayoutBuilder
 	super TypingLayoutBuilder[MType]
 
-	init(mmodule: MModule) do super
+	private var mmodule: MModule
+
+	init(mmodule: MModule) do
+		self.mmodule = mmodule
+	end
 
 	# Compute mtypes ids and position using BM
 	redef fun build_layout(mtypes) do
@@ -78,7 +67,15 @@ class BMTypeLayoutBuilder
 		return result
 	end
 
-	redef fun reverse_linearize(elements) do return self.mmodule.reverse_linearize_mtypes(elements)
+	# Give each MType a unic id using a descending linearization of the `mtypes` set
+	private fun compute_ids(elements: Set[MType]): Map[MType, Int] do
+		var ids = new HashMap[MType, Int]
+		var lin = self.mmodule.reverse_linearize_mtypes(elements)
+		for element in lin do
+			ids[element] = ids.length
+		end
+		return ids
+	end
 end
 
 # Layout builder for MType using Coloring (CL)
@@ -88,7 +85,6 @@ class CLTypeLayoutBuilder
 	private var colorer: MTypeColorer
 
 	init(mmodule: MModule) do
-		super
 		self.colorer = new MTypeColorer(mmodule)
 	end
 
@@ -100,7 +96,15 @@ class CLTypeLayoutBuilder
 		return result
 	end
 
-	redef fun reverse_linearize(elements) do return self.colorer.reverse_linearize(elements)
+	# Give each MType a unic id using a descending linearization of the `mtypes` set
+	private fun compute_ids(elements: Set[MType]): Map[MType, Int] do
+		var ids = new HashMap[MType, Int]
+		var lin = self.colorer.reverse_linearize(elements)
+		for element in lin do
+			ids[element] = ids.length
+		end
+		return ids
+	end
 end
 
 # Layout builder for MType using Perfect Hashing (PH)
@@ -110,9 +114,10 @@ class PHTypeLayoutBuilder
 	redef type LAYOUT: PHLayout[MType, MType]
 
 	private var hasher: PerfectHasher[MType, MType]
+	private var mmodule: MModule
 
 	init(mmodule: MModule, operator: PHOperator) do
-		super(mmodule)
+		self.mmodule = mmodule
 		self.hasher = new PerfectHasher[MType, MType](operator)
 	end
 
@@ -137,7 +142,7 @@ class PHTypeLayoutBuilder
 	end
 
 	# Ids start from 1 instead of 0
-	redef fun compute_ids(mtypes) do
+	private fun compute_ids(mtypes: Set[MType]): Map[MType, Int] do
 		var ids = new HashMap[MType, Int]
 		var lin = self.mmodule.reverse_linearize_mtypes(mtypes)
 		for mtype in lin do
@@ -145,15 +150,17 @@ class PHTypeLayoutBuilder
 		end
 		return ids
 	end
-
-	redef fun reverse_linearize(elements) do return self.mmodule.reverse_linearize_mtypes(elements)
 end
 
 # Layout builder for MClass using Binary Matrix (BM)
 class BMClassLayoutBuilder
 	super TypingLayoutBuilder[MClass]
 
-	init(mmodule: MModule) do super
+	private var mmodule: MModule
+
+	init(mmodule: MModule) do
+		self.mmodule = mmodule
+	end
 
 	# Compute mclasses ids and position using BM
 	redef fun build_layout(mclasses) do
@@ -163,7 +170,15 @@ class BMClassLayoutBuilder
 		return result
 	end
 
-	redef fun reverse_linearize(elements) do return self.mmodule.reverse_linearize_mclasses(elements)
+	# Give each MClass a unic id using a descending linearization
+	private fun compute_ids(elements: Set[MClass]): Map[MClass, Int] do
+		var ids = new HashMap[MClass, Int]
+		var lin = self.mmodule.reverse_linearize_mclasses(elements)
+		for element in lin do
+			ids[element] = ids.length
+		end
+		return ids
+	end
 end
 
 # Layout builder for MClass using Coloring (CL)
@@ -173,7 +188,6 @@ class CLClassLayoutBuilder
 	private var colorer: MClassColorer
 
 	init(mmodule: MModule) do
-		super
 		self.colorer = new MClassColorer(mmodule)
 	end
 
@@ -185,7 +199,15 @@ class CLClassLayoutBuilder
 		return result
 	end
 
-	redef fun reverse_linearize(elements) do return self.colorer.reverse_linearize(elements)
+	# Give each MClass a unic id using a descending linearization
+	private fun compute_ids(elements: Set[MClass]): Map[MClass, Int] do
+		var ids = new HashMap[MClass, Int]
+		var lin = self.colorer.reverse_linearize(elements)
+		for element in lin do
+			ids[element] = ids.length
+		end
+		return ids
+	end
 end
 
 # Layout builder for MClass using Perfect Hashing (PH)
@@ -195,9 +217,10 @@ class PHClassLayoutBuilder
 	redef type LAYOUT: PHLayout[MClass, MClass]
 
 	private var hasher: PerfectHasher[MClass, MClass]
+	private var mmodule: MModule
 
 	init(mmodule: MModule, operator: PHOperator) do
-		super(mmodule)
+		self.mmodule = mmodule
 		self.hasher = new PerfectHasher[MClass, MClass](operator)
 	end
 
@@ -222,7 +245,7 @@ class PHClassLayoutBuilder
 	end
 
 	# Ids start from 1 instead of 0
-	redef fun compute_ids(mclasses) do
+	private fun compute_ids(mclasses: Set[MClass]): Map[MClass, Int] do
 		var ids = new HashMap[MClass, Int]
 		var lin = self.mmodule.reverse_linearize_mclasses(mclasses)
 		for mclass in lin do
@@ -230,8 +253,6 @@ class PHClassLayoutBuilder
 		end
 		return ids
 	end
-
-	redef fun reverse_linearize(elements) do return self.mmodule.reverse_linearize_mclasses(elements)
 end
 
 abstract class PropertyLayoutBuilder[E: MProperty]
