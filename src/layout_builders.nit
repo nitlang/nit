@@ -26,25 +26,17 @@ class Layout[E: Object]
 	var pos: Map[E, Int] = new HashMap[E, Int]
 end
 
-class PHLayout[E: Object]
+class PHLayout[HOLDER: Object, E: Object]
 	super Layout[E]
 	# Masks used by hash function
-	var masks: Map[E, Int] = new HashMap[E, Int]
+	var masks: Map[HOLDER, Int] = new HashMap[HOLDER, Int]
 	# Positions of each element for each tables
-	var hashes: Map[E, Map[E, Int]] = new HashMap[E, Map[E, Int]]
+	var hashes: Map[HOLDER, Map[E, Int]] = new HashMap[HOLDER, Map[E, Int]]
 end
 
 class PropertyLayout[E: Object]
 	# Fixed positions of each element in all tables
 	var pos: Map[E, Int] = new HashMap[E, Int]
-end
-
-class PHResolutionLayout
-	super Layout[MType]
-	# Masks associated to each owner of a resolution table
-	var masks: Map[MClassType, Int] = new HashMap[MClassType, Int]
-	# Positions of each resolvec type for resolution tables
-	var hashes: Map[MClassType, Map[MType, Int]] = new HashMap[MClassType, Map[MType, Int]]
 end
 
 # Builders
@@ -115,7 +107,7 @@ end
 class PHTypeLayoutBuilder
 	super TypingLayoutBuilder[MType]
 
-	redef type LAYOUT: PHLayout[MType]
+	redef type LAYOUT: PHLayout[MType, MType]
 
 	private var hasher: PerfectHasher[MType, MType]
 
@@ -136,7 +128,7 @@ class PHTypeLayoutBuilder
 
 	# Compute mtypes ids and position using BM
 	redef fun build_layout(mtypes) do
-		var result = new PHLayout[MType]
+		var result = new PHLayout[MType, MType]
 		var conflicts = build_conflicts(mtypes)
 		result.ids = self.compute_ids(mtypes)
 		result.masks = self.hasher.compute_masks(conflicts, result.ids)
@@ -200,7 +192,7 @@ end
 class PHClassLayoutBuilder
 	super TypingLayoutBuilder[MClass]
 
-	redef type LAYOUT: PHLayout[MClass]
+	redef type LAYOUT: PHLayout[MClass, MClass]
 
 	private var hasher: PerfectHasher[MClass, MClass]
 
@@ -221,7 +213,7 @@ class PHClassLayoutBuilder
 
 	# Compute mclasses ids and position using BM
 	redef fun build_layout(mclasses) do
-		var result = new PHLayout[MClass]
+		var result = new PHLayout[MClass, MClass]
 		var conflicts = build_conflicts(mclasses)
 		result.ids = self.compute_ids(mclasses)
 		result.masks = self.hasher.compute_masks(conflicts, result.ids)
@@ -332,7 +324,7 @@ end
 class PHResolutionLayoutBuilder
 	super ResolutionLayoutBuilder
 
-	redef type LAYOUT: PHResolutionLayout
+	redef type LAYOUT: PHLayout[MClassType, MType]
 
 	private var hasher: PerfectHasher[MClassType, MType]
 
@@ -340,7 +332,7 @@ class PHResolutionLayoutBuilder
 
 	# Compute resolved types masks and hashes
 	redef fun build_layout(elements) do
-		var result = new PHResolutionLayout
+		var result = new PHLayout[MClassType, MType]
 		result.ids = self.compute_ids(elements)
 		result.pos = result.ids
 		result.masks = self.hasher.compute_masks(elements, result.ids)

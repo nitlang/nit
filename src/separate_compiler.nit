@@ -361,7 +361,7 @@ class SeparateCompiler
 			supers.add(mtype)
 			for sup in supers do
 				var color: Int
-				if layout isa PHLayout[MType] then
+				if layout isa PHLayout[MType, MType] then
 					color = layout.hashes[mtype][sup]
 				else
 					color = layout.pos[sup]
@@ -441,7 +441,7 @@ class SeparateCompiler
 			var table = new Array[nullable MType]
 			for mtype in mtypes do
 				var color: Int
-				if layout isa PHResolutionLayout then
+				if layout isa PHLayout[MClassType, MType] then
 					color = layout.hashes[mclasstype][mtype]
 				else
 					color = layout.pos[mtype]
@@ -530,7 +530,7 @@ class SeparateCompiler
 		v.add_decl("{self.type_layout.ids[mtype]},")
 		v.add_decl("\"{mtype}\", /* class_name_string */")
 		var layout = self.type_layout
-		if layout isa PHLayout[MType] then
+		if layout isa PHLayout[MType, MType] then
 			v.add_decl("{layout.masks[mtype]},")
 		else
 			v.add_decl("{layout.pos[mtype]},")
@@ -573,7 +573,7 @@ class SeparateCompiler
 		# extern const struct resolution_table_X resolution_table_X
 		self.header.add_decl("extern const struct resolution_table_{mtype.c_name} resolution_table_{mtype.c_name};")
 		self.header.add_decl("struct resolution_table_{mtype.c_name} \{")
-		if layout isa PHResolutionLayout then
+		if layout isa PHLayout[MClassType, MType] then
 			self.header.add_decl("int mask;")
 		end
 		self.header.add_decl("struct type *types[{self.resolution_tables[mclass_type].length}];")
@@ -582,7 +582,7 @@ class SeparateCompiler
 		# const struct fts_table_X fts_table_X
 		var v = new_visitor
 		v.add_decl("const struct resolution_table_{mtype.c_name} resolution_table_{mtype.c_name} = \{")
-		if layout isa PHResolutionLayout then
+		if layout isa PHLayout[MClassType, MType] then
 			v.add_decl("{layout.masks[mclass_type]},")
 		end
 		v.add_decl("\{")
