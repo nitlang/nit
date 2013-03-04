@@ -100,7 +100,7 @@ class CLTypeLayoutBuilder
 		return result
 	end
 
-	redef fun reverse_linearize(elements) do return self.mmodule.reverse_linearize_mtypes(elements)
+	redef fun reverse_linearize(elements) do return self.colorer.reverse_linearize(elements)
 end
 
 # Layout builder for MType using Perfect Hashing (PH)
@@ -185,7 +185,7 @@ class CLClassLayoutBuilder
 		return result
 	end
 
-	redef fun reverse_linearize(elements) do return self.mmodule.reverse_linearize_mclasses(elements)
+	redef fun reverse_linearize(elements) do return self.colorer.reverse_linearize(elements)
 end
 
 # Layout builder for MClass using Perfect Hashing (PH)
