@@ -39,16 +39,8 @@ class PropertyLayout[E: Object]
 	var pos: Map[E, Int] = new HashMap[E, Int]
 end
 
-# Layout for resolution tables
-class ResolutionLayout
-	# Unic ids for each resolved type
-	var ids: Map[MType, Int] = new HashMap[MType, Int]
-	# Fixed positions of resolved type
-	var pos: Map[MType, Int] = new HashMap[MType, Int]
-end
-
 class PHResolutionLayout
-	super ResolutionLayout
+	super Layout[MType]
 	# Masks associated to each owner of a resolution table
 	var masks: Map[MClassType, Int] = new HashMap[MClassType, Int]
 	# Positions of each resolvec type for resolution tables
@@ -284,7 +276,7 @@ end
 
 abstract class ResolutionLayoutBuilder
 
-	type LAYOUT: ResolutionLayout
+	type LAYOUT: Layout[MType]
 
 	init do end
 
@@ -312,7 +304,7 @@ class BMResolutionLayoutBuilder
 
 	# Compute resolved types position using BM
 	redef fun build_layout(elements) do
-		var result = new ResolutionLayout
+		var result = new Layout[MType]
 		result.ids = self.compute_ids(elements)
 		result.pos = result.ids
 		return result
@@ -329,7 +321,7 @@ class CLResolutionLayoutBuilder
 
 	# Compute resolved types colors
 	redef fun build_layout(elements) do
-		var result = new ResolutionLayout
+		var result = new Layout[MType]
 		result.ids = self.compute_ids(elements)
 		result.pos = self.colorer.colorize(elements)
 		return result
