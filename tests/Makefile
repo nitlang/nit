@@ -21,9 +21,6 @@ nitg:
 nitg-s:
 	./tests.sh --engine nitg-s ${PROGS}
 
-nitg-s-tree:
-	./tests.sh --engine nitg-s -o --generic-resolution-tree *.nit
-
 nitg-s-bm:
 	./tests.sh --engine nitg-s -o --bm-typing ${PROGS}
 
