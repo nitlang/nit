@@ -79,6 +79,9 @@ class Debugger
 	# Aliases hashmap (maps an alias to a variable name)
 	var aliases = new HashMap[String, String]
 
+	# Set containing all the traced variables and their related frame
+	private var traces = new HashSet[TraceObject]
+
 	#######################################################################
 	##                  Execution of statement function                  ##
 	#######################################################################
@@ -374,6 +377,48 @@ class Debugger
 	#######################################################################
 	##                    Trace Management functions                     ##
 	#######################################################################
+
+	private fun trace_variable(variable_name: String, breaker: Bool)
+	do
+		for i in self.traces do
+			if i.is_variable_traced_in_frame(variable_name, frame) then
+				print "This variable is already traced"
+				return
+			end
+		end
+
+		var trace_object: TraceObject
+
+		if breaker then
+			trace_object = new TraceObject(true)
+		else
+			trace_object = new TraceObject(false)
+		end
+
+		# We trace the current variable found for the current frame
+		trace_object.add_frame_variable(self.frame, variable_name)
+
+		var position_of_variable_in_arguments = get_position_of_variable_in_arguments(frame, variable_name)
+
+		# Start parsing the frames starting with the parent of the current one, until the highest
+		# When the variable traced is declared locally, the loop stops
+		for i in [1 .. frames.length-1] do
+
+			# If the variable was reported to be an argument of the previous frame
+			if position_of_variable_in_arguments != -1 then
+
+				var local_name = get_identifiers_in_current_instruction(get_function_arguments(frames[i].current_node.location.text))[position_of_variable_in_arguments]
+
+				position_of_variable_in_arguments = get_position_of_variable_in_arguments(frames[i], local_name)
+
+				trace_object.add_frame_variable(frames[i], local_name)
+			else
+				break
+			end
+		end
+
+		self.traces.add(trace_object)
+	end
 
 	# If the variable *variable_name* is an argument of the function being executed in the frame *frame*
 	# The function returns its position in the arguments
