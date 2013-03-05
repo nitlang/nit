@@ -13,10 +13,10 @@
 "	g:syntastic_nit_args specifies extra arguments to call nitc
 "	g:syntastic_nit_include_dirs lists directories to include, must be a list
 "============================================================================
-if exists("loaded_nit_syntax_checker")
+if exists("loaded_syntastic_nit_nitc_checker")
 	finish
 endif
-let loaded_nit_syntax_checker = 1
+let loaded_syntastic_nit_nitc_checker = 1
 
 " check if nitc is accessible
 if exists('g:syntastic_nitc')
@@ -32,7 +32,11 @@ if !executable(s:nitc)
 	finish
 endif
 
-function! SyntaxCheckers_nit_GetLocList()
+function! SyntaxCheckers_nit_nitc_IsAvailable()
+    return executable(expand(s:nitc))
+endfunction
+
+function! SyntaxCheckers_nit_nitc_GetLocList()
 	let makeprg = s:nitc . " --no-color --only-metamodel 2>&1 " . shellescape(expand("%"))
 
 	" custom NIT_DIR
@@ -66,3 +70,7 @@ function! SyntaxCheckers_nit_GetLocList()
 
 	return SyntasticMake({ 'makeprg': makeprg, 'errorformat':errorformat })
 endfunction
+
+call g:SyntasticRegistry.CreateAndRegisterChecker({
+    \ 'filetype': 'nit',
+    \ 'name': 'nitc'})
