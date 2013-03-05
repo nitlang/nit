@@ -76,6 +76,9 @@ class Debugger
 	# Contains the current file
 	var curr_file = ""
 
+	# Aliases hashmap (maps an alias to a variable name)
+	var aliases = new HashMap[String, String]
+
 	#######################################################################
 	##                  Execution of statement function                  ##
 	#######################################################################
@@ -185,6 +188,10 @@ class Debugger
 			# Removes a breakpoint on line x of file y
 			else if parts_of_command[0] == "d" or parts_of_command[0] == "delete" then
 				process_remove_break_fun(parts_of_command)
+			# Sets an alias for a variable
+			else if parts_of_command.length == 3 and parts_of_command[1] == "as"
+			then
+				add_alias(parts_of_command[0], parts_of_command[2])
 			# Lists all the commands available
 			else
 				list_commands
@@ -253,7 +260,7 @@ class Debugger
 
 			print "\nEnd of current instruction \n"
 		else
-			var instance = seek_variable(parts_of_command[1], frame)
+			var instance = seek_variable(get_real_variable_name(parts_of_command[1]), frame)
 
 			if instance != null
 			then
@@ -297,6 +304,44 @@ class Debugger
 		else
 			list_commands
 		end
+	end
+
+	#######################################################################
+	##                    Alias management functions                     ##
+	#######################################################################
+
+	# Adds a new alias to the tables
+	fun add_alias(var_represented: String, alias: String)
+	do
+		self.aliases[alias] = var_represented
+	end
+
+	# Gets the real name of a variable hidden by an alias
+	fun get_variable_name_by_alias(alias: String): nullable String
+	do
+		if self.aliases.keys.has(alias) then
+			return self.aliases[alias]
+		end
+
+		return null
+	end
+
+	# Gets the variable named by name, whether it is an alias or not
+	fun get_real_variable_name(name: String): String
+	do
+		var explode_string = name.split_with(".")
+		var final_string = new Buffer
+		for i in explode_string do
+			var alias_resolved = get_variable_name_by_alias(i)
+			if alias_resolved != null then
+				final_string.append(get_real_variable_name(alias_resolved))
+			else
+				final_string.append(i)
+			end
+			final_string.append(".")
+		end
+
+		return final_string.substring(0,final_string.length-1).to_s
 	end
 
 	#######################################################################
@@ -484,6 +529,8 @@ class Debugger
 		print "s : steps in on the current function\n"
 		print "n : steps-over the current instruction\n"
 		print "finish : steps out of the current function\n"
+		print "variable as alias : Adds an alias called *alias* for the variable *variable*"
+		print "An alias can reference another alias\n"
 		print "[d/delete] line_nb : Removes a breakpoint on line *line_nb* of the current file \n"
 		print "[d/delete] file_name line_nb : Removes a breakpoint on line *line_nb* of file *file_name* \n"
 		print "kill : kills the current program (Exits with an error and stack trace)\n"
