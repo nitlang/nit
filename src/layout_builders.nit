@@ -71,94 +71,15 @@ class CLTypingLayoutBuilder[E: Object]
 	redef fun build_layout(elements) do return colorer.build_layout(elements)
 end
 
-# Layout builder for MType using Perfect Hashing (PH)
-class PHTypeLayoutBuilder
-	super TypingLayoutBuilder[MType]
+# Typing Layout builder using Perfect Hashing (PH)
+class PHTypingLayoutBuilder[E: Object]
+	super TypingLayoutBuilder[E]
 
-	redef type LAYOUT: PHLayout[MType, MType]
+	private var hasher: TypingHasher[E]
 
-	private var hasher: PerfectHasher[MType, MType]
-	private var mmodule: MModule
+	init(hasher: TypingHasher[E]) do self.hasher = hasher
 
-	init(mmodule: MModule, operator: PHOperator) do
-		self.mmodule = mmodule
-		self.hasher = new PerfectHasher[MType, MType](operator)
-	end
-
-	private fun build_conflicts(mtypes: Set[MType]): Map[MType, Set[MType]] do
-		var conflicts = new HashMap[MType, Set[MType]]
-		for mtype in mtypes do
-			var supers = self.mmodule.super_mtypes(mtype, mtypes)
-			supers.add(mtype)
-			conflicts[mtype] = supers
-		end
-		return conflicts
-	end
-
-	# Compute mtypes ids and position using BM
-	redef fun build_layout(mtypes) do
-		var result = new PHLayout[MType, MType]
-		var conflicts = build_conflicts(mtypes)
-		result.ids = self.compute_ids(mtypes)
-		result.masks = self.hasher.compute_masks(conflicts, result.ids)
-		result.hashes = self.hasher.compute_hashes(conflicts, result.ids, result.masks)
-		return result
-	end
-
-	# Ids start from 1 instead of 0
-	private fun compute_ids(mtypes: Set[MType]): Map[MType, Int] do
-		var ids = new HashMap[MType, Int]
-		var lin = self.mmodule.reverse_linearize_mtypes(mtypes)
-		for mtype in lin do
-			ids[mtype] = ids.length + 1
-		end
-		return ids
-	end
-end
-
-# Layout builder for MClass using Perfect Hashing (PH)
-class PHClassLayoutBuilder
-	super TypingLayoutBuilder[MClass]
-
-	redef type LAYOUT: PHLayout[MClass, MClass]
-
-	private var hasher: PerfectHasher[MClass, MClass]
-	private var mmodule: MModule
-
-	init(mmodule: MModule, operator: PHOperator) do
-		self.mmodule = mmodule
-		self.hasher = new PerfectHasher[MClass, MClass](operator)
-	end
-
-	private fun build_conflicts(mclasses: Set[MClass]): Map[MClass, Set[MClass]] do
-		var conflicts = new HashMap[MClass, Set[MClass]]
-		for mclass in mclasses do
-			var supers = self.mmodule.super_mclasses(mclass)
-			supers.add(mclass)
-			conflicts[mclass] = supers
-		end
-		return conflicts
-	end
-
-	# Compute mclasses ids and position using BM
-	redef fun build_layout(mclasses) do
-		var result = new PHLayout[MClass, MClass]
-		var conflicts = build_conflicts(mclasses)
-		result.ids = self.compute_ids(mclasses)
-		result.masks = self.hasher.compute_masks(conflicts, result.ids)
-		result.hashes = self.hasher.compute_hashes(conflicts, result.ids, result.masks)
-		return result
-	end
-
-	# Ids start from 1 instead of 0
-	private fun compute_ids(mclasses: Set[MClass]): Map[MClass, Int] do
-		var ids = new HashMap[MClass, Int]
-		var lin = self.mmodule.reverse_linearize_mclasses(mclasses)
-		for mclass in lin do
-			ids[mclass] = ids.length + 1
-		end
-		return ids
-	end
+	redef fun build_layout(elements) do return hasher.build_layout(elements)
 end
 
 abstract class PropertyLayoutBuilder[E: MProperty]
@@ -758,4 +679,75 @@ class PHAndOperator
 	super PHOperator
 	init do end
 	redef fun op(mask, id) do return mask.bin_and(id)
+end
+
+class TypingHasher[E: Object]
+	super PerfectHasher[E, E]
+
+	var mmodule: MModule
+
+	init(operator: PHOperator, mmodule: MModule) do
+		super(operator)
+		self.mmodule = mmodule
+	end
+
+	fun build_layout(elements: Set[E]): PHLayout[E, E] do
+		var result = new PHLayout[E, E]
+		var conflicts = self.build_conflicts(elements)
+		result.ids = self.compute_ids(elements)
+		result.masks = self.compute_masks(conflicts, result.ids)
+		result.hashes = self.compute_hashes(conflicts, result.ids, result.masks)
+		return result
+	end
+
+	# Ids start from 1 instead of 0
+	private fun compute_ids(elements: Set[E]): Map[E, Int] do
+		var ids = new HashMap[E, Int]
+		var lin = self.reverse_linearize(elements)
+		for e in lin do
+			ids[e] = ids.length + 1
+		end
+		return ids
+	end
+
+	private fun build_conflicts(elements: Set[E]): Map[E, Set[E]] do
+		var conflicts = new HashMap[E, Set[E]]
+		for e in elements do
+			var supers = self.super_elements(e, elements)
+			supers.add(e)
+			conflicts[e] = supers
+		end
+		return conflicts
+	end
+
+	private fun super_elements(element: E, elements: Set[E]): Set[E] is abstract
+	private fun reverse_linearize(elements: Set[E]): Array[E] is abstract
+end
+
+class MTypeHasher
+	super TypingHasher[MType]
+
+	init(operator: PHOperator, mmodule: MModule) do super(operator, mmodule)
+
+	redef fun super_elements(element, elements) do
+		return self.mmodule.super_mtypes(element, elements)
+	end
+
+	redef fun reverse_linearize(elements) do
+		return self.mmodule.reverse_linearize_mtypes(elements)
+	end
+end
+
+class MClassHasher
+	super TypingHasher[MClass]
+
+	init(operator: PHOperator, mmodule: MModule) do super(operator, mmodule)
+
+	redef fun super_elements(element, elements) do
+		return self.mmodule.super_mclasses(element)
+	end
+
+	redef fun reverse_linearize(elements) do
+		return self.mmodule.reverse_linearize_mclasses(elements)
+	end
 end

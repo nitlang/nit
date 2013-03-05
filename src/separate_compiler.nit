@@ -333,9 +333,9 @@ class SeparateCompiler
 		if modelbuilder.toolcontext.opt_bm_typing.value then
 			layout_builder = new BMTypingLayoutBuilder[MType](new MTypeBMizer(self.mainmodule))
 		else if modelbuilder.toolcontext.opt_phmod_typing.value then
-			layout_builder = new PHTypeLayoutBuilder(self.mainmodule, new PHModOperator)
+			layout_builder = new PHTypingLayoutBuilder[MType](new MTypeHasher(new PHModOperator, self.mainmodule))
 		else if modelbuilder.toolcontext.opt_phand_typing.value then
-			layout_builder = new PHTypeLayoutBuilder(self.mainmodule, new PHAndOperator)
+			layout_builder = new PHTypingLayoutBuilder[MType](new MTypeHasher(new PHAndOperator, self.mainmodule))
 		else
 			layout_builder = new CLTypingLayoutBuilder[MType](new MTypeColorer(self.mainmodule))
 		end

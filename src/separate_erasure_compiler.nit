@@ -77,9 +77,9 @@ class SeparateErasureCompiler
 
 		var layout_builder: TypingLayoutBuilder[MClass]
 		if modelbuilder.toolcontext.opt_phmod_typing.value then
-			layout_builder = new PHClassLayoutBuilder(mainmodule, new PHModOperator)
+			layout_builder = new PHTypingLayoutBuilder[MClass](new MClassHasher(new PHModOperator, mainmodule))
 		else if modelbuilder.toolcontext.opt_phand_typing.value then
-			layout_builder = new PHClassLayoutBuilder(mainmodule, new PHAndOperator)
+			layout_builder = new PHTypingLayoutBuilder[MClass](new MClassHasher(new PHAndOperator, mainmodule))
 		else if modelbuilder.toolcontext.opt_bm_typing.value then
 			layout_builder = new BMTypingLayoutBuilder[MClass](new MClassBMizer(mainmodule))
 		else
