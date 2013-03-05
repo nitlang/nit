@@ -375,6 +375,54 @@ class Debugger
 	##                    Trace Management functions                     ##
 	#######################################################################
 
+	# Gets all the identifiers of an instruction (uses the rules of Nit as of Mar 05 2013)
+	#
+	fun get_identifiers_in_current_instruction(instruction: AbstractString): Array[String]
+	do
+		var result_array = new Array[String]
+		var instruction_buffer = new Buffer
+
+		var trigger_char_escape = false
+		var trigger_string_escape = false
+		var trigger_concat_in_string = false
+
+		for i in instruction do
+			if trigger_char_escape then
+				if i == '\'' then trigger_char_escape = false
+			else if trigger_string_escape then
+				if i == '{' then
+					trigger_concat_in_string = true
+					trigger_string_escape = false
+				else if i == '\"' then trigger_string_escape = false
+			else
+				if i.is_alphanumeric or i == '_' then
+					instruction_buffer.add(i)
+				else if i == '.' then
+					if instruction_buffer.is_numeric or (instruction_buffer[0] >= 'A' and instruction_buffer[0] <= 'Z') then
+						instruction_buffer.clear
+					else
+						result_array.push(instruction_buffer.to_s)
+						instruction_buffer.add(i)
+					end
+				else if i == '\'' then
+					trigger_char_escape = true
+				else if i == '\"' then
+					trigger_string_escape = true
+				else if i == '}' then
+					trigger_concat_in_string = false
+					trigger_string_escape = true
+				else
+					if instruction_buffer.length > 0 and not instruction_buffer.is_numeric and not (instruction_buffer[0] >= 'A' and instruction_buffer[0] <= 'Z') then result_array.push(instruction_buffer.to_s)
+					instruction_buffer.clear
+				end
+			end
+		end
+
+		if instruction_buffer.length > 0 and not instruction_buffer.is_numeric and not (instruction_buffer[0] >= 'A' and instruction_buffer[0] <= 'Z') then result_array.push(instruction_buffer.to_s)
+
+		return result_array
+	end
+
 	# Takes a function call or declaration and strips all but the arguments
 	#
 	fun get_function_arguments(function: AbstractString): String
