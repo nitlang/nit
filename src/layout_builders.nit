@@ -49,33 +49,15 @@ abstract class TypingLayoutBuilder[E: Object]
 	fun build_layout(elements: Set[E]): LAYOUT is abstract
 end
 
-# Layout builder for MType using Binary Matrix (BM)
-class BMTypeLayoutBuilder
-	super TypingLayoutBuilder[MType]
+# Typing Layout builder using binary matrix (BM)
+class BMTypingLayoutBuilder[E: Object]
+	super TypingLayoutBuilder[E]
 
-	private var mmodule: MModule
+	private var bmizer: TypingBMizer[E]
 
-	init(mmodule: MModule) do
-		self.mmodule = mmodule
-	end
+	init(bmizer: TypingBMizer[E]) do self.bmizer = bmizer
 
-	# Compute mtypes ids and position using BM
-	redef fun build_layout(mtypes) do
-		var result = new Layout[MType]
-		result.ids = self.compute_ids(mtypes)
-		result.pos = result.ids
-		return result
-	end
-
-	# Give each MType a unic id using a descending linearization of the `mtypes` set
-	private fun compute_ids(elements: Set[MType]): Map[MType, Int] do
-		var ids = new HashMap[MType, Int]
-		var lin = self.mmodule.reverse_linearize_mtypes(elements)
-		for element in lin do
-			ids[element] = ids.length
-		end
-		return ids
-	end
+	redef fun build_layout(elements) do return bmizer.build_layout(elements)
 end
 
 # Typing Layout builder using Coloring (CL)
@@ -129,35 +111,6 @@ class PHTypeLayoutBuilder
 		var lin = self.mmodule.reverse_linearize_mtypes(mtypes)
 		for mtype in lin do
 			ids[mtype] = ids.length + 1
-		end
-		return ids
-	end
-end
-
-# Layout builder for MClass using Binary Matrix (BM)
-class BMClassLayoutBuilder
-	super TypingLayoutBuilder[MClass]
-
-	private var mmodule: MModule
-
-	init(mmodule: MModule) do
-		self.mmodule = mmodule
-	end
-
-	# Compute mclasses ids and position using BM
-	redef fun build_layout(mclasses) do
-		var result = new Layout[MClass]
-		result.ids = self.compute_ids(mclasses)
-		result.pos = result.ids
-		return result
-	end
-
-	# Give each MClass a unic id using a descending linearization
-	private fun compute_ids(elements: Set[MClass]): Map[MClass, Int] do
-		var ids = new HashMap[MClass, Int]
-		var lin = self.mmodule.reverse_linearize_mclasses(elements)
-		for element in lin do
-			ids[element] = ids.length
 		end
 		return ids
 	end
@@ -325,6 +278,52 @@ class PHResolutionLayoutBuilder
 			end
 		end
 		return ids
+	end
+end
+
+# Matrice computers
+
+abstract class TypingBMizer[E: Object]
+
+	var mmodule: MModule
+
+	init(mmodule: MModule) do
+		self.mmodule = mmodule
+	end
+
+	# Compute mtypes ids and position using BM
+	fun build_layout(elements: Set[E]): Layout[E] do
+		var result = new Layout[E]
+		var ids = new HashMap[E, Int]
+		var lin = self.reverse_linearize(elements)
+		for element in lin do
+			ids[element] = ids.length
+		end
+		result.ids = ids
+		result.pos = ids
+		return result
+	end
+
+	private fun reverse_linearize(elements: Set[E]): Array[E] is abstract
+end
+
+class MTypeBMizer
+	super TypingBMizer[MType]
+
+	init(mmodule: MModule) do super(mmodule)
+
+	redef fun reverse_linearize(elements) do
+		return self.mmodule.reverse_linearize_mtypes(elements)
+	end
+end
+
+class MClassBMizer
+	super TypingBMizer[MClass]
+
+	init(mmodule: MModule) do super(mmodule)
+
+	redef fun reverse_linearize(elements) do
+		return self.mmodule.reverse_linearize_mclasses(elements)
 	end
 end
 

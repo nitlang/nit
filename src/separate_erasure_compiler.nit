@@ -81,7 +81,7 @@ class SeparateErasureCompiler
 		else if modelbuilder.toolcontext.opt_phand_typing.value then
 			layout_builder = new PHClassLayoutBuilder(mainmodule, new PHAndOperator)
 		else if modelbuilder.toolcontext.opt_bm_typing.value then
-			layout_builder = new BMClassLayoutBuilder(mainmodule)
+			layout_builder = new BMTypingLayoutBuilder[MClass](new MClassBMizer(mainmodule))
 		else
 			layout_builder = new CLTypingLayoutBuilder[MClass](new MClassColorer(mainmodule))
 		end

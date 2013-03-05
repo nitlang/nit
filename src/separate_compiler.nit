@@ -331,7 +331,7 @@ class SeparateCompiler
 		# Typing Layout
 		var layout_builder: TypingLayoutBuilder[MType]
 		if modelbuilder.toolcontext.opt_bm_typing.value then
-			layout_builder = new BMTypeLayoutBuilder(self.mainmodule)
+			layout_builder = new BMTypingLayoutBuilder[MType](new MTypeBMizer(self.mainmodule))
 		else if modelbuilder.toolcontext.opt_phmod_typing.value then
 			layout_builder = new PHTypeLayoutBuilder(self.mainmodule, new PHModOperator)
 		else if modelbuilder.toolcontext.opt_phand_typing.value then
