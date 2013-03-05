@@ -375,6 +375,19 @@ class Debugger
 	##                    Trace Management functions                     ##
 	#######################################################################
 
+	# If the variable *variable_name* is an argument of the function being executed in the frame *frame*
+	# The function returns its position in the arguments
+	# Else, it returns -1
+	private fun get_position_of_variable_in_arguments(frame: Frame, variable_name: String): Int
+	do
+		var identifiers = get_identifiers_in_current_instruction(get_function_arguments(frame.mpropdef.location.text))
+		for i in [0 .. identifiers.length-1] do
+			# If the current traced variable is an argument of the current function, we trace its parent (at least)
+			if identifiers[i] == variable_name then return i
+		end
+		return -1
+	end
+
 	# Gets all the identifiers of an instruction (uses the rules of Nit as of Mar 05 2013)
 	#
 	fun get_identifiers_in_current_instruction(instruction: AbstractString): Array[String]
