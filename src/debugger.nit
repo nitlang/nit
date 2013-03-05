@@ -200,6 +200,9 @@ class Debugger
 			# Modifies the value of a variable in the current frame
 			else if parts_of_command.length >= 3 and parts_of_command[1] == "=" then
 				process_mod_function(parts_of_command)
+			# Traces the modifications on a variable
+			else if parts_of_command.length >= 2 and parts_of_command[0] == "trace" then
+				process_trace_command(parts_of_command)
 			# Lists all the commands available
 			else
 				list_commands
@@ -372,6 +375,34 @@ class Debugger
 				modify_in_frame(target, parts_of_command[2])
 			end
 		end
+	end
+
+	# Processes the trace variable command
+	#
+	# Command pattern : "trace variable [break/print]"
+	fun process_trace_command(parts_of_command: Array[String])
+	do
+		var variable_name = get_real_variable_name(parts_of_command[1])
+		var breaker:Bool
+
+		if seek_variable(variable_name, frame) == null then
+			print "Cannot find a variable called {parts_of_command[1]}"
+			return
+		end
+
+		if parts_of_command.length == 3 then
+			if parts_of_command[2] == "break" then
+				breaker = true
+			else
+				breaker = false
+			end
+		else
+			breaker = false
+		end
+
+		trace_variable(variable_name, breaker)
+
+		print "Successfully tracing {parts_of_command[1]}"
 	end
 
 	#######################################################################
