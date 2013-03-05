@@ -92,9 +92,11 @@ class Debugger
 		var old = frame.current_node
 		frame.current_node = n
 
-		steps_fun_call(n)
+		if not n isa ABlockExpr then
+			steps_fun_call(n)
 
-		breakpoint_check(n)
+			breakpoint_check(n)
+		end
 
 		n.stmt(self)
 		frame.current_node = old
