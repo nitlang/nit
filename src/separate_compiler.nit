@@ -337,7 +337,7 @@ class SeparateCompiler
 		else if modelbuilder.toolcontext.opt_phand_typing.value then
 			layout_builder = new PHTypeLayoutBuilder(self.mainmodule, new PHAndOperator)
 		else
-			layout_builder = new CLTypeLayoutBuilder(self.mainmodule)
+			layout_builder = new CLTypingLayoutBuilder[MType](new MTypeColorer(self.mainmodule))
 		end
 
 		# colorize types

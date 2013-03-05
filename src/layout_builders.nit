@@ -78,33 +78,15 @@ class BMTypeLayoutBuilder
 	end
 end
 
-# Layout builder for MType using Coloring (CL)
-class CLTypeLayoutBuilder
-	super TypingLayoutBuilder[MType]
+# Typing Layout builder using Coloring (CL)
+class CLTypingLayoutBuilder[E: Object]
+	super TypingLayoutBuilder[E]
 
-	private var colorer: MTypeColorer
+	private var colorer: TypingColorer[E]
 
-	init(mmodule: MModule) do
-		self.colorer = new MTypeColorer(mmodule)
-	end
+	init(colorer: TypingColorer[E]) do self.colorer = colorer
 
-	# Compute mtypes ids and position using BM
-	redef fun build_layout(mtypes) do
-		var result = new Layout[MType]
-		result.ids = self.compute_ids(mtypes)
-		result.pos = self.colorer.colorize(mtypes)
-		return result
-	end
-
-	# Give each MType a unic id using a descending linearization of the `mtypes` set
-	private fun compute_ids(elements: Set[MType]): Map[MType, Int] do
-		var ids = new HashMap[MType, Int]
-		var lin = self.colorer.reverse_linearize(elements)
-		for element in lin do
-			ids[element] = ids.length
-		end
-		return ids
-	end
+	redef fun build_layout(elements) do return colorer.build_layout(elements)
 end
 
 # Layout builder for MType using Perfect Hashing (PH)
@@ -174,35 +156,6 @@ class BMClassLayoutBuilder
 	private fun compute_ids(elements: Set[MClass]): Map[MClass, Int] do
 		var ids = new HashMap[MClass, Int]
 		var lin = self.mmodule.reverse_linearize_mclasses(elements)
-		for element in lin do
-			ids[element] = ids.length
-		end
-		return ids
-	end
-end
-
-# Layout builder for MClass using Coloring (CL)
-class CLClassLayoutBuilder
-	super TypingLayoutBuilder[MClass]
-
-	private var colorer: MClassColorer
-
-	init(mmodule: MModule) do
-		self.colorer = new MClassColorer(mmodule)
-	end
-
-	# Compute mclasses ids and position using BM
-	redef fun build_layout(mclasses) do
-		var result = new Layout[MClass]
-		result.ids = self.compute_ids(mclasses)
-		result.pos = self.colorer.colorize(mclasses)
-		return result
-	end
-
-	# Give each MClass a unic id using a descending linearization
-	private fun compute_ids(elements: Set[MClass]): Map[MClass, Int] do
-		var ids = new HashMap[MClass, Int]
-		var lin = self.colorer.reverse_linearize(elements)
 		for element in lin do
 			ids[element] = ids.length
 		end
@@ -387,7 +340,24 @@ abstract class TypingColorer[E: Object]
 
 	init do end
 
-	fun colorize(elements: Set[E]): Map[E, Int] do
+	# Compute the layout with coloring
+	fun build_layout(elements: Set[E]): Layout[E] do
+		var result = new Layout[E]
+		result.ids = compute_ids(elements)
+		result.pos = colorize(elements)
+		return result
+	end
+
+	private fun compute_ids(elements: Set[E]): Map[E, Int] do
+		var ids = new HashMap[E, Int]
+		var lin = reverse_linearize(elements)
+		for element in lin do
+			ids[element] = ids.length
+		end
+		return ids
+	end
+
+	private fun colorize(elements: Set[E]): Map[E, Int] do
 		tag_elements(elements)
 		build_conflicts_graph(elements)
 		colorize_elements(core)
@@ -508,7 +478,7 @@ abstract class TypingColorer[E: Object]
 end
 
 # MType coloring
-private class MTypeColorer
+class MTypeColorer
 	super TypingColorer[MType]
 
 	var mmodule: MModule
@@ -523,7 +493,7 @@ private class MTypeColorer
 end
 
 # MClass coloring
-private class MClassColorer
+class MClassColorer
 	super TypingColorer[MClass]
 
 	private var mmodule: MModule
