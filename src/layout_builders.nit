@@ -101,29 +101,12 @@ end
 class CLResolutionLayoutBuilder
 	super ResolutionLayoutBuilder
 
-	private var colorer: ResolutionColorer = new ResolutionColorer
-
 	init do super
 
 	# Compute resolved types colors
 	redef fun build_layout(elements) do
-		var result = new Layout[MType]
-		result.ids = self.compute_ids(elements)
-		result.pos = self.colorer.colorize(elements)
-		return result
-	end
-
-	fun compute_ids(elements: Map[MClassType, Set[MType]]): Map[MType, Int] do
-		var ids = new HashMap[MType, Int]
-		var color = 0
-		for mclasstype, mclasstypes in elements do
-			for element in mclasstypes do
-				if ids.has_key(element) then continue
-				ids[element] = color
-				color += 1
-			end
-		end
-		return ids
+		var colorer = new ResolutionColorer
+		return colorer.build_layout(elements)
 	end
 end
 
@@ -538,14 +521,30 @@ class ResolutionColorer
 
 	init do end
 
-	fun colorize(elements: Map[MClassType, Set[MType]]): Map[MType, Int] do
+	# Compute resolved types colors
+	fun build_layout(elements: Map[MClassType, Set[MType]]): Layout[MType] do
 		self.build_conflicts_graph(elements)
-		self.colorize_elements(elements)
-		return coloration_result
+		var result = new Layout[MType]
+		result.ids = self.compute_ids(elements)
+		result.pos = self.colorize_elements(elements)
+		return result
+	end
+
+	private fun compute_ids(elements: Map[MClassType, Set[MType]]): Map[MType, Int] do
+		var ids = new HashMap[MType, Int]
+		var color = 0
+		for mclasstype, mclasstypes in elements do
+			for element in mclasstypes do
+				if ids.has_key(element) then continue
+				ids[element] = color
+				color += 1
+			end
+		end
+		return ids
 	end
 
 	# Colorize a collection of elements
-	fun colorize_elements(elements: Map[MClassType, Set[MType]]) do
+	private fun colorize_elements(elements: Map[MClassType, Set[MType]]): Map[MType, Int] do
 		var min_color = 0
 		for mclasstype, mclasstypes in elements do
 			for element in mclasstypes do
@@ -558,6 +557,7 @@ class ResolutionColorer
 				color = min_color
 			end
 		end
+		return self.coloration_result
 	end
 
 	# Check if a related element to the element already use the color
