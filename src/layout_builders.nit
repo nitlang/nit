@@ -79,25 +79,9 @@ class PHPropertyLayoutBuilder[E: MProperty]
 end
 
 abstract class ResolutionLayoutBuilder
-
 	type LAYOUT: Layout[MType]
-
 	init do end
-
 	fun build_layout(elements: Map[MClassType, Set[MType]]): LAYOUT is abstract
-
-	fun compute_ids(elements: Map[MClassType, Set[MType]]): Map[MType, Int] do
-		var ids = new HashMap[MType, Int]
-		var color = 0
-		for mclasstype, mclasstypes in elements do
-			for element in mclasstypes do
-				if ids.has_key(element) then continue
-				ids[element] = color
-				color += 1
-			end
-		end
-		return ids
-	end
 end
 
 # Layout builder for MClass using Binary Matrix (BM)
@@ -112,6 +96,19 @@ class BMResolutionLayoutBuilder
 		result.ids = self.compute_ids(elements)
 		result.pos = result.ids
 		return result
+	end
+
+	fun compute_ids(elements: Map[MClassType, Set[MType]]): Map[MType, Int] do
+		var ids = new HashMap[MType, Int]
+		var color = 0
+		for mclasstype, mclasstypes in elements do
+			for element in mclasstypes do
+				if ids.has_key(element) then continue
+				ids[element] = color
+				color += 1
+			end
+		end
+		return ids
 	end
 end
 
@@ -129,6 +126,19 @@ class CLResolutionLayoutBuilder
 		result.ids = self.compute_ids(elements)
 		result.pos = self.colorer.colorize(elements)
 		return result
+	end
+
+	fun compute_ids(elements: Map[MClassType, Set[MType]]): Map[MType, Int] do
+		var ids = new HashMap[MType, Int]
+		var color = 0
+		for mclasstype, mclasstypes in elements do
+			for element in mclasstypes do
+				if ids.has_key(element) then continue
+				ids[element] = color
+				color += 1
+			end
+		end
+		return ids
 	end
 end
 
@@ -152,7 +162,7 @@ class PHResolutionLayoutBuilder
 		return result
 	end
 
-	redef fun compute_ids(elements) do
+	fun compute_ids(elements: Map[MClassType, Set[MType]]): Map[MType, Int] do
 		var ids = new HashMap[MType, Int]
 		var color = 1
 		for mclasstype, mclasstypes in elements do
