@@ -456,6 +456,9 @@ class Debugger
 		end
 	end
 
+	# Processes the untrace variable command
+	#
+	# Command pattern : "untrace variable"
 	fun process_untrace_command(parts_of_command: Array[String])
 	do
 		var variable_name = get_real_variable_name(parts_of_command[1])
@@ -498,6 +501,8 @@ class Debugger
 	##                    Trace Management functions                     ##
 	#######################################################################
 
+	# Effectively untraces the variable called *variable_name*
+	#
 	private fun untrace_variable(variable_name: String): Bool
 	do
 		var to_remove: nullable TraceObject = null
@@ -515,6 +520,8 @@ class Debugger
 		end
 	end
 
+	# Effectively traces the variable *variable_name* either in print or break mode depending on the value of breaker (break if true, print if false)
+	#
 	private fun trace_variable(variable_name: String, breaker: Bool)
 	do
 		for i in self.traces do
