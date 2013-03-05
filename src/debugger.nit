@@ -99,6 +99,8 @@ class Debugger
 			steps_fun_call(n)
 
 			breakpoint_check(n)
+
+			check_if_vars_are_traced(n)
 		end
 
 		n.stmt(self)
@@ -144,6 +146,24 @@ class Debugger
 
 			n.debug("Execute stmt {n.to_s}")
 			while process_debug_command(gets) do end
+		end
+	end
+
+	# Check if a variable of current expression is traced
+	# Then prints and/or breaks for command prompt
+	private fun check_if_vars_are_traced(n: AExpr)
+	do
+		var identifiers_in_instruction = get_identifiers_in_current_instruction(n.location.text)
+
+		for i in identifiers_in_instruction do
+			var variable = seek_variable(i, frame)
+			for j in self.traces do
+				if j.is_variable_traced_in_frame(i, frame) then
+					n.debug("Traced variable {i} used")
+					if j.break_on_encounter then while process_debug_command(gets) do end
+					break
+				end
+			end
 		end
 	end
 
