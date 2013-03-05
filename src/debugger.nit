@@ -485,6 +485,23 @@ class Debugger
 	##                    Trace Management functions                     ##
 	#######################################################################
 
+	private fun untrace_variable(variable_name: String): Bool
+	do
+		var to_remove: nullable TraceObject = null
+		for i in self.traces do
+			if i.is_variable_traced_in_frame(variable_name, frame) then
+				to_remove = i
+			end
+		end
+
+		if to_remove != null then
+			self.traces.remove(to_remove)
+			return true
+		else
+			return false
+		end
+	end
+
 	private fun trace_variable(variable_name: String, breaker: Bool)
 	do
 		for i in self.traces do
