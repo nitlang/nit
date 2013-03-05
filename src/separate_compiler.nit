@@ -400,13 +400,13 @@ class SeparateCompiler
 		# Compute the table layout with the prefered method
 		var resolution_builder: ResolutionLayoutBuilder
 		if modelbuilder.toolcontext.opt_bm_typing.value then
-			resolution_builder = new BMResolutionLayoutBuilder
+			resolution_builder = new ResolutionBMizer
 		else if modelbuilder.toolcontext.opt_phmod_typing.value then
-			resolution_builder = new PHResolutionLayoutBuilder(new PHModOperator)
+			resolution_builder = new ResolutionHasher(new PHModOperator)
 		else if modelbuilder.toolcontext.opt_phand_typing.value then
-			resolution_builder = new PHResolutionLayoutBuilder(new PHAndOperator)
+			resolution_builder = new ResolutionHasher(new PHAndOperator)
 		else
-			resolution_builder = new CLResolutionLayoutBuilder
+			resolution_builder = new ResolutionColorer
 		end
 		self.resolution_layout = resolution_builder.build_layout(mtype2unresolved)
 		self.resolution_tables = self.build_resolution_tables(mtype2unresolved)

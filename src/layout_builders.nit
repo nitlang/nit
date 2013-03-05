@@ -78,52 +78,9 @@ class PHPropertyLayoutBuilder[E: MProperty]
 	super CLPropertyLayoutBuilder[E]
 end
 
-abstract class ResolutionLayoutBuilder
-	type LAYOUT: Layout[MType]
-	init do end
-	fun build_layout(elements: Map[MClassType, Set[MType]]): LAYOUT is abstract
-end
-
-# Layout builder for MClass using Binary Matrix (BM)
-class BMResolutionLayoutBuilder
-	super ResolutionLayoutBuilder
-
-	init do super
-
-	# Compute resolved types position using BM
-	redef fun build_layout(elements) do
-		var bmizer = new ResolutionBMizer
-		return bmizer.build_layout(elements)
-	end
-end
-
-# Layout builder for resolution tables using Coloring (CL)
-class CLResolutionLayoutBuilder
-	super ResolutionLayoutBuilder
-
-	init do super
-
-	# Compute resolved types colors
-	redef fun build_layout(elements) do
-		var colorer = new ResolutionColorer
-		return colorer.build_layout(elements)
-	end
-end
-
-# Layout builder for resolution table using Perfect Hashing (PH)
-class PHResolutionLayoutBuilder
-	super ResolutionLayoutBuilder
-
-	redef type LAYOUT: PHLayout[MClassType, MType]
-
-	private var hasher: ResolutionHasher
-
-	init(operator: PHOperator) do self.hasher = new ResolutionHasher(operator)
-
-	# Compute resolved types masks and hashes
-	redef fun build_layout(elements) do
-		return hasher.build_layout(elements)
-	end
+interface ResolutionLayoutBuilder
+	# Build resolution table layout
+	fun build_layout(elements: Map[MClassType, Set[MType]]): Layout[MType] is abstract
 end
 
 # Matrice computers
@@ -175,9 +132,11 @@ end
 
 # Layout builder for resolution tables using Binary Matrix (BM)
 class ResolutionBMizer
+	super ResolutionLayoutBuilder
+
 	init do end
 
-	fun build_layout(elements: Map[MClassType, Set[MType]]): Layout[MType] do
+	redef fun build_layout(elements) do
 		var result = new Layout[MType]
 		var ids = new HashMap[MType, Int]
 		var color = 0
@@ -498,13 +457,14 @@ end
 
 # Colorer for type resolution table
 class ResolutionColorer
+	super ResolutionLayoutBuilder
 
 	private var coloration_result: Map[MType, Int] = new HashMap[MType, Int]
 
 	init do end
 
 	# Compute resolved types colors
-	fun build_layout(elements: Map[MClassType, Set[MType]]): Layout[MType] do
+	redef fun build_layout(elements) do
 		self.build_conflicts_graph(elements)
 		var result = new Layout[MType]
 		result.ids = self.compute_ids(elements)
@@ -719,11 +679,12 @@ end
 
 class ResolutionHasher
 	super PerfectHasher[MClassType, MType]
+	super ResolutionLayoutBuilder
 
 	init(operator: PHOperator) do super(operator)
 
 	# Compute resolved types masks and hashes
-	fun build_layout(elements: Map[MClassType, Set[MType]]): PHLayout[MClassType, MType] do
+	redef fun build_layout(elements) do
 		var result = new PHLayout[MClassType, MType]
 		var ids = new HashMap[MType, Int]
 		var color = 1
