@@ -372,6 +372,26 @@ class Debugger
 	end
 
 	#######################################################################
+	##                    Trace Management functions                     ##
+	#######################################################################
+
+	# Takes a function call or declaration and strips all but the arguments
+	#
+	fun get_function_arguments(function: AbstractString): String
+	do
+		var buf = new Buffer
+		var trigger_copy = false
+
+		for i in function do
+			if i == ')' then break
+			if trigger_copy then buf.add(i)
+			if i == '(' then trigger_copy = true
+		end
+
+		return buf.to_s
+	end
+
+	#######################################################################
 	##                    Alias management functions                     ##
 	#######################################################################
 
