@@ -41,45 +41,9 @@ end
 
 # Builders
 
-abstract class TypingLayoutBuilder[E: Object]
-
-	type LAYOUT: Layout[E]
-
-	# Compute elements ids and position
-	fun build_layout(elements: Set[E]): LAYOUT is abstract
-end
-
-# Typing Layout builder using binary matrix (BM)
-class BMTypingLayoutBuilder[E: Object]
-	super TypingLayoutBuilder[E]
-
-	private var bmizer: TypingBMizer[E]
-
-	init(bmizer: TypingBMizer[E]) do self.bmizer = bmizer
-
-	redef fun build_layout(elements) do return bmizer.build_layout(elements)
-end
-
-# Typing Layout builder using Coloring (CL)
-class CLTypingLayoutBuilder[E: Object]
-	super TypingLayoutBuilder[E]
-
-	private var colorer: TypingColorer[E]
-
-	init(colorer: TypingColorer[E]) do self.colorer = colorer
-
-	redef fun build_layout(elements) do return colorer.build_layout(elements)
-end
-
-# Typing Layout builder using Perfect Hashing (PH)
-class PHTypingLayoutBuilder[E: Object]
-	super TypingLayoutBuilder[E]
-
-	private var hasher: TypingHasher[E]
-
-	init(hasher: TypingHasher[E]) do self.hasher = hasher
-
-	redef fun build_layout(elements) do return hasher.build_layout(elements)
+interface TypingLayoutBuilder[E: Object]
+	# Build typing table layout
+	fun build_layout(elements: Set[E]): Layout[E] is abstract
 end
 
 abstract class PropertyLayoutBuilder[E: MProperty]
@@ -205,6 +169,7 @@ end
 # Matrice computers
 
 abstract class TypingBMizer[E: Object]
+	super TypingLayoutBuilder[E]
 
 	var mmodule: MModule
 
@@ -213,7 +178,7 @@ abstract class TypingBMizer[E: Object]
 	end
 
 	# Compute mtypes ids and position using BM
-	fun build_layout(elements: Set[E]): Layout[E] do
+	redef fun build_layout(elements: Set[E]): Layout[E] do
 		var result = new Layout[E]
 		var ids = new HashMap[E, Int]
 		var lin = self.reverse_linearize(elements)
@@ -251,6 +216,7 @@ end
 # Colorers
 
 abstract class TypingColorer[E: Object]
+	super TypingLayoutBuilder[E]
 
 	private var core: Set[E] = new HashSet[E]
 	private var crown: Set[E] = new HashSet[E]
@@ -261,7 +227,7 @@ abstract class TypingColorer[E: Object]
 	init do end
 
 	# Compute the layout with coloring
-	fun build_layout(elements: Set[E]): Layout[E] do
+	redef fun build_layout(elements: Set[E]): Layout[E] do
 		var result = new Layout[E]
 		result.ids = compute_ids(elements)
 		result.pos = colorize(elements)
@@ -683,6 +649,7 @@ end
 
 class TypingHasher[E: Object]
 	super PerfectHasher[E, E]
+	super TypingLayoutBuilder[E]
 
 	var mmodule: MModule
 
@@ -691,7 +658,7 @@ class TypingHasher[E: Object]
 		self.mmodule = mmodule
 	end
 
-	fun build_layout(elements: Set[E]): PHLayout[E, E] do
+	redef fun build_layout(elements: Set[E]): PHLayout[E, E] do
 		var result = new PHLayout[E, E]
 		var conflicts = self.build_conflicts(elements)
 		result.ids = self.compute_ids(elements)

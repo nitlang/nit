@@ -331,13 +331,13 @@ class SeparateCompiler
 		# Typing Layout
 		var layout_builder: TypingLayoutBuilder[MType]
 		if modelbuilder.toolcontext.opt_bm_typing.value then
-			layout_builder = new BMTypingLayoutBuilder[MType](new MTypeBMizer(self.mainmodule))
+			layout_builder = new MTypeBMizer(self.mainmodule)
 		else if modelbuilder.toolcontext.opt_phmod_typing.value then
-			layout_builder = new PHTypingLayoutBuilder[MType](new MTypeHasher(new PHModOperator, self.mainmodule))
+			layout_builder = new MTypeHasher(new PHModOperator, self.mainmodule)
 		else if modelbuilder.toolcontext.opt_phand_typing.value then
-			layout_builder = new PHTypingLayoutBuilder[MType](new MTypeHasher(new PHAndOperator, self.mainmodule))
+			layout_builder = new MTypeHasher(new PHAndOperator, self.mainmodule)
 		else
-			layout_builder = new CLTypingLayoutBuilder[MType](new MTypeColorer(self.mainmodule))
+			layout_builder = new MTypeColorer(self.mainmodule)
 		end
 
 		# colorize types
