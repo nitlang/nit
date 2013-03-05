@@ -543,6 +543,19 @@ redef class Char
 		return false
 	end
 
+	# Returns true if the char is an alpha digit
+	fun is_alpha: Bool
+	do
+		if (self >= 'a' and self <= 'z') or (self >= 'A' and self <= 'Z') then return true
+		return false
+	end
+
+	# Returns true if the char is an alpha or a numeric digit
+	fun is_alphanumeric: Bool
+	do
+		if self.is_numeric or self.is_alpha then return true
+		return false
+	end
 end
 
 redef class Collection[E]
