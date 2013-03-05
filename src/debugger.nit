@@ -1133,6 +1133,8 @@ class Debugger
 		print "variable = value : Sets the value of *variable* to *value*\n"
 		print "[d/delete] line_nb : Removes a breakpoint on line *line_nb* of the current file \n"
 		print "[d/delete] file_name line_nb : Removes a breakpoint on line *line_nb* of file *file_name* \n"
+		print "trace variable_name [break/print] : Traces the uses of the variable you chose to trace by printing the statement it appears in or by breaking on each use."
+		print "untrace variable_name : Removes the trace on the variable you chose to trace earlier in the program"
 		print "kill : kills the current program (Exits with an error and stack trace)\n"
 	end
 
