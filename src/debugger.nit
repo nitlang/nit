@@ -259,6 +259,8 @@ class Debugger
 			end
 
 			print "\nEnd of current instruction \n"
+		else if parts_of_command[1].has('[') and parts_of_command[1].has(']') then
+			process_array_command(parts_of_command)
 		else
 			var instance = seek_variable(get_real_variable_name(parts_of_command[1]), frame)
 
@@ -303,6 +305,36 @@ class Debugger
 			remove_breakpoint(parts_of_command[1], parts_of_command[2].to_i)
 		else
 			list_commands
+		end
+	end
+
+	# Processes an array print command
+	fun process_array_command(parts_of_command: Array[String])
+	do
+		var index_of_first_brace = parts_of_command[1].index_of('[')
+		var variable_name = get_real_variable_name(parts_of_command[1].substring(0,index_of_first_brace))
+		var braces = parts_of_command[1].substring_from(index_of_first_brace)
+
+		var indexes = remove_braces(braces)
+
+		var index_array = new Array[Array[Int]]
+
+		if indexes != null then
+			for index in indexes do
+				var temp_indexes_array = process_index(index)
+				if temp_indexes_array != null then
+					index_array.push(temp_indexes_array)
+					#print index_array.last
+				end
+			end
+		end
+
+		var instance = seek_variable(variable_name, frame)
+
+		if instance != null then
+			print_nested_collection(instance, index_array, 0, variable_name, "")
+		else
+			print "Cannot find variable {variable_name}"
 		end
 	end
 
