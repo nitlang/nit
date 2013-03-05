@@ -116,31 +116,13 @@ class PHResolutionLayoutBuilder
 
 	redef type LAYOUT: PHLayout[MClassType, MType]
 
-	private var hasher: PerfectHasher[MClassType, MType]
+	private var hasher: ResolutionHasher
 
-	init(operator: PHOperator) do self.hasher = new PerfectHasher[MClassType, MType](operator)
+	init(operator: PHOperator) do self.hasher = new ResolutionHasher(operator)
 
 	# Compute resolved types masks and hashes
 	redef fun build_layout(elements) do
-		var result = new PHLayout[MClassType, MType]
-		result.ids = self.compute_ids(elements)
-		result.pos = result.ids
-		result.masks = self.hasher.compute_masks(elements, result.ids)
-		result.hashes = self.hasher.compute_hashes(elements, result.ids, result.masks)
-		return result
-	end
-
-	fun compute_ids(elements: Map[MClassType, Set[MType]]): Map[MType, Int] do
-		var ids = new HashMap[MType, Int]
-		var color = 1
-		for mclasstype, mclasstypes in elements do
-			for element in mclasstypes do
-				if ids.has_key(element) then continue
-				ids[element] = color
-				color += 1
-			end
-		end
-		return ids
+		return hasher.build_layout(elements)
 	end
 end
 
@@ -732,5 +714,30 @@ class MClassHasher
 
 	redef fun reverse_linearize(elements) do
 		return self.mmodule.reverse_linearize_mclasses(elements)
+	end
+end
+
+class ResolutionHasher
+	super PerfectHasher[MClassType, MType]
+
+	init(operator: PHOperator) do super(operator)
+
+	# Compute resolved types masks and hashes
+	fun build_layout(elements: Map[MClassType, Set[MType]]): PHLayout[MClassType, MType] do
+		var result = new PHLayout[MClassType, MType]
+		var ids = new HashMap[MType, Int]
+		var color = 1
+		for mclasstype, mclasstypes in elements do
+			for element in mclasstypes do
+				if ids.has_key(element) then continue
+				ids[element] = color
+				color += 1
+			end
+		end
+		result.ids = ids
+		result.pos = ids
+		result.masks = self.compute_masks(elements, ids)
+		result.hashes = self.compute_hashes(elements, ids, result.masks)
+		return result
 	end
 end
