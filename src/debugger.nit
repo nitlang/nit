@@ -192,6 +192,9 @@ class Debugger
 			else if parts_of_command.length == 3 and parts_of_command[1] == "as"
 			then
 				add_alias(parts_of_command[0], parts_of_command[2])
+			# Modifies the value of a variable in the current frame
+			else if parts_of_command.length >= 3 and parts_of_command[1] == "=" then
+				process_mod_function(parts_of_command)
 			# Lists all the commands available
 			else
 				list_commands
@@ -335,6 +338,34 @@ class Debugger
 			print_nested_collection(instance, index_array, 0, variable_name, "")
 		else
 			print "Cannot find variable {variable_name}"
+		end
+	end
+
+	# Processes the modification function to modify a variable dynamically
+	#
+	# Command of type variable = value
+	fun process_mod_function(parts_of_command: Array[String])
+	do
+		parts_of_command[0] = get_real_variable_name(parts_of_command[0])
+		var parts_of_variable = parts_of_command[0].split_with(".")
+
+		if parts_of_variable.length > 1 then
+			var last_part = parts_of_variable.pop
+			var first_part = parts_of_command[0].substring(0,parts_of_command[0].length - last_part.length - 1)
+			var papa = seek_variable(first_part, frame)
+
+			if papa != null and papa isa MutableInstance then
+				var attribute = get_attribute_in_mutable_instance(papa, last_part)
+
+				if attribute != null then
+					modify_argument_of_complex_type(papa, attribute, parts_of_command[2])
+				end
+			end
+		else
+			var target = seek_variable(parts_of_variable[0], frame)
+			if target != null then
+				modify_in_frame(target, parts_of_command[2])
+			end
 		end
 	end
 
