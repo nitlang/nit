@@ -82,6 +82,17 @@ class Debugger
 	# Set containing all the traced variables and their related frame
 	private var traces = new HashSet[TraceObject]
 
+	# Map containing all the positions for the positions of the arguments traced
+	# In a function call
+	private var fun_call_arguments_positions = new HashMap[Int, TraceObject]
+
+	# Triggers the remapping of a trace object in the local context after a function call
+	var aftermath = false
+
+	# Used to prevent the case when the body of the function called is empty
+	# If it is not, then, the remapping won't be happening
+	var frame_count_aftermath = 1
+
 	#######################################################################
 	##                  Execution of statement function                  ##
 	#######################################################################
@@ -99,6 +110,10 @@ class Debugger
 			steps_fun_call(n)
 
 			breakpoint_check(n)
+
+			check_funcall_and_traced_args(n)
+
+			remap(n)
 
 			check_if_vars_are_traced(n)
 		end
@@ -162,6 +177,47 @@ class Debugger
 					n.debug("Traced variable {i} used")
 					if j.break_on_encounter then while process_debug_command(gets) do end
 					break
+				end
+			end
+		end
+	end
+
+	# Function remapping all the traced objects to match their name in the local context
+	private fun remap(n: AExpr)
+	do
+		if self.aftermath then
+
+			# Trace every argument variable pre-specified
+			if self.frame_count_aftermath < frames.length and fun_call_arguments_positions.length > 0 then
+
+				var ids_in_fun_def = get_identifiers_in_current_instruction(get_function_arguments(frame.mpropdef.location.text))
+
+				for i in fun_call_arguments_positions.keys do
+					self.fun_call_arguments_positions[i].add_frame_variable(frame, ids_in_fun_def[i])
+				end
+			end
+
+			self.aftermath = false
+		end
+	end
+
+	# If the current instruction is a function call
+	# We analyse its signature and the position of traced arguments if the call
+	# For future remapping when inside the function
+	private fun check_funcall_and_traced_args(n: AExpr) do
+		# If we have a function call, we need to see if any of the arguments is traced (including the caller)
+		# if it is, next time we face an instruction, we'll trace the local version on the traced variable in the next frame
+		if n isa ACallExpr then
+			self.aftermath = true
+			self.frame_count_aftermath = frames.length
+			fun_call_arguments_positions.clear
+			var fun_arguments = get_identifiers_in_current_instruction(get_function_arguments(n.location.text))
+
+			for i in self.traces do
+				for j in [0 .. fun_arguments.length - 1] do
+					if i.is_variable_traced_in_frame(fun_arguments[j],frame) then
+						fun_call_arguments_positions[j] = i
+					end
 				end
 			end
 		end
