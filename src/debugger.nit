@@ -279,6 +279,9 @@ class Debugger
 			# Traces the modifications on a variable
 			else if parts_of_command.length >= 2 and parts_of_command[0] == "trace" then
 				process_trace_command(parts_of_command)
+			# Untraces the modifications on a variable
+			else if parts_of_command.length == 2 and parts_of_command[0] == "untrace" then
+				process_untrace_command(parts_of_command)
 			# Lists all the commands available
 			else
 				list_commands
@@ -450,6 +453,16 @@ class Debugger
 			if target != null then
 				modify_in_frame(target, parts_of_command[2])
 			end
+		end
+	end
+
+	fun process_untrace_command(parts_of_command: Array[String])
+	do
+		var variable_name = get_real_variable_name(parts_of_command[1])
+		if untrace_variable(variable_name) then
+			print "Untraced variable {parts_of_command[1]}"
+		else
+			print "{parts_of_command[1]} is not traced"
 		end
 	end
 
