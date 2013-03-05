@@ -92,23 +92,8 @@ class BMResolutionLayoutBuilder
 
 	# Compute resolved types position using BM
 	redef fun build_layout(elements) do
-		var result = new Layout[MType]
-		result.ids = self.compute_ids(elements)
-		result.pos = result.ids
-		return result
-	end
-
-	fun compute_ids(elements: Map[MClassType, Set[MType]]): Map[MType, Int] do
-		var ids = new HashMap[MType, Int]
-		var color = 0
-		for mclasstype, mclasstypes in elements do
-			for element in mclasstypes do
-				if ids.has_key(element) then continue
-				ids[element] = color
-				color += 1
-			end
-		end
-		return ids
+		var bmizer = new ResolutionBMizer
+		return bmizer.build_layout(elements)
 	end
 end
 
@@ -220,6 +205,27 @@ class MClassBMizer
 
 	redef fun reverse_linearize(elements) do
 		return self.mmodule.reverse_linearize_mclasses(elements)
+	end
+end
+
+# Layout builder for resolution tables using Binary Matrix (BM)
+class ResolutionBMizer
+	init do end
+
+	fun build_layout(elements: Map[MClassType, Set[MType]]): Layout[MType] do
+		var result = new Layout[MType]
+		var ids = new HashMap[MType, Int]
+		var color = 0
+		for mclasstype, mclasstypes in elements do
+			for element in mclasstypes do
+				if ids.has_key(element) then continue
+				ids[element] = color
+				color += 1
+			end
+		end
+		result.ids = ids
+		result.pos = ids
+		return result
 	end
 end
 
