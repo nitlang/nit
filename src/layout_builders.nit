@@ -367,6 +367,8 @@ end
 abstract class MPropertyColorer[E: MProperty]
 	super PropertyLayoutBuilder[E]
 
+	type MPROP: MProperty
+
 	private var mmodule: MModule
 	private var class_colorer: MClassColorer
 	private var coloration_result: Map[E, Int] = new HashMap[E, Int]
@@ -444,52 +446,37 @@ abstract class MPropertyColorer[E: MProperty]
 	end
 
 	# Filter properties
-	private fun properties(mclass: MClass): Set[E] is abstract
+	private fun properties(mclass: MClass): Set[E] do
+		var properties = new HashSet[E]
+		for mprop in self.mmodule.properties(mclass) do
+			if mprop isa MPROP then properties.add(mprop)
+		end
+		return properties
+	end
 end
 
 # Coloring for MMethods
 class MMethodColorer
 	super MPropertyColorer[MMethod]
 
+	redef type MPROP: MMethod
 	init(mmodule: MModule) do super
-
-	redef fun properties(mclass) do
-		var properties = new HashSet[MMethod]
-		for mprop in self.mmodule.properties(mclass) do
-			if mprop isa MMethod then properties.add(mprop)
-		end
-		return properties
-	end
 end
 
 # Coloring for MMAttributes
 class MAttributeColorer
 	super MPropertyColorer[MAttribute]
 
+	redef type MPROP: MAttribute
 	init(mmodule: MModule) do super
-
-	redef fun properties(mclass) do
-		var properties = new HashSet[MAttribute]
-		for mprop in self.mmodule.properties(mclass) do
-			if mprop isa MAttribute then properties.add(mprop)
-		end
-		return properties
-	end
 end
 
 # Coloring for MVirtualTypeProps
 class MVirtualTypePropColorer
 	super MPropertyColorer[MVirtualTypeProp]
 
+	redef type MPROP: MVirtualTypeProp
 	init(mmodule: MModule) do super
-
-	redef fun properties(mclass) do
-		var properties = new HashSet[MVirtualTypeProp]
-		for mprop in self.mmodule.properties(mclass) do
-			if mprop isa MVirtualTypeProp then properties.add(mprop)
-		end
-		return properties
-	end
 end
 
 # Colorer for type resolution table
