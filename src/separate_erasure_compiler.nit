@@ -68,7 +68,7 @@ class SeparateErasureCompiler
 	super SeparateCompiler
 
 	private var class_layout: nullable Layout[MClass]
-	protected var vt_layout: nullable PropertyLayout[MVirtualTypeProp]
+	protected var vt_layout: nullable Layout[MVirtualTypeProp]
 
 	init(mainmodule: MModule, mmbuilder: ModelBuilder, runtime_type_analysis: RapidTypeAnalysis) do
 		super
@@ -96,7 +96,7 @@ class SeparateErasureCompiler
 		self.vt_layout = vt_layout
 	end
 
-	fun build_vt_tables(mclasses: Set[MClass], layout: PropertyLayout[MProperty]): Map[MClass, Array[nullable MPropDef]] do
+	fun build_vt_tables(mclasses: Set[MClass], layout: Layout[MProperty]): Map[MClass, Array[nullable MPropDef]] do
 		var tables = new HashMap[MClass, Array[nullable MPropDef]]
 		for mclass in mclasses do
 			var table = new Array[nullable MPropDef]

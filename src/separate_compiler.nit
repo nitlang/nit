@@ -107,8 +107,8 @@ class SeparateCompiler
 
 	private var type_layout: nullable Layout[MType]
 	private var resolution_layout: nullable Layout[MType]
-	protected var method_layout: nullable PropertyLayout[MMethod]
-	protected var attr_layout: nullable PropertyLayout[MAttribute]
+	protected var method_layout: nullable Layout[MMethod]
+	protected var attr_layout: nullable Layout[MAttribute]
 
 	init(mainmodule: MModule, mmbuilder: ModelBuilder, runtime_type_analysis: RapidTypeAnalysis) do
 		super(mainmodule, mmbuilder)
@@ -225,7 +225,7 @@ class SeparateCompiler
 		self.attr_layout = attr_layout
 	end
 
-	fun build_method_tables(mclasses: Set[MClass], layout: PropertyLayout[MProperty]): Map[MClass, Array[nullable MPropDef]] do
+	fun build_method_tables(mclasses: Set[MClass], layout: Layout[MProperty]): Map[MClass, Array[nullable MPropDef]] do
 		var tables = new HashMap[MClass, Array[nullable MPropDef]]
 		for mclass in mclasses do
 			var table = new Array[nullable MPropDef]
@@ -269,7 +269,7 @@ class SeparateCompiler
 		return tables
 	end
 
-	fun build_attr_tables(mclasses: Set[MClass], layout: PropertyLayout[MProperty]): Map[MClass, Array[nullable MPropDef]] do
+	fun build_attr_tables(mclasses: Set[MClass], layout: Layout[MProperty]): Map[MClass, Array[nullable MPropDef]] do
 		var tables = new HashMap[MClass, Array[nullable MPropDef]]
 		for mclass in mclasses do
 			var table = new Array[nullable MPropDef]

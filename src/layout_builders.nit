@@ -46,12 +46,9 @@ interface TypingLayoutBuilder[E: Object]
 	fun build_layout(elements: Set[E]): Layout[E] is abstract
 end
 
-abstract class PropertyLayoutBuilder[E: MProperty]
-
-	type LAYOUT: PropertyLayout[E]
-
-	# Compute properties ids and position
-	fun build_layout(mclasses: Set[MClass]): LAYOUT is abstract
+interface PropertyLayoutBuilder[E: MProperty]
+	# Build table layout for attributes, methods and virtual types
+	fun build_layout(elements: Set[MClass]): Layout[E] is abstract
 end
 
 # Layout builder for MProperty using Coloring (CL)
@@ -66,9 +63,7 @@ class CLPropertyLayoutBuilder[E: MProperty]
 
 	# Compute mclasses ids and position using BM
 	redef fun build_layout(mclasses) do
-		var result = new PropertyLayout[E]
-		result.pos = self.colorer.colorize(mclasses)
-		return result
+		return self.colorer.build_layout(mclasses)
 	end
 end
 
@@ -336,6 +331,7 @@ end
 
 # MProperty coloring
 abstract class MPropertyColorer[E: MProperty]
+	super PropertyLayoutBuilder[E]
 
 	private var mmodule: MModule
 	private var class_colorer: MClassColorer
@@ -346,7 +342,14 @@ abstract class MPropertyColorer[E: MProperty]
 		self.class_colorer = new MClassColorer(mmodule)
 	end
 
-	fun colorize(mclasses: Set[MClass]): Map[E, Int] do
+	# Compute mclasses ids and position using BM
+	redef fun build_layout(mclasses: Set[MClass]): Layout[E] do
+		var result = new Layout[E]
+		result.pos = self.colorize(mclasses)
+		return result
+	end
+
+	private fun colorize(mclasses: Set[MClass]): Map[E, Int] do
 		self.class_colorer.tag_elements(mclasses)
 		self.class_colorer.build_conflicts_graph(mclasses)
 		self.colorize_core(self.class_colorer.core)
