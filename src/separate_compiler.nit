@@ -210,16 +210,25 @@ class SeparateCompiler
 	fun do_property_coloring do
 		var mclasses = new HashSet[MClass].from(modelbuilder.model.mclasses)
 
+		# Layouts
+		var method_layout_builder: PropertyLayoutBuilder[MMethod]
+		var attribute_layout_builder: PropertyLayoutBuilder[MAttribute]
+		if modelbuilder.toolcontext.opt_bm_typing.value then
+			method_layout_builder = new MMethodBMizer(self.mainmodule)
+			attribute_layout_builder = new MAttributeBMizer(self.mainmodule)
+		else
+			method_layout_builder = new MMethodColorer(self.mainmodule)
+			attribute_layout_builder = new MAttributeColorer(self.mainmodule)
+		end
+
 		# methods coloration
-		var method_coloring = new MMethodColorer(mainmodule)
-		var method_layout = method_coloring.build_layout(mclasses)
+		var method_layout = method_layout_builder.build_layout(mclasses)
 		self.method_tables = build_method_tables(mclasses, method_layout)
 		self.compile_color_consts(method_layout.pos)
 		self.method_layout = method_layout
 
 		# attributes coloration
-		var attribute_coloring = new MAttributeColorer(mainmodule)
-		var attr_layout = attribute_coloring.build_layout(mclasses)
+		var attr_layout = attribute_layout_builder.build_layout(mclasses)
 		self.attr_tables = build_attr_tables(mclasses, attr_layout)
 		self.compile_color_consts(attr_layout.pos)
 		self.attr_layout = attr_layout

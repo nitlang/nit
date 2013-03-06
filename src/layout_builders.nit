@@ -126,6 +126,62 @@ class ResolutionBMizer
 	end
 end
 
+# Abstract BMizing for MProperties
+class MPropertyBMizer[E: MProperty]
+	super PropertyLayoutBuilder[E]
+
+	type MPROP: MProperty
+
+	var mmodule: MModule
+
+	init(mmodule: MModule) do self.mmodule = mmodule
+
+	redef fun build_layout(elements) do
+		var result = new Layout[E]
+		var ids = new HashMap[E, Int]
+		for mclass in elements do
+			for mproperty in properties(mclass) do
+				if ids.has_key(mproperty) then continue
+				ids[mproperty] = ids.length
+			end
+		end
+		result.pos = ids
+		return result
+	end
+
+	private fun properties(mclass: MClass): Set[E] do
+		var properties = new HashSet[E]
+		for mprop in self.mmodule.properties(mclass) do
+			if mprop isa MPROP then properties.add(mprop)
+		end
+		return properties
+	end
+end
+
+# BMizing for MMethods
+class MMethodBMizer
+	super MPropertyBMizer[MMethod]
+
+	redef type MPROP: MMethod
+	init(mmodule: MModule) do super(mmodule)
+end
+
+# BMizing for MMAttributes
+class MAttributeBMizer
+	super MPropertyBMizer[MAttribute]
+
+	redef type MPROP: MAttribute
+	init(mmodule: MModule) do super(mmodule)
+end
+
+# BMizing for MVirtualTypeProps
+class MVirtualTypePropBMizer
+	super MPropertyBMizer[MVirtualTypeProp]
+
+	redef type MPROP: MVirtualTypeProp
+	init(mmodule: MModule) do super(mmodule)
+end
+
 # Colorers
 
 abstract class TypingColorer[E: Object]
