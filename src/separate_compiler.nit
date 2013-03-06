@@ -211,14 +211,14 @@ class SeparateCompiler
 		var mclasses = new HashSet[MClass].from(modelbuilder.model.mclasses)
 
 		# methods coloration
-		var method_coloring = new CLPropertyLayoutBuilder[MMethod](new MMethodColorer(mainmodule))
+		var method_coloring = new MMethodColorer(mainmodule)
 		var method_layout = method_coloring.build_layout(mclasses)
 		self.method_tables = build_method_tables(mclasses, method_layout)
 		self.compile_color_consts(method_layout.pos)
 		self.method_layout = method_layout
 
 		# attributes coloration
-		var attribute_coloring = new CLPropertyLayoutBuilder[MAttribute](new MAttributeColorer(mainmodule))
+		var attribute_coloring = new MAttributeColorer(mainmodule)
 		var attr_layout = attribute_coloring.build_layout(mclasses)
 		self.attr_tables = build_attr_tables(mclasses, attr_layout)
 		self.compile_color_consts(attr_layout.pos)

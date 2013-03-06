@@ -51,28 +51,6 @@ interface PropertyLayoutBuilder[E: MProperty]
 	fun build_layout(elements: Set[MClass]): Layout[E] is abstract
 end
 
-# Layout builder for MProperty using Coloring (CL)
-class CLPropertyLayoutBuilder[E: MProperty]
-	super PropertyLayoutBuilder[E]
-
-	private var colorer: MPropertyColorer[E]
-
-	init(colorer: MPropertyColorer[E]) do
-		self.colorer = colorer
-	end
-
-	# Compute mclasses ids and position using BM
-	redef fun build_layout(mclasses) do
-		return self.colorer.build_layout(mclasses)
-	end
-end
-
-# Layout builder for MProperty using Perfect Hashing (PH)
-# TODO implement this class without sublcassing CL builder
-class PHPropertyLayoutBuilder[E: MProperty]
-	super CLPropertyLayoutBuilder[E]
-end
-
 interface ResolutionLayoutBuilder
 	# Build resolution table layout
 	fun build_layout(elements: Map[MClassType, Set[MType]]): Layout[MType] is abstract
@@ -678,6 +656,12 @@ class MClassHasher
 	redef fun reverse_linearize(elements) do
 		return self.mmodule.reverse_linearize_mclasses(elements)
 	end
+end
+
+# Layout builder for MProperty using Perfect Hashing (PH)
+# TODO implement this class without sublcassing CL builder
+class MPropertyHasher[E: MProperty]
+	super MPropertyColorer[E]
 end
 
 class ResolutionHasher
