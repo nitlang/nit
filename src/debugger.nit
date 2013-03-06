@@ -371,6 +371,8 @@ class Debugger
 			end
 
 			print "\nEnd of current instruction \n"
+		else if parts_of_command[1] == "stack" then
+			print self.stack_trace
 		else if parts_of_command[1].has('[') and parts_of_command[1].has(']') then
 			process_array_command(parts_of_command)
 		else
@@ -1153,6 +1155,7 @@ class Debugger
 		print "[p/print] variable : [p/print] * shows the status of all the variables\n"
 		print "[p/print] variable[i] : Prints the value of the variable contained at position *i* in SequenceRead collection *variable*\n"
 		print "[p/print] variable[i..j]: Prints the value of all the variables contained between positions *i* and *j* in SequenceRead collection *variable*\n"
+		print "[p/print] stack: Prints a stack trace at current instruction\n"
 		print "Note : The arrays can be multi-dimensional (Ex : variable[i..j][k] will print all the values at position *k* of all the SequenceRead collections contained between positions *i* and *j* in SequenceRead collection *variable*)\n"
 		print "s : steps in on the current function\n"
 		print "n : steps-over the current instruction\n"
