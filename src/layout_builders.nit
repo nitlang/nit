@@ -127,7 +127,7 @@ class ResolutionBMizer
 end
 
 # Abstract BMizing for MProperties
-class MPropertyBMizer[E: MProperty]
+abstract class MPropertyBMizer[E: MProperty]
 	super PropertyLayoutBuilder[E]
 
 	type MPROP: MProperty
@@ -139,7 +139,8 @@ class MPropertyBMizer[E: MProperty]
 	redef fun build_layout(elements) do
 		var result = new Layout[E]
 		var ids = new HashMap[E, Int]
-		for mclass in elements do
+		var lin = linearize_mclasses(elements)
+		for mclass in lin do
 			for mproperty in properties(mclass) do
 				if ids.has_key(mproperty) then continue
 				ids[mproperty] = ids.length
@@ -156,6 +157,8 @@ class MPropertyBMizer[E: MProperty]
 		end
 		return properties
 	end
+
+	private fun linearize_mclasses(mclasses: Set[MClass]): Array[MClass] is abstract
 end
 
 # BMizing for MMethods
@@ -164,6 +167,8 @@ class MMethodBMizer
 
 	redef type MPROP: MMethod
 	init(mmodule: MModule) do super(mmodule)
+	# Less holes in tables with reverse linearization for method tables
+	redef fun linearize_mclasses(mclasses) do return self.mmodule.reverse_linearize_mclasses(mclasses)
 end
 
 # BMizing for MMAttributes
@@ -172,6 +177,8 @@ class MAttributeBMizer
 
 	redef type MPROP: MAttribute
 	init(mmodule: MModule) do super(mmodule)
+	# Less holes in tables with linearization for attribute tables
+	redef fun linearize_mclasses(mclasses) do return self.mmodule.linearize_mclasses(mclasses)
 end
 
 # BMizing for MVirtualTypeProps
@@ -180,6 +187,8 @@ class MVirtualTypePropBMizer
 
 	redef type MPROP: MVirtualTypeProp
 	init(mmodule: MModule) do super(mmodule)
+	# Less holes in tables with reverse linearization for method tables
+	redef fun linearize_mclasses(mclasses) do return self.mmodule.reverse_linearize_mclasses(mclasses)
 end
 
 # Colorers
