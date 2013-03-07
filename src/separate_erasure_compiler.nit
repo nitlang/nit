@@ -15,13 +15,12 @@
 # Separate compilation of a Nit program with generic type erasure
 module separate_erasure_compiler
 
+intrude import separate_compiler
 
-import separate_compiler
-
+# Add separate erased compiler specific options
 redef class ToolContext
 	# --erasure
 	var opt_erasure: OptionBool = new OptionBool("Erase generic types", "--erasure")
-
 	# --no-check-erasure-cast
 	var opt_no_check_erasure_cast: OptionBool = new OptionBool("Disable implicit casts on unsafe return with erasure-typing policy (dangerous)", "--no-check-erasure-cast")
 
@@ -38,7 +37,7 @@ redef class ModelBuilder
 		var time0 = get_time
 		self.toolcontext.info("*** COMPILING TO C ***", 1)
 
-		var compiler = new SeparateErasureCompiler(mainmodule, runtime_type_analysis, self)
+		var compiler = new SeparateErasureCompiler(mainmodule, self, runtime_type_analysis)
 		compiler.compile_header
 
 		# compile class structures
@@ -68,51 +67,105 @@ end
 class SeparateErasureCompiler
 	super SeparateCompiler
 
-	private var class_ids: HashMap[MClass, Int] = new HashMap[MClass, Int]
-	private var class_colors: Map[MClass, Int]
-	private var class_tables: Map[MClass, Array[nullable MClass]]
+	private var class_layout: nullable Layout[MClass]
+	protected var vt_layout: nullable Layout[MVirtualTypeProp]
 
-	init(mainmodule: MModule, runtime_type_analysis: RapidTypeAnalysis, mmbuilder: ModelBuilder) do
-		var mclasses = new HashSet[MClass]
-		mclasses.add_all(mmbuilder.model.mclasses)
+	init(mainmodule: MModule, mmbuilder: ModelBuilder, runtime_type_analysis: RapidTypeAnalysis) do
+		super
 
-		# classes coloration
+		var mclasses = new HashSet[MClass].from(mmbuilder.model.mclasses)
+
+		var layout_builder: TypingLayoutBuilder[MClass]
 		if modelbuilder.toolcontext.opt_phmod_typing.value then
-			# set type unique id
-			for mclass in mclasses do
-				self.class_ids[mclass] = self.class_ids.length + 1
-			end
-
-			var class_coloring = new ClassModPerfectHashing(mainmodule)
-			self.class_colors = class_coloring.compute_masks(mclasses, class_ids)
-			self.class_tables = class_coloring.hash_type_tables(mclasses, class_ids, class_colors)
-
-			self.header.add_decl("#define HASH(mask, id) ((mask)%(id))")
+			layout_builder = new MClassHasher(new PHModOperator, mainmodule)
 		else if modelbuilder.toolcontext.opt_phand_typing.value then
-			# set type unique id
-			for mclass in mclasses do
-				self.class_ids[mclass] = self.class_ids.length + 1
-			end
-
-			var class_coloring = new ClassAndPerfectHashing(mainmodule)
-			self.class_colors = class_coloring.compute_masks(mclasses, class_ids)
-			self.class_tables = class_coloring.hash_type_tables(mclasses, class_ids, class_colors)
-
-			self.header.add_decl("#define HASH(mask, id) ((mask)&(id))")
+			layout_builder = new MClassHasher(new PHAndOperator, mainmodule)
+		else if modelbuilder.toolcontext.opt_bm_typing.value then
+			layout_builder = new MClassBMizer(mainmodule)
 		else
-			var class_coloring
-			if modelbuilder.toolcontext.opt_bm_typing.value then
-				class_coloring = new NaiveClassColoring(mainmodule)
-			else
-				class_coloring = new ClassColoring(mainmodule)
-			end
-			# set type unique id
-			for mclass in mclasses do
-				self.class_ids[mclass] = self.class_ids.length + 1
-			end
-			self.class_colors = class_coloring.colorize(modelbuilder.model.mclasses)
-			self.class_tables = class_coloring.build_type_tables(modelbuilder.model.mclasses, class_colors)
+			layout_builder = new MClassColorer(mainmodule)
 		end
+		self.class_layout = layout_builder.build_layout(mclasses)
+		self.class_tables = self.build_class_typing_tables(mclasses)
+
+		# vt coloration
+		var vt_coloring = new MVirtualTypePropColorer(mainmodule)
+		var vt_layout = vt_coloring.build_layout(mclasses)
+		self.vt_tables = build_vt_tables(mclasses, vt_layout)
+		self.compile_color_consts(vt_layout.pos)
+		self.vt_layout = vt_layout
+	end
+
+	fun build_vt_tables(mclasses: Set[MClass], layout: Layout[MProperty]): Map[MClass, Array[nullable MPropDef]] do
+		var tables = new HashMap[MClass, Array[nullable MPropDef]]
+		for mclass in mclasses do
+			var table = new Array[nullable MPropDef]
+			# first, fill table from parents by reverse linearization order
+			var parents = self.mainmodule.super_mclasses(mclass)
+			var lin = self.mainmodule.reverse_linearize_mclasses(parents)
+			for parent in lin do
+				for mproperty in self.mainmodule.properties(parent) do
+					if not mproperty isa MVirtualTypeProp then continue
+					var color = layout.pos[mproperty]
+					if table.length <= color then
+						for i in [table.length .. color[ do
+							table[i] = null
+						end
+					end
+					for mpropdef in mproperty.mpropdefs do
+						if mpropdef.mclassdef.mclass == parent then
+							table[color] = mpropdef
+						end
+					end
+				end
+			end
+
+			# then override with local properties
+			for mproperty in self.mainmodule.properties(mclass) do
+				if not mproperty isa MVirtualTypeProp then continue
+				var color = layout.pos[mproperty]
+				if table.length <= color then
+					for i in [table.length .. color[ do
+						table[i] = null
+					end
+				end
+				for mpropdef in mproperty.mpropdefs do
+					if mpropdef.mclassdef.mclass == mclass then
+						table[color] = mpropdef
+					end
+				end
+			end
+			tables[mclass] = table
+		end
+		return tables
+	end
+
+	# Build class tables
+	fun build_class_typing_tables(mclasses: Set[MClass]): Map[MClass, Array[nullable MClass]] do
+		var tables = new HashMap[MClass, Array[nullable MClass]]
+		var layout = self.class_layout
+		for mclass in mclasses do
+			var table = new Array[nullable MClass]
+			var supers = new HashSet[MClass]
+			supers.add_all(self.mainmodule.super_mclasses(mclass))
+			supers.add(mclass)
+			for sup in supers do
+				var color: Int
+				if layout isa PHLayout[MClass, MClass] then
+					color = layout.hashes[mclass][sup]
+				else
+					color = layout.pos[sup]
+				end
+				if table.length <= color then
+					for i in [table.length .. color[ do
+						table[i] = null
+					end
+				end
+				table[color] = sup
+			end
+			tables[mclass] = table
+		end
+		return tables
 	end
 
 	redef fun compile_header_structs do
@@ -122,10 +175,16 @@ class SeparateErasureCompiler
 		self.header.add_decl("struct type_table \{ int size; int table[1]; \}; /* colorized type table. */")
 		self.header.add_decl("struct vts_entry \{ short int is_nullable; struct class *class; \}; /* link (nullable or not) between the vts and is bound. */")
 
-		if modelbuilder.toolcontext.opt_phmod_typing.value or modelbuilder.toolcontext.opt_phand_typing.value then
+		if self.vt_layout isa PHLayout[MClass, MVirtualTypeProp] then
 			self.header.add_decl("struct vts_table \{ int mask; struct vts_entry vts[1]; \}; /* vts list of a C type representation. */")
 		else
 			self.header.add_decl("struct vts_table \{ struct vts_entry vts[1]; \}; /* vts list of a C type representation. */")
+		end
+
+		if modelbuilder.toolcontext.opt_phmod_typing.value then
+			self.header.add_decl("#define HASH(mask, id) ((mask)%(id))")
+		else if modelbuilder.toolcontext.opt_phand_typing.value then
+			self.header.add_decl("#define HASH(mask, id) ((mask)&(id))")
 		end
 
 		self.header.add_decl("typedef struct val \{ struct class *class; nitattribute_t attrs[1]; \} val; /* general C type representing a Nit instance. */")
@@ -142,10 +201,6 @@ class SeparateErasureCompiler
 		var v = self.new_visitor
 
 		v.add_decl("/* runtime class {c_name} */")
-		var idnum = classids.length
-		var idname = "ID_" + c_name
-		self.classids[mtype] = idname
-		#self.header.add_decl("#define {idname} {idnum} /* {c_name} */")
 
 		self.header.add_decl("extern const struct class_{c_name} class_{c_name};")
 		self.header.add_decl("struct class_{c_name} \{")
@@ -160,10 +215,15 @@ class SeparateErasureCompiler
 
 		# Build class vft
 		v.add_decl("const struct class_{c_name} class_{c_name} = \{")
-		v.add_decl("{self.class_ids[mclass]},")
+		v.add_decl("{self.class_layout.ids[mclass]},")
 		v.add_decl("\"{mclass.name}\", /* class_name_string */")
 		v.add_decl("{self.box_kind_of(mclass)}, /* box_kind */")
-		v.add_decl("{self.class_colors[mclass]},")
+		var layout = self.class_layout
+		if layout isa PHLayout[MClass, MClass] then
+			v.add_decl("{layout.masks[mclass]},")
+		else
+			v.add_decl("{layout.pos[mclass]},")
+		end
 		if build_class_vts_table(mclass) then
 			v.add_decl("(const struct vts_table*) &vts_table_{c_name},")
 		else
@@ -200,7 +260,7 @@ class SeparateErasureCompiler
 			if msuper == null then
 				v.add_decl("-1, /* empty */")
 			else
-				v.add_decl("{self.class_ids[msuper]}, /* {msuper} */")
+				v.add_decl("{self.class_layout.ids[msuper]}, /* {msuper} */")
 			end
 		end
 		v.add_decl("\}")
@@ -270,7 +330,7 @@ class SeparateErasureCompiler
 
 		self.header.add_decl("extern const struct vts_table_{mclass.c_name} vts_table_{mclass.c_name};")
 		self.header.add_decl("struct vts_table_{mclass.c_name} \{")
-		if modelbuilder.toolcontext.opt_phmod_typing.value or modelbuilder.toolcontext.opt_phand_typing.value then
+		if self.vt_layout isa PHLayout[MClass, MVirtualTypeProp] then
 			self.header.add_decl("int mask;")
 		end
 		self.header.add_decl("struct vts_entry vts[{self.vt_tables[mclass].length}];")
@@ -278,8 +338,9 @@ class SeparateErasureCompiler
 
 		var v = new_visitor
 		v.add_decl("const struct vts_table_{mclass.c_name} vts_table_{mclass.c_name} = \{")
-		if modelbuilder.toolcontext.opt_phmod_typing.value or modelbuilder.toolcontext.opt_phand_typing.value then
-			v.add_decl("{vt_masks[mclass]},")
+		if self.vt_layout isa PHLayout[MClass, MVirtualTypeProp] then
+			#TODO redo this when PHPropertyLayoutBuilder will be implemented
+			#v.add_decl("{vt_masks[mclass]},")
 		end
 		v.add_decl("\{")
 
@@ -288,7 +349,7 @@ class SeparateErasureCompiler
 				v.add_decl("\{-1, NULL\}, /* empty */")
 			else
 				var is_null = 0
-				var bound = retrieve_vt_bound(mclass.intro.bound_mtype, vt.bound)
+				var bound = retrieve_vt_bound(mclass.intro.bound_mtype, vt.as(MVirtualTypeDef).bound)
 				while bound isa MNullableType do
 					bound = retrieve_vt_bound(mclass.intro.bound_mtype, bound.mtype)
 					is_null = 1
@@ -316,6 +377,54 @@ class SeparateErasureCompiler
 	end
 
 	redef fun new_visitor do return new SeparateErasureCompilerVisitor(self)
+
+	# Stats
+
+	private var class_tables: Map[MClass, Array[nullable MClass]]
+	private var vt_tables: Map[MClass, Array[nullable MPropDef]]
+
+	redef fun display_sizes
+	do
+		print "# size of subtyping tables"
+		print "\ttotal \tholes"
+		var total = 0
+		var holes = 0
+		for t, table in class_tables do
+			total += table.length
+			for e in table do if e == null then holes += 1
+		end
+		print "\t{total}\t{holes}"
+
+		print "# size of resolution tables"
+		print "\ttotal \tholes"
+		total = 0
+		holes = 0
+		for t, table in vt_tables do
+			total += table.length
+			for e in table do if e == null then holes += 1
+		end
+		print "\t{total}\t{holes}"
+
+		print "# size of methods tables"
+		print "\ttotal \tholes"
+		total = 0
+		holes = 0
+		for t, table in method_tables do
+			total += table.length
+			for e in table do if e == null then holes += 1
+		end
+		print "\t{total}\t{holes}"
+
+		print "# size of attributes tables"
+		print "\ttotal \tholes"
+		total = 0
+		holes = 0
+		for t, table in attr_tables do
+			total += table.length
+			for e in table do if e == null then holes += 1
+		end
+		print "\t{total}\t{holes}"
+	end
 end
 
 class SeparateErasureCompilerVisitor
@@ -340,10 +449,7 @@ class SeparateErasureCompilerVisitor
 		return res
 	end
 
-	redef fun init_instance(mtype)
-	do
-		return self.new_expr("NEW_{mtype.mclass.c_name}()", mtype)
-	end
+	redef fun init_instance(mtype) do return self.new_expr("NEW_{mtype.mclass.c_name}()", mtype)
 
 	redef fun type_test(value, mtype, tag)
 	do
@@ -407,7 +513,7 @@ class SeparateErasureCompilerVisitor
 			end
 			var entry = self.get_name("entry")
 			self.add("struct vts_entry {entry};")
-			if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
+			if self.compiler.as(SeparateErasureCompiler).vt_layout isa PHLayout[MClass, MVirtualTypeProp] then
 				self.add("{entry} = {recv_ptr}vts_table->vts[HASH({recv_ptr}vts_table->mask, {mtype.mproperty.const_color})];")
 			else
 				self.add("{entry} = {recv_ptr}vts_table->vts[{mtype.mproperty.const_color}];")
@@ -435,7 +541,7 @@ class SeparateErasureCompilerVisitor
 			self.add("{res} = {accept_null};")
 			self.add("\} else \{")
 		end
-		if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
+		if self.compiler.as(SeparateErasureCompiler).class_layout isa PHLayout[MClass, MClass] then
 			self.add("{cltype} = HASH({class_ptr}color, {idtype});")
 		end
 		self.add("if({cltype} >= {class_ptr}type_table->size) \{")
