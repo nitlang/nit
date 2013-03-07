@@ -570,14 +570,7 @@ abstract class AbstractCompilerVisitor
 	fun monomorphic_send(m: MMethod, t: MType, args: Array[RuntimeVariable]): nullable RuntimeVariable
 	do
 		assert t isa MClassType
-		var propdefs = m.lookup_definitions(self.compiler.mainmodule, t)
-		if propdefs.length == 0 then
-			abort
-		end
-		if propdefs.length > 1 then
-			self.debug("NOT YET IMPLEMENTED conflict for {t}.{m}: {propdefs.join(" ")}. choose the first")
-		end
-		var propdef = propdefs.first
+		var propdef = m.lookup_first_definition(self.compiler.mainmodule, t)
 		return self.call(propdef, t, args)
 	end
 
