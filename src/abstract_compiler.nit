@@ -2326,7 +2326,7 @@ redef class MModule
 	private var sub_mtypes_cache: Map[MType, Set[MType]] = new HashMap[MType, Set[MType]]
 
 	# Return a linearization of a set of mclasses
-	fun linearize_mclasses(mclasses: Set[MClass]): Array[MClass] do
+	fun linearize_mclasses_2(mclasses: Set[MClass]): Array[MClass] do
 		var lin = new Array[MClass].from(mclasses)
 		var sorter = new ClassSorter(self)
 		sorter.sort(lin)

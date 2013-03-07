@@ -178,7 +178,7 @@ class MAttributeBMizer
 	redef type MPROP: MAttribute
 	init(mmodule: MModule) do super(mmodule)
 	# Less holes in tables with linearization for attribute tables
-	redef fun linearize_mclasses(mclasses) do return self.mmodule.linearize_mclasses(mclasses)
+	redef fun linearize_mclasses(mclasses) do return self.mmodule.linearize_mclasses_2(mclasses)
 end
 
 # BMizing for MVirtualTypeProps
@@ -368,7 +368,7 @@ class MClassColorer
 	fun parent_elements(element: MClass): Set[MClass] do return self.mmodule.parent_mclasses(element)
 	redef fun is_element_mi(element, elements) do return self.parent_elements(element).length > 1
 	redef fun sub_elements(element, elements) do do return self.mmodule.sub_mclasses(element)
-	redef fun linearize(elements) do return self.mmodule.linearize_mclasses(elements)
+	redef fun linearize(elements) do return self.mmodule.linearize_mclasses_2(elements)
 	redef fun reverse_linearize(elements) do return self.mmodule.reverse_linearize_mclasses(elements)
 end
 
