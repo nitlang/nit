@@ -543,6 +543,9 @@ abstract class AbstractCompilerVisitor
 		end
 	end
 
+	# Generate a super call from a method definition
+	fun supercall(m: MMethodDef, recvtype: MClassType, args: Array[RuntimeVariable]): nullable RuntimeVariable is abstract
+
 	fun adapt_signature(m: MMethodDef, args: Array[RuntimeVariable]) is abstract
 
 	# Box or unbox a value to another type iff a C type conversion is needed
@@ -2153,17 +2156,7 @@ redef class ASuperExpr
 		end
 
 		# stantard call-next-method
-		var mpropdef = v.frame.mpropdef
-		# FIXME: we do not want an ugly static call!
-		var mpropdefs = mpropdef.mproperty.lookup_super_definitions(mpropdef.mclassdef.mmodule, mpropdef.mclassdef.bound_mtype)
-		if mpropdefs.length != 1 then
-			v.add("printf(\"NOT YET IMPLEMENTED {class_name} {mpropdef} at {location.to_s}\\n\");")
-			debug("MPRODFEFS for super {mpropdef} for {recv}: {mpropdefs.join(", ")}")
-		end
-		mpropdef = mpropdefs.first
-		assert mpropdef isa MMethodDef
-		var res = v.call(mpropdef, recv.mtype.as(MClassType), args)
-		return res
+		return v.supercall(v.frame.mpropdef.as(MMethodDef), recv.mtype.as(MClassType), args)
 	end
 end
 

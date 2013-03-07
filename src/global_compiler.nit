@@ -459,6 +459,61 @@ class GlobalCompilerVisitor
 		return rm.call(self, args)
 	end
 
+	redef fun supercall(m: MMethodDef, recvtype: MClassType, args: Array[RuntimeVariable]): nullable RuntimeVariable
+	do
+		var types = self.collect_types(args.first)
+
+		var res: nullable RuntimeVariable
+		var ret = m.mproperty.intro.msignature.return_mtype
+		if ret == null then
+			res = null
+		else
+			ret = self.resolve_for(ret, args.first)
+			res = self.new_var(ret)
+		end
+
+		self.add("/* super {m} on {args.first.inspect} */")
+		if args.first.mtype.ctype != "val*" then
+			var mclasstype = args.first.mtype.as(MClassType)
+			if not self.compiler.runtime_type_analysis.live_types.has(mclasstype) then
+				self.add("/* skip, no method {m} */")
+				return res
+			end
+			var propdef = m.lookup_next_definition(self.compiler.mainmodule, mclasstype)
+			var res2 = self.call(propdef, mclasstype, args)
+			if res != null then self.assign(res, res2.as(not null))
+			return res
+		end
+
+		if types.is_empty then
+			self.add("\{")
+			self.add("/*BUG: no live types for {args.first.inspect} . {m}*/")
+			self.bugtype(args.first)
+			self.add("\}")
+			return res
+		end
+
+		self.add("switch({args.first}->classid) \{")
+		var last = types.last
+		for t in types do
+			var propdef = m.lookup_next_definition(self.compiler.mainmodule, t)
+			if not self.compiler.hardening and t == last then
+				self.add("default: /* test {t} */")
+			else
+				self.add("case {self.compiler.classid(t)}: /* test {t} */")
+			end
+			var res2 = self.call(propdef, t, args)
+			if res != null then self.assign(res, res2.as(not null))
+			self.add "break;"
+		end
+		if self.compiler.hardening then
+			self.add("default: /* bug */")
+			self.bugtype(args.first)
+		end
+		self.add("\}")
+		return res
+	end
+
 	redef fun adapt_signature(m, args)
 	do
 		var recv = args.first
