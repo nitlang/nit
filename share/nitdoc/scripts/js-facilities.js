@@ -400,62 +400,6 @@ $(document).ready(function() {
 
 	// Close editing
 	$('textarea').blur(function() {
-		/*var id;
-		var text;
-		var url;
-		var line;
-
-    	if ($.trim(this.value) == ''){
-         		this.value = (this.defaultValue ? this.defaultValue : '');
-     	}
-     	else{
-     			id = $(this).prev().attr('id');
-     			text = this.value.replace("'", "`");
-     			pathFile = "/lib/standard/collection/array.nit";
-     			//pathFile = 'https://api.github.com/repos/StefanLage/TestWikiDoc/git/blobs/' + id;
-     			line = $(this).prev().attr('title');
-
-     			var lines = $(this).prev().text().split(/\r|\r\n|\n/);
-				var count = lines.length - 1;
-				console.log(count); 
-
-     			/*if (jQuery.inArray(id, Arrays)){
-     				//Arrays.push("'id': '"+id+"', 'info': [{'text': '"+text+"', 'link': '"+url+"', 'line': '"+line+"'}]}");
-     				alert('toto');
-     			}
-     			else{
-     				alert('test');	
-     			}*/
-     			/*var t = "{'id': '"+id+"', 'text': '"+text+"', 'link': "+url+", 'line': "+line+"}";
-
-     			//Arrays.push(JSON.stringify(eval("(" + t + ")")));
-     			Arrays.push("'id': '"+id+"', 'text': '"+text+"', 'link': '"+url+"', 'line': '"+line+"'}");
-     			alert(Arrays);
-         		
-
-         		// Get file content
-         		//alert(getFileContent(pathFile));
-         		window.toto = window.getFileContent(pathFile);
-         		//alert(getFileContent(pathFile));
-         		text = toto.replace($(this).prev().text(), this.value);
-         		getLastCommit();
-
-         		$(this).prev().html(this.value);*/
-         		//pathFile = 'https://api.github.com/repos/StefanLage/TestWikiDoc/git/blobs/' + id;
-         		/*var pathBlob = 'https://api.github.com/repos/StefanLage/TestWikiDoc/git/blobs/' + id;
-				$.when(getFileContent(pathBlob, $(this).prev().text(), this.value)).done(function(){
-
-						//alert(text);
-						//text = this.value;
-						getLastCommit();
-
-						
-				});
-				
-				$(this).prev().html(this.value);
-         		//om($(this).prev().attr('id'), this.value, $(this).prev().attr('title'), $(this).prev());
-     	}	*/
-
      	$('#modal' ).show().prepend('<a href="" class="close"><img src="resources/icons/close.png" class="btn_close" title="Fermer" alt="Fermer" /></a>');
 			 //Effet fade-in du fond opaque
 		$('body').append('<div id="fade"></div>'); //Ajout du fond opaque noir
@@ -465,7 +409,6 @@ $(document).ready(function() {
 		idBlob = $(this).prev().attr('id');
 		newComment = this.value;
 		
-
      	$(this).hide();
      	$(this).prev().show();
      	$(this).prev().prev().show();        
@@ -509,48 +452,10 @@ $(document).ready(function() {
 	     			
 	     			text = newComment.replace("'", "`");
 	     			pathFile = "/lib/standard/collection/array.nit";
-	     			//pathFile = 'https://api.github.com/repos/StefanLage/TestWikiDoc/git/blobs/' + id;
-	     			line = $(this).prev().attr('title');
-
-	     			var lines = $(this).prev().text().split(/\r|\r\n|\n/);
-					var count = lines.length - 1;
-					console.log(count); 
-
-	     			/*if (jQuery.inArray(id, Arrays)){
-	     				//Arrays.push("'id': '"+id+"', 'info': [{'text': '"+text+"', 'link': '"+url+"', 'line': '"+line+"'}]}");
-	     				alert('toto');
-	     			}
-	     			else{
-	     				alert('test');	
-	     			}*/
-	     			/*var t = "{'id': '"+id+"', 'text': '"+text+"', 'link': "+url+", 'line': "+line+"}";
-
-	     			//Arrays.push(JSON.stringify(eval("(" + t + ")")));
-	     			Arrays.push("'id': '"+id+"', 'text': '"+text+"', 'link': '"+url+"', 'line': '"+line+"'}");
-	     			alert(Arrays);
-	         		
-
-	         		// Get file content
-	         		//alert(getFileContent(pathFile));
-	         		window.toto = window.getFileContent(pathFile);
-	         		//alert(getFileContent(pathFile));
-	         		text = toto.replace($(this).prev().text(), this.value);
-	         		getLastCommit();
-
-	         		$(this).prev().html(this.value);*/
-	         		//pathFile = 'https://api.github.com/repos/StefanLage/TestWikiDoc/git/blobs/' + id;
 	         		var pathBlob = 'https://api.github.com/repos/'+userName+'/'+githubRepo+'/git/blobs/' + idBlob;
 					$.when(getFileContent(pathBlob, preElement.text(), newComment)).done(function(){
-
-							//alert(text);
-							//text = this.value;
 							getLastCommit();
-
-							
 					});
-					
-					//$(this).prev().html(this.value);
-	         		//om($(this).prev().attr('id'), this.value, $(this).prev().attr('title'), $(this).prev());
 	     	}
 	     }
 	})
@@ -605,48 +510,6 @@ function highlightBlock(a) {
 	target.show();
 }
 
-
-
-
-
-
-
-function com(id, text, line, element)
-{
-	//text = this.value.replace("'", "`");
-	//pathFile = $(this).prev().attr('name');
-	
-	//line = $(this).prev().attr('title');
-
-	/*var lines = $(this).prev().text().split(/\r|\r\n|\n/);
-	var count = lines.length - 1;
-	console.log(count); */
-
-	//Arrays.push(JSON.stringify(eval("(" + t + ")")));
-	//Arrays.push("'id': '"+id+"', 'text': '"+text+"', 'link': '"+url+"', 'line': '"+line+"'}");
-	//alert(Arrays);
-
-
-	// Get file content
-	//alert(getFileContent(pathFile));
-	//window.toto = window.getFileContent(pathFile, t, t2);
-
-	//pathFile = 'https://api.github.com/repos/StefanLage/TestWikiDoc/git/blobs/' + $.sha1("blob"+ $(this).attr +"\0" + id + "\n");
-	$.when(getFileContent(pathFile)).done(function(){
-
-			//alert(text);
-			text.
-			getLastCommit();
-
-			element.html(this.value);
-	});
-	
-}
-
-
-
-
-
 function loadContent()
 {
     state = false;
@@ -664,16 +527,13 @@ function loadFile()
     getBlobsTree(shaBaseTree);
 }
 
-
 function getLastCommit() 
 {
-    
-
     $.ajax({
         beforeSend: function (xhr) { 
-            //if ($("#login").val() != ""){ 
+            if ($("#login").val() != ""){ 
                 xhr.setRequestHeader ("Authorization", userB64);
-            //}
+            }
         },
         type: "GET",
         url: "https://api.github.com/repos/"+userName+"/"+githubRepo+"/git/refs/heads/master",
@@ -692,9 +552,9 @@ function getBaseTree()
 {
     $.ajax({ 
         beforeSend: function (xhr) { 
-            //if ($("#login").val() != ""){ 
+            if ($("#login").val() != ""){ 
                 xhr.setRequestHeader ("Authorization", userB64);
-            //}
+            }
         },
         type: "GET",
         url: "https://api.github.com/repos/"+userName+"/"+githubRepo+"/git/commits/" + shaLastCommit,
@@ -708,7 +568,6 @@ function getBaseTree()
             }
             else
             {
-                //getCurrentTree();
                 return;
             }
         }
@@ -717,8 +576,6 @@ function getBaseTree()
 
 function setNewTree()
 {
-	//pathFile = "lib/array.nit";
-
     $.ajax({ 
         beforeSend: function (xhr) { 
             xhr.setRequestHeader ("Authorization", userB64);
@@ -787,8 +644,6 @@ function commit()
 
 function setBlob()
 {
-    //alert($(".text_label").text());
-    //alert(text);
     $.ajax({
         beforeSend: function (xhr) { 
             xhr.setRequestHeader ("Authorization",  userB64);
@@ -815,9 +670,9 @@ function getFileContent(urlFile, t, t2)
     $.ajax({
         beforeSend: function (xhr) { 
             xhr.setRequestHeader ("Accept",  "application/vnd.github-blob.raw");
-            //if ($("#login").val() != ""){ 
+            if ($("#login").val() != ""){ 
                 xhr.setRequestHeader ("Authorization", userB64);
-            //}
+            }
         },
         type: "GET", 
         url: urlFile, 
@@ -825,17 +680,10 @@ function getFileContent(urlFile, t, t2)
 
         success: function(success)
         {
-            //$("#fileContent").text(success);
-            //$('.text_label').text(success);
-
             state = true;
             text = success.replace(t, t2);
-            //alert(text);
-            //return text;
         }
     });
-
-    //alert('toto');
 }
 
 
@@ -844,9 +692,9 @@ function getBlobsTree(tree)
 {
     $.ajax({
         beforeSend: function (xhr) { 
-            //if ($("#login").val() != ""){ 
+            if ($("#login").val() != ""){ 
                 xhr.setRequestHeader ("Authorization", userB64);
-            //}
+            }
         },
         type: "GET", 
         url: "https://api.github.com/repos/"+userName+"/"+githubRepo+"/git/trees/" + tree, 

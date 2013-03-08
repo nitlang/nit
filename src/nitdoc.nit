@@ -166,8 +166,6 @@ class DocContext
 			"<script type=\"text/javascript\" src=\"scripts/jquery-1.7.1.min.js\"></script>\n" +
 			"<script type=\"text/javascript\" src=\"quicksearch-list.js\"></script>\n" +
 			"<script type=\"text/javascript\" src=\"scripts/js-facilities.js\"></script>\n" +
-			"<script type=\"test/javascript\" src=\"scripts/proto_wikidoc.js\"></script>\n"+	
-			"<script type=\"test/javascript\" src=\"scripts/jquery.modal.js\"></script>\n"+
 			"<link rel=\"stylesheet\" href=\"styles/main.css\" type=\"text/css\"  media=\"screen\" />"
 
 		var custom_items = ""
