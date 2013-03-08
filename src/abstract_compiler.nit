@@ -1207,12 +1207,10 @@ redef class MMethodDef
 	end
 end
 
-redef class ANode
-	type VISITOR: AbstractCompilerVisitor
-end
+# Node visit
 
 redef class APropdef
-	fun compile_to_c(v: VISITOR, mpropdef: MMethodDef, arguments: Array[RuntimeVariable])
+	fun compile_to_c(v: AbstractCompilerVisitor, mpropdef: MMethodDef, arguments: Array[RuntimeVariable])
 	do
 		v.add("printf(\"NOT YET IMPLEMENTED {class_name} {mpropdef} at {location.to_s}\\n\");")
 		debug("Not yet implemented")
@@ -1579,7 +1577,7 @@ redef class AAttrPropdef
 		end
 	end
 
-	fun init_expr(v: VISITOR, recv: RuntimeVariable)
+	fun init_expr(v: AbstractCompilerVisitor, recv: RuntimeVariable)
 	do
 		var nexpr = self.n_expr
 		if nexpr != null then
@@ -1595,7 +1593,7 @@ redef class AAttrPropdef
 		end
 	end
 
-	fun check_expr(v: VISITOR, recv: RuntimeVariable)
+	fun check_expr(v: AbstractCompilerVisitor, recv: RuntimeVariable)
 	do
 		var nexpr = self.n_expr
 		if nexpr != null then return
@@ -1613,7 +1611,7 @@ redef class AAttrPropdef
 end
 
 redef class AClassdef
-	private fun compile_to_c(v: VISITOR, mpropdef: MMethodDef, arguments: Array[RuntimeVariable])
+	private fun compile_to_c(v: AbstractCompilerVisitor, mpropdef: MMethodDef, arguments: Array[RuntimeVariable])
 	do
 		if mpropdef == self.mfree_init then
 			var super_inits = self.super_inits
@@ -1647,7 +1645,7 @@ end
 redef class AExpr
 	# Try to compile self as an expression
 	# Do not call this method directly, use `v.expr' instead
-	private fun expr(v: VISITOR): nullable RuntimeVariable
+	private fun expr(v: AbstractCompilerVisitor): nullable RuntimeVariable
 	do
 		v.add("printf(\"NOT YET IMPLEMENTED {class_name}:{location.to_s}\\n\");")
 		var mtype = self.mtype
@@ -1662,7 +1660,7 @@ redef class AExpr
 
 	# Try to compile self as a statement
 	# Do not call this method directly, use `v.stmt' instead
-	private fun stmt(v: VISITOR)
+	private fun stmt(v: AbstractCompilerVisitor)
 	do
 		var res = expr(v)
 		if res != null then v.add("{res};")
