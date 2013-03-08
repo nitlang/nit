@@ -1,3 +1,28 @@
+var state = false;
+
+// SHA
+var shaLastCommit;
+var shaBaseTree;
+var shaNewTree;
+var shaNewCommit;
+var shaBlob;
+
+// User
+var userB64 = null;
+var currentTree;
+var pathFile;
+var recurTree = "";
+var text = "";
+var toto = "";
+var githubRepo = "";
+var userName = "";
+var password = "";
+var idBlob;
+var commitMessage = "";
+var preElement;
+var newComment;
+
+
 /*
 * JQuery Case Insensitive :icontains selector
 */
@@ -352,6 +377,185 @@ $(document).ready(function() {
 	
 	//Preload filter fields with query string
 	preloadFilters();
+
+	
+
+
+
+	/*  Proto TestWikiDoc */
+
+	var Arrays = new Array();
+	$('textarea').hide();
+
+	// Open edit file
+   	 $('.text_label').click(function(){
+        	$(this).hide();
+        	$(this).next().hide();
+        	$(this).next().text($(this).text());
+        	$(this).next().show();        
+    		$(this).next().height($(this).next().prop("scrollHeight"));
+        	$(this).next().select();
+        	preElement = $(this);
+    	});
+
+	// Close editing
+	$('textarea').blur(function() {
+		/*var id;
+		var text;
+		var url;
+		var line;
+
+    	if ($.trim(this.value) == ''){
+         		this.value = (this.defaultValue ? this.defaultValue : '');
+     	}
+     	else{
+     			id = $(this).prev().attr('id');
+     			text = this.value.replace("'", "`");
+     			pathFile = "/lib/standard/collection/array.nit";
+     			//pathFile = 'https://api.github.com/repos/StefanLage/TestWikiDoc/git/blobs/' + id;
+     			line = $(this).prev().attr('title');
+
+     			var lines = $(this).prev().text().split(/\r|\r\n|\n/);
+				var count = lines.length - 1;
+				console.log(count); 
+
+     			/*if (jQuery.inArray(id, Arrays)){
+     				//Arrays.push("'id': '"+id+"', 'info': [{'text': '"+text+"', 'link': '"+url+"', 'line': '"+line+"'}]}");
+     				alert('toto');
+     			}
+     			else{
+     				alert('test');	
+     			}*/
+     			/*var t = "{'id': '"+id+"', 'text': '"+text+"', 'link': "+url+", 'line': "+line+"}";
+
+     			//Arrays.push(JSON.stringify(eval("(" + t + ")")));
+     			Arrays.push("'id': '"+id+"', 'text': '"+text+"', 'link': '"+url+"', 'line': '"+line+"'}");
+     			alert(Arrays);
+         		
+
+         		// Get file content
+         		//alert(getFileContent(pathFile));
+         		window.toto = window.getFileContent(pathFile);
+         		//alert(getFileContent(pathFile));
+         		text = toto.replace($(this).prev().text(), this.value);
+         		getLastCommit();
+
+         		$(this).prev().html(this.value);*/
+         		//pathFile = 'https://api.github.com/repos/StefanLage/TestWikiDoc/git/blobs/' + id;
+         		/*var pathBlob = 'https://api.github.com/repos/StefanLage/TestWikiDoc/git/blobs/' + id;
+				$.when(getFileContent(pathBlob, $(this).prev().text(), this.value)).done(function(){
+
+						//alert(text);
+						//text = this.value;
+						getLastCommit();
+
+						
+				});
+				
+				$(this).prev().html(this.value);
+         		//om($(this).prev().attr('id'), this.value, $(this).prev().attr('title'), $(this).prev());
+     	}	*/
+
+     	$('#modal' ).show().prepend('<a href="" class="close"><img src="resources/icons/close.png" class="btn_close" title="Fermer" alt="Fermer" /></a>');
+			 //Effet fade-in du fond opaque
+		$('body').append('<div id="fade"></div>'); //Ajout du fond opaque noir
+		//Apparition du fond - .css({'filter' : 'alpha(opacity=80)'}) pour corriger les bogues de IE
+		$('#fade').css({'filter' : 'alpha(opacity=80)'}).fadeIn();
+
+		idBlob = $(this).prev().attr('id');
+		newComment = this.value;
+		
+
+     	$(this).hide();
+     	$(this).prev().show();
+     	$(this).prev().prev().show();        
+	});
+
+
+	//Close Popups and Fade Layer
+	$('body').on('click', 'a.close, #fade', function() { //Au clic sur le body...
+		$('#fade , #modal').fadeOut(function() {
+			$('#fade, a.close').remove();  
+		});
+	});
+
+	$('#loginAction').click(function(){
+
+		var text;
+		var url;
+		var line;
+
+		userName = $('#login').val();
+		password = $('#password').val();
+		userB64 = "Basic " +  base64.encode(userName+':'+password);
+		githubRepo = $('#repoName').attr('name');
+		commitMessage = $('#commitMessage').val();
+		
+		if(commitMessage == ""){
+			commitMessage = "New commit";
+		}
+
+		$('#fade , #modal').fadeOut(function() {
+			$('#login').val("");
+			$('#password').val("");
+			$('#fade, a.close').remove();  
+		});
+		if(userName != "" && password != ""){	
+			if ($.trim(newComment) == ''){
+	         		this.value = (this.defaultValue ? this.defaultValue : '');
+	         		alert('toto');
+	     	}
+	     	else{
+	     			
+	     			text = newComment.replace("'", "`");
+	     			pathFile = "/lib/standard/collection/array.nit";
+	     			//pathFile = 'https://api.github.com/repos/StefanLage/TestWikiDoc/git/blobs/' + id;
+	     			line = $(this).prev().attr('title');
+
+	     			var lines = $(this).prev().text().split(/\r|\r\n|\n/);
+					var count = lines.length - 1;
+					console.log(count); 
+
+	     			/*if (jQuery.inArray(id, Arrays)){
+	     				//Arrays.push("'id': '"+id+"', 'info': [{'text': '"+text+"', 'link': '"+url+"', 'line': '"+line+"'}]}");
+	     				alert('toto');
+	     			}
+	     			else{
+	     				alert('test');	
+	     			}*/
+	     			/*var t = "{'id': '"+id+"', 'text': '"+text+"', 'link': "+url+", 'line': "+line+"}";
+
+	     			//Arrays.push(JSON.stringify(eval("(" + t + ")")));
+	     			Arrays.push("'id': '"+id+"', 'text': '"+text+"', 'link': '"+url+"', 'line': '"+line+"'}");
+	     			alert(Arrays);
+	         		
+
+	         		// Get file content
+	         		//alert(getFileContent(pathFile));
+	         		window.toto = window.getFileContent(pathFile);
+	         		//alert(getFileContent(pathFile));
+	         		text = toto.replace($(this).prev().text(), this.value);
+	         		getLastCommit();
+
+	         		$(this).prev().html(this.value);*/
+	         		//pathFile = 'https://api.github.com/repos/StefanLage/TestWikiDoc/git/blobs/' + id;
+	         		var pathBlob = 'https://api.github.com/repos/'+userName+'/'+githubRepo+'/git/blobs/' + idBlob;
+					$.when(getFileContent(pathBlob, preElement.text(), newComment)).done(function(){
+
+							//alert(text);
+							//text = this.value;
+							getLastCommit();
+
+							
+					});
+					
+					//$(this).prev().html(this.value);
+	         		//om($(this).prev().attr('id'), this.value, $(this).prev().attr('title'), $(this).prev());
+	     	}
+	     }
+	})
+
+
 });
 
 /* Parse current URL and return anchor name */
@@ -399,4 +603,390 @@ function highlightBlock(a) {
 	
 	target.addClass("highlighted");
 	target.show();
+}
+
+
+
+
+
+
+
+function com(id, text, line, element)
+{
+	//text = this.value.replace("'", "`");
+	//pathFile = $(this).prev().attr('name');
+	
+	//line = $(this).prev().attr('title');
+
+	/*var lines = $(this).prev().text().split(/\r|\r\n|\n/);
+	var count = lines.length - 1;
+	console.log(count); */
+
+	//Arrays.push(JSON.stringify(eval("(" + t + ")")));
+	//Arrays.push("'id': '"+id+"', 'text': '"+text+"', 'link': '"+url+"', 'line': '"+line+"'}");
+	//alert(Arrays);
+
+
+	// Get file content
+	//alert(getFileContent(pathFile));
+	//window.toto = window.getFileContent(pathFile, t, t2);
+
+	//pathFile = 'https://api.github.com/repos/StefanLage/TestWikiDoc/git/blobs/' + $.sha1("blob"+ $(this).attr +"\0" + id + "\n");
+	$.when(getFileContent(pathFile)).done(function(){
+
+			//alert(text);
+			text.
+			getLastCommit();
+
+			element.html(this.value);
+	});
+	
+}
+
+
+
+
+
+function loadContent()
+{
+    state = false;
+    //getLastCommit();
+    //getCurrentTree();
+
+    //$("ul").empty();
+
+    loadFile();
+}
+
+function loadFile()
+{
+    getLastCommit();
+    getBlobsTree(shaBaseTree);
+}
+
+
+function getLastCommit() 
+{
+    
+
+    $.ajax({
+        beforeSend: function (xhr) { 
+            //if ($("#login").val() != ""){ 
+                xhr.setRequestHeader ("Authorization", userB64);
+            //}
+        },
+        type: "GET",
+        url: "https://api.github.com/repos/"+userName+"/"+githubRepo+"/git/refs/heads/master",
+        dataType:"json",
+        async: false,
+
+        success: function(success)
+        {
+            shaLastCommit = success.object.sha;
+            getBaseTree();
+        }
+    });
+}
+
+function getBaseTree()
+{
+    $.ajax({ 
+        beforeSend: function (xhr) { 
+            //if ($("#login").val() != ""){ 
+                xhr.setRequestHeader ("Authorization", userB64);
+            //}
+        },
+        type: "GET",
+        url: "https://api.github.com/repos/"+userName+"/"+githubRepo+"/git/commits/" + shaLastCommit,
+        dataType:"json",
+        async: false,
+        success: function(success)
+        {   
+            shaBaseTree = success.tree.sha;
+            if (state){
+                setBlob();
+            }
+            else
+            {
+                //getCurrentTree();
+                return;
+            }
+        }
+    });
+}
+
+function setNewTree()
+{
+	//pathFile = "lib/array.nit";
+
+    $.ajax({ 
+        beforeSend: function (xhr) { 
+            xhr.setRequestHeader ("Authorization", userB64);
+        },
+        type: "POST",
+        url: "https://api.github.com/repos/"+userName+"/"+githubRepo+"/git/trees", 
+        data:'{ "base_tree" : "'+shaBaseTree+'", '+
+                '"tree":[{ '+
+                    '"path":"'+ pathFile.substring(1,pathFile.length) +'",'+
+                    '"mode":"100644",'+
+                    '"type":"blob",'+
+                    '"sha": "'+ shaBlob +'"'+
+                '}] '+
+            '}',
+        
+        success: function(success)
+        { // si l'appel a bien fonctionné
+            shaNewTree = JSON.parse(success).sha;
+            setNewCommit();
+        }
+    });
+}
+
+function setNewCommit()
+{
+    $.ajax({ 
+        beforeSend: function (xhr) { 
+            xhr.setRequestHeader ("Authorization", userB64);
+        },
+        type: "POST",
+        url: "https://api.github.com/repos/"+userName+"/"+githubRepo+"/git/commits", 
+        data:'{ "message" : "'+ commitMessage +'", '+
+                '"parents" :"'+shaLastCommit+'",'+ 
+                '"tree": "'+shaNewTree+'"'+
+             '}',
+
+        success: function(success)
+        {
+            shaNewCommit = JSON.parse(success).sha;
+            commit();
+        }
+    });
+}
+
+function commit()
+{
+    $.ajax({ 
+        beforeSend: function (xhr) { 
+            xhr.setRequestHeader ("Authorization", userB64);
+        },
+        type: "POST",
+        url: "https://api.github.com/repos/"+userName+"/"+githubRepo+"/git/refs/heads/master", 
+        data:'{ "sha" : "'+shaNewCommit+'", '+
+                '"force" :"true"'+
+             '}',
+
+        success: function(success)
+        {
+            //loadContent();
+            window.open(JSON.parse(success).object.url, '_blank');
+            window.focus();
+        }
+    });
+}
+
+
+function setBlob()
+{
+    //alert($(".text_label").text());
+    //alert(text);
+    $.ajax({
+        beforeSend: function (xhr) { 
+            xhr.setRequestHeader ("Authorization",  userB64);
+        },
+        type: "POST", 
+        url: "https://api.github.com/repos/"+userName+"/"+githubRepo+"/git/blobs", 
+        data:'{ "content" : "'+text.replace(/\r?\n/g, '\\n').replace(/\t/g, '\\t')+'", '+
+                '"encoding" :"utf-8"'+
+            '}',
+        
+        success: function(success)
+        {
+            //alert(success); 
+            shaBlob = JSON.parse(success).sha;
+            setNewTree();
+        }
+    });
+}
+
+
+// Display file content
+function getFileContent(urlFile, t, t2)
+{
+    $.ajax({
+        beforeSend: function (xhr) { 
+            xhr.setRequestHeader ("Accept",  "application/vnd.github-blob.raw");
+            //if ($("#login").val() != ""){ 
+                xhr.setRequestHeader ("Authorization", userB64);
+            //}
+        },
+        type: "GET", 
+        url: urlFile, 
+        async:false,
+
+        success: function(success)
+        {
+            //$("#fileContent").text(success);
+            //$('.text_label').text(success);
+
+            state = true;
+            text = success.replace(t, t2);
+            //alert(text);
+            //return text;
+        }
+    });
+
+    //alert('toto');
+}
+
+
+// Get BLOBS of the Tree
+function getBlobsTree(tree)
+{
+    $.ajax({
+        beforeSend: function (xhr) { 
+            //if ($("#login").val() != ""){ 
+                xhr.setRequestHeader ("Authorization", userB64);
+            //}
+        },
+        type: "GET", 
+        url: "https://api.github.com/repos/"+userName+"/"+githubRepo+"/git/trees/" + tree, 
+        async:false,
+        dataType:'json',
+
+        success: function(success)
+        {   
+            $(success.tree).each(function(index, object){
+                
+                if(object.mode == "040000"){
+                    if(recurTree == ""){
+                        recurTree = object.path + "/";
+                    }
+                    else{
+                        recurTree += object.path;
+                    }
+                    getBlobsTree(object.sha);
+                }
+                else{
+                    addLi(object, recurTree + object.path);
+                } 
+            })
+            recurTree = "";
+        }
+    });
+}
+
+// Add file in UL
+function addLi(blob, path)
+{
+    $(".menu ul").append('<li id="'+blob.sha+'" name="'+path+'"><a><span class="'+path+'" name="'+path+'" id="'+blob.sha+'">'+blob.path+'</span></a></li>');
+}
+
+
+
+base64 = {};
+base64.PADCHAR = '=';
+base64.ALPHA = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+base64.getbyte64 = function(s,i) {
+    // This is oddly fast, except on Chrome/V8.
+    //  Minimal or no improvement in performance by using a
+    //   object with properties mapping chars to value (eg. 'A': 0)
+    var idx = base64.ALPHA.indexOf(s.charAt(i));
+    if (idx == -1) {
+    throw "Cannot decode base64";
+    }
+    return idx;
+}
+
+base64.decode = function(s) {
+    // convert to string
+    s = "" + s;
+    var getbyte64 = base64.getbyte64;
+    var pads, i, b10;
+    var imax = s.length
+    if (imax == 0) {
+        return s;
+    }
+
+    if (imax % 4 != 0) {
+    throw "Cannot decode base64";
+    }
+
+    pads = 0
+    if (s.charAt(imax -1) == base64.PADCHAR) {
+        pads = 1;
+        if (s.charAt(imax -2) == base64.PADCHAR) {
+            pads = 2;
+        }
+        // either way, we want to ignore this last block
+        imax -= 4;
+    }
+
+    var x = [];
+    for (i = 0; i < imax; i += 4) {
+        b10 = (getbyte64(s,i) << 18) | (getbyte64(s,i+1) << 12) |
+            (getbyte64(s,i+2) << 6) | getbyte64(s,i+3);
+        x.push(String.fromCharCode(b10 >> 16, (b10 >> 8) & 0xff, b10 & 0xff));
+    }
+
+    switch (pads) {
+    case 1:
+        b10 = (getbyte64(s,i) << 18) | (getbyte64(s,i+1) << 12) | (getbyte64(s,i+2) << 6)
+        x.push(String.fromCharCode(b10 >> 16, (b10 >> 8) & 0xff));
+        break;
+    case 2:
+        b10 = (getbyte64(s,i) << 18) | (getbyte64(s,i+1) << 12);
+        x.push(String.fromCharCode(b10 >> 16));
+        break;
+    }
+    return x.join('');
+}
+
+base64.getbyte = function(s,i) {
+    var x = s.charCodeAt(i);
+    if (x > 255) {
+        throw "INVALID_CHARACTER_ERR: DOM Exception 5";
+    }
+    return x;
+}
+
+
+base64.encode = function(s) {
+    if (arguments.length != 1) {
+    throw "SyntaxError: Not enough arguments";
+    }
+    var padchar = base64.PADCHAR;
+    var alpha   = base64.ALPHA;
+    var getbyte = base64.getbyte;
+
+    var i, b10;
+    var x = [];
+
+    // convert to string
+    s = "" + s;
+
+    var imax = s.length - s.length % 3;
+
+    if (s.length == 0) {
+        return s;
+    }
+    for (i = 0; i < imax; i += 3) {
+        b10 = (getbyte(s,i) << 16) | (getbyte(s,i+1) << 8) | getbyte(s,i+2);
+        x.push(alpha.charAt(b10 >> 18));
+        x.push(alpha.charAt((b10 >> 12) & 0x3F));
+        x.push(alpha.charAt((b10 >> 6) & 0x3f));
+        x.push(alpha.charAt(b10 & 0x3f));
+    }
+    switch (s.length - imax) {
+    case 1:
+        b10 = getbyte(s,i) << 16;
+        x.push(alpha.charAt(b10 >> 18) + alpha.charAt((b10 >> 12) & 0x3F) +
+               padchar + padchar);
+        break;
+    case 2:
+        b10 = (getbyte(s,i) << 16) | (getbyte(s,i+1) << 8);
+        x.push(alpha.charAt(b10 >> 18) + alpha.charAt((b10 >> 12) & 0x3F) +
+               alpha.charAt((b10 >> 6) & 0x3f) + padchar);
+        break;
+    }
+    return x.join('');
 }
