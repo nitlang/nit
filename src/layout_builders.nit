@@ -34,11 +34,6 @@ class PHLayout[HOLDER: Object, E: Object]
 	var hashes: Map[HOLDER, Map[E, Int]] = new HashMap[HOLDER, Map[E, Int]]
 end
 
-class PropertyLayout[E: Object]
-	# Fixed positions of each element in all tables
-	var pos: Map[E, Int] = new HashMap[E, Int]
-end
-
 # Builders
 
 interface TypingLayoutBuilder[E: Object]
