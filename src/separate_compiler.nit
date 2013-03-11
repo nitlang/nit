@@ -371,7 +371,7 @@ class SeparateCompiler
 		end
 
 		for mtype in mtypes do
-			retieve_live_partial_types(mtype)
+			retrieve_partial_types(mtype)
 		end
 		mtypes.add_all(self.partial_types)
 
@@ -505,7 +505,7 @@ class SeparateCompiler
 		return tables
 	end
 
-	fun retieve_live_partial_types(mtype: MType) do
+	fun retrieve_partial_types(mtype: MType) do
 		# add formal types arguments to mtypes
 		if mtype isa MGenericType then
 			for ft in mtype.arguments do
@@ -514,7 +514,7 @@ class SeparateCompiler
 					abort
 				end
 				self.partial_types.add(ft)
-				retieve_live_partial_types(ft)
+				retrieve_partial_types(ft)
 			end
 		end
 		var mclass_type: MClassType
