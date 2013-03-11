@@ -26,9 +26,21 @@
   --no-union-attribute        Put primitive attibutes in a box instead of an union
   --no-shortcut-equal         Always call == in a polymorphic way
   --inline-coloring-numbers   Inline colors and ids
-  --bm-typing                 Colorize items incrementaly, used to simulate binary matrix typing
-  --phmod-typing              Replace coloration by perfect hashing (with mod operator)
-  --phand-typing              Replace coloration by perfect hashing (with and operator)
   --tables-metrics            Enable static size measuring of tables used for vft, typing and resolution
+  --bm-all-tables             Replace coloring by binary matrix for all tables
+  --phmod-all-tables          Replace coloring by perfect hashing for all tables (with mod operator)
+  --phand-all-tables          Replace coloring by perfect hashing for all tables (with and operator)
+  --bm-typing                 Replace typing tables coloring by binary matrix
+  --phmod-typing              Replace typing tables coloring by perfect hashing (with mod operator)
+  --phand-typing              Replace typing tables coloring by perfect hashing (with and operator)
+  --bm-resolution             Replace resolution tables coloring by binary matrix
+  --phmod-resolution          Replace resolution tables coloring by perfect hashing (with mod operator)
+  --phand-resolution          Replace resolution tables coloring by perfect hashing (with and operator)
+  --bm-vft                    Replace vft coloring by binary matrix
+  --phmod-vft                 Replace vft coloring by perfect hashing (with mod operator)
+  --phand-vft                 Replace vft coloring by perfect hashing (with and operator)
+  --bm-attrs                  Replace attributes tables coloring by binary matrix
+  --phmod-attrs               Replace attributes tables coloring by perfect hashing (with mod operator)
+  --phand-attrs               Replace attributes tables coloring by perfect hashing (with and operator)
   --erasure                   Erase generic types
   --no-check-erasure-cast     Disable implicit casts on unsafe return with erasure-typing policy (dangerous)

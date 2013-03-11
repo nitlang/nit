@@ -75,22 +75,32 @@ class SeparateErasureCompiler
 
 		var mclasses = new HashSet[MClass].from(mmbuilder.model.mclasses)
 
+		# typing layout
 		var layout_builder: TypingLayoutBuilder[MClass]
-		if modelbuilder.toolcontext.opt_phmod_typing.value then
-			layout_builder = new MClassHasher(new PHModOperator, mainmodule)
-		else if modelbuilder.toolcontext.opt_phand_typing.value then
-			layout_builder = new MClassHasher(new PHAndOperator, mainmodule)
-		else if modelbuilder.toolcontext.opt_bm_typing.value then
+		if modelbuilder.toolcontext.opt_bm_typing.value or modelbuilder.toolcontext.opt_bm_all_tables.value then
 			layout_builder = new MClassBMizer(mainmodule)
+		else if modelbuilder.toolcontext.opt_phmod_typing.value or modelbuilder.toolcontext.opt_phmod_all_tables.value then
+			layout_builder = new MClassHasher(new PHModOperator, mainmodule)
+		else if modelbuilder.toolcontext.opt_phand_typing.value or modelbuilder.toolcontext.opt_phand_all_tables.value then
+			layout_builder = new MClassHasher(new PHAndOperator, mainmodule)
 		else
 			layout_builder = new MClassColorer(mainmodule)
 		end
 		self.class_layout = layout_builder.build_layout(mclasses)
 		self.class_tables = self.build_class_typing_tables(mclasses)
 
-		# vt coloration
-		var vt_coloring = new MVirtualTypePropColorer(mainmodule)
-		var vt_layout = vt_coloring.build_layout(mclasses)
+		# resolution layout
+		var vt_layout_builder: PropertyLayoutBuilder[MVirtualTypeProp]
+		if modelbuilder.toolcontext.opt_bm_typing.value or modelbuilder.toolcontext.opt_bm_all_tables.value then
+			vt_layout_builder = new MVirtualTypePropBMizer(mainmodule)
+		else if modelbuilder.toolcontext.opt_phmod_typing.value or modelbuilder.toolcontext.opt_phmod_all_tables.value then
+			vt_layout_builder = new MVirtualTypePropHasher(new PHModOperator, mainmodule)
+		else if modelbuilder.toolcontext.opt_phand_typing.value or modelbuilder.toolcontext.opt_phand_all_tables.value then
+			vt_layout_builder = new MVirtualTypePropHasher(new PHAndOperator, mainmodule)
+		else
+			vt_layout_builder = new MVirtualTypePropColorer(mainmodule)
+		end
+		var vt_layout = vt_layout_builder.build_layout(mclasses)
 		self.vt_tables = build_vt_tables(mclasses, vt_layout)
 		self.compile_color_consts(vt_layout.pos)
 		self.vt_layout = vt_layout
