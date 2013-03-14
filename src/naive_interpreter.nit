@@ -901,6 +901,8 @@ redef class AExternMethPropdef
 			else if pname == "system" then
 				var res = sys.system(recvval.to_s)
 				return v.int_instance(res)
+			else if pname == "atof" then
+				return v.float_instance(recvval.to_f)
 			end
 		else if cname == "Int" then
 			if pname == "rand" then
