@@ -1,0 +1,4 @@
+../examples/hello_world.nit -o out/nitg-hello_world ; out/nitg-hello_world
+base_simple3.nit -o out/nitg-base_simple3 ; out/nitg-base_simple3
+--separate ../examples/hello_world.nit -o out/nitgs-hello_world ; out/nitgs-hello_world
+--separate base_simple3.nit -o out/nitgs-base_simple3 ; out/nitgs-base_simple3
