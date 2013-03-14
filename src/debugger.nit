@@ -875,6 +875,40 @@ class Debugger
 
 end
 
+# Traces the modifications of an object linked to a certain frame
+private class TraceObject
+
+	# Map of the local names bound to a frame
+	var trace_map: HashMap[Frame, String]
+	# Decides if breaking or printing statement when the variable is encountered
+	var break_on_encounter: Bool
+
+	init(break_on_encounter: Bool)
+	do
+		trace_map = new HashMap[Frame, String]
+		self.break_on_encounter = break_on_encounter
+	end
+
+	# Adds the local alias for a variable and the frame bound to it
+	fun add_frame_variable(frame: Frame, variable_name: String)
+	do
+		self.trace_map[frame] = variable_name
+	end
+
+	# Checks if the prompted variable is traced in the specified frame
+	fun is_variable_traced_in_frame(variable_name: String, frame: Frame): Bool
+	do
+		if self.trace_map.has_key(frame) then
+			if self.trace_map[frame] == variable_name then
+				return true
+			end
+		end
+
+		return false
+	end
+
+end
+
 redef class ANode
 
 	# Breaks automatically when encountering an error
