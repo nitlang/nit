@@ -417,7 +417,7 @@ end
 
 class MMNullableType
 	super MMType
-	var _base_type: MMType
+	readable var _base_type: MMType
 	redef fun is_valid do return _base_type.is_valid
 	redef fun is_nullable: Bool do return true
 	redef fun as_notnull do return _base_type

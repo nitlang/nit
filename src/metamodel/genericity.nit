@@ -186,6 +186,14 @@ class MMTypeGeneric
 		return true
 	end
 
+	redef fun has_formal
+	do
+		for p in _params do
+			if p.has_formal then return true
+		end
+		return false
+	end
+
 	init(c: MMLocalClass, p: Array[MMType])
 	do
 		super(c)

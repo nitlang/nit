@@ -23,6 +23,8 @@ import inheritance
 redef class MMType
 	# The type a indirect type refers to
 	fun direct_type: MMType do return self
+
+	fun has_formal: Bool do return false
 end
 
 # Formal types are named indirect types
@@ -42,6 +44,7 @@ abstract class MMTypeFormal
 	redef fun is_nullable do return _bound.is_nullable
 	redef fun direct_type do return _bound.direct_type
 	redef fun local_class do return _bound.local_class
+	redef fun has_formal do return true
 
 	redef fun to_s do return _name.to_s
 
@@ -52,3 +55,6 @@ abstract class MMTypeFormal
 	end
 end
 
+redef class MMNullableType
+	redef fun has_formal do return self.base_type.has_formal
+end
