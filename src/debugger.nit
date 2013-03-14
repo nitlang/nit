@@ -70,7 +70,11 @@ class Debugger
 	# if the instruction is a function call)
 	var step_in_trigger = false
 
+	# HashMap containing the breakpoints bound to a file
 	var breakpoints = new HashMap[String, HashSet[Breakpoint]]
+
+	# Contains the current file
+	var curr_file = ""
 
 	#######################################################################
 	##                  Execution of statement function                  ##
@@ -86,6 +90,8 @@ class Debugger
 		frame.current_node = n
 
 		steps_fun_call(n)
+
+		breakpoint_check(n)
 
 		n.stmt(self)
 		frame.current_node = old
@@ -105,6 +111,21 @@ class Debugger
 				while process_debug_command(gets) do end
 			end
 		else if step_in_trigger then
+			n.debug("Execute stmt {n.to_s}")
+			while process_debug_command(gets) do end
+		end
+	end
+
+	# Checks if a breakpoint is encountered, and launches the debugging prompt if true
+	private fun breakpoint_check(n: AExpr)
+	do
+		var currFileNameSplit = self.frame.current_node.location.file.filename.to_s.split_with("/")
+
+		self.curr_file = currFileNameSplit[currFileNameSplit.length-1]
+
+		var breakpoint = find_breakpoint(curr_file, n.location.line_start)
+
+		if breakpoints.keys.has(curr_file) and breakpoint != null then
 			n.debug("Execute stmt {n.to_s}")
 			while process_debug_command(gets) do end
 		end
