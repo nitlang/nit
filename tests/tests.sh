@@ -375,7 +375,9 @@ END
 						echo "NIT_NO_STACK=1 ./$ff.bin" $args
 					fi
 					test -z "$tap" && echo -n "==> args #"$cptr " "
-					sh -c "NIT_NO_STACK=1 $TIMEOUT ./$ff.bin  ''$args < $inputs > $fff.res 2>$fff.err"
+					echo "./$ff.bin $args" > "./$fff.bin"
+					chmod +x "./$fff.bin"
+					sh -c "NIT_NO_STACK=1 $TIMEOUT ./$fff.bin < $inputs > $fff.res 2>$fff.err"
 					if [ "x$verbose" = "xtrue" ]; then
 						cat "$fff.res"
 						cat >&2 "$fff.err"
