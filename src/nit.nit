@@ -53,7 +53,9 @@ if toolcontext.opt_only_metamodel.value then exit(0)
 assert mmodules.length == 1
 var mainmodule = mmodules.first
 
-if toolcontext.opt_debugger_mode.value then
+if toolcontext.opt_debugger_autorun.value then
+	modelbuilder.run_debugger_autorun(mainmodule, arguments)
+else if toolcontext.opt_debugger_mode.value then
 	modelbuilder.run_debugger(mainmodule, arguments)
 else
 	modelbuilder.run_naive_interpreter(mainmodule, arguments)

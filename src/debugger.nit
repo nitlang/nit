@@ -23,11 +23,14 @@ intrude import naive_interpreter
 redef class ToolContext
 	# -d
 	var opt_debugger_mode: OptionBool = new OptionBool("Launches the target program with the debugger attached to it", "-d")
+	# -c
+	var opt_debugger_autorun: OptionBool = new OptionBool("Launches the target program with the interpreter, such as when the program fails, the debugging prompt is summoned", "-c")
 
 	redef init
 	do
 		super
 		self.option_context.add_option(self.opt_debugger_mode)
+		self.option_context.add_option(self.opt_debugger_autorun)
 	end
 end
 
@@ -44,6 +47,20 @@ redef class ModelBuilder
 		self.toolcontext.info("*** START INTERPRETING ***", 1)
 
 		var interpreter = new Debugger(self, mainmodule, arguments)
+
+		init_naive_interpreter(interpreter, mainmodule)
+
+		var time1 = get_time
+		self.toolcontext.info("*** END INTERPRETING: {time1-time0} ***", 2)
+	end
+
+	fun run_debugger_autorun(mainmodule: MModule, arguments: Array[String])
+	do
+		var time0 = get_time
+		self.toolcontext.info("*** START INTERPRETING ***", 1)
+
+		var interpreter = new Debugger(self, mainmodule, arguments)
+		interpreter.autocontinue = true
 
 		init_naive_interpreter(interpreter, mainmodule)
 
@@ -93,6 +110,9 @@ class Debugger
 	# If it is not, then, the remapping won't be happening
 	var frame_count_aftermath = 1
 
+	# Auto continues the execution until the end or until an error is encountered
+	var autocontinue = false
+
 	#######################################################################
 	##                  Execution of statement function                  ##
 	#######################################################################
@@ -106,16 +126,18 @@ class Debugger
 		var old = frame.current_node
 		frame.current_node = n
 
-		if not n isa ABlockExpr then
-			steps_fun_call(n)
+		if not self.autocontinue then
+			if not n isa ABlockExpr then
+				steps_fun_call(n)
 
-			breakpoint_check(n)
+				breakpoint_check(n)
 
-			check_funcall_and_traced_args(n)
+				check_funcall_and_traced_args(n)
 
-			remap(n)
+				remap(n)
 
-			check_if_vars_are_traced(n)
+				check_if_vars_are_traced(n)
+			end
 		end
 
 		n.stmt(self)
