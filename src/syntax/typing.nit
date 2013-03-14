@@ -2049,7 +2049,7 @@ abstract class ATypeCheckExpr
 		if etype == ttype then
 			v.warning(self, "Warning: Expression is already a {ttype}.")
 		else if etype < ttype then
-			if not ttype isa MMTypeFormal then
+			if not ttype.has_formal and not etype.has_formal then
 				# the old metamodel is not that great with formal types
 				v.warning(self, "Warning: Expression is already a {ttype} since it is a {etype}.")
 			end
