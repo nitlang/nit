@@ -19,6 +19,17 @@ module debugger
 
 intrude import naive_interpreter
 
+redef class ToolContext
+	# -d
+	var opt_debugger_mode: OptionBool = new OptionBool("Launches the target program with the debugger attached to it", "-d")
+
+	redef init
+	do
+		super
+		self.option_context.add_option(self.opt_debugger_mode)
+	end
+end
+
 redef class ModelBuilder
 	# Execute the program from the entry point (Sys::main) of the `mainmodule'
 	# `arguments' are the command-line arguments in order
