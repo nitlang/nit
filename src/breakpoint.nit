@@ -20,14 +20,41 @@ module breakpoint
 # Contains all the informations of a Breakpoint for the Debugger
 class Breakpoint
 
+	# Line to break on
 	var line: Int
 
+	# File concerned by the breakpoint
 	var file: String
+
+	# Maximum times to break on self
+	var max_breaks: Int
 
 	init(line: Int, file: String)
 	do
 		self.line = line
 		self.file = file
+		self.max_breaks = -1
+	end
+
+	fun set_max_breaks(breaks: Int)
+	do
+		self.max_breaks = breaks
+	end
+
+	# When the breakpoint is encountered, the check-in function should be called
+	fun check_in
+	do
+		if self.max_breaks > 0 then self.max_breaks -= 1
+	end
+
+	# Checks if the breakpoint is still valid (that is, if it has a remaining breaks number > 0 or == -1)
+	fun is_valid: Bool
+	do
+		if max_breaks == 0 then
+			return false
+		else
+			return true
+		end
 	end
 
 end
