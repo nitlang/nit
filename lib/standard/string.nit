@@ -139,6 +139,25 @@ abstract class AbstractString
 			return i
 		end
 	end
+	
+	# Returns true if the string contains only Numeric values (and one "," or one "." character)
+	fun is_numeric: Bool
+	do
+		var has_point_or_comma = false
+		for i in self
+		do
+			if not i.is_numeric
+			then
+				if (i == '.' or i == ',') and not has_point_or_comma
+				then
+					has_point_or_comma = true
+				else
+					return false
+				end
+			end
+		end
+		return true
+	end
 
 	# A upper case version of `self'
 	fun to_upper: String
@@ -513,6 +532,17 @@ redef class Char
 		s[0] = self
 		return s.to_s
 	end
+	
+	# Returns true if the char is a numerical digit
+	fun is_numeric: Bool
+	do
+		if self >= '0' and self <= '9'
+		then
+			return true
+		end
+		return false
+	end
+
 end
 
 redef class Collection[E]
