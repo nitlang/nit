@@ -69,4 +69,25 @@ class Debugger
 		return null
 	end
 
+	# Recursive function, returns the variable described by 'total_chain'
+	fun get_variable_in_mutable_instance(variable: MutableInstance, iterator: Iterator[String]): nullable Instance
+	do
+		var attribute = get_attribute_in_mutable_instance(variable, iterator.item)
+
+		if attribute == null then return null
+
+		iterator.next
+
+		if iterator.is_ok then
+			var new_variable = variable.attributes[attribute]
+			if new_variable isa MutableInstance then
+				return get_variable_in_mutable_instance(new_variable, iterator)
+			else
+				return null
+			end
+		else
+			return variable.attributes[attribute]
+		end
+	end
+
 end
