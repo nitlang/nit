@@ -55,6 +55,26 @@ end
 class Debugger
 	super NaiveInterpreter
 
+	# Seeks a variable from the current frame called 'variable_path', can introspect complex objects using function get_variable_in_mutable_instance
+	private fun seek_variable(variable_path: String, frame: Frame): nullable Instance
+	do
+		var full_variable = variable_path.split_with(".")
+
+		var full_variable_iterator = full_variable.iterator
+
+		var first_instance = get_variable_in_frame(full_variable_iterator.item, frame)
+
+		if first_instance == null then	return null
+
+		if full_variable.length <= 1 then return first_instance
+
+		full_variable_iterator.next
+
+		if not (first_instance isa MutableInstance and full_variable_iterator.is_ok) then return null
+
+		return get_variable_in_mutable_instance(first_instance, full_variable_iterator)
+	end
+
 	# Gets a variable 'variable_name' contained in the frame 'frame'
 	private fun get_variable_in_frame(variable_name: String, frame: Frame): nullable Instance
 	do
