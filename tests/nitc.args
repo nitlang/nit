@@ -1,1 +1,2 @@
---log --log-dir out/test_nitc_logs ../examples/hello_world.nit -o out/hello_world
+--log --log-dir out/test_nitc_logs ../examples/hello_world.nit -o out/nitc-hello_world ; out/nitc-hello_world
+base_simple3.nit -o out/nitc-base_simple3 ; out/nitc-base_simple3
