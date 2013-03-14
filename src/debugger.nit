@@ -521,6 +521,50 @@ class Debugger
 		return null
 	end
 
+	# Removes the braces '[' ']' in a print array command
+	# Returns an array containing their content
+	fun remove_braces(braces: String): nullable Array[String]
+	do
+		var buffer = new Buffer
+
+		var result_array = new Array[String]
+
+		var number_of_opening_brackets = 0
+		var number_of_closing_brackets = 0
+
+		var last_was_opening_bracket = false
+
+		for i in braces do
+			if i == '[' then
+				if last_was_opening_bracket then
+					return null
+				end
+
+				number_of_opening_brackets += 1
+				last_was_opening_bracket = true
+			else if i == ']' then
+				if not last_was_opening_bracket then
+					return null
+				end
+
+				result_array.push(buffer.to_s)
+				buffer.clear
+				number_of_closing_brackets += 1
+				last_was_opening_bracket = false
+			else if i.is_numeric or i == '.' then
+				buffer.append(i.to_s)
+			else if not i == ' ' then
+				return null
+			end
+		end
+
+		if number_of_opening_brackets != number_of_closing_brackets then
+			return null
+		end
+
+		return result_array
+	end
+
 	#######################################################################
 	##                   Breakpoint placing functions                    ##
 	#######################################################################
