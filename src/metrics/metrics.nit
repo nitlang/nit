@@ -15,13 +15,15 @@
 # limitations under the License.
 
 # Various statistics about Nit models and programs
-module stats
+module metrics
 
-import stats_base
-import count_ntypes
-import visit_nullable_sends
-import visit_self
-import model_stats
+import metrics_base
+import inheritance_metrics
+import refinement_metrics
+import static_types_metrics
+import nullables_metrics
+import self_metrics
 import generate_hierarchies
-import rta_stats
+import rta_metrics
 import model_hyperdoc
+import tables_metrics

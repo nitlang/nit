@@ -14,12 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# A program that collects various data about nit programs and libraries
-module nitstats
+# A program that collects various metrics on nit programs and libraries
+module nitmetrics
 
 import modelbuilder
 import exprbuilder
-import stats
+import metrics
 
 # Create a tool context to handle options and paths
 var toolcontext = new ToolContext
@@ -53,28 +53,57 @@ else
 	mainmodule.set_imported_mmodules(mmodules)
 end
 
-# Now, we just have to play with the model!
-print "*** STATS ***"
+print "*** METRICS ***"
 
-print ""
-compute_statistics(model)
+# All metrics computation ?
+var all = toolcontext.opt_all.value
 
-print ""
-visit_self(modelbuilder)
+# Inheritance usage metrics
+if all or toolcontext.opt_inheritance.value then
+	print ""
+	compute_inheritance_metrics(toolcontext, model)
+end
 
-print ""
-visit_nullable_sends(modelbuilder)
+# Refinement usage metrics
+if all or toolcontext.opt_refinement.value then
+	print ""
+	compute_refinement_metrics(model)
+end
 
-print ""
-count_ntypes(modelbuilder)
+# Self usage metrics
+if all or toolcontext.opt_self.value then
+	print ""
+	compute_self_metrics(modelbuilder)
+end
 
-generate_module_hierarchy(toolcontext, model)
-generate_classdef_hierarchy(toolcontext, model)
-generate_class_hierarchy(toolcontext, mainmodule)
-generate_model_hyperdoc(toolcontext, model)
+# Nullables metrics
+if all or toolcontext.opt_nullables.value then
+	print ""
+	compute_nullables_metrics(modelbuilder)
+end
 
-print ""
-compute_tables(mainmodule)
+# Static types metrics
+if all or toolcontext.opt_static_types.value then
+	print ""
+	compute_static_types_metrics(modelbuilder)
+end
 
-print ""
-compute_rta_stats(modelbuilder, mainmodule)
+# Tables metrics
+if all or toolcontext.opt_tables.value then
+	print ""
+	compute_tables_metrics(mainmodule)
+end
+
+# RTA metrics
+if all or toolcontext.opt_rta.value then
+	print ""
+	compute_rta_metrics(modelbuilder, mainmodule)
+end
+
+# Generate Hyperdoc
+if toolcontext.opt_generate_hyperdoc.value then
+	generate_module_hierarchy(toolcontext, model)
+	generate_classdef_hierarchy(toolcontext, model)
+	generate_class_hierarchy(toolcontext, mainmodule)
+	generate_model_hyperdoc(toolcontext, model)
+end

@@ -14,11 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Statistics about the usage of explicit and implicit self
-module visit_self
+# Metrics about the usage of explicit and implicit self
+module self_metrics
 
 import modelbuilder
-private import stats_base
+private import metrics_base
 
 private class ASelfVisitor
 	super Visitor
@@ -37,8 +37,8 @@ private class ASelfVisitor
 	end
 end
 
-# Visit the AST and print statistics about the usage of self.
-fun visit_self(modelbuilder: ModelBuilder)
+# Visit the AST and print metics about the usage of self.
+fun compute_self_metrics(modelbuilder: ModelBuilder)
 do
 	print "--- Explicit vs. Implicit Self ---"
 	# Visit all the source code to collect data
