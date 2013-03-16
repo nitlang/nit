@@ -1379,6 +1379,8 @@ redef class AAttrPropdef
 			modelbuilder.error(self, "Error: Attempt to define attribute {name} in the interface {mclass}.")
 		else if mclass.kind == enum_kind then
 			modelbuilder.error(self, "Error: Attempt to define attribute {name} in the enum class {mclass}.")
+		else if mclass.kind == extern_kind then
+			modelbuilder.error(self, "Error: Attempt to define attribute {name} in the extern class {mclass}.")
 		end
 
 		var nid = self.n_id
