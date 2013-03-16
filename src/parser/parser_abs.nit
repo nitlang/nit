@@ -47,9 +47,6 @@ end
 class TKwenum
 	super Token
 end
-class TKwspecial
-	super Token
-end
 class TKwend
 	super Token
 end
@@ -421,6 +418,7 @@ end
 class AExternClasskind
 	super AClasskind
     readable var _n_kwextern: TKwextern
+    readable var _n_kwclass: nullable TKwclass = null
 end
 class AFormaldef
 	super AFormaldef
@@ -429,8 +427,7 @@ class AFormaldef
 end
 class ASuperclass
 	super ASuperclass
-    readable var _n_kwspecial: nullable TKwspecial = null
-    readable var _n_kwsuper: nullable TKwsuper = null
+    readable var _n_kwsuper: TKwsuper
     readable var _n_type: AType
 end
 class AAttrPropdef

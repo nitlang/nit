@@ -88,9 +88,6 @@ end
 class TKwenum
 	super TokenKeyword
 end
-class TKwspecial
-	super TokenKeyword
-end
 class TKwend
 	super TokenKeyword
 end
@@ -475,6 +472,7 @@ end
 class AExternClasskind
        super AClasskind
     readable var _n_kwextern: TKwextern
+    readable var _n_kwclass: nullable TKwclass = null
 end
 class AFormaldef
 	super Prod
@@ -483,8 +481,7 @@ class AFormaldef
 end
 class ASuperclass
 	super Prod
-    readable var _n_kwspecial: nullable TKwspecial = null
-    readable var _n_kwsuper: nullable TKwsuper = null
+    readable var _n_kwsuper: TKwsuper
     readable var _n_type: AType
 end
 abstract class APropdef super Prod
@@ -571,43 +568,43 @@ abstract class AExternCall
 	super Prod
 end
 abstract class APropExternCall
-special AExternCall
+super AExternCall
 end
 class ALocalPropExternCall
-special APropExternCall
+super APropExternCall
     readable var _n_methid: AMethid
 end
 class AFullPropExternCall
-special APropExternCall
+super APropExternCall
     readable var _n_classid: TClassid
     readable var _n_quad: nullable TQuad = null
     readable var _n_methid: AMethid
 end
 class AInitPropExternCall
-special APropExternCall
+super APropExternCall
     readable var _n_classid: TClassid
 end
 class ASuperExternCall
-special AExternCall
+super AExternCall
     readable var _n_kwsuper: TKwsuper
 end
 abstract class ACastExternCall
-special AExternCall
+super AExternCall
 end
 class ACastAsExternCall
-special ACastExternCall
+super ACastExternCall
     readable var _n_from_type: AType
     readable var _n_kwas: TKwas
     readable var _n_to_type: AType
 end
 class AAsNullableExternCall
-special ACastExternCall
+super ACastExternCall
     readable var _n_type: AType
     readable var _n_kwas: TKwas
     readable var _n_kwnullable: TKwnullable
 end
 class AAsNotNullableExternCall
-special ACastExternCall
+super ACastExternCall
     readable var _n_type: AType
     readable var _n_kwas: TKwas
     readable var _n_kwnot: TKwnot
@@ -1185,7 +1182,7 @@ class ABreakClosureId
     readable var _n_kwbreak: TKwbreak
 end
 class AModuleName
-special Prod
+super Prod
     readable var _n_quad: nullable TQuad = null
     readable var _n_path: List[TId] = new List[TId]
     readable var _n_id: TId

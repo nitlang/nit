@@ -63,18 +63,18 @@ extern A
 end
 
 extern B
-special A
+super A
 end
 
 extern C `{int*`}
 end
 
 extern D
-special C
+super C
 end
 
 extern E
-special C
+super C
 end
 
 var a = new A

@@ -19,7 +19,7 @@ class A
 end
 
 class B
-special A
+super A
 	redef fun id : String is extern import super, String::from_cstring, String::to_cstring
 end
 

@@ -260,12 +260,12 @@ class Parser
 			new ReduceAction105(6),
 			new ReduceAction106(6),
 			new ReduceAction107(6),
-			new ReduceAction108(7),
+			new ReduceAction108(6),
 			new ReduceAction109(7),
-			new ReduceAction110(8),
-			new ReduceAction111(9),
+			new ReduceAction110(7),
+			new ReduceAction111(8),
 			new ReduceAction112(9),
-			new ReduceAction113(10),
+			new ReduceAction113(9),
 			new ReduceAction114(10),
 			new ReduceAction115(11),
 			new ReduceAction116(12),
@@ -5112,13 +5112,33 @@ private class ReduceAction107
 					var tkwexternnode2 = nodearraylist1
 					assert tkwexternnode2 isa nullable TKwextern
 					var pclasskindnode1: nullable AExternClasskind = new AExternClasskind.init_aexternclasskind(
-						tkwexternnode2
+						tkwexternnode2,
+						null
 					)
 					node_list = pclasskindnode1
 					p.push(p.go_to(_goto), node_list)
 	end
 end
 private class ReduceAction108
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var tkwexternnode2 = nodearraylist1
+					assert tkwexternnode2 isa nullable TKwextern
+					var tkwclassnode3 = nodearraylist2
+					assert tkwclassnode3 isa nullable TKwclass
+					var pclasskindnode1: nullable AExternClasskind = new AExternClasskind.init_aexternclasskind(
+						tkwexternnode2,
+						tkwclassnode3
+					)
+					node_list = pclasskindnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction109
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5137,7 +5157,7 @@ private class ReduceAction108
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction109
+private class ReduceAction110
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5160,7 +5180,7 @@ private class ReduceAction109
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction110
+private class ReduceAction111
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5173,7 +5193,7 @@ private class ReduceAction110
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction111
+private class ReduceAction112
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5189,7 +5209,7 @@ private class ReduceAction111
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction112
+private class ReduceAction113
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5208,28 +5228,6 @@ private class ReduceAction112
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction113
-	super ReduceAction
-	redef fun action(p: Parser)
-	do
-					var node_list: nullable Object = null
-					var nodearraylist4 = p.pop
-					var nodearraylist3 = p.pop
-					var nodearraylist2 = p.pop
-					var nodearraylist1 = p.pop
-					var tkwspecialnode2 = nodearraylist2
-					assert tkwspecialnode2 isa nullable TKwspecial
-					var ptypenode4 = nodearraylist4
-					assert ptypenode4 isa nullable AType
-					var psuperclassnode1: nullable ASuperclass = new ASuperclass.init_asuperclass(
-						tkwspecialnode2,
-						null,
-						ptypenode4
-					)
-					node_list = psuperclassnode1
-					p.push(p.go_to(_goto), node_list)
-	end
-end
 private class ReduceAction114
 	super ReduceAction
 	redef fun action(p: Parser)
@@ -5239,14 +5237,13 @@ private class ReduceAction114
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
-					var tkwsupernode3 = nodearraylist2
-					assert tkwsupernode3 isa nullable TKwsuper
-					var ptypenode4 = nodearraylist4
-					assert ptypenode4 isa nullable AType
+					var tkwsupernode2 = nodearraylist2
+					assert tkwsupernode2 isa nullable TKwsuper
+					var ptypenode3 = nodearraylist4
+					assert ptypenode3 isa nullable AType
 					var psuperclassnode1: nullable ASuperclass = new ASuperclass.init_asuperclass(
-						null,
-						tkwsupernode3,
-						ptypenode4
+						tkwsupernode2,
+						ptypenode3
 					)
 					node_list = psuperclassnode1
 					p.push(p.go_to(_goto), node_list)

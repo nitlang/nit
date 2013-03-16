@@ -1,7 +1,5 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2011 Alexis Laferrière <alexis.laf@xymus.net>
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -14,25 +12,48 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-class A
-	fun extern_echo is extern
-	fun echo do print "A"
+import kernel
+
+interface I
 end
 
-class B
-super A
-	redef fun extern_echo is extern
-	redef fun echo do print "B"
+abstract class AC
 end
 
-var a = new A
-a.echo
-a.extern_echo
+class C
+end
 
-var b = new B
-b.echo
-b.extern_echo
+enum E
+end
 
-# explicit casts
-b.as(A).echo
-b.as(A).extern_echo
+extern class EC
+	#alt1# super I
+	#alt2# super AC
+	#alt3# super C
+	#alt4# super E
+	fun foo do 1.output
+	#alt5# var x: Int 
+end
+
+class I2
+	#alt6# super EC
+end
+
+class AC2
+	#alt7# super EC
+end
+
+class C2
+	#alt8# super EC
+end
+
+class E2
+	#alt9# super EC
+end
+
+fun inita: EC is extern
+
+var a = inita
+#alt10# a = new EC 
+a.foo
+

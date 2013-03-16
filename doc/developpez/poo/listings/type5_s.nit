@@ -1,5 +1,5 @@
 class XMLDocument 
-	special Graph 
+	super Graph
 
 	redef var nodes: Array[XMLNode] = new Array[XMLNode]
 

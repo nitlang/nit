@@ -2,7 +2,7 @@ class Animal
 end
 
 class Vache
-	special Animal
+	super Animal
 
 	fun broute 
 	do

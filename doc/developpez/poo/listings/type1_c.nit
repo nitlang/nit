@@ -1,6 +1,6 @@
 abstract class Aliment end
 
-class Herbe special Aliment end
+class Herbe super Aliment end
 
 class Animal
 	type REGIME: Aliment
@@ -9,7 +9,7 @@ class Animal
 end
 
 class Vache
-	special Animal
+	super Animal
 
 	redef type REGIME: Herbe
 end

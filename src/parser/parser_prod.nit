@@ -867,12 +867,17 @@ redef class AExternClasskind
     private init empty_init do end
 
     init init_aexternclasskind (
-            n_kwextern: nullable TKwextern
+            n_kwextern: nullable TKwextern,
+            n_kwclass: nullable TKwclass
     )
     do
         empty_init
         _n_kwextern = n_kwextern.as(not null)
 	n_kwextern.parent = self
+        _n_kwclass = n_kwclass
+	if n_kwclass != null then
+		n_kwclass.parent = self
+	end
     end
 
     redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -887,11 +892,24 @@ redef class AExternClasskind
             end
             return
 	end
+        if _n_kwclass == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TKwclass
+                _n_kwclass = new_child
+	    else
+		_n_kwclass = null
+            end
+            return
+	end
     end
 
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_kwextern)
+        if _n_kwclass != null then
+            v.enter_visit(_n_kwclass.as(not null))
+        end
     end
 end
 redef class AFormaldef
@@ -947,43 +965,26 @@ redef class ASuperclass
     private init empty_init do end
 
     init init_asuperclass (
-            n_kwspecial: nullable TKwspecial,
             n_kwsuper: nullable TKwsuper,
             n_type: nullable AType
     )
     do
         empty_init
-        _n_kwspecial = n_kwspecial
-	if n_kwspecial != null then
-		n_kwspecial.parent = self
-	end
-        _n_kwsuper = n_kwsuper
-	if n_kwsuper != null then
-		n_kwsuper.parent = self
-	end
+        _n_kwsuper = n_kwsuper.as(not null)
+	n_kwsuper.parent = self
         _n_type = n_type.as(not null)
 	n_type.parent = self
     end
 
     redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
-        if _n_kwspecial == old_child then
-            if new_child != null then
-                new_child.parent = self
-		assert new_child isa TKwspecial
-                _n_kwspecial = new_child
-	    else
-		_n_kwspecial = null
-            end
-            return
-	end
         if _n_kwsuper == old_child then
             if new_child != null then
                 new_child.parent = self
 		assert new_child isa TKwsuper
                 _n_kwsuper = new_child
 	    else
-		_n_kwsuper = null
+		abort
             end
             return
 	end
@@ -1001,12 +1002,7 @@ redef class ASuperclass
 
     redef fun visit_all(v: Visitor)
     do
-        if _n_kwspecial != null then
-            v.enter_visit(_n_kwspecial.as(not null))
-        end
-        if _n_kwsuper != null then
-            v.enter_visit(_n_kwsuper.as(not null))
-        end
+        v.enter_visit(_n_kwsuper)
         v.enter_visit(_n_type)
     end
 end

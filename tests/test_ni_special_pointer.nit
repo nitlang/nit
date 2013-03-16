@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-extern ExternInt special Pointer
+extern ExternInt super Pointer
 	new as_0 is extern
 	new as_1 is extern
 	new as_2 is extern

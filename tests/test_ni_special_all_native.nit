@@ -20,7 +20,7 @@ class A
 end
 
 class B
-special A
+super A
 	redef fun work is extern
 end
 
