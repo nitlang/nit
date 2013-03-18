@@ -55,6 +55,13 @@ end
 class Debugger
 	super NaiveInterpreter
 
+	# Keeps the frame count in memory to find when to stop
+	# and launch the command prompt after a step out call
+	var step_stack_count = 1
+
+	# Triggers a step over an instruction in a nit program
+	var stop_after_step_over_trigger = true
+
 	# Main loop, every call to a debug command is done here
 	redef fun stmt(n: nullable AExpr)
 	do
@@ -63,8 +70,21 @@ class Debugger
 		var frame = self.frame
 		var old = frame.current_node
 		frame.current_node = n
+
+		steps_fun_call(n)
+
 		n.stmt(self)
 		frame.current_node = old
+	end
+
+	private fun steps_fun_call(n: AExpr)
+	do
+		if self.stop_after_step_over_trigger then
+			if self.frames.length <= self.step_stack_count then
+				n.debug("Execute stmt {n.to_s}")
+				while process_debug_command(gets) do end
+			end
+		end
 	end
 
 	#######################################################################
@@ -83,6 +103,9 @@ class Debugger
 		# Kills the current program
 		if command == "kill" then
 			abort
+		# Step-over command
+		else if command == "n" then
+			return step_over
 		else
 			var parts_of_command = command.split_with(' ')
 			# Shows the value of a variable in the current frame
@@ -91,6 +114,14 @@ class Debugger
 			end
 		end
 		return true
+	end
+
+	# Sets the flags to step-over an instruction in the current file
+	fun step_over: Bool
+	do
+		self.step_stack_count = frames.length
+		self.stop_after_step_over_trigger = true
+		return false
 	end
 
 	# Prints the demanded variable in the command
