@@ -415,22 +415,32 @@ class String
 	# The concatenation of `self' with `r'
 	fun +(s: String): String
 	do
-		var r = new Buffer.with_capacity(length + s.length)
-		r.append(self)
-		r.append(s)
-		return r.to_s
+		var newString = calloc_string(_length + s._length + 1)
+
+		self._items.copy_to(newString, _length, _indexFrom, 0)
+		s._items.copy_to(newString, s._length, s._indexFrom, _length)
+
+		newString[self._length + s._length] = '\0'
+
+		return new String.with_native(newString, _length + s._length)
 	end
 
 	# i repetitions of self
 	fun *(i: Int): String
 	do
 		assert i >= 0
-		var r = new Buffer.with_capacity(length * i)
+		var r = calloc_string((_length * i) + 1)
+
+		r[_length * i] = '\0'
+
+		var lastStr = new String.with_native(r, (_length * i))
+
 		while i > 0 do
-			r.append(self)
+			self._items.copy_to(r, _length, _indexFrom, _length*(i-1))
 			i -= 1
 		end
-		return r.to_s
+
+		return lastStr
 	end
 
 	redef fun to_s do return self
