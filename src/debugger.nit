@@ -55,6 +55,75 @@ end
 class Debugger
 	super NaiveInterpreter
 
+	# Main loop, every call to a debug command is done here
+	redef fun stmt(n: nullable AExpr)
+	do
+		if n == null then return
+
+		var frame = self.frame
+		var old = frame.current_node
+		frame.current_node = n
+		n.stmt(self)
+		frame.current_node = old
+	end
+
+	#######################################################################
+	##                   Processing commands functions                   ##
+	#######################################################################
+
+	# Takes a user command as a parameter
+	#
+	# Returns a boolean value, representing whether or not to
+	# continue reading commands from the console input
+	fun process_debug_command(command:String): Bool
+	do
+		# For lisibility
+		print "\n"
+
+		# Kills the current program
+		if command == "kill" then
+			abort
+		else
+			var parts_of_command = command.split_with(' ')
+			# Shows the value of a variable in the current frame
+			if parts_of_command[0] == "p" or parts_of_command[0] == "print" then
+				print_command(parts_of_command)
+			end
+		end
+		return true
+	end
+
+	# Prints the demanded variable in the command
+	#
+	# The name of the variable in in position 1 of the array 'parts_of_command'
+	fun print_command(parts_of_command: Array[String])
+	do
+		if parts_of_command[1] == "*" then
+			var map_of_instances = frame.map
+
+			var keys = map_of_instances.iterator
+
+			print "Variables collection : \n"
+
+			for instance in map_of_instances.keys do
+				print "Variable {instance.to_s}, Instance {map_of_instances[instance].to_s}"
+			end
+
+			print "\nEnd of current instruction \n"
+		else
+			var instance = seek_variable(parts_of_command[1], frame)
+
+			if instance != null
+			then
+				print_instance(instance)
+			end
+		end
+	end
+
+	#######################################################################
+	##                         Print functions                           ##
+	#######################################################################
+
 	# Prints an object instance and its attributes if it has some
 	#
 	# If it is a primitive type, its value is directly printed
@@ -71,6 +140,10 @@ class Debugger
 			print "Found variable {instance}"
 		end
 	end
+
+	#######################################################################
+	##                  Variable Exploration functions                   ##
+	#######################################################################
 
 	# Seeks a variable from the current frame called 'variable_path', can introspect complex objects using function get_variable_in_mutable_instance
 	private fun seek_variable(variable_path: String, frame: Frame): nullable Instance
