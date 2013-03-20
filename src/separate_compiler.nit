@@ -31,14 +31,28 @@ redef class ToolContext
 	var opt_no_shortcut_equate: OptionBool = new OptionBool("Always call == in a polymorphic way", "--no-shortcut-equal")
 	# --inline-coloring-numbers
 	var opt_inline_coloring_numbers: OptionBool = new OptionBool("Inline colors and ids", "--inline-coloring-numbers")
-	# --use-naive-coloring
-	var opt_bm_typing: OptionBool = new OptionBool("Colorize items incrementaly, used to simulate binary matrix typing", "--bm-typing")
-	# --use-mod-perfect-hashing
-	var opt_phmod_typing: OptionBool = new OptionBool("Replace coloration by perfect hashing (with mod operator)", "--phmod-typing")
-	# --use-and-perfect-hashing
-	var opt_phand_typing: OptionBool = new OptionBool("Replace coloration by perfect hashing (with and operator)", "--phand-typing")
 	# --tables-metrics
 	var opt_tables_metrics: OptionBool = new OptionBool("Enable static size measuring of tables used for vft, typing and resolution", "--tables-metrics")
+	# for all tables
+	var opt_bm_all_tables: OptionBool = new OptionBool("Replace coloring by binary matrix for all tables", "--bm-all-tables")
+	var opt_phmod_all_tables: OptionBool = new OptionBool("Replace coloring by perfect hashing for all tables (with mod operator)", "--phmod-all-tables")
+	var opt_phand_all_tables: OptionBool = new OptionBool("Replace coloring by perfect hashing for all tables (with and operator)", "--phand-all-tables")
+	# typing tables
+	var opt_bm_typing: OptionBool = new OptionBool("Replace typing tables coloring by binary matrix", "--bm-typing")
+	var opt_phmod_typing: OptionBool = new OptionBool("Replace typing tables coloring by perfect hashing (with mod operator)", "--phmod-typing")
+	var opt_phand_typing: OptionBool = new OptionBool("Replace typing tables coloring by perfect hashing (with and operator)", "--phand-typing")
+	# resolution tables
+	var opt_bm_resolution: OptionBool = new OptionBool("Replace resolution tables coloring by binary matrix", "--bm-resolution")
+	var opt_phmod_resolution: OptionBool = new OptionBool("Replace resolution tables coloring by perfect hashing (with mod operator)", "--phmod-resolution")
+	var opt_phand_resolution: OptionBool = new OptionBool("Replace resolution tables coloring by perfect hashing (with and operator)", "--phand-resolution")
+	# vft
+	var opt_bm_vft: OptionBool = new OptionBool("Replace vft coloring by binary matrix", "--bm-vft")
+	var opt_phmod_vft: OptionBool = new OptionBool("Replace vft coloring by perfect hashing (with mod operator)", "--phmod-vft")
+	var opt_phand_vft: OptionBool = new OptionBool("Replace vft coloring by perfect hashing (with and operator)", "--phand-vft")
+	# attrs tables
+	var opt_bm_attrs: OptionBool = new OptionBool("Replace attributes tables coloring by binary matrix", "--bm-attrs")
+	var opt_phmod_attrs: OptionBool = new OptionBool("Replace attributes tables coloring by perfect hashing (with mod operator)", "--phmod-attrs")
+	var opt_phand_attrs: OptionBool = new OptionBool("Replace attributes tables coloring by perfect hashing (with and operator)", "--phand-attrs")
 
 	redef init
 	do
@@ -48,10 +62,22 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_no_union_attribute)
 		self.option_context.add_option(self.opt_no_shortcut_equate)
 		self.option_context.add_option(self.opt_inline_coloring_numbers)
+		self.option_context.add_option(self.opt_tables_metrics)
+		self.option_context.add_option(self.opt_bm_all_tables)
+		self.option_context.add_option(self.opt_phmod_all_tables)
+		self.option_context.add_option(self.opt_phand_all_tables)
 		self.option_context.add_option(self.opt_bm_typing)
 		self.option_context.add_option(self.opt_phmod_typing)
 		self.option_context.add_option(self.opt_phand_typing)
-		self.option_context.add_option(self.opt_tables_metrics)
+		self.option_context.add_option(self.opt_bm_resolution)
+		self.option_context.add_option(self.opt_phmod_resolution)
+		self.option_context.add_option(self.opt_phand_resolution)
+		self.option_context.add_option(self.opt_bm_vft)
+		self.option_context.add_option(self.opt_phmod_vft)
+		self.option_context.add_option(self.opt_phand_vft)
+		self.option_context.add_option(self.opt_bm_attrs)
+		self.option_context.add_option(self.opt_phmod_attrs)
+		self.option_context.add_option(self.opt_phand_attrs)
 	end
 end
 
@@ -210,14 +236,26 @@ class SeparateCompiler
 	fun do_property_coloring do
 		var mclasses = new HashSet[MClass].from(modelbuilder.model.mclasses)
 
-		# Layouts
+		# VFT layouts
 		var method_layout_builder: PropertyLayoutBuilder[MMethod]
-		var attribute_layout_builder: PropertyLayoutBuilder[MAttribute]
-		if modelbuilder.toolcontext.opt_bm_typing.value then
+		if modelbuilder.toolcontext.opt_bm_vft.value or modelbuilder.toolcontext.opt_bm_all_tables.value then
 			method_layout_builder = new MMethodBMizer(self.mainmodule)
-			attribute_layout_builder = new MAttributeBMizer(self.mainmodule)
+		else if modelbuilder.toolcontext.opt_phmod_vft.value or modelbuilder.toolcontext.opt_phmod_all_tables.value then
+			method_layout_builder = new MMethodHasher(new PHModOperator, self.mainmodule)
+		else if modelbuilder.toolcontext.opt_phand_vft.value or modelbuilder.toolcontext.opt_phand_all_tables.value then
+			method_layout_builder = new MMethodHasher(new PHAndOperator, self.mainmodule)
 		else
 			method_layout_builder = new MMethodColorer(self.mainmodule)
+		end
+
+		var attribute_layout_builder: PropertyLayoutBuilder[MAttribute]
+		if modelbuilder.toolcontext.opt_bm_attrs.value or modelbuilder.toolcontext.opt_bm_all_tables.value then
+			attribute_layout_builder = new MAttributeBMizer(self.mainmodule)
+		else if modelbuilder.toolcontext.opt_phmod_attrs.value or modelbuilder.toolcontext.opt_phmod_all_tables.value then
+			attribute_layout_builder = new MAttributeHasher(new PHModOperator, self.mainmodule)
+		else if modelbuilder.toolcontext.opt_phand_attrs.value or modelbuilder.toolcontext.opt_phand_all_tables.value then
+			attribute_layout_builder = new MAttributeHasher(new PHAndOperator, self.mainmodule)
+		else
 			attribute_layout_builder = new MAttributeColorer(self.mainmodule)
 		end
 
@@ -333,17 +371,17 @@ class SeparateCompiler
 		end
 
 		for mtype in mtypes do
-			retieve_live_partial_types(mtype)
+			retrieve_partial_types(mtype)
 		end
 		mtypes.add_all(self.partial_types)
 
 		# Typing Layout
 		var layout_builder: TypingLayoutBuilder[MType]
-		if modelbuilder.toolcontext.opt_bm_typing.value then
+		if modelbuilder.toolcontext.opt_bm_typing.value or modelbuilder.toolcontext.opt_bm_all_tables.value then
 			layout_builder = new MTypeBMizer(self.mainmodule)
-		else if modelbuilder.toolcontext.opt_phmod_typing.value then
+		else if modelbuilder.toolcontext.opt_phmod_typing.value or modelbuilder.toolcontext.opt_phmod_all_tables.value then
 			layout_builder = new MTypeHasher(new PHModOperator, self.mainmodule)
-		else if modelbuilder.toolcontext.opt_phand_typing.value then
+		else if modelbuilder.toolcontext.opt_phand_typing.value or modelbuilder.toolcontext.opt_phand_all_tables.value then
 			layout_builder = new MTypeHasher(new PHAndOperator, self.mainmodule)
 		else
 			layout_builder = new MTypeColorer(self.mainmodule)
@@ -408,11 +446,11 @@ class SeparateCompiler
 
 		# Compute the table layout with the prefered method
 		var resolution_builder: ResolutionLayoutBuilder
-		if modelbuilder.toolcontext.opt_bm_typing.value then
+		if modelbuilder.toolcontext.opt_bm_resolution.value or modelbuilder.toolcontext.opt_bm_all_tables.value then
 			resolution_builder = new ResolutionBMizer
-		else if modelbuilder.toolcontext.opt_phmod_typing.value then
+		else if modelbuilder.toolcontext.opt_phmod_resolution.value or modelbuilder.toolcontext.opt_phmod_all_tables.value then
 			resolution_builder = new ResolutionHasher(new PHModOperator)
-		else if modelbuilder.toolcontext.opt_phand_typing.value then
+		else if modelbuilder.toolcontext.opt_phand_resolution.value or modelbuilder.toolcontext.opt_phand_all_tables.value then
 			resolution_builder = new ResolutionHasher(new PHAndOperator)
 		else
 			resolution_builder = new ResolutionColorer
@@ -467,7 +505,7 @@ class SeparateCompiler
 		return tables
 	end
 
-	fun retieve_live_partial_types(mtype: MType) do
+	fun retrieve_partial_types(mtype: MType) do
 		# add formal types arguments to mtypes
 		if mtype isa MGenericType then
 			for ft in mtype.arguments do
@@ -476,7 +514,7 @@ class SeparateCompiler
 					abort
 				end
 				self.partial_types.add(ft)
-				retieve_live_partial_types(ft)
+				retrieve_partial_types(ft)
 			end
 		end
 		var mclass_type: MClassType

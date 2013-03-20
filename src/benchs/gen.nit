@@ -235,6 +235,193 @@ class Generator
 		file.close
 	end
 
+	fun writecsharp(name: String, interfaces: Bool)
+	do
+		var cl = ""
+		if interfaces then cl = "X"
+		file = new OFStream.open("{name}.cs")
+		write "class {name} \{"
+		if interfaces then
+			write "interface Root\n\t\{ int Id(); \}"
+		else
+			write "class Root\n\t\{ public int Id() \{ return 0;\} \}"
+		end
+		for c in classes do
+			if interfaces then
+				write "interface {c} "
+			else
+				write "class {c} "
+			end
+			if c.supers.is_empty then
+				write "\t: Root"
+			else for s in [c.supers.first] do
+				write "\t: {s}"
+			end
+			if interfaces then
+				write "\{\}"
+				write "class X{c} : {c}"
+			end
+			write "\{"
+			write "\tpublic int Id() \{ return {c.id}; \}"
+			write "\}"
+		end
+		write "class L<E>"
+		if interfaces then
+			write ": Root \{"
+		else
+			write ": Root \{"
+		end
+		write "\tE _item;"
+		write "\tpublic E Item() \{ return _item; \}"
+		write "\tpublic void SetItem(E i) \{ _item = i; \}"
+		write "\tL<E> _next;"
+		write "\tpublic L<E> Next() \{ return _next; \}"
+		write "\tpublic void SetNext(L<E> n) \{ _next = n; \}"
+		write "\tpublic L(E i, L<E> n) \{ SetItem(i); SetNext(n); \}"
+		write "\tpublic int Id() \{ return -1; \}"
+		write "\}"
+
+		write "static L<Root> Fill() \{"
+		write "\tL<Root> head = null;"
+		for c in classes do
+			write "\tL<{c}> l{c} = new L<{c}>(new {cl}{c}(), null);"
+			write "\thead = new L<Root>(l{c}, head);"
+		end
+		write "\thead = null;"
+		write "for (int x=0; x<{arraylen}; x++) \{"
+		for i in [0..listlen[ do
+			var c = unlist[i]
+			write "\tL<{c}> l{i} = new L<{c}>(new {cl}{c}(), null);"
+			write "\thead = new L<Root>(l{i}, head);"
+		end
+		write "\}"
+		write "return head;"
+		write "\}"
+
+		write "static int Run(L<Root> head1, L<Root> head2) \{"
+		write "\tint cpt = 0;"
+		write "\tint y = {loops/list.length};"
+		write "\twhile (y > 0) \{;"
+		write "\tL<Root> n1 = head1;"
+		write "\tL<Root> n2 = head2;"
+		write "\twhile (n1 != null) \{"
+		for i in [0..listlen[ do
+			var c = list[i]
+			write "\t\tRoot l{i} = n1.Item();"
+			write "\t\tL<{c}> lc{i} = (L<{c}>)l{i};"
+			write "\t\t{c} c{i} = lc{i}.Item();"
+			write "\t\tn1 = n1.Next();"
+			if count then
+				write "\t\tif (c{i}.Id() == {c.id}) cpt += 1;"
+			end
+			write "\t\tRoot l2_{i} = n2.Item();"
+			write "\t\tL<{c}> lc2_{i} = (L<{c}>)l2_{i};"
+			write "\t\tlc2_{i}.SetItem(c{i});"
+			write "\t\tn2 = n2.Next();"
+		end
+		write "\t\}"
+		write "y -= 1;"
+		write "\}"
+		write "return cpt;"
+		write "\}"
+
+		write "static void Main(string[] args) \{"
+		write "L<Root> head = Fill();"
+		write "int loops = 25;"
+		write "if (args.Length > 0) loops = int.Parse(args[0]);"
+		write "for (int x=0; x<loops; x++) \{"
+		write "\tint cpt = Run(head, head);"
+		write "\tSystem.Console.WriteLine(\"\" + x + \":\\t\" + cpt);"
+		write "\}"
+		write "\}"
+		write "\}"
+		file.close
+	end
+
+	fun writescala(name: String)
+	do
+		var cl = ""
+		file = new OFStream.open("{name}.scala")
+		write "object {name} \{"
+		write "class Root\n\t\{ def id: Int = 0 \}"
+		for c in classes do
+			write "class {c} "
+			if c.supers.is_empty then
+				write "\textends Root"
+			else for s in [c.supers.first] do
+				write "\textends {s}"
+			end
+			write "\{"
+			write "\toverride def id: Int = {c.id}"
+			write "\}"
+		end
+		write "class L[E](var _item: E, var _next: L[E]) extends Root \{"
+		write "\tdef item: E = _item"
+		write "\tdef set_item(i: E) = this._item = i"
+		write "\tdef next: L[E] = _next"
+		write "\tdef set_next(n: L[E]) = this._next = n"
+		write "\toverride def id: Int = -1"
+		write "\}"
+
+		write "def fill: L[Root] = \{"
+		write "\tvar head: L[Root] = null"
+		for c in classes do
+			write "\tvar l{c}: L[{c}] = new L[{c}](new {cl}{c}(), null)"
+			write "\thead = new L[Root](l{c}, head)"
+		end
+		write "\thead = null"
+		write "\tfor (x <- 0 to {arraylen}) \{"
+		for i in [0..listlen[ do
+			var c = unlist[i]
+			write "\t\tvar l{i}: L[{c}] = new L[{c}](new {cl}{c}(), null)"
+			write "\t\thead = new L[Root](l{i}, head)"
+		end
+		write "\t\}"
+		write "\treturn head"
+		write "\}"
+
+		write "def run(head1: L[Root], head2: L[Root]): Int = \{"
+		write "\tvar cpt: Int = 0"
+		write "\tvar y: Int = {loops/list.length}"
+		write "\twhile (y > 0) \{"
+		write "\tvar n1: L[Root] = head1"
+		write "\tvar n2: L[Root] = head2"
+		write "\twhile (n1 != null) \{"
+		for i in [0..listlen[ do
+			var c = list[i]
+			write "\t\tvar l{i}: Root = n1.item"
+			write "\t\tvar lc{i}: L[{c}] = l{i}.asInstanceOf[L[{c}]]"
+			write "\t\tvar c{i}: {c} = lc{i}.item"
+			write "\t\tn1 = n1.next"
+			if count then
+				write "\t\tif (c{i}.id == {c.id}) cpt += 1"
+			end
+			write "\t\tvar l2_{i}: Root = n2.item"
+			write "\t\tvar lc2_{i}: L[{c}] = l2_{i}.asInstanceOf[L[{c}]]"
+			write "\t\tlc2_{i}.set_item(c{i})"
+			write "\t\tn2 = n2.next"
+		end
+		write "\t\}"
+		write "y -= 1"
+		write "\}"
+		write "return cpt"
+		write "\}"
+
+		write "def main(args: Array[String]) = \{"
+		write "\tvar head: L[Root] = fill"
+		write "\tvar loops: Int = 25"
+		write "\tif (args.length > 0) \{"
+		write "\t\tloops = Integer.parseInt(args(0))"
+		write "\t\}"
+		write "\tfor (x <- 0 to loops) \{"
+		write "\t\tvar cpt: Int = run(head, head)"
+		write "\t\tprintln(\"\" + x + \":\\t\" + cpt)"
+		write "\t\}"
+		write "\}"
+		write "\}"
+		file.close
+	end
+
 	fun writecpp(name: String)
 	do
 		file = new OFStream.open("{name}.cpp")
@@ -472,6 +659,8 @@ end
 g.genhier
 g.writenit(name)
 g.writejava(name, true)
+g.writecsharp(name, true)
+g.writescala(name)
 g.writecpp(name)
 g.writee("{name}_se", true)
 g.writee(name, false)
