@@ -527,6 +527,7 @@ class Debugger
 
 	# Effectively untraces the variable called *variable_name*
 	#
+	# Returns true if the variable exists, false otherwise
 	private fun untrace_variable(variable_name: String): Bool
 	do
 		var to_remove: nullable TraceObject = null
