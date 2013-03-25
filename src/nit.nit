@@ -20,6 +20,7 @@ module nit
 import modelbuilder
 import exprbuilder
 import naive_interpreter
+import debugger
 #import interpretor_type_test
 
 # Create a tool context to handle options and paths
@@ -51,4 +52,11 @@ if toolcontext.opt_only_metamodel.value then exit(0)
 # Here we launch the interpreter on the main module
 assert mmodules.length == 1
 var mainmodule = mmodules.first
-modelbuilder.run_naive_interpreter(mainmodule, arguments)
+
+if toolcontext.opt_debugger_autorun.value then
+	modelbuilder.run_debugger_autorun(mainmodule, arguments)
+else if toolcontext.opt_debugger_mode.value then
+	modelbuilder.run_debugger(mainmodule, arguments)
+else
+	modelbuilder.run_naive_interpreter(mainmodule, arguments)
+end
