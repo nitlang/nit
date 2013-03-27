@@ -19,7 +19,7 @@ import array
 
 # This abstract class generalizes ways to sort an array
 # TODO: rename *Sorter to *Comparator
-interface AbstractSorter[E: Object]
+interface AbstractSorter[E]
 	# Compare `a' and `b'.
 	# Returns:
 	# 	-1 if a < b
