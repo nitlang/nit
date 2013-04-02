@@ -20,7 +20,7 @@ package nitdoc
 import syntax
 private import utils
 import abstracttool
-import base64
+import sha 
 
 
 # Store knowledge and facilities to generate files
@@ -1204,20 +1204,16 @@ redef class MMLocalProperty
 		dctx.add("</article>")
 	end
 
-
 	fun generateShaFile(fileLocation: Location): String 
 	do
-		#print fileLocation.file.filename
 		var sha = ""
 		var file = new IFStream.open(fileLocation.file.filename)
 		var size = file.file_stat.size
-		var data = file.read_all.to_cstring
-		
-		#sha = "blob 0{0.ascii.to_s}"
-		#sha = "blob " + size.to_s + "\\0" + data
-		file.close
-		#return sha.encode_base64
-		return "47dcfea9a3848cfbb9d2dbbd7e1cf0f0fc1979bb"
+		var data = file.read_all
+		file.close	
+		sha = "blob {size}\0{data}"
+		var shafile = sha1(sha.length, sha.to_cstring)
+		return shafile
 	end
 end
 redef class MMMethod
