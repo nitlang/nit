@@ -542,6 +542,18 @@ function bench_typetest_languages()
 		bench_command "$b" "" java "${t}_$b" $s
 	done
 
+	prepare_res "$name-scala.dat" "scala" "scala"
+	for b in $seq; do
+		run_command scalac ${t}_$b.scala
+		bench_command "$b" "" scala "${t}_$b" $s
+	done
+
+	prepare_res "$name-cs.dat" "c#" "c#"
+	for b in $seq; do
+		run_command gmcs ${t}_$b.cs
+		bench_command "$b" "" mono "${t}_$b.exe" $s
+	done
+
 	prepare_res "$name-es.dat" "es" "es"
 	for b in $seq; do
 		run_command ec -clean -finalize ${t}_$b/app${t}_$b.e
