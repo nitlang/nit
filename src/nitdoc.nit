@@ -28,6 +28,8 @@ class DocContext
 	super AbstractCompiler
 	# Destination directory
 	readable writable var _dir: String = "doc"
+
+	# GitHub Repo name
 	var github_repo: String = ""
 
 	# Content of a generated file
