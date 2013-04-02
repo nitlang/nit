@@ -1114,6 +1114,7 @@ redef class MMLocalProperty
 				dctx.add("<pre class=\"text_label\" name=\"{html_name}\" >{global.intro.doc.to_html}</pre>")
 			end
 			dctx.add("<textarea rows=\"1\" cols=\"76\" id=\"fileContent\" class=\"edit\"></textarea>")
+			dctx.add("<a id=\"cancelBtn\">Cancel</a><a id=\"commitBtn\">Commit</a>")
 		end
 
 		var tlmods = new Array[MMModule]
@@ -1150,16 +1151,12 @@ redef class MMLocalProperty
 			var doc = tlp.doc
 			var n = tlp.node
 			if doc != null and (not introdoc or global.intro.doc != doc) then
-				#dctx.add("<pre class=\"text_label\">{doc.to_html}</pre>")
 				if n != null then
 					var l = n.location
-					#if is_redef then
-						#	dctx.add("<pre class=\"text_label\" name=\"{mmmodule[intro_class.global][global].global.intro.html_link(dctx)}\" >{doc.to_html}</pre>")
-						#else
-						dctx.add("<pre id=\"{generateShaFile(l)}\" class=\"text_label\" name=\"{dctx.get_source(l)}\" title=\"{l.line_start.to_s}\" >{doc.to_html}</pre>")
-						#end
+					dctx.add("<pre id=\"{generateShaFile(l)}\" class=\"text_label\" tag=\"{l.file.filename}\" name=\"{dctx.get_source(l)}\" title=\"{l.line_start.to_s}\" >{doc.to_html}</pre>")
 				end
 				dctx.add("<textarea rows=\"1\" cols=\"76\" id=\"fileContent\" class=\"edit\"></textarea>")
+				dctx.add("<a id=\"cancelBtn\">Cancel</a><a id=\"commitBtn\">Commit</a>")
 			end
 			dctx.add("<p>")
 			if tlp.local_class.global != lc.global then
@@ -1464,6 +1461,7 @@ redef class MMLocalClass
 		if doc != null then
 			dctx.add("<pre class=\"text_label\">{doc.to_html}</pre>\n")
 			dctx.add("<textarea rows=\"1\" cols=\"76\" id=\"fileContent\" class=\"edit\"></textarea>")
+			dctx.add("<a id=\"cancelBtn\">Cancel</a><a id=\"commitBtn\">Commit</a>")
 		end
 
 		var cla = new HashSet[MMLocalClass]
