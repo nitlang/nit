@@ -20,7 +20,7 @@ all: parser.nit
 
 # Preprocess the extended sablecc gramar
 .nit.sablecc3: nit.sablecc3xx
-	./prescc.sh $< $@
+	./prescc.pl $< > $@
 
 # Note that parser_nodes is no more automatically synced with the grammar
 parser.nit: .nit.sablecc3 xss/*.xss
