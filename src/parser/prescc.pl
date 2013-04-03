@@ -20,7 +20,7 @@
 #
 # Synopsis
 #
-#   Extends a sablecc grammar with parametrized productions.
+#   Extends a sablecc grammar with parametrized productions and other syntactic stuff.
 #
 # Description
 #
@@ -53,6 +53,34 @@ while (<>) {
 	push @lines, $_;
 }
 $lines = join "", @lines;
+
+$current = "";
+for (@lines) {
+	if (/^.*{\s*->\s*(\w+)\s*}/) {
+		$current = $1;
+	}
+	$current = "" if /;/;
+	next if ($current eq "");
+	if (s/{\:(\w+)}/{$1}/) {
+		$alt = $1;
+		@newargs = ();
+		while (/((\[(\w*)\])?:)?([\w~]+)(})?/g) {
+			$id=defined $3?$3:$4;
+			next if ((defined $1) && !(defined $3));
+			next if (defined $5);
+			$4 =~ /([a-z]+)/;
+			$argalt = $1;
+			if ($id eq $argalt) {
+				push @newargs, "$id";
+			} else {
+				push @newargs, "$id.$argalt";
+			}
+		}
+		chomp;
+		$_ .= " {-> New $current.$alt(". join(", ", @newargs) .")}\n";
+		s/([^\]])\:(\w+)/$1$2/g;
+	}
+}
 
 # List all the available parameters in the extended grammar
 @params = ();
