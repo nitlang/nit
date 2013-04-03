@@ -575,11 +575,13 @@ redef class AVardeclExpr
 			end
 		end
 
-		if mtype == null then
-			mtype = v.get_mclass(self, "Object").mclass_type.as_nullable
+		var decltype = mtype
+		if mtype == null or mtype isa MNullType then
+			decltype = v.get_mclass(self, "Object").mclass_type.as_nullable
+			if mtype == null then mtype = decltype
 		end
 
-		variable.declared_type = mtype
+		variable.declared_type = decltype
 		v.set_variable(self, variable, mtype)
 
 		#debug("var {variable}: {mtype}")

@@ -441,7 +441,13 @@ redef class AVardeclExpr
 			end
 		else if ne != null then
 			if not v.check_expr(ne) then return
-			va.stype = ne.stype
+			var st = ne.stype
+			if st isa MMTypeNone then
+				va.stype = v.type_object.as_nullable
+				v.flow_ctx = v.flow_ctx.sub_with(self, va, st)
+			else
+				va.stype = st
+			end
 		else
 			va.stype = v.type_object.as_nullable
 		end
