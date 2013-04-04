@@ -91,16 +91,19 @@ class Program
 					var iroutine = new IRoutine(iselfa, null)
 					var icb = new ICodeBuilder(main_module, iroutine)
 
-					for g in c.global_properties do
-						if not g.intro isa MMAttribute then continue
-						var p = c[g]
-						var t = p.signature.return_type
-						if p isa MMAttribute and t != null then
-							var ir = p.iroutine
-							if ir == null then continue
-							# FIXME: Not compatible with sep compilation
-							var e = icb.inline_routine(ir, iselfa, null).as(not null)
-							icb.stmt(new IAttrWrite(p, iself, e))
+					for sc in c.che.linear_extension.reversed do
+						for g in sc.global_properties do
+							if g.local_class != sc then continue
+							if not g.intro isa MMAttribute then continue
+							var p = c[g]
+							var t = p.signature.return_type
+							if p isa MMAttribute and t != null then
+								var ir = p.iroutine
+								if ir == null then continue
+								# FIXME: Not compatible with sep compilation
+								var e = icb.inline_routine(ir, iselfa, null).as(not null)
+								icb.stmt(new IAttrWrite(p, iself, e))
+							end
 						end
 					end
 

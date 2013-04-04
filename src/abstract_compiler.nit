@@ -338,8 +338,9 @@ abstract class AbstractCompiler
 	# Generate code that initialize the attributes on a new instance
 	fun generate_init_attr(v: VISITOR, recv: RuntimeVariable, mtype: MClassType)
 	do
-		for cd in mtype.collect_mclassdefs(self.mainmodule)
-		do
+		var cds = mtype.collect_mclassdefs(self.mainmodule).to_a
+		self.mainmodule.linearize_mclassdefs(cds)
+		for cd in cds do
 			var n = self.modelbuilder.mclassdef2nclassdef[cd]
 			for npropdef in n.n_propdefs do
 				if npropdef isa AAttrPropdef then
@@ -352,8 +353,9 @@ abstract class AbstractCompiler
 	# Generate code that check if an attribute is correctly initialized
 	fun generate_check_attr(v: VISITOR, recv: RuntimeVariable, mtype: MClassType)
 	do
-		for cd in mtype.collect_mclassdefs(self.mainmodule)
-		do
+		var cds = mtype.collect_mclassdefs(self.mainmodule).to_a
+		self.mainmodule.linearize_mclassdefs(cds)
+		for cd in cds do
 			var n = self.modelbuilder.mclassdef2nclassdef[cd]
 			for npropdef in n.n_propdefs do
 				if npropdef isa AAttrPropdef then

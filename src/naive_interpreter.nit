@@ -438,8 +438,9 @@ private class NaiveInterpreter
 		if cache.has_key(mtype) then return cache[mtype]
 
 		var res = new Array[AAttrPropdef]
-		for cd in mtype.collect_mclassdefs(self.mainmodule)
-		do
+		var cds = mtype.collect_mclassdefs(self.mainmodule).to_a
+		self.mainmodule.linearize_mclassdefs(cds)
+		for cd in cds do
 			var n = self.modelbuilder.mclassdef2nclassdef[cd]
 			for npropdef in n.n_propdefs do
 				if npropdef isa AAttrPropdef then
