@@ -25,6 +25,6 @@ nullable_Int Object_intern_poll___impl( Object recv, Array in_fds, Array out_fds
 #define stream_FDStream_FDStream_native_close_1(self, p0) (close(p0))
 #define stream_FDStream_FDStream_native_read_3(s, i, b, l) read((i), ((b)), ((l)))
 #define stream_FDStream_FDStream_native_write_3(s, i, b, l) write((i), ((b)), ((l)))
-#define stream_FDStream_FDStream_native_write_char_2(s, i, c) write((i), ((&c)), 1 )
+#define stream_FDStream_FDStream_native_write_char_2(s, i, c) write((i), (char[]){(c)}, 1 )
 
 #endif

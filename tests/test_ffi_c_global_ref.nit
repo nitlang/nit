@@ -1,6 +1,6 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2012 Alexis Laferrière <alexis.laf@xymus.net>
+# Copyright 2012-2013 Alexis Laferrière <alexis.laf@xymus.net>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,6 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+module test_ffi_c_global_ref
+
+`{
+ToBePreserved global_tbps[3] = {NULL,NULL,NULL};
+`}
+
 class ToBePreserved
 	var id : String
 
@@ -21,9 +27,24 @@ class ToBePreserved
 end
 
 class A
-	fun save_as_global( tbp : ToBePreserved ) is extern import ToBePreserved::output
-	fun recover_unsafe : ToBePreserved is extern
-	fun recover : nullable ToBePreserved is extern import ToBePreserved as nullable
+	fun save_as_global( tbp : ToBePreserved, i : Int ) import ToBePreserved::output `{
+		if ( global_tbps[i] != NULL )
+			ToBePreserved_decr_ref( global_tbps[i] );
+
+		global_tbps[i] = tbp;
+
+		ToBePreserved_incr_ref( tbp );
+	`}
+	fun recover_unsafe( i : Int ) : ToBePreserved `{
+		return global_tbps[i];
+	`}
+	fun recover( i : Int ) : nullable ToBePreserved import ToBePreserved as nullable `{
+		if ( global_tbps[i] != NULL ) {
+			return ToBePreserved_as_nullable( global_tbps[i] );
+		} else {
+			return null_ToBePreserved();
+		}
+	`}
 
 	fun launch_gc do sys.force_garbage_collection
 end
@@ -32,15 +53,18 @@ var x = new ToBePreserved( "x" )
 var y = new ToBePreserved( "y" )
 var a = new A
 
-a.save_as_global( y )
+a.save_as_global( y, 0 )
 sys.force_garbage_collection
-var r = a.recover
+var r = a.recover(0)
 if r != null then
 	r.output
 else
 	print "null :("
 end
 
-a.save_as_global( x )
+a.save_as_global( x, 1 )
+a.save_as_global( y, 2 )
 sys.force_garbage_collection
-a.recover_unsafe.output
+a.recover_unsafe(0).output
+a.recover_unsafe(1).output
+a.recover_unsafe(2).output

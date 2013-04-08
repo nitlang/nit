@@ -36,7 +36,7 @@ abstract class NiVariable
 	fun needs_preparation : Bool
 	do
 		return ni_type.local_class.primitive_info == null or
-			ni_type.local_class.primitive_info.tagged or
+			not ni_type.local_class.primitive_info.tagged or
 			ni_type.is_nullable
 	end
 
@@ -533,7 +533,7 @@ redef class MMType
 	# To be nested within a condition.
 	fun compile_condition_isa( var_name : String ) : String
 	do
-		return "( ISOBJ( {var_name} ) ? OBJISA( {var_name}, {local_class.cname} ): VALISA( {var_name}, {local_class.cname} ) )"
+		return "( ISOBJ( {var_name} ) ? ISNULL( {var_name} ) || OBJISA( {var_name}, {local_class.cname} ): VALISA( {var_name}, {local_class.cname} ) )"
 	end
 
 	# Defines a friendly type in C for a given Nit type.
