@@ -1,0 +1,347 @@
+#!/bin/bash
+# This file is part of NIT ( http://www.nitlanguage.org ).
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# This shell script helps running benchmarks
+
+# TODO: cleanup and libify the helper-parts
+
+source ./bench_plot.sh
+
+## CONFIGURATION OPTIONS ##
+
+# Default number of times a command must be run with bench_command
+# Can be overrided with 'the option -n'
+count=2
+
+### HELPER FUNCTIONS ##
+
+function die()
+{
+	echo >&2 "error: $*"
+	died=1
+}
+
+# Run a single command multiple time and store the execution times
+# in the current $res file.
+#
+#  $1: title of the command
+#  $2: long desription of the command
+#  rest: the command to execute
+function bench_command()
+{
+	if [ "$dry_run" = "true" ]; then return; fi
+	local title="$1"
+	local desc="$2"
+	shift
+	shift
+	if test "$verbose" = true; then outputopts="/dev/stdout"; else outputopts="/dev/null"; fi
+	timeout="time.out"
+	echo "$title" > "$timeout"
+	echo "# $desc" >> "$timeout"
+	echo "\$ $@" >> "$timeout"
+	echo
+	echo "** [$title] $desc **"
+	echo " $ $@"
+
+	# Execute the commands $count times
+	for i in `seq 1 "$count"`; do
+		/usr/bin/time -f "%U" -o "$timeout" -a "$@" > $outputopts 2>&1 || die "$1: failed"
+		echo -n "$i. "
+		tail -n 1 "$timeout"
+	done
+
+	line=`compute_stats "$timeout"`
+	echo "$line ($res)"
+	echo $line >> "$res"
+	rm $timeout
+}
+
+# Run a simple command witout storing the execution time
+# Used to display command on verbose and skip long executions when dry_run is given
+# $@ command to execute
+function run_command()
+{
+	if [ "$dry_run" = "true" ]; then return; fi
+	echo " $ $@"
+	"$@" || die "$@: failed"
+}
+
+# Check if the test should be skiped according to its name
+# $1: name of the test
+# $2: description of the test
+# $NOTSKIPED: arguments
+function skip_test()
+{
+	if test -z "$NOTSKIPED"; then
+		echo "* $1"
+		return 0
+	fi
+	if test "$NOTSKIPED" = "all"; then
+		: # Execute anyway
+	elif echo "$1" | egrep "$NOTSKIPED" >/dev/null 2>&1; then
+		: # Found one to execute
+	else
+		return 0
+	fi
+	echo "*"
+	echo "* $1 *****"
+	echo "*"
+	return 1
+}
+
+## HANDLE OPTIONS ##
+
+function usage()
+{
+	echo "run_bench: [options]* benchname"
+	echo "  -v: verbose mode"
+	echo "  -n count: number of execution for each bar (default: $count)"
+	echo "  --dry: Do not run the commands, just reuse the data and generate the graph"
+	echo "  --fast: Run less and faster tests"
+	echo "  -h: this help"
+}
+
+stop=false
+while [ "$stop" = false ]; do
+	case "$1" in
+		-v) verbose=true; shift;;
+		-h) usage; exit;;
+		-n) count="$2"; shift; shift;;
+		--dry) dry_run=true; shift;;
+		--fast) fast=true; shift;;
+		*) stop=true
+	esac
+done
+
+NOTSKIPED="$*"
+
+if test -z "$NOTSKIPED"; then
+	usage
+	echo "List of available benches:"
+	echo "* all: run all the benches"
+fi
+
+## COMPILE ENGINES
+
+test -f ../src/nitc_3 || ../src/ncall.sh -O
+test -f ./nitg || ../src/nitc_3 ../src/nitg.nit -O -v
+
+## EFFECTIVE BENCHS ##
+
+function bench_typetest_languages()
+{
+	name="$FUNCNAME"
+	skip_test "$name" && return
+
+	t=t
+	s=20
+	seq="w2_h2 w50_h2 w2_h25 w50_h25"
+	for b in $seq; do
+		run_command ./nitg languages/gen.nit
+		run_command ./gen.bin "${t}_$b" "$b"
+	done
+
+	prepare_res "$name-g++.dat" "g++" "g++"
+	for b in $seq; do
+		run_command g++ "${t}_$b.cpp" -O2 -o "${t}_$b.g++.bin"
+		bench_command "$b" "" "./${t}_$b.g++.bin" $s
+	done
+
+	prepare_res "$name-clang++.dat" "clang++" "clang++"
+	for b in $seq; do
+		run_command clang++ "${t}_$b.cpp" -O2 -o "${t}_$b.clang++.bin"
+		bench_command "$b" "" "./${t}_$b.clang++.bin" $s
+	done
+
+	prepare_res "$name-java.dat" "java" "java"
+	for b in $seq; do
+		run_command javac ${t}_$b.java
+		bench_command "$b" "" java "${t}_$b" $s
+	done
+
+	prepare_res "$name-scala.dat" "scala" "scala"
+	for b in $seq; do
+		run_command scalac ${t}_$b.scala
+		bench_command "$b" "" scala "${t}_$b" $s
+	done
+
+	prepare_res "$name-cs.dat" "c#" "c#"
+	for b in $seq; do
+		run_command gmcs ${t}_$b.cs
+		bench_command "$b" "" mono "${t}_$b.exe" $s
+	done
+
+	prepare_res "$name-es.dat" "es" "es"
+	for b in $seq; do
+		run_command ec -clean -finalize ${t}_$b/app${t}_$b.e
+		chmod +x app${t}_$b
+		mv app${t}_$b  ${t}_$b.es.bin
+		bench_command "$b" "" "./${t}_$b.es.bin" $s
+	done
+
+	prepare_res "$name-se.dat" "se" "se"
+	for b in $seq; do
+		run_command se compile -no_check app${t}_${b}_se.e -loadpath ${t}_${b}_se -o ${t}_$b.se.bin
+		bench_command "$b" "" "./${t}_$b.se.bin" $s
+	done
+
+	#too slow
+	#prepare_res "$name-nitg.dat" "nitg" "nitg"
+	#for b in $seq; do
+	#	run_command ./nitg "${t}_$b.nit" -o "${t}_$b.nitg.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+	#	bench_command "$b" "" "./${t}_$b.nitg.bin" $s
+	#done
+
+	prepare_res "$name-nitg-s.dat" "nitg-s" "nitg-s"
+	for b in $seq; do
+		run_command ./nitg ${t}_$b.nit --separate -o "${t}_$b.nitg-s.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+		bench_command "$b" "" "./${t}_$b.nitg-s.bin" $s
+	done
+
+	prepare_res "$name-nitg-su.dat" "nitg-su" "nitg-su"
+	for b in $seq; do
+		run_command ./nitg ${t}_$b.nit --separate --no-check-covariance -o "${t}_$b.nitg-su.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+		bench_command "$b" "" "./${t}_$b.nitg-su.bin" $s
+	done
+
+
+	prepare_res "$name-nitg-e.dat" "nitg-e" "nitg-e"
+	for b in $seq; do
+		run_command ./nitg ${t}_$b.nit --erasure -o "${t}_$b.nitg-e.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+		bench_command "$b" "" "./${t}_$b.nitg-e.bin" $s
+	done
+
+	prepare_res "$name-nitg-eu.dat" "nitg-eu" "nitg-eu"
+	for b in $seq; do
+		run_command ./nitg ${t}_$b.nit --erasure --no-check-covariance --no-check-erasure-cast -o "${t}_$b.nitg-eu.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+		bench_command "$b" "" "./${t}_$b.nitg-eu.bin" $s
+	done
+
+	plot "$name.gnu"
+}
+bench_typetest_languages
+
+function bench_typetest_depth()
+{
+	name="$FUNCNAME"
+	skip_test "$name" && return
+	rootdir=`pwd`
+	basedir="./${name}.out"
+
+	mkdir $basedir
+
+	t=t
+	s=20
+	seq="10 25 50 100"
+	for b in $seq; do
+		run_command ./nitg languages/$name.nit -o $basedir/$name.bin
+		run_command $basedir/$name.bin $basedir "${t}_$b" "$b"
+	done
+
+	prepare_res $basedir/$name-g++.dat "g++" "g++"
+	cppdir="${basedir}/cpp"
+	for b in $seq; do
+		run_command g++ "${cppdir}/${t}_$b.cpp" -O2 -o "${cppdir}/${t}_$b.g++.bin"
+		bench_command "$b" "" "${cppdir}/${t}_$b.g++.bin" $s
+	done
+
+	prepare_res $basedir/$name-clang++.dat "clang++" "clang++"
+	for b in $seq; do
+		run_command clang++ "${cppdir}/${t}_$b.cpp" -O2 -o "${cppdir}/${t}_$b.clang++.bin"
+		bench_command "$b" "" "${cppdir}/${t}_$b.clang++.bin" $s
+	done
+
+	prepare_res $basedir/$name-java.dat "java" "java"
+	javadir="${basedir}/java"
+	for b in $seq; do
+		run_command javac "${javadir}/${t}_$b.java"
+		bench_command "$b" "" java -cp "${javadir}/" "${t}_$b" $s
+	done
+
+	prepare_res $basedir/$name-scala.dat "scala" "scala"
+	scaladir="${basedir}/scala"
+	for b in $seq; do
+		run_command scalac "${scaladir}/${t}_$b.scala" -d "${scaladir}"
+		bench_command "$b" "" scala -cp "${scaladir}/" "${t}_$b" $s
+	done
+
+	prepare_res $basedir/$name-cs.dat "c#" "c#"
+	csdir="${basedir}/cs"
+	for b in $seq; do
+		run_command gmcs "$csdir/${t}_$b.cs"
+		bench_command "$b" "" mono "$csdir/${t}_$b.exe" $s
+	done
+
+	prepare_res $basedir/$name-es.dat "es" "es"
+	esdir="${basedir}/es"
+	for b in $seq; do
+		cd $esdir
+		run_command ec -clean -finalize ${t}_$b/app${t}_$b.e
+		chmod +x app${t}_$b
+		mv app${t}_$b ${t}_$b.es.bin
+		cd $rootdir
+		bench_command "$b" "" "$esdir/${t}_$b.es.bin" $s
+	done
+
+	prepare_res $basedir/$name-se.dat "se" "se"
+	sedir="${basedir}/se"
+	for b in $seq; do
+		cd $sedir
+		run_command se compile -no_check app${t}_${b}_se.e -loadpath ${t}_${b}_se -o ${t}_$b.se.bin
+		cd $rootdir
+		bench_command "$b" "" "$sedir/${t}_$b.se.bin" $s
+	done
+
+	nitdir="${basedir}/nit"
+	#too slow
+	#prepare_res "$name-nitg.dat" "nitg" "nitg"
+	#for b in $seq; do
+	#	run_command ./nitg "${t}_$b.nit" -o "${t}_$b.nitg.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+	#	bench_command "$b" "" "./${t}_$b.nitg.bin" $s
+	#done
+
+	prepare_res $nitdir/$name-nitg-s.dat "nitg-s" "nitg-s"
+	for b in $seq; do
+		run_command ./nitg $nitdir/${t}_$b.nit --separate -o "$nitdir/${t}_$b.nitg-s.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+		bench_command "$b" "" "$nitdir/${t}_$b.nitg-s.bin" $s
+	done
+
+	prepare_res $nitdir/$name-nitg-su.dat "nitg-su" "nitg-su"
+	for b in $seq; do
+		run_command ./nitg $nitdir/${t}_$b.nit --separate --no-check-covariance -o "$nitdir/${t}_$b.nitg-su.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+		bench_command "$b" "" "$nitdir/${t}_$b.nitg-su.bin" $s
+	done
+
+	prepare_res $nitdir/$name-nitg-e.dat "nitg-e" "nitg-e"
+	for b in $seq; do
+		run_command ./nitg $nitdir/${t}_$b.nit --erasure -o "$nitdir/${t}_$b.nitg-e.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+		bench_command "$b" "" "$nitdir/${t}_$b.nitg-e.bin" $s
+	done
+
+	prepare_res $nitdir/$name-nitg-eu.dat "nitg-eu" "nitg-eu"
+	for b in $seq; do
+		run_command ./nitg $nitdir/${t}_$b.nit --erasure --no-check-covariance --no-check-erasure-cast -o "$nitdir/${t}_$b.nitg-eu.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+		bench_command "$b" "" "$nitdir/${t}_$b.nitg-eu.bin" $s
+	done
+
+	plot $basedir/$name.gnu
+}
+bench_typetest_depth
+
+if test -n "$died"; then
+	echo "Some commands failed"
+	exit 1
+fi
+exit 0

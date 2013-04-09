@@ -65,9 +65,11 @@ class Generator
 		file.write("\n")
 	end
 
-	fun writenit(name: String)
+	fun writenit(dir: String, name: String)
 	do
-		file = new OFStream.open("{name}.nit")
+		dir = "{dir}/nit"
+		dir.mkdir
+		file = new OFStream.open("{dir}/{name}.nit")
 		write "class Root\n\tfun id: Int do return 0\nend"
 		for c in classes do
 			write "class {c}"
@@ -136,11 +138,14 @@ class Generator
 		file.close
 	end
 
-	fun writejava(name: String, interfaces: Bool)
+	fun writejava(dir: String, name: String, interfaces: Bool)
 	do
+		dir = "{dir}/java"
+		dir.mkdir
+		file = new OFStream.open("{dir}/{name}.java")
+
 		var cl = ""
 		if interfaces then cl = "X"
-		file = new OFStream.open("{name}.java")
 		write "class {name} \{"
 		if interfaces then
 			write "static interface Root\n\t\{ int id(); \}"
@@ -235,11 +240,14 @@ class Generator
 		file.close
 	end
 
-	fun writecsharp(name: String, interfaces: Bool)
+	fun writecsharp(dir: String, name: String, interfaces: Bool)
 	do
+		dir = "{dir}/cs"
+		dir.mkdir
+		file = new OFStream.open("{dir}/{name}.cs")
+
 		var cl = ""
 		if interfaces then cl = "X"
-		file = new OFStream.open("{name}.cs")
 		write "class {name} \{"
 		if interfaces then
 			write "interface Root\n\t\{ int Id(); \}"
@@ -338,10 +346,13 @@ class Generator
 		file.close
 	end
 
-	fun writescala(name: String)
+	fun writescala(dir: String, name: String)
 	do
+		dir = "{dir}/scala"
+		dir.mkdir
+		file = new OFStream.open("{dir}/{name}.scala")
+
 		var cl = ""
-		file = new OFStream.open("{name}.scala")
 		write "object {name} \{"
 		write "class Root\n\t\{ def id: Int = 0 \}"
 		for c in classes do
@@ -422,9 +433,12 @@ class Generator
 		file.close
 	end
 
-	fun writecpp(name: String)
+	fun writecpp(dir: String, name: String)
 	do
-		file = new OFStream.open("{name}.cpp")
+		dir = "{dir}/cpp"
+		dir.mkdir
+		file = new OFStream.open("{dir}/{name}.cpp")
+
 		write "#include <iostream>"
 		write "#include <stdlib.h>"
 		write "class Root\n\t\{ public: virtual int id() \{ return 0;\} \};"
@@ -502,20 +516,26 @@ class Generator
 		write "\}"
 		file.close
 	end
-	fun writee(name: String, se: Bool)
+
+	fun writee(dir: String, name: String, se: Bool)
 	do
+		if se then
+			dir = "{dir}/se/{name}"
+		else
+			dir = "{dir}/es/{name}"
+		end
+		dir.mkdir
+		file = new OFStream.open("{dir}/root.e")
+
 		var istk = ""
 		if se then istk = " is"
-
-		name.mkdir
-		file = new OFStream.open("{name}/root.e")
 		write "class ROOT"
 		write "feature id: INTEGER {istk} do Result := 0 end"
 		write "end"
 		file.close
 
 		for c in classes do
-			file = new OFStream.open("{name}/{c}.e")
+			file = new OFStream.open("{dir}/{c}.e")
 			write "class {c} "
 			if c.supers.is_empty then
 				write "\tinherit ROOT"
@@ -529,7 +549,7 @@ class Generator
 			file.close
 		end
 
-		file = new OFStream.open("{name}/l.e")
+		file = new OFStream.open("{dir}/l.e")
 		write "class L[E]"
 		write "inherit ROOT"
 		write "create make"
@@ -542,7 +562,7 @@ class Generator
 		write "end"
 		file.close
 
-		file = new OFStream.open("{name}/app{name}.e")
+		file = new OFStream.open("{dir}/app{name}.e")
 		write "class APP{name.to_upper}"
 		if se then
 			write "insert ARGUMENTS"
@@ -638,9 +658,10 @@ class Generator
 end
 
 var g = new Generator
-var name = args.first
+var outdir = args.first
+var name = args[1]
 if args.length > 1 then
-	var opts = args[1].split_with("_")
+	var opts = args[2].split_with("_")
 	for opt in opts do
 		var oname = opt.substring(0,1)
 		var val = opt.substring_from(1).to_i
@@ -657,10 +678,11 @@ if args.length > 1 then
 	end
 end
 g.genhier
-g.writenit(name)
-g.writejava(name, true)
-g.writecsharp(name, true)
-g.writescala(name)
-g.writecpp(name)
-g.writee("{name}_se", true)
-g.writee(name, false)
+
+g.writenit(outdir, name)
+g.writejava(outdir, name, true)
+g.writecsharp(outdir, name, true)
+g.writescala(outdir, name)
+g.writecpp(outdir, name)
+g.writee(outdir, "{name}_se", true)
+g.writee(outdir, name, false)
