@@ -341,6 +341,113 @@ function bench_typetest_depth()
 }
 bench_typetest_depth
 
+function bench_typetest_fts_depth()
+{
+	name="$FUNCNAME"
+	skip_test "$name" && return
+	rootdir=`pwd`
+	basedir="./${name}.out"
+
+	mkdir $basedir
+
+	t=t
+	s=20
+	seq="10 25 50 100"
+	for b in $seq; do
+		run_command ./nitg languages/$name.nit -o $basedir/$name.bin
+		run_command $basedir/$name.bin $basedir "${t}_$b" "$b"
+	done
+
+	prepare_res $basedir/$name-g++.dat "g++" "g++"
+	cppdir="${basedir}/cpp"
+	for b in $seq; do
+		run_command g++ "${cppdir}/${t}_$b.cpp" -O2 -o "${cppdir}/${t}_$b.g++.bin"
+		bench_command "$b" "" "${cppdir}/${t}_$b.g++.bin" $s
+	done
+
+	prepare_res $basedir/$name-clang++.dat "clang++" "clang++"
+	for b in $seq; do
+		run_command clang++ "${cppdir}/${t}_$b.cpp" -O2 -o "${cppdir}/${t}_$b.clang++.bin"
+		bench_command "$b" "" "${cppdir}/${t}_$b.clang++.bin" $s
+	done
+
+	prepare_res $basedir/$name-java.dat "java" "java"
+	javadir="${basedir}/java"
+	for b in $seq; do
+		run_command javac "${javadir}/${t}_$b.java"
+		bench_command "$b" "" java -cp "${javadir}/" "${t}_$b" $s
+	done
+
+	prepare_res $basedir/$name-scala.dat "scala" "scala"
+	scaladir="${basedir}/scala"
+	for b in $seq; do
+		run_command scalac "${scaladir}/${t}_$b.scala" -d "${scaladir}"
+		bench_command "$b" "" scala -cp "${scaladir}/" "${t}_$b" $s
+	done
+
+	prepare_res $basedir/$name-cs.dat "c#" "c#"
+	csdir="${basedir}/cs"
+	for b in $seq; do
+		run_command gmcs "$csdir/${t}_$b.cs"
+		bench_command "$b" "" mono "$csdir/${t}_$b.exe" $s
+	done
+
+	prepare_res $basedir/$name-es.dat "es" "es"
+	esdir="${basedir}/es"
+	for b in $seq; do
+		cd $esdir
+		run_command ec -clean -finalize ${t}_$b/app${t}_$b.e
+		chmod +x app${t}_$b
+		mv app${t}_$b ${t}_$b.es.bin
+		cd $rootdir
+		bench_command "$b" "" "$esdir/${t}_$b.es.bin" $s
+	done
+
+	prepare_res $basedir/$name-se.dat "se" "se"
+	sedir="${basedir}/se"
+	for b in $seq; do
+		cd $sedir
+		run_command se compile -no_check app${t}_${b}_se.e -loadpath ${t}_${b}_se -o ${t}_$b.se.bin
+		cd $rootdir
+		bench_command "$b" "" "$sedir/${t}_$b.se.bin" $s
+	done
+
+	nitdir="${basedir}/nit"
+	#too slow
+	#prepare_res "$name-nitg.dat" "nitg" "nitg"
+	#for b in $seq; do
+	#	run_command ./nitg "${t}_$b.nit" -o "${t}_$b.nitg.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+	#	bench_command "$b" "" "./${t}_$b.nitg.bin" $s
+	#done
+
+	prepare_res $nitdir/$name-nitg-s.dat "nitg-s" "nitg-s"
+	for b in $seq; do
+		run_command ./nitg $nitdir/${t}_$b.nit --separate -o "$nitdir/${t}_$b.nitg-s.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+		bench_command "$b" "" "$nitdir/${t}_$b.nitg-s.bin" $s
+	done
+
+	prepare_res $nitdir/$name-nitg-su.dat "nitg-su" "nitg-su"
+	for b in $seq; do
+		run_command ./nitg $nitdir/${t}_$b.nit --separate --no-check-covariance -o "$nitdir/${t}_$b.nitg-su.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+		bench_command "$b" "" "$nitdir/${t}_$b.nitg-su.bin" $s
+	done
+
+	prepare_res $nitdir/$name-nitg-e.dat "nitg-e" "nitg-e"
+	for b in $seq; do
+		run_command ./nitg $nitdir/${t}_$b.nit --erasure -o "$nitdir/${t}_$b.nitg-e.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+		bench_command "$b" "" "$nitdir/${t}_$b.nitg-e.bin" $s
+	done
+
+	prepare_res $nitdir/$name-nitg-eu.dat "nitg-eu" "nitg-eu"
+	for b in $seq; do
+		run_command ./nitg $nitdir/${t}_$b.nit --erasure --no-check-covariance --no-check-erasure-cast -o "$nitdir/${t}_$b.nitg-eu.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+		bench_command "$b" "" "$nitdir/${t}_$b.nitg-eu.bin" $s
+	done
+
+	plot $basedir/$name.gnu
+}
+bench_typetest_fts_depth
+
 if test -n "$died"; then
 	echo "Some commands failed"
 	exit 1
