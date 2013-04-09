@@ -134,8 +134,9 @@ if test -z "$NOTSKIPED"; then
 fi
 
 ## COMPILE ENGINES
-
-test -f ../src/nitc_3 || ../src/ncall.sh -O
+cd ../src
+test -f ./nitc_3 || ./ncall.sh -O
+cd ../benchmarks
 test -f ./nitg || ../src/nitc_3 ../src/nitg.nit -O -v
 
 ## EFFECTIVE BENCHS ##
