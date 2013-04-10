@@ -75,12 +75,14 @@ class Generator
 			write "end"
 		end
 
+		write "var klass:Klass[{classes.first}] = new Klass[{classes.last}]"
+		write "var x = 0"
 		write "for i in [0..{loops}[ do"
 		write "\tfor j in [0..{loops}[ do"
-		write "\t\tvar klass:Klass[{classes.first}] = new Klass[{classes.last}]"
-		write "\t\tprint klass isa Klass[{classes[middle]}]"
+		write "\t\tif klass isa Klass[{classes[middle]}] then x += 1"
 		write "\tend"
 		write "end"
+		write "print x"
 
 		file.close
 	end
@@ -122,12 +124,14 @@ class Generator
 		end
 
 		write "static void Main(string[] args) \{"
+		write "\tInterface<{classes.first}> klass = (Interface<{classes.first}>)new Klass<{classes.last}>();"
+		write "\tint x = 0;"
 		write "\tfor(int i = 0; i < {loops}; i++) \{"
 		write "\t\tfor(int j = 0; j < {loops}; j++) \{"
-		write "\t\t\tInterface<{classes.first}> klass = (Interface<{classes.first}>)new Klass<{classes.last}>();"
-		write "\t\t\tSystem.Console.WriteLine(klass is Interface<{classes[middle]}>);"
+		write "\t\t\tif(klass is Interface<{classes[middle]}>) \{ x++; \};"
 		write "\t\t}"
 		write "\t\}"
+		write "\t\t\tSystem.Console.WriteLine(x);"
 		write "\}"
 		write "\}"
 		file.close
@@ -187,19 +191,20 @@ class Generator
 		write "\t\tlocal"
 		write "\t\t\ta: KLASS[{classes.first}]"
 		write "\t\t\tto: KLASS[{classes[middle]}]"
+		write "\t\t\ti: INTEGER"
+		write "\t\t\tj: INTEGER"
 		write "\t\t\tx: INTEGER"
-		write "\t\t\ty: INTEGER"
 		write "\t\tdo"
-		write "\t\t\tfrom x := 0 until x>={loops} loop"
-		write "\t\t\t\tfrom y := 0 until y>={loops} loop"
-		write "\t\t\t\t\tcreate \{KLASS[{classes.last}]\} a"
+		write "\t\t\tcreate \{KLASS[{classes.last}]\} a"
+		write "\t\t\tfrom i := 0 until i>={loops} loop"
+		write "\t\t\t\tfrom j := 0 until j>={loops} loop"
 		write "\t\t\t\t\tto ?= a"
-		write "\t\t\t\t\tprint((to /= Void).out)"
-		write "\t\t\t\t\tprint(\"%N\")"
-		write "\t\t\t\t\ty := y + 1"
+		write "\t\t\t\t\tif to /= Void then x := x + 1 end"
+		write "\t\t\t\t\tj := j + 1"
 		write "\t\t\t\tend"
-		write "\t\t\t\tx := x + 1"
+		write "\t\t\t\ti := i + 1"
 		write "\t\t\tend"
+		write "\t\t\tprint(x.out)"
 		write "\t\tend"
 		write "end"
 		file.close

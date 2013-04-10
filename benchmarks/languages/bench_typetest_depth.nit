@@ -71,12 +71,14 @@ class Generator
 			write "end"
 		end
 
+		write "var a:{classes.first}[Root] = new {classes.last}[Root]"
+		write "var x = 0"
 		write "for i in [0..{loops}[ do"
 		write "\tfor j in [0..{loops}[ do"
-		write "\t\tvar a:{classes.first}[Root] = new {classes.last}[Root]"
-		write "\t\tprint a isa {classes[middle]}[Root]"
+		write "\t\tif a isa {classes[middle]}[Root] then x += 1"
 		write "\tend"
 		write "end"
+		write "print x"
 
 		file.close
 	end
@@ -116,16 +118,24 @@ class Generator
 		end
 
 		write "static public void main(String args[]) \{"
+		if interfaces then
+			write "\t{classes.first}<Root> a = new X{classes.last}<Root>();"
+			write "\t{classes.first}<Root> b = new X{classes.last}<Root>();"
+		else
+			write "\t{classes.first}<Root> a = new {classes.last}<Root>();"
+			write "\t{classes.first}<Root> b = new X{classes.last}<Root>();"
+		end
+		write "\ttest(a, b);"
+		write "\}"
+
+		write "static public void test({classes.first}<Root> a, {classes.first}<Root> b) \{"
+		write "\tint x = 0;"
 		write "\tfor(int i = 0; i < {loops}; i++) \{"
 		write "\t\tfor(int j = 0; j < {loops}; j++) \{"
-		if interfaces then
-			write "\t\t\t{classes.first}<Root> a = new X{classes.last}<Root>();"
-		else
-			write "\t\t\t{classes.first}<Root> a = new {classes.last}<Root>();"
-		end
-		write "\t\t\tSystem.out.println(a instanceof {classes[middle]});"
+		write "\t\t\tif(a instanceof {classes[middle]}) \{ x++; \} else \{ a = b; \};"
 		write "\t\t}"
 		write "\t\}"
+		write "\tSystem.out.println(x);"
 		write "\}"
 		write "\}"
 		file.close
@@ -166,16 +176,24 @@ class Generator
 		end
 
 		write "static void Main(string[] args) \{"
+		if interfaces then
+			write "\t{classes.first}<Root> a = new X{classes.last}<Root>();"
+			write "\t{classes.first}<Root> b = new X{classes.last}<Root>();"
+		else
+			write "\t{classes.first}<Root> a = new {classes.last}<Root>();"
+			write "\t{classes.first}<Root> b = new {classes.last}<Root>();"
+		end
+		write "\tTest(a, b);"
+		write "\}"
+
+		write "static void Test({classes.first}<Root> a, {classes.first}<Root> b) \{"
+		write "\tint x = 0;"
 		write "\tfor(int i = 0; i < {loops}; i++) \{"
 		write "\t\tfor(int j = 0; j < {loops}; j++) \{"
-		if interfaces then
-			write "\t\t\t{classes.first}<Root> a = new X{classes.last}<Root>();"
-		else
-			write "\t\t\t{classes.first}<Root> a = new {classes.last}<Root>();"
-		end
-		write "\t\t\tSystem.Console.WriteLine(a is {classes[middle]}<Root>);"
+		write "\t\t\tif(a is {classes[middle]}<Root>) \{ x++; \} else \{ a = b; \};"
 		write "\t\t}"
 		write "\t\}"
+		write "\tSystem.Console.WriteLine(x);"
 		write "\}"
 		write "\}"
 		file.close
@@ -211,16 +229,25 @@ class Generator
 		end
 
 		write "def main(args: Array[String]) = \{"
+		if interfaces then
+			write "\tvar a:{classes.first}[Root] = new X{classes.last}[Root]()"
+			write "\tvar b:{classes.first}[Root] = new X{classes.last}[Root]()"
+		else
+			write "\tvar a:{classes.first}[Root] = new {classes.last}[Root]()"
+			write "\tvar b:{classes.first}[Root] = new {classes.last}[Root]()"
+		end
+		write "\ttest(a, b)"
+		write "\}"
+
+		write "def test(a:{classes.first}[Root], b:{classes.first}[Root]) = \{"
+		write "\tvar o = a"
+		write "\tvar x = 0"
 		write "\tfor (i <- 0 to {loops}) \{"
 		write "\t\tfor (j <- 0 to {loops}) \{"
-		if interfaces then
-			write "\t\t\tvar a:{classes.first}[Root] = new X{classes.last}[Root]()"
-		else
-			write "\t\t\tvar a:{classes.first}[Root] = new {classes.last}[Root]()"
-		end
-		write "\t\t\tprintln(a.isInstanceOf[{classes[middle]}[Root]])"
+		write "\t\tif (o.isInstanceOf[{classes[middle]}[Root]]) \{ x = x + 1 \} else \{ o = b \}"
 		write "\t\t\}"
 		write "\t\}"
+		write "\t\t\tprintln(x)"
 		write "\}"
 		write "\}"
 
@@ -249,15 +276,23 @@ class Generator
 			write "\};"
 		end
 
-		write "int main(int argc, char **argv) \{"
+		write "void test({classes.first}<Root>* a, {classes.first}<Root>* b) \{"
+		write "\tint x = 0;"
 		write "\tfor(int i = 0; i < {loops}; i++) \{"
 		write "\t\tfor(int j = 0; j < {loops}; j++) \{"
-		write "\t\t\t{classes.first}<Root>* a = new {classes.first}<Root>();"
 		write "\t\t\t{classes[middle]}<Root>* to = dynamic_cast<{classes[middle]}<Root>*>(a);"
-		write "\t\tif(to != 0) \{ std::cout << \"true\" << std::endl; \} else \{ std::cout << \"false\" << std::endl; \}"
+		write "\t\tif(to != 0) \{ x++; \} else \{ a = b; \}"
 		write "\t\t}"
 		write "\t\}"
+		write "\tstd::cout << x << std::endl;"
 		write "\}"
+
+		write "int main(int argc, char **argv) \{"
+		write "\t{classes.first}<Root>* a = new {classes.first}<Root>();"
+		write "\t{classes.first}<Root>* b = new {classes.first}<Root>();"
+		write "\ttest(a, b);"
+		write "\}"
+
 		file.close
 	end
 
@@ -308,20 +343,31 @@ class Generator
 		end
 		write "\t\tlocal"
 		write "\t\t\ta: {classes.first}[ROOT]"
-		write "\t\t\tto: {classes[middle]}[ROOT]"
-		write "\t\t\tx: INTEGER"
-		write "\t\t\ty: INTEGER"
+		write "\t\t\tb: {classes.first}[ROOT]"
 		write "\t\tdo"
-		write "\t\t\tfrom x := 0 until x>={loops} loop"
-		write "\t\t\t\tfrom y := 0 until y>={loops} loop"
-		write "\t\t\t\t\tcreate \{{classes.last}[ROOT]\} a"
-		write "\t\t\t\t\tto ?= a"
-		write "\t\t\t\t\tprint((to /= Void).out)"
-		write "\t\t\t\t\tprint(\"%N\")"
-		write "\t\t\t\t\ty := y + 1"
+		write "\t\t\tcreate \{{classes.last}[ROOT]\} a"
+		write "\t\t\tcreate \{{classes.last}[ROOT]\} b"
+		write "\t\t\ttest(a, b)"
+		write "\t\tend"
+
+		write "\ttest(a: {classes.first}[ROOT]; b: {classes.first}[ROOT]){istk}"
+		write "\t\tlocal"
+		write "\t\t\to: {classes.first}[ROOT]"
+		write "\t\t\tto: {classes[middle]}[ROOT]"
+		write "\t\t\ti: INTEGER"
+		write "\t\t\tj: INTEGER"
+		write "\t\t\tx: INTEGER"
+		write "\t\tdo"
+		write "\t\t\to := a"
+		write "\t\t\tfrom i := 0 until i>={loops} loop"
+		write "\t\t\t\tfrom j := 0 until j>={loops} loop"
+		write "\t\t\t\t\tto ?= o"
+		write "\t\t\t\t\tif to /= Void then x := x + 1 else o := b end"
+		write "\t\t\t\t\tj := j + 1"
 		write "\t\t\t\tend"
-		write "\t\t\t\tx := x + 1"
+		write "\t\t\t\ti := i + 1"
 		write "\t\t\tend"
+		write "\t\t\tprint(x.out)"
 		write "\t\tend"
 		write "end"
 		file.close
