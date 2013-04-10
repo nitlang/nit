@@ -306,12 +306,11 @@ function bench_typetest_depth()
 	done
 
 	nitdir="${basedir}/nit"
-	#too slow
-	#prepare_res "$name-nitg.dat" "nitg" "nitg"
-	#for b in $seq; do
-	#	run_command ./nitg "${t}_$b.nit" -o "${t}_$b.nitg.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
-	#	bench_command "$b" "" "./${t}_$b.nitg.bin" $s
-	#done
+	prepare_res $nitdir/$name-nitg.dat "nitg" "nitg"
+	for b in $seq; do
+		run_command ./nitg $nitdir/${t}_$b.nit -o "$nitdir/${t}_$b.nitg.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+		bench_command "$b" "" "$nitdir/${t}_$b.nitg.bin" $s
+	done
 
 	prepare_res $nitdir/$name-nitg-s.dat "nitg-s" "nitg-s"
 	for b in $seq; do
@@ -413,12 +412,11 @@ function bench_typetest_fts_depth()
 	done
 
 	nitdir="${basedir}/nit"
-	#too slow
-	#prepare_res "$name-nitg.dat" "nitg" "nitg"
-	#for b in $seq; do
-	#	run_command ./nitg "${t}_$b.nit" -o "${t}_$b.nitg.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
-	#	bench_command "$b" "" "./${t}_$b.nitg.bin" $s
-	#done
+	prepare_res $nitdir/$name-nitg.dat "nitg" "nitg"
+	for b in $seq; do
+		run_command ./nitg $nitdir/${t}_$b.nit -o "$nitdir/${t}_$b.nitg.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+		bench_command "$b" "" "$nitdir/${t}_$b.nitg.bin" $s
+	done
 
 	prepare_res $nitdir/$name-nitg-s.dat "nitg-s" "nitg-s"
 	for b in $seq; do
@@ -521,12 +519,12 @@ function bench_typetest_fts_width()
 	done
 
 	nitdir="${basedir}/nit"
-	#too slow
-	#prepare_res "$name-nitg.dat" "nitg" "nitg"
-	#for b in $seq; do
-	#	run_command ./nitg "${t}_$b.nit" -o "${t}_$b.nitg.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
-	#	bench_command "$b" "" "./${t}_$b.nitg.bin" $s
-	#done
+
+	prepare_res $nitdir/$name-nitg.dat "nitg" "nitg"
+	for b in $seq; do
+		run_command ./nitg $nitdir/${t}_$b.nit -o "$nitdir/${t}_$b.nitg.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+		bench_command "$b" "" "$nitdir/${t}_$b.nitg.bin" $s
+	done
 
 	prepare_res $nitdir/$name-nitg-s.dat "nitg-s" "nitg-s"
 	for b in $seq; do
