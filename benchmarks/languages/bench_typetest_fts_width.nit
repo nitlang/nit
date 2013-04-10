@@ -38,7 +38,7 @@ class Generator
 	fun genhier
 	do
 		var s: nullable Klass = null
-		for d in [1..dept[ do
+		for d in [1..dept] do
 			var c = new Klass(d)
 
 			classes.add(c)
@@ -49,7 +49,7 @@ class Generator
 			end
 			s = c
 		end
-		middle = (dept / 2) - 1
+		middle = (dept + 1) / 2
 
 		for i in [0..width[ do fts.add("FT{i}")
 		for i in [0..width[ do paramsF.add(classes.first.to_s)
