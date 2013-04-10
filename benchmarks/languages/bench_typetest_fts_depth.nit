@@ -85,59 +85,6 @@ class Generator
 		file.close
 	end
 
-	fun writejava(dir: String, name: String, interfaces: Bool)
-	do
-		dir = "{dir}/java"
-		dir.mkdir
-		file = new OFStream.open("{dir}/{name}.java")
-
-		var cl = ""
-		if interfaces then cl = "X"
-		write "class {name} \{"
-		if interfaces then
-			write "static interface Root\n\t\{ int id(); \}"
-			write "static class Klass<E> implements Root\n\t\{ public int id() \{ return 0;\} \}"
-		else
-			write "static class Root\n\t\{ int id() \{ return 0;\} \}"
-			write "static class Klass<E> extends Root\n\t\{ public int id() \{ return 0;\} \}"
-		end
-
-		for c in classes do
-			if interfaces then
-				write "static interface {c} "
-			else
-				write "static class {c} "
-			end
-			if c.supers.is_empty then
-				write "\textends Root"
-			else for s in [c.supers.first] do
-				write "\textends {s}"
-			end
-			if interfaces then
-				write "\{\}"
-				write "static class X{c} implements {c}"
-			end
-			write "\{"
-			write "\tpublic int id() \{ return {c.id}; \}"
-			write "\}"
-		end
-
-		write "static public void main(String args[]) \{"
-		write "\tfor(int i = 0; i < {loops}; i++) \{"
-		write "\t\tfor(int j = 0; j < {loops}; j++) \{"
-		if interfaces then
-			write "\t\t\tKlass<X{classes.first}> klass = new Klass<X{classes.first}>();"
-		else
-			write "\t\t\tKlass<{classes.first}> klass = new Klass<{classes.first}>();"
-		end
-		write "\t\t\tSystem.out.println(klass instanceof Klass);"
-		write "\t\t}"
-		write "\t\}"
-		write "\}"
-		write "\}"
-		file.close
-	end
-
 	fun writecsharp(dir: String, name: String, interfaces: Bool)
 	do
 		dir = "{dir}/cs"
@@ -182,88 +129,6 @@ class Generator
 		write "\t\t}"
 		write "\t\}"
 		write "\}"
-		write "\}"
-		file.close
-	end
-
-	fun writescala(dir: String, name: String, interfaces: Bool)
-	do
-		dir = "{dir}/scala"
-		dir.mkdir
-		file = new OFStream.open("{dir}/{name}.scala")
-
-		var cl = ""
-		write "object {name} \{"
-		write "class Root\n\t\{ def id: Int = 0 \}"
-		write "class Klass[+E] extends Root\n\t\{ override def id: Int = 0 \}"
-		for c in classes do
-			if interfaces then
-				write "trait {c} "
-			else
-				write "class {c} "
-			end
-			if c.supers.is_empty then
-				write "\textends Root"
-			else for s in [c.supers.first] do
-				write "\textends {s}"
-			end
-			if interfaces then
-				write "\{\}"
-				write "class X{c} extends {c}"
-			end
-			write "\{"
-			write "\toverride def id: Int = {c.id}"
-			write "\}"
-		end
-
-		write "def main(args: Array[String]) = \{"
-		write "\tfor (i <- 0 to {loops}) \{"
-		write "\t\tfor (j <- 0 to {loops}) \{"
-		if interfaces then
-			write "\t\t\tvar klass:Klass[{classes.first}] = new Klass[X{classes.last}]()"
-		else
-			write "\t\t\tvar klass:Klass[{classes.first}] = new Klass[{classes.last}]()"
-		end
-		write "\t\t\tprintln(klass.isInstanceOf[Klass[{classes[middle]}]])"
-		write "\t\t\}"
-		write "\t\}"
-		write "\}"
-		write "\}"
-
-		file.close
-	end
-
-	fun writecpp(dir: String, name: String)
-	do
-		dir = "{dir}/cpp"
-		dir.mkdir
-		file = new OFStream.open("{dir}/{name}.cpp")
-
-		write "#include <iostream>"
-		write "#include <stdlib.h>"
-		write "class Root\n\t\{ public: virtual int id() \{ return 0;\} \};"
-		write "template<class E>"
-		write "class Klass\n\t\{ public: virtual int id() \{ return 0;\} \};"
-		for c in classes do
-			write "class {c} "
-			if c.supers.is_empty then
-				write "\t: public virtual Root"
-			else for s in [c.supers.first] do
-				write "\t: public virtual {s}"
-			end
-			write "\{"
-			write "\tpublic: virtual int id() \{ return {c.id}; \}"
-			write "\};"
-		end
-
-		write "int main(int argc, char **argv) \{"
-		write "\tfor(int i = 0; i < {loops}; i++) \{"
-		write "\t\tfor(int j = 0; j < {loops}; j++) \{"
-		write "\t\t\tKlass<{classes.first}>* klass = new Klass<{classes.first}>();"
-		write "\t\t\tKlass<{classes[middle]}>* to = dynamic_cast<Klass<{classes[middle]}>*>(klass);"
-		write "\t\tif(to != 0) \{ std::cout << \"true\" << std::endl; \} else \{ std::cout << \"false\" << std::endl; \}"
-		write "\t\t}"
-		write "\t\}"
 		write "\}"
 		file.close
 	end
@@ -353,9 +218,6 @@ if args.length > 3 then use_interfaces = false
 g.genhier
 
 g.writenit(outdir, name)
-g.writejava(outdir, name, use_interfaces)
 g.writecsharp(outdir, name, use_interfaces)
-g.writescala(outdir, name, use_interfaces)
-g.writecpp(outdir, name)
 g.writee(outdir, "{name}_se", true)
 g.writee(outdir, name, false)

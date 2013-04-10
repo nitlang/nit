@@ -357,33 +357,6 @@ function bench_typetest_fts_depth()
 		run_command $basedir/$name.bin $basedir "${t}_$b" "$b"
 	done
 
-	prepare_res $basedir/$name-g++.dat "g++" "g++"
-	cppdir="${basedir}/cpp"
-	for b in $seq; do
-		run_command g++ "${cppdir}/${t}_$b.cpp" -O2 -o "${cppdir}/${t}_$b.g++.bin"
-		bench_command "$b" "" "${cppdir}/${t}_$b.g++.bin" $s
-	done
-
-	prepare_res $basedir/$name-clang++.dat "clang++" "clang++"
-	for b in $seq; do
-		run_command clang++ "${cppdir}/${t}_$b.cpp" -O2 -o "${cppdir}/${t}_$b.clang++.bin"
-		bench_command "$b" "" "${cppdir}/${t}_$b.clang++.bin" $s
-	done
-
-	prepare_res $basedir/$name-java.dat "java" "java"
-	javadir="${basedir}/java"
-	for b in $seq; do
-		run_command javac "${javadir}/${t}_$b.java"
-		bench_command "$b" "" java -cp "${javadir}/" "${t}_$b" $s
-	done
-
-	prepare_res $basedir/$name-scala.dat "scala" "scala"
-	scaladir="${basedir}/scala"
-	for b in $seq; do
-		run_command scalac "${scaladir}/${t}_$b.scala" -d "${scaladir}"
-		bench_command "$b" "" scala -cp "${scaladir}/" "${t}_$b" $s
-	done
-
 	prepare_res $basedir/$name-cs.dat "c#" "c#"
 	csdir="${basedir}/cs"
 	for b in $seq; do
@@ -462,33 +435,6 @@ function bench_typetest_fts_width()
 	for b in $seq; do
 		run_command ./nitg languages/$name.nit -o $basedir/$name.bin
 		run_command $basedir/$name.bin $basedir "${t}_$b" $depth $b
-	done
-
-	prepare_res $basedir/$name-g++.dat "g++" "g++"
-	cppdir="${basedir}/cpp"
-	for b in $seq; do
-		run_command g++ "${cppdir}/${t}_$b.cpp" -O2 -o "${cppdir}/${t}_$b.g++.bin"
-		bench_command "$b" "" "${cppdir}/${t}_$b.g++.bin" $s
-	done
-
-	prepare_res $basedir/$name-clang++.dat "clang++" "clang++"
-	for b in $seq; do
-		run_command clang++ "${cppdir}/${t}_$b.cpp" -O2 -o "${cppdir}/${t}_$b.clang++.bin"
-		bench_command "$b" "" "${cppdir}/${t}_$b.clang++.bin" $s
-	done
-
-	prepare_res $basedir/$name-java.dat "java" "java"
-	javadir="${basedir}/java"
-	for b in $seq; do
-		run_command javac "${javadir}/${t}_$b.java"
-		bench_command "$b" "" java -cp "${javadir}/" "${t}_$b" $s
-	done
-
-	prepare_res $basedir/$name-scala.dat "scala" "scala"
-	scaladir="${basedir}/scala"
-	for b in $seq; do
-		run_command scalac "${scaladir}/${t}_$b.scala" -d "${scaladir}"
-		bench_command "$b" "" scala -cp "${scaladir}/" "${t}_$b" $s
 	done
 
 	prepare_res $basedir/$name-cs.dat "c#" "c#"
