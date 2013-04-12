@@ -57,7 +57,7 @@ function bench_command()
 
 	# Execute the commands $count times
 	for i in `seq 1 "$count"`; do
-		/usr/bin/time -f "%U" -o "$timeout" -a "$@" > $outputopts 2>&1 || die "$1: failed"
+		(ulimit -t 60; /usr/bin/time -f "%U" -o "$timeout" -a "$@") > $outputopts 2>&1 || die "$1: failed"
 		echo -n "$i. "
 		tail -n 1 "$timeout"
 	done
@@ -75,7 +75,7 @@ function run_command()
 {
 	if [ "$dry_run" = "true" ]; then return; fi
 	echo " $ $@"
-	"$@" || die "$@: failed"
+	(ulimit -t 180; "$@") || die "$@: failed"
 }
 
 # Check if the test should be skiped according to its name
