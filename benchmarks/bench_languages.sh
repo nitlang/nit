@@ -271,6 +271,12 @@ function bench_typetest_depth()
 		bench_command "$b" "" java -cp "${javadir}/" "${t}_$b" $s
 	done
 
+	prepare_res $basedir/$name-gcj.dat "gcj" "gcj"
+	for b in $seq; do
+		run_command gcj --main=${t}_$b -O2 "${javadir}/${t}_$b.java" -o "${javadir}/${t}_$b.gcj.bin"
+		bench_command "$b" "" "${javadir}/${t}_$b.gcj.bin" $s
+	done
+
 	prepare_res $basedir/$name-scala.dat "scala" "scala"
 	scaladir="${basedir}/scala"
 	for b in $seq; do
