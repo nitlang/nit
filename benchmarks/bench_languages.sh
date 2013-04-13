@@ -246,6 +246,7 @@ function bench_typetest_depth()
 	t=t
 	s=20
 	seq="10 25 50 100"
+	seq="2 4 8 16"
 	for b in $seq; do
 		run_command ./nitg languages/$name.nit -o $basedir/$name.bin
 		run_command $basedir/$name.bin $basedir "${t}_$b" "$b"
