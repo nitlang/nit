@@ -194,7 +194,7 @@ class Generator
 		end
 		for c in classes do
 			if interfaces then
-				write "interface {c}<E> "
+				write "interface {c}<out E> "
 			else
 				write "class {c}<E> "
 			end
@@ -254,9 +254,9 @@ class Generator
 		write "class Root\n\t\{ def id: Int = 0 \}"
 		for c in classes do
 			if interfaces then
-				write "trait {c}[E] "
+				write "trait {c}[+E] "
 			else
-				write "class {c}[E] "
+				write "class {c}[+E] "
 			end
 			if c.supers.is_empty then
 				write "\textends Root"
