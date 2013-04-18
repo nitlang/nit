@@ -95,8 +95,8 @@ class Generator
 		write "print x"
 		write "end"
 
-		write "var a:{classes.first}[Root] = new {classes.last}[Root]"
-		write "var b:{classes.first}[Root] = new {classes.first}[Root]"
+		write "var a: Root = new {classes.first}[Root]"
+		write "var b: Root = a"
 		for c in classes do
 			write "\t\t\tif a.id > 0 then a = new {c}[Root]"
 		end
@@ -141,31 +141,25 @@ class Generator
 		end
 
 		write "static public void main(String args[]) \{"
-		if interfaces then
-			write "\t{classes.first}<Root> a = new X{classes.last}<Root>();"
-			write "\t{classes.first}<Root> b = new X{classes.first}<Root>();"
-			for c in classes do
-				write "\t\t\tif (a.id() > 0) a = new X{c}<Root>();"
-			end
-		else
-			write "\t{classes.first}<Root> a = new {classes.last}<Root>();"
-			write "\t{classes.first}<Root> b = new {classes.first}<Root>();"
-			for c in classes do
-				write "\t\t\tif (a.id() > 0) a = new {c}<Root>();"
-			end
+		var tagc = ""
+		if interfaces then tagc = "X"
+		write "\tRoot a = new {tagc}{classes.first}<Root>();"
+		write "\tRoot b = a;"
+		for c in classes do
+			write "\t\t\tif (a.id() > 0) a = new {tagc}{c}<Root>();"
 		end
 		write "\ttest(b, b, 10, -100);"
 		write "\ttest(a, a, {loops}, 0);"
 		write "\}"
 
-		write "static public void test({classes.first}<Root> a, {classes.first}<Root> b, int loops, int start) \{"
+		write "static public void test(Root a, Root b, int loops, int start) \{"
 		write "\tint x = start;"
 		write "\tfor(int i = 0; i < loops; i++) \{"
 		write "\t\tfor(int j = 0; j < loops; j++) \{"
 		var test
 		if dry then test = "" else test = "a instanceof {classes[middle]} && "
 		write "\t\t\tif({test}x>=0) \{"
-		if check then write "\t\t\t\tx += 1"
+		if check then write "\t\t\t\tx -= 2"
 		write "\t\t\t\} else \{ x--; a = b;\}"
 		write "\t\t}"
 		write "\t\}"
@@ -210,24 +204,18 @@ class Generator
 		end
 
 		write "static void Main(string[] args) \{"
-		if interfaces then
-			write "\t{classes.first}<Root> a = new X{classes.last}<Root>();"
-			write "\t{classes.first}<Root> b = new X{classes.first}<Root>();"
-			for c in classes do
-				write "\t\t\tif (a.Id() > 0) a = new X{c}<Root>();"
-			end
-		else
-			write "\t{classes.first}<Root> a = new {classes.last}<Root>();"
-			write "\t{classes.first}<Root> b = new {classes.first}<Root>();"
-			for c in classes do
-				write "\t\t\tif (a.Id() > 0) a = new {c}<Root>();"
-			end
+		var tagc = ""
+		if interfaces then tagc = "X"
+		write "\tRoot a = new {tagc}{classes.first}<Root>();"
+		write "\tRoot b = a;"
+		for c in classes do
+			write "\t\t\tif (a.Id() > 0) a = new {tagc}{c}<Root>();"
 		end
 		write "\tTest(b, b, 10, -100);"
 		write "\tTest(a, a, {loops}, 0);"
 		write "\}"
 
-		write "static void Test({classes.first}<Root> a, {classes.first}<Root> b, int loops, int start) \{"
+		write "static void Test(Root a, Root b, int loops, int start) \{"
 		write "\tint x = start;"
 		write "\tfor(int i = 0; i < loops; i++) \{"
 		write "\t\tfor(int j = 0; j < loops; j++) \{"
@@ -274,24 +262,18 @@ class Generator
 		end
 
 		write "def main(args: Array[String]) = \{"
-		if interfaces then
-			write "\tvar a:{classes.first}[Root] = new X{classes.last}[Root]()"
-			write "\tvar b:{classes.first}[Root] = new X{classes.first}[Root]()"
-			for c in classes do
-				write "\t\t\tif (a.id > 0) a = new X{c}[Root]();"
-			end
-		else
-			write "\tvar a:{classes.first}[Root] = new {classes.last}[Root]()"
-			write "\tvar b:{classes.first}[Root] = new {classes.first}[Root]()"
-			for c in classes do
-				write "\t\t\tif (a.id > 0) a = new {c}[Root]();"
-			end
+		var tagc = ""
+		if interfaces then tagc = "X"
+		write "\tvar a:Root = new {tagc}{classes.first}[Root]()"
+		write "\tvar b:Root = a"
+		for c in classes do
+			write "\t\t\tif (a.id > 0) a = new {tagc}{c}[Root]();"
 		end
 		write "\ttest(b, b, 10, -100)"
 		write "\ttest(a, a, {loops}, 0)"
 		write "\}"
 
-		write "def test(aa:{classes.first}[Root], b:{classes.first}[Root], l: Int, start: Int) = \{"
+		write "def test(aa:Root, b:Root, l: Int, start: Int) = \{"
 		write "\tvar a = aa"
 		write "\tvar x = start"
 		write "\tvar loops = l"
@@ -337,13 +319,13 @@ class Generator
 			write "\};"
 		end
 
-		write "void test({classes.first}<Root>* a, {classes.first}<Root>* b, int loops, int start) \{"
+		write "void test(Root *a, Root *b, int loops, int start) \{"
 		write "\tint x = start;"
 		write "\tfor(int i = 0; i < loops; i++) \{"
 		write "\t\tfor(int j = 0; j < loops; j++) \{"
 		var test
 		if dry then test = "" else
-			write "\t\t\t{classes[middle]}<Root>* to = dynamic_cast<{classes[middle]}<Root>*>(a);"
+			write "\t\t\t{classes[middle]}<Root> *to = dynamic_cast<{classes[middle]}<Root>*>(a);"
 			test = "to != 0 &&"
 		end
 		write "\t\tif({test}x>=0) \{"
@@ -355,8 +337,8 @@ class Generator
 		write "\}"
 
 		write "int main(int argc, char **argv) \{"
-		write "\t{classes.first}<Root>* a = new {classes.last}<Root>();"
-		write "\t{classes.first}<Root>* b = new {classes.first}<Root>();"
+		write "\tRoot *a = new {classes.first}<Root>();"
+		write "\tRoot *b = a;"
 		for c in classes do
 			write "\t\t\tif (a->id() > 0) a = new {c}<Root>();"
 		end
@@ -413,11 +395,11 @@ class Generator
 			write "\tmake(args: ARRAY[STRING]){istk}"
 		end
 		write "\t\tlocal"
-		write "\t\t\ta: {classes.first}[ROOT]"
-		write "\t\t\tb: {classes.first}[ROOT]"
+		write "\t\t\ta: ROOT"
+		write "\t\t\tb: ROOT"
 		write "\t\tdo"
-		write "\t\t\tcreate \{{classes.last}[ROOT]\} a"
-		write "\t\t\tcreate \{{classes.first}[ROOT]\} b"
+		write "\t\t\tcreate \{{classes.first}[ROOT]\} a"
+		write "\t\t\tb := a"
 		for c in classes do
 			write "\t\t\tif a.id > 0 then create \{{c}[ROOT]\} a end"
 		end
@@ -425,9 +407,9 @@ class Generator
 		write "\t\t\ttest(a, a, {loops}, 0)"
 		write "\t\tend"
 
-		write "\ttest(a: {classes.first}[ROOT]; b: {classes.first}[ROOT]; l: INTEGER; start: INTEGER){istk}"
+		write "\ttest(a: ROOT; b: ROOT; l: INTEGER; start: INTEGER){istk}"
 		write "\t\tlocal"
-		write "\t\t\to: {classes.first}[ROOT]"
+		write "\t\t\to: ROOT"
 		write "\t\t\tto: {classes[middle]}[ROOT]"
 		write "\t\t\ti: INTEGER"
 		write "\t\t\tj: INTEGER"
