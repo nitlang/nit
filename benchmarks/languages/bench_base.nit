@@ -26,7 +26,7 @@ class Generator
 	var classes = new Array[Klass]
 
 	var dept writable = 5
-	var loops writable = 20000
+	var loops writable = 50000
 	var middle writable = 0
 	var dry writable = false
 	var check writable = false
@@ -88,7 +88,7 @@ class Generator
 		write "\t\tif {test} and x >= 0 then"
 		if check then write "\t\tx += 1"
 		write "\telse"
-		write "\t\t\tx -= 1"
+		write "\t\t\tx = x - 1 + i - j"
 		write "\t\t\ta = b"
 		write "\t\tend"
 		write "\t\tj += 1"
@@ -166,8 +166,9 @@ class Generator
 		var test = "true"
 		if not dry then test = testjava(interfaces)
 		write "\t\t\tif({test} && x>=0) \{"
-		if check then write "\t\t\t\tx -= 2"
-		write "\t\t\t\} else \{ x--; a = b;\}"
+		if check then write "\t\t\t\tx = x + 1;"
+		#write "\t\t\t\} else \{ x = x - 1 + i - j; a = b;\}"
+		write "\t\t\t\} else \{ x = x - 1; a = b;\}"
 		write "\t\t}"
 		write "\t\}"
 		write "\tSystem.out.println(x);"
@@ -232,7 +233,7 @@ class Generator
 		if not dry then test = testcsharp(interfaces)
 		write "\t\t\tif({test} && x>=0) \{"
 		if check then write "\t\t\t\tx++;"
-		write "\} else \{ x--; a = b; \};"
+		write "\} else \{ x = x - 1 + i - j; a = b; \};"
 		write "\t\t}"
 		write "\t\}"
 		write "\tSystem.Console.WriteLine(x);"
@@ -295,7 +296,8 @@ class Generator
 		var test = "true"
 		if not dry then test = testscala(interfaces)
 		write "\t\tif ({test} && x>=0) \{"
-		if check then write "\t\t\tx += 1"
+		if check then write "\t\t\tx += 1;"
+		#write "\} else \{ x = x - 1 + i - j; a = b; \}"
 		write "\} else \{ x = x - 1; a = b; \}"
 		write "\t\tj += 1"
 		write "\t\t\}"
@@ -339,8 +341,8 @@ class Generator
 		var test = "true"
 		if not dry then test = testcpp
 		write "\t\tif({test} && x>=0) \{"
-		if check then write "\t\t\tx += 1"
-		write "\} else \{ x--; a = b;\}"
+		if check then write "\t\t\tx += 1;"
+		write "\} else \{ x = x - 1 + i - j; a = b;\}"
 		write "\t\t}"
 		write "\t\}"
 		write "\tstd::cout << x << std::endl;"
@@ -442,7 +444,7 @@ class Generator
 		if not dry then test = teste(se)
 		write "\t\t\t\t\tif {test} and then x >= 0 then" 
 		if check then write "\t\t\t\t\tx := x + 1"
-		write "\t\t\t\t\telse x := x - 1; a := b end"
+		write "\t\t\t\t\telse x := x - 1 + i - j; a := b end"
 		write "\t\t\t\t\tj := j + 1"
 		write "\t\t\t\tend"
 		write "\t\t\t\ti := i + 1"
