@@ -1562,7 +1562,7 @@ redef class AAbsSendExpr
 		var lc = type_recv.local_class
 		var prop: nullable MMMethod = null
 		if lc.has_global_property_by_name(name) then prop = lc.select_method(name)
-		if prop == null and v.local_property.global.is_init then
+		if prop == null then
 			var props = lc.super_methods_named(name)
 			if props.length > 1 then
 				v.error(self, "Error: Ambigous method name '{name}' for {props.join(", ")}. Use explicit designation.")
@@ -1662,6 +1662,10 @@ redef class ANewExpr
 
 		if not prop.global.is_init then
 			v.error(self, "Error: {prop} is not a constructor.")
+			return
+		end
+		if not prop.global.is_init_for(t.local_class) then
+			v.error(self, "Error: {prop} is not a constructor in {t.local_class}.")
 			return
 		end
 		_stype = t
