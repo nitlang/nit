@@ -167,8 +167,8 @@ class Generator
 		if not dry then test = testjava(interfaces)
 		write "\t\t\tif({test} && x>=0) \{"
 		if check then write "\t\t\t\tx = x + 1;"
-		#write "\t\t\t\} else \{ x = x - 1 + i - j; a = b;\}"
-		write "\t\t\t\} else \{ x = x - 1; a = b;\}"
+		write "\t\t\t\} else \{ x = x - 1 + i - j; a = b;\}"
+		#write "\t\t\t\} else \{ x = x - 1; a = b;\}"
 		write "\t\t}"
 		write "\t\}"
 		write "\tSystem.out.println(x);"
