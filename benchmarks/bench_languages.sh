@@ -141,102 +141,9 @@ test -f ./nitg || ../src/nitc_3 ../src/nitg.nit -O -v
 
 ## EFFECTIVE BENCHS ##
 
-function bench_typetest_languages()
+function bench_language()
 {
-	name="$FUNCNAME"
-	skip_test "$name" && return
-
-	t=t
-	s=20
-	seq="w2_h2 w50_h2 w2_h25 w50_h25"
-	for b in $seq; do
-		run_command ./nitg languages/gen.nit
-		run_command ./gen.bin "${t}_$b" "$b"
-	done
-
-	prepare_res "$name-g++.dat" "g++" "g++"
-	for b in $seq; do
-		run_command g++ "${t}_$b.cpp" -O2 -o "${t}_$b.g++.bin"
-		bench_command "$b" "" "./${t}_$b.g++.bin" $s
-	done
-
-	prepare_res "$name-clang++.dat" "clang++" "clang++"
-	for b in $seq; do
-		run_command clang++ "${t}_$b.cpp" -O2 -o "${t}_$b.clang++.bin"
-		bench_command "$b" "" "./${t}_$b.clang++.bin" $s
-	done
-
-	prepare_res "$name-java.dat" "java" "java"
-	for b in $seq; do
-		run_command javac ${t}_$b.java
-		bench_command "$b" "" java "${t}_$b" $s
-	done
-
-	prepare_res "$name-scala.dat" "scala" "scala"
-	for b in $seq; do
-		run_command scalac ${t}_$b.scala
-		bench_command "$b" "" scala "${t}_$b" $s
-	done
-
-	prepare_res "$name-cs.dat" "c#" "c#"
-	for b in $seq; do
-		run_command gmcs ${t}_$b.cs
-		bench_command "$b" "" mono "${t}_$b.exe" $s
-	done
-
-	prepare_res "$name-es.dat" "es" "es"
-	for b in $seq; do
-		run_command ec -clean -finalize ${t}_$b/app${t}_$b.e
-		chmod +x app${t}_$b
-		mv app${t}_$b  ${t}_$b.es.bin
-		bench_command "$b" "" "./${t}_$b.es.bin" $s
-	done
-
-	prepare_res "$name-se.dat" "se" "se"
-	for b in $seq; do
-		run_command se compile -no_check app${t}_${b}_se.e -loadpath ${t}_${b}_se -o ${t}_$b.se.bin
-		bench_command "$b" "" "./${t}_$b.se.bin" $s
-	done
-
-	#too slow
-	#prepare_res "$name-nitg.dat" "nitg" "nitg"
-	#for b in $seq; do
-	#	run_command ./nitg "${t}_$b.nit" -o "${t}_$b.nitg.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
-	#	bench_command "$b" "" "./${t}_$b.nitg.bin" $s
-	#done
-
-	prepare_res "$name-nitg-s.dat" "nitg-s" "nitg-s"
-	for b in $seq; do
-		run_command ./nitg ${t}_$b.nit --separate -o "${t}_$b.nitg-s.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
-		bench_command "$b" "" "./${t}_$b.nitg-s.bin" $s
-	done
-
-	prepare_res "$name-nitg-su.dat" "nitg-su" "nitg-su"
-	for b in $seq; do
-		run_command ./nitg ${t}_$b.nit --separate --no-check-covariance -o "${t}_$b.nitg-su.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
-		bench_command "$b" "" "./${t}_$b.nitg-su.bin" $s
-	done
-
-
-	prepare_res "$name-nitg-e.dat" "nitg-e" "nitg-e"
-	for b in $seq; do
-		run_command ./nitg ${t}_$b.nit --erasure -o "${t}_$b.nitg-e.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
-		bench_command "$b" "" "./${t}_$b.nitg-e.bin" $s
-	done
-
-	prepare_res "$name-nitg-eu.dat" "nitg-eu" "nitg-eu"
-	for b in $seq; do
-		run_command ./nitg ${t}_$b.nit --erasure --no-check-covariance --no-check-erasure-cast -o "${t}_$b.nitg-eu.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
-		bench_command "$b" "" "./${t}_$b.nitg-eu.bin" $s
-	done
-
-	plot "$name.gnu"
-}
-bench_typetest_languages
-
-function bench_typetest_depth()
-{
-	name="$FUNCNAME"
+	name="$1"
 	skip_test "$name" && return
 	rootdir=`pwd`
 	basedir="./${name}.out"
@@ -245,8 +152,7 @@ function bench_typetest_depth()
 
 	t=t
 	s=20
-	seq="10 25 50 100"
-	seq="2 4 8 16"
+	seq="2 4 8"
 	for b in $seq; do
 		run_command ./nitg languages/$name.nit -o $basedir/$name.bin
 		run_command $basedir/$name.bin $basedir "${t}_$b" "$b"
@@ -325,6 +231,7 @@ function bench_typetest_depth()
 		bench_command "$b" "" "$nitdir/${t}_$b.nitg-s.bin" $s
 	done
 
+<<XXX
 	tg="nitg-s-bm"
 	prepare_res $nitdir/$name-$tg.dat "$tg" "$tg"
 	for b in $seq; do
@@ -363,251 +270,15 @@ function bench_typetest_depth()
 		run_command ./nitg $nitdir/${t}_$b.nit --erasure --no-check-covariance --no-check-erasure-cast -o "$nitdir/${t}_$b.nitg-eu.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
 		bench_command "$b" "" "$nitdir/${t}_$b.nitg-eu.bin" $s
 	done
+XXX
 
 	plot $basedir/$name.gnu
 }
-bench_typetest_depth
 
-function bench_typetest_fts_depth()
-{
-	name="$FUNCNAME"
-	skip_test "$name" && return
-	rootdir=`pwd`
-	basedir="./${name}.out"
-
-	mkdir $basedir
-
-	t=t
-	s=20
-	seq="10 25 50 100"
-	for b in $seq; do
-		run_command ./nitg languages/$name.nit -o $basedir/$name.bin
-		run_command $basedir/$name.bin $basedir "${t}_$b" "$b"
-	done
-
-	prepare_res $basedir/$name-cs.dat "c#" "c#"
-	csdir="${basedir}/cs"
-	for b in $seq; do
-		run_command gmcs "$csdir/${t}_$b.cs"
-		bench_command "$b" "" mono "$csdir/${t}_$b.exe" $s
-	done
-
-	prepare_res $basedir/$name-es.dat "es" "es"
-	esdir="${basedir}/es"
-	for b in $seq; do
-		cd $esdir
-		run_command ec -clean -finalize ${t}_$b/app${t}_$b.e
-		chmod +x app${t}_$b
-		mv app${t}_$b ${t}_$b.es.bin
-		cd $rootdir
-		bench_command "$b" "" "$esdir/${t}_$b.es.bin" $s
-	done
-
-	prepare_res $basedir/$name-se.dat "se" "se"
-	sedir="${basedir}/se"
-	for b in $seq; do
-		cd $sedir
-		run_command se compile -no_check app${t}_${b}_se.e -loadpath ${t}_${b}_se -o ${t}_$b.se.bin
-		cd $rootdir
-		bench_command "$b" "" "$sedir/${t}_$b.se.bin" $s
-	done
-
-	nitdir="${basedir}/nit"
-	prepare_res $nitdir/$name-nitg.dat "nitg" "nitg"
-	for b in $seq; do
-		run_command ./nitg $nitdir/${t}_$b.nit -o "$nitdir/${t}_$b.nitg.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
-		bench_command "$b" "" "$nitdir/${t}_$b.nitg.bin" $s
-	done
-
-	prepare_res $nitdir/$name-nitg-s.dat "nitg-s" "nitg-s"
-	for b in $seq; do
-		run_command ./nitg $nitdir/${t}_$b.nit --separate -o "$nitdir/${t}_$b.nitg-s.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
-		bench_command "$b" "" "$nitdir/${t}_$b.nitg-s.bin" $s
-	done
-
-	prepare_res $nitdir/$name-nitg-su.dat "nitg-su" "nitg-su"
-	for b in $seq; do
-		run_command ./nitg $nitdir/${t}_$b.nit --separate --no-check-covariance -o "$nitdir/${t}_$b.nitg-su.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
-		bench_command "$b" "" "$nitdir/${t}_$b.nitg-su.bin" $s
-	done
-
-	prepare_res $nitdir/$name-nitg-e.dat "nitg-e" "nitg-e"
-	for b in $seq; do
-		run_command ./nitg $nitdir/${t}_$b.nit --erasure -o "$nitdir/${t}_$b.nitg-e.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
-		bench_command "$b" "" "$nitdir/${t}_$b.nitg-e.bin" $s
-	done
-
-	prepare_res $nitdir/$name-nitg-eu.dat "nitg-eu" "nitg-eu"
-	for b in $seq; do
-		run_command ./nitg $nitdir/${t}_$b.nit --erasure --no-check-covariance --no-check-erasure-cast -o "$nitdir/${t}_$b.nitg-eu.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
-		bench_command "$b" "" "$nitdir/${t}_$b.nitg-eu.bin" $s
-	done
-
-	plot $basedir/$name.gnu
-}
-bench_typetest_fts_depth
-
-function bench_typetest_fts_width()
-{
-	name="$FUNCNAME"
-	skip_test "$name" && return
-	rootdir=`pwd`
-	basedir="./${name}.out"
-
-	mkdir $basedir
-
-	t=t
-	s=20
-	depth=10
-	seq="1 2 5 10"
-	for b in $seq; do
-		run_command ./nitg languages/$name.nit -o $basedir/$name.bin
-		run_command $basedir/$name.bin $basedir "${t}_$b" $depth $b
-	done
-
-	prepare_res $basedir/$name-cs.dat "c#" "c#"
-	csdir="${basedir}/cs"
-	for b in $seq; do
-		run_command gmcs "$csdir/${t}_$b.cs"
-		bench_command "$b" "" mono "$csdir/${t}_$b.exe" $s
-	done
-
-	prepare_res $basedir/$name-es.dat "es" "es"
-	esdir="${basedir}/es"
-	for b in $seq; do
-		cd $esdir
-		run_command ec -clean -finalize ${t}_$b/app${t}_$b.e
-		chmod +x app${t}_$b
-		mv app${t}_$b ${t}_$b.es.bin
-		cd $rootdir
-		bench_command "$b" "" "$esdir/${t}_$b.es.bin" $s
-	done
-
-	prepare_res $basedir/$name-se.dat "se" "se"
-	sedir="${basedir}/se"
-	for b in $seq; do
-		cd $sedir
-		run_command se compile -no_check app${t}_${b}_se.e -loadpath ${t}_${b}_se -o ${t}_$b.se.bin
-		cd $rootdir
-		bench_command "$b" "" "$sedir/${t}_$b.se.bin" $s
-	done
-
-	nitdir="${basedir}/nit"
-
-	prepare_res $nitdir/$name-nitg.dat "nitg" "nitg"
-	for b in $seq; do
-		run_command ./nitg $nitdir/${t}_$b.nit -o "$nitdir/${t}_$b.nitg.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
-		bench_command "$b" "" "$nitdir/${t}_$b.nitg.bin" $s
-	done
-
-	prepare_res $nitdir/$name-nitg-s.dat "nitg-s" "nitg-s"
-	for b in $seq; do
-		run_command ./nitg $nitdir/${t}_$b.nit --separate -o "$nitdir/${t}_$b.nitg-s.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
-		bench_command "$b" "" "$nitdir/${t}_$b.nitg-s.bin" $s
-	done
-
-	prepare_res $nitdir/$name-nitg-su.dat "nitg-su" "nitg-su"
-	for b in $seq; do
-		run_command ./nitg $nitdir/${t}_$b.nit --separate --no-check-covariance -o "$nitdir/${t}_$b.nitg-su.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
-		bench_command "$b" "" "$nitdir/${t}_$b.nitg-su.bin" $s
-	done
-
-	prepare_res $nitdir/$name-nitg-e.dat "nitg-e" "nitg-e"
-	for b in $seq; do
-		run_command ./nitg $nitdir/${t}_$b.nit --erasure -o "$nitdir/${t}_$b.nitg-e.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
-		bench_command "$b" "" "$nitdir/${t}_$b.nitg-e.bin" $s
-	done
-
-	prepare_res $nitdir/$name-nitg-eu.dat "nitg-eu" "nitg-eu"
-	for b in $seq; do
-		run_command ./nitg $nitdir/${t}_$b.nit --erasure --no-check-covariance --no-check-erasure-cast -o "$nitdir/${t}_$b.nitg-eu.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
-		bench_command "$b" "" "$nitdir/${t}_$b.nitg-eu.bin" $s
-	done
-
-	plot $basedir/$name.gnu
-}
-bench_typetest_fts_width
-
-function bench_typetest_fts_nesting()
-{
-	name="$FUNCNAME"
-	skip_test "$name" && return
-	rootdir=`pwd`
-	basedir="./${name}.out"
-
-	mkdir $basedir
-
-	t=t
-	s=20
-	depth=5
-	seq="1 2 5 10"
-	for b in $seq; do
-		run_command ./nitg languages/$name.nit -o $basedir/$name.bin
-		run_command $basedir/$name.bin $basedir "${t}_$b" $depth $b
-	done
-
-	prepare_res $basedir/$name-cs.dat "c#" "c#"
-	csdir="${basedir}/cs"
-	for b in $seq; do
-		run_command gmcs "$csdir/${t}_$b.cs"
-		bench_command "$b" "" mono "$csdir/${t}_$b.exe" $s
-	done
-
-	prepare_res $basedir/$name-es.dat "es" "es"
-	esdir="${basedir}/es"
-	for b in $seq; do
-		cd $esdir
-		run_command ec -clean -finalize ${t}_$b/app${t}_$b.e
-		chmod +x app${t}_$b
-		mv app${t}_$b ${t}_$b.es.bin
-		cd $rootdir
-		bench_command "$b" "" "$esdir/${t}_$b.es.bin" $s
-	done
-
-	prepare_res $basedir/$name-se.dat "se" "se"
-	sedir="${basedir}/se"
-	for b in $seq; do
-		cd $sedir
-		run_command se compile -no_check app${t}_${b}_se.e -loadpath ${t}_${b}_se -o ${t}_$b.se.bin
-		cd $rootdir
-		bench_command "$b" "" "$sedir/${t}_$b.se.bin" $s
-	done
-
-	nitdir="${basedir}/nit"
-
-	prepare_res $nitdir/$name-nitg.dat "nitg" "nitg"
-	for b in $seq; do
-		run_command ./nitg $nitdir/${t}_$b.nit -o "$nitdir/${t}_$b.nitg.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
-		bench_command "$b" "" "$nitdir/${t}_$b.nitg.bin" $s
-	done
-
-	prepare_res $nitdir/$name-nitg-s.dat "nitg-s" "nitg-s"
-	for b in $seq; do
-		run_command ./nitg $nitdir/${t}_$b.nit --separate -o "$nitdir/${t}_$b.nitg-s.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
-		bench_command "$b" "" "$nitdir/${t}_$b.nitg-s.bin" $s
-	done
-
-	prepare_res $nitdir/$name-nitg-su.dat "nitg-su" "nitg-su"
-	for b in $seq; do
-		run_command ./nitg $nitdir/${t}_$b.nit --separate --no-check-covariance -o "$nitdir/${t}_$b.nitg-su.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
-		bench_command "$b" "" "$nitdir/${t}_$b.nitg-su.bin" $s
-	done
-
-	prepare_res $nitdir/$name-nitg-e.dat "nitg-e" "nitg-e"
-	for b in $seq; do
-		run_command ./nitg $nitdir/${t}_$b.nit --erasure -o "$nitdir/${t}_$b.nitg-e.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
-		bench_command "$b" "" "$nitdir/${t}_$b.nitg-e.bin" $s
-	done
-
-	prepare_res $nitdir/$name-nitg-eu.dat "nitg-eu" "nitg-eu"
-	for b in $seq; do
-		run_command ./nitg $nitdir/${t}_$b.nit --erasure --no-check-covariance --no-check-erasure-cast -o "$nitdir/${t}_$b.nitg-eu.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
-		bench_command "$b" "" "$nitdir/${t}_$b.nitg-eu.bin" $s
-	done
-
-	plot $basedir/$name.gnu
-}
-bench_typetest_fts_nesting
+for name in languages/*.nit; do
+	n=`basename $name .nit`
+	bench_language $n
+done
 
 if test -n "$died"; then
 	echo "Some commands failed"
