@@ -7,4 +7,4 @@
 * clock_more.nit: refine clock to add comparability between clocks.
 * circular_list.nit: simple use of generic classes and nullable types to implement a double-linked circular list.
 * extern_methods.nit: basic use of extern methods, Nit methods implemented in C code
-
+* callback_monkey.nit|callback_chimpanze.nit: simple example of callback using through FFI.
