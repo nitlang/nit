@@ -37,7 +37,6 @@ class Chimpanze
 	# - Back of wokeUpAction method 
 	redef fun wokeUp( sender:Monkey, message:Object )
 	do
-		print sender
 		print message
 	end
 end
