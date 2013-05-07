@@ -323,10 +323,203 @@ extern GtkMisc `{GtkMisc *`}
 
 end
 
-extern GtkColorSelectionDialog
+#A single line text entry field
+#@https://developer.gnome.org/gtk3/3.2/GtkEntry.html
+extern GtkEntry `{GtkEntry *`}
 	super GtkWidget
-	new ( title : String, parent : GtkWindow ) is extern  import String::to_cstring `{
-		 return gtk_color_chooser_dialog_new( String_to_cstring( title ), parent );
+
+	new is extern `{
+		 return (GtkEntry *)gtk_entry_new();
+	`}
+
+	fun text : String is extern import String::to_cstring`{
+		return new_String_from_cstring( (char *)gtk_entry_get_text( recv ) );	
+	`}
+
+	fun text=( value : String) is extern import String::to_cstring`{
+		gtk_entry_set_text( recv, String_to_cstring( value ) );	
+	`}
+
+	fun visible : Bool is extern `{
+		return gtk_entry_get_visibility( recv );	
+	`}
+
+	fun visible=( is_visible : Bool) is extern `{
+		gtk_entry_set_visibility( recv, is_visible );	
+	`}
+
+	fun max_length : Int is extern `{
+		return gtk_entry_get_max_length( recv );	
+	`}
+
+	fun max_length=( max : Int) is extern `{
+		gtk_entry_set_max_length( recv, max );	
+	`}
+end
+
+#Base class for widgets which visualize an adjustment
+#@https://developer.gnome.org/gtk3/3.2/GtkRange.html
+extern GtkRange `{GtkRange *`}
+	super GtkWidget
+
+	#Gets the current position of the fill level indicator.
+	fun fill_level : Float is extern `{
+		return gtk_range_get_fill_level( recv );	
+	`}
+
+	fun fill_level=( level : Float ) is extern `{
+		gtk_range_set_fill_level( recv, level );	
+	`}
+
+	#Gets whether the range is restricted to the fill level.
+	fun restricted_to_fill_level : Bool is extern `{
+		return gtk_range_get_restrict_to_fill_level( recv );
+	`}
+
+	fun restricted_to_fill_level=( restricted : Bool ) is extern `{
+		gtk_range_set_restrict_to_fill_level( recv, restricted );
+	`}
+
+	#Gets whether the range displays the fill level graphically.
+	fun show_fill_level : Bool is extern `{
+		return gtk_range_get_show_fill_level( recv );	
+	`}
+
+ 	fun show_fill_level=( is_displayed : Bool ) is extern `{
+		gtk_range_set_show_fill_level( recv, is_displayed );	
+	`}
+
+	fun adjustment : GtkAdjustment is extern `{
+		return gtk_range_get_adjustment( recv );	
+	`}
+
+ 	fun adjustment=( value : GtkAdjustment ) is extern `{
+		gtk_range_set_adjustment( recv, value );	
+	`}
+	
+	fun inverted : Bool is extern `{
+		return gtk_range_get_inverted( recv );	
+	`}
+
+ 	fun inverted=( setting : Bool ) is extern `{
+		gtk_range_set_inverted( recv, setting );	
+	`}
+
+	fun value : Float is extern `{
+		return gtk_range_get_value( recv );	
+	`}
+
+ 	fun value=( val : Float ) is extern `{
+		gtk_range_set_value( recv, val );	
+	`}
+
+	fun set_increments( step : Float, page : Float ) is extern `{	
+		gtk_range_set_increments( recv, step, page );
+	`}
+
+	fun set_range( min : Float, max : Float ) is extern `{	
+		gtk_range_set_range( recv, min, max );
+	`}
+
+	fun round_digits : Int is extern `{
+		return gtk_range_get_round_digits( recv );	
+	`}
+
+ 	fun round_digits=( nb : Int ) is extern `{
+		gtk_range_set_round_digits( recv, nb );	
+	`}
+
+	fun size_fixed : Bool is extern `{
+		return gtk_range_get_slider_size_fixed( recv );	
+	`}
+
+	fun size_fixed=( is_fixed : Bool ) is extern `{
+		return gtk_range_set_slider_size_fixed( recv, is_fixed );	
+	`}
+
+	fun flippable : Bool is extern `{
+		return gtk_range_get_flippable( recv );	
+	`}
+
+	fun min_size=( is_flippable : Bool ) is extern `{
+		return gtk_range_set_flippable( recv, is_flippable );	
+	`}
+
+	fun min_slider_size : Int is extern `{
+		return gtk_range_get_min_slider_size( recv );	
+	`}
+
+	fun min_slider_size=( size : Int ) is extern `{
+		return gtk_range_set_min_slider_size( recv, size );	
+	`}
+end
+
+#A slider widget for selecting a value from a range
+#@https://developer.gnome.org/gtk3/3.2/GtkScale.html
+extern GtkScale `{GtkScale *`}
+	super GtkRange
+
+	new ( orientation : GtkOrientation, adjustment : GtkAdjustment ) is extern `{
+		return (GtkScale *)gtk_scale_new( orientation, adjustment );	
+	`}
+
+	new with_range ( orientation : GtkOrientation, min : Float, max : Float, step : Float ) is extern `{
+		return (GtkScale *)gtk_scale_new_with_range( orientation, min, max, step );	
+	`}
+
+	fun digits : Int is extern `{
+		return gtk_scale_get_digits( recv );
+	`}
+
+	fun digits=( nb_digits : Int ) is extern `{
+		gtk_scale_set_digits( recv, nb_digits );
+	`}
+
+	fun draw_value : Bool is extern `{
+		return gtk_scale_get_draw_value( recv );
+	`}
+
+	fun draw_value=( is_displayed : Bool ) is extern `{
+		gtk_scale_set_draw_value( recv, is_displayed );
+	`}
+
+	fun value_position : GtkPositionType is extern `{
+		return gtk_scale_get_value_pos( recv );
+	`}
+
+	fun value_position=( pos : GtkPositionType ) is extern `{
+		gtk_scale_set_value_pos( recv, pos );	
+	`}
+
+	fun has_origin : Bool is extern `{
+		return gtk_scale_get_has_origin( recv );
+	`}
+
+	fun has_origin=( orig : Bool ) is extern `{
+		gtk_scale_set_has_origin( recv, orig );
+	`}
+
+	fun add_mark( value : Float, position : GtkPositionType, markup : String ) is extern import String::to_cstring`{
+		gtk_scale_add_mark( recv, value, position, String_to_cstring( markup ) );	
+	`}
+
+	#Removes any marks that have been added with gtk_scale_add_mark().
+	fun clear_marks is extern `{
+		gtk_scale_clear_marks( recv );	
+	`}
+
+	#get layout
+	#get layout offsets
+
+end
+
+#A scrollbar
+#@https://developer.gnome.org/gtk3/3.2/GtkScrollbar.html
+extern GtkScrollbar `{GtkScrollbar *`}
+	super GtkRange
+
+		new ( orientation : GtkOrientation, adjustment : GtkAdjustment ) is extern `{
+		return (GtkScrollbar *)gtk_scrollbar_new( orientation, adjustment );	
 	`}
 end
 
@@ -683,7 +876,6 @@ extern GtkComboBox `{GtkComboBox *`}
 	`}
 end
 
-
 #Show a spinner animation
 #@https://developer.gnome.org/gtk3/3.2/GtkSpinner.html
 extern GtkSpinner `{GtkSpinner *`}
@@ -736,6 +928,21 @@ extern GtkAlignment `{GtkAlignment *`}
 
 	#get_padding
 	#set_padding
+end
+
+#A representation of an adjustable bounded value
+#@https://developer.gnome.org/gtk3/stable/GtkAdjustment.html#GtkAdjustment.description
+extern GtkAdjustment `{GtkAdjustment *`}
+
+end
+
+extern GdkColor `{GdkColor*`}
+	new is extern `{
+		GdkColor * col = malloc(sizeof(GdkColor));
+		/*gdk_color_parse( "red", recv );*/		
+		gdk_color_parse( "red", col);
+		return col;
+	`}
 end
 
 extern GdkRGBA `{GdkRGBA*`}
