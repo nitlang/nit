@@ -16,6 +16,8 @@
 
 # Classes and services to use libGTK widgets
 module gtk
+import gtk_enums
+import gdk_enums
 
 in "C Header" `{
 	#include <gtk/gtk.h>
@@ -81,6 +83,16 @@ extern GtkWidget `{GtkWidget *`}
 	fun request_size( width, height : Int ) `{
 		gtk_widget_set_size_request( recv, width, height );
 	`}
+
+	fun bg_color=( state : GtkStateType, color : GdkRGBA ) is extern `{
+		gtk_widget_override_background_color( recv, state, color);
+	`}
+
+	#with gtk it's possible to set fg_color to all widget : is it correct? is fg color inherited?	
+	#GdkColor color;
+	fun fg_color=( state : GtkStateType, color : GdkRGBA ) is extern `{
+		gtk_widget_override_color( recv, state, color);
+	`}
 end
 
 #Base class for widgets which contain other widgets
@@ -101,22 +113,6 @@ extern GtkBin `{GtkBin *`}
 	fun child : GtkWidget is extern `{
 		return gtk_bin_get_child( recv );
 	`}	
-end
-
-#Pack widgets in a rows and columns
-#@https://developer.gnome.org/gtk3/3.3/GtkGrid.html
-extern GtkGrid `{GtkGrid *`}
-	super GtkContainer
-
-	# Create a grid with a fixed number of rows and columns
-	new ( rows : Int, columns : Int, homogeneous : Bool ) `{
-		return (GtkGrid*)gtk_grid_new(); // rows, columns, homogeneous );
-	`}
-
-	# Set a widget child inside the grid at a given position
-	fun attach( child : GtkWidget, left, top, width, height : Int ) `{
-		gtk_grid_attach( recv, child, left, top, width, height );
-	`}
 end
 
 #Toplevel which can contain other widgets
@@ -175,6 +171,22 @@ extern GtkWindow `{GtkWindow *`}
 		return gtk_window_activate_default( recv );		
 	`}
 
+	fun gravity : GdkGravity is extern `{
+		return gtk_window_get_gravity( recv );
+	`}
+
+	fun gravity=( window_grav : GdkGravity ) is extern `{
+		gtk_window_set_gravity( recv, window_grav );
+	`}
+
+#	fun position : GtkWindowPosition is extern `{
+#		return gtk_window_get_position( recv );
+#	`}
+#
+#	fun position=( window_pos : GtkWindowPosition ) is extern `{
+#		gtk_window_set_position( recv, window_pos );
+#	`}
+
 	fun active : Bool is extern `{
 		return gtk_window_is_active( recv );
 	`}
@@ -223,6 +235,73 @@ extern GtkWindow `{GtkWindow *`}
 	fun keep_below=( setting : Bool ) is extern `{
 		gtk_window_set_keep_below( recv, setting );
 	`}
+end
+
+#A bin with a decorative frame and optional label
+#https://developer.gnome.org/gtk3/stable/GtkFrame.html
+extern GtkFrame `{GtkFrame *`}
+	super GtkBin
+
+	new ( lbl : String ) is extern import String::to_cstring`{
+		return (GtkFrame *)gtk_frame_new( String_to_cstring( lbl ) );   	
+	`}
+
+	fun frame_label : String is extern`{
+		return new_String_from_cstring( (char *)gtk_frame_get_label( recv ) );   	
+	`}
+
+	fun frame_label=( lbl : String ) is extern import String::to_cstring`{
+		gtk_frame_set_label( recv, String_to_cstring( lbl ) );   	
+	`}
+
+	fun label_widget : GtkWidget is extern `{
+		return gtk_frame_get_label_widget( recv );   	
+	`}
+
+	fun label_widget=( widget : GtkWidget ) is extern `{
+		gtk_frame_set_label_widget( recv, widget );   	
+	`}
+
+	fun shadow_type : GtkShadowType is extern `{
+		return gtk_frame_get_shadow_type( recv );   	
+	`}
+
+	fun shadow_type=( stype : GtkShadowType ) is extern `{
+		gtk_frame_set_shadow_type( recv, stype );   	
+	`}
+
+	#fun label_align : GtkShadowType is extern `{ 	
+	#`}
+
+	fun label_align=( xalign : Float, yalign : Float ) is extern `{
+		gtk_frame_set_label_align( recv, xalign, yalign );   	
+	`}
+end
+
+#Pack widgets in a rows and columns
+#@https://developer.gnome.org/gtk3/3.3/GtkGrid.html
+extern GtkGrid `{GtkGrid *`}
+	super GtkContainer
+
+	# Create a grid with a fixed number of rows and columns
+	new ( rows : Int, columns : Int, homogeneous : Bool ) `{
+		return (GtkGrid*)gtk_grid_new(); // rows, columns, homogeneous );
+	`}
+
+	# Set a widget child inside the grid at a given position
+	fun attach( child : GtkWidget, left, top, width, height : Int ) `{
+		gtk_grid_attach( recv, child, left, top, width, height );
+	`}
+end
+
+#The tree interface used by GtkTreeView
+#@https://developer.gnome.org/gtk3/stable/GtkTreeModel.html
+extern GtkTreeModel `{GtkTreeModel *`}
+end
+
+#An abstract class for laying out GtkCellRenderers
+#@https://developer.gnome.org/gtk3/stable/GtkCellArea.html
+extern GtkCellArea `{GtkCellArea *`}
 end
 
 #Base class for widgets with alignments and padding
@@ -340,17 +419,17 @@ end
 
 #Displays an arrow
 #@https://developer.gnome.org/gtk3/3.2/GtkArrow.html
-#extern GtkArrow `{GtkArrow *`}
-#	super GtkMisc
-#
-#	new ( arrow_type : GtkArrowType, shadow_type : GtkShadowType ) is extern `{
-#		return (GtkArrow *)gtk_arrow_new( arrow_type, shadow_type );
-#	`}
-#
-#	fun set( arrow_type : GtkArrowType, shadow_type : GtkShadowType ) is extern `{
-#		gtk_arrow_set( recv, arrow_type, shadow_type );
-#	`}
-#end
+extern GtkArrow `{GtkArrow *`}
+	super GtkMisc
+
+	new ( arrow_type : GtkArrowType, shadow_type : GtkShadowType ) is extern `{
+		return (GtkArrow *)gtk_arrow_new( arrow_type, shadow_type );
+	`}
+
+	fun set( arrow_type : GtkArrowType, shadow_type : GtkShadowType ) is extern `{
+		gtk_arrow_set( recv, arrow_type, shadow_type );
+	`}
+end
 
 #A widget that emits a signal when clicked on
 #@https://developer.gnome.org/gtk3/stable/GtkButton.html
@@ -383,6 +462,227 @@ extern GtkButton `{GtkButton *`}
 	end
 
 end
+
+#A button which pops up a scale
+#@https://developer.gnome.org/gtk3/stable/GtkScaleButton.html
+extern GtkScaleButton `{GtkScaleButton *`}
+	super GtkButton
+	
+	#const gchar **icons
+	new( size: GtkIconSize, min: Float, max: Float, step: Float ) is extern `{
+		return (GtkScaleButton *)gtk_scale_button_new( size, min, max, step, (const char **)0 );
+	`}
+end
+
+#Create buttons bound to a URL
+#@https://developer.gnome.org/gtk3/stable/GtkLinkButton.html
+extern GtkLinkButton `{GtkLinkButton *`}
+	super GtkButton
+	
+	new( uri: String ) is extern import String::to_cstring `{
+		return (GtkLinkButton *)gtk_link_button_new( String_to_cstring(uri) );
+	`}
+end
+
+#A container which can hide its child
+#https://developer.gnome.org/gtk3/stable/GtkExpander.html
+extern GtkExpander `{GtkExpander *`}
+	super GtkBin
+
+	new( lbl : String) is extern import String::to_cstring`{
+		return (GtkExpander *)gtk_expander_new( String_to_cstring( lbl ) );
+	`}
+
+	new with_mnemonic( lbl : String) is extern import String::to_cstring`{
+		return (GtkExpander *)gtk_expander_new_with_mnemonic(String_to_cstring( lbl ));
+	`}
+
+	fun expanded : Bool is extern `{
+		return gtk_expander_get_expanded( recv ); 
+	`}
+
+	fun expanded=( is_expanded : Bool ) is extern `{
+		gtk_expander_set_expanded( recv, is_expanded );
+	`}
+
+	fun spacing : Int is extern `{
+		return gtk_expander_get_spacing( recv );
+	`}
+
+	fun spacing=( pixels : Int ) is extern `{
+		gtk_expander_set_spacing( recv, pixels );
+	`}
+
+	fun label_text : String is extern `{
+		return new_String_from_cstring( (char *)gtk_expander_get_label( recv ) );
+	`}
+
+	fun label_text=( lbl : String ) is extern import String::to_cstring`{
+		gtk_expander_set_label( recv, String_to_cstring( lbl ) );
+	`}
+
+	fun use_underline : Bool is extern `{
+		return gtk_expander_get_use_underline( recv );
+	`}
+
+	fun use_underline=( used : Bool) is extern `{
+		gtk_expander_set_use_underline( recv, used );
+	`}
+
+	fun use_markup : Bool is extern `{
+		return gtk_expander_get_use_markup( recv );
+	`}
+
+	fun use_markup=( used : Bool) is extern `{
+		 gtk_expander_set_use_markup( recv, used );
+	`}
+
+	fun label_widget : GtkWidget is extern `{
+		return gtk_expander_get_label_widget( recv );
+	`}
+
+	fun label_widget=( widget : GtkWidget ) is extern `{
+		gtk_expander_set_label_widget( recv, widget );
+	`}
+
+	fun label_fill : Bool is extern `{
+		return gtk_expander_get_label_fill( recv );
+	`}
+
+	fun label_fill=( fill : Bool ) is extern `{
+		gtk_expander_set_label_fill( recv, fill );
+	`}
+
+	fun resize_toplevel : Bool is extern `{
+		return gtk_expander_get_resize_toplevel( recv );
+	`}
+
+	fun resize_toplevel=( resize : Bool ) is extern `{
+		gtk_expander_set_resize_toplevel( recv, resize );
+	`}
+
+end
+
+#An abstract class for laying out GtkCellRenderers
+#@https://developer.gnome.org/gtk3/stable/GtkCellArea.html
+extern GtkComboBox `{GtkComboBox *`}
+	super GtkBin
+
+	new is extern `{
+		return (GtkComboBox *)gtk_combo_box_new( );
+	`}
+
+	new with_entry is extern `{
+		return (GtkComboBox *)gtk_combo_box_new_with_entry( );
+	`}
+
+	new with_model( model : GtkTreeModel ) is extern `{
+		return (GtkComboBox *)gtk_combo_box_new_with_model( model );
+	`}
+
+	new with_model_and_entry( model : GtkTreeModel ) is extern `{
+		return (GtkComboBox *)gtk_combo_box_new_with_model_and_entry( model );
+	`}
+
+	new with_area( area : GtkCellArea ) is extern `{
+		return (GtkComboBox *)gtk_combo_box_new_with_area( area );
+	`}
+
+	new with_area_and_entry( area : GtkCellArea ) is extern `{
+		return (GtkComboBox *)gtk_combo_box_new_with_area_and_entry( area );
+	`}
+
+	fun wrap_width : Int is extern `{
+		return gtk_combo_box_get_wrap_width( recv );
+	`}
+
+	fun wrap_width=( width : Int ) is extern `{
+		gtk_combo_box_set_wrap_width( recv, width );
+	`}
+
+	fun row_span_col : Int is extern `{
+		return gtk_combo_box_get_row_span_column( recv );
+	`}
+
+	fun row_span_col=( row_span : Int ) is extern `{
+		gtk_combo_box_set_row_span_column( recv, row_span );
+	`}
+
+	fun col_span_col : Int is extern `{
+		return gtk_combo_box_get_column_span_column( recv );
+	`}
+
+	fun col_span_col=( col_span : Int ) is extern `{
+		gtk_combo_box_set_column_span_column( recv, col_span );
+	`}
+
+	fun active_item : Int is extern `{
+		return gtk_combo_box_get_active( recv );
+	`}
+
+	fun active_item=( active : Int ) is extern `{
+		gtk_combo_box_set_active( recv, active ); 
+	`}
+
+	#fun active_iter : GtkTreeIter is extern `{
+	#`}
+	#
+	#fun active_iter=( active : Bool ) is extern `{
+	#`}
+
+	fun column_id : Int is extern `{
+		return gtk_combo_box_get_id_column( recv );
+	`}
+
+	fun column_id=( id_column : Int ) is extern `{
+		gtk_combo_box_set_id_column( recv, id_column );
+	`}
+
+	fun active_id : String is extern `{
+		return new_String_from_cstring( (char *)gtk_combo_box_get_active_id( recv ) );
+	`}
+
+	fun active_id=( id_active : String ) is extern import String::to_cstring`{
+		gtk_combo_box_set_active_id( recv, String_to_cstring( id_active ) );
+	`}
+
+	fun model : GtkTreeModel is extern `{
+		return gtk_combo_box_get_model( recv );
+	`}
+
+	fun model=( model : GtkTreeModel ) is extern `{
+		gtk_combo_box_set_model( recv, model );
+	`}
+
+	fun popup is extern `{
+		gtk_combo_box_popup( recv );
+	`}
+
+	fun popdown is extern `{
+		gtk_combo_box_popdown( recv );
+	`}
+
+	fun title : String is extern`{
+		return new_String_from_cstring( (char *)gtk_combo_box_get_title( recv ) );
+	`}
+
+	fun title=( t : String ) is extern import String::to_cstring`{
+		gtk_combo_box_set_title( recv, String_to_cstring( t ) );
+	`}
+
+	fun has_entry : Bool is extern `{
+		return gtk_combo_box_get_has_entry( recv );
+	`}
+
+	fun with_fixed : Bool is extern `{
+		return gtk_combo_box_get_popup_fixed_width( recv );
+	`}
+
+	fun with_fixed=( fixed : Bool ) is extern `{
+		gtk_combo_box_set_popup_fixed_width( recv, fixed );
+	`}
+end
+
 
 #Show a spinner animation
 #@https://developer.gnome.org/gtk3/3.2/GtkSpinner.html
@@ -436,5 +736,10 @@ extern GtkAlignment `{GtkAlignment *`}
 
 	#get_padding
 	#set_padding
+end
+
+extern GdkRGBA `{GdkRGBA*`}
+	new is extern `{
+	`}
 end
 
