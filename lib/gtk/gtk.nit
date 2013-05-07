@@ -31,12 +31,16 @@ in "C Header" `{
 		void nit_gtk_callback_func( GtkWidget *widget,
 							gpointer   callback_data ) {
 			NitGtkSignal *data;
-
 			data = (NitGtkSignal*)callback_data;
-
 			GtkCallable_signal( data->to_call, widget, data->user_data );
 		}
 `}
+
+redef interface Object
+	protected fun init_gtk `{ gtk_init( 0, NULL ); `}
+	protected fun run_gtk `{ gtk_main(); `}
+	protected fun quit_gtk `{ gtk_main_quit(); `}
+end
 
 interface GtkCallable
 	# return true to stop event processing, false to let it propagate
@@ -46,8 +50,12 @@ end
 extern GdkEvent `{GdkEvent *`}
 end
 
+
+#Base class for all widgets
+#@https://developer.gnome.org/gtk3/stable/GtkWidget.html
 extern GtkWidget `{GtkWidget *`}
 	fun show_all is extern `{ gtk_widget_show_all( recv ); `}
+
 	fun signal_connect( signal_name : String, to_call : GtkCallable, user_data : nullable Object ) is extern import String::to_cstring, GtkCallable::signal, Object as not nullable `{
 		NitGtkSignal *data = malloc( sizeof(NitGtkSignal) );
 
@@ -57,6 +65,7 @@ extern GtkWidget `{GtkWidget *`}
 		data->to_call = to_call;
 		data->user_data = user_data;
 
+		/*Use G_CALLBACK() to cast the callback function to a GCallback*/
 		g_signal_connect( recv,
 							String_to_cstring( signal_name ),
 							G_CALLBACK(nit_gtk_callback_func),
@@ -69,12 +78,14 @@ extern GtkWidget `{GtkWidget *`}
 		return recv == o;
 	`}
 
-	fun set_size_request( width, height : Int ) `{
+	fun request_size( width, height : Int ) `{
 		gtk_widget_set_size_request( recv, width, height );
 	`}
 end
 
-extern GtkContainer `{GtkContainer*`}
+#Base class for widgets which contain other widgets
+#@https://developer.gnome.org/gtk3/stable/GtkContainer.html
+extern GtkContainer `{GtkContainer *`}
 	super GtkWidget
 
 	fun add( widget : GtkWidget ) is extern `{
@@ -82,19 +93,36 @@ extern GtkContainer `{GtkContainer*`}
 	`}
 end
 
-extern GtkGrid `{GtkGrid*`}
+#A container with just one child
+#@https://developer.gnome.org/gtk3/stable/GtkBin.html
+extern GtkBin `{GtkBin *`}
+	super GtkContainer
+	
+	fun child : GtkWidget is extern `{
+		return gtk_bin_get_child( recv );
+	`}	
+end
+
+#Pack widgets in a rows and columns
+#@https://developer.gnome.org/gtk3/3.3/GtkGrid.html
+extern GtkGrid `{GtkGrid *`}
 	super GtkContainer
 
+	# Create a grid with a fixed number of rows and columns
 	new ( rows : Int, columns : Int, homogeneous : Bool ) `{
-		return (GtkGrid*)gtk_grid_new();
+		return (GtkGrid*)gtk_grid_new(); // rows, columns, homogeneous );
 	`}
+
+	# Set a widget child inside the grid at a given position
 	fun attach( child : GtkWidget, left, top, width, height : Int ) `{
 		gtk_grid_attach( recv, child, left, top, width, height );
 	`}
 end
 
-extern GtkWindow `{GtkWindow*`}
-	super GtkContainer
+#Toplevel which can contain other widgets
+#@https://developer.gnome.org/gtk3/stable/GtkWindow.html
+extern GtkWindow `{GtkWindow *`}
+	super GtkBin
 
 	new ( flag : Int ) is extern `{
 		GtkWindow *win;
@@ -108,10 +136,10 @@ extern GtkWindow `{GtkWindow*`}
 		gtk_window_set_title( recv, String_to_cstring( title ) );
 	`}
 
-	fun signal_close_connect( to_call : GtkCallable,
-							  user_data : nullable Object )
+	#The "destroy" signal is emitted when a widget is destroyed, either by explicitly calling gtk_widget_destroy() or when the widget is unparented. Top-level GtkWindows are also destroyed when the Close window control button is clicked.
+	fun on_close( to_call : GtkCallable, user_data : nullable Object )
 	do
-		signal_connect( "close", to_call, user_data )
+		signal_connect( "destroy", to_call, user_data )
 	end
 end
 
@@ -122,38 +150,43 @@ extern GtkColorSelectionDialog
 	`}
 end
 
+#A widget that displays a small to medium amount of text
+#@https://developer.gnome.org/gtk3/3.2/GtkLabel.html
 extern GtkLabel `{GtkLabel*`}
 	super GtkWidget
 
+	# Create a GtkLabel with text
 	new ( text : String ) is extern import String::to_cstring `{
 		return (GtkLabel*)gtk_label_new( String_to_cstring( text ) );
 	`}
 
+	# Set the text of the label
 	fun text=( text : String ) import String::to_cstring `{
 		gtk_label_set_text( recv, String_to_cstring( text ) );
 	`}
 
+	# Returns the text of the label
 	fun text : String import String::from_cstring `{
 		return new_String_from_cstring( (char*)gtk_label_get_text( recv ) );
 	`}
 end
 
+#A widget that emits a signal when clicked on
+#@https://developer.gnome.org/gtk3/stable/GtkButton.html
 extern GtkButton
 	super GtkWidget
 
 	new is extern `{
 		return gtk_button_new(  );
 	`}
+
+	#Create a GtkButton with text
 	new with_label( text : String ) is extern import String::to_cstring `{
 		return gtk_button_new_with_label( String_to_cstring( text ) );
 	`}
+
 	new from_stock( stock_id : String ) is extern import String::to_cstring `{
 		return gtk_button_new_from_stock( String_to_cstring( stock_id ) );
 	`}
 end
 
-redef interface Object
-	protected fun init_gtk `{ gtk_init( 0, NULL ); `}
-	protected fun run_gtk `{ gtk_main(); `}
-	protected fun quit_gtk `{ gtk_main_quit(); `}
-end
