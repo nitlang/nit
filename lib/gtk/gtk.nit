@@ -141,6 +141,88 @@ extern GtkWindow `{GtkWindow *`}
 	do
 		signal_connect( "destroy", to_call, user_data )
 	end
+
+	fun resizable : Bool is extern `{
+		return gtk_window_get_resizable( recv );
+	`}
+
+	fun resizable=( is_resizable : Bool) is extern `{
+		return gtk_window_set_resizable( recv, is_resizable );
+	`}
+
+	#Activates the current focused widget within the window.
+	#returns TRUE if a widget got activated.
+	fun activate_focus : Bool is extern `{
+		return gtk_window_activate_focus( recv );
+	`}
+
+	#Sets a window modal or non-modal. Modal windows prevent interaction with other windows in the same application.
+	fun modal=( is_modal : Bool ) is extern `{
+		gtk_window_set_modal( recv, is_modal );
+	`}
+
+	#Windows can't actually be 0x0 in size, they must be at least 1x1
+	#but passing 0 for width and height is OK, resulting in a 1x1 default size.
+	#params width in pixels, or -1 to unset the default width
+	#params height in pixels, or -1 to unset the default height
+	fun default_size( width : Int, height : Int ) is extern `{
+		gtk_window_set_default_size( recv, width, height );	
+	`} 
+
+	#Activates the default widget for the window
+	#unless the current focused widget has been configured to receive the default action (see gtk_widget_set_receives_default()), in which case the focused widget is activated.
+	fun activate_default : Bool is extern `{
+		return gtk_window_activate_default( recv );		
+	`}
+
+	fun active : Bool is extern `{
+		return gtk_window_is_active( recv );
+	`}
+
+	#Returns whether the input focus is within this GtkWindow. For real toplevel windows, this is identical to gtk_window_is_active(), but for embedded windows, like GtkPlug, the results will differ.
+	fun has_toplevel_focus : Bool is extern `{
+		return gtk_window_has_toplevel_focus( recv );
+	`}
+
+	fun get_focus : GtkWidget is extern `{
+		return gtk_window_get_focus( recv );	
+	`}
+
+	fun set_focus( widget : GtkWidget ) is extern `{
+		return gtk_window_set_focus( recv, widget );	
+	`}
+
+	fun get_default_widget : GtkWidget is extern `{
+		return gtk_window_get_default_widget( recv );	
+	`}
+
+	fun set_default_widget( widget : GtkWidget ) is extern `{
+		return gtk_window_set_default( recv, widget );	
+	`}
+
+	fun maximize is extern `{
+		return gtk_window_maximize( recv );	
+	`}
+
+	fun unmaximize is extern `{
+		return gtk_window_unmaximize( recv );	
+	`}
+
+	fun fullscreen is extern `{
+		return gtk_window_fullscreen( recv );	
+	`}
+
+	fun unfullscreen is extern `{
+		return gtk_window_unfullscreen( recv );	
+	`}
+
+	fun keep_above=( setting : Bool ) is extern `{
+		gtk_window_set_keep_above( recv, setting );
+	`}
+
+	fun keep_below=( setting : Bool ) is extern `{
+		gtk_window_set_keep_below( recv, setting );
+	`}
 end
 
 extern GtkColorSelectionDialog
@@ -168,6 +250,17 @@ extern GtkLabel `{GtkLabel*`}
 	# Returns the text of the label
 	fun text : String import String::from_cstring `{
 		return new_String_from_cstring( (char*)gtk_label_get_text( recv ) );
+	`}
+
+	# Sets the angle of rotation for the label. 
+	# An angle of 90 reads from from bottom to top, an angle of 270, from top to bottom.
+	fun angle=( degre : Float ) `{
+		gtk_label_set_angle( recv, degre );
+	`}
+
+	# Returns the angle of rotation for the label.  
+	fun angle : Float `{
+		return gtk_label_get_angle( recv );
 	`}
 end
 
