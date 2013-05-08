@@ -619,6 +619,15 @@ $(document).ready(function() {
 			reloadComment();
 		});
 	});
+
+	$("pre").hover(
+		function () {
+			$(this).css({'cursor' : 'hand'});	
+		},
+		function () {
+			$(this).css({'cursor' : 'pointer'});	
+		}
+	);
 });
 
 /* Parse current URL and return anchor name */
