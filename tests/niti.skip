@@ -8,6 +8,7 @@ test_math
 test_mem
 test_gtk
 calculator
+callback
 shoot_logic
 bench_
 nit_args1
