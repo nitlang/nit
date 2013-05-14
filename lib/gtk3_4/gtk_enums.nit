@@ -26,13 +26,13 @@ in "C Header" `{
 #Used to specify the placement of scroll arrows in scrolling menus.
 #@https://developer.gnome.org/gtk3/3.2/gtk3-Standard-Enumerations.html#GtkArrowPlacement
 extern GtkArrowPlacement `{GtkArrowPlacement`}
-	#Place one arrow on each end of the menu.	
-	new both `{ return GTK_ARROWS_BOTH; `} 
+	#Place one arrow on each end of the menu.
+	new both `{ return GTK_ARROWS_BOTH; `}
 
 	#Place both arrows at the top of the menu.
 	new top `{ return GTK_ARROWS_START; `}
-	
-	#Place both arrows at the bottom of the menu.	
+
+	#Place both arrows at the bottom of the menu.
 	new bottom `{ return GTK_ARROWS_END; `}
 end
 
@@ -40,13 +40,13 @@ end
 #Used to indicate the direction in which a GtkArrow should point.
 #@https://developer.gnome.org/gtk3/3.2/gtk3-Standard-Enumerations.html#GtkArrowType
 extern GtkArrowType `{GtkArrowType`}
-	#Represents an upward pointing arrow.	
-	new up `{ return GTK_ARROW_UP; `} 
+	#Represents an upward pointing arrow.
+	new up `{ return GTK_ARROW_UP; `}
 
 	#Represents an downward pointing arrow.
 	new down `{ return GTK_ARROW_DOWN; `}
-	
-	#Represents a left pointing arrow.	
+
+	#Represents a left pointing arrow.
 	new left `{ return GTK_ARROW_LEFT; `}
 
 	#Represents a right pointing arrow.
@@ -61,12 +61,12 @@ end
 #@https://developer.gnome.org/gtk3/3.2/gtk3-Standard-Enumerations.html#GtkAttachOptions
 extern GtkAttachOptions `{GtkAttachOptions`}
 	#The widget should expand to take up any extra space in its container that has been allocated.
-	new expan `{ return GTK_EXPAND; `} 
+	new expan `{ return GTK_EXPAND; `}
 
 	#The widget should shrink as and when possible.
 	new shrink `{ return GTK_SHRINK; `}
-	
-	#The widget should fill the space allocated to it.	
+
+	#The widget should fill the space allocated to it.
 	new fill `{ return GTK_FILL; `}
 end
 
@@ -75,12 +75,12 @@ end
 #@https://developer.gnome.org/gtk3/3.2/gtk3-Standard-Enumerations.html#GtkButtonBoxStyle
 extern GtkButtonBoxStyle `{GtkButtonBoxStyle`}
 	#Buttons are evenly spread across the box.
-	new spread `{ return GTK_BUTTONBOX_SPREAD; `} 
+	new spread `{ return GTK_BUTTONBOX_SPREAD; `}
 
 	#Buttons are placed at the edges of the box.
 	new edge `{ return GTK_BUTTONBOX_EDGE; `}
-	
-	#Buttons are grouped towards the start of the box.	
+
+	#Buttons are grouped towards the start of the box.
 	new start `{ return GTK_BUTTONBOX_START; `}
 
 	#Buttons are grouped towards the end of the box.
@@ -95,12 +95,12 @@ end
 #@https://developer.gnome.org/gtk3/3.2/gtk3-Standard-Enumerations.html#GtkCornerType
 extern GtkCornerType `{GtkCornerType`}
 	#Place the scrollbars on the right and bottom of the widget (default behaviour).
-	new top_left `{ return GTK_CORNER_TOP_LEFT; `} 
+	new top_left `{ return GTK_CORNER_TOP_LEFT; `}
 
 	#Place the scrollbars on the right and bottom of the widget (default behaviour).
 	new bottom_left `{ return GTK_CORNER_BOTTOM_LEFT; `}
-	
-	#Place the scrollbars on the left and bottom of the widget.	
+
+	#Place the scrollbars on the left and bottom of the widget.
 	new top_right `{ return GTK_CORNER_TOP_RIGHT; `}
 
 	#Place the scrollbars on the top and left of the widget.
@@ -112,12 +112,12 @@ end
 #@https://developer.gnome.org/gtk3/3.2/gtk3-Standard-Enumerations.html#GtkExpanderStyle
 extern GtkExpanderStyle `{GtkExpanderStyle`}
 	#The style used for a collapsed subtree.
-	new collapsed `{ return GTK_EXPANDER_COLLAPSED; `} 
+	new collapsed `{ return GTK_EXPANDER_COLLAPSED; `}
 
 	#Intermediate style used during animation.
 	new semi_collapsed `{ return GTK_EXPANDER_SEMI_COLLAPSED; `}
-	
-	#Intermediate style used during animation.	
+
+	#Intermediate style used during animation.
 	new semi_expanded `{ return GTK_EXPANDER_SEMI_EXPANDED; `}
 
 	#The style used for an expanded subtree.
@@ -129,12 +129,12 @@ end
 #@https://developer.gnome.org/gtk3/3.2/gtk3-Standard-Enumerations.html#GtkJustification
 extern GtkJustification `{GtkJustification`}
 	#The text is placed at the left edge of the label.
-	new left `{ return GTK_JUSTIFY_LEFT; `} 
+	new left `{ return GTK_JUSTIFY_LEFT; `}
 
 	#The text is placed at the right edge of the label.
 	new right `{ return GTK_JUSTIFY_RIGHT; `}
-	
-	#The text is placed in the center of the label.	
+
+	#The text is placed in the center of the label.
 	new center `{ return GTK_JUSTIFY_CENTER; `}
 
 	#The text is placed is distributed across the label.
@@ -146,29 +146,29 @@ end
 #@https://developer.gnome.org/gtk3/3.2/gtk3-Standard-Enumerations.html#GtkOrientation
 extern GtkOrientation `{GtkOrientation`}
 	#The widget is in horizontal orientation.
-	new horizontal `{ return GTK_ORIENTATION_HORIZONTAL; `} 
+	new horizontal `{ return GTK_ORIENTATION_HORIZONTAL; `}
 
 	#The widget is in vertical orientation.
 	new vertical `{ return GTK_ORIENTATION_VERTICAL; `}
 end
 
 #enum GtkPackType
-#Represents the packing location GtkBox children. 
+#Represents the packing location GtkBox children.
 #@https://developer.gnome.org/gtk3/3.2/gtk3-Standard-Enumerations.html#GtkPackType
 extern GtkPackType `{GtkPackType`}
 	#The child is packed into the start of the box.
-	new start `{ return GTK_PACK_START; `} 
+	new start `{ return GTK_PACK_START; `}
 
 	#The child is packed into the end of the box.
 	new end_of_box `{ return GTK_PACK_END; `}
 end
 
 #enum GtkPolicyType
-#Determines when a scroll bar will be visible. 
+#Determines when a scroll bar will be visible.
 #@https://developer.gnome.org/gtk3/3.2/gtk3-Standard-Enumerations.html#GtkPolicyType
 extern GtkPolicyType `{GtkPolicyType`}
 	#The scrollbar is always visible.
-	new always `{ return GTK_POLICY_ALWAYS; `} 
+	new always `{ return GTK_POLICY_ALWAYS; `}
 
 	#The scrollbar will appear and disappear as necessary.
 	new automatic `{ return GTK_POLICY_AUTOMATIC; `}
@@ -178,11 +178,11 @@ extern GtkPolicyType `{GtkPolicyType`}
 end
 
 #enum GtkPositionType
-#Describes which edge of a widget a certain feature is positioned. 
+#Describes which edge of a widget a certain feature is positioned.
 #@https://developer.gnome.org/gtk3/3.2/gtk3-Standard-Enumerations.html#GtkPositionType
 extern GtkPositionType `{GtkPositionType`}
 	#The feature is at the left edge.
-	new left `{ return GTK_POS_LEFT; `} 
+	new left `{ return GTK_POS_LEFT; `}
 
 	#The feature is at the right edge.
 	new right `{ return GTK_POS_RIGHT; `}
@@ -195,11 +195,11 @@ extern GtkPositionType `{GtkPositionType`}
 end
 
 #enum GtkReliefStyle
-#Indicates the relief to be drawn around a GtkButton. 
+#Indicates the relief to be drawn around a GtkButton.
 #@https://developer.gnome.org/gtk3/3.2/gtk3-Standard-Enumerations.html#GtkReliefStyle
 extern GtkReliefStyle `{GtkReliefStyle`}
 	#Draw a normal relief.
-	new normal `{ return GTK_RELIEF_NORMAL; `} 
+	new normal `{ return GTK_RELIEF_NORMAL; `}
 
 	#A half relief.
 	new half `{ return GTK_RELIEF_HALF; `}
@@ -212,7 +212,7 @@ end
 #@https://developer.gnome.org/gtk3/3.2/gtk3-Standard-Enumerations.html#GtkResizeMode
 extern GtkResizeMode `{GtkResizeMode`}
 	#Pass resize request to the parent.
-	new parent `{ return GTK_RESIZE_PARENT; `} 
+	new parent `{ return GTK_RESIZE_PARENT; `}
 
 	#Queue resizes on this widget.
 	new queue `{ return GTK_RESIZE_QUEUE; `}
@@ -222,15 +222,15 @@ end
 #@https://developer.gnome.org/gtk3/3.2/gtk3-Standard-Enumerations.html#GtkSelectionMode
 extern GtkSelectionMode `{GtkResizeMode`}
 	#No selection is possible.
-	new none `{ return GTK_SELECTION_NONE; `} 
+	new none `{ return GTK_SELECTION_NONE; `}
 
 	#Zero or one element may be selected.
 	new single `{ return GTK_SELECTION_SINGLE; `}
 
-	#Exactly one element is selected. 
+	#Exactly one element is selected.
 	new browse `{ return GTK_SELECTION_BROWSE; `}
 
-	#Any number of elements may be selected. 
+	#Any number of elements may be selected.
 	new multiple `{ return GTK_SELECTION_MULTIPLE; `}
 end
 
@@ -238,13 +238,13 @@ end
 #Used to change the appearance of an outline typically provided by a GtkFrame.
 #@https://developer.gnome.org/gtk3/3.2/gtk3-Standard-Enumerations.html#GtkShadowType
 extern GtkShadowType `{GtkShadowType`}
-	#No outline.	
-	new none `{ return GTK_SHADOW_NONE; `} 
+	#No outline.
+	new none `{ return GTK_SHADOW_NONE; `}
 
 	#The outline is bevelled inwards.
 	new shadow_in `{ return GTK_SHADOW_IN; `}
-	
-	#The outline is bevelled outwards like a button.	
+
+	#The outline is bevelled outwards like a button.
 	new shadow_out `{ return GTK_SHADOW_OUT; `}
 
 	#The outline has a sunken 3d appearance.
@@ -255,16 +255,16 @@ extern GtkShadowType `{GtkShadowType`}
 end
 
 #enum GtkStateType
-#Indicates the current state of a widget; the state determines how the widget is drawn. 
+#Indicates the current state of a widget; the state determines how the widget is drawn.
 #@https://developer.gnome.org/gtk3/3.2/gtk3-Standard-Enumerations.html#GtkStateType
 extern GtkStateType `{GtkStateType`}
 	#State during normal operation.
-	new normal `{ return GTK_STATE_NORMAL; `} 
+	new normal `{ return GTK_STATE_NORMAL; `}
 
 	#State of a currently active widget, such as a depressed button.
 	new active `{ return GTK_STATE_ACTIVE; `}
-	
-	#State indicating that the mouse pointer is over the widget and the widget will respond to mouse clicks.	
+
+	#State indicating that the mouse pointer is over the widget and the widget will respond to mouse clicks.
 	new prelight `{ return GTK_STATE_PRELIGHT; `}
 
 	#State of a selected item, such the selected row in a list.
@@ -281,16 +281,16 @@ extern GtkStateType `{GtkStateType`}
 end
 
 #enum GtkStateFlags
-#Describes a widget state. 
+#Describes a widget state.
 #@https://developer.gnome.org/gtk3/3.2/gtk3-Standard-Enumerations.html#GtkStateFlags
 extern GtkStateFlags `{GtkStateFlags`}
 	#State during normal operation.
-	new normal `{ return GTK_STATE_FLAG_NORMAL; `} 
+	new normal `{ return GTK_STATE_FLAG_NORMAL; `}
 
 	#Widget is active.
 	new active `{ return GTK_STATE_FLAG_ACTIVE; `}
-	
-	#Widget has a mouse pointer over it.	
+
+	#Widget has a mouse pointer over it.
 	new prelight `{ return GTK_STATE_FLAG_PRELIGHT; `}
 
 	#Widget is selected.
@@ -311,12 +311,12 @@ end
 #@https://developer.gnome.org/gtk3/3.2/gtk3-Standard-Enumerations.html#GtkToolbarStyle
 extern GtkToolbarStyle `{GtkToolbarStyle`}
 	#Buttons display only icons in the toolbar.
-	new icons `{ return GTK_TOOLBAR_ICONS; `} 
+	new icons `{ return GTK_TOOLBAR_ICONS; `}
 
 	#Buttons display only text labels in the toolbar.
 	new text `{ return GTK_TOOLBAR_TEXT; `}
-	
-	#Buttons display text and icons in the toolbar.	
+
+	#Buttons display text and icons in the toolbar.
 	new both `{ return GTK_TOOLBAR_BOTH; `}
 
 	#Buttons display icons and text alongside each other, rather than vertically stacked
@@ -328,11 +328,11 @@ end
 #@https://developer.gnome.org/gtk3/3.2/gtk3-Standard-Enumerations.html#GtkWindowPosition
 extern GtkWindowPosition `{GtkWindowPosition`}
 	#No influence is made on placement.
-	new none `{ return GTK_WIN_POS_NONE; `} 
+	new none `{ return GTK_WIN_POS_NONE; `}
 
 	#Windows should be placed in the center of the screen.
 	new center `{ return GTK_WIN_POS_CENTER; `}
-	
+
 	#Windows should be placed at the current mouse position.
 	new mouse `{ return GTK_WIN_POS_MOUSE; `}
 
@@ -348,7 +348,7 @@ end
 #@https://developer.gnome.org/gtk3/3.2/gtk3-Standard-Enumerations.html#GtkWindowType
 extern GtkWindowType `{GtkWindowType`}
 	#A regular window, such as a dialog
-	new toplevel `{ return GTK_WINDOW_TOPLEVEL; `} 
+	new toplevel `{ return GTK_WINDOW_TOPLEVEL; `}
 
 	#A special window such as a tooltip.
 	new popup `{ return GTK_WINDOW_POPUP; `}
@@ -359,7 +359,7 @@ end
 #@https://developer.gnome.org/gtk3/3.2/gtk3-Standard-Enumerations.html#GtkSortType
 extern GtkSortType `{GtkSortType`}
 	#Sorting is in ascending order.
-	new asc `{ return GTK_SORT_ASCENDING; `} 
+	new asc `{ return GTK_SORT_ASCENDING; `}
 
 	#Sorting is in descending order.
 	new desc `{ return GTK_SORT_DESCENDING; `}
@@ -370,7 +370,7 @@ end
 #@https://developer.gnome.org/gtk3/3.2/gtk3-Standard-Enumerations.html#GtkBorderStyle
 extern GtkBorderStyle `{GtkBorderStyle`}
 	#No visible border.
-	new none `{ return GTK_BORDER_STYLE_NONE; `} 
+	new none `{ return GTK_BORDER_STYLE_NONE; `}
 
 	#An solid border.
 	new solid `{ return GTK_BORDER_STYLE_SOLID; `}

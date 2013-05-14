@@ -30,13 +30,13 @@ extern GtkAssistant `{GtkAssistant *`}
 	new is extern `{
 		return (GtkAssistant *)gtk_assistant_new( );
 	`}
-	
+
 	fun current_page : Int is extern `{
 		return gtk_assistant_get_current_page ( recv );
 	`}
 
 	fun current_page=( page_num : Int ) is extern `{
-		gtk_assistant_set_current_page( recv, page_num);  
+		gtk_assistant_set_current_page( recv, page_num);
 	`}
 
 	fun number_pages : Int is extern `{
@@ -48,19 +48,19 @@ extern GtkAssistant `{GtkAssistant *`}
 	`}
 
 	fun prepend( page : GtkWidget ) : Int is extern `{
-		return gtk_assistant_prepend_page( recv, page );  	
+		return gtk_assistant_prepend_page( recv, page );
 	`}
 
 	fun append( page : GtkWidget ) : Int is extern `{
-		return gtk_assistant_append_page( recv, page );  
+		return gtk_assistant_append_page( recv, page );
 	`}
 
 	fun insert( page : GtkWidget, position : Int ) : Int is extern `{
-		return gtk_assistant_insert_page( recv, page, position );  	
+		return gtk_assistant_insert_page( recv, page, position );
 	`}
 
 	fun remove( page_num : Int ) is extern `{
-		gtk_assistant_remove_page( recv, page_num );  
+		gtk_assistant_remove_page( recv, page_num );
 	`}
 
 	fun get_page_type( page : GtkWidget ) : GtkAssistantPageType is extern `{
@@ -72,19 +72,19 @@ extern GtkAssistant `{GtkAssistant *`}
 	`}
 
 	fun get_page_title( page : GtkWidget ) : String is extern `{
-		return new_String_from_cstring( (char *)gtk_assistant_get_page_title( recv, page ) );	
+		return new_String_from_cstring( (char *)gtk_assistant_get_page_title( recv, page ) );
 	`}
 
 	fun set_page_title( page : GtkWidget, title : String) is extern import String::to_cstring`{
-		gtk_assistant_set_page_title( recv, page, String_to_cstring( title ) );	
+		gtk_assistant_set_page_title( recv, page, String_to_cstring( title ) );
 	`}
 
 	fun set_page_complete( page : GtkWidget, is_complete : Bool ) is extern `{
-		gtk_assistant_set_page_complete( recv, page, is_complete );   
+		gtk_assistant_set_page_complete( recv, page, is_complete );
 	`}
 
 	fun get_page_complete( page : GtkWidget ) : Bool is extern `{
-		return gtk_assistant_get_page_complete( recv, page );   
+		return gtk_assistant_get_page_complete( recv, page );
 	`}
 
 	fun remove_action_widget( child : GtkWidget ) is extern `{
@@ -117,12 +117,12 @@ end
 #@https://developer.gnome.org/gtk3/stable/GtkAssistant.html#GtkAssistantPageType
 extern GtkAssistantPageType `{GtkAssistantPageType`}
 	#The page has regular contents. Both the Back and forward buttons will be shown.
-	new content `{ return GTK_ASSISTANT_PAGE_CONTENT; `} 
+	new content `{ return GTK_ASSISTANT_PAGE_CONTENT; `}
 
 	#The page contains an introduction to the assistant task. Only the Forward button will be shown if there is a next page.
 	new intro `{ return GTK_ASSISTANT_PAGE_INTRO; `}
-	
-	#The page lets the user confirm or deny the changes. The Back and Apply buttons will be shown.	
+
+	#The page lets the user confirm or deny the changes. The Back and Apply buttons will be shown.
 	new confirm `{ return GTK_ASSISTANT_PAGE_CONFIRM; `}
 
 	#The page informs the user of the changes done. Only the Close button will be shown.

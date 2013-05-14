@@ -139,12 +139,12 @@ extern GtkAppChooserDialog `{GtkAppChooserDialog *`}
 
 	fun widget : GtkWidget is extern `{ return gtk_app_chooser_dialog_get_widget( recv ); `}
 
-	fun heading : String is extern `{ 
-		return new_String_from_cstring( (char *)gtk_app_chooser_dialog_get_heading( recv ) ); 
+	fun heading : String is extern `{
+		return new_String_from_cstring( (char *)gtk_app_chooser_dialog_get_heading( recv ) );
 	`}
 
-	fun heading=( text : String ) is extern import String::to_cstring `{ 
-		gtk_app_chooser_dialog_set_heading( recv, String_to_cstring( text ) ); 
+	fun heading=( text : String ) is extern import String::to_cstring `{
+		gtk_app_chooser_dialog_set_heading( recv, String_to_cstring( text ) );
 	`}
 
 end
@@ -174,16 +174,16 @@ end
 #@https://developer.gnome.org/gtk3/stable/GtkFileChooser.html#GtkFileChooserAction
 extern GtkFileChooserAction `{GtkFileChooserAction`}
 	#Indicates open mode. The file chooser will only let the user pick an existing file.
-	new open `{ return GTK_FILE_CHOOSER_ACTION_OPEN; `} 
+	new open `{ return GTK_FILE_CHOOSER_ACTION_OPEN; `}
 
 	#Indicates save mode. The file chooser will let the user pick an existing file, or type in a new filename.
-	new save `{ return GTK_FILE_CHOOSER_ACTION_SAVE; `} 	
+	new save `{ return GTK_FILE_CHOOSER_ACTION_SAVE; `}
 
 	#Indicates an Open mode for selecting folders. The file chooser will let the user pick an existing folder.
-	new select_folder `{ return GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER; `} 	
+	new select_folder `{ return GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER; `}
 
 	#Indicates a mode for creating a new folder. The file chooser will let the user name an existing or new folder.
-	new create_folder `{ return GTK_FILE_CHOOSER_ACTION_CREATE_FOLDER; `} 	
+	new create_folder `{ return GTK_FILE_CHOOSER_ACTION_CREATE_FOLDER; `}
 end
 
 #A dialog for selecting fonts
@@ -211,22 +211,22 @@ end
 #@https://developer.gnome.org/gtk3/stable/GtkMessageDialog.html#GtkButtonsType
 extern GtkButtonsType `{GtkButtonsType`}
 	#No buttons at all
-	new none `{ return GTK_BUTTONS_NONE; `} 
+	new none `{ return GTK_BUTTONS_NONE; `}
 
 	#An OK button.
-	new ok `{ return GTK_BUTTONS_OK; `} 	
+	new ok `{ return GTK_BUTTONS_OK; `}
 
 	#A Close button.
-	new close `{ return GTK_BUTTONS_CLOSE; `} 	
+	new close `{ return GTK_BUTTONS_CLOSE; `}
 
 	#A Cancel button.
-	new cancel `{ return GTK_BUTTONS_CANCEL; `} 	
+	new cancel `{ return GTK_BUTTONS_CANCEL; `}
 
 	#Yes and No buttons.
-	new yes_no `{ return GTK_BUTTONS_YES_NO; `} 	
+	new yes_no `{ return GTK_BUTTONS_YES_NO; `}
 
 	#OK and Cancel buttons.
-	new ok_cancel `{ return GTK_BUTTONS_OK_CANCEL; `} 	
+	new ok_cancel `{ return GTK_BUTTONS_OK_CANCEL; `}
 end
 
 #enum GtkMessageType
@@ -234,19 +234,19 @@ end
 #@https://developer.gnome.org/gtk3/stable/GtkMessageDialog.html#GtkMessageType
 extern GtkMessageType `{GtkMessageType`}
 	#Informational message
-	new info `{ return GTK_MESSAGE_INFO; `} 
+	new info `{ return GTK_MESSAGE_INFO; `}
 
 	#Non-fatal warning message.
-	new warning `{ return GTK_MESSAGE_WARNING; `} 	
+	new warning `{ return GTK_MESSAGE_WARNING; `}
 
 	#Question requiring a choice.
-	new question `{ return GTK_MESSAGE_QUESTION; `} 	
+	new question `{ return GTK_MESSAGE_QUESTION; `}
 
 	#Fatal error message.
-	new error `{ return GTK_MESSAGE_ERROR; `} 	
+	new error `{ return GTK_MESSAGE_ERROR; `}
 
 	#None of the above, doesn't get an icon.
-	new other `{ return GTK_MESSAGE_OTHER; `} 	
+	new other `{ return GTK_MESSAGE_OTHER; `}
 end
 
 #A page setup dialog
@@ -276,10 +276,10 @@ end
 #@https://developer.gnome.org/gtk3/stable/GtkDialog.html#GtkDialogFlags
 extern GtkDialogFlags `{GtkDialogFlags`}
 	#Make the constructed dialog modal.
-	new modal `{ return GTK_DIALOG_MODAL; `} 
+	new modal `{ return GTK_DIALOG_MODAL; `}
 
-	#Destroy the dialog when its parent is destroyed.	
-	new destroy_with_parent `{ return GTK_DIALOG_DESTROY_WITH_PARENT; `} 	
+	#Destroy the dialog when its parent is destroyed.
+	new destroy_with_parent `{ return GTK_DIALOG_DESTROY_WITH_PARENT; `}
 end
 
 #enum GtkResponseType
@@ -287,34 +287,34 @@ end
 #@https://developer.gnome.org/gtk3/stable/GtkDialog.html#GtkResponseType
 extern GtkResponseType `{GtkResponseType`}
 	#Returned if an action widget has no response id, or if the dialog gets programmatically hidden or destroyed.
-	new none `{ return GTK_RESPONSE_NONE; `} 
+	new none `{ return GTK_RESPONSE_NONE; `}
 
 	#Generic response id, not used by GTK+ dialogs.
-	new reject `{ return GTK_RESPONSE_REJECT; `} 	
+	new reject `{ return GTK_RESPONSE_REJECT; `}
 
-	#Generic response id, not used by GTK+ dialogs	
-	new accept `{ return GTK_RESPONSE_ACCEPT; `} 	
+	#Generic response id, not used by GTK+ dialogs
+	new accept `{ return GTK_RESPONSE_ACCEPT; `}
 
 	#Returned if the dialog is deleted
-	new delete_event `{ return GTK_RESPONSE_DELETE_EVENT; `} 	
-	#Returned by OK buttons in GTK+ dialogs.	
-	new ok `{ return GTK_RESPONSE_OK; `} 	
+	new delete_event `{ return GTK_RESPONSE_DELETE_EVENT; `}
+	#Returned by OK buttons in GTK+ dialogs.
+	new ok `{ return GTK_RESPONSE_OK; `}
 
-	#Returned by Cancel buttons in GTK+ dialogs.	
-	new cancel `{ return GTK_RESPONSE_CANCEL; `} 	
+	#Returned by Cancel buttons in GTK+ dialogs.
+	new cancel `{ return GTK_RESPONSE_CANCEL; `}
 
-	#Returned by OK Close in GTK+ dialogs.	
-	new close `{ return GTK_RESPONSE_CLOSE; `} 	
+	#Returned by OK Close in GTK+ dialogs.
+	new close `{ return GTK_RESPONSE_CLOSE; `}
 
-	#Returned by OK Yes in GTK+ dialogs.	
-	new yes `{ return GTK_RESPONSE_YES; `} 
+	#Returned by OK Yes in GTK+ dialogs.
+	new yes `{ return GTK_RESPONSE_YES; `}
 
-	#Returned by OK No in GTK+ dialogs.	
-	new no `{ return GTK_RESPONSE_NO; `} 
+	#Returned by OK No in GTK+ dialogs.
+	new no `{ return GTK_RESPONSE_NO; `}
 
-	#Returned by OK Apply in GTK+ dialogs.	
-	new apply `{ return GTK_RESPONSE_APPLY; `} 
+	#Returned by OK Apply in GTK+ dialogs.
+	new apply `{ return GTK_RESPONSE_APPLY; `}
 
-	#Returned by OK Help in GTK+ dialogs.	
-	new help `{ return GTK_RESPONSE_HELP; `} 
+	#Returned by OK Help in GTK+ dialogs.
+	new help `{ return GTK_RESPONSE_HELP; `}
 end

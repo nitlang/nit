@@ -22,7 +22,7 @@ import gtk_core
 #@https://developer.gnome.org/gtk3/3.2/GtkCalendar.html
 extern GtkCalendar `{GtkCalendar *`}
 	super GtkWidget
-	
+
 	new is extern `{
 		 return (GtkCalendar *)gtk_calendar_new();
 	`}
@@ -40,15 +40,15 @@ extern GtkCalendar `{GtkCalendar *`}
 	`}
 
 	fun unmark_day( day : Int ) is extern `{
-		gtk_calendar_unmark_day( recv, day );		
+		gtk_calendar_unmark_day( recv, day );
 	`}
 
 	fun is_marked( day : Int ): Bool is extern `{
-		return gtk_calendar_get_day_is_marked( recv, day );	
+		return gtk_calendar_get_day_is_marked( recv, day );
 	`}
 
    fun clear_marks is extern `{
-		gtk_calendar_clear_marks( recv );	
+		gtk_calendar_clear_marks( recv );
 	`}
 
 	fun display_options : GtkCalendarDisplayOptions is extern `{
@@ -61,13 +61,13 @@ extern GtkCalendar `{GtkCalendar *`}
 	`}
 
 	#date en nit...
-	fun date: String is abstract  
+	fun date: String is abstract
 end
 
 #enum GtkCalendarDisplayOptions
 #@https://developer.gnome.org/gtk3/3.2/GtkCalendar.html#GtkCalendarDisplayOptions
 extern GtkCalendarDisplayOptions `{GtkCalendarDisplayOptions`}
-	new show_heading `{ return GTK_CALENDAR_SHOW_HEADING; `} 
+	new show_heading `{ return GTK_CALENDAR_SHOW_HEADING; `}
 	new show_day_names `{ return GTK_CALENDAR_SHOW_DAY_NAMES; `}
 	new no_month_change `{ return GTK_CALENDAR_NO_MONTH_CHANGE; `}
 	new show_week_numbers `{ return GTK_CALENDAR_SHOW_WEEK_NUMBERS; `}
@@ -95,47 +95,47 @@ extern GtkProgressBar `{GtkProgressBar *`}
 	`}
 
 	fun pulse is extern `{
-		gtk_progress_bar_pulse( recv );	
+		gtk_progress_bar_pulse( recv );
 	`}
 
 	fun pulse_step : Float is extern `{
-		return gtk_progress_bar_get_pulse_step( recv );	
+		return gtk_progress_bar_get_pulse_step( recv );
 	`}
 
 	fun pulse_step=( step : Float ) is extern `{
-		gtk_progress_bar_set_pulse_step( recv, step);	
+		gtk_progress_bar_set_pulse_step( recv, step);
 	`}
 
 	fun fraction : Float is extern `{
-		return gtk_progress_bar_get_fraction( recv );	
+		return gtk_progress_bar_get_fraction( recv );
 	`}
 
 	fun fraction=( fraction : Float) is extern `{
-		gtk_progress_bar_set_fraction( recv, fraction );	
+		gtk_progress_bar_set_fraction( recv, fraction );
 	`}
 
 	fun inverted : Bool is extern `{
-		return gtk_progress_bar_get_inverted( recv );	
+		return gtk_progress_bar_get_inverted( recv );
 	`}
 
 	fun inverted=( is_inverted : Bool) is extern `{
-		gtk_progress_bar_set_inverted( recv, is_inverted );	
+		gtk_progress_bar_set_inverted( recv, is_inverted );
 	`}
 
 	fun show_text : Bool is extern `{
-		return gtk_progress_bar_get_show_text( recv );	
+		return gtk_progress_bar_get_show_text( recv );
 	`}
 
 	fun show_text=( show : Bool) is extern `{
-		gtk_progress_bar_set_show_text( recv, show );	
+		gtk_progress_bar_set_show_text( recv, show );
 	`}
 
 	fun text : String is extern import String::to_cstring`{
-		return new_String_from_cstring( (char *)gtk_progress_bar_get_text( recv ) );	
+		return new_String_from_cstring( (char *)gtk_progress_bar_get_text( recv ) );
 	`}
 
 	fun text=( value : String) is extern import String::to_cstring`{
-		gtk_progress_bar_set_text( recv, String_to_cstring( value ) );	
+		gtk_progress_bar_set_text( recv, String_to_cstring( value ) );
 	`}
 
 	fun ellipsize is abstract
@@ -163,11 +163,11 @@ extern GtkSpinButton `{GtkSpinButton *`}
 	super GtkEntry
 
 	new ( adjustment : GtkAdjustment, climb_rate : Float, digits : Int )is extern `{
-		return (GtkSpinButton *)gtk_spin_button_new( adjustment, climb_rate, digits );	
+		return (GtkSpinButton *)gtk_spin_button_new( adjustment, climb_rate, digits );
 	`}
 
 	new with_range( min : Float, max : Float, step : Float )is extern `{
-		return (GtkSpinButton *)gtk_spin_button_new_with_range( min, max, step );	
+		return (GtkSpinButton *)gtk_spin_button_new_with_range( min, max, step );
 	`}
 
 	fun configure ( adjustment : GtkAdjustment, climb_rate : Float, digits : Int ) is extern `{
@@ -175,40 +175,40 @@ extern GtkSpinButton `{GtkSpinButton *`}
 	`}
 
 	fun adjustment : GtkAdjustment is extern `{
-		return gtk_spin_button_get_adjustment( recv ); 	
+		return gtk_spin_button_get_adjustment( recv );
 	`}
 
 	fun adjustment=( value : GtkAdjustment ) is extern `{
-		gtk_spin_button_set_adjustment( recv, value ); 	
+		gtk_spin_button_set_adjustment( recv, value );
 	`}
 
 	fun digits : Int is extern `{
-		return gtk_spin_button_get_digits( recv ); 	
+		return gtk_spin_button_get_digits( recv );
 	`}
 
 	fun digits=( nb_digits : Int ) is extern `{
-		gtk_spin_button_set_digits( recv, nb_digits ); 	
+		gtk_spin_button_set_digits( recv, nb_digits );
 	`}
 
 	fun value : Float is extern `{
-		return gtk_spin_button_get_value( recv ); 	
+		return gtk_spin_button_get_value( recv );
 	`}
 
 	fun val=( val : Float ) is extern `{
-		gtk_spin_button_set_value( recv, val ); 	
+		gtk_spin_button_set_value( recv, val );
 	`}
 
 	fun spin( direction : GtkSpinType, increment : Float ) is extern`{
-		gtk_spin_button_spin( recv, direction, increment );	
+		gtk_spin_button_spin( recv, direction, increment );
 	`}
 end
 
 #enum GtkSpinType
-#The values of the GtkSpinType enumeration are used to specify the change to make in gtk_spin_button_spin(). 
+#The values of the GtkSpinType enumeration are used to specify the change to make in gtk_spin_button_spin().
 #@https://developer.gnome.org/gtk3/stable/GtkSpinButton.html#GtkSpinType
 extern GtkSpinType `{GtkSpinType`}
 	#Increment by the adjustments step increment.
-	new step_forward `{ return GTK_SPIN_STEP_FORWARD; `} 
+	new step_forward `{ return GTK_SPIN_STEP_FORWARD; `}
 
 	#Decrement by the adjustments step increment.
 	new step_backward `{ return GTK_SPIN_STEP_BACKWARD; `}
@@ -231,7 +231,7 @@ end
 
 #A widget to unlock or lock privileged operations
 #@https://developer.gnome.org/gtk3/stable/GtkLockButton.html
-extern GtkLockButton 
+extern GtkLockButton
 	super GtkButton
 end
 
@@ -245,7 +245,7 @@ extern GtkColorButton `{GtkColorButton *`}
 	`}
 
 	fun color=( col : GdkColor ) is extern `{
-		
+
 		/* deprecated
 		GdkColor *c = malloc(sizeof(GdkColor));
 		c->pixel = 50;

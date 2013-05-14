@@ -89,7 +89,7 @@ extern GtkWidget `{GtkWidget *`}
 		gtk_widget_override_background_color( recv, state, color);
 	`}
 
-	#with gtk it's possible to set fg_color to all widget : is it correct? is fg color inherited?	
+	#with gtk it's possible to set fg_color to all widget : is it correct? is fg color inherited?
 	#GdkColor color;
 	fun fg_color=( state : GtkStateType, color : GdkRGBA ) is extern `{
 		gtk_widget_override_color( recv, state, color);
@@ -110,10 +110,10 @@ end
 #@https://developer.gnome.org/gtk3/stable/GtkBin.html
 extern GtkBin `{GtkBin *`}
 	super GtkContainer
-	
+
 	fun child : GtkWidget is extern `{
 		return gtk_bin_get_child( recv );
-	`}	
+	`}
 end
 
 #Toplevel which can contain other widgets
@@ -163,13 +163,13 @@ extern GtkWindow `{GtkWindow *`}
 	#params width in pixels, or -1 to unset the default width
 	#params height in pixels, or -1 to unset the default height
 	fun default_size( width : Int, height : Int ) is extern `{
-		gtk_window_set_default_size( recv, width, height );	
-	`} 
+		gtk_window_set_default_size( recv, width, height );
+	`}
 
 	#Activates the default widget for the window
 	#unless the current focused widget has been configured to receive the default action (see gtk_widget_set_receives_default()), in which case the focused widget is activated.
 	fun activate_default : Bool is extern `{
-		return gtk_window_activate_default( recv );		
+		return gtk_window_activate_default( recv );
 	`}
 
 	fun gravity : GdkGravity is extern `{
@@ -198,35 +198,35 @@ extern GtkWindow `{GtkWindow *`}
 	`}
 
 	fun get_focus : GtkWidget is extern `{
-		return gtk_window_get_focus( recv );	
+		return gtk_window_get_focus( recv );
 	`}
 
 	fun set_focus( widget : GtkWidget ) is extern `{
-		return gtk_window_set_focus( recv, widget );	
+		return gtk_window_set_focus( recv, widget );
 	`}
 
 	fun get_default_widget : GtkWidget is extern `{
-		return gtk_window_get_default_widget( recv );	
+		return gtk_window_get_default_widget( recv );
 	`}
 
 	fun set_default_widget( widget : GtkWidget ) is extern `{
-		return gtk_window_set_default( recv, widget );	
+		return gtk_window_set_default( recv, widget );
 	`}
 
 	fun maximize is extern `{
-		return gtk_window_maximize( recv );	
+		return gtk_window_maximize( recv );
 	`}
 
 	fun unmaximize is extern `{
-		return gtk_window_unmaximize( recv );	
+		return gtk_window_unmaximize( recv );
 	`}
 
 	fun fullscreen is extern `{
-		return gtk_window_fullscreen( recv );	
+		return gtk_window_fullscreen( recv );
 	`}
 
 	fun unfullscreen is extern `{
-		return gtk_window_unfullscreen( recv );	
+		return gtk_window_unfullscreen( recv );
 	`}
 
 	fun keep_above=( setting : Bool ) is extern `{
@@ -244,38 +244,38 @@ extern GtkFrame `{GtkFrame *`}
 	super GtkBin
 
 	new ( lbl : String ) is extern import String::to_cstring`{
-		return (GtkFrame *)gtk_frame_new( String_to_cstring( lbl ) );   	
+		return (GtkFrame *)gtk_frame_new( String_to_cstring( lbl ) );
 	`}
 
 	fun frame_label : String is extern`{
-		return new_String_from_cstring( (char *)gtk_frame_get_label( recv ) );   	
+		return new_String_from_cstring( (char *)gtk_frame_get_label( recv ) );
 	`}
 
 	fun frame_label=( lbl : String ) is extern import String::to_cstring`{
-		gtk_frame_set_label( recv, String_to_cstring( lbl ) );   	
+		gtk_frame_set_label( recv, String_to_cstring( lbl ) );
 	`}
 
 	fun label_widget : GtkWidget is extern `{
-		return gtk_frame_get_label_widget( recv );   	
+		return gtk_frame_get_label_widget( recv );
 	`}
 
 	fun label_widget=( widget : GtkWidget ) is extern `{
-		gtk_frame_set_label_widget( recv, widget );   	
+		gtk_frame_set_label_widget( recv, widget );
 	`}
 
 	fun shadow_type : GtkShadowType is extern `{
-		return gtk_frame_get_shadow_type( recv );   	
+		return gtk_frame_get_shadow_type( recv );
 	`}
 
 	fun shadow_type=( stype : GtkShadowType ) is extern `{
-		gtk_frame_set_shadow_type( recv, stype );   	
+		gtk_frame_set_shadow_type( recv, stype );
 	`}
 
-	#fun label_align : GtkShadowType is extern `{ 	
+	#fun label_align : GtkShadowType is extern `{
 	#`}
 
 	fun label_align=( xalign : Float, yalign : Float ) is extern `{
-		gtk_frame_set_label_align( recv, xalign, yalign );   	
+		gtk_frame_set_label_align( recv, xalign, yalign );
 	`}
 end
 
@@ -310,7 +310,7 @@ end
 extern GtkMisc `{GtkMisc *`}
 	super GtkWidget
 
-	fun alignment : GtkAlignment is abstract	
+	fun alignment : GtkAlignment is abstract
 
 	fun alignment=( x : Float, y : Float ) is extern `{
 		gtk_misc_set_alignment( recv, x, y );
@@ -334,27 +334,27 @@ extern GtkEntry `{GtkEntry *`}
 	`}
 
 	fun text : String is extern import String::to_cstring`{
-		return new_String_from_cstring( (char *)gtk_entry_get_text( recv ) );	
+		return new_String_from_cstring( (char *)gtk_entry_get_text( recv ) );
 	`}
 
 	fun text=( value : String) is extern import String::to_cstring`{
-		gtk_entry_set_text( recv, String_to_cstring( value ) );	
+		gtk_entry_set_text( recv, String_to_cstring( value ) );
 	`}
 
 	fun visible : Bool is extern `{
-		return gtk_entry_get_visibility( recv );	
+		return gtk_entry_get_visibility( recv );
 	`}
 
 	fun visible=( is_visible : Bool) is extern `{
-		gtk_entry_set_visibility( recv, is_visible );	
+		gtk_entry_set_visibility( recv, is_visible );
 	`}
 
 	fun max_length : Int is extern `{
-		return gtk_entry_get_max_length( recv );	
+		return gtk_entry_get_max_length( recv );
 	`}
 
 	fun max_length=( max : Int) is extern `{
-		gtk_entry_set_max_length( recv, max );	
+		gtk_entry_set_max_length( recv, max );
 	`}
 end
 
@@ -365,11 +365,11 @@ extern GtkRange `{GtkRange *`}
 
 	#Gets the current position of the fill level indicator.
 	fun fill_level : Float is extern `{
-		return gtk_range_get_fill_level( recv );	
+		return gtk_range_get_fill_level( recv );
 	`}
 
 	fun fill_level=( level : Float ) is extern `{
-		gtk_range_set_fill_level( recv, level );	
+		gtk_range_set_fill_level( recv, level );
 	`}
 
 	#Gets whether the range is restricted to the fill level.
@@ -383,75 +383,75 @@ extern GtkRange `{GtkRange *`}
 
 	#Gets whether the range displays the fill level graphically.
 	fun show_fill_level : Bool is extern `{
-		return gtk_range_get_show_fill_level( recv );	
+		return gtk_range_get_show_fill_level( recv );
 	`}
 
  	fun show_fill_level=( is_displayed : Bool ) is extern `{
-		gtk_range_set_show_fill_level( recv, is_displayed );	
+		gtk_range_set_show_fill_level( recv, is_displayed );
 	`}
 
 	fun adjustment : GtkAdjustment is extern `{
-		return gtk_range_get_adjustment( recv );	
+		return gtk_range_get_adjustment( recv );
 	`}
 
  	fun adjustment=( value : GtkAdjustment ) is extern `{
-		gtk_range_set_adjustment( recv, value );	
+		gtk_range_set_adjustment( recv, value );
 	`}
-	
+
 	fun inverted : Bool is extern `{
-		return gtk_range_get_inverted( recv );	
+		return gtk_range_get_inverted( recv );
 	`}
 
  	fun inverted=( setting : Bool ) is extern `{
-		gtk_range_set_inverted( recv, setting );	
+		gtk_range_set_inverted( recv, setting );
 	`}
 
 	fun value : Float is extern `{
-		return gtk_range_get_value( recv );	
+		return gtk_range_get_value( recv );
 	`}
 
  	fun value=( val : Float ) is extern `{
-		gtk_range_set_value( recv, val );	
+		gtk_range_set_value( recv, val );
 	`}
 
-	fun set_increments( step : Float, page : Float ) is extern `{	
+	fun set_increments( step : Float, page : Float ) is extern `{
 		gtk_range_set_increments( recv, step, page );
 	`}
 
-	fun set_range( min : Float, max : Float ) is extern `{	
+	fun set_range( min : Float, max : Float ) is extern `{
 		gtk_range_set_range( recv, min, max );
 	`}
 
 	fun round_digits : Int is extern `{
-		return gtk_range_get_round_digits( recv );	
+		return gtk_range_get_round_digits( recv );
 	`}
 
  	fun round_digits=( nb : Int ) is extern `{
-		gtk_range_set_round_digits( recv, nb );	
+		gtk_range_set_round_digits( recv, nb );
 	`}
 
 	fun size_fixed : Bool is extern `{
-		return gtk_range_get_slider_size_fixed( recv );	
+		return gtk_range_get_slider_size_fixed( recv );
 	`}
 
 	fun size_fixed=( is_fixed : Bool ) is extern `{
-		return gtk_range_set_slider_size_fixed( recv, is_fixed );	
+		return gtk_range_set_slider_size_fixed( recv, is_fixed );
 	`}
 
 	fun flippable : Bool is extern `{
-		return gtk_range_get_flippable( recv );	
+		return gtk_range_get_flippable( recv );
 	`}
 
 	fun min_size=( is_flippable : Bool ) is extern `{
-		return gtk_range_set_flippable( recv, is_flippable );	
+		return gtk_range_set_flippable( recv, is_flippable );
 	`}
 
 	fun min_slider_size : Int is extern `{
-		return gtk_range_get_min_slider_size( recv );	
+		return gtk_range_get_min_slider_size( recv );
 	`}
 
 	fun min_slider_size=( size : Int ) is extern `{
-		return gtk_range_set_min_slider_size( recv, size );	
+		return gtk_range_set_min_slider_size( recv, size );
 	`}
 end
 
@@ -461,11 +461,11 @@ extern GtkScale `{GtkScale *`}
 	super GtkRange
 
 	new ( orientation : GtkOrientation, adjustment : GtkAdjustment ) is extern `{
-		return (GtkScale *)gtk_scale_new( orientation, adjustment );	
+		return (GtkScale *)gtk_scale_new( orientation, adjustment );
 	`}
 
 	new with_range ( orientation : GtkOrientation, min : Float, max : Float, step : Float ) is extern `{
-		return (GtkScale *)gtk_scale_new_with_range( orientation, min, max, step );	
+		return (GtkScale *)gtk_scale_new_with_range( orientation, min, max, step );
 	`}
 
 	fun digits : Int is extern `{
@@ -489,7 +489,7 @@ extern GtkScale `{GtkScale *`}
 	`}
 
 	fun value_position=( pos : GtkPositionType ) is extern `{
-		gtk_scale_set_value_pos( recv, pos );	
+		gtk_scale_set_value_pos( recv, pos );
 	`}
 
 	fun has_origin : Bool is extern `{
@@ -501,12 +501,12 @@ extern GtkScale `{GtkScale *`}
 	`}
 
 	fun add_mark( value : Float, position : GtkPositionType, markup : String ) is extern import String::to_cstring`{
-		gtk_scale_add_mark( recv, value, position, String_to_cstring( markup ) );	
+		gtk_scale_add_mark( recv, value, position, String_to_cstring( markup ) );
 	`}
 
 	#Removes any marks that have been added with gtk_scale_add_mark().
 	fun clear_marks is extern `{
-		gtk_scale_clear_marks( recv );	
+		gtk_scale_clear_marks( recv );
 	`}
 
 	#get layout
@@ -520,7 +520,7 @@ extern GtkScrollbar `{GtkScrollbar *`}
 	super GtkRange
 
 		new ( orientation : GtkOrientation, adjustment : GtkAdjustment ) is extern `{
-		return (GtkScrollbar *)gtk_scrollbar_new( orientation, adjustment );	
+		return (GtkScrollbar *)gtk_scrollbar_new( orientation, adjustment );
 	`}
 end
 
@@ -544,13 +544,13 @@ extern GtkLabel `{GtkLabel *`}
 		return new_String_from_cstring( (char*)gtk_label_get_text( recv ) );
 	`}
 
-	# Sets the angle of rotation for the label. 
+	# Sets the angle of rotation for the label.
 	# An angle of 90 reads from from bottom to top, an angle of 270, from top to bottom.
 	fun angle=( degre : Float ) `{
 		gtk_label_set_angle( recv, degre );
 	`}
 
-	# Returns the angle of rotation for the label.  
+	# Returns the angle of rotation for the label.
 	fun angle : Float `{
 		return gtk_label_get_angle( recv );
 	`}
@@ -561,7 +561,7 @@ end
 #@https://developer.gnome.org/gtk3/3.2/GtkImage.html
 extern GtkImage `{GtkImage *`}
 	super GtkMisc
-	
+
 	# Create a GtkImage
 	new is extern `{
 		return (GtkImage*)gtk_image_new( );
@@ -573,15 +573,15 @@ extern GtkImage `{GtkImage *`}
 	`}
 
 	fun pixel_size : Int is extern `{
-		return gtk_image_get_pixel_size( recv );	
+		return gtk_image_get_pixel_size( recv );
 	`}
 
 	fun pixel_size=( size : Int) is extern `{
-		gtk_image_set_pixel_size( recv, size );	
+		gtk_image_set_pixel_size( recv, size );
 	`}
 
 	fun clear is extern `{
-		gtk_image_clear( recv );	
+		gtk_image_clear( recv );
 	`}
 end
 
@@ -590,12 +590,12 @@ end
 #@https://developer.gnome.org/gtk3/3.2/GtkImage.html#GtkImageType
 extern GtkImageType `{GtkImageType`}
 	# There is no image displayed by the widget.
-	new empty `{ return GTK_IMAGE_EMPTY; `} 
+	new empty `{ return GTK_IMAGE_EMPTY; `}
 
 	# The widget contains a GdkPixbuf.
 	new pixbuf `{ return GTK_IMAGE_PIXBUF; `}
-	
-	# The widget contains a stock icon name.	
+
+	# The widget contains a stock icon name.
 	new stock `{ return GTK_IMAGE_STOCK; `}
 
 	# The widget contains a GtkIconSet.
@@ -644,11 +644,11 @@ extern GtkButton `{GtkButton *`}
 	`}
 
 	fun text : String is extern `{
-		return new_String_from_cstring( (char *)gtk_button_get_label( recv ) );	
+		return new_String_from_cstring( (char *)gtk_button_get_label( recv ) );
 	`}
 
 	fun text=( value : String ) is extern import String::to_cstring`{
-		gtk_button_set_label( recv, String_to_cstring( value ) );	
+		gtk_button_set_label( recv, String_to_cstring( value ) );
 	`}
 
 	fun on_click( to_call : GtkCallable, user_data : nullable Object ) do
@@ -661,7 +661,7 @@ end
 #@https://developer.gnome.org/gtk3/stable/GtkScaleButton.html
 extern GtkScaleButton `{GtkScaleButton *`}
 	super GtkButton
-	
+
 	#const gchar **icons
 	new( size: GtkIconSize, min: Float, max: Float, step: Float ) is extern `{
 		return (GtkScaleButton *)gtk_scale_button_new( size, min, max, step, (const char **)0 );
@@ -672,7 +672,7 @@ end
 #@https://developer.gnome.org/gtk3/stable/GtkLinkButton.html
 extern GtkLinkButton `{GtkLinkButton *`}
 	super GtkButton
-	
+
 	new( uri: String ) is extern import String::to_cstring `{
 		return (GtkLinkButton *)gtk_link_button_new( String_to_cstring(uri) );
 	`}
@@ -692,7 +692,7 @@ extern GtkExpander `{GtkExpander *`}
 	`}
 
 	fun expanded : Bool is extern `{
-		return gtk_expander_get_expanded( recv ); 
+		return gtk_expander_get_expanded( recv );
 	`}
 
 	fun expanded=( is_expanded : Bool ) is extern `{
@@ -815,7 +815,7 @@ extern GtkComboBox `{GtkComboBox *`}
 	`}
 
 	fun active_item=( active : Int ) is extern `{
-		gtk_combo_box_set_active( recv, active ); 
+		gtk_combo_box_set_active( recv, active );
 	`}
 
 	#fun active_iter : GtkTreeIter is extern `{
@@ -887,11 +887,11 @@ extern GtkSpinner `{GtkSpinner *`}
 	`}
 
 	fun start is extern `{
-		return gtk_spinner_start( recv );	
+		return gtk_spinner_start( recv );
 	`}
 
 	fun stop is extern `{
-		return gtk_spinner_stop( recv );	
+		return gtk_spinner_stop( recv );
 	`}
 end
 
@@ -905,11 +905,11 @@ extern GtkSwitch `{GtkSwitch *`}
 	`}
 
 	fun active : Bool is extern `{
-		return gtk_switch_get_active( recv );	
+		return gtk_switch_get_active( recv );
 	`}
 
 	fun active=( is_active : Bool ) is extern `{
-		return gtk_switch_set_active( recv, is_active );	
+		return gtk_switch_set_active( recv, is_active );
 	`}
 end
 
@@ -920,11 +920,11 @@ extern GtkAlignment `{GtkAlignment *`}
 	super GtkBin
 
 	new ( xalign : Float, yalign : Float, xscale : Float, yscale : Float ) is extern `{
-		return (GtkAlignment *)gtk_alignment_new( xalign, yalign, xscale, yscale );   	
+		return (GtkAlignment *)gtk_alignment_new( xalign, yalign, xscale, yscale );
 	`}
 
 	fun set ( xalign : Float, yalign : Float, xscale : Float, yscale : Float ) is extern `{
-		gtk_alignment_set( recv, xalign, yalign, xscale, yscale );   	
+		gtk_alignment_set( recv, xalign, yalign, xscale, yscale );
 	`}
 
 	#get_padding
@@ -940,7 +940,7 @@ end
 extern GdkColor `{GdkColor*`}
 	new is extern `{
 		GdkColor * col = malloc(sizeof(GdkColor));
-		/*gdk_color_parse( "red", recv );*/		
+		/*gdk_color_parse( "red", recv );*/
 		gdk_color_parse( "red", col);
 		return col;
 	`}
