@@ -229,16 +229,6 @@ extern GtkSpinType `{GtkSpinType`}
 	new user_defined `{ return GTK_SPIN_USER_DEFINED; `}
 end
 
-#An entry which shows a search icon
-#@https://developer.gnome.org/gtk3/stable/GtkSearchEntry.html
-extern GtkSearchEntry `{GtkSearchEntry *`}
-	super GtkEntry
-
-	new is extern `{
-		return (GtkSearchEntry *)gtk_search_entry_new( );	
-	`}
-end
-
 #A widget to unlock or lock privileged operations
 #@https://developer.gnome.org/gtk3/stable/GtkLockButton.html
 extern GtkLockButton 
