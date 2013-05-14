@@ -19,3 +19,12 @@ import list
 intrude import array # FIXME because of string.nit
 import sorter
 import hash_collection
+
+redef class Sequence[E]
+	fun subarray(start, len: Int): Array[E]
+	do
+		var a = new Array[E].with_capacity(len)
+		for i in [start .. start+len[ do a.add(self[i])
+		return a
+	end
+end
