@@ -126,7 +126,7 @@ class CalculatorGui
 		# digits
 		for n in [0..9] do
 			var but = new GtkButton.with_label( n.to_s )
-			but.set_size_request( 64, 64 )
+			but.request_size( 64, 64 )
 			but.signal_connect( "clicked", self, n )
 			if n == 0 then
 				container.attach( but, 0, 4, 1, 1 )
@@ -137,7 +137,7 @@ class CalculatorGui
 		var r = 1
 		for op in ['+', '-', '*', '/' ] do
 			var but = new GtkButton.with_label( op.to_s )
-			but.set_size_request( 64, 64 )
+			but.request_size( 64, 64 )
 			but.signal_connect( "clicked", self, op )
 			container.attach( but, 4, r, 1, 1 )
 			r+=1
@@ -145,13 +145,13 @@ class CalculatorGui
 
 		# =
 		but_eq = new GtkButton.with_label( "=" )
-		but_eq.set_size_request( 64, 64 )
+		but_eq.request_size( 64, 64 )
 		but_eq.signal_connect( "clicked", self, '=' )
 		container.attach( but_eq, 5, 3, 1, 2 )
 
 		# .
 		var but_dot = new GtkButton.with_label( "." )
-		but_dot.set_size_request( 64, 64 )
+		but_dot.request_size( 64, 64 )
 		but_dot.signal_connect( "clicked", self, '.' )
 		container.attach( but_dot, 1, 4, 1, 1 )
 
