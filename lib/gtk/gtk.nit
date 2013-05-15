@@ -225,6 +225,25 @@ extern GtkWindow `{GtkWindow *`}
 	`}
 end
 
+#Base class for widgets with alignments and padding
+#@https://developer.gnome.org/gtk3/3.2/GtkMisc.html
+extern GtkMisc `{GtkMisc *`}
+	super GtkWidget
+
+	fun alignment : GtkAlignment is abstract	
+
+	fun alignment=( x : Float, y : Float ) is extern `{
+		gtk_misc_set_alignment( recv, x, y );
+	`}
+
+	fun padding : GtkAlignment is abstract
+
+	fun padding=( x : Float, y : Float ) is extern `{
+		gtk_misc_set_padding( recv, x, y );
+	`}
+
+end
+
 extern GtkColorSelectionDialog
 	super GtkWidget
 	new ( title : String, parent : GtkWindow ) is extern  import String::to_cstring `{
@@ -234,8 +253,8 @@ end
 
 #A widget that displays a small to medium amount of text
 #@https://developer.gnome.org/gtk3/3.2/GtkLabel.html
-extern GtkLabel `{GtkLabel*`}
-	super GtkWidget
+extern GtkLabel `{GtkLabel *`}
+	super GtkMisc
 
 	# Create a GtkLabel with text
 	new ( text : String ) is extern import String::to_cstring `{
@@ -262,24 +281,160 @@ extern GtkLabel `{GtkLabel*`}
 	fun angle : Float `{
 		return gtk_label_get_angle( recv );
 	`}
+
 end
+
+#A widget displaying an image
+#@https://developer.gnome.org/gtk3/3.2/GtkImage.html
+extern GtkImage `{GtkImage *`}
+	super GtkMisc
+	
+	# Create a GtkImage
+	new is extern `{
+		return (GtkImage*)gtk_image_new( );
+	`}
+
+	# Create a GtkImage with text
+	new file( filename : String ) is extern import String::to_cstring `{
+		return (GtkImage*)gtk_image_new_from_file( String_to_cstring( filename ) );
+	`}
+
+	fun pixel_size : Int is extern `{
+		return gtk_image_get_pixel_size( recv );	
+	`}
+
+	fun pixel_size=( size : Int) is extern `{
+		gtk_image_set_pixel_size( recv, size );	
+	`}
+
+	fun clear is extern `{
+		gtk_image_clear( recv );	
+	`}
+end
+
+#enum GtkImageType
+#Describes the image data representation used by a GtkImage.
+#@https://developer.gnome.org/gtk3/3.2/GtkImage.html#GtkImageType
+extern GtkImageType `{GtkImageType`}
+	# There is no image displayed by the widget.
+	new empty `{ return GTK_IMAGE_EMPTY; `} 
+
+	# The widget contains a GdkPixbuf.
+	new pixbuf `{ return GTK_IMAGE_PIXBUF; `}
+	
+	# The widget contains a stock icon name.	
+	new stock `{ return GTK_IMAGE_STOCK; `}
+
+	# The widget contains a GtkIconSet.
+	new icon_set `{ return GTK_IMAGE_ICON_SET; `}
+
+	# The widget contains a GdkPixbufAnimation.
+	new animation `{ return GTK_IMAGE_ANIMATION; `}
+
+	# The widget contains a named icon.
+	new icon_name `{ return GTK_IMAGE_ICON_NAME; `}
+
+	# The widget contains a GIcon.
+	new gicon `{ return GTK_IMAGE_GICON; `}
+end
+
+#Displays an arrow
+#@https://developer.gnome.org/gtk3/3.2/GtkArrow.html
+#extern GtkArrow `{GtkArrow *`}
+#	super GtkMisc
+#
+#	new ( arrow_type : GtkArrowType, shadow_type : GtkShadowType ) is extern `{
+#		return (GtkArrow *)gtk_arrow_new( arrow_type, shadow_type );
+#	`}
+#
+#	fun set( arrow_type : GtkArrowType, shadow_type : GtkShadowType ) is extern `{
+#		gtk_arrow_set( recv, arrow_type, shadow_type );
+#	`}
+#end
 
 #A widget that emits a signal when clicked on
 #@https://developer.gnome.org/gtk3/stable/GtkButton.html
-extern GtkButton
-	super GtkWidget
+extern GtkButton `{GtkButton *`}
+	super GtkBin
 
 	new is extern `{
-		return gtk_button_new(  );
+		return (GtkButton *)gtk_button_new(  );
 	`}
 
 	#Create a GtkButton with text
 	new with_label( text : String ) is extern import String::to_cstring `{
-		return gtk_button_new_with_label( String_to_cstring( text ) );
+		return (GtkButton *)gtk_button_new_with_label( String_to_cstring( text ) );
 	`}
 
 	new from_stock( stock_id : String ) is extern import String::to_cstring `{
-		return gtk_button_new_from_stock( String_to_cstring( stock_id ) );
+		return (GtkButton *)gtk_button_new_from_stock( String_to_cstring( stock_id ) );
 	`}
+
+	fun text : String is extern `{
+		return new_String_from_cstring( (char *)gtk_button_get_label( recv ) );	
+	`}
+
+	fun text=( value : String ) is extern import String::to_cstring`{
+		gtk_button_set_label( recv, String_to_cstring( value ) );	
+	`}
+
+	fun on_click( to_call : GtkCallable, user_data : nullable Object ) do
+			signal_connect( "clicked", to_call, user_data )
+	end
+
+end
+
+#Show a spinner animation
+#@https://developer.gnome.org/gtk3/3.2/GtkSpinner.html
+extern GtkSpinner `{GtkSpinner *`}
+	super GtkWidget
+
+	new is extern `{
+		 return (GtkSpinner *)gtk_spinner_new();
+	`}
+
+	fun start is extern `{
+		return gtk_spinner_start( recv );	
+	`}
+
+	fun stop is extern `{
+		return gtk_spinner_stop( recv );	
+	`}
+end
+
+#A "light switch" style toggle
+#@https://developer.gnome.org/gtk3/3.2/GtkSwitch.html
+extern GtkSwitch `{GtkSwitch *`}
+	super GtkWidget
+
+	new is extern `{
+		 return (GtkSwitch *)gtk_switch_new();
+	`}
+
+	fun active : Bool is extern `{
+		return gtk_switch_get_active( recv );	
+	`}
+
+	fun active=( is_active : Bool ) is extern `{
+		return gtk_switch_set_active( recv, is_active );	
+	`}
+end
+
+
+#A widget which controls the alignment and size of its child
+#https://developer.gnome.org/gtk3/stable/GtkAlignment.html
+extern GtkAlignment `{GtkAlignment *`}
+	super GtkBin
+
+	new ( xalign : Float, yalign : Float, xscale : Float, yscale : Float ) is extern `{
+		return (GtkAlignment *)gtk_alignment_new( xalign, yalign, xscale, yscale );   	
+	`}
+
+	fun set ( xalign : Float, yalign : Float, xscale : Float, yscale : Float ) is extern `{
+		gtk_alignment_set( recv, xalign, yalign, xscale, yscale );   	
+	`}
+
+	#get_padding
+	#set_padding
 end
 
