@@ -10,3 +10,5 @@ calculator
 nitc
 nitdoc
 nits
+socket_client
+socket_server

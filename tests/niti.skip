@@ -14,3 +14,5 @@ nit_args1
 nitc_args1
 nitg_args1
 nitg_args3
+socket_client
+socket_server
