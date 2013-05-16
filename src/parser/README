@@ -5,8 +5,8 @@ Contents:
 
 	fact_parser.pl: Script used to factorize parser.nit
 	Makefile: Update grammar and generate .nit files
-	nit.sablecc3xx: Extended sablecc3 grammar (see prescc.sh)
-	prescc.sh: Program to transform an extended sablecc3 to a standard one
+	nit.sablecc3xx: Extended sablecc3 grammar (see prescc.pl)
+	prescc.pl: Program to transform an extended sablecc3 to a standard one
 	parser_nodes.nit: token and nodes classes hierarchy used by the parser and the lexer
 	tables.nit, tables_nit.h: Interfaces to access the tables needed by the parser and the lexer
 	test_parser.nit:
