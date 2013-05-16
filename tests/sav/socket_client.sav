@@ -1,1 +1,1 @@
-Usage : ./out/socket_client.bin <host> <port>
+Usage : socket_client <host> <port>

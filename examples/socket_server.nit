@@ -20,7 +20,7 @@ module socket_server
 import socket
 
 if args.is_empty then
-	print "Usage : {program_name} <port>"
+	print "Usage : socket_server <port>"
 	return
 end
 

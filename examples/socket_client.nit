@@ -20,7 +20,7 @@ module socket_client
 import socket
 
 if args.length < 2 then
-	print "Usage : {program_name} <host> <port>"
+	print "Usage : socket_client <host> <port>"
 	return
 end
 
