@@ -23,16 +23,23 @@ end
 # Will ignore non-jsonable
 redef class Map[ K, V ]
 	# Get a json-formatted string of this map
-	fun to_json( pretty: Bool ) : String import to_json_object `{
+	fun to_pretty_json: String do return native_to_json(true)
+	fun to_json: String do return native_to_json(false)
+
+	fun native_to_json( pretty: Bool ): String import to_json_object `{
 		json_object *jobj;
 		char *json_native_string;
 		String json_string;
 
 		jobj = Map_to_json_object( recv );
+#ifdef JSON_C_TO_STRING_PRETTY
 		if ( pretty )
 			json_native_string = json_object_to_json_string_ext( jobj, JSON_C_TO_STRING_PRETTY );
 		else
 			json_native_string = json_object_to_json_string_ext( jobj, JSON_C_TO_STRING_PLAIN );
+#else
+		json_native_string = json_object_to_json_string( jobj );
+#endif
 		json_string = new_String_from_cstring( json_native_string );
 		return json_string;
 	`}

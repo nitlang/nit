@@ -39,8 +39,10 @@ redef class String
 		var json_map = json_to_object
 		if json_map != null then
 			print json_map
-			print json_map.to_json(false)
-			print json_map.to_json(true)
+			print json_map.to_json
+
+			# only available for libjson0 v0.10
+			# print json_map.to_pretty_json
 		else
 			print "Conversion to json failed."
 		end
