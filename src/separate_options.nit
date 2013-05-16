@@ -42,7 +42,7 @@ redef class ToolContext
 
 	fun integrate_separate_options( options : String, mod : MMModule )
 	do
-		for line in options.split do
+		for line in options.split_with('\n') do
 			line = line.strip_extension( "\n" )
 			separate_options.parse( line.split_with( ' ' ) )
 			var rest = new Array[String]
