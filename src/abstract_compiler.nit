@@ -1549,7 +1549,8 @@ redef class AExternInitPropdef
 		var externname
 		var nextern = self.n_extern
 		if nextern == null then
-			debug("{mpropdef} need extern name")
+			v.add("printf(\"NOT YET IMPLEMENTED nitni for {mpropdef} at {location.to_s}\\n\");")
+			v.add("exit(1);")
 			return
 		end
 		externname = nextern.text.substring(1, nextern.text.length-2)
