@@ -6,3 +6,5 @@ test_extern
 nitc
 nitdoc
 nits
+socket_client
+socket_server
