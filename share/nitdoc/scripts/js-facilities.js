@@ -1,3 +1,7 @@
+// User
+var userB64 = null;
+var sessionStarted = false;
+
 /*
 * JQuery Case Insensitive :icontains selector
 */
@@ -356,6 +360,34 @@ $(document).ready(function() {
 	$(".popover").hide();
 	// Display Login modal
 	$("#logGitHub").click(function(){ displayLogginModal(); }); 
+	// Update display
+	updateDisplaying();
+	// If cookie existing the session is opened
+	if(sessionStarted){ userB64 = "Basic " + getUserPass("logginNitdoc"); }
+	
+	// Sign In an github user or Log out him
+	$("#signIn").click(function(){
+		if(!sessionStarted){
+			if($('#loginGit').val() == "" || $('#passwordGit').val() == ""){ displayMessage('The comment field is empty!', 40, 45); }
+			else
+			{
+				userName = $('#loginGit').val();
+				password = $('#passwordGit').val();
+				repoName = $('#repositoryGit').val();
+				branchName = $('#branchGit').val();
+				userB64 = "Basic " +  base64.encode(userName+':'+password);
+				setCookie("logginNitdoc", base64.encode(userName+':'+password+':'+repoName+':'+branchName), 1);
+				$('#loginGit').val("");
+				$('#passwordGit').val("");
+			}
+		}	
+		else
+		{
+			// Delete cookie and reset settings
+			del_cookie("logginNitdoc");
+		}	
+		displayLogginModal();
+	});
 });
 
 /* Parse current URL and return anchor name */
@@ -412,23 +444,223 @@ function displayLogginModal(){
 }
 
 function updateDisplaying(){
-	$('#logginMessage').css({'display' : 'none'});
-	$("#liGitHub").attr("class", "");
-  	$("#imgGitHub").attr("src", "resources/icons/github-icon.png");
-  	$('#loginGit').val("");
-	$('#passwordGit').val("");
-	$('#nickName').text("");
-	$('.popover').css({'height' : '280px'});	
-	$('#logginMessage').css({'display' : 'none'});
-	$('#repositoryGit').val($('#repoName').attr('name'));
-  	$('#branchGit').val('wikidoc');  
-  	$('#signIn').text("Sign In");
-	$('#loginGit').show();
-  	$('#passwordGit').show();
-  	$('#lbpasswordGit').show();
-  	$('#lbloginGit').show();	
-  	$('#repositoryGit').show();
-  	$('#lbrepositoryGit').show();
-  	$('#lbbranchGit').show();  
-  	$('#branchGit').show();  
+	if (checkCookie())
+	{
+	  	$('#loginGit').hide();
+	  	$('#passwordGit').hide();
+	  	$('#lbpasswordGit').hide();		
+	  	$('#lbloginGit').hide();	
+	  	$('#repositoryGit').hide();
+	  	$('#lbrepositoryGit').hide();
+	  	$('#lbbranchGit').hide();  
+	  	$('#branchGit').hide();
+	  	$("#liGitHub").attr("class", "current");
+	  	$("#imgGitHub").attr("src", "resources/icons/github-icon-w.png");
+	  	$('#nickName').text(userName);	  	
+	  	$('#githubAccount').attr("href", "https://github.com/"+userName);
+	  	$('#logginMessage').css({'display' : 'block'});
+	  	$('#logginMessage').css({'text-align' : 'center'});
+	  	$('.popover').css({'height' : '80px'});	
+	  	$('#signIn').text("Sign out");	
+	  	sessionStarted = true;
+	}
+	else
+	{
+		sessionStarted = false;
+		$('#logginMessage').css({'display' : 'none'});
+		$("#liGitHub").attr("class", "");
+	  	$("#imgGitHub").attr("src", "resources/icons/github-icon.png");
+	  	$('#loginGit').val("");
+		$('#passwordGit').val("");
+		$('#nickName').text("");
+  		$('.popover').css({'height' : '280px'});	
+  		$('#logginMessage').css({'display' : 'none'});
+  		$('#repositoryGit').val($('#repoName').attr('name'));
+	  	$('#branchGit').val('wikidoc');  
+	  	$('#signIn').text("Sign In");
+		$('#loginGit').show();
+	  	$('#passwordGit').show();
+	  	$('#lbpasswordGit').show();
+	  	$('#lbloginGit').show();	
+	  	$('#repositoryGit').show();
+	  	$('#lbrepositoryGit').show();
+	  	$('#lbbranchGit').show();  
+	  	$('#branchGit').show();  
+	}
 }
+
+function setCookie(c_name, value, exdays)
+{
+	var exdate=new Date();
+	exdate.setDate(exdate.getDate() + exdays);
+	var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
+	document.cookie=c_name + "=" + c_value;
+}
+
+function del_cookie(c_name)
+{
+    document.cookie = c_name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
+
+function getCookie(c_name)
+{
+	var c_value = document.cookie;
+	var c_start = c_value.indexOf(" " + c_name + "=");
+	if (c_start == -1) { c_start = c_value.indexOf(c_name + "="); }
+	if (c_start == -1) { c_value = null; }
+	else
+	{
+		c_start = c_value.indexOf("=", c_start) + 1;
+		var c_end = c_value.indexOf(";", c_start);
+	  	if (c_end == -1) { c_end = c_value.length; }
+		c_value = unescape(c_value.substring(c_start,c_end));
+	}
+	return c_value;
+}
+
+function getUserPass(c_name){
+	var cookie = base64.decode(getCookie(c_name));
+	return base64.encode(cookie.split(':')[0] + ':' + cookie.split(':')[1]);
+}
+
+function checkCookie()
+{
+	var cookie=getCookie("logginNitdoc");
+	if (cookie!=null && cookie!="")
+	{
+		cookie = base64.decode(cookie);
+		userName = cookie.split(':')[0];
+		repoName = cookie.split(':')[2];		
+		branchName = cookie.split(':')[3];
+	  	return true;
+	}
+	else { return false; }
+}
+
+
+/*
+* Base64
+*/
+base64 = {};
+base64.PADCHAR = '=';
+base64.ALPHA = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+base64.getbyte64 = function(s,i) {
+    // This is oddly fast, except on Chrome/V8.
+    //  Minimal or no improvement in performance by using a
+    //   object with properties mapping chars to value (eg. 'A': 0)
+    var idx = base64.ALPHA.indexOf(s.charAt(i));
+    if (idx == -1) {
+    throw "Cannot decode base64";
+    }
+    return idx;
+}
+
+base64.decode = function(s) {
+    // convert to string
+    s = "" + s;
+    var getbyte64 = base64.getbyte64;
+    var pads, i, b10;
+    var imax = s.length
+    if (imax == 0) {
+        return s;
+    }
+
+    if (imax % 4 != 0) {
+    throw "Cannot decode base64";
+    }
+
+    pads = 0
+    if (s.charAt(imax -1) == base64.PADCHAR) {
+        pads = 1;
+        if (s.charAt(imax -2) == base64.PADCHAR) {
+            pads = 2;
+        }
+        // either way, we want to ignore this last block
+        imax -= 4;
+    }
+
+    var x = [];
+    for (i = 0; i < imax; i += 4) {
+        b10 = (getbyte64(s,i) << 18) | (getbyte64(s,i+1) << 12) |
+            (getbyte64(s,i+2) << 6) | getbyte64(s,i+3);
+        x.push(String.fromCharCode(b10 >> 16, (b10 >> 8) & 0xff, b10 & 0xff));
+    }
+
+    switch (pads) {
+    case 1:
+        b10 = (getbyte64(s,i) << 18) | (getbyte64(s,i+1) << 12) | (getbyte64(s,i+2) << 6)
+        x.push(String.fromCharCode(b10 >> 16, (b10 >> 8) & 0xff));
+        break;
+    case 2:
+        b10 = (getbyte64(s,i) << 18) | (getbyte64(s,i+1) << 12);
+        x.push(String.fromCharCode(b10 >> 16));
+        break;
+    }
+    return x.join('');
+}
+
+base64.getbyte = function(s,i) {
+    var x = s.charCodeAt(i);
+    if (x > 255) {
+        throw "INVALID_CHARACTER_ERR: DOM Exception 5";
+    }
+    return x;
+}
+
+
+base64.encode = function(s) {
+    if (arguments.length != 1) {
+    throw "SyntaxError: Not enough arguments";
+    }
+    var padchar = base64.PADCHAR;
+    var alpha   = base64.ALPHA;
+    var getbyte = base64.getbyte;
+
+    var i, b10;
+    var x = [];
+
+    // convert to string
+    s = "" + s;
+
+    var imax = s.length - s.length % 3;
+
+    if (s.length == 0) {
+        return s;
+    }
+    for (i = 0; i < imax; i += 3) {
+        b10 = (getbyte(s,i) << 16) | (getbyte(s,i+1) << 8) | getbyte(s,i+2);
+        x.push(alpha.charAt(b10 >> 18));
+        x.push(alpha.charAt((b10 >> 12) & 0x3F));
+        x.push(alpha.charAt((b10 >> 6) & 0x3f));
+        x.push(alpha.charAt(b10 & 0x3f));
+    }
+    switch (s.length - imax) {
+    case 1:
+        b10 = getbyte(s,i) << 16;
+        x.push(alpha.charAt(b10 >> 18) + alpha.charAt((b10 >> 12) & 0x3F) +
+               padchar + padchar);
+        break;
+    case 2:
+        b10 = (getbyte(s,i) << 16) | (getbyte(s,i+1) << 8);
+        x.push(alpha.charAt(b10 >> 18) + alpha.charAt((b10 >> 12) & 0x3F) +
+               alpha.charAt((b10 >> 6) & 0x3f) + padchar);
+        break;
+    }
+    return x.join('');
+}
+
+$.fn.spin = function(opts) {
+  this.each(function() {
+    var $this = $(this),
+        data = $this.data();
+
+    if (data.spinner) {
+      data.spinner.stop();
+      delete data.spinner;
+    }
+    if (opts !== false) {
+      data.spinner = new Spinner($.extend({color: $this.css('color')}, opts)).spin(this);
+    }
+  });
+  return this;
+};
