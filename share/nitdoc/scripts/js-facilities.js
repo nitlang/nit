@@ -506,7 +506,10 @@ $(document).ready(function() {
 				displayLogginModal();
 				return;
 			}
-			$('#commitMessage').val('New commit');
+			
+			// Create the commit message
+			var commitMessage = 'Wikidoc: modified comment in ' + $(this).parent().prev().html().split(' ')[1];
+			$('#commitMessage').val(commitMessage);
 	  		pathFile = $(this).prev().prev().prev().attr('tag');
 			$('#modal').show().prepend('<a class="close"><img src="resources/icons/close.png" class="btn_close" title="Close" alt="Close" /></a>');
 			$('body').append('<div id="fade"></div>');
