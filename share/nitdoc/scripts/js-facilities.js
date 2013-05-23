@@ -53,6 +53,12 @@ var currentTable = null;
 //Hightlighted index in search result preview table
 var currentIndex = -1;
 
+// Check if a comment is editing
+window.onbeforeunload = function() {
+	if(editComment > 0){
+    	return 'Are you sure you want to leave this page?';
+	}
+};
 
 /*
 * Add folding and filtering facilities to class description page.
