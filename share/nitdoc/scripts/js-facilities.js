@@ -2,6 +2,15 @@
 var userB64 = null;
 var sessionStarted = false;
 var editComment = 0;
+var currentfileContent = '';
+
+// SHA GitHub
+var shaLastCommit = "";
+var shaBaseTree;
+var shaNewTree;
+var shaNewCommit;
+var shaBlob;
+var shaMaster;
 
 /*
 * JQuery Case Insensitive :icontains selector
@@ -483,6 +492,34 @@ $(document).ready(function() {
 		$('#modalQuestion').hide();
 	});
 
+	$('#loginAction').click(function(){
+		var text;
+		var url;
+		var line;
+		// Look if the customer is logged
+		if(!sessionStarted){
+			displayMessage("You need to be loggued before commit something", 100, 40);
+			$('.popover').show();
+			return;
+		}		
+		else{ userB64 = "Basic " + getUserPass("logginNitdoc"); }
+		githubRepo = repoName;
+		editComment -= 1;
+		commitMessage = $('#commitMessage').val();
+		if(commitMessage == ""){ commitMessage = "New commit";}
+		if(sessionStarted){
+			if ($.trim(updateComment) == ''){ this.value = (this.defaultValue ? this.defaultValue : ''); }
+			else{ startCommitProcess(); }
+	    }	
+	    $('#modal, #modalQuestion').fadeOut(function() {
+	    	$('#login').val("");
+			$('#password').val("");
+			$('textarea').hide();
+			$('textarea').prev().show();
+		});
+	    $('a[id=cancelBtn]').hide();
+ 		$('a[id=commitBtn]').hide();
+	});
 });
 
 /* Parse current URL and return anchor name */
@@ -530,6 +567,19 @@ function highlightBlock(a) {
 	
 	target.addClass("highlighted");
 	target.show();
+}
+
+// Init process to commit the new comment
+function startCommitProcess()
+{
+	var numL = preElement.attr("title");
+	commentLineStart = numL.split('-')[0] - 1;	
+	commentLineEnd = (commentLineStart + preElement.text().split('\n').length) - 1;
+	state = true;	
+	replaceComment(updateComment, currentfileContent);
+	getLastCommit();	
+	getBaseTree();	
+	editComment = false;
 }
 
 function displayLogginModal(){
@@ -759,3 +809,209 @@ $.fn.spin = function(opts) {
   });
   return this;
 };
+
+function getLastCommit() 
+{   
+	var urlHead = '';
+	if(sessionStarted){ urlHead = "https://api.github.com/repos/"+userName+"/"+githubRepo+"/git/refs/heads/"+branchName;}
+	else{ 
+		// TODO: get url of the original repo.
+		return;
+	}
+
+    $.ajax({
+        beforeSend: function (xhr) { 
+            if (userB64 != ""){ xhr.setRequestHeader ("Authorization", userB64); }
+        },
+        type: "GET",
+        url: urlHead,
+        dataType:"json",
+        async: false,
+        success: function(success)
+        {        	
+            shaLastCommit = success.object.sha;            
+        }
+    });
+}
+
+function getBaseTree()
+{	
+    $.ajax({ 
+        beforeSend: function (xhr) { 
+            if (userB64 != ""){ xhr.setRequestHeader ("Authorization", userB64); }
+        },
+        type: "GET",
+        url: "https://api.github.com/repos/"+userName+"/"+githubRepo+"/git/commits/" + shaLastCommit,
+        dataType:"json",
+        async: false,
+        success: function(success)
+        {   
+            shaBaseTree = success.tree.sha;
+            if (state){ setBlob(); }
+            else{ return; }            
+        },
+        error: function(){
+        	return;
+        }
+    });    
+}
+
+function setNewTree()
+{
+    $.ajax({ 
+        beforeSend: function (xhr) { xhr.setRequestHeader ("Authorization", userB64); },
+        type: "POST",
+        url: "https://api.github.com/repos/"+userName+"/"+githubRepo+"/git/trees", 
+        async: false,
+        data:'{ "base_tree" : "'+shaBaseTree+'", '+
+                '"tree":[{ '+
+                    '"path":"'+ pathFile +'",'+
+                    '"mode":"100644",'+
+                    '"type":"blob",'+
+                    '"sha": "'+ shaBlob +'"'+
+                '}] '+
+            '}',        
+        success: function(success)
+        { // si l'appel a bien fonctionné
+            shaNewTree = JSON.parse(success).sha;
+            setNewCommit();        	
+        },
+        error: function(){
+        	return;
+        }
+    });
+}
+
+function setNewCommit()
+{
+    $.ajax({ 
+        beforeSend: function (xhr) { xhr.setRequestHeader ("Authorization", userB64); },
+        type: "POST",
+        url: "https://api.github.com/repos/"+userName+"/"+githubRepo+"/git/commits", 
+        async: false,
+        data:'{ "message" : "'+ commitMessage +'", '+
+                '"parents" :"'+shaLastCommit+'",'+ 
+                '"tree": "'+shaNewTree+'"'+
+             '}',        
+        success: function(success)
+        {
+            shaNewCommit = JSON.parse(success).sha;
+            commit();        	
+        },
+        error: function(){
+        	return;
+        }
+    });
+}
+
+//Create a commit
+function commit()
+{
+    $.ajax({ 
+        beforeSend: function (xhr) { xhr.setRequestHeader ("Authorization", userB64); },
+        type: "POST",
+        url: "https://api.github.com/repos/"+userName+"/"+githubRepo+"/git/refs/heads/"+branchName, 
+        data:'{ "sha" : "'+shaNewCommit+'", '+
+                '"force" :"true"'+
+             '}',
+        success: function(success) { displayMessage('Commit created successfully', 40, 40); },
+        error:function(error){ displayMessage('Error ' + JSON.parse(error).object.message, 40, 40); }
+    });
+}
+
+// Create a blob
+function setBlob()
+{
+    $.ajax({
+        beforeSend: function (xhr) { xhr.setRequestHeader ("Authorization",  userB64); },
+        type: "POST",         
+        url: "https://api.github.com/repos/"+userName+"/"+githubRepo+"/git/blobs",         
+        async: false,
+        data:'{ "content" : "'+text.replace(/\r?\n/g, '\\n').replace(/\t/g, '\\t').replace(/\"/g,'\\"')+'", '+
+                '"encoding" :"utf-8"'+
+            '}',
+        success: function(success)
+        {            
+            shaBlob = JSON.parse(success).sha;
+            setNewTree();                  
+        },
+        error:function(error){ 
+        	displayMessage('Error : Problem parsing JSON', 40, 40); 
+        	return;
+    	}
+    });
+}
+
+// Display file content
+function getFileContent(urlFile, newComment)
+{
+    $.ajax({
+        beforeSend: function (xhr) { 
+            xhr.setRequestHeader ("Accept",  "application/vnd.github-blob.raw");
+            if (userB64 != ""){ xhr.setRequestHeader ("Authorization", userB64); }
+        },
+        type: "GET", 
+        url: urlFile, 
+        async:false,
+        success: function(success)
+        {
+            state = true;
+            replaceComment(newComment, success);            
+        }
+    });
+}
+
+function replaceComment(newComment, fileContent){
+	var arrayNew = newComment.split('\n');	
+	var lNew = arrayNew.length;
+	text = "";
+	var lines = fileContent.split("\n");
+	for (var i = 0; i < lines.length; i++) {
+		if(i == commentLineStart){
+			// We change the comment
+			for(var j = 0; j < lNew; j++){
+				if(commentType == 1){ text += "\t# " + arrayNew[j] + "\n"; }
+				else{
+					if(arrayNew[j] == ""){ text += "#"+"\n"; }
+					else{ text += "# " + arrayNew[j] + "\n"; }
+				}
+			}
+		}
+		else if(i < commentLineStart || i >= commentLineEnd){
+			if(i == lines.length-1){ text += lines[i]; }
+			else{ text += lines[i] + "\n"; }
+		}
+	}
+}
+
+function getCommentLastCommit(path){
+	var urlRaw;
+	getLastCommit();
+	if(shaLastCommit != ""){
+		if (checkCookie()) { urlRaw="https://rawgithub.com/"+ userName +"/"+ repoName +"/" + shaLastCommit + "/" + path; }
+		else{ urlRaw="https://rawgithub.com/StefanLage/"+ $('#repoName').attr('name') +"/" + shaLastCommit + "/" + path; }
+
+		$.ajax({  
+	        type: "GET",                
+	        url: urlRaw,        
+	        async: false,
+	        success: function(success)
+	        {
+	        	currentfileContent = success;   
+	        }
+	    });
+	}
+}
+
+function displayMessage(msg, widthDiv, margModal){
+	$('#modal').hide();
+	$('#btnCreateBranch').css('margin-left',widthDiv + '%');
+	$('#txtQuestion').text(msg);
+	$('#btnCreateBranch').text("Ok");
+	$('#btnCancelBranch').hide();
+	$('#modalQuestion').css({'left' : margModal + '%'})
+	$('#modalQuestion').show();
+	$('#modalQuestion').show().prepend('<a class="close"><img src="resources/icons/close.png" class="btnCloseQuestion" title="Close" alt="Close" /></a>');
+	$('body').append('<div id="fade"></div>');
+	$('#fade').css({'filter' : 'alpha(opacity=80)'}).fadeIn();
+}
