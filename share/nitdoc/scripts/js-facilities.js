@@ -639,10 +639,20 @@ $(document).ready(function() {
 
 	$("pre").hover(
 		function () {
-			$(this).css({'cursor' : 'hand'});	
+			if(sessionStarted == true){
+				$(this).css({'cursor' : 'hand'});
+			}
+			else{
+				$(this).css({'cursor' : ''});
+			}
 		},
 		function () {
-			$(this).css({'cursor' : 'pointer'});	
+			if(sessionStarted == true){
+				$(this).css({'cursor' : 'pointer'});
+			}
+			else{
+				$(this).css({'cursor' : ''});	
+			}
 		}
 	);
 });
