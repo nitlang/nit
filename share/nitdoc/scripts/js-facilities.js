@@ -1,6 +1,7 @@
 // User
 var userB64 = null;
 var sessionStarted = false;
+var editComment = 0;
 
 /*
 * JQuery Case Insensitive :icontains selector
@@ -397,6 +398,54 @@ $(document).ready(function() {
 		}	
 		displayLogginModal();
 	});
+
+	// Open edit file
+   	$('pre[class=text_label]').click(function(){
+		// the customer is loggued ?
+		if(!sessionStarted || userName == ""){
+			// No => nothing happen
+			return;
+		}
+		else{
+			var arrayNew = $(this).text().split('\n');
+			var lNew = arrayNew.length - 1;
+			var adapt = "";
+
+			for (var i = 0; i < lNew; i++) {
+				adapt += arrayNew[i];
+				if(i < lNew-1){ adapt += "\n"; }
+			}
+			editComment += 1;
+			// hide comment
+			$(this).hide();
+			// Show edit box 
+			$(this).next().show();
+			// Show cancel button
+			$(this).next().next().show();
+			// Show commit button
+			$(this).next().next().next().show();
+			// Add text in edit box
+			if($(this).next().val() == ""){ $(this).next().val(adapt); }
+			// Resize edit box 
+			$(this).next().height($(this).next().prop("scrollHeight"));
+			// Select it
+			$(this).next().select();
+			preElement = $(this);
+		}
+	});
+
+   	$('a[id=cancelBtn]').click(function(){
+   	 	if(editComment > 0){ editComment -= 1; }
+   	 	// Hide itself
+   	 	$(this).hide();
+   	 	// Hide commitBtn
+   	 	$(this).next().hide();
+   	 	// Hide Textarea
+   	 	$(this).prev().hide();
+   	 	// Show comment
+   	 	$(this).prev().prev().show();
+   	 });
+
 });
 
 /* Parse current URL and return anchor name */
