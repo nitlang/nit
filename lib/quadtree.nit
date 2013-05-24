@@ -15,6 +15,7 @@
 # limitations under the License. 
 
 module quadtree
+import scene2d
 
 # Introduce to quadtree structure 
 abstract class AbstractQuadtree[E]
@@ -110,5 +111,50 @@ abstract class AbstractQuadtree[E]
 			end
 		end
 		return list
+	end
+end
+
+# Quadtree available for Scene2d
+# A QuadTree allow to check more precisely if a Sprite is in collision with another
+class Quadtree[E: Sprite]
+	super AbstractQuadtree[E]
+	
+	init with(x: Int, y: Int, width: Int, height: Int, level: Int, maxLevel: Int, parent: nullable Quadtree[E])
+	do
+		_x = x
+		_y = y
+		_width = width
+		_height = height
+		_level = level
+		_maxLevel = maxLevel
+		_parent = parent
+		_items = new List[E]
+		# Is it the max depth ?
+		if level == maxLevel then return
+		nw = new Quadtree[E].with(_x, _y, _width / 2, _height / 2, _level+1, _maxLevel, self)
+		ne = new Quadtree[E].with(_x + _width / 2, _y, _width / 2, _height / 2, _level+1, _maxLevel, self)
+		sw = new Quadtree[E].with(_x, _y + _height / 2, _width / 2, _height / 2, _level+1, _maxLevel, self)
+		se = new Quadtree[E].with(_x + _width / 2, y + _height / 2, _width / 2, _height / 2, _level+1, _maxLevel, self)
+	end
+	
+	redef fun findNode(item: E): nullable Quadtree[E]
+	do
+		var subWidth = _width / 2
+		var subHeight = _height / 2
+		var node = nw
+		var left = (item.x > _x+subWidth)
+		var top = (item.y > _y+subHeight)
+
+		if left then
+			if not top then node = sw
+		else
+			if top then
+				node = ne
+			else
+				node = se
+			end
+		end
+		if node is null then node = self
+		return node.as(nullable Quadtree[E])
 	end
 end
