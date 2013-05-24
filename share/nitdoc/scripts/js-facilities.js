@@ -19,6 +19,7 @@ var shaMaster;
 var repoExist = false;
 var branchExist = false;
 var githubRepo;
+var loginProcess = false; 
 
 // Spinner vars
 var opts = {
@@ -76,7 +77,6 @@ $(document).ready(function() {
 	$('a[id=cancelBtn]').hide();
 	// Hide Authenfication form
 	$(".popover").hide();
-	githubRepo = $('#repoName').attr('name');
 	// Update display
 	updateDisplaying();
 	/*
@@ -427,13 +427,22 @@ $(document).ready(function() {
 			{
 				userName = $('#loginGit').val();
 				password = $('#passwordGit').val();
-				repoName = $('#repositoryGit').val();
+				githubRepo = $('#repositoryGit').val();
 				branchName = $('#branchGit').val();
 				userB64 = "Basic " +  base64.encode(userName+':'+password);
-				setCookie("logginNitdoc", base64.encode(userName+':'+password+':'+repoName+':'+branchName), 1);
-				$('#loginGit').val("");
-				$('#passwordGit').val("");
-				reloadComment();
+				// Check if repo exist
+				isRepoExisting();
+				if(repoExist){            
+					$.when(isBranchExisting()).done(function(){  
+						loginProcess = true;            
+						if(branchExist){
+							setCookie("logginNitdoc", base64.encode(userName+':'+password+':'+githubRepo+':'+branchName), 1);        
+							$('#loginGit').val("");
+							$('#passwordGit').val("");
+							reloadComment();
+						}
+					});
+				} 
 			}
 		}	
 		else
@@ -530,9 +539,8 @@ $(document).ready(function() {
 			displayMessage("You need to be loggued before commit something", 100, 40);
 			$('.popover').show();
 			return;
-		}		
+		}
 		else{ userB64 = "Basic " + getUserPass("logginNitdoc"); }
-		githubRepo = repoName;
 		// Check if repo exist
 		isRepoExisting();
 		if(repoExist){
@@ -579,9 +587,18 @@ $(document).ready(function() {
 	   	 	createBranch();
    	 		commitMessage = $('#commitMessage').val();
 			if(commitMessage == ""){ commitMessage = "New commit"; }
-			if(userB64 != ""){	
-				if ($.trim(updateComment) == ''){ this.value = (this.defaultValue ? this.defaultValue : ''); }
-		     	else{ startCommitProcess(); }
+			if(userB64 != ""){                      
+		        if(loginProcess){
+					setCookie("logginNitdoc", base64.encode(userName+':'+password+':'+githubRepo+':'+branchName), 1);        
+					$('#loginGit').val("");
+					$('#passwordGit').val("");
+					loginProcess = false;          
+					displayLogginModal();
+		        }
+		        else{
+					if ($.trim(updateComment) == ''){ this.value = (this.defaultValue ? this.defaultValue : ''); }
+					else{ startCommitProcess(); }
+				} 
 		    }
 		}
 		else
@@ -614,7 +631,7 @@ $(document).ready(function() {
 				branchName = $(this).text();
 			}
 		});
-		$.when(updateCookie(userName, password, repoName, branchName)).done(function(){
+		$.when(updateCookie(userName, password, githubRepo, branchName)).done(function(){
 			closeAllCommentInEdtiting();
 			reloadComment();
 		});
@@ -799,7 +816,7 @@ function checkCookie()
 		cookie = base64.decode(cookie);
 		userName = cookie.split(':')[0];
 		password = cookie.split(':')[1];
-		repoName = cookie.split(':')[2];		
+		githubRepo = cookie.split(':')[2];		
 		branchName = cookie.split(':')[3];
 	  	return true;
 	}
@@ -1108,18 +1125,18 @@ function getCommentLastCommit(path){
 	var urlRaw;
 	getLastCommit();
 	if(shaLastCommit != ""){
-		if (checkCookie()) { urlRaw="https://rawgithub.com/"+ userName +"/"+ repoName +"/" + shaLastCommit + "/" + path; }
-		else{ urlRaw="https://rawgithub.com/StefanLage/"+ $('#repoName').attr('name') +"/" + shaLastCommit + "/" + path; }
-
-		$.ajax({  
-	        type: "GET",                
-	        url: urlRaw,        
-	        async: false,
-	        success: function(success)
-	        {
-	        	currentfileContent = success;   
-	        }
-	    });
+		if (checkCookie()) {
+			urlRaw="https://rawgithub.com/"+ userName +"/"+ githubRepo +"/" + shaLastCommit + "/" + path;
+			$.ajax({  
+			    type: "GET",
+			    url: urlRaw,
+			    async: false,
+			    success: function(success)
+			    {
+			      currentfileContent = success;
+			    }
+			});
+		}
 	}
 }
 
