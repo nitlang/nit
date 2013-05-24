@@ -13,6 +13,7 @@ var shaBlob;
 var shaMaster;
 var repoExist = false;
 var branchExist = false;
+var githubRepo;
 
 // Spinner vars
 var opts = {
@@ -66,7 +67,9 @@ $(document).ready(function() {
 	$(".popover").hide();
 	// Update display
 	updateDisplaying();
-	
+	githubRepo = $('#repoName').attr('name');
+	// Load comment from the original repo
+	reloadComment();
 	/*
 	* Highlight the spoted element
 	*/
@@ -550,7 +553,9 @@ $(document).ready(function() {
 				});
 				$('a[id=cancelBtn]').hide();
 				$('a[id=commitBtn]').hide();
-			}
+				// Re-load all comment
+				reloadComment();
+	 		}
  		}
 		else{ editComment -= 1; }
 	});
@@ -1164,3 +1169,26 @@ $.fn.spin = function(opts) {
   });
   return this;
 };
+
+function reloadComment(){
+	$.when(getCommentLastCommit($('pre[class=text_label]').attr('tag'))).done(function(){
+		$('pre[class=text_label]').each(function(){ getCommentOfFunction($(this)); });
+	});
+}
+
+function getCommentOfFunction(element){
+	var textC = "";	
+	var numL = element.attr("title");
+	if(numL != null){		         		
+		commentLineStart = numL.split('-')[0] - 1;
+		commentLineEnd = (commentLineStart + element.text().split('\n').length) - 1;
+		var lines = currentfileContent.split("\n");
+		for (var i = 0; i < lines.length; i++) {
+			if(i >= commentLineStart-1 && i <= commentLineEnd){
+				if (lines[i].substr(1,1) == "#"){ textC += lines[i].substr(3,lines[i].length) + "\n";}
+				else if(lines[i].substr(0,1) == '#'){ textC += lines[i].substr(2,lines[i].length) + "\n"; }
+	        }
+	    }
+	    if (textC != ""){ element.text(textC); }
+	}
+}
