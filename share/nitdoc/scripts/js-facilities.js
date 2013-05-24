@@ -11,6 +11,7 @@ var shaNewTree;
 var shaNewCommit;
 var shaBlob;
 var shaMaster;
+var repoExist = false;
 
 /*
 * JQuery Case Insensitive :icontains selector
@@ -504,21 +505,26 @@ $(document).ready(function() {
 		}		
 		else{ userB64 = "Basic " + getUserPass("logginNitdoc"); }
 		githubRepo = repoName;
-		editComment -= 1;
-		commitMessage = $('#commitMessage').val();
-		if(commitMessage == ""){ commitMessage = "New commit";}
-		if(sessionStarted){
-			if ($.trim(updateComment) == ''){ this.value = (this.defaultValue ? this.defaultValue : ''); }
-			else{ startCommitProcess(); }
-	    }	
-	    $('#modal, #modalQuestion').fadeOut(function() {
-	    	$('#login').val("");
-			$('#password').val("");
-			$('textarea').hide();
-			$('textarea').prev().show();
-		});
-	    $('a[id=cancelBtn]').hide();
- 		$('a[id=commitBtn]').hide();
+		// Check if repo exist
+		isRepoExisting();
+		if(repoExist){
+			editComment -= 1;
+			commitMessage = $('#commitMessage').val();
+			if(commitMessage == ""){ commitMessage = "New commit";}
+			if(sessionStarted){
+				if ($.trim(updateComment) == ''){ this.value = (this.defaultValue ? this.defaultValue : ''); }
+				else{ startCommitProcess(); }
+			}
+			$('#modal, #modalQuestion').fadeOut(function() {
+				$('#login').val("");
+				$('#password').val("");
+				$('textarea').hide();
+				$('textarea').prev().show();
+			});
+			$('a[id=cancelBtn]').hide();
+			$('a[id=commitBtn]').hide();
+		}
+		else{ editComment -= 1; }
 	});
 });
 
@@ -1014,4 +1020,23 @@ function displayMessage(msg, widthDiv, margModal){
 	$('#modalQuestion').show().prepend('<a class="close"><img src="resources/icons/close.png" class="btnCloseQuestion" title="Close" alt="Close" /></a>');
 	$('body').append('<div id="fade"></div>');
 	$('#fade').css({'filter' : 'alpha(opacity=80)'}).fadeIn();
+}
+
+// Check if the repo already exist
+function isRepoExisting(){
+	$.ajax({
+        beforeSend: function (xhr) { 
+            if (userB64 != "") { xhr.setRequestHeader ("Authorization", userB64); }
+        },
+        type: "GET", 
+        url: "https://api.github.com/repos/"+userName+"/"+githubRepo, 
+        async:false,
+        dataType:'json',
+        success: function(){ repoExist = true; },
+        error: function()
+        {
+        	displayMessage('Repo not found !', 35, 45);
+        	repoExist = false;
+        }
+    });
 }
