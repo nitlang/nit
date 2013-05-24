@@ -399,7 +399,7 @@ $(document).ready(function() {
 		displayLogginModal();
 	});
 
-	// Open edit file
+	// Activate edit mode
    	$('pre[class=text_label]').click(function(){
 		// the customer is loggued ?
 		if(!sessionStarted || userName == ""){
@@ -434,6 +434,7 @@ $(document).ready(function() {
 		}
 	});
 
+   	// Disable the edit mode
    	$('a[id=cancelBtn]').click(function(){
    	 	if(editComment > 0){ editComment -= 1; }
    	 	// Hide itself
@@ -445,6 +446,42 @@ $(document).ready(function() {
    	 	// Show comment
    	 	$(this).prev().prev().show();
    	 });
+
+   	// Display commit form
+   	$('a[id=commitBtn]').click(function(){
+		updateComment = $(this).prev().prev().val();
+		commentType = $(this).prev().prev().prev().attr('type');
+
+		if(updateComment == ""){ displayMessage('The comment field is empty!', 40, 45); }
+		else{
+			if(!sessionStarted){
+				displayMessage("You need to be loggued before commit something", 45, 40);
+				displayLogginModal();
+				return;
+			}
+			$('#commitMessage').val('New commit');
+	  		pathFile = $(this).prev().prev().prev().attr('tag');
+			$('#modal').show().prepend('<a class="close"><img src="resources/icons/close.png" class="btn_close" title="Close" alt="Close" /></a>');
+			$('body').append('<div id="fade"></div>');
+			$('#fade').css({'filter' : 'alpha(opacity=80)'}).fadeIn();
+		}
+   	 });
+
+   	// Close commit form
+   	$('.btn_close').click(function(){
+   	 	$(this).hide();   	 	
+   	 	$(this).next().hide();   	 	
+   	 	if(editComment > 0){ editComment -= 1; }
+   	 });
+
+	//Close Popups and Fade Layer
+	$('body').on('click', 'a.close, #fade', function() {
+		if(editComment > 0){ editComment -= 1; }
+		$('#fade , #modal').fadeOut(function() {
+			$('#fade, a.close').remove();  
+		});		
+		$('#modalQuestion').hide();
+	});
 
 });
 
