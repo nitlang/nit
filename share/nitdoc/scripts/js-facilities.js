@@ -24,6 +24,15 @@ var currentIndex = -1;
 * Add folding and filtering facilities to class description page.
 */
 $(document).ready(function() {
+
+	// Hide edit tags
+	$('textarea').hide();
+	$('a[id=commitBtn]').hide();
+	$('a[id=cancelBtn]').hide();
+	// Hide Authenfication form
+	$(".popover").hide();
+	// Update display
+	updateDisplaying();
 	
 	/*
 	* Highlight the spoted element
@@ -364,7 +373,7 @@ $(document).ready(function() {
 	updateDisplaying();
 	// If cookie existing the session is opened
 	if(sessionStarted){ userB64 = "Basic " + getUserPass("logginNitdoc"); }
-	
+
 	// Sign In an github user or Log out him
 	$("#signIn").click(function(){
 		if(!sessionStarted){
