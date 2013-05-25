@@ -366,16 +366,17 @@ END
 					args="$line"
 					bff=$bf"_args"$cptr
 					fff=$ff"_args"$cptr
+					name="$bf args $cptr"
 
 					# Sould we skip the input for this engine?
-					need_skip $bff "  args #$cptr" && continue
+					need_skip $bff "  $name" && continue
 
 					rm -rf "$fff.res" "$fff.err" "$fff.write" 2> /dev/null
 					if [ "x$verbose" = "xtrue" ]; then
 						echo ""
 						echo "NIT_NO_STACK=1 ./$ff.bin" $args
 					fi
-					test -z "$tap" && echo -n "==> args #"$cptr " "
+					test -z "$tap" && echo -n "==> $name "
 					echo "./$ff.bin $args" > "./$fff.bin"
 					chmod +x "./$fff.bin"
 					sh -c "NIT_NO_STACK=1 $TIMEOUT ./$fff.bin < $inputs > $fff.res 2>$fff.err"
@@ -392,7 +393,7 @@ END
 						cp "$fff.res"  "$fff.res2"
 						cat "$fff.err" "$fff.res2" > "$fff.res"
 					fi
-					process_result $bff "  args #$cptr"
+					process_result $bff "  $name"
 				done < $fargs
 			fi
 		else
