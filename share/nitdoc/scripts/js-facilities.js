@@ -422,7 +422,7 @@ $(document).ready(function() {
 	// Sign In an github user or Log out him
 	$("#signIn").click(function(){
 		if(!sessionStarted){
-			if($('#loginGit').val() == "" || $('#passwordGit').val() == ""){ displayMessage('The comment field is empty!', 40, 45); }
+			if($('#loginGit').val() == "" || $('#passwordGit').val() == ""){ displayMessage('Please informed login/password field!', 40, 45); }
 			else
 			{
 				userName = $('#loginGit').val();
@@ -1156,13 +1156,18 @@ function getCommentLastCommit(path){
 function displayMessage(msg, widthDiv, margModal){
 	spinner.stop();
 	$('#modal').hide();
-	$('#btnCreateBranch').css('margin-left',widthDiv + '%');
 	$('#txtQuestion').text(msg);
 	$('#btnCreateBranch').text("Ok");
-	$('#btnCancelBranch').hide();
-	$('#modalQuestion').css({'left' : margModal + '%'})
-	$('#modalQuestion').show();
+	$('#btnCancelBranch').hide();	
 	$('#modalQuestion').show().prepend('<a class="close"><img src="resources/icons/close.png" class="btnCloseQuestion" title="Close" alt="Close" /></a>');
+	var xModal = $('#modalQuestion').css('width').split('px')[0];
+	var yModal = $('#modalQuestion').css('height').split('px')[0];
+	var x = $(document).width/2 - xModal/2;
+	var y = $(document).height/2 - yModal/2;
+	var xBtnBranch = $('#btnCreateBranch').css('width').split('px')[0];
+	$('#modalQuestion').css({'left' : x, 'top' : y});
+	$('#modalQuestion').show();
+	$('#btnCreateBranch').css('margin-left', xModal/2 - xBtnBranch);
 	$('body').append('<div id="fade"></div>');
 	$('#fade').css({'filter' : 'alpha(opacity=80)'}).fadeIn();
 }
