@@ -81,13 +81,16 @@ redef extern JsonObject
 		Array dest;
 		int i;
 		int len;
+		enum json_type type;
 
 		jlist = json_object_get_array( recv );
 		len = json_object_array_length( recv );
 		dest = new_Array();
 		for ( i = 0; i < len; i ++ ) {
 			jobj = json_object_array_get_idx( recv, i );
-			obj = JsonObject_json_cross( jobj, json_object_get_type( jobj ) );
+			if ( jobj == NULL ) type = json_type_null;
+			else type = json_object_get_type( jobj );
+			obj = JsonObject_json_cross( jobj, type );
 			Array_push( dest, nullable_Jsonable_as_nullable_Object( obj ) );
 		}
 
