@@ -1008,6 +1008,7 @@ function setNewTree()
         type: "POST",
         url: "https://api.github.com/repos/"+userName+"/"+githubRepo+"/git/trees", 
         async: false,
+        dataType:'json',
         data:'{ "base_tree" : "'+shaBaseTree+'", '+
                 '"tree":[{ '+
                     '"path":"'+ pathFile +'",'+
@@ -1018,7 +1019,7 @@ function setNewTree()
             '}',        
         success: function(success)
         { // si l'appel a bien fonctionné
-            shaNewTree = JSON.parse(success).sha;
+            shaNewTree = success.sha;
             setNewCommit();        	
         },
         error: function(){
@@ -1034,13 +1035,14 @@ function setNewCommit()
         type: "POST",
         url: "https://api.github.com/repos/"+userName+"/"+githubRepo+"/git/commits", 
         async: false,
+        dataType:'json',
         data:'{ "message" : "'+ commitMessage +'", '+
                 '"parents" :"'+shaLastCommit+'",'+ 
                 '"tree": "'+shaNewTree+'"'+
              '}',        
         success: function(success)
         {
-            shaNewCommit = JSON.parse(success).sha;
+            shaNewCommit = success.sha;
             commit();        	
         },
         error: function(){
@@ -1056,11 +1058,12 @@ function commit()
         beforeSend: function (xhr) { xhr.setRequestHeader ("Authorization", userB64); },
         type: "POST",
         url: "https://api.github.com/repos/"+userName+"/"+githubRepo+"/git/refs/heads/"+branchName, 
+        dataType:'json',
         data:'{ "sha" : "'+shaNewCommit+'", '+
                 '"force" :"true"'+
              '}',
         success: function(success) { displayMessage('Commit created successfully', 40, 40); },
-        error:function(error){ displayMessage('Error ' + JSON.parse(error).object.message, 40, 40); }
+        error:function(error){ displayMessage('Error ' + error.object.message, 40, 40); }
     });
 }
 
@@ -1072,12 +1075,13 @@ function setBlob()
         type: "POST",         
         url: "https://api.github.com/repos/"+userName+"/"+githubRepo+"/git/blobs",         
         async: false,
+        dataType:'json',
         data:'{ "content" : "'+text.replace(/\r?\n/g, '\\n').replace(/\t/g, '\\t').replace(/\"/g,'\\"')+'", '+
                 '"encoding" :"utf-8"'+
             '}',
         success: function(success)
         {            
-            shaBlob = JSON.parse(success).sha;
+            shaBlob = success.sha;
             setNewTree();                  
         },
         error:function(error){ 
