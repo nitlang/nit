@@ -120,7 +120,7 @@ function run_compiler()
 		bench_command "bintrees" "bench_bintree_gen 16" "./bintrees.$title.bin" 16
 	else
 		run_command "$@" ../src/nitg.nit -o "nitg.$title.bin"
-		bench_command "nitg" "nitg --no-cc ../src/nitstats.nit" "./nitg.$title.bin" -v --no-cc ../src/nitstats.nit
+		bench_command "nitg" "nitg --no-cc ../src/nitmetrics.nit" "./nitg.$title.bin" -v --no-cc ../src/nitmetrics.nit
 		bench_command "nitg-s" "nitg --separate ../src/nitg.nit" "./nitg.$title.bin" -v --no-cc --separate ../src/nitg.nit
 		run_command "$@" ../src/nit.nit -o "nit.$title.bin"
 		bench_command "nit" "nit ../src/test_parser.nit ../src/rapid_type_analysis.nit" "./nit.$title.bin" -v ../src/test_parser.nit -- -n ../src/rapid_type_analysis.nit
