@@ -17,6 +17,7 @@
  */
 
 /* This grammar defines the NIT language. */
+Package org.nitlanguage.gen;
 
 /*****************************************************************************/
 Helpers
