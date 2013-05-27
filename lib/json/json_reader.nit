@@ -38,13 +38,18 @@ redef extern JsonObject
 		HashMap map;
 		String nit_key;
 		nullable_Jsonable nit_val;
+		enum json_type type;
 
 		map = new_HashMap();
 
 		{ /* prevents "mixed declaration and code" warning for C90 */
 		json_object_object_foreach( recv, key, val ) {
 			nit_key = new_String_from_cstring( key );
-			nit_val = JsonObject_json_cross( val , json_object_get_type( val ) );
+
+			if ( val == NULL ) type = json_type_null;
+			else type = json_object_get_type( val );
+
+			nit_val = JsonObject_json_cross( val, type );
 
 			HashMap__index_assign( map, String_as_Object( nit_key ), nullable_Jsonable_as_nullable_Object( nit_val ) );
 		}
