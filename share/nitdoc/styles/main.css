@@ -463,7 +463,7 @@ textarea {
 	float: right;
 	margin-right: 10px;
 }
-#commitBtn:hover, #cancelBtn:hover{
+#commitBtn:hover, #cancelBtn:hover, #lblDiffCommit:hover{
 	cursor: hand; cursor: pointer;
 }
 
@@ -769,7 +769,7 @@ fieldset {
 	border: 1px solid #CCC;
 }
 
-#lbloginGit, #lbpasswordGit, #lbrepositoryGit, #lbbranchGit{
+#lbloginGit, #lbpasswordGit, #lbrepositoryGit, #lbbranchGit, #lblSignedOff{
 	color: black;
 	font-style: normal;
 	margin-left: 10px;
@@ -816,7 +816,7 @@ fieldset {
 	text-align: center;
 }
 
-#passwordGit, #loginGit, #repositoryGit, #branchGit {
+#passwordGit, #loginGit, #repositoryGit, #branchGit, #signedOff{
 	height:30px; 
 	width: 200px;
 }
@@ -830,9 +830,18 @@ fieldset {
 	height:20px; 
 }
 
-#listBranches{
+#listBranches, #divGitHubRepoDisplay{
+	color: #000000;
 	display:block;
 	text-align:center;
 	margin-top: 15px;
 	margin-bottom: 15px;	
+}
+
+.githubTitle{
+	text-align:center;
+}
+
+#preSave{
+	display: none;
 }
