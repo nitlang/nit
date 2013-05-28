@@ -170,7 +170,7 @@ class DocContext
 		var custom_items = ""
 		if self._opt_custom_menu_items.value != null then custom_items = self._opt_custom_menu_items.value.as(not null)
 
-		var action_bar = "<header><nav class='main'><ul>{custom_items}<li class=\"current\">Overview</li><li><a href='full-index.html'>Full Index</a></li><li><a href=\"help.html\">Help</a></li><li id=\"liGitHub\" class=\"\"><a id=\"logGitHub\" class=\"btn\" ><img id=\"imgGitHub\" src=\"resources/icons/github-icon.png\" /></a><div class=\"popover bottom\"><div class=\"arrow\"></div><div><label id=\"lbloginGit\" for=\"login\">Username</label><input id=\"loginGit\" type=\"text\" name=\"login\"><label id=\"logginMessage\" >Hello <a id=\"githubAccount\" ><strong id=\"nickName\"></strong></a></label></div><div><label id=\"lbpasswordGit\" for=\"password\">Password</label><input id=\"passwordGit\" type=\"password\" name=\"password\"><div id=\"listBranches\"><label id=\"lbBranches\">Branch </label><select id=\"dropBranches\" name=\"dropBranches\" tabindex=\"1\" class=\"dropdown\"></select></div></div><div><label id=\"lbrepositoryGit\" for=\"repository\">Repository</label><input id=\"repositoryGit\" type=\"text\" name=\"repository\"></div><div><label id=\"lbbranchGit\" for=\"branch\">Branch</label><input id=\"branchGit\" type=\"text\" name=\"branch\"></div><div id=\"divlogIn\"><a id=\"signIn\" >Sign In</a></div></div></li></ul></nav></header>\n"
+		var action_bar = "<header><nav class='main'><ul>{custom_items}<li class=\"current\">Overview</li><li><a href='full-index.html'>Full Index</a></li><li><a href=\"help.html\">Help</a></li><li id=\"liGitHub\" class=\"\"><a id=\"logGitHub\" class=\"btn\" ><img id=\"imgGitHub\" src=\"resources/icons/github-icon.png\" /></a><div class=\"popover bottom\"><div class=\"arrow\"></div><div class=\"githubTitle\"><h3>Github Sign In</h3></div><div><label id=\"lbloginGit\" for=\"login\">Username</label><input id=\"loginGit\" type=\"text\" name=\"login\"><label id=\"logginMessage\" >Hello <a id=\"githubAccount\" ><strong id=\"nickName\"></strong></a></label></div><div><label id=\"lbpasswordGit\" for=\"password\">Password</label><input id=\"passwordGit\" type=\"password\" name=\"password\"><div id=\"divGitHubRepoDisplay\"><label id=\"lbRepoDisplay\">Repository: </label><strong><label id=\"githubRepoDisplay\"></label></strong></div></div><div><label id=\"lbrepositoryGit\" for=\"repository\">Repository</label><input id=\"repositoryGit\" type=\"text\" name=\"repository\"><div id=\"listBranches\"><label id=\"lbBranches\">Branch </label><select id=\"dropBranches\" name=\"dropBranches\" tabindex=\"1\" class=\"dropdown\"></select></div></div><div><label id=\"lbbranchGit\" for=\"branch\">Branch</label><input id=\"branchGit\" type=\"text\" name=\"branch\"></div><div id=\"divlogIn\"><a id=\"signIn\" >Sign In</a></div></div></li></ul></nav></header>\n"
 		var custom_title = "Nitdoc"
 		if self._opt_custom_title.value != null then custom_title = self._opt_custom_title.value.as(not null)
 		
@@ -227,7 +227,7 @@ class DocContext
 			assert mod isa MMSrcModule
 			if not mod.require_doc(self) then continue
 			self.filename = mod.html_name
-			action_bar = "<header><nav class='main'><ul>{custom_items}<li><a href='./index.html'>Overview</a></li><li class=\"current\">{mod.name}</li><li><a href='full-index.html'>Full Index</a></li><li><a href=\"help.html\">Help</a></li><li id=\"liGitHub\" class=\"\"><a id=\"logGitHub\" class=\"btn\" ><img id=\"imgGitHub\" src=\"resources/icons/github-icon.png\" /></a><div class=\"popover bottom\"><div class=\"arrow\"></div><div><label id=\"lbloginGit\" for=\"login\">Username</label><input id=\"loginGit\" type=\"text\" name=\"login\"><label id=\"logginMessage\" >Hello <a id=\"githubAccount\" ><strong id=\"nickName\"></strong></a></label></div><div><label id=\"lbpasswordGit\" for=\"password\">Password</label><input id=\"passwordGit\" type=\"password\" name=\"password\"><div id=\"listBranches\"><label id=\"lbBranches\">Branch </label><select id=\"dropBranches\" name=\"dropBranches\" tabindex=\"1\" class=\"dropdown\"></select></div></div><div><label id=\"lbrepositoryGit\" for=\"repository\">Repository</label><input id=\"repositoryGit\" type=\"text\" name=\"repository\"></div><div><label id=\"lbbranchGit\" for=\"branch\">Branch</label><input id=\"branchGit\" type=\"text\" name=\"branch\"></div><div id=\"divlogIn\"><a id=\"signIn\" >Sign In</a></div></div></li></ul></nav></header>\n"
+			action_bar = "<header><nav class='main'><ul>{custom_items}<li><a href='./index.html'>Overview</a></li><li class=\"current\">{mod.name}</li><li><a href='full-index.html'>Full Index</a></li><li><a href=\"help.html\">Help</a></li><li id=\"liGitHub\" class=\"\"><a id=\"logGitHub\" class=\"btn\" ><img id=\"imgGitHub\" src=\"resources/icons/github-icon.png\" /></a><div class=\"popover bottom\"><div class=\"arrow\"></div><div class=\"githubTitle\"><h3>Github Sign In</h3></div><div><label id=\"lbloginGit\" for=\"login\">Username</label><input id=\"loginGit\" type=\"text\" name=\"login\"><label id=\"logginMessage\" >Hello <a id=\"githubAccount\" ><strong id=\"nickName\"></strong></a></label></div><div><label id=\"lbpasswordGit\" for=\"password\">Password</label><input id=\"passwordGit\" type=\"password\" name=\"password\"><div id=\"divGitHubRepoDisplay\"><label id=\"lbRepoDisplay\">Repository: </label><strong><label id=\"githubRepoDisplay\"></label></strong></div></div><div><label id=\"lbrepositoryGit\" for=\"repository\">Repository</label><input id=\"repositoryGit\" type=\"text\" name=\"repository\"><div id=\"listBranches\"><label id=\"lbBranches\">Branch </label><select id=\"dropBranches\" name=\"dropBranches\" tabindex=\"1\" class=\"dropdown\"></select></div></div><div><label id=\"lbbranchGit\" for=\"branch\">Branch</label><input id=\"branchGit\" type=\"text\" name=\"branch\"></div><div id=\"divlogIn\"><a id=\"signIn\" >Sign In</a></div></div></li></ul></nav></header>\n"
 			clear
 			addGithubInformation
 			addCommitForm
@@ -246,7 +246,7 @@ class DocContext
 		for c in mainmod.local_classes do
 			if not c.require_doc(self) then continue
 			self.filename = c.html_name
-			action_bar = "<header><nav class='main'><ul>{custom_items}<li><a href='./index.html'>Overview</a></li><li>{c.global.intro.mmmodule.toplevel_owner.html_link(self)}</li><li class=\"current\">{c.name}</li><li><a href='full-index.html'>Full Index</a></li><li><a href=\"help.html\">Help</a></li><li id=\"liGitHub\" class=\"\"><a id=\"logGitHub\" class=\"btn\" ><img id=\"imgGitHub\" src=\"resources/icons/github-icon.png\" /></a><div class=\"popover bottom\"><div class=\"arrow\"></div><div><label id=\"lbloginGit\" for=\"login\">Username</label><input id=\"loginGit\" type=\"text\" name=\"login\"><label id=\"logginMessage\" >Hello <a id=\"githubAccount\" ><strong id=\"nickName\"></strong></a></label></div><div><label id=\"lbpasswordGit\" for=\"password\">Password</label><input id=\"passwordGit\" type=\"password\" name=\"password\"><div id=\"listBranches\"><label id=\"lbBranches\">Branch </label><select id=\"dropBranches\" name=\"dropBranches\" tabindex=\"1\" class=\"dropdown\"></select></div></div><div><label id=\"lbrepositoryGit\" for=\"repository\">Repository</label><input id=\"repositoryGit\" type=\"text\" name=\"repository\"></div><div><label id=\"lbbranchGit\" for=\"branch\">Branch</label><input id=\"branchGit\" type=\"text\" name=\"branch\"></div><div id=\"divlogIn\"><a id=\"signIn\" >Sign In</a></div></div></li></ul></nav></header>\n"
+			action_bar = "<header><nav class='main'><ul>{custom_items}<li><a href='./index.html'>Overview</a></li><li>{c.global.intro.mmmodule.toplevel_owner.html_link(self)}</li><li class=\"current\">{c.name}</li><li><a href='full-index.html'>Full Index</a></li><li><a href=\"help.html\">Help</a></li><li id=\"liGitHub\" class=\"\"><a id=\"logGitHub\" class=\"btn\" ><img id=\"imgGitHub\" src=\"resources/icons/github-icon.png\" /></a><div class=\"popover bottom\"><div class=\"arrow\"></div><div class=\"githubTitle\"><h3>Github Sign In</h3></div><div><label id=\"lbloginGit\" for=\"login\">Username</label><input id=\"loginGit\" type=\"text\" name=\"login\"><label id=\"logginMessage\" >Hello <a id=\"githubAccount\" ><strong id=\"nickName\"></strong></a></label></div><div><label id=\"lbpasswordGit\" for=\"password\">Password</label><input id=\"passwordGit\" type=\"password\" name=\"password\"><div id=\"divGitHubRepoDisplay\"><label id=\"lbRepoDisplay\">Repository: </label><strong><label id=\"githubRepoDisplay\"></label></strong></div></div><div><label id=\"lbrepositoryGit\" for=\"repository\">Repository</label><input id=\"repositoryGit\" type=\"text\" name=\"repository\"><div id=\"listBranches\"><label id=\"lbBranches\">Branch </label><select id=\"dropBranches\" name=\"dropBranches\" tabindex=\"1\" class=\"dropdown\"></select></div></div><div><label id=\"lbbranchGit\" for=\"branch\">Branch</label><input id=\"branchGit\" type=\"text\" name=\"branch\"></div><div id=\"divlogIn\"><a id=\"signIn\" >Sign In</a></div></div></li></ul></nav></header>\n"
 			clear
 			addGithubInformation
 			addCommitForm
@@ -262,7 +262,7 @@ class DocContext
 		end
 
 		self.filename = "fullindex"
-		action_bar = "<header><nav class='main'><ul>{custom_items}<li><a href='./index.html'>Overview</a></li><li class=\"current\">Full Index</li><li><a href=\"help.html\">Help</a></li><li id=\"liGitHub\" class=\"\"><a id=\"logGitHub\" class=\"btn\" ><img id=\"imgGitHub\" src=\"resources/icons/github-icon.png\" /></a><div class=\"popover bottom\"><div class=\"arrow\"></div><div><label id=\"lbloginGit\" for=\"login\">Username</label><input id=\"loginGit\" type=\"text\" name=\"login\"><label id=\"logginMessage\" >Hello <a id=\"githubAccount\" ><strong id=\"nickName\"></strong></a></label></div><div><label id=\"lbpasswordGit\" for=\"password\">Password</label><input id=\"passwordGit\" type=\"password\" name=\"password\"><div id=\"listBranches\"><label id=\"lbBranches\">Branch </label><select id=\"dropBranches\" name=\"dropBranches\" tabindex=\"1\" class=\"dropdown\"></select></div></div><div><label id=\"lbrepositoryGit\" for=\"repository\">Repository</label><input id=\"repositoryGit\" type=\"text\" name=\"repository\"></div><div><label id=\"lbbranchGit\" for=\"branch\">Branch</label><input id=\"branchGit\" type=\"text\" name=\"branch\"></div><div id=\"divlogIn\"><a id=\"signIn\" >Sign In</a></div></div></li></ul></nav></header>\n"
+		action_bar = "<header><nav class='main'><ul>{custom_items}<li><a href='./index.html'>Overview</a></li><li class=\"current\">Full Index</li><li><a href=\"help.html\">Help</a></li><li id=\"liGitHub\" class=\"\"><a id=\"logGitHub\" class=\"btn\" ><img id=\"imgGitHub\" src=\"resources/icons/github-icon.png\" /></a><div class=\"popover bottom\"><div class=\"arrow\"></div><div class=\"githubTitle\"><h3>Github Sign In</h3></div><div><label id=\"lbloginGit\" for=\"login\">Username</label><input id=\"loginGit\" type=\"text\" name=\"login\"><label id=\"logginMessage\" >Hello <a id=\"githubAccount\" ><strong id=\"nickName\"></strong></a></label></div><div><label id=\"lbpasswordGit\" for=\"password\">Password</label><input id=\"passwordGit\" type=\"password\" name=\"password\"><div id=\"divGitHubRepoDisplay\"><label id=\"lbRepoDisplay\">Repository: </label><strong><label id=\"githubRepoDisplay\"></label></strong></div></div><div><label id=\"lbrepositoryGit\" for=\"repository\">Repository</label><input id=\"repositoryGit\" type=\"text\" name=\"repository\"><div id=\"listBranches\"><label id=\"lbBranches\">Branch </label><select id=\"dropBranches\" name=\"dropBranches\" tabindex=\"1\" class=\"dropdown\"></select></div></div><div><label id=\"lbbranchGit\" for=\"branch\">Branch</label><input id=\"branchGit\" type=\"text\" name=\"branch\"></div></div> <div id=\"divlogIn\"><a id=\"signIn\" >Sign In</a></div></div></li></ul></nav></header>\n"
 		clear
 		addGithubInformation
 		addCommitForm
@@ -291,7 +291,7 @@ class DocContext
 
 	# Add all tags for the commit form
 	fun addCommitForm do	
-		add("<div id=\"modal\"><form class=\"clearfix\"><div><label for=\"commitMessage\">Commit message</label><input id=\"commitMessage\" type=\"text\" name=\"commitMessage\"></div><div class=\"social-signup login\"><form ></form></div><form id=\"github-connect-form\" class=\"connect-button\" name=\"login\"><a id=\"loginAction\" title=\"Commit on GitHub\"><img src=\"resources/icons/github-icon.png\"><span id=\"btnGitHub\"><strong>Commit</strong></span></a></form></form></div><div id=\"modalQuestion\"><label id=\"txtQuestion\"></label><br><a id=\"btnCreateBranch\">Yes</a><a id=\"btnCancelBranch\">No</a></div><div id=\"waitCommit\"></div>\n\n")
+		add("<div id=\"modal\"><form class=\"clearfix\"><div><label for=\"commitMessage\">Commit message</label><textarea id=\"commitMessage\" rows=\"1\" cols=\"76\" name=\"commitMessage\" ></textarea><input id=\"chkSignedOff\" type=\"checkbox\" name=\"chkSignedOff\">Signed-Off </div><div class=\"social-signup login\"><form ></form></div><form id=\"github-connect-form\" class=\"connect-button\" name=\"login\"><a id=\"loginAction\" title=\"Commit on GitHub\"><img src=\"resources/icons/github-icon.png\"><span id=\"btnGitHub\"><strong>Commit</strong></span></a></form></form></div><div id=\"modalQuestion\"><label id=\"txtQuestion\"></label><br><a id=\"btnCreateBranch\">Yes</a><a id=\"btnCancelBranch\">No</a></div><div id=\"waitCommit\"></div>\n\n")
 	end
 
 	# Add a (source) link fo a given location
@@ -634,7 +634,7 @@ redef class MMModule
 			dctx.add("{m.html_link(dctx)}::")
 		end
 		dctx.add("{self.name}</div>\n")
-
+		dctx.add("<div style=\"float: right;\"><a id=\"lblDiffCommit\"></a></div>")
 		dctx.add("<section class='description'>\n")
 
 		var doc = doc
@@ -643,6 +643,7 @@ redef class MMModule
 			dctx.add("<pre class=\"text_label\">{doc.to_html}</pre>\n")
 			dctx.add("<textarea rows=\"1\" cols=\"76\" id=\"fileContent\" class=\"edit\"></textarea>\n")
 			dctx.add("<a id=\"cancelBtn\">Cancel</a><a id=\"commitBtn\">Commit</a>")
+			dctx.add("<pre id=\"preSave\" type=\"2\" class=\"text_label\" ></pre>")
 			dctx.add("</div>\n")
 		end
 
@@ -1095,7 +1096,7 @@ redef class MMLocalProperty
 			dctx.add("::{html_name}")
 		end
 		dctx.add("</div>")
-
+		dctx.add("<div style=\"float: right;\"><a id=\"lblDiffCommit\"></a></div>")
 		dctx.add("<div class=\"description\">")
 
 		# Collect all refinement of the global property in the same global property
@@ -1114,6 +1115,7 @@ redef class MMLocalProperty
 			dctx.add("<pre class=\"text_label\" name=\"{html_name}\" >{global.intro.doc.to_html}</pre>")
 			dctx.add("<textarea rows=\"1\" cols=\"76\" id=\"fileContent\" class=\"edit\"></textarea>")
 			dctx.add("<a id=\"cancelBtn\">Cancel</a><a id=\"commitBtn\">Commit</a>")
+			dctx.add("<pre id=\"preSave\" type=\"2\" class=\"text_label\" ></pre>")
 		end
 
 		var tlmods = new Array[MMModule]
@@ -1159,6 +1161,7 @@ redef class MMLocalProperty
 			end
 			dctx.add("<textarea rows=\"1\" cols=\"76\" id=\"fileContent\" class=\"edit\"></textarea>")
 			dctx.add("<a id=\"cancelBtn\">Cancel</a><a id=\"commitBtn\">Commit</a>")
+			dctx.add("<pre id=\"preSave\" type=\"2\" class=\"text_label\" ></pre>")
 			dctx.add("<p>")
 			if tlp.local_class.global != lc.global then
 				dctx.add("inherited from {tlp.local_class.html_link(dctx)} ")
@@ -1437,7 +1440,7 @@ redef class MMLocalClass
 			dctx.add("(unexported) ")
 		end
 		dctx.add("{kind} {global.intro.mmmodule.toplevel_owner.html_link(dctx)}::{name}</div>")
-
+		dctx.add("<div style=\"float: right;\"><a id=\"lblDiffCommit\"></a></div>")
 		dctx.add("<section class=\"description\">\n")
 		var doc = doc
 		if doc != null then
@@ -1445,6 +1448,7 @@ redef class MMLocalClass
 			dctx.add("<pre type=\"2\" class=\"text_label\" tag=\"{l.file.filename}\" name=\"{dctx.get_source(l)}\" title=\"{l.line_start.to_s}\">{doc.to_html}</pre>\n")
 			dctx.add("<textarea rows=\"1\" cols=\"76\" id=\"fileContent\" class=\"edit\"></textarea>")
 			dctx.add("<a id=\"cancelBtn\">Cancel</a><a id=\"commitBtn\">Commit</a>")
+			dctx.add("<pre id=\"preSave\" type=\"2\" class=\"text_label\" ></pre>")
 		end
 
 		var cla = new HashSet[MMLocalClass]
