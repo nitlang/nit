@@ -463,7 +463,7 @@ textarea {
 	float: right;
 	margin-right: 10px;
 }
-#commitBtn:hover, #cancelBtn:hover{
+#commitBtn:hover, #cancelBtn:hover, #lblDiffCommit:hover{
 	cursor: hand; cursor: pointer;
 }
 
@@ -840,4 +840,8 @@ fieldset {
 
 .githubTitle{
 	text-align:center;
+}
+
+#preSave{
+	display: none;
 }

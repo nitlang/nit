@@ -5,6 +5,7 @@ var password = "";
 var sessionStarted = false;
 var editComment = 0;
 var currentfileContent = '';
+var originalFileContent = '';
 var addNewComment = false;
 var commentLineStart;
 var commentLineEnd;
@@ -23,6 +24,8 @@ var loginProcess = false;
 var signedOff = '';
 var userEmail = '';
 var commitMessage = '';
+var numComment = '';
+var showcomment = false;
 
 // Spinner vars
 var opts = {
@@ -467,6 +470,7 @@ $(document).ready(function() {
 			return;
 		}
 		else{
+			numComment = $(this).attr('title');
 			var arrayNew = $(this).text().split('\n');
 			var lNew = arrayNew.length - 1;
 			var adapt = "";
@@ -476,6 +480,7 @@ $(document).ready(function() {
 				if(i < lNew-1){ adapt += "\n"; }
 			}
 			editComment += 1;
+			getCommentOfFunction($(this));
 			// hide comment
 			$(this).hide();
 			// Show edit box 
@@ -497,13 +502,13 @@ $(document).ready(function() {
 
    	// Disable the edit mode
    	$('a[id=cancelBtn]').click(function(){
+   	 	$(this).parent().prev().children('#lblDiffCommit').text("");
+   	 	showcomment = false;
    	 	closeEditing($(this));
 	});
 
    	// Display commit form
    	$('a[id=commitBtn]').click(function(){
-		$(this).parent().prev().children('#lblDiffCommit').text("");
-		showcomment = false;
 		updateComment = $(this).prev().prev().val();
 		commentType = $(this).prev().prev().prev().attr('type');
 
@@ -580,6 +585,8 @@ $(document).ready(function() {
 				});
 				$('a[id=cancelBtn]').hide();
 				$('a[id=commitBtn]').hide();
+				$('a[id=lblDiffCommit]').text("");
+				showcomment = false;
 				// Re-load all comment
 				reloadComment();
 	 		}
@@ -678,6 +685,10 @@ $(document).ready(function() {
 		if($(this).is(':checked')){ addSignedOff(); }
 		else{ removeSignedOff(); }
 	})
+
+	$('a[id=lblDiffCommit]').click(function(){
+		showComment($(this));
+	});
 });
 
 /* Parse current URL and return anchor name */
@@ -1167,8 +1178,13 @@ function replaceComment(newComment, fileContent){
 	}
 }
 
-function getCommentLastCommit(path){
+function getCommentLastCommit(path, origin){
 	var urlRaw;
+	var bkBranch = '';
+	if(origin){// We want to get the original file
+		bkBranch = branchName;
+		branchName = "master";
+	}
 	getLastCommit();
 	if(shaLastCommit != ""){
 		if (checkCookie()) {
@@ -1179,11 +1195,13 @@ function getCommentLastCommit(path){
 			    async: false,
 			    success: function(success)
 			    {
-			      currentfileContent = success;
+				    if(origin){ originalFileContent = success; }
+				    else{ currentfileContent = success; }
 			    }
 			});
 		}
 	}
+	if(origin){ branchName = bkBranch; }
 }
 
 function displayMessage(msg, widthDiv, margModal){
@@ -1306,7 +1324,9 @@ $.fn.spin = function(opts) {
 };
 
 function reloadComment(){
-	$.when(getCommentLastCommit($('pre[class=text_label]').attr('tag'))).done(function(){
+	var path = $('pre[class=text_label]').attr('tag');
+	$.when(getCommentLastCommit(path, false)).done(function(){
+		if(sessionStarted){ getCommentLastCommit(path, true); }
 		$('pre[class=text_label]').each(function(){ getCommentOfFunction($(this)); });
 	});
 }
@@ -1315,16 +1335,34 @@ function getCommentOfFunction(element){
 	var textC = "";	
 	var numL = element.attr("title");
 	if(numL != null){		         		
-		commentLineStart = numL.split('-')[0] - 1;
-		commentLineEnd = (commentLineStart + element.text().split('\n').length) - 1;
+		commentLineStart = numL-1;		
+		commentLineEnd = element.attr('name').split(numL)[1].split('-')[1]-1;		
 		var lines = currentfileContent.split("\n");
 		for (var i = 0; i < lines.length; i++) {
-			if(i >= commentLineStart-1 && i <= commentLineEnd){
+			if(i >= commentLineStart-1 && i <= commentLineEnd+1){
 				if (lines[i].substr(1,1) == "#"){ textC += lines[i].substr(3,lines[i].length) + "\n";}
 				else if(lines[i].substr(0,1) == '#'){ textC += lines[i].substr(2,lines[i].length) + "\n"; }
 	        }
 	    }
-	    if (textC != ""){ element.text(textC); }
+	    if(textC != element.text){element.text(textC);}
+	    if (textC != "" && editComment > 0){
+	    	var originContent = originalFileContent.split("\n");
+	    	var origin = '';
+	    	var lblDiff = element.parent().prev().children('#lblDiffCommit');
+	    	var preSave = element.parent().children('#preSave');
+	    	for (var i = 0; i < originContent.length; i++) {
+	    		if(i >= commentLineStart-1 && i <= commentLineEnd+1){
+	    			if (originContent[i].substr(1,1) == "#"){ origin += originContent[i].substr(3,originContent[i].length) + "\n";}
+	    			else if(originContent[i].substr(0,1) == '#'){ origin += originContent[i].substr(2,originContent[i].length) + "\n"; }
+	    		}
+	    	}
+	    	if(textC != origin && numL == numComment){
+	    		// The comment is different compare to the original
+	    		if(showcomment == false){ lblDiff.text("Show original comment"); }
+	    		preSave.text(origin);
+	    	}
+	    	else if (numL == numComment){ lblDiff.text(""); }
+	    }
 	}
 }
 
@@ -1450,4 +1488,26 @@ function removeSignedOff(){
 function resizeTextarea(element){
 	var nLines = element.val().split('\n').length + 1;
 	element.attr('rows', nLines);
+}
+
+function showComment(element){
+	// Display the original comment
+	if (showcomment == true){		
+		showcomment = false;
+		element.text("Show original comment");
+	}
+	else{
+		// Show the comment updated in user's repo
+		showcomment = true;
+		element.text("Comment changed in "+githubRepo+" / "+branchName);
+	}
+	var parent = element.parent().next(".description");		
+	var textarea = parent.children('#fileContent');
+	var text = textarea.val();	
+	var preSave = parent.children('#preSave');	
+	textarea.val(preSave.text());
+	preSave.text(text);
+	// Resize edit box
+	textarea.height(textarea.prop("scrollHeight"));
+	resizeTextarea(textarea);
 }
