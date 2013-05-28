@@ -521,7 +521,7 @@ $(document).ready(function() {
 			}
 			
 			// Create the commit message
-			commitMessage = 'Wikidoc: modified comment in ' + $(this).parent().prev().html().split(' ')[1];
+			commitMessage = 'Wikidoc: modified comment in ' + $(this).parent().prev().prev().html().split(' ')[1];
 			$('#commitMessage').text(commitMessage);
 			$('#commitMessage').css({'display': 'block'});
 			pathFile = $(this).prev().prev().prev().attr('tag');
