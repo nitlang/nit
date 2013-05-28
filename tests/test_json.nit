@@ -39,7 +39,7 @@ redef class String
 		var json_map = json_to_object
 		if json_map != null then
 			print json_map
-			print json_map.to_json
+			print json_map.to_json.replace(" ","")
 
 			# only available for libjson0 v0.10
 			# print json_map.to_pretty_json
