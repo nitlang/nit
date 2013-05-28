@@ -769,7 +769,7 @@ fieldset {
 	border: 1px solid #CCC;
 }
 
-#lbloginGit, #lbpasswordGit, #lbrepositoryGit, #lbbranchGit{
+#lbloginGit, #lbpasswordGit, #lbrepositoryGit, #lbbranchGit, #lblSignedOff{
 	color: black;
 	font-style: normal;
 	margin-left: 10px;
@@ -816,7 +816,7 @@ fieldset {
 	text-align: center;
 }
 
-#passwordGit, #loginGit, #repositoryGit, #branchGit {
+#passwordGit, #loginGit, #repositoryGit, #branchGit, #signedOff{
 	height:30px; 
 	width: 200px;
 }

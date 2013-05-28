@@ -20,6 +20,9 @@ var repoExist = false;
 var branchExist = false;
 var githubRepo;
 var loginProcess = false; 
+var signedOff = '';
+var userEmail = '';
+var commitMessage = '';
 
 // Spinner vars
 var opts = {
@@ -498,6 +501,8 @@ $(document).ready(function() {
 
    	// Display commit form
    	$('a[id=commitBtn]').click(function(){
+		$(this).parent().prev().children('#lblDiffCommit').text("");
+		showcomment = false;
 		updateComment = $(this).prev().prev().val();
 		commentType = $(this).prev().prev().prev().attr('type');
 
@@ -510,9 +515,10 @@ $(document).ready(function() {
 			}
 			
 			// Create the commit message
-			var commitMessage = 'Wikidoc: modified comment in ' + $(this).parent().prev().html().split(' ')[1];
-			$('#commitMessage').val(commitMessage);
-	  		pathFile = $(this).prev().prev().prev().attr('tag');
+			commitMessage = 'Wikidoc: modified comment in ' + $(this).parent().prev().html().split(' ')[1];
+			$('#commitMessage').text(commitMessage);
+			$('#commitMessage').css({'display': 'block'});
+			pathFile = $(this).prev().prev().prev().attr('tag');
 			$('#modal').show().prepend('<a class="close"><img src="resources/icons/close.png" class="btn_close" title="Close" alt="Close" /></a>');
 			$('body').append('<div id="fade"></div>');
 			$('#fade').css({'filter' : 'alpha(opacity=80)'}).fadeIn();
@@ -524,6 +530,7 @@ $(document).ready(function() {
    	 	$(this).hide();   	 	
    	 	$(this).next().hide();   	 	
    	 	if(editComment > 0){ editComment -= 1; }
+   	 	$('#chkSignedOff').attr('checked', false);
    	 });
 
 	//Close Popups and Fade Layer
@@ -533,6 +540,7 @@ $(document).ready(function() {
 			$('#fade, a.close').remove();  
 		});		
 		$('#modalQuestion').hide();
+		$('#chkSignedOff').attr('checked', false);
 	});
 
 	$('#loginAction').click(function(){
@@ -552,13 +560,13 @@ $(document).ready(function() {
 			isBranchExisting();
 			if(branchExist){
 				editComment -= 1;
-				commitMessage = $('#commitMessage').val();
+				commitMessage = $('#commitMessage').val().replace(/\r?\n/g, '\\n').replace(/\t/g, '\\t').replace(/\"/g,'\\"');
 				if(commitMessage == ""){ commitMessage = "New commit";}
 				if(sessionStarted){
 					if ($.trim(updateComment) == ''){ this.value = (this.defaultValue ? this.defaultValue : ''); }
 					else{ 
 						displaySpinner();
-							startCommitProcess();
+						startCommitProcess();
 					}
 				}
 				$('#modal, #modalQuestion').fadeOut(function() {
@@ -574,6 +582,7 @@ $(document).ready(function() {
 	 		}
  		}
 		else{ editComment -= 1; }
+		$('#chkSignedOff').attr('checked', false);
 	});
 	
 	// Cancel creating branch
@@ -590,7 +599,7 @@ $(document).ready(function() {
    	 	if($('#btnCreateBranch').text() != 'Ok'){
 	   	 	// Create the branch
 	   	 	createBranch();
-   	 		commitMessage = $('#commitMessage').val();
+	   	 	commitMessage = $('#commitMessage').val().replace(/\r?\n/g, '\\n').replace(/\t/g, '\\t').replace(/\"/g,'\\"');
 			if(commitMessage == ""){ commitMessage = "New commit"; }
 			if(userB64 != ""){                      
 		        if(loginProcess){
@@ -660,6 +669,11 @@ $(document).ready(function() {
 			}
 		}
 	);
+
+	$('#chkSignedOff').click(function(){
+		if($(this).is(':checked')){ addSignedOff(); }
+		else{ removeSignedOff(); }
+	})
 });
 
 /* Parse current URL and return anchor name */
@@ -711,16 +725,21 @@ function highlightBlock(a) {
 
 // Init process to commit the new comment
 function startCommitProcess()
-{
-	var numL = preElement.attr("title");
-	commentLineStart = numL.split('-')[0] - 1;	
-	if(addNewComment) { commentLineStart++; }
-	commentLineEnd = (commentLineStart + preElement.text().split('\n').length) - 1;
-	state = true;	
-	replaceComment(updateComment, currentfileContent);
-	getLastCommit();	
-	getBaseTree();	
-	editComment = false;
+{	
+	if($('#chkSignedOff').is(':checked')){
+		var numL = preElement.attr("title");
+		commentLineStart = numL.split('-')[0] - 1;	
+		if(addNewComment) { commentLineStart++; }
+		commentLineEnd = (commentLineStart + preElement.text().split('\n').length) - 1;
+		state = true;	
+		replaceComment(updateComment, currentfileContent);
+		getLastCommit();	
+		getBaseTree();	
+		editComment = false;
+	}
+	else{
+		displayMessage('Please sign this commit', 40, 40); 
+	}
 }
 
 function displayLogginModal(){
@@ -765,9 +784,9 @@ function updateDisplaying(){
 		$("#liGitHub").attr("class", "");
 	  	$("#imgGitHub").attr("src", "resources/icons/github-icon.png");
 	  	$('#loginGit').val("");
-		$('#passwordGit').val("");
-		$('#nickName').text("");
-  		$('.popover').css({'height' : '325px'});	
+	  	$('#passwordGit').val("");
+	  	$('#nickName').text("");
+	  	$('.popover').css({'height' : '325px'});
   		$('#logginMessage').css({'display' : 'none'});
   		$('#repositoryGit').val($('#repoName').attr('name'));
 	  	$('#branchGit').val('wikidoc');  
@@ -1030,6 +1049,7 @@ function setNewTree()
 
 function setNewCommit()
 {
+    addSignedOff();
     $.ajax({ 
         beforeSend: function (xhr) { xhr.setRequestHeader ("Authorization", userB64); },
         type: "POST",
@@ -1364,8 +1384,9 @@ function checkSignIn(){
         dataType:'json',
         success: function(success)
         {
-        	displayMessage('You are now logged in');
+        	getUserInfo();
         	response = true;
+        	displayMessage('You are now logged in');
         },
         error: function()
         {
@@ -1374,4 +1395,48 @@ function checkSignIn(){
         }
     });
     return response;
+}
+
+function getUserInfo(){
+	$.ajax({
+        beforeSend: function (xhr) {
+            if ($("#login").val() != ""){ xhr.setRequestHeader ("Authorization", userB64); }
+        },
+        type: "GET",
+        url: "https://api.github.com/user/emails",
+        async:false,
+        dataType:'json',
+        success: function(success)
+        {        
+        	userEmail = success;
+        }
+    });
+}
+
+function getSignedOff(){
+	$.ajax({
+        beforeSend: function (xhr) {
+            if ($("#login").val() != ""){ xhr.setRequestHeader ("Authorization", userB64); }
+        },
+        type: "GET",
+        url: "https://api.github.com/users/"+userName,
+        async:false,
+        dataType:'json',
+        success: function(success)
+        {
+        	signedOff = success.name;
+        }
+    });
+}
+
+function addSignedOff(){
+	$.when(getUserInfo()).done(function(){
+		$.when(getSignedOff()).done(function(){
+			$('#commitMessage').val($('#commitMessage').val() + "\n\nSigned-off-by: "+signedOff+" <"+userEmail+">");
+		});
+	});
+}
+
+function removeSignedOff(){
+	$('#commitMessage').val(commitMessage);	
 }
