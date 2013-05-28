@@ -430,19 +430,21 @@ $(document).ready(function() {
 				githubRepo = $('#repositoryGit').val();
 				branchName = $('#branchGit').val();
 				userB64 = "Basic " +  base64.encode(userName+':'+password);
-				// Check if repo exist
-				isRepoExisting();
-				if(repoExist){            
-					$.when(isBranchExisting()).done(function(){  
-						loginProcess = true;            
-						if(branchExist){
-							setCookie("logginNitdoc", base64.encode(userName+':'+password+':'+githubRepo+':'+branchName), 1);        
-							$('#loginGit').val("");
-							$('#passwordGit').val("");
-							reloadComment();
-						}
-					});
-				} 
+				if(checkSignIn()){
+					// Check if repo exist
+					isRepoExisting();
+					if(repoExist){
+						$.when(isBranchExisting()).done(function(){
+							loginProcess = true;
+							if(branchExist){
+								setCookie("logginNitdoc", base64.encode(userName+':'+password+':'+githubRepo+':'+branchName), 1);
+								$('#loginGit').val("");
+								$('#passwordGit').val("");
+								reloadComment();
+							}
+						});
+					}
+				}
 			}
 		}	
 		else
@@ -749,7 +751,7 @@ function updateDisplaying(){
 	  	$('#githubAccount').attr("href", "https://github.com/"+userName);
 	  	$('#logginMessage').css({'display' : 'block'});
 	  	$('#logginMessage').css({'text-align' : 'center'});
-	  	$('.popover').css({'height' : '120px'});
+	  	$('.popover').css({'height' : '160px'});
 	  	$('#signIn').text("Sign out");	
 	  	sessionStarted = true;
 	  	reloadComment();
@@ -763,7 +765,7 @@ function updateDisplaying(){
 	  	$('#loginGit').val("");
 		$('#passwordGit').val("");
 		$('#nickName').text("");
-  		$('.popover').css({'height' : '280px'});	
+  		$('.popover').css({'height' : '325px'});	
   		$('#logginMessage').css({'display' : 'none'});
   		$('#repositoryGit').val($('#repoName').attr('name'));
 	  	$('#branchGit').val('wikidoc');  
@@ -1341,4 +1343,28 @@ function closeEditing(tag){
  	tag.prev().hide();
  	// Show comment
  	tag.prev().prev().show();
+}
+
+function checkSignIn(){
+	var response = false;
+	$.ajax({
+        beforeSend: function (xhr) {
+            if ($("#login").val() != ""){ xhr.setRequestHeader ("Authorization", userB64); }
+        },
+        type: "GET",
+        url: "https://api.github.com/repos/"+userName+"/"+githubRepo,
+        async:false,
+        dataType:'json',
+        success: function(success)
+        {
+        	displayMessage('You are now logged in');
+        	response = true;
+        },
+        error: function()
+        {
+        	displayMessage('Error : Wrong username or password');
+        	response = false;
+        }
+    });
+    return response;
 }
