@@ -28,7 +28,7 @@ redef class Map[ K, V ]
 
 	fun native_to_json( pretty: Bool ): String import to_json_object `{
 		json_object *jobj;
-		char *json_native_string;
+		const char *json_native_string;
 		String json_string;
 
 		jobj = Map_to_json_object( recv );
@@ -40,7 +40,7 @@ redef class Map[ K, V ]
 #else
 		json_native_string = json_object_to_json_string( jobj );
 #endif
-		json_string = new_String_from_cstring( json_native_string );
+		json_string = new_String_from_cstring( (char*)json_native_string );
 		return json_string;
 	`}
 

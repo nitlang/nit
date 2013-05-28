@@ -99,9 +99,9 @@ redef extern JsonObject
 
 	# Get this json object as a String
 	private fun json_to_string : String import String::from_cstring `{
-		char *cstring;
+		const char *cstring;
 		cstring = json_object_get_string( recv );
-		return new_String_from_cstring( cstring );
+		return new_String_from_cstring( (char*)cstring );
 	`}
 
 	# Intermediate function to convert to gt this Json object as a given type.

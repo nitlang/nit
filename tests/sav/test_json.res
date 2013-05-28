@@ -1,8 +1,3 @@
-../lib/json/json_reader.nit: In function 'JsonObject_json_to_string___impl':
-../lib/json/json_reader.nit:104:11: warning: assignment discards 'const' qualifier from pointer target type [enabled by default]
-../lib/json/json_writer.nit: In function 'Map_native_to_json___impl':
-../lib/json/json_writer.nit:38:23: warning: assignment discards 'const' qualifier from pointer target type [enabled by default]
-../lib/json/json_writer.nit:40:23: warning: assignment discards 'const' qualifier from pointer target type [enabled by default]
 {"int":"1234","float":"0.1234","str":"str","null": null}
 {"int":1234,"float":0.123400,"str":"str","null":null}
 {"arr":"123","obj":"{"int":"123","float":"-234.449997"}"}
