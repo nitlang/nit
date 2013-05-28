@@ -745,14 +745,16 @@ function updateDisplaying(){
 	  	$('#lbbranchGit').hide();  
 	  	$('#branchGit').hide();
 	  	$('#listBranches').show();
+	  	$('#divGitHubRepoDisplay').show();
 	  	$("#liGitHub").attr("class", "current");
 	  	$("#imgGitHub").attr("src", "resources/icons/github-icon-w.png");
-	  	$('#nickName').text(userName);	  	
+	  	$('#nickName').text(userName);
 	  	$('#githubAccount').attr("href", "https://github.com/"+userName);
 	  	$('#logginMessage').css({'display' : 'block'});
 	  	$('#logginMessage').css({'text-align' : 'center'});
-	  	$('.popover').css({'height' : '160px'});
-	  	$('#signIn').text("Sign out");	
+	  	$('.popover').css({'height' : '190px'});
+	  	$('#signIn').text("Sign out");
+	  	$('#githubRepoDisplay').text(githubRepo);
 	  	sessionStarted = true;
 	  	reloadComment();
 	}
@@ -779,6 +781,7 @@ function updateDisplaying(){
 	  	$('#lbbranchGit').show();  
 	  	$('#branchGit').show();  
 	  	$('#listBranches').hide();
+	  	$('#divGitHubRepoDisplay').hide();
 	}
 }
 
@@ -1158,10 +1161,10 @@ function getCommentLastCommit(path){
 function displayMessage(msg, widthDiv, margModal){
 	spinner.stop();
 	$('#modal').hide();
-	$('#txtQuestion').text(msg);
-	$('#btnCreateBranch').text("Ok");
 	$('#btnCancelBranch').hide();	
 	$('#modalQuestion').show().prepend('<a class="close"><img src="resources/icons/close.png" class="btnCloseQuestion" title="Close" alt="Close" /></a>');
+	$('#txtQuestion').text(msg);
+	$('#btnCreateBranch').text("Ok");
 	var xModal = $('#modalQuestion').css('width').split('px')[0];
 	var yModal = $('#modalQuestion').css('height').split('px')[0];
 	var x = $(document).width/2 - xModal/2;

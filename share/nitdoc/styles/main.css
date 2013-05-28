@@ -830,9 +830,14 @@ fieldset {
 	height:20px; 
 }
 
-#listBranches{
+#listBranches, #divGitHubRepoDisplay{
+	color: #000000;
 	display:block;
 	text-align:center;
 	margin-top: 15px;
 	margin-bottom: 15px;	
+}
+
+.githubTitle{
+	text-align:center;
 }
