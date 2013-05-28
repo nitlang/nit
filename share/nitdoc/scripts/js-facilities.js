@@ -488,6 +488,7 @@ $(document).ready(function() {
 			if($(this).next().val() == "" || $(this).next().val() != adapt){ $(this).next().val(adapt); }
 			// Resize edit box 
 			$(this).next().height($(this).next().prop("scrollHeight"));
+			resizeTextarea($(this).next());
 			// Select it
 			$(this).next().select();
 			preElement = $(this);
@@ -531,6 +532,7 @@ $(document).ready(function() {
    	 	$(this).next().hide();   	 	
    	 	if(editComment > 0){ editComment -= 1; }
    	 	$('#chkSignedOff').attr('checked', false);
+   	 	removeSignedOff();
    	 });
 
 	//Close Popups and Fade Layer
@@ -541,6 +543,7 @@ $(document).ready(function() {
 		});		
 		$('#modalQuestion').hide();
 		$('#chkSignedOff').attr('checked', false);
+		removeSignedOff();
 	});
 
 	$('#loginAction').click(function(){
@@ -634,6 +637,7 @@ $(document).ready(function() {
 		$(this).next().next().next().show();
 		// Resize edit box 
 		$(this).next().height($(this).next().prop("scrollHeight"));
+		resizeTextarea($(this).next());
 		// Select it
 		$(this).next().select();
 		preElement = $(this);  
@@ -1435,8 +1439,15 @@ function addSignedOff(){
 			$('#commitMessage').val($('#commitMessage').val() + "\n\nSigned-off-by: "+signedOff+" <"+userEmail+">");
 		});
 	});
+	resizeTextarea($('#commitMessage'));
 }
 
 function removeSignedOff(){
 	$('#commitMessage').val(commitMessage);	
+	resizeTextarea($('#commitMessage'));
+}
+
+function resizeTextarea(element){
+	var nLines = element.val().split('\n').length + 1;
+	element.attr('rows', nLines);
 }
