@@ -11,6 +11,7 @@ class ReadModule
 	var main: nullable MModule
 	var hmClasses: HashMap[MClass, Set[MProperty]]
 	var modules: Array[MModule]
+	var sorter: nullable MClassSorter[Object]
 	
 	init 
 	do
@@ -51,27 +52,49 @@ class ReadModule
 	
 	fun sortMain(array: Array[MClass])
 	do
-		var sorter = new MClassSorter[MClass]
+		sorter = new MClassSorter[MClass]
 		sorter.sort(array)
 	end
 
 	fun getPropertiesInfo(cl: MClass, prop: MProperty): String
 	do
-		var str = "{prop.to_s} : "
+		var str = "\33[4m{prop.to_s}\33[0m: \n\t\t\t Define in {prop.intro_mclassdef.to_s}"
 		var cl_intro = prop.intro_mclassdef.mclass
 		# Check if cl is the intro class of the property
 		if not cl_intro is cl then
 			str += "\n"
-			for red in prop.mpropdefs do
-				if not red is prop.mpropdefs.first then
+			var arrProp = prop.mpropdefs
+			sorter = new MClassSorter[MProperty]
+			sorter.sort(arrProp)
+			for red in arrProp do
+				if not red is arrProp.first then
 					#var val = red.mproperty.full_name.split_with(':')[0]
 					#val = val.split_with(':')[0]
 					#str += " refined in {val}\n"
-					str += "\t\t\t refined in {red.to_s}\n"
+					var addColor = "\t\t\t Refined in "
+					#str += "\t\t\t refined in {getFullPath(red)}  {red.mproperty.visibility.to_s}\n"
+					if red.mproperty.visibility is public_visibility then 
+						addColor += "\33[1;32m"
+					else if red.mproperty.visibility is protected_visibility then
+						addColor += "\33[0;31m"
+					else if red.mproperty.visibility is intrude_visibility then
+						addColor += "\33[1;33m"
+					else
+						addColor += "\33[0;33m"
+					end
+					addColor += " {getFullPath(red)} \33[0m \n"
+					str += addColor 
 				end
 			end
 		end
 		return str
+	end
+	
+	fun getFullPath(p: MPropDef): String 
+	do
+		var str = p.to_s.split_with('#')
+		str.remove_at(str.length-1)
+		return str.join("::")
 	end
 
 	fun process
@@ -81,12 +104,16 @@ class ReadModule
 		sortMain(classes)
 			
 		print "----------------------------------------------------"
-		print "Module :: {main.to_s}"
+		print "Module :: \33[0;32m {main.to_s} \33[0m"
 		print "----------------------------------------------------\n\n"
 		var i = 1
 		for cl in classes do 
-			print "\t{i.to_s}) {cl.to_s}"
-			for p in hmClasses[cl] do print "\t\t- {getPropertiesInfo(cl,p)}"	
+			print "\t{i.to_s}) \33[4m{cl.to_s}\33[0m"
+
+			var arrProp = hmClasses[cl].to_a
+			sorter = new MClassSorter[MProperty]
+			sorter.sort(arrProp)
+			for p in arrProp do print "\t\t- {getPropertiesInfo(cl,p)}"	
 			print "\n----------------------------------------------------\n"
 			i+=1
 		end
