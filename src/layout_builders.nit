@@ -710,10 +710,76 @@ class MClassHasher
 	end
 end
 
-# Layout builder for MProperty using Perfect Hashing (PH)
-# TODO implement this class without sublcassing CL builder
+# Abstract perfect hasher for MProperties
 class MPropertyHasher[E: MProperty]
-	super MPropertyColorer[E]
+	super PerfectHasher[MClass, E]
+	super PropertyLayoutBuilder[E]
+
+	type MPROP: MProperty
+
+	var mmodule: MModule
+
+	init(operator: PHOperator, mmodule: MModule) do
+		super(operator)
+		self.mmodule = mmodule
+	end
+
+	redef fun build_layout(mclasses) do
+		var result = new PHLayout[MClass, E]
+		var ids = new HashMap[E, Int]
+		var elements = new HashMap[MClass, Set[E]]
+		var lin = linearize_mclasses(mclasses)
+		for mclass in lin do
+			var mproperties = properties(mclass)
+			for mproperty in mproperties do
+				if ids.has_key(mproperty) then continue
+				ids[mproperty] = ids.length + 1
+			end
+			elements[mclass] = mproperties
+		end
+		result.ids = ids
+		result.pos = ids
+		result.masks = self.compute_masks(elements, ids)
+		result.hashes = self.compute_hashes(elements, ids, result.masks)
+		return result
+	end
+
+	private fun properties(mclass: MClass): Set[E] do
+		var properties = new HashSet[E]
+		for mprop in self.mmodule.properties(mclass) do
+			if mprop isa MPROP then properties.add(mprop)
+		end
+		return properties
+	end
+
+	private fun linearize_mclasses(mclasses: Set[MClass]): Array[MClass] is abstract
+end
+
+# Perfect hashing for MMethods
+class MMethodHasher
+	super MPropertyHasher[MMethod]
+
+	redef type MPROP: MMethod
+	init(operator: PHOperator, mmodule: MModule) do super(operator, mmodule)
+	redef fun linearize_mclasses(mclasses) do return self.mmodule.reverse_linearize_mclasses(mclasses)
+end
+
+# Perfect hashing for MMAttributes
+class MAttributeHasher
+	super MPropertyHasher[MAttribute]
+
+	redef type MPROP: MAttribute
+	init(operator: PHOperator, mmodule: MModule) do super(operator, mmodule)
+	redef fun linearize_mclasses(mclasses) do return self.mmodule.linearize_mclasses_2(mclasses)
+end
+
+# Perfect hashing for MVirtualTypeProps
+class MVirtualTypePropHasher
+	super MPropertyHasher[MVirtualTypeProp]
+
+	redef type MPROP: MVirtualTypeProp
+	init(operator: PHOperator, mmodule: MModule) do super(operator, mmodule)
+	redef fun linearize_mclasses(mclasses) do return self.mmodule.reverse_linearize_mclasses(mclasses)
 end
 
 class ResolutionHasher
