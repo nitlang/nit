@@ -13,6 +13,13 @@ class ReadModule
 	var modules: Array[MModule]
 	var sorter: nullable MClassSorter[Object]
 	
+	fun public_color: String do return "\33[1;32m"
+	fun protected_color: String do return "\33[1;33m"
+	fun private_color: String do return "\33[1;31m"
+	fun none_color: String do return "\33[1;31m"
+	fun end_sh: String do return "\33[0m"
+	fun under_line: String do return "\33[4m"
+
 	init 
 	do
 		toolContext.process_options
@@ -23,31 +30,23 @@ class ReadModule
 		modules = new Array[MModule]
 	end
 
-	fun getAllModule 
+	fun get_all_module 
 	do 
 		modules = modelBuilder.parse_and_build([prog])
 		modelBuilder.full_propdef_semantic_analysis
 	end
 
 	# Get the main module in the program
-	fun getMainModule 
+	fun get_main_module 
 	do
-		getAllModule
+		get_all_module
 		main = modules.first
 	end
 	# Associate classes to their properties in a HashMap
 	fun getClassesAndProp
 	do
-		if main is null then getMainModule
-		for cl in main.intro_mclasses 
-		do
-			hmClasses[cl] =  main.properties(cl)
-		end
-
-		#for k, v in hmClasses do
-			#print "p: {k.to_s} :"
-			#for val in v do print "\t{val.full_name}"
-		#end
+		if main is null then get_main_module
+		for cl in main.intro_mclasses do hmClasses[cl] =  main.properties(cl)
 	end
 	
 	fun sortMain(array: Array[MClass])
@@ -56,45 +55,44 @@ class ReadModule
 		sorter.sort(array)
 	end
 
-	fun getPropertiesInfo(cl: MClass, prop: MProperty): String
+	fun get_properties_info(cl: MClass, prop: MProperty): String
 	do
-		var str = "\33[4m{prop.to_s}\33[0m: \n\t\t\t Define in {prop.intro_mclassdef.to_s}"
+		var str = "{under_line}{prop.to_s}{end_sh}:"
 		var cl_intro = prop.intro_mclassdef.mclass
-		# Check if cl is the intro class of the property
-		if not cl_intro is cl then
-			str += "\n"
-			var arrProp = prop.mpropdefs
-			sorter = new MClassSorter[MProperty]
-			sorter.sort(arrProp)
-			for red in arrProp do
-				if not red is arrProp.first then
-					#var val = red.mproperty.full_name.split_with(':')[0]
-					#val = val.split_with(':')[0]
-					#str += " refined in {val}\n"
-					var addColor = "\t\t\t Refined in "
-					#str += "\t\t\t refined in {getFullPath(red)}  {red.mproperty.visibility.to_s}\n"
-					if red.mproperty.visibility is public_visibility then 
-						addColor += "\33[1;32m"
-					else if red.mproperty.visibility is protected_visibility then
-						addColor += "\33[0;31m"
-					else if red.mproperty.visibility is intrude_visibility then
-						addColor += "\33[1;33m"
-					else
-						addColor += "\33[0;33m"
-					end
-					addColor += " {getFullPath(red)} \33[0m \n"
-					str += addColor 
-				end
-			end
+		var properties = new Array[MPropDef]
+		for red in prop.mpropdefs do
+			str += "\n\t\t\t"
+			if red.is_intro then
+				str += "Defined by "
+			else
+				str += "Refined in "
+			end	
+			str += "{add_visibility_color(red)}"
 		end
 		return str
 	end
 	
-	fun getFullPath(p: MPropDef): String 
+	fun get_full_path(p: MPropDef): String 
 	do
-		var str = p.to_s.split_with('#')
+		var str = p.to_s.split_with("#")
 		str.remove_at(str.length-1)
 		return str.join("::")
+	end
+
+	fun add_visibility_color(prop: MPropDef): String
+	do
+		var str = ""
+		if prop.mproperty.visibility is public_visibility then 
+			str += public_color
+		else if prop.mproperty.visibility is protected_visibility then
+			str += protected_color
+		else if prop.mproperty.visibility is intrude_visibility then
+			str += private_color
+		else
+			str += none_color
+		end
+		str += "{get_full_path(prop)}{end_sh}"
+		return str
 	end
 
 	fun process
@@ -104,20 +102,29 @@ class ReadModule
 		sortMain(classes)
 			
 		print "----------------------------------------------------"
-		print "Module :: \33[0;32m {main.to_s} \33[0m"
+		print "Module :: {public_color}{main.to_s}{end_sh}"
 		print "----------------------------------------------------\n\n"
 		var i = 1
 		for cl in classes do 
-			print "\t{i.to_s}) \33[4m{cl.to_s}\33[0m"
+			print "\t{i.to_s}) {under_line}{cl.to_s}{end_sh}"
 
 			var arrProp = hmClasses[cl].to_a
 			sorter = new MClassSorter[MProperty]
 			sorter.sort(arrProp)
-			for p in arrProp do print "\t\t- {getPropertiesInfo(cl,p)}"	
+			for p in arrProp do print "\n\t\t- {get_properties_info(cl,p)}"	
 			print "\n----------------------------------------------------\n"
 			i+=1
 		end
+		print_legend
+	end
 
+	fun print_legend
+	do	
+		print "\n{under_line}LEGEND{end_sh}"
+		print "\t{public_color}public{end_sh}"
+		print "\t{protected_color}protected{end_sh}"
+		print "\t{private_color}private{end_sh}"
+		print "\t{none_color}none{end_sh}"
 	end
 end
 
