@@ -213,19 +213,20 @@ class SeparateCompiler
 		# Layouts
 		var method_layout_builder: PropertyLayoutBuilder[MMethod]
 		var attribute_layout_builder: PropertyLayoutBuilder[MAttribute]
-		if modelbuilder.toolcontext.opt_bm_typing.value then
-			method_layout_builder = new MMethodBMizer(self.mainmodule)
-			attribute_layout_builder = new MAttributeBMizer(self.mainmodule)
-		else if modelbuilder.toolcontext.opt_phmod_typing.value then
-			method_layout_builder = new MMethodHasher(new PHModOperator, self.mainmodule)
-			attribute_layout_builder = new MAttributeHasher(new PHModOperator, self.mainmodule)
-		else if modelbuilder.toolcontext.opt_phand_typing.value then
-			method_layout_builder = new MMethodHasher(new PHAndOperator, self.mainmodule)
-			attribute_layout_builder = new MAttributeHasher(new PHAndOperator, self.mainmodule)
-		else
-			method_layout_builder = new MMethodColorer(self.mainmodule)
-			attribute_layout_builder = new MAttributeColorer(self.mainmodule)
-		end
+		#FIXME PH and BM layouts too slow for large programs
+		#if modelbuilder.toolcontext.opt_bm_typing.value then
+		#	method_layout_builder = new MMethodBMizer(self.mainmodule)
+		#	attribute_layout_builder = new MAttributeBMizer(self.mainmodule)
+		#else if modelbuilder.toolcontext.opt_phmod_typing.value then
+		#	method_layout_builder = new MMethodHasher(new PHModOperator, self.mainmodule)
+		#	attribute_layout_builder = new MAttributeHasher(new PHModOperator, self.mainmodule)
+		#else if modelbuilder.toolcontext.opt_phand_typing.value then
+		#	method_layout_builder = new MMethodHasher(new PHAndOperator, self.mainmodule)
+		#	attribute_layout_builder = new MAttributeHasher(new PHAndOperator, self.mainmodule)
+		#else
+		method_layout_builder = new MMethodColorer(self.mainmodule)
+		attribute_layout_builder = new MAttributeColorer(self.mainmodule)
+		#end
 
 		# methods coloration
 		var method_layout = method_layout_builder.build_layout(mclasses)
