@@ -1,6 +1,7 @@
 import modelbuilder
 import exprbuilder
 import abstract_compiler
+#import metrics
 
 class ReadModule
 	var toolContext = new ToolContext
@@ -72,8 +73,9 @@ class ReadModule
 		return str
 	end
 	
-	fun get_full_path(p: MPropDef): String 
+	fun get_full_path(p: Object): String 
 	do
+		#if not p isa MPropDef or not p isa MClassDef then return "" 
 		var str = p.to_s.split_with("#")
 		str.remove_at(str.length-1)
 		return str.join("::")
@@ -95,6 +97,21 @@ class ReadModule
 		return str
 	end
 
+	fun get_sub_class(cl: MClass)
+	do
+		print "{under_line}SUBCLASSES{end_sh}"
+		#for sub in cl.descendants do print "{sub.name} in {sub.full_name.remove_at(sub.length-1)}"
+	end
+
+	fun get_refined(cl: MClass)
+	do
+		print "{under_line}REDEF{end_sh}"
+		for red in cl.mclassdefs
+		do
+			if not red.is_intro then print "Refined in {get_full_path(red)}" 
+		end
+	end
+
 	fun process
 	do
 		getClassesAndProp
@@ -107,6 +124,9 @@ class ReadModule
 		var i = 1
 		for cl in classes do 
 			print "\t{i.to_s}) {under_line}{cl.to_s}{end_sh}"
+
+			get_sub_class(cl)
+			get_refined(cl)
 
 			var arrProp = hmClasses[cl].to_a
 			sorter = new MClassSorter[MProperty]
