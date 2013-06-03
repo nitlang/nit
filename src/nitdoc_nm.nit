@@ -31,32 +31,32 @@ class ReadModule
 		modules = new Array[MModule]
 	end
 
-	fun get_all_module 
+	fun getallmodule 
 	do 
 		modules = modelBuilder.parse_and_build([prog])
 		modelBuilder.full_propdef_semantic_analysis
 	end
 
 	# Get the main module in the program
-	fun get_main_module 
+	fun getmainmodule 
 	do
-		get_all_module
+		getallmodule
 		main = modules.first
 	end
 	# Associate classes to their properties in a HashMap
-	fun getClassesAndProp
+	fun getclassesandprop
 	do
-		if main is null then get_main_module
-		for cl in main.intro_mclasses do hmClasses[cl] =  main.properties(cl)
+		if main is null then getmainmodule
+		for cl in main.mclassdefs do hmClasses[cl.mclass] =  main.properties(cl.mclass)
 	end
 	
-	fun sortMain(array: Array[MClass])
+	fun sortMain(array: Array[MClassDef])
 	do
-		sorter = new MClassSorter[MClass]
+		sorter = new MClassSorter[MClassDef]
 		sorter.sort(array)
 	end
 
-	fun get_properties_info(cl: MClass, prop: MProperty): String
+	fun getpropertiesinfo(cl: MClass, prop: MProperty): String
 	do
 		var str = "{under_line}{prop.to_s}{end_sh}:"
 		var cl_intro = prop.intro_mclassdef.mclass
@@ -68,12 +68,12 @@ class ReadModule
 			else
 				str += "Refined in "
 			end	
-			str += "{add_visibility_color(red)}"
+			str += "{addvisibilitycolor(red)}"
 		end
 		return str
 	end
 	
-	fun get_full_path(p: Object): String 
+	fun getfullpath(p: Object): String 
 	do
 		#if not p isa MPropDef or not p isa MClassDef then return "" 
 		var str = p.to_s.split_with("#")
@@ -81,7 +81,7 @@ class ReadModule
 		return str.join("::")
 	end
 
-	fun add_visibility_color(prop: MPropDef): String
+	fun addvisibilitycolor(prop: MPropDef): String
 	do
 		var str = ""
 		if prop.mproperty.visibility is public_visibility then 
@@ -93,29 +93,38 @@ class ReadModule
 		else
 			str += none_color
 		end
-		str += "{get_full_path(prop)}{end_sh}"
+		str += "{getfullpath(prop)}{end_sh}"
 		return str
 	end
 
-	fun get_sub_class(cl: MClass)
+	fun printsub_class(cl: MClass)
 	do
-		print "{under_line}SUBCLASSES{end_sh}"
-		#for sub in cl.descendants do print "{sub.name} in {sub.full_name.remove_at(sub.length-1)}"
+		print "\t\t{under_line}SUBCLASSES:{end_sh}"
+		#for sub in cl.children(model) do print "{sub.to_s}"
+		for sub in cl.descendants do print "\t\t\t{sub.name}" 
 	end
 
-	fun get_refined(cl: MClass)
+	fun printparent(cl: MClass)
 	do
-		print "{under_line}REDEF{end_sh}"
-		for red in cl.mclassdefs
-		do
-			if not red.is_intro then print "Refined in {get_full_path(red)}" 
-		end
+		print "\t\t{under_line}PARENTS:{end_sh}"
+		for parent in cl.ancestors do print "\t\t\t{parent.to_s}"
+	end
+
+	fun printrefined(cl: MClass)
+	do
+		print "\t\t{under_line}REDEF:{end_sh}"
+		for red in mredef(cl) do print "\t\t\tRefined in the module {getfullpath(red)}" 
+	end
+	
+	fun printdefinedby(cl: MClass) do
+		print "\tDefined by the module {public_color}{cl.intro_mmodule.to_s}{end_sh}\n"
 	end
 
 	fun process
 	do
-		getClassesAndProp
-		var classes = main.intro_mclasses
+		getclassesandprop
+		#var classes = main.intro_mclasses
+		var classes = main.mclassdefs
 		sortMain(classes)
 			
 		print "----------------------------------------------------"
@@ -123,20 +132,32 @@ class ReadModule
 		print "----------------------------------------------------\n\n"
 		var i = 1
 		for cl in classes do 
-			print "\t{i.to_s}) {under_line}{cl.to_s}{end_sh}"
+			var curclass = cl.mclass
+			print "\t{i.to_s}) {under_line}{curclass.to_s}{end_sh}"
+			printdefinedby(curclass)
+			printparent(curclass)
+			printrefined(curclass)
+			printsub_class(curclass)
 
-			get_sub_class(cl)
-			get_refined(cl)
-
-			var arrProp = hmClasses[cl].to_a
+			var arrProp = hmClasses[curclass].to_a
 			sorter = new MClassSorter[MProperty]
 			sorter.sort(arrProp)
-			for p in arrProp do print "\n\t\t- {get_properties_info(cl,p)}"	
+			for p in arrProp do print "\n\t\t- {getpropertiesinfo(curclass,p)}"	
 			print "\n----------------------------------------------------\n"
 			i+=1
 		end
 		print_legend
 	end
+	
+	fun mredef(cl: MClass): Set[String] do
+		var lst = new HashSet[String]
+		for mclassdef in cl.mclassdefs do
+			if mclassdef.is_intro then continue
+			lst.add(mclassdef.to_s)
+		end
+		return lst
+	end
+
 
 	fun print_legend
 	do	
@@ -172,6 +193,54 @@ class MClassSorter[E: Object]
 
 	var _dico: HashMap[Object, String] = new HashMap[Object, String]
 	init do end
+end
+
+redef class MClass
+	# Get parents of the class (direct super classes only)
+	fun parents: Set[MClass] do
+		var lst = new HashSet[MClass]
+		# explore all definitions of the class (refinement)
+		for mclassdef in self.mclassdefs do
+			for parent in mclassdef.supertypes do
+				lst.add(parent.mclass)
+			end
+		end
+		return lst
+	end
+
+	# Get ancestors of the class (all super classes)
+	fun ancestors: Set[MClass] do
+		var lst = new HashSet[MClass]
+		for mclassdef in self.mclassdefs do
+			for super_mclassdefs in mclassdef.in_hierarchy.greaters do
+				if super_mclassdefs is mclassdef then continue
+				lst.add(super_mclassdefs.mclass)
+			end
+		end
+		return lst
+	end
+
+	# Get childrens of the class (direct sublasses only)
+	fun children(model: Model): Set[MClass] do
+		var lst = new HashSet[MClass]
+		for other in model.mclasses do
+			if other == self then continue
+			if other.parents.has(self) then lst.add(other)
+		end
+		return lst
+	end
+
+	# Get descendant of the class
+	fun descendants: Set[MClass] do
+		var lst = new HashSet[MClass]
+		for mclassdef in self.mclassdefs do
+			for sub_mclassdef in mclassdef.in_hierarchy.smallers do
+				if sub_mclassdef is mclassdef then continue
+				lst.add(sub_mclassdef.mclass)
+			end
+		end
+		return lst
+	end
 end
 
 var read = new ReadModule
