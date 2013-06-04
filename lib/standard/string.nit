@@ -75,7 +75,7 @@ abstract class AbstractString
 		var myitems = _items
 		var itsitems = str._items
 		if myindex > length or itsindex > myindex  then return false
-		var its_index_from = str._indexFrom
+		var its_index_from = str._index_from
 		itsindex += its_index_from
 		while itsindex >= its_index_from do
 			if myitems[myindex] != itsitems[itsindex] then return false
@@ -196,8 +196,11 @@ class String
 
 	redef type OTHER: String
 
-	readable var _indexFrom: Int
-	readable var _indexTo: Int
+	# Index in _items of the start of the string
+	readable var _index_from: Int
+
+	# Indes in _items of the last item of the string
+	readable var _index_to: Int
 
 	################################################
 	#       AbstractString specific methods        #
@@ -207,16 +210,23 @@ class String
 	#
 	redef fun [](index) do
 		assert index >= 0
-		assert (index + _indexFrom) < (_indexFrom + _length)
-		return items[index + _indexFrom]
+		# Check that the index (+ index_from) is not larger than indexTo
+		# In other terms, if the index is valid
+		assert (index + _index_from) <= _index_to
+		return _items[index + _index_from]
 	end
 
 	# Create a substring.
 	#
 	# "abcd".substring(1, 2) 	# --> "bc"
 	# "abcd".substring(-1, 2)	# --> "a"
-	# "abcd".substring(1, 0)     # --> ""
-	# "abcd".substring(2, 5)     # --> "cd"
+	# "abcd".substring(1, 0)    # --> ""
+	# "abcd".substring(2, 5)    # --> "cd"
+	#
+	# A "from" index < 0 will be replaced by 0
+	# Unless a count value is > 0 at the same time
+	# In this case, from += count and count -= from
+	#
 	redef fun substring(from: Int, count: Int): String
 	do
 		assert count >= 0
@@ -227,9 +237,9 @@ class String
 			from = 0
 		end
 
-		var realFrom = _indexFrom + from
+		var realFrom = _index_from + from
 
-		if (realFrom + count) > _indexTo then return new String.from_substring(realFrom, _indexTo, _items)
+		if (realFrom + count) > _index_to then return new String.from_substring(realFrom, _index_to, _items)
 
 		if count == 0 then return ""
 
@@ -238,9 +248,12 @@ class String
 
 	# Create a substring from `self' beginning at the 'from' position
 	#
-	# "abcd".substring(1) 	# --> "bcd"
-	# "abcd".substring(-1)	# --> "abcd"
-	# "abcd".substring(2)     # --> "cd"
+	# "abcd".substring_from(1) 	# --> "bcd"
+	# "abcd".substring_from(-1)	# --> "abcd"
+	# "abcd".substring_from(2)  # --> "cd"
+	#
+	# As with substring, a "from" index < 0 will be replaced by 0
+	#
 	redef fun substring_from(from: Int): String
 	do
 		if from > _length then return ""
@@ -263,9 +276,9 @@ class String
 
 		if myindex > _length or itsindex > myindex then return false
 
-		var itsindexfrom = str.indexFrom
+		var itsindexfrom = str.index_from
 		itsindex += itsindexfrom
-		myindex += indexFrom
+		myindex += index_from
 
 		while itsindex >= itsindexfrom do
 			if myitems[myindex] != itsitems[itsindex] then return false
@@ -280,15 +293,15 @@ class String
 	redef fun to_upper: String
 	do
 		var outstr = calloc_string(self._length + 1)
-		var index = 0
+		var out_index = 0
 
 		var myitems = self._items
-		var index_from = self._indexFrom
-		var max = self._indexTo
+		var index_from = self._index_from
+		var max = self._index_to
 
 		while index_from <= max do
-			outstr[index] = myitems[index_from].to_upper
-			index += 1
+			outstr[out_index] = myitems[index_from].to_upper
+			out_index += 1
 			index_from += 1
 		end
 
@@ -301,15 +314,15 @@ class String
 	redef fun to_lower : String
 	do
 		var outstr = calloc_string(self._length + 1)
-		var index = 0
+		var out_index = 0
 
 		var myitems = self._items
-		var index_from = self._indexFrom
-		var max = self._indexTo
+		var index_from = self._index_from
+		var max = self._index_to
 
 		while index_from <= max do
-			outstr[index] = myitems[index_from].to_lower
-			index += 1
+			outstr[out_index] = myitems[index_from].to_lower
+			out_index += 1
 			index_from += 1
 		end
 
@@ -320,8 +333,9 @@ class String
 
 	redef fun output
 	do
-		var i = self._indexFrom
-		while i < length do
+		var i = self._index_from
+		var imax = self._index_to
+		while i <= imax do
 			_items[i].output
 			i += 1
 		end
@@ -332,11 +346,16 @@ class String
 	##################################################
 
 	# Creates a String object as a substring of another String
+	#
+	# From : index to start at
+	#
+	# To : Index to stop at (from + count -1)
+	#
 	private init from_substring(from: Int, to: Int, internalString: NativeString)
 	do
 		_items = internalString
-		_indexFrom = from
-		_indexTo = to
+		_index_from = from
+		_index_to = to
 		_length = to - from + 1
 	end
 
@@ -346,8 +365,8 @@ class String
 		assert size >= 0
 		_items = nat
 		_length = size
-		_indexFrom = 0
-		_indexTo = size - 1
+		_index_from = 0
+		_index_to = _length - 1
 	end
 
 	# Create a new string from a null terminated char *.
@@ -356,72 +375,89 @@ class String
 		with_native(str,str.cstring_length)
 	end
 
+	# Creates a new Nit String from an existing CString
+	# Pretty much equals to from_cstring but copies instead
+	# of passing a reference
+	# Avoids manual/automatic dealloc problems when dealing with native C code
+	init copy_from_native(str: NativeString)
+	do
+		var temp_length = str.cstring_length
+		var new_str = calloc_string(temp_length + 1)
+		str.copy_to(new_str, temp_length, 0, 0)
+		new_str[temp_length] = '\0'
+		with_native(new_str, temp_length)
+	end
+
 	# Return a null terminated char *
 	fun to_cstring: NativeString
 	do
 		#return items
-		if _indexFrom > 0 or _indexTo != items.cstring_length-1 then
-			var newItems = calloc_string(length+1)
-			self.items.copy_to(newItems, _length, _indexFrom, 0)
+		if _index_from > 0 or _index_to != items.cstring_length - 1 then
+			var newItems = calloc_string(_length + 1)
+			self.items.copy_to(newItems, _length, _index_from, 0)
 			newItems[length] = '\0'
 			return newItems
 		end
 		return _items
 	end
 
-	redef fun ==(o)
+	redef fun ==(other)
 	do
-		if not o isa String or o is null then return false
+		if not other isa String or other is null then return false
 
-		if self.object_id == o.object_id then return true
+		if self.object_id == other.object_id then return true
 
-		var l = _length
+		var my_length = _length
 
-		if o._length != l then return false
+		if other._length != my_length then return false
 
-		var i = _indexFrom
-		var j = o._indexFrom
-		var max = l + _indexFrom
-		var itsitems = o._items
+		var my_index = _index_from
+		var its_index = other._index_from
+
+		var last_iteration = my_index + my_length
+
+		var itsitems = other._items
 		var myitems = self._items
 
-		while i < max do
-			if myitems[i] != itsitems[j] then return false
-			i += 1
-			j += 1
+		while my_index < last_iteration do
+			if myitems[my_index] != itsitems[its_index] then return false
+			my_index += 1
+			its_index += 1
 		end
 
 		return true
 	end
 
-	redef fun <(s)
+	redef fun <(other)
 	do
-		if self.object_id == s.object_id then return false
+		if self.object_id == other.object_id then return false
 
-		var c1 : Int
-		var c2 : Int
-		var currIdSelf = self._indexFrom
-		var currIdOther = s._indexFrom
+		var my_curr_char : Char
+		var its_curr_char : Char
+
+		var currIdSelf = self._index_from
+		var currIdOther = other._index_from
+
 		var my_items = self._items
-		var its_items = s._items
+		var its_items = other._items
 
-		if self._length < s._length then
-			return true
-		else if self.length > s._length then
-			return false
+		var my_length = self._length
+		var its_length = other._length
+
+		if my_length != its_length then
+			if my_length < its_length then return once true
+			return once false
 		end
 
-		var self_upper_bound = self._length + currIdSelf
-		var other_upper_bound = s._length + currIdOther
+		var max_iterations = currIdSelf + my_length
 
-		while currIdSelf < self_upper_bound and currIdOther < other_upper_bound do
-			c1 = my_items[currIdSelf].ascii
-			c2 = its_items[currIdOther].ascii
+		while currIdSelf < max_iterations do
+			my_curr_char = my_items[currIdSelf]
+			its_curr_char = its_items[currIdOther]
 
-			if c1 < c2 then
-				return true
-			else if c2 < c1 then
-				return false
+			if my_curr_char != its_curr_char then
+				if my_curr_char < its_curr_char then return once true
+				return once false
 			end
 
 			currIdSelf += 1
@@ -434,32 +470,42 @@ class String
 	# The concatenation of `self' with `r'
 	fun +(s: String): String
 	do
-		var newString = calloc_string(_length + s._length + 1)
+		var my_length = self._length
+		var its_length = s._length
 
-		self._items.copy_to(newString, _length, _indexFrom, 0)
-		s._items.copy_to(newString, s._length, s._indexFrom, _length)
+		var target_string = calloc_string(my_length + its_length + 1)
 
-		newString[self._length + s._length] = '\0'
+		self._items.copy_to(target_string, my_length, _index_from, 0)
+		s._items.copy_to(target_string, its_length, s._index_from, my_length)
 
-		return new String.with_native(newString, _length + s._length)
+		target_string[my_length + its_length] = '\0'
+
+		return new String.with_native(target_string, my_length + its_length)
 	end
 
 	# i repetitions of self
 	fun *(i: Int): String
 	do
 		assert i >= 0
-		var r = calloc_string((_length * i) + 1)
 
-		r[_length * i] = '\0'
+		var my_length = self._length
 
-		var lastStr = new String.with_native(r, (_length * i))
+		var final_length = my_length * i
 
-		while i > 0 do
-			self._items.copy_to(r, _length, _indexFrom, _length*(i-1))
-			i -= 1
+		var my_items = self._items
+
+		var target_string = calloc_string((final_length) + 1)
+
+		target_string[final_length] = '\0'
+
+		var current_last = 0
+
+		for iteration in [1 .. i] do
+			my_items.copy_to(target_string, my_length, 0, current_last)
+			current_last += my_length
 		end
 
-		return lastStr
+		return new String.with_native(target_string, final_length)
 	end
 
 	redef fun to_s do return self
@@ -470,12 +516,12 @@ class String
 		var h = 5381
 		var i = _length - 1
 
-		var myitems = self.items
-		var index_from = self._indexFrom
+		var myitems = _items
+		var strStart = _index_from
 
-		i += index_from
+		i += strStart
 
-		while i >= index_from do
+		while i >= strStart do
 			h = (h * 32) + h + self._items[i].ascii
 			i -= 1
 		end
@@ -526,7 +572,7 @@ class Buffer
 		if s isa String then
 			var sl = s.length
 			if _capacity < _length + sl then enlarge(_length + sl)
-			s.items.copy_to(_items, sl, s._indexFrom, _length)
+			s.items.copy_to(_items, sl, s._index_from, _length)
 			_length += sl
 		else
 			super
@@ -578,7 +624,7 @@ class Buffer
 		_capacity = s.length + 1
 		_length = s.length
 		_items = calloc_string(_capacity)
-		s.items.copy_to(_items, _length, s._indexFrom, 0)
+		s.items.copy_to(_items, _length, s._index_from, 0)
 	end
 
 	# Create a new empty string with a given capacity.
