@@ -21,8 +21,7 @@ class ReadModule
 	fun end_sh: String do return "\33[0m"
 	fun under_line: String do return "\33[4m"
 
-	init 
-	do
+	init do
 		toolContext.process_options
 		modelBuilder = new ModelBuilder(model, toolContext)
 		arguments = toolContext.option_context.rest
@@ -31,33 +30,28 @@ class ReadModule
 		modules = new Array[MModule]
 	end
 
-	fun getallmodule 
-	do 
+	fun getallmodule do 
 		modules = modelBuilder.parse_and_build([prog])
 		modelBuilder.full_propdef_semantic_analysis
 	end
 
 	# Get the main module in the program
-	fun getmainmodule 
-	do
+	fun getmainmodule do
 		getallmodule
 		main = modules.first
 	end
 	# Associate classes to their properties in a HashMap
-	fun getclassesandprop
-	do
+	fun getclassesandprop do
 		if main is null then getmainmodule
 		for cl in main.mclassdefs do hmClasses[cl.mclass] =  main.properties(cl.mclass)
 	end
 	
-	fun sortMain(array: Array[MClassDef])
-	do
+	fun sortMain(array: Array[MClassDef]) do
 		sorter = new MClassSorter[MClassDef]
 		sorter.sort(array)
 	end
 
-	fun getpropertiesinfo(cl: MClass, prop: MProperty): String
-	do
+	fun getpropertiesinfo(cl: MClass, prop: MProperty): String do
 		var str = "{under_line}{prop.to_s}{end_sh}:"
 		var cl_intro = prop.intro_mclassdef.mclass
 		var properties = new Array[MPropDef]
@@ -73,67 +67,62 @@ class ReadModule
 		return str
 	end
 	
-	fun getfullpath(p: Object): String 
-	do
+	fun getfullpath(p: Object): String do
 		#if not p isa MPropDef or not p isa MClassDef then return "" 
 		var str = p.to_s.split_with("#")
 		str.remove_at(str.length-1)
 		return str.join("::")
 	end
 
-	fun addvisibilitycolor(prop: MPropDef): String
-	do
+	fun addvisibilitycolor(prop: MPropDef): String do
 		var str = ""
 		if prop.mproperty.visibility is public_visibility then 
-			str += public_color
+			str += "{getfullpath(prop).green}"
 		else if prop.mproperty.visibility is protected_visibility then
-			str += protected_color
+			str += "{getfullpath(prop).yellow}"
 		else if prop.mproperty.visibility is intrude_visibility then
-			str += private_color
+			str += "{getfullpath(prop).red}"
 		else
-			str += none_color
+			str += "{getfullpath(prop).red}"
 		end
-		str += "{getfullpath(prop)}{end_sh}"
 		return str
 	end
 
-	fun printsub_class(cl: MClass)
-	do
-		print "\t\t{under_line}SUBCLASSES:{end_sh}"
+	fun printsub_class(cl: MClass) do
+		print "\t\tSUBCLASSES:".under_line
 		#for sub in cl.children(model) do print "{sub.to_s}"
 		for sub in cl.descendants do print "\t\t\t{sub.name}" 
 	end
 
 	fun printparent(cl: MClass)
 	do
-		print "\t\t{under_line}PARENTS:{end_sh}"
+		print "\t\tPARENTS:".under_line
 		for parent in cl.ancestors do print "\t\t\t{parent.to_s}"
 	end
 
 	fun printrefined(cl: MClass)
 	do
-		print "\t\t{under_line}REDEF:{end_sh}"
+		print "\t\tREDEF:".under_line
 		for red in mredef(cl) do print "\t\t\tRefined in the module {getfullpath(red)}" 
 	end
 	
 	fun printdefinedby(cl: MClass) do
-		print "\tDefined by the module {public_color}{cl.intro_mmodule.to_s}{end_sh}\n"
-	end
+		print "\tDefined by the module {cl.intro_mmodule.to_s.green}\n"
+	end 
 
-	fun process
-	do
+	fun process do
 		getclassesandprop
 		#var classes = main.intro_mclasses
 		var classes = main.mclassdefs
 		sortMain(classes)
 			
 		print "----------------------------------------------------"
-		print "Module :: {public_color}{main.to_s}{end_sh}"
+		print "Module :: {main.to_s.green}"
 		print "----------------------------------------------------\n\n"
 		var i = 1
 		for cl in classes do 
 			var curclass = cl.mclass
-			print "\t{i.to_s}) {under_line}{curclass.to_s}{end_sh}"
+			print "\t{i.to_s}) {curclass.to_s.under_line}"
 			printdefinedby(curclass)
 			printparent(curclass)
 			printrefined(curclass)
@@ -159,20 +148,36 @@ class ReadModule
 	end
 
 
-	fun print_legend
-	do	
-		print "\n{under_line}LEGEND{end_sh}"
-		print "\t{public_color}public{end_sh}"
-		print "\t{protected_color}protected{end_sh}"
-		print "\t{private_color}private{end_sh}"
-		print "\t{none_color}none{end_sh}"
+	fun print_legend do	
+		print "\nLEGEND".under_line
+		print "\tpublic".green
+		print "\tprotected".yellow
+		print "\tprivate".red
+		print "\tnone".red
 	end
+end
+
+# Redef String class to add a function to color the string
+redef class String
+	
+	private fun add_escape_char(escapechar: String): String do
+		var s = escapechar
+		s += "{self} \33[0m"
+		return s
+	end
+
+	fun red: String do return add_escape_char("\33[1;31m")
+	fun yellow: String do return add_escape_char("\33[1;33m")
+	fun green: String do return add_escape_char("\33[1;32m")
+	fun blue: String do return add_escape_char("\33[1;34m")
+	fun cyan: String do return add_escape_char("\33[1;36m")
+	fun bold: String do return add_escape_char("\33[1m")
+	fun under_line: String do return add_escape_char("\33[4m")
 end
 
 class MClassSorter[E: Object]
 	super AbstractSorter[E]
-	redef fun compare(a, b)
-	do
+	redef fun compare(a, b) do
 		var sa: String
 		var sb: String
 		var d = _dico
@@ -241,6 +246,15 @@ redef class MClass
 		end
 		return lst
 	end
+end
+
+
+class Html
+	var file: OFStream
+	init(filename: String) do
+		self.file = new OFStream.open(filename)
+	end
+
 end
 
 var read = new ReadModule
