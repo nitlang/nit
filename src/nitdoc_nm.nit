@@ -23,28 +23,23 @@ class ReadModule
 		modules = new Array[MModule]
 	end
 
-	fun getallmodule do 
+	fun get_modules do 
 		modules = modelBuilder.parse_and_build([prog])
 		modelBuilder.full_propdef_semantic_analysis
 	end
 
 	# Get the main module in the program
-	fun getmainmodule do
-		getallmodule
+	fun set_main_module do
+		get_modules
 		main = modules.first
 	end
 	# Associate classes to their properties in a HashMap
-	fun getclassesandprop do
-		if main is null then getmainmodule
+	fun save_classes_and_prop do
+		if main is null then set_main_module
 		for cl in main.mclassdefs do hmClasses[cl.mclass] =  main.properties(cl.mclass)
 	end
-	
-	fun sortMain(array: Array[MClassDef]) do
-		sorter = new MClassSorter[MClassDef]
-		sorter.sort(array)
-	end
 
-	fun getpropertiesinfo(cl: MClass, prop: MProperty): String do
+	fun properties_info(cl: MClass, prop: MProperty): String do
 		var str = "{prop.to_s}:".under_line
 		var cl_intro = prop.intro_mclassdef.mclass
 		var properties = new Array[MPropDef]
@@ -61,9 +56,8 @@ class ReadModule
 	end
 	
 	fun process do
-		getclassesandprop
+		save_classes_and_prop
 		var classes = main.mclassdefs
-		sortMain(classes)
 			
 		print "----------------------------------------------------"
 		print "Module :: {main.to_s.green}"
@@ -78,9 +72,7 @@ class ReadModule
 			curclass.print_sub_class
 
 			var arrProp = hmClasses[curclass].to_a
-			sorter = new MClassSorter[MProperty]
-			sorter.sort(arrProp)
-			for p in arrProp do print "\n\t\t- {getpropertiesinfo(curclass,p)}"	
+			for p in arrProp do print "\n\t\t- {properties_info(curclass,p)}"	
 			print "\n----------------------------------------------------\n"
 			i+=1
 		end
