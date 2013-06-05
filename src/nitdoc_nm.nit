@@ -55,33 +55,13 @@ class ReadModule
 			else
 				str += "Refined in "
 			end	
-			str += addvisibilitycolor(red)
+			str += red.add_visibility_color
 		end
 		return str
 	end
 	
-	fun getfullpath(p: Object): String do
-		#if not p isa MPropDef or not p isa MClassDef then return "" 
-		var str = p.to_s.split_with("#")
-		str.remove_at(str.length-1)
-		return str.join("::")
-	end
-
-	fun addvisibilitycolor(prop: MPropDef): String do
-		var str = ""
-		if prop.mproperty.visibility is public_visibility then 
-			str = getfullpath(prop).green
-		else if prop.mproperty.visibility is protected_visibility then
-			str = getfullpath(prop).yellow
-		else
-			str = getfullpath(prop).red
-		end
-		return str
-	end
-
 	fun process do
 		getclassesandprop
-		#var classes = main.intro_mclasses
 		var classes = main.mclassdefs
 		sortMain(classes)
 			
@@ -157,6 +137,28 @@ class MClassSorter[E: Object]
 
 	var _dico: HashMap[Object, String] = new HashMap[Object, String]
 	init do end
+end
+
+redef class MPropDef
+	# Attribuate a color in terms of the visibility of the property
+	fun add_visibility_color: String do
+		var str = ""
+		if self.mproperty.visibility is public_visibility then
+			str = self.full_path.green
+		else if self.mproperty.visibility is protected_visibility then
+			str = self.full_path.yellow
+		else
+			str = self.full_path.red
+		end
+		return str
+	end
+
+	# Get the full of a property
+	fun full_path: String do
+		var str = self.to_s.split_with("#")
+		str.remove_at(str.length-1)
+		return str.join("::")
+	end
 end
 
 redef class MClass
