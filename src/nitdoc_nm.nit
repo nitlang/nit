@@ -14,13 +14,6 @@ class ReadModule
 	var modules: Array[MModule]
 	var sorter: nullable MClassSorter[Object]
 	
-	fun public_color: String do return "\33[1;32m"
-	fun protected_color: String do return "\33[1;33m"
-	fun private_color: String do return "\33[1;31m"
-	fun none_color: String do return "\33[1;31m"
-	fun end_sh: String do return "\33[0m"
-	fun under_line: String do return "\33[4m"
-
 	init do
 		toolContext.process_options
 		modelBuilder = new ModelBuilder(model, toolContext)
@@ -52,7 +45,7 @@ class ReadModule
 	end
 
 	fun getpropertiesinfo(cl: MClass, prop: MProperty): String do
-		var str = "{under_line}{prop.to_s}{end_sh}:"
+		var str = "{prop.to_s}:".under_line
 		var cl_intro = prop.intro_mclassdef.mclass
 		var properties = new Array[MPropDef]
 		for red in prop.mpropdefs do
@@ -62,7 +55,7 @@ class ReadModule
 			else
 				str += "Refined in "
 			end	
-			str += "{addvisibilitycolor(red)}"
+			str += addvisibilitycolor(red)
 		end
 		return str
 	end
@@ -77,38 +70,14 @@ class ReadModule
 	fun addvisibilitycolor(prop: MPropDef): String do
 		var str = ""
 		if prop.mproperty.visibility is public_visibility then 
-			str += "{getfullpath(prop).green}"
+			str = getfullpath(prop).green
 		else if prop.mproperty.visibility is protected_visibility then
-			str += "{getfullpath(prop).yellow}"
-		else if prop.mproperty.visibility is intrude_visibility then
-			str += "{getfullpath(prop).red}"
+			str = getfullpath(prop).yellow
 		else
-			str += "{getfullpath(prop).red}"
+			str = getfullpath(prop).red
 		end
 		return str
 	end
-
-	fun printsub_class(cl: MClass) do
-		print "\t\tSUBCLASSES:".under_line
-		#for sub in cl.children(model) do print "{sub.to_s}"
-		for sub in cl.descendants do print "\t\t\t{sub.name}" 
-	end
-
-	fun printparent(cl: MClass)
-	do
-		print "\t\tPARENTS:".under_line
-		for parent in cl.ancestors do print "\t\t\t{parent.to_s}"
-	end
-
-	fun printrefined(cl: MClass)
-	do
-		print "\t\tREDEF:".under_line
-		for red in mredef(cl) do print "\t\t\tRefined in the module {getfullpath(red)}" 
-	end
-	
-	fun printdefinedby(cl: MClass) do
-		print "\tDefined by the module {cl.intro_mmodule.to_s.green}\n"
-	end 
 
 	fun process do
 		getclassesandprop
@@ -123,10 +92,10 @@ class ReadModule
 		for cl in classes do 
 			var curclass = cl.mclass
 			print "\t{i.to_s}) {curclass.to_s.under_line}"
-			printdefinedby(curclass)
-			printparent(curclass)
-			printrefined(curclass)
-			printsub_class(curclass)
+			curclass.print_defined_by
+			curclass.print_parent
+			curclass.print_refined(main.as(not null))
+			curclass.print_sub_class
 
 			var arrProp = hmClasses[curclass].to_a
 			sorter = new MClassSorter[MProperty]
@@ -138,16 +107,6 @@ class ReadModule
 		print_legend
 	end
 	
-	fun mredef(cl: MClass): Set[String] do
-		var lst = new HashSet[String]
-		for mclassdef in cl.mclassdefs do
-			if mclassdef.is_intro then continue
-			lst.add(mclassdef.to_s)
-		end
-		return lst
-	end
-
-
 	fun print_legend do	
 		print "\nLEGEND".under_line
 		print "\tpublic".green
@@ -162,7 +121,7 @@ redef class String
 	
 	private fun add_escape_char(escapechar: String): String do
 		var s = escapechar
-		s += "{self} \33[0m"
+		s += "{self}\33[0m"
 		return s
 	end
 
@@ -201,50 +160,46 @@ class MClassSorter[E: Object]
 end
 
 redef class MClass
-	# Get parents of the class (direct super classes only)
-	fun parents: Set[MClass] do
+	
+	# Print in which MModule is define this MClass
+	fun print_defined_by do
+		print "\tDefined by the module {intro_mmodule.to_s.green}\n"
+	end
+
+	# Print all parents of itself
+	fun print_parent do
 		var lst = new HashSet[MClass]
-		# explore all definitions of the class (refinement)
+		print "\t\tPARENTS:".under_line
 		for mclassdef in self.mclassdefs do
-			for parent in mclassdef.supertypes do
+			for parent in mclassdef.in_hierarchy.greaters do
+				if parent is mclassdef or lst.has(parent.mclass )then continue
 				lst.add(parent.mclass)
+				print "\t\t\t{parent.mclass.to_s}"
 			end
 		end
-		return lst
 	end
-
-	# Get ancestors of the class (all super classes)
-	fun ancestors: Set[MClass] do
+	
+	# Print all sub-classes
+	fun print_sub_class do
+		print "\t\tSUBCLASSES:".under_line
 		var lst = new HashSet[MClass]
 		for mclassdef in self.mclassdefs do
-			for super_mclassdefs in mclassdef.in_hierarchy.greaters do
-				if super_mclassdefs is mclassdef then continue
-				lst.add(super_mclassdefs.mclass)
+			for sub in mclassdef.in_hierarchy.smallers do
+				if sub is mclassdef or lst.has(sub.mclass) then continue
+				lst.add(sub.mclass)
+				print "\t\t\t{sub.mclass.to_s}"
 			end
 		end
-		return lst
 	end
-
-	# Get childrens of the class (direct sublasses only)
-	fun children(model: Model): Set[MClass] do
-		var lst = new HashSet[MClass]
-		for other in model.mclasses do
-			if other == self then continue
-			if other.parents.has(self) then lst.add(other)
+	
+	# Print in which MModule this MClass is redefines
+	fun print_refined(mmodule: MModule) do
+		print "\t\tREDEF:".under_line
+		mmodule.linearize_mclassdefs(self.mclassdefs)
+		for red in mclassdefs do
+			if red is self.mclassdefs.first then continue
+			print "\t\t\tRefined in the module {red.mmodule}"
 		end
-		return lst
-	end
-
-	# Get descendant of the class
-	fun descendants: Set[MClass] do
-		var lst = new HashSet[MClass]
-		for mclassdef in self.mclassdefs do
-			for sub_mclassdef in mclassdef.in_hierarchy.smallers do
-				if sub_mclassdef is mclassdef then continue
-				lst.add(sub_mclassdef.mclass)
-			end
-		end
-		return lst
 	end
 end
 
