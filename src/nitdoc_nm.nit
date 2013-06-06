@@ -23,20 +23,15 @@ class ReadModule
 		modules = new Array[MModule]
 	end
 
-	fun get_modules do 
+	fun run_process_to_get_modules do
 		modules = modelBuilder.parse_and_build([prog])
 		modelBuilder.full_propdef_semantic_analysis
 	end
-
-	# Get the main module in the program
-	fun set_main_module do
-		get_modules
-		main = modules.first
-	end
+	
 	# Associate classes to their properties in a HashMap
-	fun save_classes_and_prop do
-		if main is null then set_main_module
-		for cl in main.mclassdefs do hmClasses[cl.mclass] =  main.properties(cl.mclass)
+	fun save_classes_and_prop(mmodule: MModule) do
+		hmClasses = new HashMap[MClass, Set[MProperty]]
+		for cl in mmodule.mclassdefs do hmClasses[cl.mclass] =  mmodule.properties(cl.mclass)
 	end
 
 	fun properties_info(cl: MClass, prop: MProperty): String do
@@ -56,25 +51,27 @@ class ReadModule
 	end
 	
 	fun process do
-		save_classes_and_prop
-		var classes = main.mclassdefs
-			
-		print "----------------------------------------------------"
-		print "Module :: {main.to_s.green}"
-		print "----------------------------------------------------\n\n"
-		var i = 1
-		for cl in classes do 
-			var curclass = cl.mclass
-			print "\t{i.to_s}) {curclass.to_s.under_line}"
-			curclass.print_defined_by
-			curclass.print_parent
-			curclass.print_refined(main.as(not null))
-			curclass.print_sub_class
+		run_process_to_get_modules
+		for mmodule in model.mmodules do
+			save_classes_and_prop(mmodule)
+			var classes = mmodule.mclassdefs
+			print "----------------------------------------------------"
+			print "Module :: {mmodule.to_s.green}"
+			print "----------------------------------------------------\n\n"
+			var i = 1
+			for cl in classes do
+				var curclass = cl.mclass
+				print "\t{i.to_s}) {curclass.to_s.under_line}"
+				curclass.print_defined_by
+				curclass.print_parent
+				curclass.print_refined(mmodule)
+				curclass.print_sub_class
 
-			var arrProp = hmClasses[curclass].to_a
-			for p in arrProp do print "\n\t\t- {properties_info(curclass,p)}"	
-			print "\n----------------------------------------------------\n"
-			i+=1
+				var arrProp = hmClasses[curclass].to_a
+				for p in arrProp do print "\n\t\t- {properties_info(curclass,p)}"	
+				print "\n----------------------------------------------------\n"
+				i+=1
+			end
 		end
 		print_legend
 	end
