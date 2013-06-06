@@ -42,6 +42,8 @@ do
 	print s == "abcde"
 	print s < "abcdf"
 	print s > "abcdd"
+	print s > "abcd"
+	print s < "abcdef"
 	print "z" + s + "z" == "zabcdez"
 end
 
