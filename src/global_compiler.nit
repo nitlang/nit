@@ -64,7 +64,7 @@ redef class ModelBuilder
 			self.toolcontext.info("Compile {m} ({compiler.seen.length-compiler.todos.length}/{compiler.seen.length})", 3)
 			m.compile_to_c(compiler)
 		end
-		self.toolcontext.info("Total methods to compile to C: {compiler.visitors.length}", 2)
+		self.toolcontext.info("Total methods to compile to C: {compiler.writers.length}", 2)
 
 		compiler.display_stats
 
@@ -89,7 +89,6 @@ class GlobalCompiler
 	init(mainmodule: MModule, modelbuilder: ModelBuilder, runtime_type_analysis: RapidTypeAnalysis)
 	do
 		super(mainmodule, modelbuilder)
-		self.header = new_visitor
 		self.runtime_type_analysis = runtime_type_analysis
 		self.live_primitive_types = new Array[MClassType]
 		for t in runtime_type_analysis.live_types do
@@ -150,7 +149,7 @@ class GlobalCompiler
 	private var seen: HashSet[AbstractRuntimeFunction] = new HashSet[AbstractRuntimeFunction]
 
 	# Declare C structures and identifiers for a runtime class
-	fun declare_runtimeclass(v: VISITOR, mtype: MClassType)
+	fun declare_runtimeclass(v: CodeWriter, mtype: MClassType)
 	do
 		assert self.runtime_type_analysis.live_types.has(mtype)
 		v.add_decl("/* runtime class {mtype} */")

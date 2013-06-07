@@ -86,7 +86,7 @@ redef class ModelBuilder
 		var count = 0
 
 		var i = 0
-		for vis in compiler.visitors do
+		for vis in compiler.writers do
 			count += vis.lines.length
 			if file == null or count > 10000 or vis.file_break then
 				i += 1
@@ -186,29 +186,30 @@ abstract class AbstractCompiler
 	do
 		self.mainmodule = mainmodule
 		self.modelbuilder = modelbuilder
+		self.header = new CodeWriter
+		self.writers.add(self.header)
 	end
 
 	# Force the creation of a new file
 	# The point is to avoid contamination between must-be-compiled-separately files
 	fun new_file
 	do
-		var v = self.new_visitor
+		var v = new CodeWriter
 		v.file_break = true
+		self.writers.add(v)
 	end
 
 	# The list of all associated visitors
 	# Used to generate .c files
-	# FIXME: should not be vistors but just somewhere to store lines
-	var visitors: List[VISITOR] = new List[VISITOR]
+	var writers: List[CodeWriter] = new List[CodeWriter]
 
 	# Initialize a visitor specific for a compiler engine
 	fun new_visitor: VISITOR is abstract
 
 	# Where global declaration are stored (the main .h)
 	#
-	# FIXME: should not be a visitor but just somewhere to store lines
 	# FIXME: should not have a global .h since it does not help recompilations
-	var header: VISITOR writable
+	var header: CodeWriter writable
 
 	# Compile C headers
 	# This method call compile_header_strucs method that has to be refined
@@ -429,6 +430,20 @@ abstract class AbstractCompiler
 	end
 end
 
+# Where to store generated lines
+class CodeWriter
+	var file_break: Bool = false
+	var lines: List[String] = new List[String]
+	var decl_lines: List[String] = new List[String]
+
+	# Add a line in the main part of the generated C
+	fun add(s: String) do self.lines.add(s)
+
+	# Add a line in the
+	# (used for local or global declaration)
+	fun add_decl(s: String) do self.decl_lines.add(s)
+end
+
 # A visitor on the AST of property definition that generate the C code.
 abstract class AbstractCompilerVisitor
 
@@ -449,12 +464,12 @@ abstract class AbstractCompilerVisitor
 	# Alias for self.compiler.mainmodule.bool_type
 	fun bool_type: MClassType do return self.compiler.mainmodule.bool_type
 
-	var file_break: Bool = false
+	var writer = new CodeWriter
 
 	init(compiler: COMPILER)
 	do
 		self.compiler = compiler
-		compiler.visitors.add(self)
+		compiler.writers.add(self.writer)
 	end
 
 	# Force to get the primitive class named `name' or abort
@@ -741,15 +756,12 @@ abstract class AbstractCompilerVisitor
 
 	# Code generation
 
-	private var lines: List[String] = new List[String]
-	private var decl_lines: List[String] = new List[String]
-
 	# Add a line in the main part of the generated C
-	fun add(s: String) do self.lines.add(s)
+	fun add(s: String) do self.writer.lines.add(s)
 
 	# Add a line in the
 	# (used for local or global declaration)
-	fun add_decl(s: String) do self.decl_lines.add(s)
+	fun add_decl(s: String) do self.writer.decl_lines.add(s)
 
 	# Return a new local runtime_variable initialized with the C expression `cexpr'.
 	fun new_expr(cexpr: String, mtype: MType): RuntimeVariable
