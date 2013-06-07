@@ -64,7 +64,7 @@ redef class ModelBuilder
 			self.toolcontext.info("Compile {m} ({compiler.seen.length-compiler.todos.length}/{compiler.seen.length})", 3)
 			m.compile_to_c(compiler)
 		end
-		self.toolcontext.info("Total methods to compile to C: {compiler.writers.length}", 2)
+		self.toolcontext.info("Total methods to compile to C: {compiler.seen.length}", 2)
 
 		compiler.display_stats
 

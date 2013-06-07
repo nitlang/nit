@@ -82,33 +82,35 @@ redef class ModelBuilder
 
 		var cfiles = new Array[String]
 
-		var file: nullable OFStream = null
-		var count = 0
-
-		var i = 0
-		for vis in compiler.writers do
-			count += vis.lines.length
-			if file == null or count > 10000 or vis.file_break then
-				i += 1
-				if file != null then file.close
-				var cfilename = ".nit_compile/{mainmodule.name}.{i}.c"
-				cfiles.add(cfilename)
-				file = new OFStream.open(cfilename)
-				file.write "#include \"{mainmodule.name}.1.h\"\n"
-				count = vis.lines.length
-			end
-			if vis != compiler.header then
-				for l in vis.decl_lines do
+		for f in compiler.files do
+			var i = 0
+			var file: nullable OFStream = null
+			var count = 0
+			for vis in f.writers do
+				count += vis.lines.length
+				if file == null or count > 10000  then
+					i += 1
+					if file != null then file.close
+					var cfilename = ".nit_compile/{f.name}.{i}.c"
+					self.toolcontext.info("new C source files to compile: {cfilename}", 3)
+					cfiles.add(cfilename)
+					file = new OFStream.open(cfilename)
+					file.write "#include \"{mainmodule.name}.1.h\"\n"
+					count = vis.lines.length
+				end
+				if vis != compiler.header then
+					for l in vis.decl_lines do
+						file.write l
+						file.write "\n"
+					end
+				end
+				for l in vis.lines do
 					file.write l
 					file.write "\n"
 				end
 			end
-			for l in vis.lines do
-				file.write l
-				file.write "\n"
-			end
+			if file != null then file.close
 		end
-		if file != null then file.close
 
 		self.toolcontext.info("Total C source files to compile: {cfiles.length}", 2)
 
@@ -128,9 +130,10 @@ redef class ModelBuilder
 			ofiles.add(o)
 		end
 		# Compile each required extern body into a specific .o
+		var i = 0
 		for f in compiler.extern_bodies do
 			i += 1
-			var o = ".nit_compile/{mainmodule.name}.{i}.o"
+			var o = ".nit_compile/{mainmodule.name}.extern.{i}.o"
 			makefile.write("{o}: {f}\n\t$(CC) $(CFLAGS) -D NONITCNI -c -o {o} {f}\n\n")
 			ofiles.add(o)
 		end
@@ -186,22 +189,22 @@ abstract class AbstractCompiler
 	do
 		self.mainmodule = mainmodule
 		self.modelbuilder = modelbuilder
-		self.header = new CodeWriter
-		self.writers.add(self.header)
+		var file = new_file(mainmodule.name)
+		self.header = new CodeWriter(file)
 	end
 
 	# Force the creation of a new file
 	# The point is to avoid contamination between must-be-compiled-separately files
-	fun new_file
+	fun new_file(name: String): CodeFile
 	do
-		var v = new CodeWriter
-		v.file_break = true
-		self.writers.add(v)
+		var f = new CodeFile(name)
+		self.files.add(f)
+		return f
 	end
 
-	# The list of all associated visitors
+	# The list of all associated files
 	# Used to generate .c files
-	var writers: List[CodeWriter] = new List[CodeWriter]
+	var files: List[CodeFile] = new List[CodeFile]
 
 	# Initialize a visitor specific for a compiler engine
 	fun new_visitor: VISITOR is abstract
@@ -430,9 +433,16 @@ abstract class AbstractCompiler
 	end
 end
 
+# A file unit (may be more than one file if
+# A file unit aim to be autonomous and is made or one or more `CodeWriter`s
+class CodeFile
+	var name: String
+	var writers = new Array[CodeWriter]
+end
+
 # Where to store generated lines
 class CodeWriter
-	var file_break: Bool = false
+	var file: CodeFile
 	var lines: List[String] = new List[String]
 	var decl_lines: List[String] = new List[String]
 
@@ -442,6 +452,12 @@ class CodeWriter
 	# Add a line in the
 	# (used for local or global declaration)
 	fun add_decl(s: String) do self.decl_lines.add(s)
+
+	init(file: CodeFile)
+	do
+		self.file = file
+		file.writers.add(self)
+	end
 end
 
 # A visitor on the AST of property definition that generate the C code.
@@ -464,12 +480,12 @@ abstract class AbstractCompilerVisitor
 	# Alias for self.compiler.mainmodule.bool_type
 	fun bool_type: MClassType do return self.compiler.mainmodule.bool_type
 
-	var writer = new CodeWriter
+	var writer: CodeWriter
 
 	init(compiler: COMPILER)
 	do
 		self.compiler = compiler
-		compiler.writers.add(self.writer)
+		self.writer = new CodeWriter(compiler.files.last)
 	end
 
 	# Force to get the primitive class named `name' or abort
