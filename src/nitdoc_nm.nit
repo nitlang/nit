@@ -89,18 +89,17 @@ end
 redef class String
 	
 	private fun add_escape_char(escapechar: String): String do
-		var s = escapechar
-		s += "{self}\33[0m"
-		return s
+		return "{escapechar}{self}\033[0m"
 	end
 
-	fun red: String do return add_escape_char("\33[1;31m")
-	fun yellow: String do return add_escape_char("\33[1;33m")
-	fun green: String do return add_escape_char("\33[1;32m")
-	fun blue: String do return add_escape_char("\33[1;34m")
-	fun cyan: String do return add_escape_char("\33[1;36m")
-	fun bold: String do return add_escape_char("\33[1m")
-	fun under_line: String do return add_escape_char("\33[4m")
+	private fun esc: Char do return 27.ascii
+	private fun red: String do return add_escape_char("{esc}[1;31m")
+	private fun yellow: String do return add_escape_char("{esc}[1;33m")
+	private fun green: String do return add_escape_char("{esc}[1;32m")
+	private fun blue: String do return add_escape_char("{esc}[1;34m")
+	private fun cyan: String do return add_escape_char("{esc}[1;36m")
+	private fun bold: String do return add_escape_char("{esc}[1m")
+	private fun under_line: String do return add_escape_char("{esc}[4m")
 end
 
 class MClassSorter[E: Object]
