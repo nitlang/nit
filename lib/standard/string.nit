@@ -375,6 +375,19 @@ class String
 		with_native(str,str.cstring_length)
 	end
 
+	# Creates a new Nit String from an existing CString
+	# Pretty much equals to from_cstring but copies instead
+	# of passing a reference
+	# Avoids manual/automatic dealloc problems when dealing with native C code
+	init copy_from_native(str: NativeString)
+	do
+		var temp_length = str.cstring_length
+		var new_str = calloc_string(temp_length + 1)
+		str.copy_to(new_str, temp_length, 0, 0)
+		new_str[temp_length] = '\0'
+		with_native(new_str, temp_length)
+	end
+
 	# Return a null terminated char *
 	fun to_cstring: NativeString
 	do
