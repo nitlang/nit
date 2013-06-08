@@ -895,8 +895,10 @@ redef class Sys
 		_args_cache = args
 	end
 
-	private fun native_argc: Int is extern "kernel_Sys_Sys_native_argc_0" # First argument of the main C function.
-	
-	private fun native_argv(i: Int): NativeString is extern "kernel_Sys_Sys_native_argv_1" # Second argument of the main C function.
+	# First argument of the main C function.
+	private fun native_argc: Int is intern
+
+	# Second argument of the main C function.
+	private fun native_argv(i: Int): NativeString is intern
 end
 
