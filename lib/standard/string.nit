@@ -17,6 +17,10 @@ package string
 intrude import collection # FIXME should be collection::array
 import hash
 
+`{
+#include <stdio.h>
+`}
+
 ###############################################################################
 # String                                                                      #
 ###############################################################################
