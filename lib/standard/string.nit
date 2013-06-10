@@ -177,6 +177,25 @@ abstract class AbstractString
 		return s.to_s
 	end
 
+	# Trims trailing and preceding white spaces
+	# A whitespace is defined as any character which ascii value is less than or equal to 32
+	fun trim: String
+	do
+		if self._length == 0 then return self.to_s
+		# find position of the first non white space char (ascii < 32) from the start of the string
+		var start_pos = 0
+		while self[start_pos].ascii <= 32 do
+			start_pos += 1
+			if start_pos == _length then return ""
+		end
+		# find position of the first non white space char from the end of the string
+		var end_pos = length - 1
+		while self[end_pos].ascii <= 32 do
+			end_pos -= 1
+			if end_pos == start_pos then return self[start_pos].to_s
+		end
+		return self.substring(start_pos, end_pos - start_pos + 1)
+	end
 
 	redef fun output
 	do
@@ -329,6 +348,26 @@ class String
 		outstr[self.length] = '\0'
 
 		return new String.with_native(outstr, self._length)
+	end
+
+	redef fun trim: String
+	do
+		if self._length == 0 then return self
+		# find position of the first non white space char (ascii < 32) from the start of the string
+		var start_pos = self._index_from
+		while _items[start_pos].ascii <= 32 do
+			start_pos += 1
+			if start_pos == _index_to + 1 then return ""
+		end
+		# find position of the first non white space char from the end of the string
+		var end_pos = _index_to
+		while _items[end_pos].ascii <= 32 do
+			end_pos -= 1
+			if end_pos == start_pos then return _items[start_pos].to_s
+		end
+		start_pos -= index_from
+		end_pos -= index_from
+		return self.substring(start_pos, end_pos - start_pos + 1)
 	end
 
 	redef fun output
