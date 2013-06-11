@@ -183,8 +183,6 @@ class DocContext
 		# generate the index
 		self.filename = "index.html"
 		clear
-		addGithubInformation
-		addCommitForm
 		add("<!DOCTYPE html>")
 		add("<html><head>{head}<title>Overview | {custom_title}</title></head><body>\n")
 		add(action_bar)
@@ -218,6 +216,8 @@ class DocContext
 		add("</article></div>")
 		add("</div>")
 		add("<footer>{footer_text}</footer>")
+		addGithubInformation
+		addCommitForm
 		add("</body></html>\n")
 		write_to("{dir}/index.html")
 
@@ -229,8 +229,6 @@ class DocContext
 			self.filename = mod.html_name
 			action_bar = "<header><nav class='main'><ul>{custom_items}<li><a href='./index.html'>Overview</a></li><li class=\"current\">{mod.name}</li><li><a href='full-index.html'>Full Index</a></li><li><a href=\"help.html\">Help</a></li><li id=\"liGitHub\" class=\"\"><a id=\"logGitHub\" class=\"btn\" ><img id=\"imgGitHub\" src=\"resources/icons/github-icon.png\" /></a><div class=\"popover bottom\"><div class=\"arrow\"></div><div class=\"githubTitle\"><h3>Github Sign In</h3></div><div><label id=\"lbloginGit\" for=\"login\">Username</label><input id=\"loginGit\" type=\"text\" name=\"login\"><label id=\"logginMessage\" >Hello <a id=\"githubAccount\" ><strong id=\"nickName\"></strong></a></label></div><div><label id=\"lbpasswordGit\" for=\"password\">Password</label><input id=\"passwordGit\" type=\"password\" name=\"password\"><div id=\"divGitHubRepoDisplay\"><label id=\"lbRepoDisplay\">Repository: </label><strong><label id=\"githubRepoDisplay\"></label></strong></div></div><div><label id=\"lbrepositoryGit\" for=\"repository\">Repository</label><input id=\"repositoryGit\" type=\"text\" name=\"repository\"><div id=\"listBranches\"><label id=\"lbBranches\">Branch </label><select id=\"dropBranches\" name=\"dropBranches\" tabindex=\"1\" class=\"dropdown\"></select></div></div><div><label id=\"lbbranchGit\" for=\"branch\">Branch</label><input id=\"branchGit\" type=\"text\" name=\"branch\"></div><div id=\"divlogIn\"><a id=\"signIn\" >Sign In</a></div></div></li></ul></nav></header>\n"
 			clear
-			addGithubInformation
-			addCommitForm
 			add("<!DOCTYPE html>")
 			add("<html><head>{head}<title>{mod.name} module | {custom_title}</title></head><body>\n")
 			add(action_bar)
@@ -238,6 +236,8 @@ class DocContext
 			mod.file_page_doc(self)
 			add("</div>")
 			add("<footer>{footer_text}</footer>")
+			addGithubInformation
+			addCommitForm
 			add("</body></html>\n")
 			write_to("{dir}/{mod.html_name}.html")
 		end
@@ -248,8 +248,6 @@ class DocContext
 			self.filename = c.html_name
 			action_bar = "<header><nav class='main'><ul>{custom_items}<li><a href='./index.html'>Overview</a></li><li>{c.global.intro.mmmodule.toplevel_owner.html_link(self)}</li><li class=\"current\">{c.name}</li><li><a href='full-index.html'>Full Index</a></li><li><a href=\"help.html\">Help</a></li><li id=\"liGitHub\" class=\"\"><a id=\"logGitHub\" class=\"btn\" ><img id=\"imgGitHub\" src=\"resources/icons/github-icon.png\" /></a><div class=\"popover bottom\"><div class=\"arrow\"></div><div class=\"githubTitle\"><h3>Github Sign In</h3></div><div><label id=\"lbloginGit\" for=\"login\">Username</label><input id=\"loginGit\" type=\"text\" name=\"login\"><label id=\"logginMessage\" >Hello <a id=\"githubAccount\" ><strong id=\"nickName\"></strong></a></label></div><div><label id=\"lbpasswordGit\" for=\"password\">Password</label><input id=\"passwordGit\" type=\"password\" name=\"password\"><div id=\"divGitHubRepoDisplay\"><label id=\"lbRepoDisplay\">Repository: </label><strong><label id=\"githubRepoDisplay\"></label></strong></div></div><div><label id=\"lbrepositoryGit\" for=\"repository\">Repository</label><input id=\"repositoryGit\" type=\"text\" name=\"repository\"><div id=\"listBranches\"><label id=\"lbBranches\">Branch </label><select id=\"dropBranches\" name=\"dropBranches\" tabindex=\"1\" class=\"dropdown\"></select></div></div><div><label id=\"lbbranchGit\" for=\"branch\">Branch</label><input id=\"branchGit\" type=\"text\" name=\"branch\"></div><div id=\"divlogIn\"><a id=\"signIn\" >Sign In</a></div></div></li></ul></nav></header>\n"
 			clear
-			addGithubInformation
-			addCommitForm
 			add("<!DOCTYPE html>")
 			add("<html><head>{head}<title>{c.name} class | {custom_title}</title></head><body>\n")
 			add(action_bar)
@@ -257,6 +255,8 @@ class DocContext
 			c.file_page_doc(self)
 			add("</div>")
 			add("<footer>{footer_text}</footer>")
+			addGithubInformation
+			addCommitForm
 			add("</body></html>\n")
 			write_to("{dir}/{c.html_name}.html")
 		end
@@ -264,8 +264,6 @@ class DocContext
 		self.filename = "fullindex"
 		action_bar = "<header><nav class='main'><ul>{custom_items}<li><a href='./index.html'>Overview</a></li><li class=\"current\">Full Index</li><li><a href=\"help.html\">Help</a></li><li id=\"liGitHub\" class=\"\"><a id=\"logGitHub\" class=\"btn\" ><img id=\"imgGitHub\" src=\"resources/icons/github-icon.png\" /></a><div class=\"popover bottom\"><div class=\"arrow\"></div><div class=\"githubTitle\"><h3>Github Sign In</h3></div><div><label id=\"lbloginGit\" for=\"login\">Username</label><input id=\"loginGit\" type=\"text\" name=\"login\"><label id=\"logginMessage\" >Hello <a id=\"githubAccount\" ><strong id=\"nickName\"></strong></a></label></div><div><label id=\"lbpasswordGit\" for=\"password\">Password</label><input id=\"passwordGit\" type=\"password\" name=\"password\"><div id=\"divGitHubRepoDisplay\"><label id=\"lbRepoDisplay\">Repository: </label><strong><label id=\"githubRepoDisplay\"></label></strong></div></div><div><label id=\"lbrepositoryGit\" for=\"repository\">Repository</label><input id=\"repositoryGit\" type=\"text\" name=\"repository\"><div id=\"listBranches\"><label id=\"lbBranches\">Branch </label><select id=\"dropBranches\" name=\"dropBranches\" tabindex=\"1\" class=\"dropdown\"></select></div></div><div><label id=\"lbbranchGit\" for=\"branch\">Branch</label><input id=\"branchGit\" type=\"text\" name=\"branch\"></div></div> <div id=\"divlogIn\"><a id=\"signIn\" >Sign In</a></div></div></li></ul></nav></header>\n"
 		clear
-		addGithubInformation
-		addCommitForm
 		add("<!DOCTYPE html>")
 		add("<html><head>{head}<title>Full Index | {custom_title}</title></head><body>\n")
 		add(action_bar)
@@ -275,6 +273,8 @@ class DocContext
 		add("</div>")
 		add("</div>")
 		add("<footer>{footer_text}</footer>")
+		addGithubInformation
+		addCommitForm
 		add("</body></html>\n")
 		write_to("{dir}/full-index.html")
 
