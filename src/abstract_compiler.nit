@@ -130,10 +130,9 @@ redef class ModelBuilder
 			ofiles.add(o)
 		end
 		# Compile each required extern body into a specific .o
-		var i = 0
 		for f in compiler.extern_bodies do
-			i += 1
-			var o = ".nit_compile/{mainmodule.name}.extern.{i}.o"
+			var basename = f.basename(".c")
+			var o = ".nit_compile/{basename}.extern.o"
 			makefile.write("{o}: {f}\n\t$(CC) $(CFLAGS) -D NONITCNI -c -o {o} {f}\n\n")
 			ofiles.add(o)
 		end
