@@ -18,25 +18,29 @@
 # tests for a recurring bug when callbacking a Nit method on an extern receiver 
 module test_ffi_c_callback_extern_receiver
 
+`{
+#include <stdio.h>
+`}
+
 extern Test
     new create_me is extern `{
         int* foobar = malloc(sizeof(int));
         *foobar = 12345;
         return foobar;
     `}
- 
-    fun test_me is extern import Test::foo `{
+
+    fun test_me is extern import Test::foo, String::from_cstring `{
         int i;
         for(i = 0; i < 2000; ++i) {
             printf("%d\n", i);
             Test_foo(recv, new_String_from_cstring("asdf"));
         }
     `}
- 
+
     fun foo(bar : String) do
         print bar
     end
 end
- 
+
 var t = new Test.create_me
 t.test_me
