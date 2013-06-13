@@ -101,4 +101,5 @@ class NitHomepage
 end
 
 var page = new NitHomepage
+print page.render
 page.save("nit.html")
