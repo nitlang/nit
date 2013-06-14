@@ -310,29 +310,6 @@ abstract class AbstractCompiler
 		v.add("\}")
 	end
 
-	# look for a needed .h and .c file for a given .nit source-file
-	# FIXME: bad API, parameter should be a MModule, not its source-file
-	fun add_extern(file: String)
-	do
-		file = file.strip_extension(".nit")
-		var tryfile = file + ".nit.h"
-		if tryfile.file_exists then
-			self.header.add_decl("#include \"{"..".join_path(tryfile)}\"")
-		end
-		tryfile = file + "_nit.h"
-		if tryfile.file_exists then
-			self.header.add_decl("#include \"{"..".join_path(tryfile)}\"")
-		end
-		tryfile = file + ".nit.c"
-		if tryfile.file_exists then
-			self.extern_bodies.add(tryfile)
-		end
-		tryfile = file + "_nit.c"
-		if tryfile.file_exists then
-			self.extern_bodies.add(tryfile)
-		end
-	end
-
 	# List of additional .c files required to compile (native interface)
 	var extern_bodies = new ArraySet[String]
 
@@ -777,6 +754,29 @@ abstract class AbstractCompilerVisitor
 	# Add a line in the
 	# (used for local or global declaration)
 	fun add_decl(s: String) do self.writer.decl_lines.add(s)
+
+	# look for a needed .h and .c file for a given .nit source-file
+	# FIXME: bad API, parameter should be a MModule, not its source-file
+	fun add_extern(file: String)
+	do
+		file = file.strip_extension(".nit")
+		var tryfile = file + ".nit.h"
+		if tryfile.file_exists then
+			self.compiler.header.add_decl("#include \"{"..".join_path(tryfile)}\"")
+		end
+		tryfile = file + "_nit.h"
+		if tryfile.file_exists then
+			self.compiler.header.add_decl("#include \"{"..".join_path(tryfile)}\"")
+		end
+		tryfile = file + ".nit.c"
+		if tryfile.file_exists then
+			self.compiler.extern_bodies.add(tryfile)
+		end
+		tryfile = file + "_nit.c"
+		if tryfile.file_exists then
+			self.compiler.extern_bodies.add(tryfile)
+		end
+	end
 
 	# Return a new local runtime_variable initialized with the C expression `cexpr'.
 	fun new_expr(cexpr: String, mtype: MType): RuntimeVariable
@@ -1552,7 +1552,7 @@ redef class AExternMethPropdef
 		externname = nextern.text.substring(1, nextern.text.length-2)
 		if location.file != null then
 			var file = location.file.filename
-			v.compiler.add_extern(file)
+			v.add_extern(file)
 		end
 		var res: nullable RuntimeVariable = null
 		var ret = mpropdef.msignature.return_mtype
@@ -1584,7 +1584,7 @@ redef class AExternInitPropdef
 		externname = nextern.text.substring(1, nextern.text.length-2)
 		if location.file != null then
 			var file = location.file.filename
-			v.compiler.add_extern(file)
+			v.add_extern(file)
 		end
 		v.adapt_signature(mpropdef, arguments)
 		var ret = arguments.first.mtype
