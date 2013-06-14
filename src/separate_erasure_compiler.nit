@@ -171,14 +171,14 @@ class SeparateErasureCompiler
 	redef fun compile_header_structs do
 		self.header.add_decl("typedef void(*nitmethod_t)(void); /* general C type representing a Nit method. */")
 		self.compile_header_attribute_structs
-		self.header.add_decl("struct class \{ int id; const char *name; int box_kind; int color; struct vts_table *vts_table; struct type_table *type_table; nitmethod_t vft[1]; \}; /* general C type representing a Nit class. */")
-		self.header.add_decl("struct type_table \{ int size; int table[1]; \}; /* colorized type table. */")
-		self.header.add_decl("struct vts_entry \{ short int is_nullable; struct class *class; \}; /* link (nullable or not) between the vts and is bound. */")
+		self.header.add_decl("struct class \{ int id; const char *name; int box_kind; int color; const struct vts_table *vts_table; const struct type_table *type_table; nitmethod_t vft[]; \}; /* general C type representing a Nit class. */")
+		self.header.add_decl("struct type_table \{ int size; int table[]; \}; /* colorized type table. */")
+		self.header.add_decl("struct vts_entry \{ short int is_nullable; const struct class *class; \}; /* link (nullable or not) between the vts and is bound. */")
 
 		if self.vt_layout isa PHLayout[MClass, MVirtualTypeProp] then
-			self.header.add_decl("struct vts_table \{ int mask; struct vts_entry vts[1]; \}; /* vts list of a C type representation. */")
+			self.header.add_decl("struct vts_table \{ int mask; const struct vts_entry vts[]; \}; /* vts list of a C type representation. */")
 		else
-			self.header.add_decl("struct vts_table \{ struct vts_entry vts[1]; \}; /* vts list of a C type representation. */")
+			self.header.add_decl("struct vts_table \{ int dummy; const struct vts_entry vts[]; \}; /* vts list of a C type representation. */")
 		end
 
 		if modelbuilder.toolcontext.opt_phmod_typing.value then
@@ -187,7 +187,7 @@ class SeparateErasureCompiler
 			self.header.add_decl("#define HASH(mask, id) ((mask)&(id))")
 		end
 
-		self.header.add_decl("typedef struct val \{ struct class *class; nitattribute_t attrs[1]; \} val; /* general C type representing a Nit instance. */")
+		self.header.add_decl("typedef struct instance \{ const struct class *class; nitattribute_t attrs[1]; \} val; /* general C type representing a Nit instance. */")
 	end
 
 	redef fun compile_class_to_c(mclass: MClass)
@@ -202,19 +202,10 @@ class SeparateErasureCompiler
 
 		v.add_decl("/* runtime class {c_name} */")
 
-		self.header.add_decl("extern const struct class_{c_name} class_{c_name};")
-		self.header.add_decl("struct class_{c_name} \{")
-		self.header.add_decl("int id;")
-		self.header.add_decl("const char *name;")
-		self.header.add_decl("int box_kind;")
-		self.header.add_decl("int color;")
-		self.header.add_decl("const struct vts_table *vts_table;")
-		self.header.add_decl("struct type_table *type_table;")
-		self.header.add_decl("nitmethod_t vft[{vft.length}];")
-		self.header.add_decl("\};")
+		self.header.add_decl("extern const struct class class_{c_name};")
 
 		# Build class vft
-		v.add_decl("const struct class_{c_name} class_{c_name} = \{")
+		v.add_decl("const struct class class_{c_name} = \{")
 		v.add_decl("{self.class_layout.ids[mclass]},")
 		v.add_decl("\"{mclass.name}\", /* class_name_string */")
 		v.add_decl("{self.box_kind_of(mclass)}, /* box_kind */")
@@ -225,11 +216,11 @@ class SeparateErasureCompiler
 			v.add_decl("{layout.pos[mclass]},")
 		end
 		if build_class_vts_table(mclass) then
-			v.add_decl("(const struct vts_table*) &vts_table_{c_name},")
+			v.add_decl("&vts_table_{c_name},")
 		else
 			v.add_decl("NULL,")
 		end
-		v.add_decl("(struct type_table*) &type_table_{c_name},")
+		v.add_decl("&type_table_{c_name},")
 		v.add_decl("\{")
 		for i in [0 .. vft.length[ do
 			var mpropdef = vft[i]
@@ -247,13 +238,9 @@ class SeparateErasureCompiler
 		v.add_decl("\};")
 
 		# Build class type table
-		self.header.add_decl("extern const struct type_table_{c_name} type_table_{c_name};")
-		self.header.add_decl("struct type_table_{c_name} \{")
-		self.header.add_decl("int size;")
-		self.header.add_decl("int table[{class_table.length}];")
-		self.header.add_decl("\};")
+		self.header.add_decl("extern const struct type_table type_table_{c_name};")
 
-		v.add_decl("const struct type_table_{c_name} type_table_{c_name} = \{")
+		v.add_decl("const struct type_table type_table_{c_name} = \{")
 		v.add_decl("{class_table.length},")
 		v.add_decl("\{")
 		for msuper in class_table do
@@ -266,13 +253,14 @@ class SeparateErasureCompiler
 		v.add_decl("\}")
 		v.add_decl("\};")
 
-		#Build instance struct
 		if mtype.ctype != "val*" then
+			#Build instance struct
 			self.header.add_decl("struct instance_{c_name} \{")
 			self.header.add_decl("const struct class *class;")
 			self.header.add_decl("{mtype.ctype} value;")
 			self.header.add_decl("\};")
 
+			#Build BOX
 			self.header.add_decl("val* BOX_{c_name}({mtype.ctype});")
 			v.add_decl("/* allocate {mtype} */")
 			v.add_decl("val* BOX_{mtype.c_name}({mtype.ctype} value) \{")
@@ -282,42 +270,35 @@ class SeparateErasureCompiler
 			v.add("return (val*)res;")
 			v.add("\}")
 			return
-		end
+		else if mclass.name == "NativeArray" then
+			#Build instance struct
+			self.header.add_decl("struct instance_{c_name} \{")
+			self.header.add_decl("const struct class *class;")
+			self.header.add_decl("val* values[];")
+			self.header.add_decl("\};")
 
-		var is_native_array = mclass.name == "NativeArray"
-
-		var sig
-		if is_native_array then
-			sig = "int length"
-		else
-			sig = ""
-		end
-
-		#Build instance struct
-		#extern const struct instance_array__NativeArray instance_array__NativeArray;
-		self.header.add_decl("struct instance_{c_name} \{")
-		self.header.add_decl("const struct class *class;")
-		self.header.add_decl("nitattribute_t attrs[{attrs.length}];")
-		if is_native_array then
-			# NativeArrays are just a instance header followed by an array of values
-			self.header.add_decl("val* values[0];")
-		end
-		self.header.add_decl("\};")
-
-
-		self.header.add_decl("{mtype.ctype} NEW_{c_name}({sig});")
-		v.add_decl("/* allocate {mtype} */")
-		v.add_decl("{mtype.ctype} NEW_{c_name}({sig}) \{")
-		var res = v.new_named_var(mtype, "self")
-		res.is_exact = true
-		if is_native_array then
+			#Build NEW
+			self.header.add_decl("{mtype.ctype} NEW_{c_name}(int length);")
+			v.add_decl("/* allocate {mtype} */")
+			v.add_decl("{mtype.ctype} NEW_{c_name}(int length) \{")
+			var res = v.new_named_var(mtype, "self")
+			res.is_exact = true
 			var mtype_elt = mtype.arguments.first
 			v.add("{res} = GC_MALLOC(sizeof(struct instance_{c_name}) + length*sizeof({mtype_elt.ctype}));")
-		else
-			v.add("{res} = GC_MALLOC(sizeof(struct instance_{c_name}));")
+			v.add("{res}->class = &class_{c_name};")
+			v.add("return {res};")
+			v.add("\}")
+			return
 		end
-		v.add("{res}->class = (struct class*) &class_{c_name};")
 
+		#Build NEW
+		self.header.add_decl("{mtype.ctype} NEW_{c_name}(void);")
+		v.add_decl("/* allocate {mtype} */")
+		v.add_decl("{mtype.ctype} NEW_{c_name}(void) \{")
+		var res = v.new_named_var(mtype, "self")
+		res.is_exact = true
+		v.add("{res} = GC_MALLOC(sizeof(struct instance) + {attrs.length}*sizeof(nitattribute_t));")
+		v.add("{res}->class = &class_{c_name};")
 		self.generate_init_attr(v, res, mtype)
 		v.add("return {res};")
 		v.add("\}")
@@ -328,19 +309,15 @@ class SeparateErasureCompiler
 	private fun build_class_vts_table(mclass: MClass): Bool do
 		if self.vt_tables[mclass].is_empty then return false
 
-		self.header.add_decl("extern const struct vts_table_{mclass.c_name} vts_table_{mclass.c_name};")
-		self.header.add_decl("struct vts_table_{mclass.c_name} \{")
-		if self.vt_layout isa PHLayout[MClass, MVirtualTypeProp] then
-			self.header.add_decl("int mask;")
-		end
-		self.header.add_decl("struct vts_entry vts[{self.vt_tables[mclass].length}];")
-		self.header.add_decl("\};")
+		self.header.add_decl("extern const struct vts_table vts_table_{mclass.c_name};")
 
 		var v = new_visitor
-		v.add_decl("const struct vts_table_{mclass.c_name} vts_table_{mclass.c_name} = \{")
+		v.add_decl("const struct vts_table vts_table_{mclass.c_name} = \{")
 		if self.vt_layout isa PHLayout[MClass, MVirtualTypeProp] then
 			#TODO redo this when PHPropertyLayoutBuilder will be implemented
 			#v.add_decl("{vt_masks[mclass]},")
+		else
+			v.add_decl("0, /* dummy */")
 		end
 		v.add_decl("\{")
 
@@ -354,7 +331,7 @@ class SeparateErasureCompiler
 					bound = retrieve_vt_bound(mclass.intro.bound_mtype, bound.mtype)
 					is_null = 1
 				end
-				v.add_decl("\{{is_null}, (struct class*)&class_{bound.as(MClassType).mclass.c_name}\}, /* {vt} */")
+				v.add_decl("\{{is_null}, &class_{bound.as(MClassType).mclass.c_name}\}, /* {vt} */")
 			end
 		end
 		v.add_decl("\},")
