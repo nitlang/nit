@@ -121,8 +121,12 @@ class NitIndex
 		for mmodule in mmodules do
 			var nmodule = mbuilder.mmodule2nmodule[mmodule]
 			pager.add("# module {mmodule.namespace}\n".bold)
-			pager.add("import {mmodule.in_importation.direct_greaters.join(", ")}")
-			#TODO add kmown clients
+			if not mmodule.in_importation.direct_greaters.is_empty then
+				pager.add("import ".bold + "{mmodule.in_importation.direct_greaters.join(", ")}\n")
+			end
+			if not mmodule.in_importation.direct_smallers.is_empty then
+				pager.add("known clients: ".bold + "{mmodule.in_importation.direct_smallers.join(", ")}\n")
+			end
 			pager.add_rule
 			pager.addn(nmodule.comment.green)
 			pager.add_rule
@@ -168,8 +172,7 @@ class NitIndex
 			var nclass = mbuilder.mclassdef2nclassdef[mclass.intro].as(AStdClassdef)
 
 			pager.add("# {mclass.namespace}\n".bold)
-			pager.add("{mclass.short_doc} ")
-			#TODO add kmown subclasses
+			pager.add("{mclass.short_doc}")
 			pager.add_rule
 			pager.addn(nclass.comment.green)
 			pager.add_rule
@@ -280,7 +283,9 @@ redef class MClass
 		if visibility.to_s == "public" then ret = "{ret}{to_s.green}"
 		if visibility.to_s == "private" then ret = "{ret}{to_s.red}"
 		if visibility.to_s == "protected" then ret = "{ret}{to_s.yellow}"
-		ret = "{ret} super {parents.join(", ")}"
+		if not parents.is_empty then
+			ret = "{ret} super {parents.join(", ")}"
+		end
 		return ret
 	end
 
