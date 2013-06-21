@@ -86,18 +86,17 @@ class NitIndex
 		if entry.is_empty then exit(0)
 
 		var flag = false
-		for n in mbuilder.nmodules do
-			var m = n.mmodule
+		for m in model.mmodules do
 			if m.name == entry then
 				flag = true
-				module_fulldoc(n)
+				module_fulldoc(m)
 			end
 		end
 		for c in model.mclasses do
 			if c.name == entry then
 				if not mbuilder.mclassdef2nclassdef[c.intro] isa AStdClassdef then continue
 				flag = true
-				doc_class(c)
+				class_fulldoc(c)
 			end
 		end
 		var matches = new List[MProperty]
@@ -113,8 +112,8 @@ class NitIndex
 		if arguments.length == 1 then prompt
 	end
 
-	private fun module_fulldoc(nmodule: AModule) do
-		var mmodule = nmodule.mmodule
+	private fun module_fulldoc(mmodule: MModule) do
+		var nmodule = mbuilder.mmodule2nmodule[mmodule]
 		var pager = new Pager
 		pager.add("# module {mmodule.name}\n".bold)
 		pager.add("import {mmodule.in_importation.direct_greaters.join(", ")}")
@@ -151,7 +150,7 @@ class NitIndex
 		pager.render
 	end
 
-	fun doc_class(mclass: MClass) do
+	private fun class_fulldoc(mclass: MClass) do
 		var nclass = mbuilder.mclassdef2nclassdef[mclass.intro].as(AStdClassdef)
 		var pager = new Pager
 		pager.add("# {mclass.intro_mmodule.public_owner.name}::{mclass.name}\n".bold)
