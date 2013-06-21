@@ -34,6 +34,7 @@ redef class MModule
 	fun imported_mclasses: Set[MClass] do
 		var mclasses = new HashSet[MClass]
 		for m in in_importation.greaters do
+			if m == self then continue
 			for c in m.mclassdefs do mclasses.add(c.mclass)
 		end
 		return mclasses

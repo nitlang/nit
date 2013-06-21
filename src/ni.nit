@@ -134,11 +134,11 @@ class NitIndex
 			var cats = new HashMap[String, Collection[MClass]]
 			cats["introduced classes"] = mmodule.intro_mclasses
 			cats["refined classes"] = mmodule.redef_mclasses
-			cats["inherited classes"] = mmodule.imported_mclasses
+			cats["imported classes"] = mmodule.imported_mclasses
 
 			for cat, list in cats do
 				if not list.is_empty then
-					pager.add("# {cat}".bold)
+					pager.add("\n# {cat}".bold)
 					for mclass in list do
 						var nclass = mbuilder.mclassdef2nclassdef[mclass.intro].as(AStdClassdef)
 						pager.add("")
@@ -150,7 +150,7 @@ class NitIndex
 						else
 							pager.add("\t{mclass.short_doc}")
 						end
-						if not mclass.intro_mmodule == mmodule then
+						if cat != "introduced classes" then
 							pager.add("\t\t" + "introduced in {mmodule.full_name}::{mclass}".gray)
 						end
 						for mclassdef in mclass.mclassdefs do
