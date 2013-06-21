@@ -37,10 +37,9 @@ redef class ModelBuilder
 
 		var compiler = new GlobalCompiler(mainmodule, self, runtime_type_analysis)
 		compiler.compile_header
-		var v = compiler.header
 
 		for t in runtime_type_analysis.live_types do
-			compiler.declare_runtimeclass(v, t)
+			compiler.declare_runtimeclass(t)
 		end
 
 		compiler.compile_class_names
@@ -100,12 +99,13 @@ class GlobalCompiler
 
 	# Compile class names (for the class_name and output_class_name methods)
 	protected fun compile_class_names do
+		var v = new_visitor
 		self.header.add_decl("extern const char const * class_names[];")
-		self.header.add("const char const * class_names[] = \{")
+		v.add("const char const * class_names[] = \{")
 		for t in self.runtime_type_analysis.live_types do
-			self.header.add("\"{t}\", /* {self.classid(t)} */")
+			v.add("\"{t}\", /* {self.classid(t)} */")
 		end
-		self.header.add("\};")
+		v.add("\};")
 	end
 
 	# Return the C symbol associated to a live type runtime
@@ -149,8 +149,9 @@ class GlobalCompiler
 	private var seen: HashSet[AbstractRuntimeFunction] = new HashSet[AbstractRuntimeFunction]
 
 	# Declare C structures and identifiers for a runtime class
-	fun declare_runtimeclass(v: CodeWriter, mtype: MClassType)
+	fun declare_runtimeclass(mtype: MClassType)
 	do
+		var v = self.header
 		assert self.runtime_type_analysis.live_types.has(mtype)
 		v.add_decl("/* runtime class {mtype} */")
 		var idnum = classids.length
