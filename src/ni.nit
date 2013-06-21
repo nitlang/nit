@@ -138,9 +138,10 @@ class NitIndex
 
 			for cat, list in cats do
 				if not list.is_empty then
-					pager.add("# {cat}\n".bold)
+					pager.add("# {cat}".bold)
 					for mclass in list do
 						var nclass = mbuilder.mclassdef2nclassdef[mclass.intro].as(AStdClassdef)
+						pager.add("")
 						if not nclass.short_comment.is_empty then
 							pager.add("\t# {nclass.short_comment}")
 						end
@@ -157,7 +158,6 @@ class NitIndex
 								pager.add("\t\t" + "refined in {mclassdef.namespace}".gray)
 							end
 						end
-						pager.add("")
 					end
 				end
 			end
@@ -177,17 +177,17 @@ class NitIndex
 			pager.addn(nclass.comment.green)
 			pager.add_rule
 			if not mclass.parameter_types.is_empty then
-				pager.add("# formal types\n".bold)
+				pager.add("# formal types".bold)
 				for ft, bound in mclass.parameter_types do
-					pager.add("\t{ft.to_s.green}: {bound}")
 					pager.add("")
+					pager.add("\t{ft.to_s.green}: {bound}")
 				end
 			end
 			if not mclass.virtual_types.is_empty then
-				pager.add("# virtual types\n".bold)
+				pager.add("# virtual types".bold)
 				for vt in mclass.virtual_types do
-					vt_fulldoc(pager, vt)
 					pager.add("")
+					vt_fulldoc(pager, vt)
 				end
 			end
 			pager.add_rule
@@ -200,10 +200,10 @@ class NitIndex
 
 			for cat, list in cats do
 				if not list.is_empty then
-					pager.add("# {cat}\n".bold)
+					pager.add("\n# {cat}".bold)
 					for mprop in list do
-						method_fulldoc(pager, mprop)
 						pager.add("")
+						method_fulldoc(pager, mprop)
 					end
 				end
 			end
