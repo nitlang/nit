@@ -117,150 +117,147 @@ class NitIndex
 	private fun module_fulldoc(nmodule: AModule) do
 		var mmodule = nmodule.mmodule
 		var pager = new Pager
-		pager.add("# module {mmodule.name}".bold)
-		pager.add("")
+		pager.add("# module {mmodule.name}\n".bold)
 		pager.add("import {mmodule.in_importation.direct_greaters.join(", ")}")
 		pager.add_rule
-		pager.addn(mmodule.comment(nmodule).green)
+		pager.addn(nmodule.comment.green)
 		pager.add_rule
-		if not mmodule.intro_mclasses.is_empty then
-			pager.add("# introduced classes\n".bold)
-			for mclass in mmodule.intro_mclasses do
-				mclass_shortdoc(mclass, pager)
-				pager.add("")
+
+		var cats = new HashMap[String, Collection[MClass]]
+		cats["introduced classes"] = mmodule.intro_mclasses
+		cats["refined classes"] = mmodule.redef_mclasses
+		cats["inherited classes"] = mmodule.inherited_mclasses
+
+		for cat, list in cats do
+			if not list.is_empty then
+				pager.add("# {cat}\n".bold)
+				for mclass in list do
+					var nclass = mbuilder.mclassdef2nclassdef[mclass.intro].as(AStdClassdef)
+					if not nclass.short_comment.is_empty then
+						pager.add("\t# {nclass.short_comment}")
+					end
+					if cat == "refined classes" then
+						pager.add("\tredef {mclass.short_doc}")
+					else
+						pager.add("\t{mclass.short_doc}")
+					end
+					if not mclass.intro_mmodule == mmodule then
+						pager.add("\t\tintroduced in {mmodule.full_name}::{mclass}".gray)
+					end
+					pager.add("")
+				end
 			end
 		end
-		if not mmodule.redef_mclasses.is_empty then
-			pager.add("# refined classes\n".bold)
-			for mclass in mmodule.redef_mclasses do
-				mclass_shortdoc(mclass, pager)
-				pager.add("")
-			end
-		end
 		pager.add_rule
-		#TODO get mclass from nested modules
 		pager.render
 	end
 
 	fun doc_class(mclass: MClass) do
 		var nclass = mbuilder.mclassdef2nclassdef[mclass.intro].as(AStdClassdef)
 		var pager = new Pager
-		pager.add("# {mclass.intro_mmodule.public_owner.name}::{mclass.name}".bold)
-		pager.add("")
-		# full signature
-		pager.addn("{mclass.visibility.to_s} ")
-		if mclass.is_abstract then pager.addn("abstract ")
-		if mclass.is_interface then pager.addn("interface ")
-		if mclass.is_enum then pager.addn("enum ")
-		if mclass.is_class then pager.addn("class ")
-		pager.addn("{mclass.ni_name} ")
-		pager.add("super {mclass.in_hierarchy(mainmodule).direct_greaters.join(", ")}")
+		pager.add("# {mclass.intro_mmodule.public_owner.name}::{mclass.name}\n".bold)
+		pager.add("{mclass.short_doc} ")
 		pager.add_rule
-		# comment
-		pager.addn(mclass.comment(nclass).green)
+		pager.addn(nclass.comment.green)
 		pager.add_rule
-		# formal and virtual types
 		#TODO VT
 		pager.add_rule
-		# properties
-		if not mclass.constructors.is_empty then
-			pager.add("# constructors\n".bold)
-			display_methods(pager, mclass.constructors)
-		end
-		if not mclass.intro_methods.is_empty then
-			pager.add("# methods\n".bold)
-			display_methods(pager, mclass.intro_methods)
-		end
-		if not mclass.inherited_methods.is_empty then
-			pager.add("# inherited methods\n".bold)
-			display_methods(pager, mclass.inherited_methods)
-		end
-		pager.add_rule
-		pager.render
-		#TODO check inheritance methods
-	end
 
-	private fun mclass_shortdoc(mclass: MClass, pager: Pager) do
-		var nclass = mbuilder.mclassdef2nclassdef[mclass.intro].as(AStdClassdef)
+		var cats = new HashMap[String, Collection[MMethod]]
+		cats["constructors"] = mclass.constructors
+		cats["introduced methods"] = mclass.intro_methods
+		cats["refined methods"] = mclass.redef_methods
+		cats["inherited methods"] = mclass.inherited_methods
 
-		if not mclass.short_comment(nclass).is_empty then
-			pager.add("\t# {mclass.short_comment(nclass)}")
-		end
-		pager.addn("\t")
-		if mclass.is_abstract then
-			pager.addn("abstract ")
-		end
-		if mclass.is_interface then
-			pager.addn("interface ")
-		else if mclass.is_enum then
-			pager.addn("enum ")
-		else
-			pager.addn("class ")
-		end
-		if mclass.visibility.to_s == "public" then
-			pager.addn("{mclass.ni_name} ".green)
-		else if mclass.visibility.to_s == "private" then
-			pager.addn("{mclass.ni_name} ".red)
-		else
-			pager.addn("{mclass.ni_name} ".yellow)
-		end
-		pager.addn("super {mclass.in_hierarchy(mainmodule).direct_greaters.join(", ")}\n")
-	end
-
-	private fun display_methods(pager: Pager, methods: Set[MMethod]) do
-		for mmethod in methods do
-			#TODO verifier cast
-			var nmethod = mbuilder.mpropdef2npropdef[mmethod.intro].as(AMethPropdef)
-			if not mmethod.short_comment(nmethod).is_empty then
-				pager.add("\t# {mmethod.short_comment(nmethod)}")
+		for cat, list in cats do
+			if not list.is_empty then
+				pager.add("# {cat}\n".bold)
+				for mmethod in list do
+					#TODO verifier cast
+					var nmethod = mbuilder.mpropdef2npropdef[mmethod.intro].as(AMethPropdef)
+					if not nmethod.short_comment.is_empty then
+						pager.add("\t# {nmethod.short_comment}")
+					end
+					if cat == "refined methods" then
+						pager.add("\tredef {nmethod}")
+					else
+						pager.add("\t{nmethod}")
+					end
+					if not mmethod.intro_mclassdef == mclass.intro then
+						pager.add("\t\tintroduced in {mmethod.intro_mclassdef.namespace}::{mmethod}".gray)
+					end
+					pager.add("")
+				end
 			end
-			#TODO replace Ft by names
-			#TODO fun ou init
-			pager.addn("\tfun ")
-			if mmethod.visibility.to_s == "public" then pager.addn(mmethod.name.green)
-			if mmethod.visibility.to_s == "private" then pager.addn(mmethod.name.red)
-			if mmethod.visibility.to_s == "protected" then pager.addn(mmethod.name.yellow)
-
-			pager.addn("{mmethod.intro.msignature.to_s} ")
-			#pager.addn("{nmethod.collect_text} ")
-			if nmethod isa ADeferredMethPropdef then pager.addn("is abstract ")
-			if nmethod isa AInternMethPropdef then pager.addn("is intern ")
-			if nmethod isa AExternMethPropdef then pager.addn("is extern ")
-			#TODO si non local ajouter namespace
-			pager.add("\n")
 		end
+		pager.render
 	end
 end
+
+# Model traversing
 
 redef class MModule
 	# Get the list of mclasses refined in self
 	private fun redef_mclasses: Set[MClass] do
 		var mclasses = new HashSet[MClass]
 		for c in mclassdefs do
-			if not c.is_intro and not mclasses.has(c.mclass) then
-				mclasses.add(c.mclass)
-			end
+			if not c.is_intro then mclasses.add(c.mclass)
 		end
 		return mclasses
 	end
 
-	private fun comment(nmodule: AModule): String do
-		var ret = ""
-		for t in nmodule.n_moduledecl.n_doc.n_comment do
-			ret += "{t.text.replace("# ", "")}"
+	private fun inherited_mclasses: Set[MClass] do
+		var mclasses = new HashSet[MClass]
+		for m in in_importation.greaters do
+			for c in m.mclassdefs do mclasses.add(c.mclass)
 		end
-		return ret
+		return mclasses
 	end
 end
 
 redef class MClass
 
-	private fun ni_name: String do
+	redef fun to_s: String do
 		if arity > 0 then
 			return "{name}[{intro.parameter_names.join(", ")}]"
 		else
 			return name
 		end
+	end
+
+	private fun short_doc: String do
+		var ret = ""
+		if is_interface then ret = "interface {ret}"
+		if is_enum then ret = "enum {ret}"
+		if is_class then ret = "class {ret}"
+		if is_abstract then ret = "abstract {ret}"
+		if visibility.to_s == "public" then ret = "{ret}{to_s.green}"
+		if visibility.to_s == "private" then ret = "{ret}{to_s.red}"
+		if visibility.to_s == "protected" then ret = "{ret}{to_s.yellow}"
+		ret = "{ret} super {supers.join(", ")}"
+		return ret
+	end
+
+	private fun supers: Set[MClass] do
+		var ret = new HashSet[MClass]
+		for mclassdef in mclassdefs do
+			for mclasstype in mclassdef.supertypes do
+				ret.add(mclasstype.mclass)
+			end
+		end
+		return ret
+	end
+
+	# Get ancestors of the class (all super classes)
+	fun ancestors: Set[MClass] do
+		var lst = new HashSet[MClass]
+		for mclassdef in self.mclassdefs do
+			for super_mclassdef in mclassdef.in_hierarchy.greaters do
+				if super_mclassdef == mclassdef then continue  # skip self
+				lst.add(super_mclassdef.mclass)
+			end
+		end
+		return lst
 	end
 
 	# Get the list of class constructors
@@ -289,8 +286,8 @@ redef class MClass
 		return res
 	end
 
-	# Get the list of inherited methods
-	private fun inherited_methods: Set[MMethod] do
+	# Get the list of locally refined methods
+	private fun redef_methods: Set[MMethod] do
 		var res = new HashSet[MMethod]
 		for mclassdef in mclassdefs do
 			for mpropdef in mclassdef.mpropdefs do
@@ -302,27 +299,15 @@ redef class MClass
 		return res
 	end
 
-	private fun comment(nclass: AStdClassdef): String do
-		var ret = ""
-		if nclass.n_doc != null then
-			for t in nclass.n_doc.n_comment do
-				var txt = t.text.replace("# ", "")
-				txt = txt.replace("#", "")
-				ret += "{txt}"
+	# Get the list of locally refined methods
+	private fun inherited_methods: Set[MMethod] do
+		var res = new HashSet[MMethod]
+		for s in ancestors do
+			for m in s.intro_methods do
+				if not self.intro_methods.has(m) and not self.redef_methods.has(m) then res.add(m)
 			end
 		end
-		return ret
-	end
-
-	private fun short_comment(nclass: AStdClassdef): String do
-		var ret = ""
-		if nclass.n_doc != null then
-			var txt = nclass.n_doc.n_comment.first.text
-			txt = txt.replace("# ", "")
-			txt = txt.replace("\n", "")
-			ret += txt
-		end
-		return ret
+		return res
 	end
 
 	private fun is_class: Bool do
@@ -342,15 +327,106 @@ redef class MClass
 	end
 end
 
-redef class MMethod
-	private fun short_comment(nmethod: AMethPropdef): String do
+redef class MClassDef
+	private fun namespace: String do
+		return "{mmodule.full_name}::{mclass.name}"
+	end
+end
+
+# ANode printing
+
+redef class AModule
+	private fun comment: String do
 		var ret = ""
-		if nmethod.n_doc != null then
-			var txt = nmethod.n_doc.n_comment.first.text
+		for t in n_moduledecl.n_doc.n_comment do
+			ret += "{t.text.replace("# ", "")}"
+		end
+		return ret
+	end
+end
+
+redef class AStdClassdef
+	private fun comment: String do
+		var ret = ""
+		if n_doc != null then
+			for t in n_doc.n_comment do
+				var txt = t.text.replace("# ", "")
+				txt = txt.replace("#", "")
+				ret += "{txt}"
+			end
+		end
+		return ret
+	end
+
+	private fun short_comment: String do
+		var ret = ""
+		if n_doc != null then
+			var txt = n_doc.n_comment.first.text
 			txt = txt.replace("# ", "")
 			txt = txt.replace("\n", "")
 			ret += txt
 		end
+		return ret
+	end
+end
+
+redef class AMethPropdef
+	private fun short_comment: String do
+		var ret = ""
+		if n_doc != null then
+			var txt = n_doc.n_comment.first.text
+			txt = txt.replace("# ", "")
+			txt = txt.replace("\n", "")
+			ret += txt
+		end
+		return ret
+	end
+
+	redef fun to_s do
+		var ret = ""
+		if not mpropdef.mproperty.is_init then
+			ret = "fun "
+		end
+		if mpropdef.mproperty.visibility.to_s == "public" then ret = "{ret}{mpropdef.mproperty.name.green}"
+		if mpropdef.mproperty.visibility.to_s == "private" then ret = "{ret}{mpropdef.mproperty.name.red}"
+		if mpropdef.mproperty.visibility.to_s == "protected" then ret = "{ret}{mpropdef.mproperty.name.yellow}"
+		if n_signature != null then ret = "{ret}{n_signature.to_s}"
+		if n_kwredef != null then ret = "redef {ret}"
+		if self isa ADeferredMethPropdef then ret = "{ret} is abstract"
+		if self isa AInternMethPropdef then ret = "{ret} is intern"
+		if self isa AExternMethPropdef then ret = "{ret} is extern"
+		return ret
+	end
+end
+
+redef class ASignature
+	redef fun to_s do
+		#TODO closures
+		var ret = ""
+		if not n_params.is_empty then
+			ret = "{ret}({n_params.join(", ")})"
+		end
+		if n_type != null then ret += ": {n_type.to_s}"
+		return ret
+	end
+end
+
+redef class AParam
+	redef fun to_s do
+		var ret = "{n_id.text}"
+		if n_type != null then
+			ret = "{ret}: {n_type.to_s}"
+			if n_dotdotdot != null then ret = "{ret}..."
+		end
+		return ret
+	end
+end
+
+redef class AType
+	redef fun to_s do
+		var ret = n_id.text
+		if n_kwnullable != null then ret = "nullable {ret}"
+		if not n_types.is_empty then ret = "{ret}[{n_types.join(", ")}]"
 		return ret
 	end
 end
@@ -368,6 +444,7 @@ redef class String
 	private fun green: String do return add_escape_char("{esc}[1;32m")
 	private fun blue: String do return add_escape_char("{esc}[1;34m")
 	private fun cyan: String do return add_escape_char("{esc}[1;36m")
+	private fun gray: String do return add_escape_char("{esc}[30;1m")
 	private fun bold: String do return add_escape_char("{esc}[1m")
 	private fun underline: String do return add_escape_char("{esc}[4m")
 
@@ -404,8 +481,7 @@ var ni = new NitIndex(toolcontext)
 ni.start
 
 # TODO seek methods
-# TODO bornes sur les signatures génériques
 # TODO lister les methods qui retournent un certain type
 # TODO lister les methods qui utilisent un certain type
 # TODO lister les sous-types connus d'une type
-# TODO lister les prop adaptés à un type générique
+# TODO sorter par ordre alphabétique
