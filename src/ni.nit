@@ -120,7 +120,7 @@ class NitIndex
 		var pager = new Pager
 		for mmodule in mmodules do
 			var nmodule = mbuilder.mmodule2nmodule[mmodule]
-			pager.add("# module {mmodule.name}\n".bold)
+			pager.add("# module {mmodule.namespace}\n".bold)
 			pager.add("import {mmodule.in_importation.direct_greaters.join(", ")}")
 			#TODO add kmown clients
 			pager.add_rule
@@ -167,7 +167,7 @@ class NitIndex
 		for mclass in mclasses do
 			var nclass = mbuilder.mclassdef2nclassdef[mclass.intro].as(AStdClassdef)
 
-			pager.add("# {mclass.intro_mmodule.public_owner.name}::{mclass.name}\n".bold)
+			pager.add("# {mclass.namespace}\n".bold)
 			pager.add("{mclass.short_doc} ")
 			#TODO add kmown subclasses
 			pager.add_rule
@@ -255,6 +255,12 @@ end
 
 # Printing facilities
 
+redef class MModule
+	private fun namespace: String do
+		return full_name
+	end
+end
+
 redef class MClass
 
 	redef fun to_s: String do
@@ -276,6 +282,10 @@ redef class MClass
 		if visibility.to_s == "protected" then ret = "{ret}{to_s.yellow}"
 		ret = "{ret} super {parents.join(", ")}"
 		return ret
+	end
+
+	private fun namespace: String do
+		return "{intro_mmodule.public_owner.name}::{name}"
 	end
 end
 
@@ -446,4 +456,4 @@ ni.start
 # TODO seek subclasses and super types <:<type> >:<type>
 # TODO sort by alphabetic order
 # TODO seek with regexp
-# TODO standardize namespaces
+# TODO standardize namespaces with private option
