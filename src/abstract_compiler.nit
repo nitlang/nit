@@ -89,8 +89,21 @@ redef class ModelBuilder
 
 		for f in compiler.files do
 			var i = 0
-			var file: nullable OFStream = null
+			var hfile: nullable OFStream = null
 			var count = 0
+			var cfilename = ".nit_compile/{f.name}.0.h"
+			hfile = new OFStream.open(cfilename)
+			hfile.write "#include \"{hfilename}\"\n"
+			for key in f.required_declarations do
+				if not compiler.provided_declarations.has_key(key) then
+					print "No provided declaration for {key}"
+					abort
+				end
+				hfile.write compiler.provided_declarations[key]
+				hfile.write "\n"
+			end
+			hfile.close
+			var file: nullable OFStream = null
 			for vis in f.writers do
 				if vis == compiler.header then continue
 				var total_lines = vis.lines.length + vis.decl_lines.length
@@ -99,11 +112,11 @@ redef class ModelBuilder
 				if file == null or count > 10000  then
 					i += 1
 					if file != null then file.close
-					var cfilename = ".nit_compile/{f.name}.{i}.c"
+					cfilename = ".nit_compile/{f.name}.{i}.c"
 					self.toolcontext.info("new C source files to compile: {cfilename}", 3)
 					cfiles.add(cfilename)
 					file = new OFStream.open(cfilename)
-					file.write "#include \"{hfilename}\"\n"
+					file.write "#include \"{f.name}.0.h\"\n"
 					count = total_lines
 				end
 				for l in vis.decl_lines do
@@ -213,9 +226,16 @@ abstract class AbstractCompiler
 	fun new_visitor: VISITOR is abstract
 
 	# Where global declaration are stored (the main .h)
-	#
-	# FIXME: should not have a global .h since it does not help recompilations
 	var header: CodeWriter writable
+
+	# Provide a declaration that can be requested (before or latter) by a visitor
+	fun provide_declaration(key: String, s: String)
+	do
+		assert not self.provided_declarations.has_key(key)
+		self.provided_declarations[key] = s
+	end
+
+	private var provided_declarations = new HashMap[String, String]
 
 	# Compile C headers
 	# This method call compile_header_strucs method that has to be refined
@@ -418,6 +438,7 @@ end
 class CodeFile
 	var name: String
 	var writers = new Array[CodeWriter]
+	var required_declarations = new HashSet[String]
 end
 
 # Where to store generated lines
@@ -758,6 +779,12 @@ abstract class AbstractCompilerVisitor
 	# Add a line in the
 	# (used for local or global declaration)
 	fun add_decl(s: String) do self.writer.decl_lines.add(s)
+
+	# Request the presence of a global declaration
+	fun require_declaration(key: String)
+	do
+		self.writer.file.required_declarations.add(key)
+	end
 
 	# look for a needed .h and .c file for a given .nit source-file
 	# FIXME: bad API, parameter should be a MModule, not its source-file
