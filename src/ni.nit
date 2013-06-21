@@ -139,7 +139,12 @@ class NitIndex
 			for cat, list in cats do
 				if not list.is_empty then
 					pager.add("\n# {cat}".bold)
-					for mclass in list do
+					#sort list
+					var sorted = new Array[MClass]
+					sorted.add_all(list)
+					var sorter = new ComparableSorter[MClass]
+					sorter.sort(sorted)
+					for mclass in sorted do
 						var nclass = mbuilder.mclassdef2nclassdef[mclass.intro].as(AStdClassdef)
 						pager.add("")
 						if not nclass.short_comment.is_empty then
@@ -200,8 +205,13 @@ class NitIndex
 
 			for cat, list in cats do
 				if not list.is_empty then
+					#sort list
+					var sorted = new Array[MMethod]
+					sorted.add_all(list)
+					var sorter = new ComparableSorter[MMethod]
+					sorter.sort(sorted)
 					pager.add("\n# {cat}".bold)
-					for mprop in list do
+					for mprop in sorted do
 						pager.add("")
 						method_fulldoc(pager, mprop)
 					end
@@ -215,15 +225,23 @@ class NitIndex
 	private fun props_fulldoc(raw_mprops: List[MProperty]) do
 		var pager = new Pager
 		# group by module
-		var cats = new HashMap[MModule, List[MProperty]]
+		var cats = new HashMap[MModule, Array[MProperty]]
 		for mprop in raw_mprops do
 			var mmodule = mprop.intro_mclassdef.mmodule
-			if not cats.has_key(mmodule) then cats[mmodule] = new List[MProperty]
+			if not cats.has_key(mmodule) then cats[mmodule] = new Array[MProperty]
 			cats[mmodule].add(mprop)
 		end
+		#sort groups
+		var sorter = new ComparableSorter[MModule]
+		var sorted = new Array[MModule]
+		sorted.add_all(cats.keys)
+		sorter.sort(sorted)
 		# display
-		for mmodule, mprops in cats do
+		for mmodule in sorted do
+			var mprops = cats[mmodule]
 			pager.add("# {mmodule.namespace}".bold)
+			var sorterp = new ComparableSorter[MProperty]
+			sorterp.sort(mprops)
 			for mprop in mprops do
 				if mprop isa MMethod and mbuilder.mpropdef2npropdef.has_key(mprop.intro) then
 					pager.add("")
@@ -273,12 +291,19 @@ end
 # Printing facilities
 
 redef class MModule
+	super Comparable
+	redef type OTHER: MModule
+	redef fun <(other: OTHER): Bool do return self.name < other.name
+
 	private fun namespace: String do
 		return full_name
 	end
 end
 
 redef class MClass
+	super Comparable
+	redef type OTHER: MClass
+	redef fun <(other: OTHER): Bool do return self.name < other.name
 
 	redef fun to_s: String do
 		if arity > 0 then
@@ -312,6 +337,12 @@ redef class MClassDef
 	private fun namespace: String do
 		return "{mmodule.full_name}::{mclass.name}"
 	end
+end
+
+redef class MProperty
+	super Comparable
+	redef type OTHER: MProperty
+	redef fun <(other: OTHER): Bool do return self.name < other.name
 end
 
 redef class MVirtualTypeProp
@@ -516,6 +547,5 @@ ni.start
 # TODO seek methods by param type: (<type>)
 # TODO seek subclasses and super classes <.<class> >.<class>
 # TODO seek subclasses and super types <:<type> >:<type>
-# TODO sort by alphabetic order
 # TODO seek with regexp
 # TODO standardize namespaces with private option
