@@ -42,11 +42,13 @@ redef class ModelBuilder
 
 		# compile class structures
 		compiler.new_file("{mainmodule.name}.tables")
+		compiler.do_property_coloring
 		for m in mainmodule.in_importation.greaters do
 			for mclass in m.intro_mclasses do
 				compiler.compile_class_to_c(mclass)
 			end
 		end
+		compiler.compile_color_consts(compiler.vt_layout.pos)
 
 		# The main function of the C
 		compiler.new_file("{mainmodule.name}.main")
@@ -92,7 +94,6 @@ class SeparateErasureCompiler
 		var vt_coloring = new MVirtualTypePropColorer(mainmodule)
 		var vt_layout = vt_coloring.build_layout(mclasses)
 		self.vt_tables = build_vt_tables(mclasses, vt_layout)
-		self.compile_color_consts(vt_layout.pos)
 		self.vt_layout = vt_layout
 	end
 

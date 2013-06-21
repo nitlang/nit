@@ -65,6 +65,8 @@ redef class ModelBuilder
 		compiler.compile_header
 
 		# compile class structures
+		compiler.new_file("{mainmodule.name}.classes")
+		compiler.do_property_coloring
 		for m in mainmodule.in_importation.greaters do
 			for mclass in m.intro_mclasses do
 				compiler.compile_class_to_c(mclass)
@@ -82,7 +84,7 @@ redef class ModelBuilder
 		end
 
 		# compile live & cast type structures
-		compiler.new_file("{mainmodule.name}.tables")
+		compiler.new_file("{mainmodule.name}.types")
 		var mtypes = compiler.do_type_coloring
 		for t in mtypes do
 			compiler.compile_type_to_c(t)
@@ -113,7 +115,6 @@ class SeparateCompiler
 	init(mainmodule: MModule, mmbuilder: ModelBuilder, runtime_type_analysis: RapidTypeAnalysis) do
 		super(mainmodule, mmbuilder)
 		self.runtime_type_analysis = runtime_type_analysis
-		self.do_property_coloring
 		self.compile_box_kinds
 	end
 
@@ -183,6 +184,7 @@ class SeparateCompiler
 	end
 
 	fun compile_color_consts(colors: Map[Object, Int]) do
+		var v = new_visitor
 		for m, c in colors do
 			if color_consts_done.has(m) then continue
 			if m isa MProperty then
@@ -190,14 +192,14 @@ class SeparateCompiler
 					self.header.add_decl("#define {m.const_color} {c}")
 				else
 					self.header.add_decl("extern const int {m.const_color};")
-					self.header.add("const int {m.const_color} = {c};")
+					v.add("const int {m.const_color} = {c};")
 				end
 			else if m isa MType then
 				if modelbuilder.toolcontext.opt_inline_coloring_numbers.value then
 					self.header.add_decl("#define {m.const_color} {c}")
 				else
 					self.header.add_decl("extern const int {m.const_color};")
-					self.header.add("const int {m.const_color} = {c};")
+					v.add("const int {m.const_color} = {c};")
 				end
 			end
 			color_consts_done.add(m)
