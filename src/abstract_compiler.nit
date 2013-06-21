@@ -72,9 +72,14 @@ redef class ModelBuilder
 			outname = "{mainmodule.name}.bin"
 		end
 
-		var hfilename = ".nit_compile/{mainmodule.name}.1.h"
-		var h = new OFStream.open(hfilename)
+		var hfilename = compiler.header.file.name + ".h"
+		var hfilepath = ".nit_compile/{hfilename}"
+		var h = new OFStream.open(hfilepath)
 		for l in compiler.header.decl_lines do
+			h.write l
+			h.write "\n"
+		end
+		for l in compiler.header.lines do
 			h.write l
 			h.write "\n"
 		end
@@ -87,6 +92,7 @@ redef class ModelBuilder
 			var file: nullable OFStream = null
 			var count = 0
 			for vis in f.writers do
+				if vis == compiler.header then continue
 				var total_lines = vis.lines.length + vis.decl_lines.length
 				if total_lines == 0 then continue
 				count += total_lines
@@ -97,14 +103,12 @@ redef class ModelBuilder
 					self.toolcontext.info("new C source files to compile: {cfilename}", 3)
 					cfiles.add(cfilename)
 					file = new OFStream.open(cfilename)
-					file.write "#include \"{mainmodule.name}.1.h\"\n"
+					file.write "#include \"{hfilename}\"\n"
 					count = total_lines
 				end
-				if vis != compiler.header then
-					for l in vis.decl_lines do
-						file.write l
-						file.write "\n"
-					end
+				for l in vis.decl_lines do
+					file.write l
+					file.write "\n"
 				end
 				for l in vis.lines do
 					file.write l
