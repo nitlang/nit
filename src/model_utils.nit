@@ -115,6 +115,37 @@ redef class MClass
 		return res
 	end
 
+	# Get the list of all virtual types available in 'self'.
+	fun virtual_types: Set[MVirtualTypeProp] do
+		var res = new HashSet[MVirtualTypeProp]
+		for mclassdef in mclassdefs do
+			for mpropdef in mclassdef.mpropdefs do
+				if mpropdef isa MVirtualTypeDef then
+					res.add(mpropdef.mproperty)
+				end
+			end
+		end
+		for ancestor in ancestors do
+			for mclassdef in ancestor.mclassdefs do
+				for mpropdef in mclassdef.mpropdefs do
+					if mpropdef isa MVirtualTypeDef then
+						res.add(mpropdef.mproperty)
+					end
+				end
+			end
+		end
+		return res
+	end
+
+	# Get the list of all parameter types in 'self'.
+	fun parameter_types: Map[String, MType] do
+		var res = new HashMap[String, MType]
+		for i in [0..intro.parameter_names.length[ do
+			res[intro.parameter_names[i]] = intro.bound_mtype.arguments[i]
+		end
+		return res
+	end
+
 	fun is_class: Bool do
 		return self.kind == concrete_kind or self.kind == abstract_kind
 	end

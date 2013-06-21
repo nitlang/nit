@@ -159,7 +159,25 @@ class NitIndex
 		pager.add_rule
 		pager.addn(nclass.comment.green)
 		pager.add_rule
-		#TODO VT
+		if not mclass.parameter_types.is_empty then
+			pager.add("# formal types\n".bold)
+			for ft, bound in mclass.parameter_types do
+				pager.add("\t{ft.to_s.green}: {bound}")
+				pager.add("")
+			end
+		end
+		if not mclass.virtual_types.is_empty then
+			pager.add("# virtual types\n".bold)
+			for vt in mclass.virtual_types do
+				if vt.visibility.to_s == "public" then pager.add("\t{vt.to_s.green}: {vt.intro.bound.to_s}")
+				if vt.visibility.to_s == "private" then pager.add("\t{vt.to_s.red}: {vt.intro.bound.to_s}")
+				if vt.visibility.to_s == "protected" then pager.add("\t{vt.to_s.yellow}: {vt.intro.bound.to_s}")
+				if vt.intro_mclassdef != mclass.intro then
+					pager.add("\t\tintroduced in {vt.intro_mclassdef.namespace}::{vt}".gray)
+				end
+				pager.add("")
+			end
+		end
 		pager.add_rule
 
 		var cats = new HashMap[String, Collection[MMethod]]
