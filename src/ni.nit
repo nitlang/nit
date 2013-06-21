@@ -212,34 +212,48 @@ class NitIndex
 		pager.render
 	end
 
-	private fun props_fulldoc(mprops: List[MProperty]) do
+	private fun props_fulldoc(raw_mprops: List[MProperty]) do
 		var pager = new Pager
-		# TODO group by module
-		for mprop in mprops do
-			if mprop isa MMethod and mbuilder.mpropdef2npropdef.has_key(mprop.intro) then
-				method_fulldoc(pager, mprop)
-				pager.add_rule
-			else if mprop isa MVirtualTypeProp then
-				vt_fulldoc(pager, mprop)
-				pager.add_rule
+		# group by module
+		var cats = new HashMap[MModule, List[MProperty]]
+		for mprop in raw_mprops do
+			var mmodule = mprop.intro_mclassdef.mmodule
+			if not cats.has_key(mmodule) then cats[mmodule] = new List[MProperty]
+			cats[mmodule].add(mprop)
+		end
+		# display
+		for mmodule, mprops in cats do
+			pager.add("# {mmodule.namespace}".bold)
+			for mprop in mprops do
+				if mprop isa MMethod and mbuilder.mpropdef2npropdef.has_key(mprop.intro) then
+					pager.add("")
+					method_fulldoc(pager, mprop)
+				else if mprop isa MVirtualTypeProp then
+					pager.add("")
+					vt_fulldoc(pager, mprop)
+				end
 			end
+			pager.add_rule
 		end
 		pager.render
 	end
 
-	private fun method_fulldoc(pager: Pager, mmethod: MMethod) do
-		if mbuilder.mpropdef2npropdef.has_key(mmethod.intro) then
-			var nmethod = mbuilder.mpropdef2npropdef[mmethod.intro]
-			if nmethod isa AMethPropdef then
-				if not nmethod.short_comment.is_empty then
-					pager.add("\t# {nmethod.short_comment}")
-				end
-				pager.add("\t{nmethod}")
-				pager.add("\t\t" + "introduced in {mmethod.intro_mclassdef.namespace}".gray)
-				for mpropdef in mmethod.mpropdefs do
-					if mpropdef != mmethod.intro then
-						pager.add("\t\t" + "refined in {mpropdef.mclassdef.namespace}".gray)
-					end
+	private fun method_fulldoc(pager: Pager, mprop: MMethod) do
+		if mbuilder.mpropdef2npropdef.has_key(mprop.intro) then
+			var nprop = mbuilder.mpropdef2npropdef[mprop.intro]
+			if not nprop.short_comment.is_empty then
+				pager.add("\t# {nprop.short_comment}")
+			end
+			if nprop isa AAttrPropdef then
+				pager.add("\t{nprop.read_accessor}")
+				pager.add("\t{nprop.write_accessor}")
+			else if nprop isa AMethPropdef then
+				pager.add("\t{nprop}")
+			end
+			pager.add("\t\t" + "introduced in {mprop.intro_mclassdef.namespace}".gray)
+			for mpropdef in mprop.mpropdefs do
+				if mpropdef != mprop.intro then
+					pager.add("\t\t" + "refined in {mpropdef.mclassdef.namespace}".gray)
 				end
 			end
 		end
@@ -345,8 +359,51 @@ redef class AStdClassdef
 	end
 end
 
+redef class APropdef
+	private fun short_comment: String is abstract
+end
+
+redef class AAttrPropdef
+	redef fun short_comment do
+		var ret = ""
+		if n_doc != null then
+			var txt = n_doc.n_comment.first.text
+			txt = txt.replace("# ", "")
+			txt = txt.replace("\n", "")
+			ret += txt
+		end
+		return ret
+	end
+
+	private fun read_accessor: String do
+		var ret = "fun "
+		var name = mreadpropdef.mproperty.name
+		if mpropdef.mproperty.visibility.to_s == "public" then ret = "{ret}{name.green}"
+		if mpropdef.mproperty.visibility.to_s == "private" then ret = "{ret}{name.red}"
+		if mpropdef.mproperty.visibility.to_s == "protected" then ret = "{ret}{name.yellow}"
+		ret = "{ret}: {n_type.to_s}"
+		if n_kwredef != null then ret = "redef {ret}"
+		return ret
+	end
+
+	private fun write_accessor: String do
+		var ret = "fun "
+		var name = "{mreadpropdef.mproperty.name}="
+		if n_readable != null and n_readable.n_visibility != null then
+			if n_readable.n_visibility isa APublicVisibility then ret = "{ret}{name.green}"
+			if n_readable.n_visibility isa APrivateVisibility then ret = "{ret}{name.red}"
+			if n_readable.n_visibility isa AProtectedVisibility then ret = "{ret}{name.yellow}"
+		else
+			ret = "{ret}{name.red}"
+		end
+		ret = "{ret}({mreadpropdef.mproperty.name}: {n_type.to_s})"
+		if n_kwredef != null then ret = "redef {ret}"
+		return ret
+	end
+end
+
 redef class AMethPropdef
-	private fun short_comment: String do
+	redef fun short_comment do
 		var ret = ""
 		if n_doc != null then
 			var txt = n_doc.n_comment.first.text
