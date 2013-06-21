@@ -231,7 +231,9 @@ abstract class AbstractCompiler
 	# Provide a declaration that can be requested (before or latter) by a visitor
 	fun provide_declaration(key: String, s: String)
 	do
-		assert not self.provided_declarations.has_key(key)
+		if self.provided_declarations.has_key(key) then
+			assert self.provided_declarations[key] == s
+		end
 		self.provided_declarations[key] = s
 	end
 
@@ -786,6 +788,14 @@ abstract class AbstractCompilerVisitor
 		self.writer.file.required_declarations.add(key)
 	end
 
+	# Add a declaration in the local-header
+	# The declaration is ensured to be present once
+	fun declare_once(s: String)
+	do
+		self.compiler.provide_declaration(s, s)
+		self.require_declaration(s)
+	end
+
 	# look for a needed .h and .c file for a given .nit source-file
 	# FIXME: bad API, parameter should be a MModule, not its source-file
 	fun add_extern(file: String)
@@ -793,11 +803,11 @@ abstract class AbstractCompilerVisitor
 		file = file.strip_extension(".nit")
 		var tryfile = file + ".nit.h"
 		if tryfile.file_exists then
-			self.compiler.header.add_decl("#include \"{"..".join_path(tryfile)}\"")
+			self.declare_once("#include \"{"..".join_path(tryfile)}\"")
 		end
 		tryfile = file + "_nit.h"
 		if tryfile.file_exists then
-			self.compiler.header.add_decl("#include \"{"..".join_path(tryfile)}\"")
+			self.declare_once("#include \"{"..".join_path(tryfile)}\"")
 		end
 		tryfile = file + ".nit.c"
 		if tryfile.file_exists then
