@@ -183,17 +183,7 @@ class NitIndex
 			if not mclass.virtual_types.is_empty then
 				pager.add("# virtual types\n".bold)
 				for vt in mclass.virtual_types do
-					if vt.visibility.to_s == "public" then pager.add("\t{vt.to_s.green}: {vt.intro.bound.to_s}")
-					if vt.visibility.to_s == "private" then pager.add("\t{vt.to_s.red}: {vt.intro.bound.to_s}")
-					if vt.visibility.to_s == "protected" then pager.add("\t{vt.to_s.yellow}: {vt.intro.bound.to_s}")
-					if vt.intro_mclassdef != mclass.intro then
-						pager.add("\t\t" + "introduced in {vt.intro_mclassdef.namespace}::{vt}".gray)
-					end
-					for mpropdef in vt.mpropdefs do
-						if mpropdef != vt.intro then
-							pager.add("\t\t" + "refined in {mpropdef.mclassdef.namespace}".gray)
-						end
-					end
+					vt_fulldoc(pager, vt)
 					pager.add("")
 				end
 			end
@@ -209,24 +199,7 @@ class NitIndex
 				if not list.is_empty then
 					pager.add("# {cat}\n".bold)
 					for mprop in list do
-						#TODO verifier cast
-						var nmethod = mbuilder.mpropdef2npropdef[mprop.intro].as(AMethPropdef)
-						if not nmethod.short_comment.is_empty then
-							pager.add("\t# {nmethod.short_comment}")
-						end
-						if cat == "refined methods" then
-							pager.add("\tredef {nmethod}")
-						else
-							pager.add("\t{nmethod}")
-						end
-						if not mprop.intro_mclassdef == mclass.intro then
-							pager.add("\t\t" + "introduced in {mprop.intro_mclassdef.namespace}".gray)
-						end
-						for mpropdef in mprop.mpropdefs do
-							if mpropdef != mprop.intro then
-								pager.add("\t\t" + "refined in {mpropdef.mclassdef.namespace}".gray)
-							end
-						end
+						method_fulldoc(pager, mprop)
 						pager.add("")
 					end
 				end
@@ -238,24 +211,45 @@ class NitIndex
 
 	private fun props_fulldoc(mprops: List[MProperty]) do
 		var pager = new Pager
+		# TODO group by module
 		for mprop in mprops do
-			var nprop = mbuilder.mpropdef2npropdef[mprop.intro]
-			if nprop isa AMethPropdef then
-				pager.add("# {mprop.intro_mclassdef.namespace.bold}\n")
-				if not nprop.short_comment.is_empty then
-					pager.add("\t# {nprop.short_comment}")
+			if mprop isa MMethod and mbuilder.mpropdef2npropdef.has_key(mprop.intro) then
+				method_fulldoc(pager, mprop)
+				pager.add_rule
+			else if mprop isa MVirtualTypeProp then
+				vt_fulldoc(pager, mprop)
+				pager.add_rule
+			end
+		end
+		pager.render
+	end
+
+	private fun method_fulldoc(pager: Pager, mmethod: MMethod) do
+		if mbuilder.mpropdef2npropdef.has_key(mmethod.intro) then
+			var nmethod = mbuilder.mpropdef2npropdef[mmethod.intro]
+			if nmethod isa AMethPropdef then
+				if not nmethod.short_comment.is_empty then
+					pager.add("\t# {nmethod.short_comment}")
 				end
-				pager.add("\t{nprop}")
-				pager.add("\t\t" + "introduced in {mprop.intro_mclassdef.namespace}".gray)
-				for mpropdef in mprop.mpropdefs do
-					if mpropdef != mprop.intro then
+				pager.add("\t{nmethod}")
+				pager.add("\t\t" + "introduced in {mmethod.intro_mclassdef.namespace}".gray)
+				for mpropdef in mmethod.mpropdefs do
+					if mpropdef != mmethod.intro then
 						pager.add("\t\t" + "refined in {mpropdef.mclassdef.namespace}".gray)
 					end
 				end
 			end
-			pager.add_rule
 		end
-		pager.render
+	end
+
+	private fun vt_fulldoc(pager: Pager, vt: MVirtualTypeProp) do
+		pager.add("\t{vt.short_doc}")
+		pager.add("\t\t" + "introduced in {vt.intro_mclassdef.namespace}::{vt}".gray)
+		for mpropdef in vt.mpropdefs do
+			if mpropdef != vt.intro then
+				pager.add("\t\t" + "refined in {mpropdef.mclassdef.namespace}".gray)
+			end
+		end
 	end
 end
 
@@ -288,6 +282,16 @@ end
 redef class MClassDef
 	private fun namespace: String do
 		return "{mmodule.full_name}::{mclass.name}"
+	end
+end
+
+redef class MVirtualTypeProp
+	private fun short_doc: String do
+		var ret = ""
+		if visibility.to_s == "public" then ret = "{to_s.green}: {intro.bound.to_s}"
+		if visibility.to_s == "private" then ret = "\t{to_s.red}: {intro.bound.to_s}"
+		if visibility.to_s == "protected" then ret = "\t{to_s.yellow}: {intro.bound.to_s}"
+		return ret
 	end
 end
 
@@ -436,11 +440,10 @@ toolcontext.process_options
 var ni = new NitIndex(toolcontext)
 ni.start
 
-# TODO seek properties: method, attribute, vt, ft
 # TODO seek methods by return type :<type>
 # TODO seek methods by param type: (<type>)
 # TODO seek subclasses and super classes <.<class> >.<class>
 # TODO seek subclasses and super types <:<type> >:<type>
 # TODO sort by alphabetic order
 # TODO seek with regexp
-# TODO standardize namespacesq
+# TODO standardize namespaces
