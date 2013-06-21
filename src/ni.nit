@@ -82,23 +82,27 @@ class NitIndex
 	end
 
 	fun seek(entry: String) do
-		# quitting?
 		if entry.is_empty then exit(0)
-
 		var flag = false
+		# seek for modules
+		var mmatches = new List[MModule]
 		for m in model.mmodules do
 			if m.name == entry then
 				flag = true
-				module_fulldoc(m)
+				mmatches.add(m)
 			end
 		end
+		if not mmatches.is_empty then modules_fulldoc(mmatches)
+		# seek for classes
+		var cmatches = new List[MClass]
 		for c in model.mclasses do
 			if c.name == entry then
-				if not mbuilder.mclassdef2nclassdef[c.intro] isa AStdClassdef then continue
 				flag = true
-				class_fulldoc(c)
+				cmatches.add(c)
 			end
 		end
+		if not cmatches.is_empty then classes_fulldoc(cmatches)
+		# seek for properties
 		var matches = new List[MProperty]
 		for p in model.mproperties do
 			if p.name == entry then
@@ -107,121 +111,127 @@ class NitIndex
 			end
 		end
 		if not matches.is_empty then props_fulldoc(matches)
-
+		# no matches
 		if not flag then print "Nothing known about '{entry}'"
 		if arguments.length == 1 then prompt
 	end
 
-	private fun module_fulldoc(mmodule: MModule) do
-		var nmodule = mbuilder.mmodule2nmodule[mmodule]
+	private fun modules_fulldoc(mmodules: List[MModule]) do
 		var pager = new Pager
-		pager.add("# module {mmodule.name}\n".bold)
-		pager.add("import {mmodule.in_importation.direct_greaters.join(", ")}")
-		#TODO add kmown clients
-		pager.add_rule
-		pager.addn(nmodule.comment.green)
-		pager.add_rule
+		for mmodule in mmodules do
+			var nmodule = mbuilder.mmodule2nmodule[mmodule]
+			pager.add("# module {mmodule.name}\n".bold)
+			pager.add("import {mmodule.in_importation.direct_greaters.join(", ")}")
+			#TODO add kmown clients
+			pager.add_rule
+			pager.addn(nmodule.comment.green)
+			pager.add_rule
 
-		var cats = new HashMap[String, Collection[MClass]]
-		cats["introduced classes"] = mmodule.intro_mclasses
-		cats["refined classes"] = mmodule.redef_mclasses
-		cats["inherited classes"] = mmodule.imported_mclasses
+			var cats = new HashMap[String, Collection[MClass]]
+			cats["introduced classes"] = mmodule.intro_mclasses
+			cats["refined classes"] = mmodule.redef_mclasses
+			cats["inherited classes"] = mmodule.imported_mclasses
 
-		for cat, list in cats do
-			if not list.is_empty then
-				pager.add("# {cat}\n".bold)
-				for mclass in list do
-					var nclass = mbuilder.mclassdef2nclassdef[mclass.intro].as(AStdClassdef)
-					if not nclass.short_comment.is_empty then
-						pager.add("\t# {nclass.short_comment}")
-					end
-					if cat == "refined classes" then
-						pager.add("\tredef {mclass.short_doc}")
-					else
-						pager.add("\t{mclass.short_doc}")
-					end
-					if not mclass.intro_mmodule == mmodule then
-						pager.add("\t\t" + "introduced in {mmodule.full_name}::{mclass}".gray)
-					end
-					for mclassdef in mclass.mclassdefs do
-						if mclassdef != mclass.intro then
-							pager.add("\t\t" + "refined in {mclassdef.namespace}".gray)
+			for cat, list in cats do
+				if not list.is_empty then
+					pager.add("# {cat}\n".bold)
+					for mclass in list do
+						var nclass = mbuilder.mclassdef2nclassdef[mclass.intro].as(AStdClassdef)
+						if not nclass.short_comment.is_empty then
+							pager.add("\t# {nclass.short_comment}")
 						end
+						if cat == "refined classes" then
+							pager.add("\tredef {mclass.short_doc}")
+						else
+							pager.add("\t{mclass.short_doc}")
+						end
+						if not mclass.intro_mmodule == mmodule then
+							pager.add("\t\t" + "introduced in {mmodule.full_name}::{mclass}".gray)
+						end
+						for mclassdef in mclass.mclassdefs do
+							if mclassdef != mclass.intro then
+								pager.add("\t\t" + "refined in {mclassdef.namespace}".gray)
+							end
+						end
+						pager.add("")
 					end
-					pager.add("")
 				end
 			end
+			pager.add_rule
 		end
-		pager.add_rule
 		pager.render
 	end
 
-	private fun class_fulldoc(mclass: MClass) do
-		var nclass = mbuilder.mclassdef2nclassdef[mclass.intro].as(AStdClassdef)
+	private fun classes_fulldoc(mclasses: List[MClass]) do
 		var pager = new Pager
-		pager.add("# {mclass.intro_mmodule.public_owner.name}::{mclass.name}\n".bold)
-		pager.add("{mclass.short_doc} ")
-		#TODO add kmown subclasses
-		pager.add_rule
-		pager.addn(nclass.comment.green)
-		pager.add_rule
-		if not mclass.parameter_types.is_empty then
-			pager.add("# formal types\n".bold)
-			for ft, bound in mclass.parameter_types do
-				pager.add("\t{ft.to_s.green}: {bound}")
-				pager.add("")
-			end
-		end
-		if not mclass.virtual_types.is_empty then
-			pager.add("# virtual types\n".bold)
-			for vt in mclass.virtual_types do
-				if vt.visibility.to_s == "public" then pager.add("\t{vt.to_s.green}: {vt.intro.bound.to_s}")
-				if vt.visibility.to_s == "private" then pager.add("\t{vt.to_s.red}: {vt.intro.bound.to_s}")
-				if vt.visibility.to_s == "protected" then pager.add("\t{vt.to_s.yellow}: {vt.intro.bound.to_s}")
-				if vt.intro_mclassdef != mclass.intro then
-					pager.add("\t\t" + "introduced in {vt.intro_mclassdef.namespace}::{vt}".gray)
-				end
-				for mpropdef in vt.mpropdefs do
-					if mpropdef != vt.intro then
-						pager.add("\t\t" + "refined in {mpropdef.mclassdef.namespace}".gray)
-					end
-				end
-				pager.add("")
-			end
-		end
-		pager.add_rule
+		for mclass in mclasses do
+			var nclass = mbuilder.mclassdef2nclassdef[mclass.intro].as(AStdClassdef)
 
-		var cats = new HashMap[String, Collection[MMethod]]
-		cats["constructors"] = mclass.constructors
-		cats["introduced methods"] = mclass.intro_methods
-		cats["refined methods"] = mclass.redef_methods
-		cats["inherited methods"] = mclass.inherited_methods
-
-		for cat, list in cats do
-			if not list.is_empty then
-				pager.add("# {cat}\n".bold)
-				for mprop in list do
-					#TODO verifier cast
-					var nmethod = mbuilder.mpropdef2npropdef[mprop.intro].as(AMethPropdef)
-					if not nmethod.short_comment.is_empty then
-						pager.add("\t# {nmethod.short_comment}")
+			pager.add("# {mclass.intro_mmodule.public_owner.name}::{mclass.name}\n".bold)
+			pager.add("{mclass.short_doc} ")
+			#TODO add kmown subclasses
+			pager.add_rule
+			pager.addn(nclass.comment.green)
+			pager.add_rule
+			if not mclass.parameter_types.is_empty then
+				pager.add("# formal types\n".bold)
+				for ft, bound in mclass.parameter_types do
+					pager.add("\t{ft.to_s.green}: {bound}")
+					pager.add("")
+				end
+			end
+			if not mclass.virtual_types.is_empty then
+				pager.add("# virtual types\n".bold)
+				for vt in mclass.virtual_types do
+					if vt.visibility.to_s == "public" then pager.add("\t{vt.to_s.green}: {vt.intro.bound.to_s}")
+					if vt.visibility.to_s == "private" then pager.add("\t{vt.to_s.red}: {vt.intro.bound.to_s}")
+					if vt.visibility.to_s == "protected" then pager.add("\t{vt.to_s.yellow}: {vt.intro.bound.to_s}")
+					if vt.intro_mclassdef != mclass.intro then
+						pager.add("\t\t" + "introduced in {vt.intro_mclassdef.namespace}::{vt}".gray)
 					end
-					if cat == "refined methods" then
-						pager.add("\tredef {nmethod}")
-					else
-						pager.add("\t{nmethod}")
-					end
-					if not mprop.intro_mclassdef == mclass.intro then
-						pager.add("\t\t" + "introduced in {mprop.intro_mclassdef.namespace}".gray)
-					end
-					for mpropdef in mprop.mpropdefs do
-						if mpropdef != mprop.intro then
+					for mpropdef in vt.mpropdefs do
+						if mpropdef != vt.intro then
 							pager.add("\t\t" + "refined in {mpropdef.mclassdef.namespace}".gray)
 						end
 					end
 					pager.add("")
 				end
 			end
+			pager.add_rule
+
+			var cats = new HashMap[String, Collection[MMethod]]
+			cats["constructors"] = mclass.constructors
+			cats["introduced methods"] = mclass.intro_methods
+			cats["refined methods"] = mclass.redef_methods
+			cats["inherited methods"] = mclass.inherited_methods
+
+			for cat, list in cats do
+				if not list.is_empty then
+					pager.add("# {cat}\n".bold)
+					for mprop in list do
+						#TODO verifier cast
+						var nmethod = mbuilder.mpropdef2npropdef[mprop.intro].as(AMethPropdef)
+						if not nmethod.short_comment.is_empty then
+							pager.add("\t# {nmethod.short_comment}")
+						end
+						if cat == "refined methods" then
+							pager.add("\tredef {nmethod}")
+						else
+							pager.add("\t{nmethod}")
+						end
+						if not mprop.intro_mclassdef == mclass.intro then
+							pager.add("\t\t" + "introduced in {mprop.intro_mclassdef.namespace}".gray)
+						end
+						for mpropdef in mprop.mpropdefs do
+							if mpropdef != mprop.intro then
+								pager.add("\t\t" + "refined in {mpropdef.mclassdef.namespace}".gray)
+							end
+						end
+						pager.add("")
+					end
+				end
+			end
+			pager.add_rule
 		end
 		pager.render
 	end
@@ -426,8 +436,11 @@ toolcontext.process_options
 var ni = new NitIndex(toolcontext)
 ni.start
 
-# TODO seek methods
-# TODO lister les methods qui retournent un certain type
-# TODO lister les methods qui utilisent un certain type
-# TODO lister les sous-types connus d'une type
-# TODO sorter par ordre alphabétique
+# TODO seek properties: method, attribute, vt, ft
+# TODO seek methods by return type :<type>
+# TODO seek methods by param type: (<type>)
+# TODO seek subclasses and super classes <.<class> >.<class>
+# TODO seek subclasses and super types <:<type> >:<type>
+# TODO sort by alphabetic order
+# TODO seek with regexp
+# TODO standardize namespacesq
