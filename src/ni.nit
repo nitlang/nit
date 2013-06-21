@@ -117,6 +117,7 @@ class NitIndex
 		var pager = new Pager
 		pager.add("# module {mmodule.name}\n".bold)
 		pager.add("import {mmodule.in_importation.direct_greaters.join(", ")}")
+		#TODO add kmown clients
 		pager.add_rule
 		pager.addn(nmodule.comment.green)
 		pager.add_rule
@@ -140,7 +141,12 @@ class NitIndex
 						pager.add("\t{mclass.short_doc}")
 					end
 					if not mclass.intro_mmodule == mmodule then
-						pager.add("\t\tintroduced in {mmodule.full_name}::{mclass}".gray)
+						pager.add("\t\t" + "introduced in {mmodule.full_name}::{mclass}".gray)
+					end
+					for mclassdef in mclass.mclassdefs do
+						if mclassdef != mclass.intro then
+							pager.add("\t\t" + "refined in {mclassdef.namespace}".gray)
+						end
 					end
 					pager.add("")
 				end
@@ -155,6 +161,7 @@ class NitIndex
 		var pager = new Pager
 		pager.add("# {mclass.intro_mmodule.public_owner.name}::{mclass.name}\n".bold)
 		pager.add("{mclass.short_doc} ")
+		#TODO add kmown subclasses
 		pager.add_rule
 		pager.addn(nclass.comment.green)
 		pager.add_rule
@@ -172,7 +179,12 @@ class NitIndex
 				if vt.visibility.to_s == "private" then pager.add("\t{vt.to_s.red}: {vt.intro.bound.to_s}")
 				if vt.visibility.to_s == "protected" then pager.add("\t{vt.to_s.yellow}: {vt.intro.bound.to_s}")
 				if vt.intro_mclassdef != mclass.intro then
-					pager.add("\t\tintroduced in {vt.intro_mclassdef.namespace}::{vt}".gray)
+					pager.add("\t\t" + "introduced in {vt.intro_mclassdef.namespace}::{vt}".gray)
+				end
+				for mpropdef in vt.mpropdefs do
+					if mpropdef != vt.intro then
+						pager.add("\t\t" + "refined in {mpropdef.mclassdef.namespace}".gray)
+					end
 				end
 				pager.add("")
 			end
@@ -188,9 +200,9 @@ class NitIndex
 		for cat, list in cats do
 			if not list.is_empty then
 				pager.add("# {cat}\n".bold)
-				for mmethod in list do
+				for mprop in list do
 					#TODO verifier cast
-					var nmethod = mbuilder.mpropdef2npropdef[mmethod.intro].as(AMethPropdef)
+					var nmethod = mbuilder.mpropdef2npropdef[mprop.intro].as(AMethPropdef)
 					if not nmethod.short_comment.is_empty then
 						pager.add("\t# {nmethod.short_comment}")
 					end
@@ -199,8 +211,13 @@ class NitIndex
 					else
 						pager.add("\t{nmethod}")
 					end
-					if not mmethod.intro_mclassdef == mclass.intro then
-						pager.add("\t\tintroduced in {mmethod.intro_mclassdef.namespace}::{mmethod}".gray)
+					if not mprop.intro_mclassdef == mclass.intro then
+						pager.add("\t\t" + "introduced in {mprop.intro_mclassdef.namespace}".gray)
+					end
+					for mpropdef in mprop.mpropdefs do
+						if mpropdef != mprop.intro then
+							pager.add("\t\t" + "refined in {mpropdef.mclassdef.namespace}".gray)
+						end
 					end
 					pager.add("")
 				end
