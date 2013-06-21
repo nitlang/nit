@@ -16,8 +16,7 @@
 
 module ni
 
-import toolcontext
-import exprbuilder
+import model_utils
 
 private class Pager
 	var content: String = ""
@@ -126,7 +125,7 @@ class NitIndex
 		var cats = new HashMap[String, Collection[MClass]]
 		cats["introduced classes"] = mmodule.intro_mclasses
 		cats["refined classes"] = mmodule.redef_mclasses
-		cats["inherited classes"] = mmodule.inherited_mclasses
+		cats["inherited classes"] = mmodule.imported_mclasses
 
 		for cat, list in cats do
 			if not list.is_empty then
@@ -194,26 +193,7 @@ class NitIndex
 	end
 end
 
-# Model traversing
-
-redef class MModule
-	# Get the list of mclasses refined in self
-	private fun redef_mclasses: Set[MClass] do
-		var mclasses = new HashSet[MClass]
-		for c in mclassdefs do
-			if not c.is_intro then mclasses.add(c.mclass)
-		end
-		return mclasses
-	end
-
-	private fun inherited_mclasses: Set[MClass] do
-		var mclasses = new HashSet[MClass]
-		for m in in_importation.greaters do
-			for c in m.mclassdefs do mclasses.add(c.mclass)
-		end
-		return mclasses
-	end
-end
+# Printing facilities
 
 redef class MClass
 
@@ -234,96 +214,8 @@ redef class MClass
 		if visibility.to_s == "public" then ret = "{ret}{to_s.green}"
 		if visibility.to_s == "private" then ret = "{ret}{to_s.red}"
 		if visibility.to_s == "protected" then ret = "{ret}{to_s.yellow}"
-		ret = "{ret} super {supers.join(", ")}"
+		ret = "{ret} super {parents.join(", ")}"
 		return ret
-	end
-
-	private fun supers: Set[MClass] do
-		var ret = new HashSet[MClass]
-		for mclassdef in mclassdefs do
-			for mclasstype in mclassdef.supertypes do
-				ret.add(mclasstype.mclass)
-			end
-		end
-		return ret
-	end
-
-	# Get ancestors of the class (all super classes)
-	fun ancestors: Set[MClass] do
-		var lst = new HashSet[MClass]
-		for mclassdef in self.mclassdefs do
-			for super_mclassdef in mclassdef.in_hierarchy.greaters do
-				if super_mclassdef == mclassdef then continue  # skip self
-				lst.add(super_mclassdef.mclass)
-			end
-		end
-		return lst
-	end
-
-	# Get the list of class constructors
-	private fun constructors: Set[MMethod] do
-		var res = new HashSet[MMethod]
-		for mclassdef in mclassdefs do
-			for mpropdef in mclassdef.mpropdefs do
-				if mpropdef isa MMethodDef then
-					if mpropdef.mproperty.is_init then res.add(mpropdef.mproperty)
-				end
-			end
-		end
-		return res
-	end
-
-	# Get the list of intro methods
-	private fun intro_methods: Set[MMethod] do
-		var res = new HashSet[MMethod]
-		for mclassdef in mclassdefs do
-			for mpropdef in mclassdef.mpropdefs do
-				if mpropdef isa MMethodDef then
-					if mpropdef.is_intro and not mpropdef.mproperty.is_init then res.add(mpropdef.mproperty)
-				end
-			end
-		end
-		return res
-	end
-
-	# Get the list of locally refined methods
-	private fun redef_methods: Set[MMethod] do
-		var res = new HashSet[MMethod]
-		for mclassdef in mclassdefs do
-			for mpropdef in mclassdef.mpropdefs do
-				if mpropdef isa MMethodDef then
-					if not mpropdef.is_intro and not mpropdef.mproperty.is_init then res.add(mpropdef.mproperty)
-				end
-			end
-		end
-		return res
-	end
-
-	# Get the list of locally refined methods
-	private fun inherited_methods: Set[MMethod] do
-		var res = new HashSet[MMethod]
-		for s in ancestors do
-			for m in s.intro_methods do
-				if not self.intro_methods.has(m) and not self.redef_methods.has(m) then res.add(m)
-			end
-		end
-		return res
-	end
-
-	private fun is_class: Bool do
-		return self.kind == concrete_kind or self.kind == abstract_kind
-	end
-
-	private fun is_interface: Bool do
-		return self.kind == interface_kind
-	end
-
-	private fun is_enum: Bool do
-		return self.kind == enum_kind
-	end
-
-	private fun is_abstract: Bool do
-		return self.kind == abstract_kind
 	end
 end
 
@@ -332,8 +224,6 @@ redef class MClassDef
 		return "{mmodule.full_name}::{mclass.name}"
 	end
 end
-
-# ANode printing
 
 redef class AModule
 	private fun comment: String do
