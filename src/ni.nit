@@ -106,7 +106,7 @@ class NitIndex
 				matches.add(p)
 			end
 		end
-		#if not matches.is_empty then doc_properties
+		if not matches.is_empty then props_fulldoc(matches)
 
 		if not flag then print "Nothing known about '{entry}'"
 		if arguments.length == 1 then prompt
@@ -205,6 +205,28 @@ class NitIndex
 					pager.add("")
 				end
 			end
+		end
+		pager.render
+	end
+
+	private fun props_fulldoc(mprops: List[MProperty]) do
+		var pager = new Pager
+		for mprop in mprops do
+			var nprop = mbuilder.mpropdef2npropdef[mprop.intro]
+			if nprop isa AMethPropdef then
+				pager.add("# {mprop.intro_mclassdef.namespace.bold}\n")
+				if not nprop.short_comment.is_empty then
+					pager.add("\t# {nprop.short_comment}")
+				end
+				pager.add("\t{nprop}")
+				pager.add("\t\t" + "introduced in {mprop.intro_mclassdef.namespace}".gray)
+				for mpropdef in mprop.mpropdefs do
+					if mpropdef != mprop.intro then
+						pager.add("\t\t" + "refined in {mpropdef.mclassdef.namespace}".gray)
+					end
+				end
+			end
+			pager.add_rule
 		end
 		pager.render
 	end
