@@ -194,8 +194,6 @@ abstract class AbstractCompiler
 	do
 		self.mainmodule = mainmodule
 		self.modelbuilder = modelbuilder
-		var file = new_file(mainmodule.name)
-		self.header = new CodeWriter(file)
 	end
 
 	# Force the creation of a new file

@@ -114,6 +114,8 @@ class SeparateCompiler
 
 	init(mainmodule: MModule, mmbuilder: ModelBuilder, runtime_type_analysis: RapidTypeAnalysis) do
 		super(mainmodule, mmbuilder)
+		var file = new_file("nit.common")
+		self.header = new CodeWriter(file)
 		self.runtime_type_analysis = runtime_type_analysis
 		self.compile_box_kinds
 	end

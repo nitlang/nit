@@ -88,6 +88,8 @@ class GlobalCompiler
 	init(mainmodule: MModule, modelbuilder: ModelBuilder, runtime_type_analysis: RapidTypeAnalysis)
 	do
 		super(mainmodule, modelbuilder)
+		var file = new_file(mainmodule.name)
+		self.header = new CodeWriter(file)
 		self.runtime_type_analysis = runtime_type_analysis
 		self.live_primitive_types = new Array[MClassType]
 		for t in runtime_type_analysis.live_types do
