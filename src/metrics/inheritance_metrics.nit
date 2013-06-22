@@ -121,9 +121,9 @@ redef class MClass
 		self.noa = ancestors.length
 		self.noac = model.extract_classes(ancestors).length
 		self.noai = model.extract_interfaces(ancestors).length
-		self.noc = children(model).length
-		self.nocc = model.extract_classes(children(model)).length
-		self.noci = model.extract_interfaces(children(model)).length
+		self.noc = children.length
+		self.nocc = model.extract_classes(children).length
+		self.noci = model.extract_interfaces(children).length
 		self.nod = descendants.length
 		self.nodc = model.extract_classes(descendants).length
 		self.nodi = model.extract_interfaces(descendants).length
@@ -138,63 +138,15 @@ redef class MClass
 		self.noaud = model.extract_user_defined(ancestors).length
 		self.noacud = model.extract_user_defined(model.extract_classes(ancestors)).length
 		self.noaiud = model.extract_user_defined(model.extract_interfaces(ancestors)).length
-		self.nocud = model.extract_user_defined(children(model)).length
-		self.noccud = model.extract_user_defined(model.extract_classes(children(model))).length
-		self.nociud = model.extract_user_defined(model.extract_interfaces(children(model))).length
+		self.nocud = model.extract_user_defined(children).length
+		self.noccud = model.extract_user_defined(model.extract_classes(children)).length
+		self.nociud = model.extract_user_defined(model.extract_interfaces(children)).length
 		self.nodud = model.extract_user_defined(descendants).length
 		self.nodcud = model.extract_user_defined(model.extract_classes(descendants)).length
 		self.nodiud = model.extract_user_defined(model.extract_interfaces(descendants)).length
 		self.ditud = ud_path_to_object.length
 		self.ditcud = ud_class_path_to_object.length
 		self.ditiud = ud_interface_path_to_object.length
-	end
-
-	# Get parents of the class (direct super classes only)
-	fun parents: Set[MClass] do
-		var lst = new HashSet[MClass]
-		# explore all definitions of the class (refinement)
-		for mclassdef in self.mclassdefs do
-			for parent in mclassdef.supertypes do
-				lst.add(parent.mclass)
-			end
-		end
-		return lst
-	end
-
-	# Get ancestors of the class (all super classes)
-	fun ancestors: Set[MClass] do
-		var lst = new HashSet[MClass]
-		for mclassdef in self.mclassdefs do
-			for super_mclassdef in mclassdef.in_hierarchy.greaters do
-				if super_mclassdef == mclassdef then continue  # skip self
-				lst.add(super_mclassdef.mclass)
-			end
-		end
-		return lst
-	end
-
-	# Get children of the class (direct subclasses only)
-	fun children(model: Model): Set[MClass] do
-		var lst = new HashSet[MClass]
-		for other in model.mclasses do
-			if other == self then continue # skip self
-			if other.parents.has(self) then
-				lst.add(other)
-			end
-		end
-		return lst
-	end
-
-	# Get children of the class (direct subclasses only)
-	fun descendants: Set[MClass] do
-		var lst = new HashSet[MClass]
-		for mclassdef in self.mclassdefs do
-			for sub_mclassdef in mclassdef.in_hierarchy.smallers do
-				if sub_mclassdef == mclassdef then continue  # skip self
-				lst.add(sub_mclassdef.mclass)
-			end
-		end
-		return lst
 	end
 
 	# Return the longest path from class to root hierarchy
@@ -367,20 +319,20 @@ redef class MClass
 		for parent in parents do if parent.name != "Object" and parent.is_interface then return true
 		return false
 	end
-	fun is_if_eligible(model: Model): Bool do return not children(model).is_empty
+	fun is_if_eligible(model: Model): Bool do return not children.is_empty
 	fun is_ccif_eligible(model: Model): Bool do
 		if not is_class then return false
-		for child in children(model) do if child.is_class then return true
+		for child in children do if child.is_class then return true
 		return false
 	end
 	fun is_icif_eligible(model: Model): Bool do
 		if not is_interface then return false
-		for child in children(model) do if child.is_class then return true
+		for child in children do if child.is_class then return true
 		return false
 	end
 	fun is_iiif_eligible(model: Model): Bool do
 		if not is_interface then return false
-		for child in children(model) do if child.is_interface then return true
+		for child in children do if child.is_interface then return true
 		return false
 	end
 
@@ -411,24 +363,24 @@ redef class MClass
 	end
 	fun is_slif_eligible(model: Model): Bool do
 		if is_user_defined then return false
-		return not children(model).is_empty
+		return not children.is_empty
 	end
 	fun is_slccif_eligible(model: Model): Bool do
 		if is_user_defined then return false
 		if not is_class then return false
-		for child in children(model) do if child.is_class then return true
+		for child in children do if child.is_class then return true
 		return false
 	end
 	fun is_slicif_eligible(model: Model): Bool do
 		if is_user_defined then return false
 		if not is_interface then return false
-		for child in children(model) do if child.is_class then return true
+		for child in children do if child.is_class then return true
 		return false
 	end
 	fun is_sliiif_eligible(model: Model): Bool do
 		if is_user_defined then return false
 		if not is_interface then return false
-		for child in children(model) do if child.is_interface then return true
+		for child in children do if child.is_interface then return true
 		return false
 	end
 
@@ -436,25 +388,25 @@ redef class MClass
 
 	fun is_slifsl_eligible(model: Model): Bool do
 		if is_user_defined then return false
-		for child in children(model) do if not child.is_user_defined then return true
+		for child in children do if not child.is_user_defined then return true
 		return false
 	end
 	fun is_slccifsl_eligible(model: Model): Bool do
 		if is_user_defined then return false
 		if is_class then return false
-		for child in children(model) do if not child.is_user_defined and child.is_class then return true
+		for child in children do if not child.is_user_defined and child.is_class then return true
 		return false
 	end
 	fun is_slicifsl_eligible(model: Model): Bool do
 		if is_user_defined then return false
 		if not is_interface then return false
-		for child in children(model) do if not child.is_user_defined and child.is_class then return true
+		for child in children do if not child.is_user_defined and child.is_class then return true
 		return false
 	end
 	fun is_sliiifsl_eligible(model: Model): Bool do
 		if is_user_defined then return false
 		if not is_interface then return false
-		for child in children(model) do if not child.is_user_defined and child.is_interface then return true
+		for child in children do if not child.is_user_defined and child.is_interface then return true
 		return false
 	end
 
@@ -462,25 +414,25 @@ redef class MClass
 
 	fun is_slifud_eligible(model: Model): Bool do
 		if is_user_defined then return false
-		for child in children(model) do if child.is_user_defined then return true
+		for child in children do if child.is_user_defined then return true
 		return false
 	end
 	fun is_slccifud_eligible(model: Model): Bool do
 		if is_user_defined then return false
 		if not is_class then return false
-		for child in children(model) do if child.is_user_defined and child.is_class then return true
+		for child in children do if child.is_user_defined and child.is_class then return true
 		return false
 	end
 	fun is_slicifud_eligible(model: Model): Bool do
 		if is_user_defined then return false
 		if not is_interface then return false
-		for child in children(model) do if child.is_user_defined and child.is_class then return true
+		for child in children do if child.is_user_defined and child.is_class then return true
 		return false
 	end
 	fun is_sliiifud_eligible(model: Model): Bool do
 		if is_user_defined then return false
 		if not is_interface then return false
-		for child in children(model) do if child.is_user_defined and child.is_interface then return true
+		for child in children do if child.is_user_defined and child.is_interface then return true
 		return false
 	end
 
@@ -511,24 +463,24 @@ redef class MClass
 	end
 	fun is_udif_eligible(model: Model): Bool do
 		if not is_user_defined then return false
-		return not children(model).is_empty
+		return not children.is_empty
 	end
 	fun is_udccif_eligible(model: Model): Bool do
 		if not is_user_defined then return false
 		if not is_class then return false
-		for child in children(model) do if child.is_class then return true
+		for child in children do if child.is_class then return true
 		return false
 	end
 	fun is_udicif_eligible(model: Model): Bool do
 		if not is_user_defined then return false
 		if not is_interface then return false
-		for child in children(model) do if child.is_class then return true
+		for child in children do if child.is_class then return true
 		return false
 	end
 	fun is_udiiif_eligible(model: Model): Bool do
 		if not is_user_defined then return false
 		if not is_interface then return false
-		for child in children(model) do if child.is_interface then return true
+		for child in children do if child.is_interface then return true
 		return false
 	end
 
@@ -585,24 +537,24 @@ redef class MClass
 	end
 	fun is_udifud_eligible(model: Model): Bool do
 		if not is_user_defined then return false
-		return not children(model).is_empty
+		return not children.is_empty
 	end
 	fun is_udccifud_eligible(model: Model): Bool do
 		if not is_user_defined then return false
 		if not is_class then return false
-		for child in children(model) do if child.is_user_defined and child.is_class then return true
+		for child in children do if child.is_user_defined and child.is_class then return true
 		return false
 	end
 	fun is_udicifud_eligible(model: Model): Bool do
 		if not is_user_defined then return false
 		if not is_interface then return false
-		for child in children(model) do if child.is_user_defined and child.is_class then return true
+		for child in children do if child.is_user_defined and child.is_class then return true
 		return false
 	end
 	fun is_udiiifud_eligible(model: Model): Bool do
 		if not is_user_defined then return false
 		if not is_interface then return false
-		for child in children(model) do if child.is_user_defined and child.is_interface then return true
+		for child in children do if child.is_user_defined and child.is_interface then return true
 		return false
 	end
 

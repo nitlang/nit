@@ -17,7 +17,7 @@
 # Helpers for various statistics tools.
 module metrics_base
 
-import modelbuilder
+import model_utils
 import csv
 
 redef class ToolContext
@@ -108,22 +108,6 @@ redef class Model
 end
 
 redef class MClass
-	fun is_class: Bool do
-		return self.kind == concrete_kind or self.kind == abstract_kind
-	end
-
-	fun is_interface: Bool do
-		return self.kind == interface_kind
-	end
-
-	fun is_enum: Bool do
-		return self.kind == enum_kind
-	end
-
-	fun is_abstract: Bool do
-		return self.kind == abstract_kind
-	end
-
 	fun is_user_defined: Bool do
 		return self.intro_mmodule.is_user_defined
 	end
