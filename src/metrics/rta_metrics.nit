@@ -40,16 +40,16 @@ redef class RapidTypeAnalysis
 end
 
 redef class MType
-	var nlvt: Int = 0
-	var nlct: Int = 0
+	private var nlvt: Int = 0
+	private var nlct: Int = 0
 
-	fun is_user_defined: Bool do
+	private fun is_user_defined: Bool do
 		var mtype = self
 		if mtype isa MNullableType then mtype = mtype.mtype
 		return self.as(MClassType).mclass.is_user_defined
 	end
 
-	fun get_depth: Int do
+	private fun get_depth: Int do
 		var mtype = self
 		if mtype isa MNullableType then mtype = mtype.mtype
 		if not mtype isa MGenericType then return 0
@@ -63,10 +63,10 @@ redef class MType
 end
 
 redef class MClass
-	var nlvt: Int = 0
-	var nlct: Int = 0
-	var live_types: Set[MType] = new HashSet[MType]
-	var cast_types: Set[MType] = new HashSet[MType]
+	private var nlvt: Int = 0
+	private var nlct: Int = 0
+	private var live_types: Set[MType] = new HashSet[MType]
+	private var cast_types: Set[MType] = new HashSet[MType]
 end
 
 # Run a runtime type analysis and print metrics
