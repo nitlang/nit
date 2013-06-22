@@ -84,33 +84,44 @@ class NitIndex
 	fun seek(entry: String) do
 		if entry.is_empty then exit(0)
 		var flag = false
-		# seek for modules
-		var mmatches = new List[MModule]
-		for m in model.mmodules do
-			if m.name == entry then
-				flag = true
-				mmatches.add(m)
+		# seek return types
+		if entry.has_prefix("return:") then
+			var ret = entry.split_with(":")[1].replace(" ", "")
+			var matches = seek_returns(ret)
+			if not matches.is_empty then props_fulldoc(matches)
+		else if entry.has_prefix("param:") then
+			var param = entry.split_with(":")[1].replace(" ", "")
+			var matches = seek_params(param)
+			if not matches.is_empty then props_fulldoc(matches)
+		else
+			# seek for modules
+			var mmatches = new List[MModule]
+			for m in model.mmodules do
+				if m.name == entry then
+					flag = true
+					mmatches.add(m)
+				end
 			end
-		end
-		if not mmatches.is_empty then modules_fulldoc(mmatches)
-		# seek for classes
-		var cmatches = new List[MClass]
-		for c in model.mclasses do
-			if c.name == entry then
-				flag = true
-				cmatches.add(c)
+			if not mmatches.is_empty then modules_fulldoc(mmatches)
+			# seek for classes
+			var cmatches = new List[MClass]
+			for c in model.mclasses do
+				if c.name == entry then
+					flag = true
+					cmatches.add(c)
+				end
 			end
-		end
-		if not cmatches.is_empty then classes_fulldoc(cmatches)
-		# seek for properties
-		var matches = new List[MProperty]
-		for p in model.mproperties do
-			if p.name == entry then
-				flag = true
-				matches.add(p)
+			if not cmatches.is_empty then classes_fulldoc(cmatches)
+			# seek for properties
+			var matches = new List[MProperty]
+			for p in model.mproperties do
+				if p.name == entry then
+					flag = true
+					matches.add(p)
+				end
 			end
+			if not matches.is_empty then props_fulldoc(matches)
 		end
-		if not matches.is_empty then props_fulldoc(matches)
 		# no matches
 		if not flag then print "Nothing known about '{entry}'"
 		if arguments.length == 1 then prompt
@@ -254,6 +265,37 @@ class NitIndex
 			pager.add_rule
 		end
 		pager.render
+	end
+
+	private fun seek_returns(entry: String): List[MProperty] do
+		# TODO how to match with generic types?
+		var matches = new List[MProperty]
+		for mprop in model.mproperties do
+			var intro = mprop.intro
+			if intro isa MMethodDef then
+				if intro.msignature.return_mtype != null and intro.msignature.return_mtype.to_s == entry then matches.add(mprop)
+			else if intro isa MAttributeDef then
+				if intro.static_mtype.to_s == entry then matches.add(mprop)
+			end
+		end
+		return matches
+	end
+
+	private fun seek_params(entry: String): List[MProperty] do
+		# TODO how to match with generic types?
+		var matches = new List[MProperty]
+		for mprop in model.mproperties do
+			var intro = mprop.intro
+			if intro isa MMethodDef then
+				var mparameters = intro.msignature.mparameters
+				for mparameter in mparameters do
+					if mparameter.mtype.to_s == entry then matches.add(mprop)
+				end
+			else if intro isa MAttributeDef then
+				if intro.static_mtype.to_s == entry then matches.add(mprop)
+			end
+		end
+		return matches
 	end
 
 	private fun method_fulldoc(pager: Pager, mprop: MMethod) do
@@ -408,6 +450,7 @@ redef class AAttrPropdef
 
 	private fun read_accessor: String do
 		var ret = "fun "
+		#FIXME bug with standard::stream::FDStream::fd
 		var name = mreadpropdef.mproperty.name
 		if mpropdef.mproperty.visibility.to_s == "public" then ret = "{ret}{name.green}"
 		if mpropdef.mproperty.visibility.to_s == "private" then ret = "{ret}{name.red}"
@@ -543,8 +586,6 @@ toolcontext.process_options
 var ni = new NitIndex(toolcontext)
 ni.start
 
-# TODO seek methods by return type :<type>
-# TODO seek methods by param type: (<type>)
 # TODO seek subclasses and super classes <.<class> >.<class>
 # TODO seek subclasses and super types <:<type> >:<type>
 # TODO seek with regexp
