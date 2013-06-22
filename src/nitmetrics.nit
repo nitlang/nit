@@ -57,7 +57,7 @@ print "*** METRICS ***"
 
 # All metrics computation ?
 var all = toolcontext.opt_all.value
-
+if not toolcontext.opt_inheritance.value and not toolcontext.opt_refinement.value and not toolcontext.opt_self.value and not toolcontext.opt_nullables.value and not toolcontext.opt_static_types.value and not toolcontext.opt_rta.value then all = true
 # Inheritance usage metrics
 if all or toolcontext.opt_inheritance.value then
 	print ""
