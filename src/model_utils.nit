@@ -66,6 +66,30 @@ redef class MClass
 		return lst
 	end
 
+	# Get direct children of 'self'.
+	fun children: Set[MClass] do
+		var lst = new HashSet[MClass]
+		for mclassdef in self.mclassdefs do
+			for sub_mclassdef in mclassdef.in_hierarchy.direct_smallers do
+				if sub_mclassdef == mclassdef then continue  # skip self
+				lst.add(sub_mclassdef.mclass)
+			end
+		end
+		return lst
+	end
+
+	# Get all children of 'self'.
+	fun descendants: Set[MClass] do
+		var lst = new HashSet[MClass]
+		for mclassdef in self.mclassdefs do
+			for sub_mclassdef in mclassdef.in_hierarchy.smallers do
+				if sub_mclassdef == mclassdef then continue  # skip self
+				lst.add(sub_mclassdef.mclass)
+			end
+		end
+		return lst
+	end
+
 	# Get the list of constructors available for 'self'.
 	fun constructors: Set[MMethod] do
 		var res = new HashSet[MMethod]
