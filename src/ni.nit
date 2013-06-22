@@ -88,11 +88,17 @@ class NitIndex
 		if entry.has_prefix("return:") then
 			var ret = entry.split_with(":")[1].replace(" ", "")
 			var matches = seek_returns(ret)
-			if not matches.is_empty then props_fulldoc(matches)
+			if not matches.is_empty then
+				flag = true
+				props_fulldoc(matches)
+			end
 		else if entry.has_prefix("param:") then
 			var param = entry.split_with(":")[1].replace(" ", "")
 			var matches = seek_params(param)
-			if not matches.is_empty then props_fulldoc(matches)
+			if not matches.is_empty then
+				flag = true
+				props_fulldoc(matches)
+			end
 		else
 			# seek for modules
 			var mmatches = new List[MModule]
@@ -236,21 +242,23 @@ class NitIndex
 	private fun props_fulldoc(raw_mprops: List[MProperty]) do
 		var pager = new Pager
 		# group by module
-		var cats = new HashMap[MModule, Array[MProperty]]
+		var cats = new HashMap[MClass, Array[MProperty]]
 		for mprop in raw_mprops do
-			var mmodule = mprop.intro_mclassdef.mmodule
-			if not cats.has_key(mmodule) then cats[mmodule] = new Array[MProperty]
-			cats[mmodule].add(mprop)
+			if not mbuilder.mpropdef2npropdef.has_key(mprop.intro) then continue
+			if mprop isa MAttribute then continue
+			var mclass = mprop.intro_mclassdef.mclass
+			if not cats.has_key(mclass) then cats[mclass] = new Array[MProperty]
+			cats[mclass].add(mprop)
 		end
 		#sort groups
-		var sorter = new ComparableSorter[MModule]
-		var sorted = new Array[MModule]
+		var sorter = new ComparableSorter[MClass]
+		var sorted = new Array[MClass]
 		sorted.add_all(cats.keys)
 		sorter.sort(sorted)
 		# display
-		for mmodule in sorted do
-			var mprops = cats[mmodule]
-			pager.add("# {mmodule.namespace}".bold)
+		for mclass in sorted do
+			var mprops = cats[mclass]
+			pager.add("# {mclass.namespace}".bold)
 			var sorterp = new ComparableSorter[MProperty]
 			sorterp.sort(mprops)
 			for mprop in mprops do
