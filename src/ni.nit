@@ -442,11 +442,19 @@ redef class AStdClassdef
 end
 
 redef class APropdef
-	private fun short_comment: String is abstract
-end
+	private fun comment: String do
+		var ret = ""
+		if n_doc != null then
+			for t in n_doc.n_comment do
+				var txt = t.text.replace("# ", "")
+				txt = txt.replace("#", "")
+				ret += "{txt}"
+			end
+		end
+		return ret
+	end
 
-redef class AAttrPropdef
-	redef fun short_comment do
+	private fun short_comment: String do
 		var ret = ""
 		if n_doc != null then
 			var txt = n_doc.n_comment.first.text
@@ -456,7 +464,9 @@ redef class AAttrPropdef
 		end
 		return ret
 	end
+end
 
+redef class AAttrPropdef
 	private fun read_accessor: String do
 		var ret = "fun "
 		#FIXME bug with standard::stream::FDStream::fd
@@ -486,17 +496,6 @@ redef class AAttrPropdef
 end
 
 redef class AMethPropdef
-	redef fun short_comment do
-		var ret = ""
-		if n_doc != null then
-			var txt = n_doc.n_comment.first.text
-			txt = txt.replace("# ", "")
-			txt = txt.replace("\n", "")
-			ret += txt
-		end
-		return ret
-	end
-
 	redef fun to_s do
 		var ret = ""
 		if not mpropdef.mproperty.is_init then
