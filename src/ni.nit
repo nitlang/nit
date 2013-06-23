@@ -36,9 +36,10 @@ class NitIndex
 	init(toolcontext: ToolContext) do
 		# We need a model to collect stufs
 		self.toolcontext = toolcontext
+		self.toolcontext.option_context.options.clear
 		self.arguments = toolcontext.option_context.rest
 
-		if arguments.length > 2 then
+		if arguments.is_empty or arguments.length > 2 then
 			print "usage: ni path/to/module.nit [expression]"
 			toolcontext.option_context.usage
 			exit(1)
