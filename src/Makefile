@@ -16,7 +16,7 @@
 
 NITCOPT=
 
-all: ../bin/nitc ../bin/nitdoc ../bin/nits ../bin/nitmetrics ../bin/nitg ../bin/nit
+all: ../bin/nitc ../bin/nitdoc ../bin/nits ../bin/nitmetrics ../bin/nitg ../bin/nit ../bin/netdbg ../bin/dbgcli
 
 ../bin/nitc: ../c_src/nitc parser/parser.nit
 	@echo '***************************************************************'
@@ -59,6 +59,20 @@ all: ../bin/nitc ../bin/nitdoc ../bin/nits ../bin/nitmetrics ../bin/nitg ../bin/
 	@echo '***************************************************************'
 	./git-gen-version.sh
 	../bin/nitc ${NITCOPT} -o ../bin/nit -O -v nit.nit
+
+../bin/netdbg : ../bin/nitc
+	@echo '***************************************************************'
+	@echo '* Compile netdbg from NIT source files                          *'
+	@echo '***************************************************************'
+	./git-gen-version.sh
+	../c_src/nitc ${NITCOPT} -o ../bin/netdbg -O -v netdbg.nit
+
+../bin/dbgcli : ../bin/nitc
+	@echo '***************************************************************'
+	@echo '* Compile dbgcli from NIT source files                          *'
+	@echo '***************************************************************'
+	./git-gen-version.sh
+	../c_src/nitc ${NITCOPT} -o ../bin/dbgcli -O -v dbgcli.nit
 
 ../c_src/nitc: ../c_src/*.c ../c_src/*.h ../c_src/nitc._build.sh ../c_src/Makefile
 	@echo '***************************************************************'
