@@ -472,6 +472,19 @@ class NitdocModules
 		open("div").add_class("content")
 		add("h1").text(modulename)
 		add("div").add_class("subtitle").text("module {modulename}")
+		module_comment
+		close("div")
+	end
+
+	# Insert module comment in the content
+	fun module_comment do
+		var doc = amodule.comment
+		open("div").attr("id", "description")
+		add("pre").add_class("text_label").text(doc)
+		add("textarea").add_class("edit").attr("rows", "1").attr("cols", "76").attr("id", "fileContent").text(" ")
+		add("a").attr("id", "cancelBtn").text("Cancel")
+		add("a").attr("id", "commitBtn").text("Commit")
+		add("pre").add_class("text_label").attr("id", "preSave").attr("type", "2")
 		close("div")
 	end
 
