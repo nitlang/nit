@@ -298,6 +298,20 @@ class NitdocFullindex
 		close("header")
 	end
 
+	redef fun body do
+		super
+		open("div").add_class("page")
+		open("div").add_class("content fullpage")
+		add("h1").text("Full Index")
+		add_content
+		close("div")
+		close("div")
+		add("footer").text("Nit standard library. Version jenkins-component=stdlib-19.")
+	end
+
+	fun add_content do
+	end
+
 end
 
 class NitdocPage
