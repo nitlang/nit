@@ -175,6 +175,24 @@ class NitdocOverview
 		close("header")
 	end
 
+	redef fun body do
+		super
+		open("div").add_class("page")
+		open("div").add_class("content fullpage")
+		add("h1").text("Nit Standard Library")
+		open("article").add_class("overview")
+		add_html("<p>Documentation for the standard library of Nit<br />Version jenkins-component=stdlib-19<br />Date: TODAY</p>")
+		close("article")
+		open("article").add_class("overview")
+		add("h2").text("Modules")
+		open("ul")
+		close("ul")
+		close("article")
+		close("div")
+		close("div")
+		add("footer").text("Nit standard library. Version jenkins-component=stdlib-19.")
+	end
+
 end
 
 class NitdocPage
