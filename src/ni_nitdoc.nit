@@ -312,6 +312,7 @@ class NitdocFullindex
 	fun add_content do
 		module_column
 		classes_column
+		properties_column
 	end
 
 	# Add to content modules column
@@ -341,6 +342,34 @@ class NitdocFullindex
 		for mclass in mmodules.first.imported_mclasses do
 			open("li")
 			add("a").attr("href", "{mclass.name}.html").text(mclass.name)
+			close("li")
+		end
+
+		close("ul")
+		close("article")
+	end
+
+	# Insert the properties column of fullindex page
+	fun properties_column do
+		open("article").add_class("properties filterable")
+		add("h2").text("Properties")
+		open("ul")
+
+		for method in mmodules.first.imported_methods do
+			if method.visibility is none_visibility or method.visibility is intrude_visibility then continue
+			open("li").add_class("intro")
+			add("span").attr("title", "introduction").text("I")
+			add_html("&nbsp;")
+			add("a").attr("href", "{method.local_class.name}.html").attr("title", "").text("{method.name} ({method.local_class.name})")
+			close("li")
+		end
+
+		for method in mmodules.first.redef_methods do
+			if method.visibility is none_visibility or method.visibility is intrude_visibility then continue
+			open("li").add_class("redef")
+			add("span").attr("title", "redefinition").text("R")
+			add_html("&nbsp;")
+			add("a").attr("href", "{method.local_class.name}.html").attr("title", "").text("{method.name} ({method.local_class.name})")
 			close("li")
 		end
 
