@@ -404,6 +404,77 @@ class NitdocModules
 		add("title").text("{modulename} module | {amodule.short_comment}")
 	end
 
+	redef fun header do
+		open("header")
+		open("nav").add_class("main")
+		open("ul")
+		open("li")
+		add_html("<a href=\"index.html\">Overview</a>")
+		close("li")
+		add("li").add_class("current").text(modulename)
+		open("li")
+		add_html("<a href=\"full-index.html\" >Full Index</a>")
+		close("li")
+		open("li").attr("id", "liGitHub")
+		open("a").add_class("btn").attr("id", "logGitHub")
+		add("img").attr("id", "imgGitHub").attr("src", "resources/icons/github-icon.png")
+		close("a")
+		open("div").add_class("popover bottom")
+		add("div").add_class("arrow").text(" ")
+		open("div").add_class("githubTitle")
+		add("h3").text("Github Sign In")
+		close("div")
+		open("div")
+		add("label").attr("id", "lbloginGit").text("Username")
+		add("input").attr("id", "loginGit").attr("name", "login").attr("type", "text")
+		open("label").attr("id", "logginMessage").text("Hello ")
+		open("a").attr("id", "githubAccount")
+		add("strong").attr("id", "nickName").text(" ")
+		close("a")
+		close("label")
+		close("div")
+		open("div")
+		add("label").attr("id", "lbpasswordGit").text("Password")
+		add("input").attr("id", "passwordGit").attr("name", "password").attr("type", "password")
+		open("div").attr("id", "listBranches")
+		add("label").attr("id", "lbBranches").text("Branch")
+		add("select").add_class("dropdown").attr("id", "dropBranches").attr("name", "dropBranches").attr("tabindex", "1").text(" ")
+		close("div")
+		close("div")
+		open("div")
+		add("label").attr("id", "lbrepositoryGit").text("Repository")
+		add("input").attr("id", "repositoryGit").attr("name", "repository").attr("type", "text")
+		close("div")
+		open("div")
+		add("label").attr("id", "lbbranchGit").text("Branch")
+		add("input").attr("id", "branchGit").attr("name", "branch").attr("type", "text")
+		close("div")
+		open("div")
+		add("a").attr("id", "signIn").text("Sign In")
+		close("div")
+		close("div")
+		close("li")
+		close("ul")
+		close("nav")
+		close("header")
+	end
+
+	redef fun body do
+		super
+		open("div").add_class("page")
+		add_content
+		close("div")
+		add("footer").text("Nit standard library. Version jenkins-component=stdlib-19.")
+	end
+
+	# Insert all tags in content part
+	fun add_content do
+		open("div").add_class("content")
+		add("h1").text(modulename)
+		add("div").add_class("subtitle").text("module {modulename}")
+		close("div")
+	end
+
 end
 
 class NitdocPage
