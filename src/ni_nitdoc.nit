@@ -18,6 +18,7 @@ module ni_nitdoc
 
 import model_utils
 import abstract_compiler
+import html
 
 class Nitdoc
 	private var toolcontext: ToolContext
@@ -94,6 +95,23 @@ class Nitdoc
 			sys.system("cp -r {sharedir.to_s}/* {destinationdir.to_s}/")
 		end
 	end
+end
+
+class NitdocPage
+	super HTMLPage
+	var opt_nodot: Bool
+	var destinationdir : String
+
+	redef fun head do
+		add("meta").attr("charset", "utf-8")
+		add("script").attr("type", "text/javascript").attr("src", "scripts/jquery-1.7.1.min.js")
+		add("script").attr("type", "text/javascript").attr("src", "quicksearch-list.js")
+		add("script").attr("type", "text/javascript").attr("src", "scripts/js-facilities.js")
+		add("link").attr("rel", "stylesheet").attr("href", "styles/main.css").attr("type", "text/css").attr("media", "screen")
+	end
+
+	redef fun body do header
+	fun header do end
 end
 
 # Create a tool context to handle options and paths
