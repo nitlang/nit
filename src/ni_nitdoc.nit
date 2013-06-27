@@ -311,6 +311,7 @@ class NitdocFullindex
 
 	fun add_content do
 		module_column
+		classes_column
 	end
 
 	# Add to content modules column
@@ -327,6 +328,22 @@ class NitdocFullindex
 				close("li")
 			end
 		end
+		close("ul")
+		close("article")
+	end
+
+	# Add to content classes modules
+	fun classes_column do
+		open("article").add_class("classes filterable")
+		add("h2").text("Classes")
+		open("ul")
+
+		for mclass in mmodules.first.imported_mclasses do
+			open("li")
+			add("a").attr("href", "{mclass.name}.html").text(mclass.name)
+			close("li")
+		end
+
 		close("ul")
 		close("article")
 	end
