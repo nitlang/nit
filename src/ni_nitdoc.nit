@@ -407,6 +407,33 @@ redef class AModule
 	end
 end
 
+redef class MModule
+
+	var amodule: nullable AModule
+
+	# Get the list of all methods in a module
+	fun imported_methods: Set[MMethod] do
+		var methods = new HashSet[MMethod]
+		for mclass in imported_mclasses do
+			for method in mclass.intro_methods do
+				methods.add(method)
+			end
+		end
+		return methods
+	end
+
+	# Get the list aof all refined methods in a module
+	fun redef_methods: Set[MMethod] do
+		var methods = new HashSet[MMethod]
+		for mclass in redef_mclasses do
+			for method in mclass.intro_methods do
+				methods.add(method)
+			end
+		end
+		return methods
+	end
+end
+
 # Create a tool context to handle options and paths
 var toolcontext = new ToolContext
 toolcontext.process_options
