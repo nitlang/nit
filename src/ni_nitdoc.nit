@@ -186,11 +186,26 @@ class NitdocOverview
 		open("article").add_class("overview")
 		add("h2").text("Modules")
 		open("ul")
+		add_modules
 		close("ul")
 		close("article")
 		close("div")
 		close("div")
 		add("footer").text("Nit standard library. Version jenkins-component=stdlib-19.")
+	end
+
+	fun add_modules do
+		var ls = new List[nullable MModule]
+		for amodule in amodules do
+			var mmodule = amodule.mmodule.public_owner
+			if mmodule != null and not ls.has(mmodule) then
+				open("li")
+				add("a").attr("href", "{mmodule.name}.html").text("{mmodule.to_s} ")
+				add_html(amodule.comment)
+				close("li")
+				ls.add(mmodule)
+			end
+		end
 	end
 
 end
