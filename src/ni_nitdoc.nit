@@ -225,6 +225,22 @@ class NitdocPage
 
 	redef fun body do header
 	fun header do end
+
+	# Generate a clickable graphviz image using a dot content
+	fun generate_dot(dot: String, name: String, alt: String) do
+		if opt_nodot then return
+		var file = new OFStream.open("{self.destinationdir}/{name}.dot")
+		file.write(dot)
+		file.close
+		sys.system("\{ test -f {self.destinationdir}/{name}.png && test -f {self.destinationdir}/{name}.s.dot && diff {self.destinationdir}/{name}.dot {self.destinationdir}/{name}.s.dot >/dev/null 2>&1 ; \} || \{ cp {self.destinationdir}/{name}.dot {self.destinationdir}/{name}.s.dot && dot -Tpng -o{self.destinationdir}/{name}.png -Tcmapx -o{self.destinationdir}/{name}.map {self.destinationdir}/{name}.s.dot ; \}")
+		open("article").add_class("graph")
+		add("img").attr("src", "{name}.png").attr("usemap", "#{name}").attr("style", "margin:auto").attr("alt", "{alt}")
+		close("article")
+		var fmap = new IFStream.open("{self.destinationdir}/{name}.map")
+		add_html(fmap.read_all)
+		fmap.close
+	end
+
 end
 
 redef class AModule
