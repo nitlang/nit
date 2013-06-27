@@ -93,8 +93,15 @@ class Nitdoc
 			# Create destination dir if it's necessary
 			if not destinationdir.file_exists then destinationdir.mkdir
 			sys.system("cp -r {sharedir.to_s}/* {destinationdir.to_s}/")
+			overview
 		end
 	end
+
+	fun overview do
+		var overviewpage = new NitdocOverview.with(modelbuilder.nmodules, self.opt_nodot.value, destinationdir.to_s)
+		overviewpage.save("{destinationdir.to_s}/index.html")
+	end
+
 end
 
 class NitdocOverview
