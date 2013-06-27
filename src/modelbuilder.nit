@@ -1175,7 +1175,7 @@ redef class AMethPropdef
 				name = "init"
 				name_node = self.n_kwinit
 			else if self isa AExternInitPropdef then
-				name = "new"
+				name = "init"
 				name_node = self.n_kwnew
 			else
 				abort

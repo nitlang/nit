@@ -3,10 +3,6 @@ init_inherit
 init_linext
 inline
 test_extern
-test_ni_
-test_ffi_
-test_gtk
-calculator
 nitc
 nitdoc
 nits

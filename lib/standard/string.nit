@@ -405,12 +405,6 @@ class String
 		var my_items = self._items
 		var its_items = s._items
 
-		if self._length < s._length then
-			return true
-		else if self.length > s._length then
-			return false
-		end
-
 		var self_upper_bound = self._length + currIdSelf
 		var other_upper_bound = s._length + currIdOther
 
@@ -428,7 +422,11 @@ class String
 			currIdOther += 1
 		end
 
-		return false
+		if self._length < s._length then
+			return true
+		else
+			return false
+		end
 	end
 
 	# The concatenation of `self' with `r'

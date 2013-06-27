@@ -298,9 +298,9 @@ redef class String
 	#   a    # -> [4, 7]
 	fun search_all(p: Pattern): Array[Match] do return p.search_all_in(self)
 
-	# Split self using p is separator.
+	# Split `self` using `p` as separator.
 	#   "hello world".split('o')     # -> ["hell", " w", "rld"]
-	fun split_with(p: Pattern): Array[String]
+	fun split(p: Pattern): Array[String]
 	do
 		var matches = p.split_in(self)
 		var res = new Array[String].with_capacity(matches.length)
@@ -308,9 +308,8 @@ redef class String
 		return res
 	end
 
-	# Split self using '\n' is separator.
-	#   "hello\nworld".split     # -> ["hello","world"]
-	fun split: Array[String] do return split_with('\n')
+	# @deprecated alias for `split`
+	fun split_with(p: Pattern): Array[String] do return self.split(p)
 
 	# Replace all occurences of a pattern with a string
 	#

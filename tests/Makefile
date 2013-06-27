@@ -1,49 +1,48 @@
 
 PROGS=*.nit ../examples/*.nit ../examples/leapfrog/leapfrog.nit ../examples/shoot/shoot_logic.nit ../lib/*.nit ../src/nitdoc.nit ../src/nits.nit ../src/nitc.nit ../src/test_parser.nit ../src/nit.nit ../src/nitmetrics.nit ../src/nitg.nit
 
-all: separate global niti nitg nitg-s nitg-s-bm nitg-s-phmod nitg-s-phand nitg-e nitg-e-bm nitg-e-phmod nitg-e-phand icode
+all: separate niti nitg nitg-s
+
+alot: separate global niti nitg nitg-s nitg-s-bm nitg-s-phmod nitg-s-phand nitg-e nitg-e-bm nitg-e-phmod nitg-e-phand icode
 
 separate:
-	./tests.sh ${PROGS}
+	./testfull.sh
 
 some:
 	./tests.sh base_compile.nit base_attr.nit base_gen.nit test_gen_inh.nit bench_fib.nit example_objet.nit
 
 global:
-	./tests.sh -o --global ${PROGS}
+	./testfull.sh -o --global
 
 niti:
-	./tests.sh --engine niti ${PROGS}
+	./testfull.sh --engine niti
 
 nitg:
-	./tests.sh --engine nitg ${PROGS}
+	./testfull.sh --engine nitg
 
 nitg-s:
-	./tests.sh --engine nitg-s ${PROGS}
+	./testfull.sh --engine nitg-s
 
 nitg-s-bm:
-	./tests.sh --engine nitg-s -o --bm-typing ${PROGS}
+	./testfull.sh --engine nitg-s -o --bm-typing
 
 nitg-s-phmod:
-	./tests.sh --engine nitg-s -o --phmod-typing ${PROGS}
+	./testfull.sh --engine nitg-s -o --phmod-typing
 
 nitg-s-phand:
-	./tests.sh --engine nitg-s -o --phand-typing ${PROGS}
+	./testfull.sh --engine nitg-s -o --phand-typing
 
 nitg-e:
-	./tests.sh --engine nitg-e ${PROGS}
+	./testfull.sh --engine nitg-e
 
 nitg-e-bm:
-	./tests.sh --engine nitg-e -o --bm-typing ${PROGS}
+	./testfull.sh --engine nitg-e -o --bm-typing
 
 nitg-e-phmod:
-	./tests.sh --engine nitg-e -o --phmod-typing ${PROGS}
+	./testfull.sh --engine nitg-e -o --phmod-typing
 
 nitg-e-phand:
-	./tests.sh --engine nitg-e -o --phand-typing ${PROGS}
-
-nitdoc:
-	./tests.sh ../src/nitdoc.nit
+	./testfull.sh --engine nitg-e -o --phand-typing
 
 icode:
 	./tests_icode.sh icode*.nit

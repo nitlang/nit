@@ -1,0 +1,5 @@
+c_src			-diff
+parser.nit		-diff
+parser_prod.nit		-diff
+lexer.nit		-diff
+tables_nit.c		-diff

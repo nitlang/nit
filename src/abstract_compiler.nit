@@ -65,6 +65,8 @@ redef class ModelBuilder
 		# Note that we do not try to be clever an a small change in a Nit source file may change the content of all the generated .c files
 		var time0 = get_time
 
+		".nit_compile".mkdir
+
 		var outname = self.toolcontext.opt_output.value
 		if outname == null then
 			outname = "{mainmodule.name}.bin"
@@ -83,7 +85,6 @@ redef class ModelBuilder
 		var file: nullable OFStream = null
 		var count = 0
 
-		".nit_compile".mkdir
 		var i = 0
 		for vis in compiler.visitors do
 			count += vis.lines.length
@@ -1549,7 +1550,8 @@ redef class AExternInitPropdef
 		var externname
 		var nextern = self.n_extern
 		if nextern == null then
-			debug("{mpropdef} need extern name")
+			v.add("printf(\"NOT YET IMPLEMENTED nitni for {mpropdef} at {location.to_s}\\n\");")
+			v.add("exit(1);")
 			return
 		end
 		externname = nextern.text.substring(1, nextern.text.length-2)

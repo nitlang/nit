@@ -17,6 +17,7 @@
  */
 
 /* This grammar defines the NIT language. */
+Package org.nitlanguage.gen;
 
 /*****************************************************************************/
 Helpers
@@ -474,9 +475,9 @@ expr~nopar~nobra {-> expr}
 
 expr_and~nopar~nobra {-> expr}
 	= expr_not~nopar~nobra {-> expr_not~nopar~nobra.expr}
-	| {or} expr_and~nopar~nobra kwor no expr_not~nopar~nobra {-> New expr.or(expr_and~nopar~nobra.expr, expr_not~nopar~nobra.expr)}
-	| {and} expr_and~nopar~nobra kwand no expr_not~nopar~nobra {-> New expr.and(expr_and~nopar~nobra.expr, expr_not~nopar~nobra.expr)}
-	| {or_else} expr_and~nopar~nobra kwor kwelse no expr_not~nopar~nobra {-> New expr.or_else(expr_and~nopar~nobra.expr, expr_not~nopar~nobra.expr)}
+	| {:or} expr_and~nopar~nobra :kwor :no expr_not~nopar~nobra
+	| {:and} expr_and~nopar~nobra :kwand :no expr_not~nopar~nobra
+	| {:or_else} expr_and~nopar~nobra :kwor :kwelse :no expr_not~nopar~nobra
 	;
 
 expr_not~nopar~nobra {-> expr}
@@ -486,36 +487,36 @@ expr_not~nopar~nobra {-> expr}
 
 expr_eq~nopar~nobra {-> expr}
 	= expr_add~nopar~nobra {-> expr_add~nopar~nobra.expr}
-	| {eq} expr_add~nopar~nobra eq no [expr2]:expr_add~nopar~nobra {-> New expr.eq(expr_add~nopar~nobra.expr, expr2.expr)}
-	| {ee} expr_add~nopar~nobra kwis no [expr2]:expr_add~nopar~nobra {-> New expr.ee(expr_add~nopar~nobra.expr, expr2.expr)}
-	| {ne} expr_add~nopar~nobra ne no [expr2]:expr_add~nopar~nobra {-> New expr.ne(expr_add~nopar~nobra.expr, expr2.expr)}
-	| {lt} expr_add~nopar~nobra lt no [expr2]:expr_add~nopar~nobra {-> New expr.lt(expr_add~nopar~nobra.expr, expr2.expr)}
-	| {le} expr_add~nopar~nobra le no [expr2]:expr_add~nopar~nobra {-> New expr.le(expr_add~nopar~nobra.expr, expr2.expr)}
-	| {ll} expr_eq~nopar~nobra ll no [expr2]:expr_add~nopar~nobra {-> New expr.ll(expr_eq~nopar~nobra.expr, expr2.expr)}
-	| {gt} expr_add~nopar~nobra gt no [expr2]:expr_add~nopar~nobra {-> New expr.gt(expr_add~nopar~nobra.expr, expr2.expr)}
-	| {ge} expr_add~nopar~nobra ge no [expr2]:expr_add~nopar~nobra {-> New expr.ge(expr_add~nopar~nobra.expr, expr2.expr)}
-	| {gg} expr_eq~nopar~nobra gg no [expr2]:expr_add~nopar~nobra {-> New expr.gg(expr_eq~nopar~nobra.expr, expr2.expr)}
-	| {starship} expr_add~nopar~nobra starship no [expr2]:expr_add~nopar~nobra {-> New expr.starship(expr_add~nopar~nobra.expr, expr2.expr)}
-	| {isa} expr_add~nopar~nobra kwisa no type~nobra {-> New expr.isa(expr_add~nopar~nobra.expr, type~nobra.type)}
+	| {:eq} expr_add~nopar~nobra :eq :no [expr2]:expr_add~nopar~nobra
+	| {:ee} expr_add~nopar~nobra :kwis :no [expr2]:expr_add~nopar~nobra
+	| {:ne} expr_add~nopar~nobra :ne :no [expr2]:expr_add~nopar~nobra
+	| {:lt} expr_add~nopar~nobra :lt :no [expr2]:expr_add~nopar~nobra
+	| {:le} expr_add~nopar~nobra :le :no [expr2]:expr_add~nopar~nobra
+	| {:ll} expr_eq~nopar~nobra :ll :no [expr2]:expr_add~nopar~nobra
+	| {:gt} expr_add~nopar~nobra :gt :no [expr2]:expr_add~nopar~nobra
+	| {:ge} expr_add~nopar~nobra :ge :no [expr2]:expr_add~nopar~nobra
+	| {:gg} expr_eq~nopar~nobra :gg :no [expr2]:expr_add~nopar~nobra
+	| {:starship} expr_add~nopar~nobra :starship :no [expr2]:expr_add~nopar~nobra
+	| {:isa} expr_add~nopar~nobra :kwisa :no type~nobra
 	;
 
 expr_add~nopar~nobra {-> expr}
 	=  expr_mul~nopar~nobra {-> expr_mul~nopar~nobra.expr}
-	| {plus} expr_add~nopar~nobra plus no [expr2]:expr_mul~nopar~nobra {-> New expr.plus(expr_add~nopar~nobra.expr, expr2.expr)}
-	| {minus} expr_add~nopar~nobra minus no [expr2]:expr_mul~nopar~nobra {-> New expr.minus(expr_add~nopar~nobra.expr, expr2.expr)}
+	| {:plus} expr_add~nopar~nobra :plus :no [expr2]:expr_mul~nopar~nobra
+	| {:minus} expr_add~nopar~nobra :minus :no [expr2]:expr_mul~nopar~nobra
 	;
 
 expr_mul~nopar~nobra {-> expr}
 	= expr_minus~nopar~nobra {-> expr_minus~nopar~nobra.expr}
-	| {star} expr_mul~nopar~nobra star no [expr2]:expr_minus~nopar~nobra {-> New expr.star(expr_mul~nopar~nobra.expr, expr2.expr)}
-	| {slash} expr_mul~nopar~nobra slash no [expr2]:expr_minus~nopar~nobra {-> New expr.slash(expr_mul~nopar~nobra.expr, expr2.expr)}
-	| {percent} expr_mul~nopar~nobra percent no [expr2]:expr_minus~nopar~nobra {-> New expr.percent(expr_mul~nopar~nobra.expr, expr2.expr)}
+	| {:star} expr_mul~nopar~nobra :star :no [expr2]:expr_minus~nopar~nobra
+	| {:slash} expr_mul~nopar~nobra :slash :no [expr2]:expr_minus~nopar~nobra
+	| {:percent} expr_mul~nopar~nobra :percent :no [expr2]:expr_minus~nopar~nobra
 	;
 
 expr_minus~nopar~nobra {-> expr}
 	= expr_new~nopar~nobra {-> expr_new~nopar~nobra.expr}
-	| {minus} minus no expr_minus~nopar~nobra {-> New expr.uminus(minus, expr_minus~nopar~nobra.expr)}
-	| {once} kwonce no expr_minus~nopar~nobra {-> New expr.once(kwonce, expr_minus~nopar~nobra.expr)}
+	| {:uminus} minus :no expr_minus~nopar~nobra
+	| {:once} kwonce :no expr_minus~nopar~nobra
 	;
 
 expr_new~nopar~nobra {-> expr}
@@ -535,14 +536,14 @@ expr_atom~nopar~nobra {-> expr}
 !nobra!nopar	| {range} obra no expr [n2]:no dotdot [n3]:no [expr2]:expr_nobra [n4]:no cbra {-> New expr.crange(obra, expr, expr2.expr, cbra)}
 !nobra!nopar	| {orange} obra no expr [n2]:no dotdot [n3]:no [expr2]:expr_nobra [n4]:no [cbra]:obra  {-> New expr.orange(obra, expr, expr2.expr, cbra)}
 !nobra!nopar	| {array} braargs {-> New expr.array(braargs.exprs)}
-	| {self} kwself {-> New expr.self(kwself)}
-	| {true} kwtrue {-> New expr.true(kwtrue)}
-	| {false} kwfalse {-> New expr.false(kwfalse)}
-	| {null} kwnull {-> New expr.null(kwnull)}
-	| {int} number  {-> New expr.int(number)}
-	| {float} float  {-> New expr.float(float)}
-	| {char} char  {-> New expr.char(char)}
-	| {string} string  {-> New expr.string(string)}
+	| {:self} kwself
+	| {:true} kwtrue
+	| {:false} kwfalse
+	| {:null} kwnull
+	| {:int} number
+	| {:float} float
+	| {:char} char
+	| {:string} string
 	| {superstring} superstring  {-> superstring.expr}
 !nopar	| {par} opar expr cpar {-> New expr.par(opar, expr, cpar)}
         | {as_cast} expr_atom~nopar~nobra dot no kwas [n2]:no opar [n3]:no type [n4]:no cpar {-> New expr.as_cast(expr_atom~nopar~nobra.expr, kwas, opar, type, cpar)}

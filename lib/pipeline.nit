@@ -42,12 +42,8 @@ redef interface Collection[E]
 
 	# Filter: sort with a given `sorter`.
 	# Important: require O(n) memory.
-	#
-	# REQUIRE: self isa Iterator[Object]
-	# FIXME: AbstractSorter[E] is refused
-	fun sort_with(sorter: AbstractSorter[Object]): Collection[E]
+	fun sort_with(sorter: AbstractSorter[E]): Collection[E]
 	do
-		assert self isa Collection[Object]
 		var a = self.to_a
 		sorter.sort(a)
 		return a
