@@ -95,6 +95,7 @@ class Nitdoc
 			sys.system("cp -r {sharedir.to_s}/* {destinationdir.to_s}/")
 			overview
 			fullindex
+			modules
 		end
 	end
 
@@ -106,6 +107,13 @@ class Nitdoc
 	fun fullindex do
 		var fullindex = new NitdocFullindex.with(model.mmodules)
 		fullindex.save("{destinationdir.to_s}/full-index.html")
+	end
+
+	fun modules do
+		for mod in modelbuilder.nmodules do
+			var modulepage = new NitdocModules.with(mod)
+			modulepage.save("{destinationdir.to_s}/{mod.mmodule.name}.html")
+		end
 	end
 
 end
