@@ -86,6 +86,14 @@ class Nitdoc
 			end
 		end
 	end
+
+	fun start do
+		if arguments.length == 1 then
+			# Create destination dir if it's necessary
+			if not destinationdir.file_exists then destinationdir.mkdir
+			sys.system("cp -r {sharedir.to_s}/* {destinationdir.to_s}/")
+		end
+	end
 end
 
 # Create a tool context to handle options and paths
@@ -94,3 +102,4 @@ toolcontext.process_options
 
 # Here we launch the nit index
 var nitdoc = new Nitdoc(toolcontext)
+nitdoc.start
