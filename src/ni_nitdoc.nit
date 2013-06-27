@@ -310,6 +310,25 @@ class NitdocFullindex
 	end
 
 	fun add_content do
+		module_column
+	end
+
+	# Add to content modules column
+	fun module_column do
+		var ls = new List[nullable MModule]
+		open("article").add_class("modules filterable")
+		add("h2").text("Modules")
+		open("ul")
+		for mmodule in mmodules do
+			if mmodule.public_owner != null and not ls.has(mmodule.public_owner) then
+				ls.add(mmodule.public_owner)
+				open("li")
+				add("a").attr("href", "{mmodule.public_owner.name}.html").text(mmodule.public_owner.name)
+				close("li")
+			end
+		end
+		close("ul")
+		close("article")
 	end
 
 end
