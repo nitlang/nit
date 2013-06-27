@@ -212,6 +212,29 @@ class NitdocPage
 	fun header do end
 end
 
+redef class AModule
+	private fun comment: String do
+		var ret = ""
+		if n_moduledecl is null or n_moduledecl.n_doc is null then ret
+		if n_moduledecl.n_doc is null then return ""
+		for t in n_moduledecl.n_doc.n_comment do
+			ret += "{t.text.replace("# ", "")}"
+		end
+		return ret
+	end
+
+	private fun short_comment: String do
+		var ret = ""
+		if n_moduledecl != null and n_moduledecl.n_doc != null then
+			var txt = n_moduledecl.n_doc.n_comment.first.text
+			txt = txt.replace("# ", "")
+			txt = txt.replace("\n", "")
+			ret += txt
+		end
+		return ret
+	end
+end
+
 # Create a tool context to handle options and paths
 var toolcontext = new ToolContext
 toolcontext.process_options
