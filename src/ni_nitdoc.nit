@@ -188,6 +188,7 @@ class NitdocOverview
 		open("ul")
 		add_modules
 		close("ul")
+		process_generate_dot
 		close("article")
 		close("div")
 		close("div")
@@ -206,6 +207,19 @@ class NitdocOverview
 				ls.add(mmodule)
 			end
 		end
+	end
+
+	fun process_generate_dot do
+		var op = new Buffer
+		op.append("digraph dep \{ rankdir=BT; node[shape=none,margin=0,width=0,height=0,fontsize=10]; edge[dir=none,color=gray]; ranksep=0.2; nodesep=0.1;\n")
+		for amodule in amodules do
+			op.append("\"{amodule.mmodule.name}\"[URL=\"{amodule.mmodule.name}.html\"];\n")
+			for mmodule2 in amodule.mmodule.in_importation.direct_greaters do
+				op.append("\"{amodule.mmodule.name}\"->\"{mmodule2.name}\";\n")
+			end
+		end
+		op.append("\}\n")
+		generate_dot(op.to_s, "dep", "Modules hierarchy")
 	end
 
 end
