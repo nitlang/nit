@@ -434,6 +434,24 @@ redef class MModule
 	end
 end
 
+redef class MProperty
+
+	var is_redef: Bool
+	var apropdef: nullable APropdef
+
+	redef init(intro_mclassdef: MClassDef, name: String, visibility: MVisibility)
+	do
+		super
+		is_redef = false
+	end
+
+	fun local_class: MClass do
+		var classdef = self.intro_mclassdef
+		return classdef.mclass
+	end
+
+end
+
 # Create a tool context to handle options and paths
 var toolcontext = new ToolContext
 toolcontext.process_options
