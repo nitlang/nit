@@ -94,12 +94,18 @@ class Nitdoc
 			if not destinationdir.file_exists then destinationdir.mkdir
 			sys.system("cp -r {sharedir.to_s}/* {destinationdir.to_s}/")
 			overview
+			fullindex
 		end
 	end
 
 	fun overview do
 		var overviewpage = new NitdocOverview.with(modelbuilder.nmodules, self.opt_nodot.value, destinationdir.to_s)
 		overviewpage.save("{destinationdir.to_s}/index.html")
+	end
+
+	fun fullindex do
+		var fullindex = new NitdocFullindex.with(model.mmodules)
+		fullindex.save("{destinationdir.to_s}/full-index.html")
 	end
 
 end
