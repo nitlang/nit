@@ -1037,6 +1037,15 @@ redef class MClass
 		return hm
 	end
 
+	# Return true if MModule concern contain subMModule
+	fun has_mmodule(sub: MModule): Bool do
+		for mmodule, childs in concerns do
+			if childs is null then continue
+			if childs.has(sub) then return true
+		end
+		return false
+	end
+
 end
 
 redef class AStdClassdef
