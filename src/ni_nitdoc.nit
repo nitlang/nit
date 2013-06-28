@@ -1082,6 +1082,19 @@ redef class AMethPropdef
 	end
 end
 
+redef class MClassDef
+	private fun namespace(mclass: MClass): String do
+
+		if mmodule.public_owner is null then
+			return "{mmodule.full_name}::{mclass.name}"
+		else if mclass is self.mclass then
+			return "{mmodule.public_owner.name}::{mclass.name}"
+		else
+			return "{mmodule.public_owner.name}::<a href=\"{mclass.name}.html\">{mclass.name}</a>"
+		end
+	end
+end
+
 # Create a tool context to handle options and paths
 var toolcontext = new ToolContext
 toolcontext.process_options
