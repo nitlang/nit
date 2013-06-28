@@ -1189,6 +1189,12 @@ redef class MClassDef
 	end
 end
 
+redef class Set[E]
+	fun last: E do
+		return to_a[length-1]
+	end
+end
+
 # Create a tool context to handle options and paths
 var toolcontext = new ToolContext
 toolcontext.process_options
