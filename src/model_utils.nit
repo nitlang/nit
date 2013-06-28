@@ -180,6 +180,12 @@ redef class MClass
 		return res
 	end
 
+	fun mmodules: Set[MModule] do
+		var mdls = new HashSet[MModule]
+		for mclassdef in mclassdefs do mdls.add(mclassdef.mmodule)
+		return mdls
+	end
+
 	fun is_class: Bool do
 		return self.kind == concrete_kind or self.kind == abstract_kind
 	end
