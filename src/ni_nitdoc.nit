@@ -799,6 +799,35 @@ class NitdocMClasses
 		close("section")
 	end
 
+	# Insert description tags for 'prop'
+	fun description(prop: MProperty) do
+		open("article").add_class("fun public {if prop.is_redef then "redef" else ""}").attr("id", "{prop.anchor}")
+		var sign = prop.name
+		if prop.apropdef != null then sign += prop.apropdef.signature
+		add_html("<h3 class=\"signature\">{sign}</h3>")
+		add_html("<div class=\"info\">{if prop.is_redef then "redef" else ""} fun {prop.intro_mclassdef.namespace(mclass)}::{prop.name}</div><div style=\"float: right;\"><a id=\"lblDiffCommit\"></a></div>")
+
+		open("div").add_class("description")
+		if prop.apropdef is null or prop.apropdef.comment == "" then
+			add_html("<a class=\"newComment\" title=\"32\" tag=\"\">New Comment</a>")
+		else
+			add_html("<pre class=\"text_label\" title=\"\" name=\"\" tag=\"\" type=\"1\">{prop.apropdef.comment}</pre>")
+		end
+		add_html("<textarea id=\"fileContent\" class=\"edit\" cols=\"76\" rows=\"1\" style=\"display: none;\"></textarea><a id=\"cancelBtn\" style=\"display: none;\">Cancel</a><a id=\"commitBtn\" style=\"display: none;\">Commit</a><pre id=\"preSave\" class=\"text_label\" type=\"2\"></pre>")
+		open("p")
+		if prop.local_class != mclass then add_html("inherited from {prop.local_class.intro_mmodule.name} ")
+		#TODO display show code if doc github
+		add_html("defined by the module <a href=\"{prop.intro_mclassdef.mmodule.name}.html\">{prop.intro_mclassdef.mmodule.name}</a> (<a href=\"\">show code</a>).")
+
+		for parent in mclass.parents do
+			if prop isa MMethod then if parent.constructors.has(prop) then add_html(" Previously defined by: <a href=\"{parent.intro_mmodule.name}.html\">{parent.intro_mmodule.name}</a> for <a href=\"{parent.name}.html\">{parent.name}</a>.")
+		end
+		close("p")
+		close("div")
+
+		close("article")
+	end
+
 end	
 
 class NitdocPage
