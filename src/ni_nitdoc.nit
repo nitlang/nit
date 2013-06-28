@@ -681,8 +681,59 @@ class NitdocMClasses
 	redef fun body do
 		super
 		open("div").add_class("page")
+		add_content
 		close("div")
 		add("footer").text("Nit standard library. Version jenkins-component=stdlib-19.")
+	end
+
+	# Insert all tags in content part
+	fun add_content do
+		open("div").add_class("menu")
+		properties_column
+		close("div")
+		open("div").add_class("content")
+		close("div")
+	end
+
+	fun properties_column do
+		open("nav").add_class("properties filterable")
+		add("h3").text("Properties")
+
+		if mclass.virtual_types.length > 0 then
+			add("h4").text("Virtual Types")
+			open("ul")
+			for prop in mclass.virtual_types do
+				add_html("<li class=\"redef\"><span title=\"Redefined\">R</span><a href=\"{prop.link_anchor}\">{prop.name}</a></li>")
+			end
+			close("ul")
+		end
+		if mclass.constructors.length > 0 then
+			add("h4").text("Constructors")
+			open("ul")
+			for prop in mclass.constructors do
+				add_html("<li class=\"intro\"><span title=\"Introduced\">I</span><a href=\"{prop.link_anchor}\">{prop.name}</a></li>")
+			end
+			close("ul")
+		end
+		add("h4").text("Methods")
+		open("ul")
+		if mclass.intro_methods.length > 0 then
+			for prop in mclass.intro_methods do
+				if prop.visibility is public_visibility or prop.visibility is protected_visibility then add_html("<li class=\"intro\"><span title=\"Introduced\">I</span><a href=\"{prop.link_anchor}\">{prop.name}</a></li>")
+			end
+		end
+		if mclass.inherited_methods.length > 0 then
+			for prop in mclass.inherited_methods do
+				if prop.visibility is public_visibility or prop.visibility is protected_visibility then add_html("<li class=\"inherit\"><span title=\"Inherited\">H</span><a href=\"{prop.link_anchor}\">{prop.name}</a></li>")
+			end
+		end
+		if mclass.redef_methods.length > 0 then
+			for prop in mclass.redef_methods do
+				if prop.visibility is public_visibility or prop.visibility is protected_visibility then add_html("<li class=\"redef\"><span title=\"Refined\">R</span><a href=\"{prop.link_anchor}\">{prop.name}</a></li>")
+			end
+		end
+		close("ul")
+		close("nav")
 	end
 
 end	
