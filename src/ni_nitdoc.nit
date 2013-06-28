@@ -120,6 +120,7 @@ class Nitdoc
 	fun classes do
 		for amodule in modelbuilder.nmodules do
 			for mclass, aclassdef in amodule.mclass2nclassdef do
+				mclass.amodule(modelbuilder.mmodule2nmodule)
 				var classpage = new NitdocMClasses.with(mclass, aclassdef)
 				classpage.save("{destinationdir.to_s}/{mclass.name}.html")
 			end
@@ -946,6 +947,14 @@ redef class MClass
 			return owner
 		else
 			return owner.public_owner.as(not null)
+		end
+	end
+	
+	# Associate Amodule to all MModule concern by 'self'
+	fun amodule(amodules: HashMap[MModule, AModule]) do
+		for owner, childs in concerns do
+			if childs != null then for child in childs do child.amodule = amodules[child]
+			owner.amodule = amodules[owner]
 		end
 	end
 
