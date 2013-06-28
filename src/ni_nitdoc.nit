@@ -797,6 +797,23 @@ class NitdocMClasses
 		end
 		close("ul")
 		close("section")
+		# Insert virtual types if there is almost one
+		if mclass.virtual_types.length > 0 or (stdclassdef != null and stdclassdef.n_formaldefs.length > 0) then
+			open("section").add_class("types")
+			add("h2").text("Formal and Virtual Types")
+			if mclass.virtual_types.length > 0 then for prop in mclass.virtual_types do description(prop)
+			if stdclassdef.n_formaldefs.length > 0 then
+				for prop in stdclassdef.n_formaldefs do
+					open("article").attr("id", "FT_Object_{prop.collect_text}")
+					open("h3").add_class("signature").text("{prop.collect_text}: nullable ")
+					add_html("<a title=\"The root of the class hierarchy.\" href=\"Object.html\">Object</a>")
+					close("h3")
+					add_html("<div class=\"info\">formal generic type</div>")
+					close("article")
+				end
+			end
+			close("section")
+		end
 	end
 
 	# Insert description tags for 'prop'
