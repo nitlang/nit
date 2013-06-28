@@ -28,6 +28,7 @@ class Nitdoc
 	private var arguments: Array[String]
 	private var destinationdir: nullable String
 	private var sharedir: nullable String
+	private var source: nullable String
 
 	private var opt_dir = new OptionString("Directory where doc is generated", "-d", "--dir")
 	private var opt_source = new OptionString("What link for source (%f for filename, %l for first line, %L for last line)", "--source")
@@ -43,6 +44,7 @@ class Nitdoc
 		toolcontext.option_context.add_option(opt_source)
 		toolcontext.option_context.add_option(opt_sharedir)
 		toolcontext.option_context.add_option(opt_nodot)
+		toolcontext.process_options
 		process_options
 
 		if arguments.length < 1 then
@@ -87,6 +89,11 @@ class Nitdoc
 				abort
 			end
 		end
+		if not opt_source.value is null then
+			source = ""
+		else
+			source = opt_source.value
+		end
 	end
 
 	fun start do
@@ -124,7 +131,7 @@ class Nitdoc
 			for mclass, aclassdef in amodule.mclass2nclassdef do
 				mclass.amodule(modelbuilder.mmodule2nmodule)
 				mclass.mmethod(aclassdef.mprop2npropdef)
-				var classpage = new NitdocMClasses.with(mclass, aclassdef)
+				var classpage = new NitdocMClasses.with(mclass, aclassdef, source)
 				classpage.save("{destinationdir.to_s}/{mclass.name}.html")
 			end
 		end
@@ -637,13 +644,14 @@ class NitdocMClasses
 	var stdclassdef: nullable AStdClassdef
 	var public_owner: nullable MModule
 
-	init with(mclass: MClass, aclassdef: AClassdef) do
+	init with(mclass: MClass, aclassdef: AClassdef, source: nullable String) do
 		self.mclass = mclass
 		self.aclassdef = aclassdef
 		if aclassdef isa AStdClassdef then self.stdclassdef = aclassdef
 		self.public_owner = mclass.intro_mmodule.public_owner
 		opt_nodot = false
 		destinationdir = ""
+		self.source = source
 	end
 
 	redef fun head do
@@ -902,7 +910,7 @@ class NitdocMClasses
 		open("p")
 		if prop.local_class != mclass then add_html("inherited from {prop.local_class.intro_mmodule.name} ")
 		#TODO display show code if doc github
-		add_html("defined by the module <a href=\"{prop.intro_mclassdef.mmodule.name}.html\">{prop.intro_mclassdef.mmodule.name}</a> (<a href=\"\">show code</a>).")
+		add_html("defined by the module <a href=\"{prop.intro_mclassdef.mmodule.name}.html\">{prop.intro_mclassdef.mmodule.name}</a> {if prop.apropdef is null then "" else show_source(prop.apropdef.location)}.")
 
 		for parent in mclass.parents do
 			if prop isa MMethod then if parent.constructors.has(prop) then add_html(" Previously defined by: <a href=\"{parent.intro_mmodule.name}.html\">{parent.intro_mmodule.name}</a> for <a href=\"{parent.name}.html\">{parent.name}</a>.")
@@ -920,6 +928,7 @@ class NitdocPage
 	
 	var opt_nodot: Bool
 	var destinationdir : String
+	var source: nullable String
 
 	redef fun head do
 		add("meta").attr("charset", "utf-8")
@@ -945,6 +954,23 @@ class NitdocPage
 		var fmap = new IFStream.open("{self.destinationdir}/{name}.map")
 		add_html(fmap.read_all)
 		fmap.close
+	end
+
+	# Add a (source) link fo a given location
+	fun show_source(l: Location): String
+	do
+		if source == null then
+			return "({l.file.filename.simplify_path})"
+		else
+			# THIS IS JUST UGLY ! (but there is no replace yet)
+			var x = source.split_with("%f")
+			source = x.join(l.file.filename.simplify_path)
+			x = source.split_with("%l")
+			source = x.join(l.line_start.to_s)
+			x = source.split_with("%L")
+			source = x.join(l.line_end.to_s)
+			return " (<a href=\"{source.to_s}\">show code</a>)"
+		end
 	end
 
 end
@@ -1261,7 +1287,6 @@ end
 
 # Create a tool context to handle options and paths
 var toolcontext = new ToolContext
-toolcontext.process_options
 
 # Here we launch the nit index
 var nitdoc = new Nitdoc(toolcontext)
