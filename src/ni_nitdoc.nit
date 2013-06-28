@@ -835,6 +835,19 @@ class NitdocMClasses
 			end
 			for prop in mmethods do description(prop)
 		end
+		# Insert inherited methods
+		if mclass.inherited_methods.length > 0 then
+			add("h3").text("Inherited Methods")
+			for i_mclass, methods in mclass.inherited do
+				open("p")
+				add_html("Defined in <a href=\"{i_mclass.name}.html\">{i_mclass.name}</a>: ")
+				for method in methods do
+					add_html("<a href=\"{method.link_anchor}\">{method.name}</a>")
+					if method != methods.last then add_html(", ")
+				end
+				close("p")
+			end
+		end
 		close("section")
 	end
 
