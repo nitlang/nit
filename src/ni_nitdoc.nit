@@ -96,6 +96,7 @@ class Nitdoc
 			overview
 			fullindex
 			modules
+			classes
 		end
 	end
 
@@ -113,6 +114,15 @@ class Nitdoc
 		for mod in modelbuilder.nmodules do
 			var modulepage = new NitdocModules.with(mod)
 			modulepage.save("{destinationdir.to_s}/{mod.mmodule.name}.html")
+		end
+	end
+
+	fun classes do
+		for amodule in modelbuilder.nmodules do
+			for mclass, aclassdef in amodule.mclass2nclassdef do
+				var classpage = new NitdocMClasses.with(mclass, aclassdef)
+				classpage.save("{destinationdir.to_s}/{mclass.name}.html")
+			end
 		end
 	end
 
