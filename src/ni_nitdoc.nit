@@ -924,6 +924,113 @@ redef class MClass
 
 end
 
+redef class AStdClassdef
+	private fun comment: String do
+		var ret = ""
+		if n_doc != null then
+			for t in n_doc.n_comment do
+				var txt = t.text.replace("# ", "")
+				txt = txt.replace("#", "")
+				ret += "{txt}"
+			end
+		end
+		return ret
+	end
+
+	private fun short_comment: String do
+		var ret = ""
+		if n_doc != null then
+			var txt = n_doc.n_comment.first.text
+			txt = txt.replace("# ", "")
+			txt = txt.replace("\n", "")
+			ret += txt
+		end
+		return ret
+	end
+end
+
+redef class ASignature
+	redef fun to_s do
+		#TODO closures
+		var ret = ""
+		if not n_params.is_empty then
+			ret = "{ret}({n_params.join(", ")})"
+		end
+		if n_type != null and n_type.to_s != "" then ret += " {n_type.to_s}"
+		return ret
+	end
+end
+
+redef class AParam
+	redef fun to_s do
+		var ret = "{n_id.text}"
+		if n_type != null then
+			ret = "{ret}: {n_type.to_s}"
+			if n_dotdotdot != null then ret = "{ret}..."
+		end
+		return ret
+	end
+end
+
+redef class AType
+	redef fun to_s do
+		var ret = "<a href=\"{n_id.text}.html\">{n_id.text}</a>"
+		if n_kwnullable != null then ret = "nullable {ret}"
+		if not n_types.is_empty then ret = "{ret}[{n_types.join(", ")}]"
+		return ret
+	end
+end
+
+redef class APropdef
+	private fun short_comment: String is abstract
+	private fun signature: String is abstract
+	private fun comment: String is abstract
+end
+
+redef class AAttrPropdef
+	redef fun short_comment do
+		var ret = ""
+		if n_doc != null then
+			var txt = n_doc.n_comment.first.text
+			txt = txt.replace("# ", "")
+			txt = txt.replace("\n", "")
+			ret += txt
+		end
+		return ret
+	end
+end
+
+redef class AMethPropdef
+	redef fun short_comment do
+		var ret = ""
+		if n_doc != null then
+			var txt = n_doc.n_comment.first.text
+			txt = txt.replace("# ", "")
+			txt = txt.replace("\n", "")
+			ret += txt
+		end
+		return ret
+	end
+
+	redef fun signature: String do
+		var sign = ""
+		if n_signature != null then sign = " {n_signature.to_s}"
+		return sign
+	end
+
+	redef private fun comment: String do
+		var ret = ""
+		if n_doc != null then
+			for t in n_doc.n_comment do
+				var txt = t.text.replace("# ", "")
+				txt = txt.replace("#", "")
+				ret += "{txt}"
+			end
+		end
+		return ret
+	end
+end
+
 # Create a tool context to handle options and paths
 var toolcontext = new ToolContext
 toolcontext.process_options
