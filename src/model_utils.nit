@@ -186,6 +186,25 @@ redef class MClass
 		return mdls
 	end
 
+	# Get the list of MModule concern in 'self'
+	fun concerns: HashMap[MModule, nullable List[MModule]] do
+		var hm = new HashMap[MModule, nullable List[MModule]]
+		for mmodule in mmodules do
+			var owner = mmodule.public_owner
+			if owner == null then
+				hm[mmodule] = null
+			else
+				if hm.has_key(owner) then
+					hm[owner].add(mmodule)
+				else
+					hm[owner] = new List[MModule]
+					hm[owner].add(mmodule)
+				end
+			end
+		end
+		return hm
+	end
+
 	fun is_class: Bool do
 		return self.kind == concrete_kind or self.kind == abstract_kind
 	end
