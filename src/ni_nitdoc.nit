@@ -121,6 +121,7 @@ class Nitdoc
 		for amodule in modelbuilder.nmodules do
 			for mclass, aclassdef in amodule.mclass2nclassdef do
 				mclass.amodule(modelbuilder.mmodule2nmodule)
+				mclass.mmethod(aclassdef.mprop2npropdef)
 				var classpage = new NitdocMClasses.with(mclass, aclassdef)
 				classpage.save("{destinationdir.to_s}/{mclass.name}.html")
 			end
