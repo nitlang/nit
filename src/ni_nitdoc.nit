@@ -787,6 +787,18 @@ redef class MProperty
 		return classdef.mclass
 	end
 
+	fun class_text: String do
+		return local_class.name
+	end
+
+	fun link_anchor: String do
+		return "{class_text}.html#{anchor}"
+	end
+
+	fun anchor: String do
+		return "PROP_{c_name}"
+	end
+
 end
 
 redef class MClass
