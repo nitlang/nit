@@ -1046,6 +1046,26 @@ redef class MClass
 		return false
 	end
 
+	fun mmethod(mprop2npropdef: Map[MProperty, APropdef]) do
+		for const in constructors do
+			if mprop2npropdef.has_key(const)then
+				const.apropdef = mprop2npropdef[const].as(AMethPropdef)
+			end
+		end
+
+		for intro in intro_methods do
+			if mprop2npropdef.has_key(intro)then
+				if mprop2npropdef[intro] isa AMethPropdef then intro.apropdef = mprop2npropdef[intro].as(AMethPropdef)
+			end
+		end
+
+		for rd in redef_methods do
+			if mprop2npropdef.has_key(rd)then
+				if mprop2npropdef[rd] isa AMethPropdef then rd.apropdef = mprop2npropdef[rd].as(AMethPropdef)
+			end
+		end
+	end
+
 end
 
 redef class AStdClassdef
