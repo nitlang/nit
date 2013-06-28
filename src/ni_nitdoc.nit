@@ -475,6 +475,7 @@ class NitdocModules
 		add("div").add_class("subtitle").text("module {modulename}")
 		module_comment
 		classes
+		properties
 		close("div")
 	end
 
@@ -552,6 +553,32 @@ class NitdocModules
 		close("ul")
 		close("article")
 		close("div")
+	end
+
+	fun properties do
+		open("article").add_class("properties filterable")
+		add_html("<h2>Properties</h2>")
+		open("ul")
+		for method in amodule.mmodule.imported_methods do
+			if method.visibility is none_visibility or method.visibility is intrude_visibility then continue
+			open("li").add_class("intro")
+			add("span").attr("title", "introduction").text("I")
+			add_html("&nbsp;")
+			add("a").attr("href", "{method.local_class.name}.html").attr("title", "").text("{method.name} ({method.local_class.name})")
+			close("li")
+		end
+
+		for method in amodule.mmodule.redef_methods do
+			if method.visibility is none_visibility or method.visibility is intrude_visibility then continue
+			open("li").add_class("redef")
+			add("span").attr("title", "redefinition").text("R")
+			add_html("&nbsp;")
+			add("a").attr("href", "{method.local_class.name}.html").attr("title", "").text("{method.name} ({method.local_class.name})")
+			close("li")
+		end
+
+		close("ul")
+		close("article")
 	end
 
 end
