@@ -822,6 +822,20 @@ class NitdocMClasses
 			for prop in mclass.constructors do description(prop)
 			close("section")
 		end
+		open("section").add_class("methods")
+		add("h2").add_class("section-header").text("Methods")
+		for mmodule, mmethods in mclass.all_methods do
+			add_html("<a id=\"MOD_{mmodule.name}\"></a>")
+			if mmodule != mclass.intro_mmodule and mmodule != mclass.public_owner then
+				if mclass.has_mmodule(mmodule) then
+					add_html("<p class=\"concern-doc\">{mmodule.name}: {mmodule.amodule.short_comment}</p>")
+				else
+					add_html("<h3 class=\"concern-toplevel\">Methods refined in <a href=\"{mmodule.name}.html\">{mmodule.name}</a></h3><p class=\"concern-doc\">{mmodule.name}: {mmodule.amodule.short_comment}</p>")
+				end
+			end
+			for prop in mmethods do description(prop)
+		end
+		close("section")
 	end
 
 	# Insert description tags for 'prop'
