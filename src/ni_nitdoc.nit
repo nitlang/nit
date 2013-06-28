@@ -488,6 +488,28 @@ class NitdocModules
 		close("div")
 	end
 
+	fun add_classes do
+		open("div").add_class("module")
+		open("article").add_class("classes filterable")
+		add("h2").text("Classes")
+		open("ul")
+		for c, state in amodule.mmodule.mclasses do
+			var name = c.name
+			if state == c_is_intro or state == c_is_imported then
+				open("li").add_class("intro")
+				add("span").attr("title", "introduced in this module").text("I ")
+			else
+				open("li").add_class("redef")
+				add("span").attr("title", "refined in this module").text("R ")
+			end
+			add("a").attr("href", "{name}.html").text(name)
+			close("li")
+		end
+		close("ul")
+		close("article")
+		close("div")
+	end
+
 end
 
 class NitdocPage

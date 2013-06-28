@@ -39,6 +39,15 @@ redef class MModule
 		end
 		return mclasses
 	end
+
+	# Get all mclasses in 'self' with their state
+	fun mclasses: HashMap[MClass, Int] do
+		var mclasses = new HashMap[MClass, Int]
+		for c in intro_mclasses do mclasses[c] = c_is_intro
+		for r in redef_mclasses do mclasses[r] = c_is_refined
+		for i in imported_mclasses do mclasses[i] = c_is_imported
+		return mclasses
+	end
 end
 
 redef class MClass
@@ -187,3 +196,8 @@ redef class MClass
 		return self.kind == abstract_kind
 	end
 end
+
+# MClass State
+fun c_is_intro: Int do return 1
+fun c_is_refined: Int do return 2
+fun c_is_imported: Int do return 3
