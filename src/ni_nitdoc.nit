@@ -814,6 +814,13 @@ class NitdocMClasses
 			end
 			close("section")
 		end
+		# Insert constructors if there is almost one
+		if mclass.constructors.length > 0 then
+			open("section").add_class("constructors")
+			add("h2").add_class("section-header").text("Constructors")
+			for prop in mclass.constructors do description(prop)
+			close("section")
+		end
 	end
 
 	# Insert description tags for 'prop'
