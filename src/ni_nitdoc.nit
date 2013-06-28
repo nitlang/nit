@@ -1026,6 +1026,17 @@ redef class MClass
 		end
 	end
 
+	# Associate MClass to all MMethod include in 'inherited_methods'
+	fun inherited: HashMap[MClass, Set[MMethod]] do
+		var hm = new HashMap[MClass, Set[MMethod]]
+		for method in inherited_methods do
+			var mclass = method.intro_mclassdef.mclass
+			if not hm.has_key(mclass) then hm[mclass] = new HashSet[MMethod]
+			hm[mclass].add(method)
+		end
+		return hm
+	end
+
 end
 
 redef class AStdClassdef
