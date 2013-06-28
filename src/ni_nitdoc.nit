@@ -473,6 +473,7 @@ class NitdocModules
 		add("h1").text(modulename)
 		add("div").add_class("subtitle").text("module {modulename}")
 		module_comment
+		classes
 		close("div")
 	end
 
@@ -488,7 +489,7 @@ class NitdocModules
 		close("div")
 	end
 
-	fun add_classes do
+	fun classes do
 		open("div").add_class("module")
 		open("article").add_class("classes filterable")
 		add("h2").text("Classes")
