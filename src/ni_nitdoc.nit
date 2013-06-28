@@ -922,6 +922,15 @@ redef class MClass
 		return hm
 	end
 
+	fun public_owner: MModule do
+		var owner = intro_mmodule
+		if owner.public_owner is null then
+			return owner
+		else
+			return owner.public_owner.as(not null)
+		end
+	end
+
 end
 
 redef class AStdClassdef
