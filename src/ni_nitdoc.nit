@@ -658,6 +658,49 @@ redef class MProperty
 
 end
 
+redef class MClass
+
+	# Associate all MMethods to each MModule concerns
+	fun all_methods: HashMap[MModule, Set[MMethod]] do
+		var hm = new HashMap[MModule, Set[MMethod]]
+		for mmodule, childs in concerns do
+			if not hm.has_key(mmodule) then hm[mmodule] = new HashSet[MMethod]
+			for prop in intro_methods do
+				if mmodule == prop.intro_mclassdef.mmodule then
+					prop.is_redef = false
+					hm[mmodule].add(prop)
+				end
+			end
+			for prop in redef_methods do
+				if mmodule == prop.intro_mclassdef.mmodule then
+					prop.is_redef = true
+					hm[mmodule].add(prop)
+				end
+			end
+
+			if childs != null then
+				for child in childs do
+					if not hm.has_key(child) then hm[child] = new HashSet[MMethod]
+					for prop in intro_methods do
+						if child == prop.intro_mclassdef.mmodule then
+							prop.is_redef = false
+							hm[child].add(prop)
+						end
+					end
+					for prop in redef_methods do
+						if child == prop.intro_mclassdef.mmodule then
+							prop.is_redef = true
+							hm[child].add(prop)
+						end
+					end
+				end
+			end
+		end
+		return hm
+	end
+
+end
+
 # Create a tool context to handle options and paths
 var toolcontext = new ToolContext
 toolcontext.process_options
