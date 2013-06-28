@@ -97,6 +97,7 @@ class Nitdoc
 			fullindex
 			modules
 			classes
+			quicksearch_list
 		end
 	end
 
@@ -126,6 +127,37 @@ class Nitdoc
 				classpage.save("{destinationdir.to_s}/{mclass.name}.html")
 			end
 		end
+	end
+
+	# Generate QuickSearch file
+	fun quicksearch_list do
+		var file = new OFStream.open("{destinationdir.to_s}/quicksearch-list.js")
+		var content = new Buffer
+		content.append("var entries = \{ ")
+		for prop in model.mproperties do
+			if not prop isa MMethod then continue
+			content.append("\"{prop.name}\": [")
+			for propdef in prop.mpropdefs do
+				content.append("\{txt: \"{propdef.mproperty.full_name}\", url:\"{propdef.mproperty.link_anchor}\" \}")
+				if not propdef is prop.mpropdefs.last then content.append(", ")
+			end
+			content.append("]")
+			content.append(", ")
+		end
+
+		for mclass in model.mclasses do
+			content.append("\"{mclass.name}\": [")
+			for mclassdef in mclass.mclassdefs do
+				content.append("\{txt: \"{mclassdef.mclass.full_name}\", url:\"{mclass.link_anchor}\" \}")
+				if not mclassdef is mclass.mclassdefs.last then content.append(", ")
+			end
+			content.append("]")
+			if not mclass is model.mclasses.last then content.append(", ")
+		end
+
+		content.append(" \};")
+		file.write(content.to_s)
+		file.close
 	end
 
 end
