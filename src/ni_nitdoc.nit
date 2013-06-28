@@ -782,6 +782,21 @@ class NitdocMClasses
 		open("section").add_class("description")
 		if not stdclassdef is null and not stdclassdef.comment.is_empty then add_html("<pre class=\"text_label\" title=\"122\" name=\"\" tag=\"{mclass.mclassdefs.first.location.to_s}\" type=\"2\">{stdclassdef.comment} </pre><textarea id=\"fileContent\" class=\"edit\" cols=\"76\" rows=\"1\" style=\"display: none;\"></textarea><a id=\"cancelBtn\" style=\"display: none;\">Cancel</a><a id=\"commitBtn\" style=\"display: none;\">Commit</a><pre id=\"preSave\" class=\"text_label\" type=\"2\"></pre>")
 		close("section")
+		open("section").add_class("concerns")
+		add("h2").add_class("section-header").text("Concerns")
+		open("ul")
+		for owner, childs in mclass.concerns do
+			open("li")
+			add_html("<a href=\"#MOD_{owner.name}\">{owner.name}</a>: {owner.amodule.short_comment}")
+			if not childs is null then
+				open("ul")
+				for child in childs.as(not null) do add_html("<li><a href=\"#MOD_{child.name}\">{child.name}</a>: {child.amodule.short_comment} </li>")
+				close("ul")
+			end
+			close("li")
+		end
+		close("ul")
+		close("section")
 	end
 
 end	
