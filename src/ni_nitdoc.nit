@@ -462,6 +462,7 @@ class NitdocModules
 	redef fun body do
 		super
 		open("div").add_class("page")
+		menu
 		add_content
 		close("div")
 		add("footer").text("Nit standard library. Version jenkins-component=stdlib-19.")
@@ -486,6 +487,48 @@ class NitdocModules
 		add("a").attr("id", "cancelBtn").text("Cancel")
 		add("a").attr("id", "commitBtn").text("Commit")
 		add("pre").add_class("text_label").attr("id", "preSave").attr("type", "2")
+		close("div")
+	end
+
+	fun menu do
+		var mmodule = amodule.mmodule 
+		open("div").add_class("menu")
+		open("nav")
+		add("h3").text("Module Hierarchy").attr("style","cursor: pointer;")
+		if mmodule.in_importation.direct_greaters.length > 0 then
+			add_html("<h4>All dependencies</h4><ul>")
+			for m in mmodule.in_importation.direct_greaters do
+				if m == mmodule or mmodule == m.public_owner then continue
+				open("li")
+				add("a").attr("href", "{m.name}.html").text(m.name)
+				close("li")
+			end
+			add_html("</ul>")
+		end	
+		if mmodule.in_importation.greaters.length > 0 then
+			add_html("<h4>All clients</h4><ul>")
+			for m in mmodule.in_importation.greaters do
+				if m == mmodule then continue
+				open("li")
+				add("a").attr("href", "{m.name}.html").text(m.name)
+				close("li")
+			end
+			add_html("</ul>")
+		end
+		close("nav")
+		if mmodule.in_nesting.direct_greaters.length > 0 then
+			open("nav")
+			add("h3").text("Nested Modules").attr("style","cursor: pointer;")
+			open("ul")
+			for m in mmodule.in_nesting.direct_greaters do
+				open("li")
+				add("a").attr("href", "{m.name}.html").text(m.name)
+				close("li")
+			end
+			close("ul")
+			
+			close("nav")
+		end
 		close("div")
 	end
 
