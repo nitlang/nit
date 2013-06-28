@@ -690,6 +690,7 @@ class NitdocMClasses
 	fun add_content do
 		open("div").add_class("menu")
 		properties_column
+		inheritance_column
 		close("div")
 		open("div").add_class("content")
 		close("div")
@@ -733,6 +734,34 @@ class NitdocMClasses
 			end
 		end
 		close("ul")
+		close("nav")
+	end
+
+	fun inheritance_column do
+		open("nav")
+		add("h3").text("Inheritance")
+		if mclass.parents.length > 0 then
+			add("h4").text("Superclasses")
+			open("ul")
+			for sup in mclass.parents do add_html("<li><a href=\"{sup.name}.html\">{sup.name}</a></li>")
+			close("ul")
+		end
+
+		if mclass.descendants.length is 0 then
+			add("h4").text("No Known Subclasses")
+		else if mclass.descendants.length <= 100 then
+			add("h4").text("Subclasses")
+			open("ul")
+			for sub in mclass.descendants do add_html("<li><a href=\"{sub.name}\">{sub.name}</a></li>")
+			close("ul")
+		else if mclass.children.length <= 100 then
+			add("h4").text("Direct Subclasses Only")
+			open("ul")
+			for sub in mclass.children do add_html("<li><a href=\"{sub.name}\">{sub.name}</a></li>")
+			close("ul")
+		else
+			add("h4").text("Too much Subclasses to list")
+		end
 		close("nav")
 	end
 
