@@ -65,6 +65,8 @@ redef class ModelBuilder
 		compiler.compile_header
 
 		# compile class structures
+		compiler.new_file("{mainmodule.name}.classes")
+		compiler.do_property_coloring
 		for m in mainmodule.in_importation.greaters do
 			for mclass in m.intro_mclasses do
 				compiler.compile_class_to_c(mclass)
@@ -72,17 +74,17 @@ redef class ModelBuilder
 		end
 
 		# The main function of the C
-		compiler.new_file
+		compiler.new_file("{mainmodule.name}.main")
 		compiler.compile_main_function
 
 		# compile methods
 		for m in mainmodule.in_importation.greaters do
-			compiler.new_file
+			compiler.new_file("{m.name}.sep")
 			compiler.compile_module_to_c(m)
 		end
 
 		# compile live & cast type structures
-		compiler.new_file
+		compiler.new_file("{mainmodule.name}.types")
 		var mtypes = compiler.do_type_coloring
 		for t in mtypes do
 			compiler.compile_type_to_c(t)
@@ -112,24 +114,25 @@ class SeparateCompiler
 
 	init(mainmodule: MModule, mmbuilder: ModelBuilder, runtime_type_analysis: RapidTypeAnalysis) do
 		super(mainmodule, mmbuilder)
-		self.header = new_visitor
+		var file = new_file("nit.common")
+		self.header = new CodeWriter(file)
 		self.runtime_type_analysis = runtime_type_analysis
-		self.do_property_coloring
 		self.compile_box_kinds
 	end
 
 	redef fun compile_header_structs do
 		self.header.add_decl("typedef void(*nitmethod_t)(void); /* general C type representing a Nit method. */")
 		self.compile_header_attribute_structs
-		self.header.add_decl("struct class \{ int box_kind; nitmethod_t vft[1]; \}; /* general C type representing a Nit class. */")
+		self.header.add_decl("struct class \{ int box_kind; nitmethod_t vft[]; \}; /* general C type representing a Nit class. */")
 
 		# With resolution_table_table, all live type resolution are stored in a big table: resolution_table
-		self.header.add_decl("struct type \{ int id; const char *name; int color; short int is_nullable; struct types *resolution_table; int table_size; int type_table[1]; \}; /* general C type representing a Nit type. */")
+		self.header.add_decl("struct type \{ int id; const char *name; int color; short int is_nullable; const struct types *resolution_table; int table_size; int type_table[]; \}; /* general C type representing a Nit type. */")
+		self.header.add_decl("struct instance \{ const struct type *type; const struct class *class; nitattribute_t attrs[]; \}; /* general C type representing a Nit instance. */")
 
 		if modelbuilder.toolcontext.opt_phmod_typing.value or modelbuilder.toolcontext.opt_phand_typing.value then
-			self.header.add_decl("struct types \{ int mask; struct type *types[1]; \}; /* a list types (used for vts, fts and unresolved lists). */")
+			self.header.add_decl("struct types \{ int mask; const struct type *types[]; \}; /* a list types (used for vts, fts and unresolved lists). */")
 		else
-			self.header.add_decl("struct types \{ struct type *types[1]; \}; /* a list types (used for vts, fts and unresolved lists). */")
+			self.header.add_decl("struct types \{ int dummy; const struct type *types[]; \}; /* a list types (used for vts, fts and unresolved lists). */")
 		end
 
 		if modelbuilder.toolcontext.opt_phmod_typing.value then
@@ -138,7 +141,7 @@ class SeparateCompiler
 			self.header.add_decl("#define HASH(mask, id) ((mask)&(id))")
 		end
 
-		self.header.add_decl("typedef struct \{ struct type *type; struct class *class; nitattribute_t attrs[1]; \} val; /* general C type representing a Nit instance. */")
+		self.header.add_decl("typedef struct instance val; /* general C type representing a Nit instance. */")
 	end
 
 	fun compile_header_attribute_structs
@@ -183,21 +186,22 @@ class SeparateCompiler
 	end
 
 	fun compile_color_consts(colors: Map[Object, Int]) do
+		var v = new_visitor
 		for m, c in colors do
 			if color_consts_done.has(m) then continue
 			if m isa MProperty then
 				if modelbuilder.toolcontext.opt_inline_coloring_numbers.value then
-					self.header.add_decl("#define {m.const_color} {c}")
+					self.provide_declaration(m.const_color, "#define {m.const_color} {c}")
 				else
-					self.header.add_decl("extern const int {m.const_color};")
-					self.header.add("const int {m.const_color} = {c};")
+					self.provide_declaration(m.const_color, "extern const int {m.const_color};")
+					v.add("const int {m.const_color} = {c};")
 				end
 			else if m isa MType then
 				if modelbuilder.toolcontext.opt_inline_coloring_numbers.value then
-					self.header.add_decl("#define {m.const_color} {c}")
+					self.provide_declaration(m.const_color, "#define {m.const_color} {c}")
 				else
-					self.header.add_decl("extern const int {m.const_color};")
-					self.header.add("const int {m.const_color} = {c};")
+					self.provide_declaration(m.const_color, "extern const int {m.const_color};")
+					v.add("const int {m.const_color} = {c};")
 				end
 			end
 			color_consts_done.add(m)
@@ -523,19 +527,10 @@ class SeparateCompiler
 		v.add_decl("/* runtime type {mtype} */")
 
 		# extern const struct type_X
-		self.header.add_decl("extern const struct type_{c_name} type_{c_name};")
-		self.header.add_decl("struct type_{c_name} \{")
-		self.header.add_decl("int id;")
-		self.header.add_decl("const char *name;")
-		self.header.add_decl("int color;")
-		self.header.add_decl("short int is_nullable;")
-		self.header.add_decl("const struct types *resolution_table;")
-		self.header.add_decl("int table_size;")
-		self.header.add_decl("int type_table[{self.type_tables[mtype].length}];")
-		self.header.add_decl("\};")
+		self.provide_declaration("type_{c_name}", "extern const struct type type_{c_name};")
 
 		# const struct type_X
-		v.add_decl("const struct type_{c_name} type_{c_name} = \{")
+		v.add_decl("const struct type type_{c_name} = \{")
 		v.add_decl("{self.type_layout.ids[mtype]},")
 		v.add_decl("\"{mtype}\", /* class_name_string */")
 		var layout = self.type_layout
@@ -550,7 +545,8 @@ class SeparateCompiler
 			v.add_decl("0,")
 		end
 		if compile_type_resolution_table(mtype) then
-			v.add_decl("(struct types*) &resolution_table_{c_name},")
+			v.require_declaration("resolution_table_{c_name}")
+			v.add_decl("&resolution_table_{c_name},")
 		else
 			v.add_decl("NULL,")
 		end
@@ -580,19 +576,15 @@ class SeparateCompiler
 		var layout = self.resolution_layout
 
 		# extern const struct resolution_table_X resolution_table_X
-		self.header.add_decl("extern const struct resolution_table_{mtype.c_name} resolution_table_{mtype.c_name};")
-		self.header.add_decl("struct resolution_table_{mtype.c_name} \{")
-		if layout isa PHLayout[MClassType, MType] then
-			self.header.add_decl("int mask;")
-		end
-		self.header.add_decl("struct type *types[{self.resolution_tables[mclass_type].length}];")
-		self.header.add_decl("\};")
+		self.provide_declaration("resolution_table_{mtype.c_name}", "extern const struct types resolution_table_{mtype.c_name};")
 
 		# const struct fts_table_X fts_table_X
 		var v = new_visitor
-		v.add_decl("const struct resolution_table_{mtype.c_name} resolution_table_{mtype.c_name} = \{")
+		v.add_decl("const struct types resolution_table_{mtype.c_name} = \{")
 		if layout isa PHLayout[MClassType, MType] then
 			v.add_decl("{layout.masks[mclass_type]},")
+		else
+			v.add_decl("0, /* dummy */")
 		end
 		v.add_decl("\{")
 		for t in self.resolution_tables[mclass_type] do
@@ -605,13 +597,14 @@ class SeparateCompiler
 				var tv = t.resolve_for(mclass_type, mclass_type, self.mainmodule, true)
 				# FIXME: What typeids means here? How can a tv not be live?
 				if self.type_layout.ids.has_key(tv) then
-					v.add_decl("(struct type*)&type_{tv.c_name}, /* {t}: {tv} */")
+					v.require_declaration("type_{tv.c_name}")
+					v.add_decl("&type_{tv.c_name}, /* {t}: {tv} */")
 				else
 					v.add_decl("NULL, /* empty ({t}: {tv} not a live type) */")
 				end
 			end
 		end
-		v.add_decl("\},")
+		v.add_decl("\}")
 		v.add_decl("\};")
 		return true
 	end
@@ -630,14 +623,9 @@ class SeparateCompiler
 
 		v.add_decl("/* runtime class {c_name} */")
 
-		self.header.add_decl("struct class_{c_name} \{")
-		self.header.add_decl("int box_kind;")
-		self.header.add_decl("nitmethod_t vft[{vft.length}];")
-		self.header.add_decl("\};")
-
 		# Build class vft
-		self.header.add_decl("extern const struct class_{c_name} class_{c_name};")
-		v.add_decl("const struct class_{c_name} class_{c_name} = \{")
+		self.provide_declaration("class_{c_name}", "extern const struct class class_{c_name};")
+		v.add_decl("const struct class class_{c_name} = \{")
 		v.add_decl("{self.box_kind_of(mclass)}, /* box_kind */")
 		v.add_decl("\{")
 		for i in [0 .. vft.length[ do
@@ -646,8 +634,10 @@ class SeparateCompiler
 				v.add_decl("NULL, /* empty */")
 			else
 				if true or mpropdef.mclassdef.bound_mtype.ctype != "val*" then
+					v.require_declaration("VIRTUAL_{mpropdef.c_name}")
 					v.add_decl("(nitmethod_t)VIRTUAL_{mpropdef.c_name}, /* pointer to {mclass.intro_mmodule}:{mclass}:{mpropdef} */")
 				else
+					v.require_declaration("{mpropdef.c_name}")
 					v.add_decl("(nitmethod_t){mpropdef.c_name}, /* pointer to {mclass.intro_mmodule}:{mclass}:{mpropdef} */")
 				end
 			end
@@ -665,68 +655,74 @@ class SeparateCompiler
 
 			if not self.runtime_type_analysis.live_types.has(mtype) then return
 
+			#Build BOX
 			self.header.add_decl("val* BOX_{c_name}({mtype.ctype});")
 			v.add_decl("/* allocate {mtype} */")
 			v.add_decl("val* BOX_{mtype.c_name}({mtype.ctype} value) \{")
 			v.add("struct instance_{c_name}*res = GC_MALLOC(sizeof(struct instance_{c_name}));")
-			v.add("res->type = (struct type*) &type_{c_name};")
-			v.add("res->class = (struct class*) &class_{c_name};")
+			v.require_declaration("type_{c_name}")
+			v.add("res->type = &type_{c_name};")
+			v.require_declaration("class_{c_name}")
+			v.add("res->class = &class_{c_name};")
 			v.add("res->value = value;")
 			v.add("return (val*)res;")
 			v.add("\}")
 			return
-		end
-
-		var is_native_array = mclass.name == "NativeArray"
-
-		var sig
-		if is_native_array then
-			sig = "int length, struct type* type"
-		else
-			sig = "struct type* type"
-		end
-
-		#Build instance struct
-		#extern const struct instance_array__NativeArray instance_array__NativeArray;
-		self.header.add_decl("struct instance_{c_name} \{")
-		self.header.add_decl("const struct type *type;")
-		self.header.add_decl("const struct class *class;")
-		self.header.add_decl("nitattribute_t attrs[{attrs.length}];")
-		if is_native_array then
+		else if mclass.name == "NativeArray" then
+			#Build instance struct
+			self.header.add_decl("struct instance_{c_name} \{")
+			self.header.add_decl("const struct type *type;")
+			self.header.add_decl("const struct class *class;")
 			# NativeArrays are just a instance header followed by an array of values
 			self.header.add_decl("val* values[0];")
-		end
-		self.header.add_decl("\};")
+			self.header.add_decl("\};")
 
-
-		self.header.add_decl("{mtype.ctype} NEW_{c_name}({sig});")
-		v.add_decl("/* allocate {mtype} */")
-		v.add_decl("{mtype.ctype} NEW_{c_name}({sig}) \{")
-		var res = v.new_named_var(mtype, "self")
-		res.is_exact = true
-		if is_native_array then
+			#Build NEW
+			self.provide_declaration("NEW_{c_name}", "{mtype.ctype} NEW_{c_name}(int length, const struct type* type);")
+			v.add_decl("/* allocate {mtype} */")
+			v.add_decl("{mtype.ctype} NEW_{c_name}(int length, const struct type* type) \{")
+			var res = v.new_named_var(mtype, "self")
+			res.is_exact = true
 			var mtype_elt = mtype.arguments.first
 			v.add("{res} = GC_MALLOC(sizeof(struct instance_{c_name}) + length*sizeof({mtype_elt.ctype}));")
-		else
-			v.add("{res} = GC_MALLOC(sizeof(struct instance_{c_name}));")
-		end
-		v.add("{res}->type = type;")
-		if v.compiler.modelbuilder.toolcontext.opt_hardening.value then
-			v.add("if(type == NULL) \{")
-			v.add_abort("type null")
+			v.add("{res}->type = type;")
+			hardening_live_type(v, "type")
+			v.require_declaration("class_{c_name}")
+			v.add("{res}->class = &class_{c_name};")
+			v.add("return {res};")
 			v.add("\}")
-			v.add("if(type->resolution_table == NULL) \{")
-			v.add("fprintf(stderr, \"Insantiation of a dead type: %s\\n\", type->name);")
-			v.add_abort("type dead")
-			v.add("\}")
+			return
 		end
-		v.add("{res}->class = (struct class*) &class_{c_name};")
 
+		#Build NEW
+		self.provide_declaration("NEW_{c_name}", "{mtype.ctype} NEW_{c_name}(const struct type* type);")
+		v.add_decl("/* allocate {mtype} */")
+		v.add_decl("{mtype.ctype} NEW_{c_name}(const struct type* type) \{")
+		var res = v.new_named_var(mtype, "self")
+		res.is_exact = true
+		v.add("{res} = GC_MALLOC(sizeof(struct instance) + {attrs.length}*sizeof(nitattribute_t));")
+		v.add("{res}->type = type;")
+		hardening_live_type(v, "type")
+		v.require_declaration("class_{c_name}")
+		v.add("{res}->class = &class_{c_name};")
 		self.generate_init_attr(v, res, mtype)
 		v.add("return {res};")
 		v.add("\}")
 
 		generate_check_init_instance(mtype)
+	end
+
+	# Add a dynamic test to ensure that the type referenced by `t` is a live type
+	fun hardening_live_type(v: VISITOR, t: String)
+	do
+		if not v.compiler.modelbuilder.toolcontext.opt_hardening.value then return
+		v.add("if({t} == NULL) \{")
+		v.add_abort("type null")
+		v.add("\}")
+		v.add("if({t}->resolution_table == NULL) \{")
+		v.add("fprintf(stderr, \"Insantiation of a dead type: %s\\n\", {t}->name);")
+		v.add_abort("type dead")
+		v.add("\}")
 	end
 
 	redef fun generate_check_init_instance(mtype)
@@ -736,7 +732,7 @@ class SeparateCompiler
 		var v = self.new_visitor
 		var c_name = mtype.mclass.c_name
 		var res = new RuntimeVariable("self", mtype, mtype)
-		self.header.add_decl("void CHECK_NEW_{c_name}({mtype.ctype});")
+		self.provide_declaration("CHECK_NEW_{c_name}", "void CHECK_NEW_{c_name}({mtype.ctype});")
 		v.add_decl("/* allocate {mtype} */")
 		v.add_decl("void CHECK_NEW_{c_name}({mtype.ctype} {res}) \{")
 		self.generate_check_attr(v, res, mtype)
@@ -860,6 +856,7 @@ class SeparateCompilerVisitor
 		if value.mtype.ctype == "val*" then
 			return "{value}->type"
 		else
+			self.require_declaration("type_{value.mtype.c_name}")
 			return "(&type_{value.mtype.c_name})"
 		end
 	end
@@ -948,6 +945,7 @@ class SeparateCompilerVisitor
 
 		var r
 		if ret == null then r = "void" else r = ret.ctype
+		self.require_declaration(mmethod.const_color)
 		var call = "(({r} (*)({s}))({arguments.first}->class->vft[{mmethod.const_color}]))({ss}) /* {mmethod} on {arguments.first.inspect}*/"
 
 		if res != null then
@@ -996,6 +994,7 @@ class SeparateCompilerVisitor
 		# Autobox arguments
 		self.adapt_signature(mmethoddef, arguments)
 
+		self.require_declaration(mmethoddef.c_name)
 		if res == null then
 			self.add("{mmethoddef.c_name}({arguments.join(", ")});")
 			return null
@@ -1047,6 +1046,7 @@ class SeparateCompilerVisitor
 			return res
 		end
 
+		self.require_declaration(a.const_color)
 		if self.compiler.modelbuilder.toolcontext.opt_no_union_attribute.value then
 			self.add("{res} = {recv}->attrs[{a.const_color}] != NULL; /* {a} on {recv.inspect}*/")
 		else
@@ -1069,6 +1069,7 @@ class SeparateCompilerVisitor
 		var intromclassdef = a.intro.mclassdef
 		ret = ret.resolve_for(intromclassdef.bound_mtype, intromclassdef.bound_mtype, intromclassdef.mmodule, true)
 
+		self.require_declaration(a.const_color)
 		if self.compiler.modelbuilder.toolcontext.opt_no_union_attribute.value then
 			# Get the attribute or a box (ie. always a val*)
 			var cret = self.object_type.as_nullable
@@ -1114,6 +1115,7 @@ class SeparateCompilerVisitor
 		# Adapt the value to the declared type
 		value = self.autobox(value, mtype)
 
+		self.require_declaration(a.const_color)
 		if self.compiler.modelbuilder.toolcontext.opt_no_union_attribute.value then
 			var attr = "{recv}->attrs[{a.const_color}]"
 			if mtype.ctype != "val*" then
@@ -1137,24 +1139,28 @@ class SeparateCompilerVisitor
 
 	redef fun init_instance(mtype)
 	do
+		self.require_declaration("NEW_{mtype.mclass.c_name}")
 		var compiler = self.compiler
 		if mtype isa MGenericType and mtype.need_anchor then
 			link_unresolved_type(self.frame.mpropdef.mclassdef, mtype)
 			var recv = self.frame.arguments.first
 			var recv_type_info = self.type_info(recv)
+			self.require_declaration(mtype.const_color)
 			if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
-				return self.new_expr("NEW_{mtype.mclass.c_name}((struct type *) {recv_type_info}->resolution_table->types[HASH({recv_type_info}->resolution_table->mask, {mtype.const_color})])", mtype)
+				return self.new_expr("NEW_{mtype.mclass.c_name}({recv_type_info}->resolution_table->types[HASH({recv_type_info}->resolution_table->mask, {mtype.const_color})])", mtype)
 			else
-				return self.new_expr("NEW_{mtype.mclass.c_name}((struct type *) {recv_type_info}->resolution_table->types[{mtype.const_color}])", mtype)
+				return self.new_expr("NEW_{mtype.mclass.c_name}({recv_type_info}->resolution_table->types[{mtype.const_color}])", mtype)
 			end
 		end
 		compiler.undead_types.add(mtype)
-		return self.new_expr("NEW_{mtype.mclass.c_name}((struct type *) &type_{mtype.c_name})", mtype)
+		self.require_declaration("type_{mtype.c_name}")
+		return self.new_expr("NEW_{mtype.mclass.c_name}(&type_{mtype.c_name})", mtype)
 	end
 
 	redef fun check_init_instance(value, mtype)
 	do
 		if self.compiler.modelbuilder.toolcontext.opt_no_check_initialization.value then return
+		self.require_declaration("CHECK_NEW_{mtype.mclass.c_name}")
 		self.add("CHECK_NEW_{mtype.mclass.c_name}({value});")
 	end
 
@@ -1192,10 +1198,11 @@ class SeparateCompilerVisitor
 
 		if ntype.need_anchor then
 			var type_struct = self.get_name("type_struct")
-			self.add_decl("struct type* {type_struct};")
+			self.add_decl("const struct type* {type_struct};")
 
 			# Either with resolution_table with a direct resolution
 			link_unresolved_type(self.frame.mpropdef.mclassdef, ntype)
+			self.require_declaration(ntype.const_color)
 			if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
 				self.add("{type_struct} = {recv_type_info}->resolution_table->types[HASH({recv_type_info}->resolution_table->mask, {ntype.const_color})];")
 			else
@@ -1215,6 +1222,7 @@ class SeparateCompilerVisitor
 			end
 		else if ntype isa MClassType then
 			compiler.undead_types.add(mtype)
+			self.require_declaration("type_{mtype.c_name}")
 			self.add("{cltype} = type_{mtype.c_name}.color;")
 			self.add("{idtype} = type_{mtype.c_name}.id;")
 			if compiler.modelbuilder.toolcontext.opt_typing_test_metrics.value then
@@ -1263,7 +1271,8 @@ class SeparateCompilerVisitor
 				self.add("{res} = 0; /* is_same_type_test: incompatible types {value1.mtype} vs. {value2.mtype}*/")
 			else
 				var mtype1 = value1.mtype.as(MClassType)
-				self.add("{res} = ({value2} != NULL) && ({value2}->class == (struct class*) &class_{mtype1.c_name}); /* is_same_type_test */")
+				self.require_declaration("class_{mtype1.c_name}")
+				self.add("{res} = ({value2} != NULL) && ({value2}->class == &class_{mtype1.c_name}); /* is_same_type_test */")
 			end
 		else
 			self.add("{res} = ({value1} == {value2}) || ({value1} != NULL && {value2} != NULL && {value1}->class == {value2}->class); /* is_same_type_test */")
@@ -1278,6 +1287,7 @@ class SeparateCompilerVisitor
 		if value.mtype.ctype == "val*" then
 			self.add "{res} = {value} == NULL ? \"null\" : {value}->type->name;"
 		else
+			self.require_declaration("type_{value.mtype.c_name}")
 			self.add "{res} = type_{value.mtype.c_name}.name;"
 		end
 		return res
@@ -1298,7 +1308,8 @@ class SeparateCompilerVisitor
 				self.add("{res} = 0; /* incompatible types {value1.mtype} vs. {value2.mtype}*/")
 			else
 				var mtype1 = value1.mtype.as(MClassType)
-				self.add("{res} = ({value2} != NULL) && ({value2}->class == (struct class*) &class_{mtype1.c_name});")
+				self.require_declaration("class_{mtype1.c_name}")
+				self.add("{res} = ({value2} != NULL) && ({value2}->class == &class_{mtype1.c_name});")
 				self.add("if ({res}) \{")
 				self.add("{res} = ({self.autobox(value2, value1.mtype)} == {value1});")
 				self.add("\}")
@@ -1409,20 +1420,23 @@ class SeparateCompilerVisitor
 	fun native_array_instance(elttype: MType, length: RuntimeVariable): RuntimeVariable
 	do
 		var mtype = self.get_class("NativeArray").get_mtype([elttype])
+		self.require_declaration("NEW_{mtype.mclass.c_name}")
 		assert mtype isa MGenericType
 		var compiler = self.compiler
 		if mtype.need_anchor then
 			link_unresolved_type(self.frame.mpropdef.mclassdef, mtype)
 			var recv = self.frame.arguments.first
 			var recv_type_info = self.type_info(recv)
+			self.require_declaration(mtype.const_color)
 			if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
-				return self.new_expr("NEW_{mtype.mclass.c_name}({length}, (struct type *) {recv_type_info}->resolution_table->types[HASH({recv_type_info}->resolution_table->mask, {mtype.const_color})])", mtype)
+				return self.new_expr("NEW_{mtype.mclass.c_name}({length}, {recv_type_info}->resolution_table->types[HASH({recv_type_info}->resolution_table->mask, {mtype.const_color})])", mtype)
 			else
-				return self.new_expr("NEW_{mtype.mclass.c_name}({length}, (struct type *) {recv_type_info}->resolution_table->types[{mtype.const_color}])", mtype)
+				return self.new_expr("NEW_{mtype.mclass.c_name}({length}, {recv_type_info}->resolution_table->types[{mtype.const_color}])", mtype)
 			end
 		end
 		compiler.undead_types.add(mtype)
-		return self.new_expr("NEW_{mtype.mclass.c_name}({length}, (struct type *) &type_{mtype.c_name})", mtype)
+		self.require_declaration("type_{mtype.c_name}")
+		return self.new_expr("NEW_{mtype.mclass.c_name}({length}, &type_{mtype.c_name})", mtype)
 	end
 
 	redef fun native_array_def(pname, ret_type, arguments)
@@ -1512,7 +1526,7 @@ class SeparateRuntimeFunction
 		if ret != null then
 			comment.append(": {ret}")
 		end
-		compiler.header.add_decl("{sig};")
+		compiler.provide_declaration(self.c_name, "{sig};")
 
 		v.add_decl("/* method {self} for {comment} */")
 		v.add_decl("{sig} \{")
@@ -1588,7 +1602,7 @@ class VirtualRuntimeFunction
 		if ret != null then
 			comment.append(": {ret}")
 		end
-		compiler.header.add_decl("{sig};")
+		compiler.provide_declaration(self.c_name, "{sig};")
 
 		v.add_decl("/* method {self} for {comment} */")
 		v.add_decl("{sig} \{")

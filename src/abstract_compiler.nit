@@ -72,9 +72,14 @@ redef class ModelBuilder
 			outname = "{mainmodule.name}.bin"
 		end
 
-		var hfilename = ".nit_compile/{mainmodule.name}.1.h"
-		var h = new OFStream.open(hfilename)
+		var hfilename = compiler.header.file.name + ".h"
+		var hfilepath = ".nit_compile/{hfilename}"
+		var h = new OFStream.open(hfilepath)
 		for l in compiler.header.decl_lines do
+			h.write l
+			h.write "\n"
+		end
+		for l in compiler.header.lines do
 			h.write l
 			h.write "\n"
 		end
@@ -82,33 +87,49 @@ redef class ModelBuilder
 
 		var cfiles = new Array[String]
 
-		var file: nullable OFStream = null
-		var count = 0
-
-		var i = 0
-		for vis in compiler.visitors do
-			count += vis.lines.length
-			if file == null or count > 10000 or vis.file_break then
-				i += 1
-				if file != null then file.close
-				var cfilename = ".nit_compile/{mainmodule.name}.{i}.c"
-				cfiles.add(cfilename)
-				file = new OFStream.open(cfilename)
-				file.write "#include \"{mainmodule.name}.1.h\"\n"
-				count = vis.lines.length
+		for f in compiler.files do
+			var i = 0
+			var hfile: nullable OFStream = null
+			var count = 0
+			var cfilename = ".nit_compile/{f.name}.0.h"
+			hfile = new OFStream.open(cfilename)
+			hfile.write "#include \"{hfilename}\"\n"
+			for key in f.required_declarations do
+				if not compiler.provided_declarations.has_key(key) then
+					print "No provided declaration for {key}"
+					abort
+				end
+				hfile.write compiler.provided_declarations[key]
+				hfile.write "\n"
 			end
-			if vis != compiler.header then
+			hfile.close
+			var file: nullable OFStream = null
+			for vis in f.writers do
+				if vis == compiler.header then continue
+				var total_lines = vis.lines.length + vis.decl_lines.length
+				if total_lines == 0 then continue
+				count += total_lines
+				if file == null or count > 10000  then
+					i += 1
+					if file != null then file.close
+					cfilename = ".nit_compile/{f.name}.{i}.c"
+					self.toolcontext.info("new C source files to compile: {cfilename}", 3)
+					cfiles.add(cfilename)
+					file = new OFStream.open(cfilename)
+					file.write "#include \"{f.name}.0.h\"\n"
+					count = total_lines
+				end
 				for l in vis.decl_lines do
 					file.write l
 					file.write "\n"
 				end
+				for l in vis.lines do
+					file.write l
+					file.write "\n"
+				end
 			end
-			for l in vis.lines do
-				file.write l
-				file.write "\n"
-			end
+			if file != null then file.close
 		end
-		if file != null then file.close
 
 		self.toolcontext.info("Total C source files to compile: {cfiles.length}", 2)
 
@@ -129,8 +150,8 @@ redef class ModelBuilder
 		end
 		# Compile each required extern body into a specific .o
 		for f in compiler.extern_bodies do
-			i += 1
-			var o = ".nit_compile/{mainmodule.name}.{i}.o"
+			var basename = f.basename(".c")
+			var o = ".nit_compile/{basename}.extern.o"
 			makefile.write("{o}: {f}\n\t$(CC) $(CFLAGS) -D NONITCNI -c -o {o} {f}\n\n")
 			ofiles.add(o)
 		end
@@ -190,25 +211,33 @@ abstract class AbstractCompiler
 
 	# Force the creation of a new file
 	# The point is to avoid contamination between must-be-compiled-separately files
-	fun new_file
+	fun new_file(name: String): CodeFile
 	do
-		var v = self.new_visitor
-		v.file_break = true
+		var f = new CodeFile(name)
+		self.files.add(f)
+		return f
 	end
 
-	# The list of all associated visitors
+	# The list of all associated files
 	# Used to generate .c files
-	# FIXME: should not be vistors but just somewhere to store lines
-	var visitors: List[VISITOR] = new List[VISITOR]
+	var files: List[CodeFile] = new List[CodeFile]
 
 	# Initialize a visitor specific for a compiler engine
 	fun new_visitor: VISITOR is abstract
 
 	# Where global declaration are stored (the main .h)
-	#
-	# FIXME: should not be a visitor but just somewhere to store lines
-	# FIXME: should not have a global .h since it does not help recompilations
-	var header: VISITOR writable
+	var header: CodeWriter writable
+
+	# Provide a declaration that can be requested (before or latter) by a visitor
+	fun provide_declaration(key: String, s: String)
+	do
+		if self.provided_declarations.has_key(key) then
+			assert self.provided_declarations[key] == s
+		end
+		self.provided_declarations[key] = s
+	end
+
+	private var provided_declarations = new HashMap[String, String]
 
 	# Compile C headers
 	# This method call compile_header_strucs method that has to be refined
@@ -305,29 +334,6 @@ abstract class AbstractCompiler
 		end
 		v.add("return 0;")
 		v.add("\}")
-	end
-
-	# look for a needed .h and .c file for a given .nit source-file
-	# FIXME: bad API, parameter should be a MModule, not its source-file
-	fun add_extern(file: String)
-	do
-		file = file.strip_extension(".nit")
-		var tryfile = file + ".nit.h"
-		if tryfile.file_exists then
-			self.header.add_decl("#include \"{"..".join_path(tryfile)}\"")
-		end
-		tryfile = file + "_nit.h"
-		if tryfile.file_exists then
-			self.header.add_decl("#include \"{"..".join_path(tryfile)}\"")
-		end
-		tryfile = file + ".nit.c"
-		if tryfile.file_exists then
-			self.extern_bodies.add(tryfile)
-		end
-		tryfile = file + "_nit.c"
-		if tryfile.file_exists then
-			self.extern_bodies.add(tryfile)
-		end
 	end
 
 	# List of additional .c files required to compile (native interface)
@@ -429,6 +435,34 @@ abstract class AbstractCompiler
 	end
 end
 
+# A file unit (may be more than one file if
+# A file unit aim to be autonomous and is made or one or more `CodeWriter`s
+class CodeFile
+	var name: String
+	var writers = new Array[CodeWriter]
+	var required_declarations = new HashSet[String]
+end
+
+# Where to store generated lines
+class CodeWriter
+	var file: CodeFile
+	var lines: List[String] = new List[String]
+	var decl_lines: List[String] = new List[String]
+
+	# Add a line in the main part of the generated C
+	fun add(s: String) do self.lines.add(s)
+
+	# Add a line in the
+	# (used for local or global declaration)
+	fun add_decl(s: String) do self.decl_lines.add(s)
+
+	init(file: CodeFile)
+	do
+		self.file = file
+		file.writers.add(self)
+	end
+end
+
 # A visitor on the AST of property definition that generate the C code.
 abstract class AbstractCompilerVisitor
 
@@ -449,12 +483,12 @@ abstract class AbstractCompilerVisitor
 	# Alias for self.compiler.mainmodule.bool_type
 	fun bool_type: MClassType do return self.compiler.mainmodule.bool_type
 
-	var file_break: Bool = false
+	var writer: CodeWriter
 
 	init(compiler: COMPILER)
 	do
 		self.compiler = compiler
-		compiler.visitors.add(self)
+		self.writer = new CodeWriter(compiler.files.last)
 	end
 
 	# Force to get the primitive class named `name' or abort
@@ -741,15 +775,49 @@ abstract class AbstractCompilerVisitor
 
 	# Code generation
 
-	private var lines: List[String] = new List[String]
-	private var decl_lines: List[String] = new List[String]
-
 	# Add a line in the main part of the generated C
-	fun add(s: String) do self.lines.add(s)
+	fun add(s: String) do self.writer.lines.add(s)
 
 	# Add a line in the
 	# (used for local or global declaration)
-	fun add_decl(s: String) do self.decl_lines.add(s)
+	fun add_decl(s: String) do self.writer.decl_lines.add(s)
+
+	# Request the presence of a global declaration
+	fun require_declaration(key: String)
+	do
+		self.writer.file.required_declarations.add(key)
+	end
+
+	# Add a declaration in the local-header
+	# The declaration is ensured to be present once
+	fun declare_once(s: String)
+	do
+		self.compiler.provide_declaration(s, s)
+		self.require_declaration(s)
+	end
+
+	# look for a needed .h and .c file for a given .nit source-file
+	# FIXME: bad API, parameter should be a MModule, not its source-file
+	fun add_extern(file: String)
+	do
+		file = file.strip_extension(".nit")
+		var tryfile = file + ".nit.h"
+		if tryfile.file_exists then
+			self.declare_once("#include \"{"..".join_path(tryfile)}\"")
+		end
+		tryfile = file + "_nit.h"
+		if tryfile.file_exists then
+			self.declare_once("#include \"{"..".join_path(tryfile)}\"")
+		end
+		tryfile = file + ".nit.c"
+		if tryfile.file_exists then
+			self.compiler.extern_bodies.add(tryfile)
+		end
+		tryfile = file + "_nit.c"
+		if tryfile.file_exists then
+			self.compiler.extern_bodies.add(tryfile)
+		end
+	end
 
 	# Return a new local runtime_variable initialized with the C expression `cexpr'.
 	fun new_expr(cexpr: String, mtype: MType): RuntimeVariable
@@ -1525,7 +1593,7 @@ redef class AExternMethPropdef
 		externname = nextern.text.substring(1, nextern.text.length-2)
 		if location.file != null then
 			var file = location.file.filename
-			v.compiler.add_extern(file)
+			v.add_extern(file)
 		end
 		var res: nullable RuntimeVariable = null
 		var ret = mpropdef.msignature.return_mtype
@@ -1557,7 +1625,7 @@ redef class AExternInitPropdef
 		externname = nextern.text.substring(1, nextern.text.length-2)
 		if location.file != null then
 			var file = location.file.filename
-			v.compiler.add_extern(file)
+			v.add_extern(file)
 		end
 		v.adapt_signature(mpropdef, arguments)
 		var ret = arguments.first.mtype
