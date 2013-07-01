@@ -87,7 +87,9 @@ redef class ModelBuilder
 			var file: nullable OFStream = null
 			var count = 0
 			for vis in f.writers do
-				count += vis.lines.length
+				var total_lines = vis.lines.length + vis.decl_lines.length
+				if total_lines == 0 then continue
+				count += total_lines
 				if file == null or count > 10000  then
 					i += 1
 					if file != null then file.close
@@ -96,7 +98,7 @@ redef class ModelBuilder
 					cfiles.add(cfilename)
 					file = new OFStream.open(cfilename)
 					file.write "#include \"{mainmodule.name}.1.h\"\n"
-					count = vis.lines.length
+					count = total_lines
 				end
 				if vis != compiler.header then
 					for l in vis.decl_lines do
