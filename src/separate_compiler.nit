@@ -1611,10 +1611,11 @@ class VirtualRuntimeFunction
 		end
 		frame.returnlabel = v.get_name("RET_LABEL")
 
-		if recv != arguments.first.mtype then
-			#print "{self} {recv} {arguments.first}"
+		var subret = v.call(mmethoddef, recv, arguments)
+		if ret != null then
+			assert subret != null
+			v.assign(frame.returnvar.as(not null), subret)
 		end
-		mmethoddef.compile_inside_to_c(v, arguments)
 
 		v.add("{frame.returnlabel.as(not null)}:;")
 		if ret != null then
