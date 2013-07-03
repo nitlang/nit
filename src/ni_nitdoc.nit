@@ -224,8 +224,27 @@ class NitdocOverview
 
 end
 
+class NitdocFullindex
+	super NitdocPage
+
+	var mmodules: Array[MModule]
+
+	init with(mmodules: Array[MModule]) do
+		self.mmodules = mmodules
+		opt_nodot = false
+		destinationdir = ""
+	end
+
+	redef fun head do
+		super
+		add("title").text("Full Index | Nit Standard Library")
+	end
+
+end
+
 class NitdocPage
 	super HTMLPage
+
 	var opt_nodot: Bool
 	var destinationdir : String
 
