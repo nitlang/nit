@@ -97,6 +97,27 @@ class Nitdoc
 	end
 end
 
+class NitdocOverview
+	super NitdocPage
+
+	var amodules: Array[AModule]
+
+	# Init with Array[AModule] to get all ifnormations about each MModule containt in a program
+	# opt_nodot to inform about the graph gen
+	# destination: to know where will be saved dot files
+	init with(modules: Array[AModule], opt_nodot: Bool, destination: String) do
+		self.amodules = modules
+		self.opt_nodot = opt_nodot
+		self.destinationdir = destination
+	end
+
+	redef fun head do
+		super
+		add("title").text("Overview | Nit Standard Library")
+	end
+
+end
+
 class NitdocPage
 	super HTMLPage
 	var opt_nodot: Bool
