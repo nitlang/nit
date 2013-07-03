@@ -379,9 +379,28 @@ class NitdocFullindex
 
 end
 
+class NitdocModules
+	super NitdocPage
+
+	var amodule: AModule
+	var modulename: String
+	init with(amodule: AModule) do
+		self.amodule = amodule
+		self.modulename = self.amodule.mmodule.name
+		opt_nodot = false
+		destinationdir = ""
+	end
+
+	redef fun head do
+		super
+		add("title").text("{modulename} module | {amodule.short_comment}")
+	end
+
+end
+
 class NitdocPage
 	super HTMLPage
-
+	
 	var opt_nodot: Bool
 	var destinationdir : String
 
