@@ -583,6 +583,31 @@ class NitdocModules
 
 end
 
+# Nit Standard Library
+class NitdocMClasses
+	super NitdocPage
+
+	var mclass: MClass
+	var aclassdef: AClassdef
+	var stdclassdef: nullable AStdClassdef
+	var public_owner: nullable MModule
+
+	init with(mclass: MClass, aclassdef: AClassdef) do
+		self.mclass = mclass
+		self.aclassdef = aclassdef
+		if aclassdef isa AStdClassdef then self.stdclassdef = aclassdef
+		self.public_owner = mclass.intro_mmodule.public_owner
+		opt_nodot = false
+		destinationdir = ""
+	end
+
+	redef fun head do
+		super
+		add("title").text("{self.mclass.name} class | Nit Standard Library")
+	end
+
+end	
+
 class NitdocPage
 	super HTMLPage
 	
