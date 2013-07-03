@@ -1094,6 +1094,10 @@ redef class MClass
 		end
 	end
 
+	fun link_anchor: String do
+		return "{name}.html"
+	end
+
 end
 
 redef class AStdClassdef
