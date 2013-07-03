@@ -508,12 +508,10 @@ class SeparateCompiler
 			for pd in cd.mpropdefs do
 				if not pd isa MMethodDef then continue
 				#print "compile {pd} @ {cd} @ {mmodule}"
-				var r = new SeparateRuntimeFunction(pd)
+				var r = pd.separate_runtime_function
 				r.compile_to_c(self)
-				if true or cd.bound_mtype.ctype != "val*" then
-					var r2 = new VirtualRuntimeFunction(pd)
-					r2.compile_to_c(self)
-				end
+				var r2 = pd.virtual_runtime_function
+				r2.compile_to_c(self)
 			end
 		end
 		self.mainmodule = old_module
@@ -633,13 +631,10 @@ class SeparateCompiler
 			if mpropdef == null then
 				v.add_decl("NULL, /* empty */")
 			else
-				if true or mpropdef.mclassdef.bound_mtype.ctype != "val*" then
-					v.require_declaration("VIRTUAL_{mpropdef.c_name}")
-					v.add_decl("(nitmethod_t)VIRTUAL_{mpropdef.c_name}, /* pointer to {mclass.intro_mmodule}:{mclass}:{mpropdef} */")
-				else
-					v.require_declaration("{mpropdef.c_name}")
-					v.add_decl("(nitmethod_t){mpropdef.c_name}, /* pointer to {mclass.intro_mmodule}:{mclass}:{mpropdef} */")
-				end
+				assert mpropdef isa MMethodDef
+				var rf = mpropdef.virtual_runtime_function
+				v.require_declaration(rf.c_name)
+				v.add_decl("(nitmethod_t){rf.c_name}, /* pointer to {mclass.intro_mmodule}:{mclass}:{mpropdef} */")
 			end
 		end
 		v.add_decl("\}")
@@ -1473,6 +1468,30 @@ class SeparateCompilerVisitor
 		end
 		compiler.live_unresolved_types[self.frame.mpropdef.mclassdef].add(mtype)
 	end
+end
+
+redef class MMethodDef
+	fun separate_runtime_function: AbstractRuntimeFunction
+	do
+		var res = self.separate_runtime_function_cache
+		if res == null then
+			res = new SeparateRuntimeFunction(self)
+			self.separate_runtime_function_cache = res
+		end
+		return res
+	end
+	private var separate_runtime_function_cache: nullable SeparateRuntimeFunction
+
+	fun virtual_runtime_function: AbstractRuntimeFunction
+	do
+		var res = self.virtual_runtime_function_cache
+		if res == null then
+			res = new VirtualRuntimeFunction(self)
+			self.virtual_runtime_function_cache = res
+		end
+		return res
+	end
+	private var virtual_runtime_function_cache: nullable VirtualRuntimeFunction
 end
 
 # The C function associated to a methoddef separately compiled
