@@ -27,6 +27,8 @@ redef class ToolContext
 	var opt_output: OptionString = new OptionString("Output file", "-o", "--output")
 	# --no-cc
 	var opt_no_cc: OptionBool = new OptionBool("Do not invoke C compiler", "--no-cc")
+	# --cc-paths
+	var opt_cc_path: OptionArray = new OptionArray("Set include path for C header files (may be used more than once)", "--cc-path")
 	# --make-flags
 	var opt_make_flags: OptionString = new OptionString("Additional options to make", "--make-flags")
 	# --hardening
@@ -56,6 +58,28 @@ redef class ToolContext
 end
 
 redef class ModelBuilder
+	# The list of directories to search for included C headers (-I for C compilers)
+	# The list is initially set with :
+	#   * the toolcontext --cc-path option
+	#   * the NIT_CC_PATH environment variable
+	#   * some heuristics including the NIT_DIR environment variable and the progname of the process
+	# Path can be added (or removed) by the client
+	var cc_paths = new Array[String]
+
+	redef init(model, toolcontext)
+	do
+		super
+
+		# Add user defined cc_paths
+		cc_paths.append(toolcontext.opt_cc_path.value)
+
+		path_env = "NIT_CC_PATH".environ
+		if not path_env.is_empty then
+			cc_paths.append(path_env.split_with(':'))
+		end
+
+	end
+
 	protected fun write_and_make(compiler: AbstractCompiler)
 	do
 		var mainmodule = compiler.mainmodule
@@ -138,7 +162,12 @@ redef class ModelBuilder
 		var makename = ".nit_compile/{mainmodule.name}.mk"
 		var makefile = new OFStream.open(makename)
 
-		makefile.write("CC = ccache cc\nCFLAGS = -g -O2\nLDFLAGS ?= \nLDLIBS  ?= -lm -lgc\n\n")
+		var cc_includes = ""
+		for p in cc_paths do
+			#p = "..".join_path(p)
+			cc_includes += " -I \"" + p + "\""
+		end
+		makefile.write("CC = ccache cc\nCFLAGS = -g -O2{cc_includes}\nLDFLAGS ?= \nLDLIBS  ?= -lm -lgc\n\n")
 		makefile.write("all: {outname}\n\n")
 
 		var ofiles = new Array[String]
