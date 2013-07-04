@@ -378,10 +378,13 @@ class NitdocFullindex
 	# Add to content modules column
 	fun module_column do
 		var ls = new List[nullable MModule]
+		var sorted = mmodules
+		var sorterp = new ComparableSorter[MModule]
+		sorterp.sort(sorted)
 		open("article").add_class("modules filterable")
 		add("h2").text("Modules")
 		open("ul")
-		for mmodule in mmodules do
+		for mmodule in sorted do
 			if mmodule.public_owner != null and not ls.has(mmodule.public_owner) then
 				ls.add(mmodule.public_owner)
 				open("li")
@@ -395,11 +398,14 @@ class NitdocFullindex
 
 	# Add to content classes modules
 	fun classes_column do
+		var sorted = mmodules.first.imported_mclasses.to_a
+		var sorterp = new ComparableSorter[MClass]
+		sorterp.sort(sorted)
 		open("article").add_class("classes filterable")
 		add("h2").text("Classes")
 		open("ul")
 
-		for mclass in mmodules.first.imported_mclasses do
+		for mclass in sorted do
 			open("li")
 			add("a").attr("href", "{mclass.name}.html").text(mclass.name)
 			close("li")
@@ -414,8 +420,13 @@ class NitdocFullindex
 		open("article").add_class("properties filterable")
 		add("h2").text("Properties")
 		open("ul")
+		var sorted_imported = mmodules.first.imported_methods.to_a
+		var sorted_redef = mmodules.first.redef_methods.to_a
+		var sorterp = new ComparableSorter[MProperty]
+		sorterp.sort(sorted_imported)
+		sorterp.sort(sorted_redef)
 
-		for method in mmodules.first.imported_methods do
+		for method in sorted_imported do
 			if method.visibility is none_visibility or method.visibility is intrude_visibility then continue
 			open("li").add_class("intro")
 			add("span").attr("title", "introduction").text("I")
@@ -424,7 +435,7 @@ class NitdocFullindex
 			close("li")
 		end
 
-		for method in mmodules.first.redef_methods do
+		for method in sorted_redef do
 			if method.visibility is none_visibility or method.visibility is intrude_visibility then continue
 			open("li").add_class("redef")
 			add("span").attr("title", "redefinition").text("R")
