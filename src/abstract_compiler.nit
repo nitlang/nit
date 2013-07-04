@@ -70,6 +70,20 @@ redef class ModelBuilder
 	do
 		super
 
+		# Look for the the Nit clib path
+		var path_env = "NIT_DIR".environ
+		if not path_env.is_empty then
+			var libname = "{path_env}/clib"
+			if libname.file_exists then cc_paths.add(libname)
+		end
+
+		var libname = "{sys.program_name.dirname}/../clib"
+		if libname.file_exists then cc_paths.add(libname.simplify_path)
+
+		if cc_paths.is_empty then
+			toolcontext.error(null, "Cannot determine the nit clib path. define envvar NIT_DIR.")
+		end
+
 		# Add user defined cc_paths
 		cc_paths.append(toolcontext.opt_cc_path.value)
 
