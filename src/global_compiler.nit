@@ -212,9 +212,9 @@ class GlobalCompiler
 		res.is_exact = true
 		if is_native_array then
 			var mtype_elt = mtype.arguments.first
-			v.add("{res} = GC_MALLOC(sizeof(struct {mtype.c_name}) + length*sizeof({mtype_elt.ctype}));")
+			v.add("{res} = nit_alloc(sizeof(struct {mtype.c_name}) + length*sizeof({mtype_elt.ctype}));")
 		else
-			v.add("{res} = GC_MALLOC(sizeof(struct {mtype.c_name}));")
+			v.add("{res} = nit_alloc(sizeof(struct {mtype.c_name}));")
 		end
 		v.add("{res}->classid = {self.classid(mtype)};")
 
@@ -245,7 +245,7 @@ class GlobalCompiler
 		self.header.add_decl("val* BOX_{mtype.c_name}({mtype.ctype});")
 		v.add_decl("/* allocate {mtype} */")
 		v.add_decl("val* BOX_{mtype.c_name}({mtype.ctype} value) \{")
-		v.add("struct {mtype.c_name}*res = GC_MALLOC(sizeof(struct {mtype.c_name}));")
+		v.add("struct {mtype.c_name}*res = nit_alloc(sizeof(struct {mtype.c_name}));")
 		v.add("res->classid = {self.classid(mtype)};")
 		v.add("res->value = value;")
 		v.add("return (val*)res;")

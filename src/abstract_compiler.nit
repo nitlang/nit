@@ -191,6 +191,11 @@ redef class ModelBuilder
 			makefile.write("{o}: {f}\n\t$(CC) $(CFLAGS) -D NONITCNI -c -o {o} {f}\n\n")
 			ofiles.add(o)
 		end
+
+		# Add gc_choser.h to aditionnal bodies
+		var gc_chooser = new ExternCFile("{cc_paths.first}/gc_chooser.c", "-DWITH_LIBGC")
+		compiler.extern_bodies.add(gc_chooser)
+
 		# Compile each required extern body into a specific .o
 		for f in compiler.extern_bodies do
 			var basename = f.filename.basename(".c")
@@ -290,16 +295,7 @@ abstract class AbstractCompiler
 		self.header.add_decl("#include <stdlib.h>")
 		self.header.add_decl("#include <stdio.h>")
 		self.header.add_decl("#include <string.h>")
-		self.header.add_decl("#ifndef NOBOEHM")
-		self.header.add_decl("#include <gc/gc.h>")
-		self.header.add_decl("#ifdef NOBOEHM_ATOMIC")
-		self.header.add_decl("#undef GC_MALLOC_ATOMIC")
-		self.header.add_decl("#define GC_MALLOC_ATOMIC(x) GC_MALLOC(x)")
-		self.header.add_decl("#endif /*NOBOEHM_ATOMIC*/")
-		self.header.add_decl("#else /*NOBOEHM*/")
-		self.header.add_decl("#define GC_MALLOC(x) calloc(1, (x))")
-		self.header.add_decl("#define GC_MALLOC_ATOMIC(x) calloc(1, (x))")
-		self.header.add_decl("#endif /*NOBOEHM*/")
+		self.header.add_decl("#include <gc_chooser.h>")
 
 		compile_header_structs
 
@@ -336,6 +332,7 @@ abstract class AbstractCompiler
 		end
 		v.add_decl("int main(int argc, char** argv) \{")
 		v.add("glob_argc = argc; glob_argv = argv;")
+		v.add("initialize_gc_option();")
 		var main_type = mainmodule.sys_type
 		if main_type != null then
 			var mainmodule = v.compiler.mainmodule
@@ -1609,7 +1606,7 @@ redef class AInternMethPropdef
 			v.ret(v.new_expr("glob_sys", ret.as(not null)))
 			return
 		else if pname == "calloc_string" then
-			v.ret(v.new_expr("(char*)GC_MALLOC_ATOMIC({arguments[1]})", ret.as(not null)))
+			v.ret(v.new_expr("(char*)nit_alloc({arguments[1]})", ret.as(not null)))
 			return
 		else if pname == "calloc_array" then
 			v.calloc_array(ret.as(not null), arguments)
@@ -1629,7 +1626,7 @@ redef class AInternMethPropdef
 			v.ret(v.new_expr("(char*){nat}", ret.as(not null)))
 			return
 		else if pname == "force_garbage_collection" then
-			v.add("GC_gcollect();")
+			v.add("nit_gcollect();")
 			return
 		end
 		v.add("printf(\"NOT YET IMPLEMENTED {class_name}:{mpropdef} at {location.to_s}\\n\");")

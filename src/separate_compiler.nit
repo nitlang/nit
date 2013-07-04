@@ -654,7 +654,7 @@ class SeparateCompiler
 			self.header.add_decl("val* BOX_{c_name}({mtype.ctype});")
 			v.add_decl("/* allocate {mtype} */")
 			v.add_decl("val* BOX_{mtype.c_name}({mtype.ctype} value) \{")
-			v.add("struct instance_{c_name}*res = GC_MALLOC(sizeof(struct instance_{c_name}));")
+			v.add("struct instance_{c_name}*res = nit_alloc(sizeof(struct instance_{c_name}));")
 			v.require_declaration("type_{c_name}")
 			v.add("res->type = &type_{c_name};")
 			v.require_declaration("class_{c_name}")
@@ -679,7 +679,7 @@ class SeparateCompiler
 			var res = v.new_named_var(mtype, "self")
 			res.is_exact = true
 			var mtype_elt = mtype.arguments.first
-			v.add("{res} = GC_MALLOC(sizeof(struct instance_{c_name}) + length*sizeof({mtype_elt.ctype}));")
+			v.add("{res} = nit_alloc(sizeof(struct instance_{c_name}) + length*sizeof({mtype_elt.ctype}));")
 			v.add("{res}->type = type;")
 			hardening_live_type(v, "type")
 			v.require_declaration("class_{c_name}")
@@ -695,7 +695,7 @@ class SeparateCompiler
 		v.add_decl("{mtype.ctype} NEW_{c_name}(const struct type* type) \{")
 		var res = v.new_named_var(mtype, "self")
 		res.is_exact = true
-		v.add("{res} = GC_MALLOC(sizeof(struct instance) + {attrs.length}*sizeof(nitattribute_t));")
+		v.add("{res} = nit_alloc(sizeof(struct instance) + {attrs.length}*sizeof(nitattribute_t));")
 		v.add("{res}->type = type;")
 		hardening_live_type(v, "type")
 		v.require_declaration("class_{c_name}")
