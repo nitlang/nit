@@ -179,11 +179,12 @@ redef class ModelBuilder
 		end
 		# Compile each required extern body into a specific .o
 		for f in compiler.extern_bodies do
-			var basename = f.basename(".c")
+			var basename = f.filename.basename(".c")
 			var o = ".nit_compile/{basename}.extern.o"
-			makefile.write("{o}: {f}\n\t$(CC) $(CFLAGS) -D NONITCNI -c -o {o} {f}\n\n")
+			makefile.write("{o}: {f.filename}\n\t$(CC) $(CFLAGS) -D NONITCNI {f.cflags} -c -o {o} {f.filename}\n\n")
 			ofiles.add(o)
 		end
+
 		# Link edition
 		makefile.write("{outname}: {ofiles.join(" ")}\n\t$(CC) $(LDFLAGS) -o {outname} {ofiles.join(" ")} $(LDLIBS)\n\n")
 		# Clean
@@ -366,7 +367,10 @@ abstract class AbstractCompiler
 	end
 
 	# List of additional .c files required to compile (native interface)
-	var extern_bodies = new ArraySet[String]
+	var extern_bodies = new Array[ExternCFile]
+
+	# This is used to avoid adding an extern file more than once
+	private var seen_extern = new ArraySet[String]
 
 	# Generate code that check if an instance is correctly initialized
 	fun generate_check_init_instance(mtype: MClassType) is abstract
@@ -838,14 +842,16 @@ abstract class AbstractCompilerVisitor
 		if tryfile.file_exists then
 			self.declare_once("#include \"{"..".join_path(tryfile)}\"")
 		end
+
+		if self.compiler.seen_extern.has(file) then return
+		self.compiler.seen_extern.add(file)
 		tryfile = file + ".nit.c"
-		if tryfile.file_exists then
-			self.compiler.extern_bodies.add(tryfile)
+		if not tryfile.file_exists then
+			tryfile = file + "_nit.c"
+			if not tryfile.file_exists then return
 		end
-		tryfile = file + "_nit.c"
-		if tryfile.file_exists then
-			self.compiler.extern_bodies.add(tryfile)
-		end
+		var f = new ExternCFile(tryfile, "")
+		self.compiler.extern_bodies.add(f)
 	end
 
 	# Return a new local runtime_variable initialized with the C expression `cexpr'.
@@ -1030,6 +1036,14 @@ class Frame
 
 	# The label at the end of the property
 	var returnlabel: nullable String writable = null
+end
+
+# An extern C file to compile
+class ExternCFile
+	# The filename of the file
+	var filename: String
+	# Additionnal specific CC compiler -c flags
+	var cflags: String
 end
 
 redef class String
