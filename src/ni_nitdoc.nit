@@ -1000,6 +1000,10 @@ end
 
 redef class MModule
 
+	super Comparable
+	redef type OTHER: MModule
+	redef fun <(other: OTHER): Bool do return self.name < other.name
+
 	var amodule: nullable AModule
 
 	# Get the list of all methods in a module
@@ -1026,6 +1030,10 @@ redef class MModule
 end
 
 redef class MProperty
+
+	super Comparable
+	redef type OTHER: MProperty
+	redef fun <(other: OTHER): Bool do return self.name < other.name
 
 	var is_redef: Bool
 	var apropdef: nullable APropdef
@@ -1056,6 +1064,10 @@ redef class MProperty
 end
 
 redef class MClass
+
+	super Comparable
+	redef type OTHER: MClass
+	redef fun <(other: OTHER): Bool do return self.name < other.name
 
 	# Associate all MMethods to each MModule concerns
 	fun all_methods: HashMap[MModule, Set[MMethod]] do
