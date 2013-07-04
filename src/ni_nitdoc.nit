@@ -840,6 +840,10 @@ class NitdocMClasses
 	end
 
 	fun content do
+		var sorted = new Array[MModule]
+		sorted.add_all(mclass.concerns.keys)
+		var sorterp = new ComparableSorter[MModule]
+		sorterp.sort(sorted)
 		var subtitle = ""
 		var lmmodule = new List[MModule]
 		# Insert the subtitle part
@@ -857,12 +861,18 @@ class NitdocMClasses
 		open("section").add_class("concerns")
 		add("h2").add_class("section-header").text("Concerns")
 		open("ul")
-		for owner, childs in mclass.concerns do
+		for owner in sorted do
+			var childs = mclass.concerns[owner]
 			open("li")
 			add_html("<a href=\"#MOD_{owner.name}\">{owner.name}</a>: {owner.amodule.short_comment}")
 			if not childs is null then
 				open("ul")
-				for child in childs.as(not null) do add_html("<li><a href=\"#MOD_{child.name}\">{child.name}</a>: {child.amodule.short_comment} </li>")
+				var sortedc = childs.to_a
+				var sorterpc = new ComparableSorter[MModule]
+				sorterpc.sort(sortedc)
+				for child in sortedc.as(not null) do
+					add_html("<li><a href=\"#MOD_{child.name}\">{child.name}</a>: {child.amodule.short_comment} </li>")
+				end
 				close("ul")
 			end
 			close("li")
