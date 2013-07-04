@@ -561,7 +561,10 @@ class NitdocModules
 		add("h3").text("Module Hierarchy").attr("style","cursor: pointer;")
 		if mmodule.in_importation.direct_greaters.length > 0 then
 			add_html("<h4>All dependencies</h4><ul>")
-			for m in mmodule.in_importation.direct_greaters do
+			var sorted = mmodule.in_importation.direct_greaters.to_a
+			var sorterp = new ComparableSorter[MModule]
+			sorterp.sort(sorted)
+			for m in sorted do
 				if m == mmodule or mmodule == m.public_owner then continue
 				open("li")
 				add("a").attr("href", "{m.name}.html").text(m.name)
@@ -571,7 +574,10 @@ class NitdocModules
 		end	
 		if mmodule.in_importation.greaters.length > 0 then
 			add_html("<h4>All clients</h4><ul>")
-			for m in mmodule.in_importation.greaters do
+			var sorted = mmodule.in_importation.greaters.to_a
+			var sorterp = new ComparableSorter[MModule]
+			sorterp.sort(sorted)
+			for m in sorted do
 				if m == mmodule then continue
 				open("li")
 				add("a").attr("href", "{m.name}.html").text(m.name)
@@ -581,10 +587,13 @@ class NitdocModules
 		end
 		close("nav")
 		if mmodule.in_nesting.direct_greaters.length > 0 then
+			var sorted = mmodule.in_nesting.direct_greaters.to_a
+			var sorterp = new ComparableSorter[MModule]
+			sorterp.sort(sorted)
 			open("nav")
 			add("h3").text("Nested Modules").attr("style","cursor: pointer;")
 			open("ul")
-			for m in mmodule.in_nesting.direct_greaters do
+			for m in sorted do
 				open("li")
 				add("a").attr("href", "{m.name}.html").text(m.name)
 				close("li")
@@ -597,11 +606,16 @@ class NitdocModules
 	end
 
 	fun classes do
+		var sorted = new Array[MClass]
+		sorted.add_all(amodule.mmodule.mclasses.keys)
+		var sorterp = new ComparableSorter[MClass]
+		sorterp.sort(sorted)
 		open("div").add_class("module")
 		open("article").add_class("classes filterable")
 		add("h2").text("Classes")
 		open("ul")
-		for c, state in amodule.mmodule.mclasses do
+		for c in sorted do
+			var state = amodule.mmodule.mclasses[c]
 			var name = c.name
 			if state == c_is_intro or state == c_is_imported then
 				open("li").add_class("intro")
@@ -619,10 +633,15 @@ class NitdocModules
 	end
 
 	fun properties do
+		var sorted_imported = amodule.mmodule.imported_methods.to_a
+		var sorted_redef = amodule.mmodule.redef_methods.to_a
+		var sorterp = new ComparableSorter[MProperty]
+		sorterp.sort(sorted_imported)
+		sorterp.sort(sorted_redef)
 		open("article").add_class("properties filterable")
 		add_html("<h2>Properties</h2>")
 		open("ul")
-		for method in amodule.mmodule.imported_methods do
+		for method in sorted_imported do
 			if method.visibility is none_visibility or method.visibility is intrude_visibility then continue
 			open("li").add_class("intro")
 			add("span").attr("title", "introduction").text("I")
@@ -631,7 +650,7 @@ class NitdocModules
 			close("li")
 		end
 
-		for method in amodule.mmodule.redef_methods do
+		for method in sorted_redef do
 			if method.visibility is none_visibility or method.visibility is intrude_visibility then continue
 			open("li").add_class("redef")
 			add("span").attr("title", "redefinition").text("R")
