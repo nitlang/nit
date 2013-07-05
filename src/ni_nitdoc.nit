@@ -771,21 +771,27 @@ class NitdocMClasses
 	end
 
 	fun properties_column do
+		var sorted = new Array[MProperty]
+		var sorterp = new ComparableSorter[MProperty]
 		open("nav").add_class("properties filterable")
 		add("h3").text("Properties")
 
 		if mclass.virtual_types.length > 0 then
 			add("h4").text("Virtual Types")
 			open("ul")
-			for prop in mclass.virtual_types do
+			sorted = mclass.virtual_types.to_a
+			sorterp.sort(sorted)
+			for prop in sorted do
 				add_html("<li class=\"redef\"><span title=\"Redefined\">R</span><a href=\"{prop.link_anchor}\">{prop.name}</a></li>")
 			end
 			close("ul")
 		end
 		if mclass.constructors.length > 0 then
+			sorted = mclass.constructors.to_a
+			sorterp.sort(sorted)
 			add("h4").text("Constructors")
 			open("ul")
-			for prop in mclass.constructors do
+			for prop in sorted do
 				add_html("<li class=\"intro\"><span title=\"Introduced\">I</span><a href=\"{prop.link_anchor}\">{prop.name}</a></li>")
 			end
 			close("ul")
@@ -793,17 +799,23 @@ class NitdocMClasses
 		add("h4").text("Methods")
 		open("ul")
 		if mclass.intro_methods.length > 0 then
-			for prop in mclass.intro_methods do
+			sorted = mclass.intro_methods.to_a
+			sorterp.sort(sorted)
+			for prop in sorted do
 				if prop.visibility is public_visibility or prop.visibility is protected_visibility then add_html("<li class=\"intro\"><span title=\"Introduced\">I</span><a href=\"{prop.link_anchor}\">{prop.name}</a></li>")
 			end
 		end
 		if mclass.inherited_methods.length > 0 then
-			for prop in mclass.inherited_methods do
+			sorted = mclass.inherited_methods.to_a
+			sorterp.sort(sorted)
+			for prop in sorted do
 				if prop.visibility is public_visibility or prop.visibility is protected_visibility then add_html("<li class=\"inherit\"><span title=\"Inherited\">H</span><a href=\"{prop.link_anchor}\">{prop.name}</a></li>")
 			end
 		end
 		if mclass.redef_methods.length > 0 then
-			for prop in mclass.redef_methods do
+			sorted = mclass.redef_methods.to_a
+			sorterp.sort(sorted)
+			for prop in sorted do
 				if prop.visibility is public_visibility or prop.visibility is protected_visibility then add_html("<li class=\"redef\"><span title=\"Refined\">R</span><a href=\"{prop.link_anchor}\">{prop.name}</a></li>")
 			end
 		end
@@ -812,26 +824,34 @@ class NitdocMClasses
 	end
 
 	fun inheritance_column do
+		var sorted = new Array[MClass]
+		var sorterp = new ComparableSorter[MClass]
 		open("nav")
 		add("h3").text("Inheritance")
 		if mclass.parents.length > 0 then
+			sorted = mclass.parents.to_a
+			sorterp.sort(sorted)
 			add("h4").text("Superclasses")
 			open("ul")
-			for sup in mclass.parents do add_html("<li><a href=\"{sup.name}.html\">{sup.name}</a></li>")
+			for sup in sorted do add_html("<li><a href=\"{sup.name}.html\">{sup.name}</a></li>")
 			close("ul")
 		end
 
 		if mclass.descendants.length is 0 then
 			add("h4").text("No Known Subclasses")
 		else if mclass.descendants.length <= 100 then
+			sorted = mclass.descendants.to_a
+			sorterp.sort(sorted)
 			add("h4").text("Subclasses")
 			open("ul")
-			for sub in mclass.descendants do add_html("<li><a href=\"{sub.name}\">{sub.name}</a></li>")
+			for sub in sorted do add_html("<li><a href=\"{sub.name}\">{sub.name}</a></li>")
 			close("ul")
 		else if mclass.children.length <= 100 then
+			sorted = mclass.children.to_a
+			sorterp.sort(sorted)
 			add("h4").text("Direct Subclasses Only")
 			open("ul")
-			for sub in mclass.children do add_html("<li><a href=\"{sub.name}\">{sub.name}</a></li>")
+			for sub in sorted do add_html("<li><a href=\"{sub.name}\">{sub.name}</a></li>")
 			close("ul")
 		else
 			add("h4").text("Too much Subclasses to list")
@@ -843,6 +863,8 @@ class NitdocMClasses
 		var sorted = new Array[MModule]
 		sorted.add_all(mclass.concerns.keys)
 		var sorterp = new ComparableSorter[MModule]
+		var sorterprop = new ComparableSorter[MProperty]
+		var sorterc = new ComparableSorter[MClass]
 		sorterp.sort(sorted)
 		var subtitle = ""
 		var lmmodule = new List[MModule]
@@ -870,7 +892,7 @@ class NitdocMClasses
 				var sortedc = childs.to_a
 				var sorterpc = new ComparableSorter[MModule]
 				sorterpc.sort(sortedc)
-				for child in sortedc.as(not null) do
+				for child in sortedc do
 					add_html("<li><a href=\"#MOD_{child.name}\">{child.name}</a>: {child.amodule.short_comment} </li>")
 				end
 				close("ul")
@@ -898,9 +920,11 @@ class NitdocMClasses
 		end
 		# Insert constructors if there is almost one
 		if mclass.constructors.length > 0 then
+			var sortedc = mclass.constructors.to_a
+			sorterprop.sort(sortedc)
 			open("section").add_class("constructors")
 			add("h2").add_class("section-header").text("Constructors")
-			for prop in mclass.constructors do description(prop)
+			for prop in sortedc do description(prop)
 			close("section")
 		end
 		open("section").add_class("methods")
@@ -914,17 +938,24 @@ class NitdocMClasses
 					add_html("<h3 class=\"concern-toplevel\">Methods refined in <a href=\"{mmodule.name}.html\">{mmodule.name}</a></h3><p class=\"concern-doc\">{mmodule.name}: {mmodule.amodule.short_comment}</p>")
 				end
 			end
-			for prop in mmethods do description(prop)
+			var sortedc = mmethods.to_a
+			sorterprop.sort(sortedc)
+			for prop in sortedc do description(prop)
 		end
 		# Insert inherited methods
 		if mclass.inherited_methods.length > 0 then
+			var sortedc = new Array[MClass]
+			sortedc.add_all(mclass.inherited.keys)
+			sorterc.sort(sortedc)
 			add("h3").text("Inherited Methods")
-			for i_mclass, methods in mclass.inherited do
+			for i_mclass in sortedc do
+				var sortedp = mclass.inherited[i_mclass].to_a
+				sorterprop.sort(sortedp)
 				open("p")
 				add_html("Defined in <a href=\"{i_mclass.name}.html\">{i_mclass.name}</a>: ")
-				for method in methods do
+				for method in sortedp do
 					add_html("<a href=\"{method.link_anchor}\">{method.name}</a>")
-					if method != methods.last then add_html(", ")
+					if method != sortedp.last then add_html(", ")
 				end
 				close("p")
 			end
