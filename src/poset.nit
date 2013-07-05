@@ -30,10 +30,6 @@ class POSet[E: Object]
 
 	# All the nodes
 	private var nodes: Set[E] = new HashSet[E]
-	private var tos: HashMap[E, Set[E]] = new HashMap[E, Set[E]]
-	private var froms: HashMap[E, Set[E]] = new HashMap[E, Set[E]]
-	private var dtos: HashMap[E, Set[E]] = new HashMap[E, Set[E]]
-	private var dfroms: HashMap[E, Set[E]] = new HashMap[E, Set[E]]
 	private var elements: HashMap[E, POSetElement[E]] = new HashMap[E, POSetElement[E]]
 
 	redef fun has(e) do return self.nodes.has(e)
@@ -46,13 +42,9 @@ class POSet[E: Object]
 	do
 		if nodes.has(e) then return self.elements[e]
 		nodes.add(e)
-		tos[e] = new HashSet[E]
-		tos[e].add(e)
-		froms[e] = new HashSet[E]
-		froms[e].add(e)
-		dtos[e] = new HashSet[E]
-		dfroms[e] = new HashSet[E]
 		var poe = new POSetElement[E](self, e, nodes.length)
+		poe.tos.add(e)
+		poe.froms.add(e)
 		self.elements[e] = poe
 		return poe
 	end
@@ -82,48 +74,56 @@ class POSet[E: Object]
 	# FIXME: Do somethind clever to manage loops.
 	fun add_edge(f, t: E)
 	do
-		add_node(f)
-		add_node(t)
+		var fe = add_node(f)
+		var te = add_node(t)
 		# Skip if edge already present
-		if tos[f].has(t) then return
+		if fe.tos.has(t) then return
 		# Add the edge and close the transitivity
-		for ff in froms[f] do
-			for tt in tos[t] do
-				froms[tt].add ff
-				tos[ff].add tt
+		for ff in fe.froms do
+			var ffe = self.elements[ff]
+			for tt in te.tos do
+				var tte = self.elements[tt]
+				tte.froms.add ff
+				ffe.tos.add tt
 			end
 		end
 		# Update the transitive reduction
-		if tos[t].has(f) then return # Skip the reduction if there is a loop
+		if te.tos.has(f) then return # Skip the reduction if there is a loop
 
-		for x in dfroms[t].to_a do
-			if tos[x].has(f) then
-				dfroms[t].remove(x)
-				dtos[x].remove(t)
+		for x in te.dfroms.to_a do
+			var xe = self.elements[x]
+			if xe.tos.has(f) then
+				te.dfroms.remove(x)
+				xe.dtos.remove(t)
 			end
 		end
-		for x in dtos[f].to_a do
-			if froms[x].has(t) then
-				dfroms[x].remove(f)
-				dtos[f].remove(x)
+		for x in fe.dtos.to_a do
+			var xe = self.elements[x]
+			if xe.froms.has(t) then
+				xe.dfroms.remove(f)
+				fe.dtos.remove(x)
 			end
 		end
-		dtos[f].add t
-		dfroms[t].add f
+		fe.dtos.add t
+		te.dfroms.add f
 	end
 
 	# Is there an edge (transitive or not) from `f' to `t'?
 	# Since the POSet is reflexive, true is returned if `f == t'.
 	fun has_edge(f,t: E): Bool
 	do
-		return nodes.has(f) and tos[f].has(t)
+		if not nodes.has(f) then return false
+		var fe = self.elements[f]
+		return fe.tos.has(t)
 	end
 
 	# Is there a direct edge from `f' to `t'?
 	# Note that because of loops, the result may not be the expected one.
 	fun has_direct_edge(f,t: E): Bool
 	do
-		return nodes.has(f) and dtos[f].has(t)
+		if not nodes.has(f) then return false
+		var fe = self.elements[f]
+		return fe.dtos.has(t)
 	end
 
 	# Display the POSet in a gaphical windows.
@@ -135,7 +135,8 @@ class POSet[E: Object]
 		#var f = stdout
 		f.write "digraph \{\n"
 		for x in nodes do
-			for y in dtos[x] do
+			var xe = self.elements[x]
+			for y in xe.dtos do
 				if self.has_edge(y,x) then
 					f.write "\"{x}\" -> \"{y}\"[dir=both];\n"
 				else
@@ -157,7 +158,9 @@ class POSet[E: Object]
 	# The total order is stable unless a new node or a new edge is added
 	redef fun compare(a, b: E): Int
 	do
-		var res = tos[a].length <=> tos[b].length
+		var ae = self.elements[a]
+		var be = self.elements[b]
+		var res = ae.tos.length <=> be.tos.length
 		if res != 0 then return res
 		return elements[a].count <=> elements[b].count
 	end
@@ -182,6 +185,11 @@ class POSetElement[E: Object]
 	# The real object behind the view
 	var element: E
 
+	private var tos = new HashSet[E]
+	private var froms = new HashSet[E]
+	private var dtos = new HashSet[E]
+	private var dfroms = new HashSet[E]
+
 	# The rank of the
 	# This attribute is used to force a total order for POSet#compare
 	private var count: Int
@@ -190,37 +198,37 @@ class POSetElement[E: Object]
 	# Since the POSet is reflexive, element is included in the set.
 	fun greaters: Collection[E]
 	do
-		return self.poset.tos[self.element]
+		return self.tos
 	end
 
 	# Return the set of all elements `t' that have a direct edge from `element' to `t'.
 	fun direct_greaters: Collection[E]
 	do
-		return self.poset.dtos[self.element]
+		return self.dtos
 	end
 
 	# Return the set of all elements `f' that have an edge from `f' to `element'.
 	# Since the POSet is reflexive, element is included in the set.
 	fun smallers: Collection[E]
 	do
-		return self.poset.froms[self.element]
+		return self.froms
 	end
 
 	# Return the set of all elements `f' that have an edge from `f' to `element'.
 	fun direct_smallers: Collection[E]
 	do
-		return self.poset.dfroms[self.element]
+		return self.dfroms
 	end
 
 	# Is there an edge from `object' to `t'?
 	fun <=(t: E): Bool
 	do
-		return self.poset.tos[self.element].has(t)
+		return self.tos.has(t)
 	end
 
 	# Is `t != element' and is there an edge from `object' to `t'?
 	fun <(t: E): Bool
 	do
-		return t != self.element and self.poset.tos[self.element].has(t)
+		return t != self.element and self.tos.has(t)
 	end
 end
