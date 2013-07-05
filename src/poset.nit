@@ -26,13 +26,12 @@ class POSet[E: Object]
 	super NaiveCollection[E]
 	super AbstractSorter[E]
 
-	redef fun iterator do return nodes.iterator
+	redef fun iterator do return elements.keys.iterator
 
 	# All the nodes
-	private var nodes: Set[E] = new HashSet[E]
 	private var elements: HashMap[E, POSetElement[E]] = new HashMap[E, POSetElement[E]]
 
-	redef fun has(e) do return self.nodes.has(e)
+	redef fun has(e) do return self.elements.keys.has(e)
 
 	# Add a node (an element) to the posed
 	# The new element is added unconnected to any other nodes (it is both a new root and a new leaf).
@@ -40,9 +39,8 @@ class POSet[E: Object]
 	# If `e' is already present in the POSet then just return the POSetElement (usually you will prefer []) is this case.
 	fun add_node(e: E): POSetElement[E]
 	do
-		if nodes.has(e) then return self.elements[e]
-		nodes.add(e)
-		var poe = new POSetElement[E](self, e, nodes.length)
+		if elements.keys.has(e) then return self.elements[e]
+		var poe = new POSetElement[E](self, e, elements.length)
 		poe.tos.add(e)
 		poe.froms.add(e)
 		self.elements[e] = poe
@@ -62,7 +60,7 @@ class POSet[E: Object]
 	# REQUIRE: has(e)
 	fun [](e: E): POSetElement[E]
 	do
-		assert nodes.has(e)
+		assert elements.keys.has(e)
 		return self.elements[e]
 	end
 
@@ -112,7 +110,7 @@ class POSet[E: Object]
 	# Since the POSet is reflexive, true is returned if `f == t'.
 	fun has_edge(f,t: E): Bool
 	do
-		if not nodes.has(f) then return false
+		if not elements.keys.has(f) then return false
 		var fe = self.elements[f]
 		return fe.tos.has(t)
 	end
@@ -121,7 +119,7 @@ class POSet[E: Object]
 	# Note that because of loops, the result may not be the expected one.
 	fun has_direct_edge(f,t: E): Bool
 	do
-		if not nodes.has(f) then return false
+		if not elements.keys.has(f) then return false
 		var fe = self.elements[f]
 		return fe.dtos.has(t)
 	end
@@ -134,7 +132,7 @@ class POSet[E: Object]
 		var f = new OProcess("dot", "-Txlib")
 		#var f = stdout
 		f.write "digraph \{\n"
-		for x in nodes do
+		for x in elements.keys do
 			var xe = self.elements[x]
 			for y in xe.dtos do
 				if self.has_edge(y,x) then
