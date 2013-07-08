@@ -39,6 +39,15 @@ redef class MModule
 		end
 		return mclasses
 	end
+
+	# Get all mclasses in 'self' with their state
+	fun mclasses: HashMap[MClass, Int] do
+		var mclasses = new HashMap[MClass, Int]
+		for c in intro_mclasses do mclasses[c] = c_is_intro
+		for r in redef_mclasses do mclasses[r] = c_is_refined
+		for i in imported_mclasses do mclasses[i] = c_is_imported
+		return mclasses
+	end
 end
 
 redef class MClass
@@ -171,6 +180,31 @@ redef class MClass
 		return res
 	end
 
+	fun mmodules: Set[MModule] do
+		var mdls = new HashSet[MModule]
+		for mclassdef in mclassdefs do mdls.add(mclassdef.mmodule)
+		return mdls
+	end
+
+	# Get the list of MModule concern in 'self'
+	fun concerns: HashMap[MModule, nullable List[MModule]] do
+		var hm = new HashMap[MModule, nullable List[MModule]]
+		for mmodule in mmodules do
+			var owner = mmodule.public_owner
+			if owner == null then
+				hm[mmodule] = null
+			else
+				if hm.has_key(owner) then
+					hm[owner].add(mmodule)
+				else
+					hm[owner] = new List[MModule]
+					hm[owner].add(mmodule)
+				end
+			end
+		end
+		return hm
+	end
+
 	fun is_class: Bool do
 		return self.kind == concrete_kind or self.kind == abstract_kind
 	end
@@ -187,3 +221,8 @@ redef class MClass
 		return self.kind == abstract_kind
 	end
 end
+
+# MClass State
+fun c_is_intro: Int do return 1
+fun c_is_refined: Int do return 2
+fun c_is_imported: Int do return 3
