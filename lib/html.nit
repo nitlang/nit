@@ -154,66 +154,96 @@ class HTMLTag
 	# p.text("Hello World!")
 	# Text is escaped see: standard::String::html_escape
 	fun text(txt: String): HTMLTag do
-		content = txt
+		content.clear
+		content.append(txt)
 		return self
 	end
-	private var content: String = ""
+	private var content = new Buffer
 
 	# Append text to element
 	# var p = new HTMLTag("p")
 	# p.append("Hello").append("<br/>").append("World!")
 	# Text is escaped see: standard::String::html_escape
 	fun append(txt: String): HTMLTag do
-		text("{content}{txt}")
+		content.append(txt)
 		return self
 	end
 
 	# Render the element as HTML string
 	fun html: String do
+		var attrs = render_attrs
 		var content = render_content
-		if tag != "script" and content.is_empty then return "<{tag}{render_attrs}/>"
-		return "<{tag}{render_attrs}>{content}</{tag}>"
+		var str = new Buffer
+		str.append("<{tag}")
+		str.append(attrs)
+		if tag != "script" and content.is_empty then
+			str.append("/>")
+		else
+			str.append(">")
+			str.append(content)
+			str.append("</{tag}>")
+		end
+		return str.to_s
 	end
 
 	private fun render_attrs: String do
-		var str = "{render_classes}{render_css}"
+		var cls = render_classes
+		var css = render_css
+		var str = new Buffer
+		if not cls.is_empty then
+			str.append(" ")
+			str.append(render_classes)
+		end
+		if not css.is_empty then
+			str.append(" ")
+			str.append(render_css)
+		end
+		if not attrs.is_empty then str.append(" ")
+		var count = 0
 		for key, value in attrs do
 			if key == "class" or key == "style" then continue
-			str = "{str} {key}='{value}'"
+			str.append("{key}=\"{value}\"")
+			if count < attrs.length - 1 then
+				str.append(" ")
+			end
+			count += 1
 		end
-		return str
+		return str.to_s
 	end
 
 	private fun render_css: String do
-		var css = ""
-		if attrs.has_key("style") then css = attrs["style"]
-		for key, value in self.css_props do
-			css = "{css}; {key}: {value}"
-		end
-		if css.is_empty then return ""
-		return " style='{css}'"
+		if not attrs.has_key("style") and css_props.is_empty then return ""
+		var css = new Buffer
+		css.append("style=\"")
+		if attrs.has_key("style") then css.append("{attrs["style"]}; ")
+		css.append(css_props.join("; ", ": "))
+		css.append("\"")
+		return css.to_s
 	end
 
 	private fun render_classes: String do
-		var cls = ""
-		if attrs.has_key("class") then cls = attrs["class"]
-		if not classes.is_empty then cls = " class='{cls} {classes.join(" ")}'"
-		if cls.is_empty then return ""
-		return cls
+		if not attrs.has_key("class") and classes.is_empty then return ""
+		var cls = new Buffer
+		cls.append("class=\"")
+		if attrs.has_key("class") then cls.append("{attrs["class"]} ")
+		cls.append(classes.join(" "))
+		cls.append("\"")
+		return cls.to_s
 	end
 
 	private fun render_content: String do
-		var str = content.html_escape
+		var str = new Buffer
+		str.append(content.to_s.html_escape)
 		for child in children do
-			str += child.html
+			str.append(child.html)
 		end
-		return str
+		return str.to_s
 	end
 end
 
 private class HTMLRaw
 	super HTMLTag
 
-	init(content: String) do self.content = content
-	redef fun html do return content
+	init(content: String) do self.content.append(content)
+	redef fun html do return content.to_s
 end
