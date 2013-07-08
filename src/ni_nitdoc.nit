@@ -110,7 +110,7 @@ class Nitdoc
 	end
 
 	fun overview do
-		var overviewpage = new NitdocOverview.with(modelbuilder.nmodules, self.opt_nodot.value, destinationdir.to_s)
+		var overviewpage = new NitdocOverview.with(modelbuilder, self.opt_nodot.value, destinationdir.to_s)
 		overviewpage.save("{destinationdir.to_s}/index.html")
 	end
 
@@ -173,13 +173,13 @@ end
 class NitdocOverview
 	super NitdocPage
 
-	var amodules: Array[AModule]
+	var mbuilder: ModelBuilder
 
 	# Init with Array[AModule] to get all ifnormations about each MModule containt in a program
 	# opt_nodot to inform about the graph gen
 	# destination: to know where will be saved dot files
-	init with(modules: Array[AModule], opt_nodot: Bool, destination: String) do
-		self.amodules = modules
+	init with(mbuilder: ModelBuilder, opt_nodot: Bool, destination: String) do
+		self.mbuilder = mbuilder
 		self.opt_nodot = opt_nodot
 		self.destinationdir = destination
 	end
@@ -262,30 +262,45 @@ class NitdocOverview
 	end
 
 	fun add_modules do
-		var ls = new List[nullable MModule]
-		for amodule in amodules do
-			var mmodule = amodule.mmodule.public_owner
-			if mmodule != null and not ls.has(mmodule) then
-				open("li")
-				add("a").attr("href", "{mmodule.name}.html").text("{mmodule.to_s} ")
-				add_html(amodule.comment)
-				close("li")
-				ls.add(mmodule)
-			end
+		var mmodules = list_mmodules
+		var sorted = new Array[MModule].from(mmodules)
+		var sorter = new ComparableSorter[MModule]
+		sorter.sort(sorted)
+		for mmodule in sorted do
+			var amodule = mbuilder.mmodule2nmodule[mmodule]
+			open("li")
+			add("a").attr("href", "{mmodule.name}.html").text("{mmodule.to_s} ")
+			add_html(amodule.short_comment)
+			close("li")
 		end
 	end
 
 	fun process_generate_dot do
 		var op = new Buffer
 		op.append("digraph dep \{ rankdir=BT; node[shape=none,margin=0,width=0,height=0,fontsize=10]; edge[dir=none,color=gray]; ranksep=0.2; nodesep=0.1;\n")
-		for amodule in amodules do
-			op.append("\"{amodule.mmodule.name}\"[URL=\"{amodule.mmodule.name}.html\"];\n")
-			for mmodule2 in amodule.mmodule.in_importation.direct_greaters do
-				op.append("\"{amodule.mmodule.name}\"->\"{mmodule2.name}\";\n")
+		for mmodule in list_mmodules do
+			op.append("\"{mmodule.name}\"[URL=\"{mmodule.name}.html\"];\n")
+			for imported in mmodule.in_importation.direct_greaters do
+				if imported.direct_owner == null then
+					op.append("\"{mmodule.name}\"->\"{imported.name}\";\n")
+				end
 			end
 		end
 		op.append("\}\n")
 		generate_dot(op.to_s, "dep", "Modules hierarchy")
+	end
+
+	private fun list_mmodules: Set[MModule] do
+		var mmodules = new HashSet[MModule]
+		for mmodule in mbuilder.model.mmodules do
+			var owner = mmodule.public_owner
+			if owner != null then
+				mmodules.add(owner)
+			else
+				mmodules.add(mmodule)
+			end
+		end
+		return mmodules
 	end
 
 end
