@@ -87,6 +87,12 @@ else
 			var tree = parser.parse
 			f.close
 
+			var error = tree.n_eof
+			if error isa AError then
+				print("Error at {error.location}:\n\t{error.message}")
+				return
+			end
+
 			if not no_print then
 				(new PrintTreeVisitor).enter_visit(tree)
 			end

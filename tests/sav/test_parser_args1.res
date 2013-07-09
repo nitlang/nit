@@ -1,5 +1,5 @@
-../src/test_parser.nit:17,1--96,1
-  ../src/test_parser.nit:17,1--95,3
+../src/test_parser.nit:17,1--102,1
+  ../src/test_parser.nit:17,1--101,3
     ../src/test_parser.nit:17,1--18,19
       ../src/test_parser.nit:17,1--18,0
         '# Program used to test the NIT parser
@@ -161,9 +161,9 @@
               literal value '0' ... ../src/test_parser.nit:40,11
           keyword 'end' ... ../src/test_parser.nit:41,2--4
       keyword 'end' ... ../src/test_parser.nit:42,1--3
-    ../src/test_parser.nit:44,1--95,3
-      ../src/test_parser.nit:44,1--95,3
-        ../src/test_parser.nit:44,1--95,3
+    ../src/test_parser.nit:44,1--101,3
+      ../src/test_parser.nit:44,1--101,3
+        ../src/test_parser.nit:44,1--101,3
           ../src/test_parser.nit:44,1--20
             keyword 'var' ... ../src/test_parser.nit:44,1--3
             identifier 'no_print' ... ../src/test_parser.nit:44,5--12
@@ -339,7 +339,7 @@
                 identifier 'shift' ... ../src/test_parser.nit:61,7--11
                 ../src/test_parser.nit:61,2
               keyword 'end' ... ../src/test_parser.nit:62,1--3
-          ../src/test_parser.nit:64,1--95,3
+          ../src/test_parser.nit:64,1--101,3
             keyword 'if' ... ../src/test_parser.nit:64,1--2
             ../src/test_parser.nit:64,4--29
               ../src/test_parser.nit:64,4--16
@@ -410,8 +410,8 @@
                   ../src/test_parser.nit:71,8--29
                     literal value '"  -h	print this help"' ... ../src/test_parser.nit:71,8--29
                   ')' ... ../src/test_parser.nit:71,30
-            ../src/test_parser.nit:73,2--95,3
-              ../src/test_parser.nit:73,2--94,4
+            ../src/test_parser.nit:73,2--101,3
+              ../src/test_parser.nit:73,2--100,4
                 keyword 'for' ... ../src/test_parser.nit:73,2--4
                 identifier 'a' ... ../src/test_parser.nit:73,6
                 ../src/test_parser.nit:73,11--14
@@ -419,7 +419,7 @@
                   identifier 'args' ... ../src/test_parser.nit:73,11--14
                   ../src/test_parser.nit:73,11
                 keyword 'do' ... ../src/test_parser.nit:73,16--17
-                ../src/test_parser.nit:74,3--94,4
+                ../src/test_parser.nit:74,3--100,4
                   ../src/test_parser.nit:74,3--30
                     keyword 'var' ... ../src/test_parser.nit:74,3--5
                     identifier 'f' ... ../src/test_parser.nit:74,7
@@ -462,7 +462,7 @@
                               ../src/test_parser.nit:75,43
                             ')' ... ../src/test_parser.nit:75,44
                         ')' ... ../src/test_parser.nit:75,45
-                  ../src/test_parser.nit:76,3--93,5
+                  ../src/test_parser.nit:76,3--99,5
                     keyword 'if' ... ../src/test_parser.nit:76,3--4
                     ../src/test_parser.nit:76,6--15
                       ../src/test_parser.nit:76,6
@@ -551,7 +551,7 @@
                           ../src/test_parser.nit:84,4
                         identifier 'close' ... ../src/test_parser.nit:84,6--10
                         ../src/test_parser.nit:84,4
-                    ../src/test_parser.nit:86,4--93,5
+                    ../src/test_parser.nit:86,4--99,5
                       ../src/test_parser.nit:86,4--33
                         keyword 'var' ... ../src/test_parser.nit:86,4--6
                         identifier 'parser' ... ../src/test_parser.nit:86,8--13
@@ -585,35 +585,87 @@
                           ../src/test_parser.nit:88,4
                         identifier 'close' ... ../src/test_parser.nit:88,6--10
                         ../src/test_parser.nit:88,4
-                      ../src/test_parser.nit:90,4--92,6
-                        keyword 'if' ... ../src/test_parser.nit:90,4--5
-                        ../src/test_parser.nit:90,7--18
-                          keyword 'not' ... ../src/test_parser.nit:90,7--9
-                          ../src/test_parser.nit:90,11--18
-                            ../src/test_parser.nit:90,11
-                            identifier 'no_print' ... ../src/test_parser.nit:90,11--18
-                            ../src/test_parser.nit:90,11
-                        ../src/test_parser.nit:91,5--44
-                          ../src/test_parser.nit:91,5--44
-                            ../src/test_parser.nit:91,5--26
-                              '(' ... ../src/test_parser.nit:91,5
-                              ../src/test_parser.nit:91,6--25
-                                keyword 'new' ... ../src/test_parser.nit:91,6--8
-                                ../src/test_parser.nit:91,10--25
-                                  type identifier 'PrintTreeVisitor' ... ../src/test_parser.nit:91,10--25
-                                ../src/test_parser.nit:91,6
-                              ')' ... ../src/test_parser.nit:91,26
-                            identifier 'enter_visit' ... ../src/test_parser.nit:91,28--38
-                            ../src/test_parser.nit:91,39--44
-                              '(' ... ../src/test_parser.nit:91,39
-                              ../src/test_parser.nit:91,40--43
-                                ../src/test_parser.nit:91,40
-                                identifier 'tree' ... ../src/test_parser.nit:91,40--43
-                                ../src/test_parser.nit:91,40
-                              ')' ... ../src/test_parser.nit:91,44
-                        ../src/test_parser.nit:92,4--6
-                          keyword 'end' ... ../src/test_parser.nit:92,4--6
-                      keyword 'end' ... ../src/test_parser.nit:93,3--5
-                  keyword 'end' ... ../src/test_parser.nit:94,2--4
-              keyword 'end' ... ../src/test_parser.nit:95,1--3
-  end of file ... ../src/test_parser.nit:96,1
+                      ../src/test_parser.nit:90,4--25
+                        keyword 'var' ... ../src/test_parser.nit:90,4--6
+                        identifier 'error' ... ../src/test_parser.nit:90,8--12
+                        '=' ... ../src/test_parser.nit:90,14
+                        ../src/test_parser.nit:90,16--25
+                          ../src/test_parser.nit:90,16--19
+                            ../src/test_parser.nit:90,16
+                            identifier 'tree' ... ../src/test_parser.nit:90,16--19
+                            ../src/test_parser.nit:90,16
+                          identifier 'n_eof' ... ../src/test_parser.nit:90,21--25
+                          ../src/test_parser.nit:90,16
+                      ../src/test_parser.nit:91,4--94,6
+                        keyword 'if' ... ../src/test_parser.nit:91,4--5
+                        ../src/test_parser.nit:91,7--22
+                          ../src/test_parser.nit:91,7--11
+                            ../src/test_parser.nit:91,7
+                            identifier 'error' ... ../src/test_parser.nit:91,7--11
+                            ../src/test_parser.nit:91,7
+                          ../src/test_parser.nit:91,17--22
+                            type identifier 'AError' ... ../src/test_parser.nit:91,17--22
+                        ../src/test_parser.nit:92,5--93,10
+                          ../src/test_parser.nit:92,5--58
+                            ../src/test_parser.nit:92,11
+                            identifier 'print' ... ../src/test_parser.nit:92,5--9
+                            ../src/test_parser.nit:92,10--58
+                              '(' ... ../src/test_parser.nit:92,10
+                              ../src/test_parser.nit:92,11--57
+                                ../src/test_parser.nit:92,11--21
+                                  literal value '"Error at {' ... ../src/test_parser.nit:92,11--21
+                                ../src/test_parser.nit:92,22--35
+                                  ../src/test_parser.nit:92,22--26
+                                    ../src/test_parser.nit:92,22
+                                    identifier 'error' ... ../src/test_parser.nit:92,22--26
+                                    ../src/test_parser.nit:92,22
+                                  identifier 'location' ... ../src/test_parser.nit:92,28--35
+                                  ../src/test_parser.nit:92,22
+                                ../src/test_parser.nit:92,36--42
+                                  literal value '}:\n\t{' ... ../src/test_parser.nit:92,36--42
+                                ../src/test_parser.nit:92,43--55
+                                  ../src/test_parser.nit:92,43--47
+                                    ../src/test_parser.nit:92,43
+                                    identifier 'error' ... ../src/test_parser.nit:92,43--47
+                                    ../src/test_parser.nit:92,43
+                                  identifier 'message' ... ../src/test_parser.nit:92,49--55
+                                  ../src/test_parser.nit:92,43
+                                ../src/test_parser.nit:92,56--57
+                                  '}"' ... ../src/test_parser.nit:92,56--57
+                              ')' ... ../src/test_parser.nit:92,58
+                          ../src/test_parser.nit:93,5--10
+                            keyword 'return' ... ../src/test_parser.nit:93,5--10
+                        ../src/test_parser.nit:94,4--6
+                          keyword 'end' ... ../src/test_parser.nit:94,4--6
+                      ../src/test_parser.nit:96,4--98,6
+                        keyword 'if' ... ../src/test_parser.nit:96,4--5
+                        ../src/test_parser.nit:96,7--18
+                          keyword 'not' ... ../src/test_parser.nit:96,7--9
+                          ../src/test_parser.nit:96,11--18
+                            ../src/test_parser.nit:96,11
+                            identifier 'no_print' ... ../src/test_parser.nit:96,11--18
+                            ../src/test_parser.nit:96,11
+                        ../src/test_parser.nit:97,5--44
+                          ../src/test_parser.nit:97,5--44
+                            ../src/test_parser.nit:97,5--26
+                              '(' ... ../src/test_parser.nit:97,5
+                              ../src/test_parser.nit:97,6--25
+                                keyword 'new' ... ../src/test_parser.nit:97,6--8
+                                ../src/test_parser.nit:97,10--25
+                                  type identifier 'PrintTreeVisitor' ... ../src/test_parser.nit:97,10--25
+                                ../src/test_parser.nit:97,6
+                              ')' ... ../src/test_parser.nit:97,26
+                            identifier 'enter_visit' ... ../src/test_parser.nit:97,28--38
+                            ../src/test_parser.nit:97,39--44
+                              '(' ... ../src/test_parser.nit:97,39
+                              ../src/test_parser.nit:97,40--43
+                                ../src/test_parser.nit:97,40
+                                identifier 'tree' ... ../src/test_parser.nit:97,40--43
+                                ../src/test_parser.nit:97,40
+                              ')' ... ../src/test_parser.nit:97,44
+                        ../src/test_parser.nit:98,4--6
+                          keyword 'end' ... ../src/test_parser.nit:98,4--6
+                      keyword 'end' ... ../src/test_parser.nit:99,3--5
+                  keyword 'end' ... ../src/test_parser.nit:100,2--4
+              keyword 'end' ... ../src/test_parser.nit:101,1--3
+  end of file ... ../src/test_parser.nit:102,1
