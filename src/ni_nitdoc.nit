@@ -120,9 +120,9 @@ class Nitdoc
 	end
 
 	fun modules do
-		for mod in modelbuilder.nmodules do
-			var modulepage = new NitdocModules.with(mod)
-			modulepage.save("{destinationdir.to_s}/{mod.mmodule.name}.html")
+		for mmodule in model.mmodules do
+			var modulepage = new NitdocModules.with(mmodule, modelbuilder)
+			modulepage.save("{destinationdir.to_s}/{mmodule.name}.html")
 		end
 	end
 
@@ -468,18 +468,20 @@ end
 class NitdocModules
 	super NitdocPage
 
-	var amodule: AModule
-	var modulename: String
-	init with(amodule: AModule) do
-		self.amodule = amodule
-		self.modulename = self.amodule.mmodule.name
+	var mmodule: MModule
+	var mbuilder: ModelBuilder
+
+	init with(mmodule: MModule, mbuilder: ModelBuilder) do
+		self.mmodule = mmodule
+		self.mbuilder = mbuilder
 		opt_nodot = false
 		destinationdir = ""
 	end
 
 	redef fun head do
 		super
-		add("title").text("{modulename} module | {amodule.short_comment}")
+		var amodule = mbuilder.mmodule2nmodule[mmodule]
+		add("title").text("{mmodule.name} module | {amodule.short_comment}")
 	end
 
 	redef fun header do
@@ -489,7 +491,7 @@ class NitdocModules
 		open("li")
 		add_html("<a href=\"index.html\">Overview</a>")
 		close("li")
-		add("li").add_class("current").text(modulename)
+		add("li").add_class("current").text(mmodule.name)
 		open("li")
 		add_html("<a href=\"full-index.html\" >Full Index</a>")
 		close("li")
@@ -549,8 +551,8 @@ class NitdocModules
 	# Insert all tags in content part
 	fun add_content do
 		open("div").add_class("content")
-		add("h1").text(modulename)
-		add("div").add_class("subtitle").text("module {modulename}")
+		add("h1").text(mmodule.name)
+		add("div").add_class("subtitle").text("module {mmodule.name}")
 		module_comment
 		classes
 		properties
@@ -559,6 +561,7 @@ class NitdocModules
 
 	# Insert module comment in the content
 	fun module_comment do
+		var amodule = mbuilder.mmodule2nmodule[mmodule]
 		var doc = amodule.comment
 		open("div").attr("id", "description")
 		add("pre").add_class("text_label").text(doc)
@@ -570,30 +573,30 @@ class NitdocModules
 	end
 
 	fun menu do
-		var mmodule = amodule.mmodule 
+		var amodule = mbuilder.mmodule2nmodule[mmodule]
 		open("div").add_class("menu")
 		open("nav")
 		add("h3").text("Module Hierarchy").attr("style","cursor: pointer;")
-		if mmodule.in_importation.direct_greaters.length > 0 then
+		if mmodule.in_importation.greaters.length > 0 then
 			add_html("<h4>All dependencies</h4><ul>")
-			var sorted = mmodule.in_importation.direct_greaters.to_a
-			var sorterp = new ComparableSorter[MModule]
-			sorterp.sort(sorted)
+			var sorted = mmodule.in_importation.greaters.to_a
+			var sorter = new ComparableSorter[MModule]
+			sorter.sort(sorted)
 			for m in sorted do
-				if m == mmodule or mmodule == m.public_owner then continue
+				if m == mmodule or m.public_owner != null then continue
 				open("li")
 				add("a").attr("href", "{m.name}.html").text(m.name)
 				close("li")
 			end
 			add_html("</ul>")
-		end	
-		if mmodule.in_importation.greaters.length > 0 then
+		end
+		if mmodule.in_importation.smallers.length > 0 then
 			add_html("<h4>All clients</h4><ul>")
-			var sorted = mmodule.in_importation.greaters.to_a
-			var sorterp = new ComparableSorter[MModule]
-			sorterp.sort(sorted)
+			var sorted = mmodule.in_importation.smallers.to_a
+			var sorter = new ComparableSorter[MModule]
+			sorter.sort(sorted)
 			for m in sorted do
-				if m == mmodule then continue
+				if m == mmodule or m.public_owner != null then continue
 				open("li")
 				add("a").attr("href", "{m.name}.html").text(m.name)
 				close("li")
@@ -603,8 +606,8 @@ class NitdocModules
 		close("nav")
 		if mmodule.in_nesting.direct_greaters.length > 0 then
 			var sorted = mmodule.in_nesting.direct_greaters.to_a
-			var sorterp = new ComparableSorter[MModule]
-			sorterp.sort(sorted)
+			var sorter = new ComparableSorter[MModule]
+			sorter.sort(sorted)
 			open("nav")
 			add("h3").text("Nested Modules").attr("style","cursor: pointer;")
 			open("ul")
@@ -614,30 +617,40 @@ class NitdocModules
 				close("li")
 			end
 			close("ul")
-			
+
 			close("nav")
 		end
 		close("div")
 	end
 
 	fun classes do
+		var amodule = mbuilder.mmodule2nmodule[mmodule]
+		var intro_mclasses = mmodule.intro_mclasses
+		var redef_mclasses = mmodule.redef_mclasses
+		var all_mclasses = new HashSet[MClass]
+		for m in mmodule.in_nesting.greaters do
+			all_mclasses.add_all(m.intro_mclasses)
+			all_mclasses.add_all(m.redef_mclasses)
+		end
+		all_mclasses.add_all(intro_mclasses)
+		all_mclasses.add_all(redef_mclasses)
+
 		var sorted = new Array[MClass]
-		sorted.add_all(amodule.mmodule.mclasses.keys)
-		var sorterp = new ComparableSorter[MClass]
-		sorterp.sort(sorted)
+		sorted.add_all(all_mclasses)
+		var sorter = new ComparableSorter[MClass]
+		sorter.sort(sorted)
 		open("div").add_class("module")
 		open("article").add_class("classes filterable")
 		add("h2").text("Classes")
 		open("ul")
 		for c in sorted do
-			var state = amodule.mmodule.mclasses[c]
 			var name = c.name
-			if state == c_is_intro or state == c_is_imported then
-				open("li").add_class("intro")
-				add("span").attr("title", "introduced in this module").text("I ")
-			else
+			if redef_mclasses.has(c) and c.intro_mmodule.public_owner != mmodule then
 				open("li").add_class("redef")
 				add("span").attr("title", "refined in this module").text("R ")
+			else
+				open("li").add_class("intro")
+				add("span").attr("title", "introduced in this module").text("I ")
 			end
 			add("a").attr("href", "{name}.html").text(name)
 			close("li")
@@ -648,36 +661,34 @@ class NitdocModules
 	end
 
 	fun properties do
-		var sorted_imported = amodule.mmodule.imported_methods.to_a
-		var sorted_redef = amodule.mmodule.redef_methods.to_a
-		var sorterp = new ComparableSorter[MProperty]
-		sorterp.sort(sorted_imported)
-		sorterp.sort(sorted_redef)
+		var amodule = mbuilder.mmodule2nmodule[mmodule]
+		var mpropdefs = new HashSet[MPropDef]
+		for m in mmodule.in_nesting.greaters do
+			for c in m.mclassdefs do mpropdefs.add_all(c.mpropdefs)
+		end
+		for c in mmodule.mclassdefs do mpropdefs.add_all(c.mpropdefs)
+		var sorted = mpropdefs.to_a
+		var sorter = new ComparableSorter[MPropDef]
+		sorter.sort(sorted)
 		open("article").add_class("properties filterable")
 		add_html("<h2>Properties</h2>")
 		open("ul")
-		for method in sorted_imported do
-			if method.visibility is none_visibility or method.visibility is intrude_visibility then continue
-			open("li").add_class("intro")
-			add("span").attr("title", "introduction").text("I")
+		for p in sorted do
+			if p.mproperty.visibility <= none_visibility then continue
+			if p.is_intro then
+				open("li").add_class("intro")
+				add("span").attr("title", "introduction").text("I")
+			else
+				open("li").add_class("redef")
+				add("span").attr("title", "redefinition").text("R")
+			end
 			add_html("&nbsp;")
-			add("a").attr("href", "{method.local_class.name}.html").attr("title", "").text("{method.name} ({method.local_class.name})")
+			add("a").attr("href", "{p.mclassdef.mclass.name}.html").attr("title", "").text("{p.mproperty.name} ({p.mclassdef.mclass.name})")
 			close("li")
 		end
-
-		for method in sorted_redef do
-			if method.visibility is none_visibility or method.visibility is intrude_visibility then continue
-			open("li").add_class("redef")
-			add("span").attr("title", "redefinition").text("R")
-			add_html("&nbsp;")
-			add("a").attr("href", "{method.local_class.name}.html").attr("title", "").text("{method.name} ({method.local_class.name})")
-			close("li")
-		end
-
 		close("ul")
 		close("article")
 	end
-
 end
 
 # Nit Standard Library
@@ -1067,7 +1078,10 @@ redef class AModule
 		if n_moduledecl is null or n_moduledecl.n_doc is null then ret
 		if n_moduledecl.n_doc is null then return ""
 		for t in n_moduledecl.n_doc.n_comment do
-			ret += "{t.text.replace("# ", "")}"
+			var txt = t.text
+			txt = txt.replace("# ", "")
+			txt = txt.replace("#", "")
+			ret += txt
 		end
 		return ret
 	end
@@ -1113,6 +1127,11 @@ redef class MModule
 		end
 		return methods
 	end
+end
+redef class MPropDef
+	super Comparable
+	redef type OTHER: MPropDef
+	redef fun <(other: OTHER): Bool do return self.mproperty.name < other.mproperty.name
 end
 
 redef class MProperty
