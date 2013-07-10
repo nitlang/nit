@@ -268,7 +268,7 @@ class SeparateErasureCompiler
 			self.header.add_decl("val* BOX_{c_name}({mtype.ctype});")
 			v.add_decl("/* allocate {mtype} */")
 			v.add_decl("val* BOX_{mtype.c_name}({mtype.ctype} value) \{")
-			v.add("struct instance_{c_name}*res = GC_MALLOC(sizeof(struct instance_{c_name}));")
+			v.add("struct instance_{c_name}*res = nit_alloc(sizeof(struct instance_{c_name}));")
 			v.require_declaration("class_{c_name}")
 			v.add("res->class = &class_{c_name};")
 			v.add("res->value = value;")
@@ -289,7 +289,7 @@ class SeparateErasureCompiler
 			var res = v.new_named_var(mtype, "self")
 			res.is_exact = true
 			var mtype_elt = mtype.arguments.first
-			v.add("{res} = GC_MALLOC(sizeof(struct instance_{c_name}) + length*sizeof({mtype_elt.ctype}));")
+			v.add("{res} = nit_alloc(sizeof(struct instance_{c_name}) + length*sizeof({mtype_elt.ctype}));")
 			v.require_declaration("class_{c_name}")
 			v.add("{res}->class = &class_{c_name};")
 			v.add("return {res};")
@@ -303,7 +303,7 @@ class SeparateErasureCompiler
 		v.add_decl("{mtype.ctype} NEW_{c_name}(void) \{")
 		var res = v.new_named_var(mtype, "self")
 		res.is_exact = true
-		v.add("{res} = GC_MALLOC(sizeof(struct instance) + {attrs.length}*sizeof(nitattribute_t));")
+		v.add("{res} = nit_alloc(sizeof(struct instance) + {attrs.length}*sizeof(nitattribute_t));")
 		v.require_declaration("class_{c_name}")
 		v.add("{res}->class = &class_{c_name};")
 		self.generate_init_attr(v, res, mtype)

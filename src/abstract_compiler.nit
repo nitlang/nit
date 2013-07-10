@@ -27,6 +27,8 @@ redef class ToolContext
 	var opt_output: OptionString = new OptionString("Output file", "-o", "--output")
 	# --no-cc
 	var opt_no_cc: OptionBool = new OptionBool("Do not invoke C compiler", "--no-cc")
+	# --cc-paths
+	var opt_cc_path: OptionArray = new OptionArray("Set include path for C header files (may be used more than once)", "--cc-path")
 	# --make-flags
 	var opt_make_flags: OptionString = new OptionString("Additional options to make", "--make-flags")
 	# --hardening
@@ -56,6 +58,42 @@ redef class ToolContext
 end
 
 redef class ModelBuilder
+	# The list of directories to search for included C headers (-I for C compilers)
+	# The list is initially set with :
+	#   * the toolcontext --cc-path option
+	#   * the NIT_CC_PATH environment variable
+	#   * some heuristics including the NIT_DIR environment variable and the progname of the process
+	# Path can be added (or removed) by the client
+	var cc_paths = new Array[String]
+
+	redef init(model, toolcontext)
+	do
+		super
+
+		# Look for the the Nit clib path
+		var path_env = "NIT_DIR".environ
+		if not path_env.is_empty then
+			var libname = "{path_env}/clib"
+			if libname.file_exists then cc_paths.add(libname)
+		end
+
+		var libname = "{sys.program_name.dirname}/../clib"
+		if libname.file_exists then cc_paths.add(libname.simplify_path)
+
+		if cc_paths.is_empty then
+			toolcontext.error(null, "Cannot determine the nit clib path. define envvar NIT_DIR.")
+		end
+
+		# Add user defined cc_paths
+		cc_paths.append(toolcontext.opt_cc_path.value)
+
+		path_env = "NIT_CC_PATH".environ
+		if not path_env.is_empty then
+			cc_paths.append(path_env.split_with(':'))
+		end
+
+	end
+
 	protected fun write_and_make(compiler: AbstractCompiler)
 	do
 		var mainmodule = compiler.mainmodule
@@ -138,7 +176,12 @@ redef class ModelBuilder
 		var makename = ".nit_compile/{mainmodule.name}.mk"
 		var makefile = new OFStream.open(makename)
 
-		makefile.write("CC = ccache cc\nCFLAGS = -g -O2\nLDFLAGS ?= \nLDLIBS  ?= -lm -lgc\n\n")
+		var cc_includes = ""
+		for p in cc_paths do
+			#p = "..".join_path(p)
+			cc_includes += " -I \"" + p + "\""
+		end
+		makefile.write("CC = ccache cc\nCFLAGS = -g -O2{cc_includes}\nLDFLAGS ?= \nLDLIBS  ?= -lm -lgc\n\n")
 		makefile.write("all: {outname}\n\n")
 
 		var ofiles = new Array[String]
@@ -148,13 +191,19 @@ redef class ModelBuilder
 			makefile.write("{o}: {f}\n\t$(CC) $(CFLAGS) -D NONITCNI -c -o {o} {f}\n\n")
 			ofiles.add(o)
 		end
+
+		# Add gc_choser.h to aditionnal bodies
+		var gc_chooser = new ExternCFile("{cc_paths.first}/gc_chooser.c", "-DWITH_LIBGC")
+		compiler.extern_bodies.add(gc_chooser)
+
 		# Compile each required extern body into a specific .o
 		for f in compiler.extern_bodies do
-			var basename = f.basename(".c")
+			var basename = f.filename.basename(".c")
 			var o = ".nit_compile/{basename}.extern.o"
-			makefile.write("{o}: {f}\n\t$(CC) $(CFLAGS) -D NONITCNI -c -o {o} {f}\n\n")
+			makefile.write("{o}: {f.filename}\n\t$(CC) $(CFLAGS) -D NONITCNI {f.cflags} -c -o {o} {f.filename}\n\n")
 			ofiles.add(o)
 		end
+
 		# Link edition
 		makefile.write("{outname}: {ofiles.join(" ")}\n\t$(CC) $(LDFLAGS) -o {outname} {ofiles.join(" ")} $(LDLIBS)\n\n")
 		# Clean
@@ -246,16 +295,7 @@ abstract class AbstractCompiler
 		self.header.add_decl("#include <stdlib.h>")
 		self.header.add_decl("#include <stdio.h>")
 		self.header.add_decl("#include <string.h>")
-		self.header.add_decl("#ifndef NOBOEHM")
-		self.header.add_decl("#include <gc/gc.h>")
-		self.header.add_decl("#ifdef NOBOEHM_ATOMIC")
-		self.header.add_decl("#undef GC_MALLOC_ATOMIC")
-		self.header.add_decl("#define GC_MALLOC_ATOMIC(x) GC_MALLOC(x)")
-		self.header.add_decl("#endif /*NOBOEHM_ATOMIC*/")
-		self.header.add_decl("#else /*NOBOEHM*/")
-		self.header.add_decl("#define GC_MALLOC(x) calloc(1, (x))")
-		self.header.add_decl("#define GC_MALLOC_ATOMIC(x) calloc(1, (x))")
-		self.header.add_decl("#endif /*NOBOEHM*/")
+		self.header.add_decl("#include <gc_chooser.h>")
 
 		compile_header_structs
 
@@ -292,6 +332,7 @@ abstract class AbstractCompiler
 		end
 		v.add_decl("int main(int argc, char** argv) \{")
 		v.add("glob_argc = argc; glob_argv = argv;")
+		v.add("initialize_gc_option();")
 		var main_type = mainmodule.sys_type
 		if main_type != null then
 			var mainmodule = v.compiler.mainmodule
@@ -337,7 +378,10 @@ abstract class AbstractCompiler
 	end
 
 	# List of additional .c files required to compile (native interface)
-	var extern_bodies = new ArraySet[String]
+	var extern_bodies = new Array[ExternCFile]
+
+	# This is used to avoid adding an extern file more than once
+	private var seen_extern = new ArraySet[String]
 
 	# Generate code that check if an instance is correctly initialized
 	fun generate_check_init_instance(mtype: MClassType) is abstract
@@ -809,14 +853,16 @@ abstract class AbstractCompilerVisitor
 		if tryfile.file_exists then
 			self.declare_once("#include \"{"..".join_path(tryfile)}\"")
 		end
+
+		if self.compiler.seen_extern.has(file) then return
+		self.compiler.seen_extern.add(file)
 		tryfile = file + ".nit.c"
-		if tryfile.file_exists then
-			self.compiler.extern_bodies.add(tryfile)
+		if not tryfile.file_exists then
+			tryfile = file + "_nit.c"
+			if not tryfile.file_exists then return
 		end
-		tryfile = file + "_nit.c"
-		if tryfile.file_exists then
-			self.compiler.extern_bodies.add(tryfile)
-		end
+		var f = new ExternCFile(tryfile, "")
+		self.compiler.extern_bodies.add(f)
 	end
 
 	# Return a new local runtime_variable initialized with the C expression `cexpr'.
@@ -1001,6 +1047,14 @@ class Frame
 
 	# The label at the end of the property
 	var returnlabel: nullable String writable = null
+end
+
+# An extern C file to compile
+class ExternCFile
+	# The filename of the file
+	var filename: String
+	# Additionnal specific CC compiler -c flags
+	var cflags: String
 end
 
 redef class String
@@ -1552,7 +1606,7 @@ redef class AInternMethPropdef
 			v.ret(v.new_expr("glob_sys", ret.as(not null)))
 			return
 		else if pname == "calloc_string" then
-			v.ret(v.new_expr("(char*)GC_MALLOC_ATOMIC({arguments[1]})", ret.as(not null)))
+			v.ret(v.new_expr("(char*)nit_alloc({arguments[1]})", ret.as(not null)))
 			return
 		else if pname == "calloc_array" then
 			v.calloc_array(ret.as(not null), arguments)
@@ -1572,7 +1626,7 @@ redef class AInternMethPropdef
 			v.ret(v.new_expr("(char*){nat}", ret.as(not null)))
 			return
 		else if pname == "force_garbage_collection" then
-			v.add("GC_gcollect();")
+			v.add("nit_gcollect();")
 			return
 		end
 		v.add("printf(\"NOT YET IMPLEMENTED {class_name}:{mpropdef} at {location.to_s}\\n\");")

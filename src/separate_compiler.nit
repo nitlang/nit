@@ -508,12 +508,10 @@ class SeparateCompiler
 			for pd in cd.mpropdefs do
 				if not pd isa MMethodDef then continue
 				#print "compile {pd} @ {cd} @ {mmodule}"
-				var r = new SeparateRuntimeFunction(pd)
+				var r = pd.separate_runtime_function
 				r.compile_to_c(self)
-				if true or cd.bound_mtype.ctype != "val*" then
-					var r2 = new VirtualRuntimeFunction(pd)
-					r2.compile_to_c(self)
-				end
+				var r2 = pd.virtual_runtime_function
+				r2.compile_to_c(self)
 			end
 		end
 		self.mainmodule = old_module
@@ -633,13 +631,10 @@ class SeparateCompiler
 			if mpropdef == null then
 				v.add_decl("NULL, /* empty */")
 			else
-				if true or mpropdef.mclassdef.bound_mtype.ctype != "val*" then
-					v.require_declaration("VIRTUAL_{mpropdef.c_name}")
-					v.add_decl("(nitmethod_t)VIRTUAL_{mpropdef.c_name}, /* pointer to {mclass.intro_mmodule}:{mclass}:{mpropdef} */")
-				else
-					v.require_declaration("{mpropdef.c_name}")
-					v.add_decl("(nitmethod_t){mpropdef.c_name}, /* pointer to {mclass.intro_mmodule}:{mclass}:{mpropdef} */")
-				end
+				assert mpropdef isa MMethodDef
+				var rf = mpropdef.virtual_runtime_function
+				v.require_declaration(rf.c_name)
+				v.add_decl("(nitmethod_t){rf.c_name}, /* pointer to {mclass.intro_mmodule}:{mclass}:{mpropdef} */")
 			end
 		end
 		v.add_decl("\}")
@@ -659,7 +654,7 @@ class SeparateCompiler
 			self.header.add_decl("val* BOX_{c_name}({mtype.ctype});")
 			v.add_decl("/* allocate {mtype} */")
 			v.add_decl("val* BOX_{mtype.c_name}({mtype.ctype} value) \{")
-			v.add("struct instance_{c_name}*res = GC_MALLOC(sizeof(struct instance_{c_name}));")
+			v.add("struct instance_{c_name}*res = nit_alloc(sizeof(struct instance_{c_name}));")
 			v.require_declaration("type_{c_name}")
 			v.add("res->type = &type_{c_name};")
 			v.require_declaration("class_{c_name}")
@@ -684,7 +679,7 @@ class SeparateCompiler
 			var res = v.new_named_var(mtype, "self")
 			res.is_exact = true
 			var mtype_elt = mtype.arguments.first
-			v.add("{res} = GC_MALLOC(sizeof(struct instance_{c_name}) + length*sizeof({mtype_elt.ctype}));")
+			v.add("{res} = nit_alloc(sizeof(struct instance_{c_name}) + length*sizeof({mtype_elt.ctype}));")
 			v.add("{res}->type = type;")
 			hardening_live_type(v, "type")
 			v.require_declaration("class_{c_name}")
@@ -700,7 +695,7 @@ class SeparateCompiler
 		v.add_decl("{mtype.ctype} NEW_{c_name}(const struct type* type) \{")
 		var res = v.new_named_var(mtype, "self")
 		res.is_exact = true
-		v.add("{res} = GC_MALLOC(sizeof(struct instance) + {attrs.length}*sizeof(nitattribute_t));")
+		v.add("{res} = nit_alloc(sizeof(struct instance) + {attrs.length}*sizeof(nitattribute_t));")
 		v.add("{res}->type = type;")
 		hardening_live_type(v, "type")
 		v.require_declaration("class_{c_name}")
@@ -1475,6 +1470,30 @@ class SeparateCompilerVisitor
 	end
 end
 
+redef class MMethodDef
+	fun separate_runtime_function: AbstractRuntimeFunction
+	do
+		var res = self.separate_runtime_function_cache
+		if res == null then
+			res = new SeparateRuntimeFunction(self)
+			self.separate_runtime_function_cache = res
+		end
+		return res
+	end
+	private var separate_runtime_function_cache: nullable SeparateRuntimeFunction
+
+	fun virtual_runtime_function: AbstractRuntimeFunction
+	do
+		var res = self.virtual_runtime_function_cache
+		if res == null then
+			res = new VirtualRuntimeFunction(self)
+			self.virtual_runtime_function_cache = res
+		end
+		return res
+	end
+	private var virtual_runtime_function_cache: nullable VirtualRuntimeFunction
+end
+
 # The C function associated to a methoddef separately compiled
 class SeparateRuntimeFunction
 	super AbstractRuntimeFunction
@@ -1509,7 +1528,7 @@ class SeparateRuntimeFunction
 		end
 		sig.append(self.c_name)
 		sig.append("({selfvar.mtype.ctype} {selfvar}")
-		comment.append("(self: {selfvar}")
+		comment.append("({selfvar}: {selfvar.mtype}")
 		arguments.add(selfvar)
 		for i in [0..msignature.arity[ do
 			var mtype = msignature.mparameters[i].mtype
@@ -1585,7 +1604,7 @@ class VirtualRuntimeFunction
 		end
 		sig.append(self.c_name)
 		sig.append("({selfvar.mtype.ctype} {selfvar}")
-		comment.append("(self: {selfvar}")
+		comment.append("({selfvar}: {selfvar.mtype}")
 		arguments.add(selfvar)
 		for i in [0..msignature.arity[ do
 			var mtype = msignature.mparameters[i].mtype
@@ -1611,10 +1630,11 @@ class VirtualRuntimeFunction
 		end
 		frame.returnlabel = v.get_name("RET_LABEL")
 
-		if recv != arguments.first.mtype then
-			#print "{self} {recv} {arguments.first}"
+		var subret = v.call(mmethoddef, recv, arguments)
+		if ret != null then
+			assert subret != null
+			v.assign(frame.returnvar.as(not null), subret)
 		end
-		mmethoddef.compile_inside_to_c(v, arguments)
 
 		v.add("{frame.returnlabel.as(not null)}:;")
 		if ret != null then
