@@ -848,30 +848,39 @@ class NitdocMClasses
 		var sorterp = new ComparableSorter[MClass]
 		open("nav")
 		add("h3").text("Inheritance")
-		if mclass.parents.length > 0 then
-			sorted = mclass.parents.to_a
+		if mclass.ancestors.length > 1 then
+			sorted = mclass.ancestors.to_a
 			sorterp.sort(sorted)
 			add("h4").text("Superclasses")
 			open("ul")
-			for sup in sorted do add_html("<li><a href=\"{sup.name}.html\">{sup.name}</a></li>")
+			for sup in sorted do
+				if sup == mclass then continue
+				add_html("<li><a href=\"{sup.name}.html\">{sup.name}</a></li>")
+			end
 			close("ul")
 		end
 
-		if mclass.descendants.length is 0 then
+		if mclass.descendants.length <= 1 then
 			add("h4").text("No Known Subclasses")
 		else if mclass.descendants.length <= 100 then
 			sorted = mclass.descendants.to_a
 			sorterp.sort(sorted)
 			add("h4").text("Subclasses")
 			open("ul")
-			for sub in sorted do add_html("<li><a href=\"{sub.name}\">{sub.name}</a></li>")
+			for sub in sorted do
+				if sub == mclass then continue
+				add_html("<li><a href=\"{sub.name}\">{sub.name}</a></li>")
+			end
 			close("ul")
 		else if mclass.children.length <= 100 then
 			sorted = mclass.children.to_a
 			sorterp.sort(sorted)
 			add("h4").text("Direct Subclasses Only")
 			open("ul")
-			for sub in sorted do add_html("<li><a href=\"{sub.name}\">{sub.name}</a></li>")
+			for sub in sorted do
+				if sub == mclass then continue
+				add_html("<li><a href=\"{sub.name}\">{sub.name}</a></li>")
+			end
 			close("ul")
 		else
 			add("h4").text("Too much Subclasses to list")
