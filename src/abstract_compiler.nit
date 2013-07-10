@@ -2308,19 +2308,7 @@ end
 
 # Utils
 
-redef class HashSet[E]
-	init from(elements: Collection[E]) do
-		init
-		self.add_all(elements)
-	end
-end
-
 redef class Array[E]
-	init from(elements: Collection[E]) do
-		init
-		self.add_all(elements)
-	end
-
 	# Return a new Array with the elements only contened in 'self' and not in 'o'
 	fun -(o: Array[E]): Array[E] do
 		var res = new Array[E]

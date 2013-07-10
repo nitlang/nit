@@ -445,6 +445,12 @@ class HashSet[E: Object]
 		_length = 0
 		enlarge(0)
 	end
+
+	# Build a list filled with the items of `coll'.
+	init from(coll: Collection[E]) do
+		init
+		add_all(coll)
+	end
 end
 
 private class HashSetNode[E: Object]

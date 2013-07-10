@@ -39,6 +39,7 @@ class HTMLPage
 
 	# Render the page as a html string
 	fun render: String do
+		root.children.clear
 		open("head")
 		head
 		close("head")
