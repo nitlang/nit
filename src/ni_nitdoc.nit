@@ -127,13 +127,9 @@ class Nitdoc
 	end
 
 	fun classes do
-		for amodule in modelbuilder.nmodules do
-			for mclass, aclassdef in amodule.mclass2nclassdef do
-				mclass.amodule(modelbuilder.mmodule2nmodule)
-				mclass.mmethod(aclassdef.mprop2npropdef)
-				var classpage = new NitdocMClasses.with(mclass, aclassdef, source)
-				classpage.save("{destinationdir.to_s}/{mclass.name}.html")
-			end
+		for mclass in modelbuilder.model.mclasses do
+			var classpage = new NitdocMClasses.with(mclass, modelbuilder, source)
+			classpage.save("{destinationdir.to_s}/{mclass.name}.html")
 		end
 	end
 
@@ -696,23 +692,24 @@ class NitdocMClasses
 	super NitdocPage
 
 	var mclass: MClass
-	var aclassdef: AClassdef
-	var stdclassdef: nullable AStdClassdef
-	var public_owner: nullable MModule
+	var mbuilder: ModelBuilder
 
-	init with(mclass: MClass, aclassdef: AClassdef, source: nullable String) do
+	init with(mclass: MClass, mbuilder: ModelBuilder, source: nullable String) do
 		self.mclass = mclass
-		self.aclassdef = aclassdef
-		if aclassdef isa AStdClassdef then self.stdclassdef = aclassdef
-		self.public_owner = mclass.intro_mmodule.public_owner
-		opt_nodot = false
-		destinationdir = ""
+		self.mbuilder = mbuilder
+		self.opt_nodot = false
+		self.destinationdir = ""
 		self.source = source
 	end
 
 	redef fun head do
 		super
-		add("title").text("{self.mclass.name} class | Nit Standard Library")
+		var nclass = mbuilder.mclassdef2nclassdef[mclass.intro]
+		if nclass isa AStdClassdef then
+			add("title").text("{mclass.name} class | {nclass.short_comment}")
+		else
+			add("title").text("{mclass.name} class")
+		end
 	end
 
 	redef fun header do
@@ -723,6 +720,7 @@ class NitdocMClasses
 		add_html("<a href=\"index.html\">Overview</a>")
 		close("li")
 		open("li")
+		var public_owner = mclass.public_owner
 		if public_owner is null then
 			add_html("<a href=\"{mclass.intro_mmodule.name}.html\">{mclass.intro_mmodule.name}</a>")
 		else
@@ -886,6 +884,7 @@ class NitdocMClasses
 	end
 
 	fun content do
+		var nclass = mbuilder.mclassdef2nclassdef[mclass.intro]
 		var sorted = new Array[MModule]
 		sorted.add_all(mclass.concerns.keys)
 		var sorterp = new ComparableSorter[MModule]
@@ -904,22 +903,24 @@ class NitdocMClasses
 		add_html("<div style=\"float: right;\"><a id=\"lblDiffCommit\"></a></div>")
 		# We add the class description
 		open("section").add_class("description")
-		if not stdclassdef is null and not stdclassdef.comment.is_empty then add_html("<pre class=\"text_label\" title=\"122\" name=\"\" tag=\"{mclass.mclassdefs.first.location.to_s}\" type=\"2\">{stdclassdef.comment} </pre><textarea id=\"fileContent\" class=\"edit\" cols=\"76\" rows=\"1\" style=\"display: none;\"></textarea><a id=\"cancelBtn\" style=\"display: none;\">Cancel</a><a id=\"commitBtn\" style=\"display: none;\">Commit</a><pre id=\"preSave\" class=\"text_label\" type=\"2\"></pre>")
+		if nclass isa AStdClassdef and not nclass.comment.is_empty then add_html("<pre class=\"text_label\" title=\"122\" name=\"\" tag=\"{mclass.mclassdefs.first.location.to_s}\" type=\"2\">{nclass.comment} </pre><textarea id=\"fileContent\" class=\"edit\" cols=\"76\" rows=\"1\" style=\"display: none;\"></textarea><a id=\"cancelBtn\" style=\"display: none;\">Cancel</a><a id=\"commitBtn\" style=\"display: none;\">Commit</a><pre id=\"preSave\" class=\"text_label\" type=\"2\"></pre>")
 		close("section")
 		open("section").add_class("concerns")
 		add("h2").add_class("section-header").text("Concerns")
 		open("ul")
 		for owner in sorted do
+			var nmodule = mbuilder.mmodule2nmodule[owner]
 			var childs = mclass.concerns[owner]
 			open("li")
-			add_html("<a href=\"#MOD_{owner.name}\">{owner.name}</a>: {owner.amodule.short_comment}")
+			add_html("<a href=\"#MOD_{owner.name}\">{owner.name}</a>: {nmodule.short_comment}")
 			if not childs is null then
 				open("ul")
 				var sortedc = childs.to_a
 				var sorterpc = new ComparableSorter[MModule]
 				sorterpc.sort(sortedc)
 				for child in sortedc do
-					add_html("<li><a href=\"#MOD_{child.name}\">{child.name}</a>: {child.amodule.short_comment} </li>")
+					var nchild = mbuilder.mmodule2nmodule[child]
+					add_html("<li><a href=\"#MOD_{child.name}\">{child.name}</a>: {nchild.short_comment} </li>")
 				end
 				close("ul")
 			end
@@ -928,12 +929,12 @@ class NitdocMClasses
 		close("ul")
 		close("section")
 		# Insert virtual types if there is almost one
-		if mclass.virtual_types.length > 0 or (stdclassdef != null and stdclassdef.n_formaldefs.length > 0) then
+		if mclass.virtual_types.length > 0 or mclass.arity > 0 then
 			open("section").add_class("types")
 			add("h2").text("Formal and Virtual Types")
 			if mclass.virtual_types.length > 0 then for prop in mclass.virtual_types do description(prop)
-			if stdclassdef.n_formaldefs.length > 0 then
-				for prop in stdclassdef.n_formaldefs do
+			if mclass.arity > 0 and nclass isa AStdClassdef then
+				for prop in nclass.n_formaldefs do
 					open("article").attr("id", "FT_Object_{prop.collect_text}")
 					open("h3").add_class("signature").text("{prop.collect_text}: nullable ")
 					add_html("<a title=\"The root of the class hierarchy.\" href=\"Object.html\">Object</a>")
@@ -956,12 +957,13 @@ class NitdocMClasses
 		open("section").add_class("methods")
 		add("h2").add_class("section-header").text("Methods")
 		for mmodule, mmethods in mclass.all_methods do
+			var nmodule = mbuilder.mmodule2nmodule[mmodule]
 			add_html("<a id=\"MOD_{mmodule.name}\"></a>")
 			if mmodule != mclass.intro_mmodule and mmodule != mclass.public_owner then
 				if mclass.has_mmodule(mmodule) then
-					add_html("<p class=\"concern-doc\">{mmodule.name}: {mmodule.amodule.short_comment}</p>")
+					add_html("<p class=\"concern-doc\">{mmodule.name}: {nmodule.short_comment}</p>")
 				else
-					add_html("<h3 class=\"concern-toplevel\">Methods refined in <a href=\"{mmodule.name}.html\">{mmodule.name}</a></h3><p class=\"concern-doc\">{mmodule.name}: {mmodule.amodule.short_comment}</p>")
+					add_html("<h3 class=\"concern-toplevel\">Methods refined in <a href=\"{mmodule.name}.html\">{mmodule.name}</a></h3><p class=\"concern-doc\">{mmodule.name}: {nmodule.short_comment}</p>")
 				end
 			end
 			var sortedc = mmethods.to_a
