@@ -796,7 +796,7 @@ class NitdocMClasses
 
 	fun properties_column do
 		var sorted = new Array[MProperty]
-		var sorterp = new ComparableSorter[MProperty]
+		var sorter = new ComparableSorter[MProperty]
 		open("nav").add_class("properties filterable")
 		add("h3").text("Properties")
 
@@ -804,7 +804,7 @@ class NitdocMClasses
 			add("h4").text("Virtual Types")
 			open("ul")
 			sorted = mclass.virtual_types.to_a
-			sorterp.sort(sorted)
+			sorter.sort(sorted)
 			for prop in sorted do
 				add_html("<li class=\"redef\"><span title=\"Redefined\">R</span><a href=\"{prop.link_anchor}\">{prop.name}</a></li>")
 			end
@@ -812,7 +812,7 @@ class NitdocMClasses
 		end
 		if mclass.constructors.length > 0 then
 			sorted = mclass.constructors.to_a
-			sorterp.sort(sorted)
+			sorter.sort(sorted)
 			add("h4").text("Constructors")
 			open("ul")
 			for prop in sorted do
@@ -822,25 +822,21 @@ class NitdocMClasses
 		end
 		add("h4").text("Methods")
 		open("ul")
-		if mclass.intro_methods.length > 0 then
-			sorted = mclass.intro_methods.to_a
-			sorterp.sort(sorted)
-			for prop in sorted do
-				if prop.visibility is public_visibility or prop.visibility is protected_visibility then add_html("<li class=\"intro\"><span title=\"Introduced\">I</span><a href=\"{prop.link_anchor}\">{prop.name}</a></li>")
-			end
-		end
-		if mclass.inherited_methods.length > 0 then
-			sorted = mclass.inherited_methods.to_a
-			sorterp.sort(sorted)
-			for prop in sorted do
-				if prop.visibility is public_visibility or prop.visibility is protected_visibility then add_html("<li class=\"inherit\"><span title=\"Inherited\">H</span><a href=\"{prop.link_anchor}\">{prop.name}</a></li>")
-			end
-		end
-		if mclass.redef_methods.length > 0 then
-			sorted = mclass.redef_methods.to_a
-			sorterp.sort(sorted)
-			for prop in sorted do
-				if prop.visibility is public_visibility or prop.visibility is protected_visibility then add_html("<li class=\"redef\"><span title=\"Refined\">R</span><a href=\"{prop.link_anchor}\">{prop.name}</a></li>")
+		var mmethods = new HashSet[MMethod]
+		var redef_methods = mclass.redef_methods
+		mmethods.add_all(mclass.intro_methods)
+		mmethods.add_all(mclass.inherited_methods)
+		mmethods.add_all(redef_methods)
+		sorted = mmethods.to_a
+		sorter.sort(sorted)
+		for prop in sorted do
+			if prop.visibility <= none_visibility then continue
+			if prop.intro_mclassdef.mclass == mclass then
+				add_html("<li class=\"intro\"><span title=\"Introduced\">I</span><a href=\"{prop.link_anchor}\">{prop.name}</a></li>")
+			else if redef_methods.has(prop) then
+				add_html("<li class=\"redef\"><span title=\"Refined\">R</span><a href=\"{prop.link_anchor}\">{prop.name}</a></li>")
+			else
+				add_html("<li class=\"inherit\"><span title=\"Inherited\">H</span><a href=\"{prop.link_anchor}\">{prop.name}</a></li>")
 			end
 		end
 		close("ul")
