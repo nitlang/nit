@@ -14,8 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import base_virtual_type2
 import array
+import base_virtual_type2
 
 class C
 	super A
