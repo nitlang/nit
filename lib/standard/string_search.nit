@@ -11,7 +11,7 @@
 # another product.
 
 # Basic string search, match and replace.
-package string_search
+module string_search
 
 import string
 

@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Program used to test the NIT parser
-package test_parser
+module test_parser
 
 import parser
 

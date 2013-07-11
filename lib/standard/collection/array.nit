@@ -13,7 +13,7 @@
 
 # This module introduces the standard array structure.
 # It also implements two other abstract collections : ArrayMap and ArraySet
-package array
+module array
 
 import abstract_collection
 

@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Module containing all bases for the reachable method analysis
-package reachable_method_analysis
+module reachable_method_analysis
 
 import icode
 import program

@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Analysis property bodies, statements and expressions
-package typing
+module typing
 
 import syntax_base
 import flow

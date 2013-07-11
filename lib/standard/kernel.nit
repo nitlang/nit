@@ -13,7 +13,7 @@
 
 # Most minimal classes and methods.
 # This module is the root of the standard module hierarchy.
-package kernel
+module kernel
 
 import end # Mark this module is a top level one. (must be only one)
 

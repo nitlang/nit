@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # The main module of the nitdoc program
-package nitdoc
+module nitdoc
 
 import syntax
 private import utils

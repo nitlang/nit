@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Analysis control flow and variable visibility in property bodies, statements and expressions
-package flow
+module flow
 
 import syntax_base
 

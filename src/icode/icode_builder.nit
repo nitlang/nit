@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Help generation of icode
-package icode_builder
+module icode_builder
 
 import icode_base
 

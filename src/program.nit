@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Common things to represent a Nit program/library
-package program
+module program
 
 import metamodel
 import icode

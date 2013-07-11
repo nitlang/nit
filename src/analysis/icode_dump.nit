@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Output the intermediate code unded a textual representation
-package icode_dump
+module icode_dump
 
 import icode
 import allocate_iregister_slots

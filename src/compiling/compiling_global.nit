@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Compute and generate tables for classes and modules.
-package compiling_global
+module compiling_global
 
 import table_computation
 private import compiling_icode

@@ -11,7 +11,7 @@
 # another product.
 
 # Module for range of discrete objects.
-package range
+module range
 
 import abstract_collection
 

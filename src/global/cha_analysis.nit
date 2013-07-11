@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # This module implements Class Hierarchy Analysis (CHA)
-package cha_analysis
+module cha_analysis
 
 import reachable_method_analysis
 import icode

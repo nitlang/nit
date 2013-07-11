@@ -11,7 +11,7 @@
 # another product.
 
 # Introduce Hashmap and Hashset.
-package hash_collection
+module hash_collection
 
 import array
 import hash

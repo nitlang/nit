@@ -11,7 +11,7 @@
 # another product.
 
 # Input and output streams of characters
-package stream
+module stream
 
 import string
 

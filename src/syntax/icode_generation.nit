@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Things needed by typing.nit to generate intermediate code from AST
-package icode_generation
+module icode_generation
 
 import icode
 import syntax_base

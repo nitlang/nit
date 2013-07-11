@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Common things for NIT compilation and C generation
-package compiling_base
+module compiling_base
 
 import mmloader
 private import utils

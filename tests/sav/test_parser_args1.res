@@ -1,11 +1,11 @@
 Start ../src/test_parser.nit:17,1--110,1
   AModule ../src/test_parser.nit:17,1--109,3
-    AModuledecl ../src/test_parser.nit:17,1--18,19
+    AModuledecl ../src/test_parser.nit:17,1--18,18
       ADoc ../src/test_parser.nit:17,1--18,0
         TComment "# Program used to test the NIT parser\n" ../src/test_parser.nit:17,1--18,0
-      TKwmodule "package" ../src/test_parser.nit:18,1--7
-      AModuleName ../src/test_parser.nit:18,9--19
-        TId "test_parser" ../src/test_parser.nit:18,9--19
+      TKwmodule "module" ../src/test_parser.nit:18,1--6
+      AModuleName ../src/test_parser.nit:18,8--18
+        TId "test_parser" ../src/test_parser.nit:18,8--18
     AStdImport ../src/test_parser.nit:20,1--13
       APublicVisibility ../src/test_parser.nit:20,1
       TKwimport "import" ../src/test_parser.nit:20,1--6

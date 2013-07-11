@@ -16,7 +16,7 @@
 
 # Full syntax analysis of NIT AST.
 # Detect syntax and some metamodel errors.
-package syntax
+module syntax
 
 import mmloader
 import mmbuilder

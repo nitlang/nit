@@ -17,7 +17,7 @@
 # limitations under the License.
 
 # Common command-line tool infractructure than handle options and error messages
-package toolcontext
+module toolcontext
 
 import opts
 import location

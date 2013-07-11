@@ -16,7 +16,7 @@
 # limitations under the License.
 
 # Handle multiple number of parameters in signatures
-package vararg
+module vararg
 
 import genericity
 

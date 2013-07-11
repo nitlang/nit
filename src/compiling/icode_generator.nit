@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Generates ICode as an output format
-package icode_generator
+module icode_generator
 
 private import compiling_base
 import program

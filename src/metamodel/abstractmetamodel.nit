@@ -16,7 +16,7 @@
 # limitations under the License.
 
 # core NIT metamodel classes featuring the minimal and simpliest entities
-package abstractmetamodel
+module abstractmetamodel
 
 import partial_order
 import location

@@ -12,7 +12,7 @@
 
 # Hashable things.
 # It introduces an hash function in objects.
-package hash
+module hash
 
 import kernel
 

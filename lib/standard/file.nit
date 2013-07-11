@@ -13,7 +13,7 @@
 # another product.
 
 # File manipulations (create, read, write, etc.)
-package file
+module file
 
 intrude import stream
 intrude import string

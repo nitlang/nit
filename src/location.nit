@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # This module is used to model Nit source-file and locations in source-file
-package location
+module location
 
 # A raw text Nit source file
 class SourceFile

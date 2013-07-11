@@ -11,7 +11,7 @@
 # another product.
 
 # Management of time and dates
-package time
+module time
 
 import string_search
 

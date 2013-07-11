@@ -16,7 +16,7 @@
 
 # Inline every automatic 'getters' and 'setters'
 # This optimization is done BEFORE analysis
-package inline_get_and_set
+module inline_get_and_set
 
 import icode
 private import syntax

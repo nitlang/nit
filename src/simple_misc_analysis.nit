@@ -19,7 +19,7 @@
 #  * superfluous parentheses
 #  * nested "once" expressions
 #  * use of "while true" instead of "loop"
-package simple_misc_analysis
+module simple_misc_analysis
 
 import toolcontext
 import parser

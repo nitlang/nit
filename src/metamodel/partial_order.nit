@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Partial ordered sets (ie hierarchies)
-package partial_order
+module partial_order
 
 # Handles partial ordered sets (ie hierarchies)
 # Thez are built by adding new element at the bottom of the hierarchy

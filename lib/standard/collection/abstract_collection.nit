@@ -11,7 +11,7 @@
 # another product.
 
 # This module define several abstract collection classes.
-package abstract_collection
+module abstract_collection
 
 import kernel
 

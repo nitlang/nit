@@ -11,7 +11,7 @@
 # another product.
 
 # This module handle double linked lists
-package list
+module list
 
 import abstract_collection
 

@@ -13,7 +13,7 @@
 # This module contains classes used to sorts arrays.
 # In order to provide your own sort class you should define a subclass of `AbstractSorter` with
 # a custom `AbstractSorter::compare` function.
-package sorter
+module sorter
 
 import array
 

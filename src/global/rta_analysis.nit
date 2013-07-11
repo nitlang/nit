@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # This package implements Reachable Type Analysis(RTA)
-package rta_analysis
+module rta_analysis
 
 import instantiated_type_analysis
 import reachable_method_analysis

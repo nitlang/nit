@@ -12,7 +12,7 @@
 # another product.
 
 # Basic manipulations of strings of characters
-package string
+module string
 
 intrude import collection # FIXME should be collection::array
 import hash

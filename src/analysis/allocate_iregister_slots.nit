@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # iregisters slot allocation
-package allocate_iregister_slots
+module allocate_iregister_slots
 
 import icode
 private import primitive_info

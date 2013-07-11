@@ -11,7 +11,7 @@
 # another product.
 
 # Mathematical operations
-package math
+module math
 
 import kernel
 import collection

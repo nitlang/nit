@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Common things for NIT compilation and C generation
-package primitive_info
+module primitive_info
 
 #FIXME Split this module into 2: one in metamodel and one in compiling
 

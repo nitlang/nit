@@ -13,7 +13,7 @@
 
 # Invocation and management of operating system sub-processes.
 # Standard input and output can be handled through streams.
-package exec 
+module exec
 
 import stream
 

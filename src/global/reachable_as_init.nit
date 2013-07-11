@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Module containing all bases for the reachable from init method analysis
-package reachable_as_init
+module reachable_as_init
 
 import icode
 import program

@@ -16,7 +16,7 @@
 # limitations under the License.
 
 # NIT metamodel bottom module (aka metamodel featuring all extensions)
-package metamodel
+module metamodel
 
 import genericity
 import vararg
