@@ -321,6 +321,12 @@ class Array[E]
 		_length = 0
 	end
 
+	# Create an array from a collection.
+	init from(items: Collection[E]) do
+		with_capacity(items.length)
+		self.add_all(items)
+	end
+
 	# Create an array with some `items'.
 	init with_items(objects: E...)
 	do

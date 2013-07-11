@@ -76,6 +76,18 @@ class List[E]
 		return nb
 	end
 
+	# Return a list of elements between 'from' and 'to'.
+	fun slice(from: Int, to: Int): List[E] do
+		assert from >= 0 and from < length
+		assert to >= 0 and to < length and from <= to
+		var list = new List[E]
+		while from <= to do
+			list.add(self[from])
+			from += 1
+		end
+		return list
+	end
+
 # Add elements
 
 	# O(1)
