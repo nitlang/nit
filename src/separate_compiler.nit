@@ -217,13 +217,20 @@ class SeparateCompiler
 		# Layouts
 		var method_layout_builder: PropertyLayoutBuilder[MMethod]
 		var attribute_layout_builder: PropertyLayoutBuilder[MAttribute]
-		if modelbuilder.toolcontext.opt_bm_typing.value then
-			method_layout_builder = new MMethodBMizer(self.mainmodule)
-			attribute_layout_builder = new MAttributeBMizer(self.mainmodule)
-		else
-			method_layout_builder = new MMethodColorer(self.mainmodule)
-			attribute_layout_builder = new MAttributeColorer(self.mainmodule)
-		end
+		#FIXME PH and BM layouts too slow for large programs
+		#if modelbuilder.toolcontext.opt_bm_typing.value then
+		#	method_layout_builder = new MMethodBMizer(self.mainmodule)
+		#	attribute_layout_builder = new MAttributeBMizer(self.mainmodule)
+		#else if modelbuilder.toolcontext.opt_phmod_typing.value then
+		#	method_layout_builder = new MMethodHasher(new PHModOperator, self.mainmodule)
+		#	attribute_layout_builder = new MAttributeHasher(new PHModOperator, self.mainmodule)
+		#else if modelbuilder.toolcontext.opt_phand_typing.value then
+		#	method_layout_builder = new MMethodHasher(new PHAndOperator, self.mainmodule)
+		#	attribute_layout_builder = new MAttributeHasher(new PHAndOperator, self.mainmodule)
+		#else
+		method_layout_builder = new MMethodColorer(self.mainmodule)
+		attribute_layout_builder = new MAttributeColorer(self.mainmodule)
+		#end
 
 		# methods coloration
 		var method_layout = method_layout_builder.build_layout(mclasses)
@@ -337,7 +344,7 @@ class SeparateCompiler
 		end
 
 		for mtype in mtypes do
-			retieve_live_partial_types(mtype)
+			retrieve_partial_types(mtype)
 		end
 		mtypes.add_all(self.partial_types)
 
@@ -471,7 +478,7 @@ class SeparateCompiler
 		return tables
 	end
 
-	fun retieve_live_partial_types(mtype: MType) do
+	fun retrieve_partial_types(mtype: MType) do
 		# add formal types arguments to mtypes
 		if mtype isa MGenericType then
 			for ft in mtype.arguments do
@@ -480,7 +487,7 @@ class SeparateCompiler
 					abort
 				end
 				self.partial_types.add(ft)
-				retieve_live_partial_types(ft)
+				retrieve_partial_types(ft)
 			end
 		end
 		var mclass_type: MClassType

@@ -13,12 +13,23 @@
 # limitations under the License.
 
 # Table layout builders
+# Tables are used to implement objects mecanisms like:
+#   * message sending
+#	* attribute accessing
+#	* typing
+#	* resolution (for generic types)
+# This module provides various layout for object tables:
+#	* coloring
+#	* binary matrix
+#	* perfect hashing (and & mod operators)
 module layout_builders
 
 import abstract_compiler
 
 # Layouts
 
+# A layout is the result of computation by builders
+# it contains necessary informations for basic table creation
 class Layout[E: Object]
 	# Ids or each element
 	var ids: Map[E, Int] = new HashMap[E, Int]
@@ -26,6 +37,8 @@ class Layout[E: Object]
 	var pos: Map[E, Int] = new HashMap[E, Int]
 end
 
+# A PHLayout is used everywere the builder used perfect hashing
+# it adds masks and hashes informations to std layout
 class PHLayout[HOLDER: Object, E: Object]
 	super Layout[E]
 	# Masks used by hash function
@@ -34,30 +47,32 @@ class PHLayout[HOLDER: Object, E: Object]
 	var hashes: Map[HOLDER, Map[E, Int]] = new HashMap[HOLDER, Map[E, Int]]
 end
 
-class PropertyLayout[E: Object]
-	# Fixed positions of each element in all tables
-	var pos: Map[E, Int] = new HashMap[E, Int]
-end
-
 # Builders
 
+# TypingLayoutBuilder is used to build a layout for typing tables (by type or by class)
 interface TypingLayoutBuilder[E: Object]
 	# Build typing table layout
+	# elements: the set of elements (classes or types) used in typing tables
 	fun build_layout(elements: Set[E]): Layout[E] is abstract
 end
 
+# Layout builder dedicated to vft, attribute & VT tables
 interface PropertyLayoutBuilder[E: MProperty]
 	# Build table layout for attributes, methods and virtual types
+	# elements: the set of classes containing the properties to use in table layout
 	fun build_layout(elements: Set[MClass]): Layout[E] is abstract
 end
 
+# For resolution tables (generics)
 interface ResolutionLayoutBuilder
 	# Build resolution table layout
+	# elements: association between classes and resolved types
 	fun build_layout(elements: Map[MClassType, Set[MType]]): Layout[MType] is abstract
 end
 
 # Matrice computers
 
+# Abstract layout builder for resolution tables using Binary Matrix (BM)
 abstract class TypingBMizer[E: Object]
 	super TypingLayoutBuilder[E]
 
@@ -83,6 +98,7 @@ abstract class TypingBMizer[E: Object]
 	private fun reverse_linearize(elements: Set[E]): Array[E] is abstract
 end
 
+# Layout builder for typing tables based on classes using Binary Matrix (BM)
 class MTypeBMizer
 	super TypingBMizer[MType]
 
@@ -93,6 +109,7 @@ class MTypeBMizer
 	end
 end
 
+# Layout builder for typing tables based on types using Binary Matrix (BM)
 class MClassBMizer
 	super TypingBMizer[MClass]
 
@@ -126,7 +143,7 @@ class ResolutionBMizer
 	end
 end
 
-# Abstract BMizing for MProperties
+# Abstract Layout builder for mproperties using Binary Matrix (BM)
 abstract class MPropertyBMizer[E: MProperty]
 	super PropertyLayoutBuilder[E]
 
@@ -150,6 +167,7 @@ abstract class MPropertyBMizer[E: MProperty]
 		return result
 	end
 
+	# extract properties of a mclass
 	private fun properties(mclass: MClass): Set[E] do
 		var properties = new HashSet[E]
 		for mprop in self.mmodule.properties(mclass) do
@@ -161,7 +179,7 @@ abstract class MPropertyBMizer[E: MProperty]
 	private fun linearize_mclasses(mclasses: Set[MClass]): Array[MClass] is abstract
 end
 
-# BMizing for MMethods
+# Layout builder for vft using Binary Matrix (BM)
 class MMethodBMizer
 	super MPropertyBMizer[MMethod]
 
@@ -171,7 +189,7 @@ class MMethodBMizer
 	redef fun linearize_mclasses(mclasses) do return self.mmodule.reverse_linearize_mclasses(mclasses)
 end
 
-# BMizing for MMAttributes
+# Layout builder for attribute tables using Binary Matrix (BM)
 class MAttributeBMizer
 	super MPropertyBMizer[MAttribute]
 
@@ -193,6 +211,7 @@ end
 
 # Colorers
 
+# Abstract Layout builder for typing table using coloration (CL)
 abstract class TypingColorer[E: Object]
 	super TypingLayoutBuilder[E]
 
@@ -341,7 +360,7 @@ abstract class TypingColorer[E: Object]
 	private fun reverse_linearize(elements: Set[E]): Array[E] is abstract
 end
 
-# MType coloring
+# Layout builder for typing tables based on types using coloration (CL)
 class MTypeColorer
 	super TypingColorer[MType]
 
@@ -356,7 +375,7 @@ class MTypeColorer
 	redef fun reverse_linearize(elements) do return self.mmodule.reverse_linearize_mtypes(elements)
 end
 
-# MClass coloring
+# Layout builder for typing tables based on classes using coloration (CL)
 class MClassColorer
 	super TypingColorer[MClass]
 
@@ -372,7 +391,7 @@ class MClassColorer
 	redef fun reverse_linearize(elements) do return self.mmodule.reverse_linearize_mclasses(elements)
 end
 
-# MProperty coloring
+# Abstract Layout builder for properties tables using coloration (CL)
 abstract class MPropertyColorer[E: MProperty]
 	super PropertyLayoutBuilder[E]
 
@@ -464,7 +483,7 @@ abstract class MPropertyColorer[E: MProperty]
 	end
 end
 
-# Coloring for MMethods
+# Layout builder for vft using coloration (CL)
 class MMethodColorer
 	super MPropertyColorer[MMethod]
 
@@ -472,7 +491,7 @@ class MMethodColorer
 	init(mmodule: MModule) do super
 end
 
-# Coloring for MMAttributes
+# Layout builder for attributes using coloration (CL)
 class MAttributeColorer
 	super MPropertyColorer[MAttribute]
 
@@ -480,7 +499,7 @@ class MAttributeColorer
 	init(mmodule: MModule) do super
 end
 
-# Coloring for MVirtualTypeProps
+# Layout builder for virtual types using coloration (CL)
 class MVirtualTypePropColorer
 	super MPropertyColorer[MVirtualTypeProp]
 
@@ -488,7 +507,7 @@ class MVirtualTypePropColorer
 	init(mmodule: MModule) do super
 end
 
-# Colorer for type resolution table
+# Layout builder for resolution tables using coloration (CL)
 class ResolutionColorer
 	super ResolutionLayoutBuilder
 
@@ -577,6 +596,7 @@ private class PerfectHasher[T: Object, U: Object]
 
 	init(operator: PHOperator) do self.operator = operator
 
+	# Compute mask for each holders
 	fun compute_masks(conflicts: Map[T, Set[U]], ids: Map[U, Int]): Map[T, Int] do
 		var masks = new HashMap[T, Int]
 		for mclasstype, mtypes in conflicts do
@@ -603,6 +623,7 @@ private class PerfectHasher[T: Object, U: Object]
 		return mask
 	end
 
+	# Compute hash for each element in each holder
 	fun compute_hashes(elements: Map[T, Set[U]], ids: Map[U, Int], masks: Map[T, Int]): Map[T, Map[U, Int]] do
 		var hashes = new HashMap[T, Map[U, Int]]
 		for mclasstype, mtypes in elements do
@@ -619,6 +640,7 @@ end
 
 # Abstract operator used for perfect hashing
 abstract class PHOperator
+	# hash `id` using `mask`
 	fun op(mask: Int, id:Int): Int is abstract
 end
 
@@ -638,6 +660,7 @@ class PHAndOperator
 	redef fun op(mask, id) do return mask.bin_and(id)
 end
 
+# Layout builder for typing tables using perfect hashing (PH)
 class TypingHasher[E: Object]
 	super PerfectHasher[E, E]
 	super TypingLayoutBuilder[E]
@@ -682,6 +705,7 @@ class TypingHasher[E: Object]
 	private fun reverse_linearize(elements: Set[E]): Array[E] is abstract
 end
 
+# Layout builder for typing tables with types using perfect hashing (PH)
 class MTypeHasher
 	super TypingHasher[MType]
 
@@ -696,6 +720,7 @@ class MTypeHasher
 	end
 end
 
+# Layout builder for typing tables with classes using perfect hashing (PH)
 class MClassHasher
 	super TypingHasher[MClass]
 
@@ -710,12 +735,80 @@ class MClassHasher
 	end
 end
 
-# Layout builder for MProperty using Perfect Hashing (PH)
-# TODO implement this class without sublcassing CL builder
+# Abstract layout builder for properties tables using perfect hashing (PH)
 class MPropertyHasher[E: MProperty]
-	super MPropertyColorer[E]
+	super PerfectHasher[MClass, E]
+	super PropertyLayoutBuilder[E]
+
+	type MPROP: MProperty
+
+	var mmodule: MModule
+
+	init(operator: PHOperator, mmodule: MModule) do
+		super(operator)
+		self.mmodule = mmodule
+	end
+
+	redef fun build_layout(mclasses) do
+		var result = new PHLayout[MClass, E]
+		var ids = new HashMap[E, Int]
+		var elements = new HashMap[MClass, Set[E]]
+		var lin = linearize_mclasses(mclasses)
+		for mclass in lin do
+			var mproperties = properties(mclass)
+			for mproperty in mproperties do
+				if ids.has_key(mproperty) then continue
+				ids[mproperty] = ids.length + 1
+			end
+			elements[mclass] = mproperties
+		end
+		result.ids = ids
+		result.pos = ids
+		result.masks = self.compute_masks(elements, ids)
+		result.hashes = self.compute_hashes(elements, ids, result.masks)
+		return result
+	end
+
+	# extract set of properties from mclass
+	private fun properties(mclass: MClass): Set[E] do
+		var properties = new HashSet[E]
+		for mprop in self.mmodule.properties(mclass) do
+			if mprop isa MPROP then properties.add(mprop)
+		end
+		return properties
+	end
+
+	private fun linearize_mclasses(mclasses: Set[MClass]): Array[MClass] is abstract
 end
 
+# Layout builder for vft using perfect hashing (PH)
+class MMethodHasher
+	super MPropertyHasher[MMethod]
+
+	redef type MPROP: MMethod
+	init(operator: PHOperator, mmodule: MModule) do super(operator, mmodule)
+	redef fun linearize_mclasses(mclasses) do return self.mmodule.reverse_linearize_mclasses(mclasses)
+end
+
+# Layout builder for attributes tables using perfect hashing (PH)
+class MAttributeHasher
+	super MPropertyHasher[MAttribute]
+
+	redef type MPROP: MAttribute
+	init(operator: PHOperator, mmodule: MModule) do super(operator, mmodule)
+	redef fun linearize_mclasses(mclasses) do return self.mmodule.linearize_mclasses_2(mclasses)
+end
+
+# Layout builder for virtual types tables using perfect hashing (PH)
+class MVirtualTypePropHasher
+	super MPropertyHasher[MVirtualTypeProp]
+
+	redef type MPROP: MVirtualTypeProp
+	init(operator: PHOperator, mmodule: MModule) do super(operator, mmodule)
+	redef fun linearize_mclasses(mclasses) do return self.mmodule.reverse_linearize_mclasses(mclasses)
+end
+
+# Layout builder for resolution tables using perfect hashing (PH)
 class ResolutionHasher
 	super PerfectHasher[MClassType, MType]
 	super ResolutionLayoutBuilder
