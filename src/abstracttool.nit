@@ -129,3 +129,11 @@ redef class MMLocalClass
 		file.write("end # {self}\n")
 	end
 end
+
+redef class AAnnotations
+	# Shortcut annotations and skip them completely
+	redef fun visit_all(v)
+	do
+		# Do notning
+	end
+end
