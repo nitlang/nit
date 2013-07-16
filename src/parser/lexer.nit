@@ -968,7 +968,7 @@ redef class TBang
     end
 end
 
-redef class TClassid
+redef class TAt
     redef fun parser_index: Int
     do
 	return 79
@@ -980,7 +980,7 @@ redef class TClassid
     end
 end
 
-redef class TId
+redef class TClassid
     redef fun parser_index: Int
     do
 	return 80
@@ -992,7 +992,7 @@ redef class TId
     end
 end
 
-redef class TAttrid
+redef class TId
     redef fun parser_index: Int
     do
 	return 81
@@ -1004,7 +1004,7 @@ redef class TAttrid
     end
 end
 
-redef class TNumber
+redef class TAttrid
     redef fun parser_index: Int
     do
 	return 82
@@ -1016,7 +1016,7 @@ redef class TNumber
     end
 end
 
-redef class TFloat
+redef class TNumber
     redef fun parser_index: Int
     do
 	return 83
@@ -1028,7 +1028,7 @@ redef class TFloat
     end
 end
 
-redef class TChar
+redef class TFloat
     redef fun parser_index: Int
     do
 	return 84
@@ -1040,7 +1040,7 @@ redef class TChar
     end
 end
 
-redef class TString
+redef class TChar
     redef fun parser_index: Int
     do
 	return 85
@@ -1052,7 +1052,7 @@ redef class TString
     end
 end
 
-redef class TStartString
+redef class TString
     redef fun parser_index: Int
     do
 	return 86
@@ -1064,7 +1064,7 @@ redef class TStartString
     end
 end
 
-redef class TMidString
+redef class TStartString
     redef fun parser_index: Int
     do
 	return 87
@@ -1076,7 +1076,7 @@ redef class TMidString
     end
 end
 
-redef class TEndString
+redef class TMidString
     redef fun parser_index: Int
     do
 	return 88
@@ -1088,7 +1088,7 @@ redef class TEndString
     end
 end
 
-redef class TBadChar
+redef class TEndString
     redef fun parser_index: Int
     do
 	return 89
@@ -1100,7 +1100,7 @@ redef class TBadChar
     end
 end
 
-redef class TBadString
+redef class TBadChar
     redef fun parser_index: Int
     do
 	return 90
@@ -1112,10 +1112,22 @@ redef class TBadString
     end
 end
 
-redef class TExternCodeSegment
+redef class TBadString
     redef fun parser_index: Int
     do
 	return 91
+    end
+
+    init init_tk(loc: Location)
+    do
+		_location = loc
+    end
+end
+
+redef class TExternCodeSegment
+    redef fun parser_index: Int
+    do
+	return 92
     end
 
     init init_tk(loc: Location)
@@ -1128,7 +1140,7 @@ end
 redef class EOF
     redef fun parser_index: Int
     do
-	return 92
+	return 93
     end
 
     init(loc: Location)
@@ -1540,42 +1552,45 @@ class Lexer
 						return new TBang.init_tk(location)
 					end
 					if accept_token == 80 then
-						return new TClassid.init_tk(location)
+						return new TAt.init_tk(location)
 					end
 					if accept_token == 81 then
-						return new TId.init_tk(location)
+						return new TClassid.init_tk(location)
 					end
 					if accept_token == 82 then
-						return new TAttrid.init_tk(location)
+						return new TId.init_tk(location)
 					end
 					if accept_token == 83 then
-						return new TNumber.init_tk(location)
+						return new TAttrid.init_tk(location)
 					end
 					if accept_token == 84 then
-						return new TFloat.init_tk(location)
+						return new TNumber.init_tk(location)
 					end
 					if accept_token == 85 then
-						return new TChar.init_tk(location)
+						return new TFloat.init_tk(location)
 					end
 					if accept_token == 86 then
-						return new TString.init_tk(location)
+						return new TChar.init_tk(location)
 					end
 					if accept_token == 87 then
-						return new TStartString.init_tk(location)
+						return new TString.init_tk(location)
 					end
 					if accept_token == 88 then
-						return new TMidString.init_tk(location)
+						return new TStartString.init_tk(location)
 					end
 					if accept_token == 89 then
-						return new TEndString.init_tk(location)
+						return new TMidString.init_tk(location)
 					end
 					if accept_token == 90 then
-						return new TBadChar.init_tk(location)
+						return new TEndString.init_tk(location)
 					end
 					if accept_token == 91 then
-						return new TBadString.init_tk(location)
+						return new TBadChar.init_tk(location)
 					end
 					if accept_token == 92 then
+						return new TBadString.init_tk(location)
+					end
+					if accept_token == 93 then
 						return new TExternCodeSegment.init_tk(location)
 					end
 				else

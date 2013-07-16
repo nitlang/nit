@@ -52,6 +52,7 @@ end
 abstract class Prod
 	super ANode
 	fun location=(l: Location) do _location = l
+	readable var _n_annotations: nullable AAnnotations = null
 end
 class TEol
 	super Token
@@ -307,6 +308,9 @@ class TStarship
 end
 class TBang
 	super TokenOperator
+end
+class TAt
+	super Token
 end
 class TClassid
 	super Token
@@ -1206,6 +1210,57 @@ end
 class ADoc
 	super Prod
     readable var _n_comment: List[TComment] = new List[TComment]
+end
+
+class AAnnotations
+	super Prod
+	readable var _n_at: nullable TAt = null
+	readable var _n_opar: nullable TOpar = null
+	readable var _n_items: List[AAnnotation] = new List[AAnnotation]
+	readable var _n_cpar: nullable TCpar = null
+end
+class AAnnotation
+	super Prod
+	readable var _n_atid: AAtid
+	readable var _n_opar: nullable TOpar = null
+	readable var _n_args: List[AAtArg] = new List[AAtArg]
+	readable var _n_cpar: nullable TCpar = null
+end
+abstract class AAtArg
+	super Prod
+end
+class ATypeAtArg
+	super AAtArg
+	readable var _n_type: AType
+end
+class AExprAtArg
+	super AAtArg
+	readable var _n_expr: AExpr
+end
+class AAtAtArg
+	super AAtArg
+end
+abstract class AAtid
+	super Prod
+	readable var _n_id: Token
+end
+class AIdAtid
+	super AAtid
+end
+class AKwexternAtid
+	super AAtid
+end
+class AKwinternAtid
+	super AAtid
+end
+class AKwreadableAtid
+	super AAtid
+end
+class AKwwritableAtid
+	super AAtid
+end
+class AKwimportAtid
+	super AAtid
 end
 
 class Start

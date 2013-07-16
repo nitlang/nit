@@ -260,6 +260,9 @@ end
 class TBang
 	super Token
 end
+class TAt
+	super Token
+end
 class TClassid
 	super Token
 end
@@ -336,6 +339,10 @@ class AInLanguage super Prod end
 class AExternCodeBlock super Prod end
 class AQualified super Prod end
 class ADoc super Prod end
+class AAnnotations super Prod end
+class AAnnotation super Prod end
+class AAtArg super Prod end
+class AAtid super Prod end
 
 class AModule
 	super AModule
@@ -349,12 +356,14 @@ class AModuledecl
     readable var _n_doc: nullable ADoc = null
     readable var _n_kwmodule: TKwmodule
     readable var _n_name: AModuleName
+    readable var _n_annotations: nullable AAnnotations = null
 end
 class AStdImport
 	super AImport
     readable var _n_visibility: AVisibility
     readable var _n_kwimport: TKwimport
     readable var _n_name: AModuleName
+    readable var _n_annotations: nullable AAnnotations = null
 end
 class ANoImport
 	super AImport
@@ -385,6 +394,7 @@ class AStdClassdef
     readable var _n_classkind: AClasskind
     readable var _n_id: nullable TClassid = null
     readable var _n_formaldefs: List[AFormaldef] = new List[AFormaldef]
+    readable var _n_annotations: nullable AAnnotations = null
     readable var _n_extern_code_block: nullable AExternCodeBlock = null
     readable var _n_superclasses: List[ASuperclass] = new List[ASuperclass]
     readable var _n_propdefs: List[APropdef] = new List[APropdef]
@@ -424,11 +434,13 @@ class AFormaldef
 	super AFormaldef
     readable var _n_id: TClassid
     readable var _n_type: nullable AType = null
+    readable var _n_annotations: nullable AAnnotations = null
 end
 class ASuperclass
 	super ASuperclass
     readable var _n_kwsuper: TKwsuper
     readable var _n_type: AType
+    readable var _n_annotations: nullable AAnnotations = null
 end
 class AAttrPropdef
 	super APropdef
@@ -441,6 +453,7 @@ class AAttrPropdef
     readable var _n_id: nullable TAttrid = null
     readable var _n_id2: nullable TId = null
     readable var _n_type: nullable AType = null
+    readable var _n_annotations: nullable AAnnotations = null
     readable var _n_expr: nullable AExpr = null
 end
 class AMethPropdef
@@ -459,6 +472,7 @@ class ADeferredMethPropdef
     readable var _n_kwmeth: TKwmeth
     readable var _n_methid: AMethid
     readable var _n_signature: ASignature
+    readable var _n_annotations: nullable AAnnotations = null
 end
 class AInternMethPropdef
 	super APropdef
@@ -489,6 +503,7 @@ class AConcreteMethPropdef
     readable var _n_kwmeth: TKwmeth
     readable var _n_methid: AMethid
     readable var _n_signature: ASignature
+    readable var _n_annotations: nullable AAnnotations = null
     readable var _n_block: nullable AExpr = null
 end
 class AConcreteInitPropdef
@@ -499,6 +514,7 @@ class AConcreteInitPropdef
     readable var _n_kwinit: TKwinit
     readable var _n_methid: nullable AMethid = null
     readable var _n_signature: ASignature
+    readable var _n_annotations: nullable AAnnotations = null
     readable var _n_block: nullable AExpr = null
 end
 class AExternInitPropdef
@@ -526,6 +542,7 @@ class ATypePropdef
     readable var _n_kwtype: TKwtype
     readable var _n_id: TClassid
     readable var _n_type: AType
+    readable var _n_annotations: nullable AAnnotations = null
 end
 class AReadAble
 	super AAble
@@ -627,6 +644,7 @@ class AParam
     readable var _n_id: TId
     readable var _n_type: nullable AType = null
     readable var _n_dotdotdot: nullable TDotdotdot = null
+    readable var _n_annotations: nullable AAnnotations = null
 end
 class AClosureDecl
 	super AClosureDecl
@@ -641,6 +659,7 @@ class AType
     readable var _n_kwnullable: nullable TKwnullable = null
     readable var _n_id: TClassid
     readable var _n_types: List[AType] = new List[AType]
+    readable var _n_annotations: nullable AAnnotations = null
 end
 class ALabel
 	super ALabel
@@ -659,6 +678,7 @@ class AVardeclExpr
     readable var _n_type: nullable AType = null
     readable var _n_assign: nullable TAssign = null
     readable var _n_expr: nullable AExpr = null
+    readable var _n_annotations: nullable AAnnotations = null
 end
 class AReturnExpr
 	super AExpr
@@ -959,6 +979,7 @@ class ARangeExpr
 	super AExpr
     readable var _n_expr: AExpr
     readable var _n_expr2: AExpr
+    readable var _n_annotations: nullable AAnnotations = null
 end
 class ACrangeExpr
 	super AExpr
@@ -966,6 +987,7 @@ class ACrangeExpr
     readable var _n_expr: AExpr
     readable var _n_expr2: AExpr
     readable var _n_cbra: TCbra
+    readable var _n_annotations: nullable AAnnotations = null
 end
 class AOrangeExpr
 	super AExpr
@@ -973,14 +995,17 @@ class AOrangeExpr
     readable var _n_expr: AExpr
     readable var _n_expr2: AExpr
     readable var _n_cbra: TObra
+    readable var _n_annotations: nullable AAnnotations = null
 end
 class AArrayExpr
 	super AExpr
     readable var _n_exprs: AExprs
+    readable var _n_annotations: nullable AAnnotations = null
 end
 class ASelfExpr
 	super AExpr
     readable var _n_kwself: TKwself
+    readable var _n_annotations: nullable AAnnotations = null
 end
 class AImplicitSelfExpr
 	super AExpr
@@ -988,30 +1013,37 @@ end
 class ATrueExpr
 	super AExpr
     readable var _n_kwtrue: TKwtrue
+    readable var _n_annotations: nullable AAnnotations = null
 end
 class AFalseExpr
 	super AExpr
     readable var _n_kwfalse: TKwfalse
+    readable var _n_annotations: nullable AAnnotations = null
 end
 class ANullExpr
 	super AExpr
     readable var _n_kwnull: TKwnull
+    readable var _n_annotations: nullable AAnnotations = null
 end
 class AIntExpr
 	super AExpr
     readable var _n_number: TNumber
+    readable var _n_annotations: nullable AAnnotations = null
 end
 class AFloatExpr
 	super AExpr
     readable var _n_float: TFloat
+    readable var _n_annotations: nullable AAnnotations = null
 end
 class ACharExpr
 	super AExpr
     readable var _n_char: TChar
+    readable var _n_annotations: nullable AAnnotations = null
 end
 class AStringExpr
 	super AExpr
     readable var _n_string: TString
+    readable var _n_annotations: nullable AAnnotations = null
 end
 class AStartStringExpr
 	super AExpr
@@ -1028,12 +1060,14 @@ end
 class ASuperstringExpr
 	super AExpr
     readable var _n_exprs: List[AExpr] = new List[AExpr]
+    readable var _n_annotations: nullable AAnnotations = null
 end
 class AParExpr
 	super AExpr
     readable var _n_opar: TOpar
     readable var _n_expr: AExpr
     readable var _n_cpar: TCpar
+    readable var _n_annotations: nullable AAnnotations = null
 end
 class AAsCastExpr
 	super AExpr
@@ -1175,6 +1209,57 @@ end
 class ADoc
 	super ADoc
     readable var _n_comment: List[TComment] = new List[TComment]
+end
+class AAnnotations
+	super AAnnotations
+    readable var _n_at: nullable TAt = null
+    readable var _n_opar: nullable TOpar = null
+    readable var _n_items: List[AAnnotation] = new List[AAnnotation]
+    readable var _n_cpar: nullable TCpar = null
+end
+class AAnnotation
+	super AAnnotation
+    readable var _n_atid: AAtid
+    readable var _n_opar: nullable TOpar = null
+    readable var _n_args: List[AAtArg] = new List[AAtArg]
+    readable var _n_cpar: nullable TCpar = null
+    readable var _n_annotations: nullable AAnnotations = null
+end
+class ATypeAtArg
+	super AAtArg
+    readable var _n_type: AType
+end
+class AExprAtArg
+	super AAtArg
+    readable var _n_expr: AExpr
+end
+class AAtAtArg
+	super AAtArg
+    readable var _n_annotations: AAnnotations
+end
+class AIdAtid
+	super AAtid
+    readable var _n_id: TId
+end
+class AKwexternAtid
+	super AAtid
+    readable var _n_id: TKwextern
+end
+class AKwinternAtid
+	super AAtid
+    readable var _n_id: TKwintern
+end
+class AKwreadableAtid
+	super AAtid
+    readable var _n_id: TKwreadable
+end
+class AKwwritableAtid
+	super AAtid
+    readable var _n_id: TKwwritable
+end
+class AKwimportAtid
+	super AAtid
+    readable var _n_id: TKwimport
 end
 
 class Start
