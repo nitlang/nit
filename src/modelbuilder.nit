@@ -424,6 +424,9 @@ class ModelBuilder
 	do
 		for nmodule in self.nmodules do
 			build_classes(nmodule)
+			for nclassdef in nmodule.n_classdefs do
+				build_properties(nclassdef)
+			end
 		end
 	end
 
@@ -657,10 +660,6 @@ class ModelBuilder
 		# TODO: Check that the super-class is not intrusive
 
 		# TODO: Check that the super-class is not already known (by transitivity)
-
-		for nclassdef in nmodule.n_classdefs do
-			self.build_properties(nclassdef)
-		end
 	end
 
 	# Register the nmodule associated to each mmodule
