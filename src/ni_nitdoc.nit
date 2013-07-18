@@ -332,7 +332,8 @@ class NitdocOverview
 		for mmodule in sorted do
 			var amodule = mbuilder.mmodule2nmodule[mmodule]
 			open("li")
-			add("a").attr("href", "{mmodule.name}.html").text("{mmodule.to_s} ")
+			add_html(mmodule.link(amodule))
+			add_html("&nbsp;")
 			add_html(amodule.short_comment)
 			close("li")
 		end
@@ -561,8 +562,9 @@ class NitdocModule
 			sorter.sort(sorted)
 			for m in sorted do
 				if m == mmodule or m.public_owner != null then continue
+				var am = mbuilder.mmodule2nmodule[m]
 				open("li")
-				add("a").attr("href", "{m.name}.html").text(m.name)
+				add_html(m.link(am))
 				close("li")
 			end
 			add_html("</ul>")
@@ -574,8 +576,9 @@ class NitdocModule
 			sorter.sort(sorted)
 			for m in sorted do
 				if m == mmodule or m.public_owner != null then continue
+				var am = mbuilder.mmodule2nmodule[m]
 				open("li")
-				add("a").attr("href", "{m.name}.html").text(m.name)
+				add_html(m.link(am))
 				close("li")
 			end
 			add_html("</ul>")
@@ -589,12 +592,12 @@ class NitdocModule
 			add("h3").text("Nested Modules").attr("style","cursor: pointer;")
 			open("ul")
 			for m in sorted do
+				var am = mbuilder.mmodule2nmodule[m]
 				open("li")
-				add("a").attr("href", "{m.name}.html").text(m.name)
+				add_html(m.link(am))
 				close("li")
 			end
 			close("ul")
-
 			close("nav")
 		end
 		close("div")
@@ -700,9 +703,11 @@ class NitdocClass
 		open("li")
 		var public_owner = mclass.public_owner
 		if public_owner is null then
-			add_html("<a href=\"{mclass.intro_mmodule.name}.html\">{mclass.intro_mmodule.name}</a>")
+			var am = mbuilder.mmodule2nmodule[mclass.intro_mmodule]
+			add_html(mclass.intro_mmodule.link(am))
 		else
-			add_html("<a href=\"{public_owner.name}.html\">{public_owner.name}</a>")
+			var am = mbuilder.mmodule2nmodule[public_owner]
+			add_html(public_owner.link(am))
 		end
 		close("li")
 		add("li").add_class("current").text(mclass.name)
@@ -831,7 +836,8 @@ class NitdocClass
 		add("h1").text(mclass.name)
 		open("div").add_class("subtitle")
 		if mclass.visibility is none_visibility then subtitle += "private "
-		subtitle += "{mclass.kind} <a href=\"{mclass.public_owner.name}.html\">{mclass.public_owner.name}</a>::{mclass.name}"
+		var nowner = mbuilder.mmodule2nmodule[mclass.public_owner]
+		subtitle += "{mclass.kind} {mclass.public_owner.link(nowner)}::{mclass.name}"
 		add_html(subtitle)
 		close("div")
 		add_html("<div style=\"float: right;\"><a id=\"lblDiffCommit\"></a></div>")
@@ -897,7 +903,7 @@ class NitdocClass
 				if mclass.has_mmodule(mmodule) then
 					add_html("<p class=\"concern-doc\">{mmodule.name}: {nmodule.short_comment}</p>")
 				else
-					add_html("<h3 class=\"concern-toplevel\">Methods refined in <a href=\"{mmodule.name}.html\">{mmodule.name}</a></h3><p class=\"concern-doc\">{mmodule.name}: {nmodule.short_comment}</p>")
+					add_html("<h3 class=\"concern-toplevel\">Methods refined in {mmodule.link(nmodule)}</h3><p class=\"concern-doc\">{mmodule.name}: {nmodule.short_comment}</p>")
 				end
 			end
 			var sortedc = mmethods.to_a
@@ -941,12 +947,20 @@ class NitdocClass
 		end
 		add_html("<textarea id=\"fileContent\" class=\"edit\" cols=\"76\" rows=\"1\" style=\"display: none;\"></textarea><a id=\"cancelBtn\" style=\"display: none;\">Cancel</a><a id=\"commitBtn\" style=\"display: none;\">Commit</a><pre id=\"preSave\" class=\"text_label\" type=\"2\"></pre>")
 		open("p")
-		if prop.local_class != mclass then add_html("inherited from {prop.local_class.intro_mmodule.name} ")
+		if prop.local_class != mclass then
+			var mredef = prop.local_class.intro_mmodule
+			var nredef = mbuilder.mmodule2nmodule[mredef]
+			add_html("inherited from {mredef.link(nredef)} ")
+		end
 		#TODO display show code if doc github
-		add_html("defined by the module <a href=\"{prop.intro_mclassdef.mmodule.name}.html\">{prop.intro_mclassdef.mmodule.name}</a> {if prop.apropdef is null then "" else show_source(prop.apropdef.location)}.")
+		var mintro = prop.intro_mclassdef.mmodule
+		var nintro = mbuilder.mmodule2nmodule[mintro]
+		add_html("defined by the module {mintro.link(nintro)}{if prop.apropdef is null then "" else show_source(prop.apropdef.location)}.")
 
 		for parent in mclass.parents do
-			if prop isa MMethod then if parent.constructors.has(prop) then add_html(" Previously defined by: <a href=\"{parent.intro_mmodule.name}.html\">{parent.intro_mmodule.name}</a> for <a href=\"{parent.name}.html\">{parent.name}</a>.")
+			var mparent = parent.intro_mmodule
+			var nparent = mbuilder.mmodule2nmodule[mparent]
+			if prop isa MMethod then if parent.constructors.has(prop) then add_html(" Previously defined by: {mparent.link(nparent)} for <a href=\"{parent.name}.html\">{parent.name}</a>.")
 		end
 		close("p")
 		close("div")
@@ -987,8 +1001,6 @@ redef class MModule
 	redef type OTHER: MModule
 	redef fun <(other: OTHER): Bool do return self.name < other.name
 
-	var amodule: nullable AModule
-
 	# Get the list of all methods in a module
 	fun imported_methods: Set[MMethod] do
 		var methods = new HashSet[MMethod]
@@ -1009,6 +1021,11 @@ redef class MModule
 			end
 		end
 		return methods
+	end
+
+	# Return a link (html a tag) to the nitdoc module page
+	fun link(amodule: AModule): String do
+		return "<a href=\"{name}.html\" title=\"{amodule.short_comment}\">{name}</a>"
 	end
 end
 redef class MPropDef
@@ -1100,14 +1117,6 @@ redef class MClass
 			return owner
 		else
 			return owner.public_owner.as(not null)
-		end
-	end
-	
-	# Associate Amodule to all MModule concern by 'self'
-	fun amodule(amodules: HashMap[MModule, AModule]) do
-		for owner, childs in concerns do
-			if childs != null then for child in childs do child.amodule = amodules[child]
-			owner.amodule = amodules[owner]
 		end
 	end
 
