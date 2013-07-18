@@ -121,14 +121,14 @@ class Nitdoc
 
 	fun modules do
 		for mmodule in model.mmodules do
-			var modulepage = new NitdocModules.with(mmodule, modelbuilder)
+			var modulepage = new NitdocModule.with(mmodule, modelbuilder)
 			modulepage.save("{destinationdir.to_s}/{mmodule.name}.html")
 		end
 	end
 
 	fun classes do
 		for mclass in modelbuilder.model.mclasses do
-			var classpage = new NitdocMClasses.with(mclass, modelbuilder, source)
+			var classpage = new NitdocClass.with(mclass, modelbuilder, source)
 			classpage.save("{destinationdir.to_s}/{mclass.name}.html")
 		end
 	end
@@ -166,33 +166,35 @@ class Nitdoc
 
 end
 
-class NitdocOverview
-	super NitdocPage
+# Nitdoc base page
+abstract class NitdocPage
+	super HTMLPage
 
-	var mbuilder: ModelBuilder
-
-	# Init with Array[AModule] to get all ifnormations about each MModule containt in a program
-	# opt_nodot to inform about the graph gen
-	# destination: to know where will be saved dot files
-	init with(mbuilder: ModelBuilder, opt_nodot: Bool, destination: String) do
-		self.mbuilder = mbuilder
-		self.opt_nodot = opt_nodot
-		self.destinationdir = destination
-	end
+	var opt_nodot: Bool
+	var destinationdir : String
+	var source: nullable String
 
 	redef fun head do
-		super
-		add("title").text("Overview | Nit Standard Library")
+		add("meta").attr("charset", "utf-8")
+		add("script").attr("type", "text/javascript").attr("src", "scripts/jquery-1.7.1.min.js")
+		add("script").attr("type", "text/javascript").attr("src", "quicksearch-list.js")
+		add("script").attr("type", "text/javascript").attr("src", "scripts/js-facilities.js")
+		add("link").attr("rel", "stylesheet").attr("href", "styles/main.css").attr("type", "text/css").attr("media", "screen")
 	end
 
-	redef fun header do
+	redef fun body do
+		header
+		content
+		footer
+	end
+
+	fun menu is abstract
+
+	fun header do
 		open("header")
 		open("nav").add_class("main")
 		open("ul")
-		add("li").add_class("current").text("Overview")
-		open("li")
-		add_html("<a href=\"full-index.html\">Full Index</a>")
-		close("li")
+		menu
 		open("li").attr("id", "liGitHub")
 		open("a").add_class("btn").attr("id", "logGitHub")
 		add("img").attr("id", "imgGitHub").attr("src", "resources/icons/github-icon.png")
@@ -237,8 +239,74 @@ class NitdocOverview
 		close("header")
 	end
 
-	redef fun body do
+	fun content is abstract
+
+	fun footer do
+		add("footer").text("Nit standard library. Version jenkins-component=stdlib-19.")
+	end
+
+	# Generate a clickable graphviz image using a dot content
+	fun generate_dot(dot: String, name: String, alt: String) do
+		if opt_nodot then return
+		var file = new OFStream.open("{self.destinationdir}/{name}.dot")
+		file.write(dot)
+		file.close
+		sys.system("\{ test -f {self.destinationdir}/{name}.png && test -f {self.destinationdir}/{name}.s.dot && diff {self.destinationdir}/{name}.dot {self.destinationdir}/{name}.s.dot >/dev/null 2>&1 ; \} || \{ cp {self.destinationdir}/{name}.dot {self.destinationdir}/{name}.s.dot && dot -Tpng -o{self.destinationdir}/{name}.png -Tcmapx -o{self.destinationdir}/{name}.map {self.destinationdir}/{name}.s.dot ; \}")
+		open("article").add_class("graph")
+		add("img").attr("src", "{name}.png").attr("usemap", "#{name}").attr("style", "margin:auto").attr("alt", "{alt}")
+		close("article")
+		var fmap = new IFStream.open("{self.destinationdir}/{name}.map")
+		add_html(fmap.read_all)
+		fmap.close
+	end
+
+	# Add a (source) link for a given location
+	fun show_source(l: Location): String
+	do
+		if source == null then
+			return "({l.file.filename.simplify_path})"
+		else
+			# THIS IS JUST UGLY ! (but there is no replace yet)
+			var x = source.split_with("%f")
+			source = x.join(l.file.filename.simplify_path)
+			x = source.split_with("%l")
+			source = x.join(l.line_start.to_s)
+			x = source.split_with("%L")
+			source = x.join(l.line_end.to_s)
+			return " (<a href=\"{source.to_s}\">show code</a>)"
+		end
+	end
+
+end
+
+# The overview page
+class NitdocOverview
+	super NitdocPage
+
+	var mbuilder: ModelBuilder
+
+	# Init with Array[AModule] to get all ifnormations about each MModule containt in a program
+	# opt_nodot to inform about the graph gen
+	# destination: to know where will be saved dot files
+	init with(mbuilder: ModelBuilder, opt_nodot: Bool, destination: String) do
+		self.mbuilder = mbuilder
+		self.opt_nodot = opt_nodot
+		self.destinationdir = destination
+	end
+
+	redef fun head do
 		super
+		add("title").text("Overview | Nit Standard Library")
+	end
+
+	redef fun menu do
+		add("li").add_class("current").text("Overview")
+		open("li")
+		add_html("<a href=\"full-index.html\">Full Index</a>")
+		close("li")
+	end
+
+	redef fun content do
 		open("div").add_class("page")
 		open("div").add_class("content fullpage")
 		add("h1").text("Nit Standard Library")
@@ -254,7 +322,6 @@ class NitdocOverview
 		close("article")
 		close("div")
 		close("div")
-		add("footer").text("Nit standard library. Version jenkins-component=stdlib-19.")
 	end
 
 	fun add_modules do
@@ -298,9 +365,9 @@ class NitdocOverview
 		end
 		return mmodules
 	end
-
 end
 
+# The full index page
 class NitdocFullindex
 	super NitdocPage
 
@@ -317,73 +384,22 @@ class NitdocFullindex
 		add("title").text("Full Index | Nit Standard Library")
 	end
 
-	redef fun header do
-		open("header")
-		open("nav").add_class("main")
-		open("ul")
+	redef fun menu do
 		open("li")
 		add_html("<a href=\"index.html\">Overview</a>")
 		close("li")
 		add("li").add_class("current").text("Full Index")
-		open("li").attr("id", "liGitHub")
-		open("a").add_class("btn").attr("id", "logGitHub")
-		add("img").attr("id", "imgGitHub").attr("src", "resources/icons/github-icon.png")
-		close("a")
-		open("div").add_class("popover bottom")
-		add("div").add_class("arrow").text(" ")
-		open("div").add_class("githubTitle")
-		add("h3").text("Github Sign In")
-		close("div")
-		open("div")
-		add("label").attr("id", "lbloginGit").text("Username")
-		add("input").attr("id", "loginGit").attr("name", "login").attr("type", "text")
-		open("label").attr("id", "logginMessage").text("Hello ")
-		open("a").attr("id", "githubAccount")
-		add("strong").attr("id", "nickName").text(" ")
-		close("a")
-		close("label")
-		close("div")
-		open("div")
-		add("label").attr("id", "lbpasswordGit").text("Password")
-		add("input").attr("id", "passwordGit").attr("name", "password").attr("type", "password")
-		open("div").attr("id", "listBranches")
-		add("label").attr("id", "lbBranches").text("Branch")
-		add("select").add_class("dropdown").attr("id", "dropBranches").attr("name", "dropBranches").attr("tabindex", "1").text(" ")
-		close("div")
-		close("div")
-		open("div")
-		add("label").attr("id", "lbrepositoryGit").text("Repository")
-		add("input").attr("id", "repositoryGit").attr("name", "repository").attr("type", "text")
-		close("div")
-		open("div")
-		add("label").attr("id", "lbbranchGit").text("Branch")
-		add("input").attr("id", "branchGit").attr("name", "branch").attr("type", "text")
-		close("div")
-		open("div")
-		add("a").attr("id", "signIn").text("Sign In")
-		close("div")
-		close("div")
-		close("li")
-		close("ul")
-		close("nav")
-		close("header")
 	end
 
-	redef fun body do
-		super
+	redef fun content do
 		open("div").add_class("page")
 		open("div").add_class("content fullpage")
 		add("h1").text("Full Index")
-		add_content
-		close("div")
-		close("div")
-		add("footer").text("Nit standard library. Version jenkins-component=stdlib-19.")
-	end
-
-	fun add_content do
 		module_column
 		classes_column
 		properties_column
+		close("div")
+		close("div")
 	end
 
 	# Add to content modules column
@@ -461,7 +477,8 @@ class NitdocFullindex
 
 end
 
-class NitdocModules
+# A module page
+class NitdocModule
 	super NitdocPage
 
 	var mmodule: MModule
@@ -480,10 +497,7 @@ class NitdocModules
 		add("title").text("{mmodule.name} module | {amodule.short_comment}")
 	end
 
-	redef fun header do
-		open("header")
-		open("nav").add_class("main")
-		open("ul")
+	redef fun menu do
 		open("li")
 		add_html("<a href=\"index.html\">Overview</a>")
 		close("li")
@@ -491,67 +505,19 @@ class NitdocModules
 		open("li")
 		add_html("<a href=\"full-index.html\" >Full Index</a>")
 		close("li")
-		open("li").attr("id", "liGitHub")
-		open("a").add_class("btn").attr("id", "logGitHub")
-		add("img").attr("id", "imgGitHub").attr("src", "resources/icons/github-icon.png")
-		close("a")
-		open("div").add_class("popover bottom")
-		add("div").add_class("arrow").text(" ")
-		open("div").add_class("githubTitle")
-		add("h3").text("Github Sign In")
-		close("div")
-		open("div")
-		add("label").attr("id", "lbloginGit").text("Username")
-		add("input").attr("id", "loginGit").attr("name", "login").attr("type", "text")
-		open("label").attr("id", "logginMessage").text("Hello ")
-		open("a").attr("id", "githubAccount")
-		add("strong").attr("id", "nickName").text(" ")
-		close("a")
-		close("label")
-		close("div")
-		open("div")
-		add("label").attr("id", "lbpasswordGit").text("Password")
-		add("input").attr("id", "passwordGit").attr("name", "password").attr("type", "password")
-		open("div").attr("id", "listBranches")
-		add("label").attr("id", "lbBranches").text("Branch")
-		add("select").add_class("dropdown").attr("id", "dropBranches").attr("name", "dropBranches").attr("tabindex", "1").text(" ")
-		close("div")
-		close("div")
-		open("div")
-		add("label").attr("id", "lbrepositoryGit").text("Repository")
-		add("input").attr("id", "repositoryGit").attr("name", "repository").attr("type", "text")
-		close("div")
-		open("div")
-		add("label").attr("id", "lbbranchGit").text("Branch")
-		add("input").attr("id", "branchGit").attr("name", "branch").attr("type", "text")
-		close("div")
-		open("div")
-		add("a").attr("id", "signIn").text("Sign In")
-		close("div")
-		close("div")
-		close("li")
-		close("ul")
-		close("nav")
-		close("header")
 	end
 
-	redef fun body do
-		super
+	redef fun content do
 		open("div").add_class("page")
-		menu
-		add_content
-		close("div")
-		add("footer").text("Nit standard library. Version jenkins-component=stdlib-19.")
-	end
-
-	# Insert all tags in content part
-	fun add_content do
+		sidebar
 		open("div").add_class("content")
 		add("h1").text(mmodule.name)
 		add("div").add_class("subtitle").text("module {mmodule.name}")
 		module_comment
+		#process_generate_dot
 		classes
 		properties
+		close("div")
 		close("div")
 	end
 
@@ -568,7 +534,22 @@ class NitdocModules
 		close("div")
 	end
 
-	fun menu do
+	fun process_generate_dot do
+		var op = new Buffer
+		op.append("digraph dep \{ rankdir=BT; node[shape=none,margin=0,width=0,height=0,fontsize=10]; edge[dir=none,color=gray]; ranksep=0.2; nodesep=0.1;\n")
+		for m in mmodule.in_importation.smallers do
+			op.append("\"{m.name}\"[URL=\"{m.name}.html\"];\n")
+			for imported in m.in_importation.direct_greaters do
+					if imported.direct_owner == null then
+						op.append("\"{m.name}\"->\"{imported.name}\";\n")
+					end
+					end
+		end
+		op.append("\}\n")
+		generate_dot(op.to_s, "dep_{mmodule.name}", "Modules hierarchy")
+	end
+
+	fun sidebar do
 		var amodule = mbuilder.mmodule2nmodule[mmodule]
 		open("div").add_class("menu")
 		open("nav")
@@ -687,8 +668,8 @@ class NitdocModules
 	end
 end
 
-# Nit Standard Library
-class NitdocMClasses
+# A class page
+class NitdocClass
 	super NitdocPage
 
 	var mclass: MClass
@@ -712,10 +693,7 @@ class NitdocMClasses
 		end
 	end
 
-	redef fun header do
-		open("header")
-		open("nav").add_class("main")
-		open("ul")
+	redef fun menu do
 		open("li")
 		add_html("<a href=\"index.html\">Overview</a>")
 		close("li")
@@ -731,66 +709,17 @@ class NitdocMClasses
 		open("li")
 		add_html("<a href=\"full-index.html\" >Full Index</a>")
 		close("li")
-		open("li").attr("id", "liGitHub")
-		open("a").add_class("btn").attr("id", "logGitHub")
-		add("img").attr("id", "imgGitHub").attr("src", "resources/icons/github-icon.png")
-		close("a")
-		open("div").add_class("popover bottom")
-		add("div").add_class("arrow").text(" ")
-		open("div").add_class("githubTitle")
-		add("h3").text("Github Sign In")
-		close("div")
-		open("div")
-		add("label").attr("id", "lbloginGit").text("Username")
-		add("input").attr("id", "loginGit").attr("name", "login").attr("type", "text")
-		open("label").attr("id", "logginMessage").text("Hello ")
-		open("a").attr("id", "githubAccount")
-		add("strong").attr("id", "nickName").text(" ")
-		close("a")
-		close("label")
-		close("div")
-		open("div")
-		add("label").attr("id", "lbpasswordGit").text("Password")
-		add("input").attr("id", "passwordGit").attr("name", "password").attr("type", "password")
-		open("div").attr("id", "listBranches")
-		add("label").attr("id", "lbBranches").text("Branch")
-		add("select").add_class("dropdown").attr("id", "dropBranches").attr("name", "dropBranches").attr("tabindex", "1").text(" ")
-		close("div")
-		close("div")
-		open("div")
-		add("label").attr("id", "lbrepositoryGit").text("Repository")
-		add("input").attr("id", "repositoryGit").attr("name", "repository").attr("type", "text")
-		close("div")
-		open("div")
-		add("label").attr("id", "lbbranchGit").text("Branch")
-		add("input").attr("id", "branchGit").attr("name", "branch").attr("type", "text")
-		close("div")
-		open("div")
-		add("a").attr("id", "signIn").text("Sign In")
-		close("div")
-		close("div")
-		close("li")
-		close("ul")
-		close("nav")
-		close("header")
 	end
 
-	redef fun body do
-		super
+	redef fun content do
 		open("div").add_class("page")
-		add_content
-		close("div")
-		add("footer").text("Nit standard library. Version jenkins-component=stdlib-19.")
-	end
-
-	# Insert all tags in content part
-	fun add_content do
 		open("div").add_class("menu")
 		properties_column
 		inheritance_column
 		close("div")
 		open("div").add_class("content")
-		content
+		class_doc
+		close("div")
 		close("div")
 	end
 
@@ -888,7 +817,7 @@ class NitdocMClasses
 		close("nav")
 	end
 
-	fun content do
+	fun class_doc do
 		var nclass = mbuilder.mclassdef2nclassdef[mclass.intro]
 		var sorted = new Array[MModule]
 		sorted.add_all(mclass.concerns.keys)
@@ -1025,58 +954,6 @@ class NitdocMClasses
 		close("article")
 	end
 
-end	
-
-class NitdocPage
-	super HTMLPage
-	
-	var opt_nodot: Bool
-	var destinationdir : String
-	var source: nullable String
-
-	redef fun head do
-		add("meta").attr("charset", "utf-8")
-		add("script").attr("type", "text/javascript").attr("src", "scripts/jquery-1.7.1.min.js")
-		add("script").attr("type", "text/javascript").attr("src", "quicksearch-list.js")
-		add("script").attr("type", "text/javascript").attr("src", "scripts/js-facilities.js")
-		add("link").attr("rel", "stylesheet").attr("href", "styles/main.css").attr("type", "text/css").attr("media", "screen")
-	end
-
-	redef fun body do header
-	fun header do end
-
-	# Generate a clickable graphviz image using a dot content
-	fun generate_dot(dot: String, name: String, alt: String) do
-		if opt_nodot then return
-		var file = new OFStream.open("{self.destinationdir}/{name}.dot")
-		file.write(dot)
-		file.close
-		sys.system("\{ test -f {self.destinationdir}/{name}.png && test -f {self.destinationdir}/{name}.s.dot && diff {self.destinationdir}/{name}.dot {self.destinationdir}/{name}.s.dot >/dev/null 2>&1 ; \} || \{ cp {self.destinationdir}/{name}.dot {self.destinationdir}/{name}.s.dot && dot -Tpng -o{self.destinationdir}/{name}.png -Tcmapx -o{self.destinationdir}/{name}.map {self.destinationdir}/{name}.s.dot ; \}")
-		open("article").add_class("graph")
-		add("img").attr("src", "{name}.png").attr("usemap", "#{name}").attr("style", "margin:auto").attr("alt", "{alt}")
-		close("article")
-		var fmap = new IFStream.open("{self.destinationdir}/{name}.map")
-		add_html(fmap.read_all)
-		fmap.close
-	end
-
-	# Add a (source) link fo a given location
-	fun show_source(l: Location): String
-	do
-		if source == null then
-			return "({l.file.filename.simplify_path})"
-		else
-			# THIS IS JUST UGLY ! (but there is no replace yet)
-			var x = source.split_with("%f")
-			source = x.join(l.file.filename.simplify_path)
-			x = source.split_with("%l")
-			source = x.join(l.line_start.to_s)
-			x = source.split_with("%L")
-			source = x.join(l.line_end.to_s)
-			return " (<a href=\"{source.to_s}\">show code</a>)"
-		end
-	end
-
 end
 
 redef class AModule
@@ -1106,7 +983,6 @@ redef class AModule
 end
 
 redef class MModule
-
 	super Comparable
 	redef type OTHER: MModule
 	redef fun <(other: OTHER): Bool do return self.name < other.name
@@ -1142,7 +1018,6 @@ redef class MPropDef
 end
 
 redef class MProperty
-
 	super Comparable
 	redef type OTHER: MProperty
 	redef fun <(other: OTHER): Bool do return self.name < other.name
@@ -1176,7 +1051,6 @@ redef class MProperty
 end
 
 redef class MClass
-
 	super Comparable
 	redef type OTHER: MClass
 	redef fun <(other: OTHER): Bool do return self.name < other.name
