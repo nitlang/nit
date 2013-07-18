@@ -91,6 +91,27 @@ class ModelBuilder
 	# FIXME: Maybe just let the client do the loop (instead of playing with Sequences)
 	fun parse_and_build(modules: Sequence[String]): Array[MModule]
 	do
+		var mmodules = parse(modules)
+
+		if self.toolcontext.opt_only_parse.value then
+			self.toolcontext.info("--only-parse: stop processing", 2)
+			return new Array[MModule]
+		end
+
+		# Build the model
+		var time1 = get_time
+		self.toolcontext.info("*** BUILD MODEL ***", 1)
+		self.build_all_classes
+		var time2 = get_time
+		self.toolcontext.info("*** END BUILD MODEL: {time2-time1} ***", 2)
+
+		self.toolcontext.check_errors
+
+		return mmodules
+	end
+
+	fun parse(modules: Sequence[String]): Array[MModule]
+	do
 		var time0 = get_time
 		# Parse and recursively load
 		self.toolcontext.info("*** PARSE ***", 1)
@@ -104,20 +125,6 @@ class ModelBuilder
 		self.toolcontext.info("*** END PARSE: {time1-time0} ***", 2)
 
 		self.toolcontext.check_errors
-
-		if self.toolcontext.opt_only_parse.value then
-			self.toolcontext.info("--only-parse: stop processing", 2)
-			return new Array[MModule]
-		end
-
-		# Build the model
-		self.toolcontext.info("*** BUILD MODEL ***", 1)
-		self.build_all_classes
-		var time2 = get_time
-		self.toolcontext.info("*** END BUILD MODEL: {time2-time1} ***", 2)
-
-		self.toolcontext.check_errors
-
 		return mmodules
 	end
 
