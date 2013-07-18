@@ -3,3 +3,4 @@
 ./error_syntax.nit
 -l ./error_syntax.nit
 ./error_syntax3.nit
+-e "var toto: Toto = new Toto.toto(toto+toto)"

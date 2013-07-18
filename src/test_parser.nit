@@ -44,6 +44,7 @@ end
 var no_print = false
 var only_lexer = false
 var need_help = false
+var no_file = false
 
 while not args.is_empty and args.first.first == '-' do
 	if args.first == "-n" then
@@ -51,7 +52,9 @@ while not args.is_empty and args.first.first == '-' do
 	else if args.first == "-l" then
 		only_lexer = true
 	else if args.first == "-p" then
-		only_lexer = false 
+		only_lexer = false
+	else if args.first == "-e" then
+		no_file = true
 	else if args.first == "-h" or args.first == "-?" then
 		need_help = true
 	else
@@ -68,11 +71,19 @@ if args.is_empty or need_help then
 	print("  -n	do not print anything")
 	print("  -l	only lexer")
 	print("  -p	lexer and parser (default)")
+	print("  -e	instead on files, each argument is a content to parse")
 	print("  -h	print this help")
 else
 	for a in args do
-		var f = new IFStream.open(a)
-		var lexer = new Lexer(new SourceFile(a, f))
+		var source
+		if no_file then
+			source = new SourceFile.from_string("", a)
+		else
+			var f = new IFStream.open(a)
+			source = new SourceFile(a, f)
+			f.close
+		end
+		var lexer = new Lexer(source)
 		if only_lexer then
 			var token = lexer.next
 			while not token isa EOF do
@@ -81,11 +92,9 @@ else
 				end
 				token = lexer.next
 			end
-			f.close
 		else
 			var parser = new Parser(lexer)
 			var tree = parser.parse
-			f.close
 
 			var error = tree.n_eof
 			if error isa AError then

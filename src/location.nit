@@ -33,6 +33,14 @@ class SourceFile
 		line_starts[0] = 0
 	end
 
+	# Create a new sourcefile using a dummy filename and a given content
+	init from_string(filename: String, string: String)
+	do
+		self.filename = filename
+		self.string = string
+		line_starts[0] = 0
+	end
+
 	# Position of each line start
 	var line_starts: Array[Int] = new Array[Int]
 end
