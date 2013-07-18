@@ -191,7 +191,7 @@ $ end foreach
 					var location = new Location(_file, start_line + 1, start_line + 1, start_pos + 1, start_pos + 1)
 					if sp > start_stream_pos then
 						var text = string.substring(start_stream_pos, sp-start_stream_pos)
-						var token = new PError.init_error("Syntax error: unknown token {text}.", location)
+						var token = new PLexerError.init_lexer_error("Syntax error: unknown token {text}.", location, text)
 						return token
 					else
 						var token = new EOF(location)

@@ -31,6 +31,14 @@ class PError
 	super EOF
 private init noinit do end
 end
+class PLexerError
+	super PError
+private init noinit do end
+end
+class PParserError
+	super PError
+private init noinit do end
+end
 $ end template
 
 $ template make_tokens()
@@ -90,4 +98,23 @@ redef class PError
     end
 end
 
+redef class PLexerError
+    readable var _string: String
+
+    init init_lexer_error(message: String, loc: Location, string: String)
+    do
+		init_error(message, loc)
+		_string = string
+    end
+end
+
+redef class PParserError
+    readable var _token: Token
+
+    init init_parser_error(message: String, loc: Location, token: Token)
+    do
+		init_error(message, loc)
+		_token = token
+    end
+end
 $ end template

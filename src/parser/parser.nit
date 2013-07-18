@@ -141,7 +141,7 @@ class Parser
 				(new ComputeProdLocationVisitor).enter_visit(node)
 				return node
 			else if action_type == 3 then # ERROR
-				var node2 = new AError.init_error("Syntax error: unexpected {token}.", token.location)
+				var node2 = new AParserError.init_parser_error("Syntax error: unexpected {token}.", token.location, token)
 				var node = new Start(null, node2)
 				return node
 			end

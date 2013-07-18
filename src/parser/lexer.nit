@@ -1148,6 +1148,25 @@ redef class AError
     end
 end
 
+redef class ALexerError
+    readable var _string: String
+
+    init init_lexer_error(message: String, loc: Location, string: String)
+    do
+		init_error(message, loc)
+		_string = string
+    end
+end
+
+redef class AParserError
+    readable var _token: Token
+
+    init init_parser_error(message: String, loc: Location, token: Token)
+    do
+		init_error(message, loc)
+		_token = token
+    end
+end
 
 # The lexer extract NIT tokens from an input stream.
 # It is better user with the Parser
@@ -1583,7 +1602,7 @@ class Lexer
 					var location = new Location(_file, start_line + 1, start_line + 1, start_pos + 1, start_pos + 1)
 					if sp > start_stream_pos then
 						var text = string.substring(start_stream_pos, sp-start_stream_pos)
-						var token = new AError.init_error("Syntax error: unknown token {text}.", location)
+						var token = new ALexerError.init_lexer_error("Syntax error: unknown token {text}.", location, text)
 						return token
 					else
 						var token = new EOF(location)
