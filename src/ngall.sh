@@ -3,7 +3,7 @@ rm nitg nitg.bin hello_world.bin 2>/dev/null
 #test -f nitc_3 || { ./nitc_3 ; exit }
 set -x
 set -e
-time ./nitc_3 -O nitg.nit -v
+time ../bin/nitc -O nitg.nit -v
 time ./nitg nitg.nit -v "$@"
 time ./nitg.bin nitg.nit -v "$@"
 time ./nitg.bin nitg.nit -v "$@"
