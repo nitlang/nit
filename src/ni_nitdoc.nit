@@ -284,16 +284,27 @@ end
 # The overview page
 class NitdocOverview
 	super NitdocPage
+	private var mbuilder: ModelBuilder
+	private var mmodules = new Array[MModule]
 
-	var mbuilder: ModelBuilder
-
-	# Init with Array[AModule] to get all ifnormations about each MModule containt in a program
-	# opt_nodot to inform about the graph gen
-	# destination: to know where will be saved dot files
 	init with(mbuilder: ModelBuilder, opt_nodot: Bool, destination: String) do
 		self.mbuilder = mbuilder
 		self.opt_nodot = opt_nodot
 		self.destinationdir = destination
+		# get modules
+		var mmodules = new HashSet[MModule]
+		for mmodule in mbuilder.model.mmodules do
+			var owner = mmodule.public_owner
+			if owner != null then
+				mmodules.add(owner)
+			else
+				mmodules.add(mmodule)
+			end
+		end
+		# sort modules
+		var sorter = new ComparableSorter[MModule]
+		self.mmodules.add_all(mmodules)
+		sorter.sort(self.mmodules)
 	end
 
 	redef fun head do
@@ -315,32 +326,26 @@ class NitdocOverview
 		add_html("<p>Documentation for the standard library of Nit<br />Version jenkins-component=stdlib-19<br />Date: TODAY</p>")
 		close("article")
 		open("article").add_class("overview")
+		# module list
 		add("h2").text("Modules")
 		open("ul")
-		add_modules
-		close("ul")
-		process_generate_dot
-		close("article")
-		close("div")
-	end
-
-	fun add_modules do
-		var mmodules = list_mmodules
-		var sorted = new Array[MModule].from(mmodules)
-		var sorter = new ComparableSorter[MModule]
-		sorter.sort(sorted)
-		for mmodule in sorted do
+		for mmodule in mmodules do
 			var amodule = mbuilder.mmodule2nmodule[mmodule]
 			open("li")
 			add_html("{mmodule.link(amodule)}&nbsp;{amodule.short_comment}")
 			close("li")
 		end
+		close("ul")
+		# module graph
+		process_generate_dot
+		close("article")
+		close("div")
 	end
 
 	fun process_generate_dot do
 		var op = new Buffer
 		op.append("digraph dep \{ rankdir=BT; node[shape=none,margin=0,width=0,height=0,fontsize=10]; edge[dir=none,color=gray]; ranksep=0.2; nodesep=0.1;\n")
-		for mmodule in list_mmodules do
+		for mmodule in mmodules do
 			op.append("\"{mmodule.name}\"[URL=\"{mmodule.name}.html\"];\n")
 			for imported in mmodule.in_importation.direct_greaters do
 				if imported.direct_owner == null then
@@ -350,19 +355,6 @@ class NitdocOverview
 		end
 		op.append("\}\n")
 		generate_dot(op.to_s, "dep", "Modules hierarchy")
-	end
-
-	private fun list_mmodules: Set[MModule] do
-		var mmodules = new HashSet[MModule]
-		for mmodule in mbuilder.model.mmodules do
-			var owner = mmodule.public_owner
-			if owner != null then
-				mmodules.add(owner)
-			else
-				mmodules.add(mmodule)
-			end
-		end
-		return mmodules
 	end
 end
 
