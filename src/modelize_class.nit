@@ -14,8 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#Analysis and verification of class definitions to instantiate model element
-
+# Analysis and verification of class definitions to instantiate model element
 module modelize_class
 
 import modelbuilder
