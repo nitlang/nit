@@ -142,7 +142,7 @@ class Nitdoc
 			if not prop isa MMethod then continue
 			content.append("\"{prop.name}\": [")
 			for propdef in prop.mpropdefs do
-				content.append("\{txt: \"{propdef.mproperty.full_name}\", url:\"{propdef.mproperty.link_anchor}\" \}")
+				content.append("\{txt: \"{propdef.mproperty.full_name}\", url:\"{propdef.mproperty.anchor}\" \}")
 				if not propdef is prop.mpropdefs.last then content.append(", ")
 			end
 			content.append("]")
@@ -184,7 +184,9 @@ abstract class NitdocPage
 
 	redef fun body do
 		header
+		open("div").add_class("page")
 		content
+		close("div")
 		footer
 	end
 
@@ -302,12 +304,11 @@ class NitdocOverview
 	redef fun menu do
 		add("li").add_class("current").text("Overview")
 		open("li")
-		add_html("<a href=\"full-index.html\">Full Index</a>")
+		add("a").attr("href", "full-index.html").text("Full Index")
 		close("li")
 	end
 
 	redef fun content do
-		open("div").add_class("page")
 		open("div").add_class("content fullpage")
 		add("h1").text("Nit Standard Library")
 		open("article").add_class("overview")
@@ -321,7 +322,6 @@ class NitdocOverview
 		process_generate_dot
 		close("article")
 		close("div")
-		close("div")
 	end
 
 	fun add_modules do
@@ -332,9 +332,7 @@ class NitdocOverview
 		for mmodule in sorted do
 			var amodule = mbuilder.mmodule2nmodule[mmodule]
 			open("li")
-			add_html(mmodule.link(amodule))
-			add_html("&nbsp;")
-			add_html(amodule.short_comment)
+			add_html("{mmodule.link(amodule)}&nbsp;{amodule.short_comment}")
 			close("li")
 		end
 	end
@@ -387,19 +385,17 @@ class NitdocFullindex
 
 	redef fun menu do
 		open("li")
-		add_html("<a href=\"index.html\">Overview</a>")
+		add("a").attr("href", "index.html").text("Overview")
 		close("li")
 		add("li").add_class("current").text("Full Index")
 	end
 
 	redef fun content do
-		open("div").add_class("page")
 		open("div").add_class("content fullpage")
 		add("h1").text("Full Index")
 		module_column
 		classes_column
 		properties_column
-		close("div")
 		close("div")
 	end
 
@@ -500,25 +496,24 @@ class NitdocModule
 
 	redef fun menu do
 		open("li")
-		add_html("<a href=\"index.html\">Overview</a>")
+		add("a").attr("href", "index.html").text("Overview")
 		close("li")
 		add("li").add_class("current").text(mmodule.name)
 		open("li")
-		add_html("<a href=\"full-index.html\" >Full Index</a>")
+		add("a").attr("href", "full-index.html").text("Full Index")
 		close("li")
 	end
 
 	redef fun content do
-		open("div").add_class("page")
 		sidebar
 		open("div").add_class("content")
 		add("h1").text(mmodule.name)
-		add("div").add_class("subtitle").text("module {mmodule.namespace(mbuilder)}")
+		add("div").add_class("subtitle")
+		add_html("module {mmodule.namespace(mbuilder)}")
 		module_comment
 		#process_generate_dot
 		classes
 		properties
-		close("div")
 		close("div")
 	end
 
@@ -554,53 +549,46 @@ class NitdocModule
 		var amodule = mbuilder.mmodule2nmodule[mmodule]
 		open("div").add_class("menu")
 		open("nav")
-		add("h3").text("Module Hierarchy").attr("style","cursor: pointer;")
-		if mmodule.in_importation.greaters.length > 0 then
-			add_html("<h4>All dependencies</h4><ul>")
-			var sorted = mmodule.in_importation.greaters.to_a
-			var sorter = new ComparableSorter[MModule]
-			sorter.sort(sorted)
-			for m in sorted do
-				if m == mmodule or m.public_owner != null then continue
-				var am = mbuilder.mmodule2nmodule[m]
-				open("li")
-				add_html(m.link(am))
-				close("li")
-			end
-			add_html("</ul>")
+		add("h3").text("Module Hierarchy")
+		var dependencies = new Array[MModule]
+		for dep in mmodule.in_importation.greaters do
+			if dep == mmodule or dep.public_owner != null then continue
+			dependencies.add(dep)
 		end
-		if mmodule.in_importation.smallers.length > 0 then
-			add_html("<h4>All clients</h4><ul>")
-			var sorted = mmodule.in_importation.smallers.to_a
-			var sorter = new ComparableSorter[MModule]
-			sorter.sort(sorted)
-			for m in sorted do
-				if m == mmodule or m.public_owner != null then continue
-				var am = mbuilder.mmodule2nmodule[m]
-				open("li")
-				add_html(m.link(am))
-				close("li")
-			end
-			add_html("</ul>")
+		if dependencies.length > 0 then
+			add("h4").text("All dependencies")
+			display_module_list(dependencies)
+		end
+		var clients = new Array[MModule]
+		for dep in mmodule.in_importation.smallers do
+			if dep == mmodule or dep.public_owner != null then continue
+			clients.add(dep)
+		end
+		if clients.length > 0 then
+			add("h4").text("All clients")
+			display_module_list(clients)
 		end
 		close("nav")
 		if mmodule.in_nesting.direct_greaters.length > 0 then
-			var sorted = mmodule.in_nesting.direct_greaters.to_a
-			var sorter = new ComparableSorter[MModule]
-			sorter.sort(sorted)
 			open("nav")
-			add("h3").text("Nested Modules").attr("style","cursor: pointer;")
-			open("ul")
-			for m in sorted do
-				var am = mbuilder.mmodule2nmodule[m]
-				open("li")
-				add_html(m.link(am))
-				close("li")
-			end
-			close("ul")
+			add("h3").text("Nested Modules")
+			display_module_list(mmodule.in_nesting.direct_greaters.to_a)
 			close("nav")
 		end
 		close("div")
+	end
+
+	private fun display_module_list(list: Array[MModule]) do
+		open("ul")
+		var sorter = new ComparableSorter[MModule]
+		sorter.sort(list)
+		for m in list do
+			var am = mbuilder.mmodule2nmodule[m]
+			open("li")
+			add_html(m.link(am))
+			close("li")
+		end
+		close("ul")
 	end
 
 	fun classes do
@@ -651,10 +639,13 @@ class NitdocModule
 		var sorter = new ComparableSorter[MPropDef]
 		sorter.sort(sorted)
 		open("article").add_class("properties filterable")
-		add_html("<h2>Properties</h2>")
+		add("h2").text("Properties")
 		open("ul")
 		for p in sorted do
+			if p isa MAttributeDef then continue
 			if p.mproperty.visibility <= none_visibility then continue
+			if not mbuilder.mpropdef2npropdef.has_key(p) then continue
+			var nprop = mbuilder.mpropdef2npropdef[p]
 			if p.is_intro then
 				open("li").add_class("intro")
 				add("span").attr("title", "introduction").text("I")
@@ -662,8 +653,7 @@ class NitdocModule
 				open("li").add_class("redef")
 				add("span").attr("title", "redefinition").text("R")
 			end
-			add_html("&nbsp;")
-			add("a").attr("href", "{p.mclassdef.mclass.name}.html").attr("title", "").text("{p.mproperty.name} ({p.mclassdef.mclass.name})")
+			add_html("&nbsp;{p.link(nprop)} ({p.mclassdef.mclass.name})")
 			close("li")
 		end
 		close("ul")
@@ -698,7 +688,7 @@ class NitdocClass
 
 	redef fun menu do
 		open("li")
-		add_html("<a href=\"index.html\">Overview</a>")
+		add("a").attr("href", "index.html").text("Overview")
 		close("li")
 		open("li")
 		var public_owner = mclass.public_owner
@@ -712,12 +702,11 @@ class NitdocClass
 		close("li")
 		add("li").add_class("current").text(mclass.name)
 		open("li")
-		add_html("<a href=\"full-index.html\" >Full Index</a>")
+		add("a").attr("href", "full-index.html").text("Full Index")
 		close("li")
 	end
 
 	redef fun content do
-		open("div").add_class("page")
 		open("div").add_class("menu")
 		properties_column
 		inheritance_column
@@ -725,56 +714,80 @@ class NitdocClass
 		open("div").add_class("content")
 		class_doc
 		close("div")
-		close("div")
 	end
 
 	fun properties_column do
-		var sorted = new Array[MProperty]
-		var sorter = new ComparableSorter[MProperty]
+		var sorter = new ComparableSorter[MPropDef]
 		open("nav").add_class("properties filterable")
 		add("h3").text("Properties")
-
-		if mclass.virtual_types.length > 0 then
+		# get properties
+		var vtypes = new HashSet[MVirtualTypeDef]
+		var consts = new HashSet[MMethodDef]
+		var meths = new HashSet[MMethodDef]
+		for mclassdef in mclass.mclassdefs do
+			for mpropdef in mclassdef.mpropdefs do
+				if not mbuilder.mpropdef2npropdef.has_key(mpropdef) then continue
+				if mpropdef.mproperty.visibility <= none_visibility then continue
+				if mpropdef isa MVirtualTypeDef then vtypes.add(mpropdef)
+				if mpropdef isa MMethodDef then
+					if mpropdef.mproperty.is_init then
+						consts.add(mpropdef)
+					else
+						meths.add(mpropdef)
+					end
+				end
+			end
+		end
+		for mprop in mclass.inherited_methods do
+			var mpropdef = mprop.intro
+			if not mbuilder.mpropdef2npropdef.has_key(mpropdef) then continue
+			if mprop.visibility <= none_visibility then continue
+			if mprop.intro_mclassdef.mclass.name == "Object" then continue
+			meths.add(mpropdef)
+		end
+		# virtual types
+		if vtypes.length > 0 then
+			var vts = new Array[MVirtualTypeDef]
+			vts.add_all(vtypes)
+			sorter.sort(vts)
 			add("h4").text("Virtual Types")
-			open("ul")
-			sorted = mclass.virtual_types.to_a
-			sorter.sort(sorted)
-			for prop in sorted do
-				add_html("<li class=\"redef\"><span title=\"Redefined\">R</span><a href=\"{prop.link_anchor}\">{prop.name}</a></li>")
-			end
-			close("ul")
+			display_mpropdef_list(vts)
 		end
-		if mclass.constructors.length > 0 then
-			sorted = mclass.constructors.to_a
-			sorter.sort(sorted)
+		if consts.length > 0 then
+			var cts = new Array[MMethodDef]
+			cts.add_all(consts)
+			sorter.sort(cts)
 			add("h4").text("Constructors")
-			open("ul")
-			for prop in sorted do
-				add_html("<li class=\"intro\"><span title=\"Introduced\">I</span><a href=\"{prop.link_anchor}\">{prop.name}</a></li>")
-			end
-			close("ul")
+			display_mpropdef_list(cts)
 		end
-		add("h4").text("Methods")
+		if meths.length > 0 then
+			var mts = new Array[MMethodDef]
+			mts.add_all(meths)
+			sorter.sort(mts)
+			add("h4").text("Methods")
+			display_mpropdef_list(mts)
+		end
+		close("nav")
+	end
+
+	private fun display_mpropdef_list(list: Array[MPropDef]) do
 		open("ul")
-		var mmethods = new HashSet[MMethod]
-		var redef_methods = mclass.redef_methods
-		mmethods.add_all(mclass.intro_methods)
-		mmethods.add_all(mclass.inherited_methods)
-		mmethods.add_all(redef_methods)
-		sorted = mmethods.to_a
-		sorter.sort(sorted)
-		for prop in sorted do
-			if prop.visibility <= none_visibility then continue
-			if prop.intro_mclassdef.mclass == mclass then
-				add_html("<li class=\"intro\"><span title=\"Introduced\">I</span><a href=\"{prop.link_anchor}\">{prop.name}</a></li>")
-			else if redef_methods.has(prop) then
-				add_html("<li class=\"redef\"><span title=\"Refined\">R</span><a href=\"{prop.link_anchor}\">{prop.name}</a></li>")
+		for prop in list do
+			var nprop = mbuilder.mpropdef2npropdef[prop]
+			if prop.is_intro and prop.mproperty.intro_mclassdef.mclass != mclass then
+				open("li").add_class("inherit")
+				add("span").attr("title", "Inherited").text("H")
+			else if prop.is_intro then
+				open("li").add_class("intro")
+				add("span").attr("title", "Introduced").text("I")
 			else
-				add_html("<li class=\"inherit\"><span title=\"Inherited\">H</span><a href=\"{prop.link_anchor}\">{prop.name}</a></li>")
+				open("li").add_class("redef")
+				add("span").attr("title", "Redefined").text("R")
 			end
+			add_html(prop.link(nprop))
+			close("li")
 		end
 		close("ul")
-		close("nav")
 	end
 
 	fun inheritance_column do
@@ -789,7 +802,9 @@ class NitdocClass
 			open("ul")
 			for sup in sorted do
 				if sup == mclass then continue
-				add_html("<li><a href=\"{sup.name}.html\">{sup.name}</a></li>")
+				open("li")
+				add("a").attr("href", "{sup.name}.html").text(sup.name)
+				close("li")
 			end
 			close("ul")
 		end
@@ -803,7 +818,9 @@ class NitdocClass
 			open("ul")
 			for sub in sorted do
 				if sub == mclass then continue
-				add_html("<li><a href=\"{sub.name}\">{sub.name}</a></li>")
+				open("li")
+				add("a").attr("href", "{sub.name}.html").text(sub.name)
+				close("li")
 			end
 			close("ul")
 		else if mclass.children.length <= 100 then
@@ -813,7 +830,9 @@ class NitdocClass
 			open("ul")
 			for sub in sorted do
 				if sub == mclass then continue
-				add_html("<li><a href=\"{sub.name}\">{sub.name}</a></li>")
+				open("li")
+				add("a").attr("href", "{sub.name}.html").text(sub.name)
+				close("li")
 			end
 			close("ul")
 		else
@@ -923,7 +942,8 @@ class NitdocClass
 				open("p")
 				add_html("Defined in {imclass.link(inclass)}: ")
 				for method in sortedp do
-					add_html("<a href=\"{method.link_anchor}\">{method.name}</a>")
+					#TODO link to inherited propdef
+					add_html("<a href=\"\">{method.name}</a>")
 					if method != sortedp.last then add_html(", ")
 				end
 				close("p")
@@ -1064,6 +1084,11 @@ redef class MPropDef
 	super Comparable
 	redef type OTHER: MPropDef
 	redef fun <(other: OTHER): Bool do return self.mproperty.name < other.mproperty.name
+
+	# Return a link (html a tag) to the nitdoc class page
+	fun link(nprop: APropdef): String do
+		return "<a href=\"{mclassdef.mclass.name}.html#{mproperty.anchor}\" title=\"{nprop.short_comment}\">{mproperty}</a>"
+	end
 end
 
 redef class MProperty
@@ -1083,14 +1108,6 @@ redef class MProperty
 	fun local_class: MClass do
 		var classdef = self.intro_mclassdef
 		return classdef.mclass
-	end
-
-	fun class_text: String do
-		return local_class.name
-	end
-
-	fun link_anchor: String do
-		return "{class_text}.html#{anchor}"
 	end
 
 	fun anchor: String do
