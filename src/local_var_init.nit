@@ -20,6 +20,17 @@ module local_var_init
 
 import scope
 import flow
+import phase
+
+redef class ToolContext
+	var local_var_init_phase: Phase = new LocalVarInitPhase(self, [flow_phase])
+end
+
+private class LocalVarInitPhase
+	super Phase
+
+	redef fun process_npropdef(npropdef) do npropdef.do_local_var_init(toolcontext)
+end
 
 redef class APropdef
 	# Entry point of the whole local variable initialization verifier

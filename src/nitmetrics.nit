@@ -18,7 +18,7 @@
 module nitmetrics
 
 import modelbuilder
-import exprbuilder
+import frontend
 import metrics
 
 # Create a tool context to handle options and paths
@@ -40,7 +40,7 @@ var modelbuilder = new ModelBuilder(model, toolcontext)
 
 # Here we load an process all modules passed on the command line
 var mmodules = modelbuilder.parse_and_build(arguments)
-modelbuilder.full_propdef_semantic_analysis
+modelbuilder.run_phases
 
 if mmodules.length == 0 then return
 

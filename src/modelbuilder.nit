@@ -27,6 +27,7 @@ import model
 import poset
 import opts
 import toolcontext
+import phase
 
 ###
 
@@ -59,6 +60,17 @@ class ModelBuilder
 
 	# The toolcontext used to control the interaction with the user (getting options and displaying messages)
 	var toolcontext: ToolContext
+
+	fun run_phases
+	do
+		var mmodules = model.mmodules.to_a
+		model.mmodule_importation_hierarchy.sort(mmodules)
+		var nmodules = new Array[AModule]
+		for mm in mmodules do
+			nmodules.add(mmodule2nmodule[mm])
+		end
+		toolcontext.run_phases(nmodules)
+	end
 
 	# Instantiate a modelbuilder for a model and a toolcontext
 	# Important, the options of the toolcontext must be correctly set (parse_option already called)

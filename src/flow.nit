@@ -20,6 +20,17 @@ module flow
 import parser
 import toolcontext
 import scope
+import phase
+
+redef class ToolContext
+	var flow_phase: Phase = new FlowPhase(self, [scope_phase])
+end
+
+private class FlowPhase
+	super Phase
+
+	redef fun process_npropdef(npropdef) do npropdef.do_flow(toolcontext)
+end
 
 # The visitor that derermine flowcontext for nodes
 private class FlowVisitor

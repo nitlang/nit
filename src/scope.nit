@@ -19,6 +19,19 @@ module scope
 
 import parser
 import toolcontext
+import phase
+
+import modelbuilder #FIXME useless
+
+redef class ToolContext
+	var scope_phase: Phase = new ScopePhase(self, null)
+end
+
+private class ScopePhase
+	super Phase
+	redef fun process_npropdef(npropdef) do npropdef.do_scope(toolcontext)
+end
+
 
 # A local variable (including parameters, automatic variables and self)
 class Variable

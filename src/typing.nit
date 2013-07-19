@@ -20,6 +20,17 @@ module typing
 
 import flow
 import modelbuilder
+import phase
+import local_var_init
+
+redef class ToolContext
+	var typing_phase: Phase = new TypingPhase(self, [flow_phase, local_var_init_phase])
+end
+
+private class TypingPhase
+	super Phase
+	redef fun process_npropdef(npropdef) do npropdef.do_typing(toolcontext.modelbuilder)
+end
 
 private class TypeVisitor
 	var modelbuilder:  ModelBuilder

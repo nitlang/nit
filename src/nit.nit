@@ -18,7 +18,7 @@
 module nit
 
 import modelbuilder
-import exprbuilder
+import frontend
 import naive_interpreter
 import debugger
 #import interpretor_type_test
@@ -45,7 +45,7 @@ var progname = arguments.first
 
 # Here we load an process all modules passed on the command line
 var mmodules = modelbuilder.parse_and_build([progname])
-modelbuilder.full_propdef_semantic_analysis
+modelbuilder.run_phases
 
 if toolcontext.opt_only_metamodel.value then exit(0)
 

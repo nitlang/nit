@@ -20,6 +20,16 @@ module auto_super_init
 
 import typing
 import modelbuilder
+import phase
+
+redef class ToolContext
+	var auto_super_init_phase: Phase = new AutoSuperInitPhase(self, [typing_phase])
+end
+
+private class AutoSuperInitPhase
+	super Phase
+	redef fun process_npropdef(npropdef) do if npropdef isa AConcreteMethPropdef then npropdef.do_auto_super_init(toolcontext.modelbuilder)
+end
 
 private class AutoSuperInitVisitor
 	super Visitor
