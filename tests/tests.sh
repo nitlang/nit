@@ -229,7 +229,7 @@ done
 enginebinname=$engine
 case $engine in
 	nitc) ;;
-	nitg) ;;
+	nitg) OPT="--global $OPT";;
 	nitg-s) enginebinname=nitg; OPT="--separate $OPT";;
 	nitg-e) enginebinname=nitg; OPT="--erasure $OPT";;
 	nit) engine=niti ;;

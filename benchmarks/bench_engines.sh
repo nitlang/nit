@@ -113,7 +113,7 @@ function run_compiler()
 	shift
 	if test -n "$fast"; then
 		run_command "$@" ../src/nitg.nit -o "nitg.$title.bin"
-		bench_command "nitg" "nitg ../src/test_parser.nit" "./nitg.$title.bin" -v --no-cc ../src/test_parser.nit
+		bench_command "nitg" "nitg --global ../src/test_parser.nit" "./nitg.$title.bin" -v --global --no-cc ../src/test_parser.nit
 		run_command "$@" ../src/nit.nit -o "nit.$title.bin"
 		bench_command "nit" "nit ../src/test_parser.nit ../src/location.nit" "./nit.$title.bin" -v ../src/test_parser.nit -- -n ../src/location.nit
 		run_command "$@" ../examples/shoot/shoot_logic.nit -o "shoot.$title.bin"
@@ -122,7 +122,7 @@ function run_compiler()
 		bench_command "bintrees" "bench_bintree_gen 16" "./bintrees.$title.bin" 16
 	else
 		run_command "$@" ../src/nitg.nit -o "nitg.$title.bin"
-		bench_command "nitg" "nitg --no-cc ../src/nitmetrics.nit" "./nitg.$title.bin" -v --no-cc ../src/nitmetrics.nit
+		bench_command "nitg" "nitg --global --no-cc ../src/nitmetrics.nit" "./nitg.$title.bin" -v --global --no-cc ../src/nitmetrics.nit
 		bench_command "nitg-s" "nitg --separate ../src/nitg.nit" "./nitg.$title.bin" -v --no-cc --separate ../src/nitg.nit
 		run_command "$@" ../src/nit.nit -o "nit.$title.bin"
 		bench_command "nit" "nit ../src/test_parser.nit ../src/rapid_type_analysis.nit" "./nit.$title.bin" -v ../src/test_parser.nit -- -n ../src/rapid_type_analysis.nit
@@ -206,11 +206,11 @@ function bench_steps()
 	bench_command "generate c" "" ../src/nitc_3 --global --no-cc ../src/nitg.nit
 	bench_command "full" "" ../src/nitc_3 -O --global ../src/nitg.nit -o "nitg_nitc-g.bin"
 
-	prepare_res "$name-nitg.dat" "nitg" "Various steps of nitg"
-	bench_command "parse" "" ./nitg --only-parse ../src/nitg.nit
-	bench_command "metamodel" "" ./nitg --only-metamodel ../src/nitg.nit
-	bench_command "generate c" "" ./nitg --no-cc ../src/nitg.nit
-	bench_command "full" "" ./nitg ../src/nitg.nit -o "nitg_nitg.bin"
+	prepare_res "$name-nitg.dat" "nitg" "Various steps of nitg --global"
+	bench_command "parse" "" ./nitg --global --only-parse ../src/nitg.nit
+	bench_command "metamodel" "" ./nitg --global --only-metamodel ../src/nitg.nit
+	bench_command "generate c" "" ./nitg --global --no-cc ../src/nitg.nit
+	bench_command "full" "" ./nitg --global ../src/nitg.nit -o "nitg_nitg.bin"
 
 	prepare_res "$name-nitg-e.dat" "nitg-e" "Various steps of nitg --erasure"
 	bench_command "parse" "" ./nitg --erasure --only-parse ../src/nitg.nit
@@ -230,16 +230,16 @@ function bench_nitg_options()
 	name="$FUNCNAME-$tag"
 	skip_test "$name" && return
 	prepare_res "$name.dat" "no options" "nitg without options"
-	run_compiler "nitg" ./nitg
+	run_compiler "nitg" ./nitg --global
 
 	if test -n "$2"; then
 		prepare_res "$name-all.dat" "all" "nitg with all options $@"
-		run_compiler "nitg-$tag" ./nitg $@
+		run_compiler "nitg-$tag" ./nitg --global $@
 	fi
 
 	for opt in "$@"; do
 		prepare_res "$name$opt.dat" "$opt" "nitg with option $opt"
-		run_compiler "nitg$opt" ./nitg $opt
+		run_compiler "nitg$opt" ./nitg --global $opt
 	done
 
 	plot "$name.gnu"
@@ -334,8 +334,8 @@ function bench_engines()
 	run_compiler "nitc" ../src/nitc_3 -O
 	prepare_res "$name-nitc-g.dat" "nitc-g" "nitc with --global"
 	run_compiler "nitc-g" ../src/nitc_3 -O --global
-	prepare_res "$name-nitg.dat" "nitg" "nitg"
-	run_compiler "nitg" ./nitg
+	prepare_res "$name-nitg.dat" "nitg" "nitg with --global"
+	run_compiler "nitg" ./nitg --global
 	prepare_res "$name-nitg-s.dat" "nitg-s" "nitg with --separate"
 	run_compiler "nitg-s" ./nitg --separate
 	prepare_res "$name-nitg-e.dat" "nitg-e" "nitg with --erasure"
@@ -418,7 +418,7 @@ function bench_compilation_time
 	done
 	prepare_res "$name-nitg.dat" "nitg" "nitg"
 	for i in ../examples/hello_world.nit ../src/test_parser.nit ../src/nitg.nit; do
-		bench_command `basename "$i" .nit` "" ./nitg "$i" --no-cc
+		bench_command `basename "$i" .nit` "" ./nitg --global "$i" --no-cc
 	done
 	prepare_res "$name-nitg-e.dat" "nitg-e" "nitg --erasure"
 	for i in ../examples/hello_world.nit ../src/test_parser.nit ../src/nitg.nit; do

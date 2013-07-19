@@ -26,6 +26,11 @@ import separate_compiler
 
 # Create a tool context to handle options and paths
 var toolcontext = new ToolContext
+
+# Create a new option for --global
+var opt_global = new OptionBool("Use global compilation", "--global")
+toolcontext.option_context.add_option(opt_global)
+
 # We do not add other options, so process them now!
 toolcontext.process_options
 
