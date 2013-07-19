@@ -45,6 +45,9 @@ redef class ToolContext
 		super
 		option_context.add_option(opt_path, opt_only_parse, opt_only_metamodel)
 	end
+
+	fun modelbuilder: ModelBuilder do return modelbuilder_real.as(not null)
+	private var modelbuilder_real: nullable ModelBuilder = null
 end
 
 # A model builder knows how to load nit source files and build the associated model
@@ -63,6 +66,8 @@ class ModelBuilder
 	do
 		self.model = model
 		self.toolcontext = toolcontext
+		assert toolcontext.modelbuilder_real == null
+		toolcontext.modelbuilder_real = self
 
 		# Setup the paths value
 		paths.append(toolcontext.opt_path.value)
