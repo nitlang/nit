@@ -126,6 +126,12 @@ class HTMLTag
 	end
 	private var classes: Set[String] = new HashSet[String]
 
+	# Add multiple CSS classes
+	fun add_classes(classes: Collection[String]): HTMLTag do
+		self.classes.add_all(classes)
+		return self
+	end
+
 	# Set a CSS 'value' for 'prop'
 	# var img = new HTMLTag("img")
 	# img.css("border", "2px solid black").css("position", "absolute")
