@@ -435,7 +435,7 @@ class NitdocFullindex
 
 		for mclass in sorted do
 			open("li")
-			add("a").attr("href", "{mclass.name}.html").text(mclass.name)
+			add("a").attr("href", "{mclass}.html").text(mclass.name)
 			close("li")
 		end
 
@@ -624,7 +624,7 @@ class NitdocModule
 		add("h2").text("Classes")
 		open("ul")
 		for c in sorted do
-			var name = c.name
+			var nclass = mbuilder.mclassdef2nclassdef[c.intro].as(AStdClassdef)
 			if redef_mclasses.has(c) and c.intro_mmodule.public_owner != mmodule then
 				open("li").add_class("redef")
 				add("span").attr("title", "refined in this module").text("R ")
@@ -632,7 +632,7 @@ class NitdocModule
 				open("li").add_class("intro")
 				add("span").attr("title", "introduced in this module").text("I ")
 			end
-			add("a").attr("href", "{name}.html").text(name)
+			add_html(c.link(nclass))
 			close("li")
 		end
 		close("ul")
@@ -833,11 +833,11 @@ class NitdocClass
 		var subtitle = ""
 		var lmmodule = new List[MModule]
 		# Insert the subtitle part
-		add("h1").text(mclass.name)
+		add("h1").text(mclass.to_s)
 		open("div").add_class("subtitle")
 		if mclass.visibility is none_visibility then subtitle += "private "
 		var nowner = mbuilder.mmodule2nmodule[mclass.public_owner]
-		subtitle += "{mclass.kind} {mclass.public_owner.link(nowner)}::{mclass.name}"
+		subtitle += "{mclass.kind} {mclass.public_owner.link(nowner)}::{mclass}"
 		add_html(subtitle)
 		close("div")
 		add_html("<div style=\"float: right;\"><a id=\"lblDiffCommit\"></a></div>")
@@ -916,11 +916,12 @@ class NitdocClass
 			sortedc.add_all(mclass.inherited.keys)
 			sorterc.sort(sortedc)
 			add("h3").text("Inherited Methods")
-			for i_mclass in sortedc do
-				var sortedp = mclass.inherited[i_mclass].to_a
+			for imclass in sortedc do
+				var inclass = mbuilder.mclassdef2nclassdef[imclass.intro].as(AStdClassdef)
+				var sortedp = mclass.inherited[imclass].to_a
 				sorterprop.sort(sortedp)
 				open("p")
-				add_html("Defined in <a href=\"{i_mclass.name}.html\">{i_mclass.name}</a>: ")
+				add_html("Defined in {imclass.link(inclass)}: ")
 				for method in sortedp do
 					add_html("<a href=\"{method.link_anchor}\">{method.name}</a>")
 					if method != sortedp.last then add_html(", ")
@@ -1071,6 +1072,20 @@ redef class MClass
 	super Comparable
 	redef type OTHER: MClass
 	redef fun <(other: OTHER): Bool do return self.name < other.name
+
+	# Add type parameters
+	redef fun to_s do
+		if arity > 0 then
+			return "{name}[{intro.parameter_names.join(", ")}]"
+		else
+			return name
+		end
+	end
+
+	# Return a link (html a tag) to the nitdoc class page
+	fun link(aclass: AStdClassdef): String do
+		return "<a href=\"{name}.html\" title=\"{aclass.short_comment}\">{self}</a>"
+	end
 
 	# Associate all MMethods to each MModule concerns
 	fun all_methods: HashMap[MModule, Set[MMethod]] do
