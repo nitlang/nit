@@ -133,6 +133,7 @@ class POSet[E: Object]
 		#var f = stdout
 		f.write "digraph \{\n"
 		for x in elements.keys do
+			f.write "\"{x}\";\n"
 			var xe = self.elements[x]
 			for y in xe.dtos do
 				if self.has_edge(y,x) then

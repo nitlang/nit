@@ -23,6 +23,18 @@ package simple_misc_analysis
 
 import toolcontext
 import parser
+import phase
+
+import modelbuilder #FIXME useless
+
+redef class ToolContext
+	var simple_misc_analysis_phase: Phase = new SimpleMiscAnalysisPhase(self, null)
+end
+
+private class SimpleMiscAnalysisPhase
+	super Phase
+	redef fun process_nmodule(nmodule) do nmodule.do_simple_misc_analysis(toolcontext)
+end
 
 redef class AModule
 	# Visit the module to detect easy warnings that does not need the metamodel or the importation

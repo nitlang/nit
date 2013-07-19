@@ -19,6 +19,19 @@ module literal
 
 import parser
 import toolcontext
+import phase
+
+import modelbuilder #FIXME useless
+
+redef class ToolContext
+	var literal_phase: Phase = new LiteralPhase(self, null)
+end
+
+private class LiteralPhase
+	super Phase
+
+	redef fun process_nmodule(nmodule) do nmodule.do_literal(toolcontext)
+end
 
 redef class AModule
 	# Visit the module to compute the real value of the literal-related node of the AST.

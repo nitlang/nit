@@ -18,7 +18,7 @@
 module nitg
 
 import modelbuilder
-import exprbuilder
+import frontend
 import rapid_type_analysis
 import global_compiler
 import separate_erasure_compiler
@@ -47,9 +47,9 @@ end
 var progname = arguments.first
 
 # Here we load an process all modules passed on the command line
-var mmodules = modelbuilder.parse_and_build([progname])
+var mmodules = modelbuilder.parse([progname])
 if mmodules.is_empty then return
-modelbuilder.full_propdef_semantic_analysis
+modelbuilder.run_phases
 
 if toolcontext.opt_only_metamodel.value then exit(0)
 
