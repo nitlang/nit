@@ -26,8 +26,9 @@ class Nitdoc
 	private var modelbuilder: ModelBuilder
 	private var mainmodule: MModule
 	private var arguments: Array[String]
-	private var destinationdir: nullable String
-	private var sharedir: nullable String
+	private var output_dir: nullable String
+	private var dot_dir: nullable String
+	private var share_dir: nullable String
 	private var source: nullable String
 
 	private var opt_dir = new OptionString("Directory where doc is generated", "-d", "--dir")
@@ -65,12 +66,12 @@ class Nitdoc
 
 	private fun process_options do
 		if not opt_dir.value is null then
-			destinationdir = opt_dir.value
+			output_dir = opt_dir.value
 		else
-			destinationdir = "nitdoc_directory"
+			output_dir = "doc"
 		end
 		if not opt_sharedir.value is null then
-			sharedir = opt_sharedir.value
+			share_dir = opt_sharedir.value
 		else
 			var dir = "NIT_DIR".environ
 			if dir.is_empty then
@@ -78,13 +79,13 @@ class Nitdoc
 			else
 				dir = "{dir}/share/nitdoc"
 			end
-			sharedir = dir
-			if sharedir is null then
+			share_dir = dir
+			if share_dir is null then
 				print "Error: Cannot locate nitdoc share files. Uses --sharedir or envvar NIT_DIR"
 				abort
 			end
-			dir = "{sharedir.to_s}/scripts/js-facilities.js"
-			if sharedir is null then
+			dir = "{share_dir.to_s}/scripts/js-facilities.js"
+			if share_dir is null then
 				print "Error: Invalid nitdoc share files. Check --sharedir or envvar NIT_DIR"
 				abort
 			end
@@ -99,43 +100,45 @@ class Nitdoc
 	fun start do
 		if arguments.length == 1 then
 			# Create destination dir if it's necessary
-			if not destinationdir.file_exists then destinationdir.mkdir
-			sys.system("cp -r {sharedir.to_s}/* {destinationdir.to_s}/")
+			if not output_dir.file_exists then output_dir.mkdir
+			sys.system("cp -r {share_dir.to_s}/* {output_dir.to_s}/")
+			self.dot_dir = null
+			if not opt_nodot.value then self.dot_dir = output_dir.to_s
 			overview
-			fullindex
+			#fullindex
 			modules
 			classes
-			quicksearch_list
+			#quicksearch_list
 		end
 	end
 
 	fun overview do
-		var overviewpage = new NitdocOverview.with(modelbuilder, self.opt_nodot.value, destinationdir.to_s)
-		overviewpage.save("{destinationdir.to_s}/index.html")
+		var overviewpage = new NitdocOverview(modelbuilder, dot_dir)
+		overviewpage.save("{output_dir.to_s}/index.html")
 	end
 
 	fun fullindex do
-		var fullindex = new NitdocFullindex.with(model.mmodules)
-		fullindex.save("{destinationdir.to_s}/full-index.html")
+		var fullindex = new NitdocFullindex(model.mmodules)
+		fullindex.save("{output_dir.to_s}/full-index.html")
 	end
 
 	fun modules do
 		for mmodule in model.mmodules do
-			var modulepage = new NitdocModule.with(mmodule, modelbuilder)
-			modulepage.save("{destinationdir.to_s}/{mmodule.name}.html")
+			var modulepage = new NitdocModule(mmodule, modelbuilder, dot_dir)
+			modulepage.save("{output_dir.to_s}/{mmodule.name}.html")
 		end
 	end
 
 	fun classes do
 		for mclass in modelbuilder.model.mclasses do
-			var classpage = new NitdocClass.with(mclass, modelbuilder, source)
-			classpage.save("{destinationdir.to_s}/{mclass.name}.html")
+			var classpage = new NitdocClass(mclass, modelbuilder, dot_dir, source)
+			classpage.save("{output_dir.to_s}/{mclass.name}.html")
 		end
 	end
 
 	# Generate QuickSearch file
 	fun quicksearch_list do
-		var file = new OFStream.open("{destinationdir.to_s}/quicksearch-list.js")
+		var file = new OFStream.open("{output_dir.to_s}/quicksearch-list.js")
 		var content = new Buffer
 		content.append("var entries = \{ ")
 		for prop in model.mproperties do
@@ -170,8 +173,7 @@ end
 abstract class NitdocPage
 	super HTMLPage
 
-	var opt_nodot: Bool
-	var destinationdir : String
+	var dot_dir: nullable String
 	var source: nullable String
 
 	redef fun head do
@@ -249,15 +251,16 @@ abstract class NitdocPage
 
 	# Generate a clickable graphviz image using a dot content
 	fun generate_dot(dot: String, name: String, alt: String) do
-		if opt_nodot then return
-		var file = new OFStream.open("{self.destinationdir}/{name}.dot")
+		var output_dir = dot_dir
+		if output_dir == null then return
+		var file = new OFStream.open("{output_dir}/{name}.dot")
 		file.write(dot)
 		file.close
-		sys.system("\{ test -f {self.destinationdir}/{name}.png && test -f {self.destinationdir}/{name}.s.dot && diff {self.destinationdir}/{name}.dot {self.destinationdir}/{name}.s.dot >/dev/null 2>&1 ; \} || \{ cp {self.destinationdir}/{name}.dot {self.destinationdir}/{name}.s.dot && dot -Tpng -o{self.destinationdir}/{name}.png -Tcmapx -o{self.destinationdir}/{name}.map {self.destinationdir}/{name}.s.dot ; \}")
+		sys.system("\{ test -f {output_dir}/{name}.png && test -f {output_dir}/{name}.s.dot && diff {output_dir}/{name}.dot {output_dir}/{name}.s.dot >/dev/null 2>&1 ; \} || \{ cp {output_dir}/{name}.dot {output_dir}/{name}.s.dot && dot -Tpng -o{output_dir}/{name}.png -Tcmapx -o{output_dir}/{name}.map {output_dir}/{name}.s.dot ; \}")
 		open("article").add_class("graph")
 		add("img").attr("src", "{name}.png").attr("usemap", "#{name}").attr("style", "margin:auto").attr("alt", "{alt}")
 		close("article")
-		var fmap = new IFStream.open("{self.destinationdir}/{name}.map")
+		var fmap = new IFStream.open("{output_dir}/{name}.map")
 		add_html(fmap.read_all)
 		fmap.close
 	end
@@ -278,7 +281,6 @@ abstract class NitdocPage
 			return " (<a href=\"{source.to_s}\">show code</a>)"
 		end
 	end
-
 end
 
 # The overview page
@@ -287,10 +289,9 @@ class NitdocOverview
 	private var mbuilder: ModelBuilder
 	private var mmodules = new Array[MModule]
 
-	init with(mbuilder: ModelBuilder, opt_nodot: Bool, destination: String) do
+	init(mbuilder: ModelBuilder, dot_dir: nullable String) do
 		self.mbuilder = mbuilder
-		self.opt_nodot = opt_nodot
-		self.destinationdir = destination
+		self.dot_dir = dot_dir
 		# get modules
 		var mmodules = new HashSet[MModule]
 		for mmodule in mbuilder.model.mmodules do
@@ -362,12 +363,11 @@ end
 class NitdocFullindex
 	super NitdocPage
 
-	var mmodules: Array[MModule]
+	private var mmodules: Array[MModule]
 
-	init with(mmodules: Array[MModule]) do
+	init(mmodules: Array[MModule]) do
 		self.mmodules = mmodules
-		opt_nodot = false
-		destinationdir = ""
+		self.dot_dir = null
 	end
 
 	redef fun head do
@@ -470,14 +470,13 @@ end
 class NitdocModule
 	super NitdocPage
 
-	var mmodule: MModule
-	var mbuilder: ModelBuilder
+	private var mmodule: MModule
+	private var mbuilder: ModelBuilder
 
-	init with(mmodule: MModule, mbuilder: ModelBuilder) do
+	init(mmodule: MModule, mbuilder: ModelBuilder, dot_dir: nullable String) do
 		self.mmodule = mmodule
 		self.mbuilder = mbuilder
-		opt_nodot = false
-		destinationdir = ""
+		self.dot_dir = dot_dir
 	end
 
 	redef fun head do
@@ -657,14 +656,13 @@ end
 class NitdocClass
 	super NitdocPage
 
-	var mclass: MClass
-	var mbuilder: ModelBuilder
+	private var mclass: MClass
+	private var mbuilder: ModelBuilder
 
-	init with(mclass: MClass, mbuilder: ModelBuilder, source: nullable String) do
+	init(mclass: MClass, mbuilder: ModelBuilder, dot_dir: nullable String, source: nullable String) do
 		self.mclass = mclass
 		self.mbuilder = mbuilder
-		self.opt_nodot = false
-		self.destinationdir = ""
+		self.dot_dir = dot_dir
 		self.source = source
 	end
 
