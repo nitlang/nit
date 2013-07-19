@@ -27,14 +27,21 @@ redef class ToolContext
 	# it is often simpler to use the constructor in `Phase`
 	var phases = new POSet[Phase]
 
+	fun phases_list: Sequence[Phase]
+	do
+		var phases = self.phases.to_a
+		self.phases.sort(phases)
+		return phases
+	end
+
 	# Run all registered phases on a set of modules
 	fun run_phases(nmodules: Collection[AModule])
 	do
 		var time0 = get_time
 		self.info("*** SEMANTIC ANALYSIS ***", 1)
 		#phases.show_dot
-		var phases = self.phases.to_a
-		self.phases.sort(phases)
+
+		var phases = phases_list
 
 		for phase in phases do
 			self.info(" registered phases: {phase.class_name}", 2)
