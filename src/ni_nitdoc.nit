@@ -864,7 +864,7 @@ class NitdocClass
 		add_html("<div style=\"float: right;\"><a id=\"lblDiffCommit\"></a></div>")
 		# We add the class description
 		open("section").add_class("description")
-		if nclass isa AStdClassdef and not nclass.comment.is_empty then add_html("<pre class=\"text_label\" title=\"122\" name=\"\" tag=\"{mclass.mclassdefs.first.location.to_s}\" type=\"2\">{nclass.comment} </pre><textarea id=\"fileContent\" class=\"edit\" cols=\"76\" rows=\"1\" style=\"display: none;\"></textarea><a id=\"cancelBtn\" style=\"display: none;\">Cancel</a><a id=\"commitBtn\" style=\"display: none;\">Commit</a><pre id=\"preSave\" class=\"text_label\" type=\"2\"></pre>")
+		if nclass isa AStdClassdef and not nclass.comment.is_empty then add_html("<pre class=\"text_label\" title=\"122\" name=\"\" tag=\"{mclass.mclassdefs.first.location.to_s}\" type=\"2\">{nclass.comment}</pre><textarea id=\"fileContent\" class=\"edit\" cols=\"76\" rows=\"1\" style=\"display: none;\"></textarea><a id=\"cancelBtn\" style=\"display: none;\">Cancel</a><a id=\"commitBtn\" style=\"display: none;\">Commit</a><pre id=\"preSave\" class=\"text_label\" type=\"2\"></pre>")
 		process_generate_dot
 		close("section")
 		open("section").add_class("concerns")
@@ -1060,27 +1060,21 @@ end
 
 redef class AModule
 	private fun comment: String do
-		var ret = ""
+		var ret = new Buffer
 		if n_moduledecl is null or n_moduledecl.n_doc is null then ret
 		if n_moduledecl.n_doc is null then return ""
 		for t in n_moduledecl.n_doc.n_comment do
-			var txt = t.text
-			txt = txt.replace("# ", "")
-			txt = txt.replace("#", "")
-			ret += txt
+			ret.append(t.text.substring_from(1))
 		end
-		return ret
+		return ret.to_s
 	end
 
 	private fun short_comment: String do
-		var ret = ""
+		var ret = new Buffer
 		if n_moduledecl != null and n_moduledecl.n_doc != null then
-			var txt = n_moduledecl.n_doc.n_comment.first.text
-			txt = txt.replace("# ", "")
-			txt = txt.replace("\n", "")
-			ret += txt
+			ret.append(n_moduledecl.n_doc.n_comment.first.text.substring_from(2).replace("\n", ""))
 		end
-		return ret
+		return ret.to_s
 	end
 end
 
@@ -1281,26 +1275,17 @@ end
 
 redef class AStdClassdef
 	private fun comment: String do
-		var ret = ""
+		var ret = new Buffer
 		if n_doc != null then
-			for t in n_doc.n_comment do
-				var txt = t.text.replace("# ", "")
-				txt = txt.replace("#", "")
-				ret += "{txt}"
-			end
+			for t in n_doc.n_comment do ret.append(t.text.substring_from(1))
 		end
-		return ret
+		return ret.to_s
 	end
 
 	private fun short_comment: String do
-		var ret = ""
-		if n_doc != null then
-			var txt = n_doc.n_comment.first.text
-			txt = txt.replace("# ", "")
-			txt = txt.replace("\n", "")
-			ret += txt
-		end
-		return ret
+		var ret = new Buffer
+		if n_doc != null then ret.append(n_doc.n_comment.first.text.substring_from(2).replace("\n", ""))
+		return ret.to_s
 	end
 end
 
@@ -1344,26 +1329,16 @@ end
 
 redef class AAttrPropdef
 	redef fun short_comment do
-		var ret = ""
-		if n_doc != null then
-			var txt = n_doc.n_comment.first.text
-			txt = txt.replace("# ", "")
-			txt = txt.replace("\n", "")
-			ret += txt
-		end
-		return ret
+		var ret = new Buffer
+		if n_doc != null then ret.append(n_doc.n_comment.first.text.substring_from(1))
+		return ret.to_s
 	end
 end
 
 redef class AMethPropdef
 	redef fun short_comment do
 		var ret = new Buffer
-		if n_doc != null then
-			var txt = n_doc.n_comment.first.text
-			txt = txt.replace("# ", "")
-			txt = txt.replace("\n", "")
-			ret.append(txt)
-		end
+		if n_doc != null then ret.append(n_doc.n_comment.first.text.substring_from(2).replace("\n", ""))
 		return ret.to_s
 	end
 
@@ -1376,11 +1351,7 @@ redef class AMethPropdef
 	redef private fun comment: String do
 		var ret = new Buffer
 		if n_doc != null then
-			for t in n_doc.n_comment do
-				var txt = t.text.replace("# ", "")
-				txt = txt.replace("#", "")
-				ret.append(txt)
-			end
+			for t in n_doc.n_comment do ret.append(t.text.substring_from(1))
 		end
 		return ret.to_s
 	end
