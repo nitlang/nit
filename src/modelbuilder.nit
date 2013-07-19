@@ -49,6 +49,28 @@ redef class ToolContext
 
 	fun modelbuilder: ModelBuilder do return modelbuilder_real.as(not null)
 	private var modelbuilder_real: nullable ModelBuilder = null
+
+	var modelize_class_phase: Phase = new ModelizeClassPhase(self, null)
+	var modelize_property_phase: Phase = new ModelizePropertyPhase(self, [modelize_class_phase])
+end
+
+private class ModelizeClassPhase
+	super Phase
+
+	redef fun process_nmodule(nmodule)
+	do
+		toolcontext.modelbuilder.build_classes(nmodule)
+	end
+end
+
+private class ModelizePropertyPhase
+	super Phase
+	redef fun process_nmodule(nmodule)
+	do
+		for nclassdef in nmodule.n_classdefs do
+			toolcontext.modelbuilder.build_properties(nclassdef)
+		end
+	end
 end
 
 # A model builder knows how to load nit source files and build the associated model

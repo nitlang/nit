@@ -39,7 +39,7 @@ var model = new Model
 var modelbuilder = new ModelBuilder(model, toolcontext)
 
 # Here we load an process all modules passed on the command line
-var mmodules = modelbuilder.parse_and_build(arguments)
+var mmodules = modelbuilder.parse(arguments)
 modelbuilder.run_phases
 
 if mmodules.length == 0 then return

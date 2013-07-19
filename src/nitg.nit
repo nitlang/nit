@@ -47,7 +47,7 @@ end
 var progname = arguments.first
 
 # Here we load an process all modules passed on the command line
-var mmodules = modelbuilder.parse_and_build([progname])
+var mmodules = modelbuilder.parse([progname])
 if mmodules.is_empty then return
 modelbuilder.run_phases
 

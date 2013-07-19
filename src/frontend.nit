@@ -30,6 +30,8 @@ redef class ToolContext
 	private var dummy: Bool = do_dummy
 	fun do_dummy: Bool
 	do
+		# Force easy warnings aftrm modelbuilder
+		phases.add_edge(simple_misc_analysis_phase, modelize_property_phase)
 		# Force easy warnings before intraproc-errors
 		phases.add_edge(scope_phase, simple_misc_analysis_phase)
 		return true

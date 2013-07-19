@@ -24,7 +24,7 @@ import phase
 import local_var_init
 
 redef class ToolContext
-	var typing_phase: Phase = new TypingPhase(self, [flow_phase, local_var_init_phase])
+	var typing_phase: Phase = new TypingPhase(self, [flow_phase, modelize_property_phase, local_var_init_phase])
 end
 
 private class TypingPhase
