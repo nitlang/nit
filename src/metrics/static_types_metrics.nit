@@ -19,6 +19,7 @@ module static_types_metrics
 
 private import metrics_base
 import modelbuilder
+import modelize_class
 
 # The job of this visitor is to resolve all types found
 private class ATypeCounterVisitor

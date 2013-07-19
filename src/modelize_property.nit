@@ -17,13 +17,7 @@
 # Analysis and verification of property definitions to instantiate model element
 module modelize_property
 
-import parser
-import model
-import poset
-import opts
-import toolcontext
-import phase
-import modelbuilder
+import modelize_class
 
 redef class ToolContext
 	var modelize_property_phase: Phase = new ModelizePropertyPhase(self, [modelize_class_phase])
