@@ -845,28 +845,26 @@ class NitdocClass
 	end
 
 	fun class_doc do
-		var nclass = mbuilder.mclassdef2nclassdef[mclass.intro]
-		var sorted = new Array[MModule]
-		sorted.add_all(mclass.concerns.keys)
-		var sorterp = new ComparableSorter[MModule]
-		var sorterprop = new ComparableSorter[MProperty]
-		var sorterc = new ComparableSorter[MClass]
-		sorterp.sort(sorted)
-		var subtitle = ""
-		var lmmodule = new List[MModule]
-		# Insert the subtitle part
+		# title
 		add("h1").text(mclass.to_s)
 		open("div").add_class("subtitle")
+		var subtitle = ""
 		if mclass.visibility is none_visibility then subtitle += "private "
 		subtitle += "{mclass.kind} {mclass.public_owner.namespace(mbuilder)}::{mclass}"
 		add_html(subtitle)
 		close("div")
+		# comment
+		var nclass = mbuilder.mclassdef2nclassdef[mclass.intro]
 		add_html("<div style=\"float: right;\"><a id=\"lblDiffCommit\"></a></div>")
-		# We add the class description
 		open("section").add_class("description")
 		if nclass isa AStdClassdef and not nclass.comment.is_empty then add_html("<pre class=\"text_label\" title=\"122\" name=\"\" tag=\"{mclass.mclassdefs.first.location.to_s}\" type=\"2\">{nclass.comment}</pre><textarea id=\"fileContent\" class=\"edit\" cols=\"76\" rows=\"1\" style=\"display: none;\"></textarea><a id=\"cancelBtn\" style=\"display: none;\">Cancel</a><a id=\"commitBtn\" style=\"display: none;\">Commit</a><pre id=\"preSave\" class=\"text_label\" type=\"2\"></pre>")
 		process_generate_dot
 		close("section")
+		# concerns
+		var sorted = new Array[MModule]
+		sorted.add_all(mclass.concerns.keys)
+		var sorterp = new ComparableSorter[MModule]
+		sorterp.sort(sorted)
 		open("section").add_class("concerns")
 		add("h2").add_class("section-header").text("Concerns")
 		open("ul")
@@ -890,11 +888,16 @@ class NitdocClass
 		end
 		close("ul")
 		close("section")
-		# Insert virtual types if there is almost one
+		# properties
+		var sorterprop = new ComparableSorter[MProperty]
+		var sorterc = new ComparableSorter[MClass]
+		var lmmodule = new List[MModule]
+		# virtual and formal types
 		if mclass.virtual_types.length > 0 or mclass.arity > 0 then
 			open("section").add_class("types")
 			add("h2").text("Formal and Virtual Types")
 			if mclass.virtual_types.length > 0 then for prop in mclass.virtual_types do description(prop)
+			#TODO this is incorrect
 			if mclass.arity > 0 and nclass isa AStdClassdef then
 				for prop in nclass.n_formaldefs do
 					open("article").attr("id", "FT_Object_{prop.collect_text}")
