@@ -103,16 +103,7 @@ redef class AStringFormExpr
 	var value: nullable String
 	redef fun accept_literal(v)
 	do
-		var txt
-		if self isa AStringExpr then
-			txt = self.n_string.text
-		else if self isa AStartStringExpr then
-			txt = self.n_string.text
-		else if self isa AMidStringExpr then
-			txt = self.n_string.text
-		else if self isa AEndStringExpr then
-			txt = self.n_string.text
-		else abort
+		var txt = self.n_string.text
 		self.value = txt.substring(1, txt.length-2).unescape_nit
 	end
 end

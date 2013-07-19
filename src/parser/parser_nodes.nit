@@ -1085,22 +1085,19 @@ class ACharExpr
 end
 abstract class AStringFormExpr
 	super AExpr
+    readable var _n_string: Token
 end
 class AStringExpr
 	super AStringFormExpr
-    readable var _n_string: TString
 end
 class AStartStringExpr
 	super AStringFormExpr
-    readable var _n_string: TStartString
 end
 class AMidStringExpr
 	super AStringFormExpr
-    readable var _n_string: TMidString
 end
 class AEndStringExpr
 	super AStringFormExpr
-    readable var _n_string: TEndString
 end
 class ASuperstringExpr
 	super AExpr
