@@ -74,8 +74,6 @@ private class ModelizePropertyPhase
 end
 
 # A model builder knows how to load nit source files and build the associated model
-# The important function is `parse_and_build' that does all the job.
-# The others function can be used for specific tasks
 class ModelBuilder
 	# The model where new modules, classes and properties are added
 	var model: Model
@@ -83,6 +81,7 @@ class ModelBuilder
 	# The toolcontext used to control the interaction with the user (getting options and displaying messages)
 	var toolcontext: ToolContext
 
+	# Run phases on all loaded modules
 	fun run_phases
 	do
 		var mmodules = model.mmodules.to_a
@@ -121,34 +120,13 @@ class ModelBuilder
 		if libname.file_exists then paths.add(libname.simplify_path)
 	end
 
-	# Load and analyze a bunch of modules.
+	# Load a bunch of modules.
 	# `modules' can contains filenames or module names.
-	# Imported modules are automatically loaded, builds and analysed.
-	# The result is the corresponding built modules.
+	# Imported modules are automatically loaded and modelized.
+	# The result is the corresponding model elements.
 	# Errors and warnings are printed with the toolcontext.
 	#
-	# FIXME: Maybe just let the client do the loop (instead of playing with Sequences)
-	fun parse_and_build(modules: Sequence[String]): Array[MModule]
-	do
-		var mmodules = parse(modules)
-
-		if self.toolcontext.opt_only_parse.value then
-			self.toolcontext.info("--only-parse: stop processing", 2)
-			return new Array[MModule]
-		end
-
-		# Build the model
-		var time1 = get_time
-		self.toolcontext.info("*** BUILD MODEL ***", 1)
-		self.build_all_classes
-		var time2 = get_time
-		self.toolcontext.info("*** END BUILD MODEL: {time2-time1} ***", 2)
-
-		self.toolcontext.check_errors
-
-		return mmodules
-	end
-
+	# Note: class and property model element are not analysed.
 	fun parse(modules: Sequence[String]): Array[MModule]
 	do
 		var time0 = get_time
@@ -458,17 +436,6 @@ class ModelBuilder
 	# All the loaded modules
 	var nmodules: Array[AModule] = new Array[AModule]
 
-	# Build the classes of all modules `nmodules'.
-	private fun build_all_classes
-	do
-		for nmodule in self.nmodules do
-			build_classes(nmodule)
-			for nclassdef in nmodule.n_classdefs do
-				build_properties(nclassdef)
-			end
-		end
-	end
-
 	# Visit the AST and create the MClass objects
 	private fun build_a_mclass(nmodule: AModule, nclassdef: AClassdef)
 	do
@@ -631,7 +598,7 @@ class ModelBuilder
 	end
 
 	# Build the classes of the module `nmodule'.
-	# REQUIRE: classes of imported modules are already build. (let `build_all_classes' do the job)
+	# REQUIRE: classes of imported modules are already build. (let `phase' do the job)
 	private fun build_classes(nmodule: AModule)
 	do
 		# Force building recursively
