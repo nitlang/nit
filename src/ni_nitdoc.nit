@@ -590,7 +590,6 @@ class NitdocModule
 		append("<h2>Classes</h2>")
 		append("<ul>")
 		for c in sorted do
-			var nclass = mbuilder.mclassdef2nclassdef[c.intro].as(AStdClassdef)
 			if redef_mclasses.has(c) and c.intro_mmodule.public_owner != mmodule then
 				append("<li class='redef'>")
 				append("<span title='refined in this module'>R </span>")
@@ -598,7 +597,7 @@ class NitdocModule
 				append("<li class='intro'>")
 				append("<span title='introduced in this module'>I </span>")
 			end
-			append(c.link(nclass))
+			append(c.link(mbuilder))
 			append("</li>")
 		end
 		append("</ul>")
@@ -808,7 +807,7 @@ class NitdocClass
 
 	fun class_doc do
 		# title
-		append("<h1>{mclass.to_s}</h1>")
+		append("<h1>{mclass.html_signature}</h1>")
 		append("<div class='subtitle'>")
 		var subtitle = ""
 		if mclass.visibility is none_visibility then subtitle += "private "
@@ -859,13 +858,10 @@ class NitdocClass
 			append("<section class='types'>")
 			append("<h2>Formal and Virtual Types</h2>")
 			if mclass.virtual_types.length > 0 then for prop in mclass.virtual_types do description(prop)
-			#TODO this is incorrect
 			if mclass.arity > 0 and nclass isa AStdClassdef then
-				for prop in nclass.n_formaldefs do
-					append("<article id='FT_Object_{prop.collect_text}'>")
-					append("<h3 class='signature'>{prop.collect_text}: nullable ")
-					append("<a title=\"The root of the class hierarchy.\" href=\"Object.html\">Object</a>")
-					append("</h3>")
+				for ft, bound in mclass.parameter_types do
+					append("<article id='{ft}'>")
+					append("<h3 class='signature'>{ft}: {bound.link(mbuilder)}</h3>")
 					append("<div class=\"info\">formal generic type</div>")
 					append("</article>")
 				end
@@ -905,10 +901,9 @@ class NitdocClass
 			sorterc.sort(sortedc)
 			append("<h3>Inherited Methods</h3>")
 			for imclass in sortedc do
-				var inclass = mbuilder.mclassdef2nclassdef[imclass.intro].as(AStdClassdef)
 				var sortedp = mclass.inherited[imclass].to_a
 				sorterprop.sort(sortedp)
-				append("<p>Defined in {imclass.link(inclass)}: ")
+				append("<p>Defined in {imclass.link(mbuilder)}: ")
 				for method in sortedp do
 					#TODO link to inherited propdef
 					append("<a href=\"\">{method.name}</a>")
@@ -1153,8 +1148,17 @@ redef class MClass
 	end
 
 	# Return a link (html a tag) to the nitdoc class page
-	fun link(aclass: AStdClassdef): String do
-		return "<a href='{name}.html' title=\"{aclass.short_comment}\">{html_signature}</a>"
+	fun link(mbuilder: ModelBuilder): String do
+		if mbuilder.mclassdef2nclassdef.has_key(intro) then
+			var nclass = mbuilder.mclassdef2nclassdef[intro]
+			if nclass isa AStdClassdef then
+				return "<a href='{name}.html' title=\"{nclass.short_comment}\">{html_signature}</a>"
+			else
+				return "<a href='{name}.html'>{html_signature}</a>"
+			end
+		else
+			return "<a href='{name}.html'>{html_signature}</a>"
+		end
 	end
 
 	# Associate all MMethods to each MModule concerns
@@ -1292,13 +1296,27 @@ redef class AParam
 	end
 end
 
+redef class MType
+	fun link(mbuilder: ModelBuilder): String is abstract
+end
+
+redef class MClassType
+	redef fun link(mbuilder) do return mclass.link(mbuilder)
+end
+
+redef class MNullableType
+	redef fun link(mbuilder) do return "nullable {mtype.link(mbuilder)}"
+end
+
 redef class AType
-	redef fun to_s do
+	fun link: String do
 		var ret = "<a href=\"{n_id.text}.html\">{n_id.text}</a>"
 		if n_kwnullable != null then ret = "nullable {ret}"
 		if not n_types.is_empty then ret = "{ret}[{n_types.join(", ")}]"
 		return ret
 	end
+
+	fun name: String do return n_id.text.html_escape
 end
 
 redef class APropdef
