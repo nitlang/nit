@@ -1123,6 +1123,7 @@ redef class MModule
 		if mowner != null then
 			var nowner = mbuilder.mmodule2nmodule[mowner]
 			str.append(public_owner.link(nowner))
+			str.append("::")
 		end
 		var nmodule = mbuilder.mmodule2nmodule[self]
 		str.append(self.link(nmodule))
