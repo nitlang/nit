@@ -19,7 +19,7 @@
 module typing
 
 import flow
-import modelbuilder
+import modelize_property
 import phase
 import local_var_init
 
