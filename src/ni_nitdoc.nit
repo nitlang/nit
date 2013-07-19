@@ -25,6 +25,7 @@ class Nitdoc
 	private var model: Model
 	private var modelbuilder: ModelBuilder
 	private var mainmodule: MModule
+	private var class_hierarchy: POSet[MClass]
 	private var arguments: Array[String]
 	private var output_dir: nullable String
 	private var dot_dir: nullable String
@@ -62,6 +63,7 @@ class Nitdoc
 		modelbuilder.full_propdef_semantic_analysis
 		assert mmodules.length == 1
 		self.mainmodule = mmodules.first
+		self.class_hierarchy = mainmodule.flatten_mclass_hierarchy
 	end
 
 	private fun process_options do
@@ -131,7 +133,7 @@ class Nitdoc
 
 	fun classes do
 		for mclass in modelbuilder.model.mclasses do
-			var classpage = new NitdocClass(mclass, modelbuilder, dot_dir, source)
+			var classpage = new NitdocClass(mclass, self, dot_dir, source)
 			classpage.save("{output_dir.to_s}/{mclass.name}.html")
 		end
 	end
@@ -502,7 +504,7 @@ class NitdocModule
 		add("div").add_class("subtitle")
 		add_html("module {mmodule.namespace(mbuilder)}")
 		module_comment
-		#process_generate_dot
+		process_generate_dot
 		classes
 		properties
 		close("div")
@@ -522,18 +524,27 @@ class NitdocModule
 	end
 
 	fun process_generate_dot do
+		var name = "dep_{mmodule.name}"
 		var op = new Buffer
-		op.append("digraph dep \{ rankdir=BT; node[shape=none,margin=0,width=0,height=0,fontsize=10]; edge[dir=none,color=gray]; ranksep=0.2; nodesep=0.1;\n")
-		for m in mmodule.in_importation.smallers do
-			op.append("\"{m.name}\"[URL=\"{m.name}.html\"];\n")
+		op.append("digraph {name} \{ rankdir=BT; node[shape=none,margin=0,width=0,height=0,fontsize=10]; edge[dir=none,color=gray]; ranksep=0.2; nodesep=0.1;\n")
+		for m in mmodule.in_importation.poset do
+			var public_owner = m.public_owner
+			if public_owner == null then
+				public_owner = m
+				if m == mmodule then
+					op.append("\"{m.name}\"[shape=box,margin=0.03];\n")
+				else
+					op.append("\"{m.name}\"[URL=\"{m.name}.html\"];\n")
+				end
+			end
 			for imported in m.in_importation.direct_greaters do
-					if imported.direct_owner == null then
-						op.append("\"{m.name}\"->\"{imported.name}\";\n")
-					end
-					end
+				if imported.public_owner == null then
+					op.append("\"{public_owner.name}\"->\"{imported.name}\";\n")
+				end
+			end
 		end
 		op.append("\}\n")
-		generate_dot(op.to_s, "dep_{mmodule.name}", "Modules hierarchy")
+		generate_dot(op.to_s, name, "Dependency graph for module {mmodule.name}")
 	end
 
 	fun sidebar do
@@ -658,10 +669,12 @@ class NitdocClass
 
 	private var mclass: MClass
 	private var mbuilder: ModelBuilder
+	private var nitdoc: Nitdoc
 
-	init(mclass: MClass, mbuilder: ModelBuilder, dot_dir: nullable String, source: nullable String) do
+	init(mclass: MClass, nitdoc: Nitdoc, dot_dir: nullable String, source: nullable String) do
 		self.mclass = mclass
-		self.mbuilder = mbuilder
+		self.mbuilder = nitdoc.modelbuilder
+		self.nitdoc = nitdoc
 		self.dot_dir = dot_dir
 		self.source = source
 	end
@@ -852,6 +865,7 @@ class NitdocClass
 		# We add the class description
 		open("section").add_class("description")
 		if nclass isa AStdClassdef and not nclass.comment.is_empty then add_html("<pre class=\"text_label\" title=\"122\" name=\"\" tag=\"{mclass.mclassdefs.first.location.to_s}\" type=\"2\">{nclass.comment} </pre><textarea id=\"fileContent\" class=\"edit\" cols=\"76\" rows=\"1\" style=\"display: none;\"></textarea><a id=\"cancelBtn\" style=\"display: none;\">Cancel</a><a id=\"commitBtn\" style=\"display: none;\">Commit</a><pre id=\"preSave\" class=\"text_label\" type=\"2\"></pre>")
+		process_generate_dot
 		close("section")
 		open("section").add_class("concerns")
 		add("h2").add_class("section-header").text("Concerns")
@@ -997,6 +1011,51 @@ class NitdocClass
 		close("article")
 	end
 
+	fun process_generate_dot do
+		var pe = nitdoc.class_hierarchy[mclass]
+		var cla = new HashSet[MClass]
+		var sm = new HashSet[MClass]
+		var sm2 = new HashSet[MClass]
+		sm.add(mclass)
+		while cla.length + sm.length < 10 and sm.length > 0 do
+			cla.add_all(sm)
+			sm2.clear
+			for x in sm do
+				sm2.add_all(pe.poset[x].direct_smallers)
+			end
+			var t = sm
+			sm = sm2
+			sm2 = t
+		end
+		cla.add_all(pe.greaters)
+
+		var op = new Buffer
+		var name = "dep_{mclass.name}"
+		op.append("digraph {name} \{ rankdir=BT; node[shape=none,margin=0,width=0,height=0,fontsize=10]; edge[dir=none,color=gray]; ranksep=0.2; nodesep=0.1;\n")
+		for c in cla do
+			if c == mclass then
+				op.append("\"{c.name}\"[shape=box,margin=0.03];\n")
+			else
+				op.append("\"{c.name}\"[URL=\"{c.name}.html\"];\n")
+			end
+			for c2 in pe.poset[c].direct_greaters do
+				if not cla.has(c2) then continue
+				op.append("\"{c.name}\"->\"{c2.name}\";\n")
+			end
+			if not pe.poset[c].direct_smallers.is_empty then
+				var others = true
+				for c2 in pe.poset[c].direct_smallers do
+					if cla.has(c2) then others = false
+				end
+				if others then
+					op.append("\"{c.name}...\"[label=\"\"];\n")
+					op.append("\"{c.name}...\"->\"{c.name}\"[style=dotted];\n")
+				end
+			end
+		end
+		op.append("\}\n")
+		generate_dot(op.to_s, name, "Dependency graph for class {mclass.name}")
+	end
 end
 
 redef class AModule
