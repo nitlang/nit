@@ -221,7 +221,7 @@ function bench_language()
 	nitdir="${basedir}/nit"
 	prepare_res $nitdir/$name-nitg.dat "nitg" "nitg"
 	for b in $seq; do
-		run_command ./nitg $nitdir/${t}_$b.nit -o "$nitdir/${t}_$b.nitg.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
+		run_command ./nitg $nitdir/${t}_$b.nit --global -o "$nitdir/${t}_$b.nitg.bin" --make-flags "CFLAGS=\"-g -O2 -DNOBOEHM\""
 		bench_command "$b" "" "$nitdir/${t}_$b.nitg.bin" $s
 	done
 

@@ -25,40 +25,40 @@ all: ../bin/nitc ../bin/nitdoc ../bin/nits ../bin/nitmetrics ../bin/nitg ../bin/
 	./git-gen-version.sh
 	../c_src/nitc ${NITCOPT} --clibdir ../c_src/clib -o ../bin/nitc -O -v nitc.nit
 
-../bin/nitdoc: ../bin/nitc
+../bin/nitdoc: ../bin/nitg
 	@echo '***************************************************************'
 	@echo '* Compile nitdoc from NIT source files                        *'
 	@echo '***************************************************************'
 	./git-gen-version.sh
-	../bin/nitc ${NITCOPT} -o ../bin/nitdoc -O -v nitdoc.nit
+	../bin/nitg ${NITCOPT} -o ../bin/nitdoc -v nitdoc.nit
 
-../bin/nits: ../bin/nitc
+../bin/nits: ../bin/nitg
 	@echo '***************************************************************'
 	@echo '* Compile nits from NIT source files                          *'
 	@echo '***************************************************************'
 	./git-gen-version.sh
-	../bin/nitc ${NITCOPT} -o ../bin/nits -O -v nits.nit
+	../bin/nitg ${NITCOPT} -o ../bin/nits -v nits.nit
 
-../bin/nitmetrics: ../bin/nitc
+../bin/nitmetrics: ../bin/nitg
 	@echo '***************************************************************'
 	@echo '* Compile nitmetrics from NIT source files                      *'
 	@echo '***************************************************************'
 	./git-gen-version.sh
-	../bin/nitc ${NITCOPT} -o ../bin/nitmetrics -O -v nitmetrics.nit
+	../bin/nitg ${NITCOPT} -o ../bin/nitmetrics -v nitmetrics.nit
 
 ../bin/nitg: ../bin/nitc
 	@echo '***************************************************************'
 	@echo '* Compile nitg from NIT source files                          *'
 	@echo '***************************************************************'
 	./git-gen-version.sh
-	../bin/nitc ${NITCOPT} -o ../bin/nitg -O -v nitg.nit
+	../bin/nitc ${NITCOPT} -o ../bin/nitg -v nitg.nit
 
-../bin/nit: ../bin/nitc
+../bin/nit: ../bin/nitg
 	@echo '***************************************************************'
 	@echo '* Compile nit from NIT source files                           *'
 	@echo '***************************************************************'
 	./git-gen-version.sh
-	../bin/nitc ${NITCOPT} -o ../bin/nit -O -v nit.nit
+	../bin/nitg ${NITCOPT} -o ../bin/nit -v nit.nit
 
 ../c_src/nitc: ../c_src/*.c ../c_src/*.h ../c_src/nitc._build.sh ../c_src/Makefile
 	@echo '***************************************************************'

@@ -32,3 +32,4 @@
   --tables-metrics            Enable static size measuring of tables used for vft, typing and resolution
   --erasure                   Erase generic types
   --no-check-erasure-cast     Disable implicit casts on unsafe return with erasure-typing policy (dangerous)
+  --global                    Use global compilation

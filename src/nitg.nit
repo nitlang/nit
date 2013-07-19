@@ -26,6 +26,11 @@ import separate_compiler
 
 # Create a tool context to handle options and paths
 var toolcontext = new ToolContext
+
+# Create a new option for --global
+var opt_global = new OptionBool("Use global compilation", "--global")
+toolcontext.option_context.add_option(opt_global)
+
 # We do not add other options, so process them now!
 toolcontext.process_options
 
@@ -60,8 +65,8 @@ var analysis = modelbuilder.do_rapid_type_analysis(mainmodule)
 
 if toolcontext.opt_erasure.value then
 	modelbuilder.run_separate_erasure_compiler(mainmodule, analysis)
-else if toolcontext.opt_separate.value then
-	modelbuilder.run_separate_compiler(mainmodule, analysis)
-else
+else if opt_global.value then
 	modelbuilder.run_global_compiler(mainmodule, analysis)
+else
+	modelbuilder.run_separate_compiler(mainmodule, analysis)
 end
