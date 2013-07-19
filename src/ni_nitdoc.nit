@@ -513,7 +513,7 @@ class NitdocModule
 		sidebar
 		open("div").add_class("content")
 		add("h1").text(mmodule.name)
-		add("div").add_class("subtitle").text("module {mmodule.name}")
+		add("div").add_class("subtitle").text("module {mmodule.namespace(mbuilder)}")
 		module_comment
 		#process_generate_dot
 		classes
@@ -836,8 +836,7 @@ class NitdocClass
 		add("h1").text(mclass.to_s)
 		open("div").add_class("subtitle")
 		if mclass.visibility is none_visibility then subtitle += "private "
-		var nowner = mbuilder.mmodule2nmodule[mclass.public_owner]
-		subtitle += "{mclass.kind} {mclass.public_owner.link(nowner)}::{mclass}"
+		subtitle += "{mclass.kind} {mclass.public_owner.namespace(mbuilder)}::{mclass}"
 		add_html(subtitle)
 		close("div")
 		add_html("<div style=\"float: right;\"><a id=\"lblDiffCommit\"></a></div>")
@@ -885,7 +884,7 @@ class NitdocClass
 			end
 			close("section")
 		end
-		# Insert constructors if there is almost one
+		# constructors
 		if mclass.constructors.length > 0 then
 			var sortedc = mclass.constructors.to_a
 			sorterprop.sort(sortedc)
@@ -894,6 +893,7 @@ class NitdocClass
 			for prop in sortedc do description(prop)
 			close("section")
 		end
+		# methods
 		open("section").add_class("methods")
 		add("h2").add_class("section-header").text("Methods")
 		for mmodule, mmethods in mclass.all_methods do
@@ -910,7 +910,7 @@ class NitdocClass
 			sorterprop.sort(sortedc)
 			for prop in sortedc do description(prop)
 		end
-		# Insert inherited methods
+		# inherited methods
 		if mclass.inherited_methods.length > 0 then
 			var sortedc = new Array[MClass]
 			sortedc.add_all(mclass.inherited.keys)
@@ -932,19 +932,37 @@ class NitdocClass
 		close("section")
 	end
 
-	# Insert description tags for 'prop'
 	fun description(prop: MProperty) do
-		open("article").add_class("fun public {if prop.is_redef then "redef" else ""}").attr("id", "{prop.anchor}")
+		if not mbuilder.mpropdef2npropdef.has_key(prop.intro) then return
+		var nprop = mbuilder.mpropdef2npropdef[prop.intro]
+		if not nprop isa AMethPropdef then return
+		var classes = new Array[String]
+		if nprop isa AInitPropdef then
+			classes.add("init")
+		else
+			classes.add("fun")
+		end
+		if prop.is_redef then classes.add("redef")
+		if prop.visibility == none_visibility then
+			classes.add("private")
+		else if prop.visibility == protected_visibility then
+			classes.add("protected")
+		else
+			classes.add("public")
+		end
+		open("article").add_classes(classes).attr("id", "{prop.anchor}")
 		var sign = prop.name
-		if prop.apropdef != null then sign += prop.apropdef.signature
-		add_html("<h3 class=\"signature\">{sign}</h3>")
-		add_html("<div class=\"info\">{if prop.is_redef then "redef" else ""} fun {prop.intro_mclassdef.namespace(mclass)}::{prop.name}</div><div style=\"float: right;\"><a id=\"lblDiffCommit\"></a></div>")
-
+		open("h3").add_class("signature")
+		add_html("{prop.name}{nprop.signature}")
+		close("h3")
+		open("div").add_class("info")
+		add_html("{if prop.is_redef then "redef" else ""} fun {prop.intro_mclassdef.namespace(mclass)}::{prop.name}</div><div style=\"float: right;\"><a id=\"lblDiffCommit\"></a>")
+		close("div")
 		open("div").add_class("description")
-		if prop.apropdef is null or prop.apropdef.comment == "" then
+		if nprop.comment == "" then
 			add_html("<a class=\"newComment\" title=\"32\" tag=\"\">New Comment</a>")
 		else
-			add_html("<pre class=\"text_label\" title=\"\" name=\"\" tag=\"\" type=\"1\">{prop.apropdef.comment}</pre>")
+			add_html("<pre class=\"text_label\" title=\"\" name=\"\" tag=\"\" type=\"1\">{nprop.comment}</pre>")
 		end
 		add_html("<textarea id=\"fileContent\" class=\"edit\" cols=\"76\" rows=\"1\" style=\"display: none;\"></textarea><a id=\"cancelBtn\" style=\"display: none;\">Cancel</a><a id=\"commitBtn\" style=\"display: none;\">Commit</a><pre id=\"preSave\" class=\"text_label\" type=\"2\"></pre>")
 		open("p")
@@ -1027,6 +1045,19 @@ redef class MModule
 	# Return a link (html a tag) to the nitdoc module page
 	fun link(amodule: AModule): String do
 		return "<a href=\"{name}.html\" title=\"{amodule.short_comment}\">{name}</a>"
+	end
+
+	# Return the module namespace decorated with html
+	fun namespace(mbuilder: ModelBuilder): String do
+		var str = new Buffer
+		var mowner = public_owner
+		if mowner != null then
+			var nowner = mbuilder.mmodule2nmodule[mowner]
+			str.append(public_owner.link(nowner))
+		end
+		var nmodule = mbuilder.mmodule2nmodule[self]
+		str.append(self.link(nmodule))
+		return str.to_s
 	end
 end
 redef class MPropDef
@@ -1213,7 +1244,7 @@ redef class ASignature
 		if not n_params.is_empty then
 			ret = "{ret}({n_params.join(", ")})"
 		end
-		if n_type != null and n_type.to_s != "" then ret += " {n_type.to_s}"
+		if n_type != null and n_type.to_s != "" then ret += ": {n_type.to_s}"
 		return ret
 	end
 end
@@ -1259,32 +1290,32 @@ end
 
 redef class AMethPropdef
 	redef fun short_comment do
-		var ret = ""
+		var ret = new Buffer
 		if n_doc != null then
 			var txt = n_doc.n_comment.first.text
 			txt = txt.replace("# ", "")
 			txt = txt.replace("\n", "")
-			ret += txt
+			ret.append(txt)
 		end
-		return ret
+		return ret.to_s
 	end
 
 	redef fun signature: String do
 		var sign = ""
-		if n_signature != null then sign = " {n_signature.to_s}"
+		if n_signature != null then sign = "{n_signature.to_s}"
 		return sign
 	end
 
 	redef private fun comment: String do
-		var ret = ""
+		var ret = new Buffer
 		if n_doc != null then
 			for t in n_doc.n_comment do
 				var txt = t.text.replace("# ", "")
 				txt = txt.replace("#", "")
-				ret += "{txt}"
+				ret.append(txt)
 			end
 		end
-		return ret
+		return ret.to_s
 	end
 end
 
