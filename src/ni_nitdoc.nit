@@ -18,7 +18,6 @@ module ni_nitdoc
 
 import model_utils
 import abstract_compiler
-import html
 
 class Nitdoc
 	private var toolcontext: ToolContext
@@ -173,82 +172,76 @@ end
 
 # Nitdoc base page
 abstract class NitdocPage
-	super HTMLPage
 
 	var dot_dir: nullable String
 	var source: nullable String
 
-	redef fun head do
-		add("meta").attr("charset", "utf-8")
-		add("script").attr("type", "text/javascript").attr("src", "scripts/jquery-1.7.1.min.js")
-		add("script").attr("type", "text/javascript").attr("src", "quicksearch-list.js")
-		add("script").attr("type", "text/javascript").attr("src", "scripts/js-facilities.js")
-		add("link").attr("rel", "stylesheet").attr("href", "styles/main.css").attr("type", "text/css").attr("media", "screen")
-	end
+	init do end
 
-	redef fun body do
-		header
-		open("div").add_class("page")
-		content
-		close("div")
-		footer
+	fun append(str: String) do html.append(str)
+	var html = new Buffer
+
+	fun head do
+		append("<meta charset='utf-8'/>")
+		append("<script type='text/javascript' src='scripts/jquery-1.7.1.min.js'></script>")
+		append("<script type='text/javascript' src='quicksearch-list.js'></script>")
+		append("<script type='text/javascript' src='scripts/js-facilities.js'></script>")
+		append("<link rel='stylesheet' href='styles/main.css' type='text/css' media='screen'/>")
 	end
 
 	fun menu is abstract
 
 	fun header do
-		open("header")
-		open("nav").add_class("main")
-		open("ul")
+		append("<header>")
+		append("<nav class='main'>")
+		append("<ul>")
 		menu
-		open("li").attr("id", "liGitHub")
-		open("a").add_class("btn").attr("id", "logGitHub")
-		add("img").attr("id", "imgGitHub").attr("src", "resources/icons/github-icon.png")
-		close("a")
-		open("div").add_class("popover bottom")
-		add("div").add_class("arrow").text(" ")
-		open("div").add_class("githubTitle")
-		add("h3").text("Github Sign In")
-		close("div")
-		open("div")
-		add("label").attr("id", "lbloginGit").text("Username")
-		add("input").attr("id", "loginGit").attr("name", "login").attr("type", "text")
-		open("label").attr("id", "logginMessage").text("Hello ")
-		open("a").attr("id", "githubAccount")
-		add("strong").attr("id", "nickName").text(" ")
-		close("a")
-		close("label")
-		close("div")
-		open("div")
-		add("label").attr("id", "lbpasswordGit").text("Password")
-		add("input").attr("id", "passwordGit").attr("name", "password").attr("type", "password")
-		open("div").attr("id", "listBranches")
-		add("label").attr("id", "lbBranches").text("Branch")
-		add("select").add_class("dropdown").attr("id", "dropBranches").attr("name", "dropBranches").attr("tabindex", "1").text(" ")
-		close("div")
-		close("div")
-		open("div")
-		add("label").attr("id", "lbrepositoryGit").text("Repository")
-		add("input").attr("id", "repositoryGit").attr("name", "repository").attr("type", "text")
-		close("div")
-		open("div")
-		add("label").attr("id", "lbbranchGit").text("Branch")
-		add("input").attr("id", "branchGit").attr("name", "branch").attr("type", "text")
-		close("div")
-		open("div")
-		add("a").attr("id", "signIn").text("Sign In")
-		close("div")
-		close("div")
-		close("li")
-		close("ul")
-		close("nav")
-		close("header")
+		append("<li id='liGitHub'>")
+		append("<a class='btn' id='logGitHub'>")
+		append("<img id='imgGitHub' src='resources/icons/github-icon.png' alt='GitHub'/>")
+		append("</a>")
+		append("<div class='popover bottom'>")
+		append("<div class='arrow'>&nbsp;</div>")
+		append("<div class='githubTitle'>")
+		append("<h3>Github Sign In</h3>")
+		append("</div>")
+		append("<div>")
+		append("<label id='lbloginGit'>Username</label>")
+		append("<input id='loginGit' name='login' type='text'/>")
+		append("<label id='logginMessage'>Hello ")
+		append("<a id='githubAccount'><strong id='nickName'></strong></a>")
+		append("</label>")
+		append("</div>")
+		append("<div>")
+		append("<label id='lbpasswordGit'>Password</label>")
+		append("<input id='passwordGit' name='password' type='password'/>")
+		append("<div id='listBranches'>")
+		append("<label id='lbBranches'>Branch</label>")
+		append("<select class='dropdown' id='dropBranches' name='dropBranches' tabindex='1'></select>")
+		append("</div>")
+		append("</div>")
+		append("<div>")
+		append("<label id='lbrepositoryGit'>Repository</label>")
+		append("<input id='repositoryGit' name='repository' type='text'/>")
+		append("</div>")
+		append("<div>")
+		append("<label id='lbbranchGit'>Branch</label>")
+		append("<input id='branchGit' name='branch' type='text'/>")
+		append("</div>")
+		append("<div>")
+		append("<a id='signIn'>Sign In</a>")
+		append("</div>")
+		append("</div>")
+		append("</li>")
+		append("</ul>")
+		append("</nav>")
+		append("</header>")
 	end
 
 	fun content is abstract
 
 	fun footer do
-		add("footer").text("Nit standard library. Version jenkins-component=stdlib-19.")
+		append("<footer>Nit standard library. Version jenkins-component=stdlib-19.</footer>")
 	end
 
 	# Generate a clickable graphviz image using a dot content
@@ -259,11 +252,11 @@ abstract class NitdocPage
 		file.write(dot)
 		file.close
 		sys.system("\{ test -f {output_dir}/{name}.png && test -f {output_dir}/{name}.s.dot && diff {output_dir}/{name}.dot {output_dir}/{name}.s.dot >/dev/null 2>&1 ; \} || \{ cp {output_dir}/{name}.dot {output_dir}/{name}.s.dot && dot -Tpng -o{output_dir}/{name}.png -Tcmapx -o{output_dir}/{name}.map {output_dir}/{name}.s.dot ; \}")
-		open("article").add_class("graph")
-		add("img").attr("src", "{name}.png").attr("usemap", "#{name}").attr("style", "margin:auto").attr("alt", "{alt}")
-		close("article")
+		append("<article class='graph'>")
+		append("<img src='{name}.png' usemap='#{name}' style='margin:auto' alt='{alt}'/>")
+		append("</article>")
 		var fmap = new IFStream.open("{output_dir}/{name}.map")
-		add_html(fmap.read_all)
+		append(fmap.read_all)
 		fmap.close
 	end
 
@@ -282,6 +275,29 @@ abstract class NitdocPage
 			source = x.join(l.line_end.to_s)
 			return " (<a href=\"{source.to_s}\">show code</a>)"
 		end
+	end
+
+	# Render the page as a html string
+	fun render: String do
+		append("<!DOCTYPE html>")
+		append("<head>")
+		head
+		append("</head>")
+		append("<body>")
+		header
+		append("<div class='page'>")
+		content
+		append("</div>")
+		footer
+		append("</body>")
+		return html.to_s
+	end
+
+	# Save html page in the specified file
+	fun save(file: String) do
+		var out = new OFStream.open(file)
+		out.write(render)
+		out.close
 	end
 end
 
@@ -312,37 +328,31 @@ class NitdocOverview
 
 	redef fun head do
 		super
-		add("title").text("Overview | Nit Standard Library")
+		append("<title>Overview | Nit Standard Library</title>")
 	end
 
 	redef fun menu do
-		add("li").add_class("current").text("Overview")
-		open("li")
-		add("a").attr("href", "full-index.html").text("Full Index")
-		close("li")
+		append("<li class='current'>Overview</li>")
+		append("<li><a href='full-index.html'>Full Index</a></li>")
 	end
 
 	redef fun content do
-		open("div").add_class("content fullpage")
-		add("h1").text("Nit Standard Library")
-		open("article").add_class("overview")
-		add_html("<p>Documentation for the standard library of Nit<br />Version jenkins-component=stdlib-19<br />Date: TODAY</p>")
-		close("article")
-		open("article").add_class("overview")
+		append("<div class='content fullpage'>")
+		append("<h1>Nit Standard Library</h1>")
+		append("<article class='overview'><p>Documentation for the standard library of Nit<br />Version jenkins-component=stdlib-19<br />Date: TODAY</p></article>")
+		append("<article class='overview'>")
 		# module list
-		add("h2").text("Modules")
-		open("ul")
+		append("<h2>Modules</h2>")
+		append("<ul>")
 		for mmodule in mmodules do
 			var amodule = mbuilder.mmodule2nmodule[mmodule]
-			open("li")
-			add_html("{mmodule.link(amodule)}&nbsp;{amodule.short_comment}")
-			close("li")
+			append("<li>{mmodule.link(mbuilder)}&nbsp;{amodule.short_comment}</li>")
 		end
-		close("ul")
+		append("</ul>")
 		# module graph
 		process_generate_dot
-		close("article")
-		close("div")
+		append("</article>")
+		append("</div>")
 	end
 
 	fun process_generate_dot do
@@ -374,23 +384,21 @@ class NitdocFullindex
 
 	redef fun head do
 		super
-		add("title").text("Full Index | Nit Standard Library")
+		append("<title>Full Index | Nit Standard Library</title>")
 	end
 
 	redef fun menu do
-		open("li")
-		add("a").attr("href", "index.html").text("Overview")
-		close("li")
-		add("li").add_class("current").text("Full Index")
+		append("<li><a href='index.html'>Overview</a></li>")
+		append("<li class='current'>Full Index</li>")
 	end
 
 	redef fun content do
-		open("div").add_class("content fullpage")
-		add("h1").text("Full Index")
+		append("<div class='content fullpage'>")
+		append("<h1>Full Index</h1>")
 		module_column
 		classes_column
 		properties_column
-		close("div")
+		append("</div>")
 	end
 
 	# Add to content modules column
@@ -399,19 +407,17 @@ class NitdocFullindex
 		var sorted = mmodules
 		var sorterp = new ComparableSorter[MModule]
 		sorterp.sort(sorted)
-		open("article").add_class("modules filterable")
-		add("h2").text("Modules")
-		open("ul")
+		append("<article class='modules filterable'></article>")
+		append("<h2>Modules</h2>")
+		append("<ul>")
 		for mmodule in sorted do
 			if mmodule.public_owner != null and not ls.has(mmodule.public_owner) then
 				ls.add(mmodule.public_owner)
-				open("li")
-				add("a").attr("href", "{mmodule.public_owner.name}.html").text(mmodule.public_owner.name)
-				close("li")
+				append("<li><a href='{mmodule.public_owner.name}.html'>(mmodule.public_owner.name)</a></li>")
 			end
 		end
-		close("ul")
-		close("article")
+		append("</ul>")
+		append("</article>")
 	end
 
 	# Add to content classes modules
@@ -419,25 +425,21 @@ class NitdocFullindex
 		var sorted = mmodules.first.imported_mclasses.to_a
 		var sorterp = new ComparableSorter[MClass]
 		sorterp.sort(sorted)
-		open("article").add_class("classes filterable")
-		add("h2").text("Classes")
-		open("ul")
-
+		append("<article class='classes filterable'>")
+		append("<h2>Classes</h2>")
+		append("<ul>")
 		for mclass in sorted do
-			open("li")
-			add("a").attr("href", "{mclass}.html").text(mclass.name)
-			close("li")
+			append("<li><a href='{mclass}.html'>(mclass.name)</a></li>")
 		end
-
-		close("ul")
-		close("article")
+		append("</ul>")
+		append("</article>")
 	end
 
 	# Insert the properties column of fullindex page
 	fun properties_column do
-		open("article").add_class("properties filterable")
-		add("h2").text("Properties")
-		open("ul")
+		append("<article class='classes filterable'>")
+		append("<h2>Properties</h2>")
+		append("<ul>")
 		var sorted_imported = mmodules.first.imported_methods.to_a
 		var sorted_redef = mmodules.first.redef_methods.to_a
 		var sorterp = new ComparableSorter[MProperty]
@@ -446,24 +448,21 @@ class NitdocFullindex
 
 		for method in sorted_imported do
 			if method.visibility is none_visibility or method.visibility is intrude_visibility then continue
-			open("li").add_class("intro")
-			add("span").attr("title", "introduction").text("I")
-			add_html("&nbsp;")
-			add("a").attr("href", "{method.local_class.name}.html").attr("title", "").text("{method.name} ({method.local_class.name})")
-			close("li")
+			append("<li class='intro'</li>")
+			append("<span title='introduction'>I</span>&nbsp;")
+			append("<a href='{method.local_class.name}.html' title=''>{method.name} ({method.local_class.name})</a>")
+			append("</li>")
 		end
 
 		for method in sorted_redef do
 			if method.visibility is none_visibility or method.visibility is intrude_visibility then continue
-			open("li").add_class("redef")
-			add("span").attr("title", "redefinition").text("R")
-			add_html("&nbsp;")
-			add("a").attr("href", "{method.local_class.name}.html").attr("title", "").text("{method.name} ({method.local_class.name})")
-			close("li")
+			append("<li class='redef'>")
+			append("<span title='redefinition'>R</span>&nbsp;")
+			append("<a href='{method.local_class.name}.html' title=''>{method.name} ({method.local_class.name})</span>")
+			append("</li>")
 		end
-
-		close("ul")
-		close("article")
+		append("</ul>")
+		append("</article>")
 	end
 
 end
@@ -484,43 +483,25 @@ class NitdocModule
 	redef fun head do
 		super
 		var amodule = mbuilder.mmodule2nmodule[mmodule]
-		add("title").text("{mmodule.name} module | {amodule.short_comment}")
+		append("<title>{mmodule.name} module | {amodule.short_comment}</title>")
 	end
 
 	redef fun menu do
-		open("li")
-		add("a").attr("href", "index.html").text("Overview")
-		close("li")
-		add("li").add_class("current").text(mmodule.name)
-		open("li")
-		add("a").attr("href", "full-index.html").text("Full Index")
-		close("li")
+		append("<li><a href='index.html'>Overview</a></li>")
+		append("<li class='current'>{mmodule.name}</li>")
+		append("<li><a href='full-index.html'>Full Index</a></li>")
 	end
 
 	redef fun content do
 		sidebar
-		open("div").add_class("content")
-		add("h1").text(mmodule.name)
-		add("div").add_class("subtitle")
-		add_html("module {mmodule.namespace(mbuilder)}")
-		module_comment
+		append("<div class='content'>")
+		append("<h1>{mmodule.name}</h1>")
+		append("<div class='subtitle'>{mmodule.html_signature(mbuilder)}</div>")
+		append(mmodule.html_full_comment(mbuilder))
 		process_generate_dot
 		classes
 		properties
-		close("div")
-	end
-
-	# Insert module comment in the content
-	fun module_comment do
-		var amodule = mbuilder.mmodule2nmodule[mmodule]
-		var doc = amodule.comment
-		open("div").attr("id", "description")
-		add("pre").add_class("text_label").text(doc)
-		add("textarea").add_class("edit").attr("rows", "1").attr("cols", "76").attr("id", "fileContent").text(" ")
-		add("a").attr("id", "cancelBtn").text("Cancel")
-		add("a").attr("id", "commitBtn").text("Commit")
-		add("pre").add_class("text_label").attr("id", "preSave").attr("type", "2")
-		close("div")
+		append("</div>")
 	end
 
 	fun process_generate_dot do
@@ -549,16 +530,16 @@ class NitdocModule
 
 	fun sidebar do
 		var amodule = mbuilder.mmodule2nmodule[mmodule]
-		open("div").add_class("menu")
-		open("nav")
-		add("h3").text("Module Hierarchy")
+		append("<div class='menu'>")
+		append("<nav>")
+		append("<h3>Module Hierarchy</h3>")
 		var dependencies = new Array[MModule]
 		for dep in mmodule.in_importation.greaters do
 			if dep == mmodule or dep.public_owner != null then continue
 			dependencies.add(dep)
 		end
 		if dependencies.length > 0 then
-			add("h4").text("All dependencies")
+			append("<h4>All dependencies</h4>")
 			display_module_list(dependencies)
 		end
 		var clients = new Array[MModule]
@@ -567,30 +548,25 @@ class NitdocModule
 			clients.add(dep)
 		end
 		if clients.length > 0 then
-			add("h4").text("All clients")
+			append("<h4>All clients</h4>")
 			display_module_list(clients)
 		end
-		close("nav")
+		append("</nav>")
 		if mmodule.in_nesting.direct_greaters.length > 0 then
-			open("nav")
-			add("h3").text("Nested Modules")
+			append("<nav>")
+			append("<h3>Nested Modules</h3>")
 			display_module_list(mmodule.in_nesting.direct_greaters.to_a)
-			close("nav")
+			append("</nav>")
 		end
-		close("div")
+		append("</div>")
 	end
 
 	private fun display_module_list(list: Array[MModule]) do
-		open("ul")
+		append("<ul>")
 		var sorter = new ComparableSorter[MModule]
 		sorter.sort(list)
-		for m in list do
-			var am = mbuilder.mmodule2nmodule[m]
-			open("li")
-			add_html(m.link(am))
-			close("li")
-		end
-		close("ul")
+		for m in list do append("<li>{m.link(mbuilder)}</li>")
+		append("</ul>")
 	end
 
 	fun classes do
@@ -609,25 +585,25 @@ class NitdocModule
 		sorted.add_all(all_mclasses)
 		var sorter = new ComparableSorter[MClass]
 		sorter.sort(sorted)
-		open("div").add_class("module")
-		open("article").add_class("classes filterable")
-		add("h2").text("Classes")
-		open("ul")
+		append("<div class='module'>")
+		append("<article class='classes filterable'>")
+		append("<h2>Classes</h2>")
+		append("<ul>")
 		for c in sorted do
 			var nclass = mbuilder.mclassdef2nclassdef[c.intro].as(AStdClassdef)
 			if redef_mclasses.has(c) and c.intro_mmodule.public_owner != mmodule then
-				open("li").add_class("redef")
-				add("span").attr("title", "refined in this module").text("R ")
+				append("<li class='redef'>")
+				append("<span title='refined in this module'>R </span>")
 			else
-				open("li").add_class("intro")
-				add("span").attr("title", "introduced in this module").text("I ")
+				append("<li class='intro'>")
+				append("<span title='introduced in this module'>I </span>")
 			end
-			add_html(c.link(nclass))
-			close("li")
+			append(c.link(nclass))
+			append("</li>")
 		end
-		close("ul")
-		close("article")
-		close("div")
+		append("</ul>")
+		append("</article>")
+		append("</div>")
 	end
 
 	fun properties do
@@ -640,26 +616,26 @@ class NitdocModule
 		var sorted = mpropdefs.to_a
 		var sorter = new ComparableSorter[MPropDef]
 		sorter.sort(sorted)
-		open("article").add_class("properties filterable")
-		add("h2").text("Properties")
-		open("ul")
+		append("<article class='properties filterable'>")
+		append("<h2>Properties</h2>")
+		append("<ul>")
 		for p in sorted do
 			if p isa MAttributeDef then continue
 			if p.mproperty.visibility <= none_visibility then continue
 			if not mbuilder.mpropdef2npropdef.has_key(p) then continue
 			var nprop = mbuilder.mpropdef2npropdef[p]
 			if p.is_intro then
-				open("li").add_class("intro")
-				add("span").attr("title", "introduction").text("I")
+				append("<li class='intro'>")
+				append("<span title='introduction'>I</span>&nbsp;{p.link(nprop)} ({p.mclassdef.mclass.name})")
+				append("</li>")
 			else
-				open("li").add_class("redef")
-				add("span").attr("title", "redefinition").text("R")
+				append("<li class='redef'>")
+				append("<span title='redefinition'>R</span>&nbsp;{p.link(nprop)} ({p.mclassdef.mclass.name})")
+				append("</li>")
 			end
-			add_html("&nbsp;{p.link(nprop)} ({p.mclassdef.mclass.name})")
-			close("li")
 		end
-		close("ul")
-		close("article")
+		append("</ul>")
+		append("</article>")
 	end
 end
 
@@ -683,46 +659,38 @@ class NitdocClass
 		super
 		var nclass = mbuilder.mclassdef2nclassdef[mclass.intro]
 		if nclass isa AStdClassdef then
-			add("title").text("{mclass.name} class | {nclass.short_comment}")
+			append("<title>{mclass.name} class | {nclass.short_comment}</title>")
 		else
-			add("title").text("{mclass.name} class")
+			append("<title>{mclass.name} class</title>")
 		end
 	end
 
 	redef fun menu do
-		open("li")
-		add("a").attr("href", "index.html").text("Overview")
-		close("li")
-		open("li")
+		append("<li><a href='index.html'>Overview</a></li>")
 		var public_owner = mclass.public_owner
 		if public_owner is null then
-			var am = mbuilder.mmodule2nmodule[mclass.intro_mmodule]
-			add_html(mclass.intro_mmodule.link(am))
+			append("<li>{mclass.intro_mmodule.link(mbuilder)}</li>")
 		else
-			var am = mbuilder.mmodule2nmodule[public_owner]
-			add_html(public_owner.link(am))
+			append("<li>{public_owner.link(mbuilder)}</li>")
 		end
-		close("li")
-		add("li").add_class("current").text(mclass.name)
-		open("li")
-		add("a").attr("href", "full-index.html").text("Full Index")
-		close("li")
+		append("<li class='current'>{mclass.name}</li>")
+		append("<li><a href='full-index.html'>Full Index</a></li>")
 	end
 
 	redef fun content do
-		open("div").add_class("menu")
+		append("<div class='menu'>")
 		properties_column
 		inheritance_column
-		close("div")
-		open("div").add_class("content")
+		append("</div>")
+		append("<div class='content'>")
 		class_doc
-		close("div")
+		append("</div>")
 	end
 
 	fun properties_column do
 		var sorter = new ComparableSorter[MPropDef]
-		open("nav").add_class("properties filterable")
-		add("h3").text("Properties")
+		append("<nav class='properties filterable'>")
+		append("<h3>Properties</h3>")
 		# get properties
 		var vtypes = new HashSet[MVirtualTypeDef]
 		var consts = new HashSet[MMethodDef]
@@ -753,183 +721,177 @@ class NitdocClass
 			var vts = new Array[MVirtualTypeDef]
 			vts.add_all(vtypes)
 			sorter.sort(vts)
-			add("h4").text("Virtual Types")
+			append("<h4>Virtual Types</h4>")
 			display_mpropdef_list(vts)
 		end
 		if consts.length > 0 then
 			var cts = new Array[MMethodDef]
 			cts.add_all(consts)
 			sorter.sort(cts)
-			add("h4").text("Constructors")
+			append("<h4>Constructors</h4>")
 			display_mpropdef_list(cts)
 		end
 		if meths.length > 0 then
 			var mts = new Array[MMethodDef]
 			mts.add_all(meths)
 			sorter.sort(mts)
-			add("h4").text("Methods")
+			append("<h4>Methods</h4>")
 			display_mpropdef_list(mts)
 		end
-		close("nav")
+		append("</nav>")
 	end
 
 	private fun display_mpropdef_list(list: Array[MPropDef]) do
-		open("ul")
+		append("<ul>")
 		for prop in list do
 			var nprop = mbuilder.mpropdef2npropdef[prop]
 			if prop.is_intro and prop.mproperty.intro_mclassdef.mclass != mclass then
-				open("li").add_class("inherit")
-				add("span").attr("title", "Inherited").text("H")
+				append("<li class='inherit'>")
+				append("<span title='Inherited'>H</span>")
 			else if prop.is_intro then
-				open("li").add_class("intro")
-				add("span").attr("title", "Introduced").text("I")
+				append("<li class='intro'>")
+				append("<span title='Introduced'>I</span>")
 			else
-				open("li").add_class("redef")
-				add("span").attr("title", "Redefined").text("R")
+				append("<li class='redef'>")
+				append("<span title='Redefined'>R</span>")
 			end
-			add_html(prop.link(nprop))
-			close("li")
+			append(prop.link(nprop))
+			append("</li>")
 		end
-		close("ul")
+		append("</ul>")
 	end
 
 	fun inheritance_column do
 		var sorted = new Array[MClass]
 		var sorterp = new ComparableSorter[MClass]
-		open("nav")
-		add("h3").text("Inheritance")
+		append("<nav>")
+		append("<h3>Inheritance</h3>")
 		if mclass.ancestors.length > 1 then
 			sorted = mclass.ancestors.to_a
 			sorterp.sort(sorted)
-			add("h4").text("Superclasses")
-			open("ul")
+			append("<h4>Superclasses</h4>")
+			append("<ul>")
 			for sup in sorted do
 				if sup == mclass then continue
-				open("li")
-				add("a").attr("href", "{sup.name}.html").text(sup.name)
-				close("li")
+				append("<li><a href='{sup.name}.html'>{sup.name}</a></li>")
 			end
-			close("ul")
+			append("</ul>")
 		end
 
 		if mclass.descendants.length <= 1 then
-			add("h4").text("No Known Subclasses")
+			append("<h4>No Known Subclasses</h4>")
 		else if mclass.descendants.length <= 100 then
 			sorted = mclass.descendants.to_a
 			sorterp.sort(sorted)
-			add("h4").text("Subclasses")
-			open("ul")
+			append("<h4>Subclasses</h4>")
+			append("<ul>")
 			for sub in sorted do
 				if sub == mclass then continue
-				open("li")
-				add("a").attr("href", "{sub.name}.html").text(sub.name)
-				close("li")
+				append("<li><a href='{sub.name}.html'>{sub.name}</a></li>")
 			end
-			close("ul")
+			append("</ul>")
 		else if mclass.children.length <= 100 then
 			sorted = mclass.children.to_a
 			sorterp.sort(sorted)
-			add("h4").text("Direct Subclasses Only")
-			open("ul")
+			append("<h4>Direct Subclasses Only</h4>")
+			append("<ul>")
 			for sub in sorted do
 				if sub == mclass then continue
-				open("li")
-				add("a").attr("href", "{sub.name}.html").text(sub.name)
-				close("li")
+				append("<li><a href='{sub.name}.html'>{sub.name}</a></li>")
 			end
-			close("ul")
+			append("</ul>")
 		else
-			add("h4").text("Too much Subclasses to list")
+			append("<h4>Too much Subclasses to list</h4>")
 		end
-		close("nav")
+		append("</nav>")
 	end
 
 	fun class_doc do
 		# title
-		add("h1").text(mclass.to_s)
-		open("div").add_class("subtitle")
+		append("<h1>{mclass.to_s}</h1>")
+		append("<div class='subtitle'>")
 		var subtitle = ""
 		if mclass.visibility is none_visibility then subtitle += "private "
-		subtitle += "{mclass.kind} {mclass.public_owner.namespace(mbuilder)}::{mclass}"
-		add_html(subtitle)
-		close("div")
+		subtitle += "{mclass.kind} {mclass.public_owner.html_namespace(mbuilder)}::{mclass}"
+		append(subtitle)
+		append("</div>")
 		# comment
 		var nclass = mbuilder.mclassdef2nclassdef[mclass.intro]
-		add_html("<div style=\"float: right;\"><a id=\"lblDiffCommit\"></a></div>")
-		open("section").add_class("description")
-		if nclass isa AStdClassdef and not nclass.comment.is_empty then add_html("<pre class=\"text_label\" title=\"122\" name=\"\" tag=\"{mclass.mclassdefs.first.location.to_s}\" type=\"2\">{nclass.comment}</pre><textarea id=\"fileContent\" class=\"edit\" cols=\"76\" rows=\"1\" style=\"display: none;\"></textarea><a id=\"cancelBtn\" style=\"display: none;\">Cancel</a><a id=\"commitBtn\" style=\"display: none;\">Commit</a><pre id=\"preSave\" class=\"text_label\" type=\"2\"></pre>")
+		append("<div style=\"float: right;\"><a id=\"lblDiffCommit\"></a></div>")
+		append("<section class='description'>")
+		if nclass isa AStdClassdef and not nclass.comment.is_empty then append("<pre class=\"text_label\" title=\"122\" name=\"\" tag=\"{mclass.mclassdefs.first.location.to_s}\" type=\"2\">{nclass.comment}</pre><textarea id=\"fileContent\" class=\"edit\" cols=\"76\" rows=\"1\" style=\"display: none;\"></textarea><a id=\"cancelBtn\" style=\"display: none;\">Cancel</a><a id=\"commitBtn\" style=\"display: none;\">Commit</a><pre id=\"preSave\" class=\"text_label\" type=\"2\"></pre>")
 		process_generate_dot
-		close("section")
+		append("</section>")
 		# concerns
 		var sorted = new Array[MModule]
 		sorted.add_all(mclass.concerns.keys)
 		var sorterp = new ComparableSorter[MModule]
 		sorterp.sort(sorted)
-		open("section").add_class("concerns")
-		add("h2").add_class("section-header").text("Concerns")
-		open("ul")
+		append("<section class='concerns'>")
+		append("<h2 class='section-header'>Concerns</h2>")
+		append("<ul>")
 		for owner in sorted do
 			var nmodule = mbuilder.mmodule2nmodule[owner]
 			var childs = mclass.concerns[owner]
-			open("li")
-			add_html("<a href=\"#MOD_{owner.name}\">{owner.name}</a>: {nmodule.short_comment}")
+			append("<li>")
+			append("<a href=\"#MOD_{owner.name}\">{owner.name}</a>: {nmodule.short_comment}")
 			if not childs is null then
-				open("ul")
+				append("<ul>")
 				var sortedc = childs.to_a
 				var sorterpc = new ComparableSorter[MModule]
 				sorterpc.sort(sortedc)
 				for child in sortedc do
 					var nchild = mbuilder.mmodule2nmodule[child]
-					add_html("<li><a href=\"#MOD_{child.name}\">{child.name}</a>: {nchild.short_comment} </li>")
+					append("<li><a href=\"#MOD_{child.name}\">{child.name}</a>: {nchild.short_comment} </li>")
 				end
-				close("ul")
+				append("</ul>")
 			end
-			close("li")
+			append("</li>")
 		end
-		close("ul")
-		close("section")
+		append("</ul>")
+		append("</section>")
 		# properties
 		var sorterprop = new ComparableSorter[MProperty]
 		var sorterc = new ComparableSorter[MClass]
 		var lmmodule = new List[MModule]
 		# virtual and formal types
 		if mclass.virtual_types.length > 0 or mclass.arity > 0 then
-			open("section").add_class("types")
-			add("h2").text("Formal and Virtual Types")
+			append("<section class='types'>")
+			append("<h2>Formal and Virtual Types</h2>")
 			if mclass.virtual_types.length > 0 then for prop in mclass.virtual_types do description(prop)
 			#TODO this is incorrect
 			if mclass.arity > 0 and nclass isa AStdClassdef then
 				for prop in nclass.n_formaldefs do
-					open("article").attr("id", "FT_Object_{prop.collect_text}")
-					open("h3").add_class("signature").text("{prop.collect_text}: nullable ")
-					add_html("<a title=\"The root of the class hierarchy.\" href=\"Object.html\">Object</a>")
-					close("h3")
-					add_html("<div class=\"info\">formal generic type</div>")
-					close("article")
+					append("<article id='FT_Object_{prop.collect_text}'>")
+					append("<h3 class='signature'>{prop.collect_text}: nullable ")
+					append("<a title=\"The root of the class hierarchy.\" href=\"Object.html\">Object</a>")
+					append("</h3>")
+					append("<div class=\"info\">formal generic type</div>")
+					append("</article>")
 				end
 			end
-			close("section")
+			append("</section>")
 		end
 		# constructors
 		if mclass.constructors.length > 0 then
 			var sortedc = mclass.constructors.to_a
 			sorterprop.sort(sortedc)
-			open("section").add_class("constructors")
-			add("h2").add_class("section-header").text("Constructors")
+			append("<section class='constructors'>")
+			append("<h2 class='section-header'>Constructors</h2>")
 			for prop in sortedc do description(prop)
-			close("section")
+			append("</section>")
 		end
 		# methods
-		open("section").add_class("methods")
-		add("h2").add_class("section-header").text("Methods")
+		append("<section class='methods'>")
+		append("<h2 class='section-header'>Methods</h2>")
 		for mmodule, mmethods in mclass.all_methods do
 			var nmodule = mbuilder.mmodule2nmodule[mmodule]
-			add_html("<a id=\"MOD_{mmodule.name}\"></a>")
+			append("<a id=\"MOD_{mmodule.name}\"></a>")
 			if mmodule != mclass.intro_mmodule and mmodule != mclass.public_owner then
 				if mclass.has_mmodule(mmodule) then
-					add_html("<p class=\"concern-doc\">{mmodule.name}: {nmodule.short_comment}</p>")
+					append("<p class=\"concern-doc\">{mmodule.name}: {nmodule.short_comment}</p>")
 				else
-					add_html("<h3 class=\"concern-toplevel\">Methods refined in {mmodule.link(nmodule)}</h3><p class=\"concern-doc\">{mmodule.name}: {nmodule.short_comment}</p>")
+					append("<h3 class=\"concern-toplevel\">Methods refined in {mmodule.link(mbuilder)}</h3><p class=\"concern-doc\">{mmodule.name}: {nmodule.short_comment}</p>")
 				end
 			end
 			var sortedc = mmethods.to_a
@@ -941,22 +903,21 @@ class NitdocClass
 			var sortedc = new Array[MClass]
 			sortedc.add_all(mclass.inherited.keys)
 			sorterc.sort(sortedc)
-			add("h3").text("Inherited Methods")
+			append("<h3>Inherited Methods</h3>")
 			for imclass in sortedc do
 				var inclass = mbuilder.mclassdef2nclassdef[imclass.intro].as(AStdClassdef)
 				var sortedp = mclass.inherited[imclass].to_a
 				sorterprop.sort(sortedp)
-				open("p")
-				add_html("Defined in {imclass.link(inclass)}: ")
+				append("<p>Defined in {imclass.link(inclass)}: ")
 				for method in sortedp do
 					#TODO link to inherited propdef
-					add_html("<a href=\"\">{method.name}</a>")
-					if method != sortedp.last then add_html(", ")
+					append("<a href=\"\">{method.name}</a>")
+					if method != sortedp.last then append(", ")
 				end
-				close("p")
+				append("</p>")
 			end
 		end
-		close("section")
+		append("</section>")
 	end
 
 	fun description(prop: MProperty) do
@@ -977,41 +938,35 @@ class NitdocClass
 		else
 			classes.add("public")
 		end
-		open("article").add_classes(classes).attr("id", "{prop.anchor}")
+		append("<article class='{classes.join(" ")}' id='{prop.anchor}'>")
 		var sign = prop.name
-		open("h3").add_class("signature")
-		add_html("{prop.name}{nprop.signature}")
-		close("h3")
-		open("div").add_class("info")
-		add_html("{if prop.is_redef then "redef" else ""} fun {prop.intro_mclassdef.namespace(mclass)}::{prop.name}</div><div style=\"float: right;\"><a id=\"lblDiffCommit\"></a>")
-		close("div")
-		open("div").add_class("description")
+		append("<h3 class='signature'>{prop.name}{nprop.signature}</h3>")
+		append("<div class='info'>")
+		append("{if prop.is_redef then "redef" else ""} fun {prop.intro_mclassdef.namespace(mclass)}::{prop.name}</div><div style=\"float: right;\"><a id=\"lblDiffCommit\"></a>")
+		append("</div>")
+		append("<div class='description'>")
 		if nprop.comment == "" then
-			add_html("<a class=\"newComment\" title=\"32\" tag=\"\">New Comment</a>")
+			append("<a class=\"newComment\" title=\"32\" tag=\"\">New Comment</a>")
 		else
-			add_html("<pre class=\"text_label\" title=\"\" name=\"\" tag=\"\" type=\"1\">{nprop.comment}</pre>")
+			append("<pre class=\"text_label\" title=\"\" name=\"\" tag=\"\" type=\"1\">{nprop.comment}</pre>")
 		end
-		add_html("<textarea id=\"fileContent\" class=\"edit\" cols=\"76\" rows=\"1\" style=\"display: none;\"></textarea><a id=\"cancelBtn\" style=\"display: none;\">Cancel</a><a id=\"commitBtn\" style=\"display: none;\">Commit</a><pre id=\"preSave\" class=\"text_label\" type=\"2\"></pre>")
-		open("p")
+		append("<textarea id=\"fileContent\" class=\"edit\" cols=\"76\" rows=\"1\" style=\"display: none;\"></textarea><a id=\"cancelBtn\" style=\"display: none;\">Cancel</a><a id=\"commitBtn\" style=\"display: none;\">Commit</a><pre id=\"preSave\" class=\"text_label\" type=\"2\"></pre>")
+		append("<p>")
 		if prop.local_class != mclass then
 			var mredef = prop.local_class.intro_mmodule
-			var nredef = mbuilder.mmodule2nmodule[mredef]
-			add_html("inherited from {mredef.link(nredef)} ")
+			append("inherited from {mredef.link(mbuilder)} ")
 		end
 		#TODO display show code if doc github
 		var mintro = prop.intro_mclassdef.mmodule
-		var nintro = mbuilder.mmodule2nmodule[mintro]
-		add_html("defined by the module {mintro.link(nintro)}{if prop.apropdef is null then "" else show_source(prop.apropdef.location)}.")
+		append("defined by the module {mintro.link(mbuilder)}{if prop.apropdef is null then "" else show_source(prop.apropdef.location)}.")
 
 		for parent in mclass.parents do
 			var mparent = parent.intro_mmodule
-			var nparent = mbuilder.mmodule2nmodule[mparent]
-			if prop isa MMethod then if parent.constructors.has(prop) then add_html(" Previously defined by: {mparent.link(nparent)} for <a href=\"{parent.name}.html\">{parent.name}</a>.")
+			if prop isa MMethod then if parent.constructors.has(prop) then append(" Previously defined by: {mparent.link(mbuilder)} for <a href=\"{parent.name}.html\">{parent.name}</a>.")
 		end
-		close("p")
-		close("div")
-
-		close("article")
+		append("</p>")
+		append("</div>")
+		append("</article>")
 	end
 
 	fun process_generate_dot do
@@ -1069,7 +1024,7 @@ redef class AModule
 		for t in n_moduledecl.n_doc.n_comment do
 			ret.append(t.text.substring_from(1))
 		end
-		return ret.to_s
+		return ret.to_s.html_escape
 	end
 
 	private fun short_comment: String do
@@ -1077,7 +1032,7 @@ redef class AModule
 		if n_moduledecl != null and n_moduledecl.n_doc != null then
 			ret.append(n_moduledecl.n_doc.n_comment.first.text.substring_from(2).replace("\n", ""))
 		end
-		return ret.to_s
+		return ret.to_s.html_escape
 	end
 end
 
@@ -1109,22 +1064,40 @@ redef class MModule
 	end
 
 	# Return a link (html a tag) to the nitdoc module page
-	fun link(amodule: AModule): String do
-		return "<a href=\"{name}.html\" title=\"{amodule.short_comment}\">{name}</a>"
+	fun link(mbuilder: ModelBuilder): String do
+		return "<a href='{name}.html' title='{mbuilder.mmodule2nmodule[self].short_comment}'>{name}</a>"
+	end
+
+	# Return the module signature decorated with html
+	fun html_signature(mbuilder: ModelBuilder): String do
+		return "<span>module {html_namespace(mbuilder)}</span>"
 	end
 
 	# Return the module namespace decorated with html
-	fun namespace(mbuilder: ModelBuilder): String do
-		var str = new Buffer
+	fun html_namespace(mbuilder: ModelBuilder): String do
+		var res = new Buffer
+		res.append("<span>")
 		var mowner = public_owner
 		if mowner != null then
-			var nowner = mbuilder.mmodule2nmodule[mowner]
-			str.append(public_owner.link(nowner))
-			str.append("::")
+			res.append(public_owner.html_namespace(mbuilder))
+			res.append("::")
 		end
-		var nmodule = mbuilder.mmodule2nmodule[self]
-		str.append(self.link(nmodule))
-		return str.to_s
+		res.append(self.link(mbuilder))
+		res.append("</span>")
+		return res.to_s
+	end
+
+	# Return the full comment of the module decorated with html
+	fun html_full_comment(mbuilder: ModelBuilder): String do
+		var res = new Buffer
+		res.append("<div id='description'>")
+		res.append("<pre class='text_label'>{mbuilder.mmodule2nmodule[self].comment}</pre>")
+		res.append("<textarea class='edit' rows='1' cols='76' id='fileContent'></textarea>")
+		res.append("<a id='cancelBtn'>Cancel</a>")
+		res.append("<a id='commitBtn'>Commit</a>")
+		res.append("<pre class='text_label' id='preSave' type='2'></pre>")
+		res.append("</div>")
+		return res.to_s
 	end
 end
 redef class MPropDef
@@ -1134,7 +1107,7 @@ redef class MPropDef
 
 	# Return a link (html a tag) to the nitdoc class page
 	fun link(nprop: APropdef): String do
-		return "<a href=\"{mclassdef.mclass.name}.html#{mproperty.anchor}\" title=\"{nprop.short_comment}\">{mproperty}</a>"
+		return "<a href=\"{mclassdef.mclass.name}.html#{mproperty.anchor}\" title=\"{nprop.short_comment}\">{mproperty.name}</a>"
 	end
 end
 
@@ -1161,6 +1134,8 @@ redef class MProperty
 		return "PROP_{c_name}"
 	end
 
+	# Escape name for html output
+	redef fun name do return super.html_escape
 end
 
 redef class MClass
@@ -1169,7 +1144,7 @@ redef class MClass
 	redef fun <(other: OTHER): Bool do return self.name < other.name
 
 	# Add type parameters
-	redef fun to_s do
+	fun html_signature: String do
 		if arity > 0 then
 			return "{name}[{intro.parameter_names.join(", ")}]"
 		else
@@ -1179,7 +1154,7 @@ redef class MClass
 
 	# Return a link (html a tag) to the nitdoc class page
 	fun link(aclass: AStdClassdef): String do
-		return "<a href=\"{name}.html\" title=\"{aclass.short_comment}\">{self}</a>"
+		return "<a href='{name}.html' title=\"{aclass.short_comment}\">{html_signature}</a>"
 	end
 
 	# Associate all MMethods to each MModule concerns
@@ -1274,6 +1249,8 @@ redef class MClass
 		return "{name}.html"
 	end
 
+	# Escape name for html output
+	redef fun name do return super.html_escape
 end
 
 redef class AStdClassdef
@@ -1282,13 +1259,13 @@ redef class AStdClassdef
 		if n_doc != null then
 			for t in n_doc.n_comment do ret.append(t.text.substring_from(1))
 		end
-		return ret.to_s
+		return ret.to_s.html_escape
 	end
 
 	private fun short_comment: String do
 		var ret = new Buffer
 		if n_doc != null then ret.append(n_doc.n_comment.first.text.substring_from(2).replace("\n", ""))
-		return ret.to_s
+		return ret.to_s.html_escape
 	end
 end
 
@@ -1334,7 +1311,7 @@ redef class AAttrPropdef
 	redef fun short_comment do
 		var ret = new Buffer
 		if n_doc != null then ret.append(n_doc.n_comment.first.text.substring_from(1))
-		return ret.to_s
+		return ret.to_s.html_escape
 	end
 end
 
@@ -1342,7 +1319,7 @@ redef class AMethPropdef
 	redef fun short_comment do
 		var ret = new Buffer
 		if n_doc != null then ret.append(n_doc.n_comment.first.text.substring_from(2).replace("\n", ""))
-		return ret.to_s
+		return ret.to_s.html_escape
 	end
 
 	redef fun signature: String do
@@ -1356,7 +1333,7 @@ redef class AMethPropdef
 		if n_doc != null then
 			for t in n_doc.n_comment do ret.append(t.text.substring_from(1))
 		end
-		return ret.to_s
+		return ret.to_s.html_escape
 	end
 end
 
