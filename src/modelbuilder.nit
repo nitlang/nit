@@ -504,7 +504,7 @@ class ModelBuilder
 				var nfd = nclassdef.n_formaldefs[i]
 				var nfdt = nfd.n_type
 				if nfdt != null then
-					var bound = resolve_mtype_unchecked(nclassdef, nfdt)
+					var bound = resolve_mtype_unchecked(nclassdef, nfdt, false)
 					if bound == null then return # Forward error
 					if bound.need_anchor then
 						# No F-bounds!
@@ -548,7 +548,7 @@ class ModelBuilder
 			for nsc in nclassdef.n_superclasses do
 				specobject = false
 				var ntype = nsc.n_type
-				var mtype = resolve_mtype_unchecked(nclassdef, ntype)
+				var mtype = resolve_mtype_unchecked(nclassdef, ntype, false)
 				if mtype == null then continue # Skip because of error
 				if not mtype isa MClassType then
 					error(ntype, "Error: supertypes cannot be a formal type")
@@ -784,7 +784,7 @@ class ModelBuilder
 	# The mmodule used as context is `nclassdef.mmodule'
 	# In case of problem, an error is displayed on `ntype' and null is returned.
 	# FIXME: the name "resolve_mtype" is awful
-	fun resolve_mtype_unchecked(nclassdef: AClassdef, ntype: AType): nullable MType
+	fun resolve_mtype_unchecked(nclassdef: AClassdef, ntype: AType, with_virtual: Bool): nullable MType
 	do
 		var name = ntype.n_id.text
 		var mclassdef = nclassdef.mclassdef
@@ -792,7 +792,7 @@ class ModelBuilder
 		var res: MType
 
 		# Check virtual type
-		if mclassdef != null then
+		if mclassdef != null and with_virtual then
 			var prop = try_get_mproperty_by_name(ntype, mclassdef, name).as(nullable MVirtualTypeProp)
 			if prop != null then
 				if not ntype.n_types.is_empty then
@@ -843,7 +843,7 @@ class ModelBuilder
 			else
 				var mtypes = new Array[MType]
 				for nt in ntype.n_types do
-					var mt = resolve_mtype_unchecked(nclassdef, nt)
+					var mt = resolve_mtype_unchecked(nclassdef, nt, with_virtual)
 					if mt == null then return null # Forward error
 					mtypes.add(mt)
 				end
@@ -867,7 +867,7 @@ class ModelBuilder
 	fun resolve_mtype(nclassdef: AClassdef, ntype: AType): nullable MType
 	do
 		var mtype = ntype.mtype
-		if mtype == null then mtype = resolve_mtype_unchecked(nclassdef, ntype)
+		if mtype == null then mtype = resolve_mtype_unchecked(nclassdef, ntype, true)
 		if mtype == null then return null # Forward error
 
 		if ntype.checked_mtype then return mtype
