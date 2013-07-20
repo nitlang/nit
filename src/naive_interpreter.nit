@@ -752,18 +752,27 @@ redef class AInternMethPropdef
 				return v.int_instance(recv <=> args[1].val.as(Char))
 			end
 		else if cname == "Float" then
+			var recv = args[0].to_f
 			if pname == "unary -" then
-				return v.float_instance(-args[0].to_f)
+				return v.float_instance(-recv)
 			else if pname == "+" then
-				return v.float_instance(args[0].to_f + args[1].to_f)
+				return v.float_instance(recv + args[1].to_f)
 			else if pname == "-" then
-				return v.float_instance(args[0].to_f - args[1].to_f)
+				return v.float_instance(recv - args[1].to_f)
 			else if pname == "*" then
-				return v.float_instance(args[0].to_f * args[1].to_f)
+				return v.float_instance(recv * args[1].to_f)
 			else if pname == "/" then
-				return v.float_instance(args[0].to_f / args[1].to_f)
+				return v.float_instance(recv / args[1].to_f)
+			else if pname == "<" then
+				return v.bool_instance(recv < args[1].to_f)
+			else if pname == ">" then
+				return v.bool_instance(recv > args[1].to_f)
+			else if pname == "<=" then
+				return v.bool_instance(recv <= args[1].to_f)
+			else if pname == ">=" then
+				return v.bool_instance(recv >= args[1].to_f)
 			else if pname == "to_i" then
-				return v.int_instance(args[0].to_f.to_i)
+				return v.int_instance(recv.to_i)
 			end
 		else if cname == "NativeString" then
 			var recvval = args.first.val.as(Buffer)
@@ -914,6 +923,24 @@ redef class AExternMethPropdef
 				return v.float_instance(args[0].to_f.cos)
 			else if pname == "sin" then
 				return v.float_instance(args[0].to_f.sin)
+			else if pname == "tan" then
+				return v.float_instance(args[0].to_f.tan)
+			else if pname == "acos" then
+				return v.float_instance(args[0].to_f.acos)
+			else if pname == "asin" then
+				return v.float_instance(args[0].to_f.asin)
+			else if pname == "atan" then
+				return v.float_instance(args[0].to_f.atan)
+			else if pname == "sqrt" then
+				return v.float_instance(args[0].to_f.sqrt)
+			else if pname == "exp" then
+				return v.float_instance(args[0].to_f.exp)
+			else if pname == "log" then
+				return v.float_instance(args[0].to_f.log)
+			else if pname == "pow" then
+				return v.float_instance(args[0].to_f.pow(args[1].to_f))
+			else if pname == "rand" then
+				return v.float_instance(args[0].to_f.rand)
 			end
 		else if pname == "native_argc" then
 			return v.int_instance(v.arguments.length)
@@ -922,6 +949,9 @@ redef class AExternMethPropdef
 			return v.native_string_instance(txt)
 		else if pname == "get_time" then
 			return v.int_instance(get_time)
+		else if pname == "srand_from" then
+			srand_from(args[1].to_i)
+			return null
 		else if pname == "atan2" then
 			return v.float_instance(atan2(args[1].to_f, args[2].to_f))
 		else if pname == "pi" then

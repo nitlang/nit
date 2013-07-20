@@ -2,7 +2,6 @@ closure
 init_inherit
 init_linext
 inline
-test_math
 test_mem
 shoot_logic
 bench_
