@@ -19,8 +19,25 @@
 module generate_hierarchies
 
 import model
-
 private import metrics_base
+import frontend
+
+redef class ToolContext
+	var generate_hierarchies_phase: Phase = new GenerateHierarchyPhase(self, null)
+end
+
+private class GenerateHierarchyPhase
+	super Phase
+
+	redef fun process_mainmodule(mainmodule)
+	do
+		if not toolcontext.opt_generate_hyperdoc.value and not toolcontext.opt_all.value then return
+		var model = toolcontext.modelbuilder.model
+		generate_module_hierarchy(toolcontext, model)
+		generate_classdef_hierarchy(toolcontext, model)
+		generate_class_hierarchy(toolcontext, mainmodule)
+	end
+end
 
 # Create a dot file representing the module hierarchy of a model.
 # Importation relation is represented with arrow

@@ -19,6 +19,21 @@ module inheritance_metrics
 
 import model
 private import metrics_base
+import phase
+import frontend
+
+redef class ToolContext
+	var inheritance_metrics_phase = new InheritanceMetricsPhase(self, null)
+end
+
+private class InheritanceMetricsPhase
+	super Phase
+	redef fun process_mainmodule(mainmodule)
+	do
+		if not toolcontext.opt_inheritance.value and not toolcontext.opt_all.value then return
+		compute_inheritance_metrics(toolcontext, toolcontext.modelbuilder.model)
+	end
+end
 
 redef class Model
 	# Extract the subset of classes from a set of mclass

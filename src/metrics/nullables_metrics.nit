@@ -20,6 +20,20 @@ module nullables_metrics
 import modelbuilder
 private import typing
 private import metrics_base
+import frontend
+
+redef class ToolContext
+	var nullables_metrics_phase = new NullablesMetricsPhase(self, null)
+end
+
+private class NullablesMetricsPhase
+	super Phase
+	redef fun process_mainmodule(mainmodule)
+	do
+		if not toolcontext.opt_nullables.value and not toolcontext.opt_all.value then return
+		compute_nullables_metrics(toolcontext.modelbuilder)
+	end
+end
 
 private class NullableSends
 	super Visitor

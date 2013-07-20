@@ -19,6 +19,21 @@ module model_hyperdoc
 
 import model
 import metrics_base
+import phase
+import frontend
+
+redef class ToolContext
+	var model_hyperdoc_phase = new ModelHyperdocPhase(self, null)
+end
+
+private class ModelHyperdocPhase
+	super Phase
+	redef fun process_mainmodule(mainmodule)
+	do
+		if not toolcontext.opt_generate_hyperdoc.value and not toolcontext.opt_all.value then return
+		generate_model_hyperdoc(toolcontext, toolcontext.modelbuilder.model)
+	end
+end
 
 # Genetate a HTML file for the model.
 # The generated file contains the description of each entity of the model

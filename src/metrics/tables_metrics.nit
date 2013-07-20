@@ -19,6 +19,20 @@ module tables_metrics
 
 import model
 private import metrics_base
+import frontend
+
+redef class ToolContext
+	var tables_metrics_phase = new TablesMetricsPhase(self, null)
+end
+
+private class TablesMetricsPhase
+	super Phase
+	redef fun process_mainmodule(mainmodule)
+	do
+		if not toolcontext.opt_tables.value and not toolcontext.opt_all.value then return
+		compute_tables_metrics(mainmodule)
+	end
+end
 
 # Print class tables metrics for the classes of the program main
 fun compute_tables_metrics(main: MModule)

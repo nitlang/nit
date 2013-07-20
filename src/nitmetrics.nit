@@ -55,55 +55,7 @@ end
 
 print "*** METRICS ***"
 
+toolcontext.run_global_phases(mainmodule)
+
 # All metrics computation ?
 var all = toolcontext.opt_all.value
-
-# Inheritance usage metrics
-if all or toolcontext.opt_inheritance.value then
-	print ""
-	compute_inheritance_metrics(toolcontext, model)
-end
-
-# Refinement usage metrics
-if all or toolcontext.opt_refinement.value then
-	print ""
-	compute_refinement_metrics(model)
-end
-
-# Self usage metrics
-if all or toolcontext.opt_self.value then
-	print ""
-	compute_self_metrics(modelbuilder)
-end
-
-# Nullables metrics
-if all or toolcontext.opt_nullables.value then
-	print ""
-	compute_nullables_metrics(modelbuilder)
-end
-
-# Static types metrics
-if all or toolcontext.opt_static_types.value then
-	print ""
-	compute_static_types_metrics(modelbuilder)
-end
-
-# Tables metrics
-if all or toolcontext.opt_tables.value then
-	print ""
-	compute_tables_metrics(mainmodule)
-end
-
-# RTA metrics
-if all or toolcontext.opt_rta.value then
-	print ""
-	compute_rta_metrics(modelbuilder, mainmodule)
-end
-
-# Generate Hyperdoc
-if toolcontext.opt_generate_hyperdoc.value then
-	generate_module_hierarchy(toolcontext, model)
-	generate_classdef_hierarchy(toolcontext, model)
-	generate_class_hierarchy(toolcontext, mainmodule)
-	generate_model_hyperdoc(toolcontext, model)
-end

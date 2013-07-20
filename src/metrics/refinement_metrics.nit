@@ -19,6 +19,20 @@ module refinement_metrics
 
 import model
 private import metrics_base
+import frontend
+
+redef class ToolContext
+	var refinement_metrics_phase = new RefinementMetricsPhase(self, null)
+end
+
+private class RefinementMetricsPhase
+	super Phase
+	redef fun process_mainmodule(mainmodule)
+	do
+		if not toolcontext.opt_refinement.value and not toolcontext.opt_all.value then return
+		compute_refinement_metrics(toolcontext.modelbuilder.model)
+	end
+end
 
 # Print refinement usage metrics
 fun compute_refinement_metrics(model: Model)

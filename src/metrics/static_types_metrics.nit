@@ -20,6 +20,20 @@ module static_types_metrics
 private import metrics_base
 import modelbuilder
 import modelize_class
+import frontend
+
+redef class ToolContext
+	var static_types_metrics_phase = new StaticTypesMetricsPhase(self, null)
+end
+
+private class StaticTypesMetricsPhase
+	super Phase
+	redef fun process_mainmodule(mainmodule)
+	do
+		if not toolcontext.opt_static_types.value and not toolcontext.opt_all.value then return
+		compute_static_types_metrics(toolcontext.modelbuilder)
+	end
+end
 
 # The job of this visitor is to resolve all types found
 private class ATypeCounterVisitor

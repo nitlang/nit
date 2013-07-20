@@ -20,6 +20,20 @@ module rta_metrics
 import modelbuilder
 private import rapid_type_analysis
 private import metrics_base
+import frontend
+
+redef class ToolContext
+	var rta_metrics_phase = new RTAMetricsPhase(self, null)
+end
+
+private class RTAMetricsPhase
+	super Phase
+	redef fun process_mainmodule(mainmodule)
+	do
+		if not toolcontext.opt_rta.value and not toolcontext.opt_all.value then return
+		compute_rta_metrics(toolcontext.modelbuilder, mainmodule)
+	end
+end
 
 redef class RapidTypeAnalysis
 	redef fun add_type(mtype)

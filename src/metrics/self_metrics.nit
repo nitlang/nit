@@ -16,9 +16,22 @@
 
 # Metrics about the usage of explicit and implicit self
 module self_metrics
-
 import modelbuilder
 private import metrics_base
+import frontend
+
+redef class ToolContext
+	var self_metrics_phase = new SelfMetricsPhase(self, null)
+end
+
+private class SelfMetricsPhase
+	super Phase
+	redef fun process_mainmodule(mainmodule)
+	do
+		if not toolcontext.opt_self.value and not toolcontext.opt_all.value then return
+		compute_self_metrics(toolcontext.modelbuilder)
+	end
+end
 
 private class ASelfVisitor
 	super Visitor
