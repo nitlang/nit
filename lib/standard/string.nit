@@ -783,7 +783,7 @@ end
 redef class Float
 	# Pretty print self, print needed decimals up to a max of 6.
 	redef fun to_s do
-		var str = to_precision( 6 )
+		var str = to_precision( 3 )
 		var len = str.length
 		for i in [0..len-1] do
 			var j = len-1-i
@@ -800,7 +800,30 @@ redef class Float
 	end
 
 	# `self' representation with `nb' digits after the '.'.
-	fun to_precision(nb: Int): String import String::from_cstring `{
+	fun to_precision(nb: Int): String
+	do
+		if nb == 0 then return self.to_i.to_s
+		var f = self
+		for i in [0..nb[ do f = f * 10.0
+		if self > 0.0 then
+			f = f + 0.5
+		else
+			f = f - 0.5
+		end
+		var i = f.to_i
+		if i == 0 then return "0.0"
+		var s = i.to_s
+		var sl = s.length
+		if sl > nb then
+			var p1 = s.substring(0, s.length-nb)
+			var p2 = s.substring(s.length-nb, nb)
+			return p1 + "." + p2
+		else
+			return "0." + ("0"*(nb-sl)) + s
+		end
+	end
+
+	fun to_precision_native(nb: Int): String import String::from_cstring `{
 		int size;
 		char *str;
 
