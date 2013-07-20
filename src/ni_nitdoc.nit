@@ -684,13 +684,12 @@ class NitdocClass
 		var sorter = new ComparableSorter[MPropDef]
 		append("<nav class='properties filterable'>")
 		append("<h3>Properties</h3>")
-		# get properties
+		# get intro and redef properties
 		var vtypes = new HashSet[MVirtualTypeDef]
 		var consts = new HashSet[MMethodDef]
 		var meths = new HashSet[MMethodDef]
 		for mclassdef in mclass.mclassdefs do
 			for mpropdef in mclassdef.mpropdefs do
-				if not mbuilder.mpropdef2npropdef.has_key(mpropdef) then continue
 				if mpropdef.mproperty.visibility <= none_visibility then continue
 				if mpropdef isa MVirtualTypeDef then vtypes.add(mpropdef)
 				if mpropdef isa MMethodDef then
@@ -702,9 +701,9 @@ class NitdocClass
 				end
 			end
 		end
+		# get inherited properties
 		for mprop in mclass.inherited_methods do
 			var mpropdef = mprop.intro
-			if not mbuilder.mpropdef2npropdef.has_key(mpropdef) then continue
 			if mprop.visibility <= none_visibility then continue
 			if mprop.intro_mclassdef.mclass.name == "Object" then continue
 			meths.add(mpropdef)
@@ -715,42 +714,37 @@ class NitdocClass
 			vts.add_all(vtypes)
 			sorter.sort(vts)
 			append("<h4>Virtual Types</h4>")
-			display_mpropdef_list(vts)
+			append("<ul>")
+			for mprop in vts do
+				append(mprop.html_sidebar_item(self))
+			end
+			append("</ul>")
 		end
+		# constructors
 		if consts.length > 0 then
 			var cts = new Array[MMethodDef]
 			cts.add_all(consts)
 			sorter.sort(cts)
 			append("<h4>Constructors</h4>")
-			display_mpropdef_list(cts)
+			append("<ul>")
+			for mprop in cts do
+				append(mprop.html_sidebar_item(self))
+			end
+			append("</ul>")
 		end
+		# methods
 		if meths.length > 0 then
 			var mts = new Array[MMethodDef]
 			mts.add_all(meths)
 			sorter.sort(mts)
 			append("<h4>Methods</h4>")
-			display_mpropdef_list(mts)
+			append("<ul>")
+			for mprop in mts do
+				append(mprop.html_sidebar_item(self))
+			end
+			append("</ul>")
 		end
 		append("</nav>")
-	end
-
-	private fun display_mpropdef_list(list: Array[MPropDef]) do
-		append("<ul>")
-		for prop in list do
-			if prop.is_intro and prop.mproperty.intro_mclassdef.mclass != mclass then
-				append("<li class='inherit'>")
-				append("<span title='Inherited'>H</span>")
-			else if prop.is_intro then
-				append("<li class='intro'>")
-				append("<span title='Introduced'>I</span>")
-			else
-				append("<li class='redef'>")
-				append("<span title='Redefined'>R</span>")
-			end
-			append(prop.link(mbuilder))
-			append("</li>")
-		end
-		append("</ul>")
 	end
 
 	fun inheritance_column do
@@ -1115,6 +1109,24 @@ redef class MPropDef
 			res.append("<span title='redefinition'>R</span>&nbsp;{link(mbuilder)} ({mclassdef.mclass.name})")
 			res.append("</li>")
 		end
+		return res.to_s
+	end
+
+	# Return a list item for the mpropdef
+	fun html_sidebar_item(page: NitdocClass): String do
+		var res = new Buffer
+		if is_intro and mclassdef.mclass == page.mclass then
+			res.append("<li class='intro'>")
+			res.append("<span title='Introduced'>I</span>")
+		else if is_intro and mclassdef.mclass != page.mclass then
+			res.append("<li class='inherit'>")
+			res.append("<span title='Inherited'>H</span>")
+		else
+			res.append("<li class='redef'>")
+			res.append("<span title='Redefined'>R</span>")
+		end
+		res.append(link(page.mbuilder))
+		res.append("</li>")
 		return res.to_s
 	end
 end
