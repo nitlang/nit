@@ -107,7 +107,7 @@ redef class ModelBuilder
 
 		var outname = self.toolcontext.opt_output.value
 		if outname == null then
-			outname = "{mainmodule.name}.bin"
+			outname = "{mainmodule.name}"
 		end
 
 		var hfilename = compiler.header.file.name + ".h"
