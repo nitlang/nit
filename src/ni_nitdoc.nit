@@ -106,7 +106,7 @@ class Nitdoc
 			self.dot_dir = null
 			if not opt_nodot.value then self.dot_dir = output_dir.to_s
 			overview
-			#fullindex
+			fullindex
 			modules
 			classes
 			#quicksearch_list
@@ -119,7 +119,7 @@ class Nitdoc
 	end
 
 	fun fullindex do
-		var fullindex = new NitdocFullindex(model.mmodules)
+		var fullindex = new NitdocFullindex(self)
 		fullindex.save("{output_dir.to_s}/full-index.html")
 	end
 
@@ -375,10 +375,10 @@ end
 class NitdocFullindex
 	super NitdocPage
 
-	private var mmodules: Array[MModule]
+	private var nitdoc: Nitdoc
 
-	init(mmodules: Array[MModule]) do
-		self.mmodules = mmodules
+	init(nitdoc: Nitdoc) do
+		self.nitdoc = nitdoc
 		self.dot_dir = null
 	end
 
@@ -403,18 +403,17 @@ class NitdocFullindex
 
 	# Add to content modules column
 	fun module_column do
-		var ls = new List[nullable MModule]
-		var sorted = mmodules
-		var sorterp = new ComparableSorter[MModule]
-		sorterp.sort(sorted)
-		append("<article class='modules filterable'></article>")
+		var sorter = new ComparableSorter[MModule]
+		var sorted = new Array[MModule]
+		for mmodule in nitdoc.modelbuilder.model.mmodule_importation_hierarchy do
+			sorted.add(mmodule)
+		end
+		sorter.sort(sorted)
+		append("<article class='modules filterable'>")
 		append("<h2>Modules</h2>")
 		append("<ul>")
 		for mmodule in sorted do
-			if mmodule.public_owner != null and not ls.has(mmodule.public_owner) then
-				ls.add(mmodule.public_owner)
-				append("<li><a href='{mmodule.public_owner.name}.html'>(mmodule.public_owner.name)</a></li>")
-			end
+			append("<li>{mmodule.link(nitdoc.modelbuilder)}</li>")
 		end
 		append("</ul>")
 		append("</article>")
@@ -422,14 +421,14 @@ class NitdocFullindex
 
 	# Add to content classes modules
 	fun classes_column do
-		var sorted = mmodules.first.imported_mclasses.to_a
-		var sorterp = new ComparableSorter[MClass]
-		sorterp.sort(sorted)
-		append("<article class='classes filterable'>")
+		var sorted = nitdoc.modelbuilder.model.mclasses
+		var sorter = new ComparableSorter[MClass]
+		sorter.sort(sorted)
+		append("<article class='modules filterable'>")
 		append("<h2>Classes</h2>")
 		append("<ul>")
 		for mclass in sorted do
-			append("<li><a href='{mclass}.html'>(mclass.name)</a></li>")
+			append("<li>{mclass.link(nitdoc.modelbuilder)}</li>")
 		end
 		append("</ul>")
 		append("</article>")
@@ -437,29 +436,15 @@ class NitdocFullindex
 
 	# Insert the properties column of fullindex page
 	fun properties_column do
-		append("<article class='classes filterable'>")
+		var sorted = nitdoc.modelbuilder.model.mproperties
+		var sorter = new ComparableSorter[MProperty]
+		sorter.sort(sorted)
+		append("<article class='modules filterable'>")
 		append("<h2>Properties</h2>")
 		append("<ul>")
-		var sorted_imported = mmodules.first.imported_methods.to_a
-		var sorted_redef = mmodules.first.redef_methods.to_a
-		var sorterp = new ComparableSorter[MProperty]
-		sorterp.sort(sorted_imported)
-		sorterp.sort(sorted_redef)
-
-		for method in sorted_imported do
-			if method.visibility is none_visibility or method.visibility is intrude_visibility then continue
-			append("<li class='intro'</li>")
-			append("<span title='introduction'>I</span>&nbsp;")
-			append("<a href='{method.intro_mclassdef.mclass.name}.html' title=''>{method.name} ({method.intro_mclassdef.mclass.name})</a>")
-			append("</li>")
-		end
-
-		for method in sorted_redef do
-			if method.visibility is none_visibility or method.visibility is intrude_visibility then continue
-			append("<li class='redef'>")
-			append("<span title='redefinition'>R</span>&nbsp;")
-			append("<a href='{method.intro_mclassdef.mclass.name}.html' title=''>{method.name} ({method.intro_mclassdef.mclass.name})</span>")
-			append("</li>")
+		for mproperty in sorted do
+			if mproperty isa MAttribute then continue
+			append("<li>{mproperty.intro.link(nitdoc.modelbuilder)} ({mproperty.intro.mclassdef.mclass.link(nitdoc.modelbuilder)})</li>")
 		end
 		append("</ul>")
 		append("</article>")
@@ -1212,11 +1197,11 @@ redef class MPropDef
 		var res = new Buffer
 		if is_intro then
 			res.append("<li class='intro'>")
-			res.append("<span title='introduction'>I</span>&nbsp;{link(mbuilder)} ({mclassdef.mclass.name})")
+			res.append("<span title='introduction'>I</span>&nbsp;{link(mbuilder)} ({mclassdef.mclass.link(mbuilder)})")
 			res.append("</li>")
 		else
 			res.append("<li class='redef'>")
-			res.append("<span title='redefinition'>R</span>&nbsp;{link(mbuilder)} ({mclassdef.mclass.name})")
+			res.append("<span title='redefinition'>R</span>&nbsp;{link(mbuilder)} ({mclassdef.mclass.link(mbuilder)})")
 			res.append("</li>")
 		end
 		return res.to_s
