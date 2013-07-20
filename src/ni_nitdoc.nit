@@ -1007,25 +1007,9 @@ class NitdocClass
 	end
 end
 
-redef class AModule
-	private fun comment: String do
-		var ret = new Buffer
-		if n_moduledecl is null or n_moduledecl.n_doc is null then ret
-		if n_moduledecl.n_doc is null then return ""
-		for t in n_moduledecl.n_doc.n_comment do
-			ret.append(t.text.substring_from(1))
-		end
-		return ret.to_s.html_escape
-	end
-
-	private fun short_comment: String do
-		var ret = new Buffer
-		if n_moduledecl != null and n_moduledecl.n_doc != null then
-			ret.append(n_moduledecl.n_doc.n_comment.first.text.substring_from(2).replace("\n", ""))
-		end
-		return ret.to_s.html_escape
-	end
-end
+#
+# Model redefs
+#
 
 redef class MModule
 	super Comparable
@@ -1090,81 +1074,6 @@ redef class MModule
 		res.append("</div>")
 		return res.to_s
 	end
-end
-redef class MPropDef
-	super Comparable
-	redef type OTHER: MPropDef
-	redef fun <(other: OTHER): Bool do return self.mproperty.name < other.mproperty.name
-
-	# Return a link (html a tag) to the nitdoc class page
-	fun link(mbuilder: ModelBuilder): String do
-		if mbuilder.mpropdef2npropdef.has_key(self) then
-			var nprop = mbuilder.mpropdef2npropdef[self]
-			return "<a href=\"{mclassdef.mclass.name}.html#{mproperty.anchor}\" title=\"{nprop.short_comment}\">{mproperty.name}</a>"
-		else
-			return "<a href=\"{mclassdef.mclass.name}.html#{mproperty.anchor}\">{mproperty.name}</a>"
-		end
-	end
-
-	# Return a list item for the mpropdef
-	fun html_list_item(mbuilder: ModelBuilder): String do
-		var res = new Buffer
-		if is_intro then
-			res.append("<li class='intro'>")
-			res.append("<span title='introduction'>I</span>&nbsp;{link(mbuilder)} ({mclassdef.mclass.name})")
-			res.append("</li>")
-		else
-			res.append("<li class='redef'>")
-			res.append("<span title='redefinition'>R</span>&nbsp;{link(mbuilder)} ({mclassdef.mclass.name})")
-			res.append("</li>")
-		end
-		return res.to_s
-	end
-
-	# Return a list item for the mpropdef
-	fun html_sidebar_item(page: NitdocClass): String do
-		var res = new Buffer
-		if is_intro and mclassdef.mclass == page.mclass then
-			res.append("<li class='intro'>")
-			res.append("<span title='Introduced'>I</span>")
-		else if is_intro and mclassdef.mclass != page.mclass then
-			res.append("<li class='inherit'>")
-			res.append("<span title='Inherited'>H</span>")
-		else
-			res.append("<li class='redef'>")
-			res.append("<span title='Redefined'>R</span>")
-		end
-		res.append(link(page.mbuilder))
-		res.append("</li>")
-		return res.to_s
-	end
-end
-
-redef class MProperty
-	super Comparable
-	redef type OTHER: MProperty
-	redef fun <(other: OTHER): Bool do return self.name < other.name
-
-	var is_redef: Bool
-	var apropdef: nullable APropdef
-
-	redef init(intro_mclassdef: MClassDef, name: String, visibility: MVisibility)
-	do
-		super
-		is_redef = false
-	end
-
-	fun local_class: MClass do
-		var classdef = self.intro_mclassdef
-		return classdef.mclass
-	end
-
-	fun anchor: String do
-		return "PROP_{c_name}"
-	end
-
-	# Escape name for html output
-	redef fun name do return super.html_escape
 end
 
 redef class MClass
@@ -1291,18 +1200,127 @@ redef class MClass
 	redef fun name do return super.html_escape
 end
 
-redef class AStdClassdef
+redef class MProperty
+	super Comparable
+	redef type OTHER: MProperty
+	redef fun <(other: OTHER): Bool do return self.name < other.name
+
+	var is_redef: Bool
+	var apropdef: nullable APropdef
+
+	redef init(intro_mclassdef: MClassDef, name: String, visibility: MVisibility)
+	do
+		super
+		is_redef = false
+	end
+
+	fun local_class: MClass do
+		var classdef = self.intro_mclassdef
+		return classdef.mclass
+	end
+
+	fun anchor: String do
+		return "PROP_{c_name}"
+	end
+
+	# Escape name for html output
+	redef fun name do return super.html_escape
+end
+
+redef class MType
+	fun link(mbuilder: ModelBuilder): String is abstract
+end
+
+redef class MClassType
+	redef fun link(mbuilder) do return mclass.link(mbuilder)
+end
+
+redef class MNullableType
+	redef fun link(mbuilder) do return "nullable {mtype.link(mbuilder)}"
+end
+
+redef class MClassDef
+	private fun namespace(mclass: MClass): String do
+
+		if mmodule.public_owner is null then
+			return "{mmodule.full_name}::{mclass.name}"
+		else if mclass is self.mclass then
+			return "{mmodule.public_owner.name}::{mclass.name}"
+		else
+			return "{mmodule.public_owner.name}::<a href=\"{mclass.name}.html\">{mclass.name}</a>"
+		end
+	end
+end
+
+redef class MPropDef
+	super Comparable
+	redef type OTHER: MPropDef
+	redef fun <(other: OTHER): Bool do return self.mproperty.name < other.mproperty.name
+
+	# Return a link (html a tag) to the nitdoc class page
+	fun link(mbuilder: ModelBuilder): String do
+		if mbuilder.mpropdef2npropdef.has_key(self) then
+			var nprop = mbuilder.mpropdef2npropdef[self]
+			return "<a href=\"{mclassdef.mclass.name}.html#{mproperty.anchor}\" title=\"{nprop.short_comment}\">{mproperty.name}</a>"
+		else
+			return "<a href=\"{mclassdef.mclass.name}.html#{mproperty.anchor}\">{mproperty.name}</a>"
+		end
+	end
+
+	# Return a list item for the mpropdef
+	fun html_list_item(mbuilder: ModelBuilder): String do
+		var res = new Buffer
+		if is_intro then
+			res.append("<li class='intro'>")
+			res.append("<span title='introduction'>I</span>&nbsp;{link(mbuilder)} ({mclassdef.mclass.name})")
+			res.append("</li>")
+		else
+			res.append("<li class='redef'>")
+			res.append("<span title='redefinition'>R</span>&nbsp;{link(mbuilder)} ({mclassdef.mclass.name})")
+			res.append("</li>")
+		end
+		return res.to_s
+	end
+
+	# Return a list item for the mpropdef
+	fun html_sidebar_item(page: NitdocClass): String do
+		var res = new Buffer
+		if is_intro and mclassdef.mclass == page.mclass then
+			res.append("<li class='intro'>")
+			res.append("<span title='Introduced'>I</span>")
+		else if is_intro and mclassdef.mclass != page.mclass then
+			res.append("<li class='inherit'>")
+			res.append("<span title='Inherited'>H</span>")
+		else
+			res.append("<li class='redef'>")
+			res.append("<span title='Redefined'>R</span>")
+		end
+		res.append(link(page.mbuilder))
+		res.append("</li>")
+		return res.to_s
+	end
+end
+
+#
+# Nodes redefs
+#
+
+redef class AModule
 	private fun comment: String do
 		var ret = new Buffer
-		if n_doc != null then
-			for t in n_doc.n_comment do ret.append(t.text.substring_from(1))
+		if n_moduledecl is null or n_moduledecl.n_doc is null then ret
+		if n_moduledecl.n_doc is null then return ""
+		for t in n_moduledecl.n_doc.n_comment do
+			ret.append(t.text.substring_from(1))
 		end
 		return ret.to_s.html_escape
 	end
 
 	private fun short_comment: String do
 		var ret = new Buffer
-		if n_doc != null then ret.append(n_doc.n_comment.first.text.substring_from(2).replace("\n", ""))
+		if n_moduledecl != null and n_moduledecl.n_doc != null then
+			ret.append(n_moduledecl.n_doc.n_comment.first.text.substring_from(2).replace("\n", ""))
+		end
 		return ret.to_s.html_escape
 	end
 end
@@ -1330,18 +1348,6 @@ redef class AParam
 	end
 end
 
-redef class MType
-	fun link(mbuilder: ModelBuilder): String is abstract
-end
-
-redef class MClassType
-	redef fun link(mbuilder) do return mclass.link(mbuilder)
-end
-
-redef class MNullableType
-	redef fun link(mbuilder) do return "nullable {mtype.link(mbuilder)}"
-end
-
 redef class AType
 	fun link: String do
 		var ret = "<a href=\"{n_id.text}.html\">{n_id.text}</a>"
@@ -1351,6 +1357,22 @@ redef class AType
 	end
 
 	fun name: String do return n_id.text.html_escape
+end
+
+redef class AStdClassdef
+	private fun comment: String do
+		var ret = new Buffer
+		if n_doc != null then
+			for t in n_doc.n_comment do ret.append(t.text.substring_from(1))
+		end
+		return ret.to_s.html_escape
+	end
+
+	private fun short_comment: String do
+		var ret = new Buffer
+		if n_doc != null then ret.append(n_doc.n_comment.first.text.substring_from(2).replace("\n", ""))
+		return ret.to_s.html_escape
+	end
 end
 
 redef class APropdef
@@ -1386,25 +1408,6 @@ redef class AMethPropdef
 			for t in n_doc.n_comment do ret.append(t.text.substring_from(1))
 		end
 		return ret.to_s.html_escape
-	end
-end
-
-redef class MClassDef
-	private fun namespace(mclass: MClass): String do
-
-		if mmodule.public_owner is null then
-			return "{mmodule.full_name}::{mclass.name}"
-		else if mclass is self.mclass then
-			return "{mmodule.public_owner.name}::{mclass.name}"
-		else
-			return "{mmodule.public_owner.name}::<a href=\"{mclass.name}.html\">{mclass.name}</a>"
-		end
-	end
-end
-
-redef class Set[E]
-	fun last: E do
-		return to_a[length-1]
 	end
 end
 
