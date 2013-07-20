@@ -125,6 +125,17 @@ redef class MClass
 		return res
 	end
 
+	# Get the set of properties introduced in 'self'.
+	fun intro_mproperties: Set[MProperty] do
+		var res = new HashSet[MProperty]
+		for mclassdef in mclassdefs do
+			for mpropdef in mclassdef.mpropdefs do
+				if mpropdef.is_intro then res.add(mpropdef.mproperty)
+			end
+		end
+		return res
+	end
+
 	# Get the list of locally refined methods in 'self'.
 	fun redef_methods: Set[MMethod] do
 		var res = new HashSet[MMethod]
@@ -138,12 +149,34 @@ redef class MClass
 		return res
 	end
 
+	# Get the set of locally refined properties in 'self'.
+	fun redef_mproperties: Set[MProperty] do
+		var res = new HashSet[MProperty]
+		for mclassdef in mclassdefs do
+			for mpropdef in mclassdef.mpropdefs do
+				if not mpropdef.is_intro then res.add(mpropdef.mproperty)
+			end
+		end
+		return res
+	end
+
 	# Get the list of methods inherited by 'self'.
 	fun inherited_methods: Set[MMethod] do
 		var res = new HashSet[MMethod]
 		for s in ancestors do
 			for m in s.intro_methods do
 				if not self.intro_methods.has(m) and not self.redef_methods.has(m) then res.add(m)
+			end
+		end
+		return res
+	end
+
+	# Get the set of all properties inherited by self
+	fun inherited_mproperties: Set[MProperty] do
+		var res = new HashSet[MProperty]
+		for s in ancestors do
+			for m in s.intro_mproperties do
+				if not self.intro_mproperties.has(m) and not self.redef_mproperties.has(m) then res.add(m)
 			end
 		end
 		return res

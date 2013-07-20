@@ -639,6 +639,10 @@ class NitdocClass
 	private var mclass: MClass
 	private var mbuilder: ModelBuilder
 	private var nitdoc: Nitdoc
+	private var vtypes = new HashSet[MVirtualTypeDef]
+	private var consts = new HashSet[MMethodDef]
+	private var meths = new HashSet[MMethodDef]
+	private var inherited = new HashSet[MPropDef]
 
 	init(mclass: MClass, nitdoc: Nitdoc, dot_dir: nullable String, source: nullable String) do
 		self.mclass = mclass
@@ -646,6 +650,35 @@ class NitdocClass
 		self.nitdoc = nitdoc
 		self.dot_dir = dot_dir
 		self.source = source
+		# load properties
+		for mclassdef in mclass.mclassdefs do
+			for mpropdef in mclassdef.mpropdefs do
+				if mpropdef.mproperty.visibility <= none_visibility then continue
+				if mpropdef isa MVirtualTypeDef then vtypes.add(mpropdef)
+				if mpropdef isa MMethodDef then
+					if mpropdef.mproperty.is_init then
+						consts.add(mpropdef)
+					else
+						meths.add(mpropdef)
+					end
+				end
+			end
+		end
+		# get inherited properties
+		for mprop in mclass.inherited_mproperties do
+			var mpropdef = mprop.intro
+			if mprop.visibility <= none_visibility then continue
+			if mprop.intro_mclassdef.mclass.name == "Object" then continue
+			if mpropdef isa MVirtualTypeDef then vtypes.add(mpropdef)
+			if mpropdef isa MMethodDef then
+				if mpropdef.mproperty.is_init then
+					consts.add(mpropdef)
+				else
+					meths.add(mpropdef)
+				end
+			end
+			inherited.add(mpropdef)
+		end
 	end
 
 	redef fun head do
@@ -684,30 +717,6 @@ class NitdocClass
 		var sorter = new ComparableSorter[MPropDef]
 		append("<nav class='properties filterable'>")
 		append("<h3>Properties</h3>")
-		# get intro and redef properties
-		var vtypes = new HashSet[MVirtualTypeDef]
-		var consts = new HashSet[MMethodDef]
-		var meths = new HashSet[MMethodDef]
-		for mclassdef in mclass.mclassdefs do
-			for mpropdef in mclassdef.mpropdefs do
-				if mpropdef.mproperty.visibility <= none_visibility then continue
-				if mpropdef isa MVirtualTypeDef then vtypes.add(mpropdef)
-				if mpropdef isa MMethodDef then
-					if mpropdef.mproperty.is_init then
-						consts.add(mpropdef)
-					else
-						meths.add(mpropdef)
-					end
-				end
-			end
-		end
-		# get inherited properties
-		for mprop in mclass.inherited_methods do
-			var mpropdef = mprop.intro
-			if mprop.visibility <= none_visibility then continue
-			if mprop.intro_mclassdef.mclass.name == "Object" then continue
-			meths.add(mpropdef)
-		end
 		# virtual types
 		if vtypes.length > 0 then
 			var vts = new Array[MVirtualTypeDef]
