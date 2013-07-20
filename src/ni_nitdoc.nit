@@ -569,6 +569,7 @@ class NitdocModule
 		append("</ul>")
 	end
 
+	# display the class column
 	fun classes do
 		var amodule = mbuilder.mmodule2nmodule[mmodule]
 		var intro_mclasses = mmodule.intro_mclasses
@@ -605,7 +606,9 @@ class NitdocModule
 		append("</div>")
 	end
 
+	# display the property column
 	fun properties do
+		# get properties
 		var amodule = mbuilder.mmodule2nmodule[mmodule]
 		var mpropdefs = new HashSet[MPropDef]
 		for m in mmodule.in_nesting.greaters do
@@ -615,23 +618,14 @@ class NitdocModule
 		var sorted = mpropdefs.to_a
 		var sorter = new ComparableSorter[MPropDef]
 		sorter.sort(sorted)
+		# display properties in one column
 		append("<article class='properties filterable'>")
 		append("<h2>Properties</h2>")
 		append("<ul>")
-		for p in sorted do
-			if p isa MAttributeDef then continue
-			if p.mproperty.visibility <= none_visibility then continue
-			if not mbuilder.mpropdef2npropdef.has_key(p) then continue
-			var nprop = mbuilder.mpropdef2npropdef[p]
-			if p.is_intro then
-				append("<li class='intro'>")
-				append("<span title='introduction'>I</span>&nbsp;{p.link(nprop)} ({p.mclassdef.mclass.name})")
-				append("</li>")
-			else
-				append("<li class='redef'>")
-				append("<span title='redefinition'>R</span>&nbsp;{p.link(nprop)} ({p.mclassdef.mclass.name})")
-				append("</li>")
-			end
+		for mprop in sorted do
+			if mprop isa MAttributeDef then continue
+			if mprop.mproperty.visibility <= none_visibility then continue
+			append(mprop.html_list_item(mbuilder))
 		end
 		append("</ul>")
 		append("</article>")
@@ -743,7 +737,6 @@ class NitdocClass
 	private fun display_mpropdef_list(list: Array[MPropDef]) do
 		append("<ul>")
 		for prop in list do
-			var nprop = mbuilder.mpropdef2npropdef[prop]
 			if prop.is_intro and prop.mproperty.intro_mclassdef.mclass != mclass then
 				append("<li class='inherit'>")
 				append("<span title='Inherited'>H</span>")
@@ -754,7 +747,7 @@ class NitdocClass
 				append("<li class='redef'>")
 				append("<span title='Redefined'>R</span>")
 			end
-			append(prop.link(nprop))
+			append(prop.link(mbuilder))
 			append("</li>")
 		end
 		append("</ul>")
@@ -1101,8 +1094,28 @@ redef class MPropDef
 	redef fun <(other: OTHER): Bool do return self.mproperty.name < other.mproperty.name
 
 	# Return a link (html a tag) to the nitdoc class page
-	fun link(nprop: APropdef): String do
-		return "<a href=\"{mclassdef.mclass.name}.html#{mproperty.anchor}\" title=\"{nprop.short_comment}\">{mproperty.name}</a>"
+	fun link(mbuilder: ModelBuilder): String do
+		if mbuilder.mpropdef2npropdef.has_key(self) then
+			var nprop = mbuilder.mpropdef2npropdef[self]
+			return "<a href=\"{mclassdef.mclass.name}.html#{mproperty.anchor}\" title=\"{nprop.short_comment}\">{mproperty.name}</a>"
+		else
+			return "<a href=\"{mclassdef.mclass.name}.html#{mproperty.anchor}\">{mproperty.name}</a>"
+		end
+	end
+
+	# Return a list item for the mpropdef
+	fun html_list_item(mbuilder: ModelBuilder): String do
+		var res = new Buffer
+		if is_intro then
+			res.append("<li class='intro'>")
+			res.append("<span title='introduction'>I</span>&nbsp;{link(mbuilder)} ({mclassdef.mclass.name})")
+			res.append("</li>")
+		else
+			res.append("<li class='redef'>")
+			res.append("<span title='redefinition'>R</span>&nbsp;{link(mbuilder)} ({mclassdef.mclass.name})")
+			res.append("</li>")
+		end
+		return res.to_s
 	end
 end
 
