@@ -450,7 +450,7 @@ class NitdocFullindex
 			if method.visibility is none_visibility or method.visibility is intrude_visibility then continue
 			append("<li class='intro'</li>")
 			append("<span title='introduction'>I</span>&nbsp;")
-			append("<a href='{method.local_class.name}.html' title=''>{method.name} ({method.local_class.name})</a>")
+			append("<a href='{method.intro_mclassdef.mclass.name}.html' title=''>{method.name} ({method.intro_mclassdef.mclass.name})</a>")
 			append("</li>")
 		end
 
@@ -458,7 +458,7 @@ class NitdocFullindex
 			if method.visibility is none_visibility or method.visibility is intrude_visibility then continue
 			append("<li class='redef'>")
 			append("<span title='redefinition'>R</span>&nbsp;")
-			append("<a href='{method.local_class.name}.html' title=''>{method.name} ({method.local_class.name})</span>")
+			append("<a href='{method.intro_mclassdef.mclass.name}.html' title=''>{method.name} ({method.intro_mclassdef.mclass.name})</span>")
 			append("</li>")
 		end
 		append("</ul>")
@@ -668,7 +668,6 @@ class NitdocClass
 		for mprop in mclass.inherited_mproperties do
 			var mpropdef = mprop.intro
 			if mprop.visibility <= none_visibility then continue
-			if mprop.intro_mclassdef.mclass.name == "Object" then continue
 			if mpropdef isa MVirtualTypeDef then vtypes.add(mpropdef)
 			if mpropdef isa MMethodDef then
 				if mpropdef.mproperty.is_init then
@@ -749,6 +748,7 @@ class NitdocClass
 			append("<h4>Methods</h4>")
 			append("<ul>")
 			for mprop in mts do
+				if mprop.mproperty.intro_mclassdef.mclass.name == "Object" then continue
 				append(mprop.html_sidebar_item(self))
 			end
 			append("</ul>")
@@ -804,11 +804,8 @@ class NitdocClass
 	fun class_doc do
 		# title
 		append("<h1>{mclass.html_signature}</h1>")
-		append("<div class='subtitle'>")
-		var subtitle = ""
-		if mclass.visibility is none_visibility then subtitle += "private "
-		subtitle += "{mclass.kind} {mclass.public_owner.html_namespace(mbuilder)}::{mclass}"
-		append(subtitle)
+		append("<div class='subtitle info'>{mclass.html_full_signature(mbuilder)}")
+
 		append("</div>")
 		# comment
 		var nclass = mbuilder.mclassdef2nclassdef[mclass.intro]
@@ -818,26 +815,47 @@ class NitdocClass
 		process_generate_dot
 		append("</section>")
 		# concerns
+		var concern2meths = new ArrayMap[MModule, Array[MMethodDef]]
+		var sorted_meths = new Array[MMethodDef]
 		var sorted = new Array[MModule]
-		sorted.add_all(mclass.concerns.keys)
-		var sorterp = new ComparableSorter[MModule]
-		sorterp.sort(sorted)
+		sorted_meths.add_all(meths)
+		nitdoc.mainmodule.linearize_mpropdefs(sorted_meths)
+		for meth in meths do
+			if inherited.has(meth) then continue
+			var mmodule = meth.mclassdef.mmodule
+			if not concern2meths.has_key(mmodule) then
+				sorted.add(mmodule)
+				concern2meths[mmodule] = new Array[MMethodDef]
+			end
+			concern2meths[mmodule].add(meth)
+		end
+		var sections = new ArrayMap[MModule, Array[MModule]]
+		for mmodule in concern2meths.keys do
+			var owner = mmodule.public_owner
+			if owner == null then owner = mmodule
+			if not sections.has_key(owner) then sections[owner] = new Array[MModule]
+			if owner != mmodule then sections[owner].add(mmodule)
+		end
 		append("<section class='concerns'>")
 		append("<h2 class='section-header'>Concerns</h2>")
 		append("<ul>")
-		for owner in sorted do
-			var nmodule = mbuilder.mmodule2nmodule[owner]
-			var childs = mclass.concerns[owner]
+		for owner, mmodules in sections do
+			var nowner = mbuilder.mmodule2nmodule[owner]
 			append("<li>")
-			append("<a href=\"#MOD_{owner.name}\">{owner.name}</a>: {nmodule.short_comment}")
-			if not childs is null then
+			if nowner.short_comment.is_empty then
+				append("<a href=\"#MOD_{owner.name}\">{owner.name}</a>")
+			else
+				append("<a href=\"#MOD_{owner.name}\">{owner.name}</a>: {nowner.short_comment}")
+			end
+			if not mmodules.is_empty then
 				append("<ul>")
-				var sortedc = childs.to_a
-				var sorterpc = new ComparableSorter[MModule]
-				sorterpc.sort(sortedc)
-				for child in sortedc do
-					var nchild = mbuilder.mmodule2nmodule[child]
-					append("<li><a href=\"#MOD_{child.name}\">{child.name}</a>: {nchild.short_comment} </li>")
+				for mmodule in mmodules do
+					var nmodule = mbuilder.mmodule2nmodule[mmodule]
+					if nmodule.short_comment.is_empty then
+						append("<li><a href=\"#MOD_{mmodule.name}\">{mmodule.name}</a></li>")
+					else
+						append("<li><a href=\"#MOD_{mmodule.name}\">{mmodule.name}</a>: {nmodule.short_comment}</li>")
+					end
 				end
 				append("</ul>")
 			end
@@ -846,14 +864,17 @@ class NitdocClass
 		append("</ul>")
 		append("</section>")
 		# properties
+		var prop_sorter = new ComparableSorter[MPropDef]
 		var sorterprop = new ComparableSorter[MProperty]
 		var sorterc = new ComparableSorter[MClass]
 		var lmmodule = new List[MModule]
 		# virtual and formal types
-		if mclass.virtual_types.length > 0 or mclass.arity > 0 then
+		var local_vtypes = new Array[MVirtualTypeDef]
+		for vt in vtypes do if not inherited.has(vt) then local_vtypes.add(vt)
+		if local_vtypes.length > 0 or mclass.arity > 0 then
 			append("<section class='types'>")
 			append("<h2>Formal and Virtual Types</h2>")
-			if mclass.virtual_types.length > 0 then for prop in mclass.virtual_types do description(prop)
+			# formal types
 			if mclass.arity > 0 and nclass isa AStdClassdef then
 				for ft, bound in mclass.parameter_types do
 					append("<article id='{ft}'>")
@@ -862,102 +883,81 @@ class NitdocClass
 					append("</article>")
 				end
 			end
+			# virtual types
+			prop_sorter.sort(local_vtypes)
+			for prop in local_vtypes do append(prop.html_full_desc(self))
 			append("</section>")
 		end
 		# constructors
-		if mclass.constructors.length > 0 then
-			var sortedc = mclass.constructors.to_a
-			sorterprop.sort(sortedc)
+		var local_consts = new Array[MMethodDef]
+		for const in consts do if not inherited.has(const) then local_consts.add(const)
+		prop_sorter.sort(local_consts)
+		if local_consts.length > 0 then
 			append("<section class='constructors'>")
 			append("<h2 class='section-header'>Constructors</h2>")
-			for prop in sortedc do description(prop)
+			for prop in local_consts do append(prop.html_full_desc(self))
 			append("</section>")
 		end
 		# methods
-		append("<section class='methods'>")
-		append("<h2 class='section-header'>Methods</h2>")
-		for mmodule, mmethods in mclass.all_methods do
-			var nmodule = mbuilder.mmodule2nmodule[mmodule]
-			append("<a id=\"MOD_{mmodule.name}\"></a>")
-			if mmodule != mclass.intro_mmodule and mmodule != mclass.public_owner then
-				if mclass.has_mmodule(mmodule) then
-					append("<p class=\"concern-doc\">{mmodule.name}: {nmodule.short_comment}</p>")
-				else
-					append("<h3 class=\"concern-toplevel\">Methods refined in {mmodule.link(mbuilder)}</h3><p class=\"concern-doc\">{mmodule.name}: {nmodule.short_comment}</p>")
+		if not concern2meths.is_empty then
+			append("<section class='methods'>")
+			append("<h2 class='section-header'>Methods</h2>")
+			for owner, mmodules in sections do
+				append("<a id=\"MOD_{owner.name}\"></a>")
+				if owner != mclass.intro_mmodule and owner != mclass.public_owner then
+					var nowner = mbuilder.mmodule2nmodule[owner]
+					append("<h3 class=\"concern-toplevel\">Methods refined in {owner.link(mbuilder)}</h3>")
+					if nowner.short_comment.is_empty then
+						append("<p class=\"concern-doc\">{owner.name}</p>")
+					else
+						append("<p class=\"concern-doc\">{owner.name}: {nowner.short_comment}</p>")
+					end
+				end
+				if concern2meths.has_key(owner) then
+					var mmethods = concern2meths[owner]
+					prop_sorter.sort(mmethods)
+					for prop in mmethods do append(prop.html_full_desc(self))
+				end
+				for mmodule in mmodules do
+					append("<a id=\"MOD_{mmodule.name}\"></a>")
+					var nmodule = mbuilder.mmodule2nmodule[mmodule]
+					if mmodule != mclass.intro_mmodule and mmodule != mclass.public_owner then
+						if nmodule.short_comment.is_empty then
+							append("<p class=\"concern-doc\">{mmodule.name}</p>")
+						else
+							append("<p class=\"concern-doc\">{mmodule.name}: {nmodule.short_comment}</p>")
+						end
+					end
+					var mmethods = concern2meths[mmodule]
+					prop_sorter.sort(mmethods)
+					for prop in mmethods do append(prop.html_full_desc(self))
 				end
 			end
-			var sortedc = mmethods.to_a
-			sorterprop.sort(sortedc)
-			for prop in sortedc do description(prop)
 		end
-		# inherited methods
-		if mclass.inherited_methods.length > 0 then
-			var sortedc = new Array[MClass]
-			sortedc.add_all(mclass.inherited.keys)
-			sorterc.sort(sortedc)
-			append("<h3>Inherited Methods</h3>")
-			for imclass in sortedc do
-				var sortedp = mclass.inherited[imclass].to_a
-				sorterprop.sort(sortedp)
-				append("<p>Defined in {imclass.link(mbuilder)}: ")
-				for method in sortedp do
-					#TODO link to inherited propdef
-					append("<a href=\"\">{method.name}</a>")
-					if method != sortedp.last then append(", ")
+		# inherited properties
+		if inherited.length > 0 then
+			var sorted_inherited = new Array[MPropDef]
+			sorted_inherited.add_all(inherited)
+			nitdoc.mainmodule.linearize_mpropdefs(sorted_inherited)
+			var classes = new ArrayMap[MClass, Array[MPropDef]]
+			for mmethod in sorted_inherited.reversed do
+				var mclass = mmethod.mclassdef.mclass
+				if not classes.has_key(mclass) then classes[mclass] = new Array[MPropDef]
+				classes[mclass].add(mmethod)
+			end
+			append("<h3>Inherited Properties</h3>")
+			for c, mmethods in classes do
+				prop_sorter.sort(mmethods)
+				append("<p>Defined in {c.link(mbuilder)}: ")
+				for i in [0..mmethods.length[ do
+					var mmethod = mmethods[i]
+					append(mmethod.link(mbuilder))
+					if i <= mmethods.length - 1 then append(", ")
 				end
 				append("</p>")
 			end
 		end
 		append("</section>")
-	end
-
-	fun description(prop: MProperty) do
-		if not mbuilder.mpropdef2npropdef.has_key(prop.intro) then return
-		var nprop = mbuilder.mpropdef2npropdef[prop.intro]
-		if not nprop isa AMethPropdef then return
-		var classes = new Array[String]
-		if nprop isa AInitPropdef then
-			classes.add("init")
-		else
-			classes.add("fun")
-		end
-		if prop.is_redef then classes.add("redef")
-		if prop.visibility == none_visibility then
-			classes.add("private")
-		else if prop.visibility == protected_visibility then
-			classes.add("protected")
-		else
-			classes.add("public")
-		end
-		append("<article class='{classes.join(" ")}' id='{prop.anchor}'>")
-		var sign = prop.name
-		append("<h3 class='signature'>{prop.name}{nprop.signature}</h3>")
-		append("<div class='info'>")
-		append("{if prop.is_redef then "redef" else ""} fun {prop.intro_mclassdef.namespace(mclass)}::{prop.name}</div><div style=\"float: right;\"><a id=\"lblDiffCommit\"></a>")
-		append("</div>")
-		append("<div class='description'>")
-		if nprop.comment == "" then
-			append("<a class=\"newComment\" title=\"32\" tag=\"\">New Comment</a>")
-		else
-			append("<pre class=\"text_label\" title=\"\" name=\"\" tag=\"\" type=\"1\">{nprop.comment}</pre>")
-		end
-		append("<textarea id=\"fileContent\" class=\"edit\" cols=\"76\" rows=\"1\" style=\"display: none;\"></textarea><a id=\"cancelBtn\" style=\"display: none;\">Cancel</a><a id=\"commitBtn\" style=\"display: none;\">Commit</a><pre id=\"preSave\" class=\"text_label\" type=\"2\"></pre>")
-		append("<p>")
-		if prop.local_class != mclass then
-			var mredef = prop.local_class.intro_mmodule
-			append("inherited from {mredef.link(mbuilder)} ")
-		end
-		#TODO display show code if doc github
-		var mintro = prop.intro_mclassdef.mmodule
-		append("defined by the module {mintro.link(mbuilder)}{if prop.apropdef is null then "" else show_source(prop.apropdef.location)}.")
-
-		for parent in mclass.parents do
-			var mparent = parent.intro_mmodule
-			if prop isa MMethod then if parent.constructors.has(prop) then append(" Previously defined by: {mparent.link(mbuilder)} for <a href=\"{parent.name}.html\">{parent.name}</a>.")
-		end
-		append("</p>")
-		append("</div>")
-		append("</article>")
 	end
 
 	fun process_generate_dot do
@@ -1045,11 +1045,11 @@ redef class MModule
 
 	# Return the module signature decorated with html
 	fun html_signature(mbuilder: ModelBuilder): String do
-		return "<span>module {html_namespace(mbuilder)}</span>"
+		return "<span>module {html_full_namespace(mbuilder)}</span>"
 	end
 
-	# Return the module namespace decorated with html
-	fun html_namespace(mbuilder: ModelBuilder): String do
+	# Return the module full namespace decorated with html
+	fun html_full_namespace(mbuilder: ModelBuilder): String do
 		var res = new Buffer
 		res.append("<span>")
 		var mowner = public_owner
@@ -1058,6 +1058,20 @@ redef class MModule
 			res.append("::")
 		end
 		res.append(self.link(mbuilder))
+		res.append("</span>")
+		return res.to_s
+	end
+
+	# Return the module full namespace decorated with html
+	fun html_namespace(mbuilder: ModelBuilder): String do
+		var res = new Buffer
+		res.append("<span>")
+		var mowner = public_owner
+		if mowner != null then
+			res.append(public_owner.html_namespace(mbuilder))
+		else
+			res.append(self.link(mbuilder))
+		end
 		res.append("</span>")
 		return res.to_s
 	end
@@ -1080,6 +1094,18 @@ redef class MClass
 	super Comparable
 	redef type OTHER: MClass
 	redef fun <(other: OTHER): Bool do return self.name < other.name
+
+	# Return the module signature decorated with html
+	fun html_full_signature(mbuilder: ModelBuilder): String do
+		var res = new Buffer
+		if visibility <= none_visibility then
+			res.append("private ")
+		else if visibility == protected_visibility then
+			res.append("protected ")
+		end
+		res.append("{kind} {html_namespace(mbuilder)}")
+		return res.to_s
+	end
 
 	# Add type parameters
 	fun html_signature: String do
@@ -1104,92 +1130,12 @@ redef class MClass
 		end
 	end
 
-	# Associate all MMethods to each MModule concerns
-	fun all_methods: HashMap[MModule, Set[MMethod]] do
-		var hm = new HashMap[MModule, Set[MMethod]]
-		for mmodule, childs in concerns do
-			if not hm.has_key(mmodule) then hm[mmodule] = new HashSet[MMethod]
-			for prop in intro_methods do
-				if mmodule == prop.intro_mclassdef.mmodule then
-					prop.is_redef = false
-					hm[mmodule].add(prop)
-				end
-			end
-			for prop in redef_methods do
-				if mmodule == prop.intro_mclassdef.mmodule then
-					prop.is_redef = true
-					hm[mmodule].add(prop)
-				end
-			end
-
-			if childs != null then
-				for child in childs do
-					if not hm.has_key(child) then hm[child] = new HashSet[MMethod]
-					for prop in intro_methods do
-						if child == prop.intro_mclassdef.mmodule then
-							prop.is_redef = false
-							hm[child].add(prop)
-						end
-					end
-					for prop in redef_methods do
-						if child == prop.intro_mclassdef.mmodule then
-							prop.is_redef = true
-							hm[child].add(prop)
-						end
-					end
-				end
-			end
-		end
-		return hm
-	end
-
-	fun public_owner: MModule do
-		var owner = intro_mmodule
-		if owner.public_owner is null then
-			return owner
-		else
-			return owner.public_owner.as(not null)
-		end
-	end
-
-	# Associate MClass to all MMethod include in 'inherited_methods'
-	fun inherited: HashMap[MClass, Set[MMethod]] do
-		var hm = new HashMap[MClass, Set[MMethod]]
-		for method in inherited_methods do
-			var mclass = method.intro_mclassdef.mclass
-			if not hm.has_key(mclass) then hm[mclass] = new HashSet[MMethod]
-			hm[mclass].add(method)
-		end
-		return hm
-	end
-
-	# Return true if MModule concern contain subMModule
-	fun has_mmodule(sub: MModule): Bool do
-		for mmodule, childs in concerns do
-			if childs is null then continue
-			if childs.has(sub) then return true
-		end
-		return false
-	end
-
-	fun mmethod(mprop2npropdef: Map[MProperty, APropdef]) do
-		for const in constructors do
-			if mprop2npropdef.has_key(const)then
-				const.apropdef = mprop2npropdef[const].as(AMethPropdef)
-			end
-		end
-
-		for intro in intro_methods do
-			if mprop2npropdef.has_key(intro)then
-				if mprop2npropdef[intro] isa AMethPropdef then intro.apropdef = mprop2npropdef[intro].as(AMethPropdef)
-			end
-		end
-
-		for rd in redef_methods do
-			if mprop2npropdef.has_key(rd)then
-				if mprop2npropdef[rd] isa AMethPropdef then rd.apropdef = mprop2npropdef[rd].as(AMethPropdef)
-			end
-		end
+	# Return the class namespace decorated with html
+	fun html_namespace(mbuilder: ModelBuilder): String do
+		var res = new Buffer
+		res.append(intro_mmodule.html_namespace(mbuilder))
+		res.append("::<span>{self.link(mbuilder)}</span>")
+		return res.to_s
 	end
 
 	fun link_anchor: String do
@@ -1205,22 +1151,19 @@ redef class MProperty
 	redef type OTHER: MProperty
 	redef fun <(other: OTHER): Bool do return self.name < other.name
 
-	var is_redef: Bool
-	var apropdef: nullable APropdef
-
-	redef init(intro_mclassdef: MClassDef, name: String, visibility: MVisibility)
-	do
-		super
-		is_redef = false
-	end
-
-	fun local_class: MClass do
-		var classdef = self.intro_mclassdef
-		return classdef.mclass
-	end
-
 	fun anchor: String do
 		return "PROP_{c_name}"
+	end
+
+	# Return the property namespace decorated with html
+	fun html_namespace(mbuilder: ModelBuilder): String do
+		return "{intro_mclassdef.mclass.html_namespace(mbuilder)}::<span>{intro.link(mbuilder)}</span>"
+	end
+
+	# Return the property signature decorated with html
+	fun html_signature(mbuilder: ModelBuilder): String do
+		var nprop = mbuilder.mpropdef2npropdef[intro]
+		return "{name}{nprop.html_signature(mbuilder)}"
 	end
 
 	# Escape name for html output
@@ -1240,15 +1183,12 @@ redef class MNullableType
 end
 
 redef class MClassDef
-	private fun namespace(mclass: MClass): String do
-
-		if mmodule.public_owner is null then
-			return "{mmodule.full_name}::{mclass.name}"
-		else if mclass is self.mclass then
-			return "{mmodule.public_owner.name}::{mclass.name}"
-		else
-			return "{mmodule.public_owner.name}::<a href=\"{mclass.name}.html\">{mclass.name}</a>"
-		end
+	# Return the classdef namespace decorated with html
+	fun html_namespace(mbuilder: ModelBuilder): String do
+		var res = new Buffer
+		res.append(mmodule.html_full_namespace(mbuilder))
+		res.append("::<span>{self.mclass.link(mbuilder)}</span>")
+		return res.to_s
 	end
 end
 
@@ -1299,6 +1239,181 @@ redef class MPropDef
 		res.append("</li>")
 		return res.to_s
 	end
+
+	fun html_full_desc(page: NitdocClass): String is abstract
+	fun html_info(page: NitdocClass): String is abstract
+end
+
+redef class MMethodDef
+	redef fun html_full_desc(page) do
+		if not page.mbuilder.mpropdef2npropdef.has_key(self) then
+			return ""
+		end
+		var res = new Buffer
+		var mprop = mproperty
+		var nprop = page.mbuilder.mpropdef2npropdef[self]
+		var classes = new Array[String]
+		var is_redef = mprop.intro_mclassdef.mclass != page.mclass
+		classes.add("fun")
+		if mprop.is_init then classes.add("init")
+		if is_redef then classes.add("redef")
+		if mprop.visibility == none_visibility then
+			classes.add("private")
+		else if mprop.visibility == protected_visibility then
+			classes.add("protected")
+		else
+			classes.add("public")
+		end
+		res.append("<article class='{classes.join(" ")}' id='{mprop.anchor}'>")
+		res.append("<h3 class='signature'>{mprop.html_signature(page.mbuilder)}</h3>")
+		res.append(html_info(page))
+		res.append("<div class='description'>")
+		if nprop.comment == "" then
+			res.append("<a class=\"newComment\" title=\"32\" tag=\"\">New Comment</a>")
+		else
+			res.append("<pre class=\"text_label\" title=\"\" name=\"\" tag=\"\" type=\"1\">{nprop.comment}</pre>")
+		end
+		res.append("<textarea id=\"fileContent\" class=\"edit\" cols=\"76\" rows=\"1\" style=\"display: none;\"></textarea><a id=\"cancelBtn\" style=\"display: none;\">Cancel</a><a id=\"commitBtn\" style=\"display: none;\">Commit</a><pre id=\"preSave\" class=\"text_label\" type=\"2\"></pre>")
+		# definitions block
+		res.append("<p>")
+		page.nitdoc.mainmodule.linearize_mpropdefs(mprop.mpropdefs)
+		var previous_defs = new Array[MMethodDef]
+		var next_defs = new Array[MMethodDef]
+		var self_passed = false
+		for def in mprop.mpropdefs do
+			if def == self then
+				self_passed = true
+				continue
+			end
+			if not self_passed then
+				if not page.mclass.ancestors.has(def.mclassdef.mclass) then continue
+				if def.is_intro then continue
+				previous_defs.add(def)
+			else
+				if not page.mclass.descendants.has(def.mclassdef.mclass) then continue
+				next_defs.add(def)
+			end
+		end
+		res.append("defined by {mclassdef.mmodule.html_full_namespace(page.mbuilder)}")
+		if not is_intro then
+			res.append(", introduced by {mprop.intro.mclassdef.mclass.link(page.mbuilder)}")
+		end
+		if not previous_defs.is_empty then
+			res.append(", inherited from ")
+			for i in [0..previous_defs.length[ do
+				 res.append(previous_defs[i].mclassdef.mclass.link(page.mbuilder))
+				 if i < previous_defs.length - 1 then res.append(", ")
+			end
+		end
+		if not next_defs.is_empty then
+			res.append(", redefined by ")
+			for i in [0..next_defs.length[ do
+				 res.append(next_defs[i].mclassdef.mclass.link(page.mbuilder))
+				 if i < next_defs.length - 1 then res.append(", ")
+			end
+		end
+		res.append(".</p>")
+		res.append("</div>")
+		res.append("</article>")
+		return res.to_s
+	end
+
+	redef fun html_info(page) do
+		var res = new Buffer
+		res.append("<div class='info'>")
+		if mproperty.visibility <= none_visibility then
+			res.append("private ")
+		else if mproperty.visibility <= protected_visibility then
+			res.append("protected ")
+		end
+		if mproperty.intro_mclassdef.mclass != page.mclass then res.append("redef ")
+		res.append("fun {mproperty.html_namespace(page.mbuilder)}")
+		res.append("</div>")
+		res.append("<div style=\"float: right;\"><a id=\"lblDiffCommit\"></a></div>")
+		return res.to_s
+	end
+end
+
+redef class MVirtualTypeDef
+	redef fun html_full_desc(page) do
+		var res = new Buffer
+		var mprop = mproperty
+		var is_redef = mprop.intro_mclassdef.mclass != page.mclass
+		var classes = new Array[String]
+		classes.add("type")
+		if is_redef then classes.add("redef")
+		if mprop.visibility == none_visibility then
+			classes.add("private")
+		else if mprop.visibility == protected_visibility then
+			classes.add("protected")
+		else
+			classes.add("public")
+		end
+		res.append("<article class='{classes.join(" ")}' id='{mprop.anchor}'>")
+		res.append("<h3 class='signature'>{mprop.name}: {bound.link(page.mbuilder)}</h3>")
+		res.append(html_info(page))
+		res.append("<div class='description'>")
+
+		if page.mbuilder.mpropdef2npropdef.has_key(self) and page.mbuilder.mpropdef2npropdef[self].comment != "" then
+			var nprop = page.mbuilder.mpropdef2npropdef[self]
+			res.append("<pre class=\"text_label\" title=\"\" name=\"\" tag=\"\" type=\"1\">{nprop.comment}</pre>")
+		else
+			res.append("<a class=\"newComment\" title=\"32\" tag=\"\">New Comment</a>")
+		end
+		res.append("<textarea id=\"fileContent\" class=\"edit\" cols=\"76\" rows=\"1\" style=\"display: none;\"></textarea><a id=\"cancelBtn\" style=\"display: none;\">Cancel</a><a id=\"commitBtn\" style=\"display: none;\">Commit</a><pre id=\"preSave\" class=\"text_label\" type=\"2\"></pre>")
+		# definitions block
+		res.append("<p>")
+		page.nitdoc.mainmodule.linearize_mpropdefs(mprop.mpropdefs)
+		var previous_defs = new Array[MVirtualTypeDef]
+		var next_defs = new Array[MVirtualTypeDef]
+		var self_passed = false
+		for def in mprop.mpropdefs do
+			if def == self then
+				self_passed = true
+				continue
+			end
+			if not self_passed then
+				if not page.mclass.ancestors.has(def.mclassdef.mclass) then continue
+				if def.is_intro then continue
+				previous_defs.add(def)
+			else
+				if not page.mclass.descendants.has(def.mclassdef.mclass) then continue
+				next_defs.add(def)
+			end
+		end
+		res.append("defined by {mclassdef.mmodule.html_full_namespace(page.mbuilder)}")
+		if not is_intro then
+			res.append(", introduced by {mprop.intro.mclassdef.mclass.link(page.mbuilder)}")
+		end
+		if not previous_defs.is_empty then
+			res.append(", inherited from ")
+			for i in [0..previous_defs.length[ do
+				 res.append(previous_defs[i].mclassdef.mclass.link(page.mbuilder))
+				 if i < previous_defs.length - 1 then res.append(", ")
+			end
+		end
+		if not next_defs.is_empty then
+			res.append(", redefined by ")
+			for i in [0..next_defs.length[ do
+				 res.append(next_defs[i].mclassdef.mclass.link(page.mbuilder))
+				 if i < next_defs.length - 1 then res.append(", ")
+			end
+		end
+		res.append(".</p>")
+		res.append("</div>")
+		res.append("</article>")
+		return res.to_s
+	end
+
+	redef fun html_info(page) do
+		var res = new Buffer
+		res.append("<div class='info'>")
+		if mproperty.intro_mclassdef.mclass != page.mclass then res.append("redef ")
+		res.append("type {mproperty.html_namespace(page.mbuilder)}")
+		res.append("</div>")
+		res.append("<div style=\"float: right;\"><a id=\"lblDiffCommit\"></a></div>")
+		return res.to_s
+	end
 end
 
 #
@@ -1325,40 +1440,6 @@ redef class AModule
 	end
 end
 
-redef class ASignature
-	redef fun to_s do
-		#TODO closures
-		var ret = ""
-		if not n_params.is_empty then
-			ret = "{ret}({n_params.join(", ")})"
-		end
-		if n_type != null and n_type.to_s != "" then ret += ": {n_type.to_s}"
-		return ret
-	end
-end
-
-redef class AParam
-	redef fun to_s do
-		var ret = "{n_id.text}"
-		if n_type != null then
-			ret = "{ret}: {n_type.to_s}"
-			if n_dotdotdot != null then ret = "{ret}..."
-		end
-		return ret
-	end
-end
-
-redef class AType
-	fun link: String do
-		var ret = "<a href=\"{n_id.text}.html\">{n_id.text}</a>"
-		if n_kwnullable != null then ret = "nullable {ret}"
-		if not n_types.is_empty then ret = "{ret}[{n_types.join(", ")}]"
-		return ret
-	end
-
-	fun name: String do return n_id.text.html_escape
-end
-
 redef class AStdClassdef
 	private fun comment: String do
 		var ret = new Buffer
@@ -1377,15 +1458,29 @@ end
 
 redef class APropdef
 	private fun short_comment: String is abstract
-	private fun signature: String is abstract
+	private fun html_signature(mbuilder: ModelBuilder): String is abstract
 	private fun comment: String is abstract
 end
 
 redef class AAttrPropdef
 	redef fun short_comment do
 		var ret = new Buffer
-		if n_doc != null then ret.append(n_doc.n_comment.first.text.substring_from(1))
+		if n_doc != null then ret.append(n_doc.n_comment.first.text.substring_from(2).replace("\n", ""))
 		return ret.to_s.html_escape
+	end
+
+	redef private fun comment: String do
+		var ret = new Buffer
+		if n_doc != null then
+			for t in n_doc.n_comment do ret.append(t.text.substring_from(1))
+		end
+		return ret.to_s.html_escape
+	end
+
+	redef fun html_signature(mbuilder) do
+		var res = ""
+		if n_type != null and n_type.to_html != "" then res += ": {n_type.to_html}"
+		return res
 	end
 end
 
@@ -1396,10 +1491,25 @@ redef class AMethPropdef
 		return ret.to_s.html_escape
 	end
 
-	redef fun signature: String do
-		var sign = ""
-		if n_signature != null then sign = "{n_signature.to_s}"
-		return sign
+	redef private fun comment: String do
+		var ret = new Buffer
+		if n_doc != null then
+			for t in n_doc.n_comment do ret.append(t.text.substring_from(1))
+		end
+		return ret.to_s.html_escape
+	end
+
+	redef fun html_signature(mbuilder) do
+		if n_signature != null then return n_signature.to_html
+		return ""
+	end
+end
+
+redef class ATypePropdef
+	redef fun short_comment do
+		var ret = new Buffer
+		if n_doc != null then ret.append(n_doc.n_comment.first.text.substring_from(2).replace("\n", ""))
+		return ret.to_s.html_escape
 	end
 
 	redef private fun comment: String do
@@ -1409,6 +1519,44 @@ redef class AMethPropdef
 		end
 		return ret.to_s.html_escape
 	end
+
+	redef fun html_signature(mbuilder) do
+		return mpropdef.bound.link(mbuilder)
+	end
+end
+
+redef class ASignature
+	fun to_html: String do
+		#TODO closures
+		var ret = ""
+		if not n_params.is_empty then
+			ret = "{ret}({n_params.join(", ")})"
+		end
+		if n_type != null and n_type.to_html != "" then ret += ": {n_type.to_html}"
+		return ret
+	end
+end
+
+redef class AParam
+	redef fun to_s do
+		var ret = "{n_id.text}"
+		if n_type != null then
+			ret = "{ret}: {n_type.to_html}"
+			if n_dotdotdot != null then ret = "{ret}..."
+		end
+		return ret
+	end
+end
+
+redef class AType
+	fun to_html: String do
+		var ret = "<a href=\"{n_id.text}.html\">{n_id.text}</a>"
+		if n_kwnullable != null then ret = "nullable {ret}"
+		if not n_types.is_empty then ret = "{ret}[{n_types.join(", ")}]"
+		return ret
+	end
+
+	fun name: String do return n_id.text.html_escape
 end
 
 # Create a tool context to handle options and paths
