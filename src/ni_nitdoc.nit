@@ -1166,12 +1166,6 @@ redef class MProperty
 		return "{intro_mclassdef.mclass.html_namespace(mbuilder)}::<span>{intro.link(mbuilder)}</span>"
 	end
 
-	# Return the property signature decorated with html
-	fun html_signature(mbuilder: ModelBuilder): String do
-		var nprop = mbuilder.mpropdef2npropdef[intro]
-		return "{name}{nprop.html_signature(mbuilder)}"
-	end
-
 	# Escape name for html output
 	redef fun name do return super.html_escape
 end
@@ -1278,7 +1272,15 @@ redef class MMethodDef
 			classes.add("public")
 		end
 		res.append("<article class='{classes.join(" ")}' id='{anchor}'>")
-		res.append("<h3 class='signature'>{mprop.html_signature(page.mbuilder)}</h3>")
+		if nprop isa AAttrPropdef then
+			if nprop.mreadpropdef == self then
+				res.append("<h3 class='signature'>{mprop.name}: {nprop.html_signature(page.mbuilder)}</h3>")
+			else
+				res.append("<h3 class='signature'>{mprop.name}(value: {nprop.html_signature(page.mbuilder)})</h3>")
+			end
+		else
+			res.append("<h3 class='signature'>{mprop.name}{nprop.html_signature(page.mbuilder)}</h3>")
+		end
 		res.append(html_info(page))
 		res.append("<div class='description'>")
 		if nprop.comment == "" then
@@ -1491,9 +1493,8 @@ redef class AAttrPropdef
 	end
 
 	redef fun html_signature(mbuilder) do
-		var res = ""
-		if n_type != null and n_type.to_html != "" then res += ": {n_type.to_html}"
-		return res
+		if n_type != null then return n_type.to_html
+		return ""
 	end
 end
 
