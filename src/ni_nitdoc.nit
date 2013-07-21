@@ -109,7 +109,7 @@ class Nitdoc
 			fullindex
 			modules
 			classes
-			#quicksearch_list
+			quicksearch_list
 		end
 	end
 
@@ -142,25 +142,26 @@ class Nitdoc
 		var file = new OFStream.open("{output_dir.to_s}/quicksearch-list.js")
 		var content = new Buffer
 		content.append("var entries = \{ ")
-		for prop in model.mproperties do
-			if not prop isa MMethod then continue
-			content.append("\"{prop.name}\": [")
-			for propdef in prop.mpropdefs do
-				content.append("\{txt: \"{propdef.mproperty.full_name}\", url:\"{propdef.url}\" \}")
-				if not propdef is prop.mpropdefs.last then content.append(", ")
-			end
-			content.append("]")
-			content.append(", ")
-		end
 
+		for mmodule in model.mmodules do
+			content.append("\"{mmodule.name}\": [")
+			content.append("\{txt: \"{mmodule.name}\", url:\"{mmodule.url}\" \},")
+			content.append("],")
+		end
 		for mclass in model.mclasses do
+			if mclass.visibility <= none_visibility then continue
 			content.append("\"{mclass.name}\": [")
-			for mclassdef in mclass.mclassdefs do
-				content.append("\{txt: \"{mclassdef.mclass.full_name}\", url:\"{mclass.url}\" \}")
-				if not mclassdef is mclass.mclassdefs.last then content.append(", ")
+			content.append("\{txt: \"{mclass.name}\", url:\"{mclass.url}\" \},")
+			content.append("],")
+		end
+		for mproperty in model.mproperties do
+			if mproperty.visibility <= none_visibility then continue
+			if mproperty isa MAttribute then continue
+			content.append("\"{mproperty.name}\": [")
+			for mpropdef in mproperty.mpropdefs do
+				content.append("\{txt: \"{mpropdef.full_name}\", url:\"{mpropdef.url}\" \},")
 			end
-			content.append("]")
-			if not mclass is model.mclasses.last then content.append(", ")
+			content.append("],")
 		end
 
 		content.append(" \};")
@@ -1250,6 +1251,10 @@ redef class MPropDef
 
 	fun html_full_desc(page: NitdocClass): String is abstract
 	fun html_info(page: NitdocClass): String is abstract
+
+	fun full_name: String do
+		return "{mclassdef.mclass.public_owner.name}::{mclassdef.mclass.name}::{mproperty.name}"
+	end
 end
 
 redef class MMethodDef
