@@ -894,9 +894,9 @@ class NitdocClass
 					var nowner = mbuilder.mmodule2nmodule[owner]
 					append("<h3 class=\"concern-toplevel\">Methods refined in {owner.link(mbuilder)}</h3>")
 					if nowner.short_comment.is_empty then
-						append("<p class=\"concern-doc\">{owner.name}</p>")
+						append("<p class=\"concern-doc\">{owner.link(mbuilder)}</p>")
 					else
-						append("<p class=\"concern-doc\">{owner.name}: {nowner.short_comment}</p>")
+						append("<p class=\"concern-doc\">{owner.link(mbuilder)}: {nowner.short_comment}</p>")
 					end
 				end
 				if concern2meths.has_key(owner) then
@@ -909,9 +909,9 @@ class NitdocClass
 					var nmodule = mbuilder.mmodule2nmodule[mmodule]
 					if mmodule != mclass.intro_mmodule and mmodule != mclass.public_owner then
 						if nmodule.short_comment.is_empty then
-							append("<p class=\"concern-doc\">{mmodule.name}</p>")
+							append("<p class=\"concern-doc\">{mmodule.link(mbuilder)}</p>")
 						else
-							append("<p class=\"concern-doc\">{mmodule.name}: {nmodule.short_comment}</p>")
+							append("<p class=\"concern-doc\">{mmodule.link(mbuilder)}: {nmodule.short_comment}</p>")
 						end
 					end
 					var mmethods = concern2meths[mmodule]
@@ -1288,7 +1288,7 @@ redef class MMethodDef
 		end
 		res.append("<textarea id=\"fileContent\" class=\"edit\" cols=\"76\" rows=\"1\" style=\"display: none;\"></textarea><a id=\"cancelBtn\" style=\"display: none;\">Cancel</a><a id=\"commitBtn\" style=\"display: none;\">Commit</a><pre id=\"preSave\" class=\"text_label\" type=\"2\"></pre>")
 		# definitions block
-		res.append("<p>")
+		res.append("<p class='info'>")
 		page.nitdoc.mainmodule.linearize_mpropdefs(mprop.mpropdefs)
 		var previous_defs = new Array[MMethodDef]
 		var next_defs = new Array[MMethodDef]
@@ -1375,7 +1375,7 @@ redef class MVirtualTypeDef
 		end
 		res.append("<textarea id=\"fileContent\" class=\"edit\" cols=\"76\" rows=\"1\" style=\"display: none;\"></textarea><a id=\"cancelBtn\" style=\"display: none;\">Cancel</a><a id=\"commitBtn\" style=\"display: none;\">Commit</a><pre id=\"preSave\" class=\"text_label\" type=\"2\"></pre>")
 		# definitions block
-		res.append("<p>")
+		res.append("<p class='info'>")
 		page.nitdoc.mainmodule.linearize_mpropdefs(mprop.mpropdefs)
 		var previous_defs = new Array[MVirtualTypeDef]
 		var next_defs = new Array[MVirtualTypeDef]
