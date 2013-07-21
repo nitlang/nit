@@ -154,11 +154,16 @@ class Nitdoc
 			content.append("\{txt: \"{mclass.name}\", url:\"{mclass.url}\" \},")
 			content.append("],")
 		end
+		var name2mprops = new HashMap[String, Set[MPropDef]]
 		for mproperty in model.mproperties do
 			if mproperty.visibility <= none_visibility then continue
 			if mproperty isa MAttribute then continue
-			content.append("\"{mproperty.name}\": [")
-			for mpropdef in mproperty.mpropdefs do
+			if not name2mprops.has_key(mproperty.name) then name2mprops[mproperty.name] = new HashSet[MPropDef]
+			name2mprops[mproperty.name].add_all(mproperty.mpropdefs)
+		end
+		for mproperty, mpropdefs in name2mprops do
+			content.append("\"{mproperty}\": [")
+			for mpropdef in mpropdefs do
 				content.append("\{txt: \"{mpropdef.full_name}\", url:\"{mpropdef.url}\" \},")
 			end
 			content.append("],")
