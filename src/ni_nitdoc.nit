@@ -126,14 +126,14 @@ class Nitdoc
 	fun modules do
 		for mmodule in model.mmodules do
 			var modulepage = new NitdocModule(mmodule, modelbuilder, dot_dir)
-			modulepage.save("{output_dir.to_s}/{mmodule.name}.html")
+			modulepage.save("{output_dir.to_s}/{mmodule.url}")
 		end
 	end
 
 	fun classes do
 		for mclass in modelbuilder.model.mclasses do
 			var classpage = new NitdocClass(mclass, self, dot_dir, source)
-			classpage.save("{output_dir.to_s}/{mclass.name}.html")
+			classpage.save("{output_dir.to_s}/{mclass.url}")
 		end
 	end
 
@@ -146,7 +146,7 @@ class Nitdoc
 			if not prop isa MMethod then continue
 			content.append("\"{prop.name}\": [")
 			for propdef in prop.mpropdefs do
-				content.append("\{txt: \"{propdef.mproperty.full_name}\", url:\"{propdef.mproperty.anchor}\" \}")
+				content.append("\{txt: \"{propdef.mproperty.full_name}\", url:\"{propdef.url}\" \}")
 				if not propdef is prop.mpropdefs.last then content.append(", ")
 			end
 			content.append("]")
@@ -156,7 +156,7 @@ class Nitdoc
 		for mclass in model.mclasses do
 			content.append("\"{mclass.name}\": [")
 			for mclassdef in mclass.mclassdefs do
-				content.append("\{txt: \"{mclassdef.mclass.full_name}\", url:\"{mclass.link_anchor}\" \}")
+				content.append("\{txt: \"{mclassdef.mclass.full_name}\", url:\"{mclass.url}\" \}")
 				if not mclassdef is mclass.mclassdefs.last then content.append(", ")
 			end
 			content.append("]")
@@ -359,7 +359,7 @@ class NitdocOverview
 		var op = new Buffer
 		op.append("digraph dep \{ rankdir=BT; node[shape=none,margin=0,width=0,height=0,fontsize=10]; edge[dir=none,color=gray]; ranksep=0.2; nodesep=0.1;\n")
 		for mmodule in mmodules do
-			op.append("\"{mmodule.name}\"[URL=\"{mmodule.name}.html\"];\n")
+			op.append("\"{mmodule.name}\"[URL=\"{mmodule.url}\"];\n")
 			for imported in mmodule.in_importation.direct_greaters do
 				if imported.direct_owner == null then
 					op.append("\"{mmodule.name}\"->\"{imported.name}\";\n")
@@ -500,7 +500,7 @@ class NitdocModule
 				if m == mmodule then
 					op.append("\"{m.name}\"[shape=box,margin=0.03];\n")
 				else
-					op.append("\"{m.name}\"[URL=\"{m.name}.html\"];\n")
+					op.append("\"{m.name}\"[URL=\"{m.url}\"];\n")
 				end
 			end
 			for imported in m.in_importation.direct_greaters do
@@ -753,7 +753,7 @@ class NitdocClass
 			append("<ul>")
 			for sup in sorted do
 				if sup == mclass then continue
-				append("<li><a href='{sup.name}.html'>{sup.name}</a></li>")
+				append("<li>{sup.link(mbuilder)}</li>")
 			end
 			append("</ul>")
 		end
@@ -767,7 +767,7 @@ class NitdocClass
 			append("<ul>")
 			for sub in sorted do
 				if sub == mclass then continue
-				append("<li><a href='{sub.name}.html'>{sub.name}</a></li>")
+				append("<li>{sub.link(mbuilder)}</li>")
 			end
 			append("</ul>")
 		else if mclass.children.length <= 100 then
@@ -777,7 +777,7 @@ class NitdocClass
 			append("<ul>")
 			for sub in sorted do
 				if sub == mclass then continue
-				append("<li><a href='{sub.name}.html'>{sub.name}</a></li>")
+				append("<li>{sub.link(mbuilder)}</li>")
 			end
 			append("</ul>")
 		else
@@ -828,18 +828,18 @@ class NitdocClass
 			var nowner = mbuilder.mmodule2nmodule[owner]
 			append("<li>")
 			if nowner.short_comment.is_empty then
-				append("<a href=\"#MOD_{owner.name}\">{owner.name}</a>")
+				append("<a href=\"#{owner.anchor}\">{owner.name}</a>")
 			else
-				append("<a href=\"#MOD_{owner.name}\">{owner.name}</a>: {nowner.short_comment}")
+				append("<a href=\"#{owner.anchor}\">{owner.name}</a>: {nowner.short_comment}")
 			end
 			if not mmodules.is_empty then
 				append("<ul>")
 				for mmodule in mmodules do
 					var nmodule = mbuilder.mmodule2nmodule[mmodule]
 					if nmodule.short_comment.is_empty then
-						append("<li><a href=\"#MOD_{mmodule.name}\">{mmodule.name}</a></li>")
+						append("<li><a href=\"#{mmodule.anchor}\">{mmodule.name}</a></li>")
 					else
-						append("<li><a href=\"#MOD_{mmodule.name}\">{mmodule.name}</a>: {nmodule.short_comment}</li>")
+						append("<li><a href=\"#{mmodule.anchor}\">{mmodule.name}</a>: {nmodule.short_comment}</li>")
 					end
 				end
 				append("</ul>")
@@ -888,7 +888,7 @@ class NitdocClass
 			append("<section class='methods'>")
 			append("<h2 class='section-header'>Methods</h2>")
 			for owner, mmodules in sections do
-				append("<a id=\"MOD_{owner.name}\"></a>")
+				append("<a id=\"{owner.anchor}\"></a>")
 				if owner != mclass.intro_mmodule and owner != mclass.public_owner then
 					var nowner = mbuilder.mmodule2nmodule[owner]
 					append("<h3 class=\"concern-toplevel\">Methods refined in {owner.link(mbuilder)}</h3>")
@@ -904,7 +904,7 @@ class NitdocClass
 					for prop in mmethods do append(prop.html_full_desc(self))
 				end
 				for mmodule in mmodules do
-					append("<a id=\"MOD_{mmodule.name}\"></a>")
+					append("<a id=\"{mmodule.anchor}\"></a>")
 					var nmodule = mbuilder.mmodule2nmodule[mmodule]
 					if mmodule != mclass.intro_mmodule and mmodule != mclass.public_owner then
 						if nmodule.short_comment.is_empty then
@@ -970,7 +970,7 @@ class NitdocClass
 			if c == mclass then
 				op.append("\"{c.name}\"[shape=box,margin=0.03];\n")
 			else
-				op.append("\"{c.name}\"[URL=\"{c.name}.html\"];\n")
+				op.append("\"{c.name}\"[URL=\"{c.url}\"];\n")
 			end
 			for c2 in pe.poset[c].direct_greaters do
 				if not cla.has(c2) then continue
@@ -1023,9 +1023,33 @@ redef class MModule
 		return methods
 	end
 
+	# URL to nitdoc page
+	fun url: String do
+		var res = new Buffer
+		res.append("module_")
+		var mowner = public_owner
+		if mowner != null then
+			res.append("{public_owner.name}_")
+		end
+		res.append("{self.name}.html")
+		return res.to_s
+	end
+
+	# html anchor id to the module in a nitdoc page
+	fun anchor: String do
+		var res = new Buffer
+		res.append("MOD_")
+		var mowner = public_owner
+		if mowner != null then
+			res.append("{public_owner.name}_")
+		end
+		res.append(self.name)
+		return res.to_s
+	end
+
 	# Return a link (html a tag) to the nitdoc module page
 	fun link(mbuilder: ModelBuilder): String do
-		return "<a href='{name}.html' title='{mbuilder.mmodule2nmodule[self].short_comment}'>{name}</a>"
+		return "<a href='{url}' title='{mbuilder.mmodule2nmodule[self].short_comment}'>{name}</a>"
 	end
 
 	# Return the module signature decorated with html
@@ -1106,12 +1130,12 @@ redef class MClass
 		if mbuilder.mclassdef2nclassdef.has_key(intro) then
 			var nclass = mbuilder.mclassdef2nclassdef[intro]
 			if nclass isa AStdClassdef then
-				return "<a href='{name}.html' title=\"{nclass.short_comment}\">{html_signature}</a>"
+				return "<a href='{url}' title=\"{nclass.short_comment}\">{html_signature}</a>"
 			else
-				return "<a href='{name}.html'>{html_signature}</a>"
+				return "<a href='{url}'>{html_signature}</a>"
 			end
 		else
-			return "<a href='{name}.html'>{html_signature}</a>"
+			return "<a href='{url}'>{html_signature}</a>"
 		end
 	end
 
@@ -1123,8 +1147,8 @@ redef class MClass
 		return res.to_s
 	end
 
-	fun link_anchor: String do
-		return "{name}.html"
+	fun url: String do
+		return "class_{public_owner}_{c_name}.html"
 	end
 
 	# Escape name for html output
@@ -1135,10 +1159,6 @@ redef class MProperty
 	super Comparable
 	redef type OTHER: MProperty
 	redef fun <(other: OTHER): Bool do return self.name < other.name
-
-	fun anchor: String do
-		return "PROP_{c_name}"
-	end
 
 	# Return the property namespace decorated with html
 	fun html_namespace(mbuilder: ModelBuilder): String do
@@ -1182,13 +1202,16 @@ redef class MPropDef
 	redef type OTHER: MPropDef
 	redef fun <(other: OTHER): Bool do return self.mproperty.name < other.mproperty.name
 
+	fun url: String do return "{mclassdef.mclass.url}#{anchor}"
+	fun anchor: String do return "PROP_{mclassdef.mclass.public_owner.name}_{c_name}"
+
 	# Return a link (html a tag) to the nitdoc class page
 	fun link(mbuilder: ModelBuilder): String do
 		if mbuilder.mpropdef2npropdef.has_key(self) then
 			var nprop = mbuilder.mpropdef2npropdef[self]
-			return "<a href=\"{mclassdef.mclass.name}.html#{mproperty.anchor}\" title=\"{nprop.short_comment}\">{mproperty.name}</a>"
+			return "<a href=\"{url}\" title=\"{nprop.short_comment}\">{mproperty.name}</a>"
 		else
-			return "<a href=\"{mclassdef.mclass.name}.html#{mproperty.anchor}\">{mproperty.name}</a>"
+			return "<a href=\"{url}\">{mproperty.name}</a>"
 		end
 	end
 
@@ -1249,7 +1272,7 @@ redef class MMethodDef
 		else
 			classes.add("public")
 		end
-		res.append("<article class='{classes.join(" ")}' id='{mprop.anchor}'>")
+		res.append("<article class='{classes.join(" ")}' id='{anchor}'>")
 		res.append("<h3 class='signature'>{mprop.html_signature(page.mbuilder)}</h3>")
 		res.append(html_info(page))
 		res.append("<div class='description'>")
@@ -1334,7 +1357,7 @@ redef class MVirtualTypeDef
 		else
 			classes.add("public")
 		end
-		res.append("<article class='{classes.join(" ")}' id='{mprop.anchor}'>")
+		res.append("<article class='{classes.join(" ")}' id='{anchor}'>")
 		res.append("<h3 class='signature'>{mprop.name}: {bound.link(page.mbuilder)}</h3>")
 		res.append(html_info(page))
 		res.append("<div class='description'>")
