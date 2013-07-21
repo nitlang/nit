@@ -863,7 +863,7 @@ class NitdocClass
 			# formal types
 			if mclass.arity > 0 and nclass isa AStdClassdef then
 				for ft, bound in mclass.parameter_types do
-					append("<article id='{ft}'>")
+					append("<article id='FT_{ft}'>")
 					append("<h3 class='signature'>{ft}: {bound.link(mbuilder)}</h3>")
 					append("<div class=\"info\">formal generic type</div>")
 					append("</article>")
@@ -1182,6 +1182,30 @@ redef class MNullableType
 	redef fun link(mbuilder) do return "nullable {mtype.link(mbuilder)}"
 end
 
+redef class MGenericType
+	redef fun link(mbuilder) do
+		var res = new Buffer
+		res.append("<a href='{mclass.url}'>{mclass.name}</a>[")
+		for i in [0..arguments.length[ do
+			res.append(arguments[i].link(mbuilder))
+			if i < arguments.length - 1 then res.append(", ")
+		end
+		res.append("]")
+		return res.to_s
+	end
+end
+
+redef class MParameterType
+	redef fun link(mbuilder) do
+		var name = mclass.intro.parameter_names[rank]
+		return "<a href='{mclass.url}#FT_{name}' title='formal type'>{name}</a>"
+	end
+end
+
+redef class MVirtualType
+	redef fun link(mbuilder) do return mproperty.intro.link(mbuilder)
+end
+
 redef class MClassDef
 	# Return the classdef namespace decorated with html
 	fun html_namespace(mbuilder: ModelBuilder): String do
@@ -1279,7 +1303,8 @@ redef class MMethodDef
 				res.append("<h3 class='signature'>{mprop.name}(value: {nprop.html_signature(page.mbuilder)})</h3>")
 			end
 		else
-			res.append("<h3 class='signature'>{mprop.name}{nprop.html_signature(page.mbuilder)}</h3>")
+			var intro_nprop = page.mbuilder.mpropdef2npropdef[mprop.intro]
+			res.append("<h3 class='signature'>{mprop.name}{intro_nprop.html_signature(page.mbuilder)}</h3>")
 		end
 		res.append(html_info(page))
 		res.append("<div class='description'>")
@@ -1493,7 +1518,7 @@ redef class AAttrPropdef
 	end
 
 	redef fun html_signature(mbuilder) do
-		if n_type != null then return n_type.to_html
+		if n_type != null then return n_type.mtype.link(mbuilder)
 		return ""
 	end
 end
@@ -1514,7 +1539,7 @@ redef class AMethPropdef
 	end
 
 	redef fun html_signature(mbuilder) do
-		if n_signature != null then return n_signature.to_html
+		if n_signature != null then return n_signature.to_html(mbuilder)
 		return ""
 	end
 end
@@ -1540,37 +1565,31 @@ redef class ATypePropdef
 end
 
 redef class ASignature
-	fun to_html: String do
+	fun to_html(mbuilder: ModelBuilder): String do
 		#TODO closures
-		var ret = ""
+		var res = new Buffer
 		if not n_params.is_empty then
-			ret = "{ret}({n_params.join(", ")})"
+			res.append("(")
+			for i in [0..n_params.length[ do
+				res.append(n_params[i].to_html(mbuilder))
+				if i < n_params.length - 1 then res.append(", ")
+			end
+			res.append(")")
 		end
-		if n_type != null and n_type.to_html != "" then ret += ": {n_type.to_html}"
-		return ret
+		if n_type != null and n_type.mtype.link(mbuilder) != "" then res.append(": {n_type.mtype.link(mbuilder)}")
+		return res.to_s
 	end
 end
 
 redef class AParam
-	redef fun to_s do
+	fun to_html(mbuilder: ModelBuilder): String do
 		var ret = "{n_id.text}"
 		if n_type != null then
-			ret = "{ret}: {n_type.to_html}"
+			ret = "{ret}: {n_type.mtype.link(mbuilder)}"
 			if n_dotdotdot != null then ret = "{ret}..."
 		end
 		return ret
 	end
-end
-
-redef class AType
-	fun to_html: String do
-		var ret = "<a href=\"{n_id.text}.html\">{n_id.text}</a>"
-		if n_kwnullable != null then ret = "nullable {ret}"
-		if not n_types.is_empty then ret = "{ret}[{n_types.join(", ")}]"
-		return ret
-	end
-
-	fun name: String do return n_id.text.html_escape
 end
 
 # Create a tool context to handle options and paths
