@@ -55,13 +55,18 @@ class Nitdoc
 
 		model = new Model
 		modelbuilder = new ModelBuilder(model, toolcontext)
-
-		# Here we load an process std modules
-		var mmodules = modelbuilder.parse_and_build([arguments.first])
-		if mmodules.is_empty then return
+		# Here we load an process all modules passed on the command line
+		var mmodules = modelbuilder.parse_and_build(arguments)
 		modelbuilder.full_propdef_semantic_analysis
-		assert mmodules.length == 1
-		self.mainmodule = mmodules.first
+		if mmodules.is_empty then return
+
+		if mmodules.length == 1 then
+			mainmodule = mmodules.first
+		else
+			# We need a main module, so we build it by importing all modules
+			mainmodule = new MModule(model, null, "<main>", new Location(null, 0, 0, 0, 0))
+			mainmodule.set_imported_mmodules(mmodules)
+		end
 		self.class_hierarchy = mainmodule.flatten_mclass_hierarchy
 	end
 
@@ -99,18 +104,16 @@ class Nitdoc
 	end
 
 	fun start do
-		if arguments.length == 1 then
-			# Create destination dir if it's necessary
-			if not output_dir.file_exists then output_dir.mkdir
-			sys.system("cp -r {share_dir.to_s}/* {output_dir.to_s}/")
-			self.dot_dir = null
-			if not opt_nodot.value then self.dot_dir = output_dir.to_s
-			overview
-			fullindex
-			modules
-			classes
-			quicksearch_list
-		end
+		# Create destination dir if it's necessary
+		if not output_dir.file_exists then output_dir.mkdir
+		sys.system("cp -r {share_dir.to_s}/* {output_dir.to_s}/")
+		self.dot_dir = null
+		if not opt_nodot.value then self.dot_dir = output_dir.to_s
+		overview
+		fullindex
+		modules
+		classes
+		quicksearch_list
 	end
 
 	fun overview do
@@ -125,6 +128,7 @@ class Nitdoc
 
 	fun modules do
 		for mmodule in model.mmodules do
+			if mmodule.name == "<main>" then continue
 			var modulepage = new NitdocModule(mmodule, modelbuilder, dot_dir)
 			modulepage.save("{output_dir.to_s}/{mmodule.url}")
 		end
@@ -319,6 +323,7 @@ class NitdocOverview
 		# get modules
 		var mmodules = new HashSet[MModule]
 		for mmodule in mbuilder.model.mmodules do
+			if mmodule.name == "<main>" then continue
 			var owner = mmodule.public_owner
 			if owner != null then
 				mmodules.add(owner)
@@ -351,8 +356,10 @@ class NitdocOverview
 		append("<h2>Modules</h2>")
 		append("<ul>")
 		for mmodule in mmodules do
-			var amodule = mbuilder.mmodule2nmodule[mmodule]
-			append("<li>{mmodule.link(mbuilder)}&nbsp;{amodule.short_comment}</li>")
+			if mbuilder.mmodule2nmodule.has_key(mmodule) then
+				var amodule = mbuilder.mmodule2nmodule[mmodule]
+				append("<li>{mmodule.link(mbuilder)}&nbsp;{amodule.short_comment}</li>")
+			end
 		end
 		append("</ul>")
 		# module graph
@@ -473,8 +480,10 @@ class NitdocModule
 
 	redef fun head do
 		super
-		var amodule = mbuilder.mmodule2nmodule[mmodule]
-		append("<title>{mmodule.name} module | {amodule.short_comment}</title>")
+		if mbuilder.mmodule2nmodule.has_key(mmodule) then
+			var amodule = mbuilder.mmodule2nmodule[mmodule]
+			append("<title>{mmodule.name} module | {amodule.short_comment}</title>")
+		end
 	end
 
 	redef fun menu do
@@ -500,6 +509,7 @@ class NitdocModule
 		var op = new Buffer
 		op.append("digraph {name} \{ rankdir=BT; node[shape=none,margin=0,width=0,height=0,fontsize=10]; edge[dir=none,color=gray]; ranksep=0.2; nodesep=0.1;\n")
 		for m in mmodule.in_importation.poset do
+			if m.name == "<main>" then continue
 			var public_owner = m.public_owner
 			if public_owner == null then
 				public_owner = m
@@ -510,6 +520,7 @@ class NitdocModule
 				end
 			end
 			for imported in m.in_importation.direct_greaters do
+				if imported.name == "<main>" then continue
 				if imported.public_owner == null then
 					op.append("\"{public_owner.name}\"->\"{imported.name}\";\n")
 				end
@@ -520,7 +531,6 @@ class NitdocModule
 	end
 
 	fun sidebar do
-		var amodule = mbuilder.mmodule2nmodule[mmodule]
 		append("<div class='menu'>")
 		append("<nav>")
 		append("<h3>Module Hierarchy</h3>")
@@ -562,7 +572,6 @@ class NitdocModule
 
 	# display the class column
 	fun classes do
-		var amodule = mbuilder.mmodule2nmodule[mmodule]
 		var intro_mclasses = mmodule.intro_mclasses
 		var redef_mclasses = mmodule.redef_mclasses
 		var all_mclasses = new HashSet[MClass]
@@ -600,7 +609,6 @@ class NitdocModule
 	# display the property column
 	fun properties do
 		# get properties
-		var amodule = mbuilder.mmodule2nmodule[mmodule]
 		var mpropdefs = new HashSet[MPropDef]
 		for m in mmodule.in_nesting.greaters do
 			for c in m.mclassdefs do mpropdefs.add_all(c.mpropdefs)
@@ -1055,7 +1063,11 @@ redef class MModule
 
 	# Return a link (html a tag) to the nitdoc module page
 	fun link(mbuilder: ModelBuilder): String do
-		return "<a href='{url}' title='{mbuilder.mmodule2nmodule[self].short_comment}'>{name}</a>"
+		if mbuilder.mmodule2nmodule.has_key(self) then
+			return "<a href='{url}' title='{mbuilder.mmodule2nmodule[self].short_comment}'>{name}</a>"
+		else
+			return "<a href='{url}'>{name}</a>"
+		end
 	end
 
 	# Return the module signature decorated with html
@@ -1094,13 +1106,15 @@ redef class MModule
 	# Return the full comment of the module decorated with html
 	fun html_full_comment(mbuilder: ModelBuilder): String do
 		var res = new Buffer
-		res.append("<div id='description'>")
-		res.append("<pre class='text_label'>{mbuilder.mmodule2nmodule[self].comment}</pre>")
-		res.append("<textarea class='edit' rows='1' cols='76' id='fileContent'></textarea>")
-		res.append("<a id='cancelBtn'>Cancel</a>")
-		res.append("<a id='commitBtn'>Commit</a>")
-		res.append("<pre class='text_label' id='preSave' type='2'></pre>")
-		res.append("</div>")
+		if mbuilder.mmodule2nmodule.has_key(self) then
+			res.append("<div id='description'>")
+			res.append("<pre class='text_label'>{mbuilder.mmodule2nmodule[self].comment}</pre>")
+			res.append("<textarea class='edit' rows='1' cols='76' id='fileContent'></textarea>")
+			res.append("<a id='cancelBtn'>Cancel</a>")
+			res.append("<a id='commitBtn'>Commit</a>")
+			res.append("<pre class='text_label' id='preSave' type='2'></pre>")
+			res.append("</div>")
+		end
 		return res.to_s
 	end
 end
@@ -1468,8 +1482,7 @@ end
 redef class AModule
 	private fun comment: String do
 		var ret = new Buffer
-		if n_moduledecl is null or n_moduledecl.n_doc is null then ret
-		if n_moduledecl.n_doc is null then return ""
+		if n_moduledecl == null or n_moduledecl.n_doc == null then return ""
 		for t in n_moduledecl.n_doc.n_comment do
 			ret.append(t.text.substring_from(1))
 		end
