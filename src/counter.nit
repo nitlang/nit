@@ -15,30 +15,43 @@
 # Simple numerical statistical analysis and presentation
 module counter
 
-# A counter counts occurence of things
+# A counter counts occurrences of things
 # Use this instead of a HashMap[E, Int]
 class Counter[E: Object]
-	# Total number of counted occurences
+	super Map[E, Int]
+
+	# Total number of counted occurrences
 	var total: Int = 0
 
 	private var map = new HashMap[E, Int]
 
-	# The number of counted occurences of `e'
-	fun [](e: E): Int
+	# The number of counted occurrences of `e'
+	redef fun [](e: E): Int
 	do
 		var map = self.map
 		if map.has_key(e) then return map[e]
 		return 0
 	end
 
-	# Count one more occurence of `e'
+	redef fun []=(e: E, value: Int)
+	do
+		total -= self[e]
+		self.map[e] = value
+		total += value
+	end
+
+	redef fun keys do return map.keys
+
+	redef fun values do return map.values
+
+	# Count one more occurrence of `e'
 	fun inc(e: E)
 	do
 		self.map[e] = self[e] + 1
 		total += 1
 	end
 
-	# Return an array of elements sorted by occurences
+	# Return an array of elements sorted by occurrences
 	fun sort: Array[E]
 	do
 		var res = map.keys.to_a
