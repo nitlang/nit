@@ -56,6 +56,3 @@ end
 print "*** METRICS ***"
 
 toolcontext.run_global_phases(mainmodule)
-
-# All metrics computation ?
-var all = toolcontext.opt_all.value
