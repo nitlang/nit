@@ -243,8 +243,12 @@ end
 abstract class AbstractCompiler
 	type VISITOR: AbstractCompilerVisitor
 
-	# The main module of the program
-	var mainmodule: MModule protected writable
+	# The main module of the program currently compiled
+	# Is assigned during the separate compilation
+	var mainmodule: MModule writable
+
+	# The real main module of the program
+	var realmainmodule: MModule
 
 	# The modeulbuilder used to know the model and the AST
 	var modelbuilder: ModelBuilder protected writable
@@ -255,6 +259,7 @@ abstract class AbstractCompiler
 	init(mainmodule: MModule, modelbuilder: ModelBuilder)
 	do
 		self.mainmodule = mainmodule
+		self.realmainmodule = mainmodule
 		self.modelbuilder = modelbuilder
 	end
 
