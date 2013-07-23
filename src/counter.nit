@@ -60,6 +60,36 @@ class Counter[E: Object]
 		#res.sort !cmp a, b = map[a] <=> map[b]
 		return res
 	end
+
+	# Display statistical information
+	fun print_summary
+	do
+		var list = self.sort
+		print " population: {list.length}"
+		if list.is_empty then return
+		print " minimum value: {self[list.first]}"
+		print " maximum value: {self[list.last]}"
+		print " total value: {self.total}"
+		print " average value: {div(self.total,list.length)}"
+		print " distribution:"
+		var count = 0
+		var sum = 0
+		var limit = self[list.first]
+		for t in list do
+			if self[t] > limit then
+				print "  <={limit}: sub-population={count} ({div(count*100,list.length)}%); cumulated value={sum} ({div(sum*100,self.total)}%)"
+				count = 0
+				sum = 0
+				while self[t] > limit do
+					limit = limit * 2
+					if limit == 0 then limit = 1
+				end
+			end
+			count += 1
+			sum += self[t]
+		end
+		print "  <={limit}: sub-population={count} ({div(count*100,list.length)}%); cumulated value={sum} ({div(sum*100,self.total)}%)"
+	end
 end
 
 private class CounterSorter[E: Object]

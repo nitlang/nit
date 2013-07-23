@@ -107,9 +107,15 @@ Most used types:
   C: 1
   B: 1
   A: 1
-Distribution of type usage:
-  <=1: 3 (75.00% of types; 33.33% of usage)
-  <=8: 1 (25.00% of types; 66.66% of usage)
+Statistics of type usage:
+ population: 4
+ minimum value: 1
+ maximum value: 6
+ total value: 9
+ average value: 2.25
+ distribution:
+  <=1: sub-population=3 (75.00%); cumulated value=3 (33.33%)
+  <=8: sub-population=1 (25.00%); cumulated value=6 (66.66%)
 --- Sends on Nullable Reciever ---
 Total number of sends: 19
 Number of sends on a nullable receiver: 0 (0.0%)
