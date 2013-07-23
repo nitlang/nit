@@ -40,6 +40,7 @@ class Nitdoc
 	private var opt_custom_menu_items: OptionString = new OptionString("Items displayed in menu before the 'Overview' item (Each item must be enclosed in 'li' tags)", "--custom-menu-items")
 	private var opt_custom_overview_text: OptionString = new OptionString("Text displayed as introduction of Overview page before the modules list", "--custom-overview-text")
 	private var opt_custom_footer_text: OptionString = new OptionString("Text displayed as footer of all pages", "--custom-footer-text")
+
 	init(toolcontext: ToolContext) do
 		# We need a model to collect stufs
 		self.toolcontext = toolcontext
@@ -104,11 +105,7 @@ class Nitdoc
 				abort
 			end
 		end
-		if not opt_source.value is null then
-			source = ""
-		else
-			source = opt_source.value
-		end
+		source = opt_source.value
 	end
 
 	fun start do
@@ -307,7 +304,7 @@ abstract class NitdocPage
 			source = x.join(l.line_start.to_s)
 			x = source.split_with("%L")
 			source = x.join(l.line_end.to_s)
-			return " (<a href=\"{source.to_s}\">show code</a>)"
+			return " (<a href=\"{source.to_s}\">source</a>)"
 		end
 	end
 
@@ -1321,6 +1318,68 @@ redef class MPropDef
 	fun full_name: String do
 		return "{mclassdef.mclass.public_owner.name}::{mclassdef.mclass.name}::{mproperty.name}"
 	end
+
+	fun html_inheritance(page: NitdocClass): String do
+		var res = new Buffer
+		# definitions block
+		res.append("<p class='info'>")
+		page.nitdoc.mainmodule.linearize_mpropdefs(mproperty.mpropdefs)
+		var previous_defs = new Array[MPropDef]
+		var next_defs = new Array[MPropDef]
+		var self_passed = false
+		for def in mproperty.mpropdefs do
+			if def == self then
+				self_passed = true
+				continue
+			end
+			if not self_passed then
+				if not page.mclass.ancestors.has(def.mclassdef.mclass) then continue
+				if def.is_intro then continue
+				previous_defs.add(def)
+			else
+				if not page.mclass.descendants.has(def.mclassdef.mclass) then continue
+				next_defs.add(def)
+			end
+		end
+		var source = ""
+		if page.mbuilder.mpropdef2npropdef.has_key(self) then
+			source = " {page.show_source(page.mbuilder.mpropdef2npropdef[self].location)}"
+		end
+		res.append("defined by {mclassdef.mmodule.html_full_namespace(page.mbuilder)}{source}")
+		if not is_intro then
+			source = ""
+			if page.mbuilder.mpropdef2npropdef.has_key(mproperty.intro) then 
+				source = " {page.show_source(page.mbuilder.mpropdef2npropdef[mproperty.intro].location)}"
+			end
+			res.append(", introduced by {mproperty.intro.mclassdef.mclass.link(page.mbuilder)}{source}")
+		end
+		if not previous_defs.is_empty then
+			res.append(", inherited from ")
+			for i in [0..previous_defs.length[ do
+				var def = previous_defs[i]
+				source = ""
+				if page.mbuilder.mpropdef2npropdef.has_key(def) then 
+					source = " {page.show_source(page.mbuilder.mpropdef2npropdef[def].location)}"
+				end
+				res.append("{def.mclassdef.mclass.link(page.mbuilder)}{source}")
+				if i < previous_defs.length - 1 then res.append(", ")
+			end
+		end
+		if not next_defs.is_empty then
+			res.append(", redefined by ")
+			for i in [0..next_defs.length[ do
+				var def = next_defs[i]
+				source = ""
+				if page.mbuilder.mpropdef2npropdef.has_key(def) then 
+					source = " {page.show_source(page.mbuilder.mpropdef2npropdef[def].location)}"
+				end
+				 res.append("{def.mclassdef.mclass.link(page.mbuilder)}{source}")
+				 if i < next_defs.length - 1 then res.append(", ")
+			end
+		end
+		res.append(".</p>")
+		return res.to_s
+	end
 end
 
 redef class MMethodDef
@@ -1362,45 +1421,7 @@ redef class MMethodDef
 			res.append("<pre class=\"text_label\" title=\"\" name=\"\" tag=\"\" type=\"1\">{nprop.comment}</pre>")
 		end
 		res.append("<textarea id=\"fileContent\" class=\"edit\" cols=\"76\" rows=\"1\" style=\"display: none;\"></textarea><a id=\"cancelBtn\" style=\"display: none;\">Cancel</a><a id=\"commitBtn\" style=\"display: none;\">Commit</a><pre id=\"preSave\" class=\"text_label\" type=\"2\"></pre>")
-		# definitions block
-		res.append("<p class='info'>")
-		page.nitdoc.mainmodule.linearize_mpropdefs(mprop.mpropdefs)
-		var previous_defs = new Array[MMethodDef]
-		var next_defs = new Array[MMethodDef]
-		var self_passed = false
-		for def in mprop.mpropdefs do
-			if def == self then
-				self_passed = true
-				continue
-			end
-			if not self_passed then
-				if not page.mclass.ancestors.has(def.mclassdef.mclass) then continue
-				if def.is_intro then continue
-				previous_defs.add(def)
-			else
-				if not page.mclass.descendants.has(def.mclassdef.mclass) then continue
-				next_defs.add(def)
-			end
-		end
-		res.append("defined by {mclassdef.mmodule.html_full_namespace(page.mbuilder)}")
-		if not is_intro then
-			res.append(", introduced by {mprop.intro.mclassdef.mclass.link(page.mbuilder)}")
-		end
-		if not previous_defs.is_empty then
-			res.append(", inherited from ")
-			for i in [0..previous_defs.length[ do
-				 res.append(previous_defs[i].mclassdef.mclass.link(page.mbuilder))
-				 if i < previous_defs.length - 1 then res.append(", ")
-			end
-		end
-		if not next_defs.is_empty then
-			res.append(", redefined by ")
-			for i in [0..next_defs.length[ do
-				 res.append(next_defs[i].mclassdef.mclass.link(page.mbuilder))
-				 if i < next_defs.length - 1 then res.append(", ")
-			end
-		end
-		res.append(".</p>")
+		res.append(html_inheritance(page))
 		res.append("</div>")
 		res.append("</article>")
 		return res.to_s
@@ -1449,45 +1470,7 @@ redef class MVirtualTypeDef
 			res.append("<a class=\"newComment\" title=\"32\" tag=\"\">New Comment</a>")
 		end
 		res.append("<textarea id=\"fileContent\" class=\"edit\" cols=\"76\" rows=\"1\" style=\"display: none;\"></textarea><a id=\"cancelBtn\" style=\"display: none;\">Cancel</a><a id=\"commitBtn\" style=\"display: none;\">Commit</a><pre id=\"preSave\" class=\"text_label\" type=\"2\"></pre>")
-		# definitions block
-		res.append("<p class='info'>")
-		page.nitdoc.mainmodule.linearize_mpropdefs(mprop.mpropdefs)
-		var previous_defs = new Array[MVirtualTypeDef]
-		var next_defs = new Array[MVirtualTypeDef]
-		var self_passed = false
-		for def in mprop.mpropdefs do
-			if def == self then
-				self_passed = true
-				continue
-			end
-			if not self_passed then
-				if not page.mclass.ancestors.has(def.mclassdef.mclass) then continue
-				if def.is_intro then continue
-				previous_defs.add(def)
-			else
-				if not page.mclass.descendants.has(def.mclassdef.mclass) then continue
-				next_defs.add(def)
-			end
-		end
-		res.append("defined by {mclassdef.mmodule.html_full_namespace(page.mbuilder)}")
-		if not is_intro then
-			res.append(", introduced by {mprop.intro.mclassdef.mclass.link(page.mbuilder)}")
-		end
-		if not previous_defs.is_empty then
-			res.append(", inherited from ")
-			for i in [0..previous_defs.length[ do
-				 res.append(previous_defs[i].mclassdef.mclass.link(page.mbuilder))
-				 if i < previous_defs.length - 1 then res.append(", ")
-			end
-		end
-		if not next_defs.is_empty then
-			res.append(", redefined by ")
-			for i in [0..next_defs.length[ do
-				 res.append(next_defs[i].mclassdef.mclass.link(page.mbuilder))
-				 if i < next_defs.length - 1 then res.append(", ")
-			end
-		end
-		res.append(".</p>")
+		res.append(html_inheritance(page))
 		res.append("</div>")
 		res.append("</article>")
 		return res.to_s
