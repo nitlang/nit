@@ -1131,7 +1131,7 @@ redef class EOF
 	return 92
     end
 
-    init(loc: Location)
+    init init_tk(loc: Location)
     do
         _text = ""
 		_location = loc
@@ -1143,7 +1143,7 @@ redef class AError
 
     init init_error(message: String, loc: Location)
     do
-		init(loc)
+		init_tk(loc)
 		_message = message
     end
 end
@@ -1605,7 +1605,7 @@ class Lexer
 						var token = new ALexerError.init_lexer_error("Syntax error: unknown token {text}.", location, text)
 						return token
 					else
-						var token = new EOF(location)
+						var token = new EOF.init_tk(location)
 						return token
 					end
 				end

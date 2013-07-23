@@ -25,19 +25,15 @@ $ end
 $ end
 class EOF
 	super Token
-private init noinit do end
 end
 class PError
 	super EOF
-private init noinit do end
 end
 class PLexerError
 	super PError
-private init noinit do end
 end
 class PParserError
 	super PError
-private init noinit do end
 end
 $ end template
 
@@ -81,7 +77,7 @@ redef class EOF
 	return ${tokens/eof/@parser_index}
     end
 
-    init(loc: Location)
+    init init_tk(loc: Location)
     do
         _text = ""
 		_location = loc
@@ -93,7 +89,7 @@ redef class PError
 
     init init_error(message: String, loc: Location)
     do
-		init(loc)
+		init_tk(loc)
 		_message = message
     end
 end

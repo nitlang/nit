@@ -301,19 +301,15 @@ class TExternCodeSegment
 end
 class EOF
 	super Token
-private init noinit do end
 end
 class AError
 	super EOF
-private init noinit do end
 end
 class ALexerError
 	super AError
-private init noinit do end
 end
 class AParserError
 	super AError
-private init noinit do end
 end
 
 class AModule super Prod end

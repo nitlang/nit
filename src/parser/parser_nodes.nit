@@ -376,7 +376,6 @@ class TExternCodeSegment
 end
 class EOF
 	super Token
-private init noinit do end
 	redef fun to_s
 	do
 		return "end of file"
@@ -384,15 +383,12 @@ private init noinit do end
 end
 class AError
 	super EOF
-private init noinit do end
 end
 class ALexerError
 	super AError
-private init noinit do end
 end
 class AParserError
 	super AError
-private init noinit do end
 end
 
 class AModule
