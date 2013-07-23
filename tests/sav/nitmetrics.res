@@ -20,4 +20,5 @@
   --rta                   Compute RTA metrics
   --generate-csv          Generate CVS format metrics
   --generate_hyperdoc     Generate Hyperdoc
+  --poset                 Complete metrics on posets
   -d, --dir               Directory where some statistics files are generated

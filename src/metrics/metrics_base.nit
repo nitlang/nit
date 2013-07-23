@@ -44,6 +44,8 @@ redef class ToolContext
 	var opt_generate_csv = new OptionBool("Generate CVS format metrics", "--generate-csv")
 	# --generate_hyperdoc
 	var opt_generate_hyperdoc = new OptionBool("Generate Hyperdoc", "--generate_hyperdoc")
+	# --poset
+	var opt_poset = new OptionBool("Complete metrics on posets", "--poset")
 
 	var opt_dir = new OptionString("Directory where some statistics files are generated", "-d", "--dir")
 	var output_dir: String = "."
@@ -61,6 +63,7 @@ redef class ToolContext
 		self.option_context.add_option(opt_rta)
 		self.option_context.add_option(opt_generate_csv)
 		self.option_context.add_option(opt_generate_hyperdoc)
+		self.option_context.add_option(opt_poset)
 		self.option_context.add_option(opt_dir)
 	end
 

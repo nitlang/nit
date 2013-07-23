@@ -1,4 +1,158 @@
 *** METRICS ***
+--- Poset metrics ---
+## Module importation hierarchy
+Number of nodes: 1
+Number of edges: 1 (1.00 per node)
+Number of direct edges: 0 (0.0 per node)
+Distribution of greaters
+ population: 1
+ minimum value: 1
+ maximum value: 1
+ total value: 1
+ average value: 1.00
+ distribution:
+  <=1: sub-population=1 (100.00%); cumulated value=1 (100.00%)
+Distribution of direct greaters
+ population: 1
+ minimum value: 0
+ maximum value: 0
+ total value: 0
+ average value: 0.0
+ distribution:
+  <=0: sub-population=1 (100.00%); cumulated value=0 (na%)
+Distribution of smallers
+ population: 1
+ minimum value: 1
+ maximum value: 1
+ total value: 1
+ average value: 1.00
+ distribution:
+  <=1: sub-population=1 (100.00%); cumulated value=1 (100.00%)
+Distribution of direct smallers
+ population: 1
+ minimum value: 0
+ maximum value: 0
+ total value: 0
+ average value: 0.0
+ distribution:
+  <=0: sub-population=1 (100.00%); cumulated value=0 (na%)
+## Module nesting hierarchy
+Number of nodes: 1
+Number of edges: 1 (1.00 per node)
+Number of direct edges: 0 (0.0 per node)
+Distribution of greaters
+ population: 1
+ minimum value: 1
+ maximum value: 1
+ total value: 1
+ average value: 1.00
+ distribution:
+  <=1: sub-population=1 (100.00%); cumulated value=1 (100.00%)
+Distribution of direct greaters
+ population: 1
+ minimum value: 0
+ maximum value: 0
+ total value: 0
+ average value: 0.0
+ distribution:
+  <=0: sub-population=1 (100.00%); cumulated value=0 (na%)
+Distribution of smallers
+ population: 1
+ minimum value: 1
+ maximum value: 1
+ total value: 1
+ average value: 1.00
+ distribution:
+  <=1: sub-population=1 (100.00%); cumulated value=1 (100.00%)
+Distribution of direct smallers
+ population: 1
+ minimum value: 0
+ maximum value: 0
+ total value: 0
+ average value: 0.0
+ distribution:
+  <=0: sub-population=1 (100.00%); cumulated value=0 (na%)
+## Classdef hierarchy
+Number of nodes: 8
+Number of edges: 22 (2.75 per node)
+Number of direct edges: 7 (0.87 per node)
+Distribution of greaters
+ population: 8
+ minimum value: 2
+ maximum value: 3
+ total value: 22
+ average value: 2.75
+ distribution:
+  <=2: sub-population=2 (25.00%); cumulated value=4 (18.18%)
+  <=4: sub-population=6 (75.00%); cumulated value=18 (81.81%)
+Distribution of direct greaters
+ population: 8
+ minimum value: 0
+ maximum value: 1
+ total value: 7
+ average value: 0.87
+ distribution:
+  <=0: sub-population=1 (12.50%); cumulated value=0 (0.0%)
+  <=1: sub-population=7 (87.50%); cumulated value=7 (100.00%)
+Distribution of smallers
+ population: 8
+ minimum value: 1
+ maximum value: 8
+ total value: 22
+ average value: 2.75
+ distribution:
+  <=1: sub-population=6 (75.00%); cumulated value=6 (27.27%)
+  <=8: sub-population=2 (25.00%); cumulated value=16 (72.72%)
+Distribution of direct smallers
+ population: 8
+ minimum value: 0
+ maximum value: 6
+ total value: 7
+ average value: 0.87
+ distribution:
+  <=0: sub-population=6 (75.00%); cumulated value=0 (0.0%)
+  <=1: sub-population=1 (12.50%); cumulated value=1 (14.28%)
+  <=8: sub-population=1 (12.50%); cumulated value=6 (85.71%)
+## Class hierarchy
+Number of nodes: 7
+Number of edges: 13 (1.85 per node)
+Number of direct edges: 6 (0.85 per node)
+Distribution of greaters
+ population: 7
+ minimum value: 1
+ maximum value: 2
+ total value: 13
+ average value: 1.85
+ distribution:
+  <=1: sub-population=1 (14.28%); cumulated value=1 (7.69%)
+  <=2: sub-population=6 (85.71%); cumulated value=12 (92.30%)
+Distribution of direct greaters
+ population: 7
+ minimum value: 0
+ maximum value: 1
+ total value: 6
+ average value: 0.85
+ distribution:
+  <=0: sub-population=1 (14.28%); cumulated value=0 (0.0%)
+  <=1: sub-population=6 (85.71%); cumulated value=6 (100.00%)
+Distribution of smallers
+ population: 7
+ minimum value: 1
+ maximum value: 7
+ total value: 13
+ average value: 1.85
+ distribution:
+  <=1: sub-population=6 (85.71%); cumulated value=6 (46.15%)
+  <=8: sub-population=1 (14.28%); cumulated value=7 (53.84%)
+Distribution of direct smallers
+ population: 7
+ minimum value: 0
+ maximum value: 6
+ total value: 6
+ average value: 0.85
+ distribution:
+  <=0: sub-population=6 (85.71%); cumulated value=0 (0.0%)
+  <=8: sub-population=1 (14.28%); cumulated value=6 (100.00%)
 --- Global Summary metrics ---
 (NMD) Number of Modules: 1
 (NC)  Number of Classes: 4
