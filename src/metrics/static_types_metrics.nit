@@ -94,20 +94,7 @@ do
 		print "  {t}: {typecount[t]}"
 	end
 
-	# Compute the distribution of type usage
-	print "Distribution of type usage:"
-	var count = 0
-	var sum = 0
-	var limit = 1
-	for t in types do
-		if typecount[t] > limit then
-			print "  <={limit}: {count} ({div(count*100,types.length)}% of types; {div(sum*100,typecount.total)}% of usage)"
-			count = 0
-			sum = 0
-			while typecount[t] > limit do limit = limit * 2
-		end
-		count += 1
-		sum += typecount[t]
-	end
-	print "  <={limit}: {count} ({div(count*100,types.length)}% of types; {div(sum*100,typecount.total)}% of usage)"
+	# Some statistics
+	print "Statistics of type usage:"
+	typecount.print_summary
 end
