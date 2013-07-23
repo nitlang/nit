@@ -15,6 +15,8 @@
 # Simple numerical statistical analysis and presentation
 module counter
 
+import poset
+
 # A counter counts occurrences of things
 # Use this instead of a HashMap[E, Int]
 class Counter[E: Object]
@@ -96,6 +98,48 @@ private class CounterSorter[E: Object]
 	super AbstractSorter[E]
 	var counter: Counter[E]
 	redef fun compare(a,b) do return self.counter.map[a] <=> self.counter.map[b]
+end
+
+redef class POSet[E]
+	private fun show_counter(c: Counter[Int])
+	do
+		var list = c.sort
+		(new ComparableSorter[Int]).sort(list)
+		for e in list do
+			print " {e} -> {c[e]} times ({div(c[e]*100, c.total)}%)"
+		end
+	end
+
+	# Display exhaustive metrics about the poset
+	fun print_metrics
+	do
+		var nb_greaters = new Counter[E]
+		var nb_direct_greaters = new Counter[E]
+		var nb_smallers = new Counter[E]
+		var nb_direct_smallers = new Counter[E]
+		var nb_direct_edges = 0
+		var nb_edges = 0
+		for n in self do
+			var ne = self[n]
+			nb_edges += ne.greaters.length
+			nb_direct_edges += ne.direct_greaters.length
+			nb_greaters[n] = ne.greaters.length
+			nb_direct_greaters[n] = ne.direct_greaters.length
+			nb_smallers[n] = ne.smallers.length
+			nb_direct_smallers[n] = ne.direct_smallers.length
+		end
+		print "Number of nodes: {self.length}"
+		print "Number of edges: {nb_edges} ({div(nb_edges,self.length)} per node)"
+		print "Number of direct edges: {nb_direct_edges} ({div(nb_direct_edges,self.length)} per node)"
+		print "Distribution of greaters"
+		nb_greaters.print_summary
+		print "Distribution of direct greaters"
+		nb_direct_greaters.print_summary
+		print "Distribution of smallers"
+		nb_smallers.print_summary
+		print "Distribution of direct smallers"
+		nb_direct_smallers.print_summary
+	end
 end
 
 # Helper function to display n/d and handle division by 0
