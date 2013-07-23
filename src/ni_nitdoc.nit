@@ -36,6 +36,10 @@ class Nitdoc
 	private var opt_sharedir = new OptionString("Directory containing the nitdoc files", "--sharedir")
 	private var opt_nodot = new OptionBool("Do not generate graphes with graphiviz", "--no-dot")
 
+	private var opt_custom_title: OptionString = new OptionString("Title displayed in the top of the Overview page and as suffix of all page names", "--custom-title")
+	private var opt_custom_menu_items: OptionString = new OptionString("Items displayed in menu before the 'Overview' item (Each item must be enclosed in 'li' tags)", "--custom-menu-items")
+	private var opt_custom_overview_text: OptionString = new OptionString("Text displayed as introduction of Overview page before the modules list", "--custom-overview-text")
+	private var opt_custom_footer_text: OptionString = new OptionString("Text displayed as footer of all pages", "--custom-footer-text")
 	init(toolcontext: ToolContext) do
 		# We need a model to collect stufs
 		self.toolcontext = toolcontext
@@ -45,6 +49,10 @@ class Nitdoc
 		toolcontext.option_context.add_option(opt_source)
 		toolcontext.option_context.add_option(opt_sharedir)
 		toolcontext.option_context.add_option(opt_nodot)
+		toolcontext.option_context.add_option(opt_custom_title)
+		toolcontext.option_context.add_option(opt_custom_footer_text)
+		toolcontext.option_context.add_option(opt_custom_overview_text)
+		toolcontext.option_context.add_option(opt_custom_menu_items)
 		toolcontext.process_options
 		process_options
 
@@ -117,7 +125,7 @@ class Nitdoc
 	end
 
 	fun overview do
-		var overviewpage = new NitdocOverview(modelbuilder, dot_dir)
+		var overviewpage = new NitdocOverview(self, dot_dir)
 		overviewpage.save("{output_dir.to_s}/index.html")
 	end
 
@@ -129,7 +137,7 @@ class Nitdoc
 	fun modules do
 		for mmodule in model.mmodules do
 			if mmodule.name == "<main>" then continue
-			var modulepage = new NitdocModule(mmodule, modelbuilder, dot_dir)
+			var modulepage = new NitdocModule(mmodule, self, dot_dir)
 			modulepage.save("{output_dir.to_s}/{mmodule.url}")
 		end
 	end
@@ -185,8 +193,11 @@ abstract class NitdocPage
 
 	var dot_dir: nullable String
 	var source: nullable String
+	var nitdoc: Nitdoc
 
-	init do end
+	init(nitdoc: Nitdoc) do
+		self.nitdoc = nitdoc
+	end
 
 	fun append(str: String) do html.append(str)
 	var html = new Buffer
@@ -197,9 +208,20 @@ abstract class NitdocPage
 		append("<script type='text/javascript' src='quicksearch-list.js'></script>")
 		append("<script type='text/javascript' src='scripts/js-facilities.js'></script>")
 		append("<link rel='stylesheet' href='styles/main.css' type='text/css' media='screen'/>")
+		var title = ""
+		if nitdoc.opt_custom_title.value != null then
+			title = " | {nitdoc.opt_custom_title.value.to_s}"
+		end
+		append("<title>{self.title}{title}</title>")
 	end
 
-	fun menu is abstract
+	fun menu do
+		if nitdoc.opt_custom_menu_items.value != null then
+			append(nitdoc.opt_custom_menu_items.value.to_s)
+		end
+	end
+
+	fun title: String is abstract
 
 	fun header do
 		append("<header>")
@@ -251,7 +273,9 @@ abstract class NitdocPage
 	fun content is abstract
 
 	fun footer do
-		append("<footer>Nit standard library. Version jenkins-component=stdlib-19.</footer>")
+		if nitdoc.opt_custom_footer_text.value != null then
+			append("<footer>{nitdoc.opt_custom_footer_text.value.to_s}</footer>")
+		end
 	end
 
 	# Generate a clickable graphviz image using a dot content
@@ -317,8 +341,9 @@ class NitdocOverview
 	private var mbuilder: ModelBuilder
 	private var mmodules = new Array[MModule]
 
-	init(mbuilder: ModelBuilder, dot_dir: nullable String) do
-		self.mbuilder = mbuilder
+	init(nitdoc: Nitdoc, dot_dir: nullable String) do
+		super(nitdoc)
+		self.mbuilder = nitdoc.modelbuilder
 		self.dot_dir = dot_dir
 		# get modules
 		var mmodules = new HashSet[MModule]
@@ -337,20 +362,26 @@ class NitdocOverview
 		sorter.sort(self.mmodules)
 	end
 
-	redef fun head do
-		super
-		append("<title>Overview | Nit Standard Library</title>")
-	end
+	redef fun title do return "Overview"
 
 	redef fun menu do
+		super
 		append("<li class='current'>Overview</li>")
 		append("<li><a href='full-index.html'>Full Index</a></li>")
 	end
 
 	redef fun content do
 		append("<div class='content fullpage'>")
-		append("<h1>Nit Standard Library</h1>")
-		append("<article class='overview'><p>Documentation for the standard library of Nit<br />Version jenkins-component=stdlib-19<br />Date: TODAY</p></article>")
+		var title = "Overview"
+		if nitdoc.opt_custom_title.value != null then
+			title = nitdoc.opt_custom_title.value.to_s
+		end
+		append("<h1>{title}</h1>")
+		var text = ""
+		if nitdoc.opt_custom_overview_text.value != null then
+			text = nitdoc.opt_custom_overview_text.value.to_s
+		end
+		append("<article class='overview'>{text}</article>")
 		append("<article class='overview'>")
 		# module list
 		append("<h2>Modules</h2>")
@@ -388,19 +419,15 @@ end
 class NitdocFullindex
 	super NitdocPage
 
-	private var nitdoc: Nitdoc
-
 	init(nitdoc: Nitdoc) do
-		self.nitdoc = nitdoc
+		super(nitdoc)
 		self.dot_dir = null
 	end
 
-	redef fun head do
-		super
-		append("<title>Full Index | Nit Standard Library</title>")
-	end
+	redef fun title do return "Full Index"
 
 	redef fun menu do
+		super
 		append("<li><a href='index.html'>Overview</a></li>")
 		append("<li class='current'>Full Index</li>")
 	end
@@ -472,21 +499,24 @@ class NitdocModule
 	private var mmodule: MModule
 	private var mbuilder: ModelBuilder
 
-	init(mmodule: MModule, mbuilder: ModelBuilder, dot_dir: nullable String) do
+	init(mmodule: MModule, nitdoc: Nitdoc, dot_dir: nullable String) do
+		super(nitdoc)
 		self.mmodule = mmodule
-		self.mbuilder = mbuilder
+		self.mbuilder = nitdoc.modelbuilder
 		self.dot_dir = dot_dir
 	end
 
-	redef fun head do
-		super
+	redef fun title do
 		if mbuilder.mmodule2nmodule.has_key(mmodule) then
-			var amodule = mbuilder.mmodule2nmodule[mmodule]
-			append("<title>{mmodule.name} module | {amodule.short_comment}</title>")
+			var nmodule = mbuilder.mmodule2nmodule[mmodule]
+			return "{mmodule.name} module | {nmodule.short_comment}"
+		else
+			return "{mmodule.name} module"
 		end
 	end
 
 	redef fun menu do
+		super
 		append("<li><a href='index.html'>Overview</a></li>")
 		append("<li class='current'>{mmodule.name}</li>")
 		append("<li><a href='full-index.html'>Full Index</a></li>")
@@ -637,16 +667,15 @@ class NitdocClass
 
 	private var mclass: MClass
 	private var mbuilder: ModelBuilder
-	private var nitdoc: Nitdoc
 	private var vtypes = new HashSet[MVirtualTypeDef]
 	private var consts = new HashSet[MMethodDef]
 	private var meths = new HashSet[MMethodDef]
 	private var inherited = new HashSet[MPropDef]
 
 	init(mclass: MClass, nitdoc: Nitdoc, dot_dir: nullable String, source: nullable String) do
+		super(nitdoc)
 		self.mclass = mclass
 		self.mbuilder = nitdoc.modelbuilder
-		self.nitdoc = nitdoc
 		self.dot_dir = dot_dir
 		self.source = source
 		# load properties
@@ -679,17 +708,17 @@ class NitdocClass
 		end
 	end
 
-	redef fun head do
-		super
+	redef fun title do
 		var nclass = mbuilder.mclassdef2nclassdef[mclass.intro]
 		if nclass isa AStdClassdef then
-			append("<title>{mclass.name} class | {nclass.short_comment}</title>")
+			return "{mclass.name} class | {nclass.short_comment}"
 		else
-			append("<title>{mclass.name} class</title>")
+			return "{mclass.name} class"
 		end
 	end
 
 	redef fun menu do
+		super
 		append("<li><a href='index.html'>Overview</a></li>")
 		var public_owner = mclass.public_owner
 		if public_owner is null then
