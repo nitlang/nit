@@ -17,6 +17,11 @@ redef class Token
 	return res
     end
 
+    redef fun text=(text)
+    do
+        _text = text
+    end
+
     fun parser_index: Int is abstract
 end
 

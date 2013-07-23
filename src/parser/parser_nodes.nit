@@ -42,6 +42,7 @@ end
 abstract class Token
 	super ANode
 	fun text: String is abstract
+	fun text=(text: String) is abstract
 
 	redef fun to_s: String do
 		return "'{text}'"
