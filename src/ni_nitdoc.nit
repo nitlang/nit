@@ -739,7 +739,7 @@ class NitdocClass
 			append("<h4>Methods</h4>")
 			append("<ul>")
 			for mprop in mts do
-				if mprop.mproperty.intro_mclassdef.mclass.name == "Object" then continue
+				if mclass.name != "Object" and mprop.mproperty.intro_mclassdef.mclass.name == "Object" and mprop.mproperty.visibility <= protected_visibility then continue
 				append(mprop.html_sidebar_item(self))
 			end
 			append("</ul>")
