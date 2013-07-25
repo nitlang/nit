@@ -937,9 +937,14 @@ redef class AStringFormExpr
 	# Compute _cstring and _cstring_length using string_text
 	protected fun compute_string_infos
 	do
-		var len = 0
-		var str = string_text
+		var str = n_string.text
+		if str.length >= 6 and str[0] == str[1] then
+			str = str.substring(3, str.length - 6)
+		else
+			str = str.substring(1, str.length - 2)
+		end
 		var res = new Buffer
+		var len = 0
 		var i = 0
 		while i < str.length do
 			var c = str[i]
@@ -950,6 +955,11 @@ redef class AStringFormExpr
 					res.add(c)
 				end
 				c = c2
+			else if c == '"' then
+				res.add('\\')
+			else if c == '\n' then
+				res.add('\\')
+				c = 'n'
 			end
 			len = len + 1
 			res.add(c)

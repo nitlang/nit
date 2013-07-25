@@ -275,9 +275,6 @@ end
 class TFloat
 	super Token
 end
-class TChar
-	super Token
-end
 class TString
 	super Token
 end
@@ -290,10 +287,13 @@ end
 class TEndString
 	super Token
 end
-class TBadChar
+class TChar
 	super Token
 end
 class TBadString
+	super Token
+end
+class TBadChar
 	super Token
 end
 class TExternCodeSegment

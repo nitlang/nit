@@ -104,7 +104,9 @@ redef class AStringFormExpr
 	redef fun accept_literal(v)
 	do
 		var txt = self.n_string.text
-		self.value = txt.substring(1, txt.length-2).unescape_nit
+		var skip = 1
+		if txt[0] == txt[1] and txt.length >= 6 then skip = 3
+		self.value = txt.substring(skip, txt.length-(2*skip)).unescape_nit
 	end
 end
 
