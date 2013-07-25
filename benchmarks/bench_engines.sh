@@ -130,8 +130,10 @@ function run_compiler()
 		bench_command "shoot" "shoot_logic 30" "./shoot.$title.bin" 30
 		run_command "$@" ../tests/bench_bintree_gen.nit -o "bintrees.$title.bin"
 		bench_command "bintrees" "bench_bintree_gen 18" "./bintrees.$title.bin" 18
-		run_command "$@" "$pep8analysis/src/pep8analysis.nit" -I "$pep8analysis/lib" -o "pep8a.$title.bin"
-		bench_command "pep8analisis" "bench_bintree_gen 18" "./pep8a.$title.bin" "$pep8analysis/tests/privat/"*.pep
+		if test -f "$pep8analysis/src/pep8analysis.nit"; then
+			run_command "$@" "$pep8analysis/src/pep8analysis.nit" -I "$pep8analysis/lib" -o "pep8a.$title.bin"
+			bench_command "pep8analisis" "bench_bintree_gen 18" "./pep8a.$title.bin" "$pep8analysis/tests/privat/"*.pep
+		fi
 	fi
 }
 
