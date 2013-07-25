@@ -70,6 +70,12 @@ redef class ToolContext
 					self.check_errors
 					break
 				end
+				var v = new AnnotationPhaseVisitor(phase)
+				v.enter_visit(nmodule)
+				if errcount != self.error_count then
+					self.check_errors
+					break
+				end
 			end
 			self.check_errors
 		end
@@ -79,9 +85,22 @@ redef class ToolContext
 	end
 end
 
+private class AnnotationPhaseVisitor
+	super Visitor
+
+	var phase: Phase
+
+	init(phase: Phase) do self.phase = phase
+
+	redef fun visit(n)
+	do
+		n.visit_all(self)
+		if n isa AAnnotation then phase.process_annotated_node(n.parent.parent.as(not null), n)
+	end
+end
+
 # Abstraction of steps in the analysis/processing of Nit programs
-# Specific phases should implements either `process_nmodule` or
-# `process_npropdef`.
+# Specific phases should implements one of the `process_*` method
 abstract class Phase
 	# The toolcontext instance attached to the phase
 	var toolcontext: ToolContext
@@ -109,4 +128,9 @@ abstract class Phase
 	# Note that the order of the visit is the one of the file
 	# @toimplement
 	fun process_npropdef(npropdef: APropdef) do end
+
+	# Specific actions to execute on annotated nodes
+	# Note that the order of the visit is the one of the file
+	# @toimplement
+	fun process_annotated_node(node: ANode, nat: AAnnotation) do end
 end
