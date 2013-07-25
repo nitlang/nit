@@ -33,7 +33,7 @@ redef class ModelBuilder
 	fun run_global_compiler(mainmodule: MModule, runtime_type_analysis: RapidTypeAnalysis)
 	do
 		var time0 = get_time
-		self.toolcontext.info("*** COMPILING TO C ***", 1)
+		self.toolcontext.info("*** GENERATING C ***", 1)
 
 		var compiler = new GlobalCompiler(mainmodule, self, runtime_type_analysis)
 		compiler.compile_header
@@ -68,7 +68,7 @@ redef class ModelBuilder
 		compiler.display_stats
 
 		var time1 = get_time
-		self.toolcontext.info("*** END VISITING: {time1-time0} ***", 2)
+		self.toolcontext.info("*** END GENERATING C: {time1-time0} ***", 2)
 		write_and_make(compiler)
 	end
 end

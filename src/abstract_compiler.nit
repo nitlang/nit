@@ -102,6 +102,7 @@ redef class ModelBuilder
 		# A single C file regroups many compiled rumtime functions
 		# Note that we do not try to be clever an a small change in a Nit source file may change the content of all the generated .c files
 		var time0 = get_time
+		self.toolcontext.info("*** WRITING C ***", 1)
 
 		".nit_compile".mkdir
 
@@ -212,7 +213,7 @@ redef class ModelBuilder
 		self.toolcontext.info("Generated makefile: {makename}", 2)
 
 		var time1 = get_time
-		self.toolcontext.info("*** END COMPILING TO C: {time1-time0} ***", 2)
+		self.toolcontext.info("*** END WRITING C: {time1-time0} ***", 2)
 
 		# Execute the Makefile
 

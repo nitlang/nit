@@ -35,12 +35,13 @@ redef class ModelBuilder
 	fun run_separate_erasure_compiler(mainmodule: MModule, runtime_type_analysis: RapidTypeAnalysis)
 	do
 		var time0 = get_time
-		self.toolcontext.info("*** COMPILING TO C ***", 1)
+		self.toolcontext.info("*** GENERATING C ***", 1)
 
 		var compiler = new SeparateErasureCompiler(mainmodule, self, runtime_type_analysis)
 		compiler.compile_header
 
 		# compile class structures
+		self.toolcontext.info("Property coloring", 2)
 		compiler.new_file("{mainmodule.name}.tables")
 		compiler.do_property_coloring
 		for m in mainmodule.in_importation.greaters do
@@ -56,12 +57,15 @@ redef class ModelBuilder
 
 		# compile methods
 		for m in mainmodule.in_importation.greaters do
+			self.toolcontext.info("Generate C for module {m}", 2)
 			compiler.new_file("{m.name}.sep")
 			compiler.compile_module_to_c(m)
 		end
 
 		compiler.display_stats
 
+		var time1 = get_time
+		self.toolcontext.info("*** END GENERATING C: {time1-time0} ***", 2)
 		write_and_make(compiler)
 	end
 end
