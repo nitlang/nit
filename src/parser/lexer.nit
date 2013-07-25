@@ -1033,7 +1033,7 @@ redef class TFloat
     end
 end
 
-redef class TChar
+redef class TString
     redef fun parser_index: Int
     do
 	return 84
@@ -1045,7 +1045,7 @@ redef class TChar
     end
 end
 
-redef class TString
+redef class TStartString
     redef fun parser_index: Int
     do
 	return 85
@@ -1057,7 +1057,7 @@ redef class TString
     end
 end
 
-redef class TStartString
+redef class TMidString
     redef fun parser_index: Int
     do
 	return 86
@@ -1069,7 +1069,7 @@ redef class TStartString
     end
 end
 
-redef class TMidString
+redef class TEndString
     redef fun parser_index: Int
     do
 	return 87
@@ -1081,7 +1081,7 @@ redef class TMidString
     end
 end
 
-redef class TEndString
+redef class TChar
     redef fun parser_index: Int
     do
 	return 88
@@ -1093,7 +1093,7 @@ redef class TEndString
     end
 end
 
-redef class TBadChar
+redef class TBadString
     redef fun parser_index: Int
     do
 	return 89
@@ -1105,7 +1105,7 @@ redef class TBadChar
     end
 end
 
-redef class TBadString
+redef class TBadChar
     redef fun parser_index: Int
     do
 	return 90
@@ -1579,25 +1579,25 @@ class Lexer
 						return new TFloat.init_tk(location)
 					end
 					if accept_token == 85 then
-						return new TChar.init_tk(location)
-					end
-					if accept_token == 86 then
 						return new TString.init_tk(location)
 					end
-					if accept_token == 87 then
+					if accept_token == 86 then
 						return new TStartString.init_tk(location)
 					end
-					if accept_token == 88 then
+					if accept_token == 87 then
 						return new TMidString.init_tk(location)
 					end
-					if accept_token == 89 then
+					if accept_token == 88 then
 						return new TEndString.init_tk(location)
 					end
+					if accept_token == 89 then
+						return new TChar.init_tk(location)
+					end
 					if accept_token == 90 then
-						return new TBadChar.init_tk(location)
+						return new TBadString.init_tk(location)
 					end
 					if accept_token == 91 then
-						return new TBadString.init_tk(location)
+						return new TBadChar.init_tk(location)
 					end
 					if accept_token == 92 then
 						return new TExternCodeSegment.init_tk(location)

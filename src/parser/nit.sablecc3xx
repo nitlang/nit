@@ -33,6 +33,7 @@ tab = 9;
 cr = 13;
 lf = 10;
 any = [all - [cr + lf]];
+eol_helper = cr lf | cr | lf; // This takes care of different platforms
 
 // characers inside strings and super-strings (atomaton powaa)
 str_char
@@ -41,13 +42,40 @@ str_char
 	;
 str_body = str_char*;
 
+sstr_char
+        = [any - [''' + '\']]
+        | '\' any
+        ;
+
+sstr_body = sstr_char*;
+
+long_str_char = str_char | cr | lf;
+
+long_str_part
+        = long_str_char
+        | '"' long_str_char
+        | '"' '"' long_str_char
+        | '{' long_str_char
+        | '{' '{' long_str_char
+        ;
+
+long_str_body = long_str_part*;
+
+long_sstr_char = sstr_char | cr | lf;
+long_sstr_part
+        = long_sstr_char
+        | ''' long_sstr_char
+        | ''' ''' long_sstr_char
+        ;
+
+long_sstr_body = long_sstr_part*;
+
+
 extern_code_char
 	= [all - ['`' + '\']]
 	| '\' all
 	;
 extern_code_body = extern_code_char*;
-
-eol_helper = cr lf | cr | lf; // This takes care of different platforms
 
 /*****************************************************************************/
 States
@@ -149,13 +177,13 @@ attrid = '_' lowercase letter*;
 
 number = digit+;
 float = digit* '.' digit+;
+string = '"' str_body '"' | '"' '"' '"' long_str_body '"' '"' '"' | ''' ''' ''' long_sstr_body ''' ''' ''';
+start_string = '"' str_body '{' | '"' '"' '"' long_str_body '{' '{' '{';
+mid_string = '}' str_body '{' | '}' '}' '}' long_str_body '{' '{' '{';
+end_string = '}' str_body '"' | '}' '}' '}' long_str_body '"' '"' '"';
 char = (''' [[any - '''] - '\'] ''') | (''' '\' any ''');
-string = '"' str_body '"';
-start_string = '"' str_body '{';
-mid_string = '}' str_body '{';
-end_string = '}' str_body '"';
+bad_string = ('"'|'}') str_body | '"' '"' '"' long_str_body | ''' ''' ''' long_sstr_body;
 bad_char = ''' '\'? any;
-bad_string = ('"'|'}') str_body;
 
 extern_code_segment = '`' '{' extern_code_body '`' '}';
 
