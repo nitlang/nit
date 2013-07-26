@@ -96,6 +96,9 @@ function skip_test()
 	else
 		return 0
 	fi
+	if test -n "$html"; then
+		echo >>"$html" "<h2>$1</h2>"
+	fi
 	echo "*"
 	echo "* $1 *****"
 	echo "*"
@@ -146,6 +149,7 @@ function usage()
 	echo "  -n count: number of execution for each bar (default: $count)"
 	echo "  --dry: Do not run the commands, just reuse the data and generate the graph"
 	echo "  --fast: Run less and faster tests"
+	echo "  --html: Generate and HTML output"
 	echo "  -h: this help"
 }
 
@@ -157,6 +161,7 @@ while [ "$stop" = false ]; do
 		-n) count="$2"; shift; shift;;
 		--dry) dry_run=true; shift;;
 		--fast) fast=true; shift;;
+		--html) html="index.html"; echo >"$html" "<html><head></head><body>"; shift;;
 		*) stop=true
 	esac
 done
@@ -443,6 +448,10 @@ function bench_compilation_time
 	plot "$name.gnu"
 }
 bench_compilation_time
+
+if test -n "$html"; then
+	echo >>"$html" "</body></html>"
+fi
 
 if test -n "$died"; then
 	echo "Some commands failed"

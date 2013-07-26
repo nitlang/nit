@@ -62,6 +62,9 @@ function prepare_res()
 {
 	echo
 	echo "# [$2] $3 #"
+	if test -n "$html"; then
+		echo >>"$html" "<p>[$2] $3 <a href=\"$1\">data</a></p>"
+	fi
 	res=$1
 	if [ "$plots" = "" ]; then
 		plots="plot '$1' using 4:2:3:xticlabels(5) ti '$2'"
@@ -91,9 +94,19 @@ set title "$1 ; avg. on $count-1 runs"
 set ylabel "time (s)"
 $plots
 END
+plots=
+
+if test -n "$html"; then
+	echo "# gnuplot $1"
+	bn=`basename "$1" .gnu`
+	gnuplot -e "set term png; set output \"$bn.png\"" "$1"
+	echo gnuplot -e "set term png; set output \"$bn.png\"" "$1"
+
+	echo >>"$html" "<img src=\"$bn.png\"/>"
+else
 	echo "# gnuplot -p $1"
 	gnuplot -p "$1"
-	plots=
+fi
 }
 
 ## GLOBAL VARIABLES ##
@@ -104,3 +117,5 @@ res=
 # The current stuff to plot (set by prepare_res, used by plot)
 plots=
 
+# The name of the html file if output is set to html
+html=
