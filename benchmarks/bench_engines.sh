@@ -214,6 +214,12 @@ function bench_steps()
 	bench_command "generate c" "" ./nitg --global --no-cc ../src/nitg.nit
 	bench_command "full" "" ./nitg --global ../src/nitg.nit -o "nitg_nitg.bin"
 
+	prepare_res "$name-nitg-s.dat" "nitg-s" "Various steps of nitg --separate"
+	bench_command "parse" "" ./nitg --separate --only-parse ../src/nitg.nit
+	bench_command "metamodel" "" ./nitg --separate --only-metamodel ../src/nitg.nit
+	bench_command "generate c" "" ./nitg --separate --no-cc ../src/nitg.nit
+	bench_command "full" "" ./nitg --separate ../src/nitg.nit -o "nitg_nitg-e.bin"
+
 	prepare_res "$name-nitg-e.dat" "nitg-e" "Various steps of nitg --erasure"
 	bench_command "parse" "" ./nitg --erasure --only-parse ../src/nitg.nit
 	bench_command "metamodel" "" ./nitg --erasure --only-metamodel ../src/nitg.nit
@@ -419,6 +425,10 @@ function bench_compilation_time
 	prepare_res "$name-nitg.dat" "nitg-g" "nitg --global"
 	for i in ../examples/hello_world.nit ../src/test_parser.nit ../src/nitg.nit; do
 		bench_command `basename "$i" .nit` "" ./nitg --global "$i" --no-cc
+	done
+	prepare_res "$name-nitg-e.dat" "nitg-e" "nitg --separate"
+	for i in ../examples/hello_world.nit ../src/test_parser.nit ../src/nitg.nit; do
+		bench_command `basename "$i" .nit` "" ./nitg --separate "$i" --no-cc
 	done
 	prepare_res "$name-nitg-e.dat" "nitg-e" "nitg --erasure"
 	for i in ../examples/hello_world.nit ../src/test_parser.nit ../src/nitg.nit; do
