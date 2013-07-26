@@ -182,14 +182,14 @@ redef class ModelBuilder
 			#p = "..".join_path(p)
 			cc_includes += " -I \"" + p + "\""
 		end
-		makefile.write("CC = ccache cc\nCFLAGS = -g -O2{cc_includes}\nLDFLAGS ?= \nLDLIBS  ?= -lm -lgc\n\n")
+		makefile.write("CC = ccache cc\nCFLAGS = -g -O2\nCINCL = {cc_includes}\nLDFLAGS ?= \nLDLIBS  ?= -lm -lgc\n\n")
 		makefile.write("all: {outname}\n\n")
 
 		var ofiles = new Array[String]
 		# Compile each generated file
 		for f in cfiles do
 			var o = f.strip_extension(".c") + ".o"
-			makefile.write("{o}: {f}\n\t$(CC) $(CFLAGS) -D NONITCNI -c -o {o} {f}\n\n")
+			makefile.write("{o}: {f}\n\t$(CC) $(CFLAGS) $(CINCL) -D NONITCNI -c -o {o} {f}\n\n")
 			ofiles.add(o)
 		end
 
