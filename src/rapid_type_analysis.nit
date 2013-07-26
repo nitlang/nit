@@ -589,15 +589,9 @@ redef class ASuperExpr
 			return
 		end
 
-		#FIXME: we do not want an ugly static call!
-		var mpropdef = v.mpropdef
-		var mpropdefs = mpropdef.mproperty.lookup_super_definitions(mpropdef.mclassdef.mmodule, mpropdef.mclassdef.bound_mtype)
-		if mpropdefs.length != 1 then
-			debug("MPRODFEFS for super {mpropdef} for {v.receiver}: {mpropdefs.join(", ")}")
-		end
-		var msuperpropdef = mpropdefs.first
-		assert msuperpropdef isa MMethodDef
-		v.analysis.add_static_call(v.receiver, msuperpropdef)
+		var mpropdef = v.mpropdef.lookup_next_definition(v.analysis.mainmodule, v.receiver)
+		assert mpropdef isa MMethodDef
+		v.analysis.add_static_call(v.receiver, mpropdef)
 	end
 end
 
