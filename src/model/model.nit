@@ -751,8 +751,6 @@ abstract class MType
 
 	# Return the nullable version of the type
 	# If the type is already nullable then self is returned
-	#
-	# FIXME: DO NOT WORK YET
 	fun as_nullable: MType
 	do
 		var res = self.as_nullable_cache
@@ -1143,7 +1141,6 @@ class MParameterType
 end
 
 # A type prefixed with "nullable"
-# FIXME Stub implementation
 class MNullableType
 	super MType
 
@@ -1661,8 +1658,6 @@ abstract class MPropDef
 	# Return the next definition in linearization of `mtype`.
 	#
 	# This method is used to determine what method is called by a super.
-	#
-	# FIXME: IMPLEMENTED AS A static designation, it is ugly
 	#
 	# REQUIRE: not mtype.need_anchor
 	fun lookup_next_definition(mmodule: MModule, mtype: MType): MPROPDEF

@@ -466,7 +466,6 @@ private class NaiveInterpreter
 
 	# Check that non nullable attributes of `recv' are correctly initialized.
 	# This function is used as the last instruction of a new
-	# FIXME: this will work better once there is nullable types
 	fun check_init_instance(recv: Instance)
 	do
 		if not recv isa MutableInstance then return
@@ -1586,7 +1585,6 @@ redef class ASuperExpr
 
 		# stantard call-next-method
 		var mpropdef = v.frame.mpropdef
-		# FIXME: we do not want an ugly static call!
 		mpropdef = mpropdef.lookup_next_definition(v.mainmodule, recv.mtype)
 		assert mpropdef isa MMethodDef
 		var res = v.call(mpropdef, args)
