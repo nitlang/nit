@@ -551,7 +551,7 @@ class NitdocModule
 		sidebar
 		append("<div class='content'>")
 		append("<h1>{mmodule.name}</h1>")
-		append("<div class='subtitle'>")
+		append("<div class='subtitle info'>")
 		mmodule.html_signature(self)
 		append("</div>")
 		mmodule.html_full_comment(self)
