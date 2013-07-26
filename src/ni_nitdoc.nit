@@ -407,14 +407,25 @@ class NitdocOverview
 	end
 
 	private fun process_generate_dot do
+		# build poset with public owners
+		var poset = new POSet[MModule]
+		for mmodule in mmodules do
+			poset.add_node(mmodule)
+			for omodule in mmodules do
+				if mmodule == omodule then continue
+				if mmodule.in_importation < omodule then
+					poset.add_node(omodule)
+					poset.add_edge(mmodule, omodule)
+				end
+			end
+		end
+		# build graph
 		var op = new Buffer
 		op.append("digraph dep \{ rankdir=BT; node[shape=none,margin=0,width=0,height=0,fontsize=10]; edge[dir=none,color=gray]; ranksep=0.2; nodesep=0.1;\n")
-		for mmodule in mmodules do
+		for mmodule in poset do
 			op.append("\"{mmodule.name}\"[URL=\"{mmodule.url}\"];\n")
-			for imported in mmodule.in_importation.direct_greaters do
-				if imported.direct_owner == null then
-					op.append("\"{mmodule.name}\"->\"{imported.name}\";\n")
-				end
+			for omodule in poset[mmodule].direct_greaters do
+				op.append("\"{mmodule.name}\"->\"{omodule.name}\";\n")
 			end
 		end
 		op.append("\}\n")
@@ -551,25 +562,35 @@ class NitdocModule
 	end
 
 	private fun process_generate_dot do
-		var name = "dep_{mmodule.name}"
-		var op = new Buffer
-		op.append("digraph {name} \{ rankdir=BT; node[shape=none,margin=0,width=0,height=0,fontsize=10]; edge[dir=none,color=gray]; ranksep=0.2; nodesep=0.1;\n")
-		for m in mmodule.in_importation.poset do
-			if m.name == "<main>" then continue
-			var public_owner = m.public_owner
-			if public_owner == null then
-				public_owner = m
-				if m == mmodule then
-					op.append("\"{m.name}\"[shape=box,margin=0.03];\n")
-				else
-					op.append("\"{m.name}\"[URL=\"{m.url}\"];\n")
+		# build poset with public owners
+		var poset = new POSet[MModule]
+		for mmodule in self.mmodule.in_importation.poset do
+			if mmodule.name == "<main>" then continue
+			if mmodule.public_owner != null then continue
+			if not mmodule.in_importation < self.mmodule and not self.mmodule.in_importation < mmodule and mmodule != self.mmodule then continue
+			poset.add_node(mmodule)
+			for omodule in mmodule.in_importation.poset do
+				if mmodule == omodule then continue
+				if omodule.name == "<main>" then continue
+				if omodule.public_owner != null then continue
+				if mmodule.in_importation < omodule then
+					poset.add_node(omodule)
+					poset.add_edge(mmodule, omodule)
 				end
 			end
-			for imported in m.in_importation.direct_greaters do
-				if imported.name == "<main>" then continue
-				if imported.public_owner == null then
-					op.append("\"{public_owner.name}\"->\"{imported.name}\";\n")
-				end
+		end
+		# build graph
+		var op = new Buffer
+		var name = "dep_{mmodule.name}"
+		op.append("digraph {name} \{ rankdir=BT; node[shape=none,margin=0,width=0,height=0,fontsize=10]; edge[dir=none,color=gray]; ranksep=0.2; nodesep=0.1;\n")
+		for mmodule in poset do
+			if mmodule == self.mmodule then
+				op.append("\"{mmodule.name}\"[shape=box,margin=0.03];\n")
+			else
+				op.append("\"{mmodule.name}\"[URL=\"{mmodule.url}\"];\n")
+			end
+			for omodule in poset[mmodule].direct_greaters do
+				op.append("\"{mmodule.name}\"->\"{omodule.name}\";\n")
 			end
 		end
 		op.append("\}\n")
