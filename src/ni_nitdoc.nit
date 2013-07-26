@@ -787,6 +787,7 @@ class NitdocClass
 			append("<h4>Constructors</h4>")
 			append("<ul>")
 			for mprop in cts do
+				if mprop.mproperty.name == "init" and mprop.mclassdef.mclass != mclass then continue
 				mprop.html_sidebar_item(self)
 			end
 			append("</ul>")
