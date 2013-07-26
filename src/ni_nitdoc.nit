@@ -798,36 +798,35 @@ class NitdocClass
 		var sorterp = new ComparableSorter[MClass]
 		append("<nav>")
 		append("<h3>Inheritance</h3>")
-		if mclass.ancestors.length > 1 then
-			sorted = mclass.ancestors.to_a
-			sorterp.sort(sorted)
+		var greaters = mclass.in_hierarchy(ctx.mainmodule).greaters.to_a
+		if greaters.length > 1 then
+			ctx.mainmodule.linearize_mclasses(greaters)
 			append("<h4>Superclasses</h4>")
 			append("<ul>")
-			for sup in sorted do
+			for sup in greaters do
 				if sup == mclass then continue
 				append("<li>{sup.link(mbuilder)}</li>")
 			end
 			append("</ul>")
 		end
-
-		if mclass.descendants.length <= 1 then
+		var smallers = mclass.in_hierarchy(ctx.mainmodule).smallers.to_a
+		var direct_smallers = mclass.in_hierarchy(ctx.mainmodule).direct_smallers.to_a
+		if smallers.length <= 1 then
 			append("<h4>No Known Subclasses</h4>")
-		else if mclass.descendants.length <= 100 then
-			sorted = mclass.descendants.to_a
-			sorterp.sort(sorted)
+		else if smallers.length <= 100 then
+			ctx.mainmodule.linearize_mclasses(smallers)
 			append("<h4>Subclasses</h4>")
 			append("<ul>")
-			for sub in sorted do
+			for sub in smallers do
 				if sub == mclass then continue
 				append("<li>{sub.link(mbuilder)}</li>")
 			end
 			append("</ul>")
-		else if mclass.children.length <= 100 then
-			sorted = mclass.children.to_a
-			sorterp.sort(sorted)
+		else if direct_smallers.length <= 100 then
+			ctx.mainmodule.linearize_mclasses(direct_smallers)
 			append("<h4>Direct Subclasses Only</h4>")
 			append("<ul>")
-			for sub in sorted do
+			for sub in direct_smallers do
 				if sub == mclass then continue
 				append("<li>{sub.link(mbuilder)}</li>")
 			end
@@ -1341,11 +1340,11 @@ redef class MPropDef
 				continue
 			end
 			if not self_passed then
-				if not page.mclass.ancestors.has(def.mclassdef.mclass) then continue
+				if def.mclassdef.mclass.in_hierarchy(page.ctx.mainmodule) < page.mclass then continue
 				if def.is_intro then continue
 				previous_defs.add(def)
 			else
-				if not page.mclass.descendants.has(def.mclassdef.mclass) then continue
+				if page.mclass.in_hierarchy(page.ctx.mainmodule) < def.mclassdef.mclass then continue
 				next_defs.add(def)
 			end
 		end
