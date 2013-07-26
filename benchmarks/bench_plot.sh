@@ -64,9 +64,9 @@ function prepare_res()
 	echo "# [$2] $3 #"
 	res=$1
 	if [ "$plots" = "" ]; then
-		plots="plot '$1' using 4:2:3:xticlabels(5) ti '$2';"
+		plots="plot '$1' using 4:2:3:xticlabels(5) ti '$2'"
 	else
-		plots="$plots replot '$1' using 4:2:3 ti '$2';"
+		plots="$plots, '$1' using 4:2:3 ti '$2'"
 	fi
 	if [ "$dry_run" = "true" ]; then return; fi
 	echo "# [$2] $3 ; count=$count" > "$res"
