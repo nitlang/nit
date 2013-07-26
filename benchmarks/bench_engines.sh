@@ -240,7 +240,9 @@ function bench_nitg-g_options()
 	prepare_res "$name.dat" "no options" "nitg-g without options"
 	run_compiler "nitg-g" ./nitg --global
 
-	if test -n "$2"; then
+	if test "$1" = NOALL; then
+		shift
+	elif test -n "$2"; then
 		prepare_res "$name-all.dat" "all" "nitg-g with all options $@"
 		run_compiler "nitg-g-$tag" ./nitg --global $@
 	fi
@@ -264,7 +266,9 @@ function bench_nitg-s_options()
 	prepare_res "$name.dat" "no options" "nitg-s without options"
 	run_compiler "nitg-s" ./nitg --separate
 
-	if test -n "$2"; then
+	if test "$1" = NOALL; then
+		shift
+	elif test -n "$2"; then
 		prepare_res "$name-all.dat" "all" "nitg-s with all options $@"
 		run_compiler "nitg-s-$tag" ./nitg --separate $@
 	fi
@@ -279,7 +283,7 @@ function bench_nitg-s_options()
 bench_nitg-s_options "slower" --hardening --no-inline-intern --no-union-attribute --no-shortcut-equal --no-shortcut-range
 bench_nitg-s_options "nocheck" --no-check-covariance --no-check-initialization --no-check-assert --no-check-autocast --no-check-other
 bench_nitg-s_options "faster" --inline-coloring-numbers
-bench_nitg-s_options "typing" --bm-typing --phand-typing
+bench_nitg-s_options "typing" NOALL --bm-typing --phand-typing
 
 function bench_nitg-e_options()
 {
@@ -290,7 +294,9 @@ function bench_nitg-e_options()
 	prepare_res "$name.dat" "no options" "nitg-e without options"
 	run_compiler "nitg-e" ./nitg --erasure
 
-	if test -n "$2"; then
+	if test "$1" = NOALL; then
+		shift
+	elif test -n "$2"; then
 		prepare_res "$name-all.dat" "all" "nitg-e with all options $@"
 		run_compiler "nitg-e-$tag" ./nitg --erasure $@
 	fi
@@ -305,7 +311,7 @@ function bench_nitg-e_options()
 bench_nitg-e_options "slower" --hardening --no-inline-intern --no-union-attribute --no-shortcut-equal --no-shortcut-range
 bench_nitg-e_options "nocheck" --no-check-covariance --no-check-initialization --no-check-assert --no-check-autocast --no-check-other --no-check-erasure-cast
 bench_nitg-e_options "faster" --inline-coloring-numbers
-bench_nitg-e_options "typing" --bm-typing --phand-typing
+bench_nitg-e_options "typing" NOALL --bm-typing --phand-typing
 
 function bench_nitc_gc()
 {
