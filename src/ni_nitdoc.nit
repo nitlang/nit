@@ -620,11 +620,13 @@ class NitdocModule
 			display_module_list(clients)
 		end
 		append("</nav>")
-		if mmodule.in_nesting.direct_greaters.length > 0 then
-			append("<nav>")
-			append("<h3>Nested Modules</h3>")
-			display_module_list(mmodule.in_nesting.direct_greaters.to_a)
-			append("</nav>")
+		if ctx.min_visibility < protected_visibility then
+			if mmodule.in_nesting.direct_greaters.length > 0 then
+				append("<nav>")
+				append("<h3>Nested Modules</h3>")
+				display_module_list(mmodule.in_nesting.direct_greaters.to_a)
+				append("</nav>")
+			end
 		end
 		append("</div>")
 	end
