@@ -30,11 +30,13 @@ class Nitdoc
 	private var dot_dir: nullable String
 	private var share_dir: nullable String
 	private var source: nullable String
+	private var min_visibility: MVisibility
 
 	private var opt_dir = new OptionString("Directory where doc is generated", "-d", "--dir")
 	private var opt_source = new OptionString("What link for source (%f for filename, %l for first line, %L for last line)", "--source")
 	private var opt_sharedir = new OptionString("Directory containing the nitdoc files", "--sharedir")
 	private var opt_nodot = new OptionBool("Do not generate graphes with graphiviz", "--no-dot")
+	private var opt_private: OptionBool = new OptionBool("Generate the private API", "--private")
 
 	private var opt_custom_title: OptionString = new OptionString("Title displayed in the top of the Overview page and as suffix of all page names", "--custom-title")
 	private var opt_custom_menu_items: OptionString = new OptionString("Items displayed in menu before the 'Overview' item (Each item must be enclosed in 'li' tags)", "--custom-menu-items")
@@ -50,6 +52,7 @@ class Nitdoc
 		toolcontext.option_context.add_option(opt_source)
 		toolcontext.option_context.add_option(opt_sharedir)
 		toolcontext.option_context.add_option(opt_nodot)
+		toolcontext.option_context.add_option(opt_private)
 		toolcontext.option_context.add_option(opt_custom_title)
 		toolcontext.option_context.add_option(opt_custom_footer_text)
 		toolcontext.option_context.add_option(opt_custom_overview_text)
@@ -103,6 +106,12 @@ class Nitdoc
 			if share_dir is null then
 				print "Error: Invalid nitdoc share files. Check --sharedir or envvar NIT_DIR"
 				abort
+			end
+
+			if opt_private.value then
+				min_visibility = none_visibility
+			else
+				min_visibility = protected_visibility
 			end
 		end
 		source = opt_source.value
@@ -158,14 +167,14 @@ class Nitdoc
 			content.append("],")
 		end
 		for mclass in model.mclasses do
-			if mclass.visibility <= none_visibility then continue
+			if mclass.visibility < min_visibility then continue
 			content.append("\"{mclass.name}\": [")
 			content.append("\{txt: \"{mclass.name}\", url:\"{mclass.url}\" \},")
 			content.append("],")
 		end
 		var name2mprops = new HashMap[String, Set[MPropDef]]
 		for mproperty in model.mproperties do
-			if mproperty.visibility <= none_visibility then continue
+			if mproperty.visibility < min_visibility then continue
 			if mproperty isa MAttribute then continue
 			if not name2mprops.has_key(mproperty.name) then name2mprops[mproperty.name] = new HashSet[MPropDef]
 			name2mprops[mproperty.name].add_all(mproperty.mpropdefs)
@@ -465,6 +474,7 @@ class NitdocFullindex
 		append("<h2>Classes</h2>")
 		append("<ul>")
 		for mclass in sorted do
+			if mclass.visibility < nitdoc.min_visibility then continue
 			append("<li>{mclass.link(nitdoc.modelbuilder)}</li>")
 		end
 		append("</ul>")
@@ -480,6 +490,7 @@ class NitdocFullindex
 		append("<h2>Properties</h2>")
 		append("<ul>")
 		for mproperty in sorted do
+			if mproperty.visibility < nitdoc.min_visibility then continue
 			if mproperty isa MAttribute then continue
 			append("<li>{mproperty.intro.link(nitdoc.modelbuilder)} ({mproperty.intro.mclassdef.mclass.link(nitdoc.modelbuilder)})</li>")
 		end
@@ -618,6 +629,7 @@ class NitdocModule
 		append("<h2>Classes</h2>")
 		append("<ul>")
 		for c in sorted do
+			if c.visibility < nitdoc.min_visibility then continue
 			if redef_mclasses.has(c) and c.intro_mmodule.public_owner != mmodule then
 				append("<li class='redef'>")
 				append("<span title='refined in this module'>R </span>")
@@ -650,7 +662,7 @@ class NitdocModule
 		append("<ul>")
 		for mprop in sorted do
 			if mprop isa MAttributeDef then continue
-			if mprop.mproperty.visibility <= none_visibility then continue
+			if mprop.mproperty.visibility < nitdoc.min_visibility then continue
 			append(mprop.html_list_item(mbuilder))
 		end
 		append("</ul>")
@@ -678,7 +690,7 @@ class NitdocClass
 		# load properties
 		for mclassdef in mclass.mclassdefs do
 			for mpropdef in mclassdef.mpropdefs do
-				if mpropdef.mproperty.visibility <= none_visibility then continue
+				if mpropdef.mproperty.visibility < nitdoc.min_visibility then continue
 				if mpropdef isa MVirtualTypeDef then vtypes.add(mpropdef)
 				if mpropdef isa MMethodDef then
 					if mpropdef.mproperty.is_init then
@@ -692,7 +704,7 @@ class NitdocClass
 		# get inherited properties
 		for mprop in mclass.inherited_mproperties do
 			var mpropdef = mprop.intro
-			if mprop.visibility <= none_visibility then continue
+			if mprop.visibility < nitdoc.min_visibility then continue
 			if mpropdef isa MVirtualTypeDef then vtypes.add(mpropdef)
 			if mpropdef isa MMethodDef then
 				if mpropdef.mproperty.is_init then
@@ -1153,11 +1165,7 @@ redef class MClass
 	# Return the module signature decorated with html
 	fun html_full_signature(mbuilder: ModelBuilder): String do
 		var res = new Buffer
-		if visibility <= none_visibility then
-			res.append("private ")
-		else if visibility == protected_visibility then
-			res.append("protected ")
-		end
+		if visibility < public_visibility then res.append("{visibility.to_s} ")
 		res.append("{kind} {html_namespace(mbuilder)}")
 		return res.to_s
 	end
@@ -1395,13 +1403,7 @@ redef class MMethodDef
 		classes.add("fun")
 		if mprop.is_init then classes.add("init")
 		if is_redef then classes.add("redef")
-		if mprop.visibility == none_visibility then
-			classes.add("private")
-		else if mprop.visibility == protected_visibility then
-			classes.add("protected")
-		else
-			classes.add("public")
-		end
+		classes.add(mproperty.visibility.to_s)
 		res.append("<article class='{classes.join(" ")}' id='{anchor}'>")
 		if nprop isa AAttrPropdef then
 			if nprop.mreadpropdef == self then
@@ -1430,11 +1432,7 @@ redef class MMethodDef
 	redef fun html_info(page) do
 		var res = new Buffer
 		res.append("<div class='info'>")
-		if mproperty.visibility <= none_visibility then
-			res.append("private ")
-		else if mproperty.visibility <= protected_visibility then
-			res.append("protected ")
-		end
+		if mproperty.visibility < public_visibility then res.append("{mproperty.visibility.to_s} ")
 		if mproperty.intro_mclassdef.mclass != page.mclass then res.append("redef ")
 		res.append("fun {mproperty.html_namespace(page.mbuilder)}")
 		res.append("</div>")
@@ -1451,13 +1449,7 @@ redef class MVirtualTypeDef
 		var classes = new Array[String]
 		classes.add("type")
 		if is_redef then classes.add("redef")
-		if mprop.visibility == none_visibility then
-			classes.add("private")
-		else if mprop.visibility == protected_visibility then
-			classes.add("protected")
-		else
-			classes.add("public")
-		end
+		classes.add(mproperty.visibility.to_s)
 		res.append("<article class='{classes.join(" ")}' id='{anchor}'>")
 		res.append("<h3 class='signature'>{mprop.name}: {bound.link(page.mbuilder)}</h3>")
 		res.append(html_info(page))
