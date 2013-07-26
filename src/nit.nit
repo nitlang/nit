@@ -47,8 +47,6 @@ var progname = arguments.first
 var mmodules = modelbuilder.parse([progname])
 modelbuilder.run_phases
 
-if toolcontext.opt_only_metamodel.value then exit(0)
-
 # Here we launch the interpreter on the main module
 assert mmodules.length == 1
 var mainmodule = mmodules.first

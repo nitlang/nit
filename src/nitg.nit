@@ -53,10 +53,9 @@ var progname = arguments.first
 
 # Here we load an process all modules passed on the command line
 var mmodules = modelbuilder.parse([progname])
+
 if mmodules.is_empty then return
 modelbuilder.run_phases
-
-if toolcontext.opt_only_metamodel.value then exit(0)
 
 # Here we launch the interpreter on the main module
 assert mmodules.length == 1

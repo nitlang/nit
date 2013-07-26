@@ -70,6 +70,11 @@ class ModelBuilder
 			nmodules.add(mmodule2nmodule[mm])
 		end
 		toolcontext.run_phases(nmodules)
+
+		if toolcontext.opt_only_metamodel.value then
+			self.toolcontext.info("*** ONLY METAMODEL", 1)
+			exit(0)
+		end
 	end
 
 	# Instantiate a modelbuilder for a model and a toolcontext
@@ -121,6 +126,12 @@ class ModelBuilder
 		self.toolcontext.info("*** END PARSE: {time1-time0} ***", 2)
 
 		self.toolcontext.check_errors
+
+		if toolcontext.opt_only_parse.value then
+			self.toolcontext.info("*** ONLY PARSE...", 1)
+			exit(0)
+		end
+
 		return mmodules
 	end
 
