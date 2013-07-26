@@ -19,8 +19,10 @@ module ni_nitdoc
 import model_utils
 import abstract_compiler
 
+# The NitdocContext contains all the knowledge used for doc generation
 class NitdocContext
-	private var toolcontext: ToolContext
+	super ToolContext
+
 	private var model: Model
 	private var modelbuilder: ModelBuilder
 	private var mainmodule: MModule
@@ -43,30 +45,28 @@ class NitdocContext
 	private var opt_custom_overview_text: OptionString = new OptionString("Text displayed as introduction of Overview page before the modules list", "--custom-overview-text")
 	private var opt_custom_footer_text: OptionString = new OptionString("Text displayed as footer of all pages", "--custom-footer-text")
 
-	init(toolcontext: ToolContext) do
-		# We need a model to collect stufs
-		self.toolcontext = toolcontext
-		self.arguments = toolcontext.option_context.rest
-		toolcontext.option_context.options.clear
-		toolcontext.option_context.add_option(opt_dir)
-		toolcontext.option_context.add_option(opt_source)
-		toolcontext.option_context.add_option(opt_sharedir)
-		toolcontext.option_context.add_option(opt_nodot)
-		toolcontext.option_context.add_option(opt_private)
-		toolcontext.option_context.add_option(opt_custom_title)
-		toolcontext.option_context.add_option(opt_custom_footer_text)
-		toolcontext.option_context.add_option(opt_custom_overview_text)
-		toolcontext.option_context.add_option(opt_custom_menu_items)
-		toolcontext.process_options
+	init do
+		super
+		self.arguments = option_context.rest
+		option_context.options.clear
+		option_context.add_option(opt_dir)
+		option_context.add_option(opt_source)
+		option_context.add_option(opt_sharedir)
+		option_context.add_option(opt_nodot)
+		option_context.add_option(opt_private)
+		option_context.add_option(opt_custom_title)
+		option_context.add_option(opt_custom_footer_text)
+		option_context.add_option(opt_custom_overview_text)
+		option_context.add_option(opt_custom_menu_items)
 		process_options
 
 		if arguments.length < 1 then
-			toolcontext.option_context.usage
+			option_context.usage
 			exit(1)
 		end
 
 		model = new Model
-		modelbuilder = new ModelBuilder(model, toolcontext)
+		modelbuilder = new ModelBuilder(model, self)
 		# Here we load an process all modules passed on the command line
 		var mmodules = modelbuilder.parse_and_build(arguments)
 		modelbuilder.full_propdef_semantic_analysis
@@ -82,7 +82,8 @@ class NitdocContext
 		self.class_hierarchy = mainmodule.flatten_mclass_hierarchy
 	end
 
-	private fun process_options do
+	redef fun process_options do
+		super
 		if not opt_dir.value is null then
 			output_dir = opt_dir.value
 		else
@@ -117,7 +118,7 @@ class NitdocContext
 		source = opt_source.value
 	end
 
-	fun start do
+	fun generate_nitdoc do
 		# Create destination dir if it's necessary
 		if not output_dir.file_exists then output_dir.mkdir
 		sys.system("cp -r {share_dir.to_s}/* {output_dir.to_s}/")
@@ -1612,9 +1613,5 @@ redef class AParam
 	end
 end
 
-# Create a tool context to handle options and paths
-var toolcontext = new ToolContext
-
-# Here we launch the nit index
-var nitdoc = new NitdocContext(toolcontext)
-nitdoc.start
+var nitdoc = new NitdocContext
+nitdoc.generate_nitdoc
