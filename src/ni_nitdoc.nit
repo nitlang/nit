@@ -130,17 +130,17 @@ class NitdocContext
 		quicksearch_list
 	end
 
-	fun overview do
+	private fun overview do
 		var overviewpage = new NitdocOverview(self, dot_dir)
 		overviewpage.save("{output_dir.to_s}/index.html")
 	end
 
-	fun fullindex do
+	private fun fullindex do
 		var fullindex = new NitdocFullindex(self)
 		fullindex.save("{output_dir.to_s}/full-index.html")
 	end
 
-	fun modules do
+	private fun modules do
 		for mmodule in model.mmodules do
 			if mmodule.name == "<main>" then continue
 			var modulepage = new NitdocModule(mmodule, self, dot_dir)
@@ -148,15 +148,14 @@ class NitdocContext
 		end
 	end
 
-	fun classes do
+	private fun classes do
 		for mclass in modelbuilder.model.mclasses do
 			var classpage = new NitdocClass(mclass, self, dot_dir, source)
 			classpage.save("{output_dir.to_s}/{mclass.url}")
 		end
 	end
 
-	# Generate QuickSearch file
-	fun quicksearch_list do
+	private fun quicksearch_list do
 		var file = new OFStream.open("{output_dir.to_s}/quicksearch-list.js")
 		var content = new Buffer
 		content.append("var entries = \{ ")
@@ -206,9 +205,9 @@ abstract class NitdocPage
 	end
 
 	fun append(str: String) do html.append(str)
-	var html = new Buffer
+	private var html = new Buffer
 
-	fun head do
+	protected fun head do
 		append("<meta charset='utf-8'/>")
 		append("<script type='text/javascript' src='scripts/jquery-1.7.1.min.js'></script>")
 		append("<script type='text/javascript' src='quicksearch-list.js'></script>")
@@ -221,15 +220,15 @@ abstract class NitdocPage
 		append("<title>{self.title}{title}</title>")
 	end
 
-	fun menu do
+	protected fun menu do
 		if ctx.opt_custom_menu_items.value != null then
 			append(ctx.opt_custom_menu_items.value.to_s)
 		end
 	end
 
-	fun title: String is abstract
+	protected fun title: String is abstract
 
-	fun header do
+	protected fun header do
 		append("<header>")
 		append("<nav class='main'>")
 		append("<ul>")
@@ -276,16 +275,16 @@ abstract class NitdocPage
 		append("</header>")
 	end
 
-	fun content is abstract
+	protected fun content is abstract
 
-	fun footer do
+	protected fun footer do
 		if ctx.opt_custom_footer_text.value != null then
 			append("<footer>{ctx.opt_custom_footer_text.value.to_s}</footer>")
 		end
 	end
 
 	# Generate a clickable graphviz image using a dot content
-	fun generate_dot(dot: String, name: String, alt: String) do
+	protected fun generate_dot(dot: String, name: String, alt: String) do
 		var output_dir = dot_dir
 		if output_dir == null then return
 		var file = new OFStream.open("{output_dir}/{name}.dot")
@@ -301,7 +300,7 @@ abstract class NitdocPage
 	end
 
 	# Add a (source) link for a given location
-	fun show_source(l: Location): String
+	protected fun show_source(l: Location): String
 	do
 		if source == null then
 			return "({l.file.filename.simplify_path})"
@@ -405,7 +404,7 @@ class NitdocOverview
 		append("</div>")
 	end
 
-	fun process_generate_dot do
+	private fun process_generate_dot do
 		var op = new Buffer
 		op.append("digraph dep \{ rankdir=BT; node[shape=none,margin=0,width=0,height=0,fontsize=10]; edge[dir=none,color=gray]; ranksep=0.2; nodesep=0.1;\n")
 		for mmodule in mmodules do
@@ -448,7 +447,7 @@ class NitdocFullindex
 	end
 
 	# Add to content modules column
-	fun module_column do
+	private fun module_column do
 		var sorter = new ComparableSorter[MModule]
 		var sorted = new Array[MModule]
 		for mmodule in ctx.modelbuilder.model.mmodule_importation_hierarchy do
@@ -466,7 +465,7 @@ class NitdocFullindex
 	end
 
 	# Add to content classes modules
-	fun classes_column do
+	private fun classes_column do
 		var sorted = ctx.modelbuilder.model.mclasses
 		var sorter = new ComparableSorter[MClass]
 		sorter.sort(sorted)
@@ -482,7 +481,7 @@ class NitdocFullindex
 	end
 
 	# Insert the properties column of fullindex page
-	fun properties_column do
+	private fun properties_column do
 		var sorted = ctx.modelbuilder.model.mproperties
 		var sorter = new ComparableSorter[MProperty]
 		sorter.sort(sorted)
@@ -542,7 +541,7 @@ class NitdocModule
 		append("</div>")
 	end
 
-	fun process_generate_dot do
+	private fun process_generate_dot do
 		var name = "dep_{mmodule.name}"
 		var op = new Buffer
 		op.append("digraph {name} \{ rankdir=BT; node[shape=none,margin=0,width=0,height=0,fontsize=10]; edge[dir=none,color=gray]; ranksep=0.2; nodesep=0.1;\n")
@@ -568,7 +567,7 @@ class NitdocModule
 		generate_dot(op.to_s, name, "Dependency graph for module {mmodule.name}")
 	end
 
-	fun sidebar do
+	private fun sidebar do
 		append("<div class='menu'>")
 		append("<nav>")
 		append("<h3>Module Hierarchy</h3>")
@@ -609,7 +608,7 @@ class NitdocModule
 	end
 
 	# display the class column
-	fun classes do
+	private fun classes do
 		var intro_mclasses = mmodule.intro_mclasses
 		var redef_mclasses = mmodule.redef_mclasses
 		var all_mclasses = new HashSet[MClass]
@@ -646,7 +645,7 @@ class NitdocModule
 	end
 
 	# display the property column
-	fun properties do
+	private fun properties do
 		# get properties
 		var mpropdefs = new HashSet[MPropDef]
 		for m in mmodule.in_nesting.greaters do
@@ -749,7 +748,7 @@ class NitdocClass
 		append("</div>")
 	end
 
-	fun properties_column do
+	private fun properties_column do
 		var sorter = new ComparableSorter[MPropDef]
 		append("<nav class='properties filterable'>")
 		append("<h3>Properties</h3>")
@@ -793,7 +792,7 @@ class NitdocClass
 		append("</nav>")
 	end
 
-	fun inheritance_column do
+	private fun inheritance_column do
 		var sorted = new Array[MClass]
 		var sorterp = new ComparableSorter[MClass]
 		append("<nav>")
@@ -837,7 +836,7 @@ class NitdocClass
 		append("</nav>")
 	end
 
-	fun class_doc do
+	private fun class_doc do
 		# title
 		append("<h1>{mclass.html_signature}</h1>")
 		append("<div class='subtitle info'>{mclass.html_full_signature(mbuilder)}")
@@ -996,7 +995,7 @@ class NitdocClass
 		append("</section>")
 	end
 
-	fun process_generate_dot do
+	private fun process_generate_dot do
 		var pe = ctx.class_hierarchy[mclass]
 		var cla = new HashSet[MClass]
 		var sm = new HashSet[MClass]
