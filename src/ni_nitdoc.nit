@@ -1104,28 +1104,6 @@ redef class MModule
 	redef type OTHER: MModule
 	redef fun <(other: OTHER): Bool do return self.name < other.name
 
-	# Get the list of all methods in a module
-	fun imported_methods: Set[MMethod] do
-		var methods = new HashSet[MMethod]
-		for mclass in imported_mclasses do
-			for method in mclass.intro_methods do
-				methods.add(method)
-			end
-		end
-		return methods
-	end
-
-	# Get the list aof all refined methods in a module
-	fun redef_methods: Set[MMethod] do
-		var methods = new HashSet[MMethod]
-		for mclass in redef_mclasses do
-			for method in mclass.intro_methods do
-				methods.add(method)
-			end
-		end
-		return methods
-	end
-
 	# URL to nitdoc page
 	fun url: String do
 		var res = new Buffer
@@ -1337,7 +1315,7 @@ redef class MPropDef
 	end
 
 	# Return a list item for the mpropdef
-	fun html_list_item(page: NitdocPage) do
+	private fun html_list_item(page: NitdocPage) do
 		if is_intro then
 			page.append("<li class='intro'>")
 			page.append("<span title='introduction'>I</span>&nbsp;")
@@ -1353,7 +1331,7 @@ redef class MPropDef
 	end
 
 	# Return a list item for the mpropdef
-	fun html_sidebar_item(page: NitdocClass) do
+	private fun html_sidebar_item(page: NitdocClass) do
 		if is_intro and mclassdef.mclass == page.mclass then
 			page.append("<li class='intro'>")
 			page.append("<span title='Introduced'>I</span>")
@@ -1368,14 +1346,14 @@ redef class MPropDef
 		page.append("</li>")
 	end
 
-	fun html_full_desc(page: NitdocClass) is abstract
-	fun html_info(page: NitdocClass) is abstract
+	private fun html_full_desc(page: NitdocClass) is abstract
+	private fun html_info(page: NitdocClass) is abstract
 
 	fun full_name: String do
 		return "{mclassdef.mclass.public_owner.name}::{mclassdef.mclass.name}::{mproperty.name}"
 	end
 
-	fun html_inheritance(page: NitdocClass) do
+	private fun html_inheritance(page: NitdocClass) do
 		# definitions block
 		page.append("<p class='info'>")
 		page.ctx.mainmodule.linearize_mpropdefs(mproperty.mpropdefs)
