@@ -18,76 +18,7 @@ module model_base
 
 import poset
 import location
-
-# Simple way to store an HashMap[K, Array[V]]
-# FIXME: this should move to its own module
-class MultiHashMap[K: Object, V]
-	super HashMap[K, Array[V]]
-
-	# Add `v' to the array associated with `k'.
-	# If there is no array associated, then create it.
-	fun add_one(k: K, v: V)
-	do
-		if self.has_key(k) then
-			self[k].add(v)
-		else
-			self[k] = [v]
-		end
-	end
-
-	init do end
-end
-
-# Simple way to store an HashMap[K1, HashMap[K2, V]]
-# FIXME: this should move to its own module
-class HashMap2[K1: Object, K2: Object, V]
-	private var level1: HashMap[K1, HashMap[K2, V]] = new HashMap[K1, HashMap[K2, V]]
-	fun [](k1: K1, k2: K2): nullable V
-	do
-		var level1 = self.level1
-		if not level1.has_key(k1) then return null
-		var level2 = level1[k1]
-		if not level2.has_key(k2) then return null
-		return level2[k2]
-	end
-	fun []=(k1: K1, k2: K2, v: V)
-	do
-		var level1 = self.level1
-		var level2: HashMap[K2, V]
-		if not level1.has_key(k1) then
-			level2 = new HashMap[K2, V]
-			level1[k1] = level2
-		else
-			level2 = level1[k1]
-		end
-		level2[k2] = v
-	end
-end
-
-# Simple way to store an HashMap[K1, HashMap[K2, HashMap[K3, V]]]
-# FIXME: this should move to its own module
-class HashMap3[K1: Object, K2: Object, K3: Object, V]
-	private var level1: HashMap[K1, HashMap2[K2, K3, V]] = new HashMap[K1, HashMap2[K2, K3, V]]
-	fun [](k1: K1, k2: K2, k3: K3): nullable V
-	do
-		var level1 = self.level1
-		if not level1.has_key(k1) then return null
-		var level2 = level1[k1]
-		return level2[k2, k3]
-	end
-	fun []=(k1: K1, k2: K2, k3: K3, v: V)
-	do
-		var level1 = self.level1
-		var level2: HashMap2[K2, K3, V]
-		if not level1.has_key(k1) then
-			level2 = new HashMap2[K2, K3, V]
-			level1[k1] = level2
-		else
-			level2 = level1[k1]
-		end
-		level2[k2, k3] = v
-	end
-end
+private import more_collections
 
 # The container class of a Nit object-oriented model.
 # A model knows modules, classes and properties and can retrieve them.

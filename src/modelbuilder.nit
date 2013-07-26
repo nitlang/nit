@@ -29,6 +29,8 @@ import opts
 import toolcontext
 import phase
 
+private import more_collections
+
 ###
 
 redef class ToolContext

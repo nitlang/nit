@@ -32,6 +32,7 @@ module model
 import poset
 import location
 import model_base
+private import more_collections
 
 redef class Model
 	# All known classes
