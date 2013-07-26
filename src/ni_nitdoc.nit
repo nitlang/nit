@@ -19,7 +19,7 @@ module ni_nitdoc
 import model_utils
 import abstract_compiler
 
-class Nitdoc
+class NitdocContext
 	private var toolcontext: ToolContext
 	private var model: Model
 	private var modelbuilder: ModelBuilder
@@ -199,10 +199,10 @@ abstract class NitdocPage
 
 	var dot_dir: nullable String
 	var source: nullable String
-	var nitdoc: Nitdoc
+	var ctx: NitdocContext
 
-	init(nitdoc: Nitdoc) do
-		self.nitdoc = nitdoc
+	init(ctx: NitdocContext) do
+		self.ctx = ctx
 	end
 
 	fun append(str: String) do html.append(str)
@@ -215,15 +215,15 @@ abstract class NitdocPage
 		append("<script type='text/javascript' src='scripts/js-facilities.js'></script>")
 		append("<link rel='stylesheet' href='styles/main.css' type='text/css' media='screen'/>")
 		var title = ""
-		if nitdoc.opt_custom_title.value != null then
-			title = " | {nitdoc.opt_custom_title.value.to_s}"
+		if ctx.opt_custom_title.value != null then
+			title = " | {ctx.opt_custom_title.value.to_s}"
 		end
 		append("<title>{self.title}{title}</title>")
 	end
 
 	fun menu do
-		if nitdoc.opt_custom_menu_items.value != null then
-			append(nitdoc.opt_custom_menu_items.value.to_s)
+		if ctx.opt_custom_menu_items.value != null then
+			append(ctx.opt_custom_menu_items.value.to_s)
 		end
 	end
 
@@ -279,8 +279,8 @@ abstract class NitdocPage
 	fun content is abstract
 
 	fun footer do
-		if nitdoc.opt_custom_footer_text.value != null then
-			append("<footer>{nitdoc.opt_custom_footer_text.value.to_s}</footer>")
+		if ctx.opt_custom_footer_text.value != null then
+			append("<footer>{ctx.opt_custom_footer_text.value.to_s}</footer>")
 		end
 	end
 
@@ -347,9 +347,9 @@ class NitdocOverview
 	private var mbuilder: ModelBuilder
 	private var mmodules = new Array[MModule]
 
-	init(nitdoc: Nitdoc, dot_dir: nullable String) do
-		super(nitdoc)
-		self.mbuilder = nitdoc.modelbuilder
+	init(ctx: NitdocContext, dot_dir: nullable String) do
+		super(ctx)
+		self.mbuilder = ctx.modelbuilder
 		self.dot_dir = dot_dir
 		# get modules
 		var mmodules = new HashSet[MModule]
@@ -379,13 +379,13 @@ class NitdocOverview
 	redef fun content do
 		append("<div class='content fullpage'>")
 		var title = "Overview"
-		if nitdoc.opt_custom_title.value != null then
-			title = nitdoc.opt_custom_title.value.to_s
+		if ctx.opt_custom_title.value != null then
+			title = ctx.opt_custom_title.value.to_s
 		end
 		append("<h1>{title}</h1>")
 		var text = ""
-		if nitdoc.opt_custom_overview_text.value != null then
-			text = nitdoc.opt_custom_overview_text.value.to_s
+		if ctx.opt_custom_overview_text.value != null then
+			text = ctx.opt_custom_overview_text.value.to_s
 		end
 		append("<article class='overview'>{text}</article>")
 		append("<article class='overview'>")
@@ -425,8 +425,8 @@ end
 class NitdocFullindex
 	super NitdocPage
 
-	init(nitdoc: Nitdoc) do
-		super(nitdoc)
+	init(ctx: NitdocContext) do
+		super(ctx)
 		self.dot_dir = null
 	end
 
@@ -451,7 +451,7 @@ class NitdocFullindex
 	fun module_column do
 		var sorter = new ComparableSorter[MModule]
 		var sorted = new Array[MModule]
-		for mmodule in nitdoc.modelbuilder.model.mmodule_importation_hierarchy do
+		for mmodule in ctx.modelbuilder.model.mmodule_importation_hierarchy do
 			sorted.add(mmodule)
 		end
 		sorter.sort(sorted)
@@ -459,7 +459,7 @@ class NitdocFullindex
 		append("<h2>Modules</h2>")
 		append("<ul>")
 		for mmodule in sorted do
-			append("<li>{mmodule.link(nitdoc.modelbuilder)}</li>")
+			append("<li>{mmodule.link(ctx.modelbuilder)}</li>")
 		end
 		append("</ul>")
 		append("</article>")
@@ -467,15 +467,15 @@ class NitdocFullindex
 
 	# Add to content classes modules
 	fun classes_column do
-		var sorted = nitdoc.modelbuilder.model.mclasses
+		var sorted = ctx.modelbuilder.model.mclasses
 		var sorter = new ComparableSorter[MClass]
 		sorter.sort(sorted)
 		append("<article class='modules filterable'>")
 		append("<h2>Classes</h2>")
 		append("<ul>")
 		for mclass in sorted do
-			if mclass.visibility < nitdoc.min_visibility then continue
-			append("<li>{mclass.link(nitdoc.modelbuilder)}</li>")
+			if mclass.visibility < ctx.min_visibility then continue
+			append("<li>{mclass.link(ctx.modelbuilder)}</li>")
 		end
 		append("</ul>")
 		append("</article>")
@@ -483,16 +483,16 @@ class NitdocFullindex
 
 	# Insert the properties column of fullindex page
 	fun properties_column do
-		var sorted = nitdoc.modelbuilder.model.mproperties
+		var sorted = ctx.modelbuilder.model.mproperties
 		var sorter = new ComparableSorter[MProperty]
 		sorter.sort(sorted)
 		append("<article class='modules filterable'>")
 		append("<h2>Properties</h2>")
 		append("<ul>")
 		for mproperty in sorted do
-			if mproperty.visibility < nitdoc.min_visibility then continue
+			if mproperty.visibility < ctx.min_visibility then continue
 			if mproperty isa MAttribute then continue
-			append("<li>{mproperty.intro.link(nitdoc.modelbuilder)} ({mproperty.intro.mclassdef.mclass.link(nitdoc.modelbuilder)})</li>")
+			append("<li>{mproperty.intro.link(ctx.modelbuilder)} ({mproperty.intro.mclassdef.mclass.link(ctx.modelbuilder)})</li>")
 		end
 		append("</ul>")
 		append("</article>")
@@ -507,10 +507,10 @@ class NitdocModule
 	private var mmodule: MModule
 	private var mbuilder: ModelBuilder
 
-	init(mmodule: MModule, nitdoc: Nitdoc, dot_dir: nullable String) do
-		super(nitdoc)
+	init(mmodule: MModule, ctx: NitdocContext, dot_dir: nullable String) do
+		super(ctx)
 		self.mmodule = mmodule
-		self.mbuilder = nitdoc.modelbuilder
+		self.mbuilder = ctx.modelbuilder
 		self.dot_dir = dot_dir
 	end
 
@@ -629,7 +629,7 @@ class NitdocModule
 		append("<h2>Classes</h2>")
 		append("<ul>")
 		for c in sorted do
-			if c.visibility < nitdoc.min_visibility then continue
+			if c.visibility < ctx.min_visibility then continue
 			if redef_mclasses.has(c) and c.intro_mmodule.public_owner != mmodule then
 				append("<li class='redef'>")
 				append("<span title='refined in this module'>R </span>")
@@ -662,7 +662,7 @@ class NitdocModule
 		append("<ul>")
 		for mprop in sorted do
 			if mprop isa MAttributeDef then continue
-			if mprop.mproperty.visibility < nitdoc.min_visibility then continue
+			if mprop.mproperty.visibility < ctx.min_visibility then continue
 			append(mprop.html_list_item(mbuilder))
 		end
 		append("</ul>")
@@ -681,16 +681,16 @@ class NitdocClass
 	private var meths = new HashSet[MMethodDef]
 	private var inherited = new HashSet[MPropDef]
 
-	init(mclass: MClass, nitdoc: Nitdoc, dot_dir: nullable String, source: nullable String) do
-		super(nitdoc)
+	init(mclass: MClass, ctx: NitdocContext, dot_dir: nullable String, source: nullable String) do
+		super(ctx)
 		self.mclass = mclass
-		self.mbuilder = nitdoc.modelbuilder
+		self.mbuilder = ctx.modelbuilder
 		self.dot_dir = dot_dir
 		self.source = source
 		# load properties
 		for mclassdef in mclass.mclassdefs do
 			for mpropdef in mclassdef.mpropdefs do
-				if mpropdef.mproperty.visibility < nitdoc.min_visibility then continue
+				if mpropdef.mproperty.visibility < ctx.min_visibility then continue
 				if mpropdef isa MVirtualTypeDef then vtypes.add(mpropdef)
 				if mpropdef isa MMethodDef then
 					if mpropdef.mproperty.is_init then
@@ -704,7 +704,7 @@ class NitdocClass
 		# get inherited properties
 		for mprop in mclass.inherited_mproperties do
 			var mpropdef = mprop.intro
-			if mprop.visibility < nitdoc.min_visibility then continue
+			if mprop.visibility < ctx.min_visibility then continue
 			if mpropdef isa MVirtualTypeDef then vtypes.add(mpropdef)
 			if mpropdef isa MMethodDef then
 				if mpropdef.mproperty.is_init then
@@ -856,7 +856,7 @@ class NitdocClass
 		var sorted_meths = new Array[MMethodDef]
 		var sorted = new Array[MModule]
 		sorted_meths.add_all(meths)
-		nitdoc.mainmodule.linearize_mpropdefs(sorted_meths)
+		ctx.mainmodule.linearize_mpropdefs(sorted_meths)
 		for meth in meths do
 			if inherited.has(meth) then continue
 			var mmodule = meth.mclassdef.mmodule
@@ -975,7 +975,7 @@ class NitdocClass
 		if inherited.length > 0 then
 			var sorted_inherited = new Array[MPropDef]
 			sorted_inherited.add_all(inherited)
-			nitdoc.mainmodule.linearize_mpropdefs(sorted_inherited)
+			ctx.mainmodule.linearize_mpropdefs(sorted_inherited)
 			var classes = new ArrayMap[MClass, Array[MPropDef]]
 			for mmethod in sorted_inherited.reversed do
 				var mclass = mmethod.mclassdef.mclass
@@ -998,7 +998,7 @@ class NitdocClass
 	end
 
 	fun process_generate_dot do
-		var pe = nitdoc.class_hierarchy[mclass]
+		var pe = ctx.class_hierarchy[mclass]
 		var cla = new HashSet[MClass]
 		var sm = new HashSet[MClass]
 		var sm2 = new HashSet[MClass]
@@ -1331,7 +1331,7 @@ redef class MPropDef
 		var res = new Buffer
 		# definitions block
 		res.append("<p class='info'>")
-		page.nitdoc.mainmodule.linearize_mpropdefs(mproperty.mpropdefs)
+		page.ctx.mainmodule.linearize_mpropdefs(mproperty.mpropdefs)
 		var previous_defs = new Array[MPropDef]
 		var next_defs = new Array[MPropDef]
 		var self_passed = false
@@ -1618,5 +1618,5 @@ end
 var toolcontext = new ToolContext
 
 # Here we launch the nit index
-var nitdoc = new Nitdoc(toolcontext)
+var nitdoc = new NitdocContext(toolcontext)
 nitdoc.start
