@@ -113,7 +113,7 @@ function run_compiler()
 	shift
 	if test -n "$fast"; then
 		run_command "$@" ../src/nitg.nit -o "nitg.$title.bin"
-		bench_command "nitg" "nitg --global ../src/test_parser.nit" "./nitg.$title.bin" -v --global --no-cc ../src/test_parser.nit
+		bench_command "nitg-g" "nitg --global ../src/test_parser.nit" "./nitg.$title.bin" -v --global --no-cc ../src/test_parser.nit
 		run_command "$@" ../src/nit.nit -o "nit.$title.bin"
 		bench_command "nit" "nit ../src/test_parser.nit ../src/location.nit" "./nit.$title.bin" -v ../src/test_parser.nit -- -n ../src/location.nit
 		run_command "$@" ../examples/shoot/shoot_logic.nit -o "shoot.$title.bin"
@@ -122,7 +122,7 @@ function run_compiler()
 		bench_command "bintrees" "bench_bintree_gen 16" "./bintrees.$title.bin" 16
 	else
 		run_command "$@" ../src/nitg.nit -o "nitg.$title.bin"
-		bench_command "nitg" "nitg --global --no-cc ../src/nitmetrics.nit" "./nitg.$title.bin" -v --global --no-cc ../src/nitmetrics.nit
+		bench_command "nitg-g" "nitg --global --no-cc ../src/nitmetrics.nit" "./nitg.$title.bin" -v --global --no-cc ../src/nitmetrics.nit
 		bench_command "nitg-s" "nitg --separate ../src/nitg.nit" "./nitg.$title.bin" -v --no-cc --separate ../src/nitg.nit
 		run_command "$@" ../src/nit.nit -o "nit.$title.bin"
 		bench_command "nit" "nit ../src/test_parser.nit ../src/rapid_type_analysis.nit" "./nit.$title.bin" -v ../src/test_parser.nit -- -n ../src/rapid_type_analysis.nit
@@ -208,7 +208,7 @@ function bench_steps()
 	bench_command "generate c" "" ../src/nitc_3 --global --no-cc ../src/nitg.nit
 	bench_command "full" "" ../src/nitc_3 -O --global ../src/nitg.nit -o "nitg_nitc-g.bin"
 
-	prepare_res "$name-nitg.dat" "nitg" "Various steps of nitg --global"
+	prepare_res "$name-nitg.dat" "nitg-g" "Various steps of nitg --global"
 	bench_command "parse" "" ./nitg --global --only-parse ../src/nitg.nit
 	bench_command "metamodel" "" ./nitg --global --only-metamodel ../src/nitg.nit
 	bench_command "generate c" "" ./nitg --global --no-cc ../src/nitg.nit
@@ -225,29 +225,29 @@ function bench_steps()
 bench_steps
 
 # $#: options to compare
-function bench_nitg_options()
+function bench_nitg-g_options()
 {
 	tag=$1
 	shift
 	name="$FUNCNAME-$tag"
 	skip_test "$name" && return
-	prepare_res "$name.dat" "no options" "nitg without options"
-	run_compiler "nitg" ./nitg --global
+	prepare_res "$name.dat" "no options" "nitg-g without options"
+	run_compiler "nitg-g" ./nitg --global
 
 	if test -n "$2"; then
-		prepare_res "$name-all.dat" "all" "nitg with all options $@"
-		run_compiler "nitg-$tag" ./nitg --global $@
+		prepare_res "$name-all.dat" "all" "nitg-g with all options $@"
+		run_compiler "nitg-g-$tag" ./nitg --global $@
 	fi
 
 	for opt in "$@"; do
-		prepare_res "$name$opt.dat" "$opt" "nitg with option $opt"
-		run_compiler "nitg$opt" ./nitg --global $opt
+		prepare_res "$name$opt.dat" "$opt" "nitg-g with option $opt"
+		run_compiler "nitg-g$opt" ./nitg --global $opt
 	done
 
 	plot "$name.gnu"
 }
-bench_nitg_options "hardening" --hardening
-bench_nitg_options "nocheck" --no-check-covariance --no-check-initialization --no-check-assert --no-check-autocast --no-check-other
+bench_nitg-g_options "hardening" --hardening
+bench_nitg-g_options "nocheck" --no-check-covariance --no-check-initialization --no-check-assert --no-check-autocast --no-check-other
 
 function bench_nitg-s_options()
 {
@@ -336,8 +336,8 @@ function bench_engines()
 	run_compiler "nitc" ../src/nitc_3 -O
 	prepare_res "$name-nitc-g.dat" "nitc-g" "nitc with --global"
 	run_compiler "nitc-g" ../src/nitc_3 -O --global
-	prepare_res "$name-nitg.dat" "nitg" "nitg with --global"
-	run_compiler "nitg" ./nitg --global
+	prepare_res "$name-nitg-g.dat" "nitg-g" "nitg with --global"
+	run_compiler "nitg-g" ./nitg --global
 	prepare_res "$name-nitg-s.dat" "nitg-s" "nitg with --separate"
 	run_compiler "nitg-s" ./nitg --separate
 	prepare_res "$name-nitg-e.dat" "nitg-e" "nitg with --erasure"
@@ -416,7 +416,7 @@ function bench_compilation_time
 	for i in ../examples/hello_world.nit ../src/test_parser.nit ../src/nitg.nit; do
 		bench_command `basename "$i" .nit` "" ../src/nitc_3 -O "$i" --no-cc
 	done
-	prepare_res "$name-nitg.dat" "nitg" "nitg"
+	prepare_res "$name-nitg.dat" "nitg-g" "nitg --global"
 	for i in ../examples/hello_world.nit ../src/test_parser.nit ../src/nitg.nit; do
 		bench_command `basename "$i" .nit` "" ./nitg --global "$i" --no-cc
 	done
