@@ -102,6 +102,7 @@ redef class ModelBuilder
 		# A single C file regroups many compiled rumtime functions
 		# Note that we do not try to be clever an a small change in a Nit source file may change the content of all the generated .c files
 		var time0 = get_time
+		self.toolcontext.info("*** WRITING C ***", 1)
 
 		".nit_compile".mkdir
 
@@ -181,14 +182,14 @@ redef class ModelBuilder
 			#p = "..".join_path(p)
 			cc_includes += " -I \"" + p + "\""
 		end
-		makefile.write("CC = ccache cc\nCFLAGS = -g -O2{cc_includes}\nLDFLAGS ?= \nLDLIBS  ?= -lm -lgc\n\n")
+		makefile.write("CC = ccache cc\nCFLAGS = -g -O2\nCINCL = {cc_includes}\nLDFLAGS ?= \nLDLIBS  ?= -lm -lgc\n\n")
 		makefile.write("all: {outname}\n\n")
 
 		var ofiles = new Array[String]
 		# Compile each generated file
 		for f in cfiles do
 			var o = f.strip_extension(".c") + ".o"
-			makefile.write("{o}: {f}\n\t$(CC) $(CFLAGS) -D NONITCNI -c -o {o} {f}\n\n")
+			makefile.write("{o}: {f}\n\t$(CC) $(CFLAGS) $(CINCL) -D NONITCNI -c -o {o} {f}\n\n")
 			ofiles.add(o)
 		end
 
@@ -212,7 +213,7 @@ redef class ModelBuilder
 		self.toolcontext.info("Generated makefile: {makename}", 2)
 
 		var time1 = get_time
-		self.toolcontext.info("*** END COMPILING TO C: {time1-time0} ***", 2)
+		self.toolcontext.info("*** END WRITING C: {time1-time0} ***", 2)
 
 		# Execute the Makefile
 

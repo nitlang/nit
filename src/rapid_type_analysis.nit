@@ -47,6 +47,9 @@ import auto_super_init
 redef class ModelBuilder
 	fun do_rapid_type_analysis(mainmodule: MModule): RapidTypeAnalysis
 	do
+		var time0 = get_time
+		self.toolcontext.info("*** RAPID TYPE ANALYSIS ***", 1)
+
 		var model = self.model
 		var analysis = new RapidTypeAnalysis(self, mainmodule)
 		var nmodule = self.nmodules.first
@@ -62,6 +65,10 @@ redef class ModelBuilder
 			analysis.add_monomorphic_send(maintype, mainprop)
 		end
 		analysis.run_analysis
+
+		var time1 = get_time
+		self.toolcontext.info("*** END RAPID TYPE ANALYSIS: {time1-time0} ***", 2)
+
 		return analysis
 	end
 end
