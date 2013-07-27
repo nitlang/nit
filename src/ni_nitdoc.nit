@@ -612,6 +612,7 @@ class NitdocModule
 		end
 		var clients = new Array[MModule]
 		for dep in mmodule.in_importation.smallers do
+			if dep.name == "<main>" then continue
 			if dep == mmodule or dep.public_owner != null then continue
 			clients.add(dep)
 		end
@@ -1036,7 +1037,7 @@ class NitdocClass
 				prop_sorter.sort(mmethods)
 				append("<p>Defined in ")
 				c.html_link(self)
-				append("}: ")
+				append(": ")
 				for i in [0..mmethods.length[ do
 					var mmethod = mmethods[i]
 					mmethod.html_link(self)
@@ -1443,8 +1444,6 @@ end
 
 redef class MMethodDef
 	redef fun html_full_desc(page) do
-		if not page.ctx.mbuilder.mpropdef2npropdef.has_key(self) then return
-		var nprop = page.ctx.mbuilder.mpropdef2npropdef[self]
 		var classes = new Array[String]
 		var is_redef = mproperty.intro_mclassdef.mclass != page.mclass
 		if mproperty.is_init then
@@ -1455,20 +1454,13 @@ redef class MMethodDef
 		if is_redef then classes.add("redef")
 		classes.add(mproperty.visibility.to_s)
 		page.append("<article class='{classes.join(" ")}' id='{anchor}'>")
-		if nprop isa AAttrPropdef then
-			if nprop.mreadpropdef == self then
-				page.append("<h3 class='signature'>{mproperty.name}: ")
-				nprop.html_signature(page)
-				page.append("</h3>")
-			else
-				page.append("<h3 class='signature'>{mproperty.name}(value: ")
-				nprop.html_signature(page)
-				page.append(")</h3>")
-			end
-		else
-			var intro_nprop = page.ctx.mbuilder.mpropdef2npropdef[mproperty.intro]
+		if page.ctx.mbuilder.mpropdef2npropdef.has_key(self) then
 			page.append("<h3 class='signature'>{mproperty.name}")
-			intro_nprop.html_signature(page)
+			msignature.html_signature(page)
+			page.append("</h3>")
+		else
+			page.append("<h3 class='signature'>init")
+			msignature.html_signature(page)
 			page.append("</h3>")
 		end
 		html_info(page)
@@ -1480,7 +1472,11 @@ redef class MMethodDef
 		page.append("<div class='info'>")
 		if mproperty.visibility < public_visibility then page.append("{mproperty.visibility.to_s} ")
 		if mproperty.intro_mclassdef.mclass != page.mclass then page.append("redef ")
-		page.append("fun ")
+		if mproperty.is_init then
+			page.append("init ")
+		else
+			page.append("fun ")
+		end
 		mproperty.html_namespace(page)
 		page.append("</div>")
 		page.append("<div style=\"float: right;\"><a id=\"lblDiffCommit\"></a></div>")
@@ -1510,6 +1506,31 @@ redef class MVirtualTypeDef
 		mproperty.html_namespace(page)
 		page.append("</div>")
 		page.append("<div style=\"float: right;\"><a id=\"lblDiffCommit\"></a></div>")
+	end
+end
+
+redef class MSignature
+	private fun html_signature(page: NitdocPage) do
+		if not mparameters.is_empty then
+			page.append("(")
+			for i in [0..mparameters.length[ do
+				mparameters[i].html_link(page)
+				if i < mparameters.length - 1 then page.append(", ")
+			end
+			page.append(")")
+		end
+		if return_mtype != null then
+			page.append(": ")
+			return_mtype.html_link(page)
+		end
+	end
+end
+
+redef class MParameter
+	private fun html_link(page: NitdocPage) do
+		page.append("{name}: ")
+		mtype.html_link(page)
+		if is_vararg then page.append("...")
 	end
 end
 
@@ -1554,7 +1575,6 @@ end
 redef class APropdef
 	private fun short_comment: String is abstract
 	private fun full_comment: String is abstract
-	private fun html_signature(page: NitdocPage) is abstract
 end
 
 redef class AAttrPropdef
@@ -1569,10 +1589,6 @@ redef class AAttrPropdef
 			for t in n_doc.n_comment do res.append(t.text.substring_from(1).html_escape)
 		end
 		return res.to_s
-	end
-
-	redef fun html_signature(page) do
-		if n_type != null then n_type.mtype.html_link(page)
 	end
 end
 
@@ -1589,10 +1605,6 @@ redef class AMethPropdef
 		end
 		return res.to_s
 	end
-
-	redef fun html_signature(page) do
-		if n_signature != null then n_signature.html_link(page)
-	end
 end
 
 redef class ATypePropdef
@@ -1607,39 +1619,6 @@ redef class ATypePropdef
 			for t in n_doc.n_comment do res.append(t.text.substring_from(1).html_escape)
 		end
 		return res.to_s
-	end
-
-	redef fun html_signature(page) do
-		mpropdef.bound.html_link(page)
-	end
-end
-
-redef class ASignature
-	fun html_link(page: NitdocPage) do
-		#TODO closures
-		if not n_params.is_empty then
-			page.append("(")
-			for i in [0..n_params.length[ do
-				n_params[i].html_link(page)
-				if i < n_params.length - 1 then page.append(", ")
-			end
-			page.append(")")
-		end
-		if n_type != null then
-			page.append(":")
-			n_type.mtype.html_link(page)
-		end
-	end
-end
-
-redef class AParam
-	fun html_link(page: NitdocPage) do
-		page.append(n_id.text)
-		if n_type != null then
-			page.append(": ")
-			n_type.mtype.html_link(page)
-			if n_dotdotdot != null then page.append("...")
-		end
 	end
 end
 
