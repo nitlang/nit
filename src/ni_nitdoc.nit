@@ -1573,47 +1573,12 @@ redef class AStdClassdef
 end
 
 redef class APropdef
-	private fun short_comment: String is abstract
-	private fun full_comment: String is abstract
-end
-
-redef class AAttrPropdef
-	redef fun short_comment do
+	private fun short_comment: String do
 		if n_doc != null then return n_doc.n_comment.first.text.substring_from(2).replace("\n", "").html_escape
 		return ""
 	end
 
-	redef fun full_comment: String do
-		var res = new Buffer
-		if n_doc != null then
-			for t in n_doc.n_comment do res.append(t.text.substring_from(1).html_escape)
-		end
-		return res.to_s
-	end
-end
-
-redef class AMethPropdef
-	redef fun short_comment do
-		if n_doc != null then return n_doc.n_comment.first.text.substring_from(2).replace("\n", "").html_escape
-		return ""
-	end
-
-	redef fun full_comment do
-		var res = new Buffer
-		if n_doc != null then
-			for t in n_doc.n_comment do res.append(t.text.substring_from(1).html_escape)
-		end
-		return res.to_s
-	end
-end
-
-redef class ATypePropdef
-	redef fun short_comment do
-		if n_doc != null then return n_doc.n_comment.first.text.substring_from(2).replace("\n", "").html_escape
-		return ""
-	end
-
-	redef fun full_comment do
+	private fun full_comment: String do
 		var res = new Buffer
 		if n_doc != null then
 			for t in n_doc.n_comment do res.append(t.text.substring_from(1).html_escape)
