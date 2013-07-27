@@ -92,6 +92,15 @@ redef class ANode
 		v.enter_visit(self)
 		return v.result
 	end
+
+	# Return an array of node that are annotated
+	# The attached node can be retrieved by two invocation of parent
+	fun collect_annotations_by_name(name: String): Array[AAnnotation]
+	do
+		var v = new CollectAnnotationsByNameVisitor(name)
+		v.enter_visit(self)
+		return v.result
+	end
 end
 
 private class CollectTokensByTextVisitor
@@ -104,5 +113,18 @@ private class CollectTokensByTextVisitor
 		if node == null then return
 		node.visit_all(self)
 		if node isa Token and node.text == text then result.add(node)
+	end
+end
+
+private class CollectAnnotationsByNameVisitor
+	super Visitor
+	var name: String
+	init(name: String) do self.name = name
+	var result = new Array[AAnnotation]
+	redef fun visit(node)
+	do
+		if node == null then return
+		node.visit_all(self)
+		if node isa AAnnotation and node.n_atid.n_id.text == name then result.add(node)
 	end
 end

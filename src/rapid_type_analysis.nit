@@ -401,7 +401,10 @@ private class RapidTypeVisitor
 			var implicit_cast_to = node.implicit_cast_to
 			if implicit_cast_to != null then self.add_cast_type(implicit_cast_to)
 		end
-		node.visit_all(self)
+		# RTA does not enter in AAnnotations
+		if not node isa AAnnotations then
+			node.visit_all(self)
+		end
 	end
 
 	# Force to get the primitive class named `name' or abort

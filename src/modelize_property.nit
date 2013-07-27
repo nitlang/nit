@@ -195,6 +195,12 @@ private class TextCollectorVisitor
 end
 
 redef class APropdef
+	# The associated main model entity
+	type MPROPDEF: MPropDef
+
+	# The associated propdef once build by a `ModelBuilder'
+	var mpropdef: nullable MPROPDEF writable
+
 	private fun build_property(modelbuilder: ModelBuilder, nclassdef: AClassdef)
 	do
 	end
@@ -327,8 +333,7 @@ redef class ASignature
 end
 
 redef class AMethPropdef
-	# The associated MMethodDef once build by a `ModelBuilder'
-	var mpropdef: nullable MMethodDef
+	redef type MPROPDEF: MMethodDef
 
 	# The associated super init if any
 	var super_init: nullable MMethod
@@ -529,12 +534,12 @@ redef class AMethPropdef
 end
 
 redef class AAttrPropdef
-	# The associated MAttributeDef once build by a `ModelBuilder'
-	var mpropdef: nullable MAttributeDef
+	redef type MPROPDEF: MAttributeDef
+
 	# The associated getter (read accessor) if any
-	var mreadpropdef: nullable MMethodDef
+	var mreadpropdef: nullable MMethodDef writable
 	# The associated setter (write accessor) if any
-	var mwritepropdef: nullable MMethodDef
+	var mwritepropdef: nullable MMethodDef writable
 	redef fun build_property(modelbuilder, nclassdef)
 	do
 		var mclassdef = nclassdef.mclassdef.as(not null)
@@ -816,8 +821,8 @@ redef class AAttrPropdef
 end
 
 redef class ATypePropdef
-	# The associated MVirtualTypeDef once build by a `ModelBuilder'
-	var mpropdef: nullable MVirtualTypeDef
+	redef type MPROPDEF: MVirtualTypeDef
+
 	redef fun build_property(modelbuilder, nclassdef)
 	do
 		var mclassdef = nclassdef.mclassdef.as(not null)
