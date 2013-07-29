@@ -20,8 +20,8 @@ import model_utils
 
 # The NitdocContext contains all the knowledge used for doc generation
 class NitdocContext
-	super ToolContext
 
+	private var toolcontext = new ToolContext
 	private var model: Model
 	private var mbuilder: ModelBuilder
 	private var mainmodule: MModule
@@ -45,27 +45,26 @@ class NitdocContext
 	private var opt_custom_footer_text: OptionString = new OptionString("Text displayed as footer of all pages", "--custom-footer-text")
 
 	init do
-		super
-		self.arguments = option_context.rest
-		option_context.options.clear
-		option_context.add_option(opt_dir)
-		option_context.add_option(opt_source)
-		option_context.add_option(opt_sharedir)
-		option_context.add_option(opt_nodot)
-		option_context.add_option(opt_private)
-		option_context.add_option(opt_custom_title)
-		option_context.add_option(opt_custom_footer_text)
-		option_context.add_option(opt_custom_overview_text)
-		option_context.add_option(opt_custom_menu_items)
-		process_options
+		self.arguments = toolcontext.option_context.rest
+		toolcontext.option_context.options.clear
+		toolcontext.option_context.add_option(opt_dir)
+		toolcontext.option_context.add_option(opt_source)
+		toolcontext.option_context.add_option(opt_sharedir)
+		toolcontext.option_context.add_option(opt_nodot)
+		toolcontext.option_context.add_option(opt_private)
+		toolcontext.option_context.add_option(opt_custom_title)
+		toolcontext.option_context.add_option(opt_custom_footer_text)
+		toolcontext.option_context.add_option(opt_custom_overview_text)
+		toolcontext.option_context.add_option(opt_custom_menu_items)
+		toolcontext.process_options
 
 		if arguments.length < 1 then
-			option_context.usage
+			toolcontext.option_context.usage
 			exit(1)
 		end
 
 		model = new Model
-		mbuilder = new ModelBuilder(model, self)
+		mbuilder = new ModelBuilder(model, toolcontext)
 		# Here we load an process all modules passed on the command line
 		var mmodules = mbuilder.parse_and_build(arguments)
 		if mmodules.is_empty then return
@@ -78,10 +77,10 @@ class NitdocContext
 			mainmodule.set_imported_mmodules(mmodules)
 		end
 		self.class_hierarchy = mainmodule.flatten_mclass_hierarchy
+		self.process_options
 	end
 
-	redef fun process_options do
-		super
+	private fun process_options do
 		if not opt_dir.value is null then
 			output_dir = opt_dir.value
 		else
