@@ -17,7 +17,6 @@
 module ni_nitdoc
 
 import model_utils
-import abstract_compiler
 
 # The NitdocContext contains all the knowledge used for doc generation
 class NitdocContext
@@ -1215,7 +1214,7 @@ redef class MClass
 	end
 
 	fun url: String do
-		return "class_{public_owner}_{c_name}.html"
+		return "class_{public_owner}_{name}.html"
 	end
 
 	# Escape name for html output
@@ -1284,7 +1283,7 @@ end
 
 redef class MPropDef
 	fun url: String do return "{mclassdef.mclass.url}#{anchor}"
-	fun anchor: String do return "PROP_{mclassdef.mclass.public_owner.name}_{c_name}"
+	fun anchor: String do return "PROP_{mclassdef.mclass.public_owner.name}_{mproperty.name}"
 
 	# Return a link (html a tag) to the nitdoc class page
 	fun html_link(page: NitdocPage) do
