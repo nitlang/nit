@@ -18,9 +18,9 @@ module ni
 import model_utils
 
 private class Pager
-	var content: String = ""
+	var content = new Buffer
 	fun add(text: String) do addn("{text}\n")
-	fun addn(text: String) do content += text.escape
+	fun addn(text: String) do content.append(text.escape)
 	fun add_rule do add("\n---\n")
 	fun render do sys.system("echo \"{content}\" | pager -r")
 end
