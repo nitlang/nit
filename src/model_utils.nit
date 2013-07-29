@@ -229,3 +229,33 @@ redef class MClass
 		return self.kind == abstract_kind
 	end
 end
+
+# Sorters
+
+# Sort mmodules by their name
+class MModuleNameSorter
+	super AbstractSorter[MModule]
+	redef fun compare(a, b) do return a.name <=> b.name
+	init do end
+end
+
+# Sort mclasses by their name
+class MClassNameSorter
+	super AbstractSorter[MClass]
+	redef fun compare(a, b) do return a.name <=> b.name
+	init do end
+end
+
+# Sort mproperties by their name
+class MPropertyNameSorter
+	super AbstractSorter[MProperty]
+	redef fun compare(a, b) do return a.name <=> b.name
+	init do end
+end
+
+# Sort mpropdefs by their name
+class MPropDefNameSorter
+	super AbstractSorter[MPropDef]
+	redef fun compare(a, b) do return a.mproperty.name <=> b.mproperty.name
+	init do end
+end

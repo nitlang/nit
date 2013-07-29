@@ -361,7 +361,7 @@ class NitdocOverview
 			end
 		end
 		# sort modules
-		var sorter = new ComparableSorter[MModule]
+		var sorter = new MModuleNameSorter
 		self.mmodules.add_all(mmodules)
 		sorter.sort(self.mmodules)
 	end
@@ -461,7 +461,7 @@ class NitdocFullindex
 	# Add to content modules column
 	private fun module_column do
 		var sorted = ctx.mbuilder.model.mmodule_importation_hierarchy.to_a
-		var sorter = new ComparableSorter[MModule]
+		var sorter = new MModuleNameSorter
 		sorter.sort(sorted)
 		append("<article class='modules filterable'>")
 		append("<h2>Modules</h2>")
@@ -478,7 +478,7 @@ class NitdocFullindex
 	# Add to content classes modules
 	private fun classes_column do
 		var sorted = ctx.mbuilder.model.mclasses
-		var sorter = new ComparableSorter[MClass]
+		var sorter = new MClassNameSorter
 		sorter.sort(sorted)
 		append("<article class='modules filterable'>")
 		append("<h2>Classes</h2>")
@@ -496,7 +496,7 @@ class NitdocFullindex
 	# Insert the properties column of fullindex page
 	private fun properties_column do
 		var sorted = ctx.mbuilder.model.mproperties
-		var sorter = new ComparableSorter[MProperty]
+		var sorter = new MPropertyNameSorter
 		sorter.sort(sorted)
 		append("<article class='modules filterable'>")
 		append("<h2>Properties</h2>")
@@ -633,7 +633,7 @@ class NitdocModule
 
 	private fun display_module_list(list: Array[MModule]) do
 		append("<ul>")
-		var sorter = new ComparableSorter[MModule]
+		var sorter = new MModuleNameSorter
 		sorter.sort(list)
 		for m in list do
 			append("<li>")
@@ -657,7 +657,7 @@ class NitdocModule
 
 		var sorted = new Array[MClass]
 		sorted.add_all(all_mclasses)
-		var sorter = new ComparableSorter[MClass]
+		var sorter = new MClassNameSorter
 		sorter.sort(sorted)
 		append("<div class='module'>")
 		append("<article class='classes filterable'>")
@@ -689,7 +689,7 @@ class NitdocModule
 		end
 		for c in mmodule.mclassdefs do mpropdefs.add_all(c.mpropdefs)
 		var sorted = mpropdefs.to_a
-		var sorter = new ComparableSorter[MPropDef]
+		var sorter = new MPropDefNameSorter
 		sorter.sort(sorted)
 		# display properties in one column
 		append("<article class='properties filterable'>")
@@ -787,7 +787,7 @@ class NitdocClass
 	end
 
 	private fun properties_column do
-		var sorter = new ComparableSorter[MPropDef]
+		var sorter = new MPropDefNameSorter
 		append("<nav class='properties filterable'>")
 		append("<h3>Properties</h3>")
 		# virtual types
@@ -833,7 +833,7 @@ class NitdocClass
 
 	private fun inheritance_column do
 		var sorted = new Array[MClass]
-		var sorterp = new ComparableSorter[MClass]
+		var sorterp = new MClassNameSorter
 		append("<nav>")
 		append("<h3>Inheritance</h3>")
 		var greaters = mclass.in_hierarchy(ctx.mainmodule).greaters.to_a
@@ -944,9 +944,7 @@ class NitdocClass
 		append("</ul>")
 		append("</section>")
 		# properties
-		var prop_sorter = new ComparableSorter[MPropDef]
-		var sorterprop = new ComparableSorter[MProperty]
-		var sorterc = new ComparableSorter[MClass]
+		var prop_sorter = new MPropDefNameSorter
 		var lmmodule = new List[MModule]
 		# virtual and formal types
 		var local_vtypes = new Array[MVirtualTypeDef]
@@ -1100,10 +1098,6 @@ end
 #
 
 redef class MModule
-	super Comparable
-	redef type OTHER: MModule
-	redef fun <(other: OTHER): Bool do return self.name < other.name
-
 	# URL to nitdoc page
 	fun url: String do
 		var res = new Buffer
@@ -1183,10 +1177,6 @@ redef class MModule
 end
 
 redef class MClass
-	super Comparable
-	redef type OTHER: MClass
-	redef fun <(other: OTHER): Bool do return self.name < other.name
-
 	# Return the module signature decorated with html
 	fun html_full_signature(page: NitdocPage) do
 		if visibility < public_visibility then page.append("{visibility.to_s} ")
@@ -1233,10 +1223,6 @@ redef class MClass
 end
 
 redef class MProperty
-	super Comparable
-	redef type OTHER: MProperty
-	redef fun <(other: OTHER): Bool do return self.name < other.name
-
 	# Return the property namespace decorated with html
 	fun html_namespace(page: NitdocPage) do
 		intro_mclassdef.mclass.html_namespace(page)
@@ -1297,10 +1283,6 @@ redef class MClassDef
 end
 
 redef class MPropDef
-	super Comparable
-	redef type OTHER: MPropDef
-	redef fun <(other: OTHER): Bool do return self.mproperty.name < other.mproperty.name
-
 	fun url: String do return "{mclassdef.mclass.url}#{anchor}"
 	fun anchor: String do return "PROP_{mclassdef.mclass.public_owner.name}_{c_name}"
 

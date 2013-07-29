@@ -161,7 +161,7 @@ class NitIndex
 					#sort list
 					var sorted = new Array[MClass]
 					sorted.add_all(list)
-					var sorter = new ComparableSorter[MClass]
+					var sorter = new MClassNameSorter
 					sorter.sort(sorted)
 					for mclass in sorted do
 						var nclass = mbuilder.mclassdef2nclassdef[mclass.intro].as(AStdClassdef)
@@ -227,7 +227,7 @@ class NitIndex
 					#sort list
 					var sorted = new Array[MMethod]
 					sorted.add_all(list)
-					var sorter = new ComparableSorter[MMethod]
+					var sorter = new MPropertyNameSorter
 					sorter.sort(sorted)
 					pager.add("\n# {cat}".bold)
 					for mprop in sorted do
@@ -253,7 +253,7 @@ class NitIndex
 			cats[mclass].add(mprop)
 		end
 		#sort groups
-		var sorter = new ComparableSorter[MClass]
+		var sorter = new MClassNameSorter
 		var sorted = new Array[MClass]
 		sorted.add_all(cats.keys)
 		sorter.sort(sorted)
@@ -261,7 +261,7 @@ class NitIndex
 		for mclass in sorted do
 			var mprops = cats[mclass]
 			pager.add("# {mclass.namespace}".bold)
-			var sorterp = new ComparableSorter[MProperty]
+			var sorterp = new MPropertyNameSorter
 			sorterp.sort(mprops)
 			for mprop in mprops do
 				if mprop isa MMethod and mbuilder.mpropdef2npropdef.has_key(mprop.intro) then
@@ -343,20 +343,12 @@ end
 # Printing facilities
 
 redef class MModule
-	super Comparable
-	redef type OTHER: MModule
-	redef fun <(other: OTHER): Bool do return self.name < other.name
-
 	private fun namespace: String do
 		return full_name
 	end
 end
 
 redef class MClass
-	super Comparable
-	redef type OTHER: MClass
-	redef fun <(other: OTHER): Bool do return self.name < other.name
-
 	redef fun to_s: String do
 		if arity > 0 then
 			return "{name}[{intro.parameter_names.join(", ")}]"
@@ -393,12 +385,6 @@ redef class MClassDef
 	private fun namespace: String do
 		return "{mmodule.full_name}::{mclass.name}"
 	end
-end
-
-redef class MProperty
-	super Comparable
-	redef type OTHER: MProperty
-	redef fun <(other: OTHER): Bool do return self.name < other.name
 end
 
 redef class MVirtualTypeProp
