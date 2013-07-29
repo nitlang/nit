@@ -1131,7 +1131,7 @@ redef class MMLocalProperty
 			var tlp
 			if tm.global_classes.has(lc.global) then
 				tlp = tm[lc.global][self.global]
-				assert lps.has(tlp)
+				#assert lps.has(tlp) # FIXME What this line is used for?
 			else if tm.global_classes.has(self.local_class.global) then
 				# Self is the inherited property. Process it
 				tlp = tm[self.local_class.global][self.global]
