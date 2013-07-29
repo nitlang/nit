@@ -145,54 +145,89 @@ class NitIndex
 	private fun modules_fulldoc(mmodules: List[MModule]) do
 		var pager = new Pager
 		for mmodule in mmodules do
-			var nmodule = mbuilder.mmodule2nmodule[mmodule]
-			pager.add("# module {mmodule.namespace}\n".bold)
-			if not mmodule.in_importation.direct_greaters.is_empty then
-				pager.add("import ".bold + "{mmodule.in_importation.direct_greaters.join(", ")}\n")
+			# name and prototype
+			pager.add("# {mmodule.namespace}\n".bold)
+			# comment
+			if mbuilder.mmodule2nmodule.has_key(mmodule) then
+				var nmodule = mbuilder.mmodule2nmodule[mmodule]
+				if not nmodule.n_moduledecl.n_doc == null then
+					for comment in nmodule.n_moduledecl.n_doc.comment do pager.add(comment.green)
+				end
 			end
-			if not mmodule.in_importation.direct_smallers.is_empty then
-				pager.add("known clients: ".bold + "{mmodule.in_importation.direct_smallers.join(", ")}\n")
+			pager.add("{mmodule.prototype}")
+			pager.add_rule
+			# imports
+			var msorter = new MModuleNameSorter
+			var ms = mmodule.in_importation.greaters.to_a
+			if ms.length > 1 then
+				msorter.sort(ms)
+				pager.add("# imported modules".bold)
+				pager.addn("\t")
+				for i in [0..ms.length[ do
+					if ms[i] == mmodule then continue
+					pager.addn(ms[i].name)
+					if i < ms.length - 1 then pager.addn(", ")
+				end
+				pager.add("\n")
 			end
-			pager.add_rule
-			pager.addn(nmodule.n_moduledecl.n_doc.comment.green)
-			pager.add_rule
-
-			var cats = new HashMap[String, Collection[MClass]]
-			cats["introduced classes"] = mmodule.intro_mclasses
-			cats["refined classes"] = mmodule.redef_mclasses
-			cats["imported classes"] = mmodule.imported_mclasses
-
-			for cat, list in cats do
-				if not list.is_empty then
-					pager.add("\n# {cat}".bold)
-					#sort list
-					var sorted = new Array[MClass]
-					sorted.add_all(list)
-					var sorter = new MClassNameSorter
-					sorter.sort(sorted)
-					for mclass in sorted do
-						var nclass = mbuilder.mclassdef2nclassdef[mclass.intro].as(AStdClassdef)
-						pager.add("")
-						if not nclass.n_doc == null and not nclass.n_doc.short_comment.is_empty then
-							pager.add("\t# {nclass.n_doc.short_comment}")
-						end
-						if cat == "refined classes" then
-							pager.add("\tredef {mclass.short_doc}")
-						else
-							pager.add("\t{mclass.short_doc}")
-						end
-						if cat != "introduced classes" then
-							pager.add("\t\t" + "introduced in {mmodule.full_name}::{mclass}".gray)
-						end
-						for mclassdef in mclass.mclassdefs do
-							if mclassdef != mclass.intro then
-								pager.add("\t\t" + "refined in {mclassdef.namespace}".gray)
-							end
-						end
+			# clients
+			ms = mmodule.in_importation.smallers.to_a
+			if ms.length > 1 then
+				msorter.sort(ms)
+				pager.add("# known modules".bold)
+				pager.addn("\t")
+				for i in [0..ms.length[ do
+					if ms[i] == mmodule then continue
+					pager.addn(ms[i].name)
+					if i < ms.length - 1 then pager.addn(", ") 
+				end
+				pager.add("\n")
+			end
+			# local classes and interfaces
+			var sorter = new MClassDefNameSorter
+			var intro_mclassdefs = new Array[MClassDef]
+			var redef_mclassdefs = new Array[MClassDef]
+			for mclassdef in mmodule.mclassdefs do
+				if mclassdef.is_intro then
+					intro_mclassdefs.add(mclassdef)
+				else
+					redef_mclassdefs.add(mclassdef)
+				end
+			end
+			# intro
+			if not intro_mclassdefs.is_empty then
+				sorter.sort(intro_mclassdefs)
+				pager.add("\n# introduced classes".bold)
+				for mclassdef in intro_mclassdefs do
+					pager.add("")
+					var nclass = mbuilder.mclassdef2nclassdef[mclassdef]
+					if nclass isa AStdClassdef and not nclass.n_doc == null and not nclass.n_doc.short_comment.is_empty then
+						pager.add("\t{nclass.n_doc.short_comment.green}")
+					end
+					pager.add("\t{mclassdef.mclass.prototype}")
+					#TODO add redefs?
+				end
+			end
+			# redefs
+			if not redef_mclassdefs.is_empty then
+				sorter.sort(redef_mclassdefs)
+				pager.add("\n# refined classes".bold)
+				for mclassdef in redef_mclassdefs do
+					pager.add("")
+					#TODO intro comment?
+					var nclass = mbuilder.mclassdef2nclassdef[mclassdef]
+					if nclass isa AStdClassdef and not nclass.n_doc == null and not nclass.n_doc.short_comment.is_empty then
+						pager.add("\t# {nclass.n_doc.short_comment.green}")
+					end
+					pager.add("\t{mclassdef.mclass.prototype}")
+					pager.add("\t\t" + "introduced in {mclassdef.mclass.intro.mmodule.namespace.bold}".gray)
+					for odef in mclassdef.mclass.mclassdefs do
+						if odef.is_intro or odef == mclassdef or mclassdef.mmodule == mmodule then continue
+						pager.add("\t\t" + "refined in {mclassdef.mmodule.namespace.bold}".gray)
 					end
 				end
 			end
-			pager.add_rule
+			#TODO add inherited classes?
 		end
 		pager.render
 	end
@@ -203,7 +238,7 @@ class NitIndex
 			var nclass = mbuilder.mclassdef2nclassdef[mclass.intro].as(AStdClassdef)
 
 			pager.add("# {mclass.namespace}\n".bold)
-			pager.add("{mclass.short_doc}")
+			pager.add("{mclass.prototype}")
 			if not nclass.n_doc == null then
 				pager.add_rule
 				pager.addn(nclass.n_doc.comment.green)
@@ -332,33 +367,42 @@ end
 # Printing facilities
 
 redef class MModule
+	# prototype of the module
+	# 	module ownername::name
+	private fun prototype: String do return "module {name}"
+
+	# namespace of the module
+	#	ownername::name
 	private fun namespace: String do
-		return full_name
+		if public_owner == null then
+			return self.name
+		else
+			return "{public_owner.namespace}::{self.name}"
+		end
 	end
 end
 
 redef class MClass
-	redef fun to_s: String do
+	# return the generic signature of the class
+	#	[E, F]
+	private fun signature: String do
 		if arity > 0 then
-			return "{name}[{intro.parameter_names.join(", ")}]"
+			return "[{intro.parameter_names.join(", ")}]"
 		else
-			return name
+			return ""
 		end
 	end
 
-	private fun short_doc: String do
-		var ret = ""
-		if is_interface then ret = "interface {ret}"
-		if is_enum then ret = "enum {ret}"
-		if is_class then ret = "class {ret}"
-		if is_abstract then ret = "abstract {ret}"
-		if visibility.to_s == "public" then ret = "{ret}{to_s.green}"
-		if visibility.to_s == "private" then ret = "{ret}{to_s.red}"
-		if visibility.to_s == "protected" then ret = "{ret}{to_s.yellow}"
-		if not parents.is_empty then
-			ret = "{ret} super {parents.join(", ")}"
-		end
-		return ret
+	# return the prototype of the class
+	# class name is displayed with colors depending on visibility
+	#	abstract interface Foo[E]
+	private fun prototype: String do
+		var res = new Buffer
+		res.append("{kind} ")
+		if visibility.to_s == "public" then res.append("{name}{signature}".bold.green)
+		if visibility.to_s == "private" then res.append("{name}{signature}".bold.red)
+		if visibility.to_s == "protected" then res.append("{name}{signature}".bold.yellow)
+		return res.to_s
 	end
 
 	private fun namespace: String do
@@ -457,16 +501,16 @@ redef class MVirtualType
 end
 
 redef class ADoc
-	private fun comment: String do
-		var res = new Buffer
+	private fun comment: List[String] do
+		var res = new List[String]
 		for t in n_comment do
-			res.append(t.text.replace("# ", "").replace("#", ""))
+			res.add(t.text.replace("\n", ""))
 		end
-		return res.to_s
+		return res
 	end
 
 	private fun short_comment: String do
-		return n_comment.first.text.replace("# ", "").replace("\n", "")
+		return n_comment.first.text.replace("\n", "")
 	end
 end
 
@@ -507,12 +551,14 @@ redef class String
 	end
 
 	private fun esc: Char do return 27.ascii
-	private fun red: String do return add_escape_char("{esc}[1;31m")
-	private fun yellow: String do return add_escape_char("{esc}[1;33m")
-	private fun green: String do return add_escape_char("{esc}[1;32m")
-	private fun blue: String do return add_escape_char("{esc}[1;34m")
-	private fun cyan: String do return add_escape_char("{esc}[1;36m")
-	private fun gray: String do return add_escape_char("{esc}[30;1m")
+	private fun gray: String do return add_escape_char("{esc}[30m")
+	private fun red: String do return add_escape_char("{esc}[31m")
+	private fun green: String do return add_escape_char("{esc}[32m")
+	private fun yellow: String do return add_escape_char("{esc}[33m")
+	private fun blue: String do return add_escape_char("{esc}[34m")
+	private fun purple: String do return add_escape_char("{esc}[35m")
+	private fun cyan: String do return add_escape_char("{esc}[36m")
+	private fun light_gray: String do return add_escape_char("{esc}[37m")
 	private fun bold: String do return add_escape_char("{esc}[1m")
 	private fun underline: String do return add_escape_char("{esc}[4m")
 

@@ -246,6 +246,13 @@ class MClassNameSorter
 	init do end
 end
 
+# Sort mclassdefs by their name
+class MClassDefNameSorter
+	super AbstractSorter[MClassDef]
+	redef fun compare(a, b) do return a.mclass.name <=> b.mclass.name
+	init do end
+end
+
 # Sort mproperties by their name
 class MPropertyNameSorter
 	super AbstractSorter[MProperty]
