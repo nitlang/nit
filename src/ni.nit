@@ -197,8 +197,10 @@ class NitIndex
 
 			pager.add("# {mclass.namespace}\n".bold)
 			pager.add("{mclass.short_doc}")
-			pager.add_rule
-			pager.addn(nclass.n_doc.comment.green)
+			if not nclass.n_doc == null then
+				pager.add_rule
+				pager.addn(nclass.n_doc.comment.green)
+			end
 			pager.add_rule
 			if not mclass.parameter_types.is_empty then
 				pager.add("# formal types".bold)
