@@ -354,40 +354,19 @@ class NitIndex
 		pager.render
 	end
 
-	private fun mpropdef_fulldoc(pager: Pager, mpropdef: MPropDef) do
-		if mbuilder.mpropdef2npropdef.has_key(mpropdef) then
-			var nprop = mbuilder.mpropdef2npropdef[mpropdef]
-			if not nprop.n_doc == null and not nprop.n_doc.comment.is_empty then
-				for comment in nprop.n_doc.comment do pager.add("\t{comment.green}")
-			end
-		end
-		pager.add("\t{mpropdef}")
-		if not mpropdef.is_intro then
-			pager.add("\t\t" + "introduced in {mpropdef.mproperty.intro_mclassdef.namespace.bold}".gray)
-		end
-		var mpropdefs = mpropdef.mproperty.mpropdefs
-		mainmodule.linearize_mpropdefs(mpropdefs)
-		for mpdef in mpropdefs do
-			if not mpdef.is_intro then
-				pager.add("\t\t" + "refined in {mpdef.mclassdef.namespace.bold}".gray)
-			end
-		end
-	end
-
 	private fun props_fulldoc(raw_mprops: List[MProperty]) do
 		var pager = new Pager
 		# group by module
-		var cats = new HashMap[MClass, Array[MProperty]]
+		var cats = new HashMap[MModule, Array[MProperty]]
 		for mprop in raw_mprops do
-			if not mbuilder.mpropdef2npropdef.has_key(mprop.intro) then continue
 			if mprop isa MAttribute then continue
-			var mclass = mprop.intro_mclassdef.mclass
-			if not cats.has_key(mclass) then cats[mclass] = new Array[MProperty]
-			cats[mclass].add(mprop)
+			var key = mprop.intro.mclassdef.mmodule
+			if not cats.has_key(key) then cats[key] = new Array[MProperty]
+			cats[key].add(mprop)
 		end
 		#sort groups
-		var sorter = new MClassNameSorter
-		var sorted = new Array[MClass]
+		var sorter = new MModuleNameSorter
+		var sorted = new Array[MModule]
 		sorted.add_all(cats.keys)
 		sorter.sort(sorted)
 		# display
@@ -398,9 +377,22 @@ class NitIndex
 			sorterp.sort(mprops)
 			for mprop in mprops do
 				pager.add("")
-				mpropdef_fulldoc(pager, mprop.intro)
+				if mbuilder.mpropdef2npropdef.has_key(mprop.intro) then
+					var nprop = mbuilder.mpropdef2npropdef[mprop.intro]
+					if not nprop.n_doc == null and not nprop.n_doc.comment.is_empty then
+						for comment in nprop.n_doc.comment do pager.add("\t{comment.green}")
+					end
+				end
+				pager.add("\t{mprop.intro}")
+				pager.add("\t\t" + "introduced in {mprop.intro_mclassdef.namespace.bold}".gray)
+				var mpropdefs = mprop.mpropdefs
+				mainmodule.linearize_mpropdefs(mpropdefs)
+				for mpdef in mpropdefs do
+					if not mpdef.is_intro then
+						pager.add("\t\t" + "refined in {mpdef.mclassdef.namespace.bold}".gray)
+					end
+				end
 			end
-			pager.add_rule
 		end
 		pager.render
 	end
