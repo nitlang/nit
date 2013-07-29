@@ -18,6 +18,7 @@
 module curl
 
 import curl_c
+import mail
 
 # Top level of Curl
 class Curl
