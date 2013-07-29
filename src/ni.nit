@@ -69,13 +69,20 @@ class NitIndex
 	end
 
 	fun welcome do
-		print "Welcome in Nit Index.\n"
-		print "Loaded modules"
-		for m in mbuilder.nmodules do
-			print " - {m.mmodule.name}"
+		print "Welcome in the Nit Index."
+		print "\nCommands:"
+		print "\tname\t\tlookup module, class and property with the corresponding 'name'"
+		print "\tparam: Type\tlookup methods using the corresponding 'Type' as parameter"
+		print "\treturn: Type\tlookup methods returning the corresponding 'Type'"
+		print "\tEnter a blank line to exit.\n"
+		print "\nLoaded modules:"
+		var mmodules = new Array[MModule]
+		mmodules.add_all(model.mmodules)
+		var sorter = new MModuleNameSorter
+		sorter.sort(mmodules)
+		for m in mmodules do
+			print "\t{m.name}"
 		end
-		print "\nEnter the module, class or property name you want to look up."
-		print "Enter a blank line to exit.\n"
 	end
 
 	fun prompt do
