@@ -33,7 +33,10 @@ class MyHttpFetcher
   fun request(url: String): nullable CurlRequest do return self.curl.http_request(url)
 
   # Header callback
-  redef fun header_callback(line: String) do print "Header_callback : {line}"
+  redef fun header_callback(line: String) do
+  	# We keep this callback silent for testing purposes
+    #if not line.has_prefix("Date:") then print "Header_callback : {line}"
+  end
 
   # Body callback
   redef fun body_callback(line: String) do print "Body_callback : {line}"
@@ -106,7 +109,7 @@ else
       var headers = new HeaderMap
       headers["Accept"] = "Moo"
       downloadFileRequest.headers = headers
-      downloadFileRequest.verbose = true
+      downloadFileRequest.verbose = false
       var downloadResponse = downloadFileRequest.download_to_file(null)
 
       if downloadResponse isa CurlFileResponseSuccess then
