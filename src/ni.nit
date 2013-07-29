@@ -235,54 +235,143 @@ class NitIndex
 	private fun classes_fulldoc(mclasses: List[MClass]) do
 		var pager = new Pager
 		for mclass in mclasses do
-			var nclass = mbuilder.mclassdef2nclassdef[mclass.intro].as(AStdClassdef)
-
+			# title
 			pager.add("# {mclass.namespace}\n".bold)
-			pager.add("{mclass.prototype}")
-			if not nclass.n_doc == null then
-				pager.add_rule
-				pager.addn(nclass.n_doc.comment.green)
+			# comment
+			if mbuilder.mclassdef2nclassdef.has_key(mclass.intro) then
+				var nclass = mbuilder.mclassdef2nclassdef[mclass.intro]
+				if nclass isa AStdClassdef and not nclass.n_doc == null then
+					for comment in nclass.n_doc.comment do pager.add(comment.green)
+				end
+			end
+			pager.addn("{mclass.prototype}")
+			if mclass.in_hierarchy(mainmodule).direct_greaters.length > 1 then
+				var supers = mclass.in_hierarchy(mainmodule).direct_greaters.to_a
+				pager.addn(" super ")
+				for i in [0..supers.length[ do
+					if supers[i] == mclass then continue
+					pager.addn(supers[i].name)
+					if i < mclass.in_hierarchy(mainmodule).direct_greaters.length -1 then pager.addn(", ")
+				end
+				pager.add("")
 			end
 			pager.add_rule
+			# formal types
 			if not mclass.parameter_types.is_empty then
 				pager.add("# formal types".bold)
 				for ft, bound in mclass.parameter_types do
 					pager.add("")
 					pager.add("\t{ft.to_s.green}: {bound}")
 				end
+				pager.add("")
 			end
-			if not mclass.virtual_types.is_empty then
-				pager.add("# virtual types".bold)
-				for vt in mclass.virtual_types do
-					pager.add("")
-					mpropdef_fulldoc(pager, vt.intro)
-				end
-			end
-			pager.add_rule
+			# get properties
+			var cats = new ArrayMap[String, Set[MPropDef]]
+			cats["virtual types"] = new HashSet[MPropDef]
+			cats["constructors"] = new HashSet[MPropDef]
+			cats["introduced methods"] = new HashSet[MPropDef]
+			cats["refined methods"] = new HashSet[MPropDef]
 
-			var cats = new HashMap[String, Collection[MMethod]]
-			cats["constructors"] = mclass.constructors
-			cats["introduced methods"] = mclass.intro_methods
-			cats["refined methods"] = mclass.redef_methods
-			cats["inherited methods"] = mclass.inherited_methods
-
-			for cat, list in cats do
-				if not list.is_empty then
-					#sort list
-					var sorted = new Array[MMethod]
-					sorted.add_all(list)
-					var sorter = new MPropertyNameSorter
-					sorter.sort(sorted)
-					pager.add("\n# {cat}".bold)
-					for mprop in sorted do
-						pager.add("")
-						mpropdef_fulldoc(pager, mprop.intro)
+			for mclassdef in mclass.mclassdefs do
+				for mpropdef in mclassdef.mpropdefs do
+					if mpropdef isa MAttributeDef then continue
+					if mpropdef isa MVirtualTypeDef then cats["virtual types"].add(mpropdef)
+					if mpropdef isa MMethodDef then
+						if mpropdef.mproperty.is_init then
+							cats["constructors"].add(mpropdef)
+						else if mpropdef.is_intro then
+							cats["introduced methods"].add(mpropdef)
+						else
+							cats["refined methods"].add(mpropdef)
+						end
 					end
 				end
 			end
-			pager.add_rule
+			# local mproperties
+			for cat, list in cats do
+				if not list.is_empty then
+					#sort list
+					var sorted = new Array[MPropDef]
+					sorted.add_all(list)
+					var sorter = new MPropDefNameSorter
+					sorter.sort(sorted)
+					pager.add("# {cat}".bold)
+					for mpropdef in sorted do
+						pager.add("")
+						if mbuilder.mpropdef2npropdef.has_key(mpropdef) then
+							var nprop = mbuilder.mpropdef2npropdef[mpropdef]
+							if not nprop.n_doc == null and not nprop.n_doc.comment.is_empty then
+								for comment in nprop.n_doc.comment do pager.add("\t{comment.green}")
+							else
+								nprop = mbuilder.mpropdef2npropdef[mpropdef.mproperty.intro]
+								if not nprop.n_doc == null and not nprop.n_doc.comment.is_empty then
+									for comment in nprop.n_doc.comment do pager.add("\t{comment.green}")
+								end
+							end
+						end
+						pager.add("\t{mpropdef}")
+						mainmodule.linearize_mpropdefs(mpropdef.mproperty.mpropdefs)
+						var previous_defs = new Array[MPropDef]
+						for def in mpropdef.mproperty.mpropdefs do
+							if def == mpropdef then continue
+							if def.is_intro then continue
+							if mclass.in_hierarchy(mainmodule) < def.mclassdef.mclass then
+								previous_defs.add(def)
+							end
+						end
+						if not mpropdef.is_intro then
+							pager.add("\t\t" + "introduced by {mpropdef.mproperty.intro.mclassdef.namespace.bold}".gray)
+						end
+						if not previous_defs.is_empty then
+							for def in previous_defs do pager.add("\t\t" + "inherited from {def.mclassdef.namespace.bold}".gray)
+						end
+					end
+					pager.add("")
+				end
+			end
+			# inherited mproperties
+			var inhs = new ArrayMap[MClass, Array[MProperty]]
+			var ancestors = mclass.in_hierarchy(mainmodule).greaters.to_a
+			mainmodule.linearize_mclasses(ancestors)
+			for a in ancestors do
+				if a == mclass then continue
+				for c in a.mclassdefs do
+					for p in c.intro_mproperties do
+						if p.intro_mclassdef == c then
+							if not inhs.has_key(a) then inhs[a] = new Array[MProperty]
+							inhs[a].add(p)
+						end
+					end
+				end
+			end
+			if not inhs.is_empty then
+				pager.add("# inherited properties".bold)
+				for a, ps in inhs do
+					pager.add("\n\tfrom {a.namespace.bold}: {ps.join(", ")}")
+				end
+			end
 		end
 		pager.render
+	end
+
+	private fun mpropdef_fulldoc(pager: Pager, mpropdef: MPropDef) do
+		if mbuilder.mpropdef2npropdef.has_key(mpropdef) then
+			var nprop = mbuilder.mpropdef2npropdef[mpropdef]
+			if not nprop.n_doc == null and not nprop.n_doc.comment.is_empty then
+				for comment in nprop.n_doc.comment do pager.add("\t{comment.green}")
+			end
+		end
+		pager.add("\t{mpropdef}")
+		if not mpropdef.is_intro then
+			pager.add("\t\t" + "introduced in {mpropdef.mproperty.intro_mclassdef.namespace.bold}".gray)
+		end
+		var mpropdefs = mpropdef.mproperty.mpropdefs
+		mainmodule.linearize_mpropdefs(mpropdefs)
+		for mpdef in mpropdefs do
+			if not mpdef.is_intro then
+				pager.add("\t\t" + "refined in {mpdef.mclassdef.namespace.bold}".gray)
+			end
+		end
 	end
 
 	private fun props_fulldoc(raw_mprops: List[MProperty]) do
@@ -346,22 +435,6 @@ class NitIndex
 		end
 		return matches
 	end
-
-	private fun mpropdef_fulldoc(pager: Pager, mpropdef: MPropDef) do
-		if mbuilder.mpropdef2npropdef.has_key(mpropdef) then
-			var nprop = mbuilder.mpropdef2npropdef[mpropdef]
-			if not nprop.n_doc == null and not nprop.n_doc.short_comment.is_empty then
-				pager.add("\t# {nprop.n_doc.short_comment}")
-			end
-		end
-		pager.add("\t{mpropdef}")
-		pager.add("\t\t" + "introduced in {mpropdef.mproperty.intro_mclassdef.namespace}".gray)
-		for mpdef in mpropdef.mproperty.mpropdefs do
-			if not mpdef.is_intro then
-				pager.add("\t\t" + "refined in {mpdef.mclassdef.namespace}".gray)
-			end
-		end
-	end
 end
 
 # Printing facilities
@@ -406,11 +479,7 @@ redef class MClass
 	end
 
 	private fun namespace: String do
-		if not intro_mmodule.public_owner == null then
-			return "{intro_mmodule.public_owner.name}::{name}"
-		else
-			return "{intro_mmodule.name}::{name}"
-		end
+		return "{intro_mmodule.namespace}::{name}"
 	end
 end
 
@@ -420,14 +489,21 @@ redef class MClassDef
 	end
 end
 
+redef class MProperty
+	redef fun to_s do
+		if visibility.to_s == "public" then return name.green
+		if visibility.to_s == "private" then return name.red
+		if visibility.to_s == "protected" then return name.yellow
+		return name.bold
+	end
+end
+
 redef class MMethodDef
 	redef fun to_s do
 		var res = new Buffer
 		if not is_intro then res.append("redef ")
 		if not mproperty.is_init then res.append("fun ")
-		if mproperty.visibility.to_s == "public" then res.append(mproperty.name.green)
-		if mproperty.visibility.to_s == "private" then res.append(mproperty.name.red)
-		if mproperty.visibility.to_s == "protected" then res.append(mproperty.name.yellow)
+		res.append(mproperty.to_s.bold)
 		if msignature != null then res.append(msignature.to_s)
 		# FIXME: modifiers should be accessible via the model
 		#if self isa ADeferredMethPropdef then ret = "{ret} is abstract"
@@ -440,9 +516,8 @@ end
 redef class MVirtualTypeDef
 	redef fun to_s do
 		var res = new Buffer
-		if mproperty.visibility.to_s == "public" then res.append(mproperty.name.green)
-		if mproperty.visibility.to_s == "private" then res.append(mproperty.name.red)
-		if mproperty.visibility.to_s == "protected" then res.append(mproperty.name.yellow)
+		res.append("type ")
+		res.append(mproperty.to_s.bold)
 		res.append(": {bound.to_s}")
 		return res.to_s
 	end
