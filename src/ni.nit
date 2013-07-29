@@ -92,58 +92,46 @@ class NitIndex
 
 	fun seek(entry: String) do
 		if entry.is_empty then exit(0)
-		var flag = false
+		var pager = new Pager
 		# seek return types
 		if entry.has_prefix("return:") then
 			var ret = entry.split_with(":")[1].replace(" ", "")
 			var matches = seek_returns(ret)
-			if not matches.is_empty then
-				flag = true
-				props_fulldoc(matches)
-			end
+			props_fulldoc(pager, matches)
 		else if entry.has_prefix("param:") then
 			var param = entry.split_with(":")[1].replace(" ", "")
 			var matches = seek_params(param)
-			if not matches.is_empty then
-				flag = true
-				props_fulldoc(matches)
-			end
+			props_fulldoc(pager, matches)
 		else
 			# seek for modules
 			var mmatches = new List[MModule]
 			for m in model.mmodules do
-				if m.name == entry then
-					flag = true
-					mmatches.add(m)
-				end
+				if m.name == entry then mmatches.add(m)
 			end
-			if not mmatches.is_empty then modules_fulldoc(mmatches)
+			if not mmatches.is_empty then modules_fulldoc(pager, mmatches)
 			# seek for classes
 			var cmatches = new List[MClass]
 			for c in model.mclasses do
-				if c.name == entry then
-					flag = true
-					cmatches.add(c)
-				end
+				if c.name == entry then cmatches.add(c)
 			end
-			if not cmatches.is_empty then classes_fulldoc(cmatches)
+			if not cmatches.is_empty then classes_fulldoc(pager, cmatches)
 			# seek for properties
 			var matches = new List[MProperty]
 			for p in model.mproperties do
-				if p.name == entry then
-					flag = true
-					matches.add(p)
-				end
+				if p.name == entry then matches.add(p)
 			end
-			if not matches.is_empty then props_fulldoc(matches)
+			if not matches.is_empty then props_fulldoc(pager, matches)
 		end
 		# no matches
-		if not flag then print "Nothing known about '{entry}'"
+		if pager.content.is_empty then
+			print "Nothing known about '{entry}'"
+		else
+			pager.render
+		end
 		if arguments.length == 1 then prompt
 	end
 
-	private fun modules_fulldoc(mmodules: List[MModule]) do
-		var pager = new Pager
+	private fun modules_fulldoc(pager: Pager, mmodules: List[MModule]) do
 		for mmodule in mmodules do
 			# name and prototype
 			pager.add("# {mmodule.namespace}\n".bold)
@@ -154,14 +142,13 @@ class NitIndex
 					for comment in nmodule.n_moduledecl.n_doc.comment do pager.add(comment.green)
 				end
 			end
-			pager.add("{mmodule.prototype}")
-			pager.add_rule
+			pager.add("{mmodule.prototype}\n")
 			# imports
 			var msorter = new MModuleNameSorter
 			var ms = mmodule.in_importation.greaters.to_a
 			if ms.length > 1 then
 				msorter.sort(ms)
-				pager.add("# imported modules".bold)
+				pager.add("## imported modules".bold)
 				pager.addn("\t")
 				for i in [0..ms.length[ do
 					if ms[i] == mmodule then continue
@@ -174,7 +161,7 @@ class NitIndex
 			ms = mmodule.in_importation.smallers.to_a
 			if ms.length > 1 then
 				msorter.sort(ms)
-				pager.add("# known modules".bold)
+				pager.add("## known modules".bold)
 				pager.addn("\t")
 				for i in [0..ms.length[ do
 					if ms[i] == mmodule then continue
@@ -197,7 +184,7 @@ class NitIndex
 			# intro
 			if not intro_mclassdefs.is_empty then
 				sorter.sort(intro_mclassdefs)
-				pager.add("\n# introduced classes".bold)
+				pager.add("\n## introduced classes".bold)
 				for mclassdef in intro_mclassdefs do
 					pager.add("")
 					var nclass = mbuilder.mclassdef2nclassdef[mclassdef]
@@ -211,7 +198,7 @@ class NitIndex
 			# redefs
 			if not redef_mclassdefs.is_empty then
 				sorter.sort(redef_mclassdefs)
-				pager.add("\n# refined classes".bold)
+				pager.add("\n## refined classes".bold)
 				for mclassdef in redef_mclassdefs do
 					pager.add("")
 					#TODO intro comment?
@@ -228,12 +215,11 @@ class NitIndex
 				end
 			end
 			#TODO add inherited classes?
+			pager.add_rule
 		end
-		pager.render
 	end
 
-	private fun classes_fulldoc(mclasses: List[MClass]) do
-		var pager = new Pager
+	private fun classes_fulldoc(pager: Pager, mclasses: List[MClass]) do
 		for mclass in mclasses do
 			# title
 			pager.add("# {mclass.namespace}\n".bold)
@@ -253,12 +239,11 @@ class NitIndex
 					pager.addn(supers[i].name)
 					if i < mclass.in_hierarchy(mainmodule).direct_greaters.length -1 then pager.addn(", ")
 				end
-				pager.add("")
+				pager.add("\n")
 			end
-			pager.add_rule
 			# formal types
 			if not mclass.parameter_types.is_empty then
-				pager.add("# formal types".bold)
+				pager.add("## formal types".bold)
 				for ft, bound in mclass.parameter_types do
 					pager.add("")
 					pager.add("\t{ft.to_s.green}: {bound}")
@@ -295,7 +280,7 @@ class NitIndex
 					sorted.add_all(list)
 					var sorter = new MPropDefNameSorter
 					sorter.sort(sorted)
-					pager.add("# {cat}".bold)
+					pager.add("## {cat}".bold)
 					for mpropdef in sorted do
 						pager.add("")
 						if mbuilder.mpropdef2npropdef.has_key(mpropdef) then
@@ -345,17 +330,16 @@ class NitIndex
 				end
 			end
 			if not inhs.is_empty then
-				pager.add("# inherited properties".bold)
+				pager.add("## inherited properties".bold)
 				for a, ps in inhs do
 					pager.add("\n\tfrom {a.namespace.bold}: {ps.join(", ")}")
 				end
 			end
+			pager.add_rule
 		end
-		pager.render
 	end
 
-	private fun props_fulldoc(raw_mprops: List[MProperty]) do
-		var pager = new Pager
+	private fun props_fulldoc(pager: Pager, raw_mprops: List[MProperty]) do
 		# group by module
 		var cats = new HashMap[MModule, Array[MProperty]]
 		for mprop in raw_mprops do
@@ -370,9 +354,9 @@ class NitIndex
 		sorted.add_all(cats.keys)
 		sorter.sort(sorted)
 		# display
-		for mclass in sorted do
-			var mprops = cats[mclass]
-			pager.add("# {mclass.namespace}".bold)
+		for mmodule in sorted do
+			var mprops = cats[mmodule]
+			pager.add("# matches in module {mmodule.namespace.bold}")
 			var sorterp = new MPropertyNameSorter
 			sorterp.sort(mprops)
 			for mprop in mprops do
@@ -393,8 +377,8 @@ class NitIndex
 					end
 				end
 			end
+			pager.add_rule
 		end
-		pager.render
 	end
 
 	private fun seek_returns(entry: String): List[MProperty] do
