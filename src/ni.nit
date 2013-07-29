@@ -74,8 +74,8 @@ class NitIndex
 		print "\tname\t\tlookup module, class and property with the corresponding 'name'"
 		print "\tparam: Type\tlookup methods using the corresponding 'Type' as parameter"
 		print "\treturn: Type\tlookup methods returning the corresponding 'Type'"
-		print "\tEnter a blank line to exit.\n"
-		print "\nLoaded modules:"
+		print "\tEnter ':q' to exit\n"
+		print "Loaded modules:"
 		var mmodules = new Array[MModule]
 		mmodules.add_all(model.mmodules)
 		var sorter = new MModuleNameSorter
@@ -83,6 +83,7 @@ class NitIndex
 		for m in mmodules do
 			print "\t{m.name}"
 		end
+		print ""
 	end
 
 	fun prompt do
@@ -91,7 +92,11 @@ class NitIndex
 	end
 
 	fun seek(entry: String) do
-		if entry.is_empty then exit(0)
+		if entry.is_empty then
+			prompt
+			return
+		end
+		if entry == ":q" then exit(0)
 		var pager = new Pager
 		# seek return types
 		if entry.has_prefix("return:") then
