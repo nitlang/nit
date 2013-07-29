@@ -145,7 +145,7 @@ class NitIndex
 				pager.add("known clients: ".bold + "{mmodule.in_importation.direct_smallers.join(", ")}\n")
 			end
 			pager.add_rule
-			pager.addn(nmodule.comment.green)
+			pager.addn(nmodule.n_moduledecl.n_doc.comment.green)
 			pager.add_rule
 
 			var cats = new HashMap[String, Collection[MClass]]
@@ -164,8 +164,8 @@ class NitIndex
 					for mclass in sorted do
 						var nclass = mbuilder.mclassdef2nclassdef[mclass.intro].as(AStdClassdef)
 						pager.add("")
-						if not nclass.short_comment.is_empty then
-							pager.add("\t# {nclass.short_comment}")
+						if not nclass.n_doc == null and not nclass.n_doc.short_comment.is_empty then
+							pager.add("\t# {nclass.n_doc.short_comment}")
 						end
 						if cat == "refined classes" then
 							pager.add("\tredef {mclass.short_doc}")
@@ -196,7 +196,7 @@ class NitIndex
 			pager.add("# {mclass.namespace}\n".bold)
 			pager.add("{mclass.short_doc}")
 			pager.add_rule
-			pager.addn(nclass.comment.green)
+			pager.addn(nclass.n_doc.comment.green)
 			pager.add_rule
 			if not mclass.parameter_types.is_empty then
 				pager.add("# formal types".bold)
@@ -309,8 +309,8 @@ class NitIndex
 	private fun method_fulldoc(pager: Pager, mprop: MMethod) do
 		if mbuilder.mpropdef2npropdef.has_key(mprop.intro) then
 			var nprop = mbuilder.mpropdef2npropdef[mprop.intro]
-			if not nprop.short_comment.is_empty then
-				pager.add("\t# {nprop.short_comment}")
+			if not nprop.n_doc == null and not nprop.n_doc.short_comment.is_empty then
+				pager.add("\t# {nprop.n_doc.short_comment}")
 			end
 			if nprop isa AAttrPropdef then
 				pager.add("\t{nprop.read_accessor}")
@@ -405,63 +405,17 @@ redef class MVirtualTypeProp
 	end
 end
 
-redef class AModule
+redef class ADoc
 	private fun comment: String do
-		var ret = ""
-		for t in n_moduledecl.n_doc.n_comment do
-			ret += "{t.text.replace("# ", "")}"
+		var res = new Buffer
+		for t in n_comment do
+			res.append(t.text.replace("# ", "").replace("#", ""))
 		end
-		return ret
-	end
-end
-
-redef class AStdClassdef
-	private fun comment: String do
-		var ret = ""
-		if n_doc != null then
-			for t in n_doc.n_comment do
-				var txt = t.text.replace("# ", "")
-				txt = txt.replace("#", "")
-				ret += "{txt}"
-			end
-		end
-		return ret
+		return res.to_s
 	end
 
 	private fun short_comment: String do
-		var ret = ""
-		if n_doc != null then
-			var txt = n_doc.n_comment.first.text
-			txt = txt.replace("# ", "")
-			txt = txt.replace("\n", "")
-			ret += txt
-		end
-		return ret
-	end
-end
-
-redef class APropdef
-	private fun comment: String do
-		var ret = ""
-		if n_doc != null then
-			for t in n_doc.n_comment do
-				var txt = t.text.replace("# ", "")
-				txt = txt.replace("#", "")
-				ret += "{txt}"
-			end
-		end
-		return ret
-	end
-
-	private fun short_comment: String do
-		var ret = ""
-		if n_doc != null then
-			var txt = n_doc.n_comment.first.text
-			txt = txt.replace("# ", "")
-			txt = txt.replace("\n", "")
-			ret += txt
-		end
-		return ret
+		return n_comment.first.text.replace("# ", "").replace("\n", "")
 	end
 end
 
