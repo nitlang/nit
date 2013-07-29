@@ -69,7 +69,6 @@ class NitdocContext
 		mbuilder = new ModelBuilder(model, self)
 		# Here we load an process all modules passed on the command line
 		var mmodules = mbuilder.parse_and_build(arguments)
-		mbuilder.full_propdef_semantic_analysis
 		if mmodules.is_empty then return
 
 		if mmodules.length == 1 then

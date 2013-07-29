@@ -52,7 +52,6 @@ class NitIndex
 		#var mmodules = modelbuilder.parse_and_build(["{dir}/lib/standard/standard.nit"])
 		var mmodules = mbuilder.parse_and_build([arguments.first])
 		if mmodules.is_empty then return
-		mbuilder.full_propdef_semantic_analysis
 		assert mmodules.length == 1
 		self.mainmodule = mmodules.first
 	end

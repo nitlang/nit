@@ -17,8 +17,7 @@
 # Model exploration and traversing facilities
 module model_utils
 
-import toolcontext
-import exprbuilder
+import modelbuilder
 
 redef class MModule
 	# Get the list of mclasses refined in 'self'.
