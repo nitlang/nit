@@ -211,7 +211,7 @@ class NitIndex
 				pager.add("# virtual types".bold)
 				for vt in mclass.virtual_types do
 					pager.add("")
-					vt_fulldoc(pager, vt)
+					mpropdef_fulldoc(pager, vt.intro)
 				end
 			end
 			pager.add_rule
@@ -232,7 +232,7 @@ class NitIndex
 					pager.add("\n# {cat}".bold)
 					for mprop in sorted do
 						pager.add("")
-						method_fulldoc(pager, mprop)
+						mpropdef_fulldoc(pager, mprop.intro)
 					end
 				end
 			end
@@ -264,13 +264,8 @@ class NitIndex
 			var sorterp = new MPropertyNameSorter
 			sorterp.sort(mprops)
 			for mprop in mprops do
-				if mprop isa MMethod and mbuilder.mpropdef2npropdef.has_key(mprop.intro) then
-					pager.add("")
-					method_fulldoc(pager, mprop)
-				else if mprop isa MVirtualTypeProp then
-					pager.add("")
-					vt_fulldoc(pager, mprop)
-				end
+				pager.add("")
+				mpropdef_fulldoc(pager, mprop.intro)
 			end
 			pager.add_rule
 		end
@@ -308,33 +303,18 @@ class NitIndex
 		return matches
 	end
 
-	private fun method_fulldoc(pager: Pager, mprop: MMethod) do
-		if mbuilder.mpropdef2npropdef.has_key(mprop.intro) then
-			var nprop = mbuilder.mpropdef2npropdef[mprop.intro]
+	private fun mpropdef_fulldoc(pager: Pager, mpropdef: MPropDef) do
+		if mbuilder.mpropdef2npropdef.has_key(mpropdef) then
+			var nprop = mbuilder.mpropdef2npropdef[mpropdef]
 			if not nprop.n_doc == null and not nprop.n_doc.short_comment.is_empty then
 				pager.add("\t# {nprop.n_doc.short_comment}")
 			end
-			if nprop isa AAttrPropdef then
-				pager.add("\t{nprop.read_accessor}")
-				pager.add("\t{nprop.write_accessor}")
-			else if nprop isa AMethPropdef then
-				pager.add("\t{nprop}")
-			end
-			pager.add("\t\t" + "introduced in {mprop.intro_mclassdef.namespace}".gray)
-			for mpropdef in mprop.mpropdefs do
-				if mpropdef != mprop.intro then
-					pager.add("\t\t" + "refined in {mpropdef.mclassdef.namespace}".gray)
-				end
-			end
 		end
-	end
-
-	private fun vt_fulldoc(pager: Pager, vt: MVirtualTypeProp) do
-		pager.add("\t{vt.short_doc}")
-		pager.add("\t\t" + "introduced in {vt.intro_mclassdef.namespace}::{vt}".gray)
-		for mpropdef in vt.mpropdefs do
-			if mpropdef != vt.intro then
-				pager.add("\t\t" + "refined in {mpropdef.mclassdef.namespace}".gray)
+		pager.add("\t{mpropdef}")
+		pager.add("\t\t" + "introduced in {mpropdef.mproperty.intro_mclassdef.namespace}".gray)
+		for mpdef in mpropdef.mproperty.mpropdefs do
+			if not mpdef.is_intro then
+				pager.add("\t\t" + "refined in {mpdef.mclassdef.namespace}".gray)
 			end
 		end
 	end
@@ -387,14 +367,84 @@ redef class MClassDef
 	end
 end
 
-redef class MVirtualTypeProp
-	private fun short_doc: String do
-		var ret = ""
-		if visibility.to_s == "public" then ret = "{to_s.green}: {intro.bound.to_s}"
-		if visibility.to_s == "private" then ret = "\t{to_s.red}: {intro.bound.to_s}"
-		if visibility.to_s == "protected" then ret = "\t{to_s.yellow}: {intro.bound.to_s}"
-		return ret
+redef class MMethodDef
+	redef fun to_s do
+		var res = new Buffer
+		if not is_intro then res.append("redef ")
+		if not mproperty.is_init then res.append("fun ")
+		if mproperty.visibility.to_s == "public" then res.append(mproperty.name.green)
+		if mproperty.visibility.to_s == "private" then res.append(mproperty.name.red)
+		if mproperty.visibility.to_s == "protected" then res.append(mproperty.name.yellow)
+		if msignature != null then res.append(msignature.to_s)
+		# FIXME: modifiers should be accessible via the model
+		#if self isa ADeferredMethPropdef then ret = "{ret} is abstract"
+		#if self isa AInternMethPropdef then ret = "{ret} is intern"
+		#if self isa AExternMethPropdef then ret = "{ret} is extern"
+		return res.to_s
 	end
+end
+
+redef class MVirtualTypeDef
+	redef fun to_s do
+		var res = new Buffer
+		if mproperty.visibility.to_s == "public" then res.append(mproperty.name.green)
+		if mproperty.visibility.to_s == "private" then res.append(mproperty.name.red)
+		if mproperty.visibility.to_s == "protected" then res.append(mproperty.name.yellow)
+		res.append(": {bound.to_s}")
+		return res.to_s
+	end
+end
+
+redef class MSignature
+	redef fun to_s do
+		var res = new Buffer
+		if not mparameters.is_empty then
+			res.append("(")
+			for i in [0..mparameters.length[ do
+				res.append(mparameters[i].to_s)
+				if i < mparameters.length - 1 then res.append(", ")
+			end
+			res.append(")")
+		end
+		if return_mtype != null then
+			res.append(": {return_mtype.to_s}")
+		end
+		return res.to_s
+	end
+end
+
+redef class MParameter
+	redef fun to_s do
+		var res = new Buffer
+		res.append("{name}: {mtype}")
+		if is_vararg then res.append("...")
+		return res.to_s
+	end
+end
+
+redef class MNullableType
+	redef fun to_s do return "nullable {mtype}"
+end
+
+redef class MGenericType
+	redef fun to_s do
+		var res = new Buffer
+		res.append("{mclass.name}[")
+		for i in [0..arguments.length[ do
+			res.append(arguments[i].to_s)
+			if i < arguments.length - 1 then res.append(", ")
+		end
+		res.append("]")
+		return res.to_s
+	end
+end
+
+redef class MParameterType
+	redef fun to_s do return mclass.intro.parameter_names[rank]
+end
+
+redef class MVirtualType
+	redef fun to_s do return mproperty.intro.to_s
 end
 
 redef class ADoc
@@ -436,56 +486,6 @@ redef class AAttrPropdef
 		end
 		ret = "{ret}({mreadpropdef.mproperty.name}: {n_type.to_s})"
 		if n_kwredef != null then ret = "redef {ret}"
-		return ret
-	end
-end
-
-redef class AMethPropdef
-	redef fun to_s do
-		var ret = ""
-		if not mpropdef.mproperty.is_init then
-			ret = "fun "
-		end
-		if mpropdef.mproperty.visibility.to_s == "public" then ret = "{ret}{mpropdef.mproperty.name.green}"
-		if mpropdef.mproperty.visibility.to_s == "private" then ret = "{ret}{mpropdef.mproperty.name.red}"
-		if mpropdef.mproperty.visibility.to_s == "protected" then ret = "{ret}{mpropdef.mproperty.name.yellow}"
-		if n_signature != null then ret = "{ret}{n_signature.to_s}"
-		if n_kwredef != null then ret = "redef {ret}"
-		if self isa ADeferredMethPropdef then ret = "{ret} is abstract"
-		if self isa AInternMethPropdef then ret = "{ret} is intern"
-		if self isa AExternMethPropdef then ret = "{ret} is extern"
-		return ret
-	end
-end
-
-redef class ASignature
-	redef fun to_s do
-		#TODO closures
-		var ret = ""
-		if not n_params.is_empty then
-			ret = "{ret}({n_params.join(", ")})"
-		end
-		if n_type != null then ret += ": {n_type.to_s}"
-		return ret
-	end
-end
-
-redef class AParam
-	redef fun to_s do
-		var ret = "{n_id.text}"
-		if n_type != null then
-			ret = "{ret}: {n_type.to_s}"
-			if n_dotdotdot != null then ret = "{ret}..."
-		end
-		return ret
-	end
-end
-
-redef class AType
-	redef fun to_s do
-		var ret = n_id.text
-		if n_kwnullable != null then ret = "nullable {ret}"
-		if not n_types.is_empty then ret = "{ret}[{n_types.join(", ")}]"
 		return ret
 	end
 end
