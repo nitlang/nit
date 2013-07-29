@@ -25,6 +25,9 @@ private class Pager
 	fun render do sys.system("echo \"{content}\" | pager -r")
 end
 
+# Main class of the nit index tool
+# NitIndex build the model using the toolcontext argument
+# then wait for query on std in to display documentation
 class NitIndex
 	private var toolcontext: ToolContext
 	private var model: Model
