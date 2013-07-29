@@ -378,7 +378,11 @@ redef class MClass
 	end
 
 	private fun namespace: String do
-		return "{intro_mmodule.public_owner.name}::{name}"
+		if not intro_mmodule.public_owner == null then
+			return "{intro_mmodule.public_owner.name}::{name}"
+		else
+			return "{intro_mmodule.name}::{name}"
+		end
 	end
 end
 
