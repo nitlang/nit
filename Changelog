@@ -1,3 +1,6 @@
+version 0.6.1-git
+ * Devel version
+
 version 0.6
  * New metamodel
  * New tools (nit, nitg, nitmetrics)
