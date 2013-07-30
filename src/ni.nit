@@ -70,11 +70,7 @@ class NitIndex
 
 	fun welcome do
 		print "Welcome in the Nit Index."
-		print "\nCommands:"
-		print "\tname\t\tlookup module, class and property with the corresponding 'name'"
-		print "\tparam: Type\tlookup methods using the corresponding 'Type' as parameter"
-		print "\treturn: Type\tlookup methods returning the corresponding 'Type'"
-		print "\tEnter ':q' to exit\n"
+		print ""
 		print "Loaded modules:"
 		var mmodules = new Array[MModule]
 		mmodules.add_all(model.mmodules)
@@ -83,6 +79,17 @@ class NitIndex
 		for m in mmodules do
 			print "\t{m.name}"
 		end
+		print ""
+		help
+	end
+
+	fun help do
+		print "\nCommands:"
+		print "\tname\t\tlookup module, class and property with the corresponding 'name'"
+		print "\tparam: Type\tlookup methods using the corresponding 'Type' as parameter"
+		print "\treturn: Type\tlookup methods returning the corresponding 'Type'"
+		print "\tEnter ':q' to exit"
+		print "\tEnter ':h' to display this help message"
 		print ""
 	end
 
@@ -93,6 +100,11 @@ class NitIndex
 
 	fun seek(entry: String) do
 		if entry.is_empty then
+			prompt
+			return
+		end
+		if entry == ":h" then
+			help
 			prompt
 			return
 		end
@@ -129,7 +141,7 @@ class NitIndex
 		end
 		# no matches
 		if pager.content.is_empty then
-			print "Nothing known about '{entry}'"
+			print "Nothing known about '{entry}', type ':h' for help"
 		else
 			pager.render
 		end
