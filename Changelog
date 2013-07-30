@@ -1,5 +1,13 @@
-version 0.5.1-git
- * Devel version
+version 0.6
+ * New metamodel
+ * New tools (nit, nitg, nitmetrics)
+ * Improved nitdoc featuring wikidoc
+ * Multi-line litteral strings (triple-quoted strings)
+ * New foreign function interface
+ * New libraries (especially using FFI)
+ * Lot of fixes and improvements
+
+ -- Mon, 29 Jul 2013 20:44:33 -0400
 
 version 0.5
  * General 'for' that works with more that one automatic variable (eg. Map)
