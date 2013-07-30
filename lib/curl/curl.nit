@@ -18,7 +18,6 @@
 module curl
 
 import curl_c
-import mail
 
 # Top level of Curl
 class Curl
@@ -48,20 +47,25 @@ class Curl
 		return new CurlHTTPRequest(url, self)
 	end
 
+  # Get a MAIL Request Object
+  fun mail_request: nullable CurlMailRequest
+  do
+    var err: CURLCode
+    err = self.prim_curl.easy_setopt(new CURLOption.follow_location, 1)
+    if not err.is_ok then return null
+
+    return new CurlMailRequest(self)
+  end
+
 	# Release Curl instance
 	fun destroy do self.prim_curl.easy_clean
 end
 
 # CURL Request
 class CurlRequest
-	super CCurlCallbacks
 
-	var url: String
-	var headers: nullable HeaderMap writable = null
-	var datas: nullable HeaderMap writable = null
-	var delegate: nullable CurlCallbacks writable = null
 	var verbose: Bool writable = false
-	private var curl: nullable Curl
+	private var curl: nullable Curl = null
 
 	# Launch request method
 	fun execute: CurlResponse is abstract
@@ -72,18 +76,6 @@ class CurlRequest
 		if not self.curl.is_ok then return answer_failure(0, "Curl instance is not correctly initialized")
 
 		var err: CURLCode
-
-		if self.datas != null then
-			var postdatas = self.datas.to_url_encoded(self.curl.prim_curl)
-			err = self.curl.prim_curl.easy_setopt(new CURLOption.postfields, postdatas)
-			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
-		end
-
-		if self.headers != null then
-			var headers_joined = self.headers.join_pairs(": ")
-			err = self.curl.prim_curl.easy_setopt(new CURLOption.httpheader, headers_joined.to_curlslist)
-			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
-		end
 
 		err = self.curl.prim_curl.easy_setopt(new CURLOption.verbose, self.verbose)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
@@ -104,6 +96,18 @@ end
 # CURL HTTP Request
 class CurlHTTPRequest
 	super CurlRequest
+  super CCurlCallbacks
+  super CurlCallbacksRegisterIntern
+
+  var url: String
+	var datas: nullable HeaderMap writable = null
+	var headers: nullable HeaderMap writable = null
+
+  init (url: String, curl: nullable Curl)
+  do
+    self.url = url
+    self.curl = curl
+  end
 
 	# Execute HTTP request with settings configured through attribute
 	redef fun execute: CurlResponse
@@ -116,12 +120,26 @@ class CurlHTTPRequest
 		if self.delegate != null then callback_receiver = self.delegate.as(not null)
 
 		var err: CURLCode
-
+    # Callbacks
 		err = self.curl.prim_curl.register_callback(callback_receiver, new CURLCallbackType.header)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
 		err = self.curl.prim_curl.register_callback(callback_receiver, new CURLCallbackType.body)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
+
+    # HTTP Header
+		if self.headers != null then
+			var headers_joined = self.headers.join_pairs(": ")
+			err = self.curl.prim_curl.easy_setopt(new CURLOption.httpheader, headers_joined.to_curlslist)
+			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
+		end
+
+    # Datas
+		if self.datas != null then
+			var postdatas = self.datas.to_url_encoded(self.curl.prim_curl)
+			err = self.curl.prim_curl.easy_setopt(new CURLOption.postfields, postdatas)
+			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
+		end
 
 		var err_resp = perform
 		if err_resp != null then return err_resp
@@ -183,9 +201,145 @@ class CurlHTTPRequest
 	end
 end
 
+# CURL Mail Request
+class CurlMailRequest
+  super CurlRequest
+  super CCurlCallbacks
+
+  var headers: nullable HeaderMap writable = null
+	var headers_body: nullable HeaderMap writable = null
+	var from: nullable String writable = null
+	var to: nullable Array[String] writable = null
+	var cc: nullable Array[String] writable = null
+	var bcc: nullable Array[String] writable = null
+	var subject: nullable String writable = ""
+	var body: nullable String writable = ""
+	private var supported_outgoing_protocol: Array[String]
+
+  init (curl: nullable Curl)
+  do
+    self.curl = curl
+		self.supported_outgoing_protocol = once ["smtp", "smtps"]
+  end
+
+	# Helper method to add conventional space while building entire mail
+	private fun add_conventional_space(str: String):String do return "{str}\n" end
+
+	# Helper method to add pair values to mail content while building it (ex: "To:", "address@mail.com")
+	private fun add_pair_to_content(str: String, att: String, val: nullable String):String
+	do
+		if val != null then return "{str}{att}{val}\n"
+		return "{str}{att}\n"
+	end
+
+  # Helper method to add entire list of pairs to mail content
+  private fun add_pairs_to_content(content: String, pairs: HeaderMap):String
+  do
+    for h_key, h_val in pairs do content = add_pair_to_content(content, h_key, h_val)
+    return content
+  end
+
+	# Check for host and protocol availability
+	private fun is_supported_outgoing_protocol(host: String):CURLCode
+	do
+		var host_reach = host.split_with("://")
+		if host_reach.length > 1 and supported_outgoing_protocol.has(host_reach[0]) then return once new CURLCode.ok
+		return once new CURLCode.unsupported_protocol
+	end
+
+	# Configure server host and user credentials if needed.
+	fun set_outgoing_server(host: String, user: nullable String, pwd: nullable String):nullable CurlResponse
+	do
+		# Check Curl initialisation
+		if not self.curl.is_ok then return answer_failure(0, "Curl instance is not correctly initialized")
+
+		var err: CURLCode
+
+    # Host & Protocol
+		err = is_supported_outgoing_protocol(host)
+		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
+		err = self.curl.prim_curl.easy_setopt(new CURLOption.url, host)
+		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
+
+		# Credentials
+		if not user == null and not pwd == null then
+			err = self.curl.prim_curl.easy_setopt(new CURLOption.username, user)
+			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
+			err = self.curl.prim_curl.easy_setopt(new CURLOption.password, pwd)
+			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
+		end
+
+		return null
+	end
+
+	# Execute Mail request with settings configured through attribute
+	redef fun execute: CurlResponse
+	do
+		if not self.curl.is_ok then return answer_failure(0, "Curl instance is not correctly initialized")
+
+		var success_response: CurlMailResponseSuccess = new CurlMailResponseSuccess
+		var err: CURLCode
+    var content = ""
+    # Headers
+		if self.headers != null then
+      content = add_pairs_to_content(content, self.headers.as(not null))
+		end
+
+		# Recipients
+		var g_rec = new Array[String]
+		if self.to != null and self.to.length > 0 then
+			content = add_pair_to_content(content, "To:", self.to.join(","))
+			g_rec.append(self.to.as(not null))
+		end
+		if self.cc != null and self.cc.length > 0 then
+			content = add_pair_to_content(content, "Cc:", self.cc.join(","))
+			g_rec.append(self.cc.as(not null))
+		end
+		if self.bcc != null and self.bcc.length > 0 then g_rec.append(self.bcc.as(not null))
+
+		if g_rec.length < 1 then return answer_failure(0, "The mail recipients can not be empty")
+		err = self.curl.prim_curl.easy_setopt(new CURLOption.mail_rcpt, g_rec.to_curlslist)
+		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
+
+    # From
+		if not self.from == null then
+			content = add_pair_to_content(content, "From:", self.from)
+			err = self.curl.prim_curl.easy_setopt(new CURLOption.mail_from, self.from.as(not null))
+			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
+		end
+
+		# Subject
+		content = add_pair_to_content(content, "Subject:", self.subject)
+
+    # Headers body
+		if self.headers_body != null then
+      content = add_pairs_to_content(content, self.headers_body.as(not null))
+		end
+
+		# Body
+		content = add_conventional_space(content)
+		content = add_pair_to_content(content, "", self.body)
+		content = add_conventional_space(content)
+		err = self.curl.prim_curl.register_callback(self, once new CURLCallbackType.read)
+		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
+		err = self.curl.prim_curl.register_read_datas_callback(self, content)
+		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
+
+		var err_resp = perform
+		if err_resp != null then return err_resp
+
+		return success_response
+	end
+end
+
 # Callbacks Interface, allow you to manage in your way the different streams
 interface CurlCallbacks
 	super CCurlCallbacks
+end
+
+# Callbacks attributes
+protected abstract class CurlCallbacksRegisterIntern
+  var delegate: nullable CurlCallbacks writable = null
 end
 
 # Abstract Curl request response
@@ -212,7 +366,6 @@ abstract class CurlResponseSuccessIntern
 	super CurlResponse
 
 	var headers: HashMap[String, String] = new HashMap[String, String]
-	var status_code: Int = 0
 
 	# Receive headers from request due to headers callback registering
 	redef fun header_callback(line: String)
@@ -230,6 +383,7 @@ class CurlResponseSuccess
 	super CurlResponseSuccessIntern
 
 	var body_str: String = ""
+	var status_code: Int = 0
 
 	# Receive body from request due to body callback registering
 	redef fun body_callback(line: String)
@@ -238,10 +392,16 @@ class CurlResponseSuccess
 	end
 end
 
+# Success Response Class of mail request
+class CurlMailResponseSuccess
+  super CurlResponseSuccessIntern
+end
+
 # Success Response Class of a downloaded File
 class CurlFileResponseSuccess
 	super CurlResponseSuccessIntern
 
+	var status_code: Int = 0
 	var speed_download: Int = 0
 	var size_download: Int = 0
 	var total_time: Int = 0

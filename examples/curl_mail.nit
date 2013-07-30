@@ -14,33 +14,50 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Mail sender sample using the Mail module
+# Mail sender sample using the Curl module
 module curl_mail
 
 import curl
 
-var mail = new Mail
-var err: nullable CURLCode
+var curl = new Curl
+var mail_request = curl.mail_request
 
 # Networks
-err = mail.set_outgoing_server("smtps://smtp.example.org:465", "user@example.org", "mypassword")
-if err != null then print err.to_s
-mail.verbose = true
+var response = mail_request.set_outgoing_server("smtps://smtp.example.org:465", "user@example.org", "mypassword")
+if response isa CurlResponseFailed then
+  print "Error code : {response.error_code}"
+  print "Error msg : {response.error_msg}"
+end
 
 # Headers
-var headers_body = new HashMap[String, String]
+mail_request.from = "Billy Bob"
+mail_request.to = ["user@example.org"]
+mail_request.cc = ["bob@example.org"]
+mail_request.bcc = null
+
+var headers_body = new HeaderMap
 headers_body["Content-Type:"] = "text/html; charset=\"UTF-8\""
 headers_body["Content-Transfer-Encoding:"] = "quoted-printable"
-mail.headers_body = headers_body
-mail.from = "Billy Bob"
-mail.to = ["user@example.org"]
-mail.cc = ["bob@example.org"]
-mail.bcc = null
+mail_request.headers_body = headers_body
 
 # Content
-mail.body = "<h1>Here you can write HTML stuff.</h1>"
-mail.subject = "Hello From My Nit Program"
-print "Mail Sent : {mail.send}"
+mail_request.body = "<h1>Here you can write HTML stuff.</h1>"
+mail_request.subject = "Hello From My Nit Program"
 
-# GC
-mail.destroy
+# Others
+mail_request.verbose = false
+
+# Send mail
+response = mail_request.execute
+if response isa CurlResponseFailed then
+  print "Error code : {response.error_code}"
+  print "Error msg : {response.error_msg}"
+else if response isa CurlMailResponseSuccess then
+  print "Mail Sent"
+else
+  print "Unknown Curl Response type"
+end
+
+
+
+
