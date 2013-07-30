@@ -361,7 +361,7 @@ class CurlResponseFailed
 end
 
 # Success Abstract Response Success Class
-abstract class CurlResponseSuccessIntern
+protected abstract class CurlResponseSuccessIntern
 	super CurlCallbacks
 	super CurlResponse
 
