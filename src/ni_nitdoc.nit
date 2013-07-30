@@ -155,19 +155,17 @@ class NitdocContext
 
 	private fun quicksearch_list do
 		var file = new OFStream.open("{output_dir.to_s}/quicksearch-list.js")
-		var content = new Buffer
-		content.append("var entries = \{ ")
-
+		file.write("var entries = \{ ")
 		for mmodule in model.mmodules do
-			content.append("\"{mmodule.name}\": [")
-			content.append("\{txt: \"{mmodule.name}\", url:\"{mmodule.url}\" \},")
-			content.append("],")
+			file.write("\"{mmodule.name}\": [")
+			file.write("\{txt: \"{mmodule.name}\", url:\"{mmodule.url}\" \},")
+			file.write("],")
 		end
 		for mclass in model.mclasses do
 			if mclass.visibility < min_visibility then continue
-			content.append("\"{mclass.name}\": [")
-			content.append("\{txt: \"{mclass.name}\", url:\"{mclass.url}\" \},")
-			content.append("],")
+			file.write("\"{mclass.name}\": [")
+			file.write("\{txt: \"{mclass.name}\", url:\"{mclass.url}\" \},")
+			file.write("],")
 		end
 		var name2mprops = new HashMap[String, Set[MPropDef]]
 		for mproperty in model.mproperties do
@@ -177,15 +175,13 @@ class NitdocContext
 			name2mprops[mproperty.name].add_all(mproperty.mpropdefs)
 		end
 		for mproperty, mpropdefs in name2mprops do
-			content.append("\"{mproperty}\": [")
+			file.write("\"{mproperty}\": [")
 			for mpropdef in mpropdefs do
-				content.append("\{txt: \"{mpropdef.full_name}\", url:\"{mpropdef.url}\" \},")
+				file.write("\{txt: \"{mpropdef.full_name}\", url:\"{mpropdef.url}\" \},")
 			end
-			content.append("],")
+			file.write("],")
 		end
-
-		content.append(" \};")
-		file.write(content.to_s)
+		file.write(" \};")
 		file.close
 	end
 
@@ -193,14 +189,12 @@ end
 
 # Nitdoc base page
 abstract class NitdocPage
-	super Buffer
 
 	var dot_dir: nullable String
 	var source: nullable String
 	var ctx: NitdocContext
 
 	init(ctx: NitdocContext) do
-		super
 		self.ctx = ctx
 	end
 
@@ -314,7 +308,7 @@ abstract class NitdocPage
 	end
 
 	# Render the page as a html string
-	fun render: String do
+	protected fun render do
 		append("<!DOCTYPE html>")
 		append("<head>")
 		head
@@ -326,15 +320,18 @@ abstract class NitdocPage
 		append("</div>")
 		footer
 		append("</body>")
-		return to_s
 	end
+
+	# Append a string to the page
+	fun append(s: String) do out.write(s)
 
 	# Save html page in the specified file
 	fun save(file: String) do
-		var out = new OFStream.open(file)
-		out.write(render)
-		out.close
+		self.out = new OFStream.open(file)
+		render
+		self.out.close
 	end
+	private var out: nullable OFStream
 end
 
 # The overview page
@@ -733,18 +730,23 @@ class NitdocClass
 			end
 		end
 		# get inherited properties
-		for mprop in mclass.inherited_mproperties do
-			var mpropdef = mprop.intro
-			if mprop.visibility < ctx.min_visibility then continue
-			if mpropdef isa MVirtualTypeDef then vtypes.add(mpropdef)
-			if mpropdef isa MMethodDef then
-				if mpropdef.mproperty.is_init then
-					consts.add(mpropdef)
-				else
-					meths.add(mpropdef)
+		for pclass in mclass.in_hierarchy(ctx.mainmodule).greaters do
+			if pclass == mclass then continue
+			for pclassdef in pclass.mclassdefs do
+				for mprop in pclassdef.intro_mproperties do
+					var mpropdef = mprop.intro
+					if mprop.visibility < ctx.min_visibility then continue
+					if mpropdef isa MVirtualTypeDef then vtypes.add(mpropdef)
+					if mpropdef isa MMethodDef then
+						if mpropdef.mproperty.is_init then
+							consts.add(mpropdef)
+						else
+							meths.add(mpropdef)
+						end
+					end
+					inherited.add(mpropdef)
 				end
 			end
-			inherited.add(mpropdef)
 		end
 	end
 
@@ -1098,36 +1100,50 @@ end
 redef class MModule
 	# URL to nitdoc page
 	fun url: String do
-		var res = new Buffer
-		res.append("module_")
-		var mowner = public_owner
-		if mowner != null then
-			res.append("{public_owner.name}_")
+		if url_cache == null then
+			var res = new Buffer
+			res.append("module_")
+			var mowner = public_owner
+			if mowner != null then
+				res.append("{public_owner.name}_")
+			end
+			res.append("{self.name}.html")
+			url_cache = res.to_s
 		end
-		res.append("{self.name}.html")
-		return res.to_s
+		return url_cache.as(not null)
 	end
+	private var url_cache: nullable String
 
 	# html anchor id to the module in a nitdoc page
 	fun anchor: String do
-		var res = new Buffer
-		res.append("MOD_")
-		var mowner = public_owner
-		if mowner != null then
-			res.append("{public_owner.name}_")
+		if anchor_cache == null then
+			var res = new Buffer
+			res.append("MOD_")
+			var mowner = public_owner
+			if mowner != null then
+				res.append("{public_owner.name}_")
+			end
+			res.append(self.name)
+			anchor_cache = res.to_s
 		end
-		res.append(self.name)
-		return res.to_s
+		return anchor_cache.as(not null)
 	end
+	private var anchor_cache: nullable String
 
 	# Return a link (html a tag) to the nitdoc module page
 	fun html_link(page: NitdocPage) do
-		if page.ctx.mbuilder.mmodule2nmodule.has_key(self) then
-			page.append("<a href='{url}' title='{page.ctx.mbuilder.mmodule2nmodule[self].short_comment}'>{name}</a>")
-		else
-			page.append("<a href='{url}'>{name}</a>")
+		if html_link_cache == null then
+			var res = new Buffer
+			if page.ctx.mbuilder.mmodule2nmodule.has_key(self) then
+				res.append("<a href='{url}' title='{page.ctx.mbuilder.mmodule2nmodule[self].short_comment}'>{name}</a>")
+			else
+				res.append("<a href='{url}'>{name}</a>")
+			end
+			html_link_cache = res.to_s
 		end
+		page.append(html_link_cache.as(not null))
 	end
+	private var html_link_cache: nullable String
 
 	# Return the module signature decorated with html
 	fun html_signature(page: NitdocPage) do
@@ -1194,15 +1210,21 @@ redef class MClass
 
 	# Return a link (html a tag) to the nitdoc class page
 	fun html_link(page: NitdocPage) do
-		page.append("<a href='{url}'")
-		if page.ctx.mbuilder.mclassdef2nclassdef.has_key(intro) then
-			var nclass = page.ctx.mbuilder.mclassdef2nclassdef[intro]
-			if nclass isa AStdClassdef then
-				page.append(" title=\"{nclass.short_comment}\"")
+		if html_link_cache == null then
+			var res = new Buffer
+			res.append("<a href='{url}'")
+			if page.ctx.mbuilder.mclassdef2nclassdef.has_key(intro) then
+				var nclass = page.ctx.mbuilder.mclassdef2nclassdef[intro]
+				if nclass isa AStdClassdef then
+					res.append(" title=\"{nclass.short_comment}\"")
+				end
 			end
+			res.append(">{signature}</a>")
+			html_link_cache = res.to_s
 		end
-		page.append(">{signature}</a>")
+		page.append(html_link_cache.as(not null))
 	end
+	private var html_link_cache: nullable String
 
 	# Return the class namespace decorated with html
 	fun html_namespace(page: NitdocPage) do
@@ -1281,18 +1303,37 @@ redef class MClassDef
 end
 
 redef class MPropDef
-	fun url: String do return "{mclassdef.mclass.url}#{anchor}"
-	fun anchor: String do return "PROP_{mclassdef.mclass.public_owner.name}_{mproperty.name}"
+	fun url: String do
+		if url_cache == null then
+			url_cache = "{mclassdef.mclass.url}#{anchor}"
+		end
+		return url_cache.as(not null)
+	end
+	private var url_cache: nullable String
+
+	fun anchor: String do
+		if anchor_cache == null then
+			anchor_cache = "PROP_{mclassdef.mclass.public_owner.name}_{mproperty.name}"
+		end
+		return anchor_cache.as(not null)
+	end
+	private var anchor_cache: nullable String
 
 	# Return a link (html a tag) to the nitdoc class page
 	fun html_link(page: NitdocPage) do
-		if page.ctx.mbuilder.mpropdef2npropdef.has_key(self) then
-			var nprop = page.ctx.mbuilder.mpropdef2npropdef[self]
-			page.append("<a href=\"{url}\" title=\"{nprop.short_comment}\">{mproperty.name}</a>")
-		else
-			page.append("<a href=\"{url}\">{mproperty.name}</a>")
+		if html_link_cache == null then
+			var res = new Buffer
+			if page.ctx.mbuilder.mpropdef2npropdef.has_key(self) then
+				var nprop = page.ctx.mbuilder.mpropdef2npropdef[self]
+				res.append("<a href=\"{url}\" title=\"{nprop.short_comment}\">{mproperty.name}</a>")
+			else
+				res.append("<a href=\"{url}\">{mproperty.name}</a>")
+			end
+			html_link_cache = res.to_s
 		end
+		page.append(html_link_cache.as(not null))
 	end
+	private var html_link_cache: nullable String
 
 	# Return a list item for the mpropdef
 	private fun html_list_item(page: NitdocPage) do
