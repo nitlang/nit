@@ -24,6 +24,7 @@ class MyHttpFetcher
   super CurlCallbacks
 
   var curl: Curl
+  var our_body: String = ""
 
   init do self.curl = new Curl
 
@@ -39,7 +40,7 @@ class MyHttpFetcher
   end
 
   # Body callback
-  redef fun body_callback(line: String) do print "Body_callback : {line}"
+  redef fun body_callback(line: String) do self.our_body = "{self.our_body}{line}"
 
   # Stream callback - Cf : No one is registered
   redef fun stream_callback(buffer: String, size: Int, count: Int) do print "Stream_callback : {buffer} - {size} - {count}"
@@ -87,6 +88,8 @@ else
       postContentRequest.datas = postDatas
       postContentRequest.verbose = false
       var postResponse = postContentRequest.execute
+
+      print "Our body from the callback : {myHttpFetcher.our_body}"
 
       if postResponse isa CurlResponseSuccess then
         print "*** Answer ***"

@@ -18,6 +18,12 @@ module test_curl
 
 import curl
 
+class CallbackManager
+  super CurlCallbacks
+
+  redef fun body_callback(line: String) do end
+end
+
 fun error_manager(err: CURLCode) do if not err.is_ok then print err
 
 var url = "http://example.org/"
@@ -32,6 +38,10 @@ error_manager(error)
 # Activate for advanced debugging
 #error = curl.easy_setopt(new CURLOption.verbose, 1)
 #error_manager(error)
+
+var cbManager = new CallbackManager
+error = curl.register_callback(cbManager, new CURLCallbackType.body)
+error_manager(error)
 
 error = curl.easy_perform
 error_manager(error)
