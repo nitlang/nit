@@ -57,7 +57,3 @@ else if response isa CurlMailResponseSuccess then
 else
   print "Unknown Curl Response type"
 end
-
-
-
-
