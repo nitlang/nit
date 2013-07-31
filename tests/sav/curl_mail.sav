@@ -1,5 +1,2 @@
-* getaddrinfo(3) failed for smtp.example.org:465
-* Couldn't resolve host 'smtp.example.org'
-* Closing connection #0
-* Couldn't resolve host name
-Mail Sent : false
+Error code : 6
+Error msg : Couldn't resolve host name
