@@ -1,0 +1,3 @@
+GET example.org
+POST example.com
+GET_FILE example.org
