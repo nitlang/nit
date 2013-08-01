@@ -16,6 +16,7 @@
 module nitx
 
 import model_utils
+import modelize_property
 
 private class Pager
 	var content = new Buffer
@@ -53,8 +54,9 @@ class NitIndex
 		# Here we load an process std modules
 		#var dir = "NIT_DIR".environ
 		#var mmodules = modelbuilder.parse_and_build(["{dir}/lib/standard/standard.nit"])
-		var mmodules = mbuilder.parse_and_build([arguments.first])
+		var mmodules = mbuilder.parse([arguments.first])
 		if mmodules.is_empty then return
+		mbuilder.run_phases
 		assert mmodules.length == 1
 		self.mainmodule = mmodules.first
 	end

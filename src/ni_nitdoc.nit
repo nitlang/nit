@@ -17,6 +17,7 @@
 module ni_nitdoc
 
 import model_utils
+import modelize_property
 
 # The NitdocContext contains all the knowledge used for doc generation
 class NitdocContext
@@ -66,8 +67,9 @@ class NitdocContext
 		model = new Model
 		mbuilder = new ModelBuilder(model, toolcontext)
 		# Here we load an process all modules passed on the command line
-		var mmodules = mbuilder.parse_and_build(arguments)
+		var mmodules = mbuilder.parse(arguments)
 		if mmodules.is_empty then return
+		mbuilder.run_phases
 
 		if mmodules.length == 1 then
 			mainmodule = mmodules.first
