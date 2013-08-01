@@ -198,14 +198,17 @@ $(document).ready(function() {
 
 							// Escape regexp related characters in query
 							var query = $("#search").val();
+							query = query.replace(/\\/gi, "\\\\");
 							query = query.replace(/\[/gi, "\\[");
 							query = query.replace(/\|/gi, "\\|");
 							query = query.replace(/\*/gi, "\\*");
 							query = query.replace(/\+/gi, "\\+");
-							query = query.replace(/\\/gi, "\\\\");
 							query = query.replace(/\?/gi, "\\?");
 							query = query.replace(/\(/gi, "\\(");
 							query = query.replace(/\)/gi, "\\)");
+							query = query.replace(/&/gi, "&&");
+							query = query.replace(/>/gi, "&gt;");
+							query = query.replace(/</gi, "&lt;");
 
 							var index = 0;
 							var regexp = new RegExp("^" + query, "i");
@@ -214,7 +217,7 @@ $(document).ready(function() {
 									break;
 								}
 								var result = entry.match(regexp);
-								if(result != null && result.toString().toUpperCase() == $("#search").val().toUpperCase()) {
+								if(result != null) {
 									for(var i = 0; i < entries[entry].length; i++) {
 										if(index > 10) {
 											break;

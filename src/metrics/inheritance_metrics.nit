@@ -37,56 +37,56 @@ end
 
 redef class Model
 	# Extract the subset of classes from a set of mclass
-	fun extract_classes(mclasses: Collection[MClass]): Set[MClass] do
+	private fun extract_classes(mclasses: Collection[MClass]): Set[MClass] do
 		var lst = new HashSet[MClass]
 		for mclass in mclasses do if mclass.is_class then lst.add(mclass)
 		return lst
 	end
 
 	# Extract the subset of interfaces from a set of mclass
-	fun extract_interfaces(mclasses: Collection[MClass]): Set[MClass] do
+	private fun extract_interfaces(mclasses: Collection[MClass]): Set[MClass] do
 		var lst = new HashSet[MClass]
 		for mclass in mclasses do if mclass.is_interface then lst.add(mclass)
 		return lst
 	end
 
 	# Extract the subset of generic classes/interfaces from a set of mclass
-	fun extract_generics(mclasses: Collection[MClass]): Set[MClass] do
+	private fun extract_generics(mclasses: Collection[MClass]): Set[MClass] do
 		var lst = new HashSet[MClass]
 		for mclass in mclasses do if mclass.arity > 0 then lst.add(mclass)
 		return lst
 	end
 
 	# Extract the subset of abstract classes from a set of mclass
-	fun extract_abstracts(mclasses: Collection[MClass]): Set[MClass] do
+	private fun extract_abstracts(mclasses: Collection[MClass]): Set[MClass] do
 		var lst = new HashSet[MClass]
 		for mclass in mclasses do if mclass.is_abstract then lst.add(mclass)
 		return lst
 	end
 
 	# Extract the subset of user defined classes/interfaces from a set of mclass
-	fun extract_user_defined(mclasses: Collection[MClass]): Set[MClass] do
+	private fun extract_user_defined(mclasses: Collection[MClass]): Set[MClass] do
 		var lst = new HashSet[MClass]
 		for mclass in mclasses do if mclass.is_user_defined then lst.add(mclass)
 		return lst
 	end
 
 	# Extract the subset of user defined modules from a set of mmodules
-	fun extract_user_defined_modules(mmodules: Collection[MModule]): Set[MModule] do
+	private fun extract_user_defined_modules(mmodules: Collection[MModule]): Set[MModule] do
 		var lst = new HashSet[MModule]
 		for mmodule in mmodules do if mmodule.is_user_defined then lst.add(mmodule)
 		return lst
 	end
 
 	# Extract the subset of classes/interfaces from sl lib
-	fun extract_stdlib(mclasses: Collection[MClass]): Set[MClass] do
+	private fun extract_stdlib(mclasses: Collection[MClass]): Set[MClass] do
 		var lst = new HashSet[MClass]
 		for mclass in mclasses do if not mclass.is_user_defined then lst.add(mclass)
 		return lst
 	end
 
 	# Extract the subset of user defined modules from std lib
-	fun extract_stdlib_modules(mmodules: Collection[MModule]): Set[MModule] do
+	private fun extract_stdlib_modules(mmodules: Collection[MModule]): Set[MModule] do
 		var lst = new HashSet[MModule]
 		for mmodule in mmodules do if not mmodule.is_user_defined then lst.add(mmodule)
 		return lst
@@ -136,9 +136,9 @@ redef class MClass
 		self.noa = ancestors.length
 		self.noac = model.extract_classes(ancestors).length
 		self.noai = model.extract_interfaces(ancestors).length
-		self.noc = children(model).length
-		self.nocc = model.extract_classes(children(model)).length
-		self.noci = model.extract_interfaces(children(model)).length
+		self.noc = children.length
+		self.nocc = model.extract_classes(children).length
+		self.noci = model.extract_interfaces(children).length
 		self.nod = descendants.length
 		self.nodc = model.extract_classes(descendants).length
 		self.nodi = model.extract_interfaces(descendants).length
@@ -153,9 +153,9 @@ redef class MClass
 		self.noaud = model.extract_user_defined(ancestors).length
 		self.noacud = model.extract_user_defined(model.extract_classes(ancestors)).length
 		self.noaiud = model.extract_user_defined(model.extract_interfaces(ancestors)).length
-		self.nocud = model.extract_user_defined(children(model)).length
-		self.noccud = model.extract_user_defined(model.extract_classes(children(model))).length
-		self.nociud = model.extract_user_defined(model.extract_interfaces(children(model))).length
+		self.nocud = model.extract_user_defined(children).length
+		self.noccud = model.extract_user_defined(model.extract_classes(children)).length
+		self.nociud = model.extract_user_defined(model.extract_interfaces(children)).length
 		self.nodud = model.extract_user_defined(descendants).length
 		self.nodcud = model.extract_user_defined(model.extract_classes(descendants)).length
 		self.nodiud = model.extract_user_defined(model.extract_interfaces(descendants)).length
@@ -164,56 +164,8 @@ redef class MClass
 		self.ditiud = ud_interface_path_to_object.length
 	end
 
-	# Get parents of the class (direct super classes only)
-	fun parents: Set[MClass] do
-		var lst = new HashSet[MClass]
-		# explore all definitions of the class (refinement)
-		for mclassdef in self.mclassdefs do
-			for parent in mclassdef.supertypes do
-				lst.add(parent.mclass)
-			end
-		end
-		return lst
-	end
-
-	# Get ancestors of the class (all super classes)
-	fun ancestors: Set[MClass] do
-		var lst = new HashSet[MClass]
-		for mclassdef in self.mclassdefs do
-			for super_mclassdef in mclassdef.in_hierarchy.greaters do
-				if super_mclassdef == mclassdef then continue  # skip self
-				lst.add(super_mclassdef.mclass)
-			end
-		end
-		return lst
-	end
-
-	# Get children of the class (direct subclasses only)
-	fun children(model: Model): Set[MClass] do
-		var lst = new HashSet[MClass]
-		for other in model.mclasses do
-			if other == self then continue # skip self
-			if other.parents.has(self) then
-				lst.add(other)
-			end
-		end
-		return lst
-	end
-
-	# Get children of the class (direct subclasses only)
-	fun descendants: Set[MClass] do
-		var lst = new HashSet[MClass]
-		for mclassdef in self.mclassdefs do
-			for sub_mclassdef in mclassdef.in_hierarchy.smallers do
-				if sub_mclassdef == mclassdef then continue  # skip self
-				lst.add(sub_mclassdef.mclass)
-			end
-		end
-		return lst
-	end
-
 	# Return the longest path from class to root hierarchy
-	fun path_to_object: Array[MClass] do
+	private fun path_to_object: Array[MClass] do
 		var path = new Array[MClass]
 		var max_dit: nullable Int = null
 		var max_parent: nullable MClass = null
@@ -237,7 +189,7 @@ redef class MClass
 	end
 
 	# Return the longest path from class to root hierarchy
-	fun ud_path_to_object: Array[MClass] do
+	private fun ud_path_to_object: Array[MClass] do
 		var path = new Array[MClass]
 		if not self.is_user_defined then return path
 		var max_dit: nullable Int = null
@@ -262,7 +214,7 @@ redef class MClass
 	end
 
 	# Return the longest path from class to root hierarchy following only classes relations
-	fun class_path_to_object: Array[MClass] do
+	private fun class_path_to_object: Array[MClass] do
 		var path = new Array[MClass]
 		if not self.is_class then return path
 		var max_dit: nullable Int = null
@@ -287,7 +239,7 @@ redef class MClass
 	end
 
 	# Return the longest path from class to root hierarchy following only interfaces relations
-	fun interface_path_to_object: Array[MClass] do
+	private fun interface_path_to_object: Array[MClass] do
 		var path = new Array[MClass]
 		if not self.is_interface then return path
 		var max_dit: nullable Int = null
@@ -312,7 +264,7 @@ redef class MClass
 	end
 
 	# Return the longest path from class to root hierarchy following only ud classes relations
-	fun ud_class_path_to_object: Array[MClass] do
+	private fun ud_class_path_to_object: Array[MClass] do
 		var path = new Array[MClass]
 		if not self.is_class or not self.is_user_defined then return path
 		var max_dit: nullable Int = null
@@ -337,7 +289,7 @@ redef class MClass
 	end
 
 	# Return the longest path from class to root hierarchy following only ud interfaces relations
-	fun ud_interface_path_to_object: Array[MClass] do
+	private fun ud_interface_path_to_object: Array[MClass] do
 		var path = new Array[MClass]
 		if not self.is_interface or not self.is_user_defined then return path
 		var max_dit: nullable Int = null
@@ -363,210 +315,210 @@ redef class MClass
 
 	# * -> * DUI
 
-	fun is_dui_eligible: Bool do
+	private fun is_dui_eligible: Bool do
 		for parent in parents do if parent.name != "Object" then return true
 		return false
 	end
-	fun is_ccdui_eligible: Bool do
+	private fun is_ccdui_eligible: Bool do
 		if not is_class then return false
 		for parent in parents do if parent.name != "Object" and parent.is_class then return true
 		return false
 	end
-	fun is_cidui_eligible: Bool do
+	private fun is_cidui_eligible: Bool do
 		if not is_class then return false
 		for parent in parents do if parent.name != "Object" and parent.is_interface then return true
 		return false
 	end
-	fun is_iidui_eligible: Bool do
+	private fun is_iidui_eligible: Bool do
 		if not is_interface then return false
 		for parent in parents do if parent.name != "Object" and parent.is_interface then return true
 		return false
 	end
-	fun is_if_eligible(model: Model): Bool do return not children(model).is_empty
-	fun is_ccif_eligible(model: Model): Bool do
+	private fun is_if_eligible(model: Model): Bool do return not children.is_empty
+	private fun is_ccif_eligible(model: Model): Bool do
 		if not is_class then return false
-		for child in children(model) do if child.is_class then return true
+		for child in children do if child.is_class then return true
 		return false
 	end
-	fun is_icif_eligible(model: Model): Bool do
+	private fun is_icif_eligible(model: Model): Bool do
 		if not is_interface then return false
-		for child in children(model) do if child.is_class then return true
+		for child in children do if child.is_class then return true
 		return false
 	end
-	fun is_iiif_eligible(model: Model): Bool do
+	private fun is_iiif_eligible(model: Model): Bool do
 		if not is_interface then return false
-		for child in children(model) do if child.is_interface then return true
+		for child in children do if child.is_interface then return true
 		return false
 	end
 
 	# SL -> * DUI
 
-	fun is_sldui_eligible: Bool do
+	private fun is_sldui_eligible: Bool do
 		if is_user_defined then return false
 		for parent in parents do if parent.name != "Object" then return true
 		return false
 	end
-	fun is_slccdui_eligible: Bool do
+	private fun is_slccdui_eligible: Bool do
 		if is_user_defined then return false
 		if not is_class then return false
 		for parent in parents do if parent.name != "Object" and parent.is_class then return true
 		return false
 	end
-	fun is_slcidui_eligible: Bool do
+	private fun is_slcidui_eligible: Bool do
 		if is_user_defined then return false
 		if not is_class then return false
 		for parent in parents do if parent.name != "Object" and parent.is_interface then return true
 		return false
 	end
-	fun is_sliidui_eligible: Bool do
+	private fun is_sliidui_eligible: Bool do
 		if is_user_defined then return false
 		if not is_interface then return false
 		for parent in parents do if parent.name != "Object" and parent.is_interface then return true
 		return false
 	end
-	fun is_slif_eligible(model: Model): Bool do
+	private fun is_slif_eligible(model: Model): Bool do
 		if is_user_defined then return false
-		return not children(model).is_empty
+		return not children.is_empty
 	end
-	fun is_slccif_eligible(model: Model): Bool do
+	private fun is_slccif_eligible(model: Model): Bool do
 		if is_user_defined then return false
 		if not is_class then return false
-		for child in children(model) do if child.is_class then return true
+		for child in children do if child.is_class then return true
 		return false
 	end
-	fun is_slicif_eligible(model: Model): Bool do
+	private fun is_slicif_eligible(model: Model): Bool do
 		if is_user_defined then return false
 		if not is_interface then return false
-		for child in children(model) do if child.is_class then return true
+		for child in children do if child.is_class then return true
 		return false
 	end
-	fun is_sliiif_eligible(model: Model): Bool do
+	private fun is_sliiif_eligible(model: Model): Bool do
 		if is_user_defined then return false
 		if not is_interface then return false
-		for child in children(model) do if child.is_interface then return true
+		for child in children do if child.is_interface then return true
 		return false
 	end
 
 	# SL -> SL
 
-	fun is_slifsl_eligible(model: Model): Bool do
+	private fun is_slifsl_eligible(model: Model): Bool do
 		if is_user_defined then return false
-		for child in children(model) do if not child.is_user_defined then return true
+		for child in children do if not child.is_user_defined then return true
 		return false
 	end
-	fun is_slccifsl_eligible(model: Model): Bool do
+	private fun is_slccifsl_eligible(model: Model): Bool do
 		if is_user_defined then return false
 		if is_class then return false
-		for child in children(model) do if not child.is_user_defined and child.is_class then return true
+		for child in children do if not child.is_user_defined and child.is_class then return true
 		return false
 	end
-	fun is_slicifsl_eligible(model: Model): Bool do
+	private fun is_slicifsl_eligible(model: Model): Bool do
 		if is_user_defined then return false
 		if not is_interface then return false
-		for child in children(model) do if not child.is_user_defined and child.is_class then return true
+		for child in children do if not child.is_user_defined and child.is_class then return true
 		return false
 	end
-	fun is_sliiifsl_eligible(model: Model): Bool do
+	private fun is_sliiifsl_eligible(model: Model): Bool do
 		if is_user_defined then return false
 		if not is_interface then return false
-		for child in children(model) do if not child.is_user_defined and child.is_interface then return true
+		for child in children do if not child.is_user_defined and child.is_interface then return true
 		return false
 	end
 
 	# SL -> UD
 
-	fun is_slifud_eligible(model: Model): Bool do
+	private fun is_slifud_eligible(model: Model): Bool do
 		if is_user_defined then return false
-		for child in children(model) do if child.is_user_defined then return true
+		for child in children do if child.is_user_defined then return true
 		return false
 	end
-	fun is_slccifud_eligible(model: Model): Bool do
+	private fun is_slccifud_eligible(model: Model): Bool do
 		if is_user_defined then return false
 		if not is_class then return false
-		for child in children(model) do if child.is_user_defined and child.is_class then return true
+		for child in children do if child.is_user_defined and child.is_class then return true
 		return false
 	end
-	fun is_slicifud_eligible(model: Model): Bool do
+	private fun is_slicifud_eligible(model: Model): Bool do
 		if is_user_defined then return false
 		if not is_interface then return false
-		for child in children(model) do if child.is_user_defined and child.is_class then return true
+		for child in children do if child.is_user_defined and child.is_class then return true
 		return false
 	end
-	fun is_sliiifud_eligible(model: Model): Bool do
+	private fun is_sliiifud_eligible(model: Model): Bool do
 		if is_user_defined then return false
 		if not is_interface then return false
-		for child in children(model) do if child.is_user_defined and child.is_interface then return true
+		for child in children do if child.is_user_defined and child.is_interface then return true
 		return false
 	end
 
 	# UD -> *
 
-	fun is_uddui_eligible: Bool do
+	private fun is_uddui_eligible: Bool do
 		if not is_user_defined then return false
 		for parent in parents do if parent.name != "Object" then return true
 		return false
 	end
-	fun is_udccdui_eligible: Bool do
+	private fun is_udccdui_eligible: Bool do
 		if not is_user_defined then return false
 		if not is_class then return false
 		for parent in parents do if parent.name != "Object" and parent.is_class then return true
 		return false
 	end
-	fun is_udcidui_eligible: Bool do
+	private fun is_udcidui_eligible: Bool do
 		if not is_user_defined then return false
 		if not is_class then return false
 		for parent in parents do if parent.name != "Object" and parent.is_interface then return true
 		return false
 	end
-	fun is_udiidui_eligible: Bool do
+	private fun is_udiidui_eligible: Bool do
 		if not is_user_defined then return false
 		if not is_interface then return false
 		for parent in parents do if parent.name != "Object" and parent.is_interface then return true
 		return false
 	end
-	fun is_udif_eligible(model: Model): Bool do
+	private fun is_udif_eligible(model: Model): Bool do
 		if not is_user_defined then return false
-		return not children(model).is_empty
+		return not children.is_empty
 	end
-	fun is_udccif_eligible(model: Model): Bool do
+	private fun is_udccif_eligible(model: Model): Bool do
 		if not is_user_defined then return false
 		if not is_class then return false
-		for child in children(model) do if child.is_class then return true
+		for child in children do if child.is_class then return true
 		return false
 	end
-	fun is_udicif_eligible(model: Model): Bool do
+	private fun is_udicif_eligible(model: Model): Bool do
 		if not is_user_defined then return false
 		if not is_interface then return false
-		for child in children(model) do if child.is_class then return true
+		for child in children do if child.is_class then return true
 		return false
 	end
-	fun is_udiiif_eligible(model: Model): Bool do
+	private fun is_udiiif_eligible(model: Model): Bool do
 		if not is_user_defined then return false
 		if not is_interface then return false
-		for child in children(model) do if child.is_interface then return true
+		for child in children do if child.is_interface then return true
 		return false
 	end
 
 	# UD -> SL
 
-	fun is_udduisl_eligible: Bool do
+	private fun is_udduisl_eligible: Bool do
 		if not is_user_defined then return false
 		for parent in parents do if not parent.is_user_defined and parent.name != "Object" then return true
 		return false
 	end
-	fun is_udccduisl_eligible: Bool do
+	private fun is_udccduisl_eligible: Bool do
 		if not is_user_defined then return false
 		if not is_class then return false
 		for parent in parents do if not parent.is_user_defined and parent.name != "Object" and parent.is_class then return true
 		return false
 	end
-	fun is_udciduisl_eligible: Bool do
+	private fun is_udciduisl_eligible: Bool do
 		if not is_user_defined then return false
 		if not is_class then return false
 		for parent in parents do if not parent.is_user_defined and parent.name != "Object" and parent.is_interface then return true
 		return false
 	end
-	fun is_udiiduisl_eligible: Bool do
+	private fun is_udiiduisl_eligible: Bool do
 		if not is_user_defined then return false
 		if not is_interface then return false
 		for parent in parents do if not parent.is_user_defined and parent.name != "Object" and parent.is_interface then return true
@@ -575,52 +527,51 @@ redef class MClass
 
 	# UD -> UD
 
-	fun is_udduiud_eligible: Bool do
+	private fun is_udduiud_eligible: Bool do
 		if not is_user_defined then return false
 		for parent in parents do if parent.name != "Object" and parent.is_user_defined then return true
 		return false
 	end
-	fun is_udccduiud_eligible: Bool do
+	private fun is_udccduiud_eligible: Bool do
 		if not is_user_defined then return false
 		if not is_class then return false
 		for parent in parents do if parent.name != "Object" and parent.is_class and parent.is_user_defined then return true
 		return false
 	end
-	fun is_udciduiud_eligible: Bool do
+	private fun is_udciduiud_eligible: Bool do
 		if not is_user_defined then return false
 		if not is_class then return false
 		for parent in parents do if parent.name != "Object" and parent.is_interface and parent.is_user_defined then return true
 		return false
 	end
-	fun is_udiiduiud_eligible: Bool do
+	private fun is_udiiduiud_eligible: Bool do
 		if not is_user_defined then return false
 		if not is_interface then return false
 		for parent in parents do if parent.name != "Object" and parent.is_interface and parent.is_user_defined then return true
 		return false
 	end
-	fun is_udifud_eligible(model: Model): Bool do
+	private fun is_udifud_eligible(model: Model): Bool do
 		if not is_user_defined then return false
-		return not children(model).is_empty
+		return not children.is_empty
 	end
-	fun is_udccifud_eligible(model: Model): Bool do
+	private fun is_udccifud_eligible(model: Model): Bool do
 		if not is_user_defined then return false
 		if not is_class then return false
-		for child in children(model) do if child.is_user_defined and child.is_class then return true
+		for child in children do if child.is_user_defined and child.is_class then return true
 		return false
 	end
-	fun is_udicifud_eligible(model: Model): Bool do
+	private fun is_udicifud_eligible(model: Model): Bool do
 		if not is_user_defined then return false
 		if not is_interface then return false
-		for child in children(model) do if child.is_user_defined and child.is_class then return true
+		for child in children do if child.is_user_defined and child.is_class then return true
 		return false
 	end
-	fun is_udiiifud_eligible(model: Model): Bool do
+	private fun is_udiiifud_eligible(model: Model): Bool do
 		if not is_user_defined then return false
 		if not is_interface then return false
-		for child in children(model) do if child.is_user_defined and child.is_interface then return true
+		for child in children do if child.is_user_defined and child.is_interface then return true
 		return false
 	end
-
 end
 
 redef class MModule
@@ -629,8 +580,8 @@ redef class MModule
 	private var nc: Int = 0			# (NC)  Number of Classes
 	private var ni: Int = 0			# (NI)  Number of Interfaces
 	private var nac : Int = 0		# (NAC) Number of Abstract Classes
-	protected var ngc : Int = 0		# (NGC) Number of Generic Classes
-	protected var ngi : Int = 0		# (NGI) Number of Generic Interfaces
+	private var ngc : Int = 0		# (NGC) Number of Generic Classes
+	private var ngi : Int = 0		# (NGI) Number of Generic Interfaces
 
 	private var dit = ""			# (DIT) Global Depth in Inheritance Tree
 	private var dui = "" 			# (DUI) Proportion of types that either implement an interface or extend another type other than Object
@@ -642,7 +593,7 @@ redef class MModule
 	private var icif = ""			# (ICIF) Proportion of interfaces implemented by some other class.
 	private var iiif = ""			# (IIIF) Proportion of interfaces extended by some other interface.
 
-	fun compute_module_inheritance_metrics(model: Model) do
+	private fun compute_module_inheritance_metrics(model: Model) do
 		var ditsum = 0
 		var dui_count = 0
 		var ccdui_count = 0
