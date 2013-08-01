@@ -133,7 +133,7 @@ val_t standard___collection___hash_collection___HashCollection___node_at_idx(val
   if (UNTAG_Bool(REGB1)) {
     nit_abort("Reciever is null", NULL, LOCATE_standard___collection___hash_collection, 59);
   }
-  /* ../lib/standard/collection/array.nit:718 */
+  /* ../lib/standard/collection/array.nit:724 */
   fra.me.REG[0] = ((Nit_NativeArray)fra.me.REG[0])->val[UNTAG_Int(REGB0)];
   /* ../lib/standard/collection/hash_collection.nit:60 */
   while(1) {
@@ -250,7 +250,7 @@ void standard___collection___hash_collection___HashCollection___store(val_t p0, 
   if (UNTAG_Bool(REGB1)) {
     nit_abort("Reciever is null", NULL, LOCATE_standard___collection___hash_collection, 84);
   }
-  /* ../lib/standard/collection/array.nit:718 */
+  /* ../lib/standard/collection/array.nit:724 */
   fra.me.REG[2] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB0)];
   /* ../lib/standard/collection/hash_collection.nit:85 */
   fra.me.REG[3] = ATTR_standard___collection___hash_collection___HashCollection____array(fra.me.REG[0]);
@@ -258,7 +258,7 @@ void standard___collection___hash_collection___HashCollection___store(val_t p0, 
   if (UNTAG_Bool(REGB1)) {
     nit_abort("Reciever is null", NULL, LOCATE_standard___collection___hash_collection, 85);
   }
-  /* ../lib/standard/collection/array.nit:719 */
+  /* ../lib/standard/collection/array.nit:725 */
   ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB0)]=fra.me.REG[1];
   /* ../lib/standard/collection/hash_collection.nit:86 */
   ATTR_standard___collection___hash_collection___HashNode____next_in_bucklet(fra.me.REG[1]) = fra.me.REG[2];
@@ -466,7 +466,7 @@ void standard___collection___hash_collection___HashCollection___remove_node(val_
     if (UNTAG_Bool(REGB2)) {
       nit_abort("Reciever is null", NULL, LOCATE_standard___collection___hash_collection, 129);
     }
-    /* ../lib/standard/collection/array.nit:719 */
+    /* ../lib/standard/collection/array.nit:725 */
     ((Nit_NativeArray)fra.me.REG[1])->val[UNTAG_Int(REGB0)]=fra.me.REG[3];
   }
   /* ../lib/standard/collection/hash_collection.nit:131 */
@@ -538,7 +538,7 @@ void standard___collection___hash_collection___HashCollection___raz(val_t p0){
       if (UNTAG_Bool(REGB0)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___hash_collection, 143);
       }
-      /* ../lib/standard/collection/array.nit:719 */
+      /* ../lib/standard/collection/array.nit:725 */
       ((Nit_NativeArray)fra.me.REG[1])->val[UNTAG_Int(REGB1)]=NIT_NULL;
       /* ../lib/standard/collection/hash_collection.nit:144 */
       REGB0 = TAG_Int(1);
@@ -645,7 +645,7 @@ void standard___collection___hash_collection___HashCollection___enlarge(val_t p0
   ATTR_standard___collection___hash_collection___HashCollection____capacity(fra.me.REG[0]) = REGB0;
   /* ../lib/standard/collection/hash_collection.nit:160 */
   ATTR_standard___collection___hash_collection___HashCollection____last_accessed_key(fra.me.REG[0]) = NIT_NULL;
-  /* ../lib/standard/collection/array.nit:712 */
+  /* ../lib/standard/collection/array.nit:718 */
   fra.me.REG[1] = NEW_NativeArray(UNTAG_Int(REGB0), sizeof(val_t));
   /* ../lib/standard/collection/hash_collection.nit:164 */
   ATTR_standard___collection___hash_collection___HashCollection____array(fra.me.REG[0]) = fra.me.REG[1];
@@ -665,7 +665,7 @@ void standard___collection___hash_collection___HashCollection___enlarge(val_t p0
     REGB0 = TAG_Bool(UNTAG_Int(REGB2)>=UNTAG_Int(REGB0));
     /* ../lib/standard/collection/hash_collection.nit:168 */
     if (UNTAG_Bool(REGB0)) {
-      /* ../lib/standard/collection/array.nit:719 */
+      /* ../lib/standard/collection/array.nit:725 */
       ((Nit_NativeArray)fra.me.REG[1])->val[UNTAG_Int(REGB2)]=NIT_NULL;
       /* ../lib/standard/collection/hash_collection.nit:170 */
       REGB0 = TAG_Int(1);
@@ -723,9 +723,9 @@ void standard___collection___hash_collection___HashCollection___enlarge(val_t p0
       }
       fra.me.REG[3] = ATTR_standard___collection___hash_collection___HashNode____key(fra.me.REG[2]);
       REGB1 = CALL_standard___collection___hash_collection___HashCollection___index_at(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[1])->val[UNTAG_Int(REGB1)];
-      /* ../lib/standard/collection/array.nit:719 */
+      /* ../lib/standard/collection/array.nit:725 */
       ((Nit_NativeArray)fra.me.REG[1])->val[UNTAG_Int(REGB1)]=fra.me.REG[2];
       /* ../lib/standard/collection/hash_collection.nit:182 */
       ATTR_standard___collection___hash_collection___HashNode____next_in_bucklet(fra.me.REG[2]) = fra.me.REG[3];
@@ -2633,15 +2633,40 @@ void standard___collection___hash_collection___HashSet___init(val_t p0, int* ini
   init_table[itpos7] = 1;
   return;
 }
-static const char LOCATE_standard___collection___hash_collection___HashSetNode___init[] = "hash_collection::HashSetNode::init";
-void standard___collection___hash_collection___HashSetNode___init(val_t p0, val_t p1, int* init_table){
-  int itpos8 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_standard___collection___hash_collection___HashSetNode].i;
-  struct {struct stack_frame_t me; val_t MORE_REG[3];} fra;
+static const char LOCATE_standard___collection___hash_collection___HashSet___from[] = "hash_collection::HashSet::from";
+void standard___collection___hash_collection___HashSet___from(val_t p0, val_t p1, int* init_table){
+  int itpos8 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_standard___collection___hash_collection___HashSet].i;
+  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
   val_t tmp;
   if (init_table[itpos8]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___hash_collection;
-  fra.me.line = 454;
+  fra.me.line = 449;
+  fra.me.meth = LOCATE_standard___collection___hash_collection___HashSet___from;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  fra.me.REG[1] = p1;
+  /* ../lib/standard/collection/hash_collection.nit:451 */
+  CALL_standard___collection___hash_collection___HashSet___init(fra.me.REG[0])(fra.me.REG[0], init_table);
+  /* ../lib/standard/collection/hash_collection.nit:452 */
+  CALL_standard___collection___abstract_collection___SimpleCollection___add_all(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
+  stack_frame_head = fra.me.prev;
+  init_table[itpos8] = 1;
+  return;
+}
+static const char LOCATE_standard___collection___hash_collection___HashSetNode___init[] = "hash_collection::HashSetNode::init";
+void standard___collection___hash_collection___HashSetNode___init(val_t p0, val_t p1, int* init_table){
+  int itpos9 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_standard___collection___hash_collection___HashSetNode].i;
+  struct {struct stack_frame_t me; val_t MORE_REG[3];} fra;
+  val_t tmp;
+  if (init_table[itpos9]) return;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_standard___collection___hash_collection;
+  fra.me.line = 460;
   fra.me.meth = LOCATE_standard___collection___hash_collection___HashSetNode___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -2652,14 +2677,14 @@ void standard___collection___hash_collection___HashSetNode___init(val_t p0, val_
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ../lib/standard/collection/hash_collection.nit:454 */
+  /* ../lib/standard/collection/hash_collection.nit:460 */
   fra.me.REG[2] = fra.me.REG[0];
   fra.me.REG[3] = fra.me.REG[1];
   CALL_standard___collection___hash_collection___HashNode___init(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], init_table);
-  /* ../lib/standard/collection/hash_collection.nit:456 */
+  /* ../lib/standard/collection/hash_collection.nit:462 */
   ATTR_standard___collection___hash_collection___HashNode____key(fra.me.REG[2]) = fra.me.REG[3];
   stack_frame_head = fra.me.prev;
-  init_table[itpos8] = 1;
+  init_table[itpos9] = 1;
   return;
 }
 static const char LOCATE_standard___collection___hash_collection___HashSetIterator___is_ok[] = "hash_collection::HashSetIterator::(abstract_collection::Iterator::is_ok)";
@@ -2670,14 +2695,14 @@ val_t standard___collection___hash_collection___HashSetIterator___is_ok(val_t p0
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___hash_collection;
-  fra.me.line = 462;
+  fra.me.line = 468;
   fra.me.meth = LOCATE_standard___collection___hash_collection___HashSetIterator___is_ok;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ../lib/standard/collection/hash_collection.nit:462 */
+  /* ../lib/standard/collection/hash_collection.nit:468 */
   fra.me.REG[0] = ATTR_standard___collection___hash_collection___HashSetIterator____node(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -2704,29 +2729,29 @@ val_t standard___collection___hash_collection___HashSetIterator___item(val_t p0)
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___hash_collection;
-  fra.me.line = 464;
+  fra.me.line = 470;
   fra.me.meth = LOCATE_standard___collection___hash_collection___HashSetIterator___item;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ../lib/standard/collection/hash_collection.nit:466 */
+  /* ../lib/standard/collection/hash_collection.nit:472 */
   REGB0 = CALL_standard___collection___abstract_collection___Iterator___is_ok(fra.me.REG[0])(fra.me.REG[0]);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Assert failed", NULL, LOCATE_standard___collection___hash_collection, 466);
+    nit_abort("Assert failed", NULL, LOCATE_standard___collection___hash_collection, 472);
   }
-  /* ../lib/standard/collection/hash_collection.nit:467 */
+  /* ../lib/standard/collection/hash_collection.nit:473 */
   fra.me.REG[0] = ATTR_standard___collection___hash_collection___HashSetIterator____node(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_standard___collection___hash_collection, 467);
+    nit_abort("Reciever is null", NULL, LOCATE_standard___collection___hash_collection, 473);
   }
   REGB0 = TAG_Bool(ATTR_standard___collection___hash_collection___HashNode____key(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_key", LOCATE_standard___collection___hash_collection, 467);
+    nit_abort("Uninitialized attribute %s", "_key", LOCATE_standard___collection___hash_collection, 473);
   }
   fra.me.REG[0] = ATTR_standard___collection___hash_collection___HashNode____key(fra.me.REG[0]);
   goto label1;
@@ -2741,7 +2766,7 @@ void standard___collection___hash_collection___HashSetIterator___next(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___hash_collection;
-  fra.me.line = 470;
+  fra.me.line = 476;
   fra.me.meth = LOCATE_standard___collection___hash_collection___HashSetIterator___next;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -2749,17 +2774,17 @@ void standard___collection___hash_collection___HashSetIterator___next(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ../lib/standard/collection/hash_collection.nit:472 */
+  /* ../lib/standard/collection/hash_collection.nit:478 */
   REGB0 = CALL_standard___collection___abstract_collection___Iterator___is_ok(fra.me.REG[0])(fra.me.REG[0]);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Assert failed", NULL, LOCATE_standard___collection___hash_collection, 472);
+    nit_abort("Assert failed", NULL, LOCATE_standard___collection___hash_collection, 478);
   }
-  /* ../lib/standard/collection/hash_collection.nit:473 */
+  /* ../lib/standard/collection/hash_collection.nit:479 */
   fra.me.REG[1] = ATTR_standard___collection___hash_collection___HashSetIterator____node(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_standard___collection___hash_collection, 473);
+    nit_abort("Reciever is null", NULL, LOCATE_standard___collection___hash_collection, 479);
   }
   fra.me.REG[1] = ATTR_standard___collection___hash_collection___HashNode____next_item(fra.me.REG[1]);
   ATTR_standard___collection___hash_collection___HashSetIterator____node(fra.me.REG[0]) = fra.me.REG[1];
@@ -2768,13 +2793,13 @@ void standard___collection___hash_collection___HashSetIterator___next(val_t p0){
 }
 static const char LOCATE_standard___collection___hash_collection___HashSetIterator___init[] = "hash_collection::HashSetIterator::init";
 void standard___collection___hash_collection___HashSetIterator___init(val_t p0, val_t p1, int* init_table){
-  int itpos9 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_standard___collection___hash_collection___HashSetIterator].i;
+  int itpos10 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_standard___collection___hash_collection___HashSetIterator].i;
   struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
   val_t tmp;
-  if (init_table[itpos9]) return;
+  if (init_table[itpos10]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___hash_collection;
-  fra.me.line = 482;
+  fra.me.line = 488;
   fra.me.meth = LOCATE_standard___collection___hash_collection___HashSetIterator___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -2783,12 +2808,12 @@ void standard___collection___hash_collection___HashSetIterator___init(val_t p0, 
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ../lib/standard/collection/hash_collection.nit:484 */
+  /* ../lib/standard/collection/hash_collection.nit:490 */
   ATTR_standard___collection___hash_collection___HashSetIterator____set(fra.me.REG[0]) = fra.me.REG[1];
-  /* ../lib/standard/collection/hash_collection.nit:485 */
+  /* ../lib/standard/collection/hash_collection.nit:491 */
   fra.me.REG[1] = ATTR_standard___collection___hash_collection___HashCollection____first_item(fra.me.REG[1]);
   ATTR_standard___collection___hash_collection___HashSetIterator____node(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
-  init_table[itpos9] = 1;
+  init_table[itpos10] = 1;
   return;
 }

@@ -13,10 +13,6 @@ return trans_return;
 /* out/indirect function for time::Sys::nanosleep */
 void Sys_nanosleep___out( val_t recv, val_t sec, val_t nanosec )
 {
-bigint trans___sec;
-bigint trans___nanosec;
-trans___sec = UNTAG_Int(sec);
-trans___nanosec = UNTAG_Int(nanosec);
-std_nanosleep( NULL, trans___sec, trans___nanosec );
+std_nanosleep( NULL, UNTAG_Int(sec), UNTAG_Int(nanosec) );
 nitni_local_ref_clean(  );
 }

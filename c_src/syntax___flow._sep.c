@@ -236,7 +236,7 @@ val_t syntax___flow___FlowContext___merge(val_t p0, val_t p1, val_t p2){
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[5] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB0)];
       /* syntax/flow.nit:76 */
       REGB1 = CALL_syntax___flow___FlowContext___unreash(fra.me.REG[5])(fra.me.REG[5]);
@@ -941,7 +941,7 @@ val_t syntax___flow___MergeFlowContext___merge_stype(val_t p0, val_t p1){
       if (UNTAG_Bool(REGB2)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[6] = ((Nit_NativeArray)fra.me.REG[5])->val[UNTAG_Int(REGB1)];
       /* syntax/flow.nit:228 */
       fra.me.REG[6] = CALL_syntax___flow___FlowContext___stype(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[1]);
@@ -1165,7 +1165,7 @@ val_t syntax___flow___MergeFlowContext___merge_stype(val_t p0, val_t p1){
         if (UNTAG_Bool(REGB1)) {
           nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
         }
-        /* ../lib/standard/collection/array.nit:718 */
+        /* ../lib/standard/collection/array.nit:724 */
         fra.me.REG[4] = ((Nit_NativeArray)fra.me.REG[5])->val[UNTAG_Int(REGB0)];
         /* syntax/flow.nit:261 */
         fra.me.REG[4] = CALL_syntax___flow___FlowContext___stype(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[1]);
@@ -1284,7 +1284,7 @@ val_t syntax___flow___MergeFlowContext___is_set(val_t p0, val_t p1){
         if (UNTAG_Bool(REGB2)) {
           nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
         }
-        /* ../lib/standard/collection/array.nit:718 */
+        /* ../lib/standard/collection/array.nit:724 */
         fra.me.REG[4] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB1)];
         /* syntax/flow.nit:276 */
         REGB2 = CALL_syntax___flow___FlowContext___is_set(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[1]);

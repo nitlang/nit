@@ -393,7 +393,7 @@ val_t standard___string_search___BM_Pattern___search_index_in(val_t p0, val_t p1
         if (UNTAG_Bool(REGB3)) {
           nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
         }
-        /* ../lib/standard/collection/array.nit:718 */
+        /* ../lib/standard/collection/array.nit:724 */
         fra.me.REG[2] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB5)];
         /* ../lib/standard/collection/array.nit:281 */
         goto label3;
@@ -799,7 +799,7 @@ val_t standard___string_search___BM_Pattern___suffixes(val_t p0){
         if (UNTAG_Bool(REGB4)) {
           nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
         }
-        /* ../lib/standard/collection/array.nit:718 */
+        /* ../lib/standard/collection/array.nit:724 */
         fra.me.REG[2] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB5)];
         /* ../lib/standard/collection/array.nit:281 */
         goto label1;
@@ -872,7 +872,7 @@ val_t standard___string_search___BM_Pattern___suffixes(val_t p0){
         if (UNTAG_Bool(REGB5)) {
           nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
         }
-        /* ../lib/standard/collection/array.nit:718 */
+        /* ../lib/standard/collection/array.nit:724 */
         fra.me.REG[2] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB4)];
         /* ../lib/standard/collection/array.nit:281 */
         goto label2;
@@ -1113,7 +1113,7 @@ void standard___string_search___BM_Pattern___compute_gs(val_t p0){
         if (UNTAG_Bool(REGB5)) {
           nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
         }
-        /* ../lib/standard/collection/array.nit:718 */
+        /* ../lib/standard/collection/array.nit:724 */
         fra.me.REG[2] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB3)];
         /* ../lib/standard/collection/array.nit:281 */
         goto label2;
@@ -1203,7 +1203,7 @@ void standard___string_search___BM_Pattern___compute_gs(val_t p0){
             if (UNTAG_Bool(REGB5)) {
               nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
             }
-            /* ../lib/standard/collection/array.nit:718 */
+            /* ../lib/standard/collection/array.nit:724 */
             fra.me.REG[2] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB4)];
             /* ../lib/standard/collection/array.nit:281 */
             goto label3;
@@ -1331,7 +1331,7 @@ void standard___string_search___BM_Pattern___compute_gs(val_t p0){
       if (UNTAG_Bool(REGB5)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB4)];
       /* ../lib/standard/collection/array.nit:281 */
       goto label6;
@@ -1990,8 +1990,8 @@ val_t standard___string_search___String___search_all(val_t p0, val_t p1){
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
 }
-static const char LOCATE_standard___string_search___String___split_with[] = "string_search::String::split_with";
-val_t standard___string_search___String___split_with(val_t p0, val_t p1){
+static const char LOCATE_standard___string_search___String___split[] = "string_search::String::split";
+val_t standard___string_search___String___split(val_t p0, val_t p1){
   struct {struct stack_frame_t me; val_t MORE_REG[3];} fra;
   val_t REGB0;
   val_t REGB1;
@@ -2000,7 +2000,7 @@ val_t standard___string_search___String___split_with(val_t p0, val_t p1){
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___string_search;
   fra.me.line = 301;
-  fra.me.meth = LOCATE_standard___string_search___String___split_with;
+  fra.me.meth = LOCATE_standard___string_search___String___split;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
   fra.me.nitni_local_ref_head = NULL;
@@ -2055,7 +2055,7 @@ val_t standard___string_search___String___split_with(val_t p0, val_t p1){
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB0)];
       /* ../lib/standard/string_search.nit:307 */
       fra.me.REG[3] = CALL_standard___string___Object___to_s(fra.me.REG[3])(fra.me.REG[3]);
@@ -2078,27 +2078,27 @@ val_t standard___string_search___String___split_with(val_t p0, val_t p1){
   stack_frame_head = fra.me.prev;
   return fra.me.REG[1];
 }
-static const char LOCATE_standard___string_search___String___split[] = "string_search::String::split";
-val_t standard___string_search___String___split(val_t p0){
-  struct {struct stack_frame_t me;} fra;
-  val_t REGB0;
+static const char LOCATE_standard___string_search___String___split_with[] = "string_search::String::split_with";
+val_t standard___string_search___String___split_with(val_t p0, val_t p1){
+  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___string_search;
   fra.me.line = 311;
-  fra.me.meth = LOCATE_standard___string_search___String___split;
+  fra.me.meth = LOCATE_standard___string_search___String___split_with;
   fra.me.has_broke = 0;
-  fra.me.REG_size = 1;
+  fra.me.REG_size = 2;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ../lib/standard/string_search.nit:313 */
-  REGB0 = TAG_Char('\n');
-  fra.me.REG[0] = CALL_standard___string_search___String___split_with(fra.me.REG[0])(fra.me.REG[0], REGB0);
+  fra.me.REG[1] = p1;
+  /* ../lib/standard/string_search.nit:312 */
+  fra.me.REG[1] = CALL_standard___string_search___String___split(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
-  return fra.me.REG[0];
+  return fra.me.REG[1];
 }
 static const char LOCATE_standard___string_search___String___replace[] = "string_search::String::replace";
 val_t standard___string_search___String___replace(val_t p0, val_t p1, val_t p2){
@@ -2106,7 +2106,7 @@ val_t standard___string_search___String___replace(val_t p0, val_t p1, val_t p2){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___string_search;
-  fra.me.line = 315;
+  fra.me.line = 314;
   fra.me.meth = LOCATE_standard___string_search___String___replace;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -2117,7 +2117,7 @@ val_t standard___string_search___String___replace(val_t p0, val_t p1, val_t p2){
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ../lib/standard/string_search.nit:321 */
+  /* ../lib/standard/string_search.nit:320 */
   fra.me.REG[1] = CALL_standard___string_search___String___split_with(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   fra.me.REG[2] = CALL_standard___string___Collection___join(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
   goto label1;
@@ -2137,7 +2137,7 @@ val_t standard___string_search___String___html_escape(val_t p0){
     static val_t once_value_4; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___string_search;
-  fra.me.line = 324;
+  fra.me.line = 323;
   fra.me.meth = LOCATE_standard___string_search___String___html_escape;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -2145,7 +2145,7 @@ val_t standard___string_search___String___html_escape(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ../lib/standard/string_search.nit:330 */
+  /* ../lib/standard/string_search.nit:329 */
   REGB0 = TAG_Char('&');
   REGB0 = CALL_standard___collection___abstract_collection___Collection___has(fra.me.REG[0])(fra.me.REG[0], REGB0);
   if (UNTAG_Bool(REGB0)) {
@@ -2161,7 +2161,7 @@ val_t standard___string_search___String___html_escape(val_t p0){
     fra.me.REG[1] = CALL_standard___string_search___String___replace(fra.me.REG[0])(fra.me.REG[0], REGB0, fra.me.REG[1]);
     fra.me.REG[0] = fra.me.REG[1];
   }
-  /* ../lib/standard/string_search.nit:331 */
+  /* ../lib/standard/string_search.nit:330 */
   REGB0 = TAG_Char('<');
   REGB0 = CALL_standard___collection___abstract_collection___Collection___has(fra.me.REG[0])(fra.me.REG[0], REGB0);
   if (UNTAG_Bool(REGB0)) {
@@ -2177,7 +2177,7 @@ val_t standard___string_search___String___html_escape(val_t p0){
     fra.me.REG[1] = CALL_standard___string_search___String___replace(fra.me.REG[0])(fra.me.REG[0], REGB0, fra.me.REG[1]);
     fra.me.REG[0] = fra.me.REG[1];
   }
-  /* ../lib/standard/string_search.nit:332 */
+  /* ../lib/standard/string_search.nit:331 */
   REGB0 = TAG_Char('>');
   REGB0 = CALL_standard___collection___abstract_collection___Collection___has(fra.me.REG[0])(fra.me.REG[0], REGB0);
   if (UNTAG_Bool(REGB0)) {
@@ -2193,7 +2193,7 @@ val_t standard___string_search___String___html_escape(val_t p0){
     fra.me.REG[1] = CALL_standard___string_search___String___replace(fra.me.REG[0])(fra.me.REG[0], REGB0, fra.me.REG[1]);
     fra.me.REG[0] = fra.me.REG[1];
   }
-  /* ../lib/standard/string_search.nit:333 */
+  /* ../lib/standard/string_search.nit:332 */
   REGB0 = TAG_Char('"');
   REGB0 = CALL_standard___collection___abstract_collection___Collection___has(fra.me.REG[0])(fra.me.REG[0], REGB0);
   if (UNTAG_Bool(REGB0)) {
@@ -2209,7 +2209,7 @@ val_t standard___string_search___String___html_escape(val_t p0){
     fra.me.REG[1] = CALL_standard___string_search___String___replace(fra.me.REG[0])(fra.me.REG[0], REGB0, fra.me.REG[1]);
     fra.me.REG[0] = fra.me.REG[1];
   }
-  /* ../lib/standard/string_search.nit:334 */
+  /* ../lib/standard/string_search.nit:333 */
   goto label5;
   label5: while(0);
   stack_frame_head = fra.me.prev;

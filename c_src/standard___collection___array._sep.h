@@ -49,13 +49,14 @@ extern const int SFT_standard___collection___array[];
 #define ATTR_standard___collection___array___Array____capacity(recv) ATTR(recv, (SFT_standard___collection___array[9] + 1))
 #define INIT_TABLE_POS_standard___collection___array___Array (SFT_standard___collection___array[10] + 0)
 #define CALL_standard___collection___array___Array___init(recv) ((standard___collection___array___Array___init_t)CALL((recv), (SFT_standard___collection___array[10] + 1)))
-#define CALL_standard___collection___array___Array___with_items(recv) ((standard___collection___array___Array___with_items_t)CALL((recv), (SFT_standard___collection___array[10] + 2)))
-#define CALL_standard___collection___array___Array___with_capacity(recv) ((standard___collection___array___Array___with_capacity_t)CALL((recv), (SFT_standard___collection___array[10] + 3)))
-#define CALL_standard___collection___array___Array___filled_with(recv) ((standard___collection___array___Array___filled_with_t)CALL((recv), (SFT_standard___collection___array[10] + 4)))
-#define CALL_standard___collection___array___Array___with_native(recv) ((standard___collection___array___Array___with_native_t)CALL((recv), (SFT_standard___collection___array[10] + 5)))
-#define CALL_standard___collection___array___Array___intern_items(recv) ((standard___collection___array___Array___intern_items_t)CALL((recv), (SFT_standard___collection___array[10] + 6)))
-#define CALL_standard___collection___array___Array___sort(recv) ((standard___collection___array___Array___sort_t)CALL((recv), (SFT_standard___collection___array[10] + 7)))
-#define CALL_standard___collection___array___Array___sub_sort(recv) ((standard___collection___array___Array___sub_sort_t)CALL((recv), (SFT_standard___collection___array[10] + 8)))
+#define CALL_standard___collection___array___Array___from(recv) ((standard___collection___array___Array___from_t)CALL((recv), (SFT_standard___collection___array[10] + 2)))
+#define CALL_standard___collection___array___Array___with_items(recv) ((standard___collection___array___Array___with_items_t)CALL((recv), (SFT_standard___collection___array[10] + 3)))
+#define CALL_standard___collection___array___Array___with_capacity(recv) ((standard___collection___array___Array___with_capacity_t)CALL((recv), (SFT_standard___collection___array[10] + 4)))
+#define CALL_standard___collection___array___Array___filled_with(recv) ((standard___collection___array___Array___filled_with_t)CALL((recv), (SFT_standard___collection___array[10] + 5)))
+#define CALL_standard___collection___array___Array___with_native(recv) ((standard___collection___array___Array___with_native_t)CALL((recv), (SFT_standard___collection___array[10] + 6)))
+#define CALL_standard___collection___array___Array___intern_items(recv) ((standard___collection___array___Array___intern_items_t)CALL((recv), (SFT_standard___collection___array[10] + 7)))
+#define CALL_standard___collection___array___Array___sort(recv) ((standard___collection___array___Array___sort_t)CALL((recv), (SFT_standard___collection___array[10] + 8)))
+#define CALL_standard___collection___array___Array___sub_sort(recv) ((standard___collection___array___Array___sub_sort_t)CALL((recv), (SFT_standard___collection___array[10] + 9)))
 #define ID_standard___collection___array___ArrayIterator (SFT_standard___collection___array[11])
 #define COLOR_standard___collection___array___ArrayIterator (SFT_standard___collection___array[12])
 #define ATTR_standard___collection___array___ArrayIterator____index(recv) ATTR(recv, (SFT_standard___collection___array[13] + 0))
@@ -184,6 +185,9 @@ typedef void (*standard___collection___array___Array___enlarge_t)(val_t p0, val_
 void standard___collection___array___Array___init(val_t p0, int* init_table);
 typedef void (*standard___collection___array___Array___init_t)(val_t p0, int* init_table);
 val_t NEW_Array_standard___collection___array___Array___init();
+void standard___collection___array___Array___from(val_t p0, val_t p1, int* init_table);
+typedef void (*standard___collection___array___Array___from_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_Array_standard___collection___array___Array___from(val_t p0);
 void standard___collection___array___Array___with_items(val_t p0, val_t p1, int* init_table);
 typedef void (*standard___collection___array___Array___with_items_t)(val_t p0, val_t p1, int* init_table);
 val_t NEW_Array_standard___collection___array___Array___with_items(val_t p0);

@@ -380,7 +380,7 @@ val_t primitive_info___MMLocalClass___primitive_ctypes(val_t p0){
       if (UNTAG_Bool(REGB4)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[4] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB3)];
       /* ../lib/standard/collection/array.nit:281 */
       goto label13;
@@ -433,7 +433,7 @@ val_t primitive_info___MMLocalClass___primitive_ctypes(val_t p0){
       if (UNTAG_Bool(REGB4)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[5] = ((Nit_NativeArray)fra.me.REG[5])->val[UNTAG_Int(REGB3)];
       /* ../lib/standard/collection/array.nit:281 */
       goto label14;
@@ -479,7 +479,7 @@ val_t primitive_info___MMLocalClass___primitive_ctypes(val_t p0){
       if (UNTAG_Bool(REGB3)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[6] = ((Nit_NativeArray)fra.me.REG[6])->val[UNTAG_Int(REGB2)];
       /* ../lib/standard/collection/array.nit:281 */
       goto label15;

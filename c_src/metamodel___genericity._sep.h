@@ -78,6 +78,8 @@ val_t metamodel___genericity___MMTypeGeneric___to_s(val_t p0);
 typedef val_t (*metamodel___genericity___MMTypeGeneric___to_s_t)(val_t p0);
 val_t metamodel___genericity___MMTypeGeneric___is_subtype(val_t p0, val_t p1);
 typedef val_t (*metamodel___genericity___MMTypeGeneric___is_subtype_t)(val_t p0, val_t p1);
+val_t metamodel___genericity___MMTypeGeneric___has_formal(val_t p0);
+typedef val_t (*metamodel___genericity___MMTypeGeneric___has_formal_t)(val_t p0);
 void metamodel___genericity___MMTypeGeneric___init(val_t p0, val_t p1, val_t p2, int* init_table);
 typedef void (*metamodel___genericity___MMTypeGeneric___init_t)(val_t p0, val_t p1, val_t p2, int* init_table);
 val_t NEW_MMTypeGeneric_metamodel___genericity___MMTypeGeneric___init(val_t p0, val_t p1);

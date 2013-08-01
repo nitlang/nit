@@ -8,6 +8,7 @@ extern const classtable_elt_t VFT_metamodel___type_formal___MMTypeFormal[];
 extern const char LOCATE_metamodel___type_formal[];
 extern const int SFT_metamodel___type_formal[];
 #define CALL_metamodel___type_formal___MMType___direct_type(recv) ((metamodel___type_formal___MMType___direct_type_t)CALL((recv), (SFT_metamodel___type_formal[0] + 0)))
+#define CALL_metamodel___type_formal___MMType___has_formal(recv) ((metamodel___type_formal___MMType___has_formal_t)CALL((recv), (SFT_metamodel___type_formal[0] + 1)))
 #define ID_metamodel___type_formal___MMTypeFormal (SFT_metamodel___type_formal[1])
 #define COLOR_metamodel___type_formal___MMTypeFormal (SFT_metamodel___type_formal[2])
 #define ATTR_metamodel___type_formal___MMTypeFormal____name(recv) ATTR(recv, (SFT_metamodel___type_formal[3] + 0))
@@ -18,6 +19,8 @@ extern const int SFT_metamodel___type_formal[];
 #define CALL_metamodel___type_formal___MMTypeFormal___init(recv) ((metamodel___type_formal___MMTypeFormal___init_t)CALL((recv), (SFT_metamodel___type_formal[4] + 3)))
 val_t metamodel___type_formal___MMType___direct_type(val_t p0);
 typedef val_t (*metamodel___type_formal___MMType___direct_type_t)(val_t p0);
+val_t metamodel___type_formal___MMType___has_formal(val_t p0);
+typedef val_t (*metamodel___type_formal___MMType___has_formal_t)(val_t p0);
 val_t NEW_MMType_metamodel___static_type___MMType___init();
 val_t metamodel___type_formal___MMTypeFormal___is_valid(val_t p0);
 typedef val_t (*metamodel___type_formal___MMTypeFormal___is_valid_t)(val_t p0);
@@ -35,9 +38,14 @@ val_t metamodel___type_formal___MMTypeFormal___direct_type(val_t p0);
 typedef val_t (*metamodel___type_formal___MMTypeFormal___direct_type_t)(val_t p0);
 val_t metamodel___type_formal___MMTypeFormal___local_class(val_t p0);
 typedef val_t (*metamodel___type_formal___MMTypeFormal___local_class_t)(val_t p0);
+val_t metamodel___type_formal___MMTypeFormal___has_formal(val_t p0);
+typedef val_t (*metamodel___type_formal___MMTypeFormal___has_formal_t)(val_t p0);
 val_t metamodel___type_formal___MMTypeFormal___to_s(val_t p0);
 typedef val_t (*metamodel___type_formal___MMTypeFormal___to_s_t)(val_t p0);
 void metamodel___type_formal___MMTypeFormal___init(val_t p0, val_t p1, val_t p2, int* init_table);
 typedef void (*metamodel___type_formal___MMTypeFormal___init_t)(val_t p0, val_t p1, val_t p2, int* init_table);
 val_t NEW_MMTypeFormal_metamodel___type_formal___MMTypeFormal___init(val_t p0, val_t p1);
+val_t metamodel___type_formal___MMNullableType___has_formal(val_t p0);
+typedef val_t (*metamodel___type_formal___MMNullableType___has_formal_t)(val_t p0);
+val_t NEW_MMNullableType_metamodel___static_type___MMNullableType___init(val_t p0);
 #endif

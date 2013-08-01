@@ -774,7 +774,7 @@ void nitc___NitCompiler___perform_work(val_t p0, val_t p1){
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB0)];
       /* nitc.nit:110 */
       fra.me.REG[3] = NEW_Program_program___Program___init(fra.me.REG[3], fra.me.REG[0]);

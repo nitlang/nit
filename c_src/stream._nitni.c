@@ -3,11 +3,9 @@
 /* out/indirect function for stream::FDStream::native_close */
 val_t FDStream_native_close___out( val_t recv, val_t i )
 {
-bigint trans___i;
 bigint orig_return;
 val_t trans_return;
-trans___i = UNTAG_Int(i);
-orig_return = stream_FDStream_FDStream_native_close_1( NULL, trans___i );
+orig_return = stream_FDStream_FDStream_native_close_1( NULL, UNTAG_Int(i) );
 trans_return = TAG_Int(orig_return);
 nitni_local_ref_clean(  );
 return trans_return;
@@ -15,11 +13,9 @@ return trans_return;
 /* out/indirect function for stream::FDStream::native_read_char */
 val_t FDStream_native_read_char___out( val_t recv, val_t i )
 {
-bigint trans___i;
 bigint orig_return;
 val_t trans_return;
-trans___i = UNTAG_Int(i);
-orig_return = stream_FDStream_FDStream_native_read_char_1( NULL, trans___i );
+orig_return = stream_FDStream_FDStream_native_read_char_1( NULL, UNTAG_Int(i) );
 trans_return = TAG_Int(orig_return);
 nitni_local_ref_clean(  );
 return trans_return;
@@ -27,13 +23,11 @@ return trans_return;
 /* out/indirect function for stream::FDStream::native_read */
 val_t FDStream_native_read___out( val_t recv, val_t i, val_t buf, val_t len )
 {
-bigint trans___i;
-bigint trans___len;
+char * trans___buf;
 bigint orig_return;
 val_t trans_return;
-trans___i = UNTAG_Int(i);
-trans___len = UNTAG_Int(len);
-orig_return = stream_FDStream_FDStream_native_read_3( NULL, trans___i, UNBOX_NativeString(buf), trans___len );
+trans___buf = UNBOX_NativeString(buf);
+orig_return = stream_FDStream_FDStream_native_read_3( NULL, UNTAG_Int(i), trans___buf, UNTAG_Int(len) );
 trans_return = TAG_Int(orig_return);
 nitni_local_ref_clean(  );
 return trans_return;
@@ -41,13 +35,11 @@ return trans_return;
 /* out/indirect function for stream::FDStream::native_write */
 val_t FDStream_native_write___out( val_t recv, val_t i, val_t buf, val_t len )
 {
-bigint trans___i;
-bigint trans___len;
+char * trans___buf;
 bigint orig_return;
 val_t trans_return;
-trans___i = UNTAG_Int(i);
-trans___len = UNTAG_Int(len);
-orig_return = stream_FDStream_FDStream_native_write_3( NULL, trans___i, UNBOX_NativeString(buf), trans___len );
+trans___buf = UNBOX_NativeString(buf);
+orig_return = stream_FDStream_FDStream_native_write_3( NULL, UNTAG_Int(i), trans___buf, UNTAG_Int(len) );
 trans_return = TAG_Int(orig_return);
 nitni_local_ref_clean(  );
 return trans_return;
@@ -55,13 +47,9 @@ return trans_return;
 /* out/indirect function for stream::FDStream::native_write_char */
 val_t FDStream_native_write_char___out( val_t recv, val_t i, val_t c )
 {
-bigint trans___i;
-char trans___c;
 bigint orig_return;
 val_t trans_return;
-trans___i = UNTAG_Int(i);
-trans___c = UNTAG_Char(c);
-orig_return = stream_FDStream_FDStream_native_write_char_2( NULL, trans___i, trans___c );
+orig_return = stream_FDStream_FDStream_native_write_char_2( NULL, UNTAG_Int(i), UNTAG_Char(c) );
 trans_return = TAG_Int(orig_return);
 nitni_local_ref_clean(  );
 return trans_return;
@@ -130,16 +118,14 @@ return trans_return;
 nullable_Object stream_Array__index( Array recv, bigint index )
 {
 val_t trans_recv;
-val_t trans___index;
 val_t orig_return;
 nullable_Object trans_return;
 trans_recv = recv->ref.val;
-trans___index = TAG_Int(index);
 trans_return = malloc( sizeof( struct s_nullable_Object ) );
 trans_return->ref.val = NIT_NULL;
 trans_return->ref.count = 0;
 nitni_local_ref_add( (struct nitni_ref *)trans_return );
-orig_return = CALL_standard___collection___abstract_collection___SequenceRead_____bra( trans_recv )( trans_recv, trans___index );
+orig_return = CALL_standard___collection___abstract_collection___SequenceRead_____bra( trans_recv )( trans_recv, TAG_Int(index) );
 trans_return->ref.val = orig_return;
 return trans_return;
 }
@@ -148,7 +134,7 @@ int stream_nullable_Object_is_a_Int( nullable_Object value )
 val_t temp;
 temp = value->ref.val;
 if ( ISNULL(temp) ) return 0;
-if ( ! ( ISOBJ( temp ) ? OBJISA( temp, standard___kernel___Int ): VALISA( temp, standard___kernel___Int ) ) ) return 0;
+if ( ! ( ISOBJ( temp ) ? ISNULL( temp ) || OBJISA( temp, standard___kernel___Int ): VALISA( temp, standard___kernel___Int ) ) ) return 0;
 return 1;
 }
 bigint stream_nullable_Object_as_Int( nullable_Object value )
@@ -158,7 +144,7 @@ bigint out;
 temp = value->ref.val;
 if ( ISNULL(temp) ){	fprintf( stderr, "Casting from nullable Object to Int failed because value is null." );
 	abort();
-}if ( ! ( ISOBJ( temp ) ? OBJISA( temp, standard___kernel___Int ): VALISA( temp, standard___kernel___Int ) ) ){
+}if ( ! ( ISOBJ( temp ) ? ISNULL( temp ) || OBJISA( temp, standard___kernel___Int ): VALISA( temp, standard___kernel___Int ) ) ){
 	fprintf( stderr, "Casting to Int failed because value is not a Int." );
 	abort();
 }

@@ -250,7 +250,7 @@ void standard___exec___Process___execute(val_t p0, val_t p1, val_t p2, val_t p3,
         if (UNTAG_Bool(REGB3)) {
           nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
         }
-        /* ../lib/standard/collection/array.nit:718 */
+        /* ../lib/standard/collection/array.nit:724 */
         fra.me.REG[6] = ((Nit_NativeArray)fra.me.REG[5])->val[UNTAG_Int(REGB2)];
         /* ../lib/standard/exec.nit:62 */
         REGB3 = TAG_Char('\0');

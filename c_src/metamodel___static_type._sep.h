@@ -118,7 +118,8 @@ extern const int SFT_metamodel___static_type[];
 #define COLOR_metamodel___static_type___MMNullableType (SFT_metamodel___static_type[27])
 #define ATTR_metamodel___static_type___MMNullableType____base_type(recv) ATTR(recv, (SFT_metamodel___static_type[28] + 0))
 #define INIT_TABLE_POS_metamodel___static_type___MMNullableType (SFT_metamodel___static_type[29] + 0)
-#define CALL_metamodel___static_type___MMNullableType___init(recv) ((metamodel___static_type___MMNullableType___init_t)CALL((recv), (SFT_metamodel___static_type[29] + 1)))
+#define CALL_metamodel___static_type___MMNullableType___base_type(recv) ((metamodel___static_type___MMNullableType___base_type_t)CALL((recv), (SFT_metamodel___static_type[29] + 1)))
+#define CALL_metamodel___static_type___MMNullableType___init(recv) ((metamodel___static_type___MMNullableType___init_t)CALL((recv), (SFT_metamodel___static_type[29] + 2)))
 #define ID_metamodel___static_type___MMTypeClass (SFT_metamodel___static_type[30])
 #define COLOR_metamodel___static_type___MMTypeClass (SFT_metamodel___static_type[31])
 #define ATTR_metamodel___static_type___MMTypeClass____local_class(recv) ATTR(recv, (SFT_metamodel___static_type[32] + 0))
@@ -272,6 +273,8 @@ typedef val_t (*metamodel___static_type___MMType___as_notnull_t)(val_t p0);
 void metamodel___static_type___MMType___init(val_t p0, int* init_table);
 typedef void (*metamodel___static_type___MMType___init_t)(val_t p0, int* init_table);
 val_t NEW_MMType_metamodel___static_type___MMType___init();
+val_t metamodel___static_type___MMNullableType___base_type(val_t p0);
+typedef val_t (*metamodel___static_type___MMNullableType___base_type_t)(val_t p0);
 val_t metamodel___static_type___MMNullableType___is_valid(val_t p0);
 typedef val_t (*metamodel___static_type___MMNullableType___is_valid_t)(val_t p0);
 val_t metamodel___static_type___MMNullableType___is_nullable(val_t p0);

@@ -136,7 +136,7 @@ void metamodel___inheritance___MMContext___handle_property_conflict(val_t p0, va
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[1] = ((Nit_NativeArray)fra.me.REG[5])->val[UNTAG_Int(REGB0)];
       /* metamodel/inheritance.nit:32 */
       REGB1 = TAG_Int(3);
@@ -395,7 +395,7 @@ void metamodel___inheritance___MMModule___import_global_classes(val_t p0){
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB0)];
       /* metamodel/inheritance.nit:61 */
       fra.me.REG[3] = CALL_metamodel___abstractmetamodel___MMModule___global_classes(fra.me.REG[3])(fra.me.REG[3]);
@@ -819,7 +819,7 @@ void metamodel___inheritance___MMLocalClass___inherit_global_properties(val_t p0
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[4] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB0)];
       /* metamodel/inheritance.nit:144 */
       fra.me.REG[4] = CALL_metamodel___abstractmetamodel___MMLocalClass___global_properties(fra.me.REG[4])(fra.me.REG[4]);
@@ -1042,7 +1042,7 @@ val_t metamodel___inheritance___MMLocalClass___has_global_property(val_t p0, val
       if (UNTAG_Bool(REGB2)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[4] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB1)];
       /* metamodel/inheritance.nit:181 */
       REGB2 = CALL_metamodel___abstractmetamodel___MMLocalClass___has_global_property(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[1]);
@@ -1225,7 +1225,7 @@ val_t metamodel___inheritance___MMLocalClass___has_global_property_by_name(val_t
       if (UNTAG_Bool(REGB2)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[6] = ((Nit_NativeArray)fra.me.REG[5])->val[UNTAG_Int(REGB3)];
       /* metamodel/inheritance.nit:210 */
       REGB2 = CALL_metamodel___abstractmetamodel___MMLocalClass___has_global_property_by_name(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[1]);
@@ -1797,7 +1797,7 @@ void metamodel___inheritance___MMLocalClass___add_default_any_class(val_t p0, va
             if (UNTAG_Bool(REGB2)) {
               nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
             }
-            /* ../lib/standard/collection/array.nit:718 */
+            /* ../lib/standard/collection/array.nit:724 */
             fra.me.REG[4] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB1)];
             /* metamodel/inheritance.nit:306 */
             fra.me.REG[4] = CALL_metamodel___abstractmetamodel___MMLocalClass___global(fra.me.REG[4])(fra.me.REG[4]);
@@ -1967,7 +1967,7 @@ void metamodel___inheritance___MMLocalClass___add_super_classes(val_t p0, val_t 
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[4] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB0)];
       /* metamodel/inheritance.nit:332 */
       fra.me.REG[4] = CALL_metamodel___abstractmetamodel___MMLocalClass___cshe(fra.me.REG[4])(fra.me.REG[4]);
@@ -2006,7 +2006,7 @@ void metamodel___inheritance___MMLocalClass___add_super_classes(val_t p0, val_t 
           if (UNTAG_Bool(REGB2)) {
             nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
           }
-          /* ../lib/standard/collection/array.nit:718 */
+          /* ../lib/standard/collection/array.nit:724 */
           fra.me.REG[6] = ((Nit_NativeArray)fra.me.REG[5])->val[UNTAG_Int(REGB1)];
           /* metamodel/inheritance.nit:333 */
           REGB2 = TAG_Bool(ATTR_metamodel___abstractmetamodel___MMLocalClass____mmmodule(fra.me.REG[0])!=NIT_NULL);
@@ -2106,7 +2106,7 @@ void metamodel___inheritance___MMLocalClass___add_explicit_classes(val_t p0, val
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB0)];
       /* metamodel/inheritance.nit:343 */
       fra.me.REG[3] = CALL_metamodel___static_type___MMAncestor___local_class(fra.me.REG[3])(fra.me.REG[3]);
@@ -2179,7 +2179,7 @@ void metamodel___inheritance___MMLocalClass___compute_super_parents(val_t p0, va
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[2] = ((Nit_NativeArray)fra.me.REG[0])->val[UNTAG_Int(REGB0)];
       /* metamodel/inheritance.nit:351 */
       CALL_metamodel___inheritance___MMLocalClass___compute_super_classes(fra.me.REG[2])(fra.me.REG[2]);
@@ -2281,7 +2281,7 @@ val_t metamodel___inheritance___MMLocalClass___build_ancestors(val_t p0){
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[4] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB0)];
       /* metamodel/inheritance.nit:362 */
       REGB1 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[4],fra.me.REG[0]));
@@ -2352,7 +2352,7 @@ val_t metamodel___inheritance___MMLocalClass___build_ancestors(val_t p0){
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[4] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB0)];
       /* metamodel/inheritance.nit:367 */
       fra.me.REG[5] = CALL_metamodel___static_type___MMAncestor___local_class(fra.me.REG[4])(fra.me.REG[4]);
@@ -2446,7 +2446,7 @@ val_t metamodel___inheritance___MMLocalClass___group_ancestors(val_t p0, val_t p
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB0)];
       /* metamodel/inheritance.nit:379 */
       fra.me.REG[4] = CALL_metamodel___static_type___MMAncestor___local_class(fra.me.REG[3])(fra.me.REG[3]);
@@ -2822,7 +2822,7 @@ val_t metamodel___inheritance___MMLocalClass___inherit_local_property(val_t p0, 
           if (UNTAG_Bool(REGB1)) {
             nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
           }
-          /* ../lib/standard/collection/array.nit:718 */
+          /* ../lib/standard/collection/array.nit:724 */
           fra.me.REG[7] = ((Nit_NativeArray)fra.me.REG[6])->val[UNTAG_Int(REGB0)];
           /* metamodel/inheritance.nit:450 */
           REGB1 = CALL_metamodel___abstractmetamodel___MMLocalClass___has_global_property(fra.me.REG[7])(fra.me.REG[7], fra.me.REG[1]);
@@ -2951,7 +2951,7 @@ void metamodel___inheritance___MMLocalProperty___inherit_global(val_t p0, val_t 
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[5] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB0)];
       /* metamodel/inheritance.nit:481 */
       REGB1 = CALL_metamodel___abstractmetamodel___MMLocalClass___has_global_property(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[1]);

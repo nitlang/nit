@@ -820,7 +820,7 @@ void global___rta_analysis___RtaBuilder___force_some_type_analysis(val_t p0){
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB0)];
       /* global/rta_analysis.nit:133 */
       fra.me.REG[4] = CALL_global___rta_analysis___RtaBuilder___program(fra.me.REG[0])(fra.me.REG[0]);
@@ -1139,7 +1139,7 @@ void global___rta_analysis___RtaBuilder___work(val_t p0){
         if (UNTAG_Bool(REGB1)) {
           nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
         }
-        /* ../lib/standard/collection/array.nit:718 */
+        /* ../lib/standard/collection/array.nit:724 */
         fra.me.REG[4] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB0)];
         /* global/rta_analysis.nit:177 */
         fra.me.REG[5] = CALL_global___rta_analysis___RtaBuilder___program(fra.me.REG[1])(fra.me.REG[1]);

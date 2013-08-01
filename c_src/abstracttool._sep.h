@@ -45,4 +45,9 @@ typedef void (*abstracttool___MMLocalClass___dump_properties_t)(val_t p0, val_t 
       void OC_abstracttool___MMLocalClass___dump_properties_5(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
       typedef void (*OC_abstracttool___MMLocalClass___dump_properties_5_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
 val_t NEW_MMLocalClass_metamodel___abstractmetamodel___MMLocalClass___init(val_t p0, val_t p1, val_t p2);
+void abstracttool___AAnnotations___visit_all(val_t p0, val_t p1);
+typedef void (*abstracttool___AAnnotations___visit_all_t)(val_t p0, val_t p1);
+val_t NEW_AAnnotations_parser___parser_prod___AAnnotations___empty_init();
+val_t NEW_AAnnotations_parser___parser_prod___AAnnotations___init_aannotations(val_t p0, val_t p1, val_t p2, val_t p3);
+val_t NEW_AAnnotations_parser___parser_nodes___ANode___init();
 #endif

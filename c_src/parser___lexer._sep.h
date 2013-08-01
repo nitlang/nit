@@ -18,113 +18,121 @@ extern const int SFT_parser___lexer[];
 #define CALL_parser___lexer___TKwabstract___init_tk(recv) ((parser___lexer___TKwabstract___init_tk_t)CALL((recv), (SFT_parser___lexer[7] + 0)))
 #define CALL_parser___lexer___TKwinterface___init_tk(recv) ((parser___lexer___TKwinterface___init_tk_t)CALL((recv), (SFT_parser___lexer[8] + 0)))
 #define CALL_parser___lexer___TKwenum___init_tk(recv) ((parser___lexer___TKwenum___init_tk_t)CALL((recv), (SFT_parser___lexer[9] + 0)))
-#define CALL_parser___lexer___TKwspecial___init_tk(recv) ((parser___lexer___TKwspecial___init_tk_t)CALL((recv), (SFT_parser___lexer[10] + 0)))
-#define CALL_parser___lexer___TKwend___init_tk(recv) ((parser___lexer___TKwend___init_tk_t)CALL((recv), (SFT_parser___lexer[11] + 0)))
-#define CALL_parser___lexer___TKwmeth___init_tk(recv) ((parser___lexer___TKwmeth___init_tk_t)CALL((recv), (SFT_parser___lexer[12] + 0)))
-#define CALL_parser___lexer___TKwtype___init_tk(recv) ((parser___lexer___TKwtype___init_tk_t)CALL((recv), (SFT_parser___lexer[13] + 0)))
-#define CALL_parser___lexer___TKwinit___init_tk(recv) ((parser___lexer___TKwinit___init_tk_t)CALL((recv), (SFT_parser___lexer[14] + 0)))
-#define CALL_parser___lexer___TKwredef___init_tk(recv) ((parser___lexer___TKwredef___init_tk_t)CALL((recv), (SFT_parser___lexer[15] + 0)))
-#define CALL_parser___lexer___TKwis___init_tk(recv) ((parser___lexer___TKwis___init_tk_t)CALL((recv), (SFT_parser___lexer[16] + 0)))
-#define CALL_parser___lexer___TKwdo___init_tk(recv) ((parser___lexer___TKwdo___init_tk_t)CALL((recv), (SFT_parser___lexer[17] + 0)))
-#define CALL_parser___lexer___TKwreadable___init_tk(recv) ((parser___lexer___TKwreadable___init_tk_t)CALL((recv), (SFT_parser___lexer[18] + 0)))
-#define CALL_parser___lexer___TKwwritable___init_tk(recv) ((parser___lexer___TKwwritable___init_tk_t)CALL((recv), (SFT_parser___lexer[19] + 0)))
-#define CALL_parser___lexer___TKwvar___init_tk(recv) ((parser___lexer___TKwvar___init_tk_t)CALL((recv), (SFT_parser___lexer[20] + 0)))
-#define CALL_parser___lexer___TKwintern___init_tk(recv) ((parser___lexer___TKwintern___init_tk_t)CALL((recv), (SFT_parser___lexer[21] + 0)))
-#define CALL_parser___lexer___TKwextern___init_tk(recv) ((parser___lexer___TKwextern___init_tk_t)CALL((recv), (SFT_parser___lexer[22] + 0)))
-#define CALL_parser___lexer___TKwprotected___init_tk(recv) ((parser___lexer___TKwprotected___init_tk_t)CALL((recv), (SFT_parser___lexer[23] + 0)))
-#define CALL_parser___lexer___TKwprivate___init_tk(recv) ((parser___lexer___TKwprivate___init_tk_t)CALL((recv), (SFT_parser___lexer[24] + 0)))
-#define CALL_parser___lexer___TKwintrude___init_tk(recv) ((parser___lexer___TKwintrude___init_tk_t)CALL((recv), (SFT_parser___lexer[25] + 0)))
-#define CALL_parser___lexer___TKwif___init_tk(recv) ((parser___lexer___TKwif___init_tk_t)CALL((recv), (SFT_parser___lexer[26] + 0)))
-#define CALL_parser___lexer___TKwthen___init_tk(recv) ((parser___lexer___TKwthen___init_tk_t)CALL((recv), (SFT_parser___lexer[27] + 0)))
-#define CALL_parser___lexer___TKwelse___init_tk(recv) ((parser___lexer___TKwelse___init_tk_t)CALL((recv), (SFT_parser___lexer[28] + 0)))
-#define CALL_parser___lexer___TKwwhile___init_tk(recv) ((parser___lexer___TKwwhile___init_tk_t)CALL((recv), (SFT_parser___lexer[29] + 0)))
-#define CALL_parser___lexer___TKwloop___init_tk(recv) ((parser___lexer___TKwloop___init_tk_t)CALL((recv), (SFT_parser___lexer[30] + 0)))
-#define CALL_parser___lexer___TKwfor___init_tk(recv) ((parser___lexer___TKwfor___init_tk_t)CALL((recv), (SFT_parser___lexer[31] + 0)))
-#define CALL_parser___lexer___TKwin___init_tk(recv) ((parser___lexer___TKwin___init_tk_t)CALL((recv), (SFT_parser___lexer[32] + 0)))
-#define CALL_parser___lexer___TKwand___init_tk(recv) ((parser___lexer___TKwand___init_tk_t)CALL((recv), (SFT_parser___lexer[33] + 0)))
-#define CALL_parser___lexer___TKwor___init_tk(recv) ((parser___lexer___TKwor___init_tk_t)CALL((recv), (SFT_parser___lexer[34] + 0)))
-#define CALL_parser___lexer___TKwnot___init_tk(recv) ((parser___lexer___TKwnot___init_tk_t)CALL((recv), (SFT_parser___lexer[35] + 0)))
-#define CALL_parser___lexer___TKwreturn___init_tk(recv) ((parser___lexer___TKwreturn___init_tk_t)CALL((recv), (SFT_parser___lexer[36] + 0)))
-#define CALL_parser___lexer___TKwcontinue___init_tk(recv) ((parser___lexer___TKwcontinue___init_tk_t)CALL((recv), (SFT_parser___lexer[37] + 0)))
-#define CALL_parser___lexer___TKwbreak___init_tk(recv) ((parser___lexer___TKwbreak___init_tk_t)CALL((recv), (SFT_parser___lexer[38] + 0)))
-#define CALL_parser___lexer___TKwabort___init_tk(recv) ((parser___lexer___TKwabort___init_tk_t)CALL((recv), (SFT_parser___lexer[39] + 0)))
-#define CALL_parser___lexer___TKwassert___init_tk(recv) ((parser___lexer___TKwassert___init_tk_t)CALL((recv), (SFT_parser___lexer[40] + 0)))
-#define CALL_parser___lexer___TKwnew___init_tk(recv) ((parser___lexer___TKwnew___init_tk_t)CALL((recv), (SFT_parser___lexer[41] + 0)))
-#define CALL_parser___lexer___TKwisa___init_tk(recv) ((parser___lexer___TKwisa___init_tk_t)CALL((recv), (SFT_parser___lexer[42] + 0)))
-#define CALL_parser___lexer___TKwonce___init_tk(recv) ((parser___lexer___TKwonce___init_tk_t)CALL((recv), (SFT_parser___lexer[43] + 0)))
-#define CALL_parser___lexer___TKwsuper___init_tk(recv) ((parser___lexer___TKwsuper___init_tk_t)CALL((recv), (SFT_parser___lexer[44] + 0)))
-#define CALL_parser___lexer___TKwself___init_tk(recv) ((parser___lexer___TKwself___init_tk_t)CALL((recv), (SFT_parser___lexer[45] + 0)))
-#define CALL_parser___lexer___TKwtrue___init_tk(recv) ((parser___lexer___TKwtrue___init_tk_t)CALL((recv), (SFT_parser___lexer[46] + 0)))
-#define CALL_parser___lexer___TKwfalse___init_tk(recv) ((parser___lexer___TKwfalse___init_tk_t)CALL((recv), (SFT_parser___lexer[47] + 0)))
-#define CALL_parser___lexer___TKwnull___init_tk(recv) ((parser___lexer___TKwnull___init_tk_t)CALL((recv), (SFT_parser___lexer[48] + 0)))
-#define CALL_parser___lexer___TKwas___init_tk(recv) ((parser___lexer___TKwas___init_tk_t)CALL((recv), (SFT_parser___lexer[49] + 0)))
-#define CALL_parser___lexer___TKwnullable___init_tk(recv) ((parser___lexer___TKwnullable___init_tk_t)CALL((recv), (SFT_parser___lexer[50] + 0)))
-#define CALL_parser___lexer___TKwisset___init_tk(recv) ((parser___lexer___TKwisset___init_tk_t)CALL((recv), (SFT_parser___lexer[51] + 0)))
-#define CALL_parser___lexer___TKwlabel___init_tk(recv) ((parser___lexer___TKwlabel___init_tk_t)CALL((recv), (SFT_parser___lexer[52] + 0)))
-#define CALL_parser___lexer___TKwdebug___init_tk(recv) ((parser___lexer___TKwdebug___init_tk_t)CALL((recv), (SFT_parser___lexer[53] + 0)))
-#define CALL_parser___lexer___TOpar___init_tk(recv) ((parser___lexer___TOpar___init_tk_t)CALL((recv), (SFT_parser___lexer[54] + 0)))
-#define CALL_parser___lexer___TCpar___init_tk(recv) ((parser___lexer___TCpar___init_tk_t)CALL((recv), (SFT_parser___lexer[55] + 0)))
-#define CALL_parser___lexer___TObra___init_tk(recv) ((parser___lexer___TObra___init_tk_t)CALL((recv), (SFT_parser___lexer[56] + 0)))
-#define CALL_parser___lexer___TCbra___init_tk(recv) ((parser___lexer___TCbra___init_tk_t)CALL((recv), (SFT_parser___lexer[57] + 0)))
-#define CALL_parser___lexer___TComma___init_tk(recv) ((parser___lexer___TComma___init_tk_t)CALL((recv), (SFT_parser___lexer[58] + 0)))
-#define CALL_parser___lexer___TColumn___init_tk(recv) ((parser___lexer___TColumn___init_tk_t)CALL((recv), (SFT_parser___lexer[59] + 0)))
-#define CALL_parser___lexer___TQuad___init_tk(recv) ((parser___lexer___TQuad___init_tk_t)CALL((recv), (SFT_parser___lexer[60] + 0)))
-#define CALL_parser___lexer___TAssign___init_tk(recv) ((parser___lexer___TAssign___init_tk_t)CALL((recv), (SFT_parser___lexer[61] + 0)))
-#define CALL_parser___lexer___TPluseq___init_tk(recv) ((parser___lexer___TPluseq___init_tk_t)CALL((recv), (SFT_parser___lexer[62] + 0)))
-#define CALL_parser___lexer___TMinuseq___init_tk(recv) ((parser___lexer___TMinuseq___init_tk_t)CALL((recv), (SFT_parser___lexer[63] + 0)))
-#define CALL_parser___lexer___TDotdotdot___init_tk(recv) ((parser___lexer___TDotdotdot___init_tk_t)CALL((recv), (SFT_parser___lexer[64] + 0)))
-#define CALL_parser___lexer___TDotdot___init_tk(recv) ((parser___lexer___TDotdot___init_tk_t)CALL((recv), (SFT_parser___lexer[65] + 0)))
-#define CALL_parser___lexer___TDot___init_tk(recv) ((parser___lexer___TDot___init_tk_t)CALL((recv), (SFT_parser___lexer[66] + 0)))
-#define CALL_parser___lexer___TPlus___init_tk(recv) ((parser___lexer___TPlus___init_tk_t)CALL((recv), (SFT_parser___lexer[67] + 0)))
-#define CALL_parser___lexer___TMinus___init_tk(recv) ((parser___lexer___TMinus___init_tk_t)CALL((recv), (SFT_parser___lexer[68] + 0)))
-#define CALL_parser___lexer___TStar___init_tk(recv) ((parser___lexer___TStar___init_tk_t)CALL((recv), (SFT_parser___lexer[69] + 0)))
-#define CALL_parser___lexer___TSlash___init_tk(recv) ((parser___lexer___TSlash___init_tk_t)CALL((recv), (SFT_parser___lexer[70] + 0)))
-#define CALL_parser___lexer___TPercent___init_tk(recv) ((parser___lexer___TPercent___init_tk_t)CALL((recv), (SFT_parser___lexer[71] + 0)))
-#define CALL_parser___lexer___TEq___init_tk(recv) ((parser___lexer___TEq___init_tk_t)CALL((recv), (SFT_parser___lexer[72] + 0)))
-#define CALL_parser___lexer___TNe___init_tk(recv) ((parser___lexer___TNe___init_tk_t)CALL((recv), (SFT_parser___lexer[73] + 0)))
-#define CALL_parser___lexer___TLt___init_tk(recv) ((parser___lexer___TLt___init_tk_t)CALL((recv), (SFT_parser___lexer[74] + 0)))
-#define CALL_parser___lexer___TLe___init_tk(recv) ((parser___lexer___TLe___init_tk_t)CALL((recv), (SFT_parser___lexer[75] + 0)))
-#define CALL_parser___lexer___TLl___init_tk(recv) ((parser___lexer___TLl___init_tk_t)CALL((recv), (SFT_parser___lexer[76] + 0)))
-#define CALL_parser___lexer___TGt___init_tk(recv) ((parser___lexer___TGt___init_tk_t)CALL((recv), (SFT_parser___lexer[77] + 0)))
-#define CALL_parser___lexer___TGe___init_tk(recv) ((parser___lexer___TGe___init_tk_t)CALL((recv), (SFT_parser___lexer[78] + 0)))
-#define CALL_parser___lexer___TGg___init_tk(recv) ((parser___lexer___TGg___init_tk_t)CALL((recv), (SFT_parser___lexer[79] + 0)))
-#define CALL_parser___lexer___TStarship___init_tk(recv) ((parser___lexer___TStarship___init_tk_t)CALL((recv), (SFT_parser___lexer[80] + 0)))
-#define CALL_parser___lexer___TBang___init_tk(recv) ((parser___lexer___TBang___init_tk_t)CALL((recv), (SFT_parser___lexer[81] + 0)))
+#define CALL_parser___lexer___TKwend___init_tk(recv) ((parser___lexer___TKwend___init_tk_t)CALL((recv), (SFT_parser___lexer[10] + 0)))
+#define CALL_parser___lexer___TKwmeth___init_tk(recv) ((parser___lexer___TKwmeth___init_tk_t)CALL((recv), (SFT_parser___lexer[11] + 0)))
+#define CALL_parser___lexer___TKwtype___init_tk(recv) ((parser___lexer___TKwtype___init_tk_t)CALL((recv), (SFT_parser___lexer[12] + 0)))
+#define CALL_parser___lexer___TKwinit___init_tk(recv) ((parser___lexer___TKwinit___init_tk_t)CALL((recv), (SFT_parser___lexer[13] + 0)))
+#define CALL_parser___lexer___TKwredef___init_tk(recv) ((parser___lexer___TKwredef___init_tk_t)CALL((recv), (SFT_parser___lexer[14] + 0)))
+#define CALL_parser___lexer___TKwis___init_tk(recv) ((parser___lexer___TKwis___init_tk_t)CALL((recv), (SFT_parser___lexer[15] + 0)))
+#define CALL_parser___lexer___TKwdo___init_tk(recv) ((parser___lexer___TKwdo___init_tk_t)CALL((recv), (SFT_parser___lexer[16] + 0)))
+#define CALL_parser___lexer___TKwreadable___init_tk(recv) ((parser___lexer___TKwreadable___init_tk_t)CALL((recv), (SFT_parser___lexer[17] + 0)))
+#define CALL_parser___lexer___TKwwritable___init_tk(recv) ((parser___lexer___TKwwritable___init_tk_t)CALL((recv), (SFT_parser___lexer[18] + 0)))
+#define CALL_parser___lexer___TKwvar___init_tk(recv) ((parser___lexer___TKwvar___init_tk_t)CALL((recv), (SFT_parser___lexer[19] + 0)))
+#define CALL_parser___lexer___TKwintern___init_tk(recv) ((parser___lexer___TKwintern___init_tk_t)CALL((recv), (SFT_parser___lexer[20] + 0)))
+#define CALL_parser___lexer___TKwextern___init_tk(recv) ((parser___lexer___TKwextern___init_tk_t)CALL((recv), (SFT_parser___lexer[21] + 0)))
+#define CALL_parser___lexer___TKwprotected___init_tk(recv) ((parser___lexer___TKwprotected___init_tk_t)CALL((recv), (SFT_parser___lexer[22] + 0)))
+#define CALL_parser___lexer___TKwprivate___init_tk(recv) ((parser___lexer___TKwprivate___init_tk_t)CALL((recv), (SFT_parser___lexer[23] + 0)))
+#define CALL_parser___lexer___TKwintrude___init_tk(recv) ((parser___lexer___TKwintrude___init_tk_t)CALL((recv), (SFT_parser___lexer[24] + 0)))
+#define CALL_parser___lexer___TKwif___init_tk(recv) ((parser___lexer___TKwif___init_tk_t)CALL((recv), (SFT_parser___lexer[25] + 0)))
+#define CALL_parser___lexer___TKwthen___init_tk(recv) ((parser___lexer___TKwthen___init_tk_t)CALL((recv), (SFT_parser___lexer[26] + 0)))
+#define CALL_parser___lexer___TKwelse___init_tk(recv) ((parser___lexer___TKwelse___init_tk_t)CALL((recv), (SFT_parser___lexer[27] + 0)))
+#define CALL_parser___lexer___TKwwhile___init_tk(recv) ((parser___lexer___TKwwhile___init_tk_t)CALL((recv), (SFT_parser___lexer[28] + 0)))
+#define CALL_parser___lexer___TKwloop___init_tk(recv) ((parser___lexer___TKwloop___init_tk_t)CALL((recv), (SFT_parser___lexer[29] + 0)))
+#define CALL_parser___lexer___TKwfor___init_tk(recv) ((parser___lexer___TKwfor___init_tk_t)CALL((recv), (SFT_parser___lexer[30] + 0)))
+#define CALL_parser___lexer___TKwin___init_tk(recv) ((parser___lexer___TKwin___init_tk_t)CALL((recv), (SFT_parser___lexer[31] + 0)))
+#define CALL_parser___lexer___TKwand___init_tk(recv) ((parser___lexer___TKwand___init_tk_t)CALL((recv), (SFT_parser___lexer[32] + 0)))
+#define CALL_parser___lexer___TKwor___init_tk(recv) ((parser___lexer___TKwor___init_tk_t)CALL((recv), (SFT_parser___lexer[33] + 0)))
+#define CALL_parser___lexer___TKwnot___init_tk(recv) ((parser___lexer___TKwnot___init_tk_t)CALL((recv), (SFT_parser___lexer[34] + 0)))
+#define CALL_parser___lexer___TKwreturn___init_tk(recv) ((parser___lexer___TKwreturn___init_tk_t)CALL((recv), (SFT_parser___lexer[35] + 0)))
+#define CALL_parser___lexer___TKwcontinue___init_tk(recv) ((parser___lexer___TKwcontinue___init_tk_t)CALL((recv), (SFT_parser___lexer[36] + 0)))
+#define CALL_parser___lexer___TKwbreak___init_tk(recv) ((parser___lexer___TKwbreak___init_tk_t)CALL((recv), (SFT_parser___lexer[37] + 0)))
+#define CALL_parser___lexer___TKwabort___init_tk(recv) ((parser___lexer___TKwabort___init_tk_t)CALL((recv), (SFT_parser___lexer[38] + 0)))
+#define CALL_parser___lexer___TKwassert___init_tk(recv) ((parser___lexer___TKwassert___init_tk_t)CALL((recv), (SFT_parser___lexer[39] + 0)))
+#define CALL_parser___lexer___TKwnew___init_tk(recv) ((parser___lexer___TKwnew___init_tk_t)CALL((recv), (SFT_parser___lexer[40] + 0)))
+#define CALL_parser___lexer___TKwisa___init_tk(recv) ((parser___lexer___TKwisa___init_tk_t)CALL((recv), (SFT_parser___lexer[41] + 0)))
+#define CALL_parser___lexer___TKwonce___init_tk(recv) ((parser___lexer___TKwonce___init_tk_t)CALL((recv), (SFT_parser___lexer[42] + 0)))
+#define CALL_parser___lexer___TKwsuper___init_tk(recv) ((parser___lexer___TKwsuper___init_tk_t)CALL((recv), (SFT_parser___lexer[43] + 0)))
+#define CALL_parser___lexer___TKwself___init_tk(recv) ((parser___lexer___TKwself___init_tk_t)CALL((recv), (SFT_parser___lexer[44] + 0)))
+#define CALL_parser___lexer___TKwtrue___init_tk(recv) ((parser___lexer___TKwtrue___init_tk_t)CALL((recv), (SFT_parser___lexer[45] + 0)))
+#define CALL_parser___lexer___TKwfalse___init_tk(recv) ((parser___lexer___TKwfalse___init_tk_t)CALL((recv), (SFT_parser___lexer[46] + 0)))
+#define CALL_parser___lexer___TKwnull___init_tk(recv) ((parser___lexer___TKwnull___init_tk_t)CALL((recv), (SFT_parser___lexer[47] + 0)))
+#define CALL_parser___lexer___TKwas___init_tk(recv) ((parser___lexer___TKwas___init_tk_t)CALL((recv), (SFT_parser___lexer[48] + 0)))
+#define CALL_parser___lexer___TKwnullable___init_tk(recv) ((parser___lexer___TKwnullable___init_tk_t)CALL((recv), (SFT_parser___lexer[49] + 0)))
+#define CALL_parser___lexer___TKwisset___init_tk(recv) ((parser___lexer___TKwisset___init_tk_t)CALL((recv), (SFT_parser___lexer[50] + 0)))
+#define CALL_parser___lexer___TKwlabel___init_tk(recv) ((parser___lexer___TKwlabel___init_tk_t)CALL((recv), (SFT_parser___lexer[51] + 0)))
+#define CALL_parser___lexer___TKwdebug___init_tk(recv) ((parser___lexer___TKwdebug___init_tk_t)CALL((recv), (SFT_parser___lexer[52] + 0)))
+#define CALL_parser___lexer___TOpar___init_tk(recv) ((parser___lexer___TOpar___init_tk_t)CALL((recv), (SFT_parser___lexer[53] + 0)))
+#define CALL_parser___lexer___TCpar___init_tk(recv) ((parser___lexer___TCpar___init_tk_t)CALL((recv), (SFT_parser___lexer[54] + 0)))
+#define CALL_parser___lexer___TObra___init_tk(recv) ((parser___lexer___TObra___init_tk_t)CALL((recv), (SFT_parser___lexer[55] + 0)))
+#define CALL_parser___lexer___TCbra___init_tk(recv) ((parser___lexer___TCbra___init_tk_t)CALL((recv), (SFT_parser___lexer[56] + 0)))
+#define CALL_parser___lexer___TComma___init_tk(recv) ((parser___lexer___TComma___init_tk_t)CALL((recv), (SFT_parser___lexer[57] + 0)))
+#define CALL_parser___lexer___TColumn___init_tk(recv) ((parser___lexer___TColumn___init_tk_t)CALL((recv), (SFT_parser___lexer[58] + 0)))
+#define CALL_parser___lexer___TQuad___init_tk(recv) ((parser___lexer___TQuad___init_tk_t)CALL((recv), (SFT_parser___lexer[59] + 0)))
+#define CALL_parser___lexer___TAssign___init_tk(recv) ((parser___lexer___TAssign___init_tk_t)CALL((recv), (SFT_parser___lexer[60] + 0)))
+#define CALL_parser___lexer___TPluseq___init_tk(recv) ((parser___lexer___TPluseq___init_tk_t)CALL((recv), (SFT_parser___lexer[61] + 0)))
+#define CALL_parser___lexer___TMinuseq___init_tk(recv) ((parser___lexer___TMinuseq___init_tk_t)CALL((recv), (SFT_parser___lexer[62] + 0)))
+#define CALL_parser___lexer___TDotdotdot___init_tk(recv) ((parser___lexer___TDotdotdot___init_tk_t)CALL((recv), (SFT_parser___lexer[63] + 0)))
+#define CALL_parser___lexer___TDotdot___init_tk(recv) ((parser___lexer___TDotdot___init_tk_t)CALL((recv), (SFT_parser___lexer[64] + 0)))
+#define CALL_parser___lexer___TDot___init_tk(recv) ((parser___lexer___TDot___init_tk_t)CALL((recv), (SFT_parser___lexer[65] + 0)))
+#define CALL_parser___lexer___TPlus___init_tk(recv) ((parser___lexer___TPlus___init_tk_t)CALL((recv), (SFT_parser___lexer[66] + 0)))
+#define CALL_parser___lexer___TMinus___init_tk(recv) ((parser___lexer___TMinus___init_tk_t)CALL((recv), (SFT_parser___lexer[67] + 0)))
+#define CALL_parser___lexer___TStar___init_tk(recv) ((parser___lexer___TStar___init_tk_t)CALL((recv), (SFT_parser___lexer[68] + 0)))
+#define CALL_parser___lexer___TSlash___init_tk(recv) ((parser___lexer___TSlash___init_tk_t)CALL((recv), (SFT_parser___lexer[69] + 0)))
+#define CALL_parser___lexer___TPercent___init_tk(recv) ((parser___lexer___TPercent___init_tk_t)CALL((recv), (SFT_parser___lexer[70] + 0)))
+#define CALL_parser___lexer___TEq___init_tk(recv) ((parser___lexer___TEq___init_tk_t)CALL((recv), (SFT_parser___lexer[71] + 0)))
+#define CALL_parser___lexer___TNe___init_tk(recv) ((parser___lexer___TNe___init_tk_t)CALL((recv), (SFT_parser___lexer[72] + 0)))
+#define CALL_parser___lexer___TLt___init_tk(recv) ((parser___lexer___TLt___init_tk_t)CALL((recv), (SFT_parser___lexer[73] + 0)))
+#define CALL_parser___lexer___TLe___init_tk(recv) ((parser___lexer___TLe___init_tk_t)CALL((recv), (SFT_parser___lexer[74] + 0)))
+#define CALL_parser___lexer___TLl___init_tk(recv) ((parser___lexer___TLl___init_tk_t)CALL((recv), (SFT_parser___lexer[75] + 0)))
+#define CALL_parser___lexer___TGt___init_tk(recv) ((parser___lexer___TGt___init_tk_t)CALL((recv), (SFT_parser___lexer[76] + 0)))
+#define CALL_parser___lexer___TGe___init_tk(recv) ((parser___lexer___TGe___init_tk_t)CALL((recv), (SFT_parser___lexer[77] + 0)))
+#define CALL_parser___lexer___TGg___init_tk(recv) ((parser___lexer___TGg___init_tk_t)CALL((recv), (SFT_parser___lexer[78] + 0)))
+#define CALL_parser___lexer___TStarship___init_tk(recv) ((parser___lexer___TStarship___init_tk_t)CALL((recv), (SFT_parser___lexer[79] + 0)))
+#define CALL_parser___lexer___TBang___init_tk(recv) ((parser___lexer___TBang___init_tk_t)CALL((recv), (SFT_parser___lexer[80] + 0)))
+#define CALL_parser___lexer___TAt___init_tk(recv) ((parser___lexer___TAt___init_tk_t)CALL((recv), (SFT_parser___lexer[81] + 0)))
 #define CALL_parser___lexer___TClassid___init_tk(recv) ((parser___lexer___TClassid___init_tk_t)CALL((recv), (SFT_parser___lexer[82] + 0)))
 #define CALL_parser___lexer___TId___init_tk(recv) ((parser___lexer___TId___init_tk_t)CALL((recv), (SFT_parser___lexer[83] + 0)))
 #define CALL_parser___lexer___TAttrid___init_tk(recv) ((parser___lexer___TAttrid___init_tk_t)CALL((recv), (SFT_parser___lexer[84] + 0)))
 #define CALL_parser___lexer___TNumber___init_tk(recv) ((parser___lexer___TNumber___init_tk_t)CALL((recv), (SFT_parser___lexer[85] + 0)))
 #define CALL_parser___lexer___TFloat___init_tk(recv) ((parser___lexer___TFloat___init_tk_t)CALL((recv), (SFT_parser___lexer[86] + 0)))
-#define CALL_parser___lexer___TChar___init_tk(recv) ((parser___lexer___TChar___init_tk_t)CALL((recv), (SFT_parser___lexer[87] + 0)))
-#define CALL_parser___lexer___TString___init_tk(recv) ((parser___lexer___TString___init_tk_t)CALL((recv), (SFT_parser___lexer[88] + 0)))
-#define CALL_parser___lexer___TStartString___init_tk(recv) ((parser___lexer___TStartString___init_tk_t)CALL((recv), (SFT_parser___lexer[89] + 0)))
-#define CALL_parser___lexer___TMidString___init_tk(recv) ((parser___lexer___TMidString___init_tk_t)CALL((recv), (SFT_parser___lexer[90] + 0)))
-#define CALL_parser___lexer___TEndString___init_tk(recv) ((parser___lexer___TEndString___init_tk_t)CALL((recv), (SFT_parser___lexer[91] + 0)))
-#define CALL_parser___lexer___TBadChar___init_tk(recv) ((parser___lexer___TBadChar___init_tk_t)CALL((recv), (SFT_parser___lexer[92] + 0)))
-#define CALL_parser___lexer___TBadString___init_tk(recv) ((parser___lexer___TBadString___init_tk_t)CALL((recv), (SFT_parser___lexer[93] + 0)))
+#define CALL_parser___lexer___TString___init_tk(recv) ((parser___lexer___TString___init_tk_t)CALL((recv), (SFT_parser___lexer[87] + 0)))
+#define CALL_parser___lexer___TStartString___init_tk(recv) ((parser___lexer___TStartString___init_tk_t)CALL((recv), (SFT_parser___lexer[88] + 0)))
+#define CALL_parser___lexer___TMidString___init_tk(recv) ((parser___lexer___TMidString___init_tk_t)CALL((recv), (SFT_parser___lexer[89] + 0)))
+#define CALL_parser___lexer___TEndString___init_tk(recv) ((parser___lexer___TEndString___init_tk_t)CALL((recv), (SFT_parser___lexer[90] + 0)))
+#define CALL_parser___lexer___TChar___init_tk(recv) ((parser___lexer___TChar___init_tk_t)CALL((recv), (SFT_parser___lexer[91] + 0)))
+#define CALL_parser___lexer___TBadString___init_tk(recv) ((parser___lexer___TBadString___init_tk_t)CALL((recv), (SFT_parser___lexer[92] + 0)))
+#define CALL_parser___lexer___TBadChar___init_tk(recv) ((parser___lexer___TBadChar___init_tk_t)CALL((recv), (SFT_parser___lexer[93] + 0)))
 #define CALL_parser___lexer___TExternCodeSegment___init_tk(recv) ((parser___lexer___TExternCodeSegment___init_tk_t)CALL((recv), (SFT_parser___lexer[94] + 0)))
-#define CALL_parser___lexer___EOF___init(recv) ((parser___lexer___EOF___init_t)CALL((recv), (SFT_parser___lexer[95] + 0)))
+#define CALL_parser___lexer___EOF___init_tk(recv) ((parser___lexer___EOF___init_tk_t)CALL((recv), (SFT_parser___lexer[95] + 0)))
 #define ATTR_parser___lexer___AError____message(recv) ATTR(recv, (SFT_parser___lexer[96] + 0))
 #define CALL_parser___lexer___AError___message(recv) ((parser___lexer___AError___message_t)CALL((recv), (SFT_parser___lexer[97] + 0)))
 #define CALL_parser___lexer___AError___init_error(recv) ((parser___lexer___AError___init_error_t)CALL((recv), (SFT_parser___lexer[97] + 1)))
-#define ID_parser___lexer___Lexer (SFT_parser___lexer[98])
-#define COLOR_parser___lexer___Lexer (SFT_parser___lexer[99])
-#define ATTR_parser___lexer___Lexer____token(recv) ATTR(recv, (SFT_parser___lexer[100] + 0))
-#define ATTR_parser___lexer___Lexer____state(recv) ATTR(recv, (SFT_parser___lexer[100] + 1))
-#define ATTR_parser___lexer___Lexer____file(recv) ATTR(recv, (SFT_parser___lexer[100] + 2))
-#define ATTR_parser___lexer___Lexer____stream_pos(recv) ATTR(recv, (SFT_parser___lexer[100] + 3))
-#define ATTR_parser___lexer___Lexer____line(recv) ATTR(recv, (SFT_parser___lexer[100] + 4))
-#define ATTR_parser___lexer___Lexer____pos(recv) ATTR(recv, (SFT_parser___lexer[100] + 5))
-#define ATTR_parser___lexer___Lexer____cr(recv) ATTR(recv, (SFT_parser___lexer[100] + 6))
-#define INIT_TABLE_POS_parser___lexer___Lexer (SFT_parser___lexer[101] + 0)
-#define CALL_parser___lexer___Lexer___file(recv) ((parser___lexer___Lexer___file_t)CALL((recv), (SFT_parser___lexer[101] + 1)))
-#define CALL_parser___lexer___Lexer___state_initial(recv) ((parser___lexer___Lexer___state_initial_t)CALL((recv), (SFT_parser___lexer[101] + 2)))
-#define CALL_parser___lexer___Lexer___init(recv) ((parser___lexer___Lexer___init_t)CALL((recv), (SFT_parser___lexer[101] + 3)))
-#define CALL_parser___lexer___Lexer___peek(recv) ((parser___lexer___Lexer___peek_t)CALL((recv), (SFT_parser___lexer[101] + 4)))
-#define CALL_parser___lexer___Lexer___next(recv) ((parser___lexer___Lexer___next_t)CALL((recv), (SFT_parser___lexer[101] + 5)))
-#define CALL_parser___lexer___Lexer___get_token(recv) ((parser___lexer___Lexer___get_token_t)CALL((recv), (SFT_parser___lexer[101] + 6)))
+#define ATTR_parser___lexer___ALexerError____string(recv) ATTR(recv, (SFT_parser___lexer[98] + 0))
+#define CALL_parser___lexer___ALexerError___string(recv) ((parser___lexer___ALexerError___string_t)CALL((recv), (SFT_parser___lexer[99] + 0)))
+#define CALL_parser___lexer___ALexerError___init_lexer_error(recv) ((parser___lexer___ALexerError___init_lexer_error_t)CALL((recv), (SFT_parser___lexer[99] + 1)))
+#define ATTR_parser___lexer___AParserError____token(recv) ATTR(recv, (SFT_parser___lexer[100] + 0))
+#define CALL_parser___lexer___AParserError___token(recv) ((parser___lexer___AParserError___token_t)CALL((recv), (SFT_parser___lexer[101] + 0)))
+#define CALL_parser___lexer___AParserError___init_parser_error(recv) ((parser___lexer___AParserError___init_parser_error_t)CALL((recv), (SFT_parser___lexer[101] + 1)))
+#define ID_parser___lexer___Lexer (SFT_parser___lexer[102])
+#define COLOR_parser___lexer___Lexer (SFT_parser___lexer[103])
+#define ATTR_parser___lexer___Lexer____token(recv) ATTR(recv, (SFT_parser___lexer[104] + 0))
+#define ATTR_parser___lexer___Lexer____state(recv) ATTR(recv, (SFT_parser___lexer[104] + 1))
+#define ATTR_parser___lexer___Lexer____file(recv) ATTR(recv, (SFT_parser___lexer[104] + 2))
+#define ATTR_parser___lexer___Lexer____stream_pos(recv) ATTR(recv, (SFT_parser___lexer[104] + 3))
+#define ATTR_parser___lexer___Lexer____line(recv) ATTR(recv, (SFT_parser___lexer[104] + 4))
+#define ATTR_parser___lexer___Lexer____pos(recv) ATTR(recv, (SFT_parser___lexer[104] + 5))
+#define ATTR_parser___lexer___Lexer____cr(recv) ATTR(recv, (SFT_parser___lexer[104] + 6))
+#define INIT_TABLE_POS_parser___lexer___Lexer (SFT_parser___lexer[105] + 0)
+#define CALL_parser___lexer___Lexer___file(recv) ((parser___lexer___Lexer___file_t)CALL((recv), (SFT_parser___lexer[105] + 1)))
+#define CALL_parser___lexer___Lexer___state_initial(recv) ((parser___lexer___Lexer___state_initial_t)CALL((recv), (SFT_parser___lexer[105] + 2)))
+#define CALL_parser___lexer___Lexer___init(recv) ((parser___lexer___Lexer___init_t)CALL((recv), (SFT_parser___lexer[105] + 3)))
+#define CALL_parser___lexer___Lexer___peek(recv) ((parser___lexer___Lexer___peek_t)CALL((recv), (SFT_parser___lexer[105] + 4)))
+#define CALL_parser___lexer___Lexer___next(recv) ((parser___lexer___Lexer___next_t)CALL((recv), (SFT_parser___lexer[105] + 5)))
+#define CALL_parser___lexer___Lexer___get_token(recv) ((parser___lexer___Lexer___get_token_t)CALL((recv), (SFT_parser___lexer[105] + 6)))
 val_t parser___lexer___Token___text(val_t p0);
 typedef val_t (*parser___lexer___Token___text_t)(val_t p0);
+void parser___lexer___Token___text__eq(val_t p0, val_t p1);
+typedef void (*parser___lexer___Token___text__eq_t)(val_t p0, val_t p1);
 val_t parser___lexer___Token___parser_index(val_t p0);
 typedef val_t (*parser___lexer___Token___parser_index_t)(val_t p0);
 val_t NEW_Token_parser___parser_nodes___ANode___init();
@@ -176,12 +184,6 @@ void parser___lexer___TKwenum___init_tk(val_t p0, val_t p1, int* init_table);
 typedef void (*parser___lexer___TKwenum___init_tk_t)(val_t p0, val_t p1, int* init_table);
 val_t NEW_TKwenum_parser___lexer___TKwenum___init_tk(val_t p0);
 val_t NEW_TKwenum_parser___parser_nodes___ANode___init();
-val_t parser___lexer___TKwspecial___parser_index(val_t p0);
-typedef val_t (*parser___lexer___TKwspecial___parser_index_t)(val_t p0);
-void parser___lexer___TKwspecial___init_tk(val_t p0, val_t p1, int* init_table);
-typedef void (*parser___lexer___TKwspecial___init_tk_t)(val_t p0, val_t p1, int* init_table);
-val_t NEW_TKwspecial_parser___lexer___TKwspecial___init_tk(val_t p0);
-val_t NEW_TKwspecial_parser___parser_nodes___ANode___init();
 val_t parser___lexer___TKwend___parser_index(val_t p0);
 typedef val_t (*parser___lexer___TKwend___parser_index_t)(val_t p0);
 void parser___lexer___TKwend___init_tk(val_t p0, val_t p1, int* init_table);
@@ -608,6 +610,12 @@ void parser___lexer___TBang___init_tk(val_t p0, val_t p1, int* init_table);
 typedef void (*parser___lexer___TBang___init_tk_t)(val_t p0, val_t p1, int* init_table);
 val_t NEW_TBang_parser___lexer___TBang___init_tk(val_t p0);
 val_t NEW_TBang_parser___parser_nodes___ANode___init();
+val_t parser___lexer___TAt___parser_index(val_t p0);
+typedef val_t (*parser___lexer___TAt___parser_index_t)(val_t p0);
+void parser___lexer___TAt___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*parser___lexer___TAt___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TAt_parser___lexer___TAt___init_tk(val_t p0);
+val_t NEW_TAt_parser___parser_nodes___ANode___init();
 val_t parser___lexer___TClassid___parser_index(val_t p0);
 typedef val_t (*parser___lexer___TClassid___parser_index_t)(val_t p0);
 void parser___lexer___TClassid___init_tk(val_t p0, val_t p1, int* init_table);
@@ -638,12 +646,6 @@ void parser___lexer___TFloat___init_tk(val_t p0, val_t p1, int* init_table);
 typedef void (*parser___lexer___TFloat___init_tk_t)(val_t p0, val_t p1, int* init_table);
 val_t NEW_TFloat_parser___lexer___TFloat___init_tk(val_t p0);
 val_t NEW_TFloat_parser___parser_nodes___ANode___init();
-val_t parser___lexer___TChar___parser_index(val_t p0);
-typedef val_t (*parser___lexer___TChar___parser_index_t)(val_t p0);
-void parser___lexer___TChar___init_tk(val_t p0, val_t p1, int* init_table);
-typedef void (*parser___lexer___TChar___init_tk_t)(val_t p0, val_t p1, int* init_table);
-val_t NEW_TChar_parser___lexer___TChar___init_tk(val_t p0);
-val_t NEW_TChar_parser___parser_nodes___ANode___init();
 val_t parser___lexer___TString___parser_index(val_t p0);
 typedef val_t (*parser___lexer___TString___parser_index_t)(val_t p0);
 void parser___lexer___TString___init_tk(val_t p0, val_t p1, int* init_table);
@@ -668,18 +670,24 @@ void parser___lexer___TEndString___init_tk(val_t p0, val_t p1, int* init_table);
 typedef void (*parser___lexer___TEndString___init_tk_t)(val_t p0, val_t p1, int* init_table);
 val_t NEW_TEndString_parser___lexer___TEndString___init_tk(val_t p0);
 val_t NEW_TEndString_parser___parser_nodes___ANode___init();
-val_t parser___lexer___TBadChar___parser_index(val_t p0);
-typedef val_t (*parser___lexer___TBadChar___parser_index_t)(val_t p0);
-void parser___lexer___TBadChar___init_tk(val_t p0, val_t p1, int* init_table);
-typedef void (*parser___lexer___TBadChar___init_tk_t)(val_t p0, val_t p1, int* init_table);
-val_t NEW_TBadChar_parser___lexer___TBadChar___init_tk(val_t p0);
-val_t NEW_TBadChar_parser___parser_nodes___ANode___init();
+val_t parser___lexer___TChar___parser_index(val_t p0);
+typedef val_t (*parser___lexer___TChar___parser_index_t)(val_t p0);
+void parser___lexer___TChar___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*parser___lexer___TChar___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TChar_parser___lexer___TChar___init_tk(val_t p0);
+val_t NEW_TChar_parser___parser_nodes___ANode___init();
 val_t parser___lexer___TBadString___parser_index(val_t p0);
 typedef val_t (*parser___lexer___TBadString___parser_index_t)(val_t p0);
 void parser___lexer___TBadString___init_tk(val_t p0, val_t p1, int* init_table);
 typedef void (*parser___lexer___TBadString___init_tk_t)(val_t p0, val_t p1, int* init_table);
 val_t NEW_TBadString_parser___lexer___TBadString___init_tk(val_t p0);
 val_t NEW_TBadString_parser___parser_nodes___ANode___init();
+val_t parser___lexer___TBadChar___parser_index(val_t p0);
+typedef val_t (*parser___lexer___TBadChar___parser_index_t)(val_t p0);
+void parser___lexer___TBadChar___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*parser___lexer___TBadChar___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_TBadChar_parser___lexer___TBadChar___init_tk(val_t p0);
+val_t NEW_TBadChar_parser___parser_nodes___ANode___init();
 val_t parser___lexer___TExternCodeSegment___parser_index(val_t p0);
 typedef val_t (*parser___lexer___TExternCodeSegment___parser_index_t)(val_t p0);
 void parser___lexer___TExternCodeSegment___init_tk(val_t p0, val_t p1, int* init_table);
@@ -688,16 +696,33 @@ val_t NEW_TExternCodeSegment_parser___lexer___TExternCodeSegment___init_tk(val_t
 val_t NEW_TExternCodeSegment_parser___parser_nodes___ANode___init();
 val_t parser___lexer___EOF___parser_index(val_t p0);
 typedef val_t (*parser___lexer___EOF___parser_index_t)(val_t p0);
-void parser___lexer___EOF___init(val_t p0, val_t p1, int* init_table);
-typedef void (*parser___lexer___EOF___init_t)(val_t p0, val_t p1, int* init_table);
-val_t NEW_EOF_parser___lexer___EOF___init(val_t p0);
-val_t NEW_EOF_parser___parser_nodes___EOF___noinit();
+void parser___lexer___EOF___init_tk(val_t p0, val_t p1, int* init_table);
+typedef void (*parser___lexer___EOF___init_tk_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_EOF_parser___lexer___EOF___init_tk(val_t p0);
+val_t NEW_EOF_parser___parser_nodes___ANode___init();
 val_t parser___lexer___AError___message(val_t p0);
 typedef val_t (*parser___lexer___AError___message_t)(val_t p0);
 void parser___lexer___AError___init_error(val_t p0, val_t p1, val_t p2, int* init_table);
 typedef void (*parser___lexer___AError___init_error_t)(val_t p0, val_t p1, val_t p2, int* init_table);
 val_t NEW_AError_parser___lexer___AError___init_error(val_t p0, val_t p1);
-val_t NEW_AError_parser___parser_nodes___AError___noinit();
+val_t NEW_AError_parser___lexer___EOF___init_tk(val_t p0);
+val_t NEW_AError_parser___parser_nodes___ANode___init();
+val_t parser___lexer___ALexerError___string(val_t p0);
+typedef val_t (*parser___lexer___ALexerError___string_t)(val_t p0);
+void parser___lexer___ALexerError___init_lexer_error(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
+typedef void (*parser___lexer___ALexerError___init_lexer_error_t)(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
+val_t NEW_ALexerError_parser___lexer___ALexerError___init_lexer_error(val_t p0, val_t p1, val_t p2);
+val_t NEW_ALexerError_parser___lexer___AError___init_error(val_t p0, val_t p1);
+val_t NEW_ALexerError_parser___parser_nodes___ANode___init();
+val_t NEW_ALexerError_parser___lexer___EOF___init_tk(val_t p0);
+val_t parser___lexer___AParserError___token(val_t p0);
+typedef val_t (*parser___lexer___AParserError___token_t)(val_t p0);
+void parser___lexer___AParserError___init_parser_error(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
+typedef void (*parser___lexer___AParserError___init_parser_error_t)(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
+val_t NEW_AParserError_parser___lexer___AParserError___init_parser_error(val_t p0, val_t p1, val_t p2);
+val_t NEW_AParserError_parser___lexer___AError___init_error(val_t p0, val_t p1);
+val_t NEW_AParserError_parser___parser_nodes___ANode___init();
+val_t NEW_AParserError_parser___lexer___EOF___init_tk(val_t p0);
 val_t parser___lexer___Lexer___file(val_t p0);
 typedef val_t (*parser___lexer___Lexer___file_t)(val_t p0);
 val_t parser___lexer___Lexer___state_initial(val_t p0);

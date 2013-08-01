@@ -92,6 +92,7 @@ val_t native_interface___frontier___NiVariable___needs_preparation(val_t p0){
       nit_abort("Reciever is null", NULL, LOCATE_native_interface___frontier, 39);
     }
     REGB1 = CALL_primitive_info___PrimitiveInfo___tagged(fra.me.REG[1])(fra.me.REG[1]);
+    REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
     /* native_interface/frontier.nit:38 */
     REGB0 = REGB1;
   }
@@ -1695,7 +1696,7 @@ void native_interface___frontier___MMSrcMethod___compile_super_to_frontier(val_t
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[6] = ((Nit_NativeArray)fra.me.REG[5])->val[UNTAG_Int(REGB0)];
       /* native_interface/frontier.nit:229 */
       CALL_native_interface___frontier___NiVariable___prepare_for_nit(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[2]);
@@ -1747,7 +1748,7 @@ void native_interface___frontier___MMSrcMethod___compile_super_to_frontier(val_t
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[6] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB0)];
       /* native_interface/frontier.nit:233 */
       fra.me.REG[6] = CALL_native_interface___frontier___NiVariable___as_arg_to_nit(fra.me.REG[6])(fra.me.REG[6]);
@@ -2760,7 +2761,7 @@ void native_interface___frontier___MMSignature___compile_frontier(val_t p0, val_
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[4] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB0)];
       /* native_interface/frontier.nit:347 */
       fra.me.REG[5] = CALL_native_interface___frontier___FrontierVisitor___types(fra.me.REG[1])(fra.me.REG[1]);
@@ -4442,6 +4443,7 @@ val_t native_interface___frontier___MMType___compile_condition_isa(val_t p0, val
   static val_t once_value_4; /* Once value */
   static val_t once_value_5; /* Once value */
   static val_t once_value_6; /* Once value */
+  static val_t once_value_7; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_native_interface___frontier;
   fra.me.line = 532;
@@ -4456,7 +4458,7 @@ val_t native_interface___frontier___MMType___compile_condition_isa(val_t p0, val
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   /* native_interface/frontier.nit:536 */
-  REGB0 = TAG_Int(11);
+  REGB0 = TAG_Int(13);
   fra.me.REG[2] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
   if (!once_value_1) {
     fra.me.REG[3] = BOX_NativeString("( ISOBJ( ");
@@ -4469,7 +4471,7 @@ val_t native_interface___frontier___MMType___compile_condition_isa(val_t p0, val
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
   if (!once_value_2) {
-    fra.me.REG[3] = BOX_NativeString(" ) ? OBJISA( ");
+    fra.me.REG[3] = BOX_NativeString(" ) ? ISNULL( ");
     REGB0 = TAG_Int(13);
     fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
     once_value_2 = fra.me.REG[3];
@@ -4479,51 +4481,61 @@ val_t native_interface___frontier___MMType___compile_condition_isa(val_t p0, val
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
   if (!once_value_3) {
-    fra.me.REG[3] = BOX_NativeString(", ");
-    REGB0 = TAG_Int(2);
+    fra.me.REG[3] = BOX_NativeString(" ) || OBJISA( ");
+    REGB0 = TAG_Int(14);
     fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
     once_value_3 = fra.me.REG[3];
     register_static_object(&once_value_3);
   } else fra.me.REG[3] = once_value_3;
   fra.me.REG[3] = fra.me.REG[3];
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
-  fra.me.REG[3] = CALL_metamodel___static_type___MMType___local_class(fra.me.REG[0])(fra.me.REG[0]);
-  fra.me.REG[3] = CALL_compiling___compiling_base___MMLocalClass___cname(fra.me.REG[3])(fra.me.REG[3]);
-  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
   if (!once_value_4) {
-    fra.me.REG[3] = BOX_NativeString(" ): VALISA( ");
-    REGB0 = TAG_Int(12);
+    fra.me.REG[3] = BOX_NativeString(", ");
+    REGB0 = TAG_Int(2);
     fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
     once_value_4 = fra.me.REG[3];
     register_static_object(&once_value_4);
   } else fra.me.REG[3] = once_value_4;
   fra.me.REG[3] = fra.me.REG[3];
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
-  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
+  fra.me.REG[3] = CALL_metamodel___static_type___MMType___local_class(fra.me.REG[0])(fra.me.REG[0]);
+  fra.me.REG[3] = CALL_compiling___compiling_base___MMLocalClass___cname(fra.me.REG[3])(fra.me.REG[3]);
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
   if (!once_value_5) {
+    fra.me.REG[3] = BOX_NativeString(" ): VALISA( ");
+    REGB0 = TAG_Int(12);
+    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    once_value_5 = fra.me.REG[3];
+    register_static_object(&once_value_5);
+  } else fra.me.REG[3] = once_value_5;
+  fra.me.REG[3] = fra.me.REG[3];
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
+  if (!once_value_6) {
     fra.me.REG[1] = BOX_NativeString(", ");
     REGB0 = TAG_Int(2);
     fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
-    once_value_5 = fra.me.REG[1];
-    register_static_object(&once_value_5);
-  } else fra.me.REG[1] = once_value_5;
+    once_value_6 = fra.me.REG[1];
+    register_static_object(&once_value_6);
+  } else fra.me.REG[1] = once_value_6;
   fra.me.REG[1] = fra.me.REG[1];
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
   fra.me.REG[0] = CALL_metamodel___static_type___MMType___local_class(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_compiling___compiling_base___MMLocalClass___cname(fra.me.REG[0])(fra.me.REG[0]);
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[0]);
-  if (!once_value_6) {
+  if (!once_value_7) {
     fra.me.REG[0] = BOX_NativeString(" ) )");
     REGB0 = TAG_Int(4);
     fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
-    once_value_6 = fra.me.REG[0];
-    register_static_object(&once_value_6);
-  } else fra.me.REG[0] = once_value_6;
+    once_value_7 = fra.me.REG[0];
+    register_static_object(&once_value_7);
+  } else fra.me.REG[0] = once_value_7;
   fra.me.REG[0] = fra.me.REG[0];
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[0]);
   fra.me.REG[2] = CALL_standard___string___Object___to_s(fra.me.REG[2])(fra.me.REG[2]);
-  goto label7;
-  label7: while(0);
+  goto label8;
+  label8: while(0);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[2];
 }
@@ -5629,7 +5641,7 @@ void native_interface___frontier___MMExplicitImport___compile_friendly_to_fronti
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[6] = ((Nit_NativeArray)fra.me.REG[5])->val[UNTAG_Int(REGB0)];
       /* native_interface/frontier.nit:634 */
       CALL_native_interface___frontier___NiVariable___prepare_for_nit(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[4]);
@@ -5850,7 +5862,7 @@ void native_interface___frontier___MMExplicitImport___compile_friendly_to_fronti
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[7] = ((Nit_NativeArray)fra.me.REG[0])->val[UNTAG_Int(REGB0)];
       /* native_interface/frontier.nit:655 */
       fra.me.REG[7] = CALL_native_interface___frontier___NiVariable___as_arg_to_nit(fra.me.REG[7])(fra.me.REG[7]);

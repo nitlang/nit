@@ -546,7 +546,7 @@ val_t icode___icode_builder___ICodeBuilder___add_call(val_t p0, val_t p1, val_t 
     if (UNTAG_Bool(REGB1)) {
       nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
     }
-    /* ../lib/standard/collection/array.nit:718 */
+    /* ../lib/standard/collection/array.nit:724 */
     fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB0)];
     /* ../lib/standard/collection/array.nit:281 */
     goto label6;
@@ -594,7 +594,7 @@ val_t icode___icode_builder___ICodeBuilder___add_call(val_t p0, val_t p1, val_t 
     if (UNTAG_Bool(REGB1)) {
       nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
     }
-    /* ../lib/standard/collection/array.nit:718 */
+    /* ../lib/standard/collection/array.nit:724 */
     fra.me.REG[7] = ((Nit_NativeArray)fra.me.REG[7])->val[UNTAG_Int(REGB0)];
     /* ../lib/standard/collection/array.nit:281 */
     goto label7;
@@ -661,7 +661,7 @@ val_t icode___icode_builder___ICodeBuilder___add_call(val_t p0, val_t p1, val_t 
     if (UNTAG_Bool(REGB1)) {
       nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
     }
-    /* ../lib/standard/collection/array.nit:718 */
+    /* ../lib/standard/collection/array.nit:724 */
     fra.me.REG[9] = ((Nit_NativeArray)fra.me.REG[9])->val[UNTAG_Int(REGB0)];
     /* ../lib/standard/collection/array.nit:281 */
     goto label8;
@@ -719,7 +719,7 @@ val_t icode___icode_builder___ICodeBuilder___add_call(val_t p0, val_t p1, val_t 
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[10] = ((Nit_NativeArray)fra.me.REG[10])->val[UNTAG_Int(REGB0)];
       /* ../lib/standard/collection/array.nit:281 */
       goto label9;
@@ -1258,7 +1258,7 @@ val_t icode___icode_builder___MMSignature___generate_empty_iroutine(val_t p0){
         if (UNTAG_Bool(REGB1)) {
           nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
         }
-        /* ../lib/standard/collection/array.nit:718 */
+        /* ../lib/standard/collection/array.nit:724 */
         fra.me.REG[6] = ((Nit_NativeArray)fra.me.REG[5])->val[UNTAG_Int(REGB0)];
         /* icode/icode_builder.nit:243 */
         fra.me.REG[6] = NEW_IClosureDecl_icode___icode_base___IClosureDecl___init(fra.me.REG[6]);
@@ -1352,7 +1352,7 @@ val_t icode___icode_builder___MMSignature___generate_empty_iroutine(val_t p0){
         if (UNTAG_Bool(REGB2)) {
           nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
         }
-        /* ../lib/standard/collection/array.nit:718 */
+        /* ../lib/standard/collection/array.nit:724 */
         fra.me.REG[4] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB3)];
         /* ../lib/standard/collection/array.nit:281 */
         goto label3;
@@ -1504,7 +1504,7 @@ val_t icode___icode_builder___MMSignature___generate_empty_iclosuredef(val_t p0,
         if (UNTAG_Bool(REGB1)) {
           nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
         }
-        /* ../lib/standard/collection/array.nit:718 */
+        /* ../lib/standard/collection/array.nit:724 */
         fra.me.REG[1] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB0)];
         /* icode/icode_builder.nit:275 */
         fra.me.REG[1] = NEW_IClosureDecl_icode___icode_base___IClosureDecl___init(fra.me.REG[1]);

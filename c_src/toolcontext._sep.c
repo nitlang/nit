@@ -767,7 +767,7 @@ void toolcontext___ToolContext___check_errors(val_t p0){
         if (UNTAG_Bool(REGB0)) {
           nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
         }
-        /* ../lib/standard/collection/array.nit:718 */
+        /* ../lib/standard/collection/array.nit:724 */
         fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[1])->val[UNTAG_Int(REGB1)];
         /* toolcontext.nit:91 */
         fra.me.REG[4] = CALL_toolcontext___ToolContext___opt_no_color(fra.me.REG[0])(fra.me.REG[0]);

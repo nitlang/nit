@@ -58,7 +58,7 @@ val_t metamodel___genericity___MMLocalClass___get_formal(val_t p0, val_t p1){
   if (UNTAG_Bool(REGB1)) {
     nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
   }
-  /* ../lib/standard/collection/array.nit:718 */
+  /* ../lib/standard/collection/array.nit:724 */
   fra.me.REG[0] = ((Nit_NativeArray)fra.me.REG[0])->val[UNTAG_Int(REGB0)];
   /* ../lib/standard/collection/array.nit:281 */
   goto label1;
@@ -201,7 +201,7 @@ val_t metamodel___genericity___MMLocalClass___get_instantiate_type(val_t p0, val
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[4] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB0)];
       /* metamodel/genericity.nit:47 */
       REGB1 = CALL_metamodel___genericity___MMTypeGeneric___params_equals(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[1]);
@@ -377,7 +377,7 @@ val_t metamodel___genericity___MMLocalClass___formals_types(val_t p0){
         if (UNTAG_Bool(REGB3)) {
           nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
         }
-        /* ../lib/standard/collection/array.nit:718 */
+        /* ../lib/standard/collection/array.nit:724 */
         fra.me.REG[2] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB2)];
         /* ../lib/standard/collection/array.nit:281 */
         goto label2;
@@ -787,7 +787,7 @@ val_t metamodel___genericity___MMTypeGeneric___for_module(val_t p0, val_t p1){
         if (UNTAG_Bool(REGB1)) {
           nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
         }
-        /* ../lib/standard/collection/array.nit:718 */
+        /* ../lib/standard/collection/array.nit:724 */
         fra.me.REG[6] = ((Nit_NativeArray)fra.me.REG[5])->val[UNTAG_Int(REGB0)];
         /* metamodel/genericity.nit:140 */
         fra.me.REG[6] = CALL_metamodel___static_type___MMType___for_module(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[1]);
@@ -887,7 +887,7 @@ val_t metamodel___genericity___MMTypeGeneric___adapt_to(val_t p0, val_t p1){
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[5] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB0)];
       /* metamodel/genericity.nit:152 */
       fra.me.REG[5] = CALL_metamodel___static_type___MMType___adapt_to(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[1]);
@@ -1048,7 +1048,7 @@ val_t metamodel___genericity___MMTypeGeneric___params_equals(val_t p0, val_t p1)
       if (UNTAG_Bool(REGB5)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[2] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB4)];
       /* ../lib/standard/collection/array.nit:281 */
       goto label2;
@@ -1094,7 +1094,7 @@ val_t metamodel___genericity___MMTypeGeneric___params_equals(val_t p0, val_t p1)
       if (UNTAG_Bool(REGB4)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB3)];
       /* ../lib/standard/collection/array.nit:281 */
       goto label3;
@@ -1310,7 +1310,7 @@ val_t metamodel___genericity___MMTypeGeneric___is_subtype(val_t p0, val_t p1){
       if (UNTAG_Bool(REGB4)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[2] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB3)];
       /* ../lib/standard/collection/array.nit:281 */
       goto label1;
@@ -1361,7 +1361,7 @@ val_t metamodel___genericity___MMTypeGeneric___is_subtype(val_t p0, val_t p1){
       if (UNTAG_Bool(REGB3)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB2)];
       /* ../lib/standard/collection/array.nit:281 */
       goto label2;
@@ -1398,6 +1398,93 @@ val_t metamodel___genericity___MMTypeGeneric___is_subtype(val_t p0, val_t p1){
   stack_frame_head = fra.me.prev;
   return REGB2;
 }
+static const char LOCATE_metamodel___genericity___MMTypeGeneric___has_formal[] = "genericity::MMTypeGeneric::(type_formal::MMType::has_formal)";
+val_t metamodel___genericity___MMTypeGeneric___has_formal(val_t p0){
+  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
+  val_t REGB0;
+  val_t REGB1;
+  val_t REGB2;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_metamodel___genericity;
+  fra.me.line = 189;
+  fra.me.meth = LOCATE_metamodel___genericity___MMTypeGeneric___has_formal;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[2] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* metamodel/genericity.nit:191 */
+  REGB0 = TAG_Bool(ATTR_metamodel___genericity___MMTypeGeneric____params(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_params", LOCATE_metamodel___genericity, 191);
+  }
+  fra.me.REG[0] = ATTR_metamodel___genericity___MMTypeGeneric____params(fra.me.REG[0]);
+  /* ../lib/standard/collection/array.nit:269 */
+  REGB0 = TAG_Int(0);
+  /* ../lib/standard/collection/array.nit:270 */
+  REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB1)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 270);
+  }
+  REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[0]);
+  /* ../lib/standard/collection/array.nit:271 */
+  fra.me.REG[1] = ATTR_standard___collection___array___Array____items(fra.me.REG[0]);
+  /* ../lib/standard/collection/array.nit:272 */
+  while(1) {
+    /* ../lib/standard/collection/array.nit:24 */
+    REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[0])!=NIT_NULL);
+    if (UNTAG_Bool(REGB1)) {
+    } else {
+      nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
+    }
+    REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[0]);
+    REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
+    if (UNTAG_Bool(REGB2)) {
+    } else {
+      nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
+    }
+    /* ../lib/standard/kernel.nit:235 */
+    REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
+    /* ../lib/standard/collection/array.nit:272 */
+    if (UNTAG_Bool(REGB1)) {
+      /* ../lib/standard/collection/array.nit:273 */
+      REGB1 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
+      if (UNTAG_Bool(REGB1)) {
+        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
+      }
+      /* ../lib/standard/collection/array.nit:724 */
+      fra.me.REG[2] = ((Nit_NativeArray)fra.me.REG[1])->val[UNTAG_Int(REGB0)];
+      /* metamodel/genericity.nit:192 */
+      REGB1 = CALL_metamodel___type_formal___MMType___has_formal(fra.me.REG[2])(fra.me.REG[2]);
+      if (UNTAG_Bool(REGB1)) {
+        REGB1 = TAG_Bool(1);
+        goto label1;
+      }
+      /* ../lib/standard/collection/array.nit:274 */
+      REGB2 = TAG_Int(1);
+      /* ../lib/standard/kernel.nit:238 */
+      REGB2 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB2));
+      /* ../lib/standard/collection/array.nit:274 */
+      REGB0 = REGB2;
+    } else {
+      /* ../lib/standard/collection/array.nit:272 */
+      goto label2;
+    }
+  }
+  label2: while(0);
+  /* metamodel/genericity.nit:194 */
+  REGB0 = TAG_Bool(0);
+  REGB1 = REGB0;
+  goto label1;
+  label1: while(0);
+  stack_frame_head = fra.me.prev;
+  return REGB1;
+}
 static const char LOCATE_metamodel___genericity___MMTypeGeneric___init[] = "genericity::MMTypeGeneric::init";
 void metamodel___genericity___MMTypeGeneric___init(val_t p0, val_t p1, val_t p2, int* init_table){
   int itpos0 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_metamodel___genericity___MMTypeGeneric].i;
@@ -1406,7 +1493,7 @@ void metamodel___genericity___MMTypeGeneric___init(val_t p0, val_t p1, val_t p2,
   if (init_table[itpos0]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_metamodel___genericity;
-  fra.me.line = 189;
+  fra.me.line = 197;
   fra.me.meth = LOCATE_metamodel___genericity___MMTypeGeneric___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -1418,11 +1505,11 @@ void metamodel___genericity___MMTypeGeneric___init(val_t p0, val_t p1, val_t p2,
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* metamodel/genericity.nit:189 */
+  /* metamodel/genericity.nit:197 */
   fra.me.REG[3] = fra.me.REG[0];
-  /* metamodel/genericity.nit:191 */
+  /* metamodel/genericity.nit:199 */
   CALL_metamodel___static_type___MMTypeClass___init(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], init_table);
-  /* metamodel/genericity.nit:192 */
+  /* metamodel/genericity.nit:200 */
   ATTR_metamodel___genericity___MMTypeGeneric____params(fra.me.REG[3]) = fra.me.REG[2];
   stack_frame_head = fra.me.prev;
   init_table[itpos0] = 1;
@@ -1435,18 +1522,18 @@ val_t metamodel___genericity___MMTypeFormalParameter___def_class(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_metamodel___genericity;
-  fra.me.line = 198;
+  fra.me.line = 206;
   fra.me.meth = LOCATE_metamodel___genericity___MMTypeFormalParameter___def_class;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* metamodel/genericity.nit:198 */
+  /* metamodel/genericity.nit:206 */
   REGB0 = TAG_Bool(ATTR_metamodel___genericity___MMTypeFormalParameter____def_class(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_def_class", LOCATE_metamodel___genericity, 198);
+    nit_abort("Uninitialized attribute %s", "_def_class", LOCATE_metamodel___genericity, 206);
   }
   fra.me.REG[0] = ATTR_metamodel___genericity___MMTypeFormalParameter____def_class(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1459,18 +1546,18 @@ val_t metamodel___genericity___MMTypeFormalParameter___position(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_metamodel___genericity;
-  fra.me.line = 201;
+  fra.me.line = 209;
   fra.me.meth = LOCATE_metamodel___genericity___MMTypeFormalParameter___position;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* metamodel/genericity.nit:201 */
+  /* metamodel/genericity.nit:209 */
   REGB0 = TAG_Bool(ATTR_metamodel___genericity___MMTypeFormalParameter____position(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_position", LOCATE_metamodel___genericity, 201);
+    nit_abort("Uninitialized attribute %s", "_position", LOCATE_metamodel___genericity, 209);
   }
   REGB0 = ATTR_metamodel___genericity___MMTypeFormalParameter____position(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1483,18 +1570,18 @@ val_t metamodel___genericity___MMTypeFormalParameter___mmmodule(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_metamodel___genericity;
-  fra.me.line = 204;
+  fra.me.line = 212;
   fra.me.meth = LOCATE_metamodel___genericity___MMTypeFormalParameter___mmmodule;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* metamodel/genericity.nit:204 */
+  /* metamodel/genericity.nit:212 */
   REGB0 = TAG_Bool(ATTR_metamodel___genericity___MMTypeFormalParameter____def_class(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_def_class", LOCATE_metamodel___genericity, 204);
+    nit_abort("Uninitialized attribute %s", "_def_class", LOCATE_metamodel___genericity, 212);
   }
   fra.me.REG[0] = ATTR_metamodel___genericity___MMTypeFormalParameter____def_class(fra.me.REG[0]);
   fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMLocalClass___mmmodule(fra.me.REG[0])(fra.me.REG[0]);
@@ -1511,7 +1598,7 @@ val_t metamodel___genericity___MMTypeFormalParameter___for_module(val_t p0, val_
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_metamodel___genericity;
-  fra.me.line = 206;
+  fra.me.line = 214;
   fra.me.meth = LOCATE_metamodel___genericity___MMTypeFormalParameter___for_module;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -1522,9 +1609,9 @@ val_t metamodel___genericity___MMTypeFormalParameter___for_module(val_t p0, val_
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* metamodel/genericity.nit:208 */
+  /* metamodel/genericity.nit:216 */
   fra.me.REG[2] = fra.me.REG[0];
-  /* metamodel/genericity.nit:209 */
+  /* metamodel/genericity.nit:217 */
   fra.me.REG[3] = CALL_metamodel___static_type___MMType___mmmodule(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[3],fra.me.REG[1]));
   if (UNTAG_Bool(REGB0)) {
@@ -1534,11 +1621,11 @@ val_t metamodel___genericity___MMTypeFormalParameter___for_module(val_t p0, val_
   }
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
-    /* metamodel/genericity.nit:210 */
+    /* metamodel/genericity.nit:218 */
     REGB0 = TAG_Bool(ATTR_metamodel___genericity___MMTypeFormalParameter____def_class(fra.me.REG[0])!=NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
-      nit_abort("Uninitialized attribute %s", "_def_class", LOCATE_metamodel___genericity, 210);
+      nit_abort("Uninitialized attribute %s", "_def_class", LOCATE_metamodel___genericity, 218);
     }
     fra.me.REG[3] = ATTR_metamodel___genericity___MMTypeFormalParameter____def_class(fra.me.REG[0]);
     fra.me.REG[3] = CALL_metamodel___abstractmetamodel___MMLocalClass___global(fra.me.REG[3])(fra.me.REG[3]);
@@ -1547,7 +1634,7 @@ val_t metamodel___genericity___MMTypeFormalParameter___for_module(val_t p0, val_
     fra.me.REG[3] = CALL_metamodel___genericity___MMLocalClass___get_formal(fra.me.REG[3])(fra.me.REG[3], REGB0);
     fra.me.REG[2] = fra.me.REG[3];
   }
-  /* metamodel/genericity.nit:212 */
+  /* metamodel/genericity.nit:220 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -1560,7 +1647,7 @@ val_t metamodel___genericity___MMTypeFormalParameter___upcast_for(val_t p0, val_
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_metamodel___genericity;
-  fra.me.line = 215;
+  fra.me.line = 223;
   fra.me.meth = LOCATE_metamodel___genericity___MMTypeFormalParameter___upcast_for;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1569,11 +1656,11 @@ val_t metamodel___genericity___MMTypeFormalParameter___upcast_for(val_t p0, val_
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* metamodel/genericity.nit:215 */
+  /* metamodel/genericity.nit:223 */
   fra.me.REG[0] = ATTR_metamodel___type_formal___MMTypeFormal____bound(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_metamodel___genericity, 215);
+    nit_abort("Reciever is null", NULL, LOCATE_metamodel___genericity, 223);
   }
   fra.me.REG[1] = CALL_metamodel___static_type___MMType___upcast_for(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   goto label1;
@@ -1589,7 +1676,7 @@ void metamodel___genericity___MMTypeFormalParameter___bound__eq(val_t p0, val_t 
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_metamodel___genericity;
-  fra.me.line = 217;
+  fra.me.line = 225;
   fra.me.meth = LOCATE_metamodel___genericity___MMTypeFormalParameter___bound__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -1599,7 +1686,7 @@ void metamodel___genericity___MMTypeFormalParameter___bound__eq(val_t p0, val_t 
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* metamodel/genericity.nit:219 */
+  /* metamodel/genericity.nit:227 */
   fra.me.REG[2] = ATTR_metamodel___type_formal___MMTypeFormal____bound(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -1615,9 +1702,9 @@ void metamodel___genericity___MMTypeFormalParameter___bound__eq(val_t p0, val_t 
   }
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Assert failed", NULL, LOCATE_metamodel___genericity, 219);
+    nit_abort("Assert failed", NULL, LOCATE_metamodel___genericity, 227);
   }
-  /* metamodel/genericity.nit:220 */
+  /* metamodel/genericity.nit:228 */
   ATTR_metamodel___type_formal___MMTypeFormal____bound(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;
@@ -1631,7 +1718,7 @@ val_t metamodel___genericity___MMTypeFormalParameter___adapt_to(val_t p0, val_t 
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_metamodel___genericity;
-  fra.me.line = 223;
+  fra.me.line = 231;
   fra.me.meth = LOCATE_metamodel___genericity___MMTypeFormalParameter___adapt_to;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -1641,19 +1728,19 @@ val_t metamodel___genericity___MMTypeFormalParameter___adapt_to(val_t p0, val_t 
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* metamodel/genericity.nit:225 */
+  /* metamodel/genericity.nit:233 */
   fra.me.REG[2] = CALL_metamodel___type_formal___MMType___direct_type(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[1] = fra.me.REG[2];
-  /* metamodel/genericity.nit:226 */
+  /* metamodel/genericity.nit:234 */
   fra.me.REG[2] = CALL_metamodel___genericity___MMTypeFormalParameter___def_class(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[2] = CALL_metamodel___static_type___MMType___upcast_for(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-  /* metamodel/genericity.nit:231 */
+  /* metamodel/genericity.nit:239 */
   REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[2], COLOR_metamodel___genericity___MMTypeGeneric, ID_metamodel___genericity___MMTypeGeneric)) /*cast MMTypeGeneric*/;
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Assert failed", NULL, LOCATE_metamodel___genericity, 231);
+    nit_abort("Assert failed", NULL, LOCATE_metamodel___genericity, 239);
   }
-  /* metamodel/genericity.nit:232 */
+  /* metamodel/genericity.nit:240 */
   fra.me.REG[2] = CALL_metamodel___genericity___MMTypeGeneric___params(fra.me.REG[2])(fra.me.REG[2]);
   REGB0 = CALL_metamodel___genericity___MMTypeFormalParameter___position(fra.me.REG[0])(fra.me.REG[0]);
   /* ../lib/standard/collection/array.nit:280 */
@@ -1695,12 +1782,12 @@ val_t metamodel___genericity___MMTypeFormalParameter___adapt_to(val_t p0, val_t 
   if (UNTAG_Bool(REGB1)) {
     nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
   }
-  /* ../lib/standard/collection/array.nit:718 */
+  /* ../lib/standard/collection/array.nit:724 */
   fra.me.REG[2] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB0)];
   /* ../lib/standard/collection/array.nit:281 */
   goto label1;
   label1: while(0);
-  /* metamodel/genericity.nit:233 */
+  /* metamodel/genericity.nit:241 */
   goto label2;
   label2: while(0);
   stack_frame_head = fra.me.prev;
@@ -1715,7 +1802,7 @@ void metamodel___genericity___MMTypeFormalParameter___with_bound(val_t p0, val_t
   if (init_table[itpos1]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_metamodel___genericity;
-  fra.me.line = 236;
+  fra.me.line = 244;
   fra.me.meth = LOCATE_metamodel___genericity___MMTypeFormalParameter___with_bound;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -1729,9 +1816,9 @@ void metamodel___genericity___MMTypeFormalParameter___with_bound(val_t p0, val_t
   REGB0 = p2;
   fra.me.REG[2] = p3;
   fra.me.REG[3] = p4;
-  /* metamodel/genericity.nit:238 */
+  /* metamodel/genericity.nit:246 */
   CALL_metamodel___genericity___MMTypeFormalParameter___init(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], REGB0, fra.me.REG[2], init_table);
-  /* metamodel/genericity.nit:239 */
+  /* metamodel/genericity.nit:247 */
   ATTR_metamodel___type_formal___MMTypeFormal____bound(fra.me.REG[0]) = fra.me.REG[3];
   stack_frame_head = fra.me.prev;
   init_table[itpos1] = 1;
@@ -1746,7 +1833,7 @@ void metamodel___genericity___MMTypeFormalParameter___init(val_t p0, val_t p1, v
   if (init_table[itpos2]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_metamodel___genericity;
-  fra.me.line = 242;
+  fra.me.line = 250;
   fra.me.meth = LOCATE_metamodel___genericity___MMTypeFormalParameter___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -1759,13 +1846,13 @@ void metamodel___genericity___MMTypeFormalParameter___init(val_t p0, val_t p1, v
   fra.me.REG[1] = p1;
   REGB0 = p2;
   fra.me.REG[2] = p3;
-  /* metamodel/genericity.nit:242 */
+  /* metamodel/genericity.nit:250 */
   fra.me.REG[3] = fra.me.REG[0];
-  /* metamodel/genericity.nit:244 */
+  /* metamodel/genericity.nit:252 */
   CALL_metamodel___type_formal___MMTypeFormal___init(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], NIT_NULL, init_table);
-  /* metamodel/genericity.nit:245 */
+  /* metamodel/genericity.nit:253 */
   ATTR_metamodel___genericity___MMTypeFormalParameter____position(fra.me.REG[3]) = REGB0;
-  /* metamodel/genericity.nit:246 */
+  /* metamodel/genericity.nit:254 */
   ATTR_metamodel___genericity___MMTypeFormalParameter____def_class(fra.me.REG[3]) = fra.me.REG[2];
   stack_frame_head = fra.me.prev;
   init_table[itpos2] = 1;
@@ -1778,14 +1865,14 @@ val_t metamodel___genericity___MMTypeNone___is_generic(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_metamodel___genericity;
-  fra.me.line = 251;
+  fra.me.line = 259;
   fra.me.meth = LOCATE_metamodel___genericity___MMTypeNone___is_generic;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* metamodel/genericity.nit:251 */
+  /* metamodel/genericity.nit:259 */
   REGB0 = TAG_Bool(0);
   goto label1;
   label1: while(0);
@@ -1798,7 +1885,7 @@ val_t metamodel___genericity___MMTypeNone___for_module(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_metamodel___genericity;
-  fra.me.line = 252;
+  fra.me.line = 260;
   fra.me.meth = LOCATE_metamodel___genericity___MMTypeNone___for_module;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1807,7 +1894,7 @@ val_t metamodel___genericity___MMTypeNone___for_module(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* metamodel/genericity.nit:252 */
+  /* metamodel/genericity.nit:260 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -1819,7 +1906,7 @@ val_t metamodel___genericity___MMTypeNone___adapt_to(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_metamodel___genericity;
-  fra.me.line = 253;
+  fra.me.line = 261;
   fra.me.meth = LOCATE_metamodel___genericity___MMTypeNone___adapt_to;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1828,7 +1915,7 @@ val_t metamodel___genericity___MMTypeNone___adapt_to(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* metamodel/genericity.nit:253 */
+  /* metamodel/genericity.nit:261 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;

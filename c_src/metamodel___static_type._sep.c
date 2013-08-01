@@ -602,7 +602,7 @@ val_t metamodel___static_type___MMSignature___closure_named(val_t p0, val_t p1){
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB0)];
       /* metamodel/static_type.nit:101 */
       fra.me.REG[4] = CALL_metamodel___static_type___MMClosure___name(fra.me.REG[3])(fra.me.REG[3]);
@@ -960,7 +960,7 @@ val_t metamodel___static_type___MMSignature_____l(val_t p0, val_t p1){
       if (UNTAG_Bool(REGB5)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[4] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB2)];
       /* ../lib/standard/collection/array.nit:281 */
       goto label3;
@@ -1006,7 +1006,7 @@ val_t metamodel___static_type___MMSignature_____l(val_t p0, val_t p1){
       if (UNTAG_Bool(REGB2)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB3)];
       /* ../lib/standard/collection/array.nit:281 */
       goto label4;
@@ -1133,7 +1133,7 @@ val_t metamodel___static_type___MMSignature_____bra(val_t p0, val_t p1){
   if (UNTAG_Bool(REGB1)) {
     nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
   }
-  /* ../lib/standard/collection/array.nit:718 */
+  /* ../lib/standard/collection/array.nit:724 */
   fra.me.REG[0] = ((Nit_NativeArray)fra.me.REG[0])->val[UNTAG_Int(REGB0)];
   /* ../lib/standard/collection/array.nit:281 */
   goto label1;
@@ -1293,7 +1293,7 @@ val_t metamodel___static_type___MMSignature___to_s(val_t p0){
         if (UNTAG_Bool(REGB3)) {
           nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
         }
-        /* ../lib/standard/collection/array.nit:718 */
+        /* ../lib/standard/collection/array.nit:724 */
         fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB2)];
         /* ../lib/standard/collection/array.nit:281 */
         goto label1;
@@ -1485,7 +1485,7 @@ val_t metamodel___static_type___MMSignature___adaptation_to(val_t p0, val_t p1){
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[7] = ((Nit_NativeArray)fra.me.REG[6])->val[UNTAG_Int(REGB0)];
       /* metamodel/static_type.nit:172 */
       fra.me.REG[8] = CALL_metamodel___static_type___MMParam___mmtype(fra.me.REG[7])(fra.me.REG[7]);
@@ -1591,7 +1591,7 @@ val_t metamodel___static_type___MMSignature___adaptation_to(val_t p0, val_t p1){
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB0)];
       /* metamodel/static_type.nit:188 */
       fra.me.REG[5] = CALL_metamodel___static_type___MMSignature___closures(fra.me.REG[6])(fra.me.REG[6]);
@@ -1712,7 +1712,7 @@ val_t metamodel___static_type___MMSignature___not_for_self(val_t p0){
       if (UNTAG_Bool(REGB2)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[5] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB1)];
       /* metamodel/static_type.nit:204 */
       fra.me.REG[6] = CALL_metamodel___static_type___MMParam___mmtype(fra.me.REG[5])(fra.me.REG[5]);
@@ -1838,7 +1838,7 @@ val_t metamodel___static_type___MMSignature___not_for_self(val_t p0){
       if (UNTAG_Bool(REGB2)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[6] = ((Nit_NativeArray)fra.me.REG[5])->val[UNTAG_Int(REGB1)];
       /* metamodel/static_type.nit:224 */
       fra.me.REG[8] = CALL_metamodel___static_type___MMClosure___not_for_self(fra.me.REG[6])(fra.me.REG[6]);
@@ -2818,6 +2818,30 @@ void metamodel___static_type___MMType___init(val_t p0, int* init_table){
   stack_frame_head = fra.me.prev;
   init_table[itpos5] = 1;
   return;
+}
+static const char LOCATE_metamodel___static_type___MMNullableType___base_type[] = "static_type::MMNullableType::base_type";
+val_t metamodel___static_type___MMNullableType___base_type(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_metamodel___static_type;
+  fra.me.line = 420;
+  fra.me.meth = LOCATE_metamodel___static_type___MMNullableType___base_type;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* metamodel/static_type.nit:420 */
+  REGB0 = TAG_Bool(ATTR_metamodel___static_type___MMNullableType____base_type(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_base_type", LOCATE_metamodel___static_type, 420);
+  }
+  fra.me.REG[0] = ATTR_metamodel___static_type___MMNullableType____base_type(fra.me.REG[0]);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[0];
 }
 static const char LOCATE_metamodel___static_type___MMNullableType___is_valid[] = "static_type::MMNullableType::(static_type::MMType::is_valid)";
 val_t metamodel___static_type___MMNullableType___is_valid(val_t p0){

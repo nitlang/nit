@@ -178,7 +178,7 @@ void standard___collection___sorter___AbstractSorter___quick_sort(val_t p0, val_
   if (UNTAG_Bool(REGB3)) {
     nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
   }
-  /* ../lib/standard/collection/array.nit:718 */
+  /* ../lib/standard/collection/array.nit:724 */
   fra.me.REG[2] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB2)];
   /* ../lib/standard/collection/array.nit:281 */
   goto label1;
@@ -251,7 +251,7 @@ void standard___collection___sorter___AbstractSorter___quick_sort(val_t p0, val_
           if (UNTAG_Bool(REGB5)) {
             nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
           }
-          /* ../lib/standard/collection/array.nit:718 */
+          /* ../lib/standard/collection/array.nit:724 */
           fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB4)];
           /* ../lib/standard/collection/array.nit:281 */
           goto label2;
@@ -335,7 +335,7 @@ void standard___collection___sorter___AbstractSorter___quick_sort(val_t p0, val_
           if (UNTAG_Bool(REGB4)) {
             nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
           }
-          /* ../lib/standard/collection/array.nit:718 */
+          /* ../lib/standard/collection/array.nit:724 */
           fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB5)];
           /* ../lib/standard/collection/array.nit:281 */
           goto label4;
@@ -417,7 +417,7 @@ void standard___collection___sorter___AbstractSorter___quick_sort(val_t p0, val_
         if (UNTAG_Bool(REGB5)) {
           nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
         }
-        /* ../lib/standard/collection/array.nit:718 */
+        /* ../lib/standard/collection/array.nit:724 */
         fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB4)];
         /* ../lib/standard/collection/array.nit:281 */
         goto label6;
@@ -464,7 +464,7 @@ void standard___collection___sorter___AbstractSorter___quick_sort(val_t p0, val_
         if (UNTAG_Bool(REGB5)) {
           nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
         }
-        /* ../lib/standard/collection/array.nit:718 */
+        /* ../lib/standard/collection/array.nit:724 */
         fra.me.REG[4] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB4)];
         /* ../lib/standard/collection/array.nit:281 */
         goto label7;
@@ -525,7 +525,7 @@ void standard___collection___sorter___AbstractSorter___quick_sort(val_t p0, val_
   if (UNTAG_Bool(REGB4)) {
     nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
   }
-  /* ../lib/standard/collection/array.nit:718 */
+  /* ../lib/standard/collection/array.nit:724 */
   fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB3)];
   /* ../lib/standard/collection/array.nit:281 */
   goto label9;
@@ -630,7 +630,7 @@ void standard___collection___sorter___AbstractSorter___bubble_sort(val_t p0, val
       if (UNTAG_Bool(REGB4)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[2] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB3)];
       /* ../lib/standard/collection/array.nit:281 */
       goto label1;
@@ -690,7 +690,7 @@ void standard___collection___sorter___AbstractSorter___bubble_sort(val_t p0, val
           if (UNTAG_Bool(REGB5)) {
             nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
           }
-          /* ../lib/standard/collection/array.nit:718 */
+          /* ../lib/standard/collection/array.nit:724 */
           fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB4)];
           /* ../lib/standard/collection/array.nit:281 */
           goto label2;
@@ -751,7 +751,7 @@ void standard___collection___sorter___AbstractSorter___bubble_sort(val_t p0, val
             if (UNTAG_Bool(REGB4)) {
               nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
             }
-            /* ../lib/standard/collection/array.nit:718 */
+            /* ../lib/standard/collection/array.nit:724 */
             fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB5)];
             /* ../lib/standard/collection/array.nit:281 */
             goto label3;
@@ -824,7 +824,7 @@ void standard___collection___sorter___AbstractSorter___bubble_sort(val_t p0, val
         if (UNTAG_Bool(REGB5)) {
           nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
         }
-        /* ../lib/standard/collection/array.nit:718 */
+        /* ../lib/standard/collection/array.nit:724 */
         fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB3)];
         /* ../lib/standard/collection/array.nit:281 */
         goto label5;

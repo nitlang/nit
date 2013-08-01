@@ -239,7 +239,7 @@ void program___Program___finish_processing_classes(val_t p0){
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[2] = ((Nit_NativeArray)fra.me.REG[0])->val[UNTAG_Int(REGB0)];
       /* program.nit:62 */
       CALL_metamodel___inheritance___MMLocalClass___compute_ancestors(fra.me.REG[2])(fra.me.REG[2]);
@@ -358,14 +358,14 @@ void program___Program___compute_main_method(val_t p0){
 }
 static const char LOCATE_program___Program___generate_allocation_iroutines[] = "program::Program::generate_allocation_iroutines";
 void program___Program___generate_allocation_iroutines(val_t p0){
-  struct {struct stack_frame_t me; val_t MORE_REG[5];} fra;
+  struct {struct stack_frame_t me; val_t MORE_REG[6];} fra;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_program;
   fra.me.line = 80;
   fra.me.meth = LOCATE_program___Program___generate_allocation_iroutines;
   fra.me.has_broke = 0;
-  fra.me.REG_size = 6;
+  fra.me.REG_size = 7;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
@@ -373,6 +373,7 @@ void program___Program___generate_allocation_iroutines(val_t p0){
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[4] = NIT_NULL;
   fra.me.REG[5] = NIT_NULL;
+  fra.me.REG[6] = NIT_NULL;
   fra.me.REG[0] = p0;
   /* program.nit:80 */
   fra.me.REG[1] = fra.me.REG[0];
@@ -384,9 +385,10 @@ void program___Program___generate_allocation_iroutines(val_t p0){
   return;
 }
   void OC_program___Program___generate_allocation_iroutines_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0){
-    struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
+    struct {struct stack_frame_t me; val_t MORE_REG[3];} fra;
     val_t REGB0;
     val_t REGB1;
+    val_t REGB2;
     fun_t CREG[1];
     val_t tmp;
     fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
@@ -394,10 +396,12 @@ void program___Program___generate_allocation_iroutines(val_t p0){
     fra.me.line = 0;
     fra.me.meth = LOCATE_program___Program___generate_allocation_iroutines;
     fra.me.has_broke = 0;
-    fra.me.REG_size = 2;
+    fra.me.REG_size = 4;
     fra.me.nitni_local_ref_head = NULL;
     fra.me.REG[0] = NIT_NULL;
     fra.me.REG[1] = NIT_NULL;
+    fra.me.REG[2] = NIT_NULL;
+    fra.me.REG[3] = NIT_NULL;
     fra.me.closure_ctx = closctx_param;
     fra.me.closure_funs = CREG;
     fra.me.REG[0] = p0;
@@ -448,38 +452,189 @@ void program___Program___generate_allocation_iroutines(val_t p0){
       fra.me.REG[1] = NEW_ICodeBuilder_icode___icode_builder___ICodeBuilder___init(fra.me.REG[1], fra.me.REG[0]);
       closctx->REG[5] = fra.me.REG[1];
       /* program.nit:94 */
-      fra.me.REG[1] = CALL_metamodel___abstractmetamodel___MMLocalClass___global_properties(closctx->REG[2])(closctx->REG[2]);
-      CALL_standard___collection___abstract_collection___Collection___iterate(fra.me.REG[1])(fra.me.REG[1], closctx, ((fun_t)OC_program___Program___generate_allocation_iroutines_3));
-      /* program.nit:107 */
+      fra.me.REG[1] = CALL_metamodel___abstractmetamodel___MMLocalClass___che(closctx->REG[2])(closctx->REG[2]);
+      fra.me.REG[1] = CALL_metamodel___partial_order___PartialOrderElement___linear_extension(fra.me.REG[1])(fra.me.REG[1]);
+      fra.me.REG[1] = CALL_standard___collection___array___AbstractArrayRead___reversed(fra.me.REG[1])(fra.me.REG[1]);
+      /* ../lib/standard/collection/array.nit:269 */
+      REGB0 = TAG_Int(0);
+      /* ../lib/standard/collection/array.nit:270 */
+      REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1])!=NIT_NULL);
+      if (UNTAG_Bool(REGB1)) {
+      } else {
+        nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 270);
+      }
+      REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1]);
+      /* ../lib/standard/collection/array.nit:271 */
+      fra.me.REG[2] = ATTR_standard___collection___array___Array____items(fra.me.REG[1]);
+      /* ../lib/standard/collection/array.nit:272 */
+      while(1) {
+        /* ../lib/standard/collection/array.nit:24 */
+        REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1])!=NIT_NULL);
+        if (UNTAG_Bool(REGB1)) {
+        } else {
+          nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
+        }
+        REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1]);
+        REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
+        if (UNTAG_Bool(REGB2)) {
+        } else {
+          nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
+        }
+        /* ../lib/standard/kernel.nit:235 */
+        REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
+        /* ../lib/standard/collection/array.nit:272 */
+        if (UNTAG_Bool(REGB1)) {
+          /* ../lib/standard/collection/array.nit:273 */
+          REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
+          if (UNTAG_Bool(REGB1)) {
+            nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
+          }
+          /* ../lib/standard/collection/array.nit:724 */
+          fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB0)];
+          /* program.nit:94 */
+          closctx->REG[6] = fra.me.REG[3];
+          /* program.nit:95 */
+          fra.me.REG[3] = CALL_metamodel___abstractmetamodel___MMLocalClass___global_properties(closctx->REG[6])(closctx->REG[6]);
+          CALL_standard___collection___abstract_collection___Collection___iterate(fra.me.REG[3])(fra.me.REG[3], closctx, ((fun_t)OC_program___Program___generate_allocation_iroutines_3));
+          /* ../lib/standard/collection/array.nit:274 */
+          REGB1 = TAG_Int(1);
+          /* ../lib/standard/kernel.nit:238 */
+          REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
+          /* ../lib/standard/collection/array.nit:274 */
+          REGB0 = REGB1;
+        } else {
+          /* ../lib/standard/collection/array.nit:272 */
+          goto label5;
+        }
+      }
+      label5: while(0);
+      /* program.nit:110 */
       CALL_program___MMLocalClass___init_var_iroutine__eq(closctx->REG[2])(closctx->REG[2], fra.me.REG[0]);
-      /* program.nit:111 */
+      /* program.nit:114 */
       fra.me.REG[0] = CALL_metamodel___static_type___MMLocalClass___get_type(closctx->REG[2])(closctx->REG[2]);
       fra.me.REG[0] = NEW_IRegister_icode___icode_base___IRegister___init(fra.me.REG[0]);
       closctx->REG[5] = fra.me.REG[0];
-      /* program.nit:112 */
+      /* program.nit:115 */
       REGB0 = TAG_Int(1);
       fra.me.REG[0] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
       CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], closctx->REG[5]);
-      /* program.nit:113 */
+      /* program.nit:116 */
       fra.me.REG[0] = NEW_IRoutine_icode___icode_base___IRoutine___init(fra.me.REG[0], NIT_NULL);
-      /* program.nit:114 */
-      fra.me.REG[1] = CALL_program___Program___main_module(closctx->REG[1])(closctx->REG[1]);
-      fra.me.REG[1] = NEW_ICodeBuilder_icode___icode_builder___ICodeBuilder___init(fra.me.REG[1], fra.me.REG[0]);
-      closctx->REG[3] = fra.me.REG[1];
-      /* program.nit:115 */
-      fra.me.REG[1] = CALL_metamodel___abstractmetamodel___MMLocalClass___global_properties(closctx->REG[2])(closctx->REG[2]);
-      CALL_standard___collection___abstract_collection___Collection___iterate(fra.me.REG[1])(fra.me.REG[1], closctx, ((fun_t)OC_program___Program___generate_allocation_iroutines_5));
-      /* program.nit:124 */
-      CALL_program___MMLocalClass___checknew_iroutine__eq(closctx->REG[2])(closctx->REG[2], fra.me.REG[0]);
+      /* program.nit:117 */
+      fra.me.REG[2] = CALL_program___Program___main_module(closctx->REG[1])(closctx->REG[1]);
+      fra.me.REG[2] = NEW_ICodeBuilder_icode___icode_builder___ICodeBuilder___init(fra.me.REG[2], fra.me.REG[0]);
+      closctx->REG[3] = fra.me.REG[2];
+      /* program.nit:118 */
+      fra.me.REG[2] = CALL_metamodel___abstractmetamodel___MMLocalClass___global_properties(closctx->REG[2])(closctx->REG[2]);
+      CALL_standard___collection___abstract_collection___Collection___iterate(fra.me.REG[2])(fra.me.REG[2], closctx, ((fun_t)OC_program___Program___generate_allocation_iroutines_6));
       /* program.nit:127 */
+      CALL_program___MMLocalClass___checknew_iroutine__eq(closctx->REG[2])(closctx->REG[2], fra.me.REG[0]);
+      /* program.nit:130 */
       fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMLocalClass___global_properties(closctx->REG[2])(closctx->REG[2]);
-      CALL_standard___collection___abstract_collection___Collection___iterate(fra.me.REG[0])(fra.me.REG[0], closctx, ((fun_t)OC_program___Program___generate_allocation_iroutines_7));
+      CALL_standard___collection___abstract_collection___Collection___iterate(fra.me.REG[0])(fra.me.REG[0], closctx, ((fun_t)OC_program___Program___generate_allocation_iroutines_8));
     }
     label2: while(0);
     stack_frame_head = fra.me.prev;
     return;
   }
-      void OC_program___Program___generate_allocation_iroutines_3(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0){
+          void OC_program___Program___generate_allocation_iroutines_3(struct stack_frame_t *closctx, val_t p0){
+            struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
+            val_t REGB0;
+            val_t REGB1;
+            val_t tmp;
+            fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+            fra.me.file = LOCATE_program;
+            fra.me.line = 0;
+            fra.me.meth = LOCATE_program___Program___generate_allocation_iroutines;
+            fra.me.has_broke = 0;
+            fra.me.REG_size = 2;
+            fra.me.nitni_local_ref_head = NULL;
+            fra.me.REG[0] = NIT_NULL;
+            fra.me.REG[1] = NIT_NULL;
+            fra.me.REG[0] = p0;
+            /* program.nit:96 */
+            fra.me.REG[1] = CALL_metamodel___abstractmetamodel___MMGlobalProperty___local_class(fra.me.REG[0])(fra.me.REG[0]);
+            REGB0 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[1],closctx->REG[6]));
+            if (UNTAG_Bool(REGB0)) {
+            } else {
+              REGB1 = CALL_standard___kernel___Object_____eqeq(fra.me.REG[1])(fra.me.REG[1], closctx->REG[6]);
+              REGB0 = REGB1;
+            }
+            REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
+            if (UNTAG_Bool(REGB0)) {
+              goto label4;
+            }
+            /* program.nit:97 */
+            fra.me.REG[1] = CALL_metamodel___abstractmetamodel___MMGlobalProperty___intro(fra.me.REG[0])(fra.me.REG[0]);
+            REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[1], COLOR_metamodel___abstractmetamodel___MMAttribute, ID_metamodel___abstractmetamodel___MMAttribute)) /*cast MMAttribute*/;
+            REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
+            if (UNTAG_Bool(REGB0)) {
+              goto label4;
+            }
+            /* program.nit:98 */
+            fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMLocalClass_____bra(closctx->REG[2])(closctx->REG[2], fra.me.REG[0]);
+            /* program.nit:99 */
+            fra.me.REG[1] = CALL_metamodel___static_type___MMLocalProperty___signature(fra.me.REG[0])(fra.me.REG[0]);
+            REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
+            if (UNTAG_Bool(REGB0)) {
+              nit_abort("Reciever is null", NULL, LOCATE_program, 99);
+            }
+            fra.me.REG[1] = CALL_metamodel___static_type___MMSignature___return_type(fra.me.REG[1])(fra.me.REG[1]);
+            /* program.nit:100 */
+            REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[0], COLOR_metamodel___abstractmetamodel___MMAttribute, ID_metamodel___abstractmetamodel___MMAttribute)) /*cast MMAttribute*/;
+            if (UNTAG_Bool(REGB0)) {
+              REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
+              if (UNTAG_Bool(REGB0)) {
+              } else {
+		REGB1 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
+		if (UNTAG_Bool(REGB1)) {
+		REGB1 = TAG_Bool(0);
+		REGB0 = REGB1;
+		} else {
+		REGB1 = CALL_standard___kernel___Object_____eqeq(fra.me.REG[1])(fra.me.REG[1], NIT_NULL);
+		REGB0 = REGB1;
+		}
+              }
+              REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
+            } else {
+              REGB1 = TAG_Bool(0);
+              REGB0 = REGB1;
+            }
+            if (UNTAG_Bool(REGB0)) {
+              /* program.nit:101 */
+              fra.me.REG[1] = CALL_icode___icode_base___MMAttribute___iroutine(fra.me.REG[0])(fra.me.REG[0]);
+              /* program.nit:102 */
+              REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
+              if (UNTAG_Bool(REGB0)) {
+              } else {
+		REGB1 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
+		if (UNTAG_Bool(REGB1)) {
+		REGB1 = TAG_Bool(0);
+		REGB0 = REGB1;
+		} else {
+		REGB1 = CALL_standard___kernel___Object_____eqeq(fra.me.REG[1])(fra.me.REG[1], NIT_NULL);
+		REGB0 = REGB1;
+		}
+              }
+              if (UNTAG_Bool(REGB0)) {
+		goto label4;
+              }
+              /* program.nit:104 */
+              fra.me.REG[1] = CALL_icode___icode_tools___ICodeBuilder___inline_routine(closctx->REG[5])(closctx->REG[5], fra.me.REG[1], closctx->REG[4], NIT_NULL);
+              REGB0 = TAG_Bool((fra.me.REG[1]!=NIT_NULL) && VAL_ISA(fra.me.REG[1], COLOR_icode___icode_base___IRegister, ID_icode___icode_base___IRegister)) /*cast IRegister*/;
+              if (UNTAG_Bool(REGB0)) {
+              } else {
+		nit_abort("Cast failed", NULL, LOCATE_program, 104);
+              }
+              /* program.nit:105 */
+              fra.me.REG[1] = NEW_IAttrWrite_icode___icode_base___IAttrWrite___init(fra.me.REG[0], closctx->REG[3], fra.me.REG[1]);
+              CALL_icode___icode_builder___ICodeBuilder___stmt(closctx->REG[5])(closctx->REG[5], fra.me.REG[1]);
+            }
+            label4: while(0);
+            stack_frame_head = fra.me.prev;
+            return;
+          }
+      void OC_program___Program___generate_allocation_iroutines_6(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0){
         struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
         val_t REGB0;
         val_t REGB1;
@@ -498,112 +653,23 @@ void program___Program___generate_allocation_iroutines(val_t p0){
         fra.me.closure_funs = CREG;
         fra.me.REG[0] = p0;
         CREG[0] = clos_fun0;
-        /* program.nit:95 */
-        fra.me.REG[1] = CALL_metamodel___abstractmetamodel___MMGlobalProperty___intro(fra.me.REG[0])(fra.me.REG[0]);
-        REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[1], COLOR_metamodel___abstractmetamodel___MMAttribute, ID_metamodel___abstractmetamodel___MMAttribute)) /*cast MMAttribute*/;
-        REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
-        if (UNTAG_Bool(REGB0)) {
-          goto label4;
-        }
-        /* program.nit:96 */
-        fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMLocalClass_____bra(closctx->REG[2])(closctx->REG[2], fra.me.REG[0]);
-        /* program.nit:97 */
-        fra.me.REG[1] = CALL_metamodel___static_type___MMLocalProperty___signature(fra.me.REG[0])(fra.me.REG[0]);
-        REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
-        if (UNTAG_Bool(REGB0)) {
-          nit_abort("Reciever is null", NULL, LOCATE_program, 97);
-        }
-        fra.me.REG[1] = CALL_metamodel___static_type___MMSignature___return_type(fra.me.REG[1])(fra.me.REG[1]);
-        /* program.nit:98 */
-        REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[0], COLOR_metamodel___abstractmetamodel___MMAttribute, ID_metamodel___abstractmetamodel___MMAttribute)) /*cast MMAttribute*/;
-        if (UNTAG_Bool(REGB0)) {
-          REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
-          if (UNTAG_Bool(REGB0)) {
-          } else {
-            REGB1 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
-            if (UNTAG_Bool(REGB1)) {
-              REGB1 = TAG_Bool(0);
-              REGB0 = REGB1;
-            } else {
-              REGB1 = CALL_standard___kernel___Object_____eqeq(fra.me.REG[1])(fra.me.REG[1], NIT_NULL);
-              REGB0 = REGB1;
-            }
-          }
-          REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
-        } else {
-          REGB1 = TAG_Bool(0);
-          REGB0 = REGB1;
-        }
-        if (UNTAG_Bool(REGB0)) {
-          /* program.nit:99 */
-          fra.me.REG[1] = CALL_icode___icode_base___MMAttribute___iroutine(fra.me.REG[0])(fra.me.REG[0]);
-          /* program.nit:100 */
-          REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
-          if (UNTAG_Bool(REGB0)) {
-          } else {
-            REGB1 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
-            if (UNTAG_Bool(REGB1)) {
-              REGB1 = TAG_Bool(0);
-              REGB0 = REGB1;
-            } else {
-              REGB1 = CALL_standard___kernel___Object_____eqeq(fra.me.REG[1])(fra.me.REG[1], NIT_NULL);
-              REGB0 = REGB1;
-            }
-          }
-          if (UNTAG_Bool(REGB0)) {
-            goto label4;
-          }
-          /* program.nit:102 */
-          fra.me.REG[1] = CALL_icode___icode_tools___ICodeBuilder___inline_routine(closctx->REG[5])(closctx->REG[5], fra.me.REG[1], closctx->REG[4], NIT_NULL);
-          REGB0 = TAG_Bool((fra.me.REG[1]!=NIT_NULL) && VAL_ISA(fra.me.REG[1], COLOR_icode___icode_base___IRegister, ID_icode___icode_base___IRegister)) /*cast IRegister*/;
-          if (UNTAG_Bool(REGB0)) {
-          } else {
-            nit_abort("Cast failed", NULL, LOCATE_program, 102);
-          }
-          /* program.nit:103 */
-          fra.me.REG[1] = NEW_IAttrWrite_icode___icode_base___IAttrWrite___init(fra.me.REG[0], closctx->REG[3], fra.me.REG[1]);
-          CALL_icode___icode_builder___ICodeBuilder___stmt(closctx->REG[5])(closctx->REG[5], fra.me.REG[1]);
-        }
-        label4: while(0);
-        stack_frame_head = fra.me.prev;
-        return;
-      }
-      void OC_program___Program___generate_allocation_iroutines_5(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0){
-        struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
-        val_t REGB0;
-        val_t REGB1;
-        fun_t CREG[1];
-        val_t tmp;
-        fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
-        fra.me.file = LOCATE_program;
-        fra.me.line = 0;
-        fra.me.meth = LOCATE_program___Program___generate_allocation_iroutines;
-        fra.me.has_broke = 0;
-        fra.me.REG_size = 2;
-        fra.me.nitni_local_ref_head = NULL;
-        fra.me.REG[0] = NIT_NULL;
-        fra.me.REG[1] = NIT_NULL;
-        fra.me.closure_ctx = closctx_param;
-        fra.me.closure_funs = CREG;
-        fra.me.REG[0] = p0;
-        CREG[0] = clos_fun0;
-        /* program.nit:116 */
-        fra.me.REG[1] = CALL_metamodel___abstractmetamodel___MMGlobalProperty___intro(fra.me.REG[0])(fra.me.REG[0]);
-        REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[1], COLOR_metamodel___abstractmetamodel___MMAttribute, ID_metamodel___abstractmetamodel___MMAttribute)) /*cast MMAttribute*/;
-        REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
-        if (UNTAG_Bool(REGB0)) {
-          goto label6;
-        }
-        /* program.nit:117 */
-        fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMLocalClass_____bra(closctx->REG[2])(closctx->REG[2], fra.me.REG[0]);
-        /* program.nit:118 */
-        fra.me.REG[1] = CALL_metamodel___static_type___MMLocalProperty___signature(fra.me.REG[0])(fra.me.REG[0]);
-        REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
-        if (UNTAG_Bool(REGB0)) {
-          nit_abort("Reciever is null", NULL, LOCATE_program, 118);
-        }
-        fra.me.REG[1] = CALL_metamodel___static_type___MMSignature___return_type(fra.me.REG[1])(fra.me.REG[1]);
         /* program.nit:119 */
+        fra.me.REG[1] = CALL_metamodel___abstractmetamodel___MMGlobalProperty___intro(fra.me.REG[0])(fra.me.REG[0]);
+        REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[1], COLOR_metamodel___abstractmetamodel___MMAttribute, ID_metamodel___abstractmetamodel___MMAttribute)) /*cast MMAttribute*/;
+        REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
+        if (UNTAG_Bool(REGB0)) {
+          goto label7;
+        }
+        /* program.nit:120 */
+        fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMLocalClass_____bra(closctx->REG[2])(closctx->REG[2], fra.me.REG[0]);
+        /* program.nit:121 */
+        fra.me.REG[1] = CALL_metamodel___static_type___MMLocalProperty___signature(fra.me.REG[0])(fra.me.REG[0]);
+        REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
+        if (UNTAG_Bool(REGB0)) {
+          nit_abort("Reciever is null", NULL, LOCATE_program, 121);
+        }
+        fra.me.REG[1] = CALL_metamodel___static_type___MMSignature___return_type(fra.me.REG[1])(fra.me.REG[1]);
+        /* program.nit:122 */
         REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[0], COLOR_metamodel___abstractmetamodel___MMAttribute, ID_metamodel___abstractmetamodel___MMAttribute)) /*cast MMAttribute*/;
         if (UNTAG_Bool(REGB0)) {
           REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
@@ -626,7 +692,7 @@ void program___Program___generate_allocation_iroutines(val_t p0){
         if (UNTAG_Bool(REGB0)) {
           REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
           if (UNTAG_Bool(REGB0)) {
-            nit_abort("Reciever is null", NULL, LOCATE_program, 119);
+            nit_abort("Reciever is null", NULL, LOCATE_program, 122);
           }
           REGB0 = CALL_metamodel___static_type___MMType___is_nullable(fra.me.REG[1])(fra.me.REG[1]);
           REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
@@ -635,14 +701,14 @@ void program___Program___generate_allocation_iroutines(val_t p0){
           REGB0 = REGB1;
         }
         if (UNTAG_Bool(REGB0)) {
-          /* program.nit:120 */
+          /* program.nit:123 */
           CALL_icode___icode_builder___ICodeBuilder___add_attr_check(closctx->REG[3])(closctx->REG[3], fra.me.REG[0], closctx->REG[5]);
         }
-        label6: while(0);
+        label7: while(0);
         stack_frame_head = fra.me.prev;
         return;
       }
-      void OC_program___Program___generate_allocation_iroutines_7(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0){
+      void OC_program___Program___generate_allocation_iroutines_8(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0){
         struct {struct stack_frame_t me; val_t MORE_REG[5];} fra;
         val_t REGB0;
         val_t REGB1;
@@ -667,31 +733,31 @@ void program___Program___generate_allocation_iroutines(val_t p0){
         fra.me.closure_funs = CREG;
         fra.me.REG[0] = p0;
         CREG[0] = clos_fun0;
-        /* program.nit:129 */
+        /* program.nit:132 */
         REGB0 = CALL_metamodel___abstractmetamodel___MMGlobalProperty___is_init_for(fra.me.REG[0])(fra.me.REG[0], closctx->REG[2]);
         REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
         if (UNTAG_Bool(REGB0)) {
-          goto label8;
+          goto label9;
         }
-        /* program.nit:130 */
+        /* program.nit:133 */
         fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMLocalClass_____bra(closctx->REG[2])(closctx->REG[2], fra.me.REG[0]);
-        /* program.nit:131 */
+        /* program.nit:134 */
         REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[0], COLOR_metamodel___abstractmetamodel___MMMethod, ID_metamodel___abstractmetamodel___MMMethod)) /*cast MMMethod*/;
         if (UNTAG_Bool(REGB0)) {
         } else {
-          nit_abort("Assert failed", NULL, LOCATE_program, 131);
+          nit_abort("Assert failed", NULL, LOCATE_program, 134);
         }
-        /* program.nit:133 */
+        /* program.nit:136 */
         fra.me.REG[1] = CALL_metamodel___static_type___MMLocalClass___get_type(closctx->REG[2])(closctx->REG[2]);
         fra.me.REG[1] = NEW_IRegister_icode___icode_base___IRegister___init(fra.me.REG[1]);
-        /* program.nit:134 */
+        /* program.nit:137 */
         fra.me.REG[2] = NEW_Array_standard___collection___array___Array___init();
-        /* program.nit:135 */
+        /* program.nit:138 */
         REGB0 = TAG_Int(0);
         fra.me.REG[3] = CALL_metamodel___static_type___MMLocalProperty___signature(fra.me.REG[0])(fra.me.REG[0]);
         REGB1 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
         if (UNTAG_Bool(REGB1)) {
-          nit_abort("Reciever is null", NULL, LOCATE_program, 135);
+          nit_abort("Reciever is null", NULL, LOCATE_program, 138);
         }
         REGB1 = CALL_metamodel___static_type___MMSignature___arity(fra.me.REG[3])(fra.me.REG[3]);
         /* ../lib/standard/kernel.nit:355 */
@@ -705,12 +771,12 @@ void program___Program___generate_allocation_iroutines(val_t p0){
           REGB2 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
           /* ../lib/standard/kernel.nit:355 */
           if (UNTAG_Bool(REGB2)) {
-            /* program.nit:135 */
+            /* program.nit:138 */
             REGB2 = REGB0;
             fra.me.REG[3] = CALL_metamodel___static_type___MMLocalProperty___signature(fra.me.REG[0])(fra.me.REG[0]);
             REGB3 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
             if (UNTAG_Bool(REGB3)) {
-              nit_abort("Reciever is null", NULL, LOCATE_program, 135);
+              nit_abort("Reciever is null", NULL, LOCATE_program, 138);
             }
             fra.me.REG[3] = CALL_metamodel___static_type___MMSignature_____bra(fra.me.REG[3])(fra.me.REG[3], REGB2);
             fra.me.REG[3] = NEW_IRegister_icode___icode_base___IRegister___init(fra.me.REG[3]);
@@ -723,51 +789,51 @@ void program___Program___generate_allocation_iroutines(val_t p0){
             REGB0 = REGB2;
           } else {
             /* ../lib/standard/kernel.nit:355 */
-            goto label9;
+            goto label10;
           }
         }
-        label9: while(0);
-        /* program.nit:136 */
+        label10: while(0);
+        /* program.nit:139 */
         fra.me.REG[3] = NEW_IRoutine_icode___icode_base___IRoutine___init(fra.me.REG[2], fra.me.REG[1]);
-        /* program.nit:137 */
+        /* program.nit:140 */
         fra.me.REG[4] = CALL_icode___icode_base___MMMethod___iroutine(fra.me.REG[0])(fra.me.REG[0]);
         REGB0 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
         if (UNTAG_Bool(REGB0)) {
-          nit_abort("Reciever is null", NULL, LOCATE_program, 137);
+          nit_abort("Reciever is null", NULL, LOCATE_program, 140);
         }
         fra.me.REG[4] = CALL_icode___icode_base___IRoutine___location(fra.me.REG[4])(fra.me.REG[4]);
         CALL_icode___icode_base___IRoutine___location__eq(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[4]);
-        /* program.nit:138 */
+        /* program.nit:141 */
         fra.me.REG[4] = CALL_program___Program___main_module(closctx->REG[1])(closctx->REG[1]);
         fra.me.REG[4] = NEW_ICodeBuilder_icode___icode_builder___ICodeBuilder___init(fra.me.REG[4], fra.me.REG[3]);
-        /* program.nit:140 */
+        /* program.nit:143 */
         fra.me.REG[5] = CALL_metamodel___static_type___MMLocalClass___get_type(closctx->REG[2])(closctx->REG[2]);
         fra.me.REG[5] = NEW_IAllocateInstance_icode___icode_base___IAllocateInstance___init(fra.me.REG[5]);
-        /* program.nit:141 */
+        /* program.nit:144 */
         CALL_icode___icode_base___ICode___result__eq(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[1]);
-        /* program.nit:142 */
+        /* program.nit:145 */
         CALL_icode___icode_builder___ICodeBuilder___stmt(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[5]);
-        /* program.nit:143 */
+        /* program.nit:146 */
         REGB0 = TAG_Int(1);
         fra.me.REG[5] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
         CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[1]);
-        /* program.nit:144 */
+        /* program.nit:147 */
         CALL_standard___collection___abstract_collection___SimpleCollection___add_all(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[2]);
-        /* program.nit:146 */
+        /* program.nit:149 */
         fra.me.REG[2] = CALL_metamodel___static_type___MMLocalClass___get_type(closctx->REG[2])(closctx->REG[2]);
         fra.me.REG[2] = NEW_IInitAttributes_icode___icode_base___IInitAttributes___init(fra.me.REG[2], fra.me.REG[1]);
         CALL_icode___icode_builder___ICodeBuilder___stmt(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[2]);
-        /* program.nit:147 */
+        /* program.nit:150 */
         fra.me.REG[5] = NEW_IStaticCall_icode___icode_base___IStaticCall___init(fra.me.REG[0], fra.me.REG[5]);
         CALL_icode___icode_builder___ICodeBuilder___stmt(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[5]);
-        /* program.nit:148 */
+        /* program.nit:151 */
         fra.me.REG[5] = CALL_metamodel___static_type___MMLocalClass___get_type(closctx->REG[2])(closctx->REG[2]);
         fra.me.REG[1] = NEW_ICheckInstance_icode___icode_base___ICheckInstance___init(fra.me.REG[5], fra.me.REG[1]);
         CALL_icode___icode_builder___ICodeBuilder___stmt(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[1]);
-        /* program.nit:150 */
+        /* program.nit:153 */
         fra.me.REG[1] = CALL_program___MMLocalClass___new_instance_iroutine(closctx->REG[2])(closctx->REG[2]);
         CALL_standard___collection___abstract_collection___Map_____braeq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[3]);
-        label8: while(0);
+        label9: while(0);
         stack_frame_head = fra.me.prev;
         return;
       }
@@ -779,7 +845,7 @@ void program___Program___with_each_iroutines(val_t p0, struct stack_frame_t *clo
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_program;
-  fra.me.line = 156;
+  fra.me.line = 159;
   fra.me.meth = LOCATE_program___Program___with_each_iroutines;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -791,12 +857,12 @@ void program___Program___with_each_iroutines(val_t p0, struct stack_frame_t *clo
   fra.me.closure_funs = CREG;
   fra.me.REG[0] = p0;
   CREG[0] = clos_fun0;
-  /* program.nit:161 */
+  /* program.nit:164 */
   fra.me.REG[1] = CALL_program___Program___main_module(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[1] = CALL_metamodel___abstractmetamodel___MMModule___mhe(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_program, 161);
+    nit_abort("Reciever is null", NULL, LOCATE_program, 164);
   }
   fra.me.REG[1] = CALL_metamodel___partial_order___PartialOrderElement___greaters_and_self(fra.me.REG[1])(fra.me.REG[1]);
   CALL_standard___collection___abstract_collection___Collection___iterate(fra.me.REG[1])(fra.me.REG[1], (&(fra.me)), ((fun_t)OC_program___Program___with_each_iroutines_1));
@@ -825,7 +891,7 @@ void program___Program___with_each_iroutines(val_t p0, struct stack_frame_t *clo
     fra.me.REG[0] = p0;
     CREG[0] = clos_fun0;
     closctx->REG[1] = fra.me.REG[0];
-    /* program.nit:162 */
+    /* program.nit:165 */
     fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMModule___local_classes(closctx->REG[1])(closctx->REG[1]);
     CALL_standard___collection___abstract_collection___Collection___iterate(fra.me.REG[0])(fra.me.REG[0], closctx, ((fun_t)OC_program___Program___with_each_iroutines_2));
     switch (closctx->has_broke) {
@@ -855,19 +921,19 @@ void program___Program___with_each_iroutines(val_t p0, struct stack_frame_t *clo
       fra.me.closure_funs = CREG;
       fra.me.REG[0] = p0;
       CREG[0] = clos_fun0;
-      /* program.nit:163 */
-      closctx->REG[2] = NIT_NULL;
       /* program.nit:166 */
+      closctx->REG[2] = NIT_NULL;
+      /* program.nit:169 */
       fra.me.REG[1] = CALL_metamodel___abstractmetamodel___MMLocalClass___local_local_properties(fra.me.REG[0])(fra.me.REG[0]);
       CALL_standard___collection___abstract_collection___Collection___iterate(fra.me.REG[1])(fra.me.REG[1], closctx, ((fun_t)OC_program___Program___with_each_iroutines_3));
       switch (closctx->has_broke) {
         case 0: break;
         default: goto label5;
       }
-      /* program.nit:177 */
+      /* program.nit:180 */
       fra.me.REG[1] = CALL_program___MMLocalClass___init_var_iroutine(fra.me.REG[0])(fra.me.REG[0]);
       closctx->REG[2] = fra.me.REG[1];
-      /* program.nit:178 */
+      /* program.nit:181 */
       REGB0 = TAG_Bool(closctx->REG[2]==NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
       } else {
@@ -882,17 +948,17 @@ void program___Program___with_each_iroutines(val_t p0, struct stack_frame_t *clo
       }
       REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
       if (UNTAG_Bool(REGB0)) {
-        /* program.nit:179 */
+        /* program.nit:182 */
         ((void (*)(struct stack_frame_t *, val_t, val_t))(closctx->closure_funs[0]))(closctx->closure_ctx, closctx->REG[2], closctx->REG[1]);
         if (closctx->closure_ctx->has_broke) {
           closctx->has_broke = 1;
           goto label5;
         }
       }
-      /* program.nit:181 */
+      /* program.nit:184 */
       fra.me.REG[1] = CALL_program___MMLocalClass___checknew_iroutine(fra.me.REG[0])(fra.me.REG[0]);
       closctx->REG[2] = fra.me.REG[1];
-      /* program.nit:182 */
+      /* program.nit:185 */
       REGB0 = TAG_Bool(closctx->REG[2]==NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
       } else {
@@ -907,14 +973,14 @@ void program___Program___with_each_iroutines(val_t p0, struct stack_frame_t *clo
       }
       REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
       if (UNTAG_Bool(REGB0)) {
-        /* program.nit:183 */
+        /* program.nit:186 */
         ((void (*)(struct stack_frame_t *, val_t, val_t))(closctx->closure_funs[0]))(closctx->closure_ctx, closctx->REG[2], closctx->REG[1]);
         if (closctx->closure_ctx->has_broke) {
           closctx->has_broke = 1;
           goto label5;
         }
       }
-      /* program.nit:185 */
+      /* program.nit:188 */
       fra.me.REG[0] = CALL_program___MMLocalClass___new_instance_iroutine(fra.me.REG[0])(fra.me.REG[0]);
       fra.me.REG[0] = CALL_standard___collection___abstract_collection___MapRead___values(fra.me.REG[0])(fra.me.REG[0]);
       CALL_standard___collection___abstract_collection___Collection___iterate(fra.me.REG[0])(fra.me.REG[0], closctx, ((fun_t)OC_program___Program___with_each_iroutines_6));
@@ -945,22 +1011,22 @@ void program___Program___with_each_iroutines(val_t p0, struct stack_frame_t *clo
         fra.me.closure_funs = CREG;
         fra.me.REG[0] = p0;
         CREG[0] = clos_fun0;
-        /* program.nit:167 */
+        /* program.nit:170 */
         REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[0], COLOR_metamodel___abstractmetamodel___MMAttribute, ID_metamodel___abstractmetamodel___MMAttribute)) /*cast MMAttribute*/;
         if (UNTAG_Bool(REGB0)) {
-          /* program.nit:168 */
+          /* program.nit:171 */
           fra.me.REG[1] = CALL_icode___icode_base___MMAttribute___iroutine(fra.me.REG[0])(fra.me.REG[0]);
           closctx->REG[2] = fra.me.REG[1];
         } else {
-          /* program.nit:169 */
+          /* program.nit:172 */
           REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[0], COLOR_metamodel___abstractmetamodel___MMMethod, ID_metamodel___abstractmetamodel___MMMethod)) /*cast MMMethod*/;
           if (UNTAG_Bool(REGB0)) {
-            /* program.nit:170 */
+            /* program.nit:173 */
             fra.me.REG[0] = CALL_icode___icode_base___MMMethod___iroutine(fra.me.REG[0])(fra.me.REG[0]);
             closctx->REG[2] = fra.me.REG[0];
           }
         }
-        /* program.nit:172 */
+        /* program.nit:175 */
         REGB0 = TAG_Bool(closctx->REG[2]==NIT_NULL);
         if (UNTAG_Bool(REGB0)) {
         } else {
@@ -976,7 +1042,7 @@ void program___Program___with_each_iroutines(val_t p0, struct stack_frame_t *clo
         if (UNTAG_Bool(REGB0)) {
           goto label4;
         }
-        /* program.nit:173 */
+        /* program.nit:176 */
         ((void (*)(struct stack_frame_t *, val_t, val_t))(closctx->closure_funs[0]))(closctx->closure_ctx, closctx->REG[2], closctx->REG[1]);
         if (closctx->closure_ctx->has_broke) {
           closctx->has_broke = 1;
@@ -1002,7 +1068,7 @@ void program___Program___with_each_iroutines(val_t p0, struct stack_frame_t *clo
         fra.me.closure_funs = CREG;
         fra.me.REG[0] = p0;
         CREG[0] = clos_fun0;
-        /* program.nit:186 */
+        /* program.nit:189 */
         ((void (*)(struct stack_frame_t *, val_t, val_t))(closctx->closure_funs[0]))(closctx->closure_ctx, fra.me.REG[0], closctx->REG[1]);
         if (closctx->closure_ctx->has_broke) {
           closctx->has_broke = 1;
@@ -1020,7 +1086,7 @@ void program___Program___with_each_methods(val_t p0, struct stack_frame_t *closc
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_program;
-  fra.me.line = 192;
+  fra.me.line = 195;
   fra.me.meth = LOCATE_program___Program___with_each_methods;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1031,12 +1097,12 @@ void program___Program___with_each_methods(val_t p0, struct stack_frame_t *closc
   fra.me.closure_funs = CREG;
   fra.me.REG[0] = p0;
   CREG[0] = clos_fun0;
-  /* program.nit:197 */
+  /* program.nit:200 */
   fra.me.REG[1] = CALL_program___Program___main_module(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[1] = CALL_metamodel___abstractmetamodel___MMModule___mhe(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_program, 197);
+    nit_abort("Reciever is null", NULL, LOCATE_program, 200);
   }
   fra.me.REG[1] = CALL_metamodel___partial_order___PartialOrderElement___greaters_and_self(fra.me.REG[1])(fra.me.REG[1]);
   CALL_standard___collection___abstract_collection___Collection___iterate(fra.me.REG[1])(fra.me.REG[1], (&(fra.me)), ((fun_t)OC_program___Program___with_each_methods_1));
@@ -1064,7 +1130,7 @@ void program___Program___with_each_methods(val_t p0, struct stack_frame_t *closc
     fra.me.closure_funs = CREG;
     fra.me.REG[0] = p0;
     CREG[0] = clos_fun0;
-    /* program.nit:198 */
+    /* program.nit:201 */
     fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMModule___local_classes(fra.me.REG[0])(fra.me.REG[0]);
     CALL_standard___collection___abstract_collection___Collection___iterate(fra.me.REG[0])(fra.me.REG[0], closctx, ((fun_t)OC_program___Program___with_each_methods_2));
     switch (closctx->has_broke) {
@@ -1091,7 +1157,7 @@ void program___Program___with_each_methods(val_t p0, struct stack_frame_t *closc
       fra.me.closure_funs = CREG;
       fra.me.REG[0] = p0;
       CREG[0] = clos_fun0;
-      /* program.nit:200 */
+      /* program.nit:203 */
       fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMLocalClass___local_local_properties(fra.me.REG[0])(fra.me.REG[0]);
       CALL_standard___collection___abstract_collection___Collection___iterate(fra.me.REG[0])(fra.me.REG[0], closctx, ((fun_t)OC_program___Program___with_each_methods_3));
       switch (closctx->has_broke) {
@@ -1119,10 +1185,10 @@ void program___Program___with_each_methods(val_t p0, struct stack_frame_t *closc
         fra.me.closure_funs = CREG;
         fra.me.REG[0] = p0;
         CREG[0] = clos_fun0;
-        /* program.nit:201 */
+        /* program.nit:204 */
         REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[0], COLOR_metamodel___abstractmetamodel___MMMethod, ID_metamodel___abstractmetamodel___MMMethod)) /*cast MMMethod*/;
         if (UNTAG_Bool(REGB0)) {
-          /* program.nit:202 */
+          /* program.nit:205 */
           ((void (*)(struct stack_frame_t *, val_t))(closctx->closure_funs[0]))(closctx->closure_ctx, fra.me.REG[0]);
           if (closctx->closure_ctx->has_broke) {
             closctx->has_broke = 1;
@@ -1140,7 +1206,7 @@ void program___Program___with_each_live_local_classes(val_t p0, struct stack_fra
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_program;
-  fra.me.line = 209;
+  fra.me.line = 212;
   fra.me.meth = LOCATE_program___Program___with_each_live_local_classes;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
@@ -1150,7 +1216,7 @@ void program___Program___with_each_live_local_classes(val_t p0, struct stack_fra
   fra.me.closure_funs = CREG;
   fra.me.REG[0] = p0;
   CREG[0] = clos_fun0;
-  /* program.nit:214 */
+  /* program.nit:217 */
   fra.me.REG[0] = CALL_program___Program___main_module(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMModule___local_classes(fra.me.REG[0])(fra.me.REG[0]);
   CALL_standard___collection___abstract_collection___Collection___iterate(fra.me.REG[0])(fra.me.REG[0], (&(fra.me)), ((fun_t)OC_program___Program___with_each_live_local_classes_1));
@@ -1178,7 +1244,7 @@ void program___Program___with_each_live_local_classes(val_t p0, struct stack_fra
     fra.me.closure_funs = CREG;
     fra.me.REG[0] = p0;
     CREG[0] = clos_fun0;
-    /* program.nit:215 */
+    /* program.nit:218 */
     ((void (*)(struct stack_frame_t *, val_t))(closctx->closure_funs[0]))(closctx->closure_ctx, fra.me.REG[0]);
     if (closctx->closure_ctx->has_broke) {
       closctx->has_broke = 1;
@@ -1196,7 +1262,7 @@ void program___Program___init(val_t p0, val_t p1, val_t p2, int* init_table){
   if (init_table[itpos0]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_program;
-  fra.me.line = 219;
+  fra.me.line = 222;
   fra.me.meth = LOCATE_program___Program___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -1207,11 +1273,11 @@ void program___Program___init(val_t p0, val_t p1, val_t p2, int* init_table){
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* program.nit:220 */
+  /* program.nit:223 */
   ATTR_program___Program____main_module(fra.me.REG[0]) = fra.me.REG[1];
-  /* program.nit:221 */
+  /* program.nit:224 */
   ATTR_program___Program____tc(fra.me.REG[0]) = fra.me.REG[2];
-  /* program.nit:222 */
+  /* program.nit:225 */
   CALL_program___Program___finish_processing_classes(fra.me.REG[0])(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   init_table[itpos0] = 1;
@@ -1223,14 +1289,14 @@ val_t program___MMLocalClass___init_var_iroutine(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_program;
-  fra.me.line = 227;
+  fra.me.line = 230;
   fra.me.meth = LOCATE_program___MMLocalClass___init_var_iroutine;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* program.nit:227 */
+  /* program.nit:230 */
   fra.me.REG[0] = ATTR_program___MMLocalClass____init_var_iroutine(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -1241,7 +1307,7 @@ void program___MMLocalClass___init_var_iroutine__eq(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_program;
-  fra.me.line = 227;
+  fra.me.line = 230;
   fra.me.meth = LOCATE_program___MMLocalClass___init_var_iroutine__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1250,7 +1316,7 @@ void program___MMLocalClass___init_var_iroutine__eq(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* program.nit:227 */
+  /* program.nit:230 */
   ATTR_program___MMLocalClass____init_var_iroutine(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;
@@ -1261,14 +1327,14 @@ val_t program___MMLocalClass___checknew_iroutine(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_program;
-  fra.me.line = 229;
+  fra.me.line = 232;
   fra.me.meth = LOCATE_program___MMLocalClass___checknew_iroutine;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* program.nit:229 */
+  /* program.nit:232 */
   fra.me.REG[0] = ATTR_program___MMLocalClass____checknew_iroutine(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -1279,7 +1345,7 @@ void program___MMLocalClass___checknew_iroutine__eq(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_program;
-  fra.me.line = 229;
+  fra.me.line = 232;
   fra.me.meth = LOCATE_program___MMLocalClass___checknew_iroutine__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1288,7 +1354,7 @@ void program___MMLocalClass___checknew_iroutine__eq(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* program.nit:229 */
+  /* program.nit:232 */
   ATTR_program___MMLocalClass____checknew_iroutine(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;
@@ -1300,18 +1366,18 @@ val_t program___MMLocalClass___new_instance_iroutine(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_program;
-  fra.me.line = 231;
+  fra.me.line = 234;
   fra.me.meth = LOCATE_program___MMLocalClass___new_instance_iroutine;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* program.nit:231 */
+  /* program.nit:234 */
   REGB0 = TAG_Bool(ATTR_program___MMLocalClass____new_instance_iroutine(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_new_instance_iroutine", LOCATE_program, 231);
+    nit_abort("Uninitialized attribute %s", "_new_instance_iroutine", LOCATE_program, 234);
   }
   fra.me.REG[0] = ATTR_program___MMLocalClass____new_instance_iroutine(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;

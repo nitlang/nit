@@ -20,8 +20,9 @@ extern const int SFT_location[];
 #define CALL_location___SourceFile___string(recv) ((location___SourceFile___string_t)CALL((recv), (SFT_location[3] + 3)))
 #define CALL_location___SourceFile___string__eq(recv) ((location___SourceFile___string__eq_t)CALL((recv), (SFT_location[3] + 4)))
 #define CALL_location___SourceFile___init(recv) ((location___SourceFile___init_t)CALL((recv), (SFT_location[3] + 5)))
-#define CALL_location___SourceFile___line_starts(recv) ((location___SourceFile___line_starts_t)CALL((recv), (SFT_location[3] + 6)))
-#define CALL_location___SourceFile___line_starts__eq(recv) ((location___SourceFile___line_starts__eq_t)CALL((recv), (SFT_location[3] + 7)))
+#define CALL_location___SourceFile___from_string(recv) ((location___SourceFile___from_string_t)CALL((recv), (SFT_location[3] + 6)))
+#define CALL_location___SourceFile___line_starts(recv) ((location___SourceFile___line_starts_t)CALL((recv), (SFT_location[3] + 7)))
+#define CALL_location___SourceFile___line_starts__eq(recv) ((location___SourceFile___line_starts__eq_t)CALL((recv), (SFT_location[3] + 8)))
 #define ID_location___Location (SFT_location[4])
 #define COLOR_location___Location (SFT_location[5])
 #define ATTR_location___Location____file(recv) ATTR(recv, (SFT_location[6] + 0))
@@ -55,6 +56,9 @@ typedef void (*location___SourceFile___string__eq_t)(val_t p0, val_t p1);
 void location___SourceFile___init(val_t p0, val_t p1, val_t p2, int* init_table);
 typedef void (*location___SourceFile___init_t)(val_t p0, val_t p1, val_t p2, int* init_table);
 val_t NEW_SourceFile_location___SourceFile___init(val_t p0, val_t p1);
+void location___SourceFile___from_string(val_t p0, val_t p1, val_t p2, int* init_table);
+typedef void (*location___SourceFile___from_string_t)(val_t p0, val_t p1, val_t p2, int* init_table);
+val_t NEW_SourceFile_location___SourceFile___from_string(val_t p0, val_t p1);
 val_t location___SourceFile___line_starts(val_t p0);
 typedef val_t (*location___SourceFile___line_starts_t)(val_t p0);
 void location___SourceFile___line_starts__eq(val_t p0, val_t p1);
