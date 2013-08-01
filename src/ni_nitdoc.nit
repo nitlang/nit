@@ -1439,7 +1439,7 @@ redef class MPropDef
 		if not page.ctx.mbuilder.mpropdef2npropdef.has_key(self) then return
 		var nprop = page.ctx.mbuilder.mpropdef2npropdef[self]
 		page.append("<div class='description'>")
-		if not is_intro then
+		if not is_intro and page.ctx.mbuilder.mpropdef2npropdef.has_key(mproperty.intro) then
 			var intro_nprop = page.ctx.mbuilder.mpropdef2npropdef[mproperty.intro]
 			page.append("<p>from ")
 			mproperty.html_namespace(page)
