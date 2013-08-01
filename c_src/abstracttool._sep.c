@@ -298,7 +298,7 @@ void abstracttool___AbstractCompiler___exec_cmd_line(val_t p0){
       if (UNTAG_Bool(REGB3)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB0)];
       /* ../lib/standard/collection/array.nit:281 */
       goto label9;
@@ -892,3 +892,21 @@ void abstracttool___MMLocalClass___dump_properties(val_t p0, val_t p1){
         stack_frame_head = fra.me.prev;
         return;
       }
+static const char LOCATE_abstracttool___AAnnotations___visit_all[] = "abstracttool::AAnnotations::(parser_prod::ANode::visit_all)";
+void abstracttool___AAnnotations___visit_all(val_t p0, val_t p1){
+  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_abstracttool;
+  fra.me.line = 134;
+  fra.me.meth = LOCATE_abstracttool___AAnnotations___visit_all;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  fra.me.REG[1] = p1;
+  stack_frame_head = fra.me.prev;
+  return;
+}

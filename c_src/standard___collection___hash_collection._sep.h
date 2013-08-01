@@ -97,6 +97,7 @@ extern const int SFT_standard___collection___hash_collection[];
 #define COLOR_standard___collection___hash_collection___HashSet (SFT_standard___collection___hash_collection[29])
 #define INIT_TABLE_POS_standard___collection___hash_collection___HashSet (SFT_standard___collection___hash_collection[30] + 0)
 #define CALL_standard___collection___hash_collection___HashSet___init(recv) ((standard___collection___hash_collection___HashSet___init_t)CALL((recv), (SFT_standard___collection___hash_collection[30] + 1)))
+#define CALL_standard___collection___hash_collection___HashSet___from(recv) ((standard___collection___hash_collection___HashSet___from_t)CALL((recv), (SFT_standard___collection___hash_collection[30] + 2)))
 #define ID_standard___collection___hash_collection___HashSetNode (SFT_standard___collection___hash_collection[31])
 #define COLOR_standard___collection___hash_collection___HashSetNode (SFT_standard___collection___hash_collection[32])
 #define INIT_TABLE_POS_standard___collection___hash_collection___HashSetNode (SFT_standard___collection___hash_collection[33] + 0)
@@ -250,6 +251,9 @@ typedef val_t (*standard___collection___hash_collection___HashSet___iterator_t)(
 void standard___collection___hash_collection___HashSet___init(val_t p0, int* init_table);
 typedef void (*standard___collection___hash_collection___HashSet___init_t)(val_t p0, int* init_table);
 val_t NEW_HashSet_standard___collection___hash_collection___HashSet___init();
+void standard___collection___hash_collection___HashSet___from(val_t p0, val_t p1, int* init_table);
+typedef void (*standard___collection___hash_collection___HashSet___from_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_HashSet_standard___collection___hash_collection___HashSet___from(val_t p0);
 void standard___collection___hash_collection___HashSetNode___init(val_t p0, val_t p1, int* init_table);
 typedef void (*standard___collection___hash_collection___HashSetNode___init_t)(val_t p0, val_t p1, int* init_table);
 val_t NEW_HashSetNode_standard___collection___hash_collection___HashSetNode___init(val_t p0);

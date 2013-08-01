@@ -123,7 +123,7 @@ val_t compiling_writer___Writer___add_all(val_t p0, val_t p1, val_t p2){
       if (UNTAG_Bool(REGB2)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[4] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB1)];
       /* compiling_writer.nit:44 */
       if (UNTAG_Bool(REGB0)) {

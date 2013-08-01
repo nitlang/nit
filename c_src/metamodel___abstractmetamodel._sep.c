@@ -235,7 +235,7 @@ void metamodel___abstractmetamodel___MMContext___add_local_class(val_t p0, val_t
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[5] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB0)];
       /* metamodel/abstractmetamodel.nit:59 */
       REGB1 = TAG_Bool(VAL_ISA(fra.me.REG[5], COLOR_metamodel___abstractmetamodel___MMConcreteClass, ID_metamodel___abstractmetamodel___MMConcreteClass)) /*cast MMConcreteClass*/;
@@ -280,7 +280,7 @@ void metamodel___abstractmetamodel___MMContext___add_local_class(val_t p0, val_t
             if (UNTAG_Bool(REGB2)) {
               nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
             }
-            /* ../lib/standard/collection/array.nit:718 */
+            /* ../lib/standard/collection/array.nit:724 */
             fra.me.REG[7] = ((Nit_NativeArray)fra.me.REG[6])->val[UNTAG_Int(REGB1)];
             /* metamodel/abstractmetamodel.nit:63 */
             REGB2 = CALL_standard___collection___abstract_collection___Collection___has(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[7]);
@@ -2594,7 +2594,7 @@ val_t metamodel___abstractmetamodel___MMLocalClass___super_methods_named(val_t p
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[4] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB0)];
       /* metamodel/abstractmetamodel.nit:471 */
       fra.me.REG[5] = CALL_metamodel___abstractmetamodel___MMLocalClass___method(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[1]);

@@ -834,6 +834,11 @@ redef class AInternMethPropdef
 			mtype = mtype.arguments.first
 			var val = new Array[Instance].filled_with(v.null_instance, args[1].to_i)
 			return new PrimitiveInstance[Array[Instance]](v.mainmodule.get_primitive_class("NativeArray").get_mtype([mtype]), val)
+		else if pname == "native_argc" then
+			return v.int_instance(v.arguments.length)
+		else if pname == "native_argv" then
+			var txt = v.arguments[args[1].to_i]
+			return v.native_string_instance(txt)
 		end
 		fatal(v, "NOT YET IMPLEMENTED intern {mpropdef}")
 		abort

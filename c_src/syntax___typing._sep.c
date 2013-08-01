@@ -792,7 +792,7 @@ val_t syntax___typing___TypingVisitor___get_default_constructor_for(val_t p0, va
           if (UNTAG_Bool(REGB2)) {
             nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
           }
-          /* ../lib/standard/collection/array.nit:718 */
+          /* ../lib/standard/collection/array.nit:724 */
           fra.me.REG[4] = ((Nit_NativeArray)fra.me.REG[8])->val[UNTAG_Int(REGB1)];
           /* syntax/typing.nit:146 */
           REGB2 = TAG_Int(5);
@@ -950,7 +950,7 @@ val_t syntax___typing___TypingVisitor___get_default_constructor_for(val_t p0, va
             if (UNTAG_Bool(REGB1)) {
               nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
             }
-            /* ../lib/standard/collection/array.nit:718 */
+            /* ../lib/standard/collection/array.nit:724 */
             fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[6])->val[UNTAG_Int(REGB2)];
             /* syntax/typing.nit:153 */
             REGB1 = TAG_Int(5);
@@ -1695,7 +1695,7 @@ void syntax___typing___AConcreteInitPropdef___after_typing(val_t p0, val_t p1){
       if (UNTAG_Bool(REGB3)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[5] = ((Nit_NativeArray)fra.me.REG[5])->val[UNTAG_Int(REGB2)];
       /* ../lib/standard/collection/array.nit:281 */
       goto label1;
@@ -1782,7 +1782,7 @@ void syntax___typing___AConcreteInitPropdef___after_typing(val_t p0, val_t p1){
         if (UNTAG_Bool(REGB4)) {
           nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
         }
-        /* ../lib/standard/collection/array.nit:718 */
+        /* ../lib/standard/collection/array.nit:724 */
         fra.me.REG[6] = ((Nit_NativeArray)fra.me.REG[6])->val[UNTAG_Int(REGB3)];
         /* ../lib/standard/collection/array.nit:281 */
         goto label2;
@@ -1932,7 +1932,7 @@ void syntax___typing___AConcreteInitPropdef___after_typing(val_t p0, val_t p1){
               if (UNTAG_Bool(REGB4)) {
 		nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
               }
-              /* ../lib/standard/collection/array.nit:718 */
+              /* ../lib/standard/collection/array.nit:724 */
               fra.me.REG[5] = ((Nit_NativeArray)fra.me.REG[5])->val[UNTAG_Int(REGB3)];
               /* ../lib/standard/collection/array.nit:281 */
               goto label3;
@@ -2377,7 +2377,7 @@ void syntax___typing___AClosureDecl___accept_typing(val_t p0, val_t p1){
         if (UNTAG_Bool(REGB1)) {
           nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
         }
-        /* ../lib/standard/collection/array.nit:718 */
+        /* ../lib/standard/collection/array.nit:724 */
         fra.me.REG[2] = ((Nit_NativeArray)fra.me.REG[8])->val[UNTAG_Int(REGB2)];
         /* syntax/typing.nit:344 */
         CALL_syntax___syntax_base___AbsSyntaxVisitor___check_conform_expr(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[2], fra.me.REG[7]);
@@ -3010,15 +3010,29 @@ void syntax___typing___AVardeclExpr___after_typing(val_t p0, val_t p1){
         nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 444);
       }
       fra.me.REG[2] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[2])(fra.me.REG[2]);
-      CALL_syntax___syntax_base___Variable___stype__eq(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[2]);
+      /* syntax/typing.nit:445 */
+      REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[2], COLOR_metamodel___static_type___MMTypeNone, ID_metamodel___static_type___MMTypeNone)) /*cast MMTypeNone*/;
+      if (UNTAG_Bool(REGB0)) {
+        /* syntax/typing.nit:446 */
+        fra.me.REG[4] = CALL_syntax___syntax_base___AbsSyntaxVisitor___type_object(fra.me.REG[1])(fra.me.REG[1]);
+        fra.me.REG[4] = CALL_metamodel___static_type___MMType___as_nullable(fra.me.REG[4])(fra.me.REG[4]);
+        CALL_syntax___syntax_base___Variable___stype__eq(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[4]);
+        /* syntax/typing.nit:447 */
+        fra.me.REG[4] = CALL_syntax___typing___TypingVisitor___flow_ctx(fra.me.REG[1])(fra.me.REG[1]);
+        fra.me.REG[4] = CALL_syntax___flow___FlowContext___sub_with(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[0], fra.me.REG[3], fra.me.REG[2]);
+        CALL_syntax___typing___TypingVisitor___flow_ctx__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[4]);
+      } else {
+        /* syntax/typing.nit:449 */
+        CALL_syntax___syntax_base___Variable___stype__eq(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[2]);
+      }
     } else {
-      /* syntax/typing.nit:446 */
+      /* syntax/typing.nit:452 */
       fra.me.REG[1] = CALL_syntax___syntax_base___AbsSyntaxVisitor___type_object(fra.me.REG[1])(fra.me.REG[1]);
       fra.me.REG[1] = CALL_metamodel___static_type___MMType___as_nullable(fra.me.REG[1])(fra.me.REG[1]);
       CALL_syntax___syntax_base___Variable___stype__eq(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[1]);
     }
   }
-  /* syntax/typing.nit:448 */
+  /* syntax/typing.nit:454 */
   REGB0 = TAG_Bool(1);
   ATTR_syntax___typing___AExpr____is_typed(fra.me.REG[0]) = REGB0;
   label1: while(0);
@@ -3032,7 +3046,7 @@ void syntax___typing___ABlockExpr___accept_typing(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 453;
+  fra.me.line = 459;
   fra.me.meth = LOCATE_syntax___typing___ABlockExpr___accept_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -3042,10 +3056,10 @@ void syntax___typing___ABlockExpr___accept_typing(val_t p0, val_t p1){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:455 */
+  /* syntax/typing.nit:461 */
   fra.me.REG[2] = CALL_parser___parser_nodes___ABlockExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   CALL_standard___collection___abstract_collection___Collection___iterate(fra.me.REG[2])(fra.me.REG[2], (&(fra.me)), ((fun_t)OC_syntax___typing___ABlockExpr___accept_typing_1));
-  /* syntax/typing.nit:464 */
+  /* syntax/typing.nit:470 */
   REGB0 = TAG_Bool(1);
   ATTR_syntax___typing___AExpr____is_typed(fra.me.REG[0]) = REGB0;
   stack_frame_head = fra.me.prev;
@@ -3070,24 +3084,24 @@ void syntax___typing___ABlockExpr___accept_typing(val_t p0, val_t p1){
     fra.me.closure_funs = CREG;
     fra.me.REG[0] = p0;
     CREG[0] = clos_fun0;
-    /* syntax/typing.nit:456 */
+    /* syntax/typing.nit:462 */
     fra.me.REG[1] = CALL_syntax___typing___TypingVisitor___flow_ctx(closctx->REG[1])(closctx->REG[1]);
     REGB0 = CALL_syntax___flow___FlowContext___unreash(fra.me.REG[1])(fra.me.REG[1]);
     REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
     if (UNTAG_Bool(REGB0)) {
-      /* syntax/typing.nit:457 */
+      /* syntax/typing.nit:463 */
       CALL_parser___parser_prod___Visitor___enter_visit(closctx->REG[1])(closctx->REG[1], fra.me.REG[0]);
     } else {
-      /* syntax/typing.nit:458 */
+      /* syntax/typing.nit:464 */
       fra.me.REG[1] = CALL_syntax___typing___TypingVisitor___flow_ctx(closctx->REG[1])(closctx->REG[1]);
       REGB0 = CALL_syntax___flow___FlowContext___already_unreash(fra.me.REG[1])(fra.me.REG[1]);
       REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
       if (UNTAG_Bool(REGB0)) {
-        /* syntax/typing.nit:459 */
+        /* syntax/typing.nit:465 */
         fra.me.REG[1] = CALL_syntax___typing___TypingVisitor___flow_ctx(closctx->REG[1])(closctx->REG[1]);
         REGB0 = TAG_Bool(1);
         CALL_syntax___flow___FlowContext___already_unreash__eq(fra.me.REG[1])(fra.me.REG[1], REGB0);
-        /* syntax/typing.nit:460 */
+        /* syntax/typing.nit:466 */
         if (!once_value_2) {
           fra.me.REG[1] = BOX_NativeString("Error: unreachable statement.");
           REGB0 = TAG_Int(29);
@@ -3113,7 +3127,7 @@ void syntax___typing___AReturnExpr___after_typing(val_t p0, val_t p1){
       static val_t once_value_4; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 469;
+  fra.me.line = 475;
   fra.me.meth = LOCATE_syntax___typing___AReturnExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
@@ -3125,20 +3139,20 @@ void syntax___typing___AReturnExpr___after_typing(val_t p0, val_t p1){
   fra.me.REG[4] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:471 */
+  /* syntax/typing.nit:477 */
   CALL_syntax___typing___TypingVisitor___mark_unreash(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
-  /* syntax/typing.nit:472 */
+  /* syntax/typing.nit:478 */
   fra.me.REG[2] = CALL_syntax___syntax_base___AbsSyntaxVisitor___local_property(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[2] = CALL_metamodel___static_type___MMLocalProperty___signature(fra.me.REG[2])(fra.me.REG[2]);
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 472);
+    nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 478);
   }
   fra.me.REG[2] = CALL_metamodel___static_type___MMSignature___return_type(fra.me.REG[2])(fra.me.REG[2]);
-  /* syntax/typing.nit:474 */
+  /* syntax/typing.nit:480 */
   REGB0 = CALL_syntax___typing___TypingVisitor___is_default_closure_definition(fra.me.REG[1])(fra.me.REG[1]);
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:475 */
+    /* syntax/typing.nit:481 */
     if (!once_value_1) {
       fra.me.REG[3] = BOX_NativeString("Error: 'return' invalid in default closure definitions. Use 'continue' or 'break'.");
       REGB0 = TAG_Int(82);
@@ -3148,12 +3162,12 @@ void syntax___typing___AReturnExpr___after_typing(val_t p0, val_t p1){
     } else fra.me.REG[3] = once_value_1;
     fra.me.REG[3] = fra.me.REG[3];
     CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[3]);
-    /* syntax/typing.nit:476 */
+    /* syntax/typing.nit:482 */
     goto label2;
   }
-  /* syntax/typing.nit:479 */
+  /* syntax/typing.nit:485 */
   fra.me.REG[3] = CALL_parser___parser_nodes___AReturnExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
-  /* syntax/typing.nit:480 */
+  /* syntax/typing.nit:486 */
   REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -3185,7 +3199,7 @@ void syntax___typing___AReturnExpr___after_typing(val_t p0, val_t p1){
     REGB0 = REGB1;
   }
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:481 */
+    /* syntax/typing.nit:487 */
     if (!once_value_3) {
       fra.me.REG[4] = BOX_NativeString("Error: Return without value in a function.");
       REGB0 = TAG_Int(42);
@@ -3196,7 +3210,7 @@ void syntax___typing___AReturnExpr___after_typing(val_t p0, val_t p1){
     fra.me.REG[4] = fra.me.REG[4];
     CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[4]);
   } else {
-    /* syntax/typing.nit:482 */
+    /* syntax/typing.nit:488 */
     REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
@@ -3228,7 +3242,7 @@ void syntax___typing___AReturnExpr___after_typing(val_t p0, val_t p1){
       REGB0 = REGB1;
     }
     if (UNTAG_Bool(REGB0)) {
-      /* syntax/typing.nit:483 */
+      /* syntax/typing.nit:489 */
       if (!once_value_4) {
         fra.me.REG[4] = BOX_NativeString("Error: Return with value in a procedure.");
         REGB0 = TAG_Int(40);
@@ -3239,7 +3253,7 @@ void syntax___typing___AReturnExpr___after_typing(val_t p0, val_t p1){
       fra.me.REG[4] = fra.me.REG[4];
       CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[4]);
     } else {
-      /* syntax/typing.nit:484 */
+      /* syntax/typing.nit:490 */
       REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
       } else {
@@ -3272,12 +3286,12 @@ void syntax___typing___AReturnExpr___after_typing(val_t p0, val_t p1){
         REGB0 = REGB1;
       }
       if (UNTAG_Bool(REGB0)) {
-        /* syntax/typing.nit:485 */
+        /* syntax/typing.nit:491 */
         CALL_syntax___syntax_base___AbsSyntaxVisitor___check_conform_expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3], fra.me.REG[2]);
       }
     }
   }
-  /* syntax/typing.nit:487 */
+  /* syntax/typing.nit:493 */
   REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -3292,14 +3306,14 @@ void syntax___typing___AReturnExpr___after_typing(val_t p0, val_t p1){
   }
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:488 */
+    /* syntax/typing.nit:494 */
     REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 488);
+      nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 494);
     }
     CALL_syntax___typing___AExpr___warn_parentheses(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[1]);
   }
-  /* syntax/typing.nit:490 */
+  /* syntax/typing.nit:496 */
   REGB0 = TAG_Bool(1);
   ATTR_syntax___typing___AExpr____is_typed(fra.me.REG[0]) = REGB0;
   label2: while(0);
@@ -3317,7 +3331,7 @@ void syntax___typing___AContinueExpr___after_typing(val_t p0, val_t p1){
       static val_t once_value_4; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 495;
+  fra.me.line = 501;
   fra.me.meth = LOCATE_syntax___typing___AContinueExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
@@ -3329,12 +3343,12 @@ void syntax___typing___AContinueExpr___after_typing(val_t p0, val_t p1){
   fra.me.REG[4] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:497 */
+  /* syntax/typing.nit:503 */
   CALL_syntax___typing___TypingVisitor___mark_unreash(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
-  /* syntax/typing.nit:498 */
+  /* syntax/typing.nit:504 */
   fra.me.REG[2] = CALL_syntax___typing___TypingVisitor___scope_ctx(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[2] = CALL_syntax___scope___AEscapeExpr___compute_escapable_block(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
-  /* syntax/typing.nit:499 */
+  /* syntax/typing.nit:505 */
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -3350,14 +3364,14 @@ void syntax___typing___AContinueExpr___after_typing(val_t p0, val_t p1){
   if (UNTAG_Bool(REGB0)) {
     goto label1;
   }
-  /* syntax/typing.nit:501 */
+  /* syntax/typing.nit:507 */
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 501);
+    nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 507);
   }
   REGB0 = CALL_syntax___scope___EscapableBlock___is_break_block(fra.me.REG[2])(fra.me.REG[2]);
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:502 */
+    /* syntax/typing.nit:508 */
     if (!once_value_2) {
       fra.me.REG[3] = BOX_NativeString("Error: cannot 'continue', only 'break'.");
       REGB0 = TAG_Int(39);
@@ -3367,18 +3381,18 @@ void syntax___typing___AContinueExpr___after_typing(val_t p0, val_t p1){
     } else fra.me.REG[3] = once_value_2;
     fra.me.REG[3] = fra.me.REG[3];
     CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[3]);
-    /* syntax/typing.nit:503 */
+    /* syntax/typing.nit:509 */
     goto label1;
   }
-  /* syntax/typing.nit:506 */
+  /* syntax/typing.nit:512 */
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 506);
+    nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 512);
   }
   fra.me.REG[2] = CALL_syntax___scope___EscapableBlock___continue_stype(fra.me.REG[2])(fra.me.REG[2]);
-  /* syntax/typing.nit:507 */
+  /* syntax/typing.nit:513 */
   fra.me.REG[3] = CALL_parser___parser_nodes___AContinueExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
-  /* syntax/typing.nit:508 */
+  /* syntax/typing.nit:514 */
   REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -3410,7 +3424,7 @@ void syntax___typing___AContinueExpr___after_typing(val_t p0, val_t p1){
     REGB0 = REGB1;
   }
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:509 */
+    /* syntax/typing.nit:515 */
     if (!once_value_3) {
       fra.me.REG[4] = BOX_NativeString("Error: continue with a value required in this block.");
       REGB0 = TAG_Int(52);
@@ -3421,7 +3435,7 @@ void syntax___typing___AContinueExpr___after_typing(val_t p0, val_t p1){
     fra.me.REG[4] = fra.me.REG[4];
     CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[4]);
   } else {
-    /* syntax/typing.nit:510 */
+    /* syntax/typing.nit:516 */
     REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
@@ -3453,7 +3467,7 @@ void syntax___typing___AContinueExpr___after_typing(val_t p0, val_t p1){
       REGB0 = REGB1;
     }
     if (UNTAG_Bool(REGB0)) {
-      /* syntax/typing.nit:511 */
+      /* syntax/typing.nit:517 */
       if (!once_value_4) {
         fra.me.REG[4] = BOX_NativeString("Error: continue without value required in this block.");
         REGB0 = TAG_Int(53);
@@ -3464,7 +3478,7 @@ void syntax___typing___AContinueExpr___after_typing(val_t p0, val_t p1){
       fra.me.REG[4] = fra.me.REG[4];
       CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[4]);
     } else {
-      /* syntax/typing.nit:512 */
+      /* syntax/typing.nit:518 */
       REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
       } else {
@@ -3497,12 +3511,12 @@ void syntax___typing___AContinueExpr___after_typing(val_t p0, val_t p1){
         REGB0 = REGB1;
       }
       if (UNTAG_Bool(REGB0)) {
-        /* syntax/typing.nit:513 */
+        /* syntax/typing.nit:519 */
         CALL_syntax___syntax_base___AbsSyntaxVisitor___check_conform_expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3], fra.me.REG[2]);
       }
     }
   }
-  /* syntax/typing.nit:515 */
+  /* syntax/typing.nit:521 */
   REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -3517,14 +3531,14 @@ void syntax___typing___AContinueExpr___after_typing(val_t p0, val_t p1){
   }
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:516 */
+    /* syntax/typing.nit:522 */
     REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 516);
+      nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 522);
     }
     CALL_syntax___typing___AExpr___warn_parentheses(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[1]);
   }
-  /* syntax/typing.nit:518 */
+  /* syntax/typing.nit:524 */
   REGB0 = TAG_Bool(1);
   ATTR_syntax___typing___AExpr____is_typed(fra.me.REG[0]) = REGB0;
   label1: while(0);
@@ -3541,7 +3555,7 @@ void syntax___typing___ABreakExpr___after_typing(val_t p0, val_t p1){
       static val_t once_value_3; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 523;
+  fra.me.line = 529;
   fra.me.meth = LOCATE_syntax___typing___ABreakExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
@@ -3553,14 +3567,14 @@ void syntax___typing___ABreakExpr___after_typing(val_t p0, val_t p1){
   fra.me.REG[4] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:525 */
+  /* syntax/typing.nit:531 */
   fra.me.REG[2] = CALL_syntax___typing___TypingVisitor___flow_ctx(fra.me.REG[1])(fra.me.REG[1]);
-  /* syntax/typing.nit:526 */
+  /* syntax/typing.nit:532 */
   CALL_syntax___typing___TypingVisitor___mark_unreash(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
-  /* syntax/typing.nit:527 */
+  /* syntax/typing.nit:533 */
   fra.me.REG[3] = CALL_syntax___typing___TypingVisitor___scope_ctx(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[3] = CALL_syntax___scope___AEscapeExpr___compute_escapable_block(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
-  /* syntax/typing.nit:528 */
+  /* syntax/typing.nit:534 */
   REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -3576,22 +3590,22 @@ void syntax___typing___ABreakExpr___after_typing(val_t p0, val_t p1){
   if (UNTAG_Bool(REGB0)) {
     goto label1;
   }
-  /* syntax/typing.nit:530 */
+  /* syntax/typing.nit:536 */
   REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 530);
+    nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 536);
   }
   fra.me.REG[4] = CALL_syntax___scope___EscapableBlock___break_flow_contexts(fra.me.REG[3])(fra.me.REG[3]);
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[2]);
-  /* syntax/typing.nit:532 */
+  /* syntax/typing.nit:538 */
   REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 532);
+    nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 538);
   }
   fra.me.REG[3] = CALL_syntax___scope___EscapableBlock___break_list(fra.me.REG[3])(fra.me.REG[3]);
-  /* syntax/typing.nit:533 */
+  /* syntax/typing.nit:539 */
   fra.me.REG[2] = CALL_parser___parser_nodes___ABreakExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
-  /* syntax/typing.nit:534 */
+  /* syntax/typing.nit:540 */
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -3623,7 +3637,7 @@ void syntax___typing___ABreakExpr___after_typing(val_t p0, val_t p1){
     REGB0 = REGB1;
   }
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:535 */
+    /* syntax/typing.nit:541 */
     if (!once_value_2) {
       fra.me.REG[4] = BOX_NativeString("Error: break with a value required in this block.");
       REGB0 = TAG_Int(49);
@@ -3634,7 +3648,7 @@ void syntax___typing___ABreakExpr___after_typing(val_t p0, val_t p1){
     fra.me.REG[4] = fra.me.REG[4];
     CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[4]);
   } else {
-    /* syntax/typing.nit:536 */
+    /* syntax/typing.nit:542 */
     REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
@@ -3666,7 +3680,7 @@ void syntax___typing___ABreakExpr___after_typing(val_t p0, val_t p1){
       REGB0 = REGB1;
     }
     if (UNTAG_Bool(REGB0)) {
-      /* syntax/typing.nit:537 */
+      /* syntax/typing.nit:543 */
       if (!once_value_3) {
         fra.me.REG[4] = BOX_NativeString("Error: break without value required in this block.");
         REGB0 = TAG_Int(50);
@@ -3677,7 +3691,7 @@ void syntax___typing___ABreakExpr___after_typing(val_t p0, val_t p1){
       fra.me.REG[4] = fra.me.REG[4];
       CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[4]);
     } else {
-      /* syntax/typing.nit:538 */
+      /* syntax/typing.nit:544 */
       REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
       } else {
@@ -3710,16 +3724,16 @@ void syntax___typing___ABreakExpr___after_typing(val_t p0, val_t p1){
         REGB0 = REGB1;
       }
       if (UNTAG_Bool(REGB0)) {
-        /* syntax/typing.nit:540 */
+        /* syntax/typing.nit:546 */
         REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
         if (UNTAG_Bool(REGB0)) {
-          nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 540);
+          nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 546);
         }
         CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[2]);
       }
     }
   }
-  /* syntax/typing.nit:542 */
+  /* syntax/typing.nit:548 */
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -3734,14 +3748,14 @@ void syntax___typing___ABreakExpr___after_typing(val_t p0, val_t p1){
   }
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:543 */
+    /* syntax/typing.nit:549 */
     REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 543);
+      nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 549);
     }
     CALL_syntax___typing___AExpr___warn_parentheses(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
   }
-  /* syntax/typing.nit:545 */
+  /* syntax/typing.nit:551 */
   REGB0 = TAG_Bool(1);
   ATTR_syntax___typing___AExpr____is_typed(fra.me.REG[0]) = REGB0;
   label1: while(0);
@@ -3755,7 +3769,7 @@ void syntax___typing___AAbortExpr___after_typing(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 550;
+  fra.me.line = 556;
   fra.me.meth = LOCATE_syntax___typing___AAbortExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -3764,9 +3778,9 @@ void syntax___typing___AAbortExpr___after_typing(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:552 */
+  /* syntax/typing.nit:558 */
   CALL_syntax___typing___TypingVisitor___mark_unreash(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
-  /* syntax/typing.nit:553 */
+  /* syntax/typing.nit:559 */
   REGB0 = TAG_Bool(1);
   ATTR_syntax___typing___AExpr____is_typed(fra.me.REG[0]) = REGB0;
   stack_frame_head = fra.me.prev;
@@ -3778,14 +3792,14 @@ val_t syntax___typing___AAbsControl___escapable(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 560;
+  fra.me.line = 566;
   fra.me.meth = LOCATE_syntax___typing___AAbsControl___escapable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:560 */
+  /* syntax/typing.nit:566 */
   fra.me.REG[0] = ATTR_syntax___typing___AAbsControl____escapable(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -3798,7 +3812,7 @@ void syntax___typing___AAbsControl___process_control(val_t p0, val_t p1, val_t p
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 563;
+  fra.me.line = 569;
   fra.me.meth = LOCATE_syntax___typing___AAbsControl___process_control;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
@@ -3815,54 +3829,54 @@ void syntax___typing___AAbsControl___process_control(val_t p0, val_t p1, val_t p
   fra.me.REG[2] = p2;
   fra.me.REG[3] = p3;
   REGB0 = p4;
-  /* syntax/typing.nit:567 */
+  /* syntax/typing.nit:573 */
   ATTR_syntax___typing___AAbsControl____escapable(fra.me.REG[0]) = fra.me.REG[2];
-  /* syntax/typing.nit:568 */
+  /* syntax/typing.nit:574 */
   fra.me.REG[4] = CALL_syntax___typing___TypingVisitor___scope_ctx(fra.me.REG[1])(fra.me.REG[1]);
   CALL_syntax___scope___ScopeContext___push_escapable(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[2], fra.me.REG[3]);
-  /* syntax/typing.nit:571 */
+  /* syntax/typing.nit:577 */
   fra.me.REG[3] = CALL_syntax___typing___TypingVisitor___flow_ctx(fra.me.REG[1])(fra.me.REG[1]);
-  /* syntax/typing.nit:572 */
+  /* syntax/typing.nit:578 */
   fra.me.REG[4] = CALL_syntax___typing___TypingVisitor___base_flow_ctx(fra.me.REG[1])(fra.me.REG[1]);
-  /* syntax/typing.nit:573 */
+  /* syntax/typing.nit:579 */
   if (UNTAG_Bool(REGB0)) {
     fra.me.REG[5] = CALL_syntax___typing___TypingVisitor___flow_ctx(fra.me.REG[1])(fra.me.REG[1]);
     CALL_syntax___typing___TypingVisitor___base_flow_ctx__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[5]);
   }
-  /* syntax/typing.nit:576 */
+  /* syntax/typing.nit:582 */
   CALL_syntax___typing___AAbsControl___process_control_inside(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* syntax/typing.nit:579 */
+  /* syntax/typing.nit:585 */
   fra.me.REG[5] = CALL_syntax___typing___TypingVisitor___flow_ctx(fra.me.REG[1])(fra.me.REG[1]);
   REGB1 = CALL_syntax___flow___FlowContext___unreash(fra.me.REG[5])(fra.me.REG[5]);
   REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
   if (UNTAG_Bool(REGB1)) {
-    /* syntax/typing.nit:580 */
+    /* syntax/typing.nit:586 */
     fra.me.REG[5] = CALL_syntax___scope___EscapableBlock___break_flow_contexts(fra.me.REG[2])(fra.me.REG[2]);
     fra.me.REG[6] = CALL_syntax___typing___TypingVisitor___flow_ctx(fra.me.REG[1])(fra.me.REG[1]);
     CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[6]);
   }
-  /* syntax/typing.nit:584 */
+  /* syntax/typing.nit:590 */
   fra.me.REG[6] = CALL_syntax___scope___EscapableBlock___break_flow_contexts(fra.me.REG[2])(fra.me.REG[2]);
   REGB1 = CALL_standard___collection___abstract_collection___Collection___is_empty(fra.me.REG[6])(fra.me.REG[6]);
   if (UNTAG_Bool(REGB1)) {
-    /* syntax/typing.nit:585 */
+    /* syntax/typing.nit:591 */
     CALL_syntax___typing___TypingVisitor___flow_ctx__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
-    /* syntax/typing.nit:586 */
+    /* syntax/typing.nit:592 */
     CALL_syntax___typing___TypingVisitor___mark_unreash(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
   } else {
-    /* syntax/typing.nit:588 */
+    /* syntax/typing.nit:594 */
     fra.me.REG[2] = CALL_syntax___scope___EscapableBlock___break_flow_contexts(fra.me.REG[2])(fra.me.REG[2]);
     fra.me.REG[2] = CALL_syntax___flow___FlowContext___merge(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[0], fra.me.REG[2]);
     CALL_syntax___typing___TypingVisitor___flow_ctx__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
   }
-  /* syntax/typing.nit:591 */
+  /* syntax/typing.nit:597 */
   if (UNTAG_Bool(REGB0)) {
     CALL_syntax___typing___TypingVisitor___base_flow_ctx__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[4]);
   }
-  /* syntax/typing.nit:592 */
+  /* syntax/typing.nit:598 */
   fra.me.REG[1] = CALL_syntax___typing___TypingVisitor___scope_ctx(fra.me.REG[1])(fra.me.REG[1]);
   CALL_syntax___scope___ScopeContext___pop(fra.me.REG[1])(fra.me.REG[1]);
-  /* syntax/typing.nit:593 */
+  /* syntax/typing.nit:599 */
   REGB0 = TAG_Bool(1);
   ATTR_syntax___typing___AExpr____is_typed(fra.me.REG[0]) = REGB0;
   stack_frame_head = fra.me.prev;
@@ -3874,13 +3888,13 @@ void syntax___typing___AAbsControl___process_control_inside(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 596;
+  fra.me.line = 602;
   fra.me.meth = LOCATE_syntax___typing___AAbsControl___process_control_inside;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* syntax/typing.nit:596 */
-  nit_abort("Deferred method called", NULL, LOCATE_syntax___typing, 596);
+  /* syntax/typing.nit:602 */
+  nit_abort("Deferred method called", NULL, LOCATE_syntax___typing, 602);
   stack_frame_head = fra.me.prev;
   return;
 }
@@ -3891,7 +3905,7 @@ void syntax___typing___ADoExpr___accept_typing(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 602;
+  fra.me.line = 608;
   fra.me.meth = LOCATE_syntax___typing___ADoExpr___accept_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -3902,7 +3916,7 @@ void syntax___typing___ADoExpr___accept_typing(val_t p0, val_t p1){
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:604 */
+  /* syntax/typing.nit:610 */
   fra.me.REG[2] = NEW_BreakOnlyEscapableBlock_syntax___scope___BreakOnlyEscapableBlock___init(fra.me.REG[0]);
   fra.me.REG[3] = CALL_parser___parser_nodes___ALabelable___n_label(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(0);
@@ -3916,7 +3930,7 @@ void syntax___typing___ADoExpr___process_control_inside(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 607;
+  fra.me.line = 613;
   fra.me.meth = LOCATE_syntax___typing___ADoExpr___process_control_inside;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -3925,7 +3939,7 @@ void syntax___typing___ADoExpr___process_control_inside(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:609 */
+  /* syntax/typing.nit:615 */
   fra.me.REG[0] = CALL_parser___parser_nodes___ADoExpr___n_block(fra.me.REG[0])(fra.me.REG[0]);
   CALL_syntax___typing___TypingVisitor___enter_visit_block(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -3938,7 +3952,7 @@ void syntax___typing___AIfExpr___accept_typing(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 614;
+  fra.me.line = 620;
   fra.me.meth = LOCATE_syntax___typing___AIfExpr___accept_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
@@ -3950,40 +3964,40 @@ void syntax___typing___AIfExpr___accept_typing(val_t p0, val_t p1){
   fra.me.REG[4] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:616 */
+  /* syntax/typing.nit:622 */
   fra.me.REG[2] = CALL_parser___parser_nodes___AIfExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   CALL_parser___parser_prod___Visitor___enter_visit(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-  /* syntax/typing.nit:617 */
+  /* syntax/typing.nit:623 */
   fra.me.REG[2] = CALL_parser___parser_nodes___AIfExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[3] = CALL_syntax___syntax_base___AbsSyntaxVisitor___type_bool(fra.me.REG[1])(fra.me.REG[1]);
   CALL_syntax___syntax_base___AbsSyntaxVisitor___check_conform_expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2], fra.me.REG[3]);
-  /* syntax/typing.nit:619 */
+  /* syntax/typing.nit:625 */
   fra.me.REG[3] = CALL_parser___parser_nodes___AIfExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   CALL_syntax___typing___AExpr___warn_parentheses(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[1]);
-  /* syntax/typing.nit:622 */
+  /* syntax/typing.nit:628 */
   fra.me.REG[3] = CALL_syntax___typing___TypingVisitor___flow_ctx(fra.me.REG[1])(fra.me.REG[1]);
-  /* syntax/typing.nit:623 */
+  /* syntax/typing.nit:629 */
   fra.me.REG[2] = CALL_parser___parser_nodes___AIfExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   CALL_syntax___typing___TypingVisitor___use_if_true_flow_ctx(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-  /* syntax/typing.nit:626 */
+  /* syntax/typing.nit:632 */
   fra.me.REG[2] = CALL_parser___parser_nodes___AIfExpr___n_then(fra.me.REG[0])(fra.me.REG[0]);
   CALL_syntax___typing___TypingVisitor___enter_visit_block(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-  /* syntax/typing.nit:629 */
+  /* syntax/typing.nit:635 */
   fra.me.REG[2] = CALL_syntax___typing___TypingVisitor___flow_ctx(fra.me.REG[1])(fra.me.REG[1]);
-  /* syntax/typing.nit:632 */
+  /* syntax/typing.nit:638 */
   CALL_syntax___typing___TypingVisitor___flow_ctx__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
-  /* syntax/typing.nit:633 */
+  /* syntax/typing.nit:639 */
   fra.me.REG[3] = CALL_parser___parser_nodes___AIfExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   CALL_syntax___typing___TypingVisitor___use_if_false_flow_ctx(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
-  /* syntax/typing.nit:636 */
+  /* syntax/typing.nit:642 */
   fra.me.REG[3] = CALL_parser___parser_nodes___AIfExpr___n_else(fra.me.REG[0])(fra.me.REG[0]);
   CALL_syntax___typing___TypingVisitor___enter_visit_block(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
-  /* syntax/typing.nit:639 */
+  /* syntax/typing.nit:645 */
   fra.me.REG[3] = CALL_syntax___typing___TypingVisitor___base_flow_ctx(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[4] = CALL_syntax___typing___TypingVisitor___flow_ctx(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[4] = CALL_syntax___flow___FlowContext___merge_reash(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[0], fra.me.REG[2], fra.me.REG[4]);
   CALL_syntax___typing___TypingVisitor___flow_ctx__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[4]);
-  /* syntax/typing.nit:640 */
+  /* syntax/typing.nit:646 */
   REGB0 = TAG_Bool(1);
   ATTR_syntax___typing___AExpr____is_typed(fra.me.REG[0]) = REGB0;
   stack_frame_head = fra.me.prev;
@@ -3996,7 +4010,7 @@ void syntax___typing___AWhileExpr___accept_typing(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 646;
+  fra.me.line = 652;
   fra.me.meth = LOCATE_syntax___typing___AWhileExpr___accept_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -4007,7 +4021,7 @@ void syntax___typing___AWhileExpr___accept_typing(val_t p0, val_t p1){
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:648 */
+  /* syntax/typing.nit:654 */
   fra.me.REG[2] = NEW_EscapableBlock_syntax___scope___EscapableBlock___init(fra.me.REG[0]);
   fra.me.REG[3] = CALL_parser___parser_nodes___ALabelable___n_label(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(1);
@@ -4023,7 +4037,7 @@ void syntax___typing___AWhileExpr___process_control_inside(val_t p0, val_t p1){
     static val_t once_value_1; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 651;
+  fra.me.line = 657;
   fra.me.meth = LOCATE_syntax___typing___AWhileExpr___process_control_inside;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
@@ -4035,20 +4049,20 @@ void syntax___typing___AWhileExpr___process_control_inside(val_t p0, val_t p1){
   fra.me.REG[4] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:653 */
+  /* syntax/typing.nit:659 */
   fra.me.REG[2] = CALL_syntax___typing___TypingVisitor___flow_ctx(fra.me.REG[1])(fra.me.REG[1]);
-  /* syntax/typing.nit:656 */
+  /* syntax/typing.nit:662 */
   fra.me.REG[3] = CALL_parser___parser_nodes___AWhileExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   CALL_parser___parser_prod___Visitor___enter_visit(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
-  /* syntax/typing.nit:657 */
+  /* syntax/typing.nit:663 */
   fra.me.REG[3] = CALL_parser___parser_nodes___AWhileExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[4] = CALL_syntax___syntax_base___AbsSyntaxVisitor___type_bool(fra.me.REG[1])(fra.me.REG[1]);
   CALL_syntax___syntax_base___AbsSyntaxVisitor___check_conform_expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3], fra.me.REG[4]);
-  /* syntax/typing.nit:659 */
+  /* syntax/typing.nit:665 */
   fra.me.REG[4] = CALL_parser___parser_nodes___AWhileExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[4], COLOR_parser___parser_nodes___ATrueExpr, ID_parser___parser_nodes___ATrueExpr)) /*cast ATrueExpr*/;
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:660 */
+    /* syntax/typing.nit:666 */
     if (!once_value_1) {
       fra.me.REG[4] = BOX_NativeString("Warning: use 'loop' instead of 'while true do'.");
       REGB0 = TAG_Int(47);
@@ -4059,26 +4073,26 @@ void syntax___typing___AWhileExpr___process_control_inside(val_t p0, val_t p1){
     fra.me.REG[4] = fra.me.REG[4];
     CALL_syntax___syntax_base___AbsSyntaxVisitor___warning(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[4]);
   } else {
-    /* syntax/typing.nit:662 */
+    /* syntax/typing.nit:668 */
     fra.me.REG[4] = CALL_parser___parser_nodes___AWhileExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
     CALL_syntax___typing___AExpr___warn_parentheses(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[1]);
   }
-  /* syntax/typing.nit:666 */
+  /* syntax/typing.nit:672 */
   fra.me.REG[4] = CALL_parser___parser_nodes___AWhileExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   CALL_syntax___typing___TypingVisitor___use_if_true_flow_ctx(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[4]);
-  /* syntax/typing.nit:669 */
+  /* syntax/typing.nit:675 */
   fra.me.REG[4] = CALL_parser___parser_nodes___AWhileExpr___n_block(fra.me.REG[0])(fra.me.REG[0]);
   CALL_syntax___typing___TypingVisitor___enter_visit_block(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[4]);
-  /* syntax/typing.nit:672 */
+  /* syntax/typing.nit:678 */
   CALL_syntax___typing___TypingVisitor___flow_ctx__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-  /* syntax/typing.nit:673 */
+  /* syntax/typing.nit:679 */
   fra.me.REG[2] = CALL_parser___parser_nodes___AWhileExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   CALL_syntax___typing___TypingVisitor___use_if_false_flow_ctx(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-  /* syntax/typing.nit:674 */
+  /* syntax/typing.nit:680 */
   fra.me.REG[0] = CALL_syntax___typing___AAbsControl___escapable(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 674);
+    nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 680);
   }
   fra.me.REG[0] = CALL_syntax___scope___EscapableBlock___break_flow_contexts(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[1] = CALL_syntax___typing___TypingVisitor___flow_ctx(fra.me.REG[1])(fra.me.REG[1]);
@@ -4093,7 +4107,7 @@ void syntax___typing___ALoopExpr___accept_typing(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 680;
+  fra.me.line = 686;
   fra.me.meth = LOCATE_syntax___typing___ALoopExpr___accept_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -4104,7 +4118,7 @@ void syntax___typing___ALoopExpr___accept_typing(val_t p0, val_t p1){
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:682 */
+  /* syntax/typing.nit:688 */
   fra.me.REG[2] = NEW_EscapableBlock_syntax___scope___EscapableBlock___init(fra.me.REG[0]);
   fra.me.REG[3] = CALL_parser___parser_nodes___ALabelable___n_label(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(1);
@@ -4118,7 +4132,7 @@ void syntax___typing___ALoopExpr___process_control_inside(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 685;
+  fra.me.line = 691;
   fra.me.meth = LOCATE_syntax___typing___ALoopExpr___process_control_inside;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -4128,10 +4142,10 @@ void syntax___typing___ALoopExpr___process_control_inside(val_t p0, val_t p1){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:688 */
+  /* syntax/typing.nit:694 */
   fra.me.REG[2] = CALL_parser___parser_nodes___ALoopExpr___n_block(fra.me.REG[0])(fra.me.REG[0]);
   CALL_syntax___typing___TypingVisitor___enter_visit_block(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-  /* syntax/typing.nit:691 */
+  /* syntax/typing.nit:697 */
   CALL_syntax___typing___TypingVisitor___mark_unreash(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return;
@@ -4143,7 +4157,7 @@ val_t syntax___typing___AForExpr___variables(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 698;
+  fra.me.line = 704;
   fra.me.meth = LOCATE_syntax___typing___AForExpr___variables;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -4151,13 +4165,13 @@ val_t syntax___typing___AForExpr___variables(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:698 */
+  /* syntax/typing.nit:704 */
   fra.me.REG[1] = fra.me.REG[0];
   fra.me.REG[1] = ATTR_syntax___typing___AForExpr____variables(fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[1]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Cast failed", NULL, LOCATE_syntax___typing, 698);
+    nit_abort("Cast failed", NULL, LOCATE_syntax___typing, 704);
   }
   goto label1;
   label1: while(0);
@@ -4171,7 +4185,7 @@ void syntax___typing___AForExpr___accept_typing(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 700;
+  fra.me.line = 706;
   fra.me.meth = LOCATE_syntax___typing___AForExpr___accept_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -4182,7 +4196,7 @@ void syntax___typing___AForExpr___accept_typing(val_t p0, val_t p1){
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:702 */
+  /* syntax/typing.nit:708 */
   fra.me.REG[2] = NEW_EscapableBlock_syntax___scope___EscapableBlock___init(fra.me.REG[0]);
   fra.me.REG[3] = CALL_parser___parser_nodes___ALabelable___n_label(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(1);
@@ -4196,7 +4210,7 @@ void syntax___typing___AForExpr___process_control_inside(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 705;
+  fra.me.line = 711;
   fra.me.meth = LOCATE_syntax___typing___AForExpr___process_control_inside;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -4206,19 +4220,19 @@ void syntax___typing___AForExpr___process_control_inside(val_t p0, val_t p1){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:707 */
+  /* syntax/typing.nit:713 */
   fra.me.REG[2] = CALL_syntax___typing___TypingVisitor___scope_ctx(fra.me.REG[1])(fra.me.REG[1]);
   CALL_syntax___scope___ScopeContext___push(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[0]);
-  /* syntax/typing.nit:708 */
+  /* syntax/typing.nit:714 */
   fra.me.REG[2] = CALL_syntax___typing___TypingVisitor___flow_ctx(fra.me.REG[1])(fra.me.REG[1]);
-  /* syntax/typing.nit:710 */
+  /* syntax/typing.nit:716 */
   CALL_syntax___typing___AForExpr___do_typing(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* syntax/typing.nit:713 */
+  /* syntax/typing.nit:719 */
   fra.me.REG[0] = CALL_parser___parser_nodes___AForExpr___n_block(fra.me.REG[0])(fra.me.REG[0]);
   CALL_syntax___typing___TypingVisitor___enter_visit_block(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
-  /* syntax/typing.nit:716 */
+  /* syntax/typing.nit:722 */
   CALL_syntax___typing___TypingVisitor___flow_ctx__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-  /* syntax/typing.nit:717 */
+  /* syntax/typing.nit:723 */
   fra.me.REG[1] = CALL_syntax___typing___TypingVisitor___scope_ctx(fra.me.REG[1])(fra.me.REG[1]);
   CALL_syntax___scope___ScopeContext___pop(fra.me.REG[1])(fra.me.REG[1]);
   stack_frame_head = fra.me.prev;
@@ -4252,7 +4266,7 @@ void syntax___typing___AForExpr___do_typing(val_t p0, val_t p1){
       static val_t once_value_18; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 720;
+  fra.me.line = 726;
   fra.me.meth = LOCATE_syntax___typing___AForExpr___do_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
@@ -4267,30 +4281,30 @@ void syntax___typing___AForExpr___do_typing(val_t p0, val_t p1){
   fra.me.REG[7] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:723 */
+  /* syntax/typing.nit:729 */
   fra.me.REG[2] = NEW_Array_standard___collection___array___Array___init();
-  /* syntax/typing.nit:724 */
+  /* syntax/typing.nit:730 */
   fra.me.REG[3] = CALL_parser___parser_nodes___AForExpr___n_ids(fra.me.REG[0])(fra.me.REG[0]);
   CALL_standard___collection___abstract_collection___Collection___iterate(fra.me.REG[3])(fra.me.REG[3], (&(fra.me)), ((fun_t)OC_syntax___typing___AForExpr___do_typing_1));
-  /* syntax/typing.nit:729 */
+  /* syntax/typing.nit:735 */
   ATTR_syntax___typing___AForExpr____variables(fra.me.REG[0]) = fra.me.REG[2];
-  /* syntax/typing.nit:732 */
+  /* syntax/typing.nit:738 */
   fra.me.REG[3] = CALL_parser___parser_nodes___AForExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   CALL_parser___parser_prod___Visitor___enter_visit(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
-  /* syntax/typing.nit:733 */
+  /* syntax/typing.nit:739 */
   fra.me.REG[3] = CALL_parser___parser_nodes___AForExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = CALL_syntax___syntax_base___AbsSyntaxVisitor___check_expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
     goto label2;
   }
-  /* syntax/typing.nit:734 */
+  /* syntax/typing.nit:740 */
   fra.me.REG[3] = CALL_parser___parser_nodes___AForExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[3] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[3])(fra.me.REG[3]);
-  /* syntax/typing.nit:736 */
+  /* syntax/typing.nit:742 */
   REGB0 = CALL_metamodel___static_type___MMType___is_nullable(fra.me.REG[3])(fra.me.REG[3]);
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:737 */
+    /* syntax/typing.nit:743 */
     fra.me.REG[4] = CALL_parser___parser_nodes___AForExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
     if (!once_value_3) {
       fra.me.REG[5] = BOX_NativeString("Type error: 'for' on a nullable expression.");
@@ -4301,13 +4315,13 @@ void syntax___typing___AForExpr___do_typing(val_t p0, val_t p1){
     } else fra.me.REG[5] = once_value_3;
     fra.me.REG[5] = fra.me.REG[5];
     CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[4], fra.me.REG[5]);
-    /* syntax/typing.nit:738 */
+    /* syntax/typing.nit:744 */
     goto label2;
   }
-  /* syntax/typing.nit:740 */
+  /* syntax/typing.nit:746 */
   fra.me.REG[5] = CALL_parser___parser_nodes___AForExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   CALL_syntax___typing___AExpr___warn_parentheses(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[1]);
-  /* syntax/typing.nit:743 */
+  /* syntax/typing.nit:749 */
   if (!once_value_4) {
     if (!once_value_5) {
       fra.me.REG[5] = BOX_NativeString("iterate");
@@ -4322,12 +4336,12 @@ void syntax___typing___AForExpr___do_typing(val_t p0, val_t p1){
     register_static_object(&once_value_4);
   } else fra.me.REG[5] = once_value_4;
   fra.me.REG[5] = fra.me.REG[5];
-  /* syntax/typing.nit:744 */
+  /* syntax/typing.nit:750 */
   fra.me.REG[4] = CALL_metamodel___static_type___MMType___local_class(fra.me.REG[3])(fra.me.REG[3]);
   REGB0 = CALL_metamodel___abstractmetamodel___MMLocalClass___has_global_property_by_name(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[5]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:745 */
+    /* syntax/typing.nit:751 */
     fra.me.REG[4] = CALL_parser___parser_nodes___AForExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
     REGB0 = TAG_Int(3);
     fra.me.REG[6] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
@@ -4353,21 +4367,21 @@ void syntax___typing___AForExpr___do_typing(val_t p0, val_t p1){
     CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[7]);
     fra.me.REG[6] = CALL_standard___string___Object___to_s(fra.me.REG[6])(fra.me.REG[6]);
     CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[4], fra.me.REG[6]);
-    /* syntax/typing.nit:746 */
+    /* syntax/typing.nit:752 */
     goto label2;
   }
-  /* syntax/typing.nit:748 */
+  /* syntax/typing.nit:754 */
   fra.me.REG[6] = CALL_metamodel___static_type___MMType___local_class(fra.me.REG[3])(fra.me.REG[3]);
   fra.me.REG[5] = CALL_metamodel___abstractmetamodel___MMLocalClass___select_method(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[5]);
-  /* syntax/typing.nit:749 */
+  /* syntax/typing.nit:755 */
   fra.me.REG[6] = CALL_metamodel___abstractmetamodel___MMLocalProperty___global(fra.me.REG[5])(fra.me.REG[5]);
   fra.me.REG[4] = CALL_syntax___syntax_base___AbsSyntaxVisitor___mmmodule(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[7] = CALL_parser___parser_nodes___AForExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = CALL_syntax___typing___AExpr___is_self(fra.me.REG[7])(fra.me.REG[7]);
   CALL_syntax___syntax_base___MMGlobalProperty___check_visibility(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[1], fra.me.REG[0], fra.me.REG[4], REGB0);
-  /* syntax/typing.nit:750 */
+  /* syntax/typing.nit:756 */
   fra.me.REG[3] = CALL_metamodel___static_type___MMLocalProperty___signature_for(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[3]);
-  /* syntax/typing.nit:751 */
+  /* syntax/typing.nit:757 */
   fra.me.REG[5] = CALL_parser___parser_nodes___AForExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = CALL_syntax___typing___AExpr___is_self(fra.me.REG[5])(fra.me.REG[5]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
@@ -4375,7 +4389,7 @@ void syntax___typing___AForExpr___do_typing(val_t p0, val_t p1){
     fra.me.REG[5] = CALL_metamodel___static_type___MMSignature___not_for_self(fra.me.REG[3])(fra.me.REG[3]);
     fra.me.REG[3] = fra.me.REG[5];
   }
-  /* syntax/typing.nit:752 */
+  /* syntax/typing.nit:758 */
   REGB0 = CALL_metamodel___static_type___MMSignature___arity(fra.me.REG[3])(fra.me.REG[3]);
   REGB1 = TAG_Int(0);
   REGB2 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
@@ -4383,12 +4397,12 @@ void syntax___typing___AForExpr___do_typing(val_t p0, val_t p1){
   } else {
     /* ../lib/standard/kernel.nit:230 */
     REGB1 = TAG_Bool((REGB0)==(REGB1));
-    /* syntax/typing.nit:752 */
+    /* syntax/typing.nit:758 */
     REGB2 = REGB1;
   }
   REGB2 = TAG_Bool(!UNTAG_Bool(REGB2));
   if (UNTAG_Bool(REGB2)) {
-    /* syntax/typing.nit:753 */
+    /* syntax/typing.nit:759 */
     if (!once_value_8) {
       fra.me.REG[5] = BOX_NativeString("Error: 'iterate' incompatible with 'for': require no arguments.");
       REGB2 = TAG_Int(63);
@@ -4398,10 +4412,10 @@ void syntax___typing___AForExpr___do_typing(val_t p0, val_t p1){
     } else fra.me.REG[5] = once_value_8;
     fra.me.REG[5] = fra.me.REG[5];
     CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[5]);
-    /* syntax/typing.nit:754 */
+    /* syntax/typing.nit:760 */
     goto label2;
   } else {
-    /* syntax/typing.nit:755 */
+    /* syntax/typing.nit:761 */
     fra.me.REG[5] = CALL_metamodel___static_type___MMSignature___closures(fra.me.REG[3])(fra.me.REG[3]);
     /* ../lib/standard/collection/array.nit:24 */
     REGB2 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[5])!=NIT_NULL);
@@ -4410,19 +4424,19 @@ void syntax___typing___AForExpr___do_typing(val_t p0, val_t p1){
       nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
     }
     REGB2 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[5]);
-    /* syntax/typing.nit:755 */
+    /* syntax/typing.nit:761 */
     REGB1 = TAG_Int(1);
     REGB0 = TAG_Bool(IS_EQUAL_OO(REGB2,REGB1));
     if (UNTAG_Bool(REGB0)) {
     } else {
       /* ../lib/standard/kernel.nit:230 */
       REGB1 = TAG_Bool((REGB2)==(REGB1));
-      /* syntax/typing.nit:755 */
+      /* syntax/typing.nit:761 */
       REGB0 = REGB1;
     }
     REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
     if (UNTAG_Bool(REGB0)) {
-      /* syntax/typing.nit:756 */
+      /* syntax/typing.nit:762 */
       if (!once_value_9) {
         fra.me.REG[5] = BOX_NativeString("Error: 'iterate' incompatible with 'for': require one closure.");
         REGB0 = TAG_Int(62);
@@ -4432,20 +4446,20 @@ void syntax___typing___AForExpr___do_typing(val_t p0, val_t p1){
       } else fra.me.REG[5] = once_value_9;
       fra.me.REG[5] = fra.me.REG[5];
       CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[5]);
-      /* syntax/typing.nit:757 */
+      /* syntax/typing.nit:763 */
       goto label2;
     }
   }
-  /* syntax/typing.nit:759 */
+  /* syntax/typing.nit:765 */
   fra.me.REG[5] = CALL_metamodel___static_type___MMSignature___closures(fra.me.REG[3])(fra.me.REG[3]);
   fra.me.REG[5] = CALL_standard___collection___abstract_collection___Collection___first(fra.me.REG[5])(fra.me.REG[5]);
   REGB0 = TAG_Bool(fra.me.REG[5]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 759);
+    nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 765);
   }
   fra.me.REG[5] = CALL_metamodel___static_type___MMClosure___signature(fra.me.REG[5])(fra.me.REG[5]);
   fra.me.REG[3] = fra.me.REG[5];
-  /* syntax/typing.nit:760 */
+  /* syntax/typing.nit:766 */
   fra.me.REG[5] = CALL_metamodel___static_type___MMSignature___return_type(fra.me.REG[3])(fra.me.REG[3]);
   REGB0 = TAG_Bool(fra.me.REG[5]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -4461,7 +4475,7 @@ void syntax___typing___AForExpr___do_typing(val_t p0, val_t p1){
   }
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:761 */
+    /* syntax/typing.nit:767 */
     if (!once_value_10) {
       fra.me.REG[5] = BOX_NativeString("Error: 'iterate' incompatible with 'for': require one procedural closure.");
       REGB0 = TAG_Int(73);
@@ -4471,7 +4485,7 @@ void syntax___typing___AForExpr___do_typing(val_t p0, val_t p1){
     } else fra.me.REG[5] = once_value_10;
     fra.me.REG[5] = fra.me.REG[5];
     CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[5]);
-    /* syntax/typing.nit:762 */
+    /* syntax/typing.nit:768 */
     goto label2;
   }
   /* ../lib/standard/collection/array.nit:24 */
@@ -4481,19 +4495,19 @@ void syntax___typing___AForExpr___do_typing(val_t p0, val_t p1){
     nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
   }
   REGB0 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2]);
-  /* syntax/typing.nit:764 */
+  /* syntax/typing.nit:770 */
   REGB1 = CALL_metamodel___static_type___MMSignature___arity(fra.me.REG[3])(fra.me.REG[3]);
   REGB2 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
   if (UNTAG_Bool(REGB2)) {
   } else {
     /* ../lib/standard/kernel.nit:230 */
     REGB1 = TAG_Bool((REGB0)==(REGB1));
-    /* syntax/typing.nit:764 */
+    /* syntax/typing.nit:770 */
     REGB2 = REGB1;
   }
   REGB2 = TAG_Bool(!UNTAG_Bool(REGB2));
   if (UNTAG_Bool(REGB2)) {
-    /* syntax/typing.nit:765 */
+    /* syntax/typing.nit:771 */
     REGB2 = CALL_metamodel___static_type___MMSignature___arity(fra.me.REG[3])(fra.me.REG[3]);
     REGB1 = TAG_Int(1);
     REGB0 = TAG_Bool(IS_EQUAL_OO(REGB2,REGB1));
@@ -4501,11 +4515,11 @@ void syntax___typing___AForExpr___do_typing(val_t p0, val_t p1){
     } else {
       /* ../lib/standard/kernel.nit:230 */
       REGB1 = TAG_Bool((REGB2)==(REGB1));
-      /* syntax/typing.nit:765 */
+      /* syntax/typing.nit:771 */
       REGB0 = REGB1;
     }
     if (UNTAG_Bool(REGB0)) {
-      /* syntax/typing.nit:766 */
+      /* syntax/typing.nit:772 */
       REGB0 = TAG_Int(7);
       fra.me.REG[5] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
       if (!once_value_11) {
@@ -4547,7 +4561,7 @@ void syntax___typing___AForExpr___do_typing(val_t p0, val_t p1){
         nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
       }
       REGB0 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2]);
-      /* syntax/typing.nit:766 */
+      /* syntax/typing.nit:772 */
       fra.me.REG[4] = CALL_standard___string___Object___to_s(REGB0)(REGB0);
       CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[4]);
       if (!once_value_14) {
@@ -4562,7 +4576,7 @@ void syntax___typing___AForExpr___do_typing(val_t p0, val_t p1){
       fra.me.REG[5] = CALL_standard___string___Object___to_s(fra.me.REG[5])(fra.me.REG[5]);
       CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[5]);
     } else {
-      /* syntax/typing.nit:768 */
+      /* syntax/typing.nit:774 */
       REGB0 = TAG_Int(7);
       fra.me.REG[5] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
       if (!once_value_15) {
@@ -4604,7 +4618,7 @@ void syntax___typing___AForExpr___do_typing(val_t p0, val_t p1){
         nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
       }
       REGB0 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2]);
-      /* syntax/typing.nit:768 */
+      /* syntax/typing.nit:774 */
       fra.me.REG[4] = CALL_standard___string___Object___to_s(REGB0)(REGB0);
       CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[4]);
       if (!once_value_18) {
@@ -4619,10 +4633,10 @@ void syntax___typing___AForExpr___do_typing(val_t p0, val_t p1){
       fra.me.REG[5] = CALL_standard___string___Object___to_s(fra.me.REG[5])(fra.me.REG[5]);
       CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[5]);
     }
-    /* syntax/typing.nit:770 */
+    /* syntax/typing.nit:776 */
     goto label2;
   }
-  /* syntax/typing.nit:774 */
+  /* syntax/typing.nit:780 */
   REGB0 = TAG_Int(0);
   /* ../lib/standard/collection/array.nit:24 */
   REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2])!=NIT_NULL);
@@ -4642,7 +4656,7 @@ void syntax___typing___AForExpr___do_typing(val_t p0, val_t p1){
     REGB2 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
     /* ../lib/standard/kernel.nit:355 */
     if (UNTAG_Bool(REGB2)) {
-      /* syntax/typing.nit:774 */
+      /* syntax/typing.nit:780 */
       REGB2 = REGB0;
       /* ../lib/standard/collection/array.nit:278 */
       fra.me.REG[5] = fra.me.REG[2];
@@ -4686,16 +4700,16 @@ void syntax___typing___AForExpr___do_typing(val_t p0, val_t p1){
       if (UNTAG_Bool(REGB4)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[5] = ((Nit_NativeArray)fra.me.REG[5])->val[UNTAG_Int(REGB3)];
       /* ../lib/standard/collection/array.nit:281 */
       goto label19;
       label19: while(0);
-      /* syntax/typing.nit:775 */
+      /* syntax/typing.nit:781 */
       fra.me.REG[0] = CALL_metamodel___static_type___MMSignature_____bra(fra.me.REG[3])(fra.me.REG[3], REGB2);
       REGB2 = TAG_Bool(fra.me.REG[5]==NIT_NULL);
       if (UNTAG_Bool(REGB2)) {
-        nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 775);
+        nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 781);
       }
       CALL_syntax___syntax_base___Variable___stype__eq(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[0]);
       /* ../lib/standard/kernel.nit:357 */
@@ -4731,13 +4745,13 @@ void syntax___typing___AForExpr___do_typing(val_t p0, val_t p1){
     fra.me.closure_funs = CREG;
     fra.me.REG[0] = p0;
     CREG[0] = clos_fun0;
-    /* syntax/typing.nit:725 */
+    /* syntax/typing.nit:731 */
     fra.me.REG[1] = CALL_syntax___syntax_base___Token___to_symbol(fra.me.REG[0])(fra.me.REG[0]);
     fra.me.REG[0] = NEW_AutoVariable_syntax___syntax_base___AutoVariable___init(fra.me.REG[1], fra.me.REG[0]);
-    /* syntax/typing.nit:726 */
+    /* syntax/typing.nit:732 */
     fra.me.REG[1] = CALL_syntax___typing___TypingVisitor___scope_ctx(closctx->REG[1])(closctx->REG[1]);
     CALL_syntax___scope___ScopeContext___add_variable(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
-    /* syntax/typing.nit:727 */
+    /* syntax/typing.nit:733 */
     CALL_standard___collection___abstract_collection___SimpleCollection___add(closctx->REG[2])(closctx->REG[2], fra.me.REG[0]);
     stack_frame_head = fra.me.prev;
     return;
@@ -4750,7 +4764,7 @@ void syntax___typing___AAssertExpr___accept_typing(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 781;
+  fra.me.line = 787;
   fra.me.meth = LOCATE_syntax___typing___AAssertExpr___accept_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -4761,17 +4775,17 @@ void syntax___typing___AAssertExpr___accept_typing(val_t p0, val_t p1){
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:784 */
+  /* syntax/typing.nit:790 */
   fra.me.REG[2] = CALL_parser___parser_nodes___AAssertExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   CALL_parser___parser_prod___Visitor___enter_visit(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-  /* syntax/typing.nit:785 */
+  /* syntax/typing.nit:791 */
   fra.me.REG[2] = CALL_parser___parser_nodes___AAssertExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[3] = CALL_syntax___syntax_base___AbsSyntaxVisitor___type_bool(fra.me.REG[1])(fra.me.REG[1]);
   CALL_syntax___syntax_base___AbsSyntaxVisitor___check_conform_expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2], fra.me.REG[3]);
-  /* syntax/typing.nit:786 */
+  /* syntax/typing.nit:792 */
   fra.me.REG[3] = CALL_parser___parser_nodes___AAssertExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   CALL_syntax___typing___AExpr___warn_parentheses(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[1]);
-  /* syntax/typing.nit:789 */
+  /* syntax/typing.nit:795 */
   fra.me.REG[3] = CALL_parser___parser_nodes___AAssertExpr___n_else(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -4787,21 +4801,21 @@ void syntax___typing___AAssertExpr___accept_typing(val_t p0, val_t p1){
   }
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:790 */
+    /* syntax/typing.nit:796 */
     fra.me.REG[3] = CALL_syntax___typing___TypingVisitor___flow_ctx(fra.me.REG[1])(fra.me.REG[1]);
-    /* syntax/typing.nit:791 */
+    /* syntax/typing.nit:797 */
     fra.me.REG[2] = CALL_parser___parser_nodes___AAssertExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
     CALL_syntax___typing___TypingVisitor___use_if_false_flow_ctx(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-    /* syntax/typing.nit:792 */
+    /* syntax/typing.nit:798 */
     fra.me.REG[2] = CALL_parser___parser_nodes___AAssertExpr___n_else(fra.me.REG[0])(fra.me.REG[0]);
     CALL_parser___parser_prod___Visitor___enter_visit(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-    /* syntax/typing.nit:793 */
+    /* syntax/typing.nit:799 */
     CALL_syntax___typing___TypingVisitor___flow_ctx__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
   }
-  /* syntax/typing.nit:797 */
+  /* syntax/typing.nit:803 */
   fra.me.REG[3] = CALL_parser___parser_nodes___AAssertExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   CALL_syntax___typing___TypingVisitor___use_if_true_flow_ctx(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
-  /* syntax/typing.nit:798 */
+  /* syntax/typing.nit:804 */
   REGB0 = TAG_Bool(1);
   ATTR_syntax___typing___AExpr____is_typed(fra.me.REG[0]) = REGB0;
   stack_frame_head = fra.me.prev;
@@ -4814,7 +4828,7 @@ val_t syntax___typing___AVarFormExpr___variable(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 804;
+  fra.me.line = 810;
   fra.me.meth = LOCATE_syntax___typing___AVarFormExpr___variable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -4822,13 +4836,13 @@ val_t syntax___typing___AVarFormExpr___variable(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:804 */
+  /* syntax/typing.nit:810 */
   fra.me.REG[1] = fra.me.REG[0];
   fra.me.REG[1] = ATTR_syntax___typing___AVarFormExpr____variable(fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[1]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Cast failed", NULL, LOCATE_syntax___typing, 804);
+    nit_abort("Cast failed", NULL, LOCATE_syntax___typing, 810);
   }
   goto label1;
   label1: while(0);
@@ -4841,14 +4855,14 @@ val_t syntax___typing___AVarExpr___its_variable(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 808;
+  fra.me.line = 814;
   fra.me.meth = LOCATE_syntax___typing___AVarExpr___its_variable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:808 */
+  /* syntax/typing.nit:814 */
   fra.me.REG[0] = CALL_syntax___syntax_base___AVarFormExpr___variable(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
   label1: while(0);
@@ -4863,7 +4877,7 @@ void syntax___typing___AVarExpr___after_typing(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 810;
+  fra.me.line = 816;
   fra.me.meth = LOCATE_syntax___typing___AVarExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -4874,16 +4888,16 @@ void syntax___typing___AVarExpr___after_typing(val_t p0, val_t p1){
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:812 */
+  /* syntax/typing.nit:818 */
   fra.me.REG[2] = CALL_syntax___typing___TypingVisitor___flow_ctx(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[3] = CALL_syntax___syntax_base___AVarFormExpr___variable(fra.me.REG[0])(fra.me.REG[0]);
   CALL_syntax___flow___FlowContext___check_is_set(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[0], fra.me.REG[3]);
-  /* syntax/typing.nit:813 */
+  /* syntax/typing.nit:819 */
   fra.me.REG[1] = CALL_syntax___typing___TypingVisitor___flow_ctx(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[3] = CALL_syntax___syntax_base___AVarFormExpr___variable(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[3] = CALL_syntax___flow___FlowContext___stype(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
   ATTR_syntax___typing___AExpr____stype(fra.me.REG[0]) = fra.me.REG[3];
-  /* syntax/typing.nit:814 */
+  /* syntax/typing.nit:820 */
   fra.me.REG[3] = ATTR_syntax___typing___AExpr____stype(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -4910,7 +4924,7 @@ void syntax___typing___AVarAssignExpr___after_typing(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 819;
+  fra.me.line = 825;
   fra.me.meth = LOCATE_syntax___typing___AVarAssignExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
@@ -4922,21 +4936,21 @@ void syntax___typing___AVarAssignExpr___after_typing(val_t p0, val_t p1){
   fra.me.REG[4] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:821 */
+  /* syntax/typing.nit:827 */
   fra.me.REG[2] = CALL_syntax___syntax_base___AVarFormExpr___variable(fra.me.REG[0])(fra.me.REG[0]);
   CALL_syntax___typing___TypingVisitor___mark_is_set(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-  /* syntax/typing.nit:824 */
+  /* syntax/typing.nit:830 */
   fra.me.REG[2] = CALL_syntax___typing___TypingVisitor___base_flow_ctx(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[3] = CALL_syntax___syntax_base___AVarFormExpr___variable(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[3] = CALL_syntax___flow___FlowContext___stype(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
-  /* syntax/typing.nit:825 */
+  /* syntax/typing.nit:831 */
   fra.me.REG[2] = CALL_parser___parser_nodes___AAssignFormExpr___n_value(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = CALL_syntax___syntax_base___AbsSyntaxVisitor___check_expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
     goto label1;
   }
-  /* syntax/typing.nit:826 */
+  /* syntax/typing.nit:832 */
   REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -4961,14 +4975,14 @@ void syntax___typing___AVarAssignExpr___after_typing(val_t p0, val_t p1){
   if (UNTAG_Bool(REGB0)) {
     goto label1;
   }
-  /* syntax/typing.nit:829 */
+  /* syntax/typing.nit:835 */
   fra.me.REG[3] = CALL_syntax___typing___TypingVisitor___flow_ctx(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[2] = CALL_syntax___syntax_base___AVarFormExpr___variable(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[4] = CALL_parser___parser_nodes___AAssignFormExpr___n_value(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[4] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[4])(fra.me.REG[4]);
   fra.me.REG[4] = CALL_syntax___flow___FlowContext___sub_with(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[0], fra.me.REG[2], fra.me.REG[4]);
   CALL_syntax___typing___TypingVisitor___flow_ctx__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[4]);
-  /* syntax/typing.nit:831 */
+  /* syntax/typing.nit:837 */
   REGB0 = TAG_Bool(1);
   ATTR_syntax___typing___AExpr____is_typed(fra.me.REG[0]) = REGB0;
   label1: while(0);
@@ -4988,7 +5002,7 @@ val_t syntax___typing___AReassignFormExpr___do_rvalue_typing(val_t p0, val_t p1,
     static val_t once_value_6; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 836;
+  fra.me.line = 842;
   fra.me.meth = LOCATE_syntax___typing___AReassignFormExpr___do_rvalue_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
@@ -5004,7 +5018,7 @@ val_t syntax___typing___AReassignFormExpr___do_rvalue_typing(val_t p0, val_t p1,
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* syntax/typing.nit:841 */
+  /* syntax/typing.nit:847 */
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -5018,17 +5032,17 @@ val_t syntax___typing___AReassignFormExpr___do_rvalue_typing(val_t p0, val_t p1,
     }
   }
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:842 */
+    /* syntax/typing.nit:848 */
     fra.me.REG[3] = NIT_NULL;
     goto label1;
   }
-  /* syntax/typing.nit:844 */
+  /* syntax/typing.nit:850 */
   fra.me.REG[4] = CALL_parser___parser_nodes___AReassignFormExpr___n_assign_op(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[4] = CALL_syntax___typing___AAssignOp___method_name(fra.me.REG[4])(fra.me.REG[4]);
-  /* syntax/typing.nit:845 */
+  /* syntax/typing.nit:851 */
   REGB0 = TAG_Bool((fra.me.REG[2]!=NIT_NULL) && VAL_ISA(fra.me.REG[2], COLOR_metamodel___static_type___MMTypeNone, ID_metamodel___static_type___MMTypeNone)) /*cast MMTypeNone*/;
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:846 */
+    /* syntax/typing.nit:852 */
     REGB0 = TAG_Int(3);
     fra.me.REG[5] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
     if (!once_value_2) {
@@ -5053,21 +5067,21 @@ val_t syntax___typing___AReassignFormExpr___do_rvalue_typing(val_t p0, val_t p1,
     CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[6]);
     fra.me.REG[5] = CALL_standard___string___Object___to_s(fra.me.REG[5])(fra.me.REG[5]);
     CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[5]);
-    /* syntax/typing.nit:847 */
+    /* syntax/typing.nit:853 */
     fra.me.REG[3] = NIT_NULL;
     goto label1;
   }
-  /* syntax/typing.nit:849 */
+  /* syntax/typing.nit:855 */
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 849);
+    nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 855);
   }
   fra.me.REG[5] = CALL_metamodel___static_type___MMType___local_class(fra.me.REG[2])(fra.me.REG[2]);
-  /* syntax/typing.nit:850 */
+  /* syntax/typing.nit:856 */
   REGB0 = CALL_metamodel___abstractmetamodel___MMLocalClass___has_global_property_by_name(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[4]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:851 */
+    /* syntax/typing.nit:857 */
     REGB0 = TAG_Int(5);
     fra.me.REG[6] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
     if (!once_value_4) {
@@ -5103,22 +5117,22 @@ val_t syntax___typing___AReassignFormExpr___do_rvalue_typing(val_t p0, val_t p1,
     CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[7]);
     fra.me.REG[6] = CALL_standard___string___Object___to_s(fra.me.REG[6])(fra.me.REG[6]);
     CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[6]);
-    /* syntax/typing.nit:852 */
+    /* syntax/typing.nit:858 */
     fra.me.REG[3] = NIT_NULL;
     goto label1;
   }
-  /* syntax/typing.nit:854 */
+  /* syntax/typing.nit:860 */
   fra.me.REG[4] = CALL_metamodel___abstractmetamodel___MMLocalClass___select_method(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[4]);
-  /* syntax/typing.nit:855 */
+  /* syntax/typing.nit:861 */
   fra.me.REG[5] = CALL_metamodel___abstractmetamodel___MMLocalProperty___global(fra.me.REG[4])(fra.me.REG[4]);
   fra.me.REG[6] = CALL_syntax___syntax_base___AbsSyntaxVisitor___mmmodule(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Bool(0);
   CALL_syntax___syntax_base___MMGlobalProperty___check_visibility(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[1], fra.me.REG[0], fra.me.REG[6], REGB0);
-  /* syntax/typing.nit:856 */
+  /* syntax/typing.nit:862 */
   fra.me.REG[2] = CALL_metamodel___static_type___MMLocalProperty___signature_for(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[2]);
-  /* syntax/typing.nit:857 */
+  /* syntax/typing.nit:863 */
   ATTR_syntax___typing___AReassignFormExpr____assign_method(fra.me.REG[0]) = fra.me.REG[4];
-  /* syntax/typing.nit:858 */
+  /* syntax/typing.nit:864 */
   fra.me.REG[0] = CALL_parser___parser_nodes___AReassignFormExpr___n_value(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Int(0);
   fra.me.REG[4] = CALL_metamodel___static_type___MMSignature_____bra(fra.me.REG[2])(fra.me.REG[2], REGB0);
@@ -5129,11 +5143,11 @@ val_t syntax___typing___AReassignFormExpr___do_rvalue_typing(val_t p0, val_t p1,
     fra.me.REG[3] = NIT_NULL;
     goto label1;
   }
-  /* syntax/typing.nit:859 */
+  /* syntax/typing.nit:865 */
   fra.me.REG[2] = CALL_metamodel___static_type___MMSignature___return_type(fra.me.REG[2])(fra.me.REG[2]);
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 859);
+    nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 865);
   }
   fra.me.REG[2] = CALL_metamodel___static_type___MMType___not_for_self(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[3] = fra.me.REG[2];
@@ -5149,7 +5163,7 @@ val_t syntax___typing___AReassignFormExpr___assign_method(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 862;
+  fra.me.line = 868;
   fra.me.meth = LOCATE_syntax___typing___AReassignFormExpr___assign_method;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -5157,13 +5171,13 @@ val_t syntax___typing___AReassignFormExpr___assign_method(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:862 */
+  /* syntax/typing.nit:868 */
   fra.me.REG[1] = fra.me.REG[0];
   fra.me.REG[1] = ATTR_syntax___typing___AReassignFormExpr____assign_method(fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[1]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Cast failed", NULL, LOCATE_syntax___typing, 862);
+    nit_abort("Cast failed", NULL, LOCATE_syntax___typing, 868);
   }
   goto label1;
   label1: while(0);
@@ -5178,7 +5192,7 @@ void syntax___typing___AVarReassignExpr___after_typing(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 867;
+  fra.me.line = 873;
   fra.me.meth = LOCATE_syntax___typing___AVarReassignExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
@@ -5190,20 +5204,20 @@ void syntax___typing___AVarReassignExpr___after_typing(val_t p0, val_t p1){
   fra.me.REG[4] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:869 */
+  /* syntax/typing.nit:875 */
   fra.me.REG[2] = CALL_syntax___typing___TypingVisitor___flow_ctx(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[3] = CALL_syntax___syntax_base___AVarFormExpr___variable(fra.me.REG[0])(fra.me.REG[0]);
   CALL_syntax___flow___FlowContext___check_is_set(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[0], fra.me.REG[3]);
-  /* syntax/typing.nit:870 */
+  /* syntax/typing.nit:876 */
   fra.me.REG[3] = CALL_syntax___syntax_base___AVarFormExpr___variable(fra.me.REG[0])(fra.me.REG[0]);
   CALL_syntax___typing___TypingVisitor___mark_is_set(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
-  /* syntax/typing.nit:871 */
+  /* syntax/typing.nit:877 */
   fra.me.REG[3] = CALL_syntax___typing___TypingVisitor___flow_ctx(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[2] = CALL_syntax___syntax_base___AVarFormExpr___variable(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[2] = CALL_syntax___flow___FlowContext___stype(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[2]);
-  /* syntax/typing.nit:872 */
+  /* syntax/typing.nit:878 */
   fra.me.REG[2] = CALL_syntax___typing___AReassignFormExpr___do_rvalue_typing(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], fra.me.REG[2]);
-  /* syntax/typing.nit:873 */
+  /* syntax/typing.nit:879 */
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -5219,18 +5233,18 @@ void syntax___typing___AVarReassignExpr___after_typing(val_t p0, val_t p1){
   if (UNTAG_Bool(REGB0)) {
     goto label1;
   }
-  /* syntax/typing.nit:876 */
+  /* syntax/typing.nit:882 */
   fra.me.REG[3] = CALL_syntax___typing___TypingVisitor___base_flow_ctx(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[4] = CALL_syntax___syntax_base___AVarFormExpr___variable(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[4] = CALL_syntax___flow___FlowContext___stype(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[4]);
-  /* syntax/typing.nit:877 */
+  /* syntax/typing.nit:883 */
   fra.me.REG[3] = CALL_parser___parser_nodes___AReassignFormExpr___n_value(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = CALL_syntax___syntax_base___AbsSyntaxVisitor___check_expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
     goto label1;
   }
-  /* syntax/typing.nit:878 */
+  /* syntax/typing.nit:884 */
   REGB0 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -5255,12 +5269,12 @@ void syntax___typing___AVarReassignExpr___after_typing(val_t p0, val_t p1){
   if (UNTAG_Bool(REGB0)) {
     goto label1;
   }
-  /* syntax/typing.nit:881 */
+  /* syntax/typing.nit:887 */
   fra.me.REG[4] = CALL_syntax___typing___TypingVisitor___flow_ctx(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[3] = CALL_syntax___syntax_base___AVarFormExpr___variable(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[2] = CALL_syntax___flow___FlowContext___sub_with(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[0], fra.me.REG[3], fra.me.REG[2]);
   CALL_syntax___typing___TypingVisitor___flow_ctx__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-  /* syntax/typing.nit:883 */
+  /* syntax/typing.nit:889 */
   REGB0 = TAG_Bool(1);
   ATTR_syntax___typing___AExpr____is_typed(fra.me.REG[0]) = REGB0;
   label1: while(0);
@@ -5273,13 +5287,13 @@ val_t syntax___typing___AAssignOp___method_name(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 888;
+  fra.me.line = 894;
   fra.me.meth = LOCATE_syntax___typing___AAssignOp___method_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* syntax/typing.nit:888 */
-  nit_abort("Deferred method called", NULL, LOCATE_syntax___typing, 888);
+  /* syntax/typing.nit:894 */
+  nit_abort("Deferred method called", NULL, LOCATE_syntax___typing, 894);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -5292,14 +5306,14 @@ val_t syntax___typing___APlusAssignOp___method_name(val_t p0){
     static val_t once_value_2; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 891;
+  fra.me.line = 897;
   fra.me.meth = LOCATE_syntax___typing___APlusAssignOp___method_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:891 */
+  /* syntax/typing.nit:897 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[0] = BOX_NativeString("+");
@@ -5328,14 +5342,14 @@ val_t syntax___typing___AMinusAssignOp___method_name(val_t p0){
     static val_t once_value_2; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 894;
+  fra.me.line = 900;
   fra.me.meth = LOCATE_syntax___typing___AMinusAssignOp___method_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:894 */
+  /* syntax/typing.nit:900 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[0] = BOX_NativeString("-");
@@ -5362,7 +5376,7 @@ val_t syntax___typing___ASelfExpr___variable(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 899;
+  fra.me.line = 905;
   fra.me.meth = LOCATE_syntax___typing___ASelfExpr___variable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -5370,13 +5384,13 @@ val_t syntax___typing___ASelfExpr___variable(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:899 */
+  /* syntax/typing.nit:905 */
   fra.me.REG[1] = fra.me.REG[0];
   fra.me.REG[1] = ATTR_syntax___typing___ASelfExpr____variable(fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[1]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Cast failed", NULL, LOCATE_syntax___typing, 899);
+    nit_abort("Cast failed", NULL, LOCATE_syntax___typing, 905);
   }
   goto label1;
   label1: while(0);
@@ -5389,14 +5403,14 @@ val_t syntax___typing___ASelfExpr___its_variable(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 901;
+  fra.me.line = 907;
   fra.me.meth = LOCATE_syntax___typing___ASelfExpr___its_variable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:901 */
+  /* syntax/typing.nit:907 */
   fra.me.REG[0] = CALL_syntax___syntax_base___ASelfExpr___variable(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
   label1: while(0);
@@ -5410,7 +5424,7 @@ void syntax___typing___ASelfExpr___after_typing(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 903;
+  fra.me.line = 909;
   fra.me.meth = LOCATE_syntax___typing___ASelfExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -5420,15 +5434,15 @@ void syntax___typing___ASelfExpr___after_typing(val_t p0, val_t p1){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:905 */
+  /* syntax/typing.nit:911 */
   fra.me.REG[2] = CALL_syntax___typing___TypingVisitor___self_var(fra.me.REG[1])(fra.me.REG[1]);
   ATTR_syntax___typing___ASelfExpr____variable(fra.me.REG[0]) = fra.me.REG[2];
-  /* syntax/typing.nit:906 */
+  /* syntax/typing.nit:912 */
   fra.me.REG[1] = CALL_syntax___typing___TypingVisitor___flow_ctx(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[2] = CALL_syntax___syntax_base___ASelfExpr___variable(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[2] = CALL_syntax___flow___FlowContext___stype(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
   ATTR_syntax___typing___AExpr____stype(fra.me.REG[0]) = fra.me.REG[2];
-  /* syntax/typing.nit:907 */
+  /* syntax/typing.nit:913 */
   REGB0 = TAG_Bool(1);
   ATTR_syntax___typing___AExpr____is_typed(fra.me.REG[0]) = REGB0;
   stack_frame_head = fra.me.prev;
@@ -5441,14 +5455,14 @@ val_t syntax___typing___ASelfExpr___is_self(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 910;
+  fra.me.line = 916;
   fra.me.meth = LOCATE_syntax___typing___ASelfExpr___is_self;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:910 */
+  /* syntax/typing.nit:916 */
   REGB0 = TAG_Bool(1);
   goto label1;
   label1: while(0);
@@ -5462,14 +5476,14 @@ val_t syntax___typing___AImplicitSelfExpr___is_implicit_self(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 914;
+  fra.me.line = 920;
   fra.me.meth = LOCATE_syntax___typing___AImplicitSelfExpr___is_implicit_self;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:914 */
+  /* syntax/typing.nit:920 */
   REGB0 = TAG_Bool(1);
   goto label1;
   label1: while(0);
@@ -5484,7 +5498,7 @@ void syntax___typing___AIfexprExpr___accept_typing(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 918;
+  fra.me.line = 924;
   fra.me.meth = LOCATE_syntax___typing___AIfexprExpr___accept_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
@@ -5496,37 +5510,37 @@ void syntax___typing___AIfexprExpr___accept_typing(val_t p0, val_t p1){
   fra.me.REG[4] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:920 */
+  /* syntax/typing.nit:926 */
   fra.me.REG[2] = CALL_syntax___typing___TypingVisitor___flow_ctx(fra.me.REG[1])(fra.me.REG[1]);
-  /* syntax/typing.nit:923 */
+  /* syntax/typing.nit:929 */
   fra.me.REG[3] = CALL_parser___parser_nodes___AIfexprExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   CALL_parser___parser_prod___Visitor___enter_visit(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
-  /* syntax/typing.nit:924 */
+  /* syntax/typing.nit:930 */
   fra.me.REG[3] = CALL_parser___parser_nodes___AIfexprExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[4] = CALL_syntax___syntax_base___AbsSyntaxVisitor___type_bool(fra.me.REG[1])(fra.me.REG[1]);
   CALL_syntax___syntax_base___AbsSyntaxVisitor___check_conform_expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3], fra.me.REG[4]);
-  /* syntax/typing.nit:927 */
+  /* syntax/typing.nit:933 */
   fra.me.REG[4] = CALL_parser___parser_nodes___AIfexprExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   CALL_syntax___typing___TypingVisitor___use_if_true_flow_ctx(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[4]);
-  /* syntax/typing.nit:930 */
+  /* syntax/typing.nit:936 */
   fra.me.REG[4] = CALL_parser___parser_nodes___AIfexprExpr___n_then(fra.me.REG[0])(fra.me.REG[0]);
   CALL_syntax___typing___TypingVisitor___enter_visit_block(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[4]);
-  /* syntax/typing.nit:933 */
+  /* syntax/typing.nit:939 */
   fra.me.REG[4] = CALL_syntax___typing___TypingVisitor___flow_ctx(fra.me.REG[1])(fra.me.REG[1]);
-  /* syntax/typing.nit:936 */
+  /* syntax/typing.nit:942 */
   CALL_syntax___typing___TypingVisitor___flow_ctx__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-  /* syntax/typing.nit:937 */
+  /* syntax/typing.nit:943 */
   fra.me.REG[2] = CALL_parser___parser_nodes___AIfexprExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   CALL_syntax___typing___TypingVisitor___use_if_false_flow_ctx(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-  /* syntax/typing.nit:940 */
+  /* syntax/typing.nit:946 */
   fra.me.REG[2] = CALL_parser___parser_nodes___AIfexprExpr___n_else(fra.me.REG[0])(fra.me.REG[0]);
   CALL_syntax___typing___TypingVisitor___enter_visit_block(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-  /* syntax/typing.nit:943 */
+  /* syntax/typing.nit:949 */
   fra.me.REG[2] = CALL_syntax___typing___TypingVisitor___base_flow_ctx(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[3] = CALL_syntax___typing___TypingVisitor___flow_ctx(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[3] = CALL_syntax___flow___FlowContext___merge_reash(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[0], fra.me.REG[4], fra.me.REG[3]);
   CALL_syntax___typing___TypingVisitor___flow_ctx__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
-  /* syntax/typing.nit:945 */
+  /* syntax/typing.nit:951 */
   REGB0 = TAG_Int(2);
   fra.me.REG[3] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
   fra.me.REG[4] = CALL_parser___parser_nodes___AIfexprExpr___n_then(fra.me.REG[0])(fra.me.REG[0]);
@@ -5534,7 +5548,7 @@ void syntax___typing___AIfexprExpr___accept_typing(val_t p0, val_t p1){
   fra.me.REG[4] = CALL_parser___parser_nodes___AIfexprExpr___n_else(fra.me.REG[0])(fra.me.REG[0]);
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[4]);
   fra.me.REG[3] = CALL_syntax___syntax_base___AbsSyntaxVisitor___check_conform_multiexpr(fra.me.REG[1])(fra.me.REG[1], NIT_NULL, fra.me.REG[3]);
-  /* syntax/typing.nit:946 */
+  /* syntax/typing.nit:952 */
   REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -5550,9 +5564,9 @@ void syntax___typing___AIfexprExpr___accept_typing(val_t p0, val_t p1){
   if (UNTAG_Bool(REGB0)) {
     goto label1;
   }
-  /* syntax/typing.nit:948 */
+  /* syntax/typing.nit:954 */
   ATTR_syntax___typing___AExpr____stype(fra.me.REG[0]) = fra.me.REG[3];
-  /* syntax/typing.nit:949 */
+  /* syntax/typing.nit:955 */
   REGB0 = TAG_Bool(1);
   ATTR_syntax___typing___AExpr____is_typed(fra.me.REG[0]) = REGB0;
   label1: while(0);
@@ -5566,7 +5580,7 @@ void syntax___typing___ABoolExpr___after_typing(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 954;
+  fra.me.line = 960;
   fra.me.meth = LOCATE_syntax___typing___ABoolExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -5575,10 +5589,10 @@ void syntax___typing___ABoolExpr___after_typing(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:956 */
+  /* syntax/typing.nit:962 */
   fra.me.REG[1] = CALL_syntax___syntax_base___AbsSyntaxVisitor___type_bool(fra.me.REG[1])(fra.me.REG[1]);
   ATTR_syntax___typing___AExpr____stype(fra.me.REG[0]) = fra.me.REG[1];
-  /* syntax/typing.nit:957 */
+  /* syntax/typing.nit:963 */
   REGB0 = TAG_Bool(1);
   ATTR_syntax___typing___AExpr____is_typed(fra.me.REG[0]) = REGB0;
   stack_frame_head = fra.me.prev;
@@ -5592,7 +5606,7 @@ void syntax___typing___AOrExpr___accept_typing(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 962;
+  fra.me.line = 968;
   fra.me.meth = LOCATE_syntax___typing___AOrExpr___accept_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
@@ -5604,22 +5618,22 @@ void syntax___typing___AOrExpr___accept_typing(val_t p0, val_t p1){
   fra.me.REG[4] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:964 */
+  /* syntax/typing.nit:970 */
   fra.me.REG[2] = CALL_syntax___typing___TypingVisitor___flow_ctx(fra.me.REG[1])(fra.me.REG[1]);
-  /* syntax/typing.nit:965 */
+  /* syntax/typing.nit:971 */
   fra.me.REG[3] = CALL_syntax___syntax_base___AbsSyntaxVisitor___type_bool(fra.me.REG[1])(fra.me.REG[1]);
-  /* syntax/typing.nit:966 */
+  /* syntax/typing.nit:972 */
   ATTR_syntax___typing___AExpr____stype(fra.me.REG[0]) = fra.me.REG[3];
-  /* syntax/typing.nit:969 */
+  /* syntax/typing.nit:975 */
   fra.me.REG[4] = CALL_parser___parser_nodes___AOrExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   CALL_parser___parser_prod___Visitor___enter_visit(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[4]);
-  /* syntax/typing.nit:972 */
+  /* syntax/typing.nit:978 */
   fra.me.REG[4] = CALL_parser___parser_nodes___AOrExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   CALL_syntax___typing___TypingVisitor___use_if_false_flow_ctx(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[4]);
-  /* syntax/typing.nit:975 */
+  /* syntax/typing.nit:981 */
   fra.me.REG[4] = CALL_parser___parser_nodes___AOrExpr___n_expr2(fra.me.REG[0])(fra.me.REG[0]);
   CALL_parser___parser_prod___Visitor___enter_visit(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[4]);
-  /* syntax/typing.nit:976 */
+  /* syntax/typing.nit:982 */
   fra.me.REG[4] = CALL_parser___parser_nodes___AOrExpr___n_expr2(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[4] = CALL_syntax___typing___AExpr___if_false_flow_ctx(fra.me.REG[4])(fra.me.REG[4]);
   REGB0 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
@@ -5636,26 +5650,26 @@ void syntax___typing___AOrExpr___accept_typing(val_t p0, val_t p1){
   }
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:977 */
+    /* syntax/typing.nit:983 */
     fra.me.REG[4] = CALL_parser___parser_nodes___AOrExpr___n_expr2(fra.me.REG[0])(fra.me.REG[0]);
     fra.me.REG[4] = CALL_syntax___typing___AExpr___if_false_flow_ctx(fra.me.REG[4])(fra.me.REG[4]);
     ATTR_syntax___typing___AExpr____if_false_flow_ctx(fra.me.REG[0]) = fra.me.REG[4];
   } else {
-    /* syntax/typing.nit:979 */
+    /* syntax/typing.nit:985 */
     fra.me.REG[4] = CALL_syntax___typing___TypingVisitor___flow_ctx(fra.me.REG[1])(fra.me.REG[1]);
     ATTR_syntax___typing___AExpr____if_false_flow_ctx(fra.me.REG[0]) = fra.me.REG[4];
   }
-  /* syntax/typing.nit:982 */
+  /* syntax/typing.nit:988 */
   CALL_syntax___typing___TypingVisitor___flow_ctx__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-  /* syntax/typing.nit:984 */
+  /* syntax/typing.nit:990 */
   fra.me.REG[2] = CALL_parser___parser_nodes___AOrExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   CALL_syntax___syntax_base___AbsSyntaxVisitor___check_conform_expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2], fra.me.REG[3]);
-  /* syntax/typing.nit:985 */
+  /* syntax/typing.nit:991 */
   fra.me.REG[2] = CALL_parser___parser_nodes___AOrExpr___n_expr2(fra.me.REG[0])(fra.me.REG[0]);
   CALL_syntax___syntax_base___AbsSyntaxVisitor___check_conform_expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2], fra.me.REG[3]);
-  /* syntax/typing.nit:986 */
+  /* syntax/typing.nit:992 */
   ATTR_syntax___typing___AExpr____stype(fra.me.REG[0]) = fra.me.REG[3];
-  /* syntax/typing.nit:987 */
+  /* syntax/typing.nit:993 */
   REGB0 = TAG_Bool(1);
   ATTR_syntax___typing___AExpr____is_typed(fra.me.REG[0]) = REGB0;
   stack_frame_head = fra.me.prev;
@@ -5669,7 +5683,7 @@ void syntax___typing___AAndExpr___accept_typing(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 992;
+  fra.me.line = 998;
   fra.me.meth = LOCATE_syntax___typing___AAndExpr___accept_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
@@ -5681,20 +5695,20 @@ void syntax___typing___AAndExpr___accept_typing(val_t p0, val_t p1){
   fra.me.REG[4] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:994 */
+  /* syntax/typing.nit:1000 */
   fra.me.REG[2] = CALL_syntax___typing___TypingVisitor___flow_ctx(fra.me.REG[1])(fra.me.REG[1]);
-  /* syntax/typing.nit:995 */
+  /* syntax/typing.nit:1001 */
   fra.me.REG[3] = CALL_syntax___syntax_base___AbsSyntaxVisitor___type_bool(fra.me.REG[1])(fra.me.REG[1]);
-  /* syntax/typing.nit:998 */
+  /* syntax/typing.nit:1004 */
   fra.me.REG[4] = CALL_parser___parser_nodes___AAndExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   CALL_parser___parser_prod___Visitor___enter_visit(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[4]);
-  /* syntax/typing.nit:1001 */
+  /* syntax/typing.nit:1007 */
   fra.me.REG[4] = CALL_parser___parser_nodes___AAndExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   CALL_syntax___typing___TypingVisitor___use_if_true_flow_ctx(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[4]);
-  /* syntax/typing.nit:1004 */
+  /* syntax/typing.nit:1010 */
   fra.me.REG[4] = CALL_parser___parser_nodes___AAndExpr___n_expr2(fra.me.REG[0])(fra.me.REG[0]);
   CALL_parser___parser_prod___Visitor___enter_visit(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[4]);
-  /* syntax/typing.nit:1005 */
+  /* syntax/typing.nit:1011 */
   fra.me.REG[4] = CALL_parser___parser_nodes___AAndExpr___n_expr2(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[4] = CALL_syntax___typing___AExpr___if_true_flow_ctx(fra.me.REG[4])(fra.me.REG[4]);
   REGB0 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
@@ -5711,26 +5725,26 @@ void syntax___typing___AAndExpr___accept_typing(val_t p0, val_t p1){
   }
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:1006 */
+    /* syntax/typing.nit:1012 */
     fra.me.REG[4] = CALL_parser___parser_nodes___AAndExpr___n_expr2(fra.me.REG[0])(fra.me.REG[0]);
     fra.me.REG[4] = CALL_syntax___typing___AExpr___if_true_flow_ctx(fra.me.REG[4])(fra.me.REG[4]);
     ATTR_syntax___typing___AExpr____if_true_flow_ctx(fra.me.REG[0]) = fra.me.REG[4];
   } else {
-    /* syntax/typing.nit:1008 */
+    /* syntax/typing.nit:1014 */
     fra.me.REG[4] = CALL_syntax___typing___TypingVisitor___flow_ctx(fra.me.REG[1])(fra.me.REG[1]);
     ATTR_syntax___typing___AExpr____if_true_flow_ctx(fra.me.REG[0]) = fra.me.REG[4];
   }
-  /* syntax/typing.nit:1011 */
+  /* syntax/typing.nit:1017 */
   CALL_syntax___typing___TypingVisitor___flow_ctx__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-  /* syntax/typing.nit:1013 */
+  /* syntax/typing.nit:1019 */
   fra.me.REG[2] = CALL_parser___parser_nodes___AAndExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   CALL_syntax___syntax_base___AbsSyntaxVisitor___check_conform_expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2], fra.me.REG[3]);
-  /* syntax/typing.nit:1014 */
+  /* syntax/typing.nit:1020 */
   fra.me.REG[2] = CALL_parser___parser_nodes___AAndExpr___n_expr2(fra.me.REG[0])(fra.me.REG[0]);
   CALL_syntax___syntax_base___AbsSyntaxVisitor___check_conform_expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2], fra.me.REG[3]);
-  /* syntax/typing.nit:1015 */
+  /* syntax/typing.nit:1021 */
   ATTR_syntax___typing___AExpr____stype(fra.me.REG[0]) = fra.me.REG[3];
-  /* syntax/typing.nit:1016 */
+  /* syntax/typing.nit:1022 */
   REGB0 = TAG_Bool(1);
   ATTR_syntax___typing___AExpr____is_typed(fra.me.REG[0]) = REGB0;
   stack_frame_head = fra.me.prev;
@@ -5743,7 +5757,7 @@ void syntax___typing___ANotExpr___after_typing(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1021;
+  fra.me.line = 1027;
   fra.me.meth = LOCATE_syntax___typing___ANotExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -5754,22 +5768,22 @@ void syntax___typing___ANotExpr___after_typing(val_t p0, val_t p1){
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:1023 */
+  /* syntax/typing.nit:1029 */
   fra.me.REG[2] = CALL_parser___parser_nodes___ANotExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[3] = CALL_syntax___syntax_base___AbsSyntaxVisitor___type_bool(fra.me.REG[1])(fra.me.REG[1]);
   CALL_syntax___syntax_base___AbsSyntaxVisitor___check_conform_expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2], fra.me.REG[3]);
-  /* syntax/typing.nit:1026 */
+  /* syntax/typing.nit:1032 */
   fra.me.REG[3] = CALL_parser___parser_nodes___ANotExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[3] = ATTR_syntax___typing___AExpr____if_true_flow_ctx(fra.me.REG[3]);
   ATTR_syntax___typing___AExpr____if_false_flow_ctx(fra.me.REG[0]) = fra.me.REG[3];
-  /* syntax/typing.nit:1027 */
+  /* syntax/typing.nit:1033 */
   fra.me.REG[3] = CALL_parser___parser_nodes___ANotExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[3] = ATTR_syntax___typing___AExpr____if_false_flow_ctx(fra.me.REG[3]);
   ATTR_syntax___typing___AExpr____if_true_flow_ctx(fra.me.REG[0]) = fra.me.REG[3];
-  /* syntax/typing.nit:1029 */
+  /* syntax/typing.nit:1035 */
   fra.me.REG[1] = CALL_syntax___syntax_base___AbsSyntaxVisitor___type_bool(fra.me.REG[1])(fra.me.REG[1]);
   ATTR_syntax___typing___AExpr____stype(fra.me.REG[0]) = fra.me.REG[1];
-  /* syntax/typing.nit:1030 */
+  /* syntax/typing.nit:1036 */
   REGB0 = TAG_Bool(1);
   ATTR_syntax___typing___AExpr____is_typed(fra.me.REG[0]) = REGB0;
   stack_frame_head = fra.me.prev;
@@ -5784,7 +5798,7 @@ void syntax___typing___AOrElseExpr___after_typing(val_t p0, val_t p1){
     static val_t once_value_1; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1035;
+  fra.me.line = 1041;
   fra.me.meth = LOCATE_syntax___typing___AOrElseExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
@@ -5798,22 +5812,22 @@ void syntax___typing___AOrElseExpr___after_typing(val_t p0, val_t p1){
   fra.me.REG[6] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:1037 */
+  /* syntax/typing.nit:1043 */
   fra.me.REG[2] = CALL_syntax___typing___TypingVisitor___flow_ctx(fra.me.REG[1])(fra.me.REG[1]);
-  /* syntax/typing.nit:1040 */
+  /* syntax/typing.nit:1046 */
   fra.me.REG[3] = CALL_parser___parser_nodes___AOrElseExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   CALL_parser___parser_prod___Visitor___enter_visit(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
-  /* syntax/typing.nit:1041 */
+  /* syntax/typing.nit:1047 */
   fra.me.REG[3] = CALL_parser___parser_nodes___AOrElseExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   CALL_syntax___syntax_base___AbsSyntaxVisitor___check_expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
-  /* syntax/typing.nit:1044 */
+  /* syntax/typing.nit:1050 */
   fra.me.REG[3] = CALL_parser___parser_nodes___AOrElseExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[3] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[3])(fra.me.REG[3]);
-  /* syntax/typing.nit:1045 */
+  /* syntax/typing.nit:1051 */
   REGB0 = CALL_metamodel___static_type___MMType___is_nullable(fra.me.REG[3])(fra.me.REG[3]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:1046 */
+    /* syntax/typing.nit:1052 */
     fra.me.REG[4] = CALL_parser___parser_nodes___AOrElseExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
     if (!once_value_1) {
       fra.me.REG[5] = BOX_NativeString("Warning: left operand of a 'or else' is not a nullable type.");
@@ -5825,14 +5839,14 @@ void syntax___typing___AOrElseExpr___after_typing(val_t p0, val_t p1){
     fra.me.REG[5] = fra.me.REG[5];
     CALL_syntax___syntax_base___AbsSyntaxVisitor___warning(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[4], fra.me.REG[5]);
   } else {
-    /* syntax/typing.nit:1048 */
+    /* syntax/typing.nit:1054 */
     fra.me.REG[5] = CALL_metamodel___static_type___MMType___as_notnull(fra.me.REG[3])(fra.me.REG[3]);
     fra.me.REG[3] = fra.me.REG[5];
   }
-  /* syntax/typing.nit:1052 */
+  /* syntax/typing.nit:1058 */
   fra.me.REG[5] = CALL_parser___parser_nodes___AOrElseExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[5] = CALL_syntax___typing___AExpr___its_variable(fra.me.REG[5])(fra.me.REG[5]);
-  /* syntax/typing.nit:1053 */
+  /* syntax/typing.nit:1059 */
   REGB0 = TAG_Bool(fra.me.REG[5]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -5847,26 +5861,26 @@ void syntax___typing___AOrElseExpr___after_typing(val_t p0, val_t p1){
   }
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:1054 */
+    /* syntax/typing.nit:1060 */
     fra.me.REG[4] = CALL_syntax___typing___TypingVisitor___flow_ctx(fra.me.REG[1])(fra.me.REG[1]);
     fra.me.REG[6] = CALL_syntax___syntax_base___AbsSyntaxVisitor___type_none(fra.me.REG[1])(fra.me.REG[1]);
     CALL_syntax___flow___FlowContext___sub_with(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[0], fra.me.REG[5], fra.me.REG[6]);
   }
-  /* syntax/typing.nit:1058 */
+  /* syntax/typing.nit:1064 */
   fra.me.REG[6] = CALL_parser___parser_nodes___AOrElseExpr___n_expr2(fra.me.REG[0])(fra.me.REG[0]);
   CALL_parser___parser_prod___Visitor___enter_visit(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[6]);
-  /* syntax/typing.nit:1059 */
+  /* syntax/typing.nit:1065 */
   fra.me.REG[6] = CALL_parser___parser_nodes___AOrElseExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   CALL_syntax___syntax_base___AbsSyntaxVisitor___check_expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[6]);
-  /* syntax/typing.nit:1062 */
+  /* syntax/typing.nit:1068 */
   CALL_syntax___typing___TypingVisitor___flow_ctx__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-  /* syntax/typing.nit:1065 */
+  /* syntax/typing.nit:1071 */
   REGB0 = TAG_Int(1);
   fra.me.REG[2] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
   fra.me.REG[6] = CALL_parser___parser_nodes___AOrElseExpr___n_expr2(fra.me.REG[0])(fra.me.REG[0]);
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[6]);
   fra.me.REG[2] = CALL_syntax___syntax_base___AbsSyntaxVisitor___check_conform_multiexpr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3], fra.me.REG[2]);
-  /* syntax/typing.nit:1066 */
+  /* syntax/typing.nit:1072 */
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -5882,9 +5896,9 @@ void syntax___typing___AOrElseExpr___after_typing(val_t p0, val_t p1){
   if (UNTAG_Bool(REGB0)) {
     goto label2;
   }
-  /* syntax/typing.nit:1068 */
+  /* syntax/typing.nit:1074 */
   ATTR_syntax___typing___AExpr____stype(fra.me.REG[0]) = fra.me.REG[2];
-  /* syntax/typing.nit:1069 */
+  /* syntax/typing.nit:1075 */
   REGB0 = TAG_Bool(1);
   ATTR_syntax___typing___AExpr____is_typed(fra.me.REG[0]) = REGB0;
   label2: while(0);
@@ -5898,7 +5912,7 @@ void syntax___typing___AIntExpr___after_typing(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1074;
+  fra.me.line = 1080;
   fra.me.meth = LOCATE_syntax___typing___AIntExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -5907,10 +5921,10 @@ void syntax___typing___AIntExpr___after_typing(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:1076 */
+  /* syntax/typing.nit:1082 */
   fra.me.REG[1] = CALL_syntax___syntax_base___AbsSyntaxVisitor___type_int(fra.me.REG[1])(fra.me.REG[1]);
   ATTR_syntax___typing___AExpr____stype(fra.me.REG[0]) = fra.me.REG[1];
-  /* syntax/typing.nit:1077 */
+  /* syntax/typing.nit:1083 */
   REGB0 = TAG_Bool(1);
   ATTR_syntax___typing___AExpr____is_typed(fra.me.REG[0]) = REGB0;
   stack_frame_head = fra.me.prev;
@@ -5923,7 +5937,7 @@ void syntax___typing___AFloatExpr___after_typing(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1082;
+  fra.me.line = 1088;
   fra.me.meth = LOCATE_syntax___typing___AFloatExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -5932,10 +5946,10 @@ void syntax___typing___AFloatExpr___after_typing(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:1084 */
+  /* syntax/typing.nit:1090 */
   fra.me.REG[1] = CALL_syntax___syntax_base___AbsSyntaxVisitor___type_float(fra.me.REG[1])(fra.me.REG[1]);
   ATTR_syntax___typing___AExpr____stype(fra.me.REG[0]) = fra.me.REG[1];
-  /* syntax/typing.nit:1085 */
+  /* syntax/typing.nit:1091 */
   REGB0 = TAG_Bool(1);
   ATTR_syntax___typing___AExpr____is_typed(fra.me.REG[0]) = REGB0;
   stack_frame_head = fra.me.prev;
@@ -5948,7 +5962,7 @@ void syntax___typing___ACharExpr___after_typing(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1090;
+  fra.me.line = 1096;
   fra.me.meth = LOCATE_syntax___typing___ACharExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -5957,10 +5971,10 @@ void syntax___typing___ACharExpr___after_typing(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:1092 */
+  /* syntax/typing.nit:1098 */
   fra.me.REG[1] = CALL_syntax___syntax_base___AbsSyntaxVisitor___type_char(fra.me.REG[1])(fra.me.REG[1]);
   ATTR_syntax___typing___AExpr____stype(fra.me.REG[0]) = fra.me.REG[1];
-  /* syntax/typing.nit:1093 */
+  /* syntax/typing.nit:1099 */
   REGB0 = TAG_Bool(1);
   ATTR_syntax___typing___AExpr____is_typed(fra.me.REG[0]) = REGB0;
   stack_frame_head = fra.me.prev;
@@ -5973,7 +5987,7 @@ void syntax___typing___AStringFormExpr___after_typing(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1098;
+  fra.me.line = 1104;
   fra.me.meth = LOCATE_syntax___typing___AStringFormExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -5982,10 +5996,10 @@ void syntax___typing___AStringFormExpr___after_typing(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:1100 */
+  /* syntax/typing.nit:1106 */
   fra.me.REG[1] = CALL_syntax___syntax_base___AbsSyntaxVisitor___type_string(fra.me.REG[1])(fra.me.REG[1]);
   ATTR_syntax___typing___AExpr____stype(fra.me.REG[0]) = fra.me.REG[1];
-  /* syntax/typing.nit:1101 */
+  /* syntax/typing.nit:1107 */
   REGB0 = TAG_Bool(1);
   ATTR_syntax___typing___AExpr____is_typed(fra.me.REG[0]) = REGB0;
   stack_frame_head = fra.me.prev;
@@ -5998,7 +6012,7 @@ val_t syntax___typing___ASuperstringExpr___atype(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1106;
+  fra.me.line = 1112;
   fra.me.meth = LOCATE_syntax___typing___ASuperstringExpr___atype;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -6006,13 +6020,13 @@ val_t syntax___typing___ASuperstringExpr___atype(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1106 */
+  /* syntax/typing.nit:1112 */
   fra.me.REG[1] = fra.me.REG[0];
   fra.me.REG[1] = ATTR_syntax___typing___ASuperstringExpr____atype(fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[1]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Cast failed", NULL, LOCATE_syntax___typing, 1106);
+    nit_abort("Cast failed", NULL, LOCATE_syntax___typing, 1112);
   }
   goto label1;
   label1: while(0);
@@ -6026,7 +6040,7 @@ void syntax___typing___ASuperstringExpr___after_typing(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1108;
+  fra.me.line = 1114;
   fra.me.meth = LOCATE_syntax___typing___ASuperstringExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
@@ -6038,20 +6052,20 @@ void syntax___typing___ASuperstringExpr___after_typing(val_t p0, val_t p1){
   fra.me.REG[4] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:1110 */
+  /* syntax/typing.nit:1116 */
   fra.me.REG[2] = CALL_syntax___syntax_base___AbsSyntaxVisitor___type_object(fra.me.REG[1])(fra.me.REG[1]);
-  /* syntax/typing.nit:1111 */
+  /* syntax/typing.nit:1117 */
   fra.me.REG[3] = CALL_syntax___syntax_base___AbsSyntaxVisitor___type_string(fra.me.REG[1])(fra.me.REG[1]);
-  /* syntax/typing.nit:1112 */
+  /* syntax/typing.nit:1118 */
   ATTR_syntax___typing___AExpr____stype(fra.me.REG[0]) = fra.me.REG[3];
-  /* syntax/typing.nit:1113 */
+  /* syntax/typing.nit:1119 */
   fra.me.REG[4] = CALL_parser___parser_nodes___ASuperstringExpr___n_exprs(fra.me.REG[0])(fra.me.REG[0]);
   CALL_standard___collection___abstract_collection___Collection___iterate(fra.me.REG[4])(fra.me.REG[4], (&(fra.me)), ((fun_t)OC_syntax___typing___ASuperstringExpr___after_typing_1));
-  /* syntax/typing.nit:1114 */
+  /* syntax/typing.nit:1120 */
   fra.me.REG[3] = CALL_syntax___syntax_base___AbsSyntaxVisitor___type_array(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
-  /* syntax/typing.nit:1115 */
+  /* syntax/typing.nit:1121 */
   ATTR_syntax___typing___ASuperstringExpr____atype(fra.me.REG[0]) = fra.me.REG[3];
-  /* syntax/typing.nit:1116 */
+  /* syntax/typing.nit:1122 */
   REGB0 = TAG_Bool(1);
   ATTR_syntax___typing___AExpr____is_typed(fra.me.REG[0]) = REGB0;
   stack_frame_head = fra.me.prev;
@@ -6084,7 +6098,7 @@ void syntax___typing___ANullExpr___after_typing(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1121;
+  fra.me.line = 1127;
   fra.me.meth = LOCATE_syntax___typing___ANullExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -6093,10 +6107,10 @@ void syntax___typing___ANullExpr___after_typing(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:1123 */
+  /* syntax/typing.nit:1129 */
   fra.me.REG[1] = CALL_syntax___syntax_base___AbsSyntaxVisitor___type_none(fra.me.REG[1])(fra.me.REG[1]);
   ATTR_syntax___typing___AExpr____stype(fra.me.REG[0]) = fra.me.REG[1];
-  /* syntax/typing.nit:1124 */
+  /* syntax/typing.nit:1130 */
   REGB0 = TAG_Bool(1);
   ATTR_syntax___typing___AExpr____is_typed(fra.me.REG[0]) = REGB0;
   stack_frame_head = fra.me.prev;
@@ -6110,7 +6124,7 @@ void syntax___typing___AArrayExpr___after_typing(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1129;
+  fra.me.line = 1135;
   fra.me.meth = LOCATE_syntax___typing___AArrayExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -6120,11 +6134,11 @@ void syntax___typing___AArrayExpr___after_typing(val_t p0, val_t p1){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:1131 */
+  /* syntax/typing.nit:1137 */
   fra.me.REG[2] = CALL_parser___parser_nodes___AArrayExpr___n_exprs(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[2] = CALL_parser___parser_nodes___AExprs___n_exprs(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[2] = CALL_syntax___syntax_base___AbsSyntaxVisitor___check_conform_multiexpr(fra.me.REG[1])(fra.me.REG[1], NIT_NULL, fra.me.REG[2]);
-  /* syntax/typing.nit:1132 */
+  /* syntax/typing.nit:1138 */
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -6151,7 +6165,7 @@ void syntax___typing___AArrayExpr___do_typing(val_t p0, val_t p1, val_t p2){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1135;
+  fra.me.line = 1141;
   fra.me.meth = LOCATE_syntax___typing___AArrayExpr___do_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -6162,10 +6176,10 @@ void syntax___typing___AArrayExpr___do_typing(val_t p0, val_t p1, val_t p2){
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* syntax/typing.nit:1137 */
+  /* syntax/typing.nit:1143 */
   fra.me.REG[2] = CALL_syntax___syntax_base___AbsSyntaxVisitor___type_array(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
   ATTR_syntax___typing___AExpr____stype(fra.me.REG[0]) = fra.me.REG[2];
-  /* syntax/typing.nit:1138 */
+  /* syntax/typing.nit:1144 */
   REGB0 = TAG_Bool(1);
   ATTR_syntax___typing___AExpr____is_typed(fra.me.REG[0]) = REGB0;
   stack_frame_head = fra.me.prev;
@@ -6182,7 +6196,7 @@ void syntax___typing___ARangeExpr___after_typing(val_t p0, val_t p1){
       static val_t once_value_4; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1143;
+  fra.me.line = 1149;
   fra.me.meth = LOCATE_syntax___typing___ARangeExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
@@ -6195,7 +6209,7 @@ void syntax___typing___ARangeExpr___after_typing(val_t p0, val_t p1){
   fra.me.REG[5] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:1145 */
+  /* syntax/typing.nit:1151 */
   fra.me.REG[2] = CALL_parser___parser_nodes___ARangeExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = CALL_syntax___syntax_base___AbsSyntaxVisitor___check_expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
@@ -6210,23 +6224,23 @@ void syntax___typing___ARangeExpr___after_typing(val_t p0, val_t p1){
   if (UNTAG_Bool(REGB0)) {
     goto label1;
   }
-  /* syntax/typing.nit:1146 */
+  /* syntax/typing.nit:1152 */
   fra.me.REG[2] = CALL_parser___parser_nodes___ARangeExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[2] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[2])(fra.me.REG[2]);
-  /* syntax/typing.nit:1147 */
+  /* syntax/typing.nit:1153 */
   fra.me.REG[3] = CALL_parser___parser_nodes___ARangeExpr___n_expr2(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[3] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[3])(fra.me.REG[3]);
-  /* syntax/typing.nit:1148 */
+  /* syntax/typing.nit:1154 */
   REGB0 = CALL_metamodel___static_type___MMType_____l(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:1149 */
+    /* syntax/typing.nit:1155 */
     fra.me.REG[2] = fra.me.REG[3];
   } else {
-    /* syntax/typing.nit:1150 */
+    /* syntax/typing.nit:1156 */
     REGB0 = CALL_metamodel___static_type___MMType_____l(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[2]);
     REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
     if (UNTAG_Bool(REGB0)) {
-      /* syntax/typing.nit:1151 */
+      /* syntax/typing.nit:1157 */
       REGB0 = TAG_Int(5);
       fra.me.REG[4] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
       if (!once_value_2) {
@@ -6262,13 +6276,13 @@ void syntax___typing___ARangeExpr___after_typing(val_t p0, val_t p1){
       CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[3]);
       fra.me.REG[4] = CALL_standard___string___Object___to_s(fra.me.REG[4])(fra.me.REG[4]);
       CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[4]);
-      /* syntax/typing.nit:1152 */
+      /* syntax/typing.nit:1158 */
       goto label1;
     }
   }
-  /* syntax/typing.nit:1154 */
+  /* syntax/typing.nit:1160 */
   fra.me.REG[4] = CALL_syntax___syntax_base___AbsSyntaxVisitor___type_discrete(fra.me.REG[1])(fra.me.REG[1]);
-  /* syntax/typing.nit:1155 */
+  /* syntax/typing.nit:1161 */
   fra.me.REG[3] = CALL_parser___parser_nodes___ARangeExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = CALL_syntax___syntax_base___AbsSyntaxVisitor___check_conform_expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3], fra.me.REG[4]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
@@ -6283,10 +6297,10 @@ void syntax___typing___ARangeExpr___after_typing(val_t p0, val_t p1){
   if (UNTAG_Bool(REGB0)) {
     goto label1;
   }
-  /* syntax/typing.nit:1156 */
+  /* syntax/typing.nit:1162 */
   fra.me.REG[2] = CALL_syntax___syntax_base___AbsSyntaxVisitor___type_range(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
   ATTR_syntax___typing___AExpr____stype(fra.me.REG[0]) = fra.me.REG[2];
-  /* syntax/typing.nit:1157 */
+  /* syntax/typing.nit:1163 */
   REGB0 = TAG_Bool(1);
   ATTR_syntax___typing___AExpr____is_typed(fra.me.REG[0]) = REGB0;
   label1: while(0);
@@ -6299,14 +6313,14 @@ val_t syntax___typing___ASuperExpr___init_in_superclass(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1162;
+  fra.me.line = 1168;
   fra.me.meth = LOCATE_syntax___typing___ASuperExpr___init_in_superclass;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1162 */
+  /* syntax/typing.nit:1168 */
   fra.me.REG[0] = ATTR_syntax___typing___ASuperExpr____init_in_superclass(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -6317,14 +6331,14 @@ val_t syntax___typing___ASuperExpr___compute_raw_arguments(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1163;
+  fra.me.line = 1169;
   fra.me.meth = LOCATE_syntax___typing___ASuperExpr___compute_raw_arguments;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1163 */
+  /* syntax/typing.nit:1169 */
   fra.me.REG[0] = CALL_parser___parser_nodes___ASuperExpr___n_args(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_syntax___syntax_base___AExprs___to_a(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -6352,7 +6366,7 @@ void syntax___typing___ASuperExpr___after_typing(val_t p0, val_t p1){
       static val_t once_value_13; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1164;
+  fra.me.line = 1170;
   fra.me.meth = LOCATE_syntax___typing___ASuperExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
@@ -6369,27 +6383,27 @@ void syntax___typing___ASuperExpr___after_typing(val_t p0, val_t p1){
   fra.me.REG[9] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:1164 */
+  /* syntax/typing.nit:1170 */
   fra.me.REG[2] = fra.me.REG[0];
-  /* syntax/typing.nit:1166 */
+  /* syntax/typing.nit:1172 */
   fra.me.REG[3] = CALL_syntax___syntax_base___AbsSyntaxVisitor___local_property(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[3] = CALL_metamodel___abstractmetamodel___MMLocalProperty___prhe(fra.me.REG[3])(fra.me.REG[3]);
   fra.me.REG[3] = CALL_metamodel___partial_order___PartialOrderElement___direct_greaters(fra.me.REG[3])(fra.me.REG[3]);
-  /* syntax/typing.nit:1167 */
+  /* syntax/typing.nit:1173 */
   REGB0 = CALL_standard___collection___abstract_collection___Collection___is_empty(fra.me.REG[3])(fra.me.REG[3]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:1168 */
+    /* syntax/typing.nit:1174 */
     fra.me.REG[4] = CALL_syntax___syntax_base___AbsSyntaxVisitor___local_property(fra.me.REG[1])(fra.me.REG[1]);
     REGB0 = TAG_Bool(1);
     CALL_metamodel___abstractmetamodel___MMLocalProperty___need_super__eq(fra.me.REG[4])(fra.me.REG[4], REGB0);
   } else {
-    /* syntax/typing.nit:1169 */
+    /* syntax/typing.nit:1175 */
     fra.me.REG[4] = CALL_syntax___syntax_base___AbsSyntaxVisitor___local_property(fra.me.REG[1])(fra.me.REG[1]);
     fra.me.REG[4] = CALL_metamodel___abstractmetamodel___MMLocalProperty___global(fra.me.REG[4])(fra.me.REG[4]);
     REGB0 = CALL_metamodel___abstractmetamodel___MMGlobalProperty___is_init(fra.me.REG[4])(fra.me.REG[4]);
     if (UNTAG_Bool(REGB0)) {
-      /* syntax/typing.nit:1170 */
+      /* syntax/typing.nit:1176 */
       fra.me.REG[4] = CALL_syntax___syntax_base___AbsSyntaxVisitor___local_class(fra.me.REG[1])(fra.me.REG[1]);
       fra.me.REG[5] = CALL_syntax___syntax_base___AbsSyntaxVisitor___local_property(fra.me.REG[1])(fra.me.REG[1]);
       fra.me.REG[5] = CALL_metamodel___abstractmetamodel___MMLocalProperty___name(fra.me.REG[5])(fra.me.REG[5]);
@@ -6430,14 +6444,14 @@ void syntax___typing___ASuperExpr___after_typing(val_t p0, val_t p1){
           if (UNTAG_Bool(REGB1)) {
             nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
           }
-          /* ../lib/standard/collection/array.nit:718 */
+          /* ../lib/standard/collection/array.nit:724 */
           fra.me.REG[7] = ((Nit_NativeArray)fra.me.REG[6])->val[UNTAG_Int(REGB0)];
-          /* syntax/typing.nit:1172 */
+          /* syntax/typing.nit:1178 */
           fra.me.REG[8] = CALL_metamodel___abstractmetamodel___MMLocalProperty___global(fra.me.REG[7])(fra.me.REG[7]);
           REGB1 = CALL_metamodel___abstractmetamodel___MMGlobalProperty___is_init(fra.me.REG[8])(fra.me.REG[8]);
           REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
           if (UNTAG_Bool(REGB1)) {
-            /* syntax/typing.nit:1173 */
+            /* syntax/typing.nit:1179 */
             REGB1 = TAG_Int(5);
             fra.me.REG[8] = NEW_Array_standard___collection___array___Array___with_capacity(REGB1);
             if (!once_value_1) {
@@ -6475,7 +6489,7 @@ void syntax___typing___ASuperExpr___after_typing(val_t p0, val_t p1){
             fra.me.REG[8] = CALL_standard___string___Object___to_s(fra.me.REG[8])(fra.me.REG[8]);
             CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2], fra.me.REG[8]);
           } else {
-            /* syntax/typing.nit:1175 */
+            /* syntax/typing.nit:1181 */
             fra.me.REG[8] = CALL_syntax___syntax_base___AbsSyntaxVisitor___local_class(fra.me.REG[1])(fra.me.REG[1]);
             fra.me.REG[7] = CALL_metamodel___abstractmetamodel___MMLocalProperty___global(fra.me.REG[7])(fra.me.REG[7]);
             fra.me.REG[7] = CALL_metamodel___abstractmetamodel___MMLocalClass_____bra(fra.me.REG[8])(fra.me.REG[8], fra.me.REG[7]);
@@ -6493,10 +6507,10 @@ void syntax___typing___ASuperExpr___after_typing(val_t p0, val_t p1){
         }
       }
       label4: while(0);
-      /* syntax/typing.nit:1178 */
+      /* syntax/typing.nit:1184 */
       REGB0 = CALL_standard___collection___abstract_collection___Collection___is_empty(fra.me.REG[3])(fra.me.REG[3]);
       if (UNTAG_Bool(REGB0)) {
-        /* syntax/typing.nit:1179 */
+        /* syntax/typing.nit:1185 */
         REGB0 = TAG_Int(3);
         fra.me.REG[6] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
         if (!once_value_5) {
@@ -6523,7 +6537,7 @@ void syntax___typing___ASuperExpr___after_typing(val_t p0, val_t p1){
         CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[4]);
         fra.me.REG[6] = CALL_standard___string___Object___to_s(fra.me.REG[6])(fra.me.REG[6]);
         CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2], fra.me.REG[6]);
-        /* syntax/typing.nit:1180 */
+        /* syntax/typing.nit:1186 */
         goto label7;
       } else {
         /* ../lib/standard/collection/array.nit:24 */
@@ -6533,7 +6547,7 @@ void syntax___typing___ASuperExpr___after_typing(val_t p0, val_t p1){
           nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
         }
         REGB0 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[3]);
-        /* syntax/typing.nit:1181 */
+        /* syntax/typing.nit:1187 */
         REGB1 = TAG_Int(1);
         REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
         if (UNTAG_Bool(REGB2)) {
@@ -6542,9 +6556,9 @@ void syntax___typing___ASuperExpr___after_typing(val_t p0, val_t p1){
         }
         /* ../lib/standard/kernel.nit:237 */
         REGB1 = TAG_Bool(UNTAG_Int(REGB0)>UNTAG_Int(REGB1));
-        /* syntax/typing.nit:1181 */
+        /* syntax/typing.nit:1187 */
         if (UNTAG_Bool(REGB1)) {
-          /* syntax/typing.nit:1182 */
+          /* syntax/typing.nit:1188 */
           REGB1 = TAG_Int(5);
           fra.me.REG[6] = NEW_Array_standard___collection___array___Array___with_capacity(REGB1);
           if (!once_value_8) {
@@ -6590,23 +6604,23 @@ void syntax___typing___ASuperExpr___after_typing(val_t p0, val_t p1){
           CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[4]);
           fra.me.REG[6] = CALL_standard___string___Object___to_s(fra.me.REG[6])(fra.me.REG[6]);
           CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2], fra.me.REG[6]);
-          /* syntax/typing.nit:1183 */
+          /* syntax/typing.nit:1189 */
           goto label7;
         }
       }
-      /* syntax/typing.nit:1185 */
+      /* syntax/typing.nit:1191 */
       fra.me.REG[5] = CALL_standard___collection___abstract_collection___Collection___first(fra.me.REG[5])(fra.me.REG[5]);
-      /* syntax/typing.nit:1186 */
+      /* syntax/typing.nit:1192 */
       REGB1 = TAG_Bool(VAL_ISA(fra.me.REG[5], COLOR_metamodel___abstractmetamodel___MMMethod, ID_metamodel___abstractmetamodel___MMMethod)) /*cast MMMethod*/;
       if (UNTAG_Bool(REGB1)) {
       } else {
-        nit_abort("Assert failed", NULL, LOCATE_syntax___typing, 1186);
+        nit_abort("Assert failed", NULL, LOCATE_syntax___typing, 1192);
       }
-      /* syntax/typing.nit:1187 */
+      /* syntax/typing.nit:1193 */
       ATTR_syntax___typing___ASuperExpr____init_in_superclass(fra.me.REG[2]) = fra.me.REG[5];
-      /* syntax/typing.nit:1188 */
+      /* syntax/typing.nit:1194 */
       CALL_syntax___typing___ASuperInitCall___register_super_init_call(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1], fra.me.REG[5]);
-      /* syntax/typing.nit:1189 */
+      /* syntax/typing.nit:1195 */
       fra.me.REG[6] = CALL_parser___parser_nodes___ASuperExpr___n_args(fra.me.REG[2])(fra.me.REG[2]);
       fra.me.REG[6] = CALL_parser___parser_nodes___AExprs___n_exprs(fra.me.REG[6])(fra.me.REG[6]);
       REGB1 = CALL_standard___collection___abstract_collection___Collection___length(fra.me.REG[6])(fra.me.REG[6]);
@@ -6618,25 +6632,25 @@ void syntax___typing___ASuperExpr___after_typing(val_t p0, val_t p1){
       }
       /* ../lib/standard/kernel.nit:237 */
       REGB0 = TAG_Bool(UNTAG_Int(REGB1)>UNTAG_Int(REGB0));
-      /* syntax/typing.nit:1189 */
+      /* syntax/typing.nit:1195 */
       if (UNTAG_Bool(REGB0)) {
-        /* syntax/typing.nit:1190 */
+        /* syntax/typing.nit:1196 */
         fra.me.REG[6] = CALL_syntax___typing___TypingVisitor___self_var(fra.me.REG[1])(fra.me.REG[1]);
         fra.me.REG[6] = CALL_syntax___syntax_base___Variable___stype(fra.me.REG[6])(fra.me.REG[6]);
         REGB0 = TAG_Bool((fra.me.REG[6]!=NIT_NULL) && VAL_ISA(fra.me.REG[6], COLOR_metamodel___static_type___MMType, ID_metamodel___static_type___MMType)) /*cast MMType*/;
         if (UNTAG_Bool(REGB0)) {
         } else {
-          nit_abort("Cast failed", NULL, LOCATE_syntax___typing, 1190);
+          nit_abort("Cast failed", NULL, LOCATE_syntax___typing, 1196);
         }
         REGB0 = TAG_Bool(1);
         fra.me.REG[6] = CALL_syntax___typing___AAbsSendExpr___get_signature(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1], fra.me.REG[6], fra.me.REG[5], REGB0);
-        /* syntax/typing.nit:1191 */
+        /* syntax/typing.nit:1197 */
         fra.me.REG[5] = CALL_metamodel___abstractmetamodel___MMLocalProperty___name(fra.me.REG[5])(fra.me.REG[5]);
         fra.me.REG[4] = CALL_syntax___typing___AAbsAbsSendExpr___compute_raw_arguments(fra.me.REG[2])(fra.me.REG[2]);
         CALL_syntax___typing___AAbsAbsSendExpr___process_signature(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1], fra.me.REG[6], fra.me.REG[5], fra.me.REG[4]);
       }
     } else {
-      /* syntax/typing.nit:1194 */
+      /* syntax/typing.nit:1200 */
       REGB0 = TAG_Int(3);
       fra.me.REG[4] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
       if (!once_value_12) {
@@ -6662,22 +6676,22 @@ void syntax___typing___ASuperExpr___after_typing(val_t p0, val_t p1){
       CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[5]);
       fra.me.REG[4] = CALL_standard___string___Object___to_s(fra.me.REG[4])(fra.me.REG[4]);
       CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2], fra.me.REG[4]);
-      /* syntax/typing.nit:1195 */
+      /* syntax/typing.nit:1201 */
       goto label7;
     }
   }
-  /* syntax/typing.nit:1198 */
+  /* syntax/typing.nit:1204 */
   fra.me.REG[4] = CALL_standard___collection___abstract_collection___Collection___first(fra.me.REG[3])(fra.me.REG[3]);
   fra.me.REG[5] = CALL_syntax___typing___TypingVisitor___self_var(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[5] = CALL_syntax___syntax_base___Variable___stype(fra.me.REG[5])(fra.me.REG[5]);
   REGB0 = TAG_Bool((fra.me.REG[5]!=NIT_NULL) && VAL_ISA(fra.me.REG[5], COLOR_metamodel___static_type___MMType, ID_metamodel___static_type___MMType)) /*cast MMType*/;
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Cast failed", NULL, LOCATE_syntax___typing, 1198);
+    nit_abort("Cast failed", NULL, LOCATE_syntax___typing, 1204);
   }
   REGB0 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1198);
+    nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1204);
   }
   fra.me.REG[5] = CALL_metamodel___static_type___MMLocalProperty___signature_for(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[5]);
   fra.me.REG[5] = CALL_metamodel___static_type___MMSignature___return_type(fra.me.REG[5])(fra.me.REG[5]);
@@ -6695,9 +6709,9 @@ void syntax___typing___ASuperExpr___after_typing(val_t p0, val_t p1){
   }
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:1199 */
+    /* syntax/typing.nit:1205 */
     fra.me.REG[5] = NEW_Array_standard___collection___array___Array___init();
-    /* syntax/typing.nit:1200 */
+    /* syntax/typing.nit:1206 */
     fra.me.REG[4] = NIT_NULL;
     /* ../lib/standard/collection/array.nit:269 */
     REGB0 = TAG_Int(0);
@@ -6733,41 +6747,41 @@ void syntax___typing___ASuperExpr___after_typing(val_t p0, val_t p1){
         if (UNTAG_Bool(REGB1)) {
           nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
         }
-        /* ../lib/standard/collection/array.nit:718 */
+        /* ../lib/standard/collection/array.nit:724 */
         fra.me.REG[7] = ((Nit_NativeArray)fra.me.REG[6])->val[UNTAG_Int(REGB0)];
-        /* syntax/typing.nit:1202 */
+        /* syntax/typing.nit:1208 */
         REGB1 = TAG_Bool(VAL_ISA(fra.me.REG[7], COLOR_metamodel___abstractmetamodel___MMMethod, ID_metamodel___abstractmetamodel___MMMethod)) /*cast MMMethod*/;
         if (UNTAG_Bool(REGB1)) {
         } else {
-          nit_abort("Assert failed", NULL, LOCATE_syntax___typing, 1202);
+          nit_abort("Assert failed", NULL, LOCATE_syntax___typing, 1208);
         }
-        /* syntax/typing.nit:1203 */
+        /* syntax/typing.nit:1209 */
         fra.me.REG[8] = CALL_syntax___typing___TypingVisitor___self_var(fra.me.REG[1])(fra.me.REG[1]);
         fra.me.REG[8] = CALL_syntax___syntax_base___Variable___stype(fra.me.REG[8])(fra.me.REG[8]);
         REGB1 = TAG_Bool((fra.me.REG[8]!=NIT_NULL) && VAL_ISA(fra.me.REG[8], COLOR_metamodel___static_type___MMType, ID_metamodel___static_type___MMType)) /*cast MMType*/;
         if (UNTAG_Bool(REGB1)) {
         } else {
-          nit_abort("Cast failed", NULL, LOCATE_syntax___typing, 1203);
+          nit_abort("Cast failed", NULL, LOCATE_syntax___typing, 1209);
         }
         fra.me.REG[8] = CALL_metamodel___static_type___MMLocalProperty___signature_for(fra.me.REG[7])(fra.me.REG[7], fra.me.REG[8]);
         fra.me.REG[8] = CALL_metamodel___static_type___MMSignature___return_type(fra.me.REG[8])(fra.me.REG[8]);
         fra.me.REG[7] = CALL_syntax___syntax_base___AbsSyntaxVisitor___mmmodule(fra.me.REG[1])(fra.me.REG[1]);
         REGB1 = TAG_Bool(fra.me.REG[8]==NIT_NULL);
         if (UNTAG_Bool(REGB1)) {
-          nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1203);
+          nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1209);
         }
         fra.me.REG[7] = CALL_metamodel___static_type___MMType___for_module(fra.me.REG[8])(fra.me.REG[8], fra.me.REG[7]);
         fra.me.REG[8] = CALL_syntax___syntax_base___AbsSyntaxVisitor___local_property(fra.me.REG[1])(fra.me.REG[1]);
         fra.me.REG[8] = CALL_metamodel___static_type___MMLocalProperty___signature(fra.me.REG[8])(fra.me.REG[8]);
         REGB1 = TAG_Bool(fra.me.REG[8]==NIT_NULL);
         if (UNTAG_Bool(REGB1)) {
-          nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1203);
+          nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1209);
         }
         fra.me.REG[8] = CALL_metamodel___static_type___MMSignature___recv(fra.me.REG[8])(fra.me.REG[8]);
         fra.me.REG[8] = CALL_metamodel___static_type___MMType___adapt_to(fra.me.REG[7])(fra.me.REG[7], fra.me.REG[8]);
-        /* syntax/typing.nit:1204 */
+        /* syntax/typing.nit:1210 */
         CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[8]);
-        /* syntax/typing.nit:1205 */
+        /* syntax/typing.nit:1211 */
         REGB1 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
         if (UNTAG_Bool(REGB1)) {
         } else {
@@ -6785,13 +6799,13 @@ void syntax___typing___ASuperExpr___after_typing(val_t p0, val_t p1){
         } else {
           REGB2 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
           if (UNTAG_Bool(REGB2)) {
-            nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1205);
+            nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1211);
           }
           REGB2 = CALL_metamodel___static_type___MMType_____l(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[8]);
           REGB1 = REGB2;
         }
         if (UNTAG_Bool(REGB1)) {
-          /* syntax/typing.nit:1206 */
+          /* syntax/typing.nit:1212 */
           fra.me.REG[4] = fra.me.REG[8];
         }
         /* ../lib/standard/collection/array.nit:274 */
@@ -6840,13 +6854,13 @@ void syntax___typing___ASuperExpr___after_typing(val_t p0, val_t p1){
         if (UNTAG_Bool(REGB1)) {
           nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
         }
-        /* ../lib/standard/collection/array.nit:718 */
+        /* ../lib/standard/collection/array.nit:724 */
         fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[6])->val[UNTAG_Int(REGB0)];
-        /* syntax/typing.nit:1210 */
+        /* syntax/typing.nit:1216 */
         REGB1 = TAG_Bool(fra.me.REG[4]!=NIT_NULL);
         if (UNTAG_Bool(REGB1)) {
         } else {
-          nit_abort("Cast failed", NULL, LOCATE_syntax___typing, 1210);
+          nit_abort("Cast failed", NULL, LOCATE_syntax___typing, 1216);
         }
         CALL_syntax___syntax_base___AbsSyntaxVisitor___check_conform(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2], fra.me.REG[3], fra.me.REG[4]);
         /* ../lib/standard/collection/array.nit:274 */
@@ -6861,20 +6875,20 @@ void syntax___typing___ASuperExpr___after_typing(val_t p0, val_t p1){
       }
     }
     label15: while(0);
-    /* syntax/typing.nit:1212 */
+    /* syntax/typing.nit:1218 */
     ATTR_syntax___typing___AExpr____stype(fra.me.REG[2]) = fra.me.REG[4];
   }
-  /* syntax/typing.nit:1214 */
+  /* syntax/typing.nit:1220 */
   fra.me.REG[1] = CALL_syntax___syntax_base___AbsSyntaxVisitor___local_property(fra.me.REG[1])(fra.me.REG[1]);
-  /* syntax/typing.nit:1215 */
+  /* syntax/typing.nit:1221 */
   REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[1], COLOR_syntax___syntax_base___MMSrcMethod, ID_syntax___syntax_base___MMSrcMethod)) /*cast MMSrcMethod*/;
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Assert failed", NULL, LOCATE_syntax___typing, 1215);
+    nit_abort("Assert failed", NULL, LOCATE_syntax___typing, 1221);
   }
-  /* syntax/typing.nit:1216 */
+  /* syntax/typing.nit:1222 */
   ATTR_syntax___typing___AAbsSendExpr____prop(fra.me.REG[2]) = fra.me.REG[1];
-  /* syntax/typing.nit:1217 */
+  /* syntax/typing.nit:1223 */
   REGB0 = TAG_Bool(1);
   ATTR_syntax___typing___AExpr____is_typed(fra.me.REG[2]) = REGB0;
   label7: while(0);
@@ -6887,14 +6901,14 @@ val_t syntax___typing___AExternCall___target_class_name(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1222;
+  fra.me.line = 1228;
   fra.me.meth = LOCATE_syntax___typing___AExternCall___target_class_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1222 */
+  /* syntax/typing.nit:1228 */
   fra.me.REG[0] = NIT_NULL;
   goto label1;
   label1: while(0);
@@ -6907,13 +6921,13 @@ val_t syntax___typing___AExternCall___target_method_name(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1223;
+  fra.me.line = 1229;
   fra.me.meth = LOCATE_syntax___typing___AExternCall___target_method_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* syntax/typing.nit:1223 */
-  nit_abort("Deferred method called", NULL, LOCATE_syntax___typing, 1223);
+  /* syntax/typing.nit:1229 */
+  nit_abort("Deferred method called", NULL, LOCATE_syntax___typing, 1229);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -6931,7 +6945,7 @@ void syntax___typing___AExternCall___after_typing(val_t p0, val_t p1){
     static val_t once_value_7; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1225;
+  fra.me.line = 1231;
   fra.me.meth = LOCATE_syntax___typing___AExternCall___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
@@ -6946,13 +6960,13 @@ void syntax___typing___AExternCall___after_typing(val_t p0, val_t p1){
   fra.me.REG[7] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:1225 */
+  /* syntax/typing.nit:1231 */
   fra.me.REG[2] = fra.me.REG[0];
-  /* syntax/typing.nit:1227 */
+  /* syntax/typing.nit:1233 */
   fra.me.REG[3] = CALL_syntax___typing___AExternCall___target_class_name(fra.me.REG[2])(fra.me.REG[2]);
-  /* syntax/typing.nit:1228 */
+  /* syntax/typing.nit:1234 */
   fra.me.REG[4] = CALL_syntax___typing___AExternCall___target_method_name(fra.me.REG[2])(fra.me.REG[2]);
-  /* syntax/typing.nit:1235 */
+  /* syntax/typing.nit:1241 */
   REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -6966,26 +6980,26 @@ void syntax___typing___AExternCall___after_typing(val_t p0, val_t p1){
     }
   }
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:1236 */
+    /* syntax/typing.nit:1242 */
     fra.me.REG[5] = CALL_syntax___syntax_base___AbsSyntaxVisitor___local_property(fra.me.REG[1])(fra.me.REG[1]);
     fra.me.REG[5] = CALL_metamodel___abstractmetamodel___MMLocalProperty___local_class(fra.me.REG[5])(fra.me.REG[5]);
   } else {
-    /* syntax/typing.nit:1238 */
+    /* syntax/typing.nit:1244 */
     fra.me.REG[6] = CALL_syntax___syntax_base___AbsSyntaxVisitor___local_property(fra.me.REG[1])(fra.me.REG[1]);
     fra.me.REG[6] = CALL_metamodel___abstractmetamodel___MMLocalProperty___mmmodule(fra.me.REG[6])(fra.me.REG[6]);
     REGB0 = CALL_metamodel___abstractmetamodel___MMModule___has_global_class_named(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[3]);
     if (UNTAG_Bool(REGB0)) {
-      /* syntax/typing.nit:1239 */
+      /* syntax/typing.nit:1245 */
       fra.me.REG[6] = CALL_syntax___syntax_base___AbsSyntaxVisitor___local_property(fra.me.REG[1])(fra.me.REG[1]);
       fra.me.REG[6] = CALL_metamodel___abstractmetamodel___MMLocalProperty___mmmodule(fra.me.REG[6])(fra.me.REG[6]);
       fra.me.REG[6] = CALL_metamodel___abstractmetamodel___MMModule___global_class_named(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[3]);
-      /* syntax/typing.nit:1240 */
+      /* syntax/typing.nit:1246 */
       fra.me.REG[7] = CALL_syntax___syntax_base___AbsSyntaxVisitor___local_property(fra.me.REG[1])(fra.me.REG[1]);
       fra.me.REG[7] = CALL_metamodel___abstractmetamodel___MMLocalProperty___mmmodule(fra.me.REG[7])(fra.me.REG[7]);
       fra.me.REG[6] = CALL_metamodel___abstractmetamodel___MMModule_____bra(fra.me.REG[7])(fra.me.REG[7], fra.me.REG[6]);
       fra.me.REG[5] = fra.me.REG[6];
     } else {
-      /* syntax/typing.nit:1242 */
+      /* syntax/typing.nit:1248 */
       REGB0 = TAG_Int(3);
       fra.me.REG[6] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
       if (!once_value_1) {
@@ -6999,7 +7013,7 @@ void syntax___typing___AExternCall___after_typing(val_t p0, val_t p1){
       CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[7]);
       REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
-        nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1242);
+        nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1248);
       }
       fra.me.REG[3] = CALL_standard___string___Object___to_s(fra.me.REG[3])(fra.me.REG[3]);
       CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[3]);
@@ -7014,22 +7028,22 @@ void syntax___typing___AExternCall___after_typing(val_t p0, val_t p1){
       CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[3]);
       fra.me.REG[6] = CALL_standard___string___Object___to_s(fra.me.REG[6])(fra.me.REG[6]);
       CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2], fra.me.REG[6]);
-      /* syntax/typing.nit:1243 */
+      /* syntax/typing.nit:1249 */
       goto label3;
     }
   }
-  /* syntax/typing.nit:1247 */
+  /* syntax/typing.nit:1253 */
   REGB0 = CALL_metamodel___abstractmetamodel___MMLocalClass___has_global_property_by_name(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[4]);
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:1248 */
+    /* syntax/typing.nit:1254 */
     fra.me.REG[6] = CALL_metamodel___abstractmetamodel___MMLocalClass___get_property_by_name(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[4]);
-    /* syntax/typing.nit:1250 */
+    /* syntax/typing.nit:1256 */
     fra.me.REG[6] = CALL_metamodel___abstractmetamodel___MMLocalClass_____bra(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[6]);
-    /* syntax/typing.nit:1252 */
+    /* syntax/typing.nit:1258 */
     REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[6], COLOR_metamodel___abstractmetamodel___MMMethod, ID_metamodel___abstractmetamodel___MMMethod)) /*cast MMMethod*/;
     if (UNTAG_Bool(REGB0)) {
     } else {
-      /* syntax/typing.nit:1255 */
+      /* syntax/typing.nit:1261 */
       REGB0 = TAG_Int(3);
       fra.me.REG[3] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
       if (!once_value_4) {
@@ -7054,11 +7068,11 @@ void syntax___typing___AExternCall___after_typing(val_t p0, val_t p1){
       CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[7]);
       fra.me.REG[3] = CALL_standard___string___Object___to_s(fra.me.REG[3])(fra.me.REG[3]);
       CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2], fra.me.REG[3]);
-      /* syntax/typing.nit:1256 */
+      /* syntax/typing.nit:1262 */
       goto label3;
     }
   } else {
-    /* syntax/typing.nit:1259 */
+    /* syntax/typing.nit:1265 */
     REGB0 = TAG_Int(3);
     fra.me.REG[3] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
     if (!once_value_6) {
@@ -7083,17 +7097,17 @@ void syntax___typing___AExternCall___after_typing(val_t p0, val_t p1){
     CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[4]);
     fra.me.REG[3] = CALL_standard___string___Object___to_s(fra.me.REG[3])(fra.me.REG[3]);
     CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2], fra.me.REG[3]);
-    /* syntax/typing.nit:1260 */
+    /* syntax/typing.nit:1266 */
     goto label3;
   }
-  /* syntax/typing.nit:1263 */
+  /* syntax/typing.nit:1269 */
   fra.me.REG[6] = NEW_MMExplicitImport_metamodel___abstractmetamodel___MMExplicitImport___init(fra.me.REG[5], fra.me.REG[6]);
-  /* syntax/typing.nit:1264 */
+  /* syntax/typing.nit:1270 */
   fra.me.REG[1] = CALL_syntax___syntax_base___AbsSyntaxVisitor___local_property(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[1], COLOR_syntax___syntax_base___MMSrcMethod, ID_syntax___syntax_base___MMSrcMethod)) /*cast MMSrcMethod*/;
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Cast failed", NULL, LOCATE_syntax___typing, 1264);
+    nit_abort("Cast failed", NULL, LOCATE_syntax___typing, 1270);
   }
   fra.me.REG[1] = CALL_metamodel___abstractmetamodel___MMMethod___explicit_imports(fra.me.REG[1])(fra.me.REG[1]);
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[6]);
@@ -7107,14 +7121,14 @@ val_t syntax___typing___ALocalPropExternCall___target_class_name(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1269;
+  fra.me.line = 1275;
   fra.me.meth = LOCATE_syntax___typing___ALocalPropExternCall___target_class_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1269 */
+  /* syntax/typing.nit:1275 */
   fra.me.REG[0] = NIT_NULL;
   goto label1;
   label1: while(0);
@@ -7128,7 +7142,7 @@ val_t syntax___typing___ALocalPropExternCall___target_method_name(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1270;
+  fra.me.line = 1276;
   fra.me.meth = LOCATE_syntax___typing___ALocalPropExternCall___target_method_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -7136,14 +7150,14 @@ val_t syntax___typing___ALocalPropExternCall___target_method_name(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1270 */
+  /* syntax/typing.nit:1276 */
   fra.me.REG[1] = fra.me.REG[0];
   fra.me.REG[1] = CALL_parser___parser_nodes___ALocalPropExternCall___n_methid(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[1] = CALL_syntax___syntax_base___AMethid___name(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Bool((fra.me.REG[1]!=NIT_NULL) && VAL_ISA(fra.me.REG[1], COLOR_symbol___Symbol, ID_symbol___Symbol)) /*cast Symbol*/;
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Cast failed", NULL, LOCATE_syntax___typing, 1270);
+    nit_abort("Cast failed", NULL, LOCATE_syntax___typing, 1276);
   }
   goto label1;
   label1: while(0);
@@ -7159,7 +7173,7 @@ void syntax___typing___ASuperExternCall___after_typing(val_t p0, val_t p1){
     static val_t once_value_2; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1274;
+  fra.me.line = 1280;
   fra.me.meth = LOCATE_syntax___typing___ASuperExternCall___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -7170,20 +7184,20 @@ void syntax___typing___ASuperExternCall___after_typing(val_t p0, val_t p1){
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:1276 */
+  /* syntax/typing.nit:1282 */
   fra.me.REG[2] = CALL_syntax___syntax_base___AbsSyntaxVisitor___local_property(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[2] = CALL_metamodel___abstractmetamodel___MMLocalProperty___prhe(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[2] = CALL_metamodel___partial_order___PartialOrderElement___direct_greaters(fra.me.REG[2])(fra.me.REG[2]);
-  /* syntax/typing.nit:1277 */
+  /* syntax/typing.nit:1283 */
   REGB0 = CALL_standard___collection___abstract_collection___Collection___is_empty(fra.me.REG[2])(fra.me.REG[2]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:1278 */
+    /* syntax/typing.nit:1284 */
     fra.me.REG[2] = CALL_syntax___syntax_base___AbsSyntaxVisitor___local_property(fra.me.REG[1])(fra.me.REG[1]);
     REGB0 = TAG_Bool(1);
     CALL_metamodel___abstractmetamodel___MMLocalProperty___need_super__eq(fra.me.REG[2])(fra.me.REG[2], REGB0);
   } else {
-    /* syntax/typing.nit:1280 */
+    /* syntax/typing.nit:1286 */
     REGB0 = TAG_Int(3);
     fra.me.REG[2] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
     if (!once_value_1) {
@@ -7209,7 +7223,7 @@ void syntax___typing___ASuperExternCall___after_typing(val_t p0, val_t p1){
     CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
     fra.me.REG[2] = CALL_standard___string___Object___to_s(fra.me.REG[2])(fra.me.REG[2]);
     CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[2]);
-    /* syntax/typing.nit:1281 */
+    /* syntax/typing.nit:1287 */
     goto label3;
   }
   label3: while(0);
@@ -7222,14 +7236,14 @@ val_t syntax___typing___AFullPropExternCall___target_class_name(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1287;
+  fra.me.line = 1293;
   fra.me.meth = LOCATE_syntax___typing___AFullPropExternCall___target_class_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1287 */
+  /* syntax/typing.nit:1293 */
   fra.me.REG[0] = CALL_parser___parser_nodes___AFullPropExternCall___n_classid(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_syntax___syntax_base___Token___to_symbol(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -7244,7 +7258,7 @@ val_t syntax___typing___AFullPropExternCall___target_method_name(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1288;
+  fra.me.line = 1294;
   fra.me.meth = LOCATE_syntax___typing___AFullPropExternCall___target_method_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -7252,14 +7266,14 @@ val_t syntax___typing___AFullPropExternCall___target_method_name(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1288 */
+  /* syntax/typing.nit:1294 */
   fra.me.REG[1] = fra.me.REG[0];
   fra.me.REG[1] = CALL_parser___parser_nodes___AFullPropExternCall___n_methid(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[1] = CALL_syntax___syntax_base___AMethid___name(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Bool((fra.me.REG[1]!=NIT_NULL) && VAL_ISA(fra.me.REG[1], COLOR_symbol___Symbol, ID_symbol___Symbol)) /*cast Symbol*/;
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Cast failed", NULL, LOCATE_syntax___typing, 1288);
+    nit_abort("Cast failed", NULL, LOCATE_syntax___typing, 1294);
   }
   goto label1;
   label1: while(0);
@@ -7272,14 +7286,14 @@ val_t syntax___typing___AInitPropExternCall___target_class_name(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1292;
+  fra.me.line = 1298;
   fra.me.meth = LOCATE_syntax___typing___AInitPropExternCall___target_class_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1292 */
+  /* syntax/typing.nit:1298 */
   fra.me.REG[0] = CALL_parser___parser_nodes___AInitPropExternCall___n_classid(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_syntax___syntax_base___Token___to_symbol(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -7295,14 +7309,14 @@ val_t syntax___typing___AInitPropExternCall___target_method_name(val_t p0){
   static val_t once_value_1; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1293;
+  fra.me.line = 1299;
   fra.me.meth = LOCATE_syntax___typing___AInitPropExternCall___target_method_name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1293 */
+  /* syntax/typing.nit:1299 */
   if (!once_value_1) {
     fra.me.REG[0] = BOX_NativeString("init");
     REGB0 = TAG_Int(4);
@@ -7323,13 +7337,13 @@ val_t syntax___typing___ACastExternCall___from_type(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1297;
+  fra.me.line = 1303;
   fra.me.meth = LOCATE_syntax___typing___ACastExternCall___from_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* syntax/typing.nit:1297 */
-  nit_abort("Deferred method called", NULL, LOCATE_syntax___typing, 1297);
+  /* syntax/typing.nit:1303 */
+  nit_abort("Deferred method called", NULL, LOCATE_syntax___typing, 1303);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -7339,13 +7353,13 @@ val_t syntax___typing___ACastExternCall___to_type(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1298;
+  fra.me.line = 1304;
   fra.me.meth = LOCATE_syntax___typing___ACastExternCall___to_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* syntax/typing.nit:1298 */
-  nit_abort("Deferred method called", NULL, LOCATE_syntax___typing, 1298);
+  /* syntax/typing.nit:1304 */
+  nit_abort("Deferred method called", NULL, LOCATE_syntax___typing, 1304);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -7358,7 +7372,7 @@ void syntax___typing___ACastExternCall___after_typing(val_t p0, val_t p1){
     static val_t once_value_1; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1300;
+  fra.me.line = 1306;
   fra.me.meth = LOCATE_syntax___typing___ACastExternCall___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -7369,7 +7383,7 @@ void syntax___typing___ACastExternCall___after_typing(val_t p0, val_t p1){
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:1302 */
+  /* syntax/typing.nit:1308 */
   fra.me.REG[2] = CALL_syntax___typing___ACastExternCall___from_type(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[3] = CALL_syntax___typing___ACastExternCall___to_type(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[2],fra.me.REG[3]));
@@ -7379,7 +7393,7 @@ void syntax___typing___ACastExternCall___after_typing(val_t p0, val_t p1){
     REGB0 = REGB1;
   }
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:1304 */
+    /* syntax/typing.nit:1310 */
     if (!once_value_1) {
       fra.me.REG[3] = BOX_NativeString("Attepting to cast from and to the same type.");
       REGB0 = TAG_Int(44);
@@ -7390,19 +7404,19 @@ void syntax___typing___ACastExternCall___after_typing(val_t p0, val_t p1){
     fra.me.REG[3] = fra.me.REG[3];
     CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[3]);
   }
-  /* syntax/typing.nit:1307 */
+  /* syntax/typing.nit:1313 */
   fra.me.REG[3] = CALL_syntax___typing___ACastExternCall___from_type(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[2] = CALL_syntax___typing___ACastExternCall___to_type(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[2] = NEW_MMImportedCast_metamodel___static_type___MMImportedCast___init(fra.me.REG[3], fra.me.REG[2]);
-  /* syntax/typing.nit:1308 */
+  /* syntax/typing.nit:1314 */
   fra.me.REG[1] = CALL_syntax___syntax_base___AbsSyntaxVisitor___local_property(fra.me.REG[1])(fra.me.REG[1]);
-  /* syntax/typing.nit:1309 */
+  /* syntax/typing.nit:1315 */
   REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[1], COLOR_metamodel___abstractmetamodel___MMMethod, ID_metamodel___abstractmetamodel___MMMethod)) /*cast MMMethod*/;
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Assert failed", NULL, LOCATE_syntax___typing, 1309);
+    nit_abort("Assert failed", NULL, LOCATE_syntax___typing, 1315);
   }
-  /* syntax/typing.nit:1310 */
+  /* syntax/typing.nit:1316 */
   fra.me.REG[1] = CALL_metamodel___static_type___MMMethod___explicit_casts(fra.me.REG[1])(fra.me.REG[1]);
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
   stack_frame_head = fra.me.prev;
@@ -7414,14 +7428,14 @@ val_t syntax___typing___ACastAsExternCall___from_type(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1315;
+  fra.me.line = 1321;
   fra.me.meth = LOCATE_syntax___typing___ACastAsExternCall___from_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1315 */
+  /* syntax/typing.nit:1321 */
   fra.me.REG[0] = CALL_parser___parser_nodes___ACastAsExternCall___n_from_type(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_syntax___syntax_base___AType___stype(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -7435,14 +7449,14 @@ val_t syntax___typing___ACastAsExternCall___to_type(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1316;
+  fra.me.line = 1322;
   fra.me.meth = LOCATE_syntax___typing___ACastAsExternCall___to_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1316 */
+  /* syntax/typing.nit:1322 */
   fra.me.REG[0] = CALL_parser___parser_nodes___ACastAsExternCall___n_to_type(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_syntax___syntax_base___AType___stype(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -7456,14 +7470,14 @@ val_t syntax___typing___AAsNullableExternCall___from_type(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1320;
+  fra.me.line = 1326;
   fra.me.meth = LOCATE_syntax___typing___AAsNullableExternCall___from_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1320 */
+  /* syntax/typing.nit:1326 */
   fra.me.REG[0] = CALL_parser___parser_nodes___AAsNullableExternCall___n_type(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_syntax___syntax_base___AType___stype(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -7477,14 +7491,14 @@ val_t syntax___typing___AAsNullableExternCall___to_type(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1321;
+  fra.me.line = 1327;
   fra.me.meth = LOCATE_syntax___typing___AAsNullableExternCall___to_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1321 */
+  /* syntax/typing.nit:1327 */
   fra.me.REG[0] = CALL_parser___parser_nodes___AAsNullableExternCall___n_type(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_syntax___syntax_base___AType___stype(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_metamodel___static_type___MMType___as_nullable(fra.me.REG[0])(fra.me.REG[0]);
@@ -7500,7 +7514,7 @@ val_t syntax___typing___AAsNotNullableExternCall___from_type(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1325;
+  fra.me.line = 1331;
   fra.me.meth = LOCATE_syntax___typing___AAsNotNullableExternCall___from_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -7508,17 +7522,17 @@ val_t syntax___typing___AAsNotNullableExternCall___from_type(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1327 */
+  /* syntax/typing.nit:1333 */
   fra.me.REG[0] = CALL_parser___parser_nodes___AAsNotNullableExternCall___n_type(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_syntax___syntax_base___AType___stype(fra.me.REG[0])(fra.me.REG[0]);
-  /* syntax/typing.nit:1328 */
+  /* syntax/typing.nit:1334 */
   REGB0 = CALL_metamodel___static_type___MMType___is_nullable(fra.me.REG[0])(fra.me.REG[0]);
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:1330 */
+    /* syntax/typing.nit:1336 */
     fra.me.REG[1] = fra.me.REG[0];
     goto label1;
   } else {
-    /* syntax/typing.nit:1332 */
+    /* syntax/typing.nit:1338 */
     fra.me.REG[0] = CALL_metamodel___static_type___MMType___as_nullable(fra.me.REG[0])(fra.me.REG[0]);
     fra.me.REG[1] = fra.me.REG[0];
     goto label1;
@@ -7533,14 +7547,14 @@ val_t syntax___typing___AAsNotNullableExternCall___to_type(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1335;
+  fra.me.line = 1341;
   fra.me.meth = LOCATE_syntax___typing___AAsNotNullableExternCall___to_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1335 */
+  /* syntax/typing.nit:1341 */
   fra.me.REG[0] = CALL_parser___parser_nodes___AAsNotNullableExternCall___n_type(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_syntax___syntax_base___AType___stype(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_metamodel___static_type___MMType___as_notnull(fra.me.REG[0])(fra.me.REG[0]);
@@ -7556,7 +7570,7 @@ val_t syntax___typing___AAttrFormExpr___prop(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1339;
+  fra.me.line = 1345;
   fra.me.meth = LOCATE_syntax___typing___AAttrFormExpr___prop;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -7564,13 +7578,13 @@ val_t syntax___typing___AAttrFormExpr___prop(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1339 */
+  /* syntax/typing.nit:1345 */
   fra.me.REG[1] = fra.me.REG[0];
   fra.me.REG[1] = ATTR_syntax___typing___AAttrFormExpr____prop(fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[1]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Cast failed", NULL, LOCATE_syntax___typing, 1339);
+    nit_abort("Cast failed", NULL, LOCATE_syntax___typing, 1345);
   }
   goto label1;
   label1: while(0);
@@ -7584,7 +7598,7 @@ val_t syntax___typing___AAttrFormExpr___attr_type(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1342;
+  fra.me.line = 1348;
   fra.me.meth = LOCATE_syntax___typing___AAttrFormExpr___attr_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -7592,13 +7606,13 @@ val_t syntax___typing___AAttrFormExpr___attr_type(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1342 */
+  /* syntax/typing.nit:1348 */
   fra.me.REG[1] = fra.me.REG[0];
   fra.me.REG[1] = ATTR_syntax___typing___AAttrFormExpr____attr_type(fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[1]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Cast failed", NULL, LOCATE_syntax___typing, 1342);
+    nit_abort("Cast failed", NULL, LOCATE_syntax___typing, 1348);
   }
   goto label1;
   label1: while(0);
@@ -7623,7 +7637,7 @@ void syntax___typing___AAttrFormExpr___do_typing(val_t p0, val_t p1){
     static val_t once_value_10; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1345;
+  fra.me.line = 1351;
   fra.me.meth = LOCATE_syntax___typing___AAttrFormExpr___do_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
@@ -7637,23 +7651,23 @@ void syntax___typing___AAttrFormExpr___do_typing(val_t p0, val_t p1){
   fra.me.REG[6] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:1348 */
+  /* syntax/typing.nit:1354 */
   fra.me.REG[2] = CALL_parser___parser_nodes___AAttrFormExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = CALL_syntax___syntax_base___AbsSyntaxVisitor___check_expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
     goto label1;
   }
-  /* syntax/typing.nit:1349 */
+  /* syntax/typing.nit:1355 */
   fra.me.REG[2] = CALL_parser___parser_nodes___AAttrFormExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[2] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[2])(fra.me.REG[2]);
-  /* syntax/typing.nit:1350 */
+  /* syntax/typing.nit:1356 */
   fra.me.REG[3] = CALL_parser___parser_nodes___AAttrFormExpr___n_id(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[3] = CALL_syntax___syntax_base___Token___to_symbol(fra.me.REG[3])(fra.me.REG[3]);
-  /* syntax/typing.nit:1351 */
+  /* syntax/typing.nit:1357 */
   REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[2], COLOR_metamodel___static_type___MMTypeNone, ID_metamodel___static_type___MMTypeNone)) /*cast MMTypeNone*/;
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:1352 */
+    /* syntax/typing.nit:1358 */
     REGB0 = TAG_Int(3);
     fra.me.REG[4] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
     if (!once_value_2) {
@@ -7678,16 +7692,16 @@ void syntax___typing___AAttrFormExpr___do_typing(val_t p0, val_t p1){
     CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[5]);
     fra.me.REG[4] = CALL_standard___string___Object___to_s(fra.me.REG[4])(fra.me.REG[4]);
     CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[4]);
-    /* syntax/typing.nit:1353 */
+    /* syntax/typing.nit:1359 */
     goto label1;
   }
-  /* syntax/typing.nit:1355 */
+  /* syntax/typing.nit:1361 */
   fra.me.REG[4] = CALL_metamodel___static_type___MMType___local_class(fra.me.REG[2])(fra.me.REG[2]);
-  /* syntax/typing.nit:1356 */
+  /* syntax/typing.nit:1362 */
   REGB0 = CALL_metamodel___abstractmetamodel___MMLocalClass___has_global_property_by_name(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[3]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:1357 */
+    /* syntax/typing.nit:1363 */
     REGB0 = TAG_Int(5);
     fra.me.REG[5] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
     if (!once_value_4) {
@@ -7723,12 +7737,12 @@ void syntax___typing___AAttrFormExpr___do_typing(val_t p0, val_t p1){
     CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[6]);
     fra.me.REG[5] = CALL_standard___string___Object___to_s(fra.me.REG[5])(fra.me.REG[5]);
     CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[5]);
-    /* syntax/typing.nit:1358 */
+    /* syntax/typing.nit:1364 */
     goto label1;
   }
-  /* syntax/typing.nit:1360 */
+  /* syntax/typing.nit:1366 */
   fra.me.REG[4] = CALL_metamodel___abstractmetamodel___MMLocalClass___select_attribute(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[3]);
-  /* syntax/typing.nit:1361 */
+  /* syntax/typing.nit:1367 */
   fra.me.REG[5] = CALL_syntax___syntax_base___AbsSyntaxVisitor___mmmodule(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[6] = CALL_metamodel___abstractmetamodel___MMLocalProperty___global(fra.me.REG[4])(fra.me.REG[4]);
   fra.me.REG[6] = CALL_metamodel___abstractmetamodel___MMGlobalProperty___local_class(fra.me.REG[6])(fra.me.REG[6]);
@@ -7742,9 +7756,9 @@ void syntax___typing___AAttrFormExpr___do_typing(val_t p0, val_t p1){
   }
   /* ../lib/standard/kernel.nit:235 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-  /* syntax/typing.nit:1361 */
+  /* syntax/typing.nit:1367 */
   if (UNTAG_Bool(REGB1)) {
-    /* syntax/typing.nit:1362 */
+    /* syntax/typing.nit:1368 */
     REGB1 = TAG_Int(7);
     fra.me.REG[6] = NEW_Array_standard___collection___array___Array___with_capacity(REGB1);
     if (!once_value_7) {
@@ -7796,24 +7810,24 @@ void syntax___typing___AAttrFormExpr___do_typing(val_t p0, val_t p1){
     fra.me.REG[6] = CALL_standard___string___Object___to_s(fra.me.REG[6])(fra.me.REG[6]);
     CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[6]);
   }
-  /* syntax/typing.nit:1364 */
+  /* syntax/typing.nit:1370 */
   ATTR_syntax___typing___AAttrFormExpr____prop(fra.me.REG[0]) = fra.me.REG[4];
-  /* syntax/typing.nit:1365 */
+  /* syntax/typing.nit:1371 */
   fra.me.REG[2] = CALL_metamodel___static_type___MMLocalProperty___signature_for(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[2]);
   fra.me.REG[2] = CALL_metamodel___static_type___MMSignature___return_type(fra.me.REG[2])(fra.me.REG[2]);
-  /* syntax/typing.nit:1366 */
+  /* syntax/typing.nit:1372 */
   fra.me.REG[4] = CALL_parser___parser_nodes___AAttrFormExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   REGB1 = CALL_syntax___typing___AExpr___is_self(fra.me.REG[4])(fra.me.REG[4]);
   REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
   if (UNTAG_Bool(REGB1)) {
     REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
     if (UNTAG_Bool(REGB1)) {
-      nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1366);
+      nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1372);
     }
     fra.me.REG[4] = CALL_metamodel___static_type___MMType___not_for_self(fra.me.REG[2])(fra.me.REG[2]);
     fra.me.REG[2] = fra.me.REG[4];
   }
-  /* syntax/typing.nit:1367 */
+  /* syntax/typing.nit:1373 */
   ATTR_syntax___typing___AAttrFormExpr____attr_type(fra.me.REG[0]) = fra.me.REG[2];
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -7827,7 +7841,7 @@ void syntax___typing___AAttrExpr___after_typing(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1372;
+  fra.me.line = 1378;
   fra.me.meth = LOCATE_syntax___typing___AAttrExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -7836,9 +7850,9 @@ void syntax___typing___AAttrExpr___after_typing(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:1374 */
+  /* syntax/typing.nit:1380 */
   CALL_syntax___typing___AAttrFormExpr___do_typing(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* syntax/typing.nit:1375 */
+  /* syntax/typing.nit:1381 */
   fra.me.REG[1] = ATTR_syntax___typing___AAttrFormExpr____prop(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -7855,10 +7869,10 @@ void syntax___typing___AAttrExpr___after_typing(val_t p0, val_t p1){
   if (UNTAG_Bool(REGB0)) {
     goto label1;
   }
-  /* syntax/typing.nit:1376 */
+  /* syntax/typing.nit:1382 */
   fra.me.REG[1] = CALL_syntax___syntax_base___AAttrFormExpr___attr_type(fra.me.REG[0])(fra.me.REG[0]);
   ATTR_syntax___typing___AExpr____stype(fra.me.REG[0]) = fra.me.REG[1];
-  /* syntax/typing.nit:1377 */
+  /* syntax/typing.nit:1383 */
   REGB0 = TAG_Bool(1);
   ATTR_syntax___typing___AExpr____is_typed(fra.me.REG[0]) = REGB0;
   label1: while(0);
@@ -7873,7 +7887,7 @@ void syntax___typing___AAttrAssignExpr___after_typing(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1382;
+  fra.me.line = 1388;
   fra.me.meth = LOCATE_syntax___typing___AAttrAssignExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -7884,9 +7898,9 @@ void syntax___typing___AAttrAssignExpr___after_typing(val_t p0, val_t p1){
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:1384 */
+  /* syntax/typing.nit:1390 */
   CALL_syntax___typing___AAttrFormExpr___do_typing(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* syntax/typing.nit:1385 */
+  /* syntax/typing.nit:1391 */
   fra.me.REG[2] = ATTR_syntax___typing___AAttrFormExpr____prop(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -7903,7 +7917,7 @@ void syntax___typing___AAttrAssignExpr___after_typing(val_t p0, val_t p1){
   if (UNTAG_Bool(REGB0)) {
     goto label1;
   }
-  /* syntax/typing.nit:1386 */
+  /* syntax/typing.nit:1392 */
   fra.me.REG[2] = CALL_parser___parser_nodes___AAssignFormExpr___n_value(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[3] = CALL_syntax___syntax_base___AAttrFormExpr___attr_type(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = CALL_syntax___syntax_base___AbsSyntaxVisitor___check_conform_expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2], fra.me.REG[3]);
@@ -7911,7 +7925,7 @@ void syntax___typing___AAttrAssignExpr___after_typing(val_t p0, val_t p1){
   if (UNTAG_Bool(REGB0)) {
     goto label1;
   }
-  /* syntax/typing.nit:1387 */
+  /* syntax/typing.nit:1393 */
   REGB0 = TAG_Bool(1);
   ATTR_syntax___typing___AExpr____is_typed(fra.me.REG[0]) = REGB0;
   label1: while(0);
@@ -7926,7 +7940,7 @@ void syntax___typing___AAttrReassignExpr___after_typing(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1392;
+  fra.me.line = 1398;
   fra.me.meth = LOCATE_syntax___typing___AAttrReassignExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -7937,9 +7951,9 @@ void syntax___typing___AAttrReassignExpr___after_typing(val_t p0, val_t p1){
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:1394 */
+  /* syntax/typing.nit:1400 */
   CALL_syntax___typing___AAttrFormExpr___do_typing(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* syntax/typing.nit:1395 */
+  /* syntax/typing.nit:1401 */
   fra.me.REG[2] = ATTR_syntax___typing___AAttrFormExpr____prop(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -7956,10 +7970,10 @@ void syntax___typing___AAttrReassignExpr___after_typing(val_t p0, val_t p1){
   if (UNTAG_Bool(REGB0)) {
     goto label1;
   }
-  /* syntax/typing.nit:1396 */
+  /* syntax/typing.nit:1402 */
   fra.me.REG[2] = CALL_syntax___syntax_base___AAttrFormExpr___attr_type(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[2] = CALL_syntax___typing___AReassignFormExpr___do_rvalue_typing(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], fra.me.REG[2]);
-  /* syntax/typing.nit:1397 */
+  /* syntax/typing.nit:1403 */
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -7975,11 +7989,11 @@ void syntax___typing___AAttrReassignExpr___after_typing(val_t p0, val_t p1){
   if (UNTAG_Bool(REGB0)) {
     goto label1;
   }
-  /* syntax/typing.nit:1398 */
+  /* syntax/typing.nit:1404 */
   fra.me.REG[3] = CALL_parser___parser_nodes___AReassignFormExpr___n_value(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[3] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[3])(fra.me.REG[3]);
   CALL_syntax___syntax_base___AbsSyntaxVisitor___check_conform(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[2], fra.me.REG[3]);
-  /* syntax/typing.nit:1399 */
+  /* syntax/typing.nit:1405 */
   REGB0 = TAG_Bool(1);
   ATTR_syntax___typing___AExpr____is_typed(fra.me.REG[0]) = REGB0;
   label1: while(0);
@@ -7995,7 +8009,7 @@ void syntax___typing___AIssetAttrExpr___after_typing(val_t p0, val_t p1){
     static val_t once_value_2; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1404;
+  fra.me.line = 1410;
   fra.me.meth = LOCATE_syntax___typing___AIssetAttrExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -8005,9 +8019,9 @@ void syntax___typing___AIssetAttrExpr___after_typing(val_t p0, val_t p1){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:1406 */
+  /* syntax/typing.nit:1412 */
   CALL_syntax___typing___AAttrFormExpr___do_typing(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* syntax/typing.nit:1407 */
+  /* syntax/typing.nit:1413 */
   fra.me.REG[2] = ATTR_syntax___typing___AAttrFormExpr____prop(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -8024,11 +8038,11 @@ void syntax___typing___AIssetAttrExpr___after_typing(val_t p0, val_t p1){
   if (UNTAG_Bool(REGB0)) {
     goto label1;
   }
-  /* syntax/typing.nit:1408 */
+  /* syntax/typing.nit:1414 */
   fra.me.REG[2] = CALL_syntax___syntax_base___AAttrFormExpr___attr_type(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = CALL_metamodel___static_type___MMType___is_nullable(fra.me.REG[2])(fra.me.REG[2]);
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:1409 */
+    /* syntax/typing.nit:1415 */
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("Error: isset on a nullable attribute.");
       REGB0 = TAG_Int(37);
@@ -8039,10 +8053,10 @@ void syntax___typing___AIssetAttrExpr___after_typing(val_t p0, val_t p1){
     fra.me.REG[2] = fra.me.REG[2];
     CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[2]);
   }
-  /* syntax/typing.nit:1411 */
+  /* syntax/typing.nit:1417 */
   fra.me.REG[1] = CALL_syntax___syntax_base___AbsSyntaxVisitor___type_bool(fra.me.REG[1])(fra.me.REG[1]);
   ATTR_syntax___typing___AExpr____stype(fra.me.REG[0]) = fra.me.REG[1];
-  /* syntax/typing.nit:1412 */
+  /* syntax/typing.nit:1418 */
   REGB0 = TAG_Bool(1);
   ATTR_syntax___typing___AExpr____is_typed(fra.me.REG[0]) = REGB0;
   label1: while(0);
@@ -8056,7 +8070,7 @@ val_t syntax___typing___AAbsAbsSendExpr___prop_signature(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1417;
+  fra.me.line = 1423;
   fra.me.meth = LOCATE_syntax___typing___AAbsAbsSendExpr___prop_signature;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -8064,14 +8078,14 @@ val_t syntax___typing___AAbsAbsSendExpr___prop_signature(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1417 */
+  /* syntax/typing.nit:1423 */
   fra.me.REG[1] = fra.me.REG[0];
-  /* syntax/typing.nit:1418 */
+  /* syntax/typing.nit:1424 */
   fra.me.REG[1] = ATTR_syntax___typing___AAbsAbsSendExpr____prop_signature(fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[1]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Cast failed", NULL, LOCATE_syntax___typing, 1418);
+    nit_abort("Cast failed", NULL, LOCATE_syntax___typing, 1424);
   }
   goto label1;
   label1: while(0);
@@ -8086,7 +8100,7 @@ val_t syntax___typing___AAbsAbsSendExpr___raw_arguments(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1421;
+  fra.me.line = 1427;
   fra.me.meth = LOCATE_syntax___typing___AAbsAbsSendExpr___raw_arguments;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -8096,9 +8110,9 @@ val_t syntax___typing___AAbsAbsSendExpr___raw_arguments(val_t p0){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1424 */
+  /* syntax/typing.nit:1430 */
   fra.me.REG[1] = ATTR_syntax___typing___AAbsAbsSendExpr____raw_arguments_cache(fra.me.REG[0]);
-  /* syntax/typing.nit:1425 */
+  /* syntax/typing.nit:1431 */
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -8113,14 +8127,14 @@ val_t syntax___typing___AAbsAbsSendExpr___raw_arguments(val_t p0){
   }
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:1426 */
+    /* syntax/typing.nit:1432 */
     fra.me.REG[2] = fra.me.REG[1];
     goto label1;
   } else {
-    /* syntax/typing.nit:1428 */
+    /* syntax/typing.nit:1434 */
     fra.me.REG[3] = CALL_syntax___typing___AAbsAbsSendExpr___compute_raw_arguments(fra.me.REG[0])(fra.me.REG[0]);
     fra.me.REG[1] = fra.me.REG[3];
-    /* syntax/typing.nit:1429 */
+    /* syntax/typing.nit:1435 */
     REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
@@ -8137,9 +8151,9 @@ val_t syntax___typing___AAbsAbsSendExpr___raw_arguments(val_t p0){
       fra.me.REG[3] = NEW_Array_standard___collection___array___Array___init();
       fra.me.REG[1] = fra.me.REG[3];
     }
-    /* syntax/typing.nit:1430 */
+    /* syntax/typing.nit:1436 */
     ATTR_syntax___typing___AAbsAbsSendExpr____raw_arguments_cache(fra.me.REG[0]) = fra.me.REG[1];
-    /* syntax/typing.nit:1431 */
+    /* syntax/typing.nit:1437 */
     fra.me.REG[2] = fra.me.REG[1];
     goto label1;
   }
@@ -8156,7 +8170,7 @@ val_t syntax___typing___AAbsAbsSendExpr___compute_raw_arguments(val_t p0){
   static val_t once_value_2; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1437;
+  fra.me.line = 1443;
   fra.me.meth = LOCATE_syntax___typing___AAbsAbsSendExpr___compute_raw_arguments;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -8165,7 +8179,7 @@ val_t syntax___typing___AAbsAbsSendExpr___compute_raw_arguments(val_t p0){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1439 */
+  /* syntax/typing.nit:1445 */
   REGB0 = TAG_Int(3);
   fra.me.REG[1] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
   if (!once_value_1) {
@@ -8191,7 +8205,7 @@ val_t syntax___typing___AAbsAbsSendExpr___compute_raw_arguments(val_t p0){
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
   fra.me.REG[1] = CALL_standard___string___Object___to_s(fra.me.REG[1])(fra.me.REG[1]);
   CALL_standard___file___Object___print(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* syntax/typing.nit:1440 */
+  /* syntax/typing.nit:1446 */
   fra.me.REG[1] = NIT_NULL;
   goto label3;
   label3: while(0);
@@ -8219,7 +8233,7 @@ val_t syntax___typing___AAbsAbsSendExpr___process_signature(val_t p0, val_t p1, 
     static val_t once_value_3; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1443;
+  fra.me.line = 1449;
   fra.me.meth = LOCATE_syntax___typing___AAbsAbsSendExpr___process_signature;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
@@ -8236,11 +8250,11 @@ val_t syntax___typing___AAbsAbsSendExpr___process_signature(val_t p0, val_t p1, 
   fra.me.REG[2] = p2;
   fra.me.REG[3] = p3;
   fra.me.REG[4] = p4;
-  /* syntax/typing.nit:1446 */
+  /* syntax/typing.nit:1452 */
   REGB0 = CALL_metamodel___vararg___MMSignature___vararg_rank(fra.me.REG[2])(fra.me.REG[2]);
-  /* syntax/typing.nit:1447 */
+  /* syntax/typing.nit:1453 */
   REGB1 = CALL_metamodel___static_type___MMSignature___arity(fra.me.REG[2])(fra.me.REG[2]);
-  /* syntax/typing.nit:1449 */
+  /* syntax/typing.nit:1455 */
   REGB2 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
   if (UNTAG_Bool(REGB2)) {
   } else {
@@ -8258,7 +8272,7 @@ val_t syntax___typing___AAbsAbsSendExpr___process_signature(val_t p0, val_t p1, 
   } else {
     REGB3 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
     if (UNTAG_Bool(REGB3)) {
-      nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1449);
+      nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1455);
     }
     /* ../lib/standard/collection/array.nit:24 */
     REGB3 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[4])!=NIT_NULL);
@@ -8267,7 +8281,7 @@ val_t syntax___typing___AAbsAbsSendExpr___process_signature(val_t p0, val_t p1, 
       nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
     }
     REGB3 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[4]);
-    /* syntax/typing.nit:1449 */
+    /* syntax/typing.nit:1455 */
     REGB2 = REGB3;
   }
   REGB3 = TAG_Bool(VAL_ISA(REGB2, VTCOLOR_standard___kernel___Comparable___OTHER(REGB1), VTID_standard___kernel___Comparable___OTHER(REGB1))) /*cast OTHER*/;
@@ -8277,7 +8291,7 @@ val_t syntax___typing___AAbsAbsSendExpr___process_signature(val_t p0, val_t p1, 
   }
   /* ../lib/standard/kernel.nit:237 */
   REGB3 = TAG_Bool(UNTAG_Int(REGB1)>UNTAG_Int(REGB2));
-  /* syntax/typing.nit:1450 */
+  /* syntax/typing.nit:1456 */
   if (UNTAG_Bool(REGB3)) {
     REGB3 = TAG_Bool(1);
   } else {
@@ -8286,7 +8300,7 @@ val_t syntax___typing___AAbsAbsSendExpr___process_signature(val_t p0, val_t p1, 
     } else {
       /* ../lib/standard/kernel.nit:230 */
       REGB5 = TAG_Bool((REGB1)==(REGB2));
-      /* syntax/typing.nit:1450 */
+      /* syntax/typing.nit:1456 */
       REGB4 = REGB5;
     }
     REGB4 = TAG_Bool(!UNTAG_Bool(REGB4));
@@ -8294,13 +8308,13 @@ val_t syntax___typing___AAbsAbsSendExpr___process_signature(val_t p0, val_t p1, 
       REGB4 = TAG_Int(1);
       /* ../lib/standard/kernel.nit:239 */
       REGB4 = TAG_Int(-UNTAG_Int(REGB4));
-      /* syntax/typing.nit:1450 */
+      /* syntax/typing.nit:1456 */
       REGB5 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB4));
       if (UNTAG_Bool(REGB5)) {
       } else {
         /* ../lib/standard/kernel.nit:230 */
         REGB4 = TAG_Bool((REGB0)==(REGB4));
-        /* syntax/typing.nit:1450 */
+        /* syntax/typing.nit:1456 */
         REGB5 = REGB4;
       }
     } else {
@@ -8310,7 +8324,7 @@ val_t syntax___typing___AAbsAbsSendExpr___process_signature(val_t p0, val_t p1, 
     REGB3 = REGB5;
   }
   if (UNTAG_Bool(REGB3)) {
-    /* syntax/typing.nit:1451 */
+    /* syntax/typing.nit:1457 */
     REGB3 = TAG_Int(5);
     fra.me.REG[5] = NEW_Array_standard___collection___array___Array___with_capacity(REGB3);
     if (!once_value_1) {
@@ -8346,13 +8360,13 @@ val_t syntax___typing___AAbsAbsSendExpr___process_signature(val_t p0, val_t p1, 
     CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[3]);
     fra.me.REG[5] = CALL_standard___string___Object___to_s(fra.me.REG[5])(fra.me.REG[5]);
     CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[5]);
-    /* syntax/typing.nit:1452 */
+    /* syntax/typing.nit:1458 */
     REGB3 = TAG_Bool(0);
     goto label4;
   }
-  /* syntax/typing.nit:1454 */
+  /* syntax/typing.nit:1460 */
   REGB5 = TAG_Int(0);
-  /* syntax/typing.nit:1455 */
+  /* syntax/typing.nit:1461 */
   REGB4 = TAG_Int(0);
   /* ../lib/standard/kernel.nit:350 */
   REGB6 = REGB1;
@@ -8367,21 +8381,21 @@ val_t syntax___typing___AAbsAbsSendExpr___process_signature(val_t p0, val_t p1, 
     REGB7 = TAG_Bool(UNTAG_Int(REGB4)<UNTAG_Int(REGB6));
     /* ../lib/standard/kernel.nit:355 */
     if (UNTAG_Bool(REGB7)) {
-      /* syntax/typing.nit:1455 */
+      /* syntax/typing.nit:1461 */
       REGB7 = REGB4;
-      /* syntax/typing.nit:1457 */
+      /* syntax/typing.nit:1463 */
       fra.me.REG[5] = CALL_metamodel___static_type___MMSignature_____bra(fra.me.REG[2])(fra.me.REG[2], REGB7);
-      /* syntax/typing.nit:1458 */
+      /* syntax/typing.nit:1464 */
       REGB8 = TAG_Bool(IS_EQUAL_OO(REGB7,REGB0));
       if (UNTAG_Bool(REGB8)) {
       } else {
         /* ../lib/standard/kernel.nit:230 */
         REGB7 = TAG_Bool((REGB7)==(REGB0));
-        /* syntax/typing.nit:1458 */
+        /* syntax/typing.nit:1464 */
         REGB8 = REGB7;
       }
       if (UNTAG_Bool(REGB8)) {
-        /* syntax/typing.nit:1459 */
+        /* syntax/typing.nit:1465 */
         REGB8 = TAG_Int(0);
         /* ../lib/standard/kernel.nit:240 */
         REGB7 = TAG_Int(UNTAG_Int(REGB2)-UNTAG_Int(REGB1));
@@ -8396,10 +8410,10 @@ val_t syntax___typing___AAbsAbsSendExpr___process_signature(val_t p0, val_t p1, 
           REGB9 = TAG_Bool(UNTAG_Int(REGB8)<=UNTAG_Int(REGB7));
           /* ../lib/standard/kernel.nit:344 */
           if (UNTAG_Bool(REGB9)) {
-            /* syntax/typing.nit:1460 */
+            /* syntax/typing.nit:1466 */
             REGB9 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
             if (UNTAG_Bool(REGB9)) {
-              nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1460);
+              nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1466);
             }
             /* ../lib/standard/collection/array.nit:278 */
             fra.me.REG[0] = fra.me.REG[4];
@@ -8443,18 +8457,18 @@ val_t syntax___typing___AAbsAbsSendExpr___process_signature(val_t p0, val_t p1, 
             if (UNTAG_Bool(REGB10)) {
               nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
             }
-            /* ../lib/standard/collection/array.nit:718 */
+            /* ../lib/standard/collection/array.nit:724 */
             fra.me.REG[0] = ((Nit_NativeArray)fra.me.REG[0])->val[UNTAG_Int(REGB9)];
             /* ../lib/standard/collection/array.nit:281 */
             goto label5;
             label5: while(0);
-            /* syntax/typing.nit:1461 */
+            /* syntax/typing.nit:1467 */
             CALL_syntax___syntax_base___AbsSyntaxVisitor___check_conform_expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[5]);
-            /* syntax/typing.nit:1462 */
+            /* syntax/typing.nit:1468 */
             REGB9 = TAG_Int(1);
             /* ../lib/standard/kernel.nit:238 */
             REGB9 = TAG_Int(UNTAG_Int(REGB5)+UNTAG_Int(REGB9));
-            /* syntax/typing.nit:1462 */
+            /* syntax/typing.nit:1468 */
             REGB5 = REGB9;
             /* ../lib/standard/kernel.nit:346 */
             REGB9 = TAG_Int(1);
@@ -8469,10 +8483,10 @@ val_t syntax___typing___AAbsAbsSendExpr___process_signature(val_t p0, val_t p1, 
         }
         label6: while(0);
       } else {
-        /* syntax/typing.nit:1465 */
+        /* syntax/typing.nit:1471 */
         REGB8 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
         if (UNTAG_Bool(REGB8)) {
-          nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1465);
+          nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1471);
         }
         /* ../lib/standard/collection/array.nit:278 */
         fra.me.REG[3] = fra.me.REG[4];
@@ -8516,20 +8530,20 @@ val_t syntax___typing___AAbsAbsSendExpr___process_signature(val_t p0, val_t p1, 
         if (UNTAG_Bool(REGB7)) {
           nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
         }
-        /* ../lib/standard/collection/array.nit:718 */
+        /* ../lib/standard/collection/array.nit:724 */
         fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB8)];
         /* ../lib/standard/collection/array.nit:281 */
         goto label7;
         label7: while(0);
-        /* syntax/typing.nit:1465 */
+        /* syntax/typing.nit:1471 */
         fra.me.REG[0] = fra.me.REG[3];
-        /* syntax/typing.nit:1466 */
+        /* syntax/typing.nit:1472 */
         CALL_syntax___syntax_base___AbsSyntaxVisitor___check_conform_expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[5]);
-        /* syntax/typing.nit:1467 */
+        /* syntax/typing.nit:1473 */
         REGB8 = TAG_Int(1);
         /* ../lib/standard/kernel.nit:238 */
         REGB8 = TAG_Int(UNTAG_Int(REGB5)+UNTAG_Int(REGB8));
-        /* syntax/typing.nit:1467 */
+        /* syntax/typing.nit:1473 */
         REGB5 = REGB8;
       }
       /* ../lib/standard/kernel.nit:357 */
@@ -8544,7 +8558,7 @@ val_t syntax___typing___AAbsAbsSendExpr___process_signature(val_t p0, val_t p1, 
     }
   }
   label8: while(0);
-  /* syntax/typing.nit:1470 */
+  /* syntax/typing.nit:1476 */
   REGB4 = TAG_Bool(1);
   REGB3 = REGB4;
   goto label4;
@@ -8584,7 +8598,7 @@ val_t syntax___typing___AAbsAbsSendExpr___process_closures(val_t p0, val_t p1, v
       static val_t once_value_25; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1473;
+  fra.me.line = 1479;
   fra.me.meth = LOCATE_syntax___typing___AAbsAbsSendExpr___process_closures;
   fra.me.has_broke = 0;
   fra.me.REG_size = 17;
@@ -8611,11 +8625,11 @@ val_t syntax___typing___AAbsAbsSendExpr___process_closures(val_t p0, val_t p1, v
   fra.me.REG[2] = p2;
   fra.me.REG[3] = p3;
   fra.me.REG[4] = p4;
-  /* syntax/typing.nit:1476 */
+  /* syntax/typing.nit:1482 */
   fra.me.REG[5] = CALL_metamodel___static_type___MMSignature___return_type(fra.me.REG[2])(fra.me.REG[2]);
-  /* syntax/typing.nit:1477 */
+  /* syntax/typing.nit:1483 */
   fra.me.REG[6] = CALL_metamodel___static_type___MMSignature___closures(fra.me.REG[2])(fra.me.REG[2]);
-  /* syntax/typing.nit:1478 */
+  /* syntax/typing.nit:1484 */
   REGB0 = TAG_Int(0);
   /* ../lib/standard/collection/array.nit:266 */
   fra.me.REG[7] = fra.me.REG[6];
@@ -8653,16 +8667,16 @@ val_t syntax___typing___AAbsAbsSendExpr___process_closures(val_t p0, val_t p1, v
       if (UNTAG_Bool(REGB2)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[9] = ((Nit_NativeArray)fra.me.REG[8])->val[UNTAG_Int(REGB1)];
-      /* syntax/typing.nit:1480 */
+      /* syntax/typing.nit:1486 */
       REGB2 = CALL_metamodel___static_type___MMClosure___is_optional(fra.me.REG[9])(fra.me.REG[9]);
       REGB2 = TAG_Bool(!UNTAG_Bool(REGB2));
       if (UNTAG_Bool(REGB2)) {
         REGB2 = TAG_Int(1);
         /* ../lib/standard/kernel.nit:238 */
         REGB2 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB2));
-        /* syntax/typing.nit:1480 */
+        /* syntax/typing.nit:1486 */
         REGB0 = REGB2;
       }
       /* ../lib/standard/collection/array.nit:274 */
@@ -8677,9 +8691,9 @@ val_t syntax___typing___AAbsAbsSendExpr___process_closures(val_t p0, val_t p1, v
     }
   }
   label1: while(0);
-  /* syntax/typing.nit:1482 */
+  /* syntax/typing.nit:1488 */
   REGB1 = TAG_Int(0);
-  /* syntax/typing.nit:1483 */
+  /* syntax/typing.nit:1489 */
   REGB2 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
   if (UNTAG_Bool(REGB2)) {
   } else {
@@ -8696,7 +8710,7 @@ val_t syntax___typing___AAbsAbsSendExpr___process_closures(val_t p0, val_t p1, v
   if (UNTAG_Bool(REGB2)) {
     REGB2 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
     if (UNTAG_Bool(REGB2)) {
-      nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1483);
+      nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1489);
     }
     /* ../lib/standard/collection/array.nit:24 */
     REGB2 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[4])!=NIT_NULL);
@@ -8705,7 +8719,7 @@ val_t syntax___typing___AAbsAbsSendExpr___process_closures(val_t p0, val_t p1, v
       nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
     }
     REGB2 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[4]);
-    /* syntax/typing.nit:1483 */
+    /* syntax/typing.nit:1489 */
     REGB1 = REGB2;
   }
   /* ../lib/standard/collection/array.nit:24 */
@@ -8715,7 +8729,7 @@ val_t syntax___typing___AAbsAbsSendExpr___process_closures(val_t p0, val_t p1, v
     nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
   }
   REGB2 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[6]);
-  /* syntax/typing.nit:1484 */
+  /* syntax/typing.nit:1490 */
   REGB3 = TAG_Int(0);
   REGB4 = TAG_Bool(VAL_ISA(REGB3, VTCOLOR_standard___kernel___Comparable___OTHER(REGB2), VTID_standard___kernel___Comparable___OTHER(REGB2))) /*cast OTHER*/;
   if (UNTAG_Bool(REGB4)) {
@@ -8724,16 +8738,16 @@ val_t syntax___typing___AAbsAbsSendExpr___process_closures(val_t p0, val_t p1, v
   }
   /* ../lib/standard/kernel.nit:237 */
   REGB3 = TAG_Bool(UNTAG_Int(REGB2)>UNTAG_Int(REGB3));
-  /* syntax/typing.nit:1484 */
+  /* syntax/typing.nit:1490 */
   if (UNTAG_Bool(REGB3)) {
-    /* syntax/typing.nit:1485 */
+    /* syntax/typing.nit:1491 */
     REGB3 = TAG_Int(0);
     REGB2 = TAG_Bool(IS_EQUAL_OO(REGB1,REGB3));
     if (UNTAG_Bool(REGB2)) {
     } else {
       /* ../lib/standard/kernel.nit:230 */
       REGB3 = TAG_Bool((REGB1)==(REGB3));
-      /* syntax/typing.nit:1485 */
+      /* syntax/typing.nit:1491 */
       REGB2 = REGB3;
     }
     if (UNTAG_Bool(REGB2)) {
@@ -8746,12 +8760,12 @@ val_t syntax___typing___AAbsAbsSendExpr___process_closures(val_t p0, val_t p1, v
       /* ../lib/standard/kernel.nit:237 */
       REGB2 = TAG_Bool(UNTAG_Int(REGB0)>UNTAG_Int(REGB2));
     } else {
-      /* syntax/typing.nit:1485 */
+      /* syntax/typing.nit:1491 */
       REGB3 = TAG_Bool(0);
       REGB2 = REGB3;
     }
     if (UNTAG_Bool(REGB2)) {
-      /* syntax/typing.nit:1486 */
+      /* syntax/typing.nit:1492 */
       REGB2 = TAG_Int(5);
       fra.me.REG[8] = NEW_Array_standard___collection___array___Array___with_capacity(REGB2);
       if (!once_value_2) {
@@ -8781,7 +8795,7 @@ val_t syntax___typing___AAbsAbsSendExpr___process_closures(val_t p0, val_t p1, v
         nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
       }
       REGB2 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[6]);
-      /* syntax/typing.nit:1486 */
+      /* syntax/typing.nit:1492 */
       fra.me.REG[7] = CALL_standard___string___Object___to_s(REGB2)(REGB2);
       CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[8])(fra.me.REG[8], fra.me.REG[7]);
       if (!once_value_4) {
@@ -8810,7 +8824,7 @@ val_t syntax___typing___AAbsAbsSendExpr___process_closures(val_t p0, val_t p1, v
       }
       /* ../lib/standard/kernel.nit:237 */
       REGB2 = TAG_Bool(UNTAG_Int(REGB1)>UNTAG_Int(REGB2));
-      /* syntax/typing.nit:1487 */
+      /* syntax/typing.nit:1493 */
       if (UNTAG_Bool(REGB2)) {
         REGB2 = TAG_Bool(1);
       } else {
@@ -8821,11 +8835,11 @@ val_t syntax___typing___AAbsAbsSendExpr___process_closures(val_t p0, val_t p1, v
         }
         /* ../lib/standard/kernel.nit:235 */
         REGB0 = TAG_Bool(UNTAG_Int(REGB1)<UNTAG_Int(REGB0));
-        /* syntax/typing.nit:1487 */
+        /* syntax/typing.nit:1493 */
         REGB2 = REGB0;
       }
       if (UNTAG_Bool(REGB2)) {
-        /* syntax/typing.nit:1488 */
+        /* syntax/typing.nit:1494 */
         REGB2 = TAG_Int(7);
         fra.me.REG[8] = NEW_Array_standard___collection___array___Array___with_capacity(REGB2);
         if (!once_value_5) {
@@ -8855,7 +8869,7 @@ val_t syntax___typing___AAbsAbsSendExpr___process_closures(val_t p0, val_t p1, v
           nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
         }
         REGB2 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[6]);
-        /* syntax/typing.nit:1488 */
+        /* syntax/typing.nit:1494 */
         fra.me.REG[7] = CALL_standard___string___Object___to_s(REGB2)(REGB2);
         CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[8])(fra.me.REG[8], fra.me.REG[7]);
         if (!once_value_7) {
@@ -8869,7 +8883,7 @@ val_t syntax___typing___AAbsAbsSendExpr___process_closures(val_t p0, val_t p1, v
         CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[8])(fra.me.REG[8], fra.me.REG[7]);
         REGB2 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
         if (UNTAG_Bool(REGB2)) {
-          nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1488);
+          nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1494);
         }
         /* ../lib/standard/collection/array.nit:24 */
         REGB2 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[4])!=NIT_NULL);
@@ -8878,7 +8892,7 @@ val_t syntax___typing___AAbsAbsSendExpr___process_closures(val_t p0, val_t p1, v
           nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
         }
         REGB2 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[4]);
-        /* syntax/typing.nit:1488 */
+        /* syntax/typing.nit:1494 */
         fra.me.REG[7] = CALL_standard___string___Object___to_s(REGB2)(REGB2);
         CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[8])(fra.me.REG[8], fra.me.REG[7]);
         if (!once_value_8) {
@@ -8893,9 +8907,9 @@ val_t syntax___typing___AAbsAbsSendExpr___process_closures(val_t p0, val_t p1, v
         fra.me.REG[8] = CALL_standard___string___Object___to_s(fra.me.REG[8])(fra.me.REG[8]);
         CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[8]);
       } else {
-        /* syntax/typing.nit:1491 */
+        /* syntax/typing.nit:1497 */
         fra.me.REG[8] = NIT_NULL;
-        /* syntax/typing.nit:1492 */
+        /* syntax/typing.nit:1498 */
         REGB2 = TAG_Bool(fra.me.REG[5]==NIT_NULL);
         if (UNTAG_Bool(REGB2)) {
         } else {
@@ -8913,7 +8927,7 @@ val_t syntax___typing___AAbsAbsSendExpr___process_closures(val_t p0, val_t p1, v
           fra.me.REG[7] = NEW_Array_standard___collection___array___Array___init();
           fra.me.REG[8] = fra.me.REG[7];
         }
-        /* syntax/typing.nit:1495 */
+        /* syntax/typing.nit:1501 */
         REGB2 = TAG_Int(0);
         REGB0 = TAG_Bool(VAL_ISA(REGB2, VTCOLOR_standard___kernel___Comparable___OTHER(REGB1), VTID_standard___kernel___Comparable___OTHER(REGB1))) /*cast OTHER*/;
         if (UNTAG_Bool(REGB0)) {
@@ -8922,15 +8936,15 @@ val_t syntax___typing___AAbsAbsSendExpr___process_closures(val_t p0, val_t p1, v
         }
         /* ../lib/standard/kernel.nit:237 */
         REGB2 = TAG_Bool(UNTAG_Int(REGB1)>UNTAG_Int(REGB2));
-        /* syntax/typing.nit:1495 */
+        /* syntax/typing.nit:1501 */
         if (UNTAG_Bool(REGB2)) {
           REGB2 = TAG_Int(1);
           /* ../lib/standard/kernel.nit:240 */
           REGB2 = TAG_Int(UNTAG_Int(REGB1)-UNTAG_Int(REGB2));
-          /* syntax/typing.nit:1495 */
+          /* syntax/typing.nit:1501 */
           REGB0 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
           if (UNTAG_Bool(REGB0)) {
-            nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1495);
+            nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1501);
           }
           /* ../lib/standard/collection/array.nit:278 */
           fra.me.REG[7] = fra.me.REG[4];
@@ -8973,21 +8987,21 @@ val_t syntax___typing___AAbsAbsSendExpr___process_closures(val_t p0, val_t p1, v
           if (UNTAG_Bool(REGB0)) {
             nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
           }
-          /* ../lib/standard/collection/array.nit:718 */
+          /* ../lib/standard/collection/array.nit:724 */
           fra.me.REG[7] = ((Nit_NativeArray)fra.me.REG[7])->val[UNTAG_Int(REGB2)];
           /* ../lib/standard/collection/array.nit:281 */
           goto label9;
           label9: while(0);
-          /* syntax/typing.nit:1495 */
+          /* syntax/typing.nit:1501 */
           REGB2 = TAG_Bool(fra.me.REG[7]==NIT_NULL);
           if (UNTAG_Bool(REGB2)) {
-            nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1495);
+            nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1501);
           }
           fra.me.REG[7] = CALL_parser___parser_nodes___ALabelable___n_label(fra.me.REG[7])(fra.me.REG[7]);
         } else {
           fra.me.REG[7] = NIT_NULL;
         }
-        /* syntax/typing.nit:1498 */
+        /* syntax/typing.nit:1504 */
         REGB2 = TAG_Int(0);
         /* ../lib/standard/kernel.nit:350 */
         REGB0 = REGB1;
@@ -9002,12 +9016,12 @@ val_t syntax___typing___AAbsAbsSendExpr___process_closures(val_t p0, val_t p1, v
           REGB3 = TAG_Bool(UNTAG_Int(REGB2)<UNTAG_Int(REGB0));
           /* ../lib/standard/kernel.nit:355 */
           if (UNTAG_Bool(REGB3)) {
-            /* syntax/typing.nit:1498 */
+            /* syntax/typing.nit:1504 */
             REGB3 = REGB2;
-            /* syntax/typing.nit:1499 */
+            /* syntax/typing.nit:1505 */
             REGB4 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
             if (UNTAG_Bool(REGB4)) {
-              nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1499);
+              nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1505);
             }
             /* ../lib/standard/collection/array.nit:278 */
             fra.me.REG[9] = fra.me.REG[4];
@@ -9050,17 +9064,17 @@ val_t syntax___typing___AAbsAbsSendExpr___process_closures(val_t p0, val_t p1, v
             if (UNTAG_Bool(REGB4)) {
               nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
             }
-            /* ../lib/standard/collection/array.nit:718 */
+            /* ../lib/standard/collection/array.nit:724 */
             fra.me.REG[9] = ((Nit_NativeArray)fra.me.REG[9])->val[UNTAG_Int(REGB3)];
             /* ../lib/standard/collection/array.nit:281 */
             goto label10;
             label10: while(0);
-            /* syntax/typing.nit:1500 */
+            /* syntax/typing.nit:1506 */
             fra.me.REG[10] = CALL_parser___parser_nodes___AClosureDef___n_id(fra.me.REG[9])(fra.me.REG[9]);
             fra.me.REG[10] = CALL_syntax___typing___AClosureId___to_symbol(fra.me.REG[10])(fra.me.REG[10]);
-            /* syntax/typing.nit:1501 */
+            /* syntax/typing.nit:1507 */
             fra.me.REG[11] = CALL_metamodel___static_type___MMSignature___closure_named(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[10]);
-            /* syntax/typing.nit:1502 */
+            /* syntax/typing.nit:1508 */
             REGB3 = TAG_Bool(fra.me.REG[11]==NIT_NULL);
             if (UNTAG_Bool(REGB3)) {
             } else {
@@ -9075,14 +9089,14 @@ val_t syntax___typing___AAbsAbsSendExpr___process_closures(val_t p0, val_t p1, v
             }
             REGB3 = TAG_Bool(!UNTAG_Bool(REGB3));
             if (UNTAG_Bool(REGB3)) {
-              /* syntax/typing.nit:1503 */
+              /* syntax/typing.nit:1509 */
               fra.me.REG[11] = NEW_EscapableClosure_syntax___scope___EscapableClosure___init(fra.me.REG[9], fra.me.REG[11], fra.me.REG[8]);
-              /* syntax/typing.nit:1504 */
+              /* syntax/typing.nit:1510 */
               fra.me.REG[12] = CALL_syntax___typing___TypingVisitor___scope_ctx(fra.me.REG[1])(fra.me.REG[1]);
               CALL_syntax___scope___ScopeContext___push_escapable(fra.me.REG[12])(fra.me.REG[12], fra.me.REG[11], fra.me.REG[7]);
-              /* syntax/typing.nit:1505 */
+              /* syntax/typing.nit:1511 */
               CALL_syntax___typing___AClosureDef___accept_typing2(fra.me.REG[9])(fra.me.REG[9], fra.me.REG[1], fra.me.REG[11]);
-              /* syntax/typing.nit:1506 */
+              /* syntax/typing.nit:1512 */
               fra.me.REG[11] = CALL_syntax___typing___TypingVisitor___scope_ctx(fra.me.REG[1])(fra.me.REG[1]);
               CALL_syntax___scope___ScopeContext___pop(fra.me.REG[11])(fra.me.REG[11]);
             } else {
@@ -9093,18 +9107,18 @@ val_t syntax___typing___AAbsAbsSendExpr___process_closures(val_t p0, val_t p1, v
 		nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
               }
               REGB3 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[6]);
-              /* syntax/typing.nit:1507 */
+              /* syntax/typing.nit:1513 */
               REGB4 = TAG_Int(1);
               REGB5 = TAG_Bool(IS_EQUAL_OO(REGB3,REGB4));
               if (UNTAG_Bool(REGB5)) {
               } else {
 		/* ../lib/standard/kernel.nit:230 */
 		REGB4 = TAG_Bool((REGB3)==(REGB4));
-		/* syntax/typing.nit:1507 */
+		/* syntax/typing.nit:1513 */
 		REGB5 = REGB4;
               }
               if (UNTAG_Bool(REGB5)) {
-		/* syntax/typing.nit:1508 */
+		/* syntax/typing.nit:1514 */
 		fra.me.REG[11] = CALL_parser___parser_nodes___AClosureDef___n_id(fra.me.REG[9])(fra.me.REG[9]);
 		REGB5 = TAG_Int(7);
 		fra.me.REG[12] = NEW_Array_standard___collection___array___Array___with_capacity(REGB5);
@@ -9142,7 +9156,7 @@ val_t syntax___typing___AAbsAbsSendExpr___process_closures(val_t p0, val_t p1, v
 		fra.me.REG[13] = CALL_standard___collection___abstract_collection___Collection___first(fra.me.REG[6])(fra.me.REG[6]);
 		REGB5 = TAG_Bool(fra.me.REG[13]==NIT_NULL);
 		if (UNTAG_Bool(REGB5)) {
-		nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1508);
+		nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1514);
 		}
 		fra.me.REG[13] = CALL_metamodel___static_type___MMClosure___name(fra.me.REG[13])(fra.me.REG[13]);
 		fra.me.REG[13] = CALL_standard___string___Object___to_s(fra.me.REG[13])(fra.me.REG[13]);
@@ -9159,7 +9173,7 @@ val_t syntax___typing___AAbsAbsSendExpr___process_closures(val_t p0, val_t p1, v
 		fra.me.REG[12] = CALL_standard___string___Object___to_s(fra.me.REG[12])(fra.me.REG[12]);
 		CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[11], fra.me.REG[12]);
               } else {
-		/* syntax/typing.nit:1510 */
+		/* syntax/typing.nit:1516 */
 		fra.me.REG[12] = NEW_Array_standard___collection___array___Array___init();
 		/* ../lib/standard/collection/array.nit:266 */
 		fra.me.REG[11] = fra.me.REG[6];
@@ -9197,9 +9211,9 @@ val_t syntax___typing___AAbsAbsSendExpr___process_closures(val_t p0, val_t p1, v
 		if (UNTAG_Bool(REGB4)) {
 		nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
 		}
-		/* ../lib/standard/collection/array.nit:718 */
+		/* ../lib/standard/collection/array.nit:724 */
 		fra.me.REG[14] = ((Nit_NativeArray)fra.me.REG[13])->val[UNTAG_Int(REGB5)];
-		/* syntax/typing.nit:1512 */
+		/* syntax/typing.nit:1518 */
 		REGB4 = TAG_Int(3);
 		fra.me.REG[15] = NEW_Array_standard___collection___array___Array___with_capacity(REGB4);
 		if (!once_value_15) {
@@ -9237,7 +9251,7 @@ val_t syntax___typing___AAbsAbsSendExpr___process_closures(val_t p0, val_t p1, v
 		}
 		}
 		label17: while(0);
-		/* syntax/typing.nit:1514 */
+		/* syntax/typing.nit:1520 */
 		fra.me.REG[9] = CALL_parser___parser_nodes___AClosureDef___n_id(fra.me.REG[9])(fra.me.REG[9]);
 		REGB5 = TAG_Int(7);
 		fra.me.REG[13] = NEW_Array_standard___collection___array___Array___with_capacity(REGB5);
@@ -9307,7 +9321,7 @@ val_t syntax___typing___AAbsAbsSendExpr___process_closures(val_t p0, val_t p1, v
           }
         }
         label23: while(0);
-        /* syntax/typing.nit:1519 */
+        /* syntax/typing.nit:1525 */
         REGB2 = TAG_Bool(fra.me.REG[8]==NIT_NULL);
         if (UNTAG_Bool(REGB2)) {
         } else {
@@ -9322,26 +9336,26 @@ val_t syntax___typing___AAbsAbsSendExpr___process_closures(val_t p0, val_t p1, v
         }
         REGB2 = TAG_Bool(!UNTAG_Bool(REGB2));
         if (UNTAG_Bool(REGB2)) {
-          /* syntax/typing.nit:1520 */
+          /* syntax/typing.nit:1526 */
           fra.me.REG[8] = CALL_syntax___syntax_base___AbsSyntaxVisitor___check_conform_multiexpr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[5], fra.me.REG[8]);
           fra.me.REG[5] = fra.me.REG[8];
         }
       }
     }
   } else {
-    /* syntax/typing.nit:1523 */
+    /* syntax/typing.nit:1529 */
     REGB2 = TAG_Int(0);
     REGB0 = TAG_Bool(IS_EQUAL_OO(REGB1,REGB2));
     if (UNTAG_Bool(REGB0)) {
     } else {
       /* ../lib/standard/kernel.nit:230 */
       REGB2 = TAG_Bool((REGB1)==(REGB2));
-      /* syntax/typing.nit:1523 */
+      /* syntax/typing.nit:1529 */
       REGB0 = REGB2;
     }
     REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
     if (UNTAG_Bool(REGB0)) {
-      /* syntax/typing.nit:1524 */
+      /* syntax/typing.nit:1530 */
       REGB0 = TAG_Int(3);
       fra.me.REG[8] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
       if (!once_value_24) {
@@ -9368,7 +9382,7 @@ val_t syntax___typing___AAbsAbsSendExpr___process_closures(val_t p0, val_t p1, v
       CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[8]);
     }
   }
-  /* syntax/typing.nit:1526 */
+  /* syntax/typing.nit:1532 */
   goto label26;
   label26: while(0);
   stack_frame_head = fra.me.prev;
@@ -9383,7 +9397,7 @@ void syntax___typing___AAbsSendExpr___do_typing(val_t p0, val_t p1, val_t p2, va
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1531;
+  fra.me.line = 1537;
   fra.me.meth = LOCATE_syntax___typing___AAbsSendExpr___do_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
@@ -9403,9 +9417,9 @@ void syntax___typing___AAbsSendExpr___do_typing(val_t p0, val_t p1, val_t p2, va
   fra.me.REG[3] = p5;
   fra.me.REG[4] = p6;
   fra.me.REG[5] = p7;
-  /* syntax/typing.nit:1534 */
+  /* syntax/typing.nit:1540 */
   fra.me.REG[3] = CALL_syntax___typing___AAbsSendExpr___get_property(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], fra.me.REG[2], REGB0, fra.me.REG[3]);
-  /* syntax/typing.nit:1535 */
+  /* syntax/typing.nit:1541 */
   REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -9421,12 +9435,12 @@ void syntax___typing___AAbsSendExpr___do_typing(val_t p0, val_t p1, val_t p2, va
   if (UNTAG_Bool(REGB0)) {
     goto label1;
   }
-  /* syntax/typing.nit:1536 */
+  /* syntax/typing.nit:1542 */
   fra.me.REG[2] = CALL_syntax___typing___AAbsSendExpr___get_signature(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], fra.me.REG[2], fra.me.REG[3], REGB1);
-  /* syntax/typing.nit:1537 */
+  /* syntax/typing.nit:1543 */
   REGB1 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
-    nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1537);
+    nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1543);
   }
   fra.me.REG[6] = CALL_metamodel___abstractmetamodel___MMLocalProperty___name(fra.me.REG[3])(fra.me.REG[3]);
   REGB1 = CALL_syntax___typing___AAbsAbsSendExpr___process_signature(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], fra.me.REG[2], fra.me.REG[6], fra.me.REG[4]);
@@ -9434,14 +9448,14 @@ void syntax___typing___AAbsSendExpr___do_typing(val_t p0, val_t p1, val_t p2, va
   if (UNTAG_Bool(REGB1)) {
     goto label1;
   }
-  /* syntax/typing.nit:1538 */
+  /* syntax/typing.nit:1544 */
   REGB1 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
-    nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1538);
+    nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1544);
   }
   fra.me.REG[4] = CALL_metamodel___abstractmetamodel___MMLocalProperty___name(fra.me.REG[3])(fra.me.REG[3]);
   fra.me.REG[5] = CALL_syntax___typing___AAbsAbsSendExpr___process_closures(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], fra.me.REG[2], fra.me.REG[4], fra.me.REG[5]);
-  /* syntax/typing.nit:1539 */
+  /* syntax/typing.nit:1545 */
   REGB1 = TAG_Bool(fra.me.REG[5]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
   } else {
@@ -9476,11 +9490,11 @@ void syntax___typing___AAbsSendExpr___do_typing(val_t p0, val_t p1, val_t p2, va
   if (UNTAG_Bool(REGB1)) {
     goto label1;
   }
-  /* syntax/typing.nit:1540 */
+  /* syntax/typing.nit:1546 */
   ATTR_syntax___typing___AAbsSendExpr____prop(fra.me.REG[0]) = fra.me.REG[3];
-  /* syntax/typing.nit:1541 */
+  /* syntax/typing.nit:1547 */
   ATTR_syntax___typing___AAbsAbsSendExpr____prop_signature(fra.me.REG[0]) = fra.me.REG[2];
-  /* syntax/typing.nit:1542 */
+  /* syntax/typing.nit:1548 */
   ATTR_syntax___typing___AAbsSendExpr____return_type(fra.me.REG[0]) = fra.me.REG[5];
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -9512,7 +9526,7 @@ val_t syntax___typing___AAbsSendExpr___get_property(val_t p0, val_t p1, val_t p2
       static val_t once_value_17; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1545;
+  fra.me.line = 1551;
   fra.me.meth = LOCATE_syntax___typing___AAbsSendExpr___get_property;
   fra.me.has_broke = 0;
   fra.me.REG_size = 10;
@@ -9532,10 +9546,10 @@ val_t syntax___typing___AAbsSendExpr___get_property(val_t p0, val_t p1, val_t p2
   fra.me.REG[2] = p2;
   REGB0 = p3;
   fra.me.REG[3] = p4;
-  /* syntax/typing.nit:1547 */
+  /* syntax/typing.nit:1553 */
   REGB1 = TAG_Bool(VAL_ISA(fra.me.REG[2], COLOR_metamodel___static_type___MMTypeNone, ID_metamodel___static_type___MMTypeNone)) /*cast MMTypeNone*/;
   if (UNTAG_Bool(REGB1)) {
-    /* syntax/typing.nit:1548 */
+    /* syntax/typing.nit:1554 */
     if (!once_value_1) {
       if (!once_value_2) {
         fra.me.REG[4] = BOX_NativeString("==");
@@ -9582,12 +9596,12 @@ val_t syntax___typing___AAbsSendExpr___get_property(val_t p0, val_t p1, val_t p2
       REGB1 = REGB2;
     }
     if (UNTAG_Bool(REGB1)) {
-      /* syntax/typing.nit:1550 */
+      /* syntax/typing.nit:1556 */
       fra.me.REG[4] = CALL_syntax___syntax_base___AbsSyntaxVisitor___type_object(fra.me.REG[1])(fra.me.REG[1]);
       fra.me.REG[4] = CALL_metamodel___static_type___MMType___as_nullable(fra.me.REG[4])(fra.me.REG[4]);
       fra.me.REG[2] = fra.me.REG[4];
     } else {
-      /* syntax/typing.nit:1552 */
+      /* syntax/typing.nit:1558 */
       REGB1 = TAG_Int(3);
       fra.me.REG[4] = NEW_Array_standard___collection___array___Array___with_capacity(REGB1);
       if (!once_value_5) {
@@ -9612,22 +9626,22 @@ val_t syntax___typing___AAbsSendExpr___get_property(val_t p0, val_t p1, val_t p2
       CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[5]);
       fra.me.REG[4] = CALL_standard___string___Object___to_s(fra.me.REG[4])(fra.me.REG[4]);
       CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[4]);
-      /* syntax/typing.nit:1553 */
+      /* syntax/typing.nit:1559 */
       fra.me.REG[4] = NIT_NULL;
       goto label7;
     }
   }
-  /* syntax/typing.nit:1556 */
+  /* syntax/typing.nit:1562 */
   fra.me.REG[5] = CALL_metamodel___static_type___MMType___local_class(fra.me.REG[2])(fra.me.REG[2]);
-  /* syntax/typing.nit:1557 */
+  /* syntax/typing.nit:1563 */
   fra.me.REG[6] = NIT_NULL;
-  /* syntax/typing.nit:1558 */
+  /* syntax/typing.nit:1564 */
   REGB1 = CALL_metamodel___abstractmetamodel___MMLocalClass___has_global_property_by_name(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[3]);
   if (UNTAG_Bool(REGB1)) {
     fra.me.REG[7] = CALL_metamodel___abstractmetamodel___MMLocalClass___select_method(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[3]);
     fra.me.REG[6] = fra.me.REG[7];
   }
-  /* syntax/typing.nit:1559 */
+  /* syntax/typing.nit:1565 */
   REGB1 = TAG_Bool(fra.me.REG[6]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
   } else {
@@ -9641,15 +9655,7 @@ val_t syntax___typing___AAbsSendExpr___get_property(val_t p0, val_t p1, val_t p2
     }
   }
   if (UNTAG_Bool(REGB1)) {
-    fra.me.REG[7] = CALL_syntax___syntax_base___AbsSyntaxVisitor___local_property(fra.me.REG[1])(fra.me.REG[1]);
-    fra.me.REG[7] = CALL_metamodel___abstractmetamodel___MMLocalProperty___global(fra.me.REG[7])(fra.me.REG[7]);
-    REGB1 = CALL_metamodel___abstractmetamodel___MMGlobalProperty___is_init(fra.me.REG[7])(fra.me.REG[7]);
-  } else {
-    REGB2 = TAG_Bool(0);
-    REGB1 = REGB2;
-  }
-  if (UNTAG_Bool(REGB1)) {
-    /* syntax/typing.nit:1560 */
+    /* syntax/typing.nit:1566 */
     fra.me.REG[7] = CALL_metamodel___abstractmetamodel___MMLocalClass___super_methods_named(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[3]);
     /* ../lib/standard/collection/array.nit:24 */
     REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[7])!=NIT_NULL);
@@ -9658,7 +9664,7 @@ val_t syntax___typing___AAbsSendExpr___get_property(val_t p0, val_t p1, val_t p2
       nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
     }
     REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[7]);
-    /* syntax/typing.nit:1561 */
+    /* syntax/typing.nit:1567 */
     REGB2 = TAG_Int(1);
     REGB3 = TAG_Bool(VAL_ISA(REGB2, VTCOLOR_standard___kernel___Comparable___OTHER(REGB1), VTID_standard___kernel___Comparable___OTHER(REGB1))) /*cast OTHER*/;
     if (UNTAG_Bool(REGB3)) {
@@ -9667,9 +9673,9 @@ val_t syntax___typing___AAbsSendExpr___get_property(val_t p0, val_t p1, val_t p2
     }
     /* ../lib/standard/kernel.nit:237 */
     REGB2 = TAG_Bool(UNTAG_Int(REGB1)>UNTAG_Int(REGB2));
-    /* syntax/typing.nit:1561 */
+    /* syntax/typing.nit:1567 */
     if (UNTAG_Bool(REGB2)) {
-      /* syntax/typing.nit:1562 */
+      /* syntax/typing.nit:1568 */
       REGB2 = TAG_Int(5);
       fra.me.REG[8] = NEW_Array_standard___collection___array___Array___with_capacity(REGB2);
       if (!once_value_8) {
@@ -9713,7 +9719,7 @@ val_t syntax___typing___AAbsSendExpr___get_property(val_t p0, val_t p1, val_t p2
       CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[8])(fra.me.REG[8], fra.me.REG[9]);
       fra.me.REG[8] = CALL_standard___string___Object___to_s(fra.me.REG[8])(fra.me.REG[8]);
       CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[8]);
-      /* syntax/typing.nit:1563 */
+      /* syntax/typing.nit:1569 */
       fra.me.REG[4] = NIT_NULL;
       goto label7;
     } else {
@@ -9724,37 +9730,37 @@ val_t syntax___typing___AAbsSendExpr___get_property(val_t p0, val_t p1, val_t p2
         nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
       }
       REGB2 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[7]);
-      /* syntax/typing.nit:1564 */
+      /* syntax/typing.nit:1570 */
       REGB1 = TAG_Int(1);
       REGB3 = TAG_Bool(IS_EQUAL_OO(REGB2,REGB1));
       if (UNTAG_Bool(REGB3)) {
       } else {
         /* ../lib/standard/kernel.nit:230 */
         REGB1 = TAG_Bool((REGB2)==(REGB1));
-        /* syntax/typing.nit:1564 */
+        /* syntax/typing.nit:1570 */
         REGB3 = REGB1;
       }
       if (UNTAG_Bool(REGB3)) {
-        /* syntax/typing.nit:1565 */
+        /* syntax/typing.nit:1571 */
         fra.me.REG[7] = CALL_standard___collection___abstract_collection___Collection___first(fra.me.REG[7])(fra.me.REG[7]);
         REGB3 = TAG_Bool(fra.me.REG[7]==NIT_NULL);
         if (UNTAG_Bool(REGB3)) {
-          nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1565);
+          nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1571);
         }
         fra.me.REG[7] = CALL_metamodel___abstractmetamodel___MMLocalProperty___global(fra.me.REG[7])(fra.me.REG[7]);
         fra.me.REG[7] = CALL_metamodel___abstractmetamodel___MMLocalClass_____bra(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[7]);
-        /* syntax/typing.nit:1566 */
+        /* syntax/typing.nit:1572 */
         REGB3 = TAG_Bool(VAL_ISA(fra.me.REG[7], COLOR_metamodel___abstractmetamodel___MMMethod, ID_metamodel___abstractmetamodel___MMMethod)) /*cast MMMethod*/;
         if (UNTAG_Bool(REGB3)) {
         } else {
-          nit_abort("Assert failed", NULL, LOCATE_syntax___typing, 1566);
+          nit_abort("Assert failed", NULL, LOCATE_syntax___typing, 1572);
         }
-        /* syntax/typing.nit:1567 */
+        /* syntax/typing.nit:1573 */
         fra.me.REG[6] = fra.me.REG[7];
       }
     }
   }
-  /* syntax/typing.nit:1571 */
+  /* syntax/typing.nit:1577 */
   REGB3 = TAG_Bool(fra.me.REG[6]==NIT_NULL);
   if (UNTAG_Bool(REGB3)) {
   } else {
@@ -9768,9 +9774,9 @@ val_t syntax___typing___AAbsSendExpr___get_property(val_t p0, val_t p1, val_t p2
     }
   }
   if (UNTAG_Bool(REGB3)) {
-    /* syntax/typing.nit:1572 */
+    /* syntax/typing.nit:1578 */
     if (UNTAG_Bool(REGB0)) {
-      /* syntax/typing.nit:1573 */
+      /* syntax/typing.nit:1579 */
       REGB0 = TAG_Int(5);
       fra.me.REG[7] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
       if (!once_value_12) {
@@ -9807,7 +9813,7 @@ val_t syntax___typing___AAbsSendExpr___get_property(val_t p0, val_t p1, val_t p2
       fra.me.REG[7] = CALL_standard___string___Object___to_s(fra.me.REG[7])(fra.me.REG[7]);
       CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[7]);
     } else {
-      /* syntax/typing.nit:1575 */
+      /* syntax/typing.nit:1581 */
       REGB0 = TAG_Int(5);
       fra.me.REG[7] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
       if (!once_value_15) {
@@ -9844,11 +9850,11 @@ val_t syntax___typing___AAbsSendExpr___get_property(val_t p0, val_t p1, val_t p2
       fra.me.REG[7] = CALL_standard___string___Object___to_s(fra.me.REG[7])(fra.me.REG[7]);
       CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[7]);
     }
-    /* syntax/typing.nit:1577 */
+    /* syntax/typing.nit:1583 */
     fra.me.REG[4] = NIT_NULL;
     goto label7;
   }
-  /* syntax/typing.nit:1579 */
+  /* syntax/typing.nit:1585 */
   fra.me.REG[4] = fra.me.REG[6];
   goto label7;
   label7: while(0);
@@ -9862,7 +9868,7 @@ val_t syntax___typing___AAbsSendExpr___get_signature(val_t p0, val_t p1, val_t p
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1582;
+  fra.me.line = 1588;
   fra.me.meth = LOCATE_syntax___typing___AAbsSendExpr___get_signature;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
@@ -9878,19 +9884,19 @@ val_t syntax___typing___AAbsSendExpr___get_signature(val_t p0, val_t p1, val_t p
   fra.me.REG[2] = p2;
   fra.me.REG[3] = p3;
   REGB0 = p4;
-  /* syntax/typing.nit:1585 */
+  /* syntax/typing.nit:1591 */
   fra.me.REG[4] = CALL_metamodel___abstractmetamodel___MMLocalProperty___global(fra.me.REG[3])(fra.me.REG[3]);
   fra.me.REG[5] = CALL_syntax___syntax_base___AbsSyntaxVisitor___mmmodule(fra.me.REG[1])(fra.me.REG[1]);
   CALL_syntax___syntax_base___MMGlobalProperty___check_visibility(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[1], fra.me.REG[0], fra.me.REG[5], REGB0);
-  /* syntax/typing.nit:1586 */
+  /* syntax/typing.nit:1592 */
   fra.me.REG[2] = CALL_metamodel___static_type___MMLocalProperty___signature_for(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[2]);
-  /* syntax/typing.nit:1587 */
+  /* syntax/typing.nit:1593 */
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
     fra.me.REG[3] = CALL_metamodel___static_type___MMSignature___not_for_self(fra.me.REG[2])(fra.me.REG[2]);
     fra.me.REG[2] = fra.me.REG[3];
   }
-  /* syntax/typing.nit:1588 */
+  /* syntax/typing.nit:1594 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -9903,7 +9909,7 @@ val_t syntax___typing___AAbsSendExpr___prop(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1591;
+  fra.me.line = 1597;
   fra.me.meth = LOCATE_syntax___typing___AAbsSendExpr___prop;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -9911,14 +9917,14 @@ val_t syntax___typing___AAbsSendExpr___prop(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1591 */
+  /* syntax/typing.nit:1597 */
   fra.me.REG[1] = fra.me.REG[0];
-  /* syntax/typing.nit:1592 */
+  /* syntax/typing.nit:1598 */
   fra.me.REG[1] = ATTR_syntax___typing___AAbsSendExpr____prop(fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[1]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Cast failed", NULL, LOCATE_syntax___typing, 1592);
+    nit_abort("Cast failed", NULL, LOCATE_syntax___typing, 1598);
   }
   goto label1;
   label1: while(0);
@@ -9931,14 +9937,14 @@ val_t syntax___typing___AAbsSendExpr___return_type(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1595;
+  fra.me.line = 1601;
   fra.me.meth = LOCATE_syntax___typing___AAbsSendExpr___return_type;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1595 */
+  /* syntax/typing.nit:1601 */
   fra.me.REG[0] = ATTR_syntax___typing___AAbsSendExpr____return_type(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -9960,7 +9966,7 @@ void syntax___typing___ASuperInitCall___register_super_init_call(val_t p0, val_t
         static val_t once_value_8; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1602;
+  fra.me.line = 1608;
   fra.me.meth = LOCATE_syntax___typing___ASuperInitCall___register_super_init_call;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
@@ -9977,9 +9983,9 @@ void syntax___typing___ASuperInitCall___register_super_init_call(val_t p0, val_t
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* syntax/typing.nit:1602 */
+  /* syntax/typing.nit:1608 */
   fra.me.REG[3] = fra.me.REG[0];
-  /* syntax/typing.nit:1604 */
+  /* syntax/typing.nit:1610 */
   fra.me.REG[4] = CALL_parser___parser_prod___ANode___parent(fra.me.REG[3])(fra.me.REG[3]);
   fra.me.REG[5] = CALL_syntax___typing___TypingVisitor___top_block(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Bool(IS_EQUAL_NN(fra.me.REG[4],fra.me.REG[5]));
@@ -10009,7 +10015,7 @@ void syntax___typing___ASuperInitCall___register_super_init_call(val_t p0, val_t
     REGB0 = REGB1;
   }
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:1605 */
+    /* syntax/typing.nit:1611 */
     REGB0 = TAG_Int(3);
     fra.me.REG[5] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
     if (!once_value_1) {
@@ -10035,42 +10041,42 @@ void syntax___typing___ASuperInitCall___register_super_init_call(val_t p0, val_t
     fra.me.REG[5] = CALL_standard___string___Object___to_s(fra.me.REG[5])(fra.me.REG[5]);
     CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3], fra.me.REG[5]);
   }
-  /* syntax/typing.nit:1607 */
+  /* syntax/typing.nit:1613 */
   fra.me.REG[5] = CALL_syntax___syntax_base___AbsSyntaxVisitor___mmmodule(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[4] = CALL_metamodel___abstractmetamodel___MMLocalProperty___global(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[4] = CALL_metamodel___abstractmetamodel___MMGlobalProperty___intro(fra.me.REG[4])(fra.me.REG[4]);
   fra.me.REG[4] = CALL_metamodel___abstractmetamodel___MMLocalProperty___local_class(fra.me.REG[4])(fra.me.REG[4]);
   fra.me.REG[4] = CALL_metamodel___abstractmetamodel___MMLocalClass___global(fra.me.REG[4])(fra.me.REG[4]);
   fra.me.REG[4] = CALL_metamodel___abstractmetamodel___MMModule_____bra(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[4]);
-  /* syntax/typing.nit:1608 */
+  /* syntax/typing.nit:1614 */
   fra.me.REG[5] = NIT_NULL;
-  /* syntax/typing.nit:1609 */
+  /* syntax/typing.nit:1615 */
   fra.me.REG[6] = CALL_syntax___typing___TypingVisitor___explicit_super_init_calls(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[6]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Cast failed", NULL, LOCATE_syntax___typing, 1609);
+    nit_abort("Cast failed", NULL, LOCATE_syntax___typing, 1615);
   }
-  /* syntax/typing.nit:1610 */
+  /* syntax/typing.nit:1616 */
   REGB0 = CALL_standard___collection___abstract_collection___Collection___is_empty(fra.me.REG[6])(fra.me.REG[6]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:1611 */
+    /* syntax/typing.nit:1617 */
     fra.me.REG[0] = CALL_standard___collection___abstract_collection___SequenceRead___last(fra.me.REG[6])(fra.me.REG[6]);
     REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1611);
+      nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1617);
     }
     fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMLocalProperty___global(fra.me.REG[0])(fra.me.REG[0]);
     fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMGlobalProperty___intro(fra.me.REG[0])(fra.me.REG[0]);
     fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMLocalProperty___local_class(fra.me.REG[0])(fra.me.REG[0]);
     fra.me.REG[5] = fra.me.REG[0];
   }
-  /* syntax/typing.nit:1613 */
+  /* syntax/typing.nit:1619 */
   fra.me.REG[0] = CALL_syntax___syntax_base___AbsSyntaxVisitor___local_class(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMLocalClass___cshe(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_metamodel___partial_order___PartialOrderElement___reverse_linear_extension(fra.me.REG[0])(fra.me.REG[0]);
-  /* syntax/typing.nit:1614 */
+  /* syntax/typing.nit:1620 */
   fra.me.REG[7] = CALL_syntax___syntax_base___AbsSyntaxVisitor___local_class(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[4],fra.me.REG[7]));
   if (UNTAG_Bool(REGB0)) {
@@ -10079,15 +10085,15 @@ void syntax___typing___ASuperInitCall___register_super_init_call(val_t p0, val_t
     REGB0 = REGB1;
   }
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:1615 */
+    /* syntax/typing.nit:1621 */
     REGB0 = TAG_Bool(1);
     CALL_syntax___typing___TypingVisitor___explicit_other_init_call__eq(fra.me.REG[1])(fra.me.REG[1], REGB0);
   } else {
-    /* syntax/typing.nit:1616 */
+    /* syntax/typing.nit:1622 */
     REGB0 = CALL_standard___collection___abstract_collection___Collection___has(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[4]);
     REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
     if (UNTAG_Bool(REGB0)) {
-      /* syntax/typing.nit:1617 */
+      /* syntax/typing.nit:1623 */
       REGB0 = TAG_Int(5);
       fra.me.REG[7] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
       if (!once_value_3) {
@@ -10132,7 +10138,7 @@ void syntax___typing___ASuperInitCall___register_super_init_call(val_t p0, val_t
       fra.me.REG[7] = CALL_standard___string___Object___to_s(fra.me.REG[7])(fra.me.REG[7]);
       CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3], fra.me.REG[7]);
     } else {
-      /* syntax/typing.nit:1618 */
+      /* syntax/typing.nit:1624 */
       REGB0 = TAG_Bool(IS_EQUAL_ON(fra.me.REG[4],fra.me.REG[5]));
       if (UNTAG_Bool(REGB0)) {
       } else {
@@ -10140,7 +10146,7 @@ void syntax___typing___ASuperInitCall___register_super_init_call(val_t p0, val_t
         REGB0 = REGB1;
       }
       if (UNTAG_Bool(REGB0)) {
-        /* syntax/typing.nit:1619 */
+        /* syntax/typing.nit:1625 */
         REGB0 = TAG_Int(3);
         fra.me.REG[7] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
         if (!once_value_7) {
@@ -10200,9 +10206,9 @@ void syntax___typing___ASuperInitCall___register_super_init_call(val_t p0, val_t
             if (UNTAG_Bool(REGB1)) {
               nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
             }
-            /* ../lib/standard/collection/array.nit:718 */
+            /* ../lib/standard/collection/array.nit:724 */
             fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[7])->val[UNTAG_Int(REGB0)];
-            /* syntax/typing.nit:1622 */
+            /* syntax/typing.nit:1628 */
             REGB1 = TAG_Bool(IS_EQUAL_ON(fra.me.REG[3],fra.me.REG[5]));
             if (UNTAG_Bool(REGB1)) {
             } else {
@@ -10210,10 +10216,10 @@ void syntax___typing___ASuperInitCall___register_super_init_call(val_t p0, val_t
               REGB1 = REGB2;
             }
             if (UNTAG_Bool(REGB1)) {
-              /* syntax/typing.nit:1623 */
+              /* syntax/typing.nit:1629 */
               fra.me.REG[5] = NIT_NULL;
             } else {
-              /* syntax/typing.nit:1624 */
+              /* syntax/typing.nit:1630 */
               REGB1 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[3],fra.me.REG[4]));
               if (UNTAG_Bool(REGB1)) {
               } else {
@@ -10221,9 +10227,9 @@ void syntax___typing___ASuperInitCall___register_super_init_call(val_t p0, val_t
 		REGB1 = REGB2;
               }
               if (UNTAG_Bool(REGB1)) {
-		/* syntax/typing.nit:1625 */
+		/* syntax/typing.nit:1631 */
 		CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[2]);
-		/* syntax/typing.nit:1626 */
+		/* syntax/typing.nit:1632 */
 		goto label9;
               }
             }
@@ -10252,14 +10258,14 @@ val_t syntax___typing___ANewExpr___compute_raw_arguments(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1635;
+  fra.me.line = 1641;
   fra.me.meth = LOCATE_syntax___typing___ANewExpr___compute_raw_arguments;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1635 */
+  /* syntax/typing.nit:1641 */
   fra.me.REG[0] = CALL_parser___parser_nodes___ANewExpr___n_args(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_syntax___syntax_base___AExprs___to_a(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -10281,9 +10287,12 @@ void syntax___typing___ANewExpr___after_typing(val_t p0, val_t p1){
       static val_t once_value_7; /* Once value */
     static val_t once_value_8; /* Once value */
     static val_t once_value_9; /* Once value */
+    static val_t once_value_10; /* Once value */
+    static val_t once_value_11; /* Once value */
+    static val_t once_value_12; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1636;
+  fra.me.line = 1642;
   fra.me.meth = LOCATE_syntax___typing___ANewExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
@@ -10295,22 +10304,22 @@ void syntax___typing___ANewExpr___after_typing(val_t p0, val_t p1){
   fra.me.REG[4] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:1638 */
+  /* syntax/typing.nit:1644 */
   fra.me.REG[2] = CALL_parser___parser_nodes___ANewExpr___n_type(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = CALL_syntax___syntax_base___AType___is_typed(fra.me.REG[2])(fra.me.REG[2]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
     goto label1;
   }
-  /* syntax/typing.nit:1639 */
+  /* syntax/typing.nit:1645 */
   fra.me.REG[2] = CALL_parser___parser_nodes___ANewExpr___n_type(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[2] = CALL_syntax___syntax_base___AType___stype(fra.me.REG[2])(fra.me.REG[2]);
-  /* syntax/typing.nit:1640 */
+  /* syntax/typing.nit:1646 */
   fra.me.REG[3] = CALL_metamodel___static_type___MMType___local_class(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[3] = CALL_metamodel___abstractmetamodel___MMLocalClass___global(fra.me.REG[3])(fra.me.REG[3]);
   REGB0 = CALL_metamodel___abstractmetamodel___MMGlobalClass___is_abstract(fra.me.REG[3])(fra.me.REG[3]);
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:1641 */
+    /* syntax/typing.nit:1647 */
     REGB0 = TAG_Int(3);
     fra.me.REG[3] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
     if (!once_value_2) {
@@ -10336,13 +10345,13 @@ void syntax___typing___ANewExpr___after_typing(val_t p0, val_t p1){
     CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[4]);
     fra.me.REG[3] = CALL_standard___string___Object___to_s(fra.me.REG[3])(fra.me.REG[3]);
     CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[3]);
-    /* syntax/typing.nit:1642 */
+    /* syntax/typing.nit:1648 */
     goto label1;
   }
-  /* syntax/typing.nit:1644 */
+  /* syntax/typing.nit:1650 */
   REGB0 = CALL_metamodel___static_type___MMType___is_nullable(fra.me.REG[2])(fra.me.REG[2]);
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:1645 */
+    /* syntax/typing.nit:1651 */
     REGB0 = TAG_Int(3);
     fra.me.REG[3] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
     if (!once_value_4) {
@@ -10368,7 +10377,7 @@ void syntax___typing___ANewExpr___after_typing(val_t p0, val_t p1){
     fra.me.REG[3] = CALL_standard___string___Object___to_s(fra.me.REG[3])(fra.me.REG[3]);
     CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[3]);
   }
-  /* syntax/typing.nit:1648 */
+  /* syntax/typing.nit:1654 */
   fra.me.REG[3] = CALL_parser___parser_nodes___ANewExpr___n_id(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -10383,7 +10392,7 @@ void syntax___typing___ANewExpr___after_typing(val_t p0, val_t p1){
     }
   }
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:1649 */
+    /* syntax/typing.nit:1655 */
     if (!once_value_6) {
       if (!once_value_7) {
         fra.me.REG[3] = BOX_NativeString("init");
@@ -10399,21 +10408,21 @@ void syntax___typing___ANewExpr___after_typing(val_t p0, val_t p1){
     } else fra.me.REG[3] = once_value_6;
     fra.me.REG[3] = fra.me.REG[3];
   } else {
-    /* syntax/typing.nit:1651 */
+    /* syntax/typing.nit:1657 */
     fra.me.REG[4] = CALL_parser___parser_nodes___ANewExpr___n_id(fra.me.REG[0])(fra.me.REG[0]);
     REGB0 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1651);
+      nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1657);
     }
     fra.me.REG[4] = CALL_syntax___syntax_base___Token___to_symbol(fra.me.REG[4])(fra.me.REG[4]);
     fra.me.REG[3] = fra.me.REG[4];
   }
-  /* syntax/typing.nit:1654 */
+  /* syntax/typing.nit:1660 */
   REGB0 = TAG_Bool(0);
   REGB1 = TAG_Bool(0);
   fra.me.REG[4] = CALL_syntax___syntax_base___AAbsAbsSendExpr___raw_arguments(fra.me.REG[0])(fra.me.REG[0]);
   CALL_syntax___typing___AAbsSendExpr___do_typing(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], fra.me.REG[2], REGB0, REGB1, fra.me.REG[3], fra.me.REG[4], NIT_NULL);
-  /* syntax/typing.nit:1655 */
+  /* syntax/typing.nit:1661 */
   fra.me.REG[4] = ATTR_syntax___typing___AAbsSendExpr____prop(fra.me.REG[0]);
   REGB1 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
@@ -10430,13 +10439,13 @@ void syntax___typing___ANewExpr___after_typing(val_t p0, val_t p1){
   if (UNTAG_Bool(REGB1)) {
     goto label1;
   }
-  /* syntax/typing.nit:1657 */
+  /* syntax/typing.nit:1663 */
   fra.me.REG[4] = CALL_syntax___syntax_base___AAbsSendExpr___prop(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[4] = CALL_metamodel___abstractmetamodel___MMLocalProperty___global(fra.me.REG[4])(fra.me.REG[4]);
   REGB1 = CALL_metamodel___abstractmetamodel___MMGlobalProperty___is_init(fra.me.REG[4])(fra.me.REG[4]);
   REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
   if (UNTAG_Bool(REGB1)) {
-    /* syntax/typing.nit:1658 */
+    /* syntax/typing.nit:1664 */
     REGB1 = TAG_Int(3);
     fra.me.REG[4] = NEW_Array_standard___collection___array___Array___with_capacity(REGB1);
     if (!once_value_8) {
@@ -10462,12 +10471,60 @@ void syntax___typing___ANewExpr___after_typing(val_t p0, val_t p1){
     CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[3]);
     fra.me.REG[4] = CALL_standard___string___Object___to_s(fra.me.REG[4])(fra.me.REG[4]);
     CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[4]);
-    /* syntax/typing.nit:1659 */
+    /* syntax/typing.nit:1665 */
     goto label1;
   }
-  /* syntax/typing.nit:1661 */
+  /* syntax/typing.nit:1667 */
+  fra.me.REG[4] = CALL_syntax___syntax_base___AAbsSendExpr___prop(fra.me.REG[0])(fra.me.REG[0]);
+  fra.me.REG[4] = CALL_metamodel___abstractmetamodel___MMLocalProperty___global(fra.me.REG[4])(fra.me.REG[4]);
+  fra.me.REG[3] = CALL_metamodel___static_type___MMType___local_class(fra.me.REG[2])(fra.me.REG[2]);
+  REGB1 = CALL_metamodel___abstractmetamodel___MMGlobalProperty___is_init_for(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[3]);
+  REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
+  if (UNTAG_Bool(REGB1)) {
+    /* syntax/typing.nit:1668 */
+    REGB1 = TAG_Int(5);
+    fra.me.REG[3] = NEW_Array_standard___collection___array___Array___with_capacity(REGB1);
+    if (!once_value_10) {
+      fra.me.REG[4] = BOX_NativeString("Error: ");
+      REGB1 = TAG_Int(7);
+      fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB1);
+      once_value_10 = fra.me.REG[4];
+      register_static_object(&once_value_10);
+    } else fra.me.REG[4] = once_value_10;
+    fra.me.REG[4] = fra.me.REG[4];
+    CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[4]);
+    fra.me.REG[4] = CALL_syntax___syntax_base___AAbsSendExpr___prop(fra.me.REG[0])(fra.me.REG[0]);
+    fra.me.REG[4] = CALL_standard___string___Object___to_s(fra.me.REG[4])(fra.me.REG[4]);
+    CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[4]);
+    if (!once_value_11) {
+      fra.me.REG[4] = BOX_NativeString(" is not a constructor in ");
+      REGB1 = TAG_Int(25);
+      fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB1);
+      once_value_11 = fra.me.REG[4];
+      register_static_object(&once_value_11);
+    } else fra.me.REG[4] = once_value_11;
+    fra.me.REG[4] = fra.me.REG[4];
+    CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[4]);
+    fra.me.REG[4] = CALL_metamodel___static_type___MMType___local_class(fra.me.REG[2])(fra.me.REG[2]);
+    fra.me.REG[4] = CALL_standard___string___Object___to_s(fra.me.REG[4])(fra.me.REG[4]);
+    CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[4]);
+    if (!once_value_12) {
+      fra.me.REG[4] = BOX_NativeString(".");
+      REGB1 = TAG_Int(1);
+      fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB1);
+      once_value_12 = fra.me.REG[4];
+      register_static_object(&once_value_12);
+    } else fra.me.REG[4] = once_value_12;
+    fra.me.REG[4] = fra.me.REG[4];
+    CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[4]);
+    fra.me.REG[3] = CALL_standard___string___Object___to_s(fra.me.REG[3])(fra.me.REG[3]);
+    CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[3]);
+    /* syntax/typing.nit:1669 */
+    goto label1;
+  }
+  /* syntax/typing.nit:1671 */
   ATTR_syntax___typing___AExpr____stype(fra.me.REG[0]) = fra.me.REG[2];
-  /* syntax/typing.nit:1662 */
+  /* syntax/typing.nit:1672 */
   REGB1 = TAG_Bool(1);
   ATTR_syntax___typing___AExpr____is_typed(fra.me.REG[0]) = REGB1;
   label1: while(0);
@@ -10480,13 +10537,13 @@ val_t syntax___typing___ASendExpr___name(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1668;
+  fra.me.line = 1678;
   fra.me.meth = LOCATE_syntax___typing___ASendExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* syntax/typing.nit:1668 */
-  nit_abort("Deferred method called", NULL, LOCATE_syntax___typing, 1668);
+  /* syntax/typing.nit:1678 */
+  nit_abort("Deferred method called", NULL, LOCATE_syntax___typing, 1678);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -10496,14 +10553,14 @@ val_t syntax___typing___ASendExpr___closure_defs(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1671;
+  fra.me.line = 1681;
   fra.me.meth = LOCATE_syntax___typing___ASendExpr___closure_defs;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1672 */
+  /* syntax/typing.nit:1682 */
   fra.me.REG[0] = NIT_NULL;
   goto label1;
   label1: while(0);
@@ -10516,7 +10573,7 @@ void syntax___typing___ASendExpr___after_typing(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1674;
+  fra.me.line = 1684;
   fra.me.meth = LOCATE_syntax___typing___ASendExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -10525,7 +10582,7 @@ void syntax___typing___ASendExpr___after_typing(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:1676 */
+  /* syntax/typing.nit:1686 */
   CALL_syntax___typing___ASendExpr___do_all_typing(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   stack_frame_head = fra.me.prev;
   return;
@@ -10542,7 +10599,7 @@ void syntax___typing___ASendExpr___do_all_typing(val_t p0, val_t p1){
         static val_t once_value_5; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1679;
+  fra.me.line = 1689;
   fra.me.meth = LOCATE_syntax___typing___ASendExpr___do_all_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
@@ -10556,16 +10613,16 @@ void syntax___typing___ASendExpr___do_all_typing(val_t p0, val_t p1){
   fra.me.REG[6] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:1679 */
+  /* syntax/typing.nit:1689 */
   fra.me.REG[2] = fra.me.REG[0];
-  /* syntax/typing.nit:1681 */
+  /* syntax/typing.nit:1691 */
   fra.me.REG[3] = CALL_parser___parser_nodes___ASendExpr___n_expr(fra.me.REG[2])(fra.me.REG[2]);
   REGB0 = CALL_syntax___syntax_base___AbsSyntaxVisitor___check_expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
     goto label1;
   }
-  /* syntax/typing.nit:1682 */
+  /* syntax/typing.nit:1692 */
   fra.me.REG[3] = CALL_parser___parser_nodes___ASendExpr___n_expr(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[3] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[3])(fra.me.REG[3]);
   fra.me.REG[4] = CALL_parser___parser_nodes___ASendExpr___n_expr(fra.me.REG[2])(fra.me.REG[2]);
@@ -10576,7 +10633,7 @@ void syntax___typing___ASendExpr___do_all_typing(val_t p0, val_t p1){
   fra.me.REG[5] = CALL_syntax___syntax_base___AAbsAbsSendExpr___raw_arguments(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[6] = CALL_syntax___syntax_base___ASendExpr___closure_defs(fra.me.REG[2])(fra.me.REG[2]);
   CALL_syntax___typing___AAbsSendExpr___do_typing(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1], fra.me.REG[3], REGB0, REGB1, fra.me.REG[4], fra.me.REG[5], fra.me.REG[6]);
-  /* syntax/typing.nit:1683 */
+  /* syntax/typing.nit:1693 */
   fra.me.REG[6] = ATTR_syntax___typing___AAbsSendExpr____prop(fra.me.REG[2]);
   REGB1 = TAG_Bool(fra.me.REG[6]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
@@ -10593,24 +10650,24 @@ void syntax___typing___ASendExpr___do_all_typing(val_t p0, val_t p1){
   if (UNTAG_Bool(REGB1)) {
     goto label1;
   }
-  /* syntax/typing.nit:1684 */
+  /* syntax/typing.nit:1694 */
   fra.me.REG[6] = ATTR_syntax___typing___AAbsSendExpr____prop(fra.me.REG[2]);
   REGB1 = TAG_Bool(fra.me.REG[6]!=NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
   } else {
-    nit_abort("Cast failed", NULL, LOCATE_syntax___typing, 1684);
+    nit_abort("Cast failed", NULL, LOCATE_syntax___typing, 1694);
   }
-  /* syntax/typing.nit:1686 */
+  /* syntax/typing.nit:1696 */
   fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMLocalProperty___global(fra.me.REG[6])(fra.me.REG[6]);
   REGB1 = CALL_metamodel___abstractmetamodel___MMGlobalProperty___is_init(fra.me.REG[0])(fra.me.REG[0]);
   if (UNTAG_Bool(REGB1)) {
-    /* syntax/typing.nit:1687 */
+    /* syntax/typing.nit:1697 */
     fra.me.REG[0] = CALL_syntax___syntax_base___AbsSyntaxVisitor___local_property(fra.me.REG[1])(fra.me.REG[1]);
     fra.me.REG[0] = CALL_metamodel___abstractmetamodel___MMLocalProperty___global(fra.me.REG[0])(fra.me.REG[0]);
     REGB1 = CALL_metamodel___abstractmetamodel___MMGlobalProperty___is_init(fra.me.REG[0])(fra.me.REG[0]);
     REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
     if (UNTAG_Bool(REGB1)) {
-      /* syntax/typing.nit:1688 */
+      /* syntax/typing.nit:1698 */
       REGB1 = TAG_Int(3);
       fra.me.REG[0] = NEW_Array_standard___collection___array___Array___with_capacity(REGB1);
       if (!once_value_2) {
@@ -10636,12 +10693,12 @@ void syntax___typing___ASendExpr___do_all_typing(val_t p0, val_t p1){
       fra.me.REG[0] = CALL_standard___string___Object___to_s(fra.me.REG[0])(fra.me.REG[0]);
       CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2], fra.me.REG[0]);
     } else {
-      /* syntax/typing.nit:1689 */
+      /* syntax/typing.nit:1699 */
       fra.me.REG[0] = CALL_parser___parser_nodes___ASendExpr___n_expr(fra.me.REG[2])(fra.me.REG[2]);
       REGB1 = CALL_syntax___typing___AExpr___is_self(fra.me.REG[0])(fra.me.REG[0]);
       REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
       if (UNTAG_Bool(REGB1)) {
-        /* syntax/typing.nit:1690 */
+        /* syntax/typing.nit:1700 */
         REGB1 = TAG_Int(3);
         fra.me.REG[0] = NEW_Array_standard___collection___array___Array___with_capacity(REGB1);
         if (!once_value_4) {
@@ -10667,15 +10724,15 @@ void syntax___typing___ASendExpr___do_all_typing(val_t p0, val_t p1){
         fra.me.REG[0] = CALL_standard___string___Object___to_s(fra.me.REG[0])(fra.me.REG[0]);
         CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2], fra.me.REG[0]);
       } else {
-        /* syntax/typing.nit:1692 */
+        /* syntax/typing.nit:1702 */
         CALL_syntax___typing___ASuperInitCall___register_super_init_call(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1], fra.me.REG[6]);
       }
     }
   }
-  /* syntax/typing.nit:1696 */
+  /* syntax/typing.nit:1706 */
   fra.me.REG[6] = CALL_syntax___syntax_base___AAbsSendExpr___return_type(fra.me.REG[2])(fra.me.REG[2]);
   ATTR_syntax___typing___AExpr____stype(fra.me.REG[2]) = fra.me.REG[6];
-  /* syntax/typing.nit:1697 */
+  /* syntax/typing.nit:1707 */
   REGB1 = TAG_Bool(1);
   ATTR_syntax___typing___AExpr____is_typed(fra.me.REG[2]) = REGB1;
   label1: while(0);
@@ -10689,7 +10746,7 @@ val_t syntax___typing___ASendReassignExpr___read_prop(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1702;
+  fra.me.line = 1712;
   fra.me.meth = LOCATE_syntax___typing___ASendReassignExpr___read_prop;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -10697,13 +10754,13 @@ val_t syntax___typing___ASendReassignExpr___read_prop(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1702 */
+  /* syntax/typing.nit:1712 */
   fra.me.REG[1] = fra.me.REG[0];
   fra.me.REG[1] = ATTR_syntax___typing___ASendReassignExpr____read_prop(fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[1]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Cast failed", NULL, LOCATE_syntax___typing, 1702);
+    nit_abort("Cast failed", NULL, LOCATE_syntax___typing, 1712);
   }
   goto label1;
   label1: while(0);
@@ -10729,7 +10786,7 @@ void syntax___typing___ASendReassignExpr___do_all_typing(val_t p0, val_t p1){
         static val_t once_value_11; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1704;
+  fra.me.line = 1714;
   fra.me.meth = LOCATE_syntax___typing___ASendReassignExpr___do_all_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
@@ -10743,18 +10800,18 @@ void syntax___typing___ASendReassignExpr___do_all_typing(val_t p0, val_t p1){
   fra.me.REG[6] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:1704 */
+  /* syntax/typing.nit:1714 */
   fra.me.REG[2] = fra.me.REG[0];
-  /* syntax/typing.nit:1706 */
+  /* syntax/typing.nit:1716 */
   fra.me.REG[3] = CALL_parser___parser_nodes___ASendExpr___n_expr(fra.me.REG[2])(fra.me.REG[2]);
   REGB0 = CALL_syntax___syntax_base___AbsSyntaxVisitor___check_expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
     goto label1;
   }
-  /* syntax/typing.nit:1707 */
+  /* syntax/typing.nit:1717 */
   fra.me.REG[3] = CALL_syntax___syntax_base___AAbsAbsSendExpr___raw_arguments(fra.me.REG[2])(fra.me.REG[2]);
-  /* syntax/typing.nit:1708 */
+  /* syntax/typing.nit:1718 */
   fra.me.REG[4] = CALL_parser___parser_nodes___ASendExpr___n_expr(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[4] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[4])(fra.me.REG[4]);
   fra.me.REG[5] = CALL_parser___parser_nodes___ASendExpr___n_expr(fra.me.REG[2])(fra.me.REG[2]);
@@ -10763,9 +10820,9 @@ void syntax___typing___ASendReassignExpr___do_all_typing(val_t p0, val_t p1){
   REGB1 = CALL_syntax___typing___AExpr___is_self(fra.me.REG[5])(fra.me.REG[5]);
   fra.me.REG[5] = CALL_syntax___typing___ASendExpr___name(fra.me.REG[2])(fra.me.REG[2]);
   CALL_syntax___typing___AAbsSendExpr___do_typing(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1], fra.me.REG[4], REGB0, REGB1, fra.me.REG[5], fra.me.REG[3], NIT_NULL);
-  /* syntax/typing.nit:1709 */
+  /* syntax/typing.nit:1719 */
   fra.me.REG[5] = ATTR_syntax___typing___AAbsSendExpr____prop(fra.me.REG[2]);
-  /* syntax/typing.nit:1710 */
+  /* syntax/typing.nit:1720 */
   REGB1 = TAG_Bool(fra.me.REG[5]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
   } else {
@@ -10781,21 +10838,21 @@ void syntax___typing___ASendReassignExpr___do_all_typing(val_t p0, val_t p1){
   if (UNTAG_Bool(REGB1)) {
     goto label1;
   }
-  /* syntax/typing.nit:1711 */
+  /* syntax/typing.nit:1721 */
   REGB1 = TAG_Bool(fra.me.REG[5]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
-    nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1711);
+    nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1721);
   }
   fra.me.REG[4] = CALL_metamodel___abstractmetamodel___MMLocalProperty___global(fra.me.REG[5])(fra.me.REG[5]);
   REGB1 = CALL_metamodel___abstractmetamodel___MMGlobalProperty___is_init(fra.me.REG[4])(fra.me.REG[4]);
   if (UNTAG_Bool(REGB1)) {
-    /* syntax/typing.nit:1712 */
+    /* syntax/typing.nit:1722 */
     fra.me.REG[4] = CALL_syntax___syntax_base___AbsSyntaxVisitor___local_property(fra.me.REG[1])(fra.me.REG[1]);
     fra.me.REG[4] = CALL_metamodel___abstractmetamodel___MMLocalProperty___global(fra.me.REG[4])(fra.me.REG[4]);
     REGB1 = CALL_metamodel___abstractmetamodel___MMGlobalProperty___is_init(fra.me.REG[4])(fra.me.REG[4]);
     REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
     if (UNTAG_Bool(REGB1)) {
-      /* syntax/typing.nit:1713 */
+      /* syntax/typing.nit:1723 */
       REGB1 = TAG_Int(3);
       fra.me.REG[4] = NEW_Array_standard___collection___array___Array___with_capacity(REGB1);
       if (!once_value_2) {
@@ -10821,12 +10878,12 @@ void syntax___typing___ASendReassignExpr___do_all_typing(val_t p0, val_t p1){
       fra.me.REG[4] = CALL_standard___string___Object___to_s(fra.me.REG[4])(fra.me.REG[4]);
       CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2], fra.me.REG[4]);
     } else {
-      /* syntax/typing.nit:1714 */
+      /* syntax/typing.nit:1724 */
       fra.me.REG[4] = CALL_parser___parser_nodes___ASendExpr___n_expr(fra.me.REG[2])(fra.me.REG[2]);
       REGB1 = CALL_syntax___typing___AExpr___is_self(fra.me.REG[4])(fra.me.REG[4]);
       REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
       if (UNTAG_Bool(REGB1)) {
-        /* syntax/typing.nit:1715 */
+        /* syntax/typing.nit:1725 */
         REGB1 = TAG_Int(3);
         fra.me.REG[4] = NEW_Array_standard___collection___array___Array___with_capacity(REGB1);
         if (!once_value_4) {
@@ -10854,21 +10911,21 @@ void syntax___typing___ASendReassignExpr___do_all_typing(val_t p0, val_t p1){
       }
     }
   }
-  /* syntax/typing.nit:1718 */
+  /* syntax/typing.nit:1728 */
   fra.me.REG[4] = CALL_parser___parser_nodes___ASendExpr___n_expr(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[4] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[4])(fra.me.REG[4]);
   REGB1 = TAG_Bool(fra.me.REG[5]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
-    nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1718);
+    nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1728);
   }
   fra.me.REG[4] = CALL_metamodel___static_type___MMLocalProperty___signature_for(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[4]);
   fra.me.REG[4] = CALL_metamodel___static_type___MMSignature___return_type(fra.me.REG[4])(fra.me.REG[4]);
   REGB1 = TAG_Bool((fra.me.REG[4]!=NIT_NULL) && VAL_ISA(fra.me.REG[4], COLOR_metamodel___static_type___MMType, ID_metamodel___static_type___MMType)) /*cast MMType*/;
   if (UNTAG_Bool(REGB1)) {
   } else {
-    nit_abort("Cast failed", NULL, LOCATE_syntax___typing, 1718);
+    nit_abort("Cast failed", NULL, LOCATE_syntax___typing, 1728);
   }
-  /* syntax/typing.nit:1719 */
+  /* syntax/typing.nit:1729 */
   fra.me.REG[0] = CALL_parser___parser_nodes___ASendExpr___n_expr(fra.me.REG[2])(fra.me.REG[2]);
   REGB1 = CALL_syntax___typing___AExpr___is_self(fra.me.REG[0])(fra.me.REG[0]);
   REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
@@ -10876,9 +10933,9 @@ void syntax___typing___ASendReassignExpr___do_all_typing(val_t p0, val_t p1){
     fra.me.REG[0] = CALL_metamodel___static_type___MMType___not_for_self(fra.me.REG[4])(fra.me.REG[4]);
     fra.me.REG[4] = fra.me.REG[0];
   }
-  /* syntax/typing.nit:1721 */
+  /* syntax/typing.nit:1731 */
   fra.me.REG[4] = CALL_syntax___typing___AReassignFormExpr___do_rvalue_typing(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1], fra.me.REG[4]);
-  /* syntax/typing.nit:1722 */
+  /* syntax/typing.nit:1732 */
   REGB1 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
   } else {
@@ -10894,19 +10951,19 @@ void syntax___typing___ASendReassignExpr___do_all_typing(val_t p0, val_t p1){
   if (UNTAG_Bool(REGB1)) {
     goto label1;
   }
-  /* syntax/typing.nit:1723 */
+  /* syntax/typing.nit:1733 */
   fra.me.REG[0] = CALL_parser___parser_nodes___AReassignFormExpr___n_value(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[0] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[0])(fra.me.REG[0]);
   CALL_syntax___syntax_base___AbsSyntaxVisitor___check_conform(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2], fra.me.REG[4], fra.me.REG[0]);
-  /* syntax/typing.nit:1725 */
+  /* syntax/typing.nit:1735 */
   ATTR_syntax___typing___ASendReassignExpr____read_prop(fra.me.REG[2]) = fra.me.REG[5];
-  /* syntax/typing.nit:1726 */
+  /* syntax/typing.nit:1736 */
   fra.me.REG[0] = CALL_standard___collection___array___Collection___to_a(fra.me.REG[3])(fra.me.REG[3]);
   fra.me.REG[3] = fra.me.REG[0];
-  /* syntax/typing.nit:1727 */
+  /* syntax/typing.nit:1737 */
   fra.me.REG[0] = CALL_parser___parser_nodes___AReassignFormExpr___n_value(fra.me.REG[2])(fra.me.REG[2]);
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[0]);
-  /* syntax/typing.nit:1729 */
+  /* syntax/typing.nit:1739 */
   fra.me.REG[0] = CALL_parser___parser_nodes___ASendExpr___n_expr(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[0] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[4] = CALL_parser___parser_nodes___ASendExpr___n_expr(fra.me.REG[2])(fra.me.REG[2]);
@@ -10939,21 +10996,21 @@ void syntax___typing___ASendReassignExpr___do_all_typing(val_t p0, val_t p1){
   fra.me.REG[4] = CALL_standard___string___Object___to_s(fra.me.REG[4])(fra.me.REG[4]);
   fra.me.REG[4] = CALL_symbol___String___to_symbol(fra.me.REG[4])(fra.me.REG[4]);
   CALL_syntax___typing___AAbsSendExpr___do_typing(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1], fra.me.REG[0], REGB1, REGB0, fra.me.REG[4], fra.me.REG[3], NIT_NULL);
-  /* syntax/typing.nit:1730 */
+  /* syntax/typing.nit:1740 */
   REGB0 = TAG_Bool(fra.me.REG[5]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1730);
+    nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 1740);
   }
   fra.me.REG[3] = CALL_metamodel___abstractmetamodel___MMLocalProperty___global(fra.me.REG[5])(fra.me.REG[5]);
   REGB0 = CALL_metamodel___abstractmetamodel___MMGlobalProperty___is_init(fra.me.REG[3])(fra.me.REG[3]);
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:1731 */
+    /* syntax/typing.nit:1741 */
     fra.me.REG[3] = CALL_syntax___syntax_base___AbsSyntaxVisitor___local_property(fra.me.REG[1])(fra.me.REG[1]);
     fra.me.REG[3] = CALL_metamodel___abstractmetamodel___MMLocalProperty___global(fra.me.REG[3])(fra.me.REG[3]);
     REGB0 = CALL_metamodel___abstractmetamodel___MMGlobalProperty___is_init(fra.me.REG[3])(fra.me.REG[3]);
     REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
     if (UNTAG_Bool(REGB0)) {
-      /* syntax/typing.nit:1732 */
+      /* syntax/typing.nit:1742 */
       REGB0 = TAG_Int(3);
       fra.me.REG[3] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
       if (!once_value_8) {
@@ -10979,12 +11036,12 @@ void syntax___typing___ASendReassignExpr___do_all_typing(val_t p0, val_t p1){
       fra.me.REG[3] = CALL_standard___string___Object___to_s(fra.me.REG[3])(fra.me.REG[3]);
       CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2], fra.me.REG[3]);
     } else {
-      /* syntax/typing.nit:1733 */
+      /* syntax/typing.nit:1743 */
       fra.me.REG[3] = CALL_parser___parser_nodes___ASendExpr___n_expr(fra.me.REG[2])(fra.me.REG[2]);
       REGB0 = CALL_syntax___typing___AExpr___is_self(fra.me.REG[3])(fra.me.REG[3]);
       REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
       if (UNTAG_Bool(REGB0)) {
-        /* syntax/typing.nit:1734 */
+        /* syntax/typing.nit:1744 */
         REGB0 = TAG_Int(3);
         fra.me.REG[3] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
         if (!once_value_10) {
@@ -11012,7 +11069,7 @@ void syntax___typing___ASendReassignExpr___do_all_typing(val_t p0, val_t p1){
       }
     }
   }
-  /* syntax/typing.nit:1738 */
+  /* syntax/typing.nit:1748 */
   REGB0 = TAG_Bool(1);
   ATTR_syntax___typing___AExpr____is_typed(fra.me.REG[2]) = REGB0;
   label1: while(0);
@@ -11026,7 +11083,7 @@ val_t syntax___typing___ABinopExpr___compute_raw_arguments(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1743;
+  fra.me.line = 1753;
   fra.me.meth = LOCATE_syntax___typing___ABinopExpr___compute_raw_arguments;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -11034,7 +11091,7 @@ val_t syntax___typing___ABinopExpr___compute_raw_arguments(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1743 */
+  /* syntax/typing.nit:1753 */
   REGB0 = TAG_Int(1);
   fra.me.REG[1] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
   fra.me.REG[0] = CALL_parser___parser_nodes___ABinopExpr___n_expr2(fra.me.REG[0])(fra.me.REG[0]);
@@ -11053,14 +11110,14 @@ val_t syntax___typing___AEqExpr___name(val_t p0){
     static val_t once_value_2; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1746;
+  fra.me.line = 1756;
   fra.me.meth = LOCATE_syntax___typing___AEqExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1746 */
+  /* syntax/typing.nit:1756 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[0] = BOX_NativeString("==");
@@ -11090,7 +11147,7 @@ void syntax___typing___AEqExpr___after_typing(val_t p0, val_t p1){
       static val_t once_value_3; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1747;
+  fra.me.line = 1757;
   fra.me.meth = LOCATE_syntax___typing___AEqExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -11101,12 +11158,12 @@ void syntax___typing___AEqExpr___after_typing(val_t p0, val_t p1){
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:1747 */
+  /* syntax/typing.nit:1757 */
   fra.me.REG[2] = fra.me.REG[0];
   fra.me.REG[3] = fra.me.REG[1];
-  /* syntax/typing.nit:1749 */
+  /* syntax/typing.nit:1759 */
   CALL_SUPER_syntax___typing___AEqExpr___after_typing(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* syntax/typing.nit:1750 */
+  /* syntax/typing.nit:1760 */
   fra.me.REG[1] = CALL_parser___parser_nodes___ASendExpr___n_expr(fra.me.REG[2])(fra.me.REG[2]);
   REGB0 = CALL_syntax___syntax_base___AExpr___is_typed(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
@@ -11121,7 +11178,7 @@ void syntax___typing___AEqExpr___after_typing(val_t p0, val_t p1){
   if (UNTAG_Bool(REGB0)) {
     goto label1;
   }
-  /* syntax/typing.nit:1751 */
+  /* syntax/typing.nit:1761 */
   fra.me.REG[1] = CALL_parser___parser_nodes___ASendExpr___n_expr(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[1] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[1], COLOR_metamodel___static_type___MMTypeNone, ID_metamodel___static_type___MMTypeNone)) /*cast MMTypeNone*/;
@@ -11137,26 +11194,26 @@ void syntax___typing___AEqExpr___after_typing(val_t p0, val_t p1){
   if (UNTAG_Bool(REGB0)) {
     REGB0 = TAG_Bool(1);
   } else {
-    /* syntax/typing.nit:1752 */
+    /* syntax/typing.nit:1762 */
     fra.me.REG[1] = CALL_parser___parser_nodes___ABinopExpr___n_expr2(fra.me.REG[2])(fra.me.REG[2]);
     fra.me.REG[1] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[1])(fra.me.REG[1]);
     REGB1 = TAG_Bool(VAL_ISA(fra.me.REG[1], COLOR_metamodel___static_type___MMTypeNone, ID_metamodel___static_type___MMTypeNone)) /*cast MMTypeNone*/;
-    /* syntax/typing.nit:1751 */
+    /* syntax/typing.nit:1761 */
     REGB0 = REGB1;
   }
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:1752 */
+    /* syntax/typing.nit:1762 */
     fra.me.REG[1] = CALL_parser___parser_nodes___ASendExpr___n_expr(fra.me.REG[2])(fra.me.REG[2]);
     fra.me.REG[1] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[1])(fra.me.REG[1]);
     REGB0 = CALL_metamodel___static_type___MMType___is_nullable(fra.me.REG[1])(fra.me.REG[1]);
     REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   } else {
-    /* syntax/typing.nit:1751 */
+    /* syntax/typing.nit:1761 */
     REGB1 = TAG_Bool(0);
     REGB0 = REGB1;
   }
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:1753 */
+    /* syntax/typing.nit:1763 */
     if (!once_value_2) {
       fra.me.REG[1] = BOX_NativeString("Warning: comparaison between null and a non nullable value.");
       REGB0 = TAG_Int(59);
@@ -11167,17 +11224,17 @@ void syntax___typing___AEqExpr___after_typing(val_t p0, val_t p1){
     fra.me.REG[1] = fra.me.REG[1];
     CALL_syntax___syntax_base___AbsSyntaxVisitor___warning(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[2], fra.me.REG[1]);
   }
-  /* syntax/typing.nit:1756 */
+  /* syntax/typing.nit:1766 */
   fra.me.REG[1] = CALL_parser___parser_nodes___ASendExpr___n_expr(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[1] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[1], COLOR_metamodel___static_type___MMTypeNone, ID_metamodel___static_type___MMTypeNone)) /*cast MMTypeNone*/;
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:1757 */
+    /* syntax/typing.nit:1767 */
     fra.me.REG[1] = CALL_parser___parser_nodes___ABinopExpr___n_expr2(fra.me.REG[2])(fra.me.REG[2]);
     fra.me.REG[1] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[1])(fra.me.REG[1]);
     REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[1], COLOR_metamodel___static_type___MMTypeNone, ID_metamodel___static_type___MMTypeNone)) /*cast MMTypeNone*/;
     if (UNTAG_Bool(REGB0)) {
-      /* syntax/typing.nit:1758 */
+      /* syntax/typing.nit:1768 */
       if (!once_value_3) {
         fra.me.REG[1] = BOX_NativeString("Warning: comparaison between two null values.");
         REGB0 = TAG_Int(45);
@@ -11188,17 +11245,17 @@ void syntax___typing___AEqExpr___after_typing(val_t p0, val_t p1){
       fra.me.REG[1] = fra.me.REG[1];
       CALL_syntax___syntax_base___AbsSyntaxVisitor___warning(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[2], fra.me.REG[1]);
     } else {
-      /* syntax/typing.nit:1760 */
+      /* syntax/typing.nit:1770 */
       fra.me.REG[1] = CALL_parser___parser_nodes___ABinopExpr___n_expr2(fra.me.REG[2])(fra.me.REG[2]);
       CALL_syntax___typing___AEqExpr___try_to_isa(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3], fra.me.REG[1]);
     }
   } else {
-    /* syntax/typing.nit:1762 */
+    /* syntax/typing.nit:1772 */
     fra.me.REG[1] = CALL_parser___parser_nodes___ABinopExpr___n_expr2(fra.me.REG[2])(fra.me.REG[2]);
     fra.me.REG[1] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[1])(fra.me.REG[1]);
     REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[1], COLOR_metamodel___static_type___MMTypeNone, ID_metamodel___static_type___MMTypeNone)) /*cast MMTypeNone*/;
     if (UNTAG_Bool(REGB0)) {
-      /* syntax/typing.nit:1763 */
+      /* syntax/typing.nit:1773 */
       fra.me.REG[1] = CALL_parser___parser_nodes___ASendExpr___n_expr(fra.me.REG[2])(fra.me.REG[2]);
       CALL_syntax___typing___AEqExpr___try_to_isa(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3], fra.me.REG[1]);
     }
@@ -11215,7 +11272,7 @@ void syntax___typing___AEqExpr___try_to_isa(val_t p0, val_t p1, val_t p2){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1767;
+  fra.me.line = 1777;
   fra.me.meth = LOCATE_syntax___typing___AEqExpr___try_to_isa;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
@@ -11228,9 +11285,9 @@ void syntax___typing___AEqExpr___try_to_isa(val_t p0, val_t p1, val_t p2){
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* syntax/typing.nit:1769 */
+  /* syntax/typing.nit:1779 */
   fra.me.REG[3] = CALL_syntax___typing___AExpr___its_variable(fra.me.REG[2])(fra.me.REG[2]);
-  /* syntax/typing.nit:1770 */
+  /* syntax/typing.nit:1780 */
   REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -11252,13 +11309,13 @@ void syntax___typing___AEqExpr___try_to_isa(val_t p0, val_t p1, val_t p2){
     REGB0 = REGB1;
   }
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:1771 */
+    /* syntax/typing.nit:1781 */
     fra.me.REG[4] = CALL_syntax___typing___TypingVisitor___flow_ctx(fra.me.REG[1])(fra.me.REG[1]);
     fra.me.REG[2] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[2])(fra.me.REG[2]);
     fra.me.REG[2] = CALL_metamodel___static_type___MMType___as_notnull(fra.me.REG[2])(fra.me.REG[2]);
     fra.me.REG[2] = CALL_syntax___flow___FlowContext___sub_with(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[0], fra.me.REG[3], fra.me.REG[2]);
     ATTR_syntax___typing___AExpr____if_false_flow_ctx(fra.me.REG[0]) = fra.me.REG[2];
-    /* syntax/typing.nit:1772 */
+    /* syntax/typing.nit:1782 */
     fra.me.REG[2] = CALL_syntax___typing___TypingVisitor___flow_ctx(fra.me.REG[1])(fra.me.REG[1]);
     fra.me.REG[1] = CALL_syntax___syntax_base___AbsSyntaxVisitor___type_none(fra.me.REG[1])(fra.me.REG[1]);
     fra.me.REG[1] = CALL_syntax___flow___FlowContext___sub_with(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[0], fra.me.REG[3], fra.me.REG[1]);
@@ -11276,14 +11333,14 @@ val_t syntax___typing___ANeExpr___name(val_t p0){
     static val_t once_value_2; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1777;
+  fra.me.line = 1787;
   fra.me.meth = LOCATE_syntax___typing___ANeExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1777 */
+  /* syntax/typing.nit:1787 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[0] = BOX_NativeString("!=");
@@ -11313,7 +11370,7 @@ void syntax___typing___ANeExpr___after_typing(val_t p0, val_t p1){
       static val_t once_value_3; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1778;
+  fra.me.line = 1788;
   fra.me.meth = LOCATE_syntax___typing___ANeExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -11324,12 +11381,12 @@ void syntax___typing___ANeExpr___after_typing(val_t p0, val_t p1){
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:1778 */
+  /* syntax/typing.nit:1788 */
   fra.me.REG[2] = fra.me.REG[0];
   fra.me.REG[3] = fra.me.REG[1];
-  /* syntax/typing.nit:1780 */
+  /* syntax/typing.nit:1790 */
   CALL_SUPER_syntax___typing___ANeExpr___after_typing(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* syntax/typing.nit:1781 */
+  /* syntax/typing.nit:1791 */
   fra.me.REG[1] = CALL_parser___parser_nodes___ASendExpr___n_expr(fra.me.REG[2])(fra.me.REG[2]);
   REGB0 = CALL_syntax___syntax_base___AExpr___is_typed(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
@@ -11344,7 +11401,7 @@ void syntax___typing___ANeExpr___after_typing(val_t p0, val_t p1){
   if (UNTAG_Bool(REGB0)) {
     goto label1;
   }
-  /* syntax/typing.nit:1782 */
+  /* syntax/typing.nit:1792 */
   fra.me.REG[1] = CALL_parser___parser_nodes___ASendExpr___n_expr(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[1] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[1], COLOR_metamodel___static_type___MMTypeNone, ID_metamodel___static_type___MMTypeNone)) /*cast MMTypeNone*/;
@@ -11360,26 +11417,26 @@ void syntax___typing___ANeExpr___after_typing(val_t p0, val_t p1){
   if (UNTAG_Bool(REGB0)) {
     REGB0 = TAG_Bool(1);
   } else {
-    /* syntax/typing.nit:1783 */
+    /* syntax/typing.nit:1793 */
     fra.me.REG[1] = CALL_parser___parser_nodes___ABinopExpr___n_expr2(fra.me.REG[2])(fra.me.REG[2]);
     fra.me.REG[1] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[1])(fra.me.REG[1]);
     REGB1 = TAG_Bool(VAL_ISA(fra.me.REG[1], COLOR_metamodel___static_type___MMTypeNone, ID_metamodel___static_type___MMTypeNone)) /*cast MMTypeNone*/;
-    /* syntax/typing.nit:1782 */
+    /* syntax/typing.nit:1792 */
     REGB0 = REGB1;
   }
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:1783 */
+    /* syntax/typing.nit:1793 */
     fra.me.REG[1] = CALL_parser___parser_nodes___ASendExpr___n_expr(fra.me.REG[2])(fra.me.REG[2]);
     fra.me.REG[1] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[1])(fra.me.REG[1]);
     REGB0 = CALL_metamodel___static_type___MMType___is_nullable(fra.me.REG[1])(fra.me.REG[1]);
     REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   } else {
-    /* syntax/typing.nit:1782 */
+    /* syntax/typing.nit:1792 */
     REGB1 = TAG_Bool(0);
     REGB0 = REGB1;
   }
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:1784 */
+    /* syntax/typing.nit:1794 */
     if (!once_value_2) {
       fra.me.REG[1] = BOX_NativeString("Warning: comparaison between null and a non nullable value.");
       REGB0 = TAG_Int(59);
@@ -11390,17 +11447,17 @@ void syntax___typing___ANeExpr___after_typing(val_t p0, val_t p1){
     fra.me.REG[1] = fra.me.REG[1];
     CALL_syntax___syntax_base___AbsSyntaxVisitor___warning(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[2], fra.me.REG[1]);
   }
-  /* syntax/typing.nit:1787 */
+  /* syntax/typing.nit:1797 */
   fra.me.REG[1] = CALL_parser___parser_nodes___ASendExpr___n_expr(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[1] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[1], COLOR_metamodel___static_type___MMTypeNone, ID_metamodel___static_type___MMTypeNone)) /*cast MMTypeNone*/;
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:1788 */
+    /* syntax/typing.nit:1798 */
     fra.me.REG[1] = CALL_parser___parser_nodes___ABinopExpr___n_expr2(fra.me.REG[2])(fra.me.REG[2]);
     fra.me.REG[1] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[1])(fra.me.REG[1]);
     REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[1], COLOR_metamodel___static_type___MMTypeNone, ID_metamodel___static_type___MMTypeNone)) /*cast MMTypeNone*/;
     if (UNTAG_Bool(REGB0)) {
-      /* syntax/typing.nit:1789 */
+      /* syntax/typing.nit:1799 */
       if (!once_value_3) {
         fra.me.REG[1] = BOX_NativeString("Warning: comparaison between two null values.");
         REGB0 = TAG_Int(45);
@@ -11411,17 +11468,17 @@ void syntax___typing___ANeExpr___after_typing(val_t p0, val_t p1){
       fra.me.REG[1] = fra.me.REG[1];
       CALL_syntax___syntax_base___AbsSyntaxVisitor___warning(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[2], fra.me.REG[1]);
     } else {
-      /* syntax/typing.nit:1791 */
+      /* syntax/typing.nit:1801 */
       fra.me.REG[1] = CALL_parser___parser_nodes___ABinopExpr___n_expr2(fra.me.REG[2])(fra.me.REG[2]);
       CALL_syntax___typing___ANeExpr___try_to_isa(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3], fra.me.REG[1]);
     }
   } else {
-    /* syntax/typing.nit:1793 */
+    /* syntax/typing.nit:1803 */
     fra.me.REG[1] = CALL_parser___parser_nodes___ABinopExpr___n_expr2(fra.me.REG[2])(fra.me.REG[2]);
     fra.me.REG[1] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[1])(fra.me.REG[1]);
     REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[1], COLOR_metamodel___static_type___MMTypeNone, ID_metamodel___static_type___MMTypeNone)) /*cast MMTypeNone*/;
     if (UNTAG_Bool(REGB0)) {
-      /* syntax/typing.nit:1794 */
+      /* syntax/typing.nit:1804 */
       fra.me.REG[1] = CALL_parser___parser_nodes___ASendExpr___n_expr(fra.me.REG[2])(fra.me.REG[2]);
       CALL_syntax___typing___ANeExpr___try_to_isa(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3], fra.me.REG[1]);
     }
@@ -11438,7 +11495,7 @@ void syntax___typing___ANeExpr___try_to_isa(val_t p0, val_t p1, val_t p2){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1798;
+  fra.me.line = 1808;
   fra.me.meth = LOCATE_syntax___typing___ANeExpr___try_to_isa;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
@@ -11451,9 +11508,9 @@ void syntax___typing___ANeExpr___try_to_isa(val_t p0, val_t p1, val_t p2){
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* syntax/typing.nit:1800 */
+  /* syntax/typing.nit:1810 */
   fra.me.REG[3] = CALL_syntax___typing___AExpr___its_variable(fra.me.REG[2])(fra.me.REG[2]);
-  /* syntax/typing.nit:1801 */
+  /* syntax/typing.nit:1811 */
   REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -11475,13 +11532,13 @@ void syntax___typing___ANeExpr___try_to_isa(val_t p0, val_t p1, val_t p2){
     REGB0 = REGB1;
   }
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:1802 */
+    /* syntax/typing.nit:1812 */
     fra.me.REG[4] = CALL_syntax___typing___TypingVisitor___flow_ctx(fra.me.REG[1])(fra.me.REG[1]);
     fra.me.REG[2] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[2])(fra.me.REG[2]);
     fra.me.REG[2] = CALL_metamodel___static_type___MMType___as_notnull(fra.me.REG[2])(fra.me.REG[2]);
     fra.me.REG[2] = CALL_syntax___flow___FlowContext___sub_with(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[0], fra.me.REG[3], fra.me.REG[2]);
     ATTR_syntax___typing___AExpr____if_true_flow_ctx(fra.me.REG[0]) = fra.me.REG[2];
-    /* syntax/typing.nit:1803 */
+    /* syntax/typing.nit:1813 */
     fra.me.REG[2] = CALL_syntax___typing___TypingVisitor___flow_ctx(fra.me.REG[1])(fra.me.REG[1]);
     fra.me.REG[1] = CALL_syntax___syntax_base___AbsSyntaxVisitor___type_none(fra.me.REG[1])(fra.me.REG[1]);
     fra.me.REG[1] = CALL_syntax___flow___FlowContext___sub_with(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[0], fra.me.REG[3], fra.me.REG[1]);
@@ -11499,14 +11556,14 @@ val_t syntax___typing___ALtExpr___name(val_t p0){
     static val_t once_value_2; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1808;
+  fra.me.line = 1818;
   fra.me.meth = LOCATE_syntax___typing___ALtExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1808 */
+  /* syntax/typing.nit:1818 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[0] = BOX_NativeString("<");
@@ -11535,14 +11592,14 @@ val_t syntax___typing___ALeExpr___name(val_t p0){
     static val_t once_value_2; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1811;
+  fra.me.line = 1821;
   fra.me.meth = LOCATE_syntax___typing___ALeExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1811 */
+  /* syntax/typing.nit:1821 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[0] = BOX_NativeString("<=");
@@ -11571,14 +11628,14 @@ val_t syntax___typing___ALlExpr___name(val_t p0){
     static val_t once_value_2; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1814;
+  fra.me.line = 1824;
   fra.me.meth = LOCATE_syntax___typing___ALlExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1814 */
+  /* syntax/typing.nit:1824 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[0] = BOX_NativeString("<<");
@@ -11607,14 +11664,14 @@ val_t syntax___typing___AGtExpr___name(val_t p0){
     static val_t once_value_2; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1817;
+  fra.me.line = 1827;
   fra.me.meth = LOCATE_syntax___typing___AGtExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1817 */
+  /* syntax/typing.nit:1827 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[0] = BOX_NativeString(">");
@@ -11643,14 +11700,14 @@ val_t syntax___typing___AGeExpr___name(val_t p0){
     static val_t once_value_2; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1820;
+  fra.me.line = 1830;
   fra.me.meth = LOCATE_syntax___typing___AGeExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1820 */
+  /* syntax/typing.nit:1830 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[0] = BOX_NativeString(">=");
@@ -11679,14 +11736,14 @@ val_t syntax___typing___AGgExpr___name(val_t p0){
     static val_t once_value_2; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1823;
+  fra.me.line = 1833;
   fra.me.meth = LOCATE_syntax___typing___AGgExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1823 */
+  /* syntax/typing.nit:1833 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[0] = BOX_NativeString(">>");
@@ -11715,14 +11772,14 @@ val_t syntax___typing___APlusExpr___name(val_t p0){
     static val_t once_value_2; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1826;
+  fra.me.line = 1836;
   fra.me.meth = LOCATE_syntax___typing___APlusExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1826 */
+  /* syntax/typing.nit:1836 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[0] = BOX_NativeString("+");
@@ -11751,14 +11808,14 @@ val_t syntax___typing___AMinusExpr___name(val_t p0){
     static val_t once_value_2; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1829;
+  fra.me.line = 1839;
   fra.me.meth = LOCATE_syntax___typing___AMinusExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1829 */
+  /* syntax/typing.nit:1839 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[0] = BOX_NativeString("-");
@@ -11787,14 +11844,14 @@ val_t syntax___typing___AStarshipExpr___name(val_t p0){
     static val_t once_value_2; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1832;
+  fra.me.line = 1842;
   fra.me.meth = LOCATE_syntax___typing___AStarshipExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1832 */
+  /* syntax/typing.nit:1842 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[0] = BOX_NativeString("<=>");
@@ -11823,14 +11880,14 @@ val_t syntax___typing___AStarExpr___name(val_t p0){
     static val_t once_value_2; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1835;
+  fra.me.line = 1845;
   fra.me.meth = LOCATE_syntax___typing___AStarExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1835 */
+  /* syntax/typing.nit:1845 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[0] = BOX_NativeString("*");
@@ -11859,14 +11916,14 @@ val_t syntax___typing___ASlashExpr___name(val_t p0){
     static val_t once_value_2; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1838;
+  fra.me.line = 1848;
   fra.me.meth = LOCATE_syntax___typing___ASlashExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1838 */
+  /* syntax/typing.nit:1848 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[0] = BOX_NativeString("/");
@@ -11895,14 +11952,14 @@ val_t syntax___typing___APercentExpr___name(val_t p0){
     static val_t once_value_2; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1841;
+  fra.me.line = 1851;
   fra.me.meth = LOCATE_syntax___typing___APercentExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1841 */
+  /* syntax/typing.nit:1851 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[0] = BOX_NativeString("%");
@@ -11931,14 +11988,14 @@ val_t syntax___typing___AUminusExpr___name(val_t p0){
     static val_t once_value_2; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1845;
+  fra.me.line = 1855;
   fra.me.meth = LOCATE_syntax___typing___AUminusExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1845 */
+  /* syntax/typing.nit:1855 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[0] = BOX_NativeString("unary -");
@@ -11964,14 +12021,14 @@ val_t syntax___typing___AUminusExpr___compute_raw_arguments(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1846;
+  fra.me.line = 1856;
   fra.me.meth = LOCATE_syntax___typing___AUminusExpr___compute_raw_arguments;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1846 */
+  /* syntax/typing.nit:1856 */
   fra.me.REG[0] = NIT_NULL;
   goto label1;
   label1: while(0);
@@ -11988,7 +12045,7 @@ void syntax___typing___ACallFormExpr___after_typing(val_t p0, val_t p1){
           static val_t once_value_2; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1850;
+  fra.me.line = 1860;
   fra.me.meth = LOCATE_syntax___typing___ACallFormExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
@@ -12004,20 +12061,20 @@ void syntax___typing___ACallFormExpr___after_typing(val_t p0, val_t p1){
   fra.me.REG[8] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:1850 */
+  /* syntax/typing.nit:1860 */
   fra.me.REG[2] = fra.me.REG[0];
   fra.me.REG[3] = fra.me.REG[1];
-  /* syntax/typing.nit:1852 */
+  /* syntax/typing.nit:1862 */
   fra.me.REG[4] = CALL_parser___parser_nodes___ASendExpr___n_expr(fra.me.REG[2])(fra.me.REG[2]);
   REGB0 = CALL_syntax___typing___AExpr___is_implicit_self(fra.me.REG[4])(fra.me.REG[4]);
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:1853 */
+    /* syntax/typing.nit:1863 */
     fra.me.REG[4] = CALL_parser___parser_nodes___ACallFormExpr___n_id(fra.me.REG[2])(fra.me.REG[2]);
     fra.me.REG[4] = CALL_syntax___syntax_base___Token___to_symbol(fra.me.REG[4])(fra.me.REG[4]);
-    /* syntax/typing.nit:1854 */
+    /* syntax/typing.nit:1864 */
     fra.me.REG[5] = CALL_syntax___typing___TypingVisitor___scope_ctx(fra.me.REG[3])(fra.me.REG[3]);
     fra.me.REG[5] = CALL_syntax___scope___ScopeContext_____bra(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[4]);
-    /* syntax/typing.nit:1855 */
+    /* syntax/typing.nit:1865 */
     REGB0 = TAG_Bool(fra.me.REG[5]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
@@ -12032,18 +12089,18 @@ void syntax___typing___ACallFormExpr___after_typing(val_t p0, val_t p1){
     }
     REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
     if (UNTAG_Bool(REGB0)) {
-      /* syntax/typing.nit:1857 */
+      /* syntax/typing.nit:1867 */
       REGB0 = TAG_Bool((fra.me.REG[5]!=NIT_NULL) && VAL_ISA(fra.me.REG[5], COLOR_syntax___syntax_base___ClosureVariable, ID_syntax___syntax_base___ClosureVariable)) /*cast ClosureVariable*/;
       if (UNTAG_Bool(REGB0)) {
-        /* syntax/typing.nit:1858 */
+        /* syntax/typing.nit:1868 */
         fra.me.REG[6] = CALL_parser___parser_nodes___ACallFormExpr___n_id(fra.me.REG[2])(fra.me.REG[2]);
         fra.me.REG[7] = CALL_parser___parser_nodes___ACallFormExpr___n_args(fra.me.REG[2])(fra.me.REG[2]);
         fra.me.REG[8] = CALL_parser___parser_nodes___ASendExpr___n_closure_defs(fra.me.REG[2])(fra.me.REG[2]);
         fra.me.REG[8] = NEW_AClosureCallExpr_parser___parser_prod___AClosureCallExpr___init_aclosurecallexpr(fra.me.REG[6], fra.me.REG[7], fra.me.REG[8]);
-        /* syntax/typing.nit:1859 */
+        /* syntax/typing.nit:1869 */
         ATTR_syntax___typing___AClosureCallExpr____variable(fra.me.REG[8]) = fra.me.REG[5];
       } else {
-        /* syntax/typing.nit:1861 */
+        /* syntax/typing.nit:1871 */
         fra.me.REG[7] = CALL_parser___parser_nodes___ACallFormExpr___n_args(fra.me.REG[2])(fra.me.REG[2]);
         fra.me.REG[7] = CALL_parser___parser_nodes___AExprs___n_exprs(fra.me.REG[7])(fra.me.REG[7]);
         REGB0 = CALL_standard___collection___abstract_collection___Collection___is_empty(fra.me.REG[7])(fra.me.REG[7]);
@@ -12056,7 +12113,7 @@ void syntax___typing___ACallFormExpr___after_typing(val_t p0, val_t p1){
           REGB0 = REGB1;
         }
         if (UNTAG_Bool(REGB0)) {
-          /* syntax/typing.nit:1862 */
+          /* syntax/typing.nit:1872 */
           REGB0 = TAG_Int(3);
           fra.me.REG[7] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
           if (!once_value_1) {
@@ -12081,24 +12138,24 @@ void syntax___typing___ACallFormExpr___after_typing(val_t p0, val_t p1){
           CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[7])(fra.me.REG[7], fra.me.REG[4]);
           fra.me.REG[7] = CALL_standard___string___Object___to_s(fra.me.REG[7])(fra.me.REG[7]);
           CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[2], fra.me.REG[7]);
-          /* syntax/typing.nit:1863 */
+          /* syntax/typing.nit:1873 */
           goto label3;
         }
-        /* syntax/typing.nit:1865 */
+        /* syntax/typing.nit:1875 */
         fra.me.REG[7] = CALL_syntax___typing___ACallFormExpr___variable_create(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[5]);
         fra.me.REG[8] = fra.me.REG[7];
-        /* syntax/typing.nit:1866 */
+        /* syntax/typing.nit:1876 */
         ATTR_syntax___typing___AVarFormExpr____variable(fra.me.REG[8]) = fra.me.REG[5];
       }
-      /* syntax/typing.nit:1868 */
+      /* syntax/typing.nit:1878 */
       CALL_parser___parser_prod___ANode___replace_with(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[8]);
-      /* syntax/typing.nit:1869 */
+      /* syntax/typing.nit:1879 */
       CALL_syntax___typing___ANode___after_typing(fra.me.REG[8])(fra.me.REG[8], fra.me.REG[3]);
-      /* syntax/typing.nit:1870 */
+      /* syntax/typing.nit:1880 */
       goto label3;
     }
   }
-  /* syntax/typing.nit:1874 */
+  /* syntax/typing.nit:1884 */
   CALL_SUPER_syntax___typing___ACallFormExpr___after_typing(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   label3: while(0);
   stack_frame_head = fra.me.prev;
@@ -12111,7 +12168,7 @@ val_t syntax___typing___ACallFormExpr___closure_defs(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1877;
+  fra.me.line = 1887;
   fra.me.meth = LOCATE_syntax___typing___ACallFormExpr___closure_defs;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -12119,15 +12176,15 @@ val_t syntax___typing___ACallFormExpr___closure_defs(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1879 */
+  /* syntax/typing.nit:1889 */
   fra.me.REG[1] = CALL_parser___parser_nodes___ASendExpr___n_closure_defs(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = CALL_standard___collection___abstract_collection___Collection___is_empty(fra.me.REG[1])(fra.me.REG[1]);
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:1880 */
+    /* syntax/typing.nit:1890 */
     fra.me.REG[1] = NIT_NULL;
     goto label1;
   } else {
-    /* syntax/typing.nit:1882 */
+    /* syntax/typing.nit:1892 */
     fra.me.REG[0] = CALL_parser___parser_nodes___ASendExpr___n_closure_defs(fra.me.REG[0])(fra.me.REG[0]);
     fra.me.REG[0] = CALL_standard___collection___array___Collection___to_a(fra.me.REG[0])(fra.me.REG[0]);
     fra.me.REG[1] = fra.me.REG[0];
@@ -12143,13 +12200,13 @@ val_t syntax___typing___ACallFormExpr___variable_create(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1886;
+  fra.me.line = 1896;
   fra.me.meth = LOCATE_syntax___typing___ACallFormExpr___variable_create;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* syntax/typing.nit:1886 */
-  nit_abort("Deferred method called", NULL, LOCATE_syntax___typing, 1886);
+  /* syntax/typing.nit:1896 */
+  nit_abort("Deferred method called", NULL, LOCATE_syntax___typing, 1896);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -12159,7 +12216,7 @@ val_t syntax___typing___ACallExpr___variable_create(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1891;
+  fra.me.line = 1901;
   fra.me.meth = LOCATE_syntax___typing___ACallExpr___variable_create;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -12168,7 +12225,7 @@ val_t syntax___typing___ACallExpr___variable_create(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:1893 */
+  /* syntax/typing.nit:1903 */
   fra.me.REG[0] = CALL_parser___parser_nodes___ACallFormExpr___n_id(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = NEW_AVarExpr_parser___parser_prod___AVarExpr___init_avarexpr(fra.me.REG[0]);
   goto label1;
@@ -12182,14 +12239,14 @@ val_t syntax___typing___ACallExpr___name(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1896;
+  fra.me.line = 1906;
   fra.me.meth = LOCATE_syntax___typing___ACallExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1896 */
+  /* syntax/typing.nit:1906 */
   fra.me.REG[0] = CALL_parser___parser_nodes___ACallFormExpr___n_id(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_syntax___syntax_base___Token___to_symbol(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -12203,14 +12260,14 @@ val_t syntax___typing___ACallExpr___compute_raw_arguments(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1897;
+  fra.me.line = 1907;
   fra.me.meth = LOCATE_syntax___typing___ACallExpr___compute_raw_arguments;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1897 */
+  /* syntax/typing.nit:1907 */
   fra.me.REG[0] = CALL_parser___parser_nodes___ACallFormExpr___n_args(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_syntax___syntax_base___AExprs___to_a(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -12224,7 +12281,7 @@ val_t syntax___typing___ACallAssignExpr___variable_create(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1901;
+  fra.me.line = 1911;
   fra.me.meth = LOCATE_syntax___typing___ACallAssignExpr___variable_create;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -12234,7 +12291,7 @@ val_t syntax___typing___ACallAssignExpr___variable_create(val_t p0, val_t p1){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:1903 */
+  /* syntax/typing.nit:1913 */
   fra.me.REG[1] = CALL_parser___parser_nodes___ACallFormExpr___n_id(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[2] = CALL_parser___parser_nodes___AAssignFormExpr___n_assign(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_parser___parser_nodes___AAssignFormExpr___n_value(fra.me.REG[0])(fra.me.REG[0]);
@@ -12252,7 +12309,7 @@ val_t syntax___typing___ACallAssignExpr___name(val_t p0){
   static val_t once_value_1; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1906;
+  fra.me.line = 1916;
   fra.me.meth = LOCATE_syntax___typing___ACallAssignExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -12260,7 +12317,7 @@ val_t syntax___typing___ACallAssignExpr___name(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1906 */
+  /* syntax/typing.nit:1916 */
   fra.me.REG[0] = CALL_parser___parser_nodes___ACallFormExpr___n_id(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_parser___parser_nodes___Token___text(fra.me.REG[0])(fra.me.REG[0]);
   if (!once_value_1) {
@@ -12284,7 +12341,7 @@ val_t syntax___typing___ACallAssignExpr___compute_raw_arguments(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1907;
+  fra.me.line = 1917;
   fra.me.meth = LOCATE_syntax___typing___ACallAssignExpr___compute_raw_arguments;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -12292,13 +12349,13 @@ val_t syntax___typing___ACallAssignExpr___compute_raw_arguments(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1908 */
+  /* syntax/typing.nit:1918 */
   fra.me.REG[1] = CALL_parser___parser_nodes___ACallFormExpr___n_args(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[1] = CALL_syntax___syntax_base___AExprs___to_a(fra.me.REG[1])(fra.me.REG[1]);
-  /* syntax/typing.nit:1909 */
+  /* syntax/typing.nit:1919 */
   fra.me.REG[0] = CALL_parser___parser_nodes___AAssignFormExpr___n_value(fra.me.REG[0])(fra.me.REG[0]);
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
-  /* syntax/typing.nit:1910 */
+  /* syntax/typing.nit:1920 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -12310,7 +12367,7 @@ val_t syntax___typing___ACallReassignExpr___variable_create(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1915;
+  fra.me.line = 1925;
   fra.me.meth = LOCATE_syntax___typing___ACallReassignExpr___variable_create;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -12320,7 +12377,7 @@ val_t syntax___typing___ACallReassignExpr___variable_create(val_t p0, val_t p1){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:1917 */
+  /* syntax/typing.nit:1927 */
   fra.me.REG[1] = CALL_parser___parser_nodes___ACallFormExpr___n_id(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[2] = CALL_parser___parser_nodes___AReassignFormExpr___n_assign_op(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_parser___parser_nodes___AReassignFormExpr___n_value(fra.me.REG[0])(fra.me.REG[0]);
@@ -12336,14 +12393,14 @@ val_t syntax___typing___ACallReassignExpr___name(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1920;
+  fra.me.line = 1930;
   fra.me.meth = LOCATE_syntax___typing___ACallReassignExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1920 */
+  /* syntax/typing.nit:1930 */
   fra.me.REG[0] = CALL_parser___parser_nodes___ACallFormExpr___n_id(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_syntax___syntax_base___Token___to_symbol(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -12357,14 +12414,14 @@ val_t syntax___typing___ACallReassignExpr___compute_raw_arguments(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1921;
+  fra.me.line = 1931;
   fra.me.meth = LOCATE_syntax___typing___ACallReassignExpr___compute_raw_arguments;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1921 */
+  /* syntax/typing.nit:1931 */
   fra.me.REG[0] = CALL_parser___parser_nodes___ACallFormExpr___n_args(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_syntax___syntax_base___AExprs___to_a(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -12381,14 +12438,14 @@ val_t syntax___typing___ABraExpr___name(val_t p0){
     static val_t once_value_2; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1925;
+  fra.me.line = 1935;
   fra.me.meth = LOCATE_syntax___typing___ABraExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1925 */
+  /* syntax/typing.nit:1935 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[0] = BOX_NativeString("[]");
@@ -12414,14 +12471,14 @@ val_t syntax___typing___ABraExpr___compute_raw_arguments(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1926;
+  fra.me.line = 1936;
   fra.me.meth = LOCATE_syntax___typing___ABraExpr___compute_raw_arguments;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1926 */
+  /* syntax/typing.nit:1936 */
   fra.me.REG[0] = CALL_parser___parser_nodes___ABraFormExpr___n_args(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_syntax___syntax_base___AExprs___to_a(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -12436,7 +12493,7 @@ val_t syntax___typing___ABraExpr___closure_defs(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1927;
+  fra.me.line = 1937;
   fra.me.meth = LOCATE_syntax___typing___ABraExpr___closure_defs;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -12444,15 +12501,15 @@ val_t syntax___typing___ABraExpr___closure_defs(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1929 */
+  /* syntax/typing.nit:1939 */
   fra.me.REG[1] = CALL_parser___parser_nodes___ASendExpr___n_closure_defs(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = CALL_standard___collection___abstract_collection___Collection___is_empty(fra.me.REG[1])(fra.me.REG[1]);
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:1930 */
+    /* syntax/typing.nit:1940 */
     fra.me.REG[1] = NIT_NULL;
     goto label1;
   } else {
-    /* syntax/typing.nit:1932 */
+    /* syntax/typing.nit:1942 */
     fra.me.REG[0] = CALL_parser___parser_nodes___ASendExpr___n_closure_defs(fra.me.REG[0])(fra.me.REG[0]);
     fra.me.REG[0] = CALL_standard___collection___array___Collection___to_a(fra.me.REG[0])(fra.me.REG[0]);
     fra.me.REG[1] = fra.me.REG[0];
@@ -12471,14 +12528,14 @@ val_t syntax___typing___ABraAssignExpr___name(val_t p0){
     static val_t once_value_2; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1938;
+  fra.me.line = 1948;
   fra.me.meth = LOCATE_syntax___typing___ABraAssignExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1938 */
+  /* syntax/typing.nit:1948 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[0] = BOX_NativeString("[]=");
@@ -12504,7 +12561,7 @@ val_t syntax___typing___ABraAssignExpr___compute_raw_arguments(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1939;
+  fra.me.line = 1949;
   fra.me.meth = LOCATE_syntax___typing___ABraAssignExpr___compute_raw_arguments;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -12512,13 +12569,13 @@ val_t syntax___typing___ABraAssignExpr___compute_raw_arguments(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1940 */
+  /* syntax/typing.nit:1950 */
   fra.me.REG[1] = CALL_parser___parser_nodes___ABraFormExpr___n_args(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[1] = CALL_syntax___syntax_base___AExprs___to_a(fra.me.REG[1])(fra.me.REG[1]);
-  /* syntax/typing.nit:1941 */
+  /* syntax/typing.nit:1951 */
   fra.me.REG[0] = CALL_parser___parser_nodes___AAssignFormExpr___n_value(fra.me.REG[0])(fra.me.REG[0]);
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
-  /* syntax/typing.nit:1942 */
+  /* syntax/typing.nit:1952 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -12533,14 +12590,14 @@ val_t syntax___typing___ABraReassignExpr___name(val_t p0){
     static val_t once_value_2; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1947;
+  fra.me.line = 1957;
   fra.me.meth = LOCATE_syntax___typing___ABraReassignExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1947 */
+  /* syntax/typing.nit:1957 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[0] = BOX_NativeString("[]");
@@ -12566,14 +12623,14 @@ val_t syntax___typing___ABraReassignExpr___compute_raw_arguments(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1948;
+  fra.me.line = 1958;
   fra.me.meth = LOCATE_syntax___typing___ABraReassignExpr___compute_raw_arguments;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1948 */
+  /* syntax/typing.nit:1958 */
   fra.me.REG[0] = CALL_parser___parser_nodes___ABraFormExpr___n_args(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_syntax___syntax_base___AExprs___to_a(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -12590,14 +12647,14 @@ val_t syntax___typing___AInitExpr___name(val_t p0){
     static val_t once_value_2; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1952;
+  fra.me.line = 1962;
   fra.me.meth = LOCATE_syntax___typing___AInitExpr___name;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1952 */
+  /* syntax/typing.nit:1962 */
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[0] = BOX_NativeString("init");
@@ -12623,14 +12680,14 @@ val_t syntax___typing___AInitExpr___compute_raw_arguments(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1953;
+  fra.me.line = 1963;
   fra.me.meth = LOCATE_syntax___typing___AInitExpr___compute_raw_arguments;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1953 */
+  /* syntax/typing.nit:1963 */
   fra.me.REG[0] = CALL_parser___parser_nodes___AInitExpr___n_args(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_syntax___syntax_base___AExprs___to_a(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -12645,7 +12702,7 @@ val_t syntax___typing___AClosureCallExpr___variable(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1958;
+  fra.me.line = 1968;
   fra.me.meth = LOCATE_syntax___typing___AClosureCallExpr___variable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -12653,13 +12710,13 @@ val_t syntax___typing___AClosureCallExpr___variable(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1958 */
+  /* syntax/typing.nit:1968 */
   fra.me.REG[1] = fra.me.REG[0];
   fra.me.REG[1] = ATTR_syntax___typing___AClosureCallExpr____variable(fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[1]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Cast failed", NULL, LOCATE_syntax___typing, 1958);
+    nit_abort("Cast failed", NULL, LOCATE_syntax___typing, 1968);
   }
   goto label1;
   label1: while(0);
@@ -12672,14 +12729,14 @@ val_t syntax___typing___AClosureCallExpr___compute_raw_arguments(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1959;
+  fra.me.line = 1969;
   fra.me.meth = LOCATE_syntax___typing___AClosureCallExpr___compute_raw_arguments;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1959 */
+  /* syntax/typing.nit:1969 */
   fra.me.REG[0] = CALL_parser___parser_nodes___AClosureCallExpr___n_args(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_syntax___syntax_base___AExprs___to_a(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -12695,7 +12752,7 @@ void syntax___typing___AClosureCallExpr___after_typing(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1961;
+  fra.me.line = 1971;
   fra.me.meth = LOCATE_syntax___typing___AClosureCallExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
@@ -12707,45 +12764,45 @@ void syntax___typing___AClosureCallExpr___after_typing(val_t p0, val_t p1){
   fra.me.REG[4] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:1963 */
+  /* syntax/typing.nit:1973 */
   fra.me.REG[2] = CALL_syntax___syntax_base___AClosureCallExpr___variable(fra.me.REG[0])(fra.me.REG[0]);
-  /* syntax/typing.nit:1964 */
+  /* syntax/typing.nit:1974 */
   fra.me.REG[3] = CALL_syntax___syntax_base___ClosureVariable___closure(fra.me.REG[2])(fra.me.REG[2]);
   REGB0 = CALL_metamodel___static_type___MMClosure___is_break(fra.me.REG[3])(fra.me.REG[3]);
   if (UNTAG_Bool(REGB0)) {
     CALL_syntax___typing___TypingVisitor___mark_unreash(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
   }
-  /* syntax/typing.nit:1965 */
+  /* syntax/typing.nit:1975 */
   fra.me.REG[2] = CALL_syntax___syntax_base___ClosureVariable___closure(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[2] = CALL_metamodel___static_type___MMClosure___signature(fra.me.REG[2])(fra.me.REG[2]);
-  /* syntax/typing.nit:1966 */
+  /* syntax/typing.nit:1976 */
   fra.me.REG[3] = CALL_parser___parser_nodes___AClosureCallExpr___n_id(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[3] = CALL_syntax___syntax_base___Token___to_symbol(fra.me.REG[3])(fra.me.REG[3]);
   fra.me.REG[4] = CALL_syntax___typing___AAbsAbsSendExpr___compute_raw_arguments(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = CALL_syntax___typing___AAbsAbsSendExpr___process_signature(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], fra.me.REG[2], fra.me.REG[3], fra.me.REG[4]);
-  /* syntax/typing.nit:1967 */
+  /* syntax/typing.nit:1977 */
   fra.me.REG[4] = CALL_parser___parser_nodes___AClosureCallExpr___n_closure_defs(fra.me.REG[0])(fra.me.REG[0]);
   REGB1 = CALL_standard___collection___abstract_collection___Collection___is_empty(fra.me.REG[4])(fra.me.REG[4]);
   REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
   if (UNTAG_Bool(REGB1)) {
-    /* syntax/typing.nit:1968 */
+    /* syntax/typing.nit:1978 */
     fra.me.REG[4] = CALL_parser___parser_nodes___AClosureCallExpr___n_id(fra.me.REG[0])(fra.me.REG[0]);
     fra.me.REG[4] = CALL_syntax___syntax_base___Token___to_symbol(fra.me.REG[4])(fra.me.REG[4]);
     fra.me.REG[3] = CALL_parser___parser_nodes___AClosureCallExpr___n_closure_defs(fra.me.REG[0])(fra.me.REG[0]);
     fra.me.REG[3] = CALL_standard___collection___array___Collection___to_a(fra.me.REG[3])(fra.me.REG[3]);
     CALL_syntax___typing___AAbsAbsSendExpr___process_closures(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], fra.me.REG[2], fra.me.REG[4], fra.me.REG[3]);
   }
-  /* syntax/typing.nit:1970 */
+  /* syntax/typing.nit:1980 */
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
     goto label1;
   }
-  /* syntax/typing.nit:1971 */
+  /* syntax/typing.nit:1981 */
   ATTR_syntax___typing___AAbsAbsSendExpr____prop_signature(fra.me.REG[0]) = fra.me.REG[2];
-  /* syntax/typing.nit:1972 */
+  /* syntax/typing.nit:1982 */
   fra.me.REG[2] = CALL_metamodel___static_type___MMSignature___return_type(fra.me.REG[2])(fra.me.REG[2]);
   ATTR_syntax___typing___AExpr____stype(fra.me.REG[0]) = fra.me.REG[2];
-  /* syntax/typing.nit:1973 */
+  /* syntax/typing.nit:1983 */
   REGB0 = TAG_Bool(1);
   ATTR_syntax___typing___AExpr____is_typed(fra.me.REG[0]) = REGB0;
   label1: while(0);
@@ -12758,13 +12815,13 @@ val_t syntax___typing___AClosureId___to_symbol(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1978;
+  fra.me.line = 1988;
   fra.me.meth = LOCATE_syntax___typing___AClosureId___to_symbol;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* syntax/typing.nit:1978 */
-  nit_abort("Deferred method called", NULL, LOCATE_syntax___typing, 1978);
+  /* syntax/typing.nit:1988 */
+  nit_abort("Deferred method called", NULL, LOCATE_syntax___typing, 1988);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -12774,14 +12831,14 @@ val_t syntax___typing___ASimpleClosureId___to_symbol(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1981;
+  fra.me.line = 1991;
   fra.me.meth = LOCATE_syntax___typing___ASimpleClosureId___to_symbol;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1981 */
+  /* syntax/typing.nit:1991 */
   fra.me.REG[0] = CALL_parser___parser_nodes___ASimpleClosureId___n_id(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_syntax___syntax_base___Token___to_symbol(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -12795,14 +12852,14 @@ val_t syntax___typing___ABreakClosureId___to_symbol(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1984;
+  fra.me.line = 1994;
   fra.me.meth = LOCATE_syntax___typing___ABreakClosureId___to_symbol;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1984 */
+  /* syntax/typing.nit:1994 */
   fra.me.REG[0] = CALL_parser___parser_nodes___ABreakClosureId___n_kwbreak(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_syntax___syntax_base___Token___to_symbol(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -12817,7 +12874,7 @@ val_t syntax___typing___AClosureDef___closure(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1989;
+  fra.me.line = 1999;
   fra.me.meth = LOCATE_syntax___typing___AClosureDef___closure;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -12825,13 +12882,13 @@ val_t syntax___typing___AClosureDef___closure(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1989 */
+  /* syntax/typing.nit:1999 */
   fra.me.REG[1] = fra.me.REG[0];
   fra.me.REG[1] = ATTR_syntax___typing___AClosureDef____closure(fra.me.REG[1]);
   REGB0 = TAG_Bool(fra.me.REG[1]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Cast failed", NULL, LOCATE_syntax___typing, 1989);
+    nit_abort("Cast failed", NULL, LOCATE_syntax___typing, 1999);
   }
   goto label1;
   label1: while(0);
@@ -12844,14 +12901,14 @@ val_t syntax___typing___AClosureDef___escapable(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1991;
+  fra.me.line = 2001;
   fra.me.meth = LOCATE_syntax___typing___AClosureDef___escapable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:1991 */
+  /* syntax/typing.nit:2001 */
   fra.me.REG[0] = ATTR_syntax___typing___AClosureDef____escapable(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -12863,7 +12920,7 @@ void syntax___typing___AClosureDef___accept_typing(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 1995;
+  fra.me.line = 2005;
   fra.me.meth = LOCATE_syntax___typing___AClosureDef___accept_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -12873,13 +12930,13 @@ void syntax___typing___AClosureDef___accept_typing(val_t p0, val_t p1){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:1995 */
+  /* syntax/typing.nit:2005 */
   fra.me.REG[2] = fra.me.REG[0];
-  /* syntax/typing.nit:1998 */
+  /* syntax/typing.nit:2008 */
   REGB0 = TAG_Bool(ATTR_syntax___typing___AClosureDef____accept_typing2(fra.me.REG[2])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_accept_typing2", LOCATE_syntax___typing, 1998);
+    nit_abort("Uninitialized attribute %s", "_accept_typing2", LOCATE_syntax___typing, 2008);
   }
   REGB0 = ATTR_syntax___typing___AClosureDef____accept_typing2(fra.me.REG[2]);
   if (UNTAG_Bool(REGB0)) {
@@ -12903,7 +12960,7 @@ void syntax___typing___AClosureDef___accept_typing2(val_t p0, val_t p1, val_t p2
         static val_t once_value_7; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 2001;
+  fra.me.line = 2011;
   fra.me.meth = LOCATE_syntax___typing___AClosureDef___accept_typing2;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
@@ -12919,12 +12976,12 @@ void syntax___typing___AClosureDef___accept_typing2(val_t p0, val_t p1, val_t p2
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* syntax/typing.nit:2003 */
+  /* syntax/typing.nit:2013 */
   ATTR_syntax___typing___AClosureDef____escapable(fra.me.REG[0]) = fra.me.REG[2];
-  /* syntax/typing.nit:2005 */
+  /* syntax/typing.nit:2015 */
   fra.me.REG[3] = CALL_syntax___scope___EscapableClosure___closure(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[3] = CALL_metamodel___static_type___MMClosure___signature(fra.me.REG[3])(fra.me.REG[3]);
-  /* syntax/typing.nit:2006 */
+  /* syntax/typing.nit:2016 */
   REGB0 = CALL_metamodel___static_type___MMSignature___arity(fra.me.REG[3])(fra.me.REG[3]);
   fra.me.REG[4] = CALL_parser___parser_nodes___AClosureDef___n_ids(fra.me.REG[0])(fra.me.REG[0]);
   REGB1 = CALL_standard___collection___abstract_collection___Collection___length(fra.me.REG[4])(fra.me.REG[4]);
@@ -12933,12 +12990,12 @@ void syntax___typing___AClosureDef___accept_typing2(val_t p0, val_t p1, val_t p2
   } else {
     /* ../lib/standard/kernel.nit:230 */
     REGB1 = TAG_Bool((REGB0)==(REGB1));
-    /* syntax/typing.nit:2006 */
+    /* syntax/typing.nit:2016 */
     REGB2 = REGB1;
   }
   REGB2 = TAG_Bool(!UNTAG_Bool(REGB2));
   if (UNTAG_Bool(REGB2)) {
-    /* syntax/typing.nit:2007 */
+    /* syntax/typing.nit:2017 */
     REGB2 = TAG_Int(5);
     fra.me.REG[4] = NEW_Array_standard___collection___array___Array___with_capacity(REGB2);
     if (!once_value_1) {
@@ -12977,26 +13034,26 @@ void syntax___typing___AClosureDef___accept_typing2(val_t p0, val_t p1, val_t p2
     CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[5]);
     fra.me.REG[4] = CALL_standard___string___Object___to_s(fra.me.REG[4])(fra.me.REG[4]);
     CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[4]);
-    /* syntax/typing.nit:2008 */
+    /* syntax/typing.nit:2018 */
     goto label4;
   }
-  /* syntax/typing.nit:2011 */
+  /* syntax/typing.nit:2021 */
   fra.me.REG[4] = CALL_syntax___scope___EscapableClosure___closure(fra.me.REG[2])(fra.me.REG[2]);
   ATTR_syntax___typing___AClosureDef____closure(fra.me.REG[0]) = fra.me.REG[4];
-  /* syntax/typing.nit:2013 */
+  /* syntax/typing.nit:2023 */
   fra.me.REG[4] = CALL_syntax___typing___TypingVisitor___scope_ctx(fra.me.REG[1])(fra.me.REG[1]);
   CALL_syntax___scope___ScopeContext___push(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[0]);
-  /* syntax/typing.nit:2014 */
+  /* syntax/typing.nit:2024 */
   fra.me.REG[4] = CALL_syntax___typing___TypingVisitor___flow_ctx(fra.me.REG[1])(fra.me.REG[1]);
-  /* syntax/typing.nit:2015 */
+  /* syntax/typing.nit:2025 */
   fra.me.REG[5] = CALL_syntax___typing___TypingVisitor___base_flow_ctx(fra.me.REG[1])(fra.me.REG[1]);
-  /* syntax/typing.nit:2016 */
+  /* syntax/typing.nit:2026 */
   fra.me.REG[6] = CALL_syntax___typing___TypingVisitor___flow_ctx(fra.me.REG[1])(fra.me.REG[1]);
   CALL_syntax___typing___TypingVisitor___base_flow_ctx__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[6]);
-  /* syntax/typing.nit:2017 */
+  /* syntax/typing.nit:2027 */
   fra.me.REG[6] = NEW_Array_standard___collection___array___Array___init();
   CALL_syntax___syntax_base___AClosureDef___variables__eq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[6]);
-  /* syntax/typing.nit:2018 */
+  /* syntax/typing.nit:2028 */
   REGB2 = TAG_Int(0);
   fra.me.REG[6] = CALL_parser___parser_nodes___AClosureDef___n_ids(fra.me.REG[0])(fra.me.REG[0]);
   REGB1 = CALL_standard___collection___abstract_collection___Collection___length(fra.me.REG[6])(fra.me.REG[6]);
@@ -13011,30 +13068,30 @@ void syntax___typing___AClosureDef___accept_typing2(val_t p0, val_t p1, val_t p2
     REGB0 = TAG_Bool(UNTAG_Int(REGB2)<UNTAG_Int(REGB1));
     /* ../lib/standard/kernel.nit:355 */
     if (UNTAG_Bool(REGB0)) {
-      /* syntax/typing.nit:2018 */
+      /* syntax/typing.nit:2028 */
       REGB0 = REGB2;
-      /* syntax/typing.nit:2019 */
+      /* syntax/typing.nit:2029 */
       fra.me.REG[6] = CALL_parser___parser_nodes___AClosureDef___n_ids(fra.me.REG[0])(fra.me.REG[0]);
       fra.me.REG[6] = CALL_standard___collection___abstract_collection___SequenceRead_____bra(fra.me.REG[6])(fra.me.REG[6], REGB0);
       REGB3 = TAG_Bool(fra.me.REG[6]==NIT_NULL);
       if (UNTAG_Bool(REGB3)) {
-        nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 2019);
+        nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 2029);
       }
       fra.me.REG[6] = CALL_syntax___syntax_base___Token___to_symbol(fra.me.REG[6])(fra.me.REG[6]);
       fra.me.REG[7] = CALL_parser___parser_nodes___AClosureDef___n_ids(fra.me.REG[0])(fra.me.REG[0]);
       fra.me.REG[7] = CALL_standard___collection___abstract_collection___SequenceRead_____bra(fra.me.REG[7])(fra.me.REG[7], REGB0);
       fra.me.REG[7] = NEW_AutoVariable_syntax___syntax_base___AutoVariable___init(fra.me.REG[6], fra.me.REG[7]);
-      /* syntax/typing.nit:2020 */
+      /* syntax/typing.nit:2030 */
       fra.me.REG[6] = CALL_syntax___syntax_base___AClosureDef___variables(fra.me.REG[0])(fra.me.REG[0]);
       REGB3 = TAG_Bool(fra.me.REG[6]==NIT_NULL);
       if (UNTAG_Bool(REGB3)) {
-        nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 2020);
+        nit_abort("Reciever is null", NULL, LOCATE_syntax___typing, 2030);
       }
       CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[7]);
-      /* syntax/typing.nit:2021 */
+      /* syntax/typing.nit:2031 */
       fra.me.REG[6] = CALL_metamodel___static_type___MMSignature_____bra(fra.me.REG[3])(fra.me.REG[3], REGB0);
       CALL_syntax___syntax_base___Variable___stype__eq(fra.me.REG[7])(fra.me.REG[7], fra.me.REG[6]);
-      /* syntax/typing.nit:2022 */
+      /* syntax/typing.nit:2032 */
       fra.me.REG[6] = CALL_syntax___typing___TypingVisitor___scope_ctx(fra.me.REG[1])(fra.me.REG[1]);
       CALL_syntax___scope___ScopeContext___add_variable(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[7]);
       /* ../lib/standard/kernel.nit:357 */
@@ -13049,12 +13106,12 @@ void syntax___typing___AClosureDef___accept_typing2(val_t p0, val_t p1, val_t p2
     }
   }
   label5: while(0);
-  /* syntax/typing.nit:2025 */
+  /* syntax/typing.nit:2035 */
   REGB2 = TAG_Bool(1);
   ATTR_syntax___typing___AClosureDef____accept_typing2(fra.me.REG[0]) = REGB2;
-  /* syntax/typing.nit:2026 */
+  /* syntax/typing.nit:2036 */
   CALL_syntax___typing___ANode___accept_typing(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* syntax/typing.nit:2028 */
+  /* syntax/typing.nit:2038 */
   fra.me.REG[3] = CALL_syntax___typing___TypingVisitor___flow_ctx(fra.me.REG[1])(fra.me.REG[1]);
   REGB2 = CALL_syntax___flow___FlowContext___unreash(fra.me.REG[3])(fra.me.REG[3]);
   REGB1 = TAG_Bool(0);
@@ -13063,11 +13120,11 @@ void syntax___typing___AClosureDef___accept_typing2(val_t p0, val_t p1, val_t p2
   } else {
     /* ../lib/standard/kernel.nit:198 */
     REGB1 = TAG_Bool((REGB2)==(REGB1));
-    /* syntax/typing.nit:2028 */
+    /* syntax/typing.nit:2038 */
     REGB0 = REGB1;
   }
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:2029 */
+    /* syntax/typing.nit:2039 */
     fra.me.REG[3] = CALL_syntax___syntax_base___AClosureDef___closure(fra.me.REG[0])(fra.me.REG[0]);
     fra.me.REG[3] = CALL_metamodel___static_type___MMClosure___signature(fra.me.REG[3])(fra.me.REG[3]);
     fra.me.REG[3] = CALL_metamodel___static_type___MMSignature___return_type(fra.me.REG[3])(fra.me.REG[3]);
@@ -13085,7 +13142,7 @@ void syntax___typing___AClosureDef___accept_typing2(val_t p0, val_t p1, val_t p2
     }
     REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
     if (UNTAG_Bool(REGB0)) {
-      /* syntax/typing.nit:2030 */
+      /* syntax/typing.nit:2040 */
       if (!once_value_6) {
         fra.me.REG[3] = BOX_NativeString("Control error: Reached end of block (a 'continue' with a value was expected).");
         REGB0 = TAG_Int(77);
@@ -13096,7 +13153,7 @@ void syntax___typing___AClosureDef___accept_typing2(val_t p0, val_t p1, val_t p2
       fra.me.REG[3] = fra.me.REG[3];
       CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[3]);
     } else {
-      /* syntax/typing.nit:2031 */
+      /* syntax/typing.nit:2041 */
       fra.me.REG[3] = CALL_syntax___syntax_base___AClosureDef___closure(fra.me.REG[0])(fra.me.REG[0]);
       REGB0 = CALL_metamodel___static_type___MMClosure___is_break(fra.me.REG[3])(fra.me.REG[3]);
       if (UNTAG_Bool(REGB0)) {
@@ -13119,7 +13176,7 @@ void syntax___typing___AClosureDef___accept_typing2(val_t p0, val_t p1, val_t p2
         REGB0 = REGB1;
       }
       if (UNTAG_Bool(REGB0)) {
-        /* syntax/typing.nit:2032 */
+        /* syntax/typing.nit:2042 */
         if (!once_value_7) {
           fra.me.REG[2] = BOX_NativeString("Control error: Reached end of break block (a 'break' with a value was expected).");
           REGB0 = TAG_Int(80);
@@ -13132,11 +13189,11 @@ void syntax___typing___AClosureDef___accept_typing2(val_t p0, val_t p1, val_t p2
       }
     }
   }
-  /* syntax/typing.nit:2035 */
+  /* syntax/typing.nit:2045 */
   CALL_syntax___typing___TypingVisitor___flow_ctx__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[4]);
-  /* syntax/typing.nit:2036 */
+  /* syntax/typing.nit:2046 */
   CALL_syntax___typing___TypingVisitor___base_flow_ctx__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[5]);
-  /* syntax/typing.nit:2037 */
+  /* syntax/typing.nit:2047 */
   fra.me.REG[1] = CALL_syntax___typing___TypingVisitor___scope_ctx(fra.me.REG[1])(fra.me.REG[1]);
   CALL_syntax___scope___ScopeContext___pop(fra.me.REG[1])(fra.me.REG[1]);
   label4: while(0);
@@ -13160,7 +13217,7 @@ void syntax___typing___ATypeCheckExpr___check_expr_cast(val_t p0, val_t p1, val_
               static val_t once_value_10; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 2043;
+  fra.me.line = 2053;
   fra.me.meth = LOCATE_syntax___typing___ATypeCheckExpr___check_expr_cast;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
@@ -13175,23 +13232,23 @@ void syntax___typing___ATypeCheckExpr___check_expr_cast(val_t p0, val_t p1, val_
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
   fra.me.REG[3] = p3;
-  /* syntax/typing.nit:2045 */
+  /* syntax/typing.nit:2055 */
   REGB0 = CALL_syntax___syntax_base___AbsSyntaxVisitor___check_expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
     goto label1;
   }
-  /* syntax/typing.nit:2046 */
+  /* syntax/typing.nit:2056 */
   REGB0 = CALL_syntax___syntax_base___AType___is_typed(fra.me.REG[3])(fra.me.REG[3]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
     goto label1;
   }
-  /* syntax/typing.nit:2047 */
+  /* syntax/typing.nit:2057 */
   fra.me.REG[2] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[2])(fra.me.REG[2]);
-  /* syntax/typing.nit:2048 */
+  /* syntax/typing.nit:2058 */
   fra.me.REG[3] = CALL_syntax___syntax_base___AType___stype(fra.me.REG[3])(fra.me.REG[3]);
-  /* syntax/typing.nit:2049 */
+  /* syntax/typing.nit:2059 */
   REGB0 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[2],fra.me.REG[3]));
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -13199,7 +13256,7 @@ void syntax___typing___ATypeCheckExpr___check_expr_cast(val_t p0, val_t p1, val_
     REGB0 = REGB1;
   }
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:2050 */
+    /* syntax/typing.nit:2060 */
     REGB0 = TAG_Int(3);
     fra.me.REG[4] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
     if (!once_value_2) {
@@ -13225,14 +13282,21 @@ void syntax___typing___ATypeCheckExpr___check_expr_cast(val_t p0, val_t p1, val_
     fra.me.REG[4] = CALL_standard___string___Object___to_s(fra.me.REG[4])(fra.me.REG[4]);
     CALL_syntax___syntax_base___AbsSyntaxVisitor___warning(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[4]);
   } else {
-    /* syntax/typing.nit:2051 */
+    /* syntax/typing.nit:2061 */
     REGB0 = CALL_metamodel___static_type___MMType_____l(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
     if (UNTAG_Bool(REGB0)) {
-      /* syntax/typing.nit:2052 */
-      REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[3], COLOR_metamodel___type_formal___MMTypeFormal, ID_metamodel___type_formal___MMTypeFormal)) /*cast MMTypeFormal*/;
+      /* syntax/typing.nit:2062 */
+      REGB0 = CALL_metamodel___type_formal___MMType___has_formal(fra.me.REG[3])(fra.me.REG[3]);
       REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
       if (UNTAG_Bool(REGB0)) {
-        /* syntax/typing.nit:2054 */
+        REGB0 = CALL_metamodel___type_formal___MMType___has_formal(fra.me.REG[2])(fra.me.REG[2]);
+        REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
+      } else {
+        REGB1 = TAG_Bool(0);
+        REGB0 = REGB1;
+      }
+      if (UNTAG_Bool(REGB0)) {
+        /* syntax/typing.nit:2064 */
         REGB0 = TAG_Int(5);
         fra.me.REG[4] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
         if (!once_value_4) {
@@ -13270,10 +13334,10 @@ void syntax___typing___ATypeCheckExpr___check_expr_cast(val_t p0, val_t p1, val_
         CALL_syntax___syntax_base___AbsSyntaxVisitor___warning(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[4]);
       }
     } else {
-      /* syntax/typing.nit:2056 */
+      /* syntax/typing.nit:2066 */
       REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[2], COLOR_metamodel___static_type___MMTypeNone, ID_metamodel___static_type___MMTypeNone)) /*cast MMTypeNone*/;
       if (UNTAG_Bool(REGB0)) {
-        /* syntax/typing.nit:2058 */
+        /* syntax/typing.nit:2068 */
         REGB0 = TAG_Int(3);
         fra.me.REG[4] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
         if (!once_value_7) {
@@ -13299,7 +13363,7 @@ void syntax___typing___ATypeCheckExpr___check_expr_cast(val_t p0, val_t p1, val_
         fra.me.REG[4] = CALL_standard___string___Object___to_s(fra.me.REG[4])(fra.me.REG[4]);
         CALL_syntax___syntax_base___AbsSyntaxVisitor___warning(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[4]);
       } else {
-        /* syntax/typing.nit:2059 */
+        /* syntax/typing.nit:2069 */
         REGB0 = CALL_metamodel___static_type___MMType___is_nullable(fra.me.REG[2])(fra.me.REG[2]);
         if (UNTAG_Bool(REGB0)) {
           fra.me.REG[2] = CALL_metamodel___static_type___MMType___as_notnull(fra.me.REG[2])(fra.me.REG[2]);
@@ -13314,7 +13378,7 @@ void syntax___typing___ATypeCheckExpr___check_expr_cast(val_t p0, val_t p1, val_
           REGB0 = REGB1;
         }
         if (UNTAG_Bool(REGB0)) {
-          /* syntax/typing.nit:2060 */
+          /* syntax/typing.nit:2070 */
           REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[3], COLOR_metamodel___type_formal___MMTypeFormal, ID_metamodel___type_formal___MMTypeFormal)) /*cast MMTypeFormal*/;
           if (UNTAG_Bool(REGB0)) {
             fra.me.REG[3] = CALL_metamodel___type_formal___MMTypeFormal___bound(fra.me.REG[3])(fra.me.REG[3]);
@@ -13325,10 +13389,10 @@ void syntax___typing___ATypeCheckExpr___check_expr_cast(val_t p0, val_t p1, val_
           }
           if (UNTAG_Bool(REGB0)) {
           } else {
-            /* syntax/typing.nit:2066 */
+            /* syntax/typing.nit:2076 */
             REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[0], COLOR_parser___parser_nodes___AIsaExpr, ID_parser___parser_nodes___AIsaExpr)) /*cast AIsaExpr*/;
             if (UNTAG_Bool(REGB0)) {
-              /* syntax/typing.nit:2067 */
+              /* syntax/typing.nit:2077 */
               if (!once_value_9) {
 		fra.me.REG[3] = BOX_NativeString("Warning: Prefer '!= null'.");
 		REGB0 = TAG_Int(26);
@@ -13339,7 +13403,7 @@ void syntax___typing___ATypeCheckExpr___check_expr_cast(val_t p0, val_t p1, val_
               fra.me.REG[3] = fra.me.REG[3];
               CALL_syntax___syntax_base___AbsSyntaxVisitor___warning(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[3]);
             } else {
-              /* syntax/typing.nit:2069 */
+              /* syntax/typing.nit:2079 */
               if (!once_value_10) {
 		fra.me.REG[3] = BOX_NativeString("Warning: Prefer '.as(not null)'.");
 		REGB0 = TAG_Int(32);
@@ -13367,7 +13431,7 @@ void syntax___typing___AIsaExpr___after_typing(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 2077;
+  fra.me.line = 2087;
   fra.me.meth = LOCATE_syntax___typing___AIsaExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
@@ -13379,21 +13443,21 @@ void syntax___typing___AIsaExpr___after_typing(val_t p0, val_t p1){
   fra.me.REG[4] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:2079 */
+  /* syntax/typing.nit:2089 */
   fra.me.REG[2] = CALL_parser___parser_nodes___AIsaExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[3] = CALL_parser___parser_nodes___AIsaExpr___n_type(fra.me.REG[0])(fra.me.REG[0]);
   CALL_syntax___typing___ATypeCheckExpr___check_expr_cast(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], fra.me.REG[2], fra.me.REG[3]);
-  /* syntax/typing.nit:2080 */
+  /* syntax/typing.nit:2090 */
   fra.me.REG[3] = CALL_parser___parser_nodes___AIsaExpr___n_type(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = CALL_syntax___syntax_base___AType___is_typed(fra.me.REG[3])(fra.me.REG[3]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
     goto label1;
   }
-  /* syntax/typing.nit:2081 */
+  /* syntax/typing.nit:2091 */
   fra.me.REG[3] = CALL_parser___parser_nodes___AIsaExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[3] = CALL_syntax___typing___AExpr___its_variable(fra.me.REG[3])(fra.me.REG[3]);
-  /* syntax/typing.nit:2082 */
+  /* syntax/typing.nit:2092 */
   REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -13408,17 +13472,17 @@ void syntax___typing___AIsaExpr___after_typing(val_t p0, val_t p1){
   }
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:2083 */
+    /* syntax/typing.nit:2093 */
     fra.me.REG[2] = CALL_syntax___typing___TypingVisitor___flow_ctx(fra.me.REG[1])(fra.me.REG[1]);
     fra.me.REG[4] = CALL_parser___parser_nodes___AIsaExpr___n_type(fra.me.REG[0])(fra.me.REG[0]);
     fra.me.REG[4] = CALL_syntax___syntax_base___AType___stype(fra.me.REG[4])(fra.me.REG[4]);
     fra.me.REG[4] = CALL_syntax___flow___FlowContext___sub_with(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[0], fra.me.REG[3], fra.me.REG[4]);
     ATTR_syntax___typing___AExpr____if_true_flow_ctx(fra.me.REG[0]) = fra.me.REG[4];
   }
-  /* syntax/typing.nit:2085 */
+  /* syntax/typing.nit:2095 */
   fra.me.REG[1] = CALL_syntax___syntax_base___AbsSyntaxVisitor___type_bool(fra.me.REG[1])(fra.me.REG[1]);
   ATTR_syntax___typing___AExpr____stype(fra.me.REG[0]) = fra.me.REG[1];
-  /* syntax/typing.nit:2086 */
+  /* syntax/typing.nit:2096 */
   REGB0 = TAG_Bool(1);
   ATTR_syntax___typing___AExpr____is_typed(fra.me.REG[0]) = REGB0;
   label1: while(0);
@@ -13433,7 +13497,7 @@ void syntax___typing___AAsCastExpr___after_typing(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 2092;
+  fra.me.line = 2102;
   fra.me.meth = LOCATE_syntax___typing___AAsCastExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -13444,22 +13508,22 @@ void syntax___typing___AAsCastExpr___after_typing(val_t p0, val_t p1){
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:2094 */
+  /* syntax/typing.nit:2104 */
   fra.me.REG[2] = CALL_parser___parser_nodes___AAsCastExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[3] = CALL_parser___parser_nodes___AAsCastExpr___n_type(fra.me.REG[0])(fra.me.REG[0]);
   CALL_syntax___typing___ATypeCheckExpr___check_expr_cast(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], fra.me.REG[2], fra.me.REG[3]);
-  /* syntax/typing.nit:2095 */
+  /* syntax/typing.nit:2105 */
   fra.me.REG[3] = CALL_parser___parser_nodes___AAsCastExpr___n_type(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = CALL_syntax___syntax_base___AType___is_typed(fra.me.REG[3])(fra.me.REG[3]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
     goto label1;
   }
-  /* syntax/typing.nit:2096 */
+  /* syntax/typing.nit:2106 */
   fra.me.REG[3] = CALL_parser___parser_nodes___AAsCastExpr___n_type(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[3] = CALL_syntax___syntax_base___AType___stype(fra.me.REG[3])(fra.me.REG[3]);
   ATTR_syntax___typing___AExpr____stype(fra.me.REG[0]) = fra.me.REG[3];
-  /* syntax/typing.nit:2097 */
+  /* syntax/typing.nit:2107 */
   fra.me.REG[3] = ATTR_syntax___typing___AExpr____stype(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -13488,7 +13552,7 @@ void syntax___typing___AAsNotnullExpr___after_typing(val_t p0, val_t p1){
       static val_t once_value_3; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 2102;
+  fra.me.line = 2112;
   fra.me.meth = LOCATE_syntax___typing___AAsNotnullExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
@@ -13500,20 +13564,20 @@ void syntax___typing___AAsNotnullExpr___after_typing(val_t p0, val_t p1){
   fra.me.REG[4] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:2104 */
+  /* syntax/typing.nit:2114 */
   fra.me.REG[2] = CALL_parser___parser_nodes___AAsNotnullExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = CALL_syntax___syntax_base___AbsSyntaxVisitor___check_expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
     goto label1;
   }
-  /* syntax/typing.nit:2105 */
+  /* syntax/typing.nit:2115 */
   fra.me.REG[2] = CALL_parser___parser_nodes___AAsNotnullExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[2] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[2])(fra.me.REG[2]);
-  /* syntax/typing.nit:2106 */
+  /* syntax/typing.nit:2116 */
   REGB0 = TAG_Bool(VAL_ISA(fra.me.REG[2], COLOR_metamodel___static_type___MMTypeNone, ID_metamodel___static_type___MMTypeNone)) /*cast MMTypeNone*/;
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:2107 */
+    /* syntax/typing.nit:2117 */
     fra.me.REG[3] = CALL_parser___parser_nodes___AAsNotnullExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
     if (!once_value_2) {
       fra.me.REG[4] = BOX_NativeString("Type error: 'as(not null)' on 'null' value.");
@@ -13524,14 +13588,14 @@ void syntax___typing___AAsNotnullExpr___after_typing(val_t p0, val_t p1){
     } else fra.me.REG[4] = once_value_2;
     fra.me.REG[4] = fra.me.REG[4];
     CALL_syntax___syntax_base___AbsSyntaxVisitor___error(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3], fra.me.REG[4]);
-    /* syntax/typing.nit:2108 */
+    /* syntax/typing.nit:2118 */
     goto label1;
   } else {
-    /* syntax/typing.nit:2109 */
+    /* syntax/typing.nit:2119 */
     REGB0 = CALL_metamodel___static_type___MMType___is_nullable(fra.me.REG[2])(fra.me.REG[2]);
     REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
     if (UNTAG_Bool(REGB0)) {
-      /* syntax/typing.nit:2110 */
+      /* syntax/typing.nit:2120 */
       fra.me.REG[2] = CALL_parser___parser_nodes___AAsNotnullExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
       if (!once_value_3) {
         fra.me.REG[4] = BOX_NativeString("Warning: 'as(not null)' on non nullable type.");
@@ -13544,12 +13608,12 @@ void syntax___typing___AAsNotnullExpr___after_typing(val_t p0, val_t p1){
       CALL_syntax___syntax_base___AbsSyntaxVisitor___warning(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2], fra.me.REG[4]);
     }
   }
-  /* syntax/typing.nit:2112 */
+  /* syntax/typing.nit:2122 */
   fra.me.REG[4] = CALL_parser___parser_nodes___AAsNotnullExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[4] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[4])(fra.me.REG[4]);
   fra.me.REG[4] = CALL_metamodel___static_type___MMType___as_notnull(fra.me.REG[4])(fra.me.REG[4]);
   ATTR_syntax___typing___AExpr____stype(fra.me.REG[0]) = fra.me.REG[4];
-  /* syntax/typing.nit:2113 */
+  /* syntax/typing.nit:2123 */
   REGB0 = TAG_Bool(1);
   ATTR_syntax___typing___AExpr____is_typed(fra.me.REG[0]) = REGB0;
   label1: while(0);
@@ -13563,7 +13627,7 @@ void syntax___typing___AProxyExpr___after_typing(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 2118;
+  fra.me.line = 2128;
   fra.me.meth = LOCATE_syntax___typing___AProxyExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -13572,31 +13636,31 @@ void syntax___typing___AProxyExpr___after_typing(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:2120 */
+  /* syntax/typing.nit:2130 */
   fra.me.REG[1] = CALL_parser___parser_nodes___AProxyExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = CALL_syntax___syntax_base___AExpr___is_typed(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
     goto label1;
   }
-  /* syntax/typing.nit:2121 */
+  /* syntax/typing.nit:2131 */
   REGB0 = TAG_Bool(1);
   ATTR_syntax___typing___AExpr____is_typed(fra.me.REG[0]) = REGB0;
-  /* syntax/typing.nit:2122 */
+  /* syntax/typing.nit:2132 */
   fra.me.REG[1] = CALL_parser___parser_nodes___AProxyExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = CALL_syntax___syntax_base___AExpr___is_statement(fra.me.REG[1])(fra.me.REG[1]);
   if (UNTAG_Bool(REGB0)) {
     goto label1;
   }
-  /* syntax/typing.nit:2123 */
+  /* syntax/typing.nit:2133 */
   fra.me.REG[1] = CALL_parser___parser_nodes___AProxyExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[1] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[1])(fra.me.REG[1]);
   ATTR_syntax___typing___AExpr____stype(fra.me.REG[0]) = fra.me.REG[1];
-  /* syntax/typing.nit:2124 */
+  /* syntax/typing.nit:2134 */
   fra.me.REG[1] = CALL_parser___parser_nodes___AProxyExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[1] = ATTR_syntax___typing___AExpr____if_true_flow_ctx(fra.me.REG[1]);
   ATTR_syntax___typing___AExpr____if_true_flow_ctx(fra.me.REG[0]) = fra.me.REG[1];
-  /* syntax/typing.nit:2125 */
+  /* syntax/typing.nit:2135 */
   fra.me.REG[1] = CALL_parser___parser_nodes___AProxyExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[1] = ATTR_syntax___typing___AExpr____if_false_flow_ctx(fra.me.REG[1]);
   ATTR_syntax___typing___AExpr____if_false_flow_ctx(fra.me.REG[0]) = fra.me.REG[1];
@@ -13611,14 +13675,14 @@ val_t syntax___typing___AProxyExpr___is_self(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 2128;
+  fra.me.line = 2138;
   fra.me.meth = LOCATE_syntax___typing___AProxyExpr___is_self;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:2128 */
+  /* syntax/typing.nit:2138 */
   fra.me.REG[0] = CALL_parser___parser_nodes___AProxyExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = CALL_syntax___typing___AExpr___is_self(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -13632,14 +13696,14 @@ val_t syntax___typing___AProxyExpr___its_variable(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 2130;
+  fra.me.line = 2140;
   fra.me.meth = LOCATE_syntax___typing___AProxyExpr___its_variable;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/typing.nit:2130 */
+  /* syntax/typing.nit:2140 */
   fra.me.REG[0] = CALL_parser___parser_nodes___AProxyExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_syntax___typing___AExpr___its_variable(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -13657,7 +13721,7 @@ void syntax___typing___AOnceExpr___accept_typing(val_t p0, val_t p1){
     static val_t once_value_1; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 2134;
+  fra.me.line = 2144;
   fra.me.meth = LOCATE_syntax___typing___AOnceExpr___accept_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
@@ -13669,10 +13733,10 @@ void syntax___typing___AOnceExpr___accept_typing(val_t p0, val_t p1){
   fra.me.REG[4] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:2134 */
+  /* syntax/typing.nit:2144 */
   fra.me.REG[2] = fra.me.REG[0];
   fra.me.REG[3] = fra.me.REG[1];
-  /* syntax/typing.nit:2136 */
+  /* syntax/typing.nit:2146 */
   REGB0 = CALL_syntax___typing___TypingVisitor___once_count(fra.me.REG[3])(fra.me.REG[3]);
   REGB1 = TAG_Int(0);
   REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
@@ -13682,9 +13746,9 @@ void syntax___typing___AOnceExpr___accept_typing(val_t p0, val_t p1){
   }
   /* ../lib/standard/kernel.nit:237 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)>UNTAG_Int(REGB1));
-  /* syntax/typing.nit:2136 */
+  /* syntax/typing.nit:2146 */
   if (UNTAG_Bool(REGB1)) {
-    /* syntax/typing.nit:2137 */
+    /* syntax/typing.nit:2147 */
     if (!once_value_1) {
       fra.me.REG[4] = BOX_NativeString("Useless once in a once expression.");
       REGB1 = TAG_Int(34);
@@ -13695,21 +13759,21 @@ void syntax___typing___AOnceExpr___accept_typing(val_t p0, val_t p1){
     fra.me.REG[4] = fra.me.REG[4];
     CALL_syntax___syntax_base___AbsSyntaxVisitor___warning(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[2], fra.me.REG[4]);
   }
-  /* syntax/typing.nit:2139 */
+  /* syntax/typing.nit:2149 */
   REGB1 = CALL_syntax___typing___TypingVisitor___once_count(fra.me.REG[3])(fra.me.REG[3]);
   REGB0 = TAG_Int(1);
   /* ../lib/standard/kernel.nit:238 */
   REGB0 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB0));
-  /* syntax/typing.nit:2139 */
+  /* syntax/typing.nit:2149 */
   CALL_syntax___typing___TypingVisitor___once_count__eq(fra.me.REG[3])(fra.me.REG[3], REGB0);
-  /* syntax/typing.nit:2141 */
+  /* syntax/typing.nit:2151 */
   CALL_SUPER_syntax___typing___AOnceExpr___accept_typing(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* syntax/typing.nit:2143 */
+  /* syntax/typing.nit:2153 */
   REGB0 = CALL_syntax___typing___TypingVisitor___once_count(fra.me.REG[3])(fra.me.REG[3]);
   REGB1 = TAG_Int(1);
   /* ../lib/standard/kernel.nit:240 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB1));
-  /* syntax/typing.nit:2143 */
+  /* syntax/typing.nit:2153 */
   CALL_syntax___typing___TypingVisitor___once_count__eq(fra.me.REG[3])(fra.me.REG[3], REGB1);
   stack_frame_head = fra.me.prev;
   return;
@@ -13725,7 +13789,7 @@ void syntax___typing___ADebugTypeExpr___after_typing(val_t p0, val_t p1){
     static val_t once_value_4; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___typing;
-  fra.me.line = 2148;
+  fra.me.line = 2158;
   fra.me.meth = LOCATE_syntax___typing___ADebugTypeExpr___after_typing;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
@@ -13738,27 +13802,27 @@ void syntax___typing___ADebugTypeExpr___after_typing(val_t p0, val_t p1){
   fra.me.REG[5] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/typing.nit:2150 */
+  /* syntax/typing.nit:2160 */
   fra.me.REG[2] = CALL_parser___parser_nodes___ADebugTypeExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = CALL_syntax___syntax_base___AbsSyntaxVisitor___check_expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
     goto label1;
   }
-  /* syntax/typing.nit:2151 */
+  /* syntax/typing.nit:2161 */
   fra.me.REG[2] = CALL_parser___parser_nodes___ADebugTypeExpr___n_type(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = CALL_syntax___syntax_base___AType___is_typed(fra.me.REG[2])(fra.me.REG[2]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
     goto label1;
   }
-  /* syntax/typing.nit:2152 */
+  /* syntax/typing.nit:2162 */
   fra.me.REG[2] = CALL_parser___parser_nodes___ADebugTypeExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[2] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[2])(fra.me.REG[2]);
-  /* syntax/typing.nit:2153 */
+  /* syntax/typing.nit:2163 */
   fra.me.REG[3] = CALL_parser___parser_nodes___ADebugTypeExpr___n_type(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[3] = CALL_syntax___syntax_base___AType___stype(fra.me.REG[3])(fra.me.REG[3]);
-  /* syntax/typing.nit:2154 */
+  /* syntax/typing.nit:2164 */
   REGB0 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[2],fra.me.REG[3]));
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -13767,7 +13831,7 @@ void syntax___typing___ADebugTypeExpr___after_typing(val_t p0, val_t p1){
   }
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/typing.nit:2155 */
+    /* syntax/typing.nit:2165 */
     REGB0 = TAG_Int(5);
     fra.me.REG[4] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
     if (!once_value_2) {

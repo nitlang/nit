@@ -4,6 +4,7 @@
 #include "standard___collection._sep.h"
 #include <nit_common.h>
 #include "string._nitni.h"
+#include "standard___string._ffi.h"
 
 extern const classtable_elt_t VFT_standard___string___AbstractString[];
 
@@ -33,56 +34,68 @@ extern const int SFT_standard___string[];
 #define CALL_standard___string___AbstractString___to_f(recv) ((standard___string___AbstractString___to_f_t)CALL((recv), (SFT_standard___string[3] + 8)))
 #define CALL_standard___string___AbstractString___to_hex(recv) ((standard___string___AbstractString___to_hex_t)CALL((recv), (SFT_standard___string[3] + 9)))
 #define CALL_standard___string___AbstractString___a_to(recv) ((standard___string___AbstractString___a_to_t)CALL((recv), (SFT_standard___string[3] + 10)))
-#define CALL_standard___string___AbstractString___to_upper(recv) ((standard___string___AbstractString___to_upper_t)CALL((recv), (SFT_standard___string[3] + 11)))
-#define CALL_standard___string___AbstractString___to_lower(recv) ((standard___string___AbstractString___to_lower_t)CALL((recv), (SFT_standard___string[3] + 12)))
+#define CALL_standard___string___AbstractString___is_numeric(recv) ((standard___string___AbstractString___is_numeric_t)CALL((recv), (SFT_standard___string[3] + 11)))
+#define CALL_standard___string___AbstractString___to_upper(recv) ((standard___string___AbstractString___to_upper_t)CALL((recv), (SFT_standard___string[3] + 12)))
+#define CALL_standard___string___AbstractString___to_lower(recv) ((standard___string___AbstractString___to_lower_t)CALL((recv), (SFT_standard___string[3] + 13)))
+#define CALL_standard___string___AbstractString___trim(recv) ((standard___string___AbstractString___trim_t)CALL((recv), (SFT_standard___string[3] + 14)))
 #define ID_standard___string___String (SFT_standard___string[4])
 #define COLOR_standard___string___String (SFT_standard___string[5])
-#define INIT_TABLE_POS_standard___string___String (SFT_standard___string[6] + 0)
-#define CALL_standard___string___String___with_native(recv) ((standard___string___String___with_native_t)CALL((recv), (SFT_standard___string[6] + 1)))
-#define CALL_standard___string___String___from_cstring(recv) ((standard___string___String___from_cstring_t)CALL((recv), (SFT_standard___string[6] + 2)))
-#define CALL_standard___string___String___to_cstring(recv) ((standard___string___String___to_cstring_t)CALL((recv), (SFT_standard___string[6] + 3)))
-#define CALL_standard___string___String_____plus(recv) ((standard___string___String_____plus_t)CALL((recv), (SFT_standard___string[6] + 4)))
-#define CALL_standard___string___String_____star(recv) ((standard___string___String_____star_t)CALL((recv), (SFT_standard___string[6] + 5)))
-#define ID_standard___string___Buffer (SFT_standard___string[7])
-#define COLOR_standard___string___Buffer (SFT_standard___string[8])
-#define ATTR_standard___string___Buffer____capacity(recv) ATTR(recv, (SFT_standard___string[9] + 0))
-#define INIT_TABLE_POS_standard___string___Buffer (SFT_standard___string[10] + 0)
-#define CALL_SUPER_standard___string___Buffer___append(recv) ((standard___string___Buffer___append_t)CALL((recv), (SFT_standard___string[10] + 1)))
-#define CALL_standard___string___Buffer___init(recv) ((standard___string___Buffer___init_t)CALL((recv), (SFT_standard___string[10] + 2)))
-#define CALL_standard___string___Buffer___from(recv) ((standard___string___Buffer___from_t)CALL((recv), (SFT_standard___string[10] + 3)))
-#define CALL_standard___string___Buffer___with_capacity(recv) ((standard___string___Buffer___with_capacity_t)CALL((recv), (SFT_standard___string[10] + 4)))
-#define CALL_standard___string___Buffer___capacity(recv) ((standard___string___Buffer___capacity_t)CALL((recv), (SFT_standard___string[10] + 5)))
-#define CALL_standard___string___Object___to_s(recv) ((standard___string___Object___to_s_t)CALL((recv), (SFT_standard___string[11] + 0)))
-#define CALL_standard___string___Object___native_class_name(recv) ((standard___string___Object___native_class_name_t)CALL((recv), (SFT_standard___string[11] + 1)))
-#define CALL_standard___string___Object___class_name(recv) ((standard___string___Object___class_name_t)CALL((recv), (SFT_standard___string[11] + 2)))
-#define CALL_standard___string___Object___inspect(recv) ((standard___string___Object___inspect_t)CALL((recv), (SFT_standard___string[11] + 3)))
-#define CALL_standard___string___Object___inspect_head(recv) ((standard___string___Object___inspect_head_t)CALL((recv), (SFT_standard___string[11] + 4)))
-#define CALL_standard___string___Object___args(recv) ((standard___string___Object___args_t)CALL((recv), (SFT_standard___string[11] + 5)))
-#define CALL_standard___string___Int___fill_buffer(recv) ((standard___string___Int___fill_buffer_t)CALL((recv), (SFT_standard___string[12] + 0)))
-#define CALL_standard___string___Int___to_hex(recv) ((standard___string___Int___to_hex_t)CALL((recv), (SFT_standard___string[12] + 1)))
-#define CALL_standard___string___Int___to_base(recv) ((standard___string___Int___to_base_t)CALL((recv), (SFT_standard___string[12] + 2)))
-#define CALL_standard___string___Float___to_precision(recv) ((standard___string___Float___to_precision_t)CALL((recv), (SFT_standard___string[13] + 0)))
-#define CALL_standard___string___Collection___join(recv) ((standard___string___Collection___join_t)CALL((recv), (SFT_standard___string[14] + 0)))
-#define CALL_standard___string___Map___join(recv) ((standard___string___Map___join_t)CALL((recv), (SFT_standard___string[15] + 0)))
-#define ID_standard___string___NativeString (SFT_standard___string[16])
-#define COLOR_standard___string___NativeString (SFT_standard___string[17])
-#define INIT_TABLE_POS_standard___string___NativeString (SFT_standard___string[18] + 0)
-#define CALL_standard___string___NativeString_____bra(recv) ((standard___string___NativeString_____bra_t)CALL((recv), (SFT_standard___string[18] + 1)))
-#define CALL_standard___string___NativeString_____braeq(recv) ((standard___string___NativeString_____braeq_t)CALL((recv), (SFT_standard___string[18] + 2)))
-#define CALL_standard___string___NativeString___copy_to(recv) ((standard___string___NativeString___copy_to_t)CALL((recv), (SFT_standard___string[18] + 3)))
-#define CALL_standard___string___NativeString___cstring_length(recv) ((standard___string___NativeString___cstring_length_t)CALL((recv), (SFT_standard___string[18] + 4)))
-#define CALL_standard___string___NativeString___atoi(recv) ((standard___string___NativeString___atoi_t)CALL((recv), (SFT_standard___string[18] + 5)))
-#define CALL_standard___string___NativeString___atof(recv) ((standard___string___NativeString___atof_t)CALL((recv), (SFT_standard___string[18] + 6)))
-#define CALL_standard___string___NativeString___init(recv) ((standard___string___NativeString___init_t)CALL((recv), (SFT_standard___string[18] + 7)))
-#define ID_standard___string___StringCapable (SFT_standard___string[19])
-#define COLOR_standard___string___StringCapable (SFT_standard___string[20])
-#define INIT_TABLE_POS_standard___string___StringCapable (SFT_standard___string[21] + 0)
-#define CALL_standard___string___StringCapable___calloc_string(recv) ((standard___string___StringCapable___calloc_string_t)CALL((recv), (SFT_standard___string[21] + 1)))
-#define ATTR_standard___string___Sys____args_cache(recv) ATTR(recv, (SFT_standard___string[22] + 0))
-#define CALL_standard___string___Sys___program_name(recv) ((standard___string___Sys___program_name_t)CALL((recv), (SFT_standard___string[23] + 0)))
-#define CALL_standard___string___Sys___init_args(recv) ((standard___string___Sys___init_args_t)CALL((recv), (SFT_standard___string[23] + 1)))
-#define CALL_standard___string___Sys___native_argc(recv) ((standard___string___Sys___native_argc_t)CALL((recv), (SFT_standard___string[23] + 2)))
-#define CALL_standard___string___Sys___native_argv(recv) ((standard___string___Sys___native_argv_t)CALL((recv), (SFT_standard___string[23] + 3)))
+#define ATTR_standard___string___String____index_from(recv) ATTR(recv, (SFT_standard___string[6] + 0))
+#define ATTR_standard___string___String____index_to(recv) ATTR(recv, (SFT_standard___string[6] + 1))
+#define INIT_TABLE_POS_standard___string___String (SFT_standard___string[7] + 0)
+#define CALL_standard___string___String___index_from(recv) ((standard___string___String___index_from_t)CALL((recv), (SFT_standard___string[7] + 1)))
+#define CALL_standard___string___String___index_to(recv) ((standard___string___String___index_to_t)CALL((recv), (SFT_standard___string[7] + 2)))
+#define CALL_standard___string___String___from_substring(recv) ((standard___string___String___from_substring_t)CALL((recv), (SFT_standard___string[7] + 3)))
+#define CALL_standard___string___String___with_native(recv) ((standard___string___String___with_native_t)CALL((recv), (SFT_standard___string[7] + 4)))
+#define CALL_standard___string___String___from_cstring(recv) ((standard___string___String___from_cstring_t)CALL((recv), (SFT_standard___string[7] + 5)))
+#define CALL_standard___string___String___copy_from_native(recv) ((standard___string___String___copy_from_native_t)CALL((recv), (SFT_standard___string[7] + 6)))
+#define CALL_standard___string___String___to_cstring(recv) ((standard___string___String___to_cstring_t)CALL((recv), (SFT_standard___string[7] + 7)))
+#define CALL_standard___string___String_____plus(recv) ((standard___string___String_____plus_t)CALL((recv), (SFT_standard___string[7] + 8)))
+#define CALL_standard___string___String_____star(recv) ((standard___string___String_____star_t)CALL((recv), (SFT_standard___string[7] + 9)))
+#define ID_standard___string___Buffer (SFT_standard___string[8])
+#define COLOR_standard___string___Buffer (SFT_standard___string[9])
+#define ATTR_standard___string___Buffer____capacity(recv) ATTR(recv, (SFT_standard___string[10] + 0))
+#define INIT_TABLE_POS_standard___string___Buffer (SFT_standard___string[11] + 0)
+#define CALL_SUPER_standard___string___Buffer___append(recv) ((standard___string___Buffer___append_t)CALL((recv), (SFT_standard___string[11] + 1)))
+#define CALL_standard___string___Buffer___init(recv) ((standard___string___Buffer___init_t)CALL((recv), (SFT_standard___string[11] + 2)))
+#define CALL_standard___string___Buffer___from(recv) ((standard___string___Buffer___from_t)CALL((recv), (SFT_standard___string[11] + 3)))
+#define CALL_standard___string___Buffer___with_capacity(recv) ((standard___string___Buffer___with_capacity_t)CALL((recv), (SFT_standard___string[11] + 4)))
+#define CALL_standard___string___Buffer___capacity(recv) ((standard___string___Buffer___capacity_t)CALL((recv), (SFT_standard___string[11] + 5)))
+#define CALL_standard___string___Object___to_s(recv) ((standard___string___Object___to_s_t)CALL((recv), (SFT_standard___string[12] + 0)))
+#define CALL_standard___string___Object___native_class_name(recv) ((standard___string___Object___native_class_name_t)CALL((recv), (SFT_standard___string[12] + 1)))
+#define CALL_standard___string___Object___class_name(recv) ((standard___string___Object___class_name_t)CALL((recv), (SFT_standard___string[12] + 2)))
+#define CALL_standard___string___Object___inspect(recv) ((standard___string___Object___inspect_t)CALL((recv), (SFT_standard___string[12] + 3)))
+#define CALL_standard___string___Object___inspect_head(recv) ((standard___string___Object___inspect_head_t)CALL((recv), (SFT_standard___string[12] + 4)))
+#define CALL_standard___string___Object___args(recv) ((standard___string___Object___args_t)CALL((recv), (SFT_standard___string[12] + 5)))
+#define CALL_standard___string___Int___fill_buffer(recv) ((standard___string___Int___fill_buffer_t)CALL((recv), (SFT_standard___string[13] + 0)))
+#define CALL_standard___string___Int___to_hex(recv) ((standard___string___Int___to_hex_t)CALL((recv), (SFT_standard___string[13] + 1)))
+#define CALL_standard___string___Int___to_base(recv) ((standard___string___Int___to_base_t)CALL((recv), (SFT_standard___string[13] + 2)))
+#define CALL_standard___string___Float___to_precision(recv) ((standard___string___Float___to_precision_t)CALL((recv), (SFT_standard___string[14] + 0)))
+#define CALL_standard___string___Float___to_precision_native(recv) ((standard___string___Float___to_precision_native_t)CALL((recv), (SFT_standard___string[14] + 1)))
+#define CALL_standard___string___Char___is_numeric(recv) ((standard___string___Char___is_numeric_t)CALL((recv), (SFT_standard___string[15] + 0)))
+#define CALL_standard___string___Char___is_alpha(recv) ((standard___string___Char___is_alpha_t)CALL((recv), (SFT_standard___string[15] + 1)))
+#define CALL_standard___string___Char___is_alphanumeric(recv) ((standard___string___Char___is_alphanumeric_t)CALL((recv), (SFT_standard___string[15] + 2)))
+#define CALL_standard___string___Collection___join(recv) ((standard___string___Collection___join_t)CALL((recv), (SFT_standard___string[16] + 0)))
+#define CALL_standard___string___Map___join(recv) ((standard___string___Map___join_t)CALL((recv), (SFT_standard___string[17] + 0)))
+#define ID_standard___string___NativeString (SFT_standard___string[18])
+#define COLOR_standard___string___NativeString (SFT_standard___string[19])
+#define INIT_TABLE_POS_standard___string___NativeString (SFT_standard___string[20] + 0)
+#define CALL_standard___string___NativeString_____bra(recv) ((standard___string___NativeString_____bra_t)CALL((recv), (SFT_standard___string[20] + 1)))
+#define CALL_standard___string___NativeString_____braeq(recv) ((standard___string___NativeString_____braeq_t)CALL((recv), (SFT_standard___string[20] + 2)))
+#define CALL_standard___string___NativeString___copy_to(recv) ((standard___string___NativeString___copy_to_t)CALL((recv), (SFT_standard___string[20] + 3)))
+#define CALL_standard___string___NativeString___cstring_length(recv) ((standard___string___NativeString___cstring_length_t)CALL((recv), (SFT_standard___string[20] + 4)))
+#define CALL_standard___string___NativeString___atoi(recv) ((standard___string___NativeString___atoi_t)CALL((recv), (SFT_standard___string[20] + 5)))
+#define CALL_standard___string___NativeString___atof(recv) ((standard___string___NativeString___atof_t)CALL((recv), (SFT_standard___string[20] + 6)))
+#define CALL_standard___string___NativeString___init(recv) ((standard___string___NativeString___init_t)CALL((recv), (SFT_standard___string[20] + 7)))
+#define ID_standard___string___StringCapable (SFT_standard___string[21])
+#define COLOR_standard___string___StringCapable (SFT_standard___string[22])
+#define INIT_TABLE_POS_standard___string___StringCapable (SFT_standard___string[23] + 0)
+#define CALL_standard___string___StringCapable___calloc_string(recv) ((standard___string___StringCapable___calloc_string_t)CALL((recv), (SFT_standard___string[23] + 1)))
+#define ATTR_standard___string___Sys____args_cache(recv) ATTR(recv, (SFT_standard___string[24] + 0))
+#define CALL_standard___string___Sys___program_name(recv) ((standard___string___Sys___program_name_t)CALL((recv), (SFT_standard___string[25] + 0)))
+#define CALL_standard___string___Sys___init_args(recv) ((standard___string___Sys___init_args_t)CALL((recv), (SFT_standard___string[25] + 1)))
+#define CALL_standard___string___Sys___native_argc(recv) ((standard___string___Sys___native_argc_t)CALL((recv), (SFT_standard___string[25] + 2)))
+#define CALL_standard___string___Sys___native_argv(recv) ((standard___string___Sys___native_argv_t)CALL((recv), (SFT_standard___string[25] + 3)))
 val_t standard___string___AbstractString___items(val_t p0);
 typedef val_t (*standard___string___AbstractString___items_t)(val_t p0);
 val_t standard___string___AbstractString_____bra(val_t p0, val_t p1);
@@ -108,6 +121,11 @@ typedef val_t (*standard___string___AbstractString___a_to_t)(val_t p0, val_t p1)
   typedef void (*CLOS_OC_standard___string___AbstractString___a_to_1_0)(struct stack_frame_t *);
   void OC_standard___string___AbstractString___a_to_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
   typedef void (*OC_standard___string___AbstractString___a_to_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+val_t standard___string___AbstractString___is_numeric(val_t p0);
+typedef val_t (*standard___string___AbstractString___is_numeric_t)(val_t p0);
+  typedef void (*CLOS_OC_standard___string___AbstractString___is_numeric_1_0)(struct stack_frame_t *);
+  void OC_standard___string___AbstractString___is_numeric_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+  typedef void (*OC_standard___string___AbstractString___is_numeric_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
 val_t standard___string___AbstractString___to_upper(val_t p0);
 typedef val_t (*standard___string___AbstractString___to_upper_t)(val_t p0);
   typedef void (*CLOS_OC_standard___string___AbstractString___to_upper_1_0)(struct stack_frame_t *);
@@ -118,15 +136,43 @@ typedef val_t (*standard___string___AbstractString___to_lower_t)(val_t p0);
   typedef void (*CLOS_OC_standard___string___AbstractString___to_lower_1_0)(struct stack_frame_t *);
   void OC_standard___string___AbstractString___to_lower_1(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
   typedef void (*OC_standard___string___AbstractString___to_lower_1_t)(struct stack_frame_t *closctx, val_t p0, struct stack_frame_t *closctx_param, fun_t clos_fun0);
+val_t standard___string___AbstractString___trim(val_t p0);
+typedef val_t (*standard___string___AbstractString___trim_t)(val_t p0);
 void standard___string___AbstractString___output(val_t p0);
 typedef void (*standard___string___AbstractString___output_t)(val_t p0);
 val_t NEW_AbstractString_standard___collection___array___AbstractArrayRead___init();
+val_t standard___string___String___index_from(val_t p0);
+typedef val_t (*standard___string___String___index_from_t)(val_t p0);
+val_t standard___string___String___index_to(val_t p0);
+typedef val_t (*standard___string___String___index_to_t)(val_t p0);
+val_t standard___string___String_____bra(val_t p0, val_t p1);
+typedef val_t (*standard___string___String_____bra_t)(val_t p0, val_t p1);
+val_t standard___string___String___substring(val_t p0, val_t p1, val_t p2);
+typedef val_t (*standard___string___String___substring_t)(val_t p0, val_t p1, val_t p2);
+val_t standard___string___String___substring_from(val_t p0, val_t p1);
+typedef val_t (*standard___string___String___substring_from_t)(val_t p0, val_t p1);
+val_t standard___string___String___has_substring(val_t p0, val_t p1, val_t p2);
+typedef val_t (*standard___string___String___has_substring_t)(val_t p0, val_t p1, val_t p2);
+val_t standard___string___String___to_upper(val_t p0);
+typedef val_t (*standard___string___String___to_upper_t)(val_t p0);
+val_t standard___string___String___to_lower(val_t p0);
+typedef val_t (*standard___string___String___to_lower_t)(val_t p0);
+val_t standard___string___String___trim(val_t p0);
+typedef val_t (*standard___string___String___trim_t)(val_t p0);
+void standard___string___String___output(val_t p0);
+typedef void (*standard___string___String___output_t)(val_t p0);
+void standard___string___String___from_substring(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
+typedef void (*standard___string___String___from_substring_t)(val_t p0, val_t p1, val_t p2, val_t p3, int* init_table);
+val_t NEW_String_standard___string___String___from_substring(val_t p0, val_t p1, val_t p2);
 void standard___string___String___with_native(val_t p0, val_t p1, val_t p2, int* init_table);
 typedef void (*standard___string___String___with_native_t)(val_t p0, val_t p1, val_t p2, int* init_table);
 val_t NEW_String_standard___string___String___with_native(val_t p0, val_t p1);
 void standard___string___String___from_cstring(val_t p0, val_t p1, int* init_table);
 typedef void (*standard___string___String___from_cstring_t)(val_t p0, val_t p1, int* init_table);
 val_t NEW_String_standard___string___String___from_cstring(val_t p0);
+void standard___string___String___copy_from_native(val_t p0, val_t p1, int* init_table);
+typedef void (*standard___string___String___copy_from_native_t)(val_t p0, val_t p1, int* init_table);
+val_t NEW_String_standard___string___String___copy_from_native(val_t p0);
 val_t standard___string___String___to_cstring(val_t p0);
 typedef val_t (*standard___string___String___to_cstring_t)(val_t p0);
 val_t standard___string___String_____eqeq(val_t p0, val_t p1);
@@ -192,8 +238,16 @@ val_t standard___string___Float___to_s(val_t p0);
 typedef val_t (*standard___string___Float___to_s_t)(val_t p0);
 val_t standard___string___Float___to_precision(val_t p0, val_t p1);
 typedef val_t (*standard___string___Float___to_precision_t)(val_t p0, val_t p1);
+val_t standard___string___Float___to_precision_native(val_t p0, val_t p1);
+typedef val_t (*standard___string___Float___to_precision_native_t)(val_t p0, val_t p1);
 val_t standard___string___Char___to_s(val_t p0);
 typedef val_t (*standard___string___Char___to_s_t)(val_t p0);
+val_t standard___string___Char___is_numeric(val_t p0);
+typedef val_t (*standard___string___Char___is_numeric_t)(val_t p0);
+val_t standard___string___Char___is_alpha(val_t p0);
+typedef val_t (*standard___string___Char___is_alpha_t)(val_t p0);
+val_t standard___string___Char___is_alphanumeric(val_t p0);
+typedef val_t (*standard___string___Char___is_alphanumeric_t)(val_t p0);
 val_t standard___string___Collection___to_s(val_t p0);
 typedef val_t (*standard___string___Collection___to_s_t)(val_t p0);
   typedef void (*CLOS_OC_standard___string___Collection___to_s_1_0)(struct stack_frame_t *);
@@ -207,6 +261,7 @@ val_t NEW_Array_standard___collection___array___Array___with_capacity(val_t p0);
 val_t NEW_Array_standard___collection___array___Array___init();
 val_t NEW_Array_standard___collection___array___Array___filled_with(val_t p0, val_t p1);
 val_t NEW_Array_standard___collection___array___Array___with_items(val_t p0);
+val_t NEW_Array_standard___collection___array___Array___from(val_t p0);
 val_t NEW_Array_standard___collection___array___Array___with_native(val_t p0, val_t p1);
 val_t standard___string___Map___join(val_t p0, val_t p1, val_t p2);
 typedef val_t (*standard___string___Map___join_t)(val_t p0, val_t p1, val_t p2);

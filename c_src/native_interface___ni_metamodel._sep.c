@@ -945,7 +945,7 @@ val_t native_interface___ni_metamodel___MMMethod___friendly_cparams(val_t p0, va
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[1] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB0)];
       /* native_interface/ni_metamodel.nit:127 */
       REGB1 = TAG_Int(5);
@@ -1482,7 +1482,7 @@ val_t native_interface___ni_metamodel___MMMethod___cparams(val_t p0){
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB0)];
       /* native_interface/ni_metamodel.nit:198 */
       REGB1 = TAG_Int(3);

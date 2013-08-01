@@ -8,4 +8,7 @@
 #include <nit_common.h>
 extern const char LOCATE_standard___collection[];
 extern const int SFT_standard___collection[];
+#define CALL_standard___collection___Sequence___subarray(recv) ((standard___collection___Sequence___subarray_t)CALL((recv), (SFT_standard___collection[0] + 0)))
+val_t standard___collection___Sequence___subarray(val_t p0, val_t p1, val_t p2);
+typedef val_t (*standard___collection___Sequence___subarray_t)(val_t p0, val_t p1, val_t p2);
 #endif

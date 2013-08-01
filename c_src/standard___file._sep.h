@@ -198,6 +198,8 @@ val_t standard___file___String___files(val_t p0);
 typedef val_t (*standard___file___String___files_t)(val_t p0);
 val_t NEW_String_standard___string___String___from_cstring(val_t p0);
 val_t NEW_String_standard___string___String___with_native(val_t p0, val_t p1);
+val_t NEW_String_standard___string___String___from_substring(val_t p0, val_t p1, val_t p2);
+val_t NEW_String_standard___string___String___copy_from_native(val_t p0);
 val_t standard___file___NativeString___file_exists(val_t p0);
 typedef val_t (*standard___file___NativeString___file_exists_t)(val_t p0);
 val_t standard___file___NativeString___file_stat(val_t p0);

@@ -97,7 +97,7 @@ void syntax___mmbuilder___ToolContext___handle_property_conflict(val_t p0, val_t
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[7] = ((Nit_NativeArray)fra.me.REG[6])->val[UNTAG_Int(REGB0)];
       /* syntax/mmbuilder.nit:36 */
       fra.me.REG[7] = CALL_metamodel___abstractmetamodel___MMLocalProperty___local_class(fra.me.REG[7])(fra.me.REG[7]);
@@ -337,7 +337,7 @@ void syntax___mmbuilder___MMSrcModule___do_mmbuilder(val_t p0, val_t p1){
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[6] = ((Nit_NativeArray)fra.me.REG[5])->val[UNTAG_Int(REGB0)];
       /* syntax/mmbuilder.nit:99 */
       CALL_syntax___mmbuilder___MMLocalClass___accept_class_visitor(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[3]);
@@ -395,7 +395,7 @@ void syntax___mmbuilder___MMSrcModule___do_mmbuilder(val_t p0, val_t p1){
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[6] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB0)];
       /* syntax/mmbuilder.nit:107 */
       CALL_syntax___mmbuilder___MMLocalClass___accept_class_visitor(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[3]);
@@ -451,7 +451,7 @@ void syntax___mmbuilder___MMSrcModule___do_mmbuilder(val_t p0, val_t p1){
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[6] = ((Nit_NativeArray)fra.me.REG[5])->val[UNTAG_Int(REGB0)];
       /* syntax/mmbuilder.nit:115 */
       CALL_syntax___mmbuilder___MMLocalClass___accept_class_visitor(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[3]);
@@ -548,7 +548,7 @@ void syntax___mmbuilder___MMSrcModule___do_mmbuilder(val_t p0, val_t p1){
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[5] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB0)];
       /* syntax/mmbuilder.nit:129 */
       CALL_syntax___mmbuilder___MMLocalClass___accept_properties_visitor(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[0]);
@@ -951,7 +951,7 @@ void syntax___mmbuilder___MMSrcLocalClass___process_default_constructors(val_t p
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[7] = ((Nit_NativeArray)fra.me.REG[6])->val[UNTAG_Int(REGB0)];
       /* syntax/mmbuilder.nit:204 */
       fra.me.REG[8] = CALL_metamodel___abstractmetamodel___MMLocalClass___global(fra.me.REG[7])(fra.me.REG[7]);
@@ -1576,7 +1576,7 @@ void syntax___mmbuilder___MMImplicitInit___accept_property_visitor(val_t p0, val
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[6] = ((Nit_NativeArray)fra.me.REG[5])->val[UNTAG_Int(REGB0)];
       /* syntax/mmbuilder.nit:302 */
       fra.me.REG[7] = CALL_metamodel___static_type___MMLocalProperty___signature(fra.me.REG[6])(fra.me.REG[6]);
@@ -1770,7 +1770,7 @@ void syntax___mmbuilder___MMImplicitInit___accept_property_visitor(val_t p0, val
         if (UNTAG_Bool(REGB3)) {
           nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
         }
-        /* ../lib/standard/collection/array.nit:718 */
+        /* ../lib/standard/collection/array.nit:724 */
         fra.me.REG[5] = ((Nit_NativeArray)fra.me.REG[5])->val[UNTAG_Int(REGB1)];
         /* ../lib/standard/collection/array.nit:281 */
         goto label7;
@@ -1826,7 +1826,7 @@ void syntax___mmbuilder___MMImplicitInit___accept_property_visitor(val_t p0, val
       if (UNTAG_Bool(REGB2)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[4] = ((Nit_NativeArray)fra.me.REG[5])->val[UNTAG_Int(REGB0)];
       /* syntax/mmbuilder.nit:321 */
       fra.me.REG[7] = CALL_metamodel___static_type___MMLocalProperty___signature(fra.me.REG[4])(fra.me.REG[4]);
@@ -3916,7 +3916,7 @@ void syntax___mmbuilder___AClassdef___accept_class_verifier(val_t p0, val_t p1){
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[5] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB0)];
       /* syntax/mmbuilder.nit:625 */
       fra.me.REG[6] = CALL_metamodel___abstractmetamodel___MMLocalClass___global(fra.me.REG[5])(fra.me.REG[5]);
@@ -4595,7 +4595,7 @@ void syntax___mmbuilder___AStdClassdef___accept_class_verifier(val_t p0, val_t p
         if (UNTAG_Bool(REGB1)) {
           nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
         }
-        /* ../lib/standard/collection/array.nit:718 */
+        /* ../lib/standard/collection/array.nit:724 */
         fra.me.REG[5] = ((Nit_NativeArray)fra.me.REG[0])->val[UNTAG_Int(REGB0)];
         /* syntax/mmbuilder.nit:709 */
         fra.me.REG[6] = CALL_metamodel___abstractmetamodel___MMLocalClass___global(fra.me.REG[5])(fra.me.REG[5]);
@@ -6125,7 +6125,7 @@ void syntax___mmbuilder___APropdef___do_and_check_intro(val_t p0, val_t p1, val_
             if (UNTAG_Bool(REGB1)) {
               nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
             }
-            /* ../lib/standard/collection/array.nit:718 */
+            /* ../lib/standard/collection/array.nit:724 */
             fra.me.REG[0] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB0)];
             /* syntax/mmbuilder.nit:907 */
             fra.me.REG[3] = CALL_metamodel___static_type___MMLocalProperty___signature(fra.me.REG[2])(fra.me.REG[2]);
@@ -6222,7 +6222,7 @@ void syntax___mmbuilder___APropdef___inherit_signature(val_t p0, val_t p1, val_t
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[5] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB0)];
       /* syntax/mmbuilder.nit:917 */
       fra.me.REG[5] = CALL_metamodel___static_type___MMLocalProperty___signature(fra.me.REG[5])(fra.me.REG[5]);
@@ -6309,7 +6309,7 @@ void syntax___mmbuilder___APropdef___inherit_signature(val_t p0, val_t p1, val_t
             if (UNTAG_Bool(REGB2)) {
               nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
             }
-            /* ../lib/standard/collection/array.nit:718 */
+            /* ../lib/standard/collection/array.nit:724 */
             fra.me.REG[8] = ((Nit_NativeArray)fra.me.REG[7])->val[UNTAG_Int(REGB3)];
             /* syntax/mmbuilder.nit:924 */
             REGB2 = CALL_syntax___syntax_base___AParam___position(fra.me.REG[8])(fra.me.REG[8]);
@@ -6648,7 +6648,7 @@ void syntax___mmbuilder___APropdef___do_and_check_redef(val_t p0, val_t p1, val_
       if (UNTAG_Bool(REGB0)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[7] = ((Nit_NativeArray)fra.me.REG[6])->val[UNTAG_Int(REGB2)];
       /* syntax/mmbuilder.nit:957 */
       fra.me.REG[8] = CALL_metamodel___abstractmetamodel___MMLocalProperty___local_class(fra.me.REG[7])(fra.me.REG[7]);
@@ -6950,7 +6950,7 @@ void syntax___mmbuilder___APropdef___do_and_check_redef(val_t p0, val_t p1, val_
             if (UNTAG_Bool(REGB3)) {
               nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
             }
-            /* ../lib/standard/collection/array.nit:718 */
+            /* ../lib/standard/collection/array.nit:724 */
             fra.me.REG[11] = ((Nit_NativeArray)fra.me.REG[10])->val[UNTAG_Int(REGB0)];
             /* syntax/mmbuilder.nit:973 */
             REGB3 = CALL_syntax___syntax_base___AParam___position(fra.me.REG[11])(fra.me.REG[11]);
@@ -7030,7 +7030,7 @@ void syntax___mmbuilder___APropdef___do_and_check_redef(val_t p0, val_t p1, val_
             if (UNTAG_Bool(REGB4)) {
               nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
             }
-            /* ../lib/standard/collection/array.nit:718 */
+            /* ../lib/standard/collection/array.nit:724 */
             fra.me.REG[12] = ((Nit_NativeArray)fra.me.REG[12])->val[UNTAG_Int(REGB5)];
             /* ../lib/standard/collection/array.nit:281 */
             goto label24;
@@ -9847,7 +9847,7 @@ void syntax___mmbuilder___ASignature___accept_property_verifier(val_t p0, val_t 
             if (UNTAG_Bool(REGB1)) {
               nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
             }
-            /* ../lib/standard/collection/array.nit:718 */
+            /* ../lib/standard/collection/array.nit:724 */
             fra.me.REG[6] = ((Nit_NativeArray)fra.me.REG[5])->val[UNTAG_Int(REGB0)];
             /* syntax/mmbuilder.nit:1291 */
             fra.me.REG[7] = CALL_syntax___mmbuilder___AParam___stype(fra.me.REG[6])(fra.me.REG[6]);
@@ -9987,7 +9987,7 @@ void syntax___mmbuilder___ASignature___accept_property_verifier(val_t p0, val_t 
             if (UNTAG_Bool(REGB0)) {
               nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
             }
-            /* ../lib/standard/collection/array.nit:718 */
+            /* ../lib/standard/collection/array.nit:724 */
             fra.me.REG[0] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB1)];
             /* syntax/mmbuilder.nit:1306 */
             fra.me.REG[1] = CALL_syntax___mmbuilder___PropertyVerifierVisitor___signature_builder(fra.me.REG[3])(fra.me.REG[3]);
@@ -10357,7 +10357,7 @@ void syntax___mmbuilder___AParam___accept_property_verifier(val_t p0, val_t p1){
         if (UNTAG_Bool(REGB1)) {
           nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
         }
-        /* ../lib/standard/collection/array.nit:718 */
+        /* ../lib/standard/collection/array.nit:724 */
         fra.me.REG[5] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB0)];
         /* syntax/mmbuilder.nit:1345 */
         CALL_syntax___mmbuilder___AParam___stype__eq(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[0]);
@@ -10734,7 +10734,7 @@ void syntax___mmbuilder___AClosureDecl___accept_property_verifier(val_t p0, val_
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[7] = ((Nit_NativeArray)fra.me.REG[6])->val[UNTAG_Int(REGB0)];
       /* syntax/mmbuilder.nit:1393 */
       fra.me.REG[8] = CALL_parser___parser_nodes___AClosureDecl___n_id(fra.me.REG[7])(fra.me.REG[7]);

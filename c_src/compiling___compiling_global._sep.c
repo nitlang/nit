@@ -116,7 +116,7 @@ void compiling___compiling_global___Program___compile_tables_to_c(val_t p0, val_
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[5] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB0)];
       /* compiling/compiling_global.nit:38 */
       fra.me.REG[6] = CALL_program___Program___main_module(fra.me.REG[0])(fra.me.REG[0]);
@@ -622,7 +622,7 @@ void compiling___compiling_global___MMModule___compile_mod_to_c(val_t p0, val_t 
       if (UNTAG_Bool(REGB2)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[4] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB1)];
       /* compiling/compiling_global.nit:91 */
       fra.me.REG[5] = CALL_compiling___compiling_base___CompilerVisitor___program(fra.me.REG[1])(fra.me.REG[1]);
@@ -1092,7 +1092,7 @@ void compiling___compiling_global___MMModule___compile_local_table_to_c(val_t p0
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB0)];
       /* compiling/compiling_global.nit:130 */
       fra.me.REG[4] = CALL_compiling___compiling_base___CompilerVisitor___program(fra.me.REG[1])(fra.me.REG[1]);
@@ -1302,7 +1302,7 @@ void compiling___compiling_global___ModuleTableEltGroup___compile_macros(val_t p
       if (UNTAG_Bool(REGB2)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[4] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB1)];
       /* compiling/compiling_global.nit:160 */
       REGB2 = TAG_Int(5);
@@ -1610,7 +1610,7 @@ val_t compiling___compiling_global___TableEltSuper___compile_to_c(val_t p0, val_
       if (UNTAG_Bool(REGB2)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[5] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB1)];
       /* compiling/compiling_global.nit:195 */
       REGB2 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[5],fra.me.REG[1]));
@@ -2473,7 +2473,7 @@ val_t compiling___compiling_global___TableEltClassInitTable___compile_to_c(val_t
     if (UNTAG_Bool(REGB2)) {
       nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
     }
-    /* ../lib/standard/collection/array.nit:718 */
+    /* ../lib/standard/collection/array.nit:724 */
     fra.me.REG[5] = ((Nit_NativeArray)fra.me.REG[5])->val[UNTAG_Int(REGB1)];
     /* ../lib/standard/collection/array.nit:281 */
     goto label1;
@@ -3018,7 +3018,7 @@ val_t compiling___compiling_global___TableEltClassObjectSize___compile_to_c(val_
         if (UNTAG_Bool(REGB2)) {
           nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
         }
-        /* ../lib/standard/collection/array.nit:718 */
+        /* ../lib/standard/collection/array.nit:724 */
         fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB1)];
         /* compiling/compiling_global.nit:339 */
         REGB2 = TAG_Int(1);
@@ -3635,7 +3635,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[7] = ((Nit_NativeArray)fra.me.REG[6])->val[UNTAG_Int(REGB2)];
       /* compiling/compiling_global.nit:393 */
       REGB1 = TAG_Bool(fra.me.REG[7]==NIT_NULL);
@@ -3792,7 +3792,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
       if (UNTAG_Bool(REGB0)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[5] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB2)];
       /* compiling/compiling_global.nit:406 */
       REGB0 = TAG_Bool(fra.me.REG[5]==NIT_NULL);

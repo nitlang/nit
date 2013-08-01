@@ -874,6 +874,10 @@ redef class INative
 		else if c == once "Sys".to_symbol then
 			if n == once "force_garbage_collection".to_symbol then
 				s = "Nit_gc_force_garbage_collection()"
+			else if n == once "native_argc".to_symbol then
+				s = "TAG_Int(glob_argc)"
+			else if n == once "native_argv".to_symbol then
+				s = "BOX_NativeString(glob_argv[UNTAG_Int({regs[1]})])"
 			end
 		else if n == once "object_id".to_symbol then
 			s = "TAG_Int((bigint)((obj_t){regs[0]})[1].object_id)"

@@ -98,7 +98,7 @@ val_t syntax___scope___ScopeContext_____bra(val_t p0, val_t p1){
       if (UNTAG_Bool(REGB2)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[2] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB0)];
       /* ../lib/standard/collection/array.nit:281 */
       goto label1;
@@ -434,7 +434,7 @@ void syntax___scope___ScopeContext___push_escapable(val_t p0, val_t p1, val_t p2
         if (UNTAG_Bool(REGB2)) {
           nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
         }
-        /* ../lib/standard/collection/array.nit:718 */
+        /* ../lib/standard/collection/array.nit:724 */
         fra.me.REG[4] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB0)];
         /* ../lib/standard/collection/array.nit:281 */
         goto label1;
@@ -632,7 +632,7 @@ val_t syntax___scope___ScopeContext___head(val_t p0){
       if (UNTAG_Bool(REGB2)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[1] = ((Nit_NativeArray)fra.me.REG[1])->val[UNTAG_Int(REGB0)];
       /* ../lib/standard/collection/array.nit:281 */
       goto label1;
@@ -774,7 +774,7 @@ val_t syntax___scope___ScopeContext___get_by_label(val_t p0, val_t p1){
       if (UNTAG_Bool(REGB2)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB0)];
       /* ../lib/standard/collection/array.nit:281 */
       goto label1;

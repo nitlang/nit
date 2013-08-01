@@ -1320,7 +1320,7 @@ val_t opts___OptionEnum___value_name(val_t p0){
   if (UNTAG_Bool(REGB1)) {
     nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
   }
-  /* ../lib/standard/collection/array.nit:718 */
+  /* ../lib/standard/collection/array.nit:724 */
   fra.me.REG[1] = ((Nit_NativeArray)fra.me.REG[1])->val[UNTAG_Int(REGB0)];
   /* ../lib/standard/collection/array.nit:281 */
   goto label1;
@@ -1438,7 +1438,7 @@ val_t opts___OptionEnum___pretty_default(val_t p0){
     if (UNTAG_Bool(REGB1)) {
       nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
     }
-    /* ../lib/standard/collection/array.nit:718 */
+    /* ../lib/standard/collection/array.nit:724 */
     fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB0)];
     /* ../lib/standard/collection/array.nit:281 */
     goto label2;
@@ -1750,7 +1750,7 @@ void opts___OptionContext___usage(val_t p0){
       if (UNTAG_Bool(REGB2)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB1)];
       /* ../lib/opts.nit:240 */
       REGB2 = TAG_Int(3);
@@ -1790,7 +1790,7 @@ void opts___OptionContext___usage(val_t p0){
           if (UNTAG_Bool(REGB4)) {
             nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
           }
-          /* ../lib/standard/collection/array.nit:718 */
+          /* ../lib/standard/collection/array.nit:724 */
           fra.me.REG[5] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB3)];
           /* ../lib/standard/collection/array.nit:24 */
           REGB4 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[5])!=NIT_NULL);
@@ -1882,7 +1882,7 @@ void opts___OptionContext___usage(val_t p0){
       if (UNTAG_Bool(REGB2)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[4] = ((Nit_NativeArray)fra.me.REG[1])->val[UNTAG_Int(REGB1)];
       /* ../lib/opts.nit:248 */
       fra.me.REG[4] = CALL_opts___Option___pretty(fra.me.REG[4])(fra.me.REG[4], REGB0);
@@ -2197,7 +2197,7 @@ void opts___OptionContext___parse_intern(val_t p0, val_t p1){
       if (UNTAG_Bool(REGB2)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB0)];
       /* ../lib/opts.nit:301 */
       REGB2 = CALL_opts___Option___mandatory(fra.me.REG[3])(fra.me.REG[3]);
@@ -2327,7 +2327,7 @@ void opts___OptionContext___add_option(val_t p0, val_t p1){
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[0])->val[UNTAG_Int(REGB0)];
       /* ../lib/opts.nit:310 */
       REGB1 = TAG_Bool(ATTR_opts___OptionContext____options(fra.me.REG[2])!=NIT_NULL);
@@ -2449,7 +2449,7 @@ void opts___OptionContext___build(val_t p0){
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB0)];
       /* ../lib/opts.nit:325 */
       fra.me.REG[4] = CALL_opts___Option___names(fra.me.REG[3])(fra.me.REG[3]);
@@ -2487,7 +2487,7 @@ void opts___OptionContext___build(val_t p0){
           if (UNTAG_Bool(REGB2)) {
             nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
           }
-          /* ../lib/standard/collection/array.nit:718 */
+          /* ../lib/standard/collection/array.nit:724 */
           fra.me.REG[6] = ((Nit_NativeArray)fra.me.REG[5])->val[UNTAG_Int(REGB1)];
           /* ../lib/opts.nit:326 */
           REGB2 = TAG_Bool(ATTR_opts___OptionContext____optmap(fra.me.REG[0])!=NIT_NULL);
@@ -2597,7 +2597,7 @@ val_t opts___OptionContext___get_errors(val_t p0){
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB0)];
       /* ../lib/opts.nit:338 */
       fra.me.REG[3] = CALL_opts___Option___errors(fra.me.REG[3])(fra.me.REG[3]);
@@ -2635,7 +2635,7 @@ val_t opts___OptionContext___get_errors(val_t p0){
           if (UNTAG_Bool(REGB2)) {
             nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
           }
-          /* ../lib/standard/collection/array.nit:718 */
+          /* ../lib/standard/collection/array.nit:724 */
           fra.me.REG[5] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB1)];
           /* ../lib/opts.nit:339 */
           CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[5]);

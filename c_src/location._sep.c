@@ -123,6 +123,40 @@ void location___SourceFile___init(val_t p0, val_t p1, val_t p2, int* init_table)
   init_table[itpos0] = 1;
   return;
 }
+static const char LOCATE_location___SourceFile___from_string[] = "location::SourceFile::from_string";
+void location___SourceFile___from_string(val_t p0, val_t p1, val_t p2, int* init_table){
+  int itpos1 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_location___SourceFile].i;
+  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
+  val_t REGB0;
+  val_t REGB1;
+  val_t tmp;
+  if (init_table[itpos1]) return;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_location;
+  fra.me.line = 36;
+  fra.me.meth = LOCATE_location___SourceFile___from_string;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[2] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  fra.me.REG[1] = p1;
+  fra.me.REG[2] = p2;
+  /* location.nit:39 */
+  CALL_location___SourceFile___filename__eq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
+  /* location.nit:40 */
+  CALL_location___SourceFile___string__eq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
+  /* location.nit:41 */
+  fra.me.REG[0] = CALL_location___SourceFile___line_starts(fra.me.REG[0])(fra.me.REG[0]);
+  REGB0 = TAG_Int(0);
+  REGB1 = TAG_Int(0);
+  CALL_standard___collection___abstract_collection___Sequence_____braeq(fra.me.REG[0])(fra.me.REG[0], REGB0, REGB1);
+  stack_frame_head = fra.me.prev;
+  init_table[itpos1] = 1;
+  return;
+}
 static const char LOCATE_location___SourceFile___line_starts[] = "location::SourceFile::line_starts";
 val_t location___SourceFile___line_starts(val_t p0){
   struct {struct stack_frame_t me;} fra;
@@ -130,18 +164,18 @@ val_t location___SourceFile___line_starts(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_location;
-  fra.me.line = 36;
+  fra.me.line = 44;
   fra.me.meth = LOCATE_location___SourceFile___line_starts;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* location.nit:36 */
+  /* location.nit:44 */
   REGB0 = TAG_Bool(ATTR_location___SourceFile_____atline_starts(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "@line_starts", LOCATE_location, 36);
+    nit_abort("Uninitialized attribute %s", "@line_starts", LOCATE_location, 44);
   }
   fra.me.REG[0] = ATTR_location___SourceFile_____atline_starts(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -153,7 +187,7 @@ void location___SourceFile___line_starts__eq(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_location;
-  fra.me.line = 36;
+  fra.me.line = 44;
   fra.me.meth = LOCATE_location___SourceFile___line_starts__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -162,7 +196,7 @@ void location___SourceFile___line_starts__eq(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* location.nit:36 */
+  /* location.nit:44 */
   ATTR_location___SourceFile_____atline_starts(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;
@@ -173,14 +207,14 @@ val_t location___Location___file(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_location;
-  fra.me.line = 45;
+  fra.me.line = 53;
   fra.me.meth = LOCATE_location___Location___file;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* location.nit:45 */
+  /* location.nit:53 */
   fra.me.REG[0] = ATTR_location___Location____file(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -192,18 +226,18 @@ val_t location___Location___line_start(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_location;
-  fra.me.line = 46;
+  fra.me.line = 54;
   fra.me.meth = LOCATE_location___Location___line_start;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* location.nit:46 */
+  /* location.nit:54 */
   REGB0 = TAG_Bool(ATTR_location___Location____line_start(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_line_start", LOCATE_location, 46);
+    nit_abort("Uninitialized attribute %s", "_line_start", LOCATE_location, 54);
   }
   REGB0 = ATTR_location___Location____line_start(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -216,18 +250,18 @@ val_t location___Location___line_end(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_location;
-  fra.me.line = 47;
+  fra.me.line = 55;
   fra.me.meth = LOCATE_location___Location___line_end;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* location.nit:47 */
+  /* location.nit:55 */
   REGB0 = TAG_Bool(ATTR_location___Location____line_end(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_line_end", LOCATE_location, 47);
+    nit_abort("Uninitialized attribute %s", "_line_end", LOCATE_location, 55);
   }
   REGB0 = ATTR_location___Location____line_end(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -240,18 +274,18 @@ val_t location___Location___column_start(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_location;
-  fra.me.line = 48;
+  fra.me.line = 56;
   fra.me.meth = LOCATE_location___Location___column_start;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* location.nit:48 */
+  /* location.nit:56 */
   REGB0 = TAG_Bool(ATTR_location___Location____column_start(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_column_start", LOCATE_location, 48);
+    nit_abort("Uninitialized attribute %s", "_column_start", LOCATE_location, 56);
   }
   REGB0 = ATTR_location___Location____column_start(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -264,18 +298,18 @@ val_t location___Location___column_end(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_location;
-  fra.me.line = 49;
+  fra.me.line = 57;
   fra.me.meth = LOCATE_location___Location___column_end;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* location.nit:49 */
+  /* location.nit:57 */
   REGB0 = TAG_Bool(ATTR_location___Location____column_end(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_column_end", LOCATE_location, 49);
+    nit_abort("Uninitialized attribute %s", "_column_end", LOCATE_location, 57);
   }
   REGB0 = ATTR_location___Location____column_end(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -283,17 +317,17 @@ val_t location___Location___column_end(val_t p0){
 }
 static const char LOCATE_location___Location___init[] = "location::Location::init";
 void location___Location___init(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, int* init_table){
-  int itpos1 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_location___Location].i;
+  int itpos2 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_location___Location].i;
   struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
   val_t REGB0;
   val_t REGB1;
   val_t REGB2;
   val_t REGB3;
   val_t tmp;
-  if (init_table[itpos1]) return;
+  if (init_table[itpos2]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_location;
-  fra.me.line = 51;
+  fra.me.line = 59;
   fra.me.meth = LOCATE_location___Location___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -306,18 +340,18 @@ void location___Location___init(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4
   REGB1 = p3;
   REGB2 = p4;
   REGB3 = p5;
-  /* location.nit:52 */
+  /* location.nit:60 */
   ATTR_location___Location____file(fra.me.REG[0]) = fra.me.REG[1];
-  /* location.nit:53 */
+  /* location.nit:61 */
   ATTR_location___Location____line_start(fra.me.REG[0]) = REGB0;
-  /* location.nit:54 */
+  /* location.nit:62 */
   ATTR_location___Location____line_end(fra.me.REG[0]) = REGB1;
-  /* location.nit:55 */
+  /* location.nit:63 */
   ATTR_location___Location____column_start(fra.me.REG[0]) = REGB2;
-  /* location.nit:56 */
+  /* location.nit:64 */
   ATTR_location___Location____column_end(fra.me.REG[0]) = REGB3;
   stack_frame_head = fra.me.prev;
-  init_table[itpos1] = 1;
+  init_table[itpos2] = 1;
   return;
 }
 static const char LOCATE_location___Location___text[] = "location::Location::text";
@@ -330,7 +364,7 @@ val_t location___Location___text(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_location;
-  fra.me.line = 59;
+  fra.me.line = 67;
   fra.me.meth = LOCATE_location___Location___text;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
@@ -341,9 +375,9 @@ val_t location___Location___text(val_t p0){
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[4] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* location.nit:62 */
+  /* location.nit:70 */
   fra.me.REG[1] = CALL_location___Location___text_cache(fra.me.REG[0])(fra.me.REG[0]);
-  /* location.nit:63 */
+  /* location.nit:71 */
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -361,13 +395,13 @@ val_t location___Location___text(val_t p0){
     fra.me.REG[2] = fra.me.REG[1];
     goto label1;
   }
-  /* location.nit:64 */
+  /* location.nit:72 */
   fra.me.REG[3] = fra.me.REG[0];
-  /* location.nit:65 */
+  /* location.nit:73 */
   fra.me.REG[4] = CALL_location___Location___file(fra.me.REG[3])(fra.me.REG[3]);
   REGB0 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_location, 65);
+    nit_abort("Reciever is null", NULL, LOCATE_location, 73);
   }
   fra.me.REG[4] = CALL_location___SourceFile___line_starts(fra.me.REG[4])(fra.me.REG[4]);
   REGB0 = CALL_location___Location___line_start(fra.me.REG[3])(fra.me.REG[3]);
@@ -413,28 +447,28 @@ val_t location___Location___text(val_t p0){
   if (UNTAG_Bool(REGB0)) {
     nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
   }
-  /* ../lib/standard/collection/array.nit:718 */
+  /* ../lib/standard/collection/array.nit:724 */
   fra.me.REG[4] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB1)];
   /* ../lib/standard/collection/array.nit:281 */
   goto label2;
   label2: while(0);
-  /* location.nit:65 */
+  /* location.nit:73 */
   REGB1 = CALL_location___Location___column_start(fra.me.REG[3])(fra.me.REG[3]);
   REGB0 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_location, 65);
+    nit_abort("Reciever is null", NULL, LOCATE_location, 73);
   }
   /* ../lib/standard/kernel.nit:238 */
   REGB1 = TAG_Int(UNTAG_Int(fra.me.REG[4])+UNTAG_Int(REGB1));
-  /* location.nit:65 */
+  /* location.nit:73 */
   REGB0 = TAG_Int(1);
   /* ../lib/standard/kernel.nit:240 */
   REGB0 = TAG_Int(UNTAG_Int(REGB1)-UNTAG_Int(REGB0));
-  /* location.nit:66 */
+  /* location.nit:74 */
   fra.me.REG[4] = CALL_location___Location___file(fra.me.REG[3])(fra.me.REG[3]);
   REGB1 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
-    nit_abort("Reciever is null", NULL, LOCATE_location, 66);
+    nit_abort("Reciever is null", NULL, LOCATE_location, 74);
   }
   fra.me.REG[4] = CALL_location___SourceFile___line_starts(fra.me.REG[4])(fra.me.REG[4]);
   REGB1 = CALL_location___Location___line_end(fra.me.REG[3])(fra.me.REG[3]);
@@ -480,42 +514,42 @@ val_t location___Location___text(val_t p0){
   if (UNTAG_Bool(REGB1)) {
     nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
   }
-  /* ../lib/standard/collection/array.nit:718 */
+  /* ../lib/standard/collection/array.nit:724 */
   fra.me.REG[4] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB2)];
   /* ../lib/standard/collection/array.nit:281 */
   goto label3;
   label3: while(0);
-  /* location.nit:66 */
+  /* location.nit:74 */
   REGB2 = CALL_location___Location___column_end(fra.me.REG[3])(fra.me.REG[3]);
   REGB1 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
-    nit_abort("Reciever is null", NULL, LOCATE_location, 66);
+    nit_abort("Reciever is null", NULL, LOCATE_location, 74);
   }
   /* ../lib/standard/kernel.nit:238 */
   REGB2 = TAG_Int(UNTAG_Int(fra.me.REG[4])+UNTAG_Int(REGB2));
-  /* location.nit:66 */
+  /* location.nit:74 */
   REGB1 = TAG_Int(1);
   /* ../lib/standard/kernel.nit:240 */
   REGB1 = TAG_Int(UNTAG_Int(REGB2)-UNTAG_Int(REGB1));
-  /* location.nit:67 */
+  /* location.nit:75 */
   fra.me.REG[3] = CALL_location___Location___file(fra.me.REG[3])(fra.me.REG[3]);
   REGB2 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
   if (UNTAG_Bool(REGB2)) {
-    nit_abort("Reciever is null", NULL, LOCATE_location, 67);
+    nit_abort("Reciever is null", NULL, LOCATE_location, 75);
   }
   fra.me.REG[3] = CALL_location___SourceFile___string(fra.me.REG[3])(fra.me.REG[3]);
   /* ../lib/standard/kernel.nit:240 */
   REGB1 = TAG_Int(UNTAG_Int(REGB1)-UNTAG_Int(REGB0));
-  /* location.nit:67 */
+  /* location.nit:75 */
   REGB2 = TAG_Int(1);
   /* ../lib/standard/kernel.nit:238 */
   REGB2 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB2));
-  /* location.nit:67 */
+  /* location.nit:75 */
   fra.me.REG[3] = CALL_standard___string___AbstractString___substring(fra.me.REG[3])(fra.me.REG[3], REGB0, REGB2);
   fra.me.REG[1] = fra.me.REG[3];
-  /* location.nit:68 */
+  /* location.nit:76 */
   CALL_location___Location___text_cache__eq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* location.nit:69 */
+  /* location.nit:77 */
   fra.me.REG[2] = fra.me.REG[1];
   goto label1;
   label1: while(0);
@@ -528,14 +562,14 @@ val_t location___Location___text_cache(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_location;
-  fra.me.line = 72;
+  fra.me.line = 80;
   fra.me.meth = LOCATE_location___Location___text_cache;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* location.nit:72 */
+  /* location.nit:80 */
   fra.me.REG[0] = ATTR_location___Location_____attext_cache(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -546,7 +580,7 @@ void location___Location___text_cache__eq(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_location;
-  fra.me.line = 72;
+  fra.me.line = 80;
   fra.me.meth = LOCATE_location___Location___text_cache__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -555,24 +589,24 @@ void location___Location___text_cache__eq(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* location.nit:72 */
+  /* location.nit:80 */
   ATTR_location___Location_____attext_cache(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;
 }
 static const char LOCATE_location___Location___with_file[] = "location::Location::with_file";
 void location___Location___with_file(val_t p0, val_t p1, int* init_table){
-  int itpos2 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_location___Location].i;
+  int itpos3 = VAL2OBJ(p0)->vft[INIT_TABLE_POS_location___Location].i;
   struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
   val_t REGB0;
   val_t REGB1;
   val_t REGB2;
   val_t REGB3;
   val_t tmp;
-  if (init_table[itpos2]) return;
+  if (init_table[itpos3]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_location;
-  fra.me.line = 74;
+  fra.me.line = 82;
   fra.me.meth = LOCATE_location___Location___with_file;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -581,14 +615,14 @@ void location___Location___with_file(val_t p0, val_t p1, int* init_table){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* location.nit:74 */
+  /* location.nit:82 */
   REGB0 = TAG_Int(0);
   REGB1 = TAG_Int(0);
   REGB2 = TAG_Int(0);
   REGB3 = TAG_Int(0);
   CALL_location___Location___init(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], REGB0, REGB1, REGB2, REGB3, init_table);
   stack_frame_head = fra.me.prev;
-  init_table[itpos2] = 1;
+  init_table[itpos3] = 1;
   return;
 }
 static const char LOCATE_location___Location_____eqeq[] = "location::Location::(kernel::Object::==)";
@@ -601,7 +635,7 @@ val_t location___Location_____eqeq(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_location;
-  fra.me.line = 76;
+  fra.me.line = 84;
   fra.me.meth = LOCATE_location___Location_____eqeq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -612,7 +646,7 @@ val_t location___Location_____eqeq(val_t p0, val_t p1){
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* location.nit:77 */
+  /* location.nit:85 */
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -629,7 +663,7 @@ val_t location___Location_____eqeq(val_t p0, val_t p1){
     REGB0 = TAG_Bool(0);
     goto label1;
   }
-  /* location.nit:78 */
+  /* location.nit:86 */
   REGB1 = TAG_Bool((fra.me.REG[1]!=NIT_NULL) && VAL_ISA(fra.me.REG[1], COLOR_location___Location, ID_location___Location)) /*cast Location*/;
   REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
   if (UNTAG_Bool(REGB1)) {
@@ -637,10 +671,10 @@ val_t location___Location_____eqeq(val_t p0, val_t p1){
     REGB0 = REGB1;
     goto label1;
   }
-  /* location.nit:80 */
+  /* location.nit:88 */
   REGB1 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
-    nit_abort("Reciever is null", NULL, LOCATE_location, 80);
+    nit_abort("Reciever is null", NULL, LOCATE_location, 88);
   }
   fra.me.REG[2] = CALL_location___Location___file(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[3] = CALL_location___Location___file(fra.me.REG[0])(fra.me.REG[0]);
@@ -662,10 +696,10 @@ val_t location___Location_____eqeq(val_t p0, val_t p1){
     REGB0 = REGB1;
     goto label1;
   }
-  /* location.nit:81 */
+  /* location.nit:89 */
   REGB1 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
-    nit_abort("Reciever is null", NULL, LOCATE_location, 81);
+    nit_abort("Reciever is null", NULL, LOCATE_location, 89);
   }
   REGB1 = CALL_location___Location___line_start(fra.me.REG[1])(fra.me.REG[1]);
   REGB2 = CALL_location___Location___line_start(fra.me.REG[0])(fra.me.REG[0]);
@@ -674,7 +708,7 @@ val_t location___Location_____eqeq(val_t p0, val_t p1){
   } else {
     /* ../lib/standard/kernel.nit:230 */
     REGB2 = TAG_Bool((REGB1)==(REGB2));
-    /* location.nit:81 */
+    /* location.nit:89 */
     REGB3 = REGB2;
   }
   REGB3 = TAG_Bool(!UNTAG_Bool(REGB3));
@@ -683,10 +717,10 @@ val_t location___Location_____eqeq(val_t p0, val_t p1){
     REGB0 = REGB3;
     goto label1;
   }
-  /* location.nit:82 */
+  /* location.nit:90 */
   REGB3 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB3)) {
-    nit_abort("Reciever is null", NULL, LOCATE_location, 82);
+    nit_abort("Reciever is null", NULL, LOCATE_location, 90);
   }
   REGB3 = CALL_location___Location___line_end(fra.me.REG[1])(fra.me.REG[1]);
   REGB2 = CALL_location___Location___line_end(fra.me.REG[0])(fra.me.REG[0]);
@@ -695,7 +729,7 @@ val_t location___Location_____eqeq(val_t p0, val_t p1){
   } else {
     /* ../lib/standard/kernel.nit:230 */
     REGB2 = TAG_Bool((REGB3)==(REGB2));
-    /* location.nit:82 */
+    /* location.nit:90 */
     REGB1 = REGB2;
   }
   REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
@@ -704,10 +738,10 @@ val_t location___Location_____eqeq(val_t p0, val_t p1){
     REGB0 = REGB1;
     goto label1;
   }
-  /* location.nit:83 */
+  /* location.nit:91 */
   REGB1 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
-    nit_abort("Reciever is null", NULL, LOCATE_location, 83);
+    nit_abort("Reciever is null", NULL, LOCATE_location, 91);
   }
   REGB1 = CALL_location___Location___column_start(fra.me.REG[1])(fra.me.REG[1]);
   REGB2 = CALL_location___Location___column_start(fra.me.REG[0])(fra.me.REG[0]);
@@ -716,7 +750,7 @@ val_t location___Location_____eqeq(val_t p0, val_t p1){
   } else {
     /* ../lib/standard/kernel.nit:230 */
     REGB2 = TAG_Bool((REGB1)==(REGB2));
-    /* location.nit:83 */
+    /* location.nit:91 */
     REGB3 = REGB2;
   }
   REGB3 = TAG_Bool(!UNTAG_Bool(REGB3));
@@ -725,10 +759,10 @@ val_t location___Location_____eqeq(val_t p0, val_t p1){
     REGB0 = REGB3;
     goto label1;
   }
-  /* location.nit:84 */
+  /* location.nit:92 */
   REGB3 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB3)) {
-    nit_abort("Reciever is null", NULL, LOCATE_location, 84);
+    nit_abort("Reciever is null", NULL, LOCATE_location, 92);
   }
   REGB3 = CALL_location___Location___column_end(fra.me.REG[1])(fra.me.REG[1]);
   REGB2 = CALL_location___Location___column_end(fra.me.REG[0])(fra.me.REG[0]);
@@ -737,7 +771,7 @@ val_t location___Location_____eqeq(val_t p0, val_t p1){
   } else {
     /* ../lib/standard/kernel.nit:230 */
     REGB2 = TAG_Bool((REGB3)==(REGB2));
-    /* location.nit:84 */
+    /* location.nit:92 */
     REGB1 = REGB2;
   }
   REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
@@ -746,7 +780,7 @@ val_t location___Location_____eqeq(val_t p0, val_t p1){
     REGB0 = REGB1;
     goto label1;
   }
-  /* location.nit:86 */
+  /* location.nit:94 */
   REGB1 = TAG_Bool(1);
   REGB0 = REGB1;
   goto label1;
@@ -764,7 +798,7 @@ val_t location___Location___located_in(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_location;
-  fra.me.line = 89;
+  fra.me.line = 97;
   fra.me.meth = LOCATE_location___Location___located_in;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -773,7 +807,7 @@ val_t location___Location___located_in(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* location.nit:90 */
+  /* location.nit:98 */
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -790,11 +824,11 @@ val_t location___Location___located_in(val_t p0, val_t p1){
     REGB0 = TAG_Bool(0);
     goto label1;
   }
-  /* location.nit:92 */
+  /* location.nit:100 */
   REGB1 = CALL_location___Location___line_start(fra.me.REG[0])(fra.me.REG[0]);
   REGB2 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB2)) {
-    nit_abort("Reciever is null", NULL, LOCATE_location, 92);
+    nit_abort("Reciever is null", NULL, LOCATE_location, 100);
   }
   REGB2 = CALL_location___Location___line_start(fra.me.REG[1])(fra.me.REG[1]);
   REGB3 = TAG_Bool(VAL_ISA(REGB2, VTCOLOR_standard___kernel___Comparable___OTHER(REGB1), VTID_standard___kernel___Comparable___OTHER(REGB1))) /*cast OTHER*/;
@@ -804,17 +838,17 @@ val_t location___Location___located_in(val_t p0, val_t p1){
   }
   /* ../lib/standard/kernel.nit:235 */
   REGB2 = TAG_Bool(UNTAG_Int(REGB1)<UNTAG_Int(REGB2));
-  /* location.nit:92 */
+  /* location.nit:100 */
   if (UNTAG_Bool(REGB2)) {
     REGB2 = TAG_Bool(0);
     REGB0 = REGB2;
     goto label1;
   }
-  /* location.nit:93 */
+  /* location.nit:101 */
   REGB2 = CALL_location___Location___line_start(fra.me.REG[0])(fra.me.REG[0]);
   REGB1 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
-    nit_abort("Reciever is null", NULL, LOCATE_location, 93);
+    nit_abort("Reciever is null", NULL, LOCATE_location, 101);
   }
   REGB1 = CALL_location___Location___line_end(fra.me.REG[1])(fra.me.REG[1]);
   REGB3 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB2), VTID_standard___kernel___Comparable___OTHER(REGB2))) /*cast OTHER*/;
@@ -824,17 +858,17 @@ val_t location___Location___located_in(val_t p0, val_t p1){
   }
   /* ../lib/standard/kernel.nit:237 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB2)>UNTAG_Int(REGB1));
-  /* location.nit:93 */
+  /* location.nit:101 */
   if (UNTAG_Bool(REGB1)) {
     REGB1 = TAG_Bool(0);
     REGB0 = REGB1;
     goto label1;
   }
-  /* location.nit:95 */
+  /* location.nit:103 */
   REGB1 = CALL_location___Location___line_end(fra.me.REG[0])(fra.me.REG[0]);
   REGB2 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB2)) {
-    nit_abort("Reciever is null", NULL, LOCATE_location, 95);
+    nit_abort("Reciever is null", NULL, LOCATE_location, 103);
   }
   REGB2 = CALL_location___Location___line_end(fra.me.REG[1])(fra.me.REG[1]);
   REGB3 = TAG_Bool(VAL_ISA(REGB2, VTCOLOR_standard___kernel___Comparable___OTHER(REGB1), VTID_standard___kernel___Comparable___OTHER(REGB1))) /*cast OTHER*/;
@@ -844,17 +878,17 @@ val_t location___Location___located_in(val_t p0, val_t p1){
   }
   /* ../lib/standard/kernel.nit:237 */
   REGB2 = TAG_Bool(UNTAG_Int(REGB1)>UNTAG_Int(REGB2));
-  /* location.nit:95 */
+  /* location.nit:103 */
   if (UNTAG_Bool(REGB2)) {
     REGB2 = TAG_Bool(0);
     REGB0 = REGB2;
     goto label1;
   }
-  /* location.nit:97 */
+  /* location.nit:105 */
   REGB2 = CALL_location___Location___line_start(fra.me.REG[0])(fra.me.REG[0]);
   REGB1 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
-    nit_abort("Reciever is null", NULL, LOCATE_location, 97);
+    nit_abort("Reciever is null", NULL, LOCATE_location, 105);
   }
   REGB1 = CALL_location___Location___line_start(fra.me.REG[1])(fra.me.REG[1]);
   REGB3 = TAG_Bool(IS_EQUAL_OO(REGB2,REGB1));
@@ -862,15 +896,15 @@ val_t location___Location___located_in(val_t p0, val_t p1){
   } else {
     /* ../lib/standard/kernel.nit:230 */
     REGB1 = TAG_Bool((REGB2)==(REGB1));
-    /* location.nit:97 */
+    /* location.nit:105 */
     REGB3 = REGB1;
   }
   if (UNTAG_Bool(REGB3)) {
-    /* location.nit:98 */
+    /* location.nit:106 */
     REGB3 = CALL_location___Location___column_start(fra.me.REG[0])(fra.me.REG[0]);
     REGB1 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
     if (UNTAG_Bool(REGB1)) {
-      nit_abort("Reciever is null", NULL, LOCATE_location, 98);
+      nit_abort("Reciever is null", NULL, LOCATE_location, 106);
     }
     REGB1 = CALL_location___Location___column_start(fra.me.REG[1])(fra.me.REG[1]);
     REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB3), VTID_standard___kernel___Comparable___OTHER(REGB3))) /*cast OTHER*/;
@@ -880,17 +914,17 @@ val_t location___Location___located_in(val_t p0, val_t p1){
     }
     /* ../lib/standard/kernel.nit:235 */
     REGB1 = TAG_Bool(UNTAG_Int(REGB3)<UNTAG_Int(REGB1));
-    /* location.nit:98 */
+    /* location.nit:106 */
     if (UNTAG_Bool(REGB1)) {
       REGB1 = TAG_Bool(0);
       REGB0 = REGB1;
       goto label1;
     }
-    /* location.nit:99 */
+    /* location.nit:107 */
     REGB1 = CALL_location___Location___column_start(fra.me.REG[0])(fra.me.REG[0]);
     REGB3 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
     if (UNTAG_Bool(REGB3)) {
-      nit_abort("Reciever is null", NULL, LOCATE_location, 99);
+      nit_abort("Reciever is null", NULL, LOCATE_location, 107);
     }
     REGB3 = CALL_location___Location___column_end(fra.me.REG[1])(fra.me.REG[1]);
     REGB2 = TAG_Bool(VAL_ISA(REGB3, VTCOLOR_standard___kernel___Comparable___OTHER(REGB1), VTID_standard___kernel___Comparable___OTHER(REGB1))) /*cast OTHER*/;
@@ -900,18 +934,18 @@ val_t location___Location___located_in(val_t p0, val_t p1){
     }
     /* ../lib/standard/kernel.nit:237 */
     REGB3 = TAG_Bool(UNTAG_Int(REGB1)>UNTAG_Int(REGB3));
-    /* location.nit:99 */
+    /* location.nit:107 */
     if (UNTAG_Bool(REGB3)) {
       REGB3 = TAG_Bool(0);
       REGB0 = REGB3;
       goto label1;
     }
   }
-  /* location.nit:102 */
+  /* location.nit:110 */
   REGB3 = CALL_location___Location___line_end(fra.me.REG[0])(fra.me.REG[0]);
   REGB1 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
-    nit_abort("Reciever is null", NULL, LOCATE_location, 102);
+    nit_abort("Reciever is null", NULL, LOCATE_location, 110);
   }
   REGB1 = CALL_location___Location___line_end(fra.me.REG[1])(fra.me.REG[1]);
   REGB2 = TAG_Bool(IS_EQUAL_OO(REGB3,REGB1));
@@ -919,14 +953,14 @@ val_t location___Location___located_in(val_t p0, val_t p1){
   } else {
     /* ../lib/standard/kernel.nit:230 */
     REGB1 = TAG_Bool((REGB3)==(REGB1));
-    /* location.nit:102 */
+    /* location.nit:110 */
     REGB2 = REGB1;
   }
   if (UNTAG_Bool(REGB2)) {
     REGB2 = CALL_location___Location___column_end(fra.me.REG[0])(fra.me.REG[0]);
     REGB1 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
     if (UNTAG_Bool(REGB1)) {
-      nit_abort("Reciever is null", NULL, LOCATE_location, 102);
+      nit_abort("Reciever is null", NULL, LOCATE_location, 110);
     }
     REGB1 = CALL_location___Location___column_end(fra.me.REG[1])(fra.me.REG[1]);
     REGB3 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB2), VTID_standard___kernel___Comparable___OTHER(REGB2))) /*cast OTHER*/;
@@ -937,7 +971,7 @@ val_t location___Location___located_in(val_t p0, val_t p1){
     /* ../lib/standard/kernel.nit:237 */
     REGB1 = TAG_Bool(UNTAG_Int(REGB2)>UNTAG_Int(REGB1));
   } else {
-    /* location.nit:102 */
+    /* location.nit:110 */
     REGB2 = TAG_Bool(0);
     REGB1 = REGB2;
   }
@@ -946,7 +980,7 @@ val_t location___Location___located_in(val_t p0, val_t p1){
     REGB0 = REGB1;
     goto label1;
   }
-  /* location.nit:104 */
+  /* location.nit:112 */
   REGB1 = TAG_Bool(1);
   REGB0 = REGB1;
   goto label1;
@@ -980,7 +1014,7 @@ val_t location___Location___to_s(val_t p0){
     static val_t once_value_18; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_location;
-  fra.me.line = 107;
+  fra.me.line = 115;
   fra.me.meth = LOCATE_location___Location___to_s;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
@@ -991,7 +1025,7 @@ val_t location___Location___to_s(val_t p0){
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[4] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* location.nit:108 */
+  /* location.nit:116 */
   if (!once_value_1) {
     fra.me.REG[1] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
@@ -1000,7 +1034,7 @@ val_t location___Location___to_s(val_t p0){
     register_static_object(&once_value_1);
   } else fra.me.REG[1] = once_value_1;
   fra.me.REG[1] = fra.me.REG[1];
-  /* location.nit:109 */
+  /* location.nit:117 */
   fra.me.REG[2] = CALL_location___Location___file(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -1016,19 +1050,19 @@ val_t location___Location___to_s(val_t p0){
   }
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
-    /* location.nit:110 */
+    /* location.nit:118 */
     fra.me.REG[2] = CALL_location___Location___file(fra.me.REG[0])(fra.me.REG[0]);
     REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      nit_abort("Reciever is null", NULL, LOCATE_location, 110);
+      nit_abort("Reciever is null", NULL, LOCATE_location, 118);
     }
     fra.me.REG[2] = CALL_location___SourceFile___filename(fra.me.REG[2])(fra.me.REG[2]);
     fra.me.REG[1] = fra.me.REG[2];
-    /* location.nit:111 */
+    /* location.nit:119 */
     fra.me.REG[2] = CALL_location___Location___file(fra.me.REG[0])(fra.me.REG[0]);
     REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      nit_abort("Reciever is null", NULL, LOCATE_location, 111);
+      nit_abort("Reciever is null", NULL, LOCATE_location, 119);
     }
     fra.me.REG[2] = CALL_location___SourceFile___filename(fra.me.REG[2])(fra.me.REG[2]);
     /* ../lib/standard/collection/array.nit:24 */
@@ -1038,7 +1072,7 @@ val_t location___Location___to_s(val_t p0){
       nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
     }
     REGB0 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2]);
-    /* location.nit:111 */
+    /* location.nit:119 */
     REGB1 = TAG_Int(0);
     REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
     if (UNTAG_Bool(REGB2)) {
@@ -1047,7 +1081,7 @@ val_t location___Location___to_s(val_t p0){
     }
     /* ../lib/standard/kernel.nit:237 */
     REGB1 = TAG_Bool(UNTAG_Int(REGB0)>UNTAG_Int(REGB1));
-    /* location.nit:111 */
+    /* location.nit:119 */
     if (UNTAG_Bool(REGB1)) {
       if (!once_value_2) {
         fra.me.REG[2] = BOX_NativeString(":");
@@ -1061,7 +1095,7 @@ val_t location___Location___to_s(val_t p0){
       fra.me.REG[1] = fra.me.REG[2];
     }
   }
-  /* location.nit:114 */
+  /* location.nit:122 */
   REGB1 = CALL_location___Location___line_start(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = CALL_location___Location___line_end(fra.me.REG[0])(fra.me.REG[0]);
   REGB2 = TAG_Bool(IS_EQUAL_OO(REGB1,REGB0));
@@ -1069,11 +1103,11 @@ val_t location___Location___to_s(val_t p0){
   } else {
     /* ../lib/standard/kernel.nit:230 */
     REGB0 = TAG_Bool((REGB1)==(REGB0));
-    /* location.nit:114 */
+    /* location.nit:122 */
     REGB2 = REGB0;
   }
   if (UNTAG_Bool(REGB2)) {
-    /* location.nit:115 */
+    /* location.nit:123 */
     REGB2 = CALL_location___Location___column_start(fra.me.REG[0])(fra.me.REG[0]);
     REGB0 = CALL_location___Location___column_end(fra.me.REG[0])(fra.me.REG[0]);
     REGB1 = TAG_Bool(IS_EQUAL_OO(REGB2,REGB0));
@@ -1081,11 +1115,11 @@ val_t location___Location___to_s(val_t p0){
     } else {
       /* ../lib/standard/kernel.nit:230 */
       REGB0 = TAG_Bool((REGB2)==(REGB0));
-      /* location.nit:115 */
+      /* location.nit:123 */
       REGB1 = REGB0;
     }
     if (UNTAG_Bool(REGB1)) {
-      /* location.nit:116 */
+      /* location.nit:124 */
       REGB1 = TAG_Int(7);
       fra.me.REG[2] = NEW_Array_standard___collection___array___Array___with_capacity(REGB1);
       if (!once_value_3) {
@@ -1134,7 +1168,7 @@ val_t location___Location___to_s(val_t p0){
       fra.me.REG[2] = CALL_standard___string___Object___to_s(fra.me.REG[2])(fra.me.REG[2]);
       goto label7;
     } else {
-      /* location.nit:118 */
+      /* location.nit:126 */
       REGB1 = TAG_Int(9);
       fra.me.REG[3] = NEW_Array_standard___collection___array___Array___with_capacity(REGB1);
       if (!once_value_8) {
@@ -1197,7 +1231,7 @@ val_t location___Location___to_s(val_t p0){
       goto label7;
     }
   } else {
-    /* location.nit:121 */
+    /* location.nit:129 */
     REGB1 = TAG_Int(11);
     fra.me.REG[3] = NEW_Array_standard___collection___array___Array___with_capacity(REGB1);
     if (!once_value_13) {
@@ -1285,7 +1319,7 @@ val_t location___Location___relative_to(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_location;
-  fra.me.line = 125;
+  fra.me.line = 133;
   fra.me.meth = LOCATE_location___Location___relative_to;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -1295,7 +1329,7 @@ val_t location___Location___relative_to(val_t p0, val_t p1){
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* location.nit:127 */
+  /* location.nit:135 */
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -1312,7 +1346,7 @@ val_t location___Location___relative_to(val_t p0, val_t p1){
   if (UNTAG_Bool(REGB0)) {
     REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      nit_abort("Reciever is null", NULL, LOCATE_location, 127);
+      nit_abort("Reciever is null", NULL, LOCATE_location, 135);
     }
     fra.me.REG[1] = CALL_location___Location___file(fra.me.REG[1])(fra.me.REG[1]);
     fra.me.REG[2] = CALL_location___Location___file(fra.me.REG[0])(fra.me.REG[0]);
@@ -1333,14 +1367,14 @@ val_t location___Location___relative_to(val_t p0, val_t p1){
     REGB0 = REGB1;
   }
   if (UNTAG_Bool(REGB0)) {
-    /* location.nit:128 */
+    /* location.nit:136 */
     REGB0 = CALL_location___Location___line_start(fra.me.REG[0])(fra.me.REG[0]);
     REGB1 = CALL_location___Location___line_end(fra.me.REG[0])(fra.me.REG[0]);
     REGB2 = CALL_location___Location___column_start(fra.me.REG[0])(fra.me.REG[0]);
     REGB3 = CALL_location___Location___column_end(fra.me.REG[0])(fra.me.REG[0]);
     fra.me.REG[2] = NEW_Location_location___Location___init(NIT_NULL, REGB0, REGB1, REGB2, REGB3);
   } else {
-    /* location.nit:130 */
+    /* location.nit:138 */
     fra.me.REG[1] = CALL_location___Location___file(fra.me.REG[0])(fra.me.REG[0]);
     REGB3 = CALL_location___Location___line_start(fra.me.REG[0])(fra.me.REG[0]);
     REGB2 = CALL_location___Location___line_end(fra.me.REG[0])(fra.me.REG[0]);
@@ -1349,7 +1383,7 @@ val_t location___Location___relative_to(val_t p0, val_t p1){
     fra.me.REG[1] = NEW_Location_location___Location___init(fra.me.REG[1], REGB3, REGB2, REGB1, REGB0);
     fra.me.REG[2] = fra.me.REG[1];
   }
-  /* location.nit:132 */
+  /* location.nit:140 */
   fra.me.REG[2] = CALL_standard___string___Object___to_s(fra.me.REG[2])(fra.me.REG[2]);
   goto label1;
   label1: while(0);
@@ -1366,7 +1400,7 @@ val_t location___Location_____l(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_location;
-  fra.me.line = 135;
+  fra.me.line = 143;
   fra.me.meth = LOCATE_location___Location_____l;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1380,7 +1414,7 @@ val_t location___Location_____l(val_t p0, val_t p1){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_location, 0);
   }
-  /* location.nit:136 */
+  /* location.nit:144 */
   REGB0 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[0],fra.me.REG[1]));
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -1391,21 +1425,21 @@ val_t location___Location_____l(val_t p0, val_t p1){
     REGB0 = TAG_Bool(0);
     goto label1;
   }
-  /* location.nit:137 */
+  /* location.nit:145 */
   REGB1 = CALL_location___Location___located_in(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   if (UNTAG_Bool(REGB1)) {
     REGB1 = TAG_Bool(1);
     REGB0 = REGB1;
     goto label1;
   }
-  /* location.nit:138 */
+  /* location.nit:146 */
   REGB1 = CALL_location___Location___located_in(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
   if (UNTAG_Bool(REGB1)) {
     REGB1 = TAG_Bool(0);
     REGB0 = REGB1;
     goto label1;
   }
-  /* location.nit:140 */
+  /* location.nit:148 */
   REGB1 = CALL_location___Location___line_start(fra.me.REG[0])(fra.me.REG[0]);
   REGB2 = CALL_location___Location___line_start(fra.me.REG[1])(fra.me.REG[1]);
   REGB3 = TAG_Bool(IS_EQUAL_OO(REGB1,REGB2));
@@ -1413,7 +1447,7 @@ val_t location___Location_____l(val_t p0, val_t p1){
   } else {
     /* ../lib/standard/kernel.nit:230 */
     REGB2 = TAG_Bool((REGB1)==(REGB2));
-    /* location.nit:140 */
+    /* location.nit:148 */
     REGB3 = REGB2;
   }
   REGB3 = TAG_Bool(!UNTAG_Bool(REGB3));
@@ -1427,11 +1461,11 @@ val_t location___Location_____l(val_t p0, val_t p1){
     }
     /* ../lib/standard/kernel.nit:235 */
     REGB2 = TAG_Bool(UNTAG_Int(REGB3)<UNTAG_Int(REGB2));
-    /* location.nit:140 */
+    /* location.nit:148 */
     REGB0 = REGB2;
     goto label1;
   }
-  /* location.nit:141 */
+  /* location.nit:149 */
   REGB2 = CALL_location___Location___column_start(fra.me.REG[0])(fra.me.REG[0]);
   REGB3 = CALL_location___Location___column_start(fra.me.REG[1])(fra.me.REG[1]);
   REGB1 = TAG_Bool(IS_EQUAL_OO(REGB2,REGB3));
@@ -1439,7 +1473,7 @@ val_t location___Location_____l(val_t p0, val_t p1){
   } else {
     /* ../lib/standard/kernel.nit:230 */
     REGB3 = TAG_Bool((REGB2)==(REGB3));
-    /* location.nit:141 */
+    /* location.nit:149 */
     REGB1 = REGB3;
   }
   REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
@@ -1453,11 +1487,11 @@ val_t location___Location_____l(val_t p0, val_t p1){
     }
     /* ../lib/standard/kernel.nit:235 */
     REGB3 = TAG_Bool(UNTAG_Int(REGB1)<UNTAG_Int(REGB3));
-    /* location.nit:141 */
+    /* location.nit:149 */
     REGB0 = REGB3;
     goto label1;
   }
-  /* location.nit:142 */
+  /* location.nit:150 */
   REGB3 = CALL_location___Location___line_end(fra.me.REG[0])(fra.me.REG[0]);
   REGB1 = CALL_location___Location___line_end(fra.me.REG[1])(fra.me.REG[1]);
   REGB2 = TAG_Bool(IS_EQUAL_OO(REGB3,REGB1));
@@ -1465,7 +1499,7 @@ val_t location___Location_____l(val_t p0, val_t p1){
   } else {
     /* ../lib/standard/kernel.nit:230 */
     REGB1 = TAG_Bool((REGB3)==(REGB1));
-    /* location.nit:142 */
+    /* location.nit:150 */
     REGB2 = REGB1;
   }
   REGB2 = TAG_Bool(!UNTAG_Bool(REGB2));
@@ -1479,11 +1513,11 @@ val_t location___Location_____l(val_t p0, val_t p1){
     }
     /* ../lib/standard/kernel.nit:235 */
     REGB1 = TAG_Bool(UNTAG_Int(REGB2)<UNTAG_Int(REGB1));
-    /* location.nit:142 */
+    /* location.nit:150 */
     REGB0 = REGB1;
     goto label1;
   }
-  /* location.nit:144 */
+  /* location.nit:152 */
   REGB1 = CALL_location___Location___column_end(fra.me.REG[0])(fra.me.REG[0]);
   REGB2 = CALL_location___Location___column_end(fra.me.REG[1])(fra.me.REG[1]);
   REGB3 = TAG_Bool(VAL_ISA(REGB2, VTCOLOR_standard___kernel___Comparable___OTHER(REGB1), VTID_standard___kernel___Comparable___OTHER(REGB1))) /*cast OTHER*/;
@@ -1493,7 +1527,7 @@ val_t location___Location_____l(val_t p0, val_t p1){
   }
   /* ../lib/standard/kernel.nit:235 */
   REGB2 = TAG_Bool(UNTAG_Int(REGB1)<UNTAG_Int(REGB2));
-  /* location.nit:144 */
+  /* location.nit:152 */
   REGB0 = REGB2;
   goto label1;
   label1: while(0);
@@ -1526,7 +1560,7 @@ val_t location___Location___colored_line(val_t p0, val_t p1){
   static val_t once_value_17; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_location;
-  fra.me.line = 147;
+  fra.me.line = 155;
   fra.me.meth = LOCATE_location___Location___colored_line;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
@@ -1541,11 +1575,11 @@ val_t location___Location___colored_line(val_t p0, val_t p1){
   fra.me.REG[7] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* location.nit:154 */
+  /* location.nit:162 */
   REGB0 = TAG_Int(27);
   /* ../lib/standard/kernel.nit:300 */
   REGB0 = TAG_Char(UNTAG_Int(REGB0));
-  /* location.nit:155 */
+  /* location.nit:163 */
   REGB1 = TAG_Int(3);
   fra.me.REG[2] = NEW_Array_standard___collection___array___Array___with_capacity(REGB1);
   if (!once_value_1) {
@@ -1569,7 +1603,7 @@ val_t location___Location___colored_line(val_t p0, val_t p1){
   fra.me.REG[3] = fra.me.REG[3];
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
   fra.me.REG[2] = CALL_standard___string___Object___to_s(fra.me.REG[2])(fra.me.REG[2]);
-  /* location.nit:156 */
+  /* location.nit:164 */
   REGB1 = TAG_Int(5);
   fra.me.REG[3] = NEW_Array_standard___collection___array___Array___with_capacity(REGB1);
   if (!once_value_3) {
@@ -1603,13 +1637,13 @@ val_t location___Location___colored_line(val_t p0, val_t p1){
   fra.me.REG[1] = fra.me.REG[1];
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[1]);
   fra.me.REG[3] = CALL_standard___string___Object___to_s(fra.me.REG[3])(fra.me.REG[3]);
-  /* location.nit:159 */
+  /* location.nit:167 */
   REGB0 = CALL_location___Location___line_start(fra.me.REG[0])(fra.me.REG[0]);
-  /* location.nit:160 */
+  /* location.nit:168 */
   fra.me.REG[1] = CALL_location___Location___file(fra.me.REG[0])(fra.me.REG[0]);
   REGB1 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
-    nit_abort("Reciever is null", NULL, LOCATE_location, 160);
+    nit_abort("Reciever is null", NULL, LOCATE_location, 168);
   }
   fra.me.REG[1] = CALL_location___SourceFile___line_starts(fra.me.REG[1])(fra.me.REG[1]);
   REGB1 = TAG_Int(1);
@@ -1654,23 +1688,23 @@ val_t location___Location___colored_line(val_t p0, val_t p1){
   if (UNTAG_Bool(REGB2)) {
     nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
   }
-  /* ../lib/standard/collection/array.nit:718 */
+  /* ../lib/standard/collection/array.nit:724 */
   fra.me.REG[1] = ((Nit_NativeArray)fra.me.REG[1])->val[UNTAG_Int(REGB1)];
   /* ../lib/standard/collection/array.nit:281 */
   goto label6;
   label6: while(0);
-  /* location.nit:160 */
+  /* location.nit:168 */
   REGB1 = fra.me.REG[1];
-  /* location.nit:161 */
+  /* location.nit:169 */
   REGB2 = REGB1;
-  /* location.nit:162 */
+  /* location.nit:170 */
   fra.me.REG[1] = CALL_location___Location___file(fra.me.REG[0])(fra.me.REG[0]);
   REGB3 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB3)) {
-    nit_abort("Reciever is null", NULL, LOCATE_location, 162);
+    nit_abort("Reciever is null", NULL, LOCATE_location, 170);
   }
   fra.me.REG[1] = CALL_location___SourceFile___string(fra.me.REG[1])(fra.me.REG[1]);
-  /* location.nit:163 */
+  /* location.nit:171 */
   while(1) {
     REGB3 = TAG_Int(1);
     /* ../lib/standard/kernel.nit:238 */
@@ -1689,12 +1723,12 @@ val_t location___Location___colored_line(val_t p0, val_t p1){
     }
     /* ../lib/standard/kernel.nit:235 */
     REGB4 = TAG_Bool(UNTAG_Int(REGB3)<UNTAG_Int(REGB4));
-    /* location.nit:163 */
+    /* location.nit:171 */
     if (UNTAG_Bool(REGB4)) {
       REGB4 = TAG_Int(1);
       /* ../lib/standard/kernel.nit:238 */
       REGB4 = TAG_Int(UNTAG_Int(REGB2)+UNTAG_Int(REGB4));
-      /* location.nit:163 */
+      /* location.nit:171 */
       REGB4 = CALL_standard___collection___abstract_collection___SequenceRead_____bra(fra.me.REG[1])(fra.me.REG[1], REGB4);
       REGB3 = TAG_Char('\n');
       REGB5 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB3));
@@ -1702,7 +1736,7 @@ val_t location___Location___colored_line(val_t p0, val_t p1){
       } else {
         /* ../lib/standard/kernel.nit:381 */
         REGB3 = TAG_Bool((REGB4)==(REGB3));
-        /* location.nit:163 */
+        /* location.nit:171 */
         REGB5 = REGB3;
       }
       REGB5 = TAG_Bool(!UNTAG_Bool(REGB5));
@@ -1714,7 +1748,7 @@ val_t location___Location___colored_line(val_t p0, val_t p1){
       REGB5 = TAG_Int(1);
       /* ../lib/standard/kernel.nit:238 */
       REGB5 = TAG_Int(UNTAG_Int(REGB2)+UNTAG_Int(REGB5));
-      /* location.nit:163 */
+      /* location.nit:171 */
       REGB5 = CALL_standard___collection___abstract_collection___SequenceRead_____bra(fra.me.REG[1])(fra.me.REG[1], REGB5);
       REGB3 = TAG_Char('\r');
       REGB4 = TAG_Bool(IS_EQUAL_OO(REGB5,REGB3));
@@ -1722,7 +1756,7 @@ val_t location___Location___colored_line(val_t p0, val_t p1){
       } else {
         /* ../lib/standard/kernel.nit:381 */
         REGB3 = TAG_Bool((REGB5)==(REGB3));
-        /* location.nit:163 */
+        /* location.nit:171 */
         REGB4 = REGB3;
       }
       REGB4 = TAG_Bool(!UNTAG_Bool(REGB4));
@@ -1731,47 +1765,47 @@ val_t location___Location___colored_line(val_t p0, val_t p1){
       REGB4 = REGB3;
     }
     if (UNTAG_Bool(REGB4)) {
-      /* location.nit:164 */
+      /* location.nit:172 */
       REGB4 = TAG_Int(1);
       /* ../lib/standard/kernel.nit:238 */
       REGB4 = TAG_Int(UNTAG_Int(REGB2)+UNTAG_Int(REGB4));
-      /* location.nit:164 */
+      /* location.nit:172 */
       REGB2 = REGB4;
     } else {
-      /* location.nit:163 */
+      /* location.nit:171 */
       goto label7;
     }
   }
   label7: while(0);
-  /* location.nit:166 */
+  /* location.nit:174 */
   REGB4 = CALL_location___Location___column_start(fra.me.REG[0])(fra.me.REG[0]);
   REGB3 = TAG_Int(1);
   /* ../lib/standard/kernel.nit:240 */
   REGB3 = TAG_Int(UNTAG_Int(REGB4)-UNTAG_Int(REGB3));
-  /* location.nit:166 */
+  /* location.nit:174 */
   fra.me.REG[4] = CALL_standard___string___AbstractString___substring(fra.me.REG[1])(fra.me.REG[1], REGB1, REGB3);
-  /* location.nit:168 */
+  /* location.nit:176 */
   REGB3 = CALL_location___Location___line_end(fra.me.REG[0])(fra.me.REG[0]);
   REGB4 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB3));
   if (UNTAG_Bool(REGB4)) {
   } else {
     /* ../lib/standard/kernel.nit:230 */
     REGB3 = TAG_Bool((REGB0)==(REGB3));
-    /* location.nit:168 */
+    /* location.nit:176 */
     REGB4 = REGB3;
   }
   REGB4 = TAG_Bool(!UNTAG_Bool(REGB4));
   if (UNTAG_Bool(REGB4)) {
     /* ../lib/standard/kernel.nit:240 */
     REGB4 = TAG_Int(UNTAG_Int(REGB2)-UNTAG_Int(REGB1));
-    /* location.nit:169 */
+    /* location.nit:177 */
     REGB3 = TAG_Int(1);
     /* ../lib/standard/kernel.nit:238 */
     REGB3 = TAG_Int(UNTAG_Int(REGB4)+UNTAG_Int(REGB3));
-    /* location.nit:169 */
+    /* location.nit:177 */
     fra.me.REG[5] = REGB3;
   } else {
-    /* location.nit:171 */
+    /* location.nit:179 */
     REGB3 = CALL_location___Location___column_end(fra.me.REG[0])(fra.me.REG[0]);
     fra.me.REG[5] = REGB3;
   }
@@ -1791,43 +1825,43 @@ val_t location___Location___colored_line(val_t p0, val_t p1){
   }
   /* ../lib/standard/kernel.nit:234 */
   REGB4 = TAG_Bool(UNTAG_Int(REGB3)<=UNTAG_Int(REGB4));
-  /* location.nit:175 */
+  /* location.nit:183 */
   if (UNTAG_Bool(REGB4)) {
-    /* location.nit:176 */
+    /* location.nit:184 */
     REGB4 = CALL_location___Location___column_start(fra.me.REG[0])(fra.me.REG[0]);
     /* ../lib/standard/kernel.nit:238 */
     REGB4 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB4));
-    /* location.nit:176 */
+    /* location.nit:184 */
     REGB3 = TAG_Int(1);
     /* ../lib/standard/kernel.nit:240 */
     REGB3 = TAG_Int(UNTAG_Int(REGB4)-UNTAG_Int(REGB3));
-    /* location.nit:176 */
+    /* location.nit:184 */
     REGB4 = CALL_location___Location___column_start(fra.me.REG[0])(fra.me.REG[0]);
     REGB0 = TAG_Bool(fra.me.REG[5]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      nit_abort("Reciever is null", NULL, LOCATE_location, 176);
+      nit_abort("Reciever is null", NULL, LOCATE_location, 184);
     }
     /* ../lib/standard/kernel.nit:240 */
     REGB4 = TAG_Int(UNTAG_Int(fra.me.REG[5])-UNTAG_Int(REGB4));
-    /* location.nit:176 */
+    /* location.nit:184 */
     REGB0 = TAG_Int(1);
     /* ../lib/standard/kernel.nit:238 */
     REGB0 = TAG_Int(UNTAG_Int(REGB4)+UNTAG_Int(REGB0));
-    /* location.nit:176 */
+    /* location.nit:184 */
     fra.me.REG[6] = CALL_standard___string___AbstractString___substring(fra.me.REG[1])(fra.me.REG[1], REGB3, REGB0);
     /* ../lib/standard/kernel.nit:238 */
     REGB0 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(fra.me.REG[5]));
     /* ../lib/standard/kernel.nit:240 */
     REGB2 = TAG_Int(UNTAG_Int(REGB2)-UNTAG_Int(REGB1));
     REGB2 = TAG_Int(UNTAG_Int(REGB2)-UNTAG_Int(fra.me.REG[5]));
-    /* location.nit:177 */
+    /* location.nit:185 */
     REGB3 = TAG_Int(1);
     /* ../lib/standard/kernel.nit:238 */
     REGB3 = TAG_Int(UNTAG_Int(REGB2)+UNTAG_Int(REGB3));
-    /* location.nit:177 */
+    /* location.nit:185 */
     fra.me.REG[5] = CALL_standard___string___AbstractString___substring(fra.me.REG[1])(fra.me.REG[1], REGB0, REGB3);
   } else {
-    /* location.nit:179 */
+    /* location.nit:187 */
     if (!once_value_8) {
       fra.me.REG[7] = BOX_NativeString("");
       REGB3 = TAG_Int(0);
@@ -1837,7 +1871,7 @@ val_t location___Location___colored_line(val_t p0, val_t p1){
     } else fra.me.REG[7] = once_value_8;
     fra.me.REG[7] = fra.me.REG[7];
     fra.me.REG[6] = fra.me.REG[7];
-    /* location.nit:180 */
+    /* location.nit:188 */
     if (!once_value_9) {
       fra.me.REG[7] = BOX_NativeString("");
       REGB3 = TAG_Int(0);
@@ -1848,13 +1882,13 @@ val_t location___Location___colored_line(val_t p0, val_t p1){
     fra.me.REG[7] = fra.me.REG[7];
     fra.me.REG[5] = fra.me.REG[7];
   }
-  /* location.nit:182 */
+  /* location.nit:190 */
   fra.me.REG[7] = NEW_Buffer_standard___string___Buffer___init();
-  /* location.nit:183 */
+  /* location.nit:191 */
   REGB3 = CALL_location___Location___column_start(fra.me.REG[0])(fra.me.REG[0]);
   /* ../lib/standard/kernel.nit:238 */
   REGB3 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB3));
-  /* location.nit:183 */
+  /* location.nit:191 */
   REGB0 = TAG_Int(1);
   /* ../lib/standard/kernel.nit:240 */
   REGB0 = TAG_Int(UNTAG_Int(REGB3)-UNTAG_Int(REGB0));
@@ -1869,9 +1903,9 @@ val_t location___Location___colored_line(val_t p0, val_t p1){
     REGB3 = TAG_Bool(UNTAG_Int(REGB1)<UNTAG_Int(REGB0));
     /* ../lib/standard/kernel.nit:355 */
     if (UNTAG_Bool(REGB3)) {
-      /* location.nit:183 */
+      /* location.nit:191 */
       REGB3 = REGB1;
-      /* location.nit:184 */
+      /* location.nit:192 */
       REGB3 = CALL_standard___collection___abstract_collection___SequenceRead_____bra(fra.me.REG[1])(fra.me.REG[1], REGB3);
       REGB2 = TAG_Char('\t');
       REGB4 = TAG_Bool(IS_EQUAL_OO(REGB3,REGB2));
@@ -1879,15 +1913,15 @@ val_t location___Location___colored_line(val_t p0, val_t p1){
       } else {
         /* ../lib/standard/kernel.nit:381 */
         REGB2 = TAG_Bool((REGB3)==(REGB2));
-        /* location.nit:184 */
+        /* location.nit:192 */
         REGB4 = REGB2;
       }
       if (UNTAG_Bool(REGB4)) {
-        /* location.nit:185 */
+        /* location.nit:193 */
         REGB4 = TAG_Char('\t');
         CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[7])(fra.me.REG[7], REGB4);
       } else {
-        /* location.nit:187 */
+        /* location.nit:195 */
         REGB4 = TAG_Char(' ');
         CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[7])(fra.me.REG[7], REGB4);
       }
@@ -1903,7 +1937,7 @@ val_t location___Location___colored_line(val_t p0, val_t p1){
     }
   }
   label10: while(0);
-  /* location.nit:190 */
+  /* location.nit:198 */
   REGB1 = TAG_Int(13);
   fra.me.REG[1] = NEW_Array_standard___collection___array___Array___with_capacity(REGB1);
   if (!once_value_11) {

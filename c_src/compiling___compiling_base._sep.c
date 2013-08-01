@@ -1269,7 +1269,7 @@ void compiling___compiling_base___CProgram___generate_build_file(val_t p0){
       if (UNTAG_Bool(REGB2)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[0] = ((Nit_NativeArray)fra.me.REG[5])->val[UNTAG_Int(REGB1)];
       /* compiling/compiling_base.nit:113 */
       REGB2 = TAG_Int(3);
@@ -1343,7 +1343,7 @@ void compiling___compiling_base___CProgram___generate_build_file(val_t p0){
       if (UNTAG_Bool(REGB2)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[6])->val[UNTAG_Int(REGB1)];
       /* compiling/compiling_base.nit:114 */
       REGB2 = TAG_Int(3);
@@ -1417,7 +1417,7 @@ void compiling___compiling_base___CProgram___generate_build_file(val_t p0){
       if (UNTAG_Bool(REGB2)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[5] = ((Nit_NativeArray)fra.me.REG[6])->val[UNTAG_Int(REGB1)];
       /* compiling/compiling_base.nit:115 */
       REGB2 = TAG_Int(3);

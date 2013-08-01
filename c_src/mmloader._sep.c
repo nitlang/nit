@@ -345,7 +345,7 @@ val_t mmloader___ToolContext___try_to_load(val_t p0, val_t p1, val_t p2){
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[6] = ((Nit_NativeArray)fra.me.REG[5])->val[UNTAG_Int(REGB0)];
       /* mmloader.nit:86 */
       fra.me.REG[7] = CALL_mmloader___ModuleLoader___try_to_load_dir(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[1], fra.me.REG[2]);
@@ -800,7 +800,7 @@ val_t mmloader___ToolContext___get_module(val_t p0, val_t p1, val_t p2){
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[5] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB0)];
       /* mmloader.nit:164 */
       fra.me.REG[5] = CALL_mmloader___ToolContext___directory_for(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[5]);

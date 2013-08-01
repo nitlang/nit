@@ -257,7 +257,8 @@ void separate_options___ToolContext___integrate_separate_options(val_t p0, val_t
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
   /* separate_options.nit:45 */
-  fra.me.REG[1] = CALL_standard___string_search___String___split(fra.me.REG[1])(fra.me.REG[1]);
+  REGB0 = TAG_Char('\n');
+  fra.me.REG[1] = CALL_standard___string_search___String___split_with(fra.me.REG[1])(fra.me.REG[1], REGB0);
   /* ../lib/standard/collection/array.nit:269 */
   REGB0 = TAG_Int(0);
   /* ../lib/standard/collection/array.nit:270 */
@@ -292,7 +293,7 @@ void separate_options___ToolContext___integrate_separate_options(val_t p0, val_t
       if (UNTAG_Bool(REGB1)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
       }
-      /* ../lib/standard/collection/array.nit:718 */
+      /* ../lib/standard/collection/array.nit:724 */
       fra.me.REG[4] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB0)];
       /* separate_options.nit:46 */
       if (!once_value_1) {
@@ -349,7 +350,7 @@ void separate_options___ToolContext___integrate_separate_options(val_t p0, val_t
           if (UNTAG_Bool(REGB2)) {
             nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
           }
-          /* ../lib/standard/collection/array.nit:718 */
+          /* ../lib/standard/collection/array.nit:724 */
           fra.me.REG[7] = ((Nit_NativeArray)fra.me.REG[6])->val[UNTAG_Int(REGB1)];
           /* ../lib/standard/collection/array.nit:24 */
           REGB2 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[7])!=NIT_NULL);

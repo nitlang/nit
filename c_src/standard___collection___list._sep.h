@@ -16,13 +16,14 @@ extern const int SFT_standard___collection___list[];
 #define ATTR_standard___collection___list___List____head(recv) ATTR(recv, (SFT_standard___collection___list[2] + 0))
 #define ATTR_standard___collection___list___List____tail(recv) ATTR(recv, (SFT_standard___collection___list[2] + 1))
 #define INIT_TABLE_POS_standard___collection___list___List (SFT_standard___collection___list[3] + 0)
-#define CALL_standard___collection___list___List___link(recv) ((standard___collection___list___List___link_t)CALL((recv), (SFT_standard___collection___list[3] + 1)))
-#define CALL_standard___collection___list___List___init(recv) ((standard___collection___list___List___init_t)CALL((recv), (SFT_standard___collection___list[3] + 2)))
-#define CALL_standard___collection___list___List___from(recv) ((standard___collection___list___List___from_t)CALL((recv), (SFT_standard___collection___list[3] + 3)))
-#define CALL_standard___collection___list___List___get_node(recv) ((standard___collection___list___List___get_node_t)CALL((recv), (SFT_standard___collection___list[3] + 4)))
-#define CALL_standard___collection___list___List___search_node_after(recv) ((standard___collection___list___List___search_node_after_t)CALL((recv), (SFT_standard___collection___list[3] + 5)))
-#define CALL_standard___collection___list___List___remove_node(recv) ((standard___collection___list___List___remove_node_t)CALL((recv), (SFT_standard___collection___list[3] + 6)))
-#define CALL_standard___collection___list___List___insert_before(recv) ((standard___collection___list___List___insert_before_t)CALL((recv), (SFT_standard___collection___list[3] + 7)))
+#define CALL_standard___collection___list___List___slice(recv) ((standard___collection___list___List___slice_t)CALL((recv), (SFT_standard___collection___list[3] + 1)))
+#define CALL_standard___collection___list___List___link(recv) ((standard___collection___list___List___link_t)CALL((recv), (SFT_standard___collection___list[3] + 2)))
+#define CALL_standard___collection___list___List___init(recv) ((standard___collection___list___List___init_t)CALL((recv), (SFT_standard___collection___list[3] + 3)))
+#define CALL_standard___collection___list___List___from(recv) ((standard___collection___list___List___from_t)CALL((recv), (SFT_standard___collection___list[3] + 4)))
+#define CALL_standard___collection___list___List___get_node(recv) ((standard___collection___list___List___get_node_t)CALL((recv), (SFT_standard___collection___list[3] + 5)))
+#define CALL_standard___collection___list___List___search_node_after(recv) ((standard___collection___list___List___search_node_after_t)CALL((recv), (SFT_standard___collection___list[3] + 6)))
+#define CALL_standard___collection___list___List___remove_node(recv) ((standard___collection___list___List___remove_node_t)CALL((recv), (SFT_standard___collection___list[3] + 7)))
+#define CALL_standard___collection___list___List___insert_before(recv) ((standard___collection___list___List___insert_before_t)CALL((recv), (SFT_standard___collection___list[3] + 8)))
 #define ID_standard___collection___list___ListIterator (SFT_standard___collection___list[4])
 #define COLOR_standard___collection___list___ListIterator (SFT_standard___collection___list[5])
 #define ATTR_standard___collection___list___ListIterator____list(recv) ATTR(recv, (SFT_standard___collection___list[6] + 0))
@@ -65,6 +66,8 @@ val_t standard___collection___list___List___has_only(val_t p0, val_t p1);
 typedef val_t (*standard___collection___list___List___has_only_t)(val_t p0, val_t p1);
 val_t standard___collection___list___List___count(val_t p0, val_t p1);
 typedef val_t (*standard___collection___list___List___count_t)(val_t p0, val_t p1);
+val_t standard___collection___list___List___slice(val_t p0, val_t p1, val_t p2);
+typedef val_t (*standard___collection___list___List___slice_t)(val_t p0, val_t p1, val_t p2);
 void standard___collection___list___List___push(val_t p0, val_t p1);
 typedef void (*standard___collection___list___List___push_t)(val_t p0, val_t p1);
 void standard___collection___list___List___unshift(val_t p0, val_t p1);

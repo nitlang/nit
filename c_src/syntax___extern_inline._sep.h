@@ -87,7 +87,7 @@ val_t NEW_AExternPropdef_parser___parser_prod___AMethPropdef___init_amethpropdef
 void syntax___extern_inline___AStdClassdef___accept_property_verifier(val_t p0, val_t p1);
 typedef void (*syntax___extern_inline___AStdClassdef___accept_property_verifier_t)(val_t p0, val_t p1);
 val_t NEW_AStdClassdef_parser___parser_prod___AStdClassdef___empty_init();
-val_t NEW_AStdClassdef_parser___parser_prod___AStdClassdef___init_astdclassdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6, val_t p7, val_t p8, val_t p9);
+val_t NEW_AStdClassdef_parser___parser_prod___AStdClassdef___init_astdclassdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6, val_t p7, val_t p8, val_t p9, val_t p10);
 val_t NEW_AStdClassdef_parser___parser_nodes___ANode___init();
 void syntax___extern_inline___MMSrcModule___do_mmbuilder(val_t p0, val_t p1);
 typedef void (*syntax___extern_inline___MMSrcModule___do_mmbuilder_t)(val_t p0, val_t p1);
