@@ -1634,6 +1634,12 @@ redef class AInternMethPropdef
 		else if pname == "force_garbage_collection" then
 			v.add("nit_gcollect();")
 			return
+		else if pname == "native_argc" then
+			v.ret(v.new_expr("glob_argc", ret.as(not null)))
+			return
+		else if pname == "native_argv" then
+			v.ret(v.new_expr("glob_argv[{arguments[1]}]", ret.as(not null)))
+			return
 		end
 		v.add("printf(\"NOT YET IMPLEMENTED {class_name}:{mpropdef} at {location.to_s}\\n\");")
 		debug("Not implemented {mpropdef}")
