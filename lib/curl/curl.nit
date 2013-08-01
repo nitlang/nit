@@ -338,7 +338,7 @@ interface CurlCallbacks
 end
 
 # Callbacks attributes
-protected abstract class CurlCallbacksRegisterIntern
+abstract class CurlCallbacksRegisterIntern
   var delegate: nullable CurlCallbacks writable = null
 end
 
@@ -361,7 +361,7 @@ class CurlResponseFailed
 end
 
 # Success Abstract Response Success Class
-protected abstract class CurlResponseSuccessIntern
+abstract class CurlResponseSuccessIntern
 	super CurlCallbacks
 	super CurlResponse
 
