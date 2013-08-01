@@ -239,9 +239,13 @@ class SeparateCompiler
 		for mclass in mclasses do
 			var table = new Array[nullable MPropDef]
 			# first, fill table from parents by reverse linearization order
-			var parents = self.mainmodule.super_mclasses(mclass)
-			var lin = self.mainmodule.reverse_linearize_mclasses(parents)
-			for parent in lin do
+			var parents = new Array[MClass]
+			if mainmodule.flatten_mclass_hierarchy.has(mclass) then
+				parents = mclass.in_hierarchy(mainmodule).greaters.to_a
+				self.mainmodule.linearize_mclasses(parents)
+			end
+			for parent in parents do
+				if parent == mclass then continue
 				for mproperty in self.mainmodule.properties(parent) do
 					if not mproperty isa MMethod then continue
 					var color = layout.pos[mproperty]
@@ -283,9 +287,13 @@ class SeparateCompiler
 		for mclass in mclasses do
 			var table = new Array[nullable MPropDef]
 			# first, fill table from parents by reverse linearization order
-			var parents = self.mainmodule.super_mclasses(mclass)
-			var lin = self.mainmodule.reverse_linearize_mclasses(parents)
-			for parent in lin do
+			var parents = new Array[MClass]
+			if mainmodule.flatten_mclass_hierarchy.has(mclass) then
+				parents = mclass.in_hierarchy(mainmodule).greaters.to_a
+				self.mainmodule.linearize_mclasses(parents)
+			end
+			for parent in parents do
+				if parent == mclass then continue
 				for mproperty in self.mainmodule.properties(parent) do
 					if not mproperty isa MAttribute then continue
 					var color = layout.pos[mproperty]
@@ -363,12 +371,19 @@ class SeparateCompiler
 	fun build_type_tables(mtypes: Set[MType]): Map[MType, Array[nullable MType]] do
 		var tables = new HashMap[MType, Array[nullable MType]]
 		var layout = self.type_layout
+		var poset = new POSet[MType]
+		for mtype in mtypes do
+			poset.add_node(mtype)
+			for otype in mtypes do
+				if mtype == otype then continue
+				if mtype.is_subtype(self.mainmodule, null, otype) then
+					poset.add_edge(mtype, otype)
+				end
+			end
+		end
 		for mtype in mtypes do
 			var table = new Array[nullable MType]
-			var supers = new HashSet[MType]
-			supers.add_all(self.mainmodule.super_mtypes(mtype, mtypes))
-			supers.add(mtype)
-			for sup in supers do
+			for sup in poset[mtype].greaters do
 				var color: Int
 				if layout isa PHLayout[MType, MType] then
 					color = layout.hashes[mtype][sup]

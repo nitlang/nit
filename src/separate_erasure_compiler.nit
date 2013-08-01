@@ -101,9 +101,13 @@ class SeparateErasureCompiler
 		for mclass in mclasses do
 			var table = new Array[nullable MPropDef]
 			# first, fill table from parents by reverse linearization order
-			var parents = self.mainmodule.super_mclasses(mclass)
-			var lin = self.mainmodule.reverse_linearize_mclasses(parents)
-			for parent in lin do
+			var parents = new Array[MClass]
+			if mainmodule.flatten_mclass_hierarchy.has(mclass) then
+				parents = mclass.in_hierarchy(mainmodule).greaters.to_a
+				self.mainmodule.linearize_mclasses(parents)
+			end
+			for parent in parents do
+				if parent == mclass then continue
 				for mproperty in self.mainmodule.properties(parent) do
 					if not mproperty isa MVirtualTypeProp then continue
 					var color = layout.pos[mproperty]
@@ -146,9 +150,10 @@ class SeparateErasureCompiler
 		var layout = self.class_layout
 		for mclass in mclasses do
 			var table = new Array[nullable MClass]
-			var supers = new HashSet[MClass]
-			supers.add_all(self.mainmodule.super_mclasses(mclass))
-			supers.add(mclass)
+			var supers = new Array[MClass]
+			if mainmodule.flatten_mclass_hierarchy.has(mclass) then
+				supers = mclass.in_hierarchy(mainmodule).greaters.to_a
+			end
 			for sup in supers do
 				var color: Int
 				if layout isa PHLayout[MClass, MClass] then
