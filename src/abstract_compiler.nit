@@ -1640,6 +1640,12 @@ redef class AInternMethPropdef
 		else if pname == "native_argv" then
 			v.ret(v.new_expr("glob_argv[{arguments[1]}]", ret.as(not null)))
 			return
+		else if pname == "native_argc" then
+			v.add("glob_argc;")
+			return
+		else if pname == "native_argv" then
+			v.add("glob_argv[{arguments[1]}];")
+			return
 		end
 		v.add("printf(\"NOT YET IMPLEMENTED {class_name}:{mpropdef} at {location.to_s}\\n\");")
 		debug("Not implemented {mpropdef}")

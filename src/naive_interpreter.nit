@@ -946,11 +946,6 @@ redef class AExternMethPropdef
 			else if pname == "rand" then
 				return v.float_instance(args[0].to_f.rand)
 			end
-		else if pname == "native_argc" then
-			return v.int_instance(v.arguments.length)
-		else if pname == "native_argv" then
-			var txt = v.arguments[args[1].to_i]
-			return v.native_string_instance(txt)
 		else if pname == "get_time" then
 			return v.int_instance(get_time)
 		else if pname == "srand_from" then
