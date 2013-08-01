@@ -294,13 +294,22 @@ nav ul li span,
 	color: #6C6C6C;
 }
 
+.content a {
+	color: #0D8921;
+}
+
 .content a:hover {
 	color: #333;
 }
 
-.content a {
+.info a {
+	color: #333;
+}
+
+.info a:hover {
 	color: #0D8921;
 }
+
 
 article .info .code {
 	float: right;
@@ -410,9 +419,9 @@ nav h3 a.fold {
 }
 
 /* Icons */
-.vtype.public { background-image: url('../resources/icons/vtype_public.png')}
-.vtype.protected { background-image: url('../resources/icons/vtype_protected.png')}
-.vtype.private { background-image: url('../resources/icons/vtype_private.png')}
+.type.public { background-image: url('../resources/icons/vtype_public.png')}
+.type.protected { background-image: url('../resources/icons/vtype_protected.png')}
+.type.private { background-image: url('../resources/icons/vtype_private.png')}
 .init.public { background-image: url('../resources/icons/const_public.png')}
 .init.protected { background-image: url('../resources/icons/const_protected.png')}
 .init.private { background-image: url('../resources/icons/const_private.png')}
@@ -844,4 +853,14 @@ fieldset {
 
 #preSave{
 	display: none;
+}
+
+a.newComment {
+	padding: 5px;
+	color: #0D8921;
+	display: block;
+	margin: 1em 0px;
+}
+a.newComment: hover {
+	color: #333;
 }

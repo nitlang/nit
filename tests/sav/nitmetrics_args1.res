@@ -184,7 +184,7 @@ Distribution of direct smallers
 (IF) Proportion of types Inherited From: 20.00%
 (CCIF) Proportion of classes extended by class: 0.0%
 (ICIF) Proportion of interfaces implemented by class: 100.00%
-(IIIF) Proportion of interfaces extended by interface: 0.0%
+(IIIF) Proportion of interfaces extended by interface: 100.00%
 
 --- (SL -> *) Std-Lib Inheritance metrics ---
 (SLDUI) Proportion of SL types inheriting another type other than Object: na%
@@ -216,7 +216,7 @@ Distribution of direct smallers
 (UDIF) Proportion of UD types Inherited From: 20.00%
 (UDCCIF) Proportion of UD classes extended by class: 0.0%
 (UDICIF) Proportion of UD interfaces implemented by class: 100.00%
-(UDIIIF) Proportion of UD interfaces extended by interface: 0.0%
+(UDIIIF) Proportion of UD interfaces extended by interface: 100.00%
 
 --- (UD -> SL) User-Defined Inheritance metrics ---
 (UDDUISL) Proportion of UD types inheriting another type other SL type: 0.0%
@@ -232,7 +232,7 @@ Distribution of direct smallers
 (UDIFUD) Proportion of UD types Inherited From: 20.00%
 (UDCCIFUD) Proportion of UD classes extended by UD class: 0.0%
 (UDICIFUD) Proportion of UD interfaces implemented by UD class: 100.00%
-(UDIIIFUD) Proportion of UD interfaces extended by UD interface: 0.0%
+(UDIIIFUD) Proportion of UD interfaces extended by UD interface: 100.00%
 --- Metrics of refinement usage ---
 Number of modules: 1
 
