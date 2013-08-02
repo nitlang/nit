@@ -56,13 +56,13 @@ window.onbeforeunload = function() {
 };
 
 $(document).ready(function() {
-
+	createLoginBox();
 	// Hide edit tags
 	$('textarea').hide();
 	$('a[id=commitBtn]').hide();
 	$('a[id=cancelBtn]').hide();
 	// Display Login modal
-	$("#logGitHub").click(function(){ displayLogginModal(); }); 
+	$("#logGitHub").click(function(){ toggleLoginBox(); });
 	// Update display
 	updateDisplaying();
 	// If cookie existing the session is opened
@@ -102,7 +102,7 @@ $(document).ready(function() {
 			del_cookie("logginNitdoc");
 			closeAllCommentInEdtiting();
 		}	
-		displayLogginModal();
+		toggleLoginBox();
 	});
 
 	// Activate edit mode
@@ -159,7 +159,7 @@ $(document).ready(function() {
 		else{
 			if(!sessionStarted){
 				displayMessage("You need to be loggued before commit something", 45, 40);
-				displayLogginModal();
+				toggleLoginBox();
 				return;
 			}
 			
@@ -260,7 +260,7 @@ $(document).ready(function() {
 					$('#loginGit').val("");
 					$('#passwordGit').val("");
 					loginProcess = false;          
-					displayLogginModal();
+					toggleLoginBox();
 		        }
 		        else{
 					if ($.trim(updateComment) == ''){ this.value = (this.defaultValue ? this.defaultValue : ''); }
@@ -351,15 +351,6 @@ function startCommitProcess()
 	else{
 		displayMessage('Please sign this commit', 40, 40); 
 	}
-}
-
-function displayLogginModal(){
-	if ($('.popover').is(':hidden')) { 
-		if(sessionStarted){ getListBranches(); }
-		$('.popover').show(); 
-	}
-	else { $('.popover').hide(); }	
-	updateDisplaying();
 }
 
 function updateDisplaying(){
@@ -992,4 +983,59 @@ function showComment(element){
 	// Resize edit box
 	textarea.height(textarea.prop("scrollHeight"));
 	resizeTextarea(textarea);
+}
+
+/* GitHub login box management */
+
+function createLoginBox() {
+	$("nav.main ul").append(
+		"<li id='liGitHub'>" +
+		"  <a class='btn' id='logGitHub'>" +
+		"    <img id='imgGitHub' src='resources/icons/github-icon.png' alt='GitHub'/>" +
+		"  </a>" +
+		"  <div class='popover bottom' style='display: none;'>" +
+		"    <div class='arrow'>&nbsp;</div>" +
+		"      <div class='githubTitle'>" +
+		"        <h3>Github Sign In</h3>" +
+		"      </div>" +
+		"      <div>" +
+		"        <label id='lbloginGit'>Username</label>" +
+		"        <input id='loginGit' name='login' type='text'/>" +
+		"        <label id='logginMessage'>Hello " +
+		"          <a id='githubAccount'><strong id='nickName'></strong></a>" +
+		"        </label>" +
+		"      </div>" +
+		"      <div>" +
+		"        <label id='lbpasswordGit'>Password</label>" +
+		"        <input id='passwordGit' name='password' type='password'/>" +
+		"        <div id='listBranches'>" +
+		"          <label id='lbBranches'>Branch</label>" +
+		"          <select class='dropdown' id='dropBranches' name='dropBranches' tabindex='1'></select>" +
+		"        </div>" +
+		"      </div>" +
+		"      <div>" +
+		"        <label id='lbrepositoryGit'>Repository</label>" +
+		"        <input id='repositoryGit' name='repository' type='text'/>" +
+		"      </div>" +
+		"      <div>" +
+		"        <label id='lbbranchGit'>Branch</label>" +
+		"        <input id='branchGit' name='branch' type='text'/>" +
+		"      </div>" +
+		"      <div>" +
+		"        <a id='signIn'>Sign In</a>" +
+		"      </div>" +
+		"    </div>" +
+		"  </div>" +
+		"</li>"
+	);
+}
+
+function toggleLoginBox(){
+	if ($('.popover').is(':hidden')) {
+		if(sessionStarted){ getListBranches(); }
+		$('.popover').show();
+	} else {
+		$('.popover').hide();
+	}
+	updateDisplaying();
 }
