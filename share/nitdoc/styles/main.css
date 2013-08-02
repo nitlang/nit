@@ -855,6 +855,10 @@ fieldset {
 	display: none;
 }
 
+.noComment {
+	padding: 5px;
+}
+
 a.newComment {
 	padding: 5px;
 	color: #0D8921;

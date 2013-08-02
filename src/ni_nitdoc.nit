@@ -856,9 +856,7 @@ class NitdocClass
 		append("</div>")
 		# comment
 		var nclass = ctx.mbuilder.mclassdef2nclassdef[mclass.intro]
-		append("<div style=\"float: right;\"><a id=\"lblDiffCommit\"></a></div>")
 		append("<section class='description'>")
-		if nclass isa AStdClassdef and not nclass.full_comment.is_empty then append("<pre class=\"text_label\" title=\"122\" name=\"\" tag=\"{mclass.mclassdefs.first.location.to_s}\" type=\"2\">{nclass.full_comment}</pre><textarea id=\"fileContent\" class=\"edit\" cols=\"76\" rows=\"1\" style=\"display: none;\"></textarea><a id=\"cancelBtn\" style=\"display: none;\">Cancel</a><a id=\"commitBtn\" style=\"display: none;\">Commit</a><pre id=\"preSave\" class=\"text_label\" type=\"2\"></pre>")
 		process_generate_dot
 		append("</section>")
 		# concerns
@@ -1148,10 +1146,6 @@ redef class MModule
 		if page.ctx.mbuilder.mmodule2nmodule.has_key(self) then
 			page.append("<div id='description'>")
 			page.append("<pre class='text_label'>{page.ctx.mbuilder.mmodule2nmodule[self].full_comment}</pre>")
-			page.append("<textarea class='edit' rows='1' cols='76' id='fileContent'></textarea>")
-			page.append("<a id='cancelBtn'>Cancel</a>")
-			page.append("<a id='commitBtn'>Commit</a>")
-			page.append("<pre class='text_label' id='preSave' type='2'></pre>")
 			page.append("</div>")
 		end
 	end
@@ -1406,24 +1400,23 @@ redef class MPropDef
 		page.append("<div class='description'>")
 		if not is_intro and page.ctx.mbuilder.mpropdef2npropdef.has_key(mproperty.intro) then
 			var intro_nprop = page.ctx.mbuilder.mpropdef2npropdef[mproperty.intro]
-			page.append("<p>from ")
+			page.append("<p class='info'>from ")
 			mproperty.html_namespace(page)
 			page.append("</p>")
 			if intro_nprop.full_comment == "" then
-				page.append("<a class=\"newComment\" title=\"32\" tag=\"\">New Comment</a>")
+				page.append("<span class=\"noComment\">No comment</span>")
 			else
-				page.append("<pre class=\"text_label\" title=\"\" name=\"\" tag=\"\" type=\"1\">{intro_nprop.full_comment}</pre>")
+				page.append("<pre>{intro_nprop.full_comment}</pre>")
 			end
-			page.append("<p>from ")
+			page.append("<p class='info'>from ")
 			mclassdef.html_namespace(page)
 			page.append("</p>")
 		end
 		if nprop.full_comment == "" then
-			page.append("<a class=\"newComment\" title=\"32\" tag=\"\">New Comment</a>")
+			page.append("<span class=\"noComment\">No comment</span>")
 		else
-			page.append("<pre class=\"text_label\" title=\"\" name=\"\" tag=\"\" type=\"1\">{nprop.full_comment}</pre>")
+			page.append("<pre>{nprop.full_comment}</pre>")
 		end
-		page.append("<textarea id=\"fileContent\" class=\"edit\" cols=\"76\" rows=\"1\" style=\"display: none;\"></textarea><a id=\"cancelBtn\" style=\"display: none;\">Cancel</a><a id=\"commitBtn\" style=\"display: none;\">Commit</a><pre id=\"preSave\" class=\"text_label\" type=\"2\"></pre>")
 		html_inheritance(page)
 		page.append("</div>")
 	end
@@ -1466,7 +1459,6 @@ redef class MMethodDef
 		end
 		mproperty.html_namespace(page)
 		page.append("</div>")
-		page.append("<div style=\"float: right;\"><a id=\"lblDiffCommit\"></a></div>")
 	end
 end
 
@@ -1492,7 +1484,6 @@ redef class MVirtualTypeDef
 		page.append("type ")
 		mproperty.html_namespace(page)
 		page.append("</div>")
-		page.append("<div style=\"float: right;\"><a id=\"lblDiffCommit\"></a></div>")
 	end
 end
 
