@@ -2384,133 +2384,17 @@ redef class Array[E]
 end
 
 redef class MModule
-
-	# Return a linearization of a set of mtypes
-	fun linearize_mtypes(mtypes: Set[MType]): Array[MType] do
-		var lin = new Array[MType].from(mtypes)
-		var sorter = new TypeSorter(self)
-		sorter.sort(lin)
-		return lin
-	end
-
-	# Return a reverse linearization of a set of mtypes
-	fun reverse_linearize_mtypes(mtypes: Set[MType]): Array[MType] do
-		var lin = new Array[MType].from(mtypes)
-		var sorter = new ReverseTypeSorter(self)
-		sorter.sort(lin)
-		return lin
-	end
-
-	# Return super types of a `mtype` in `self`
-	fun super_mtypes(mtype: MType, mtypes: Set[MType]): Set[MType] do
-		if not self.super_mtypes_cache.has_key(mtype) then
-			var supers = new HashSet[MType]
-			for otype in mtypes do
-				if otype == mtype then continue
-				if mtype.is_subtype(self, null, otype) then
-					supers.add(otype)
-				end
-			end
-			self.super_mtypes_cache[mtype] = supers
-		end
-		return self.super_mtypes_cache[mtype]
-	end
-
-	private var super_mtypes_cache: Map[MType, Set[MType]] = new HashMap[MType, Set[MType]]
-
-	# Return all sub mtypes (directs and indirects) of a `mtype` in `self`
-	fun sub_mtypes(mtype: MType, mtypes: Set[MType]): Set[MType] do
-		if not self.sub_mtypes_cache.has_key(mtype) then
-			var subs = new HashSet[MType]
-			for otype in mtypes do
-				if otype == mtype then continue
-				if otype.is_subtype(self, null, mtype) then
-					subs.add(otype)
-				end
-			end
-			self.sub_mtypes_cache[mtype] = subs
-		end
-		return self.sub_mtypes_cache[mtype]
-	end
-
-	private var sub_mtypes_cache: Map[MType, Set[MType]] = new HashMap[MType, Set[MType]]
-
-	# Return a linearization of a set of mclasses
-	fun linearize_mclasses_2(mclasses: Set[MClass]): Array[MClass] do
-		var lin = new Array[MClass].from(mclasses)
-		var sorter = new ClassSorter(self)
-		sorter.sort(lin)
-		return lin
-	end
-
-	# Return a reverse linearization of a set of mtypes
-	fun reverse_linearize_mclasses(mclasses: Set[MClass]): Array[MClass] do
-		var lin = new Array[MClass].from(mclasses)
-		var sorter = new ReverseClassSorter(self)
-		sorter.sort(lin)
-		return lin
-	end
-
-	# Return all super mclasses (directs and indirects) of a `mclass` in `self`
-	fun super_mclasses(mclass: MClass): Set[MClass] do
-		if not self.super_mclasses_cache.has_key(mclass) then
-			var supers = new HashSet[MClass]
-			if self.flatten_mclass_hierarchy.has(mclass) then
-				for sup in self.flatten_mclass_hierarchy[mclass].greaters do
-					if sup == mclass then continue
-					supers.add(sup)
-				end
-			end
-			self.super_mclasses_cache[mclass] = supers
-		end
-		return self.super_mclasses_cache[mclass]
-	end
-
-	private var super_mclasses_cache: Map[MClass, Set[MClass]] = new HashMap[MClass, Set[MClass]]
-
-	# Return all parents of a `mclass` in `self`
-	fun parent_mclasses(mclass: MClass): Set[MClass] do
-		if not self.parent_mclasses_cache.has_key(mclass) then
-			var parents = new HashSet[MClass]
-			if self.flatten_mclass_hierarchy.has(mclass) then
-				for sup in self.flatten_mclass_hierarchy[mclass].direct_greaters do
-					if sup == mclass then continue
-					parents.add(sup)
-				end
-			end
-			self.parent_mclasses_cache[mclass] = parents
-		end
-		return self.parent_mclasses_cache[mclass]
-	end
-
-	private var parent_mclasses_cache: Map[MClass, Set[MClass]] = new HashMap[MClass, Set[MClass]]
-
-	# Return all sub mclasses (directs and indirects) of a `mclass` in `self`
-	fun sub_mclasses(mclass: MClass): Set[MClass] do
-		if not self.sub_mclasses_cache.has_key(mclass) then
-			var subs = new HashSet[MClass]
-			if self.flatten_mclass_hierarchy.has(mclass) then
-				for sub in self.flatten_mclass_hierarchy[mclass].smallers do
-					if sub == mclass then continue
-					subs.add(sub)
-				end
-			end
-			self.sub_mclasses_cache[mclass] = subs
-		end
-		return self.sub_mclasses_cache[mclass]
-	end
-
-	private var sub_mclasses_cache: Map[MClass, Set[MClass]] = new HashMap[MClass, Set[MClass]]
-
 	# All 'mproperties' associated to all 'mclassdefs' of `mclass`
 	fun properties(mclass: MClass): Set[MProperty] do
 		if not self.properties_cache.has_key(mclass) then
 			var properties = new HashSet[MProperty]
-			var parents = self.super_mclasses(mclass)
+			var parents = new Array[MClass]
+			if self.flatten_mclass_hierarchy.has(mclass) then
+				parents.add_all(mclass.in_hierarchy(self).direct_greaters)
+			end
 			for parent in parents do
 				properties.add_all(self.properties(parent))
 			end
-
 			for mclassdef in mclass.mclassdefs do
 				for mpropdef in mclassdef.mpropdefs do
 					properties.add(mpropdef.mproperty)
@@ -2520,72 +2404,5 @@ redef class MModule
 		end
 		return properties_cache[mclass]
 	end
-
 	private var properties_cache: Map[MClass, Set[MProperty]] = new HashMap[MClass, Set[MProperty]]
-end
-
-# A sorter for linearize list of types
-private class TypeSorter
-	super AbstractSorter[MType]
-
-	private var mmodule: MModule
-
-	init(mmodule: MModule) do self.mmodule = mmodule
-
-	redef fun compare(a, b) do
-		if a == b then
-			return 0
-		else if a.is_subtype(self.mmodule, null, b) then
-			return -1
-		end
-		return 1
-	end
-end
-
-# A sorter for reverse linearization
-private class ReverseTypeSorter
-	super TypeSorter
-
-	init(mmodule: MModule) do end
-
-	redef fun compare(a, b) do
-		if a == b then
-			return 0
-		else if a.is_subtype(self.mmodule, null, b) then
-			return 1
-		end
-		return -1
-	end
-end
-
-# A sorter for linearize list of classes
-private class ClassSorter
-	super AbstractSorter[MClass]
-
-	var mmodule: MModule
-
-	redef fun compare(a, b) do
-		if a == b then
-			return 0
-		else if self.mmodule.flatten_mclass_hierarchy.has(a) and self.mmodule.flatten_mclass_hierarchy[a].greaters.has(b) then
-			return -1
-		end
-		return 1
-	end
-end
-
-# A sorter for reverse linearization
-private class ReverseClassSorter
-	super AbstractSorter[MClass]
-
-	var mmodule: MModule
-
-	redef fun compare(a, b) do
-		if a == b then
-			return 0
-		else if self.mmodule.flatten_mclass_hierarchy.has(a) and self.mmodule.flatten_mclass_hierarchy[a].greaters.has(b) then
-			return 1
-		end
-		return -1
-	end
 end
