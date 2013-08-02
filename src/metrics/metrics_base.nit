@@ -32,6 +32,8 @@ redef class ToolContext
 	var opt_refinement = new OptionBool("Compute metrics about refinement usage", "--refinement")
 	# --self
 	var opt_self = new OptionBool("Compute metrics about the usage of explicit and implicit self", "--self")
+	# --ast
+	var opt_ast = new OptionBool("Compute metrics about the usage of nodes and identifiers in the AST", "--ast")
 	# --nullables
 	var opt_nullables = new OptionBool("Compute metrics on nullables send", "--nullables")
 	# --static-types
@@ -57,6 +59,7 @@ redef class ToolContext
 		self.option_context.add_option(opt_inheritance)
 		self.option_context.add_option(opt_refinement)
 		self.option_context.add_option(opt_self)
+		self.option_context.add_option(opt_ast)
 		self.option_context.add_option(opt_nullables)
 		self.option_context.add_option(opt_static_types)
 		self.option_context.add_option(opt_tables)
