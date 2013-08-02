@@ -535,10 +535,6 @@ end
 #  * foo(othertype, anchor, mmodule)
 #  * foo(anchor, mmodule, othertype)
 #  * foo(othertype, mmodule, anchor)
-#
-# FIXME: Add a 'is_valid_anchor' to improve imputability.
-# Currently, anchors are used "as it" without check thus if the caller gives a
-# bad anchor, then the method will likely crash (abort) in a bad case
 abstract class MType
 
 	# The model of the type
@@ -548,6 +544,7 @@ abstract class MType
 	# The typing is done using the standard typing policy of Nit.
 	#
 	# REQUIRE: anchor == null implies not self.need_anchor and not sup.need_anchor
+	# REQUIRE: anchor != null implies self.can_resolve_for(anchor, null, mmodule) and sup.can_resolve_for(anchor, null, mmodule)
 	fun is_subtype(mmodule: MModule, anchor: nullable MClassType, sup: MType): Bool
 	do
 		var sub = self
@@ -555,6 +552,9 @@ abstract class MType
 		if anchor == null then
 			assert not sub.need_anchor
 			assert not sup.need_anchor
+		else
+			assert sub.can_resolve_for(anchor, null, mmodule)
+			assert sup.can_resolve_for(anchor, null, mmodule)
 		end
 
 		# First, resolve the formal types to a common version in the receiver
@@ -690,6 +690,7 @@ abstract class MType
 	# H[Int]  supertype_to  G  #->  G[Int, Bool]
 	#
 	# REQUIRE: `super_mclass' is a super-class of `self'
+	# REQUIRE: self.need_anchor implies anchor != null and self.can_resolve_for(anchor, null, mmodule)
 	# ENSURE: return.mclass = mclass
 	fun supertype_to(mmodule: MModule, anchor: nullable MClassType, super_mclass: MClass): MClassType
 	do
@@ -775,6 +776,8 @@ abstract class MType
 	#
 	#   E.resolve_for(A[Array[F]],B[nullable Object])  #->  Array[F]
 	#
+	# The resolution can be done because `E` make sense for the class A (see `can_resolve_for`)
+	#
 	# TODO: Explain the cleanup_virtual
 	#
 	# FIXME: the parameter `cleanup_virtual' is just a bad idea, but having
@@ -783,6 +786,28 @@ abstract class MType
 	# REQUIRE: can_resolve_for(mtype, anchor, mmodule)
 	# ENSURE: not self.need_anchor implies return == self
 	fun resolve_for(mtype: MType, anchor: nullable MClassType, mmodule: MModule, cleanup_virtual: Bool): MType is abstract
+
+	# Can the type be resolved?
+	#
+	# In order to resolve open types, the formal types must make sence.
+	#
+	# ## Example
+	#
+	#     class A[E]
+	#     end
+	#     class B[F]
+	#     end
+	#
+	#   E.can_resolve_for(A[Int])  #->  true, E make sense in A
+	#   E.can_resolve_for(B[Int])  #->  false, E does not make sense in B
+	#   B[E].can_resolve_for(A[F], B[Object])  #->  true,
+	#     B[E] is a red hearing only the E is important,
+	#     E make sense in A
+	#
+	# REQUIRE: anchor != null implies not anchor.need_anchor
+	# REQUIRE: mtype.need_anchor implies anchor != null and mtype.can_resolve_for(anchor, null, mmodule)
+	# ENSURE: not self.need_anchor implies return == true
+	fun can_resolve_for(mtype: MType, anchor: nullable MClassType, mmodule: MModule): Bool is abstract
 
 	# Return the nullable version of the type
 	# If the type is already nullable then self is returned
@@ -889,6 +914,8 @@ class MClassType
 
 	redef fun resolve_for(mtype: MType, anchor: nullable MClassType, mmodule: MModule, cleanup_virtual: Bool): MClassType do return self
 
+	redef fun can_resolve_for(mtype, anchor, mmodule) do return true
+
 	redef fun collect_mclassdefs(mmodule)
 	do
 		assert not self.need_anchor
@@ -987,12 +1014,23 @@ class MGenericType
 	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual)
 	do
 		if not need_anchor then return self
+		assert can_resolve_for(mtype, anchor, mmodule)
 		var types = new Array[MType]
 		for t in arguments do
 			types.add(t.resolve_for(mtype, anchor, mmodule, cleanup_virtual))
 		end
 		return mclass.get_mtype(types)
 	end
+
+	redef fun can_resolve_for(mtype, anchor, mmodule)
+	do
+		if not need_anchor then return true
+		for t in arguments do
+			if not t.can_resolve_for(mtype, anchor, mmodule) then return false
+		end
+		return true
+	end
+
 
 	redef fun depth
 	do
@@ -1051,6 +1089,7 @@ class MVirtualType
 
 	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual)
 	do
+		assert can_resolve_for(mtype, anchor, mmodule)
 		# self is a virtual type declared (or inherited) in mtype
 		# The point of the function it to get the bound of the virtual type that make sense for mtype
 		# But because mtype is maybe a virtual/formal type, we need to get a real receiver first
@@ -1084,6 +1123,15 @@ class MVirtualType
 
 		# If anything apply, then `self' cannot be resolved, so return self
 		return self
+	end
+
+	redef fun can_resolve_for(mtype, anchor, mmodule)
+	do
+		if mtype.need_anchor then
+			assert anchor != null
+			mtype = mtype.anchor_to(mmodule, anchor)
+		end
+		return mtype.has_mproperty(mmodule, mproperty)
 	end
 
 	redef fun to_s do return self.mproperty.to_s
@@ -1158,6 +1206,7 @@ class MParameterType
 
 	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual)
 	do
+		assert can_resolve_for(mtype, anchor, mmodule)
 		#print "{class_name}: {self}/{mtype}/{anchor}?"
 
 		if mtype isa MGenericType and mtype.mclass == self.mclass then
@@ -1205,6 +1254,15 @@ class MParameterType
 		return res
 	end
 
+	redef fun can_resolve_for(mtype, anchor, mmodule)
+	do
+		if mtype.need_anchor then
+			assert anchor != null
+			mtype = mtype.anchor_to(mmodule, anchor)
+		end
+		return mtype.collect_mclassdefs(mmodule).has(mclass.intro)
+	end
+
 	init(mclass: MClass, rank: Int)
 	do
 		self.mclass = mclass
@@ -1234,6 +1292,11 @@ class MNullableType
 	do
 		var res = self.mtype.resolve_for(mtype, anchor, mmodule, cleanup_virtual)
 		return res.as_nullable
+	end
+
+	redef fun can_resolve_for(mtype, anchor, mmodule)
+	do
+		return self.mtype.can_resolve_for(mtype, anchor, mmodule)
 	end
 
 	redef fun depth do return self.mtype.depth
@@ -1273,6 +1336,7 @@ class MNullType
 	redef fun as_nullable do return self
 	redef fun need_anchor do return false
 	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual) do return self
+	redef fun can_resolve_for(mtype, anchor, mmodule) do return true
 
 	redef fun collect_mclassdefs(mmodule) do return new HashSet[MClassDef]
 
