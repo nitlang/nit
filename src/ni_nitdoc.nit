@@ -205,6 +205,8 @@ abstract class NitdocPage
 		append("<script type='text/javascript' src='scripts/jquery-1.7.1.min.js'></script>")
 		append("<script type='text/javascript' src='quicksearch-list.js'></script>")
 		append("<script type='text/javascript' src='scripts/js-facilities.js'></script>")
+		append("<script type='text/javascript' src='scripts/base64.js'></script>")
+		append("<script type='text/javascript' src='scripts/github.js'></script>")
 		append("<link rel='stylesheet' href='styles/main.css' type='text/css' media='screen'/>")
 		var title = ""
 		if ctx.opt_custom_title.value != null then
@@ -230,7 +232,7 @@ abstract class NitdocPage
 		append("<a class='btn' id='logGitHub'>")
 		append("<img id='imgGitHub' src='resources/icons/github-icon.png' alt='GitHub'/>")
 		append("</a>")
-		append("<div class='popover bottom'>")
+		append("<div class='popover bottom' style='display: none;'>")
 		append("<div class='arrow'>&nbsp;</div>")
 		append("<div class='githubTitle'>")
 		append("<h3>Github Sign In</h3>")

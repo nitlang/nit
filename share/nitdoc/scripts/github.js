@@ -61,13 +61,6 @@ $(document).ready(function() {
 	$('textarea').hide();
 	$('a[id=commitBtn]').hide();
 	$('a[id=cancelBtn]').hide();
-	// Hide Authenfication form
-	$(".popover").hide();
-	// Update display
-	updateDisplaying();
-
-	// Hide Authenfication form
-	$(".popover").hide();
 	// Display Login modal
 	$("#logGitHub").click(function(){ displayLogginModal(); }); 
 	// Update display
