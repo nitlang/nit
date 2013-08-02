@@ -776,6 +776,19 @@ abstract class MType
 		return 1
 	end
 
+	# The length of the type seen as a tree.
+	#
+	# A -> 1
+	# G[A] -> 2
+	# H[A, B] -> 3
+	# H[G[A], B] -> 4
+	#
+	# Formal types have a length of 1.
+	fun length: Int
+	do
+		return 1
+	end
+
 	# Compute all the classdefs inherited/imported.
 	# The returned set contains:
 	#  * the class definitions from `mmodule` and its imported modules
@@ -954,6 +967,15 @@ class MGenericType
 			if d > dmax then dmax = d
 		end
 		return dmax + 1
+	end
+
+	redef fun length
+	do
+		var res = 1
+		for a in self.arguments do
+			res += a.length
+		end
+		return res
 	end
 end
 
@@ -1166,6 +1188,8 @@ class MNullableType
 
 	redef fun depth do return self.mtype.depth
 
+	redef fun length do return self.mtype.length
+
 	redef fun collect_mclassdefs(mmodule)
 	do
 		assert not self.need_anchor
@@ -1233,6 +1257,20 @@ class MSignature
 			if d > dmax then dmax = d
 		end
 		return dmax + 1
+	end
+
+	redef fun length
+	do
+		var res = 1
+		var t = self.return_mtype
+		if t != null then res += t.length
+		for p in mparameters do
+			res += p.mtype.length
+		end
+		for p in mclosures do
+			res += p.mtype.length
+		end
+		return res
 	end
 
 	# REQUIRE: 1 <= mparameters.count p -> p.is_vararg
