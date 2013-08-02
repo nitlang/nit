@@ -51,7 +51,7 @@ all: ../bin/nitc ../bin/nitdoc ../bin/nits ../bin/nitmetrics ../bin/nitg ../bin/
 	@echo '* Compile nitg from NIT source files                          *'
 	@echo '***************************************************************'
 	./git-gen-version.sh
-	../bin/nitc ${NITCOPT} -o ../bin/nitg -v nitg.nit
+	../bin/nitc ${NITCOPT} -O -o ../bin/nitg -v nitg.nit
 
 ../bin/nit: ../bin/nitg
 	@echo '***************************************************************'
