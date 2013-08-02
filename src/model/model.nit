@@ -539,8 +539,6 @@ end
 # FIXME: Add a 'is_valid_anchor' to improve imputability.
 # Currently, anchors are used "as it" without check thus if the caller gives a
 # bad anchor, then the method will likely crash (abort) in a bad case
-#
-# FIXME: maybe allways add an anchor with a nullable type (as in is_subtype)
 abstract class MType
 
 	# The model of the type
@@ -673,7 +671,7 @@ abstract class MType
 		if not need_anchor then return self
 		assert not anchor.need_anchor
 		# Just resolve to the anchor and clear all the virtual types
-		var res = self.resolve_for(anchor, anchor, mmodule, true)
+		var res = self.resolve_for(anchor, null, mmodule, true)
 		assert not res.need_anchor
 		return res
 	end
@@ -693,11 +691,17 @@ abstract class MType
 	#
 	# REQUIRE: `super_mclass' is a super-class of `self'
 	# ENSURE: return.mclass = mclass
-	fun supertype_to(mmodule: MModule, anchor: MClassType, super_mclass: MClass): MClassType
+	fun supertype_to(mmodule: MModule, anchor: nullable MClassType, super_mclass: MClass): MClassType
 	do
 		if super_mclass.arity == 0 then return super_mclass.mclass_type
 		if self isa MClassType and self.mclass == super_mclass then return self
-		var resolved_self = self.anchor_to(mmodule, anchor)
+		var resolved_self
+		if self.need_anchor then
+			assert anchor != null
+			resolved_self = self.anchor_to(mmodule, anchor)
+		else
+			resolved_self = self
+		end
 		var supertypes = resolved_self.collect_mtypes(mmodule)
 		for supertype in supertypes do
 			if supertype.mclass == super_mclass then
@@ -714,10 +718,14 @@ abstract class MType
 	#
 	# This function returns self if `need_anchor' is false.
 	#
-	# Example:
+	# ## Example 1
+	#
 	#     class G[E]
 	#     class H[F] super G[F]
-	# Array[E]  resolve_for  H[Int]  #->  Array[Int]
+	#     class X[Z]
+	#
+	#   Array[E].resolve_for(H[Int])  #->  Array[Int]
+	#   Array[E].resolve_for(G[Z], X[Int]) #->  Array[Z]
 	#
 	# Explanation of the example:
 	#  * Array[E].need_anchor is true because there is a formal generic
@@ -729,10 +737,11 @@ abstract class MType
 	#  * So, in H[Int], Array[E] is Array[Int]
 	#
 	# This function is mainly used to inherit a signature.
-	# Because, unlike `anchor_type', we do not want a full resolution of
+	# Because, unlike `anchor_to', we do not want a full resolution of
 	# a type but only an adapted version of it.
 	#
-	# Example:
+	# ## Example 2
+	#
         #     class A[E]
 	#         foo(e:E):E
 	#     end
@@ -741,13 +750,39 @@ abstract class MType
 	# The signature on foo is (e: E): E
 	# If we resolve the signature for B, we get (e:Int):Int
 	#
+	# ## Example 3
+	#
+	#     class A[E]
+	#         fun foo(e:E) is abstract
+	#     end
+	#     class B[F]
+	#         var a: A[Array[F]]
+	#         fun bar do a.foo(x) # <- x is here
+	#     end
+	#
+	# The first question is: is foo available on `a`?
+	#
+	# The static type of a is `A[Array[F]]`, that is an open type.
+	# in order to find a method `foo`, whe must look at a resolved type.
+	#
+	#   A[Array[F]].anchor_to(B[nullable Object])  #->  A[Array[nullable Object]]
+	#
+	# the method `foo` exists in `A[Array[nullable Object]]`, therefore `foo` exists for `a`.
+	#
+	# The next question is: what is the accepted types for `x'?
+	#
+	# the signature of `foo` is `foo(e:E)`, thus we must resolve the type E
+	#
+	#   E.resolve_for(A[Array[F]],B[nullable Object])  #->  Array[F]
+	#
 	# TODO: Explain the cleanup_virtual
 	#
 	# FIXME: the parameter `cleanup_virtual' is just a bad idea, but having
 	# two function instead of one seems also to be a bad idea.
 	#
+	# REQUIRE: can_resolve_for(mtype, anchor, mmodule)
 	# ENSURE: not self.need_anchor implies return == self
-	fun resolve_for(mtype: MType, anchor: MClassType, mmodule: MModule, cleanup_virtual: Bool): MType is abstract
+	fun resolve_for(mtype: MType, anchor: nullable MClassType, mmodule: MModule, cleanup_virtual: Bool): MType is abstract
 
 	# Return the nullable version of the type
 	# If the type is already nullable then self is returned
@@ -852,7 +887,7 @@ class MClassType
 		return super.as(MClassType)
 	end
 
-	redef fun resolve_for(mtype: MType, anchor: MClassType, mmodule: MModule, cleanup_virtual: Bool): MClassType do return self
+	redef fun resolve_for(mtype: MType, anchor: nullable MClassType, mmodule: MModule, cleanup_virtual: Bool): MClassType do return self
 
 	redef fun collect_mclassdefs(mmodule)
 	do
@@ -1020,7 +1055,13 @@ class MVirtualType
 		# The point of the function it to get the bound of the virtual type that make sense for mtype
 		# But because mtype is maybe a virtual/formal type, we need to get a real receiver first
 		#print "{class_name}: {self}/{mtype}/{anchor}?"
-		var resolved_reciever = mtype.resolve_for(anchor, anchor, mmodule, true)
+		var resolved_reciever
+		if mtype.need_anchor then
+			assert anchor != null
+			resolved_reciever = mtype.resolve_for(anchor, null, mmodule, true)
+		else
+			resolved_reciever = mtype
+		end
 		# Now, we can get the bound
 		var verbatim_bound = lookup_bound(mmodule, resolved_reciever)
 		# The bound is exactly as declared in the "type" property, so we must resolve it again
@@ -1127,14 +1168,20 @@ class MParameterType
 		# The point of the function it to get the bound of the virtual type that make sense for mtype
 		# But because mtype is maybe a virtual/formal type, we need to get a real receiver first
 		# FIXME: What happend here is far from clear. Thus this part must be validated and clarified
-		var resolved_receiver = mtype.resolve_for(anchor.mclass.mclass_type, anchor, mmodule, true)
+		var resolved_receiver
+		if mtype.need_anchor then
+			assert anchor != null
+			resolved_receiver = mtype.resolve_for(anchor.mclass.mclass_type, anchor, mmodule, true)
+		else
+			resolved_receiver = mtype
+		end
 		if resolved_receiver isa MNullableType then resolved_receiver = resolved_receiver.mtype
 		if resolved_receiver isa MParameterType then
 			assert resolved_receiver.mclass == anchor.mclass
 			resolved_receiver = anchor.arguments[resolved_receiver.rank]
 			if resolved_receiver isa MNullableType then resolved_receiver = resolved_receiver.mtype
 		end
-		assert resolved_receiver isa MClassType else print "{class_name}: {self}/{mtype}/{anchor}? {resolved_receiver}"
+		assert resolved_receiver isa MClassType
 
 		# Eh! The parameter is in the current class.
 		# So we return the corresponding argument, no mater what!
@@ -1144,7 +1191,10 @@ class MParameterType
 			return res
 		end
 
-		resolved_receiver = resolved_receiver.resolve_for(anchor, anchor, mmodule, false)
+		if resolved_receiver.need_anchor then
+			assert anchor != null
+			resolved_receiver = resolved_receiver.resolve_for(anchor, null, mmodule, false)
+		end
 		# Now, we can get the bound
 		var verbatim_bound = lookup_bound(mmodule, resolved_receiver)
 		# The bound is exactly as declared in the "type" property, so we must resolve it again
@@ -1322,7 +1372,7 @@ class MSignature
 		return b.to_s
 	end
 
-	redef fun resolve_for(mtype: MType, anchor: MClassType, mmodule: MModule, cleanup_virtual: Bool): MSignature
+	redef fun resolve_for(mtype: MType, anchor: nullable MClassType, mmodule: MModule, cleanup_virtual: Bool): MSignature
 	do
 		var params = new Array[MParameter]
 		for p in self.mparameters do
@@ -1351,7 +1401,7 @@ class MParameter
 	# Is the parameter a vararg?
 	var is_vararg: Bool
 
-	fun resolve_for(mtype: MType, anchor: MClassType, mmodule: MModule, cleanup_virtual: Bool): MParameter
+	fun resolve_for(mtype: MType, anchor: nullable MClassType, mmodule: MModule, cleanup_virtual: Bool): MParameter
 	do
 		if not self.mtype.need_anchor then return self
 		var newtype = self.mtype.resolve_for(mtype, anchor, mmodule, cleanup_virtual)
