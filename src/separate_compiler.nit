@@ -255,9 +255,13 @@ class SeparateCompiler
 		for mclass in mclasses do
 			var table = new Array[nullable MPropDef]
 			# first, fill table from parents by reverse linearization order
-			var parents = self.mainmodule.super_mclasses(mclass)
-			var lin = self.mainmodule.reverse_linearize_mclasses(parents)
-			for parent in lin do
+			var parents = new Array[MClass]
+			if mainmodule.flatten_mclass_hierarchy.has(mclass) then
+				parents = mclass.in_hierarchy(mainmodule).greaters.to_a
+				self.mainmodule.linearize_mclasses(parents)
+			end
+			for parent in parents do
+				if parent == mclass then continue
 				for mproperty in self.mainmodule.properties(parent) do
 					if not mproperty isa MMethod then continue
 					var color = layout.pos[mproperty]
@@ -299,9 +303,13 @@ class SeparateCompiler
 		for mclass in mclasses do
 			var table = new Array[nullable MPropDef]
 			# first, fill table from parents by reverse linearization order
-			var parents = self.mainmodule.super_mclasses(mclass)
-			var lin = self.mainmodule.reverse_linearize_mclasses(parents)
-			for parent in lin do
+			var parents = new Array[MClass]
+			if mainmodule.flatten_mclass_hierarchy.has(mclass) then
+				parents = mclass.in_hierarchy(mainmodule).greaters.to_a
+				self.mainmodule.linearize_mclasses(parents)
+			end
+			for parent in parents do
+				if parent == mclass then continue
 				for mproperty in self.mainmodule.properties(parent) do
 					if not mproperty isa MAttribute then continue
 					var color = layout.pos[mproperty]
@@ -339,7 +347,7 @@ class SeparateCompiler
 	end
 
 	# colorize live types of the program
-	private fun do_type_coloring: Set[MType] do
+	private fun do_type_coloring: POSet[MType] do
 		var mtypes = new HashSet[MType]
 		mtypes.add_all(self.runtime_type_analysis.live_types)
 		mtypes.add_all(self.runtime_type_analysis.live_cast_types)
@@ -367,24 +375,22 @@ class SeparateCompiler
 
 		# colorize types
 		self.type_layout = layout_builder.build_layout(mtypes)
-		self.type_tables = self.build_type_tables(mtypes)
+		var poset = layout_builder.poset.as(not null)
+		self.type_tables = self.build_type_tables(poset)
 
 		# VT and FT are stored with other unresolved types in the big resolution_tables
 		self.compile_resolution_tables(mtypes)
 
-		return mtypes
+		return poset
 	end
 
 	# Build type tables
-	fun build_type_tables(mtypes: Set[MType]): Map[MType, Array[nullable MType]] do
+	fun build_type_tables(mtypes: POSet[MType]): Map[MType, Array[nullable MType]] do
 		var tables = new HashMap[MType, Array[nullable MType]]
 		var layout = self.type_layout
 		for mtype in mtypes do
 			var table = new Array[nullable MType]
-			var supers = new HashSet[MType]
-			supers.add_all(self.mainmodule.super_mtypes(mtype, mtypes))
-			supers.add(mtype)
-			for sup in supers do
+			for sup in mtypes[mtype].greaters do
 				var color: Int
 				if layout isa PHLayout[MType, MType] then
 					color = layout.hashes[mtype][sup]
