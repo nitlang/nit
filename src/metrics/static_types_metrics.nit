@@ -82,19 +82,7 @@ do
 	print "Total number of explicit static types: {typecount.total}"
 	if typecount.total == 0 then return
 
-	# types sorted by usage
-	var types = typecount.sort
-
-	# Display most used types (ie the last of `types')
-	print "Most used types: "
-	var min = 10
-	if types.length < min then min = types.length
-	for i in [0..min[ do
-		var t = types[types.length-i-1]
-		print "  {t}: {typecount[t]}"
-	end
-
-	# Some statistics
 	print "Statistics of type usage:"
 	typecount.print_summary
+	typecount.print_elements(10)
 end

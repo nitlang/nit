@@ -1,4 +1,73 @@
 *** METRICS ***
+--- AST Metrics ---
+## All nodes of the AST
+ population: 47
+ minimum value: 1
+ maximum value: 39
+ total value: 254
+ average value: 5.40
+ distribution:
+  <=1: sub-population=14 (29.78%); cumulated value=14 (5.51%)
+  <=2: sub-population=6 (12.76%); cumulated value=12 (4.72%)
+  <=4: sub-population=9 (19.14%); cumulated value=29 (11.41%)
+  <=8: sub-population=10 (21.27%); cumulated value=61 (24.01%)
+  <=16: sub-population=4 (8.51%); cumulated value=44 (17.32%)
+  <=32: sub-population=3 (6.38%); cumulated value=55 (21.65%)
+  <=64: sub-population=1 (2.12%); cumulated value=39 (15.35%)
+ list:
+  TId: 39 (15.35%)
+  AListExprs: 19 (7.48%)
+  APublicVisibility: 18 (7.08%)
+  ACallExpr: 18 (7.08%)
+  TClassid: 15 (5.90%)
+  TNumber: 10 (3.93%)
+  AIntExpr: 10 (3.93%)
+  AType: 9 (3.54%)
+  TKwend: 8 (3.14%)
+  ASignature: 8 (3.14%)
+  ...
+  AModule: 1 (0.39%)
+  AMainClassdef: 1 (0.39%)
+  ATopClassdef: 1 (0.39%)
+  TKwreturn: 1 (0.39%)
+  AReturnExpr: 1 (0.39%)
+  TKwinterface: 1 (0.39%)
+  ANoImport: 1 (0.39%)
+  AInterfaceClasskind: 1 (0.39%)
+  AMainMethPropdef: 1 (0.39%)
+  TKwimport: 1 (0.39%)
+## All identifiers of the AST
+ population: 19
+ minimum value: 1
+ maximum value: 11
+ total value: 54
+ average value: 2.84
+ distribution:
+  <=1: sub-population=2 (10.52%); cumulated value=2 (3.70%)
+  <=2: sub-population=12 (63.15%); cumulated value=24 (44.44%)
+  <=4: sub-population=3 (15.78%); cumulated value=10 (18.51%)
+  <=8: sub-population=1 (5.26%); cumulated value=7 (12.96%)
+  <=16: sub-population=1 (5.26%); cumulated value=11 (20.37%)
+ list:
+  output: 11 (20.37%)
+  Int: 7 (12.96%)
+  run: 4 (7.40%)
+  c: 3 (5.55%)
+  val: 3 (5.55%)
+  i: 2 (3.70%)
+  bar: 2 (3.70%)
+  foo: 2 (3.70%)
+  val2: 2 (3.70%)
+  val1: 2 (3.70%)
+  C: 2 (3.70%)
+  v: 2 (3.70%)
+  baz: 2 (3.70%)
+  a: 2 (3.70%)
+  A: 2 (3.70%)
+  B: 2 (3.70%)
+  b: 2 (3.70%)
+  Object: 1 (1.85%)
+  Bool: 1 (1.85%)
 --- Poset metrics ---
 ## Module importation hierarchy
 Number of nodes: 1
@@ -175,11 +244,6 @@ Number of sends on a nullable receiver: 0 (0.0%)
 Number of buggy sends (cannot determine the type of the receiver): 0 (0.0%)
 --- Metrics of the explitic static types ---
 Total number of explicit static types: 9
-Most used types: 
-  Int: 6
-  C: 1
-  B: 1
-  A: 1
 Statistics of type usage:
  population: 4
  minimum value: 1
@@ -189,6 +253,11 @@ Statistics of type usage:
  distribution:
   <=1: sub-population=3 (75.00%); cumulated value=3 (33.33%)
   <=8: sub-population=1 (25.00%); cumulated value=6 (66.66%)
+ list:
+  Int: 6 (66.66%)
+  C: 1 (11.11%)
+  B: 1 (11.11%)
+  A: 1 (11.11%)
 --- Metrics of refinement usage ---
 Number of modules: 1
 

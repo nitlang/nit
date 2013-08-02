@@ -63,6 +63,13 @@ class Counter[E: Object]
 		return res
 	end
 
+	# The method used to display an element
+	# @toimplement by default just call `to_s` on the element
+	protected fun element_to_s(e: E): String
+	do
+		do return e.to_s
+	end
+
 	# Display statistical information
 	fun print_summary
 	do
@@ -91,6 +98,27 @@ class Counter[E: Object]
 			sum += self[t]
 		end
 		print "  <={limit}: sub-population={count} ({div(count*100,list.length)}%); cumulated value={sum} ({div(sum*100,self.total)}%)"
+	end
+
+	# Display up to `count` most used elements and `count` least used elements
+	# Use `element_to_s` to display the element
+	fun print_elements(count: Int)
+	do
+		# Display most used types (ie the last of `types')
+		print " list:"
+		var list = self.sort
+		var min = count
+		if list.length <= count*2 then min = list.length
+		for i in [0..min[ do
+			var t = list[list.length-i-1]
+			print "  {element_to_s(t)}: {self[t]} ({div(self[t]*100,self.total)}%)"
+		end
+		if list.length <= count*2 then return
+		print "  ..."
+		for i in [0..min[ do
+			var t = list[min-i-1]
+			print "  {element_to_s(t)}: {self[t]} ({div(self[t]*100,self.total)}%)"
+		end
 	end
 end
 
