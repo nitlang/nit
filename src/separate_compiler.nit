@@ -632,26 +632,30 @@ class SeparateCompiler
 		var attrs = self.attr_tables[mclass]
 		var v = new_visitor
 
+		var is_dead = not runtime_type_analysis.live_classes.has(mclass) and mtype.ctype == "val*" and mclass.name != "NativeArray"
+
 		v.add_decl("/* runtime class {c_name} */")
 
 		# Build class vft
-		self.provide_declaration("class_{c_name}", "extern const struct class class_{c_name};")
-		v.add_decl("const struct class class_{c_name} = \{")
-		v.add_decl("{self.box_kind_of(mclass)}, /* box_kind */")
-		v.add_decl("\{")
-		for i in [0 .. vft.length[ do
-			var mpropdef = vft[i]
-			if mpropdef == null then
-				v.add_decl("NULL, /* empty */")
-			else
-				assert mpropdef isa MMethodDef
-				var rf = mpropdef.virtual_runtime_function
-				v.require_declaration(rf.c_name)
-				v.add_decl("(nitmethod_t){rf.c_name}, /* pointer to {mclass.intro_mmodule}:{mclass}:{mpropdef} */")
+		if not is_dead then
+			self.provide_declaration("class_{c_name}", "extern const struct class class_{c_name};")
+			v.add_decl("const struct class class_{c_name} = \{")
+			v.add_decl("{self.box_kind_of(mclass)}, /* box_kind */")
+			v.add_decl("\{")
+			for i in [0 .. vft.length[ do
+				var mpropdef = vft[i]
+				if mpropdef == null then
+					v.add_decl("NULL, /* empty */")
+				else
+					assert mpropdef isa MMethodDef
+					var rf = mpropdef.virtual_runtime_function
+					v.require_declaration(rf.c_name)
+					v.add_decl("(nitmethod_t){rf.c_name}, /* pointer to {mclass.intro_mmodule}:{mclass}:{mpropdef} */")
+				end
 			end
+			v.add_decl("\}")
+			v.add_decl("\};")
 		end
-		v.add_decl("\}")
-		v.add_decl("\};")
 
 		if mtype.ctype != "val*" then
 			#Build instance struct
@@ -706,15 +710,19 @@ class SeparateCompiler
 		self.provide_declaration("NEW_{c_name}", "{mtype.ctype} NEW_{c_name}(const struct type* type);")
 		v.add_decl("/* allocate {mtype} */")
 		v.add_decl("{mtype.ctype} NEW_{c_name}(const struct type* type) \{")
-		var res = v.new_named_var(mtype, "self")
-		res.is_exact = true
-		v.add("{res} = nit_alloc(sizeof(struct instance) + {attrs.length}*sizeof(nitattribute_t));")
-		v.add("{res}->type = type;")
-		hardening_live_type(v, "type")
-		v.require_declaration("class_{c_name}")
-		v.add("{res}->class = &class_{c_name};")
-		self.generate_init_attr(v, res, mtype)
-		v.add("return {res};")
+		if is_dead then
+			v.add_abort("{mclass} is DEAD")
+		else
+			var res = v.new_named_var(mtype, "self")
+			res.is_exact = true
+			v.add("{res} = nit_alloc(sizeof(struct instance) + {attrs.length}*sizeof(nitattribute_t));")
+			v.add("{res}->type = type;")
+			hardening_live_type(v, "type")
+			v.require_declaration("class_{c_name}")
+			v.add("{res}->class = &class_{c_name};")
+			self.generate_init_attr(v, res, mtype)
+			v.add("return {res};")
+		end
 		v.add("\}")
 
 		generate_check_init_instance(mtype)
@@ -743,7 +751,11 @@ class SeparateCompiler
 		self.provide_declaration("CHECK_NEW_{c_name}", "void CHECK_NEW_{c_name}({mtype.ctype});")
 		v.add_decl("/* allocate {mtype} */")
 		v.add_decl("void CHECK_NEW_{c_name}({mtype.ctype} {res}) \{")
-		self.generate_check_attr(v, res, mtype)
+		if runtime_type_analysis.live_classes.has(mtype.mclass) then
+			self.generate_check_attr(v, res, mtype)
+		else
+			v.add_abort("{mtype.mclass} is DEAD")
+		end
 		v.add("\}")
 	end
 
