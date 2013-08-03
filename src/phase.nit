@@ -61,7 +61,6 @@ redef class ToolContext
 				errcount = self.error_count
 				for nclassdef in nmodule.n_classdefs do
 					for npropdef in nclassdef.n_propdefs do
-						self.info(" phase: {phase.class_name} for {npropdef.location}", 4)
 						assert phase.toolcontext == self
 						phase.process_npropdef(npropdef)
 					end
