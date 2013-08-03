@@ -433,7 +433,7 @@ class MClassDef
 
 	# Internal name combining the module and the class
 	# Example: "mymodule#MyClass"
-	redef fun to_s do return "{mmodule}#{mclass}"
+	redef var to_s: String
 
 	init(mmodule: MModule, bound_mtype: MClassType, location: Location, parameter_names: Array[String])
 	do
@@ -445,6 +445,7 @@ class MClassDef
 		mmodule.mclassdefs.add(self)
 		mclass.mclassdefs.add(self)
 		self.parameter_names = parameter_names
+		self.to_s = "{mmodule}#{mclass}"
 	end
 
 	# All declared super-types
@@ -1000,14 +1001,13 @@ class MGenericType
 				break
 			end
 		end
+
+		self.to_s = "{mclass}[{arguments.join(", ")}]"
 	end
 
 	# Recursively print the type of the arguments within brackets.
 	# Example: "Map[String, List[Int]]"
-	redef fun to_s
-	do
-		return "{mclass}[{arguments.join(", ")}]"
-	end
+	redef var to_s: String
 
 	redef var need_anchor: Bool
 
@@ -1282,9 +1282,10 @@ class MNullableType
 	init(mtype: MType)
 	do
 		self.mtype = mtype
+		self.to_s = "nullable {mtype}"
 	end
 
-	redef fun to_s do return "nullable {mtype}"
+	redef var to_s: String
 
 	redef fun need_anchor do return mtype.need_anchor
 	redef fun as_nullable do return self
@@ -1795,14 +1796,12 @@ abstract class MPropDef
 		self.location = location
 		mclassdef.mpropdefs.add(self)
 		mproperty.mpropdefs.add(self)
+		self.to_s = "{mclassdef}#{mproperty}"
 	end
 
 	# Internal name combining the module, the class and the property
 	# Example: "mymodule#MyClass#mymethod"
-	redef fun to_s
-	do
-		return "{mclassdef}#{mproperty}"
-	end
+	redef var to_s: String
 
 	# Is self the definition that introduce the property?
 	fun is_intro: Bool do return mproperty.intro == self
