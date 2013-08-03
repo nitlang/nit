@@ -88,6 +88,9 @@ class RapidTypeAnalysis
 	# live_send_sites to determine new customized_methoddefs to visit
 	var live_types: HashSet[MClassType] = new HashSet[MClassType]
 
+	# Live (instantiated) classes.
+	var live_classes: HashSet[MClass] = new HashSet[MClass]
+
 	# The pool of types used to perform type checks (isa and as).
 	var live_cast_types: HashSet[MClassType] = new HashSet[MClassType]
 
@@ -133,6 +136,8 @@ class RapidTypeAnalysis
 		assert not mtype.need_anchor
 		self.live_types.add(mtype)
 		self.check_depth(mtype)
+
+		self.live_classes.add(mtype.mclass)
 
 		# Collect default attributes
 		for cd in mtype.collect_mclassdefs(self.mainmodule)
