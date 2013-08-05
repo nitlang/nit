@@ -159,12 +159,14 @@ do
 	end
 
 	print "--- RTA metrics ---"
+	print "Number of live runtime classes: {analysis.live_classes.length}"
+	if analysis.live_classes.length < 8 then print "\t{analysis.live_classes.join(" ")}"
 	print "Number of live runtime types (instantied resolved type): {analysis.live_types.length}"
 	if analysis.live_types.length < 8 then print "\t{analysis.live_types.join(" ")}"
+	print "Number of live methods: {analysis.live_methods.length}"
+	if analysis.live_methods.length < 8 then print "\t{analysis.live_methods.join(" ")}"
 	print "Number of live method definitions: {analysis.live_methoddefs.length}"
 	if analysis.live_methoddefs.length < 8 then print "\t{analysis.live_methoddefs.join(" ")}"
-	print "Number of live customized method definitions: {analysis.live_customized_methoddefs.length}"
-	if analysis.live_customized_methoddefs.length < 8 then print "\t{analysis.live_customized_methoddefs.join(" ")}"
 	print "Number of live runtime cast types (ie used in as and isa): {analysis.live_cast_types.length}"
 	if analysis.live_cast_types.length < 8 then print "\t{analysis.live_cast_types.join(" ")}"
 end
