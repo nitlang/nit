@@ -1005,8 +1005,7 @@ redef class AAttrPropdef
 			return
 		end
 		var mtype = self.mpropdef.static_mtype.as(not null)
-		# TODO The needinit info is statically computed, move it to modelbuilder or whatever
-		mtype = mtype.resolve_for(self.mpropdef.mclassdef.bound_mtype, self.mpropdef.mclassdef.bound_mtype, self.mpropdef.mclassdef.mmodule, true)
+		mtype = mtype.anchor_to(v.mainmodule, recv.mtype.as(MClassType))
 		if mtype isa MNullableType then
 			recv.attributes[self.mpropdef.mproperty] = v.null_instance
 		end
