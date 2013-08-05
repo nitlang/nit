@@ -169,4 +169,13 @@ do
 	if analysis.live_methoddefs.length < 8 then print "\t{analysis.live_methoddefs.join(" ")}"
 	print "Number of live runtime cast types (ie used in as and isa): {analysis.live_cast_types.length}"
 	if analysis.live_cast_types.length < 8 then print "\t{analysis.live_cast_types.join(" ")}"
+
+	var x = 0
+	for p in analysis.live_methods do
+		for d in p.mpropdefs do
+			if analysis.live_methoddefs.has(d) or d.is_abstract then continue
+			x += 1
+		end
+	end
+	print "Number of dead method definitions of live methods: {x}"
 end
