@@ -1,6 +1,5 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2013 Jean-Philippe Caissy <jpcaissy@piji.ca>
 # Copyright 2013 Alexis Laferrière <alexis.laf@xymus.net>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,32 +14,32 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# tests for a recurring bug when callbacking a Nit method on an extern receiver 
-module test_ffi_c_callback_extern_receiver
+# FFI test with simple callbacks to Nit (within module)
+module test_ffi_c_more_callbacks
 
 `{
 #include <stdio.h>
 `}
 
-extern Test
-    new create_me is extern `{
-        int* foobar = malloc(sizeof(int));
-        *foobar = 12345;
-        return foobar;
-    `}
-
-    fun test_me is extern import Test::foo, String::from_cstring `{
-        int i;
-        for(i = 0; i < 2000; ++i) {
-            printf("%d\n", i);
-            Test_foo(recv, new_String_from_cstring("asdf"));
-        }
-    `}
-
-    fun foo(bar : String) do
-        print bar
-    end
+class A
+	var a: Int
+	init do a = 1234
+	init alt(i: Int) do a = i
+	fun to_i: Int do return a
 end
 
-var t = new Test.create_me
-t.test_me
+fun in1(i: Int) do print "Back in Nit: in1 {i}"
+fun in2(i: Float) do print "Back in Nit: in2"
+
+fun out(i: Int, f: Float): Int import in1, in2, A, A::alt, A::to_i `{
+	printf("From C, beginning out: %ld\n", i);
+	Object_in1(recv, i);
+	A a = new_A();
+	A b = new_A_alt(10);
+	printf("From C, a=%ld\n", A_to_i(a));
+	printf("From C, b=%ld\n", A_to_i(b));
+	printf("From C, end of out: %f\n", f);
+	return 567;
+`}
+
+print out(12345, 1.23445)
