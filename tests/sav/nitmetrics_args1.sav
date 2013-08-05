@@ -229,12 +229,15 @@ Total size of tables (classes and instances): 34 (not including stuff like info 
 Average size of table by runtime class: 5.66
 Values never redefined: 34 (100.00%)
 --- RTA metrics ---
+Number of live runtime classes: 6
+	Sys Bool Int A B C
 Number of live runtime types (instantied resolved type): 6
 	Sys Bool Int A B C
+Number of live methods: 11
 Number of live method definitions: 14
-Number of live customized method definitions: 14
 Number of live runtime cast types (ie used in as and isa): 0
 	
+Number of dead method definitions of live methods: 0
 --- Explicit vs. Implicit Self ---
 Total number of self: 5
 Total number of implicit self: 4 (80.00%)
