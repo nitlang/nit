@@ -20,11 +20,14 @@ end
 
 class G[E, F]
 	fun new_ae: A[nullable Object] do return new A[E]
-	fun new_gafgaaenae: G[nullable Object, nullable Object] do return new G[A[F],G[A[A[E]],nullable A[E]]]
 	fun isa_af(x: Object): Bool
 	do 
 		return x isa A[F]
 	end
+end
+
+class H[E, F]
+	fun new_gafgaaenae: G[nullable Object, nullable Object] do return new G[A[F],G[A[A[E]],nullable A[E]]]
 end
 
 var gib = new G[Int, Bool]
@@ -37,7 +40,8 @@ gib_ae.output_class_name
 
 '\n'.output
 
-var gib_x = gib.new_gafgaaenae
+var hib = new H[Int, Bool]
+var gib_x = hib.new_gafgaaenae
 gib_x.output_class_name
 (gib_x isa G[Object, Object]).output
 (gib_x isa G[A[Object], G[nullable A[Object], nullable Object]]).output
