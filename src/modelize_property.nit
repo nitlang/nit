@@ -470,6 +470,7 @@ redef class AMethPropdef
 
 		msignature = new MSignature(mparameters, ret_type)
 		mpropdef.msignature = msignature
+		mpropdef.is_abstract = self isa ADeferredMethPropdef
 
 		if nsig != null then
 			for nclosure in nsig.n_closure_decls do
