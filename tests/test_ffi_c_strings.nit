@@ -1,6 +1,5 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2013 Jean-Philippe Caissy <jpcaissy@piji.ca>
 # Copyright 2013 Alexis Laferrière <alexis.laf@xymus.net>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,32 +14,33 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# tests for a recurring bug when callbacking a Nit method on an extern receiver 
-module test_ffi_c_callback_extern_receiver
-
-`{
-#include <stdio.h>
+fun print_cstring(cstr: NativeString) `{
+	printf("cstr-> %s\n", cstr);
 `}
 
-extern Test
-    new create_me is extern `{
-        int* foobar = malloc(sizeof(int));
-        *foobar = 12345;
-        return foobar;
-    `}
+fun get_cstring: NativeString `{
+	return "char* from C";
+`}
 
-    fun test_me is extern import Test::foo, String::from_cstring `{
-        int i;
-        for(i = 0; i < 2000; ++i) {
-            printf("%d\n", i);
-            Test_foo(recv, new_String_from_cstring("asdf"));
-        }
-    `}
+fun print_string(str: String) import String::to_cstring `{
+	printf("str-> %s\n", String_to_cstring(str) );
+`}
 
-    fun foo(bar : String) do
-        print bar
-    end
-end
+fun get_string: String import String::from_cstring, String::output `{
+	String str = new_String_from_cstring("Nit string from C");
+	String_output(str);
+	printf("\n");
+	return str;
+`}
 
-var t = new Test.create_me
-t.test_me
+print_cstring( "char* to C".to_cstring )
+
+var cstr = get_cstring
+print cstr.cstring_length
+print_cstring cstr
+
+print_string( "Nit string to C" )
+
+var str = get_string
+print str.length
+print str

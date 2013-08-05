@@ -1,6 +1,5 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2013 Jean-Philippe Caissy <jpcaissy@piji.ca>
 # Copyright 2013 Alexis Laferrière <alexis.laf@xymus.net>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,32 +14,42 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# tests for a recurring bug when callbacking a Nit method on an extern receiver 
-module test_ffi_c_callback_extern_receiver
+# Very basic FFI tests
+# Does not use extern methods from other modules
+module test_ffi_c_extra_simple
 
-`{
-#include <stdio.h>
+in "C" `{
+	#include <stdio.h>
 `}
 
-extern Test
-    new create_me is extern `{
-        int* foobar = malloc(sizeof(int));
-        *foobar = 12345;
-        return foobar;
-    `}
+class A
+	fun foo `{
+		printf( "foo from C\n" );
+	`}
 
-    fun test_me is extern import Test::foo, String::from_cstring `{
-        int i;
-        for(i = 0; i < 2000; ++i) {
-            printf("%d\n", i);
-            Test_foo(recv, new_String_from_cstring("asdf"));
-        }
-    `}
+	fun bar( other : A, i : Int ) `{
+		printf( "bar from C: %ld\n", i );
+	`}
 
-    fun foo(bar : String) do
-        print bar
-    end
+	fun baz( i : Int ) : Int `{
+		return i * 2;
+	`}
+
+	fun titi( i : Float ) : Float `{
+		printf( "titi from C: %f\n", i );
+		return i*2.0f; // i * 12;
+	`}
+
+	fun bounce( a : A ) : A `{
+		return a;
+	`}
 end
 
-var t = new Test.create_me
-t.test_me
+var a = new A
+a.foo
+a.bar( a, 144 )
+print "From Nit: {a.baz( 121 )}"
+print "From Nit: calling titi"
+a.titi( 2.34 )
+print "From Nit: called titi"
+print a == a.bounce( a )

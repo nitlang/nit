@@ -1,6 +1,6 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2012 Alexis Laferrière <alexis.laf@xymus.net>
+# Copyright 2012-2013 Alexis Laferrière <alexis.laf@xymus.net>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,28 +14,29 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This module illustrates some uses of the native interface, specifically
+# This module illustrates some uses of the FFI, specifically
 # how to use extern methods. Which means to implement a Nit method in C.
-#
-# Steps to use extern methods:
-# 1. Write the Nit module (like this file), define extern methods
-#    with "is extern" and identify possible callbacks with "import".
-# 2. Run ithe "nits" program on the Nit module, it will generate
-#    two files, extern_methods.stub.[ch] files.
-# 3. Modify those files to implement Nit methods in C.
-# 4. Rename the stub files to extern_methods.nit.c and extern_methods.nit.h.
 module extern_methods
 
 redef enum Int
 	# Returns self'th fibonnaci number
 	# implemented here in C for optimization purposes
-	fun fib : Int is extern
+	fun fib : Int `{
+		if ( recv < 2 )
+			return recv;
+		else
+			return Int_fib___impl( recv-1 ) + Int_fib___impl( recv-2 );
+	`}
 
 	# System call to sleep for "self" seconds
-	fun sleep is extern
+	fun sleep `{
+		sleep( recv );
+	`}
 
 	# Return atan2l( self, x ) from libmath
-	fun atan_with( x : Int ) : Float is extern
+	fun atan_with( x : Int ) : Float `{
+		return atan2( recv, x );
+	`}
 
 	# This method callback to Nit methods from C code
 	# It will use from C code:
@@ -43,7 +44,15 @@ redef enum Int
 	# * the + operator, a method of Int
 	# * to_s, a method of all objects
 	# * String::to_cstring, a method of String to return an equivalent char*
-	fun foo is extern import fib, +, to_s, String::to_cstring
+	fun foo import fib, +, to_s, String::to_cstring `{
+		long recv_fib = Int_fib( recv );
+		long recv_plus_fib = Int__plus( recv, recv_fib );
+
+		String nit_string = Int_to_s( recv_plus_fib );
+		char *c_string = String_to_cstring( nit_string );
+
+		printf( "from C: self + fib(self) = %s\n", c_string );
+	`}
 
 	# Equivalent to foo but written in pure Nit
 	fun bar do print "from Nit: self + fib(self) = {self+self.fib}"

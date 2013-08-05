@@ -15,17 +15,43 @@
 # Curses for Nit
 module curses
 
+in "C header" `{
+	#include <ncurses.h>
+`}
+
 # A curse windows
-extern Window
+extern Window `{WINDOW *`}
 	# Initialize the screen
-	new is extern "initscr"
+	new `{
+		WINDOW *res;
+		res = initscr();
+		if (res == NULL) {
+			fprintf(stderr, "Error initialising ncurses.\n");
+			exit(EXIT_FAILURE);
+		}
+		raw();
+		keypad(res, TRUE);
+		noecho();
+		return res;
+	`}
 
 	# print a string somewhere
 	# NOTE: as with the curses API, the position is (y,x)
-	fun mvaddstr(y,x: Int, str: String) is extern import String::to_cstring
+	fun mvaddstr(y,x: Int, str: String) import String::to_cstring `{
+		char *c_string = String_to_cstring( str );
+		mvaddstr(y, x, c_string);
+	`}
 
-	fun refresh is extern
-	fun wclear is extern
-	fun delwin is extern
-	fun endwin is extern
+	fun refresh `{
+		refresh();
+	`}
+	fun wclear `{
+		wclear(recv);
+	`}
+	fun delwin `{
+		delwin(recv);
+	`}
+	fun endwin `{
+		endwin();
+	`}
 end
