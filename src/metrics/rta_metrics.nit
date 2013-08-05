@@ -35,23 +35,6 @@ private class RTAMetricsPhase
 	end
 end
 
-redef class RapidTypeAnalysis
-	redef fun add_type(mtype)
-	do
-		mtype.nlvt += 1
-		mtype.mclass.nlvt += 1
-		mtype.mclass.live_types.add(mtype)
-		super(mtype)
-	end
-
-	redef fun add_cast_type(mtype)
-	do
-		mtype.nlct += 1
-		mtype.mclass.nlct += 1
-		mtype.mclass.cast_types.add(mtype)
-		super(mtype)
-	end
-end
 
 redef class MType
 	private var nlvt: Int = 0
@@ -107,6 +90,8 @@ do
 	for mtype in analysis.live_types do
 		mtypes.add(mtype)
 		nlvt += 1
+		mtype.mclass.nlvt += 1
+		mtype.mclass.live_types.add(mtype)
 		if mtype isa MGenericType then nlvtg += 1
 		if mtype.is_user_defined then
 			nlvtudud += 1
@@ -120,6 +105,8 @@ do
 	for mtype in analysis.live_cast_types do
 		mtypes.add(mtype)
 		nlct += 1
+		mtype.mclass.nlct += 1
+		mtype.mclass.cast_types.add(mtype)
 		if mtype isa MGenericType then nlctg += 1
 		if mtype.is_user_defined then
 			nlctudud += 1
