@@ -201,15 +201,9 @@ redef class APropdef
 	# The associated propdef once build by a `ModelBuilder'
 	var mpropdef: nullable MPROPDEF writable
 
-	private fun build_property(modelbuilder: ModelBuilder, nclassdef: AClassdef)
-	do
-	end
-	private fun build_signature(modelbuilder: ModelBuilder, nclassdef: AClassdef)
-	do
-	end
-	private fun check_signature(modelbuilder: ModelBuilder, nclassdef: AClassdef)
-	do
-	end
+	private fun build_property(modelbuilder: ModelBuilder, nclassdef: AClassdef) is abstract
+	private fun build_signature(modelbuilder: ModelBuilder, nclassdef: AClassdef) is abstract
+	private fun check_signature(modelbuilder: ModelBuilder, nclassdef: AClassdef) is abstract
 	private fun new_property_visibility(modelbuilder: ModelBuilder, nclassdef: AClassdef, nvisibility: nullable AVisibility): MVisibility
 	do
 		var mvisibility = public_visibility
@@ -476,6 +470,7 @@ redef class AMethPropdef
 
 		msignature = new MSignature(mparameters, ret_type)
 		mpropdef.msignature = msignature
+		mpropdef.is_abstract = self isa ADeferredMethPropdef
 
 		if nsig != null then
 			for nclosure in nsig.n_closure_decls do

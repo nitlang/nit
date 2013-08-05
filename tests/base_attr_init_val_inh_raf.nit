@@ -12,6 +12,37 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import kernel
+import base_attr_init_val_inh
 
-class A end
+redef class A
+	var aa1 = new W(3)
+	var aa2: W = a1
+	var aa3: W = aa1
+end
+
+redef class B
+	super A
+	var bb1 = new W(4)
+	var bb2: W = b1
+	var bb3: W = a1
+	var bb4: W = bb1
+	var bb5: W = aa1
+end
+
+var test1 = new A
+test1.aa1.v.output
+test1.aa2.v.output
+test1.aa3.v.output
+
+'\n'.output
+
+var test2 = new B
+test2.aa1.v.output
+test2.aa2.v.output
+test2.aa3.v.output
+test2.bb1.v.output
+test2.bb2.v.output
+test2.bb3.v.output
+test2.bb4.v.output
+test2.bb5.v.output
+

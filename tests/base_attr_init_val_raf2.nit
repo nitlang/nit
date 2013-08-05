@@ -12,6 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import kernel
+import base_attr_init_val1
 
-class A end
+redef class A
+	var k: Int = i + 3
+end
+
+var a = new A
+a.k.output

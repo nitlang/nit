@@ -12,6 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import kernel
+import base_attr_init_val_raf
+import base_attr_init_val_raf2
 
-class A end
+redef class A
+	var l: Int = i + j * 10 + k * 100
+end
+
+var a = new A
+a.l.output
