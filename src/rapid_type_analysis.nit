@@ -15,28 +15,12 @@
 # limitations under the License.
 
 
-# Rapid type analysis on the AST with heterogenous generics and customization
+# Rapid type analysis on the AST
 #
 # Rapid type analysis is an analyse that aproximates the set of live classes
 # and the set of live methods starting from the entry point of the program.
 # These two sets are interdependant and computed together.
 # It is quite efficient but the type set is global and pollutes each call site.
-#
-# Heterogenous generics means that each intancied generic class is associated
-# to a distinct rapid type.
-# Heterogenous generics has the advantage to resolve the formal generic
-# parameters types but increase the number of types.
-# More important, heterogenous generics cannot deal with infinite number of rapid
-# types since the analyse tries to list them all (so some programs will be badly refused)
-#
-# Customization means that each method definition is analyzed one per rapid
-# type of receiver.
-# Customization have the following advantages:
-#  * `self' is monomorphic
-#  * virtual types are all resolved
-#  * live attributes can be determined on each class
-# But has the disadvantage to explode the number of rapid method: each method
-# definition for each rapid type that need it
 module rapid_type_analysis
 
 import model
@@ -47,28 +31,8 @@ import auto_super_init
 redef class ModelBuilder
 	fun do_rapid_type_analysis(mainmodule: MModule): RapidTypeAnalysis
 	do
-		var time0 = get_time
-		self.toolcontext.info("*** RAPID TYPE ANALYSIS ***", 1)
-
-		var model = self.model
 		var analysis = new RapidTypeAnalysis(self, mainmodule)
-		var nmodule = self.nmodules.first
-		var maintype = mainmodule.sys_type
-		if maintype == null then return analysis # No entry point
-		analysis.add_type(maintype)
-		var initprop = mainmodule.try_get_primitive_method("init", maintype)
-		if initprop != null then
-			analysis.add_monomorphic_send(maintype, initprop)
-		end
-		var mainprop = mainmodule.try_get_primitive_method("main", maintype)
-		if mainprop != null then
-			analysis.add_monomorphic_send(maintype, mainprop)
-		end
 		analysis.run_analysis
-
-		var time1 = get_time
-		self.toolcontext.info("*** END RAPID TYPE ANALYSIS: {time1-time0} ***", 2)
-
 		return analysis
 	end
 end
@@ -85,180 +49,93 @@ class RapidTypeAnalysis
 
 	# The pool to live types.
 	# During the analysis, new types are added and combined with
-	# live_send_sites to determine new customized_methoddefs to visit
-	var live_types: HashSet[MClassType] = new HashSet[MClassType]
+	# live_methods to determine new methoddefs to visit
+	var live_types = new HashSet[MClassType]
+
+	# The pool of undesolved live types
+	# They are globally resolved at the end of the analaysis
+	var live_open_types = new HashSet[MClassType]
 
 	# Live (instantiated) classes.
-	var live_classes: HashSet[MClass] = new HashSet[MClass]
+	var live_classes = new HashSet[MClass]
 
 	# The pool of types used to perform type checks (isa and as).
-	var live_cast_types: HashSet[MClassType] = new HashSet[MClassType]
+	var live_cast_types = new HashSet[MClassType]
+
+	# The pool of undesolved types used to perform type checks (isa and as).
+	# They are globally resolved at the end of the analaysis
+	var live_open_cast_types = new HashSet[MType]
 
 	# Live method definitions.
-	# These method definitions are:
-	#  * visited trough a add_send on an already known live_type
-	#  * visited trough a add_type for an already known live_send_sites
-	#  * visided by a add_monomorphic_send or a add_static_call
-	var live_methoddefs: HashSet[MMethodDef] = new HashSet[MMethodDef]
+	var live_methoddefs = new HashSet[MMethodDef]
 
-	# The pool of live customized method definitions
-	var live_customized_methoddefs: HashSet[CustomizedMethodDef] = new HashSet[CustomizedMethodDef]
+	# Live methods.
+	var live_methods = new HashSet[MMethod]
 
-	# The pool of live RTA send site
-	# During the analysis, new live_send_sites are added and combined with
-	# live_types to determine new live_customized_methoddefs to visit
-	var live_send_sites: HashSet[RTASendSite] = new HashSet[RTASendSite]
+	# Live call-to-super.
+	var live_super_sends = new HashSet[MMethodDef]
 
-	# The customized method definitions that remain to visit
-	private var todo: List[CustomizedMethodDef] = new List[CustomizedMethodDef]
+	# Methods that are are still candidate to the try_send
+	private var totry_methods = new HashSet[MMethod]
 
-	# Adapt and remove nullable
-	# return null if we got the null type
-	fun cleanup_type(mtype: MType, recvtype: MClassType): nullable MClassType
-	do
-		mtype = mtype.anchor_to(self.mainmodule, recvtype)
-		if mtype isa MNullType then return null
-		if mtype isa MNullableType then mtype = mtype.mtype
-		assert mtype isa MClassType
-		assert not mtype.need_anchor
-		return mtype
-	end
-
-	# Add a live type to the pool
-	#
-	# If the types is already live, then do nothing.
-	#
-	# REQUIRE: not mtype.need_anchor
-	fun add_type(mtype: MClassType)
-	do
-		if self.live_types.has(mtype) then return
-
-		assert not mtype.need_anchor
-		self.live_types.add(mtype)
-		self.check_depth(mtype)
-
-		self.live_classes.add(mtype.mclass)
-
-		# Collect default attributes
-		for cd in mtype.collect_mclassdefs(self.mainmodule)
-		do
-			var nclassdef = self.modelbuilder.mclassdef2nclassdef[cd]
-			for npropdef in nclassdef.n_propdefs do
-				if not npropdef isa AAttrPropdef then continue
-				var nexpr = npropdef.n_expr
-				if nexpr == null then continue
-				var v = new RapidTypeVisitor(self, nclassdef, npropdef.mpropdef.as(not null), mtype)
-				v.enter_visit(nexpr)
-			end
-		end
-
-		for rss in self.live_send_sites do
-			if not mtype.is_subtype(self.mainmodule, null, rss.receiver) then continue
-			if mtype.has_mproperty(self.mainmodule, rss.mmethod) then
-				self.add_monomorphic_send(mtype, rss.mmethod)
-			end
-		end
-	end
-
-	# Add a send site to the pool
-	#
-	# If the send site is already live, then do nothing.
-	fun add_send(mtype: MClassType, mmethod: MMethod)
-	do
-		var rss = new RTASendSite(mmethod, mtype)
-		if self.live_send_sites.has(rss) then return
-
-		self.live_send_sites.add(rss)
-
-		for mtype2 in self.live_types do
-			if not mtype2.is_subtype(self.mainmodule, null, mtype) then continue
-			if mtype2.has_mproperty(self.mainmodule, mmethod) then
-				self.add_monomorphic_send(mtype2, mmethod)
-			end
-		end
-	end
-
-	# Add a monomoprhic send.
-	# The send site is not added to the pool.
-	# The method just determine the associated method definition then
-	# performs a static_call
-	fun add_monomorphic_send(mtype: MClassType, mmethod: MMethod)
-	do
-		assert self.live_types.has(mtype)
-		if not mtype.has_mproperty(self.mainmodule, mmethod) then return
-		var def = mmethod.lookup_first_definition(self.mainmodule, mtype)
-		self.add_static_call(mtype, def)
-	end
-
-	# Add a customized_methoddefs to the pool
-	# Is the customized_methoddefs is already live, then do nothing
-	fun add_static_call(mtype: MClassType, mmethoddef: MMethodDef)
-	do
-		assert self.live_types.has(mtype)
-		var rm = new CustomizedMethodDef(mmethoddef, mtype)
-		if self.live_customized_methoddefs.has(rm) then return
-		self.live_customized_methoddefs.add(rm)
-		self.todo.add(rm)
-		self.live_methoddefs.add(mmethoddef)
-	end
-
-	# Add mtype to the cast pool.
-	fun add_cast_type(mtype: MClassType)
-	do
-		if self.live_cast_types.has(mtype) then return
-
-		assert not mtype.need_anchor
-		self.live_cast_types.add(mtype)
-		self.check_depth(mtype)
-	end
-
-	fun check_depth(mtype: MClassType)
-	do
-		var d = mtype.depth
-		if d > 255 then
-			self.modelbuilder.toolcontext.fatal_error(null, "Fatal error: limitation in the rapidtype analysis engine: a type depth of {d} is too important, the problematic type is {mtype}.")
-		end
-	end
+	# The method definitions that remain to visit
+	private var todo = new List[MMethodDef]
 
 	# Run the analysis until all visitable method definitions are visited.
 	fun run_analysis
 	do
+		var maintype = mainmodule.sys_type
+		if maintype == null then return # No entry point
+		add_new(maintype, maintype)
+		var initprop = mainmodule.try_get_primitive_method("init", maintype)
+		if initprop != null then
+			add_send(maintype, initprop)
+		end
+		var mainprop = mainmodule.try_get_primitive_method("main", maintype)
+		if mainprop != null then
+			add_send(maintype, mainprop)
+		end
+
 		# Force Bool
 		var classes = self.modelbuilder.model.get_mclasses_by_name("Bool")
-		if classes != null then for c in classes do self.add_type(c.mclass_type)
+		if classes != null then for c in classes do self.add_new(c.mclass_type, c.mclass_type)
 
 		while not todo.is_empty do
-			var mr = todo.shift
+			var mmethoddef = todo.shift
+			#print "# visit {mmethoddef}"
+			var v = new RapidTypeVisitor(self, mmethoddef.mclassdef.bound_mtype, mmethoddef)
 
-			var vararg_rank = mr.mmethoddef.msignature.vararg_rank
+			var vararg_rank = mmethoddef.msignature.vararg_rank
 			if vararg_rank > -1 then
-				var node = self.modelbuilder.mpropdef2npropdef[mr.mmethoddef]
-				var elttype = mr.mmethoddef.msignature.mparameters[vararg_rank].mtype
-				elttype = elttype.anchor_to(self.mainmodule, mr.receiver)
+				var node = self.modelbuilder.mpropdef2npropdef[mmethoddef]
+				var elttype = mmethoddef.msignature.mparameters[vararg_rank].mtype
+				#elttype = elttype.anchor_to(self.mainmodule, v.receiver)
 				var vararg = self.mainmodule.get_primitive_class("Array").get_mtype([elttype])
-				self.add_type(vararg)
-				self.add_monomorphic_send(vararg, self.modelbuilder.force_get_primitive_method(node, "with_native", vararg, self.mainmodule))
+				v.add_type(vararg)
+				vararg = v.cleanup_type(vararg).as(not null)
+				v.add_monomorphic_send(vararg, self.modelbuilder.force_get_primitive_method(node, "with_native", vararg, self.mainmodule))
 				var native = self.mainmodule.get_primitive_class("NativeArray").get_mtype([elttype])
-				self.add_type(native)
+				v.add_type(native)
 			end
 
-			for i in [0..mr.mmethoddef.msignature.arity[ do
-				var origtype = mr.mmethoddef.mproperty.intro.msignature.mparameters[i].mtype
+
+			for i in [0..mmethoddef.msignature.arity[ do
+				var origtype = mmethoddef.mproperty.intro.msignature.mparameters[i].mtype
 				if not origtype.need_anchor then continue # skip non covariant stuff
-				var paramtype = mr.mmethoddef.msignature.mparameters[i].mtype
-				paramtype = self.cleanup_type(paramtype, mr.receiver).as(not null)
-				self.add_cast_type(paramtype)
+				var paramtype = mmethoddef.msignature.mparameters[i].mtype
+				#paramtype = v.cleanup_type(paramtype).as(not null)
+				add_cast(paramtype)
 			end
 
-			if not self.modelbuilder.mpropdef2npropdef.has_key(mr.mmethoddef) then
+			if not modelbuilder.mpropdef2npropdef.has_key(mmethoddef) then
 				# It is an init for a class?
-				if mr.mmethoddef.mproperty.name == "init" then
-					var nclassdef = self.modelbuilder.mclassdef2nclassdef[mr.mmethoddef.mclassdef]
+				if mmethoddef.mproperty.name == "init" then
+					var nclassdef = self.modelbuilder.mclassdef2nclassdef[mmethoddef.mclassdef]
 					var super_inits = nclassdef.super_inits
 					if super_inits != null then
 						#assert args.length == 1
 						for su in super_inits do
-							self.add_monomorphic_send(mr.receiver, su)
+							v.add_monomorphic_send(v.receiver, su)
 						end
 					end
 
@@ -267,98 +144,214 @@ class RapidTypeAnalysis
 				end
 				continue
 			end
-			var npropdef = self.modelbuilder.mpropdef2npropdef[mr.mmethoddef]
+
+			var npropdef = modelbuilder.mpropdef2npropdef[mmethoddef]
+
 			if npropdef isa AConcreteMethPropdef then
-				#npropdef.debug("Visit {mr.mmethoddef} for {mr.receiver}")
-				var nclassdef = npropdef.parent.as(AClassdef)
-				var mmethoddef = npropdef.mpropdef.as(not null)
 				var auto_super_inits = npropdef.auto_super_inits
 				if auto_super_inits != null then
 					for auto_super_init in auto_super_inits do
-						self.add_monomorphic_send(mr.receiver, auto_super_init)
+						v.add_monomorphic_send(v.receiver, auto_super_init)
 					end
 				end
-				var v = new RapidTypeVisitor(self, nclassdef, mmethoddef, mr.receiver)
-				v.enter_visit(npropdef.n_block)
-			else if npropdef isa ADeferredMethPropdef then
-				# nothing to do (maybe add a waring?)
-			else if npropdef isa AAttrPropdef then
-				# nothing to do
 			else if npropdef isa AInternMethPropdef or npropdef isa AExternMethPropdef then
 				# UGLY: We force the "instantation" of the concrete return type if any
-				var ret = mr.mmethoddef.msignature.return_mtype
+				var ret = mmethoddef.msignature.return_mtype
 				if ret != null and ret isa MClassType and ret.mclass.kind != abstract_kind and ret.mclass.kind != interface_kind then
-					ret = ret.anchor_to(self.mainmodule, mr.receiver)
-					self.add_type(ret)
+					v.add_type(ret)
 				end
 			else if npropdef isa AExternInitPropdef then
-				self.add_type(mr.receiver)
+				v.add_type(v.receiver)
 			else
-				npropdef.debug("Not yet implemented")
-				abort
+
 			end
+
+			v.enter_visit(npropdef)
+		end
+
+		#print "MMethod {live_methods.length}: {live_methods.join(", ")}"
+		#print "MMethodDef {live_methoddefs.length}: {live_methoddefs.join(", ")}"
+
+		#print "open MType {live_open_types.length}: {live_open_types.join(", ")}"
+		var todo_types = new List[MClassType]
+		todo_types.add_all(live_types)
+		while not todo_types.is_empty do
+			var t = todo_types.shift
+			for ot in live_open_types do
+				#print "{ot}/{t} ?"
+				if not ot.can_resolve_for(t, t, mainmodule) then continue
+				var rt = ot.anchor_to(mainmodule, t)
+				if live_types.has(rt) then continue
+				#print "{ot}/{t} -> {rt}"
+				live_types.add(rt)
+				todo_types.add(rt)
+				check_depth(rt)
+			end
+		end
+		#print "MType {live_types.length}: {live_types.join(", ")}"
+
+		#print "open cast MType {live_open_cast_types.length}: {live_open_cast_types.join(", ")}"
+		for ot in live_open_cast_types do
+			#print "live_open_cast_type: {ot}"
+			for t in live_types do
+				if not ot.can_resolve_for(t, t, mainmodule) then continue
+				var rt = ot.anchor_to(mainmodule, t)
+				if rt isa MNullableType then rt = rt.mtype
+				assert rt isa MClassType
+				live_cast_types.add(rt)
+				#print "  {ot}/{t} -> {rt}"
+			end
+		end
+		#print "cast MType {live_cast_types.length}: {live_cast_types.join(", ")}"
+	end
+
+	private fun check_depth(mtype: MClassType)
+	do
+		var d = mtype.length
+		if d > 255 then
+			self.modelbuilder.toolcontext.fatal_error(null, "Fatal error: limitation in the rapidtype analysis engine: a type depth of {d} is too important, the problematic type is {mtype}.")
+		end
+	end
+
+	fun add_new(recv: MClassType, mtype: MClassType)
+	do
+		assert not recv.need_anchor
+		if mtype.need_anchor then
+			if live_open_types.has(mtype) then return
+			live_open_types.add(mtype)
+		else
+			if live_types.has(mtype) then return
+			live_types.add(mtype)
+		end
+
+		var mclass = mtype.mclass
+		if live_classes.has(mclass) then return
+		live_classes.add(mclass)
+
+		for p in totry_methods do try_send(mtype, p)
+		for p in live_super_sends do try_super_send(mtype, p)
+
+		var bound_mtype = mtype.anchor_to(mainmodule, recv)
+		for cd in bound_mtype.collect_mclassdefs(mainmodule)
+		do
+			if not self.modelbuilder.mclassdef2nclassdef.has_key(cd) then continue
+			var nclassdef = self.modelbuilder.mclassdef2nclassdef[cd]
+			for npropdef in nclassdef.n_propdefs do
+				if not npropdef isa AAttrPropdef then continue
+				var nexpr = npropdef.n_expr
+				if nexpr == null then continue
+				var mpropdef = npropdef.mpropdef.as(not null)
+				var v = new RapidTypeVisitor(self, bound_mtype, mpropdef)
+				v.enter_visit(nexpr)
+			end
+		end
+
+	end
+
+	fun add_cast(mtype: MType)
+	do
+		if mtype isa MNullableType then mtype = mtype.mtype
+		if mtype.need_anchor then
+			live_open_cast_types.add(mtype)
+		else
+			assert mtype isa MClassType
+			live_cast_types.add(mtype)
+		end
+	end
+
+	fun try_send(recv: MClassType, mproperty: MMethod)
+	do
+		recv = recv.mclass.intro.bound_mtype
+		if not recv.has_mproperty(mainmodule, mproperty) then return
+		var d = mproperty.lookup_first_definition(mainmodule, recv)
+		add_call(d)
+	end
+
+	fun add_call(mpropdef: MMethodDef)
+	do
+		if live_methoddefs.has(mpropdef) then return
+		live_methoddefs.add(mpropdef)
+		todo.add(mpropdef)
+
+		var mproperty = mpropdef.mproperty
+		if mproperty.mpropdefs.length <= 1 then return
+		# If all definitions of a method are live, we can remove the definition of the totry set
+		for d in mproperty.mpropdefs do
+			if d.is_abstract then continue
+			if not live_methoddefs.has(d) then return
+		end
+		#print "full property: {mpropdef.mproperty} for {mpropdef.mproperty.mpropdefs.length} definitions"
+		totry_methods.remove(mpropdef.mproperty)
+	end
+
+	fun add_send(recv: MType, mproperty: MMethod)
+	do
+		if live_methods.has(mproperty) then return
+		#print "new prop: {mproperty}"
+		live_methods.add(mproperty)
+		if mproperty.mpropdefs.length == 1 then
+			# If there is only one definition, just add the definition and do not try again the property
+			var d = mproperty.mpropdefs.first
+			add_call(d)
+			return
+		end
+		# Else, the property is potentially called with various reciever
+		# So just try the methods with existing receiver and register it for future receiver
+		totry_methods.add(mproperty)
+		for c in live_classes do
+			try_send(c.intro.bound_mtype, mproperty)
+		end
+	end
+
+	fun try_super_send(recv: MClassType, mpropdef: MMethodDef)
+	do
+		recv = recv.mclass.intro.bound_mtype
+		if not recv.collect_mclassdefs(mainmodule).has(mpropdef.mclassdef) then return
+		var d = mpropdef.lookup_next_definition(mainmodule, recv)
+		add_call(d)
+	end
+
+	fun add_super_send(recv: MType, mpropdef: MMethodDef)
+	do
+		if live_super_sends.has(mpropdef) then return
+		#print "new super prop: {mpropdef}"
+		live_super_sends.add(mpropdef)
+		for t in live_types do
+			try_super_send(t, mpropdef)
 		end
 	end
 end
 
-# A method definitions customized to a specific receiver
-class CustomizedMethodDef
-	var mmethoddef: MMethodDef
-	var receiver: MClassType
-
-	redef fun to_s
-	do
-		return "{self.mmethoddef}({receiver})"
-	end
-
-	redef fun ==(o)
-	do
-		return o isa CustomizedMethodDef and o.mmethoddef == self.mmethoddef and o.receiver == self.receiver
-	end
-
-	redef fun hash
-	do
-		return self.mmethoddef.hash + self.receiver.hash
-	end
-end
-
-# A method invokation site bounded by a specific receiver
-class RTASendSite
-	var mmethod: MMethod
-	var receiver: MClassType
-
-	redef fun ==(o)
-	do
-		return o isa RTASendSite and o.mmethod == self.mmethod and o.receiver == self.receiver
-	end
-
-	redef fun hash
-	do
-		return self.mmethod.hash + self.receiver.hash
-	end
-end
-
-private class RapidTypeVisitor
+class RapidTypeVisitor
 	super Visitor
 
 	var analysis: RapidTypeAnalysis
-
-	var nclassdef: AClassdef
-
+	var receiver: MClassType
 	var mpropdef: MPropDef
 
-	var receiver: MClassType
-
-	init(analysis: RapidTypeAnalysis, nclassdef: AClassdef, mpropdef: MPropDef, receiver: MClassType)
+	init(analysis: RapidTypeAnalysis, receiver: MClassType, mpropdef: MPropDef)
 	do
 		self.analysis = analysis
-		self.nclassdef = nclassdef
-		self.mpropdef = mpropdef
 		self.receiver = receiver
+		self.mpropdef = mpropdef
+		assert not receiver.need_anchor
 	end
 
-	# Adapt and remove nullable
-	# return null if we got the null type
+	redef fun visit(n)
+	do
+		if n == null then return
+		n.accept_rapid_type_visitor(self)
+		if n isa AExpr then
+			var implicit_cast_to = n.implicit_cast_to
+			if implicit_cast_to != null then self.add_cast_type(implicit_cast_to)
+		end
+
+		# RTA does not enter in AAnnotations
+		if not n isa AAnnotations then
+			n.visit_all(self)
+		end
+	end
+
 	fun cleanup_type(mtype: MType): nullable MClassType
 	do
 		mtype = mtype.anchor_to(self.analysis.mainmodule, self.receiver)
@@ -369,117 +362,73 @@ private class RapidTypeVisitor
 		return mtype
 	end
 
-	fun add_type(mtype: MType)
-	do
-		var rapidtype = cleanup_type(mtype)
-		if rapidtype == null then return # we do not care about null
-
-		self.analysis.add_type(rapidtype)
-		#self.current_node.debug("add_type {rapidtype}")
-	end
-
-	fun add_send(mtype: MType, mproperty: MMethod)
-	do
-		var rapidtype = cleanup_type(mtype)
-		if rapidtype == null then return # we do not care about null
-
-		analysis.add_send(rapidtype, mproperty)
-		#self.current_node.debug("add_send {mproperty}")
-	end
-
-	fun add_monomorphic_send(mtype: MType, mproperty: MMethod)
-	do
-		var rapidtype = cleanup_type(mtype)
-		if rapidtype == null then return # we do not care about null
-
-		self.analysis.add_monomorphic_send(rapidtype, mproperty)
-		#self.current_node.debug("add_monomorphic_send {rapidtype} {mproperty}")
-	end
-
-	fun add_cast_type(mtype: MType)
-	do
-		var rapidtype = cleanup_type(mtype)
-		if rapidtype == null then return # we do not care about null
-
-		self.analysis.add_cast_type(rapidtype)
-		#self.current_node.debug("add_cast_type {rapidtype}")
-	end
-
-	redef fun visit(node)
-	do
-		if node == null then return
-		node.accept_rapid_type_vistor(self)
-		if node isa AExpr then
-			var implicit_cast_to = node.implicit_cast_to
-			if implicit_cast_to != null then self.add_cast_type(implicit_cast_to)
-		end
-		# RTA does not enter in AAnnotations
-		if not node isa AAnnotations then
-			node.visit_all(self)
-		end
-	end
-
-	# Force to get the primitive class named `name' or abort
 	fun get_class(name: String): MClass
 	do
-		return self.analysis.mainmodule.get_primitive_class(name)
+		return analysis.mainmodule.get_primitive_class(name)
 	end
 
-	# Force to get the primitive property named `name' in the instance `recv' or abort
 	fun get_method(recv: MType, name: String): MMethod
 	do
-		var rapidtype = cleanup_type(recv)
-		if rapidtype == null then abort
-
-		return self.analysis.modelbuilder.force_get_primitive_method(self.current_node.as(not null), name, rapidtype, self.analysis.mainmodule)
+		var mtype = cleanup_type(recv)
+		assert mtype != null
+		return self.analysis.modelbuilder.force_get_primitive_method(self.current_node.as(not null), name, mtype, self.analysis.mainmodule)
 	end
+
+	fun add_type(mtype: MClassType) do analysis.add_new(receiver, mtype)
+
+	fun add_monomorphic_send(mtype: MType, mproperty: MMethod) do analysis.try_send(mtype.as(MClassType), mproperty)
+
+	fun add_send(mtype: MType, mproperty: MMethod) do analysis.add_send(mtype, mproperty)
+
+	fun add_cast_type(mtype: MType) do analysis.add_cast(mtype)
 end
 
 ###
 
 redef class ANode
-	private fun accept_rapid_type_vistor(v: RapidTypeVisitor)
+	private fun accept_rapid_type_visitor(v: RapidTypeVisitor)
 	do
 	end
 end
 
 redef class AIntExpr
-	redef fun accept_rapid_type_vistor(v)
+	redef fun accept_rapid_type_visitor(v)
 	do
-		v.add_type(self.mtype.as(not null))
+		v.add_type(self.mtype.as(MClassType))
 	end
 end
 
 redef class AFloatExpr
-	redef fun accept_rapid_type_vistor(v)
+	redef fun accept_rapid_type_visitor(v)
 	do
-		v.add_type(self.mtype.as(not null))
+		v.add_type(self.mtype.as(MClassType))
 	end
 end
 
 redef class ACharExpr
-	redef fun accept_rapid_type_vistor(v)
+	redef fun accept_rapid_type_visitor(v)
 	do
-		v.add_type(self.mtype.as(not null))
+		v.add_type(self.mtype.as(MClassType))
 	end
 end
 
 redef class AArrayExpr
-	redef fun accept_rapid_type_vistor(v)
+	redef fun accept_rapid_type_visitor(v)
 	do
 		var mtype = self.mtype.as(MClassType)
 		v.add_type(mtype)
-		var native = v.get_class("NativeArray").get_mtype([mtype.arguments.first])
+		var native = v.analysis.mainmodule.get_primitive_class("NativeArray").get_mtype([mtype.arguments.first])
 		v.add_type(native)
+		mtype = v.cleanup_type(mtype).as(not null)
 		var prop = v.get_method(mtype, "with_native")
 		v.add_monomorphic_send(mtype, prop)
 	end
 end
 
 redef class AStringFormExpr
-	redef fun accept_rapid_type_vistor(v)
+	redef fun accept_rapid_type_visitor(v)
 	do
-		var mtype = self.mtype.as(not null)
+		var mtype = self.mtype.as(MClassType)
 		v.add_type(mtype)
 		var native = v.get_class("NativeString").mclass_type
 		v.add_type(native)
@@ -489,7 +438,7 @@ redef class AStringFormExpr
 end
 
 redef class ASuperstringExpr
-	redef fun accept_rapid_type_vistor(v)
+	redef fun accept_rapid_type_visitor(v)
 	do
 		var arraytype = v.get_class("Array").get_mtype([v.get_class("Object").mclass_type])
 		v.add_type(arraytype)
@@ -502,9 +451,9 @@ redef class ASuperstringExpr
 end
 
 redef class ACrangeExpr
-	redef fun accept_rapid_type_vistor(v)
+	redef fun accept_rapid_type_visitor(v)
 	do
-		var mtype = self.mtype.as(not null)
+		var mtype = self.mtype.as(MClassType)
 		v.add_type(mtype)
 		var prop = v.get_method(mtype, "init")
 		v.add_monomorphic_send(mtype, prop)
@@ -512,9 +461,9 @@ redef class ACrangeExpr
 end
 
 redef class AOrangeExpr
-	redef fun accept_rapid_type_vistor(v)
+	redef fun accept_rapid_type_visitor(v)
 	do
-		var mtype = self.mtype.as(not null)
+		var mtype = self.mtype.as(MClassType)
 		v.add_type(mtype)
 		var prop = v.get_method(mtype, "without_last")
 		v.add_monomorphic_send(mtype, prop)
@@ -522,50 +471,45 @@ redef class AOrangeExpr
 end
 
 redef class ATrueExpr
-	redef fun accept_rapid_type_vistor(v)
+	redef fun accept_rapid_type_visitor(v)
 	do
-		v.add_type(self.mtype.as(not null))
+		v.add_type(self.mtype.as(MClassType))
 	end
 end
 
 redef class AFalseExpr
-	redef fun accept_rapid_type_vistor(v)
+	redef fun accept_rapid_type_visitor(v)
 	do
-		v.add_type(self.mtype.as(not null))
+		v.add_type(self.mtype.as(MClassType))
 	end
 end
 
 redef class AIsaExpr
-	redef fun accept_rapid_type_vistor(v)
+	redef fun accept_rapid_type_visitor(v)
 	do
 		v.add_cast_type(self.cast_type.as(not null))
 	end
 end
 
 redef class AAsCastExpr
-	redef fun accept_rapid_type_vistor(v)
+	redef fun accept_rapid_type_visitor(v)
 	do
 		v.add_cast_type(self.mtype.as(not null))
 	end
 end
 
-#
-
 redef class ASendExpr
-	redef fun accept_rapid_type_vistor(v)
+	redef fun accept_rapid_type_visitor(v)
 	do
 		var mproperty = self.mproperty.as(not null)
-		if n_expr isa ASelfExpr then
-			v.add_monomorphic_send(v.receiver, mproperty)
-		else
-			var recvtype = self.n_expr.mtype.as(not null)
-			v.add_send(recvtype, mproperty)
-		end
+		var recvtype = self.n_expr.mtype.as(not null)
+		v.add_send(recvtype, mproperty)
 	end
 end
 
+
 redef class ASendReassignFormExpr
-	redef fun accept_rapid_type_vistor(v)
+	redef fun accept_rapid_type_visitor(v)
 	do
 		v.add_send(self.read_type.as(not null), self.reassign_property.mproperty)
 		var mproperty = self.mproperty.as(not null)
@@ -582,21 +526,21 @@ redef class ASendReassignFormExpr
 end
 
 redef class AVarReassignExpr
-	redef fun accept_rapid_type_vistor(v)
+	redef fun accept_rapid_type_visitor(v)
 	do
 		v.add_send(self.read_type.as(not null), self.reassign_property.mproperty)
 	end
 end
 
 redef class AAttrReassignExpr
-	redef fun accept_rapid_type_vistor(v)
+	redef fun accept_rapid_type_visitor(v)
 	do
 		v.add_send(self.read_type.as(not null), self.reassign_property.mproperty)
 	end
 end
 
 redef class ASuperExpr
-	redef fun accept_rapid_type_vistor(v)
+	redef fun accept_rapid_type_visitor(v)
 	do
 		var mproperty = self.mproperty
 		if mproperty != null then
@@ -604,14 +548,12 @@ redef class ASuperExpr
 			return
 		end
 
-		var mpropdef = v.mpropdef.lookup_next_definition(v.analysis.mainmodule, v.receiver)
-		assert mpropdef isa MMethodDef
-		v.analysis.add_static_call(v.receiver, mpropdef)
+		v.analysis.add_super_send(v.receiver, v.mpropdef.as(MMethodDef))
 	end
 end
 
 redef class AForExpr
-	redef fun accept_rapid_type_vistor(v)
+	redef fun accept_rapid_type_visitor(v)
 	do
 		var recvtype = self.n_expr.mtype.as(not null)
 		var colltype = self.coltype.as(not null)
@@ -633,10 +575,11 @@ redef class AForExpr
 end
 
 redef class ANewExpr
-	redef fun accept_rapid_type_vistor(v)
+	redef fun accept_rapid_type_visitor(v)
 	do
-		var recvtype = self.mtype.as(not null)
-		v.add_type(recvtype)
-		v.add_monomorphic_send(recvtype, mproperty.as(not null))
+		var mtype = self.mtype.as(MClassType)
+		v.add_type(mtype)
+		var mproperty = self.mproperty.as(not null)
+		v.add_monomorphic_send(mtype, mproperty)
 	end
 end
