@@ -47,7 +47,6 @@ class NitdocContext
 
 	init do
 		self.arguments = toolcontext.option_context.rest
-		toolcontext.option_context.options.clear
 		toolcontext.option_context.add_option(opt_dir)
 		toolcontext.option_context.add_option(opt_source)
 		toolcontext.option_context.add_option(opt_sharedir)
