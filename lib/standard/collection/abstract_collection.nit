@@ -243,6 +243,13 @@ interface MapRead[K: Object, E]
 	# Get the item at `key'.
 	fun [](key: K): E is abstract
 
+	# Get the item at `key` or return `default` if not in map
+	fun get_or_default(key: K, default: E): E
+	do
+		if has_key(key) then return self[key]
+		return default
+	end
+
 	# Depreciated alias for `keys.has'
 	fun has_key(key: K): Bool do return self.keys.has(key)
 

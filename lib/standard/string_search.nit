@@ -197,6 +197,9 @@ class BM_Pattern
 			i += 1
 		end
 	end
+
+	redef fun hash do return _motif.hash
+	redef fun ==(o) do return o isa BM_Pattern and o._motif == _motif
 end
 
 # Matches are a part of a string.
