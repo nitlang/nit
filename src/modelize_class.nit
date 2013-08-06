@@ -202,6 +202,7 @@ redef class ModelBuilder
 	# REQUIRE: classes of imported modules are already build. (let `phase' do the job)
 	private fun build_classes(nmodule: AModule)
 	do
+		var errcount = toolcontext.error_count
 		# Force building recursively
 		if nmodule.build_classes_is_done then return
 		nmodule.build_classes_is_done = true
@@ -211,24 +212,28 @@ redef class ModelBuilder
 			build_classes(mmodule2nmodule[imp])
 		end
 
+		if errcount != toolcontext.error_count then return
+
 		# Create all classes
 		for nclassdef in nmodule.n_classdefs do
 			self.build_a_mclass(nmodule, nclassdef)
 		end
+
+		if errcount != toolcontext.error_count then return
 
 		# Create all classdefs
 		for nclassdef in nmodule.n_classdefs do
 			self.build_a_mclassdef(nmodule, nclassdef)
 		end
 
-		for nclassdef in nmodule.n_classdefs do
-			if nclassdef.mclassdef == null then return # forward error
-		end
+		if errcount != toolcontext.error_count then return
 
 		# Create inheritance on all classdefs
 		for nclassdef in nmodule.n_classdefs do
 			self.collect_a_mclassdef_inheritance(nmodule, nclassdef)
 		end
+
+		if errcount != toolcontext.error_count then return
 
 		# Create the mclassdef hierarchy
 		for nclassdef in nmodule.n_classdefs do
@@ -236,10 +241,14 @@ redef class ModelBuilder
 			mclassdef.add_in_hierarchy
 		end
 
+		if errcount != toolcontext.error_count then return
+
 		# Check inheritance
 		for nclassdef in nmodule.n_classdefs do
 			self.check_supertypes(nmodule, nclassdef)
 		end
+
+		if errcount != toolcontext.error_count then return
 
 		# Check unchecked ntypes
 		for nclassdef in nmodule.n_classdefs do
