@@ -59,6 +59,7 @@ class NitdocContext
 		self.arguments = toolcontext.option_context.rest
 
 		if arguments.length < 1 then
+			print "usage: nitdoc [options] file..."
 			toolcontext.option_context.usage
 			exit(1)
 		end
