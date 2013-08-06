@@ -270,7 +270,27 @@ redef class ModelBuilder
 					end
 				end
 			end
+		end
 
+		if errcount != toolcontext.error_count then return
+
+		# Check clash of ancestors
+		for nclassdef in nmodule.n_classdefs do
+			var mclassdef = nclassdef.mclassdef.as(not null)
+			var superclasses = new HashMap[MClass, MClassType]
+			for scd in mclassdef.in_hierarchy.greaters do
+				for st in scd.supertypes do
+					if not superclasses.has_key(st.mclass) then
+						superclasses[st.mclass] = st
+					else if superclasses[st.mclass] != st then
+						var st1 = superclasses[st.mclass].resolve_for(mclassdef.mclass.mclass_type, mclassdef.bound_mtype, mmodule, false)
+						var st2 = st.resolve_for(mclassdef.mclass.mclass_type, mclassdef.bound_mtype, mmodule, false)
+						if st1 != st2 then
+							error(nclassdef, "Error: Incompatibles ancestors for {mclassdef.mclass}: {st1}, {st2}")
+						end
+					end
+				end
+			end
 		end
 
 		# TODO: Check that the super-class is not intrusive
