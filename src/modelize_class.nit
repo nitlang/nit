@@ -51,6 +51,10 @@ redef class ModelBuilder
 			nvisibility = nclassdef.n_visibility
 			mvisibility = nvisibility.mvisibility
 			arity = nclassdef.n_formaldefs.length
+			if mvisibility == protected_visibility then
+				error(nvisibility, "Error: only properties can be protected.")
+				return
+			end
 		else if nclassdef isa ATopClassdef then
 			name = "Object"
 			nkind = null

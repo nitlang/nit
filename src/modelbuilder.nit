@@ -411,6 +411,10 @@ class ModelBuilder
 			if sup == null then continue # Skip error
 			imported_modules.add(sup)
 			var mvisibility = aimport.n_visibility.mvisibility
+			if mvisibility == protected_visibility then
+				error(aimport.n_visibility, "Error: only properties can be protected.")
+				return
+			end
 			mmodule.set_visibility_for(sup, mvisibility)
 		end
 		if stdimport then
