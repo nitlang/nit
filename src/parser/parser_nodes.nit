@@ -542,7 +542,6 @@ abstract class AExternPropdef
     readable var _n_extern_code_block: nullable AExternCodeBlock = null
 end
 class AExternMethPropdef
-	super AMethPropdef
 	super AExternPropdef
     readable var _n_kwmeth: TKwmeth
 end
@@ -971,7 +970,6 @@ abstract class ASendReassignFormExpr
 	super AReassignFormExpr
 end
 class AAttrReassignExpr
-	super AExpr
 	super AAttrFormExpr
 	super AReassignFormExpr
 end
@@ -983,7 +981,6 @@ class ACallAssignExpr
 	super AAssignFormExpr
 end
 class ACallReassignExpr
-	super AExpr
 	super ACallFormExpr
 	super ASendReassignFormExpr
 end
