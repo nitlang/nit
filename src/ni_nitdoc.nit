@@ -46,8 +46,6 @@ class NitdocContext
 	private var opt_custom_footer_text: OptionString = new OptionString("Text displayed as footer of all pages", "--custom-footer-text")
 
 	init do
-		self.arguments = toolcontext.option_context.rest
-		toolcontext.option_context.options.clear
 		toolcontext.option_context.add_option(opt_dir)
 		toolcontext.option_context.add_option(opt_source)
 		toolcontext.option_context.add_option(opt_sharedir)
@@ -58,8 +56,10 @@ class NitdocContext
 		toolcontext.option_context.add_option(opt_custom_overview_text)
 		toolcontext.option_context.add_option(opt_custom_menu_items)
 		toolcontext.process_options
+		self.arguments = toolcontext.option_context.rest
 
 		if arguments.length < 1 then
+			print "usage: nitdoc [options] file..."
 			toolcontext.option_context.usage
 			exit(1)
 		end

@@ -3,7 +3,4 @@ init_inherit
 init_linext
 inline
 test_extern
-curses
 nitc
-nitdoc
-nits
