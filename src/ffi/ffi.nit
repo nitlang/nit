@@ -39,10 +39,6 @@ redef class MMSrcModule
 	end
 end
 
-redef class MMLocalClass
-	super FFIVisited
-end
-
 redef class FFIVisitor
 	fun compile
 	do

@@ -12,47 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module syntax_annotations2 is
-	annot
-	annot2
+class A[E]
+	super Array[E]
 end
 
-import kernel is annot
-import kernel is annot, annot2
-import kernel is
-	annot
-	annot2
+class B[F]
+	super List[F]
 end
 
-class A
-	annot
-	super Toto is annot
-	super Tata is annot, annot2
-	super Titi is
-		annot
-		annot2
-	end
-	fun foo1 is
-		annot
-	do
-		var x: Toto@foo
-	end
-	fun foo2 is annot
-	fun foo3 is annot, annot2
-	fun foo4 is
-		annot
-		annot2
-	end
-	var bar: Int is annot, annot2
-	var bar2: Int is
-		annot
-		annot2
-	end
-end
-
-interface Toto
-end
-interface Tata
-end
-interface Titi
+class C
+	super A[Int]
+	super B[Char]
 end
