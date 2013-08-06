@@ -293,9 +293,44 @@ redef class ModelBuilder
 			end
 		end
 
+		if errcount != toolcontext.error_count then return
+
 		# TODO: Check that the super-class is not intrusive
 
-		# TODO: Check that the super-class is not already known (by transitivity)
+		# Check that the superclasses are not already known (by transitivity)
+		for nclassdef in nmodule.n_classdefs do
+			if not nclassdef isa AStdClassdef then continue
+			var mclassdef = nclassdef.mclassdef.as(not null)
+
+			# Get the direct superclasses
+			# Since we are a mclassdef, just look at the mclassdef hierarchy
+			var parents = new Array[MClass]
+			for sup in mclassdef.in_hierarchy.direct_greaters do
+				parents.add(sup.mclass)
+			end
+
+			# Used to track duplicates of superclasses
+			var seen_parents = new ArrayMap[MClass, AType]
+
+			# The Object class
+			var objectclass = try_get_mclass_by_name(nmodule, mmodule, "Object")
+
+			# Check each declared superclass to see if it belong to the direct superclass
+			for nsc in nclassdef.n_superclasses do
+				var ntype = nsc.n_type
+				var mtype = ntype.mtype
+				if mtype == null then continue
+				assert mtype isa MClassType
+				var sc = mtype.mclass
+				if not parents.has(sc) or sc == objectclass then
+					warning(ntype, "Warning: superfluous super-class {mtype} in class {mclassdef.mclass}.")
+				else if not seen_parents.has_key(sc) then
+					seen_parents[sc] = ntype
+				else
+					warning(ntype, "Warning: duplicated super-class {mtype} in class {mclassdef.mclass}.")
+				end
+			end
+		end
 	end
 
 	# Register the nclassdef associated to each mclassdef
