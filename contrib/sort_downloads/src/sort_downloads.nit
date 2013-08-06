@@ -76,8 +76,10 @@ redef class String
 	end
 end
 
-# Hack to keep track of the real directory name associated to this pattern
-redef class BM_Pattern
+# Keeps track of the real directory name associated to this pattern
+class PatternWithDir
+	super BM_Pattern
+
 	var dir: String
 
 	init with_dir(motif, dir: String)
@@ -138,11 +140,11 @@ class XySorter
 		end
 
 		# build regexxes
-		var patterns = new HashSet[BM_Pattern]
+		var patterns = new HashSet[PatternWithDir]
 		for dir in dirs_name do
-			patterns.add new BM_Pattern.with_dir(dir, dir)
-			patterns.add new BM_Pattern.with_dir(dir.replace(' ', "."), dir)
-			patterns.add new BM_Pattern.with_dir(dir.replace(' ', "_"), dir)
+			patterns.add new PatternWithDir.with_dir(dir, dir)
+			patterns.add new PatternWithDir.with_dir(dir.replace(' ', "."), dir)
+			patterns.add new PatternWithDir.with_dir(dir.replace(' ', "_"), dir)
 		end
 
 		# compare source files with patterns and sort
