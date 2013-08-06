@@ -68,8 +68,11 @@ redef class String
 	# Replace `~` by the path to the home diretory
 	fun replace_tilde: String
 	do
-		var home_folder = "HOME".environ
-		return replace("~", home_folder)
+		var match = search("~/")
+		if match != null and match.from == 0 then
+			var home_folder = "HOME".environ
+			return "{home_folder}/{substring(match.after, length)}"
+		else return self
 	end
 end
 
