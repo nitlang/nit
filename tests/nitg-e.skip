@@ -4,5 +4,3 @@ init_linext
 inline
 test_extern
 nitc
-nitdoc
-nits
