@@ -140,6 +140,7 @@ redef class MModule
 		for m in self.in_importation.greaters do
 			for cd in m.mclassdefs do
 				var c = cd.mclass
+				res.add_node(c)
 				for s in cd.supertypes do
 					res.add_edge(c, s.mclass)
 				end

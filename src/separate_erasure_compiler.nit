@@ -82,20 +82,24 @@ class SeparateErasureCompiler
 		var mclasses = new HashSet[MClass].from(mmbuilder.model.mclasses)
 
 		var layout_builder: TypingLayoutBuilder[MClass]
+		var class_colorer = new MClassColorer(mainmodule)
 		if modelbuilder.toolcontext.opt_phmod_typing.value then
 			layout_builder = new MClassHasher(new PHModOperator, mainmodule)
+			class_colorer.build_layout(mclasses)
 		else if modelbuilder.toolcontext.opt_phand_typing.value then
 			layout_builder = new MClassHasher(new PHAndOperator, mainmodule)
+			class_colorer.build_layout(mclasses)
 		else if modelbuilder.toolcontext.opt_bm_typing.value then
 			layout_builder = new MClassBMizer(mainmodule)
+			class_colorer.build_layout(mclasses)
 		else
-			layout_builder = new MClassColorer(mainmodule)
+			layout_builder = class_colorer
 		end
 		self.class_layout = layout_builder.build_layout(mclasses)
 		self.class_tables = self.build_class_typing_tables(mclasses)
 
 		# vt coloration
-		var vt_coloring = new MVirtualTypePropColorer(mainmodule)
+		var vt_coloring = new MVirtualTypePropColorer(mainmodule, class_colorer)
 		var vt_layout = vt_coloring.build_layout(mclasses)
 		self.vt_tables = build_vt_tables(mclasses, vt_layout)
 		self.vt_layout = vt_layout
@@ -106,9 +110,13 @@ class SeparateErasureCompiler
 		for mclass in mclasses do
 			var table = new Array[nullable MPropDef]
 			# first, fill table from parents by reverse linearization order
-			var parents = self.mainmodule.super_mclasses(mclass)
-			var lin = self.mainmodule.reverse_linearize_mclasses(parents)
-			for parent in lin do
+			var parents = new Array[MClass]
+			if mainmodule.flatten_mclass_hierarchy.has(mclass) then
+				parents = mclass.in_hierarchy(mainmodule).greaters.to_a
+				self.mainmodule.linearize_mclasses(parents)
+			end
+			for parent in parents do
+				if parent == mclass then continue
 				for mproperty in self.mainmodule.properties(parent) do
 					if not mproperty isa MVirtualTypeProp then continue
 					var color = layout.pos[mproperty]
@@ -151,9 +159,10 @@ class SeparateErasureCompiler
 		var layout = self.class_layout
 		for mclass in mclasses do
 			var table = new Array[nullable MClass]
-			var supers = new HashSet[MClass]
-			supers.add_all(self.mainmodule.super_mclasses(mclass))
-			supers.add(mclass)
+			var supers = new Array[MClass]
+			if mainmodule.flatten_mclass_hierarchy.has(mclass) then
+				supers = mclass.in_hierarchy(mainmodule).greaters.to_a
+			end
 			for sup in supers do
 				var color: Int
 				if layout isa PHLayout[MClass, MClass] then
