@@ -690,6 +690,7 @@ class NitdocClass
 		self.dot_dir = dot_dir
 		self.source = source
 		# load properties
+		var locals = new HashSet[MProperty]
 		for mclassdef in mclass.mclassdefs do
 			for mpropdef in mclassdef.mpropdefs do
 				if mpropdef.mproperty.visibility < ctx.min_visibility then continue
@@ -701,6 +702,7 @@ class NitdocClass
 						meths.add(mpropdef)
 					end
 				end
+				locals.add(mpropdef.mproperty)
 			end
 		end
 		# get inherited properties
@@ -710,6 +712,7 @@ class NitdocClass
 				for mprop in pclassdef.intro_mproperties do
 					var mpropdef = mprop.intro
 					if mprop.visibility < ctx.min_visibility then continue
+					if locals.has(mprop) then continue
 					if mpropdef isa MVirtualTypeDef then vtypes.add(mpropdef)
 					if mpropdef isa MMethodDef then
 						if mpropdef.mproperty.is_init then
