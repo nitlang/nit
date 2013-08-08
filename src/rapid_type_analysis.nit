@@ -87,11 +87,11 @@ class RapidTypeAnalysis
 		var maintype = mainmodule.sys_type
 		if maintype == null then return # No entry point
 		add_new(maintype, maintype)
-		var initprop = mainmodule.try_get_primitive_method("init", maintype)
+		var initprop = mainmodule.try_get_primitive_method("init", maintype.mclass)
 		if initprop != null then
 			add_send(maintype, initprop)
 		end
-		var mainprop = mainmodule.try_get_primitive_method("main", maintype)
+		var mainprop = mainmodule.try_get_primitive_method("main", maintype.mclass)
 		if mainprop != null then
 			add_send(maintype, mainprop)
 		end
@@ -112,8 +112,7 @@ class RapidTypeAnalysis
 				#elttype = elttype.anchor_to(self.mainmodule, v.receiver)
 				var vararg = self.mainmodule.get_primitive_class("Array").get_mtype([elttype])
 				v.add_type(vararg)
-				vararg = v.cleanup_type(vararg).as(not null)
-				v.add_monomorphic_send(vararg, self.modelbuilder.force_get_primitive_method(node, "with_native", vararg, self.mainmodule))
+				v.add_monomorphic_send(vararg, self.modelbuilder.force_get_primitive_method(node, "with_native", vararg.mclass, self.mainmodule))
 				var native = self.mainmodule.get_primitive_class("NativeArray").get_mtype([elttype])
 				v.add_type(native)
 			end
@@ -371,7 +370,7 @@ class RapidTypeVisitor
 	do
 		var mtype = cleanup_type(recv)
 		assert mtype != null
-		return self.analysis.modelbuilder.force_get_primitive_method(self.current_node.as(not null), name, mtype, self.analysis.mainmodule)
+		return self.analysis.modelbuilder.force_get_primitive_method(self.current_node.as(not null), name, mtype.mclass, self.analysis.mainmodule)
 	end
 
 	fun add_type(mtype: MClassType) do analysis.add_new(receiver, mtype)

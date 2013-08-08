@@ -227,19 +227,23 @@ redef class MModule
 	end
 
 	# Try to get the primitive method named `name' on the type `recv'
-	fun try_get_primitive_method(name: String, recv: MType): nullable MMethod
+	fun try_get_primitive_method(name: String, recv: MClass): nullable MMethod
 	do
 		var props = self.model.get_mproperties_by_name(name)
 		if props == null then return null
 		var res: nullable MMethod = null
 		for mprop in props do
 			assert mprop isa MMethod
-			if not recv.has_mproperty(self, mprop) then continue
-			if res == null then
-				res = mprop
-			else
-				print("Fatal Error: ambigous property name '{name}'; conflict between {mprop.full_name} and {res.full_name}")
-				abort
+			var intro = mprop.intro_mclassdef
+			for mclassdef in recv.mclassdefs do
+				if not self.in_importation.greaters.has(mclassdef.mmodule) then continue
+				if not mclassdef.in_hierarchy.greaters.has(intro) then continue
+				if res == null then
+					res = mprop
+				else if res != mprop then
+					print("Fatal Error: ambigous property name '{name}'; conflict between {mprop.full_name} and {res.full_name}")
+					abort
+				end
 			end
 		end
 		return res

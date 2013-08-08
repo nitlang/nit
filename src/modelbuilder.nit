@@ -451,7 +451,7 @@ class ModelBuilder
 	end
 
 	# Force to get the primitive method named `name' on the type `recv' or do a fatal error on `n'
-	fun force_get_primitive_method(n: ANode, name: String, recv: MType, mmodule: MModule): MMethod
+	fun force_get_primitive_method(n: ANode, name: String, recv: MClass, mmodule: MModule): MMethod
 	do
 		var res = mmodule.try_get_primitive_method(name, recv)
 		if res == null then

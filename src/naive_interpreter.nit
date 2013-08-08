@@ -57,12 +57,12 @@ redef class ModelBuilder
 		var mainobj = new MutableInstance(sys_type)
 		interpreter.mainobj = mainobj
 		interpreter.init_instance(mainobj)
-		var initprop = mainmodule.try_get_primitive_method("init", sys_type)
+		var initprop = mainmodule.try_get_primitive_method("init", sys_type.mclass)
 		if initprop != null then
 			interpreter.send(initprop, [mainobj])
 		end
 		interpreter.check_init_instance(mainobj)
-		var mainprop = mainmodule.try_get_primitive_method("main", sys_type)
+		var mainprop = mainmodule.try_get_primitive_method("main", sys_type.mclass)
 		if mainprop != null then
 			interpreter.send(mainprop, [mainobj])
 		end
@@ -102,7 +102,8 @@ private class NaiveInterpreter
 
 	fun force_get_primitive_method(name: String, recv: MType): MMethod
 	do
-		return self.modelbuilder.force_get_primitive_method(self.frame.current_node, name, recv, self.mainmodule)
+		assert recv isa MClassType
+		return self.modelbuilder.force_get_primitive_method(self.frame.current_node, name, recv.mclass, self.mainmodule)
 	end
 
 	# Is a return executed?

@@ -344,11 +344,11 @@ abstract class AbstractCompiler
 			var mainmodule = v.compiler.mainmodule
 			var glob_sys = v.init_instance(main_type)
 			v.add("glob_sys = {glob_sys};")
-			var main_init = mainmodule.try_get_primitive_method("init", main_type)
+			var main_init = mainmodule.try_get_primitive_method("init", main_type.mclass)
 			if main_init != null then
 				v.send(main_init, [glob_sys])
 			end
-			var main_method = mainmodule.try_get_primitive_method("main", main_type)
+			var main_method = mainmodule.try_get_primitive_method("main", main_type.mclass)
 			if main_method != null then
 				v.send(main_method, [glob_sys])
 			end
@@ -547,7 +547,8 @@ abstract class AbstractCompilerVisitor
 	# Force to get the primitive property named `name' in the instance `recv' or abort
 	fun get_property(name: String, recv: MType): MMethod
 	do
-		return self.compiler.modelbuilder.force_get_primitive_method(self.current_node.as(not null), name, recv, self.compiler.mainmodule)
+		assert recv isa MClassType
+		return self.compiler.modelbuilder.force_get_primitive_method(self.current_node.as(not null), name, recv.mclass, self.compiler.mainmodule)
 	end
 
 	fun compile_callsite(callsite: CallSite, args: Array[RuntimeVariable]): nullable RuntimeVariable
