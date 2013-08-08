@@ -84,6 +84,9 @@ $(document).ready(function() {
 						// Select next result on "Down"
 						case 40:
 							if(currentIndex < currentTable.find("tr").length - 1) {
+								if($(currentTable.find("tr")[currentIndex + 1]).hasClass("overflow")) {
+									break;
+								}
 								$(currentTable.find("tr")[currentIndex]).removeClass("activeSearchResult");
 								currentIndex++;
 								$(currentTable.find("tr")[currentIndex]).addClass("activeSearchResult");
@@ -100,8 +103,8 @@ $(document).ready(function() {
 							if($("#search").val().length == 0)
 								return false
 				
-							window.location = "full-index.html#q=" + $("#search").val();
-							if(window.location.href.indexOf("full-index.html") > -1) {
+							window.location = "search.html#q=" + $("#search").val();
+							if(window.location.href.indexOf("search.html") > -1) {
 								location.reload();
 							}				
 							return false;
@@ -146,14 +149,13 @@ $(document).ready(function() {
 
 							var index = 0;
 							var regexp = new RegExp("^" + query, "i");
+							var overflow = 0;
 							for(var entry in entries) {
-								if(index > 10) {
-									break;
-								}
 								var result = entry.match(regexp);
 								if(result != null) {
 									for(var i = 0; i < entries[entry].length; i++) {
 										if(index > 10) {
+											overflow++;
 											break;
 										}
 										currentTable.append(
@@ -180,6 +182,23 @@ $(document).ready(function() {
 										index++;
 									}
 								}
+							}
+							if(overflow > 0) {
+								currentTable.append(
+									$("<tr class='overflow'>")
+									.append(
+										$("<td colspan='2'>")
+										.append(
+											$("<a href='#' title='Show all results' data-query='"+ query +"'>" + overflow + " more results for '" + query + "'</a>")
+											.click(function() {
+												window.location = "search.html#q=" + $(this).attr("data-query");
+												if(window.location.href.indexOf("search.html") > -1) {
+													location.reload();
+												}
+											})
+										)
+									)
+								);
 							}
 							
 							// Initialize table properties

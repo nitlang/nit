@@ -488,6 +488,11 @@ nav h3 a.fold {
 	text-align: right;
 }
 
+#searchTable tr.overflow td {
+	text-align: center;
+	background-color: #E0E0E0;
+}
+
 textarea {
 	margin: 10px;
 	font-family: monospace;
