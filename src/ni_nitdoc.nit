@@ -337,7 +337,9 @@ class NitdocOverview
 	end
 
 	redef fun content do
-		append("<div class='content fullpage'>")
+		var footed = ""
+		if ctx.opt_custom_footer_text.value != null then footed = "footed"
+		append("<div class='content fullpage {footed}'>")
 		var title = "Overview"
 		if ctx.opt_custom_title.value != null then
 			title = ctx.opt_custom_title.value.to_s
@@ -412,7 +414,9 @@ class NitdocFullindex
 	end
 
 	redef fun content do
-		append("<div class='content fullpage'>")
+		var footed = ""
+		if ctx.opt_custom_footer_text.value != null then footed = "footed"
+		append("<div class='content fullpage {footed}'>")
 		append("<h1>Full Index</h1>")
 		module_column
 		classes_column
@@ -510,7 +514,9 @@ class NitdocModule
 
 	redef fun content do
 		sidebar
-		append("<div class='content'>")
+		var footed = ""
+		if ctx.opt_custom_footer_text.value != null then footed = "footed"
+		append("<div class='content {footed}'>")
 		append("<h1>{mmodule.name}</h1>")
 		append("<div class='subtitle info'>")
 		mmodule.html_signature(self)
@@ -748,7 +754,9 @@ class NitdocClass
 		properties_column
 		inheritance_column
 		append("</div>")
-		append("<div class='content'>")
+		var footed = ""
+		if ctx.opt_custom_footer_text.value != null then footed = "footed"
+		append("<div class='content {footed}'>")
 		class_doc
 		append("</div>")
 	end

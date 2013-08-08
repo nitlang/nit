@@ -84,7 +84,7 @@ header {
 .content {
 	position: fixed;
 	top: 50px;
-	bottom: 2em;
+	bottom: 0em;
 	margin-left: 265px;
 	width: 667px;
 	overflow-y:	scroll;
@@ -94,6 +94,10 @@ header {
 .content.fullpage {
 	margin-left: 20px;
 	width: 910px;
+}
+
+.content.footed {
+	bottom: 2em;
 }
 
 footer {
