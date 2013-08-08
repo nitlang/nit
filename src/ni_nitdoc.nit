@@ -124,7 +124,7 @@ class NitdocContext
 		self.dot_dir = null
 		if not opt_nodot.value then self.dot_dir = output_dir.to_s
 		overview
-		fullindex
+		search
 		modules
 		classes
 		quicksearch_list
@@ -135,9 +135,9 @@ class NitdocContext
 		overviewpage.save("{output_dir.to_s}/index.html")
 	end
 
-	private fun fullindex do
-		var fullindex = new NitdocFullindex(self)
-		fullindex.save("{output_dir.to_s}/full-index.html")
+	private fun search do
+		var searchpage = new NitdocSearch(self)
+		searchpage.save("{output_dir.to_s}/search.html")
 	end
 
 	private fun modules do
@@ -334,7 +334,7 @@ class NitdocOverview
 	redef fun menu do
 		super
 		append("<li class='current'>Overview</li>")
-		append("<li><a href='full-index.html'>Full Index</a></li>")
+		append("<li><a href='search.html'>Search</a></li>")
 	end
 
 	redef fun content do
@@ -397,8 +397,8 @@ class NitdocOverview
 	end
 end
 
-# The full index page
-class NitdocFullindex
+# The search page
+class NitdocSearch
 	super NitdocPage
 
 	init(ctx: NitdocContext) do
@@ -406,19 +406,19 @@ class NitdocFullindex
 		self.dot_dir = null
 	end
 
-	redef fun title do return "Full Index"
+	redef fun title do return "Search"
 
 	redef fun menu do
 		super
 		append("<li><a href='index.html'>Overview</a></li>")
-		append("<li class='current'>Full Index</li>")
+		append("<li class='current'>Search</li>")
 	end
 
 	redef fun content do
 		var footed = ""
 		if ctx.opt_custom_footer_text.value != null then footed = "footed"
 		append("<div class='content fullpage {footed}'>")
-		append("<h1>Full Index</h1>")
+		append("<h1>{title}</h1>")
 		module_column
 		classes_column
 		properties_column
@@ -510,7 +510,7 @@ class NitdocModule
 		super
 		append("<li><a href='index.html'>Overview</a></li>")
 		append("<li class='current'>{mmodule.name}</li>")
-		append("<li><a href='full-index.html'>Full Index</a></li>")
+		append("<li><a href='search.html'>Search</a></li>")
 	end
 
 	redef fun content do
@@ -747,7 +747,7 @@ class NitdocClass
 			append("</li>")
 		end
 		append("<li class='current'>{mclass.name}</li>")
-		append("<li><a href='full-index.html'>Full Index</a></li>")
+		append("<li><a href='search.html'>Search</a></li>")
 	end
 
 	redef fun content do
