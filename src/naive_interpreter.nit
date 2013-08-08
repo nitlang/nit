@@ -1069,6 +1069,17 @@ redef class AExpr
 end
 
 redef class ABlockExpr
+	redef fun expr(v)
+	do
+		var last = self.n_expr.last
+		for e in self.n_expr do
+			if e == last then break
+			v.stmt(e)
+			if v.is_escaping then return null
+		end
+		return last.expr(v)
+	end
+
 	redef fun stmt(v)
 	do
 		for e in self.n_expr do

@@ -1811,6 +1811,15 @@ redef class ABlockExpr
 	do
 		for e in self.n_expr do v.stmt(e)
 	end
+	redef fun expr(v)
+	do
+		var last = self.n_expr.last
+		for e in self.n_expr do
+			if e == last then break
+			v.stmt(e)
+		end
+		return v.expr(last, null)
+	end
 end
 
 redef class AVardeclExpr
