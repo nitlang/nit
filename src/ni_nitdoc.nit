@@ -270,7 +270,7 @@ abstract class NitdocPage
 			source = x.join(l.line_start.to_s)
 			x = source.split_with("%L")
 			source = x.join(l.line_end.to_s)
-			return " (<a href=\"{source.to_s}\">source</a>)"
+			return " (<a target='_blank' title='Show source' href=\"{source.to_s}\">source</a>)"
 		end
 	end
 
