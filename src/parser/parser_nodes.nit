@@ -103,7 +103,7 @@ abstract class Prod
 	do
 		super
 		assert n isa Prod
-		n.location = location
+		if n._location == null then n._location = _location
 	end
 end
 
