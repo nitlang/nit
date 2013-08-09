@@ -41,21 +41,30 @@ abstract class ANode
 	# Protect form invalid instantiation of nodes
 	private init do end
 
-	# Remove a child from the AST
-	fun remove_child(child: ANode)
+	# Replace a child with an other node in the AST
+	private fun replace_child(old_child: ANode, new_child: nullable ANode) is abstract
+
+	# Detach a node from its parent
+	# Aborts if the node is not detashable. use `replace_with` instead
+	# REQUIRE: parent != null
+	# REQUIRE: is_detachable
+	# ENDURE: parent == null
+	fun detach
 	do
-		replace_child(child, null)
+		assert _parent != null
+		_parent.replace_child(self, null)
+		_parent = null
 	end
 
-	# Replace a child with an other node in the AST
-	fun replace_child(old_child: ANode, new_child: nullable ANode) is abstract
-
 	# Replace itself with an other node in the AST
+	# REQUIRE: parent != null
+	# ENSURE: node.parent == old(parent)
+	# ENSURE: parent == null
 	fun replace_with(node: ANode)
 	do
-		if _parent != null then
-			_parent.replace_child(self, node)
-		end
+		assert _parent != null
+		_parent.replace_child(self, node)
+		_parent = null
 	end
 
 	# Visit all nodes in order.
