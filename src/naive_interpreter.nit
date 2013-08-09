@@ -1185,6 +1185,17 @@ redef class AAbortExpr
 end
 
 redef class AIfExpr
+	redef fun expr(v)
+	do
+		var cond = v.expr(self.n_expr)
+		if cond == null then return null
+		if cond.is_true then
+			return v.expr(self.n_then.as(not null))
+		else
+			return v.expr(self.n_else.as(not null))
+		end
+	end
+
 	redef fun stmt(v)
 	do
 		var cond = v.expr(self.n_expr)

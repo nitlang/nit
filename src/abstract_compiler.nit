@@ -1910,6 +1910,18 @@ redef class AIfExpr
 		v.stmt(self.n_else)
 		v.add("\}")
 	end
+
+	redef fun expr(v)
+	do
+		var res = v.new_var(self.mtype.as(not null))
+		var cond = v.expr_bool(self.n_expr)
+		v.add("if ({cond})\{")
+		v.assign(res, v.expr(self.n_then.as(not null), null))
+		v.add("\} else \{")
+		v.assign(res, v.expr(self.n_else.as(not null), null))
+		v.add("\}")
+		return res
+	end
 end
 
 redef class AIfexprExpr
