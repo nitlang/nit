@@ -6,67 +6,6 @@ import lexer
 intrude import parser_nodes
 private import tables
 
-redef class ANode
-	# Parent of the node in the AST
-	readable writable var _parent: nullable ANode
-
-	# Remove a child from the AST
-	fun remove_child(child: ANode)
-	do
-		replace_child(child, null)
-	end
-
-	# Replace a child with an other node in the AST
-	fun replace_child(old_child: ANode, new_child: nullable ANode) is abstract
-
-	# Replace itself with an other node in the AST
-	fun replace_with(node: ANode)
-	do
-		if _parent != null then
-			_parent.replace_child(self, node)
-		end
-	end
-
-	# Visit all nodes in order.
-	# Thus, call "v.visit(e)" for each node e
-	fun visit_all(v: Visitor) is abstract
-end
-
-redef class Token
-	redef fun visit_all(v: Visitor) do end
-	redef fun replace_child(old_child: ANode, new_child: nullable ANode) do end
-end
-
-redef class Prod
-	redef fun replace_with(n: ANode)
-        do
-                super
-                assert n isa Prod
-                n.location = location
-        end
-end
-
-# Abstract standard visitor
-abstract class Visitor
-	# What the visitor do when a node is visited
-        # Concrete visitors should redefine this method.
-        protected fun visit(e: nullable ANode) is abstract
-
-        # Ask the visitor to visit a given node.
-        # Usually automatically called by visit_all* methods.
-	# This methos should not be redefined
-        fun enter_visit(e: nullable ANode)
-	do
-		var old = _current_node
-		_current_node = e
-		visit(e)
-		_current_node = old
-	end
-
-	# The current visited node
-	readable var _current_node: nullable ANode = null
-end
-
 redef class AModule
     private init empty_init do end
 

@@ -36,6 +36,30 @@ abstract class ANode
 	do
 		print "{hot_location} {self.class_name}: {message}\n{hot_location.colored_line("0;32")}"
 	end
+
+	# Parent of the node in the AST
+	readable writable var _parent: nullable ANode
+
+	# Remove a child from the AST
+	fun remove_child(child: ANode)
+	do
+		replace_child(child, null)
+	end
+
+	# Replace a child with an other node in the AST
+	fun replace_child(old_child: ANode, new_child: nullable ANode) is abstract
+
+	# Replace itself with an other node in the AST
+	fun replace_with(node: ANode)
+	do
+		if _parent != null then
+			_parent.replace_child(self, node)
+		end
+	end
+
+	# Visit all nodes in order.
+	# Thus, call "v.visit(e)" for each node e
+	fun visit_all(v: Visitor) is abstract
 end
 
 # Ancestor of all tokens
@@ -47,6 +71,9 @@ abstract class Token
 	redef fun to_s: String do
 		return "'{text}'"
 	end
+
+	redef fun visit_all(v: Visitor) do end
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode) do end
 end
 
 # Ancestor of all productions
@@ -54,7 +81,36 @@ abstract class Prod
 	super ANode
 	fun location=(l: Location) do _location = l
 	readable var _n_annotations: nullable AAnnotations = null
+
+	redef fun replace_with(n: ANode)
+        do
+                super
+                assert n isa Prod
+		n.location = location
+        end
 end
+
+# Abstract standard visitor
+abstract class Visitor
+	# What the visitor do when a node is visited
+        # Concrete visitors should redefine this method.
+        protected fun visit(e: nullable ANode) is abstract
+
+        # Ask the visitor to visit a given node.
+        # Usually automatically called by visit_all* methods.
+	# This methos should not be redefined
+        fun enter_visit(e: nullable ANode)
+	do
+		var old = _current_node
+		_current_node = e
+		visit(e)
+		_current_node = old
+	end
+
+	# The current visited node
+	readable var _current_node: nullable ANode = null
+end
+
 class TEol
 	super Token
 	redef fun to_s

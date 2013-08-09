@@ -15,7 +15,6 @@ $ // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 $ // See the License for the specific language governing permissions and
 $ // limitations under the License.
 
-$ include 'nodes.xss'
 $ include 'lexer.xss'
 $ include 'parser.xss'
 $ include 'tokens.xss'
@@ -28,7 +27,6 @@ package parser_abs
 
 import location
 
-$ call make_abs_nodes()
 $ call make_abs_tokens()
 $ call make_abs_prods()
 $ end output
@@ -61,7 +59,6 @@ intrude import parser_abs
 $ end
 private import tables
 
-$ call make_nodes()
 $ call make_prods()
 $ end output
 

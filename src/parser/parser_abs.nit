@@ -4,25 +4,6 @@ package parser_abs
 
 import location
 
-# Root of the AST hierarchy
-abstract class ANode
-	var _location: nullable Location
-
-	# Location is set during AST building. Once built, location cannon be null
-	# However, manual instanciated nodes may need mode care
-	fun location: Location do return _location.as(not null)
-end
-
-# Ancestor of all tokens
-abstract class Token
-	super ANode
-end
-
-# Ancestor of all productions
-abstract class Prod
-	super ANode
-	fun location=(loc: Location) do _location = loc
-end
 class TEol
 	super Token
 end
