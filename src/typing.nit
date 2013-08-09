@@ -1435,6 +1435,7 @@ redef class ASuperExpr
 			v.check_signature(self, args, mproperty.name, msignature)
 		end
 		self.mtype = msignature.return_mtype
+		self.is_typed = true
 	end
 
 	private fun process_superinit(v: TypeVisitor)
