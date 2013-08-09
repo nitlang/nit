@@ -1109,11 +1109,12 @@ redef class AVarExpr
 end
 
 redef class AVarAssignExpr
-	redef fun stmt(v)
+	redef fun expr(v)
 	do
 		var i = v.expr(self.n_value)
-		if i == null then return
+		if i == null then return null
 		v.frame.map[self.variable.as(not null)] = i
+		return i
 	end
 end
 

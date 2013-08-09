@@ -1850,6 +1850,13 @@ redef class AVarAssignExpr
 		var i = v.expr(self.n_value, variable.declared_type)
 		v.assign(v.variable(variable), i)
 	end
+	redef fun expr(v)
+	do
+		var variable = self.variable.as(not null)
+		var i = v.expr(self.n_value, variable.declared_type)
+		v.assign(v.variable(variable), i)
+		return i
+	end
 end
 
 redef class AVarReassignExpr
