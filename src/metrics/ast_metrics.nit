@@ -55,7 +55,6 @@ private class AstMetricsVisitor
 
 	redef fun visit(n)
 	do
-		if n == null then return
 		n.visit_all(self)
 		phase.node_counter.inc(n.class_name)
 		if n isa TId or n isa TAttrid or n isa TClassid then

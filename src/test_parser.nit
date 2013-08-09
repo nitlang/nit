@@ -22,9 +22,8 @@ import parser
 class PrintTreeVisitor
 	super Visitor
 	var _rank: Int
-	redef fun visit(n: nullable ANode)
+	redef fun visit(n)
 	do
-		if n == null then return
 		if n isa Token then
 			printn("  " * _rank, n.to_s, " ... ", n.location, "\n")
 		else

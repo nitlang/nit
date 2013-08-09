@@ -110,7 +110,6 @@ private class CollectTokensByTextVisitor
 	var result = new Array[Token]
 	redef fun visit(node)
 	do
-		if node == null then return
 		node.visit_all(self)
 		if node isa Token and node.text == text then result.add(node)
 	end
@@ -123,7 +122,6 @@ private class CollectAnnotationsByNameVisitor
 	var result = new Array[AAnnotation]
 	redef fun visit(node)
 	do
-		if node == null then return
 		node.visit_all(self)
 		if node isa AAnnotation and node.n_atid.n_id.text == name then result.add(node)
 	end

@@ -114,7 +114,7 @@ private class ScopeVisitor
 		return null
 	end
 
-	redef fun visit(n: nullable ANode)
+	redef fun visit(n)
 	do
 		n.accept_scope_visitor(self)
 	end

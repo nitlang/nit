@@ -40,7 +40,7 @@ private class TypingVisitor
 	super AbsSyntaxVisitor
 	redef fun visit(n)
 	do
-		if n != null then n.accept_typing(self)
+		n.accept_typing(self)
 	end
 
 	# Current knowledge about scoped things (variable, labels, etc.)

@@ -1474,11 +1474,9 @@ private class ComputeProdLocationVisitor
 	# Location of the last visited token in the current production
 	var _last_location: nullable Location = null
 
-	redef fun visit(n: nullable ANode)
+	redef fun visit(n: ANode)
 	do
-		if n == null then
-			return
-		else if n isa Token then
+		if n isa Token then
 			var loc = n.location
 			_last_location = loc
 

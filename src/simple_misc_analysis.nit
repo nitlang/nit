@@ -50,7 +50,7 @@ private class SimpleMiscVisitor
 	super Visitor
 	redef fun visit(n)
 	do
-		if n != null then n.accept_simple_misc(self)
+		n.accept_simple_misc(self)
 	end
 
 	# Number of nested once

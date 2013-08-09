@@ -103,13 +103,14 @@ abstract class Visitor
 	# What the visitor do when a node is visited
 	# Concrete visitors should implement this method.
 	# @toimplement
-	protected fun visit(e: nullable ANode) is abstract
+	protected fun visit(e: ANode) is abstract
 
 	# Ask the visitor to visit a given node.
 	# Usually automatically called by visit_all* methods.
 	# This method should not be redefined
 	fun enter_visit(e: nullable ANode)
 	do
+		if e == null then return
 		var old = _current_node
 		_current_node = e
 		visit(e)

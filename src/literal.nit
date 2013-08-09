@@ -55,10 +55,8 @@ private class LiteralVisitor
 
 	redef fun visit(n)
 	do
-		if n != null then
-			n.accept_literal(self)
-			n.visit_all(self)
-		end
+		n.accept_literal(self)
+		n.visit_all(self)
 	end
 end
 

@@ -338,7 +338,6 @@ class RapidTypeVisitor
 
 	redef fun visit(n)
 	do
-		if n == null then return
 		n.accept_rapid_type_visitor(self)
 		if n isa AExpr then
 			var implicit_cast_to = n.implicit_cast_to

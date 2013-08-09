@@ -52,24 +52,22 @@ private class FlowVisitor
 
 	redef fun visit(node)
 	do
-		if node != null then
-			if first == null then first = node
+		if first == null then first = node
 
-			if current_flow_context.node == null then current_flow_context.node = node
-			node.accept_flow_visitor(self)
-			if node isa AExpr then
-				var flow = self.current_flow_context
-				node.after_flow_context = flow
-				# Force the creation of a specific merge after the analysis of the node.
-				if flow.when_true != flow or flow.when_false != flow then
-					self.make_sub_flow
-					self.current_flow_context.name = "AUTOSUB"
-				end
+		if current_flow_context.node == null then current_flow_context.node = node
+		node.accept_flow_visitor(self)
+		if node isa AExpr then
+			var flow = self.current_flow_context
+			node.after_flow_context = flow
+			# Force the creation of a specific merge after the analysis of the node.
+			if flow.when_true != flow or flow.when_false != flow then
+				self.make_sub_flow
+				self.current_flow_context.name = "AUTOSUB"
 			end
+		end
 
-			if first == node then
-				#self.printflow
-			end
+		if first == node then
+			#self.printflow
 		end
 	end
 
