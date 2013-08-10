@@ -14,23 +14,26 @@ Some Nit features:
 
 
 Requirement:
-	
+
 	* gcc		http://gcc.gnu.org/
+	* ccache	http://ccache.samba.org/	to improve recompilation
 
 Optionals tools:
 
-	* ccache	http://ccache.samba.org/	to improve recompilation
 	* dot		http://www.graphviz.org/	to enable graphes with the nitdoc tool
 
 Important files and directory:
 
+	benchmarks/	Script to bench the compilers
 	bin/		The Nit tools
 	bin/nitc	The Nit compiler
+	bin/nitg	The new Nit compiler
+	bin/nit		The Nit interpreter
 	bin/nitdoc	The Nit autodoc
-	BUGS		Known big usability bugs
 	c_src/		C code of nitc (needed to bootstrap)
 	clib/		C code needed by nitc to compile programs
 	Changelog	List of change between versions
+	contrib/	Various Nit programs (may or may not be useful)
 	doc/		Documentation
 	examples/	Program examples written in Nit
 	LICENCE		License of the software
@@ -41,7 +44,6 @@ Important files and directory:
 	NOTICE		List of the authors
 	README		This file
 	src/		The Nit tool sources (written in Nit)
-	TODO		What next features are planed
 
 
 How to start:
