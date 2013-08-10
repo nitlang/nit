@@ -14,10 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import kernel #alt1# private import kernel #alt2# protected import kernel
+import kernel #alt1# private import kernel #alt2# protected import kernel #alt7# intrude import kernel
 
-class A #alt3# private class A #alt4# protected class A
-	fun foo #alt5# private fun foo #alt6# protected fun foo
+class A #alt3# private class A #alt4# protected class A #alt8# intrude class A
+	fun foo #alt5# private fun foo #alt6# protected fun foo #alt9# intrude fun foo
 	do
 		1.output
 	end

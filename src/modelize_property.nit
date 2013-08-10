@@ -207,7 +207,13 @@ redef class APropdef
 	private fun new_property_visibility(modelbuilder: ModelBuilder, nclassdef: AClassdef, nvisibility: nullable AVisibility): MVisibility
 	do
 		var mvisibility = public_visibility
-		if nvisibility != null then mvisibility = nvisibility.mvisibility
+		if nvisibility != null then
+			mvisibility = nvisibility.mvisibility
+			if mvisibility == intrude_visibility then
+				modelbuilder.error(nvisibility, "Error: intrude is not a legal visibility for properties.")
+				mvisibility = public_visibility
+			end
+		end
 		if nclassdef.mclassdef.mclass.visibility == private_visibility then
 			if mvisibility == protected_visibility then
 				assert nvisibility != null

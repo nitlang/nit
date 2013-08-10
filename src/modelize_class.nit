@@ -54,6 +54,9 @@ redef class ModelBuilder
 			if mvisibility == protected_visibility then
 				error(nvisibility, "Error: only properties can be protected.")
 				return
+			else if mvisibility == intrude_visibility then
+				error(nvisibility, "Error: intrude is not a legal visibility for classes.")
+				return
 			end
 		else if nclassdef isa ATopClassdef then
 			name = "Object"
