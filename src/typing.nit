@@ -1676,5 +1676,6 @@ redef class ADebugTypeExpr
 			var umtype = v.anchor_to(mtype)
 			v.modelbuilder.warning(self, "Found type {expr} (-> {unsafe}), expected {mtype} (-> {umtype})")
 		end
+		self.is_typed = true
 	end
 end
