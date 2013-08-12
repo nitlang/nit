@@ -20,6 +20,7 @@ module abstract_compiler
 import literal
 import typing
 import auto_super_init
+import frontend
 
 # Add compiling options
 redef class ToolContext

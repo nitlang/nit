@@ -20,6 +20,7 @@ module naive_interpreter
 import literal
 import typing
 import auto_super_init
+import frontend
 
 redef class ToolContext
 	# --discover-call-trace
