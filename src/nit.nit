@@ -19,6 +19,7 @@ module nit
 
 import modelbuilder
 import frontend
+import transform
 import naive_interpreter
 import debugger
 #import interpretor_type_test
