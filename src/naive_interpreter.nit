@@ -887,6 +887,8 @@ redef class AExternMethPropdef
 			if pname == "rand" then
 				var res = recvval.rand
 				return v.int_instance(res)
+			else if pname == "native_int_to_s" then
+				return v.native_string_instance(recvval.to_s)
 			end
 		else if cname == "NativeFile" then
 			var recvval = args.first.val
