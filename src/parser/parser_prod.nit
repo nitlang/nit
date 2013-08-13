@@ -88,6 +88,15 @@ redef class AModule
         end
     end
 
+		redef fun n_moduledecl=(node)
+		do
+			_n_moduledecl = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         if _n_moduledecl != null then
@@ -173,6 +182,32 @@ redef class AModuledecl
 	end
     end
 
+		redef fun n_doc=(node)
+		do
+			_n_doc = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_kwmodule=(node)
+		do
+			_n_kwmodule = node
+			node.parent = self
+		end
+		redef fun n_name=(node)
+		do
+			_n_name = node
+			node.parent = self
+		end
+		redef fun n_annotations=(node)
+		do
+			_n_annotations = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         if _n_doc != null then
@@ -252,6 +287,30 @@ redef class AStdImport
 	end
     end
 
+		redef fun n_visibility=(node)
+		do
+			_n_visibility = node
+			node.parent = self
+		end
+		redef fun n_kwimport=(node)
+		do
+			_n_kwimport = node
+			node.parent = self
+		end
+		redef fun n_name=(node)
+		do
+			_n_name = node
+			node.parent = self
+		end
+		redef fun n_annotations=(node)
+		do
+			_n_annotations = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_visibility)
@@ -314,6 +373,23 @@ redef class ANoImport
 	end
     end
 
+		redef fun n_visibility=(node)
+		do
+			_n_visibility = node
+			node.parent = self
+		end
+		redef fun n_kwimport=(node)
+		do
+			_n_kwimport = node
+			node.parent = self
+		end
+		redef fun n_kwend=(node)
+		do
+			_n_kwend = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_visibility)
@@ -332,6 +408,8 @@ redef class APublicVisibility
     redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
     end
+
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -362,6 +440,13 @@ redef class APrivateVisibility
             return
 	end
     end
+
+		redef fun n_kwprivate=(node)
+		do
+			_n_kwprivate = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -394,6 +479,13 @@ redef class AProtectedVisibility
 	end
     end
 
+		redef fun n_kwprotected=(node)
+		do
+			_n_kwprotected = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_kwprotected)
@@ -424,6 +516,13 @@ redef class AIntrudeVisibility
             return
 	end
     end
+
+		redef fun n_kwintrude=(node)
+		do
+			_n_kwintrude = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -611,6 +710,58 @@ redef class AStdClassdef
 	end
     end
 
+		redef fun n_doc=(node)
+		do
+			_n_doc = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_kwredef=(node)
+		do
+			_n_kwredef = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_visibility=(node)
+		do
+			_n_visibility = node
+			node.parent = self
+		end
+		redef fun n_classkind=(node)
+		do
+			_n_classkind = node
+			node.parent = self
+		end
+		redef fun n_id=(node)
+		do
+			_n_id = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_annotations=(node)
+		do
+			_n_annotations = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_extern_code_block=(node)
+		do
+			_n_extern_code_block = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_kwend=(node)
+		do
+			_n_kwend = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         if _n_doc != null then
@@ -673,6 +824,8 @@ redef class ATopClassdef
         end
     end
 
+
+
     redef fun visit_all(v: Visitor)
     do
             for n in _n_propdefs do
@@ -711,6 +864,8 @@ redef class AMainClassdef
         end
     end
 
+
+
     redef fun visit_all(v: Visitor)
     do
             for n in _n_propdefs do
@@ -743,6 +898,13 @@ redef class AConcreteClasskind
             return
 	end
     end
+
+		redef fun n_kwclass=(node)
+		do
+			_n_kwclass = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -788,6 +950,18 @@ redef class AAbstractClasskind
 	end
     end
 
+		redef fun n_kwabstract=(node)
+		do
+			_n_kwabstract = node
+			node.parent = self
+		end
+		redef fun n_kwclass=(node)
+		do
+			_n_kwclass = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_kwabstract)
@@ -820,6 +994,13 @@ redef class AInterfaceClasskind
 	end
     end
 
+		redef fun n_kwinterface=(node)
+		do
+			_n_kwinterface = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_kwinterface)
@@ -850,6 +1031,13 @@ redef class AEnumClasskind
             return
 	end
     end
+
+		redef fun n_kwenum=(node)
+		do
+			_n_kwenum = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -896,6 +1084,20 @@ redef class AExternClasskind
             return
 	end
     end
+
+		redef fun n_kwextern=(node)
+		do
+			_n_kwextern = node
+			node.parent = self
+		end
+		redef fun n_kwclass=(node)
+		do
+			_n_kwclass = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -961,6 +1163,27 @@ redef class AFormaldef
 	end
     end
 
+		redef fun n_id=(node)
+		do
+			_n_id = node
+			node.parent = self
+		end
+		redef fun n_type=(node)
+		do
+			_n_type = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_annotations=(node)
+		do
+			_n_annotations = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_id)
@@ -1025,6 +1248,25 @@ redef class ASuperclass
             return
 	end
     end
+
+		redef fun n_kwsuper=(node)
+		do
+			_n_kwsuper = node
+			node.parent = self
+		end
+		redef fun n_type=(node)
+		do
+			_n_type = node
+			node.parent = self
+		end
+		redef fun n_annotations=(node)
+		do
+			_n_annotations = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -1209,6 +1451,81 @@ redef class AAttrPropdef
 	end
     end
 
+		redef fun n_doc=(node)
+		do
+			_n_doc = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_readable=(node)
+		do
+			_n_readable = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_writable=(node)
+		do
+			_n_writable = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_kwredef=(node)
+		do
+			_n_kwredef = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_visibility=(node)
+		do
+			_n_visibility = node
+			node.parent = self
+		end
+		redef fun n_kwvar=(node)
+		do
+			_n_kwvar = node
+			node.parent = self
+		end
+		redef fun n_id=(node)
+		do
+			_n_id = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_id2=(node)
+		do
+			_n_id2 = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_type=(node)
+		do
+			_n_type = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_annotations=(node)
+		do
+			_n_annotations = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         if _n_doc != null then
@@ -1323,6 +1640,37 @@ redef class AMethPropdef
             return
 	end
     end
+
+		redef fun n_doc=(node)
+		do
+			_n_doc = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_kwredef=(node)
+		do
+			_n_kwredef = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_visibility=(node)
+		do
+			_n_visibility = node
+			node.parent = self
+		end
+		redef fun n_methid=(node)
+		do
+			_n_methid = node
+			node.parent = self
+		end
+		redef fun n_signature=(node)
+		do
+			_n_signature = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -1447,6 +1795,49 @@ redef class ADeferredMethPropdef
 	end
     end
 
+		redef fun n_doc=(node)
+		do
+			_n_doc = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_kwredef=(node)
+		do
+			_n_kwredef = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_visibility=(node)
+		do
+			_n_visibility = node
+			node.parent = self
+		end
+		redef fun n_kwmeth=(node)
+		do
+			_n_kwmeth = node
+			node.parent = self
+		end
+		redef fun n_methid=(node)
+		do
+			_n_methid = node
+			node.parent = self
+		end
+		redef fun n_signature=(node)
+		do
+			_n_signature = node
+			node.parent = self
+		end
+		redef fun n_annotations=(node)
+		do
+			_n_annotations = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         if _n_doc != null then
@@ -1558,6 +1949,42 @@ redef class AInternMethPropdef
             return
 	end
     end
+
+		redef fun n_doc=(node)
+		do
+			_n_doc = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_kwredef=(node)
+		do
+			_n_kwredef = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_visibility=(node)
+		do
+			_n_visibility = node
+			node.parent = self
+		end
+		redef fun n_kwmeth=(node)
+		do
+			_n_kwmeth = node
+			node.parent = self
+		end
+		redef fun n_methid=(node)
+		do
+			_n_methid = node
+			node.parent = self
+		end
+		redef fun n_signature=(node)
+		do
+			_n_signature = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -1713,6 +2140,63 @@ redef class AExternMethPropdef
 	end
     end
 
+		redef fun n_doc=(node)
+		do
+			_n_doc = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_kwredef=(node)
+		do
+			_n_kwredef = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_visibility=(node)
+		do
+			_n_visibility = node
+			node.parent = self
+		end
+		redef fun n_kwmeth=(node)
+		do
+			_n_kwmeth = node
+			node.parent = self
+		end
+		redef fun n_methid=(node)
+		do
+			_n_methid = node
+			node.parent = self
+		end
+		redef fun n_signature=(node)
+		do
+			_n_signature = node
+			node.parent = self
+		end
+		redef fun n_extern=(node)
+		do
+			_n_extern = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_extern_calls=(node)
+		do
+			_n_extern_calls = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_extern_code_block=(node)
+		do
+			_n_extern_code_block = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         if _n_doc != null then
@@ -1861,6 +2345,56 @@ redef class AConcreteMethPropdef
 	end
     end
 
+		redef fun n_doc=(node)
+		do
+			_n_doc = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_kwredef=(node)
+		do
+			_n_kwredef = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_visibility=(node)
+		do
+			_n_visibility = node
+			node.parent = self
+		end
+		redef fun n_kwmeth=(node)
+		do
+			_n_kwmeth = node
+			node.parent = self
+		end
+		redef fun n_methid=(node)
+		do
+			_n_methid = node
+			node.parent = self
+		end
+		redef fun n_signature=(node)
+		do
+			_n_signature = node
+			node.parent = self
+		end
+		redef fun n_annotations=(node)
+		do
+			_n_annotations = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_block=(node)
+		do
+			_n_block = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         if _n_doc != null then
@@ -2007,6 +2541,58 @@ redef class AConcreteInitPropdef
             return
 	end
     end
+
+		redef fun n_doc=(node)
+		do
+			_n_doc = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_kwredef=(node)
+		do
+			_n_kwredef = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_visibility=(node)
+		do
+			_n_visibility = node
+			node.parent = self
+		end
+		redef fun n_kwinit=(node)
+		do
+			_n_kwinit = node
+			node.parent = self
+		end
+		redef fun n_methid=(node)
+		do
+			_n_methid = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_signature=(node)
+		do
+			_n_signature = node
+			node.parent = self
+		end
+		redef fun n_annotations=(node)
+		do
+			_n_annotations = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_block=(node)
+		do
+			_n_block = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -2172,6 +2758,65 @@ redef class AExternInitPropdef
 	end
     end
 
+		redef fun n_doc=(node)
+		do
+			_n_doc = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_kwredef=(node)
+		do
+			_n_kwredef = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_visibility=(node)
+		do
+			_n_visibility = node
+			node.parent = self
+		end
+		redef fun n_kwnew=(node)
+		do
+			_n_kwnew = node
+			node.parent = self
+		end
+		redef fun n_methid=(node)
+		do
+			_n_methid = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_signature=(node)
+		do
+			_n_signature = node
+			node.parent = self
+		end
+		redef fun n_extern=(node)
+		do
+			_n_extern = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_extern_calls=(node)
+		do
+			_n_extern_calls = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_extern_code_block=(node)
+		do
+			_n_extern_code_block = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         if _n_doc != null then
@@ -2239,6 +2884,22 @@ redef class AMainMethPropdef
             return
 	end
     end
+
+		redef fun n_kwredef=(node)
+		do
+			_n_kwredef = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_block=(node)
+		do
+			_n_block = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -2360,6 +3021,49 @@ redef class ATypePropdef
 	end
     end
 
+		redef fun n_doc=(node)
+		do
+			_n_doc = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_kwredef=(node)
+		do
+			_n_kwredef = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_visibility=(node)
+		do
+			_n_visibility = node
+			node.parent = self
+		end
+		redef fun n_kwtype=(node)
+		do
+			_n_kwtype = node
+			node.parent = self
+		end
+		redef fun n_id=(node)
+		do
+			_n_id = node
+			node.parent = self
+		end
+		redef fun n_type=(node)
+		do
+			_n_type = node
+			node.parent = self
+		end
+		redef fun n_annotations=(node)
+		do
+			_n_annotations = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         if _n_doc != null then
@@ -2417,6 +3121,20 @@ redef class AReadAble
             return
 	end
     end
+
+		redef fun n_kwredef=(node)
+		do
+			_n_kwredef = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_kwreadable=(node)
+		do
+			_n_kwreadable = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -2482,6 +3200,27 @@ redef class AWriteAble
 	end
     end
 
+		redef fun n_kwredef=(node)
+		do
+			_n_kwredef = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_visibility=(node)
+		do
+			_n_visibility = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_kwwritable=(node)
+		do
+			_n_kwwritable = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         if _n_kwredef != null then
@@ -2519,6 +3258,13 @@ redef class AIdMethid
 	end
     end
 
+		redef fun n_id=(node)
+		do
+			_n_id = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_id)
@@ -2549,6 +3295,13 @@ redef class APlusMethid
             return
 	end
     end
+
+		redef fun n_plus=(node)
+		do
+			_n_plus = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -2581,6 +3334,13 @@ redef class AMinusMethid
 	end
     end
 
+		redef fun n_minus=(node)
+		do
+			_n_minus = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_minus)
@@ -2611,6 +3371,13 @@ redef class AStarMethid
             return
 	end
     end
+
+		redef fun n_star=(node)
+		do
+			_n_star = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -2643,6 +3410,13 @@ redef class ASlashMethid
 	end
     end
 
+		redef fun n_slash=(node)
+		do
+			_n_slash = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_slash)
@@ -2673,6 +3447,13 @@ redef class APercentMethid
             return
 	end
     end
+
+		redef fun n_percent=(node)
+		do
+			_n_percent = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -2705,6 +3486,13 @@ redef class AEqMethid
 	end
     end
 
+		redef fun n_eq=(node)
+		do
+			_n_eq = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_eq)
@@ -2735,6 +3523,13 @@ redef class ANeMethid
             return
 	end
     end
+
+		redef fun n_ne=(node)
+		do
+			_n_ne = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -2767,6 +3562,13 @@ redef class ALeMethid
 	end
     end
 
+		redef fun n_le=(node)
+		do
+			_n_le = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_le)
@@ -2797,6 +3599,13 @@ redef class AGeMethid
             return
 	end
     end
+
+		redef fun n_ge=(node)
+		do
+			_n_ge = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -2829,6 +3638,13 @@ redef class ALtMethid
 	end
     end
 
+		redef fun n_lt=(node)
+		do
+			_n_lt = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_lt)
@@ -2859,6 +3675,13 @@ redef class AGtMethid
             return
 	end
     end
+
+		redef fun n_gt=(node)
+		do
+			_n_gt = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -2891,6 +3714,13 @@ redef class ALlMethid
 	end
     end
 
+		redef fun n_ll=(node)
+		do
+			_n_ll = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_ll)
@@ -2921,6 +3751,13 @@ redef class AGgMethid
             return
 	end
     end
+
+		redef fun n_gg=(node)
+		do
+			_n_gg = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -2966,6 +3803,18 @@ redef class ABraMethid
 	end
     end
 
+		redef fun n_obra=(node)
+		do
+			_n_obra = node
+			node.parent = self
+		end
+		redef fun n_cbra=(node)
+		do
+			_n_cbra = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_obra)
@@ -2997,6 +3846,13 @@ redef class AStarshipMethid
             return
 	end
     end
+
+		redef fun n_starship=(node)
+		do
+			_n_starship = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -3041,6 +3897,18 @@ redef class AAssignMethid
             return
 	end
     end
+
+		redef fun n_id=(node)
+		do
+			_n_id = node
+			node.parent = self
+		end
+		redef fun n_assign=(node)
+		do
+			_n_assign = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -3099,6 +3967,23 @@ redef class ABraassignMethid
             return
 	end
     end
+
+		redef fun n_obra=(node)
+		do
+			_n_obra = node
+			node.parent = self
+		end
+		redef fun n_cbra=(node)
+		do
+			_n_cbra = node
+			node.parent = self
+		end
+		redef fun n_assign=(node)
+		do
+			_n_assign = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -3201,6 +4086,29 @@ redef class ASignature
         end
     end
 
+		redef fun n_opar=(node)
+		do
+			_n_opar = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_cpar=(node)
+		do
+			_n_cpar = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_type=(node)
+		do
+			_n_type = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         if _n_opar != null then
@@ -3290,6 +4198,34 @@ redef class AParam
             return
 	end
     end
+
+		redef fun n_id=(node)
+		do
+			_n_id = node
+			node.parent = self
+		end
+		redef fun n_type=(node)
+		do
+			_n_type = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_dotdotdot=(node)
+		do
+			_n_dotdotdot = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_annotations=(node)
+		do
+			_n_annotations = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -3387,6 +4323,37 @@ redef class AClosureDecl
 	end
     end
 
+		redef fun n_kwbreak=(node)
+		do
+			_n_kwbreak = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_bang=(node)
+		do
+			_n_bang = node
+			node.parent = self
+		end
+		redef fun n_id=(node)
+		do
+			_n_id = node
+			node.parent = self
+		end
+		redef fun n_signature=(node)
+		do
+			_n_signature = node
+			node.parent = self
+		end
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         if _n_kwbreak != null then
@@ -3474,6 +4441,27 @@ redef class AType
 	end
     end
 
+		redef fun n_kwnullable=(node)
+		do
+			_n_kwnullable = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_id=(node)
+		do
+			_n_id = node
+			node.parent = self
+		end
+		redef fun n_annotations=(node)
+		do
+			_n_annotations = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         if _n_kwnullable != null then
@@ -3527,6 +4515,18 @@ redef class ALabel
 	end
     end
 
+		redef fun n_kwlabel=(node)
+		do
+			_n_kwlabel = node
+			node.parent = self
+		end
+		redef fun n_id=(node)
+		do
+			_n_id = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_kwlabel)
@@ -3578,6 +4578,15 @@ redef class ABlockExpr
             return
 	end
     end
+
+		redef fun n_kwend=(node)
+		do
+			_n_kwend = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -3688,6 +4697,46 @@ redef class AVardeclExpr
 	end
     end
 
+		redef fun n_kwvar=(node)
+		do
+			_n_kwvar = node
+			node.parent = self
+		end
+		redef fun n_id=(node)
+		do
+			_n_id = node
+			node.parent = self
+		end
+		redef fun n_type=(node)
+		do
+			_n_type = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_assign=(node)
+		do
+			_n_assign = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_annotations=(node)
+		do
+			_n_annotations = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_kwvar)
@@ -3748,6 +4797,22 @@ redef class AReturnExpr
             return
 	end
     end
+
+		redef fun n_kwreturn=(node)
+		do
+			_n_kwreturn = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -3815,6 +4880,27 @@ redef class ABreakExpr
 	end
     end
 
+		redef fun n_kwbreak=(node)
+		do
+			_n_kwbreak = node
+			node.parent = self
+		end
+		redef fun n_label=(node)
+		do
+			_n_label = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_kwbreak)
@@ -3851,6 +4937,13 @@ redef class AAbortExpr
             return
 	end
     end
+
+		redef fun n_kwabort=(node)
+		do
+			_n_kwabort = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -3914,6 +5007,29 @@ redef class AContinueExpr
             return
 	end
     end
+
+		redef fun n_kwcontinue=(node)
+		do
+			_n_kwcontinue = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_label=(node)
+		do
+			_n_label = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -3983,6 +5099,27 @@ redef class ADoExpr
             return
 	end
     end
+
+		redef fun n_kwdo=(node)
+		do
+			_n_kwdo = node
+			node.parent = self
+		end
+		redef fun n_block=(node)
+		do
+			_n_block = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_label=(node)
+		do
+			_n_label = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -4063,6 +5200,32 @@ redef class AIfExpr
             return
 	end
     end
+
+		redef fun n_kwif=(node)
+		do
+			_n_kwif = node
+			node.parent = self
+		end
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+		redef fun n_then=(node)
+		do
+			_n_then = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_else=(node)
+		do
+			_n_else = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -4167,6 +5330,38 @@ redef class AIfexprExpr
 	end
     end
 
+		redef fun n_kwif=(node)
+		do
+			_n_kwif = node
+			node.parent = self
+		end
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+		redef fun n_kwthen=(node)
+		do
+			_n_kwthen = node
+			node.parent = self
+		end
+		redef fun n_then=(node)
+		do
+			_n_then = node
+			node.parent = self
+		end
+		redef fun n_kwelse=(node)
+		do
+			_n_kwelse = node
+			node.parent = self
+		end
+		redef fun n_else=(node)
+		do
+			_n_else = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_kwif)
@@ -4259,6 +5454,37 @@ redef class AWhileExpr
 	end
     end
 
+		redef fun n_kwwhile=(node)
+		do
+			_n_kwwhile = node
+			node.parent = self
+		end
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+		redef fun n_kwdo=(node)
+		do
+			_n_kwdo = node
+			node.parent = self
+		end
+		redef fun n_block=(node)
+		do
+			_n_block = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_label=(node)
+		do
+			_n_label = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_kwwhile)
@@ -4327,6 +5553,27 @@ redef class ALoopExpr
             return
 	end
     end
+
+		redef fun n_kwloop=(node)
+		do
+			_n_kwloop = node
+			node.parent = self
+		end
+		redef fun n_block=(node)
+		do
+			_n_block = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_label=(node)
+		do
+			_n_label = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -4439,6 +5686,37 @@ redef class AForExpr
 	end
     end
 
+		redef fun n_kwfor=(node)
+		do
+			_n_kwfor = node
+			node.parent = self
+		end
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+		redef fun n_kwdo=(node)
+		do
+			_n_kwdo = node
+			node.parent = self
+		end
+		redef fun n_block=(node)
+		do
+			_n_block = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_label=(node)
+		do
+			_n_label = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_kwfor)
@@ -4524,6 +5802,32 @@ redef class AAssertExpr
 	end
     end
 
+		redef fun n_kwassert=(node)
+		do
+			_n_kwassert = node
+			node.parent = self
+		end
+		redef fun n_id=(node)
+		do
+			_n_id = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+		redef fun n_else=(node)
+		do
+			_n_else = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_kwassert)
@@ -4575,6 +5879,18 @@ redef class AOnceExpr
 	end
     end
 
+		redef fun n_kwonce=(node)
+		do
+			_n_kwonce = node
+			node.parent = self
+		end
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_kwonce)
@@ -4606,6 +5922,13 @@ redef class ASendExpr
             return
 	end
     end
+
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -4650,6 +5973,18 @@ redef class ABinopExpr
             return
 	end
     end
+
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+		redef fun n_expr2=(node)
+		do
+			_n_expr2 = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -4696,6 +6031,18 @@ redef class AOrExpr
 	end
     end
 
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+		redef fun n_expr2=(node)
+		do
+			_n_expr2 = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_expr)
@@ -4740,6 +6087,18 @@ redef class AAndExpr
             return
 	end
     end
+
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+		redef fun n_expr2=(node)
+		do
+			_n_expr2 = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -4786,6 +6145,18 @@ redef class AOrElseExpr
 	end
     end
 
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+		redef fun n_expr2=(node)
+		do
+			_n_expr2 = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_expr)
@@ -4830,6 +6201,18 @@ redef class ANotExpr
             return
 	end
     end
+
+		redef fun n_kwnot=(node)
+		do
+			_n_kwnot = node
+			node.parent = self
+		end
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -4876,6 +6259,18 @@ redef class AEqExpr
 	end
     end
 
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+		redef fun n_expr2=(node)
+		do
+			_n_expr2 = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_expr)
@@ -4920,6 +6315,18 @@ redef class AEeExpr
             return
 	end
     end
+
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+		redef fun n_expr2=(node)
+		do
+			_n_expr2 = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -4966,6 +6373,18 @@ redef class ANeExpr
 	end
     end
 
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+		redef fun n_expr2=(node)
+		do
+			_n_expr2 = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_expr)
@@ -5010,6 +6429,18 @@ redef class ALtExpr
             return
 	end
     end
+
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+		redef fun n_expr2=(node)
+		do
+			_n_expr2 = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -5056,6 +6487,18 @@ redef class ALeExpr
 	end
     end
 
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+		redef fun n_expr2=(node)
+		do
+			_n_expr2 = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_expr)
@@ -5100,6 +6543,18 @@ redef class ALlExpr
             return
 	end
     end
+
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+		redef fun n_expr2=(node)
+		do
+			_n_expr2 = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -5146,6 +6601,18 @@ redef class AGtExpr
 	end
     end
 
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+		redef fun n_expr2=(node)
+		do
+			_n_expr2 = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_expr)
@@ -5190,6 +6657,18 @@ redef class AGeExpr
             return
 	end
     end
+
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+		redef fun n_expr2=(node)
+		do
+			_n_expr2 = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -5236,6 +6715,18 @@ redef class AGgExpr
 	end
     end
 
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+		redef fun n_expr2=(node)
+		do
+			_n_expr2 = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_expr)
@@ -5280,6 +6771,18 @@ redef class AIsaExpr
             return
 	end
     end
+
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+		redef fun n_type=(node)
+		do
+			_n_type = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -5326,6 +6829,18 @@ redef class APlusExpr
 	end
     end
 
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+		redef fun n_expr2=(node)
+		do
+			_n_expr2 = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_expr)
@@ -5370,6 +6885,18 @@ redef class AMinusExpr
             return
 	end
     end
+
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+		redef fun n_expr2=(node)
+		do
+			_n_expr2 = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -5416,6 +6943,18 @@ redef class AStarshipExpr
 	end
     end
 
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+		redef fun n_expr2=(node)
+		do
+			_n_expr2 = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_expr)
@@ -5460,6 +6999,18 @@ redef class AStarExpr
             return
 	end
     end
+
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+		redef fun n_expr2=(node)
+		do
+			_n_expr2 = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -5506,6 +7057,18 @@ redef class ASlashExpr
 	end
     end
 
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+		redef fun n_expr2=(node)
+		do
+			_n_expr2 = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_expr)
@@ -5551,6 +7114,18 @@ redef class APercentExpr
 	end
     end
 
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+		redef fun n_expr2=(node)
+		do
+			_n_expr2 = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_expr)
@@ -5595,6 +7170,18 @@ redef class AUminusExpr
             return
 	end
     end
+
+		redef fun n_minus=(node)
+		do
+			_n_minus = node
+			node.parent = self
+		end
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -5669,6 +7256,30 @@ redef class ANewExpr
 	end
     end
 
+		redef fun n_kwnew=(node)
+		do
+			_n_kwnew = node
+			node.parent = self
+		end
+		redef fun n_type=(node)
+		do
+			_n_type = node
+			node.parent = self
+		end
+		redef fun n_id=(node)
+		do
+			_n_id = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_args=(node)
+		do
+			_n_args = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_kwnew)
@@ -5717,6 +7328,18 @@ redef class AAttrExpr
             return
 	end
     end
+
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+		redef fun n_id=(node)
+		do
+			_n_id = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -5788,6 +7411,28 @@ redef class AAttrAssignExpr
             return
 	end
     end
+
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+		redef fun n_id=(node)
+		do
+			_n_id = node
+			node.parent = self
+		end
+		redef fun n_assign=(node)
+		do
+			_n_assign = node
+			node.parent = self
+		end
+		redef fun n_value=(node)
+		do
+			_n_value = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -5861,6 +7506,28 @@ redef class AAttrReassignExpr
             return
 	end
     end
+
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+		redef fun n_id=(node)
+		do
+			_n_id = node
+			node.parent = self
+		end
+		redef fun n_assign_op=(node)
+		do
+			_n_assign_op = node
+			node.parent = self
+		end
+		redef fun n_value=(node)
+		do
+			_n_value = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -5939,6 +7606,23 @@ redef class ACallExpr
             end
         end
     end
+
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+		redef fun n_id=(node)
+		do
+			_n_id = node
+			node.parent = self
+		end
+		redef fun n_args=(node)
+		do
+			_n_args = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -6028,6 +7712,33 @@ redef class ACallAssignExpr
 	end
     end
 
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+		redef fun n_id=(node)
+		do
+			_n_id = node
+			node.parent = self
+		end
+		redef fun n_args=(node)
+		do
+			_n_args = node
+			node.parent = self
+		end
+		redef fun n_assign=(node)
+		do
+			_n_assign = node
+			node.parent = self
+		end
+		redef fun n_value=(node)
+		do
+			_n_value = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_expr)
@@ -6115,6 +7826,33 @@ redef class ACallReassignExpr
 	end
     end
 
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+		redef fun n_id=(node)
+		do
+			_n_id = node
+			node.parent = self
+		end
+		redef fun n_args=(node)
+		do
+			_n_args = node
+			node.parent = self
+		end
+		redef fun n_assign_op=(node)
+		do
+			_n_assign_op = node
+			node.parent = self
+		end
+		redef fun n_value=(node)
+		do
+			_n_value = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_expr)
@@ -6178,6 +7916,25 @@ redef class ASuperExpr
 	end
     end
 
+		redef fun n_qualified=(node)
+		do
+			_n_qualified = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_kwsuper=(node)
+		do
+			_n_kwsuper = node
+			node.parent = self
+		end
+		redef fun n_args=(node)
+		do
+			_n_args = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         if _n_qualified != null then
@@ -6238,6 +7995,23 @@ redef class AInitExpr
             return
 	end
     end
+
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+		redef fun n_kwinit=(node)
+		do
+			_n_kwinit = node
+			node.parent = self
+		end
+		redef fun n_args=(node)
+		do
+			_n_args = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -6302,6 +8076,18 @@ redef class ABraExpr
             end
         end
     end
+
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+		redef fun n_args=(node)
+		do
+			_n_args = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -6377,6 +8163,28 @@ redef class ABraAssignExpr
 	end
     end
 
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+		redef fun n_args=(node)
+		do
+			_n_args = node
+			node.parent = self
+		end
+		redef fun n_assign=(node)
+		do
+			_n_assign = node
+			node.parent = self
+		end
+		redef fun n_value=(node)
+		do
+			_n_value = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_expr)
@@ -6450,6 +8258,28 @@ redef class ABraReassignExpr
 	end
     end
 
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+		redef fun n_args=(node)
+		do
+			_n_args = node
+			node.parent = self
+		end
+		redef fun n_assign_op=(node)
+		do
+			_n_assign_op = node
+			node.parent = self
+		end
+		redef fun n_value=(node)
+		do
+			_n_value = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_expr)
@@ -6515,6 +8345,18 @@ redef class AClosureCallExpr
         end
     end
 
+		redef fun n_id=(node)
+		do
+			_n_id = node
+			node.parent = self
+		end
+		redef fun n_args=(node)
+		do
+			_n_args = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_id)
@@ -6549,6 +8391,13 @@ redef class AVarExpr
             return
 	end
     end
+
+		redef fun n_id=(node)
+		do
+			_n_id = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -6606,6 +8455,23 @@ redef class AVarAssignExpr
             return
 	end
     end
+
+		redef fun n_id=(node)
+		do
+			_n_id = node
+			node.parent = self
+		end
+		redef fun n_assign=(node)
+		do
+			_n_assign = node
+			node.parent = self
+		end
+		redef fun n_value=(node)
+		do
+			_n_value = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -6665,6 +8531,23 @@ redef class AVarReassignExpr
             return
 	end
     end
+
+		redef fun n_id=(node)
+		do
+			_n_id = node
+			node.parent = self
+		end
+		redef fun n_assign_op=(node)
+		do
+			_n_assign_op = node
+			node.parent = self
+		end
+		redef fun n_value=(node)
+		do
+			_n_value = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -6726,6 +8609,25 @@ redef class ARangeExpr
             return
 	end
     end
+
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+		redef fun n_expr2=(node)
+		do
+			_n_expr2 = node
+			node.parent = self
+		end
+		redef fun n_annotations=(node)
+		do
+			_n_annotations = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -6815,6 +8717,35 @@ redef class ACrangeExpr
             return
 	end
     end
+
+		redef fun n_obra=(node)
+		do
+			_n_obra = node
+			node.parent = self
+		end
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+		redef fun n_expr2=(node)
+		do
+			_n_expr2 = node
+			node.parent = self
+		end
+		redef fun n_cbra=(node)
+		do
+			_n_cbra = node
+			node.parent = self
+		end
+		redef fun n_annotations=(node)
+		do
+			_n_annotations = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -6907,6 +8838,35 @@ redef class AOrangeExpr
 	end
     end
 
+		redef fun n_obra=(node)
+		do
+			_n_obra = node
+			node.parent = self
+		end
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+		redef fun n_expr2=(node)
+		do
+			_n_expr2 = node
+			node.parent = self
+		end
+		redef fun n_cbra=(node)
+		do
+			_n_cbra = node
+			node.parent = self
+		end
+		redef fun n_annotations=(node)
+		do
+			_n_annotations = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_obra)
@@ -6959,6 +8919,20 @@ redef class AArrayExpr
 	end
     end
 
+		redef fun n_exprs=(node)
+		do
+			_n_exprs = node
+			node.parent = self
+		end
+		redef fun n_annotations=(node)
+		do
+			_n_annotations = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_exprs)
@@ -7008,6 +8982,20 @@ redef class ASelfExpr
 	end
     end
 
+		redef fun n_kwself=(node)
+		do
+			_n_kwself = node
+			node.parent = self
+		end
+		redef fun n_annotations=(node)
+		do
+			_n_annotations = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_kwself)
@@ -7027,6 +9015,8 @@ redef class AImplicitSelfExpr
     redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
     end
+
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -7072,6 +9062,20 @@ redef class ATrueExpr
             return
 	end
     end
+
+		redef fun n_kwtrue=(node)
+		do
+			_n_kwtrue = node
+			node.parent = self
+		end
+		redef fun n_annotations=(node)
+		do
+			_n_annotations = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -7122,6 +9126,20 @@ redef class AFalseExpr
 	end
     end
 
+		redef fun n_kwfalse=(node)
+		do
+			_n_kwfalse = node
+			node.parent = self
+		end
+		redef fun n_annotations=(node)
+		do
+			_n_annotations = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_kwfalse)
@@ -7170,6 +9188,20 @@ redef class ANullExpr
             return
 	end
     end
+
+		redef fun n_kwnull=(node)
+		do
+			_n_kwnull = node
+			node.parent = self
+		end
+		redef fun n_annotations=(node)
+		do
+			_n_annotations = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -7220,6 +9252,20 @@ redef class AIntExpr
 	end
     end
 
+		redef fun n_number=(node)
+		do
+			_n_number = node
+			node.parent = self
+		end
+		redef fun n_annotations=(node)
+		do
+			_n_annotations = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_number)
@@ -7268,6 +9314,20 @@ redef class AFloatExpr
             return
 	end
     end
+
+		redef fun n_float=(node)
+		do
+			_n_float = node
+			node.parent = self
+		end
+		redef fun n_annotations=(node)
+		do
+			_n_annotations = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -7318,6 +9378,20 @@ redef class ACharExpr
 	end
     end
 
+		redef fun n_char=(node)
+		do
+			_n_char = node
+			node.parent = self
+		end
+		redef fun n_annotations=(node)
+		do
+			_n_annotations = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_char)
@@ -7367,6 +9441,20 @@ redef class AStringExpr
 	end
     end
 
+		redef fun n_string=(node)
+		do
+			_n_string = node
+			node.parent = self
+		end
+		redef fun n_annotations=(node)
+		do
+			_n_annotations = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_string)
@@ -7401,6 +9489,13 @@ redef class AStartStringExpr
 	end
     end
 
+		redef fun n_string=(node)
+		do
+			_n_string = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_string)
@@ -7432,6 +9527,13 @@ redef class AMidStringExpr
 	end
     end
 
+		redef fun n_string=(node)
+		do
+			_n_string = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_string)
@@ -7462,6 +9564,13 @@ redef class AEndStringExpr
             return
 	end
     end
+
+		redef fun n_string=(node)
+		do
+			_n_string = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -7513,6 +9622,15 @@ redef class ASuperstringExpr
             return
 	end
     end
+
+		redef fun n_annotations=(node)
+		do
+			_n_annotations = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -7590,6 +9708,30 @@ redef class AParExpr
             return
 	end
     end
+
+		redef fun n_opar=(node)
+		do
+			_n_opar = node
+			node.parent = self
+		end
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+		redef fun n_cpar=(node)
+		do
+			_n_cpar = node
+			node.parent = self
+		end
+		redef fun n_annotations=(node)
+		do
+			_n_annotations = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -7678,6 +9820,33 @@ redef class AAsCastExpr
             return
 	end
     end
+
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+		redef fun n_kwas=(node)
+		do
+			_n_kwas = node
+			node.parent = self
+		end
+		redef fun n_opar=(node)
+		do
+			_n_opar = node
+			node.parent = self
+		end
+		redef fun n_type=(node)
+		do
+			_n_type = node
+			node.parent = self
+		end
+		redef fun n_cpar=(node)
+		do
+			_n_cpar = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -7779,6 +9948,38 @@ redef class AAsNotnullExpr
 	end
     end
 
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+		redef fun n_kwas=(node)
+		do
+			_n_kwas = node
+			node.parent = self
+		end
+		redef fun n_opar=(node)
+		do
+			_n_opar = node
+			node.parent = self
+		end
+		redef fun n_kwnot=(node)
+		do
+			_n_kwnot = node
+			node.parent = self
+		end
+		redef fun n_kwnull=(node)
+		do
+			_n_kwnull = node
+			node.parent = self
+		end
+		redef fun n_cpar=(node)
+		do
+			_n_cpar = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_expr)
@@ -7840,6 +10041,23 @@ redef class AIssetAttrExpr
             return
 	end
     end
+
+		redef fun n_kwisset=(node)
+		do
+			_n_kwisset = node
+			node.parent = self
+		end
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+		redef fun n_id=(node)
+		do
+			_n_id = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -7913,6 +10131,28 @@ redef class ADebugTypeExpr
 	end
     end
 
+		redef fun n_kwdebug=(node)
+		do
+			_n_kwdebug = node
+			node.parent = self
+		end
+		redef fun n_kwtype=(node)
+		do
+			_n_kwtype = node
+			node.parent = self
+		end
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+		redef fun n_type=(node)
+		do
+			_n_type = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_kwdebug)
@@ -7951,6 +10191,8 @@ redef class AListExprs
             end
         end
     end
+
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -8015,6 +10257,18 @@ redef class AParExprs
             return
 	end
     end
+
+		redef fun n_opar=(node)
+		do
+			_n_opar = node
+			node.parent = self
+		end
+		redef fun n_cpar=(node)
+		do
+			_n_cpar = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -8082,6 +10336,18 @@ redef class ABraExprs
 	end
     end
 
+		redef fun n_obra=(node)
+		do
+			_n_obra = node
+			node.parent = self
+		end
+		redef fun n_cbra=(node)
+		do
+			_n_cbra = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_obra)
@@ -8117,6 +10383,13 @@ redef class APlusAssignOp
 	end
     end
 
+		redef fun n_pluseq=(node)
+		do
+			_n_pluseq = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_pluseq)
@@ -8147,6 +10420,13 @@ redef class AMinusAssignOp
             return
 	end
     end
+
+		redef fun n_minuseq=(node)
+		do
+			_n_minuseq = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -8255,6 +10535,39 @@ redef class AClosureDef
 	end
     end
 
+		redef fun n_bang=(node)
+		do
+			_n_bang = node
+			node.parent = self
+		end
+		redef fun n_id=(node)
+		do
+			_n_id = node
+			node.parent = self
+		end
+		redef fun n_kwdo=(node)
+		do
+			_n_kwdo = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_label=(node)
+		do
+			_n_label = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_bang)
@@ -8299,6 +10612,13 @@ redef class ASimpleClosureId
 	end
     end
 
+		redef fun n_id=(node)
+		do
+			_n_id = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_id)
@@ -8329,6 +10649,13 @@ redef class ABreakClosureId
             return
 	end
     end
+
+		redef fun n_kwbreak=(node)
+		do
+			_n_kwbreak = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -8394,6 +10721,20 @@ redef class AModuleName
 	end
     end
 
+		redef fun n_quad=(node)
+		do
+			_n_quad = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_id=(node)
+		do
+			_n_id = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         if _n_quad != null then
@@ -8449,6 +10790,13 @@ redef class AExternCalls
         end
     end
 
+		redef fun n_kwimport=(node)
+		do
+			_n_kwimport = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_kwimport)
@@ -8468,6 +10816,8 @@ redef class AExternCall
     redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
     end
+
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -8499,6 +10849,13 @@ redef class ASuperExternCall
 	end
     end
 
+		redef fun n_kwsuper=(node)
+		do
+			_n_kwsuper = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_kwsuper)
@@ -8529,6 +10886,13 @@ redef class ALocalPropExternCall
             return
 	end
     end
+
+		redef fun n_methid=(node)
+		do
+			_n_methid = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -8589,6 +10953,25 @@ redef class AFullPropExternCall
 	end
     end
 
+		redef fun n_classid=(node)
+		do
+			_n_classid = node
+			node.parent = self
+		end
+		redef fun n_quad=(node)
+		do
+			_n_quad = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_methid=(node)
+		do
+			_n_methid = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_classid)
@@ -8623,6 +11006,13 @@ redef class AInitPropExternCall
             return
 	end
     end
+
+		redef fun n_classid=(node)
+		do
+			_n_classid = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -8680,6 +11070,23 @@ redef class ACastAsExternCall
             return
 	end
     end
+
+		redef fun n_from_type=(node)
+		do
+			_n_from_type = node
+			node.parent = self
+		end
+		redef fun n_kwas=(node)
+		do
+			_n_kwas = node
+			node.parent = self
+		end
+		redef fun n_to_type=(node)
+		do
+			_n_to_type = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -8739,6 +11146,23 @@ redef class AAsNullableExternCall
             return
 	end
     end
+
+		redef fun n_type=(node)
+		do
+			_n_type = node
+			node.parent = self
+		end
+		redef fun n_kwas=(node)
+		do
+			_n_kwas = node
+			node.parent = self
+		end
+		redef fun n_kwnullable=(node)
+		do
+			_n_kwnullable = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -8812,6 +11236,28 @@ redef class AAsNotNullableExternCall
 	end
     end
 
+		redef fun n_type=(node)
+		do
+			_n_type = node
+			node.parent = self
+		end
+		redef fun n_kwas=(node)
+		do
+			_n_kwas = node
+			node.parent = self
+		end
+		redef fun n_kwnot=(node)
+		do
+			_n_kwnot = node
+			node.parent = self
+		end
+		redef fun n_kwnullable=(node)
+		do
+			_n_kwnullable = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_type)
@@ -8859,6 +11305,18 @@ redef class AInLanguage
 	end
     end
 
+		redef fun n_kwin=(node)
+		do
+			_n_kwin = node
+			node.parent = self
+		end
+		redef fun n_string=(node)
+		do
+			_n_string = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_kwin)
@@ -8905,6 +11363,20 @@ redef class AExternCodeBlock
             return
 	end
     end
+
+		redef fun n_in_language=(node)
+		do
+			_n_in_language = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_extern_code_segment=(node)
+		do
+			_n_extern_code_segment = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -8960,6 +11432,15 @@ redef class AQualified
 	end
     end
 
+		redef fun n_classid=(node)
+		do
+			_n_classid = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
             for n in _n_id do
@@ -9000,6 +11481,8 @@ redef class ADoc
             end
         end
     end
+
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -9083,6 +11566,29 @@ redef class AAnnotations
             return
 	end
     end
+
+		redef fun n_at=(node)
+		do
+			_n_at = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_opar=(node)
+		do
+			_n_opar = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_cpar=(node)
+		do
+			_n_cpar = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -9189,6 +11695,34 @@ redef class AAnnotation
 	end
     end
 
+		redef fun n_atid=(node)
+		do
+			_n_atid = node
+			node.parent = self
+		end
+		redef fun n_opar=(node)
+		do
+			_n_opar = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_cpar=(node)
+		do
+			_n_cpar = node
+			if node != null then
+				node.parent = self
+			end
+		end
+		redef fun n_annotations=(node)
+		do
+			_n_annotations = node
+			if node != null then
+				node.parent = self
+			end
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_atid)
@@ -9232,6 +11766,13 @@ redef class ATypeAtArg
 	end
     end
 
+		redef fun n_type=(node)
+		do
+			_n_type = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_type)
@@ -9262,6 +11803,13 @@ redef class AExprAtArg
             return
 	end
     end
+
+		redef fun n_expr=(node)
+		do
+			_n_expr = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -9294,6 +11842,13 @@ redef class AAtAtArg
 	end
     end
 
+		redef fun n_annotations=(node)
+		do
+			_n_annotations = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_annotations)
@@ -9324,6 +11879,13 @@ redef class AIdAtid
             return
 	end
     end
+
+		redef fun n_id=(node)
+		do
+			_n_id = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -9356,6 +11918,13 @@ redef class AKwexternAtid
 	end
     end
 
+		redef fun n_id=(node)
+		do
+			_n_id = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_id)
@@ -9386,6 +11955,13 @@ redef class AKwinternAtid
             return
 	end
     end
+
+		redef fun n_id=(node)
+		do
+			_n_id = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do
@@ -9418,6 +11994,13 @@ redef class AKwreadableAtid
 	end
     end
 
+		redef fun n_id=(node)
+		do
+			_n_id = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_id)
@@ -9449,6 +12032,13 @@ redef class AKwwritableAtid
 	end
     end
 
+		redef fun n_id=(node)
+		do
+			_n_id = node
+			node.parent = self
+		end
+
+
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_id)
@@ -9479,6 +12069,13 @@ redef class AKwimportAtid
             return
 	end
     end
+
+		redef fun n_id=(node)
+		do
+			_n_id = node
+			node.parent = self
+		end
+
 
     redef fun visit_all(v: Visitor)
     do

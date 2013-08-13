@@ -131,6 +131,24 @@ $   end
 $ end foreach
     end
 
+$   foreach {elem}
+$     if @is_list
+$     else
+		redef fun n_@{name}=(node)
+		do
+			_n_@{name} = node
+$       if @modifier
+			if node != null then
+				node.parent = self
+			end
+$       else
+			node.parent = self
+$       end
+		end
+$     end
+$   end foreach
+
+
     redef fun visit_all(v: Visitor)
     do
 $   foreach {elem}
