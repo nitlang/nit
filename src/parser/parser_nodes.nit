@@ -36,7 +36,7 @@ abstract class ANode
 	end
 
 	# Parent of the node in the AST
-	readable writable var _parent: nullable ANode = null
+	var parent: nullable ANode = null
 
 	# Protect form invalid instantiation of nodes
 	private init do end
@@ -51,9 +51,9 @@ abstract class ANode
 	# ENDURE: parent == null
 	fun detach
 	do
-		assert _parent != null
-		_parent.replace_child(self, null)
-		_parent = null
+		assert parent != null
+		parent.replace_child(self, null)
+		parent = null
 	end
 
 	# Replace itself with an other node in the AST
@@ -62,9 +62,9 @@ abstract class ANode
 	# ENSURE: parent == null
 	fun replace_with(node: ANode)
 	do
-		assert _parent != null
-		_parent.replace_child(self, node)
-		_parent = null
+		assert parent != null
+		parent.replace_child(self, node)
+		parent = null
 	end
 
 	# Visit all nodes in order.
