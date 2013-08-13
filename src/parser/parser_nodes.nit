@@ -72,6 +72,68 @@ abstract class ANode
 	fun visit_all(v: Visitor) is abstract
 end
 
+# A sequence of nodes
+# There is a specifc class (instead of a using Array) to track the parent/child relation when nodes are added or removed
+class ANodes[E: ANode]
+	super Sequence[E]
+	private var parent: ANode
+	private var items = new Array[E]
+	redef fun iterator do return items.iterator
+	redef fun length do return items.length
+	redef fun is_empty do return items.is_empty
+	redef fun push(e)
+	do
+		hook_add(e)
+		items.push(e)
+	end
+	redef fun pop
+	do
+		var res = items.pop
+		hook_remove(res)
+		return res
+	end
+	redef fun unshift(e)
+	do
+		hook_add(e)
+		items.unshift(e)
+	end
+	redef fun shift
+	do
+		var res = items.shift
+		hook_remove(res)
+		return res
+	end
+	redef fun has(e)
+	do
+		return items.has(e)
+	end
+	redef fun [](index)
+	do
+		return items[index]
+	end
+	redef fun []=(index, e)
+	do
+		hook_remove(self[index])
+		hook_add(e)
+		items[index]=e
+	end
+	redef fun remove_at(index)
+	do
+		hook_remove(items[index])
+		items.remove_at(index)
+	end
+	private fun hook_add(e: E)
+	do
+		#assert e.parent == null
+		e.parent = parent
+	end
+	private fun hook_remove(e: E)
+	do
+		assert e.parent == parent
+		e.parent = null
+	end
+end
+
 # Ancestor of all tokens
 # A token is a node that has a `text` but no children.
 abstract class Token
@@ -501,9 +563,9 @@ class AModule
 	super Prod
 
 	readable var _n_moduledecl: nullable AModuledecl = null
-	readable var _n_imports: List[AImport] = new List[AImport]
-	readable var _n_extern_code_blocks: List[AExternCodeBlock] = new List[AExternCodeBlock]
-	readable var _n_classdefs: List[AClassdef] = new List[AClassdef]
+	readable var _n_imports: ANodes[AImport] = new ANodes[AImport](self)
+	readable var _n_extern_code_blocks: ANodes[AExternCodeBlock] = new ANodes[AExternCodeBlock](self)
+	readable var _n_classdefs: ANodes[AClassdef] = new ANodes[AClassdef](self)
 end
 
 # The declaration of the module with the documentation, name, and annotations
@@ -564,7 +626,7 @@ end
 # While most definition are `AStdClassdef`
 # There is tow special case of class definition
 abstract class AClassdef super Prod
-	readable var _n_propdefs: List[APropdef] = new List[APropdef]
+	readable var _n_propdefs: ANodes[APropdef] = new ANodes[APropdef](self)
 end
 
 # A standard class definition with a name, superclasses and properties
@@ -575,9 +637,9 @@ class AStdClassdef
 	readable var _n_visibility: AVisibility
 	readable var _n_classkind: AClasskind
 	readable var _n_id: nullable TClassid = null
-	readable var _n_formaldefs: List[AFormaldef] = new List[AFormaldef]
+	readable var _n_formaldefs: ANodes[AFormaldef] = new ANodes[AFormaldef](self)
 	readable var _n_extern_code_block: nullable AExternCodeBlock = null
-	readable var _n_superclasses: List[ASuperclass] = new List[ASuperclass]
+	readable var _n_superclasses: ANodes[ASuperclass] = new ANodes[ASuperclass](self)
 	readable var _n_kwend: TKwend
 	redef fun hot_location do return n_id.location
 end
@@ -746,7 +808,7 @@ end
 class AExternCalls
 	super Prod
 	readable var _n_kwimport: TKwimport
-	readable var _n_extern_calls: List[AExternCall] = new List[AExternCall]
+	readable var _n_extern_calls: ANodes[AExternCall] = new ANodes[AExternCall](self)
 end
 abstract class AExternCall
 	super Prod
@@ -910,10 +972,10 @@ end
 class ASignature
 	super Prod
 	readable var _n_opar: nullable TOpar = null
-	readable var _n_params: List[AParam] = new List[AParam]
+	readable var _n_params: ANodes[AParam] = new ANodes[AParam](self)
 	readable var _n_cpar: nullable TCpar = null
 	readable var _n_type: nullable AType = null
-	readable var _n_closure_decls: List[AClosureDecl] = new List[AClosureDecl]
+	readable var _n_closure_decls: ANodes[AClosureDecl] = new ANodes[AClosureDecl](self)
 end
 
 # A parameter definition in a signature. eg `x:X`
@@ -942,7 +1004,7 @@ class AType
 	readable var _n_id: TClassid
 
 	# Type arguments for a generic type
-	readable var _n_types: List[AType] = new List[AType]
+	readable var _n_types: ANodes[AType] = new ANodes[AType](self)
 end
 
 # A label at the end of a block or in a break/continue statement. eg `label x`
@@ -962,7 +1024,7 @@ end
 # The last AExpr gives the value of the whole block
 class ABlockExpr
 	super AExpr
-	readable var _n_expr: List[AExpr] = new List[AExpr]
+	readable var _n_expr: ANodes[AExpr] = new ANodes[AExpr](self)
 	readable var _n_kwend: nullable TKwend = null
 end
 
@@ -1064,7 +1126,7 @@ class AForExpr
 	super AExpr
 	super ALabelable
 	readable var _n_kwfor: TKwfor
-	readable var _n_ids: List[TId] = new List[TId]
+	readable var _n_ids: ANodes[TId] = new ANodes[TId](self)
 	readable var _n_expr: AExpr
 	readable var _n_kwdo: TKwdo
 	readable var _n_block: nullable AExpr = null
@@ -1105,7 +1167,7 @@ abstract class ASendExpr
 	super AExpr
 	# The receiver of the method invocation
 	readable var _n_expr: AExpr
-	readable var _n_closure_defs: List[AClosureDef] = new List[AClosureDef]
+	readable var _n_closure_defs: ANodes[AClosureDef] = new ANodes[AClosureDef](self)
 end
 
 # A binary operation on a method
@@ -1367,7 +1429,7 @@ class AClosureCallExpr
 	super AExpr
 	readable var _n_id: TId
 	readable var _n_args: AExprs
-	readable var _n_closure_defs: List[AClosureDef] = new List[AClosureDef]
+	readable var _n_closure_defs: ANodes[AClosureDef] = new ANodes[AClosureDef](self)
 end
 
 # A local variable read access.
@@ -1488,7 +1550,7 @@ end
 # Each part is modelized a sequence of expression. eg. ["a{, x, }b{, y, }c"]
 class ASuperstringExpr
 	super AExpr
-	readable var _n_exprs: List[AExpr] = new List[AExpr]
+	readable var _n_exprs: ANodes[AExpr] = new ANodes[AExpr](self)
 end
 
 # A simple parenthesis. eg `(x)`
@@ -1534,7 +1596,7 @@ end
 # A list of expression separated with commas (arguments for instance)
 abstract class AExprs
 	super Prod 
-	readable var _n_exprs: List[AExpr] = new List[AExpr]
+	readable var _n_exprs: ANodes[AExpr] = new ANodes[AExpr](self)
 end
 
 class ADebugTypeExpr
@@ -1581,7 +1643,7 @@ class AClosureDef
 	super ALabelable
 	readable var _n_bang: TBang
 	readable var _n_id: AClosureId
-	readable var _n_ids: List[TId] = new List[TId]
+	readable var _n_ids: ANodes[TId] = new ANodes[TId](self)
 	readable var _n_kwdo: nullable TKwdo = null
 	readable var _n_expr: nullable AExpr = null
 	redef fun hot_location do return n_id.location
@@ -1600,7 +1662,7 @@ end
 class AModuleName
 	super Prod
 	readable var _n_quad: nullable TQuad = null
-	readable var _n_path: List[TId] = new List[TId]
+	readable var _n_path: ANodes[TId] = new ANodes[TId](self)
 	readable var _n_id: TId
 end
 class AInLanguage
@@ -1616,7 +1678,7 @@ end
 class AQualified
 	super Prod
 	readable var _n_quad: nullable TQuad = null
-	readable var _n_id: List[TId] = new List[TId]
+	readable var _n_id: ANodes[TId] = new ANodes[TId](self)
 	readable var _n_classid: nullable TClassid = null
 end
 
@@ -1624,21 +1686,21 @@ end
 # It contains the block of comments just above the declaration
 class ADoc
 	super Prod
-	readable var _n_comment: List[TComment] = new List[TComment]
+	readable var _n_comment: ANodes[TComment] = new ANodes[TComment](self)
 end
 
 class AAnnotations
 	super Prod
 	readable var _n_at: nullable TAt = null
 	readable var _n_opar: nullable TOpar = null
-	readable var _n_items: List[AAnnotation] = new List[AAnnotation]
+	readable var _n_items: ANodes[AAnnotation] = new ANodes[AAnnotation](self)
 	readable var _n_cpar: nullable TCpar = null
 end
 class AAnnotation
 	super Prod
 	readable var _n_atid: AAtid
 	readable var _n_opar: nullable TOpar = null
-	readable var _n_args: List[AAtArg] = new List[AAtArg]
+	readable var _n_args: ANodes[AAtArg] = new ANodes[AAtArg](self)
 	readable var _n_cpar: nullable TCpar = null
 end
 abstract class AAtArg
