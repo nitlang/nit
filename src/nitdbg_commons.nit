@@ -49,7 +49,7 @@ class InterpretCommons
 		arguments = toolcontext.option_context.rest
 		if arguments.is_empty or toolcontext.opt_help.value then
 			toolcontext.option_context.usage
-			return
+			exit(0)
 		end
 		var progname = arguments.first
 		
