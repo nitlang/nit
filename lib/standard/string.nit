@@ -768,9 +768,15 @@ redef class Int
 		end
 	end
 
+	# C function to convert an nit Int to a NativeString (char*)
+	private fun native_int_to_s(len: Int): NativeString is extern "native_int_to_s"
+
 	# return displayable int in base 10 and signed
-	redef fun to_s do return to_base(10,true)
-	
+	redef fun to_s do
+		var len = digit_count(10)
+		return new String.from_cstring(native_int_to_s(len))
+	end
+
 	# return displayable int in hexadecimal (unsigned (not now))
 	fun to_hex: String do return to_base(16,false)
 

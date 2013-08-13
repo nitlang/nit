@@ -303,6 +303,7 @@ universal Int
 	# Number of digits of an integer in base `b' (plus one if negative)
 	fun digit_count(b: Int): Int
 	do
+		if b == 10 then return digit_count_base_10
 		var d: Int # number of digits
 		var n: Int # current number
 		# Sign
@@ -321,6 +322,28 @@ universal Int
 			n = n / b  	# euclidian division /
 		end
 		return d
+	end
+
+	# Optimized version for base 10
+	fun digit_count_base_10: Int
+	do
+		var val: Int
+		var result: Int
+		if self < 0 then
+			result = 2
+			val = -self
+		else
+			result = 1
+			val = self
+		end
+		loop
+			if val < 10 then return result
+			if val < 100 then return result+1
+			if val < 1000 then return result+2
+			if val < 10000 then return result+3
+			val = val / 10000
+			result += 4
+		end
 	end
 
 	# Return the corresponding digit character
