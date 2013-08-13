@@ -54,6 +54,38 @@ class Socket
 		host = null
 	end
 
+	# Returns an array containing an enum of the events ready to be read
+	#
+	# event_types : Combination of several event types to watch
+	#
+	# timeout : Time in milliseconds before stopping listening for events on this socket
+	#
+	private fun poll_in(event_types: Array[FFSocketPollValues], timeout: Int): Array[FFSocketPollValues] do return socket.socket_poll(new PollFD(socket.descriptor, event_types), timeout)
+
+	# Easier use of poll_in to check for something to read on all channels of any priority
+	#
+	# timeout : Time in milliseconds before stopping to wait for events
+	#
+	fun ready_to_read(timeout: Int): Bool
+	do
+		var events = new Array[FFSocketPollValues]
+		events.push(new FFSocketPollValues.pollin)
+		events.push(new FFSocketPollValues.pollrdnorm)
+		events.push(new FFSocketPollValues.pollpri)
+		events.push(new FFSocketPollValues.pollrdband)
+		return poll_in(events, timeout).length != 0
+	end
+
+	# Checks if the socket still is connected
+	#
+	fun connected: Bool
+	do
+		var events = new Array[FFSocketPollValues]
+		events.push(new FFSocketPollValues.pollhup)
+		events.push(new FFSocketPollValues.pollerr)
+		return poll_in(events, 0).length == 0
+	end
+
 	fun connect: Bool do return socket.connect(addrin) >= 0
 	fun write(msg: String): Bool do return socket.write(msg) >= 0
 	fun read: String do return socket.read
