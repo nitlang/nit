@@ -42,37 +42,7 @@ redef class Int
 	end
 end
 
-redef class Array[F]
-    redef fun add(item: F)
-	do
-	    self[length] = item
-	    self[length] = item
-	end
-end
-
-redef class Object
-    redef fun printn(a: Object...)
-	do
-            stdout.write("print:")
-	    stdout.write(a.to_s)
-	end
-end
-
 printn("4! = ")
 print(4.fact2)
 printn("4! = ")
 print(4.fact0)
-
-var a = [1,2]
-do
-    print(a)
-    a.add(3)
-    print(a)
-end
-
-var b = new Buffer.from("ab")
-do
-    print(b)
-    b.add('c')
-    print(b)
-end

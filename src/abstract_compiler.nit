@@ -20,6 +20,7 @@ module abstract_compiler
 import literal
 import typing
 import auto_super_init
+import frontend
 
 # Add compiling options
 redef class ToolContext
@@ -2124,15 +2125,15 @@ redef class AEeExpr
 end
 
 redef class AIntExpr
-	redef fun expr(v) do return v.new_expr("{self.n_number.text}", self.mtype.as(not null))
+	redef fun expr(v) do return v.new_expr("{self.value.to_s}", self.mtype.as(not null))
 end
 
 redef class AFloatExpr
-	redef fun expr(v) do return v.new_expr("{self.n_float.text}", self.mtype.as(not null))
+	redef fun expr(v) do return v.new_expr("{self.n_float.text}", self.mtype.as(not null)) # FIXME use value, not n_float
 end
 
 redef class ACharExpr
-	redef fun expr(v) do return v.new_expr("{self.n_char.text}", self.mtype.as(not null))
+	redef fun expr(v) do return v.new_expr("'{self.value.to_s.escape_to_c}'", self.mtype.as(not null))
 end
 
 redef class AArrayExpr

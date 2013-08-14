@@ -137,9 +137,6 @@ private class CachedPhase
 		# Sanity checks
 		assert nclassdef.mclassdef == mclassdef
 
-		# Required so that some visit can use nclassdef as a context # FIXME it is ugly
-		n.parent = nclassdef
-
 		# Required so that propdef are visited in visitors
 		if not nclassdef.n_propdefs.has(n) then nclassdef.n_propdefs.add(n)
 	end

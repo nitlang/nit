@@ -36,7 +36,7 @@ abstract class ANode
 	end
 
 	# Parent of the node in the AST
-	readable writable var _parent: nullable ANode = null
+	var parent: nullable ANode = null
 
 	# Protect form invalid instantiation of nodes
 	private init do end
@@ -51,9 +51,9 @@ abstract class ANode
 	# ENDURE: parent == null
 	fun detach
 	do
-		assert _parent != null
-		_parent.replace_child(self, null)
-		_parent = null
+		assert parent != null
+		parent.replace_child(self, null)
+		parent = null
 	end
 
 	# Replace itself with an other node in the AST
@@ -62,14 +62,76 @@ abstract class ANode
 	# ENSURE: parent == null
 	fun replace_with(node: ANode)
 	do
-		assert _parent != null
-		_parent.replace_child(self, node)
-		_parent = null
+		assert parent != null
+		parent.replace_child(self, node)
+		parent = null
 	end
 
 	# Visit all nodes in order.
 	# Thus, call `v.enter_visit(e)` for each child `e`
 	fun visit_all(v: Visitor) is abstract
+end
+
+# A sequence of nodes
+# There is a specifc class (instead of a using Array) to track the parent/child relation when nodes are added or removed
+class ANodes[E: ANode]
+	super Sequence[E]
+	private var parent: ANode
+	private var items = new Array[E]
+	redef fun iterator do return items.iterator
+	redef fun length do return items.length
+	redef fun is_empty do return items.is_empty
+	redef fun push(e)
+	do
+		hook_add(e)
+		items.push(e)
+	end
+	redef fun pop
+	do
+		var res = items.pop
+		hook_remove(res)
+		return res
+	end
+	redef fun unshift(e)
+	do
+		hook_add(e)
+		items.unshift(e)
+	end
+	redef fun shift
+	do
+		var res = items.shift
+		hook_remove(res)
+		return res
+	end
+	redef fun has(e)
+	do
+		return items.has(e)
+	end
+	redef fun [](index)
+	do
+		return items[index]
+	end
+	redef fun []=(index, e)
+	do
+		hook_remove(self[index])
+		hook_add(e)
+		items[index]=e
+	end
+	redef fun remove_at(index)
+	do
+		hook_remove(items[index])
+		items.remove_at(index)
+	end
+	private fun hook_add(e: E)
+	do
+		#assert e.parent == null
+		e.parent = parent
+	end
+	private fun hook_remove(e: E)
+	do
+		assert e.parent == parent
+		e.parent = null
+	end
 end
 
 # Ancestor of all tokens
@@ -97,7 +159,7 @@ abstract class Prod
 	fun location=(l: Location) do _location = l
 
 	# All the annotations attached directly to the node
-	readable var _n_annotations: nullable AAnnotations = null
+	readable writable var _n_annotations: nullable AAnnotations = null
 
 	redef fun replace_with(n: ANode)
 	do
@@ -127,7 +189,7 @@ abstract class Visitor
 	end
 
 	# The current visited node
-	readable var _current_node: nullable ANode = null
+	readable writable var _current_node: nullable ANode = null
 end
 
 # Token of end of line (basically `\n`)
@@ -500,18 +562,18 @@ end
 class AModule
 	super Prod
 
-	readable var _n_moduledecl: nullable AModuledecl = null
-	readable var _n_imports: List[AImport] = new List[AImport]
-	readable var _n_extern_code_blocks: List[AExternCodeBlock] = new List[AExternCodeBlock]
-	readable var _n_classdefs: List[AClassdef] = new List[AClassdef]
+	readable writable var _n_moduledecl: nullable AModuledecl = null
+	readable var _n_imports: ANodes[AImport] = new ANodes[AImport](self)
+	readable var _n_extern_code_blocks: ANodes[AExternCodeBlock] = new ANodes[AExternCodeBlock](self)
+	readable var _n_classdefs: ANodes[AClassdef] = new ANodes[AClassdef](self)
 end
 
 # The declaration of the module with the documentation, name, and annotations
 class AModuledecl
 	super Prod
-	readable var _n_doc: nullable ADoc = null
-	readable var _n_kwmodule: TKwmodule
-	readable var _n_name: AModuleName
+	readable writable var _n_doc: nullable ADoc = null
+	readable writable var _n_kwmodule: TKwmodule
+	readable writable var _n_name: AModuleName
 end
 
 # A import clause of a module
@@ -522,17 +584,17 @@ end
 # A standard import clause. eg `import x`
 class AStdImport
 	super AImport
-	readable var _n_visibility: AVisibility
-	readable var _n_kwimport: TKwimport
-	readable var _n_name: AModuleName
+	readable writable var _n_visibility: AVisibility
+	readable writable var _n_kwimport: TKwimport
+	readable writable var _n_name: AModuleName
 end
 
 # The special import clause of the kernel module. eg `import end`
 class ANoImport
 	super AImport
-	readable var _n_visibility: AVisibility
-	readable var _n_kwimport: TKwimport
-	readable var _n_kwend: TKwend
+	readable writable var _n_visibility: AVisibility
+	readable writable var _n_kwimport: TKwimport
+	readable writable var _n_kwend: TKwend
 end
 
 # A visibility modifier
@@ -549,36 +611,36 @@ class APublicVisibility
 end
 class APrivateVisibility
 	super AVisibility
-	readable var _n_kwprivate: TKwprivate
+	readable writable var _n_kwprivate: TKwprivate
 end
 class AProtectedVisibility
 	super AVisibility
-	readable var _n_kwprotected: TKwprotected
+	readable writable var _n_kwprotected: TKwprotected
 end
 class AIntrudeVisibility
 	super AVisibility
-	readable var _n_kwintrude: TKwintrude
+	readable writable var _n_kwintrude: TKwintrude
 end
 
 # A class definition
 # While most definition are `AStdClassdef`
 # There is tow special case of class definition
 abstract class AClassdef super Prod
-	readable var _n_propdefs: List[APropdef] = new List[APropdef]
+	readable var _n_propdefs: ANodes[APropdef] = new ANodes[APropdef](self)
 end
 
 # A standard class definition with a name, superclasses and properties
 class AStdClassdef
 	super AClassdef
-	readable var _n_doc: nullable ADoc = null
-	readable var _n_kwredef: nullable TKwredef = null
-	readable var _n_visibility: AVisibility
-	readable var _n_classkind: AClasskind
-	readable var _n_id: nullable TClassid = null
-	readable var _n_formaldefs: List[AFormaldef] = new List[AFormaldef]
-	readable var _n_extern_code_block: nullable AExternCodeBlock = null
-	readable var _n_superclasses: List[ASuperclass] = new List[ASuperclass]
-	readable var _n_kwend: TKwend
+	readable writable var _n_doc: nullable ADoc = null
+	readable writable var _n_kwredef: nullable TKwredef = null
+	readable writable var _n_visibility: AVisibility
+	readable writable var _n_classkind: AClasskind
+	readable writable var _n_id: nullable TClassid = null
+	readable var _n_formaldefs: ANodes[AFormaldef] = new ANodes[AFormaldef](self)
+	readable writable var _n_extern_code_block: nullable AExternCodeBlock = null
+	readable var _n_superclasses: ANodes[ASuperclass] = new ANodes[ASuperclass](self)
+	readable writable var _n_kwend: TKwend
 	redef fun hot_location do return n_id.location
 end
 
@@ -598,68 +660,68 @@ abstract class AClasskind
 end
 class AConcreteClasskind
 	super AClasskind
-	readable var _n_kwclass: TKwclass
+	readable writable var _n_kwclass: TKwclass
 end
 class AAbstractClasskind
 	super AClasskind
-	readable var _n_kwabstract: TKwabstract
-	readable var _n_kwclass: TKwclass
+	readable writable var _n_kwabstract: TKwabstract
+	readable writable var _n_kwclass: TKwclass
 end
 class AInterfaceClasskind
 	super AClasskind
-	readable var _n_kwinterface: TKwinterface
+	readable writable var _n_kwinterface: TKwinterface
 end
 class AEnumClasskind
 	super AClasskind
-	readable var _n_kwenum: TKwenum
+	readable writable var _n_kwenum: TKwenum
 end
 class AExternClasskind
 	super AClasskind
-	readable var _n_kwextern: TKwextern
-	readable var _n_kwclass: nullable TKwclass = null
+	readable writable var _n_kwextern: TKwextern
+	readable writable var _n_kwclass: nullable TKwclass = null
 end
 
 # The definition of a formal generic parameter type. eg `X: Y`
 class AFormaldef
 	super Prod
-	readable var _n_id: TClassid
+	readable writable var _n_id: TClassid
 	# The bound of the parameter type
-	readable var _n_type: nullable AType = null
+	readable writable var _n_type: nullable AType = null
 end
 
 # A super-class. eg `super X`
 class ASuperclass
 	super Prod
-	readable var _n_kwsuper: TKwsuper
-	readable var _n_type: AType
+	readable writable var _n_kwsuper: TKwsuper
+	readable writable var _n_type: AType
 end
 
 # The definition of a property
 abstract class APropdef
 	super Prod
-	readable var _n_doc: nullable ADoc = null
+	readable writable var _n_doc: nullable ADoc = null
 end
 
 # A definition of an attribute
 # For historical reason, old-syle and new-style attributes use the same `ANode` sub-class
 class AAttrPropdef
 	super APropdef
-	readable var _n_kwredef: nullable TKwredef = null
-	readable var _n_visibility: AVisibility
-	readable var _n_kwvar: TKwvar
+	readable writable var _n_kwredef: nullable TKwredef = null
+	readable writable var _n_visibility: AVisibility
+	readable writable var _n_kwvar: TKwvar
 
 	# The identifier for an old-style attribute (null if new-style)
-	readable var _n_id: nullable TAttrid
+	readable writable var _n_id: nullable TAttrid
 
 	# The identifier for a new-style attribute (null if old-style)
-	readable var _n_id2: nullable TId
+	readable writable var _n_id2: nullable TId
 
-	readable var _n_type: nullable AType = null
-	readable var _n_readable: nullable AAble = null
-	readable var _n_writable: nullable AAble = null
+	readable writable var _n_type: nullable AType = null
+	readable writable var _n_readable: nullable AAble = null
+	readable writable var _n_writable: nullable AAble = null
 
 	# The initial value, if any
-	readable var _n_expr: nullable AExpr = null
+	readable writable var _n_expr: nullable AExpr = null
 	redef fun hot_location
 	do
 		if n_id != null then return n_id.location else return n_id2.location
@@ -669,10 +731,10 @@ end
 # A definition of all kind of method (including constructors)
 abstract class AMethPropdef
 	super APropdef
-	readable var _n_kwredef: nullable TKwredef = null
-	readable var _n_visibility: nullable AVisibility
-	readable var _n_methid: nullable AMethid = null
-	readable var _n_signature: nullable ASignature
+	readable writable var _n_kwredef: nullable TKwredef = null
+	readable writable var _n_visibility: nullable AVisibility
+	readable writable var _n_methid: nullable AMethid = null
+	readable writable var _n_signature: nullable ASignature
 	redef fun hot_location
 	do
 		if n_methid != null then
@@ -687,34 +749,34 @@ end
 # *deferred* is a old synonynmous of *abstract* that comes from PRM, that comes from Eiffel.
 class ADeferredMethPropdef
 	super AMethPropdef
-	readable var _n_kwmeth: TKwmeth
+	readable writable var _n_kwmeth: TKwmeth
 end
 
 # A method marked intern
 class AInternMethPropdef
 	super AMethPropdef
-	readable var _n_kwmeth: TKwmeth
+	readable writable var _n_kwmeth: TKwmeth
 end
 
 # A method of a constructor marked extern
 abstract class AExternPropdef
 	super AMethPropdef
-	readable var _n_extern: nullable TString = null
-	readable var _n_extern_calls: nullable AExternCalls = null
-	readable var _n_extern_code_block: nullable AExternCodeBlock = null
+	readable writable var _n_extern: nullable TString = null
+	readable writable var _n_extern_calls: nullable AExternCalls = null
+	readable writable var _n_extern_code_block: nullable AExternCodeBlock = null
 end
 
 # A method marked extern
 class AExternMethPropdef
 	super AExternPropdef
-	readable var _n_kwmeth: TKwmeth
+	readable writable var _n_kwmeth: TKwmeth
 end
 
 # A method with a body
 class AConcreteMethPropdef
 	super AMethPropdef
-	readable var _n_kwmeth: nullable TKwmeth
-	readable var _n_block: nullable AExpr = null
+	readable writable var _n_kwmeth: nullable TKwmeth
+	readable writable var _n_block: nullable AExpr = null
 end
 
 # A constructor
@@ -726,7 +788,7 @@ end
 class AConcreteInitPropdef
 	super AConcreteMethPropdef
 	super AInitPropdef
-	readable var _n_kwinit: TKwinit
+	readable writable var _n_kwinit: TKwinit
 	redef fun hot_location do return n_kwinit.location
 end
 
@@ -734,7 +796,7 @@ end
 class AExternInitPropdef
 	super AExternPropdef
 	super AInitPropdef
-	readable var _n_kwnew: TKwnew
+	readable writable var _n_kwnew: TKwnew
 end
 
 # The implicit main method
@@ -745,8 +807,8 @@ end
 # Declaration of callbacks for extern methods
 class AExternCalls
 	super Prod
-	readable var _n_kwimport: TKwimport
-	readable var _n_extern_calls: List[AExternCall] = new List[AExternCall]
+	readable writable var _n_kwimport: TKwimport
+	readable var _n_extern_calls: ANodes[AExternCall] = new ANodes[AExternCall](self)
 end
 abstract class AExternCall
 	super Prod
@@ -756,72 +818,72 @@ abstract class APropExternCall
 end
 class ALocalPropExternCall
 	super APropExternCall
-	readable var _n_methid: AMethid
+	readable writable var _n_methid: AMethid
 end
 class AFullPropExternCall
 	super APropExternCall
-	readable var _n_classid: TClassid
-	readable var _n_quad: nullable TQuad = null
-	readable var _n_methid: AMethid
+	readable writable var _n_classid: TClassid
+	readable writable var _n_quad: nullable TQuad = null
+	readable writable var _n_methid: AMethid
 end
 class AInitPropExternCall
 	super APropExternCall
-	readable var _n_classid: TClassid
+	readable writable var _n_classid: TClassid
 end
 class ASuperExternCall
 	super AExternCall
-	readable var _n_kwsuper: TKwsuper
+	readable writable var _n_kwsuper: TKwsuper
 end
 abstract class ACastExternCall
 	super AExternCall
 end
 class ACastAsExternCall
 	super ACastExternCall
-	readable var _n_from_type: AType
-	readable var _n_kwas: TKwas
-	readable var _n_to_type: AType
+	readable writable var _n_from_type: AType
+	readable writable var _n_kwas: TKwas
+	readable writable var _n_to_type: AType
 end
 class AAsNullableExternCall
 	super ACastExternCall
-	readable var _n_type: AType
-	readable var _n_kwas: TKwas
-	readable var _n_kwnullable: TKwnullable
+	readable writable var _n_type: AType
+	readable writable var _n_kwas: TKwas
+	readable writable var _n_kwnullable: TKwnullable
 end
 class AAsNotNullableExternCall
 	super ACastExternCall
-	readable var _n_type: AType
-	readable var _n_kwas: TKwas
-	readable var _n_kwnot: TKwnot
-	readable var _n_kwnullable: TKwnullable
+	readable writable var _n_type: AType
+	readable writable var _n_kwas: TKwas
+	readable writable var _n_kwnot: TKwnot
+	readable writable var _n_kwnullable: TKwnullable
 end
 
 # A definition of a virtual type
 class ATypePropdef
 	super APropdef
-	readable var _n_kwredef: nullable TKwredef = null
-	readable var _n_visibility: AVisibility
-	readable var _n_kwtype: TKwtype
-	readable var _n_id: TClassid
-	readable var _n_type: AType
+	readable writable var _n_kwredef: nullable TKwredef = null
+	readable writable var _n_visibility: AVisibility
+	readable writable var _n_kwtype: TKwtype
+	readable writable var _n_id: TClassid
+	readable writable var _n_type: AType
 end
 
 # A `writable` or `readable` modifier
 abstract class AAble
 	super Prod
-	readable var _n_visibility: nullable AVisibility = null
-	readable var _n_kwredef: nullable TKwredef = null
+	readable writable var _n_visibility: nullable AVisibility = null
+	readable writable var _n_kwredef: nullable TKwredef = null
 end
 
 # A `readable` modifier
 class AReadAble
 	super AAble
-	readable var _n_kwreadable: TKwreadable
+	readable writable var _n_kwreadable: TKwreadable
 end
 
 # A `writable` modifier
 class AWriteAble
 	super AAble
-	readable var _n_kwwritable: TKwwritable
+	readable writable var _n_kwwritable: TKwwritable
 end
 
 # The identifier of a method in a method declaration.
@@ -831,51 +893,51 @@ abstract class AMethid
 end
 class AIdMethid
 	super AMethid
-	readable var _n_id: TId
+	readable writable var _n_id: TId
 end
 class APlusMethid
 	super AMethid
-	readable var _n_plus: TPlus
+	readable writable var _n_plus: TPlus
 end
 class AMinusMethid
 	super AMethid
-	readable var _n_minus: TMinus
+	readable writable var _n_minus: TMinus
 end
 class AStarMethid
 	super AMethid
-	readable var _n_star: TStar
+	readable writable var _n_star: TStar
 end
 class ASlashMethid
 	super AMethid
-	readable var _n_slash: TSlash
+	readable writable var _n_slash: TSlash
 end
 class APercentMethid
 	super AMethid
-	readable var _n_percent: TPercent
+	readable writable var _n_percent: TPercent
 end
 class AEqMethid
 	super AMethid
-	readable var _n_eq: TEq
+	readable writable var _n_eq: TEq
 end
 class ANeMethid
 	super AMethid
-	readable var _n_ne: TNe
+	readable writable var _n_ne: TNe
 end
 class ALeMethid
 	super AMethid
-	readable var _n_le: TLe
+	readable writable var _n_le: TLe
 end
 class AGeMethid
 	super AMethid
-	readable var _n_ge: TGe
+	readable writable var _n_ge: TGe
 end
 class ALtMethid
 	super AMethid
-	readable var _n_lt: TLt
+	readable writable var _n_lt: TLt
 end
 class AGtMethid
 	super AMethid
-	readable var _n_gt: TGt
+	readable writable var _n_gt: TGt
 end
 class ALlMethid
 	super AMethid
@@ -887,69 +949,69 @@ class AGgMethid
 end
 class ABraMethid
 	super AMethid
-	readable var _n_obra: TObra
-	readable var _n_cbra: TCbra
+	readable writable var _n_obra: TObra
+	readable writable var _n_cbra: TCbra
 end
 class AStarshipMethid
 	super AMethid
-	readable var _n_starship: TStarship
+	readable writable var _n_starship: TStarship
 end
 class AAssignMethid
 	super AMethid
-	readable var _n_id: TId
-	readable var _n_assign: TAssign
+	readable writable var _n_id: TId
+	readable writable var _n_assign: TAssign
 end
 class ABraassignMethid
 	super AMethid
-	readable var _n_obra: TObra
-	readable var _n_cbra: TCbra
-	readable var _n_assign: TAssign
+	readable writable var _n_obra: TObra
+	readable writable var _n_cbra: TCbra
+	readable writable var _n_assign: TAssign
 end
 
 # A signature in a method definition. eg `(x,y:X,z:Z):T`
 class ASignature
 	super Prod
-	readable var _n_opar: nullable TOpar = null
-	readable var _n_params: List[AParam] = new List[AParam]
-	readable var _n_cpar: nullable TCpar = null
-	readable var _n_type: nullable AType = null
-	readable var _n_closure_decls: List[AClosureDecl] = new List[AClosureDecl]
+	readable writable var _n_opar: nullable TOpar = null
+	readable var _n_params: ANodes[AParam] = new ANodes[AParam](self)
+	readable writable var _n_cpar: nullable TCpar = null
+	readable writable var _n_type: nullable AType = null
+	readable var _n_closure_decls: ANodes[AClosureDecl] = new ANodes[AClosureDecl](self)
 end
 
 # A parameter definition in a signature. eg `x:X`
 class AParam
 	super Prod
-	readable var _n_id: TId
-	readable var _n_type: nullable AType = null
-	readable var _n_dotdotdot: nullable TDotdotdot = null
+	readable writable var _n_id: TId
+	readable writable var _n_type: nullable AType = null
+	readable writable var _n_dotdotdot: nullable TDotdotdot = null
 end
 
 class AClosureDecl
 	super Prod
-	readable var _n_kwbreak: nullable TKwbreak = null
-	readable var _n_bang: TBang
-	readable var _n_id: TId
-	readable var _n_signature: ASignature
-	readable var _n_expr: nullable AExpr = null
+	readable writable var _n_kwbreak: nullable TKwbreak = null
+	readable writable var _n_bang: TBang
+	readable writable var _n_id: TId
+	readable writable var _n_signature: ASignature
+	readable writable var _n_expr: nullable AExpr = null
 end
 
 # A static type. eg `nullable X[Y]`
 class AType
 	super Prod
-	readable var _n_kwnullable: nullable TKwnullable = null
+	readable writable var _n_kwnullable: nullable TKwnullable = null
 
 	# The name of the class or of the formal type
-	readable var _n_id: TClassid
+	readable writable var _n_id: TClassid
 
 	# Type arguments for a generic type
-	readable var _n_types: List[AType] = new List[AType]
+	readable var _n_types: ANodes[AType] = new ANodes[AType](self)
 end
 
 # A label at the end of a block or in a break/continue statement. eg `label x`
 class ALabel
 	super Prod
-	readable var _n_kwlabel: TKwlabel
-	readable var _n_id: TId
+	readable writable var _n_kwlabel: TKwlabel
+	readable writable var _n_id: TId
 end
 
 # Expression and statements
@@ -962,141 +1024,141 @@ end
 # The last AExpr gives the value of the whole block
 class ABlockExpr
 	super AExpr
-	readable var _n_expr: List[AExpr] = new List[AExpr]
-	readable var _n_kwend: nullable TKwend = null
+	readable var _n_expr: ANodes[AExpr] = new ANodes[AExpr](self)
+	readable writable var _n_kwend: nullable TKwend = null
 end
 
 # A declaration of a local variable. eg `var x: X = y`
 class AVardeclExpr
 	super AExpr
-	readable var _n_kwvar: TKwvar
-	readable var _n_id: TId
-	readable var _n_type: nullable AType = null
-	readable var _n_assign: nullable TAssign = null
+	readable writable var _n_kwvar: TKwvar
+	readable writable var _n_id: TId
+	readable writable var _n_type: nullable AType = null
+	readable writable var _n_assign: nullable TAssign = null
 
 	# The initial value, if any
-	readable var _n_expr: nullable AExpr = null
+	readable writable var _n_expr: nullable AExpr = null
 end
 
 # A `return` statement. eg `return x`
 class AReturnExpr
 	super AExpr
-	readable var _n_kwreturn: nullable TKwreturn = null
-	readable var _n_expr: nullable AExpr = null
+	readable writable var _n_kwreturn: nullable TKwreturn = null
+	readable writable var _n_expr: nullable AExpr = null
 end
 
 # Something that has a label.
 abstract class ALabelable
 	super Prod
-	readable var _n_label: nullable ALabel = null
+	readable writable var _n_label: nullable ALabel = null
 end
 
 # A `break` statement.
 class ABreakExpr
 	super AExpr
 	super ALabelable
-	readable var _n_kwbreak: TKwbreak
-	readable var _n_expr: nullable AExpr = null
+	readable writable var _n_kwbreak: TKwbreak
+	readable writable var _n_expr: nullable AExpr = null
 end
 
 # An `abort` statement
 class AAbortExpr
 	super AExpr
-	readable var _n_kwabort: TKwabort
+	readable writable var _n_kwabort: TKwabort
 end
 
 # A `continue` statement
 class AContinueExpr
 	super AExpr
 	super ALabelable
-	readable var _n_kwcontinue: nullable TKwcontinue = null
-	readable var _n_expr: nullable AExpr = null
+	readable writable var _n_kwcontinue: nullable TKwcontinue = null
+	readable writable var _n_expr: nullable AExpr = null
 end
 
 # A `do` statement
 class ADoExpr
 	super AExpr
 	super ALabelable
-	readable var _n_kwdo: TKwdo
-	readable var _n_block: nullable AExpr = null
+	readable writable var _n_kwdo: TKwdo
+	readable writable var _n_block: nullable AExpr = null
 end
 
 # A `if` statement
 class AIfExpr
 	super AExpr
-	readable var _n_kwif: TKwif
-	readable var _n_expr: AExpr
-	readable var _n_then: nullable AExpr = null
-	readable var _n_else: nullable AExpr = null
+	readable writable var _n_kwif: TKwif
+	readable writable var _n_expr: AExpr
+	readable writable var _n_then: nullable AExpr = null
+	readable writable var _n_else: nullable AExpr = null
 end
 
 # A `if` expression
 class AIfexprExpr
 	super AExpr
-	readable var _n_kwif: TKwif
-	readable var _n_expr: AExpr
-	readable var _n_kwthen: TKwthen
-	readable var _n_then: AExpr
-	readable var _n_kwelse: TKwelse
-	readable var _n_else: AExpr
+	readable writable var _n_kwif: TKwif
+	readable writable var _n_expr: AExpr
+	readable writable var _n_kwthen: TKwthen
+	readable writable var _n_then: AExpr
+	readable writable var _n_kwelse: TKwelse
+	readable writable var _n_else: AExpr
 end
 
 # A `while` statement
 class AWhileExpr
 	super AExpr
 	super ALabelable
-	readable var _n_kwwhile:  TKwwhile
-	readable var _n_expr: AExpr
-	readable var _n_kwdo: TKwdo
-	readable var _n_block: nullable AExpr = null
+	readable writable var _n_kwwhile:  TKwwhile
+	readable writable var _n_expr: AExpr
+	readable writable var _n_kwdo: TKwdo
+	readable writable var _n_block: nullable AExpr = null
 end
 
 # A `loop` statement
 class ALoopExpr
 	super AExpr
 	super ALabelable
-	readable var _n_kwloop: TKwloop
-	readable var _n_block: nullable AExpr = null
+	readable writable var _n_kwloop: TKwloop
+	readable writable var _n_block: nullable AExpr = null
 end
 
 # A `for` statement
 class AForExpr
 	super AExpr
 	super ALabelable
-	readable var _n_kwfor: TKwfor
-	readable var _n_ids: List[TId] = new List[TId]
-	readable var _n_expr: AExpr
-	readable var _n_kwdo: TKwdo
-	readable var _n_block: nullable AExpr = null
+	readable writable var _n_kwfor: TKwfor
+	readable var _n_ids: ANodes[TId] = new ANodes[TId](self)
+	readable writable var _n_expr: AExpr
+	readable writable var _n_kwdo: TKwdo
+	readable writable var _n_block: nullable AExpr = null
 end
 
 # An `assert` statement
 class AAssertExpr
 	super AExpr
-	readable var _n_kwassert: TKwassert
-	readable var _n_id: nullable TId = null
-	readable var _n_expr: AExpr
-	readable var _n_else: nullable AExpr = null
+	readable writable var _n_kwassert: TKwassert
+	readable writable var _n_id: nullable TId = null
+	readable writable var _n_expr: AExpr
+	readable writable var _n_else: nullable AExpr = null
 end
 
 # Whatever is a simple assignment. eg `= something`
 abstract class AAssignFormExpr
 	super AExpr
-	readable var _n_assign: TAssign
-	readable var _n_value: AExpr
+	readable writable var _n_assign: TAssign
+	readable writable var _n_value: AExpr
 end
 
 # Whatever is a combined assignment. eg `+= something`
 abstract class AReassignFormExpr
 	super AExpr
-	readable var _n_assign_op: AAssignOp
-	readable var _n_value: AExpr
+	readable writable var _n_assign_op: AAssignOp
+	readable writable var _n_value: AExpr
 end
 
 # A `once` expression. eg `once x`
 class AOnceExpr
 	super AProxyExpr
-	readable var _n_kwonce: TKwonce
+	readable writable var _n_kwonce: TKwonce
 end
 
 # A polymorphic invocation of a method
@@ -1104,8 +1166,8 @@ end
 abstract class ASendExpr
 	super AExpr
 	# The receiver of the method invocation
-	readable var _n_expr: AExpr
-	readable var _n_closure_defs: List[AClosureDef] = new List[AClosureDef]
+	readable writable var _n_expr: AExpr
+	readable var _n_closure_defs: ANodes[AClosureDef] = new ANodes[AClosureDef](self)
 end
 
 # A binary operation on a method
@@ -1113,7 +1175,7 @@ abstract class ABinopExpr
 	super ASendExpr
 	# The second operand of the operation
 	# Note: the receiver (`n_expr`) is the first operand
-	readable var _n_expr2: AExpr
+	readable writable var _n_expr2: AExpr
 end
 
 # Something that is boolean expression
@@ -1124,29 +1186,29 @@ end
 # A `or` expression 
 class AOrExpr
 	super ABoolExpr
-	readable var _n_expr: AExpr
-	readable var _n_expr2: AExpr
+	readable writable var _n_expr: AExpr
+	readable writable var _n_expr2: AExpr
 end
 
 # A `and` expression
 class AAndExpr
 	super ABoolExpr
-	readable var _n_expr: AExpr
-	readable var _n_expr2: AExpr
+	readable writable var _n_expr: AExpr
+	readable writable var _n_expr2: AExpr
 end
 
 # A `or else` expression
 class AOrElseExpr
 	super ABoolExpr
-	readable var _n_expr: AExpr
-	readable var _n_expr2: AExpr
+	readable writable var _n_expr: AExpr
+	readable writable var _n_expr2: AExpr
 end
 
 # A `not` expression
 class ANotExpr
 	super ABoolExpr
-	readable var _n_kwnot: TKwnot
-	readable var _n_expr: AExpr
+	readable writable var _n_kwnot: TKwnot
+	readable writable var _n_expr: AExpr
 end
 
 # A `==` expression
@@ -1157,8 +1219,8 @@ end
 # A `is` expression
 class AEeExpr
 	super ABoolExpr
-	readable var _n_expr: AExpr
-	readable var _n_expr2: AExpr
+	readable writable var _n_expr: AExpr
+	readable writable var _n_expr2: AExpr
 end
 
 # A `!=` expression
@@ -1199,8 +1261,8 @@ end
 # A type-ckeck expression. eg `x isa T`
 class AIsaExpr
 	super ABoolExpr
-	readable var _n_expr: AExpr
-	readable var _n_type: AType
+	readable writable var _n_expr: AExpr
+	readable writable var _n_type: AType
 end
 
 # A `+` expression
@@ -1236,18 +1298,18 @@ end
 # A unary minus expression. eg `-x`
 class AUminusExpr
 	super ASendExpr
-	readable var _n_minus: TMinus
+	readable writable var _n_minus: TMinus
 end
 
 # An explicit instantiation. eg `new T`
 class ANewExpr
 	super AExpr
-	readable var _n_kwnew: TKwnew
-	readable var _n_type: AType
+	readable writable var _n_kwnew: TKwnew
+	readable writable var _n_type: AType
 
 	# The name of the named-constructor, if any
-	readable var _n_id: nullable TId = null
-	readable var _n_args: AExprs
+	readable writable var _n_id: nullable TId = null
+	readable writable var _n_args: AExprs
 end
 
 # Whatever is a old-style attribute access
@@ -1255,10 +1317,10 @@ abstract class AAttrFormExpr
 	super AExpr
 
 	# The receiver of the attribute
-	readable var _n_expr: AExpr
+	readable writable var _n_expr: AExpr
 
 	# The name of the attribute
-	readable var _n_id: TAttrid
+	readable writable var _n_id: TAttrid
 end
 
 # The read of an attribute. eg `x._a`
@@ -1277,10 +1339,10 @@ abstract class ACallFormExpr
 	super ASendExpr
 
 	# The name of the method
-	readable var _n_id: TId
+	readable writable var _n_id: TId
 
 	# The arguments of the call
-	readable var _n_args: AExprs
+	readable writable var _n_args: AExprs
 end
 
 # A complex setter call (standard or brackets)
@@ -1321,23 +1383,23 @@ end
 # A call to `super`. OR a call of a super-constructor
 class ASuperExpr
 	super AExpr
-	readable var _n_qualified: nullable AQualified = null
-	readable var _n_kwsuper: TKwsuper
-	readable var _n_args: AExprs
+	readable writable var _n_qualified: nullable AQualified = null
+	readable writable var _n_kwsuper: TKwsuper
+	readable writable var _n_args: AExprs
 end
 
 # A call to the `init` constructor.
 # Note: because `init` is a keyword and not a `TId`, the explicit call to init cannot be a ACallFormExpr
 class AInitExpr
 	super ASendExpr
-	readable var _n_kwinit: TKwinit
-	readable var _n_args: AExprs
+	readable writable var _n_kwinit: TKwinit
+	readable writable var _n_args: AExprs
 end
 
 # Whatever looks-like a call of the brackets `[]` operator.
 abstract class ABraFormExpr
 	super ASendExpr
-	readable var _n_args: AExprs
+	readable writable var _n_args: AExprs
 end
 
 # A call of the brackets operator. eg `x[y,z]`
@@ -1354,7 +1416,7 @@ end
 # Whatever is an access to a local variable
 abstract class AVarFormExpr
 	super AExpr
-	readable var _n_id: TId
+	readable writable var _n_id: TId
 end
 
 # A complex setter call of the bracket operator. eg `x[y,z]+=t`
@@ -1365,9 +1427,9 @@ end
 
 class AClosureCallExpr
 	super AExpr
-	readable var _n_id: TId
-	readable var _n_args: AExprs
-	readable var _n_closure_defs: List[AClosureDef] = new List[AClosureDef]
+	readable writable var _n_id: TId
+	readable writable var _n_args: AExprs
+	readable var _n_closure_defs: ANodes[AClosureDef] = new ANodes[AClosureDef](self)
 end
 
 # A local variable read access.
@@ -1393,34 +1455,34 @@ end
 # A literal range, open or closed
 abstract class ARangeExpr
 	super AExpr
-	readable var _n_expr: AExpr
-	readable var _n_expr2: AExpr
+	readable writable var _n_expr: AExpr
+	readable writable var _n_expr2: AExpr
 end
 
 # A closed literal range. eg `[x..y]`
 class ACrangeExpr
 	super ARangeExpr
-	readable var _n_obra: TObra
-	readable var _n_cbra: TCbra
+	readable writable var _n_obra: TObra
+	readable writable var _n_cbra: TCbra
 end
 
 # An open literal range. eg `[x..y[`
 class AOrangeExpr
 	super ARangeExpr
-	readable var _n_obra: TObra
-	readable var _n_cbra: TObra
+	readable writable var _n_obra: TObra
+	readable writable var _n_cbra: TObra
 end
 
 # A literal array. eg. `[x,y,z]`
 class AArrayExpr
 	super AExpr
-	readable var _n_exprs: AExprs
+	readable writable var _n_exprs: AExprs
 end
 
 # A read of `self` 
 class ASelfExpr
 	super AExpr
-	readable var _n_kwself: nullable TKwself
+	readable writable var _n_kwself: nullable TKwself
 end
 
 # When there is no explicit receiver, `self` is implicit
@@ -1431,37 +1493,37 @@ end
 # A `true` boolean literal constant
 class ATrueExpr
 	super ABoolExpr
-	readable var _n_kwtrue: TKwtrue
+	readable writable var _n_kwtrue: TKwtrue
 end
 # A `false` boolean literal constant
 class AFalseExpr
 	super ABoolExpr
-	readable var _n_kwfalse: TKwfalse
+	readable writable var _n_kwfalse: TKwfalse
 end
 # A `null` literal constant
 class ANullExpr
 	super AExpr
-	readable var _n_kwnull: TKwnull
+	readable writable var _n_kwnull: TKwnull
 end
 # An integer literal
 class AIntExpr
 	super AExpr
-	readable var _n_number: TNumber
+	readable writable var _n_number: TNumber
 end
 # A float literal
 class AFloatExpr
 	super AExpr
-	readable var _n_float: TFloat
+	readable writable var _n_float: TFloat
 end
 # A character literal
 class ACharExpr
 	super AExpr
-	readable var _n_char: TChar
+	readable writable var _n_char: TChar
 end
 # A string literal
 abstract class AStringFormExpr
 	super AExpr
-	readable var _n_string: Token
+	readable writable var _n_string: Token
 end
 
 # A simple string. eg. `"abc"`
@@ -1488,61 +1550,61 @@ end
 # Each part is modelized a sequence of expression. eg. ["a{, x, }b{, y, }c"]
 class ASuperstringExpr
 	super AExpr
-	readable var _n_exprs: List[AExpr] = new List[AExpr]
+	readable var _n_exprs: ANodes[AExpr] = new ANodes[AExpr](self)
 end
 
 # A simple parenthesis. eg `(x)`
 class AParExpr
 	super AProxyExpr
-	readable var _n_opar: TOpar
-	readable var _n_cpar: TCpar
+	readable writable var _n_opar: TOpar
+	readable writable var _n_cpar: TCpar
 end
 
 # Whatevej just contains (and mimic) an other expression
 abstract class AProxyExpr
 	super AExpr
-	readable var _n_expr: AExpr
+	readable writable var _n_expr: AExpr
 end
 
 # A type cast. eg `x.as(T)`
 class AAsCastExpr
 	super AExpr
-	readable var _n_expr: AExpr
-	readable var _n_kwas: TKwas
-	readable var _n_opar: TOpar
-	readable var _n_type: AType
-	readable var _n_cpar: TCpar
+	readable writable var _n_expr: AExpr
+	readable writable var _n_kwas: TKwas
+	readable writable var _n_opar: TOpar
+	readable writable var _n_type: AType
+	readable writable var _n_cpar: TCpar
 end
 
 # A as-not-null cast. eg `x.as(not null)`
 class AAsNotnullExpr
 	super AExpr
-	readable var _n_expr: AExpr
-	readable var _n_kwas: TKwas
-	readable var _n_opar: TOpar
-	readable var _n_kwnot: TKwnot
-	readable var _n_kwnull: TKwnull
-	readable var _n_cpar: TCpar
+	readable writable var _n_expr: AExpr
+	readable writable var _n_kwas: TKwas
+	readable writable var _n_opar: TOpar
+	readable writable var _n_kwnot: TKwnot
+	readable writable var _n_kwnull: TKwnull
+	readable writable var _n_cpar: TCpar
 end
 
 # A is-set check of old-style attributes. eg `isset x._a`
 class AIssetAttrExpr
 	super AAttrFormExpr
-	readable var _n_kwisset: TKwisset
+	readable writable var _n_kwisset: TKwisset
 end
 
 # A list of expression separated with commas (arguments for instance)
 abstract class AExprs
 	super Prod 
-	readable var _n_exprs: List[AExpr] = new List[AExpr]
+	readable var _n_exprs: ANodes[AExpr] = new ANodes[AExpr](self)
 end
 
 class ADebugTypeExpr
 	super AExpr
-	readable var _n_kwdebug: TKwdebug
-	readable var _n_kwtype: TKwtype
-	readable var _n_expr: AExpr
-	readable var _n_type: AType
+	readable writable var _n_kwdebug: TKwdebug
+	readable writable var _n_kwtype: TKwtype
+	readable writable var _n_expr: AExpr
+	readable writable var _n_type: AType
 end
 
 # A simple list of expressions
@@ -1553,15 +1615,15 @@ end
 # A list of expressions enclosed in parentheses
 class AParExprs
 	super AExprs
-	readable var _n_opar: TOpar
-	readable var _n_cpar: TCpar
+	readable writable var _n_opar: TOpar
+	readable writable var _n_cpar: TCpar
 end
 
 # A list of expressions enclosed in brackets
 class ABraExprs
 	super AExprs
-	readable var _n_obra: TObra
-	readable var _n_cbra: TCbra
+	readable writable var _n_obra: TObra
+	readable writable var _n_cbra: TCbra
 end
 
 # A complex assignment operator. eg `+=`
@@ -1570,20 +1632,20 @@ abstract class AAssignOp
 end
 class APlusAssignOp
 	super AAssignOp
-	readable var _n_pluseq: TPluseq
+	readable writable var _n_pluseq: TPluseq
 end
 class AMinusAssignOp
 	super AAssignOp
-	readable var _n_minuseq: TMinuseq
+	readable writable var _n_minuseq: TMinuseq
 end
 
 class AClosureDef
 	super ALabelable
-	readable var _n_bang: TBang
-	readable var _n_id: AClosureId
-	readable var _n_ids: List[TId] = new List[TId]
-	readable var _n_kwdo: nullable TKwdo = null
-	readable var _n_expr: nullable AExpr = null
+	readable writable var _n_bang: TBang
+	readable writable var _n_id: AClosureId
+	readable var _n_ids: ANodes[TId] = new ANodes[TId](self)
+	readable writable var _n_kwdo: nullable TKwdo = null
+	readable writable var _n_expr: nullable AExpr = null
 	redef fun hot_location do return n_id.location
 end
 abstract class AClosureId
@@ -1591,73 +1653,73 @@ abstract class AClosureId
 end
 class ASimpleClosureId
 	super AClosureId
-	readable var _n_id: TId
+	readable writable var _n_id: TId
 end
 class ABreakClosureId
 	super AClosureId
-	readable var _n_kwbreak: TKwbreak
+	readable writable var _n_kwbreak: TKwbreak
 end
 class AModuleName
 	super Prod
-	readable var _n_quad: nullable TQuad = null
-	readable var _n_path: List[TId] = new List[TId]
-	readable var _n_id: TId
+	readable writable var _n_quad: nullable TQuad = null
+	readable var _n_path: ANodes[TId] = new ANodes[TId](self)
+	readable writable var _n_id: TId
 end
 class AInLanguage
 	super Prod
-	readable var _n_kwin: TKwin
-	readable var _n_string: TString
+	readable writable var _n_kwin: TKwin
+	readable writable var _n_string: TString
 end
 class AExternCodeBlock
 	super Prod
-	readable var _n_in_language: nullable AInLanguage = null
-	readable var _n_extern_code_segment: TExternCodeSegment
+	readable writable var _n_in_language: nullable AInLanguage = null
+	readable writable var _n_extern_code_segment: TExternCodeSegment
 end
 class AQualified
 	super Prod
-	readable var _n_quad: nullable TQuad = null
-	readable var _n_id: List[TId] = new List[TId]
-	readable var _n_classid: nullable TClassid = null
+	readable writable var _n_quad: nullable TQuad = null
+	readable var _n_id: ANodes[TId] = new ANodes[TId](self)
+	readable writable var _n_classid: nullable TClassid = null
 end
 
 # A documentation of a definition
 # It contains the block of comments just above the declaration
 class ADoc
 	super Prod
-	readable var _n_comment: List[TComment] = new List[TComment]
+	readable var _n_comment: ANodes[TComment] = new ANodes[TComment](self)
 end
 
 class AAnnotations
 	super Prod
-	readable var _n_at: nullable TAt = null
-	readable var _n_opar: nullable TOpar = null
-	readable var _n_items: List[AAnnotation] = new List[AAnnotation]
-	readable var _n_cpar: nullable TCpar = null
+	readable writable var _n_at: nullable TAt = null
+	readable writable var _n_opar: nullable TOpar = null
+	readable var _n_items: ANodes[AAnnotation] = new ANodes[AAnnotation](self)
+	readable writable var _n_cpar: nullable TCpar = null
 end
 class AAnnotation
 	super Prod
-	readable var _n_atid: AAtid
-	readable var _n_opar: nullable TOpar = null
-	readable var _n_args: List[AAtArg] = new List[AAtArg]
-	readable var _n_cpar: nullable TCpar = null
+	readable writable var _n_atid: AAtid
+	readable writable var _n_opar: nullable TOpar = null
+	readable var _n_args: ANodes[AAtArg] = new ANodes[AAtArg](self)
+	readable writable var _n_cpar: nullable TCpar = null
 end
 abstract class AAtArg
 	super Prod
 end
 class ATypeAtArg
 	super AAtArg
-	readable var _n_type: AType
+	readable writable var _n_type: AType
 end
 class AExprAtArg
 	super AAtArg
-	readable var _n_expr: AExpr
+	readable writable var _n_expr: AExpr
 end
 class AAtAtArg
 	super AAtArg
 end
 abstract class AAtid
 	super Prod
-	readable var _n_id: Token
+	readable writable var _n_id: Token
 end
 class AIdAtid
 	super AAtid
@@ -1681,8 +1743,8 @@ end
 # The root of the AST
 class Start
 	super Prod
-	readable var _n_base: nullable AModule
-	readable var _n_eof: EOF
+	readable writable var _n_base: nullable AModule
+	readable writable var _n_eof: EOF
 	init(n_base: nullable AModule, n_eof: EOF)
 	do
 		self._n_base = n_base

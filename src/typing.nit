@@ -559,6 +559,13 @@ redef class ABlockExpr
 		for e in self.n_expr do v.visit_stmt(e)
 		self.is_typed = true
 	end
+
+	# The type of a blockexpr is the one of the last expression (or null if empty)
+	redef fun mtype
+	do
+		if self.n_expr.is_empty then return null
+		return self.n_expr.last.mtype
+	end
 end
 
 redef class AVardeclExpr
@@ -1676,5 +1683,6 @@ redef class ADebugTypeExpr
 			var umtype = v.anchor_to(mtype)
 			v.modelbuilder.warning(self, "Found type {expr} (-> {unsafe}), expected {mtype} (-> {umtype})")
 		end
+		self.is_typed = true
 	end
 end

@@ -19,6 +19,7 @@ module nitg
 
 import modelbuilder
 import frontend
+import transform
 import rapid_type_analysis
 import global_compiler
 import separate_erasure_compiler

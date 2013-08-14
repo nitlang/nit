@@ -18,6 +18,7 @@ module nitdbg_commons
 
 import modelbuilder
 import frontend
+import transform
 
 class InterpretCommons
 
