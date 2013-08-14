@@ -4,7 +4,6 @@
 $.expr[':'].icontains = function(obj, index, meta, stack){
 	return (obj.textContent.replace(/\[[0-9]+\]/g, "") || obj.innerText.replace(/\[[0-9]+\]/g, "") || jQuery(obj).text().replace(/\[[0-9]+\]/g, "") || '').toLowerCase().indexOf(meta[3].toLowerCase()) >= 0;
 };
-
 /*
  *	Quick Search global vars
  */
@@ -354,6 +353,18 @@ $(document).ready(function() {
 
 	//Preload filter fields with query string
 	preloadFilters();
+
+	//Copy to clipboard utility on signatures
+	$(".signature").each(function(){
+		$(this).append(
+			$("<button class='copyButton' data-clipboard-text='" + $(this).attr("data-untyped-signature") + "'></button>")
+			.append($("<img src='./resources/icons/copy.png' />"))
+		)
+	});
+
+	var clip = new ZeroClipboard($(".copyButton"), {
+	  moviePath: "./ZeroClipboard.swf"
+	} );
 });
 
 /* Parse current URL and return anchor name */

@@ -203,6 +203,7 @@ abstract class NitdocPage
 	protected fun head do
 		append("<meta charset='utf-8'/>")
 		append("<script type='text/javascript' src='scripts/jquery-1.7.1.min.js'></script>")
+		append("<script type='text/javascript' src='scripts/ZeroClipboard.min.js'></script>")
 		append("<script type='text/javascript' src='quicksearch-list.js'></script>")
 		append("<script type='text/javascript' src='scripts/base64.js'></script>")
 		append("<script type='text/javascript' src='scripts/github.js'></script>")
@@ -929,9 +930,9 @@ class NitdocClass
 			if mclass.arity > 0 and nclass isa AStdClassdef then
 				for ft, bound in mclass.parameter_types do
 					append("<article id='FT_{ft}'>")
-					append("<h3 class='signature'>{ft}: ")
+					append("<h3 class='signature' data-untyped-signature='{ft.to_s}'><span>{ft}: ")
 					bound.html_link(self)
-					append("</h3>")
+					append("</span></h3>")
 					append("<div class=\"info\">formal generic type</div>")
 					append("</article>")
 				end
@@ -1443,13 +1444,15 @@ redef class MMethodDef
 		classes.add(mproperty.visibility.to_s)
 		page.append("<article class='{classes.join(" ")}' id='{anchor}'>")
 		if page.ctx.mbuilder.mpropdef2npropdef.has_key(self) then
-			page.append("<h3 class='signature'>{mproperty.name}")
+			page.append("<h3 class='signature' data-untyped-signature='{mproperty.name}{msignature.untyped_signature(page)}'>")
+			page.append("<span>{mproperty.name}")
 			msignature.html_signature(page)
-			page.append("</h3>")
+			page.append("</span></h3>")
 		else
-			page.append("<h3 class='signature'>init")
+			page.append("<h3 class='signature' data-untyped-signature='init{msignature.untyped_signature(page)}'>")
+			page.append("<span>init")
 			msignature.html_signature(page)
-			page.append("</h3>")
+			page.append("</span></h3>")
 		end
 		html_info(page)
 		html_comment(page)
@@ -1478,9 +1481,9 @@ redef class MVirtualTypeDef
 		if is_redef then classes.add("redef")
 		classes.add(mproperty.visibility.to_s)
 		page.append("<article class='{classes.join(" ")}' id='{anchor}'>")
-		page.append("<h3 class='signature'>{mproperty.name}: ")
+		page.append("<h3 class='signature' data-untyped-signature='{mproperty.name}'><span>{mproperty.name}: ")
 		bound.html_link(page)
-		page.append("</h3>")
+		page.append("</span></h3>")
 		html_info(page)
 		html_comment(page)
 		page.append("</article>")
@@ -1509,6 +1512,19 @@ redef class MSignature
 			page.append(": ")
 			return_mtype.html_link(page)
 		end
+	end
+
+	private fun untyped_signature(page: NitdocPage): String do
+		var res = new Buffer
+		if not mparameters.is_empty then
+			res.append("(")
+			for i in [0..mparameters.length[ do
+				res.append(mparameters[i].name)
+				if i < mparameters.length - 1 then res.append(", ")
+			end
+			res.append(")")
+		end
+		return res.to_s
 	end
 end
 

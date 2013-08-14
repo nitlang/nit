@@ -106,6 +106,28 @@ footer {
 	width: 100%;
 }
 
+article:hover > .signature .copyButton, .copyButton.zeroclipboard-is-hover {
+	visibility: visible;
+}
+
+.copyButton.zeroclipboard-is-active {
+	border-color: #0D8921;
+}
+
+.copyButton {
+	visibility: hidden;
+	vertical-align: middle;
+	margin: -2px 0px 0px 10px;
+	width: 22px;
+	height: 19px;
+	padding: 1px;
+	cursor: pointer;
+}
+
+.copyButton img {
+	width: 16px;
+}
+
 /* Webkit scroll bars */
 
 .menu {
