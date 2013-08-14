@@ -513,7 +513,7 @@ class TMidString
 	super TokenLiteral
 end
 class TEndString
-	super Token
+	super TokenLiteral
 end
 
 # A malformed string
