@@ -31,6 +31,10 @@ pre {
 	overflow: auto;
 }
 
+pre.noComment {
+	background: transparent;
+}
+
 hr {
 	background-color: #DDD;
 	height: 1px;
@@ -288,7 +292,7 @@ header nav.main ul li.current {
 	padding-left: 10px;
 }
 
-nav ul li span, 
+nav ul li span,
 .content article ul li span {
 	color: #CCC;
 	text-align: center;
@@ -339,6 +343,16 @@ nav ul li span,
 
 article .info .code {
 	float: right;
+}
+
+.description .inheritance {
+	text-align: right;
+	margin: 2px;
+
+}
+
+.classes pre, .methods pre {
+	margin-bottom: 0;
 }
 
 .content .concern-doc {
@@ -410,7 +424,7 @@ nav.main input[type=text] {
 }
 
 nav.main form {
-	float: right;	
+	float: right;
 }
 
 .filter a {
@@ -445,15 +459,15 @@ nav h3 a.fold {
 }
 
 /* Icons */
-.type.public { background-image: url('../resources/icons/vtype_public.png')}
-.type.protected { background-image: url('../resources/icons/vtype_protected.png')}
-.type.private { background-image: url('../resources/icons/vtype_private.png')}
-.init.public { background-image: url('../resources/icons/const_public.png')}
-.init.protected { background-image: url('../resources/icons/const_protected.png')}
-.init.private { background-image: url('../resources/icons/const_private.png')}
-.fun.public { background-image: url('../resources/icons/meth_public.png')}
-.fun.protected { background-image: url('../resources/icons/meth_protected.png')}
-.fun.private { background-image: url('../resources/icons/meth_private.png')}
+.type.public, .interface.public, .abstract.class.public { background-image: url('../resources/icons/vtype_public.png')}
+.type.protected, .interface.protected, .abstract.class.protected { background-image: url('../resources/icons/vtype_protected.png')}
+.type.private, .interface.private, .abstract.class.private { background-image: url('../resources/icons/vtype_private.png')}
+.init.public, .enum.public { background-image: url('../resources/icons/const_public.png')}
+.init.protected, .enum.protected { background-image: url('../resources/icons/const_protected.png')}
+.init.private, .enum.private { background-image: url('../resources/icons/const_private.png')}
+.fun.public, .class.public, .extern.public { background-image: url('../resources/icons/meth_public.png')}
+.fun.protected, .class.protected, .extern.protected { background-image: url('../resources/icons/meth_protected.png')}
+.fun.private, .class.private, .extern.private { background-image: url('../resources/icons/meth_private.png')}
 
 /* Quick Search */
 
@@ -544,8 +558,8 @@ textarea {
 	display: none; /*--masqué par défaut--*/
 	background: #fff;
 	padding: 20px;
-	margin-bottom: 400px;	
-	font-size: 1.2em;	
+	margin-bottom: 400px;
+	font-size: 1.2em;
 }
 
 #modalQuestion{
@@ -606,8 +620,8 @@ img.btn_close, img.btnCloseQuestion {
 	float: right;
 	margin: -35px -35px 0 0;
 }
-fieldset { 
-    margin-bottom: 20px; 
+fieldset {
+    margin-bottom: 20px;
 }
 
 #login, #password, #commitMessage, #repoCommit, #branchName{
@@ -624,7 +638,7 @@ fieldset {
 	max-width: 100%;
 	display: block;
 	margin-bottom: 20px;
-	background: #fff; 
+	background: #fff;
 }
 
 .connect-button a{
@@ -638,18 +652,18 @@ fieldset {
 	background-image:     -ms-linear-gradient(top, #92C929, #1d7900); /* IE10 */
 	background-image:      -o-linear-gradient(top, #92C929, #1d7900); /* Opera 11.10+ */
 	background-image:         linear-gradient(top, #92C929, #1d7900);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#92C929', EndColorStr='#1d7900'); /* IE6–IE9 */    
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#92C929', EndColorStr='#1d7900'); /* IE6–IE9 */
 	border-radius: 4px;
-	-moz-border-radius: 4px; 
-	-webkit-border-radius: 4px;  
-	-moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;    
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;
 	box-shadow: 0px 2px 4px rgba(0,0,0, .2);
 	-moz-box-shadow: 0px 2px 4px rgba(0,0,0, .2);
-	-webkit-box-shadow: 0px 2px 4px rgba(0,0,0, .2);    
+	-webkit-box-shadow: 0px 2px 4px rgba(0,0,0, .2);
 	text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2);
 	-moz-text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2);
-	-webkit-text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2);    
-	border: 1px solid #1d7900;    
+	-webkit-text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2);
+	border: 1px solid #1d7900;
 	color: #fff;
 	font-weight: 300;
 	font-size: 14px;
@@ -813,13 +827,13 @@ fieldset {
 	color: black;
 	font-style: normal;
 	margin-left: 10px;
-	margin-top: 10px;	
+	margin-top: 10px;
 }
 #logginMessage , #lbBranches{
 	color: black;
 	font-style: normal;
 	text-align: center;
-	margin-top: 10px;	
+	margin-top: 10px;
 }
 
 #divlogIn{
@@ -837,18 +851,18 @@ fieldset {
 	background-image:     -ms-linear-gradient(top, #92C929, #1d7900); /* IE10 */
 	background-image:      -o-linear-gradient(top, #92C929, #1d7900); /* Opera 11.10+ */
 	background-image:         linear-gradient(top, #92C929, #1d7900);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#92C929', EndColorStr='#1d7900'); /* IE6–IE9 */    
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#92C929', EndColorStr='#1d7900'); /* IE6–IE9 */
 	border-radius: 4px;
-	-moz-border-radius: 4px; 
-	-webkit-border-radius: 4px;  
-	-moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;    
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;
 	box-shadow: 0px 2px 4px rgba(0,0,0, .2);
 	-moz-box-shadow: 0px 2px 4px rgba(0,0,0, .2);
-	-webkit-box-shadow: 0px 2px 4px rgba(0,0,0, .2);    
+	-webkit-box-shadow: 0px 2px 4px rgba(0,0,0, .2);
 	text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2);
 	-moz-text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2);
-	-webkit-text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2);    
-	border: 1px solid #1d7900;    
+	-webkit-text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2);
+	border: 1px solid #1d7900;
 	color: #fff;
 	font-weight: 300;
 	font-size: 14px;
@@ -857,7 +871,7 @@ fieldset {
 }
 
 #passwordGit, #loginGit, #repositoryGit, #branchGit, #signedOff{
-	height:30px; 
+	height:30px;
 	width: 200px;
 }
 
@@ -867,7 +881,7 @@ fieldset {
 
 #dropBranches{
 	font-size: 12px;
-	height:20px; 
+	height:20px;
 }
 
 #listBranches, #divGitHubRepoDisplay{
@@ -875,7 +889,7 @@ fieldset {
 	display:block;
 	text-align:center;
 	margin-top: 15px;
-	margin-bottom: 15px;	
+	margin-bottom: 15px;
 }
 
 .githubTitle{
@@ -884,10 +898,6 @@ fieldset {
 
 #preSave{
 	display: none;
-}
-
-.noComment {
-	padding: 5px;
 }
 
 a.newComment {
