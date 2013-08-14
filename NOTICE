@@ -36,3 +36,8 @@ Copyright: 2009-2012 Alexis Laferrière <alexis.laf@xymus.net>
            2006 Gabriel Bauman <gbauman@gmail.com>
 License: GPL 2.0 (see LICENSE-GPL-2)
 Comment: GPL because the original work is GPL
+
+Files: share/nitdoc/ZeroClipboard.swf
+       share/nitdoc/scripts/ZeroClipboard.min.js
+Copyright: 2013 Jon Rohan, James M. Greene
+Licence: MIT (see LICENSE-MIT)
