@@ -22,26 +22,26 @@ import string_search
 redef class Object
 # Simple I/O
 
-	# Print `objects' on the standard output (`stdout').
+	# Print `objects` on the standard output (`stdout`).
 	protected fun printn(objects: Object...)
 	do
 		stdout.write(objects.to_s)
 	end
 
-	# Print an `object' on the standard output (`stdout') and add a newline.
+	# Print an `object` on the standard output (`stdout`) and add a newline.
 	protected fun print(object: Object)
 	do
 		stdout.write(object.to_s)
 		stdout.write("\n")
 	end
 
-	# Read a character from the standard input (`stdin').
+	# Read a character from the standard input (`stdin`).
 	protected fun getc: Char
 	do
 		return stdin.read_char.ascii
 	end
 
-	# Read a line from the standard input (`stdin').
+	# Read a line from the standard input (`stdin`).
 	protected fun gets: String
 	do
 		return stdin.read_line
@@ -98,7 +98,7 @@ class IFStream
 	# End of file?
 	redef readable var _end_reached: Bool = false
 
-	# Open the file at `path' for reading.
+	# Open the file at `path` for reading.
 	init open(path: String)
 	do
 		_path = path
@@ -133,7 +133,7 @@ class OFStream
 	# Is the file open in write mode
 	var _writable: Bool
 	
-	# Write `len' bytes from `native'.
+	# Write `len` bytes from `native`.
 	private fun write_native(native: NativeString, len: Int)
 	do
 		assert _writable
@@ -144,7 +144,7 @@ class OFStream
 		end
 	end
 	
-	# Open the file at `path' for writing.
+	# Open the file at `path` for writing.
 	init open(path: String)
 	do
 		_file = new NativeFile.io_open_write(path.to_cstring)
@@ -242,9 +242,9 @@ redef class String
 	#  * the validity of the path is not checked
 	#
 	#     "some/./complex/../../path/from/../to/a////file//".simplify_path	# -> "path/to/a/file"
-	#     "../dir/file" # -> "../dir/file"
-	#     "dir/../../" # -> ".."
-	#     "//absolute//path/" # -> "/absolute/path"
+	#     "../dir/file".simplify_path # -> "../dir/file"
+	#     "dir/../../".simplify_path # -> ".."
+	#     "//absolute//path/".simplify_path # -> "/absolute/path"
 	fun simplify_path: String
 	do
 		var a = self.split_with("/")
@@ -263,7 +263,7 @@ redef class String
 
 	# Correctly join two path using the directory separator.
 	#
-	# Using a standard "{self}/{path}" does not work when `self' is the empty string.
+	# Using a standard "{self}/{path}" does not work when `self` is the empty string.
 	# This method ensure that the join is valid.
 	#
 	#     "hello".join_path("world") # -> "hello/world"
@@ -271,7 +271,7 @@ redef class String
 	#     "".join_path("world") # -> "world"
 	#     "/hello".join_path("/world") # -> "/world"
 	#
-	# Note: you may want to use `simplify_path' on the result
+	# Note: you may want to use `simplify_path` on the result
 	#
 	# Note: I you want to join a great number of path, you can write
 	#

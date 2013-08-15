@@ -11,26 +11,26 @@
 # another product.
 
 # This module contains classes used to sorts arrays.
-# In order to provide your own sort class you should define a subclass of AbstractSorter with
-# a custom `compare' function.
+# In order to provide your own sort class you should define a subclass of `AbstractSorter` with
+# a custom `AbstractSorter::compare` function.
 package sorter
 
 import array
 
 # This abstract class generalizes ways to sort an array
-# TODO: rename *Sorter to *Comparator
+# TODO: rename `AbstractSorter` to `Comparator`
 interface AbstractSorter[E]
-	# Compare `a' and `b'.
+	# Compare `a` and `b`.
 	# Returns:
 	# 	-1 if a < b
 	#	0  if a = b
 	#	1  if a > b
 	fun compare(a: E, b: E): Int is abstract
 
-	# Sort `array' using the `compare' function.
+	# Sort `array` using the `compare` function.
 	fun sort(array: Array[E]) do sub_sort(array, 0, array.length-1)
 
-	# Sort `array' between `from' and `to' indices
+	# Sort `array` between `from` and `to` indices
 	private fun sub_sort(array: Array[E], from: Int, to: Int)
 	do
 		if from >= to then
@@ -42,7 +42,7 @@ interface AbstractSorter[E]
 		end
 	end
 
-	# Quick-sort `array' between `from' and `to' indices
+	# Quick-sort `array` between `from` and `to` indices
 	private fun quick_sort(array: Array[E], from: Int, to: Int)
 	do
 		var pivot = array[from]
@@ -63,7 +63,7 @@ interface AbstractSorter[E]
 		sub_sort(array, i, to)
 	end
 	
-	# Bubble-sort `array' between `from' and `to' indices
+	# Bubble-sort `array` between `from` and `to` indices
 	private fun bubble_sort(array: Array[E], from: Int, to: Int)
 	do
 		var i = from
@@ -88,7 +88,7 @@ interface AbstractSorter[E]
 end
 
 # This class uses the operator <=> to sort arrays.
-# You can also use the `sort' method of the `Array' class.
+# You can also use the `sort` method of the `Array` class.
 class ComparableSorter[E: Comparable]
 	super AbstractSorter[E]
 	# Return a <=> b

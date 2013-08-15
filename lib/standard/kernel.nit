@@ -31,17 +31,17 @@ interface Object
 	# The identifier is used internally to provide a hash value.
 	fun object_id: Int is intern
 
-	# Return true if `self' and `other' have the same dynamic type.
+	# Return true if `self` and `other` have the same dynamic type.
 	# Unless specific code, you should not use this method.
 	fun is_same_type(other: Object): Bool is intern
 
-	# Have `self' and `other' the same value?
+	# Have `self` and `other` the same value?
 	##
 	# The exact meaning of "same value" is let to the subclasses.
-	# Implicitly, the default implementation, is `is'
+	# Implicitly, the default implementation, is `is`
 	fun ==(other: nullable Object): Bool do return self is other
 
-	# Have `self' and `other' different values?
+	# Have `self` and `other` different values?
 	##
 	# != is equivalent with "not ==".
 	fun !=(other: nullable Object): Bool do return not (self == other)
@@ -64,13 +64,13 @@ interface Object
 	# Quit the program with a specific return code
 	protected fun exit(exit_value: Int) is intern
 
-	# Return the global sys object, the only instance of the `Sys' class.
+	# Return the global sys object, the only instance of the `Sys` class.
 	protected fun sys: Sys is intern
 end
 
 # The main class of the program.
-# `Sys' is a singleton class, its only instance is `sys' defined in `Object'.
-# `sys' is used to invoke methods on the program on the system.
+# `Sys` is a singleton class, its only instance is `sys` defined in `Object`.
+# `sys` is used to invoke methods on the program on the system.
 class Sys
 	# Instructions outside classes implicitly redefine this method.
 	fun main do end
@@ -83,21 +83,21 @@ end
 # The ancestor of class where objects are in a total order.
 # In order to work, the method '<' has to be redefined.
 interface Comparable
-	# What `self' can be compared to?
+	# What `self` can be compared to?
 	type OTHER: Comparable
 
-	# Is `self' lesser than `other'?
+	# Is `self` lesser than `other`?
 	fun <(other: OTHER): Bool is abstract 
 
-	# not `other' < `self'
-	# Note, the implementation must ensure that: (x<=y) == (x<y or x==y)
+	# not `other` < `self`
+	# Note, the implementation must ensure that: `(x<=y) == (x<y or x==y)`
 	fun <=(other: OTHER): Bool do return not other < self
 
-	# not `self' < `other' 
-	# Note, the implementation must ensure that: (x>=y) == (x>y or x==y)
+	# not `self` < `other`
+	# Note, the implementation must ensure that: `(x>=y) == (x>y or x==y)`
 	fun >=(other: OTHER): Bool do return not self < other
 
-	# `other' < `self'
+	# `other` < `self`
 	fun >(other: OTHER): Bool do return other < self
 
 	# -1 if <, +1 if > and 0 otherwise
@@ -119,7 +119,7 @@ interface Comparable
 		return c <= self and self <= d
 	end
 
-	# The maximum between `self' and `other' (prefers `self' if equals).
+	# The maximum between `self` and `other` (prefers `self` if equals).
 	fun max(other: OTHER): OTHER
 	do
 		if self < other then
@@ -129,7 +129,7 @@ interface Comparable
 		end
 	end
 
-	# The minimum between `self' and `c' (prefer `self' if equals)
+	# The minimum between `self` and `c` (prefer `self` if equals)
 	fun min(c: OTHER): OTHER
 	do
 		if c < self then
@@ -152,15 +152,16 @@ interface Discrete
 	# The previous element.
 	fun prec: OTHER do return self - 1
 
-	# The `i'-th successor element.
+	# The `i`-th successor element.
 	fun +(i: Int): OTHER is abstract
 
-	# The `i'-th previous element.
+	# The `i`-th previous element.
 	fun -(i: Int): OTHER is abstract
 
 	# The distance between self and d.
-	# 10.distance(15)	# --> 5
-	# 'Z'.distance('A')	# --> 25
+	#
+	#     10.distance(15)	# --> 5
+	#     'Z'.distance('A')	# --> 25
 	fun distance(d: OTHER): Int
 	do
 		var cursor: OTHER
@@ -189,9 +190,9 @@ end
 ###############################################################################
 
 # Native Booleans.
-# `true' and `false' are the only instances.
+# `true` and `false` are the only instances.
 # Boolean are manipulated trough three special operators:
-#	 `and', `or', `not'.
+#	 `and`, `or`, `not`.
 # Booleans are mainly used by conditional statement and loops.
 universal Bool
 	redef fun object_id is intern
@@ -216,7 +217,7 @@ universal Float
 	fun *(i: Float): Float is intern
 	fun /(i: Float): Float is intern
 	
-	# The integer part of `self'.
+	# The integer part of `self`.
 	fun to_i: Int is intern
 end
 
@@ -244,7 +245,7 @@ universal Int
 	fun lshift(i: Int): Int is intern
 	fun rshift(i: Int): Int is intern   
 
-	# The float equivalent of `self'
+	# The float equivalent of `self`
 	fun to_f: Float is intern
 
 	redef fun succ is intern
@@ -297,10 +298,10 @@ universal Int
 		end
 	end
 
-	# The character whose ASCII value is `self'.
+	# The character whose ASCII value is `self`.
 	fun ascii: Char is intern
 
-	# Number of digits of an integer in base `b' (plus one if negative)
+	# Number of digits of an integer in base `b` (plus one if negative)
 	fun digit_count(b: Int): Int
 	do
 		if b == 10 then return digit_count_base_10
@@ -347,8 +348,8 @@ universal Int
 	end
 
 	# Return the corresponding digit character
-	# If 0 <= `self' <= 9, return the corresponding character.
-	# If 10 <= `self' <= 36, return the corresponding letter [a..z].
+	# If 0 <= `self` <= 9, return the corresponding character.
+	# If 10 <= `self` <= 36, return the corresponding letter [a..z].
 	fun to_c: Char
 	do
 		assert self >= 0 and self <= 36 # TODO plan for this
@@ -395,7 +396,7 @@ end
 
 # Native characters.
 # Characters are denoted with simple quote.
-# eg. 'a' or '\n'.
+# eg. `'a'` or `'\n'`.
 universal Char
 	super Discrete
 	redef type OTHER: Char
@@ -423,7 +424,7 @@ universal Char
 		end
 	end
 
-	# If `self' is a digit then return this digit else return -1.
+	# If `self` is a digit then return this digit else return -1.
 	fun to_i: Int
 	do
 

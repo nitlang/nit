@@ -15,18 +15,18 @@ package string_search
 
 import string
 
-# Patterns are abstract string motifs (include `String' and `Char').
+# Patterns are abstract string motifs (include `String` and `Char`).
 interface Pattern
-	# Search `self' into `s' from a certain position.
+	# Search `self` into `s` from a certain position.
 	# Return the position of the first character of the matching section.
 	# Return -1 if not found.
 	fun search_index_in(s: String, from: Int): Int is abstract
 
-	# Search `self' into `s' from a certain position.
+	# Search `self` into `s` from a certain position.
 	# Return null if not found.
 	fun search_in(s: String, from: Int): nullable Match is abstract
 
-	# Search all `self' occurrences into `s'.
+	# Search all `self` occurrences into `s`.
 	fun search_all_in(s: String): Array[Match]
 	do
 		var res = new Array[Match] # Result
@@ -38,7 +38,7 @@ interface Pattern
 		return res
 	end
 
-	# Split `s' using `self' is separator.
+	# Split `s` using `self` is separator.
 	fun split_in(s: String): Array[Match]
 	do
 		var res = new Array[Match] # Result
@@ -66,7 +66,7 @@ class BM_Pattern
 
 	redef fun to_s do return _motif
 
-	# boyer-moore search gives the position of the first occurrence of a pattern starting at position `from'
+	# boyer-moore search gives the position of the first occurrence of a pattern starting at position `from`
 	redef fun search_index_in(s, from)
 	do
 		assert from >= 0
@@ -93,7 +93,7 @@ class BM_Pattern
 		return -1 # found nothing
 	end
 
-	# boyer-moore search. Return null if not found 
+	# boyer-moore search. Return null if not found
 	redef fun search_in(s, from)
 	do
 		var to = search_index_in(s, from)
@@ -104,7 +104,7 @@ class BM_Pattern
 		end
 	end
 
-	# Compile a new motif 
+	# Compile a new motif
 	init(motif: String)
 	do
 		_motif = motif
@@ -217,7 +217,7 @@ class Match
 	# The contents of the matching part
 	redef fun to_s do return _string.substring(_from, _length)
 
-	# Matches `len' characters of `s' from `f'.
+	# Matches `len` characters of `s` from `f`.
 	init(s: String, f: Int, len: Int)
 	do
 		assert positive_length: len >= 0
@@ -281,25 +281,26 @@ redef class String
 		end
 	end
 
-	# Like `search_from' but from the first character.
+	# Like `search_from` but from the first character.
 	fun search(p: Pattern): nullable Match do return p.search_in(self, 0)
 
 	# Search the given pattern into self from a.
-	# The search starts at `from'.
+	# The search starts at `from`.
 	# Return null if not found.
 	fun search_from(p: Pattern, from: Int): nullable Match do return p.search_in(self, from)
 
 	# Search all occurrences of p into self.
 	#
-	#   var a = new Array[Int]
-	#   for i in "hello world".searches('o') do
-	#       a.add(i.from)
-	#   end
-	#   a    # -> [4, 7]
+	#     var a = new Array[Int]
+	#     for i in "hello world".search_all('o') do
+	#         a.add(i.from)
+	#     end
+	#     a    # -> [4, 7]
 	fun search_all(p: Pattern): Array[Match] do return p.search_all_in(self)
 
 	# Split `self` using `p` as separator.
-	#   "hello world".split('o')     # -> ["hell", " w", "rld"]
+	#
+	#     "hello world".split('o')     # -> ["hell", " w", "rld"]
 	fun split(p: Pattern): Array[String]
 	do
 		var matches = p.split_in(self)
@@ -313,8 +314,8 @@ redef class String
 
 	# Replace all occurences of a pattern with a string
 	#
-	#   "hlelo".replace("le", "el")	# -> "hello"
-	#   "hello".replace('l', "")	# -> "heo"
+	#     "hlelo".replace("le", "el")	# -> "hello"
+	#     "hello".replace('l', "")	# -> "heo"
 	fun replace(p: Pattern, string: String): String
 	do
 		return self.split_with(p).join(string)
@@ -322,7 +323,7 @@ redef class String
 
 	# Escape the four characters < > & and " with their html counterpart
 	#
-	#    "a&b->\"x\"".html_escape # -> "a&amp;b-&gt;&quot;x&quot;"
+	#     "a&b->\"x\"".html_escape # -> "a&amp;b-&gt;&quot;x&quot;"
 	fun html_escape: String
 	do
 		var ret = self
