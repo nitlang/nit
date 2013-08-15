@@ -35,10 +35,10 @@ abstract class AbstractString
 
 	# Create a substring.
 	#
-	# "abcd".substring(1, 2) 	# --> "bc"
-	# "abcd".substring(-1, 2)	# --> "a"
-	# "abcd".substring(1, 0)     # --> ""
-	# "abcd".substring(2, 5)     # --> "cd"
+	#     "abcd".substring(1, 2) 	# --> "bc"
+	#     "abcd".substring(-1, 2)	# --> "a"
+	#     "abcd".substring(1, 0)     # --> ""
+	#     "abcd".substring(2, 5)     # --> "cd"
 	fun substring(from: Int, count: Int): String
 	do
 		assert count >= 0
@@ -57,21 +57,21 @@ abstract class AbstractString
 		end
 	end
 
-	# Create a substring from `self' beginning at the 'from' position
+	# Create a substring from `self` beginning at the `from` position
 	#
-	# "abcd".substring(1) 	# --> "bcd"
-	# "abcd".substring(-1)	# --> "abcd"
-	# "abcd".substring(2)     # --> "cd"
+	#     "abcd".substring_from(1)	# --> "bcd"
+	#     "abcd".substring_from(-1)	# --> "abcd"
+	#     "abcd".substring_from(2)     # --> "cd"
 	fun substring_from(from: Int): String
 	do
 		assert from < length
 		return substring(from, length - from)
 	end
 
-	# Does self have a substring 'str' starting from position 'pos
+	# Does self have a substring `str` starting from position `pos`?
 	#
-	# "abcd".has_substring("bc",1) 	# --> true
-	# "abcd".has_substring("bc",2) 	# --> false
+	#     "abcd".has_substring("bc",1)	# --> true
+	#     "abcd".has_substring("bc",2)	# --> false
 	fun has_substring(str: String, pos: Int): Bool
 	do
 		var itsindex = str.length - 1
@@ -89,36 +89,36 @@ abstract class AbstractString
 		return true
 	end
 
-	# Is this string prefixed by 'prefix'
+	# Is this string prefixed by `prefix`?
 	#
-	# "abc".is_prefix("abcd") 	# --> true
-	# "bc".is_prefix("abcd") 	# --> false
+	#     "abc".has_prefix("abcd")	# --> true
+	#     "bc".has_prefix("abcd")	# --> false
 	fun has_prefix(prefix: String): Bool do return has_substring(prefix,0)
 
-	# Is this string suffixed by 'suffix'
+	# Is this string suffixed by `suffix`?
 	#
-	# "abcd".has_suffix("abc") 	# --> false
-	# "abcd".has_suffix("bcd") 	# --> true
+	#     "abcd".has_suffix("abc")	# --> false
+	#     "abcd".has_suffix("bcd")	# --> true
 	fun has_suffix(suffix: String): Bool do return has_substring(suffix, length - suffix.length)
 
-	# If `self' contains only digits, return the corresponding integer
+	# If `self` contains only digits, return the corresponding integer
 	fun to_i: Int
 	do
 		# Shortcut
 		return to_s.to_cstring.atoi
 	end
 
-	# If `self' contains a float, return the corresponding float
+	# If `self` contains a float, return the corresponding float
 	fun to_f: Float
 	do
 		# Shortcut
 		return to_s.to_cstring.atof
 	end
 
-	# If `self' contains only digits and alpha <= 'f', return the corresponding integer.
+	# If `self` contains only digits and alpha <= 'f', return the corresponding integer.
 	fun to_hex: Int do return a_to(16)
 
-	# If `self' contains only digits and letters, return the corresponding integer in a given base
+	# If `self` contains only digits and letters, return the corresponding integer in a given base
 	fun a_to(base: Int) : Int
 	do
 		var i = 0
@@ -146,7 +146,7 @@ abstract class AbstractString
 		end
 	end
 
-	# Returns true if the string contains only Numeric values (and one "," or one "." character)
+	# Returns `true` if the string contains only Numeric values (and one "," or one "." character)
 	fun is_numeric: Bool
 	do
 		var has_point_or_comma = false
@@ -165,7 +165,7 @@ abstract class AbstractString
 		return true
 	end
 
-	# A upper case version of `self'
+	# A upper case version of `self`
 	fun to_upper: String
 	do
 		var s = new Buffer.with_capacity(length)
@@ -173,7 +173,7 @@ abstract class AbstractString
 		return s.to_s
 	end
 
-	# A lower case version of `self'
+	# A lower case version of `self`
 	fun to_lower : String
 	do
 		var s = new Buffer.with_capacity(length)
@@ -241,14 +241,14 @@ class String
 
 	# Create a substring.
 	#
-	# "abcd".substring(1, 2) 	# --> "bc"
-	# "abcd".substring(-1, 2)	# --> "a"
-	# "abcd".substring(1, 0)    # --> ""
-	# "abcd".substring(2, 5)    # --> "cd"
+	#     "abcd".substring(1, 2)	# --> "bc"
+	#     "abcd".substring(-1, 2)	# --> "a"
+	#     "abcd".substring(1, 0)    # --> ""
+	#     "abcd".substring(2, 5)    # --> "cd"
 	#
-	# A "from" index < 0 will be replaced by 0
-	# Unless a count value is > 0 at the same time
-	# In this case, from += count and count -= from
+	# A `from` index < 0 will be replaced by 0
+	# Unless a `count` value is > 0 at the same time
+	# In this case, `from += count` and `count -= from`
 	#
 	redef fun substring(from: Int, count: Int): String
 	do
@@ -269,11 +269,11 @@ class String
 		return new String.from_substring(realFrom, realFrom + count - 1, _items)
 	end
 
-	# Create a substring from `self' beginning at the 'from' position
+	# Create a substring from `self` beginning at the `from` position
 	#
-	# "abcd".substring_from(1) 	# --> "bcd"
-	# "abcd".substring_from(-1)	# --> "abcd"
-	# "abcd".substring_from(2)  # --> "cd"
+	#     "abcd".substring_from(1)	# --> "bcd"
+	#     "abcd".substring_from(-1)	# --> "abcd"
+	#     "abcd".substring_from(2)  # --> "cd"
 	#
 	# As with substring, a "from" index < 0 will be replaced by 0
 	#
@@ -284,10 +284,10 @@ class String
 		return substring(from, _length)
 	end
 
-	# Does self have a substring 'str' starting from position 'pos
+	# Does self have a substring `str` starting from position 'pos
 	#
-	# "abcd".has_substring("bc",1) 	# --> true
-	# "abcd".has_substring("bc",2) 	# --> false
+	#     "abcd".has_substring("bc",1)	# --> true
+	#     "abcd".has_substring("bc",2)	# --> false
 	redef fun has_substring(str: String, pos: Int): Bool
 	do
 		var itsindex = str._length - 1
@@ -312,7 +312,7 @@ class String
 		return true
 	end
 
-	# A upper case version of `self'
+	# A upper case version of `self`
 	redef fun to_upper: String
 	do
 		var outstr = calloc_string(self._length + 1)
@@ -333,7 +333,7 @@ class String
 		return new String.with_native(outstr, self._length)
 	end
 
-	# A lower case version of `self'
+	# A lower case version of `self`
 	redef fun to_lower : String
 	do
 		var outstr = calloc_string(self._length + 1)
@@ -472,7 +472,8 @@ class String
 	end
 
 	# The comparison between two strings is done on a lexicographical basis
-	# Eg : "aa" < "b" => true
+	#
+	#     "aa" < "b" # => true
 	redef fun <(other)
 	do
 		if self.object_id == other.object_id then return false
@@ -507,7 +508,7 @@ class String
 		return my_length < its_length
 	end
 
-	# The concatenation of `self' with `r'
+	# The concatenation of `self` with `s`
 	fun +(s: String): String
 	do
 		var my_length = self._length
@@ -523,7 +524,7 @@ class String
 		return new String.with_native(target_string, my_length + its_length)
 	end
 
-	# i repetitions of self
+	# `i` repetitions of `self`
 	fun *(i: Int): String
 	do
 		assert i >= 0
@@ -692,7 +693,7 @@ class Buffer
 		return true
 	end
 
-	readable private var _capacity: Int 
+	readable private var _capacity: Int
 end
 
 ###############################################################################
@@ -700,19 +701,16 @@ end
 ###############################################################################
 
 redef class Object
-	# User readable representation of `self'.
+	# User readable representation of `self`.
 	fun to_s: String do return inspect
 
 	# The class name of the object in NativeString format.
 	private fun native_class_name: NativeString is intern
 
 	# The class name of the object.
-	# FIXME: real type information is not available at runtime.
-	# Therefore, for instance, an instance of List[Bool] has just
-	# "List" for class_name
 	fun class_name: String do return new String.from_cstring(native_class_name)
 
-	# Developer readable representation of `self'.
+	# Developer readable representation of `self`.
 	# Usually, it uses the form "<CLASSNAME:#OBJECTID bla bla bla>"
 	fun inspect: String
 	do
@@ -744,9 +742,9 @@ redef class Bool
 end
 
 redef class Int
-	fun fill_buffer(s: Buffer, base: Int, signed: Bool)
-	# Fill `s' with the digits in base 'base' of `self' (and with the '-' sign if 'signed' and negative).
+	# Fill `s` with the digits in base `base` of `self` (and with the '-' sign if 'signed' and negative).
 	# assume < to_c max const of char
+	fun fill_buffer(s: Buffer, base: Int, signed: Bool)
 	do
 		var n: Int
 		# Sign
@@ -809,7 +807,7 @@ redef class Float
 		return str
 	end
 
-	# `self' representation with `nb' digits after the '.'.
+	# `self` representation with `nb` digits after the '.'.
 	fun to_precision(nb: Int): String
 	do
 		if nb == 0 then return self.to_i.to_s
@@ -887,7 +885,7 @@ redef class Collection[E]
 		return s.to_s
 	end
 
-	# Concatenate and separate each elements with `sep'. 
+	# Concatenate and separate each elements with `sep`.
 	fun join(sep: String): String
 	do
 		if is_empty then return ""
@@ -929,8 +927,8 @@ end
 
 redef class Map[K,V]
 	# Concatenate couple of 'key value'.
-	# key and value are separated by 'couple_sep'.
-	# each couple is separated each couple with `sep'.
+	# key and value are separated by `couple_sep`.
+	# each couple is separated each couple with `sep`.
 	fun join(sep: String, couple_sep: String): String
 	do
 		if is_empty then return ""
@@ -997,7 +995,7 @@ redef class Sys
 		return new String.from_cstring(native_argv(0))
 	end
 
-	# Initialize `args' with the contents of `native_argc' and `native_argv'.
+	# Initialize `args` with the contents of `native_argc` and `native_argv`.
 	private fun init_args
 	do
 		var argc = native_argc

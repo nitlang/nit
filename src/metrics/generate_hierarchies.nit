@@ -64,7 +64,7 @@ do
 	f.close
 end
 
-# Helper function for `generate_module_hierarchy'.
+# Helper function for `generate_module_hierarchy`.
 # Create graphviz nodes for the module and recusrively for its nested modules
 private fun generate_module_hierarchy_for(mmodule: MModule, buf: Buffer)
 do

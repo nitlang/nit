@@ -18,7 +18,7 @@ module counter
 import poset
 
 # A counter counts occurrences of things
-# Use this instead of a HashMap[E, Int]
+# Use this instead of a `HashMap[E, Int]`
 class Counter[E: Object]
 	super Map[E, Int]
 
@@ -27,7 +27,7 @@ class Counter[E: Object]
 
 	private var map = new HashMap[E, Int]
 
-	# The number of counted occurrences of `e'
+	# The number of counted occurrences of `e`
 	redef fun [](e: E): Int
 	do
 		var map = self.map
@@ -46,7 +46,7 @@ class Counter[E: Object]
 
 	redef fun values do return map.values
 
-	# Count one more occurrence of `e'
+	# Count one more occurrence of `e`
 	fun inc(e: E)
 	do
 		self.map[e] = self[e] + 1
@@ -104,7 +104,6 @@ class Counter[E: Object]
 	# Use `element_to_s` to display the element
 	fun print_elements(count: Int)
 	do
-		# Display most used types (ie the last of `types')
 		print " list:"
 		var list = self.sort
 		var min = count
@@ -170,7 +169,7 @@ redef class POSet[E]
 	end
 end
 
-# Helper function to display n/d and handle division by 0
+# Helper function to display `n/d` and handle division by 0
 fun div(n: Int, d: Int): String
 do
 	if d == 0 then return "na"

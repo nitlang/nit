@@ -116,7 +116,7 @@ class List[E]
 		_head = node
 	end
 
-	# Append `l' to `self' but clear `l'.
+	# Append `l` to `self` but clear `l`.
 	##
 	# O(1)
 	fun link(l: List[E])
@@ -185,7 +185,7 @@ class List[E]
 	# Build an empty list.
 	init do end
 	
-	# Build a list filled with the items of `coll'.
+	# Build a list filled with the items of `coll`.
 	init from(coll: Collection[E]) do append(coll)
 
 	# The first node of the list
@@ -194,7 +194,7 @@ class List[E]
 	# The last node of the list
 	var _tail: nullable ListNode[E]
 
-	# Get the `i'th node. get `null' otherwise.
+	# Get the `i`th node. get `null` otherwise.
 	private fun get_node(i: Int): nullable ListNode[E]
 	do
 		var n = _head
@@ -208,7 +208,7 @@ class List[E]
 		return n 
 	end
 
-	# get the first node that contains e after 'after', null otherwise
+	# get the first node that contains `e` after 'after', null otherwise
 	private fun search_node_after(e: E, after: nullable ListNode[E]): nullable ListNode[E]
 	do
 		var n = after
@@ -265,7 +265,7 @@ class ListIterator[E]
 		_index += 1
 	end
 
-	# Build a new iterator from `node'.
+	# Build a new iterator for `list`.
 	private init(list: List[E])
 	do
 		_list = list

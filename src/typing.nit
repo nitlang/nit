@@ -79,7 +79,7 @@ private class TypeVisitor
 		return res
 	end
 
-	# Retrieve the signature of a MMethodDef resolved for a specific call.
+	# Retrieve the signature of a `MMethodDef` resolved for a specific call.
 	# This method is an helper to symplify the query on the model.
 	#
 	# Note: `for_self` indicates if the reciever is self or not.
@@ -92,7 +92,7 @@ private class TypeVisitor
 	# Check that `sub` is a subtype of `sup`.
 	# If `sub` is not a valud suptype, then display an error on `node` an return null.
 	# If `sub` is a safe subtype of `sup` then return `sub`.
-	# If `sun` is an insafe subtype (ie an imlicit cast is required), then return `sup`.
+	# If `sub` is an insafe subtype (ie an imlicit cast is required), then return `sup`.
 	#
 	# The point of the return type is to determinate the usable type on an expression:
 	# If the suptype is safe, then the return type is the one on the expression typed by `sub`.
@@ -120,7 +120,7 @@ private class TypeVisitor
 	# Return the type of the expression
 	# Display an error and return null if:
 	#  * the type cannot be determined or
-	#  * `nexpr' is a statement
+	#  * `nexpr` is a statement
 	fun visit_expr(nexpr: AExpr): nullable MType
 	do
 		nexpr.accept_typing(self)
@@ -138,11 +138,11 @@ private class TypeVisitor
 		return null
 	end
 
-	# Visit an expression and expect its static type is a least a `sup'
-	# Return the type of the expression
+	# Visit an expression and expect its static type is a least a `sup`
+	# Return the type of the expression or null if
 	#  * the type cannot be determined or
-	#  * `nexpr' is a statement
-	#  * `nexpt' is not a `sup'
+	#  * `nexpr` is a statement or
+	#  * `nexpr` is not a `sup`
 	fun visit_expr_subtype(nexpr: AExpr, sup: nullable MType): nullable MType
 	do
 		var sub = visit_expr(nexpr)
@@ -157,11 +157,11 @@ private class TypeVisitor
 		return res
 	end
 
-	# Visit an expression and expect its static type is a bool
-	# Return the type of the expression
+	# Visit an expression and expect its static type is a `Bool`
+	# Return the type of the expression or null if
 	#  * the type cannot be determined or
-	#  * `nexpr' is a statement
-	#  * `nexpt' is not a `sup'
+	#  * `nexpr` is a statement or
+	#  * `nexpr` is not a `Bool`
 	fun visit_expr_bool(nexpr: AExpr): nullable MType
 	do
 		return self.visit_expr_subtype(nexpr, self.type_bool(nexpr))
@@ -534,10 +534,10 @@ redef class AExpr
 	var mtype: nullable MType = null
 
 	# Is the statement correctly typed?
-	# Used to distinguish errors and statements when `mtype' == null
+	# Used to distinguish errors and statements when `mtype == null`
 	var is_typed: Bool = false
 
-	# If required, the following implicit cast ".as(XXX)"
+	# If required, the following implicit cast `.as(XXX)`
 	# Such a cast may by required after evaluating the expression when
 	# a unsafe operation is detected (silently accepted by the Nit language).
 	# The attribute is computed by `check_subtype`
@@ -649,10 +649,10 @@ redef class AReassignFormExpr
 
 	var read_type: nullable MType = null
 
-	# Determine the `reassign_property'
-	# `readtype' is the type of the reading of the left value.
-	# `writetype' is the type of the writing of the left value.
-	# (Because of ACallReassignExpr, both can be different.
+	# Determine the `reassign_property`
+	# `readtype` is the type of the reading of the left value.
+	# `writetype` is the type of the writing of the left value.
+	# (Because of `ACallReassignExpr`, both can be different.
 	# Return the static type of the value to store.
 	private fun resolve_reassignment(v: TypeVisitor, readtype, writetype: MType): nullable MType
 	do
@@ -1105,7 +1105,7 @@ end
 
 redef class AIsaExpr
 	# The static type to cast to.
-	# (different from the static type of the expression that is Bool).
+	# (different from the static type of the expression that is `Bool`).
 	var cast_type: nullable MType
 	redef fun accept_typing(v)
 	do

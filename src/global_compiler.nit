@@ -125,9 +125,9 @@ class GlobalCompiler
 	protected var classids: HashMap[MClassType, String] = new HashMap[MClassType, String]
 
 	# Declaration of structures the live Nit types
-	# Each live type is generated as an independent C `struct' type.
+	# Each live type is generated as an independent C `struct` type.
 	# They only share a common first field `classid` used to implement the polymorphism.
-	# Usualy, all C variables that refers to a Nit object are typed on the abstract struct `val' that contains only the `classid` field.
+	# Usualy, all C variables that refers to a Nit object are typed on the abstract struct `val` that contains only the `classid` field.
 	redef fun compile_header_structs do
 		self.header.add_decl("typedef struct \{int classid;\} val; /* general C type representing a Nit instance. */")
 	end

@@ -61,7 +61,7 @@ interface IStream
 		return s.to_s
 	end
 
-	# Read a string until the end of the line and append it to `s'.
+	# Read a string until the end of the line and append it to `s`.
 	fun append_line_to(s: Buffer)
 	do
 		loop
@@ -195,7 +195,7 @@ abstract class BufferedIStream
 	# Is the last fill_buffer reach the end 
 	protected fun end_reached: Bool is abstract
 
-	# Allocate a `_buffer' for a given `capacity'.
+	# Allocate a `_buffer` for a given `capacity`.
 	protected fun prepare_buffer(capacity: Int)
 	do
 		_buffer = new Buffer.with_capacity(capacity)

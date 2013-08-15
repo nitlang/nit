@@ -441,8 +441,8 @@ abstract class AbstractCompiler
 
 	# Display stats about compilation process
 	# Metrics used:
-	#	* type tests against resolved types (x isa Collection[Animal])
-	#	* type tests against unresolved types (x isa Collection[E])
+	#	* type tests against resolved types (`x isa Collection[Animal]`)
+	#	* type tests against unresolved types (`x isa Collection[E]`)
 	#	* type tests skipped
 	#	* type tests total
 	# 	*
@@ -525,7 +525,7 @@ abstract class AbstractCompilerVisitor
 	# The current visited AST node
 	var current_node: nullable ANode writable = null
 
-	# The current Frame
+	# The current `Frame`
 	var frame: nullable Frame writable
 
 	# Alias for self.compiler.mainmodule.object_type
@@ -542,10 +542,10 @@ abstract class AbstractCompilerVisitor
 		self.writer = new CodeWriter(compiler.files.last)
 	end
 
-	# Force to get the primitive class named `name' or abort
+	# Force to get the primitive class named `name` or abort
 	fun get_class(name: String): MClass do return self.compiler.mainmodule.get_primitive_class(name)
 
-	# Force to get the primitive property named `name' in the instance `recv' or abort
+	# Force to get the primitive property named `name` in the instance `recv` or abort
 	fun get_property(name: String, recv: MType): MMethod
 	do
 		assert recv isa MClassType
@@ -561,7 +561,7 @@ abstract class AbstractCompilerVisitor
 
 	fun native_array_def(pname: String, ret_type: nullable MType, arguments: Array[RuntimeVariable]) is abstract
 
-	# Transform varargs, in raw arguments, into a single argument of type Array
+	# Transform varargs, in raw arguments, into a single argument of type `Array`
 	# Note: this method modify the given `args`
 	# If there is no vararg, then `args` is not modified.
 	fun varargize(mpropdef: MPropDef, msignature: MSignature, args: Array[RuntimeVariable])
@@ -613,8 +613,8 @@ abstract class AbstractCompilerVisitor
 
 	# Unsafely cast a value to a new type
 	# ie the result share the same C variable but my have a different mcasttype
-	# NOTE: if the adaptation is useless then `value' is returned as it.
-	# ENSURE: return.name == value.name
+	# NOTE: if the adaptation is useless then `value` is returned as it.
+	# ENSURE: `(return).name == value.name`
 	fun autoadapt(value: RuntimeVariable, mtype: MType): RuntimeVariable
 	do
 		mtype = self.anchor(mtype)
@@ -655,10 +655,10 @@ abstract class AbstractCompilerVisitor
 	#  Generate a static call on a method definition
 	fun call(m: MMethodDef, recvtype: MClassType, args: Array[RuntimeVariable]): nullable RuntimeVariable is abstract
 
-	#  Generate a polymorphic send for the method `m' and the arguments `args'
+	#  Generate a polymorphic send for the method `m` and the arguments `args`
 	fun send(m: MMethod, args: Array[RuntimeVariable]): nullable RuntimeVariable is abstract
 
-	# Generate a monomorphic send for the method `m', the type `t' and the arguments `args'
+	# Generate a monomorphic send for the method `m`, the type `t` and the arguments `args`
 	fun monomorphic_send(m: MMethod, t: MType, args: Array[RuntimeVariable]): nullable RuntimeVariable
 	do
 		assert t isa MClassType
@@ -700,7 +700,7 @@ abstract class AbstractCompilerVisitor
 	private var names: HashSet[String] = new HashSet[String]
 	private var last: Int = 0
 
-	# Return a new name based on `s' and unique in the visitor
+	# Return a new name based on `s` and unique in the visitor
 	fun get_name(s: String): String
 	do
 		if not self.names.has(s) then
@@ -734,7 +734,7 @@ abstract class AbstractCompilerVisitor
 	private var escapemark_names = new HashMap[EscapeMark, String]
 
 	# Return a "const char*" variable associated to the classname of the dynamic type of an object
- 	# NOTE: we do not return a RuntimeVariable "NativeString" as the class may not exist in the module/program
+ 	# NOTE: we do not return a `RuntimeVariable` "NativeString" as the class may not exist in the module/program
 	fun class_name_string(value: RuntimeVariable): String is abstract
 
 	# Variables handling
@@ -849,7 +849,7 @@ abstract class AbstractCompilerVisitor
 	end
 
 	# look for a needed .h and .c file for a given .nit source-file
-	# FIXME: bad API, parameter should be a MModule, not its source-file
+	# FIXME: bad API, parameter should be a `MModule`, not its source-file
 	fun add_extern(file: String)
 	do
 		file = file.strip_extension(".nit")
@@ -873,7 +873,7 @@ abstract class AbstractCompilerVisitor
 		self.compiler.extern_bodies.add(f)
 	end
 
-	# Return a new local runtime_variable initialized with the C expression `cexpr'.
+	# Return a new local runtime_variable initialized with the C expression `cexpr`.
 	fun new_expr(cexpr: String, mtype: MType): RuntimeVariable
 	do
 		var res = new_var(mtype)
@@ -893,7 +893,7 @@ abstract class AbstractCompilerVisitor
 		self.add("exit(1);")
 	end
 
-	# Generate a return with the value `s'
+	# Generate a return with the value `s`
 	fun ret(s: RuntimeVariable)
 	do
 		self.assign(self.frame.returnvar.as(not null), s)
@@ -934,7 +934,7 @@ abstract class AbstractCompilerVisitor
 		return res
 	end
 
-	# Alias for `self.expr(nexpr, self.bool_type)'
+	# Alias for `self.expr(nexpr, self.bool_type)`
 	fun expr_bool(nexpr: AExpr): RuntimeVariable do return expr(nexpr, bool_type)
 
 	# Safely show a debug message on the current node and repeat the message in the C code as a comment
@@ -980,7 +980,7 @@ abstract class AbstractRuntimeFunction
 	# May inline the body or generate a C function call
 	fun call(v: VISITOR, arguments: Array[RuntimeVariable]): nullable RuntimeVariable is abstract
 
-	# Generate the code for the RuntimeFunction
+	# Generate the code for the `AbstractRuntimeFunction`
 	# Warning: compile more than once compilation makes CC unhappy
 	fun compile_to_c(compiler: COMPILER) is abstract
 end
@@ -988,7 +988,7 @@ end
 # A runtime variable hold a runtime value in C.
 # Runtime variables are associated to Nit local variables and intermediate results in Nit expressions.
 #
-# The tricky point is that a single C variable can be associated to more than one RuntimeVariable because the static knowledge of the type of an expression can vary in the C code.
+# The tricky point is that a single C variable can be associated to more than one `RuntimeVariable` because the static knowledge of the type of an expression can vary in the C code.
 class RuntimeVariable
 	# The name of the variable in the C code
 	var name: String
@@ -1032,7 +1032,7 @@ class RuntimeVariable
 	end
 end
 
-# A frame correspond to a visited property in a GlobalCompilerVisitor
+# A frame correspond to a visited property in a `GlobalCompilerVisitor`
 class Frame
 
 	type VISITOR: AbstractCompilerVisitor
@@ -1784,7 +1784,7 @@ end
 
 redef class AExpr
 	# Try to compile self as an expression
-	# Do not call this method directly, use `v.expr' instead
+	# Do not call this method directly, use `v.expr` instead
 	private fun expr(v: AbstractCompilerVisitor): nullable RuntimeVariable
 	do
 		v.add("printf(\"NOT YET IMPLEMENTED {class_name}:{location.to_s}\\n\");")
@@ -1799,7 +1799,7 @@ redef class AExpr
 	end
 
 	# Try to compile self as a statement
-	# Do not call this method directly, use `v.stmt' instead
+	# Do not call this method directly, use `v.stmt` instead
 	private fun stmt(v: AbstractCompilerVisitor)
 	do
 		var res = expr(v)
@@ -2405,7 +2405,7 @@ end
 # Utils
 
 redef class Array[E]
-	# Return a new Array with the elements only contened in 'self' and not in 'o'
+	# Return a new `Array` with the elements only contened in self and not in `o`
 	fun -(o: Array[E]): Array[E] do
 		var res = new Array[E]
 		for e in self do if not o.has(e) then res.add(e)
@@ -2414,7 +2414,7 @@ redef class Array[E]
 end
 
 redef class MModule
-	# All 'mproperties' associated to all 'mclassdefs' of `mclass`
+	# All `MProperty` associated to all `MClassDef` of `mclass`
 	fun properties(mclass: MClass): Set[MProperty] do
 		if not self.properties_cache.has_key(mclass) then
 			var properties = new HashSet[MProperty]

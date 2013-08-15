@@ -20,7 +20,7 @@ redef class Object
 	# The hash code of the object.
 	# Assuming that a == b -> a.hash == b.hash
 	##
-	# Without redefinition, it is based on the `object_id' of the instance.
+	# Without redefinition, it is based on the `object_id` of the instance.
 	fun hash: Int do return object_id / 8
 end
 

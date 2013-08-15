@@ -65,8 +65,8 @@ class Range[E: Discrete]
 
 	redef fun is_empty do return _first >= _after
 
-	# Create a range [`from', `to'].
-	# The syntax [`from'..`to'[ is equivalent.
+	# Create a range [`from`, `to`].
+	# The syntax `[from..to[` is equivalent.
 	init(from: E, to: E)
 	do
 		_first = from
@@ -74,8 +74,8 @@ class Range[E: Discrete]
 		_after = to.succ
 	end
 
-	# Create a range [`from', `to'[.
-	# The syntax [`from'..`to'[ is equivalent.
+	# Create a range [`from`, `to`[.
+	# The syntax `[from..to[` is equivalent.
 	init without_last(from: E, to: E)
 	do
 		_first = from

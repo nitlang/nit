@@ -153,10 +153,10 @@ class Location
 	end
 
 	# Return the associated line with the location highlihted with color and a carret under the starting position
-	# `color' must be and terminal escape sequence used as "{escape}[{color}m;"
-	# "0;31" for red
-	# "1;31" for bright red
-	# "0;32" for green
+	# `color` must be and terminal escape sequence used as `"{escape}[{color}m;"`
+	# * `"0;31"` for red
+	# * `"1;31"` for bright red
+	# * `"0;32"` for green
 	fun colored_line(color: String): String
 	do
 		var esc = 27.ascii

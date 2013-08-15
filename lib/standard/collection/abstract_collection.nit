@@ -20,19 +20,19 @@ import kernel
 # Instances of this class offers an iterator method.
 #
 # Collections instances can use the "for" structure:
-#	  var x: Collection[U]
-#         ...
+#         var x: Collection[U]
+#         # ...
 #         for u in x do
 #             # u is a U
-#             ...
+#             # ...
 #         end
 # that is equivalent with
 #         var x: Collection[U]
-#         ...
+#         # ...
 #         var i = x.iterator
 #         while i.is_ok do
 #             var u = i.item # u is a U
-#             ...
+#             # ...
 #             i.next
 #         end
 #
@@ -53,22 +53,22 @@ interface Collection[E]
 		end
 	end
 
-	# Is there no item in the collection ?
+	# Is there no item in the collection?
 	fun is_empty: Bool is abstract 
 
 	# Number of items in the collection.
 	fun length: Int is abstract
 
-	# Is `item' in the collection ?
+	# Is `item` in the collection ?
 	# Comparisons are done with ==
 	fun has(item: E): Bool is abstract
 
-	# Is the collection contain only `item' ?
+	# Is the collection contain only `item`?
 	# Comparisons are done with ==
 	# Return true if the collection is empty.
 	fun has_only(item: E): Bool is abstract
 
-	# How many occurrences of `item' are in the collection ?
+	# How many occurrences of `item` are in the collection?
 	# Comparisons are done with ==
 	fun count(item: E): Int is abstract
 
@@ -119,11 +119,11 @@ end
 # They are mainly used with collections.
 interface Iterator[E]
 	# The current item.
-	# Require `is_ok'.
+	# Require `is_ok`.
 	fun item: E is abstract
 
 	# Jump to the next item.
-	# Require `is_ok'.
+	# Require `is_ok`.
 	fun next is abstract
 
 	# Is there a current item ?
@@ -182,10 +182,10 @@ interface RemovableCollection[E]
 	# Remove all items
 	fun clear is abstract
 
-	# Remove an occucence of `item'
+	# Remove an occucence of `item`
 	fun remove(item: E) is abstract
 
-	# Remove all occurences of `item'
+	# Remove all occurences of `item`
 	fun remove_all(item: E) do while has(item) do remove(item)
 end
 
@@ -203,12 +203,12 @@ end
 # Abstract sets.
 #
 # Set contains contains only one element with the same value (according to ==).
-#    var s: Set[E]
-#    var a = "Hello"
-#    var b = "Hel" + "lo"
-#    ...
-#    s.add(a)
-#    s.has(b) # --> true
+#      var s: Set[E]
+#      var a = "Hello"
+#      var b = "Hel" + "lo"
+#      # ...
+#      s.add(a)
+#      s.has(b) # --> true
 interface Set[E: Object]
 	super SimpleCollection[E]
 
@@ -238,12 +238,12 @@ interface Set[E: Object]
 	redef fun remove_all(item) do remove(item)
 end
 
-# MapRead are abstract associative collections: `key' -> `item'.
+# MapRead are abstract associative collections: `key` -> `item`.
 interface MapRead[K: Object, E]
-	# Get the item at `key'.
+	# Get the item at `key`.
 	fun [](key: K): E is abstract
 
-	# Depreciated alias for `keys.has'
+	# Depreciated alias for `keys.has`
 	fun has_key(key: K): Bool do return self.keys.has(key)
 
 	# Get a new iterator on the map.
@@ -261,12 +261,12 @@ interface MapRead[K: Object, E]
 	end
 
 	# Return the point of view of self on the values only.
-	# Note that `self' and `values' are views on the same data;
+	# Note that `self` and `values` are views on the same data;
 	# therefore any modification of one is visible on the other.
 	fun values: Collection[E] is abstract
 
 	# Return the point of view of self on the keys only.
-	# Note that `self' and `keys' are views on the same data;
+	# Note that `self` and `keys` are views on the same data;
 	# therefore any modification of one is visible on the other.
 	fun keys: Collection[K] is abstract
 
@@ -277,35 +277,35 @@ interface MapRead[K: Object, E]
 	fun length: Int is abstract
 end
 
-# Maps are associative collections: `key' -> `item'.
+# Maps are associative collections: `key` -> `item`.
 #
 # The main operator over maps is [].
 #
 #     var map: Map[U, V]
-#     ...
+#     # ...
 #     map[u1] = v1      # Associate 'v1' to 'u1'
 #     map[u2] = v2      # Associate 'v2' to 'u2'
-#     map[u1]            # -> v1
-#     map[u2]            # -> v2
+#     print map[u1]     # -> v1
+#     print map[u2]     # -> v2
 #
 # Instances of maps can be used with the for structure
 #
-#     for key, value in map do ..
+#     for key, value in map do # things with `key` and `value`
 #
-# The keys and values in the map can also be manipulated directly with the `keys' and `values' methods.
+# The keys and values in the map can also be manipulated directly with the `keys` and `values` methods.
 #
 #     map.keys.has(u1)   # -> true
 #     map.keys.has(u3)   # -> false
-#     map.values.has(v1)   # -> true
-#     map.values.has(v3)   # -> false
+#     map.values.has(v1) # -> true
+#     map.values.has(v3) # -> false
 #
 interface Map[K: Object, E]
 	super MapRead[K, E]
-	# Set the`item' at `key'.
+	# Set the`item` at `key`.
 	fun []=(key: K, item: E) is abstract
 
-	# Add each (key,value) of `map' into `self'.
-	# If a same key exists in `map' and `self', then the value in self is discarded.
+	# Add each (key,value) of `map` into `self`.
+	# If a same key exists in `map` and `self`, then the value in self is discarded.
 	fun recover_with(map: Map[K, E])
 	do
 		var i = map.iterator
@@ -326,21 +326,21 @@ end
 # Iterators for Map.
 interface MapIterator[K: Object, E]
 	# The current item.
-	# Require `is_ok'.
+	# Require `is_ok`.
 	fun item: E is abstract
 
 	# The key of the current item.
-	# Require `is_ok'.
+	# Require `is_ok`.
 	fun key: K is abstract
 
 	# Jump to the next item.
-	# Require `is_ok'.
+	# Require `is_ok`.
 	fun next is abstract
 
 	# Is there a current item ?
 	fun is_ok: Bool is abstract
 
-	# Set a new `item' at `key'.
+	# Set a new `item` at `key`.
 	#fun item=(item: E) is abstract
 end
 
@@ -367,11 +367,11 @@ class MapValuesIterator[K: Object, V]
 end
 
 # Sequences are indexed collections.
-# The first item is 0. The last is `length'-1.
+# The first item is 0. The last is `length-1`.
 interface SequenceRead[E]
 	super Collection[E]
 	# Get the first item.
-	# Is equivalent with `self'[0].
+	# Is equivalent with `self[0]`.
 	redef fun first
 	do
 		assert not_empty: not is_empty
@@ -379,20 +379,20 @@ interface SequenceRead[E]
 	end
 
 	# Return the index=th element of the sequence.
-	# The first element is 0 and the last if `length-1'
+	# The first element is 0 and the last if `length-1`
 	# If index is invalid, the program aborts
 	fun [](index: Int): E is abstract
 
 	# Get the last item.
-	# Is equivalent with `self'[`length'-1].
+	# Is equivalent with `self[length-1]`.
 	fun last: E
 	do
 		assert not_empty: not is_empty
 		return self[length-1]
 	end
 
-	# Return the index of the first occurrence of `item'.
-	# Return -1 if `item' is not found
+	# Return the index of the first occurrence of `item`.
+	# Return -1 if `item` is not found
 	# Comparison is done with ==
 	fun index_of(item: E): Int
 	do
@@ -408,18 +408,18 @@ interface SequenceRead[E]
 end
 
 # Sequence are indexed collection.
-# The first item is 0. The last is `length'-1.
+# The first item is 0. The last is `length-1`.
 interface Sequence[E]
 	super SequenceRead[E]
 	super SimpleCollection[E]
 
 	# Set the first item.
-	# Is equivalent with `self'[0] = `item'.
+	# Is equivalent with `self[0] = item`.
 	fun first=(item: E)
 	do self[0] = item end
 
 	# Set the last item.
-	# Is equivalent with `self'[length-1] = `item'.
+	# Is equivalent with `self[length-1] = item`.
 	fun last=(item: E) 
 	do 
 		var l = length
@@ -430,7 +430,7 @@ interface Sequence[E]
 		end
 	end
 
-	# A synonym of `push'
+	# A synonym of `push`
 	redef fun add(e) do push(e)
 
 	# Add an item after the last.
@@ -449,10 +449,10 @@ interface Sequence[E]
 	# The second item become the first.
 	fun shift: E is abstract
 
-	# Set the`item' at `index'.
+	# Set the `item` at `index`.
 	fun []=(index: Int, item: E) is abstract
 
-	# Remove the item at `index' and shift all following elements
+	# Remove the item at `index` and shift all following elements
 	fun remove_at(index: Int) is abstract
 end
 
