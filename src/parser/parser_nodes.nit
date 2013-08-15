@@ -1358,14 +1358,14 @@ class AAttrReassignExpr
 end
 
 # A call with a standard method-name and any number of arguments. eg `x.m(y)`. OR just a simple id
-# Note: because the parser cannot distinguish a variable read with a method call with an implicit receiver and no arguments. it always returns a ACallExpr.
+# Note: because the parser cannot distinguish a variable read with a method call with an implicit receiver and no arguments, it always returns a `ACallExpr`.
 # Semantic analysis have to transform them to instance of `AVarExpr`.
 class ACallExpr
 	super ACallFormExpr
 end
 
 # A setter call with a standard method-name and any number of arguments. eg `x.m(y)=z`. OR just a simple assignment.
-# Note: because the parser cannot distinguish a variable write with a setter call with an implicit receiver and no arguments. it always returns a ACallAssignExpr.
+# Note: because the parser cannot distinguish a variable write with a setter call with an implicit receiver and no arguments, it always returns a `ACallAssignExpr`.
 # Semantic analysis have to transform them to instance of `AVarAssignExpr`.
 class ACallAssignExpr
 	super ACallFormExpr
@@ -1373,7 +1373,7 @@ class ACallAssignExpr
 end
 
 # A complex setter call with a standard method-name and any number of arguments. eg `x.m(y)+=z`. OR just a simple complex assignment.
-# Note: because the parser cannot distinguish a variable write with a compex setter call with an implicit receiver and no arguments. it always returns a ACallReassignExpr.
+# Note: because the parser cannot distinguish a variable write with a compex setter call with an implicit receiver and no arguments, it always returns a `ACallReassignExpr`.
 # Semantic analysis have to transform them to instance of `AVarReassignExpr`.
 class ACallReassignExpr
 	super ACallFormExpr
@@ -1389,7 +1389,7 @@ class ASuperExpr
 end
 
 # A call to the `init` constructor.
-# Note: because `init` is a keyword and not a `TId`, the explicit call to init cannot be a ACallFormExpr
+# Note: because `init` is a keyword and not a `TId`, the explicit call to init cannot be a ACallFormExpr.
 class AInitExpr
 	super ASendExpr
 	readable writable var _n_kwinit: TKwinit
@@ -1439,14 +1439,14 @@ class AVarExpr
 end
 
 # A local variable simple assigment access
-# The parser cannot instantiate them, see `ACallAssingExpr`.
+# The parser cannot instantiate them, see `ACallAssignExpr`.
 class AVarAssignExpr
 	super AVarFormExpr
 	super AAssignFormExpr
 end
 
 # A local variable complex assignment access
-# The parser cannot instantiate them, see `ACallReassingExpr`.
+# The parser cannot instantiate them, see `ACallReassignExpr`.
 class AVarReassignExpr
 	super AVarFormExpr
 	super AReassignFormExpr
@@ -1546,8 +1546,8 @@ class AEndStringExpr
 	super AStringFormExpr
 end
 
-# A superstring literal. eg "a{x}b{y}c"
-# Each part is modelized a sequence of expression. eg. ["a{, x, }b{, y, }c"]
+# A superstring literal. eg `"a{x}b{y}c"`
+# Each part is modelized a sequence of expression. eg. `["a{, x, }b{, y, }c"]`
 class ASuperstringExpr
 	super AExpr
 	readable var _n_exprs: ANodes[AExpr] = new ANodes[AExpr](self)
