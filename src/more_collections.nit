@@ -15,11 +15,11 @@
 # Highly specific, but useful, collections-related classes.
 module more_collections
 
-# Simple way to store an HashMap[K, Array[V]]
+# Simple way to store an `HashMap[K, Array[V]]`
 class MultiHashMap[K: Object, V]
 	super HashMap[K, Array[V]]
 
-	# Add `v' to the array associated with `k'.
+	# Add `v` to the array associated with `k`.
 	# If there is no array associated, then create it.
 	fun add_one(k: K, v: V)
 	do
@@ -33,7 +33,7 @@ class MultiHashMap[K: Object, V]
 	init do end
 end
 
-# Simple way to store an HashMap[K1, HashMap[K2, V]]
+# Simple way to store an `HashMap[K1, HashMap[K2, V]]`
 class HashMap2[K1: Object, K2: Object, V]
 	private var level1: HashMap[K1, HashMap[K2, V]] = new HashMap[K1, HashMap[K2, V]]
 
@@ -63,7 +63,7 @@ class HashMap2[K1: Object, K2: Object, V]
 	end
 end
 
-# Simple way to store an HashMap[K1, HashMap[K2, HashMap[K3, V]]]
+# Simple way to store an `HashMap[K1, HashMap[K2, HashMap[K3, V]]]`
 class HashMap3[K1: Object, K2: Object, K3: Object, V]
 	private var level1: HashMap[K1, HashMap2[K2, K3, V]] = new HashMap[K1, HashMap2[K2, K3, V]]
 

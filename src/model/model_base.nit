@@ -36,7 +36,7 @@ class Model
 	# Collections of modules grouped by their short names
 	private var mmodules_by_name: MultiHashMap[String, MModule] = new MultiHashMap[String, MModule]
 
-	# Return all module named `name'
+	# Return all module named `name`
 	# If such a module does not exist, null is returned (instead of an empty array)
 	#
 	# Visibility or modules are not considered
@@ -51,7 +51,7 @@ class Model
 end
 
 # A Nit module is usually associated with a Nit source file.
-# Modules can be nested (see `direct_owner', `public_owner', and `in_nesting')
+# Modules can be nested (see `direct_owner`, `public_owner`, and `in_nesting`)
 class MModule
 	# The model considered
 	var model: Model
@@ -65,17 +65,17 @@ class MModule
 	# The origin of the definition
 	var location: Location
 
-	# Alias for `name'
+	# Alias for `name`
 	redef fun to_s do return self.name
 
-	# The view of the module in the module_nesting_hierarchy
+	# The view of the module in the `model.mmodule_nesting_hierarchy`
 	var in_nesting: POSetElement[MModule]
 
-	# The view of the module in the module_importation_hierarchy
+	# The view of the module in the `model.mmodule_importation_hierarchy`
 	var in_importation: POSetElement[MModule]
 
 	# The canonical name of the module
-	# Example: "owner::name"
+	# Example: `"owner::name"`
 	fun full_name: String
 	do
 		var owner = self.public_owner
@@ -87,7 +87,7 @@ class MModule
 	end
 
 	# Create a new empty module and register it to a model
-	# `direct_owner' is the direct owner (null if top-level module)
+	# `direct_owner` is the direct owner (null if top-level module)
 	init(model: Model, direct_owner: nullable MModule, name: String, location: Location)
 	do
 		self.model = model
@@ -105,7 +105,7 @@ class MModule
 
 	# Register the imported modules (ie "import some_module")
 	# This function can only invoked once by mmodule.
-	# The visibility must be set with `se_visibility_for'.
+	# The visibility must be set with `set_visibility_for`.
 	fun set_imported_mmodules(imported_mmodules: Array[MModule])
 	do
 		assert unique_invocation: self.in_importation.direct_greaters.is_empty
@@ -129,7 +129,7 @@ class MModule
 	end
 
 	# Set the visibility of an imported module
-	# REQUIRE: the visibility of the modules imported by `m' are already set for `m'
+	# REQUIRE: the visibility of the modules imported by `m` are already set for `m`
 	fun set_visibility_for(m: MModule, v: MVisibility)
 	do
 		if v == intrude_visibility then
@@ -153,7 +153,7 @@ class MModule
 
 	# The first module in the nesting hierarchy to export self as public
 	# This function is used to determine the canonical name of modules, classes and properties.
-	# REQUIRE: the visibility of all nesting modules is already set for `m'.
+	# REQUIRE: the visibility of all nesting modules is already set.
 	fun public_owner: nullable MModule
 	do
 		var res = self.direct_owner
@@ -165,7 +165,7 @@ class MModule
 		return res
 	end
 
-	# Return true if a class or a property introduced in `intro_mmodule' with a visibility of 'visibility' is visible in self.
+	# Return true if a class or a property introduced in `intro_mmodule` with a visibility of `visibility` is visible in self.
 	fun is_visible(intro_mmodule: MModule, visibility: MVisibility): Bool
 	do
 		var v = visibility_for(intro_mmodule)
@@ -186,10 +186,10 @@ end
 # A visibility (for modules, class and properties)
 # Valid visibility are:
 #
-#  * intrude_visibility
-#  * public_visibility
-#  * protected_visibility
-#  * none_visibility
+#  * `intrude_visibility`
+#  * `public_visibility`
+#  * `protected_visibility`
+#  * `none_visibility`
 #
 # Note this class is basically an enum.
 # FIXME: use a real enum once user-defined enums are available

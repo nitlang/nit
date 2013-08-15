@@ -20,8 +20,8 @@ module poset
 # Preorder set graph.
 # This class modelize an incremental preorder graph where new node and edges can be added (but no removal)
 # Preorder graph has two caracteristics:
-#  * reflexivity: an element is in relation with itself (ie `self.has(e)' implies `self.has_edge(e,e)')
-#  * transitivity: `self.has_edge(e,f)' and `self.has_edge(f,g)' implies `self.has_edge(e,g)'
+#  * reflexivity: an element is in relation with itself (ie `self.has(e)` implies `self.has_edge(e,e)`)
+#  * transitivity: `self.has_edge(e,f)` and `self.has_edge(f,g)` implies `self.has_edge(e,g)`
 class POSet[E: Object]
 	super NaiveCollection[E]
 	super AbstractSorter[E]
@@ -35,8 +35,8 @@ class POSet[E: Object]
 
 	# Add a node (an element) to the posed
 	# The new element is added unconnected to any other nodes (it is both a new root and a new leaf).
-	# Return the POSetElement associated to `e'.
-	# If `e' is already present in the POSet then just return the POSetElement (usually you will prefer []) is this case.
+	# Return the POSetElement associated to `e`.
+	# If `e` is already present in the POSet then just return the POSetElement (usually you will prefer []) is this case.
 	fun add_node(e: E): POSetElement[E]
 	do
 		if elements.keys.has(e) then return self.elements[e]
@@ -47,10 +47,10 @@ class POSet[E: Object]
 		return poe
 	end
 
-	# Return a view of `e' in the poset.
+	# Return a view of `e` in the poset.
 	# This allows to asks manipulate elements in thier relation with others elements.
 	#
-	#     var poset = POSet[Something] = ...
+	#     var poset: POSet[Something] # ...
 	#     for x in poset do
 	#         for y in poset[x].direct_greaters do
 	#             print "{x} -> {y}"
@@ -64,10 +64,10 @@ class POSet[E: Object]
 		return self.elements[e]
 	end
 
-	# Add an edge from `f' to `t'.
+	# Add an edge from `f` to `t`.
 	# Because a POSet is transitive, all transitive edges are also added to the graph.
 	# If the edge already exists, the this function does nothing.
-	# If a reverse edge (from `t' to 'f') already exists, a loop is created.
+	# If a reverse edge (from `t` to `f`) already exists, a loop is created.
 	#
 	# FIXME: Do somethind clever to manage loops.
 	fun add_edge(f, t: E)
@@ -106,8 +106,8 @@ class POSet[E: Object]
 		te.dfroms.add f
 	end
 
-	# Is there an edge (transitive or not) from `f' to `t'?
-	# Since the POSet is reflexive, true is returned if `f == t'.
+	# Is there an edge (transitive or not) from `f` to `t`?
+	# Since the POSet is reflexive, true is returned if `f == t`.
 	fun has_edge(f,t: E): Bool
 	do
 		if not elements.keys.has(f) then return false
@@ -115,7 +115,7 @@ class POSet[E: Object]
 		return fe.tos.has(t)
 	end
 
-	# Is there a direct edge from `f' to `t'?
+	# Is there a direct edge from `f` to `t`?
 	# Note that because of loops, the result may not be the expected one.
 	fun has_direct_edge(f,t: E): Bool
 	do
@@ -174,7 +174,7 @@ end
 #         var in_some_relation: POSetElement[Thing]
 #         var in_other_relation: POSetElement[Thing]
 #     end
-#     var t: Thing ...
+#     var t: Thing # ...
 #     t.in_some_relation.greaters
 #
 class POSetElement[E: Object]
@@ -193,39 +193,39 @@ class POSetElement[E: Object]
 	# This attribute is used to force a total order for POSet#compare
 	private var count: Int
 
-	# Return the set of all elements `t' that have an edge from `element' to `t'.
+	# Return the set of all elements `t` that have an edge from `element` to `t`.
 	# Since the POSet is reflexive, element is included in the set.
 	fun greaters: Collection[E]
 	do
 		return self.tos
 	end
 
-	# Return the set of all elements `t' that have a direct edge from `element' to `t'.
+	# Return the set of all elements `t` that have a direct edge from `element` to `t`.
 	fun direct_greaters: Collection[E]
 	do
 		return self.dtos
 	end
 
-	# Return the set of all elements `f' that have an edge from `f' to `element'.
+	# Return the set of all elements `f` that have an edge from `f` to `element`.
 	# Since the POSet is reflexive, element is included in the set.
 	fun smallers: Collection[E]
 	do
 		return self.froms
 	end
 
-	# Return the set of all elements `f' that have an edge from `f' to `element'.
+	# Return the set of all elements `f` that have an edge from `f` to `element`.
 	fun direct_smallers: Collection[E]
 	do
 		return self.dfroms
 	end
 
-	# Is there an edge from `object' to `t'?
+	# Is there an edge from `element` to `t`?
 	fun <=(t: E): Bool
 	do
 		return self.tos.has(t)
 	end
 
-	# Is `t != element' and is there an edge from `object' to `t'?
+	# Is `t != element` and is there an edge from `element` to `t`?
 	fun <(t: E): Bool
 	do
 		return t != self.element and self.tos.has(t)
