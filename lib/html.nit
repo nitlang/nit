@@ -155,23 +155,25 @@ class HTMLTag
 	# List of children HTML elements
 	var children: Set[HTMLTag] = new HashSet[HTMLTag]
 
-	# Set text of element
-	# var p = new HTMLTag("p")
-	# p.text("Hello World!")
-	# Text is escaped see: standard::String::html_escape
+	# Clear all child and set the text of element
+	#     var p = new HTMLTag("p")
+	#     p.text("Hello World!")
+	#     p.html # -> "<p>Hello World!</p>"
+	# Text is escaped see: `standard::String::html_escape`
 	fun text(txt: String): HTMLTag do
-		content.clear
-		content.append(txt)
+
+		children.clear
+		append(txt)
 		return self
 	end
-	private var content = new Buffer
 
 	# Append text to element
-	# var p = new HTMLTag("p")
-	# p.append("Hello").append("<br/>").append("World!")
+	#     var p = new HTMLTag("p")
+	#     p.append("Hello").add(new HTMLTag("br")).append("World!")
+	#     p.html # -> "<p>Hello<br/>World!</p>"
 	# Text is escaped see: standard::String::html_escape
 	fun append(txt: String): HTMLTag do
-		content.append(txt)
+		add(new HTMLRaw(txt.html_escape))
 		return self
 	end
 
@@ -239,7 +241,6 @@ class HTMLTag
 
 	private fun render_content: String do
 		var str = new Buffer
-		str.append(content.to_s.html_escape)
 		for child in children do
 			str.append(child.html)
 		end
@@ -250,6 +251,7 @@ end
 private class HTMLRaw
 	super HTMLTag
 
-	init(content: String) do self.content.append(content)
-	redef fun html do return content.to_s
+	private var content: String
+	init(content: String) do self.content = content
+	redef fun html do return content
 end
