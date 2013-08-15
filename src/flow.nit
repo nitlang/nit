@@ -187,13 +187,13 @@ private class FlowVisitor
 end
 
 # A Node in the static flow graph.
-# A same FlowContext can be shared by more than one ANode.
+# A same `FlowContext` can be shared by more than one `ANode`.
 class FlowContext
 	# The reachable previous flow
 	var previous: Array[FlowContext] = new Array[FlowContext]
 
 	# Additional reachable flow that loop up to self.
-	# Loops apears in 'loop', 'while', 'for', closure and with 'continue'
+	# Loops apears in `loop`, `while`, `for`, closure and with `continue`
 	var loops: Array[FlowContext] = new Array[FlowContext]
 
 	private var is_marked_unreachable: Bool = false

@@ -33,7 +33,7 @@ private class ModelizeClassPhase
 end
 
 redef class ModelBuilder
-	# Visit the AST and create the MClass objects
+	# Visit the AST and create the `MClass` objects
 	private fun build_a_mclass(nmodule: AModule, nclassdef: AClassdef)
 	do
 		var mmodule = nmodule.mmodule.as(not null)
@@ -96,7 +96,7 @@ redef class ModelBuilder
 		nmodule.mclass2nclassdef[mclass] = nclassdef
 	end
 
-	# Visit the AST and create the MClassDef objects
+	# Visit the AST and create the `MClassDef` objects
 	private fun build_a_mclassdef(nmodule: AModule, nclassdef: AClassdef)
 	do
 		var mmodule = nmodule.mmodule.as(not null)
@@ -154,7 +154,7 @@ redef class ModelBuilder
 		end
 	end
 
-	# Visit the AST and set the super-types of the MClassdef objects
+	# Visit the AST and set the super-types of the `MClassDef` objects
 	private fun collect_a_mclassdef_inheritance(nmodule: AModule, nclassdef: AClassdef)
 	do
 		var mmodule = nmodule.mmodule.as(not null)
@@ -201,8 +201,8 @@ redef class ModelBuilder
 		end
 	end
 
-	# Build the classes of the module `nmodule'.
-	# REQUIRE: classes of imported modules are already build. (let `phase' do the job)
+	# Build the classes of the module `nmodule`.
+	# REQUIRE: classes of imported modules are already build. (let `phase` do the job)
 	private fun build_classes(nmodule: AModule)
 	do
 		var errcount = toolcontext.error_count
@@ -337,13 +337,13 @@ redef class ModelBuilder
 	end
 
 	# Register the nclassdef associated to each mclassdef
-	# FIXME: why not refine the MClassDef class with a nullable attribute?
+	# FIXME: why not refine the `MClassDef` class with a nullable attribute?
 	var mclassdef2nclassdef: HashMap[MClassDef, AClassdef] = new HashMap[MClassDef, AClassdef]
 
-	# Return the static type associated to the node `ntype'.
-	# `classdef' is the context where the call is made (used to understand formal types)
-	# The mmodule used as context is `nclassdef.mmodule'
-	# In case of problem, an error is displayed on `ntype' and null is returned.
+	# Return the static type associated to the node `ntype`.
+	# `nclassdef` is the context where the call is made (used to understand formal types)
+	# The mmodule used as context is `nclassdef.mmodule`
+	# In case of problem, an error is displayed on `ntype` and null is returned.
 	# FIXME: the name "resolve_mtype" is awful
 	fun resolve_mtype_unchecked(nclassdef: AClassdef, ntype: AType, with_virtual: Bool): nullable MType
 	do
@@ -420,10 +420,10 @@ redef class ModelBuilder
 		return null
 	end
 
-	# Return the static type associated to the node `ntype'.
-	# `classdef' is the context where the call is made (used to understand formal types)
-	# The mmodule used as context is `nclassdef.mmodule'
-	# In case of problem, an error is displayed on `ntype' and null is returned.
+	# Return the static type associated to the node `ntype`.
+	# `nclassdef` is the context where the call is made (used to understand formal types)
+	# The mmodule used as context is `nclassdef.mmodule`
+	# In case of problem, an error is displayed on `ntype` and null is returned.
 	# FIXME: the name "resolve_mtype" is awful
 	fun resolve_mtype(nclassdef: AClassdef, ntype: AType): nullable MType
 	do
@@ -456,15 +456,15 @@ end
 redef class AModule
 	# Flag that indicate if the class building is already completed
 	var build_classes_is_done: Bool = false
-	# What is the AClassdef associated to a MClass?
+	# What is the AClassdef associated to a `MClass`?
 	# Used to check multiple definition of a class.
 	var mclass2nclassdef: Map[MClass, AClassdef] = new HashMap[MClass, AClassdef]
 end
 
 redef class AClassdef
-	# The associated MClass once build by a `ModelBuilder'
+	# The associated MClass once build by a `ModelBuilder`
 	var mclass: nullable MClass
-	# The associated MClassDef once build by a `ModelBuilder'
+	# The associated MClassDef once build by a `ModelBuilder`
 	var mclassdef: nullable MClassDef
 end
 

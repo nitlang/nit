@@ -14,14 +14,14 @@
 
 # Table layout builders
 # Tables are used to implement objects mecanisms like:
-#   * message sending
-#	* attribute accessing
-#	* typing
-#	* resolution (for generic types)
+#  * message sending
+#  * attribute accessing
+#  * typing
+#  * resolution (for generic types)
 # This module provides various layout for object tables:
-#	* coloring
-#	* binary matrix
-#	* perfect hashing (and & mod operators)
+#  * coloring
+#  * binary matrix
+#  * perfect hashing (and & mod operators)
 module layout_builders
 
 import abstract_compiler

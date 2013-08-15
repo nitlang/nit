@@ -44,7 +44,7 @@ private class NullableSends
 	var nullable_sends: Int = 0
 	var buggy_sends: Int = 0
 
-	# Get a new visitor on a classef to add type count in `typecount'.
+	# Get a new visitor on a classef to add type count in `typecount`.
 	init(modelbuilder: ModelBuilder, nclassdef: AClassdef)
 	do
 		self.modelbuilder = modelbuilder

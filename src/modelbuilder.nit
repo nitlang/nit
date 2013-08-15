@@ -107,7 +107,7 @@ class ModelBuilder
 	end
 
 	# Load a bunch of modules.
-	# `modules' can contains filenames or module names.
+	# `modules` can contains filenames or module names.
 	# Imported modules are automatically loaded and modelized.
 	# The result is the corresponding model elements.
 	# Errors and warnings are printed with the toolcontext.
@@ -137,10 +137,10 @@ class ModelBuilder
 		return mmodules
 	end
 
-	# Return a class named `name' visible by the module `mmodule'.
+	# Return a class named `name` visible by the module `mmodule`.
 	# Visibility in modules is correctly handled.
 	# If no such a class exists, then null is returned.
-	# If more than one class exists, then an error on `anode' is displayed and null is returned.
+	# If more than one class exists, then an error on `anode` is displayed and null is returned.
 	# FIXME: add a way to handle class name conflict
 	fun try_get_mclass_by_name(anode: ANode, mmodule: MModule, name: String): nullable MClass
 	do
@@ -163,11 +163,11 @@ class ModelBuilder
 		return res
 	end
 
-	# Return a property named `name' on the type `mtype' visible in the module `mmodule'.
+	# Return a property named `name` on the type `mtype` visible in the module `mmodule`.
 	# Visibility in modules is correctly handled.
 	# Protected properties are returned (it is up to the caller to check and reject protected properties).
 	# If no such a property exists, then null is returned.
-	# If more than one property exists, then an error on `anode' is displayed and null is returned.
+	# If more than one property exists, then an error on `anode` is displayed and null is returned.
 	# FIXME: add a way to handle property name conflict
 	fun try_get_mproperty_by_name2(anode: ANode, mmodule: MModule, mtype: MType, name: String): nullable MProperty
 	do
@@ -232,9 +232,9 @@ class ModelBuilder
 	var paths: Array[String] = new Array[String]
 
 	# Get a module by its short name; if required, the module is loaded, parsed and its hierarchies computed.
-	# If `mmodule' is set, then the module search starts from it up to the top level (see `paths');
-	# if `mmodule' is null then the module is searched in the top level only.
-	# If no module exists or there is a name conflict, then an error on `anode' is displayed and null is returned.
+	# If `mmodule` is set, then the module search starts from it up to the top level (see `paths`);
+	# if `mmodule` is null then the module is searched in the top level only.
+	# If no module exists or there is a name conflict, then an error on `anode` is displayed and null is returned.
 	# FIXME: add a way to handle module name conflict
 	fun get_mmodule_by_name(anode: ANode, mmodule: nullable MModule, name: String): nullable MModule
 	do
@@ -433,24 +433,24 @@ class ModelBuilder
 	var nmodules: Array[AModule] = new Array[AModule]
 
 	# Register the nmodule associated to each mmodule
-	# FIXME: why not refine the MModule class with a nullable attribute?
+	# FIXME: why not refine the `MModule` class with a nullable attribute?
 	var mmodule2nmodule: HashMap[MModule, AModule] = new HashMap[MModule, AModule]
 
 	# Helper function to display an error on a node.
-	# Alias for `self.toolcontext.error(n.hot_location, text)'
+	# Alias for `self.toolcontext.error(n.hot_location, text)`
 	fun error(n: ANode, text: String)
 	do
 		self.toolcontext.error(n.hot_location, text)
 	end
 
 	# Helper function to display a warning on a node.
-	# Alias for: `self.toolcontext.warning(n.hot_location, text)'
+	# Alias for: `self.toolcontext.warning(n.hot_location, text)`
 	fun warning(n: ANode, text: String)
 	do
 		self.toolcontext.warning(n.hot_location, text)
 	end
 
-	# Force to get the primitive method named `name' on the type `recv' or do a fatal error on `n'
+	# Force to get the primitive method named `name` on the type `recv` or do a fatal error on `n`
 	fun force_get_primitive_method(n: ANode, name: String, recv: MClass, mmodule: MModule): MMethod
 	do
 		var res = mmodule.try_get_primitive_method(name, recv)
@@ -463,7 +463,7 @@ class ModelBuilder
 end
 
 redef class AModule
-	# The associated MModule once build by a `ModelBuilder'
+	# The associated MModule once build by a `ModelBuilder`
 	var mmodule: nullable MModule
 	# Flag that indicate if the importation is already completed
 	var is_importation_done: Bool = false

@@ -35,10 +35,10 @@ end
 
 redef class ModelBuilder
 	# Register the npropdef associated to each mpropdef
-	# FIXME: why not refine the MPropDef class with a nullable attribute?
+	# FIXME: why not refine the `MPropDef` class with a nullable attribute?
 	var mpropdef2npropdef: HashMap[MPropDef, APropdef] = new HashMap[MPropDef, APropdef]
 
-	# Build the properties of `nclassdef'.
+	# Build the properties of `nclassdef`.
 	# REQUIRE: all superclasses are built.
 	private fun build_properties(nclassdef: AClassdef)
 	do
@@ -64,7 +64,7 @@ redef class ModelBuilder
 	end
 
 	# Introduce or inherit default constructor
-	# This is the last part of `build_properties'.
+	# This is the last part of `build_properties`.
 	private fun process_default_constructors(nclassdef: AClassdef)
 	do
 		var mclassdef = nclassdef.mclassdef.as(not null)
@@ -167,7 +167,7 @@ redef class AClassdef
 	# The free init (implicitely constructed by the class if required)
 	var mfree_init: nullable MMethodDef = null
 
-	# What is the APropdef associated to a MProperty?
+	# What is the `APropdef` associated to a `MProperty`?
 	# Used to check multiple definition of a property.
 	var mprop2npropdef: Map[MProperty, APropdef] = new HashMap[MProperty, APropdef]
 end
@@ -198,7 +198,7 @@ redef class APropdef
 	# The associated main model entity
 	type MPROPDEF: MPropDef
 
-	# The associated propdef once build by a `ModelBuilder'
+	# The associated propdef once build by a `ModelBuilder`
 	var mpropdef: nullable MPROPDEF writable
 
 	private fun build_property(modelbuilder: ModelBuilder, nclassdef: AClassdef) is abstract
