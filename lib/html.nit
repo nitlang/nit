@@ -155,101 +155,101 @@ class HTMLTag
 	# List of children HTML elements
 	var children: Set[HTMLTag] = new HashSet[HTMLTag]
 
-	# Set text of element
-	# var p = new HTMLTag("p")
-	# p.text("Hello World!")
-	# Text is escaped see: standard::String::html_escape
+	# Clear all child and set the text of element
+	#     var p = new HTMLTag("p")
+	#     p.text("Hello World!")
+	#     p.html # -> "<p>Hello World!</p>"
+	# Text is escaped see: `standard::String::html_escape`
 	fun text(txt: String): HTMLTag do
-		content.clear
-		content.append(txt)
+
+		children.clear
+		append(txt)
 		return self
 	end
-	private var content = new Buffer
 
 	# Append text to element
-	# var p = new HTMLTag("p")
-	# p.append("Hello").append("<br/>").append("World!")
+	#     var p = new HTMLTag("p")
+	#     p.append("Hello").add(new HTMLTag("br")).append("World!")
+	#     p.html # -> "<p>Hello<br/>World!</p>"
 	# Text is escaped see: standard::String::html_escape
 	fun append(txt: String): HTMLTag do
-		content.append(txt)
+		add(new HTMLRaw(txt.html_escape))
 		return self
 	end
 
 	# Render the element as HTML string
 	fun html: String do
-		var attrs = render_attrs
-		var content = render_content
-		var str = new Buffer
-		str.append("<{tag}")
-		str.append(attrs)
-		if tag != "script" and content.is_empty then
-			str.append("/>")
-		else
-			str.append(">")
-			str.append(content)
-			str.append("</{tag}>")
-		end
-		return str.to_s
+		var res = new Array[String]
+		render_in(res)
+		return res.to_s
 	end
 
-	private fun render_attrs: String do
-		var cls = render_classes
-		var css = render_css
-		var str = new Buffer
-		if not cls.is_empty then
-			str.append(" ")
-			str.append(render_classes)
+	# In order to avoid recursive concatenation,
+	# this function collects in `res` all the small fragments of `String`
+	private fun render_in(res: Sequence[String])
+	do
+		res.add "<"
+		res.add tag
+		render_attrs_in(res)
+		if tag != "script" and children.is_empty then
+			res.add "/>"
+		else
+			res.add ">"
+			for child in children do child.render_in(res)
+			res.add "</"
+			res.add tag
+			res.add ">"
 		end
-		if not css.is_empty then
-			str.append(" ")
-			str.append(render_css)
+	end
+
+	private fun render_attrs_in(res: Sequence[String]) do
+		if attrs.has_key("class") or not classes.is_empty then
+			res.add " class=\""
+			for cls in classes do
+				res.add cls
+				res.add " "
+			end
+			if attrs.has_key("class") then
+				res.add attrs["class"]
+				res.add " "
+			end
+			if res.last == " " then res.pop
+			res.add "\""
 		end
-		if not attrs.is_empty then str.append(" ")
-		var count = 0
+
+		if attrs.has_key("style") or not css_props.is_empty then
+			res.add " style=\""
+			for k, v in attrs do
+				res.add k
+				res.add ": "
+				res.add v
+				res.add "; "
+			end
+			if attrs.has_key("style") then
+				res.add(attrs["style"])
+			end
+			if res.last == "; " then res.pop
+			res.add "\""
+		end
+
+		if attrs.is_empty then return
+
 		for key, value in attrs do
 			if key == "class" or key == "style" then continue
-			str.append("{key}=\"{value}\"")
-			if count < attrs.length - 1 then
-				str.append(" ")
-			end
-			count += 1
+			res.add " "
+			res.add key
+			res.add "=\""
+			res.add value
+			res.add "\""
 		end
-		return str.to_s
-	end
-
-	private fun render_css: String do
-		if not attrs.has_key("style") and css_props.is_empty then return ""
-		var css = new Buffer
-		css.append("style=\"")
-		if attrs.has_key("style") then css.append("{attrs["style"]}; ")
-		css.append(css_props.join("; ", ": "))
-		css.append("\"")
-		return css.to_s
-	end
-
-	private fun render_classes: String do
-		if not attrs.has_key("class") and classes.is_empty then return ""
-		var cls = new Buffer
-		cls.append("class=\"")
-		if attrs.has_key("class") then cls.append("{attrs["class"]} ")
-		cls.append(classes.join(" "))
-		cls.append("\"")
-		return cls.to_s
-	end
-
-	private fun render_content: String do
-		var str = new Buffer
-		str.append(content.to_s.html_escape)
-		for child in children do
-			str.append(child.html)
-		end
-		return str.to_s
 	end
 end
 
 private class HTMLRaw
 	super HTMLTag
 
-	init(content: String) do self.content.append(content)
-	redef fun html do return content.to_s
+	private var content: String
+	init(content: String) do self.content = content
+	redef fun html do return content
+	redef fun render_in(res) do res.add content
 end

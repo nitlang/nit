@@ -1239,8 +1239,9 @@ class Lexer
 		return result
 	end
 
-	# Get a token, or null if it is discarded
-	private fun get_token: nullable Token
+	# Primitive method to return a token, or return null if it is discarded
+	# Is used to implement `peek` and `next`
+	protected fun get_token: nullable Token
 	do
 		var dfa_state = 0
 
