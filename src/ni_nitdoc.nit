@@ -18,6 +18,7 @@ module ni_nitdoc
 
 import model_utils
 import modelize_property
+import markdown
 
 # The NitdocContext contains all the knowledge used for doc generation
 class NitdocContext
@@ -1685,13 +1686,10 @@ redef class AModule
 	end
 
 	private fun full_comment: String do
-		var res = new Buffer
 		if n_moduledecl != null and n_moduledecl.n_doc != null then
-			for t in n_moduledecl.n_doc.n_comment do
-				res.append(t.text.substring_from(1).html_escape)
-			end
+			return n_moduledecl.n_doc.full_markdown.html
 		end
-		return res.to_s
+		return ""
 	end
 end
 
@@ -1702,11 +1700,8 @@ redef class AStdClassdef
 	end
 
 	private fun full_comment: String do
-		var res = new Buffer
-		if n_doc != null then
-			for t in n_doc.n_comment do res.append(t.text.substring_from(1).html_escape)
-		end
-		return res.to_s
+		if n_doc != null then return n_doc.full_markdown.html
+		return ""
 	end
 end
 
@@ -1717,11 +1712,8 @@ redef class APropdef
 	end
 
 	private fun full_comment: String do
-		var res = new Buffer
-		if n_doc != null then
-			for t in n_doc.n_comment do res.append(t.text.substring_from(1).html_escape)
-		end
-		return res.to_s
+		if n_doc != null then return n_doc.full_markdown.html
+		return ""
 	end
 end
 
