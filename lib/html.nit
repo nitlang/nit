@@ -177,6 +177,16 @@ class HTMLTag
 		return self
 	end
 
+	# Append raw HTML to element
+	#     var p = new HTMLTag("p")
+	#     p.append("Hello").add_raw_html("<bla/>")
+	#     p.html #- "<p>Hello<bla/></p>"
+	# Note: the HTML in insered as it, no verification is done
+	fun add_raw_html(txt: String): HTMLTag do
+		add(new HTMLRaw(txt))
+		return self
+	end
+
 	# Render the element as HTML string
 	fun html: String do
 		var res = new Array[String]
