@@ -245,7 +245,7 @@ abstract class AbstractArray[E]
 	fun swap_at(a: Int,b: Int)
 	do
 	    var e = self[a]
-	    self[a] = b
+	    self[a] = self[b]
 	    self[b] = e
 	end
 end
