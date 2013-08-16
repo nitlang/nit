@@ -197,6 +197,17 @@ class HTMLTag
 		return res.to_s
 	end
 
+	# Save html page in the specified file
+	fun save(file: String) do
+		var out = new OFStream.open(file)
+		var res = new Array[String]
+		render_in(res)
+		for r in res do
+			out.write(r)
+		end
+		out.close
+	end
+
 	# In order to avoid recursive concatenation,
 	# this function collects in `res` all the small fragments of `String`
 	private fun render_in(res: Sequence[String])
