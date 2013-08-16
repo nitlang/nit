@@ -124,7 +124,7 @@ class HTMLTag
 		classes.add(klass)
 		return self
 	end
-	private var classes: Set[String] = new HashSet[String]
+	var classes: Set[String] = new HashSet[String]
 
 	# Add multiple CSS classes
 	fun add_classes(classes: Collection[String]): HTMLTag do
