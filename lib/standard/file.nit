@@ -241,10 +241,10 @@ redef class String
 	#  * no I/O access is performed
 	#  * the validity of the path is not checked
 	#
-	#     "some/./complex/../../path/from/../to/a////file//".simplify_path	# -> "path/to/a/file"
-	#     "../dir/file".simplify_path # -> "../dir/file"
-	#     "dir/../../".simplify_path # -> ".."
-	#     "//absolute//path/".simplify_path # -> "/absolute/path"
+	#     assert "some/./complex/../../path/from/../to/a////file//".simplify_path	     ==  "path/to/a/file"
+	#     assert "../dir/file".simplify_path      ==  "../dir/file"
+	#     assert "dir/../../".simplify_path      ==  ".."
+	#     assert "//absolute//path/".simplify_path      ==  "/absolute/path"
 	fun simplify_path: String
 	do
 		var a = self.split_with("/")
@@ -266,10 +266,10 @@ redef class String
 	# Using a standard "{self}/{path}" does not work when `self` is the empty string.
 	# This method ensure that the join is valid.
 	#
-	#     "hello".join_path("world") # -> "hello/world"
-	#     "hel/lo".join_path("wor/ld") # -> "hel/lo/wor/ld"
-	#     "".join_path("world") # -> "world"
-	#     "/hello".join_path("/world") # -> "/world"
+	#     assert "hello".join_path("world")      ==  "hello/world"
+	#     assert "hel/lo".join_path("wor/ld")      ==  "hel/lo/wor/ld"
+	#     assert "".join_path("world")      ==  "world"
+	#     assert "/hello".join_path("/world")      ==  "/world"
 	#
 	# Note: you may want to use `simplify_path` on the result
 	#

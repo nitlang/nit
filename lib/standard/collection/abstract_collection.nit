@@ -203,12 +203,12 @@ end
 # Abstract sets.
 #
 # Set contains contains only one element with the same value (according to ==).
-#      var s: Set[E]
+#      var s: Set[String] = new ArraySet[String]
 #      var a = "Hello"
 #      var b = "Hel" + "lo"
 #      # ...
 #      s.add(a)
-#      s.has(b) # --> true
+#      assert s.has(b)      ==  true
 interface Set[E: Object]
 	super SimpleCollection[E]
 
@@ -271,7 +271,7 @@ interface MapRead[K: Object, E]
 	fun keys: Collection[K] is abstract
 
 	# Is there no item in the collection?
-	fun is_empty: Bool is abstract 
+	fun is_empty: Bool is abstract
 
 	# Number of items in the collection.
 	fun length: Int is abstract
@@ -281,23 +281,25 @@ end
 #
 # The main operator over maps is [].
 #
-#     var map: Map[U, V]
+#     var map: Map[String, Int] = new ArrayMap[String, Int]
 #     # ...
-#     map[u1] = v1      # Associate 'v1' to 'u1'
-#     map[u2] = v2      # Associate 'v2' to 'u2'
-#     print map[u1]     # -> v1
-#     print map[u2]     # -> v2
+#     map["one"] = 1      # Associate 'one' to '1'
+#     map["two"] = 2      # Associate 'two' to '2'
+#     assert map["one"]             ==  1
+#     assert map["two"]             ==  2
 #
 # Instances of maps can be used with the for structure
 #
-#     for key, value in map do # things with `key` and `value`
+#     for key, value in map do
+#         assert (key == "one" and value == 1) or (key == "two" and value == 2)
+#     end
 #
 # The keys and values in the map can also be manipulated directly with the `keys` and `values` methods.
 #
-#     map.keys.has(u1)   # -> true
-#     map.keys.has(u3)   # -> false
-#     map.values.has(v1) # -> true
-#     map.values.has(v3) # -> false
+#     assert map.keys.has("one")    ==  true
+#     assert map.keys.has("tree")   ==  false
+#     assert map.values.has(1)      ==  true
+#     assert map.values.has(3)      ==  false
 #
 interface Map[K: Object, E]
 	super MapRead[K, E]

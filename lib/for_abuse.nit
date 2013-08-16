@@ -140,7 +140,7 @@ redef class Array[E]
 	#
 	#     var a = [1, 3, 2]
 	#     for q in a do q.res = q.a <=> q.b
-	#     print a # => 123
+	#     assert print a      ==  123
 	#
 	# Implements a sort by permutation.
 	fun sort_fa: ForAbuser[CompareQuery[E]]
@@ -154,8 +154,8 @@ end
 # Open and read a file trough a `for` abuse.
 # The abuse just ensures that the file is closed after the reading.
 #
-#     for f in file_open(path) do
-#       print path.read_line
+#     for f in file_open("/etc/issue") do
+#       print f.read_line
 #     end # f is automatically closed here
 fun file_open(path: String): ForAbuser[IFStream]
 do

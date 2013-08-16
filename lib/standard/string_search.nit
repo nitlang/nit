@@ -295,12 +295,12 @@ redef class String
 	#     for i in "hello world".search_all('o') do
 	#         a.add(i.from)
 	#     end
-	#     a    # -> [4, 7]
+	#     assert a         ==  [4, 7]
 	fun search_all(p: Pattern): Array[Match] do return p.search_all_in(self)
 
 	# Split `self` using `p` as separator.
 	#
-	#     "hello world".split('o')     # -> ["hell", " w", "rld"]
+	#     assert "hello world".split('o')          ==  ["hell", " w", "rld"]
 	fun split(p: Pattern): Array[String]
 	do
 		var matches = p.split_in(self)
@@ -314,8 +314,8 @@ redef class String
 
 	# Replace all occurences of a pattern with a string
 	#
-	#     "hlelo".replace("le", "el")	# -> "hello"
-	#     "hello".replace('l', "")	# -> "heo"
+	#     assert "hlelo".replace("le", "el")	     ==  "hello"
+	#     assert "hello".replace('l', "")	     ==  "heo"
 	fun replace(p: Pattern, string: String): String
 	do
 		return self.split_with(p).join(string)
@@ -323,7 +323,7 @@ redef class String
 
 	# Escape the four characters < > & and " with their html counterpart
 	#
-	#     "a&b->\"x\"".html_escape # -> "a&amp;b-&gt;&quot;x&quot;"
+	#     assert "a&b->\"x\"".html_escape      ==  "a&amp;b-&gt;&quot;x&quot;"
 	fun html_escape: String
 	do
 		var ret = self

@@ -158,7 +158,7 @@ class HTMLTag
 	# Clear all child and set the text of element
 	#     var p = new HTMLTag("p")
 	#     p.text("Hello World!")
-	#     p.html # -> "<p>Hello World!</p>"
+	#     assert p.html      ==  "<p>Hello World!</p>"
 	# Text is escaped see: `standard::String::html_escape`
 	fun text(txt: String): HTMLTag do
 
@@ -169,8 +169,10 @@ class HTMLTag
 
 	# Append text to element
 	#     var p = new HTMLTag("p")
-	#     p.append("Hello").add(new HTMLTag("br")).append("World!")
-	#     p.html # -> "<p>Hello<br/>World!</p>"
+	#     p.append("Hello")
+	#     p.add(new HTMLTag("br"))
+	#     p.append("World!")
+	#     assert p.html      ==  "<p>Hello<br/>World!</p>"
 	# Text is escaped see: standard::String::html_escape
 	fun append(txt: String): HTMLTag do
 		add(new HTMLRaw(txt.html_escape))
@@ -179,7 +181,8 @@ class HTMLTag
 
 	# Append raw HTML to element
 	#     var p = new HTMLTag("p")
-	#     p.append("Hello").add_raw_html("<bla/>")
+	#     p.append("Hello")
+	#     p.add_raw_html("<bla/>")
 	#     p.html #- "<p>Hello<bla/></p>"
 	# Note: the HTML in insered as it, no verification is done
 	fun add_raw_html(txt: String): HTMLTag do

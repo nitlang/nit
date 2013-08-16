@@ -97,7 +97,7 @@ abstract class AbstractArrayRead[E]
 
 	# Return a new array that is the reverse of `self`
 	#
-	#     [1,2,3].reversed # -> [3, 2, 1]
+	#     assert [1,2,3].reversed      ==  [3, 2, 1]
 	fun reversed: Array[E]
 	do
 		var cmp = _length
@@ -114,7 +114,7 @@ abstract class AbstractArrayRead[E]
 	#     var a = [1, 2, 3, 4]
 	#     var b = [10, 20, 30, 40, 50]
 	#     a.copy_to(1, 2, b, 2)
-	#     b # -> [10, 20, 2, 3, 50]
+	#     assert b      ==  [10, 20, 2, 3, 50]
 	protected fun copy_to(start: Int, len: Int, dest: AbstractArray[E], new_start: Int)
 	do
 		# TODO native one
@@ -201,7 +201,7 @@ abstract class AbstractArray[E]
 	#
 	#     var a= [10, 20, 30, 40]
 	#     a.insert(100, 2)
-	#     a # -> [10, 20, 100, 30, 40]
+	#     assert a      ==  [10, 20, 100, 30, 40]
 	fun insert(item: E, pos: Int)
 	do
 		enlarge(length + 1)
@@ -241,7 +241,7 @@ abstract class AbstractArray[E]
 	#
 	#     var a = [10, 20, 30, 40]
 	#     a.swap_at(1, 3)
-	#     a # -> [10, 40, 30, 20]
+	#     assert a      ==  [10, 40, 30, 20]
 	fun swap_at(a: Int,b: Int)
 	do
 	    var e = self[a]
@@ -253,12 +253,13 @@ end
 # Resizable one dimension array of objects.
 #
 # Arrays have a literal representation.
-#     a = [12, 32, 8]
-# is equivalent with:
-#     a = new Array[Int]
-#     a.push(12)
-#     a.push(32)
-#     a.push(8)
+#     var a = [12, 32, 8]
+#     # is equivalent with:
+#     var b = new Array[Int]
+#     b.push(12)
+#     b.push(32)
+#     b.push(8)
+#     assert a == b
 class Array[E]
 	super AbstractArray[E]
 	super ArrayCapable[E]
