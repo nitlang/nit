@@ -113,10 +113,10 @@ redef class String
 	#
 	# Example:
 	#     var s = "\\n"
-	#     print s.length # -> 2
+	#     assert s.length        ==  2
 	#     var u = s.unescape_nit
-	#     print s.length # -> 1
-	#     print s[0].ascii # -> 10 (the ASCII value of the "new line" character)
+	#     assert u.length        ==  1
+	#     assert u[0].ascii      ==  10 # (the ASCII value of the "new line" character)
 	fun unescape_nit: String
 	do
 		var res = new Buffer.with_capacity(self.length)
