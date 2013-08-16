@@ -398,6 +398,23 @@ article .info .code {
 	margin: 0;
 }
 
+.content .nitdoc {
+	background: #F7F7F7;
+	padding: 5px;
+	color: black;
+	overflow: auto;
+}
+
+.content .nitdoc pre {
+	background: #EEE;
+	border-radius: 8px;
+}
+
+.content .nitdoc code {
+	background: #DDD;
+	padding: 0 1px;
+	border-radius: 5px;
+
 /* JS facilities */
 
 input[type=text] {

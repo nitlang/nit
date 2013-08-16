@@ -160,8 +160,8 @@ interface Discrete
 
 	# The distance between self and d.
 	#
-	#     10.distance(15)	# --> 5
-	#     'Z'.distance('A')	# --> 25
+	#     assert 10.distance(15)	     ==  5
+	#     assert 'Z'.distance('A')	     ==  25
 	fun distance(d: OTHER): Int
 	do
 		var cursor: OTHER

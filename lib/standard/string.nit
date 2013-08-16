@@ -31,14 +31,19 @@ abstract class AbstractString
 
 	readable private var _items: NativeString
 
+	# Access a character at `index` in the string.
 	redef fun [](index) do return _items[index]
 
 	# Create a substring.
 	#
-	#     "abcd".substring(1, 2) 	# --> "bc"
-	#     "abcd".substring(-1, 2)	# --> "a"
-	#     "abcd".substring(1, 0)     # --> ""
-	#     "abcd".substring(2, 5)     # --> "cd"
+	#     assert "abcd".substring(1, 2)         ==  "bc"
+	#     assert "abcd".substring(-1, )         ==  "a"
+	#     assert "abcd".substring(1, 0)         ==  ""
+	#     assert "abcd".substring(2, 5)         ==  "cd"
+	#
+	# A `from` index < 0 will be replaced by 0.
+	# Unless a `count` value is > 0 at the same time.
+	# In this case, `from += count` and `count -= from`.
 	fun substring(from: Int, count: Int): String
 	do
 		assert count >= 0
@@ -59,9 +64,11 @@ abstract class AbstractString
 
 	# Create a substring from `self` beginning at the `from` position
 	#
-	#     "abcd".substring_from(1)	# --> "bcd"
-	#     "abcd".substring_from(-1)	# --> "abcd"
-	#     "abcd".substring_from(2)     # --> "cd"
+	#     assert "abcd".substring_from(1)	     ==  "bcd"
+	#     assert "abcd".substring_from(-1)	     ==  "abcd"
+	#     assert "abcd".substring_from(2)       ==  "cd"
+	#
+	# As with substring, a `from` index < 0 will be replaced by 0
 	fun substring_from(from: Int): String
 	do
 		assert from < length
@@ -70,8 +77,8 @@ abstract class AbstractString
 
 	# Does self have a substring `str` starting from position `pos`?
 	#
-	#     "abcd".has_substring("bc",1)	# --> true
-	#     "abcd".has_substring("bc",2)	# --> false
+	#     assert "abcd".has_substring("bc",1)	     ==  true
+	#     assert "abcd".has_substring("bc",2)	     ==  false
 	fun has_substring(str: String, pos: Int): Bool
 	do
 		var itsindex = str.length - 1
@@ -91,14 +98,14 @@ abstract class AbstractString
 
 	# Is this string prefixed by `prefix`?
 	#
-	#     "abc".has_prefix("abcd")	# --> true
-	#     "bc".has_prefix("abcd")	# --> false
+	#     assert "abcd".has_prefix("ab")	     ==  true
+	#     assert "abcbc".has_prefix("bc")	     ==  false
 	fun has_prefix(prefix: String): Bool do return has_substring(prefix,0)
 
 	# Is this string suffixed by `suffix`?
 	#
-	#     "abcd".has_suffix("abc")	# --> false
-	#     "abcd".has_suffix("bcd")	# --> true
+	#     assert "abcd".has_suffix("abc")	     ==  false
+	#     assert "abcd".has_suffix("bcd")	     ==  true
 	fun has_suffix(suffix: String): Bool do return has_substring(suffix, length - suffix.length)
 
 	# If `self` contains only digits, return the corresponding integer
@@ -229,8 +236,6 @@ class String
 	#       AbstractString specific methods        #
 	################################################
 
-	# Access a character at index in String
-	#
 	redef fun [](index) do
 		assert index >= 0
 		# Check that the index (+ index_from) is not larger than indexTo
@@ -239,17 +244,6 @@ class String
 		return _items[index + _index_from]
 	end
 
-	# Create a substring.
-	#
-	#     "abcd".substring(1, 2)	# --> "bc"
-	#     "abcd".substring(-1, 2)	# --> "a"
-	#     "abcd".substring(1, 0)    # --> ""
-	#     "abcd".substring(2, 5)    # --> "cd"
-	#
-	# A `from` index < 0 will be replaced by 0
-	# Unless a `count` value is > 0 at the same time
-	# In this case, `from += count` and `count -= from`
-	#
 	redef fun substring(from: Int, count: Int): String
 	do
 		assert count >= 0
@@ -269,14 +263,6 @@ class String
 		return new String.from_substring(realFrom, realFrom + count - 1, _items)
 	end
 
-	# Create a substring from `self` beginning at the `from` position
-	#
-	#     "abcd".substring_from(1)	# --> "bcd"
-	#     "abcd".substring_from(-1)	# --> "abcd"
-	#     "abcd".substring_from(2)  # --> "cd"
-	#
-	# As with substring, a "from" index < 0 will be replaced by 0
-	#
 	redef fun substring_from(from: Int): String
 	do
 		if from > _length then return ""
@@ -284,10 +270,6 @@ class String
 		return substring(from, _length)
 	end
 
-	# Does self have a substring `str` starting from position 'pos
-	#
-	#     "abcd".has_substring("bc",1)	# --> true
-	#     "abcd".has_substring("bc",2)	# --> false
 	redef fun has_substring(str: String, pos: Int): Bool
 	do
 		var itsindex = str._length - 1
@@ -312,7 +294,6 @@ class String
 		return true
 	end
 
-	# A upper case version of `self`
 	redef fun to_upper: String
 	do
 		var outstr = calloc_string(self._length + 1)
@@ -333,7 +314,6 @@ class String
 		return new String.with_native(outstr, self._length)
 	end
 
-	# A lower case version of `self`
 	redef fun to_lower : String
 	do
 		var outstr = calloc_string(self._length + 1)
@@ -473,7 +453,7 @@ class String
 
 	# The comparison between two strings is done on a lexicographical basis
 	#
-	#     "aa" < "b" # => true
+	#     assert "aa" < "b"      ==  true
 	redef fun <(other)
 	do
 		if self.object_id == other.object_id then return false

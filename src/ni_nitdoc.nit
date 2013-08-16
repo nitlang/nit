@@ -18,6 +18,7 @@ module ni_nitdoc
 
 import model_utils
 import modelize_property
+import markdown
 
 # The NitdocContext contains all the knowledge used for doc generation
 class NitdocContext
@@ -616,7 +617,7 @@ class NitdocModule
 		# comment
 		var nmodule = ctx.mbuilder.mmodule2nmodule[mmodule]
 		append("<section class='description'>")
-		if not nmodule.full_comment.is_empty then append("<pre>{nmodule.full_comment}</pre>")
+		if not nmodule.full_comment.is_empty then append("<div>{nmodule.full_comment}</div>")
 		process_generate_dot
 		append("</section>")
 		# classes
@@ -907,7 +908,7 @@ class NitdocClass
 		# comment
 		var nclass = ctx.mbuilder.mclassdef2nclassdef[mclass.intro]
 		append("<section class='description'>")
-		if nclass isa AStdClassdef and not nclass.full_comment.is_empty then append("<pre>{nclass.full_comment}</pre>")
+		if nclass isa AStdClassdef and not nclass.full_comment.is_empty then append("<div>{nclass.full_comment}</div>")
 		process_generate_dot
 		append("</section>")
 		# concerns
@@ -1198,7 +1199,7 @@ redef class MModule
 	fun html_full_comment(page: NitdocPage) do
 		if page.ctx.mbuilder.mmodule2nmodule.has_key(self) then
 			page.append("<div id='description'>")
-			page.append("<pre>{page.ctx.mbuilder.mmodule2nmodule[self].full_comment}</pre>")
+			page.append("<div>{page.ctx.mbuilder.mmodule2nmodule[self].full_comment}</div>")
 			page.append("</div>")
 		end
 	end
@@ -1380,7 +1381,7 @@ redef class MClass
 						page.append("<p class='info inheritance'>")
 						page.append("<span class=\"noComment\">no comment for </span>")
 					else
-						page.append("<pre>{nclass.full_comment}</pre>")
+						page.append("<div>{nclass.full_comment}</div>")
 						page.append("<p class='info inheritance'>")
 					end
 					if mclassdef.is_intro then
@@ -1538,7 +1539,7 @@ redef class MPropDef
 					page.append("<p class='info inheritance'>")
 					page.append("<span class=\"noComment\">no comment for </span>")
 				else
-					page.append("<pre>{intro_nprop.full_comment}</pre>")
+					page.append("<div>{intro_nprop.full_comment}</div>")
 					page.append("<p class='info inheritance'>")
 				end
 				page.append("introduction in ")
@@ -1552,7 +1553,7 @@ redef class MPropDef
 				page.append("<p class='info inheritance'>")
 				page.append("<span class=\"noComment\">no comment for </span>")
 			else
-				page.append("<pre>{nprop.full_comment}</pre>")
+				page.append("<div>{nprop.full_comment}</div>")
 				page.append("<p class='info inheritance'>")
 			end
 			if is_intro then
@@ -1685,13 +1686,10 @@ redef class AModule
 	end
 
 	private fun full_comment: String do
-		var res = new Buffer
 		if n_moduledecl != null and n_moduledecl.n_doc != null then
-			for t in n_moduledecl.n_doc.n_comment do
-				res.append(t.text.substring_from(1).html_escape)
-			end
+			return n_moduledecl.n_doc.full_markdown.html
 		end
-		return res.to_s
+		return ""
 	end
 end
 
@@ -1702,11 +1700,8 @@ redef class AStdClassdef
 	end
 
 	private fun full_comment: String do
-		var res = new Buffer
-		if n_doc != null then
-			for t in n_doc.n_comment do res.append(t.text.substring_from(1).html_escape)
-		end
-		return res.to_s
+		if n_doc != null then return n_doc.full_markdown.html
+		return ""
 	end
 end
 
@@ -1717,11 +1712,8 @@ redef class APropdef
 	end
 
 	private fun full_comment: String do
-		var res = new Buffer
-		if n_doc != null then
-			for t in n_doc.n_comment do res.append(t.text.substring_from(1).html_escape)
-		end
-		return res.to_s
+		if n_doc != null then return n_doc.full_markdown.html
+		return ""
 	end
 end
 
