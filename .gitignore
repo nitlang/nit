@@ -3,6 +3,7 @@
 EIFGENs
 
 .nit_compile*
+.nitunit
 *.orig
 bin/nit*
 doc/stdlib
