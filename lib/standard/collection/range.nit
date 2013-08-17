@@ -29,7 +29,7 @@ class Range[E: Discrete]
 
 	redef fun has(item) do return item >= _first and item <= _last
 
-	redef fun has_only(item) do return _first == item and item == _last
+	redef fun has_only(item) do return _first == item and item == _last or is_empty
 
 	redef fun count(item)
 	do
