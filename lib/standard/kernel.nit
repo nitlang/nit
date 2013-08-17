@@ -216,8 +216,14 @@ universal Float
 	fun -(i: Float): Float is intern
 	fun *(i: Float): Float is intern
 	fun /(i: Float): Float is intern
-	
+
 	# The integer part of `self`.
+	#
+	#     assert (0.0).to_i      == 0
+	#     assert (0.9).to_i      == 0
+	#     assert (-0.9).to_i     == 0
+	#     assert (9.9).to_i      == 9
+	#     assert (-9.9).to_i     == -9
 	fun to_i: Int is intern
 end
 
@@ -241,11 +247,22 @@ universal Int
 	redef fun -(i) is intern
 	fun *(i: Int): Int is intern
 	fun /(i: Int): Int is intern
-	fun %(i: Int): Int is intern   
+	fun %(i: Int): Int is intern
+
+	# `i` bits shift fo the left (aka <<)
+	#
+	#     assert 5.lshift(1)    == 10
 	fun lshift(i: Int): Int is intern
-	fun rshift(i: Int): Int is intern   
+
+	# `i` bits shift fo the right (aka >>)
+	#
+	#     assert 5.rshift(1)    == 2
+	fun rshift(i: Int): Int is intern
 
 	# The float equivalent of `self`
+	#
+	#     assert 5.to_f         == 5.0
+	#     assert 5.to_f         != 5 # Float and Int are not equals
 	fun to_f: Float is intern
 
 	redef fun succ is intern
@@ -259,7 +276,7 @@ universal Int
 			return -d
 		end
 	end
-	
+
 	redef fun <=>(other)
 	do
 		if self < other then
@@ -299,9 +316,15 @@ universal Int
 	end
 
 	# The character whose ASCII value is `self`.
+	#
+	#      assert 65.ascii   == 'A'
+	#      assert 10.ascii   == '\n'
 	fun ascii: Char is intern
 
 	# Number of digits of an integer in base `b` (plus one if negative)
+	#
+	#     assert 123.digit_count(10) == 3
+	#     assert 123.digit_count(2) == 7 # 1111011 in binary
 	fun digit_count(b: Int): Int
 	do
 		if b == 10 then return digit_count_base_10
@@ -349,7 +372,9 @@ universal Int
 
 	# Return the corresponding digit character
 	# If 0 <= `self` <= 9, return the corresponding character.
+	#     assert 5.to_c    == '5'
 	# If 10 <= `self` <= 36, return the corresponding letter [a..z].
+	#     assert 15.to_c   == 'f'
 	fun to_c: Char
 	do
 		assert self >= 0 and self <= 36 # TODO plan for this
@@ -383,6 +408,10 @@ universal Int
 	end
 
 	# The absolute value of self
+	#
+	#     assert (-10).abs   == 10
+	#     assert 10.abs    == 10
+	#     assert 0.abs     == 0
 	fun abs: Int
 	do
 	    if self >= 0
@@ -425,6 +454,8 @@ universal Char
 	end
 
 	# If `self` is a digit then return this digit else return -1.
+	#
+	#     assert '5'.to_i    == 5
 	fun to_i: Int
 	do
 
@@ -438,6 +469,9 @@ universal Char
 	end
 
 	# the ascii value of self
+	#
+	#     assert 'a'.ascii    == 97
+	#     assert '\n'.ascii   == 10
 	fun ascii: Int is intern
 
 	redef fun +(i) is intern
@@ -445,6 +479,10 @@ universal Char
 
 	# Return the lower case version of self.
 	# If self is not a letter, then return self
+	#
+	#     assert 'A'.to_lower  == 'a'
+	#     assert 'a'.to_lower  == 'a'
+	#     assert '$'.to_lower  == '$'
 	fun to_lower: Char
 	do
 		if is_upper then
@@ -456,6 +494,10 @@ universal Char
 
 	# Return the upper case version of self.
 	# If self is not a letter, then return self
+	#
+	#     assert 'a'.to_upper  == 'A'
+	#     assert 'A'.to_upper  == 'A'
+	#     assert '$'.to_upper  == '$'
 	fun to_upper: Char
 	do
 		if is_lower then
@@ -464,26 +506,45 @@ universal Char
 			return self
 		end
 	end
-	
+
 	# Is self a digit? (from '0' to '9')
+	#
+	#     assert '0'.is_digit   == true
+	#     assert '9'.is_digit   == true
+	#     assert 'a'.is_digit   == false
 	fun is_digit : Bool
 	do
 		return self >= '0' and self <= '9'
 	end
-	
+
 	# Is self a lower case letter? (from 'a' to 'z')
+	#
+	#     assert 'a'.is_lower   == true
+	#     assert 'z'.is_lower   == true
+	#     assert 'A'.is_lower   == false
+	#     assert '$'.is_lower   == false
 	fun is_lower : Bool
 	do
 		return self >= 'a' and self <= 'z'
 	end
-	
+
 	# Is self a upper case letter? (from 'A' to 'Z')
+	#
+	#     assert 'A'.is_upper   == true
+	#     assert 'A'.is_upper   == true
+	#     assert 'z'.is_upper   == false
+	#     assert '$'.is_upper   == false
 	fun is_upper : Bool
 	do
 		return self >= 'A' and self <= 'Z'
 	end
-	
+
 	# Is self a letter? (from 'A' to 'Z' and 'a' to 'z')
+	#
+	#     assert 'A'.is_letter  == true
+	#     assert 'A'.is_letter  == true
+	#     assert 'z'.is_letter  == true
+	#     assert '$'.is_letter  == false
 	fun is_letter : Bool
 	do
 		return is_lower or is_upper
