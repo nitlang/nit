@@ -149,8 +149,7 @@ private class Doc2Mdwn
 				# Code part
 				var n2 = new HTMLTag("code")
 				n.add(n2)
-
-				n2.text part
+				process_code(n2, part)
 			end
 			is_text = not is_text
 		end
@@ -163,11 +162,14 @@ private class Doc2Mdwn
 			var n = new HTMLTag("pre")
 			root.add(n)
 			var btext = curblock.to_s
-
-			n.append btext
-
+			process_code(n, btext)
 			curblock.clear
 		end
+	end
+
+	fun process_code(n: HTMLTag, text: String)
+	do
+		n.append text
 	end
 end
 
