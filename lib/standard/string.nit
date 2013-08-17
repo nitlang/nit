@@ -32,6 +32,8 @@ abstract class AbstractString
 	readable private var _items: NativeString
 
 	# Access a character at `index` in the string.
+	#
+	#     assert "abcd"[2]         == 'c'
 	redef fun [](index) do return _items[index]
 
 	# Create a substring.
@@ -109,6 +111,9 @@ abstract class AbstractString
 	fun has_suffix(suffix: String): Bool do return has_substring(suffix, length - suffix.length)
 
 	# If `self` contains only digits, return the corresponding integer
+	#
+	#     assert "123".to_i        == 123
+	#     assert "-1".to_i         == -1
 	fun to_i: Int
 	do
 		# Shortcut
@@ -116,6 +121,10 @@ abstract class AbstractString
 	end
 
 	# If `self` contains a float, return the corresponding float
+	#
+	#     assert "123".to_f        == 123.0
+	#     assert "-1".to_f         == -1.0
+	#     assert "-1.2e-3".to_f    == -1.2e-3
 	fun to_f: Float
 	do
 		# Shortcut
@@ -126,6 +135,8 @@ abstract class AbstractString
 	fun to_hex: Int do return a_to(16)
 
 	# If `self` contains only digits and letters, return the corresponding integer in a given base
+	#
+	#     assert "120".a_to(3)     == 15
 	fun a_to(base: Int) : Int
 	do
 		var i = 0
@@ -154,6 +165,11 @@ abstract class AbstractString
 	end
 
 	# Returns `true` if the string contains only Numeric values (and one "," or one "." character)
+	#
+	#     assert "123".is_numeric  == true
+	#     assert "1.2".is_numeric  == true
+	#     assert "1,2".is_numeric  == true
+	#     assert "1..2".is_numeric == false
 	fun is_numeric: Bool
 	do
 		var has_point_or_comma = false
@@ -173,6 +189,8 @@ abstract class AbstractString
 	end
 
 	# A upper case version of `self`
+	#
+	#     assert "Hello World!".to_upper     == "HELLO WORLD!"
 	fun to_upper: String
 	do
 		var s = new Buffer.with_capacity(length)
@@ -181,6 +199,8 @@ abstract class AbstractString
 	end
 
 	# A lower case version of `self`
+	#
+	#     assert "Hello World!".to_lower     == "hello world!"
 	fun to_lower : String
 	do
 		var s = new Buffer.with_capacity(length)
@@ -190,6 +210,9 @@ abstract class AbstractString
 
 	# Trims trailing and preceding white spaces
 	# A whitespace is defined as any character which ascii value is less than or equal to 32
+	#
+	#     assert "  Hello  World !  ".trim   == "Hello  World !"
+	#     assert "\na\nb\tc\t".trim          == "a\nb\tc"
 	fun trim: String
 	do
 		if self._length == 0 then return self.to_s
@@ -489,6 +512,8 @@ class String
 	end
 
 	# The concatenation of `self` with `s`
+	#
+	#     assert "hello " + "world!"         == "hello world!"
 	fun +(s: String): String
 	do
 		var my_length = self._length
@@ -505,6 +530,10 @@ class String
 	end
 
 	# `i` repetitions of `self`
+	#
+	#     assert "abc"*3           == "abcabcabc"
+	#     assert "abc"*1           == "abc"
+	#     assert "abc"*0           == ""
 	fun *(i: Int): String
 	do
 		assert i >= 0
@@ -688,6 +717,8 @@ redef class Object
 	private fun native_class_name: NativeString is intern
 
 	# The class name of the object.
+	#
+	#    assert 5.class_name == "Int"
 	fun class_name: String do return new String.from_cstring(native_class_name)
 
 	# Developer readable representation of `self`.
@@ -711,6 +742,8 @@ redef class Object
 end
 
 redef class Bool
+	#     assert true.to_s         == "true"
+	#     assert false.to_s        == "false"
 	redef fun to_s
 	do 
 		if self then 
@@ -750,6 +783,9 @@ redef class Int
 	private fun native_int_to_s(len: Int): NativeString is extern "native_int_to_s"
 
 	# return displayable int in base 10 and signed
+	#
+	#     assert 1.to_s            == "1"
+	#     assert (-123).to_s       == "-123"
 	redef fun to_s do
 		var len = digit_count(10)
 		return new String.from_cstring(native_int_to_s(len))
@@ -769,7 +805,7 @@ redef class Int
 end
 
 redef class Float
-	# Pretty print self, print needed decimals up to a max of 6.
+	# Pretty print self, print needoed decimals up to a max of 3.
 	redef fun to_s do
 		var str = to_precision( 3 )
 		var len = str.length
@@ -824,6 +860,7 @@ redef class Float
 end
 
 redef class Char
+	#     assert 'x'.to_s    == "x"
 	redef fun to_s
 	do
 		var s = new Buffer.with_capacity(1)
@@ -866,6 +903,9 @@ redef class Collection[E]
 	end
 
 	# Concatenate and separate each elements with `sep`.
+	#
+	#     assert [1, 2, 3].join(":")         == "1:2:3"
+	#     assert [1..3].join(":")            == "1:2:3"
 	fun join(sep: String): String
 	do
 		if is_empty then return ""
@@ -909,6 +949,11 @@ redef class Map[K,V]
 	# Concatenate couple of 'key value'.
 	# key and value are separated by `couple_sep`.
 	# each couple is separated each couple with `sep`.
+	#
+	#     var m = new ArrayMap[Int, String]
+	#     m[1] = "one"
+	#     m[10] = "ten"
+	#     assert m.join("; ", "=") == "1=one; 10=ten"
 	fun join(sep: String, couple_sep: String): String
 	do
 		if is_empty then return ""

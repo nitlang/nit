@@ -54,25 +54,48 @@ interface Collection[E]
 	end
 
 	# Is there no item in the collection?
+	#
+	#     assert [1,2,3].is_empty  == false
+	#     assert [1..1[.is_empty   == true
 	fun is_empty: Bool is abstract 
 
 	# Number of items in the collection.
+	#
+	#     assert [10,20,30].length == 3
+	#     assert [20..30[.length   == 10
 	fun length: Int is abstract
 
 	# Is `item` in the collection ?
 	# Comparisons are done with ==
+	#
+	#     assert [1,2,3].has(2)    == true
+	#     assert [1,2,3].has(9)    == false
+	#     assert [1..5[.has(2)     == true
+	#     assert [1..5[.has(9)     == false
 	fun has(item: E): Bool is abstract
 
 	# Is the collection contain only `item`?
 	# Comparisons are done with ==
 	# Return true if the collection is empty.
+	#
+	#     assert [1,1,1].has_only(1)         == true
+	#     assert [1,2,3].has_only(1)         == false
+	#     assert [1..1].has_only(1)          == true
+	#     assert [1..3].has_only(1)          == false
+	#     assert [3..3[.has_only(1)          == true # empty collection
+	#
+	# ENSURE `is_empty implies (return) == true`
 	fun has_only(item: E): Bool is abstract
 
 	# How many occurrences of `item` are in the collection?
 	# Comparisons are done with ==
+	#
+	#    assert [10,20,10].count(10)         == 2
 	fun count(item: E): Int is abstract
 
 	# Return one the item of the collection
+	#
+	#    assert [1,2,3].first                == 1
 	fun first: E is abstract
 end
 

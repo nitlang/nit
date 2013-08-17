@@ -16,7 +16,7 @@
 
 NITCOPT=
 
-all: ../bin/nitc ../bin/nitdoc ../bin/nits ../bin/nitmetrics ../bin/nitg ../bin/nit ../bin/nitx ../bin/netdbg ../bin/dbgcli ../bin/nitdox
+all: ../bin/nitc ../bin/nitdoc ../bin/nits ../bin/nitmetrics ../bin/nitg ../bin/nit ../bin/nitx ../bin/netdbg ../bin/dbgcli ../bin/nitdox ../bin/nitunit
 
 ../bin/nitc: ../c_src/nitc parser/parser.nit
 	@echo '***************************************************************'
@@ -87,6 +87,13 @@ all: ../bin/nitc ../bin/nitdoc ../bin/nits ../bin/nitmetrics ../bin/nitg ../bin/
 	@echo '***************************************************************'
 	./git-gen-version.sh
 	../bin/nitc ${NITCOPT} -o ../bin/dbgcli -O -v dbgcli.nit
+
+../bin/nitunit : ../bin/nitg
+	@echo '***************************************************************'
+	@echo '* Compile nitunit from NIT source files                       *'
+	@echo '***************************************************************'
+	./git-gen-version.sh
+	../bin/nitg ${NITCOPT} -o ../bin/nitunit -v nitunit.nit
 
 ../c_src/nitc: ../c_src/*.c ../c_src/*.h ../c_src/nitc._build.sh ../c_src/Makefile
 	@echo '***************************************************************'
