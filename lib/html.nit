@@ -230,11 +230,11 @@ class HTMLTag
 		if attrs.has_key("class") or not classes.is_empty then
 			res.add " class=\""
 			for cls in classes do
-				res.add cls
+				res.add cls.html_escape
 				res.add " "
 			end
 			if attrs.has_key("class") then
-				res.add attrs["class"]
+				res.add attrs["class"].html_escape
 				res.add " "
 			end
 			if res.last == " " then res.pop
@@ -244,13 +244,13 @@ class HTMLTag
 		if attrs.has_key("style") or not css_props.is_empty then
 			res.add " style=\""
 			for k, v in attrs do
-				res.add k
+				res.add k.html_escape
 				res.add ": "
-				res.add v
+				res.add v.html_escape
 				res.add "; "
 			end
 			if attrs.has_key("style") then
-				res.add(attrs["style"])
+				res.add(attrs["style"].html_escape)
 			end
 			if res.last == "; " then res.pop
 			res.add "\""
@@ -261,9 +261,9 @@ class HTMLTag
 		for key, value in attrs do
 			if key == "class" or key == "style" then continue
 			res.add " "
-			res.add key
+			res.add key.html_escape
 			res.add "=\""
-			res.add value
+			res.add value.html_escape
 			res.add "\""
 		end
 	end
