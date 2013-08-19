@@ -324,12 +324,18 @@ redef class ASignature
 		var mparameters = new Array[MParameter]
 		for i in [0..param_names.length[ do
 			var mparameter = new MParameter(param_names[i], param_types[i], i == vararg_rank)
+			self.n_params[i].mparameter = mparameter
 			mparameters.add(mparameter)
 		end
 
 		var msignature = new MSignature(mparameters, ret_type)
 		return msignature
 	end
+end
+
+redef class AParam
+	# The associated mparameter if any
+	var mparameter: nullable MParameter = null
 end
 
 redef class AMethPropdef
@@ -471,6 +477,7 @@ redef class AMethPropdef
 		var mparameters = new Array[MParameter]
 		for i in [0..param_names.length[ do
 			var mparameter = new MParameter(param_names[i], param_types[i], i == vararg_rank)
+			if nsig != null then nsig.n_params[i].mparameter = mparameter
 			mparameters.add(mparameter)
 		end
 
