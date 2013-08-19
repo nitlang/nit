@@ -94,9 +94,9 @@ class NitdocContext
 		else
 			var dir = "NIT_DIR".environ
 			if dir.is_empty then
-				dir = "{sys.program_name.dirname}/../share/nitdoc"
+				dir = "{sys.program_name.dirname}/../share/ni_nitdoc"
 			else
-				dir = "{dir}/share/nitdoc"
+				dir = "{dir}/share/ni_nitdoc"
 			end
 			share_dir = dir
 			if share_dir is null then
@@ -210,6 +210,7 @@ abstract class NitdocPage
 		append("<script type='text/javascript' src='scripts/github.js'></script>")
 		append("<script type='text/javascript' src='scripts/js-facilities.js'></script>")
 		append("<link rel='stylesheet' href='styles/main.css' type='text/css' media='screen'/>")
+		append("<link rel='stylesheet' href='styles/github.css' type='text/css' media='screen'/>")
 		var title = ""
 		if ctx.opt_custom_title.value != null then
 			title = " | {ctx.opt_custom_title.value.to_s}"
