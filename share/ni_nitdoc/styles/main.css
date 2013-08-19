@@ -1,0 +1,533 @@
+/* General */
+
+body {
+	margin: 0;
+	font: 14px "Helvetica Neue", Helvetica, Tahoma, sans-serif;
+}
+
+a {
+	color: #333;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #0D8921;
+}
+
+ul {
+	list-style-type: square;
+}
+
+pre, code {
+	white-space: pre;
+	font-family: monospace;
+	font-size: 1em;
+}
+
+pre {
+	background: #EEE;
+	padding: 5px;
+	color: black;
+	overflow: auto;
+	padding-left: 12px;
+	margin-bottom:0px;
+}
+
+pre.noComment {
+	background: transparent;
+}
+
+hr {
+	background-color: #DDD;
+	height: 1px;
+	border: 0;
+}
+
+div.clear {
+	clear: both;
+}
+
+/* Titles */
+
+h1, h2, h3, h4, h5 {
+	font-family: Verdana, Geneva, sans-serif;
+	color: #6C6C6C;
+	font-weight: normal;
+}
+
+h1 {
+	font-size: 300%;
+	margin: 0 0 10px 0;
+}
+
+h3 {
+	font-weight: bold;
+}
+
+/* Page display */
+
+body {
+	overflow: hidden;
+	height: 100%;
+}
+
+header {
+}
+
+.page {
+	width: 937px;
+	margin: auto;
+}
+
+.menu {
+	position: fixed;
+	top: 50px;
+	bottom: 2em;
+	width: 250px;
+	overflow-y:	scroll;
+}
+
+.content {
+	position: fixed;
+	top: 50px;
+	bottom: 0em;
+	margin-left: 265px;
+	width: 667px;
+	overflow-y:	scroll;
+	padding-right: 10px;
+}
+
+.content.fullpage {
+	margin-left: 20px;
+	width: 910px;
+}
+
+.content.footed {
+	bottom: 2em;
+}
+
+footer {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+}
+
+article:hover > .signature .copyButton, .copyButton.zeroclipboard-is-hover {
+	visibility: visible;
+}
+
+.copyButton.zeroclipboard-is-active {
+	border-color: #0D8921;
+}
+
+.copyButton {
+	visibility: hidden;
+	vertical-align: middle;
+	margin: -2px 0px 0px 10px;
+	width: 22px;
+	height: 19px;
+	padding: 1px;
+	cursor: pointer;
+	background: #eee;
+	border: 1px solid #ccc;
+	box-shadow: none;
+}
+
+.copyButton img {
+	width: 16px;
+}
+
+/* Webkit scroll bars */
+
+.menu {
+    overflow-y: hidden;
+}
+
+.menu:hover {
+    overflow-y: scroll;
+}
+
+.menu::-webkit-scrollbar, .content::-webkit-scrollbar {
+    width: 10px;
+}
+
+.menu::-webkit-scrollbar-thumb, .content::-webkit-scrollbar-thumb {
+	background: #CCC;
+	-webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,0.10),inset 0 -1px 0 rgba(0,0,0,0.07);
+}
+
+.menu::-webkit-scrollbar-thumb:hover, .content::-webkit-scrollbar-thumb:hover {
+	background: #999;
+}
+
+.menu::-webkit-scrollbar-corner, .content::-webkit-scrollbar-corner {
+	background: transparent;
+}
+
+.menu::-webkit-scrollbar-button, .content::-webkit-scrollbar-button {
+	width: 0;
+	height: 0;
+	display: none;
+}
+
+/* Header, Footer */
+
+header nav ul {
+	padding: 0;
+	list-style-type: none;
+	width: 900px;
+	margin: auto;
+}
+
+header nav ul li {
+	display: inline;
+	padding: 3px 6px;
+	margin: auto 5px;
+	color: #999;
+}
+
+header nav ul li a {
+	color: black;
+}
+
+header nav ul li a:hover {
+	color: #0D8921;
+}
+
+footer {
+	text-align: center;
+	padding-bottom: 10px;
+	color: #CCC;
+}
+
+/* Main menu */
+
+header nav.main {
+	background: #E0E0E0 url(../resources/top_back.gif) repeat-x top left;
+	padding: 7px 0;
+}
+
+header nav.main ul li.current {
+	background: #0D8921;
+	color: white;
+}
+
+/* Latteral Menu */
+
+.menu nav {
+	margin: 20px;
+	width: 208px;
+	border: 1px solid #CCC;
+}
+
+.menu nav:first-child {
+	margin-top: 0;
+}
+
+.menu nav h3 {
+	margin: 0;
+	padding: 5px;
+	background: #CCC;
+	font-size: 1em;
+}
+
+.menu nav h4 {
+	font-weight: bold;
+	color: #555555;
+	margin: 10px 0 0 10px;
+	font-size: 12px;
+}
+
+.menu nav h4:last-child {
+	margin-bottom: 5px;
+}
+
+.menu nav ul {
+	margin: 10px;
+	padding: 0;
+	list-style-type: none;
+}
+
+.menu nav ul li {
+	overflow: hidden;
+	color: #CCC;
+}
+
+/* Content */
+
+.content article {
+	color: #6C6C6C;
+	background-repeat: no-repeat;
+	background-position: left 7px;
+	margin: 20px 0;
+	padding: 5px 20px;
+}
+
+.content article h3 {
+	margin: 0;
+	font-weight: bold;
+	color: #333;
+}
+
+.content article.graph {
+	text-align: center;
+}
+
+.content article.modules,
+.content article.classes,
+.content article.properties {
+	float: left;
+	width: 250px;
+	overflow: hidden;
+}
+
+.content article.overview ul,
+.content article.modules ul,
+.content article.classes ul,
+.content article.properties ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+.content article.properties ul ul {
+	padding-left: 10px;
+}
+
+nav ul li span,
+.content article ul li span {
+	color: #CCC;
+	text-align: center;
+	font-family: monospace;
+	margin-right: 5px;
+}
+
+.content article.modules ul code,
+.content article.classes ul code,
+.content article.properties ul code {
+	font-weight: normal;
+}
+
+.content section.summary h2, .content section.summary article{
+	color: #000000;
+}
+
+.content section.summary article h3{
+	font-weight: bold;
+	color: #555;
+}
+
+.content article.highlighted {
+	background-color: #FFF3C2;
+	color: black;
+}
+
+.content .subtitle {
+	color: #6C6C6C;
+}
+
+.content a {
+	color: #0D8921;
+}
+
+.content a:hover {
+	color: #333;
+}
+
+.info {
+	color: #6C6C6C;
+}
+
+.info a {
+	color: #333;
+}
+
+.info a:hover {
+	color: #0D8921;
+}
+
+
+article .info .code {
+	float: right;
+}
+
+.description .inheritance {
+	text-align: right;
+	margin: 2px;
+
+}
+
+.content .concern-doc {
+	border-top: 3px dotted #CCC;
+	padding: 5px 0;
+	color: #999;
+}
+
+.content section.concerns {
+	padding: 10px;
+	background: #EEE;
+}
+
+.content section.concerns h2 {
+	margin-top: 0;
+}
+
+.content section.concerns ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.content section.concerns li {
+    margin-top: 20px;
+}
+
+.content section.concerns ul ul {
+    padding-left: 20px;
+}
+
+.content section.concerns li li {
+    margin-top: 0;
+}
+
+.content section.methods h3.concern-toplevel {
+	border-top: 3px dotted #CCC;
+	padding-top: 0.83em;
+	color: #999;
+}
+
+.noComment {
+	background-color: transparent;
+}
+
+.show-code {
+	margin: 0;
+}
+
+/* JS facilities */
+
+input[type=text] {
+	width: 150px;
+	border: 1px solid #CCC;
+	margin-right: 5px;
+	padding: 1px 2px;
+}
+
+input[type=text].notUsed {
+	color: #999;
+	font-style: italic;
+}
+
+nav .filter {
+	text-align: center;
+	padding: 5px;
+}
+
+nav.main input[type=text] {
+	margin: -2px 10px;
+	color: black;
+	font-style: normal;
+}
+
+nav.main form {
+	float: right;
+}
+
+.filter a {
+	color: #0D8921;
+	cursor: pointer;
+	font-family: monospace;
+	margin-right: 5px;
+   font-weight: bold;
+}
+
+.filter a.hidden {
+	color: #999;
+   font-weight: normal;
+}
+
+.filter a:hover {
+	text-decoration: underline;
+}
+
+nav h3 a.fold {
+	margin: 0 5px;
+	color: #999;
+	font-family: monospace;
+	font-weight: bold;
+	font-size: 120%;
+	cursor: pointer;
+}
+
+.hide {
+	overflow-y: hidden;
+	height: 0;
+}
+
+/* Icons */
+.type.public, .interface.public, .abstract.class.public { background-image: url('../resources/icons/vtype_public.png')}
+.type.protected, .interface.protected, .abstract.class.protected { background-image: url('../resources/icons/vtype_protected.png')}
+.type.private, .interface.private, .abstract.class.private { background-image: url('../resources/icons/vtype_private.png')}
+.init.public, .enum.public { background-image: url('../resources/icons/const_public.png')}
+.init.protected, .enum.protected { background-image: url('../resources/icons/const_protected.png')}
+.init.private, .enum.private { background-image: url('../resources/icons/const_private.png')}
+.fun.public, .class.public, .extern.public { background-image: url('../resources/icons/meth_public.png')}
+.fun.protected, .class.protected, .extern.protected { background-image: url('../resources/icons/meth_protected.png')}
+.fun.private, .class.private, .extern.private { background-image: url('../resources/icons/meth_private.png')}
+
+/* Quick Search */
+
+#search {
+	width: 300px;
+}
+
+#searchTable {
+	background-color: #FFFFFF;
+	border: 1px solid #E0E0E0;
+	border-spacing: 0px;
+	z-index: 10; /* the menu must be over the rest of the page. */
+}
+
+#searchTable .activeSearchResult {
+	cursor: pointer;
+	background: #EEE;
+}
+
+#searchTable td {
+	white-space: nowrap;
+	overflow: hidden;
+	line-height: 22px;
+	padding: 2px;
+	width: 25%;
+}
+
+#searchTable td.entryInfo {
+	color: #0D8921;
+	font-size: small;
+	width: 75%;
+	text-align: right;
+}
+
+#searchTable tr.overflow td {
+	text-align: center;
+	background-color: #E0E0E0;
+}
+
+/* New comments style */
+
+.content .nitdoc {
+  background: #F7F7F7;
+  padding: 5px;
+  color: black;
+  overflow: auto;
+}
+
+.content .nitdoc pre {
+  background: #EEE;
+  border-radius: 8px;
+}
+
+.content .nitdoc code {
+  background: #DDD;
+  padding: 0 1px;
+  border-radius: 5px;
+}
