@@ -20,7 +20,7 @@ var shaMaster;
 var repoExist = false;
 var branchExist = false;
 var githubRepo;
-var loginProcess = false; 
+var loginProcess = false;
 var signedOff = '';
 var userEmail = '';
 var commitMessage = '';
@@ -51,7 +51,7 @@ var spinner = new Spinner(opts).spin(targetSpinner);
 // Check if a comment is editing
 window.onbeforeunload = function() {
 	if(editComment > 0){
-    	return 'Are you sure you want to leave this page?';
+	return 'Are you sure you want to leave this page?';
 	}
 };
 
@@ -95,18 +95,18 @@ $(document).ready(function() {
 					}
 				}
 			}
-		}	
+		}
 		else
 		{
 			// Delete cookie and reset settings
 			del_cookie("logginNitdoc");
 			closeAllCommentInEdtiting();
-		}	
+		}
 		toggleLoginBox();
 	});
 
 	// Activate edit mode
-   	$('pre[class=text_label]').click(function(){
+	$('pre[class=text_label]').click(function(){
 		// the customer is loggued ?
 		if(!sessionStarted || userName == ""){
 			// No => nothing happen
@@ -126,7 +126,7 @@ $(document).ready(function() {
 			getCommentOfFunction($(this));
 			// hide comment
 			$(this).hide();
-			// Show edit box 
+			// Show edit box
 			$(this).next().show();
 			// Show cancel button
 			$(this).next().next().show();
@@ -134,7 +134,7 @@ $(document).ready(function() {
 			$(this).next().next().next().show();
 			// Add text in edit box
 			if($(this).next().val() == "" || $(this).next().val() != adapt){ $(this).next().val(adapt); }
-			// Resize edit box 
+			// Resize edit box
 			$(this).next().height($(this).next().prop("scrollHeight"));
 			resizeTextarea($(this).next());
 			// Select it
@@ -143,15 +143,15 @@ $(document).ready(function() {
 		}
 	});
 
-   	// Disable the edit mode
-   	$('a[id=cancelBtn]').click(function(){
-   	 	$(this).parent().prev().children('#lblDiffCommit').text("");
-   	 	showcomment = false;
-   	 	closeEditing($(this));
+	// Disable the edit mode
+	$('a[id=cancelBtn]').click(function(){
+		$(this).parent().prev().children('#lblDiffCommit').text("");
+		showcomment = false;
+		closeEditing($(this));
 	});
 
-   	// Display commit form
-   	$('a[id=commitBtn]').click(function(){
+	// Display commit form
+	$('a[id=commitBtn]').click(function(){
 		updateComment = $(this).prev().prev().val();
 		commentType = $(this).prev().prev().prev().attr('type');
 
@@ -162,7 +162,7 @@ $(document).ready(function() {
 				toggleLoginBox();
 				return;
 			}
-			
+
 			// Create the commit message
 			commitMessage = 'Wikidoc: modified comment in ' + $(this).parent().prev().prev().html().split(' ')[1];
 			$('#commitMessage').text(commitMessage);
@@ -172,23 +172,23 @@ $(document).ready(function() {
 			$('body').append('<div id="fade"></div>');
 			$('#fade').css({'filter' : 'alpha(opacity=80)'}).fadeIn();
 		}
-   	 });
+	 });
 
-   	// Close commit form
-   	$('.btn_close').click(function(){
-   	 	$(this).hide();   	 	
-   	 	$(this).next().hide();   	 	
-   	 	if(editComment > 0){ editComment -= 1; }
-   	 	$('#chkSignedOff').attr('checked', false);
-   	 	removeSignedOff();
-   	 });
+	// Close commit form
+	$('.btn_close').click(function(){
+		$(this).hide();
+		$(this).next().hide();
+		if(editComment > 0){ editComment -= 1; }
+		$('#chkSignedOff').attr('checked', false);
+		removeSignedOff();
+	 });
 
 	//Close Popups and Fade Layer
 	$('body').on('click', 'a.close, #fade', function() {
 		if(editComment > 0){ editComment -= 1; }
 		$('#fade , #modal').fadeOut(function() {
-			$('#fade, a.close').remove();  
-		});		
+			$('#fade, a.close').remove();
+		});
 		$('#modalQuestion').hide();
 		$('#chkSignedOff').attr('checked', false);
 		removeSignedOff();
@@ -215,7 +215,7 @@ $(document).ready(function() {
 				if(commitMessage == ""){ commitMessage = "New commit";}
 				if(sessionStarted){
 					if ($.trim(updateComment) == ''){ this.value = (this.defaultValue ? this.defaultValue : ''); }
-					else{ 
+					else{
 						displaySpinner();
 						startCommitProcess();
 					}
@@ -232,68 +232,68 @@ $(document).ready(function() {
 				showcomment = false;
 				// Re-load all comment
 				reloadComment();
-	 		}
- 		}
+			}
+		}
 		else{ editComment -= 1; }
 		$('#chkSignedOff').attr('checked', false);
 	});
-	
+
 	// Cancel creating branch
 	$('#btnCancelBranch').click(function(){
 		editComment -= 1;
-   	 	$('#modalQuestion').hide();
-   	 	$('#fade , #modal').fadeOut(function() { $('#fade, a.close').remove(); });
+		$('#modalQuestion').hide();
+		$('#fade , #modal').fadeOut(function() { $('#fade, a.close').remove(); });
 		return;
-   	});
+	});
 
-   	// Create new branch and continu
-   	$('#btnCreateBranch').click(function(){
-   	 	$('#modalQuestion').hide();
-   	 	if($('#btnCreateBranch').text() != 'Ok'){
-	   	 	// Create the branch
-	   	 	createBranch();
-	   	 	commitMessage = $('#commitMessage').val().replace(/\r?\n/g, '\\n').replace(/\t/g, '\\t').replace(/\"/g,'\\"');
+	// Create new branch and continu
+	$('#btnCreateBranch').click(function(){
+		$('#modalQuestion').hide();
+		if($('#btnCreateBranch').text() != 'Ok'){
+			// Create the branch
+			createBranch();
+			commitMessage = $('#commitMessage').val().replace(/\r?\n/g, '\\n').replace(/\t/g, '\\t').replace(/\"/g,'\\"');
 			if(commitMessage == ""){ commitMessage = "New commit"; }
-			if(userB64 != ""){                      
+			if(userB64 != ""){
 		        if(loginProcess){
-					setCookie("logginNitdoc", base64.encode(userName+':'+password+':'+githubRepo+':'+branchName), 1);        
+					setCookie("logginNitdoc", base64.encode(userName+':'+password+':'+githubRepo+':'+branchName), 1);
 					$('#loginGit').val("");
 					$('#passwordGit').val("");
-					loginProcess = false;          
+					loginProcess = false;
 					toggleLoginBox();
 		        }
 		        else{
 					if ($.trim(updateComment) == ''){ this.value = (this.defaultValue ? this.defaultValue : ''); }
 					else{ startCommitProcess(); }
-				} 
+				}
 		    }
 		}
 		else
 		{
 			$('#fade , #modalQuestion, #modal').fadeOut(function() { $('#fade, a.close').remove(); });
 		}
-   	});
+	});
 
-   	$('a[class=newComment]').click(function(){
-   	 	addNewComment = true;   	 	
-   	 	editComment += 1;
-   		// hide comment
+	$('a[class=newComment]').click(function(){
+		addNewComment = true;
+		editComment += 1;
+		// hide comment
 		$(this).hide();
-		// Show edit box 
+		// Show edit box
 		$(this).next().show();
 		// Show cancel button
 		$(this).next().next().show();
 		// Show commit button
 		$(this).next().next().next().show();
-		// Resize edit box 
+		// Resize edit box
 		$(this).next().height($(this).next().prop("scrollHeight"));
 		resizeTextarea($(this).next());
 		// Select it
 		$(this).next().select();
-		preElement = $(this);  
-   	 });
+		preElement = $(this);
+	 });
 
-   	$("#dropBranches").change(function () {		
+	$("#dropBranches").change(function () {
 		$("#dropBranches option:selected").each(function () {
 			if(branchName != $(this).text()){
 				branchName = $(this).text();
@@ -319,7 +319,7 @@ $(document).ready(function() {
 				$(this).css({'cursor' : 'pointer'});
 			}
 			else{
-				$(this).css({'cursor' : ''});	
+				$(this).css({'cursor' : ''});
 			}
 		}
 	);
@@ -336,73 +336,73 @@ $(document).ready(function() {
 
 // Init process to commit the new comment
 function startCommitProcess()
-{	
+{
 	if($('#chkSignedOff').is(':checked')){
 		var numL = preElement.attr("title");
-		commentLineStart = numL.split('-')[0] - 1;	
+		commentLineStart = numL.split('-')[0] - 1;
 		if(addNewComment) { commentLineStart++; }
 		commentLineEnd = (commentLineStart + preElement.text().split('\n').length) - 1;
-		state = true;	
+		state = true;
 		replaceComment(updateComment, currentfileContent);
-		getLastCommit();	
-		getBaseTree();	
+		getLastCommit();
+		getBaseTree();
 		editComment = false;
 	}
 	else{
-		displayMessage('Please sign this commit', 40, 40); 
+		displayMessage('Please sign this commit', 40, 40);
 	}
 }
 
 function updateDisplaying(){
 	if (checkCookie())
 	{
-		userB64 = "Basic " + getUserPass("logginNitdoc"); 
-	  	$('#loginGit').hide();
-	  	$('#passwordGit').hide();
-	  	$('#lbpasswordGit').hide();		
-	  	$('#lbloginGit').hide();	
-	  	$('#repositoryGit').hide();
-	  	$('#lbrepositoryGit').hide();
-	  	$('#lbbranchGit').hide();  
-	  	$('#branchGit').hide();
-	  	$('#listBranches').show();
-	  	$('#divGitHubRepoDisplay').show();
-	  	$("#liGitHub").attr("class", "current");
-	  	$("#imgGitHub").attr("src", "resources/icons/github-icon-w.png");
-	  	$('#nickName').text(userName);
-	  	$('#githubAccount').attr("href", "https://github.com/"+userName);
-	  	$('#logginMessage').css({'display' : 'block'});
-	  	$('#logginMessage').css({'text-align' : 'center'});
-	  	$('.popover').css({'height' : '190px'});
-	  	$('#signIn').text("Sign out");
-	  	$('#githubRepoDisplay').text(githubRepo);
-	  	sessionStarted = true;
-	  	reloadComment();
+		userB64 = "Basic " + getUserPass("logginNitdoc");
+		$('#loginGit').hide();
+		$('#passwordGit').hide();
+		$('#lbpasswordGit').hide();
+		$('#lbloginGit').hide();
+		$('#repositoryGit').hide();
+		$('#lbrepositoryGit').hide();
+		$('#lbbranchGit').hide();
+		$('#branchGit').hide();
+		$('#listBranches').show();
+		$('#divGitHubRepoDisplay').show();
+		$("#liGitHub").attr("class", "current");
+		$("#imgGitHub").attr("src", "resources/icons/github-icon-w.png");
+		$('#nickName').text(userName);
+		$('#githubAccount').attr("href", "https://github.com/"+userName);
+		$('#logginMessage').css({'display' : 'block'});
+		$('#logginMessage').css({'text-align' : 'center'});
+		$('.popover').css({'height' : '190px'});
+		$('#signIn').text("Sign out");
+		$('#githubRepoDisplay').text(githubRepo);
+		sessionStarted = true;
+		reloadComment();
 	}
 	else
 	{
 		sessionStarted = false;
 		$('#logginMessage').css({'display' : 'none'});
 		$("#liGitHub").attr("class", "");
-	  	$("#imgGitHub").attr("src", "resources/icons/github-icon.png");
-	  	$('#loginGit').val("");
-	  	$('#passwordGit').val("");
-	  	$('#nickName').text("");
-	  	$('.popover').css({'height' : '325px'});
-  		$('#logginMessage').css({'display' : 'none'});
-  		$('#repositoryGit').val($('#repoName').attr('name'));
-	  	$('#branchGit').val('wikidoc');  
-	  	$('#signIn').text("Sign In");
+		$("#imgGitHub").attr("src", "resources/icons/github-icon.png");
+		$('#loginGit').val("");
+		$('#passwordGit').val("");
+		$('#nickName').text("");
+		$('.popover').css({'height' : '325px'});
+		$('#logginMessage').css({'display' : 'none'});
+		$('#repositoryGit').val($('#repoName').attr('name'));
+		$('#branchGit').val('wikidoc');
+		$('#signIn').text("Sign In");
 		$('#loginGit').show();
-	  	$('#passwordGit').show();
-	  	$('#lbpasswordGit').show();
-	  	$('#lbloginGit').show();	
-	  	$('#repositoryGit').show();
-	  	$('#lbrepositoryGit').show();
-	  	$('#lbbranchGit').show();  
-	  	$('#branchGit').show();  
-	  	$('#listBranches').hide();
-	  	$('#divGitHubRepoDisplay').hide();
+		$('#passwordGit').show();
+		$('#lbpasswordGit').show();
+		$('#lbloginGit').show();
+		$('#repositoryGit').show();
+		$('#lbrepositoryGit').show();
+		$('#lbbranchGit').show();
+		$('#branchGit').show();
+		$('#listBranches').hide();
+		$('#divGitHubRepoDisplay').hide();
 	}
 }
 
@@ -436,7 +436,7 @@ function getCookie(c_name)
 	{
 		c_start = c_value.indexOf("=", c_start) + 1;
 		var c_end = c_value.indexOf(";", c_start);
-	  	if (c_end == -1) { c_end = c_value.length; }
+		if (c_end == -1) { c_end = c_value.length; }
 		c_value = unescape(c_value.substring(c_start,c_end));
 	}
 	return c_value;
@@ -455,24 +455,24 @@ function checkCookie()
 		cookie = base64.decode(cookie);
 		userName = cookie.split(':')[0];
 		password = cookie.split(':')[1];
-		githubRepo = cookie.split(':')[2];		
+		githubRepo = cookie.split(':')[2];
 		branchName = cookie.split(':')[3];
-	  	return true;
+		return true;
 	}
 	else { return false; }
 }
 
-function getLastCommit() 
-{   
+function getLastCommit()
+{
 	var urlHead = '';
 	if(sessionStarted){ urlHead = "https://api.github.com/repos/"+userName+"/"+githubRepo+"/git/refs/heads/"+branchName;}
-	else{ 
+	else{
 		// TODO: get url of the original repo.
 		return;
 	}
 
     $.ajax({
-        beforeSend: function (xhr) { 
+        beforeSend: function (xhr) {
             if (userB64 != ""){ xhr.setRequestHeader ("Authorization", userB64); }
         },
         type: "GET",
@@ -480,16 +480,16 @@ function getLastCommit()
         dataType:"json",
         async: false,
         success: function(success)
-        {        	
-            shaLastCommit = success.object.sha;            
+        {
+            shaLastCommit = success.object.sha;
         }
     });
 }
 
 function getBaseTree()
-{	
-    $.ajax({ 
-        beforeSend: function (xhr) { 
+{
+    $.ajax({
+        beforeSend: function (xhr) {
             if (userB64 != ""){ xhr.setRequestHeader ("Authorization", userB64); }
         },
         type: "GET",
@@ -497,23 +497,23 @@ function getBaseTree()
         dataType:"json",
         async: false,
         success: function(success)
-        {   
+        {
             shaBaseTree = success.tree.sha;
             if (state){ setBlob(); }
-            else{ return; }            
+            else{ return; }
         },
         error: function(){
-        	return;
+	return;
         }
-    });    
+    });
 }
 
 function setNewTree()
 {
-    $.ajax({ 
+    $.ajax({
         beforeSend: function (xhr) { xhr.setRequestHeader ("Authorization", userB64); },
         type: "POST",
-        url: "https://api.github.com/repos/"+userName+"/"+githubRepo+"/git/trees", 
+        url: "https://api.github.com/repos/"+userName+"/"+githubRepo+"/git/trees",
         async: false,
         dataType:'json',
         data:'{ "base_tree" : "'+shaBaseTree+'", '+
@@ -523,14 +523,14 @@ function setNewTree()
                     '"type":"blob",'+
                     '"sha": "'+ shaBlob +'"'+
                 '}] '+
-            '}',        
+            '}',
         success: function(success)
         { // si l'appel a bien fonctionné
             shaNewTree = success.sha;
-            setNewCommit();        	
+            setNewCommit();
         },
         error: function(){
-        	return;
+	return;
         }
     });
 }
@@ -538,23 +538,23 @@ function setNewTree()
 function setNewCommit()
 {
     addSignedOff();
-    $.ajax({ 
+    $.ajax({
         beforeSend: function (xhr) { xhr.setRequestHeader ("Authorization", userB64); },
         type: "POST",
-        url: "https://api.github.com/repos/"+userName+"/"+githubRepo+"/git/commits", 
+        url: "https://api.github.com/repos/"+userName+"/"+githubRepo+"/git/commits",
         async: false,
         dataType:'json',
         data:'{ "message" : "'+ commitMessage +'", '+
-                '"parents" :"'+shaLastCommit+'",'+ 
+                '"parents" :"'+shaLastCommit+'",'+
                 '"tree": "'+shaNewTree+'"'+
-             '}',        
+             '}',
         success: function(success)
         {
             shaNewCommit = success.sha;
-            commit();        	
+            commit();
         },
         error: function(){
-        	return;
+	return;
         }
     });
 }
@@ -562,10 +562,10 @@ function setNewCommit()
 //Create a commit
 function commit()
 {
-    $.ajax({ 
+    $.ajax({
         beforeSend: function (xhr) { xhr.setRequestHeader ("Authorization", userB64); },
         type: "POST",
-        url: "https://api.github.com/repos/"+userName+"/"+githubRepo+"/git/refs/heads/"+branchName, 
+        url: "https://api.github.com/repos/"+userName+"/"+githubRepo+"/git/refs/heads/"+branchName,
         dataType:'json',
         data:'{ "sha" : "'+shaNewCommit+'", '+
                 '"force" :"true"'+
@@ -580,22 +580,22 @@ function setBlob()
 {
     $.ajax({
         beforeSend: function (xhr) { xhr.setRequestHeader ("Authorization",  userB64); },
-        type: "POST",         
-        url: "https://api.github.com/repos/"+userName+"/"+githubRepo+"/git/blobs",         
+        type: "POST",
+        url: "https://api.github.com/repos/"+userName+"/"+githubRepo+"/git/blobs",
         async: false,
         dataType:'json',
         data:'{ "content" : "'+text.replace(/\r?\n/g, '\\n').replace(/\t/g, '\\t').replace(/\"/g,'\\"')+'", '+
                 '"encoding" :"utf-8"'+
             '}',
         success: function(success)
-        {            
+        {
             shaBlob = success.sha;
-            setNewTree();                  
+            setNewTree();
         },
-        error:function(error){ 
-        	displayMessage('Error : Problem parsing JSON', 40, 40); 
-        	return;
-    	}
+        error:function(error){
+	displayMessage('Error : Problem parsing JSON', 40, 40);
+	return;
+	}
     });
 }
 
@@ -603,23 +603,23 @@ function setBlob()
 function getFileContent(urlFile, newComment)
 {
     $.ajax({
-        beforeSend: function (xhr) { 
+        beforeSend: function (xhr) {
             xhr.setRequestHeader ("Accept",  "application/vnd.github-blob.raw");
             if (userB64 != ""){ xhr.setRequestHeader ("Authorization", userB64); }
         },
-        type: "GET", 
-        url: urlFile, 
+        type: "GET",
+        url: urlFile,
         async:false,
         success: function(success)
         {
             state = true;
-            replaceComment(newComment, success);            
+            replaceComment(newComment, success);
         }
     });
 }
 
 function replaceComment(newComment, fileContent){
-	var arrayNew = newComment.split('\n');	
+	var arrayNew = newComment.split('\n');
 	var lNew = arrayNew.length;
 	text = "";
 	var lines = fileContent.split("\n");
@@ -630,7 +630,7 @@ function replaceComment(newComment, fileContent){
 					if(lines[i+1].substr(indexLine,1) == "\t" || lines[i+1].substr(indexLine,1) == "#"){ text += lines[i+1].substr(indexLine,1); }
 					else{ break;}
 				}
-				text += lines[i] + "\n"; 
+				text += lines[i] + "\n";
 			}
 			// We change the comment
 			for(var j = 0; j < lNew; j++){
@@ -662,7 +662,7 @@ function getCommentLastCommit(path, origin){
 	if(shaLastCommit != ""){
 		if (checkCookie()) {
 			urlRaw="https://rawgithub.com/"+ userName +"/"+ githubRepo +"/" + shaLastCommit + "/" + path;
-			$.ajax({  
+			$.ajax({
 			    type: "GET",
 			    url: urlRaw,
 			    async: false,
@@ -680,7 +680,7 @@ function getCommentLastCommit(path, origin){
 function displayMessage(msg, widthDiv, margModal){
 	spinner.stop();
 	$('#modal').hide();
-	$('#btnCancelBranch').hide();	
+	$('#btnCancelBranch').hide();
 	$('#modalQuestion').show().prepend('<a class="close"><img src="resources/icons/close.png" class="btnCloseQuestion" title="Close" alt="Close" /></a>');
 	$('#txtQuestion').text(msg);
 	$('#btnCreateBranch').text("Ok");
@@ -704,18 +704,18 @@ function displaySpinner(){
 // Check if the repo already exist
 function isRepoExisting(){
 	$.ajax({
-        beforeSend: function (xhr) { 
+        beforeSend: function (xhr) {
             if (userB64 != "") { xhr.setRequestHeader ("Authorization", userB64); }
         },
-        type: "GET", 
-        url: "https://api.github.com/repos/"+userName+"/"+githubRepo, 
+        type: "GET",
+        url: "https://api.github.com/repos/"+userName+"/"+githubRepo,
         async:false,
         dataType:'json',
         success: function(){ repoExist = true; },
         error: function()
         {
-        	displayMessage('Repo not found !', 35, 45);
-        	repoExist = false;
+	displayMessage('Repo not found !', 35, 45);
+	repoExist = false;
         }
     });
 }
@@ -747,10 +747,10 @@ function isBranchExisting(){
 	});
 }
 
-function getMasterSha() 
+function getMasterSha()
 {
     $.ajax({
-        beforeSend: function (xhr) { 
+        beforeSend: function (xhr) {
             if (userB64 != ""){ xhr.setRequestHeader ("Authorization", userB64); }
         },
         type: "GET",
@@ -765,17 +765,17 @@ function createBranch(){
 
 	getMasterSha();
 
-	$.ajax({ 
+	$.ajax({
         beforeSend: function (xhr) { xhr.setRequestHeader ("Authorization", userB64); },
         type: "POST",
-        url: "https://api.github.com/repos/"+userName+"/"+githubRepo+"/git/refs", 
+        url: "https://api.github.com/repos/"+userName+"/"+githubRepo+"/git/refs",
         data:'{ "ref" : "refs/heads/'+branchName+'",'+
-        		'"sha" : "'+shaMaster+'"'+
+		'"sha" : "'+shaMaster+'"'+
             '}',
         success: function(){ return; },
         error: function(){
-        	editComment -= 1;
-        	displayMessage('Impossible to create the new branch : ' + branchName, 40, 40);
+	editComment -= 1;
+	displayMessage('Impossible to create the new branch : ' + branchName, 40, 40);
         }
     });
 }
@@ -805,11 +805,11 @@ function reloadComment(){
 }
 
 function getCommentOfFunction(element){
-	var textC = "";	
+	var textC = "";
 	var numL = element.attr("title");
-	if(numL != null){		         		
-		commentLineStart = numL-1;		
-		commentLineEnd = element.attr('name').split(numL)[1].split('-')[1]-1;		
+	if(numL != null){
+		commentLineStart = numL-1;
+		commentLineEnd = element.attr('name').split(numL)[1].split('-')[1]-1;
 		var lines = currentfileContent.split("\n");
 		for (var i = 0; i < lines.length; i++) {
 			if(i >= commentLineStart-1 && i <= commentLineEnd+1){
@@ -819,22 +819,22 @@ function getCommentOfFunction(element){
 	    }
 	    if(textC != element.text){element.text(textC);}
 	    if (textC != "" && editComment > 0){
-	    	var originContent = originalFileContent.split("\n");
-	    	var origin = '';
-	    	var lblDiff = element.parent().prev().children('#lblDiffCommit');
-	    	var preSave = element.parent().children('#preSave');
-	    	for (var i = 0; i < originContent.length; i++) {
-	    		if(i >= commentLineStart-1 && i <= commentLineEnd+1){
-	    			if (originContent[i].substr(1,1) == "#"){ origin += originContent[i].substr(3,originContent[i].length) + "\n";}
-	    			else if(originContent[i].substr(0,1) == '#'){ origin += originContent[i].substr(2,originContent[i].length) + "\n"; }
-	    		}
-	    	}
-	    	if(textC != origin && numL == numComment){
-	    		// The comment is different compare to the original
-	    		if(showcomment == false){ lblDiff.text("Show original comment"); }
-	    		preSave.text(origin);
-	    	}
-	    	else if (numL == numComment){ lblDiff.text(""); }
+		var originContent = originalFileContent.split("\n");
+		var origin = '';
+		var lblDiff = element.parent().prev().children('#lblDiffCommit');
+		var preSave = element.parent().children('#preSave');
+		for (var i = 0; i < originContent.length; i++) {
+			if(i >= commentLineStart-1 && i <= commentLineEnd+1){
+				if (originContent[i].substr(1,1) == "#"){ origin += originContent[i].substr(3,originContent[i].length) + "\n";}
+				else if(originContent[i].substr(0,1) == '#'){ origin += originContent[i].substr(2,originContent[i].length) + "\n"; }
+			}
+		}
+		if(textC != origin && numL == numComment){
+			// The comment is different compare to the original
+			if(showcomment == false){ lblDiff.text("Show original comment"); }
+			preSave.text(origin);
+		}
+		else if (numL == numComment){ lblDiff.text(""); }
 	    }
 	}
 }
@@ -844,21 +844,21 @@ function getListBranches()
 {
 	cleanListBranches();
     $.ajax({
-        beforeSend: function (xhr) { 
+        beforeSend: function (xhr) {
             if ($("#login").val() != ""){ xhr.setRequestHeader ("Authorization", userB64); }
         },
-        type: "GET", 
-        url: "https://api.github.com/repos/"+userName+"/"+githubRepo+"/branches", 
+        type: "GET",
+        url: "https://api.github.com/repos/"+userName+"/"+githubRepo+"/branches",
         async:false,
         dataType:'json',
         success: function(success)
-        {   
-            for(var branch in success) { 
-            	var selected = '';
-            	if(branchName == success[branch].name){
-            		selected = 'selected';
-            	}
-            	$('#dropBranches').append('<option value="" '+ selected +'>' + success[branch].name + '</option>');
+        {
+            for(var branch in success) {
+	var selected = '';
+	if(branchName == success[branch].name){
+		selected = 'selected';
+	}
+	$('#dropBranches').append('<option value="" '+ selected +'>' + success[branch].name + '</option>');
             }
         }
     });
@@ -872,19 +872,19 @@ function cleanListBranches(){
 function closeAllCommentInEdtiting(){
 	$('a[id=cancelBtn]').each(function(){
 		closeEditing($(this));
- 	});
+	});
 }
 
 function closeEditing(tag){
 	if(editComment > 0){ editComment -= 1; }
- 	// Hide itself
- 	tag.hide();
- 	// Hide commitBtn
- 	tag.next().hide();
- 	// Hide Textarea
- 	tag.prev().hide();
- 	// Show comment
- 	tag.prev().prev().show();
+	// Hide itself
+	tag.hide();
+	// Hide commitBtn
+	tag.next().hide();
+	// Hide Textarea
+	tag.prev().hide();
+	// Show comment
+	tag.prev().prev().show();
 }
 
 function checkSignIn(){
@@ -899,14 +899,14 @@ function checkSignIn(){
         dataType:'json',
         success: function(success)
         {
-        	getUserInfo();
-        	response = true;
-        	displayMessage('You are now logged in');
+	getUserInfo();
+	response = true;
+	displayMessage('You are now logged in');
         },
         error: function()
         {
-        	displayMessage('Error : Wrong username or password');
-        	response = false;
+	displayMessage('Error : Wrong username or password');
+	response = false;
         }
     });
     return response;
@@ -922,8 +922,8 @@ function getUserInfo(){
         async:false,
         dataType:'json',
         success: function(success)
-        {        
-        	userEmail = success;
+        {
+	userEmail = success;
         }
     });
 }
@@ -939,7 +939,7 @@ function getSignedOff(){
         dataType:'json',
         success: function(success)
         {
-        	signedOff = success.name;
+	signedOff = success.name;
         }
     });
 }
@@ -954,7 +954,7 @@ function addSignedOff(){
 }
 
 function removeSignedOff(){
-	$('#commitMessage').val(commitMessage);	
+	$('#commitMessage').val(commitMessage);
 	resizeTextarea($('#commitMessage'));
 }
 
@@ -965,7 +965,7 @@ function resizeTextarea(element){
 
 function showComment(element){
 	// Display the original comment
-	if (showcomment == true){		
+	if (showcomment == true){
 		showcomment = false;
 		element.text("Show original comment");
 	}
@@ -974,10 +974,10 @@ function showComment(element){
 		showcomment = true;
 		element.text("Comment changed in "+githubRepo+" / "+branchName);
 	}
-	var parent = element.parent().next(".description");		
+	var parent = element.parent().next(".description");
 	var textarea = parent.children('#fileContent');
-	var text = textarea.val();	
-	var preSave = parent.children('#preSave');	
+	var text = textarea.val();
+	var preSave = parent.children('#preSave');
 	textarea.val(preSave.text());
 	preSave.text(text);
 	// Resize edit box
