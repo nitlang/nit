@@ -43,15 +43,11 @@ assert sqlite_insert_2: db.get_error == 0
 db.prepare(select_req)
 assert sqlite_select: db.get_error == 0
 
-# Get first row
-db.step
-assert sqlite_column_0_0: db.column_text(0) == "Bob"
-assert sqlite_column_0_1: db.column_text(1) == "zzz"
-assert sqlite_column_0_2: db.column_text(2) == "1"
-db.step
-assert sqlite_column_1_0: db.column_text(0) == "Guillaume"
-assert sqlite_column_1_1: db.column_text(1) == "xxx"
-assert sqlite_column_1_2: db.column_text(2) == "1"
+while db.step.is_row do
+	print db.column_text(0)
+	print db.column_text(1)
+	print db.column_text(2)
+end
 
 db.close
 
