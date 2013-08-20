@@ -61,17 +61,7 @@ extern class Sqlite3Code `{int`}
 	fun is_done: Bool `{ return recv == SQLITE_DONE; `}
 end
 
-interface PrepareResult
-end
-
-class PrepareFailed
-	super PrepareResult
-
-	var error: String
-end
-
 extern class Statement `{sqlite3_stmt*`}
-	super PrepareResult
 
 	fun step: Sqlite3Code `{
 		return sqlite3_step(recv);
@@ -134,19 +124,14 @@ extern class Sqlite3 `{sqlite3 *`}
 		return sqlite3_exec(recv, String_to_cstring(sql), 0, 0, 0);
 	`}
 
-	fun prepare(sql: String): PrepareResult import String::to_cstring, Statement as (PrepareResult), error_to_prepare_failed `{
+	fun prepare(sql: String): nullable Statement import String::to_cstring, Statement as nullable `{
 		sqlite3_stmt *stmt;
 		int res = sqlite3_prepare_v2(recv, String_to_cstring(sql), -1, &stmt, 0);
 		if (res == SQLITE_OK)
-			return Statement_as_PrepareResult(stmt);
+			return Statement_as_nullable(stmt);
 		else
-			return Sqlite3_error_to_prepare_failed(recv);
+			return null_Statement();
 	`}
-
-	private fun error_to_prepare_failed: PrepareResult
-	do
-		return new PrepareFailed(get_error_str)
-	end
 
 	fun last_insert_rowid: Int `{
 		return sqlite3_last_insert_rowid(recv);

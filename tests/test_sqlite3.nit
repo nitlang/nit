@@ -40,11 +40,10 @@ assert sqlite_insert_2: db.get_error == 0
 
 var stmt = db.prepare(select_req)
 assert sqlite_select: db.get_error == 0
-if stmt isa PrepareFailed then
-	print "Prepared failed got: {stmt.error}"
+if stmt == null then
+	print "Prepared failed got: {db.get_error_str}"
 	abort
 end
-assert stmt isa Statement
 
 while stmt.step.is_row do
 	print stmt.column_text(0)
@@ -59,6 +58,6 @@ assert sqlite_reopen: db.get_error == 0
 
 stmt = db.prepare(select_req)
 assert sqlite_reselect: db.get_error == 0
-assert stmt isa Statement
+assert stmt != null
 stmt.step
 assert sqlite_column_0_0_reopened: stmt.column_text(0) == "Bob"
