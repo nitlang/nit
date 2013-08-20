@@ -27,21 +27,21 @@ var insert_req_2 = "INSERT INTO users VALUES('Guillaume', 'xxx', 1)"
 var select_req = "SELECT * FROM users"
 
 var db = new Sqlite3.open(filename)
-assert sqlite_open: db.get_error == 0
+assert sqlite_open: db.error.is_ok
 
 db.exec(create_req)
-assert sqlite_create_table: db.get_error == 0
+assert sqlite_create_table: db.error.is_ok
 
 db.exec(insert_req_1)
-assert sqlite_insert_1: db.get_error == 0
+assert sqlite_insert_1: db.error.is_ok
 
 db.exec(insert_req_2)
-assert sqlite_insert_2: db.get_error == 0
+assert sqlite_insert_2: db.error.is_ok
 
 var stmt = db.prepare(select_req)
-assert sqlite_select: db.get_error == 0
+assert sqlite_select: db.error.is_ok
 if stmt == null then
-	print "Prepared failed got: {db.get_error_str}"
+	print "Prepared failed got: {db.error.to_s}"
 	abort
 end
 
@@ -54,10 +54,10 @@ end
 db.close
 
 db = new Sqlite3.open(filename)
-assert sqlite_reopen: db.get_error == 0
+assert sqlite_reopen: db.error.is_ok
 
 stmt = db.prepare(select_req)
-assert sqlite_reselect: db.get_error == 0
+assert sqlite_reselect: db.error.is_ok
 assert stmt != null
 stmt.step
 assert sqlite_column_0_0_reopened: stmt.column_text(0) == "Bob"

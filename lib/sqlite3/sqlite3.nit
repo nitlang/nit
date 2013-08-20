@@ -59,6 +59,12 @@ extern class Sqlite3Code `{int`}
 
 	new done `{ return SQLITE_DONE; `} #       101  /* sqlite3_step() has finished executing */
 	fun is_done: Bool `{ return recv == SQLITE_DONE; `}
+
+	redef fun to_s: String import String::from_cstring `{
+		char *err = (char *)sqlite3_errstr(recv);
+		if (err == NULL) err = "";
+		return new_String_from_cstring(err);
+	`}
 end
 
 extern class Statement `{sqlite3_stmt*`}
@@ -137,15 +143,7 @@ extern class Sqlite3 `{sqlite3 *`}
 		return sqlite3_last_insert_rowid(recv);
 	`}
 
-	fun get_error : Int import String::from_cstring `{
+	fun error: Sqlite3Code `{
 		return sqlite3_errcode(recv);
-	`}
-
-	fun get_error_str : String import String::from_cstring `{
-		char * err =(char *) sqlite3_errmsg(recv);
-		if(err == NULL){
-			err = "";
-		}
-		return new_String_from_cstring(err);
 	`}
 end
