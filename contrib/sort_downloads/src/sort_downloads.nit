@@ -33,6 +33,10 @@ import opts
 # Modify these according to your needs. It is also possible to have alternates
 # using class refinment and a main calling to super.
 class Config
+	# Is it configured? Change to "true" when the configuration has been
+	# adapted to your needs and setup
+	var is_configured = false
+
 	# Source directory where are the files to be sorted.
 	var source_dir = "~/Downloads/"
 
@@ -188,6 +192,10 @@ class XySorter
 end
 
 var config = new Config
+if not config.is_configured then
+	print "Not configured, make sure you modify the script and set is_configured to true"
+	exit 1
+end
 var sorter = new XySorter
 
 # calculate cut off time using `elapsed_days` compared to now
