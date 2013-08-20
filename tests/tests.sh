@@ -57,7 +57,7 @@ function compare_to_result()
 	sed '/[Ww]arning/d;/[Ee]rror/d' "$sav" > "out/$pattern.sav2"
 	grep '[Ee]rror' "out/$pattern.res" >/dev/null && echo "Error" >> "out/$pattern.res2"
 	grep '[Ee]rror' "$sav" >/dev/null && echo "Error" >> "out/$pattern.sav2"
-	diff -u "out/$pattern.res2" "out/$pattern.sav2" > "out/$pattern.diff.sav2.log"
+	diff -u "out/$pattern.res2" "out/$pattern.sav2" > "out/$pattern.diff.sav.log"
 	if [ "$?" == 0 ]; then
 		return 2
 	else
@@ -80,6 +80,8 @@ function process_result()
 	NSOSO=""
 	SOSOF=""
 	NSOSOF=""
+	base=${description%%_*}
+	echo >>$xml "<testcase classname='$engine.$base' name='$description'>"
 	for sav in "sav/$engine/$pattern.res" "sav/$pattern.res" "sav/$pattern.sav"; do
 		compare_to_result "$pattern" "$sav"
 		case "$?" in
@@ -151,6 +153,10 @@ function process_result()
 		else
 			echo "[======= fail out/$pattern.res $NSAV =======]"
 		fi
+		echo >>$xml "<error message='fail out/$pattern.res $NSAV'/>"
+		echo >>$xml "<system-out><![CDATA["
+		head >>$xml -n 50 out/$pattern.diff.sav.log
+		echo >>$xml "]]></system-out>"
 		nok="$nok $pattern"
 		echo "$ii" >> "$ERRLIST"
 	elif [ -n "$NFIXME" ]; then
@@ -159,6 +165,10 @@ function process_result()
 		else
 			echo "[======= changed out/$pattern.res $NFIXME ======]"
 		fi
+		echo >>$xml "<error message='changed out/$pattern.res $NFIXME'/>"
+		echo >>$xml "<system-out><![CDATA["
+		head >>$xml -n 50 out/$pattern.diff.sav.log
+		echo >>$xml "]]></system-out>"
 		nok="$nok $pattern"
 		echo "$ii" >> "$ERRLIST"
 	else
@@ -169,6 +179,7 @@ function process_result()
 		fi
 		nos="$nos $pattern"
 	fi
+	echo >>$xml "</testcase>"
 }
 
 need_skip()
@@ -274,6 +285,8 @@ fi
 ok=""
 nok=""
 todos=""
+xml="tests-$engine.xml"
+echo >$xml "<testsuites><testsuite>"
 
 # CLEAN the out directory
 rm -rf out/ 2>/dev/null
@@ -434,6 +447,8 @@ if [ "x$ERRLIST" != "x" ]; then
 	fi
 	mv $ERRLIST $ERRLIST_TARGET
 fi
+
+echo >>$xml "</testsuite></testsuites>"
 
 if [ -n "$nok" ]; then
 	exit 1
