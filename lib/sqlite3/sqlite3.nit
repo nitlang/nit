@@ -19,11 +19,6 @@ module sqlite3
 
 in "C header" `{
 	#include "sqlite3.h"
-	struct Data{
-		sqlite3 *ppDb;
-		sqlite3_stmt * stmt;
-	};
-
 `}
 
 extern class Sqlite3Code `{int`}
@@ -66,39 +61,24 @@ extern class Sqlite3Code `{int`}
 	fun is_done: Bool `{ return recv == SQLITE_DONE; `}
 end
 
-extern Sqlite3 `{struct Data*`}
-	new `{
-		struct Data* data = malloc(sizeof(data));
-		return data;
-	`}
+interface PrepareResult
+end
 
-	fun destroy do close
+class PrepareFailed
+	super PrepareResult
 
-	fun open(filename : String) import String::to_cstring`{	
-		sqlite3_open(String_to_cstring(filename), &recv->ppDb);
-	`}
+	var error: String
+end
 
-	fun close `{
-		sqlite3_close(recv->ppDb);
-		free(recv);
-	`}
-
-	fun exec(sql : String): Sqlite3Code import String::to_cstring `{
-		struct Data * data = recv;
-		return sqlite3_exec(data->ppDb, String_to_cstring(sql), 0, 0, 0);
-	`}
-
-	fun prepare(sql : String): Sqlite3Code import String::to_cstring `{
-		struct Data * data = recv;
-		return sqlite3_prepare_v2(data->ppDb, String_to_cstring(sql), -1, &(data->stmt), 0);
-	`}
+extern class Statement `{sqlite3_stmt*`}
+	super PrepareResult
 
 	fun step: Sqlite3Code `{
-		return sqlite3_step(recv->stmt);
+		return sqlite3_step(recv);
 	`}
 
 	fun column_name(i: Int) : String import String::from_cstring `{
-		const char * name = (sqlite3_column_name(recv->stmt, i));
+		const char * name = (sqlite3_column_name(recv, i));
 		if(name == NULL){
 			name = "";
 		}
@@ -107,19 +87,19 @@ extern Sqlite3 `{struct Data*`}
 	`}
 
 	fun column_bytes(i: Int) : Int `{
-		return sqlite3_column_bytes(recv->stmt, i);
+		return sqlite3_column_bytes(recv, i);
 	`}
 
 	fun column_double(i: Int) : Float `{
-		return sqlite3_column_double(recv->stmt, i);
+		return sqlite3_column_double(recv, i);
 	`}
 
 	fun column_int(i: Int) : Int `{
-		return sqlite3_column_int(recv->stmt, i);
+		return sqlite3_column_int(recv, i);
 	`}
 
 	fun column_text(i: Int) : String import String::from_cstring `{
-		char * ret = (char *) sqlite3_column_text(recv->stmt, i);
+		char * ret = (char *) sqlite3_column_text(recv, i);
 		if( ret == NULL ){
 			ret = "";
 		}
@@ -127,7 +107,7 @@ extern Sqlite3 `{struct Data*`}
 	`}
 
 	fun column_type(i: Int) : Int `{
-		return sqlite3_column_type(recv->stmt, i);
+		return sqlite3_column_type(recv, i);
 	`}
 
 	#	fun column_blob(i : Int) : String `{
@@ -135,19 +115,49 @@ extern Sqlite3 `{struct Data*`}
 	#	`}
 
 	fun column_count: Int `{
-		return sqlite3_column_count(recv->stmt);
+		return sqlite3_column_count(recv);
+	`}
+end
+
+extern class Sqlite3 `{sqlite3 *`}
+	new open(filename: String) import String::to_cstring `{
+		sqlite3 *self;
+		sqlite3_open(String_to_cstring(filename), &self);
+		return self;
 	`}
 
+	fun destroy do close
+
+	fun close `{ sqlite3_close(recv); `}
+
+	fun exec(sql : String): Sqlite3Code import String::to_cstring `{
+		return sqlite3_exec(recv, String_to_cstring(sql), 0, 0, 0);
+	`}
+
+	fun prepare(sql: String): PrepareResult import String::to_cstring, Statement as (PrepareResult), error_to_prepare_failed `{
+		sqlite3_stmt *stmt;
+		int res = sqlite3_prepare_v2(recv, String_to_cstring(sql), -1, &stmt, 0);
+		if (res == SQLITE_OK)
+			return Statement_as_PrepareResult(stmt);
+		else
+			return Sqlite3_error_to_prepare_failed(recv);
+	`}
+
+	private fun error_to_prepare_failed: PrepareResult
+	do
+		return new PrepareFailed(get_error_str)
+	end
+
 	fun last_insert_rowid: Int `{
-		return sqlite3_last_insert_rowid(recv->ppDb);
+		return sqlite3_last_insert_rowid(recv);
 	`}
 
 	fun get_error : Int import String::from_cstring `{
-		return sqlite3_errcode(recv->ppDb);
+		return sqlite3_errcode(recv);
 	`}
 
 	fun get_error_str : String import String::from_cstring `{
-		char * err =(char *) sqlite3_errmsg(recv->ppDb);
+		char * err =(char *) sqlite3_errmsg(recv);
 		if(err == NULL){
 			err = "";
 		}

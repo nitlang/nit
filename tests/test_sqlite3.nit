@@ -26,9 +26,7 @@ var insert_req_1 = "INSERT INTO users VALUES('Bob', 'zzz', 1)"
 var insert_req_2 = "INSERT INTO users VALUES('Guillaume', 'xxx', 1)"
 var select_req = "SELECT * FROM users"
 
-var db = new Sqlite3
-
-db.open(filename)
+var db = new Sqlite3.open(filename)
 assert sqlite_open: db.get_error == 0
 
 db.exec(create_req)
@@ -40,22 +38,27 @@ assert sqlite_insert_1: db.get_error == 0
 db.exec(insert_req_2)
 assert sqlite_insert_2: db.get_error == 0
 
-db.prepare(select_req)
+var stmt = db.prepare(select_req)
 assert sqlite_select: db.get_error == 0
+if stmt isa PrepareFailed then
+	print "Prepared failed got: {stmt.error}"
+	abort
+end
+assert stmt isa Statement
 
-while db.step.is_row do
-	print db.column_text(0)
-	print db.column_text(1)
-	print db.column_text(2)
+while stmt.step.is_row do
+	print stmt.column_text(0)
+	print stmt.column_text(1)
+	print stmt.column_text(2)
 end
 
 db.close
 
-db = new Sqlite3
-db.open(filename)
+db = new Sqlite3.open(filename)
 assert sqlite_reopen: db.get_error == 0
 
-db.prepare(select_req)
+stmt = db.prepare(select_req)
 assert sqlite_reselect: db.get_error == 0
-db.step
-assert sqlite_column_0_0_reopened: db.column_text(0) == "Bob"
+assert stmt isa Statement
+stmt.step
+assert sqlite_column_0_0_reopened: stmt.column_text(0) == "Bob"
