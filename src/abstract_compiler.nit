@@ -1065,63 +1065,6 @@ class ExternCFile
 	var cflags: String
 end
 
-redef class String
-	# Mangle a string to be a unique valid C identifier
-	fun to_cmangle: String
-	do
-		var res = new Buffer
-		var underscore = false
-		for c in self do
-			if (c >= 'a' and c <= 'z') or (c >='A' and c <= 'Z') then
-				res.add(c)
-				underscore = false
-				continue
-			end
-			if underscore then
-				res.append('_'.ascii.to_s)
-				res.add('d')
-			end
-			if c >= '0' and c <= '9' then
-				res.add(c)
-				underscore = false
-			else if c == '_' then
-				res.add(c)
-				underscore = true
-			else
-				res.add('_')
-				res.append(c.ascii.to_s)
-				res.add('d')
-				underscore = false
-			end
-		end
-		return res.to_s
-	end
-
-	# Escape " \ ' and non printable characters for literal C strings or characters
-	fun escape_to_c: String
-	do
-		var b = new Buffer
-		for c in self do
-			if c == '\n' then
-				b.append("\\n")
-			else if c == '\0' then
-				b.append("\\0")
-			else if c == '"' then
-				b.append("\\\"")
-			else if c == '\'' then
-				b.append("\\\'")
-			else if c == '\\' then
-				b.append("\\\\")
-			else if c.ascii < 32 then
-				b.append("\\{c.ascii.to_base(8, false)}")
-			else
-				b.add(c)
-			end
-		end
-		return b.to_s
-	end
-end
-
 redef class MType
 	# Return the C type associated to a given Nit static type
 	fun ctype: String do return "val*"
