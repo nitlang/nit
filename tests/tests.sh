@@ -48,7 +48,7 @@ function compare_to_result()
 	local pattern="$1"
 	local sav="$2"
 	if [ ! -r "$sav" ]; then return 0; fi
-	diff -u "out/$pattern.res" "$sav" > "out/$pattern.diff.sav.log"
+	diff -u "$sav" "out/$pattern.res" > "out/$pattern.diff.sav.log"
 	if [ "$?" == 0 ]; then
 		return 1
 	fi
@@ -57,7 +57,7 @@ function compare_to_result()
 	sed '/[Ww]arning/d;/[Ee]rror/d' "$sav" > "out/$pattern.sav2"
 	grep '[Ee]rror' "out/$pattern.res" >/dev/null && echo "Error" >> "out/$pattern.res2"
 	grep '[Ee]rror' "$sav" >/dev/null && echo "Error" >> "out/$pattern.sav2"
-	diff -u "out/$pattern.res2" "out/$pattern.sav2" > "out/$pattern.diff.sav.log"
+	diff -u "out/$pattern.sav2" "out/$pattern.res2" > "out/$pattern.diff.sav.log"
 	if [ "$?" == 0 ]; then
 		return 2
 	else
