@@ -201,6 +201,7 @@ need_skip()
 		else
 			echo "=> $2: [skip]"
 		fi
+		echo >>$xml "<testcase classname='$3' name='$2'><skipped/></testcase>"
 		return 0
 	fi
 	return 1
@@ -311,7 +312,7 @@ for ii in "$@"; do
 	pack=`echo $ii | perl -p -e 's|^../([^/]*)/([a-zA-Z_]*).*|\1.\2| || s|^([a-zA-Z]*)[^_]*_([a-zA-Z]*).*|\1.\2| || s|\W*([a-zA-Z_]*).*|\1|'`
 
 	# Sould we skip the file for this engine?
-	need_skip $f $f && continue
+	need_skip $f $f $pack && continue
 
 	tmp=${ii/../AA}
 	if [ "x$tmp" = "x$ii" ]; then
@@ -325,7 +326,7 @@ for ii in "$@"; do
 		ff="out/$bf"
 
 		# Sould we skip the alternative for this engine?
-		need_skip $bf $bf && continue
+		need_skip $bf $bf $pack && continue
 
 		test -z "$tap" && echo -n "=> $bf: "
 
@@ -393,7 +394,7 @@ END
 					name="$bf args $cptr"
 
 					# Sould we skip the input for this engine?
-					need_skip $bff "  $name" && continue
+					need_skip $bff "  $name" $pack && continue
 
 					rm -rf "$fff.res" "$fff.err" "$fff.write" 2> /dev/null
 					if [ "x$verbose" = "xtrue" ]; then
