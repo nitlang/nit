@@ -18,6 +18,7 @@ package file
 intrude import stream
 intrude import string
 import string_search
+import time
 
 redef class Object
 # Simple I/O
@@ -197,6 +198,7 @@ redef class String
 	fun file_exists: Bool do return to_cstring.file_exists
 
 	fun file_stat: FileStat do return to_cstring.file_stat
+	fun file_lstat: FileStat do return to_cstring.file_lstat
 
 	# Remove a file, return true if success
 	fun file_delete: Bool do return to_cstring.file_delete
@@ -320,17 +322,33 @@ end
 redef class NativeString
 	private fun file_exists: Bool is extern "string_NativeString_NativeString_file_exists_0"
 	private fun file_stat: FileStat is extern "string_NativeString_NativeString_file_stat_0"
+	private fun file_lstat: FileStat `{
+		struct stat* stat_element;
+		int res;
+		stat_element = malloc(sizeof(struct stat));
+		res = lstat(recv, stat_element);
+		if (res == -1) return NULL;
+		return stat_element;
+	`}
 	private fun file_mkdir: Bool is extern "string_NativeString_NativeString_file_mkdir_0"
 	private fun file_delete: Bool is extern "string_NativeString_NativeString_file_delete_0"
 end
 
-extern FileStat
+extern FileStat `{ struct stat * `}
 # This class is system dependent ... must reify the vfs
 	fun mode: Int is extern "file_FileStat_FileStat_mode_0"
 	fun atime: Int is extern "file_FileStat_FileStat_atime_0"
 	fun ctime: Int is extern "file_FileStat_FileStat_ctime_0"
 	fun mtime: Int is extern "file_FileStat_FileStat_mtime_0"
 	fun size: Int is extern "file_FileStat_FileStat_size_0"
+
+	fun is_reg: Bool `{ return S_ISREG(recv->st_mode); `}
+	fun is_dir: Bool `{ return S_ISDIR(recv->st_mode); `}
+	fun is_chr: Bool `{ return S_ISCHR(recv->st_mode); `}
+	fun is_blk: Bool `{ return S_ISBLK(recv->st_mode); `}
+	fun is_fifo: Bool `{ return S_ISFIFO(recv->st_mode); `}
+	fun is_lnk: Bool `{ return S_ISLNK(recv->st_mode); `}
+	fun is_sock: Bool `{ return S_ISSOCK(recv->st_mode); `}
 end
 
 # Instance of this class are standard FILE * pointers
