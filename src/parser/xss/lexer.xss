@@ -53,13 +53,27 @@ $ end foreach
 		_file = file
 	end
 
+	# The last peeked token to chain them
+	private var last_token: nullable Token = null
+
 	# Give the next token (but do not consume it)
 	fun peek: Token
 	do
-		while _token == null do
-			_token = get_token
+		var t = _token
+		if t != null then return t
+
+		t = get_token
+		while t == null do t = get_token
+
+		var l = last_token
+		if l != null then
+			l.next_token = t
+			t.prev_token = l
 		end
-		return _token.as(not null)
+
+		last_token = t
+		_token = t
+		return t
 	end
 
 	# Give and consume the next token
