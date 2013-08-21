@@ -72,6 +72,7 @@ function process_result()
 	# Result
 	pattern=$1
 	description=$2
+	pack=$3
 	SAV=""
 	NSAV=""
 	FIXME=""
@@ -80,8 +81,7 @@ function process_result()
 	NSOSO=""
 	SOSOF=""
 	NSOSOF=""
-	base=${description%%_*}
-	echo >>$xml "<testcase classname='$engine.$base' name='$description'>"
+	echo >>$xml "<testcase classname='$pack' name='$description'>"
 	for sav in "sav/$engine/$pattern.res" "sav/$pattern.res" "sav/$pattern.sav"; do
 		compare_to_result "$pattern" "$sav"
 		case "$?" in
@@ -308,6 +308,8 @@ for ii in "$@"; do
 	fi
 	f=`basename "$ii" .nit`
 
+	pack=`echo $ii | perl -p -e 's|^../([^/]*)/([a-zA-Z_]*).*|\1.\2| || s|^([a-zA-Z]*)[^_]*_([a-zA-Z]*).*|\1.\2| || s|\W*([a-zA-Z_]*).*|\1|'`
+
 	# Sould we skip the file for this engine?
 	need_skip $f $f && continue
 
@@ -357,7 +359,7 @@ END
 		if [ "$ERR" != 0 ]; then
 			test -z "$tap" && echo -n "! "
 			cat "$ff.compile.log" "$ff.cmp.err" > "$ff.res"
-			process_result $bf $bf
+			process_result $bf $bf $pack
 		elif [ -x "./$ff.bin" ]; then
 			test -z "$tap" && echo -n ". "
 			# Execute
@@ -378,7 +380,7 @@ END
 			fi
 			cp "$ff.res"  "$ff.res2"
 			cat "$ff.cmp.err" "$ff.err" "$ff.res2" > "$ff.res"
-			process_result $bf $bf
+			process_result $bf $bf $pack
 
 			if [ -f "$f.args" ]; then
 				fargs=$f.args
@@ -415,14 +417,14 @@ END
 						cp "$fff.res"  "$fff.res2"
 						cat "$fff.err" "$fff.res2" > "$fff.res"
 					fi
-					process_result $bff "  $name"
+					process_result $bff "  $name" $pack
 				done < $fargs
 			fi
 		else
 			test -z "$tap" && echo -n "! "
 			cat "$ff.cmp.err" > "$ff.res"
 			echo "Compilation error" > "$ff.res"
-			process_result $bf "$bf"
+			process_result $bf "$bf" $pack
 		fi
 	done
 done
