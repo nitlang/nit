@@ -25,9 +25,9 @@ class PrintTreeVisitor
 	redef fun visit(n)
 	do
 		if n isa Token then
-			printn("  " * _rank, n.to_s, " ... ", n.location, "\n")
+			printn("  " * _rank, n.class_name, " \"", n.text.escape_to_c, "\" ", n.location, "\n")
 		else
-			printn("  " * _rank, n.location, "\n")
+			printn("  " * _rank, n.class_name, " ", n.location, "\n")
 		end
 		_rank = _rank + 1
 		n.visit_all(self)
