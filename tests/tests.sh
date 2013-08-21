@@ -177,6 +177,10 @@ function process_result()
 		else
 			echo "[=== no sav ===] out/$pattern.res"
 		fi
+		echo >>$xml "<skipped/>"
+		echo >>$xml "<system-out><![CDATA["
+		cat  >>$xml out/$pattern.res
+		echo >>$xml "]]></system-out>"
 		nos="$nos $pattern"
 	fi
 	if test -s out/$pattern.cmp.err; then
