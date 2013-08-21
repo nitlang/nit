@@ -93,7 +93,13 @@ end
 class HTMLTag
 	# HTML tagname: 'div' for <div></div>
 	var tag: String
-	init(tag: String) do self.tag = tag
+	init(tag: String) do
+		self.tag = tag
+		self.is_void = (once ["area", "base", "br", "col", "command", "embed", "hr", "img", "input", "keygen", "link", "meta", "param", "source", "track", "wbr"]).has(tag)
+	end
+
+	# Is the HTML element a void element?
+	var is_void: Bool
 
 	init with_attrs(tag: String, attrs: Map[String, String]) do
 		self.tag = tag
@@ -215,7 +221,7 @@ class HTMLTag
 		res.add "<"
 		res.add tag
 		render_attrs_in(res)
-		if tag != "script" and children.is_empty then
+		if is_void and children.is_empty then
 			res.add "/>"
 		else
 			res.add ">"
