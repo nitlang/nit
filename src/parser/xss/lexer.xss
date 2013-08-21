@@ -65,10 +65,7 @@ $ end foreach
 	# Give and consume the next token
 	fun next: Token
 	do
-		var result = _token
-		while result == null do
-			result = get_token
-		end
+		var result = peek
 		_token = null
 		return result
 	end
