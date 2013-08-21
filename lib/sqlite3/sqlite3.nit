@@ -61,7 +61,11 @@ extern class Sqlite3Code `{int`}
 	fun is_done: Bool `{ return recv == SQLITE_DONE; `}
 
 	redef fun to_s: String import String::from_cstring `{
+#if SQLITE_VERSION_NUMBER >= 3007015
 		char *err = (char *)sqlite3_errstr(recv);
+#else
+		char *err = "sqlite3_errstr supported only by version >= 3.7.15";
+#endif
 		if (err == NULL) err = "";
 		return new_String_from_cstring(err);
 	`}
