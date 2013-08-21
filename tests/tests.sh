@@ -157,6 +157,9 @@ function process_result()
 		echo >>$xml "<system-out><![CDATA["
 		head >>$xml -n 50 out/$pattern.diff.sav.log
 		echo >>$xml "]]></system-out>"
+		echo >>$xml "<system-err><![CDATA["
+		cat  >>$xml out/$pattern.compile.log
+		echo >>$xml "]]></system-err>"
 		nok="$nok $pattern"
 		echo "$ii" >> "$ERRLIST"
 	elif [ -n "$NFIXME" ]; then
@@ -169,6 +172,9 @@ function process_result()
 		echo >>$xml "<system-out><![CDATA["
 		head >>$xml -n 50 out/$pattern.diff.sav.log
 		echo >>$xml "]]></system-out>"
+		echo >>$xml "<system-err><![CDATA["
+		cat  >>$xml out/$pattern.compile.log
+		echo >>$xml "]]></system-err>"
 		nok="$nok $pattern"
 		echo "$ii" >> "$ERRLIST"
 	else
