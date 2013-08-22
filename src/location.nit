@@ -64,14 +64,20 @@ class Location
 		_column_end = column_e
 	end
 
+	# The index in the start character in the source
+	fun pstart: Int do return file.line_starts[line_start-1] + column_start-1
+
+	# The index on the end character in the source
+	fun pend: Int do return file.line_starts[line_end-1] + column_end-1
+
 	# The verbatim associated text in the source-file
 	fun text: String
 	do
 		var res = self.text_cache
 		if res != null then return res
 		var l = self
-		var pstart = l.file.line_starts[l.line_start-1] + l.column_start-1
-		var pend = l.file.line_starts[l.line_end-1] + l.column_end-1
+		var pstart = self.pstart
+		var pend = self.pend
 		res = l.file.string.substring(pstart, pend-pstart+1)
 		self.text_cache = res
 		return res

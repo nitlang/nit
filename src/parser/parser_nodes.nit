@@ -143,6 +143,14 @@ abstract class Token
 	fun text: String is abstract
 	fun text=(text: String) is abstract
 
+	# The previous token in the Lexer.
+	# May have disapeared in the AST
+	var prev_token: nullable Token
+
+	# The next token in the Lexer.
+	# May have disapeared in the AST
+	var next_token: nullable Token
+
 	redef fun to_s: String do
 		return "'{text}'"
 	end
@@ -513,7 +521,7 @@ class TMidString
 	super TokenLiteral
 end
 class TEndString
-	super Token
+	super TokenLiteral
 end
 
 # A malformed string

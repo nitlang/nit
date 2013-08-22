@@ -409,6 +409,7 @@ class ModelBuilder
 			var mod_name = aimport.n_name.n_id.text
 			var sup = self.get_mmodule_by_name(aimport.n_name, mmodule, mod_name)
 			if sup == null then continue # Skip error
+			aimport.mmodule = sup
 			imported_modules.add(sup)
 			var mvisibility = aimport.n_visibility.mvisibility
 			if mvisibility == protected_visibility then
@@ -460,6 +461,11 @@ class ModelBuilder
 		end
 		return res
 	end
+end
+
+redef class AStdImport
+	# The imported module once determined
+	var mmodule: nullable MModule = null
 end
 
 redef class AModule

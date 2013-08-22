@@ -117,6 +117,7 @@ redef class ModelBuilder
 					return
 				end
 				names.add(ptname)
+				nfd.mtype = mclass.mclass_type.arguments[i].as(MParameterType)
 			end
 
 			# Revolve bound for formal parameter names
@@ -131,13 +132,18 @@ redef class ModelBuilder
 						error(nfd, "Error: Formal parameter type `{names[i]}' bounded with a formal parameter type")
 					else
 						bounds.add(bound)
+						nfd.bound = bound
 					end
 				else if mclass.mclassdefs.is_empty then
 					# No bound, then implicitely bound by nullable Object
-					bounds.add(objectclass.mclass_type.as_nullable)
+					var bound = objectclass.mclass_type.as_nullable
+					bounds.add(bound)
+					nfd.bound = bound
 				else
 					# Inherit the bound
-					bounds.add(mclass.intro.bound_mtype.arguments[i])
+					var bound = mclass.intro.bound_mtype.arguments[i]
+					bounds.add(bound)
+					nfd.bound = bound
 				end
 			end
 		end
@@ -486,6 +492,14 @@ redef class AEnumClasskind
 end
 redef class AExternClasskind
 	redef fun mkind do return extern_kind
+end
+
+redef class AFormaldef
+	# The associated parameter type
+	var mtype: nullable MParameterType = null
+
+	# The associated bound
+	var bound: nullable MType = null
 end
 
 redef class AType
