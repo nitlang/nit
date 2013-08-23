@@ -84,7 +84,7 @@ interface Collection[E]
 	#     assert [1..3].has_only(1)          == false
 	#     assert [3..3[.has_only(1)          == true # empty collection
 	#
-	# ENSURE `is_empty implies (return) == true`
+	# ENSURE `is_empty implies result == true`
 	fun has_only(item: E): Bool is abstract
 
 	# How many occurrences of `item` are in the collection?

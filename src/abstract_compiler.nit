@@ -614,7 +614,7 @@ abstract class AbstractCompilerVisitor
 	# Unsafely cast a value to a new type
 	# ie the result share the same C variable but my have a different mcasttype
 	# NOTE: if the adaptation is useless then `value` is returned as it.
-	# ENSURE: `(return).name == value.name`
+	# ENSURE: `result.name == value.name`
 	fun autoadapt(value: RuntimeVariable, mtype: MType): RuntimeVariable
 	do
 		mtype = self.anchor(mtype)
@@ -638,7 +638,7 @@ abstract class AbstractCompilerVisitor
 	fun adapt_signature(m: MMethodDef, args: Array[RuntimeVariable]) is abstract
 
 	# Box or unbox a value to another type iff a C type conversion is needed
- 	# ENSURE: result.mtype.ctype == mtype.ctype
+	# ENSURE: `result.mtype.ctype == mtype.ctype`
 	fun autobox(value: RuntimeVariable, mtype: MType): RuntimeVariable is abstract
 
 	#  Generate a polymorphic subtype test
