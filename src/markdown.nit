@@ -17,6 +17,7 @@ module markdown
 
 import parser
 import html
+import highlight
 
 # The class that does the convertion from a `ADoc` to HTML
 private class Doc2Mdwn
@@ -171,7 +172,19 @@ private class Doc2Mdwn
 
 	fun process_code(n: HTMLTag, text: String)
 	do
-		n.append text
+		# Try to parse it
+		var ast = toolcontext.parse_something(text)
+
+		if ast isa AError then
+			n.append text
+			# n.attrs["title"] = ast.message
+			n.add_class("rawcode")
+		else
+			var v = new HighlightVisitor
+			v.enter_visit(ast)
+			n.add(v.html)
+			n.add_class("nitcode")
+		end
 	end
 end
 
