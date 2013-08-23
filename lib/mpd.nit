@@ -150,6 +150,7 @@ class MPDConnection
 		var album: nullable String = null
 		var artist: nullable String = null
 		var title: nullable String = null
+		var time: nullable Int = null
 
 		socket.write("currentsong\n")
 		var rep = socket.read
@@ -165,12 +166,15 @@ class MPDConnection
 					artist = rest
 				else if key == "title:" then
 					title = rest
+				else if key == "time:" then
+					time = rest.to_i
 				end
 			end
 		end
 
-		if album != null and artist != null and title != null then
-			return new SongInfo(album, artist, title)
+		if album != null and artist != null and
+			title != null and time != null then
+			return new SongInfo(album, artist, title, time)
 		else
 			return null
 		end
@@ -182,6 +186,7 @@ class SongInfo
 	var album: String
 	var artist: String
 	var title: String
+	var time: Int
 end
 
 # MPD server status
