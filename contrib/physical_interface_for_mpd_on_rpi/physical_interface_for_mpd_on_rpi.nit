@@ -174,7 +174,7 @@ class HD44780
 		write(true, fs)
 	end
 
-	fun setup
+	fun setup_alt
 	do
 		ds = [d4,d5,d6,d7]
 
@@ -189,51 +189,64 @@ class HD44780
 		en.write(false)
 
 		# wait 20ms for power up
-		#50.bcm2835_delay
+		50.bcm2835_delay
 
-		#write_4bits(true,true,false,false)
-		#write_4_bits(3)
+		write_4bits(true,true,false,false)
+		write_4_bits(3)
 
-		#5.bcm2835_delay
+		5.bcm2835_delay
 
-		#write_4bits(true,true,false,false)
-		#write_4_bits(3)
+		write_4bits(true,true,false,false)
+		write_4_bits(3)
 
-		#5.bcm2835_delay
+		5.bcm2835_delay
 
-		#write_4bits(true,true,false,false)
-		#write_4_bits(3)
+		write_4bits(true,true,false,false)
+		write_4_bits(3)
 
-		#200.bcm2835_delay_micros
+		200.bcm2835_delay_micros
 
-		#write_4bits(false,true,false,false)
-		#write_4_bits(2)
+		write_4bits(false,true,false,false)
+		write_4_bits(2)
 
 		# wait 5ms
-		#5.bcm2835_delay
+		5.bcm2835_delay
 
 		# set interface
 		# 4bits, 2 lines
-		#write(true, flow)
-		#function_set(4, 2, 8)
+		function_set(4, 2, 8)
 
 		# cursor
 		# don't shift & hide
-		#display_control(true, true, true)
+		display_control(true, true, true)
 
 		# clear & home
-		#write(true, flag_)
-		#clear
+		clear
 
 		# set cursor move direction
 		# move right
-		#write(true, 6)
+		write(true, 6)
 
 		# turn on display
-		#write(true, 4)
+		write(true, 4)
 
 		# set entry mode
-		#entry_mode(true, true)
+		entry_mode(true, true)
+	end
+
+	fun setup
+	do
+		ds = [d4,d5,d6,d7]
+
+		rs.fsel = new FunctionSelect.outp
+		en.fsel = new FunctionSelect.outp
+		d4.fsel = new FunctionSelect.outp
+		d5.fsel = new FunctionSelect.outp
+		d6.fsel = new FunctionSelect.outp
+		d7.fsel = new FunctionSelect.outp
+
+		rs.write(false)
+		en.write(false)
 
 		write(true, "33".to_hex) # init
 		write(true, "32".to_hex) # init
