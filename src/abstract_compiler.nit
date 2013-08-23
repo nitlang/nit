@@ -2020,6 +2020,21 @@ redef class AOrExpr
 	end
 end
 
+redef class AImpliesExpr
+	redef fun expr(v)
+	do
+		var res = v.new_var(self.mtype.as(not null))
+		var i1 = v.expr_bool(self.n_expr)
+		v.add("if (!{i1}) \{")
+		v.add("{res} = 1;")
+		v.add("\} else \{")
+		var i2 = v.expr_bool(self.n_expr2)
+		v.add("{res} = {i2};")
+		v.add("\}")
+		return res
+	end
+end
+
 redef class AAndExpr
 	redef fun expr(v)
 	do

@@ -128,6 +128,13 @@ redef class AOrExpr
 	end
 end
 
+redef class AImpliesExpr
+	redef fun accept_transform_visitor(v)
+	do
+		# TODO
+	end
+end
+
 redef class AAndExpr
 	# `x and y` is replaced with `if x then y else x`
 	redef fun accept_transform_visitor(v)
