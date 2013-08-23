@@ -994,6 +994,36 @@ redef class AOrExpr
 	end
 end
 
+redef class AImpliesExpr
+	redef fun accept_typing(v)
+	do
+		var old_flow_ctx = v.flow_ctx
+		var stype = v.type_bool
+		_stype = stype
+
+		# Process left operand
+		v.enter_visit(n_expr)
+
+		# Prepare right operand context
+		v.use_if_true_flow_ctx(n_expr)
+
+		# Process right operand
+		v.enter_visit(n_expr2)
+		if n_expr2.if_false_flow_ctx != null then
+			_if_false_flow_ctx = n_expr2.if_false_flow_ctx
+		else
+			_if_false_flow_ctx = v.flow_ctx
+		end
+
+		v.flow_ctx = old_flow_ctx
+
+		v.check_conform_expr(n_expr, stype)
+		v.check_conform_expr(n_expr2, stype)
+		_stype = stype
+		_is_typed = true
+	end
+end
+
 redef class AAndExpr
 	redef fun accept_typing(v)
 	do
