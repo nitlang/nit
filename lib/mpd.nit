@@ -50,12 +50,12 @@ class MPDConnection
 
 		var password = password
 		if password != null then
-			write("password {password}\n")
+			write_and_check("password {password}\n")
 		end
 	end
 
 	# Write a command to the MPD server
-	protected fun write(msg: String)
+	protected fun write_and_check(msg: String)
 	do
 		if socket == null then connect
 
@@ -117,16 +117,16 @@ class MPDConnection
 		error = "Cannot get volume"
 	end
 
-	fun volume=(vol: Int) do write("setvol {vol}\n")
+	fun volume=(vol: Int) do write_and_check("setvol {vol}\n")
 
 	# Pause music playing on the MPD server
-	fun pause do write("pause\n")
+	fun pause do write_and_check("pause\n")
 
 	# Stop music playing on the MPD server
-	fun stop do write("stop\n")
+	fun stop do write_and_check("stop\n")
 
 	# Play music playing on the MPD server
-	fun play do write("play\n")
+	fun play do write_and_check("play\n")
 
 	# Get information on the currently playing song on the MPD server
 	fun current_song: nullable SongInfo
