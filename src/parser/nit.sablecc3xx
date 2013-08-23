@@ -123,6 +123,7 @@ kwin = 'in';
 kwand = 'and';
 kwor = 'or';
 kwnot = 'not';
+kwimplies = 'implies';
 kwreturn = 'return';
 kwcontinue = 'continue';
 kwbreak = 'break';
@@ -516,6 +517,7 @@ expr_and~nopar~nobra~nois {-> expr}
 	| {:or} expr_and~nopar~nobra~nois :kwor :no expr_not~nopar~nobra~nois
 	| {:and} expr_and~nopar~nobra~nois :kwand :no expr_not~nopar~nobra~nois
 	| {:or_else} expr_and~nopar~nobra~nois :kwor :kwelse :no expr_not~nopar~nobra~nois
+	| {:implies} expr_and~nopar~nobra~nois :kwimplies :no expr_not~nopar~nobra~nois
 	;
 
 expr_not~nopar~nobra~nois {-> expr}
@@ -806,6 +808,7 @@ expr	= {block} expr* kwend?
 	| {or} expr [expr2]:expr 
 	| {and} expr [expr2]:expr 
 	| {or_else} expr [expr2]:expr
+	| {implies} expr [expr2]:expr
 	| {not} kwnot expr 
 	| {eq} expr [expr2]:expr 
 	| {ee} expr [expr2]:expr 

@@ -313,6 +313,9 @@ end
 class TKwor
 	super TokenKeyword
 end
+class TKwimplies
+	super TokenKeyword
+end
 class TKwnot
 	super TokenKeyword
 end
@@ -1207,6 +1210,13 @@ end
 
 # A `or else` expression
 class AOrElseExpr
+	super ABoolExpr
+	readable writable var _n_expr: AExpr
+	readable writable var _n_expr2: AExpr
+end
+
+# A `implies` expression
+class AImpliesExpr
 	super ABoolExpr
 	readable writable var _n_expr: AExpr
 	readable writable var _n_expr2: AExpr
