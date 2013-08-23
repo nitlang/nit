@@ -549,8 +549,8 @@ abstract class MType
 	# Return true if `self` is an subtype of `sup`.
 	# The typing is done using the standard typing policy of Nit.
 	#
-	# REQUIRE: `anchor == null` implies `not self.need_anchor and not sup.need_anchor`
-	# REQUIRE: `anchor != null` implies `self.can_resolve_for(anchor, null, mmodule) and sup.can_resolve_for(anchor, null, mmodule)`
+	# REQUIRE: `anchor == null implies not self.need_anchor and not sup.need_anchor`
+	# REQUIRE: `anchor != null implies self.can_resolve_for(anchor, null, mmodule) and sup.can_resolve_for(anchor, null, mmodule)`
 	fun is_subtype(mmodule: MModule, anchor: nullable MClassType, sup: MType): Bool
 	do
 		var sub = self
@@ -674,7 +674,7 @@ abstract class MType
         # because "redef type U: Y". Therefore, Map[T, U] is bound to
 	# Map[B, Y]
 	#
-	# ENSURE: `not self.need_anchor` implies `result == self`
+	# ENSURE: `not self.need_anchor implies result == self`
 	# ENSURE: `not result.need_anchor`
 	fun anchor_to(mmodule: MModule, anchor: MClassType): MType
 	do
@@ -700,7 +700,7 @@ abstract class MType
 	# H[Int]  supertype_to  G  #->  G[Int, Bool]
 	#
 	# REQUIRE: `super_mclass` is a super-class of `self`
-	# REQUIRE: `self.need_anchor` implies `anchor != null and self.can_resolve_for(anchor, null, mmodule)`
+	# REQUIRE: `self.need_anchor implies anchor != null and self.can_resolve_for(anchor, null, mmodule)`
 	# ENSURE: `result.mclass = super_mclass`
 	fun supertype_to(mmodule: MModule, anchor: nullable MClassType, super_mclass: MClass): MClassType
 	do
@@ -792,7 +792,7 @@ abstract class MType
 	# two function instead of one seems also to be a bad idea.
 	#
 	# REQUIRE: `can_resolve_for(mtype, anchor, mmodule)`
-	# ENSURE: `not self.need_anchor` implies `result == self`
+	# ENSURE: `not self.need_anchor implies result == self`
 	fun resolve_for(mtype: MType, anchor: nullable MClassType, mmodule: MModule, cleanup_virtual: Bool): MType is abstract
 
 	# Can the type be resolved?
@@ -812,9 +812,9 @@ abstract class MType
 	#    B[E] is a red hearing only the E is important,
 	#    E make sense in A
 	#
-	# REQUIRE: `anchor != null` implies `not anchor.need_anchor`
-	# REQUIRE: `mtype.need_anchor` implies `anchor != null and mtype.can_resolve_for(anchor, null, mmodule)`
-	# ENSURE: `not self.need_anchor` implies `result == true`
+	# REQUIRE: `anchor != null implies not anchor.need_anchor`
+	# REQUIRE: `mtype.need_anchor implies anchor != null and mtype.can_resolve_for(anchor, null, mmodule)`
+	# ENSURE: `not self.need_anchor implies result == true`
 	fun can_resolve_for(mtype: MType, anchor: nullable MClassType, mmodule: MModule): Bool is abstract
 
 	# Return the nullable version of the type
