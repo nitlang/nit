@@ -54,11 +54,8 @@ class HighlightVisitor
 	# Used to print parts of the source betwen tokens of the AST
 	private var pos = 0
 
-	var modelbuilder: ModelBuilder
-
-	init(modelbuilder: ModelBuilder)
+	init
 	do
-		self.modelbuilder = modelbuilder
 		html.add_class("nitcode")
 		token_head = html
 		prod_head = html

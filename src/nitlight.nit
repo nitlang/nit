@@ -53,7 +53,7 @@ end
 for mm in mmodules do
 	if dir != null then toolcontext.info("write {dir}/{mm.name}.html", 1)
 
-	var v = new HighlightVisitor(modelbuilder)
+	var v = new HighlightVisitor
 	if opt_ast.value then v.with_ast = true
 	var page = null
 	if not opt_fragment.value then
@@ -106,7 +106,7 @@ if dir != null then
 	page.add_raw_html "</li></body>"
 	page.save("{dir}/index.html")
 
-	var v = new HighlightVisitor(modelbuilder)
+	var v = new HighlightVisitor
 	toolcontext.info("write {dir}/style.css", 1)
 	var f = new OFStream.open("{dir}/style.css")
 	f.write v.css_content
