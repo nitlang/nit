@@ -454,10 +454,8 @@ loop
 	var lev = inp.lev
 	if lev != last_in then
 		last_in = lev
-		if lev then
-			print "hps"
-			hit_play_stop
-		end
+		if lev then hit_play_stop
+		force_lcd_update = true
 	end
 
 	# volume
