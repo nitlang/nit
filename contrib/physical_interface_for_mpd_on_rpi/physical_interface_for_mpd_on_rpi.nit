@@ -70,7 +70,8 @@ class RotaryEncoder
 	end
 end
 
-class LCD
+# Hitachi HD44780 or similar 2-4 lines LCD displays
+class HD44780
 	var rs: RPiPin
 	var en: RPiPin
 	var d4: RPiPin
@@ -415,7 +416,7 @@ var lcd_d4 = new RPiPin.p1_19
 var lcd_d5 = new RPiPin.p1_26
 var lcd_d6 = new RPiPin.p1_24
 var lcd_d7 = new RPiPin.p1_22
-var lcd = new LCD(lcd_rs, lcd_en, lcd_d4, lcd_d5, lcd_d6, lcd_d7)
+var lcd = new HD44780(lcd_rs, lcd_en, lcd_d4, lcd_d5, lcd_d6, lcd_d7)
 lcd.setup
 #lcd.write(false, 'a'.to_i.to_ascii)
 lcd.clear
