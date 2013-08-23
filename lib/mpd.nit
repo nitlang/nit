@@ -76,6 +76,9 @@ class MPDConnection
 
 		var volume: nullable Int = null
 		var state: nullable String = null
+		var elapsed: nullable Int = null
+		var time_at: nullable Int = null
+		var time_total: nullable Int = null
 
 		# get current status
 		socket.write("status\n")
@@ -89,14 +92,21 @@ class MPDConnection
 				if  key == "volume:" then
 					volume = rest.to_i
 					if volume == -1 then volume = null
-				else if  key == "volume:" then
+				else if  key == "state:" then
 					state = rest
+				else if  key == "elapsed:" then
+					elapsed = rest.to_i
+				else if  key == "time:" then
+					var times = rest.split(":")
+					time_at = times[0].to_i
+					time_total = times[1].to_i
 				end
 			end
 		end
 
 		if state != null then
-			return new ServerStatus(volume, state)
+			var status = new ServerStatus(volume, state, elapsed, time_at, time_total)
+			return status
 		else
 			return null
 		end
@@ -177,5 +187,30 @@ end
 # MPD server status
 class ServerStatus
 	var volume: nullable Int
+
 	var state: String
+	fun playing: Bool do return state == "play"
+	fun stopped: Bool do return state == "stop"
+
+	var elapsed: nullable Int
+	var time_at: nullable Int
+	var time_total: nullable Int
+	fun time_ratio: nullable Float do
+		if time_at == null or time_total == null then return null
+		return time_at.to_f / time_total.to_f
+	end
+
+	redef fun to_s do
+		var vol = "unknown"
+		if volume != null then vol = volume.to_s
+
+		var time_at = time_at
+		var time_total = time_total
+		var elapsed = elapsed
+		if time_at != null and time_total != null and elapsed != null then
+			return "volume: {vol}\nstate: {state}\nelapsed: {elapsed}\ntime_[at|total]: {time_at}:{time_total}\ntime_ratio: {time_ratio.as(not null)}"
+		else
+			return "volume: {vol}\nstate: {state}"
+		end
+	end
 end
