@@ -235,11 +235,13 @@ class HD44780
 		# set entry mode
 		#entry_mode(true, true)
 
-		write(true, "33".to_hex)
-		write(true, "32".to_hex)
-		write(true, "28".to_hex)
-		write(true, "0C".to_hex)
-		write(true, "01".to_hex)
+		write(true, "33".to_hex) # init
+		write(true, "32".to_hex) # init
+		write(true, "28".to_hex) # 2 lines, 5x7
+		write(true, "0C".to_hex) # hide cursor
+		write(true, "06".to_hex) # cursor move right
+		write(true, "04".to_hex) # turn on display
+		write(true, "01".to_hex) # clear display
 	end
 
 	fun write_4_bits(v: Int)
