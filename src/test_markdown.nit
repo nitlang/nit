@@ -76,6 +76,8 @@ var modelbuilder = new ModelBuilder(model, toolcontext)
 var mmodules = modelbuilder.parse(args)
 modelbuilder.run_phases
 
+var hv = new HighlightVisitor
+
 var page = new HTMLTag("html")
 page.add_raw_html """
 <head>
@@ -95,6 +97,10 @@ overflow: auto;
 padding: 6px 6px;
 border-radius: 3px;
 }
+.rawcode[title] {
+border-color: red;
+}
+{{{hv.css_content}}}
 </style>
 </head><body>
 """

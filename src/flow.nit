@@ -485,6 +485,21 @@ redef class AOrExpr
 	end
 end
 
+redef class AImpliesExpr
+	redef fun accept_flow_visitor(v)
+	do
+		var after_expr = v.visit_expr(self.n_expr)
+
+		v.current_flow_context = after_expr.when_true
+		var after_expr2 = v.visit_expr(self.n_expr2)
+
+		var merge_true = v.make_merge_flow(after_expr.when_false, after_expr2.when_true)
+		merge_true.name = "OR TRUE"
+
+		v.make_true_false_flow(merge_true, after_expr2.when_false)
+	end
+end
+
 redef class AAndExpr
 	redef fun accept_flow_visitor(v)
 	do

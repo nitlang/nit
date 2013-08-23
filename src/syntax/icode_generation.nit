@@ -787,6 +787,28 @@ redef class AOrExpr
 	end
 end
 
+redef class AImpliesExpr
+	redef fun generate_icode(v)
+	do
+		# Prepare result
+		var reg = v.new_register(stype)
+
+		# Process left operand (in a if/then)
+		var iif = new IIf(v.generate_expr(n_expr))
+		v.stmt(iif)
+		var seq_old = v.seq
+		v.seq = iif.else_seq
+		v.add_assignment(reg, v.lit_true_reg)
+
+		# Process right operand (in the else)
+		v.seq = iif.then_seq
+		v.add_assignment(reg, v.generate_expr(n_expr2))
+
+		v.seq = seq_old
+		return reg
+	end
+end
+
 redef class AAndExpr
 	redef fun generate_icode(v)
 	do

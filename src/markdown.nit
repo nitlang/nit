@@ -17,9 +17,12 @@ module markdown
 
 import parser
 import html
+import highlight
 
 # The class that does the convertion from a `ADoc` to HTML
 private class Doc2Mdwn
+	var toolcontext: ToolContext
+
 	# The lines of the current code block, empty is no current code block
 	var curblock = new Array[String]
 
@@ -169,7 +172,19 @@ private class Doc2Mdwn
 
 	fun process_code(n: HTMLTag, text: String)
 	do
-		n.append text
+		# Try to parse it
+		var ast = toolcontext.parse_something(text)
+
+		if ast isa AError then
+			n.append text
+			# n.attrs["title"] = ast.message
+			n.add_class("rawcode")
+		else
+			var v = new HighlightVisitor
+			v.enter_visit(ast)
+			n.add(v.html)
+			n.add_class("nitcode")
+		end
 	end
 end
 
@@ -177,14 +192,16 @@ redef class ADoc
 	# Build a `<div>` element that contains the full documentation in HTML
 	fun full_markdown: HTMLTag
 	do
-		var d2m = new Doc2Mdwn
+		var tc = new ToolContext
+		var d2m = new Doc2Mdwn(tc)
 		return d2m.work(self)
 	end
 
 	# Build a `<span>` element that contains the synopsys in HTML
 	fun short_markdown: HTMLTag
 	do
-		var d2m = new Doc2Mdwn
+		var tc = new ToolContext
+		var d2m = new Doc2Mdwn(tc)
 		return d2m.short_work(self)
 	end
 end

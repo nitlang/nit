@@ -1320,6 +1320,16 @@ redef class AOrExpr
 	end
 end
 
+redef class AImpliesExpr
+	redef fun expr(v)
+	do
+		var cond = v.expr(self.n_expr)
+		if cond == null then return null
+		if not cond.is_true then return v.true_instance
+		return v.expr(self.n_expr2)
+	end
+end
+
 redef class AAndExpr
 	redef fun expr(v)
 	do
