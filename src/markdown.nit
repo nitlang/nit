@@ -20,6 +20,8 @@ import html
 
 # The class that does the convertion from a `ADoc` to HTML
 private class Doc2Mdwn
+	var toolcontext: ToolContext
+
 	# The lines of the current code block, empty is no current code block
 	var curblock = new Array[String]
 
@@ -177,14 +179,16 @@ redef class ADoc
 	# Build a `<div>` element that contains the full documentation in HTML
 	fun full_markdown: HTMLTag
 	do
-		var d2m = new Doc2Mdwn
+		var tc = new ToolContext
+		var d2m = new Doc2Mdwn(tc)
 		return d2m.work(self)
 	end
 
 	# Build a `<span>` element that contains the synopsys in HTML
 	fun short_markdown: HTMLTag
 	do
-		var d2m = new Doc2Mdwn
+		var tc = new ToolContext
+		var d2m = new Doc2Mdwn(tc)
 		return d2m.short_work(self)
 	end
 end

@@ -23,8 +23,6 @@ import parser_util
 class NitUnitExecutor
 	super Doc2Mdwn
 
-	var toolcontext: ToolContext
-
 	# The name of the module to import
 	var modname: String
 
@@ -37,7 +35,7 @@ class NitUnitExecutor
 	# Initialize a new e
 	init(toolcontext: ToolContext, prefix: String, modname: String, testsuite: HTMLTag)
 	do
-		self.toolcontext = toolcontext
+		super(toolcontext)
 		self.prefix = prefix
 		self.modname = modname
 		self.testsuite = testsuite
