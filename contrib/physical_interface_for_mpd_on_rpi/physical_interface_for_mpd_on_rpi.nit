@@ -348,7 +348,10 @@ do
 	var status = mpd.status
 	var playing = false
 	if status != null then
-		playing = status.state == "play"
+		playing = status.playing
+	else
+		print "Cannot get state"
+		return
 	end
 
 	if playing then
