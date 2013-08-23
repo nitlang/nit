@@ -15,6 +15,7 @@
 # This module is implicitly imported by every module.
 package standard
 
+import posix
 import environ 
 import time
 import string_search

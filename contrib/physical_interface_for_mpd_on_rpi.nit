@@ -26,6 +26,7 @@ module physical_interface_for_mpd_on_rpi
 
 import bcm2835
 import mpd
+import privileges
 
 redef class Object
 	fun mpd: MPDConnection do return once new MPDConnection("localhost", 6600, "password")
@@ -37,6 +38,7 @@ class RotaryEncoder
 	var old_a= false
 	var old_b= false
 
+	# returns '<', '>' or null accoring to rotation or lack thereof
 	fun update: nullable Char
 	do
 		var new_a = pin_a.lev
@@ -76,7 +78,7 @@ class LCD
 	var d6: RPiPin
 	var d7: RPiPin
 
-	var ds = new Array[RPiPin]# = [d4,d5,d6,d7]
+	var ds = new Array[RPiPin]
 
 	# commands
 	fun flag_clear_display: Int do return 1
@@ -359,7 +361,26 @@ do
 	end
 end
 
+# commandline options for privileges drop
+var opts = new OptionContext
+var opt_ug = new OptionDropPrivileges
+#opt_ug.mandatory = true
+opts.add_option(opt_ug)
+
+# parse and check command line options
+opts.parse(args)
+if not opts.errors.is_empty then
+	print opts.errors
+	print "Usage: {program_name} [options]"
+	opts.usage
+	exit 1
+end
+
 assert bcm2835_init else print "Failed to init"
+
+# drop privileges!
+var user_group = opt_ug.value
+if user_group != null then user_group.drop_privileges
 
 # Debug LED
 var out = new RPiPin.p1_11
