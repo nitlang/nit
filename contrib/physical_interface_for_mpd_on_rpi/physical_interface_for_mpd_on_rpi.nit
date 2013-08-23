@@ -119,6 +119,9 @@ class HD44780
 	fun flag_5x10_dots: Int do return 4
 	fun flag_5x8_dots: Int do return 0
 
+	# last text displayed
+	private var last_text: nullable String = null
+
 	fun function_set(bits, lines, dots_wide: Int)
 	do
 		var fs = flag_function_set
@@ -337,9 +340,28 @@ class HD44780
 
 	fun text=(v: String)
 	do
+		# do not redraw the samething
+		var last_text = last_text
+		if last_text != null and last_text == v then return
+
 		clear
 		return_home
-		for c in v do write(false, c.ascii)
+		var count = 0
+		for c in v do
+			if c == '\n' then
+				# FIXME, this should work
+				#write(true, "C0".to_hex)
+				# instead we use the following which may not be portable
+
+				for s in [count..40[ do write(false, ' '.ascii)
+				count = 0
+			else
+				write(false, c.ascii)
+				count += 1
+			end
+		end
+
+		self.last_text = v
 	end
 end
 
