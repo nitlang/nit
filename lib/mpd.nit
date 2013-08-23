@@ -62,7 +62,11 @@ class MPDConnection
 		socket.write(msg)
 		sys.nanosleep(0,5000)
 		var rep = socket.read
-		assert rep.has_prefix("OK") else print "MPD responded {rep}"
+		if not rep.has_prefix("OK") then
+			print "Error: MPD responded {rep}"
+			socket.close
+			socket = null
+		end
 	end
 
 	# Get MPD server status
