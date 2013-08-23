@@ -440,15 +440,14 @@ var lcd_d6 = new RPiPin.p1_24
 var lcd_d7 = new RPiPin.p1_22
 var lcd = new HD44780(lcd_rs, lcd_en, lcd_d4, lcd_d5, lcd_d6, lcd_d7)
 lcd.setup
-#lcd.write(false, 'a'.to_i.to_ascii)
 lcd.clear
-lcd.write(false, 'a'.ascii)
-lcd.write(false, 'C'.ascii)
 
 var last_in = false
 var led_on = false
 var tick = 0
 loop
+	var force_lcd_update = false
+
 	# play button
 	var lev = inp.lev
 	if lev != last_in then
@@ -469,12 +468,30 @@ loop
 			print "vol up"
 			mpd.relative_volume = vol_step
 		end
+		force_lcd_update = true
 	end
 
-	if tick % 100 == 0 then
-		print tick
-		#var now_playing = mpd.status("")
-		#lcd.text = tick.to_s
+	# update lcd
+	if tick % 100 == 0 or force_lcd_update then
+		var status = mpd.status
+		var song = mpd.current_song
+
+		var status_char
+		if status == null then
+			lcd.text = "Unknown status"
+		else if song == null then
+			lcd.text = "No song playing"
+		else
+			if status.playing then
+				status_char = ">"
+			else status_char = "#"
+
+			var tr = status.time_ratio
+			var pos = "-"
+			if tr != null then pos = (status.time_ratio*10.0).to_i.to_s
+
+			lcd.text = "{status_char} {song.artist}\n{pos} {song.title}"
+		end
 	end
 
 	10.bcm2835_delay
