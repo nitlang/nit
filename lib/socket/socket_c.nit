@@ -119,8 +119,8 @@ extern FFSocket `{ S_DESCRIPTOR* `}
 	fun write(buffer: String): Int import String::to_cstring, String::length `{ return write(*recv, (char*)String_to_cstring(buffer), String_length(buffer)); `}
 
 	fun read: String `{
-		char c[1024];
-		int n = read(*recv, c, (sizeof(c)-1));
+		char *c = (char*)malloc(1024);
+		int n = read(*recv, c, 1023);
 		if(n < 0) exit(-1);
 		c[n] = '\0';
 		return new_String_from_cstring(c);
