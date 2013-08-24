@@ -41,6 +41,9 @@ class PhysicalInterface
 
 	var lcd: HD44780
 
+	var lcd_backlight: RPiPin
+	var lcd_backlight_delay = 1000
+
 	init
 	do
 		# commandline options for privileges drop
@@ -97,12 +100,16 @@ class PhysicalInterface
 		lcd = new HD44780(lcd_rs, lcd_en, lcd_d4, lcd_d5, lcd_d6, lcd_d7)
 		lcd.setup
 		lcd.clear
+
+		lcd_backlight = new RPiPin.p1_18
+		lcd_backlight.fsel = new FunctionSelect.outp
 	end
 
 	fun run
 	do
 		var led_on = false
 		var tick = 0
+		var last_event = 0
 		loop
 			var force_lcd_update = false
 
@@ -143,6 +150,7 @@ class PhysicalInterface
 					lcd.text = "No song playing"
 				else
 					if status.playing then
+						last_event = tick
 						status_char = ">"
 					else status_char = "#"
 
@@ -152,6 +160,16 @@ class PhysicalInterface
 
 					lcd.text = "{status_char} {song.artist}\n{pos} {song.title}"
 				end
+			end
+
+			# manage backlight
+			if force_lcd_update then last_event = tick
+
+			var diff_with_last_event = tick - last_event
+			if diff_with_last_event == 0 then
+				lcd_backlight.write(true)
+			else if diff_with_last_event == lcd_backlight_delay then
+				lcd_backlight.write(false)
 			end
 
 			10.bcm2835_delay
