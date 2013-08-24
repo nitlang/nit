@@ -42,6 +42,8 @@ class PhysicalInterface
 	var lcd_backlight: RPiPin
 	var lcd_backlight_delay = 1000
 
+	var buzzer: Buzzer
+
 	init
 	do
 		# commandline options for privileges drop
@@ -96,6 +98,11 @@ class PhysicalInterface
 
 		lcd_backlight = new RPiPin.p1_18
 		lcd_backlight.fsel = new FunctionSelect.outp
+
+		# Buzzer
+		var buzzer_pin = new RPiPin.p1_11
+		buzzer_pin.fsel = new FunctionSelect.outp
+		buzzer = new Buzzer(buzzer_pin)
 	end
 
 	fun run
@@ -189,12 +196,16 @@ class PhysicalInterface
 			print "stopped -> play"
 			mpd.play
 		end
+
+		bell
 	end
 
 	fun play_playlist_a
 	do
 		mpd.load_playlist("alexis")
 	end
+
+	fun bell do buzzer.buzz(1.5, 20)
 end
 
 var phy = new PhysicalInterface
