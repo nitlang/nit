@@ -457,3 +457,33 @@ class HD44780
 		self.last_text = v
 	end
 end
+
+# Component for any kind of buttons or switches
+class Switch
+	var pin: RPiPin
+
+	init (pin: RPiPin, pud: PUDControl)
+	do
+		self.pin = pin
+		pin.fsel = new FunctionSelect.inpt
+		pin.pud = pud
+	end
+
+	fun is_down: Bool do return pin.lev
+
+	var last_down: nullable Bool = null
+
+	# Returns true is state (is_down) changed since last call to `changed`
+	fun changed: Bool
+	do
+		var now = is_down
+		var last_down = last_down
+		if last_down == null then
+			self.last_down = now
+			return false
+		else if last_down != now then
+			self.last_down = now
+			return true
+		else return false
+	end
+end
