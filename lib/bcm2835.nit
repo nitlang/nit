@@ -553,3 +553,20 @@ class StepperMotor
 		for i in [0..4[ do pins[i].write(bits[i])
 	end
 end
+
+class Buzzer
+	var pin: RPiPin
+
+	fun buzz(delay: Float, times: Int)
+	do
+		assert times > 0
+		assert delay > 0.0
+		var delay_i = (delay*1000.0).to_i
+		for i in [0..times[ do
+			pin.write(true)
+			delay_i.bcm2835_delay_micros
+			pin.write(false)
+			delay_i.bcm2835_delay_micros
+		end
+	end
+end
