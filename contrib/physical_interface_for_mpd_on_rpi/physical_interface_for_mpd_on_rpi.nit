@@ -29,7 +29,10 @@ import mpd
 import privileges
 
 class PhysicalInterface
-	var mpd = new MPDConnection("localhost", 6600, "password")
+	var mpd = new MPDConnection(server, port, password)
+	protected fun password: String do return "password"
+	fun server: String do return "localhost"
+	fun port: Int do return 6600
 
 	var but_play: Switch
 	var but_playlist_a: Switch
