@@ -487,3 +487,69 @@ class Switch
 		else return false
 	end
 end
+
+class StepperMotor
+	var pins: Sequence[RPiPin]
+	var delay: Int
+
+	init (delay: Int, a, b, c, d: RPiPin)
+	do
+		pins = [a, b, c, d]
+		self.delay = delay
+
+		for p in pins do p.fsel = new FunctionSelect.outp
+	end
+
+	fun forward(steps: Int)
+	do
+		for s in [0..steps[ do
+			set(true, false, false, false)
+			delay.bcm2835_delay
+			set(true, true, false, false)
+			delay.bcm2835_delay
+			set(false, true, false, false)
+			delay.bcm2835_delay
+			set(false, true, true, false)
+			delay.bcm2835_delay
+			set(false, false, true, false)
+			delay.bcm2835_delay
+			set(false, false, true, true)
+			delay.bcm2835_delay
+			set(false, false, false, true)
+			delay.bcm2835_delay
+			set(true, false, false, true)
+			delay.bcm2835_delay
+		end
+	end
+
+	fun backwards(steps: Int)
+	do
+		for s in [0..steps[ do
+			set(true, false, false, true)
+			delay.bcm2835_delay
+			set(false, false, false, true)
+			delay.bcm2835_delay
+			set(false, false, true, true)
+			delay.bcm2835_delay
+			set(false, false, true, false)
+			delay.bcm2835_delay
+			set(false, true, true, false)
+			delay.bcm2835_delay
+			set(false, true, false, false)
+			delay.bcm2835_delay
+			set(true, true, false, false)
+			delay.bcm2835_delay
+			set(true, false, false, false)
+			delay.bcm2835_delay
+		end
+	end
+
+	fun release do set(false, false, false, false)
+
+	protected fun set(a, b, c, d: Bool)
+	do
+		var bits = new Array[Bool].with_items(a, b, c, d)
+
+		for i in [0..4[ do pins[i].write(bits[i])
+	end
+end
