@@ -70,7 +70,8 @@ class RotaryEncoder
 	end
 end
 
-class LCD
+# Hitachi HD44780 or similar 2-4 lines LCD displays
+class HD44780
 	var rs: RPiPin
 	var en: RPiPin
 	var d4: RPiPin
@@ -117,6 +118,9 @@ class LCD
 	fun flag_1_line: Int do return 0
 	fun flag_5x10_dots: Int do return 4
 	fun flag_5x8_dots: Int do return 0
+
+	# last text displayed
+	private var last_text: nullable String = null
 
 	fun function_set(bits, lines, dots_wide: Int)
 	do
@@ -170,7 +174,7 @@ class LCD
 		write(true, fs)
 	end
 
-	fun setup
+	fun setup_alt
 	do
 		ds = [d4,d5,d6,d7]
 
@@ -185,57 +189,72 @@ class LCD
 		en.write(false)
 
 		# wait 20ms for power up
-		#50.bcm2835_delay
+		50.bcm2835_delay
 
-		#write_4bits(true,true,false,false)
-		#write_4_bits(3)
+		write_4bits(true,true,false,false)
+		write_4_bits(3)
 
-		#5.bcm2835_delay
+		5.bcm2835_delay
 
-		#write_4bits(true,true,false,false)
-		#write_4_bits(3)
+		write_4bits(true,true,false,false)
+		write_4_bits(3)
 
-		#5.bcm2835_delay
+		5.bcm2835_delay
 
-		#write_4bits(true,true,false,false)
-		#write_4_bits(3)
+		write_4bits(true,true,false,false)
+		write_4_bits(3)
 
-		#200.bcm2835_delay_micros
+		200.bcm2835_delay_micros
 
-		#write_4bits(false,true,false,false)
-		#write_4_bits(2)
+		write_4bits(false,true,false,false)
+		write_4_bits(2)
 
 		# wait 5ms
-		#5.bcm2835_delay
+		5.bcm2835_delay
 
 		# set interface
 		# 4bits, 2 lines
-		#write(true, flow)
-		#function_set(4, 2, 8)
+		function_set(4, 2, 8)
 
 		# cursor
 		# don't shift & hide
-		#display_control(true, true, true)
+		display_control(true, true, true)
 
 		# clear & home
-		#write(true, flag_)
-		#clear
+		clear
 
 		# set cursor move direction
 		# move right
-		#write(true, 6)
+		write(true, 6)
 
 		# turn on display
-		#write(true, 4)
+		write(true, 4)
 
 		# set entry mode
-		#entry_mode(true, true)
+		entry_mode(true, true)
+	end
 
-		write(true, "33".to_hex)
-		write(true, "32".to_hex)
-		write(true, "28".to_hex)
-		write(true, "0C".to_hex)
-		write(true, "01".to_hex)
+	fun setup
+	do
+		ds = [d4,d5,d6,d7]
+
+		rs.fsel = new FunctionSelect.outp
+		en.fsel = new FunctionSelect.outp
+		d4.fsel = new FunctionSelect.outp
+		d5.fsel = new FunctionSelect.outp
+		d6.fsel = new FunctionSelect.outp
+		d7.fsel = new FunctionSelect.outp
+
+		rs.write(false)
+		en.write(false)
+
+		write(true, "33".to_hex) # init
+		write(true, "32".to_hex) # init
+		write(true, "28".to_hex) # 2 lines, 5x7
+		write(true, "0C".to_hex) # hide cursor
+		write(true, "06".to_hex) # cursor move right
+		write(true, "04".to_hex) # turn on display
+		write(true, "01".to_hex) # clear display
 	end
 
 	fun write_4_bits(v: Int)
@@ -336,9 +355,28 @@ class LCD
 
 	fun text=(v: String)
 	do
+		# do not redraw the samething
+		var last_text = last_text
+		if last_text != null and last_text == v then return
+
 		clear
 		return_home
-		for c in v do write(false, c.ascii)
+		var count = 0
+		for c in v do
+			if c == '\n' then
+				# FIXME, this should work
+				#write(true, "C0".to_hex)
+				# instead we use the following which may not be portable
+
+				for s in [count..40[ do write(false, ' '.ascii)
+				count = 0
+			else
+				write(false, c.ascii)
+				count += 1
+			end
+		end
+
+		self.last_text = v
 	end
 end
 
@@ -348,7 +386,10 @@ do
 	var status = mpd.status
 	var playing = false
 	if status != null then
-		playing = status.state == "play"
+		playing = status.playing
+	else
+		print "Cannot get state"
+		return
 	end
 
 	if playing then
@@ -412,25 +453,22 @@ var lcd_d4 = new RPiPin.p1_19
 var lcd_d5 = new RPiPin.p1_26
 var lcd_d6 = new RPiPin.p1_24
 var lcd_d7 = new RPiPin.p1_22
-var lcd = new LCD(lcd_rs, lcd_en, lcd_d4, lcd_d5, lcd_d6, lcd_d7)
+var lcd = new HD44780(lcd_rs, lcd_en, lcd_d4, lcd_d5, lcd_d6, lcd_d7)
 lcd.setup
-#lcd.write(false, 'a'.to_i.to_ascii)
 lcd.clear
-lcd.write(false, 'a'.ascii)
-lcd.write(false, 'C'.ascii)
 
 var last_in = false
 var led_on = false
 var tick = 0
 loop
+	var force_lcd_update = false
+
 	# play button
 	var lev = inp.lev
 	if lev != last_in then
 		last_in = lev
-		if lev then
-			print "hps"
-			hit_play_stop
-		end
+		if lev then hit_play_stop
+		force_lcd_update = true
 	end
 
 	# volume
@@ -443,12 +481,30 @@ loop
 			print "vol up"
 			mpd.relative_volume = vol_step
 		end
+		force_lcd_update = true
 	end
 
-	if tick % 100 == 0 then
-		print tick
-		#var now_playing = mpd.status("")
-		#lcd.text = tick.to_s
+	# update lcd
+	if tick % 100 == 0 or force_lcd_update then
+		var status = mpd.status
+		var song = mpd.current_song
+
+		var status_char
+		if status == null then
+			lcd.text = "Unknown status"
+		else if song == null then
+			lcd.text = "No song playing"
+		else
+			if status.playing then
+				status_char = ">"
+			else status_char = "#"
+
+			var tr = status.time_ratio
+			var pos = "-"
+			if tr != null then pos = (status.time_ratio*10.0).to_i.to_s
+
+			lcd.text = "{status_char} {song.artist}\n{pos} {song.title}"
+		end
 	end
 
 	10.bcm2835_delay
