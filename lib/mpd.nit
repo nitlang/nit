@@ -179,6 +179,11 @@ class MPDConnection
 			return null
 		end
 	end
+
+	fun load_playlist(name: String)
+	do
+		write_and_check "load \"{name}\""
+	end
 end
 
 # MPD song info
