@@ -31,8 +31,6 @@ import privileges
 class PhysicalInterface
 	var mpd = new MPDConnection("localhost", 6600, "password")
 
-	var debug_led: RPiPin
-
 	var but_play: Switch
 	var but_playlist_a: Switch
 
@@ -66,11 +64,6 @@ class PhysicalInterface
 		# drop privileges!
 		var user_group = opt_ug.value
 		if user_group != null then user_group.drop_privileges
-
-		# Debug LED
-		debug_led = new RPiPin.p1_11
-		debug_led.fsel = new FunctionSelect.outp
-		debug_led.write(false)
 
 		# Play button
 		but_play = new Switch(new RPiPin.p1_13, new PUDControl.down)
@@ -107,7 +100,6 @@ class PhysicalInterface
 
 	fun run
 	do
-		var led_on = false
 		var tick = 0
 		var last_event = 0
 		loop
