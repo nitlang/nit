@@ -18,6 +18,7 @@
 module moles
 
 import mnit
+import realtime
 
 class Hole
 	var game : Game
@@ -174,6 +175,8 @@ class MyApp
 
 	var screen : nullable Screen = null
 
+	var target_dt = 20000000
+
 	init do super
 
 	redef fun init_window
@@ -187,8 +190,16 @@ class MyApp
 	do
 		var screen = self.screen
 		if screen != null then
+			var clock = new Clock
+
 			screen.game.do_turn
 			screen.do_frame( display )
+
+			var dt = clock.lapse
+			if dt.sec == 0 and dt.nanosec < target_dt then
+				var sleep_t = target_dt - dt.nanosec
+				sys.nanosleep(0, sleep_t)
+			end
 		end
 	end
 
