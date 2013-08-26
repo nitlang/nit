@@ -119,7 +119,7 @@ function run_compiler()
 		bench_command "nitg-g" "nitg --global ../src/test_parser.nit" "./nitg.$title.bin" -v --global --no-cc ../src/test_parser.nit
 		run_command "$@" ../src/nit.nit -o "nit.$title.bin"
 		bench_command "nit" "nit ../src/test_parser.nit ../src/location.nit" "./nit.$title.bin" -v ../src/test_parser.nit -- -n ../src/location.nit
-		run_command "$@" ../examples/shoot/shoot_logic.nit -o "shoot.$title.bin"
+		run_command "$@" ../examples/shoot/src/shoot_logic.nit -o "shoot.$title.bin"
 		bench_command "shoot" "shoot_logic" "./shoot.$title.bin"
 		run_command "$@" ../tests/bench_bintree_gen.nit -o "bintrees.$title.bin"
 		bench_command "bintrees" "bench_bintree_gen 16" "./bintrees.$title.bin" 16
@@ -129,7 +129,7 @@ function run_compiler()
 		bench_command "nitg-s" "nitg --separate ../src/nitg.nit" "./nitg.$title.bin" -v --no-cc --separate ../src/nitg.nit
 		run_command "$@" ../src/nit.nit -o "nit.$title.bin"
 		bench_command "nit" "nit ../src/test_parser.nit ../src/rapid_type_analysis.nit" "./nit.$title.bin" -v ../src/test_parser.nit -- -n ../src/rapid_type_analysis.nit
-		run_command "$@" ../examples/shoot/shoot_logic.nit -o "shoot.$title.bin"
+		run_command "$@" ../examples/shoot/src/shoot_logic.nit -o "shoot.$title.bin"
 		bench_command "shoot" "shoot_logic 30" "./shoot.$title.bin" 30
 		run_command "$@" ../tests/bench_bintree_gen.nit -o "bintrees.$title.bin"
 		bench_command "bintrees" "bench_bintree_gen 18" "./bintrees.$title.bin" 18
