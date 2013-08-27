@@ -519,6 +519,7 @@ class NitdocModule
 				if mclassdef.is_intro then
 					intro_mclasses.add(mclassdef.mclass)
 				else
+					if mclassdef.mclass.mpropdefs_in_module(self).is_empty then continue
 					redef_mclasses.add(mclassdef.mclass)
 				end
 				local_mclasses.add(mclassdef.mclass)
@@ -566,7 +567,8 @@ class NitdocModule
 	private fun classes_column do
 		var sorter = new MClassNameSorter
 		var sorted = new Array[MClass]
-		sorted.add_all(local_mclasses)
+		sorted.add_all(intro_mclasses)
+		sorted.add_all(redef_mclasses)
 		sorter.sort(sorted)
 		if not sorted.is_empty then
 			append("<nav class='properties filterable'>")
@@ -1379,20 +1381,30 @@ redef class MClass
 	end
 
 	private fun html_full_desc(page: NitdocModule) do
-		var classes = new Array[String]
-		classes.add(kind.to_s)
-		if not page.mmodule.in_nesting.greaters.has(intro.mmodule) then classes.add("redef")
-		classes.add(visibility.to_s)
-		page.append("<article class='{classes.join(" ")}' id='{anchor}'>")
-		page.append("<h3 class='signature' data-untyped-signature='{html_name}{html_short_signature}'>")
-		page.append("<span>")
-		html_short_link(page)
-		html_signature(page)
-		page.append("</span></h3>")
-		html_info(page)
-		html_comment(page)
-		html_redefs(page)
-		page.append("</article>")
+		var is_redef = not page.mmodule.in_nesting.greaters.has(intro.mmodule)
+		var redefs = mpropdefs_in_module(page)
+		if not is_redef or not redefs.is_empty then
+			var classes = new Array[String]
+			classes.add(kind.to_s)
+			if is_redef then classes.add("redef")
+			classes.add(visibility.to_s)
+			page.append("<article class='{classes.join(" ")}' id='{anchor}'>")
+			page.append("<h3 class='signature' data-untyped-signature='{html_name}{html_short_signature}'>")
+			page.append("<span>")
+			html_short_link(page)
+			html_signature(page)
+			page.append("</span></h3>")
+			html_info(page)
+			html_comment(page)
+			if is_redef and not redefs.is_empty then
+				page.append("<div class='refinements'>")
+				for mpropdef in redefs do
+					mpropdef.html_full_desc(page, self)
+				end
+				page.append("</div>")
+			end
+			page.append("</article>")
+		end
 	end
 
 	private fun html_info(page: NitdocModule) do
@@ -1454,19 +1466,19 @@ redef class MClass
 		page.append("</div>")
 	end
 
-	private fun html_redefs(page: NitdocModule) do
+	private fun mpropdefs_in_module(page: NitdocModule): Array[MPropDef] do
+		var res = new Array[MPropDef]
 		page.mmodule.linearize_mclassdefs(mclassdefs)
-		page.append("<div class='refinements'>")
-		# comments for each mclassdef contained in current mmodule
 		for mclassdef in mclassdefs do
 			if not page.mmodule.mclassdefs.has(mclassdef) then continue
 			if mclassdef.is_intro then continue
 			for mpropdef in mclassdef.mpropdefs do
+				if mpropdef.mproperty.visibility < page.ctx.min_visibility then continue
 				if mpropdef isa MAttributeDef then continue
-				mpropdef.html_full_desc(page, self)
+				res.add(mpropdef)
 			end
 		end
-		page.append("</div>")
+		return res
 	end
 end
 
