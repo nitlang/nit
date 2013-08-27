@@ -123,6 +123,7 @@ kwin = 'in';
 kwand = 'and';
 kwor = 'or';
 kwnot = 'not';
+kwimplies = 'implies';
 kwreturn = 'return';
 kwcontinue = 'continue';
 kwbreak = 'break';
@@ -224,7 +225,7 @@ implicit_main_meth {-> propdef}
 
 /* CLASSES *******************************************************************/
 classdef
-	= [doc]:no redef visibility classkind no classid formaldefs? line_annotations_forclass? extern_code_block? [superclasses]:superclass* propdefs* [n2]:no kwend {-> New classdef.std(doc.doc, redef.kwredef, visibility, classkind, classid, [formaldefs.formaldef], line_annotations_forclass.annotations, extern_code_block, [superclasses.superclass], [propdefs.propdef], kwend)};
+	= [doc]:no redef visibility classkind no qualified? classid formaldefs? line_annotations_forclass? extern_code_block? [superclasses]:superclass* propdefs* [n2]:no kwend {-> New classdef.std(doc.doc, redef.kwredef, visibility, classkind, classid, [formaldefs.formaldef], line_annotations_forclass.annotations, extern_code_block, [superclasses.superclass], [propdefs.propdef], kwend)};
 redef {-> kwredef?}
 	= kwredef? {-> kwredef};
 classkind
@@ -411,9 +412,9 @@ stmt~withelse~noexpr~nopar {-> expr}
 	| {loop} loop~withelse {-> loop~withelse.expr}
 	| {for} for~withelse {-> for~withelse.expr}
 	| {assert} assert~withelse {-> assert~withelse.expr}
-!noexpr	| {call} recv id args_nopar closure_defs~withelse? {-> New expr.call(recv.expr, id, args_nopar.exprs, [closure_defs~withelse.closure_def])}
+!noexpr	| {call} recv qualified? id args_nopar closure_defs~withelse? {-> New expr.call(recv.expr, id, args_nopar.exprs, [closure_defs~withelse.closure_def])}
 !noexpr	| {super} qualified? kwsuper args_nopar {-> New expr.super(qualified, kwsuper, args_nopar.exprs)}
-!noexpr	| {init} recv kwinit args_nopar {-> New expr.init(recv.expr, kwinit, args_nopar.exprs)}
+!noexpr	| {init} recv qualified? kwinit args_nopar {-> New expr.init(recv.expr, kwinit, args_nopar.exprs)}
 	| {debug_type_is} kwdebug kwtype type column expr_final~withelse {-> New expr.debug_type(kwdebug, kwtype, expr_final~withelse.expr, type) }
 	;
 
@@ -449,11 +450,11 @@ vardecl~withelse{-> expr}
 	;
 
 assignment~withelse~nopar {-> expr}
-	= {attr} recv~nopar attrid assign expr_final~withelse {-> New expr.attr_assign(recv~nopar.expr, attrid, assign, expr_final~withelse.expr)}
-	| {call} recv~nopar id args assign expr_final~withelse {-> New expr.call_assign(recv~nopar.expr, id, args.exprs, assign,  expr_final~withelse.expr)}
+	= {attr} recv~nopar qualified? attrid assign expr_final~withelse {-> New expr.attr_assign(recv~nopar.expr, attrid, assign, expr_final~withelse.expr)}
+	| {call} recv~nopar qualified? id args assign expr_final~withelse {-> New expr.call_assign(recv~nopar.expr, id, args.exprs, assign,  expr_final~withelse.expr)}
 	| {bra} expr_atom~nopar braargs assign expr_final~withelse {-> New expr.bra_assign(expr_atom~nopar.expr, braargs.exprs, assign,  expr_final~withelse.expr)}
-	| {attr_re} recv~nopar attrid assign_op expr_final~withelse {-> New expr.attr_reassign(recv~nopar.expr, attrid, assign_op,  expr_final~withelse.expr)}
-	| {call_re} recv~nopar id args assign_op expr_final~withelse {-> New expr.call_reassign(recv~nopar.expr, id, args.exprs, assign_op,  expr_final~withelse.expr)}
+	| {attr_re} recv~nopar qualified? attrid assign_op expr_final~withelse {-> New expr.attr_reassign(recv~nopar.expr, attrid, assign_op,  expr_final~withelse.expr)}
+	| {call_re} recv~nopar qualified? id args assign_op expr_final~withelse {-> New expr.call_reassign(recv~nopar.expr, id, args.exprs, assign_op,  expr_final~withelse.expr)}
 	| {bra_re} expr_atom~nopar braargs assign_op expr_final~withelse {-> New expr.bra_reassign(expr_atom~nopar.expr, braargs.exprs, assign_op,  expr_final~withelse.expr)}
 	;
 assign_op
@@ -502,7 +503,7 @@ assertid {-> id}
 /* EXPRESSIONS ***************************************************************/
 expr_final~nopar~withelse~nobra {-> expr}
 	= expr~nopar~nobra {-> expr~nopar~nobra.expr}
-	| {closure_call} recv~nobra id args closure_defs~withelse {-> New expr.call(recv~nobra.expr, id, args.exprs, [closure_defs~withelse.closure_def])}
+	| {closure_call} recv~nobra qualified? id args closure_defs~withelse {-> New expr.call(recv~nobra.expr, id, args.exprs, [closure_defs~withelse.closure_def])}
 !nobra!nopar	| {closure_bra} expr_atom braargs closure_defs~withelse {-> New expr.bra(expr_atom.expr, braargs.exprs, [closure_defs~withelse.closure_def])}
 	;
 
@@ -516,6 +517,7 @@ expr_and~nopar~nobra~nois {-> expr}
 	| {:or} expr_and~nopar~nobra~nois :kwor :no expr_not~nopar~nobra~nois
 	| {:and} expr_and~nopar~nobra~nois :kwand :no expr_not~nopar~nobra~nois
 	| {:or_else} expr_and~nopar~nobra~nois :kwor :kwelse :no expr_not~nopar~nobra~nois
+	| {:implies} expr_and~nopar~nobra~nois :kwimplies :no expr_not~nopar~nobra~nois
 	;
 
 expr_not~nopar~nobra~nois {-> expr}
@@ -560,16 +562,16 @@ expr_minus~nopar~nobra {-> expr}
 expr_new~nopar~nobra {-> expr}
 	= expr_atom~nopar~nobra {-> expr_atom~nopar~nobra.expr}
 	| {new} kwnew no type~nobra_nopar args {-> New expr.new(kwnew, type~nobra_nopar.type, Null, args.exprs)}
-	| {isset_attr} kwisset recv~nopar~nobra attrid {-> New expr.isset_attr(kwisset, recv~nopar~nobra.expr, attrid)}
+	| {isset_attr} kwisset recv~nopar~nobra qualified? attrid {-> New expr.isset_attr(kwisset, recv~nopar~nobra.expr, attrid)}
 	;
 
 expr_atom~nopar~nobra {-> expr}
-	= {attr} recv~nopar~nobra attrid {-> New expr.attr(recv~nopar~nobra.expr, attrid)}
-	| {call} recv~nopar~nobra id args {-> New expr.call(recv~nopar~nobra.expr, id, args.exprs, [])}
+	= {attr} recv~nopar~nobra qualified? attrid {-> New expr.attr(recv~nopar~nobra.expr, attrid)}
+	| {call} recv~nopar~nobra qualified? id args {-> New expr.call(recv~nopar~nobra.expr, id, args.exprs, [])}
 	| {super} qualified? kwsuper args {-> New expr.super(qualified, kwsuper, args.exprs)}
 	| {init} recv~nopar~nobra kwinit args {-> New expr.init(recv~nopar~nobra.expr, kwinit, args.exprs)}
 !nobra	| {bra} expr_atom~nopar braargs {-> New expr.bra(expr_atom~nopar.expr, braargs.exprs, [])}
-	| {new} kwnew no type~nobra_nopar dot [n2]:no id args {-> New expr.new(kwnew, type~nobra_nopar.type, id, args.exprs)}
+	| {new} kwnew no type~nobra_nopar dot [n2]:no qualified? id args {-> New expr.new(kwnew, type~nobra_nopar.type, id, args.exprs)}
 // !nopar to unambiguise 'foo[5].bar' between '(foo[5]).bar' and 'foo([5].bar),
 !nobra!nopar	| {range} obra no expr [n2]:no dotdot [n3]:no [expr2]:expr_nobra [n4]:no cbra annotations? {-> New expr.crange(obra, expr, expr2.expr, cbra, annotations)}
 !nobra!nopar	| {orange} obra no expr [n2]:no dotdot [n3]:no [expr2]:expr_nobra [n4]:no [cbra]:obra annotations? {-> New expr.orange(obra, expr, expr2.expr, cbra, annotations)}
@@ -583,7 +585,7 @@ expr_atom~nopar~nobra {-> expr}
 	| {char} char annotations? {-> New expr.char(char, annotations)}
 	| {string} string annotations? {-> New expr.string(string, annotations)}
 	| {superstring} superstring  {-> superstring.expr}
-!nopar	| {par} opar expr cpar annotations? {-> New expr.par(opar, expr, cpar, annotations)}
+!nopar	| {par} opar no expr [n2]:no cpar annotations? {-> New expr.par(opar, expr, cpar, annotations)}
         | {as_cast} expr_atom~nopar~nobra dot no kwas [n2]:no opar [n3]:no type [n4]:no cpar {-> New expr.as_cast(expr_atom~nopar~nobra.expr, kwas, opar, type, cpar)}
         | {as_notnull} expr_atom~nopar~nobra dot no kwas [n2]:no opar [n3]:no kwnot [n4]:no kwnull [n5]:no cpar {-> New expr.as_notnull(expr_atom~nopar~nobra.expr, kwas, opar, kwnot, kwnull, cpar)}
 	;
@@ -605,13 +607,13 @@ superstring_end {-> expr}
 
 annotations~nopar {-> annotations}
 	= {one} at one_annotation~nopar {-> New annotations(at, Null, [one_annotation~nopar.annotation], Null)}
-	| {many} at opar annotation_list cpar {-> New annotations(at, opar, [annotation_list.annotation], cpar)}
+	| {many} at opar no annotation_list [n2]:no cpar {-> New annotations(at, opar, [annotation_list.annotation], cpar)}
 	;
 
 one_annotation~nopar {-> annotation}
 	= {alone} atid annotations~nopar? {-> New annotation(atid, Null, [], Null, annotations~nopar.annotations)}
 // !nopar to unambiguise 'new T@foo(bar)' between 'new T@(foo(bar))' and 'new (T@foo)(bar)'
-!nopar	| {args} atid opar at_args cpar annotations~nopar? {-> New annotation(atid, opar, [at_args.at_arg], cpar, annotations~nopar.annotations)}
+!nopar	| {args} atid opar no at_args [n2]:no cpar annotations~nopar? {-> New annotation(atid, opar, [at_args.at_arg], cpar, annotations~nopar.annotations)}
 	;
 
 many_annotations {-> annotations}
@@ -627,7 +629,7 @@ line_annotations~forclass {-> annotations}
 	;
 line_annotation~forclass {-> annotation}
 	= [doc]:no atid~forclass annotations? n1 {-> New annotation(atid~forclass.atid, Null, [], Null, annotations)}
-	| {args} [doc]:no atid~forclass opar at_args cpar annotations? n1 {-> New annotation(atid~forclass.atid, opar, [at_args.at_arg], cpar, annotations)}
+	| {args} [doc]:no atid~forclass opar no at_args cpar annotations? n1 {-> New annotation(atid~forclass.atid, opar, [at_args.at_arg], cpar, annotations)}
 	| {nopar} [doc]:no atid~forclass at_args_nopar n1 {-> New annotation(atid~forclass.atid, Null, [at_args_nopar.at_arg], Null, Null)}
 	;
 
@@ -651,12 +653,12 @@ at_arg~nopar {-> at_arg}
 	;
 
 atid~forclass {-> atid}
-	= {id} id {-> New atid.id(id)}
-//!forclass	| {kwextern} kwextern {-> New atid.kwextern(kwextern)}
-//!forclass	| {kwintern} kwintern {-> New atid.kwintern(kwintern)}
-!forclass	| {kwreadable} kwreadable {-> New atid.kwreadable(kwreadable)}
-!forclass	| {kwwritable} kwwritable {-> New atid.kwwritable(kwwritable)}
-	| {kwimport} kwimport {-> New atid.kwimport(kwimport)}
+	= {id} qualified? id {-> New atid.id(id)}
+//!forclass	| {kwextern} qualified? kwextern {-> New atid.kwextern(kwextern)}
+//!forclass	| {kwintern} qualified? kwintern {-> New atid.kwintern(kwintern)}
+!forclass	| {kwreadable} qualified? kwreadable {-> New atid.kwreadable(kwreadable)}
+!forclass	| {kwwritable} qualified? kwwritable {-> New atid.kwwritable(kwwritable)}
+	| {kwimport} qualified? kwimport {-> New atid.kwimport(kwimport)}
 	;
 
 /* MISC **********************************************************************/
@@ -684,7 +686,7 @@ expr_list {-> expr*}
 expr_tail {-> expr} 
 	= comma no expr [n2]:no {-> expr};
 idlist {-> id*}
-	= opar idlist_nopar cpar {-> [idlist_nopar.id]}
+	= opar no idlist_nopar [n2]:no cpar {-> [idlist_nopar.id]}
 	| {nopar} idlist_nopar {-> [idlist_nopar.id]}
 	;
 idlist_nopar {-> id*}
@@ -806,6 +808,7 @@ expr	= {block} expr* kwend?
 	| {or} expr [expr2]:expr 
 	| {and} expr [expr2]:expr 
 	| {or_else} expr [expr2]:expr
+	| {implies} expr [expr2]:expr
 	| {not} kwnot expr 
 	| {eq} expr [expr2]:expr 
 	| {ee} expr [expr2]:expr 

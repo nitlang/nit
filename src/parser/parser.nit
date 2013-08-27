@@ -229,1221 +229,1743 @@ class Parser
 			new ReduceAction74(5),
 			new ReduceAction75(5),
 			new ReduceAction76(5),
-			new ReduceAction77(5),
+			new ReduceAction75(5),
 			new ReduceAction78(5),
 			new ReduceAction79(5),
-			new ReduceAction80(5),
+			new ReduceAction78(5),
 			new ReduceAction81(5),
 			new ReduceAction82(5),
 			new ReduceAction83(5),
 			new ReduceAction84(5),
-			new ReduceAction85(5),
+			new ReduceAction83(5),
 			new ReduceAction86(5),
 			new ReduceAction87(5),
-			new ReduceAction88(5),
+			new ReduceAction86(5),
 			new ReduceAction89(5),
 			new ReduceAction90(5),
 			new ReduceAction91(5),
 			new ReduceAction92(5),
-			new ReduceAction93(5),
+			new ReduceAction91(5),
 			new ReduceAction94(5),
 			new ReduceAction95(5),
-			new ReduceAction96(5),
+			new ReduceAction94(5),
 			new ReduceAction97(5),
 			new ReduceAction98(5),
 			new ReduceAction99(5),
 			new ReduceAction100(5),
-			new ReduceAction101(5),
+			new ReduceAction99(5),
 			new ReduceAction102(5),
 			new ReduceAction103(5),
-			new ReduceAction104(5),
+			new ReduceAction102(5),
 			new ReduceAction105(5),
 			new ReduceAction106(5),
 			new ReduceAction107(5),
 			new ReduceAction108(5),
-			new ReduceAction109(5),
+			new ReduceAction107(5),
 			new ReduceAction110(5),
 			new ReduceAction111(5),
-			new ReduceAction112(5),
+			new ReduceAction110(5),
 			new ReduceAction113(5),
 			new ReduceAction114(5),
 			new ReduceAction115(5),
 			new ReduceAction116(5),
-			new ReduceAction117(5),
+			new ReduceAction115(5),
 			new ReduceAction118(5),
 			new ReduceAction119(5),
-			new ReduceAction120(5),
+			new ReduceAction118(5),
 			new ReduceAction121(5),
 			new ReduceAction122(5),
 			new ReduceAction123(5),
 			new ReduceAction124(5),
-			new ReduceAction125(5),
+			new ReduceAction123(5),
 			new ReduceAction126(5),
 			new ReduceAction127(5),
-			new ReduceAction128(5),
+			new ReduceAction126(5),
 			new ReduceAction129(5),
 			new ReduceAction130(5),
 			new ReduceAction131(5),
 			new ReduceAction132(5),
-			new ReduceAction133(5),
+			new ReduceAction131(5),
 			new ReduceAction134(5),
 			new ReduceAction135(5),
-			new ReduceAction136(5),
-			new ReduceAction137(6),
-			new ReduceAction138(6),
-			new ReduceAction139(6),
-			new ReduceAction140(6),
-			new ReduceAction141(6),
-			new ReduceAction142(6),
-			new ReduceAction143(7),
-			new ReduceAction144(7),
-			new ReduceAction145(8),
-			new ReduceAction146(9),
-			new ReduceAction147(9),
-			new ReduceAction148(9),
-			new ReduceAction149(9),
-			new ReduceAction150(10),
-			new ReduceAction151(10),
-			new ReduceAction152(11),
-			new ReduceAction153(12),
-			new ReduceAction154(12),
-			new ReduceAction155(12),
-			new ReduceAction156(12),
-			new ReduceAction157(12),
-			new ReduceAction158(12),
-			new ReduceAction159(12),
-			new ReduceAction160(12),
-			new ReduceAction161(12),
-			new ReduceAction162(12),
-			new ReduceAction163(12),
-			new ReduceAction164(12),
-			new ReduceAction165(12),
-			new ReduceAction166(12),
-			new ReduceAction167(12),
-			new ReduceAction168(12),
-			new ReduceAction169(12),
-			new ReduceAction170(12),
-			new ReduceAction171(12),
-			new ReduceAction172(12),
-			new ReduceAction173(12),
-			new ReduceAction174(12),
-			new ReduceAction175(12),
-			new ReduceAction176(12),
-			new ReduceAction177(12),
-			new ReduceAction178(12),
-			new ReduceAction179(12),
-			new ReduceAction180(12),
-			new ReduceAction181(12),
-			new ReduceAction182(12),
-			new ReduceAction183(12),
-			new ReduceAction184(12),
-			new ReduceAction185(12),
-			new ReduceAction186(12),
-			new ReduceAction187(12),
-			new ReduceAction188(12),
-			new ReduceAction189(12),
-			new ReduceAction190(12),
-			new ReduceAction191(12),
-			new ReduceAction192(12),
-			new ReduceAction193(12),
-			new ReduceAction194(12),
-			new ReduceAction195(12),
-			new ReduceAction196(12),
-			new ReduceAction197(12),
-			new ReduceAction198(12),
-			new ReduceAction199(12),
-			new ReduceAction200(12),
-			new ReduceAction201(12),
-			new ReduceAction202(12),
-			new ReduceAction203(12),
-			new ReduceAction204(12),
-			new ReduceAction205(12),
-			new ReduceAction206(12),
-			new ReduceAction207(12),
-			new ReduceAction208(12),
-			new ReduceAction209(12),
-			new ReduceAction210(12),
-			new ReduceAction211(12),
-			new ReduceAction212(12),
-			new ReduceAction213(12),
-			new ReduceAction214(12),
-			new ReduceAction215(12),
-			new ReduceAction216(12),
-			new ReduceAction217(12),
-			new ReduceAction218(12),
-			new ReduceAction219(12),
-			new ReduceAction220(12),
-			new ReduceAction221(12),
-			new ReduceAction222(12),
-			new ReduceAction223(12),
-			new ReduceAction224(12),
-			new ReduceAction225(12),
-			new ReduceAction226(12),
-			new ReduceAction227(12),
-			new ReduceAction228(12),
-			new ReduceAction229(12),
-			new ReduceAction230(12),
-			new ReduceAction231(12),
-			new ReduceAction232(12),
-			new ReduceAction233(12),
-			new ReduceAction234(12),
-			new ReduceAction235(12),
-			new ReduceAction236(12),
-			new ReduceAction237(12),
-			new ReduceAction238(12),
-			new ReduceAction239(12),
-			new ReduceAction240(12),
-			new ReduceAction241(12),
-			new ReduceAction242(12),
-			new ReduceAction243(12),
-			new ReduceAction244(12),
-			new ReduceAction245(12),
-			new ReduceAction246(12),
-			new ReduceAction247(12),
-			new ReduceAction248(12),
-			new ReduceAction249(12),
-			new ReduceAction250(12),
-			new ReduceAction251(12),
-			new ReduceAction252(12),
-			new ReduceAction253(12),
-			new ReduceAction254(12),
-			new ReduceAction255(12),
-			new ReduceAction256(12),
-			new ReduceAction257(12),
-			new ReduceAction258(12),
-			new ReduceAction259(12),
-			new ReduceAction260(12),
-			new ReduceAction261(12),
-			new ReduceAction262(12),
-			new ReduceAction263(12),
-			new ReduceAction264(12),
-			new ReduceAction265(12),
-			new ReduceAction266(12),
-			new ReduceAction267(12),
-			new ReduceAction268(12),
-			new ReduceAction269(12),
-			new ReduceAction270(12),
-			new ReduceAction271(12),
-			new ReduceAction272(12),
-			new ReduceAction273(12),
-			new ReduceAction274(12),
-			new ReduceAction275(12),
-			new ReduceAction276(12),
-			new ReduceAction277(12),
-			new ReduceAction278(12),
-			new ReduceAction279(12),
-			new ReduceAction280(12),
-			new ReduceAction281(12),
-			new ReduceAction282(12),
-			new ReduceAction283(12),
-			new ReduceAction284(12),
-			new ReduceAction285(12),
-			new ReduceAction286(12),
-			new ReduceAction287(12),
-			new ReduceAction288(12),
-			new ReduceAction289(12),
-			new ReduceAction290(12),
-			new ReduceAction291(12),
-			new ReduceAction292(12),
-			new ReduceAction293(12),
-			new ReduceAction294(12),
-			new ReduceAction295(12),
-			new ReduceAction296(12),
-			new ReduceAction297(12),
-			new ReduceAction298(12),
-			new ReduceAction299(12),
-			new ReduceAction300(12),
-			new ReduceAction301(12),
-			new ReduceAction302(12),
-			new ReduceAction303(12),
-			new ReduceAction304(12),
-			new ReduceAction305(12),
-			new ReduceAction306(12),
-			new ReduceAction307(12),
-			new ReduceAction308(12),
-			new ReduceAction309(12),
-			new ReduceAction310(12),
-			new ReduceAction311(12),
-			new ReduceAction312(12),
-			new ReduceAction313(12),
-			new ReduceAction314(12),
-			new ReduceAction315(12),
-			new ReduceAction316(12),
-			new ReduceAction317(12),
-			new ReduceAction318(12),
-			new ReduceAction319(12),
-			new ReduceAction320(12),
-			new ReduceAction321(13),
-			new ReduceAction322(13),
-			new ReduceAction321(14),
-			new ReduceAction324(14),
-			new ReduceAction325(15),
-			new ReduceAction326(15),
-			new ReduceAction327(16),
-			new ReduceAction328(16),
-			new ReduceAction329(17),
-			new ReduceAction330(17),
-			new ReduceAction331(18),
-			new ReduceAction332(18),
-			new ReduceAction333(18),
-			new ReduceAction334(18),
-			new ReduceAction335(19),
-			new ReduceAction336(19),
-			new ReduceAction337(19),
-			new ReduceAction338(19),
-			new ReduceAction339(19),
-			new ReduceAction340(19),
-			new ReduceAction341(19),
-			new ReduceAction342(19),
-			new ReduceAction343(19),
-			new ReduceAction344(19),
-			new ReduceAction345(19),
-			new ReduceAction346(19),
-			new ReduceAction347(19),
-			new ReduceAction348(19),
-			new ReduceAction349(19),
-			new ReduceAction350(19),
-			new ReduceAction351(19),
-			new ReduceAction352(19),
-			new ReduceAction353(20),
-			new ReduceAction354(20),
-			new ReduceAction355(20),
-			new ReduceAction356(20),
-			new ReduceAction357(20),
-			new ReduceAction358(20),
-			new ReduceAction359(20),
-			new ReduceAction360(20),
-			new ReduceAction361(20),
-			new ReduceAction362(20),
-			new ReduceAction363(20),
-			new ReduceAction364(20),
-			new ReduceAction365(21),
-			new ReduceAction366(21),
-			new ReduceAction367(21),
-			new ReduceAction368(21),
-			new ReduceAction369(21),
-			new ReduceAction370(21),
-			new ReduceAction371(22),
-			new ReduceAction372(22),
-			new ReduceAction373(23),
-			new ReduceAction374(24),
-			new ReduceAction375(24),
-			new ReduceAction376(24),
-			new ReduceAction377(24),
-			new ReduceAction378(24),
-			new ReduceAction379(24),
-			new ReduceAction380(25),
-			new ReduceAction381(26),
-			new ReduceAction382(26),
-			new ReduceAction383(26),
-			new ReduceAction384(26),
-			new ReduceAction385(26),
-			new ReduceAction386(26),
-			new ReduceAction387(27),
-			new ReduceAction388(28),
-			new ReduceAction389(28),
-			new ReduceAction390(29),
-			new ReduceAction391(30),
-			new ReduceAction391(30),
-			new ReduceAction393(30),
-			new ReduceAction394(31),
-			new ReduceAction395(31),
-			new ReduceAction396(31),
-			new ReduceAction397(32),
-			new ReduceAction398(32),
-			new ReduceAction399(32),
-			new ReduceAction400(33),
-			new ReduceAction401(34),
-			new ReduceAction402(34),
-			new ReduceAction403(35),
-			new ReduceAction404(36),
-			new ReduceAction405(36),
-			new ReduceAction406(36),
-			new ReduceAction407(36),
-			new ReduceAction408(36),
-			new ReduceAction409(36),
-			new ReduceAction410(36),
-			new ReduceAction411(36),
-			new ReduceAction412(37),
-			new ReduceAction413(37),
-			new ReduceAction414(38),
-			new ReduceAction414(39),
-			new ReduceAction416(40),
-			new ReduceAction417(40),
-			new ReduceAction418(40),
-			new ReduceAction419(40),
-			new ReduceAction420(41),
-			new ReduceAction421(41),
-			new ReduceAction422(42),
-			new ReduceAction423(42),
-			new ReduceAction424(43),
-			new ReduceAction425(43),
-			new ReduceAction416(44),
-			new ReduceAction419(45),
-			new ReduceAction419(45),
-			new ReduceAction429(45),
-			new ReduceAction430(45),
-			new ReduceAction431(45),
-			new ReduceAction432(45),
-			new ReduceAction433(45),
-			new ReduceAction434(45),
-			new ReduceAction435(45),
-			new ReduceAction436(45),
-			new ReduceAction437(45),
-			new ReduceAction438(45),
-			new ReduceAction439(45),
-			new ReduceAction419(45),
-			new ReduceAction419(45),
-			new ReduceAction419(45),
-			new ReduceAction419(45),
-			new ReduceAction419(45),
-			new ReduceAction419(45),
-			new ReduceAction446(45),
-			new ReduceAction447(45),
-			new ReduceAction448(45),
-			new ReduceAction449(45),
-			new ReduceAction450(45),
-			new ReduceAction451(45),
-			new ReduceAction452(45),
-			new ReduceAction453(45),
-			new ReduceAction454(45),
-			new ReduceAction455(46),
-			new ReduceAction456(47),
-			new ReduceAction457(47),
-			new ReduceAction458(48),
-			new ReduceAction459(48),
-			new ReduceAction460(48),
-			new ReduceAction461(48),
-			new ReduceAction462(48),
-			new ReduceAction463(48),
-			new ReduceAction464(48),
-			new ReduceAction465(48),
-			new ReduceAction466(48),
-			new ReduceAction467(49),
-			new ReduceAction468(49),
-			new ReduceAction469(49),
-			new ReduceAction470(49),
-			new ReduceAction471(49),
-			new ReduceAction472(49),
-			new ReduceAction473(50),
-			new ReduceAction474(50),
-			new ReduceAction475(51),
-			new ReduceAction476(52),
-			new ReduceAction477(52),
-			new ReduceAction478(52),
-			new ReduceAction479(52),
-			new ReduceAction480(52),
-			new ReduceAction481(52),
-			new ReduceAction482(52),
-			new ReduceAction483(52),
-			new ReduceAction484(53),
-			new ReduceAction485(53),
-			new ReduceAction486(53),
-			new ReduceAction487(53),
-			new ReduceAction488(53),
-			new ReduceAction489(53),
-			new ReduceAction490(53),
-			new ReduceAction491(53),
-			new ReduceAction492(53),
-			new ReduceAction493(53),
-			new ReduceAction494(54),
-			new ReduceAction495(54),
-			new ReduceAction496(55),
-			new ReduceAction497(55),
-			new ReduceAction498(56),
-			new ReduceAction499(56),
-			new ReduceAction500(56),
-			new ReduceAction501(56),
-			new ReduceAction502(56),
-			new ReduceAction416(57),
-			new ReduceAction418(57),
-			new ReduceAction505(58),
-			new ReduceAction506(58),
-			new ReduceAction507(59),
-			new ReduceAction508(59),
-			new ReduceAction509(60),
-			new ReduceAction510(60),
-			new ReduceAction511(60),
-			new ReduceAction512(60),
-			new ReduceAction513(61),
-			new ReduceAction514(61),
-			new ReduceAction515(61),
-			new ReduceAction516(61),
-			new ReduceAction517(62),
-			new ReduceAction419(63),
-			new ReduceAction448(63),
-			new ReduceAction449(63),
-			new ReduceAction521(63),
-			new ReduceAction419(64),
-			new ReduceAction523(64),
-			new ReduceAction419(65),
-			new ReduceAction525(65),
-			new ReduceAction526(65),
-			new ReduceAction527(65),
-			new ReduceAction419(66),
-			new ReduceAction529(66),
-			new ReduceAction419(67),
-			new ReduceAction531(67),
-			new ReduceAction532(67),
-			new ReduceAction533(67),
-			new ReduceAction534(67),
-			new ReduceAction535(67),
-			new ReduceAction536(67),
-			new ReduceAction537(67),
-			new ReduceAction538(67),
-			new ReduceAction539(67),
-			new ReduceAction540(67),
-			new ReduceAction541(67),
-			new ReduceAction419(68),
-			new ReduceAction543(68),
-			new ReduceAction544(68),
-			new ReduceAction419(69),
-			new ReduceAction546(69),
-			new ReduceAction547(69),
-			new ReduceAction548(69),
-			new ReduceAction419(70),
-			new ReduceAction550(70),
-			new ReduceAction551(70),
-			new ReduceAction419(71),
-			new ReduceAction553(71),
-			new ReduceAction554(71),
-			new ReduceAction555(71),
-			new ReduceAction556(72),
-			new ReduceAction557(72),
-			new ReduceAction446(72),
-			new ReduceAction447(72),
-			new ReduceAction450(72),
-			new ReduceAction451(72),
-			new ReduceAction452(72),
-			new ReduceAction453(72),
-			new ReduceAction564(72),
-			new ReduceAction565(72),
-			new ReduceAction566(72),
-			new ReduceAction567(72),
-			new ReduceAction568(72),
-			new ReduceAction569(72),
-			new ReduceAction570(72),
-			new ReduceAction571(72),
-			new ReduceAction572(72),
-			new ReduceAction573(72),
-			new ReduceAction574(72),
-			new ReduceAction575(72),
-			new ReduceAction576(72),
-			new ReduceAction577(72),
-			new ReduceAction578(72),
-			new ReduceAction579(72),
-			new ReduceAction580(72),
-			new ReduceAction581(72),
-			new ReduceAction582(72),
-			new ReduceAction583(72),
-			new ReduceAction584(72),
-			new ReduceAction585(72),
-			new ReduceAction586(72),
-			new ReduceAction587(72),
-			new ReduceAction419(72),
-			new ReduceAction589(72),
-			new ReduceAction590(72),
-			new ReduceAction591(72),
-			new ReduceAction592(72),
-			new ReduceAction593(73),
-			new ReduceAction594(73),
-			new ReduceAction595(73),
-			new ReduceAction596(73),
-			new ReduceAction597(74),
-			new ReduceAction598(75),
-			new ReduceAction597(76),
-			new ReduceAction600(77),
-			new ReduceAction601(78),
-			new ReduceAction602(79),
-			new ReduceAction603(79),
-			new ReduceAction604(80),
-			new ReduceAction605(80),
-			new ReduceAction606(80),
-			new ReduceAction607(80),
-			new ReduceAction608(81),
-			new ReduceAction609(82),
-			new ReduceAction610(82),
-			new ReduceAction608(83),
-			new ReduceAction612(84),
-			new ReduceAction613(84),
-			new ReduceAction614(84),
-			new ReduceAction615(84),
-			new ReduceAction616(84),
-			new ReduceAction617(85),
-			new ReduceAction618(86),
-			new ReduceAction619(86),
-			new ReduceAction620(87),
-			new ReduceAction621(88),
-			new ReduceAction622(88),
-			new ReduceAction622(88),
-			new ReduceAction624(88),
-			new ReduceAction625(89),
-			new ReduceAction626(89),
-			new ReduceAction627(89),
-			new ReduceAction628(89),
-			new ReduceAction629(90),
-			new ReduceAction630(90),
-			new ReduceAction631(90),
-			new ReduceAction629(91),
-			new ReduceAction633(91),
-			new ReduceAction630(91),
-			new ReduceAction631(91),
-			new ReduceAction636(92),
-			new ReduceAction637(93),
-			new ReduceAction638(93),
-			new ReduceAction639(94),
-			new ReduceAction640(95),
-			new ReduceAction641(95),
-			new ReduceAction642(96),
-			new ReduceAction643(96),
-			new ReduceAction644(96),
-			new ReduceAction645(96),
-			new ReduceAction646(97),
-			new ReduceAction647(97),
-			new ReduceAction648(97),
-			new ReduceAction649(98),
-			new ReduceAction650(99),
-			new ReduceAction651(100),
-			new ReduceAction651(100),
-			new ReduceAction653(101),
-			new ReduceAction654(101),
-			new ReduceAction70(101),
-			new ReduceAction656(102),
-			new ReduceAction657(102),
-			new ReduceAction658(103),
-			new ReduceAction659(103),
-			new ReduceAction651(103),
-			new ReduceAction152(104),
-			new ReduceAction153(105),
-			new ReduceAction154(105),
-			new ReduceAction155(105),
-			new ReduceAction156(105),
-			new ReduceAction157(105),
-			new ReduceAction158(105),
-			new ReduceAction159(105),
-			new ReduceAction160(105),
-			new ReduceAction161(105),
-			new ReduceAction162(105),
-			new ReduceAction163(105),
-			new ReduceAction164(105),
-			new ReduceAction169(105),
-			new ReduceAction170(105),
-			new ReduceAction171(105),
-			new ReduceAction172(105),
-			new ReduceAction173(105),
-			new ReduceAction174(105),
-			new ReduceAction175(105),
-			new ReduceAction176(105),
-			new ReduceAction177(105),
-			new ReduceAction178(105),
-			new ReduceAction179(105),
-			new ReduceAction180(105),
-			new ReduceAction181(105),
-			new ReduceAction182(105),
-			new ReduceAction183(105),
-			new ReduceAction184(105),
-			new ReduceAction185(105),
-			new ReduceAction186(105),
-			new ReduceAction187(105),
-			new ReduceAction188(105),
-			new ReduceAction353(106),
-			new ReduceAction354(106),
-			new ReduceAction355(106),
-			new ReduceAction356(106),
-			new ReduceAction361(106),
-			new ReduceAction362(106),
-			new ReduceAction404(107),
-			new ReduceAction405(107),
-			new ReduceAction406(107),
-			new ReduceAction407(107),
-			new ReduceAction419(108),
-			new ReduceAction448(108),
-			new ReduceAction449(108),
-			new ReduceAction419(109),
-			new ReduceAction523(109),
-			new ReduceAction419(110),
-			new ReduceAction525(110),
-			new ReduceAction526(110),
-			new ReduceAction527(110),
-			new ReduceAction419(111),
-			new ReduceAction529(111),
-			new ReduceAction419(112),
-			new ReduceAction531(112),
-			new ReduceAction532(112),
-			new ReduceAction533(112),
-			new ReduceAction534(112),
-			new ReduceAction535(112),
-			new ReduceAction536(112),
-			new ReduceAction537(112),
-			new ReduceAction538(112),
-			new ReduceAction539(112),
-			new ReduceAction540(112),
-			new ReduceAction541(112),
-			new ReduceAction419(113),
-			new ReduceAction543(113),
-			new ReduceAction544(113),
-			new ReduceAction419(114),
-			new ReduceAction546(114),
-			new ReduceAction547(114),
-			new ReduceAction548(114),
-			new ReduceAction419(115),
-			new ReduceAction550(115),
-			new ReduceAction551(115),
-			new ReduceAction419(116),
-			new ReduceAction553(116),
-			new ReduceAction554(116),
-			new ReduceAction555(116),
-			new ReduceAction556(117),
-			new ReduceAction557(117),
-			new ReduceAction446(117),
-			new ReduceAction447(117),
-			new ReduceAction450(117),
-			new ReduceAction451(117),
-			new ReduceAction452(117),
-			new ReduceAction453(117),
-			new ReduceAction565(117),
-			new ReduceAction572(117),
-			new ReduceAction573(117),
-			new ReduceAction574(117),
-			new ReduceAction575(117),
-			new ReduceAction576(117),
-			new ReduceAction577(117),
-			new ReduceAction578(117),
-			new ReduceAction579(117),
-			new ReduceAction580(117),
-			new ReduceAction581(117),
-			new ReduceAction582(117),
-			new ReduceAction583(117),
-			new ReduceAction584(117),
-			new ReduceAction585(117),
-			new ReduceAction586(117),
-			new ReduceAction587(117),
-			new ReduceAction419(117),
-			new ReduceAction589(117),
-			new ReduceAction590(117),
-			new ReduceAction591(117),
-			new ReduceAction592(117),
-			new ReduceAction404(118),
-			new ReduceAction405(118),
-			new ReduceAction406(118),
-			new ReduceAction407(118),
-			new ReduceAction408(118),
-			new ReduceAction409(118),
-			new ReduceAction410(118),
-			new ReduceAction411(118),
-			new ReduceAction419(119),
-			new ReduceAction419(119),
-			new ReduceAction429(119),
-			new ReduceAction430(119),
-			new ReduceAction431(119),
-			new ReduceAction432(119),
-			new ReduceAction433(119),
-			new ReduceAction434(119),
-			new ReduceAction435(119),
-			new ReduceAction436(119),
-			new ReduceAction437(119),
-			new ReduceAction438(119),
-			new ReduceAction439(119),
-			new ReduceAction419(119),
-			new ReduceAction419(119),
-			new ReduceAction419(119),
-			new ReduceAction419(119),
-			new ReduceAction419(119),
-			new ReduceAction419(119),
-			new ReduceAction446(119),
-			new ReduceAction447(119),
-			new ReduceAction448(119),
-			new ReduceAction449(119),
-			new ReduceAction450(119),
-			new ReduceAction451(119),
-			new ReduceAction452(119),
-			new ReduceAction453(119),
-			new ReduceAction454(119),
-			new ReduceAction484(120),
-			new ReduceAction485(120),
-			new ReduceAction486(120),
-			new ReduceAction487(120),
-			new ReduceAction488(120),
-			new ReduceAction489(120),
-			new ReduceAction490(120),
-			new ReduceAction491(120),
-			new ReduceAction492(120),
-			new ReduceAction493(120),
-			new ReduceAction419(121),
-			new ReduceAction448(121),
-			new ReduceAction449(121),
-			new ReduceAction419(122),
-			new ReduceAction523(122),
-			new ReduceAction419(123),
-			new ReduceAction525(123),
-			new ReduceAction526(123),
-			new ReduceAction527(123),
-			new ReduceAction419(124),
-			new ReduceAction529(124),
-			new ReduceAction419(125),
-			new ReduceAction531(125),
-			new ReduceAction532(125),
-			new ReduceAction533(125),
-			new ReduceAction534(125),
-			new ReduceAction535(125),
-			new ReduceAction536(125),
-			new ReduceAction537(125),
-			new ReduceAction538(125),
-			new ReduceAction539(125),
-			new ReduceAction540(125),
-			new ReduceAction541(125),
-			new ReduceAction419(126),
-			new ReduceAction543(126),
-			new ReduceAction544(126),
-			new ReduceAction419(127),
-			new ReduceAction546(127),
-			new ReduceAction547(127),
-			new ReduceAction548(127),
-			new ReduceAction419(128),
-			new ReduceAction550(128),
-			new ReduceAction551(128),
-			new ReduceAction419(129),
-			new ReduceAction553(129),
-			new ReduceAction554(129),
-			new ReduceAction555(129),
-			new ReduceAction556(130),
-			new ReduceAction557(130),
-			new ReduceAction446(130),
-			new ReduceAction447(130),
-			new ReduceAction450(130),
-			new ReduceAction451(130),
-			new ReduceAction452(130),
-			new ReduceAction453(130),
-			new ReduceAction564(130),
-			new ReduceAction565(130),
-			new ReduceAction572(130),
-			new ReduceAction573(130),
-			new ReduceAction574(130),
-			new ReduceAction575(130),
-			new ReduceAction576(130),
-			new ReduceAction577(130),
-			new ReduceAction578(130),
-			new ReduceAction579(130),
-			new ReduceAction580(130),
-			new ReduceAction581(130),
-			new ReduceAction582(130),
-			new ReduceAction583(130),
-			new ReduceAction584(130),
-			new ReduceAction585(130),
-			new ReduceAction586(130),
-			new ReduceAction587(130),
-			new ReduceAction419(130),
-			new ReduceAction591(130),
-			new ReduceAction592(130),
-			new ReduceAction602(131),
-			new ReduceAction603(131),
-			new ReduceAction604(132),
-			new ReduceAction605(132),
-			new ReduceAction618(133),
-			new ReduceAction619(133),
-			new ReduceAction621(134),
-			new ReduceAction622(134),
-			new ReduceAction622(134),
-			new ReduceAction404(135),
-			new ReduceAction405(135),
-			new ReduceAction406(135),
-			new ReduceAction407(135),
-			new ReduceAction419(136),
-			new ReduceAction448(136),
-			new ReduceAction449(136),
-			new ReduceAction419(137),
-			new ReduceAction523(137),
-			new ReduceAction419(138),
-			new ReduceAction525(138),
-			new ReduceAction526(138),
-			new ReduceAction527(138),
-			new ReduceAction419(139),
-			new ReduceAction529(139),
-			new ReduceAction419(140),
-			new ReduceAction531(140),
-			new ReduceAction532(140),
-			new ReduceAction533(140),
-			new ReduceAction534(140),
-			new ReduceAction535(140),
-			new ReduceAction536(140),
-			new ReduceAction537(140),
-			new ReduceAction538(140),
-			new ReduceAction539(140),
-			new ReduceAction540(140),
-			new ReduceAction541(140),
-			new ReduceAction419(141),
-			new ReduceAction543(141),
-			new ReduceAction544(141),
-			new ReduceAction419(142),
-			new ReduceAction546(142),
-			new ReduceAction547(142),
-			new ReduceAction548(142),
-			new ReduceAction419(143),
-			new ReduceAction550(143),
-			new ReduceAction551(143),
-			new ReduceAction419(144),
-			new ReduceAction553(144),
-			new ReduceAction931(144),
-			new ReduceAction932(145),
-			new ReduceAction933(145),
-			new ReduceAction450(145),
-			new ReduceAction451(145),
-			new ReduceAction936(145),
-			new ReduceAction565(145),
-			new ReduceAction572(145),
-			new ReduceAction573(145),
-			new ReduceAction574(145),
-			new ReduceAction575(145),
-			new ReduceAction576(145),
-			new ReduceAction577(145),
-			new ReduceAction578(145),
-			new ReduceAction579(145),
-			new ReduceAction580(145),
-			new ReduceAction581(145),
-			new ReduceAction582(145),
-			new ReduceAction583(145),
-			new ReduceAction584(145),
-			new ReduceAction585(145),
-			new ReduceAction586(145),
-			new ReduceAction587(145),
-			new ReduceAction419(145),
-			new ReduceAction591(145),
-			new ReduceAction592(145),
-			new ReduceAction957(146),
-			new ReduceAction958(146),
-			new ReduceAction416(147),
-			new ReduceAction417(147),
-			new ReduceAction418(147),
-			new ReduceAction419(147),
-			new ReduceAction419(148),
-			new ReduceAction419(148),
-			new ReduceAction429(148),
-			new ReduceAction430(148),
-			new ReduceAction431(148),
-			new ReduceAction432(148),
-			new ReduceAction433(148),
-			new ReduceAction434(148),
-			new ReduceAction435(148),
-			new ReduceAction436(148),
-			new ReduceAction437(148),
-			new ReduceAction438(148),
-			new ReduceAction439(148),
-			new ReduceAction419(148),
-			new ReduceAction419(148),
-			new ReduceAction419(148),
-			new ReduceAction419(148),
-			new ReduceAction419(148),
-			new ReduceAction419(148),
-			new ReduceAction446(148),
-			new ReduceAction447(148),
-			new ReduceAction448(148),
-			new ReduceAction449(148),
-			new ReduceAction450(148),
-			new ReduceAction451(148),
-			new ReduceAction452(148),
-			new ReduceAction453(148),
-			new ReduceAction454(148),
-			new ReduceAction456(149),
-			new ReduceAction457(149),
-			new ReduceAction458(150),
-			new ReduceAction459(150),
-			new ReduceAction460(150),
-			new ReduceAction461(150),
-			new ReduceAction462(150),
-			new ReduceAction463(150),
-			new ReduceAction464(150),
-			new ReduceAction465(150),
-			new ReduceAction466(150),
-			new ReduceAction475(151),
-			new ReduceAction476(152),
-			new ReduceAction477(152),
-			new ReduceAction478(152),
-			new ReduceAction479(152),
-			new ReduceAction480(152),
-			new ReduceAction481(152),
-			new ReduceAction482(152),
-			new ReduceAction483(152),
-			new ReduceAction484(153),
-			new ReduceAction485(153),
-			new ReduceAction486(153),
-			new ReduceAction487(153),
-			new ReduceAction488(153),
-			new ReduceAction489(153),
-			new ReduceAction490(153),
-			new ReduceAction491(153),
-			new ReduceAction492(153),
-			new ReduceAction493(153),
-			new ReduceAction496(154),
-			new ReduceAction497(154),
-			new ReduceAction498(155),
-			new ReduceAction505(156),
-			new ReduceAction506(156),
-			new ReduceAction507(157),
-			new ReduceAction508(157),
-			new ReduceAction509(158),
-			new ReduceAction510(158),
-			new ReduceAction511(158),
-			new ReduceAction512(158),
-			new ReduceAction513(159),
-			new ReduceAction514(159),
-			new ReduceAction419(160),
-			new ReduceAction448(160),
-			new ReduceAction449(160),
-			new ReduceAction521(160),
-			new ReduceAction419(161),
-			new ReduceAction448(161),
-			new ReduceAction449(161),
-			new ReduceAction419(162),
-			new ReduceAction419(162),
-			new ReduceAction429(162),
-			new ReduceAction430(162),
-			new ReduceAction431(162),
-			new ReduceAction432(162),
-			new ReduceAction433(162),
-			new ReduceAction434(162),
-			new ReduceAction435(162),
-			new ReduceAction436(162),
-			new ReduceAction437(162),
-			new ReduceAction438(162),
-			new ReduceAction439(162),
-			new ReduceAction419(162),
-			new ReduceAction419(162),
-			new ReduceAction419(162),
-			new ReduceAction419(162),
-			new ReduceAction419(162),
-			new ReduceAction419(162),
-			new ReduceAction446(162),
-			new ReduceAction447(162),
-			new ReduceAction448(162),
-			new ReduceAction449(162),
-			new ReduceAction450(162),
-			new ReduceAction451(162),
-			new ReduceAction452(162),
-			new ReduceAction453(162),
-			new ReduceAction454(162),
-			new ReduceAction484(163),
-			new ReduceAction485(163),
-			new ReduceAction486(163),
-			new ReduceAction487(163),
-			new ReduceAction488(163),
-			new ReduceAction489(163),
-			new ReduceAction490(163),
-			new ReduceAction491(163),
-			new ReduceAction492(163),
-			new ReduceAction493(163),
-			new ReduceAction419(164),
-			new ReduceAction448(164),
-			new ReduceAction449(164),
-			new ReduceAction419(165),
-			new ReduceAction448(165),
-			new ReduceAction449(165),
-			new ReduceAction416(166),
-			new ReduceAction417(166),
-			new ReduceAction418(166),
-			new ReduceAction416(167),
-			new ReduceAction417(167),
-			new ReduceAction418(167),
-			new ReduceAction419(168),
-			new ReduceAction419(168),
-			new ReduceAction429(168),
-			new ReduceAction430(168),
-			new ReduceAction431(168),
-			new ReduceAction432(168),
-			new ReduceAction433(168),
-			new ReduceAction434(168),
-			new ReduceAction435(168),
-			new ReduceAction436(168),
-			new ReduceAction437(168),
-			new ReduceAction438(168),
-			new ReduceAction439(168),
-			new ReduceAction419(168),
-			new ReduceAction419(168),
-			new ReduceAction419(168),
-			new ReduceAction419(168),
-			new ReduceAction419(168),
-			new ReduceAction454(168),
-			new ReduceAction419(169),
-			new ReduceAction419(169),
-			new ReduceAction429(169),
-			new ReduceAction430(169),
-			new ReduceAction431(169),
-			new ReduceAction432(169),
-			new ReduceAction433(169),
-			new ReduceAction434(169),
-			new ReduceAction435(169),
-			new ReduceAction436(169),
-			new ReduceAction437(169),
-			new ReduceAction438(169),
-			new ReduceAction439(169),
-			new ReduceAction419(169),
-			new ReduceAction419(169),
-			new ReduceAction419(169),
-			new ReduceAction419(169),
-			new ReduceAction419(169),
-			new ReduceAction454(169),
-			new ReduceAction419(170),
-			new ReduceAction419(170),
-			new ReduceAction429(170),
-			new ReduceAction430(170),
-			new ReduceAction431(170),
-			new ReduceAction432(170),
-			new ReduceAction433(170),
-			new ReduceAction434(170),
-			new ReduceAction435(170),
-			new ReduceAction436(170),
-			new ReduceAction437(170),
-			new ReduceAction438(170),
-			new ReduceAction439(170),
-			new ReduceAction419(170),
-			new ReduceAction419(170),
-			new ReduceAction419(170),
-			new ReduceAction419(170),
-			new ReduceAction419(170),
-			new ReduceAction454(170),
-			new ReduceAction419(171),
-			new ReduceAction419(171),
-			new ReduceAction429(171),
-			new ReduceAction430(171),
-			new ReduceAction431(171),
-			new ReduceAction432(171),
-			new ReduceAction433(171),
-			new ReduceAction434(171),
-			new ReduceAction435(171),
-			new ReduceAction436(171),
-			new ReduceAction437(171),
-			new ReduceAction438(171),
-			new ReduceAction439(171),
-			new ReduceAction419(171),
-			new ReduceAction419(171),
-			new ReduceAction419(171),
-			new ReduceAction419(171),
-			new ReduceAction419(171),
-			new ReduceAction454(171),
-			new ReduceAction419(172),
-			new ReduceAction523(172),
-			new ReduceAction419(173),
-			new ReduceAction525(173),
-			new ReduceAction526(173),
-			new ReduceAction527(173),
-			new ReduceAction419(174),
-			new ReduceAction529(174),
-			new ReduceAction419(175),
-			new ReduceAction531(175),
-			new ReduceAction533(175),
-			new ReduceAction534(175),
-			new ReduceAction535(175),
-			new ReduceAction536(175),
-			new ReduceAction537(175),
-			new ReduceAction538(175),
-			new ReduceAction539(175),
-			new ReduceAction540(175),
-			new ReduceAction541(175),
-			new ReduceAction419(176),
-			new ReduceAction523(176),
-			new ReduceAction419(177),
-			new ReduceAction525(177),
-			new ReduceAction526(177),
-			new ReduceAction527(177),
-			new ReduceAction419(178),
-			new ReduceAction529(178),
-			new ReduceAction419(179),
-			new ReduceAction531(179),
-			new ReduceAction533(179),
-			new ReduceAction534(179),
-			new ReduceAction535(179),
-			new ReduceAction536(179),
-			new ReduceAction537(179),
-			new ReduceAction538(179),
-			new ReduceAction539(179),
-			new ReduceAction540(179),
-			new ReduceAction541(179),
-			new ReduceAction419(180),
-			new ReduceAction523(180),
-			new ReduceAction419(181),
-			new ReduceAction525(181),
-			new ReduceAction526(181),
-			new ReduceAction527(181),
-			new ReduceAction419(182),
-			new ReduceAction529(182),
-			new ReduceAction419(183),
-			new ReduceAction531(183),
-			new ReduceAction533(183),
-			new ReduceAction534(183),
-			new ReduceAction535(183),
-			new ReduceAction536(183),
-			new ReduceAction537(183),
-			new ReduceAction538(183),
-			new ReduceAction539(183),
-			new ReduceAction540(183),
-			new ReduceAction541(183),
-			new ReduceAction419(184),
-			new ReduceAction523(184),
-			new ReduceAction419(185),
-			new ReduceAction525(185),
-			new ReduceAction526(185),
-			new ReduceAction527(185),
-			new ReduceAction419(186),
-			new ReduceAction529(186),
-			new ReduceAction419(187),
-			new ReduceAction531(187),
-			new ReduceAction533(187),
-			new ReduceAction534(187),
-			new ReduceAction535(187),
-			new ReduceAction536(187),
-			new ReduceAction537(187),
-			new ReduceAction538(187),
-			new ReduceAction539(187),
-			new ReduceAction540(187),
-			new ReduceAction541(187),
-			new ReduceAction612(188),
-			new ReduceAction613(188),
-			new ReduceAction614(188),
-			new ReduceAction615(188),
-			new ReduceAction616(188),
-			new ReduceAction625(189),
-			new ReduceAction628(189),
-			new ReduceAction1250(190),
-			new ReduceAction1251(190),
-			new ReduceAction1252(191),
-			new ReduceAction1253(191),
-			new ReduceAction1254(192),
-			new ReduceAction1255(192),
-			new ReduceAction1256(193),
-			new ReduceAction1257(193),
-			new ReduceAction1258(194),
-			new ReduceAction1259(194),
-			new ReduceAction1256(195),
-			new ReduceAction1257(195),
-			new ReduceAction1262(196),
-			new ReduceAction1263(196),
-			new ReduceAction1264(197),
-			new ReduceAction1265(197),
-			new ReduceAction1266(198),
-			new ReduceAction1267(198),
-			new ReduceAction1268(199),
-			new ReduceAction1269(199),
-			new ReduceAction412(200),
-			new ReduceAction1271(200),
-			new ReduceAction1272(201),
-			new ReduceAction1273(201),
-			new ReduceAction380(202),
-			new ReduceAction1275(202),
-			new ReduceAction609(203),
-			new ReduceAction1277(203),
-			new ReduceAction609(204),
-			new ReduceAction1277(204),
-			new ReduceAction618(205),
-			new ReduceAction1281(205),
-			new ReduceAction1272(206),
-			new ReduceAction1273(206),
-			new ReduceAction640(207),
-			new ReduceAction1285(207),
-			new ReduceAction1286(208),
-			new ReduceAction1287(208),
-			new ReduceAction1288(209),
-			new ReduceAction1289(209),
-			new ReduceAction609(210),
-			new ReduceAction1277(210)
+			new ReduceAction134(5),
+			new ReduceAction137(5),
+			new ReduceAction138(5),
+			new ReduceAction139(5),
+			new ReduceAction140(5),
+			new ReduceAction139(5),
+			new ReduceAction142(5),
+			new ReduceAction143(5),
+			new ReduceAction142(5),
+			new ReduceAction145(5),
+			new ReduceAction146(5),
+			new ReduceAction147(5),
+			new ReduceAction148(5),
+			new ReduceAction147(5),
+			new ReduceAction150(5),
+			new ReduceAction151(5),
+			new ReduceAction150(5),
+			new ReduceAction153(5),
+			new ReduceAction154(5),
+			new ReduceAction155(5),
+			new ReduceAction156(5),
+			new ReduceAction155(5),
+			new ReduceAction158(5),
+			new ReduceAction159(5),
+			new ReduceAction158(5),
+			new ReduceAction161(5),
+			new ReduceAction162(5),
+			new ReduceAction163(5),
+			new ReduceAction164(5),
+			new ReduceAction163(5),
+			new ReduceAction166(5),
+			new ReduceAction167(5),
+			new ReduceAction166(5),
+			new ReduceAction169(5),
+			new ReduceAction170(5),
+			new ReduceAction171(5),
+			new ReduceAction172(5),
+			new ReduceAction171(5),
+			new ReduceAction174(5),
+			new ReduceAction175(5),
+			new ReduceAction174(5),
+			new ReduceAction177(5),
+			new ReduceAction178(5),
+			new ReduceAction179(5),
+			new ReduceAction180(5),
+			new ReduceAction179(5),
+			new ReduceAction182(5),
+			new ReduceAction183(5),
+			new ReduceAction182(5),
+			new ReduceAction185(5),
+			new ReduceAction186(5),
+			new ReduceAction187(5),
+			new ReduceAction188(5),
+			new ReduceAction187(5),
+			new ReduceAction190(5),
+			new ReduceAction191(5),
+			new ReduceAction190(5),
+			new ReduceAction193(5),
+			new ReduceAction194(5),
+			new ReduceAction195(5),
+			new ReduceAction196(5),
+			new ReduceAction195(5),
+			new ReduceAction198(5),
+			new ReduceAction199(5),
+			new ReduceAction198(5),
+			new ReduceAction201(5),
+			new ReduceAction202(5),
+			new ReduceAction203(5),
+			new ReduceAction204(5),
+			new ReduceAction203(5),
+			new ReduceAction206(5),
+			new ReduceAction207(5),
+			new ReduceAction206(5),
+			new ReduceAction209(5),
+			new ReduceAction210(5),
+			new ReduceAction211(5),
+			new ReduceAction212(5),
+			new ReduceAction211(5),
+			new ReduceAction214(5),
+			new ReduceAction215(5),
+			new ReduceAction214(5),
+			new ReduceAction217(5),
+			new ReduceAction218(5),
+			new ReduceAction219(5),
+			new ReduceAction220(5),
+			new ReduceAction219(5),
+			new ReduceAction222(5),
+			new ReduceAction223(5),
+			new ReduceAction222(5),
+			new ReduceAction225(5),
+			new ReduceAction226(5),
+			new ReduceAction227(5),
+			new ReduceAction228(5),
+			new ReduceAction227(5),
+			new ReduceAction230(5),
+			new ReduceAction231(5),
+			new ReduceAction230(5),
+			new ReduceAction233(5),
+			new ReduceAction234(5),
+			new ReduceAction235(5),
+			new ReduceAction236(5),
+			new ReduceAction235(5),
+			new ReduceAction238(5),
+			new ReduceAction239(5),
+			new ReduceAction238(5),
+			new ReduceAction241(5),
+			new ReduceAction242(5),
+			new ReduceAction243(5),
+			new ReduceAction244(5),
+			new ReduceAction243(5),
+			new ReduceAction246(5),
+			new ReduceAction247(5),
+			new ReduceAction246(5),
+			new ReduceAction249(5),
+			new ReduceAction250(5),
+			new ReduceAction251(5),
+			new ReduceAction252(5),
+			new ReduceAction251(5),
+			new ReduceAction254(5),
+			new ReduceAction255(5),
+			new ReduceAction254(5),
+			new ReduceAction257(5),
+			new ReduceAction258(5),
+			new ReduceAction259(5),
+			new ReduceAction260(5),
+			new ReduceAction259(5),
+			new ReduceAction262(5),
+			new ReduceAction263(5),
+			new ReduceAction262(5),
+			new ReduceAction265(5),
+			new ReduceAction266(5),
+			new ReduceAction267(5),
+			new ReduceAction268(5),
+			new ReduceAction267(5),
+			new ReduceAction270(5),
+			new ReduceAction271(5),
+			new ReduceAction270(5),
+			new ReduceAction273(5),
+			new ReduceAction274(5),
+			new ReduceAction275(5),
+			new ReduceAction276(5),
+			new ReduceAction275(5),
+			new ReduceAction278(5),
+			new ReduceAction279(5),
+			new ReduceAction278(5),
+			new ReduceAction281(5),
+			new ReduceAction282(5),
+			new ReduceAction283(5),
+			new ReduceAction284(5),
+			new ReduceAction283(5),
+			new ReduceAction286(5),
+			new ReduceAction287(5),
+			new ReduceAction286(5),
+			new ReduceAction289(5),
+			new ReduceAction290(5),
+			new ReduceAction291(5),
+			new ReduceAction292(5),
+			new ReduceAction291(5),
+			new ReduceAction294(5),
+			new ReduceAction295(5),
+			new ReduceAction294(5),
+			new ReduceAction297(5),
+			new ReduceAction298(5),
+			new ReduceAction299(5),
+			new ReduceAction300(5),
+			new ReduceAction299(5),
+			new ReduceAction302(5),
+			new ReduceAction303(5),
+			new ReduceAction302(5),
+			new ReduceAction305(5),
+			new ReduceAction306(5),
+			new ReduceAction307(5),
+			new ReduceAction308(5),
+			new ReduceAction307(5),
+			new ReduceAction310(5),
+			new ReduceAction311(5),
+			new ReduceAction310(5),
+			new ReduceAction313(5),
+			new ReduceAction314(5),
+			new ReduceAction315(5),
+			new ReduceAction316(5),
+			new ReduceAction315(5),
+			new ReduceAction318(5),
+			new ReduceAction319(5),
+			new ReduceAction318(5),
+			new ReduceAction321(5),
+			new ReduceAction322(5),
+			new ReduceAction323(5),
+			new ReduceAction324(5),
+			new ReduceAction323(5),
+			new ReduceAction326(5),
+			new ReduceAction327(5),
+			new ReduceAction326(5),
+			new ReduceAction329(6),
+			new ReduceAction330(6),
+			new ReduceAction331(6),
+			new ReduceAction332(6),
+			new ReduceAction333(6),
+			new ReduceAction334(6),
+			new ReduceAction335(7),
+			new ReduceAction336(7),
+			new ReduceAction337(8),
+			new ReduceAction338(9),
+			new ReduceAction339(9),
+			new ReduceAction340(9),
+			new ReduceAction341(9),
+			new ReduceAction342(10),
+			new ReduceAction343(10),
+			new ReduceAction344(11),
+			new ReduceAction345(12),
+			new ReduceAction346(12),
+			new ReduceAction347(12),
+			new ReduceAction348(12),
+			new ReduceAction349(12),
+			new ReduceAction350(12),
+			new ReduceAction351(12),
+			new ReduceAction352(12),
+			new ReduceAction353(12),
+			new ReduceAction354(12),
+			new ReduceAction355(12),
+			new ReduceAction356(12),
+			new ReduceAction357(12),
+			new ReduceAction358(12),
+			new ReduceAction359(12),
+			new ReduceAction360(12),
+			new ReduceAction361(12),
+			new ReduceAction362(12),
+			new ReduceAction363(12),
+			new ReduceAction364(12),
+			new ReduceAction365(12),
+			new ReduceAction366(12),
+			new ReduceAction367(12),
+			new ReduceAction368(12),
+			new ReduceAction369(12),
+			new ReduceAction370(12),
+			new ReduceAction371(12),
+			new ReduceAction372(12),
+			new ReduceAction373(12),
+			new ReduceAction374(12),
+			new ReduceAction375(12),
+			new ReduceAction376(12),
+			new ReduceAction377(12),
+			new ReduceAction378(12),
+			new ReduceAction379(12),
+			new ReduceAction380(12),
+			new ReduceAction381(12),
+			new ReduceAction382(12),
+			new ReduceAction383(12),
+			new ReduceAction384(12),
+			new ReduceAction385(12),
+			new ReduceAction386(12),
+			new ReduceAction387(12),
+			new ReduceAction388(12),
+			new ReduceAction389(12),
+			new ReduceAction390(12),
+			new ReduceAction391(12),
+			new ReduceAction392(12),
+			new ReduceAction393(12),
+			new ReduceAction394(12),
+			new ReduceAction395(12),
+			new ReduceAction396(12),
+			new ReduceAction397(12),
+			new ReduceAction398(12),
+			new ReduceAction399(12),
+			new ReduceAction400(12),
+			new ReduceAction401(12),
+			new ReduceAction402(12),
+			new ReduceAction403(12),
+			new ReduceAction404(12),
+			new ReduceAction405(12),
+			new ReduceAction406(12),
+			new ReduceAction407(12),
+			new ReduceAction408(12),
+			new ReduceAction409(12),
+			new ReduceAction410(12),
+			new ReduceAction411(12),
+			new ReduceAction412(12),
+			new ReduceAction413(12),
+			new ReduceAction414(12),
+			new ReduceAction415(12),
+			new ReduceAction416(12),
+			new ReduceAction417(12),
+			new ReduceAction418(12),
+			new ReduceAction419(12),
+			new ReduceAction420(12),
+			new ReduceAction421(12),
+			new ReduceAction422(12),
+			new ReduceAction423(12),
+			new ReduceAction424(12),
+			new ReduceAction425(12),
+			new ReduceAction426(12),
+			new ReduceAction427(12),
+			new ReduceAction428(12),
+			new ReduceAction429(12),
+			new ReduceAction430(12),
+			new ReduceAction431(12),
+			new ReduceAction432(12),
+			new ReduceAction433(12),
+			new ReduceAction434(12),
+			new ReduceAction435(12),
+			new ReduceAction436(12),
+			new ReduceAction437(12),
+			new ReduceAction438(12),
+			new ReduceAction439(12),
+			new ReduceAction440(12),
+			new ReduceAction441(12),
+			new ReduceAction442(12),
+			new ReduceAction443(12),
+			new ReduceAction444(12),
+			new ReduceAction445(12),
+			new ReduceAction446(12),
+			new ReduceAction447(12),
+			new ReduceAction448(12),
+			new ReduceAction449(12),
+			new ReduceAction450(12),
+			new ReduceAction451(12),
+			new ReduceAction452(12),
+			new ReduceAction453(12),
+			new ReduceAction454(12),
+			new ReduceAction455(12),
+			new ReduceAction456(12),
+			new ReduceAction457(12),
+			new ReduceAction458(12),
+			new ReduceAction459(12),
+			new ReduceAction460(12),
+			new ReduceAction461(12),
+			new ReduceAction462(12),
+			new ReduceAction463(12),
+			new ReduceAction464(12),
+			new ReduceAction465(12),
+			new ReduceAction466(12),
+			new ReduceAction467(12),
+			new ReduceAction468(12),
+			new ReduceAction469(12),
+			new ReduceAction470(12),
+			new ReduceAction471(12),
+			new ReduceAction472(12),
+			new ReduceAction473(12),
+			new ReduceAction474(12),
+			new ReduceAction475(12),
+			new ReduceAction476(12),
+			new ReduceAction477(12),
+			new ReduceAction478(12),
+			new ReduceAction479(12),
+			new ReduceAction480(12),
+			new ReduceAction481(12),
+			new ReduceAction482(12),
+			new ReduceAction483(12),
+			new ReduceAction484(12),
+			new ReduceAction485(12),
+			new ReduceAction486(12),
+			new ReduceAction487(12),
+			new ReduceAction488(12),
+			new ReduceAction489(12),
+			new ReduceAction490(12),
+			new ReduceAction491(12),
+			new ReduceAction492(12),
+			new ReduceAction493(12),
+			new ReduceAction494(12),
+			new ReduceAction495(12),
+			new ReduceAction496(12),
+			new ReduceAction497(12),
+			new ReduceAction498(12),
+			new ReduceAction499(12),
+			new ReduceAction500(12),
+			new ReduceAction501(12),
+			new ReduceAction502(12),
+			new ReduceAction503(12),
+			new ReduceAction504(12),
+			new ReduceAction505(12),
+			new ReduceAction506(12),
+			new ReduceAction507(12),
+			new ReduceAction508(12),
+			new ReduceAction509(12),
+			new ReduceAction510(12),
+			new ReduceAction511(12),
+			new ReduceAction512(12),
+			new ReduceAction513(13),
+			new ReduceAction514(13),
+			new ReduceAction513(14),
+			new ReduceAction516(14),
+			new ReduceAction517(15),
+			new ReduceAction518(15),
+			new ReduceAction519(16),
+			new ReduceAction520(16),
+			new ReduceAction521(17),
+			new ReduceAction522(17),
+			new ReduceAction523(18),
+			new ReduceAction524(18),
+			new ReduceAction525(18),
+			new ReduceAction526(18),
+			new ReduceAction527(19),
+			new ReduceAction528(19),
+			new ReduceAction529(19),
+			new ReduceAction530(19),
+			new ReduceAction531(19),
+			new ReduceAction532(19),
+			new ReduceAction533(19),
+			new ReduceAction534(19),
+			new ReduceAction535(19),
+			new ReduceAction536(19),
+			new ReduceAction537(19),
+			new ReduceAction538(19),
+			new ReduceAction539(19),
+			new ReduceAction540(19),
+			new ReduceAction541(19),
+			new ReduceAction542(19),
+			new ReduceAction543(19),
+			new ReduceAction544(19),
+			new ReduceAction545(20),
+			new ReduceAction546(20),
+			new ReduceAction547(20),
+			new ReduceAction548(20),
+			new ReduceAction549(20),
+			new ReduceAction550(20),
+			new ReduceAction551(20),
+			new ReduceAction552(20),
+			new ReduceAction553(20),
+			new ReduceAction554(20),
+			new ReduceAction555(20),
+			new ReduceAction556(20),
+			new ReduceAction557(21),
+			new ReduceAction558(21),
+			new ReduceAction559(21),
+			new ReduceAction560(21),
+			new ReduceAction561(21),
+			new ReduceAction562(21),
+			new ReduceAction563(22),
+			new ReduceAction564(22),
+			new ReduceAction565(23),
+			new ReduceAction566(24),
+			new ReduceAction567(24),
+			new ReduceAction568(24),
+			new ReduceAction569(24),
+			new ReduceAction570(24),
+			new ReduceAction571(24),
+			new ReduceAction572(25),
+			new ReduceAction573(26),
+			new ReduceAction574(26),
+			new ReduceAction575(26),
+			new ReduceAction576(26),
+			new ReduceAction577(26),
+			new ReduceAction578(26),
+			new ReduceAction579(27),
+			new ReduceAction580(28),
+			new ReduceAction581(28),
+			new ReduceAction582(29),
+			new ReduceAction583(30),
+			new ReduceAction583(30),
+			new ReduceAction585(30),
+			new ReduceAction586(31),
+			new ReduceAction587(31),
+			new ReduceAction588(31),
+			new ReduceAction589(32),
+			new ReduceAction590(32),
+			new ReduceAction591(32),
+			new ReduceAction592(33),
+			new ReduceAction593(34),
+			new ReduceAction594(34),
+			new ReduceAction595(35),
+			new ReduceAction596(36),
+			new ReduceAction597(36),
+			new ReduceAction598(36),
+			new ReduceAction599(36),
+			new ReduceAction600(36),
+			new ReduceAction601(36),
+			new ReduceAction602(36),
+			new ReduceAction603(36),
+			new ReduceAction604(37),
+			new ReduceAction605(37),
+			new ReduceAction606(38),
+			new ReduceAction606(39),
+			new ReduceAction608(40),
+			new ReduceAction609(40),
+			new ReduceAction610(40),
+			new ReduceAction611(40),
+			new ReduceAction612(41),
+			new ReduceAction613(41),
+			new ReduceAction614(42),
+			new ReduceAction615(42),
+			new ReduceAction616(43),
+			new ReduceAction617(43),
+			new ReduceAction608(44),
+			new ReduceAction611(45),
+			new ReduceAction611(45),
+			new ReduceAction621(45),
+			new ReduceAction622(45),
+			new ReduceAction623(45),
+			new ReduceAction624(45),
+			new ReduceAction625(45),
+			new ReduceAction626(45),
+			new ReduceAction627(45),
+			new ReduceAction628(45),
+			new ReduceAction629(45),
+			new ReduceAction630(45),
+			new ReduceAction631(45),
+			new ReduceAction611(45),
+			new ReduceAction611(45),
+			new ReduceAction611(45),
+			new ReduceAction611(45),
+			new ReduceAction611(45),
+			new ReduceAction611(45),
+			new ReduceAction638(45),
+			new ReduceAction639(45),
+			new ReduceAction640(45),
+			new ReduceAction641(45),
+			new ReduceAction640(45),
+			new ReduceAction643(45),
+			new ReduceAction644(45),
+			new ReduceAction643(45),
+			new ReduceAction646(45),
+			new ReduceAction647(45),
+			new ReduceAction648(45),
+			new ReduceAction649(45),
+			new ReduceAction648(45),
+			new ReduceAction651(45),
+			new ReduceAction652(45),
+			new ReduceAction651(45),
+			new ReduceAction654(45),
+			new ReduceAction655(45),
+			new ReduceAction656(45),
+			new ReduceAction657(45),
+			new ReduceAction658(45),
+			new ReduceAction659(45),
+			new ReduceAction660(45),
+			new ReduceAction661(45),
+			new ReduceAction660(45),
+			new ReduceAction663(45),
+			new ReduceAction664(45),
+			new ReduceAction663(45),
+			new ReduceAction666(45),
+			new ReduceAction667(46),
+			new ReduceAction668(47),
+			new ReduceAction669(47),
+			new ReduceAction670(48),
+			new ReduceAction671(48),
+			new ReduceAction672(48),
+			new ReduceAction673(48),
+			new ReduceAction674(48),
+			new ReduceAction675(48),
+			new ReduceAction676(48),
+			new ReduceAction677(48),
+			new ReduceAction678(48),
+			new ReduceAction679(49),
+			new ReduceAction680(49),
+			new ReduceAction681(49),
+			new ReduceAction682(49),
+			new ReduceAction683(49),
+			new ReduceAction684(49),
+			new ReduceAction685(50),
+			new ReduceAction686(50),
+			new ReduceAction687(51),
+			new ReduceAction688(52),
+			new ReduceAction689(52),
+			new ReduceAction690(52),
+			new ReduceAction691(52),
+			new ReduceAction692(52),
+			new ReduceAction693(52),
+			new ReduceAction694(52),
+			new ReduceAction695(52),
+			new ReduceAction696(53),
+			new ReduceAction697(53),
+			new ReduceAction698(53),
+			new ReduceAction699(53),
+			new ReduceAction698(53),
+			new ReduceAction701(53),
+			new ReduceAction702(53),
+			new ReduceAction701(53),
+			new ReduceAction704(53),
+			new ReduceAction705(53),
+			new ReduceAction706(53),
+			new ReduceAction707(53),
+			new ReduceAction706(53),
+			new ReduceAction709(53),
+			new ReduceAction710(53),
+			new ReduceAction709(53),
+			new ReduceAction712(53),
+			new ReduceAction713(53),
+			new ReduceAction714(53),
+			new ReduceAction715(53),
+			new ReduceAction716(53),
+			new ReduceAction715(53),
+			new ReduceAction718(53),
+			new ReduceAction719(53),
+			new ReduceAction718(53),
+			new ReduceAction721(53),
+			new ReduceAction722(53),
+			new ReduceAction723(53),
+			new ReduceAction724(53),
+			new ReduceAction723(53),
+			new ReduceAction726(53),
+			new ReduceAction727(53),
+			new ReduceAction726(53),
+			new ReduceAction729(53),
+			new ReduceAction730(54),
+			new ReduceAction731(54),
+			new ReduceAction732(55),
+			new ReduceAction733(55),
+			new ReduceAction734(56),
+			new ReduceAction735(56),
+			new ReduceAction736(56),
+			new ReduceAction737(56),
+			new ReduceAction738(56),
+			new ReduceAction608(57),
+			new ReduceAction610(57),
+			new ReduceAction741(58),
+			new ReduceAction742(58),
+			new ReduceAction743(59),
+			new ReduceAction744(59),
+			new ReduceAction745(60),
+			new ReduceAction746(60),
+			new ReduceAction747(60),
+			new ReduceAction748(60),
+			new ReduceAction749(61),
+			new ReduceAction750(61),
+			new ReduceAction751(61),
+			new ReduceAction752(61),
+			new ReduceAction753(62),
+			new ReduceAction611(63),
+			new ReduceAction646(63),
+			new ReduceAction647(63),
+			new ReduceAction648(63),
+			new ReduceAction649(63),
+			new ReduceAction648(63),
+			new ReduceAction651(63),
+			new ReduceAction652(63),
+			new ReduceAction651(63),
+			new ReduceAction763(63),
+			new ReduceAction611(64),
+			new ReduceAction765(64),
+			new ReduceAction611(65),
+			new ReduceAction767(65),
+			new ReduceAction768(65),
+			new ReduceAction769(65),
+			new ReduceAction770(65),
+			new ReduceAction611(66),
+			new ReduceAction772(66),
+			new ReduceAction611(67),
+			new ReduceAction774(67),
+			new ReduceAction775(67),
+			new ReduceAction776(67),
+			new ReduceAction777(67),
+			new ReduceAction778(67),
+			new ReduceAction779(67),
+			new ReduceAction780(67),
+			new ReduceAction781(67),
+			new ReduceAction782(67),
+			new ReduceAction783(67),
+			new ReduceAction784(67),
+			new ReduceAction611(68),
+			new ReduceAction786(68),
+			new ReduceAction787(68),
+			new ReduceAction611(69),
+			new ReduceAction789(69),
+			new ReduceAction790(69),
+			new ReduceAction791(69),
+			new ReduceAction611(70),
+			new ReduceAction793(70),
+			new ReduceAction794(70),
+			new ReduceAction611(71),
+			new ReduceAction796(71),
+			new ReduceAction797(71),
+			new ReduceAction798(71),
+			new ReduceAction799(71),
+			new ReduceAction800(71),
+			new ReduceAction799(71),
+			new ReduceAction802(71),
+			new ReduceAction803(71),
+			new ReduceAction802(71),
+			new ReduceAction805(72),
+			new ReduceAction806(72),
+			new ReduceAction807(72),
+			new ReduceAction808(72),
+			new ReduceAction807(72),
+			new ReduceAction810(72),
+			new ReduceAction811(72),
+			new ReduceAction810(72),
+			new ReduceAction638(72),
+			new ReduceAction639(72),
+			new ReduceAction640(72),
+			new ReduceAction641(72),
+			new ReduceAction640(72),
+			new ReduceAction643(72),
+			new ReduceAction644(72),
+			new ReduceAction643(72),
+			new ReduceAction654(72),
+			new ReduceAction655(72),
+			new ReduceAction656(72),
+			new ReduceAction657(72),
+			new ReduceAction658(72),
+			new ReduceAction659(72),
+			new ReduceAction827(72),
+			new ReduceAction828(72),
+			new ReduceAction829(72),
+			new ReduceAction830(72),
+			new ReduceAction829(72),
+			new ReduceAction832(72),
+			new ReduceAction833(72),
+			new ReduceAction834(72),
+			new ReduceAction835(72),
+			new ReduceAction836(72),
+			new ReduceAction837(72),
+			new ReduceAction838(72),
+			new ReduceAction839(72),
+			new ReduceAction840(72),
+			new ReduceAction841(72),
+			new ReduceAction842(72),
+			new ReduceAction843(72),
+			new ReduceAction844(72),
+			new ReduceAction845(72),
+			new ReduceAction846(72),
+			new ReduceAction847(72),
+			new ReduceAction848(72),
+			new ReduceAction849(72),
+			new ReduceAction850(72),
+			new ReduceAction851(72),
+			new ReduceAction852(72),
+			new ReduceAction853(72),
+			new ReduceAction611(72),
+			new ReduceAction855(72),
+			new ReduceAction856(72),
+			new ReduceAction857(72),
+			new ReduceAction858(72),
+			new ReduceAction859(73),
+			new ReduceAction860(73),
+			new ReduceAction861(73),
+			new ReduceAction862(73),
+			new ReduceAction863(74),
+			new ReduceAction864(75),
+			new ReduceAction863(76),
+			new ReduceAction866(77),
+			new ReduceAction867(78),
+			new ReduceAction868(79),
+			new ReduceAction869(79),
+			new ReduceAction870(80),
+			new ReduceAction871(80),
+			new ReduceAction872(80),
+			new ReduceAction873(80),
+			new ReduceAction874(81),
+			new ReduceAction875(82),
+			new ReduceAction876(82),
+			new ReduceAction874(83),
+			new ReduceAction878(84),
+			new ReduceAction879(84),
+			new ReduceAction880(84),
+			new ReduceAction881(84),
+			new ReduceAction882(84),
+			new ReduceAction883(85),
+			new ReduceAction884(86),
+			new ReduceAction885(86),
+			new ReduceAction886(87),
+			new ReduceAction887(88),
+			new ReduceAction888(88),
+			new ReduceAction888(88),
+			new ReduceAction890(88),
+			new ReduceAction891(89),
+			new ReduceAction892(89),
+			new ReduceAction893(89),
+			new ReduceAction892(89),
+			new ReduceAction895(89),
+			new ReduceAction896(89),
+			new ReduceAction897(89),
+			new ReduceAction896(89),
+			new ReduceAction899(89),
+			new ReduceAction900(89),
+			new ReduceAction901(89),
+			new ReduceAction900(89),
+			new ReduceAction903(89),
+			new ReduceAction904(89),
+			new ReduceAction905(89),
+			new ReduceAction904(89),
+			new ReduceAction907(90),
+			new ReduceAction908(90),
+			new ReduceAction909(90),
+			new ReduceAction907(91),
+			new ReduceAction911(91),
+			new ReduceAction908(91),
+			new ReduceAction909(91),
+			new ReduceAction914(92),
+			new ReduceAction915(93),
+			new ReduceAction916(93),
+			new ReduceAction917(94),
+			new ReduceAction918(95),
+			new ReduceAction919(95),
+			new ReduceAction920(96),
+			new ReduceAction921(96),
+			new ReduceAction922(96),
+			new ReduceAction923(96),
+			new ReduceAction924(97),
+			new ReduceAction925(98),
+			new ReduceAction926(99),
+			new ReduceAction926(99),
+			new ReduceAction928(100),
+			new ReduceAction929(100),
+			new ReduceAction70(100),
+			new ReduceAction931(101),
+			new ReduceAction932(101),
+			new ReduceAction933(102),
+			new ReduceAction934(102),
+			new ReduceAction926(102),
+			new ReduceAction344(103),
+			new ReduceAction345(104),
+			new ReduceAction346(104),
+			new ReduceAction347(104),
+			new ReduceAction348(104),
+			new ReduceAction349(104),
+			new ReduceAction350(104),
+			new ReduceAction351(104),
+			new ReduceAction352(104),
+			new ReduceAction353(104),
+			new ReduceAction354(104),
+			new ReduceAction355(104),
+			new ReduceAction356(104),
+			new ReduceAction361(104),
+			new ReduceAction362(104),
+			new ReduceAction363(104),
+			new ReduceAction364(104),
+			new ReduceAction365(104),
+			new ReduceAction366(104),
+			new ReduceAction367(104),
+			new ReduceAction368(104),
+			new ReduceAction369(104),
+			new ReduceAction370(104),
+			new ReduceAction371(104),
+			new ReduceAction372(104),
+			new ReduceAction373(104),
+			new ReduceAction374(104),
+			new ReduceAction375(104),
+			new ReduceAction376(104),
+			new ReduceAction377(104),
+			new ReduceAction378(104),
+			new ReduceAction379(104),
+			new ReduceAction380(104),
+			new ReduceAction545(105),
+			new ReduceAction546(105),
+			new ReduceAction547(105),
+			new ReduceAction548(105),
+			new ReduceAction553(105),
+			new ReduceAction554(105),
+			new ReduceAction596(106),
+			new ReduceAction597(106),
+			new ReduceAction598(106),
+			new ReduceAction599(106),
+			new ReduceAction611(107),
+			new ReduceAction646(107),
+			new ReduceAction647(107),
+			new ReduceAction648(107),
+			new ReduceAction651(107),
+			new ReduceAction649(107),
+			new ReduceAction652(107),
+			new ReduceAction648(107),
+			new ReduceAction651(107),
+			new ReduceAction611(108),
+			new ReduceAction765(108),
+			new ReduceAction611(109),
+			new ReduceAction767(109),
+			new ReduceAction768(109),
+			new ReduceAction769(109),
+			new ReduceAction770(109),
+			new ReduceAction611(110),
+			new ReduceAction772(110),
+			new ReduceAction611(111),
+			new ReduceAction774(111),
+			new ReduceAction775(111),
+			new ReduceAction776(111),
+			new ReduceAction777(111),
+			new ReduceAction778(111),
+			new ReduceAction779(111),
+			new ReduceAction780(111),
+			new ReduceAction781(111),
+			new ReduceAction782(111),
+			new ReduceAction783(111),
+			new ReduceAction784(111),
+			new ReduceAction611(112),
+			new ReduceAction786(112),
+			new ReduceAction787(112),
+			new ReduceAction611(113),
+			new ReduceAction789(113),
+			new ReduceAction790(113),
+			new ReduceAction791(113),
+			new ReduceAction611(114),
+			new ReduceAction793(114),
+			new ReduceAction794(114),
+			new ReduceAction611(115),
+			new ReduceAction796(115),
+			new ReduceAction797(115),
+			new ReduceAction798(115),
+			new ReduceAction799(115),
+			new ReduceAction802(115),
+			new ReduceAction800(115),
+			new ReduceAction803(115),
+			new ReduceAction799(115),
+			new ReduceAction802(115),
+			new ReduceAction805(116),
+			new ReduceAction806(116),
+			new ReduceAction807(116),
+			new ReduceAction810(116),
+			new ReduceAction808(116),
+			new ReduceAction811(116),
+			new ReduceAction807(116),
+			new ReduceAction810(116),
+			new ReduceAction638(116),
+			new ReduceAction639(116),
+			new ReduceAction640(116),
+			new ReduceAction643(116),
+			new ReduceAction641(116),
+			new ReduceAction644(116),
+			new ReduceAction640(116),
+			new ReduceAction643(116),
+			new ReduceAction654(116),
+			new ReduceAction655(116),
+			new ReduceAction656(116),
+			new ReduceAction657(116),
+			new ReduceAction658(116),
+			new ReduceAction659(116),
+			new ReduceAction828(116),
+			new ReduceAction829(116),
+			new ReduceAction830(116),
+			new ReduceAction829(116),
+			new ReduceAction838(116),
+			new ReduceAction839(116),
+			new ReduceAction840(116),
+			new ReduceAction841(116),
+			new ReduceAction842(116),
+			new ReduceAction843(116),
+			new ReduceAction844(116),
+			new ReduceAction845(116),
+			new ReduceAction846(116),
+			new ReduceAction847(116),
+			new ReduceAction848(116),
+			new ReduceAction849(116),
+			new ReduceAction850(116),
+			new ReduceAction851(116),
+			new ReduceAction852(116),
+			new ReduceAction853(116),
+			new ReduceAction611(116),
+			new ReduceAction855(116),
+			new ReduceAction856(116),
+			new ReduceAction857(116),
+			new ReduceAction858(116),
+			new ReduceAction596(117),
+			new ReduceAction597(117),
+			new ReduceAction598(117),
+			new ReduceAction599(117),
+			new ReduceAction600(117),
+			new ReduceAction601(117),
+			new ReduceAction602(117),
+			new ReduceAction603(117),
+			new ReduceAction611(118),
+			new ReduceAction611(118),
+			new ReduceAction621(118),
+			new ReduceAction622(118),
+			new ReduceAction623(118),
+			new ReduceAction624(118),
+			new ReduceAction625(118),
+			new ReduceAction626(118),
+			new ReduceAction627(118),
+			new ReduceAction628(118),
+			new ReduceAction629(118),
+			new ReduceAction630(118),
+			new ReduceAction631(118),
+			new ReduceAction611(118),
+			new ReduceAction611(118),
+			new ReduceAction611(118),
+			new ReduceAction611(118),
+			new ReduceAction611(118),
+			new ReduceAction611(118),
+			new ReduceAction638(118),
+			new ReduceAction639(118),
+			new ReduceAction640(118),
+			new ReduceAction641(118),
+			new ReduceAction640(118),
+			new ReduceAction643(118),
+			new ReduceAction644(118),
+			new ReduceAction643(118),
+			new ReduceAction646(118),
+			new ReduceAction647(118),
+			new ReduceAction648(118),
+			new ReduceAction649(118),
+			new ReduceAction648(118),
+			new ReduceAction651(118),
+			new ReduceAction652(118),
+			new ReduceAction651(118),
+			new ReduceAction654(118),
+			new ReduceAction655(118),
+			new ReduceAction656(118),
+			new ReduceAction657(118),
+			new ReduceAction658(118),
+			new ReduceAction659(118),
+			new ReduceAction660(118),
+			new ReduceAction661(118),
+			new ReduceAction660(118),
+			new ReduceAction663(118),
+			new ReduceAction664(118),
+			new ReduceAction663(118),
+			new ReduceAction666(118),
+			new ReduceAction696(119),
+			new ReduceAction697(119),
+			new ReduceAction698(119),
+			new ReduceAction699(119),
+			new ReduceAction698(119),
+			new ReduceAction701(119),
+			new ReduceAction702(119),
+			new ReduceAction701(119),
+			new ReduceAction704(119),
+			new ReduceAction705(119),
+			new ReduceAction706(119),
+			new ReduceAction707(119),
+			new ReduceAction706(119),
+			new ReduceAction709(119),
+			new ReduceAction710(119),
+			new ReduceAction709(119),
+			new ReduceAction712(119),
+			new ReduceAction713(119),
+			new ReduceAction714(119),
+			new ReduceAction715(119),
+			new ReduceAction716(119),
+			new ReduceAction715(119),
+			new ReduceAction718(119),
+			new ReduceAction719(119),
+			new ReduceAction718(119),
+			new ReduceAction721(119),
+			new ReduceAction722(119),
+			new ReduceAction723(119),
+			new ReduceAction724(119),
+			new ReduceAction723(119),
+			new ReduceAction726(119),
+			new ReduceAction727(119),
+			new ReduceAction726(119),
+			new ReduceAction729(119),
+			new ReduceAction611(120),
+			new ReduceAction646(120),
+			new ReduceAction647(120),
+			new ReduceAction648(120),
+			new ReduceAction649(120),
+			new ReduceAction648(120),
+			new ReduceAction651(120),
+			new ReduceAction652(120),
+			new ReduceAction651(120),
+			new ReduceAction611(121),
+			new ReduceAction765(121),
+			new ReduceAction611(122),
+			new ReduceAction767(122),
+			new ReduceAction768(122),
+			new ReduceAction769(122),
+			new ReduceAction770(122),
+			new ReduceAction611(123),
+			new ReduceAction772(123),
+			new ReduceAction611(124),
+			new ReduceAction774(124),
+			new ReduceAction775(124),
+			new ReduceAction776(124),
+			new ReduceAction777(124),
+			new ReduceAction778(124),
+			new ReduceAction779(124),
+			new ReduceAction780(124),
+			new ReduceAction781(124),
+			new ReduceAction782(124),
+			new ReduceAction783(124),
+			new ReduceAction784(124),
+			new ReduceAction611(125),
+			new ReduceAction786(125),
+			new ReduceAction787(125),
+			new ReduceAction611(126),
+			new ReduceAction789(126),
+			new ReduceAction790(126),
+			new ReduceAction791(126),
+			new ReduceAction611(127),
+			new ReduceAction793(127),
+			new ReduceAction794(127),
+			new ReduceAction611(128),
+			new ReduceAction796(128),
+			new ReduceAction797(128),
+			new ReduceAction798(128),
+			new ReduceAction799(128),
+			new ReduceAction800(128),
+			new ReduceAction799(128),
+			new ReduceAction802(128),
+			new ReduceAction803(128),
+			new ReduceAction802(128),
+			new ReduceAction805(129),
+			new ReduceAction806(129),
+			new ReduceAction807(129),
+			new ReduceAction808(129),
+			new ReduceAction807(129),
+			new ReduceAction810(129),
+			new ReduceAction811(129),
+			new ReduceAction810(129),
+			new ReduceAction638(129),
+			new ReduceAction639(129),
+			new ReduceAction640(129),
+			new ReduceAction641(129),
+			new ReduceAction640(129),
+			new ReduceAction643(129),
+			new ReduceAction644(129),
+			new ReduceAction643(129),
+			new ReduceAction654(129),
+			new ReduceAction655(129),
+			new ReduceAction656(129),
+			new ReduceAction657(129),
+			new ReduceAction658(129),
+			new ReduceAction659(129),
+			new ReduceAction827(129),
+			new ReduceAction828(129),
+			new ReduceAction829(129),
+			new ReduceAction830(129),
+			new ReduceAction829(129),
+			new ReduceAction838(129),
+			new ReduceAction839(129),
+			new ReduceAction840(129),
+			new ReduceAction841(129),
+			new ReduceAction842(129),
+			new ReduceAction843(129),
+			new ReduceAction844(129),
+			new ReduceAction845(129),
+			new ReduceAction846(129),
+			new ReduceAction847(129),
+			new ReduceAction848(129),
+			new ReduceAction849(129),
+			new ReduceAction850(129),
+			new ReduceAction851(129),
+			new ReduceAction852(129),
+			new ReduceAction853(129),
+			new ReduceAction611(129),
+			new ReduceAction857(129),
+			new ReduceAction858(129),
+			new ReduceAction868(130),
+			new ReduceAction869(130),
+			new ReduceAction870(131),
+			new ReduceAction871(131),
+			new ReduceAction884(132),
+			new ReduceAction885(132),
+			new ReduceAction887(133),
+			new ReduceAction888(133),
+			new ReduceAction888(133),
+			new ReduceAction596(134),
+			new ReduceAction597(134),
+			new ReduceAction598(134),
+			new ReduceAction599(134),
+			new ReduceAction611(135),
+			new ReduceAction646(135),
+			new ReduceAction647(135),
+			new ReduceAction648(135),
+			new ReduceAction651(135),
+			new ReduceAction649(135),
+			new ReduceAction652(135),
+			new ReduceAction648(135),
+			new ReduceAction651(135),
+			new ReduceAction611(136),
+			new ReduceAction765(136),
+			new ReduceAction611(137),
+			new ReduceAction767(137),
+			new ReduceAction768(137),
+			new ReduceAction769(137),
+			new ReduceAction770(137),
+			new ReduceAction611(138),
+			new ReduceAction772(138),
+			new ReduceAction611(139),
+			new ReduceAction774(139),
+			new ReduceAction775(139),
+			new ReduceAction776(139),
+			new ReduceAction777(139),
+			new ReduceAction778(139),
+			new ReduceAction779(139),
+			new ReduceAction780(139),
+			new ReduceAction781(139),
+			new ReduceAction782(139),
+			new ReduceAction783(139),
+			new ReduceAction784(139),
+			new ReduceAction611(140),
+			new ReduceAction786(140),
+			new ReduceAction787(140),
+			new ReduceAction611(141),
+			new ReduceAction789(141),
+			new ReduceAction790(141),
+			new ReduceAction791(141),
+			new ReduceAction611(142),
+			new ReduceAction793(142),
+			new ReduceAction794(142),
+			new ReduceAction611(143),
+			new ReduceAction796(143),
+			new ReduceAction1317(143),
+			new ReduceAction1318(143),
+			new ReduceAction797(143),
+			new ReduceAction1318(143),
+			new ReduceAction1321(144),
+			new ReduceAction1322(144),
+			new ReduceAction805(144),
+			new ReduceAction1322(144),
+			new ReduceAction1325(144),
+			new ReduceAction1326(144),
+			new ReduceAction638(144),
+			new ReduceAction1326(144),
+			new ReduceAction654(144),
+			new ReduceAction655(144),
+			new ReduceAction656(144),
+			new ReduceAction657(144),
+			new ReduceAction1333(144),
+			new ReduceAction828(144),
+			new ReduceAction829(144),
+			new ReduceAction830(144),
+			new ReduceAction829(144),
+			new ReduceAction838(144),
+			new ReduceAction839(144),
+			new ReduceAction840(144),
+			new ReduceAction841(144),
+			new ReduceAction842(144),
+			new ReduceAction843(144),
+			new ReduceAction844(144),
+			new ReduceAction845(144),
+			new ReduceAction846(144),
+			new ReduceAction847(144),
+			new ReduceAction848(144),
+			new ReduceAction849(144),
+			new ReduceAction850(144),
+			new ReduceAction851(144),
+			new ReduceAction852(144),
+			new ReduceAction853(144),
+			new ReduceAction611(144),
+			new ReduceAction857(144),
+			new ReduceAction858(144),
+			new ReduceAction1357(145),
+			new ReduceAction1358(145),
+			new ReduceAction608(146),
+			new ReduceAction609(146),
+			new ReduceAction610(146),
+			new ReduceAction611(146),
+			new ReduceAction611(147),
+			new ReduceAction611(147),
+			new ReduceAction621(147),
+			new ReduceAction622(147),
+			new ReduceAction623(147),
+			new ReduceAction624(147),
+			new ReduceAction625(147),
+			new ReduceAction626(147),
+			new ReduceAction627(147),
+			new ReduceAction628(147),
+			new ReduceAction629(147),
+			new ReduceAction630(147),
+			new ReduceAction631(147),
+			new ReduceAction611(147),
+			new ReduceAction611(147),
+			new ReduceAction611(147),
+			new ReduceAction611(147),
+			new ReduceAction611(147),
+			new ReduceAction611(147),
+			new ReduceAction638(147),
+			new ReduceAction639(147),
+			new ReduceAction640(147),
+			new ReduceAction641(147),
+			new ReduceAction640(147),
+			new ReduceAction643(147),
+			new ReduceAction644(147),
+			new ReduceAction643(147),
+			new ReduceAction646(147),
+			new ReduceAction647(147),
+			new ReduceAction648(147),
+			new ReduceAction649(147),
+			new ReduceAction648(147),
+			new ReduceAction651(147),
+			new ReduceAction652(147),
+			new ReduceAction651(147),
+			new ReduceAction654(147),
+			new ReduceAction655(147),
+			new ReduceAction656(147),
+			new ReduceAction657(147),
+			new ReduceAction658(147),
+			new ReduceAction659(147),
+			new ReduceAction660(147),
+			new ReduceAction661(147),
+			new ReduceAction660(147),
+			new ReduceAction663(147),
+			new ReduceAction664(147),
+			new ReduceAction663(147),
+			new ReduceAction666(147),
+			new ReduceAction668(148),
+			new ReduceAction669(148),
+			new ReduceAction670(149),
+			new ReduceAction671(149),
+			new ReduceAction672(149),
+			new ReduceAction673(149),
+			new ReduceAction674(149),
+			new ReduceAction675(149),
+			new ReduceAction676(149),
+			new ReduceAction677(149),
+			new ReduceAction678(149),
+			new ReduceAction687(150),
+			new ReduceAction688(151),
+			new ReduceAction689(151),
+			new ReduceAction690(151),
+			new ReduceAction691(151),
+			new ReduceAction692(151),
+			new ReduceAction693(151),
+			new ReduceAction694(151),
+			new ReduceAction695(151),
+			new ReduceAction696(152),
+			new ReduceAction697(152),
+			new ReduceAction698(152),
+			new ReduceAction699(152),
+			new ReduceAction698(152),
+			new ReduceAction701(152),
+			new ReduceAction702(152),
+			new ReduceAction701(152),
+			new ReduceAction704(152),
+			new ReduceAction705(152),
+			new ReduceAction706(152),
+			new ReduceAction707(152),
+			new ReduceAction706(152),
+			new ReduceAction709(152),
+			new ReduceAction710(152),
+			new ReduceAction709(152),
+			new ReduceAction712(152),
+			new ReduceAction713(152),
+			new ReduceAction714(152),
+			new ReduceAction715(152),
+			new ReduceAction716(152),
+			new ReduceAction715(152),
+			new ReduceAction718(152),
+			new ReduceAction719(152),
+			new ReduceAction718(152),
+			new ReduceAction721(152),
+			new ReduceAction722(152),
+			new ReduceAction723(152),
+			new ReduceAction724(152),
+			new ReduceAction723(152),
+			new ReduceAction726(152),
+			new ReduceAction727(152),
+			new ReduceAction726(152),
+			new ReduceAction729(152),
+			new ReduceAction732(153),
+			new ReduceAction733(153),
+			new ReduceAction734(154),
+			new ReduceAction741(155),
+			new ReduceAction742(155),
+			new ReduceAction743(156),
+			new ReduceAction744(156),
+			new ReduceAction745(157),
+			new ReduceAction746(157),
+			new ReduceAction747(157),
+			new ReduceAction748(157),
+			new ReduceAction749(158),
+			new ReduceAction750(158),
+			new ReduceAction611(159),
+			new ReduceAction646(159),
+			new ReduceAction647(159),
+			new ReduceAction648(159),
+			new ReduceAction649(159),
+			new ReduceAction648(159),
+			new ReduceAction651(159),
+			new ReduceAction652(159),
+			new ReduceAction651(159),
+			new ReduceAction763(159),
+			new ReduceAction611(160),
+			new ReduceAction646(160),
+			new ReduceAction647(160),
+			new ReduceAction648(160),
+			new ReduceAction651(160),
+			new ReduceAction649(160),
+			new ReduceAction652(160),
+			new ReduceAction648(160),
+			new ReduceAction651(160),
+			new ReduceAction611(161),
+			new ReduceAction611(161),
+			new ReduceAction621(161),
+			new ReduceAction622(161),
+			new ReduceAction623(161),
+			new ReduceAction624(161),
+			new ReduceAction625(161),
+			new ReduceAction626(161),
+			new ReduceAction627(161),
+			new ReduceAction628(161),
+			new ReduceAction629(161),
+			new ReduceAction630(161),
+			new ReduceAction631(161),
+			new ReduceAction611(161),
+			new ReduceAction611(161),
+			new ReduceAction611(161),
+			new ReduceAction611(161),
+			new ReduceAction611(161),
+			new ReduceAction611(161),
+			new ReduceAction638(161),
+			new ReduceAction639(161),
+			new ReduceAction640(161),
+			new ReduceAction641(161),
+			new ReduceAction640(161),
+			new ReduceAction643(161),
+			new ReduceAction644(161),
+			new ReduceAction643(161),
+			new ReduceAction646(161),
+			new ReduceAction647(161),
+			new ReduceAction648(161),
+			new ReduceAction649(161),
+			new ReduceAction648(161),
+			new ReduceAction651(161),
+			new ReduceAction652(161),
+			new ReduceAction651(161),
+			new ReduceAction654(161),
+			new ReduceAction655(161),
+			new ReduceAction656(161),
+			new ReduceAction657(161),
+			new ReduceAction658(161),
+			new ReduceAction659(161),
+			new ReduceAction660(161),
+			new ReduceAction661(161),
+			new ReduceAction660(161),
+			new ReduceAction663(161),
+			new ReduceAction664(161),
+			new ReduceAction663(161),
+			new ReduceAction666(161),
+			new ReduceAction696(162),
+			new ReduceAction697(162),
+			new ReduceAction698(162),
+			new ReduceAction699(162),
+			new ReduceAction698(162),
+			new ReduceAction701(162),
+			new ReduceAction702(162),
+			new ReduceAction701(162),
+			new ReduceAction704(162),
+			new ReduceAction705(162),
+			new ReduceAction706(162),
+			new ReduceAction707(162),
+			new ReduceAction706(162),
+			new ReduceAction709(162),
+			new ReduceAction710(162),
+			new ReduceAction709(162),
+			new ReduceAction712(162),
+			new ReduceAction713(162),
+			new ReduceAction714(162),
+			new ReduceAction715(162),
+			new ReduceAction716(162),
+			new ReduceAction715(162),
+			new ReduceAction718(162),
+			new ReduceAction719(162),
+			new ReduceAction718(162),
+			new ReduceAction721(162),
+			new ReduceAction722(162),
+			new ReduceAction723(162),
+			new ReduceAction724(162),
+			new ReduceAction723(162),
+			new ReduceAction726(162),
+			new ReduceAction727(162),
+			new ReduceAction726(162),
+			new ReduceAction729(162),
+			new ReduceAction611(163),
+			new ReduceAction646(163),
+			new ReduceAction647(163),
+			new ReduceAction648(163),
+			new ReduceAction649(163),
+			new ReduceAction648(163),
+			new ReduceAction651(163),
+			new ReduceAction652(163),
+			new ReduceAction651(163),
+			new ReduceAction611(164),
+			new ReduceAction646(164),
+			new ReduceAction647(164),
+			new ReduceAction648(164),
+			new ReduceAction651(164),
+			new ReduceAction649(164),
+			new ReduceAction652(164),
+			new ReduceAction648(164),
+			new ReduceAction651(164),
+			new ReduceAction608(165),
+			new ReduceAction609(165),
+			new ReduceAction610(165),
+			new ReduceAction608(166),
+			new ReduceAction609(166),
+			new ReduceAction610(166),
+			new ReduceAction611(167),
+			new ReduceAction611(167),
+			new ReduceAction621(167),
+			new ReduceAction622(167),
+			new ReduceAction623(167),
+			new ReduceAction624(167),
+			new ReduceAction625(167),
+			new ReduceAction626(167),
+			new ReduceAction627(167),
+			new ReduceAction628(167),
+			new ReduceAction629(167),
+			new ReduceAction630(167),
+			new ReduceAction631(167),
+			new ReduceAction611(167),
+			new ReduceAction611(167),
+			new ReduceAction611(167),
+			new ReduceAction611(167),
+			new ReduceAction611(167),
+			new ReduceAction666(167),
+			new ReduceAction611(168),
+			new ReduceAction611(168),
+			new ReduceAction621(168),
+			new ReduceAction622(168),
+			new ReduceAction623(168),
+			new ReduceAction624(168),
+			new ReduceAction625(168),
+			new ReduceAction626(168),
+			new ReduceAction627(168),
+			new ReduceAction628(168),
+			new ReduceAction629(168),
+			new ReduceAction630(168),
+			new ReduceAction631(168),
+			new ReduceAction611(168),
+			new ReduceAction611(168),
+			new ReduceAction611(168),
+			new ReduceAction611(168),
+			new ReduceAction611(168),
+			new ReduceAction666(168),
+			new ReduceAction611(169),
+			new ReduceAction611(169),
+			new ReduceAction621(169),
+			new ReduceAction622(169),
+			new ReduceAction623(169),
+			new ReduceAction624(169),
+			new ReduceAction625(169),
+			new ReduceAction626(169),
+			new ReduceAction627(169),
+			new ReduceAction628(169),
+			new ReduceAction629(169),
+			new ReduceAction630(169),
+			new ReduceAction631(169),
+			new ReduceAction611(169),
+			new ReduceAction611(169),
+			new ReduceAction611(169),
+			new ReduceAction611(169),
+			new ReduceAction611(169),
+			new ReduceAction666(169),
+			new ReduceAction611(170),
+			new ReduceAction611(170),
+			new ReduceAction621(170),
+			new ReduceAction622(170),
+			new ReduceAction623(170),
+			new ReduceAction624(170),
+			new ReduceAction625(170),
+			new ReduceAction626(170),
+			new ReduceAction627(170),
+			new ReduceAction628(170),
+			new ReduceAction629(170),
+			new ReduceAction630(170),
+			new ReduceAction631(170),
+			new ReduceAction611(170),
+			new ReduceAction611(170),
+			new ReduceAction611(170),
+			new ReduceAction611(170),
+			new ReduceAction611(170),
+			new ReduceAction666(170),
+			new ReduceAction611(171),
+			new ReduceAction765(171),
+			new ReduceAction611(172),
+			new ReduceAction767(172),
+			new ReduceAction768(172),
+			new ReduceAction769(172),
+			new ReduceAction770(172),
+			new ReduceAction611(173),
+			new ReduceAction772(173),
+			new ReduceAction611(174),
+			new ReduceAction774(174),
+			new ReduceAction776(174),
+			new ReduceAction777(174),
+			new ReduceAction778(174),
+			new ReduceAction779(174),
+			new ReduceAction780(174),
+			new ReduceAction781(174),
+			new ReduceAction782(174),
+			new ReduceAction783(174),
+			new ReduceAction784(174),
+			new ReduceAction611(175),
+			new ReduceAction765(175),
+			new ReduceAction611(176),
+			new ReduceAction767(176),
+			new ReduceAction768(176),
+			new ReduceAction769(176),
+			new ReduceAction770(176),
+			new ReduceAction611(177),
+			new ReduceAction772(177),
+			new ReduceAction611(178),
+			new ReduceAction774(178),
+			new ReduceAction776(178),
+			new ReduceAction777(178),
+			new ReduceAction778(178),
+			new ReduceAction779(178),
+			new ReduceAction780(178),
+			new ReduceAction781(178),
+			new ReduceAction782(178),
+			new ReduceAction783(178),
+			new ReduceAction784(178),
+			new ReduceAction611(179),
+			new ReduceAction765(179),
+			new ReduceAction611(180),
+			new ReduceAction767(180),
+			new ReduceAction768(180),
+			new ReduceAction769(180),
+			new ReduceAction770(180),
+			new ReduceAction611(181),
+			new ReduceAction772(181),
+			new ReduceAction611(182),
+			new ReduceAction774(182),
+			new ReduceAction776(182),
+			new ReduceAction777(182),
+			new ReduceAction778(182),
+			new ReduceAction779(182),
+			new ReduceAction780(182),
+			new ReduceAction781(182),
+			new ReduceAction782(182),
+			new ReduceAction783(182),
+			new ReduceAction784(182),
+			new ReduceAction611(183),
+			new ReduceAction765(183),
+			new ReduceAction611(184),
+			new ReduceAction767(184),
+			new ReduceAction768(184),
+			new ReduceAction769(184),
+			new ReduceAction770(184),
+			new ReduceAction611(185),
+			new ReduceAction772(185),
+			new ReduceAction611(186),
+			new ReduceAction774(186),
+			new ReduceAction776(186),
+			new ReduceAction777(186),
+			new ReduceAction778(186),
+			new ReduceAction779(186),
+			new ReduceAction780(186),
+			new ReduceAction781(186),
+			new ReduceAction782(186),
+			new ReduceAction783(186),
+			new ReduceAction784(186),
+			new ReduceAction878(187),
+			new ReduceAction879(187),
+			new ReduceAction880(187),
+			new ReduceAction881(187),
+			new ReduceAction882(187),
+			new ReduceAction891(188),
+			new ReduceAction892(188),
+			new ReduceAction893(188),
+			new ReduceAction892(188),
+			new ReduceAction903(188),
+			new ReduceAction904(188),
+			new ReduceAction905(188),
+			new ReduceAction904(188),
+			new ReduceAction1772(189),
+			new ReduceAction1773(189),
+			new ReduceAction1774(190),
+			new ReduceAction1775(190),
+			new ReduceAction1776(191),
+			new ReduceAction1777(191),
+			new ReduceAction1778(192),
+			new ReduceAction1779(192),
+			new ReduceAction1780(193),
+			new ReduceAction1781(193),
+			new ReduceAction1778(194),
+			new ReduceAction1779(194),
+			new ReduceAction1784(195),
+			new ReduceAction1785(195),
+			new ReduceAction1786(196),
+			new ReduceAction1787(196),
+			new ReduceAction1788(197),
+			new ReduceAction1789(197),
+			new ReduceAction1790(198),
+			new ReduceAction1791(198),
+			new ReduceAction604(199),
+			new ReduceAction1793(199),
+			new ReduceAction1794(200),
+			new ReduceAction1795(200),
+			new ReduceAction572(201),
+			new ReduceAction1797(201),
+			new ReduceAction875(202),
+			new ReduceAction1799(202),
+			new ReduceAction875(203),
+			new ReduceAction1799(203),
+			new ReduceAction884(204),
+			new ReduceAction1803(204),
+			new ReduceAction1794(205),
+			new ReduceAction1795(205),
+			new ReduceAction918(206),
+			new ReduceAction1807(206),
+			new ReduceAction1808(207),
+			new ReduceAction1809(207),
+			new ReduceAction1810(208),
+			new ReduceAction1811(208),
+			new ReduceAction875(209),
+			new ReduceAction1799(209)
 		)
 	end
 end
@@ -1452,10 +1974,6 @@ redef class Prod
 	# Location on the first token after the start of a production
 	# So outside the production for epilon production
 	var _first_location: nullable Location
-
-	# Location of the last token before the end of a production
-	# So outside the production for epilon production
-	var _last_location: nullable Location
 end
 
 # Find location of production nodes
@@ -1467,9 +1985,6 @@ private class ComputeProdLocationVisitor
 
 	# Already visited epsilon productions that waits something after them
 	var _need_after_epsilons: Array[Prod] = new Array[Prod]
-
-	# Already visited epsilon production that waits something before them
-	var _need_before_epsilons: Array[Prod] = new Array[Prod]
 
 	# Location of the last visited token in the current production
 	var _last_location: nullable Location = null
@@ -1490,12 +2005,9 @@ private class ComputeProdLocationVisitor
 
 			# Find location for already visited epsilon production that need one
 			if not _need_after_epsilons.is_empty then
+				var loco = new Location(loc.file, loc.line_start, loc.line_start, loc.column_start, loc.column_start) 
 				for no in _need_after_epsilons do
-					# Epsilon production that is in the middle of a non-epsilon production
-					# The epsilon production has both a token before and after it
-					var endl = loc
-					var startl = no._last_location
-					no.location = new Location(endl.file, startl.line_end, endl.line_start, startl.column_end, endl.column_start)
+					no.location = loco
 				end
 				_need_after_epsilons.clear
 			end
@@ -1503,28 +2015,15 @@ private class ComputeProdLocationVisitor
 			assert n isa Prod
 			_need_first_prods.add(n)
 
-			var old_last = _last_location
-			_last_location = null
 			n.visit_all(self)
-			var endl = _last_location
-			if endl == null then _last_location = old_last
 
-			n._last_location = endl
 			var startl = n._first_location
 			if startl != null then
 				# Non-epsilon production
+				var endl = _last_location
 				assert endl != null
 
 				n.location = new Location(startl.file, startl.line_start, endl.line_end, startl.column_start, endl.column_end)
-
-				if not _need_before_epsilons.is_empty then
-					var loc = new Location(startl.file, startl.line_start, startl.line_start, startl.column_start, startl.column_start)
-					for no in _need_before_epsilons do
-						# Epsilon production that starts the current non-epsilon production
-						no.location = loc
-					end
-					_need_before_epsilons.clear
-				end
 
 				if not _need_after_epsilons.is_empty then
 					var loc = new Location(endl.file, endl.line_end, endl.line_end, endl.column_end, endl.column_end)
@@ -1535,15 +2034,8 @@ private class ComputeProdLocationVisitor
 					_need_after_epsilons.clear
 				end
 			else
-				# No first token means epsilon production (or "throw all my tokens" production)
-				# So, it must be located it later
-				if endl == null then
-					# Epsilon production that starts a parent non-epsilon production
-					_need_before_epsilons.add(n)
-				else
-					# Epsilon production in the middle or that finishes a parent non-epsilon production
-					_need_after_epsilons.add(n)
-				end
+				# Epsilon production in the middle or that finishes a parent non-epsilon production
+				_need_after_epsilons.add(n)
 			end
 		end
 	end
@@ -4024,6 +4516,186 @@ private class ReduceAction75
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist6
+					assert tclassidnode6 isa nullable TClassid
+					var tkwendnode12 = nodearraylist8
+					assert tkwendnode12 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						null,
+						null,
+						listnode10,
+						listnode11,
+						tkwendnode12
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction76
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var tkwendnode12 = nodearraylist9
+					assert tkwendnode12 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						null,
+						null,
+						listnode10,
+						listnode11,
+						tkwendnode12
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction78
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var tkwendnode12 = nodearraylist9
+					assert tkwendnode12 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						null,
+						null,
+						listnode10,
+						listnode11,
+						tkwendnode12
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction79
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist8
+					assert tclassidnode6 isa nullable TClassid
+					var tkwendnode12 = nodearraylist10
+					assert tkwendnode12 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						null,
+						null,
+						listnode10,
+						listnode11,
+						tkwendnode12
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction81
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
 					var listnode8 = new Array[Object]
 					var listnode11 = new Array[Object]
 					var listnode12 = new Array[Object]
@@ -4057,7 +4729,7 @@ private class ReduceAction75
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction76
+private class ReduceAction82
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4106,7 +4778,203 @@ private class ReduceAction76
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction77
+private class ReduceAction83
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist6
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist7
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var tkwendnode13 = nodearraylist9
+					assert tkwendnode13 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						null,
+						null,
+						listnode11,
+						listnode12,
+						tkwendnode13
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction84
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist8
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var tkwendnode13 = nodearraylist10
+					assert tkwendnode13 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						null,
+						null,
+						listnode11,
+						listnode12,
+						tkwendnode13
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction86
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist8
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var tkwendnode13 = nodearraylist10
+					assert tkwendnode13 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						null,
+						null,
+						listnode11,
+						listnode12,
+						tkwendnode13
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction87
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist8
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist9
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var tkwendnode13 = nodearraylist11
+					assert tkwendnode13 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						null,
+						null,
+						listnode11,
+						listnode12,
+						tkwendnode13
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction89
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4159,7 +5027,7 @@ private class ReduceAction77
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction78
+private class ReduceAction90
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4215,7 +5083,231 @@ private class ReduceAction78
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction79
+private class ReduceAction91
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode15 = new Array[Object]
+					var listnode16 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist6
+					assert tclassidnode6 isa nullable TClassid
+					var listnode12 = new Array[Object]
+					var listnode11 = nodearraylist7
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var pannotationsnode8: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode12,
+						null
+					)
+					var tkwendnode17 = nodearraylist9
+					assert tkwendnode17 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						pannotationsnode8,
+						null,
+						listnode15,
+						listnode16,
+						tkwendnode17
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction92
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode15 = new Array[Object]
+					var listnode16 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode12 = new Array[Object]
+					var listnode11 = nodearraylist8
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var pannotationsnode8: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode12,
+						null
+					)
+					var tkwendnode17 = nodearraylist10
+					assert tkwendnode17 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						pannotationsnode8,
+						null,
+						listnode15,
+						listnode16,
+						tkwendnode17
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction94
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode15 = new Array[Object]
+					var listnode16 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode12 = new Array[Object]
+					var listnode11 = nodearraylist8
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var pannotationsnode8: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode12,
+						null
+					)
+					var tkwendnode17 = nodearraylist10
+					assert tkwendnode17 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						pannotationsnode8,
+						null,
+						listnode15,
+						listnode16,
+						tkwendnode17
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction95
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode15 = new Array[Object]
+					var listnode16 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist8
+					assert tclassidnode6 isa nullable TClassid
+					var listnode12 = new Array[Object]
+					var listnode11 = nodearraylist9
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var pannotationsnode8: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode12,
+						null
+					)
+					var tkwendnode17 = nodearraylist11
+					assert tkwendnode17 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						pannotationsnode8,
+						null,
+						listnode15,
+						listnode16,
+						tkwendnode17
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction97
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4272,7 +5364,7 @@ private class ReduceAction79
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction80
+private class ReduceAction98
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4332,7 +5424,247 @@ private class ReduceAction80
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction81
+private class ReduceAction99
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode16 = new Array[Object]
+					var listnode17 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist6
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist7
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var listnode13 = new Array[Object]
+					var listnode12 = nodearraylist8
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var pannotationsnode9: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode13,
+						null
+					)
+					var tkwendnode18 = nodearraylist10
+					assert tkwendnode18 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						pannotationsnode9,
+						null,
+						listnode16,
+						listnode17,
+						tkwendnode18
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction100
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode16 = new Array[Object]
+					var listnode17 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist8
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var listnode13 = new Array[Object]
+					var listnode12 = nodearraylist9
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var pannotationsnode9: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode13,
+						null
+					)
+					var tkwendnode18 = nodearraylist11
+					assert tkwendnode18 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						pannotationsnode9,
+						null,
+						listnode16,
+						listnode17,
+						tkwendnode18
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction102
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode16 = new Array[Object]
+					var listnode17 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist8
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var listnode13 = new Array[Object]
+					var listnode12 = nodearraylist9
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var pannotationsnode9: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode13,
+						null
+					)
+					var tkwendnode18 = nodearraylist11
+					assert tkwendnode18 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						pannotationsnode9,
+						null,
+						listnode16,
+						listnode17,
+						tkwendnode18
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction103
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode16 = new Array[Object]
+					var listnode17 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist8
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist9
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var listnode13 = new Array[Object]
+					var listnode12 = nodearraylist10
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var pannotationsnode9: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode13,
+						null
+					)
+					var tkwendnode18 = nodearraylist12
+					assert tkwendnode18 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						pannotationsnode9,
+						null,
+						listnode16,
+						listnode17,
+						tkwendnode18
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction105
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4377,7 +5709,7 @@ private class ReduceAction81
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction82
+private class ReduceAction106
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4425,7 +5757,199 @@ private class ReduceAction82
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction83
+private class ReduceAction107
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist6
+					assert tclassidnode6 isa nullable TClassid
+					var pexterncodeblocknode9 = nodearraylist7
+					assert pexterncodeblocknode9 isa nullable AExternCodeBlock
+					var tkwendnode12 = nodearraylist9
+					assert tkwendnode12 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						null,
+						pexterncodeblocknode9,
+						listnode10,
+						listnode11,
+						tkwendnode12
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction108
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var pexterncodeblocknode9 = nodearraylist8
+					assert pexterncodeblocknode9 isa nullable AExternCodeBlock
+					var tkwendnode12 = nodearraylist10
+					assert tkwendnode12 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						null,
+						pexterncodeblocknode9,
+						listnode10,
+						listnode11,
+						tkwendnode12
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction110
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var pexterncodeblocknode9 = nodearraylist8
+					assert pexterncodeblocknode9 isa nullable AExternCodeBlock
+					var tkwendnode12 = nodearraylist10
+					assert tkwendnode12 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						null,
+						pexterncodeblocknode9,
+						listnode10,
+						listnode11,
+						tkwendnode12
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction111
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist8
+					assert tclassidnode6 isa nullable TClassid
+					var pexterncodeblocknode9 = nodearraylist9
+					assert pexterncodeblocknode9 isa nullable AExternCodeBlock
+					var tkwendnode12 = nodearraylist11
+					assert tkwendnode12 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						null,
+						pexterncodeblocknode9,
+						listnode10,
+						listnode11,
+						tkwendnode12
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction113
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4474,7 +5998,7 @@ private class ReduceAction83
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction84
+private class ReduceAction114
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4526,7 +6050,215 @@ private class ReduceAction84
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction85
+private class ReduceAction115
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist6
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist7
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var pexterncodeblocknode10 = nodearraylist8
+					assert pexterncodeblocknode10 isa nullable AExternCodeBlock
+					var tkwendnode13 = nodearraylist10
+					assert tkwendnode13 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						null,
+						pexterncodeblocknode10,
+						listnode11,
+						listnode12,
+						tkwendnode13
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction116
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist8
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var pexterncodeblocknode10 = nodearraylist9
+					assert pexterncodeblocknode10 isa nullable AExternCodeBlock
+					var tkwendnode13 = nodearraylist11
+					assert tkwendnode13 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						null,
+						pexterncodeblocknode10,
+						listnode11,
+						listnode12,
+						tkwendnode13
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction118
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist8
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var pexterncodeblocknode10 = nodearraylist9
+					assert pexterncodeblocknode10 isa nullable AExternCodeBlock
+					var tkwendnode13 = nodearraylist11
+					assert tkwendnode13 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						null,
+						pexterncodeblocknode10,
+						listnode11,
+						listnode12,
+						tkwendnode13
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction119
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist8
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist9
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var pexterncodeblocknode10 = nodearraylist10
+					assert pexterncodeblocknode10 isa nullable AExternCodeBlock
+					var tkwendnode13 = nodearraylist12
+					assert tkwendnode13 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						null,
+						pexterncodeblocknode10,
+						listnode11,
+						listnode12,
+						tkwendnode13
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction121
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4582,7 +6314,7 @@ private class ReduceAction85
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction86
+private class ReduceAction122
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4641,7 +6373,243 @@ private class ReduceAction86
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction87
+private class ReduceAction123
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode15 = new Array[Object]
+					var listnode16 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist6
+					assert tclassidnode6 isa nullable TClassid
+					var listnode12 = new Array[Object]
+					var listnode11 = nodearraylist7
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var pannotationsnode8: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode12,
+						null
+					)
+					var pexterncodeblocknode14 = nodearraylist8
+					assert pexterncodeblocknode14 isa nullable AExternCodeBlock
+					var tkwendnode17 = nodearraylist10
+					assert tkwendnode17 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						pannotationsnode8,
+						pexterncodeblocknode14,
+						listnode15,
+						listnode16,
+						tkwendnode17
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction124
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode15 = new Array[Object]
+					var listnode16 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode12 = new Array[Object]
+					var listnode11 = nodearraylist8
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var pannotationsnode8: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode12,
+						null
+					)
+					var pexterncodeblocknode14 = nodearraylist9
+					assert pexterncodeblocknode14 isa nullable AExternCodeBlock
+					var tkwendnode17 = nodearraylist11
+					assert tkwendnode17 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						pannotationsnode8,
+						pexterncodeblocknode14,
+						listnode15,
+						listnode16,
+						tkwendnode17
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction126
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode15 = new Array[Object]
+					var listnode16 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode12 = new Array[Object]
+					var listnode11 = nodearraylist8
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var pannotationsnode8: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode12,
+						null
+					)
+					var pexterncodeblocknode14 = nodearraylist9
+					assert pexterncodeblocknode14 isa nullable AExternCodeBlock
+					var tkwendnode17 = nodearraylist11
+					assert tkwendnode17 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						pannotationsnode8,
+						pexterncodeblocknode14,
+						listnode15,
+						listnode16,
+						tkwendnode17
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction127
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode15 = new Array[Object]
+					var listnode16 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist8
+					assert tclassidnode6 isa nullable TClassid
+					var listnode12 = new Array[Object]
+					var listnode11 = nodearraylist9
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var pannotationsnode8: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode12,
+						null
+					)
+					var pexterncodeblocknode14 = nodearraylist10
+					assert pexterncodeblocknode14 isa nullable AExternCodeBlock
+					var tkwendnode17 = nodearraylist12
+					assert tkwendnode17 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						pannotationsnode8,
+						pexterncodeblocknode14,
+						listnode15,
+						listnode16,
+						tkwendnode17
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction129
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4701,7 +6669,7 @@ private class ReduceAction87
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction88
+private class ReduceAction130
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4764,7 +6732,259 @@ private class ReduceAction88
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction89
+private class ReduceAction131
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode16 = new Array[Object]
+					var listnode17 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist6
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist7
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var listnode13 = new Array[Object]
+					var listnode12 = nodearraylist8
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var pannotationsnode9: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode13,
+						null
+					)
+					var pexterncodeblocknode15 = nodearraylist9
+					assert pexterncodeblocknode15 isa nullable AExternCodeBlock
+					var tkwendnode18 = nodearraylist11
+					assert tkwendnode18 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						pannotationsnode9,
+						pexterncodeblocknode15,
+						listnode16,
+						listnode17,
+						tkwendnode18
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction132
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode16 = new Array[Object]
+					var listnode17 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist8
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var listnode13 = new Array[Object]
+					var listnode12 = nodearraylist9
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var pannotationsnode9: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode13,
+						null
+					)
+					var pexterncodeblocknode15 = nodearraylist10
+					assert pexterncodeblocknode15 isa nullable AExternCodeBlock
+					var tkwendnode18 = nodearraylist12
+					assert tkwendnode18 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						pannotationsnode9,
+						pexterncodeblocknode15,
+						listnode16,
+						listnode17,
+						tkwendnode18
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction134
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode16 = new Array[Object]
+					var listnode17 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist8
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var listnode13 = new Array[Object]
+					var listnode12 = nodearraylist9
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var pannotationsnode9: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode13,
+						null
+					)
+					var pexterncodeblocknode15 = nodearraylist10
+					assert pexterncodeblocknode15 isa nullable AExternCodeBlock
+					var tkwendnode18 = nodearraylist12
+					assert tkwendnode18 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						pannotationsnode9,
+						pexterncodeblocknode15,
+						listnode16,
+						listnode17,
+						tkwendnode18
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction135
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist13 = p.pop
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode16 = new Array[Object]
+					var listnode17 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist8
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist9
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var listnode13 = new Array[Object]
+					var listnode12 = nodearraylist10
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var pannotationsnode9: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode13,
+						null
+					)
+					var pexterncodeblocknode15 = nodearraylist11
+					assert pexterncodeblocknode15 isa nullable AExternCodeBlock
+					var tkwendnode18 = nodearraylist13
+					assert tkwendnode18 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						pannotationsnode9,
+						pexterncodeblocknode15,
+						listnode16,
+						listnode17,
+						tkwendnode18
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction137
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4810,7 +7030,7 @@ private class ReduceAction89
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction90
+private class ReduceAction138
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4859,7 +7079,203 @@ private class ReduceAction90
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction91
+private class ReduceAction139
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist6
+					assert tclassidnode6 isa nullable TClassid
+					var listnode10 = nodearraylist7
+					assert listnode10 isa Array[Object]
+					listnode11 = concat(listnode11, listnode10)
+					var tkwendnode13 = nodearraylist9
+					assert tkwendnode13 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						null,
+						null,
+						listnode11,
+						listnode12,
+						tkwendnode13
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction140
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode10 = nodearraylist8
+					assert listnode10 isa Array[Object]
+					listnode11 = concat(listnode11, listnode10)
+					var tkwendnode13 = nodearraylist10
+					assert tkwendnode13 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						null,
+						null,
+						listnode11,
+						listnode12,
+						tkwendnode13
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction142
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode10 = nodearraylist8
+					assert listnode10 isa Array[Object]
+					listnode11 = concat(listnode11, listnode10)
+					var tkwendnode13 = nodearraylist10
+					assert tkwendnode13 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						null,
+						null,
+						listnode11,
+						listnode12,
+						tkwendnode13
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction143
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist8
+					assert tclassidnode6 isa nullable TClassid
+					var listnode10 = nodearraylist9
+					assert listnode10 isa Array[Object]
+					listnode11 = concat(listnode11, listnode10)
+					var tkwendnode13 = nodearraylist11
+					assert tkwendnode13 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						null,
+						null,
+						listnode11,
+						listnode12,
+						tkwendnode13
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction145
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4909,7 +7325,7 @@ private class ReduceAction91
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction92
+private class ReduceAction146
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -4962,7 +7378,219 @@ private class ReduceAction92
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction93
+private class ReduceAction147
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode13 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist6
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist7
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var listnode11 = nodearraylist8
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var tkwendnode14 = nodearraylist10
+					assert tkwendnode14 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						null,
+						null,
+						listnode12,
+						listnode13,
+						tkwendnode14
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction148
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode13 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist8
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var listnode11 = nodearraylist9
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var tkwendnode14 = nodearraylist11
+					assert tkwendnode14 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						null,
+						null,
+						listnode12,
+						listnode13,
+						tkwendnode14
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction150
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode13 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist8
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var listnode11 = nodearraylist9
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var tkwendnode14 = nodearraylist11
+					assert tkwendnode14 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						null,
+						null,
+						listnode12,
+						listnode13,
+						tkwendnode14
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction151
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode13 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist8
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist9
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var listnode11 = nodearraylist10
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var tkwendnode14 = nodearraylist12
+					assert tkwendnode14 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						null,
+						null,
+						listnode12,
+						listnode13,
+						tkwendnode14
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction153
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5019,7 +7647,7 @@ private class ReduceAction93
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction94
+private class ReduceAction154
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5079,7 +7707,247 @@ private class ReduceAction94
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction95
+private class ReduceAction155
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode16 = new Array[Object]
+					var listnode17 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist6
+					assert tclassidnode6 isa nullable TClassid
+					var listnode12 = new Array[Object]
+					var listnode11 = nodearraylist7
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var pannotationsnode8: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode12,
+						null
+					)
+					var listnode15 = nodearraylist8
+					assert listnode15 isa Array[Object]
+					listnode16 = concat(listnode16, listnode15)
+					var tkwendnode18 = nodearraylist10
+					assert tkwendnode18 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						pannotationsnode8,
+						null,
+						listnode16,
+						listnode17,
+						tkwendnode18
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction156
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode16 = new Array[Object]
+					var listnode17 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode12 = new Array[Object]
+					var listnode11 = nodearraylist8
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var pannotationsnode8: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode12,
+						null
+					)
+					var listnode15 = nodearraylist9
+					assert listnode15 isa Array[Object]
+					listnode16 = concat(listnode16, listnode15)
+					var tkwendnode18 = nodearraylist11
+					assert tkwendnode18 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						pannotationsnode8,
+						null,
+						listnode16,
+						listnode17,
+						tkwendnode18
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction158
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode16 = new Array[Object]
+					var listnode17 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode12 = new Array[Object]
+					var listnode11 = nodearraylist8
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var pannotationsnode8: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode12,
+						null
+					)
+					var listnode15 = nodearraylist9
+					assert listnode15 isa Array[Object]
+					listnode16 = concat(listnode16, listnode15)
+					var tkwendnode18 = nodearraylist11
+					assert tkwendnode18 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						pannotationsnode8,
+						null,
+						listnode16,
+						listnode17,
+						tkwendnode18
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction159
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode16 = new Array[Object]
+					var listnode17 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist8
+					assert tclassidnode6 isa nullable TClassid
+					var listnode12 = new Array[Object]
+					var listnode11 = nodearraylist9
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var pannotationsnode8: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode12,
+						null
+					)
+					var listnode15 = nodearraylist10
+					assert listnode15 isa Array[Object]
+					listnode16 = concat(listnode16, listnode15)
+					var tkwendnode18 = nodearraylist12
+					assert tkwendnode18 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						pannotationsnode8,
+						null,
+						listnode16,
+						listnode17,
+						tkwendnode18
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction161
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5140,7 +8008,7 @@ private class ReduceAction95
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction96
+private class ReduceAction162
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5204,7 +8072,263 @@ private class ReduceAction96
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction97
+private class ReduceAction163
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode17 = new Array[Object]
+					var listnode18 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist6
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist7
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var listnode13 = new Array[Object]
+					var listnode12 = nodearraylist8
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var pannotationsnode9: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode13,
+						null
+					)
+					var listnode16 = nodearraylist9
+					assert listnode16 isa Array[Object]
+					listnode17 = concat(listnode17, listnode16)
+					var tkwendnode19 = nodearraylist11
+					assert tkwendnode19 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						pannotationsnode9,
+						null,
+						listnode17,
+						listnode18,
+						tkwendnode19
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction164
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode17 = new Array[Object]
+					var listnode18 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist8
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var listnode13 = new Array[Object]
+					var listnode12 = nodearraylist9
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var pannotationsnode9: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode13,
+						null
+					)
+					var listnode16 = nodearraylist10
+					assert listnode16 isa Array[Object]
+					listnode17 = concat(listnode17, listnode16)
+					var tkwendnode19 = nodearraylist12
+					assert tkwendnode19 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						pannotationsnode9,
+						null,
+						listnode17,
+						listnode18,
+						tkwendnode19
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction166
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode17 = new Array[Object]
+					var listnode18 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist8
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var listnode13 = new Array[Object]
+					var listnode12 = nodearraylist9
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var pannotationsnode9: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode13,
+						null
+					)
+					var listnode16 = nodearraylist10
+					assert listnode16 isa Array[Object]
+					listnode17 = concat(listnode17, listnode16)
+					var tkwendnode19 = nodearraylist12
+					assert tkwendnode19 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						pannotationsnode9,
+						null,
+						listnode17,
+						listnode18,
+						tkwendnode19
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction167
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist13 = p.pop
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode17 = new Array[Object]
+					var listnode18 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist8
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist9
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var listnode13 = new Array[Object]
+					var listnode12 = nodearraylist10
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var pannotationsnode9: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode13,
+						null
+					)
+					var listnode16 = nodearraylist11
+					assert listnode16 isa Array[Object]
+					listnode17 = concat(listnode17, listnode16)
+					var tkwendnode19 = nodearraylist13
+					assert tkwendnode19 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						pannotationsnode9,
+						null,
+						listnode17,
+						listnode18,
+						tkwendnode19
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction169
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5253,7 +8377,7 @@ private class ReduceAction97
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction98
+private class ReduceAction170
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5305,7 +8429,215 @@ private class ReduceAction98
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction99
+private class ReduceAction171
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist6
+					assert tclassidnode6 isa nullable TClassid
+					var pexterncodeblocknode9 = nodearraylist7
+					assert pexterncodeblocknode9 isa nullable AExternCodeBlock
+					var listnode10 = nodearraylist8
+					assert listnode10 isa Array[Object]
+					listnode11 = concat(listnode11, listnode10)
+					var tkwendnode13 = nodearraylist10
+					assert tkwendnode13 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						null,
+						pexterncodeblocknode9,
+						listnode11,
+						listnode12,
+						tkwendnode13
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction172
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var pexterncodeblocknode9 = nodearraylist8
+					assert pexterncodeblocknode9 isa nullable AExternCodeBlock
+					var listnode10 = nodearraylist9
+					assert listnode10 isa Array[Object]
+					listnode11 = concat(listnode11, listnode10)
+					var tkwendnode13 = nodearraylist11
+					assert tkwendnode13 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						null,
+						pexterncodeblocknode9,
+						listnode11,
+						listnode12,
+						tkwendnode13
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction174
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var pexterncodeblocknode9 = nodearraylist8
+					assert pexterncodeblocknode9 isa nullable AExternCodeBlock
+					var listnode10 = nodearraylist9
+					assert listnode10 isa Array[Object]
+					listnode11 = concat(listnode11, listnode10)
+					var tkwendnode13 = nodearraylist11
+					assert tkwendnode13 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						null,
+						pexterncodeblocknode9,
+						listnode11,
+						listnode12,
+						tkwendnode13
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction175
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist8
+					assert tclassidnode6 isa nullable TClassid
+					var pexterncodeblocknode9 = nodearraylist9
+					assert pexterncodeblocknode9 isa nullable AExternCodeBlock
+					var listnode10 = nodearraylist10
+					assert listnode10 isa Array[Object]
+					listnode11 = concat(listnode11, listnode10)
+					var tkwendnode13 = nodearraylist12
+					assert tkwendnode13 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						null,
+						pexterncodeblocknode9,
+						listnode11,
+						listnode12,
+						tkwendnode13
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction177
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5358,7 +8690,7 @@ private class ReduceAction99
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction100
+private class ReduceAction178
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5414,7 +8746,231 @@ private class ReduceAction100
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction101
+private class ReduceAction179
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode13 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist6
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist7
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var pexterncodeblocknode10 = nodearraylist8
+					assert pexterncodeblocknode10 isa nullable AExternCodeBlock
+					var listnode11 = nodearraylist9
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var tkwendnode14 = nodearraylist11
+					assert tkwendnode14 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						null,
+						pexterncodeblocknode10,
+						listnode12,
+						listnode13,
+						tkwendnode14
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction180
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode13 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist8
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var pexterncodeblocknode10 = nodearraylist9
+					assert pexterncodeblocknode10 isa nullable AExternCodeBlock
+					var listnode11 = nodearraylist10
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var tkwendnode14 = nodearraylist12
+					assert tkwendnode14 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						null,
+						pexterncodeblocknode10,
+						listnode12,
+						listnode13,
+						tkwendnode14
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction182
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode13 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist8
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var pexterncodeblocknode10 = nodearraylist9
+					assert pexterncodeblocknode10 isa nullable AExternCodeBlock
+					var listnode11 = nodearraylist10
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var tkwendnode14 = nodearraylist12
+					assert tkwendnode14 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						null,
+						pexterncodeblocknode10,
+						listnode12,
+						listnode13,
+						tkwendnode14
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction183
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist13 = p.pop
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode13 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist8
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist9
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var pexterncodeblocknode10 = nodearraylist10
+					assert pexterncodeblocknode10 isa nullable AExternCodeBlock
+					var listnode11 = nodearraylist11
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var tkwendnode14 = nodearraylist13
+					assert tkwendnode14 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						null,
+						pexterncodeblocknode10,
+						listnode12,
+						listnode13,
+						tkwendnode14
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction185
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5474,7 +9030,7 @@ private class ReduceAction101
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction102
+private class ReduceAction186
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5537,7 +9093,259 @@ private class ReduceAction102
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction103
+private class ReduceAction187
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode16 = new Array[Object]
+					var listnode17 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist6
+					assert tclassidnode6 isa nullable TClassid
+					var listnode12 = new Array[Object]
+					var listnode11 = nodearraylist7
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var pannotationsnode8: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode12,
+						null
+					)
+					var pexterncodeblocknode14 = nodearraylist8
+					assert pexterncodeblocknode14 isa nullable AExternCodeBlock
+					var listnode15 = nodearraylist9
+					assert listnode15 isa Array[Object]
+					listnode16 = concat(listnode16, listnode15)
+					var tkwendnode18 = nodearraylist11
+					assert tkwendnode18 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						pannotationsnode8,
+						pexterncodeblocknode14,
+						listnode16,
+						listnode17,
+						tkwendnode18
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction188
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode16 = new Array[Object]
+					var listnode17 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode12 = new Array[Object]
+					var listnode11 = nodearraylist8
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var pannotationsnode8: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode12,
+						null
+					)
+					var pexterncodeblocknode14 = nodearraylist9
+					assert pexterncodeblocknode14 isa nullable AExternCodeBlock
+					var listnode15 = nodearraylist10
+					assert listnode15 isa Array[Object]
+					listnode16 = concat(listnode16, listnode15)
+					var tkwendnode18 = nodearraylist12
+					assert tkwendnode18 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						pannotationsnode8,
+						pexterncodeblocknode14,
+						listnode16,
+						listnode17,
+						tkwendnode18
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction190
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode16 = new Array[Object]
+					var listnode17 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode12 = new Array[Object]
+					var listnode11 = nodearraylist8
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var pannotationsnode8: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode12,
+						null
+					)
+					var pexterncodeblocknode14 = nodearraylist9
+					assert pexterncodeblocknode14 isa nullable AExternCodeBlock
+					var listnode15 = nodearraylist10
+					assert listnode15 isa Array[Object]
+					listnode16 = concat(listnode16, listnode15)
+					var tkwendnode18 = nodearraylist12
+					assert tkwendnode18 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						pannotationsnode8,
+						pexterncodeblocknode14,
+						listnode16,
+						listnode17,
+						tkwendnode18
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction191
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist13 = p.pop
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode16 = new Array[Object]
+					var listnode17 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist8
+					assert tclassidnode6 isa nullable TClassid
+					var listnode12 = new Array[Object]
+					var listnode11 = nodearraylist9
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var pannotationsnode8: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode12,
+						null
+					)
+					var pexterncodeblocknode14 = nodearraylist10
+					assert pexterncodeblocknode14 isa nullable AExternCodeBlock
+					var listnode15 = nodearraylist11
+					assert listnode15 isa Array[Object]
+					listnode16 = concat(listnode16, listnode15)
+					var tkwendnode18 = nodearraylist13
+					assert tkwendnode18 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						pannotationsnode8,
+						pexterncodeblocknode14,
+						listnode16,
+						listnode17,
+						tkwendnode18
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction193
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5601,7 +9409,7 @@ private class ReduceAction103
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction104
+private class ReduceAction194
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5668,7 +9476,275 @@ private class ReduceAction104
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction105
+private class ReduceAction195
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode17 = new Array[Object]
+					var listnode18 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist6
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist7
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var listnode13 = new Array[Object]
+					var listnode12 = nodearraylist8
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var pannotationsnode9: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode13,
+						null
+					)
+					var pexterncodeblocknode15 = nodearraylist9
+					assert pexterncodeblocknode15 isa nullable AExternCodeBlock
+					var listnode16 = nodearraylist10
+					assert listnode16 isa Array[Object]
+					listnode17 = concat(listnode17, listnode16)
+					var tkwendnode19 = nodearraylist12
+					assert tkwendnode19 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						pannotationsnode9,
+						pexterncodeblocknode15,
+						listnode17,
+						listnode18,
+						tkwendnode19
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction196
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist13 = p.pop
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode17 = new Array[Object]
+					var listnode18 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist8
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var listnode13 = new Array[Object]
+					var listnode12 = nodearraylist9
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var pannotationsnode9: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode13,
+						null
+					)
+					var pexterncodeblocknode15 = nodearraylist10
+					assert pexterncodeblocknode15 isa nullable AExternCodeBlock
+					var listnode16 = nodearraylist11
+					assert listnode16 isa Array[Object]
+					listnode17 = concat(listnode17, listnode16)
+					var tkwendnode19 = nodearraylist13
+					assert tkwendnode19 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						pannotationsnode9,
+						pexterncodeblocknode15,
+						listnode17,
+						listnode18,
+						tkwendnode19
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction198
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist13 = p.pop
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode17 = new Array[Object]
+					var listnode18 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist8
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var listnode13 = new Array[Object]
+					var listnode12 = nodearraylist9
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var pannotationsnode9: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode13,
+						null
+					)
+					var pexterncodeblocknode15 = nodearraylist10
+					assert pexterncodeblocknode15 isa nullable AExternCodeBlock
+					var listnode16 = nodearraylist11
+					assert listnode16 isa Array[Object]
+					listnode17 = concat(listnode17, listnode16)
+					var tkwendnode19 = nodearraylist13
+					assert tkwendnode19 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						pannotationsnode9,
+						pexterncodeblocknode15,
+						listnode17,
+						listnode18,
+						tkwendnode19
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction199
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist14 = p.pop
+					var nodearraylist13 = p.pop
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode17 = new Array[Object]
+					var listnode18 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist8
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist9
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var listnode13 = new Array[Object]
+					var listnode12 = nodearraylist10
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var pannotationsnode9: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode13,
+						null
+					)
+					var pexterncodeblocknode15 = nodearraylist11
+					assert pexterncodeblocknode15 isa nullable AExternCodeBlock
+					var listnode16 = nodearraylist12
+					assert listnode16 isa Array[Object]
+					listnode17 = concat(listnode17, listnode16)
+					var tkwendnode19 = nodearraylist14
+					assert tkwendnode19 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						pannotationsnode9,
+						pexterncodeblocknode15,
+						listnode17,
+						listnode18,
+						tkwendnode19
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction201
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5714,7 +9790,7 @@ private class ReduceAction105
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction106
+private class ReduceAction202
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5763,7 +9839,203 @@ private class ReduceAction106
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction107
+private class ReduceAction203
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist6
+					assert tclassidnode6 isa nullable TClassid
+					var listnode11 = nodearraylist7
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var tkwendnode13 = nodearraylist9
+					assert tkwendnode13 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						null,
+						null,
+						listnode10,
+						listnode12,
+						tkwendnode13
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction204
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode11 = nodearraylist8
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var tkwendnode13 = nodearraylist10
+					assert tkwendnode13 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						null,
+						null,
+						listnode10,
+						listnode12,
+						tkwendnode13
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction206
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode11 = nodearraylist8
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var tkwendnode13 = nodearraylist10
+					assert tkwendnode13 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						null,
+						null,
+						listnode10,
+						listnode12,
+						tkwendnode13
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction207
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist8
+					assert tclassidnode6 isa nullable TClassid
+					var listnode11 = nodearraylist9
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var tkwendnode13 = nodearraylist11
+					assert tkwendnode13 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						null,
+						null,
+						listnode10,
+						listnode12,
+						tkwendnode13
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction209
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5813,7 +10085,7 @@ private class ReduceAction107
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction108
+private class ReduceAction210
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5866,7 +10138,219 @@ private class ReduceAction108
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction109
+private class ReduceAction211
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode13 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist6
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist7
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var listnode12 = nodearraylist8
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var tkwendnode14 = nodearraylist10
+					assert tkwendnode14 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						null,
+						null,
+						listnode11,
+						listnode13,
+						tkwendnode14
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction212
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode13 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist8
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var listnode12 = nodearraylist9
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var tkwendnode14 = nodearraylist11
+					assert tkwendnode14 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						null,
+						null,
+						listnode11,
+						listnode13,
+						tkwendnode14
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction214
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode13 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist8
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var listnode12 = nodearraylist9
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var tkwendnode14 = nodearraylist11
+					assert tkwendnode14 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						null,
+						null,
+						listnode11,
+						listnode13,
+						tkwendnode14
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction215
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode13 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist8
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist9
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var listnode12 = nodearraylist10
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var tkwendnode14 = nodearraylist12
+					assert tkwendnode14 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						null,
+						null,
+						listnode11,
+						listnode13,
+						tkwendnode14
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction217
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5923,7 +10407,7 @@ private class ReduceAction109
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction110
+private class ReduceAction218
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -5983,7 +10467,247 @@ private class ReduceAction110
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction111
+private class ReduceAction219
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode15 = new Array[Object]
+					var listnode17 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist6
+					assert tclassidnode6 isa nullable TClassid
+					var listnode12 = new Array[Object]
+					var listnode11 = nodearraylist7
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var pannotationsnode8: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode12,
+						null
+					)
+					var listnode16 = nodearraylist8
+					assert listnode16 isa Array[Object]
+					listnode17 = concat(listnode17, listnode16)
+					var tkwendnode18 = nodearraylist10
+					assert tkwendnode18 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						pannotationsnode8,
+						null,
+						listnode15,
+						listnode17,
+						tkwendnode18
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction220
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode15 = new Array[Object]
+					var listnode17 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode12 = new Array[Object]
+					var listnode11 = nodearraylist8
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var pannotationsnode8: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode12,
+						null
+					)
+					var listnode16 = nodearraylist9
+					assert listnode16 isa Array[Object]
+					listnode17 = concat(listnode17, listnode16)
+					var tkwendnode18 = nodearraylist11
+					assert tkwendnode18 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						pannotationsnode8,
+						null,
+						listnode15,
+						listnode17,
+						tkwendnode18
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction222
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode15 = new Array[Object]
+					var listnode17 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode12 = new Array[Object]
+					var listnode11 = nodearraylist8
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var pannotationsnode8: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode12,
+						null
+					)
+					var listnode16 = nodearraylist9
+					assert listnode16 isa Array[Object]
+					listnode17 = concat(listnode17, listnode16)
+					var tkwendnode18 = nodearraylist11
+					assert tkwendnode18 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						pannotationsnode8,
+						null,
+						listnode15,
+						listnode17,
+						tkwendnode18
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction223
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode15 = new Array[Object]
+					var listnode17 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist8
+					assert tclassidnode6 isa nullable TClassid
+					var listnode12 = new Array[Object]
+					var listnode11 = nodearraylist9
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var pannotationsnode8: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode12,
+						null
+					)
+					var listnode16 = nodearraylist10
+					assert listnode16 isa Array[Object]
+					listnode17 = concat(listnode17, listnode16)
+					var tkwendnode18 = nodearraylist12
+					assert tkwendnode18 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						pannotationsnode8,
+						null,
+						listnode15,
+						listnode17,
+						tkwendnode18
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction225
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -6044,7 +10768,7 @@ private class ReduceAction111
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction112
+private class ReduceAction226
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -6108,7 +10832,263 @@ private class ReduceAction112
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction113
+private class ReduceAction227
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode16 = new Array[Object]
+					var listnode18 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist6
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist7
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var listnode13 = new Array[Object]
+					var listnode12 = nodearraylist8
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var pannotationsnode9: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode13,
+						null
+					)
+					var listnode17 = nodearraylist9
+					assert listnode17 isa Array[Object]
+					listnode18 = concat(listnode18, listnode17)
+					var tkwendnode19 = nodearraylist11
+					assert tkwendnode19 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						pannotationsnode9,
+						null,
+						listnode16,
+						listnode18,
+						tkwendnode19
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction228
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode16 = new Array[Object]
+					var listnode18 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist8
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var listnode13 = new Array[Object]
+					var listnode12 = nodearraylist9
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var pannotationsnode9: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode13,
+						null
+					)
+					var listnode17 = nodearraylist10
+					assert listnode17 isa Array[Object]
+					listnode18 = concat(listnode18, listnode17)
+					var tkwendnode19 = nodearraylist12
+					assert tkwendnode19 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						pannotationsnode9,
+						null,
+						listnode16,
+						listnode18,
+						tkwendnode19
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction230
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode16 = new Array[Object]
+					var listnode18 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist8
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var listnode13 = new Array[Object]
+					var listnode12 = nodearraylist9
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var pannotationsnode9: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode13,
+						null
+					)
+					var listnode17 = nodearraylist10
+					assert listnode17 isa Array[Object]
+					listnode18 = concat(listnode18, listnode17)
+					var tkwendnode19 = nodearraylist12
+					assert tkwendnode19 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						pannotationsnode9,
+						null,
+						listnode16,
+						listnode18,
+						tkwendnode19
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction231
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist13 = p.pop
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode16 = new Array[Object]
+					var listnode18 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist8
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist9
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var listnode13 = new Array[Object]
+					var listnode12 = nodearraylist10
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var pannotationsnode9: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode13,
+						null
+					)
+					var listnode17 = nodearraylist11
+					assert listnode17 isa Array[Object]
+					listnode18 = concat(listnode18, listnode17)
+					var tkwendnode19 = nodearraylist13
+					assert tkwendnode19 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						pannotationsnode9,
+						null,
+						listnode16,
+						listnode18,
+						tkwendnode19
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction233
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -6157,7 +11137,7 @@ private class ReduceAction113
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction114
+private class ReduceAction234
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -6209,7 +11189,215 @@ private class ReduceAction114
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction115
+private class ReduceAction235
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist6
+					assert tclassidnode6 isa nullable TClassid
+					var pexterncodeblocknode9 = nodearraylist7
+					assert pexterncodeblocknode9 isa nullable AExternCodeBlock
+					var listnode11 = nodearraylist8
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var tkwendnode13 = nodearraylist10
+					assert tkwendnode13 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						null,
+						pexterncodeblocknode9,
+						listnode10,
+						listnode12,
+						tkwendnode13
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction236
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var pexterncodeblocknode9 = nodearraylist8
+					assert pexterncodeblocknode9 isa nullable AExternCodeBlock
+					var listnode11 = nodearraylist9
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var tkwendnode13 = nodearraylist11
+					assert tkwendnode13 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						null,
+						pexterncodeblocknode9,
+						listnode10,
+						listnode12,
+						tkwendnode13
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction238
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var pexterncodeblocknode9 = nodearraylist8
+					assert pexterncodeblocknode9 isa nullable AExternCodeBlock
+					var listnode11 = nodearraylist9
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var tkwendnode13 = nodearraylist11
+					assert tkwendnode13 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						null,
+						pexterncodeblocknode9,
+						listnode10,
+						listnode12,
+						tkwendnode13
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction239
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist8
+					assert tclassidnode6 isa nullable TClassid
+					var pexterncodeblocknode9 = nodearraylist9
+					assert pexterncodeblocknode9 isa nullable AExternCodeBlock
+					var listnode11 = nodearraylist10
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var tkwendnode13 = nodearraylist12
+					assert tkwendnode13 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						null,
+						pexterncodeblocknode9,
+						listnode10,
+						listnode12,
+						tkwendnode13
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction241
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -6262,7 +11450,7 @@ private class ReduceAction115
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction116
+private class ReduceAction242
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -6318,7 +11506,231 @@ private class ReduceAction116
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction117
+private class ReduceAction243
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode13 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist6
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist7
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var pexterncodeblocknode10 = nodearraylist8
+					assert pexterncodeblocknode10 isa nullable AExternCodeBlock
+					var listnode12 = nodearraylist9
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var tkwendnode14 = nodearraylist11
+					assert tkwendnode14 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						null,
+						pexterncodeblocknode10,
+						listnode11,
+						listnode13,
+						tkwendnode14
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction244
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode13 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist8
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var pexterncodeblocknode10 = nodearraylist9
+					assert pexterncodeblocknode10 isa nullable AExternCodeBlock
+					var listnode12 = nodearraylist10
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var tkwendnode14 = nodearraylist12
+					assert tkwendnode14 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						null,
+						pexterncodeblocknode10,
+						listnode11,
+						listnode13,
+						tkwendnode14
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction246
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode13 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist8
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var pexterncodeblocknode10 = nodearraylist9
+					assert pexterncodeblocknode10 isa nullable AExternCodeBlock
+					var listnode12 = nodearraylist10
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var tkwendnode14 = nodearraylist12
+					assert tkwendnode14 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						null,
+						pexterncodeblocknode10,
+						listnode11,
+						listnode13,
+						tkwendnode14
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction247
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist13 = p.pop
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode13 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist8
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist9
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var pexterncodeblocknode10 = nodearraylist10
+					assert pexterncodeblocknode10 isa nullable AExternCodeBlock
+					var listnode12 = nodearraylist11
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var tkwendnode14 = nodearraylist13
+					assert tkwendnode14 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						null,
+						pexterncodeblocknode10,
+						listnode11,
+						listnode13,
+						tkwendnode14
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction249
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -6378,7 +11790,7 @@ private class ReduceAction117
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction118
+private class ReduceAction250
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -6441,7 +11853,259 @@ private class ReduceAction118
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction119
+private class ReduceAction251
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode15 = new Array[Object]
+					var listnode17 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist6
+					assert tclassidnode6 isa nullable TClassid
+					var listnode12 = new Array[Object]
+					var listnode11 = nodearraylist7
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var pannotationsnode8: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode12,
+						null
+					)
+					var pexterncodeblocknode14 = nodearraylist8
+					assert pexterncodeblocknode14 isa nullable AExternCodeBlock
+					var listnode16 = nodearraylist9
+					assert listnode16 isa Array[Object]
+					listnode17 = concat(listnode17, listnode16)
+					var tkwendnode18 = nodearraylist11
+					assert tkwendnode18 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						pannotationsnode8,
+						pexterncodeblocknode14,
+						listnode15,
+						listnode17,
+						tkwendnode18
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction252
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode15 = new Array[Object]
+					var listnode17 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode12 = new Array[Object]
+					var listnode11 = nodearraylist8
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var pannotationsnode8: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode12,
+						null
+					)
+					var pexterncodeblocknode14 = nodearraylist9
+					assert pexterncodeblocknode14 isa nullable AExternCodeBlock
+					var listnode16 = nodearraylist10
+					assert listnode16 isa Array[Object]
+					listnode17 = concat(listnode17, listnode16)
+					var tkwendnode18 = nodearraylist12
+					assert tkwendnode18 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						pannotationsnode8,
+						pexterncodeblocknode14,
+						listnode15,
+						listnode17,
+						tkwendnode18
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction254
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode15 = new Array[Object]
+					var listnode17 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode12 = new Array[Object]
+					var listnode11 = nodearraylist8
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var pannotationsnode8: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode12,
+						null
+					)
+					var pexterncodeblocknode14 = nodearraylist9
+					assert pexterncodeblocknode14 isa nullable AExternCodeBlock
+					var listnode16 = nodearraylist10
+					assert listnode16 isa Array[Object]
+					listnode17 = concat(listnode17, listnode16)
+					var tkwendnode18 = nodearraylist12
+					assert tkwendnode18 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						pannotationsnode8,
+						pexterncodeblocknode14,
+						listnode15,
+						listnode17,
+						tkwendnode18
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction255
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist13 = p.pop
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode15 = new Array[Object]
+					var listnode17 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist8
+					assert tclassidnode6 isa nullable TClassid
+					var listnode12 = new Array[Object]
+					var listnode11 = nodearraylist9
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var pannotationsnode8: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode12,
+						null
+					)
+					var pexterncodeblocknode14 = nodearraylist10
+					assert pexterncodeblocknode14 isa nullable AExternCodeBlock
+					var listnode16 = nodearraylist11
+					assert listnode16 isa Array[Object]
+					listnode17 = concat(listnode17, listnode16)
+					var tkwendnode18 = nodearraylist13
+					assert tkwendnode18 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						pannotationsnode8,
+						pexterncodeblocknode14,
+						listnode15,
+						listnode17,
+						tkwendnode18
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction257
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -6505,7 +12169,7 @@ private class ReduceAction119
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction120
+private class ReduceAction258
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -6572,7 +12236,275 @@ private class ReduceAction120
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction121
+private class ReduceAction259
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode16 = new Array[Object]
+					var listnode18 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist6
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist7
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var listnode13 = new Array[Object]
+					var listnode12 = nodearraylist8
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var pannotationsnode9: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode13,
+						null
+					)
+					var pexterncodeblocknode15 = nodearraylist9
+					assert pexterncodeblocknode15 isa nullable AExternCodeBlock
+					var listnode17 = nodearraylist10
+					assert listnode17 isa Array[Object]
+					listnode18 = concat(listnode18, listnode17)
+					var tkwendnode19 = nodearraylist12
+					assert tkwendnode19 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						pannotationsnode9,
+						pexterncodeblocknode15,
+						listnode16,
+						listnode18,
+						tkwendnode19
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction260
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist13 = p.pop
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode16 = new Array[Object]
+					var listnode18 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist8
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var listnode13 = new Array[Object]
+					var listnode12 = nodearraylist9
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var pannotationsnode9: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode13,
+						null
+					)
+					var pexterncodeblocknode15 = nodearraylist10
+					assert pexterncodeblocknode15 isa nullable AExternCodeBlock
+					var listnode17 = nodearraylist11
+					assert listnode17 isa Array[Object]
+					listnode18 = concat(listnode18, listnode17)
+					var tkwendnode19 = nodearraylist13
+					assert tkwendnode19 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						pannotationsnode9,
+						pexterncodeblocknode15,
+						listnode16,
+						listnode18,
+						tkwendnode19
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction262
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist13 = p.pop
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode16 = new Array[Object]
+					var listnode18 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist8
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var listnode13 = new Array[Object]
+					var listnode12 = nodearraylist9
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var pannotationsnode9: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode13,
+						null
+					)
+					var pexterncodeblocknode15 = nodearraylist10
+					assert pexterncodeblocknode15 isa nullable AExternCodeBlock
+					var listnode17 = nodearraylist11
+					assert listnode17 isa Array[Object]
+					listnode18 = concat(listnode18, listnode17)
+					var tkwendnode19 = nodearraylist13
+					assert tkwendnode19 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						pannotationsnode9,
+						pexterncodeblocknode15,
+						listnode16,
+						listnode18,
+						tkwendnode19
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction263
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist14 = p.pop
+					var nodearraylist13 = p.pop
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode16 = new Array[Object]
+					var listnode18 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist8
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist9
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var listnode13 = new Array[Object]
+					var listnode12 = nodearraylist10
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var pannotationsnode9: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode13,
+						null
+					)
+					var pexterncodeblocknode15 = nodearraylist11
+					assert pexterncodeblocknode15 isa nullable AExternCodeBlock
+					var listnode17 = nodearraylist12
+					assert listnode17 isa Array[Object]
+					listnode18 = concat(listnode18, listnode17)
+					var tkwendnode19 = nodearraylist14
+					assert tkwendnode19 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						pannotationsnode9,
+						pexterncodeblocknode15,
+						listnode16,
+						listnode18,
+						tkwendnode19
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction265
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -6622,7 +12554,7 @@ private class ReduceAction121
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction122
+private class ReduceAction266
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -6675,7 +12607,219 @@ private class ReduceAction122
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction123
+private class ReduceAction267
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode13 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist6
+					assert tclassidnode6 isa nullable TClassid
+					var listnode10 = nodearraylist7
+					assert listnode10 isa Array[Object]
+					listnode11 = concat(listnode11, listnode10)
+					var listnode12 = nodearraylist8
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var tkwendnode14 = nodearraylist10
+					assert tkwendnode14 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						null,
+						null,
+						listnode11,
+						listnode13,
+						tkwendnode14
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction268
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode13 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode10 = nodearraylist8
+					assert listnode10 isa Array[Object]
+					listnode11 = concat(listnode11, listnode10)
+					var listnode12 = nodearraylist9
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var tkwendnode14 = nodearraylist11
+					assert tkwendnode14 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						null,
+						null,
+						listnode11,
+						listnode13,
+						tkwendnode14
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction270
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode13 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode10 = nodearraylist8
+					assert listnode10 isa Array[Object]
+					listnode11 = concat(listnode11, listnode10)
+					var listnode12 = nodearraylist9
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var tkwendnode14 = nodearraylist11
+					assert tkwendnode14 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						null,
+						null,
+						listnode11,
+						listnode13,
+						tkwendnode14
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction271
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode13 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist8
+					assert tclassidnode6 isa nullable TClassid
+					var listnode10 = nodearraylist9
+					assert listnode10 isa Array[Object]
+					listnode11 = concat(listnode11, listnode10)
+					var listnode12 = nodearraylist10
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var tkwendnode14 = nodearraylist12
+					assert tkwendnode14 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						null,
+						null,
+						listnode11,
+						listnode13,
+						tkwendnode14
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction273
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -6729,7 +12873,7 @@ private class ReduceAction123
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction124
+private class ReduceAction274
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -6786,7 +12930,235 @@ private class ReduceAction124
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction125
+private class ReduceAction275
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode14 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist6
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist7
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var listnode11 = nodearraylist8
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var listnode13 = nodearraylist9
+					assert listnode13 isa Array[Object]
+					listnode14 = concat(listnode14, listnode13)
+					var tkwendnode15 = nodearraylist11
+					assert tkwendnode15 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						null,
+						null,
+						listnode12,
+						listnode14,
+						tkwendnode15
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction276
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode14 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist8
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var listnode11 = nodearraylist9
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var listnode13 = nodearraylist10
+					assert listnode13 isa Array[Object]
+					listnode14 = concat(listnode14, listnode13)
+					var tkwendnode15 = nodearraylist12
+					assert tkwendnode15 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						null,
+						null,
+						listnode12,
+						listnode14,
+						tkwendnode15
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction278
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode14 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist8
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var listnode11 = nodearraylist9
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var listnode13 = nodearraylist10
+					assert listnode13 isa Array[Object]
+					listnode14 = concat(listnode14, listnode13)
+					var tkwendnode15 = nodearraylist12
+					assert tkwendnode15 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						null,
+						null,
+						listnode12,
+						listnode14,
+						tkwendnode15
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction279
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist13 = p.pop
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode14 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist8
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist9
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var listnode11 = nodearraylist10
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var listnode13 = nodearraylist11
+					assert listnode13 isa Array[Object]
+					listnode14 = concat(listnode14, listnode13)
+					var tkwendnode15 = nodearraylist13
+					assert tkwendnode15 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						null,
+						null,
+						listnode12,
+						listnode14,
+						tkwendnode15
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction281
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -6847,7 +13219,7 @@ private class ReduceAction125
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction126
+private class ReduceAction282
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -6911,7 +13283,263 @@ private class ReduceAction126
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction127
+private class ReduceAction283
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode16 = new Array[Object]
+					var listnode18 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist6
+					assert tclassidnode6 isa nullable TClassid
+					var listnode12 = new Array[Object]
+					var listnode11 = nodearraylist7
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var pannotationsnode8: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode12,
+						null
+					)
+					var listnode15 = nodearraylist8
+					assert listnode15 isa Array[Object]
+					listnode16 = concat(listnode16, listnode15)
+					var listnode17 = nodearraylist9
+					assert listnode17 isa Array[Object]
+					listnode18 = concat(listnode18, listnode17)
+					var tkwendnode19 = nodearraylist11
+					assert tkwendnode19 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						pannotationsnode8,
+						null,
+						listnode16,
+						listnode18,
+						tkwendnode19
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction284
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode16 = new Array[Object]
+					var listnode18 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode12 = new Array[Object]
+					var listnode11 = nodearraylist8
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var pannotationsnode8: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode12,
+						null
+					)
+					var listnode15 = nodearraylist9
+					assert listnode15 isa Array[Object]
+					listnode16 = concat(listnode16, listnode15)
+					var listnode17 = nodearraylist10
+					assert listnode17 isa Array[Object]
+					listnode18 = concat(listnode18, listnode17)
+					var tkwendnode19 = nodearraylist12
+					assert tkwendnode19 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						pannotationsnode8,
+						null,
+						listnode16,
+						listnode18,
+						tkwendnode19
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction286
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode16 = new Array[Object]
+					var listnode18 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode12 = new Array[Object]
+					var listnode11 = nodearraylist8
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var pannotationsnode8: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode12,
+						null
+					)
+					var listnode15 = nodearraylist9
+					assert listnode15 isa Array[Object]
+					listnode16 = concat(listnode16, listnode15)
+					var listnode17 = nodearraylist10
+					assert listnode17 isa Array[Object]
+					listnode18 = concat(listnode18, listnode17)
+					var tkwendnode19 = nodearraylist12
+					assert tkwendnode19 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						pannotationsnode8,
+						null,
+						listnode16,
+						listnode18,
+						tkwendnode19
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction287
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist13 = p.pop
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode16 = new Array[Object]
+					var listnode18 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist8
+					assert tclassidnode6 isa nullable TClassid
+					var listnode12 = new Array[Object]
+					var listnode11 = nodearraylist9
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var pannotationsnode8: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode12,
+						null
+					)
+					var listnode15 = nodearraylist10
+					assert listnode15 isa Array[Object]
+					listnode16 = concat(listnode16, listnode15)
+					var listnode17 = nodearraylist11
+					assert listnode17 isa Array[Object]
+					listnode18 = concat(listnode18, listnode17)
+					var tkwendnode19 = nodearraylist13
+					assert tkwendnode19 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						pannotationsnode8,
+						null,
+						listnode16,
+						listnode18,
+						tkwendnode19
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction289
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -6976,7 +13604,7 @@ private class ReduceAction127
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction128
+private class ReduceAction290
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7044,7 +13672,279 @@ private class ReduceAction128
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction129
+private class ReduceAction291
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode17 = new Array[Object]
+					var listnode19 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist6
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist7
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var listnode13 = new Array[Object]
+					var listnode12 = nodearraylist8
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var pannotationsnode9: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode13,
+						null
+					)
+					var listnode16 = nodearraylist9
+					assert listnode16 isa Array[Object]
+					listnode17 = concat(listnode17, listnode16)
+					var listnode18 = nodearraylist10
+					assert listnode18 isa Array[Object]
+					listnode19 = concat(listnode19, listnode18)
+					var tkwendnode20 = nodearraylist12
+					assert tkwendnode20 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						pannotationsnode9,
+						null,
+						listnode17,
+						listnode19,
+						tkwendnode20
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction292
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist13 = p.pop
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode17 = new Array[Object]
+					var listnode19 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist8
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var listnode13 = new Array[Object]
+					var listnode12 = nodearraylist9
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var pannotationsnode9: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode13,
+						null
+					)
+					var listnode16 = nodearraylist10
+					assert listnode16 isa Array[Object]
+					listnode17 = concat(listnode17, listnode16)
+					var listnode18 = nodearraylist11
+					assert listnode18 isa Array[Object]
+					listnode19 = concat(listnode19, listnode18)
+					var tkwendnode20 = nodearraylist13
+					assert tkwendnode20 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						pannotationsnode9,
+						null,
+						listnode17,
+						listnode19,
+						tkwendnode20
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction294
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist13 = p.pop
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode17 = new Array[Object]
+					var listnode19 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist8
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var listnode13 = new Array[Object]
+					var listnode12 = nodearraylist9
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var pannotationsnode9: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode13,
+						null
+					)
+					var listnode16 = nodearraylist10
+					assert listnode16 isa Array[Object]
+					listnode17 = concat(listnode17, listnode16)
+					var listnode18 = nodearraylist11
+					assert listnode18 isa Array[Object]
+					listnode19 = concat(listnode19, listnode18)
+					var tkwendnode20 = nodearraylist13
+					assert tkwendnode20 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						pannotationsnode9,
+						null,
+						listnode17,
+						listnode19,
+						tkwendnode20
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction295
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist14 = p.pop
+					var nodearraylist13 = p.pop
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode17 = new Array[Object]
+					var listnode19 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist8
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist9
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var listnode13 = new Array[Object]
+					var listnode12 = nodearraylist10
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var pannotationsnode9: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode13,
+						null
+					)
+					var listnode16 = nodearraylist11
+					assert listnode16 isa Array[Object]
+					listnode17 = concat(listnode17, listnode16)
+					var listnode18 = nodearraylist12
+					assert listnode18 isa Array[Object]
+					listnode19 = concat(listnode19, listnode18)
+					var tkwendnode20 = nodearraylist14
+					assert tkwendnode20 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						pannotationsnode9,
+						null,
+						listnode17,
+						listnode19,
+						tkwendnode20
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction297
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7097,7 +13997,7 @@ private class ReduceAction129
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction130
+private class ReduceAction298
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7153,7 +14053,231 @@ private class ReduceAction130
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction131
+private class ReduceAction299
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode13 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist6
+					assert tclassidnode6 isa nullable TClassid
+					var pexterncodeblocknode9 = nodearraylist7
+					assert pexterncodeblocknode9 isa nullable AExternCodeBlock
+					var listnode10 = nodearraylist8
+					assert listnode10 isa Array[Object]
+					listnode11 = concat(listnode11, listnode10)
+					var listnode12 = nodearraylist9
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var tkwendnode14 = nodearraylist11
+					assert tkwendnode14 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						null,
+						pexterncodeblocknode9,
+						listnode11,
+						listnode13,
+						tkwendnode14
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction300
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode13 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var pexterncodeblocknode9 = nodearraylist8
+					assert pexterncodeblocknode9 isa nullable AExternCodeBlock
+					var listnode10 = nodearraylist9
+					assert listnode10 isa Array[Object]
+					listnode11 = concat(listnode11, listnode10)
+					var listnode12 = nodearraylist10
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var tkwendnode14 = nodearraylist12
+					assert tkwendnode14 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						null,
+						pexterncodeblocknode9,
+						listnode11,
+						listnode13,
+						tkwendnode14
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction302
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode13 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var pexterncodeblocknode9 = nodearraylist8
+					assert pexterncodeblocknode9 isa nullable AExternCodeBlock
+					var listnode10 = nodearraylist9
+					assert listnode10 isa Array[Object]
+					listnode11 = concat(listnode11, listnode10)
+					var listnode12 = nodearraylist10
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var tkwendnode14 = nodearraylist12
+					assert tkwendnode14 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						null,
+						pexterncodeblocknode9,
+						listnode11,
+						listnode13,
+						tkwendnode14
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction303
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist13 = p.pop
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode13 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist8
+					assert tclassidnode6 isa nullable TClassid
+					var pexterncodeblocknode9 = nodearraylist9
+					assert pexterncodeblocknode9 isa nullable AExternCodeBlock
+					var listnode10 = nodearraylist10
+					assert listnode10 isa Array[Object]
+					listnode11 = concat(listnode11, listnode10)
+					var listnode12 = nodearraylist11
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var tkwendnode14 = nodearraylist13
+					assert tkwendnode14 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						null,
+						pexterncodeblocknode9,
+						listnode11,
+						listnode13,
+						tkwendnode14
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction305
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7210,7 +14334,7 @@ private class ReduceAction131
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction132
+private class ReduceAction306
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7270,7 +14394,247 @@ private class ReduceAction132
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction133
+private class ReduceAction307
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode14 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist6
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist7
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var pexterncodeblocknode10 = nodearraylist8
+					assert pexterncodeblocknode10 isa nullable AExternCodeBlock
+					var listnode11 = nodearraylist9
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var listnode13 = nodearraylist10
+					assert listnode13 isa Array[Object]
+					listnode14 = concat(listnode14, listnode13)
+					var tkwendnode15 = nodearraylist12
+					assert tkwendnode15 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						null,
+						pexterncodeblocknode10,
+						listnode12,
+						listnode14,
+						tkwendnode15
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction308
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist13 = p.pop
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode14 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist8
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var pexterncodeblocknode10 = nodearraylist9
+					assert pexterncodeblocknode10 isa nullable AExternCodeBlock
+					var listnode11 = nodearraylist10
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var listnode13 = nodearraylist11
+					assert listnode13 isa Array[Object]
+					listnode14 = concat(listnode14, listnode13)
+					var tkwendnode15 = nodearraylist13
+					assert tkwendnode15 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						null,
+						pexterncodeblocknode10,
+						listnode12,
+						listnode14,
+						tkwendnode15
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction310
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist13 = p.pop
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode14 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist8
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var pexterncodeblocknode10 = nodearraylist9
+					assert pexterncodeblocknode10 isa nullable AExternCodeBlock
+					var listnode11 = nodearraylist10
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var listnode13 = nodearraylist11
+					assert listnode13 isa Array[Object]
+					listnode14 = concat(listnode14, listnode13)
+					var tkwendnode15 = nodearraylist13
+					assert tkwendnode15 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						null,
+						pexterncodeblocknode10,
+						listnode12,
+						listnode14,
+						tkwendnode15
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction311
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist14 = p.pop
+					var nodearraylist13 = p.pop
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode14 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist8
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist9
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var pexterncodeblocknode10 = nodearraylist10
+					assert pexterncodeblocknode10 isa nullable AExternCodeBlock
+					var listnode11 = nodearraylist11
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var listnode13 = nodearraylist12
+					assert listnode13 isa Array[Object]
+					listnode14 = concat(listnode14, listnode13)
+					var tkwendnode15 = nodearraylist14
+					assert tkwendnode15 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						null,
+						pexterncodeblocknode10,
+						listnode12,
+						listnode14,
+						tkwendnode15
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction313
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7334,7 +14698,7 @@ private class ReduceAction133
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction134
+private class ReduceAction314
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7401,7 +14765,275 @@ private class ReduceAction134
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction135
+private class ReduceAction315
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode16 = new Array[Object]
+					var listnode18 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist6
+					assert tclassidnode6 isa nullable TClassid
+					var listnode12 = new Array[Object]
+					var listnode11 = nodearraylist7
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var pannotationsnode8: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode12,
+						null
+					)
+					var pexterncodeblocknode14 = nodearraylist8
+					assert pexterncodeblocknode14 isa nullable AExternCodeBlock
+					var listnode15 = nodearraylist9
+					assert listnode15 isa Array[Object]
+					listnode16 = concat(listnode16, listnode15)
+					var listnode17 = nodearraylist10
+					assert listnode17 isa Array[Object]
+					listnode18 = concat(listnode18, listnode17)
+					var tkwendnode19 = nodearraylist12
+					assert tkwendnode19 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						pannotationsnode8,
+						pexterncodeblocknode14,
+						listnode16,
+						listnode18,
+						tkwendnode19
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction316
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist13 = p.pop
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode16 = new Array[Object]
+					var listnode18 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode12 = new Array[Object]
+					var listnode11 = nodearraylist8
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var pannotationsnode8: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode12,
+						null
+					)
+					var pexterncodeblocknode14 = nodearraylist9
+					assert pexterncodeblocknode14 isa nullable AExternCodeBlock
+					var listnode15 = nodearraylist10
+					assert listnode15 isa Array[Object]
+					listnode16 = concat(listnode16, listnode15)
+					var listnode17 = nodearraylist11
+					assert listnode17 isa Array[Object]
+					listnode18 = concat(listnode18, listnode17)
+					var tkwendnode19 = nodearraylist13
+					assert tkwendnode19 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						pannotationsnode8,
+						pexterncodeblocknode14,
+						listnode16,
+						listnode18,
+						tkwendnode19
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction318
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist13 = p.pop
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode16 = new Array[Object]
+					var listnode18 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode12 = new Array[Object]
+					var listnode11 = nodearraylist8
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var pannotationsnode8: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode12,
+						null
+					)
+					var pexterncodeblocknode14 = nodearraylist9
+					assert pexterncodeblocknode14 isa nullable AExternCodeBlock
+					var listnode15 = nodearraylist10
+					assert listnode15 isa Array[Object]
+					listnode16 = concat(listnode16, listnode15)
+					var listnode17 = nodearraylist11
+					assert listnode17 isa Array[Object]
+					listnode18 = concat(listnode18, listnode17)
+					var tkwendnode19 = nodearraylist13
+					assert tkwendnode19 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						pannotationsnode8,
+						pexterncodeblocknode14,
+						listnode16,
+						listnode18,
+						tkwendnode19
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction319
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist14 = p.pop
+					var nodearraylist13 = p.pop
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode7 = new Array[Object]
+					var listnode16 = new Array[Object]
+					var listnode18 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist8
+					assert tclassidnode6 isa nullable TClassid
+					var listnode12 = new Array[Object]
+					var listnode11 = nodearraylist9
+					assert listnode11 isa Array[Object]
+					listnode12 = concat(listnode12, listnode11)
+					var pannotationsnode8: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode12,
+						null
+					)
+					var pexterncodeblocknode14 = nodearraylist10
+					assert pexterncodeblocknode14 isa nullable AExternCodeBlock
+					var listnode15 = nodearraylist11
+					assert listnode15 isa Array[Object]
+					listnode16 = concat(listnode16, listnode15)
+					var listnode17 = nodearraylist12
+					assert listnode17 isa Array[Object]
+					listnode18 = concat(listnode18, listnode17)
+					var tkwendnode19 = nodearraylist14
+					assert tkwendnode19 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode7,
+						pannotationsnode8,
+						pexterncodeblocknode14,
+						listnode16,
+						listnode18,
+						tkwendnode19
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction321
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7469,7 +15101,7 @@ private class ReduceAction135
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction136
+private class ReduceAction322
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7540,7 +15172,291 @@ private class ReduceAction136
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction137
+private class ReduceAction323
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist13 = p.pop
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode17 = new Array[Object]
+					var listnode19 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist6
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist7
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var listnode13 = new Array[Object]
+					var listnode12 = nodearraylist8
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var pannotationsnode9: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode13,
+						null
+					)
+					var pexterncodeblocknode15 = nodearraylist9
+					assert pexterncodeblocknode15 isa nullable AExternCodeBlock
+					var listnode16 = nodearraylist10
+					assert listnode16 isa Array[Object]
+					listnode17 = concat(listnode17, listnode16)
+					var listnode18 = nodearraylist11
+					assert listnode18 isa Array[Object]
+					listnode19 = concat(listnode19, listnode18)
+					var tkwendnode20 = nodearraylist13
+					assert tkwendnode20 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						pannotationsnode9,
+						pexterncodeblocknode15,
+						listnode17,
+						listnode19,
+						tkwendnode20
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction324
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist14 = p.pop
+					var nodearraylist13 = p.pop
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode17 = new Array[Object]
+					var listnode19 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist3
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist8
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var listnode13 = new Array[Object]
+					var listnode12 = nodearraylist9
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var pannotationsnode9: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode13,
+						null
+					)
+					var pexterncodeblocknode15 = nodearraylist10
+					assert pexterncodeblocknode15 isa nullable AExternCodeBlock
+					var listnode16 = nodearraylist11
+					assert listnode16 isa Array[Object]
+					listnode17 = concat(listnode17, listnode16)
+					var listnode18 = nodearraylist12
+					assert listnode18 isa Array[Object]
+					listnode19 = concat(listnode19, listnode18)
+					var tkwendnode20 = nodearraylist14
+					assert tkwendnode20 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						pannotationsnode9,
+						pexterncodeblocknode15,
+						listnode17,
+						listnode19,
+						tkwendnode20
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction326
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist14 = p.pop
+					var nodearraylist13 = p.pop
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode17 = new Array[Object]
+					var listnode19 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist7
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist8
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var listnode13 = new Array[Object]
+					var listnode12 = nodearraylist9
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var pannotationsnode9: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode13,
+						null
+					)
+					var pexterncodeblocknode15 = nodearraylist10
+					assert pexterncodeblocknode15 isa nullable AExternCodeBlock
+					var listnode16 = nodearraylist11
+					assert listnode16 isa Array[Object]
+					listnode17 = concat(listnode17, listnode16)
+					var listnode18 = nodearraylist12
+					assert listnode18 isa Array[Object]
+					listnode19 = concat(listnode19, listnode18)
+					var tkwendnode20 = nodearraylist14
+					assert tkwendnode20 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						pannotationsnode9,
+						pexterncodeblocknode15,
+						listnode17,
+						listnode19,
+						tkwendnode20
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction327
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist15 = p.pop
+					var nodearraylist14 = p.pop
+					var nodearraylist13 = p.pop
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode8 = new Array[Object]
+					var listnode17 = new Array[Object]
+					var listnode19 = new Array[Object]
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa nullable ADoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa nullable TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa nullable AVisibility
+					var pclasskindnode5 = nodearraylist4
+					assert pclasskindnode5 isa nullable AClasskind
+					var tclassidnode6 = nodearraylist8
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist9
+					assert listnode7 isa Array[Object]
+					listnode8 = concat(listnode8, listnode7)
+					var listnode13 = new Array[Object]
+					var listnode12 = nodearraylist10
+					assert listnode12 isa Array[Object]
+					listnode13 = concat(listnode13, listnode12)
+					var pannotationsnode9: nullable AAnnotations = new AAnnotations.init_aannotations(
+						null,
+						null,
+						listnode13,
+						null
+					)
+					var pexterncodeblocknode15 = nodearraylist11
+					assert pexterncodeblocknode15 isa nullable AExternCodeBlock
+					var listnode16 = nodearraylist12
+					assert listnode16 isa Array[Object]
+					listnode17 = concat(listnode17, listnode16)
+					var listnode18 = nodearraylist13
+					assert listnode18 isa Array[Object]
+					listnode19 = concat(listnode19, listnode18)
+					var tkwendnode20 = nodearraylist15
+					assert tkwendnode20 isa nullable TKwend
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						pclasskindnode5,
+						tclassidnode6,
+						listnode8,
+						pannotationsnode9,
+						pexterncodeblocknode15,
+						listnode17,
+						listnode19,
+						tkwendnode20
+					)
+					node_list = pclassdefnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction329
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7555,7 +15471,7 @@ private class ReduceAction137
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction138
+private class ReduceAction330
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7574,7 +15490,7 @@ private class ReduceAction138
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction139
+private class ReduceAction331
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7589,7 +15505,7 @@ private class ReduceAction139
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction140
+private class ReduceAction332
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7604,7 +15520,7 @@ private class ReduceAction140
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction141
+private class ReduceAction333
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7620,7 +15536,7 @@ private class ReduceAction141
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction142
+private class ReduceAction334
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7639,7 +15555,7 @@ private class ReduceAction142
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction143
+private class ReduceAction335
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7658,7 +15574,7 @@ private class ReduceAction143
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction144
+private class ReduceAction336
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7681,7 +15597,7 @@ private class ReduceAction144
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction145
+private class ReduceAction337
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7694,7 +15610,7 @@ private class ReduceAction145
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction146
+private class ReduceAction338
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7711,7 +15627,7 @@ private class ReduceAction146
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction147
+private class ReduceAction339
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7731,7 +15647,7 @@ private class ReduceAction147
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction148
+private class ReduceAction340
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7751,7 +15667,7 @@ private class ReduceAction148
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction149
+private class ReduceAction341
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7774,7 +15690,7 @@ private class ReduceAction149
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction150
+private class ReduceAction342
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7796,7 +15712,7 @@ private class ReduceAction150
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction151
+private class ReduceAction343
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7821,7 +15737,7 @@ private class ReduceAction151
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction152
+private class ReduceAction344
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7833,7 +15749,7 @@ private class ReduceAction152
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction153
+private class ReduceAction345
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7871,7 +15787,7 @@ private class ReduceAction153
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction154
+private class ReduceAction346
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7912,7 +15828,7 @@ private class ReduceAction154
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction155
+private class ReduceAction347
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7953,7 +15869,7 @@ private class ReduceAction155
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction156
+private class ReduceAction348
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -7997,7 +15913,7 @@ private class ReduceAction156
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction157
+private class ReduceAction349
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8036,7 +15952,7 @@ private class ReduceAction157
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction158
+private class ReduceAction350
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8078,7 +15994,7 @@ private class ReduceAction158
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction159
+private class ReduceAction351
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8120,7 +16036,7 @@ private class ReduceAction159
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction160
+private class ReduceAction352
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8165,7 +16081,7 @@ private class ReduceAction160
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction161
+private class ReduceAction353
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8204,7 +16120,7 @@ private class ReduceAction161
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction162
+private class ReduceAction354
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8246,7 +16162,7 @@ private class ReduceAction162
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction163
+private class ReduceAction355
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8282,7 +16198,7 @@ private class ReduceAction163
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction164
+private class ReduceAction356
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8321,7 +16237,7 @@ private class ReduceAction164
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction165
+private class ReduceAction357
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8356,7 +16272,7 @@ private class ReduceAction165
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction166
+private class ReduceAction358
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8394,7 +16310,7 @@ private class ReduceAction166
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction167
+private class ReduceAction359
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8428,7 +16344,7 @@ private class ReduceAction167
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction168
+private class ReduceAction360
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8465,7 +16381,7 @@ private class ReduceAction168
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction169
+private class ReduceAction361
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8502,7 +16418,7 @@ private class ReduceAction169
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction170
+private class ReduceAction362
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8542,7 +16458,7 @@ private class ReduceAction170
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction171
+private class ReduceAction363
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8582,7 +16498,7 @@ private class ReduceAction171
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction172
+private class ReduceAction364
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8625,7 +16541,7 @@ private class ReduceAction172
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction173
+private class ReduceAction365
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8665,7 +16581,7 @@ private class ReduceAction173
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction174
+private class ReduceAction366
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8708,7 +16624,7 @@ private class ReduceAction174
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction175
+private class ReduceAction367
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8751,7 +16667,7 @@ private class ReduceAction175
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction176
+private class ReduceAction368
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8797,7 +16713,7 @@ private class ReduceAction176
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction177
+private class ReduceAction369
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8837,7 +16753,7 @@ private class ReduceAction177
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction178
+private class ReduceAction370
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8880,7 +16796,7 @@ private class ReduceAction178
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction179
+private class ReduceAction371
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8923,7 +16839,7 @@ private class ReduceAction179
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction180
+private class ReduceAction372
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -8969,7 +16885,7 @@ private class ReduceAction180
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction181
+private class ReduceAction373
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9012,7 +16928,7 @@ private class ReduceAction181
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction182
+private class ReduceAction374
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9058,7 +16974,7 @@ private class ReduceAction182
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction183
+private class ReduceAction375
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9104,7 +17020,7 @@ private class ReduceAction183
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction184
+private class ReduceAction376
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9153,7 +17069,7 @@ private class ReduceAction184
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction185
+private class ReduceAction377
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9191,7 +17107,7 @@ private class ReduceAction185
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction186
+private class ReduceAction378
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9232,7 +17148,7 @@ private class ReduceAction186
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction187
+private class ReduceAction379
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9273,7 +17189,7 @@ private class ReduceAction187
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction188
+private class ReduceAction380
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9317,7 +17233,7 @@ private class ReduceAction188
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction189
+private class ReduceAction381
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9351,7 +17267,7 @@ private class ReduceAction189
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction190
+private class ReduceAction382
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9388,7 +17304,7 @@ private class ReduceAction190
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction191
+private class ReduceAction383
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9425,7 +17341,7 @@ private class ReduceAction191
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction192
+private class ReduceAction384
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9465,7 +17381,7 @@ private class ReduceAction192
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction193
+private class ReduceAction385
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9502,7 +17418,7 @@ private class ReduceAction193
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction194
+private class ReduceAction386
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9542,7 +17458,7 @@ private class ReduceAction194
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction195
+private class ReduceAction387
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9582,7 +17498,7 @@ private class ReduceAction195
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction196
+private class ReduceAction388
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9625,7 +17541,7 @@ private class ReduceAction196
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction197
+private class ReduceAction389
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9662,7 +17578,7 @@ private class ReduceAction197
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction198
+private class ReduceAction390
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9702,7 +17618,7 @@ private class ReduceAction198
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction199
+private class ReduceAction391
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9742,7 +17658,7 @@ private class ReduceAction199
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction200
+private class ReduceAction392
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9785,7 +17701,7 @@ private class ReduceAction200
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction201
+private class ReduceAction393
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9825,7 +17741,7 @@ private class ReduceAction201
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction202
+private class ReduceAction394
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9868,7 +17784,7 @@ private class ReduceAction202
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction203
+private class ReduceAction395
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9911,7 +17827,7 @@ private class ReduceAction203
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction204
+private class ReduceAction396
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9957,7 +17873,7 @@ private class ReduceAction204
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction205
+private class ReduceAction397
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -9996,7 +17912,7 @@ private class ReduceAction205
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction206
+private class ReduceAction398
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10038,7 +17954,7 @@ private class ReduceAction206
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction207
+private class ReduceAction399
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10080,7 +17996,7 @@ private class ReduceAction207
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction208
+private class ReduceAction400
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10125,7 +18041,7 @@ private class ReduceAction208
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction209
+private class ReduceAction401
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10167,7 +18083,7 @@ private class ReduceAction209
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction210
+private class ReduceAction402
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10212,7 +18128,7 @@ private class ReduceAction210
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction211
+private class ReduceAction403
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10257,7 +18173,7 @@ private class ReduceAction211
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction212
+private class ReduceAction404
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10305,7 +18221,7 @@ private class ReduceAction212
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction213
+private class ReduceAction405
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10347,7 +18263,7 @@ private class ReduceAction213
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction214
+private class ReduceAction406
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10392,7 +18308,7 @@ private class ReduceAction214
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction215
+private class ReduceAction407
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10437,7 +18353,7 @@ private class ReduceAction215
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction216
+private class ReduceAction408
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10485,7 +18401,7 @@ private class ReduceAction216
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction217
+private class ReduceAction409
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10530,7 +18446,7 @@ private class ReduceAction217
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction218
+private class ReduceAction410
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10578,7 +18494,7 @@ private class ReduceAction218
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction219
+private class ReduceAction411
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10626,7 +18542,7 @@ private class ReduceAction219
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction220
+private class ReduceAction412
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10677,7 +18593,7 @@ private class ReduceAction220
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction221
+private class ReduceAction413
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10711,7 +18627,7 @@ private class ReduceAction221
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction222
+private class ReduceAction414
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10748,7 +18664,7 @@ private class ReduceAction222
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction223
+private class ReduceAction415
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10785,7 +18701,7 @@ private class ReduceAction223
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction224
+private class ReduceAction416
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10825,7 +18741,7 @@ private class ReduceAction224
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction225
+private class ReduceAction417
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10862,7 +18778,7 @@ private class ReduceAction225
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction226
+private class ReduceAction418
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10902,7 +18818,7 @@ private class ReduceAction226
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction227
+private class ReduceAction419
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10942,7 +18858,7 @@ private class ReduceAction227
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction228
+private class ReduceAction420
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -10985,7 +18901,7 @@ private class ReduceAction228
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction229
+private class ReduceAction421
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11022,7 +18938,7 @@ private class ReduceAction229
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction230
+private class ReduceAction422
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11062,7 +18978,7 @@ private class ReduceAction230
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction231
+private class ReduceAction423
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11102,7 +19018,7 @@ private class ReduceAction231
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction232
+private class ReduceAction424
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11145,7 +19061,7 @@ private class ReduceAction232
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction233
+private class ReduceAction425
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11185,7 +19101,7 @@ private class ReduceAction233
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction234
+private class ReduceAction426
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11228,7 +19144,7 @@ private class ReduceAction234
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction235
+private class ReduceAction427
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11271,7 +19187,7 @@ private class ReduceAction235
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction236
+private class ReduceAction428
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11317,7 +19233,7 @@ private class ReduceAction236
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction237
+private class ReduceAction429
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11356,7 +19272,7 @@ private class ReduceAction237
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction238
+private class ReduceAction430
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11398,7 +19314,7 @@ private class ReduceAction238
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction239
+private class ReduceAction431
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11440,7 +19356,7 @@ private class ReduceAction239
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction240
+private class ReduceAction432
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11485,7 +19401,7 @@ private class ReduceAction240
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction241
+private class ReduceAction433
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11527,7 +19443,7 @@ private class ReduceAction241
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction242
+private class ReduceAction434
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11572,7 +19488,7 @@ private class ReduceAction242
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction243
+private class ReduceAction435
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11617,7 +19533,7 @@ private class ReduceAction243
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction244
+private class ReduceAction436
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11665,7 +19581,7 @@ private class ReduceAction244
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction245
+private class ReduceAction437
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11707,7 +19623,7 @@ private class ReduceAction245
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction246
+private class ReduceAction438
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11752,7 +19668,7 @@ private class ReduceAction246
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction247
+private class ReduceAction439
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11797,7 +19713,7 @@ private class ReduceAction247
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction248
+private class ReduceAction440
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11845,7 +19761,7 @@ private class ReduceAction248
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction249
+private class ReduceAction441
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11890,7 +19806,7 @@ private class ReduceAction249
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction250
+private class ReduceAction442
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11938,7 +19854,7 @@ private class ReduceAction250
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction251
+private class ReduceAction443
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -11986,7 +19902,7 @@ private class ReduceAction251
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction252
+private class ReduceAction444
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12037,7 +19953,7 @@ private class ReduceAction252
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction253
+private class ReduceAction445
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12072,7 +19988,7 @@ private class ReduceAction253
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction254
+private class ReduceAction446
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12110,7 +20026,7 @@ private class ReduceAction254
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction255
+private class ReduceAction447
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12148,7 +20064,7 @@ private class ReduceAction255
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction256
+private class ReduceAction448
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12189,7 +20105,7 @@ private class ReduceAction256
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction257
+private class ReduceAction449
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12227,7 +20143,7 @@ private class ReduceAction257
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction258
+private class ReduceAction450
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12268,7 +20184,7 @@ private class ReduceAction258
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction259
+private class ReduceAction451
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12309,7 +20225,7 @@ private class ReduceAction259
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction260
+private class ReduceAction452
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12353,7 +20269,7 @@ private class ReduceAction260
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction261
+private class ReduceAction453
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12389,7 +20305,7 @@ private class ReduceAction261
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction262
+private class ReduceAction454
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12428,7 +20344,7 @@ private class ReduceAction262
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction263
+private class ReduceAction455
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12467,7 +20383,7 @@ private class ReduceAction263
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction264
+private class ReduceAction456
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12509,7 +20425,7 @@ private class ReduceAction264
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction265
+private class ReduceAction457
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12548,7 +20464,7 @@ private class ReduceAction265
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction266
+private class ReduceAction458
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12590,7 +20506,7 @@ private class ReduceAction266
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction267
+private class ReduceAction459
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12632,7 +20548,7 @@ private class ReduceAction267
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction268
+private class ReduceAction460
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12677,7 +20593,7 @@ private class ReduceAction268
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction269
+private class ReduceAction461
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12710,7 +20626,7 @@ private class ReduceAction269
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction270
+private class ReduceAction462
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12746,7 +20662,7 @@ private class ReduceAction270
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction271
+private class ReduceAction463
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12782,7 +20698,7 @@ private class ReduceAction271
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction272
+private class ReduceAction464
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12821,7 +20737,7 @@ private class ReduceAction272
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction273
+private class ReduceAction465
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12855,7 +20771,7 @@ private class ReduceAction273
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction274
+private class ReduceAction466
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12892,7 +20808,7 @@ private class ReduceAction274
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction275
+private class ReduceAction467
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12929,7 +20845,7 @@ private class ReduceAction275
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction276
+private class ReduceAction468
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -12969,7 +20885,7 @@ private class ReduceAction276
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction277
+private class ReduceAction469
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -13006,7 +20922,7 @@ private class ReduceAction277
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction278
+private class ReduceAction470
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -13046,7 +20962,7 @@ private class ReduceAction278
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction279
+private class ReduceAction471
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -13086,7 +21002,7 @@ private class ReduceAction279
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction280
+private class ReduceAction472
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -13129,7 +21045,7 @@ private class ReduceAction280
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction281
+private class ReduceAction473
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -13166,7 +21082,7 @@ private class ReduceAction281
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction282
+private class ReduceAction474
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -13206,7 +21122,7 @@ private class ReduceAction282
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction283
+private class ReduceAction475
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -13246,7 +21162,7 @@ private class ReduceAction283
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction284
+private class ReduceAction476
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -13289,7 +21205,7 @@ private class ReduceAction284
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction285
+private class ReduceAction477
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -13329,7 +21245,7 @@ private class ReduceAction285
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction286
+private class ReduceAction478
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -13372,7 +21288,7 @@ private class ReduceAction286
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction287
+private class ReduceAction479
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -13415,7 +21331,7 @@ private class ReduceAction287
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction288
+private class ReduceAction480
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -13461,7 +21377,7 @@ private class ReduceAction288
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction289
+private class ReduceAction481
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -13498,7 +21414,7 @@ private class ReduceAction289
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction290
+private class ReduceAction482
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -13538,7 +21454,7 @@ private class ReduceAction290
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction291
+private class ReduceAction483
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -13578,7 +21494,7 @@ private class ReduceAction291
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction292
+private class ReduceAction484
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -13621,7 +21537,7 @@ private class ReduceAction292
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction293
+private class ReduceAction485
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -13661,7 +21577,7 @@ private class ReduceAction293
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction294
+private class ReduceAction486
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -13704,7 +21620,7 @@ private class ReduceAction294
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction295
+private class ReduceAction487
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -13747,7 +21663,7 @@ private class ReduceAction295
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction296
+private class ReduceAction488
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -13793,7 +21709,7 @@ private class ReduceAction296
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction297
+private class ReduceAction489
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -13833,7 +21749,7 @@ private class ReduceAction297
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction298
+private class ReduceAction490
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -13876,7 +21792,7 @@ private class ReduceAction298
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction299
+private class ReduceAction491
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -13919,7 +21835,7 @@ private class ReduceAction299
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction300
+private class ReduceAction492
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -13965,7 +21881,7 @@ private class ReduceAction300
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction301
+private class ReduceAction493
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -14008,7 +21924,7 @@ private class ReduceAction301
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction302
+private class ReduceAction494
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -14054,7 +21970,7 @@ private class ReduceAction302
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction303
+private class ReduceAction495
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -14100,7 +22016,7 @@ private class ReduceAction303
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction304
+private class ReduceAction496
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -14149,7 +22065,7 @@ private class ReduceAction304
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction305
+private class ReduceAction497
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -14184,7 +22100,7 @@ private class ReduceAction305
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction306
+private class ReduceAction498
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -14222,7 +22138,7 @@ private class ReduceAction306
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction307
+private class ReduceAction499
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -14260,7 +22176,7 @@ private class ReduceAction307
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction308
+private class ReduceAction500
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -14301,7 +22217,7 @@ private class ReduceAction308
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction309
+private class ReduceAction501
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -14339,7 +22255,7 @@ private class ReduceAction309
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction310
+private class ReduceAction502
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -14380,7 +22296,7 @@ private class ReduceAction310
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction311
+private class ReduceAction503
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -14421,7 +22337,7 @@ private class ReduceAction311
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction312
+private class ReduceAction504
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -14465,7 +22381,7 @@ private class ReduceAction312
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction313
+private class ReduceAction505
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -14503,7 +22419,7 @@ private class ReduceAction313
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction314
+private class ReduceAction506
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -14544,7 +22460,7 @@ private class ReduceAction314
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction315
+private class ReduceAction507
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -14585,7 +22501,7 @@ private class ReduceAction315
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction316
+private class ReduceAction508
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -14629,7 +22545,7 @@ private class ReduceAction316
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction317
+private class ReduceAction509
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -14670,7 +22586,7 @@ private class ReduceAction317
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction318
+private class ReduceAction510
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -14714,7 +22630,7 @@ private class ReduceAction318
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction319
+private class ReduceAction511
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -14758,7 +22674,7 @@ private class ReduceAction319
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction320
+private class ReduceAction512
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -14805,7 +22721,7 @@ private class ReduceAction320
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction321
+private class ReduceAction513
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -14817,7 +22733,7 @@ private class ReduceAction321
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction322
+private class ReduceAction514
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -14831,7 +22747,7 @@ private class ReduceAction322
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction324
+private class ReduceAction516
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -14844,7 +22760,7 @@ private class ReduceAction324
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction325
+private class ReduceAction517
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -14860,7 +22776,7 @@ private class ReduceAction325
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction326
+private class ReduceAction518
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -14879,7 +22795,7 @@ private class ReduceAction326
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction327
+private class ReduceAction519
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -14896,7 +22812,7 @@ private class ReduceAction327
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction328
+private class ReduceAction520
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -14916,7 +22832,7 @@ private class ReduceAction328
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction329
+private class ReduceAction521
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -14936,7 +22852,7 @@ private class ReduceAction329
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction330
+private class ReduceAction522
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -14959,7 +22875,7 @@ private class ReduceAction330
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction331
+private class ReduceAction523
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -14969,7 +22885,7 @@ private class ReduceAction331
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction332
+private class ReduceAction524
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -14985,7 +22901,7 @@ private class ReduceAction332
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction333
+private class ReduceAction525
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15001,7 +22917,7 @@ private class ReduceAction333
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction334
+private class ReduceAction526
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15017,7 +22933,7 @@ private class ReduceAction334
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction335
+private class ReduceAction527
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15032,7 +22948,7 @@ private class ReduceAction335
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction336
+private class ReduceAction528
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15047,7 +22963,7 @@ private class ReduceAction336
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction337
+private class ReduceAction529
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15062,7 +22978,7 @@ private class ReduceAction337
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction338
+private class ReduceAction530
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15077,7 +22993,7 @@ private class ReduceAction338
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction339
+private class ReduceAction531
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15092,7 +23008,7 @@ private class ReduceAction339
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction340
+private class ReduceAction532
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15107,7 +23023,7 @@ private class ReduceAction340
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction341
+private class ReduceAction533
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15122,7 +23038,7 @@ private class ReduceAction341
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction342
+private class ReduceAction534
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15137,7 +23053,7 @@ private class ReduceAction342
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction343
+private class ReduceAction535
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15152,7 +23068,7 @@ private class ReduceAction343
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction344
+private class ReduceAction536
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15167,7 +23083,7 @@ private class ReduceAction344
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction345
+private class ReduceAction537
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15182,7 +23098,7 @@ private class ReduceAction345
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction346
+private class ReduceAction538
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15197,7 +23113,7 @@ private class ReduceAction346
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction347
+private class ReduceAction539
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15212,7 +23128,7 @@ private class ReduceAction347
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction348
+private class ReduceAction540
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15227,7 +23143,7 @@ private class ReduceAction348
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction349
+private class ReduceAction541
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15246,7 +23162,7 @@ private class ReduceAction349
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction350
+private class ReduceAction542
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15261,7 +23177,7 @@ private class ReduceAction350
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction351
+private class ReduceAction543
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15280,7 +23196,7 @@ private class ReduceAction351
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction352
+private class ReduceAction544
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15303,7 +23219,7 @@ private class ReduceAction352
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction353
+private class ReduceAction545
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15332,7 +23248,7 @@ private class ReduceAction353
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction354
+private class ReduceAction546
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15365,7 +23281,7 @@ private class ReduceAction354
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction355
+private class ReduceAction547
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15398,7 +23314,7 @@ private class ReduceAction355
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction356
+private class ReduceAction548
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15435,7 +23351,7 @@ private class ReduceAction356
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction357
+private class ReduceAction549
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15461,7 +23377,7 @@ private class ReduceAction357
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction358
+private class ReduceAction550
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15491,7 +23407,7 @@ private class ReduceAction358
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction359
+private class ReduceAction551
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15521,7 +23437,7 @@ private class ReduceAction359
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction360
+private class ReduceAction552
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15555,7 +23471,7 @@ private class ReduceAction360
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction361
+private class ReduceAction553
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15577,7 +23493,7 @@ private class ReduceAction361
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction362
+private class ReduceAction554
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15603,7 +23519,7 @@ private class ReduceAction362
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction363
+private class ReduceAction555
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15622,7 +23538,7 @@ private class ReduceAction363
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction364
+private class ReduceAction556
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15645,7 +23561,7 @@ private class ReduceAction364
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction365
+private class ReduceAction557
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15670,7 +23586,7 @@ private class ReduceAction365
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction366
+private class ReduceAction558
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15699,7 +23615,7 @@ private class ReduceAction366
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction367
+private class ReduceAction559
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15727,7 +23643,7 @@ private class ReduceAction367
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction368
+private class ReduceAction560
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15759,7 +23675,7 @@ private class ReduceAction368
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction369
+private class ReduceAction561
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15777,7 +23693,7 @@ private class ReduceAction369
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction370
+private class ReduceAction562
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15798,7 +23714,7 @@ private class ReduceAction370
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction371
+private class ReduceAction563
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15814,7 +23730,7 @@ private class ReduceAction371
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction372
+private class ReduceAction564
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15834,7 +23750,7 @@ private class ReduceAction372
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction373
+private class ReduceAction565
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15847,7 +23763,7 @@ private class ReduceAction373
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction374
+private class ReduceAction566
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15865,7 +23781,7 @@ private class ReduceAction374
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction375
+private class ReduceAction567
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15886,7 +23802,7 @@ private class ReduceAction375
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction376
+private class ReduceAction568
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15907,7 +23823,7 @@ private class ReduceAction376
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction377
+private class ReduceAction569
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15931,7 +23847,7 @@ private class ReduceAction377
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction378
+private class ReduceAction570
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15955,7 +23871,7 @@ private class ReduceAction378
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction379
+private class ReduceAction571
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15982,7 +23898,7 @@ private class ReduceAction379
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction380
+private class ReduceAction572
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -15996,7 +23912,7 @@ private class ReduceAction380
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction381
+private class ReduceAction573
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16022,7 +23938,7 @@ private class ReduceAction381
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction382
+private class ReduceAction574
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16051,7 +23967,7 @@ private class ReduceAction382
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction383
+private class ReduceAction575
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16081,7 +23997,7 @@ private class ReduceAction383
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction384
+private class ReduceAction576
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16114,7 +24030,7 @@ private class ReduceAction384
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction385
+private class ReduceAction577
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16145,7 +24061,7 @@ private class ReduceAction385
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction386
+private class ReduceAction578
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16179,7 +24095,7 @@ private class ReduceAction386
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction387
+private class ReduceAction579
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16195,7 +24111,7 @@ private class ReduceAction387
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction388
+private class ReduceAction580
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16219,7 +24135,7 @@ private class ReduceAction388
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction389
+private class ReduceAction581
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16247,7 +24163,7 @@ private class ReduceAction389
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction390
+private class ReduceAction582
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16260,7 +24176,7 @@ private class ReduceAction390
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction391
+private class ReduceAction583
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16271,7 +24187,7 @@ private class ReduceAction391
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction393
+private class ReduceAction585
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16286,7 +24202,7 @@ private class ReduceAction393
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction394
+private class ReduceAction586
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16301,7 +24217,7 @@ private class ReduceAction394
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction395
+private class ReduceAction587
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16324,7 +24240,7 @@ private class ReduceAction395
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction396
+private class ReduceAction588
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16339,7 +24255,7 @@ private class ReduceAction396
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction397
+private class ReduceAction589
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16367,7 +24283,7 @@ private class ReduceAction397
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction398
+private class ReduceAction590
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16391,7 +24307,7 @@ private class ReduceAction398
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction399
+private class ReduceAction591
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16420,7 +24336,7 @@ private class ReduceAction399
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction400
+private class ReduceAction592
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16439,7 +24355,7 @@ private class ReduceAction400
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction401
+private class ReduceAction593
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16455,7 +24371,7 @@ private class ReduceAction401
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction402
+private class ReduceAction594
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16474,7 +24390,7 @@ private class ReduceAction402
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction403
+private class ReduceAction595
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16486,7 +24402,7 @@ private class ReduceAction403
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction404
+private class ReduceAction596
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16505,7 +24421,7 @@ private class ReduceAction404
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction405
+private class ReduceAction597
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16527,7 +24443,7 @@ private class ReduceAction405
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction406
+private class ReduceAction598
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16549,7 +24465,7 @@ private class ReduceAction406
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction407
+private class ReduceAction599
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16574,7 +24490,7 @@ private class ReduceAction407
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction408
+private class ReduceAction600
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16601,7 +24517,7 @@ private class ReduceAction408
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction409
+private class ReduceAction601
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16631,7 +24547,7 @@ private class ReduceAction409
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction410
+private class ReduceAction602
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16661,7 +24577,7 @@ private class ReduceAction410
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction411
+private class ReduceAction603
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16694,7 +24610,7 @@ private class ReduceAction411
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction412
+private class ReduceAction604
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16709,7 +24625,7 @@ private class ReduceAction412
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction413
+private class ReduceAction605
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16728,7 +24644,7 @@ private class ReduceAction413
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction414
+private class ReduceAction606
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16741,7 +24657,7 @@ private class ReduceAction414
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction416
+private class ReduceAction608
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16753,7 +24669,7 @@ private class ReduceAction416
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction417
+private class ReduceAction609
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16771,7 +24687,7 @@ private class ReduceAction417
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction418
+private class ReduceAction610
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16788,7 +24704,7 @@ private class ReduceAction418
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction419
+private class ReduceAction611
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16799,7 +24715,7 @@ private class ReduceAction419
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction420
+private class ReduceAction612
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16819,7 +24735,7 @@ private class ReduceAction420
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction421
+private class ReduceAction613
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16843,7 +24759,7 @@ private class ReduceAction421
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction422
+private class ReduceAction614
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16864,7 +24780,7 @@ private class ReduceAction422
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction423
+private class ReduceAction615
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16889,7 +24805,7 @@ private class ReduceAction423
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction424
+private class ReduceAction616
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16913,7 +24829,7 @@ private class ReduceAction424
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction425
+private class ReduceAction617
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16941,7 +24857,7 @@ private class ReduceAction425
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction429
+private class ReduceAction621
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16957,7 +24873,7 @@ private class ReduceAction429
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction430
+private class ReduceAction622
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16976,7 +24892,7 @@ private class ReduceAction430
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction431
+private class ReduceAction623
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -16993,7 +24909,7 @@ private class ReduceAction431
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction432
+private class ReduceAction624
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -17013,7 +24929,7 @@ private class ReduceAction432
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction433
+private class ReduceAction625
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -17033,7 +24949,7 @@ private class ReduceAction433
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction434
+private class ReduceAction626
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -17056,7 +24972,7 @@ private class ReduceAction434
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction435
+private class ReduceAction627
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -17071,7 +24987,7 @@ private class ReduceAction435
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction436
+private class ReduceAction628
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -17088,7 +25004,7 @@ private class ReduceAction436
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction437
+private class ReduceAction629
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -17108,7 +25024,7 @@ private class ReduceAction437
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction438
+private class ReduceAction630
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -17128,7 +25044,7 @@ private class ReduceAction438
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction439
+private class ReduceAction631
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -17151,7 +25067,7 @@ private class ReduceAction439
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction446
+private class ReduceAction638
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -17178,7 +25094,7 @@ private class ReduceAction446
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction447
+private class ReduceAction639
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -17201,7 +25117,113 @@ private class ReduceAction447
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction448
+private class ReduceAction640
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode5 = new Array[Object]
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa nullable AExpr
+					var tidnode3 = nodearraylist5
+					assert tidnode3 isa nullable TId
+					var pexprsnode4 = nodearraylist6
+					assert pexprsnode4 isa nullable AExprs
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
+						pexprnode2,
+						tidnode3,
+						pexprsnode4,
+						listnode5
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction641
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode5 = new Array[Object]
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa nullable AExpr
+					var tidnode3 = nodearraylist6
+					assert tidnode3 isa nullable TId
+					var pexprsnode4 = nodearraylist7
+					assert pexprsnode4 isa nullable AExprs
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
+						pexprnode2,
+						tidnode3,
+						pexprsnode4,
+						listnode5
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction643
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode5 = new Array[Object]
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
+					var tidnode3 = nodearraylist2
+					assert tidnode3 isa nullable TId
+					var pexprsnode4 = nodearraylist3
+					assert pexprsnode4 isa nullable AExprs
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
+						pexprnode2,
+						tidnode3,
+						pexprsnode4,
+						listnode5
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction644
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode5 = new Array[Object]
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
+					var tidnode3 = nodearraylist3
+					assert tidnode3 isa nullable TId
+					var pexprsnode4 = nodearraylist4
+					assert pexprsnode4 isa nullable AExprs
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
+						pexprnode2,
+						tidnode3,
+						pexprsnode4,
+						listnode5
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction646
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -17232,7 +25254,7 @@ private class ReduceAction448
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction449
+private class ReduceAction647
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -17259,7 +25281,129 @@ private class ReduceAction449
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction450
+private class ReduceAction648
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode6 = new Array[Object]
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa nullable AExpr
+					var tidnode3 = nodearraylist5
+					assert tidnode3 isa nullable TId
+					var pexprsnode4 = nodearraylist6
+					assert pexprsnode4 isa nullable AExprs
+					var listnode5 = nodearraylist7
+					assert listnode5 isa Array[Object]
+					listnode6 = concat(listnode6, listnode5)
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
+						pexprnode2,
+						tidnode3,
+						pexprsnode4,
+						listnode6
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction649
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode6 = new Array[Object]
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa nullable AExpr
+					var tidnode3 = nodearraylist6
+					assert tidnode3 isa nullable TId
+					var pexprsnode4 = nodearraylist7
+					assert pexprsnode4 isa nullable AExprs
+					var listnode5 = nodearraylist8
+					assert listnode5 isa Array[Object]
+					listnode6 = concat(listnode6, listnode5)
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
+						pexprnode2,
+						tidnode3,
+						pexprsnode4,
+						listnode6
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction651
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode6 = new Array[Object]
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
+					var tidnode3 = nodearraylist2
+					assert tidnode3 isa nullable TId
+					var pexprsnode4 = nodearraylist3
+					assert pexprsnode4 isa nullable AExprs
+					var listnode5 = nodearraylist4
+					assert listnode5 isa Array[Object]
+					listnode6 = concat(listnode6, listnode5)
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
+						pexprnode2,
+						tidnode3,
+						pexprsnode4,
+						listnode6
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction652
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode6 = new Array[Object]
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
+					var tidnode3 = nodearraylist3
+					assert tidnode3 isa nullable TId
+					var pexprsnode4 = nodearraylist4
+					assert pexprsnode4 isa nullable AExprs
+					var listnode5 = nodearraylist5
+					assert listnode5 isa Array[Object]
+					listnode6 = concat(listnode6, listnode5)
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
+						pexprnode2,
+						tidnode3,
+						pexprsnode4,
+						listnode6
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction654
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -17279,7 +25423,7 @@ private class ReduceAction450
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction451
+private class ReduceAction655
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -17287,22 +25431,88 @@ private class ReduceAction451
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
-					var pqualifiednode2 = nodearraylist1
-					assert pqualifiednode2 isa nullable AQualified
-					var tkwsupernode3 = nodearraylist2
-					assert tkwsupernode3 isa nullable TKwsuper
-					var pexprsnode4 = nodearraylist3
-					assert pexprsnode4 isa nullable AExprs
+					var listnode3 = new Array[Object]
+					var tclassidnode4 = nodearraylist1
+					assert tclassidnode4 isa nullable TClassid
+					var pqualifiednode2: nullable AQualified = new AQualified.init_aqualified(
+						listnode3,
+						tclassidnode4
+					)
+					var tkwsupernode5 = nodearraylist2
+					assert tkwsupernode5 isa nullable TKwsuper
+					var pexprsnode6 = nodearraylist3
+					assert pexprsnode6 isa nullable AExprs
 					var pexprnode1: nullable ASuperExpr = new ASuperExpr.init_asuperexpr(
 						pqualifiednode2,
-						tkwsupernode3,
-						pexprsnode4
+						tkwsupernode5,
+						pexprsnode6
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction452
+private class ReduceAction656
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode4 = new Array[Object]
+					var listnode3 = nodearraylist1
+					assert listnode3 isa Array[Object]
+					listnode4 = concat(listnode4, listnode3)
+					var tclassidnode5 = nodearraylist2
+					assert tclassidnode5 isa nullable TClassid
+					var pqualifiednode2: nullable AQualified = new AQualified.init_aqualified(
+						listnode4,
+						tclassidnode5
+					)
+					var tkwsupernode6 = nodearraylist3
+					assert tkwsupernode6 isa nullable TKwsuper
+					var pexprsnode7 = nodearraylist4
+					assert pexprsnode7 isa nullable AExprs
+					var pexprnode1: nullable ASuperExpr = new ASuperExpr.init_asuperexpr(
+						pqualifiednode2,
+						tkwsupernode6,
+						pexprsnode7
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction657
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode4 = new Array[Object]
+					var listnode3 = nodearraylist1
+					assert listnode3 isa Array[Object]
+					listnode4 = concat(listnode4, listnode3)
+					var pqualifiednode2: nullable AQualified = new AQualified.init_aqualified(
+						listnode4,
+						null
+					)
+					var tkwsupernode6 = nodearraylist2
+					assert tkwsupernode6 isa nullable TKwsuper
+					var pexprsnode7 = nodearraylist3
+					assert pexprsnode7 isa nullable AExprs
+					var pexprnode1: nullable ASuperExpr = new ASuperExpr.init_asuperexpr(
+						pqualifiednode2,
+						tkwsupernode6,
+						pexprsnode7
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction658
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -17327,7 +25537,7 @@ private class ReduceAction452
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction453
+private class ReduceAction659
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -17348,7 +25558,105 @@ private class ReduceAction453
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction454
+private class ReduceAction660
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa nullable AExpr
+					var tkwinitnode3 = nodearraylist5
+					assert tkwinitnode3 isa nullable TKwinit
+					var pexprsnode4 = nodearraylist6
+					assert pexprsnode4 isa nullable AExprs
+					var pexprnode1: nullable AInitExpr = new AInitExpr.init_ainitexpr(
+						pexprnode2,
+						tkwinitnode3,
+						pexprsnode4
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction661
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa nullable AExpr
+					var tkwinitnode3 = nodearraylist6
+					assert tkwinitnode3 isa nullable TKwinit
+					var pexprsnode4 = nodearraylist7
+					assert pexprsnode4 isa nullable AExprs
+					var pexprnode1: nullable AInitExpr = new AInitExpr.init_ainitexpr(
+						pexprnode2,
+						tkwinitnode3,
+						pexprsnode4
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction663
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
+					var tkwinitnode3 = nodearraylist2
+					assert tkwinitnode3 isa nullable TKwinit
+					var pexprsnode4 = nodearraylist3
+					assert pexprsnode4 isa nullable AExprs
+					var pexprnode1: nullable AInitExpr = new AInitExpr.init_ainitexpr(
+						pexprnode2,
+						tkwinitnode3,
+						pexprsnode4
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction664
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
+					var tkwinitnode3 = nodearraylist3
+					assert tkwinitnode3 isa nullable TKwinit
+					var pexprsnode4 = nodearraylist4
+					assert pexprsnode4 isa nullable AExprs
+					var pexprnode1: nullable AInitExpr = new AInitExpr.init_ainitexpr(
+						pexprnode2,
+						tkwinitnode3,
+						pexprsnode4
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction666
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -17376,7 +25684,7 @@ private class ReduceAction454
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction455
+private class ReduceAction667
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -17395,7 +25703,7 @@ private class ReduceAction455
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction456
+private class ReduceAction668
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -17410,7 +25718,7 @@ private class ReduceAction456
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction457
+private class ReduceAction669
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -17429,7 +25737,7 @@ private class ReduceAction457
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction458
+private class ReduceAction670
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -17462,11 +25770,13 @@ private class ReduceAction458
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction459
+private class ReduceAction671
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -17480,14 +25790,14 @@ private class ReduceAction459
 					assert tbangnode2 isa nullable TBang
 					var pclosureidnode3 = nodearraylist2
 					assert pclosureidnode3 isa nullable AClosureId
-					var listnode4 = nodearraylist4
+					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
 					listnode5 = concat(listnode5, listnode4)
-					var tkwdonode6 = nodearraylist6
+					var tkwdonode6 = nodearraylist8
 					assert tkwdonode6 isa nullable TKwdo
-					var pexprnode7 = nodearraylist7
+					var pexprnode7 = nodearraylist9
 					assert pexprnode7 isa nullable AExpr
-					var plabelnode8 = nodearraylist8
+					var plabelnode8 = nodearraylist10
 					assert plabelnode8 isa nullable ALabel
 					var pclosuredefnode1: nullable AClosureDef = new AClosureDef.init_aclosuredef(
 						tbangnode2,
@@ -17501,7 +25811,7 @@ private class ReduceAction459
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction460
+private class ReduceAction672
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -17538,7 +25848,7 @@ private class ReduceAction460
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction461
+private class ReduceAction673
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -17568,11 +25878,13 @@ private class ReduceAction461
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction462
+private class ReduceAction674
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -17585,12 +25897,12 @@ private class ReduceAction462
 					assert tbangnode2 isa nullable TBang
 					var pclosureidnode3 = nodearraylist2
 					assert pclosureidnode3 isa nullable AClosureId
-					var listnode4 = nodearraylist4
+					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
 					listnode5 = concat(listnode5, listnode4)
-					var tkwdonode6 = nodearraylist6
+					var tkwdonode6 = nodearraylist8
 					assert tkwdonode6 isa nullable TKwdo
-					var pexprnode7 = nodearraylist7
+					var pexprnode7 = nodearraylist9
 					assert pexprnode7 isa nullable AExpr
 					var pclosuredefnode1: nullable AClosureDef = new AClosureDef.init_aclosuredef(
 						tbangnode2,
@@ -17604,7 +25916,7 @@ private class ReduceAction462
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction463
+private class ReduceAction675
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -17638,7 +25950,7 @@ private class ReduceAction463
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction464
+private class ReduceAction676
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -17667,11 +25979,13 @@ private class ReduceAction464
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction465
+private class ReduceAction677
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -17685,10 +25999,10 @@ private class ReduceAction465
 					assert tbangnode2 isa nullable TBang
 					var pclosureidnode3 = nodearraylist2
 					assert pclosureidnode3 isa nullable AClosureId
-					var listnode4 = nodearraylist4
+					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
 					listnode5 = concat(listnode5, listnode4)
-					var pexprnode7 = nodearraylist8
+					var pexprnode7 = nodearraylist10
 					assert pexprnode7 isa nullable AExpr
 					var pclosuredefnode1: nullable AClosureDef = new AClosureDef.init_aclosuredef(
 						tbangnode2,
@@ -17702,7 +26016,7 @@ private class ReduceAction465
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction466
+private class ReduceAction678
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -17735,7 +26049,7 @@ private class ReduceAction466
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction467
+private class ReduceAction679
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -17766,11 +26080,13 @@ private class ReduceAction467
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction468
+private class ReduceAction680
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -17784,12 +26100,12 @@ private class ReduceAction468
 					assert tbangnode2 isa nullable TBang
 					var pclosureidnode3 = nodearraylist2
 					assert pclosureidnode3 isa nullable AClosureId
-					var listnode4 = nodearraylist4
+					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
 					listnode5 = concat(listnode5, listnode4)
-					var tkwdonode6 = nodearraylist6
+					var tkwdonode6 = nodearraylist8
 					assert tkwdonode6 isa nullable TKwdo
-					var pexprnode7 = nodearraylist8
+					var pexprnode7 = nodearraylist10
 					assert pexprnode7 isa nullable AExpr
 					var pclosuredefnode1: nullable AClosureDef = new AClosureDef.init_aclosuredef(
 						tbangnode2,
@@ -17803,7 +26119,7 @@ private class ReduceAction468
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction469
+private class ReduceAction681
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -17838,7 +26154,7 @@ private class ReduceAction469
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction470
+private class ReduceAction682
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -17866,11 +26182,13 @@ private class ReduceAction470
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction471
+private class ReduceAction683
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -17883,10 +26201,10 @@ private class ReduceAction471
 					assert tbangnode2 isa nullable TBang
 					var pclosureidnode3 = nodearraylist2
 					assert pclosureidnode3 isa nullable AClosureId
-					var listnode4 = nodearraylist4
+					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
 					listnode5 = concat(listnode5, listnode4)
-					var tkwdonode6 = nodearraylist6
+					var tkwdonode6 = nodearraylist8
 					assert tkwdonode6 isa nullable TKwdo
 					var pclosuredefnode1: nullable AClosureDef = new AClosureDef.init_aclosuredef(
 						tbangnode2,
@@ -17900,7 +26218,7 @@ private class ReduceAction471
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction472
+private class ReduceAction684
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -17932,7 +26250,7 @@ private class ReduceAction472
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction473
+private class ReduceAction685
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -17947,7 +26265,7 @@ private class ReduceAction473
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction474
+private class ReduceAction686
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -17962,7 +26280,7 @@ private class ReduceAction474
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction475
+private class ReduceAction687
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -17979,7 +26297,7 @@ private class ReduceAction475
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction476
+private class ReduceAction688
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -18002,7 +26320,7 @@ private class ReduceAction476
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction477
+private class ReduceAction689
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -18028,7 +26346,7 @@ private class ReduceAction477
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction478
+private class ReduceAction690
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -18054,7 +26372,7 @@ private class ReduceAction478
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction479
+private class ReduceAction691
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -18083,7 +26401,7 @@ private class ReduceAction479
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction480
+private class ReduceAction692
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -18113,7 +26431,7 @@ private class ReduceAction480
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction481
+private class ReduceAction693
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -18146,7 +26464,7 @@ private class ReduceAction481
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction482
+private class ReduceAction694
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -18179,7 +26497,7 @@ private class ReduceAction482
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction483
+private class ReduceAction695
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -18215,7 +26533,7 @@ private class ReduceAction483
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction484
+private class ReduceAction696
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -18244,7 +26562,7 @@ private class ReduceAction484
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction485
+private class ReduceAction697
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -18269,7 +26587,121 @@ private class ReduceAction485
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction486
+private class ReduceAction698
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa nullable AExpr
+					var tattridnode3 = nodearraylist5
+					assert tattridnode3 isa nullable TAttrid
+					var tassignnode4 = nodearraylist6
+					assert tassignnode4 isa nullable TAssign
+					var pexprnode5 = nodearraylist7
+					assert pexprnode5 isa nullable AExpr
+					var pexprnode1: nullable AAttrAssignExpr = new AAttrAssignExpr.init_aattrassignexpr(
+						pexprnode2,
+						tattridnode3,
+						tassignnode4,
+						pexprnode5
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction699
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa nullable AExpr
+					var tattridnode3 = nodearraylist6
+					assert tattridnode3 isa nullable TAttrid
+					var tassignnode4 = nodearraylist7
+					assert tassignnode4 isa nullable TAssign
+					var pexprnode5 = nodearraylist8
+					assert pexprnode5 isa nullable AExpr
+					var pexprnode1: nullable AAttrAssignExpr = new AAttrAssignExpr.init_aattrassignexpr(
+						pexprnode2,
+						tattridnode3,
+						tassignnode4,
+						pexprnode5
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction701
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
+					var tattridnode3 = nodearraylist2
+					assert tattridnode3 isa nullable TAttrid
+					var tassignnode4 = nodearraylist3
+					assert tassignnode4 isa nullable TAssign
+					var pexprnode5 = nodearraylist4
+					assert pexprnode5 isa nullable AExpr
+					var pexprnode1: nullable AAttrAssignExpr = new AAttrAssignExpr.init_aattrassignexpr(
+						pexprnode2,
+						tattridnode3,
+						tassignnode4,
+						pexprnode5
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction702
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
+					var tattridnode3 = nodearraylist3
+					assert tattridnode3 isa nullable TAttrid
+					var tassignnode4 = nodearraylist4
+					assert tassignnode4 isa nullable TAssign
+					var pexprnode5 = nodearraylist5
+					assert pexprnode5 isa nullable AExpr
+					var pexprnode1: nullable AAttrAssignExpr = new AAttrAssignExpr.init_aattrassignexpr(
+						pexprnode2,
+						tattridnode3,
+						tassignnode4,
+						pexprnode5
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction704
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -18302,7 +26734,7 @@ private class ReduceAction486
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction487
+private class ReduceAction705
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -18331,7 +26763,137 @@ private class ReduceAction487
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction488
+private class ReduceAction706
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa nullable AExpr
+					var tidnode3 = nodearraylist5
+					assert tidnode3 isa nullable TId
+					var pexprsnode4 = nodearraylist6
+					assert pexprsnode4 isa nullable AExprs
+					var tassignnode5 = nodearraylist7
+					assert tassignnode5 isa nullable TAssign
+					var pexprnode6 = nodearraylist8
+					assert pexprnode6 isa nullable AExpr
+					var pexprnode1: nullable ACallAssignExpr = new ACallAssignExpr.init_acallassignexpr(
+						pexprnode2,
+						tidnode3,
+						pexprsnode4,
+						tassignnode5,
+						pexprnode6
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction707
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa nullable AExpr
+					var tidnode3 = nodearraylist6
+					assert tidnode3 isa nullable TId
+					var pexprsnode4 = nodearraylist7
+					assert pexprsnode4 isa nullable AExprs
+					var tassignnode5 = nodearraylist8
+					assert tassignnode5 isa nullable TAssign
+					var pexprnode6 = nodearraylist9
+					assert pexprnode6 isa nullable AExpr
+					var pexprnode1: nullable ACallAssignExpr = new ACallAssignExpr.init_acallassignexpr(
+						pexprnode2,
+						tidnode3,
+						pexprsnode4,
+						tassignnode5,
+						pexprnode6
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction709
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
+					var tidnode3 = nodearraylist2
+					assert tidnode3 isa nullable TId
+					var pexprsnode4 = nodearraylist3
+					assert pexprsnode4 isa nullable AExprs
+					var tassignnode5 = nodearraylist4
+					assert tassignnode5 isa nullable TAssign
+					var pexprnode6 = nodearraylist5
+					assert pexprnode6 isa nullable AExpr
+					var pexprnode1: nullable ACallAssignExpr = new ACallAssignExpr.init_acallassignexpr(
+						pexprnode2,
+						tidnode3,
+						pexprsnode4,
+						tassignnode5,
+						pexprnode6
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction710
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
+					var tidnode3 = nodearraylist3
+					assert tidnode3 isa nullable TId
+					var pexprsnode4 = nodearraylist4
+					assert pexprsnode4 isa nullable AExprs
+					var tassignnode5 = nodearraylist5
+					assert tassignnode5 isa nullable TAssign
+					var pexprnode6 = nodearraylist6
+					assert pexprnode6 isa nullable AExpr
+					var pexprnode1: nullable ACallAssignExpr = new ACallAssignExpr.init_acallassignexpr(
+						pexprnode2,
+						tidnode3,
+						pexprsnode4,
+						tassignnode5,
+						pexprnode6
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction712
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -18358,7 +26920,7 @@ private class ReduceAction488
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction489
+private class ReduceAction713
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -18387,7 +26949,7 @@ private class ReduceAction489
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction490
+private class ReduceAction714
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -18412,7 +26974,121 @@ private class ReduceAction490
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction491
+private class ReduceAction715
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa nullable AExpr
+					var tattridnode3 = nodearraylist5
+					assert tattridnode3 isa nullable TAttrid
+					var passignopnode4 = nodearraylist6
+					assert passignopnode4 isa nullable AAssignOp
+					var pexprnode5 = nodearraylist7
+					assert pexprnode5 isa nullable AExpr
+					var pexprnode1: nullable AAttrReassignExpr = new AAttrReassignExpr.init_aattrreassignexpr(
+						pexprnode2,
+						tattridnode3,
+						passignopnode4,
+						pexprnode5
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction716
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa nullable AExpr
+					var tattridnode3 = nodearraylist6
+					assert tattridnode3 isa nullable TAttrid
+					var passignopnode4 = nodearraylist7
+					assert passignopnode4 isa nullable AAssignOp
+					var pexprnode5 = nodearraylist8
+					assert pexprnode5 isa nullable AExpr
+					var pexprnode1: nullable AAttrReassignExpr = new AAttrReassignExpr.init_aattrreassignexpr(
+						pexprnode2,
+						tattridnode3,
+						passignopnode4,
+						pexprnode5
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction718
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
+					var tattridnode3 = nodearraylist2
+					assert tattridnode3 isa nullable TAttrid
+					var passignopnode4 = nodearraylist3
+					assert passignopnode4 isa nullable AAssignOp
+					var pexprnode5 = nodearraylist4
+					assert pexprnode5 isa nullable AExpr
+					var pexprnode1: nullable AAttrReassignExpr = new AAttrReassignExpr.init_aattrreassignexpr(
+						pexprnode2,
+						tattridnode3,
+						passignopnode4,
+						pexprnode5
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction719
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
+					var tattridnode3 = nodearraylist3
+					assert tattridnode3 isa nullable TAttrid
+					var passignopnode4 = nodearraylist4
+					assert passignopnode4 isa nullable AAssignOp
+					var pexprnode5 = nodearraylist5
+					assert pexprnode5 isa nullable AExpr
+					var pexprnode1: nullable AAttrReassignExpr = new AAttrReassignExpr.init_aattrreassignexpr(
+						pexprnode2,
+						tattridnode3,
+						passignopnode4,
+						pexprnode5
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction721
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -18445,7 +27121,7 @@ private class ReduceAction491
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction492
+private class ReduceAction722
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -18474,7 +27150,137 @@ private class ReduceAction492
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction493
+private class ReduceAction723
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa nullable AExpr
+					var tidnode3 = nodearraylist5
+					assert tidnode3 isa nullable TId
+					var pexprsnode4 = nodearraylist6
+					assert pexprsnode4 isa nullable AExprs
+					var passignopnode5 = nodearraylist7
+					assert passignopnode5 isa nullable AAssignOp
+					var pexprnode6 = nodearraylist8
+					assert pexprnode6 isa nullable AExpr
+					var pexprnode1: nullable ACallReassignExpr = new ACallReassignExpr.init_acallreassignexpr(
+						pexprnode2,
+						tidnode3,
+						pexprsnode4,
+						passignopnode5,
+						pexprnode6
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction724
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa nullable AExpr
+					var tidnode3 = nodearraylist6
+					assert tidnode3 isa nullable TId
+					var pexprsnode4 = nodearraylist7
+					assert pexprsnode4 isa nullable AExprs
+					var passignopnode5 = nodearraylist8
+					assert passignopnode5 isa nullable AAssignOp
+					var pexprnode6 = nodearraylist9
+					assert pexprnode6 isa nullable AExpr
+					var pexprnode1: nullable ACallReassignExpr = new ACallReassignExpr.init_acallreassignexpr(
+						pexprnode2,
+						tidnode3,
+						pexprsnode4,
+						passignopnode5,
+						pexprnode6
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction726
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
+					var tidnode3 = nodearraylist2
+					assert tidnode3 isa nullable TId
+					var pexprsnode4 = nodearraylist3
+					assert pexprsnode4 isa nullable AExprs
+					var passignopnode5 = nodearraylist4
+					assert passignopnode5 isa nullable AAssignOp
+					var pexprnode6 = nodearraylist5
+					assert pexprnode6 isa nullable AExpr
+					var pexprnode1: nullable ACallReassignExpr = new ACallReassignExpr.init_acallreassignexpr(
+						pexprnode2,
+						tidnode3,
+						pexprsnode4,
+						passignopnode5,
+						pexprnode6
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction727
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
+					var tidnode3 = nodearraylist3
+					assert tidnode3 isa nullable TId
+					var pexprsnode4 = nodearraylist4
+					assert pexprsnode4 isa nullable AExprs
+					var passignopnode5 = nodearraylist5
+					assert passignopnode5 isa nullable AAssignOp
+					var pexprnode6 = nodearraylist6
+					assert pexprnode6 isa nullable AExpr
+					var pexprnode1: nullable ACallReassignExpr = new ACallReassignExpr.init_acallreassignexpr(
+						pexprnode2,
+						tidnode3,
+						pexprsnode4,
+						passignopnode5,
+						pexprnode6
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction729
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -18501,7 +27307,7 @@ private class ReduceAction493
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction494
+private class ReduceAction730
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -18516,7 +27322,7 @@ private class ReduceAction494
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction495
+private class ReduceAction731
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -18531,7 +27337,7 @@ private class ReduceAction495
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction496
+private class ReduceAction732
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -18554,7 +27360,7 @@ private class ReduceAction496
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction497
+private class ReduceAction733
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -18574,7 +27380,7 @@ private class ReduceAction497
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction498
+private class ReduceAction734
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -18605,7 +27411,7 @@ private class ReduceAction498
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction499
+private class ReduceAction735
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -18632,7 +27438,7 @@ private class ReduceAction499
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction500
+private class ReduceAction736
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -18663,7 +27469,7 @@ private class ReduceAction500
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction501
+private class ReduceAction737
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -18690,7 +27496,7 @@ private class ReduceAction501
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction502
+private class ReduceAction738
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -18718,7 +27524,7 @@ private class ReduceAction502
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction505
+private class ReduceAction741
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -18741,7 +27547,7 @@ private class ReduceAction505
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction506
+private class ReduceAction742
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -18761,7 +27567,7 @@ private class ReduceAction506
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction507
+private class ReduceAction743
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -18794,7 +27600,7 @@ private class ReduceAction507
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction508
+private class ReduceAction744
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -18824,11 +27630,13 @@ private class ReduceAction508
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction509
+private class ReduceAction745
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
+					var nodearraylist15 = p.pop
+					var nodearraylist14 = p.pop
 					var nodearraylist13 = p.pop
 					var nodearraylist12 = p.pop
 					var nodearraylist11 = p.pop
@@ -18845,16 +27653,16 @@ private class ReduceAction509
 					var listnode4 = new Array[Object]
 					var tkwfornode2 = nodearraylist1
 					assert tkwfornode2 isa nullable TKwfor
-					var listnode3 = nodearraylist4
+					var listnode3 = nodearraylist5
 					assert listnode3 isa Array[Object]
 					listnode4 = concat(listnode4, listnode3)
-					var pexprnode5 = nodearraylist9
+					var pexprnode5 = nodearraylist11
 					assert pexprnode5 isa nullable AExpr
-					var tkwdonode6 = nodearraylist11
+					var tkwdonode6 = nodearraylist13
 					assert tkwdonode6 isa nullable TKwdo
-					var pexprnode7 = nodearraylist12
+					var pexprnode7 = nodearraylist14
 					assert pexprnode7 isa nullable AExpr
-					var plabelnode8 = nodearraylist13
+					var plabelnode8 = nodearraylist15
 					assert plabelnode8 isa nullable ALabel
 					var pexprnode1: nullable AForExpr = new AForExpr.init_aforexpr(
 						tkwfornode2,
@@ -18868,7 +27676,7 @@ private class ReduceAction509
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction510
+private class ReduceAction746
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -18910,11 +27718,13 @@ private class ReduceAction510
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction511
+private class ReduceAction747
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
+					var nodearraylist14 = p.pop
+					var nodearraylist13 = p.pop
 					var nodearraylist12 = p.pop
 					var nodearraylist11 = p.pop
 					var nodearraylist10 = p.pop
@@ -18930,14 +27740,14 @@ private class ReduceAction511
 					var listnode4 = new Array[Object]
 					var tkwfornode2 = nodearraylist1
 					assert tkwfornode2 isa nullable TKwfor
-					var listnode3 = nodearraylist4
+					var listnode3 = nodearraylist5
 					assert listnode3 isa Array[Object]
 					listnode4 = concat(listnode4, listnode3)
-					var pexprnode5 = nodearraylist9
+					var pexprnode5 = nodearraylist11
 					assert pexprnode5 isa nullable AExpr
-					var tkwdonode6 = nodearraylist11
+					var tkwdonode6 = nodearraylist13
 					assert tkwdonode6 isa nullable TKwdo
-					var pexprnode7 = nodearraylist12
+					var pexprnode7 = nodearraylist14
 					assert pexprnode7 isa nullable AExpr
 					var pexprnode1: nullable AForExpr = new AForExpr.init_aforexpr(
 						tkwfornode2,
@@ -18951,7 +27761,7 @@ private class ReduceAction511
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction512
+private class ReduceAction748
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -18990,7 +27800,7 @@ private class ReduceAction512
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction513
+private class ReduceAction749
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -19015,7 +27825,7 @@ private class ReduceAction513
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction514
+private class ReduceAction750
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -19043,7 +27853,7 @@ private class ReduceAction514
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction515
+private class ReduceAction751
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -19064,7 +27874,7 @@ private class ReduceAction515
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction516
+private class ReduceAction752
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -19088,7 +27898,7 @@ private class ReduceAction516
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction517
+private class ReduceAction753
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -19100,7 +27910,7 @@ private class ReduceAction517
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction521
+private class ReduceAction763
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -19125,7 +27935,7 @@ private class ReduceAction521
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction523
+private class ReduceAction765
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -19165,7 +27975,7 @@ private class ReduceAction523
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction525
+private class ReduceAction767
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -19186,7 +27996,7 @@ private class ReduceAction525
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction526
+private class ReduceAction768
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -19207,7 +28017,7 @@ private class ReduceAction526
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction527
+private class ReduceAction769
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -19229,7 +28039,28 @@ private class ReduceAction527
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction529
+private class ReduceAction770
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa nullable AExpr
+					var pexprnode3 = nodearraylist4
+					assert pexprnode3 isa nullable AExpr
+					var pexprnode1: nullable AImpliesExpr = new AImpliesExpr.init_aimpliesexpr(
+						pexprnode2,
+						pexprnode3
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction772
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -19249,7 +28080,7 @@ private class ReduceAction529
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction531
+private class ReduceAction774
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -19270,7 +28101,7 @@ private class ReduceAction531
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction532
+private class ReduceAction775
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -19291,7 +28122,7 @@ private class ReduceAction532
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction533
+private class ReduceAction776
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -19312,7 +28143,7 @@ private class ReduceAction533
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction534
+private class ReduceAction777
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -19333,7 +28164,7 @@ private class ReduceAction534
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction535
+private class ReduceAction778
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -19354,7 +28185,7 @@ private class ReduceAction535
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction536
+private class ReduceAction779
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -19375,7 +28206,7 @@ private class ReduceAction536
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction537
+private class ReduceAction780
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -19396,7 +28227,7 @@ private class ReduceAction537
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction538
+private class ReduceAction781
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -19417,7 +28248,7 @@ private class ReduceAction538
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction539
+private class ReduceAction782
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -19438,7 +28269,7 @@ private class ReduceAction539
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction540
+private class ReduceAction783
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -19459,7 +28290,7 @@ private class ReduceAction540
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction541
+private class ReduceAction784
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -19480,7 +28311,7 @@ private class ReduceAction541
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction543
+private class ReduceAction786
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -19501,7 +28332,7 @@ private class ReduceAction543
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction544
+private class ReduceAction787
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -19522,7 +28353,7 @@ private class ReduceAction544
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction546
+private class ReduceAction789
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -19543,7 +28374,7 @@ private class ReduceAction546
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction547
+private class ReduceAction790
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -19564,7 +28395,7 @@ private class ReduceAction547
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction548
+private class ReduceAction791
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -19585,7 +28416,7 @@ private class ReduceAction548
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction550
+private class ReduceAction793
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -19605,7 +28436,7 @@ private class ReduceAction550
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction551
+private class ReduceAction794
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -19625,7 +28456,7 @@ private class ReduceAction551
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction553
+private class ReduceAction796
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -19650,7 +28481,7 @@ private class ReduceAction553
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction554
+private class ReduceAction797
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -19675,7 +28506,7 @@ private class ReduceAction554
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction555
+private class ReduceAction798
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -19696,7 +28527,105 @@ private class ReduceAction555
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction556
+private class ReduceAction799
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var tkwissetnode2 = nodearraylist1
+					assert tkwissetnode2 isa nullable TKwisset
+					var pexprnode3 = nodearraylist2
+					assert pexprnode3 isa nullable AExpr
+					var tattridnode4 = nodearraylist6
+					assert tattridnode4 isa nullable TAttrid
+					var pexprnode1: nullable AIssetAttrExpr = new AIssetAttrExpr.init_aissetattrexpr(
+						tkwissetnode2,
+						pexprnode3,
+						tattridnode4
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction800
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var tkwissetnode2 = nodearraylist1
+					assert tkwissetnode2 isa nullable TKwisset
+					var pexprnode3 = nodearraylist2
+					assert pexprnode3 isa nullable AExpr
+					var tattridnode4 = nodearraylist7
+					assert tattridnode4 isa nullable TAttrid
+					var pexprnode1: nullable AIssetAttrExpr = new AIssetAttrExpr.init_aissetattrexpr(
+						tkwissetnode2,
+						pexprnode3,
+						tattridnode4
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction802
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var tkwissetnode2 = nodearraylist1
+					assert tkwissetnode2 isa nullable TKwisset
+					var pexprnode3: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
+					var tattridnode4 = nodearraylist3
+					assert tattridnode4 isa nullable TAttrid
+					var pexprnode1: nullable AIssetAttrExpr = new AIssetAttrExpr.init_aissetattrexpr(
+						tkwissetnode2,
+						pexprnode3,
+						tattridnode4
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction803
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var tkwissetnode2 = nodearraylist1
+					assert tkwissetnode2 isa nullable TKwisset
+					var pexprnode3: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
+					var tattridnode4 = nodearraylist4
+					assert tattridnode4 isa nullable TAttrid
+					var pexprnode1: nullable AIssetAttrExpr = new AIssetAttrExpr.init_aissetattrexpr(
+						tkwissetnode2,
+						pexprnode3,
+						tattridnode4
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction805
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -19717,7 +28646,7 @@ private class ReduceAction556
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction557
+private class ReduceAction806
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -19734,7 +28663,89 @@ private class ReduceAction557
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction564
+private class ReduceAction807
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa nullable AExpr
+					var tattridnode3 = nodearraylist5
+					assert tattridnode3 isa nullable TAttrid
+					var pexprnode1: nullable AAttrExpr = new AAttrExpr.init_aattrexpr(
+						pexprnode2,
+						tattridnode3
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction808
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa nullable AExpr
+					var tattridnode3 = nodearraylist6
+					assert tattridnode3 isa nullable TAttrid
+					var pexprnode1: nullable AAttrExpr = new AAttrExpr.init_aattrexpr(
+						pexprnode2,
+						tattridnode3
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction810
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
+					var tattridnode3 = nodearraylist2
+					assert tattridnode3 isa nullable TAttrid
+					var pexprnode1: nullable AAttrExpr = new AAttrExpr.init_aattrexpr(
+						pexprnode2,
+						tattridnode3
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction811
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
+					var tattridnode3 = nodearraylist3
+					assert tattridnode3 isa nullable TAttrid
+					var pexprnode1: nullable AAttrExpr = new AAttrExpr.init_aattrexpr(
+						pexprnode2,
+						tattridnode3
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction827
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -19755,7 +28766,7 @@ private class ReduceAction564
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction565
+private class ReduceAction828
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -19785,7 +28796,70 @@ private class ReduceAction565
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction566
+private class ReduceAction829
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var tkwnewnode2 = nodearraylist1
+					assert tkwnewnode2 isa nullable TKwnew
+					var ptypenode3 = nodearraylist3
+					assert ptypenode3 isa nullable AType
+					var tidnode4 = nodearraylist7
+					assert tidnode4 isa nullable TId
+					var pexprsnode5 = nodearraylist8
+					assert pexprsnode5 isa nullable AExprs
+					var pexprnode1: nullable ANewExpr = new ANewExpr.init_anewexpr(
+						tkwnewnode2,
+						ptypenode3,
+						tidnode4,
+						pexprsnode5
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction830
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var tkwnewnode2 = nodearraylist1
+					assert tkwnewnode2 isa nullable TKwnew
+					var ptypenode3 = nodearraylist3
+					assert ptypenode3 isa nullable AType
+					var tidnode4 = nodearraylist8
+					assert tidnode4 isa nullable TId
+					var pexprsnode5 = nodearraylist9
+					assert pexprsnode5 isa nullable AExprs
+					var pexprnode1: nullable ANewExpr = new ANewExpr.init_anewexpr(
+						tkwnewnode2,
+						ptypenode3,
+						tidnode4,
+						pexprsnode5
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction832
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -19818,7 +28892,7 @@ private class ReduceAction566
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction567
+private class ReduceAction833
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -19854,7 +28928,7 @@ private class ReduceAction567
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction568
+private class ReduceAction834
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -19887,7 +28961,7 @@ private class ReduceAction568
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction569
+private class ReduceAction835
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -19923,7 +28997,7 @@ private class ReduceAction569
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction570
+private class ReduceAction836
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -19939,7 +29013,7 @@ private class ReduceAction570
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction571
+private class ReduceAction837
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -19958,7 +29032,7 @@ private class ReduceAction571
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction572
+private class ReduceAction838
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -19974,7 +29048,7 @@ private class ReduceAction572
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction573
+private class ReduceAction839
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -19993,7 +29067,7 @@ private class ReduceAction573
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction574
+private class ReduceAction840
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -20009,7 +29083,7 @@ private class ReduceAction574
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction575
+private class ReduceAction841
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -20028,7 +29102,7 @@ private class ReduceAction575
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction576
+private class ReduceAction842
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -20044,7 +29118,7 @@ private class ReduceAction576
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction577
+private class ReduceAction843
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -20063,7 +29137,7 @@ private class ReduceAction577
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction578
+private class ReduceAction844
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -20079,7 +29153,7 @@ private class ReduceAction578
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction579
+private class ReduceAction845
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -20098,7 +29172,7 @@ private class ReduceAction579
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction580
+private class ReduceAction846
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -20114,7 +29188,7 @@ private class ReduceAction580
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction581
+private class ReduceAction847
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -20133,7 +29207,7 @@ private class ReduceAction581
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction582
+private class ReduceAction848
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -20149,7 +29223,7 @@ private class ReduceAction582
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction583
+private class ReduceAction849
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -20168,7 +29242,7 @@ private class ReduceAction583
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction584
+private class ReduceAction850
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -20184,7 +29258,7 @@ private class ReduceAction584
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction585
+private class ReduceAction851
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -20203,7 +29277,7 @@ private class ReduceAction585
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction586
+private class ReduceAction852
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -20219,7 +29293,7 @@ private class ReduceAction586
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction587
+private class ReduceAction853
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -20238,19 +29312,21 @@ private class ReduceAction587
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction589
+private class ReduceAction855
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var toparnode2 = nodearraylist1
 					assert toparnode2 isa nullable TOpar
-					var pexprnode3 = nodearraylist2
+					var pexprnode3 = nodearraylist3
 					assert pexprnode3 isa nullable AExpr
-					var tcparnode4 = nodearraylist3
+					var tcparnode4 = nodearraylist5
 					assert tcparnode4 isa nullable TCpar
 					var pexprnode1: nullable AParExpr = new AParExpr.init_aparexpr(
 						toparnode2,
@@ -20262,22 +29338,24 @@ private class ReduceAction589
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction590
+private class ReduceAction856
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var toparnode2 = nodearraylist1
 					assert toparnode2 isa nullable TOpar
-					var pexprnode3 = nodearraylist2
+					var pexprnode3 = nodearraylist3
 					assert pexprnode3 isa nullable AExpr
-					var tcparnode4 = nodearraylist3
+					var tcparnode4 = nodearraylist5
 					assert tcparnode4 isa nullable TCpar
-					var pannotationsnode5 = nodearraylist4
+					var pannotationsnode5 = nodearraylist6
 					assert pannotationsnode5 isa nullable AAnnotations
 					var pexprnode1: nullable AParExpr = new AParExpr.init_aparexpr(
 						toparnode2,
@@ -20289,7 +29367,7 @@ private class ReduceAction590
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction591
+private class ReduceAction857
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -20325,7 +29403,7 @@ private class ReduceAction591
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction592
+private class ReduceAction858
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -20366,7 +29444,7 @@ private class ReduceAction592
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction593
+private class ReduceAction859
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -20390,7 +29468,7 @@ private class ReduceAction593
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction594
+private class ReduceAction860
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -20418,7 +29496,7 @@ private class ReduceAction594
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction595
+private class ReduceAction861
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -20445,7 +29523,7 @@ private class ReduceAction595
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction596
+private class ReduceAction862
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -20476,7 +29554,7 @@ private class ReduceAction596
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction597
+private class ReduceAction863
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -20498,7 +29576,7 @@ private class ReduceAction597
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction598
+private class ReduceAction864
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -20513,7 +29591,7 @@ private class ReduceAction598
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction600
+private class ReduceAction866
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -20528,7 +29606,7 @@ private class ReduceAction600
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction601
+private class ReduceAction867
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -20543,7 +29621,7 @@ private class ReduceAction601
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction602
+private class ReduceAction868
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -20568,11 +29646,13 @@ private class ReduceAction602
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction603
+private class ReduceAction869
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
@@ -20582,10 +29662,10 @@ private class ReduceAction603
 					assert tatnode2 isa nullable TAt
 					var toparnode3 = nodearraylist2
 					assert toparnode3 isa nullable TOpar
-					var listnode4 = nodearraylist3
+					var listnode4 = nodearraylist4
 					assert listnode4 isa Array[Object]
 					listnode5 = concat(listnode5, listnode4)
-					var tcparnode6 = nodearraylist4
+					var tcparnode6 = nodearraylist6
 					assert tcparnode6 isa nullable TCpar
 					var pannotationsnode1: nullable AAnnotations = new AAnnotations.init_aannotations(
 						tatnode2,
@@ -20597,7 +29677,7 @@ private class ReduceAction603
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction604
+private class ReduceAction870
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -20617,7 +29697,7 @@ private class ReduceAction604
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction605
+private class ReduceAction871
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -20640,11 +29720,13 @@ private class ReduceAction605
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction606
+private class ReduceAction872
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
@@ -20654,10 +29736,10 @@ private class ReduceAction606
 					assert patidnode2 isa nullable AAtid
 					var toparnode3 = nodearraylist2
 					assert toparnode3 isa nullable TOpar
-					var listnode4 = nodearraylist3
+					var listnode4 = nodearraylist4
 					assert listnode4 isa Array[Object]
 					listnode5 = concat(listnode5, listnode4)
-					var tcparnode6 = nodearraylist4
+					var tcparnode6 = nodearraylist6
 					assert tcparnode6 isa nullable TCpar
 					var pannotationnode1: nullable AAnnotation = new AAnnotation.init_aannotation(
 						patidnode2,
@@ -20670,11 +29752,13 @@ private class ReduceAction606
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction607
+private class ReduceAction873
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
@@ -20685,12 +29769,12 @@ private class ReduceAction607
 					assert patidnode2 isa nullable AAtid
 					var toparnode3 = nodearraylist2
 					assert toparnode3 isa nullable TOpar
-					var listnode4 = nodearraylist3
+					var listnode4 = nodearraylist4
 					assert listnode4 isa Array[Object]
 					listnode5 = concat(listnode5, listnode4)
-					var tcparnode6 = nodearraylist4
+					var tcparnode6 = nodearraylist6
 					assert tcparnode6 isa nullable TCpar
-					var pannotationsnode7 = nodearraylist5
+					var pannotationsnode7 = nodearraylist7
 					assert pannotationsnode7 isa nullable AAnnotations
 					var pannotationnode1: nullable AAnnotation = new AAnnotation.init_aannotation(
 						patidnode2,
@@ -20703,7 +29787,7 @@ private class ReduceAction607
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction608
+private class ReduceAction874
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -20723,7 +29807,7 @@ private class ReduceAction608
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction609
+private class ReduceAction875
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -20738,7 +29822,7 @@ private class ReduceAction609
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction610
+private class ReduceAction876
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -20757,7 +29841,7 @@ private class ReduceAction610
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction612
+private class ReduceAction878
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -20779,7 +29863,7 @@ private class ReduceAction612
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction613
+private class ReduceAction879
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -20804,39 +29888,7 @@ private class ReduceAction613
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction614
-	super ReduceAction
-	redef fun action(p: Parser)
-	do
-					var node_list: nullable Object = null
-					var nodearraylist6 = p.pop
-					var nodearraylist5 = p.pop
-					var nodearraylist4 = p.pop
-					var nodearraylist3 = p.pop
-					var nodearraylist2 = p.pop
-					var nodearraylist1 = p.pop
-					var listnode5 = new Array[Object]
-					var patidnode2 = nodearraylist2
-					assert patidnode2 isa nullable AAtid
-					var toparnode3 = nodearraylist3
-					assert toparnode3 isa nullable TOpar
-					var listnode4 = nodearraylist4
-					assert listnode4 isa Array[Object]
-					listnode5 = concat(listnode5, listnode4)
-					var tcparnode6 = nodearraylist5
-					assert tcparnode6 isa nullable TCpar
-					var pannotationnode1: nullable AAnnotation = new AAnnotation.init_aannotation(
-						patidnode2,
-						toparnode3,
-						listnode5,
-						tcparnode6,
-						null
-					)
-					node_list = pannotationnode1
-					p.push(p.go_to(_goto), node_list)
-	end
-end
-private class ReduceAction615
+private class ReduceAction880
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -20853,12 +29905,46 @@ private class ReduceAction615
 					assert patidnode2 isa nullable AAtid
 					var toparnode3 = nodearraylist3
 					assert toparnode3 isa nullable TOpar
-					var listnode4 = nodearraylist4
+					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
 					listnode5 = concat(listnode5, listnode4)
-					var tcparnode6 = nodearraylist5
+					var tcparnode6 = nodearraylist6
 					assert tcparnode6 isa nullable TCpar
-					var pannotationsnode7 = nodearraylist6
+					var pannotationnode1: nullable AAnnotation = new AAnnotation.init_aannotation(
+						patidnode2,
+						toparnode3,
+						listnode5,
+						tcparnode6,
+						null
+					)
+					node_list = pannotationnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction881
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode5 = new Array[Object]
+					var patidnode2 = nodearraylist2
+					assert patidnode2 isa nullable AAtid
+					var toparnode3 = nodearraylist3
+					assert toparnode3 isa nullable TOpar
+					var listnode4 = nodearraylist5
+					assert listnode4 isa Array[Object]
+					listnode5 = concat(listnode5, listnode4)
+					var tcparnode6 = nodearraylist6
+					assert tcparnode6 isa nullable TCpar
+					var pannotationsnode7 = nodearraylist7
 					assert pannotationsnode7 isa nullable AAnnotations
 					var pannotationnode1: nullable AAnnotation = new AAnnotation.init_aannotation(
 						patidnode2,
@@ -20871,7 +29957,7 @@ private class ReduceAction615
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction616
+private class ReduceAction882
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -20897,7 +29983,7 @@ private class ReduceAction616
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction617
+private class ReduceAction883
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -20910,7 +29996,7 @@ private class ReduceAction617
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction618
+private class ReduceAction884
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -20925,7 +30011,7 @@ private class ReduceAction618
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction619
+private class ReduceAction885
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -20944,7 +30030,7 @@ private class ReduceAction619
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction620
+private class ReduceAction886
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -20957,7 +30043,7 @@ private class ReduceAction620
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction621
+private class ReduceAction887
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -20972,7 +30058,7 @@ private class ReduceAction621
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction622
+private class ReduceAction888
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -20987,7 +30073,7 @@ private class ReduceAction622
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction624
+private class ReduceAction890
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21002,7 +30088,7 @@ private class ReduceAction624
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction625
+private class ReduceAction891
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21017,7 +30103,40 @@ private class ReduceAction625
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction626
+private class ReduceAction892
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var tidnode2 = nodearraylist2
+					assert tidnode2 isa nullable TId
+					var patidnode1: nullable AIdAtid = new AIdAtid.init_aidatid(
+						tidnode2
+					)
+					node_list = patidnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction893
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var tidnode2 = nodearraylist3
+					assert tidnode2 isa nullable TId
+					var patidnode1: nullable AIdAtid = new AIdAtid.init_aidatid(
+						tidnode2
+					)
+					node_list = patidnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction895
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21032,7 +30151,40 @@ private class ReduceAction626
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction627
+private class ReduceAction896
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var tkwreadablenode2 = nodearraylist2
+					assert tkwreadablenode2 isa nullable TKwreadable
+					var patidnode1: nullable AKwreadableAtid = new AKwreadableAtid.init_akwreadableatid(
+						tkwreadablenode2
+					)
+					node_list = patidnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction897
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var tkwreadablenode2 = nodearraylist3
+					assert tkwreadablenode2 isa nullable TKwreadable
+					var patidnode1: nullable AKwreadableAtid = new AKwreadableAtid.init_akwreadableatid(
+						tkwreadablenode2
+					)
+					node_list = patidnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction899
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21047,7 +30199,40 @@ private class ReduceAction627
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction628
+private class ReduceAction900
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var tkwwritablenode2 = nodearraylist2
+					assert tkwwritablenode2 isa nullable TKwwritable
+					var patidnode1: nullable AKwwritableAtid = new AKwwritableAtid.init_akwwritableatid(
+						tkwwritablenode2
+					)
+					node_list = patidnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction901
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var tkwwritablenode2 = nodearraylist3
+					assert tkwwritablenode2 isa nullable TKwwritable
+					var patidnode1: nullable AKwwritableAtid = new AKwwritableAtid.init_akwwritableatid(
+						tkwwritablenode2
+					)
+					node_list = patidnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction903
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21062,7 +30247,40 @@ private class ReduceAction628
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction629
+private class ReduceAction904
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var tkwimportnode2 = nodearraylist2
+					assert tkwimportnode2 isa nullable TKwimport
+					var patidnode1: nullable AKwimportAtid = new AKwimportAtid.init_akwimportatid(
+						tkwimportnode2
+					)
+					node_list = patidnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction905
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var tkwimportnode2 = nodearraylist3
+					assert tkwimportnode2 isa nullable TKwimport
+					var patidnode1: nullable AKwimportAtid = new AKwimportAtid.init_akwimportatid(
+						tkwimportnode2
+					)
+					node_list = patidnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction907
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21088,7 +30306,7 @@ private class ReduceAction629
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction630
+private class ReduceAction908
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21110,7 +30328,7 @@ private class ReduceAction630
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction631
+private class ReduceAction909
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21123,7 +30341,7 @@ private class ReduceAction631
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction633
+private class ReduceAction911
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21142,7 +30360,7 @@ private class ReduceAction633
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction636
+private class ReduceAction914
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21168,7 +30386,7 @@ private class ReduceAction636
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction637
+private class ReduceAction915
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21184,7 +30402,7 @@ private class ReduceAction637
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction638
+private class ReduceAction916
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21204,7 +30422,7 @@ private class ReduceAction638
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction639
+private class ReduceAction917
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21218,7 +30436,7 @@ private class ReduceAction639
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction640
+private class ReduceAction918
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21233,7 +30451,7 @@ private class ReduceAction640
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction641
+private class ReduceAction919
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21255,7 +30473,7 @@ private class ReduceAction641
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction642
+private class ReduceAction920
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21273,7 +30491,7 @@ private class ReduceAction642
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction643
+private class ReduceAction921
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21295,7 +30513,7 @@ private class ReduceAction643
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction644
+private class ReduceAction922
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21317,7 +30535,7 @@ private class ReduceAction644
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction645
+private class ReduceAction923
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21343,63 +30561,7 @@ private class ReduceAction645
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction646
-	super ReduceAction
-	redef fun action(p: Parser)
-	do
-					var node_list: nullable Object = null
-					var nodearraylist1 = p.pop
-					var listnode2 = new Array[Object]
-					var tclassidnode3 = nodearraylist1
-					assert tclassidnode3 isa nullable TClassid
-					var pqualifiednode1: nullable AQualified = new AQualified.init_aqualified(
-						listnode2,
-						tclassidnode3
-					)
-					node_list = pqualifiednode1
-					p.push(p.go_to(_goto), node_list)
-	end
-end
-private class ReduceAction647
-	super ReduceAction
-	redef fun action(p: Parser)
-	do
-					var node_list: nullable Object = null
-					var nodearraylist2 = p.pop
-					var nodearraylist1 = p.pop
-					var listnode3 = new Array[Object]
-					var listnode2 = nodearraylist1
-					assert listnode2 isa Array[Object]
-					listnode3 = concat(listnode3, listnode2)
-					var tclassidnode4 = nodearraylist2
-					assert tclassidnode4 isa nullable TClassid
-					var pqualifiednode1: nullable AQualified = new AQualified.init_aqualified(
-						listnode3,
-						tclassidnode4
-					)
-					node_list = pqualifiednode1
-					p.push(p.go_to(_goto), node_list)
-	end
-end
-private class ReduceAction648
-	super ReduceAction
-	redef fun action(p: Parser)
-	do
-					var node_list: nullable Object = null
-					var nodearraylist1 = p.pop
-					var listnode3 = new Array[Object]
-					var listnode2 = nodearraylist1
-					assert listnode2 isa Array[Object]
-					listnode3 = concat(listnode3, listnode2)
-					var pqualifiednode1: nullable AQualified = new AQualified.init_aqualified(
-						listnode3,
-						null
-					)
-					node_list = pqualifiednode1
-					p.push(p.go_to(_goto), node_list)
-	end
-end
-private class ReduceAction649
+private class ReduceAction924
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21412,7 +30574,7 @@ private class ReduceAction649
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction650
+private class ReduceAction925
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21425,7 +30587,7 @@ private class ReduceAction650
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction651
+private class ReduceAction926
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21434,7 +30596,7 @@ private class ReduceAction651
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction653
+private class ReduceAction928
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21451,7 +30613,7 @@ private class ReduceAction653
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction654
+private class ReduceAction929
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21469,7 +30631,7 @@ private class ReduceAction654
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction656
+private class ReduceAction931
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21478,7 +30640,7 @@ private class ReduceAction656
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction657
+private class ReduceAction932
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21489,7 +30651,7 @@ private class ReduceAction657
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction658
+private class ReduceAction933
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21499,7 +30661,7 @@ private class ReduceAction658
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction659
+private class ReduceAction934
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21510,7 +30672,7 @@ private class ReduceAction659
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction931
+private class ReduceAction1317
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21533,7 +30695,31 @@ private class ReduceAction931
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction932
+private class ReduceAction1318
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var tkwissetnode2 = nodearraylist1
+					assert tkwissetnode2 isa nullable TKwisset
+					var pexprnode3 = nodearraylist2
+					assert pexprnode3 isa nullable AExpr
+					var tattridnode4 = nodearraylist4
+					assert tattridnode4 isa nullable TAttrid
+					var pexprnode1: nullable AIssetAttrExpr = new AIssetAttrExpr.init_aissetattrexpr(
+						tkwissetnode2,
+						pexprnode3,
+						tattridnode4
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction1321
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21552,7 +30738,27 @@ private class ReduceAction932
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction933
+private class ReduceAction1322
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa nullable AExpr
+					var tattridnode3 = nodearraylist3
+					assert tattridnode3 isa nullable TAttrid
+					var pexprnode1: nullable AAttrExpr = new AAttrExpr.init_aattrexpr(
+						pexprnode2,
+						tattridnode3
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction1325
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21577,7 +30783,33 @@ private class ReduceAction933
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction936
+private class ReduceAction1326
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode5 = new Array[Object]
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa nullable AExpr
+					var tidnode3 = nodearraylist3
+					assert tidnode3 isa nullable TId
+					var pexprsnode4 = nodearraylist4
+					assert pexprsnode4 isa nullable AExprs
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
+						pexprnode2,
+						tidnode3,
+						pexprsnode4,
+						listnode5
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction1333
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21600,7 +30832,7 @@ private class ReduceAction936
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction957
+private class ReduceAction1357
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21613,7 +30845,7 @@ private class ReduceAction957
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction958
+private class ReduceAction1358
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21623,7 +30855,7 @@ private class ReduceAction958
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1250
+private class ReduceAction1772
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21638,7 +30870,7 @@ private class ReduceAction1250
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1251
+private class ReduceAction1773
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21657,7 +30889,7 @@ private class ReduceAction1251
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1252
+private class ReduceAction1774
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21672,7 +30904,7 @@ private class ReduceAction1252
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1253
+private class ReduceAction1775
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21691,7 +30923,7 @@ private class ReduceAction1253
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1254
+private class ReduceAction1776
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21706,7 +30938,7 @@ private class ReduceAction1254
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1255
+private class ReduceAction1777
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21725,7 +30957,7 @@ private class ReduceAction1255
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1256
+private class ReduceAction1778
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21740,7 +30972,7 @@ private class ReduceAction1256
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1257
+private class ReduceAction1779
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21759,7 +30991,7 @@ private class ReduceAction1257
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1258
+private class ReduceAction1780
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21774,7 +31006,7 @@ private class ReduceAction1258
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1259
+private class ReduceAction1781
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21793,7 +31025,7 @@ private class ReduceAction1259
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1262
+private class ReduceAction1784
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21808,7 +31040,7 @@ private class ReduceAction1262
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1263
+private class ReduceAction1785
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21827,7 +31059,7 @@ private class ReduceAction1263
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1264
+private class ReduceAction1786
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21842,7 +31074,7 @@ private class ReduceAction1264
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1265
+private class ReduceAction1787
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21861,7 +31093,7 @@ private class ReduceAction1265
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1266
+private class ReduceAction1788
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21876,7 +31108,7 @@ private class ReduceAction1266
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1267
+private class ReduceAction1789
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21895,7 +31127,7 @@ private class ReduceAction1267
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1268
+private class ReduceAction1790
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21910,7 +31142,7 @@ private class ReduceAction1268
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1269
+private class ReduceAction1791
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21929,7 +31161,7 @@ private class ReduceAction1269
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1271
+private class ReduceAction1793
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21948,7 +31180,7 @@ private class ReduceAction1271
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1272
+private class ReduceAction1794
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21963,7 +31195,7 @@ private class ReduceAction1272
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1273
+private class ReduceAction1795
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -21982,7 +31214,7 @@ private class ReduceAction1273
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1275
+private class ReduceAction1797
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -22000,7 +31232,7 @@ private class ReduceAction1275
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1277
+private class ReduceAction1799
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -22019,7 +31251,7 @@ private class ReduceAction1277
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1281
+private class ReduceAction1803
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -22038,7 +31270,7 @@ private class ReduceAction1281
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1285
+private class ReduceAction1807
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -22057,7 +31289,7 @@ private class ReduceAction1285
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1286
+private class ReduceAction1808
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -22072,7 +31304,7 @@ private class ReduceAction1286
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1287
+private class ReduceAction1809
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -22091,7 +31323,7 @@ private class ReduceAction1287
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1288
+private class ReduceAction1810
 	super ReduceAction
 	redef fun action(p: Parser)
 	do
@@ -22106,7 +31338,7 @@ private class ReduceAction1288
 					p.push(p.go_to(_goto), node_list)
 	end
 end
-private class ReduceAction1289
+private class ReduceAction1811
 	super ReduceAction
 	redef fun action(p: Parser)
 	do

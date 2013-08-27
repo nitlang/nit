@@ -20,8 +20,8 @@ module poset
 # Preorder set graph.
 # This class modelize an incremental preorder graph where new node and edges can be added (but no removal)
 # Preorder graph has two caracteristics:
-#  * reflexivity: an element is in relation with itself (ie `self.has(e)` implies `self.has_edge(e,e)`)
-#  * transitivity: `self.has_edge(e,f)` and `self.has_edge(f,g)` implies `self.has_edge(e,g)`
+#  * reflexivity: an element is in relation with itself (ie `self.has(e) implies self.has_edge(e,e)`)
+#  * transitivity: `(self.has_edge(e,f) and self.has_edge(f,g)) implies self.has_edge(e,g)`
 class POSet[E: Object]
 	super NaiveCollection[E]
 	super AbstractSorter[E]

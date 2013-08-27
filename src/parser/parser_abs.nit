@@ -103,6 +103,9 @@ end
 class TKwnot
 	super Token
 end
+class TKwimplies
+	super Token
+end
 class TKwreturn
 	super Token
 end
@@ -763,6 +766,11 @@ class AAndExpr
     readable var _n_expr2: AExpr
 end
 class AOrElseExpr
+	super AExpr
+    readable var _n_expr: AExpr
+    readable var _n_expr2: AExpr
+end
+class AImpliesExpr
 	super AExpr
     readable var _n_expr: AExpr
     readable var _n_expr2: AExpr

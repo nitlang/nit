@@ -942,6 +942,15 @@ redef class AOrExpr
 	end
 end
 
+redef class AImpliesExpr
+	redef fun accept_typing(v)
+	do
+		v.visit_expr_bool(n_expr)
+		v.visit_expr_bool(n_expr2)
+		self.mtype = v.type_bool(self)
+	end
+end
+
 redef class AAndExpr
 	redef fun accept_typing(v)
 	do

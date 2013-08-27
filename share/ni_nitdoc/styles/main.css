@@ -356,9 +356,9 @@ article .info .code {
 }
 
 .content .concern-doc {
-	border-top: 3px dotted #CCC;
+	border-bottom: 1px dashed #CCC;
 	padding: 5px 0;
-	color: #999;
+	color: #6C6C6C;
 }
 
 .content section.concerns {
@@ -390,9 +390,9 @@ article .info .code {
 }
 
 .content section.methods h3.concern-toplevel {
-	border-top: 3px dotted #CCC;
-	padding-top: 0.83em;
-	color: #999;
+	padding: 10px;
+	border: 1px solid #ccc;
+	color: #6C6C6C;
 }
 
 .show-code {
@@ -507,4 +507,55 @@ nav h3 a.fold {
 	text-align: center;
 	background-color: #E0E0E0;
 }
+
+/* New comments style */
+
+.content .nitdoc {
+  background: #F7F7F7;
+  padding: 5px;
+  color: black;
+  overflow: auto;
+}
+
+.content .nitdoc pre {
+  background: #EEE;
+}
+
+.content .nitdoc code {
+  background: #DDD;
+  padding: 0 1px;
+}
+
+.rawcode {
+}
+
+.nitcode a { color: inherit; text-decoration: inherit; } /* hide links */
+.nitcode a:hover { text-decoration: underline; } /* underline links */
+.nitcode span[title]:hover { text-decoration: underline; } /* underline titles */
+/* lexical raw tokens. independent of usage or semantic: */
+.nitcode .nc_c { color: gray; font-style: italic; } /* comment */
+.nitcode .nc_d { color: #3D8127; font-style: italic; } /* documentation comments */
+.nitcode .nc_k { font-weight: bold; } /* keyword */
+.nitcode .nc_o {} /* operator */
+.nitcode .nc_i {} /* standard identifier */
+.nitcode .nc_t { color: #445588; font-weight: bold; } /* type/class identifier */
+.nitcode .nc_a { color: #445588; font-style: italic; } /* old style attribute identifier */
+.nitcode .nc_l { color: #009999; } /* char and number literal */
+.nitcode .nc_s { color: #8F1546; } /* string literal */
+/* syntactic token usage. added because of their position in the AST */
+.nitcode .nc_ast { color: blue; } /* assert label */
+.nitcode .nc_la { color: blue; } /* break/continue label */
+.nitcode .nc_m { color: #445588; } /* module name */
+/* syntactic groups */
+.nitcode .nc_def { font-weight: bold; color: blue; } /* name used in a definition */
+.nitcode .nc_def.nc_a { color: blue; } /* name used in a attribute definition */
+.nitcode .nc_def.nc_t { color: blue; } /* name used in a class or vt definition */
+.nitcode .nc_ss { color: #9E6BEB; } /* superstrings */
+.nitcode .nc_cdef {} /* A whole class definition */
+.nitcode .nc_pdef {} /* A whole property definition */
+/* semantic token usage */
+.nitcode .nc_v { font-style: italic; } /* local variable or parameter */
+.nitcode .nc_vt { font-style: italic; } /* virtual type or formal type */
+
+.nitcode .nc_error { border: 1px red solid;} /* not used */
 

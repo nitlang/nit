@@ -36,7 +36,6 @@ dep_module_1.dot
 dep_module_1.map
 dep_module_1.png
 dep_module_1.s.dot
-help.html
 index.html
 module_module_0.html
 module_module_1.html

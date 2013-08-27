@@ -143,6 +143,14 @@ abstract class Token
 	fun text: String is abstract
 	fun text=(text: String) is abstract
 
+	# The previous token in the Lexer.
+	# May have disapeared in the AST
+	var prev_token: nullable Token
+
+	# The next token in the Lexer.
+	# May have disapeared in the AST
+	var next_token: nullable Token
+
 	redef fun to_s: String do
 		return "'{text}'"
 	end
@@ -303,6 +311,9 @@ class TKwand
 	super TokenKeyword
 end
 class TKwor
+	super TokenKeyword
+end
+class TKwimplies
 	super TokenKeyword
 end
 class TKwnot
@@ -513,7 +524,7 @@ class TMidString
 	super TokenLiteral
 end
 class TEndString
-	super Token
+	super TokenLiteral
 end
 
 # A malformed string
@@ -1199,6 +1210,13 @@ end
 
 # A `or else` expression
 class AOrElseExpr
+	super ABoolExpr
+	readable writable var _n_expr: AExpr
+	readable writable var _n_expr2: AExpr
+end
+
+# A `implies` expression
+class AImpliesExpr
 	super ABoolExpr
 	readable writable var _n_expr: AExpr
 	readable writable var _n_expr2: AExpr

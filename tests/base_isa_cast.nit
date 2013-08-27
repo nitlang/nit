@@ -55,5 +55,17 @@ if a isa B or a == a then
 #alt4#	a.foo
 end
 
+if not (not a isa B or a == a) then
+	a.foo
+end
+
+if a isa B implies a == a then
+#alt7#	a.foo
+end
+
+if not (a isa B implies a == a) then
+	a.foo
+end
+
 assert a isa B
 a.foo

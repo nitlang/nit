@@ -48,7 +48,7 @@ function compare_to_result()
 	local pattern="$1"
 	local sav="$2"
 	if [ ! -r "$sav" ]; then return 0; fi
-	diff -u "out/$pattern.res" "$sav" > "out/$pattern.diff.sav.log"
+	diff -u "$sav" "out/$pattern.res" > "out/$pattern.diff.sav.log"
 	if [ "$?" == 0 ]; then
 		return 1
 	fi
@@ -57,7 +57,7 @@ function compare_to_result()
 	sed '/[Ww]arning/d;/[Ee]rror/d' "$sav" > "out/$pattern.sav2"
 	grep '[Ee]rror' "out/$pattern.res" >/dev/null && echo "Error" >> "out/$pattern.res2"
 	grep '[Ee]rror' "$sav" >/dev/null && echo "Error" >> "out/$pattern.sav2"
-	diff -u "out/$pattern.res2" "out/$pattern.sav2" > "out/$pattern.diff.sav2.log"
+	diff -u "out/$pattern.sav2" "out/$pattern.res2" > "out/$pattern.diff.sav.log"
 	if [ "$?" == 0 ]; then
 		return 2
 	else
@@ -72,6 +72,7 @@ function process_result()
 	# Result
 	pattern=$1
 	description=$2
+	pack=$3
 	SAV=""
 	NSAV=""
 	FIXME=""
@@ -80,6 +81,7 @@ function process_result()
 	NSOSO=""
 	SOSOF=""
 	NSOSOF=""
+	echo >>$xml "<testcase classname='$pack' name='$description'>"
 	for sav in "sav/$engine/$pattern.res" "sav/$pattern.res" "sav/$pattern.sav"; do
 		compare_to_result "$pattern" "$sav"
 		case "$?" in
@@ -151,6 +153,10 @@ function process_result()
 		else
 			echo "[======= fail out/$pattern.res $NSAV =======]"
 		fi
+		echo >>$xml "<error message='fail out/$pattern.res $NSAV'/>"
+		echo >>$xml "<system-out><![CDATA["
+		head >>$xml -n 50 out/$pattern.diff.sav.log
+		echo >>$xml "]]></system-out>"
 		nok="$nok $pattern"
 		echo "$ii" >> "$ERRLIST"
 	elif [ -n "$NFIXME" ]; then
@@ -159,6 +165,10 @@ function process_result()
 		else
 			echo "[======= changed out/$pattern.res $NFIXME ======]"
 		fi
+		echo >>$xml "<error message='changed out/$pattern.res $NFIXME'/>"
+		echo >>$xml "<system-out><![CDATA["
+		head >>$xml -n 50 out/$pattern.diff.sav.log
+		echo >>$xml "]]></system-out>"
 		nok="$nok $pattern"
 		echo "$ii" >> "$ERRLIST"
 	else
@@ -167,8 +177,18 @@ function process_result()
 		else
 			echo "[=== no sav ===] out/$pattern.res"
 		fi
+		echo >>$xml "<skipped/>"
+		echo >>$xml "<system-out><![CDATA["
+		cat  >>$xml out/$pattern.res
+		echo >>$xml "]]></system-out>"
 		nos="$nos $pattern"
 	fi
+	if test -s out/$pattern.cmp.err; then
+		echo >>$xml "<system-err><![CDATA["
+		cat  >>$xml out/$pattern.cmp.err
+		echo >>$xml "]]></system-err>"
+	fi
+	echo >>$xml "</testcase>"
 }
 
 need_skip()
@@ -181,6 +201,7 @@ need_skip()
 		else
 			echo "=> $2: [skip]"
 		fi
+		echo >>$xml "<testcase classname='$3' name='$2'><skipped/></testcase>"
 		return 0
 	fi
 	return 1
@@ -274,6 +295,8 @@ fi
 ok=""
 nok=""
 todos=""
+xml="tests-$engine.xml"
+echo >$xml "<testsuites><testsuite>"
 
 # CLEAN the out directory
 rm -rf out/ 2>/dev/null
@@ -286,8 +309,10 @@ for ii in "$@"; do
 	fi
 	f=`basename "$ii" .nit`
 
+	pack=`echo $ii | perl -p -e 's|^../([^/]*)/([a-zA-Z_]*).*|\1.\2| || s|^([a-zA-Z]*)[^_]*_([a-zA-Z]*).*|\1.\2| || s|\W*([a-zA-Z_]*).*|\1|'`
+
 	# Sould we skip the file for this engine?
-	need_skip $f $f && continue
+	need_skip $f $f $pack && continue
 
 	tmp=${ii/../AA}
 	if [ "x$tmp" = "x$ii" ]; then
@@ -301,7 +326,7 @@ for ii in "$@"; do
 		ff="out/$bf"
 
 		# Sould we skip the alternative for this engine?
-		need_skip $bf $bf && continue
+		need_skip $bf $bf $pack && continue
 
 		test -z "$tap" && echo -n "=> $bf: "
 
@@ -335,7 +360,7 @@ END
 		if [ "$ERR" != 0 ]; then
 			test -z "$tap" && echo -n "! "
 			cat "$ff.compile.log" "$ff.cmp.err" > "$ff.res"
-			process_result $bf $bf
+			process_result $bf $bf $pack
 		elif [ -x "./$ff.bin" ]; then
 			test -z "$tap" && echo -n ". "
 			# Execute
@@ -356,7 +381,7 @@ END
 			fi
 			cp "$ff.res"  "$ff.res2"
 			cat "$ff.cmp.err" "$ff.err" "$ff.res2" > "$ff.res"
-			process_result $bf $bf
+			process_result $bf $bf $pack
 
 			if [ -f "$f.args" ]; then
 				fargs=$f.args
@@ -369,7 +394,7 @@ END
 					name="$bf args $cptr"
 
 					# Sould we skip the input for this engine?
-					need_skip $bff "  $name" && continue
+					need_skip $bff "  $name" $pack && continue
 
 					rm -rf "$fff.res" "$fff.err" "$fff.write" 2> /dev/null
 					if [ "x$verbose" = "xtrue" ]; then
@@ -393,14 +418,14 @@ END
 						cp "$fff.res"  "$fff.res2"
 						cat "$fff.err" "$fff.res2" > "$fff.res"
 					fi
-					process_result $bff "  $name"
+					process_result $bff "  $name" $pack
 				done < $fargs
 			fi
 		else
 			test -z "$tap" && echo -n "! "
 			cat "$ff.cmp.err" > "$ff.res"
 			echo "Compilation error" > "$ff.res"
-			process_result $bf "$bf"
+			process_result $bf "$bf" $pack
 		fi
 	done
 done
@@ -434,6 +459,8 @@ if [ "x$ERRLIST" != "x" ]; then
 	fi
 	mv $ERRLIST $ERRLIST_TARGET
 fi
+
+echo >>$xml "</testsuite></testsuites>"
 
 if [ -n "$nok" ]; then
 	exit 1

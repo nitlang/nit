@@ -38,10 +38,10 @@ abstract class AbstractString
 
 	# Create a substring.
 	#
-	#     assert "abcd".substring(1, 2)         ==  "bc"
-	#     assert "abcd".substring(-1, )         ==  "a"
-	#     assert "abcd".substring(1, 0)         ==  ""
-	#     assert "abcd".substring(2, 5)         ==  "cd"
+	#     assert "abcd".substring(1, 2)      ==  "bc"
+	#     assert "abcd".substring(-1, 2)     ==  "a"
+	#     assert "abcd".substring(1, 0)      ==  ""
+	#     assert "abcd".substring(2, 5)      ==  "cd"
 	#
 	# A `from` index < 0 will be replaced by 0.
 	# Unless a `count` value is > 0 at the same time.
@@ -66,9 +66,9 @@ abstract class AbstractString
 
 	# Create a substring from `self` beginning at the `from` position
 	#
-	#     assert "abcd".substring_from(1)	     ==  "bcd"
-	#     assert "abcd".substring_from(-1)	     ==  "abcd"
-	#     assert "abcd".substring_from(2)       ==  "cd"
+	#     assert "abcd".substring_from(1)    ==  "bcd"
+	#     assert "abcd".substring_from(-1)   ==  "abcd"
+	#     assert "abcd".substring_from(2)    ==  "cd"
 	#
 	# As with substring, a `from` index < 0 will be replaced by 0
 	fun substring_from(from: Int): String
@@ -124,7 +124,7 @@ abstract class AbstractString
 	#
 	#     assert "123".to_f        == 123.0
 	#     assert "-1".to_f         == -1.0
-	#     assert "-1.2e-3".to_f    == -1.2e-3
+	#     assert "-1.2e-3".to_f    == -0.0012
 	fun to_f: Float
 	do
 		# Shortcut
@@ -238,6 +238,64 @@ abstract class AbstractString
 			_items[i].output
 			i += 1
 		end
+	end
+
+	# Mangle a string to be a unique string only made of alphanumeric characters
+	fun to_cmangle: String
+	do
+		var res = new Buffer
+		var underscore = false
+		for c in self do
+			if (c >= 'a' and c <= 'z') or (c >='A' and c <= 'Z') then
+				res.add(c)
+				underscore = false
+				continue
+			end
+			if underscore then
+				res.append('_'.ascii.to_s)
+				res.add('d')
+			end
+			if c >= '0' and c <= '9' then
+				res.add(c)
+				underscore = false
+			else if c == '_' then
+				res.add(c)
+				underscore = true
+			else
+				res.add('_')
+				res.append(c.ascii.to_s)
+				res.add('d')
+				underscore = false
+			end
+		end
+		return res.to_s
+	end
+
+	# Escape " \ ' and non printable characters using the rules of literal C strings and characters
+	#
+	#     assert "abAB12<>&".escape_to_c         == "abAB12<>&"
+	#     assert "\n\"'\\".escape_to_c         == "\\n\\\"\\'\\\\"
+	fun escape_to_c: String
+	do
+		var b = new Buffer
+		for c in self do
+			if c == '\n' then
+				b.append("\\n")
+			else if c == '\0' then
+				b.append("\\0")
+			else if c == '"' then
+				b.append("\\\"")
+			else if c == '\'' then
+				b.append("\\\'")
+			else if c == '\\' then
+				b.append("\\\\")
+			else if c.ascii < 32 then
+				b.append("\\{c.ascii.to_base(8, false)}")
+			else
+				b.add(c)
+			end
+		end
+		return b.to_s
 	end
 end
 
@@ -476,7 +534,7 @@ class String
 
 	# The comparison between two strings is done on a lexicographical basis
 	#
-	#     assert "aa" < "b"      ==  true
+	#     assert ("aa" < "b")      ==  true
 	redef fun <(other)
 	do
 		if self.object_id == other.object_id then return false

@@ -50,19 +50,23 @@ class MPDConnection
 
 		var password = password
 		if password != null then
-			write("password {password}\n")
+			write_and_check("password {password}\n")
 		end
 	end
 
 	# Write a command to the MPD server
-	protected fun write(msg: String)
+	protected fun write_and_check(msg: String)
 	do
 		if socket == null then connect
 
 		socket.write(msg)
 		sys.nanosleep(0,5000)
 		var rep = socket.read
-		assert rep.has_prefix("OK") else print "MPD responded {rep}"
+		if not rep.has_prefix("OK") then
+			print "Error: MPD responded {rep}"
+			socket.close
+			socket = null
+		end
 	end
 
 	# Get MPD server status
@@ -72,6 +76,9 @@ class MPDConnection
 
 		var volume: nullable Int = null
 		var state: nullable String = null
+		var elapsed: nullable Int = null
+		var time_at: nullable Int = null
+		var time_total: nullable Int = null
 
 		# get current status
 		socket.write("status\n")
@@ -85,14 +92,21 @@ class MPDConnection
 				if  key == "volume:" then
 					volume = rest.to_i
 					if volume == -1 then volume = null
-				else if  key == "volume:" then
+				else if  key == "state:" then
 					state = rest
+				else if  key == "elapsed:" then
+					elapsed = rest.to_i
+				else if  key == "time:" then
+					var times = rest.split(":")
+					time_at = times[0].to_i
+					time_total = times[1].to_i
 				end
 			end
 		end
 
 		if state != null then
-			return new ServerStatus(volume, state)
+			var status = new ServerStatus(volume, state, elapsed, time_at, time_total)
+			return status
 		else
 			return null
 		end
@@ -117,16 +131,16 @@ class MPDConnection
 		error = "Cannot get volume"
 	end
 
-	fun volume=(vol: Int) do write("setvol {vol}\n")
+	fun volume=(vol: Int) do write_and_check("setvol {vol}\n")
 
 	# Pause music playing on the MPD server
-	fun pause do write("pause\n")
+	fun pause do write_and_check("pause\n")
 
 	# Stop music playing on the MPD server
-	fun stop do write("stop\n")
+	fun stop do write_and_check("stop\n")
 
 	# Play music playing on the MPD server
-	fun play do write("play\n")
+	fun play do write_and_check("play\n")
 
 	# Get information on the currently playing song on the MPD server
 	fun current_song: nullable SongInfo
@@ -136,6 +150,7 @@ class MPDConnection
 		var album: nullable String = null
 		var artist: nullable String = null
 		var title: nullable String = null
+		var time: nullable Int = null
 
 		socket.write("currentsong\n")
 		var rep = socket.read
@@ -151,15 +166,23 @@ class MPDConnection
 					artist = rest
 				else if key == "title:" then
 					title = rest
+				else if key == "time:" then
+					time = rest.to_i
 				end
 			end
 		end
 
-		if album != null and artist != null and title != null then
-			return new SongInfo(album, artist, title)
+		if album != null and artist != null and
+			title != null and time != null then
+			return new SongInfo(album, artist, title, time)
 		else
 			return null
 		end
+	end
+
+	fun load_playlist(name: String)
+	do
+		write_and_check "load \"{name}\""
 	end
 end
 
@@ -168,10 +191,36 @@ class SongInfo
 	var album: String
 	var artist: String
 	var title: String
+	var time: Int
 end
 
 # MPD server status
 class ServerStatus
 	var volume: nullable Int
+
 	var state: String
+	fun playing: Bool do return state == "play"
+	fun stopped: Bool do return state == "stop"
+
+	var elapsed: nullable Int
+	var time_at: nullable Int
+	var time_total: nullable Int
+	fun time_ratio: nullable Float do
+		if time_at == null or time_total == null then return null
+		return time_at.to_f / time_total.to_f
+	end
+
+	redef fun to_s do
+		var vol = "unknown"
+		if volume != null then vol = volume.to_s
+
+		var time_at = time_at
+		var time_total = time_total
+		var elapsed = elapsed
+		if time_at != null and time_total != null and elapsed != null then
+			return "volume: {vol}\nstate: {state}\nelapsed: {elapsed}\ntime_[at|total]: {time_at}:{time_total}\ntime_ratio: {time_ratio.as(not null)}"
+		else
+			return "volume: {vol}\nstate: {state}"
+		end
+	end
 end

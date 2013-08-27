@@ -1,0 +1,1 @@
+--cc-lib-name SDL --cc-lib-name SDL_ttf --cc-lib-name SDL_image

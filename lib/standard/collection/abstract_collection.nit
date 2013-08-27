@@ -84,7 +84,7 @@ interface Collection[E]
 	#     assert [1..3].has_only(1)          == false
 	#     assert [3..3[.has_only(1)          == true # empty collection
 	#
-	# ENSURE `is_empty implies (return) == true`
+	# ENSURE `is_empty implies result == true`
 	fun has_only(item: E): Bool is abstract
 
 	# How many occurrences of `item` are in the collection?
@@ -265,6 +265,13 @@ end
 interface MapRead[K: Object, E]
 	# Get the item at `key`.
 	fun [](key: K): E is abstract
+
+	# Get the item at `key` or return `default` if not in map
+	fun get_or_default(key: K, default: E): E
+	do
+		if has_key(key) then return self[key]
+		return default
+	end
 
 	# Depreciated alias for `keys.has`
 	fun has_key(key: K): Bool do return self.keys.has(key)
