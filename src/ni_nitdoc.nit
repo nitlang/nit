@@ -505,7 +505,6 @@ class NitdocModule
 	private var local_mclasses = new HashSet[MClass]
 	private var intro_mclasses = new HashSet[MClass]
 	private var redef_mclasses = new HashSet[MClass]
-	private var inherited_mclasses = new HashSet[MClass]
 
 	init(mmodule: MModule, ctx: NitdocContext, dot_dir: nullable String) do
 		super(ctx)
@@ -523,15 +522,6 @@ class NitdocModule
 					redef_mclasses.add(mclassdef.mclass)
 				end
 				local_mclasses.add(mclassdef.mclass)
-			end
-		end
-		# get inherited mclasses
-		for m in mmodule.in_importation.greaters do
-			if m == mmodule then continue
-			for mclassdef in m.mclassdefs do
-				if mclassdef.mclass.visibility < ctx.min_visibility then continue
-				if local_mclasses.has(mclassdef.mclass) then continue
-				inherited_mclasses.add(mclassdef.mclass)
 			end
 		end
 	end
@@ -650,36 +640,6 @@ class NitdocModule
 			append("<section class='classes'>")
 			append("<h2 class='section-header'>Refined classes</h2>")
 			for mclass in redefs do mclass.html_full_desc(self)
-			append("</section>")
-		end
-		# inherited properties
-		var inherited = new Array[MClass]
-		inherited.add_all(inherited_mclasses)
-		if inherited_mclasses.length > 0 then
-			var modules2classes = new ArrayMap[MModule, Array[MClass]]
-			for mclass in inherited_mclasses do
-				if not modules2classes.has_key(mclass.intro_mmodule) then modules2classes[mclass.intro_mmodule] = new Array[MClass]
-				modules2classes[mclass.intro_mmodule].add(mclass)
-			end
-			append("<section class='classes'>")
-			append("<h2 class='section-header'>Inherited Classes</h2>")
-			var mmodules = new Array[MModule]
-			mmodules.add_all(modules2classes.keys)
-			var msorter = new MModuleNameSorter
-			msorter.sort(mmodules)
-			for m in mmodules do
-				var mclasses = modules2classes[m]
-				class_sorter.sort(mclasses)
-				append("<p>Defined in ")
-				m.html_link(self)
-				append(": ")
-				for i in [0..mclasses.length[ do
-					var mclass = mclasses[i]
-					mclass.html_link(self)
-					if i <= mclasses.length - 1 then append(", ")
-				end
-			append("</p>")
-			end
 			append("</section>")
 		end
 	end
@@ -1396,13 +1356,6 @@ redef class MClass
 			page.append("</span></h3>")
 			html_info(page)
 			html_comment(page)
-			if is_redef and not redefs.is_empty then
-				page.append("<div class='refinements'>")
-				for mpropdef in redefs do
-					mpropdef.html_full_desc(page, self)
-				end
-				page.append("</div>")
-			end
 			page.append("</article>")
 		end
 	end
