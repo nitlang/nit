@@ -221,7 +221,11 @@ button.github img {
 
 /* Comment editing */
 
-.description textarea {
+.commentBox {
+	text-align: right;
+}
+
+.commentBox textarea {
 	font-family: monospace;
 	font-size: 1em;
 	width: 100%;
@@ -231,11 +235,12 @@ button.github img {
 	overflow-y: hidden;
 }
 
-.commentBox {
-	text-align: right;
+.commentBox .preview {
+	margin: 0 15px;
+	cursor: pointer;
 }
 
-.commentBox .cancel{
+.commentBox .cancel {
 	background-color: #b33630;
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#b33630), to(#9f312c)); /* Saf4+, Chrome */
 	background-image: -webkit-linear-gradient(top, #b33630, #9f312c); /* Chrome 10+, Saf5.1+ */
@@ -250,11 +255,11 @@ button.github img {
 span.noComment a {
 	color: #0D8921;
 }
-a.newComment: hover {
+span.noComment a:hover {
 	color: #333;
 }
 
-pre.locked {
+div.comment.locked {
 	color: gray;
 }
 p.locked {

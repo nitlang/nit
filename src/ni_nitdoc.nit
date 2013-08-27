@@ -46,6 +46,9 @@ class NitdocContext
 	private var opt_custom_overview_text: OptionString = new OptionString("Text displayed as introduction of Overview page before the modules list", "--custom-overview-text")
 	private var opt_custom_footer_text: OptionString = new OptionString("Text displayed as footer of all pages", "--custom-footer-text")
 
+	private var opt_github_base: OptionString = new OptionString("The branch (or git ref) edited commits will be pulled into (ex: octocat:master)", "--github-base")
+	private var opt_github_head: OptionString = new OptionString("The reference branch name used to create pull requests (ex: master)", "--github-head")
+
 	init do
 		toolcontext.option_context.add_option(opt_dir)
 		toolcontext.option_context.add_option(opt_source)
@@ -56,6 +59,8 @@ class NitdocContext
 		toolcontext.option_context.add_option(opt_custom_footer_text)
 		toolcontext.option_context.add_option(opt_custom_overview_text)
 		toolcontext.option_context.add_option(opt_custom_menu_items)
+		toolcontext.option_context.add_option(opt_github_base)
+		toolcontext.option_context.add_option(opt_github_head)
 		toolcontext.process_options
 		self.arguments = toolcontext.option_context.rest
 
@@ -205,6 +210,7 @@ abstract class NitdocPage
 		append("<meta charset='utf-8'/>")
 		append("<script type='text/javascript' src='scripts/jquery-1.7.1.min.js'></script>")
 		append("<script type='text/javascript' src='scripts/ZeroClipboard.min.js'></script>")
+		append("<script type='text/javascript' src='scripts/Markdown.Converter.js'></script>")
 		append("<script type='text/javascript' src='quicksearch-list.js'></script>")
 		append("<script type='text/javascript' src='scripts/base64.js'></script>")
 		append("<script type='text/javascript' src='scripts/github.js'></script>")
@@ -283,7 +289,12 @@ abstract class NitdocPage
 		append("<head>")
 		head
 		append("</head>")
-		append("<body>")
+		append("<body")
+		if not ctx.opt_github_base.value == null and not ctx.opt_github_head.value == null then
+			append(" data-github-base='{ctx.opt_github_base.value.as(not null)}'")
+			append(" data-github-head='{ctx.opt_github_head.value.as(not null)}'")
+		end
+		append(">")
 		header
 		append("<div class='page'>")
 		content
@@ -525,7 +536,7 @@ class NitdocModule
 	end
 
 	redef fun title do
-		if mbuilder.mmodule2nmodule.has_key(mmodule) then
+		if mbuilder.mmodule2nmodule.has_key(mmodule) and not mbuilder.mmodule2nmodule[mmodule].short_comment.is_empty then
 			var nmodule = mbuilder.mmodule2nmodule[mmodule]
 			return "{mmodule.name} module | {nmodule.short_comment}"
 		else
@@ -616,11 +627,7 @@ class NitdocModule
 		mmodule.html_signature(self)
 		append("</div>")
 		# comment
-		var nmodule = ctx.mbuilder.mmodule2nmodule[mmodule]
-		append("<section class='description'>")
-		if not nmodule.full_comment.is_empty then append("<div>{nmodule.full_comment}</div>")
-		process_generate_dot
-		append("</section>")
+		mmodule.html_comment(self)
 		# classes
 		var class_sorter = new MClassNameSorter
 		# intro
@@ -907,9 +914,7 @@ class NitdocClass
 		mclass.html_namespace(self)
 		append("{mclass.html_short_signature}</div>")
 		# comment
-		var nclass = ctx.mbuilder.mclassdef2nclassdef[mclass.intro]
-		append("<section class='description'>")
-		if nclass isa AStdClassdef and not nclass.full_comment.is_empty then append("<div>{nclass.full_comment}</div>")
+		mclass.html_comment(self)
 		process_generate_dot
 		append("</section>")
 		# concerns
@@ -964,6 +969,7 @@ class NitdocClass
 		# properties
 		var prop_sorter = new MPropDefNameSorter
 		var lmmodule = new List[MModule]
+		var nclass = ctx.mbuilder.mclassdef2nclassdef[mclass.intro]
 		# virtual and formal types
 		var local_vtypes = new Array[MVirtualTypeDef]
 		for vt in vtypes do if not inherited.has(vt) then local_vtypes.add(vt)
@@ -1197,12 +1203,23 @@ redef class MModule
 	end
 
 	# Return the full comment of the module decorated with html
-	fun html_full_comment(page: NitdocPage) do
+	private fun html_comment(page: NitdocPage) do
+		page.append("<div class='description'>")
 		if page.ctx.mbuilder.mmodule2nmodule.has_key(self) then
-			page.append("<div id='description'>")
-			page.append("<div>{page.ctx.mbuilder.mmodule2nmodule[self].full_comment}</div>")
-			page.append("</div>")
+			var nmodule = page.ctx.mbuilder.mmodule2nmodule[self]
+			page.append("<textarea class='baseComment' data-comment-namespace='{full_name}' data-comment-location='{nmodule.doc_location.to_s}'>{nmodule.full_comment}</textarea>")
+			if nmodule.full_comment == "" then
+				page.append("<p class='info inheritance'>")
+				page.append("<span class=\"noComment\">no comment for </span>")
+			else
+				page.append("<div class='comment'>{nmodule.full_markdown}</div>")
+				page.append("<p class='info inheritance'>")
+			end
+			page.append("definition in ")
+			self.html_full_namespace(page)
+			page.append(" {page.show_source(nmodule.location)}</p>")
 		end
+		page.append("</div>")
 	end
 
 	private fun has_mclassdef_for(mclass: MClass): Bool do
@@ -1369,35 +1386,56 @@ redef class MClass
 		page.append("{html_short_signature}</div>")
 	end
 
-	private fun html_comment(page: NitdocModule) do
-		page.mmodule.linearize_mclassdefs(mclassdefs)
+	private fun html_comment(page: NitdocPage) do
 		page.append("<div class='description'>")
-		# comments for each mclassdef contained in current mmodule
-		for mclassdef in mclassdefs do
-			if not mclassdef.is_intro and not page.mmodule.mclassdefs.has(mclassdef) then continue
-			if page.ctx.mbuilder.mclassdef2nclassdef.has_key(mclassdef) then
-				var nclass = page.ctx.mbuilder.mclassdef2nclassdef[mclassdef]
+		if page isa NitdocModule then
+			page.mmodule.linearize_mclassdefs(mclassdefs)
+			# comments for each mclassdef contained in current mmodule
+			for mclassdef in mclassdefs do
+				if not mclassdef.is_intro and not page.mmodule.mclassdefs.has(mclassdef) then continue
+				if page.ctx.mbuilder.mclassdef2nclassdef.has_key(mclassdef) then
+					var nclass = page.ctx.mbuilder.mclassdef2nclassdef[mclassdef]
+					if nclass isa AStdClassdef then
+						page.append("<textarea class='baseComment' data-comment-namespace='{mclassdef.mmodule.full_name}::{name}' data-comment-location='{nclass.doc_location.to_s}'>{nclass.full_comment}</textarea>")
+						if nclass.full_comment == "" then
+							page.append("<p class='info inheritance'>")
+							page.append("<span class=\"noComment\">no comment for </span>")
+						else
+							page.append("<div class='comment'>{nclass.full_markdown}</div>")
+							page.append("<p class='info inheritance'>")
+						end
+						if mclassdef.is_intro then
+							page.append("introduction in ")
+						else
+							page.append("refinement in ")
+						end
+						mclassdef.mmodule.html_full_namespace(page)
+						page.append(" {page.show_source(nclass.location)}</p>")
+					end
+				end
+			end
+		else
+			# comments for intro
+			if page.ctx.mbuilder.mclassdef2nclassdef.has_key(intro) then
+				var nclass = page.ctx.mbuilder.mclassdef2nclassdef[intro]
 				if nclass isa AStdClassdef then
+					page.append("<textarea class='baseComment' data-comment-namespace='{intro.mmodule.full_name}::{name}' data-comment-location='{nclass.doc_location.to_s}'>{nclass.full_comment}</textarea>")
 					if nclass.full_comment == "" then
 						page.append("<p class='info inheritance'>")
 						page.append("<span class=\"noComment\">no comment for </span>")
 					else
-						page.append("<div>{nclass.full_comment}</div>")
+						page.append("<div class='comment'>{nclass.full_markdown}</div>")
 						page.append("<p class='info inheritance'>")
 					end
-					if mclassdef.is_intro then
-						page.append("introduction in ")
-					else
-						page.append("refinement in ")
-					end
-					mclassdef.mmodule.html_full_namespace(page)
+					page.append("introduction in ")
+					intro.mmodule.html_full_namespace(page)
 					page.append(" {page.show_source(nclass.location)}</p>")
 				end
 			end
 		end
 		page.append("</div>")
 	end
-	
+
 	private fun html_redefs(page: NitdocModule) do
 		page.mmodule.linearize_mclassdefs(mclassdefs)
 		page.append("<div class='refinements'>")
@@ -1536,11 +1574,12 @@ redef class MPropDef
 		if not is_intro then
 			if page.ctx.mbuilder.mpropdef2npropdef.has_key(mproperty.intro) then
 				var intro_nprop = page.ctx.mbuilder.mpropdef2npropdef[mproperty.intro]
+				page.append("<textarea class='baseComment' data-comment-namespace='{mproperty.intro.mclassdef.mmodule.full_name}::{mproperty.intro.mclassdef.mclass.name}::{mproperty.name}' data-comment-location='{intro_nprop.doc_location.to_s}'>{intro_nprop.full_comment}</textarea>")
 				if intro_nprop.full_comment.is_empty then
 					page.append("<p class='info inheritance'>")
 					page.append("<span class=\"noComment\">no comment for </span>")
 				else
-					page.append("<div>{intro_nprop.full_comment}</div>")
+					page.append("<div class='comment'>{intro_nprop.full_markdown}</div>")
 					page.append("<p class='info inheritance'>")
 				end
 				page.append("introduction in ")
@@ -1550,16 +1589,17 @@ redef class MPropDef
 		end
 		if page.ctx.mbuilder.mpropdef2npropdef.has_key(self) then
 			var nprop = page.ctx.mbuilder.mpropdef2npropdef[self]
+			page.append("<textarea class='baseComment' data-comment-namespace='{mclassdef.mmodule.full_name}::{mclassdef.mclass.name}::{mproperty.name}' data-comment-location='{nprop.doc_location.to_s}'>{nprop.full_comment}</textarea>")
 			if nprop.full_comment == "" then
 				page.append("<p class='info inheritance'>")
 				page.append("<span class=\"noComment\">no comment for </span>")
 			else
-				page.append("<div>{nprop.full_comment}</div>")
+				page.append("<div class='comment'>{nprop.full_markdown}</div>")
 				page.append("<p class='info inheritance'>")
 			end
 			if is_intro then
 				page.append("introduction in ")
-			else 
+			else
 				page.append("redefinition in ")
 			end
 			mclassdef.html_namespace(page)
@@ -1596,7 +1636,7 @@ redef class MMethodDef
 		html_comment(page)
 		page.append("</article>")
 	end
-	
+
 	redef fun html_info(page, ctx) do
 		page.append("<div class='info'>")
 		if mproperty.visibility < public_visibility then page.append("{mproperty.visibility.to_s} ")
@@ -1678,45 +1718,97 @@ end
 # Nodes redefs
 #
 
+redef class ADoc
+	private fun short_comment: String do
+		return n_comment.first.text.substring_from(2).replace("\n", "").html_escape
+	end
+
+	private fun full_comment: String do
+		var res = new Buffer
+		for t in n_comment do
+			var text = t.text
+			text = text.substring_from(1)
+			if text.first == ' ' then text = text.substring_from(1)
+			res.append(text.html_escape)
+		end
+		return res.to_s
+	end
+end
+
 redef class AModule
 	private fun short_comment: String do
 		if n_moduledecl != null and n_moduledecl.n_doc != null then
-			return n_moduledecl.n_doc.n_comment.first.text.substring_from(2).replace("\n", "").html_escape
+			return n_moduledecl.n_doc.short_comment
 		end
 		return ""
 	end
 
 	private fun full_comment: String do
+		if n_moduledecl != null and n_moduledecl.n_doc != null then
+			return n_moduledecl.n_doc.full_comment
+		end
+		return ""
+	end
+
+	private fun full_markdown: String do
 		if n_moduledecl != null and n_moduledecl.n_doc != null then
 			return n_moduledecl.n_doc.full_markdown.html
 		end
 		return ""
 	end
+
+	private fun doc_location: Location do
+		if n_moduledecl != null and n_moduledecl.n_doc != null then
+			return n_moduledecl.n_doc.location
+		end
+		return location
+	end
 end
 
 redef class AStdClassdef
 	private fun short_comment: String do
-		if n_doc != null then return n_doc.n_comment.first.text.substring_from(2).replace("\n", "").html_escape
+		if n_doc != null then return n_doc.short_comment
 		return ""
 	end
 
 	private fun full_comment: String do
+		if n_doc != null then return n_doc.full_comment
+		return ""
+	end
+
+	private fun full_markdown: String do
 		if n_doc != null then return n_doc.full_markdown.html
 		return ""
+	end
+
+	private fun doc_location: Location do
+		if n_doc != null then return n_doc.location
+		return location
 	end
 end
 
 redef class APropdef
 	private fun short_comment: String do
-		if n_doc != null then return n_doc.n_comment.first.text.substring_from(2).replace("\n", "").html_escape
+		if n_doc != null then return n_doc.short_comment
 		return ""
 	end
 
 	private fun full_comment: String do
+		if n_doc != null then return n_doc.full_comment
+		return ""
+	end
+
+	private fun full_markdown: String do
 		if n_doc != null then return n_doc.full_markdown.html
 		return ""
 	end
+
+	private fun doc_location: Location do
+		if n_doc != null then return n_doc.location
+		return location
+	end
 end
+
 
 var nitdoc = new NitdocContext
 nitdoc.generate_nitdoc
