@@ -20,11 +20,6 @@ var currentIndex = -1;
 $(document).ready(function() {
 
 	/*
-	* Highlight the spoted element
-	*/
-	highlightBlock(currentAnchor());
-
-	/*
 	* Nav block folding
 	*/
 
@@ -363,13 +358,6 @@ $(document).ready(function() {
 		})
 	);
 
-	/*
-	* Anchors jumps
-	*/
-	$("a[href*='#']").click( function() {
-		highlightBlock($(this).attr("href").split(/#/)[1]);
-	});
-
 	//Preload filter fields with query string
 	preloadFilters();
 
@@ -415,20 +403,3 @@ function preloadFilters() {
 
 }
 
-/* Hightlight the spoted block */
-function highlightBlock(a) {
-	if(a == undefined) {
-		return;
-	}
-
-	$(".highlighted").removeClass("highlighted");
-
-	var target = $("#" + a);
-
-	if(target.is("article")) {
-		target.parent().addClass("highlighted");
-	}
-
-	target.addClass("highlighted");
-	target.show();
-}

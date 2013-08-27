@@ -315,7 +315,7 @@ nav ul li span,
 	color: #555;
 }
 
-.content article.highlighted {
+.content article:target {
 	background-color: #FFF3C2;
 	color: black;
 }
