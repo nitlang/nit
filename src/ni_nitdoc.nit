@@ -576,7 +576,7 @@ class NitdocModule
 		append("<h3>Module Hierarchy</h3>")
 		var dependencies = new Array[MModule]
 		for dep in mmodule.in_importation.greaters do
-			if dep == mmodule or dep.public_owner != null then continue
+			if dep == mmodule or dep.direct_owner == mmodule or dep.public_owner == mmodule then continue
 			dependencies.add(dep)
 		end
 		if mmodule.in_nesting.direct_greaters.length > 0 then
@@ -590,7 +590,7 @@ class NitdocModule
 		var clients = new Array[MModule]
 		for dep in mmodule.in_importation.smallers do
 			if dep.name == "<main>" then continue
-			if dep == mmodule or dep.public_owner != null then continue
+			if dep == mmodule then continue
 			clients.add(dep)
 		end
 		if clients.length > 0 then
@@ -620,6 +620,7 @@ class NitdocModule
 		append("</div>")
 		# comment
 		mmodule.html_comment(self)
+		process_generate_dot
 		# classes
 		var class_sorter = new MClassNameSorter
 		# intro
@@ -649,17 +650,26 @@ class NitdocModule
 		var poset = new POSet[MModule]
 		for mmodule in self.mmodule.in_importation.poset do
 			if mmodule.name == "<main>" then continue
-			if mmodule.public_owner != null then continue
+			#if mmodule.public_owner != null then continue
 			if not mmodule.in_importation < self.mmodule and not self.mmodule.in_importation < mmodule and mmodule != self.mmodule then continue
 			poset.add_node(mmodule)
 			for omodule in mmodule.in_importation.poset do
 				if mmodule == omodule then continue
 				if omodule.name == "<main>" then continue
-				if omodule.public_owner != null then continue
+				if not omodule.in_importation < self.mmodule and not self.mmodule.in_importation < omodule then continue
+				if omodule.in_importation < mmodule then
+					poset.add_node(omodule)
+					poset.add_edge(omodule, mmodule)
+				end
 				if mmodule.in_importation < omodule then
 					poset.add_node(omodule)
 					poset.add_edge(mmodule, omodule)
 				end
+				#if omodule.public_owner != null then continue
+				#if mmodule.in_importation < omodule then
+					#poset.add_node(omodule)
+					#poset.add_edge(mmodule, omodule)
+				#end
 			end
 		end
 		# build graph
