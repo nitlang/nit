@@ -252,13 +252,6 @@ button.github img {
 	border: 1px solid #9f312c;
 }
 
-span.noComment a {
-	color: #0D8921;
-}
-span.noComment a:hover {
-	color: #333;
-}
-
 div.comment.locked {
 	color: gray;
 }

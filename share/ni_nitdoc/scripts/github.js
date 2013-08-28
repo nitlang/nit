@@ -449,25 +449,28 @@ function GitHubUI() {
 
 		// Add hidden <pre> to empty commits
 		$("span.noComment").each(function() {
+			$(this).addClass("editComment");
 			var baseComment = $(this).parent().prev();
 			var location = ui.parseLocation(baseComment.attr("data-comment-location"));
 			location.lend = location.lstart;
 			var locString = "../" + location.path + ":" + location.lstart + "," + location.tabpos + "--" + location.lend + ",0";
 			baseComment.attr("data-comment-location", locString);
-			$(this).html("<a class='noComment'>add comment</a> for ");
+			$(this).html("<a class='editComment noComment'>add comment</a> for ");
 		});
-		$('span.noComment a').each(function() {
+		$('.description div.comment').each(function() {
+			var p = $(this).next();
+			p.prepend("<span class='editComment'><a class='editComment'>edit comment</a> for </span>")
+		});
+		$('a.editComment').each(function() {
 			$(this).css("cursor", "pointer")
 			$(this).click(function() {
 				$(this).parent().hide();
-				ui.openCommentBox($(this).parent().parent().prev());
-			});
-		});
-		$('.description div.comment').each(function() {
-			$(this).css("cursor", "pointer")
-			$(this).click(function() {
-				ui.openCommentBox($(this).prev());
-				$(this).hide();
+				if(!$(this).hasClass("noComment")) {
+					$(this).parent().parent().prev().hide();
+					ui.openCommentBox($(this).parent().parent().prev().prev());
+				} else {
+					ui.openCommentBox($(this).parent().parent().prev());
+				}
 			});
 		});
 
@@ -501,7 +504,6 @@ function GitHubUI() {
 	}
 
 	this.openCommentBox = function(baseArea) {
-		console.log(baseArea);
 		this.openedComments += 1;
 		// get text and format it
 		var formated = "";
@@ -563,11 +565,12 @@ function GitHubUI() {
 
 	this.closeCommentBox = function(commentBox) {
 		this.openedComments -= 1;
-		if(!!commentBox.parent().find(".baseComment").text()) {
-			commentBox.parent().find("div.comment").show();
-		} else if(commentBox.hasClass("newComment")) {
-			commentBox.next().find("span.noComment").show();
+		var target = commentBox.next();
+		if(!commentBox.hasClass("newComment")) {
+			target.show();
+			target = target.next();
 		}
+		target.find("span.editComment").show();
 		commentBox.remove();
 	}
 
