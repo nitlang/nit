@@ -800,7 +800,7 @@ function GitHubUI() {
 			for(var i = 0; i < commentLines.length; i++) {
 				var line = commentLines[i];
 				var tab = location.tabpos > 1 ? "\t" : "";
-				res += tab + "# " + line + "\n";
+				res += tab + (line.length > 0 ? "# " : "#") + line + "\n";
 			}
 		}
 		// copy lines fron lend to end
