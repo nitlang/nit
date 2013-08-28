@@ -141,7 +141,7 @@ $(document).ready(function() {
 							query = query.replace(/&/gi, "&&");
 
 							var index = 0;
-							var regexp = new RegExp("^" + query, "i");
+							var regexp = new RegExp("^" + query);
 							var overflow = 0;
 							for(var entry in entries) {
 								var result = entry.match(regexp);
