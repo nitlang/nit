@@ -250,22 +250,22 @@ class NitIndex
 				end
 			end
 			pager.addn("{mclass.prototype}")
-			if mclass.in_hierarchy(mainmodule).direct_greaters.length > 1 then
+			if not mclass.in_hierarchy(mainmodule).direct_greaters.is_empty then
 				var supers = mclass.in_hierarchy(mainmodule).direct_greaters.to_a
 				pager.addn(" super ")
 				for i in [0..supers.length[ do
 					if supers[i] == mclass then continue
-					pager.addn(supers[i].name)
+					pager.addn("{supers[i].name}{supers[i].signature}")
 					if i < mclass.in_hierarchy(mainmodule).direct_greaters.length -1 then pager.addn(", ")
 				end
-				pager.add("\n")
 			end
+			pager.add("\n")
 			# formal types
 			if not mclass.parameter_types.is_empty then
 				pager.add("## formal types".bold)
 				for ft, bound in mclass.parameter_types do
 					pager.add("")
-					pager.add("\t{ft.to_s.green}: {bound}")
+					pager.add("\t{ft.to_s.green}: {bound.to_console}")
 				end
 				pager.add("")
 			end
@@ -313,7 +313,7 @@ class NitIndex
 								end
 							end
 						end
-						pager.add("\t{mpropdef}")
+						pager.add("\t{mpropdef.to_console}")
 						mainmodule.linearize_mpropdefs(mpropdef.mproperty.mpropdefs)
 						var previous_defs = new Array[MPropDef]
 						for def in mpropdef.mproperty.mpropdefs do
@@ -386,7 +386,7 @@ class NitIndex
 						for comment in nprop.n_doc.comment do pager.add("\t{comment.green}")
 					end
 				end
-				pager.add("\t{mprop.intro}")
+				pager.add("\t{mprop.intro.to_console}")
 				pager.add("\t\t" + "introduced in {mprop.intro_mclassdef.namespace.bold}".gray)
 				var mpropdefs = mprop.mpropdefs
 				mainmodule.linearize_mpropdefs(mpropdefs)
@@ -454,11 +454,16 @@ redef class MClass
 	# return the generic signature of the class
 	#	[E, F]
 	private fun signature: String do
+		var res = new Buffer
 		if arity > 0 then
-			return "[{intro.parameter_names.join(", ")}]"
-		else
-			return ""
+			res.append("[")
+			for i in [0..intro.parameter_names.length[ do
+				res.append(intro.parameter_names[i])
+				if i < intro.parameter_names.length - 1 then res.append(", ")
+			end
+			res.append("]")
 		end
+		return res.to_s
 	end
 
 	# return the prototype of the class
@@ -485,7 +490,7 @@ redef class MClassDef
 end
 
 redef class MProperty
-	redef fun to_s do
+	fun to_console: String do
 		if visibility.to_s == "public" then return name.green
 		if visibility.to_s == "private" then return name.red
 		if visibility.to_s == "protected" then return name.yellow
@@ -493,13 +498,17 @@ redef class MProperty
 	end
 end
 
+redef class MPropDef
+	fun to_console: String is abstract
+end
+
 redef class MMethodDef
-	redef fun to_s do
+	redef fun to_console do
 		var res = new Buffer
 		if not is_intro then res.append("redef ")
 		if not mproperty.is_init then res.append("fun ")
-		res.append(mproperty.to_s.bold)
-		if msignature != null then res.append(msignature.to_s)
+		res.append(mproperty.to_console.bold)
+		if msignature != null then res.append(msignature.to_console)
 		# FIXME: modifiers should be accessible via the model
 		#if self isa ADeferredMethPropdef then ret = "{ret} is abstract"
 		#if self isa AInternMethPropdef then ret = "{ret} is intern"
@@ -509,52 +518,56 @@ redef class MMethodDef
 end
 
 redef class MVirtualTypeDef
-	redef fun to_s do
+	redef fun to_console do
 		var res = new Buffer
 		res.append("type ")
-		res.append(mproperty.to_s.bold)
-		res.append(": {bound.to_s}")
+		res.append(mproperty.to_console.bold)
+		res.append(": {bound.to_console}")
 		return res.to_s
 	end
 end
 
 redef class MSignature
-	redef fun to_s do
+	redef fun to_console do
 		var res = new Buffer
 		if not mparameters.is_empty then
 			res.append("(")
 			for i in [0..mparameters.length[ do
-				res.append(mparameters[i].to_s)
+				res.append(mparameters[i].to_console)
 				if i < mparameters.length - 1 then res.append(", ")
 			end
 			res.append(")")
 		end
 		if return_mtype != null then
-			res.append(": {return_mtype.to_s}")
+			res.append(": {return_mtype.to_console}")
 		end
 		return res.to_s
 	end
 end
 
 redef class MParameter
-	redef fun to_s do
+	fun to_console: String do
 		var res = new Buffer
-		res.append("{name}: {mtype}")
+		res.append("{name}: {mtype.to_console}")
 		if is_vararg then res.append("...")
 		return res.to_s
 	end
 end
 
+redef class MType
+	fun to_console: String do return self.to_s
+end
+
 redef class MNullableType
-	redef fun to_s do return "nullable {mtype}"
+	redef fun to_console do return "nullable {mtype.to_console}"
 end
 
 redef class MGenericType
-	redef fun to_s do
+	redef fun to_console do
 		var res = new Buffer
 		res.append("{mclass.name}[")
 		for i in [0..arguments.length[ do
-			res.append(arguments[i].to_s)
+			res.append(arguments[i].to_console)
 			if i < arguments.length - 1 then res.append(", ")
 		end
 		res.append("]")
@@ -563,11 +576,11 @@ redef class MGenericType
 end
 
 redef class MParameterType
-	redef fun to_s do return mclass.intro.parameter_names[rank]
+	redef fun to_console do return mclass.intro.parameter_names[rank]
 end
 
 redef class MVirtualType
-	redef fun to_s do return mproperty.intro.to_s
+	redef fun to_console do return mproperty.name
 end
 
 redef class ADoc
