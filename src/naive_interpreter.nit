@@ -1401,10 +1401,7 @@ redef class AStringFormExpr
 	do
 		var txt = self.value.as(not null)
 		var nat = v.native_string_instance(txt)
-		var res = new MutableInstance(v.mainmodule.get_primitive_class("String").mclass_type)
-		v.init_instance(res)
-		v.send(v.force_get_primitive_method("from_cstring", res.mtype), [res, nat])
-		v.check_init_instance(res)
+		var res = v.send(v.force_get_primitive_method("to_s", nat.mtype), [nat]).as(not null)
 		return res
 	end
 end

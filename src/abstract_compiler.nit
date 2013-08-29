@@ -807,13 +807,11 @@ abstract class AbstractCompilerVisitor
 		self.add("if ({name}) \{")
 		self.add("{res} = {name};")
 		self.add("\} else \{")
-		var nat = self.new_var(self.get_class("NativeString").mclass_type)
+		var native_mtype = self.get_class("NativeString").mclass_type
+		var nat = self.new_var(native_mtype)
 		self.add("{nat} = \"{string.escape_to_c}\";")
-		var res2 = self.init_instance(mtype)
-		self.add("{res} = {res2};")
 		var length = self.int_instance(string.length)
-		self.send(self.get_property("with_native", mtype), [res, nat, length])
-		self.check_init_instance(res, mtype)
+		self.add("{res} = {self.monomorphic_send(self.get_property("to_s_with_length", native_mtype), native_mtype, [nat, length]).as(not null)};")
 		self.add("{name} = {res};")
 		self.add("\}")
 		return res
