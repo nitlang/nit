@@ -18,7 +18,7 @@ C implementation of md5::String::md5_digest
 
 Imported methods signatures:
 	char * String_to_cstring( String recv ) for string::String::to_cstring
-	String new_String_from_cstring( char * str ) for string::String::from_cstring
+	String NativeString_to_s( char * str ) for string::NativeString::to_s
 */
 String String_md5___impl( String recv )
 {
@@ -38,7 +38,7 @@ String String_md5___impl( String recv )
 		sprintf(hex_output + di * 2, "%02x", digest[di]);
 	hex_output[ 32 ] = '\0';
 
-	return new_String_from_cstring( hex_output );
+	return NativeString_to_s( hex_output );
 }
 
 

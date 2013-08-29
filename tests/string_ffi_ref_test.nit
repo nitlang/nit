@@ -28,13 +28,13 @@ class StringTest
 		referenced_str = null
 	end
 
-	fun get_c_string import String::items, String::from_cstring, String::copy_from_native, StringTest::ref_test, StringTest::copy_test `{
+	fun get_c_string import String::items, NativeString::to_s, NativeString::to_s_with_copy, StringTest::ref_test, StringTest::copy_test `{
 		char* string = "This is a test string";
 
-		String ref_string = new_String_from_cstring(string);
+		String ref_string = NativeString_to_s(string);
 		StringTest_ref_test(recv, ref_string);
 
-		String copy_string = new_String_copy_from_native(string);
+		String copy_string = NativeString_to_s_with_copy(string);
 		StringTest_copy_test(recv, copy_string);
 
 		int same_refs = String_items(copy_string) == String_items(ref_string);

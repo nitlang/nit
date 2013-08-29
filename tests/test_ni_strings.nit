@@ -15,18 +15,18 @@
 # limitations under the License.
 
 class A
-	fun get_str_from_nstr( nstr : NativeString ) : String is extern import String::from_cstring
-	fun get_str_from_nstr_with_len( nstr : NativeString ) : String is extern import String::with_native, NativeString::cstring_length
+	fun get_str_from_nstr( nstr : NativeString ) : String is extern import NativeString::to_s
+	fun get_str_from_nstr_with_len( nstr : NativeString ) : String is extern import NativeString::to_s_with_length, NativeString::cstring_length
 
 	fun get_nstr_from_str( str : String ) : NativeString is extern import String::to_cstring
 
-	fun get_something : String is extern import String::from_cstring
+	fun get_something : String is extern import NativeString::to_s
 end
 
 var a = new A
 print a.get_str_from_nstr( "hello world...".to_cstring )
 print a.get_str_from_nstr_with_len( "hello world?".to_cstring )
-print new String.from_cstring( a.get_nstr_from_str( "hello world!" ) )
+print a.get_nstr_from_str( "hello world!" ).to_s
 
 
 var something = a.get_something # expects "something"

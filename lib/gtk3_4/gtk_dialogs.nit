@@ -51,7 +51,7 @@ extern GtkAboutDialog `{GtkAboutDialog *`}
 	`}
 
 	fun program_name : String is extern`{
-		return new_String_from_cstring( (char *)gtk_about_dialog_get_program_name( recv ) );
+		return NativeString_to_s( (char *)gtk_about_dialog_get_program_name( recv ) );
 	`}
 
 	fun program_name=( name : String ) is extern import String::to_cstring`{
@@ -59,7 +59,7 @@ extern GtkAboutDialog `{GtkAboutDialog *`}
 	`}
 
 	fun version : String is extern`{
-		return new_String_from_cstring( (char *)gtk_about_dialog_get_version( recv ) );
+		return NativeString_to_s( (char *)gtk_about_dialog_get_version( recv ) );
 	`}
 
 	fun version=( v : String ) is extern import String::to_cstring`{
@@ -67,7 +67,7 @@ extern GtkAboutDialog `{GtkAboutDialog *`}
 	`}
 
 	fun copyright : String is extern`{
-		return new_String_from_cstring( (char *)gtk_about_dialog_get_copyright( recv ) );
+		return NativeString_to_s( (char *)gtk_about_dialog_get_copyright( recv ) );
 	`}
 
 	fun copyright=( c : String ) is extern import String::to_cstring`{
@@ -75,7 +75,7 @@ extern GtkAboutDialog `{GtkAboutDialog *`}
 	`}
 
 	fun comments : String is extern`{
-		return new_String_from_cstring( (char *)gtk_about_dialog_get_comments( recv ) );
+		return NativeString_to_s( (char *)gtk_about_dialog_get_comments( recv ) );
 	`}
 
 	fun comments=( com : String ) is extern import String::to_cstring`{
@@ -83,7 +83,7 @@ extern GtkAboutDialog `{GtkAboutDialog *`}
 	`}
 
 	fun license : String is extern`{
-		return new_String_from_cstring( (char *)gtk_about_dialog_get_license( recv ) );
+		return NativeString_to_s( (char *)gtk_about_dialog_get_license( recv ) );
 	`}
 
 	fun license=( li : String ) is extern import String::to_cstring`{
@@ -93,7 +93,7 @@ extern GtkAboutDialog `{GtkAboutDialog *`}
 	#license_type
 
 	fun website : String is extern`{
-		return new_String_from_cstring( (char *)gtk_about_dialog_get_website( recv ) );
+		return NativeString_to_s( (char *)gtk_about_dialog_get_website( recv ) );
 	`}
 
 	fun website=( link : String ) is extern import String::to_cstring`{
@@ -101,7 +101,7 @@ extern GtkAboutDialog `{GtkAboutDialog *`}
 	`}
 
 	fun website_label : String is extern`{
-		return new_String_from_cstring( (char *) gtk_about_dialog_get_website_label( recv ) );
+		return NativeString_to_s( (char *) gtk_about_dialog_get_website_label( recv ) );
 	`}
 
 	fun website_label=( link_label : String ) is extern import String::to_cstring`{
@@ -110,7 +110,7 @@ extern GtkAboutDialog `{GtkAboutDialog *`}
 
 	#TODO
 	#fun authors : String is extern`{
-	#		return new_String_from_cstring( gtk_about_dialog_get_authors( recv ) );
+	#		return NativeString_to_s( gtk_about_dialog_get_authors( recv ) );
 	#`}
 
 	#TODO
@@ -140,7 +140,7 @@ extern GtkAppChooserDialog `{GtkAppChooserDialog *`}
 	fun widget : GtkWidget is extern `{ return gtk_app_chooser_dialog_get_widget( recv ); `}
 
 	fun heading : String is extern `{
-		return new_String_from_cstring( (char *)gtk_app_chooser_dialog_get_heading( recv ) );
+		return NativeString_to_s( (char *)gtk_app_chooser_dialog_get_heading( recv ) );
 	`}
 
 	fun heading=( text : String ) is extern import String::to_cstring `{

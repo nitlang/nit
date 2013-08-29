@@ -123,7 +123,7 @@ extern FFSocket `{ S_DESCRIPTOR* `}
 		int n = read(*recv, c, (sizeof(c)-1));
 		if(n < 0) exit(-1);
 		c[n] = '\0';
-		return new_String_from_cstring(c);
+		return NativeString_to_s(c);
 	`}
 
 	fun bind(addrIn: FFSocketAddrIn): Int `{ return bind(*recv, (S_ADDR*)addrIn, sizeof(*addrIn)); `}
@@ -207,14 +207,14 @@ extern FFSocketAddrIn `{ S_ADDR_IN* `}
 		memcpy( (char*)&sai->sin_addr.s_addr, (char*)hostent->h_addr, hostent->h_length );
 		return sai;
 	`}
-	fun address: String `{ return new_String_from_cstring( (char*)inet_ntoa(recv->sin_addr) ); `}
+	fun address: String `{ return NativeString_to_s( (char*)inet_ntoa(recv->sin_addr) ); `}
 	fun family: FFSocketAddressFamilies `{ return recv->sin_family; `}
 	fun port: Int `{ return ntohs(recv->sin_port); `}
 	fun destroy `{ free(recv); `}
 end
 
 extern FFSocketHostent `{ S_HOSTENT* `}
-	private fun i_h_aliases(i: Int): String `{ return new_String_from_cstring(recv->h_aliases[i]); `}
+	private fun i_h_aliases(i: Int): String `{ return NativeString_to_s(recv->h_aliases[i]); `}
 	private fun i_h_aliases_reachable(i: Int): Bool `{ return (recv->h_aliases[i] != NULL); `}
 	fun h_aliases: Array[String]
 	do
@@ -227,10 +227,10 @@ extern FFSocketHostent `{ S_HOSTENT* `}
 		end
 		return d
 	end
-	fun h_addr: String `{ return new_String_from_cstring( (char*)inet_ntoa(*(S_IN_ADDR*)recv->h_addr) ); `}
+	fun h_addr: String `{ return NativeString_to_s( (char*)inet_ntoa(*(S_IN_ADDR*)recv->h_addr) ); `}
 	fun h_addrtype: Int `{ return recv->h_addrtype; `}
 	fun h_length: Int `{ return recv->h_length; `}
-	fun h_name: String `{ return new_String_from_cstring(recv->h_name); `}
+	fun h_name: String `{ return NativeString_to_s(recv->h_name); `}
 end
 
 extern FFTimeval `{ S_TIMEVAL* `}
