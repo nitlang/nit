@@ -10,7 +10,7 @@ $(document).ready(function() {
 	if(session) {
 		githubAPI = new GitHubAPI(session.user, session.password, session.repo)
 		ui.activate();
-		console.log("Session started from cookie (head: "+ $("body").attr("data-github-head") +", head: "+ $("body").attr("data-github-base") +")");
+		console.log("Session started from cookie (head: "+ $("body").attr("data-github-head") +", base: "+ $("body").attr("data-github-base") +")");
 
 	} else {
 		console.log("No cookie found");
@@ -254,26 +254,26 @@ function GitHubAPI(login, password, repo) {
 	// update a pull request
 	this.updatePullRequest = function(title, body, state, number) {
 		var res = false;
-		$.ajax({
-		beforeSend: function (xhr) {
-				xhr.setRequestHeader ("Authorization", githubAPI.auth);
-		},
-		type: "PATCH",
-		url: "https://api.github.com/repos/" + this.login + "/" + this.repo + "/pulls/" + number,
-			data: JSON.stringify({
-				title: title,
-				body: body,
-				state: state
-			}),
-			async: false,
-		dataType: 'json',
-		success: function(response) {
-				res = response;
+			$.ajax({
+			beforeSend: function (xhr) {
+					xhr.setRequestHeader ("Authorization", githubAPI.auth);
 			},
-			error: function(response) {
-				res = response;
-			}
-	});
+			type: "PATCH",
+			url: "https://api.github.com/repos/" + this.login + "/" + this.repo + "/pulls/" + number,
+				data: JSON.stringify({
+					title: title,
+					body: body,
+					state: state
+				}),
+				async: false,
+			dataType: 'json',
+			success: function(response) {
+					res = response;
+				},
+				error: function(response) {
+					res = response;
+				}
+		});
 		return res;
 	}
 }
@@ -503,27 +503,24 @@ function GitHubUI() {
 		$('#fade , #modal').hide();
 	}
 
-	this.openCommentBox = function(baseArea) {
+	this.openCommentBox = function(baseArea, requestID) {
 		this.openedComments += 1;
 		// get text and format it
-		var formated = "";
-		var len = 1;
-		var commentLines = baseArea.text().split('\n');
-		for (var i = 0; i < commentLines.length; i++) {
-			formated += commentLines[i];
-			if(i < commentLines.length - 2){ formated += "\n"; }
+		var originalComment = baseArea.text();
+		var modifiedComment;
+		if(!!requestID) {
+			// get comment from last pull request
+			var requests = JSON.parse(localStorage.requests);
+			modifiedComment = Base64.decode(requests[requestID].comment);
 		}
-		len = commentLines.length - 1;
-
 		// create comment box
-		var tarea = $("<textarea rows='" + len + "'>" + formated + "</textarea>");
+		var tarea = $("<textarea>" + (!modifiedComment? originalComment: modifiedComment) + "</textarea>");
 		var width = width = baseArea.parent().innerWidth() - 13;
 		tarea.css("width", width + "px");
 		tarea.css("display", "block");
 		tarea.keyup(function(event) {
 			$(event.target).css("height", (event.target.value.split(/\r|\n/).length * 16) + "px");
-			var baseComment =  $(event.target).parents("div.description").find("textarea.baseComment").text();
-			if ($(event.target).val() != baseComment) {
+			if ( (!requestID && $(event.target).val() != originalComment) || (requestID && $(event.target).val() != originalComment && $(event.target).val() != modifiedComment) ) {
 				$(event.target).parent().find("button.commit").removeAttr("disabled");
 			} else {
 				$(event.target).parent().find("button.commit").attr("disabled", "disabled");
@@ -549,7 +546,7 @@ function GitHubUI() {
 			.append(
 				$("<button class='commit'>Commit</button>")
 				.click(function() {
-					ui.openCommitBox($(this).parent());
+					ui.openCommitBox($(this).parent(), requestID);
 				})
 			)
 			.append(
@@ -574,7 +571,7 @@ function GitHubUI() {
 		commentBox.remove();
 	}
 
-	this.openCommitBox = function(commentBox) {
+	this.openCommitBox = function(commentBox,  requestID) {
 		$('#fade').show();
 		$('#modal')
 			.empty()
@@ -599,7 +596,7 @@ function GitHubUI() {
 						$(this).text("Commiting...");
 					})
 					.mouseup(function() {
-						ui.commit($(this).parent().parent(), commentBox)
+						ui.commit($(this).parent().parent(), commentBox, requestID)
 					})
 				)
 			)
@@ -611,7 +608,12 @@ function GitHubUI() {
 	}
 
 
-	this.commit = function(commitBox, commentBox) {
+	this.commit = function(commitBox, commentBox,  requestID) {
+		// close existing pull request for the comment
+		if(!!requestID) {
+			this.closePullRequest(requestID);
+		}
+
 		// get comments datas
 		var location = this.parseLocation(commentBox.attr("data-comment-location"));
 		var comment = commentBox.find("textarea").val();
@@ -637,7 +639,7 @@ function GitHubUI() {
 		// save pull request in cookie
 		var requests = [];
 		if(!!localStorage.requests) {requests = JSON.parse(localStorage.requests)}
-		requests[requests.length] = {
+		requests[response.number] = {
 			request: response,
 			location: commentBox.attr("data-comment-location"),
 			comment: Base64.encode(comment)
@@ -698,6 +700,7 @@ function GitHubUI() {
 		var converter = new Markdown.Converter();
 		// Look for modified comments in page
 		for(i in requests) {
+			if(!requests[i]) { continue; }
 			var request = requests[i];
 			$("textarea[data-comment-location=\"" + request.location + "\"]").each(function () {
 				var div = $(this).next();
@@ -709,12 +712,12 @@ function GitHubUI() {
 						div.remove();
 					} else if(div.is("div.comment.locked")) {
 						// unlock comment
+						div.empty();
+						div.append(converter.makeHtml($(this).text()));
 						div.removeClass("locked");
 						div.css("cursor", "pointer")
-						div.click(function() {
-							ui.openCommentBox(div.prev());
-						});
 						div.next().remove();
+						div.next().find("span.editComment").show();
 					}
 				} else {
 					// create div for the new coment
@@ -729,17 +732,26 @@ function GitHubUI() {
 						div.append(converter.makeHtml(Base64.decode(request.comment)));
 						// lock click
 						div.css("cursor", "auto");
-						div.unbind("click");
 						div.addClass("locked");
+						div.next().find("span.editComment").hide();
 						div.after(
 							$("<p class='locked inheritance'>")
 							.text("comment modified in ")
 							.append("<a href='"+ request.request.html_url +"' target='_blank' title='Review on GitHub'>pull request #"+ request.request.number +"</a>")
 							.append(" ")
 							.append(
+								$("<a data-pullrequest-number='"+ request.request.number +"' class='update'>update</a>")
+								.click(function (){
+									div.hide();
+									ui.openCommentBox(div.prev(), $(this).attr("data-pullrequest-number"));
+								})
+							)
+							.append(" ")
+							.append(
 								$("<a data-pullrequest-number='"+ request.request.number +"' class='cancel'>cancel</a>")
 								.click(function (){
 									ui.closePullRequest($(this).attr("data-pullrequest-number"));
+									ui.reloadComments();
 								})
 							)
 						);
@@ -761,15 +773,12 @@ function GitHubUI() {
 			this.openModalBox("Unable to close pull request!", res.status + ": " + res.statusText, true);
 			return false;
 		}
-		// remove from localstorage
+		// update in localstorage
 		var requests = JSON.parse(localStorage.requests);
-		for(i in requests) {
-			if(requests[i].request.number == number) {
-				requests[i].isClosed = true;
-			}
+		if(!!requests[number]) {
+			requests[number].isClosed = true;
 		}
 		localStorage.requests = JSON.stringify(requests);
-		ui.reloadComments()
 	}
 
 	/* Utility */

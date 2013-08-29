@@ -1734,7 +1734,8 @@ redef class ADoc
 			if text.first == ' ' then text = text.substring_from(1)
 			res.append(text.html_escape)
 		end
-		return res.to_s
+		var str = res.to_s
+		return str.substring(0, str.length - 1)
 	end
 end
 

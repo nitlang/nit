@@ -263,3 +263,8 @@ a.cancel {
 	color: #b33630;
 	cursor: pointer;
 }
+
+a.update {
+	color: orange;
+	cursor: pointer;
+}
