@@ -27,7 +27,7 @@ val_t standard___environ___String___environ(val_t p0){
     if (!once_value_2) {
       fra.me.REG[1] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+      fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
       once_value_2 = fra.me.REG[1];
       register_static_object(&once_value_2);
     } else fra.me.REG[1] = once_value_2;
@@ -48,14 +48,14 @@ val_t standard___environ___String___environ(val_t p0){
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
     /* ../lib/standard/environ.nit:30 */
-    fra.me.REG[0] = NEW_String_standard___string___String___from_cstring(fra.me.REG[0]);
+    fra.me.REG[0] = CALL_standard___string___Object___to_s(fra.me.REG[0])(fra.me.REG[0]);
     goto label3;
   } else {
     /* ../lib/standard/environ.nit:32 */
     if (!once_value_4) {
       fra.me.REG[1] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+      fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
       once_value_4 = fra.me.REG[1];
       register_static_object(&once_value_4);
     } else fra.me.REG[1] = once_value_4;

@@ -68,7 +68,7 @@ void global___reachable_method_analysis___Program___dump_reachable_methods(val_t
   if (!once_value_1) {
     fra.me.REG[4] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+    fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
     once_value_1 = fra.me.REG[4];
     register_static_object(&once_value_1);
   } else fra.me.REG[4] = once_value_1;
@@ -78,7 +78,7 @@ void global___reachable_method_analysis___Program___dump_reachable_methods(val_t
   if (!once_value_2) {
     fra.me.REG[1] = BOX_NativeString("/");
     REGB0 = TAG_Int(1);
-    fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+    fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
     once_value_2 = fra.me.REG[1];
     register_static_object(&once_value_2);
   } else fra.me.REG[1] = once_value_2;
@@ -91,7 +91,7 @@ void global___reachable_method_analysis___Program___dump_reachable_methods(val_t
   if (!once_value_3) {
     fra.me.REG[1] = BOX_NativeString(".reachable_methods.");
     REGB0 = TAG_Int(19);
-    fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+    fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
     once_value_3 = fra.me.REG[1];
     register_static_object(&once_value_3);
   } else fra.me.REG[1] = once_value_3;
@@ -101,7 +101,7 @@ void global___reachable_method_analysis___Program___dump_reachable_methods(val_t
   if (!once_value_4) {
     fra.me.REG[2] = BOX_NativeString(".log");
     REGB0 = TAG_Int(4);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_4 = fra.me.REG[2];
     register_static_object(&once_value_4);
   } else fra.me.REG[2] = once_value_4;
@@ -147,7 +147,7 @@ void global___reachable_method_analysis___Program___dump_reachable_methods(val_t
       if (!once_value_6) {
         fra.me.REG[2] = BOX_NativeString("");
         REGB0 = TAG_Int(0);
-        fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+        fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
         once_value_6 = fra.me.REG[2];
         register_static_object(&once_value_6);
       } else fra.me.REG[2] = once_value_6;
@@ -158,7 +158,7 @@ void global___reachable_method_analysis___Program___dump_reachable_methods(val_t
       if (!once_value_7) {
         fra.me.REG[0] = BOX_NativeString("\n");
         REGB0 = TAG_Int(1);
-        fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+        fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
         once_value_7 = fra.me.REG[0];
         register_static_object(&once_value_7);
       } else fra.me.REG[0] = once_value_7;
@@ -200,7 +200,7 @@ void global___reachable_method_analysis___Program___dump_unreachable_methods(val
   if (!once_value_1) {
     fra.me.REG[4] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+    fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
     once_value_1 = fra.me.REG[4];
     register_static_object(&once_value_1);
   } else fra.me.REG[4] = once_value_1;
@@ -210,7 +210,7 @@ void global___reachable_method_analysis___Program___dump_unreachable_methods(val
   if (!once_value_2) {
     fra.me.REG[1] = BOX_NativeString("/");
     REGB0 = TAG_Int(1);
-    fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+    fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
     once_value_2 = fra.me.REG[1];
     register_static_object(&once_value_2);
   } else fra.me.REG[1] = once_value_2;
@@ -223,7 +223,7 @@ void global___reachable_method_analysis___Program___dump_unreachable_methods(val
   if (!once_value_3) {
     fra.me.REG[1] = BOX_NativeString(".unreachable_methods.");
     REGB0 = TAG_Int(21);
-    fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+    fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
     once_value_3 = fra.me.REG[1];
     register_static_object(&once_value_3);
   } else fra.me.REG[1] = once_value_3;
@@ -233,7 +233,7 @@ void global___reachable_method_analysis___Program___dump_unreachable_methods(val
   if (!once_value_4) {
     fra.me.REG[2] = BOX_NativeString(".log");
     REGB0 = TAG_Int(4);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_4 = fra.me.REG[2];
     register_static_object(&once_value_4);
   } else fra.me.REG[2] = once_value_4;
@@ -280,7 +280,7 @@ void global___reachable_method_analysis___Program___dump_unreachable_methods(val
       if (!once_value_6) {
         fra.me.REG[2] = BOX_NativeString("");
         REGB0 = TAG_Int(0);
-        fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+        fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
         once_value_6 = fra.me.REG[2];
         register_static_object(&once_value_6);
       } else fra.me.REG[2] = once_value_6;
@@ -291,7 +291,7 @@ void global___reachable_method_analysis___Program___dump_unreachable_methods(val
       if (!once_value_7) {
         fra.me.REG[0] = BOX_NativeString("\n");
         REGB0 = TAG_Int(1);
-        fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+        fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
         once_value_7 = fra.me.REG[0];
         register_static_object(&once_value_7);
       } else fra.me.REG[0] = once_value_7;

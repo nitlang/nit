@@ -58,6 +58,7 @@ typedef struct s_HashSet *HashSet;
 #define HashSet_decr_ref( x ) nitni_global_ref_decr( (struct nitni_ref*)(x) )
 #endif
 #include "file_nit.h"
+#include <standard___file._ffi.h>
 
 /* out/indirect function for file::Stdin::poll_in */
 val_t Stdin_poll_in___out( val_t recv );
@@ -70,6 +71,9 @@ val_t NativeString_file_exists___out( val_t recv );
 
 /* out/indirect function for file::NativeString::file_stat */
 val_t NativeString_file_stat___out( val_t recv );
+
+/* out/indirect function for file::NativeString::file_lstat */
+val_t NativeString_file_lstat___out( val_t recv );
 
 /* out/indirect function for file::NativeString::file_mkdir */
 val_t NativeString_file_mkdir___out( val_t recv );
@@ -91,6 +95,27 @@ val_t FileStat_mtime___out( val_t recv );
 
 /* out/indirect function for file::FileStat::size */
 val_t FileStat_size___out( val_t recv );
+
+/* out/indirect function for file::FileStat::is_reg */
+val_t FileStat_is_reg___out( val_t recv );
+
+/* out/indirect function for file::FileStat::is_dir */
+val_t FileStat_is_dir___out( val_t recv );
+
+/* out/indirect function for file::FileStat::is_chr */
+val_t FileStat_is_chr___out( val_t recv );
+
+/* out/indirect function for file::FileStat::is_blk */
+val_t FileStat_is_blk___out( val_t recv );
+
+/* out/indirect function for file::FileStat::is_fifo */
+val_t FileStat_is_fifo___out( val_t recv );
+
+/* out/indirect function for file::FileStat::is_lnk */
+val_t FileStat_is_lnk___out( val_t recv );
+
+/* out/indirect function for file::FileStat::is_sock */
+val_t FileStat_is_sock___out( val_t recv );
 
 /* out/indirect function for file::NativeFile::io_read */
 val_t NativeFile_io_read___out( val_t recv, val_t buf, val_t len );
@@ -128,10 +153,10 @@ void file_HashSet_add( HashSet recv, Object item );
 #ifndef HashSet_add
 #define HashSet_add file_HashSet_add
 #endif
-/* friendly for string::String::from_cstring */
-String file_new_String_from_cstring( char * str );
-#ifndef new_String_from_cstring
-#define new_String_from_cstring file_new_String_from_cstring
+/* friendly for string::NativeString::(string::Object::to_s) */
+String file_NativeString_to_s( char * recv );
+#ifndef NativeString_to_s
+#define NativeString_to_s file_NativeString_to_s
 #endif
 /* friendly for string::String::to_cstring */
 char * file_String_to_cstring( String recv );

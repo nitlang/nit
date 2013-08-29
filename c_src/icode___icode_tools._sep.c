@@ -441,7 +441,7 @@ val_t icode___icode_tools___ICodeBuilder___inline_routine(val_t p0, val_t p1, va
   REGB2 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
   if (UNTAG_Bool(REGB2)) {
   } else {
-    /* ../lib/standard/kernel.nit:230 */
+    /* ../lib/standard/kernel.nit:237 */
     REGB1 = TAG_Bool((REGB0)==(REGB1));
     /* icode/icode_tools.nit:102 */
     REGB2 = REGB1;
@@ -505,7 +505,7 @@ val_t icode___icode_tools___ICodeBuilder___inline_routine(val_t p0, val_t p1, va
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:234 */
+  /* ../lib/standard/kernel.nit:241 */
   REGB0 = TAG_Bool(UNTAG_Int(REGB2)<=UNTAG_Int(REGB1));
   /* icode/icode_tools.nit:106 */
   if (UNTAG_Bool(REGB0)) {
@@ -554,16 +554,16 @@ val_t icode___icode_tools___ICodeBuilder___inline_routine(val_t p0, val_t p1, va
   /* icode/icode_tools.nit:120 */
   REGB0 = TAG_Int(0);
   REGB3 = CALL_standard___collection___abstract_collection___Collection___length(fra.me.REG[2])(fra.me.REG[2]);
-  /* ../lib/standard/kernel.nit:355 */
+  /* ../lib/standard/kernel.nit:404 */
   while(1) {
     REGB4 = TAG_Bool(VAL_ISA(REGB3, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
     if (UNTAG_Bool(REGB4)) {
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:242 */
     REGB4 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB3));
-    /* ../lib/standard/kernel.nit:355 */
+    /* ../lib/standard/kernel.nit:404 */
     if (UNTAG_Bool(REGB4)) {
       /* icode/icode_tools.nit:120 */
       REGB4 = REGB0;
@@ -572,14 +572,14 @@ val_t icode___icode_tools___ICodeBuilder___inline_routine(val_t p0, val_t p1, va
       fra.me.REG[8] = CALL_standard___collection___abstract_collection___SequenceRead_____bra(fra.me.REG[8])(fra.me.REG[8], REGB4);
       fra.me.REG[9] = CALL_standard___collection___abstract_collection___SequenceRead_____bra(fra.me.REG[2])(fra.me.REG[2], REGB4);
       CALL_standard___collection___abstract_collection___Map_____braeq(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[8], fra.me.REG[9]);
-      /* ../lib/standard/kernel.nit:357 */
+      /* ../lib/standard/kernel.nit:406 */
       REGB4 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB4 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB4));
-      /* ../lib/standard/kernel.nit:357 */
+      /* ../lib/standard/kernel.nit:406 */
       REGB0 = REGB4;
     } else {
-      /* ../lib/standard/kernel.nit:355 */
+      /* ../lib/standard/kernel.nit:404 */
       goto label2;
     }
   }
@@ -611,18 +611,18 @@ val_t icode___icode_tools___ICodeBuilder___inline_routine(val_t p0, val_t p1, va
     fra.me.REG[0] = ATTR_icode___icode_tools___ICodeDupContext____closures(fra.me.REG[4]);
     /* icode/icode_tools.nit:137 */
     REGB0 = TAG_Int(0);
-    /* ../lib/standard/kernel.nit:350 */
+    /* ../lib/standard/kernel.nit:399 */
     REGB3 = REGB2;
-    /* ../lib/standard/kernel.nit:355 */
+    /* ../lib/standard/kernel.nit:404 */
     while(1) {
       REGB4 = TAG_Bool(VAL_ISA(REGB3, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
       if (UNTAG_Bool(REGB4)) {
       } else {
         nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
       }
-      /* ../lib/standard/kernel.nit:235 */
+      /* ../lib/standard/kernel.nit:242 */
       REGB4 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB3));
-      /* ../lib/standard/kernel.nit:355 */
+      /* ../lib/standard/kernel.nit:404 */
       if (UNTAG_Bool(REGB4)) {
         /* icode/icode_tools.nit:137 */
         REGB4 = REGB0;
@@ -638,28 +638,28 @@ val_t icode___icode_tools___ICodeBuilder___inline_routine(val_t p0, val_t p1, va
         }
         fra.me.REG[2] = CALL_standard___collection___abstract_collection___SequenceRead_____bra(fra.me.REG[3])(fra.me.REG[3], REGB4);
         CALL_standard___collection___abstract_collection___Map_____braeq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[6], fra.me.REG[2]);
-        /* ../lib/standard/kernel.nit:357 */
+        /* ../lib/standard/kernel.nit:406 */
         REGB4 = TAG_Int(1);
-        /* ../lib/standard/kernel.nit:238 */
+        /* ../lib/standard/kernel.nit:245 */
         REGB4 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB4));
-        /* ../lib/standard/kernel.nit:357 */
+        /* ../lib/standard/kernel.nit:406 */
         REGB0 = REGB4;
       } else {
-        /* ../lib/standard/kernel.nit:355 */
+        /* ../lib/standard/kernel.nit:404 */
         goto label4;
       }
     }
     label4: while(0);
-    /* ../lib/standard/kernel.nit:355 */
+    /* ../lib/standard/kernel.nit:404 */
     while(1) {
       REGB0 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB2), VTID_standard___kernel___Comparable___OTHER(REGB2))) /*cast OTHER*/;
       if (UNTAG_Bool(REGB0)) {
       } else {
         nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
       }
-      /* ../lib/standard/kernel.nit:235 */
+      /* ../lib/standard/kernel.nit:242 */
       REGB0 = TAG_Bool(UNTAG_Int(REGB2)<UNTAG_Int(REGB1));
-      /* ../lib/standard/kernel.nit:355 */
+      /* ../lib/standard/kernel.nit:404 */
       if (UNTAG_Bool(REGB0)) {
         /* icode/icode_tools.nit:140 */
         REGB0 = REGB2;
@@ -670,14 +670,14 @@ val_t icode___icode_tools___ICodeBuilder___inline_routine(val_t p0, val_t p1, va
         }
         fra.me.REG[3] = CALL_standard___collection___abstract_collection___SequenceRead_____bra(fra.me.REG[5])(fra.me.REG[5], REGB0);
         CALL_standard___collection___abstract_collection___Map_____braeq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3], NIT_NULL);
-        /* ../lib/standard/kernel.nit:357 */
+        /* ../lib/standard/kernel.nit:406 */
         REGB0 = TAG_Int(1);
-        /* ../lib/standard/kernel.nit:238 */
+        /* ../lib/standard/kernel.nit:245 */
         REGB0 = TAG_Int(UNTAG_Int(REGB2)+UNTAG_Int(REGB0));
-        /* ../lib/standard/kernel.nit:357 */
+        /* ../lib/standard/kernel.nit:406 */
         REGB2 = REGB0;
       } else {
-        /* ../lib/standard/kernel.nit:355 */
+        /* ../lib/standard/kernel.nit:404 */
         goto label5;
       }
     }

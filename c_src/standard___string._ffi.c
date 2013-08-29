@@ -3,9 +3,11 @@
 */
 #include "standard___string._ffi.h"
 
+#include <stdio.h>
+
 String Float_to_precision_native___impl( float recv, bigint nb )
 {
-#line 826 "../lib/standard/string.nit"
+#line 830 "../lib/standard/string.nit"
 
 
 		int size;
@@ -15,5 +17,5 @@ String Float_to_precision_native___impl( float recv, bigint nb )
 		str = malloc(size + 1);
 		sprintf(str, "%.*f", (int)nb, recv );
 
-		return new_String_from_cstring( str );
+		return NativeString_to_s( str );
 	}

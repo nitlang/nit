@@ -48,7 +48,7 @@ void syntax___icode_generation___A2IContext___stmt(val_t p0, val_t p1){
   } else {
     /* syntax/icode_generation.nit:32 */
     fra.me.REG[3] = CALL_syntax___icode_generation___A2IContext___visitor(fra.me.REG[2])(fra.me.REG[2]);
-    fra.me.REG[3] = CALL_parser___parser_prod___Visitor___current_node(fra.me.REG[3])(fra.me.REG[3]);
+    fra.me.REG[3] = CALL_parser___parser_nodes___Visitor___current_node(fra.me.REG[3])(fra.me.REG[3]);
     REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
@@ -65,7 +65,7 @@ void syntax___icode_generation___A2IContext___stmt(val_t p0, val_t p1){
     if (UNTAG_Bool(REGB0)) {
       /* syntax/icode_generation.nit:33 */
       fra.me.REG[3] = CALL_syntax___icode_generation___A2IContext___visitor(fra.me.REG[2])(fra.me.REG[2]);
-      fra.me.REG[3] = CALL_parser___parser_prod___Visitor___current_node(fra.me.REG[3])(fra.me.REG[3]);
+      fra.me.REG[3] = CALL_parser___parser_nodes___Visitor___current_node(fra.me.REG[3])(fra.me.REG[3]);
       REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
         nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 33);
@@ -108,7 +108,7 @@ val_t syntax___icode_generation___A2IContext___add_new_array(val_t p0, val_t p1,
     if (!once_value_2) {
       fra.me.REG[3] = BOX_NativeString("with_capacity");
       REGB1 = TAG_Int(13);
-      fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB1);
+      fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB1);
       once_value_2 = fra.me.REG[3];
       register_static_object(&once_value_2);
     } else fra.me.REG[3] = once_value_2;
@@ -167,7 +167,7 @@ void syntax___icode_generation___A2IContext___add_call_array_add(val_t p0, val_t
     if (!once_value_2) {
       fra.me.REG[5] = BOX_NativeString("add");
       REGB0 = TAG_Int(3);
-      fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB0);
+      fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB0);
       once_value_2 = fra.me.REG[5];
       register_static_object(&once_value_2);
     } else fra.me.REG[5] = once_value_2;
@@ -554,23 +554,23 @@ void syntax___icode_generation___A2IContext___invoke_super_init_calls_after(val_
         nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 109);
       }
       fra.me.REG[3] = CALL_syntax___syntax_base___AConcreteInitPropdef___super_init_calls(fra.me.REG[2])(fra.me.REG[2]);
-      /* ../lib/standard/collection/array.nit:278 */
+      /* ../lib/standard/collection/array.nit:279 */
       REGB2 = REGB0;
-      /* ../lib/standard/collection/array.nit:280 */
+      /* ../lib/standard/collection/array.nit:281 */
       REGB3 = TAG_Int(0);
       REGB4 = TAG_Bool(VAL_ISA(REGB3, VTCOLOR_standard___kernel___Comparable___OTHER(REGB2), VTID_standard___kernel___Comparable___OTHER(REGB2))) /*cast OTHER*/;
       if (UNTAG_Bool(REGB4)) {
       } else {
         nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
       }
-      /* ../lib/standard/kernel.nit:236 */
+      /* ../lib/standard/kernel.nit:243 */
       REGB3 = TAG_Bool(UNTAG_Int(REGB2)>=UNTAG_Int(REGB3));
-      /* ../lib/standard/collection/array.nit:280 */
+      /* ../lib/standard/collection/array.nit:281 */
       if (UNTAG_Bool(REGB3)) {
         REGB3 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[3])!=NIT_NULL);
         if (UNTAG_Bool(REGB3)) {
         } else {
-          nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 280);
+          nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 281);
         }
         REGB3 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[3]);
         REGB4 = TAG_Bool(VAL_ISA(REGB3, VTCOLOR_standard___kernel___Comparable___OTHER(REGB2), VTID_standard___kernel___Comparable___OTHER(REGB2))) /*cast OTHER*/;
@@ -578,26 +578,26 @@ void syntax___icode_generation___A2IContext___invoke_super_init_calls_after(val_
         } else {
           nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
         }
-        /* ../lib/standard/kernel.nit:235 */
+        /* ../lib/standard/kernel.nit:242 */
         REGB3 = TAG_Bool(UNTAG_Int(REGB2)<UNTAG_Int(REGB3));
       } else {
-        /* ../lib/standard/collection/array.nit:280 */
+        /* ../lib/standard/collection/array.nit:281 */
         REGB4 = TAG_Bool(0);
         REGB3 = REGB4;
       }
       if (UNTAG_Bool(REGB3)) {
       } else {
-        nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 280);
+        nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 281);
       }
-      /* ../lib/standard/collection/array.nit:281 */
+      /* ../lib/standard/collection/array.nit:282 */
       fra.me.REG[3] = ATTR_standard___collection___array___Array____items(fra.me.REG[3]);
       REGB3 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
       if (UNTAG_Bool(REGB3)) {
-        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
+        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 282);
       }
-      /* ../lib/standard/collection/array.nit:724 */
+      /* ../lib/standard/collection/array.nit:725 */
       fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB2)];
-      /* ../lib/standard/collection/array.nit:281 */
+      /* ../lib/standard/collection/array.nit:282 */
       goto label2;
       label2: while(0);
       /* syntax/icode_generation.nit:109 */
@@ -617,7 +617,7 @@ void syntax___icode_generation___A2IContext___invoke_super_init_calls_after(val_
       if (UNTAG_Bool(REGB2)) {
         /* syntax/icode_generation.nit:110 */
         REGB2 = TAG_Int(1);
-        /* ../lib/standard/kernel.nit:238 */
+        /* ../lib/standard/kernel.nit:245 */
         REGB2 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB2));
         /* syntax/icode_generation.nit:110 */
         REGB0 = REGB2;
@@ -629,7 +629,7 @@ void syntax___icode_generation___A2IContext___invoke_super_init_calls_after(val_
     label3: while(0);
     /* syntax/icode_generation.nit:112 */
     REGB2 = TAG_Int(1);
-    /* ../lib/standard/kernel.nit:238 */
+    /* ../lib/standard/kernel.nit:245 */
     REGB2 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB2));
     /* syntax/icode_generation.nit:112 */
     REGB0 = REGB2;
@@ -640,23 +640,23 @@ void syntax___icode_generation___A2IContext___invoke_super_init_calls_after(val_
         nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 114);
       }
       fra.me.REG[3] = CALL_syntax___syntax_base___AConcreteInitPropdef___explicit_super_init_calls(fra.me.REG[2])(fra.me.REG[2]);
-      /* ../lib/standard/collection/array.nit:278 */
+      /* ../lib/standard/collection/array.nit:279 */
       REGB2 = REGB1;
-      /* ../lib/standard/collection/array.nit:280 */
+      /* ../lib/standard/collection/array.nit:281 */
       REGB3 = TAG_Int(0);
       REGB4 = TAG_Bool(VAL_ISA(REGB3, VTCOLOR_standard___kernel___Comparable___OTHER(REGB2), VTID_standard___kernel___Comparable___OTHER(REGB2))) /*cast OTHER*/;
       if (UNTAG_Bool(REGB4)) {
       } else {
         nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
       }
-      /* ../lib/standard/kernel.nit:236 */
+      /* ../lib/standard/kernel.nit:243 */
       REGB3 = TAG_Bool(UNTAG_Int(REGB2)>=UNTAG_Int(REGB3));
-      /* ../lib/standard/collection/array.nit:280 */
+      /* ../lib/standard/collection/array.nit:281 */
       if (UNTAG_Bool(REGB3)) {
         REGB3 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[3])!=NIT_NULL);
         if (UNTAG_Bool(REGB3)) {
         } else {
-          nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 280);
+          nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 281);
         }
         REGB3 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[3]);
         REGB4 = TAG_Bool(VAL_ISA(REGB3, VTCOLOR_standard___kernel___Comparable___OTHER(REGB2), VTID_standard___kernel___Comparable___OTHER(REGB2))) /*cast OTHER*/;
@@ -664,26 +664,26 @@ void syntax___icode_generation___A2IContext___invoke_super_init_calls_after(val_
         } else {
           nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
         }
-        /* ../lib/standard/kernel.nit:235 */
+        /* ../lib/standard/kernel.nit:242 */
         REGB3 = TAG_Bool(UNTAG_Int(REGB2)<UNTAG_Int(REGB3));
       } else {
-        /* ../lib/standard/collection/array.nit:280 */
+        /* ../lib/standard/collection/array.nit:281 */
         REGB4 = TAG_Bool(0);
         REGB3 = REGB4;
       }
       if (UNTAG_Bool(REGB3)) {
       } else {
-        nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 280);
+        nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 281);
       }
-      /* ../lib/standard/collection/array.nit:281 */
+      /* ../lib/standard/collection/array.nit:282 */
       fra.me.REG[3] = ATTR_standard___collection___array___Array____items(fra.me.REG[3]);
       REGB3 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
       if (UNTAG_Bool(REGB3)) {
-        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
+        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 282);
       }
-      /* ../lib/standard/collection/array.nit:724 */
+      /* ../lib/standard/collection/array.nit:725 */
       fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB2)];
-      /* ../lib/standard/collection/array.nit:281 */
+      /* ../lib/standard/collection/array.nit:282 */
       goto label4;
       label4: while(0);
       /* syntax/icode_generation.nit:114 */
@@ -703,7 +703,7 @@ void syntax___icode_generation___A2IContext___invoke_super_init_calls_after(val_
       if (UNTAG_Bool(REGB2)) {
         /* syntax/icode_generation.nit:115 */
         REGB2 = TAG_Int(1);
-        /* ../lib/standard/kernel.nit:238 */
+        /* ../lib/standard/kernel.nit:245 */
         REGB2 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB2));
         /* syntax/icode_generation.nit:115 */
         REGB1 = REGB2;
@@ -715,7 +715,7 @@ void syntax___icode_generation___A2IContext___invoke_super_init_calls_after(val_
     label5: while(0);
     /* syntax/icode_generation.nit:117 */
     REGB2 = TAG_Int(1);
-    /* ../lib/standard/kernel.nit:238 */
+    /* ../lib/standard/kernel.nit:245 */
     REGB2 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB2));
     /* syntax/icode_generation.nit:117 */
     REGB1 = REGB2;
@@ -740,7 +740,7 @@ void syntax___icode_generation___A2IContext___invoke_super_init_calls_after(val_
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:235 */
+  /* ../lib/standard/kernel.nit:242 */
   REGB2 = TAG_Bool(UNTAG_Int(REGB1)<UNTAG_Int(REGB2));
   /* syntax/icode_generation.nit:120 */
   if (UNTAG_Bool(REGB2)) {
@@ -750,21 +750,21 @@ void syntax___icode_generation___A2IContext___invoke_super_init_calls_after(val_
       nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 121);
     }
     fra.me.REG[3] = CALL_syntax___syntax_base___AConcreteInitPropdef___explicit_super_init_calls(fra.me.REG[2])(fra.me.REG[2]);
-    /* ../lib/standard/collection/array.nit:280 */
+    /* ../lib/standard/collection/array.nit:281 */
     REGB2 = TAG_Int(0);
     REGB3 = TAG_Bool(VAL_ISA(REGB2, VTCOLOR_standard___kernel___Comparable___OTHER(REGB1), VTID_standard___kernel___Comparable___OTHER(REGB1))) /*cast OTHER*/;
     if (UNTAG_Bool(REGB3)) {
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:236 */
+    /* ../lib/standard/kernel.nit:243 */
     REGB2 = TAG_Bool(UNTAG_Int(REGB1)>=UNTAG_Int(REGB2));
-    /* ../lib/standard/collection/array.nit:280 */
+    /* ../lib/standard/collection/array.nit:281 */
     if (UNTAG_Bool(REGB2)) {
       REGB2 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[3])!=NIT_NULL);
       if (UNTAG_Bool(REGB2)) {
       } else {
-        nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 280);
+        nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 281);
       }
       REGB2 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[3]);
       REGB3 = TAG_Bool(VAL_ISA(REGB2, VTCOLOR_standard___kernel___Comparable___OTHER(REGB1), VTID_standard___kernel___Comparable___OTHER(REGB1))) /*cast OTHER*/;
@@ -772,26 +772,26 @@ void syntax___icode_generation___A2IContext___invoke_super_init_calls_after(val_
       } else {
         nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
       }
-      /* ../lib/standard/kernel.nit:235 */
+      /* ../lib/standard/kernel.nit:242 */
       REGB2 = TAG_Bool(UNTAG_Int(REGB1)<UNTAG_Int(REGB2));
     } else {
-      /* ../lib/standard/collection/array.nit:280 */
+      /* ../lib/standard/collection/array.nit:281 */
       REGB3 = TAG_Bool(0);
       REGB2 = REGB3;
     }
     if (UNTAG_Bool(REGB2)) {
     } else {
-      nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 280);
+      nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 281);
     }
-    /* ../lib/standard/collection/array.nit:281 */
+    /* ../lib/standard/collection/array.nit:282 */
     fra.me.REG[3] = ATTR_standard___collection___array___Array____items(fra.me.REG[3]);
     REGB2 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
     if (UNTAG_Bool(REGB2)) {
-      nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
+      nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 282);
     }
-    /* ../lib/standard/collection/array.nit:724 */
+    /* ../lib/standard/collection/array.nit:725 */
     fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB1)];
-    /* ../lib/standard/collection/array.nit:281 */
+    /* ../lib/standard/collection/array.nit:282 */
     goto label6;
     label6: while(0);
     /* syntax/icode_generation.nit:121 */
@@ -817,7 +817,7 @@ void syntax___icode_generation___A2IContext___invoke_super_init_calls_after(val_
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:242 */
     REGB2 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
     /* syntax/icode_generation.nit:124 */
     if (UNTAG_Bool(REGB2)) {
@@ -827,23 +827,23 @@ void syntax___icode_generation___A2IContext___invoke_super_init_calls_after(val_
         nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 125);
       }
       fra.me.REG[3] = CALL_syntax___syntax_base___AConcreteInitPropdef___super_init_calls(fra.me.REG[2])(fra.me.REG[2]);
-      /* ../lib/standard/collection/array.nit:278 */
+      /* ../lib/standard/collection/array.nit:279 */
       REGB2 = REGB0;
-      /* ../lib/standard/collection/array.nit:280 */
+      /* ../lib/standard/collection/array.nit:281 */
       REGB3 = TAG_Int(0);
       REGB4 = TAG_Bool(VAL_ISA(REGB3, VTCOLOR_standard___kernel___Comparable___OTHER(REGB2), VTID_standard___kernel___Comparable___OTHER(REGB2))) /*cast OTHER*/;
       if (UNTAG_Bool(REGB4)) {
       } else {
         nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
       }
-      /* ../lib/standard/kernel.nit:236 */
+      /* ../lib/standard/kernel.nit:243 */
       REGB3 = TAG_Bool(UNTAG_Int(REGB2)>=UNTAG_Int(REGB3));
-      /* ../lib/standard/collection/array.nit:280 */
+      /* ../lib/standard/collection/array.nit:281 */
       if (UNTAG_Bool(REGB3)) {
         REGB3 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[3])!=NIT_NULL);
         if (UNTAG_Bool(REGB3)) {
         } else {
-          nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 280);
+          nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 281);
         }
         REGB3 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[3]);
         REGB4 = TAG_Bool(VAL_ISA(REGB3, VTCOLOR_standard___kernel___Comparable___OTHER(REGB2), VTID_standard___kernel___Comparable___OTHER(REGB2))) /*cast OTHER*/;
@@ -851,26 +851,26 @@ void syntax___icode_generation___A2IContext___invoke_super_init_calls_after(val_
         } else {
           nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
         }
-        /* ../lib/standard/kernel.nit:235 */
+        /* ../lib/standard/kernel.nit:242 */
         REGB3 = TAG_Bool(UNTAG_Int(REGB2)<UNTAG_Int(REGB3));
       } else {
-        /* ../lib/standard/collection/array.nit:280 */
+        /* ../lib/standard/collection/array.nit:281 */
         REGB4 = TAG_Bool(0);
         REGB3 = REGB4;
       }
       if (UNTAG_Bool(REGB3)) {
       } else {
-        nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 280);
+        nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 281);
       }
-      /* ../lib/standard/collection/array.nit:281 */
+      /* ../lib/standard/collection/array.nit:282 */
       fra.me.REG[3] = ATTR_standard___collection___array___Array____items(fra.me.REG[3]);
       REGB3 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
       if (UNTAG_Bool(REGB3)) {
-        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
+        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 282);
       }
-      /* ../lib/standard/collection/array.nit:724 */
+      /* ../lib/standard/collection/array.nit:725 */
       fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB2)];
-      /* ../lib/standard/collection/array.nit:281 */
+      /* ../lib/standard/collection/array.nit:282 */
       goto label7;
       label7: while(0);
       /* syntax/icode_generation.nit:126 */
@@ -896,7 +896,7 @@ void syntax___icode_generation___A2IContext___invoke_super_init_calls_after(val_
       REGB4 = TAG_Bool(IS_EQUAL_OO(REGB2,REGB3));
       if (UNTAG_Bool(REGB4)) {
       } else {
-        /* ../lib/standard/kernel.nit:230 */
+        /* ../lib/standard/kernel.nit:237 */
         REGB3 = TAG_Bool((REGB2)==(REGB3));
         /* syntax/icode_generation.nit:128 */
         REGB4 = REGB3;
@@ -918,7 +918,7 @@ void syntax___icode_generation___A2IContext___invoke_super_init_calls_after(val_
       CALL_icode___icode_builder___ICodeBuilder___stmt(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[4]);
       /* syntax/icode_generation.nit:136 */
       REGB4 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB4 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB4));
       /* syntax/icode_generation.nit:136 */
       REGB0 = REGB4;
@@ -1374,7 +1374,7 @@ void syntax___icode_generation___MMSrcAttribute___generate_iroutine(val_t p0, va
     CALL_syntax___icode_generation___A2IVisitor___icode_ctx__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
     /* syntax/icode_generation.nit:206 */
     fra.me.REG[3] = CALL_syntax___syntax_base___MMLocalProperty___node(fra.me.REG[0])(fra.me.REG[0]);
-    CALL_parser___parser_prod___Visitor___enter_visit(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
+    CALL_parser___parser_nodes___Visitor___enter_visit(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
     /* syntax/icode_generation.nit:207 */
     CALL_syntax___icode_generation___A2IVisitor___icode_ctx__eq(fra.me.REG[1])(fra.me.REG[1], NIT_NULL);
     /* syntax/icode_generation.nit:208 */
@@ -1589,7 +1589,7 @@ void syntax___icode_generation___MMMethSrcMethod___inner_generate_iroutine(val_t
   /* syntax/icode_generation.nit:253 */
   fra.me.REG[1] = CALL_syntax___icode_generation___A2IContext___visitor(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[0] = CALL_syntax___syntax_base___MMLocalProperty___node(fra.me.REG[0])(fra.me.REG[0]);
-  CALL_parser___parser_prod___Visitor___enter_visit(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
+  CALL_parser___parser_nodes___Visitor___enter_visit(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return;
 }
@@ -1636,24 +1636,24 @@ void syntax___icode_generation___MMImplicitInit___inner_generate_iroutine(val_t 
     nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
   }
   REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[3]);
-  /* ../lib/standard/kernel.nit:240 */
+  /* ../lib/standard/kernel.nit:247 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB1));
   /* syntax/icode_generation.nit:262 */
   fra.me.REG[3] = CALL_standard___collection___abstract_collection___Collection___first(fra.me.REG[2])(fra.me.REG[2]);
   /* syntax/icode_generation.nit:263 */
   fra.me.REG[4] = CALL_syntax___syntax_base___MMImplicitInit___super_inits(fra.me.REG[0])(fra.me.REG[0]);
-  /* ../lib/standard/collection/array.nit:269 */
-  REGB0 = TAG_Int(0);
   /* ../lib/standard/collection/array.nit:270 */
+  REGB0 = TAG_Int(0);
+  /* ../lib/standard/collection/array.nit:271 */
   REGB2 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[4])!=NIT_NULL);
   if (UNTAG_Bool(REGB2)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 270);
+    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 271);
   }
   REGB2 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[4]);
-  /* ../lib/standard/collection/array.nit:271 */
-  fra.me.REG[5] = ATTR_standard___collection___array___Array____items(fra.me.REG[4]);
   /* ../lib/standard/collection/array.nit:272 */
+  fra.me.REG[5] = ATTR_standard___collection___array___Array____items(fra.me.REG[4]);
+  /* ../lib/standard/collection/array.nit:273 */
   while(1) {
     /* ../lib/standard/collection/array.nit:24 */
     REGB2 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[4])!=NIT_NULL);
@@ -1667,16 +1667,16 @@ void syntax___icode_generation___MMImplicitInit___inner_generate_iroutine(val_t 
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:242 */
     REGB2 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB2));
-    /* ../lib/standard/collection/array.nit:272 */
+    /* ../lib/standard/collection/array.nit:273 */
     if (UNTAG_Bool(REGB2)) {
-      /* ../lib/standard/collection/array.nit:273 */
+      /* ../lib/standard/collection/array.nit:274 */
       REGB2 = TAG_Bool(fra.me.REG[5]==NIT_NULL);
       if (UNTAG_Bool(REGB2)) {
-        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
+        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 274);
       }
-      /* ../lib/standard/collection/array.nit:724 */
+      /* ../lib/standard/collection/array.nit:725 */
       fra.me.REG[6] = ((Nit_NativeArray)fra.me.REG[5])->val[UNTAG_Int(REGB0)];
       /* syntax/icode_generation.nit:264 */
       REGB2 = TAG_Bool(VAL_ISA(fra.me.REG[6], COLOR_metamodel___abstractmetamodel___MMMethod, ID_metamodel___abstractmetamodel___MMMethod)) /*cast MMMethod*/;
@@ -1703,32 +1703,32 @@ void syntax___icode_generation___MMImplicitInit___inner_generate_iroutine(val_t 
         CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[8])(fra.me.REG[8], fra.me.REG[3]);
         /* syntax/icode_generation.nit:269 */
         REGB2 = TAG_Int(1);
-        /* ../lib/standard/kernel.nit:350 */
+        /* ../lib/standard/kernel.nit:399 */
         REGB3 = REGB1;
-        /* ../lib/standard/kernel.nit:355 */
+        /* ../lib/standard/kernel.nit:404 */
         while(1) {
           REGB4 = TAG_Bool(VAL_ISA(REGB3, VTCOLOR_standard___kernel___Comparable___OTHER(REGB2), VTID_standard___kernel___Comparable___OTHER(REGB2))) /*cast OTHER*/;
           if (UNTAG_Bool(REGB4)) {
           } else {
             nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
           }
-          /* ../lib/standard/kernel.nit:235 */
+          /* ../lib/standard/kernel.nit:242 */
           REGB4 = TAG_Bool(UNTAG_Int(REGB2)<UNTAG_Int(REGB3));
-          /* ../lib/standard/kernel.nit:355 */
+          /* ../lib/standard/kernel.nit:404 */
           if (UNTAG_Bool(REGB4)) {
             /* syntax/icode_generation.nit:269 */
             REGB4 = REGB2;
             /* syntax/icode_generation.nit:270 */
             fra.me.REG[9] = CALL_standard___collection___abstract_collection___SequenceRead_____bra(fra.me.REG[2])(fra.me.REG[2], REGB4);
             CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[8])(fra.me.REG[8], fra.me.REG[9]);
-            /* ../lib/standard/kernel.nit:357 */
+            /* ../lib/standard/kernel.nit:406 */
             REGB4 = TAG_Int(1);
-            /* ../lib/standard/kernel.nit:238 */
+            /* ../lib/standard/kernel.nit:245 */
             REGB4 = TAG_Int(UNTAG_Int(REGB2)+UNTAG_Int(REGB4));
-            /* ../lib/standard/kernel.nit:357 */
+            /* ../lib/standard/kernel.nit:406 */
             REGB2 = REGB4;
           } else {
-            /* ../lib/standard/kernel.nit:355 */
+            /* ../lib/standard/kernel.nit:404 */
             goto label1;
           }
         }
@@ -1741,54 +1741,54 @@ void syntax___icode_generation___MMImplicitInit___inner_generate_iroutine(val_t 
         fra.me.REG[7] = NEW_ICall_icode___icode_base___ICall___init(fra.me.REG[6], fra.me.REG[7]);
         CALL_icode___icode_builder___ICodeBuilder___stmt(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[7]);
       }
-      /* ../lib/standard/collection/array.nit:274 */
+      /* ../lib/standard/collection/array.nit:275 */
       REGB2 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB2 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB2));
-      /* ../lib/standard/collection/array.nit:274 */
+      /* ../lib/standard/collection/array.nit:275 */
       REGB0 = REGB2;
     } else {
-      /* ../lib/standard/collection/array.nit:272 */
+      /* ../lib/standard/collection/array.nit:273 */
       goto label2;
     }
   }
   label2: while(0);
   /* syntax/icode_generation.nit:277 */
   REGB0 = CALL_standard___collection___abstract_collection___Collection___length(fra.me.REG[2])(fra.me.REG[2]);
-  /* ../lib/standard/kernel.nit:350 */
+  /* ../lib/standard/kernel.nit:399 */
   REGB2 = REGB1;
-  /* ../lib/standard/kernel.nit:355 */
+  /* ../lib/standard/kernel.nit:404 */
   while(1) {
     REGB3 = TAG_Bool(VAL_ISA(REGB0, VTCOLOR_standard___kernel___Comparable___OTHER(REGB2), VTID_standard___kernel___Comparable___OTHER(REGB2))) /*cast OTHER*/;
     if (UNTAG_Bool(REGB3)) {
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:242 */
     REGB3 = TAG_Bool(UNTAG_Int(REGB2)<UNTAG_Int(REGB0));
-    /* ../lib/standard/kernel.nit:355 */
+    /* ../lib/standard/kernel.nit:404 */
     if (UNTAG_Bool(REGB3)) {
       /* syntax/icode_generation.nit:277 */
       REGB3 = REGB2;
       /* syntax/icode_generation.nit:278 */
       fra.me.REG[5] = CALL_syntax___syntax_base___MMImplicitInit___unassigned_attributes(fra.me.REG[0])(fra.me.REG[0]);
-      /* ../lib/standard/kernel.nit:240 */
+      /* ../lib/standard/kernel.nit:247 */
       REGB4 = TAG_Int(UNTAG_Int(REGB3)-UNTAG_Int(REGB1));
-      /* ../lib/standard/collection/array.nit:280 */
+      /* ../lib/standard/collection/array.nit:281 */
       REGB5 = TAG_Int(0);
       REGB6 = TAG_Bool(VAL_ISA(REGB5, VTCOLOR_standard___kernel___Comparable___OTHER(REGB4), VTID_standard___kernel___Comparable___OTHER(REGB4))) /*cast OTHER*/;
       if (UNTAG_Bool(REGB6)) {
       } else {
         nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
       }
-      /* ../lib/standard/kernel.nit:236 */
+      /* ../lib/standard/kernel.nit:243 */
       REGB5 = TAG_Bool(UNTAG_Int(REGB4)>=UNTAG_Int(REGB5));
-      /* ../lib/standard/collection/array.nit:280 */
+      /* ../lib/standard/collection/array.nit:281 */
       if (UNTAG_Bool(REGB5)) {
         REGB5 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[5])!=NIT_NULL);
         if (UNTAG_Bool(REGB5)) {
         } else {
-          nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 280);
+          nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 281);
         }
         REGB5 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[5]);
         REGB6 = TAG_Bool(VAL_ISA(REGB5, VTCOLOR_standard___kernel___Comparable___OTHER(REGB4), VTID_standard___kernel___Comparable___OTHER(REGB4))) /*cast OTHER*/;
@@ -1796,40 +1796,40 @@ void syntax___icode_generation___MMImplicitInit___inner_generate_iroutine(val_t 
         } else {
           nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
         }
-        /* ../lib/standard/kernel.nit:235 */
+        /* ../lib/standard/kernel.nit:242 */
         REGB5 = TAG_Bool(UNTAG_Int(REGB4)<UNTAG_Int(REGB5));
       } else {
-        /* ../lib/standard/collection/array.nit:280 */
+        /* ../lib/standard/collection/array.nit:281 */
         REGB6 = TAG_Bool(0);
         REGB5 = REGB6;
       }
       if (UNTAG_Bool(REGB5)) {
       } else {
-        nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 280);
+        nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 281);
       }
-      /* ../lib/standard/collection/array.nit:281 */
+      /* ../lib/standard/collection/array.nit:282 */
       fra.me.REG[5] = ATTR_standard___collection___array___Array____items(fra.me.REG[5]);
       REGB5 = TAG_Bool(fra.me.REG[5]==NIT_NULL);
       if (UNTAG_Bool(REGB5)) {
-        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
+        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 282);
       }
-      /* ../lib/standard/collection/array.nit:724 */
+      /* ../lib/standard/collection/array.nit:725 */
       fra.me.REG[5] = ((Nit_NativeArray)fra.me.REG[5])->val[UNTAG_Int(REGB4)];
-      /* ../lib/standard/collection/array.nit:281 */
+      /* ../lib/standard/collection/array.nit:282 */
       goto label3;
       label3: while(0);
       /* syntax/icode_generation.nit:279 */
       fra.me.REG[4] = CALL_standard___collection___abstract_collection___SequenceRead_____bra(fra.me.REG[2])(fra.me.REG[2], REGB3);
       fra.me.REG[4] = NEW_IAttrWrite_icode___icode_base___IAttrWrite___init(fra.me.REG[5], fra.me.REG[3], fra.me.REG[4]);
       CALL_icode___icode_builder___ICodeBuilder___stmt(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[4]);
-      /* ../lib/standard/kernel.nit:357 */
+      /* ../lib/standard/kernel.nit:406 */
       REGB3 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB3 = TAG_Int(UNTAG_Int(REGB2)+UNTAG_Int(REGB3));
-      /* ../lib/standard/kernel.nit:357 */
+      /* ../lib/standard/kernel.nit:406 */
       REGB2 = REGB3;
     } else {
-      /* ../lib/standard/kernel.nit:355 */
+      /* ../lib/standard/kernel.nit:404 */
       goto label4;
     }
   }
@@ -1885,10 +1885,9 @@ val_t syntax___icode_generation___A2IVisitor___icode_ctx(val_t p0){
   stack_frame_head = fra.me.prev;
   return fra.me.REG[1];
 }
-static const char LOCATE_syntax___icode_generation___A2IVisitor___visit[] = "icode_generation::A2IVisitor::(parser_prod::Visitor::visit)";
+static const char LOCATE_syntax___icode_generation___A2IVisitor___visit[] = "icode_generation::A2IVisitor::(parser_nodes::Visitor::visit)";
 void syntax___icode_generation___A2IVisitor___visit(val_t p0, val_t p1){
   struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
-  val_t REGB0;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___icode_generation;
@@ -1902,10 +1901,6 @@ void syntax___icode_generation___A2IVisitor___visit(val_t p0, val_t p1){
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   /* syntax/icode_generation.nit:288 */
-  REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
-  if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 288);
-  }
   CALL_syntax___icode_generation___ANode___accept_icode_generation(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return;
@@ -2104,16 +2099,16 @@ void syntax___icode_generation___ASignature___fill_iroutine_parameters(val_t p0,
   REGB0 = TAG_Int(0);
   fra.me.REG[3] = CALL_parser___parser_nodes___ASignature___n_closure_decls(fra.me.REG[5])(fra.me.REG[5]);
   REGB1 = CALL_standard___collection___abstract_collection___Collection___length(fra.me.REG[3])(fra.me.REG[3]);
-  /* ../lib/standard/kernel.nit:355 */
+  /* ../lib/standard/kernel.nit:404 */
   while(1) {
     REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
     if (UNTAG_Bool(REGB2)) {
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:242 */
     REGB2 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-    /* ../lib/standard/kernel.nit:355 */
+    /* ../lib/standard/kernel.nit:404 */
     if (UNTAG_Bool(REGB2)) {
       /* syntax/icode_generation.nit:335 */
       REGB2 = REGB0;
@@ -2129,14 +2124,14 @@ void syntax___icode_generation___ASignature___fill_iroutine_parameters(val_t p0,
       }
       fra.me.REG[2] = CALL_standard___collection___abstract_collection___SequenceRead_____bra(fra.me.REG[4])(fra.me.REG[4], REGB2);
       CALL_standard___collection___abstract_collection___Map_____braeq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3], fra.me.REG[2]);
-      /* ../lib/standard/kernel.nit:357 */
+      /* ../lib/standard/kernel.nit:406 */
       REGB2 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB2 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB2));
-      /* ../lib/standard/kernel.nit:357 */
+      /* ../lib/standard/kernel.nit:406 */
       REGB0 = REGB2;
     } else {
-      /* ../lib/standard/kernel.nit:355 */
+      /* ../lib/standard/kernel.nit:404 */
       goto label2;
     }
   }
@@ -2374,23 +2369,23 @@ void syntax___icode_generation___AConcreteMethPropdef___fill_iroutine(val_t p0, 
   fra.me.REG[4] = CALL_syntax___icode_generation___A2IContext___variable(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[4]);
   /* syntax/icode_generation.nit:373 */
   REGB0 = TAG_Int(0);
-  /* ../lib/standard/collection/array.nit:278 */
+  /* ../lib/standard/collection/array.nit:279 */
   fra.me.REG[5] = fra.me.REG[3];
-  /* ../lib/standard/collection/array.nit:280 */
+  /* ../lib/standard/collection/array.nit:281 */
   REGB1 = TAG_Int(0);
   REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
   if (UNTAG_Bool(REGB2)) {
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:236 */
+  /* ../lib/standard/kernel.nit:243 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)>=UNTAG_Int(REGB1));
-  /* ../lib/standard/collection/array.nit:280 */
+  /* ../lib/standard/collection/array.nit:281 */
   if (UNTAG_Bool(REGB1)) {
     REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[5])!=NIT_NULL);
     if (UNTAG_Bool(REGB1)) {
     } else {
-      nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 280);
+      nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 281);
     }
     REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[5]);
     REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
@@ -2398,26 +2393,26 @@ void syntax___icode_generation___AConcreteMethPropdef___fill_iroutine(val_t p0, 
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:242 */
     REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
   } else {
-    /* ../lib/standard/collection/array.nit:280 */
+    /* ../lib/standard/collection/array.nit:281 */
     REGB2 = TAG_Bool(0);
     REGB1 = REGB2;
   }
   if (UNTAG_Bool(REGB1)) {
   } else {
-    nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 280);
+    nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 281);
   }
-  /* ../lib/standard/collection/array.nit:281 */
+  /* ../lib/standard/collection/array.nit:282 */
   fra.me.REG[5] = ATTR_standard___collection___array___Array____items(fra.me.REG[5]);
   REGB1 = TAG_Bool(fra.me.REG[5]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
-    nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
+    nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 282);
   }
-  /* ../lib/standard/collection/array.nit:724 */
+  /* ../lib/standard/collection/array.nit:725 */
   fra.me.REG[5] = ((Nit_NativeArray)fra.me.REG[5])->val[UNTAG_Int(REGB0)];
-  /* ../lib/standard/collection/array.nit:281 */
+  /* ../lib/standard/collection/array.nit:282 */
   goto label1;
   label1: while(0);
   /* syntax/icode_generation.nit:373 */
@@ -2612,13 +2607,13 @@ void syntax___icode_generation___AExternInitPropdef___fill_iroutine(val_t p0, va
   }
   REGB1 = CALL_metamodel___static_type___MMSignature___arity(fra.me.REG[6])(fra.me.REG[6]);
   REGB2 = TAG_Int(1);
-  /* ../lib/standard/kernel.nit:238 */
+  /* ../lib/standard/kernel.nit:245 */
   REGB2 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB2));
   /* syntax/icode_generation.nit:418 */
   REGB1 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB2));
   if (UNTAG_Bool(REGB1)) {
   } else {
-    /* ../lib/standard/kernel.nit:230 */
+    /* ../lib/standard/kernel.nit:237 */
     REGB2 = TAG_Bool((REGB0)==(REGB2));
     /* syntax/icode_generation.nit:418 */
     REGB1 = REGB2;
@@ -2668,7 +2663,7 @@ void syntax___icode_generation___ADeferredMethPropdef___fill_iroutine(val_t p0, 
   if (!once_value_1) {
     fra.me.REG[0] = BOX_NativeString("Deferred method called");
     REGB0 = TAG_Int(22);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_1 = fra.me.REG[0];
     register_static_object(&once_value_1);
   } else fra.me.REG[0] = once_value_1;
@@ -3211,7 +3206,7 @@ val_t syntax___icode_generation___AAbortExpr___generate_icode(val_t p0, val_t p1
   if (!once_value_1) {
     fra.me.REG[2] = BOX_NativeString("Aborted");
     REGB0 = TAG_Int(7);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_1 = fra.me.REG[2];
     register_static_object(&once_value_1);
   } else fra.me.REG[2] = once_value_1;
@@ -3548,7 +3543,7 @@ val_t syntax___icode_generation___AForExpr___generate_icode(val_t p0, val_t p1){
         if (!once_value_2) {
           fra.me.REG[7] = BOX_NativeString("enumerate_to");
           REGB0 = TAG_Int(12);
-          fra.me.REG[7] = NEW_String_standard___string___String___with_native(fra.me.REG[7], REGB0);
+          fra.me.REG[7] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[7])(fra.me.REG[7], REGB0);
           once_value_2 = fra.me.REG[7];
           register_static_object(&once_value_2);
         } else fra.me.REG[7] = once_value_2;
@@ -3572,7 +3567,7 @@ val_t syntax___icode_generation___AForExpr___generate_icode(val_t p0, val_t p1){
         if (!once_value_4) {
           fra.me.REG[6] = BOX_NativeString("enumerate_before");
           REGB0 = TAG_Int(16);
-          fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB0);
+          fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB0);
           once_value_4 = fra.me.REG[6];
           register_static_object(&once_value_4);
         } else fra.me.REG[6] = once_value_4;
@@ -3592,7 +3587,7 @@ val_t syntax___icode_generation___AForExpr___generate_icode(val_t p0, val_t p1){
       if (!once_value_6) {
         fra.me.REG[4] = BOX_NativeString("iterate");
         REGB0 = TAG_Int(7);
-        fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+        fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
         once_value_6 = fra.me.REG[4];
         register_static_object(&once_value_6);
       } else fra.me.REG[4] = once_value_6;
@@ -3680,38 +3675,38 @@ val_t syntax___icode_generation___AForExpr___generate_icode(val_t p0, val_t p1){
     nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
   }
   REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[8]);
-  /* ../lib/standard/kernel.nit:355 */
+  /* ../lib/standard/kernel.nit:404 */
   while(1) {
     REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
     if (UNTAG_Bool(REGB2)) {
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:242 */
     REGB2 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-    /* ../lib/standard/kernel.nit:355 */
+    /* ../lib/standard/kernel.nit:404 */
     if (UNTAG_Bool(REGB2)) {
       /* syntax/icode_generation.nit:667 */
       REGB2 = REGB0;
       /* syntax/icode_generation.nit:668 */
       fra.me.REG[8] = CALL_syntax___syntax_base___AForExpr___variables(fra.me.REG[0])(fra.me.REG[0]);
-      /* ../lib/standard/collection/array.nit:278 */
+      /* ../lib/standard/collection/array.nit:279 */
       REGB3 = REGB2;
-      /* ../lib/standard/collection/array.nit:280 */
+      /* ../lib/standard/collection/array.nit:281 */
       REGB4 = TAG_Int(0);
       REGB5 = TAG_Bool(VAL_ISA(REGB4, VTCOLOR_standard___kernel___Comparable___OTHER(REGB3), VTID_standard___kernel___Comparable___OTHER(REGB3))) /*cast OTHER*/;
       if (UNTAG_Bool(REGB5)) {
       } else {
         nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
       }
-      /* ../lib/standard/kernel.nit:236 */
+      /* ../lib/standard/kernel.nit:243 */
       REGB4 = TAG_Bool(UNTAG_Int(REGB3)>=UNTAG_Int(REGB4));
-      /* ../lib/standard/collection/array.nit:280 */
+      /* ../lib/standard/collection/array.nit:281 */
       if (UNTAG_Bool(REGB4)) {
         REGB4 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[8])!=NIT_NULL);
         if (UNTAG_Bool(REGB4)) {
         } else {
-          nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 280);
+          nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 281);
         }
         REGB4 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[8]);
         REGB5 = TAG_Bool(VAL_ISA(REGB4, VTCOLOR_standard___kernel___Comparable___OTHER(REGB3), VTID_standard___kernel___Comparable___OTHER(REGB3))) /*cast OTHER*/;
@@ -3719,26 +3714,26 @@ val_t syntax___icode_generation___AForExpr___generate_icode(val_t p0, val_t p1){
         } else {
           nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
         }
-        /* ../lib/standard/kernel.nit:235 */
+        /* ../lib/standard/kernel.nit:242 */
         REGB4 = TAG_Bool(UNTAG_Int(REGB3)<UNTAG_Int(REGB4));
       } else {
-        /* ../lib/standard/collection/array.nit:280 */
+        /* ../lib/standard/collection/array.nit:281 */
         REGB5 = TAG_Bool(0);
         REGB4 = REGB5;
       }
       if (UNTAG_Bool(REGB4)) {
       } else {
-        nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 280);
+        nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 281);
       }
-      /* ../lib/standard/collection/array.nit:281 */
+      /* ../lib/standard/collection/array.nit:282 */
       fra.me.REG[8] = ATTR_standard___collection___array___Array____items(fra.me.REG[8]);
       REGB4 = TAG_Bool(fra.me.REG[8]==NIT_NULL);
       if (UNTAG_Bool(REGB4)) {
-        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
+        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 282);
       }
-      /* ../lib/standard/collection/array.nit:724 */
+      /* ../lib/standard/collection/array.nit:725 */
       fra.me.REG[8] = ((Nit_NativeArray)fra.me.REG[8])->val[UNTAG_Int(REGB3)];
-      /* ../lib/standard/collection/array.nit:281 */
+      /* ../lib/standard/collection/array.nit:282 */
       goto label7;
       label7: while(0);
       /* syntax/icode_generation.nit:668 */
@@ -3747,14 +3742,14 @@ val_t syntax___icode_generation___AForExpr___generate_icode(val_t p0, val_t p1){
       fra.me.REG[2] = CALL_standard___collection___abstract_collection___SequenceRead_____bra(fra.me.REG[2])(fra.me.REG[2], REGB2);
       fra.me.REG[2] = NEW_IMove_icode___icode_base___IMove___init(fra.me.REG[8], fra.me.REG[2]);
       CALL_icode___icode_builder___ICodeBuilder___stmt(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-      /* ../lib/standard/kernel.nit:357 */
+      /* ../lib/standard/kernel.nit:406 */
       REGB2 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB2 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB2));
-      /* ../lib/standard/kernel.nit:357 */
+      /* ../lib/standard/kernel.nit:406 */
       REGB0 = REGB2;
     } else {
-      /* ../lib/standard/kernel.nit:355 */
+      /* ../lib/standard/kernel.nit:404 */
       goto label8;
     }
   }
@@ -3837,7 +3832,7 @@ val_t syntax___icode_generation___AAssertExpr___generate_icode(val_t p0, val_t p
     if (!once_value_1) {
       fra.me.REG[4] = BOX_NativeString("Assert failed");
       REGB0 = TAG_Int(13);
-      fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+      fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
       once_value_1 = fra.me.REG[4];
       register_static_object(&once_value_1);
     } else fra.me.REG[4] = once_value_1;
@@ -3851,7 +3846,7 @@ val_t syntax___icode_generation___AAssertExpr___generate_icode(val_t p0, val_t p
     if (!once_value_2) {
       fra.me.REG[4] = BOX_NativeString("Assert '%s' failed");
       REGB0 = TAG_Int(18);
-      fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+      fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
       once_value_2 = fra.me.REG[4];
       register_static_object(&once_value_2);
     } else fra.me.REG[4] = once_value_2;
@@ -4544,35 +4539,35 @@ val_t syntax___icode_generation___AStringFormExpr___generate_icode(val_t p0, val
   fra.me.REG[4] = CALL_icode___icode_base___IOnce___body(fra.me.REG[4])(fra.me.REG[4]);
   CALL_icode___icode_builder___ICodeBuilder___seq__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[4]);
   /* syntax/icode_generation.nit:919 */
-  fra.me.REG[4] = ATTR_syntax___icode_generation___AStringFormExpr____cstring(fra.me.REG[2]);
-  REGB0 = TAG_Bool(fra.me.REG[4]!=NIT_NULL);
+  fra.me.REG[4] = CALL_syntax___icode_generation___A2IContext___visitor(fra.me.REG[1])(fra.me.REG[1]);
+  fra.me.REG[4] = CALL_syntax___syntax_base___AbsSyntaxVisitor___type_nativestring(fra.me.REG[4])(fra.me.REG[4]);
+  /* syntax/icode_generation.nit:920 */
+  fra.me.REG[6] = ATTR_syntax___icode_generation___AStringFormExpr____cstring(fra.me.REG[2]);
+  REGB0 = TAG_Bool(fra.me.REG[6]!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Cast failed", NULL, LOCATE_syntax___icode_generation, 919);
+    nit_abort("Cast failed", NULL, LOCATE_syntax___icode_generation, 920);
   }
-  fra.me.REG[4] = NEW_IStringValue_icode___icode_base___IStringValue___init(fra.me.REG[4]);
-  fra.me.REG[0] = CALL_syntax___icode_generation___A2IContext___visitor(fra.me.REG[1])(fra.me.REG[1]);
-  fra.me.REG[0] = CALL_syntax___syntax_base___AbsSyntaxVisitor___type_nativestring(fra.me.REG[0])(fra.me.REG[0]);
-  fra.me.REG[0] = CALL_icode___icode_builder___ICodeBuilder___expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[4], fra.me.REG[0]);
-  /* syntax/icode_generation.nit:920 */
-  fra.me.REG[4] = ATTR_syntax___icode_generation___AStringFormExpr____cstring_length(fra.me.REG[2]);
-  REGB0 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
-  if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 920);
-  }
-  fra.me.REG[4] = CALL_standard___string___Object___to_s(fra.me.REG[4])(fra.me.REG[4]);
-  fra.me.REG[4] = NEW_IIntValue_icode___icode_base___IIntValue___init(fra.me.REG[4]);
-  fra.me.REG[6] = CALL_syntax___icode_generation___A2IContext___visitor(fra.me.REG[1])(fra.me.REG[1]);
-  fra.me.REG[6] = CALL_syntax___syntax_base___AbsSyntaxVisitor___type_int(fra.me.REG[6])(fra.me.REG[6]);
-  fra.me.REG[6] = CALL_icode___icode_builder___ICodeBuilder___expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[4], fra.me.REG[6]);
+  fra.me.REG[6] = NEW_IStringValue_icode___icode_base___IStringValue___init(fra.me.REG[6]);
+  fra.me.REG[6] = CALL_icode___icode_builder___ICodeBuilder___expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[6], fra.me.REG[4]);
   /* syntax/icode_generation.nit:921 */
-  fra.me.REG[4] = CALL_syntax___icode_generation___A2IContext___visitor(fra.me.REG[1])(fra.me.REG[1]);
-  fra.me.REG[7] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[2])(fra.me.REG[2]);
+  fra.me.REG[0] = ATTR_syntax___icode_generation___AStringFormExpr____cstring_length(fra.me.REG[2]);
+  REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+    nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 921);
+  }
+  fra.me.REG[0] = CALL_standard___string___Object___to_s(fra.me.REG[0])(fra.me.REG[0]);
+  fra.me.REG[0] = NEW_IIntValue_icode___icode_base___IIntValue___init(fra.me.REG[0]);
+  fra.me.REG[7] = CALL_syntax___icode_generation___A2IContext___visitor(fra.me.REG[1])(fra.me.REG[1]);
+  fra.me.REG[7] = CALL_syntax___syntax_base___AbsSyntaxVisitor___type_int(fra.me.REG[7])(fra.me.REG[7]);
+  fra.me.REG[7] = CALL_icode___icode_builder___ICodeBuilder___expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[7]);
+  /* syntax/icode_generation.nit:922 */
+  fra.me.REG[0] = CALL_syntax___icode_generation___A2IContext___visitor(fra.me.REG[1])(fra.me.REG[1]);
   if (!once_value_1) {
     if (!once_value_2) {
-      fra.me.REG[8] = BOX_NativeString("with_native");
-      REGB0 = TAG_Int(11);
-      fra.me.REG[8] = NEW_String_standard___string___String___with_native(fra.me.REG[8], REGB0);
+      fra.me.REG[8] = BOX_NativeString("to_s_with_length");
+      REGB0 = TAG_Int(16);
+      fra.me.REG[8] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[8])(fra.me.REG[8], REGB0);
       once_value_2 = fra.me.REG[8];
       register_static_object(&once_value_2);
     } else fra.me.REG[8] = once_value_2;
@@ -4582,21 +4577,20 @@ val_t syntax___icode_generation___AStringFormExpr___generate_icode(val_t p0, val
     register_static_object(&once_value_1);
   } else fra.me.REG[8] = once_value_1;
   fra.me.REG[8] = fra.me.REG[8];
-  fra.me.REG[8] = CALL_syntax___syntax_base___AbsSyntaxVisitor___get_method(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[7], fra.me.REG[8]);
-  /* syntax/icode_generation.nit:922 */
-  fra.me.REG[7] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[2])(fra.me.REG[2]);
+  fra.me.REG[8] = CALL_syntax___syntax_base___AbsSyntaxVisitor___get_method(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[4], fra.me.REG[8]);
+  /* syntax/icode_generation.nit:923 */
   REGB0 = TAG_Int(2);
   fra.me.REG[4] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
-  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[0]);
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[6]);
-  fra.me.REG[4] = NEW_INew_icode___icode_base___INew___init(fra.me.REG[7], fra.me.REG[8], fra.me.REG[4]);
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[7]);
+  fra.me.REG[4] = NEW_ICall_icode___icode_base___ICall___init(fra.me.REG[8], fra.me.REG[4]);
   fra.me.REG[2] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[2] = CALL_icode___icode_builder___ICodeBuilder___expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[4], fra.me.REG[2]);
-  /* syntax/icode_generation.nit:923 */
-  CALL_icode___icode_builder___ICodeBuilder___add_assignment(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[5], fra.me.REG[2]);
   /* syntax/icode_generation.nit:924 */
-  CALL_icode___icode_builder___ICodeBuilder___seq__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
+  CALL_icode___icode_builder___ICodeBuilder___add_assignment(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[5], fra.me.REG[2]);
   /* syntax/icode_generation.nit:925 */
+  CALL_icode___icode_builder___ICodeBuilder___seq__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
+  /* syntax/icode_generation.nit:926 */
   goto label3;
   label3: while(0);
   stack_frame_head = fra.me.prev;
@@ -4608,13 +4602,13 @@ val_t syntax___icode_generation___AStringFormExpr___string_text(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___icode_generation;
-  fra.me.line = 928;
+  fra.me.line = 929;
   fra.me.meth = LOCATE_syntax___icode_generation___AStringFormExpr___string_text;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* syntax/icode_generation.nit:928 */
-  nit_abort("Deferred method called", NULL, LOCATE_syntax___icode_generation, 928);
+  /* syntax/icode_generation.nit:929 */
+  nit_abort("Deferred method called", NULL, LOCATE_syntax___icode_generation, 929);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -4630,7 +4624,7 @@ void syntax___icode_generation___AStringFormExpr___compute_string_infos(val_t p0
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___icode_generation;
-  fra.me.line = 937;
+  fra.me.line = 938;
   fra.me.meth = LOCATE_syntax___icode_generation___AStringFormExpr___compute_string_infos;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -4639,7 +4633,7 @@ void syntax___icode_generation___AStringFormExpr___compute_string_infos(val_t p0
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/icode_generation.nit:940 */
+  /* syntax/icode_generation.nit:941 */
   fra.me.REG[1] = CALL_parser___parser_nodes___AStringFormExpr___n_string(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[1] = CALL_parser___parser_nodes___Token___text(fra.me.REG[1])(fra.me.REG[1]);
   /* ../lib/standard/collection/array.nit:24 */
@@ -4649,16 +4643,16 @@ void syntax___icode_generation___AStringFormExpr___compute_string_infos(val_t p0
     nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
   }
   REGB0 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1]);
-  /* syntax/icode_generation.nit:941 */
+  /* syntax/icode_generation.nit:942 */
   REGB1 = TAG_Int(6);
   REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
   if (UNTAG_Bool(REGB2)) {
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:236 */
+  /* ../lib/standard/kernel.nit:243 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)>=UNTAG_Int(REGB1));
-  /* syntax/icode_generation.nit:941 */
+  /* syntax/icode_generation.nit:942 */
   if (UNTAG_Bool(REGB1)) {
     REGB1 = TAG_Int(0);
     REGB1 = CALL_standard___collection___abstract_collection___SequenceRead_____bra(fra.me.REG[1])(fra.me.REG[1], REGB1);
@@ -4667,9 +4661,9 @@ void syntax___icode_generation___AStringFormExpr___compute_string_infos(val_t p0
     REGB2 = TAG_Bool(IS_EQUAL_OO(REGB1,REGB0));
     if (UNTAG_Bool(REGB2)) {
     } else {
-      /* ../lib/standard/kernel.nit:381 */
+      /* ../lib/standard/kernel.nit:434 */
       REGB0 = TAG_Bool((REGB1)==(REGB0));
-      /* syntax/icode_generation.nit:941 */
+      /* syntax/icode_generation.nit:942 */
       REGB2 = REGB0;
     }
   } else {
@@ -4677,7 +4671,7 @@ void syntax___icode_generation___AStringFormExpr___compute_string_infos(val_t p0
     REGB2 = REGB0;
   }
   if (UNTAG_Bool(REGB2)) {
-    /* syntax/icode_generation.nit:942 */
+    /* syntax/icode_generation.nit:943 */
     REGB2 = TAG_Int(3);
     /* ../lib/standard/collection/array.nit:24 */
     REGB0 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1])!=NIT_NULL);
@@ -4686,15 +4680,15 @@ void syntax___icode_generation___AStringFormExpr___compute_string_infos(val_t p0
       nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
     }
     REGB0 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1]);
-    /* syntax/icode_generation.nit:942 */
+    /* syntax/icode_generation.nit:943 */
     REGB1 = TAG_Int(6);
-    /* ../lib/standard/kernel.nit:240 */
+    /* ../lib/standard/kernel.nit:247 */
     REGB1 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB1));
-    /* syntax/icode_generation.nit:942 */
+    /* syntax/icode_generation.nit:943 */
     fra.me.REG[2] = CALL_standard___string___AbstractString___substring(fra.me.REG[1])(fra.me.REG[1], REGB2, REGB1);
     fra.me.REG[1] = fra.me.REG[2];
   } else {
-    /* syntax/icode_generation.nit:944 */
+    /* syntax/icode_generation.nit:945 */
     REGB1 = TAG_Int(1);
     /* ../lib/standard/collection/array.nit:24 */
     REGB2 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1])!=NIT_NULL);
@@ -4703,21 +4697,21 @@ void syntax___icode_generation___AStringFormExpr___compute_string_infos(val_t p0
       nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
     }
     REGB2 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1]);
-    /* syntax/icode_generation.nit:944 */
+    /* syntax/icode_generation.nit:945 */
     REGB0 = TAG_Int(2);
-    /* ../lib/standard/kernel.nit:240 */
+    /* ../lib/standard/kernel.nit:247 */
     REGB0 = TAG_Int(UNTAG_Int(REGB2)-UNTAG_Int(REGB0));
-    /* syntax/icode_generation.nit:944 */
+    /* syntax/icode_generation.nit:945 */
     fra.me.REG[2] = CALL_standard___string___AbstractString___substring(fra.me.REG[1])(fra.me.REG[1], REGB1, REGB0);
     fra.me.REG[1] = fra.me.REG[2];
   }
-  /* syntax/icode_generation.nit:946 */
-  fra.me.REG[2] = NEW_Buffer_standard___string___Buffer___init();
   /* syntax/icode_generation.nit:947 */
-  REGB0 = TAG_Int(0);
+  fra.me.REG[2] = NEW_Buffer_standard___string___Buffer___init();
   /* syntax/icode_generation.nit:948 */
-  REGB1 = TAG_Int(0);
+  REGB0 = TAG_Int(0);
   /* syntax/icode_generation.nit:949 */
+  REGB1 = TAG_Int(0);
+  /* syntax/icode_generation.nit:950 */
   while(1) {
     /* ../lib/standard/collection/array.nit:24 */
     REGB2 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1])!=NIT_NULL);
@@ -4731,39 +4725,39 @@ void syntax___icode_generation___AStringFormExpr___compute_string_infos(val_t p0
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:242 */
     REGB2 = TAG_Bool(UNTAG_Int(REGB1)<UNTAG_Int(REGB2));
-    /* syntax/icode_generation.nit:949 */
+    /* syntax/icode_generation.nit:950 */
     if (UNTAG_Bool(REGB2)) {
-      /* syntax/icode_generation.nit:950 */
-      REGB2 = CALL_standard___collection___abstract_collection___SequenceRead_____bra(fra.me.REG[1])(fra.me.REG[1], REGB1);
       /* syntax/icode_generation.nit:951 */
+      REGB2 = CALL_standard___collection___abstract_collection___SequenceRead_____bra(fra.me.REG[1])(fra.me.REG[1], REGB1);
+      /* syntax/icode_generation.nit:952 */
       REGB3 = TAG_Char('\\');
       REGB4 = TAG_Bool(IS_EQUAL_OO(REGB2,REGB3));
       if (UNTAG_Bool(REGB4)) {
       } else {
-        /* ../lib/standard/kernel.nit:381 */
+        /* ../lib/standard/kernel.nit:434 */
         REGB3 = TAG_Bool((REGB2)==(REGB3));
-        /* syntax/icode_generation.nit:951 */
+        /* syntax/icode_generation.nit:952 */
         REGB4 = REGB3;
       }
       if (UNTAG_Bool(REGB4)) {
-        /* syntax/icode_generation.nit:952 */
-        REGB4 = TAG_Int(1);
-        /* ../lib/standard/kernel.nit:238 */
-        REGB4 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB4));
-        /* syntax/icode_generation.nit:952 */
-        REGB1 = REGB4;
         /* syntax/icode_generation.nit:953 */
-        REGB4 = CALL_standard___collection___abstract_collection___SequenceRead_____bra(fra.me.REG[1])(fra.me.REG[1], REGB1);
+        REGB4 = TAG_Int(1);
+        /* ../lib/standard/kernel.nit:245 */
+        REGB4 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB4));
+        /* syntax/icode_generation.nit:953 */
+        REGB1 = REGB4;
         /* syntax/icode_generation.nit:954 */
+        REGB4 = CALL_standard___collection___abstract_collection___SequenceRead_____bra(fra.me.REG[1])(fra.me.REG[1], REGB1);
+        /* syntax/icode_generation.nit:955 */
         REGB3 = TAG_Char('{');
         REGB5 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB3));
         if (UNTAG_Bool(REGB5)) {
         } else {
-          /* ../lib/standard/kernel.nit:381 */
+          /* ../lib/standard/kernel.nit:434 */
           REGB3 = TAG_Bool((REGB4)==(REGB3));
-          /* syntax/icode_generation.nit:954 */
+          /* syntax/icode_generation.nit:955 */
           REGB5 = REGB3;
         }
         REGB5 = TAG_Bool(!UNTAG_Bool(REGB5));
@@ -4772,9 +4766,9 @@ void syntax___icode_generation___AStringFormExpr___compute_string_infos(val_t p0
           REGB3 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB5));
           if (UNTAG_Bool(REGB3)) {
           } else {
-            /* ../lib/standard/kernel.nit:381 */
+            /* ../lib/standard/kernel.nit:434 */
             REGB5 = TAG_Bool((REGB4)==(REGB5));
-            /* syntax/icode_generation.nit:954 */
+            /* syntax/icode_generation.nit:955 */
             REGB3 = REGB5;
           }
           REGB3 = TAG_Bool(!UNTAG_Bool(REGB3));
@@ -4783,71 +4777,71 @@ void syntax___icode_generation___AStringFormExpr___compute_string_infos(val_t p0
           REGB3 = REGB5;
         }
         if (UNTAG_Bool(REGB3)) {
-          /* syntax/icode_generation.nit:955 */
+          /* syntax/icode_generation.nit:956 */
           CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], REGB2);
         }
-        /* syntax/icode_generation.nit:957 */
+        /* syntax/icode_generation.nit:958 */
         REGB2 = REGB4;
       } else {
-        /* syntax/icode_generation.nit:958 */
+        /* syntax/icode_generation.nit:959 */
         REGB4 = TAG_Char('"');
         REGB3 = TAG_Bool(IS_EQUAL_OO(REGB2,REGB4));
         if (UNTAG_Bool(REGB3)) {
         } else {
-          /* ../lib/standard/kernel.nit:381 */
+          /* ../lib/standard/kernel.nit:434 */
           REGB4 = TAG_Bool((REGB2)==(REGB4));
-          /* syntax/icode_generation.nit:958 */
+          /* syntax/icode_generation.nit:959 */
           REGB3 = REGB4;
         }
         if (UNTAG_Bool(REGB3)) {
-          /* syntax/icode_generation.nit:959 */
+          /* syntax/icode_generation.nit:960 */
           REGB3 = TAG_Char('\\');
           CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], REGB3);
         } else {
-          /* syntax/icode_generation.nit:960 */
+          /* syntax/icode_generation.nit:961 */
           REGB3 = TAG_Char('\n');
           REGB4 = TAG_Bool(IS_EQUAL_OO(REGB2,REGB3));
           if (UNTAG_Bool(REGB4)) {
           } else {
-            /* ../lib/standard/kernel.nit:381 */
+            /* ../lib/standard/kernel.nit:434 */
             REGB3 = TAG_Bool((REGB2)==(REGB3));
-            /* syntax/icode_generation.nit:960 */
+            /* syntax/icode_generation.nit:961 */
             REGB4 = REGB3;
           }
           if (UNTAG_Bool(REGB4)) {
-            /* syntax/icode_generation.nit:961 */
+            /* syntax/icode_generation.nit:962 */
             REGB4 = TAG_Char('\\');
             CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], REGB4);
-            /* syntax/icode_generation.nit:962 */
+            /* syntax/icode_generation.nit:963 */
             REGB4 = TAG_Char('n');
             REGB2 = REGB4;
           }
         }
       }
-      /* syntax/icode_generation.nit:964 */
-      REGB4 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
-      REGB4 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB4));
-      /* syntax/icode_generation.nit:964 */
-      REGB0 = REGB4;
       /* syntax/icode_generation.nit:965 */
+      REGB4 = TAG_Int(1);
+      /* ../lib/standard/kernel.nit:245 */
+      REGB4 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB4));
+      /* syntax/icode_generation.nit:965 */
+      REGB0 = REGB4;
+      /* syntax/icode_generation.nit:966 */
       CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], REGB2);
-      /* syntax/icode_generation.nit:966 */
+      /* syntax/icode_generation.nit:967 */
       REGB2 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB2 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB2));
-      /* syntax/icode_generation.nit:966 */
+      /* syntax/icode_generation.nit:967 */
       REGB1 = REGB2;
     } else {
-      /* syntax/icode_generation.nit:949 */
+      /* syntax/icode_generation.nit:950 */
       goto label1;
     }
   }
   label1: while(0);
-  /* syntax/icode_generation.nit:968 */
+  /* syntax/icode_generation.nit:969 */
   fra.me.REG[2] = CALL_standard___string___Object___to_s(fra.me.REG[2])(fra.me.REG[2]);
   ATTR_syntax___icode_generation___AStringFormExpr____cstring(fra.me.REG[0]) = fra.me.REG[2];
-  /* syntax/icode_generation.nit:969 */
+  /* syntax/icode_generation.nit:970 */
   ATTR_syntax___icode_generation___AStringFormExpr____cstring_length(fra.me.REG[0]) = REGB0;
   stack_frame_head = fra.me.prev;
   return;
@@ -4861,7 +4855,7 @@ val_t syntax___icode_generation___AStringExpr___string_text(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___icode_generation;
-  fra.me.line = 974;
+  fra.me.line = 975;
   fra.me.meth = LOCATE_syntax___icode_generation___AStringExpr___string_text;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -4869,7 +4863,7 @@ val_t syntax___icode_generation___AStringExpr___string_text(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/icode_generation.nit:974 */
+  /* syntax/icode_generation.nit:975 */
   fra.me.REG[1] = CALL_parser___parser_nodes___AStringFormExpr___n_string(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[1] = CALL_parser___parser_nodes___Token___text(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Int(1);
@@ -4882,11 +4876,11 @@ val_t syntax___icode_generation___AStringExpr___string_text(val_t p0){
     nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
   }
   REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[0]);
-  /* syntax/icode_generation.nit:974 */
+  /* syntax/icode_generation.nit:975 */
   REGB2 = TAG_Int(2);
-  /* ../lib/standard/kernel.nit:240 */
+  /* ../lib/standard/kernel.nit:247 */
   REGB2 = TAG_Int(UNTAG_Int(REGB1)-UNTAG_Int(REGB2));
-  /* syntax/icode_generation.nit:974 */
+  /* syntax/icode_generation.nit:975 */
   fra.me.REG[1] = CALL_standard___string___AbstractString___substring(fra.me.REG[1])(fra.me.REG[1], REGB0, REGB2);
   goto label1;
   label1: while(0);
@@ -4902,7 +4896,7 @@ val_t syntax___icode_generation___AStartStringExpr___string_text(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___icode_generation;
-  fra.me.line = 977;
+  fra.me.line = 978;
   fra.me.meth = LOCATE_syntax___icode_generation___AStartStringExpr___string_text;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -4910,7 +4904,7 @@ val_t syntax___icode_generation___AStartStringExpr___string_text(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/icode_generation.nit:977 */
+  /* syntax/icode_generation.nit:978 */
   fra.me.REG[1] = CALL_parser___parser_nodes___AStringFormExpr___n_string(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[1] = CALL_parser___parser_nodes___Token___text(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Int(1);
@@ -4923,11 +4917,11 @@ val_t syntax___icode_generation___AStartStringExpr___string_text(val_t p0){
     nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
   }
   REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[0]);
-  /* syntax/icode_generation.nit:977 */
+  /* syntax/icode_generation.nit:978 */
   REGB2 = TAG_Int(2);
-  /* ../lib/standard/kernel.nit:240 */
+  /* ../lib/standard/kernel.nit:247 */
   REGB2 = TAG_Int(UNTAG_Int(REGB1)-UNTAG_Int(REGB2));
-  /* syntax/icode_generation.nit:977 */
+  /* syntax/icode_generation.nit:978 */
   fra.me.REG[1] = CALL_standard___string___AbstractString___substring(fra.me.REG[1])(fra.me.REG[1], REGB0, REGB2);
   goto label1;
   label1: while(0);
@@ -4943,7 +4937,7 @@ val_t syntax___icode_generation___AMidStringExpr___string_text(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___icode_generation;
-  fra.me.line = 980;
+  fra.me.line = 981;
   fra.me.meth = LOCATE_syntax___icode_generation___AMidStringExpr___string_text;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -4951,7 +4945,7 @@ val_t syntax___icode_generation___AMidStringExpr___string_text(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/icode_generation.nit:980 */
+  /* syntax/icode_generation.nit:981 */
   fra.me.REG[1] = CALL_parser___parser_nodes___AStringFormExpr___n_string(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[1] = CALL_parser___parser_nodes___Token___text(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Int(1);
@@ -4964,11 +4958,11 @@ val_t syntax___icode_generation___AMidStringExpr___string_text(val_t p0){
     nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
   }
   REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[0]);
-  /* syntax/icode_generation.nit:980 */
+  /* syntax/icode_generation.nit:981 */
   REGB2 = TAG_Int(2);
-  /* ../lib/standard/kernel.nit:240 */
+  /* ../lib/standard/kernel.nit:247 */
   REGB2 = TAG_Int(UNTAG_Int(REGB1)-UNTAG_Int(REGB2));
-  /* syntax/icode_generation.nit:980 */
+  /* syntax/icode_generation.nit:981 */
   fra.me.REG[1] = CALL_standard___string___AbstractString___substring(fra.me.REG[1])(fra.me.REG[1], REGB0, REGB2);
   goto label1;
   label1: while(0);
@@ -4984,7 +4978,7 @@ val_t syntax___icode_generation___AEndStringExpr___string_text(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___icode_generation;
-  fra.me.line = 983;
+  fra.me.line = 984;
   fra.me.meth = LOCATE_syntax___icode_generation___AEndStringExpr___string_text;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -4992,7 +4986,7 @@ val_t syntax___icode_generation___AEndStringExpr___string_text(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* syntax/icode_generation.nit:983 */
+  /* syntax/icode_generation.nit:984 */
   fra.me.REG[1] = CALL_parser___parser_nodes___AStringFormExpr___n_string(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[1] = CALL_parser___parser_nodes___Token___text(fra.me.REG[1])(fra.me.REG[1]);
   REGB0 = TAG_Int(1);
@@ -5005,11 +4999,11 @@ val_t syntax___icode_generation___AEndStringExpr___string_text(val_t p0){
     nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
   }
   REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[0]);
-  /* syntax/icode_generation.nit:983 */
+  /* syntax/icode_generation.nit:984 */
   REGB2 = TAG_Int(2);
-  /* ../lib/standard/kernel.nit:240 */
+  /* ../lib/standard/kernel.nit:247 */
   REGB2 = TAG_Int(UNTAG_Int(REGB1)-UNTAG_Int(REGB2));
-  /* syntax/icode_generation.nit:983 */
+  /* syntax/icode_generation.nit:984 */
   fra.me.REG[1] = CALL_standard___string___AbstractString___substring(fra.me.REG[1])(fra.me.REG[1], REGB0, REGB2);
   goto label1;
   label1: while(0);
@@ -5025,7 +5019,7 @@ val_t syntax___icode_generation___ASuperstringExpr___generate_icode(val_t p0, va
     static val_t once_value_2; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___icode_generation;
-  fra.me.line = 987;
+  fra.me.line = 988;
   fra.me.meth = LOCATE_syntax___icode_generation___ASuperstringExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
@@ -5038,12 +5032,12 @@ val_t syntax___icode_generation___ASuperstringExpr___generate_icode(val_t p0, va
   fra.me.REG[5] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/icode_generation.nit:989 */
+  /* syntax/icode_generation.nit:990 */
   fra.me.REG[2] = CALL_syntax___syntax_base___ASuperstringExpr___atype(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[3] = CALL_parser___parser_nodes___ASuperstringExpr___n_exprs(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = CALL_standard___collection___abstract_collection___Collection___length(fra.me.REG[3])(fra.me.REG[3]);
   fra.me.REG[2] = CALL_syntax___icode_generation___A2IContext___add_new_array(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2], REGB0);
-  /* syntax/icode_generation.nit:990 */
+  /* syntax/icode_generation.nit:991 */
   fra.me.REG[3] = CALL_syntax___icode_generation___A2IContext___visitor(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[4] = CALL_syntax___icode_generation___A2IContext___visitor(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[4] = CALL_syntax___syntax_base___AbsSyntaxVisitor___type_object(fra.me.REG[4])(fra.me.REG[4]);
@@ -5051,7 +5045,7 @@ val_t syntax___icode_generation___ASuperstringExpr___generate_icode(val_t p0, va
     if (!once_value_2) {
       fra.me.REG[5] = BOX_NativeString("to_s");
       REGB0 = TAG_Int(4);
-      fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB0);
+      fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB0);
       once_value_2 = fra.me.REG[5];
       register_static_object(&once_value_2);
     } else fra.me.REG[5] = once_value_2;
@@ -5062,10 +5056,10 @@ val_t syntax___icode_generation___ASuperstringExpr___generate_icode(val_t p0, va
   } else fra.me.REG[5] = once_value_1;
   fra.me.REG[5] = fra.me.REG[5];
   fra.me.REG[5] = CALL_syntax___syntax_base___AbsSyntaxVisitor___get_method(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[4], fra.me.REG[5]);
-  /* syntax/icode_generation.nit:991 */
+  /* syntax/icode_generation.nit:992 */
   fra.me.REG[4] = CALL_parser___parser_nodes___ASuperstringExpr___n_exprs(fra.me.REG[0])(fra.me.REG[0]);
   CALL_standard___collection___abstract_collection___Collection___iterate(fra.me.REG[4])(fra.me.REG[4], (&(fra.me)), ((fun_t)OC_syntax___icode_generation___ASuperstringExpr___generate_icode_3));
-  /* syntax/icode_generation.nit:998 */
+  /* syntax/icode_generation.nit:999 */
   REGB0 = TAG_Int(1);
   fra.me.REG[4] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[2]);
@@ -5097,9 +5091,9 @@ val_t syntax___icode_generation___ASuperstringExpr___generate_icode(val_t p0, va
     fra.me.closure_funs = CREG;
     fra.me.REG[0] = p0;
     CREG[0] = clos_fun0;
-    /* syntax/icode_generation.nit:992 */
-    fra.me.REG[1] = CALL_syntax___icode_generation___A2IContext___generate_expr(closctx->REG[1])(closctx->REG[1], fra.me.REG[0]);
     /* syntax/icode_generation.nit:993 */
+    fra.me.REG[1] = CALL_syntax___icode_generation___A2IContext___generate_expr(closctx->REG[1])(closctx->REG[1], fra.me.REG[0]);
+    /* syntax/icode_generation.nit:994 */
     fra.me.REG[0] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[0])(fra.me.REG[0]);
     fra.me.REG[2] = CALL_syntax___syntax_base___AExpr___stype(closctx->REG[0])(closctx->REG[0]);
     REGB0 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[0],fra.me.REG[2]));
@@ -5110,7 +5104,7 @@ val_t syntax___icode_generation___ASuperstringExpr___generate_icode(val_t p0, va
     }
     REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
     if (UNTAG_Bool(REGB0)) {
-      /* syntax/icode_generation.nit:994 */
+      /* syntax/icode_generation.nit:995 */
       REGB0 = TAG_Int(1);
       fra.me.REG[2] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
       CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1]);
@@ -5119,7 +5113,7 @@ val_t syntax___icode_generation___ASuperstringExpr___generate_icode(val_t p0, va
       fra.me.REG[0] = CALL_icode___icode_builder___ICodeBuilder___expr(closctx->REG[1])(closctx->REG[1], fra.me.REG[2], fra.me.REG[0]);
       fra.me.REG[1] = fra.me.REG[0];
     }
-    /* syntax/icode_generation.nit:996 */
+    /* syntax/icode_generation.nit:997 */
     CALL_syntax___icode_generation___A2IContext___add_call_array_add(closctx->REG[1])(closctx->REG[1], closctx->REG[2], fra.me.REG[1]);
     stack_frame_head = fra.me.prev;
     return;
@@ -5130,7 +5124,7 @@ val_t syntax___icode_generation___ANullExpr___generate_icode(val_t p0, val_t p1)
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___icode_generation;
-  fra.me.line = 1003;
+  fra.me.line = 1004;
   fra.me.meth = LOCATE_syntax___icode_generation___ANullExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -5139,7 +5133,7 @@ val_t syntax___icode_generation___ANullExpr___generate_icode(val_t p0, val_t p1)
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/icode_generation.nit:1005 */
+  /* syntax/icode_generation.nit:1006 */
   fra.me.REG[1] = CALL_icode___icode_builder___ICodeBuilder___lit_null_reg(fra.me.REG[1])(fra.me.REG[1]);
   goto label1;
   label1: while(0);
@@ -5153,7 +5147,7 @@ val_t syntax___icode_generation___AArrayExpr___generate_icode(val_t p0, val_t p1
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___icode_generation;
-  fra.me.line = 1010;
+  fra.me.line = 1011;
   fra.me.meth = LOCATE_syntax___icode_generation___AArrayExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -5163,15 +5157,15 @@ val_t syntax___icode_generation___AArrayExpr___generate_icode(val_t p0, val_t p1
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/icode_generation.nit:1012 */
+  /* syntax/icode_generation.nit:1013 */
   fra.me.REG[2] = CALL_parser___parser_nodes___AArrayExpr___n_exprs(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[2] = CALL_parser___parser_nodes___AExprs___n_exprs(fra.me.REG[2])(fra.me.REG[2]);
-  /* syntax/icode_generation.nit:1013 */
+  /* syntax/icode_generation.nit:1014 */
   fra.me.REG[0] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = CALL_standard___collection___abstract_collection___Collection___length(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[0] = CALL_syntax___icode_generation___A2IContext___add_new_array(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], REGB0);
   CALL_standard___collection___abstract_collection___Collection___iterate(fra.me.REG[2])(fra.me.REG[2], (&(fra.me)), ((fun_t)OC_syntax___icode_generation___AArrayExpr___generate_icode_1));
-  /* syntax/icode_generation.nit:1018 */
+  /* syntax/icode_generation.nit:1019 */
   goto label2;
   label2: while(0);
   stack_frame_head = fra.me.prev;
@@ -5181,7 +5175,7 @@ val_t syntax___icode_generation___AArrayExpr___generate_icode(val_t p0, val_t p1
     struct {struct stack_frame_t me;} fra;
     fun_t CREG[1];
     val_t tmp;
-    /* syntax/icode_generation.nit:1014 */
+    /* syntax/icode_generation.nit:1015 */
     fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
     fra.me.file = LOCATE_syntax___icode_generation;
     fra.me.line = 0;
@@ -5194,9 +5188,9 @@ val_t syntax___icode_generation___AArrayExpr___generate_icode(val_t p0, val_t p1
     fra.me.closure_funs = CREG;
     fra.me.REG[0] = p0;
     CREG[0] = clos_fun0;
-    /* syntax/icode_generation.nit:1015 */
-    fra.me.REG[0] = CALL_syntax___icode_generation___A2IContext___generate_expr(closctx->REG[1])(closctx->REG[1], fra.me.REG[0]);
     /* syntax/icode_generation.nit:1016 */
+    fra.me.REG[0] = CALL_syntax___icode_generation___A2IContext___generate_expr(closctx->REG[1])(closctx->REG[1], fra.me.REG[0]);
+    /* syntax/icode_generation.nit:1017 */
     CALL_syntax___icode_generation___A2IContext___add_call_array_add(closctx->REG[1])(closctx->REG[1], closctx->REG[0], fra.me.REG[0]);
     stack_frame_head = fra.me.prev;
     return;
@@ -5210,7 +5204,7 @@ val_t syntax___icode_generation___ACrangeExpr___generate_icode(val_t p0, val_t p
     static val_t once_value_2; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___icode_generation;
-  fra.me.line = 1023;
+  fra.me.line = 1024;
   fra.me.meth = LOCATE_syntax___icode_generation___ACrangeExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
@@ -5224,20 +5218,20 @@ val_t syntax___icode_generation___ACrangeExpr___generate_icode(val_t p0, val_t p
   fra.me.REG[6] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/icode_generation.nit:1025 */
+  /* syntax/icode_generation.nit:1026 */
   fra.me.REG[2] = CALL_parser___parser_nodes___ARangeExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[2] = CALL_syntax___icode_generation___A2IContext___generate_expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-  /* syntax/icode_generation.nit:1026 */
+  /* syntax/icode_generation.nit:1027 */
   fra.me.REG[3] = CALL_parser___parser_nodes___ARangeExpr___n_expr2(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[3] = CALL_syntax___icode_generation___A2IContext___generate_expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
-  /* syntax/icode_generation.nit:1027 */
+  /* syntax/icode_generation.nit:1028 */
   fra.me.REG[4] = CALL_syntax___icode_generation___A2IContext___visitor(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[5] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[0])(fra.me.REG[0]);
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[6] = BOX_NativeString("init");
       REGB0 = TAG_Int(4);
-      fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB0);
+      fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB0);
       once_value_2 = fra.me.REG[6];
       register_static_object(&once_value_2);
     } else fra.me.REG[6] = once_value_2;
@@ -5248,7 +5242,7 @@ val_t syntax___icode_generation___ACrangeExpr___generate_icode(val_t p0, val_t p
   } else fra.me.REG[6] = once_value_1;
   fra.me.REG[6] = fra.me.REG[6];
   fra.me.REG[6] = CALL_syntax___syntax_base___AbsSyntaxVisitor___get_method(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[5], fra.me.REG[6]);
-  /* syntax/icode_generation.nit:1028 */
+  /* syntax/icode_generation.nit:1029 */
   fra.me.REG[5] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Int(2);
   fra.me.REG[4] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
@@ -5271,7 +5265,7 @@ val_t syntax___icode_generation___AOrangeExpr___generate_icode(val_t p0, val_t p
     static val_t once_value_2; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___icode_generation;
-  fra.me.line = 1033;
+  fra.me.line = 1034;
   fra.me.meth = LOCATE_syntax___icode_generation___AOrangeExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
@@ -5285,20 +5279,20 @@ val_t syntax___icode_generation___AOrangeExpr___generate_icode(val_t p0, val_t p
   fra.me.REG[6] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/icode_generation.nit:1035 */
+  /* syntax/icode_generation.nit:1036 */
   fra.me.REG[2] = CALL_parser___parser_nodes___ARangeExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[2] = CALL_syntax___icode_generation___A2IContext___generate_expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-  /* syntax/icode_generation.nit:1036 */
+  /* syntax/icode_generation.nit:1037 */
   fra.me.REG[3] = CALL_parser___parser_nodes___ARangeExpr___n_expr2(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[3] = CALL_syntax___icode_generation___A2IContext___generate_expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
-  /* syntax/icode_generation.nit:1037 */
+  /* syntax/icode_generation.nit:1038 */
   fra.me.REG[4] = CALL_syntax___icode_generation___A2IContext___visitor(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[5] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[0])(fra.me.REG[0]);
   if (!once_value_1) {
     if (!once_value_2) {
       fra.me.REG[6] = BOX_NativeString("without_last");
       REGB0 = TAG_Int(12);
-      fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB0);
+      fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB0);
       once_value_2 = fra.me.REG[6];
       register_static_object(&once_value_2);
     } else fra.me.REG[6] = once_value_2;
@@ -5309,7 +5303,7 @@ val_t syntax___icode_generation___AOrangeExpr___generate_icode(val_t p0, val_t p
   } else fra.me.REG[6] = once_value_1;
   fra.me.REG[6] = fra.me.REG[6];
   fra.me.REG[6] = CALL_syntax___syntax_base___AbsSyntaxVisitor___get_method(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[5], fra.me.REG[6]);
-  /* syntax/icode_generation.nit:1038 */
+  /* syntax/icode_generation.nit:1039 */
   fra.me.REG[5] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Int(2);
   fra.me.REG[4] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
@@ -5333,7 +5327,7 @@ val_t syntax___icode_generation___ASuperExpr___generate_icode(val_t p0, val_t p1
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___icode_generation;
-  fra.me.line = 1043;
+  fra.me.line = 1044;
   fra.me.meth = LOCATE_syntax___icode_generation___ASuperExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 6;
@@ -5346,14 +5340,14 @@ val_t syntax___icode_generation___ASuperExpr___generate_icode(val_t p0, val_t p1
   fra.me.REG[5] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/icode_generation.nit:1045 */
+  /* syntax/icode_generation.nit:1046 */
   fra.me.REG[2] = CALL_icode___icode_builder___ICodeBuilder___iroutine(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[2] = CALL_icode___icode_base___IRoutine___params(fra.me.REG[2])(fra.me.REG[2]);
   REGB0 = CALL_standard___collection___abstract_collection___Collection___length(fra.me.REG[2])(fra.me.REG[2]);
   REGB1 = TAG_Int(1);
-  /* ../lib/standard/kernel.nit:240 */
+  /* ../lib/standard/kernel.nit:247 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB1));
-  /* syntax/icode_generation.nit:1046 */
+  /* syntax/icode_generation.nit:1047 */
   fra.me.REG[2] = CALL_syntax___syntax_base___ASuperExpr___init_in_superclass(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
@@ -5369,79 +5363,79 @@ val_t syntax___icode_generation___ASuperExpr___generate_icode(val_t p0, val_t p1
   }
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/icode_generation.nit:1047 */
+    /* syntax/icode_generation.nit:1048 */
     fra.me.REG[2] = CALL_syntax___syntax_base___ASuperExpr___init_in_superclass(fra.me.REG[0])(fra.me.REG[0]);
     REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1047);
+      nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1048);
     }
     fra.me.REG[2] = CALL_metamodel___static_type___MMLocalProperty___signature(fra.me.REG[2])(fra.me.REG[2]);
     REGB0 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1047);
+      nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1048);
     }
     REGB0 = CALL_metamodel___static_type___MMSignature___arity(fra.me.REG[2])(fra.me.REG[2]);
     REGB1 = REGB0;
   }
-  /* syntax/icode_generation.nit:1049 */
-  REGB0 = TAG_Int(1);
-  /* ../lib/standard/kernel.nit:238 */
-  REGB0 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB0));
-  /* syntax/icode_generation.nit:1049 */
-  fra.me.REG[2] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
   /* syntax/icode_generation.nit:1050 */
+  REGB0 = TAG_Int(1);
+  /* ../lib/standard/kernel.nit:245 */
+  REGB0 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB0));
+  /* syntax/icode_generation.nit:1050 */
+  fra.me.REG[2] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
+  /* syntax/icode_generation.nit:1051 */
   fra.me.REG[3] = CALL_icode___icode_builder___ICodeBuilder___iroutine(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[3] = CALL_icode___icode_base___IRoutine___params(fra.me.REG[3])(fra.me.REG[3]);
   REGB0 = TAG_Int(0);
   fra.me.REG[3] = CALL_standard___collection___abstract_collection___SequenceRead_____bra(fra.me.REG[3])(fra.me.REG[3], REGB0);
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
-  /* syntax/icode_generation.nit:1051 */
+  /* syntax/icode_generation.nit:1052 */
   fra.me.REG[3] = CALL_parser___parser_nodes___ASuperExpr___n_args(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[3] = CALL_parser___parser_nodes___AExprs___n_exprs(fra.me.REG[3])(fra.me.REG[3]);
-  /* syntax/icode_generation.nit:1052 */
+  /* syntax/icode_generation.nit:1053 */
   REGB0 = CALL_standard___collection___abstract_collection___Collection___length(fra.me.REG[3])(fra.me.REG[3]);
   REGB2 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
   if (UNTAG_Bool(REGB2)) {
   } else {
-    /* ../lib/standard/kernel.nit:230 */
+    /* ../lib/standard/kernel.nit:237 */
     REGB0 = TAG_Bool((REGB0)==(REGB1));
-    /* syntax/icode_generation.nit:1052 */
+    /* syntax/icode_generation.nit:1053 */
     REGB2 = REGB0;
   }
   REGB2 = TAG_Bool(!UNTAG_Bool(REGB2));
   if (UNTAG_Bool(REGB2)) {
-    /* syntax/icode_generation.nit:1053 */
+    /* syntax/icode_generation.nit:1054 */
     REGB2 = TAG_Int(0);
-    /* ../lib/standard/kernel.nit:355 */
+    /* ../lib/standard/kernel.nit:404 */
     while(1) {
       REGB0 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB2), VTID_standard___kernel___Comparable___OTHER(REGB2))) /*cast OTHER*/;
       if (UNTAG_Bool(REGB0)) {
       } else {
         nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
       }
-      /* ../lib/standard/kernel.nit:235 */
+      /* ../lib/standard/kernel.nit:242 */
       REGB0 = TAG_Bool(UNTAG_Int(REGB2)<UNTAG_Int(REGB1));
-      /* ../lib/standard/kernel.nit:355 */
+      /* ../lib/standard/kernel.nit:404 */
       if (UNTAG_Bool(REGB0)) {
-        /* syntax/icode_generation.nit:1053 */
-        REGB0 = REGB2;
         /* syntax/icode_generation.nit:1054 */
+        REGB0 = REGB2;
+        /* syntax/icode_generation.nit:1055 */
         fra.me.REG[4] = CALL_icode___icode_builder___ICodeBuilder___iroutine(fra.me.REG[1])(fra.me.REG[1]);
         fra.me.REG[4] = CALL_icode___icode_base___IRoutine___params(fra.me.REG[4])(fra.me.REG[4]);
         REGB3 = TAG_Int(1);
-        /* ../lib/standard/kernel.nit:238 */
+        /* ../lib/standard/kernel.nit:245 */
         REGB3 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB3));
-        /* syntax/icode_generation.nit:1054 */
+        /* syntax/icode_generation.nit:1055 */
         fra.me.REG[4] = CALL_standard___collection___abstract_collection___SequenceRead_____bra(fra.me.REG[4])(fra.me.REG[4], REGB3);
         CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[4]);
-        /* ../lib/standard/kernel.nit:357 */
+        /* ../lib/standard/kernel.nit:406 */
         REGB3 = TAG_Int(1);
-        /* ../lib/standard/kernel.nit:238 */
+        /* ../lib/standard/kernel.nit:245 */
         REGB3 = TAG_Int(UNTAG_Int(REGB2)+UNTAG_Int(REGB3));
-        /* ../lib/standard/kernel.nit:357 */
+        /* ../lib/standard/kernel.nit:406 */
         REGB2 = REGB3;
       } else {
-        /* ../lib/standard/kernel.nit:355 */
+        /* ../lib/standard/kernel.nit:404 */
         goto label1;
       }
     }
@@ -5449,9 +5443,9 @@ val_t syntax___icode_generation___ASuperExpr___generate_icode(val_t p0, val_t p1
   } else {
     CALL_standard___collection___abstract_collection___Collection___iterate(fra.me.REG[3])(fra.me.REG[3], (&(fra.me)), ((fun_t)OC_syntax___icode_generation___ASuperExpr___generate_icode_2));
   }
-  /* syntax/icode_generation.nit:1061 */
-  fra.me.REG[3] = CALL_syntax___syntax_base___ASuperExpr___init_in_superclass(fra.me.REG[0])(fra.me.REG[0]);
   /* syntax/icode_generation.nit:1062 */
+  fra.me.REG[3] = CALL_syntax___syntax_base___ASuperExpr___init_in_superclass(fra.me.REG[0])(fra.me.REG[0]);
+  /* syntax/icode_generation.nit:1063 */
   REGB2 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
   if (UNTAG_Bool(REGB2)) {
   } else {
@@ -5466,18 +5460,18 @@ val_t syntax___icode_generation___ASuperExpr___generate_icode(val_t p0, val_t p1
   }
   REGB2 = TAG_Bool(!UNTAG_Bool(REGB2));
   if (UNTAG_Bool(REGB2)) {
-    /* syntax/icode_generation.nit:1063 */
+    /* syntax/icode_generation.nit:1064 */
     REGB2 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
     if (UNTAG_Bool(REGB2)) {
-      nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1063);
+      nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1064);
     }
     fra.me.REG[4] = CALL_metamodel___static_type___MMLocalProperty___signature(fra.me.REG[3])(fra.me.REG[3]);
     REGB2 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
     if (UNTAG_Bool(REGB2)) {
-      nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1063);
+      nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1064);
     }
     fra.me.REG[4] = CALL_metamodel___static_type___MMSignature___return_type(fra.me.REG[4])(fra.me.REG[4]);
-    /* syntax/icode_generation.nit:1064 */
+    /* syntax/icode_generation.nit:1065 */
     REGB2 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
     if (UNTAG_Bool(REGB2)) {
     } else {
@@ -5492,34 +5486,34 @@ val_t syntax___icode_generation___ASuperExpr___generate_icode(val_t p0, val_t p1
     }
     REGB2 = TAG_Bool(!UNTAG_Bool(REGB2));
     if (UNTAG_Bool(REGB2)) {
-      /* syntax/icode_generation.nit:1065 */
+      /* syntax/icode_generation.nit:1066 */
       fra.me.REG[5] = NEW_ICall_icode___icode_base___ICall___init(fra.me.REG[3], fra.me.REG[2]);
       fra.me.REG[4] = CALL_icode___icode_builder___ICodeBuilder___expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[5], fra.me.REG[4]);
       goto label3;
     } else {
-      /* syntax/icode_generation.nit:1067 */
+      /* syntax/icode_generation.nit:1068 */
       fra.me.REG[5] = NEW_ICall_icode___icode_base___ICall___init(fra.me.REG[3], fra.me.REG[2]);
       CALL_icode___icode_builder___ICodeBuilder___stmt(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[5]);
-      /* syntax/icode_generation.nit:1068 */
+      /* syntax/icode_generation.nit:1069 */
       fra.me.REG[4] = NIT_NULL;
       goto label3;
     }
   } else {
-    /* syntax/icode_generation.nit:1071 */
+    /* syntax/icode_generation.nit:1072 */
     fra.me.REG[0] = CALL_syntax___syntax_base___AAbsSendExpr___prop(fra.me.REG[0])(fra.me.REG[0]);
     fra.me.REG[3] = fra.me.REG[0];
-    /* syntax/icode_generation.nit:1072 */
+    /* syntax/icode_generation.nit:1073 */
     REGB2 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
     if (UNTAG_Bool(REGB2)) {
-      nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1072);
+      nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1073);
     }
     fra.me.REG[0] = CALL_metamodel___static_type___MMLocalProperty___signature(fra.me.REG[3])(fra.me.REG[3]);
     REGB2 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
     if (UNTAG_Bool(REGB2)) {
-      nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1072);
+      nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1073);
     }
     fra.me.REG[0] = CALL_metamodel___static_type___MMSignature___return_type(fra.me.REG[0])(fra.me.REG[0]);
-    /* syntax/icode_generation.nit:1073 */
+    /* syntax/icode_generation.nit:1074 */
     REGB2 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
     if (UNTAG_Bool(REGB2)) {
     } else {
@@ -5533,14 +5527,14 @@ val_t syntax___icode_generation___ASuperExpr___generate_icode(val_t p0, val_t p1
       }
     }
     if (UNTAG_Bool(REGB2)) {
-      /* syntax/icode_generation.nit:1074 */
+      /* syntax/icode_generation.nit:1075 */
       fra.me.REG[5] = NEW_ISuper_icode___icode_base___ISuper___init(fra.me.REG[3], fra.me.REG[2]);
       CALL_icode___icode_builder___ICodeBuilder___stmt(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[5]);
-      /* syntax/icode_generation.nit:1075 */
+      /* syntax/icode_generation.nit:1076 */
       fra.me.REG[4] = NIT_NULL;
       goto label3;
     } else {
-      /* syntax/icode_generation.nit:1077 */
+      /* syntax/icode_generation.nit:1078 */
       fra.me.REG[2] = NEW_ISuper_icode___icode_base___ISuper___init(fra.me.REG[3], fra.me.REG[2]);
       fra.me.REG[0] = CALL_icode___icode_builder___ICodeBuilder___expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2], fra.me.REG[0]);
       fra.me.REG[4] = fra.me.REG[0];
@@ -5555,7 +5549,7 @@ val_t syntax___icode_generation___ASuperExpr___generate_icode(val_t p0, val_t p1
       struct {struct stack_frame_t me;} fra;
       fun_t CREG[1];
       val_t tmp;
-      /* syntax/icode_generation.nit:1057 */
+      /* syntax/icode_generation.nit:1058 */
       fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
       fra.me.file = LOCATE_syntax___icode_generation;
       fra.me.line = 0;
@@ -5568,7 +5562,7 @@ val_t syntax___icode_generation___ASuperExpr___generate_icode(val_t p0, val_t p1
       fra.me.closure_funs = CREG;
       fra.me.REG[0] = p0;
       CREG[0] = clos_fun0;
-      /* syntax/icode_generation.nit:1058 */
+      /* syntax/icode_generation.nit:1059 */
       fra.me.REG[0] = CALL_syntax___icode_generation___A2IContext___generate_expr(closctx->REG[1])(closctx->REG[1], fra.me.REG[0]);
       CALL_standard___collection___abstract_collection___SimpleCollection___add(closctx->REG[2])(closctx->REG[2], fra.me.REG[0]);
       stack_frame_head = fra.me.prev;
@@ -5581,7 +5575,7 @@ val_t syntax___icode_generation___AAttrExpr___generate_icode(val_t p0, val_t p1)
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___icode_generation;
-  fra.me.line = 1084;
+  fra.me.line = 1085;
   fra.me.meth = LOCATE_syntax___icode_generation___AAttrExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -5592,17 +5586,17 @@ val_t syntax___icode_generation___AAttrExpr___generate_icode(val_t p0, val_t p1)
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/icode_generation.nit:1086 */
+  /* syntax/icode_generation.nit:1087 */
   fra.me.REG[2] = CALL_parser___parser_nodes___AAttrFormExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[2] = CALL_syntax___icode_generation___A2IContext___generate_expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-  /* syntax/icode_generation.nit:1087 */
+  /* syntax/icode_generation.nit:1088 */
   fra.me.REG[3] = CALL_parser___parser_nodes___AAttrFormExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[3] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[3])(fra.me.REG[3]);
   REGB0 = CALL_metamodel___static_type___MMType___is_nullable(fra.me.REG[3])(fra.me.REG[3]);
   if (UNTAG_Bool(REGB0)) {
     CALL_icode___icode_builder___ICodeBuilder___add_null_reciever_check(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
   }
-  /* syntax/icode_generation.nit:1088 */
+  /* syntax/icode_generation.nit:1089 */
   fra.me.REG[0] = CALL_syntax___syntax_base___AAttrFormExpr___prop(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[2] = CALL_icode___icode_builder___ICodeBuilder___add_attr_read(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], fra.me.REG[2]);
   goto label1;
@@ -5617,7 +5611,7 @@ val_t syntax___icode_generation___AAttrAssignExpr___generate_icode(val_t p0, val
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___icode_generation;
-  fra.me.line = 1093;
+  fra.me.line = 1094;
   fra.me.meth = LOCATE_syntax___icode_generation___AAttrAssignExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -5628,24 +5622,24 @@ val_t syntax___icode_generation___AAttrAssignExpr___generate_icode(val_t p0, val
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/icode_generation.nit:1095 */
+  /* syntax/icode_generation.nit:1096 */
   fra.me.REG[2] = CALL_parser___parser_nodes___AAttrFormExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[2] = CALL_syntax___icode_generation___A2IContext___generate_expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-  /* syntax/icode_generation.nit:1096 */
+  /* syntax/icode_generation.nit:1097 */
   fra.me.REG[3] = CALL_parser___parser_nodes___AAttrFormExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[3] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[3])(fra.me.REG[3]);
   REGB0 = CALL_metamodel___static_type___MMType___is_nullable(fra.me.REG[3])(fra.me.REG[3]);
   if (UNTAG_Bool(REGB0)) {
     CALL_icode___icode_builder___ICodeBuilder___add_null_reciever_check(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
   }
-  /* syntax/icode_generation.nit:1097 */
+  /* syntax/icode_generation.nit:1098 */
   fra.me.REG[3] = CALL_parser___parser_nodes___AAssignFormExpr___n_value(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[3] = CALL_syntax___icode_generation___A2IContext___generate_expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
-  /* syntax/icode_generation.nit:1098 */
+  /* syntax/icode_generation.nit:1099 */
   fra.me.REG[0] = CALL_syntax___syntax_base___AAttrFormExpr___prop(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[3] = NEW_IAttrWrite_icode___icode_base___IAttrWrite___init(fra.me.REG[0], fra.me.REG[2], fra.me.REG[3]);
   CALL_icode___icode_builder___ICodeBuilder___stmt(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
-  /* syntax/icode_generation.nit:1099 */
+  /* syntax/icode_generation.nit:1100 */
   fra.me.REG[3] = NIT_NULL;
   goto label1;
   label1: while(0);
@@ -5659,7 +5653,7 @@ val_t syntax___icode_generation___AAttrReassignExpr___generate_icode(val_t p0, v
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___icode_generation;
-  fra.me.line = 1103;
+  fra.me.line = 1104;
   fra.me.meth = LOCATE_syntax___icode_generation___AAttrReassignExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
@@ -5673,25 +5667,25 @@ val_t syntax___icode_generation___AAttrReassignExpr___generate_icode(val_t p0, v
   fra.me.REG[6] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/icode_generation.nit:1105 */
+  /* syntax/icode_generation.nit:1106 */
   fra.me.REG[2] = CALL_parser___parser_nodes___AAttrFormExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[2] = CALL_syntax___icode_generation___A2IContext___generate_expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-  /* syntax/icode_generation.nit:1106 */
+  /* syntax/icode_generation.nit:1107 */
   fra.me.REG[3] = CALL_parser___parser_nodes___AAttrFormExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[3] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[3])(fra.me.REG[3]);
   REGB0 = CALL_metamodel___static_type___MMType___is_nullable(fra.me.REG[3])(fra.me.REG[3]);
   if (UNTAG_Bool(REGB0)) {
     CALL_icode___icode_builder___ICodeBuilder___add_null_reciever_check(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
   }
-  /* syntax/icode_generation.nit:1107 */
+  /* syntax/icode_generation.nit:1108 */
   fra.me.REG[3] = CALL_syntax___syntax_base___AAttrFormExpr___prop(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[3] = NEW_IAttrRead_icode___icode_base___IAttrRead___init(fra.me.REG[3], fra.me.REG[2]);
   fra.me.REG[4] = CALL_syntax___syntax_base___AAttrFormExpr___attr_type(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[4] = CALL_icode___icode_builder___ICodeBuilder___expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3], fra.me.REG[4]);
-  /* syntax/icode_generation.nit:1108 */
+  /* syntax/icode_generation.nit:1109 */
   fra.me.REG[3] = CALL_parser___parser_nodes___AReassignFormExpr___n_value(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[3] = CALL_syntax___icode_generation___A2IContext___generate_expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
-  /* syntax/icode_generation.nit:1109 */
+  /* syntax/icode_generation.nit:1110 */
   fra.me.REG[5] = CALL_syntax___syntax_base___AReassignFormExpr___assign_method(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Int(2);
   fra.me.REG[6] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
@@ -5700,11 +5694,11 @@ val_t syntax___icode_generation___AAttrReassignExpr___generate_icode(val_t p0, v
   fra.me.REG[6] = NEW_ICall_icode___icode_base___ICall___init(fra.me.REG[5], fra.me.REG[6]);
   fra.me.REG[5] = CALL_syntax___syntax_base___AAttrFormExpr___attr_type(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[5] = CALL_icode___icode_builder___ICodeBuilder___expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[6], fra.me.REG[5]);
-  /* syntax/icode_generation.nit:1110 */
+  /* syntax/icode_generation.nit:1111 */
   fra.me.REG[0] = CALL_syntax___syntax_base___AAttrFormExpr___prop(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[5] = NEW_IAttrWrite_icode___icode_base___IAttrWrite___init(fra.me.REG[0], fra.me.REG[2], fra.me.REG[5]);
   CALL_icode___icode_builder___ICodeBuilder___stmt(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[5]);
-  /* syntax/icode_generation.nit:1111 */
+  /* syntax/icode_generation.nit:1112 */
   fra.me.REG[5] = NIT_NULL;
   goto label1;
   label1: while(0);
@@ -5718,7 +5712,7 @@ val_t syntax___icode_generation___AIssetAttrExpr___generate_icode(val_t p0, val_
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___icode_generation;
-  fra.me.line = 1116;
+  fra.me.line = 1117;
   fra.me.meth = LOCATE_syntax___icode_generation___AIssetAttrExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -5729,17 +5723,17 @@ val_t syntax___icode_generation___AIssetAttrExpr___generate_icode(val_t p0, val_
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/icode_generation.nit:1118 */
+  /* syntax/icode_generation.nit:1119 */
   fra.me.REG[2] = CALL_parser___parser_nodes___AAttrFormExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[2] = CALL_syntax___icode_generation___A2IContext___generate_expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-  /* syntax/icode_generation.nit:1119 */
+  /* syntax/icode_generation.nit:1120 */
   fra.me.REG[3] = CALL_parser___parser_nodes___AAttrFormExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[3] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[3])(fra.me.REG[3]);
   REGB0 = CALL_metamodel___static_type___MMType___is_nullable(fra.me.REG[3])(fra.me.REG[3]);
   if (UNTAG_Bool(REGB0)) {
     CALL_icode___icode_builder___ICodeBuilder___add_null_reciever_check(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
   }
-  /* syntax/icode_generation.nit:1120 */
+  /* syntax/icode_generation.nit:1121 */
   fra.me.REG[3] = CALL_syntax___syntax_base___AAttrFormExpr___prop(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[2] = NEW_IAttrIsset_icode___icode_base___IAttrIsset___init(fra.me.REG[3], fra.me.REG[2]);
   fra.me.REG[0] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[0])(fra.me.REG[0]);
@@ -5766,7 +5760,7 @@ void syntax___icode_generation___AAbsAbsSendExpr___generate_icode_for_arguments_
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___icode_generation;
-  fra.me.line = 1125;
+  fra.me.line = 1126;
   fra.me.meth = LOCATE_syntax___icode_generation___AAbsAbsSendExpr___generate_icode_for_arguments_in;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
@@ -5782,11 +5776,11 @@ void syntax___icode_generation___AAbsAbsSendExpr___generate_icode_for_arguments_
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
   fra.me.REG[3] = p3;
-  /* syntax/icode_generation.nit:1128 */
-  REGB0 = CALL_metamodel___static_type___MMSignature___arity(fra.me.REG[3])(fra.me.REG[3]);
   /* syntax/icode_generation.nit:1129 */
-  REGB1 = CALL_metamodel___vararg___MMSignature___vararg_rank(fra.me.REG[3])(fra.me.REG[3]);
+  REGB0 = CALL_metamodel___static_type___MMSignature___arity(fra.me.REG[3])(fra.me.REG[3]);
   /* syntax/icode_generation.nit:1130 */
+  REGB1 = CALL_metamodel___vararg___MMSignature___vararg_rank(fra.me.REG[3])(fra.me.REG[3]);
+  /* syntax/icode_generation.nit:1131 */
   fra.me.REG[0] = CALL_syntax___syntax_base___AAbsAbsSendExpr___raw_arguments(fra.me.REG[0])(fra.me.REG[0]);
   /* ../lib/standard/collection/array.nit:24 */
   REGB2 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[0])!=NIT_NULL);
@@ -5795,77 +5789,77 @@ void syntax___icode_generation___AAbsAbsSendExpr___generate_icode_for_arguments_
     nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
   }
   REGB2 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[0]);
-  /* syntax/icode_generation.nit:1132 */
-  REGB3 = TAG_Int(0);
   /* syntax/icode_generation.nit:1133 */
+  REGB3 = TAG_Int(0);
+  /* syntax/icode_generation.nit:1134 */
   REGB4 = TAG_Int(0);
-  /* ../lib/standard/kernel.nit:350 */
+  /* ../lib/standard/kernel.nit:399 */
   REGB5 = REGB0;
-  /* ../lib/standard/kernel.nit:355 */
+  /* ../lib/standard/kernel.nit:404 */
   while(1) {
     REGB6 = TAG_Bool(VAL_ISA(REGB5, VTCOLOR_standard___kernel___Comparable___OTHER(REGB4), VTID_standard___kernel___Comparable___OTHER(REGB4))) /*cast OTHER*/;
     if (UNTAG_Bool(REGB6)) {
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:242 */
     REGB6 = TAG_Bool(UNTAG_Int(REGB4)<UNTAG_Int(REGB5));
-    /* ../lib/standard/kernel.nit:355 */
+    /* ../lib/standard/kernel.nit:404 */
     if (UNTAG_Bool(REGB6)) {
-      /* syntax/icode_generation.nit:1133 */
+      /* syntax/icode_generation.nit:1134 */
       REGB6 = REGB4;
-      /* syntax/icode_generation.nit:1135 */
-      fra.me.REG[4] = CALL_metamodel___static_type___MMSignature_____bra(fra.me.REG[3])(fra.me.REG[3], REGB6);
       /* syntax/icode_generation.nit:1136 */
+      fra.me.REG[4] = CALL_metamodel___static_type___MMSignature_____bra(fra.me.REG[3])(fra.me.REG[3], REGB6);
+      /* syntax/icode_generation.nit:1137 */
       REGB7 = TAG_Bool(IS_EQUAL_OO(REGB6,REGB1));
       if (UNTAG_Bool(REGB7)) {
       } else {
-        /* ../lib/standard/kernel.nit:230 */
+        /* ../lib/standard/kernel.nit:237 */
         REGB6 = TAG_Bool((REGB6)==(REGB1));
-        /* syntax/icode_generation.nit:1136 */
+        /* syntax/icode_generation.nit:1137 */
         REGB7 = REGB6;
       }
       if (UNTAG_Bool(REGB7)) {
-        /* syntax/icode_generation.nit:1137 */
+        /* syntax/icode_generation.nit:1138 */
         fra.me.REG[5] = CALL_syntax___icode_generation___A2IContext___visitor(fra.me.REG[1])(fra.me.REG[1]);
         fra.me.REG[4] = CALL_syntax___syntax_base___AbsSyntaxVisitor___type_array(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[4]);
-        /* ../lib/standard/kernel.nit:240 */
+        /* ../lib/standard/kernel.nit:247 */
         REGB7 = TAG_Int(UNTAG_Int(REGB2)-UNTAG_Int(REGB0));
-        /* syntax/icode_generation.nit:1137 */
-        fra.me.REG[4] = CALL_syntax___icode_generation___A2IContext___add_new_array(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[4], REGB7);
         /* syntax/icode_generation.nit:1138 */
+        fra.me.REG[4] = CALL_syntax___icode_generation___A2IContext___add_new_array(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[4], REGB7);
+        /* syntax/icode_generation.nit:1139 */
         REGB7 = TAG_Int(0);
-        /* ../lib/standard/kernel.nit:240 */
+        /* ../lib/standard/kernel.nit:247 */
         REGB6 = TAG_Int(UNTAG_Int(REGB2)-UNTAG_Int(REGB0));
-        /* ../lib/standard/kernel.nit:344 */
+        /* ../lib/standard/kernel.nit:393 */
         while(1) {
           REGB8 = TAG_Bool(VAL_ISA(REGB6, VTCOLOR_standard___kernel___Comparable___OTHER(REGB7), VTID_standard___kernel___Comparable___OTHER(REGB7))) /*cast OTHER*/;
           if (UNTAG_Bool(REGB8)) {
           } else {
             nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
           }
-          /* ../lib/standard/kernel.nit:234 */
+          /* ../lib/standard/kernel.nit:241 */
           REGB8 = TAG_Bool(UNTAG_Int(REGB7)<=UNTAG_Int(REGB6));
-          /* ../lib/standard/kernel.nit:344 */
+          /* ../lib/standard/kernel.nit:393 */
           if (UNTAG_Bool(REGB8)) {
-            /* ../lib/standard/collection/array.nit:278 */
+            /* ../lib/standard/collection/array.nit:279 */
             fra.me.REG[5] = fra.me.REG[0];
             REGB8 = REGB3;
-            /* ../lib/standard/collection/array.nit:280 */
+            /* ../lib/standard/collection/array.nit:281 */
             REGB9 = TAG_Int(0);
             REGB10 = TAG_Bool(VAL_ISA(REGB9, VTCOLOR_standard___kernel___Comparable___OTHER(REGB8), VTID_standard___kernel___Comparable___OTHER(REGB8))) /*cast OTHER*/;
             if (UNTAG_Bool(REGB10)) {
             } else {
               nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
             }
-            /* ../lib/standard/kernel.nit:236 */
+            /* ../lib/standard/kernel.nit:243 */
             REGB9 = TAG_Bool(UNTAG_Int(REGB8)>=UNTAG_Int(REGB9));
-            /* ../lib/standard/collection/array.nit:280 */
+            /* ../lib/standard/collection/array.nit:281 */
             if (UNTAG_Bool(REGB9)) {
               REGB9 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[5])!=NIT_NULL);
               if (UNTAG_Bool(REGB9)) {
               } else {
-		nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 280);
+		nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 281);
               }
               REGB9 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[5]);
               REGB10 = TAG_Bool(VAL_ISA(REGB9, VTCOLOR_standard___kernel___Comparable___OTHER(REGB8), VTID_standard___kernel___Comparable___OTHER(REGB8))) /*cast OTHER*/;
@@ -5873,70 +5867,70 @@ void syntax___icode_generation___AAbsAbsSendExpr___generate_icode_for_arguments_
               } else {
 		nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
               }
-              /* ../lib/standard/kernel.nit:235 */
+              /* ../lib/standard/kernel.nit:242 */
               REGB9 = TAG_Bool(UNTAG_Int(REGB8)<UNTAG_Int(REGB9));
             } else {
-              /* ../lib/standard/collection/array.nit:280 */
+              /* ../lib/standard/collection/array.nit:281 */
               REGB10 = TAG_Bool(0);
               REGB9 = REGB10;
             }
             if (UNTAG_Bool(REGB9)) {
             } else {
-              nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 280);
+              nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 281);
             }
-            /* ../lib/standard/collection/array.nit:281 */
+            /* ../lib/standard/collection/array.nit:282 */
             fra.me.REG[5] = ATTR_standard___collection___array___Array____items(fra.me.REG[5]);
             REGB9 = TAG_Bool(fra.me.REG[5]==NIT_NULL);
             if (UNTAG_Bool(REGB9)) {
-              nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
+              nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 282);
             }
-            /* ../lib/standard/collection/array.nit:724 */
+            /* ../lib/standard/collection/array.nit:725 */
             fra.me.REG[5] = ((Nit_NativeArray)fra.me.REG[5])->val[UNTAG_Int(REGB8)];
-            /* ../lib/standard/collection/array.nit:281 */
+            /* ../lib/standard/collection/array.nit:282 */
             goto label1;
             label1: while(0);
-            /* syntax/icode_generation.nit:1140 */
+            /* syntax/icode_generation.nit:1141 */
             fra.me.REG[6] = CALL_syntax___icode_generation___A2IContext___generate_expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[5]);
             CALL_syntax___icode_generation___A2IContext___add_call_array_add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[4], fra.me.REG[6]);
-            /* syntax/icode_generation.nit:1141 */
+            /* syntax/icode_generation.nit:1142 */
             REGB8 = TAG_Int(1);
-            /* ../lib/standard/kernel.nit:238 */
+            /* ../lib/standard/kernel.nit:245 */
             REGB8 = TAG_Int(UNTAG_Int(REGB3)+UNTAG_Int(REGB8));
-            /* syntax/icode_generation.nit:1141 */
+            /* syntax/icode_generation.nit:1142 */
             REGB3 = REGB8;
-            /* ../lib/standard/kernel.nit:346 */
+            /* ../lib/standard/kernel.nit:395 */
             REGB8 = TAG_Int(1);
-            /* ../lib/standard/kernel.nit:238 */
+            /* ../lib/standard/kernel.nit:245 */
             REGB8 = TAG_Int(UNTAG_Int(REGB7)+UNTAG_Int(REGB8));
-            /* ../lib/standard/kernel.nit:346 */
+            /* ../lib/standard/kernel.nit:395 */
             REGB7 = REGB8;
           } else {
-            /* ../lib/standard/kernel.nit:344 */
+            /* ../lib/standard/kernel.nit:393 */
             goto label2;
           }
         }
         label2: while(0);
-        /* syntax/icode_generation.nit:1143 */
+        /* syntax/icode_generation.nit:1144 */
         CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[4]);
       } else {
-        /* ../lib/standard/collection/array.nit:278 */
+        /* ../lib/standard/collection/array.nit:279 */
         fra.me.REG[4] = fra.me.REG[0];
         REGB7 = REGB3;
-        /* ../lib/standard/collection/array.nit:280 */
+        /* ../lib/standard/collection/array.nit:281 */
         REGB6 = TAG_Int(0);
         REGB8 = TAG_Bool(VAL_ISA(REGB6, VTCOLOR_standard___kernel___Comparable___OTHER(REGB7), VTID_standard___kernel___Comparable___OTHER(REGB7))) /*cast OTHER*/;
         if (UNTAG_Bool(REGB8)) {
         } else {
           nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
         }
-        /* ../lib/standard/kernel.nit:236 */
+        /* ../lib/standard/kernel.nit:243 */
         REGB6 = TAG_Bool(UNTAG_Int(REGB7)>=UNTAG_Int(REGB6));
-        /* ../lib/standard/collection/array.nit:280 */
+        /* ../lib/standard/collection/array.nit:281 */
         if (UNTAG_Bool(REGB6)) {
           REGB6 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[4])!=NIT_NULL);
           if (UNTAG_Bool(REGB6)) {
           } else {
-            nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 280);
+            nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 281);
           }
           REGB6 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[4]);
           REGB8 = TAG_Bool(VAL_ISA(REGB6, VTCOLOR_standard___kernel___Comparable___OTHER(REGB7), VTID_standard___kernel___Comparable___OTHER(REGB7))) /*cast OTHER*/;
@@ -5944,48 +5938,48 @@ void syntax___icode_generation___AAbsAbsSendExpr___generate_icode_for_arguments_
           } else {
             nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
           }
-          /* ../lib/standard/kernel.nit:235 */
+          /* ../lib/standard/kernel.nit:242 */
           REGB6 = TAG_Bool(UNTAG_Int(REGB7)<UNTAG_Int(REGB6));
         } else {
-          /* ../lib/standard/collection/array.nit:280 */
+          /* ../lib/standard/collection/array.nit:281 */
           REGB8 = TAG_Bool(0);
           REGB6 = REGB8;
         }
         if (UNTAG_Bool(REGB6)) {
         } else {
-          nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 280);
+          nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 281);
         }
-        /* ../lib/standard/collection/array.nit:281 */
+        /* ../lib/standard/collection/array.nit:282 */
         fra.me.REG[4] = ATTR_standard___collection___array___Array____items(fra.me.REG[4]);
         REGB6 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
         if (UNTAG_Bool(REGB6)) {
-          nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
+          nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 282);
         }
-        /* ../lib/standard/collection/array.nit:724 */
+        /* ../lib/standard/collection/array.nit:725 */
         fra.me.REG[4] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB7)];
-        /* ../lib/standard/collection/array.nit:281 */
+        /* ../lib/standard/collection/array.nit:282 */
         goto label3;
         label3: while(0);
-        /* syntax/icode_generation.nit:1145 */
-        fra.me.REG[5] = fra.me.REG[4];
         /* syntax/icode_generation.nit:1146 */
+        fra.me.REG[5] = fra.me.REG[4];
+        /* syntax/icode_generation.nit:1147 */
         fra.me.REG[5] = CALL_syntax___icode_generation___A2IContext___generate_expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[5]);
         CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[5]);
-        /* syntax/icode_generation.nit:1147 */
+        /* syntax/icode_generation.nit:1148 */
         REGB7 = TAG_Int(1);
-        /* ../lib/standard/kernel.nit:238 */
+        /* ../lib/standard/kernel.nit:245 */
         REGB7 = TAG_Int(UNTAG_Int(REGB3)+UNTAG_Int(REGB7));
-        /* syntax/icode_generation.nit:1147 */
+        /* syntax/icode_generation.nit:1148 */
         REGB3 = REGB7;
       }
-      /* ../lib/standard/kernel.nit:357 */
+      /* ../lib/standard/kernel.nit:406 */
       REGB7 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB7 = TAG_Int(UNTAG_Int(REGB4)+UNTAG_Int(REGB7));
-      /* ../lib/standard/kernel.nit:357 */
+      /* ../lib/standard/kernel.nit:406 */
       REGB4 = REGB7;
     } else {
-      /* ../lib/standard/kernel.nit:355 */
+      /* ../lib/standard/kernel.nit:404 */
       goto label4;
     }
   }
@@ -6004,7 +5998,7 @@ val_t syntax___icode_generation___ASendExpr___generate_icode(val_t p0, val_t p1)
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___icode_generation;
-  fra.me.line = 1154;
+  fra.me.line = 1155;
   fra.me.meth = LOCATE_syntax___icode_generation___ASendExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 16;
@@ -6027,41 +6021,41 @@ val_t syntax___icode_generation___ASendExpr___generate_icode(val_t p0, val_t p1)
   fra.me.REG[15] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/icode_generation.nit:1154 */
+  /* syntax/icode_generation.nit:1155 */
   fra.me.REG[2] = fra.me.REG[0];
-  /* syntax/icode_generation.nit:1156 */
+  /* syntax/icode_generation.nit:1157 */
   fra.me.REG[3] = CALL_parser___parser_nodes___ASendExpr___n_expr(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[3] = CALL_syntax___icode_generation___A2IContext___generate_expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
-  /* syntax/icode_generation.nit:1157 */
-  fra.me.REG[4] = NEW_Array_standard___collection___array___Array___init();
   /* syntax/icode_generation.nit:1158 */
-  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[3]);
+  fra.me.REG[4] = NEW_Array_standard___collection___array___Array___init();
   /* syntax/icode_generation.nit:1159 */
-  fra.me.REG[3] = CALL_syntax___syntax_base___AAbsSendExpr___prop(fra.me.REG[2])(fra.me.REG[2]);
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[3]);
   /* syntax/icode_generation.nit:1160 */
+  fra.me.REG[3] = CALL_syntax___syntax_base___AAbsSendExpr___prop(fra.me.REG[2])(fra.me.REG[2]);
+  /* syntax/icode_generation.nit:1161 */
   fra.me.REG[5] = CALL_metamodel___static_type___MMLocalProperty___signature(fra.me.REG[3])(fra.me.REG[3]);
   REGB0 = TAG_Bool((fra.me.REG[5]!=NIT_NULL) && VAL_ISA(fra.me.REG[5], COLOR_metamodel___static_type___MMSignature, ID_metamodel___static_type___MMSignature)) /*cast MMSignature*/;
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Cast failed", NULL, LOCATE_syntax___icode_generation, 1160);
+    nit_abort("Cast failed", NULL, LOCATE_syntax___icode_generation, 1161);
   }
   CALL_syntax___icode_generation___AAbsAbsSendExpr___generate_icode_for_arguments_in(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1], fra.me.REG[4], fra.me.REG[5]);
-  /* syntax/icode_generation.nit:1161 */
+  /* syntax/icode_generation.nit:1162 */
   fra.me.REG[5] = NIT_NULL;
-  /* syntax/icode_generation.nit:1165 */
-  fra.me.REG[0] = CALL_icode___icode_builder___ICodeBuilder___seq(fra.me.REG[1])(fra.me.REG[1]);
   /* syntax/icode_generation.nit:1166 */
-  fra.me.REG[6] = NIT_NULL;
+  fra.me.REG[0] = CALL_icode___icode_builder___ICodeBuilder___seq(fra.me.REG[1])(fra.me.REG[1]);
   /* syntax/icode_generation.nit:1167 */
+  fra.me.REG[6] = NIT_NULL;
+  /* syntax/icode_generation.nit:1168 */
   fra.me.REG[7] = CALL_syntax___syntax_base___AAbsAbsSendExpr___prop_signature(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[7] = CALL_metamodel___static_type___MMSignature___closures(fra.me.REG[7])(fra.me.REG[7]);
   REGB0 = CALL_standard___collection___abstract_collection___Collection___is_empty(fra.me.REG[7])(fra.me.REG[7]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/icode_generation.nit:1168 */
+    /* syntax/icode_generation.nit:1169 */
     fra.me.REG[7] = CALL_syntax___syntax_base___AAbsAbsSendExpr___prop_signature(fra.me.REG[2])(fra.me.REG[2]);
     fra.me.REG[7] = CALL_metamodel___static_type___MMSignature___return_type(fra.me.REG[7])(fra.me.REG[7]);
-    /* syntax/icode_generation.nit:1169 */
+    /* syntax/icode_generation.nit:1170 */
     REGB0 = TAG_Bool(fra.me.REG[7]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
@@ -6076,22 +6070,22 @@ val_t syntax___icode_generation___ASendExpr___generate_icode(val_t p0, val_t p1)
     }
     REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
     if (UNTAG_Bool(REGB0)) {
-      /* syntax/icode_generation.nit:1170 */
+      /* syntax/icode_generation.nit:1171 */
       fra.me.REG[7] = CALL_icode___icode_builder___ICodeBuilder___new_register(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[7]);
       fra.me.REG[5] = fra.me.REG[7];
     }
-    /* syntax/icode_generation.nit:1172 */
-    fra.me.REG[7] = NEW_ISeq_icode___icode_base___ISeq___init();
     /* syntax/icode_generation.nit:1173 */
-    CALL_icode___icode_builder___ICodeBuilder___stmt(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[7]);
+    fra.me.REG[7] = NEW_ISeq_icode___icode_base___ISeq___init();
     /* syntax/icode_generation.nit:1174 */
-    CALL_icode___icode_builder___ICodeBuilder___seq__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[7]);
+    CALL_icode___icode_builder___ICodeBuilder___stmt(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[7]);
     /* syntax/icode_generation.nit:1175 */
+    CALL_icode___icode_builder___ICodeBuilder___seq__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[7]);
+    /* syntax/icode_generation.nit:1176 */
     fra.me.REG[8] = NEW_Array_standard___collection___array___Array___init();
     fra.me.REG[6] = fra.me.REG[8];
-    /* syntax/icode_generation.nit:1176 */
-    REGB0 = TAG_Int(0);
     /* syntax/icode_generation.nit:1177 */
+    REGB0 = TAG_Int(0);
+    /* syntax/icode_generation.nit:1178 */
     fra.me.REG[8] = CALL_syntax___syntax_base___ASendExpr___closure_defs(fra.me.REG[2])(fra.me.REG[2]);
     REGB0 = TAG_Bool(fra.me.REG[8]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
@@ -6110,7 +6104,7 @@ val_t syntax___icode_generation___ASendExpr___generate_icode(val_t p0, val_t p1)
       fra.me.REG[8] = CALL_syntax___syntax_base___ASendExpr___closure_defs(fra.me.REG[2])(fra.me.REG[2]);
       REGB0 = TAG_Bool(fra.me.REG[8]==NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
-        nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1177);
+        nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1178);
       }
       /* ../lib/standard/collection/array.nit:24 */
       REGB0 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[8])!=NIT_NULL);
@@ -6120,23 +6114,23 @@ val_t syntax___icode_generation___ASendExpr___generate_icode(val_t p0, val_t p1)
       }
       REGB0 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[8]);
     }
-    /* syntax/icode_generation.nit:1178 */
-    fra.me.REG[8] = CALL_syntax___syntax_base___ASendExpr___closure_defs(fra.me.REG[2])(fra.me.REG[2]);
     /* syntax/icode_generation.nit:1179 */
+    fra.me.REG[8] = CALL_syntax___syntax_base___ASendExpr___closure_defs(fra.me.REG[2])(fra.me.REG[2]);
+    /* syntax/icode_generation.nit:1180 */
     fra.me.REG[9] = CALL_syntax___syntax_base___AAbsAbsSendExpr___prop_signature(fra.me.REG[2])(fra.me.REG[2]);
     fra.me.REG[9] = CALL_metamodel___static_type___MMSignature___closures(fra.me.REG[9])(fra.me.REG[9]);
-    /* ../lib/standard/collection/array.nit:269 */
-    REGB0 = TAG_Int(0);
     /* ../lib/standard/collection/array.nit:270 */
+    REGB0 = TAG_Int(0);
+    /* ../lib/standard/collection/array.nit:271 */
     REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[9])!=NIT_NULL);
     if (UNTAG_Bool(REGB1)) {
     } else {
-      nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 270);
+      nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 271);
     }
     REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[9]);
-    /* ../lib/standard/collection/array.nit:271 */
-    fra.me.REG[10] = ATTR_standard___collection___array___Array____items(fra.me.REG[9]);
     /* ../lib/standard/collection/array.nit:272 */
+    fra.me.REG[10] = ATTR_standard___collection___array___Array____items(fra.me.REG[9]);
+    /* ../lib/standard/collection/array.nit:273 */
     while(1) {
       /* ../lib/standard/collection/array.nit:24 */
       REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[9])!=NIT_NULL);
@@ -6150,22 +6144,22 @@ val_t syntax___icode_generation___ASendExpr___generate_icode(val_t p0, val_t p1)
       } else {
         nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
       }
-      /* ../lib/standard/kernel.nit:235 */
+      /* ../lib/standard/kernel.nit:242 */
       REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-      /* ../lib/standard/collection/array.nit:272 */
+      /* ../lib/standard/collection/array.nit:273 */
       if (UNTAG_Bool(REGB1)) {
-        /* ../lib/standard/collection/array.nit:273 */
+        /* ../lib/standard/collection/array.nit:274 */
         REGB1 = TAG_Bool(fra.me.REG[10]==NIT_NULL);
         if (UNTAG_Bool(REGB1)) {
-          nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
+          nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 274);
         }
-        /* ../lib/standard/collection/array.nit:724 */
+        /* ../lib/standard/collection/array.nit:725 */
         fra.me.REG[11] = ((Nit_NativeArray)fra.me.REG[10])->val[UNTAG_Int(REGB0)];
-        /* syntax/icode_generation.nit:1180 */
-        REGB1 = TAG_Bool(0);
         /* syntax/icode_generation.nit:1181 */
-        fra.me.REG[11] = CALL_metamodel___static_type___MMClosure___name(fra.me.REG[11])(fra.me.REG[11]);
+        REGB1 = TAG_Bool(0);
         /* syntax/icode_generation.nit:1182 */
+        fra.me.REG[11] = CALL_metamodel___static_type___MMClosure___name(fra.me.REG[11])(fra.me.REG[11]);
+        /* syntax/icode_generation.nit:1183 */
         REGB2 = TAG_Bool(fra.me.REG[8]==NIT_NULL);
         if (UNTAG_Bool(REGB2)) {
         } else {
@@ -6180,25 +6174,25 @@ val_t syntax___icode_generation___ASendExpr___generate_icode(val_t p0, val_t p1)
         }
         REGB2 = TAG_Bool(!UNTAG_Bool(REGB2));
         if (UNTAG_Bool(REGB2)) {
-          /* syntax/icode_generation.nit:1183 */
+          /* syntax/icode_generation.nit:1184 */
           REGB2 = TAG_Bool(fra.me.REG[8]==NIT_NULL);
           if (UNTAG_Bool(REGB2)) {
-            nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1183);
+            nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1184);
           }
-          /* ../lib/standard/collection/array.nit:266 */
+          /* ../lib/standard/collection/array.nit:267 */
           fra.me.REG[12] = fra.me.REG[8];
-          /* ../lib/standard/collection/array.nit:269 */
-          REGB2 = TAG_Int(0);
           /* ../lib/standard/collection/array.nit:270 */
+          REGB2 = TAG_Int(0);
+          /* ../lib/standard/collection/array.nit:271 */
           REGB3 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[12])!=NIT_NULL);
           if (UNTAG_Bool(REGB3)) {
           } else {
-            nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 270);
+            nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 271);
           }
           REGB3 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[12]);
-          /* ../lib/standard/collection/array.nit:271 */
-          fra.me.REG[13] = ATTR_standard___collection___array___Array____items(fra.me.REG[12]);
           /* ../lib/standard/collection/array.nit:272 */
+          fra.me.REG[13] = ATTR_standard___collection___array___Array____items(fra.me.REG[12]);
+          /* ../lib/standard/collection/array.nit:273 */
           while(1) {
             /* ../lib/standard/collection/array.nit:24 */
             REGB3 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[12])!=NIT_NULL);
@@ -6212,18 +6206,18 @@ val_t syntax___icode_generation___ASendExpr___generate_icode(val_t p0, val_t p1)
             } else {
               nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
             }
-            /* ../lib/standard/kernel.nit:235 */
+            /* ../lib/standard/kernel.nit:242 */
             REGB3 = TAG_Bool(UNTAG_Int(REGB2)<UNTAG_Int(REGB3));
-            /* ../lib/standard/collection/array.nit:272 */
+            /* ../lib/standard/collection/array.nit:273 */
             if (UNTAG_Bool(REGB3)) {
-              /* ../lib/standard/collection/array.nit:273 */
+              /* ../lib/standard/collection/array.nit:274 */
               REGB3 = TAG_Bool(fra.me.REG[13]==NIT_NULL);
               if (UNTAG_Bool(REGB3)) {
-		nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
+		nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 274);
               }
-              /* ../lib/standard/collection/array.nit:724 */
+              /* ../lib/standard/collection/array.nit:725 */
               fra.me.REG[14] = ((Nit_NativeArray)fra.me.REG[13])->val[UNTAG_Int(REGB2)];
-              /* syntax/icode_generation.nit:1184 */
+              /* syntax/icode_generation.nit:1185 */
               fra.me.REG[15] = CALL_parser___parser_nodes___AClosureDef___n_id(fra.me.REG[14])(fra.me.REG[14]);
               fra.me.REG[15] = CALL_syntax___typing___AClosureId___to_symbol(fra.me.REG[15])(fra.me.REG[15]);
               REGB3 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[15],fra.me.REG[11]));
@@ -6236,91 +6230,91 @@ val_t syntax___icode_generation___ASendExpr___generate_icode(val_t p0, val_t p1)
               if (UNTAG_Bool(REGB3)) {
 		goto label1;
               }
-              /* syntax/icode_generation.nit:1185 */
+              /* syntax/icode_generation.nit:1186 */
               REGB3 = TAG_Bool(0);
               REGB4 = TAG_Bool(IS_EQUAL_OO(REGB1,REGB3));
               if (UNTAG_Bool(REGB4)) {
               } else {
-		/* ../lib/standard/kernel.nit:198 */
+		/* ../lib/standard/kernel.nit:199 */
 		REGB3 = TAG_Bool((REGB1)==(REGB3));
-		/* syntax/icode_generation.nit:1185 */
+		/* syntax/icode_generation.nit:1186 */
 		REGB4 = REGB3;
               }
               if (UNTAG_Bool(REGB4)) {
               } else {
-		nit_abort("Assert failed", NULL, LOCATE_syntax___icode_generation, 1185);
+		nit_abort("Assert failed", NULL, LOCATE_syntax___icode_generation, 1186);
               }
-              /* syntax/icode_generation.nit:1186 */
+              /* syntax/icode_generation.nit:1187 */
               REGB4 = TAG_Bool(1);
               REGB1 = REGB4;
-              /* syntax/icode_generation.nit:1187 */
-              fra.me.REG[15] = CALL_syntax___typing___AClosureDef___escapable(fra.me.REG[14])(fra.me.REG[14]);
-              REGB4 = TAG_Bool(fra.me.REG[15]==NIT_NULL);
-              if (UNTAG_Bool(REGB4)) {
-		nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1187);
-              }
-              CALL_syntax___icode_generation___EscapableBlock___break_seq__eq(fra.me.REG[15])(fra.me.REG[15], fra.me.REG[7]);
               /* syntax/icode_generation.nit:1188 */
               fra.me.REG[15] = CALL_syntax___typing___AClosureDef___escapable(fra.me.REG[14])(fra.me.REG[14]);
               REGB4 = TAG_Bool(fra.me.REG[15]==NIT_NULL);
               if (UNTAG_Bool(REGB4)) {
 		nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1188);
               }
-              CALL_syntax___icode_generation___EscapableBlock___break_value__eq(fra.me.REG[15])(fra.me.REG[15], fra.me.REG[5]);
+              CALL_syntax___icode_generation___EscapableBlock___break_seq__eq(fra.me.REG[15])(fra.me.REG[15], fra.me.REG[7]);
               /* syntax/icode_generation.nit:1189 */
-              fra.me.REG[14] = CALL_syntax___icode_generation___AClosureDef___generate_iclosuredef(fra.me.REG[14])(fra.me.REG[14], fra.me.REG[1]);
+              fra.me.REG[15] = CALL_syntax___typing___AClosureDef___escapable(fra.me.REG[14])(fra.me.REG[14]);
+              REGB4 = TAG_Bool(fra.me.REG[15]==NIT_NULL);
+              if (UNTAG_Bool(REGB4)) {
+		nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1189);
+              }
+              CALL_syntax___icode_generation___EscapableBlock___break_value__eq(fra.me.REG[15])(fra.me.REG[15], fra.me.REG[5]);
               /* syntax/icode_generation.nit:1190 */
+              fra.me.REG[14] = CALL_syntax___icode_generation___AClosureDef___generate_iclosuredef(fra.me.REG[14])(fra.me.REG[14], fra.me.REG[1]);
+              /* syntax/icode_generation.nit:1191 */
               REGB4 = TAG_Bool(fra.me.REG[6]==NIT_NULL);
               if (UNTAG_Bool(REGB4)) {
-		nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1190);
+		nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1191);
               }
               CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[14]);
               label1: while(0);
-              /* ../lib/standard/collection/array.nit:274 */
+              /* ../lib/standard/collection/array.nit:275 */
               REGB4 = TAG_Int(1);
-              /* ../lib/standard/kernel.nit:238 */
+              /* ../lib/standard/kernel.nit:245 */
               REGB4 = TAG_Int(UNTAG_Int(REGB2)+UNTAG_Int(REGB4));
-              /* ../lib/standard/collection/array.nit:274 */
+              /* ../lib/standard/collection/array.nit:275 */
               REGB2 = REGB4;
             } else {
-              /* ../lib/standard/collection/array.nit:272 */
+              /* ../lib/standard/collection/array.nit:273 */
               goto label2;
             }
           }
           label2: while(0);
         }
-        /* syntax/icode_generation.nit:1193 */
+        /* syntax/icode_generation.nit:1194 */
         REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
         if (UNTAG_Bool(REGB1)) {
-          /* syntax/icode_generation.nit:1194 */
+          /* syntax/icode_generation.nit:1195 */
           REGB1 = TAG_Bool(fra.me.REG[6]==NIT_NULL);
           if (UNTAG_Bool(REGB1)) {
-            nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1194);
+            nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1195);
           }
           CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[6])(fra.me.REG[6], NIT_NULL);
         }
-        /* ../lib/standard/collection/array.nit:274 */
+        /* ../lib/standard/collection/array.nit:275 */
         REGB1 = TAG_Int(1);
-        /* ../lib/standard/kernel.nit:238 */
+        /* ../lib/standard/kernel.nit:245 */
         REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
-        /* ../lib/standard/collection/array.nit:274 */
+        /* ../lib/standard/collection/array.nit:275 */
         REGB0 = REGB1;
       } else {
-        /* ../lib/standard/collection/array.nit:272 */
+        /* ../lib/standard/collection/array.nit:273 */
         goto label3;
       }
     }
     label3: while(0);
   }
-  /* syntax/icode_generation.nit:1199 */
+  /* syntax/icode_generation.nit:1200 */
   fra.me.REG[6] = CALL_icode___icode_builder___ICodeBuilder___add_call(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3], fra.me.REG[4], fra.me.REG[6]);
-  /* syntax/icode_generation.nit:1202 */
+  /* syntax/icode_generation.nit:1203 */
   fra.me.REG[2] = CALL_syntax___syntax_base___AAbsAbsSendExpr___prop_signature(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[2] = CALL_metamodel___static_type___MMSignature___closures(fra.me.REG[2])(fra.me.REG[2]);
   REGB0 = CALL_standard___collection___abstract_collection___Collection___is_empty(fra.me.REG[2])(fra.me.REG[2]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/icode_generation.nit:1203 */
+    /* syntax/icode_generation.nit:1204 */
     REGB0 = TAG_Bool(fra.me.REG[5]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
@@ -6355,20 +6349,20 @@ val_t syntax___icode_generation___ASendExpr___generate_icode(val_t p0, val_t p1)
     if (UNTAG_Bool(REGB0)) {
       CALL_icode___icode_builder___ICodeBuilder___add_assignment(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[5], fra.me.REG[6]);
     }
-    /* syntax/icode_generation.nit:1204 */
+    /* syntax/icode_generation.nit:1205 */
     CALL_icode___icode_builder___ICodeBuilder___seq__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
   } else {
-    /* syntax/icode_generation.nit:1206 */
+    /* syntax/icode_generation.nit:1207 */
     fra.me.REG[5] = fra.me.REG[6];
   }
-  /* syntax/icode_generation.nit:1209 */
+  /* syntax/icode_generation.nit:1210 */
   fra.me.REG[6] = CALL_metamodel___abstractmetamodel___MMLocalProperty___global(fra.me.REG[3])(fra.me.REG[3]);
   REGB0 = CALL_metamodel___abstractmetamodel___MMGlobalProperty___is_init(fra.me.REG[6])(fra.me.REG[6]);
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/icode_generation.nit:1210 */
+    /* syntax/icode_generation.nit:1211 */
     CALL_syntax___icode_generation___A2IContext___invoke_super_init_calls_after(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
   }
-  /* syntax/icode_generation.nit:1212 */
+  /* syntax/icode_generation.nit:1213 */
   goto label4;
   label4: while(0);
   stack_frame_head = fra.me.prev;
@@ -6381,7 +6375,7 @@ val_t syntax___icode_generation___ASendReassignExpr___generate_icode(val_t p0, v
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___icode_generation;
-  fra.me.line = 1217;
+  fra.me.line = 1218;
   fra.me.meth = LOCATE_syntax___icode_generation___ASendReassignExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 8;
@@ -6396,51 +6390,51 @@ val_t syntax___icode_generation___ASendReassignExpr___generate_icode(val_t p0, v
   fra.me.REG[7] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/icode_generation.nit:1217 */
+  /* syntax/icode_generation.nit:1218 */
   fra.me.REG[2] = fra.me.REG[0];
-  /* syntax/icode_generation.nit:1219 */
+  /* syntax/icode_generation.nit:1220 */
   fra.me.REG[3] = CALL_parser___parser_nodes___ASendExpr___n_expr(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[3] = CALL_syntax___icode_generation___A2IContext___generate_expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
-  /* syntax/icode_generation.nit:1220 */
+  /* syntax/icode_generation.nit:1221 */
   fra.me.REG[4] = CALL_parser___parser_nodes___ASendExpr___n_expr(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[4] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[4])(fra.me.REG[4]);
   REGB0 = CALL_metamodel___static_type___MMType___is_nullable(fra.me.REG[4])(fra.me.REG[4]);
   if (UNTAG_Bool(REGB0)) {
     CALL_icode___icode_builder___ICodeBuilder___add_null_reciever_check(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
   }
-  /* syntax/icode_generation.nit:1221 */
-  fra.me.REG[4] = NEW_Array_standard___collection___array___Array___init();
   /* syntax/icode_generation.nit:1222 */
-  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[3]);
+  fra.me.REG[4] = NEW_Array_standard___collection___array___Array___init();
   /* syntax/icode_generation.nit:1223 */
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[3]);
+  /* syntax/icode_generation.nit:1224 */
   fra.me.REG[3] = CALL_syntax___syntax_base___ASendReassignExpr___read_prop(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[3] = CALL_metamodel___static_type___MMLocalProperty___signature(fra.me.REG[3])(fra.me.REG[3]);
   REGB0 = TAG_Bool((fra.me.REG[3]!=NIT_NULL) && VAL_ISA(fra.me.REG[3], COLOR_metamodel___static_type___MMSignature, ID_metamodel___static_type___MMSignature)) /*cast MMSignature*/;
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Cast failed", NULL, LOCATE_syntax___icode_generation, 1223);
+    nit_abort("Cast failed", NULL, LOCATE_syntax___icode_generation, 1224);
   }
   CALL_syntax___icode_generation___AAbsAbsSendExpr___generate_icode_for_arguments_in(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1], fra.me.REG[4], fra.me.REG[3]);
-  /* syntax/icode_generation.nit:1225 */
+  /* syntax/icode_generation.nit:1226 */
   fra.me.REG[3] = CALL_syntax___syntax_base___ASendReassignExpr___read_prop(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[3] = NEW_ICall_icode___icode_base___ICall___init(fra.me.REG[3], fra.me.REG[4]);
   fra.me.REG[5] = CALL_syntax___syntax_base___ASendReassignExpr___read_prop(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[5] = CALL_metamodel___static_type___MMLocalProperty___signature(fra.me.REG[5])(fra.me.REG[5]);
   REGB0 = TAG_Bool(fra.me.REG[5]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1225);
+    nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1226);
   }
   fra.me.REG[5] = CALL_metamodel___static_type___MMSignature___return_type(fra.me.REG[5])(fra.me.REG[5]);
   REGB0 = TAG_Bool((fra.me.REG[5]!=NIT_NULL) && VAL_ISA(fra.me.REG[5], COLOR_metamodel___static_type___MMType, ID_metamodel___static_type___MMType)) /*cast MMType*/;
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Cast failed", NULL, LOCATE_syntax___icode_generation, 1225);
+    nit_abort("Cast failed", NULL, LOCATE_syntax___icode_generation, 1226);
   }
   fra.me.REG[5] = CALL_icode___icode_builder___ICodeBuilder___expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3], fra.me.REG[5]);
-  /* syntax/icode_generation.nit:1226 */
+  /* syntax/icode_generation.nit:1227 */
   fra.me.REG[3] = CALL_parser___parser_nodes___AReassignFormExpr___n_value(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[3] = CALL_syntax___icode_generation___A2IContext___generate_expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
-  /* syntax/icode_generation.nit:1227 */
+  /* syntax/icode_generation.nit:1228 */
   fra.me.REG[6] = CALL_syntax___syntax_base___AReassignFormExpr___assign_method(fra.me.REG[2])(fra.me.REG[2]);
   REGB0 = TAG_Int(2);
   fra.me.REG[7] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
@@ -6451,24 +6445,24 @@ val_t syntax___icode_generation___ASendReassignExpr___generate_icode(val_t p0, v
   fra.me.REG[6] = CALL_metamodel___static_type___MMLocalProperty___signature(fra.me.REG[6])(fra.me.REG[6]);
   REGB0 = TAG_Bool(fra.me.REG[6]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1227);
+    nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1228);
   }
   fra.me.REG[6] = CALL_metamodel___static_type___MMSignature___return_type(fra.me.REG[6])(fra.me.REG[6]);
   REGB0 = TAG_Bool((fra.me.REG[6]!=NIT_NULL) && VAL_ISA(fra.me.REG[6], COLOR_metamodel___static_type___MMType, ID_metamodel___static_type___MMType)) /*cast MMType*/;
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Cast failed", NULL, LOCATE_syntax___icode_generation, 1227);
+    nit_abort("Cast failed", NULL, LOCATE_syntax___icode_generation, 1228);
   }
   fra.me.REG[6] = CALL_icode___icode_builder___ICodeBuilder___expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[7], fra.me.REG[6]);
-  /* syntax/icode_generation.nit:1228 */
-  fra.me.REG[4] = CALL_standard___collection___array___Collection___to_a(fra.me.REG[4])(fra.me.REG[4]);
   /* syntax/icode_generation.nit:1229 */
-  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[6]);
+  fra.me.REG[4] = CALL_standard___collection___array___Collection___to_a(fra.me.REG[4])(fra.me.REG[4]);
   /* syntax/icode_generation.nit:1230 */
+  CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[6]);
+  /* syntax/icode_generation.nit:1231 */
   fra.me.REG[2] = CALL_syntax___syntax_base___AAbsSendExpr___prop(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[4] = NEW_ICall_icode___icode_base___ICall___init(fra.me.REG[2], fra.me.REG[4]);
   CALL_icode___icode_builder___ICodeBuilder___stmt(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[4]);
-  /* syntax/icode_generation.nit:1231 */
+  /* syntax/icode_generation.nit:1232 */
   fra.me.REG[4] = NIT_NULL;
   goto label1;
   label1: while(0);
@@ -6482,7 +6476,7 @@ val_t syntax___icode_generation___ANewExpr___generate_icode(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___icode_generation;
-  fra.me.line = 1236;
+  fra.me.line = 1237;
   fra.me.meth = LOCATE_syntax___icode_generation___ANewExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
@@ -6494,20 +6488,20 @@ val_t syntax___icode_generation___ANewExpr___generate_icode(val_t p0, val_t p1){
   fra.me.REG[4] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/icode_generation.nit:1236 */
+  /* syntax/icode_generation.nit:1237 */
   fra.me.REG[2] = fra.me.REG[0];
-  /* syntax/icode_generation.nit:1238 */
-  fra.me.REG[3] = NEW_Array_standard___collection___array___Array___init();
   /* syntax/icode_generation.nit:1239 */
+  fra.me.REG[3] = NEW_Array_standard___collection___array___Array___init();
+  /* syntax/icode_generation.nit:1240 */
   fra.me.REG[4] = CALL_syntax___syntax_base___AAbsSendExpr___prop(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[4] = CALL_metamodel___static_type___MMLocalProperty___signature(fra.me.REG[4])(fra.me.REG[4]);
   REGB0 = TAG_Bool((fra.me.REG[4]!=NIT_NULL) && VAL_ISA(fra.me.REG[4], COLOR_metamodel___static_type___MMSignature, ID_metamodel___static_type___MMSignature)) /*cast MMSignature*/;
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Cast failed", NULL, LOCATE_syntax___icode_generation, 1239);
+    nit_abort("Cast failed", NULL, LOCATE_syntax___icode_generation, 1240);
   }
   CALL_syntax___icode_generation___AAbsAbsSendExpr___generate_icode_for_arguments_in(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[1], fra.me.REG[3], fra.me.REG[4]);
-  /* syntax/icode_generation.nit:1240 */
+  /* syntax/icode_generation.nit:1241 */
   fra.me.REG[4] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[0] = CALL_syntax___syntax_base___AAbsSendExpr___prop(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[3] = NEW_INew_icode___icode_base___INew___init(fra.me.REG[4], fra.me.REG[0], fra.me.REG[3]);
@@ -6524,7 +6518,7 @@ val_t syntax___icode_generation___AProxyExpr___generate_icode(val_t p0, val_t p1
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___icode_generation;
-  fra.me.line = 1245;
+  fra.me.line = 1246;
   fra.me.meth = LOCATE_syntax___icode_generation___AProxyExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -6533,7 +6527,7 @@ val_t syntax___icode_generation___AProxyExpr___generate_icode(val_t p0, val_t p1
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/icode_generation.nit:1247 */
+  /* syntax/icode_generation.nit:1248 */
   fra.me.REG[0] = CALL_parser___parser_nodes___AProxyExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_syntax___icode_generation___A2IContext___generate_expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
   goto label1;
@@ -6547,7 +6541,7 @@ val_t syntax___icode_generation___AOnceExpr___generate_icode(val_t p0, val_t p1)
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___icode_generation;
-  fra.me.line = 1252;
+  fra.me.line = 1253;
   fra.me.meth = LOCATE_syntax___icode_generation___AOnceExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 5;
@@ -6559,24 +6553,24 @@ val_t syntax___icode_generation___AOnceExpr___generate_icode(val_t p0, val_t p1)
   fra.me.REG[4] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/icode_generation.nit:1254 */
-  fra.me.REG[2] = NEW_IOnce_icode___icode_base___IOnce___init();
   /* syntax/icode_generation.nit:1255 */
+  fra.me.REG[2] = NEW_IOnce_icode___icode_base___IOnce___init();
+  /* syntax/icode_generation.nit:1256 */
   fra.me.REG[3] = CALL_syntax___syntax_base___AExpr___stype(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[3] = CALL_icode___icode_builder___ICodeBuilder___expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2], fra.me.REG[3]);
-  /* syntax/icode_generation.nit:1256 */
-  fra.me.REG[4] = CALL_icode___icode_builder___ICodeBuilder___seq(fra.me.REG[1])(fra.me.REG[1]);
   /* syntax/icode_generation.nit:1257 */
+  fra.me.REG[4] = CALL_icode___icode_builder___ICodeBuilder___seq(fra.me.REG[1])(fra.me.REG[1]);
+  /* syntax/icode_generation.nit:1258 */
   fra.me.REG[2] = CALL_icode___icode_base___IOnce___body(fra.me.REG[2])(fra.me.REG[2]);
   CALL_icode___icode_builder___ICodeBuilder___seq__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-  /* syntax/icode_generation.nit:1259 */
+  /* syntax/icode_generation.nit:1260 */
   fra.me.REG[0] = CALL_parser___parser_nodes___AProxyExpr___n_expr(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_syntax___icode_generation___A2IContext___generate_expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
-  /* syntax/icode_generation.nit:1260 */
+  /* syntax/icode_generation.nit:1261 */
   CALL_icode___icode_builder___ICodeBuilder___add_assignment(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3], fra.me.REG[0]);
-  /* syntax/icode_generation.nit:1262 */
-  CALL_icode___icode_builder___ICodeBuilder___seq__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[4]);
   /* syntax/icode_generation.nit:1263 */
+  CALL_icode___icode_builder___ICodeBuilder___seq__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[4]);
+  /* syntax/icode_generation.nit:1264 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -6594,7 +6588,7 @@ val_t syntax___icode_generation___AClosureDef___generate_iclosuredef(val_t p0, v
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___icode_generation;
-  fra.me.line = 1271;
+  fra.me.line = 1272;
   fra.me.meth = LOCATE_syntax___icode_generation___AClosureDef___generate_iclosuredef;
   fra.me.has_broke = 0;
   fra.me.REG_size = 7;
@@ -6608,50 +6602,50 @@ val_t syntax___icode_generation___AClosureDef___generate_iclosuredef(val_t p0, v
   fra.me.REG[6] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/icode_generation.nit:1271 */
+  /* syntax/icode_generation.nit:1272 */
   fra.me.REG[2] = fra.me.REG[0];
-  /* syntax/icode_generation.nit:1274 */
-  fra.me.REG[3] = NEW_Array_standard___collection___array___Array___init();
   /* syntax/icode_generation.nit:1275 */
+  fra.me.REG[3] = NEW_Array_standard___collection___array___Array___init();
+  /* syntax/icode_generation.nit:1276 */
   fra.me.REG[4] = CALL_syntax___syntax_base___AClosureDef___closure(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[4] = CALL_metamodel___static_type___MMClosure___signature(fra.me.REG[4])(fra.me.REG[4]);
-  /* syntax/icode_generation.nit:1276 */
+  /* syntax/icode_generation.nit:1277 */
   REGB0 = TAG_Int(0);
   REGB1 = CALL_metamodel___static_type___MMSignature___arity(fra.me.REG[4])(fra.me.REG[4]);
-  /* ../lib/standard/kernel.nit:355 */
+  /* ../lib/standard/kernel.nit:404 */
   while(1) {
     REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
     if (UNTAG_Bool(REGB2)) {
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:242 */
     REGB2 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-    /* ../lib/standard/kernel.nit:355 */
+    /* ../lib/standard/kernel.nit:404 */
     if (UNTAG_Bool(REGB2)) {
-      /* syntax/icode_generation.nit:1276 */
-      REGB2 = REGB0;
       /* syntax/icode_generation.nit:1277 */
+      REGB2 = REGB0;
+      /* syntax/icode_generation.nit:1278 */
       fra.me.REG[5] = CALL_metamodel___static_type___MMSignature_____bra(fra.me.REG[4])(fra.me.REG[4], REGB2);
       fra.me.REG[5] = CALL_icode___icode_builder___ICodeBuilder___new_register(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[5]);
       CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[5]);
-      /* ../lib/standard/kernel.nit:357 */
+      /* ../lib/standard/kernel.nit:406 */
       REGB2 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB2 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB2));
-      /* ../lib/standard/kernel.nit:357 */
+      /* ../lib/standard/kernel.nit:406 */
       REGB0 = REGB2;
     } else {
-      /* ../lib/standard/kernel.nit:355 */
+      /* ../lib/standard/kernel.nit:404 */
       goto label1;
     }
   }
   label1: while(0);
-  /* syntax/icode_generation.nit:1279 */
-  fra.me.REG[5] = NIT_NULL;
   /* syntax/icode_generation.nit:1280 */
-  fra.me.REG[4] = CALL_metamodel___static_type___MMSignature___return_type(fra.me.REG[4])(fra.me.REG[4]);
+  fra.me.REG[5] = NIT_NULL;
   /* syntax/icode_generation.nit:1281 */
+  fra.me.REG[4] = CALL_metamodel___static_type___MMSignature___return_type(fra.me.REG[4])(fra.me.REG[4]);
+  /* syntax/icode_generation.nit:1282 */
   REGB0 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -6666,42 +6660,42 @@ val_t syntax___icode_generation___AClosureDef___generate_iclosuredef(val_t p0, v
   }
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/icode_generation.nit:1282 */
+    /* syntax/icode_generation.nit:1283 */
     fra.me.REG[4] = CALL_icode___icode_builder___ICodeBuilder___new_register(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[4]);
     fra.me.REG[5] = fra.me.REG[4];
   }
-  /* syntax/icode_generation.nit:1285 */
-  fra.me.REG[5] = NEW_IClosureDef_icode___icode_base___IClosureDef___init(fra.me.REG[3], fra.me.REG[5]);
   /* syntax/icode_generation.nit:1286 */
+  fra.me.REG[5] = NEW_IClosureDef_icode___icode_base___IClosureDef___init(fra.me.REG[3], fra.me.REG[5]);
+  /* syntax/icode_generation.nit:1287 */
   fra.me.REG[3] = CALL_parser___parser_nodes___ANode___location(fra.me.REG[2])(fra.me.REG[2]);
   CALL_icode___icode_base___IRoutine___location__eq(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[3]);
-  /* syntax/icode_generation.nit:1289 */
-  fra.me.REG[3] = CALL_icode___icode_builder___ICodeBuilder___seq(fra.me.REG[1])(fra.me.REG[1]);
   /* syntax/icode_generation.nit:1290 */
+  fra.me.REG[3] = CALL_icode___icode_builder___ICodeBuilder___seq(fra.me.REG[1])(fra.me.REG[1]);
+  /* syntax/icode_generation.nit:1291 */
   fra.me.REG[4] = CALL_icode___icode_base___IRoutine___body(fra.me.REG[5])(fra.me.REG[5]);
   CALL_icode___icode_builder___ICodeBuilder___seq__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[4]);
-  /* syntax/icode_generation.nit:1291 */
+  /* syntax/icode_generation.nit:1292 */
   fra.me.REG[4] = CALL_syntax___typing___AClosureDef___escapable(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[6] = CALL_icode___icode_base___IRoutine___body(fra.me.REG[5])(fra.me.REG[5]);
   REGB0 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1291);
+    nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1292);
   }
   CALL_syntax___icode_generation___EscapableBlock___continue_seq__eq(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[6]);
-  /* syntax/icode_generation.nit:1292 */
+  /* syntax/icode_generation.nit:1293 */
   fra.me.REG[6] = CALL_syntax___typing___AClosureDef___escapable(fra.me.REG[2])(fra.me.REG[2]);
   fra.me.REG[4] = CALL_icode___icode_base___IRoutine___result(fra.me.REG[5])(fra.me.REG[5]);
   REGB0 = TAG_Bool(fra.me.REG[6]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1292);
+    nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1293);
   }
   CALL_syntax___icode_generation___EscapableBlock___continue_value__eq(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[4]);
-  /* syntax/icode_generation.nit:1295 */
+  /* syntax/icode_generation.nit:1296 */
   REGB0 = TAG_Int(0);
   fra.me.REG[4] = CALL_syntax___syntax_base___AClosureDef___variables(fra.me.REG[2])(fra.me.REG[2]);
   REGB1 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
-    nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1295);
+    nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1296);
   }
   /* ../lib/standard/collection/array.nit:24 */
   REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[4])!=NIT_NULL);
@@ -6710,42 +6704,42 @@ val_t syntax___icode_generation___AClosureDef___generate_iclosuredef(val_t p0, v
     nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
   }
   REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[4]);
-  /* ../lib/standard/kernel.nit:355 */
+  /* ../lib/standard/kernel.nit:404 */
   while(1) {
     REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
     if (UNTAG_Bool(REGB2)) {
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:242 */
     REGB2 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-    /* ../lib/standard/kernel.nit:355 */
+    /* ../lib/standard/kernel.nit:404 */
     if (UNTAG_Bool(REGB2)) {
-      /* syntax/icode_generation.nit:1295 */
-      REGB2 = REGB0;
       /* syntax/icode_generation.nit:1296 */
+      REGB2 = REGB0;
+      /* syntax/icode_generation.nit:1297 */
       fra.me.REG[4] = CALL_syntax___syntax_base___AClosureDef___variables(fra.me.REG[2])(fra.me.REG[2]);
       REGB3 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
       if (UNTAG_Bool(REGB3)) {
-        nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1296);
+        nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1297);
       }
-      /* ../lib/standard/collection/array.nit:278 */
+      /* ../lib/standard/collection/array.nit:279 */
       REGB3 = REGB2;
-      /* ../lib/standard/collection/array.nit:280 */
+      /* ../lib/standard/collection/array.nit:281 */
       REGB4 = TAG_Int(0);
       REGB5 = TAG_Bool(VAL_ISA(REGB4, VTCOLOR_standard___kernel___Comparable___OTHER(REGB3), VTID_standard___kernel___Comparable___OTHER(REGB3))) /*cast OTHER*/;
       if (UNTAG_Bool(REGB5)) {
       } else {
         nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
       }
-      /* ../lib/standard/kernel.nit:236 */
+      /* ../lib/standard/kernel.nit:243 */
       REGB4 = TAG_Bool(UNTAG_Int(REGB3)>=UNTAG_Int(REGB4));
-      /* ../lib/standard/collection/array.nit:280 */
+      /* ../lib/standard/collection/array.nit:281 */
       if (UNTAG_Bool(REGB4)) {
         REGB4 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[4])!=NIT_NULL);
         if (UNTAG_Bool(REGB4)) {
         } else {
-          nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 280);
+          nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 281);
         }
         REGB4 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[4]);
         REGB5 = TAG_Bool(VAL_ISA(REGB4, VTCOLOR_standard___kernel___Comparable___OTHER(REGB3), VTID_standard___kernel___Comparable___OTHER(REGB3))) /*cast OTHER*/;
@@ -6753,57 +6747,57 @@ val_t syntax___icode_generation___AClosureDef___generate_iclosuredef(val_t p0, v
         } else {
           nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
         }
-        /* ../lib/standard/kernel.nit:235 */
+        /* ../lib/standard/kernel.nit:242 */
         REGB4 = TAG_Bool(UNTAG_Int(REGB3)<UNTAG_Int(REGB4));
       } else {
-        /* ../lib/standard/collection/array.nit:280 */
+        /* ../lib/standard/collection/array.nit:281 */
         REGB5 = TAG_Bool(0);
         REGB4 = REGB5;
       }
       if (UNTAG_Bool(REGB4)) {
       } else {
-        nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 280);
+        nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 281);
       }
-      /* ../lib/standard/collection/array.nit:281 */
+      /* ../lib/standard/collection/array.nit:282 */
       fra.me.REG[4] = ATTR_standard___collection___array___Array____items(fra.me.REG[4]);
       REGB4 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
       if (UNTAG_Bool(REGB4)) {
-        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
+        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 282);
       }
-      /* ../lib/standard/collection/array.nit:724 */
+      /* ../lib/standard/collection/array.nit:725 */
       fra.me.REG[4] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB3)];
-      /* ../lib/standard/collection/array.nit:281 */
+      /* ../lib/standard/collection/array.nit:282 */
       goto label2;
       label2: while(0);
-      /* syntax/icode_generation.nit:1296 */
-      fra.me.REG[4] = CALL_syntax___icode_generation___A2IContext___variable(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[4]);
       /* syntax/icode_generation.nit:1297 */
+      fra.me.REG[4] = CALL_syntax___icode_generation___A2IContext___variable(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[4]);
+      /* syntax/icode_generation.nit:1298 */
       fra.me.REG[6] = CALL_icode___icode_base___IRoutine___params(fra.me.REG[5])(fra.me.REG[5]);
       fra.me.REG[6] = CALL_standard___collection___abstract_collection___SequenceRead_____bra(fra.me.REG[6])(fra.me.REG[6], REGB2);
       CALL_icode___icode_builder___ICodeBuilder___add_assignment(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[4], fra.me.REG[6]);
-      /* ../lib/standard/kernel.nit:357 */
+      /* ../lib/standard/kernel.nit:406 */
       REGB2 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB2 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB2));
-      /* ../lib/standard/kernel.nit:357 */
+      /* ../lib/standard/kernel.nit:406 */
       REGB0 = REGB2;
     } else {
-      /* ../lib/standard/kernel.nit:355 */
+      /* ../lib/standard/kernel.nit:404 */
       goto label3;
     }
   }
   label3: while(0);
-  /* syntax/icode_generation.nit:1300 */
+  /* syntax/icode_generation.nit:1301 */
   fra.me.REG[6] = CALL_parser___parser_nodes___AClosureDef___n_expr(fra.me.REG[2])(fra.me.REG[2]);
   CALL_syntax___icode_generation___A2IContext___generate_stmt(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[6]);
-  /* syntax/icode_generation.nit:1303 */
+  /* syntax/icode_generation.nit:1304 */
   fra.me.REG[6] = CALL_syntax___syntax_base___AClosureDef___closure(fra.me.REG[2])(fra.me.REG[2]);
   REGB0 = CALL_metamodel___static_type___MMClosure___is_break(fra.me.REG[6])(fra.me.REG[6]);
   if (UNTAG_Bool(REGB0)) {
     fra.me.REG[6] = CALL_syntax___typing___AClosureDef___escapable(fra.me.REG[2])(fra.me.REG[2]);
     REGB0 = TAG_Bool(fra.me.REG[6]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1303);
+      nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1304);
     }
     fra.me.REG[6] = CALL_syntax___icode_generation___EscapableBlock___break_value(fra.me.REG[6])(fra.me.REG[6]);
     REGB0 = TAG_Bool(fra.me.REG[6]==NIT_NULL);
@@ -6823,25 +6817,25 @@ val_t syntax___icode_generation___AClosureDef___generate_iclosuredef(val_t p0, v
     REGB0 = REGB1;
   }
   if (UNTAG_Bool(REGB0)) {
-    /* syntax/icode_generation.nit:1304 */
+    /* syntax/icode_generation.nit:1305 */
     fra.me.REG[6] = CALL_syntax___typing___AClosureDef___escapable(fra.me.REG[2])(fra.me.REG[2]);
     REGB0 = TAG_Bool(fra.me.REG[6]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1304);
+      nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1305);
     }
     fra.me.REG[6] = CALL_syntax___icode_generation___EscapableBlock___break_seq(fra.me.REG[6])(fra.me.REG[6]);
     REGB0 = TAG_Bool(fra.me.REG[6]!=NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
-      nit_abort("Cast failed", NULL, LOCATE_syntax___icode_generation, 1304);
+      nit_abort("Cast failed", NULL, LOCATE_syntax___icode_generation, 1305);
     }
     CALL_icode___icode_builder___ICodeBuilder___add_escape(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[6]);
   }
-  /* syntax/icode_generation.nit:1307 */
-  CALL_icode___icode_builder___ICodeBuilder___seq__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
   /* syntax/icode_generation.nit:1308 */
-  ATTR_syntax___icode_generation___AClosureDef____iclosure_def(fra.me.REG[2]) = fra.me.REG[5];
+  CALL_icode___icode_builder___ICodeBuilder___seq__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
   /* syntax/icode_generation.nit:1309 */
+  ATTR_syntax___icode_generation___AClosureDef____iclosure_def(fra.me.REG[2]) = fra.me.REG[5];
+  /* syntax/icode_generation.nit:1310 */
   goto label4;
   label4: while(0);
   stack_frame_head = fra.me.prev;
@@ -6856,7 +6850,7 @@ val_t syntax___icode_generation___AClosureCallExpr___generate_icode(val_t p0, va
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___icode_generation;
-  fra.me.line = 1314;
+  fra.me.line = 1315;
   fra.me.meth = LOCATE_syntax___icode_generation___AClosureCallExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
@@ -6872,57 +6866,57 @@ val_t syntax___icode_generation___AClosureCallExpr___generate_icode(val_t p0, va
   fra.me.REG[8] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/icode_generation.nit:1317 */
-  fra.me.REG[2] = NEW_Array_standard___collection___array___Array___init();
   /* syntax/icode_generation.nit:1318 */
+  fra.me.REG[2] = NEW_Array_standard___collection___array___Array___init();
+  /* syntax/icode_generation.nit:1319 */
   fra.me.REG[3] = CALL_syntax___syntax_base___AClosureCallExpr___variable(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[3] = CALL_syntax___syntax_base___ClosureVariable___closure(fra.me.REG[3])(fra.me.REG[3]);
   fra.me.REG[3] = CALL_metamodel___static_type___MMClosure___signature(fra.me.REG[3])(fra.me.REG[3]);
   CALL_syntax___icode_generation___AAbsAbsSendExpr___generate_icode_for_arguments_in(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], fra.me.REG[2], fra.me.REG[3]);
-  /* syntax/icode_generation.nit:1321 */
+  /* syntax/icode_generation.nit:1322 */
   fra.me.REG[3] = CALL_syntax___icode_generation___A2IContext___closurevariables(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[4] = CALL_syntax___syntax_base___AClosureCallExpr___variable(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[4] = CALL_standard___collection___abstract_collection___MapRead_____bra(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[4]);
-  /* syntax/icode_generation.nit:1322 */
-  fra.me.REG[3] = NEW_IClosCall_icode___icode_base___IClosCall___init(fra.me.REG[4], fra.me.REG[2]);
   /* syntax/icode_generation.nit:1323 */
+  fra.me.REG[3] = NEW_IClosCall_icode___icode_base___IClosCall___init(fra.me.REG[4], fra.me.REG[2]);
+  /* syntax/icode_generation.nit:1324 */
   fra.me.REG[5] = CALL_icode___icode_builder___ICodeBuilder___seq(fra.me.REG[1])(fra.me.REG[1]);
-  /* syntax/icode_generation.nit:1326 */
+  /* syntax/icode_generation.nit:1327 */
   fra.me.REG[6] = CALL_parser___parser_nodes___AClosureCallExpr___n_closure_defs(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = CALL_standard___collection___abstract_collection___Collection___length(fra.me.REG[6])(fra.me.REG[6]);
   REGB1 = TAG_Int(1);
   REGB2 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
   if (UNTAG_Bool(REGB2)) {
   } else {
-    /* ../lib/standard/kernel.nit:230 */
+    /* ../lib/standard/kernel.nit:237 */
     REGB1 = TAG_Bool((REGB0)==(REGB1));
-    /* syntax/icode_generation.nit:1326 */
+    /* syntax/icode_generation.nit:1327 */
     REGB2 = REGB1;
   }
   if (UNTAG_Bool(REGB2)) {
-    /* syntax/icode_generation.nit:1327 */
-    fra.me.REG[6] = NEW_ISeq_icode___icode_base___ISeq___init();
     /* syntax/icode_generation.nit:1328 */
-    CALL_icode___icode_base___IClosCall___break_seq__eq(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[6]);
+    fra.me.REG[6] = NEW_ISeq_icode___icode_base___ISeq___init();
     /* syntax/icode_generation.nit:1329 */
-    CALL_icode___icode_builder___ICodeBuilder___seq__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[6]);
+    CALL_icode___icode_base___IClosCall___break_seq__eq(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[6]);
     /* syntax/icode_generation.nit:1330 */
+    CALL_icode___icode_builder___ICodeBuilder___seq__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[6]);
+    /* syntax/icode_generation.nit:1331 */
     fra.me.REG[6] = CALL_parser___parser_nodes___AClosureCallExpr___n_closure_defs(fra.me.REG[0])(fra.me.REG[0]);
     fra.me.REG[6] = CALL_standard___collection___abstract_collection___Collection___first(fra.me.REG[6])(fra.me.REG[6]);
     REGB2 = TAG_Bool(fra.me.REG[6]==NIT_NULL);
     if (UNTAG_Bool(REGB2)) {
-      nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1330);
+      nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1331);
     }
     fra.me.REG[6] = CALL_parser___parser_nodes___AClosureDef___n_expr(fra.me.REG[6])(fra.me.REG[6]);
     CALL_syntax___icode_generation___A2IContext___generate_stmt(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[6]);
-    /* syntax/icode_generation.nit:1331 */
+    /* syntax/icode_generation.nit:1332 */
     CALL_icode___icode_builder___ICodeBuilder___seq__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[5]);
   }
-  /* syntax/icode_generation.nit:1335 */
-  fra.me.REG[6] = NIT_NULL;
   /* syntax/icode_generation.nit:1336 */
-  fra.me.REG[7] = CALL_icode___icode_base___IClosureDecl___default(fra.me.REG[4])(fra.me.REG[4]);
+  fra.me.REG[6] = NIT_NULL;
   /* syntax/icode_generation.nit:1337 */
+  fra.me.REG[7] = CALL_icode___icode_base___IClosureDecl___default(fra.me.REG[4])(fra.me.REG[4]);
+  /* syntax/icode_generation.nit:1338 */
   REGB2 = TAG_Bool(fra.me.REG[7]==NIT_NULL);
   if (UNTAG_Bool(REGB2)) {
   } else {
@@ -6937,31 +6931,31 @@ val_t syntax___icode_generation___AClosureCallExpr___generate_icode(val_t p0, va
   }
   REGB2 = TAG_Bool(!UNTAG_Bool(REGB2));
   if (UNTAG_Bool(REGB2)) {
-    /* syntax/icode_generation.nit:1338 */
+    /* syntax/icode_generation.nit:1339 */
     fra.me.REG[4] = NEW_IHasClos_icode___icode_base___IHasClos___init(fra.me.REG[4]);
     fra.me.REG[8] = CALL_syntax___icode_generation___A2IContext___visitor(fra.me.REG[1])(fra.me.REG[1]);
     fra.me.REG[8] = CALL_syntax___syntax_base___AbsSyntaxVisitor___type_bool(fra.me.REG[8])(fra.me.REG[8]);
     fra.me.REG[8] = CALL_icode___icode_builder___ICodeBuilder___expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[4], fra.me.REG[8]);
     fra.me.REG[8] = NEW_IIf_icode___icode_base___IIf___init(fra.me.REG[8]);
     fra.me.REG[6] = fra.me.REG[8];
-    /* syntax/icode_generation.nit:1339 */
-    CALL_icode___icode_builder___ICodeBuilder___stmt(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[6]);
     /* syntax/icode_generation.nit:1340 */
+    CALL_icode___icode_builder___ICodeBuilder___stmt(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[6]);
+    /* syntax/icode_generation.nit:1341 */
     REGB2 = TAG_Bool(fra.me.REG[6]==NIT_NULL);
     if (UNTAG_Bool(REGB2)) {
-      nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1340);
+      nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1341);
     }
     fra.me.REG[8] = CALL_icode___icode_base___IIf___then_seq(fra.me.REG[6])(fra.me.REG[6]);
     CALL_icode___icode_builder___ICodeBuilder___seq__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[8]);
   }
-  /* syntax/icode_generation.nit:1344 */
-  fra.me.REG[8] = NIT_NULL;
   /* syntax/icode_generation.nit:1345 */
+  fra.me.REG[8] = NIT_NULL;
+  /* syntax/icode_generation.nit:1346 */
   fra.me.REG[0] = CALL_syntax___syntax_base___AClosureCallExpr___variable(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_syntax___syntax_base___ClosureVariable___closure(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_metamodel___static_type___MMClosure___signature(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_metamodel___static_type___MMSignature___return_type(fra.me.REG[0])(fra.me.REG[0]);
-  /* syntax/icode_generation.nit:1346 */
+  /* syntax/icode_generation.nit:1347 */
   REGB2 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB2)) {
   } else {
@@ -6975,16 +6969,16 @@ val_t syntax___icode_generation___AClosureCallExpr___generate_icode(val_t p0, va
     }
   }
   if (UNTAG_Bool(REGB2)) {
-    /* syntax/icode_generation.nit:1347 */
+    /* syntax/icode_generation.nit:1348 */
     CALL_icode___icode_builder___ICodeBuilder___stmt(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
   } else {
-    /* syntax/icode_generation.nit:1349 */
+    /* syntax/icode_generation.nit:1350 */
     fra.me.REG[3] = CALL_icode___icode_builder___ICodeBuilder___expr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3], fra.me.REG[0]);
     fra.me.REG[8] = fra.me.REG[3];
   }
-  /* syntax/icode_generation.nit:1353 */
-  fra.me.REG[3] = NIT_NULL;
   /* syntax/icode_generation.nit:1354 */
+  fra.me.REG[3] = NIT_NULL;
+  /* syntax/icode_generation.nit:1355 */
   REGB2 = TAG_Bool(fra.me.REG[7]==NIT_NULL);
   if (UNTAG_Bool(REGB2)) {
   } else {
@@ -6999,7 +6993,7 @@ val_t syntax___icode_generation___AClosureCallExpr___generate_icode(val_t p0, va
   }
   REGB2 = TAG_Bool(!UNTAG_Bool(REGB2));
   if (UNTAG_Bool(REGB2)) {
-    /* syntax/icode_generation.nit:1355 */
+    /* syntax/icode_generation.nit:1356 */
     REGB2 = TAG_Bool(fra.me.REG[6]==NIT_NULL);
     if (UNTAG_Bool(REGB2)) {
     } else {
@@ -7015,9 +7009,9 @@ val_t syntax___icode_generation___AClosureCallExpr___generate_icode(val_t p0, va
     REGB2 = TAG_Bool(!UNTAG_Bool(REGB2));
     if (UNTAG_Bool(REGB2)) {
     } else {
-      nit_abort("Assert failed", NULL, LOCATE_syntax___icode_generation, 1355);
+      nit_abort("Assert failed", NULL, LOCATE_syntax___icode_generation, 1356);
     }
-    /* syntax/icode_generation.nit:1356 */
+    /* syntax/icode_generation.nit:1357 */
     REGB2 = TAG_Bool(fra.me.REG[8]==NIT_NULL);
     if (UNTAG_Bool(REGB2)) {
     } else {
@@ -7032,7 +7026,7 @@ val_t syntax___icode_generation___AClosureCallExpr___generate_icode(val_t p0, va
     }
     REGB2 = TAG_Bool(!UNTAG_Bool(REGB2));
     if (UNTAG_Bool(REGB2)) {
-      /* syntax/icode_generation.nit:1357 */
+      /* syntax/icode_generation.nit:1358 */
       REGB2 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
       if (UNTAG_Bool(REGB2)) {
       } else {
@@ -7048,24 +7042,24 @@ val_t syntax___icode_generation___AClosureCallExpr___generate_icode(val_t p0, va
       REGB2 = TAG_Bool(!UNTAG_Bool(REGB2));
       if (UNTAG_Bool(REGB2)) {
       } else {
-        nit_abort("Assert failed", NULL, LOCATE_syntax___icode_generation, 1357);
+        nit_abort("Assert failed", NULL, LOCATE_syntax___icode_generation, 1358);
       }
-      /* syntax/icode_generation.nit:1358 */
+      /* syntax/icode_generation.nit:1359 */
       fra.me.REG[0] = CALL_icode___icode_builder___ICodeBuilder___new_register(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
       fra.me.REG[3] = fra.me.REG[0];
-      /* syntax/icode_generation.nit:1359 */
+      /* syntax/icode_generation.nit:1360 */
       CALL_icode___icode_builder___ICodeBuilder___add_assignment(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3], fra.me.REG[8]);
     }
-    /* syntax/icode_generation.nit:1361 */
+    /* syntax/icode_generation.nit:1362 */
     REGB2 = TAG_Bool(fra.me.REG[6]==NIT_NULL);
     if (UNTAG_Bool(REGB2)) {
-      nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1361);
+      nit_abort("Reciever is null", NULL, LOCATE_syntax___icode_generation, 1362);
     }
     fra.me.REG[6] = CALL_icode___icode_base___IIf___else_seq(fra.me.REG[6])(fra.me.REG[6]);
     CALL_icode___icode_builder___ICodeBuilder___seq__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[6]);
-    /* syntax/icode_generation.nit:1362 */
-    fra.me.REG[2] = CALL_icode___icode_tools___ICodeBuilder___inline_routine(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[7], fra.me.REG[2], NIT_NULL);
     /* syntax/icode_generation.nit:1363 */
+    fra.me.REG[2] = CALL_icode___icode_tools___ICodeBuilder___inline_routine(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[7], fra.me.REG[2], NIT_NULL);
+    /* syntax/icode_generation.nit:1364 */
     REGB2 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
     if (UNTAG_Bool(REGB2)) {
     } else {
@@ -7080,7 +7074,7 @@ val_t syntax___icode_generation___AClosureCallExpr___generate_icode(val_t p0, va
     }
     REGB2 = TAG_Bool(!UNTAG_Bool(REGB2));
     if (UNTAG_Bool(REGB2)) {
-      /* syntax/icode_generation.nit:1364 */
+      /* syntax/icode_generation.nit:1365 */
       REGB2 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
       if (UNTAG_Bool(REGB2)) {
       } else {
@@ -7096,18 +7090,18 @@ val_t syntax___icode_generation___AClosureCallExpr___generate_icode(val_t p0, va
       REGB2 = TAG_Bool(!UNTAG_Bool(REGB2));
       if (UNTAG_Bool(REGB2)) {
       } else {
-        nit_abort("Assert failed", NULL, LOCATE_syntax___icode_generation, 1364);
+        nit_abort("Assert failed", NULL, LOCATE_syntax___icode_generation, 1365);
       }
-      /* syntax/icode_generation.nit:1365 */
+      /* syntax/icode_generation.nit:1366 */
       CALL_icode___icode_builder___ICodeBuilder___add_assignment(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3], fra.me.REG[2]);
     }
-    /* syntax/icode_generation.nit:1367 */
+    /* syntax/icode_generation.nit:1368 */
     CALL_icode___icode_builder___ICodeBuilder___seq__eq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[5]);
   } else {
-    /* syntax/icode_generation.nit:1369 */
+    /* syntax/icode_generation.nit:1370 */
     fra.me.REG[3] = fra.me.REG[8];
   }
-  /* syntax/icode_generation.nit:1371 */
+  /* syntax/icode_generation.nit:1372 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -7119,7 +7113,7 @@ val_t syntax___icode_generation___ADebugTypeExpr___generate_icode(val_t p0, val_
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_syntax___icode_generation;
-  fra.me.line = 1376;
+  fra.me.line = 1377;
   fra.me.meth = LOCATE_syntax___icode_generation___ADebugTypeExpr___generate_icode;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -7128,7 +7122,7 @@ val_t syntax___icode_generation___ADebugTypeExpr___generate_icode(val_t p0, val_
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* syntax/icode_generation.nit:1379 */
+  /* syntax/icode_generation.nit:1380 */
   fra.me.REG[1] = NIT_NULL;
   goto label1;
   label1: while(0);

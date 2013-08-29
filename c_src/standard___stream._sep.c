@@ -61,7 +61,7 @@ val_t standard___stream___IStream___read(val_t p0, val_t p1){
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:237 */
+    /* ../lib/standard/kernel.nit:244 */
     REGB1 = TAG_Bool(UNTAG_Int(REGB0)>UNTAG_Int(REGB1));
     /* ../lib/standard/stream.nit:34 */
     if (UNTAG_Bool(REGB1)) {
@@ -81,17 +81,17 @@ val_t standard___stream___IStream___read(val_t p0, val_t p1){
       } else {
         nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
       }
-      /* ../lib/standard/kernel.nit:236 */
+      /* ../lib/standard/kernel.nit:243 */
       REGB2 = TAG_Bool(UNTAG_Int(REGB1)>=UNTAG_Int(REGB2));
       /* ../lib/standard/stream.nit:36 */
       if (UNTAG_Bool(REGB2)) {
-        /* ../lib/standard/kernel.nit:300 */
+        /* ../lib/standard/kernel.nit:318 */
         REGB1 = TAG_Char(UNTAG_Int(REGB1));
         /* ../lib/standard/stream.nit:37 */
         CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], REGB1);
         /* ../lib/standard/stream.nit:38 */
         REGB1 = TAG_Int(1);
-        /* ../lib/standard/kernel.nit:240 */
+        /* ../lib/standard/kernel.nit:247 */
         REGB1 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB1));
         /* ../lib/standard/stream.nit:38 */
         REGB0 = REGB1;
@@ -175,11 +175,11 @@ val_t standard___stream___IStream___read_all(val_t p0){
       } else {
         nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
       }
-      /* ../lib/standard/kernel.nit:236 */
+      /* ../lib/standard/kernel.nit:243 */
       REGB1 = TAG_Bool(UNTAG_Int(REGB0)>=UNTAG_Int(REGB1));
       /* ../lib/standard/stream.nit:59 */
       if (UNTAG_Bool(REGB1)) {
-        /* ../lib/standard/kernel.nit:300 */
+        /* ../lib/standard/kernel.nit:318 */
         REGB0 = TAG_Char(UNTAG_Int(REGB0));
         /* ../lib/standard/stream.nit:59 */
         CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], REGB0);
@@ -221,13 +221,13 @@ void standard___stream___IStream___append_line_to(val_t p0, val_t p1){
     REGB0 = CALL_standard___stream___IStream___read_char(fra.me.REG[0])(fra.me.REG[0]);
     /* ../lib/standard/stream.nit:69 */
     REGB1 = TAG_Int(1);
-    /* ../lib/standard/kernel.nit:239 */
+    /* ../lib/standard/kernel.nit:246 */
     REGB1 = TAG_Int(-UNTAG_Int(REGB1));
     /* ../lib/standard/stream.nit:69 */
     REGB2 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
     if (UNTAG_Bool(REGB2)) {
     } else {
-      /* ../lib/standard/kernel.nit:230 */
+      /* ../lib/standard/kernel.nit:237 */
       REGB1 = TAG_Bool((REGB0)==(REGB1));
       /* ../lib/standard/stream.nit:69 */
       REGB2 = REGB1;
@@ -239,7 +239,7 @@ void standard___stream___IStream___append_line_to(val_t p0, val_t p1){
         goto label1;
       }
     } else {
-      /* ../lib/standard/kernel.nit:300 */
+      /* ../lib/standard/kernel.nit:318 */
       REGB0 = TAG_Char(UNTAG_Int(REGB0));
       /* ../lib/standard/stream.nit:73 */
       CALL_standard___collection___abstract_collection___Sequence___push(fra.me.REG[1])(fra.me.REG[1], REGB0);
@@ -248,7 +248,7 @@ void standard___stream___IStream___append_line_to(val_t p0, val_t p1){
       REGB1 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB2));
       if (UNTAG_Bool(REGB1)) {
       } else {
-        /* ../lib/standard/kernel.nit:381 */
+        /* ../lib/standard/kernel.nit:434 */
         REGB2 = TAG_Bool((REGB0)==(REGB2));
         /* ../lib/standard/stream.nit:74 */
         REGB1 = REGB2;
@@ -359,7 +359,7 @@ val_t standard___stream___BufferedIStream___read_char(val_t p0){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:236 */
+  /* ../lib/standard/kernel.nit:243 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)>=UNTAG_Int(REGB1));
   /* ../lib/standard/stream.nit:99 */
   if (UNTAG_Bool(REGB1)) {
@@ -390,13 +390,13 @@ val_t standard___stream___BufferedIStream___read_char(val_t p0){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:236 */
+  /* ../lib/standard/kernel.nit:243 */
   REGB0 = TAG_Bool(UNTAG_Int(REGB1)>=UNTAG_Int(REGB0));
   /* ../lib/standard/stream.nit:102 */
   if (UNTAG_Bool(REGB0)) {
     /* ../lib/standard/stream.nit:103 */
     REGB0 = TAG_Int(1);
-    /* ../lib/standard/kernel.nit:239 */
+    /* ../lib/standard/kernel.nit:246 */
     REGB0 = TAG_Int(-UNTAG_Int(REGB0));
     /* ../lib/standard/stream.nit:103 */
     goto label1;
@@ -417,11 +417,11 @@ val_t standard___stream___BufferedIStream___read_char(val_t p0){
   /* ../lib/standard/stream.nit:106 */
   REGB2 = ATTR_standard___stream___BufferedIStream____buffer_pos(fra.me.REG[0]);
   REGB3 = TAG_Int(1);
-  /* ../lib/standard/kernel.nit:238 */
+  /* ../lib/standard/kernel.nit:245 */
   REGB3 = TAG_Int(UNTAG_Int(REGB2)+UNTAG_Int(REGB3));
   /* ../lib/standard/stream.nit:106 */
   ATTR_standard___stream___BufferedIStream____buffer_pos(fra.me.REG[0]) = REGB3;
-  /* ../lib/standard/kernel.nit:416 */
+  /* ../lib/standard/kernel.nit:471 */
   REGB1 = TAG_Int((unsigned char)UNTAG_Char(REGB1));
   /* ../lib/standard/stream.nit:107 */
   REGB0 = REGB1;
@@ -482,7 +482,7 @@ val_t standard___stream___BufferedIStream___read(val_t p0, val_t p1){
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:237 */
+    /* ../lib/standard/kernel.nit:244 */
     REGB3 = TAG_Bool(UNTAG_Int(REGB0)>UNTAG_Int(REGB3));
     /* ../lib/standard/stream.nit:115 */
     if (UNTAG_Bool(REGB3)) {
@@ -491,7 +491,7 @@ val_t standard___stream___BufferedIStream___read(val_t p0, val_t p1){
       } else {
         nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
       }
-      /* ../lib/standard/kernel.nit:236 */
+      /* ../lib/standard/kernel.nit:243 */
       REGB3 = TAG_Bool(UNTAG_Int(REGB1)>=UNTAG_Int(REGB2));
       /* ../lib/standard/stream.nit:116 */
       if (UNTAG_Bool(REGB3)) {
@@ -534,7 +534,7 @@ val_t standard___stream___BufferedIStream___read(val_t p0, val_t p1){
         } else {
           nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
         }
-        /* ../lib/standard/kernel.nit:235 */
+        /* ../lib/standard/kernel.nit:242 */
         REGB3 = TAG_Bool(UNTAG_Int(REGB1)<UNTAG_Int(REGB2));
         /* ../lib/standard/stream.nit:122 */
         if (UNTAG_Bool(REGB3)) {
@@ -544,7 +544,7 @@ val_t standard___stream___BufferedIStream___read(val_t p0, val_t p1){
           } else {
             nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
           }
-          /* ../lib/standard/kernel.nit:237 */
+          /* ../lib/standard/kernel.nit:244 */
           REGB3 = TAG_Bool(UNTAG_Int(REGB0)>UNTAG_Int(REGB3));
         } else {
           /* ../lib/standard/stream.nit:122 */
@@ -562,13 +562,13 @@ val_t standard___stream___BufferedIStream___read(val_t p0, val_t p1){
           CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], REGB3);
           /* ../lib/standard/stream.nit:124 */
           REGB3 = TAG_Int(1);
-          /* ../lib/standard/kernel.nit:238 */
+          /* ../lib/standard/kernel.nit:245 */
           REGB3 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB3));
           /* ../lib/standard/stream.nit:124 */
           REGB1 = REGB3;
           /* ../lib/standard/stream.nit:125 */
           REGB3 = TAG_Int(1);
-          /* ../lib/standard/kernel.nit:240 */
+          /* ../lib/standard/kernel.nit:247 */
           REGB3 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB3));
           /* ../lib/standard/stream.nit:125 */
           REGB0 = REGB3;
@@ -646,7 +646,7 @@ val_t standard___stream___BufferedIStream___read_all(val_t p0){
         } else {
           nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
         }
-        /* ../lib/standard/kernel.nit:235 */
+        /* ../lib/standard/kernel.nit:242 */
         REGB2 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
         /* ../lib/standard/stream.nit:138 */
         if (UNTAG_Bool(REGB2)) {
@@ -660,7 +660,7 @@ val_t standard___stream___BufferedIStream___read_all(val_t p0){
           CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], REGB2);
           /* ../lib/standard/stream.nit:140 */
           REGB2 = TAG_Int(1);
-          /* ../lib/standard/kernel.nit:238 */
+          /* ../lib/standard/kernel.nit:245 */
           REGB2 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB2));
           /* ../lib/standard/stream.nit:140 */
           REGB0 = REGB2;
@@ -735,7 +735,7 @@ void standard___stream___BufferedIStream___append_line_to(val_t p0, val_t p1){
       } else {
         nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
       }
-      /* ../lib/standard/kernel.nit:235 */
+      /* ../lib/standard/kernel.nit:242 */
       REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
       /* ../lib/standard/stream.nit:153 */
       if (UNTAG_Bool(REGB1)) {
@@ -749,7 +749,7 @@ void standard___stream___BufferedIStream___append_line_to(val_t p0, val_t p1){
         REGB3 = TAG_Bool(IS_EQUAL_OO(REGB1,REGB2));
         if (UNTAG_Bool(REGB3)) {
         } else {
-          /* ../lib/standard/kernel.nit:381 */
+          /* ../lib/standard/kernel.nit:434 */
           REGB2 = TAG_Bool((REGB1)==(REGB2));
           /* ../lib/standard/stream.nit:153 */
           REGB3 = REGB2;
@@ -761,7 +761,7 @@ void standard___stream___BufferedIStream___append_line_to(val_t p0, val_t p1){
       }
       if (UNTAG_Bool(REGB3)) {
         REGB3 = TAG_Int(1);
-        /* ../lib/standard/kernel.nit:238 */
+        /* ../lib/standard/kernel.nit:245 */
         REGB3 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB3));
         /* ../lib/standard/stream.nit:153 */
         REGB0 = REGB3;
@@ -782,7 +782,7 @@ void standard___stream___BufferedIStream___append_line_to(val_t p0, val_t p1){
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:237 */
+    /* ../lib/standard/kernel.nit:244 */
     REGB3 = TAG_Bool(UNTAG_Int(REGB0)>UNTAG_Int(REGB3));
     /* ../lib/standard/stream.nit:156 */
     if (UNTAG_Bool(REGB3)) {
@@ -793,7 +793,7 @@ void standard___stream___BufferedIStream___append_line_to(val_t p0, val_t p1){
         nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
       }
       REGB3 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1]);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB3 = TAG_Int(UNTAG_Int(REGB3)+UNTAG_Int(REGB0));
       /* ../lib/standard/stream.nit:158 */
       REGB2 = TAG_Bool(ATTR_standard___stream___BufferedIStream____buffer_pos(fra.me.REG[0])!=NIT_NULL);
@@ -802,7 +802,7 @@ void standard___stream___BufferedIStream___append_line_to(val_t p0, val_t p1){
         nit_abort("Uninitialized attribute %s", "_buffer_pos", LOCATE_standard___stream, 158);
       }
       REGB2 = ATTR_standard___stream___BufferedIStream____buffer_pos(fra.me.REG[0]);
-      /* ../lib/standard/kernel.nit:240 */
+      /* ../lib/standard/kernel.nit:247 */
       REGB2 = TAG_Int(UNTAG_Int(REGB3)-UNTAG_Int(REGB2));
       /* ../lib/standard/stream.nit:158 */
       CALL_standard___collection___array___AbstractArray___enlarge(fra.me.REG[1])(fra.me.REG[1], REGB2);
@@ -820,7 +820,7 @@ void standard___stream___BufferedIStream___append_line_to(val_t p0, val_t p1){
         } else {
           nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
         }
-        /* ../lib/standard/kernel.nit:235 */
+        /* ../lib/standard/kernel.nit:242 */
         REGB3 = TAG_Bool(UNTAG_Int(REGB2)<UNTAG_Int(REGB0));
         /* ../lib/standard/stream.nit:162 */
         if (UNTAG_Bool(REGB3)) {
@@ -834,7 +834,7 @@ void standard___stream___BufferedIStream___append_line_to(val_t p0, val_t p1){
           CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], REGB3);
           /* ../lib/standard/stream.nit:164 */
           REGB3 = TAG_Int(1);
-          /* ../lib/standard/kernel.nit:238 */
+          /* ../lib/standard/kernel.nit:245 */
           REGB3 = TAG_Int(UNTAG_Int(REGB2)+UNTAG_Int(REGB3));
           /* ../lib/standard/stream.nit:164 */
           REGB2 = REGB3;
@@ -863,13 +863,13 @@ void standard___stream___BufferedIStream___append_line_to(val_t p0, val_t p1){
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:242 */
     REGB2 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB2));
     /* ../lib/standard/stream.nit:168 */
     if (UNTAG_Bool(REGB2)) {
       /* ../lib/standard/stream.nit:170 */
       REGB2 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB2 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB2));
       /* ../lib/standard/stream.nit:170 */
       ATTR_standard___stream___BufferedIStream____buffer_pos(fra.me.REG[0]) = REGB2;
@@ -934,7 +934,7 @@ val_t standard___stream___BufferedIStream___eof(val_t p0){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:236 */
+  /* ../lib/standard/kernel.nit:243 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)>=UNTAG_Int(REGB1));
   /* ../lib/standard/stream.nit:184 */
   if (UNTAG_Bool(REGB1)) {
@@ -1284,13 +1284,13 @@ val_t standard___stream___FDIStream___read_char(val_t p0){
   REGB0 = CALL_standard___stream___FDStream___native_read_char(fra.me.REG[0])(fra.me.REG[0], REGB0);
   /* ../lib/standard/stream.nit:237 */
   REGB1 = TAG_Int(1);
-  /* ../lib/standard/kernel.nit:239 */
+  /* ../lib/standard/kernel.nit:246 */
   REGB1 = TAG_Int(-UNTAG_Int(REGB1));
   /* ../lib/standard/stream.nit:237 */
   REGB2 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
   if (UNTAG_Bool(REGB2)) {
   } else {
-    /* ../lib/standard/kernel.nit:230 */
+    /* ../lib/standard/kernel.nit:237 */
     REGB1 = TAG_Bool((REGB0)==(REGB1));
     /* ../lib/standard/stream.nit:237 */
     REGB2 = REGB1;
@@ -1415,7 +1415,7 @@ void standard___stream___FDOStream___write(val_t p0, val_t p1){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:235 */
+  /* ../lib/standard/kernel.nit:242 */
   REGB0 = TAG_Bool(UNTAG_Int(REGB1)<UNTAG_Int(REGB0));
   /* ../lib/standard/stream.nit:252 */
   if (UNTAG_Bool(REGB0)) {
@@ -1524,7 +1524,7 @@ val_t standard___stream___Object___poll(val_t p0, val_t p1){
       REGB1 = TAG_Bool(0);
       REGB0 = REGB1;
     } else {
-      /* ../lib/standard/kernel.nit:230 */
+      /* ../lib/standard/kernel.nit:237 */
       REGB1 = TAG_Bool((fra.me.REG[3])==(NIT_NULL));
       /* ../lib/standard/stream.nit:290 */
       REGB0 = REGB1;

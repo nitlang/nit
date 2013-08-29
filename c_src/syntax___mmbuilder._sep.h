@@ -523,7 +523,7 @@ val_t syntax___mmbuilder___MethidAccumulator___name(val_t p0);
 typedef val_t (*syntax___mmbuilder___MethidAccumulator___name_t)(val_t p0);
 void syntax___mmbuilder___MethidAccumulator___visit(val_t p0, val_t p1);
 typedef void (*syntax___mmbuilder___MethidAccumulator___visit_t)(val_t p0, val_t p1);
-val_t NEW_MethidAccumulator_parser___parser_prod___Visitor___init();
+val_t NEW_MethidAccumulator_parser___parser_nodes___Visitor___init();
 val_t syntax___mmbuilder___AMethid___name(val_t p0);
 typedef val_t (*syntax___mmbuilder___AMethid___name_t)(val_t p0);
 void syntax___mmbuilder___AMethid___accept_property_builder(val_t p0, val_t p1);

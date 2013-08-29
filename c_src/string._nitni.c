@@ -1,5 +1,15 @@
 #include "string._nitni.h"
 #include "string_nit.h"
+/* out/indirect function for string::Int::native_int_to_s */
+val_t Int_native_int_to_s___out( val_t recv, val_t len )
+{
+char * orig_return;
+val_t trans_return;
+orig_return = native_int_to_s( UNTAG_Int(recv), UNTAG_Int(len) );
+trans_return = BOX_NativeString(orig_return);
+nitni_local_ref_clean(  );
+return trans_return;
+}
 /* out/indirect function for string::Float::to_precision_native */
 val_t Float_to_precision_native___out( val_t recv, val_t nb )
 {
@@ -27,38 +37,18 @@ trans_return = BOX_Float(orig_return);
 nitni_local_ref_clean(  );
 return trans_return;
 }
-/* out/indirect function for string::Sys::native_argc */
-val_t Sys_native_argc___out( val_t recv )
+/* friendly for string::NativeString::(string::Object::to_s) */
+String string_NativeString_to_s( char * recv )
 {
-bigint orig_return;
-val_t trans_return;
-orig_return = kernel_Sys_Sys_native_argc_0( NULL );
-trans_return = TAG_Int(orig_return);
-nitni_local_ref_clean(  );
-return trans_return;
-}
-/* out/indirect function for string::Sys::native_argv */
-val_t Sys_native_argv___out( val_t recv, val_t i )
-{
-char * orig_return;
-val_t trans_return;
-orig_return = kernel_Sys_Sys_native_argv_1( NULL, UNTAG_Int(i) );
-trans_return = BOX_NativeString(orig_return);
-nitni_local_ref_clean(  );
-return trans_return;
-}
-/* friendly for string::String::from_cstring */
-String string_new_String_from_cstring( char * str )
-{
-val_t trans___str;
+val_t trans_recv;
 val_t orig_return;
 String trans_return;
-trans___str = BOX_NativeString(str);
+trans_recv = BOX_NativeString(recv);
 trans_return = malloc( sizeof( struct s_String ) );
 trans_return->ref.val = NIT_NULL;
 trans_return->ref.count = 0;
 nitni_local_ref_add( (struct nitni_ref *)trans_return );
-orig_return = NEW_String_standard___string___String___from_cstring( trans___str );
+orig_return = CALL_standard___string___Object___to_s( trans_recv )( trans_recv );
 trans_return->ref.val = orig_return;
 return trans_return;
 }

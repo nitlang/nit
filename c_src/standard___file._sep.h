@@ -2,9 +2,10 @@
 #ifndef standard___file_sep
 #define standard___file_sep
 #include "standard___stream._sep.h"
-#include "standard___string_search._sep.h"
+#include "standard___time._sep.h"
 #include <nit_common.h>
 #include "file._nitni.h"
+#include "standard___file._ffi.h"
 
 extern const classtable_elt_t VFT_standard___file___FStream[];
 
@@ -19,8 +20,8 @@ extern const classtable_elt_t VFT_standard___file___Stdout[];
 extern const classtable_elt_t VFT_standard___file___Stderr[];
 
 extern const classtable_elt_t VFT_standard___file___FileStat[];
-struct TBOX_FileStat { const classtable_elt_t * vft; bigint object_id; void* val;};
-val_t BOX_FileStat(void* val);
+struct TBOX_FileStat { const classtable_elt_t * vft; bigint object_id;  struct stat *  val;};
+val_t BOX_FileStat( struct stat *  val);
 #define UNBOX_FileStat(x) (((struct TBOX_FileStat *)(VAL2OBJ(x)))->val)
 
 extern const classtable_elt_t VFT_standard___file___NativeFile[];
@@ -75,19 +76,21 @@ extern const int SFT_standard___file[];
 #define CALL_standard___file___Stderr___init(recv) ((standard___file___Stderr___init_t)CALL((recv), (SFT_standard___file[21] + 1)))
 #define CALL_standard___file___String___file_exists(recv) ((standard___file___String___file_exists_t)CALL((recv), (SFT_standard___file[22] + 0)))
 #define CALL_standard___file___String___file_stat(recv) ((standard___file___String___file_stat_t)CALL((recv), (SFT_standard___file[22] + 1)))
-#define CALL_standard___file___String___file_delete(recv) ((standard___file___String___file_delete_t)CALL((recv), (SFT_standard___file[22] + 2)))
-#define CALL_standard___file___String___strip_extension(recv) ((standard___file___String___strip_extension_t)CALL((recv), (SFT_standard___file[22] + 3)))
-#define CALL_standard___file___String___basename(recv) ((standard___file___String___basename_t)CALL((recv), (SFT_standard___file[22] + 4)))
-#define CALL_standard___file___String___dirname(recv) ((standard___file___String___dirname_t)CALL((recv), (SFT_standard___file[22] + 5)))
-#define CALL_standard___file___String___simplify_path(recv) ((standard___file___String___simplify_path_t)CALL((recv), (SFT_standard___file[22] + 6)))
-#define CALL_standard___file___String___join_path(recv) ((standard___file___String___join_path_t)CALL((recv), (SFT_standard___file[22] + 7)))
-#define CALL_standard___file___String___mkdir(recv) ((standard___file___String___mkdir_t)CALL((recv), (SFT_standard___file[22] + 8)))
-#define CALL_standard___file___String___file_extension(recv) ((standard___file___String___file_extension_t)CALL((recv), (SFT_standard___file[22] + 9)))
-#define CALL_standard___file___String___files(recv) ((standard___file___String___files_t)CALL((recv), (SFT_standard___file[22] + 10)))
+#define CALL_standard___file___String___file_lstat(recv) ((standard___file___String___file_lstat_t)CALL((recv), (SFT_standard___file[22] + 2)))
+#define CALL_standard___file___String___file_delete(recv) ((standard___file___String___file_delete_t)CALL((recv), (SFT_standard___file[22] + 3)))
+#define CALL_standard___file___String___strip_extension(recv) ((standard___file___String___strip_extension_t)CALL((recv), (SFT_standard___file[22] + 4)))
+#define CALL_standard___file___String___basename(recv) ((standard___file___String___basename_t)CALL((recv), (SFT_standard___file[22] + 5)))
+#define CALL_standard___file___String___dirname(recv) ((standard___file___String___dirname_t)CALL((recv), (SFT_standard___file[22] + 6)))
+#define CALL_standard___file___String___simplify_path(recv) ((standard___file___String___simplify_path_t)CALL((recv), (SFT_standard___file[22] + 7)))
+#define CALL_standard___file___String___join_path(recv) ((standard___file___String___join_path_t)CALL((recv), (SFT_standard___file[22] + 8)))
+#define CALL_standard___file___String___mkdir(recv) ((standard___file___String___mkdir_t)CALL((recv), (SFT_standard___file[22] + 9)))
+#define CALL_standard___file___String___file_extension(recv) ((standard___file___String___file_extension_t)CALL((recv), (SFT_standard___file[22] + 10)))
+#define CALL_standard___file___String___files(recv) ((standard___file___String___files_t)CALL((recv), (SFT_standard___file[22] + 11)))
 #define CALL_standard___file___NativeString___file_exists(recv) ((standard___file___NativeString___file_exists_t)CALL((recv), (SFT_standard___file[23] + 0)))
 #define CALL_standard___file___NativeString___file_stat(recv) ((standard___file___NativeString___file_stat_t)CALL((recv), (SFT_standard___file[23] + 1)))
-#define CALL_standard___file___NativeString___file_mkdir(recv) ((standard___file___NativeString___file_mkdir_t)CALL((recv), (SFT_standard___file[23] + 2)))
-#define CALL_standard___file___NativeString___file_delete(recv) ((standard___file___NativeString___file_delete_t)CALL((recv), (SFT_standard___file[23] + 3)))
+#define CALL_standard___file___NativeString___file_lstat(recv) ((standard___file___NativeString___file_lstat_t)CALL((recv), (SFT_standard___file[23] + 2)))
+#define CALL_standard___file___NativeString___file_mkdir(recv) ((standard___file___NativeString___file_mkdir_t)CALL((recv), (SFT_standard___file[23] + 3)))
+#define CALL_standard___file___NativeString___file_delete(recv) ((standard___file___NativeString___file_delete_t)CALL((recv), (SFT_standard___file[23] + 4)))
 #define ID_standard___file___FileStat (SFT_standard___file[24])
 #define COLOR_standard___file___FileStat (SFT_standard___file[25])
 #define INIT_TABLE_POS_standard___file___FileStat (SFT_standard___file[26] + 0)
@@ -96,6 +99,13 @@ extern const int SFT_standard___file[];
 #define CALL_standard___file___FileStat___ctime(recv) ((standard___file___FileStat___ctime_t)CALL((recv), (SFT_standard___file[26] + 3)))
 #define CALL_standard___file___FileStat___mtime(recv) ((standard___file___FileStat___mtime_t)CALL((recv), (SFT_standard___file[26] + 4)))
 #define CALL_standard___file___FileStat___size(recv) ((standard___file___FileStat___size_t)CALL((recv), (SFT_standard___file[26] + 5)))
+#define CALL_standard___file___FileStat___is_reg(recv) ((standard___file___FileStat___is_reg_t)CALL((recv), (SFT_standard___file[26] + 6)))
+#define CALL_standard___file___FileStat___is_dir(recv) ((standard___file___FileStat___is_dir_t)CALL((recv), (SFT_standard___file[26] + 7)))
+#define CALL_standard___file___FileStat___is_chr(recv) ((standard___file___FileStat___is_chr_t)CALL((recv), (SFT_standard___file[26] + 8)))
+#define CALL_standard___file___FileStat___is_blk(recv) ((standard___file___FileStat___is_blk_t)CALL((recv), (SFT_standard___file[26] + 9)))
+#define CALL_standard___file___FileStat___is_fifo(recv) ((standard___file___FileStat___is_fifo_t)CALL((recv), (SFT_standard___file[26] + 10)))
+#define CALL_standard___file___FileStat___is_lnk(recv) ((standard___file___FileStat___is_lnk_t)CALL((recv), (SFT_standard___file[26] + 11)))
+#define CALL_standard___file___FileStat___is_sock(recv) ((standard___file___FileStat___is_sock_t)CALL((recv), (SFT_standard___file[26] + 12)))
 #define ID_standard___file___NativeFile (SFT_standard___file[27])
 #define COLOR_standard___file___NativeFile (SFT_standard___file[28])
 #define INIT_TABLE_POS_standard___file___NativeFile (SFT_standard___file[29] + 0)
@@ -178,6 +188,8 @@ val_t standard___file___String___file_exists(val_t p0);
 typedef val_t (*standard___file___String___file_exists_t)(val_t p0);
 val_t standard___file___String___file_stat(val_t p0);
 typedef val_t (*standard___file___String___file_stat_t)(val_t p0);
+val_t standard___file___String___file_lstat(val_t p0);
+typedef val_t (*standard___file___String___file_lstat_t)(val_t p0);
 val_t standard___file___String___file_delete(val_t p0);
 typedef val_t (*standard___file___String___file_delete_t)(val_t p0);
 val_t standard___file___String___strip_extension(val_t p0, val_t p1);
@@ -196,14 +208,14 @@ val_t standard___file___String___file_extension(val_t p0);
 typedef val_t (*standard___file___String___file_extension_t)(val_t p0);
 val_t standard___file___String___files(val_t p0);
 typedef val_t (*standard___file___String___files_t)(val_t p0);
-val_t NEW_String_standard___string___String___from_cstring(val_t p0);
-val_t NEW_String_standard___string___String___with_native(val_t p0, val_t p1);
 val_t NEW_String_standard___string___String___from_substring(val_t p0, val_t p1, val_t p2);
-val_t NEW_String_standard___string___String___copy_from_native(val_t p0);
+val_t NEW_String_standard___string___String___with_infos(val_t p0, val_t p1, val_t p2, val_t p3);
 val_t standard___file___NativeString___file_exists(val_t p0);
 typedef val_t (*standard___file___NativeString___file_exists_t)(val_t p0);
 val_t standard___file___NativeString___file_stat(val_t p0);
 typedef val_t (*standard___file___NativeString___file_stat_t)(val_t p0);
+val_t standard___file___NativeString___file_lstat(val_t p0);
+typedef val_t (*standard___file___NativeString___file_lstat_t)(val_t p0);
 val_t standard___file___NativeString___file_mkdir(val_t p0);
 typedef val_t (*standard___file___NativeString___file_mkdir_t)(val_t p0);
 val_t standard___file___NativeString___file_delete(val_t p0);
@@ -219,6 +231,20 @@ val_t standard___file___FileStat___mtime(val_t p0);
 typedef val_t (*standard___file___FileStat___mtime_t)(val_t p0);
 val_t standard___file___FileStat___size(val_t p0);
 typedef val_t (*standard___file___FileStat___size_t)(val_t p0);
+val_t standard___file___FileStat___is_reg(val_t p0);
+typedef val_t (*standard___file___FileStat___is_reg_t)(val_t p0);
+val_t standard___file___FileStat___is_dir(val_t p0);
+typedef val_t (*standard___file___FileStat___is_dir_t)(val_t p0);
+val_t standard___file___FileStat___is_chr(val_t p0);
+typedef val_t (*standard___file___FileStat___is_chr_t)(val_t p0);
+val_t standard___file___FileStat___is_blk(val_t p0);
+typedef val_t (*standard___file___FileStat___is_blk_t)(val_t p0);
+val_t standard___file___FileStat___is_fifo(val_t p0);
+typedef val_t (*standard___file___FileStat___is_fifo_t)(val_t p0);
+val_t standard___file___FileStat___is_lnk(val_t p0);
+typedef val_t (*standard___file___FileStat___is_lnk_t)(val_t p0);
+val_t standard___file___FileStat___is_sock(val_t p0);
+typedef val_t (*standard___file___FileStat___is_sock_t)(val_t p0);
 val_t standard___file___NativeFile___io_read(val_t p0, val_t p1, val_t p2);
 typedef val_t (*standard___file___NativeFile___io_read_t)(val_t p0, val_t p1, val_t p2);
 val_t standard___file___NativeFile___io_write(val_t p0, val_t p1, val_t p2);
