@@ -18,7 +18,7 @@ ul {
 	list-style-type: square;
 }
 
-pre, code, .description > div {
+pre, code {
 	white-space: pre;
 	font-family: monospace;
 	font-size: 1em;
