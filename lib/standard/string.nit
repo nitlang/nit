@@ -405,35 +405,6 @@ class String
 		_length = to - from + 1
 	end
 
-	# Create a new string from a given char *.
-	private init with_native(nat: NativeString, size: Int)
-	do
-		assert size >= 0
-		_items = nat
-		_length = size
-		_index_from = 0
-		_index_to = _length - 1
-	end
-
-	# Create a new string from a null terminated char *.
-	private init from_cstring(str: NativeString)
-	do
-		with_native(str,str.cstring_length)
-	end
-
-	# Creates a new Nit String from an existing CString
-	# Pretty much equals to from_cstring but copies instead
-	# of passing a reference
-	# Avoids manual/automatic dealloc problems when dealing with native C code
-	private init copy_from_native(str: NativeString)
-	do
-		var temp_length = str.cstring_length
-		var new_str = calloc_string(temp_length + 1)
-		str.copy_to(new_str, temp_length, 0, 0)
-		new_str[temp_length] = '\0'
-		with_native(new_str, temp_length)
-	end
-
 	private init with_infos(items: NativeString, len: Int, from: Int, to: Int)
 	do
 		self._items = items
