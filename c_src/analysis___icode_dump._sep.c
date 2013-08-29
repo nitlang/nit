@@ -46,7 +46,7 @@ void analysis___icode_dump___IRoutine___dump(val_t p0, val_t p1){
     if (!once_value_2) {
       fra.me.REG[4] = BOX_NativeString("Parameters: ");
       REGB0 = TAG_Int(12);
-      fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+      fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
       once_value_2 = fra.me.REG[4];
       register_static_object(&once_value_2);
     } else fra.me.REG[4] = once_value_2;
@@ -55,7 +55,7 @@ void analysis___icode_dump___IRoutine___dump(val_t p0, val_t p1){
     if (!once_value_3) {
       fra.me.REG[4] = BOX_NativeString(", ");
       REGB0 = TAG_Int(2);
-      fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+      fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
       once_value_3 = fra.me.REG[4];
       register_static_object(&once_value_3);
     } else fra.me.REG[4] = once_value_3;
@@ -65,7 +65,7 @@ void analysis___icode_dump___IRoutine___dump(val_t p0, val_t p1){
     if (!once_value_4) {
       fra.me.REG[4] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+      fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
       once_value_4 = fra.me.REG[4];
       register_static_object(&once_value_4);
     } else fra.me.REG[4] = once_value_4;
@@ -97,7 +97,7 @@ void analysis___icode_dump___IRoutine___dump(val_t p0, val_t p1){
     if (!once_value_5) {
       fra.me.REG[2] = BOX_NativeString("Result: ");
       REGB0 = TAG_Int(8);
-      fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+      fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
       once_value_5 = fra.me.REG[2];
       register_static_object(&once_value_5);
     } else fra.me.REG[2] = once_value_5;
@@ -108,7 +108,7 @@ void analysis___icode_dump___IRoutine___dump(val_t p0, val_t p1){
     if (!once_value_6) {
       fra.me.REG[3] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+      fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
       once_value_6 = fra.me.REG[3];
       register_static_object(&once_value_6);
     } else fra.me.REG[3] = once_value_6;
@@ -125,7 +125,7 @@ void analysis___icode_dump___IRoutine___dump(val_t p0, val_t p1){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:237 */
+  /* ../lib/standard/kernel.nit:244 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)>UNTAG_Int(REGB1));
   /* analysis/icode_dump.nit:38 */
   if (UNTAG_Bool(REGB1)) {
@@ -135,7 +135,7 @@ void analysis___icode_dump___IRoutine___dump(val_t p0, val_t p1){
     if (!once_value_7) {
       fra.me.REG[3] = BOX_NativeString("StdSlots: ");
       REGB1 = TAG_Int(10);
-      fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB1);
+      fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB1);
       once_value_7 = fra.me.REG[3];
       register_static_object(&once_value_7);
     } else fra.me.REG[3] = once_value_7;
@@ -147,7 +147,7 @@ void analysis___icode_dump___IRoutine___dump(val_t p0, val_t p1){
     if (!once_value_8) {
       fra.me.REG[3] = BOX_NativeString("");
       REGB1 = TAG_Int(0);
-      fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB1);
+      fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB1);
       once_value_8 = fra.me.REG[3];
       register_static_object(&once_value_8);
     } else fra.me.REG[3] = once_value_8;
@@ -164,7 +164,7 @@ void analysis___icode_dump___IRoutine___dump(val_t p0, val_t p1){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:237 */
+  /* ../lib/standard/kernel.nit:244 */
   REGB0 = TAG_Bool(UNTAG_Int(REGB1)>UNTAG_Int(REGB0));
   /* analysis/icode_dump.nit:41 */
   if (UNTAG_Bool(REGB0)) {
@@ -174,7 +174,7 @@ void analysis___icode_dump___IRoutine___dump(val_t p0, val_t p1){
     if (!once_value_9) {
       fra.me.REG[3] = BOX_NativeString("TagSlots: ");
       REGB0 = TAG_Int(10);
-      fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+      fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
       once_value_9 = fra.me.REG[3];
       register_static_object(&once_value_9);
     } else fra.me.REG[3] = once_value_9;
@@ -186,7 +186,7 @@ void analysis___icode_dump___IRoutine___dump(val_t p0, val_t p1){
     if (!once_value_10) {
       fra.me.REG[3] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+      fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
       once_value_10 = fra.me.REG[3];
       register_static_object(&once_value_10);
     } else fra.me.REG[3] = once_value_10;
@@ -295,7 +295,7 @@ void analysis___icode_dump___IClosureDecl___dump(val_t p0, val_t p1){
   if (!once_value_1) {
     fra.me.REG[3] = BOX_NativeString("Closure: ");
     REGB0 = TAG_Int(9);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_1 = fra.me.REG[3];
     register_static_object(&once_value_1);
   } else fra.me.REG[3] = once_value_1;
@@ -306,7 +306,7 @@ void analysis___icode_dump___IClosureDecl___dump(val_t p0, val_t p1){
   if (!once_value_2) {
     fra.me.REG[3] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_2 = fra.me.REG[3];
     register_static_object(&once_value_2);
   } else fra.me.REG[3] = once_value_2;
@@ -483,7 +483,7 @@ val_t analysis___icode_dump___ICodeDumper___register(val_t p0, val_t p1){
         REGB1 = TAG_Bool(0);
         REGB0 = REGB1;
       } else {
-        /* ../lib/standard/kernel.nit:230 */
+        /* ../lib/standard/kernel.nit:237 */
         REGB1 = TAG_Bool((fra.me.REG[3])==(NIT_NULL));
         /* analysis/icode_dump.nit:86 */
         REGB0 = REGB1;
@@ -493,7 +493,7 @@ val_t analysis___icode_dump___ICodeDumper___register(val_t p0, val_t p1){
       /* analysis/icode_dump.nit:87 */
       REGB0 = ATTR_analysis___icode_dump___ICodeDumper____last_value(fra.me.REG[0]);
       REGB1 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
       /* analysis/icode_dump.nit:87 */
       ATTR_analysis___icode_dump___ICodeDumper____last_value(fra.me.REG[0]) = REGB1;
@@ -503,7 +503,7 @@ val_t analysis___icode_dump___ICodeDumper___register(val_t p0, val_t p1){
       if (!once_value_2) {
         fra.me.REG[5] = BOX_NativeString("r");
         REGB1 = TAG_Int(1);
-        fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB1);
+        fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB1);
         once_value_2 = fra.me.REG[5];
         register_static_object(&once_value_2);
       } else fra.me.REG[5] = once_value_2;
@@ -520,7 +520,7 @@ val_t analysis___icode_dump___ICodeDumper___register(val_t p0, val_t p1){
       if (!once_value_3) {
         fra.me.REG[5] = BOX_NativeString("");
         REGB1 = TAG_Int(0);
-        fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB1);
+        fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB1);
         once_value_3 = fra.me.REG[5];
         register_static_object(&once_value_3);
       } else fra.me.REG[5] = once_value_3;
@@ -542,7 +542,7 @@ val_t analysis___icode_dump___ICodeDumper___register(val_t p0, val_t p1){
       /* analysis/icode_dump.nit:92 */
       REGB1 = ATTR_analysis___icode_dump___ICodeDumper____last_value(fra.me.REG[0]);
       REGB0 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB0 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB0));
       /* analysis/icode_dump.nit:92 */
       ATTR_analysis___icode_dump___ICodeDumper____last_value(fra.me.REG[0]) = REGB0;
@@ -555,7 +555,7 @@ val_t analysis___icode_dump___ICodeDumper___register(val_t p0, val_t p1){
         if (!once_value_4) {
           fra.me.REG[5] = BOX_NativeString("BREG");
           REGB0 = TAG_Int(4);
-          fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB0);
+          fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB0);
           once_value_4 = fra.me.REG[5];
           register_static_object(&once_value_4);
         } else fra.me.REG[5] = once_value_4;
@@ -566,7 +566,7 @@ val_t analysis___icode_dump___ICodeDumper___register(val_t p0, val_t p1){
         if (!once_value_5) {
           fra.me.REG[5] = BOX_NativeString("(r");
           REGB0 = TAG_Int(2);
-          fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB0);
+          fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB0);
           once_value_5 = fra.me.REG[5];
           register_static_object(&once_value_5);
         } else fra.me.REG[5] = once_value_5;
@@ -583,7 +583,7 @@ val_t analysis___icode_dump___ICodeDumper___register(val_t p0, val_t p1){
         if (!once_value_6) {
           fra.me.REG[5] = BOX_NativeString(")");
           REGB0 = TAG_Int(1);
-          fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB0);
+          fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB0);
           once_value_6 = fra.me.REG[5];
           register_static_object(&once_value_6);
         } else fra.me.REG[5] = once_value_6;
@@ -600,7 +600,7 @@ val_t analysis___icode_dump___ICodeDumper___register(val_t p0, val_t p1){
           if (!once_value_7) {
             fra.me.REG[6] = BOX_NativeString("LREG");
             REGB0 = TAG_Int(4);
-            fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB0);
+            fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB0);
             once_value_7 = fra.me.REG[6];
             register_static_object(&once_value_7);
           } else fra.me.REG[6] = once_value_7;
@@ -611,7 +611,7 @@ val_t analysis___icode_dump___ICodeDumper___register(val_t p0, val_t p1){
           if (!once_value_8) {
             fra.me.REG[6] = BOX_NativeString("(r");
             REGB0 = TAG_Int(2);
-            fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB0);
+            fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB0);
             once_value_8 = fra.me.REG[6];
             register_static_object(&once_value_8);
           } else fra.me.REG[6] = once_value_8;
@@ -628,7 +628,7 @@ val_t analysis___icode_dump___ICodeDumper___register(val_t p0, val_t p1){
           if (!once_value_9) {
             fra.me.REG[6] = BOX_NativeString(")");
             REGB0 = TAG_Int(1);
-            fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB0);
+            fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB0);
             once_value_9 = fra.me.REG[6];
             register_static_object(&once_value_9);
           } else fra.me.REG[6] = once_value_9;
@@ -643,7 +643,7 @@ val_t analysis___icode_dump___ICodeDumper___register(val_t p0, val_t p1){
           if (!once_value_10) {
             fra.me.REG[6] = BOX_NativeString("REG");
             REGB0 = TAG_Int(3);
-            fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB0);
+            fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB0);
             once_value_10 = fra.me.REG[6];
             register_static_object(&once_value_10);
           } else fra.me.REG[6] = once_value_10;
@@ -654,7 +654,7 @@ val_t analysis___icode_dump___ICodeDumper___register(val_t p0, val_t p1){
           if (!once_value_11) {
             fra.me.REG[3] = BOX_NativeString("(r");
             REGB0 = TAG_Int(2);
-            fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+            fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
             once_value_11 = fra.me.REG[3];
             register_static_object(&once_value_11);
           } else fra.me.REG[3] = once_value_11;
@@ -671,7 +671,7 @@ val_t analysis___icode_dump___ICodeDumper___register(val_t p0, val_t p1){
           if (!once_value_12) {
             fra.me.REG[3] = BOX_NativeString(")");
             REGB0 = TAG_Int(1);
-            fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+            fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
             once_value_12 = fra.me.REG[3];
             register_static_object(&once_value_12);
           } else fra.me.REG[3] = once_value_12;
@@ -736,7 +736,7 @@ val_t analysis___icode_dump___ICodeDumper___register_all(val_t p0, val_t p1){
     if (!once_value_1) {
       fra.me.REG[2] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+      fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
       once_value_1 = fra.me.REG[2];
       register_static_object(&once_value_1);
     } else fra.me.REG[2] = once_value_1;
@@ -755,7 +755,7 @@ val_t analysis___icode_dump___ICodeDumper___register_all(val_t p0, val_t p1){
   if (!once_value_4) {
     fra.me.REG[0] = BOX_NativeString(", ");
     REGB0 = TAG_Int(2);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_4 = fra.me.REG[0];
     register_static_object(&once_value_4);
   } else fra.me.REG[0] = once_value_4;
@@ -833,7 +833,7 @@ val_t analysis___icode_dump___ICodeDumper___closdecl(val_t p0, val_t p1){
     /* analysis/icode_dump.nit:127 */
     REGB0 = ATTR_analysis___icode_dump___ICodeDumper____last_clos(fra.me.REG[0]);
     REGB1 = TAG_Int(1);
-    /* ../lib/standard/kernel.nit:238 */
+    /* ../lib/standard/kernel.nit:245 */
     REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
     /* analysis/icode_dump.nit:127 */
     ATTR_analysis___icode_dump___ICodeDumper____last_clos(fra.me.REG[0]) = REGB1;
@@ -843,7 +843,7 @@ val_t analysis___icode_dump___ICodeDumper___closdecl(val_t p0, val_t p1){
     if (!once_value_2) {
       fra.me.REG[4] = BOX_NativeString("clos");
       REGB1 = TAG_Int(4);
-      fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB1);
+      fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB1);
       once_value_2 = fra.me.REG[4];
       register_static_object(&once_value_2);
     } else fra.me.REG[4] = once_value_2;
@@ -860,7 +860,7 @@ val_t analysis___icode_dump___ICodeDumper___closdecl(val_t p0, val_t p1){
     if (!once_value_3) {
       fra.me.REG[4] = BOX_NativeString("");
       REGB1 = TAG_Int(0);
-      fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB1);
+      fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB1);
       once_value_3 = fra.me.REG[4];
       register_static_object(&once_value_3);
     } else fra.me.REG[4] = once_value_3;
@@ -927,7 +927,7 @@ val_t analysis___icode_dump___ICodeDumper___lab(val_t p0, val_t p1){
     /* analysis/icode_dump.nit:142 */
     REGB0 = ATTR_analysis___icode_dump___ICodeDumper____last_label(fra.me.REG[0]);
     REGB1 = TAG_Int(1);
-    /* ../lib/standard/kernel.nit:238 */
+    /* ../lib/standard/kernel.nit:245 */
     REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
     /* analysis/icode_dump.nit:142 */
     ATTR_analysis___icode_dump___ICodeDumper____last_label(fra.me.REG[0]) = REGB1;
@@ -937,7 +937,7 @@ val_t analysis___icode_dump___ICodeDumper___lab(val_t p0, val_t p1){
     if (!once_value_2) {
       fra.me.REG[4] = BOX_NativeString("[l");
       REGB1 = TAG_Int(2);
-      fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB1);
+      fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB1);
       once_value_2 = fra.me.REG[4];
       register_static_object(&once_value_2);
     } else fra.me.REG[4] = once_value_2;
@@ -954,7 +954,7 @@ val_t analysis___icode_dump___ICodeDumper___lab(val_t p0, val_t p1){
     if (!once_value_3) {
       fra.me.REG[4] = BOX_NativeString("]");
       REGB1 = TAG_Int(1);
-      fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB1);
+      fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB1);
       once_value_3 = fra.me.REG[4];
       register_static_object(&once_value_3);
     } else fra.me.REG[4] = once_value_3;
@@ -1021,7 +1021,7 @@ val_t analysis___icode_dump___ICodeDumper___line(val_t p0, val_t p1){
     /* analysis/icode_dump.nit:156 */
     REGB0 = ATTR_analysis___icode_dump___ICodeDumper____last_line(fra.me.REG[0]);
     REGB1 = TAG_Int(1);
-    /* ../lib/standard/kernel.nit:238 */
+    /* ../lib/standard/kernel.nit:245 */
     REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
     /* analysis/icode_dump.nit:156 */
     ATTR_analysis___icode_dump___ICodeDumper____last_line(fra.me.REG[0]) = REGB1;
@@ -1031,7 +1031,7 @@ val_t analysis___icode_dump___ICodeDumper___line(val_t p0, val_t p1){
     if (!once_value_2) {
       fra.me.REG[4] = BOX_NativeString("");
       REGB1 = TAG_Int(0);
-      fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB1);
+      fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB1);
       once_value_2 = fra.me.REG[4];
       register_static_object(&once_value_2);
     } else fra.me.REG[4] = once_value_2;
@@ -1048,7 +1048,7 @@ val_t analysis___icode_dump___ICodeDumper___line(val_t p0, val_t p1){
     if (!once_value_3) {
       fra.me.REG[4] = BOX_NativeString("");
       REGB1 = TAG_Int(0);
-      fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB1);
+      fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB1);
       once_value_3 = fra.me.REG[4];
       register_static_object(&once_value_3);
     } else fra.me.REG[4] = once_value_3;
@@ -1129,16 +1129,16 @@ void analysis___icode_dump___ICodeDumper___write(val_t p0, val_t p1){
     nit_abort("Uninitialized attribute %s", "_indent_level", LOCATE_analysis___icode_dump, 172);
   }
   REGB1 = ATTR_analysis___icode_dump___ICodeDumper____indent_level(fra.me.REG[0]);
-  /* ../lib/standard/kernel.nit:355 */
+  /* ../lib/standard/kernel.nit:404 */
   while(1) {
     REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
     if (UNTAG_Bool(REGB2)) {
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:242 */
     REGB2 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-    /* ../lib/standard/kernel.nit:355 */
+    /* ../lib/standard/kernel.nit:404 */
     if (UNTAG_Bool(REGB2)) {
       /* analysis/icode_dump.nit:173 */
       REGB2 = TAG_Int(0);
@@ -1146,21 +1146,21 @@ void analysis___icode_dump___ICodeDumper___write(val_t p0, val_t p1){
       if (!once_value_1) {
         fra.me.REG[3] = BOX_NativeString("    ");
         REGB2 = TAG_Int(4);
-        fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB2);
+        fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB2);
         once_value_1 = fra.me.REG[3];
         register_static_object(&once_value_1);
       } else fra.me.REG[3] = once_value_1;
       fra.me.REG[3] = fra.me.REG[3];
       CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
       CALL_standard___file___Object___printn(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
-      /* ../lib/standard/kernel.nit:357 */
+      /* ../lib/standard/kernel.nit:406 */
       REGB2 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB2 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB2));
-      /* ../lib/standard/kernel.nit:357 */
+      /* ../lib/standard/kernel.nit:406 */
       REGB0 = REGB2;
     } else {
-      /* ../lib/standard/kernel.nit:355 */
+      /* ../lib/standard/kernel.nit:404 */
       goto label2;
     }
   }
@@ -1212,7 +1212,7 @@ void analysis___icode_dump___ICodeDumper___indent(val_t p0){
   /* analysis/icode_dump.nit:181 */
   REGB0 = ATTR_analysis___icode_dump___ICodeDumper____indent_level(fra.me.REG[0]);
   REGB1 = TAG_Int(1);
-  /* ../lib/standard/kernel.nit:238 */
+  /* ../lib/standard/kernel.nit:245 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
   /* analysis/icode_dump.nit:181 */
   ATTR_analysis___icode_dump___ICodeDumper____indent_level(fra.me.REG[0]) = REGB1;
@@ -1237,7 +1237,7 @@ void analysis___icode_dump___ICodeDumper___unindent(val_t p0){
   /* analysis/icode_dump.nit:184 */
   REGB0 = ATTR_analysis___icode_dump___ICodeDumper____indent_level(fra.me.REG[0]);
   REGB1 = TAG_Int(1);
-  /* ../lib/standard/kernel.nit:240 */
+  /* ../lib/standard/kernel.nit:247 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB1));
   /* analysis/icode_dump.nit:184 */
   ATTR_analysis___icode_dump___ICodeDumper____indent_level(fra.me.REG[0]) = REGB1;
@@ -1288,7 +1288,7 @@ void analysis___icode_dump___ICode___dump(val_t p0, val_t p1){
   if (!once_value_1) {
     fra.me.REG[3] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_1 = fra.me.REG[3];
     register_static_object(&once_value_1);
   } else fra.me.REG[3] = once_value_1;
@@ -1297,7 +1297,7 @@ void analysis___icode_dump___ICode___dump(val_t p0, val_t p1){
   if (!once_value_2) {
     fra.me.REG[4] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+    fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
     once_value_2 = fra.me.REG[4];
     register_static_object(&once_value_2);
   } else fra.me.REG[4] = once_value_2;
@@ -1331,7 +1331,7 @@ void analysis___icode_dump___ICode___dump(val_t p0, val_t p1){
     if (!once_value_3) {
       fra.me.REG[7] = BOX_NativeString("        ... ");
       REGB0 = TAG_Int(12);
-      fra.me.REG[7] = NEW_String_standard___string___String___with_native(fra.me.REG[7], REGB0);
+      fra.me.REG[7] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[7])(fra.me.REG[7], REGB0);
       once_value_3 = fra.me.REG[7];
       register_static_object(&once_value_3);
     } else fra.me.REG[7] = once_value_3;
@@ -1342,7 +1342,7 @@ void analysis___icode_dump___ICode___dump(val_t p0, val_t p1){
     if (!once_value_4) {
       fra.me.REG[5] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB0);
+      fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB0);
       once_value_4 = fra.me.REG[5];
       register_static_object(&once_value_4);
     } else fra.me.REG[5] = once_value_4;
@@ -1360,7 +1360,7 @@ void analysis___icode_dump___ICode___dump(val_t p0, val_t p1){
     if (!once_value_5) {
       fra.me.REG[5] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB0);
+      fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB0);
       once_value_5 = fra.me.REG[5];
       register_static_object(&once_value_5);
     } else fra.me.REG[5] = once_value_5;
@@ -1371,7 +1371,7 @@ void analysis___icode_dump___ICode___dump(val_t p0, val_t p1){
     if (!once_value_6) {
       fra.me.REG[5] = BOX_NativeString(": ");
       REGB0 = TAG_Int(2);
-      fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB0);
+      fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB0);
       once_value_6 = fra.me.REG[5];
       register_static_object(&once_value_6);
     } else fra.me.REG[5] = once_value_6;
@@ -1400,7 +1400,7 @@ void analysis___icode_dump___ICode___dump(val_t p0, val_t p1){
     if (!once_value_7) {
       fra.me.REG[5] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB0);
+      fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB0);
       once_value_7 = fra.me.REG[5];
       register_static_object(&once_value_7);
     } else fra.me.REG[5] = once_value_7;
@@ -1410,7 +1410,7 @@ void analysis___icode_dump___ICode___dump(val_t p0, val_t p1){
     if (!once_value_8) {
       fra.me.REG[5] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB0);
+      fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB0);
       once_value_8 = fra.me.REG[5];
       register_static_object(&once_value_8);
     } else fra.me.REG[5] = once_value_8;
@@ -1421,7 +1421,7 @@ void analysis___icode_dump___ICode___dump(val_t p0, val_t p1){
     if (!once_value_9) {
       fra.me.REG[5] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB0);
+      fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB0);
       once_value_9 = fra.me.REG[5];
       register_static_object(&once_value_9);
     } else fra.me.REG[5] = once_value_9;
@@ -1431,7 +1431,7 @@ void analysis___icode_dump___ICode___dump(val_t p0, val_t p1){
     if (!once_value_10) {
       fra.me.REG[5] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB0);
+      fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB0);
       once_value_10 = fra.me.REG[5];
       register_static_object(&once_value_10);
     } else fra.me.REG[5] = once_value_10;
@@ -1446,7 +1446,7 @@ void analysis___icode_dump___ICode___dump(val_t p0, val_t p1){
     if (!once_value_11) {
       fra.me.REG[5] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB0);
+      fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB0);
       once_value_11 = fra.me.REG[5];
       register_static_object(&once_value_11);
     } else fra.me.REG[5] = once_value_11;
@@ -1456,7 +1456,7 @@ void analysis___icode_dump___ICode___dump(val_t p0, val_t p1){
     if (!once_value_12) {
       fra.me.REG[4] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+      fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
       once_value_12 = fra.me.REG[4];
       register_static_object(&once_value_12);
     } else fra.me.REG[4] = once_value_12;
@@ -1467,7 +1467,7 @@ void analysis___icode_dump___ICode___dump(val_t p0, val_t p1){
     if (!once_value_13) {
       fra.me.REG[2] = BOX_NativeString(" := ");
       REGB0 = TAG_Int(4);
-      fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+      fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
       once_value_13 = fra.me.REG[2];
       register_static_object(&once_value_13);
     } else fra.me.REG[2] = once_value_13;
@@ -1478,7 +1478,7 @@ void analysis___icode_dump___ICode___dump(val_t p0, val_t p1){
     if (!once_value_14) {
       fra.me.REG[0] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+      fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
       once_value_14 = fra.me.REG[0];
       register_static_object(&once_value_14);
     } else fra.me.REG[0] = once_value_14;
@@ -1488,7 +1488,7 @@ void analysis___icode_dump___ICode___dump(val_t p0, val_t p1){
     if (!once_value_15) {
       fra.me.REG[3] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+      fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
       once_value_15 = fra.me.REG[3];
       register_static_object(&once_value_15);
     } else fra.me.REG[3] = once_value_15;
@@ -1521,7 +1521,7 @@ val_t analysis___icode_dump___ICode___dump_intern(val_t p0, val_t p1){
   if (!once_value_1) {
     fra.me.REG[1] = BOX_NativeString("???");
     REGB0 = TAG_Int(3);
-    fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+    fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
     once_value_1 = fra.me.REG[1];
     register_static_object(&once_value_1);
   } else fra.me.REG[1] = once_value_1;
@@ -1621,7 +1621,7 @@ void analysis___icode_dump___ICodeN___dump(val_t p0, val_t p1){
         if (!once_value_2) {
           fra.me.REG[1] = BOX_NativeString("CLOSURE = NULL");
           REGB0 = TAG_Int(14);
-          fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+          fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
           once_value_2 = fra.me.REG[1];
           register_static_object(&once_value_2);
         } else fra.me.REG[1] = once_value_2;
@@ -1632,7 +1632,7 @@ void analysis___icode_dump___ICodeN___dump(val_t p0, val_t p1){
         if (!once_value_3) {
           fra.me.REG[1] = BOX_NativeString("CLOSURE");
           REGB0 = TAG_Int(7);
-          fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+          fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
           once_value_3 = fra.me.REG[1];
           register_static_object(&once_value_3);
         } else fra.me.REG[1] = once_value_3;
@@ -1704,7 +1704,7 @@ void analysis___icode_dump___ISeq___dump(val_t p0, val_t p1){
     if (!once_value_2) {
       fra.me.REG[3] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+      fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
       once_value_2 = fra.me.REG[3];
       register_static_object(&once_value_2);
     } else fra.me.REG[3] = once_value_2;
@@ -1715,7 +1715,7 @@ void analysis___icode_dump___ISeq___dump(val_t p0, val_t p1){
     if (!once_value_3) {
       fra.me.REG[0] = BOX_NativeString(":");
       REGB0 = TAG_Int(1);
-      fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+      fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
       once_value_3 = fra.me.REG[0];
       register_static_object(&once_value_3);
     } else fra.me.REG[0] = once_value_3;
@@ -1776,7 +1776,7 @@ void analysis___icode_dump___IIf___dump(val_t p0, val_t p1){
   if (!once_value_1) {
     fra.me.REG[3] = BOX_NativeString("IF(");
     REGB0 = TAG_Int(3);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_1 = fra.me.REG[3];
     register_static_object(&once_value_1);
   } else fra.me.REG[3] = once_value_1;
@@ -1788,7 +1788,7 @@ void analysis___icode_dump___IIf___dump(val_t p0, val_t p1){
   if (!once_value_2) {
     fra.me.REG[3] = BOX_NativeString(") {");
     REGB0 = TAG_Int(3);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_2 = fra.me.REG[3];
     register_static_object(&once_value_2);
   } else fra.me.REG[3] = once_value_2;
@@ -1807,7 +1807,7 @@ void analysis___icode_dump___IIf___dump(val_t p0, val_t p1){
   if (!once_value_3) {
     fra.me.REG[2] = BOX_NativeString("} ELSE {");
     REGB0 = TAG_Int(8);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_3 = fra.me.REG[2];
     register_static_object(&once_value_3);
   } else fra.me.REG[2] = once_value_3;
@@ -1824,7 +1824,7 @@ void analysis___icode_dump___IIf___dump(val_t p0, val_t p1){
   if (!once_value_4) {
     fra.me.REG[0] = BOX_NativeString("}");
     REGB0 = TAG_Int(1);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_4 = fra.me.REG[0];
     register_static_object(&once_value_4);
   } else fra.me.REG[0] = once_value_4;
@@ -1860,7 +1860,7 @@ void analysis___icode_dump___ILoop___dump(val_t p0, val_t p1){
   if (!once_value_1) {
     fra.me.REG[2] = BOX_NativeString("LOOP {");
     REGB0 = TAG_Int(6);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_1 = fra.me.REG[2];
     register_static_object(&once_value_1);
   } else fra.me.REG[2] = once_value_1;
@@ -1877,7 +1877,7 @@ void analysis___icode_dump___ILoop___dump(val_t p0, val_t p1){
   if (!once_value_3) {
     fra.me.REG[2] = BOX_NativeString("}");
     REGB0 = TAG_Int(1);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_3 = fra.me.REG[2];
     register_static_object(&once_value_3);
   } else fra.me.REG[2] = once_value_3;
@@ -1911,7 +1911,7 @@ void analysis___icode_dump___ILoop___dump(val_t p0, val_t p1){
     if (!once_value_4) {
       fra.me.REG[3] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+      fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
       once_value_4 = fra.me.REG[3];
       register_static_object(&once_value_4);
     } else fra.me.REG[3] = once_value_4;
@@ -1922,7 +1922,7 @@ void analysis___icode_dump___ILoop___dump(val_t p0, val_t p1){
     if (!once_value_5) {
       fra.me.REG[0] = BOX_NativeString(":");
       REGB0 = TAG_Int(1);
-      fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+      fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
       once_value_5 = fra.me.REG[0];
       register_static_object(&once_value_5);
     } else fra.me.REG[0] = once_value_5;
@@ -1981,7 +1981,7 @@ val_t analysis___icode_dump___IEscape___dump_intern(val_t p0, val_t p1){
   if (!once_value_1) {
     fra.me.REG[3] = BOX_NativeString("ESCAPE ");
     REGB0 = TAG_Int(7);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_1 = fra.me.REG[3];
     register_static_object(&once_value_1);
   } else fra.me.REG[3] = once_value_1;
@@ -1993,7 +1993,7 @@ val_t analysis___icode_dump___IEscape___dump_intern(val_t p0, val_t p1){
   if (!once_value_2) {
     fra.me.REG[0] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_2 = fra.me.REG[0];
     register_static_object(&once_value_2);
   } else fra.me.REG[0] = once_value_2;
@@ -2031,7 +2031,7 @@ val_t analysis___icode_dump___IAbort___dump_intern(val_t p0, val_t p1){
   if (!once_value_1) {
     fra.me.REG[2] = BOX_NativeString("ABORT (\"");
     REGB0 = TAG_Int(8);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_1 = fra.me.REG[2];
     register_static_object(&once_value_1);
   } else fra.me.REG[2] = once_value_1;
@@ -2041,7 +2041,7 @@ val_t analysis___icode_dump___IAbort___dump_intern(val_t p0, val_t p1){
   if (!once_value_2) {
     fra.me.REG[2] = BOX_NativeString("\", \"");
     REGB0 = TAG_Int(4);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_2 = fra.me.REG[2];
     register_static_object(&once_value_2);
   } else fra.me.REG[2] = once_value_2;
@@ -2051,7 +2051,7 @@ val_t analysis___icode_dump___IAbort___dump_intern(val_t p0, val_t p1){
   if (!once_value_3) {
     fra.me.REG[2] = BOX_NativeString("\")");
     REGB0 = TAG_Int(2);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_3 = fra.me.REG[2];
     register_static_object(&once_value_3);
   } else fra.me.REG[2] = once_value_3;
@@ -2090,7 +2090,7 @@ val_t analysis___icode_dump___ICall___dump_intern(val_t p0, val_t p1){
   if (!once_value_1) {
     fra.me.REG[3] = BOX_NativeString("CALL ");
     REGB0 = TAG_Int(5);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_1 = fra.me.REG[3];
     register_static_object(&once_value_1);
   } else fra.me.REG[3] = once_value_1;
@@ -2102,7 +2102,7 @@ val_t analysis___icode_dump___ICall___dump_intern(val_t p0, val_t p1){
   if (!once_value_2) {
     fra.me.REG[3] = BOX_NativeString("(");
     REGB0 = TAG_Int(1);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_2 = fra.me.REG[3];
     register_static_object(&once_value_2);
   } else fra.me.REG[3] = once_value_2;
@@ -2114,7 +2114,7 @@ val_t analysis___icode_dump___ICall___dump_intern(val_t p0, val_t p1){
   if (!once_value_3) {
     fra.me.REG[0] = BOX_NativeString(")");
     REGB0 = TAG_Int(1);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_3 = fra.me.REG[0];
     register_static_object(&once_value_3);
   } else fra.me.REG[0] = once_value_3;
@@ -2154,7 +2154,7 @@ val_t analysis___icode_dump___INew___dump_intern(val_t p0, val_t p1){
   if (!once_value_1) {
     fra.me.REG[3] = BOX_NativeString("NEW ");
     REGB0 = TAG_Int(4);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_1 = fra.me.REG[3];
     register_static_object(&once_value_1);
   } else fra.me.REG[3] = once_value_1;
@@ -2166,7 +2166,7 @@ val_t analysis___icode_dump___INew___dump_intern(val_t p0, val_t p1){
   if (!once_value_2) {
     fra.me.REG[3] = BOX_NativeString(".");
     REGB0 = TAG_Int(1);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_2 = fra.me.REG[3];
     register_static_object(&once_value_2);
   } else fra.me.REG[3] = once_value_2;
@@ -2178,7 +2178,7 @@ val_t analysis___icode_dump___INew___dump_intern(val_t p0, val_t p1){
   if (!once_value_3) {
     fra.me.REG[3] = BOX_NativeString("(");
     REGB0 = TAG_Int(1);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_3 = fra.me.REG[3];
     register_static_object(&once_value_3);
   } else fra.me.REG[3] = once_value_3;
@@ -2190,7 +2190,7 @@ val_t analysis___icode_dump___INew___dump_intern(val_t p0, val_t p1){
   if (!once_value_4) {
     fra.me.REG[0] = BOX_NativeString(")");
     REGB0 = TAG_Int(1);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_4 = fra.me.REG[0];
     register_static_object(&once_value_4);
   } else fra.me.REG[0] = once_value_4;
@@ -2229,7 +2229,7 @@ val_t analysis___icode_dump___ISuper___dump_intern(val_t p0, val_t p1){
   if (!once_value_1) {
     fra.me.REG[3] = BOX_NativeString("SUPER ");
     REGB0 = TAG_Int(6);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_1 = fra.me.REG[3];
     register_static_object(&once_value_1);
   } else fra.me.REG[3] = once_value_1;
@@ -2241,7 +2241,7 @@ val_t analysis___icode_dump___ISuper___dump_intern(val_t p0, val_t p1){
   if (!once_value_2) {
     fra.me.REG[3] = BOX_NativeString("(");
     REGB0 = TAG_Int(1);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_2 = fra.me.REG[3];
     register_static_object(&once_value_2);
   } else fra.me.REG[3] = once_value_2;
@@ -2253,7 +2253,7 @@ val_t analysis___icode_dump___ISuper___dump_intern(val_t p0, val_t p1){
   if (!once_value_3) {
     fra.me.REG[0] = BOX_NativeString(")");
     REGB0 = TAG_Int(1);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_3 = fra.me.REG[0];
     register_static_object(&once_value_3);
   } else fra.me.REG[0] = once_value_3;
@@ -2292,7 +2292,7 @@ val_t analysis___icode_dump___IStaticCall___dump_intern(val_t p0, val_t p1){
   if (!once_value_1) {
     fra.me.REG[3] = BOX_NativeString("STATIC_CALL ");
     REGB0 = TAG_Int(12);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_1 = fra.me.REG[3];
     register_static_object(&once_value_1);
   } else fra.me.REG[3] = once_value_1;
@@ -2304,7 +2304,7 @@ val_t analysis___icode_dump___IStaticCall___dump_intern(val_t p0, val_t p1){
   if (!once_value_2) {
     fra.me.REG[3] = BOX_NativeString("(");
     REGB0 = TAG_Int(1);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_2 = fra.me.REG[3];
     register_static_object(&once_value_2);
   } else fra.me.REG[3] = once_value_2;
@@ -2316,7 +2316,7 @@ val_t analysis___icode_dump___IStaticCall___dump_intern(val_t p0, val_t p1){
   if (!once_value_3) {
     fra.me.REG[0] = BOX_NativeString(")");
     REGB0 = TAG_Int(1);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_3 = fra.me.REG[0];
     register_static_object(&once_value_3);
   } else fra.me.REG[0] = once_value_3;
@@ -2353,7 +2353,7 @@ val_t analysis___icode_dump___IAllocateInstance___dump_intern(val_t p0, val_t p1
   if (!once_value_1) {
     fra.me.REG[2] = BOX_NativeString("ALLOCATE NEW_");
     REGB0 = TAG_Int(13);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_1 = fra.me.REG[2];
     register_static_object(&once_value_1);
   } else fra.me.REG[2] = once_value_1;
@@ -2365,7 +2365,7 @@ val_t analysis___icode_dump___IAllocateInstance___dump_intern(val_t p0, val_t p1
   if (!once_value_2) {
     fra.me.REG[0] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_2 = fra.me.REG[0];
     register_static_object(&once_value_2);
   } else fra.me.REG[0] = once_value_2;
@@ -2404,7 +2404,7 @@ val_t analysis___icode_dump___ICheckInstance___dump_intern(val_t p0, val_t p1){
   if (!once_value_1) {
     fra.me.REG[3] = BOX_NativeString("CHECK_INSTANCE CHECKNEW_");
     REGB0 = TAG_Int(24);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_1 = fra.me.REG[3];
     register_static_object(&once_value_1);
   } else fra.me.REG[3] = once_value_1;
@@ -2416,7 +2416,7 @@ val_t analysis___icode_dump___ICheckInstance___dump_intern(val_t p0, val_t p1){
   if (!once_value_2) {
     fra.me.REG[3] = BOX_NativeString("(");
     REGB0 = TAG_Int(1);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_2 = fra.me.REG[3];
     register_static_object(&once_value_2);
   } else fra.me.REG[3] = once_value_2;
@@ -2428,7 +2428,7 @@ val_t analysis___icode_dump___ICheckInstance___dump_intern(val_t p0, val_t p1){
   if (!once_value_3) {
     fra.me.REG[0] = BOX_NativeString(")");
     REGB0 = TAG_Int(1);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_3 = fra.me.REG[0];
     register_static_object(&once_value_3);
   } else fra.me.REG[0] = once_value_3;
@@ -2467,7 +2467,7 @@ val_t analysis___icode_dump___IInitAttributes___dump_intern(val_t p0, val_t p1){
   if (!once_value_1) {
     fra.me.REG[3] = BOX_NativeString("INIT_ATTRIBUTES INIT_ATTRIBUTES_");
     REGB0 = TAG_Int(32);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_1 = fra.me.REG[3];
     register_static_object(&once_value_1);
   } else fra.me.REG[3] = once_value_1;
@@ -2479,7 +2479,7 @@ val_t analysis___icode_dump___IInitAttributes___dump_intern(val_t p0, val_t p1){
   if (!once_value_2) {
     fra.me.REG[3] = BOX_NativeString("(");
     REGB0 = TAG_Int(1);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_2 = fra.me.REG[3];
     register_static_object(&once_value_2);
   } else fra.me.REG[3] = once_value_2;
@@ -2491,7 +2491,7 @@ val_t analysis___icode_dump___IInitAttributes___dump_intern(val_t p0, val_t p1){
   if (!once_value_3) {
     fra.me.REG[0] = BOX_NativeString(")");
     REGB0 = TAG_Int(1);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_3 = fra.me.REG[0];
     register_static_object(&once_value_3);
   } else fra.me.REG[0] = once_value_3;
@@ -2530,7 +2530,7 @@ val_t analysis___icode_dump___IClosCall___dump_intern(val_t p0, val_t p1){
   if (!once_value_1) {
     fra.me.REG[3] = BOX_NativeString("CLOS_CALL ");
     REGB0 = TAG_Int(10);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_1 = fra.me.REG[3];
     register_static_object(&once_value_1);
   } else fra.me.REG[3] = once_value_1;
@@ -2542,7 +2542,7 @@ val_t analysis___icode_dump___IClosCall___dump_intern(val_t p0, val_t p1){
   if (!once_value_2) {
     fra.me.REG[3] = BOX_NativeString("(");
     REGB0 = TAG_Int(1);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_2 = fra.me.REG[3];
     register_static_object(&once_value_2);
   } else fra.me.REG[3] = once_value_2;
@@ -2554,7 +2554,7 @@ val_t analysis___icode_dump___IClosCall___dump_intern(val_t p0, val_t p1){
   if (!once_value_3) {
     fra.me.REG[0] = BOX_NativeString(")");
     REGB0 = TAG_Int(1);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_3 = fra.me.REG[0];
     register_static_object(&once_value_3);
   } else fra.me.REG[0] = once_value_3;
@@ -2593,7 +2593,7 @@ val_t analysis___icode_dump___IAttrRead___dump_intern(val_t p0, val_t p1){
   if (!once_value_1) {
     fra.me.REG[3] = BOX_NativeString("ATTR_READ ");
     REGB0 = TAG_Int(10);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_1 = fra.me.REG[3];
     register_static_object(&once_value_1);
   } else fra.me.REG[3] = once_value_1;
@@ -2605,7 +2605,7 @@ val_t analysis___icode_dump___IAttrRead___dump_intern(val_t p0, val_t p1){
   if (!once_value_2) {
     fra.me.REG[3] = BOX_NativeString("(");
     REGB0 = TAG_Int(1);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_2 = fra.me.REG[3];
     register_static_object(&once_value_2);
   } else fra.me.REG[3] = once_value_2;
@@ -2617,7 +2617,7 @@ val_t analysis___icode_dump___IAttrRead___dump_intern(val_t p0, val_t p1){
   if (!once_value_3) {
     fra.me.REG[0] = BOX_NativeString(")");
     REGB0 = TAG_Int(1);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_3 = fra.me.REG[0];
     register_static_object(&once_value_3);
   } else fra.me.REG[0] = once_value_3;
@@ -2657,7 +2657,7 @@ val_t analysis___icode_dump___IAttrWrite___dump_intern(val_t p0, val_t p1){
   if (!once_value_1) {
     fra.me.REG[3] = BOX_NativeString("ATTR_WRITE ");
     REGB0 = TAG_Int(11);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_1 = fra.me.REG[3];
     register_static_object(&once_value_1);
   } else fra.me.REG[3] = once_value_1;
@@ -2669,7 +2669,7 @@ val_t analysis___icode_dump___IAttrWrite___dump_intern(val_t p0, val_t p1){
   if (!once_value_2) {
     fra.me.REG[3] = BOX_NativeString("(");
     REGB0 = TAG_Int(1);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_2 = fra.me.REG[3];
     register_static_object(&once_value_2);
   } else fra.me.REG[3] = once_value_2;
@@ -2681,7 +2681,7 @@ val_t analysis___icode_dump___IAttrWrite___dump_intern(val_t p0, val_t p1){
   if (!once_value_3) {
     fra.me.REG[3] = BOX_NativeString(") := ");
     REGB0 = TAG_Int(5);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_3 = fra.me.REG[3];
     register_static_object(&once_value_3);
   } else fra.me.REG[3] = once_value_3;
@@ -2693,7 +2693,7 @@ val_t analysis___icode_dump___IAttrWrite___dump_intern(val_t p0, val_t p1){
   if (!once_value_4) {
     fra.me.REG[0] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_4 = fra.me.REG[0];
     register_static_object(&once_value_4);
   } else fra.me.REG[0] = once_value_4;
@@ -2732,7 +2732,7 @@ val_t analysis___icode_dump___IAttrIsset___dump_intern(val_t p0, val_t p1){
   if (!once_value_1) {
     fra.me.REG[3] = BOX_NativeString("ATTR_ISSET ");
     REGB0 = TAG_Int(11);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_1 = fra.me.REG[3];
     register_static_object(&once_value_1);
   } else fra.me.REG[3] = once_value_1;
@@ -2744,7 +2744,7 @@ val_t analysis___icode_dump___IAttrIsset___dump_intern(val_t p0, val_t p1){
   if (!once_value_2) {
     fra.me.REG[3] = BOX_NativeString("(");
     REGB0 = TAG_Int(1);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_2 = fra.me.REG[3];
     register_static_object(&once_value_2);
   } else fra.me.REG[3] = once_value_2;
@@ -2756,7 +2756,7 @@ val_t analysis___icode_dump___IAttrIsset___dump_intern(val_t p0, val_t p1){
   if (!once_value_3) {
     fra.me.REG[0] = BOX_NativeString(")");
     REGB0 = TAG_Int(1);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_3 = fra.me.REG[0];
     register_static_object(&once_value_3);
   } else fra.me.REG[0] = once_value_3;
@@ -2795,7 +2795,7 @@ val_t analysis___icode_dump___ITypeCheck___dump_intern(val_t p0, val_t p1){
   if (!once_value_1) {
     fra.me.REG[3] = BOX_NativeString("CHECKTYPE ");
     REGB0 = TAG_Int(10);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_1 = fra.me.REG[3];
     register_static_object(&once_value_1);
   } else fra.me.REG[3] = once_value_1;
@@ -2807,7 +2807,7 @@ val_t analysis___icode_dump___ITypeCheck___dump_intern(val_t p0, val_t p1){
   if (!once_value_2) {
     fra.me.REG[3] = BOX_NativeString(" isa ");
     REGB0 = TAG_Int(5);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_2 = fra.me.REG[3];
     register_static_object(&once_value_2);
   } else fra.me.REG[3] = once_value_2;
@@ -2819,7 +2819,7 @@ val_t analysis___icode_dump___ITypeCheck___dump_intern(val_t p0, val_t p1){
   if (!once_value_3) {
     fra.me.REG[0] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_3 = fra.me.REG[0];
     register_static_object(&once_value_3);
   } else fra.me.REG[0] = once_value_3;
@@ -2858,7 +2858,7 @@ val_t analysis___icode_dump___INative___dump_intern(val_t p0, val_t p1){
   if (!once_value_1) {
     fra.me.REG[3] = BOX_NativeString("NATIVE \"");
     REGB0 = TAG_Int(8);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_1 = fra.me.REG[3];
     register_static_object(&once_value_1);
   } else fra.me.REG[3] = once_value_1;
@@ -2870,7 +2870,7 @@ val_t analysis___icode_dump___INative___dump_intern(val_t p0, val_t p1){
   if (!once_value_2) {
     fra.me.REG[3] = BOX_NativeString("\"(");
     REGB0 = TAG_Int(2);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_2 = fra.me.REG[3];
     register_static_object(&once_value_2);
   } else fra.me.REG[3] = once_value_2;
@@ -2882,7 +2882,7 @@ val_t analysis___icode_dump___INative___dump_intern(val_t p0, val_t p1){
   if (!once_value_3) {
     fra.me.REG[0] = BOX_NativeString(")");
     REGB0 = TAG_Int(1);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_3 = fra.me.REG[0];
     register_static_object(&once_value_3);
   } else fra.me.REG[0] = once_value_3;
@@ -2919,7 +2919,7 @@ val_t analysis___icode_dump___IIntValue___dump_intern(val_t p0, val_t p1){
   if (!once_value_1) {
     fra.me.REG[2] = BOX_NativeString("INTVALUE ");
     REGB0 = TAG_Int(9);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_1 = fra.me.REG[2];
     register_static_object(&once_value_1);
   } else fra.me.REG[2] = once_value_1;
@@ -2930,7 +2930,7 @@ val_t analysis___icode_dump___IIntValue___dump_intern(val_t p0, val_t p1){
   if (!once_value_2) {
     fra.me.REG[0] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_2 = fra.me.REG[0];
     register_static_object(&once_value_2);
   } else fra.me.REG[0] = once_value_2;
@@ -2967,7 +2967,7 @@ val_t analysis___icode_dump___IBoolValue___dump_intern(val_t p0, val_t p1){
   if (!once_value_1) {
     fra.me.REG[2] = BOX_NativeString("BOOLVALUE ");
     REGB0 = TAG_Int(10);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_1 = fra.me.REG[2];
     register_static_object(&once_value_1);
   } else fra.me.REG[2] = once_value_1;
@@ -2979,7 +2979,7 @@ val_t analysis___icode_dump___IBoolValue___dump_intern(val_t p0, val_t p1){
   if (!once_value_2) {
     fra.me.REG[0] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_2 = fra.me.REG[0];
     register_static_object(&once_value_2);
   } else fra.me.REG[0] = once_value_2;
@@ -3016,7 +3016,7 @@ val_t analysis___icode_dump___IStringValue___dump_intern(val_t p0, val_t p1){
   if (!once_value_1) {
     fra.me.REG[2] = BOX_NativeString("STRINGVALUE ");
     REGB0 = TAG_Int(12);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_1 = fra.me.REG[2];
     register_static_object(&once_value_1);
   } else fra.me.REG[2] = once_value_1;
@@ -3027,7 +3027,7 @@ val_t analysis___icode_dump___IStringValue___dump_intern(val_t p0, val_t p1){
   if (!once_value_2) {
     fra.me.REG[0] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_2 = fra.me.REG[0];
     register_static_object(&once_value_2);
   } else fra.me.REG[0] = once_value_2;
@@ -3064,7 +3064,7 @@ val_t analysis___icode_dump___ICharValue___dump_intern(val_t p0, val_t p1){
   if (!once_value_1) {
     fra.me.REG[2] = BOX_NativeString("CHARVALUE ");
     REGB0 = TAG_Int(10);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_1 = fra.me.REG[2];
     register_static_object(&once_value_1);
   } else fra.me.REG[2] = once_value_1;
@@ -3075,7 +3075,7 @@ val_t analysis___icode_dump___ICharValue___dump_intern(val_t p0, val_t p1){
   if (!once_value_2) {
     fra.me.REG[0] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_2 = fra.me.REG[0];
     register_static_object(&once_value_2);
   } else fra.me.REG[0] = once_value_2;
@@ -3112,7 +3112,7 @@ val_t analysis___icode_dump___IFloatValue___dump_intern(val_t p0, val_t p1){
   if (!once_value_1) {
     fra.me.REG[2] = BOX_NativeString("FLOATVALUE ");
     REGB0 = TAG_Int(11);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_1 = fra.me.REG[2];
     register_static_object(&once_value_1);
   } else fra.me.REG[2] = once_value_1;
@@ -3123,7 +3123,7 @@ val_t analysis___icode_dump___IFloatValue___dump_intern(val_t p0, val_t p1){
   if (!once_value_2) {
     fra.me.REG[0] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_2 = fra.me.REG[0];
     register_static_object(&once_value_2);
   } else fra.me.REG[0] = once_value_2;
@@ -3161,7 +3161,7 @@ val_t analysis___icode_dump___IMove___dump_intern(val_t p0, val_t p1){
   if (!once_value_1) {
     fra.me.REG[3] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_1 = fra.me.REG[3];
     register_static_object(&once_value_1);
   } else fra.me.REG[3] = once_value_1;
@@ -3173,7 +3173,7 @@ val_t analysis___icode_dump___IMove___dump_intern(val_t p0, val_t p1){
   if (!once_value_2) {
     fra.me.REG[0] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_2 = fra.me.REG[0];
     register_static_object(&once_value_2);
   } else fra.me.REG[0] = once_value_2;
@@ -3212,7 +3212,7 @@ val_t analysis___icode_dump___IIs___dump_intern(val_t p0, val_t p1){
   if (!once_value_1) {
     fra.me.REG[3] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_1 = fra.me.REG[3];
     register_static_object(&once_value_1);
   } else fra.me.REG[3] = once_value_1;
@@ -3224,7 +3224,7 @@ val_t analysis___icode_dump___IIs___dump_intern(val_t p0, val_t p1){
   if (!once_value_2) {
     fra.me.REG[3] = BOX_NativeString(" is ");
     REGB0 = TAG_Int(4);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_2 = fra.me.REG[3];
     register_static_object(&once_value_2);
   } else fra.me.REG[3] = once_value_2;
@@ -3236,7 +3236,7 @@ val_t analysis___icode_dump___IIs___dump_intern(val_t p0, val_t p1){
   if (!once_value_3) {
     fra.me.REG[0] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_3 = fra.me.REG[0];
     register_static_object(&once_value_3);
   } else fra.me.REG[0] = once_value_3;
@@ -3274,7 +3274,7 @@ val_t analysis___icode_dump___INot___dump_intern(val_t p0, val_t p1){
   if (!once_value_1) {
     fra.me.REG[3] = BOX_NativeString("NOT ");
     REGB0 = TAG_Int(4);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_1 = fra.me.REG[3];
     register_static_object(&once_value_1);
   } else fra.me.REG[3] = once_value_1;
@@ -3286,7 +3286,7 @@ val_t analysis___icode_dump___INot___dump_intern(val_t p0, val_t p1){
   if (!once_value_2) {
     fra.me.REG[0] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_2 = fra.me.REG[0];
     register_static_object(&once_value_2);
   } else fra.me.REG[0] = once_value_2;
@@ -3328,7 +3328,7 @@ void analysis___icode_dump___IOnce___dump(val_t p0, val_t p1){
   if (!once_value_1) {
     fra.me.REG[4] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+    fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
     once_value_1 = fra.me.REG[4];
     register_static_object(&once_value_1);
   } else fra.me.REG[4] = once_value_1;
@@ -3345,7 +3345,7 @@ void analysis___icode_dump___IOnce___dump(val_t p0, val_t p1){
   if (!once_value_2) {
     fra.me.REG[4] = BOX_NativeString(" := ONCE {");
     REGB0 = TAG_Int(10);
-    fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+    fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
     once_value_2 = fra.me.REG[4];
     register_static_object(&once_value_2);
   } else fra.me.REG[4] = once_value_2;
@@ -3364,7 +3364,7 @@ void analysis___icode_dump___IOnce___dump(val_t p0, val_t p1){
   if (!once_value_3) {
     fra.me.REG[2] = BOX_NativeString("}");
     REGB0 = TAG_Int(1);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_3 = fra.me.REG[2];
     register_static_object(&once_value_3);
   } else fra.me.REG[2] = once_value_3;
@@ -3399,7 +3399,7 @@ val_t analysis___icode_dump___IHasClos___dump_intern(val_t p0, val_t p1){
   if (!once_value_1) {
     fra.me.REG[3] = BOX_NativeString("HASCLOS ");
     REGB0 = TAG_Int(8);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_1 = fra.me.REG[3];
     register_static_object(&once_value_1);
   } else fra.me.REG[3] = once_value_1;
@@ -3411,7 +3411,7 @@ val_t analysis___icode_dump___IHasClos___dump_intern(val_t p0, val_t p1){
   if (!once_value_2) {
     fra.me.REG[0] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_2 = fra.me.REG[0];
     register_static_object(&once_value_2);
   } else fra.me.REG[0] = once_value_2;

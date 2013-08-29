@@ -342,7 +342,7 @@ val_t syntax___extern_inline___TExternCodeSegment___code(val_t p0){
   REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[0]);
   /* syntax/extern_inline.nit:50 */
   REGB2 = TAG_Int(4);
-  /* ../lib/standard/kernel.nit:240 */
+  /* ../lib/standard/kernel.nit:247 */
   REGB2 = TAG_Int(UNTAG_Int(REGB1)-UNTAG_Int(REGB2));
   /* syntax/extern_inline.nit:50 */
   fra.me.REG[1] = CALL_standard___string___AbstractString___substring(fra.me.REG[1])(fra.me.REG[1], REGB0, REGB2);
@@ -406,7 +406,7 @@ val_t syntax___extern_inline___AExternCodeBlock___to_extern_code(val_t p0){
     REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2]);
     /* syntax/extern_inline.nit:62 */
     REGB2 = TAG_Int(2);
-    /* ../lib/standard/kernel.nit:240 */
+    /* ../lib/standard/kernel.nit:247 */
     REGB2 = TAG_Int(UNTAG_Int(REGB1)-UNTAG_Int(REGB2));
     /* syntax/extern_inline.nit:62 */
     fra.me.REG[2] = CALL_standard___string___AbstractString___substring(fra.me.REG[2])(fra.me.REG[2], REGB0, REGB2);
@@ -478,7 +478,7 @@ void syntax___extern_inline___AExternPropdef___accept_property_verifier(val_t p0
       if (!once_value_1) {
         fra.me.REG[4] = BOX_NativeString("Cannot implement the non extern method ");
         REGB0 = TAG_Int(39);
-        fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+        fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
         once_value_1 = fra.me.REG[4];
         register_static_object(&once_value_1);
       } else fra.me.REG[4] = once_value_1;
@@ -490,7 +490,7 @@ void syntax___extern_inline___AExternPropdef___accept_property_verifier(val_t p0
       if (!once_value_2) {
         fra.me.REG[4] = BOX_NativeString(" with extern code");
         REGB0 = TAG_Int(17);
-        fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+        fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
         once_value_2 = fra.me.REG[4];
         register_static_object(&once_value_2);
       } else fra.me.REG[4] = once_value_2;
@@ -574,7 +574,7 @@ void syntax___extern_inline___AStdClassdef___accept_property_verifier(val_t p0, 
       if (!once_value_1) {
         fra.me.REG[4] = BOX_NativeString("Cannot define an extern equivalent in the non extern class ");
         REGB0 = TAG_Int(59);
-        fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+        fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
         once_value_1 = fra.me.REG[4];
         register_static_object(&once_value_1);
       } else fra.me.REG[4] = once_value_1;
@@ -587,7 +587,7 @@ void syntax___extern_inline___AStdClassdef___accept_property_verifier(val_t p0, 
       if (!once_value_2) {
         fra.me.REG[4] = BOX_NativeString("");
         REGB0 = TAG_Int(0);
-        fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+        fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
         once_value_2 = fra.me.REG[4];
         register_static_object(&once_value_2);
       } else fra.me.REG[4] = once_value_2;

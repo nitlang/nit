@@ -97,7 +97,7 @@ void global___dead_method_removal___Program___optimize_dead_methods(val_t p0){
       /* global/dead_method_removal.nit:32 */
       REGB0 = CALL_global___dead_method_removal___Program___nb_removed_iroutines(closctx->REG[0])(closctx->REG[0]);
       REGB1 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
       /* global/dead_method_removal.nit:32 */
       ATTR_global___dead_method_removal___Program____nb_removed_iroutines(closctx->REG[0]) = REGB1;
@@ -105,7 +105,7 @@ void global___dead_method_removal___Program___optimize_dead_methods(val_t p0){
       /* global/dead_method_removal.nit:34 */
       REGB1 = CALL_global___dead_method_removal___Program___nb_not_removed_iroutines(closctx->REG[0])(closctx->REG[0]);
       REGB0 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB0 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB0));
       /* global/dead_method_removal.nit:34 */
       ATTR_global___dead_method_removal___Program____nb_not_removed_iroutines(closctx->REG[0]) = REGB0;
@@ -144,7 +144,7 @@ void global___dead_method_removal___Program___dump_dead_method_optimization(val_
   if (!once_value_1) {
     fra.me.REG[3] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_1 = fra.me.REG[3];
     register_static_object(&once_value_1);
   } else fra.me.REG[3] = once_value_1;
@@ -154,7 +154,7 @@ void global___dead_method_removal___Program___dump_dead_method_optimization(val_
   if (!once_value_2) {
     fra.me.REG[1] = BOX_NativeString("/");
     REGB0 = TAG_Int(1);
-    fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+    fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
     once_value_2 = fra.me.REG[1];
     register_static_object(&once_value_2);
   } else fra.me.REG[1] = once_value_2;
@@ -167,7 +167,7 @@ void global___dead_method_removal___Program___dump_dead_method_optimization(val_
   if (!once_value_3) {
     fra.me.REG[1] = BOX_NativeString(".dmr_opt.log");
     REGB0 = TAG_Int(12);
-    fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+    fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
     once_value_3 = fra.me.REG[1];
     register_static_object(&once_value_3);
   } else fra.me.REG[1] = once_value_3;
@@ -181,7 +181,7 @@ void global___dead_method_removal___Program___dump_dead_method_optimization(val_
   if (!once_value_4) {
     fra.me.REG[3] = BOX_NativeString("Nb. dead iroutines removed: ");
     REGB0 = TAG_Int(28);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_4 = fra.me.REG[3];
     register_static_object(&once_value_4);
   } else fra.me.REG[3] = once_value_4;
@@ -193,7 +193,7 @@ void global___dead_method_removal___Program___dump_dead_method_optimization(val_
   if (!once_value_5) {
     fra.me.REG[3] = BOX_NativeString("\n");
     REGB0 = TAG_Int(1);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_5 = fra.me.REG[3];
     register_static_object(&once_value_5);
   } else fra.me.REG[3] = once_value_5;
@@ -207,7 +207,7 @@ void global___dead_method_removal___Program___dump_dead_method_optimization(val_
   if (!once_value_6) {
     fra.me.REG[3] = BOX_NativeString("Nb. live iroutines: ");
     REGB0 = TAG_Int(20);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_6 = fra.me.REG[3];
     register_static_object(&once_value_6);
   } else fra.me.REG[3] = once_value_6;
@@ -219,7 +219,7 @@ void global___dead_method_removal___Program___dump_dead_method_optimization(val_
   if (!once_value_7) {
     fra.me.REG[0] = BOX_NativeString("\n");
     REGB0 = TAG_Int(1);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_7 = fra.me.REG[0];
     register_static_object(&once_value_7);
   } else fra.me.REG[0] = once_value_7;
@@ -262,7 +262,7 @@ void global___dead_method_removal___IRoutine___set_not_reachable(val_t p0, val_t
   if (!once_value_1) {
     fra.me.REG[2] = BOX_NativeString("This method should not be called !");
     REGB0 = TAG_Int(34);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_1 = fra.me.REG[2];
     register_static_object(&once_value_1);
   } else fra.me.REG[2] = once_value_1;

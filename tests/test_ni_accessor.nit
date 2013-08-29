@@ -20,11 +20,11 @@ class A
 	readable writable var _rw : String = "rw"
 
 	fun print_all is extern import String::to_cstring, r, rw
-	fun modify is extern import String::from_cstring, w=, rw=
+	fun modify is extern import NativeString::to_s, w=, rw=
 end
 
 class B
-	fun print_and_modify( a : A ) is extern import A::rw, A::rw=, String::to_cstring, String::from_cstring
+	fun print_and_modify( a : A ) is extern import A::rw, A::rw=, String::to_cstring, NativeString::to_s
 end
 
 var a = new A

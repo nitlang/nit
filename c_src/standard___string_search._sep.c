@@ -145,7 +145,7 @@ val_t standard___string_search___Pattern___split_in(val_t p0, val_t p1){
         nit_abort("Reciever is null", NULL, LOCATE_standard___string_search, 49);
       }
       REGB1 = CALL_standard___string_search___Match___from(fra.me.REG[3])(fra.me.REG[3]);
-      /* ../lib/standard/kernel.nit:240 */
+      /* ../lib/standard/kernel.nit:247 */
       REGB1 = TAG_Int(UNTAG_Int(REGB1)-UNTAG_Int(REGB0));
       /* ../lib/standard/string_search.nit:50 */
       fra.me.REG[4] = NEW_Match_standard___string_search___Match___init(fra.me.REG[1], REGB0, REGB1);
@@ -173,7 +173,7 @@ val_t standard___string_search___Pattern___split_in(val_t p0, val_t p1){
     nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
   }
   REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1]);
-  /* ../lib/standard/kernel.nit:240 */
+  /* ../lib/standard/kernel.nit:247 */
   REGB1 = TAG_Int(UNTAG_Int(REGB1)-UNTAG_Int(REGB0));
   /* ../lib/standard/string_search.nit:55 */
   fra.me.REG[1] = NEW_Match_standard___string_search___Match___init(fra.me.REG[1], REGB0, REGB1);
@@ -242,7 +242,7 @@ val_t standard___string_search___BM_Pattern___search_index_in(val_t p0, val_t p1
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:236 */
+  /* ../lib/standard/kernel.nit:243 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)>=UNTAG_Int(REGB1));
   /* ../lib/standard/string_search.nit:72 */
   if (UNTAG_Bool(REGB1)) {
@@ -265,24 +265,24 @@ val_t standard___string_search___BM_Pattern___search_index_in(val_t p0, val_t p1
   REGB2 = ATTR_standard___string_search___BM_Pattern____length(fra.me.REG[0]);
   /* ../lib/standard/string_search.nit:77 */
   while(1) {
-    /* ../lib/standard/kernel.nit:240 */
+    /* ../lib/standard/kernel.nit:247 */
     REGB3 = TAG_Int(UNTAG_Int(REGB1)-UNTAG_Int(REGB2));
     /* ../lib/standard/string_search.nit:77 */
     REGB4 = TAG_Int(1);
-    /* ../lib/standard/kernel.nit:238 */
+    /* ../lib/standard/kernel.nit:245 */
     REGB4 = TAG_Int(UNTAG_Int(REGB3)+UNTAG_Int(REGB4));
     REGB3 = TAG_Bool(VAL_ISA(REGB4, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
     if (UNTAG_Bool(REGB3)) {
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:242 */
     REGB4 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB4));
     /* ../lib/standard/string_search.nit:77 */
     if (UNTAG_Bool(REGB4)) {
       /* ../lib/standard/string_search.nit:78 */
       REGB4 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:240 */
+      /* ../lib/standard/kernel.nit:247 */
       REGB4 = TAG_Int(UNTAG_Int(REGB2)-UNTAG_Int(REGB4));
       /* ../lib/standard/string_search.nit:79 */
       while(1) {
@@ -292,7 +292,7 @@ val_t standard___string_search___BM_Pattern___search_index_in(val_t p0, val_t p1
         } else {
           nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
         }
-        /* ../lib/standard/kernel.nit:236 */
+        /* ../lib/standard/kernel.nit:243 */
         REGB3 = TAG_Bool(UNTAG_Int(REGB4)>=UNTAG_Int(REGB3));
         /* ../lib/standard/string_search.nit:79 */
         if (UNTAG_Bool(REGB3)) {
@@ -303,14 +303,14 @@ val_t standard___string_search___BM_Pattern___search_index_in(val_t p0, val_t p1
           }
           fra.me.REG[2] = ATTR_standard___string_search___BM_Pattern____motif(fra.me.REG[0]);
           REGB3 = CALL_standard___collection___abstract_collection___SequenceRead_____bra(fra.me.REG[2])(fra.me.REG[2], REGB4);
-          /* ../lib/standard/kernel.nit:238 */
+          /* ../lib/standard/kernel.nit:245 */
           REGB5 = TAG_Int(UNTAG_Int(REGB4)+UNTAG_Int(REGB0));
           /* ../lib/standard/string_search.nit:79 */
           REGB5 = CALL_standard___collection___abstract_collection___SequenceRead_____bra(fra.me.REG[1])(fra.me.REG[1], REGB5);
           REGB6 = TAG_Bool(IS_EQUAL_OO(REGB3,REGB5));
           if (UNTAG_Bool(REGB6)) {
           } else {
-            /* ../lib/standard/kernel.nit:381 */
+            /* ../lib/standard/kernel.nit:434 */
             REGB5 = TAG_Bool((REGB3)==(REGB5));
             /* ../lib/standard/string_search.nit:79 */
             REGB6 = REGB5;
@@ -321,7 +321,7 @@ val_t standard___string_search___BM_Pattern___search_index_in(val_t p0, val_t p1
         }
         if (UNTAG_Bool(REGB6)) {
           REGB6 = TAG_Int(1);
-          /* ../lib/standard/kernel.nit:240 */
+          /* ../lib/standard/kernel.nit:247 */
           REGB6 = TAG_Int(UNTAG_Int(REGB4)-UNTAG_Int(REGB6));
           /* ../lib/standard/string_search.nit:79 */
           REGB4 = REGB6;
@@ -337,7 +337,7 @@ val_t standard___string_search___BM_Pattern___search_index_in(val_t p0, val_t p1
       } else {
         nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
       }
-      /* ../lib/standard/kernel.nit:235 */
+      /* ../lib/standard/kernel.nit:242 */
       REGB6 = TAG_Bool(UNTAG_Int(REGB4)<UNTAG_Int(REGB6));
       /* ../lib/standard/string_search.nit:80 */
       if (UNTAG_Bool(REGB6)) {
@@ -352,23 +352,23 @@ val_t standard___string_search___BM_Pattern___search_index_in(val_t p0, val_t p1
           nit_abort("Uninitialized attribute %s", "_gs", LOCATE_standard___string_search, 83);
         }
         fra.me.REG[2] = ATTR_standard___string_search___BM_Pattern____gs(fra.me.REG[0]);
-        /* ../lib/standard/collection/array.nit:278 */
+        /* ../lib/standard/collection/array.nit:279 */
         REGB5 = REGB4;
-        /* ../lib/standard/collection/array.nit:280 */
+        /* ../lib/standard/collection/array.nit:281 */
         REGB3 = TAG_Int(0);
         REGB7 = TAG_Bool(VAL_ISA(REGB3, VTCOLOR_standard___kernel___Comparable___OTHER(REGB5), VTID_standard___kernel___Comparable___OTHER(REGB5))) /*cast OTHER*/;
         if (UNTAG_Bool(REGB7)) {
         } else {
           nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
         }
-        /* ../lib/standard/kernel.nit:236 */
+        /* ../lib/standard/kernel.nit:243 */
         REGB3 = TAG_Bool(UNTAG_Int(REGB5)>=UNTAG_Int(REGB3));
-        /* ../lib/standard/collection/array.nit:280 */
+        /* ../lib/standard/collection/array.nit:281 */
         if (UNTAG_Bool(REGB3)) {
           REGB3 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2])!=NIT_NULL);
           if (UNTAG_Bool(REGB3)) {
           } else {
-            nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 280);
+            nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 281);
           }
           REGB3 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2]);
           REGB7 = TAG_Bool(VAL_ISA(REGB3, VTCOLOR_standard___kernel___Comparable___OTHER(REGB5), VTID_standard___kernel___Comparable___OTHER(REGB5))) /*cast OTHER*/;
@@ -376,40 +376,40 @@ val_t standard___string_search___BM_Pattern___search_index_in(val_t p0, val_t p1
           } else {
             nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
           }
-          /* ../lib/standard/kernel.nit:235 */
+          /* ../lib/standard/kernel.nit:242 */
           REGB3 = TAG_Bool(UNTAG_Int(REGB5)<UNTAG_Int(REGB3));
         } else {
-          /* ../lib/standard/collection/array.nit:280 */
+          /* ../lib/standard/collection/array.nit:281 */
           REGB7 = TAG_Bool(0);
           REGB3 = REGB7;
         }
         if (UNTAG_Bool(REGB3)) {
         } else {
-          nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 280);
+          nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 281);
         }
-        /* ../lib/standard/collection/array.nit:281 */
+        /* ../lib/standard/collection/array.nit:282 */
         fra.me.REG[2] = ATTR_standard___collection___array___Array____items(fra.me.REG[2]);
         REGB3 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
         if (UNTAG_Bool(REGB3)) {
-          nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
+          nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 282);
         }
-        /* ../lib/standard/collection/array.nit:724 */
+        /* ../lib/standard/collection/array.nit:725 */
         fra.me.REG[2] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB5)];
-        /* ../lib/standard/collection/array.nit:281 */
+        /* ../lib/standard/collection/array.nit:282 */
         goto label3;
         label3: while(0);
         /* ../lib/standard/string_search.nit:83 */
         REGB5 = fra.me.REG[2];
-        /* ../lib/standard/kernel.nit:238 */
+        /* ../lib/standard/kernel.nit:245 */
         REGB3 = TAG_Int(UNTAG_Int(REGB4)+UNTAG_Int(REGB0));
         /* ../lib/standard/string_search.nit:84 */
         REGB3 = CALL_standard___collection___abstract_collection___SequenceRead_____bra(fra.me.REG[1])(fra.me.REG[1], REGB3);
         REGB3 = CALL_standard___string_search___BM_Pattern___bc(fra.me.REG[0])(fra.me.REG[0], REGB3);
-        /* ../lib/standard/kernel.nit:240 */
+        /* ../lib/standard/kernel.nit:247 */
         REGB3 = TAG_Int(UNTAG_Int(REGB3)-UNTAG_Int(REGB2));
         /* ../lib/standard/string_search.nit:84 */
         REGB7 = TAG_Int(1);
-        /* ../lib/standard/kernel.nit:238 */
+        /* ../lib/standard/kernel.nit:245 */
         REGB7 = TAG_Int(UNTAG_Int(REGB3)+UNTAG_Int(REGB7));
         REGB4 = TAG_Int(UNTAG_Int(REGB7)+UNTAG_Int(REGB4));
         REGB7 = TAG_Bool(VAL_ISA(REGB4, VTCOLOR_standard___kernel___Comparable___OTHER(REGB5), VTID_standard___kernel___Comparable___OTHER(REGB5))) /*cast OTHER*/;
@@ -417,16 +417,16 @@ val_t standard___string_search___BM_Pattern___search_index_in(val_t p0, val_t p1
         } else {
           nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
         }
-        /* ../lib/standard/kernel.nit:237 */
+        /* ../lib/standard/kernel.nit:244 */
         REGB7 = TAG_Bool(UNTAG_Int(REGB5)>UNTAG_Int(REGB4));
         /* ../lib/standard/string_search.nit:86 */
         if (UNTAG_Bool(REGB7)) {
-          /* ../lib/standard/kernel.nit:238 */
+          /* ../lib/standard/kernel.nit:245 */
           REGB5 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB5));
           /* ../lib/standard/string_search.nit:87 */
           REGB0 = REGB5;
         } else {
-          /* ../lib/standard/kernel.nit:238 */
+          /* ../lib/standard/kernel.nit:245 */
           REGB4 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB4));
           /* ../lib/standard/string_search.nit:89 */
           REGB0 = REGB4;
@@ -440,7 +440,7 @@ val_t standard___string_search___BM_Pattern___search_index_in(val_t p0, val_t p1
   label4: while(0);
   /* ../lib/standard/string_search.nit:93 */
   REGB0 = TAG_Int(1);
-  /* ../lib/standard/kernel.nit:239 */
+  /* ../lib/standard/kernel.nit:246 */
   REGB0 = TAG_Int(-UNTAG_Int(REGB0));
   /* ../lib/standard/string_search.nit:93 */
   REGB6 = REGB0;
@@ -478,7 +478,7 @@ val_t standard___string_search___BM_Pattern___search_in(val_t p0, val_t p1, val_
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:235 */
+  /* ../lib/standard/kernel.nit:242 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
   /* ../lib/standard/string_search.nit:100 */
   if (UNTAG_Bool(REGB1)) {
@@ -640,14 +640,14 @@ void standard___string_search___BM_Pattern___compute_bc(val_t p0){
   /* ../lib/standard/string_search.nit:144 */
   while(1) {
     REGB2 = TAG_Int(1);
-    /* ../lib/standard/kernel.nit:240 */
+    /* ../lib/standard/kernel.nit:247 */
     REGB2 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB2));
     REGB3 = TAG_Bool(VAL_ISA(REGB2, VTCOLOR_standard___kernel___Comparable___OTHER(REGB1), VTID_standard___kernel___Comparable___OTHER(REGB1))) /*cast OTHER*/;
     if (UNTAG_Bool(REGB3)) {
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:242 */
     REGB2 = TAG_Bool(UNTAG_Int(REGB1)<UNTAG_Int(REGB2));
     /* ../lib/standard/string_search.nit:144 */
     if (UNTAG_Bool(REGB2)) {
@@ -659,17 +659,17 @@ void standard___string_search___BM_Pattern___compute_bc(val_t p0){
       }
       fra.me.REG[2] = ATTR_standard___string_search___BM_Pattern____bc_table(fra.me.REG[0]);
       REGB2 = CALL_standard___collection___abstract_collection___SequenceRead_____bra(fra.me.REG[1])(fra.me.REG[1], REGB1);
-      /* ../lib/standard/kernel.nit:240 */
+      /* ../lib/standard/kernel.nit:247 */
       REGB3 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB1));
       /* ../lib/standard/string_search.nit:145 */
       REGB4 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:240 */
+      /* ../lib/standard/kernel.nit:247 */
       REGB4 = TAG_Int(UNTAG_Int(REGB3)-UNTAG_Int(REGB4));
       /* ../lib/standard/string_search.nit:145 */
       CALL_standard___collection___abstract_collection___Map_____braeq(fra.me.REG[2])(fra.me.REG[2], REGB2, REGB4);
       /* ../lib/standard/string_search.nit:146 */
       REGB4 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB4 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB4));
       /* ../lib/standard/string_search.nit:146 */
       REGB1 = REGB4;
@@ -724,11 +724,11 @@ val_t standard___string_search___BM_Pattern___suffixes(val_t p0){
   REGB1 = TAG_Int(0);
   /* ../lib/standard/string_search.nit:157 */
   REGB2 = TAG_Int(1);
-  /* ../lib/standard/kernel.nit:240 */
+  /* ../lib/standard/kernel.nit:247 */
   REGB2 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB2));
   /* ../lib/standard/string_search.nit:158 */
   REGB3 = TAG_Int(2);
-  /* ../lib/standard/kernel.nit:240 */
+  /* ../lib/standard/kernel.nit:247 */
   REGB3 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB3));
   /* ../lib/standard/string_search.nit:159 */
   while(1) {
@@ -738,7 +738,7 @@ val_t standard___string_search___BM_Pattern___suffixes(val_t p0){
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:236 */
+    /* ../lib/standard/kernel.nit:243 */
     REGB4 = TAG_Bool(UNTAG_Int(REGB3)>=UNTAG_Int(REGB4));
     /* ../lib/standard/string_search.nit:159 */
     if (UNTAG_Bool(REGB4)) {
@@ -747,34 +747,34 @@ val_t standard___string_search___BM_Pattern___suffixes(val_t p0){
       } else {
         nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
       }
-      /* ../lib/standard/kernel.nit:237 */
+      /* ../lib/standard/kernel.nit:244 */
       REGB4 = TAG_Bool(UNTAG_Int(REGB3)>UNTAG_Int(REGB2));
       /* ../lib/standard/string_search.nit:160 */
       if (UNTAG_Bool(REGB4)) {
-        /* ../lib/standard/kernel.nit:238 */
+        /* ../lib/standard/kernel.nit:245 */
         REGB4 = TAG_Int(UNTAG_Int(REGB3)+UNTAG_Int(REGB0));
         /* ../lib/standard/string_search.nit:160 */
         REGB5 = TAG_Int(1);
-        /* ../lib/standard/kernel.nit:240 */
+        /* ../lib/standard/kernel.nit:247 */
         REGB5 = TAG_Int(UNTAG_Int(REGB4)-UNTAG_Int(REGB5));
         REGB5 = TAG_Int(UNTAG_Int(REGB5)-UNTAG_Int(REGB1));
-        /* ../lib/standard/collection/array.nit:278 */
+        /* ../lib/standard/collection/array.nit:279 */
         fra.me.REG[2] = fra.me.REG[0];
-        /* ../lib/standard/collection/array.nit:280 */
+        /* ../lib/standard/collection/array.nit:281 */
         REGB4 = TAG_Int(0);
         REGB6 = TAG_Bool(VAL_ISA(REGB4, VTCOLOR_standard___kernel___Comparable___OTHER(REGB5), VTID_standard___kernel___Comparable___OTHER(REGB5))) /*cast OTHER*/;
         if (UNTAG_Bool(REGB6)) {
         } else {
           nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
         }
-        /* ../lib/standard/kernel.nit:236 */
+        /* ../lib/standard/kernel.nit:243 */
         REGB4 = TAG_Bool(UNTAG_Int(REGB5)>=UNTAG_Int(REGB4));
-        /* ../lib/standard/collection/array.nit:280 */
+        /* ../lib/standard/collection/array.nit:281 */
         if (UNTAG_Bool(REGB4)) {
           REGB4 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2])!=NIT_NULL);
           if (UNTAG_Bool(REGB4)) {
           } else {
-            nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 280);
+            nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 281);
           }
           REGB4 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2]);
           REGB6 = TAG_Bool(VAL_ISA(REGB4, VTCOLOR_standard___kernel___Comparable___OTHER(REGB5), VTID_standard___kernel___Comparable___OTHER(REGB5))) /*cast OTHER*/;
@@ -782,29 +782,29 @@ val_t standard___string_search___BM_Pattern___suffixes(val_t p0){
           } else {
             nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
           }
-          /* ../lib/standard/kernel.nit:235 */
+          /* ../lib/standard/kernel.nit:242 */
           REGB4 = TAG_Bool(UNTAG_Int(REGB5)<UNTAG_Int(REGB4));
         } else {
-          /* ../lib/standard/collection/array.nit:280 */
+          /* ../lib/standard/collection/array.nit:281 */
           REGB6 = TAG_Bool(0);
           REGB4 = REGB6;
         }
         if (UNTAG_Bool(REGB4)) {
         } else {
-          nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 280);
+          nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 281);
         }
-        /* ../lib/standard/collection/array.nit:281 */
+        /* ../lib/standard/collection/array.nit:282 */
         fra.me.REG[2] = ATTR_standard___collection___array___Array____items(fra.me.REG[2]);
         REGB4 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
         if (UNTAG_Bool(REGB4)) {
-          nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
+          nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 282);
         }
-        /* ../lib/standard/collection/array.nit:724 */
+        /* ../lib/standard/collection/array.nit:725 */
         fra.me.REG[2] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB5)];
-        /* ../lib/standard/collection/array.nit:281 */
+        /* ../lib/standard/collection/array.nit:282 */
         goto label1;
         label1: while(0);
-        /* ../lib/standard/kernel.nit:240 */
+        /* ../lib/standard/kernel.nit:247 */
         REGB5 = TAG_Int(UNTAG_Int(REGB3)-UNTAG_Int(REGB2));
         /* ../lib/standard/string_search.nit:160 */
         REGB4 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
@@ -816,7 +816,7 @@ val_t standard___string_search___BM_Pattern___suffixes(val_t p0){
         } else {
           nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
         }
-        /* ../lib/standard/kernel.nit:235 */
+        /* ../lib/standard/kernel.nit:242 */
         REGB5 = TAG_Bool(UNTAG_Int(fra.me.REG[2])<UNTAG_Int(REGB5));
       } else {
         /* ../lib/standard/string_search.nit:160 */
@@ -824,30 +824,30 @@ val_t standard___string_search___BM_Pattern___suffixes(val_t p0){
         REGB5 = REGB4;
       }
       if (UNTAG_Bool(REGB5)) {
-        /* ../lib/standard/kernel.nit:238 */
+        /* ../lib/standard/kernel.nit:245 */
         REGB5 = TAG_Int(UNTAG_Int(REGB3)+UNTAG_Int(REGB0));
         /* ../lib/standard/string_search.nit:161 */
         REGB4 = TAG_Int(1);
-        /* ../lib/standard/kernel.nit:240 */
+        /* ../lib/standard/kernel.nit:247 */
         REGB4 = TAG_Int(UNTAG_Int(REGB5)-UNTAG_Int(REGB4));
         REGB4 = TAG_Int(UNTAG_Int(REGB4)-UNTAG_Int(REGB1));
-        /* ../lib/standard/collection/array.nit:278 */
+        /* ../lib/standard/collection/array.nit:279 */
         fra.me.REG[2] = fra.me.REG[0];
-        /* ../lib/standard/collection/array.nit:280 */
+        /* ../lib/standard/collection/array.nit:281 */
         REGB5 = TAG_Int(0);
         REGB6 = TAG_Bool(VAL_ISA(REGB5, VTCOLOR_standard___kernel___Comparable___OTHER(REGB4), VTID_standard___kernel___Comparable___OTHER(REGB4))) /*cast OTHER*/;
         if (UNTAG_Bool(REGB6)) {
         } else {
           nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
         }
-        /* ../lib/standard/kernel.nit:236 */
+        /* ../lib/standard/kernel.nit:243 */
         REGB5 = TAG_Bool(UNTAG_Int(REGB4)>=UNTAG_Int(REGB5));
-        /* ../lib/standard/collection/array.nit:280 */
+        /* ../lib/standard/collection/array.nit:281 */
         if (UNTAG_Bool(REGB5)) {
           REGB5 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2])!=NIT_NULL);
           if (UNTAG_Bool(REGB5)) {
           } else {
-            nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 280);
+            nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 281);
           }
           REGB5 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2]);
           REGB6 = TAG_Bool(VAL_ISA(REGB5, VTCOLOR_standard___kernel___Comparable___OTHER(REGB4), VTID_standard___kernel___Comparable___OTHER(REGB4))) /*cast OTHER*/;
@@ -855,26 +855,26 @@ val_t standard___string_search___BM_Pattern___suffixes(val_t p0){
           } else {
             nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
           }
-          /* ../lib/standard/kernel.nit:235 */
+          /* ../lib/standard/kernel.nit:242 */
           REGB5 = TAG_Bool(UNTAG_Int(REGB4)<UNTAG_Int(REGB5));
         } else {
-          /* ../lib/standard/collection/array.nit:280 */
+          /* ../lib/standard/collection/array.nit:281 */
           REGB6 = TAG_Bool(0);
           REGB5 = REGB6;
         }
         if (UNTAG_Bool(REGB5)) {
         } else {
-          nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 280);
+          nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 281);
         }
-        /* ../lib/standard/collection/array.nit:281 */
+        /* ../lib/standard/collection/array.nit:282 */
         fra.me.REG[2] = ATTR_standard___collection___array___Array____items(fra.me.REG[2]);
         REGB5 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
         if (UNTAG_Bool(REGB5)) {
-          nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
+          nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 282);
         }
-        /* ../lib/standard/collection/array.nit:724 */
+        /* ../lib/standard/collection/array.nit:725 */
         fra.me.REG[2] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB4)];
-        /* ../lib/standard/collection/array.nit:281 */
+        /* ../lib/standard/collection/array.nit:282 */
         goto label2;
         label2: while(0);
         /* ../lib/standard/string_search.nit:161 */
@@ -885,7 +885,7 @@ val_t standard___string_search___BM_Pattern___suffixes(val_t p0){
         } else {
           nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
         }
-        /* ../lib/standard/kernel.nit:235 */
+        /* ../lib/standard/kernel.nit:242 */
         REGB4 = TAG_Bool(UNTAG_Int(REGB3)<UNTAG_Int(REGB2));
         /* ../lib/standard/string_search.nit:163 */
         if (UNTAG_Bool(REGB4)) {
@@ -901,16 +901,16 @@ val_t standard___string_search___BM_Pattern___suffixes(val_t p0){
           } else {
             nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
           }
-          /* ../lib/standard/kernel.nit:236 */
+          /* ../lib/standard/kernel.nit:243 */
           REGB4 = TAG_Bool(UNTAG_Int(REGB2)>=UNTAG_Int(REGB4));
           /* ../lib/standard/string_search.nit:165 */
           if (UNTAG_Bool(REGB4)) {
             REGB4 = CALL_standard___collection___abstract_collection___SequenceRead_____bra(fra.me.REG[1])(fra.me.REG[1], REGB2);
-            /* ../lib/standard/kernel.nit:238 */
+            /* ../lib/standard/kernel.nit:245 */
             REGB5 = TAG_Int(UNTAG_Int(REGB2)+UNTAG_Int(REGB0));
             /* ../lib/standard/string_search.nit:165 */
             REGB6 = TAG_Int(1);
-            /* ../lib/standard/kernel.nit:240 */
+            /* ../lib/standard/kernel.nit:247 */
             REGB6 = TAG_Int(UNTAG_Int(REGB5)-UNTAG_Int(REGB6));
             REGB6 = TAG_Int(UNTAG_Int(REGB6)-UNTAG_Int(REGB1));
             /* ../lib/standard/string_search.nit:165 */
@@ -918,7 +918,7 @@ val_t standard___string_search___BM_Pattern___suffixes(val_t p0){
             REGB5 = TAG_Bool(IS_EQUAL_OO(REGB4,REGB6));
             if (UNTAG_Bool(REGB5)) {
             } else {
-              /* ../lib/standard/kernel.nit:381 */
+              /* ../lib/standard/kernel.nit:434 */
               REGB6 = TAG_Bool((REGB4)==(REGB6));
               /* ../lib/standard/string_search.nit:165 */
               REGB5 = REGB6;
@@ -929,7 +929,7 @@ val_t standard___string_search___BM_Pattern___suffixes(val_t p0){
           }
           if (UNTAG_Bool(REGB5)) {
             REGB5 = TAG_Int(1);
-            /* ../lib/standard/kernel.nit:240 */
+            /* ../lib/standard/kernel.nit:247 */
             REGB5 = TAG_Int(UNTAG_Int(REGB2)-UNTAG_Int(REGB5));
             /* ../lib/standard/string_search.nit:165 */
             REGB2 = REGB5;
@@ -938,14 +938,14 @@ val_t standard___string_search___BM_Pattern___suffixes(val_t p0){
           }
         }
         label3: while(0);
-        /* ../lib/standard/kernel.nit:240 */
+        /* ../lib/standard/kernel.nit:247 */
         REGB5 = TAG_Int(UNTAG_Int(REGB1)-UNTAG_Int(REGB2));
         /* ../lib/standard/string_search.nit:166 */
         CALL_standard___collection___abstract_collection___Sequence_____braeq(fra.me.REG[0])(fra.me.REG[0], REGB3, REGB5);
       }
       /* ../lib/standard/string_search.nit:168 */
       REGB5 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:240 */
+      /* ../lib/standard/kernel.nit:247 */
       REGB5 = TAG_Int(UNTAG_Int(REGB3)-UNTAG_Int(REGB5));
       /* ../lib/standard/string_search.nit:168 */
       REGB3 = REGB5;
@@ -1009,7 +1009,7 @@ void standard___string_search___BM_Pattern___compute_gs(val_t p0){
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:242 */
     REGB2 = TAG_Bool(UNTAG_Int(REGB1)<UNTAG_Int(REGB0));
     /* ../lib/standard/string_search.nit:179 */
     if (UNTAG_Bool(REGB2)) {
@@ -1023,7 +1023,7 @@ void standard___string_search___BM_Pattern___compute_gs(val_t p0){
       CALL_standard___collection___abstract_collection___Sequence_____braeq(fra.me.REG[2])(fra.me.REG[2], REGB1, REGB0);
       /* ../lib/standard/string_search.nit:181 */
       REGB2 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB2 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB2));
       /* ../lib/standard/string_search.nit:181 */
       REGB1 = REGB2;
@@ -1037,33 +1037,33 @@ void standard___string_search___BM_Pattern___compute_gs(val_t p0){
   REGB2 = TAG_Int(0);
   /* ../lib/standard/string_search.nit:184 */
   REGB3 = TAG_Int(1);
-  /* ../lib/standard/kernel.nit:240 */
+  /* ../lib/standard/kernel.nit:247 */
   REGB3 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB3));
   /* ../lib/standard/string_search.nit:184 */
   REGB1 = REGB3;
   /* ../lib/standard/string_search.nit:185 */
   while(1) {
     REGB3 = TAG_Int(1);
-    /* ../lib/standard/kernel.nit:239 */
+    /* ../lib/standard/kernel.nit:246 */
     REGB3 = TAG_Int(-UNTAG_Int(REGB3));
     REGB4 = TAG_Bool(VAL_ISA(REGB3, VTCOLOR_standard___kernel___Comparable___OTHER(REGB1), VTID_standard___kernel___Comparable___OTHER(REGB1))) /*cast OTHER*/;
     if (UNTAG_Bool(REGB4)) {
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:236 */
+    /* ../lib/standard/kernel.nit:243 */
     REGB3 = TAG_Bool(UNTAG_Int(REGB1)>=UNTAG_Int(REGB3));
     /* ../lib/standard/string_search.nit:185 */
     if (UNTAG_Bool(REGB3)) {
       /* ../lib/standard/string_search.nit:186 */
       REGB3 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:239 */
+      /* ../lib/standard/kernel.nit:246 */
       REGB3 = TAG_Int(-UNTAG_Int(REGB3));
       /* ../lib/standard/string_search.nit:186 */
       REGB4 = TAG_Bool(IS_EQUAL_OO(REGB1,REGB3));
       if (UNTAG_Bool(REGB4)) {
       } else {
-        /* ../lib/standard/kernel.nit:230 */
+        /* ../lib/standard/kernel.nit:237 */
         REGB3 = TAG_Bool((REGB1)==(REGB3));
         /* ../lib/standard/string_search.nit:186 */
         REGB4 = REGB3;
@@ -1071,24 +1071,24 @@ void standard___string_search___BM_Pattern___compute_gs(val_t p0){
       if (UNTAG_Bool(REGB4)) {
         REGB4 = TAG_Bool(1);
       } else {
-        /* ../lib/standard/collection/array.nit:278 */
+        /* ../lib/standard/collection/array.nit:279 */
         fra.me.REG[2] = fra.me.REG[1];
         REGB3 = REGB1;
-        /* ../lib/standard/collection/array.nit:280 */
+        /* ../lib/standard/collection/array.nit:281 */
         REGB5 = TAG_Int(0);
         REGB6 = TAG_Bool(VAL_ISA(REGB5, VTCOLOR_standard___kernel___Comparable___OTHER(REGB3), VTID_standard___kernel___Comparable___OTHER(REGB3))) /*cast OTHER*/;
         if (UNTAG_Bool(REGB6)) {
         } else {
           nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
         }
-        /* ../lib/standard/kernel.nit:236 */
+        /* ../lib/standard/kernel.nit:243 */
         REGB5 = TAG_Bool(UNTAG_Int(REGB3)>=UNTAG_Int(REGB5));
-        /* ../lib/standard/collection/array.nit:280 */
+        /* ../lib/standard/collection/array.nit:281 */
         if (UNTAG_Bool(REGB5)) {
           REGB5 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2])!=NIT_NULL);
           if (UNTAG_Bool(REGB5)) {
           } else {
-            nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 280);
+            nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 281);
           }
           REGB5 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2]);
           REGB6 = TAG_Bool(VAL_ISA(REGB5, VTCOLOR_standard___kernel___Comparable___OTHER(REGB3), VTID_standard___kernel___Comparable___OTHER(REGB3))) /*cast OTHER*/;
@@ -1096,31 +1096,31 @@ void standard___string_search___BM_Pattern___compute_gs(val_t p0){
           } else {
             nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
           }
-          /* ../lib/standard/kernel.nit:235 */
+          /* ../lib/standard/kernel.nit:242 */
           REGB5 = TAG_Bool(UNTAG_Int(REGB3)<UNTAG_Int(REGB5));
         } else {
-          /* ../lib/standard/collection/array.nit:280 */
+          /* ../lib/standard/collection/array.nit:281 */
           REGB6 = TAG_Bool(0);
           REGB5 = REGB6;
         }
         if (UNTAG_Bool(REGB5)) {
         } else {
-          nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 280);
+          nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 281);
         }
-        /* ../lib/standard/collection/array.nit:281 */
+        /* ../lib/standard/collection/array.nit:282 */
         fra.me.REG[2] = ATTR_standard___collection___array___Array____items(fra.me.REG[2]);
         REGB5 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
         if (UNTAG_Bool(REGB5)) {
-          nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
+          nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 282);
         }
-        /* ../lib/standard/collection/array.nit:724 */
+        /* ../lib/standard/collection/array.nit:725 */
         fra.me.REG[2] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB3)];
-        /* ../lib/standard/collection/array.nit:281 */
+        /* ../lib/standard/collection/array.nit:282 */
         goto label2;
         label2: while(0);
         /* ../lib/standard/string_search.nit:186 */
         REGB3 = TAG_Int(1);
-        /* ../lib/standard/kernel.nit:238 */
+        /* ../lib/standard/kernel.nit:245 */
         REGB3 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB3));
         /* ../lib/standard/string_search.nit:186 */
         REGB5 = TAG_Bool(IS_EQUAL_ON(REGB3,fra.me.REG[2]));
@@ -1131,7 +1131,7 @@ void standard___string_search___BM_Pattern___compute_gs(val_t p0){
             REGB6 = TAG_Bool(0);
             REGB5 = REGB6;
           } else {
-            /* ../lib/standard/kernel.nit:230 */
+            /* ../lib/standard/kernel.nit:237 */
             REGB3 = TAG_Bool((fra.me.REG[2])==(REGB3));
             /* ../lib/standard/string_search.nit:186 */
             REGB5 = REGB3;
@@ -1143,7 +1143,7 @@ void standard___string_search___BM_Pattern___compute_gs(val_t p0){
         /* ../lib/standard/string_search.nit:187 */
         while(1) {
           REGB4 = TAG_Int(1);
-          /* ../lib/standard/kernel.nit:240 */
+          /* ../lib/standard/kernel.nit:247 */
           REGB4 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB4));
           REGB4 = TAG_Int(UNTAG_Int(REGB4)-UNTAG_Int(REGB1));
           REGB5 = TAG_Bool(VAL_ISA(REGB4, VTCOLOR_standard___kernel___Comparable___OTHER(REGB2), VTID_standard___kernel___Comparable___OTHER(REGB2))) /*cast OTHER*/;
@@ -1151,7 +1151,7 @@ void standard___string_search___BM_Pattern___compute_gs(val_t p0){
           } else {
             nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
           }
-          /* ../lib/standard/kernel.nit:235 */
+          /* ../lib/standard/kernel.nit:242 */
           REGB4 = TAG_Bool(UNTAG_Int(REGB2)<UNTAG_Int(REGB4));
           /* ../lib/standard/string_search.nit:187 */
           if (UNTAG_Bool(REGB4)) {
@@ -1162,23 +1162,23 @@ void standard___string_search___BM_Pattern___compute_gs(val_t p0){
               nit_abort("Uninitialized attribute %s", "_gs", LOCATE_standard___string_search, 188);
             }
             fra.me.REG[2] = ATTR_standard___string_search___BM_Pattern____gs(fra.me.REG[0]);
-            /* ../lib/standard/collection/array.nit:278 */
+            /* ../lib/standard/collection/array.nit:279 */
             REGB4 = REGB2;
-            /* ../lib/standard/collection/array.nit:280 */
+            /* ../lib/standard/collection/array.nit:281 */
             REGB5 = TAG_Int(0);
             REGB3 = TAG_Bool(VAL_ISA(REGB5, VTCOLOR_standard___kernel___Comparable___OTHER(REGB4), VTID_standard___kernel___Comparable___OTHER(REGB4))) /*cast OTHER*/;
             if (UNTAG_Bool(REGB3)) {
             } else {
               nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
             }
-            /* ../lib/standard/kernel.nit:236 */
+            /* ../lib/standard/kernel.nit:243 */
             REGB5 = TAG_Bool(UNTAG_Int(REGB4)>=UNTAG_Int(REGB5));
-            /* ../lib/standard/collection/array.nit:280 */
+            /* ../lib/standard/collection/array.nit:281 */
             if (UNTAG_Bool(REGB5)) {
               REGB5 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2])!=NIT_NULL);
               if (UNTAG_Bool(REGB5)) {
               } else {
-		nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 280);
+		nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 281);
               }
               REGB5 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2]);
               REGB3 = TAG_Bool(VAL_ISA(REGB5, VTCOLOR_standard___kernel___Comparable___OTHER(REGB4), VTID_standard___kernel___Comparable___OTHER(REGB4))) /*cast OTHER*/;
@@ -1186,26 +1186,26 @@ void standard___string_search___BM_Pattern___compute_gs(val_t p0){
               } else {
 		nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
               }
-              /* ../lib/standard/kernel.nit:235 */
+              /* ../lib/standard/kernel.nit:242 */
               REGB5 = TAG_Bool(UNTAG_Int(REGB4)<UNTAG_Int(REGB5));
             } else {
-              /* ../lib/standard/collection/array.nit:280 */
+              /* ../lib/standard/collection/array.nit:281 */
               REGB3 = TAG_Bool(0);
               REGB5 = REGB3;
             }
             if (UNTAG_Bool(REGB5)) {
             } else {
-              nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 280);
+              nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 281);
             }
-            /* ../lib/standard/collection/array.nit:281 */
+            /* ../lib/standard/collection/array.nit:282 */
             fra.me.REG[2] = ATTR_standard___collection___array___Array____items(fra.me.REG[2]);
             REGB5 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
             if (UNTAG_Bool(REGB5)) {
-              nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
+              nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 282);
             }
-            /* ../lib/standard/collection/array.nit:724 */
+            /* ../lib/standard/collection/array.nit:725 */
             fra.me.REG[2] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB4)];
-            /* ../lib/standard/collection/array.nit:281 */
+            /* ../lib/standard/collection/array.nit:282 */
             goto label3;
             label3: while(0);
             /* ../lib/standard/string_search.nit:188 */
@@ -1217,7 +1217,7 @@ void standard___string_search___BM_Pattern___compute_gs(val_t p0){
 		REGB5 = TAG_Bool(0);
 		REGB4 = REGB5;
               } else {
-		/* ../lib/standard/kernel.nit:230 */
+		/* ../lib/standard/kernel.nit:237 */
 		REGB5 = TAG_Bool((fra.me.REG[2])==(REGB0));
 		/* ../lib/standard/string_search.nit:188 */
 		REGB4 = REGB5;
@@ -1231,7 +1231,7 @@ void standard___string_search___BM_Pattern___compute_gs(val_t p0){
               }
               fra.me.REG[2] = ATTR_standard___string_search___BM_Pattern____gs(fra.me.REG[0]);
               REGB4 = TAG_Int(1);
-              /* ../lib/standard/kernel.nit:240 */
+              /* ../lib/standard/kernel.nit:247 */
               REGB4 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB4));
               REGB4 = TAG_Int(UNTAG_Int(REGB4)-UNTAG_Int(REGB1));
               /* ../lib/standard/string_search.nit:188 */
@@ -1239,7 +1239,7 @@ void standard___string_search___BM_Pattern___compute_gs(val_t p0){
             }
             /* ../lib/standard/string_search.nit:189 */
             REGB4 = TAG_Int(1);
-            /* ../lib/standard/kernel.nit:238 */
+            /* ../lib/standard/kernel.nit:245 */
             REGB4 = TAG_Int(UNTAG_Int(REGB2)+UNTAG_Int(REGB4));
             /* ../lib/standard/string_search.nit:189 */
             REGB2 = REGB4;
@@ -1252,7 +1252,7 @@ void standard___string_search___BM_Pattern___compute_gs(val_t p0){
       }
       /* ../lib/standard/string_search.nit:192 */
       REGB4 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:240 */
+      /* ../lib/standard/kernel.nit:247 */
       REGB4 = TAG_Int(UNTAG_Int(REGB1)-UNTAG_Int(REGB4));
       /* ../lib/standard/string_search.nit:192 */
       REGB1 = REGB4;
@@ -1268,14 +1268,14 @@ void standard___string_search___BM_Pattern___compute_gs(val_t p0){
   /* ../lib/standard/string_search.nit:195 */
   while(1) {
     REGB2 = TAG_Int(1);
-    /* ../lib/standard/kernel.nit:240 */
+    /* ../lib/standard/kernel.nit:247 */
     REGB2 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB2));
     REGB4 = TAG_Bool(VAL_ISA(REGB2, VTCOLOR_standard___kernel___Comparable___OTHER(REGB1), VTID_standard___kernel___Comparable___OTHER(REGB1))) /*cast OTHER*/;
     if (UNTAG_Bool(REGB4)) {
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:242 */
     REGB2 = TAG_Bool(UNTAG_Int(REGB1)<UNTAG_Int(REGB2));
     /* ../lib/standard/string_search.nit:195 */
     if (UNTAG_Bool(REGB2)) {
@@ -1287,26 +1287,26 @@ void standard___string_search___BM_Pattern___compute_gs(val_t p0){
       }
       fra.me.REG[2] = ATTR_standard___string_search___BM_Pattern____gs(fra.me.REG[0]);
       REGB2 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:240 */
+      /* ../lib/standard/kernel.nit:247 */
       REGB2 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB2));
-      /* ../lib/standard/collection/array.nit:278 */
+      /* ../lib/standard/collection/array.nit:279 */
       fra.me.REG[3] = fra.me.REG[1];
       REGB4 = REGB1;
-      /* ../lib/standard/collection/array.nit:280 */
+      /* ../lib/standard/collection/array.nit:281 */
       REGB5 = TAG_Int(0);
       REGB3 = TAG_Bool(VAL_ISA(REGB5, VTCOLOR_standard___kernel___Comparable___OTHER(REGB4), VTID_standard___kernel___Comparable___OTHER(REGB4))) /*cast OTHER*/;
       if (UNTAG_Bool(REGB3)) {
       } else {
         nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
       }
-      /* ../lib/standard/kernel.nit:236 */
+      /* ../lib/standard/kernel.nit:243 */
       REGB5 = TAG_Bool(UNTAG_Int(REGB4)>=UNTAG_Int(REGB5));
-      /* ../lib/standard/collection/array.nit:280 */
+      /* ../lib/standard/collection/array.nit:281 */
       if (UNTAG_Bool(REGB5)) {
         REGB5 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[3])!=NIT_NULL);
         if (UNTAG_Bool(REGB5)) {
         } else {
-          nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 280);
+          nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 281);
         }
         REGB5 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[3]);
         REGB3 = TAG_Bool(VAL_ISA(REGB5, VTCOLOR_standard___kernel___Comparable___OTHER(REGB4), VTID_standard___kernel___Comparable___OTHER(REGB4))) /*cast OTHER*/;
@@ -1314,40 +1314,40 @@ void standard___string_search___BM_Pattern___compute_gs(val_t p0){
         } else {
           nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
         }
-        /* ../lib/standard/kernel.nit:235 */
+        /* ../lib/standard/kernel.nit:242 */
         REGB5 = TAG_Bool(UNTAG_Int(REGB4)<UNTAG_Int(REGB5));
       } else {
-        /* ../lib/standard/collection/array.nit:280 */
+        /* ../lib/standard/collection/array.nit:281 */
         REGB3 = TAG_Bool(0);
         REGB5 = REGB3;
       }
       if (UNTAG_Bool(REGB5)) {
       } else {
-        nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 280);
+        nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 281);
       }
-      /* ../lib/standard/collection/array.nit:281 */
+      /* ../lib/standard/collection/array.nit:282 */
       fra.me.REG[3] = ATTR_standard___collection___array___Array____items(fra.me.REG[3]);
       REGB5 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
       if (UNTAG_Bool(REGB5)) {
-        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
+        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 282);
       }
-      /* ../lib/standard/collection/array.nit:724 */
+      /* ../lib/standard/collection/array.nit:725 */
       fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB4)];
-      /* ../lib/standard/collection/array.nit:281 */
+      /* ../lib/standard/collection/array.nit:282 */
       goto label6;
       label6: while(0);
-      /* ../lib/standard/kernel.nit:240 */
+      /* ../lib/standard/kernel.nit:247 */
       REGB2 = TAG_Int(UNTAG_Int(REGB2)-UNTAG_Int(fra.me.REG[3]));
       /* ../lib/standard/string_search.nit:196 */
       REGB4 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:240 */
+      /* ../lib/standard/kernel.nit:247 */
       REGB4 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB4));
       REGB4 = TAG_Int(UNTAG_Int(REGB4)-UNTAG_Int(REGB1));
       /* ../lib/standard/string_search.nit:196 */
       CALL_standard___collection___abstract_collection___Sequence_____braeq(fra.me.REG[2])(fra.me.REG[2], REGB2, REGB4);
       /* ../lib/standard/string_search.nit:197 */
       REGB4 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB4 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB4));
       /* ../lib/standard/string_search.nit:197 */
       REGB1 = REGB4;
@@ -1360,6 +1360,80 @@ void standard___string_search___BM_Pattern___compute_gs(val_t p0){
   stack_frame_head = fra.me.prev;
   return;
 }
+static const char LOCATE_standard___string_search___BM_Pattern___hash[] = "string_search::BM_Pattern::(hash::Object::hash)";
+val_t standard___string_search___BM_Pattern___hash(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_standard___string_search;
+  fra.me.line = 201;
+  fra.me.meth = LOCATE_standard___string_search___BM_Pattern___hash;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 1;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  /* ../lib/standard/string_search.nit:201 */
+  REGB0 = TAG_Bool(ATTR_standard___string_search___BM_Pattern____motif(fra.me.REG[0])!=NIT_NULL);
+  if (UNTAG_Bool(REGB0)) {
+  } else {
+    nit_abort("Uninitialized attribute %s", "_motif", LOCATE_standard___string_search, 201);
+  }
+  fra.me.REG[0] = ATTR_standard___string_search___BM_Pattern____motif(fra.me.REG[0]);
+  REGB0 = CALL_standard___hash___Object___hash(fra.me.REG[0])(fra.me.REG[0]);
+  goto label1;
+  label1: while(0);
+  stack_frame_head = fra.me.prev;
+  return REGB0;
+}
+static const char LOCATE_standard___string_search___BM_Pattern_____eqeq[] = "string_search::BM_Pattern::(kernel::Object::==)";
+val_t standard___string_search___BM_Pattern_____eqeq(val_t p0, val_t p1){
+  struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
+  val_t REGB0;
+  val_t REGB1;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_standard___string_search;
+  fra.me.line = 202;
+  fra.me.meth = LOCATE_standard___string_search___BM_Pattern_____eqeq;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 2;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  fra.me.REG[1] = p1;
+  /* ../lib/standard/string_search.nit:202 */
+  REGB0 = TAG_Bool((fra.me.REG[1]!=NIT_NULL) && VAL_ISA(fra.me.REG[1], COLOR_standard___string_search___BM_Pattern, ID_standard___string_search___BM_Pattern)) /*cast BM_Pattern*/;
+  if (UNTAG_Bool(REGB0)) {
+    REGB0 = TAG_Bool(ATTR_standard___string_search___BM_Pattern____motif(fra.me.REG[1])!=NIT_NULL);
+    if (UNTAG_Bool(REGB0)) {
+    } else {
+      nit_abort("Uninitialized attribute %s", "_motif", LOCATE_standard___string_search, 202);
+    }
+    fra.me.REG[1] = ATTR_standard___string_search___BM_Pattern____motif(fra.me.REG[1]);
+    REGB0 = TAG_Bool(ATTR_standard___string_search___BM_Pattern____motif(fra.me.REG[0])!=NIT_NULL);
+    if (UNTAG_Bool(REGB0)) {
+    } else {
+      nit_abort("Uninitialized attribute %s", "_motif", LOCATE_standard___string_search, 202);
+    }
+    fra.me.REG[0] = ATTR_standard___string_search___BM_Pattern____motif(fra.me.REG[0]);
+    REGB0 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[1],fra.me.REG[0]));
+    if (UNTAG_Bool(REGB0)) {
+    } else {
+      REGB1 = CALL_standard___kernel___Object_____eqeq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
+      REGB0 = REGB1;
+    }
+  } else {
+    REGB1 = TAG_Bool(0);
+    REGB0 = REGB1;
+  }
+  goto label1;
+  label1: while(0);
+  stack_frame_head = fra.me.prev;
+  return REGB0;
+}
 static const char LOCATE_standard___string_search___Match___string[] = "string_search::Match::string";
 val_t standard___string_search___Match___string(val_t p0){
   struct {struct stack_frame_t me;} fra;
@@ -1367,18 +1441,18 @@ val_t standard___string_search___Match___string(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___string_search;
-  fra.me.line = 204;
+  fra.me.line = 207;
   fra.me.meth = LOCATE_standard___string_search___Match___string;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ../lib/standard/string_search.nit:204 */
+  /* ../lib/standard/string_search.nit:207 */
   REGB0 = TAG_Bool(ATTR_standard___string_search___Match____string(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_string", LOCATE_standard___string_search, 204);
+    nit_abort("Uninitialized attribute %s", "_string", LOCATE_standard___string_search, 207);
   }
   fra.me.REG[0] = ATTR_standard___string_search___Match____string(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1391,18 +1465,18 @@ val_t standard___string_search___Match___from(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___string_search;
-  fra.me.line = 207;
+  fra.me.line = 210;
   fra.me.meth = LOCATE_standard___string_search___Match___from;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ../lib/standard/string_search.nit:207 */
+  /* ../lib/standard/string_search.nit:210 */
   REGB0 = TAG_Bool(ATTR_standard___string_search___Match____from(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_from", LOCATE_standard___string_search, 207);
+    nit_abort("Uninitialized attribute %s", "_from", LOCATE_standard___string_search, 210);
   }
   REGB0 = ATTR_standard___string_search___Match____from(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1415,18 +1489,18 @@ val_t standard___string_search___Match___length(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___string_search;
-  fra.me.line = 210;
+  fra.me.line = 213;
   fra.me.meth = LOCATE_standard___string_search___Match___length;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ../lib/standard/string_search.nit:210 */
+  /* ../lib/standard/string_search.nit:213 */
   REGB0 = TAG_Bool(ATTR_standard___string_search___Match____length(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___string_search, 210);
+    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___string_search, 213);
   }
   REGB0 = ATTR_standard___string_search___Match____length(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1440,29 +1514,29 @@ val_t standard___string_search___Match___after(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___string_search;
-  fra.me.line = 213;
+  fra.me.line = 216;
   fra.me.meth = LOCATE_standard___string_search___Match___after;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ../lib/standard/string_search.nit:215 */
+  /* ../lib/standard/string_search.nit:218 */
   REGB0 = TAG_Bool(ATTR_standard___string_search___Match____from(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_from", LOCATE_standard___string_search, 215);
+    nit_abort("Uninitialized attribute %s", "_from", LOCATE_standard___string_search, 218);
   }
   REGB0 = ATTR_standard___string_search___Match____from(fra.me.REG[0]);
   REGB1 = TAG_Bool(ATTR_standard___string_search___Match____length(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___string_search, 215);
+    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___string_search, 218);
   }
   REGB1 = ATTR_standard___string_search___Match____length(fra.me.REG[0]);
-  /* ../lib/standard/kernel.nit:238 */
+  /* ../lib/standard/kernel.nit:245 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
-  /* ../lib/standard/string_search.nit:215 */
+  /* ../lib/standard/string_search.nit:218 */
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
@@ -1476,7 +1550,7 @@ val_t standard___string_search___Match___to_s(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___string_search;
-  fra.me.line = 217;
+  fra.me.line = 220;
   fra.me.meth = LOCATE_standard___string_search___Match___to_s;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1484,23 +1558,23 @@ val_t standard___string_search___Match___to_s(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ../lib/standard/string_search.nit:218 */
+  /* ../lib/standard/string_search.nit:221 */
   REGB0 = TAG_Bool(ATTR_standard___string_search___Match____string(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_string", LOCATE_standard___string_search, 218);
+    nit_abort("Uninitialized attribute %s", "_string", LOCATE_standard___string_search, 221);
   }
   fra.me.REG[1] = ATTR_standard___string_search___Match____string(fra.me.REG[0]);
   REGB0 = TAG_Bool(ATTR_standard___string_search___Match____from(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_from", LOCATE_standard___string_search, 218);
+    nit_abort("Uninitialized attribute %s", "_from", LOCATE_standard___string_search, 221);
   }
   REGB0 = ATTR_standard___string_search___Match____from(fra.me.REG[0]);
   REGB1 = TAG_Bool(ATTR_standard___string_search___Match____length(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___string_search, 218);
+    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___string_search, 221);
   }
   REGB1 = ATTR_standard___string_search___Match____length(fra.me.REG[0]);
   fra.me.REG[1] = CALL_standard___string___AbstractString___substring(fra.me.REG[1])(fra.me.REG[1], REGB0, REGB1);
@@ -1522,7 +1596,7 @@ void standard___string_search___Match___init(val_t p0, val_t p1, val_t p2, val_t
   if (init_table[itpos1]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___string_search;
-  fra.me.line = 220;
+  fra.me.line = 223;
   fra.me.meth = LOCATE_standard___string_search___Match___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1533,35 +1607,35 @@ void standard___string_search___Match___init(val_t p0, val_t p1, val_t p2, val_t
   fra.me.REG[1] = p1;
   REGB0 = p2;
   REGB1 = p3;
-  /* ../lib/standard/string_search.nit:223 */
+  /* ../lib/standard/string_search.nit:226 */
   REGB2 = TAG_Int(0);
   REGB3 = TAG_Bool(VAL_ISA(REGB2, VTCOLOR_standard___kernel___Comparable___OTHER(REGB1), VTID_standard___kernel___Comparable___OTHER(REGB1))) /*cast OTHER*/;
   if (UNTAG_Bool(REGB3)) {
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:236 */
+  /* ../lib/standard/kernel.nit:243 */
   REGB2 = TAG_Bool(UNTAG_Int(REGB1)>=UNTAG_Int(REGB2));
-  /* ../lib/standard/string_search.nit:223 */
+  /* ../lib/standard/string_search.nit:226 */
   if (UNTAG_Bool(REGB2)) {
   } else {
-    nit_abort("Assert '%s' failed", "positive_length", LOCATE_standard___string_search, 223);
+    nit_abort("Assert '%s' failed", "positive_length", LOCATE_standard___string_search, 226);
   }
-  /* ../lib/standard/string_search.nit:224 */
+  /* ../lib/standard/string_search.nit:227 */
   REGB2 = TAG_Int(0);
   REGB3 = TAG_Bool(VAL_ISA(REGB2, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
   if (UNTAG_Bool(REGB3)) {
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:236 */
+  /* ../lib/standard/kernel.nit:243 */
   REGB2 = TAG_Bool(UNTAG_Int(REGB0)>=UNTAG_Int(REGB2));
-  /* ../lib/standard/string_search.nit:224 */
+  /* ../lib/standard/string_search.nit:227 */
   if (UNTAG_Bool(REGB2)) {
   } else {
-    nit_abort("Assert '%s' failed", "valid_from", LOCATE_standard___string_search, 224);
+    nit_abort("Assert '%s' failed", "valid_from", LOCATE_standard___string_search, 227);
   }
-  /* ../lib/standard/kernel.nit:238 */
+  /* ../lib/standard/kernel.nit:245 */
   REGB2 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
   /* ../lib/standard/collection/array.nit:24 */
   REGB3 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1])!=NIT_NULL);
@@ -1575,18 +1649,18 @@ void standard___string_search___Match___init(val_t p0, val_t p1, val_t p2, val_t
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:234 */
+  /* ../lib/standard/kernel.nit:241 */
   REGB3 = TAG_Bool(UNTAG_Int(REGB2)<=UNTAG_Int(REGB3));
-  /* ../lib/standard/string_search.nit:225 */
+  /* ../lib/standard/string_search.nit:228 */
   if (UNTAG_Bool(REGB3)) {
   } else {
-    nit_abort("Assert '%s' failed", "valid_after", LOCATE_standard___string_search, 225);
+    nit_abort("Assert '%s' failed", "valid_after", LOCATE_standard___string_search, 228);
   }
-  /* ../lib/standard/string_search.nit:226 */
+  /* ../lib/standard/string_search.nit:229 */
   ATTR_standard___string_search___Match____string(fra.me.REG[0]) = fra.me.REG[1];
-  /* ../lib/standard/string_search.nit:227 */
+  /* ../lib/standard/string_search.nit:230 */
   ATTR_standard___string_search___Match____from(fra.me.REG[0]) = REGB0;
-  /* ../lib/standard/string_search.nit:228 */
+  /* ../lib/standard/string_search.nit:231 */
   ATTR_standard___string_search___Match____length(fra.me.REG[0]) = REGB1;
   stack_frame_head = fra.me.prev;
   init_table[itpos1] = 1;
@@ -1603,7 +1677,7 @@ val_t standard___string_search___Char___search_index_in(val_t p0, val_t p1, val_
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___string_search;
-  fra.me.line = 235;
+  fra.me.line = 238;
   fra.me.meth = LOCATE_standard___string_search___Char___search_index_in;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
@@ -1619,48 +1693,48 @@ val_t standard___string_search___Char___search_index_in(val_t p0, val_t p1, val_
     nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
   }
   REGB2 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[0]);
-  /* ../lib/standard/string_search.nit:238 */
+  /* ../lib/standard/string_search.nit:241 */
   while(1) {
     REGB3 = TAG_Bool(VAL_ISA(REGB2, VTCOLOR_standard___kernel___Comparable___OTHER(REGB1), VTID_standard___kernel___Comparable___OTHER(REGB1))) /*cast OTHER*/;
     if (UNTAG_Bool(REGB3)) {
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:242 */
     REGB3 = TAG_Bool(UNTAG_Int(REGB1)<UNTAG_Int(REGB2));
-    /* ../lib/standard/string_search.nit:238 */
+    /* ../lib/standard/string_search.nit:241 */
     if (UNTAG_Bool(REGB3)) {
-      /* ../lib/standard/string_search.nit:239 */
+      /* ../lib/standard/string_search.nit:242 */
       REGB3 = CALL_standard___collection___abstract_collection___SequenceRead_____bra(fra.me.REG[0])(fra.me.REG[0], REGB1);
       REGB4 = TAG_Bool(IS_EQUAL_OO(REGB3,REGB0));
       if (UNTAG_Bool(REGB4)) {
       } else {
-        /* ../lib/standard/kernel.nit:381 */
+        /* ../lib/standard/kernel.nit:434 */
         REGB3 = TAG_Bool((REGB3)==(REGB0));
-        /* ../lib/standard/string_search.nit:239 */
+        /* ../lib/standard/string_search.nit:242 */
         REGB4 = REGB3;
       }
       if (UNTAG_Bool(REGB4)) {
         REGB4 = REGB1;
         goto label1;
       }
-      /* ../lib/standard/string_search.nit:240 */
+      /* ../lib/standard/string_search.nit:243 */
       REGB3 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB3 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB3));
-      /* ../lib/standard/string_search.nit:240 */
+      /* ../lib/standard/string_search.nit:243 */
       REGB1 = REGB3;
     } else {
-      /* ../lib/standard/string_search.nit:238 */
+      /* ../lib/standard/string_search.nit:241 */
       goto label2;
     }
   }
   label2: while(0);
-  /* ../lib/standard/string_search.nit:242 */
+  /* ../lib/standard/string_search.nit:245 */
   REGB1 = TAG_Int(1);
-  /* ../lib/standard/kernel.nit:239 */
+  /* ../lib/standard/kernel.nit:246 */
   REGB1 = TAG_Int(-UNTAG_Int(REGB1));
-  /* ../lib/standard/string_search.nit:242 */
+  /* ../lib/standard/string_search.nit:245 */
   REGB4 = REGB1;
   goto label1;
   label1: while(0);
@@ -1676,7 +1750,7 @@ val_t standard___string_search___Char___search_in(val_t p0, val_t p1, val_t p2){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___string_search;
-  fra.me.line = 245;
+  fra.me.line = 248;
   fra.me.meth = LOCATE_standard___string_search___Char___search_in;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1686,24 +1760,24 @@ val_t standard___string_search___Char___search_in(val_t p0, val_t p1, val_t p2){
   REGB0 = p0;
   fra.me.REG[0] = p1;
   REGB1 = p2;
-  /* ../lib/standard/string_search.nit:247 */
+  /* ../lib/standard/string_search.nit:250 */
   REGB1 = CALL_standard___string_search___Pattern___search_index_in(REGB0)(REGB0, fra.me.REG[0], REGB1);
-  /* ../lib/standard/string_search.nit:248 */
+  /* ../lib/standard/string_search.nit:251 */
   REGB0 = TAG_Int(0);
   REGB2 = TAG_Bool(VAL_ISA(REGB0, VTCOLOR_standard___kernel___Comparable___OTHER(REGB1), VTID_standard___kernel___Comparable___OTHER(REGB1))) /*cast OTHER*/;
   if (UNTAG_Bool(REGB2)) {
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:235 */
+  /* ../lib/standard/kernel.nit:242 */
   REGB0 = TAG_Bool(UNTAG_Int(REGB1)<UNTAG_Int(REGB0));
-  /* ../lib/standard/string_search.nit:248 */
+  /* ../lib/standard/string_search.nit:251 */
   if (UNTAG_Bool(REGB0)) {
-    /* ../lib/standard/string_search.nit:249 */
+    /* ../lib/standard/string_search.nit:252 */
     fra.me.REG[1] = NIT_NULL;
     goto label1;
   } else {
-    /* ../lib/standard/string_search.nit:251 */
+    /* ../lib/standard/string_search.nit:254 */
     REGB0 = TAG_Int(1);
     fra.me.REG[0] = NEW_Match_standard___string_search___Match___init(fra.me.REG[0], REGB1, REGB0);
     fra.me.REG[1] = fra.me.REG[0];
@@ -1725,7 +1799,7 @@ val_t standard___string_search___String___search_index_in(val_t p0, val_t p1, va
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___string_search;
-  fra.me.line = 259;
+  fra.me.line = 262;
   fra.me.meth = LOCATE_standard___string_search___String___search_index_in;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1735,19 +1809,19 @@ val_t standard___string_search___String___search_index_in(val_t p0, val_t p1, va
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   REGB0 = p2;
-  /* ../lib/standard/string_search.nit:261 */
+  /* ../lib/standard/string_search.nit:264 */
   REGB1 = TAG_Int(0);
   REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
   if (UNTAG_Bool(REGB2)) {
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:236 */
+  /* ../lib/standard/kernel.nit:243 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)>=UNTAG_Int(REGB1));
-  /* ../lib/standard/string_search.nit:261 */
+  /* ../lib/standard/string_search.nit:264 */
   if (UNTAG_Bool(REGB1)) {
   } else {
-    nit_abort("Assert failed", NULL, LOCATE_standard___string_search, 261);
+    nit_abort("Assert failed", NULL, LOCATE_standard___string_search, 264);
   }
   /* ../lib/standard/collection/array.nit:24 */
   REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1])!=NIT_NULL);
@@ -1762,22 +1836,22 @@ val_t standard___string_search___String___search_index_in(val_t p0, val_t p1, va
     nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
   }
   REGB2 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[0]);
-  /* ../lib/standard/kernel.nit:240 */
+  /* ../lib/standard/kernel.nit:247 */
   REGB2 = TAG_Int(UNTAG_Int(REGB1)-UNTAG_Int(REGB2));
-  /* ../lib/standard/string_search.nit:262 */
+  /* ../lib/standard/string_search.nit:265 */
   REGB1 = TAG_Int(1);
-  /* ../lib/standard/kernel.nit:238 */
+  /* ../lib/standard/kernel.nit:245 */
   REGB1 = TAG_Int(UNTAG_Int(REGB2)+UNTAG_Int(REGB1));
-  /* ../lib/standard/string_search.nit:263 */
+  /* ../lib/standard/string_search.nit:266 */
   while(1) {
     REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
     if (UNTAG_Bool(REGB2)) {
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:242 */
     REGB2 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-    /* ../lib/standard/string_search.nit:263 */
+    /* ../lib/standard/string_search.nit:266 */
     if (UNTAG_Bool(REGB2)) {
       /* ../lib/standard/collection/array.nit:24 */
       REGB2 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[0])!=NIT_NULL);
@@ -1786,11 +1860,11 @@ val_t standard___string_search___String___search_index_in(val_t p0, val_t p1, va
         nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
       }
       REGB2 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[0]);
-      /* ../lib/standard/string_search.nit:264 */
+      /* ../lib/standard/string_search.nit:267 */
       REGB3 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:240 */
+      /* ../lib/standard/kernel.nit:247 */
       REGB3 = TAG_Int(UNTAG_Int(REGB2)-UNTAG_Int(REGB3));
-      /* ../lib/standard/string_search.nit:265 */
+      /* ../lib/standard/string_search.nit:268 */
       while(1) {
         REGB2 = TAG_Int(0);
         REGB4 = TAG_Bool(VAL_ISA(REGB2, VTCOLOR_standard___kernel___Comparable___OTHER(REGB3), VTID_standard___kernel___Comparable___OTHER(REGB3))) /*cast OTHER*/;
@@ -1798,21 +1872,21 @@ val_t standard___string_search___String___search_index_in(val_t p0, val_t p1, va
         } else {
           nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
         }
-        /* ../lib/standard/kernel.nit:236 */
+        /* ../lib/standard/kernel.nit:243 */
         REGB2 = TAG_Bool(UNTAG_Int(REGB3)>=UNTAG_Int(REGB2));
-        /* ../lib/standard/string_search.nit:265 */
+        /* ../lib/standard/string_search.nit:268 */
         if (UNTAG_Bool(REGB2)) {
           REGB2 = CALL_standard___collection___abstract_collection___SequenceRead_____bra(fra.me.REG[0])(fra.me.REG[0], REGB3);
-          /* ../lib/standard/kernel.nit:238 */
+          /* ../lib/standard/kernel.nit:245 */
           REGB4 = TAG_Int(UNTAG_Int(REGB3)+UNTAG_Int(REGB0));
-          /* ../lib/standard/string_search.nit:265 */
+          /* ../lib/standard/string_search.nit:268 */
           REGB4 = CALL_standard___collection___abstract_collection___SequenceRead_____bra(fra.me.REG[1])(fra.me.REG[1], REGB4);
           REGB5 = TAG_Bool(IS_EQUAL_OO(REGB2,REGB4));
           if (UNTAG_Bool(REGB5)) {
           } else {
-            /* ../lib/standard/kernel.nit:381 */
+            /* ../lib/standard/kernel.nit:434 */
             REGB4 = TAG_Bool((REGB2)==(REGB4));
-            /* ../lib/standard/string_search.nit:265 */
+            /* ../lib/standard/string_search.nit:268 */
             REGB5 = REGB4;
           }
         } else {
@@ -1821,46 +1895,46 @@ val_t standard___string_search___String___search_index_in(val_t p0, val_t p1, va
         }
         if (UNTAG_Bool(REGB5)) {
           REGB5 = TAG_Int(1);
-          /* ../lib/standard/kernel.nit:240 */
+          /* ../lib/standard/kernel.nit:247 */
           REGB5 = TAG_Int(UNTAG_Int(REGB3)-UNTAG_Int(REGB5));
-          /* ../lib/standard/string_search.nit:265 */
+          /* ../lib/standard/string_search.nit:268 */
           REGB3 = REGB5;
         } else {
           goto label1;
         }
       }
       label1: while(0);
-      /* ../lib/standard/string_search.nit:267 */
+      /* ../lib/standard/string_search.nit:270 */
       REGB5 = TAG_Int(0);
       REGB4 = TAG_Bool(VAL_ISA(REGB5, VTCOLOR_standard___kernel___Comparable___OTHER(REGB3), VTID_standard___kernel___Comparable___OTHER(REGB3))) /*cast OTHER*/;
       if (UNTAG_Bool(REGB4)) {
       } else {
         nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
       }
-      /* ../lib/standard/kernel.nit:235 */
+      /* ../lib/standard/kernel.nit:242 */
       REGB5 = TAG_Bool(UNTAG_Int(REGB3)<UNTAG_Int(REGB5));
-      /* ../lib/standard/string_search.nit:267 */
+      /* ../lib/standard/string_search.nit:270 */
       if (UNTAG_Bool(REGB5)) {
         REGB5 = REGB0;
         goto label2;
       }
-      /* ../lib/standard/string_search.nit:269 */
+      /* ../lib/standard/string_search.nit:272 */
       REGB3 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB3 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB3));
-      /* ../lib/standard/string_search.nit:269 */
+      /* ../lib/standard/string_search.nit:272 */
       REGB0 = REGB3;
     } else {
-      /* ../lib/standard/string_search.nit:263 */
+      /* ../lib/standard/string_search.nit:266 */
       goto label3;
     }
   }
   label3: while(0);
-  /* ../lib/standard/string_search.nit:271 */
+  /* ../lib/standard/string_search.nit:274 */
   REGB0 = TAG_Int(1);
-  /* ../lib/standard/kernel.nit:239 */
+  /* ../lib/standard/kernel.nit:246 */
   REGB0 = TAG_Int(-UNTAG_Int(REGB0));
-  /* ../lib/standard/string_search.nit:271 */
+  /* ../lib/standard/string_search.nit:274 */
   REGB5 = REGB0;
   goto label2;
   label2: while(0);
@@ -1876,7 +1950,7 @@ val_t standard___string_search___String___search_in(val_t p0, val_t p1, val_t p2
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___string_search;
-  fra.me.line = 274;
+  fra.me.line = 277;
   fra.me.meth = LOCATE_standard___string_search___String___search_in;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -1887,20 +1961,20 @@ val_t standard___string_search___String___search_in(val_t p0, val_t p1, val_t p2
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   REGB0 = p2;
-  /* ../lib/standard/string_search.nit:276 */
+  /* ../lib/standard/string_search.nit:279 */
   REGB0 = CALL_standard___string_search___Pattern___search_index_in(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], REGB0);
-  /* ../lib/standard/string_search.nit:277 */
+  /* ../lib/standard/string_search.nit:280 */
   REGB1 = TAG_Int(0);
   REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
   if (UNTAG_Bool(REGB2)) {
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:235 */
+  /* ../lib/standard/kernel.nit:242 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-  /* ../lib/standard/string_search.nit:277 */
+  /* ../lib/standard/string_search.nit:280 */
   if (UNTAG_Bool(REGB1)) {
-    /* ../lib/standard/string_search.nit:278 */
+    /* ../lib/standard/string_search.nit:281 */
     fra.me.REG[2] = NIT_NULL;
     goto label1;
   } else {
@@ -1911,7 +1985,7 @@ val_t standard___string_search___String___search_in(val_t p0, val_t p1, val_t p2
       nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
     }
     REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[0]);
-    /* ../lib/standard/string_search.nit:280 */
+    /* ../lib/standard/string_search.nit:283 */
     fra.me.REG[1] = NEW_Match_standard___string_search___Match___init(fra.me.REG[1], REGB0, REGB1);
     fra.me.REG[2] = fra.me.REG[1];
     goto label1;
@@ -1927,7 +2001,7 @@ val_t standard___string_search___String___search(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___string_search;
-  fra.me.line = 284;
+  fra.me.line = 287;
   fra.me.meth = LOCATE_standard___string_search___String___search;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1936,7 +2010,7 @@ val_t standard___string_search___String___search(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ../lib/standard/string_search.nit:285 */
+  /* ../lib/standard/string_search.nit:288 */
   REGB0 = TAG_Int(0);
   fra.me.REG[0] = CALL_standard___string_search___Pattern___search_in(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], REGB0);
   goto label1;
@@ -1951,7 +2025,7 @@ val_t standard___string_search___String___search_from(val_t p0, val_t p1, val_t 
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___string_search;
-  fra.me.line = 287;
+  fra.me.line = 290;
   fra.me.meth = LOCATE_standard___string_search___String___search_from;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1961,7 +2035,7 @@ val_t standard___string_search___String___search_from(val_t p0, val_t p1, val_t 
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   REGB0 = p2;
-  /* ../lib/standard/string_search.nit:290 */
+  /* ../lib/standard/string_search.nit:293 */
   fra.me.REG[0] = CALL_standard___string_search___Pattern___search_in(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0], REGB0);
   goto label1;
   label1: while(0);
@@ -1974,7 +2048,7 @@ val_t standard___string_search___String___search_all(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___string_search;
-  fra.me.line = 292;
+  fra.me.line = 295;
   fra.me.meth = LOCATE_standard___string_search___String___search_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1983,7 +2057,7 @@ val_t standard___string_search___String___search_all(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ../lib/standard/string_search.nit:299 */
+  /* ../lib/standard/string_search.nit:302 */
   fra.me.REG[0] = CALL_standard___string_search___Pattern___search_all_in(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
   goto label1;
   label1: while(0);
@@ -1999,7 +2073,7 @@ val_t standard___string_search___String___split(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___string_search;
-  fra.me.line = 301;
+  fra.me.line = 304;
   fra.me.meth = LOCATE_standard___string_search___String___split;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -2010,7 +2084,7 @@ val_t standard___string_search___String___split(val_t p0, val_t p1){
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ../lib/standard/string_search.nit:305 */
+  /* ../lib/standard/string_search.nit:309 */
   fra.me.REG[0] = CALL_standard___string_search___Pattern___split_in(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
   /* ../lib/standard/collection/array.nit:24 */
   REGB0 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[0])!=NIT_NULL);
@@ -2019,20 +2093,20 @@ val_t standard___string_search___String___split(val_t p0, val_t p1){
     nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
   }
   REGB0 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[0]);
-  /* ../lib/standard/string_search.nit:306 */
+  /* ../lib/standard/string_search.nit:310 */
   fra.me.REG[1] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
-  /* ../lib/standard/collection/array.nit:269 */
-  REGB0 = TAG_Int(0);
   /* ../lib/standard/collection/array.nit:270 */
+  REGB0 = TAG_Int(0);
+  /* ../lib/standard/collection/array.nit:271 */
   REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 270);
+    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 271);
   }
   REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[0]);
-  /* ../lib/standard/collection/array.nit:271 */
-  fra.me.REG[2] = ATTR_standard___collection___array___Array____items(fra.me.REG[0]);
   /* ../lib/standard/collection/array.nit:272 */
+  fra.me.REG[2] = ATTR_standard___collection___array___Array____items(fra.me.REG[0]);
+  /* ../lib/standard/collection/array.nit:273 */
   while(1) {
     /* ../lib/standard/collection/array.nit:24 */
     REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[0])!=NIT_NULL);
@@ -2046,33 +2120,33 @@ val_t standard___string_search___String___split(val_t p0, val_t p1){
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:242 */
     REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-    /* ../lib/standard/collection/array.nit:272 */
+    /* ../lib/standard/collection/array.nit:273 */
     if (UNTAG_Bool(REGB1)) {
-      /* ../lib/standard/collection/array.nit:273 */
+      /* ../lib/standard/collection/array.nit:274 */
       REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
-        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
+        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 274);
       }
-      /* ../lib/standard/collection/array.nit:724 */
+      /* ../lib/standard/collection/array.nit:725 */
       fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB0)];
-      /* ../lib/standard/string_search.nit:307 */
+      /* ../lib/standard/string_search.nit:311 */
       fra.me.REG[3] = CALL_standard___string___Object___to_s(fra.me.REG[3])(fra.me.REG[3]);
       CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
-      /* ../lib/standard/collection/array.nit:274 */
+      /* ../lib/standard/collection/array.nit:275 */
       REGB1 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
-      /* ../lib/standard/collection/array.nit:274 */
+      /* ../lib/standard/collection/array.nit:275 */
       REGB0 = REGB1;
     } else {
-      /* ../lib/standard/collection/array.nit:272 */
+      /* ../lib/standard/collection/array.nit:273 */
       goto label1;
     }
   }
   label1: while(0);
-  /* ../lib/standard/string_search.nit:308 */
+  /* ../lib/standard/string_search.nit:312 */
   goto label2;
   label2: while(0);
   stack_frame_head = fra.me.prev;
@@ -2084,7 +2158,7 @@ val_t standard___string_search___String___split_with(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___string_search;
-  fra.me.line = 311;
+  fra.me.line = 315;
   fra.me.meth = LOCATE_standard___string_search___String___split_with;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -2093,7 +2167,7 @@ val_t standard___string_search___String___split_with(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ../lib/standard/string_search.nit:312 */
+  /* ../lib/standard/string_search.nit:316 */
   fra.me.REG[1] = CALL_standard___string_search___String___split(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   goto label1;
   label1: while(0);
@@ -2106,7 +2180,7 @@ val_t standard___string_search___String___replace(val_t p0, val_t p1, val_t p2){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___string_search;
-  fra.me.line = 314;
+  fra.me.line = 318;
   fra.me.meth = LOCATE_standard___string_search___String___replace;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -2117,7 +2191,7 @@ val_t standard___string_search___String___replace(val_t p0, val_t p1, val_t p2){
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ../lib/standard/string_search.nit:320 */
+  /* ../lib/standard/string_search.nit:324 */
   fra.me.REG[1] = CALL_standard___string_search___String___split_with(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   fra.me.REG[2] = CALL_standard___string___Collection___join(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
   goto label1;
@@ -2137,7 +2211,7 @@ val_t standard___string_search___String___html_escape(val_t p0){
     static val_t once_value_4; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___string_search;
-  fra.me.line = 323;
+  fra.me.line = 327;
   fra.me.meth = LOCATE_standard___string_search___String___html_escape;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -2145,7 +2219,7 @@ val_t standard___string_search___String___html_escape(val_t p0){
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ../lib/standard/string_search.nit:329 */
+  /* ../lib/standard/string_search.nit:333 */
   REGB0 = TAG_Char('&');
   REGB0 = CALL_standard___collection___abstract_collection___Collection___has(fra.me.REG[0])(fra.me.REG[0], REGB0);
   if (UNTAG_Bool(REGB0)) {
@@ -2153,7 +2227,7 @@ val_t standard___string_search___String___html_escape(val_t p0){
     if (!once_value_1) {
       fra.me.REG[1] = BOX_NativeString("&amp;");
       REGB1 = TAG_Int(5);
-      fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB1);
+      fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB1);
       once_value_1 = fra.me.REG[1];
       register_static_object(&once_value_1);
     } else fra.me.REG[1] = once_value_1;
@@ -2161,7 +2235,7 @@ val_t standard___string_search___String___html_escape(val_t p0){
     fra.me.REG[1] = CALL_standard___string_search___String___replace(fra.me.REG[0])(fra.me.REG[0], REGB0, fra.me.REG[1]);
     fra.me.REG[0] = fra.me.REG[1];
   }
-  /* ../lib/standard/string_search.nit:330 */
+  /* ../lib/standard/string_search.nit:334 */
   REGB0 = TAG_Char('<');
   REGB0 = CALL_standard___collection___abstract_collection___Collection___has(fra.me.REG[0])(fra.me.REG[0], REGB0);
   if (UNTAG_Bool(REGB0)) {
@@ -2169,7 +2243,7 @@ val_t standard___string_search___String___html_escape(val_t p0){
     if (!once_value_2) {
       fra.me.REG[1] = BOX_NativeString("&lt;");
       REGB1 = TAG_Int(4);
-      fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB1);
+      fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB1);
       once_value_2 = fra.me.REG[1];
       register_static_object(&once_value_2);
     } else fra.me.REG[1] = once_value_2;
@@ -2177,7 +2251,7 @@ val_t standard___string_search___String___html_escape(val_t p0){
     fra.me.REG[1] = CALL_standard___string_search___String___replace(fra.me.REG[0])(fra.me.REG[0], REGB0, fra.me.REG[1]);
     fra.me.REG[0] = fra.me.REG[1];
   }
-  /* ../lib/standard/string_search.nit:331 */
+  /* ../lib/standard/string_search.nit:335 */
   REGB0 = TAG_Char('>');
   REGB0 = CALL_standard___collection___abstract_collection___Collection___has(fra.me.REG[0])(fra.me.REG[0], REGB0);
   if (UNTAG_Bool(REGB0)) {
@@ -2185,7 +2259,7 @@ val_t standard___string_search___String___html_escape(val_t p0){
     if (!once_value_3) {
       fra.me.REG[1] = BOX_NativeString("&gt;");
       REGB1 = TAG_Int(4);
-      fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB1);
+      fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB1);
       once_value_3 = fra.me.REG[1];
       register_static_object(&once_value_3);
     } else fra.me.REG[1] = once_value_3;
@@ -2193,7 +2267,7 @@ val_t standard___string_search___String___html_escape(val_t p0){
     fra.me.REG[1] = CALL_standard___string_search___String___replace(fra.me.REG[0])(fra.me.REG[0], REGB0, fra.me.REG[1]);
     fra.me.REG[0] = fra.me.REG[1];
   }
-  /* ../lib/standard/string_search.nit:332 */
+  /* ../lib/standard/string_search.nit:336 */
   REGB0 = TAG_Char('"');
   REGB0 = CALL_standard___collection___abstract_collection___Collection___has(fra.me.REG[0])(fra.me.REG[0], REGB0);
   if (UNTAG_Bool(REGB0)) {
@@ -2201,7 +2275,7 @@ val_t standard___string_search___String___html_escape(val_t p0){
     if (!once_value_4) {
       fra.me.REG[1] = BOX_NativeString("&quot;");
       REGB1 = TAG_Int(6);
-      fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB1);
+      fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB1);
       once_value_4 = fra.me.REG[1];
       register_static_object(&once_value_4);
     } else fra.me.REG[1] = once_value_4;
@@ -2209,7 +2283,7 @@ val_t standard___string_search___String___html_escape(val_t p0){
     fra.me.REG[1] = CALL_standard___string_search___String___replace(fra.me.REG[0])(fra.me.REG[0], REGB0, fra.me.REG[1]);
     fra.me.REG[0] = fra.me.REG[1];
   }
-  /* ../lib/standard/string_search.nit:333 */
+  /* ../lib/standard/string_search.nit:337 */
   goto label5;
   label5: while(0);
   stack_frame_head = fra.me.prev;

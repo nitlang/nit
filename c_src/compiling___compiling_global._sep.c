@@ -46,7 +46,7 @@ void compiling___compiling_global___Program___compile_tables_to_c(val_t p0, val_
   if (!once_value_4) {
     fra.me.REG[2] = BOX_NativeString("classtable_t TAG2VFT[4] = {NULL");
     REGB0 = TAG_Int(31);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_4 = fra.me.REG[2];
     register_static_object(&once_value_4);
   } else fra.me.REG[2] = once_value_4;
@@ -58,7 +58,7 @@ void compiling___compiling_global___Program___compile_tables_to_c(val_t p0, val_
   if (!once_value_5) {
     fra.me.REG[4] = BOX_NativeString("Int");
     REGB0 = TAG_Int(3);
-    fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+    fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
     once_value_5 = fra.me.REG[4];
     register_static_object(&once_value_5);
   } else fra.me.REG[4] = once_value_5;
@@ -67,7 +67,7 @@ void compiling___compiling_global___Program___compile_tables_to_c(val_t p0, val_
   if (!once_value_6) {
     fra.me.REG[4] = BOX_NativeString("Char");
     REGB0 = TAG_Int(4);
-    fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+    fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
     once_value_6 = fra.me.REG[4];
     register_static_object(&once_value_6);
   } else fra.me.REG[4] = once_value_6;
@@ -76,24 +76,24 @@ void compiling___compiling_global___Program___compile_tables_to_c(val_t p0, val_
   if (!once_value_7) {
     fra.me.REG[4] = BOX_NativeString("Bool");
     REGB0 = TAG_Int(4);
-    fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+    fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
     once_value_7 = fra.me.REG[4];
     register_static_object(&once_value_7);
   } else fra.me.REG[4] = once_value_7;
   fra.me.REG[4] = fra.me.REG[4];
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[4]);
-  /* ../lib/standard/collection/array.nit:269 */
-  REGB0 = TAG_Int(0);
   /* ../lib/standard/collection/array.nit:270 */
+  REGB0 = TAG_Int(0);
+  /* ../lib/standard/collection/array.nit:271 */
   REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[3])!=NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 270);
+    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 271);
   }
   REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[3]);
-  /* ../lib/standard/collection/array.nit:271 */
-  fra.me.REG[4] = ATTR_standard___collection___array___Array____items(fra.me.REG[3]);
   /* ../lib/standard/collection/array.nit:272 */
+  fra.me.REG[4] = ATTR_standard___collection___array___Array____items(fra.me.REG[3]);
+  /* ../lib/standard/collection/array.nit:273 */
   while(1) {
     /* ../lib/standard/collection/array.nit:24 */
     REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[3])!=NIT_NULL);
@@ -107,16 +107,16 @@ void compiling___compiling_global___Program___compile_tables_to_c(val_t p0, val_
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:242 */
     REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-    /* ../lib/standard/collection/array.nit:272 */
+    /* ../lib/standard/collection/array.nit:273 */
     if (UNTAG_Bool(REGB1)) {
-      /* ../lib/standard/collection/array.nit:273 */
+      /* ../lib/standard/collection/array.nit:274 */
       REGB1 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
-        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
+        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 274);
       }
-      /* ../lib/standard/collection/array.nit:724 */
+      /* ../lib/standard/collection/array.nit:725 */
       fra.me.REG[5] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB0)];
       /* compiling/compiling_global.nit:38 */
       fra.me.REG[6] = CALL_program___Program___main_module(fra.me.REG[0])(fra.me.REG[0]);
@@ -133,7 +133,7 @@ void compiling___compiling_global___Program___compile_tables_to_c(val_t p0, val_
         if (!once_value_8) {
           fra.me.REG[6] = BOX_NativeString(", (const classtable_t)VFT_");
           REGB1 = TAG_Int(26);
-          fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB1);
+          fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB1);
           once_value_8 = fra.me.REG[6];
           register_static_object(&once_value_8);
         } else fra.me.REG[6] = once_value_8;
@@ -144,7 +144,7 @@ void compiling___compiling_global___Program___compile_tables_to_c(val_t p0, val_
         if (!once_value_9) {
           fra.me.REG[5] = BOX_NativeString("");
           REGB1 = TAG_Int(0);
-          fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB1);
+          fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB1);
           once_value_9 = fra.me.REG[5];
           register_static_object(&once_value_9);
         } else fra.me.REG[5] = once_value_9;
@@ -157,21 +157,21 @@ void compiling___compiling_global___Program___compile_tables_to_c(val_t p0, val_
         if (!once_value_10) {
           fra.me.REG[7] = BOX_NativeString(", NULL");
           REGB1 = TAG_Int(6);
-          fra.me.REG[7] = NEW_String_standard___string___String___with_native(fra.me.REG[7], REGB1);
+          fra.me.REG[7] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[7])(fra.me.REG[7], REGB1);
           once_value_10 = fra.me.REG[7];
           register_static_object(&once_value_10);
         } else fra.me.REG[7] = once_value_10;
         fra.me.REG[7] = fra.me.REG[7];
         CALL_standard___collection___abstract_collection___Sequence___append(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[7]);
       }
-      /* ../lib/standard/collection/array.nit:274 */
+      /* ../lib/standard/collection/array.nit:275 */
       REGB1 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
-      /* ../lib/standard/collection/array.nit:274 */
+      /* ../lib/standard/collection/array.nit:275 */
       REGB0 = REGB1;
     } else {
-      /* ../lib/standard/collection/array.nit:272 */
+      /* ../lib/standard/collection/array.nit:273 */
       goto label11;
     }
   }
@@ -180,7 +180,7 @@ void compiling___compiling_global___Program___compile_tables_to_c(val_t p0, val_
   if (!once_value_12) {
     fra.me.REG[0] = BOX_NativeString("};");
     REGB0 = TAG_Int(2);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_12 = fra.me.REG[0];
     register_static_object(&once_value_12);
   } else fra.me.REG[0] = once_value_12;
@@ -282,7 +282,7 @@ void compiling___compiling_global___Program___compile_main_part(val_t p0, val_t 
   if (!once_value_1) {
     fra.me.REG[2] = BOX_NativeString("int main(int argc, char **argv) {");
     REGB0 = TAG_Int(33);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_1 = fra.me.REG[2];
     register_static_object(&once_value_1);
   } else fra.me.REG[2] = once_value_1;
@@ -294,7 +294,7 @@ void compiling___compiling_global___Program___compile_main_part(val_t p0, val_t 
   if (!once_value_2) {
     fra.me.REG[2] = BOX_NativeString("prepare_signals();");
     REGB0 = TAG_Int(18);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_2 = fra.me.REG[2];
     register_static_object(&once_value_2);
   } else fra.me.REG[2] = once_value_2;
@@ -304,7 +304,7 @@ void compiling___compiling_global___Program___compile_main_part(val_t p0, val_t 
   if (!once_value_3) {
     fra.me.REG[2] = BOX_NativeString("glob_argc = argc; glob_argv = argv;");
     REGB0 = TAG_Int(35);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_3 = fra.me.REG[2];
     register_static_object(&once_value_3);
   } else fra.me.REG[2] = once_value_3;
@@ -330,7 +330,7 @@ void compiling___compiling_global___Program___compile_main_part(val_t p0, val_t 
     if (!once_value_4) {
       fra.me.REG[2] = BOX_NativeString("No main");
       REGB0 = TAG_Int(7);
-      fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+      fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
       once_value_4 = fra.me.REG[2];
       register_static_object(&once_value_4);
     } else fra.me.REG[2] = once_value_4;
@@ -346,7 +346,7 @@ void compiling___compiling_global___Program___compile_main_part(val_t p0, val_t 
     if (!once_value_5) {
       fra.me.REG[3] = BOX_NativeString("G_sys = NEW_");
       REGB0 = TAG_Int(12);
-      fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+      fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
       once_value_5 = fra.me.REG[3];
       register_static_object(&once_value_5);
     } else fra.me.REG[3] = once_value_5;
@@ -361,7 +361,7 @@ void compiling___compiling_global___Program___compile_main_part(val_t p0, val_t 
     if (!once_value_6) {
       fra.me.REG[2] = BOX_NativeString("();");
       REGB0 = TAG_Int(3);
-      fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+      fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
       once_value_6 = fra.me.REG[2];
       register_static_object(&once_value_6);
     } else fra.me.REG[2] = once_value_6;
@@ -373,7 +373,7 @@ void compiling___compiling_global___Program___compile_main_part(val_t p0, val_t 
     if (!once_value_7) {
       fra.me.REG[0] = BOX_NativeString("register_static_object(&G_sys);");
       REGB0 = TAG_Int(31);
-      fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+      fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
       once_value_7 = fra.me.REG[0];
       register_static_object(&once_value_7);
     } else fra.me.REG[0] = once_value_7;
@@ -385,7 +385,7 @@ void compiling___compiling_global___Program___compile_main_part(val_t p0, val_t 
     if (!once_value_8) {
       fra.me.REG[2] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+      fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
       once_value_8 = fra.me.REG[2];
       register_static_object(&once_value_8);
     } else fra.me.REG[2] = once_value_8;
@@ -402,7 +402,7 @@ void compiling___compiling_global___Program___compile_main_part(val_t p0, val_t 
     if (!once_value_9) {
       fra.me.REG[2] = BOX_NativeString("(G_sys);");
       REGB0 = TAG_Int(8);
-      fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+      fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
       once_value_9 = fra.me.REG[2];
       register_static_object(&once_value_9);
     } else fra.me.REG[2] = once_value_9;
@@ -415,7 +415,7 @@ void compiling___compiling_global___Program___compile_main_part(val_t p0, val_t 
   if (!once_value_10) {
     fra.me.REG[0] = BOX_NativeString("return 0;");
     REGB0 = TAG_Int(9);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_10 = fra.me.REG[0];
     register_static_object(&once_value_10);
   } else fra.me.REG[0] = once_value_10;
@@ -427,7 +427,7 @@ void compiling___compiling_global___Program___compile_main_part(val_t p0, val_t 
   if (!once_value_11) {
     fra.me.REG[0] = BOX_NativeString("}");
     REGB0 = TAG_Int(1);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_11 = fra.me.REG[0];
     register_static_object(&once_value_11);
   } else fra.me.REG[0] = once_value_11;
@@ -533,7 +533,7 @@ void compiling___compiling_global___MMModule___compile_mod_to_c(val_t p0, val_t 
   if (!once_value_1) {
     fra.me.REG[3] = BOX_NativeString("extern const char LOCATE_");
     REGB0 = TAG_Int(25);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_1 = fra.me.REG[3];
     register_static_object(&once_value_1);
   } else fra.me.REG[3] = once_value_1;
@@ -544,7 +544,7 @@ void compiling___compiling_global___MMModule___compile_mod_to_c(val_t p0, val_t 
   if (!once_value_2) {
     fra.me.REG[3] = BOX_NativeString("[];");
     REGB0 = TAG_Int(3);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_2 = fra.me.REG[3];
     register_static_object(&once_value_2);
   } else fra.me.REG[3] = once_value_2;
@@ -564,7 +564,7 @@ void compiling___compiling_global___MMModule___compile_mod_to_c(val_t p0, val_t 
     if (!once_value_3) {
       fra.me.REG[3] = BOX_NativeString("extern const int SFT_");
       REGB0 = TAG_Int(21);
-      fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+      fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
       once_value_3 = fra.me.REG[3];
       register_static_object(&once_value_3);
     } else fra.me.REG[3] = once_value_3;
@@ -575,7 +575,7 @@ void compiling___compiling_global___MMModule___compile_mod_to_c(val_t p0, val_t 
     if (!once_value_4) {
       fra.me.REG[3] = BOX_NativeString("[];");
       REGB0 = TAG_Int(3);
-      fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+      fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
       once_value_4 = fra.me.REG[3];
       register_static_object(&once_value_4);
     } else fra.me.REG[3] = once_value_4;
@@ -588,18 +588,18 @@ void compiling___compiling_global___MMModule___compile_mod_to_c(val_t p0, val_t 
   REGB0 = TAG_Int(0);
   /* compiling/compiling_global.nit:89 */
   fra.me.REG[2] = CALL_compiling___table_computation___MMModule___local_table(fra.me.REG[0])(fra.me.REG[0]);
-  /* ../lib/standard/collection/array.nit:269 */
-  REGB1 = TAG_Int(0);
   /* ../lib/standard/collection/array.nit:270 */
+  REGB1 = TAG_Int(0);
+  /* ../lib/standard/collection/array.nit:271 */
   REGB2 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2])!=NIT_NULL);
   if (UNTAG_Bool(REGB2)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 270);
+    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 271);
   }
   REGB2 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2]);
-  /* ../lib/standard/collection/array.nit:271 */
-  fra.me.REG[3] = ATTR_standard___collection___array___Array____items(fra.me.REG[2]);
   /* ../lib/standard/collection/array.nit:272 */
+  fra.me.REG[3] = ATTR_standard___collection___array___Array____items(fra.me.REG[2]);
+  /* ../lib/standard/collection/array.nit:273 */
   while(1) {
     /* ../lib/standard/collection/array.nit:24 */
     REGB2 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2])!=NIT_NULL);
@@ -613,16 +613,16 @@ void compiling___compiling_global___MMModule___compile_mod_to_c(val_t p0, val_t 
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:242 */
     REGB2 = TAG_Bool(UNTAG_Int(REGB1)<UNTAG_Int(REGB2));
-    /* ../lib/standard/collection/array.nit:272 */
+    /* ../lib/standard/collection/array.nit:273 */
     if (UNTAG_Bool(REGB2)) {
-      /* ../lib/standard/collection/array.nit:273 */
+      /* ../lib/standard/collection/array.nit:274 */
       REGB2 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
       if (UNTAG_Bool(REGB2)) {
-        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
+        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 274);
       }
-      /* ../lib/standard/collection/array.nit:724 */
+      /* ../lib/standard/collection/array.nit:725 */
       fra.me.REG[4] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB1)];
       /* compiling/compiling_global.nit:91 */
       fra.me.REG[5] = CALL_compiling___compiling_base___CompilerVisitor___program(fra.me.REG[1])(fra.me.REG[1]);
@@ -635,7 +635,7 @@ void compiling___compiling_global___MMModule___compile_mod_to_c(val_t p0, val_t 
         if (!once_value_5) {
           fra.me.REG[6] = BOX_NativeString("");
           REGB2 = TAG_Int(0);
-          fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB2);
+          fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB2);
           once_value_5 = fra.me.REG[6];
           register_static_object(&once_value_5);
         } else fra.me.REG[6] = once_value_5;
@@ -647,7 +647,7 @@ void compiling___compiling_global___MMModule___compile_mod_to_c(val_t p0, val_t 
         if (!once_value_6) {
           fra.me.REG[6] = BOX_NativeString("");
           REGB2 = TAG_Int(0);
-          fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB2);
+          fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB2);
           once_value_6 = fra.me.REG[6];
           register_static_object(&once_value_6);
         } else fra.me.REG[6] = once_value_6;
@@ -661,7 +661,7 @@ void compiling___compiling_global___MMModule___compile_mod_to_c(val_t p0, val_t 
         if (!once_value_7) {
           fra.me.REG[7] = BOX_NativeString("SFT_");
           REGB2 = TAG_Int(4);
-          fra.me.REG[7] = NEW_String_standard___string___String___with_native(fra.me.REG[7], REGB2);
+          fra.me.REG[7] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[7])(fra.me.REG[7], REGB2);
           once_value_7 = fra.me.REG[7];
           register_static_object(&once_value_7);
         } else fra.me.REG[7] = once_value_7;
@@ -672,7 +672,7 @@ void compiling___compiling_global___MMModule___compile_mod_to_c(val_t p0, val_t 
         if (!once_value_8) {
           fra.me.REG[7] = BOX_NativeString("[");
           REGB2 = TAG_Int(1);
-          fra.me.REG[7] = NEW_String_standard___string___String___with_native(fra.me.REG[7], REGB2);
+          fra.me.REG[7] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[7])(fra.me.REG[7], REGB2);
           once_value_8 = fra.me.REG[7];
           register_static_object(&once_value_8);
         } else fra.me.REG[7] = once_value_8;
@@ -683,7 +683,7 @@ void compiling___compiling_global___MMModule___compile_mod_to_c(val_t p0, val_t 
         if (!once_value_9) {
           fra.me.REG[7] = BOX_NativeString("]");
           REGB2 = TAG_Int(1);
-          fra.me.REG[7] = NEW_String_standard___string___String___with_native(fra.me.REG[7], REGB2);
+          fra.me.REG[7] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[7])(fra.me.REG[7], REGB2);
           once_value_9 = fra.me.REG[7];
           register_static_object(&once_value_9);
         } else fra.me.REG[7] = once_value_9;
@@ -693,21 +693,21 @@ void compiling___compiling_global___MMModule___compile_mod_to_c(val_t p0, val_t 
         fra.me.REG[5] = fra.me.REG[6];
         /* compiling/compiling_global.nit:95 */
         REGB2 = TAG_Int(1);
-        /* ../lib/standard/kernel.nit:238 */
+        /* ../lib/standard/kernel.nit:245 */
         REGB2 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB2));
         /* compiling/compiling_global.nit:95 */
         REGB0 = REGB2;
       }
       /* compiling/compiling_global.nit:97 */
       CALL_compiling___compiling_global___AbsTableElt___compile_macros(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[1], fra.me.REG[5]);
-      /* ../lib/standard/collection/array.nit:274 */
+      /* ../lib/standard/collection/array.nit:275 */
       REGB2 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB2 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB2));
-      /* ../lib/standard/collection/array.nit:274 */
+      /* ../lib/standard/collection/array.nit:275 */
       REGB1 = REGB2;
     } else {
-      /* ../lib/standard/collection/array.nit:272 */
+      /* ../lib/standard/collection/array.nit:273 */
       goto label10;
     }
   }
@@ -812,16 +812,16 @@ void compiling___compiling_global___MMModule___compile_mod_to_c(val_t p0, val_t 
           nit_abort("Reciever is null", NULL, LOCATE_compiling___compiling_global, 109);
         }
         REGB1 = CALL_metamodel___static_type___MMSignature___arity(fra.me.REG[2])(fra.me.REG[2]);
-        /* ../lib/standard/kernel.nit:355 */
+        /* ../lib/standard/kernel.nit:404 */
         while(1) {
           REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
           if (UNTAG_Bool(REGB2)) {
           } else {
             nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
           }
-          /* ../lib/standard/kernel.nit:235 */
+          /* ../lib/standard/kernel.nit:242 */
           REGB2 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-          /* ../lib/standard/kernel.nit:355 */
+          /* ../lib/standard/kernel.nit:404 */
           if (UNTAG_Bool(REGB2)) {
             /* compiling/compiling_global.nit:109 */
             REGB2 = REGB0;
@@ -831,7 +831,7 @@ void compiling___compiling_global___MMModule___compile_mod_to_c(val_t p0, val_t 
             if (!once_value_14) {
               fra.me.REG[3] = BOX_NativeString("val_t p");
               REGB3 = TAG_Int(7);
-              fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB3);
+              fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB3);
               once_value_14 = fra.me.REG[3];
               register_static_object(&once_value_14);
             } else fra.me.REG[3] = once_value_14;
@@ -842,7 +842,7 @@ void compiling___compiling_global___MMModule___compile_mod_to_c(val_t p0, val_t 
             if (!once_value_15) {
               fra.me.REG[3] = BOX_NativeString("");
               REGB2 = TAG_Int(0);
-              fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB2);
+              fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB2);
               once_value_15 = fra.me.REG[3];
               register_static_object(&once_value_15);
             } else fra.me.REG[3] = once_value_15;
@@ -850,14 +850,14 @@ void compiling___compiling_global___MMModule___compile_mod_to_c(val_t p0, val_t 
             CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
             fra.me.REG[2] = CALL_standard___string___Object___to_s(fra.me.REG[2])(fra.me.REG[2]);
             CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2]);
-            /* ../lib/standard/kernel.nit:357 */
+            /* ../lib/standard/kernel.nit:406 */
             REGB2 = TAG_Int(1);
-            /* ../lib/standard/kernel.nit:238 */
+            /* ../lib/standard/kernel.nit:245 */
             REGB2 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB2));
-            /* ../lib/standard/kernel.nit:357 */
+            /* ../lib/standard/kernel.nit:406 */
             REGB0 = REGB2;
           } else {
-            /* ../lib/standard/kernel.nit:355 */
+            /* ../lib/standard/kernel.nit:404 */
             goto label16;
           }
         }
@@ -868,7 +868,7 @@ void compiling___compiling_global___MMModule___compile_mod_to_c(val_t p0, val_t 
         if (!once_value_17) {
           fra.me.REG[3] = BOX_NativeString("val_t NEW_");
           REGB0 = TAG_Int(10);
-          fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+          fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
           once_value_17 = fra.me.REG[3];
           register_static_object(&once_value_17);
         } else fra.me.REG[3] = once_value_17;
@@ -879,7 +879,7 @@ void compiling___compiling_global___MMModule___compile_mod_to_c(val_t p0, val_t 
         if (!once_value_18) {
           fra.me.REG[3] = BOX_NativeString("_");
           REGB0 = TAG_Int(1);
-          fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+          fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
           once_value_18 = fra.me.REG[3];
           register_static_object(&once_value_18);
         } else fra.me.REG[3] = once_value_18;
@@ -892,7 +892,7 @@ void compiling___compiling_global___MMModule___compile_mod_to_c(val_t p0, val_t 
         if (!once_value_19) {
           fra.me.REG[1] = BOX_NativeString("(");
           REGB0 = TAG_Int(1);
-          fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+          fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
           once_value_19 = fra.me.REG[1];
           register_static_object(&once_value_19);
         } else fra.me.REG[1] = once_value_19;
@@ -901,7 +901,7 @@ void compiling___compiling_global___MMModule___compile_mod_to_c(val_t p0, val_t 
         if (!once_value_20) {
           fra.me.REG[1] = BOX_NativeString(", ");
           REGB0 = TAG_Int(2);
-          fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+          fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
           once_value_20 = fra.me.REG[1];
           register_static_object(&once_value_20);
         } else fra.me.REG[1] = once_value_20;
@@ -911,7 +911,7 @@ void compiling___compiling_global___MMModule___compile_mod_to_c(val_t p0, val_t 
         if (!once_value_21) {
           fra.me.REG[1] = BOX_NativeString(");");
           REGB0 = TAG_Int(2);
-          fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+          fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
           once_value_21 = fra.me.REG[1];
           register_static_object(&once_value_21);
         } else fra.me.REG[1] = once_value_21;
@@ -958,7 +958,7 @@ void compiling___compiling_global___MMModule___compile_local_table_to_c(val_t p0
   if (!once_value_1) {
     fra.me.REG[3] = BOX_NativeString("const char LOCATE_");
     REGB0 = TAG_Int(18);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_1 = fra.me.REG[3];
     register_static_object(&once_value_1);
   } else fra.me.REG[3] = once_value_1;
@@ -969,7 +969,7 @@ void compiling___compiling_global___MMModule___compile_local_table_to_c(val_t p0
   if (!once_value_2) {
     fra.me.REG[3] = BOX_NativeString("[] = \"");
     REGB0 = TAG_Int(6);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_2 = fra.me.REG[3];
     register_static_object(&once_value_2);
   } else fra.me.REG[3] = once_value_2;
@@ -986,7 +986,7 @@ void compiling___compiling_global___MMModule___compile_local_table_to_c(val_t p0
   if (!once_value_3) {
     fra.me.REG[3] = BOX_NativeString("\";");
     REGB0 = TAG_Int(2);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_3 = fra.me.REG[3];
     register_static_object(&once_value_3);
   } else fra.me.REG[3] = once_value_3;
@@ -1015,7 +1015,7 @@ void compiling___compiling_global___MMModule___compile_local_table_to_c(val_t p0
   if (!once_value_5) {
     fra.me.REG[3] = BOX_NativeString("const int SFT_");
     REGB0 = TAG_Int(14);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_5 = fra.me.REG[3];
     register_static_object(&once_value_5);
   } else fra.me.REG[3] = once_value_5;
@@ -1026,7 +1026,7 @@ void compiling___compiling_global___MMModule___compile_local_table_to_c(val_t p0
   if (!once_value_6) {
     fra.me.REG[3] = BOX_NativeString("[");
     REGB0 = TAG_Int(1);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_6 = fra.me.REG[3];
     register_static_object(&once_value_6);
   } else fra.me.REG[3] = once_value_6;
@@ -1046,7 +1046,7 @@ void compiling___compiling_global___MMModule___compile_local_table_to_c(val_t p0
   if (!once_value_7) {
     fra.me.REG[3] = BOX_NativeString("] = {");
     REGB0 = TAG_Int(5);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_7 = fra.me.REG[3];
     register_static_object(&once_value_7);
   } else fra.me.REG[3] = once_value_7;
@@ -1058,18 +1058,18 @@ void compiling___compiling_global___MMModule___compile_local_table_to_c(val_t p0
   CALL_compiling___compiling_base___CompilerVisitor___indent(fra.me.REG[1])(fra.me.REG[1]);
   /* compiling/compiling_global.nit:129 */
   fra.me.REG[0] = CALL_compiling___table_computation___MMModule___local_table(fra.me.REG[0])(fra.me.REG[0]);
-  /* ../lib/standard/collection/array.nit:269 */
-  REGB0 = TAG_Int(0);
   /* ../lib/standard/collection/array.nit:270 */
+  REGB0 = TAG_Int(0);
+  /* ../lib/standard/collection/array.nit:271 */
   REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 270);
+    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 271);
   }
   REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[0]);
-  /* ../lib/standard/collection/array.nit:271 */
-  fra.me.REG[2] = ATTR_standard___collection___array___Array____items(fra.me.REG[0]);
   /* ../lib/standard/collection/array.nit:272 */
+  fra.me.REG[2] = ATTR_standard___collection___array___Array____items(fra.me.REG[0]);
+  /* ../lib/standard/collection/array.nit:273 */
   while(1) {
     /* ../lib/standard/collection/array.nit:24 */
     REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[0])!=NIT_NULL);
@@ -1083,16 +1083,16 @@ void compiling___compiling_global___MMModule___compile_local_table_to_c(val_t p0
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:242 */
     REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-    /* ../lib/standard/collection/array.nit:272 */
+    /* ../lib/standard/collection/array.nit:273 */
     if (UNTAG_Bool(REGB1)) {
-      /* ../lib/standard/collection/array.nit:273 */
+      /* ../lib/standard/collection/array.nit:274 */
       REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
-        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
+        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 274);
       }
-      /* ../lib/standard/collection/array.nit:724 */
+      /* ../lib/standard/collection/array.nit:725 */
       fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB0)];
       /* compiling/compiling_global.nit:130 */
       fra.me.REG[4] = CALL_compiling___compiling_base___CompilerVisitor___program(fra.me.REG[1])(fra.me.REG[1]);
@@ -1100,21 +1100,21 @@ void compiling___compiling_global___MMModule___compile_local_table_to_c(val_t p0
       if (!once_value_8) {
         fra.me.REG[3] = BOX_NativeString(",");
         REGB1 = TAG_Int(1);
-        fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB1);
+        fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB1);
         once_value_8 = fra.me.REG[3];
         register_static_object(&once_value_8);
       } else fra.me.REG[3] = once_value_8;
       fra.me.REG[3] = fra.me.REG[3];
       fra.me.REG[3] = CALL_standard___string___String_____plus(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[3]);
       CALL_compiling___compiling_base___CompilerVisitor___add_instr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[3]);
-      /* ../lib/standard/collection/array.nit:274 */
+      /* ../lib/standard/collection/array.nit:275 */
       REGB1 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
-      /* ../lib/standard/collection/array.nit:274 */
+      /* ../lib/standard/collection/array.nit:275 */
       REGB0 = REGB1;
     } else {
-      /* ../lib/standard/collection/array.nit:272 */
+      /* ../lib/standard/collection/array.nit:273 */
       goto label9;
     }
   }
@@ -1125,7 +1125,7 @@ void compiling___compiling_global___MMModule___compile_local_table_to_c(val_t p0
   if (!once_value_10) {
     fra.me.REG[2] = BOX_NativeString("};");
     REGB0 = TAG_Int(2);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_10 = fra.me.REG[2];
     register_static_object(&once_value_10);
   } else fra.me.REG[2] = once_value_10;
@@ -1209,7 +1209,7 @@ val_t compiling___compiling_global___ModuleTableEltGroup___value(val_t p0, val_t
   if (!once_value_1) {
     fra.me.REG[3] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_1 = fra.me.REG[3];
     register_static_object(&once_value_1);
   } else fra.me.REG[3] = once_value_1;
@@ -1224,7 +1224,7 @@ val_t compiling___compiling_global___ModuleTableEltGroup___value(val_t p0, val_t
   if (!once_value_2) {
     fra.me.REG[0] = BOX_NativeString(" /* Group of ? */");
     REGB0 = TAG_Int(17);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_2 = fra.me.REG[0];
     register_static_object(&once_value_2);
   } else fra.me.REG[0] = once_value_2;
@@ -1268,18 +1268,18 @@ void compiling___compiling_global___ModuleTableEltGroup___compile_macros(val_t p
   REGB0 = TAG_Int(0);
   /* compiling/compiling_global.nit:159 */
   fra.me.REG[0] = CALL_compiling___table_computation___ModuleTableEltGroup___elements(fra.me.REG[0])(fra.me.REG[0]);
-  /* ../lib/standard/collection/array.nit:269 */
-  REGB1 = TAG_Int(0);
   /* ../lib/standard/collection/array.nit:270 */
+  REGB1 = TAG_Int(0);
+  /* ../lib/standard/collection/array.nit:271 */
   REGB2 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB2)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 270);
+    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 271);
   }
   REGB2 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[0]);
-  /* ../lib/standard/collection/array.nit:271 */
-  fra.me.REG[3] = ATTR_standard___collection___array___Array____items(fra.me.REG[0]);
   /* ../lib/standard/collection/array.nit:272 */
+  fra.me.REG[3] = ATTR_standard___collection___array___Array____items(fra.me.REG[0]);
+  /* ../lib/standard/collection/array.nit:273 */
   while(1) {
     /* ../lib/standard/collection/array.nit:24 */
     REGB2 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[0])!=NIT_NULL);
@@ -1293,16 +1293,16 @@ void compiling___compiling_global___ModuleTableEltGroup___compile_macros(val_t p
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:242 */
     REGB2 = TAG_Bool(UNTAG_Int(REGB1)<UNTAG_Int(REGB2));
-    /* ../lib/standard/collection/array.nit:272 */
+    /* ../lib/standard/collection/array.nit:273 */
     if (UNTAG_Bool(REGB2)) {
-      /* ../lib/standard/collection/array.nit:273 */
+      /* ../lib/standard/collection/array.nit:274 */
       REGB2 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
       if (UNTAG_Bool(REGB2)) {
-        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
+        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 274);
       }
-      /* ../lib/standard/collection/array.nit:724 */
+      /* ../lib/standard/collection/array.nit:725 */
       fra.me.REG[4] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB1)];
       /* compiling/compiling_global.nit:160 */
       REGB2 = TAG_Int(5);
@@ -1310,7 +1310,7 @@ void compiling___compiling_global___ModuleTableEltGroup___compile_macros(val_t p
       if (!once_value_1) {
         fra.me.REG[6] = BOX_NativeString("");
         REGB2 = TAG_Int(0);
-        fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB2);
+        fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB2);
         once_value_1 = fra.me.REG[6];
         register_static_object(&once_value_1);
       } else fra.me.REG[6] = once_value_1;
@@ -1320,7 +1320,7 @@ void compiling___compiling_global___ModuleTableEltGroup___compile_macros(val_t p
       if (!once_value_2) {
         fra.me.REG[6] = BOX_NativeString(" + ");
         REGB2 = TAG_Int(3);
-        fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB2);
+        fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB2);
         once_value_2 = fra.me.REG[6];
         register_static_object(&once_value_2);
       } else fra.me.REG[6] = once_value_2;
@@ -1331,7 +1331,7 @@ void compiling___compiling_global___ModuleTableEltGroup___compile_macros(val_t p
       if (!once_value_3) {
         fra.me.REG[6] = BOX_NativeString("");
         REGB2 = TAG_Int(0);
-        fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB2);
+        fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB2);
         once_value_3 = fra.me.REG[6];
         register_static_object(&once_value_3);
       } else fra.me.REG[6] = once_value_3;
@@ -1341,18 +1341,18 @@ void compiling___compiling_global___ModuleTableEltGroup___compile_macros(val_t p
       CALL_compiling___compiling_global___AbsTableElt___compile_macros(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[1], fra.me.REG[5]);
       /* compiling/compiling_global.nit:161 */
       REGB2 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB2 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB2));
       /* compiling/compiling_global.nit:161 */
       REGB0 = REGB2;
-      /* ../lib/standard/collection/array.nit:274 */
+      /* ../lib/standard/collection/array.nit:275 */
       REGB2 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB2 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB2));
-      /* ../lib/standard/collection/array.nit:274 */
+      /* ../lib/standard/collection/array.nit:275 */
       REGB1 = REGB2;
     } else {
-      /* ../lib/standard/collection/array.nit:272 */
+      /* ../lib/standard/collection/array.nit:273 */
       goto label4;
     }
   }
@@ -1393,7 +1393,7 @@ void compiling___compiling_global___TableEltMeth___compile_macros(val_t p0, val_
   if (!once_value_1) {
     fra.me.REG[4] = BOX_NativeString("#define ");
     REGB0 = TAG_Int(8);
-    fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+    fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
     once_value_1 = fra.me.REG[4];
     register_static_object(&once_value_1);
   } else fra.me.REG[4] = once_value_1;
@@ -1404,7 +1404,7 @@ void compiling___compiling_global___TableEltMeth___compile_macros(val_t p0, val_
   if (!once_value_2) {
     fra.me.REG[4] = BOX_NativeString("(recv) ((");
     REGB0 = TAG_Int(9);
-    fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+    fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
     once_value_2 = fra.me.REG[4];
     register_static_object(&once_value_2);
   } else fra.me.REG[4] = once_value_2;
@@ -1416,7 +1416,7 @@ void compiling___compiling_global___TableEltMeth___compile_macros(val_t p0, val_
   if (!once_value_3) {
     fra.me.REG[0] = BOX_NativeString("_t)CALL((recv), (");
     REGB0 = TAG_Int(17);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_3 = fra.me.REG[0];
     register_static_object(&once_value_3);
   } else fra.me.REG[0] = once_value_3;
@@ -1426,7 +1426,7 @@ void compiling___compiling_global___TableEltMeth___compile_macros(val_t p0, val_
   if (!once_value_4) {
     fra.me.REG[2] = BOX_NativeString(")))");
     REGB0 = TAG_Int(3);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_4 = fra.me.REG[2];
     register_static_object(&once_value_4);
   } else fra.me.REG[2] = once_value_4;
@@ -1497,7 +1497,7 @@ void compiling___compiling_global___TableEltSuper___compile_macros(val_t p0, val
   if (!once_value_1) {
     fra.me.REG[4] = BOX_NativeString("#define ");
     REGB0 = TAG_Int(8);
-    fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+    fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
     once_value_1 = fra.me.REG[4];
     register_static_object(&once_value_1);
   } else fra.me.REG[4] = once_value_1;
@@ -1508,7 +1508,7 @@ void compiling___compiling_global___TableEltSuper___compile_macros(val_t p0, val
   if (!once_value_2) {
     fra.me.REG[4] = BOX_NativeString("(recv) ((");
     REGB0 = TAG_Int(9);
-    fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+    fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
     once_value_2 = fra.me.REG[4];
     register_static_object(&once_value_2);
   } else fra.me.REG[4] = once_value_2;
@@ -1519,7 +1519,7 @@ void compiling___compiling_global___TableEltSuper___compile_macros(val_t p0, val
   if (!once_value_3) {
     fra.me.REG[0] = BOX_NativeString("_t)CALL((recv), (");
     REGB0 = TAG_Int(17);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_3 = fra.me.REG[0];
     register_static_object(&once_value_3);
   } else fra.me.REG[0] = once_value_3;
@@ -1529,7 +1529,7 @@ void compiling___compiling_global___TableEltSuper___compile_macros(val_t p0, val
   if (!once_value_4) {
     fra.me.REG[2] = BOX_NativeString(")))");
     REGB0 = TAG_Int(3);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_4 = fra.me.REG[2];
     register_static_object(&once_value_4);
   } else fra.me.REG[2] = once_value_4;
@@ -1576,18 +1576,18 @@ val_t compiling___compiling_global___TableEltSuper___compile_to_c(val_t p0, val_
   fra.me.REG[3] = CALL_metamodel___partial_order___PartialOrderElement___linear_extension(fra.me.REG[3])(fra.me.REG[3]);
   /* compiling/compiling_global.nit:192 */
   REGB0 = TAG_Bool(0);
-  /* ../lib/standard/collection/array.nit:269 */
-  REGB1 = TAG_Int(0);
   /* ../lib/standard/collection/array.nit:270 */
+  REGB1 = TAG_Int(0);
+  /* ../lib/standard/collection/array.nit:271 */
   REGB2 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[3])!=NIT_NULL);
   if (UNTAG_Bool(REGB2)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 270);
+    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 271);
   }
   REGB2 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[3]);
-  /* ../lib/standard/collection/array.nit:271 */
-  fra.me.REG[4] = ATTR_standard___collection___array___Array____items(fra.me.REG[3]);
   /* ../lib/standard/collection/array.nit:272 */
+  fra.me.REG[4] = ATTR_standard___collection___array___Array____items(fra.me.REG[3]);
+  /* ../lib/standard/collection/array.nit:273 */
   while(1) {
     /* ../lib/standard/collection/array.nit:24 */
     REGB2 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[3])!=NIT_NULL);
@@ -1601,16 +1601,16 @@ val_t compiling___compiling_global___TableEltSuper___compile_to_c(val_t p0, val_
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:242 */
     REGB2 = TAG_Bool(UNTAG_Int(REGB1)<UNTAG_Int(REGB2));
-    /* ../lib/standard/collection/array.nit:272 */
+    /* ../lib/standard/collection/array.nit:273 */
     if (UNTAG_Bool(REGB2)) {
-      /* ../lib/standard/collection/array.nit:273 */
+      /* ../lib/standard/collection/array.nit:274 */
       REGB2 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
       if (UNTAG_Bool(REGB2)) {
-        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
+        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 274);
       }
-      /* ../lib/standard/collection/array.nit:724 */
+      /* ../lib/standard/collection/array.nit:725 */
       fra.me.REG[5] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB1)];
       /* compiling/compiling_global.nit:195 */
       REGB2 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[5],fra.me.REG[1]));
@@ -1643,14 +1643,14 @@ val_t compiling___compiling_global___TableEltSuper___compile_to_c(val_t p0, val_
           }
         }
       }
-      /* ../lib/standard/collection/array.nit:274 */
+      /* ../lib/standard/collection/array.nit:275 */
       REGB2 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB2 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB2));
-      /* ../lib/standard/collection/array.nit:274 */
+      /* ../lib/standard/collection/array.nit:275 */
       REGB1 = REGB2;
     } else {
-      /* ../lib/standard/collection/array.nit:272 */
+      /* ../lib/standard/collection/array.nit:273 */
       goto label2;
     }
   }
@@ -1693,7 +1693,7 @@ void compiling___compiling_global___TableEltVTClassColor___compile_macros(val_t 
   if (!once_value_1) {
     fra.me.REG[4] = BOX_NativeString("#define ");
     REGB0 = TAG_Int(8);
-    fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+    fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
     once_value_1 = fra.me.REG[4];
     register_static_object(&once_value_1);
   } else fra.me.REG[4] = once_value_1;
@@ -1704,7 +1704,7 @@ void compiling___compiling_global___TableEltVTClassColor___compile_macros(val_t 
   if (!once_value_2) {
     fra.me.REG[0] = BOX_NativeString("(recv) (VAL2VFT(recv)[");
     REGB0 = TAG_Int(22);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_2 = fra.me.REG[0];
     register_static_object(&once_value_2);
   } else fra.me.REG[0] = once_value_2;
@@ -1714,7 +1714,7 @@ void compiling___compiling_global___TableEltVTClassColor___compile_macros(val_t 
   if (!once_value_3) {
     fra.me.REG[2] = BOX_NativeString("].i)");
     REGB0 = TAG_Int(4);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_3 = fra.me.REG[2];
     register_static_object(&once_value_3);
   } else fra.me.REG[2] = once_value_3;
@@ -1786,7 +1786,7 @@ val_t compiling___compiling_global___TableEltVTClassColor___compile_to_c(val_t p
   if (!once_value_1) {
     fra.me.REG[7] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[7] = NEW_String_standard___string___String___with_native(fra.me.REG[7], REGB0);
+    fra.me.REG[7] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[7])(fra.me.REG[7], REGB0);
     once_value_1 = fra.me.REG[7];
     register_static_object(&once_value_1);
   } else fra.me.REG[7] = once_value_1;
@@ -1799,7 +1799,7 @@ val_t compiling___compiling_global___TableEltVTClassColor___compile_to_c(val_t p
   if (!once_value_2) {
     fra.me.REG[6] = BOX_NativeString(" /* ");
     REGB0 = TAG_Int(4);
-    fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB0);
+    fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB0);
     once_value_2 = fra.me.REG[6];
     register_static_object(&once_value_2);
   } else fra.me.REG[6] = once_value_2;
@@ -1812,7 +1812,7 @@ val_t compiling___compiling_global___TableEltVTClassColor___compile_to_c(val_t p
   if (!once_value_3) {
     fra.me.REG[3] = BOX_NativeString(": VT ");
     REGB0 = TAG_Int(5);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_3 = fra.me.REG[3];
     register_static_object(&once_value_3);
   } else fra.me.REG[3] = once_value_3;
@@ -1823,7 +1823,7 @@ val_t compiling___compiling_global___TableEltVTClassColor___compile_to_c(val_t p
   if (!once_value_4) {
     fra.me.REG[2] = BOX_NativeString("::");
     REGB0 = TAG_Int(2);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_4 = fra.me.REG[2];
     register_static_object(&once_value_4);
   } else fra.me.REG[2] = once_value_4;
@@ -1834,7 +1834,7 @@ val_t compiling___compiling_global___TableEltVTClassColor___compile_to_c(val_t p
   if (!once_value_5) {
     fra.me.REG[4] = BOX_NativeString(" : color of ");
     REGB0 = TAG_Int(12);
-    fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+    fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
     once_value_5 = fra.me.REG[4];
     register_static_object(&once_value_5);
   } else fra.me.REG[4] = once_value_5;
@@ -1845,7 +1845,7 @@ val_t compiling___compiling_global___TableEltVTClassColor___compile_to_c(val_t p
   if (!once_value_6) {
     fra.me.REG[5] = BOX_NativeString(" */");
     REGB0 = TAG_Int(3);
-    fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB0);
+    fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB0);
     once_value_6 = fra.me.REG[5];
     register_static_object(&once_value_6);
   } else fra.me.REG[5] = once_value_6;
@@ -1889,7 +1889,7 @@ void compiling___compiling_global___TableEltVTClassId___compile_macros(val_t p0,
   if (!once_value_1) {
     fra.me.REG[4] = BOX_NativeString("#define ");
     REGB0 = TAG_Int(8);
-    fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+    fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
     once_value_1 = fra.me.REG[4];
     register_static_object(&once_value_1);
   } else fra.me.REG[4] = once_value_1;
@@ -1900,7 +1900,7 @@ void compiling___compiling_global___TableEltVTClassId___compile_macros(val_t p0,
   if (!once_value_2) {
     fra.me.REG[0] = BOX_NativeString("(recv) (VAL2VFT(recv)[");
     REGB0 = TAG_Int(22);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_2 = fra.me.REG[0];
     register_static_object(&once_value_2);
   } else fra.me.REG[0] = once_value_2;
@@ -1910,7 +1910,7 @@ void compiling___compiling_global___TableEltVTClassId___compile_macros(val_t p0,
   if (!once_value_3) {
     fra.me.REG[2] = BOX_NativeString("].i)");
     REGB0 = TAG_Int(4);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_3 = fra.me.REG[2];
     register_static_object(&once_value_3);
   } else fra.me.REG[2] = once_value_3;
@@ -1971,7 +1971,7 @@ val_t compiling___compiling_global___TableEltVTClassId___compile_to_c(val_t p0, 
   if (!once_value_1) {
     fra.me.REG[6] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB0);
+    fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB0);
     once_value_1 = fra.me.REG[6];
     register_static_object(&once_value_1);
   } else fra.me.REG[6] = once_value_1;
@@ -1989,7 +1989,7 @@ val_t compiling___compiling_global___TableEltVTClassId___compile_to_c(val_t p0, 
   if (!once_value_2) {
     fra.me.REG[6] = BOX_NativeString(" /* ");
     REGB0 = TAG_Int(4);
-    fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB0);
+    fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB0);
     once_value_2 = fra.me.REG[6];
     register_static_object(&once_value_2);
   } else fra.me.REG[6] = once_value_2;
@@ -2002,7 +2002,7 @@ val_t compiling___compiling_global___TableEltVTClassId___compile_to_c(val_t p0, 
   if (!once_value_3) {
     fra.me.REG[0] = BOX_NativeString(": VT ");
     REGB0 = TAG_Int(5);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_3 = fra.me.REG[0];
     register_static_object(&once_value_3);
   } else fra.me.REG[0] = once_value_3;
@@ -2013,7 +2013,7 @@ val_t compiling___compiling_global___TableEltVTClassId___compile_to_c(val_t p0, 
   if (!once_value_4) {
     fra.me.REG[2] = BOX_NativeString("::");
     REGB0 = TAG_Int(2);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_4 = fra.me.REG[2];
     register_static_object(&once_value_4);
   } else fra.me.REG[2] = once_value_4;
@@ -2024,7 +2024,7 @@ val_t compiling___compiling_global___TableEltVTClassId___compile_to_c(val_t p0, 
   if (!once_value_5) {
     fra.me.REG[3] = BOX_NativeString(" : id of ");
     REGB0 = TAG_Int(9);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_5 = fra.me.REG[3];
     register_static_object(&once_value_5);
   } else fra.me.REG[3] = once_value_5;
@@ -2035,7 +2035,7 @@ val_t compiling___compiling_global___TableEltVTClassId___compile_to_c(val_t p0, 
   if (!once_value_6) {
     fra.me.REG[4] = BOX_NativeString(" */");
     REGB0 = TAG_Int(3);
-    fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+    fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
     once_value_6 = fra.me.REG[4];
     register_static_object(&once_value_6);
   } else fra.me.REG[4] = once_value_6;
@@ -2079,7 +2079,7 @@ void compiling___compiling_global___TableEltAttr___compile_macros(val_t p0, val_
   if (!once_value_1) {
     fra.me.REG[4] = BOX_NativeString("#define ");
     REGB0 = TAG_Int(8);
-    fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+    fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
     once_value_1 = fra.me.REG[4];
     register_static_object(&once_value_1);
   } else fra.me.REG[4] = once_value_1;
@@ -2090,7 +2090,7 @@ void compiling___compiling_global___TableEltAttr___compile_macros(val_t p0, val_
   if (!once_value_2) {
     fra.me.REG[0] = BOX_NativeString("(recv) ATTR(recv, (");
     REGB0 = TAG_Int(19);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_2 = fra.me.REG[0];
     register_static_object(&once_value_2);
   } else fra.me.REG[0] = once_value_2;
@@ -2100,7 +2100,7 @@ void compiling___compiling_global___TableEltAttr___compile_macros(val_t p0, val_
   if (!once_value_3) {
     fra.me.REG[2] = BOX_NativeString("))");
     REGB0 = TAG_Int(2);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_3 = fra.me.REG[2];
     register_static_object(&once_value_3);
   } else fra.me.REG[2] = once_value_3;
@@ -2148,7 +2148,7 @@ val_t compiling___compiling_global___TableEltAttr___compile_to_c(val_t p0, val_t
   if (!once_value_1) {
     fra.me.REG[5] = BOX_NativeString("/* ");
     REGB0 = TAG_Int(3);
-    fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB0);
+    fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB0);
     once_value_1 = fra.me.REG[5];
     register_static_object(&once_value_1);
   } else fra.me.REG[5] = once_value_1;
@@ -2161,7 +2161,7 @@ val_t compiling___compiling_global___TableEltAttr___compile_to_c(val_t p0, val_t
   if (!once_value_2) {
     fra.me.REG[0] = BOX_NativeString(": Attribute ");
     REGB0 = TAG_Int(12);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_2 = fra.me.REG[0];
     register_static_object(&once_value_2);
   } else fra.me.REG[0] = once_value_2;
@@ -2172,7 +2172,7 @@ val_t compiling___compiling_global___TableEltAttr___compile_to_c(val_t p0, val_t
   if (!once_value_3) {
     fra.me.REG[2] = BOX_NativeString("::");
     REGB0 = TAG_Int(2);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_3 = fra.me.REG[2];
     register_static_object(&once_value_3);
   } else fra.me.REG[2] = once_value_3;
@@ -2183,7 +2183,7 @@ val_t compiling___compiling_global___TableEltAttr___compile_to_c(val_t p0, val_t
   if (!once_value_4) {
     fra.me.REG[3] = BOX_NativeString(" */");
     REGB0 = TAG_Int(3);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_4 = fra.me.REG[3];
     register_static_object(&once_value_4);
   } else fra.me.REG[3] = once_value_4;
@@ -2240,7 +2240,7 @@ void compiling___compiling_global___AbsTableEltClass___compile_macros(val_t p0, 
   if (!once_value_1) {
     fra.me.REG[4] = BOX_NativeString("#define ");
     REGB0 = TAG_Int(8);
-    fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+    fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
     once_value_1 = fra.me.REG[4];
     register_static_object(&once_value_1);
   } else fra.me.REG[4] = once_value_1;
@@ -2251,7 +2251,7 @@ void compiling___compiling_global___AbsTableEltClass___compile_macros(val_t p0, 
   if (!once_value_2) {
     fra.me.REG[0] = BOX_NativeString(" (");
     REGB0 = TAG_Int(2);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_2 = fra.me.REG[0];
     register_static_object(&once_value_2);
   } else fra.me.REG[0] = once_value_2;
@@ -2261,7 +2261,7 @@ void compiling___compiling_global___AbsTableEltClass___compile_macros(val_t p0, 
   if (!once_value_3) {
     fra.me.REG[2] = BOX_NativeString(")");
     REGB0 = TAG_Int(1);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_3 = fra.me.REG[2];
     register_static_object(&once_value_3);
   } else fra.me.REG[2] = once_value_3;
@@ -2321,7 +2321,7 @@ val_t compiling___compiling_global___TableEltClassId___value(val_t p0, val_t p1)
   if (!once_value_1) {
     fra.me.REG[3] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_1 = fra.me.REG[3];
     register_static_object(&once_value_1);
   } else fra.me.REG[3] = once_value_1;
@@ -2341,7 +2341,7 @@ val_t compiling___compiling_global___TableEltClassId___value(val_t p0, val_t p1)
   if (!once_value_2) {
     fra.me.REG[3] = BOX_NativeString(" /* Id of ");
     REGB0 = TAG_Int(10);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_2 = fra.me.REG[3];
     register_static_object(&once_value_2);
   } else fra.me.REG[3] = once_value_2;
@@ -2353,7 +2353,7 @@ val_t compiling___compiling_global___TableEltClassId___value(val_t p0, val_t p1)
   if (!once_value_3) {
     fra.me.REG[0] = BOX_NativeString(" */");
     REGB0 = TAG_Int(3);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_3 = fra.me.REG[0];
     register_static_object(&once_value_3);
   } else fra.me.REG[0] = once_value_3;
@@ -2431,24 +2431,24 @@ val_t compiling___compiling_global___TableEltClassInitTable___compile_to_c(val_t
   REGB0 = TAG_Int(0);
   /* compiling/compiling_global.nit:285 */
   while(1) {
-    /* ../lib/standard/collection/array.nit:278 */
+    /* ../lib/standard/collection/array.nit:279 */
     fra.me.REG[5] = fra.me.REG[3];
     REGB1 = REGB0;
-    /* ../lib/standard/collection/array.nit:280 */
+    /* ../lib/standard/collection/array.nit:281 */
     REGB2 = TAG_Int(0);
     REGB3 = TAG_Bool(VAL_ISA(REGB2, VTCOLOR_standard___kernel___Comparable___OTHER(REGB1), VTID_standard___kernel___Comparable___OTHER(REGB1))) /*cast OTHER*/;
     if (UNTAG_Bool(REGB3)) {
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:236 */
+    /* ../lib/standard/kernel.nit:243 */
     REGB2 = TAG_Bool(UNTAG_Int(REGB1)>=UNTAG_Int(REGB2));
-    /* ../lib/standard/collection/array.nit:280 */
+    /* ../lib/standard/collection/array.nit:281 */
     if (UNTAG_Bool(REGB2)) {
       REGB2 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[5])!=NIT_NULL);
       if (UNTAG_Bool(REGB2)) {
       } else {
-        nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 280);
+        nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 281);
       }
       REGB2 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[5]);
       REGB3 = TAG_Bool(VAL_ISA(REGB2, VTCOLOR_standard___kernel___Comparable___OTHER(REGB1), VTID_standard___kernel___Comparable___OTHER(REGB1))) /*cast OTHER*/;
@@ -2456,26 +2456,26 @@ val_t compiling___compiling_global___TableEltClassInitTable___compile_to_c(val_t
       } else {
         nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
       }
-      /* ../lib/standard/kernel.nit:235 */
+      /* ../lib/standard/kernel.nit:242 */
       REGB2 = TAG_Bool(UNTAG_Int(REGB1)<UNTAG_Int(REGB2));
     } else {
-      /* ../lib/standard/collection/array.nit:280 */
+      /* ../lib/standard/collection/array.nit:281 */
       REGB3 = TAG_Bool(0);
       REGB2 = REGB3;
     }
     if (UNTAG_Bool(REGB2)) {
     } else {
-      nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 280);
+      nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 281);
     }
-    /* ../lib/standard/collection/array.nit:281 */
+    /* ../lib/standard/collection/array.nit:282 */
     fra.me.REG[5] = ATTR_standard___collection___array___Array____items(fra.me.REG[5]);
     REGB2 = TAG_Bool(fra.me.REG[5]==NIT_NULL);
     if (UNTAG_Bool(REGB2)) {
-      nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
+      nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 282);
     }
-    /* ../lib/standard/collection/array.nit:724 */
+    /* ../lib/standard/collection/array.nit:725 */
     fra.me.REG[5] = ((Nit_NativeArray)fra.me.REG[5])->val[UNTAG_Int(REGB1)];
-    /* ../lib/standard/collection/array.nit:281 */
+    /* ../lib/standard/collection/array.nit:282 */
     goto label1;
     label1: while(0);
     /* compiling/compiling_global.nit:285 */
@@ -2496,7 +2496,7 @@ val_t compiling___compiling_global___TableEltClassInitTable___compile_to_c(val_t
     if (UNTAG_Bool(REGB1)) {
       /* compiling/compiling_global.nit:286 */
       REGB1 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
       /* compiling/compiling_global.nit:286 */
       REGB0 = REGB1;
@@ -2512,7 +2512,7 @@ val_t compiling___compiling_global___TableEltClassInitTable___compile_to_c(val_t
   if (!once_value_3) {
     fra.me.REG[6] = BOX_NativeString("");
     REGB1 = TAG_Int(0);
-    fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB1);
+    fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB1);
     once_value_3 = fra.me.REG[6];
     register_static_object(&once_value_3);
   } else fra.me.REG[6] = once_value_3;
@@ -2523,7 +2523,7 @@ val_t compiling___compiling_global___TableEltClassInitTable___compile_to_c(val_t
   if (!once_value_4) {
     fra.me.REG[6] = BOX_NativeString(" /* ");
     REGB0 = TAG_Int(4);
-    fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB0);
+    fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB0);
     once_value_4 = fra.me.REG[6];
     register_static_object(&once_value_4);
   } else fra.me.REG[6] = once_value_4;
@@ -2536,7 +2536,7 @@ val_t compiling___compiling_global___TableEltClassInitTable___compile_to_c(val_t
   if (!once_value_5) {
     fra.me.REG[0] = BOX_NativeString(": ");
     REGB0 = TAG_Int(2);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_5 = fra.me.REG[0];
     register_static_object(&once_value_5);
   } else fra.me.REG[0] = once_value_5;
@@ -2547,7 +2547,7 @@ val_t compiling___compiling_global___TableEltClassInitTable___compile_to_c(val_t
   if (!once_value_6) {
     fra.me.REG[2] = BOX_NativeString(" < ");
     REGB0 = TAG_Int(3);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_6 = fra.me.REG[2];
     register_static_object(&once_value_6);
   } else fra.me.REG[2] = once_value_6;
@@ -2559,7 +2559,7 @@ val_t compiling___compiling_global___TableEltClassInitTable___compile_to_c(val_t
   if (!once_value_7) {
     fra.me.REG[4] = BOX_NativeString(": superclass init_table position */");
     REGB0 = TAG_Int(35);
-    fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+    fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
     once_value_7 = fra.me.REG[4];
     register_static_object(&once_value_7);
   } else fra.me.REG[4] = once_value_7;
@@ -2620,7 +2620,7 @@ val_t compiling___compiling_global___TableEltClassColor___value(val_t p0, val_t 
   if (!once_value_1) {
     fra.me.REG[3] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_1 = fra.me.REG[3];
     register_static_object(&once_value_1);
   } else fra.me.REG[3] = once_value_1;
@@ -2633,7 +2633,7 @@ val_t compiling___compiling_global___TableEltClassColor___value(val_t p0, val_t 
   if (!once_value_2) {
     fra.me.REG[1] = BOX_NativeString(" /* Color of ");
     REGB0 = TAG_Int(13);
-    fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+    fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
     once_value_2 = fra.me.REG[1];
     register_static_object(&once_value_2);
   } else fra.me.REG[1] = once_value_2;
@@ -2645,7 +2645,7 @@ val_t compiling___compiling_global___TableEltClassColor___value(val_t p0, val_t 
   if (!once_value_3) {
     fra.me.REG[0] = BOX_NativeString(" */");
     REGB0 = TAG_Int(3);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_3 = fra.me.REG[0];
     register_static_object(&once_value_3);
   } else fra.me.REG[0] = once_value_3;
@@ -2696,7 +2696,7 @@ val_t compiling___compiling_global___TableEltClassColor___compile_to_c(val_t p0,
   if (!once_value_1) {
     fra.me.REG[5] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB0);
+    fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB0);
     once_value_1 = fra.me.REG[5];
     register_static_object(&once_value_1);
   } else fra.me.REG[5] = once_value_1;
@@ -2708,7 +2708,7 @@ val_t compiling___compiling_global___TableEltClassColor___compile_to_c(val_t p0,
   if (!once_value_2) {
     fra.me.REG[5] = BOX_NativeString(" /* ");
     REGB0 = TAG_Int(4);
-    fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB0);
+    fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB0);
     once_value_2 = fra.me.REG[5];
     register_static_object(&once_value_2);
   } else fra.me.REG[5] = once_value_2;
@@ -2721,7 +2721,7 @@ val_t compiling___compiling_global___TableEltClassColor___compile_to_c(val_t p0,
   if (!once_value_3) {
     fra.me.REG[0] = BOX_NativeString(": ");
     REGB0 = TAG_Int(2);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_3 = fra.me.REG[0];
     register_static_object(&once_value_3);
   } else fra.me.REG[0] = once_value_3;
@@ -2732,7 +2732,7 @@ val_t compiling___compiling_global___TableEltClassColor___compile_to_c(val_t p0,
   if (!once_value_4) {
     fra.me.REG[2] = BOX_NativeString(" < ");
     REGB0 = TAG_Int(3);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_4 = fra.me.REG[2];
     register_static_object(&once_value_4);
   } else fra.me.REG[2] = once_value_4;
@@ -2744,7 +2744,7 @@ val_t compiling___compiling_global___TableEltClassColor___compile_to_c(val_t p0,
   if (!once_value_5) {
     fra.me.REG[4] = BOX_NativeString(": superclass typecheck marker */");
     REGB0 = TAG_Int(32);
-    fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+    fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
     once_value_5 = fra.me.REG[4];
     register_static_object(&once_value_5);
   } else fra.me.REG[4] = once_value_5;
@@ -2809,7 +2809,7 @@ val_t compiling___compiling_global___TableEltClassSelfId___compile_to_c(val_t p0
   if (!once_value_1) {
     fra.me.REG[4] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+    fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
     once_value_1 = fra.me.REG[4];
     register_static_object(&once_value_1);
   } else fra.me.REG[4] = once_value_1;
@@ -2828,7 +2828,7 @@ val_t compiling___compiling_global___TableEltClassSelfId___compile_to_c(val_t p0
   if (!once_value_2) {
     fra.me.REG[2] = BOX_NativeString(" /* ");
     REGB0 = TAG_Int(4);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_2 = fra.me.REG[2];
     register_static_object(&once_value_2);
   } else fra.me.REG[2] = once_value_2;
@@ -2841,7 +2841,7 @@ val_t compiling___compiling_global___TableEltClassSelfId___compile_to_c(val_t p0
   if (!once_value_3) {
     fra.me.REG[0] = BOX_NativeString(": Identity */");
     REGB0 = TAG_Int(13);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_3 = fra.me.REG[0];
     register_static_object(&once_value_3);
   } else fra.me.REG[0] = once_value_3;
@@ -2884,7 +2884,7 @@ val_t compiling___compiling_global___TableEltClassSelfName___compile_to_c(val_t 
   if (!once_value_1) {
     fra.me.REG[4] = BOX_NativeString("\"");
     REGB0 = TAG_Int(1);
-    fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+    fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
     once_value_1 = fra.me.REG[4];
     register_static_object(&once_value_1);
   } else fra.me.REG[4] = once_value_1;
@@ -2897,7 +2897,7 @@ val_t compiling___compiling_global___TableEltClassSelfName___compile_to_c(val_t 
   if (!once_value_2) {
     fra.me.REG[2] = BOX_NativeString("\" /* ");
     REGB0 = TAG_Int(5);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_2 = fra.me.REG[2];
     register_static_object(&once_value_2);
   } else fra.me.REG[2] = once_value_2;
@@ -2910,7 +2910,7 @@ val_t compiling___compiling_global___TableEltClassSelfName___compile_to_c(val_t 
   if (!once_value_3) {
     fra.me.REG[0] = BOX_NativeString(": Class Name */");
     REGB0 = TAG_Int(15);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_3 = fra.me.REG[0];
     register_static_object(&once_value_3);
   } else fra.me.REG[0] = once_value_3;
@@ -2958,7 +2958,7 @@ val_t compiling___compiling_global___TableEltClassObjectSize___compile_to_c(val_
   if (!once_value_1) {
     fra.me.REG[4] = BOX_NativeString("NativeArray");
     REGB1 = TAG_Int(11);
-    fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB1);
+    fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB1);
     once_value_1 = fra.me.REG[4];
     register_static_object(&once_value_1);
   } else fra.me.REG[4] = once_value_1;
@@ -2973,7 +2973,7 @@ val_t compiling___compiling_global___TableEltClassObjectSize___compile_to_c(val_
   if (UNTAG_Bool(REGB1)) {
     /* compiling/compiling_global.nit:334 */
     REGB1 = TAG_Int(1);
-    /* ../lib/standard/kernel.nit:239 */
+    /* ../lib/standard/kernel.nit:246 */
     REGB1 = TAG_Int(-UNTAG_Int(REGB1));
     /* compiling/compiling_global.nit:334 */
     REGB0 = REGB1;
@@ -2984,18 +2984,18 @@ val_t compiling___compiling_global___TableEltClassObjectSize___compile_to_c(val_
     fra.me.REG[2] = CALL_standard___collection___abstract_collection___MapRead_____bra(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[2]);
     /* compiling/compiling_global.nit:337 */
     fra.me.REG[2] = CALL_compiling___table_computation___CompiledClass___instance_table(fra.me.REG[2])(fra.me.REG[2]);
-    /* ../lib/standard/collection/array.nit:269 */
-    REGB1 = TAG_Int(0);
     /* ../lib/standard/collection/array.nit:270 */
+    REGB1 = TAG_Int(0);
+    /* ../lib/standard/collection/array.nit:271 */
     REGB2 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2])!=NIT_NULL);
     if (UNTAG_Bool(REGB2)) {
     } else {
-      nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 270);
+      nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 271);
     }
     REGB2 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2]);
-    /* ../lib/standard/collection/array.nit:271 */
-    fra.me.REG[4] = ATTR_standard___collection___array___Array____items(fra.me.REG[2]);
     /* ../lib/standard/collection/array.nit:272 */
+    fra.me.REG[4] = ATTR_standard___collection___array___Array____items(fra.me.REG[2]);
+    /* ../lib/standard/collection/array.nit:273 */
     while(1) {
       /* ../lib/standard/collection/array.nit:24 */
       REGB2 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2])!=NIT_NULL);
@@ -3009,31 +3009,31 @@ val_t compiling___compiling_global___TableEltClassObjectSize___compile_to_c(val_
       } else {
         nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
       }
-      /* ../lib/standard/kernel.nit:235 */
+      /* ../lib/standard/kernel.nit:242 */
       REGB2 = TAG_Bool(UNTAG_Int(REGB1)<UNTAG_Int(REGB2));
-      /* ../lib/standard/collection/array.nit:272 */
+      /* ../lib/standard/collection/array.nit:273 */
       if (UNTAG_Bool(REGB2)) {
-        /* ../lib/standard/collection/array.nit:273 */
+        /* ../lib/standard/collection/array.nit:274 */
         REGB2 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
         if (UNTAG_Bool(REGB2)) {
-          nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
+          nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 274);
         }
-        /* ../lib/standard/collection/array.nit:724 */
+        /* ../lib/standard/collection/array.nit:725 */
         fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB1)];
         /* compiling/compiling_global.nit:339 */
         REGB2 = TAG_Int(1);
-        /* ../lib/standard/kernel.nit:238 */
+        /* ../lib/standard/kernel.nit:245 */
         REGB2 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB2));
         /* compiling/compiling_global.nit:339 */
         REGB0 = REGB2;
-        /* ../lib/standard/collection/array.nit:274 */
+        /* ../lib/standard/collection/array.nit:275 */
         REGB2 = TAG_Int(1);
-        /* ../lib/standard/kernel.nit:238 */
+        /* ../lib/standard/kernel.nit:245 */
         REGB2 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB2));
-        /* ../lib/standard/collection/array.nit:274 */
+        /* ../lib/standard/collection/array.nit:275 */
         REGB1 = REGB2;
       } else {
-        /* ../lib/standard/collection/array.nit:272 */
+        /* ../lib/standard/collection/array.nit:273 */
         goto label2;
       }
     }
@@ -3045,7 +3045,7 @@ val_t compiling___compiling_global___TableEltClassObjectSize___compile_to_c(val_
   if (!once_value_3) {
     fra.me.REG[2] = BOX_NativeString("");
     REGB1 = TAG_Int(0);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB1);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB1);
     once_value_3 = fra.me.REG[2];
     register_static_object(&once_value_3);
   } else fra.me.REG[2] = once_value_3;
@@ -3056,7 +3056,7 @@ val_t compiling___compiling_global___TableEltClassObjectSize___compile_to_c(val_
   if (!once_value_4) {
     fra.me.REG[2] = BOX_NativeString(" /* ");
     REGB0 = TAG_Int(4);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_4 = fra.me.REG[2];
     register_static_object(&once_value_4);
   } else fra.me.REG[2] = once_value_4;
@@ -3069,7 +3069,7 @@ val_t compiling___compiling_global___TableEltClassObjectSize___compile_to_c(val_
   if (!once_value_5) {
     fra.me.REG[0] = BOX_NativeString(": Object size (-1 if a NativeArray)*/");
     REGB0 = TAG_Int(37);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_5 = fra.me.REG[0];
     register_static_object(&once_value_5);
   } else fra.me.REG[0] = once_value_5;
@@ -3110,7 +3110,7 @@ val_t compiling___compiling_global___TableEltObjectId___compile_to_c(val_t p0, v
   if (!once_value_1) {
     fra.me.REG[3] = BOX_NativeString("/* ");
     REGB0 = TAG_Int(3);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_1 = fra.me.REG[3];
     register_static_object(&once_value_1);
   } else fra.me.REG[3] = once_value_1;
@@ -3123,7 +3123,7 @@ val_t compiling___compiling_global___TableEltObjectId___compile_to_c(val_t p0, v
   if (!once_value_2) {
     fra.me.REG[0] = BOX_NativeString(": Object_id */");
     REGB0 = TAG_Int(14);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_2 = fra.me.REG[0];
     register_static_object(&once_value_2);
   } else fra.me.REG[0] = once_value_2;
@@ -3164,7 +3164,7 @@ val_t compiling___compiling_global___TableEltVftPointer___compile_to_c(val_t p0,
   if (!once_value_1) {
     fra.me.REG[3] = BOX_NativeString("/* ");
     REGB0 = TAG_Int(3);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_1 = fra.me.REG[3];
     register_static_object(&once_value_1);
   } else fra.me.REG[3] = once_value_1;
@@ -3177,7 +3177,7 @@ val_t compiling___compiling_global___TableEltVftPointer___compile_to_c(val_t p0,
   if (!once_value_2) {
     fra.me.REG[0] = BOX_NativeString(": Pointer to the classtable */");
     REGB0 = TAG_Int(30);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_2 = fra.me.REG[0];
     register_static_object(&once_value_2);
   } else fra.me.REG[0] = once_value_2;
@@ -3228,7 +3228,7 @@ void compiling___compiling_global___MMLocalClass___declare_tables_to_c(val_t p0,
   if (!once_value_1) {
     fra.me.REG[2] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_1 = fra.me.REG[2];
     register_static_object(&once_value_1);
   } else fra.me.REG[2] = once_value_1;
@@ -3242,7 +3242,7 @@ void compiling___compiling_global___MMLocalClass___declare_tables_to_c(val_t p0,
   if (!once_value_2) {
     fra.me.REG[4] = BOX_NativeString("extern const classtable_elt_t VFT_");
     REGB0 = TAG_Int(34);
-    fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+    fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
     once_value_2 = fra.me.REG[4];
     register_static_object(&once_value_2);
   } else fra.me.REG[4] = once_value_2;
@@ -3253,7 +3253,7 @@ void compiling___compiling_global___MMLocalClass___declare_tables_to_c(val_t p0,
   if (!once_value_3) {
     fra.me.REG[4] = BOX_NativeString("[];");
     REGB0 = TAG_Int(3);
-    fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+    fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
     once_value_3 = fra.me.REG[4];
     register_static_object(&once_value_3);
   } else fra.me.REG[4] = once_value_3;
@@ -3299,7 +3299,7 @@ void compiling___compiling_global___MMLocalClass___declare_tables_to_c(val_t p0,
     if (!once_value_4) {
       fra.me.REG[4] = BOX_NativeString("struct TBOX_");
       REGB0 = TAG_Int(12);
-      fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+      fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
       once_value_4 = fra.me.REG[4];
       register_static_object(&once_value_4);
     } else fra.me.REG[4] = once_value_4;
@@ -3311,7 +3311,7 @@ void compiling___compiling_global___MMLocalClass___declare_tables_to_c(val_t p0,
     if (!once_value_5) {
       fra.me.REG[4] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+      fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
       once_value_5 = fra.me.REG[4];
       register_static_object(&once_value_5);
     } else fra.me.REG[4] = once_value_5;
@@ -3324,7 +3324,7 @@ void compiling___compiling_global___MMLocalClass___declare_tables_to_c(val_t p0,
     if (!once_value_6) {
       fra.me.REG[5] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB0);
+      fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB0);
       once_value_6 = fra.me.REG[5];
       register_static_object(&once_value_6);
     } else fra.me.REG[5] = once_value_6;
@@ -3334,7 +3334,7 @@ void compiling___compiling_global___MMLocalClass___declare_tables_to_c(val_t p0,
     if (!once_value_7) {
       fra.me.REG[5] = BOX_NativeString(" { const classtable_elt_t * vft; bigint object_id; ");
       REGB0 = TAG_Int(51);
-      fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB0);
+      fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB0);
       once_value_7 = fra.me.REG[5];
       register_static_object(&once_value_7);
     } else fra.me.REG[5] = once_value_7;
@@ -3344,7 +3344,7 @@ void compiling___compiling_global___MMLocalClass___declare_tables_to_c(val_t p0,
     if (!once_value_8) {
       fra.me.REG[5] = BOX_NativeString(" val;};");
       REGB0 = TAG_Int(7);
-      fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB0);
+      fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB0);
       once_value_8 = fra.me.REG[5];
       register_static_object(&once_value_8);
     } else fra.me.REG[5] = once_value_8;
@@ -3358,7 +3358,7 @@ void compiling___compiling_global___MMLocalClass___declare_tables_to_c(val_t p0,
     if (!once_value_9) {
       fra.me.REG[5] = BOX_NativeString("val_t BOX_");
       REGB0 = TAG_Int(10);
-      fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB0);
+      fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB0);
       once_value_9 = fra.me.REG[5];
       register_static_object(&once_value_9);
     } else fra.me.REG[5] = once_value_9;
@@ -3370,7 +3370,7 @@ void compiling___compiling_global___MMLocalClass___declare_tables_to_c(val_t p0,
     if (!once_value_10) {
       fra.me.REG[5] = BOX_NativeString("(");
       REGB0 = TAG_Int(1);
-      fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB0);
+      fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB0);
       once_value_10 = fra.me.REG[5];
       register_static_object(&once_value_10);
     } else fra.me.REG[5] = once_value_10;
@@ -3380,7 +3380,7 @@ void compiling___compiling_global___MMLocalClass___declare_tables_to_c(val_t p0,
     if (!once_value_11) {
       fra.me.REG[2] = BOX_NativeString(" val);");
       REGB0 = TAG_Int(6);
-      fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+      fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
       once_value_11 = fra.me.REG[2];
       register_static_object(&once_value_11);
     } else fra.me.REG[2] = once_value_11;
@@ -3394,7 +3394,7 @@ void compiling___compiling_global___MMLocalClass___declare_tables_to_c(val_t p0,
     if (!once_value_12) {
       fra.me.REG[2] = BOX_NativeString("#define UNBOX_");
       REGB0 = TAG_Int(14);
-      fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+      fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
       once_value_12 = fra.me.REG[2];
       register_static_object(&once_value_12);
     } else fra.me.REG[2] = once_value_12;
@@ -3406,7 +3406,7 @@ void compiling___compiling_global___MMLocalClass___declare_tables_to_c(val_t p0,
     if (!once_value_13) {
       fra.me.REG[0] = BOX_NativeString("(x) (((");
       REGB0 = TAG_Int(7);
-      fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+      fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
       once_value_13 = fra.me.REG[0];
       register_static_object(&once_value_13);
     } else fra.me.REG[0] = once_value_13;
@@ -3416,7 +3416,7 @@ void compiling___compiling_global___MMLocalClass___declare_tables_to_c(val_t p0,
     if (!once_value_14) {
       fra.me.REG[3] = BOX_NativeString(" *)(VAL2OBJ(x)))->val)");
       REGB0 = TAG_Int(22);
-      fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+      fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
       once_value_14 = fra.me.REG[3];
       register_static_object(&once_value_14);
     } else fra.me.REG[3] = once_value_14;
@@ -3551,7 +3551,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:237 */
+  /* ../lib/standard/kernel.nit:244 */
   REGB2 = TAG_Bool(UNTAG_Int(REGB1)>UNTAG_Int(REGB2));
   /* compiling/compiling_global.nit:386 */
   if (UNTAG_Bool(REGB2)) {
@@ -3567,7 +3567,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
   if (!once_value_1) {
     fra.me.REG[6] = BOX_NativeString("const classtable_elt_t VFT_");
     REGB2 = TAG_Int(27);
-    fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB2);
+    fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB2);
     once_value_1 = fra.me.REG[6];
     register_static_object(&once_value_1);
   } else fra.me.REG[6] = once_value_1;
@@ -3578,7 +3578,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
   if (!once_value_2) {
     fra.me.REG[6] = BOX_NativeString("[");
     REGB2 = TAG_Int(1);
-    fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB2);
+    fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB2);
     once_value_2 = fra.me.REG[6];
     register_static_object(&once_value_2);
   } else fra.me.REG[6] = once_value_2;
@@ -3589,7 +3589,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
   if (!once_value_3) {
     fra.me.REG[6] = BOX_NativeString("] = {");
     REGB2 = TAG_Int(5);
-    fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB2);
+    fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB2);
     once_value_3 = fra.me.REG[6];
     register_static_object(&once_value_3);
   } else fra.me.REG[6] = once_value_3;
@@ -3599,20 +3599,20 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
   CALL_compiling___compiling_base___CompilerVisitor___add_instr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[5]);
   /* compiling/compiling_global.nit:391 */
   CALL_compiling___compiling_base___CompilerVisitor___indent(fra.me.REG[1])(fra.me.REG[1]);
-  /* ../lib/standard/collection/array.nit:266 */
+  /* ../lib/standard/collection/array.nit:267 */
   fra.me.REG[5] = fra.me.REG[3];
-  /* ../lib/standard/collection/array.nit:269 */
-  REGB2 = TAG_Int(0);
   /* ../lib/standard/collection/array.nit:270 */
+  REGB2 = TAG_Int(0);
+  /* ../lib/standard/collection/array.nit:271 */
   REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[5])!=NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 270);
+    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 271);
   }
   REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[5]);
-  /* ../lib/standard/collection/array.nit:271 */
-  fra.me.REG[6] = ATTR_standard___collection___array___Array____items(fra.me.REG[5]);
   /* ../lib/standard/collection/array.nit:272 */
+  fra.me.REG[6] = ATTR_standard___collection___array___Array____items(fra.me.REG[5]);
+  /* ../lib/standard/collection/array.nit:273 */
   while(1) {
     /* ../lib/standard/collection/array.nit:24 */
     REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[5])!=NIT_NULL);
@@ -3626,16 +3626,16 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:242 */
     REGB1 = TAG_Bool(UNTAG_Int(REGB2)<UNTAG_Int(REGB1));
-    /* ../lib/standard/collection/array.nit:272 */
+    /* ../lib/standard/collection/array.nit:273 */
     if (UNTAG_Bool(REGB1)) {
-      /* ../lib/standard/collection/array.nit:273 */
+      /* ../lib/standard/collection/array.nit:274 */
       REGB1 = TAG_Bool(fra.me.REG[6]==NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
-        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
+        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 274);
       }
-      /* ../lib/standard/collection/array.nit:724 */
+      /* ../lib/standard/collection/array.nit:725 */
       fra.me.REG[7] = ((Nit_NativeArray)fra.me.REG[6])->val[UNTAG_Int(REGB2)];
       /* compiling/compiling_global.nit:393 */
       REGB1 = TAG_Bool(fra.me.REG[7]==NIT_NULL);
@@ -3655,7 +3655,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
         if (!once_value_4) {
           fra.me.REG[8] = BOX_NativeString("{0} /* Class Hole :( */,");
           REGB1 = TAG_Int(24);
-          fra.me.REG[8] = NEW_String_standard___string___String___with_native(fra.me.REG[8], REGB1);
+          fra.me.REG[8] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[8])(fra.me.REG[8], REGB1);
           once_value_4 = fra.me.REG[8];
           register_static_object(&once_value_4);
         } else fra.me.REG[8] = once_value_4;
@@ -3668,7 +3668,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
         if (!once_value_5) {
           fra.me.REG[9] = BOX_NativeString("{(bigint) ");
           REGB1 = TAG_Int(10);
-          fra.me.REG[9] = NEW_String_standard___string___String___with_native(fra.me.REG[9], REGB1);
+          fra.me.REG[9] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[9])(fra.me.REG[9], REGB1);
           once_value_5 = fra.me.REG[9];
           register_static_object(&once_value_5);
         } else fra.me.REG[9] = once_value_5;
@@ -3683,7 +3683,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
         if (!once_value_6) {
           fra.me.REG[7] = BOX_NativeString("},");
           REGB1 = TAG_Int(2);
-          fra.me.REG[7] = NEW_String_standard___string___String___with_native(fra.me.REG[7], REGB1);
+          fra.me.REG[7] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[7])(fra.me.REG[7], REGB1);
           once_value_6 = fra.me.REG[7];
           register_static_object(&once_value_6);
         } else fra.me.REG[7] = once_value_6;
@@ -3692,14 +3692,14 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
         fra.me.REG[8] = CALL_standard___string___Object___to_s(fra.me.REG[8])(fra.me.REG[8]);
         CALL_compiling___compiling_base___CompilerVisitor___add_instr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[8]);
       }
-      /* ../lib/standard/collection/array.nit:274 */
+      /* ../lib/standard/collection/array.nit:275 */
       REGB1 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB1 = TAG_Int(UNTAG_Int(REGB2)+UNTAG_Int(REGB1));
-      /* ../lib/standard/collection/array.nit:274 */
+      /* ../lib/standard/collection/array.nit:275 */
       REGB2 = REGB1;
     } else {
-      /* ../lib/standard/collection/array.nit:272 */
+      /* ../lib/standard/collection/array.nit:273 */
       goto label7;
     }
   }
@@ -3716,7 +3716,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:237 */
+  /* ../lib/standard/kernel.nit:244 */
   REGB2 = TAG_Bool(UNTAG_Int(REGB0)>UNTAG_Int(REGB2));
   /* compiling/compiling_global.nit:399 */
   if (UNTAG_Bool(REGB2)) {
@@ -3724,7 +3724,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
     if (!once_value_8) {
       fra.me.REG[6] = BOX_NativeString("{0},");
       REGB2 = TAG_Int(4);
-      fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB2);
+      fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB2);
       once_value_8 = fra.me.REG[6];
       register_static_object(&once_value_8);
     } else fra.me.REG[6] = once_value_8;
@@ -3736,7 +3736,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
       nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
     }
     REGB2 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[3]);
-    /* ../lib/standard/kernel.nit:240 */
+    /* ../lib/standard/kernel.nit:247 */
     REGB2 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB2));
     /* compiling/compiling_global.nit:400 */
     fra.me.REG[6] = CALL_standard___string___String_____star(fra.me.REG[6])(fra.me.REG[6], REGB2);
@@ -3748,7 +3748,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
   if (!once_value_9) {
     fra.me.REG[6] = BOX_NativeString("};");
     REGB2 = TAG_Int(2);
-    fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB2);
+    fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB2);
     once_value_9 = fra.me.REG[6];
     register_static_object(&once_value_9);
   } else fra.me.REG[6] = once_value_9;
@@ -3756,20 +3756,20 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
   CALL_compiling___compiling_base___CompilerVisitor___add_instr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[6]);
   /* compiling/compiling_global.nit:404 */
   fra.me.REG[4] = CALL_compiling___table_computation___CompiledClass___instance_table(fra.me.REG[4])(fra.me.REG[4]);
-  /* ../lib/standard/collection/array.nit:266 */
+  /* ../lib/standard/collection/array.nit:267 */
   fra.me.REG[6] = fra.me.REG[4];
-  /* ../lib/standard/collection/array.nit:269 */
-  REGB2 = TAG_Int(0);
   /* ../lib/standard/collection/array.nit:270 */
+  REGB2 = TAG_Int(0);
+  /* ../lib/standard/collection/array.nit:271 */
   REGB0 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[6])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 270);
+    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 271);
   }
   REGB0 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[6]);
-  /* ../lib/standard/collection/array.nit:271 */
-  fra.me.REG[3] = ATTR_standard___collection___array___Array____items(fra.me.REG[6]);
   /* ../lib/standard/collection/array.nit:272 */
+  fra.me.REG[3] = ATTR_standard___collection___array___Array____items(fra.me.REG[6]);
+  /* ../lib/standard/collection/array.nit:273 */
   while(1) {
     /* ../lib/standard/collection/array.nit:24 */
     REGB0 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[6])!=NIT_NULL);
@@ -3783,16 +3783,16 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:242 */
     REGB0 = TAG_Bool(UNTAG_Int(REGB2)<UNTAG_Int(REGB0));
-    /* ../lib/standard/collection/array.nit:272 */
+    /* ../lib/standard/collection/array.nit:273 */
     if (UNTAG_Bool(REGB0)) {
-      /* ../lib/standard/collection/array.nit:273 */
+      /* ../lib/standard/collection/array.nit:274 */
       REGB0 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
       if (UNTAG_Bool(REGB0)) {
-        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
+        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 274);
       }
-      /* ../lib/standard/collection/array.nit:724 */
+      /* ../lib/standard/collection/array.nit:725 */
       fra.me.REG[5] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB2)];
       /* compiling/compiling_global.nit:406 */
       REGB0 = TAG_Bool(fra.me.REG[5]==NIT_NULL);
@@ -3812,7 +3812,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
         if (!once_value_10) {
           fra.me.REG[8] = BOX_NativeString("/* Instance Hole :( */");
           REGB0 = TAG_Int(22);
-          fra.me.REG[8] = NEW_String_standard___string___String___with_native(fra.me.REG[8], REGB0);
+          fra.me.REG[8] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[8])(fra.me.REG[8], REGB0);
           once_value_10 = fra.me.REG[8];
           register_static_object(&once_value_10);
         } else fra.me.REG[8] = once_value_10;
@@ -3827,14 +3827,14 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
         fra.me.REG[5] = CALL_compiling___compiling_global___TableElt___compile_to_c(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[1], fra.me.REG[2]);
         CALL_compiling___compiling_base___CompilerVisitor___add_instr(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[5]);
       }
-      /* ../lib/standard/collection/array.nit:274 */
+      /* ../lib/standard/collection/array.nit:275 */
       REGB0 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB0 = TAG_Int(UNTAG_Int(REGB2)+UNTAG_Int(REGB0));
-      /* ../lib/standard/collection/array.nit:274 */
+      /* ../lib/standard/collection/array.nit:275 */
       REGB2 = REGB0;
     } else {
-      /* ../lib/standard/collection/array.nit:272 */
+      /* ../lib/standard/collection/array.nit:273 */
       goto label11;
     }
   }
@@ -3846,7 +3846,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
   if (!once_value_12) {
     fra.me.REG[5] = BOX_NativeString("NativeArray");
     REGB2 = TAG_Int(11);
-    fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB2);
+    fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB2);
     once_value_12 = fra.me.REG[5];
     register_static_object(&once_value_12);
   } else fra.me.REG[5] = once_value_12;
@@ -3863,7 +3863,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
     if (!once_value_13) {
       fra.me.REG[5] = BOX_NativeString("val_t NEW_NativeArray(size_t length, size_t size) {");
       REGB2 = TAG_Int(51);
-      fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB2);
+      fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB2);
       once_value_13 = fra.me.REG[5];
       register_static_object(&once_value_13);
     } else fra.me.REG[5] = once_value_13;
@@ -3875,7 +3875,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
     if (!once_value_14) {
       fra.me.REG[5] = BOX_NativeString("Nit_NativeArray array;");
       REGB2 = TAG_Int(22);
-      fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB2);
+      fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB2);
       once_value_14 = fra.me.REG[5];
       register_static_object(&once_value_14);
     } else fra.me.REG[5] = once_value_14;
@@ -3885,7 +3885,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
     if (!once_value_15) {
       fra.me.REG[5] = BOX_NativeString("array = (Nit_NativeArray)alloc(sizeof(struct Nit_NativeArray) + ((length - 1) * size));");
       REGB2 = TAG_Int(87);
-      fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB2);
+      fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB2);
       once_value_15 = fra.me.REG[5];
       register_static_object(&once_value_15);
     } else fra.me.REG[5] = once_value_15;
@@ -3897,7 +3897,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
     if (!once_value_16) {
       fra.me.REG[6] = BOX_NativeString("array->vft = (classtable_elt_t*)VFT_");
       REGB2 = TAG_Int(36);
-      fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB2);
+      fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB2);
       once_value_16 = fra.me.REG[6];
       register_static_object(&once_value_16);
     } else fra.me.REG[6] = once_value_16;
@@ -3908,7 +3908,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
     if (!once_value_17) {
       fra.me.REG[6] = BOX_NativeString(";");
       REGB2 = TAG_Int(1);
-      fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB2);
+      fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB2);
       once_value_17 = fra.me.REG[6];
       register_static_object(&once_value_17);
     } else fra.me.REG[6] = once_value_17;
@@ -3920,7 +3920,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
     if (!once_value_18) {
       fra.me.REG[5] = BOX_NativeString("array->object_id = object_id_counter;");
       REGB2 = TAG_Int(37);
-      fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB2);
+      fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB2);
       once_value_18 = fra.me.REG[5];
       register_static_object(&once_value_18);
     } else fra.me.REG[5] = once_value_18;
@@ -3930,7 +3930,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
     if (!once_value_19) {
       fra.me.REG[5] = BOX_NativeString("object_id_counter = object_id_counter + 1;");
       REGB2 = TAG_Int(42);
-      fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB2);
+      fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB2);
       once_value_19 = fra.me.REG[5];
       register_static_object(&once_value_19);
     } else fra.me.REG[5] = once_value_19;
@@ -3940,7 +3940,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
     if (!once_value_20) {
       fra.me.REG[5] = BOX_NativeString("array->size = length;");
       REGB2 = TAG_Int(21);
-      fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB2);
+      fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB2);
       once_value_20 = fra.me.REG[5];
       register_static_object(&once_value_20);
     } else fra.me.REG[5] = once_value_20;
@@ -3950,7 +3950,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
     if (!once_value_21) {
       fra.me.REG[5] = BOX_NativeString("return OBJ2VAL(array);");
       REGB2 = TAG_Int(22);
-      fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB2);
+      fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB2);
       once_value_21 = fra.me.REG[5];
       register_static_object(&once_value_21);
     } else fra.me.REG[5] = once_value_21;
@@ -3962,7 +3962,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
     if (!once_value_22) {
       fra.me.REG[5] = BOX_NativeString("}");
       REGB2 = TAG_Int(1);
-      fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB2);
+      fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB2);
       once_value_22 = fra.me.REG[5];
       register_static_object(&once_value_22);
     } else fra.me.REG[5] = once_value_22;
@@ -3989,7 +3989,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
       if (!once_value_23) {
         fra.me.REG[6] = BOX_NativeString("INIT_ATTRIBUTES__");
         REGB2 = TAG_Int(17);
-        fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB2);
+        fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB2);
         once_value_23 = fra.me.REG[6];
         register_static_object(&once_value_23);
       } else fra.me.REG[6] = once_value_23;
@@ -4000,7 +4000,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
       if (!once_value_24) {
         fra.me.REG[6] = BOX_NativeString("");
         REGB2 = TAG_Int(0);
-        fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB2);
+        fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB2);
         once_value_24 = fra.me.REG[6];
         register_static_object(&once_value_24);
       } else fra.me.REG[6] = once_value_24;
@@ -4014,7 +4014,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
       if (!once_value_25) {
         fra.me.REG[7] = BOX_NativeString("init var of ");
         REGB2 = TAG_Int(12);
-        fra.me.REG[7] = NEW_String_standard___string___String___with_native(fra.me.REG[7], REGB2);
+        fra.me.REG[7] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[7])(fra.me.REG[7], REGB2);
         once_value_25 = fra.me.REG[7];
         register_static_object(&once_value_25);
       } else fra.me.REG[7] = once_value_25;
@@ -4026,7 +4026,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
       if (!once_value_26) {
         fra.me.REG[7] = BOX_NativeString("");
         REGB2 = TAG_Int(0);
-        fra.me.REG[7] = NEW_String_standard___string___String___with_native(fra.me.REG[7], REGB2);
+        fra.me.REG[7] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[7])(fra.me.REG[7], REGB2);
         once_value_26 = fra.me.REG[7];
         register_static_object(&once_value_26);
       } else fra.me.REG[7] = once_value_26;
@@ -4059,7 +4059,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
       if (!once_value_27) {
         fra.me.REG[6] = BOX_NativeString("}");
         REGB2 = TAG_Int(1);
-        fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB2);
+        fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB2);
         once_value_27 = fra.me.REG[6];
         register_static_object(&once_value_27);
       } else fra.me.REG[6] = once_value_27;
@@ -4071,7 +4071,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
       if (!once_value_28) {
         fra.me.REG[8] = BOX_NativeString("val_t NEW_");
         REGB2 = TAG_Int(10);
-        fra.me.REG[8] = NEW_String_standard___string___String___with_native(fra.me.REG[8], REGB2);
+        fra.me.REG[8] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[8])(fra.me.REG[8], REGB2);
         once_value_28 = fra.me.REG[8];
         register_static_object(&once_value_28);
       } else fra.me.REG[8] = once_value_28;
@@ -4082,7 +4082,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
       if (!once_value_29) {
         fra.me.REG[8] = BOX_NativeString("(void);");
         REGB2 = TAG_Int(7);
-        fra.me.REG[8] = NEW_String_standard___string___String___with_native(fra.me.REG[8], REGB2);
+        fra.me.REG[8] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[8])(fra.me.REG[8], REGB2);
         once_value_29 = fra.me.REG[8];
         register_static_object(&once_value_29);
       } else fra.me.REG[8] = once_value_29;
@@ -4096,7 +4096,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
       if (!once_value_30) {
         fra.me.REG[8] = BOX_NativeString("val_t NEW_");
         REGB2 = TAG_Int(10);
-        fra.me.REG[8] = NEW_String_standard___string___String___with_native(fra.me.REG[8], REGB2);
+        fra.me.REG[8] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[8])(fra.me.REG[8], REGB2);
         once_value_30 = fra.me.REG[8];
         register_static_object(&once_value_30);
       } else fra.me.REG[8] = once_value_30;
@@ -4107,7 +4107,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
       if (!once_value_31) {
         fra.me.REG[8] = BOX_NativeString("(void)");
         REGB2 = TAG_Int(6);
-        fra.me.REG[8] = NEW_String_standard___string___String___with_native(fra.me.REG[8], REGB2);
+        fra.me.REG[8] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[8])(fra.me.REG[8], REGB2);
         once_value_31 = fra.me.REG[8];
         register_static_object(&once_value_31);
       } else fra.me.REG[8] = once_value_31;
@@ -4119,7 +4119,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
       if (!once_value_32) {
         fra.me.REG[6] = BOX_NativeString("{");
         REGB2 = TAG_Int(1);
-        fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB2);
+        fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB2);
         once_value_32 = fra.me.REG[6];
         register_static_object(&once_value_32);
       } else fra.me.REG[6] = once_value_32;
@@ -4131,7 +4131,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
       if (!once_value_33) {
         fra.me.REG[6] = BOX_NativeString("obj_t obj;");
         REGB2 = TAG_Int(10);
-        fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB2);
+        fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB2);
         once_value_33 = fra.me.REG[6];
         register_static_object(&once_value_33);
       } else fra.me.REG[6] = once_value_33;
@@ -4143,7 +4143,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
       if (!once_value_34) {
         fra.me.REG[8] = BOX_NativeString("obj = alloc(sizeof(val_t) * ");
         REGB2 = TAG_Int(28);
-        fra.me.REG[8] = NEW_String_standard___string___String___with_native(fra.me.REG[8], REGB2);
+        fra.me.REG[8] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[8])(fra.me.REG[8], REGB2);
         once_value_34 = fra.me.REG[8];
         register_static_object(&once_value_34);
       } else fra.me.REG[8] = once_value_34;
@@ -4162,7 +4162,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
       if (!once_value_35) {
         fra.me.REG[4] = BOX_NativeString(");");
         REGB2 = TAG_Int(2);
-        fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB2);
+        fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB2);
         once_value_35 = fra.me.REG[4];
         register_static_object(&once_value_35);
       } else fra.me.REG[4] = once_value_35;
@@ -4176,7 +4176,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
       if (!once_value_36) {
         fra.me.REG[4] = BOX_NativeString("obj->vft = (classtable_elt_t*)VFT_");
         REGB2 = TAG_Int(34);
-        fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB2);
+        fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB2);
         once_value_36 = fra.me.REG[4];
         register_static_object(&once_value_36);
       } else fra.me.REG[4] = once_value_36;
@@ -4187,7 +4187,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
       if (!once_value_37) {
         fra.me.REG[4] = BOX_NativeString(";");
         REGB2 = TAG_Int(1);
-        fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB2);
+        fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB2);
         once_value_37 = fra.me.REG[4];
         register_static_object(&once_value_37);
       } else fra.me.REG[4] = once_value_37;
@@ -4199,7 +4199,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
       if (!once_value_38) {
         fra.me.REG[6] = BOX_NativeString("obj[1].object_id = object_id_counter;");
         REGB2 = TAG_Int(37);
-        fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB2);
+        fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB2);
         once_value_38 = fra.me.REG[6];
         register_static_object(&once_value_38);
       } else fra.me.REG[6] = once_value_38;
@@ -4209,7 +4209,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
       if (!once_value_39) {
         fra.me.REG[6] = BOX_NativeString("object_id_counter = object_id_counter + 1;");
         REGB2 = TAG_Int(42);
-        fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB2);
+        fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB2);
         once_value_39 = fra.me.REG[6];
         register_static_object(&once_value_39);
       } else fra.me.REG[6] = once_value_39;
@@ -4219,7 +4219,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
       if (!once_value_40) {
         fra.me.REG[6] = BOX_NativeString("return OBJ2VAL(obj);");
         REGB2 = TAG_Int(20);
-        fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB2);
+        fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB2);
         once_value_40 = fra.me.REG[6];
         register_static_object(&once_value_40);
       } else fra.me.REG[6] = once_value_40;
@@ -4231,7 +4231,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
       if (!once_value_41) {
         fra.me.REG[6] = BOX_NativeString("}");
         REGB2 = TAG_Int(1);
-        fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB2);
+        fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB2);
         once_value_41 = fra.me.REG[6];
         register_static_object(&once_value_41);
       } else fra.me.REG[6] = once_value_41;
@@ -4243,7 +4243,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
       if (!once_value_42) {
         fra.me.REG[4] = BOX_NativeString("CHECKNEW_");
         REGB2 = TAG_Int(9);
-        fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB2);
+        fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB2);
         once_value_42 = fra.me.REG[4];
         register_static_object(&once_value_42);
       } else fra.me.REG[4] = once_value_42;
@@ -4254,7 +4254,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
       if (!once_value_43) {
         fra.me.REG[4] = BOX_NativeString("");
         REGB2 = TAG_Int(0);
-        fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB2);
+        fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB2);
         once_value_43 = fra.me.REG[4];
         register_static_object(&once_value_43);
       } else fra.me.REG[4] = once_value_43;
@@ -4268,7 +4268,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
       if (!once_value_44) {
         fra.me.REG[5] = BOX_NativeString("check new ");
         REGB2 = TAG_Int(10);
-        fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB2);
+        fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB2);
         once_value_44 = fra.me.REG[5];
         register_static_object(&once_value_44);
       } else fra.me.REG[5] = once_value_44;
@@ -4280,7 +4280,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
       if (!once_value_45) {
         fra.me.REG[5] = BOX_NativeString("");
         REGB2 = TAG_Int(0);
-        fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB2);
+        fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB2);
         once_value_45 = fra.me.REG[5];
         register_static_object(&once_value_45);
       } else fra.me.REG[5] = once_value_45;
@@ -4313,7 +4313,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
       if (!once_value_46) {
         fra.me.REG[4] = BOX_NativeString("}");
         REGB2 = TAG_Int(1);
-        fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB2);
+        fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB2);
         once_value_46 = fra.me.REG[4];
         register_static_object(&once_value_46);
       } else fra.me.REG[4] = once_value_46;
@@ -4324,7 +4324,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
       fra.me.REG[4] = CALL_metamodel___partial_order___PartialOrderElement___greaters(fra.me.REG[4])(fra.me.REG[4]);
       REGB2 = CALL_standard___collection___abstract_collection___Collection___length(fra.me.REG[4])(fra.me.REG[4]);
       REGB0 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB0 = TAG_Int(UNTAG_Int(REGB2)+UNTAG_Int(REGB0));
       /* compiling/compiling_global.nit:466 */
       REGB2 = TAG_Int(5);
@@ -4332,7 +4332,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
       if (!once_value_47) {
         fra.me.REG[8] = BOX_NativeString("int init_table[");
         REGB2 = TAG_Int(15);
-        fra.me.REG[8] = NEW_String_standard___string___String___with_native(fra.me.REG[8], REGB2);
+        fra.me.REG[8] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[8])(fra.me.REG[8], REGB2);
         once_value_47 = fra.me.REG[8];
         register_static_object(&once_value_47);
       } else fra.me.REG[8] = once_value_47;
@@ -4343,7 +4343,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
       if (!once_value_48) {
         fra.me.REG[8] = BOX_NativeString("] = {0");
         REGB2 = TAG_Int(6);
-        fra.me.REG[8] = NEW_String_standard___string___String___with_native(fra.me.REG[8], REGB2);
+        fra.me.REG[8] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[8])(fra.me.REG[8], REGB2);
         once_value_48 = fra.me.REG[8];
         register_static_object(&once_value_48);
       } else fra.me.REG[8] = once_value_48;
@@ -4352,13 +4352,13 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
       if (!once_value_49) {
         fra.me.REG[8] = BOX_NativeString(", 0");
         REGB2 = TAG_Int(3);
-        fra.me.REG[8] = NEW_String_standard___string___String___with_native(fra.me.REG[8], REGB2);
+        fra.me.REG[8] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[8])(fra.me.REG[8], REGB2);
         once_value_49 = fra.me.REG[8];
         register_static_object(&once_value_49);
       } else fra.me.REG[8] = once_value_49;
       fra.me.REG[8] = fra.me.REG[8];
       REGB2 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:240 */
+      /* ../lib/standard/kernel.nit:247 */
       REGB2 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB2));
       /* compiling/compiling_global.nit:466 */
       fra.me.REG[8] = CALL_standard___string___String_____star(fra.me.REG[8])(fra.me.REG[8], REGB2);
@@ -4366,7 +4366,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
       if (!once_value_50) {
         fra.me.REG[8] = BOX_NativeString("};");
         REGB2 = TAG_Int(2);
-        fra.me.REG[8] = NEW_String_standard___string___String___with_native(fra.me.REG[8], REGB2);
+        fra.me.REG[8] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[8])(fra.me.REG[8], REGB2);
         once_value_50 = fra.me.REG[8];
         register_static_object(&once_value_50);
       } else fra.me.REG[8] = once_value_50;
@@ -4397,7 +4397,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
         if (!once_value_62) {
           fra.me.REG[4] = BOX_NativeString("struct TBOX_");
           REGB2 = TAG_Int(12);
-          fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB2);
+          fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB2);
           once_value_62 = fra.me.REG[4];
           register_static_object(&once_value_62);
         } else fra.me.REG[4] = once_value_62;
@@ -4409,7 +4409,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
         if (!once_value_63) {
           fra.me.REG[4] = BOX_NativeString("");
           REGB2 = TAG_Int(0);
-          fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB2);
+          fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB2);
           once_value_63 = fra.me.REG[4];
           register_static_object(&once_value_63);
         } else fra.me.REG[4] = once_value_63;
@@ -4422,7 +4422,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
         if (!once_value_64) {
           fra.me.REG[8] = BOX_NativeString("val_t BOX_");
           REGB2 = TAG_Int(10);
-          fra.me.REG[8] = NEW_String_standard___string___String___with_native(fra.me.REG[8], REGB2);
+          fra.me.REG[8] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[8])(fra.me.REG[8], REGB2);
           once_value_64 = fra.me.REG[8];
           register_static_object(&once_value_64);
         } else fra.me.REG[8] = once_value_64;
@@ -4434,7 +4434,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
         if (!once_value_65) {
           fra.me.REG[8] = BOX_NativeString("(");
           REGB2 = TAG_Int(1);
-          fra.me.REG[8] = NEW_String_standard___string___String___with_native(fra.me.REG[8], REGB2);
+          fra.me.REG[8] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[8])(fra.me.REG[8], REGB2);
           once_value_65 = fra.me.REG[8];
           register_static_object(&once_value_65);
         } else fra.me.REG[8] = once_value_65;
@@ -4444,7 +4444,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
         if (!once_value_66) {
           fra.me.REG[3] = BOX_NativeString(" val) {");
           REGB2 = TAG_Int(7);
-          fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB2);
+          fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB2);
           once_value_66 = fra.me.REG[3];
           register_static_object(&once_value_66);
         } else fra.me.REG[3] = once_value_66;
@@ -4460,7 +4460,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
         if (!once_value_67) {
           fra.me.REG[3] = BOX_NativeString("");
           REGB2 = TAG_Int(0);
-          fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB2);
+          fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB2);
           once_value_67 = fra.me.REG[3];
           register_static_object(&once_value_67);
         } else fra.me.REG[3] = once_value_67;
@@ -4470,7 +4470,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
         if (!once_value_68) {
           fra.me.REG[3] = BOX_NativeString(" *box = (");
           REGB2 = TAG_Int(9);
-          fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB2);
+          fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB2);
           once_value_68 = fra.me.REG[3];
           register_static_object(&once_value_68);
         } else fra.me.REG[3] = once_value_68;
@@ -4480,7 +4480,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
         if (!once_value_69) {
           fra.me.REG[3] = BOX_NativeString("*)alloc(sizeof(");
           REGB2 = TAG_Int(15);
-          fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB2);
+          fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB2);
           once_value_69 = fra.me.REG[3];
           register_static_object(&once_value_69);
         } else fra.me.REG[3] = once_value_69;
@@ -4490,7 +4490,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
         if (!once_value_70) {
           fra.me.REG[0] = BOX_NativeString("));");
           REGB2 = TAG_Int(3);
-          fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB2);
+          fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB2);
           once_value_70 = fra.me.REG[0];
           register_static_object(&once_value_70);
         } else fra.me.REG[0] = once_value_70;
@@ -4504,7 +4504,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
         if (!once_value_71) {
           fra.me.REG[0] = BOX_NativeString("box->vft = VFT_");
           REGB2 = TAG_Int(15);
-          fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB2);
+          fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB2);
           once_value_71 = fra.me.REG[0];
           register_static_object(&once_value_71);
         } else fra.me.REG[0] = once_value_71;
@@ -4515,7 +4515,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
         if (!once_value_72) {
           fra.me.REG[2] = BOX_NativeString(";");
           REGB2 = TAG_Int(1);
-          fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB2);
+          fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB2);
           once_value_72 = fra.me.REG[2];
           register_static_object(&once_value_72);
         } else fra.me.REG[2] = once_value_72;
@@ -4527,7 +4527,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
         if (!once_value_73) {
           fra.me.REG[4] = BOX_NativeString("box->val = val;");
           REGB2 = TAG_Int(15);
-          fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB2);
+          fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB2);
           once_value_73 = fra.me.REG[4];
           register_static_object(&once_value_73);
         } else fra.me.REG[4] = once_value_73;
@@ -4537,7 +4537,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
         if (!once_value_74) {
           fra.me.REG[4] = BOX_NativeString("box->object_id = object_id_counter;");
           REGB2 = TAG_Int(35);
-          fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB2);
+          fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB2);
           once_value_74 = fra.me.REG[4];
           register_static_object(&once_value_74);
         } else fra.me.REG[4] = once_value_74;
@@ -4547,7 +4547,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
         if (!once_value_75) {
           fra.me.REG[4] = BOX_NativeString("object_id_counter = object_id_counter + 1;");
           REGB2 = TAG_Int(42);
-          fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB2);
+          fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB2);
           once_value_75 = fra.me.REG[4];
           register_static_object(&once_value_75);
         } else fra.me.REG[4] = once_value_75;
@@ -4557,7 +4557,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
         if (!once_value_76) {
           fra.me.REG[4] = BOX_NativeString("return OBJ2VAL(box);");
           REGB2 = TAG_Int(20);
-          fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB2);
+          fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB2);
           once_value_76 = fra.me.REG[4];
           register_static_object(&once_value_76);
         } else fra.me.REG[4] = once_value_76;
@@ -4569,7 +4569,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
         if (!once_value_77) {
           fra.me.REG[4] = BOX_NativeString("}");
           REGB2 = TAG_Int(1);
-          fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB2);
+          fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB2);
           once_value_77 = fra.me.REG[4];
           register_static_object(&once_value_77);
         } else fra.me.REG[4] = once_value_77;
@@ -4632,7 +4632,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
         if (!once_value_53) {
           fra.me.REG[2] = BOX_NativeString("NEW_");
           REGB0 = TAG_Int(4);
-          fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+          fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
           once_value_53 = fra.me.REG[2];
           register_static_object(&once_value_53);
         } else fra.me.REG[2] = once_value_53;
@@ -4643,7 +4643,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
         if (!once_value_54) {
           fra.me.REG[2] = BOX_NativeString("_");
           REGB0 = TAG_Int(1);
-          fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+          fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
           once_value_54 = fra.me.REG[2];
           register_static_object(&once_value_54);
         } else fra.me.REG[2] = once_value_54;
@@ -4656,7 +4656,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
         if (!once_value_55) {
           fra.me.REG[2] = BOX_NativeString("");
           REGB0 = TAG_Int(0);
-          fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+          fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
           once_value_55 = fra.me.REG[2];
           register_static_object(&once_value_55);
         } else fra.me.REG[2] = once_value_55;
@@ -4671,7 +4671,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
         if (!once_value_56) {
           fra.me.REG[4] = BOX_NativeString("new ");
           REGB0 = TAG_Int(4);
-          fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+          fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
           once_value_56 = fra.me.REG[4];
           register_static_object(&once_value_56);
         } else fra.me.REG[4] = once_value_56;
@@ -4682,7 +4682,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
         if (!once_value_57) {
           fra.me.REG[4] = BOX_NativeString(" ");
           REGB0 = TAG_Int(1);
-          fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+          fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
           once_value_57 = fra.me.REG[4];
           register_static_object(&once_value_57);
         } else fra.me.REG[4] = once_value_57;
@@ -4693,7 +4693,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
         if (!once_value_58) {
           fra.me.REG[4] = BOX_NativeString("");
           REGB0 = TAG_Int(0);
-          fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+          fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
           once_value_58 = fra.me.REG[4];
           register_static_object(&once_value_58);
         } else fra.me.REG[4] = once_value_58;
@@ -4732,7 +4732,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
         if (!once_value_59) {
           fra.me.REG[0] = BOX_NativeString("return ");
           REGB0 = TAG_Int(7);
-          fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+          fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
           once_value_59 = fra.me.REG[0];
           register_static_object(&once_value_59);
         } else fra.me.REG[0] = once_value_59;
@@ -4742,7 +4742,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
         if (!once_value_60) {
           fra.me.REG[3] = BOX_NativeString(";");
           REGB0 = TAG_Int(1);
-          fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+          fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
           once_value_60 = fra.me.REG[3];
           register_static_object(&once_value_60);
         } else fra.me.REG[3] = once_value_60;
@@ -4758,7 +4758,7 @@ void compiling___compiling_global___MMLocalClass___compile_tables_to_c(val_t p0,
         if (!once_value_61) {
           fra.me.REG[2] = BOX_NativeString("}");
           REGB0 = TAG_Int(1);
-          fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+          fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
           once_value_61 = fra.me.REG[2];
           register_static_object(&once_value_61);
         } else fra.me.REG[2] = once_value_61;
@@ -4836,7 +4836,7 @@ void compiling___compiling_global___MMMethod___compile_property_to_c(val_t p0, v
     if (!once_value_1) {
       fra.me.REG[4] = BOX_NativeString("int* init_table");
       REGB0 = TAG_Int(15);
-      fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+      fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
       once_value_1 = fra.me.REG[4];
       register_static_object(&once_value_1);
     } else fra.me.REG[4] = once_value_1;
@@ -4875,7 +4875,7 @@ void compiling___compiling_global___MMMethod___compile_property_to_c(val_t p0, v
     if (!once_value_2) {
       fra.me.REG[8] = BOX_NativeString("itpos");
       REGB0 = TAG_Int(5);
-      fra.me.REG[8] = NEW_String_standard___string___String___with_native(fra.me.REG[8], REGB0);
+      fra.me.REG[8] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[8])(fra.me.REG[8], REGB0);
       once_value_2 = fra.me.REG[8];
       register_static_object(&once_value_2);
     } else fra.me.REG[8] = once_value_2;
@@ -4887,7 +4887,7 @@ void compiling___compiling_global___MMMethod___compile_property_to_c(val_t p0, v
     if (!once_value_3) {
       fra.me.REG[8] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[8] = NEW_String_standard___string___String___with_native(fra.me.REG[8], REGB0);
+      fra.me.REG[8] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[8])(fra.me.REG[8], REGB0);
       once_value_3 = fra.me.REG[8];
       register_static_object(&once_value_3);
     } else fra.me.REG[8] = once_value_3;
@@ -4901,7 +4901,7 @@ void compiling___compiling_global___MMMethod___compile_property_to_c(val_t p0, v
     if (!once_value_4) {
       fra.me.REG[8] = BOX_NativeString("int ");
       REGB0 = TAG_Int(4);
-      fra.me.REG[8] = NEW_String_standard___string___String___with_native(fra.me.REG[8], REGB0);
+      fra.me.REG[8] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[8])(fra.me.REG[8], REGB0);
       once_value_4 = fra.me.REG[8];
       register_static_object(&once_value_4);
     } else fra.me.REG[8] = once_value_4;
@@ -4911,7 +4911,7 @@ void compiling___compiling_global___MMMethod___compile_property_to_c(val_t p0, v
     if (!once_value_5) {
       fra.me.REG[8] = BOX_NativeString(" = VAL2OBJ(");
       REGB0 = TAG_Int(11);
-      fra.me.REG[8] = NEW_String_standard___string___String___with_native(fra.me.REG[8], REGB0);
+      fra.me.REG[8] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[8])(fra.me.REG[8], REGB0);
       once_value_5 = fra.me.REG[8];
       register_static_object(&once_value_5);
     } else fra.me.REG[8] = once_value_5;
@@ -4922,7 +4922,7 @@ void compiling___compiling_global___MMMethod___compile_property_to_c(val_t p0, v
     if (!once_value_6) {
       fra.me.REG[8] = BOX_NativeString(")->vft[");
       REGB0 = TAG_Int(7);
-      fra.me.REG[8] = NEW_String_standard___string___String___with_native(fra.me.REG[8], REGB0);
+      fra.me.REG[8] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[8])(fra.me.REG[8], REGB0);
       once_value_6 = fra.me.REG[8];
       register_static_object(&once_value_6);
     } else fra.me.REG[8] = once_value_6;
@@ -4935,7 +4935,7 @@ void compiling___compiling_global___MMMethod___compile_property_to_c(val_t p0, v
     if (!once_value_7) {
       fra.me.REG[8] = BOX_NativeString("].i;");
       REGB0 = TAG_Int(4);
-      fra.me.REG[8] = NEW_String_standard___string___String___with_native(fra.me.REG[8], REGB0);
+      fra.me.REG[8] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[8])(fra.me.REG[8], REGB0);
       once_value_7 = fra.me.REG[8];
       register_static_object(&once_value_7);
     } else fra.me.REG[8] = once_value_7;
@@ -4949,7 +4949,7 @@ void compiling___compiling_global___MMMethod___compile_property_to_c(val_t p0, v
     if (!once_value_8) {
       fra.me.REG[8] = BOX_NativeString("if (init_table[");
       REGB0 = TAG_Int(15);
-      fra.me.REG[8] = NEW_String_standard___string___String___with_native(fra.me.REG[8], REGB0);
+      fra.me.REG[8] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[8])(fra.me.REG[8], REGB0);
       once_value_8 = fra.me.REG[8];
       register_static_object(&once_value_8);
     } else fra.me.REG[8] = once_value_8;
@@ -4959,7 +4959,7 @@ void compiling___compiling_global___MMMethod___compile_property_to_c(val_t p0, v
     if (!once_value_9) {
       fra.me.REG[8] = BOX_NativeString("]) return;");
       REGB0 = TAG_Int(10);
-      fra.me.REG[8] = NEW_String_standard___string___String___with_native(fra.me.REG[8], REGB0);
+      fra.me.REG[8] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[8])(fra.me.REG[8], REGB0);
       once_value_9 = fra.me.REG[8];
       register_static_object(&once_value_9);
     } else fra.me.REG[8] = once_value_9;
@@ -4996,7 +4996,7 @@ void compiling___compiling_global___MMMethod___compile_property_to_c(val_t p0, v
     if (!once_value_10) {
       fra.me.REG[2] = BOX_NativeString("init_table[");
       REGB0 = TAG_Int(11);
-      fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+      fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
       once_value_10 = fra.me.REG[2];
       register_static_object(&once_value_10);
     } else fra.me.REG[2] = once_value_10;
@@ -5006,7 +5006,7 @@ void compiling___compiling_global___MMMethod___compile_property_to_c(val_t p0, v
     if (!once_value_11) {
       fra.me.REG[6] = BOX_NativeString("] = 1;");
       REGB0 = TAG_Int(6);
-      fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB0);
+      fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB0);
       once_value_11 = fra.me.REG[6];
       register_static_object(&once_value_11);
     } else fra.me.REG[6] = once_value_11;
@@ -5033,7 +5033,7 @@ void compiling___compiling_global___MMMethod___compile_property_to_c(val_t p0, v
     if (!once_value_12) {
       fra.me.REG[0] = BOX_NativeString("return;");
       REGB0 = TAG_Int(7);
-      fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+      fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
       once_value_12 = fra.me.REG[0];
       register_static_object(&once_value_12);
     } else fra.me.REG[0] = once_value_12;
@@ -5046,7 +5046,7 @@ void compiling___compiling_global___MMMethod___compile_property_to_c(val_t p0, v
     if (!once_value_13) {
       fra.me.REG[6] = BOX_NativeString("return ");
       REGB0 = TAG_Int(7);
-      fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB0);
+      fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB0);
       once_value_13 = fra.me.REG[6];
       register_static_object(&once_value_13);
     } else fra.me.REG[6] = once_value_13;
@@ -5056,7 +5056,7 @@ void compiling___compiling_global___MMMethod___compile_property_to_c(val_t p0, v
     if (!once_value_14) {
       fra.me.REG[3] = BOX_NativeString(";");
       REGB0 = TAG_Int(1);
-      fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+      fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
       once_value_14 = fra.me.REG[3];
       register_static_object(&once_value_14);
     } else fra.me.REG[3] = once_value_14;
@@ -5071,7 +5071,7 @@ void compiling___compiling_global___MMMethod___compile_property_to_c(val_t p0, v
   if (!once_value_15) {
     fra.me.REG[0] = BOX_NativeString("}");
     REGB0 = TAG_Int(1);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_15 = fra.me.REG[0];
     register_static_object(&once_value_15);
   } else fra.me.REG[0] = once_value_15;

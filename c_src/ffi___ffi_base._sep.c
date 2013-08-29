@@ -67,7 +67,7 @@ void ffi___ffi_base___ExternCode___accept_ffi_visitor(val_t p0, val_t p1){
     if (!once_value_1) {
       fra.me.REG[4] = BOX_NativeString("language \"");
       REGB0 = TAG_Int(10);
-      fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+      fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
       once_value_1 = fra.me.REG[4];
       register_static_object(&once_value_1);
     } else fra.me.REG[4] = once_value_1;
@@ -77,7 +77,7 @@ void ffi___ffi_base___ExternCode___accept_ffi_visitor(val_t p0, val_t p1){
     if (!once_value_2) {
       fra.me.REG[0] = BOX_NativeString("\" used to implement a code block in ");
       REGB0 = TAG_Int(36);
-      fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+      fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
       once_value_2 = fra.me.REG[0];
       register_static_object(&once_value_2);
     } else fra.me.REG[0] = once_value_2;
@@ -89,7 +89,7 @@ void ffi___ffi_base___ExternCode___accept_ffi_visitor(val_t p0, val_t p1){
     if (!once_value_3) {
       fra.me.REG[0] = BOX_NativeString(" is unknown.");
       REGB0 = TAG_Int(12);
-      fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+      fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
       once_value_3 = fra.me.REG[0];
       register_static_object(&once_value_3);
     } else fra.me.REG[0] = once_value_3;
@@ -105,7 +105,7 @@ void ffi___ffi_base___ExternCode___accept_ffi_visitor(val_t p0, val_t p1){
     if (!once_value_4) {
       fra.me.REG[0] = BOX_NativeString("please specify a language to implement code blocks in ");
       REGB0 = TAG_Int(54);
-      fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+      fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
       once_value_4 = fra.me.REG[0];
       register_static_object(&once_value_4);
     } else fra.me.REG[0] = once_value_4;
@@ -117,7 +117,7 @@ void ffi___ffi_base___ExternCode___accept_ffi_visitor(val_t p0, val_t p1){
     if (!once_value_5) {
       fra.me.REG[1] = BOX_NativeString(".");
       REGB0 = TAG_Int(1);
-      fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+      fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
       once_value_5 = fra.me.REG[1];
       register_static_object(&once_value_5);
     } else fra.me.REG[1] = once_value_5;
@@ -294,7 +294,7 @@ void ffi___ffi_base___MMMethod___accept_ffi_visitor(val_t p0, val_t p1){
       if (!once_value_1) {
         fra.me.REG[5] = BOX_NativeString("language \"");
         REGB0 = TAG_Int(10);
-        fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB0);
+        fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB0);
         once_value_1 = fra.me.REG[5];
         register_static_object(&once_value_1);
       } else fra.me.REG[5] = once_value_1;
@@ -304,7 +304,7 @@ void ffi___ffi_base___MMMethod___accept_ffi_visitor(val_t p0, val_t p1){
       if (!once_value_2) {
         fra.me.REG[2] = BOX_NativeString("\" used to implement ");
         REGB0 = TAG_Int(20);
-        fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+        fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
         once_value_2 = fra.me.REG[2];
         register_static_object(&once_value_2);
       } else fra.me.REG[2] = once_value_2;
@@ -315,7 +315,7 @@ void ffi___ffi_base___MMMethod___accept_ffi_visitor(val_t p0, val_t p1){
       if (!once_value_3) {
         fra.me.REG[2] = BOX_NativeString(" is unknown.");
         REGB0 = TAG_Int(12);
-        fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+        fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
         once_value_3 = fra.me.REG[2];
         register_static_object(&once_value_3);
       } else fra.me.REG[2] = once_value_3;
@@ -331,7 +331,7 @@ void ffi___ffi_base___MMMethod___accept_ffi_visitor(val_t p0, val_t p1){
       if (!once_value_4) {
         fra.me.REG[3] = BOX_NativeString("please specify a language to implement ");
         REGB0 = TAG_Int(39);
-        fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+        fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
         once_value_4 = fra.me.REG[3];
         register_static_object(&once_value_4);
       } else fra.me.REG[3] = once_value_4;
@@ -342,7 +342,7 @@ void ffi___ffi_base___MMMethod___accept_ffi_visitor(val_t p0, val_t p1){
       if (!once_value_5) {
         fra.me.REG[0] = BOX_NativeString(".");
         REGB0 = TAG_Int(1);
-        fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+        fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
         once_value_5 = fra.me.REG[0];
         register_static_object(&once_value_5);
       } else fra.me.REG[0] = once_value_5;

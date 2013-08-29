@@ -333,7 +333,7 @@ void global___Program___do_global_analysis(val_t p0){
   if (!once_value_1) {
     fra.me.REG[2] = BOX_NativeString("cha");
     REGB0 = TAG_Int(3);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_1 = fra.me.REG[2];
     register_static_object(&once_value_1);
   } else fra.me.REG[2] = once_value_1;
@@ -359,7 +359,7 @@ void global___Program___do_global_analysis(val_t p0){
     if (!once_value_2) {
       fra.me.REG[1] = BOX_NativeString("rta");
       REGB0 = TAG_Int(3);
-      fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+      fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
       once_value_2 = fra.me.REG[1];
       register_static_object(&once_value_2);
     } else fra.me.REG[1] = once_value_2;

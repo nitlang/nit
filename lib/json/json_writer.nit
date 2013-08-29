@@ -40,7 +40,7 @@ redef class Map[ K, V ]
 #else
 		json_native_string = json_object_to_json_string( jobj );
 #endif
-		json_string = new_String_from_cstring( (char*)json_native_string );
+		json_string = NativeString_to_s( (char*)json_native_string );
 		return json_string;
 	`}
 
@@ -93,7 +93,7 @@ redef class Sequence[ E ]
 end
 
 redef class String
-	redef fun to_json_object import String::from_cstring `{
+	redef fun to_json_object import NativeString::to_s `{
 		char *native_recv = String_to_cstring( recv );
 		return json_object_new_string( native_recv );
 	`}

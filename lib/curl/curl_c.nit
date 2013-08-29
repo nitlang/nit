@@ -48,17 +48,17 @@ in "C body" `{
 	size_t nit_curl_callback_func(void *buffer, size_t size, size_t count, CURLCallbackDatas *datas){
 		if(datas->type == CURLcallbackTypeHeader){
 			char *line_c = (char*)buffer;
-			String line_o = new_String_copy_from_native(line_c);
+			String line_o = NativeString_to_s_with_copy(line_c);
 			CCurlCallbacks_header_callback(datas->delegate, line_o);
 		}
 		else if(datas->type == CURLcallbackTypeBody){
 			char *line_c = (char*)buffer;
-			String line_o = new_String_copy_from_native(line_c);
+			String line_o = NativeString_to_s_with_copy(line_c);
 			CCurlCallbacks_body_callback(datas->delegate, line_o);
 		}
 		else if(datas->type == CURLcallbackTypeStream){
 			char *line_c = (char*)buffer;
-			String line_o = new_String_from_cstring(line_c);
+			String line_o = NativeString_to_s(line_c);
 			CCurlCallbacks_stream_callback(datas->delegate, line_o, size, count);
 		}
 		return count;
@@ -113,11 +113,11 @@ extern CCurl `{ CURL * `}
 		 return answ
 	end
 	# Internal method used to get String object information initially knowns as C Chars type
-	private fun i_getinfo_chars(opt: CURLInfoChars, res: CURLInfoResponseString):CURLCode import CURLInfoResponseString::response= `{
+	private fun i_getinfo_chars(opt: CURLInfoChars, res: CURLInfoResponseString):CURLCode import CURLInfoResponseString::response=, NativeString::to_s_with_copy `{
 		char *r = NULL;
 		CURLcode c = curl_easy_getinfo( recv, opt, &r);
 		if((c == CURLE_OK) && r != NULL){
-			String ro = new_String_copy_from_native(r);
+			String ro = NativeString_to_s_with_copy(r);
 			CURLInfoResponseString_response__assign( res, ro);
 		}
 		return c;
@@ -185,14 +185,13 @@ extern CCurl `{ CURL * `}
 		return once new CURLCode.unknown_option
 	end
 	# Internal method used to configure read callback
-	private fun i_register_read_datas_callback(delegate: CCurlCallbacks, datas: String, size: Int):CURLCode import String::to_cstring, String::copy_from_native `{
+	private fun i_register_read_datas_callback(delegate: CCurlCallbacks, datas: String, size: Int):CURLCode import String::to_cstring `{
 		CURLCallbackReadDatas *d = NULL;
 		d = malloc(sizeof(CURLCallbackReadDatas));
 		d->data = (char*)String_to_cstring(datas);
 		d->len = size;
 		d->pos = 0;
 		return curl_easy_setopt( recv, CURLOPT_READDATA, d);
-
 	`}
 	# Internal method used to configure callbacks in terms of given type
 	private fun i_register_callback(delegate: CCurlCallbacks, cbtype: CURLCallbackType):CURLCode is extern import CCurlCallbacks::header_callback,	CCurlCallbacks::body_callback, CCurlCallbacks::stream_callback	`{
@@ -221,11 +220,11 @@ extern CCurl `{ CURL * `}
 		return e;
 	`}
 	# Convert given string to URL encoded string
-	fun escape(url: String):String `{
+	fun escape(url: String):String import String::to_cstring, NativeString::to_s_with_copy `{
 		char *orig_url, *encoded_url = NULL;
 		orig_url = String_to_cstring(url);
 		encoded_url = curl_easy_escape( recv, orig_url, strlen(orig_url));
-		String b_url = new_String_copy_from_native(encoded_url);
+		String b_url = NativeString_to_s_with_copy(encoded_url);
 		curl_free(encoded_url);
 		return b_url;
 	`}
@@ -282,9 +281,9 @@ extern CURLCode `{ CURLcode `}
 	fun is_valid_protocol:Bool `{ return recv == CURLE_UNSUPPORTED_PROTOCOL; `}
 	fun is_valid_init:Bool `{ return recv == CURLE_FAILED_INIT; `}
 	fun to_i:Int do return code end
-	redef fun to_s `{
+	redef fun to_s import NativeString::to_s_with_copy `{
 		char *c = (char*)curl_easy_strerror(recv);
-		return new_String_copy_from_native(c);
+		return NativeString_to_s_with_copy(c);
 	`}
 end
 
@@ -310,7 +309,7 @@ extern CURLSList `{ struct curl_slist * `}
 	# Internal method to check for reachability of next element
 	private fun i_next_reachable(c: CURLSList):Bool `{ return (c != NULL && c->next != NULL); `}
 	# Internal method to get current data
-	private fun i_data(c: CURLSList):String `{ return new_String_from_cstring(c->data); `}
+	private fun i_data(c: CURLSList):String `{ return NativeString_to_s(c->data); `}
 	# Internal method to get next element
 	private fun i_next(c: CURLSList):CURLSList `{ return c->next; `}
 	# Convert current low level List to an Array[String] object

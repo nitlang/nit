@@ -2,7 +2,6 @@
 #ifndef standard_sep
 #define standard_sep
 #include "standard___environ._sep.h"
-#include "standard___time._sep.h"
 #include "standard___file._sep.h"
 #include "standard___exec._sep.h"
 #include "standard___math._sep.h"

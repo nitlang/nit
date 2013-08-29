@@ -20,5 +20,5 @@ module md5
 redef class String
 	# returns the md5 digest of the receiver string
 	# algorithm implemented by L. Peter Deutsch <ghost@aladdin.com>
-	fun md5 : String is extern import String::to_cstring, String::from_cstring, String::print
+	fun md5 : String is extern import String::to_cstring, NativeString::to_s, String::print
 end

@@ -248,7 +248,7 @@ extern GtkFrame `{GtkFrame *`}
 	`}
 
 	fun frame_label : String is extern`{
-		return new_String_from_cstring( (char *)gtk_frame_get_label( recv ) );
+		return NativeString_to_s( (char *)gtk_frame_get_label( recv ) );
 	`}
 
 	fun frame_label=( lbl : String ) is extern import String::to_cstring`{
@@ -334,7 +334,7 @@ extern GtkEntry `{GtkEntry *`}
 	`}
 
 	fun text : String is extern import String::to_cstring`{
-		return new_String_from_cstring( (char *)gtk_entry_get_text( recv ) );
+		return NativeString_to_s( (char *)gtk_entry_get_text( recv ) );
 	`}
 
 	fun text=( value : String) is extern import String::to_cstring`{
@@ -540,8 +540,8 @@ extern GtkLabel `{GtkLabel *`}
 	`}
 
 	# Returns the text of the label
-	fun text : String import String::from_cstring `{
-		return new_String_from_cstring( (char*)gtk_label_get_text( recv ) );
+	fun text : String import NativeString::to_s `{
+		return NativeString_to_s( (char*)gtk_label_get_text( recv ) );
 	`}
 
 	# Sets the angle of rotation for the label.
@@ -644,7 +644,7 @@ extern GtkButton `{GtkButton *`}
 	`}
 
 	fun text : String is extern `{
-		return new_String_from_cstring( (char *)gtk_button_get_label( recv ) );
+		return NativeString_to_s( (char *)gtk_button_get_label( recv ) );
 	`}
 
 	fun text=( value : String ) is extern import String::to_cstring`{
@@ -708,7 +708,7 @@ extern GtkExpander `{GtkExpander *`}
 	`}
 
 	fun label_text : String is extern `{
-		return new_String_from_cstring( (char *)gtk_expander_get_label( recv ) );
+		return NativeString_to_s( (char *)gtk_expander_get_label( recv ) );
 	`}
 
 	fun label_text=( lbl : String ) is extern import String::to_cstring`{
@@ -833,7 +833,7 @@ extern GtkComboBox `{GtkComboBox *`}
 	`}
 
 	fun active_id : String is extern `{
-		return new_String_from_cstring( (char *)gtk_combo_box_get_active_id( recv ) );
+		return NativeString_to_s( (char *)gtk_combo_box_get_active_id( recv ) );
 	`}
 
 	fun active_id=( id_active : String ) is extern import String::to_cstring`{
@@ -857,7 +857,7 @@ extern GtkComboBox `{GtkComboBox *`}
 	`}
 
 	fun title : String is extern`{
-		return new_String_from_cstring( (char *)gtk_combo_box_get_title( recv ) );
+		return NativeString_to_s( (char *)gtk_combo_box_get_title( recv ) );
 	`}
 
 	fun title=( t : String ) is extern import String::to_cstring`{

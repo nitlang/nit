@@ -18,7 +18,7 @@ intrude import jsonable
 redef class String
 	# Deserializes this String and return its value as a Map[String, nullable Jsonable]
 	# On error, null is returned.
-	fun json_to_object : nullable Map[String, nullable Jsonable] import String::from_cstring, JsonObject::json_to_map `{
+	fun json_to_object : nullable Map[String, nullable Jsonable] import NativeString::to_s, JsonObject::json_to_map `{
 		char *native_recv;
 		json_object *jobj;
 		nullable_Map map;
@@ -34,7 +34,7 @@ end
 
 redef extern JsonObject
 	# Get this json object as a Map
-	private fun json_to_map : nullable Map[String, nullable Jsonable] import String::from_cstring, String::to_cstring, HashMap, HashMap::[]=, json_cross, HashMap[String,nullable Jsonable] as( nullable Map[String,nullable Jsonable] ), String as ( Object ), nullable Jsonable as (nullable Object) `{
+	private fun json_to_map : nullable Map[String, nullable Jsonable] import NativeString::to_s, String::to_cstring, HashMap, HashMap::[]=, json_cross, HashMap[String,nullable Jsonable] as( nullable Map[String,nullable Jsonable] ), String as ( Object ), nullable Jsonable as (nullable Object) `{
 		HashMap map;
 		String nit_key;
 		nullable_Jsonable nit_val;
@@ -44,7 +44,7 @@ redef extern JsonObject
 
 		{ /* prevents "mixed declaration and code" warning for C90 */
 		json_object_object_foreach( recv, key, val ) {
-			nit_key = new_String_from_cstring( key );
+			nit_key = NativeString_to_s( key );
 
 			if ( val == NULL ) type = json_type_null;
 			else type = json_object_get_type( val );
@@ -98,10 +98,10 @@ redef extern JsonObject
 	`}
 
 	# Get this json object as a String
-	private fun json_to_string : String import String::from_cstring `{
+	private fun json_to_string : String import NativeString::to_s `{
 		const char *cstring;
 		cstring = json_object_get_string( recv );
-		return new_String_from_cstring( (char*)cstring );
+		return NativeString_to_s( (char*)cstring );
 	`}
 
 	# Intermediate function to convert to gt this Json object as a given type.

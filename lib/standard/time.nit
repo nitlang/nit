@@ -36,8 +36,8 @@ extern class TimeT `{time_t`}
 
 	fun update `{ time(&recv); `}
 
-	fun ctime: String import String::copy_from_native `{
-		return new_String_copy_from_native( ctime(&recv) );
+	fun ctime: String import NativeString::to_s_with_copy `{
+		return NativeString_to_s_with_copy( ctime(&recv) );
 	`}
 
 	# Difference in secondes from start (self if the end time)
@@ -85,10 +85,10 @@ extern class Tm `{struct tm *`}
 	fun yday: Int `{ return recv->tm_yday; `}
 	fun is_dst: Bool `{ return recv->tm_isdst; `}
 
-	fun asctime: String import String::copy_from_native `{
-		return new_String_copy_from_native( asctime(recv) );
+	fun asctime: String import NativeString::to_s_with_copy `{
+		return NativeString_to_s_with_copy( asctime(recv) );
 	`}
-	fun strftime(format: String): String import String::to_cstring, String::from_cstring `{
+	fun strftime(format: String): String import String::to_cstring, NativeString::to_s `{
 		char* buf, *c_format;
 		size_t res;
 
@@ -96,7 +96,7 @@ extern class Tm `{struct tm *`}
 		c_format = String_to_cstring(format);
 
 		res = strftime(buf, 100, c_format, recv);
-		return new_String_from_cstring(buf);
+		return NativeString_to_s(buf);
 	`}
 
 	redef fun to_s do return asctime.replace("\n", "")

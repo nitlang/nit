@@ -236,7 +236,7 @@ val_t syntax___extern_type_inheritance___MMLocalClass___extern_type(val_t p0){
     if (!once_value_3) {
       fra.me.REG[3] = BOX_NativeString("Pointer");
       REGB0 = TAG_Int(7);
-      fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+      fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
       once_value_3 = fra.me.REG[3];
       register_static_object(&once_value_3);
     } else fra.me.REG[3] = once_value_3;
@@ -257,7 +257,7 @@ val_t syntax___extern_type_inheritance___MMLocalClass___extern_type(val_t p0){
     if (!once_value_4) {
       fra.me.REG[3] = BOX_NativeString("C");
       REGB0 = TAG_Int(1);
-      fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+      fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
       once_value_4 = fra.me.REG[3];
       register_static_object(&once_value_4);
     } else fra.me.REG[3] = once_value_4;
@@ -265,7 +265,7 @@ val_t syntax___extern_type_inheritance___MMLocalClass___extern_type(val_t p0){
     if (!once_value_5) {
       fra.me.REG[2] = BOX_NativeString("void*");
       REGB0 = TAG_Int(5);
-      fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+      fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
       once_value_5 = fra.me.REG[2];
       register_static_object(&once_value_5);
     } else fra.me.REG[2] = once_value_5;
@@ -286,18 +286,18 @@ val_t syntax___extern_type_inheritance___MMLocalClass___extern_type(val_t p0){
   /* syntax/extern_type_inheritance.nit:64 */
   fra.me.REG[3] = CALL_metamodel___abstractmetamodel___MMLocalClass___cshe(fra.me.REG[3])(fra.me.REG[3]);
   fra.me.REG[3] = CALL_metamodel___partial_order___PartialOrderElement___direct_greaters(fra.me.REG[3])(fra.me.REG[3]);
-  /* ../lib/standard/collection/array.nit:269 */
-  REGB0 = TAG_Int(0);
   /* ../lib/standard/collection/array.nit:270 */
+  REGB0 = TAG_Int(0);
+  /* ../lib/standard/collection/array.nit:271 */
   REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[3])!=NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 270);
+    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 271);
   }
   REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[3]);
-  /* ../lib/standard/collection/array.nit:271 */
-  fra.me.REG[4] = ATTR_standard___collection___array___Array____items(fra.me.REG[3]);
   /* ../lib/standard/collection/array.nit:272 */
+  fra.me.REG[4] = ATTR_standard___collection___array___Array____items(fra.me.REG[3]);
+  /* ../lib/standard/collection/array.nit:273 */
   while(1) {
     /* ../lib/standard/collection/array.nit:24 */
     REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[3])!=NIT_NULL);
@@ -311,16 +311,16 @@ val_t syntax___extern_type_inheritance___MMLocalClass___extern_type(val_t p0){
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:242 */
     REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-    /* ../lib/standard/collection/array.nit:272 */
+    /* ../lib/standard/collection/array.nit:273 */
     if (UNTAG_Bool(REGB1)) {
-      /* ../lib/standard/collection/array.nit:273 */
+      /* ../lib/standard/collection/array.nit:274 */
       REGB1 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
-        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
+        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 274);
       }
-      /* ../lib/standard/collection/array.nit:724 */
+      /* ../lib/standard/collection/array.nit:725 */
       fra.me.REG[5] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB0)];
       /* syntax/extern_type_inheritance.nit:65 */
       fra.me.REG[6] = CALL_metamodel___abstractmetamodel___MMLocalClass___global(fra.me.REG[5])(fra.me.REG[5]);
@@ -330,14 +330,14 @@ val_t syntax___extern_type_inheritance___MMLocalClass___extern_type(val_t p0){
         fra.me.REG[5] = CALL_syntax___extern_type_inheritance___MMLocalClass___extern_type_origin(fra.me.REG[5])(fra.me.REG[5]);
         CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[5]);
       }
-      /* ../lib/standard/collection/array.nit:274 */
+      /* ../lib/standard/collection/array.nit:275 */
       REGB1 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
-      /* ../lib/standard/collection/array.nit:274 */
+      /* ../lib/standard/collection/array.nit:275 */
       REGB0 = REGB1;
     } else {
-      /* ../lib/standard/collection/array.nit:272 */
+      /* ../lib/standard/collection/array.nit:273 */
       goto label6;
     }
   }
@@ -350,7 +350,7 @@ val_t syntax___extern_type_inheritance___MMLocalClass___extern_type(val_t p0){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:237 */
+  /* ../lib/standard/kernel.nit:244 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)>UNTAG_Int(REGB1));
   /* syntax/extern_type_inheritance.nit:71 */
   if (UNTAG_Bool(REGB1)) {
@@ -361,7 +361,7 @@ val_t syntax___extern_type_inheritance___MMLocalClass___extern_type(val_t p0){
     if (!once_value_7) {
       fra.me.REG[5] = BOX_NativeString("Error: Extern class ");
       REGB1 = TAG_Int(20);
-      fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB1);
+      fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB1);
       once_value_7 = fra.me.REG[5];
       register_static_object(&once_value_7);
     } else fra.me.REG[5] = once_value_7;
@@ -373,7 +373,7 @@ val_t syntax___extern_type_inheritance___MMLocalClass___extern_type(val_t p0){
     if (!once_value_8) {
       fra.me.REG[5] = BOX_NativeString("::");
       REGB1 = TAG_Int(2);
-      fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB1);
+      fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB1);
       once_value_8 = fra.me.REG[5];
       register_static_object(&once_value_8);
     } else fra.me.REG[5] = once_value_8;
@@ -385,7 +385,7 @@ val_t syntax___extern_type_inheritance___MMLocalClass___extern_type(val_t p0){
     if (!once_value_9) {
       fra.me.REG[5] = BOX_NativeString(" has ambiguous extern type, found in super classes: \n");
       REGB1 = TAG_Int(53);
-      fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB1);
+      fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB1);
       once_value_9 = fra.me.REG[5];
       register_static_object(&once_value_9);
     } else fra.me.REG[5] = once_value_9;
@@ -404,7 +404,7 @@ val_t syntax___extern_type_inheritance___MMLocalClass___extern_type(val_t p0){
     REGB2 = TAG_Bool(IS_EQUAL_OO(REGB1,REGB0));
     if (UNTAG_Bool(REGB2)) {
     } else {
-      /* ../lib/standard/kernel.nit:230 */
+      /* ../lib/standard/kernel.nit:237 */
       REGB0 = TAG_Bool((REGB1)==(REGB0));
       /* syntax/extern_type_inheritance.nit:75 */
       REGB2 = REGB0;
@@ -460,7 +460,7 @@ val_t syntax___extern_type_inheritance___MMLocalClass___extern_type(val_t p0){
       if (!once_value_11) {
         fra.me.REG[3] = BOX_NativeString("");
         REGB0 = TAG_Int(0);
-        fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+        fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
         once_value_11 = fra.me.REG[3];
         register_static_object(&once_value_11);
       } else fra.me.REG[3] = once_value_11;
@@ -476,7 +476,7 @@ val_t syntax___extern_type_inheritance___MMLocalClass___extern_type(val_t p0){
       if (!once_value_12) {
         fra.me.REG[3] = BOX_NativeString(" from ");
         REGB0 = TAG_Int(7);
-        fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+        fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
         once_value_12 = fra.me.REG[3];
         register_static_object(&once_value_12);
       } else fra.me.REG[3] = once_value_12;
@@ -487,7 +487,7 @@ val_t syntax___extern_type_inheritance___MMLocalClass___extern_type(val_t p0){
       if (!once_value_13) {
         fra.me.REG[0] = BOX_NativeString("\n");
         REGB0 = TAG_Int(1);
-        fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+        fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
         once_value_13 = fra.me.REG[0];
         register_static_object(&once_value_13);
       } else fra.me.REG[0] = once_value_13;

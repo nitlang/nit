@@ -32,7 +32,7 @@ val_t native_interface___ni_metamodel___MMType___friendly_extern_name(val_t p0){
     if (!once_value_1) {
       fra.me.REG[3] = BOX_NativeString("nullable_");
       REGB0 = TAG_Int(9);
-      fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+      fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
       once_value_1 = fra.me.REG[3];
       register_static_object(&once_value_1);
     } else fra.me.REG[3] = once_value_1;
@@ -45,7 +45,7 @@ val_t native_interface___ni_metamodel___MMType___friendly_extern_name(val_t p0){
     if (!once_value_2) {
       fra.me.REG[3] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+      fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
       once_value_2 = fra.me.REG[3];
       register_static_object(&once_value_2);
     } else fra.me.REG[3] = once_value_2;
@@ -119,7 +119,7 @@ val_t native_interface___ni_metamodel___MMType___mangled_name(val_t p0){
     if (!once_value_1) {
       fra.me.REG[2] = BOX_NativeString("nullable_");
       REGB0 = TAG_Int(9);
-      fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+      fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
       once_value_1 = fra.me.REG[2];
       register_static_object(&once_value_1);
     } else fra.me.REG[2] = once_value_1;
@@ -132,7 +132,7 @@ val_t native_interface___ni_metamodel___MMType___mangled_name(val_t p0){
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+      fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
       once_value_2 = fra.me.REG[2];
       register_static_object(&once_value_2);
     } else fra.me.REG[2] = once_value_2;
@@ -218,7 +218,7 @@ val_t native_interface___ni_metamodel___MMType___from_native(val_t p0, val_t p1)
     if (!once_value_2) {
       fra.me.REG[4] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+      fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
       once_value_2 = fra.me.REG[4];
       register_static_object(&once_value_2);
     } else fra.me.REG[4] = once_value_2;
@@ -228,7 +228,7 @@ val_t native_interface___ni_metamodel___MMType___from_native(val_t p0, val_t p1)
     if (!once_value_3) {
       fra.me.REG[1] = BOX_NativeString("->ref.val");
       REGB0 = TAG_Int(9);
-      fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+      fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
       once_value_3 = fra.me.REG[1];
       register_static_object(&once_value_3);
     } else fra.me.REG[1] = once_value_3;
@@ -312,7 +312,7 @@ val_t native_interface___ni_metamodel___MMType___assign_to_friendly(val_t p0, va
     if (!once_value_1) {
       fra.me.REG[4] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+      fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
       once_value_1 = fra.me.REG[4];
       register_static_object(&once_value_1);
     } else fra.me.REG[4] = once_value_1;
@@ -322,7 +322,7 @@ val_t native_interface___ni_metamodel___MMType___assign_to_friendly(val_t p0, va
     if (!once_value_2) {
       fra.me.REG[4] = BOX_NativeString(" = ");
       REGB0 = TAG_Int(3);
-      fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+      fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
       once_value_2 = fra.me.REG[4];
       register_static_object(&once_value_2);
     } else fra.me.REG[4] = once_value_2;
@@ -333,7 +333,7 @@ val_t native_interface___ni_metamodel___MMType___assign_to_friendly(val_t p0, va
     if (!once_value_3) {
       fra.me.REG[4] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+      fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
       once_value_3 = fra.me.REG[4];
       register_static_object(&once_value_3);
     } else fra.me.REG[4] = once_value_3;
@@ -348,7 +348,7 @@ val_t native_interface___ni_metamodel___MMType___assign_to_friendly(val_t p0, va
     if (!once_value_5) {
       fra.me.REG[5] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB0);
+      fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB0);
       once_value_5 = fra.me.REG[5];
       register_static_object(&once_value_5);
     } else fra.me.REG[5] = once_value_5;
@@ -358,7 +358,7 @@ val_t native_interface___ni_metamodel___MMType___assign_to_friendly(val_t p0, va
     if (!once_value_6) {
       fra.me.REG[1] = BOX_NativeString("->ref.val = ");
       REGB0 = TAG_Int(12);
-      fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+      fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
       once_value_6 = fra.me.REG[1];
       register_static_object(&once_value_6);
     } else fra.me.REG[1] = once_value_6;
@@ -369,7 +369,7 @@ val_t native_interface___ni_metamodel___MMType___assign_to_friendly(val_t p0, va
     if (!once_value_7) {
       fra.me.REG[2] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+      fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
       once_value_7 = fra.me.REG[2];
       register_static_object(&once_value_7);
     } else fra.me.REG[2] = once_value_7;
@@ -450,7 +450,7 @@ val_t native_interface___ni_metamodel___MMType___assign_from_friendly(val_t p0, 
     if (!once_value_1) {
       fra.me.REG[4] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+      fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
       once_value_1 = fra.me.REG[4];
       register_static_object(&once_value_1);
     } else fra.me.REG[4] = once_value_1;
@@ -460,7 +460,7 @@ val_t native_interface___ni_metamodel___MMType___assign_from_friendly(val_t p0, 
     if (!once_value_2) {
       fra.me.REG[4] = BOX_NativeString(" = ");
       REGB0 = TAG_Int(3);
-      fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+      fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
       once_value_2 = fra.me.REG[4];
       register_static_object(&once_value_2);
     } else fra.me.REG[4] = once_value_2;
@@ -471,7 +471,7 @@ val_t native_interface___ni_metamodel___MMType___assign_from_friendly(val_t p0, 
     if (!once_value_3) {
       fra.me.REG[0] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+      fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
       once_value_3 = fra.me.REG[0];
       register_static_object(&once_value_3);
     } else fra.me.REG[0] = once_value_3;
@@ -486,7 +486,7 @@ val_t native_interface___ni_metamodel___MMType___assign_from_friendly(val_t p0, 
     if (!once_value_5) {
       fra.me.REG[4] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+      fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
       once_value_5 = fra.me.REG[4];
       register_static_object(&once_value_5);
     } else fra.me.REG[4] = once_value_5;
@@ -496,7 +496,7 @@ val_t native_interface___ni_metamodel___MMType___assign_from_friendly(val_t p0, 
     if (!once_value_6) {
       fra.me.REG[1] = BOX_NativeString(" = ");
       REGB0 = TAG_Int(3);
-      fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+      fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
       once_value_6 = fra.me.REG[1];
       register_static_object(&once_value_6);
     } else fra.me.REG[1] = once_value_6;
@@ -506,7 +506,7 @@ val_t native_interface___ni_metamodel___MMType___assign_from_friendly(val_t p0, 
     if (!once_value_7) {
       fra.me.REG[2] = BOX_NativeString("->ref.val");
       REGB0 = TAG_Int(9);
-      fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+      fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
       once_value_7 = fra.me.REG[2];
       register_static_object(&once_value_7);
     } else fra.me.REG[2] = once_value_7;
@@ -586,7 +586,7 @@ val_t native_interface___ni_metamodel___MMType___friendly_null_getter(val_t p0){
   if (!once_value_1) {
     fra.me.REG[2] = BOX_NativeString("null_");
     REGB0 = TAG_Int(5);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_1 = fra.me.REG[2];
     register_static_object(&once_value_1);
   } else fra.me.REG[2] = once_value_1;
@@ -598,7 +598,7 @@ val_t native_interface___ni_metamodel___MMType___friendly_null_getter(val_t p0){
   if (!once_value_2) {
     fra.me.REG[0] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_2 = fra.me.REG[0];
     register_static_object(&once_value_2);
   } else fra.me.REG[0] = once_value_2;
@@ -637,7 +637,7 @@ val_t native_interface___ni_metamodel___MMType___local_friendly_null_getter_from
   if (!once_value_1) {
     fra.me.REG[3] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_1 = fra.me.REG[3];
     register_static_object(&once_value_1);
   } else fra.me.REG[3] = once_value_1;
@@ -648,7 +648,7 @@ val_t native_interface___ni_metamodel___MMType___local_friendly_null_getter_from
   if (!once_value_2) {
     fra.me.REG[1] = BOX_NativeString("_");
     REGB0 = TAG_Int(1);
-    fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+    fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
     once_value_2 = fra.me.REG[1];
     register_static_object(&once_value_2);
   } else fra.me.REG[1] = once_value_2;
@@ -659,7 +659,7 @@ val_t native_interface___ni_metamodel___MMType___local_friendly_null_getter_from
   if (!once_value_3) {
     fra.me.REG[0] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_3 = fra.me.REG[0];
     register_static_object(&once_value_3);
   } else fra.me.REG[0] = once_value_3;
@@ -700,7 +700,7 @@ val_t native_interface___ni_metamodel___MMMethod___local_friendly_name_from(val_
   if (!once_value_1) {
     fra.me.REG[4] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+    fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
     once_value_1 = fra.me.REG[4];
     register_static_object(&once_value_1);
   } else fra.me.REG[4] = once_value_1;
@@ -711,7 +711,7 @@ val_t native_interface___ni_metamodel___MMMethod___local_friendly_name_from(val_
   if (!once_value_2) {
     fra.me.REG[1] = BOX_NativeString("_");
     REGB0 = TAG_Int(1);
-    fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+    fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
     once_value_2 = fra.me.REG[1];
     register_static_object(&once_value_2);
   } else fra.me.REG[1] = once_value_2;
@@ -722,7 +722,7 @@ val_t native_interface___ni_metamodel___MMMethod___local_friendly_name_from(val_
   if (!once_value_3) {
     fra.me.REG[2] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_3 = fra.me.REG[2];
     register_static_object(&once_value_3);
   } else fra.me.REG[2] = once_value_3;
@@ -758,7 +758,7 @@ val_t native_interface___ni_metamodel___MMMethod___friendly_super_cname(val_t p0
   if (!once_value_1) {
     fra.me.REG[2] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_1 = fra.me.REG[2];
     register_static_object(&once_value_1);
   } else fra.me.REG[2] = once_value_1;
@@ -770,7 +770,7 @@ val_t native_interface___ni_metamodel___MMMethod___friendly_super_cname(val_t p0
   if (!once_value_2) {
     fra.me.REG[2] = BOX_NativeString("___super");
     REGB0 = TAG_Int(8);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_2 = fra.me.REG[2];
     register_static_object(&once_value_2);
   } else fra.me.REG[2] = once_value_2;
@@ -809,7 +809,7 @@ val_t native_interface___ni_metamodel___MMMethod___local_friendly_super_name_fro
   if (!once_value_1) {
     fra.me.REG[3] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_1 = fra.me.REG[3];
     register_static_object(&once_value_1);
   } else fra.me.REG[3] = once_value_1;
@@ -820,7 +820,7 @@ val_t native_interface___ni_metamodel___MMMethod___local_friendly_super_name_fro
   if (!once_value_2) {
     fra.me.REG[1] = BOX_NativeString("_");
     REGB0 = TAG_Int(1);
-    fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+    fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
     once_value_2 = fra.me.REG[1];
     register_static_object(&once_value_2);
   } else fra.me.REG[1] = once_value_2;
@@ -831,7 +831,7 @@ val_t native_interface___ni_metamodel___MMMethod___local_friendly_super_name_fro
   if (!once_value_3) {
     fra.me.REG[0] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_3 = fra.me.REG[0];
     register_static_object(&once_value_3);
   } else fra.me.REG[0] = once_value_3;
@@ -883,7 +883,7 @@ val_t native_interface___ni_metamodel___MMMethod___friendly_cparams(val_t p0, va
     if (!once_value_1) {
       fra.me.REG[4] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+      fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
       once_value_1 = fra.me.REG[4];
       register_static_object(&once_value_1);
     } else fra.me.REG[4] = once_value_1;
@@ -895,7 +895,7 @@ val_t native_interface___ni_metamodel___MMMethod___friendly_cparams(val_t p0, va
     if (!once_value_2) {
       fra.me.REG[1] = BOX_NativeString(" recv");
       REGB0 = TAG_Int(5);
-      fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+      fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
       once_value_2 = fra.me.REG[1];
       register_static_object(&once_value_2);
     } else fra.me.REG[1] = once_value_2;
@@ -911,18 +911,18 @@ val_t native_interface___ni_metamodel___MMMethod___friendly_cparams(val_t p0, va
     nit_abort("Reciever is null", NULL, LOCATE_native_interface___ni_metamodel, 126);
   }
   fra.me.REG[0] = CALL_metamodel___static_type___MMSignature___params(fra.me.REG[0])(fra.me.REG[0]);
-  /* ../lib/standard/collection/array.nit:269 */
-  REGB0 = TAG_Int(0);
   /* ../lib/standard/collection/array.nit:270 */
+  REGB0 = TAG_Int(0);
+  /* ../lib/standard/collection/array.nit:271 */
   REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 270);
+    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 271);
   }
   REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[0]);
-  /* ../lib/standard/collection/array.nit:271 */
-  fra.me.REG[3] = ATTR_standard___collection___array___Array____items(fra.me.REG[0]);
   /* ../lib/standard/collection/array.nit:272 */
+  fra.me.REG[3] = ATTR_standard___collection___array___Array____items(fra.me.REG[0]);
+  /* ../lib/standard/collection/array.nit:273 */
   while(1) {
     /* ../lib/standard/collection/array.nit:24 */
     REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[0])!=NIT_NULL);
@@ -936,16 +936,16 @@ val_t native_interface___ni_metamodel___MMMethod___friendly_cparams(val_t p0, va
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:242 */
     REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-    /* ../lib/standard/collection/array.nit:272 */
+    /* ../lib/standard/collection/array.nit:273 */
     if (UNTAG_Bool(REGB1)) {
-      /* ../lib/standard/collection/array.nit:273 */
+      /* ../lib/standard/collection/array.nit:274 */
       REGB1 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
-        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
+        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 274);
       }
-      /* ../lib/standard/collection/array.nit:724 */
+      /* ../lib/standard/collection/array.nit:725 */
       fra.me.REG[1] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB0)];
       /* native_interface/ni_metamodel.nit:127 */
       REGB1 = TAG_Int(5);
@@ -953,7 +953,7 @@ val_t native_interface___ni_metamodel___MMMethod___friendly_cparams(val_t p0, va
       if (!once_value_3) {
         fra.me.REG[5] = BOX_NativeString("");
         REGB1 = TAG_Int(0);
-        fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB1);
+        fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB1);
         once_value_3 = fra.me.REG[5];
         register_static_object(&once_value_3);
       } else fra.me.REG[5] = once_value_3;
@@ -965,7 +965,7 @@ val_t native_interface___ni_metamodel___MMMethod___friendly_cparams(val_t p0, va
       if (!once_value_4) {
         fra.me.REG[5] = BOX_NativeString(" ");
         REGB1 = TAG_Int(1);
-        fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB1);
+        fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB1);
         once_value_4 = fra.me.REG[5];
         register_static_object(&once_value_4);
       } else fra.me.REG[5] = once_value_4;
@@ -977,7 +977,7 @@ val_t native_interface___ni_metamodel___MMMethod___friendly_cparams(val_t p0, va
       if (!once_value_5) {
         fra.me.REG[1] = BOX_NativeString("");
         REGB1 = TAG_Int(0);
-        fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB1);
+        fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB1);
         once_value_5 = fra.me.REG[1];
         register_static_object(&once_value_5);
       } else fra.me.REG[1] = once_value_5;
@@ -985,14 +985,14 @@ val_t native_interface___ni_metamodel___MMMethod___friendly_cparams(val_t p0, va
       CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[1]);
       fra.me.REG[4] = CALL_standard___string___Object___to_s(fra.me.REG[4])(fra.me.REG[4]);
       CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[4]);
-      /* ../lib/standard/collection/array.nit:274 */
+      /* ../lib/standard/collection/array.nit:275 */
       REGB1 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
-      /* ../lib/standard/collection/array.nit:274 */
+      /* ../lib/standard/collection/array.nit:275 */
       REGB0 = REGB1;
     } else {
-      /* ../lib/standard/collection/array.nit:272 */
+      /* ../lib/standard/collection/array.nit:273 */
       goto label6;
     }
   }
@@ -1032,7 +1032,7 @@ val_t native_interface___ni_metamodel___MMMethod___csignature_with_suffix(val_t 
   if (!once_value_1) {
     fra.me.REG[4] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+    fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
     once_value_1 = fra.me.REG[4];
     register_static_object(&once_value_1);
   } else fra.me.REG[4] = once_value_1;
@@ -1043,7 +1043,7 @@ val_t native_interface___ni_metamodel___MMMethod___csignature_with_suffix(val_t 
   if (!once_value_2) {
     fra.me.REG[4] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+    fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
     once_value_2 = fra.me.REG[4];
     register_static_object(&once_value_2);
   } else fra.me.REG[4] = once_value_2;
@@ -1053,7 +1053,7 @@ val_t native_interface___ni_metamodel___MMMethod___csignature_with_suffix(val_t 
   if (!once_value_3) {
     fra.me.REG[1] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+    fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
     once_value_3 = fra.me.REG[1];
     register_static_object(&once_value_3);
   } else fra.me.REG[1] = once_value_3;
@@ -1126,7 +1126,7 @@ val_t native_interface___ni_metamodel___MMMethod___csignature_with_name(val_t p0
     if (!once_value_1) {
       fra.me.REG[5] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB0);
+      fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB0);
       once_value_1 = fra.me.REG[5];
       register_static_object(&once_value_1);
     } else fra.me.REG[5] = once_value_1;
@@ -1147,7 +1147,7 @@ val_t native_interface___ni_metamodel___MMMethod___csignature_with_name(val_t p0
     if (!once_value_2) {
       fra.me.REG[5] = BOX_NativeString(" ");
       REGB0 = TAG_Int(1);
-      fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB0);
+      fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB0);
       once_value_2 = fra.me.REG[5];
       register_static_object(&once_value_2);
     } else fra.me.REG[5] = once_value_2;
@@ -1166,7 +1166,7 @@ val_t native_interface___ni_metamodel___MMMethod___csignature_with_name(val_t p0
       if (!once_value_3) {
         fra.me.REG[5] = BOX_NativeString("");
         REGB0 = TAG_Int(0);
-        fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB0);
+        fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB0);
         once_value_3 = fra.me.REG[5];
         register_static_object(&once_value_3);
       } else fra.me.REG[5] = once_value_3;
@@ -1178,7 +1178,7 @@ val_t native_interface___ni_metamodel___MMMethod___csignature_with_name(val_t p0
       if (!once_value_4) {
         fra.me.REG[5] = BOX_NativeString(" ");
         REGB0 = TAG_Int(1);
-        fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB0);
+        fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB0);
         once_value_4 = fra.me.REG[5];
         register_static_object(&once_value_4);
       } else fra.me.REG[5] = once_value_4;
@@ -1191,7 +1191,7 @@ val_t native_interface___ni_metamodel___MMMethod___csignature_with_name(val_t p0
       if (!once_value_5) {
         fra.me.REG[4] = BOX_NativeString("void ");
         REGB0 = TAG_Int(5);
-        fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+        fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
         once_value_5 = fra.me.REG[4];
         register_static_object(&once_value_5);
       } else fra.me.REG[4] = once_value_5;
@@ -1228,7 +1228,7 @@ val_t native_interface___ni_metamodel___MMMethod___csignature_with_name(val_t p0
   if (!once_value_6) {
     fra.me.REG[1] = BOX_NativeString("( ");
     REGB0 = TAG_Int(2);
-    fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+    fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
     once_value_6 = fra.me.REG[1];
     register_static_object(&once_value_6);
   } else fra.me.REG[1] = once_value_6;
@@ -1237,7 +1237,7 @@ val_t native_interface___ni_metamodel___MMMethod___csignature_with_name(val_t p0
   if (!once_value_7) {
     fra.me.REG[1] = BOX_NativeString(", ");
     REGB0 = TAG_Int(2);
-    fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+    fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
     once_value_7 = fra.me.REG[1];
     register_static_object(&once_value_7);
   } else fra.me.REG[1] = once_value_7;
@@ -1247,7 +1247,7 @@ val_t native_interface___ni_metamodel___MMMethod___csignature_with_name(val_t p0
   if (!once_value_8) {
     fra.me.REG[1] = BOX_NativeString(" )");
     REGB0 = TAG_Int(2);
-    fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+    fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
     once_value_8 = fra.me.REG[1];
     register_static_object(&once_value_8);
   } else fra.me.REG[1] = once_value_8;
@@ -1330,7 +1330,7 @@ val_t native_interface___ni_metamodel___MMMethod___friendly_super_csignature(val
   if (!once_value_1) {
     fra.me.REG[1] = BOX_NativeString("___super");
     REGB0 = TAG_Int(8);
-    fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+    fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
     once_value_1 = fra.me.REG[1];
     register_static_object(&once_value_1);
   } else fra.me.REG[1] = once_value_1;
@@ -1388,7 +1388,7 @@ val_t native_interface___ni_metamodel___MMMethod___impl_csignature(val_t p0){
   if (!once_value_1) {
     fra.me.REG[1] = BOX_NativeString("___impl");
     REGB0 = TAG_Int(7);
-    fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+    fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
     once_value_1 = fra.me.REG[1];
     register_static_object(&once_value_1);
   } else fra.me.REG[1] = once_value_1;
@@ -1434,7 +1434,7 @@ val_t native_interface___ni_metamodel___MMMethod___cparams(val_t p0){
     if (!once_value_1) {
       fra.me.REG[2] = BOX_NativeString("val_t recv");
       REGB0 = TAG_Int(10);
-      fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+      fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
       once_value_1 = fra.me.REG[2];
       register_static_object(&once_value_1);
     } else fra.me.REG[2] = once_value_1;
@@ -1448,18 +1448,18 @@ val_t native_interface___ni_metamodel___MMMethod___cparams(val_t p0){
     nit_abort("Reciever is null", NULL, LOCATE_native_interface___ni_metamodel, 198);
   }
   fra.me.REG[0] = CALL_metamodel___static_type___MMSignature___params(fra.me.REG[0])(fra.me.REG[0]);
-  /* ../lib/standard/collection/array.nit:269 */
-  REGB0 = TAG_Int(0);
   /* ../lib/standard/collection/array.nit:270 */
+  REGB0 = TAG_Int(0);
+  /* ../lib/standard/collection/array.nit:271 */
   REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 270);
+    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 271);
   }
   REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[0]);
-  /* ../lib/standard/collection/array.nit:271 */
-  fra.me.REG[2] = ATTR_standard___collection___array___Array____items(fra.me.REG[0]);
   /* ../lib/standard/collection/array.nit:272 */
+  fra.me.REG[2] = ATTR_standard___collection___array___Array____items(fra.me.REG[0]);
+  /* ../lib/standard/collection/array.nit:273 */
   while(1) {
     /* ../lib/standard/collection/array.nit:24 */
     REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[0])!=NIT_NULL);
@@ -1473,16 +1473,16 @@ val_t native_interface___ni_metamodel___MMMethod___cparams(val_t p0){
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:242 */
     REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-    /* ../lib/standard/collection/array.nit:272 */
+    /* ../lib/standard/collection/array.nit:273 */
     if (UNTAG_Bool(REGB1)) {
-      /* ../lib/standard/collection/array.nit:273 */
+      /* ../lib/standard/collection/array.nit:274 */
       REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
-        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
+        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 274);
       }
-      /* ../lib/standard/collection/array.nit:724 */
+      /* ../lib/standard/collection/array.nit:725 */
       fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB0)];
       /* native_interface/ni_metamodel.nit:198 */
       REGB1 = TAG_Int(3);
@@ -1490,7 +1490,7 @@ val_t native_interface___ni_metamodel___MMMethod___cparams(val_t p0){
       if (!once_value_2) {
         fra.me.REG[5] = BOX_NativeString("val_t ");
         REGB1 = TAG_Int(6);
-        fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB1);
+        fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB1);
         once_value_2 = fra.me.REG[5];
         register_static_object(&once_value_2);
       } else fra.me.REG[5] = once_value_2;
@@ -1502,7 +1502,7 @@ val_t native_interface___ni_metamodel___MMMethod___cparams(val_t p0){
       if (!once_value_3) {
         fra.me.REG[3] = BOX_NativeString("");
         REGB1 = TAG_Int(0);
-        fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB1);
+        fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB1);
         once_value_3 = fra.me.REG[3];
         register_static_object(&once_value_3);
       } else fra.me.REG[3] = once_value_3;
@@ -1510,14 +1510,14 @@ val_t native_interface___ni_metamodel___MMMethod___cparams(val_t p0){
       CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[3]);
       fra.me.REG[4] = CALL_standard___string___Object___to_s(fra.me.REG[4])(fra.me.REG[4]);
       CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[4]);
-      /* ../lib/standard/collection/array.nit:274 */
+      /* ../lib/standard/collection/array.nit:275 */
       REGB1 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
-      /* ../lib/standard/collection/array.nit:274 */
+      /* ../lib/standard/collection/array.nit:275 */
       REGB0 = REGB1;
     } else {
-      /* ../lib/standard/collection/array.nit:272 */
+      /* ../lib/standard/collection/array.nit:273 */
       goto label4;
     }
   }
@@ -1590,7 +1590,7 @@ val_t native_interface___ni_metamodel___MMMethod___out_csignature(val_t p0){
     if (!once_value_1) {
       fra.me.REG[2] = BOX_NativeString("val_t ");
       REGB0 = TAG_Int(6);
-      fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+      fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
       once_value_1 = fra.me.REG[2];
       register_static_object(&once_value_1);
     } else fra.me.REG[2] = once_value_1;
@@ -1601,7 +1601,7 @@ val_t native_interface___ni_metamodel___MMMethod___out_csignature(val_t p0){
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("void ");
       REGB0 = TAG_Int(5);
-      fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+      fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
       once_value_2 = fra.me.REG[2];
       register_static_object(&once_value_2);
     } else fra.me.REG[2] = once_value_2;
@@ -1618,7 +1618,7 @@ val_t native_interface___ni_metamodel___MMMethod___out_csignature(val_t p0){
     if (!once_value_3) {
       fra.me.REG[3] = BOX_NativeString("NEW_");
       REGB0 = TAG_Int(4);
-      fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+      fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
       once_value_3 = fra.me.REG[3];
       register_static_object(&once_value_3);
     } else fra.me.REG[3] = once_value_3;
@@ -1630,7 +1630,7 @@ val_t native_interface___ni_metamodel___MMMethod___out_csignature(val_t p0){
     if (!once_value_4) {
       fra.me.REG[3] = BOX_NativeString("_");
       REGB0 = TAG_Int(1);
-      fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+      fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
       once_value_4 = fra.me.REG[3];
       register_static_object(&once_value_4);
     } else fra.me.REG[3] = once_value_4;
@@ -1641,7 +1641,7 @@ val_t native_interface___ni_metamodel___MMMethod___out_csignature(val_t p0){
     if (!once_value_5) {
       fra.me.REG[3] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+      fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
       once_value_5 = fra.me.REG[3];
       register_static_object(&once_value_5);
     } else fra.me.REG[3] = once_value_5;
@@ -1656,7 +1656,7 @@ val_t native_interface___ni_metamodel___MMMethod___out_csignature(val_t p0){
     if (!once_value_6) {
       fra.me.REG[3] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+      fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
       once_value_6 = fra.me.REG[3];
       register_static_object(&once_value_6);
     } else fra.me.REG[3] = once_value_6;
@@ -1668,7 +1668,7 @@ val_t native_interface___ni_metamodel___MMMethod___out_csignature(val_t p0){
     if (!once_value_7) {
       fra.me.REG[3] = BOX_NativeString("___out");
       REGB0 = TAG_Int(6);
-      fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+      fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
       once_value_7 = fra.me.REG[3];
       register_static_object(&once_value_7);
     } else fra.me.REG[3] = once_value_7;
@@ -1683,7 +1683,7 @@ val_t native_interface___ni_metamodel___MMMethod___out_csignature(val_t p0){
   if (!once_value_8) {
     fra.me.REG[3] = BOX_NativeString("( ");
     REGB0 = TAG_Int(2);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_8 = fra.me.REG[3];
     register_static_object(&once_value_8);
   } else fra.me.REG[3] = once_value_8;
@@ -1693,7 +1693,7 @@ val_t native_interface___ni_metamodel___MMMethod___out_csignature(val_t p0){
   if (!once_value_9) {
     fra.me.REG[3] = BOX_NativeString(", ");
     REGB0 = TAG_Int(2);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_9 = fra.me.REG[3];
     register_static_object(&once_value_9);
   } else fra.me.REG[3] = once_value_9;
@@ -1703,7 +1703,7 @@ val_t native_interface___ni_metamodel___MMMethod___out_csignature(val_t p0){
   if (!once_value_10) {
     fra.me.REG[3] = BOX_NativeString(" )");
     REGB0 = TAG_Int(2);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_10 = fra.me.REG[3];
     register_static_object(&once_value_10);
   } else fra.me.REG[3] = once_value_10;
@@ -1798,7 +1798,7 @@ val_t native_interface___ni_metamodel___MMImportedCast___as_friendly_extern_name
       if (!once_value_1) {
         fra.me.REG[2] = BOX_NativeString("");
         REGB0 = TAG_Int(0);
-        fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+        fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
         once_value_1 = fra.me.REG[2];
         register_static_object(&once_value_1);
       } else fra.me.REG[2] = once_value_1;
@@ -1810,7 +1810,7 @@ val_t native_interface___ni_metamodel___MMImportedCast___as_friendly_extern_name
       if (!once_value_2) {
         fra.me.REG[2] = BOX_NativeString("_as_nullable");
         REGB0 = TAG_Int(12);
-        fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+        fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
         once_value_2 = fra.me.REG[2];
         register_static_object(&once_value_2);
       } else fra.me.REG[2] = once_value_2;
@@ -1828,7 +1828,7 @@ val_t native_interface___ni_metamodel___MMImportedCast___as_friendly_extern_name
         if (!once_value_4) {
           fra.me.REG[3] = BOX_NativeString("");
           REGB0 = TAG_Int(0);
-          fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+          fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
           once_value_4 = fra.me.REG[3];
           register_static_object(&once_value_4);
         } else fra.me.REG[3] = once_value_4;
@@ -1840,7 +1840,7 @@ val_t native_interface___ni_metamodel___MMImportedCast___as_friendly_extern_name
         if (!once_value_5) {
           fra.me.REG[3] = BOX_NativeString("_as_not_null");
           REGB0 = TAG_Int(12);
-          fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+          fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
           once_value_5 = fra.me.REG[3];
           register_static_object(&once_value_5);
         } else fra.me.REG[3] = once_value_5;
@@ -1861,7 +1861,7 @@ val_t native_interface___ni_metamodel___MMImportedCast___as_friendly_extern_name
     if (!once_value_6) {
       fra.me.REG[3] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+      fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
       once_value_6 = fra.me.REG[3];
       register_static_object(&once_value_6);
     } else fra.me.REG[3] = once_value_6;
@@ -1873,7 +1873,7 @@ val_t native_interface___ni_metamodel___MMImportedCast___as_friendly_extern_name
     if (!once_value_7) {
       fra.me.REG[3] = BOX_NativeString("_as_");
       REGB0 = TAG_Int(4);
-      fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+      fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
       once_value_7 = fra.me.REG[3];
       register_static_object(&once_value_7);
     } else fra.me.REG[3] = once_value_7;
@@ -1885,7 +1885,7 @@ val_t native_interface___ni_metamodel___MMImportedCast___as_friendly_extern_name
     if (!once_value_8) {
       fra.me.REG[0] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+      fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
       once_value_8 = fra.me.REG[0];
       register_static_object(&once_value_8);
     } else fra.me.REG[0] = once_value_8;
@@ -1926,7 +1926,7 @@ val_t native_interface___ni_metamodel___MMImportedCast___as_local_cname(val_t p0
   if (!once_value_1) {
     fra.me.REG[3] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_1 = fra.me.REG[3];
     register_static_object(&once_value_1);
   } else fra.me.REG[3] = once_value_1;
@@ -1937,7 +1937,7 @@ val_t native_interface___ni_metamodel___MMImportedCast___as_local_cname(val_t p0
   if (!once_value_2) {
     fra.me.REG[1] = BOX_NativeString("_");
     REGB0 = TAG_Int(1);
-    fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+    fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
     once_value_2 = fra.me.REG[1];
     register_static_object(&once_value_2);
   } else fra.me.REG[1] = once_value_2;
@@ -1948,7 +1948,7 @@ val_t native_interface___ni_metamodel___MMImportedCast___as_local_cname(val_t p0
   if (!once_value_3) {
     fra.me.REG[0] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_3 = fra.me.REG[0];
     register_static_object(&once_value_3);
   } else fra.me.REG[0] = once_value_3;
@@ -1989,7 +1989,7 @@ val_t native_interface___ni_metamodel___MMImportedCast___as_local_csignature(val
   if (!once_value_1) {
     fra.me.REG[3] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_1 = fra.me.REG[3];
     register_static_object(&once_value_1);
   } else fra.me.REG[3] = once_value_1;
@@ -2001,7 +2001,7 @@ val_t native_interface___ni_metamodel___MMImportedCast___as_local_csignature(val
   if (!once_value_2) {
     fra.me.REG[3] = BOX_NativeString(" ");
     REGB0 = TAG_Int(1);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_2 = fra.me.REG[3];
     register_static_object(&once_value_2);
   } else fra.me.REG[3] = once_value_2;
@@ -2012,7 +2012,7 @@ val_t native_interface___ni_metamodel___MMImportedCast___as_local_csignature(val
   if (!once_value_3) {
     fra.me.REG[1] = BOX_NativeString("( ");
     REGB0 = TAG_Int(2);
-    fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+    fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
     once_value_3 = fra.me.REG[1];
     register_static_object(&once_value_3);
   } else fra.me.REG[1] = once_value_3;
@@ -2024,7 +2024,7 @@ val_t native_interface___ni_metamodel___MMImportedCast___as_local_csignature(val
   if (!once_value_4) {
     fra.me.REG[1] = BOX_NativeString(" ");
     REGB0 = TAG_Int(1);
-    fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+    fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
     once_value_4 = fra.me.REG[1];
     register_static_object(&once_value_4);
   } else fra.me.REG[1] = once_value_4;
@@ -2035,7 +2035,7 @@ val_t native_interface___ni_metamodel___MMImportedCast___as_local_csignature(val
   if (!once_value_5) {
     fra.me.REG[0] = BOX_NativeString(" )");
     REGB0 = TAG_Int(2);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_5 = fra.me.REG[0];
     register_static_object(&once_value_5);
   } else fra.me.REG[0] = once_value_5;
@@ -2074,7 +2074,7 @@ val_t native_interface___ni_metamodel___MMImportedCast___as_friendly_csignature(
   if (!once_value_1) {
     fra.me.REG[2] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_1 = fra.me.REG[2];
     register_static_object(&once_value_1);
   } else fra.me.REG[2] = once_value_1;
@@ -2086,7 +2086,7 @@ val_t native_interface___ni_metamodel___MMImportedCast___as_friendly_csignature(
   if (!once_value_2) {
     fra.me.REG[2] = BOX_NativeString(" ");
     REGB0 = TAG_Int(1);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_2 = fra.me.REG[2];
     register_static_object(&once_value_2);
   } else fra.me.REG[2] = once_value_2;
@@ -2097,7 +2097,7 @@ val_t native_interface___ni_metamodel___MMImportedCast___as_friendly_csignature(
   if (!once_value_3) {
     fra.me.REG[2] = BOX_NativeString("( ");
     REGB0 = TAG_Int(2);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_3 = fra.me.REG[2];
     register_static_object(&once_value_3);
   } else fra.me.REG[2] = once_value_3;
@@ -2109,7 +2109,7 @@ val_t native_interface___ni_metamodel___MMImportedCast___as_friendly_csignature(
   if (!once_value_4) {
     fra.me.REG[2] = BOX_NativeString(" ");
     REGB0 = TAG_Int(1);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_4 = fra.me.REG[2];
     register_static_object(&once_value_4);
   } else fra.me.REG[2] = once_value_4;
@@ -2120,7 +2120,7 @@ val_t native_interface___ni_metamodel___MMImportedCast___as_friendly_csignature(
   if (!once_value_5) {
     fra.me.REG[0] = BOX_NativeString(" )");
     REGB0 = TAG_Int(2);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_5 = fra.me.REG[0];
     register_static_object(&once_value_5);
   } else fra.me.REG[0] = once_value_5;
@@ -2172,7 +2172,7 @@ val_t native_interface___ni_metamodel___MMImportedCast___is_a_friendly_extern_na
         if (!once_value_1) {
           fra.me.REG[2] = BOX_NativeString("");
           REGB0 = TAG_Int(0);
-          fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+          fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
           once_value_1 = fra.me.REG[2];
           register_static_object(&once_value_1);
         } else fra.me.REG[2] = once_value_1;
@@ -2184,7 +2184,7 @@ val_t native_interface___ni_metamodel___MMImportedCast___is_a_friendly_extern_na
         if (!once_value_2) {
           fra.me.REG[2] = BOX_NativeString("_is_null");
           REGB0 = TAG_Int(8);
-          fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+          fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
           once_value_2 = fra.me.REG[2];
           register_static_object(&once_value_2);
         } else fra.me.REG[2] = once_value_2;
@@ -2204,7 +2204,7 @@ val_t native_interface___ni_metamodel___MMImportedCast___is_a_friendly_extern_na
     if (!once_value_4) {
       fra.me.REG[3] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+      fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
       once_value_4 = fra.me.REG[3];
       register_static_object(&once_value_4);
     } else fra.me.REG[3] = once_value_4;
@@ -2216,7 +2216,7 @@ val_t native_interface___ni_metamodel___MMImportedCast___is_a_friendly_extern_na
     if (!once_value_5) {
       fra.me.REG[3] = BOX_NativeString("_is_a_");
       REGB0 = TAG_Int(6);
-      fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+      fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
       once_value_5 = fra.me.REG[3];
       register_static_object(&once_value_5);
     } else fra.me.REG[3] = once_value_5;
@@ -2228,7 +2228,7 @@ val_t native_interface___ni_metamodel___MMImportedCast___is_a_friendly_extern_na
     if (!once_value_6) {
       fra.me.REG[0] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+      fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
       once_value_6 = fra.me.REG[0];
       register_static_object(&once_value_6);
     } else fra.me.REG[0] = once_value_6;
@@ -2269,7 +2269,7 @@ val_t native_interface___ni_metamodel___MMImportedCast___is_a_local_cname(val_t 
   if (!once_value_1) {
     fra.me.REG[3] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_1 = fra.me.REG[3];
     register_static_object(&once_value_1);
   } else fra.me.REG[3] = once_value_1;
@@ -2280,7 +2280,7 @@ val_t native_interface___ni_metamodel___MMImportedCast___is_a_local_cname(val_t 
   if (!once_value_2) {
     fra.me.REG[1] = BOX_NativeString("_");
     REGB0 = TAG_Int(1);
-    fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+    fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
     once_value_2 = fra.me.REG[1];
     register_static_object(&once_value_2);
   } else fra.me.REG[1] = once_value_2;
@@ -2291,7 +2291,7 @@ val_t native_interface___ni_metamodel___MMImportedCast___is_a_local_cname(val_t 
   if (!once_value_3) {
     fra.me.REG[0] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_3 = fra.me.REG[0];
     register_static_object(&once_value_3);
   } else fra.me.REG[0] = once_value_3;
@@ -2331,7 +2331,7 @@ val_t native_interface___ni_metamodel___MMImportedCast___is_a_local_csignature(v
   if (!once_value_1) {
     fra.me.REG[3] = BOX_NativeString("int ");
     REGB0 = TAG_Int(4);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_1 = fra.me.REG[3];
     register_static_object(&once_value_1);
   } else fra.me.REG[3] = once_value_1;
@@ -2342,7 +2342,7 @@ val_t native_interface___ni_metamodel___MMImportedCast___is_a_local_csignature(v
   if (!once_value_2) {
     fra.me.REG[1] = BOX_NativeString("( ");
     REGB0 = TAG_Int(2);
-    fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+    fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
     once_value_2 = fra.me.REG[1];
     register_static_object(&once_value_2);
   } else fra.me.REG[1] = once_value_2;
@@ -2354,7 +2354,7 @@ val_t native_interface___ni_metamodel___MMImportedCast___is_a_local_csignature(v
   if (!once_value_3) {
     fra.me.REG[1] = BOX_NativeString(" ");
     REGB0 = TAG_Int(1);
-    fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+    fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
     once_value_3 = fra.me.REG[1];
     register_static_object(&once_value_3);
   } else fra.me.REG[1] = once_value_3;
@@ -2365,7 +2365,7 @@ val_t native_interface___ni_metamodel___MMImportedCast___is_a_local_csignature(v
   if (!once_value_4) {
     fra.me.REG[0] = BOX_NativeString(" )");
     REGB0 = TAG_Int(2);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_4 = fra.me.REG[0];
     register_static_object(&once_value_4);
   } else fra.me.REG[0] = once_value_4;
@@ -2403,7 +2403,7 @@ val_t native_interface___ni_metamodel___MMImportedCast___is_a_friendly_csignatur
   if (!once_value_1) {
     fra.me.REG[2] = BOX_NativeString("int ");
     REGB0 = TAG_Int(4);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_1 = fra.me.REG[2];
     register_static_object(&once_value_1);
   } else fra.me.REG[2] = once_value_1;
@@ -2414,7 +2414,7 @@ val_t native_interface___ni_metamodel___MMImportedCast___is_a_friendly_csignatur
   if (!once_value_2) {
     fra.me.REG[2] = BOX_NativeString("( ");
     REGB0 = TAG_Int(2);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_2 = fra.me.REG[2];
     register_static_object(&once_value_2);
   } else fra.me.REG[2] = once_value_2;
@@ -2426,7 +2426,7 @@ val_t native_interface___ni_metamodel___MMImportedCast___is_a_friendly_csignatur
   if (!once_value_3) {
     fra.me.REG[2] = BOX_NativeString(" ");
     REGB0 = TAG_Int(1);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_3 = fra.me.REG[2];
     register_static_object(&once_value_3);
   } else fra.me.REG[2] = once_value_3;
@@ -2437,7 +2437,7 @@ val_t native_interface___ni_metamodel___MMImportedCast___is_a_friendly_csignatur
   if (!once_value_4) {
     fra.me.REG[0] = BOX_NativeString(" )");
     REGB0 = TAG_Int(2);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_4 = fra.me.REG[0];
     register_static_object(&once_value_4);
   } else fra.me.REG[0] = once_value_4;
@@ -2470,7 +2470,7 @@ val_t native_interface___ni_metamodel___MMImportedCast___hash(val_t p0){
   REGB0 = CALL_standard___hash___Object___hash(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[0] = CALL_metamodel___static_type___MMImportedCast___to(fra.me.REG[0])(fra.me.REG[0]);
   REGB1 = CALL_standard___hash___Object___hash(fra.me.REG[0])(fra.me.REG[0]);
-  /* ../lib/standard/kernel.nit:238 */
+  /* ../lib/standard/kernel.nit:245 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
   /* native_interface/ni_metamodel.nit:297 */
   goto label1;

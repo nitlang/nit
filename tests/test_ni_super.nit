@@ -20,7 +20,7 @@ end
 
 class B
 super A
-	redef fun id : String is extern import super, String::from_cstring, String::to_cstring
+	redef fun id : String is extern import super, NativeString::to_s, String::to_cstring
 end
 
 var a = new A

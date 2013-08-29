@@ -131,7 +131,7 @@ extern GtkProgressBar `{GtkProgressBar *`}
 	`}
 
 	fun text : String is extern import String::to_cstring`{
-		return new_String_from_cstring( (char *)gtk_progress_bar_get_text( recv ) );
+		return NativeString_to_s( (char *)gtk_progress_bar_get_text( recv ) );
 	`}
 
 	fun text=( value : String) is extern import String::to_cstring`{

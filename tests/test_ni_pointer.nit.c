@@ -27,11 +27,11 @@ A new_A___impl(  )
 C implementation of test_ni_pointer::A::(string::Object::to_s)
 
 Imported methods signatures:
-	String new_String_from_cstring( char * str ) for string::String::from_cstring
+	String NativeString_to_s( char * str ) for string::NativeString::to_s
 */
 String A_to_s___impl( A recv )
 {
 	char* s = calloc( 256, sizeof(char) );
 	sprintf( s, "%d", *((int*)recv) );
-	return new_String_from_cstring( s );
+	return NativeString_to_s( s );
 }

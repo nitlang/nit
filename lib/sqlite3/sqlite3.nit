@@ -60,14 +60,14 @@ extern class Sqlite3Code `{int`}
 	new done `{ return SQLITE_DONE; `} #       101  /* sqlite3_step() has finished executing */
 	fun is_done: Bool `{ return recv == SQLITE_DONE; `}
 
-	redef fun to_s: String import String::from_cstring `{
+	redef fun to_s: String import NativeString::to_s `{
 #if SQLITE_VERSION_NUMBER >= 3007015
 		char *err = (char *)sqlite3_errstr(recv);
 #else
 		char *err = "sqlite3_errstr supported only by version >= 3.7.15";
 #endif
 		if (err == NULL) err = "";
-		return new_String_from_cstring(err);
+		return NativeString_to_s(err);
 	`}
 end
 
@@ -77,13 +77,13 @@ extern class Statement `{sqlite3_stmt*`}
 		return sqlite3_step(recv);
 	`}
 
-	fun column_name(i: Int) : String import String::from_cstring `{
+	fun column_name(i: Int) : String import NativeString::to_s `{
 		const char * name = (sqlite3_column_name(recv, i));
 		if(name == NULL){
 			name = "";
 		}
 		char * ret = (char *) name;
-		return new_String_from_cstring(ret);
+		return NativeString_to_s(ret);
 	`}
 
 	fun column_bytes(i: Int) : Int `{
@@ -98,12 +98,12 @@ extern class Statement `{sqlite3_stmt*`}
 		return sqlite3_column_int(recv, i);
 	`}
 
-	fun column_text(i: Int) : String import String::from_cstring `{
+	fun column_text(i: Int) : String import NativeString::to_s `{
 		char * ret = (char *) sqlite3_column_text(recv, i);
 		if( ret == NULL ){
 			ret = "";
 		}
-		return new_String_from_cstring(ret);
+		return NativeString_to_s(ret);
 	`}
 
 	fun column_type(i: Int) : Int `{

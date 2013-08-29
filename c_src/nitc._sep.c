@@ -242,7 +242,7 @@ void nitc___NitCompiler___init(val_t p0, int* init_table){
   if (!once_value_1) {
     fra.me.REG[2] = BOX_NativeString("nitc");
     REGB0 = TAG_Int(4);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_1 = fra.me.REG[2];
     register_static_object(&once_value_1);
   } else fra.me.REG[2] = once_value_1;
@@ -373,7 +373,7 @@ void nitc___NitCompiler___process_options(val_t p0){
     if (!once_value_1) {
       fra.me.REG[2] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+      fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
       once_value_1 = fra.me.REG[2];
       register_static_object(&once_value_1);
     } else fra.me.REG[2] = once_value_1;
@@ -403,7 +403,7 @@ void nitc___NitCompiler___process_options(val_t p0){
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString("NIT_COMPDIR");
       REGB0 = TAG_Int(11);
-      fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+      fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
       once_value_2 = fra.me.REG[2];
       register_static_object(&once_value_2);
     } else fra.me.REG[2] = once_value_2;
@@ -435,7 +435,7 @@ void nitc___NitCompiler___process_options(val_t p0){
       if (!once_value_3) {
         fra.me.REG[2] = BOX_NativeString(".nit_compile");
         REGB0 = TAG_Int(12);
-        fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+        fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
         once_value_3 = fra.me.REG[2];
         register_static_object(&once_value_3);
       } else fra.me.REG[2] = once_value_3;
@@ -479,7 +479,7 @@ void nitc___NitCompiler___process_options(val_t p0){
     if (!once_value_4) {
       fra.me.REG[0] = BOX_NativeString("NIT_DIR");
       REGB0 = TAG_Int(7);
-      fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+      fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
       once_value_4 = fra.me.REG[0];
       register_static_object(&once_value_4);
     } else fra.me.REG[0] = once_value_4;
@@ -494,7 +494,7 @@ void nitc___NitCompiler___process_options(val_t p0){
       if (!once_value_5) {
         fra.me.REG[3] = BOX_NativeString("");
         REGB0 = TAG_Int(0);
-        fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+        fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
         once_value_5 = fra.me.REG[3];
         register_static_object(&once_value_5);
       } else fra.me.REG[3] = once_value_5;
@@ -507,7 +507,7 @@ void nitc___NitCompiler___process_options(val_t p0){
       if (!once_value_6) {
         fra.me.REG[3] = BOX_NativeString("/../clib");
         REGB0 = TAG_Int(8);
-        fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+        fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
         once_value_6 = fra.me.REG[3];
         register_static_object(&once_value_6);
       } else fra.me.REG[3] = once_value_6;
@@ -527,7 +527,7 @@ void nitc___NitCompiler___process_options(val_t p0){
       if (!once_value_7) {
         fra.me.REG[3] = BOX_NativeString("");
         REGB0 = TAG_Int(0);
-        fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+        fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
         once_value_7 = fra.me.REG[3];
         register_static_object(&once_value_7);
       } else fra.me.REG[3] = once_value_7;
@@ -537,7 +537,7 @@ void nitc___NitCompiler___process_options(val_t p0){
       if (!once_value_8) {
         fra.me.REG[3] = BOX_NativeString("/clib");
         REGB0 = TAG_Int(5);
-        fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+        fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
         once_value_8 = fra.me.REG[3];
         register_static_object(&once_value_8);
       } else fra.me.REG[3] = once_value_8;
@@ -570,7 +570,7 @@ void nitc___NitCompiler___process_options(val_t p0){
       if (!once_value_9) {
         fra.me.REG[0] = BOX_NativeString("Error: Cannot locate NIT C library directory. Uses --clibdir or envvar NIT_DIR.");
         REGB0 = TAG_Int(79);
-        fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+        fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
         once_value_9 = fra.me.REG[0];
         register_static_object(&once_value_9);
       } else fra.me.REG[0] = once_value_9;
@@ -609,7 +609,7 @@ void nitc___NitCompiler___process_options(val_t p0){
     if (!once_value_10) {
       fra.me.REG[0] = BOX_NativeString("NIT_DIR");
       REGB0 = TAG_Int(7);
-      fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+      fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
       once_value_10 = fra.me.REG[0];
       register_static_object(&once_value_10);
     } else fra.me.REG[0] = once_value_10;
@@ -624,7 +624,7 @@ void nitc___NitCompiler___process_options(val_t p0){
       if (!once_value_11) {
         fra.me.REG[3] = BOX_NativeString("");
         REGB0 = TAG_Int(0);
-        fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+        fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
         once_value_11 = fra.me.REG[3];
         register_static_object(&once_value_11);
       } else fra.me.REG[3] = once_value_11;
@@ -637,7 +637,7 @@ void nitc___NitCompiler___process_options(val_t p0){
       if (!once_value_12) {
         fra.me.REG[3] = BOX_NativeString("/../bin");
         REGB0 = TAG_Int(7);
-        fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+        fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
         once_value_12 = fra.me.REG[3];
         register_static_object(&once_value_12);
       } else fra.me.REG[3] = once_value_12;
@@ -657,7 +657,7 @@ void nitc___NitCompiler___process_options(val_t p0){
       if (!once_value_13) {
         fra.me.REG[3] = BOX_NativeString("");
         REGB0 = TAG_Int(0);
-        fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+        fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
         once_value_13 = fra.me.REG[3];
         register_static_object(&once_value_13);
       } else fra.me.REG[3] = once_value_13;
@@ -667,7 +667,7 @@ void nitc___NitCompiler___process_options(val_t p0){
       if (!once_value_14) {
         fra.me.REG[3] = BOX_NativeString("/bin");
         REGB0 = TAG_Int(4);
-        fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+        fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
         once_value_14 = fra.me.REG[3];
         register_static_object(&once_value_14);
       } else fra.me.REG[3] = once_value_14;
@@ -700,7 +700,7 @@ void nitc___NitCompiler___process_options(val_t p0){
       if (!once_value_15) {
         fra.me.REG[0] = BOX_NativeString("Error: Cannot locate NIT tools directory. Uses --bindir or envvar NIT_DIR.");
         REGB0 = TAG_Int(74);
-        fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+        fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
         once_value_15 = fra.me.REG[0];
         register_static_object(&once_value_15);
       } else fra.me.REG[0] = once_value_15;
@@ -740,18 +740,18 @@ void nitc___NitCompiler___perform_work(val_t p0, val_t p1){
   fra.me.REG[4] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ../lib/standard/collection/array.nit:269 */
-  REGB0 = TAG_Int(0);
   /* ../lib/standard/collection/array.nit:270 */
+  REGB0 = TAG_Int(0);
+  /* ../lib/standard/collection/array.nit:271 */
   REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1])!=NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 270);
+    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 271);
   }
   REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1]);
-  /* ../lib/standard/collection/array.nit:271 */
-  fra.me.REG[2] = ATTR_standard___collection___array___Array____items(fra.me.REG[1]);
   /* ../lib/standard/collection/array.nit:272 */
+  fra.me.REG[2] = ATTR_standard___collection___array___Array____items(fra.me.REG[1]);
+  /* ../lib/standard/collection/array.nit:273 */
   while(1) {
     /* ../lib/standard/collection/array.nit:24 */
     REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1])!=NIT_NULL);
@@ -765,16 +765,16 @@ void nitc___NitCompiler___perform_work(val_t p0, val_t p1){
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:242 */
     REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-    /* ../lib/standard/collection/array.nit:272 */
+    /* ../lib/standard/collection/array.nit:273 */
     if (UNTAG_Bool(REGB1)) {
-      /* ../lib/standard/collection/array.nit:273 */
+      /* ../lib/standard/collection/array.nit:274 */
       REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
-        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
+        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 274);
       }
-      /* ../lib/standard/collection/array.nit:724 */
+      /* ../lib/standard/collection/array.nit:725 */
       fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB0)];
       /* nitc.nit:110 */
       fra.me.REG[3] = NEW_Program_program___Program___init(fra.me.REG[3], fra.me.REG[0]);
@@ -795,14 +795,14 @@ void nitc___NitCompiler___perform_work(val_t p0, val_t p1){
       CALL_compiling___table_computation___Program___do_table_computation(fra.me.REG[3])(fra.me.REG[3]);
       /* nitc.nit:116 */
       CALL_compiling___Program___compile_prog(fra.me.REG[3])(fra.me.REG[3]);
-      /* ../lib/standard/collection/array.nit:274 */
+      /* ../lib/standard/collection/array.nit:275 */
       REGB1 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
-      /* ../lib/standard/collection/array.nit:274 */
+      /* ../lib/standard/collection/array.nit:275 */
       REGB0 = REGB1;
     } else {
-      /* ../lib/standard/collection/array.nit:272 */
+      /* ../lib/standard/collection/array.nit:273 */
       goto label1;
     }
   }

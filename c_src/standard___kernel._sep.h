@@ -94,10 +94,11 @@ extern const int SFT_standard___kernel[];
 #define CALL_standard___kernel___Int___to_f(recv) ((standard___kernel___Int___to_f_t)CALL((recv), (SFT_standard___kernel[20] + 7)))
 #define CALL_standard___kernel___Int___ascii(recv) ((standard___kernel___Int___ascii_t)CALL((recv), (SFT_standard___kernel[20] + 8)))
 #define CALL_standard___kernel___Int___digit_count(recv) ((standard___kernel___Int___digit_count_t)CALL((recv), (SFT_standard___kernel[20] + 9)))
-#define CALL_standard___kernel___Int___to_c(recv) ((standard___kernel___Int___to_c_t)CALL((recv), (SFT_standard___kernel[20] + 10)))
-#define CALL_standard___kernel___Int___enumerate_to(recv) ((standard___kernel___Int___enumerate_to_t)CALL((recv), (SFT_standard___kernel[20] + 11)))
-#define CALL_standard___kernel___Int___enumerate_before(recv) ((standard___kernel___Int___enumerate_before_t)CALL((recv), (SFT_standard___kernel[20] + 12)))
-#define CALL_standard___kernel___Int___abs(recv) ((standard___kernel___Int___abs_t)CALL((recv), (SFT_standard___kernel[20] + 13)))
+#define CALL_standard___kernel___Int___digit_count_base_10(recv) ((standard___kernel___Int___digit_count_base_10_t)CALL((recv), (SFT_standard___kernel[20] + 10)))
+#define CALL_standard___kernel___Int___to_c(recv) ((standard___kernel___Int___to_c_t)CALL((recv), (SFT_standard___kernel[20] + 11)))
+#define CALL_standard___kernel___Int___enumerate_to(recv) ((standard___kernel___Int___enumerate_to_t)CALL((recv), (SFT_standard___kernel[20] + 12)))
+#define CALL_standard___kernel___Int___enumerate_before(recv) ((standard___kernel___Int___enumerate_before_t)CALL((recv), (SFT_standard___kernel[20] + 13)))
+#define CALL_standard___kernel___Int___abs(recv) ((standard___kernel___Int___abs_t)CALL((recv), (SFT_standard___kernel[20] + 14)))
 #define ID_standard___kernel___Char (SFT_standard___kernel[21])
 #define COLOR_standard___kernel___Char (SFT_standard___kernel[22])
 #define INIT_TABLE_POS_standard___kernel___Char (SFT_standard___kernel[23] + 0)
@@ -243,6 +244,8 @@ val_t standard___kernel___Int___ascii(val_t p0);
 typedef val_t (*standard___kernel___Int___ascii_t)(val_t p0);
 val_t standard___kernel___Int___digit_count(val_t p0, val_t p1);
 typedef val_t (*standard___kernel___Int___digit_count_t)(val_t p0, val_t p1);
+val_t standard___kernel___Int___digit_count_base_10(val_t p0);
+typedef val_t (*standard___kernel___Int___digit_count_base_10_t)(val_t p0);
 val_t standard___kernel___Int___to_c(val_t p0);
 typedef val_t (*standard___kernel___Int___to_c_t)(val_t p0);
 typedef void (*CLOS_standard___kernel___Int___enumerate_to_0)(struct stack_frame_t *, val_t);

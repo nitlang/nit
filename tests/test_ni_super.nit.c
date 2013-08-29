@@ -17,7 +17,7 @@
 C implementation of super::B::(super::A::id)
 
 Imported methods signatures:
-	void new_String_from_cstring( char * str ) for string::String::from_cstring
+	void NativeString_to_s( char * str ) for string::NativeString::to_s
 	char * String_to_cstring( String recv ) for string::String::to_cstring
 	String B_id___super( B recv ) to call super
 */
@@ -32,5 +32,5 @@ String B_id___impl( B recv )
 	strcpy( new_name+strlen( prefix ), super_name );
 	new_name[ strlen( prefix )+strlen( super_name ) ] = '\0';
 
-	return new_String_from_cstring( new_name );
+	return NativeString_to_s( new_name );
 }
