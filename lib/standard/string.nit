@@ -392,7 +392,7 @@ class String
 
 		outstr[self.length] = '\0'
 
-		return new String.with_native(outstr, self._length)
+		return outstr.to_s_with_length(self._length)
 	end
 
 	redef fun to_lower : String
@@ -412,7 +412,7 @@ class String
 
 		outstr[self.length] = '\0'
 
-		return new String.with_native(outstr, self._length)
+		return outstr.to_s_with_length(self._length)
 	end
 
 	redef fun trim: String
@@ -463,39 +463,17 @@ class String
 		_length = to - from + 1
 	end
 
-	# Create a new string from a given char *.
-	init with_native(nat: NativeString, size: Int)
+	private init with_infos(items: NativeString, len: Int, from: Int, to: Int)
 	do
-		assert size >= 0
-		_items = nat
-		_length = size
-		_index_from = 0
-		_index_to = _length - 1
-	end
-
-	# Create a new string from a null terminated char *.
-	init from_cstring(str: NativeString)
-	do
-		with_native(str,str.cstring_length)
-	end
-
-	# Creates a new Nit String from an existing CString
-	# Pretty much equals to from_cstring but copies instead
-	# of passing a reference
-	# Avoids manual/automatic dealloc problems when dealing with native C code
-	init copy_from_native(str: NativeString)
-	do
-		var temp_length = str.cstring_length
-		var new_str = calloc_string(temp_length + 1)
-		str.copy_to(new_str, temp_length, 0, 0)
-		new_str[temp_length] = '\0'
-		with_native(new_str, temp_length)
+		self._items = items
+		_length = len
+		_index_from = from
+		_index_to = to
 	end
 
 	# Return a null terminated char *
 	fun to_cstring: NativeString
 	do
-		#return items
 		if _index_from > 0 or _index_to != items.cstring_length - 1 then
 			var newItems = calloc_string(_length + 1)
 			self.items.copy_to(newItems, _length, _index_from, 0)
@@ -577,14 +555,16 @@ class String
 		var my_length = self._length
 		var its_length = s._length
 
+		var total_length = my_length + its_length
+
 		var target_string = calloc_string(my_length + its_length + 1)
 
 		self._items.copy_to(target_string, my_length, _index_from, 0)
 		s._items.copy_to(target_string, its_length, s._index_from, my_length)
 
-		target_string[my_length + its_length] = '\0'
+		target_string[total_length] = '\0'
 
-		return new String.with_native(target_string, my_length + its_length)
+		return target_string.to_s_with_length(total_length)
 	end
 
 	# `i` repetitions of `self`
@@ -613,7 +593,7 @@ class String
 			current_last += my_length
 		end
 
-		return new String.with_native(target_string, final_length)
+		return target_string.to_s_with_length(final_length)
 	end
 
 	redef fun to_s do return self
@@ -696,7 +676,7 @@ class Buffer
 		# Ensure the afterlast byte is '\0' to nul-terminated char *
 		a[length] = '\0'
 
-		return new String.with_native(a, length)
+		return a.to_s_with_length(length)
 	end
 
 	redef fun <(s)
@@ -777,7 +757,7 @@ redef class Object
 	# The class name of the object.
 	#
 	#    assert 5.class_name == "Int"
-	fun class_name: String do return new String.from_cstring(native_class_name)
+	fun class_name: String do return native_class_name.to_s
 
 	# Developer readable representation of `self`.
 	# Usually, it uses the form "<CLASSNAME:#OBJECTID bla bla bla>"
@@ -846,7 +826,7 @@ redef class Int
 	#     assert (-123).to_s       == "-123"
 	redef fun to_s do
 		var len = digit_count(10)
-		return new String.from_cstring(native_int_to_s(len))
+		return native_int_to_s(len).to_s_with_length(len)
 	end
 
 	# return displayable int in hexadecimal (unsigned (not now))
@@ -905,7 +885,7 @@ redef class Float
 		end
 	end
 
-	fun to_precision_native(nb: Int): String import String::from_cstring `{
+	fun to_precision_native(nb: Int): String import NativeString::to_s `{
 		int size;
 		char *str;
 
@@ -913,7 +893,7 @@ redef class Float
 		str = malloc(size + 1);
 		sprintf(str, "%.*f", (int)nb, recv );
 
-		return new_String_from_cstring( str );
+		return NativeString_to_s( str );
 	`}
 end
 
@@ -1043,10 +1023,12 @@ end
 
 # Native strings are simple C char *
 class NativeString
+	super StringCapable
+
 	fun [](index: Int): Char is intern
 	fun []=(index: Int, item: Char) is intern
 	fun copy_to(dest: NativeString, length: Int, from: Int, to: Int) is intern
-	
+
 	# Position of the first nul character.
 	fun cstring_length: Int
 	do
@@ -1056,6 +1038,26 @@ class NativeString
 	end
 	fun atoi: Int is intern
 	fun atof: Float is extern "atof"
+
+	redef fun to_s
+	do
+		return to_s_with_length(cstring_length)
+	end
+
+	fun to_s_with_length(length: Int): String
+	do
+		assert length >= 0
+		return new String.with_infos(self, length, 0, length - 1)
+	end
+
+	fun to_s_with_copy: String
+	do
+		var length = cstring_length
+		var new_self = calloc_string(length + 1)
+		copy_to(new_self, length, 0, 0)
+		return new String.with_infos(new_self, length, 0, length - 1)
+	end
+
 end
 
 # StringCapable objects can create native strings
@@ -1075,7 +1077,7 @@ redef class Sys
 	# The name of the program as given by the OS
 	fun program_name: String
 	do
-		return new String.from_cstring(native_argv(0))
+		return native_argv(0).to_s
 	end
 
 	# Initialize `args` with the contents of `native_argc` and `native_argv`.
@@ -1085,7 +1087,7 @@ redef class Sys
 		var args = new Array[String].with_capacity(0)
 		var i = 1
 		while i < argc do
-			args[i-1] = new String.from_cstring(native_argv(i))
+			args[i-1] = native_argv(i).to_s
 			i += 1
 		end
 		_args_cache = args

@@ -231,7 +231,7 @@ val_t standard___collection___list___List___length(val_t p0){
     if (UNTAG_Bool(REGB1)) {
       /* ../lib/standard/collection/list.nit:49 */
       REGB1 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
       /* ../lib/standard/collection/list.nit:49 */
       REGB0 = REGB1;
@@ -433,7 +433,7 @@ val_t standard___collection___list___List___count(val_t p0, val_t p1){
       REGB1 = TAG_Bool(!UNTAG_Bool(REGB1));
       if (UNTAG_Bool(REGB1)) {
         REGB1 = TAG_Int(1);
-        /* ../lib/standard/kernel.nit:238 */
+        /* ../lib/standard/kernel.nit:245 */
         REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
         /* ../lib/standard/collection/list.nit:73 */
         REGB0 = REGB1;
@@ -485,7 +485,7 @@ val_t standard___collection___list___List___slice(val_t p0, val_t p1, val_t p2){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:236 */
+  /* ../lib/standard/kernel.nit:243 */
   REGB2 = TAG_Bool(UNTAG_Int(REGB0)>=UNTAG_Int(REGB2));
   /* ../lib/standard/collection/list.nit:81 */
   if (UNTAG_Bool(REGB2)) {
@@ -495,7 +495,7 @@ val_t standard___collection___list___List___slice(val_t p0, val_t p1, val_t p2){
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:242 */
     REGB2 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB2));
   } else {
     /* ../lib/standard/collection/list.nit:81 */
@@ -513,7 +513,7 @@ val_t standard___collection___list___List___slice(val_t p0, val_t p1, val_t p2){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:236 */
+  /* ../lib/standard/kernel.nit:243 */
   REGB2 = TAG_Bool(UNTAG_Int(REGB1)>=UNTAG_Int(REGB2));
   /* ../lib/standard/collection/list.nit:82 */
   if (UNTAG_Bool(REGB2)) {
@@ -523,7 +523,7 @@ val_t standard___collection___list___List___slice(val_t p0, val_t p1, val_t p2){
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:242 */
     REGB2 = TAG_Bool(UNTAG_Int(REGB1)<UNTAG_Int(REGB2));
   } else {
     /* ../lib/standard/collection/list.nit:82 */
@@ -536,7 +536,7 @@ val_t standard___collection___list___List___slice(val_t p0, val_t p1, val_t p2){
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:234 */
+    /* ../lib/standard/kernel.nit:241 */
     REGB2 = TAG_Bool(UNTAG_Int(REGB0)<=UNTAG_Int(REGB1));
   } else {
     /* ../lib/standard/collection/list.nit:82 */
@@ -556,7 +556,7 @@ val_t standard___collection___list___List___slice(val_t p0, val_t p1, val_t p2){
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:234 */
+    /* ../lib/standard/kernel.nit:241 */
     REGB2 = TAG_Bool(UNTAG_Int(REGB0)<=UNTAG_Int(REGB1));
     /* ../lib/standard/collection/list.nit:84 */
     if (UNTAG_Bool(REGB2)) {
@@ -565,7 +565,7 @@ val_t standard___collection___list___List___slice(val_t p0, val_t p1, val_t p2){
       CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
       /* ../lib/standard/collection/list.nit:86 */
       REGB2 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB2 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB2));
       /* ../lib/standard/collection/list.nit:86 */
       REGB0 = REGB2;
@@ -1102,7 +1102,7 @@ val_t standard___collection___list___List___get_node(val_t p0, val_t p1){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:235 */
+  /* ../lib/standard/kernel.nit:242 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
   /* ../lib/standard/collection/list.nit:201 */
   if (UNTAG_Bool(REGB1)) {
@@ -1132,7 +1132,7 @@ val_t standard___collection___list___List___get_node(val_t p0, val_t p1){
       } else {
         nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
       }
-      /* ../lib/standard/kernel.nit:237 */
+      /* ../lib/standard/kernel.nit:244 */
       REGB1 = TAG_Bool(UNTAG_Int(REGB0)>UNTAG_Int(REGB1));
     } else {
       /* ../lib/standard/collection/list.nit:204 */
@@ -1149,7 +1149,7 @@ val_t standard___collection___list___List___get_node(val_t p0, val_t p1){
       fra.me.REG[0] = fra.me.REG[2];
       /* ../lib/standard/collection/list.nit:206 */
       REGB1 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:240 */
+      /* ../lib/standard/kernel.nit:247 */
       REGB1 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB1));
       /* ../lib/standard/collection/list.nit:206 */
       REGB0 = REGB1;
@@ -1522,7 +1522,7 @@ void standard___collection___list___ListIterator___next(val_t p0){
   /* ../lib/standard/collection/list.nit:265 */
   REGB0 = ATTR_standard___collection___list___ListIterator____index(fra.me.REG[0]);
   REGB1 = TAG_Int(1);
-  /* ../lib/standard/kernel.nit:238 */
+  /* ../lib/standard/kernel.nit:245 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
   /* ../lib/standard/collection/list.nit:265 */
   ATTR_standard___collection___list___ListIterator____index(fra.me.REG[0]) = REGB1;

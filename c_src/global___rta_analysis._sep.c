@@ -699,7 +699,7 @@ void global___rta_analysis___RtaBuilder___force_some_type_analysis(val_t p0){
   if (!once_value_1) {
     fra.me.REG[2] = BOX_NativeString("Object");
     REGB0 = TAG_Int(6);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_1 = fra.me.REG[2];
     register_static_object(&once_value_1);
   } else fra.me.REG[2] = once_value_1;
@@ -708,7 +708,7 @@ void global___rta_analysis___RtaBuilder___force_some_type_analysis(val_t p0){
   if (!once_value_2) {
     fra.me.REG[2] = BOX_NativeString("Bool");
     REGB0 = TAG_Int(4);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_2 = fra.me.REG[2];
     register_static_object(&once_value_2);
   } else fra.me.REG[2] = once_value_2;
@@ -717,7 +717,7 @@ void global___rta_analysis___RtaBuilder___force_some_type_analysis(val_t p0){
   if (!once_value_3) {
     fra.me.REG[2] = BOX_NativeString("Float");
     REGB0 = TAG_Int(5);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_3 = fra.me.REG[2];
     register_static_object(&once_value_3);
   } else fra.me.REG[2] = once_value_3;
@@ -726,7 +726,7 @@ void global___rta_analysis___RtaBuilder___force_some_type_analysis(val_t p0){
   if (!once_value_4) {
     fra.me.REG[2] = BOX_NativeString("Int");
     REGB0 = TAG_Int(3);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_4 = fra.me.REG[2];
     register_static_object(&once_value_4);
   } else fra.me.REG[2] = once_value_4;
@@ -735,7 +735,7 @@ void global___rta_analysis___RtaBuilder___force_some_type_analysis(val_t p0){
   if (!once_value_5) {
     fra.me.REG[2] = BOX_NativeString("String");
     REGB0 = TAG_Int(6);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_5 = fra.me.REG[2];
     register_static_object(&once_value_5);
   } else fra.me.REG[2] = once_value_5;
@@ -744,7 +744,7 @@ void global___rta_analysis___RtaBuilder___force_some_type_analysis(val_t p0){
   if (!once_value_6) {
     fra.me.REG[2] = BOX_NativeString("NativeString");
     REGB0 = TAG_Int(12);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_6 = fra.me.REG[2];
     register_static_object(&once_value_6);
   } else fra.me.REG[2] = once_value_6;
@@ -753,7 +753,7 @@ void global___rta_analysis___RtaBuilder___force_some_type_analysis(val_t p0){
   if (!once_value_7) {
     fra.me.REG[2] = BOX_NativeString("Range");
     REGB0 = TAG_Int(5);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_7 = fra.me.REG[2];
     register_static_object(&once_value_7);
   } else fra.me.REG[2] = once_value_7;
@@ -762,7 +762,7 @@ void global___rta_analysis___RtaBuilder___force_some_type_analysis(val_t p0){
   if (!once_value_8) {
     fra.me.REG[2] = BOX_NativeString("Array");
     REGB0 = TAG_Int(5);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_8 = fra.me.REG[2];
     register_static_object(&once_value_8);
   } else fra.me.REG[2] = once_value_8;
@@ -771,7 +771,7 @@ void global___rta_analysis___RtaBuilder___force_some_type_analysis(val_t p0){
   if (!once_value_9) {
     fra.me.REG[2] = BOX_NativeString("ArrayIterator");
     REGB0 = TAG_Int(13);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_9 = fra.me.REG[2];
     register_static_object(&once_value_9);
   } else fra.me.REG[2] = once_value_9;
@@ -780,24 +780,24 @@ void global___rta_analysis___RtaBuilder___force_some_type_analysis(val_t p0){
   if (!once_value_10) {
     fra.me.REG[2] = BOX_NativeString("Inline__");
     REGB0 = TAG_Int(8);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_10 = fra.me.REG[2];
     register_static_object(&once_value_10);
   } else fra.me.REG[2] = once_value_10;
   fra.me.REG[2] = fra.me.REG[2];
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
-  /* ../lib/standard/collection/array.nit:269 */
-  REGB0 = TAG_Int(0);
   /* ../lib/standard/collection/array.nit:270 */
+  REGB0 = TAG_Int(0);
+  /* ../lib/standard/collection/array.nit:271 */
   REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1])!=NIT_NULL);
   if (UNTAG_Bool(REGB1)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 270);
+    nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 271);
   }
   REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1]);
-  /* ../lib/standard/collection/array.nit:271 */
-  fra.me.REG[2] = ATTR_standard___collection___array___Array____items(fra.me.REG[1]);
   /* ../lib/standard/collection/array.nit:272 */
+  fra.me.REG[2] = ATTR_standard___collection___array___Array____items(fra.me.REG[1]);
+  /* ../lib/standard/collection/array.nit:273 */
   while(1) {
     /* ../lib/standard/collection/array.nit:24 */
     REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1])!=NIT_NULL);
@@ -811,16 +811,16 @@ void global___rta_analysis___RtaBuilder___force_some_type_analysis(val_t p0){
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:242 */
     REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-    /* ../lib/standard/collection/array.nit:272 */
+    /* ../lib/standard/collection/array.nit:273 */
     if (UNTAG_Bool(REGB1)) {
-      /* ../lib/standard/collection/array.nit:273 */
+      /* ../lib/standard/collection/array.nit:274 */
       REGB1 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
       if (UNTAG_Bool(REGB1)) {
-        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
+        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 274);
       }
-      /* ../lib/standard/collection/array.nit:724 */
+      /* ../lib/standard/collection/array.nit:725 */
       fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB0)];
       /* global/rta_analysis.nit:133 */
       fra.me.REG[4] = CALL_global___rta_analysis___RtaBuilder___program(fra.me.REG[0])(fra.me.REG[0]);
@@ -839,14 +839,14 @@ void global___rta_analysis___RtaBuilder___force_some_type_analysis(val_t p0){
       /* global/rta_analysis.nit:135 */
       CALL_global___rta_analysis___RtaBuilder___add_instantiated_class(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
       label11: while(0);
-      /* ../lib/standard/collection/array.nit:274 */
+      /* ../lib/standard/collection/array.nit:275 */
       REGB1 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
-      /* ../lib/standard/collection/array.nit:274 */
+      /* ../lib/standard/collection/array.nit:275 */
       REGB0 = REGB1;
     } else {
-      /* ../lib/standard/collection/array.nit:272 */
+      /* ../lib/standard/collection/array.nit:273 */
       goto label12;
     }
   }
@@ -857,7 +857,7 @@ void global___rta_analysis___RtaBuilder___force_some_type_analysis(val_t p0){
   if (!once_value_13) {
     fra.me.REG[1] = BOX_NativeString("Inline__");
     REGB0 = TAG_Int(8);
-    fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+    fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
     once_value_13 = fra.me.REG[1];
     register_static_object(&once_value_13);
   } else fra.me.REG[1] = once_value_13;
@@ -871,7 +871,7 @@ void global___rta_analysis___RtaBuilder___force_some_type_analysis(val_t p0){
     if (!once_value_14) {
       fra.me.REG[2] = BOX_NativeString("Inline__");
       REGB0 = TAG_Int(8);
-      fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+      fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
       once_value_14 = fra.me.REG[2];
       register_static_object(&once_value_14);
     } else fra.me.REG[2] = once_value_14;
@@ -889,7 +889,7 @@ void global___rta_analysis___RtaBuilder___force_some_type_analysis(val_t p0){
   if (!once_value_16) {
     fra.me.REG[1] = BOX_NativeString("Pointer");
     REGB0 = TAG_Int(7);
-    fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+    fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
     once_value_16 = fra.me.REG[1];
     register_static_object(&once_value_16);
   } else fra.me.REG[1] = once_value_16;
@@ -903,7 +903,7 @@ void global___rta_analysis___RtaBuilder___force_some_type_analysis(val_t p0){
     if (!once_value_17) {
       fra.me.REG[2] = BOX_NativeString("Pointer");
       REGB0 = TAG_Int(7);
-      fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+      fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
       once_value_17 = fra.me.REG[2];
       register_static_object(&once_value_17);
     } else fra.me.REG[2] = once_value_17;
@@ -1081,7 +1081,7 @@ void global___rta_analysis___RtaBuilder___work(val_t p0){
     if (!once_value_1) {
       fra.me.REG[3] = BOX_NativeString("Int");
       REGB0 = TAG_Int(3);
-      fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+      fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
       once_value_1 = fra.me.REG[3];
       register_static_object(&once_value_1);
     } else fra.me.REG[3] = once_value_1;
@@ -1090,7 +1090,7 @@ void global___rta_analysis___RtaBuilder___work(val_t p0){
     if (!once_value_2) {
       fra.me.REG[3] = BOX_NativeString("Char");
       REGB0 = TAG_Int(4);
-      fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+      fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
       once_value_2 = fra.me.REG[3];
       register_static_object(&once_value_2);
     } else fra.me.REG[3] = once_value_2;
@@ -1099,24 +1099,24 @@ void global___rta_analysis___RtaBuilder___work(val_t p0){
     if (!once_value_3) {
       fra.me.REG[3] = BOX_NativeString("Bool");
       REGB0 = TAG_Int(4);
-      fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+      fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
       once_value_3 = fra.me.REG[3];
       register_static_object(&once_value_3);
     } else fra.me.REG[3] = once_value_3;
     fra.me.REG[3] = fra.me.REG[3];
     CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
-    /* ../lib/standard/collection/array.nit:269 */
-    REGB0 = TAG_Int(0);
     /* ../lib/standard/collection/array.nit:270 */
+    REGB0 = TAG_Int(0);
+    /* ../lib/standard/collection/array.nit:271 */
     REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2])!=NIT_NULL);
     if (UNTAG_Bool(REGB1)) {
     } else {
-      nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 270);
+      nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 271);
     }
     REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2]);
-    /* ../lib/standard/collection/array.nit:271 */
-    fra.me.REG[3] = ATTR_standard___collection___array___Array____items(fra.me.REG[2]);
     /* ../lib/standard/collection/array.nit:272 */
+    fra.me.REG[3] = ATTR_standard___collection___array___Array____items(fra.me.REG[2]);
+    /* ../lib/standard/collection/array.nit:273 */
     while(1) {
       /* ../lib/standard/collection/array.nit:24 */
       REGB1 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2])!=NIT_NULL);
@@ -1130,16 +1130,16 @@ void global___rta_analysis___RtaBuilder___work(val_t p0){
       } else {
         nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
       }
-      /* ../lib/standard/kernel.nit:235 */
+      /* ../lib/standard/kernel.nit:242 */
       REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-      /* ../lib/standard/collection/array.nit:272 */
+      /* ../lib/standard/collection/array.nit:273 */
       if (UNTAG_Bool(REGB1)) {
-        /* ../lib/standard/collection/array.nit:273 */
+        /* ../lib/standard/collection/array.nit:274 */
         REGB1 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
         if (UNTAG_Bool(REGB1)) {
-          nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
+          nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 274);
         }
-        /* ../lib/standard/collection/array.nit:724 */
+        /* ../lib/standard/collection/array.nit:725 */
         fra.me.REG[4] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB0)];
         /* global/rta_analysis.nit:177 */
         fra.me.REG[5] = CALL_global___rta_analysis___RtaBuilder___program(fra.me.REG[1])(fra.me.REG[1]);
@@ -1154,14 +1154,14 @@ void global___rta_analysis___RtaBuilder___work(val_t p0){
           fra.me.REG[4] = CALL_metamodel___abstractmetamodel___MMModule___class_by_name(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[4]);
           CALL_global___rta_analysis___RtaBuilder___add_instantiated_class(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[4]);
         }
-        /* ../lib/standard/collection/array.nit:274 */
+        /* ../lib/standard/collection/array.nit:275 */
         REGB1 = TAG_Int(1);
-        /* ../lib/standard/kernel.nit:238 */
+        /* ../lib/standard/kernel.nit:245 */
         REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
-        /* ../lib/standard/collection/array.nit:274 */
+        /* ../lib/standard/collection/array.nit:275 */
         REGB0 = REGB1;
       } else {
-        /* ../lib/standard/collection/array.nit:272 */
+        /* ../lib/standard/collection/array.nit:273 */
         goto label4;
       }
     }

@@ -319,7 +319,7 @@ val_t analysis___inline_methods___ICall___is_inlinable(val_t p0){
       if (!once_value_2) {
         fra.me.REG[3] = BOX_NativeString("Object");
         REGB0 = TAG_Int(6);
-        fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+        fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
         once_value_2 = fra.me.REG[3];
         register_static_object(&once_value_2);
       } else fra.me.REG[3] = once_value_2;
@@ -348,7 +348,7 @@ val_t analysis___inline_methods___ICall___is_inlinable(val_t p0){
       if (!once_value_4) {
         fra.me.REG[3] = BOX_NativeString("Int");
         REGB1 = TAG_Int(3);
-        fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB1);
+        fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB1);
         once_value_4 = fra.me.REG[3];
         register_static_object(&once_value_4);
       } else fra.me.REG[3] = once_value_4;
@@ -369,7 +369,7 @@ val_t analysis___inline_methods___ICall___is_inlinable(val_t p0){
         if (!once_value_6) {
           fra.me.REG[3] = BOX_NativeString("enumerate_to");
           REGB1 = TAG_Int(12);
-          fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB1);
+          fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB1);
           once_value_6 = fra.me.REG[3];
           register_static_object(&once_value_6);
         } else fra.me.REG[3] = once_value_6;
@@ -392,7 +392,7 @@ val_t analysis___inline_methods___ICall___is_inlinable(val_t p0){
           if (!once_value_8) {
             fra.me.REG[3] = BOX_NativeString("enumerate_before");
             REGB2 = TAG_Int(16);
-            fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB2);
+            fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB2);
             once_value_8 = fra.me.REG[3];
             register_static_object(&once_value_8);
           } else fra.me.REG[3] = once_value_8;
@@ -425,7 +425,7 @@ val_t analysis___inline_methods___ICall___is_inlinable(val_t p0){
       if (!once_value_10) {
         fra.me.REG[3] = BOX_NativeString("Array");
         REGB1 = TAG_Int(5);
-        fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB1);
+        fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB1);
         once_value_10 = fra.me.REG[3];
         register_static_object(&once_value_10);
       } else fra.me.REG[3] = once_value_10;
@@ -446,7 +446,7 @@ val_t analysis___inline_methods___ICall___is_inlinable(val_t p0){
         if (!once_value_12) {
           fra.me.REG[3] = BOX_NativeString("length");
           REGB1 = TAG_Int(6);
-          fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB1);
+          fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB1);
           once_value_12 = fra.me.REG[3];
           register_static_object(&once_value_12);
         } else fra.me.REG[3] = once_value_12;
@@ -469,7 +469,7 @@ val_t analysis___inline_methods___ICall___is_inlinable(val_t p0){
           if (!once_value_14) {
             fra.me.REG[3] = BOX_NativeString("[]");
             REGB2 = TAG_Int(2);
-            fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB2);
+            fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB2);
             once_value_14 = fra.me.REG[3];
             register_static_object(&once_value_14);
           } else fra.me.REG[3] = once_value_14;
@@ -494,7 +494,7 @@ val_t analysis___inline_methods___ICall___is_inlinable(val_t p0){
           if (!once_value_16) {
             fra.me.REG[3] = BOX_NativeString("iterate");
             REGB2 = TAG_Int(7);
-            fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB2);
+            fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB2);
             once_value_16 = fra.me.REG[3];
             register_static_object(&once_value_16);
           } else fra.me.REG[3] = once_value_16;
@@ -527,7 +527,7 @@ val_t analysis___inline_methods___ICall___is_inlinable(val_t p0){
       if (!once_value_18) {
         fra.me.REG[3] = BOX_NativeString("AbstractArrayRead");
         REGB1 = TAG_Int(17);
-        fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB1);
+        fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB1);
         once_value_18 = fra.me.REG[3];
         register_static_object(&once_value_18);
       } else fra.me.REG[3] = once_value_18;
@@ -548,7 +548,7 @@ val_t analysis___inline_methods___ICall___is_inlinable(val_t p0){
         if (!once_value_20) {
           fra.me.REG[3] = BOX_NativeString("length");
           REGB1 = TAG_Int(6);
-          fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB1);
+          fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB1);
           once_value_20 = fra.me.REG[3];
           register_static_object(&once_value_20);
         } else fra.me.REG[3] = once_value_20;
@@ -571,7 +571,7 @@ val_t analysis___inline_methods___ICall___is_inlinable(val_t p0){
           if (!once_value_22) {
             fra.me.REG[3] = BOX_NativeString("[]");
             REGB2 = TAG_Int(2);
-            fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB2);
+            fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB2);
             once_value_22 = fra.me.REG[3];
             register_static_object(&once_value_22);
           } else fra.me.REG[3] = once_value_22;
@@ -608,7 +608,7 @@ val_t analysis___inline_methods___ICall___is_inlinable(val_t p0){
       if (!once_value_24) {
         fra.me.REG[3] = BOX_NativeString("Inline__");
         REGB1 = TAG_Int(8);
-        fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB1);
+        fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB1);
         once_value_24 = fra.me.REG[3];
         register_static_object(&once_value_24);
       } else fra.me.REG[3] = once_value_24;

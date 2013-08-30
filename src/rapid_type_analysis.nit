@@ -426,12 +426,10 @@ end
 redef class AStringFormExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		var mtype = self.mtype.as(MClassType)
-		v.add_type(mtype)
 		var native = v.get_class("NativeString").mclass_type
 		v.add_type(native)
-		var prop = v.get_method(mtype, "from_cstring")
-		v.add_monomorphic_send(mtype, prop)
+		var prop = v.get_method(native, "to_s")
+		v.add_monomorphic_send(native, prop)
 	end
 end
 

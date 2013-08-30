@@ -81,13 +81,13 @@ val_t standard___collection___abstract_collection___Collection___length(val_t p0
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 59;
+  fra.me.line = 62;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Collection___length;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ../lib/standard/collection/abstract_collection.nit:59 */
-  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 59);
+  /* ../lib/standard/collection/abstract_collection.nit:62 */
+  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 62);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -97,13 +97,13 @@ val_t standard___collection___abstract_collection___Collection___has(val_t p0, v
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 62;
+  fra.me.line = 68;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Collection___has;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ../lib/standard/collection/abstract_collection.nit:62 */
-  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 62);
+  /* ../lib/standard/collection/abstract_collection.nit:68 */
+  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 68);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -113,13 +113,13 @@ val_t standard___collection___abstract_collection___Collection___has_only(val_t 
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 66;
+  fra.me.line = 77;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Collection___has_only;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ../lib/standard/collection/abstract_collection.nit:66 */
-  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 66);
+  /* ../lib/standard/collection/abstract_collection.nit:77 */
+  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 77);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -129,13 +129,13 @@ val_t standard___collection___abstract_collection___Collection___count(val_t p0,
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 71;
+  fra.me.line = 90;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Collection___count;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ../lib/standard/collection/abstract_collection.nit:71 */
-  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 71);
+  /* ../lib/standard/collection/abstract_collection.nit:90 */
+  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 90);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -145,13 +145,13 @@ val_t standard___collection___abstract_collection___Collection___first(val_t p0)
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 75;
+  fra.me.line = 96;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Collection___first;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ../lib/standard/collection/abstract_collection.nit:75 */
-  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 75);
+  /* ../lib/standard/collection/abstract_collection.nit:96 */
+  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 96);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -164,22 +164,22 @@ val_t standard___collection___abstract_collection___NaiveCollection___is_empty(v
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 83;
+  fra.me.line = 106;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___NaiveCollection___is_empty;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ../lib/standard/collection/abstract_collection.nit:83 */
+  /* ../lib/standard/collection/abstract_collection.nit:106 */
   REGB0 = CALL_standard___collection___abstract_collection___Collection___length(fra.me.REG[0])(fra.me.REG[0]);
   REGB1 = TAG_Int(0);
   REGB2 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
   if (UNTAG_Bool(REGB2)) {
   } else {
-    /* ../lib/standard/kernel.nit:230 */
+    /* ../lib/standard/kernel.nit:237 */
     REGB1 = TAG_Bool((REGB0)==(REGB1));
-    /* ../lib/standard/collection/abstract_collection.nit:83 */
+    /* ../lib/standard/collection/abstract_collection.nit:106 */
     REGB2 = REGB1;
   }
   goto label1;
@@ -194,7 +194,7 @@ val_t standard___collection___abstract_collection___NaiveCollection___length(val
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 85;
+  fra.me.line = 108;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___NaiveCollection___length;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -202,11 +202,11 @@ val_t standard___collection___abstract_collection___NaiveCollection___length(val
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ../lib/standard/collection/abstract_collection.nit:87 */
+  /* ../lib/standard/collection/abstract_collection.nit:110 */
   REGB0 = TAG_Int(0);
   fra.me.REG[1] = REGB0;
   CALL_standard___collection___abstract_collection___Collection___iterate(fra.me.REG[0])(fra.me.REG[0], (&(fra.me)), ((fun_t)OC_standard___collection___abstract_collection___NaiveCollection___length_1));
-  /* ../lib/standard/collection/abstract_collection.nit:89 */
+  /* ../lib/standard/collection/abstract_collection.nit:112 */
   REGB0 = fra.me.REG[1];
   goto label2;
   label2: while(0);
@@ -218,7 +218,7 @@ val_t standard___collection___abstract_collection___NaiveCollection___length(val
     val_t REGB0;
     fun_t CREG[1];
     val_t tmp;
-    /* ../lib/standard/collection/abstract_collection.nit:88 */
+    /* ../lib/standard/collection/abstract_collection.nit:111 */
     fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
     fra.me.file = LOCATE_standard___collection___abstract_collection;
     fra.me.line = 0;
@@ -232,9 +232,9 @@ val_t standard___collection___abstract_collection___NaiveCollection___length(val
     fra.me.REG[0] = p0;
     CREG[0] = clos_fun0;
     REGB0 = TAG_Int(1);
-    /* ../lib/standard/kernel.nit:238 */
+    /* ../lib/standard/kernel.nit:245 */
     REGB0 = TAG_Int(UNTAG_Int(closctx->REG[1])+UNTAG_Int(REGB0));
-    /* ../lib/standard/collection/abstract_collection.nit:88 */
+    /* ../lib/standard/collection/abstract_collection.nit:111 */
     closctx->REG[1] = REGB0;
     stack_frame_head = fra.me.prev;
     return;
@@ -246,7 +246,7 @@ val_t standard___collection___abstract_collection___NaiveCollection___has(val_t 
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 92;
+  fra.me.line = 115;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___NaiveCollection___has;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -260,7 +260,7 @@ val_t standard___collection___abstract_collection___NaiveCollection___has(val_t 
     case 0: break;
     case 1: (&(fra.me))->has_broke = 0; goto label3;
   }
-  /* ../lib/standard/collection/abstract_collection.nit:95 */
+  /* ../lib/standard/collection/abstract_collection.nit:118 */
   REGB0 = TAG_Bool(0);
   fra.me.REG[0] = REGB0;
   goto label3;
@@ -274,7 +274,7 @@ val_t standard___collection___abstract_collection___NaiveCollection___has(val_t 
     val_t REGB1;
     fun_t CREG[1];
     val_t tmp;
-    /* ../lib/standard/collection/abstract_collection.nit:94 */
+    /* ../lib/standard/collection/abstract_collection.nit:117 */
     fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
     fra.me.file = LOCATE_standard___collection___abstract_collection;
     fra.me.line = 0;
@@ -316,7 +316,7 @@ val_t standard___collection___abstract_collection___NaiveCollection___has_only(v
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 98;
+  fra.me.line = 121;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___NaiveCollection___has_only;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -330,7 +330,7 @@ val_t standard___collection___abstract_collection___NaiveCollection___has_only(v
     case 0: break;
     case 1: (&(fra.me))->has_broke = 0; goto label3;
   }
-  /* ../lib/standard/collection/abstract_collection.nit:101 */
+  /* ../lib/standard/collection/abstract_collection.nit:124 */
   REGB0 = TAG_Bool(1);
   fra.me.REG[0] = REGB0;
   goto label3;
@@ -344,7 +344,7 @@ val_t standard___collection___abstract_collection___NaiveCollection___has_only(v
     val_t REGB1;
     fun_t CREG[1];
     val_t tmp;
-    /* ../lib/standard/collection/abstract_collection.nit:100 */
+    /* ../lib/standard/collection/abstract_collection.nit:123 */
     fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
     fra.me.file = LOCATE_standard___collection___abstract_collection;
     fra.me.line = 0;
@@ -387,7 +387,7 @@ val_t standard___collection___abstract_collection___NaiveCollection___count(val_
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 104;
+  fra.me.line = 127;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___NaiveCollection___count;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -397,11 +397,11 @@ val_t standard___collection___abstract_collection___NaiveCollection___count(val_
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ../lib/standard/collection/abstract_collection.nit:106 */
+  /* ../lib/standard/collection/abstract_collection.nit:129 */
   REGB0 = TAG_Int(0);
   fra.me.REG[2] = REGB0;
   CALL_standard___collection___abstract_collection___Collection___iterate(fra.me.REG[0])(fra.me.REG[0], (&(fra.me)), ((fun_t)OC_standard___collection___abstract_collection___NaiveCollection___count_1));
-  /* ../lib/standard/collection/abstract_collection.nit:108 */
+  /* ../lib/standard/collection/abstract_collection.nit:131 */
   REGB0 = fra.me.REG[2];
   goto label2;
   label2: while(0);
@@ -414,7 +414,7 @@ val_t standard___collection___abstract_collection___NaiveCollection___count(val_
     val_t REGB1;
     fun_t CREG[1];
     val_t tmp;
-    /* ../lib/standard/collection/abstract_collection.nit:107 */
+    /* ../lib/standard/collection/abstract_collection.nit:130 */
     fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
     fra.me.file = LOCATE_standard___collection___abstract_collection;
     fra.me.line = 0;
@@ -441,9 +441,9 @@ val_t standard___collection___abstract_collection___NaiveCollection___count(val_
     }
     if (UNTAG_Bool(REGB0)) {
       REGB0 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB0 = TAG_Int(UNTAG_Int(closctx->REG[2])+UNTAG_Int(REGB0));
-      /* ../lib/standard/collection/abstract_collection.nit:107 */
+      /* ../lib/standard/collection/abstract_collection.nit:130 */
       closctx->REG[2] = REGB0;
     }
     stack_frame_head = fra.me.prev;
@@ -458,14 +458,14 @@ val_t standard___collection___abstract_collection___NaiveCollection___first(val_
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 111;
+  fra.me.line = 134;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___NaiveCollection___first;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ../lib/standard/collection/abstract_collection.nit:113 */
+  /* ../lib/standard/collection/abstract_collection.nit:136 */
   REGB0 = CALL_standard___collection___abstract_collection___Collection___length(fra.me.REG[0])(fra.me.REG[0]);
   REGB1 = TAG_Int(0);
   REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
@@ -473,14 +473,14 @@ val_t standard___collection___abstract_collection___NaiveCollection___first(val_
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:237 */
+  /* ../lib/standard/kernel.nit:244 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)>UNTAG_Int(REGB1));
-  /* ../lib/standard/collection/abstract_collection.nit:113 */
+  /* ../lib/standard/collection/abstract_collection.nit:136 */
   if (UNTAG_Bool(REGB1)) {
   } else {
-    nit_abort("Assert failed", NULL, LOCATE_standard___collection___abstract_collection, 113);
+    nit_abort("Assert failed", NULL, LOCATE_standard___collection___abstract_collection, 136);
   }
-  /* ../lib/standard/collection/abstract_collection.nit:114 */
+  /* ../lib/standard/collection/abstract_collection.nit:137 */
   fra.me.REG[0] = CALL_standard___collection___abstract_collection___Collection___iterator(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_standard___collection___abstract_collection___Iterator___item(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -494,13 +494,13 @@ val_t standard___collection___abstract_collection___Iterator___item(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 121;
+  fra.me.line = 144;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Iterator___item;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ../lib/standard/collection/abstract_collection.nit:121 */
-  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 121);
+  /* ../lib/standard/collection/abstract_collection.nit:144 */
+  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 144);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -510,13 +510,13 @@ void standard___collection___abstract_collection___Iterator___next(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 125;
+  fra.me.line = 148;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Iterator___next;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ../lib/standard/collection/abstract_collection.nit:125 */
-  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 125);
+  /* ../lib/standard/collection/abstract_collection.nit:148 */
+  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 148);
   stack_frame_head = fra.me.prev;
   return;
 }
@@ -526,13 +526,13 @@ val_t standard___collection___abstract_collection___Iterator___is_ok(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 129;
+  fra.me.line = 152;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Iterator___is_ok;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ../lib/standard/collection/abstract_collection.nit:129 */
-  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 129);
+  /* ../lib/standard/collection/abstract_collection.nit:152 */
+  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 152);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -542,14 +542,14 @@ val_t standard___collection___abstract_collection___Container___first(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 137;
+  fra.me.line = 160;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Container___first;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ../lib/standard/collection/abstract_collection.nit:137 */
+  /* ../lib/standard/collection/abstract_collection.nit:160 */
   fra.me.REG[0] = ATTR_standard___collection___abstract_collection___Container____item(fra.me.REG[0]);
   goto label1;
   label1: while(0);
@@ -563,14 +563,14 @@ val_t standard___collection___abstract_collection___Container___is_empty(val_t p
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 139;
+  fra.me.line = 162;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Container___is_empty;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ../lib/standard/collection/abstract_collection.nit:139 */
+  /* ../lib/standard/collection/abstract_collection.nit:162 */
   REGB0 = TAG_Bool(0);
   goto label1;
   label1: while(0);
@@ -584,14 +584,14 @@ val_t standard___collection___abstract_collection___Container___length(val_t p0)
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 141;
+  fra.me.line = 164;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Container___length;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ../lib/standard/collection/abstract_collection.nit:141 */
+  /* ../lib/standard/collection/abstract_collection.nit:164 */
   REGB0 = TAG_Int(1);
   goto label1;
   label1: while(0);
@@ -606,7 +606,7 @@ val_t standard___collection___abstract_collection___Container___has(val_t p0, va
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 143;
+  fra.me.line = 166;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Container___has;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -615,7 +615,7 @@ val_t standard___collection___abstract_collection___Container___has(val_t p0, va
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ../lib/standard/collection/abstract_collection.nit:143 */
+  /* ../lib/standard/collection/abstract_collection.nit:166 */
   fra.me.REG[0] = ATTR_standard___collection___abstract_collection___Container____item(fra.me.REG[0]);
   REGB0 = TAG_Bool(IS_EQUAL_NN(fra.me.REG[0],fra.me.REG[1]));
   if (UNTAG_Bool(REGB0)) {
@@ -642,7 +642,7 @@ val_t standard___collection___abstract_collection___Container___has_only(val_t p
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 145;
+  fra.me.line = 168;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Container___has_only;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -651,7 +651,7 @@ val_t standard___collection___abstract_collection___Container___has_only(val_t p
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ../lib/standard/collection/abstract_collection.nit:145 */
+  /* ../lib/standard/collection/abstract_collection.nit:168 */
   fra.me.REG[0] = ATTR_standard___collection___abstract_collection___Container____item(fra.me.REG[0]);
   REGB0 = TAG_Bool(IS_EQUAL_NN(fra.me.REG[0],fra.me.REG[1]));
   if (UNTAG_Bool(REGB0)) {
@@ -678,7 +678,7 @@ val_t standard___collection___abstract_collection___Container___count(val_t p0, 
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 147;
+  fra.me.line = 170;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Container___count;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -687,7 +687,7 @@ val_t standard___collection___abstract_collection___Container___count(val_t p0, 
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ../lib/standard/collection/abstract_collection.nit:149 */
+  /* ../lib/standard/collection/abstract_collection.nit:172 */
   fra.me.REG[0] = ATTR_standard___collection___abstract_collection___Container____item(fra.me.REG[0]);
   REGB0 = TAG_Bool(IS_EQUAL_NN(fra.me.REG[0],fra.me.REG[1]));
   if (UNTAG_Bool(REGB0)) {
@@ -702,11 +702,11 @@ val_t standard___collection___abstract_collection___Container___count(val_t p0, 
     }
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ../lib/standard/collection/abstract_collection.nit:150 */
+    /* ../lib/standard/collection/abstract_collection.nit:173 */
     REGB0 = TAG_Int(1);
     goto label1;
   } else {
-    /* ../lib/standard/collection/abstract_collection.nit:152 */
+    /* ../lib/standard/collection/abstract_collection.nit:175 */
     REGB1 = TAG_Int(0);
     REGB0 = REGB1;
     goto label1;
@@ -721,14 +721,14 @@ val_t standard___collection___abstract_collection___Container___iterator(val_t p
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 156;
+  fra.me.line = 179;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Container___iterator;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ../lib/standard/collection/abstract_collection.nit:156 */
+  /* ../lib/standard/collection/abstract_collection.nit:179 */
   fra.me.REG[0] = NEW_ContainerIterator_standard___collection___abstract_collection___ContainerIterator___init(fra.me.REG[0]);
   goto label1;
   label1: while(0);
@@ -743,7 +743,7 @@ void standard___collection___abstract_collection___Container___init(val_t p0, va
   if (init_table[itpos0]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 158;
+  fra.me.line = 181;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Container___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -752,7 +752,7 @@ void standard___collection___abstract_collection___Container___init(val_t p0, va
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ../lib/standard/collection/abstract_collection.nit:159 */
+  /* ../lib/standard/collection/abstract_collection.nit:182 */
   ATTR_standard___collection___abstract_collection___Container____item(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos0] = 1;
@@ -764,14 +764,14 @@ val_t standard___collection___abstract_collection___Container___item(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 161;
+  fra.me.line = 184;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Container___item;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ../lib/standard/collection/abstract_collection.nit:161 */
+  /* ../lib/standard/collection/abstract_collection.nit:184 */
   fra.me.REG[0] = ATTR_standard___collection___abstract_collection___Container____item(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -782,7 +782,7 @@ void standard___collection___abstract_collection___Container___item__eq(val_t p0
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 161;
+  fra.me.line = 184;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Container___item__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -791,7 +791,7 @@ void standard___collection___abstract_collection___Container___item__eq(val_t p0
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ../lib/standard/collection/abstract_collection.nit:161 */
+  /* ../lib/standard/collection/abstract_collection.nit:184 */
   ATTR_standard___collection___abstract_collection___Container____item(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;
@@ -803,18 +803,18 @@ val_t standard___collection___abstract_collection___ContainerIterator___item(val
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 168;
+  fra.me.line = 191;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___ContainerIterator___item;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ../lib/standard/collection/abstract_collection.nit:168 */
+  /* ../lib/standard/collection/abstract_collection.nit:191 */
   REGB0 = TAG_Bool(ATTR_standard___collection___abstract_collection___ContainerIterator____container(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_container", LOCATE_standard___collection___abstract_collection, 168);
+    nit_abort("Uninitialized attribute %s", "_container", LOCATE_standard___collection___abstract_collection, 191);
   }
   fra.me.REG[0] = ATTR_standard___collection___abstract_collection___ContainerIterator____container(fra.me.REG[0]);
   fra.me.REG[0] = CALL_standard___collection___abstract_collection___Container___item(fra.me.REG[0])(fra.me.REG[0]);
@@ -830,14 +830,14 @@ void standard___collection___abstract_collection___ContainerIterator___next(val_
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 170;
+  fra.me.line = 193;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___ContainerIterator___next;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ../lib/standard/collection/abstract_collection.nit:170 */
+  /* ../lib/standard/collection/abstract_collection.nit:193 */
   REGB0 = TAG_Bool(0);
   ATTR_standard___collection___abstract_collection___ContainerIterator____is_ok(fra.me.REG[0]) = REGB0;
   stack_frame_head = fra.me.prev;
@@ -851,7 +851,7 @@ void standard___collection___abstract_collection___ContainerIterator___init(val_
   if (init_table[itpos1]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 172;
+  fra.me.line = 195;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___ContainerIterator___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -860,7 +860,7 @@ void standard___collection___abstract_collection___ContainerIterator___init(val_
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ../lib/standard/collection/abstract_collection.nit:172 */
+  /* ../lib/standard/collection/abstract_collection.nit:195 */
   ATTR_standard___collection___abstract_collection___ContainerIterator____container(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos1] = 1;
@@ -873,18 +873,18 @@ val_t standard___collection___abstract_collection___ContainerIterator___is_ok(va
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 174;
+  fra.me.line = 197;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___ContainerIterator___is_ok;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ../lib/standard/collection/abstract_collection.nit:174 */
+  /* ../lib/standard/collection/abstract_collection.nit:197 */
   REGB0 = TAG_Bool(ATTR_standard___collection___abstract_collection___ContainerIterator____is_ok(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_is_ok", LOCATE_standard___collection___abstract_collection, 174);
+    nit_abort("Uninitialized attribute %s", "_is_ok", LOCATE_standard___collection___abstract_collection, 197);
   }
   REGB0 = ATTR_standard___collection___abstract_collection___ContainerIterator____is_ok(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -896,13 +896,13 @@ void standard___collection___abstract_collection___RemovableCollection___clear(v
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 182;
+  fra.me.line = 205;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___RemovableCollection___clear;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ../lib/standard/collection/abstract_collection.nit:182 */
-  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 182);
+  /* ../lib/standard/collection/abstract_collection.nit:205 */
+  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 205);
   stack_frame_head = fra.me.prev;
   return;
 }
@@ -912,13 +912,13 @@ void standard___collection___abstract_collection___RemovableCollection___remove(
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 185;
+  fra.me.line = 208;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___RemovableCollection___remove;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ../lib/standard/collection/abstract_collection.nit:185 */
-  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 185);
+  /* ../lib/standard/collection/abstract_collection.nit:208 */
+  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 208);
   stack_frame_head = fra.me.prev;
   return;
 }
@@ -929,7 +929,7 @@ void standard___collection___abstract_collection___RemovableCollection___remove_
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 188;
+  fra.me.line = 211;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___RemovableCollection___remove_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -938,7 +938,7 @@ void standard___collection___abstract_collection___RemovableCollection___remove_
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ../lib/standard/collection/abstract_collection.nit:189 */
+  /* ../lib/standard/collection/abstract_collection.nit:212 */
   while(1) {
     REGB0 = CALL_standard___collection___abstract_collection___Collection___has(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
     if (UNTAG_Bool(REGB0)) {
@@ -957,13 +957,13 @@ void standard___collection___abstract_collection___SimpleCollection___add(val_t 
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 195;
+  fra.me.line = 218;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___SimpleCollection___add;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ../lib/standard/collection/abstract_collection.nit:195 */
-  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 195);
+  /* ../lib/standard/collection/abstract_collection.nit:218 */
+  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 218);
   stack_frame_head = fra.me.prev;
   return;
 }
@@ -973,7 +973,7 @@ void standard___collection___abstract_collection___SimpleCollection___add_all(va
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 199;
+  fra.me.line = 222;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___SimpleCollection___add_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -990,7 +990,7 @@ void standard___collection___abstract_collection___SimpleCollection___add_all(va
     struct {struct stack_frame_t me;} fra;
     fun_t CREG[1];
     val_t tmp;
-    /* ../lib/standard/collection/abstract_collection.nit:200 */
+    /* ../lib/standard/collection/abstract_collection.nit:223 */
     fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
     fra.me.file = LOCATE_standard___collection___abstract_collection;
     fra.me.line = 0;
@@ -1017,7 +1017,7 @@ val_t standard___collection___abstract_collection___Set___has_only(val_t p0, val
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 215;
+  fra.me.line = 238;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Set___has_only;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1026,40 +1026,40 @@ val_t standard___collection___abstract_collection___Set___has_only(val_t p0, val
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ../lib/standard/collection/abstract_collection.nit:217 */
+  /* ../lib/standard/collection/abstract_collection.nit:240 */
   REGB0 = CALL_standard___collection___abstract_collection___Collection___length(fra.me.REG[0])(fra.me.REG[0]);
-  /* ../lib/standard/collection/abstract_collection.nit:218 */
+  /* ../lib/standard/collection/abstract_collection.nit:241 */
   REGB1 = TAG_Int(1);
   REGB2 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
   if (UNTAG_Bool(REGB2)) {
   } else {
-    /* ../lib/standard/kernel.nit:230 */
+    /* ../lib/standard/kernel.nit:237 */
     REGB1 = TAG_Bool((REGB0)==(REGB1));
-    /* ../lib/standard/collection/abstract_collection.nit:218 */
+    /* ../lib/standard/collection/abstract_collection.nit:241 */
     REGB2 = REGB1;
   }
   if (UNTAG_Bool(REGB2)) {
-    /* ../lib/standard/collection/abstract_collection.nit:219 */
+    /* ../lib/standard/collection/abstract_collection.nit:242 */
     REGB2 = CALL_standard___collection___abstract_collection___Collection___has(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
     goto label1;
   } else {
-    /* ../lib/standard/collection/abstract_collection.nit:220 */
+    /* ../lib/standard/collection/abstract_collection.nit:243 */
     REGB1 = TAG_Int(0);
     REGB3 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
     if (UNTAG_Bool(REGB3)) {
     } else {
-      /* ../lib/standard/kernel.nit:230 */
+      /* ../lib/standard/kernel.nit:237 */
       REGB1 = TAG_Bool((REGB0)==(REGB1));
-      /* ../lib/standard/collection/abstract_collection.nit:220 */
+      /* ../lib/standard/collection/abstract_collection.nit:243 */
       REGB3 = REGB1;
     }
     if (UNTAG_Bool(REGB3)) {
-      /* ../lib/standard/collection/abstract_collection.nit:221 */
+      /* ../lib/standard/collection/abstract_collection.nit:244 */
       REGB3 = TAG_Bool(1);
       REGB2 = REGB3;
       goto label1;
     } else {
-      /* ../lib/standard/collection/abstract_collection.nit:223 */
+      /* ../lib/standard/collection/abstract_collection.nit:246 */
       REGB3 = TAG_Bool(0);
       REGB2 = REGB3;
       goto label1;
@@ -1077,7 +1077,7 @@ val_t standard___collection___abstract_collection___Set___count(val_t p0, val_t 
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 227;
+  fra.me.line = 250;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Set___count;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1086,14 +1086,14 @@ val_t standard___collection___abstract_collection___Set___count(val_t p0, val_t 
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ../lib/standard/collection/abstract_collection.nit:230 */
+  /* ../lib/standard/collection/abstract_collection.nit:253 */
   REGB0 = CALL_standard___collection___abstract_collection___Collection___has(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   if (UNTAG_Bool(REGB0)) {
-    /* ../lib/standard/collection/abstract_collection.nit:231 */
+    /* ../lib/standard/collection/abstract_collection.nit:254 */
     REGB0 = TAG_Int(1);
     goto label1;
   } else {
-    /* ../lib/standard/collection/abstract_collection.nit:233 */
+    /* ../lib/standard/collection/abstract_collection.nit:256 */
     REGB1 = TAG_Int(0);
     REGB0 = REGB1;
     goto label1;
@@ -1108,7 +1108,7 @@ void standard___collection___abstract_collection___Set___remove_all(val_t p0, va
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 237;
+  fra.me.line = 260;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Set___remove_all;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1117,7 +1117,7 @@ void standard___collection___abstract_collection___Set___remove_all(val_t p0, va
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ../lib/standard/collection/abstract_collection.nit:238 */
+  /* ../lib/standard/collection/abstract_collection.nit:261 */
   CALL_standard___collection___abstract_collection___RemovableCollection___remove(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   stack_frame_head = fra.me.prev;
   return;
@@ -1128,15 +1128,46 @@ val_t standard___collection___abstract_collection___MapRead_____bra(val_t p0, va
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 243;
+  fra.me.line = 266;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapRead_____bra;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ../lib/standard/collection/abstract_collection.nit:243 */
-  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 243);
+  /* ../lib/standard/collection/abstract_collection.nit:266 */
+  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 266);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
+}
+static const char LOCATE_standard___collection___abstract_collection___MapRead___get_or_default[] = "abstract_collection::MapRead::get_or_default";
+val_t standard___collection___abstract_collection___MapRead___get_or_default(val_t p0, val_t p1, val_t p2){
+  struct {struct stack_frame_t me; val_t MORE_REG[2];} fra;
+  val_t REGB0;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_standard___collection___abstract_collection;
+  fra.me.line = 269;
+  fra.me.meth = LOCATE_standard___collection___abstract_collection___MapRead___get_or_default;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 3;
+  fra.me.nitni_local_ref_head = NULL;
+  fra.me.REG[0] = NIT_NULL;
+  fra.me.REG[1] = NIT_NULL;
+  fra.me.REG[2] = NIT_NULL;
+  fra.me.REG[0] = p0;
+  fra.me.REG[1] = p1;
+  fra.me.REG[2] = p2;
+  /* ../lib/standard/collection/abstract_collection.nit:272 */
+  REGB0 = CALL_standard___collection___abstract_collection___MapRead___has_key(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
+  if (UNTAG_Bool(REGB0)) {
+    fra.me.REG[1] = CALL_standard___collection___abstract_collection___MapRead_____bra(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
+    goto label1;
+  }
+  /* ../lib/standard/collection/abstract_collection.nit:273 */
+  fra.me.REG[1] = fra.me.REG[2];
+  goto label1;
+  label1: while(0);
+  stack_frame_head = fra.me.prev;
+  return fra.me.REG[1];
 }
 static const char LOCATE_standard___collection___abstract_collection___MapRead___has_key[] = "abstract_collection::MapRead::has_key";
 val_t standard___collection___abstract_collection___MapRead___has_key(val_t p0, val_t p1){
@@ -1145,7 +1176,7 @@ val_t standard___collection___abstract_collection___MapRead___has_key(val_t p0, 
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 246;
+  fra.me.line = 276;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapRead___has_key;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1154,7 +1185,7 @@ val_t standard___collection___abstract_collection___MapRead___has_key(val_t p0, 
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ../lib/standard/collection/abstract_collection.nit:247 */
+  /* ../lib/standard/collection/abstract_collection.nit:277 */
   fra.me.REG[0] = CALL_standard___collection___abstract_collection___MapRead___keys(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = CALL_standard___collection___abstract_collection___Collection___has(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   goto label1;
@@ -1168,13 +1199,13 @@ val_t standard___collection___abstract_collection___MapRead___iterator(val_t p0)
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 249;
+  fra.me.line = 279;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapRead___iterator;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ../lib/standard/collection/abstract_collection.nit:249 */
-  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 249);
+  /* ../lib/standard/collection/abstract_collection.nit:279 */
+  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 279);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -1186,7 +1217,7 @@ void standard___collection___abstract_collection___MapRead___iterate(val_t p0, s
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 252;
+  fra.me.line = 282;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapRead___iterate;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -1198,23 +1229,23 @@ void standard___collection___abstract_collection___MapRead___iterate(val_t p0, s
   fra.me.closure_funs = CREG;
   fra.me.REG[0] = p0;
   CREG[0] = clos_fun0;
-  /* ../lib/standard/collection/abstract_collection.nit:256 */
+  /* ../lib/standard/collection/abstract_collection.nit:286 */
   fra.me.REG[0] = CALL_standard___collection___abstract_collection___MapRead___iterator(fra.me.REG[0])(fra.me.REG[0]);
-  /* ../lib/standard/collection/abstract_collection.nit:257 */
+  /* ../lib/standard/collection/abstract_collection.nit:287 */
   while(1) {
     REGB0 = CALL_standard___collection___abstract_collection___MapIterator___is_ok(fra.me.REG[0])(fra.me.REG[0]);
     if (UNTAG_Bool(REGB0)) {
-      /* ../lib/standard/collection/abstract_collection.nit:258 */
+      /* ../lib/standard/collection/abstract_collection.nit:288 */
       fra.me.REG[1] = CALL_standard___collection___abstract_collection___MapIterator___key(fra.me.REG[0])(fra.me.REG[0]);
       fra.me.REG[2] = CALL_standard___collection___abstract_collection___MapIterator___item(fra.me.REG[0])(fra.me.REG[0]);
       ((void (*)(struct stack_frame_t *, val_t, val_t))(CREG[0]))(closctx_param, fra.me.REG[1], fra.me.REG[2]);
       if (closctx_param->has_broke) {
         goto label1;
       }
-      /* ../lib/standard/collection/abstract_collection.nit:259 */
+      /* ../lib/standard/collection/abstract_collection.nit:289 */
       CALL_standard___collection___abstract_collection___MapIterator___next(fra.me.REG[0])(fra.me.REG[0]);
     } else {
-      /* ../lib/standard/collection/abstract_collection.nit:257 */
+      /* ../lib/standard/collection/abstract_collection.nit:287 */
       goto label2;
     }
   }
@@ -1229,13 +1260,13 @@ val_t standard___collection___abstract_collection___MapRead___values(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 263;
+  fra.me.line = 293;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapRead___values;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ../lib/standard/collection/abstract_collection.nit:263 */
-  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 263);
+  /* ../lib/standard/collection/abstract_collection.nit:293 */
+  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 293);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -1245,13 +1276,13 @@ val_t standard___collection___abstract_collection___MapRead___keys(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 268;
+  fra.me.line = 298;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapRead___keys;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ../lib/standard/collection/abstract_collection.nit:268 */
-  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 268);
+  /* ../lib/standard/collection/abstract_collection.nit:298 */
+  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 298);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -1261,13 +1292,13 @@ val_t standard___collection___abstract_collection___MapRead___is_empty(val_t p0)
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 273;
+  fra.me.line = 303;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapRead___is_empty;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ../lib/standard/collection/abstract_collection.nit:273 */
-  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 273);
+  /* ../lib/standard/collection/abstract_collection.nit:303 */
+  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 303);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -1277,13 +1308,13 @@ val_t standard___collection___abstract_collection___MapRead___length(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 276;
+  fra.me.line = 306;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapRead___length;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ../lib/standard/collection/abstract_collection.nit:276 */
-  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 276);
+  /* ../lib/standard/collection/abstract_collection.nit:306 */
+  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 306);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -1293,13 +1324,13 @@ void standard___collection___abstract_collection___Map_____braeq(val_t p0, val_t
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 304;
+  fra.me.line = 336;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Map_____braeq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ../lib/standard/collection/abstract_collection.nit:304 */
-  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 304);
+  /* ../lib/standard/collection/abstract_collection.nit:336 */
+  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 336);
   stack_frame_head = fra.me.prev;
   return;
 }
@@ -1310,7 +1341,7 @@ void standard___collection___abstract_collection___Map___recover_with(val_t p0, 
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 307;
+  fra.me.line = 339;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Map___recover_with;
   fra.me.has_broke = 0;
   fra.me.REG_size = 4;
@@ -1321,20 +1352,20 @@ void standard___collection___abstract_collection___Map___recover_with(val_t p0, 
   fra.me.REG[3] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ../lib/standard/collection/abstract_collection.nit:311 */
+  /* ../lib/standard/collection/abstract_collection.nit:343 */
   fra.me.REG[1] = CALL_standard___collection___abstract_collection___MapRead___iterator(fra.me.REG[1])(fra.me.REG[1]);
-  /* ../lib/standard/collection/abstract_collection.nit:312 */
+  /* ../lib/standard/collection/abstract_collection.nit:344 */
   while(1) {
     REGB0 = CALL_standard___collection___abstract_collection___MapIterator___is_ok(fra.me.REG[1])(fra.me.REG[1]);
     if (UNTAG_Bool(REGB0)) {
-      /* ../lib/standard/collection/abstract_collection.nit:313 */
+      /* ../lib/standard/collection/abstract_collection.nit:345 */
       fra.me.REG[2] = CALL_standard___collection___abstract_collection___MapIterator___key(fra.me.REG[1])(fra.me.REG[1]);
       fra.me.REG[3] = CALL_standard___collection___abstract_collection___MapIterator___item(fra.me.REG[1])(fra.me.REG[1]);
       CALL_standard___collection___abstract_collection___Map_____braeq(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[2], fra.me.REG[3]);
-      /* ../lib/standard/collection/abstract_collection.nit:314 */
+      /* ../lib/standard/collection/abstract_collection.nit:346 */
       CALL_standard___collection___abstract_collection___MapIterator___next(fra.me.REG[1])(fra.me.REG[1]);
     } else {
-      /* ../lib/standard/collection/abstract_collection.nit:312 */
+      /* ../lib/standard/collection/abstract_collection.nit:344 */
       goto label1;
     }
   }
@@ -1348,13 +1379,13 @@ void standard___collection___abstract_collection___Map___clear(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 318;
+  fra.me.line = 350;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Map___clear;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ../lib/standard/collection/abstract_collection.nit:318 */
-  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 318);
+  /* ../lib/standard/collection/abstract_collection.nit:350 */
+  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 350);
   stack_frame_head = fra.me.prev;
   return;
 }
@@ -1364,13 +1395,13 @@ val_t standard___collection___abstract_collection___Map___values(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 321;
+  fra.me.line = 353;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Map___values;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ../lib/standard/collection/abstract_collection.nit:321 */
-  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 321);
+  /* ../lib/standard/collection/abstract_collection.nit:353 */
+  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 353);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -1380,13 +1411,13 @@ val_t standard___collection___abstract_collection___Map___keys(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 323;
+  fra.me.line = 355;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Map___keys;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ../lib/standard/collection/abstract_collection.nit:323 */
-  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 323);
+  /* ../lib/standard/collection/abstract_collection.nit:355 */
+  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 355);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -1396,13 +1427,13 @@ val_t standard___collection___abstract_collection___MapIterator___item(val_t p0)
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 328;
+  fra.me.line = 360;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapIterator___item;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ../lib/standard/collection/abstract_collection.nit:328 */
-  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 328);
+  /* ../lib/standard/collection/abstract_collection.nit:360 */
+  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 360);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -1412,13 +1443,13 @@ val_t standard___collection___abstract_collection___MapIterator___key(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 332;
+  fra.me.line = 364;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapIterator___key;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ../lib/standard/collection/abstract_collection.nit:332 */
-  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 332);
+  /* ../lib/standard/collection/abstract_collection.nit:364 */
+  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 364);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -1428,13 +1459,13 @@ void standard___collection___abstract_collection___MapIterator___next(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 336;
+  fra.me.line = 368;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapIterator___next;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ../lib/standard/collection/abstract_collection.nit:336 */
-  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 336);
+  /* ../lib/standard/collection/abstract_collection.nit:368 */
+  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 368);
   stack_frame_head = fra.me.prev;
   return;
 }
@@ -1444,13 +1475,13 @@ val_t standard___collection___abstract_collection___MapIterator___is_ok(val_t p0
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 340;
+  fra.me.line = 372;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapIterator___is_ok;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ../lib/standard/collection/abstract_collection.nit:340 */
-  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 340);
+  /* ../lib/standard/collection/abstract_collection.nit:372 */
+  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 372);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -1461,18 +1492,18 @@ val_t standard___collection___abstract_collection___MapKeysIterator___iterator(v
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 350;
+  fra.me.line = 382;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapKeysIterator___iterator;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ../lib/standard/collection/abstract_collection.nit:350 */
+  /* ../lib/standard/collection/abstract_collection.nit:382 */
   REGB0 = TAG_Bool(ATTR_standard___collection___abstract_collection___MapKeysIterator_____atiterator(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "@iterator", LOCATE_standard___collection___abstract_collection, 350);
+    nit_abort("Uninitialized attribute %s", "@iterator", LOCATE_standard___collection___abstract_collection, 382);
   }
   fra.me.REG[0] = ATTR_standard___collection___abstract_collection___MapKeysIterator_____atiterator(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1484,7 +1515,7 @@ void standard___collection___abstract_collection___MapKeysIterator___iterator__e
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 350;
+  fra.me.line = 382;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapKeysIterator___iterator__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1493,7 +1524,7 @@ void standard___collection___abstract_collection___MapKeysIterator___iterator__e
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ../lib/standard/collection/abstract_collection.nit:350 */
+  /* ../lib/standard/collection/abstract_collection.nit:382 */
   ATTR_standard___collection___abstract_collection___MapKeysIterator_____atiterator(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;
@@ -1505,14 +1536,14 @@ val_t standard___collection___abstract_collection___MapKeysIterator___is_ok(val_
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 353;
+  fra.me.line = 385;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapKeysIterator___is_ok;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ../lib/standard/collection/abstract_collection.nit:353 */
+  /* ../lib/standard/collection/abstract_collection.nit:385 */
   fra.me.REG[0] = CALL_standard___collection___abstract_collection___MapKeysIterator___iterator(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = CALL_standard___collection___abstract_collection___MapIterator___is_ok(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -1526,14 +1557,14 @@ void standard___collection___abstract_collection___MapKeysIterator___next(val_t 
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 354;
+  fra.me.line = 386;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapKeysIterator___next;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ../lib/standard/collection/abstract_collection.nit:354 */
+  /* ../lib/standard/collection/abstract_collection.nit:386 */
   fra.me.REG[0] = CALL_standard___collection___abstract_collection___MapKeysIterator___iterator(fra.me.REG[0])(fra.me.REG[0]);
   CALL_standard___collection___abstract_collection___MapIterator___next(fra.me.REG[0])(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1545,14 +1576,14 @@ val_t standard___collection___abstract_collection___MapKeysIterator___item(val_t
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 355;
+  fra.me.line = 387;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapKeysIterator___item;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ../lib/standard/collection/abstract_collection.nit:355 */
+  /* ../lib/standard/collection/abstract_collection.nit:387 */
   fra.me.REG[0] = CALL_standard___collection___abstract_collection___MapKeysIterator___iterator(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_standard___collection___abstract_collection___MapIterator___key(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -1589,18 +1620,18 @@ val_t standard___collection___abstract_collection___MapValuesIterator___iterator
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 361;
+  fra.me.line = 393;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapValuesIterator___iterator;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ../lib/standard/collection/abstract_collection.nit:361 */
+  /* ../lib/standard/collection/abstract_collection.nit:393 */
   REGB0 = TAG_Bool(ATTR_standard___collection___abstract_collection___MapValuesIterator_____atiterator(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "@iterator", LOCATE_standard___collection___abstract_collection, 361);
+    nit_abort("Uninitialized attribute %s", "@iterator", LOCATE_standard___collection___abstract_collection, 393);
   }
   fra.me.REG[0] = ATTR_standard___collection___abstract_collection___MapValuesIterator_____atiterator(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1612,7 +1643,7 @@ void standard___collection___abstract_collection___MapValuesIterator___iterator_
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 361;
+  fra.me.line = 393;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapValuesIterator___iterator__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1621,7 +1652,7 @@ void standard___collection___abstract_collection___MapValuesIterator___iterator_
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ../lib/standard/collection/abstract_collection.nit:361 */
+  /* ../lib/standard/collection/abstract_collection.nit:393 */
   ATTR_standard___collection___abstract_collection___MapValuesIterator_____atiterator(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;
@@ -1633,14 +1664,14 @@ val_t standard___collection___abstract_collection___MapValuesIterator___is_ok(va
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 364;
+  fra.me.line = 396;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapValuesIterator___is_ok;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ../lib/standard/collection/abstract_collection.nit:364 */
+  /* ../lib/standard/collection/abstract_collection.nit:396 */
   fra.me.REG[0] = CALL_standard___collection___abstract_collection___MapValuesIterator___iterator(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = CALL_standard___collection___abstract_collection___MapIterator___is_ok(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -1654,14 +1685,14 @@ void standard___collection___abstract_collection___MapValuesIterator___next(val_
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 365;
+  fra.me.line = 397;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapValuesIterator___next;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ../lib/standard/collection/abstract_collection.nit:365 */
+  /* ../lib/standard/collection/abstract_collection.nit:397 */
   fra.me.REG[0] = CALL_standard___collection___abstract_collection___MapValuesIterator___iterator(fra.me.REG[0])(fra.me.REG[0]);
   CALL_standard___collection___abstract_collection___MapIterator___next(fra.me.REG[0])(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
@@ -1673,14 +1704,14 @@ val_t standard___collection___abstract_collection___MapValuesIterator___item(val
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 366;
+  fra.me.line = 398;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___MapValuesIterator___item;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ../lib/standard/collection/abstract_collection.nit:366 */
+  /* ../lib/standard/collection/abstract_collection.nit:398 */
   fra.me.REG[0] = CALL_standard___collection___abstract_collection___MapValuesIterator___iterator(fra.me.REG[0])(fra.me.REG[0]);
   fra.me.REG[0] = CALL_standard___collection___abstract_collection___MapIterator___item(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -1717,21 +1748,21 @@ val_t standard___collection___abstract_collection___SequenceRead___first(val_t p
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 373;
+  fra.me.line = 405;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___SequenceRead___first;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ../lib/standard/collection/abstract_collection.nit:377 */
+  /* ../lib/standard/collection/abstract_collection.nit:409 */
   REGB0 = CALL_standard___collection___abstract_collection___Collection___is_empty(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Assert '%s' failed", "not_empty", LOCATE_standard___collection___abstract_collection, 377);
+    nit_abort("Assert '%s' failed", "not_empty", LOCATE_standard___collection___abstract_collection, 409);
   }
-  /* ../lib/standard/collection/abstract_collection.nit:378 */
+  /* ../lib/standard/collection/abstract_collection.nit:410 */
   REGB0 = TAG_Int(0);
   fra.me.REG[0] = CALL_standard___collection___abstract_collection___SequenceRead_____bra(fra.me.REG[0])(fra.me.REG[0], REGB0);
   goto label1;
@@ -1745,13 +1776,13 @@ val_t standard___collection___abstract_collection___SequenceRead_____bra(val_t p
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 381;
+  fra.me.line = 413;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___SequenceRead_____bra;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ../lib/standard/collection/abstract_collection.nit:381 */
-  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 381);
+  /* ../lib/standard/collection/abstract_collection.nit:413 */
+  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 413);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -1763,26 +1794,26 @@ val_t standard___collection___abstract_collection___SequenceRead___last(val_t p0
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 386;
+  fra.me.line = 418;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___SequenceRead___last;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ../lib/standard/collection/abstract_collection.nit:390 */
+  /* ../lib/standard/collection/abstract_collection.nit:422 */
   REGB0 = CALL_standard___collection___abstract_collection___Collection___is_empty(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(!UNTAG_Bool(REGB0));
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Assert '%s' failed", "not_empty", LOCATE_standard___collection___abstract_collection, 390);
+    nit_abort("Assert '%s' failed", "not_empty", LOCATE_standard___collection___abstract_collection, 422);
   }
-  /* ../lib/standard/collection/abstract_collection.nit:391 */
+  /* ../lib/standard/collection/abstract_collection.nit:423 */
   REGB0 = CALL_standard___collection___abstract_collection___Collection___length(fra.me.REG[0])(fra.me.REG[0]);
   REGB1 = TAG_Int(1);
-  /* ../lib/standard/kernel.nit:240 */
+  /* ../lib/standard/kernel.nit:247 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB1));
-  /* ../lib/standard/collection/abstract_collection.nit:391 */
+  /* ../lib/standard/collection/abstract_collection.nit:423 */
   fra.me.REG[0] = CALL_standard___collection___abstract_collection___SequenceRead_____bra(fra.me.REG[0])(fra.me.REG[0], REGB1);
   goto label1;
   label1: while(0);
@@ -1797,7 +1828,7 @@ val_t standard___collection___abstract_collection___SequenceRead___index_of(val_
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 394;
+  fra.me.line = 426;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___SequenceRead___index_of;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -1807,13 +1838,13 @@ val_t standard___collection___abstract_collection___SequenceRead___index_of(val_
   fra.me.REG[2] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ../lib/standard/collection/abstract_collection.nit:399 */
+  /* ../lib/standard/collection/abstract_collection.nit:431 */
   fra.me.REG[0] = CALL_standard___collection___abstract_collection___Collection___iterator(fra.me.REG[0])(fra.me.REG[0]);
-  /* ../lib/standard/collection/abstract_collection.nit:400 */
+  /* ../lib/standard/collection/abstract_collection.nit:432 */
   while(1) {
     REGB0 = CALL_standard___collection___abstract_collection___Iterator___is_ok(fra.me.REG[0])(fra.me.REG[0]);
     if (UNTAG_Bool(REGB0)) {
-      /* ../lib/standard/collection/abstract_collection.nit:401 */
+      /* ../lib/standard/collection/abstract_collection.nit:433 */
       fra.me.REG[2] = CALL_standard___collection___abstract_collection___Iterator___item(fra.me.REG[0])(fra.me.REG[0]);
       REGB0 = TAG_Bool(IS_EQUAL_NN(fra.me.REG[2],fra.me.REG[1]));
       if (UNTAG_Bool(REGB0)) {
@@ -1831,19 +1862,19 @@ val_t standard___collection___abstract_collection___SequenceRead___index_of(val_
         REGB0 = CALL_standard___collection___abstract_collection___IndexedIterator___index(fra.me.REG[0])(fra.me.REG[0]);
         goto label1;
       }
-      /* ../lib/standard/collection/abstract_collection.nit:402 */
+      /* ../lib/standard/collection/abstract_collection.nit:434 */
       CALL_standard___collection___abstract_collection___Iterator___next(fra.me.REG[0])(fra.me.REG[0]);
     } else {
-      /* ../lib/standard/collection/abstract_collection.nit:400 */
+      /* ../lib/standard/collection/abstract_collection.nit:432 */
       goto label2;
     }
   }
   label2: while(0);
-  /* ../lib/standard/collection/abstract_collection.nit:404 */
+  /* ../lib/standard/collection/abstract_collection.nit:436 */
   REGB1 = TAG_Int(1);
-  /* ../lib/standard/kernel.nit:239 */
+  /* ../lib/standard/kernel.nit:246 */
   REGB1 = TAG_Int(-UNTAG_Int(REGB1));
-  /* ../lib/standard/collection/abstract_collection.nit:404 */
+  /* ../lib/standard/collection/abstract_collection.nit:436 */
   REGB0 = REGB1;
   goto label1;
   label1: while(0);
@@ -1856,13 +1887,13 @@ val_t standard___collection___abstract_collection___SequenceRead___iterator(val_
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 407;
+  fra.me.line = 439;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___SequenceRead___iterator;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ../lib/standard/collection/abstract_collection.nit:407 */
-  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 407);
+  /* ../lib/standard/collection/abstract_collection.nit:439 */
+  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 439);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -1873,7 +1904,7 @@ void standard___collection___abstract_collection___Sequence___first__eq(val_t p0
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 416;
+  fra.me.line = 448;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Sequence___first__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1882,7 +1913,7 @@ void standard___collection___abstract_collection___Sequence___first__eq(val_t p0
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ../lib/standard/collection/abstract_collection.nit:419 */
+  /* ../lib/standard/collection/abstract_collection.nit:451 */
   REGB0 = TAG_Int(0);
   CALL_standard___collection___abstract_collection___Sequence_____braeq(fra.me.REG[0])(fra.me.REG[0], REGB0, fra.me.REG[1]);
   stack_frame_head = fra.me.prev;
@@ -1897,7 +1928,7 @@ void standard___collection___abstract_collection___Sequence___last__eq(val_t p0,
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 421;
+  fra.me.line = 453;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Sequence___last__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1906,27 +1937,27 @@ void standard___collection___abstract_collection___Sequence___last__eq(val_t p0,
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ../lib/standard/collection/abstract_collection.nit:425 */
+  /* ../lib/standard/collection/abstract_collection.nit:457 */
   REGB0 = CALL_standard___collection___abstract_collection___Collection___length(fra.me.REG[0])(fra.me.REG[0]);
-  /* ../lib/standard/collection/abstract_collection.nit:426 */
+  /* ../lib/standard/collection/abstract_collection.nit:458 */
   REGB1 = TAG_Int(0);
   REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
   if (UNTAG_Bool(REGB2)) {
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:237 */
+  /* ../lib/standard/kernel.nit:244 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)>UNTAG_Int(REGB1));
-  /* ../lib/standard/collection/abstract_collection.nit:426 */
+  /* ../lib/standard/collection/abstract_collection.nit:458 */
   if (UNTAG_Bool(REGB1)) {
-    /* ../lib/standard/collection/abstract_collection.nit:427 */
+    /* ../lib/standard/collection/abstract_collection.nit:459 */
     REGB1 = TAG_Int(1);
-    /* ../lib/standard/kernel.nit:240 */
+    /* ../lib/standard/kernel.nit:247 */
     REGB1 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB1));
-    /* ../lib/standard/collection/abstract_collection.nit:427 */
+    /* ../lib/standard/collection/abstract_collection.nit:459 */
     CALL_standard___collection___abstract_collection___Sequence_____braeq(fra.me.REG[0])(fra.me.REG[0], REGB1, fra.me.REG[1]);
   } else {
-    /* ../lib/standard/collection/abstract_collection.nit:429 */
+    /* ../lib/standard/collection/abstract_collection.nit:461 */
     REGB1 = TAG_Int(0);
     CALL_standard___collection___abstract_collection___Sequence_____braeq(fra.me.REG[0])(fra.me.REG[0], REGB1, fra.me.REG[1]);
   }
@@ -1939,7 +1970,7 @@ void standard___collection___abstract_collection___Sequence___add(val_t p0, val_
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 433;
+  fra.me.line = 465;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Sequence___add;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1948,7 +1979,7 @@ void standard___collection___abstract_collection___Sequence___add(val_t p0, val_
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ../lib/standard/collection/abstract_collection.nit:434 */
+  /* ../lib/standard/collection/abstract_collection.nit:466 */
   CALL_standard___collection___abstract_collection___Sequence___push(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   stack_frame_head = fra.me.prev;
   return;
@@ -1959,13 +1990,13 @@ void standard___collection___abstract_collection___Sequence___push(val_t p0, val
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 436;
+  fra.me.line = 468;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Sequence___push;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ../lib/standard/collection/abstract_collection.nit:436 */
-  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 436);
+  /* ../lib/standard/collection/abstract_collection.nit:468 */
+  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 468);
   stack_frame_head = fra.me.prev;
   return;
 }
@@ -1975,7 +2006,7 @@ void standard___collection___abstract_collection___Sequence___append(val_t p0, v
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 439;
+  fra.me.line = 471;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Sequence___append;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -1992,7 +2023,7 @@ void standard___collection___abstract_collection___Sequence___append(val_t p0, v
     struct {struct stack_frame_t me;} fra;
     fun_t CREG[1];
     val_t tmp;
-    /* ../lib/standard/collection/abstract_collection.nit:440 */
+    /* ../lib/standard/collection/abstract_collection.nit:472 */
     fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
     fra.me.file = LOCATE_standard___collection___abstract_collection;
     fra.me.line = 0;
@@ -2015,13 +2046,13 @@ val_t standard___collection___abstract_collection___Sequence___pop(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 442;
+  fra.me.line = 474;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Sequence___pop;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ../lib/standard/collection/abstract_collection.nit:442 */
-  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 442);
+  /* ../lib/standard/collection/abstract_collection.nit:474 */
+  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 474);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -2031,13 +2062,13 @@ void standard___collection___abstract_collection___Sequence___unshift(val_t p0, 
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 445;
+  fra.me.line = 477;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Sequence___unshift;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ../lib/standard/collection/abstract_collection.nit:445 */
-  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 445);
+  /* ../lib/standard/collection/abstract_collection.nit:477 */
+  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 477);
   stack_frame_head = fra.me.prev;
   return;
 }
@@ -2047,13 +2078,13 @@ val_t standard___collection___abstract_collection___Sequence___shift(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 448;
+  fra.me.line = 480;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Sequence___shift;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ../lib/standard/collection/abstract_collection.nit:448 */
-  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 448);
+  /* ../lib/standard/collection/abstract_collection.nit:480 */
+  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 480);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -2063,13 +2094,13 @@ void standard___collection___abstract_collection___Sequence_____braeq(val_t p0, 
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 452;
+  fra.me.line = 484;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Sequence_____braeq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ../lib/standard/collection/abstract_collection.nit:452 */
-  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 452);
+  /* ../lib/standard/collection/abstract_collection.nit:484 */
+  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 484);
   stack_frame_head = fra.me.prev;
   return;
 }
@@ -2079,13 +2110,13 @@ void standard___collection___abstract_collection___Sequence___remove_at(val_t p0
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 455;
+  fra.me.line = 487;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Sequence___remove_at;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ../lib/standard/collection/abstract_collection.nit:455 */
-  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 455);
+  /* ../lib/standard/collection/abstract_collection.nit:487 */
+  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 487);
   stack_frame_head = fra.me.prev;
   return;
 }
@@ -2095,13 +2126,13 @@ val_t standard___collection___abstract_collection___IndexedIterator___index(val_
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 462;
+  fra.me.line = 494;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___IndexedIterator___index;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ../lib/standard/collection/abstract_collection.nit:462 */
-  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 462);
+  /* ../lib/standard/collection/abstract_collection.nit:494 */
+  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 494);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -2111,13 +2142,13 @@ val_t standard___collection___abstract_collection___CoupleMap___couple_at(val_t 
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 469;
+  fra.me.line = 501;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___CoupleMap___couple_at;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
-  /* ../lib/standard/collection/abstract_collection.nit:469 */
-  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 469);
+  /* ../lib/standard/collection/abstract_collection.nit:501 */
+  nit_abort("Deferred method called", NULL, LOCATE_standard___collection___abstract_collection, 501);
   stack_frame_head = fra.me.prev;
   return NIT_NULL;
 }
@@ -2129,7 +2160,7 @@ val_t standard___collection___abstract_collection___CoupleMap_____bra(val_t p0, 
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 473;
+  fra.me.line = 505;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___CoupleMap_____bra;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -2138,9 +2169,9 @@ val_t standard___collection___abstract_collection___CoupleMap_____bra(val_t p0, 
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ../lib/standard/collection/abstract_collection.nit:475 */
+  /* ../lib/standard/collection/abstract_collection.nit:507 */
   fra.me.REG[1] = CALL_standard___collection___abstract_collection___CoupleMap___couple_at(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
-  /* ../lib/standard/collection/abstract_collection.nit:476 */
+  /* ../lib/standard/collection/abstract_collection.nit:508 */
   REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
@@ -2154,13 +2185,13 @@ val_t standard___collection___abstract_collection___CoupleMap_____bra(val_t p0, 
     }
   }
   if (UNTAG_Bool(REGB0)) {
-    /* ../lib/standard/collection/abstract_collection.nit:477 */
-    nit_abort("Aborted", NULL, LOCATE_standard___collection___abstract_collection, 477);
+    /* ../lib/standard/collection/abstract_collection.nit:509 */
+    nit_abort("Aborted", NULL, LOCATE_standard___collection___abstract_collection, 509);
   } else {
-    /* ../lib/standard/collection/abstract_collection.nit:479 */
+    /* ../lib/standard/collection/abstract_collection.nit:511 */
     REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
-      nit_abort("Reciever is null", NULL, LOCATE_standard___collection___abstract_collection, 479);
+      nit_abort("Reciever is null", NULL, LOCATE_standard___collection___abstract_collection, 511);
     }
     fra.me.REG[1] = CALL_standard___collection___abstract_collection___Couple___second(fra.me.REG[1])(fra.me.REG[1]);
     goto label1;
@@ -2176,24 +2207,24 @@ val_t standard___collection___abstract_collection___CoupleMapIterator___item(val
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 489;
+  fra.me.line = 521;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___CoupleMapIterator___item;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ../lib/standard/collection/abstract_collection.nit:489 */
+  /* ../lib/standard/collection/abstract_collection.nit:521 */
   REGB0 = TAG_Bool(ATTR_standard___collection___abstract_collection___CoupleMapIterator____iter(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_iter", LOCATE_standard___collection___abstract_collection, 489);
+    nit_abort("Uninitialized attribute %s", "_iter", LOCATE_standard___collection___abstract_collection, 521);
   }
   fra.me.REG[0] = ATTR_standard___collection___abstract_collection___CoupleMapIterator____iter(fra.me.REG[0]);
   fra.me.REG[0] = CALL_standard___collection___abstract_collection___Iterator___item(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_standard___collection___abstract_collection, 489);
+    nit_abort("Reciever is null", NULL, LOCATE_standard___collection___abstract_collection, 521);
   }
   fra.me.REG[0] = CALL_standard___collection___abstract_collection___Couple___second(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -2208,24 +2239,24 @@ val_t standard___collection___abstract_collection___CoupleMapIterator___key(val_
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 493;
+  fra.me.line = 525;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___CoupleMapIterator___key;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ../lib/standard/collection/abstract_collection.nit:493 */
+  /* ../lib/standard/collection/abstract_collection.nit:525 */
   REGB0 = TAG_Bool(ATTR_standard___collection___abstract_collection___CoupleMapIterator____iter(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_iter", LOCATE_standard___collection___abstract_collection, 493);
+    nit_abort("Uninitialized attribute %s", "_iter", LOCATE_standard___collection___abstract_collection, 525);
   }
   fra.me.REG[0] = ATTR_standard___collection___abstract_collection___CoupleMapIterator____iter(fra.me.REG[0]);
   fra.me.REG[0] = CALL_standard___collection___abstract_collection___Iterator___item(fra.me.REG[0])(fra.me.REG[0]);
   REGB0 = TAG_Bool(fra.me.REG[0]==NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
-    nit_abort("Reciever is null", NULL, LOCATE_standard___collection___abstract_collection, 493);
+    nit_abort("Reciever is null", NULL, LOCATE_standard___collection___abstract_collection, 525);
   }
   fra.me.REG[0] = CALL_standard___collection___abstract_collection___Couple___first(fra.me.REG[0])(fra.me.REG[0]);
   goto label1;
@@ -2240,18 +2271,18 @@ val_t standard___collection___abstract_collection___CoupleMapIterator___is_ok(va
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 495;
+  fra.me.line = 527;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___CoupleMapIterator___is_ok;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ../lib/standard/collection/abstract_collection.nit:495 */
+  /* ../lib/standard/collection/abstract_collection.nit:527 */
   REGB0 = TAG_Bool(ATTR_standard___collection___abstract_collection___CoupleMapIterator____iter(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_iter", LOCATE_standard___collection___abstract_collection, 495);
+    nit_abort("Uninitialized attribute %s", "_iter", LOCATE_standard___collection___abstract_collection, 527);
   }
   fra.me.REG[0] = ATTR_standard___collection___abstract_collection___CoupleMapIterator____iter(fra.me.REG[0]);
   REGB0 = CALL_standard___collection___abstract_collection___Iterator___is_ok(fra.me.REG[0])(fra.me.REG[0]);
@@ -2267,18 +2298,18 @@ void standard___collection___abstract_collection___CoupleMapIterator___next(val_
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 497;
+  fra.me.line = 529;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___CoupleMapIterator___next;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ../lib/standard/collection/abstract_collection.nit:499 */
+  /* ../lib/standard/collection/abstract_collection.nit:531 */
   REGB0 = TAG_Bool(ATTR_standard___collection___abstract_collection___CoupleMapIterator____iter(fra.me.REG[0])!=NIT_NULL);
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Uninitialized attribute %s", "_iter", LOCATE_standard___collection___abstract_collection, 499);
+    nit_abort("Uninitialized attribute %s", "_iter", LOCATE_standard___collection___abstract_collection, 531);
   }
   fra.me.REG[0] = ATTR_standard___collection___abstract_collection___CoupleMapIterator____iter(fra.me.REG[0]);
   CALL_standard___collection___abstract_collection___Iterator___next(fra.me.REG[0])(fra.me.REG[0]);
@@ -2293,7 +2324,7 @@ void standard___collection___abstract_collection___CoupleMapIterator___init(val_
   if (init_table[itpos4]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 504;
+  fra.me.line = 536;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___CoupleMapIterator___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -2302,7 +2333,7 @@ void standard___collection___abstract_collection___CoupleMapIterator___init(val_
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ../lib/standard/collection/abstract_collection.nit:504 */
+  /* ../lib/standard/collection/abstract_collection.nit:536 */
   ATTR_standard___collection___abstract_collection___CoupleMapIterator____iter(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   init_table[itpos4] = 1;
@@ -2314,14 +2345,14 @@ val_t standard___collection___abstract_collection___Couple___first(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 512;
+  fra.me.line = 544;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Couple___first;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ../lib/standard/collection/abstract_collection.nit:512 */
+  /* ../lib/standard/collection/abstract_collection.nit:544 */
   fra.me.REG[0] = ATTR_standard___collection___abstract_collection___Couple____first(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -2332,7 +2363,7 @@ void standard___collection___abstract_collection___Couple___first__eq(val_t p0, 
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 512;
+  fra.me.line = 544;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Couple___first__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -2341,7 +2372,7 @@ void standard___collection___abstract_collection___Couple___first__eq(val_t p0, 
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ../lib/standard/collection/abstract_collection.nit:512 */
+  /* ../lib/standard/collection/abstract_collection.nit:544 */
   ATTR_standard___collection___abstract_collection___Couple____first(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;
@@ -2352,14 +2383,14 @@ val_t standard___collection___abstract_collection___Couple___second(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 515;
+  fra.me.line = 547;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Couple___second;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ../lib/standard/collection/abstract_collection.nit:515 */
+  /* ../lib/standard/collection/abstract_collection.nit:547 */
   fra.me.REG[0] = ATTR_standard___collection___abstract_collection___Couple____second(fra.me.REG[0]);
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -2370,7 +2401,7 @@ void standard___collection___abstract_collection___Couple___second__eq(val_t p0,
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 515;
+  fra.me.line = 547;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Couple___second__eq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -2379,7 +2410,7 @@ void standard___collection___abstract_collection___Couple___second__eq(val_t p0,
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ../lib/standard/collection/abstract_collection.nit:515 */
+  /* ../lib/standard/collection/abstract_collection.nit:547 */
   ATTR_standard___collection___abstract_collection___Couple____second(fra.me.REG[0]) = fra.me.REG[1];
   stack_frame_head = fra.me.prev;
   return;
@@ -2392,7 +2423,7 @@ void standard___collection___abstract_collection___Couple___init(val_t p0, val_t
   if (init_table[itpos5]) return;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___collection___abstract_collection;
-  fra.me.line = 518;
+  fra.me.line = 550;
   fra.me.meth = LOCATE_standard___collection___abstract_collection___Couple___init;
   fra.me.has_broke = 0;
   fra.me.REG_size = 3;
@@ -2403,9 +2434,9 @@ void standard___collection___abstract_collection___Couple___init(val_t p0, val_t
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
   fra.me.REG[2] = p2;
-  /* ../lib/standard/collection/abstract_collection.nit:521 */
+  /* ../lib/standard/collection/abstract_collection.nit:553 */
   ATTR_standard___collection___abstract_collection___Couple____first(fra.me.REG[0]) = fra.me.REG[1];
-  /* ../lib/standard/collection/abstract_collection.nit:522 */
+  /* ../lib/standard/collection/abstract_collection.nit:554 */
   ATTR_standard___collection___abstract_collection___Couple____second(fra.me.REG[0]) = fra.me.REG[2];
   stack_frame_head = fra.me.prev;
   init_table[itpos5] = 1;

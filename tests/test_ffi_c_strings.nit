@@ -26,8 +26,8 @@ fun print_string(str: String) import String::to_cstring `{
 	printf("str-> %s\n", String_to_cstring(str) );
 `}
 
-fun get_string: String import String::from_cstring, String::output `{
-	String str = new_String_from_cstring("Nit string from C");
+fun get_string: String import NativeString::to_s, String::output `{
+	String str = NativeString_to_s("Nit string from C");
 	String_output(str);
 	printf("\n");
 	return str;

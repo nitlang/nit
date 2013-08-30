@@ -938,10 +938,11 @@ redef class AStringFormExpr
 		var ionce = new IOnce
 		var reg = v.expr(ionce, stype)
 		v.seq = ionce.body
-		var ns = v.expr(new IStringValue(_cstring.as(not null)), v.visitor.type_nativestring)
+		var native_type = v.visitor.type_nativestring
+		var ns = v.expr(new IStringValue(_cstring.as(not null)), native_type)
 		var ni = v.expr(new IIntValue(_cstring_length.to_s), v.visitor.type_int)
-		var prop = v.visitor.get_method(stype, once "with_native".to_symbol)
-		var e = v.expr(new INew(stype, prop, [ns, ni]), stype)
+		var prop = v.visitor.get_method(native_type, once "to_s_with_length".to_symbol)
+		var e = v.expr(new ICall(prop, [ns, ni]), stype)
 		v.add_assignment(reg, e)
 		v.seq = old_seq
 		return reg

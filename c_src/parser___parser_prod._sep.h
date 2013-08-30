@@ -3,378 +3,330 @@
 #define parser___parser_prod_sep
 #include "parser___lexer._sep.h"
 #include <nit_common.h>
-
-extern const classtable_elt_t VFT_parser___parser_prod___Visitor[];
 extern const char LOCATE_parser___parser_prod[];
 extern const int SFT_parser___parser_prod[];
-#define ATTR_parser___parser_prod___ANode____parent(recv) ATTR(recv, (SFT_parser___parser_prod[0] + 0))
-#define CALL_parser___parser_prod___ANode___parent(recv) ((parser___parser_prod___ANode___parent_t)CALL((recv), (SFT_parser___parser_prod[1] + 0)))
-#define CALL_parser___parser_prod___ANode___parent__eq(recv) ((parser___parser_prod___ANode___parent__eq_t)CALL((recv), (SFT_parser___parser_prod[1] + 1)))
-#define CALL_parser___parser_prod___ANode___remove_child(recv) ((parser___parser_prod___ANode___remove_child_t)CALL((recv), (SFT_parser___parser_prod[1] + 2)))
-#define CALL_parser___parser_prod___ANode___replace_child(recv) ((parser___parser_prod___ANode___replace_child_t)CALL((recv), (SFT_parser___parser_prod[1] + 3)))
-#define CALL_parser___parser_prod___ANode___replace_with(recv) ((parser___parser_prod___ANode___replace_with_t)CALL((recv), (SFT_parser___parser_prod[1] + 4)))
-#define CALL_parser___parser_prod___ANode___visit_all(recv) ((parser___parser_prod___ANode___visit_all_t)CALL((recv), (SFT_parser___parser_prod[1] + 5)))
-#define CALL_SUPER_parser___parser_prod___Prod___replace_with(recv) ((parser___parser_prod___Prod___replace_with_t)CALL((recv), (SFT_parser___parser_prod[2] + 0)))
-#define ID_parser___parser_prod___Visitor (SFT_parser___parser_prod[3])
-#define COLOR_parser___parser_prod___Visitor (SFT_parser___parser_prod[4])
-#define ATTR_parser___parser_prod___Visitor____current_node(recv) ATTR(recv, (SFT_parser___parser_prod[5] + 0))
-#define INIT_TABLE_POS_parser___parser_prod___Visitor (SFT_parser___parser_prod[6] + 0)
-#define CALL_parser___parser_prod___Visitor___visit(recv) ((parser___parser_prod___Visitor___visit_t)CALL((recv), (SFT_parser___parser_prod[6] + 1)))
-#define CALL_parser___parser_prod___Visitor___enter_visit(recv) ((parser___parser_prod___Visitor___enter_visit_t)CALL((recv), (SFT_parser___parser_prod[6] + 2)))
-#define CALL_parser___parser_prod___Visitor___current_node(recv) ((parser___parser_prod___Visitor___current_node_t)CALL((recv), (SFT_parser___parser_prod[6] + 3)))
-#define CALL_parser___parser_prod___Visitor___init(recv) ((parser___parser_prod___Visitor___init_t)CALL((recv), (SFT_parser___parser_prod[6] + 4)))
-#define CALL_parser___parser_prod___AModule___empty_init(recv) ((parser___parser_prod___AModule___empty_init_t)CALL((recv), (SFT_parser___parser_prod[7] + 0)))
-#define CALL_parser___parser_prod___AModule___init_amodule(recv) ((parser___parser_prod___AModule___init_amodule_t)CALL((recv), (SFT_parser___parser_prod[7] + 1)))
-#define CALL_parser___parser_prod___AModuledecl___empty_init(recv) ((parser___parser_prod___AModuledecl___empty_init_t)CALL((recv), (SFT_parser___parser_prod[8] + 0)))
-#define CALL_parser___parser_prod___AModuledecl___init_amoduledecl(recv) ((parser___parser_prod___AModuledecl___init_amoduledecl_t)CALL((recv), (SFT_parser___parser_prod[8] + 1)))
-#define CALL_parser___parser_prod___AStdImport___empty_init(recv) ((parser___parser_prod___AStdImport___empty_init_t)CALL((recv), (SFT_parser___parser_prod[9] + 0)))
-#define CALL_parser___parser_prod___AStdImport___init_astdimport(recv) ((parser___parser_prod___AStdImport___init_astdimport_t)CALL((recv), (SFT_parser___parser_prod[9] + 1)))
-#define CALL_parser___parser_prod___ANoImport___empty_init(recv) ((parser___parser_prod___ANoImport___empty_init_t)CALL((recv), (SFT_parser___parser_prod[10] + 0)))
-#define CALL_parser___parser_prod___ANoImport___init_anoimport(recv) ((parser___parser_prod___ANoImport___init_anoimport_t)CALL((recv), (SFT_parser___parser_prod[10] + 1)))
-#define CALL_parser___parser_prod___APublicVisibility___empty_init(recv) ((parser___parser_prod___APublicVisibility___empty_init_t)CALL((recv), (SFT_parser___parser_prod[11] + 0)))
-#define CALL_parser___parser_prod___APublicVisibility___init_apublicvisibility(recv) ((parser___parser_prod___APublicVisibility___init_apublicvisibility_t)CALL((recv), (SFT_parser___parser_prod[11] + 1)))
-#define CALL_parser___parser_prod___APrivateVisibility___empty_init(recv) ((parser___parser_prod___APrivateVisibility___empty_init_t)CALL((recv), (SFT_parser___parser_prod[12] + 0)))
-#define CALL_parser___parser_prod___APrivateVisibility___init_aprivatevisibility(recv) ((parser___parser_prod___APrivateVisibility___init_aprivatevisibility_t)CALL((recv), (SFT_parser___parser_prod[12] + 1)))
-#define CALL_parser___parser_prod___AProtectedVisibility___empty_init(recv) ((parser___parser_prod___AProtectedVisibility___empty_init_t)CALL((recv), (SFT_parser___parser_prod[13] + 0)))
-#define CALL_parser___parser_prod___AProtectedVisibility___init_aprotectedvisibility(recv) ((parser___parser_prod___AProtectedVisibility___init_aprotectedvisibility_t)CALL((recv), (SFT_parser___parser_prod[13] + 1)))
-#define CALL_parser___parser_prod___AIntrudeVisibility___empty_init(recv) ((parser___parser_prod___AIntrudeVisibility___empty_init_t)CALL((recv), (SFT_parser___parser_prod[14] + 0)))
-#define CALL_parser___parser_prod___AIntrudeVisibility___init_aintrudevisibility(recv) ((parser___parser_prod___AIntrudeVisibility___init_aintrudevisibility_t)CALL((recv), (SFT_parser___parser_prod[14] + 1)))
-#define CALL_parser___parser_prod___AStdClassdef___empty_init(recv) ((parser___parser_prod___AStdClassdef___empty_init_t)CALL((recv), (SFT_parser___parser_prod[15] + 0)))
-#define CALL_parser___parser_prod___AStdClassdef___init_astdclassdef(recv) ((parser___parser_prod___AStdClassdef___init_astdclassdef_t)CALL((recv), (SFT_parser___parser_prod[15] + 1)))
-#define CALL_parser___parser_prod___ATopClassdef___empty_init(recv) ((parser___parser_prod___ATopClassdef___empty_init_t)CALL((recv), (SFT_parser___parser_prod[16] + 0)))
-#define CALL_parser___parser_prod___ATopClassdef___init_atopclassdef(recv) ((parser___parser_prod___ATopClassdef___init_atopclassdef_t)CALL((recv), (SFT_parser___parser_prod[16] + 1)))
-#define CALL_parser___parser_prod___AMainClassdef___empty_init(recv) ((parser___parser_prod___AMainClassdef___empty_init_t)CALL((recv), (SFT_parser___parser_prod[17] + 0)))
-#define CALL_parser___parser_prod___AMainClassdef___init_amainclassdef(recv) ((parser___parser_prod___AMainClassdef___init_amainclassdef_t)CALL((recv), (SFT_parser___parser_prod[17] + 1)))
-#define CALL_parser___parser_prod___AConcreteClasskind___empty_init(recv) ((parser___parser_prod___AConcreteClasskind___empty_init_t)CALL((recv), (SFT_parser___parser_prod[18] + 0)))
-#define CALL_parser___parser_prod___AConcreteClasskind___init_aconcreteclasskind(recv) ((parser___parser_prod___AConcreteClasskind___init_aconcreteclasskind_t)CALL((recv), (SFT_parser___parser_prod[18] + 1)))
-#define CALL_parser___parser_prod___AAbstractClasskind___empty_init(recv) ((parser___parser_prod___AAbstractClasskind___empty_init_t)CALL((recv), (SFT_parser___parser_prod[19] + 0)))
-#define CALL_parser___parser_prod___AAbstractClasskind___init_aabstractclasskind(recv) ((parser___parser_prod___AAbstractClasskind___init_aabstractclasskind_t)CALL((recv), (SFT_parser___parser_prod[19] + 1)))
-#define CALL_parser___parser_prod___AInterfaceClasskind___empty_init(recv) ((parser___parser_prod___AInterfaceClasskind___empty_init_t)CALL((recv), (SFT_parser___parser_prod[20] + 0)))
-#define CALL_parser___parser_prod___AInterfaceClasskind___init_ainterfaceclasskind(recv) ((parser___parser_prod___AInterfaceClasskind___init_ainterfaceclasskind_t)CALL((recv), (SFT_parser___parser_prod[20] + 1)))
-#define CALL_parser___parser_prod___AEnumClasskind___empty_init(recv) ((parser___parser_prod___AEnumClasskind___empty_init_t)CALL((recv), (SFT_parser___parser_prod[21] + 0)))
-#define CALL_parser___parser_prod___AEnumClasskind___init_aenumclasskind(recv) ((parser___parser_prod___AEnumClasskind___init_aenumclasskind_t)CALL((recv), (SFT_parser___parser_prod[21] + 1)))
-#define CALL_parser___parser_prod___AExternClasskind___empty_init(recv) ((parser___parser_prod___AExternClasskind___empty_init_t)CALL((recv), (SFT_parser___parser_prod[22] + 0)))
-#define CALL_parser___parser_prod___AExternClasskind___init_aexternclasskind(recv) ((parser___parser_prod___AExternClasskind___init_aexternclasskind_t)CALL((recv), (SFT_parser___parser_prod[22] + 1)))
-#define CALL_parser___parser_prod___AFormaldef___empty_init(recv) ((parser___parser_prod___AFormaldef___empty_init_t)CALL((recv), (SFT_parser___parser_prod[23] + 0)))
-#define CALL_parser___parser_prod___AFormaldef___init_aformaldef(recv) ((parser___parser_prod___AFormaldef___init_aformaldef_t)CALL((recv), (SFT_parser___parser_prod[23] + 1)))
-#define CALL_parser___parser_prod___ASuperclass___empty_init(recv) ((parser___parser_prod___ASuperclass___empty_init_t)CALL((recv), (SFT_parser___parser_prod[24] + 0)))
-#define CALL_parser___parser_prod___ASuperclass___init_asuperclass(recv) ((parser___parser_prod___ASuperclass___init_asuperclass_t)CALL((recv), (SFT_parser___parser_prod[24] + 1)))
-#define CALL_parser___parser_prod___AAttrPropdef___empty_init(recv) ((parser___parser_prod___AAttrPropdef___empty_init_t)CALL((recv), (SFT_parser___parser_prod[25] + 0)))
-#define CALL_parser___parser_prod___AAttrPropdef___init_aattrpropdef(recv) ((parser___parser_prod___AAttrPropdef___init_aattrpropdef_t)CALL((recv), (SFT_parser___parser_prod[25] + 1)))
-#define CALL_parser___parser_prod___AMethPropdef___empty_init(recv) ((parser___parser_prod___AMethPropdef___empty_init_t)CALL((recv), (SFT_parser___parser_prod[26] + 0)))
-#define CALL_parser___parser_prod___AMethPropdef___init_amethpropdef(recv) ((parser___parser_prod___AMethPropdef___init_amethpropdef_t)CALL((recv), (SFT_parser___parser_prod[26] + 1)))
-#define CALL_parser___parser_prod___ADeferredMethPropdef___empty_init(recv) ((parser___parser_prod___ADeferredMethPropdef___empty_init_t)CALL((recv), (SFT_parser___parser_prod[27] + 0)))
-#define CALL_parser___parser_prod___ADeferredMethPropdef___init_adeferredmethpropdef(recv) ((parser___parser_prod___ADeferredMethPropdef___init_adeferredmethpropdef_t)CALL((recv), (SFT_parser___parser_prod[27] + 1)))
-#define CALL_parser___parser_prod___AInternMethPropdef___empty_init(recv) ((parser___parser_prod___AInternMethPropdef___empty_init_t)CALL((recv), (SFT_parser___parser_prod[28] + 0)))
-#define CALL_parser___parser_prod___AInternMethPropdef___init_ainternmethpropdef(recv) ((parser___parser_prod___AInternMethPropdef___init_ainternmethpropdef_t)CALL((recv), (SFT_parser___parser_prod[28] + 1)))
-#define CALL_parser___parser_prod___AExternMethPropdef___empty_init(recv) ((parser___parser_prod___AExternMethPropdef___empty_init_t)CALL((recv), (SFT_parser___parser_prod[29] + 0)))
-#define CALL_parser___parser_prod___AExternMethPropdef___init_aexternmethpropdef(recv) ((parser___parser_prod___AExternMethPropdef___init_aexternmethpropdef_t)CALL((recv), (SFT_parser___parser_prod[29] + 1)))
-#define CALL_parser___parser_prod___AConcreteMethPropdef___empty_init(recv) ((parser___parser_prod___AConcreteMethPropdef___empty_init_t)CALL((recv), (SFT_parser___parser_prod[30] + 0)))
-#define CALL_parser___parser_prod___AConcreteMethPropdef___init_aconcretemethpropdef(recv) ((parser___parser_prod___AConcreteMethPropdef___init_aconcretemethpropdef_t)CALL((recv), (SFT_parser___parser_prod[30] + 1)))
-#define CALL_parser___parser_prod___AConcreteInitPropdef___empty_init(recv) ((parser___parser_prod___AConcreteInitPropdef___empty_init_t)CALL((recv), (SFT_parser___parser_prod[31] + 0)))
-#define CALL_parser___parser_prod___AConcreteInitPropdef___init_aconcreteinitpropdef(recv) ((parser___parser_prod___AConcreteInitPropdef___init_aconcreteinitpropdef_t)CALL((recv), (SFT_parser___parser_prod[31] + 1)))
-#define CALL_parser___parser_prod___AExternInitPropdef___empty_init(recv) ((parser___parser_prod___AExternInitPropdef___empty_init_t)CALL((recv), (SFT_parser___parser_prod[32] + 0)))
-#define CALL_parser___parser_prod___AExternInitPropdef___init_aexterninitpropdef(recv) ((parser___parser_prod___AExternInitPropdef___init_aexterninitpropdef_t)CALL((recv), (SFT_parser___parser_prod[32] + 1)))
-#define CALL_parser___parser_prod___AMainMethPropdef___empty_init(recv) ((parser___parser_prod___AMainMethPropdef___empty_init_t)CALL((recv), (SFT_parser___parser_prod[33] + 0)))
-#define CALL_parser___parser_prod___AMainMethPropdef___init_amainmethpropdef(recv) ((parser___parser_prod___AMainMethPropdef___init_amainmethpropdef_t)CALL((recv), (SFT_parser___parser_prod[33] + 1)))
-#define CALL_parser___parser_prod___ATypePropdef___empty_init(recv) ((parser___parser_prod___ATypePropdef___empty_init_t)CALL((recv), (SFT_parser___parser_prod[34] + 0)))
-#define CALL_parser___parser_prod___ATypePropdef___init_atypepropdef(recv) ((parser___parser_prod___ATypePropdef___init_atypepropdef_t)CALL((recv), (SFT_parser___parser_prod[34] + 1)))
-#define CALL_parser___parser_prod___AReadAble___empty_init(recv) ((parser___parser_prod___AReadAble___empty_init_t)CALL((recv), (SFT_parser___parser_prod[35] + 0)))
-#define CALL_parser___parser_prod___AReadAble___init_areadable(recv) ((parser___parser_prod___AReadAble___init_areadable_t)CALL((recv), (SFT_parser___parser_prod[35] + 1)))
-#define CALL_parser___parser_prod___AWriteAble___empty_init(recv) ((parser___parser_prod___AWriteAble___empty_init_t)CALL((recv), (SFT_parser___parser_prod[36] + 0)))
-#define CALL_parser___parser_prod___AWriteAble___init_awriteable(recv) ((parser___parser_prod___AWriteAble___init_awriteable_t)CALL((recv), (SFT_parser___parser_prod[36] + 1)))
-#define CALL_parser___parser_prod___AIdMethid___empty_init(recv) ((parser___parser_prod___AIdMethid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[37] + 0)))
-#define CALL_parser___parser_prod___AIdMethid___init_aidmethid(recv) ((parser___parser_prod___AIdMethid___init_aidmethid_t)CALL((recv), (SFT_parser___parser_prod[37] + 1)))
-#define CALL_parser___parser_prod___APlusMethid___empty_init(recv) ((parser___parser_prod___APlusMethid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[38] + 0)))
-#define CALL_parser___parser_prod___APlusMethid___init_aplusmethid(recv) ((parser___parser_prod___APlusMethid___init_aplusmethid_t)CALL((recv), (SFT_parser___parser_prod[38] + 1)))
-#define CALL_parser___parser_prod___AMinusMethid___empty_init(recv) ((parser___parser_prod___AMinusMethid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[39] + 0)))
-#define CALL_parser___parser_prod___AMinusMethid___init_aminusmethid(recv) ((parser___parser_prod___AMinusMethid___init_aminusmethid_t)CALL((recv), (SFT_parser___parser_prod[39] + 1)))
-#define CALL_parser___parser_prod___AStarMethid___empty_init(recv) ((parser___parser_prod___AStarMethid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[40] + 0)))
-#define CALL_parser___parser_prod___AStarMethid___init_astarmethid(recv) ((parser___parser_prod___AStarMethid___init_astarmethid_t)CALL((recv), (SFT_parser___parser_prod[40] + 1)))
-#define CALL_parser___parser_prod___ASlashMethid___empty_init(recv) ((parser___parser_prod___ASlashMethid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[41] + 0)))
-#define CALL_parser___parser_prod___ASlashMethid___init_aslashmethid(recv) ((parser___parser_prod___ASlashMethid___init_aslashmethid_t)CALL((recv), (SFT_parser___parser_prod[41] + 1)))
-#define CALL_parser___parser_prod___APercentMethid___empty_init(recv) ((parser___parser_prod___APercentMethid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[42] + 0)))
-#define CALL_parser___parser_prod___APercentMethid___init_apercentmethid(recv) ((parser___parser_prod___APercentMethid___init_apercentmethid_t)CALL((recv), (SFT_parser___parser_prod[42] + 1)))
-#define CALL_parser___parser_prod___AEqMethid___empty_init(recv) ((parser___parser_prod___AEqMethid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[43] + 0)))
-#define CALL_parser___parser_prod___AEqMethid___init_aeqmethid(recv) ((parser___parser_prod___AEqMethid___init_aeqmethid_t)CALL((recv), (SFT_parser___parser_prod[43] + 1)))
-#define CALL_parser___parser_prod___ANeMethid___empty_init(recv) ((parser___parser_prod___ANeMethid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[44] + 0)))
-#define CALL_parser___parser_prod___ANeMethid___init_anemethid(recv) ((parser___parser_prod___ANeMethid___init_anemethid_t)CALL((recv), (SFT_parser___parser_prod[44] + 1)))
-#define CALL_parser___parser_prod___ALeMethid___empty_init(recv) ((parser___parser_prod___ALeMethid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[45] + 0)))
-#define CALL_parser___parser_prod___ALeMethid___init_alemethid(recv) ((parser___parser_prod___ALeMethid___init_alemethid_t)CALL((recv), (SFT_parser___parser_prod[45] + 1)))
-#define CALL_parser___parser_prod___AGeMethid___empty_init(recv) ((parser___parser_prod___AGeMethid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[46] + 0)))
-#define CALL_parser___parser_prod___AGeMethid___init_agemethid(recv) ((parser___parser_prod___AGeMethid___init_agemethid_t)CALL((recv), (SFT_parser___parser_prod[46] + 1)))
-#define CALL_parser___parser_prod___ALtMethid___empty_init(recv) ((parser___parser_prod___ALtMethid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[47] + 0)))
-#define CALL_parser___parser_prod___ALtMethid___init_altmethid(recv) ((parser___parser_prod___ALtMethid___init_altmethid_t)CALL((recv), (SFT_parser___parser_prod[47] + 1)))
-#define CALL_parser___parser_prod___AGtMethid___empty_init(recv) ((parser___parser_prod___AGtMethid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[48] + 0)))
-#define CALL_parser___parser_prod___AGtMethid___init_agtmethid(recv) ((parser___parser_prod___AGtMethid___init_agtmethid_t)CALL((recv), (SFT_parser___parser_prod[48] + 1)))
-#define CALL_parser___parser_prod___ALlMethid___empty_init(recv) ((parser___parser_prod___ALlMethid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[49] + 0)))
-#define CALL_parser___parser_prod___ALlMethid___init_allmethid(recv) ((parser___parser_prod___ALlMethid___init_allmethid_t)CALL((recv), (SFT_parser___parser_prod[49] + 1)))
-#define CALL_parser___parser_prod___AGgMethid___empty_init(recv) ((parser___parser_prod___AGgMethid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[50] + 0)))
-#define CALL_parser___parser_prod___AGgMethid___init_aggmethid(recv) ((parser___parser_prod___AGgMethid___init_aggmethid_t)CALL((recv), (SFT_parser___parser_prod[50] + 1)))
-#define CALL_parser___parser_prod___ABraMethid___empty_init(recv) ((parser___parser_prod___ABraMethid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[51] + 0)))
-#define CALL_parser___parser_prod___ABraMethid___init_abramethid(recv) ((parser___parser_prod___ABraMethid___init_abramethid_t)CALL((recv), (SFT_parser___parser_prod[51] + 1)))
-#define CALL_parser___parser_prod___AStarshipMethid___empty_init(recv) ((parser___parser_prod___AStarshipMethid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[52] + 0)))
-#define CALL_parser___parser_prod___AStarshipMethid___init_astarshipmethid(recv) ((parser___parser_prod___AStarshipMethid___init_astarshipmethid_t)CALL((recv), (SFT_parser___parser_prod[52] + 1)))
-#define CALL_parser___parser_prod___AAssignMethid___empty_init(recv) ((parser___parser_prod___AAssignMethid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[53] + 0)))
-#define CALL_parser___parser_prod___AAssignMethid___init_aassignmethid(recv) ((parser___parser_prod___AAssignMethid___init_aassignmethid_t)CALL((recv), (SFT_parser___parser_prod[53] + 1)))
-#define CALL_parser___parser_prod___ABraassignMethid___empty_init(recv) ((parser___parser_prod___ABraassignMethid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[54] + 0)))
-#define CALL_parser___parser_prod___ABraassignMethid___init_abraassignmethid(recv) ((parser___parser_prod___ABraassignMethid___init_abraassignmethid_t)CALL((recv), (SFT_parser___parser_prod[54] + 1)))
-#define CALL_parser___parser_prod___ASignature___empty_init(recv) ((parser___parser_prod___ASignature___empty_init_t)CALL((recv), (SFT_parser___parser_prod[55] + 0)))
-#define CALL_parser___parser_prod___ASignature___init_asignature(recv) ((parser___parser_prod___ASignature___init_asignature_t)CALL((recv), (SFT_parser___parser_prod[55] + 1)))
-#define CALL_parser___parser_prod___AParam___empty_init(recv) ((parser___parser_prod___AParam___empty_init_t)CALL((recv), (SFT_parser___parser_prod[56] + 0)))
-#define CALL_parser___parser_prod___AParam___init_aparam(recv) ((parser___parser_prod___AParam___init_aparam_t)CALL((recv), (SFT_parser___parser_prod[56] + 1)))
-#define CALL_parser___parser_prod___AClosureDecl___empty_init(recv) ((parser___parser_prod___AClosureDecl___empty_init_t)CALL((recv), (SFT_parser___parser_prod[57] + 0)))
-#define CALL_parser___parser_prod___AClosureDecl___init_aclosuredecl(recv) ((parser___parser_prod___AClosureDecl___init_aclosuredecl_t)CALL((recv), (SFT_parser___parser_prod[57] + 1)))
-#define CALL_parser___parser_prod___AType___empty_init(recv) ((parser___parser_prod___AType___empty_init_t)CALL((recv), (SFT_parser___parser_prod[58] + 0)))
-#define CALL_parser___parser_prod___AType___init_atype(recv) ((parser___parser_prod___AType___init_atype_t)CALL((recv), (SFT_parser___parser_prod[58] + 1)))
-#define CALL_parser___parser_prod___ALabel___empty_init(recv) ((parser___parser_prod___ALabel___empty_init_t)CALL((recv), (SFT_parser___parser_prod[59] + 0)))
-#define CALL_parser___parser_prod___ALabel___init_alabel(recv) ((parser___parser_prod___ALabel___init_alabel_t)CALL((recv), (SFT_parser___parser_prod[59] + 1)))
-#define CALL_parser___parser_prod___ABlockExpr___empty_init(recv) ((parser___parser_prod___ABlockExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[60] + 0)))
-#define CALL_parser___parser_prod___ABlockExpr___init_ablockexpr(recv) ((parser___parser_prod___ABlockExpr___init_ablockexpr_t)CALL((recv), (SFT_parser___parser_prod[60] + 1)))
-#define CALL_parser___parser_prod___AVardeclExpr___empty_init(recv) ((parser___parser_prod___AVardeclExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[61] + 0)))
-#define CALL_parser___parser_prod___AVardeclExpr___init_avardeclexpr(recv) ((parser___parser_prod___AVardeclExpr___init_avardeclexpr_t)CALL((recv), (SFT_parser___parser_prod[61] + 1)))
-#define CALL_parser___parser_prod___AReturnExpr___empty_init(recv) ((parser___parser_prod___AReturnExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[62] + 0)))
-#define CALL_parser___parser_prod___AReturnExpr___init_areturnexpr(recv) ((parser___parser_prod___AReturnExpr___init_areturnexpr_t)CALL((recv), (SFT_parser___parser_prod[62] + 1)))
-#define CALL_parser___parser_prod___ABreakExpr___empty_init(recv) ((parser___parser_prod___ABreakExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[63] + 0)))
-#define CALL_parser___parser_prod___ABreakExpr___init_abreakexpr(recv) ((parser___parser_prod___ABreakExpr___init_abreakexpr_t)CALL((recv), (SFT_parser___parser_prod[63] + 1)))
-#define CALL_parser___parser_prod___AAbortExpr___empty_init(recv) ((parser___parser_prod___AAbortExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[64] + 0)))
-#define CALL_parser___parser_prod___AAbortExpr___init_aabortexpr(recv) ((parser___parser_prod___AAbortExpr___init_aabortexpr_t)CALL((recv), (SFT_parser___parser_prod[64] + 1)))
-#define CALL_parser___parser_prod___AContinueExpr___empty_init(recv) ((parser___parser_prod___AContinueExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[65] + 0)))
-#define CALL_parser___parser_prod___AContinueExpr___init_acontinueexpr(recv) ((parser___parser_prod___AContinueExpr___init_acontinueexpr_t)CALL((recv), (SFT_parser___parser_prod[65] + 1)))
-#define CALL_parser___parser_prod___ADoExpr___empty_init(recv) ((parser___parser_prod___ADoExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[66] + 0)))
-#define CALL_parser___parser_prod___ADoExpr___init_adoexpr(recv) ((parser___parser_prod___ADoExpr___init_adoexpr_t)CALL((recv), (SFT_parser___parser_prod[66] + 1)))
-#define CALL_parser___parser_prod___AIfExpr___empty_init(recv) ((parser___parser_prod___AIfExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[67] + 0)))
-#define CALL_parser___parser_prod___AIfExpr___init_aifexpr(recv) ((parser___parser_prod___AIfExpr___init_aifexpr_t)CALL((recv), (SFT_parser___parser_prod[67] + 1)))
-#define CALL_parser___parser_prod___AIfexprExpr___empty_init(recv) ((parser___parser_prod___AIfexprExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[68] + 0)))
-#define CALL_parser___parser_prod___AIfexprExpr___init_aifexprexpr(recv) ((parser___parser_prod___AIfexprExpr___init_aifexprexpr_t)CALL((recv), (SFT_parser___parser_prod[68] + 1)))
-#define CALL_parser___parser_prod___AWhileExpr___empty_init(recv) ((parser___parser_prod___AWhileExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[69] + 0)))
-#define CALL_parser___parser_prod___AWhileExpr___init_awhileexpr(recv) ((parser___parser_prod___AWhileExpr___init_awhileexpr_t)CALL((recv), (SFT_parser___parser_prod[69] + 1)))
-#define CALL_parser___parser_prod___ALoopExpr___empty_init(recv) ((parser___parser_prod___ALoopExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[70] + 0)))
-#define CALL_parser___parser_prod___ALoopExpr___init_aloopexpr(recv) ((parser___parser_prod___ALoopExpr___init_aloopexpr_t)CALL((recv), (SFT_parser___parser_prod[70] + 1)))
-#define CALL_parser___parser_prod___AForExpr___empty_init(recv) ((parser___parser_prod___AForExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[71] + 0)))
-#define CALL_parser___parser_prod___AForExpr___init_aforexpr(recv) ((parser___parser_prod___AForExpr___init_aforexpr_t)CALL((recv), (SFT_parser___parser_prod[71] + 1)))
-#define CALL_parser___parser_prod___AAssertExpr___empty_init(recv) ((parser___parser_prod___AAssertExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[72] + 0)))
-#define CALL_parser___parser_prod___AAssertExpr___init_aassertexpr(recv) ((parser___parser_prod___AAssertExpr___init_aassertexpr_t)CALL((recv), (SFT_parser___parser_prod[72] + 1)))
-#define CALL_parser___parser_prod___AOnceExpr___empty_init(recv) ((parser___parser_prod___AOnceExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[73] + 0)))
-#define CALL_parser___parser_prod___AOnceExpr___init_aonceexpr(recv) ((parser___parser_prod___AOnceExpr___init_aonceexpr_t)CALL((recv), (SFT_parser___parser_prod[73] + 1)))
-#define CALL_parser___parser_prod___ASendExpr___empty_init(recv) ((parser___parser_prod___ASendExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[74] + 0)))
-#define CALL_parser___parser_prod___ASendExpr___init_asendexpr(recv) ((parser___parser_prod___ASendExpr___init_asendexpr_t)CALL((recv), (SFT_parser___parser_prod[74] + 1)))
-#define CALL_parser___parser_prod___ABinopExpr___empty_init(recv) ((parser___parser_prod___ABinopExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[75] + 0)))
-#define CALL_parser___parser_prod___ABinopExpr___init_abinopexpr(recv) ((parser___parser_prod___ABinopExpr___init_abinopexpr_t)CALL((recv), (SFT_parser___parser_prod[75] + 1)))
-#define CALL_parser___parser_prod___AOrExpr___empty_init(recv) ((parser___parser_prod___AOrExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[76] + 0)))
-#define CALL_parser___parser_prod___AOrExpr___init_aorexpr(recv) ((parser___parser_prod___AOrExpr___init_aorexpr_t)CALL((recv), (SFT_parser___parser_prod[76] + 1)))
-#define CALL_parser___parser_prod___AAndExpr___empty_init(recv) ((parser___parser_prod___AAndExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[77] + 0)))
-#define CALL_parser___parser_prod___AAndExpr___init_aandexpr(recv) ((parser___parser_prod___AAndExpr___init_aandexpr_t)CALL((recv), (SFT_parser___parser_prod[77] + 1)))
-#define CALL_parser___parser_prod___AOrElseExpr___empty_init(recv) ((parser___parser_prod___AOrElseExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[78] + 0)))
-#define CALL_parser___parser_prod___AOrElseExpr___init_aorelseexpr(recv) ((parser___parser_prod___AOrElseExpr___init_aorelseexpr_t)CALL((recv), (SFT_parser___parser_prod[78] + 1)))
-#define CALL_parser___parser_prod___ANotExpr___empty_init(recv) ((parser___parser_prod___ANotExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[79] + 0)))
-#define CALL_parser___parser_prod___ANotExpr___init_anotexpr(recv) ((parser___parser_prod___ANotExpr___init_anotexpr_t)CALL((recv), (SFT_parser___parser_prod[79] + 1)))
-#define CALL_parser___parser_prod___AEqExpr___empty_init(recv) ((parser___parser_prod___AEqExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[80] + 0)))
-#define CALL_parser___parser_prod___AEqExpr___init_aeqexpr(recv) ((parser___parser_prod___AEqExpr___init_aeqexpr_t)CALL((recv), (SFT_parser___parser_prod[80] + 1)))
-#define CALL_parser___parser_prod___AEeExpr___empty_init(recv) ((parser___parser_prod___AEeExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[81] + 0)))
-#define CALL_parser___parser_prod___AEeExpr___init_aeeexpr(recv) ((parser___parser_prod___AEeExpr___init_aeeexpr_t)CALL((recv), (SFT_parser___parser_prod[81] + 1)))
-#define CALL_parser___parser_prod___ANeExpr___empty_init(recv) ((parser___parser_prod___ANeExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[82] + 0)))
-#define CALL_parser___parser_prod___ANeExpr___init_aneexpr(recv) ((parser___parser_prod___ANeExpr___init_aneexpr_t)CALL((recv), (SFT_parser___parser_prod[82] + 1)))
-#define CALL_parser___parser_prod___ALtExpr___empty_init(recv) ((parser___parser_prod___ALtExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[83] + 0)))
-#define CALL_parser___parser_prod___ALtExpr___init_altexpr(recv) ((parser___parser_prod___ALtExpr___init_altexpr_t)CALL((recv), (SFT_parser___parser_prod[83] + 1)))
-#define CALL_parser___parser_prod___ALeExpr___empty_init(recv) ((parser___parser_prod___ALeExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[84] + 0)))
-#define CALL_parser___parser_prod___ALeExpr___init_aleexpr(recv) ((parser___parser_prod___ALeExpr___init_aleexpr_t)CALL((recv), (SFT_parser___parser_prod[84] + 1)))
-#define CALL_parser___parser_prod___ALlExpr___empty_init(recv) ((parser___parser_prod___ALlExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[85] + 0)))
-#define CALL_parser___parser_prod___ALlExpr___init_allexpr(recv) ((parser___parser_prod___ALlExpr___init_allexpr_t)CALL((recv), (SFT_parser___parser_prod[85] + 1)))
-#define CALL_parser___parser_prod___AGtExpr___empty_init(recv) ((parser___parser_prod___AGtExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[86] + 0)))
-#define CALL_parser___parser_prod___AGtExpr___init_agtexpr(recv) ((parser___parser_prod___AGtExpr___init_agtexpr_t)CALL((recv), (SFT_parser___parser_prod[86] + 1)))
-#define CALL_parser___parser_prod___AGeExpr___empty_init(recv) ((parser___parser_prod___AGeExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[87] + 0)))
-#define CALL_parser___parser_prod___AGeExpr___init_ageexpr(recv) ((parser___parser_prod___AGeExpr___init_ageexpr_t)CALL((recv), (SFT_parser___parser_prod[87] + 1)))
-#define CALL_parser___parser_prod___AGgExpr___empty_init(recv) ((parser___parser_prod___AGgExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[88] + 0)))
-#define CALL_parser___parser_prod___AGgExpr___init_aggexpr(recv) ((parser___parser_prod___AGgExpr___init_aggexpr_t)CALL((recv), (SFT_parser___parser_prod[88] + 1)))
-#define CALL_parser___parser_prod___AIsaExpr___empty_init(recv) ((parser___parser_prod___AIsaExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[89] + 0)))
-#define CALL_parser___parser_prod___AIsaExpr___init_aisaexpr(recv) ((parser___parser_prod___AIsaExpr___init_aisaexpr_t)CALL((recv), (SFT_parser___parser_prod[89] + 1)))
-#define CALL_parser___parser_prod___APlusExpr___empty_init(recv) ((parser___parser_prod___APlusExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[90] + 0)))
-#define CALL_parser___parser_prod___APlusExpr___init_aplusexpr(recv) ((parser___parser_prod___APlusExpr___init_aplusexpr_t)CALL((recv), (SFT_parser___parser_prod[90] + 1)))
-#define CALL_parser___parser_prod___AMinusExpr___empty_init(recv) ((parser___parser_prod___AMinusExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[91] + 0)))
-#define CALL_parser___parser_prod___AMinusExpr___init_aminusexpr(recv) ((parser___parser_prod___AMinusExpr___init_aminusexpr_t)CALL((recv), (SFT_parser___parser_prod[91] + 1)))
-#define CALL_parser___parser_prod___AStarshipExpr___empty_init(recv) ((parser___parser_prod___AStarshipExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[92] + 0)))
-#define CALL_parser___parser_prod___AStarshipExpr___init_astarshipexpr(recv) ((parser___parser_prod___AStarshipExpr___init_astarshipexpr_t)CALL((recv), (SFT_parser___parser_prod[92] + 1)))
-#define CALL_parser___parser_prod___AStarExpr___empty_init(recv) ((parser___parser_prod___AStarExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[93] + 0)))
-#define CALL_parser___parser_prod___AStarExpr___init_astarexpr(recv) ((parser___parser_prod___AStarExpr___init_astarexpr_t)CALL((recv), (SFT_parser___parser_prod[93] + 1)))
-#define CALL_parser___parser_prod___ASlashExpr___empty_init(recv) ((parser___parser_prod___ASlashExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[94] + 0)))
-#define CALL_parser___parser_prod___ASlashExpr___init_aslashexpr(recv) ((parser___parser_prod___ASlashExpr___init_aslashexpr_t)CALL((recv), (SFT_parser___parser_prod[94] + 1)))
-#define CALL_parser___parser_prod___APercentExpr___empty_init(recv) ((parser___parser_prod___APercentExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[95] + 0)))
-#define CALL_parser___parser_prod___APercentExpr___init_apercentexpr(recv) ((parser___parser_prod___APercentExpr___init_apercentexpr_t)CALL((recv), (SFT_parser___parser_prod[95] + 1)))
-#define CALL_parser___parser_prod___AUminusExpr___empty_init(recv) ((parser___parser_prod___AUminusExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[96] + 0)))
-#define CALL_parser___parser_prod___AUminusExpr___init_auminusexpr(recv) ((parser___parser_prod___AUminusExpr___init_auminusexpr_t)CALL((recv), (SFT_parser___parser_prod[96] + 1)))
-#define CALL_parser___parser_prod___ANewExpr___empty_init(recv) ((parser___parser_prod___ANewExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[97] + 0)))
-#define CALL_parser___parser_prod___ANewExpr___init_anewexpr(recv) ((parser___parser_prod___ANewExpr___init_anewexpr_t)CALL((recv), (SFT_parser___parser_prod[97] + 1)))
-#define CALL_parser___parser_prod___AAttrExpr___empty_init(recv) ((parser___parser_prod___AAttrExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[98] + 0)))
-#define CALL_parser___parser_prod___AAttrExpr___init_aattrexpr(recv) ((parser___parser_prod___AAttrExpr___init_aattrexpr_t)CALL((recv), (SFT_parser___parser_prod[98] + 1)))
-#define CALL_parser___parser_prod___AAttrAssignExpr___empty_init(recv) ((parser___parser_prod___AAttrAssignExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[99] + 0)))
-#define CALL_parser___parser_prod___AAttrAssignExpr___init_aattrassignexpr(recv) ((parser___parser_prod___AAttrAssignExpr___init_aattrassignexpr_t)CALL((recv), (SFT_parser___parser_prod[99] + 1)))
-#define CALL_parser___parser_prod___AAttrReassignExpr___empty_init(recv) ((parser___parser_prod___AAttrReassignExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[100] + 0)))
-#define CALL_parser___parser_prod___AAttrReassignExpr___init_aattrreassignexpr(recv) ((parser___parser_prod___AAttrReassignExpr___init_aattrreassignexpr_t)CALL((recv), (SFT_parser___parser_prod[100] + 1)))
-#define CALL_parser___parser_prod___ACallExpr___empty_init(recv) ((parser___parser_prod___ACallExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[101] + 0)))
-#define CALL_parser___parser_prod___ACallExpr___init_acallexpr(recv) ((parser___parser_prod___ACallExpr___init_acallexpr_t)CALL((recv), (SFT_parser___parser_prod[101] + 1)))
-#define CALL_parser___parser_prod___ACallAssignExpr___empty_init(recv) ((parser___parser_prod___ACallAssignExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[102] + 0)))
-#define CALL_parser___parser_prod___ACallAssignExpr___init_acallassignexpr(recv) ((parser___parser_prod___ACallAssignExpr___init_acallassignexpr_t)CALL((recv), (SFT_parser___parser_prod[102] + 1)))
-#define CALL_parser___parser_prod___ACallReassignExpr___empty_init(recv) ((parser___parser_prod___ACallReassignExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[103] + 0)))
-#define CALL_parser___parser_prod___ACallReassignExpr___init_acallreassignexpr(recv) ((parser___parser_prod___ACallReassignExpr___init_acallreassignexpr_t)CALL((recv), (SFT_parser___parser_prod[103] + 1)))
-#define CALL_parser___parser_prod___ASuperExpr___empty_init(recv) ((parser___parser_prod___ASuperExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[104] + 0)))
-#define CALL_parser___parser_prod___ASuperExpr___init_asuperexpr(recv) ((parser___parser_prod___ASuperExpr___init_asuperexpr_t)CALL((recv), (SFT_parser___parser_prod[104] + 1)))
-#define CALL_parser___parser_prod___AInitExpr___empty_init(recv) ((parser___parser_prod___AInitExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[105] + 0)))
-#define CALL_parser___parser_prod___AInitExpr___init_ainitexpr(recv) ((parser___parser_prod___AInitExpr___init_ainitexpr_t)CALL((recv), (SFT_parser___parser_prod[105] + 1)))
-#define CALL_parser___parser_prod___ABraExpr___empty_init(recv) ((parser___parser_prod___ABraExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[106] + 0)))
-#define CALL_parser___parser_prod___ABraExpr___init_abraexpr(recv) ((parser___parser_prod___ABraExpr___init_abraexpr_t)CALL((recv), (SFT_parser___parser_prod[106] + 1)))
-#define CALL_parser___parser_prod___ABraAssignExpr___empty_init(recv) ((parser___parser_prod___ABraAssignExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[107] + 0)))
-#define CALL_parser___parser_prod___ABraAssignExpr___init_abraassignexpr(recv) ((parser___parser_prod___ABraAssignExpr___init_abraassignexpr_t)CALL((recv), (SFT_parser___parser_prod[107] + 1)))
-#define CALL_parser___parser_prod___ABraReassignExpr___empty_init(recv) ((parser___parser_prod___ABraReassignExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[108] + 0)))
-#define CALL_parser___parser_prod___ABraReassignExpr___init_abrareassignexpr(recv) ((parser___parser_prod___ABraReassignExpr___init_abrareassignexpr_t)CALL((recv), (SFT_parser___parser_prod[108] + 1)))
-#define CALL_parser___parser_prod___AClosureCallExpr___empty_init(recv) ((parser___parser_prod___AClosureCallExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[109] + 0)))
-#define CALL_parser___parser_prod___AClosureCallExpr___init_aclosurecallexpr(recv) ((parser___parser_prod___AClosureCallExpr___init_aclosurecallexpr_t)CALL((recv), (SFT_parser___parser_prod[109] + 1)))
-#define CALL_parser___parser_prod___AVarExpr___empty_init(recv) ((parser___parser_prod___AVarExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[110] + 0)))
-#define CALL_parser___parser_prod___AVarExpr___init_avarexpr(recv) ((parser___parser_prod___AVarExpr___init_avarexpr_t)CALL((recv), (SFT_parser___parser_prod[110] + 1)))
-#define CALL_parser___parser_prod___AVarAssignExpr___empty_init(recv) ((parser___parser_prod___AVarAssignExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[111] + 0)))
-#define CALL_parser___parser_prod___AVarAssignExpr___init_avarassignexpr(recv) ((parser___parser_prod___AVarAssignExpr___init_avarassignexpr_t)CALL((recv), (SFT_parser___parser_prod[111] + 1)))
-#define CALL_parser___parser_prod___AVarReassignExpr___empty_init(recv) ((parser___parser_prod___AVarReassignExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[112] + 0)))
-#define CALL_parser___parser_prod___AVarReassignExpr___init_avarreassignexpr(recv) ((parser___parser_prod___AVarReassignExpr___init_avarreassignexpr_t)CALL((recv), (SFT_parser___parser_prod[112] + 1)))
-#define CALL_parser___parser_prod___ARangeExpr___empty_init(recv) ((parser___parser_prod___ARangeExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[113] + 0)))
-#define CALL_parser___parser_prod___ARangeExpr___init_arangeexpr(recv) ((parser___parser_prod___ARangeExpr___init_arangeexpr_t)CALL((recv), (SFT_parser___parser_prod[113] + 1)))
-#define CALL_parser___parser_prod___ACrangeExpr___empty_init(recv) ((parser___parser_prod___ACrangeExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[114] + 0)))
-#define CALL_parser___parser_prod___ACrangeExpr___init_acrangeexpr(recv) ((parser___parser_prod___ACrangeExpr___init_acrangeexpr_t)CALL((recv), (SFT_parser___parser_prod[114] + 1)))
-#define CALL_parser___parser_prod___AOrangeExpr___empty_init(recv) ((parser___parser_prod___AOrangeExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[115] + 0)))
-#define CALL_parser___parser_prod___AOrangeExpr___init_aorangeexpr(recv) ((parser___parser_prod___AOrangeExpr___init_aorangeexpr_t)CALL((recv), (SFT_parser___parser_prod[115] + 1)))
-#define CALL_parser___parser_prod___AArrayExpr___empty_init(recv) ((parser___parser_prod___AArrayExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[116] + 0)))
-#define CALL_parser___parser_prod___AArrayExpr___init_aarrayexpr(recv) ((parser___parser_prod___AArrayExpr___init_aarrayexpr_t)CALL((recv), (SFT_parser___parser_prod[116] + 1)))
-#define CALL_parser___parser_prod___ASelfExpr___empty_init(recv) ((parser___parser_prod___ASelfExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[117] + 0)))
-#define CALL_parser___parser_prod___ASelfExpr___init_aselfexpr(recv) ((parser___parser_prod___ASelfExpr___init_aselfexpr_t)CALL((recv), (SFT_parser___parser_prod[117] + 1)))
-#define CALL_parser___parser_prod___AImplicitSelfExpr___empty_init(recv) ((parser___parser_prod___AImplicitSelfExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[118] + 0)))
-#define CALL_parser___parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr(recv) ((parser___parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr_t)CALL((recv), (SFT_parser___parser_prod[118] + 1)))
-#define CALL_parser___parser_prod___ATrueExpr___empty_init(recv) ((parser___parser_prod___ATrueExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[119] + 0)))
-#define CALL_parser___parser_prod___ATrueExpr___init_atrueexpr(recv) ((parser___parser_prod___ATrueExpr___init_atrueexpr_t)CALL((recv), (SFT_parser___parser_prod[119] + 1)))
-#define CALL_parser___parser_prod___AFalseExpr___empty_init(recv) ((parser___parser_prod___AFalseExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[120] + 0)))
-#define CALL_parser___parser_prod___AFalseExpr___init_afalseexpr(recv) ((parser___parser_prod___AFalseExpr___init_afalseexpr_t)CALL((recv), (SFT_parser___parser_prod[120] + 1)))
-#define CALL_parser___parser_prod___ANullExpr___empty_init(recv) ((parser___parser_prod___ANullExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[121] + 0)))
-#define CALL_parser___parser_prod___ANullExpr___init_anullexpr(recv) ((parser___parser_prod___ANullExpr___init_anullexpr_t)CALL((recv), (SFT_parser___parser_prod[121] + 1)))
-#define CALL_parser___parser_prod___AIntExpr___empty_init(recv) ((parser___parser_prod___AIntExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[122] + 0)))
-#define CALL_parser___parser_prod___AIntExpr___init_aintexpr(recv) ((parser___parser_prod___AIntExpr___init_aintexpr_t)CALL((recv), (SFT_parser___parser_prod[122] + 1)))
-#define CALL_parser___parser_prod___AFloatExpr___empty_init(recv) ((parser___parser_prod___AFloatExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[123] + 0)))
-#define CALL_parser___parser_prod___AFloatExpr___init_afloatexpr(recv) ((parser___parser_prod___AFloatExpr___init_afloatexpr_t)CALL((recv), (SFT_parser___parser_prod[123] + 1)))
-#define CALL_parser___parser_prod___ACharExpr___empty_init(recv) ((parser___parser_prod___ACharExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[124] + 0)))
-#define CALL_parser___parser_prod___ACharExpr___init_acharexpr(recv) ((parser___parser_prod___ACharExpr___init_acharexpr_t)CALL((recv), (SFT_parser___parser_prod[124] + 1)))
-#define CALL_parser___parser_prod___AStringExpr___empty_init(recv) ((parser___parser_prod___AStringExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[125] + 0)))
-#define CALL_parser___parser_prod___AStringExpr___init_astringexpr(recv) ((parser___parser_prod___AStringExpr___init_astringexpr_t)CALL((recv), (SFT_parser___parser_prod[125] + 1)))
-#define CALL_parser___parser_prod___AStartStringExpr___empty_init(recv) ((parser___parser_prod___AStartStringExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[126] + 0)))
-#define CALL_parser___parser_prod___AStartStringExpr___init_astartstringexpr(recv) ((parser___parser_prod___AStartStringExpr___init_astartstringexpr_t)CALL((recv), (SFT_parser___parser_prod[126] + 1)))
-#define CALL_parser___parser_prod___AMidStringExpr___empty_init(recv) ((parser___parser_prod___AMidStringExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[127] + 0)))
-#define CALL_parser___parser_prod___AMidStringExpr___init_amidstringexpr(recv) ((parser___parser_prod___AMidStringExpr___init_amidstringexpr_t)CALL((recv), (SFT_parser___parser_prod[127] + 1)))
-#define CALL_parser___parser_prod___AEndStringExpr___empty_init(recv) ((parser___parser_prod___AEndStringExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[128] + 0)))
-#define CALL_parser___parser_prod___AEndStringExpr___init_aendstringexpr(recv) ((parser___parser_prod___AEndStringExpr___init_aendstringexpr_t)CALL((recv), (SFT_parser___parser_prod[128] + 1)))
-#define CALL_parser___parser_prod___ASuperstringExpr___empty_init(recv) ((parser___parser_prod___ASuperstringExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[129] + 0)))
-#define CALL_parser___parser_prod___ASuperstringExpr___init_asuperstringexpr(recv) ((parser___parser_prod___ASuperstringExpr___init_asuperstringexpr_t)CALL((recv), (SFT_parser___parser_prod[129] + 1)))
-#define CALL_parser___parser_prod___AParExpr___empty_init(recv) ((parser___parser_prod___AParExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[130] + 0)))
-#define CALL_parser___parser_prod___AParExpr___init_aparexpr(recv) ((parser___parser_prod___AParExpr___init_aparexpr_t)CALL((recv), (SFT_parser___parser_prod[130] + 1)))
-#define CALL_parser___parser_prod___AAsCastExpr___empty_init(recv) ((parser___parser_prod___AAsCastExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[131] + 0)))
-#define CALL_parser___parser_prod___AAsCastExpr___init_aascastexpr(recv) ((parser___parser_prod___AAsCastExpr___init_aascastexpr_t)CALL((recv), (SFT_parser___parser_prod[131] + 1)))
-#define CALL_parser___parser_prod___AAsNotnullExpr___empty_init(recv) ((parser___parser_prod___AAsNotnullExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[132] + 0)))
-#define CALL_parser___parser_prod___AAsNotnullExpr___init_aasnotnullexpr(recv) ((parser___parser_prod___AAsNotnullExpr___init_aasnotnullexpr_t)CALL((recv), (SFT_parser___parser_prod[132] + 1)))
-#define CALL_parser___parser_prod___AIssetAttrExpr___empty_init(recv) ((parser___parser_prod___AIssetAttrExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[133] + 0)))
-#define CALL_parser___parser_prod___AIssetAttrExpr___init_aissetattrexpr(recv) ((parser___parser_prod___AIssetAttrExpr___init_aissetattrexpr_t)CALL((recv), (SFT_parser___parser_prod[133] + 1)))
-#define CALL_parser___parser_prod___ADebugTypeExpr___empty_init(recv) ((parser___parser_prod___ADebugTypeExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[134] + 0)))
-#define CALL_parser___parser_prod___ADebugTypeExpr___init_adebugtypeexpr(recv) ((parser___parser_prod___ADebugTypeExpr___init_adebugtypeexpr_t)CALL((recv), (SFT_parser___parser_prod[134] + 1)))
-#define CALL_parser___parser_prod___AListExprs___empty_init(recv) ((parser___parser_prod___AListExprs___empty_init_t)CALL((recv), (SFT_parser___parser_prod[135] + 0)))
-#define CALL_parser___parser_prod___AListExprs___init_alistexprs(recv) ((parser___parser_prod___AListExprs___init_alistexprs_t)CALL((recv), (SFT_parser___parser_prod[135] + 1)))
-#define CALL_parser___parser_prod___AParExprs___empty_init(recv) ((parser___parser_prod___AParExprs___empty_init_t)CALL((recv), (SFT_parser___parser_prod[136] + 0)))
-#define CALL_parser___parser_prod___AParExprs___init_aparexprs(recv) ((parser___parser_prod___AParExprs___init_aparexprs_t)CALL((recv), (SFT_parser___parser_prod[136] + 1)))
-#define CALL_parser___parser_prod___ABraExprs___empty_init(recv) ((parser___parser_prod___ABraExprs___empty_init_t)CALL((recv), (SFT_parser___parser_prod[137] + 0)))
-#define CALL_parser___parser_prod___ABraExprs___init_abraexprs(recv) ((parser___parser_prod___ABraExprs___init_abraexprs_t)CALL((recv), (SFT_parser___parser_prod[137] + 1)))
-#define CALL_parser___parser_prod___APlusAssignOp___empty_init(recv) ((parser___parser_prod___APlusAssignOp___empty_init_t)CALL((recv), (SFT_parser___parser_prod[138] + 0)))
-#define CALL_parser___parser_prod___APlusAssignOp___init_aplusassignop(recv) ((parser___parser_prod___APlusAssignOp___init_aplusassignop_t)CALL((recv), (SFT_parser___parser_prod[138] + 1)))
-#define CALL_parser___parser_prod___AMinusAssignOp___empty_init(recv) ((parser___parser_prod___AMinusAssignOp___empty_init_t)CALL((recv), (SFT_parser___parser_prod[139] + 0)))
-#define CALL_parser___parser_prod___AMinusAssignOp___init_aminusassignop(recv) ((parser___parser_prod___AMinusAssignOp___init_aminusassignop_t)CALL((recv), (SFT_parser___parser_prod[139] + 1)))
-#define CALL_parser___parser_prod___AClosureDef___empty_init(recv) ((parser___parser_prod___AClosureDef___empty_init_t)CALL((recv), (SFT_parser___parser_prod[140] + 0)))
-#define CALL_parser___parser_prod___AClosureDef___init_aclosuredef(recv) ((parser___parser_prod___AClosureDef___init_aclosuredef_t)CALL((recv), (SFT_parser___parser_prod[140] + 1)))
-#define CALL_parser___parser_prod___ASimpleClosureId___empty_init(recv) ((parser___parser_prod___ASimpleClosureId___empty_init_t)CALL((recv), (SFT_parser___parser_prod[141] + 0)))
-#define CALL_parser___parser_prod___ASimpleClosureId___init_asimpleclosureid(recv) ((parser___parser_prod___ASimpleClosureId___init_asimpleclosureid_t)CALL((recv), (SFT_parser___parser_prod[141] + 1)))
-#define CALL_parser___parser_prod___ABreakClosureId___empty_init(recv) ((parser___parser_prod___ABreakClosureId___empty_init_t)CALL((recv), (SFT_parser___parser_prod[142] + 0)))
-#define CALL_parser___parser_prod___ABreakClosureId___init_abreakclosureid(recv) ((parser___parser_prod___ABreakClosureId___init_abreakclosureid_t)CALL((recv), (SFT_parser___parser_prod[142] + 1)))
-#define CALL_parser___parser_prod___AModuleName___empty_init(recv) ((parser___parser_prod___AModuleName___empty_init_t)CALL((recv), (SFT_parser___parser_prod[143] + 0)))
-#define CALL_parser___parser_prod___AModuleName___init_amodulename(recv) ((parser___parser_prod___AModuleName___init_amodulename_t)CALL((recv), (SFT_parser___parser_prod[143] + 1)))
-#define CALL_parser___parser_prod___AExternCalls___empty_init(recv) ((parser___parser_prod___AExternCalls___empty_init_t)CALL((recv), (SFT_parser___parser_prod[144] + 0)))
-#define CALL_parser___parser_prod___AExternCalls___init_aexterncalls(recv) ((parser___parser_prod___AExternCalls___init_aexterncalls_t)CALL((recv), (SFT_parser___parser_prod[144] + 1)))
-#define CALL_parser___parser_prod___AExternCall___empty_init(recv) ((parser___parser_prod___AExternCall___empty_init_t)CALL((recv), (SFT_parser___parser_prod[145] + 0)))
-#define CALL_parser___parser_prod___AExternCall___init_aexterncall(recv) ((parser___parser_prod___AExternCall___init_aexterncall_t)CALL((recv), (SFT_parser___parser_prod[145] + 1)))
-#define CALL_parser___parser_prod___ASuperExternCall___empty_init(recv) ((parser___parser_prod___ASuperExternCall___empty_init_t)CALL((recv), (SFT_parser___parser_prod[146] + 0)))
-#define CALL_parser___parser_prod___ASuperExternCall___init_asuperexterncall(recv) ((parser___parser_prod___ASuperExternCall___init_asuperexterncall_t)CALL((recv), (SFT_parser___parser_prod[146] + 1)))
-#define CALL_parser___parser_prod___ALocalPropExternCall___empty_init(recv) ((parser___parser_prod___ALocalPropExternCall___empty_init_t)CALL((recv), (SFT_parser___parser_prod[147] + 0)))
-#define CALL_parser___parser_prod___ALocalPropExternCall___init_alocalpropexterncall(recv) ((parser___parser_prod___ALocalPropExternCall___init_alocalpropexterncall_t)CALL((recv), (SFT_parser___parser_prod[147] + 1)))
-#define CALL_parser___parser_prod___AFullPropExternCall___empty_init(recv) ((parser___parser_prod___AFullPropExternCall___empty_init_t)CALL((recv), (SFT_parser___parser_prod[148] + 0)))
-#define CALL_parser___parser_prod___AFullPropExternCall___init_afullpropexterncall(recv) ((parser___parser_prod___AFullPropExternCall___init_afullpropexterncall_t)CALL((recv), (SFT_parser___parser_prod[148] + 1)))
-#define CALL_parser___parser_prod___AInitPropExternCall___empty_init(recv) ((parser___parser_prod___AInitPropExternCall___empty_init_t)CALL((recv), (SFT_parser___parser_prod[149] + 0)))
-#define CALL_parser___parser_prod___AInitPropExternCall___init_ainitpropexterncall(recv) ((parser___parser_prod___AInitPropExternCall___init_ainitpropexterncall_t)CALL((recv), (SFT_parser___parser_prod[149] + 1)))
-#define CALL_parser___parser_prod___ACastAsExternCall___empty_init(recv) ((parser___parser_prod___ACastAsExternCall___empty_init_t)CALL((recv), (SFT_parser___parser_prod[150] + 0)))
-#define CALL_parser___parser_prod___ACastAsExternCall___init_acastasexterncall(recv) ((parser___parser_prod___ACastAsExternCall___init_acastasexterncall_t)CALL((recv), (SFT_parser___parser_prod[150] + 1)))
-#define CALL_parser___parser_prod___AAsNullableExternCall___empty_init(recv) ((parser___parser_prod___AAsNullableExternCall___empty_init_t)CALL((recv), (SFT_parser___parser_prod[151] + 0)))
-#define CALL_parser___parser_prod___AAsNullableExternCall___init_aasnullableexterncall(recv) ((parser___parser_prod___AAsNullableExternCall___init_aasnullableexterncall_t)CALL((recv), (SFT_parser___parser_prod[151] + 1)))
-#define CALL_parser___parser_prod___AAsNotNullableExternCall___empty_init(recv) ((parser___parser_prod___AAsNotNullableExternCall___empty_init_t)CALL((recv), (SFT_parser___parser_prod[152] + 0)))
-#define CALL_parser___parser_prod___AAsNotNullableExternCall___init_aasnotnullableexterncall(recv) ((parser___parser_prod___AAsNotNullableExternCall___init_aasnotnullableexterncall_t)CALL((recv), (SFT_parser___parser_prod[152] + 1)))
-#define CALL_parser___parser_prod___AInLanguage___empty_init(recv) ((parser___parser_prod___AInLanguage___empty_init_t)CALL((recv), (SFT_parser___parser_prod[153] + 0)))
-#define CALL_parser___parser_prod___AInLanguage___init_ainlanguage(recv) ((parser___parser_prod___AInLanguage___init_ainlanguage_t)CALL((recv), (SFT_parser___parser_prod[153] + 1)))
-#define CALL_parser___parser_prod___AExternCodeBlock___empty_init(recv) ((parser___parser_prod___AExternCodeBlock___empty_init_t)CALL((recv), (SFT_parser___parser_prod[154] + 0)))
-#define CALL_parser___parser_prod___AExternCodeBlock___init_aexterncodeblock(recv) ((parser___parser_prod___AExternCodeBlock___init_aexterncodeblock_t)CALL((recv), (SFT_parser___parser_prod[154] + 1)))
-#define CALL_parser___parser_prod___AQualified___empty_init(recv) ((parser___parser_prod___AQualified___empty_init_t)CALL((recv), (SFT_parser___parser_prod[155] + 0)))
-#define CALL_parser___parser_prod___AQualified___init_aqualified(recv) ((parser___parser_prod___AQualified___init_aqualified_t)CALL((recv), (SFT_parser___parser_prod[155] + 1)))
-#define CALL_parser___parser_prod___ADoc___empty_init(recv) ((parser___parser_prod___ADoc___empty_init_t)CALL((recv), (SFT_parser___parser_prod[156] + 0)))
-#define CALL_parser___parser_prod___ADoc___init_adoc(recv) ((parser___parser_prod___ADoc___init_adoc_t)CALL((recv), (SFT_parser___parser_prod[156] + 1)))
-#define CALL_parser___parser_prod___AAnnotations___empty_init(recv) ((parser___parser_prod___AAnnotations___empty_init_t)CALL((recv), (SFT_parser___parser_prod[157] + 0)))
-#define CALL_parser___parser_prod___AAnnotations___init_aannotations(recv) ((parser___parser_prod___AAnnotations___init_aannotations_t)CALL((recv), (SFT_parser___parser_prod[157] + 1)))
-#define CALL_parser___parser_prod___AAnnotation___empty_init(recv) ((parser___parser_prod___AAnnotation___empty_init_t)CALL((recv), (SFT_parser___parser_prod[158] + 0)))
-#define CALL_parser___parser_prod___AAnnotation___init_aannotation(recv) ((parser___parser_prod___AAnnotation___init_aannotation_t)CALL((recv), (SFT_parser___parser_prod[158] + 1)))
-#define CALL_parser___parser_prod___ATypeAtArg___empty_init(recv) ((parser___parser_prod___ATypeAtArg___empty_init_t)CALL((recv), (SFT_parser___parser_prod[159] + 0)))
-#define CALL_parser___parser_prod___ATypeAtArg___init_atypeatarg(recv) ((parser___parser_prod___ATypeAtArg___init_atypeatarg_t)CALL((recv), (SFT_parser___parser_prod[159] + 1)))
-#define CALL_parser___parser_prod___AExprAtArg___empty_init(recv) ((parser___parser_prod___AExprAtArg___empty_init_t)CALL((recv), (SFT_parser___parser_prod[160] + 0)))
-#define CALL_parser___parser_prod___AExprAtArg___init_aexpratarg(recv) ((parser___parser_prod___AExprAtArg___init_aexpratarg_t)CALL((recv), (SFT_parser___parser_prod[160] + 1)))
-#define CALL_parser___parser_prod___AAtAtArg___empty_init(recv) ((parser___parser_prod___AAtAtArg___empty_init_t)CALL((recv), (SFT_parser___parser_prod[161] + 0)))
-#define CALL_parser___parser_prod___AAtAtArg___init_aatatarg(recv) ((parser___parser_prod___AAtAtArg___init_aatatarg_t)CALL((recv), (SFT_parser___parser_prod[161] + 1)))
-#define CALL_parser___parser_prod___AIdAtid___empty_init(recv) ((parser___parser_prod___AIdAtid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[162] + 0)))
-#define CALL_parser___parser_prod___AIdAtid___init_aidatid(recv) ((parser___parser_prod___AIdAtid___init_aidatid_t)CALL((recv), (SFT_parser___parser_prod[162] + 1)))
-#define CALL_parser___parser_prod___AKwexternAtid___empty_init(recv) ((parser___parser_prod___AKwexternAtid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[163] + 0)))
-#define CALL_parser___parser_prod___AKwexternAtid___init_akwexternatid(recv) ((parser___parser_prod___AKwexternAtid___init_akwexternatid_t)CALL((recv), (SFT_parser___parser_prod[163] + 1)))
-#define CALL_parser___parser_prod___AKwinternAtid___empty_init(recv) ((parser___parser_prod___AKwinternAtid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[164] + 0)))
-#define CALL_parser___parser_prod___AKwinternAtid___init_akwinternatid(recv) ((parser___parser_prod___AKwinternAtid___init_akwinternatid_t)CALL((recv), (SFT_parser___parser_prod[164] + 1)))
-#define CALL_parser___parser_prod___AKwreadableAtid___empty_init(recv) ((parser___parser_prod___AKwreadableAtid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[165] + 0)))
-#define CALL_parser___parser_prod___AKwreadableAtid___init_akwreadableatid(recv) ((parser___parser_prod___AKwreadableAtid___init_akwreadableatid_t)CALL((recv), (SFT_parser___parser_prod[165] + 1)))
-#define CALL_parser___parser_prod___AKwwritableAtid___empty_init(recv) ((parser___parser_prod___AKwwritableAtid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[166] + 0)))
-#define CALL_parser___parser_prod___AKwwritableAtid___init_akwwritableatid(recv) ((parser___parser_prod___AKwwritableAtid___init_akwwritableatid_t)CALL((recv), (SFT_parser___parser_prod[166] + 1)))
-#define CALL_parser___parser_prod___AKwimportAtid___empty_init(recv) ((parser___parser_prod___AKwimportAtid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[167] + 0)))
-#define CALL_parser___parser_prod___AKwimportAtid___init_akwimportatid(recv) ((parser___parser_prod___AKwimportAtid___init_akwimportatid_t)CALL((recv), (SFT_parser___parser_prod[167] + 1)))
-val_t parser___parser_prod___ANode___parent(val_t p0);
-typedef val_t (*parser___parser_prod___ANode___parent_t)(val_t p0);
-void parser___parser_prod___ANode___parent__eq(val_t p0, val_t p1);
-typedef void (*parser___parser_prod___ANode___parent__eq_t)(val_t p0, val_t p1);
-void parser___parser_prod___ANode___remove_child(val_t p0, val_t p1);
-typedef void (*parser___parser_prod___ANode___remove_child_t)(val_t p0, val_t p1);
-void parser___parser_prod___ANode___replace_child(val_t p0, val_t p1, val_t p2);
-typedef void (*parser___parser_prod___ANode___replace_child_t)(val_t p0, val_t p1, val_t p2);
-void parser___parser_prod___ANode___replace_with(val_t p0, val_t p1);
-typedef void (*parser___parser_prod___ANode___replace_with_t)(val_t p0, val_t p1);
-void parser___parser_prod___ANode___visit_all(val_t p0, val_t p1);
-typedef void (*parser___parser_prod___ANode___visit_all_t)(val_t p0, val_t p1);
-val_t NEW_ANode_parser___parser_nodes___ANode___init();
-void parser___parser_prod___Token___visit_all(val_t p0, val_t p1);
-typedef void (*parser___parser_prod___Token___visit_all_t)(val_t p0, val_t p1);
-void parser___parser_prod___Token___replace_child(val_t p0, val_t p1, val_t p2);
-typedef void (*parser___parser_prod___Token___replace_child_t)(val_t p0, val_t p1, val_t p2);
-val_t NEW_Token_parser___parser_nodes___ANode___init();
-void parser___parser_prod___Prod___replace_with(val_t p0, val_t p1);
-typedef void (*parser___parser_prod___Prod___replace_with_t)(val_t p0, val_t p1);
-val_t NEW_Prod_parser___parser_nodes___ANode___init();
-void parser___parser_prod___Visitor___visit(val_t p0, val_t p1);
-typedef void (*parser___parser_prod___Visitor___visit_t)(val_t p0, val_t p1);
-void parser___parser_prod___Visitor___enter_visit(val_t p0, val_t p1);
-typedef void (*parser___parser_prod___Visitor___enter_visit_t)(val_t p0, val_t p1);
-val_t parser___parser_prod___Visitor___current_node(val_t p0);
-typedef val_t (*parser___parser_prod___Visitor___current_node_t)(val_t p0);
-void parser___parser_prod___Visitor___init(val_t p0, int* init_table);
-typedef void (*parser___parser_prod___Visitor___init_t)(val_t p0, int* init_table);
-val_t NEW_Visitor_parser___parser_prod___Visitor___init();
+#define CALL_parser___parser_prod___AModule___empty_init(recv) ((parser___parser_prod___AModule___empty_init_t)CALL((recv), (SFT_parser___parser_prod[0] + 0)))
+#define CALL_parser___parser_prod___AModule___init_amodule(recv) ((parser___parser_prod___AModule___init_amodule_t)CALL((recv), (SFT_parser___parser_prod[0] + 1)))
+#define CALL_parser___parser_prod___AModuledecl___empty_init(recv) ((parser___parser_prod___AModuledecl___empty_init_t)CALL((recv), (SFT_parser___parser_prod[1] + 0)))
+#define CALL_parser___parser_prod___AModuledecl___init_amoduledecl(recv) ((parser___parser_prod___AModuledecl___init_amoduledecl_t)CALL((recv), (SFT_parser___parser_prod[1] + 1)))
+#define CALL_parser___parser_prod___AStdImport___empty_init(recv) ((parser___parser_prod___AStdImport___empty_init_t)CALL((recv), (SFT_parser___parser_prod[2] + 0)))
+#define CALL_parser___parser_prod___AStdImport___init_astdimport(recv) ((parser___parser_prod___AStdImport___init_astdimport_t)CALL((recv), (SFT_parser___parser_prod[2] + 1)))
+#define CALL_parser___parser_prod___ANoImport___empty_init(recv) ((parser___parser_prod___ANoImport___empty_init_t)CALL((recv), (SFT_parser___parser_prod[3] + 0)))
+#define CALL_parser___parser_prod___ANoImport___init_anoimport(recv) ((parser___parser_prod___ANoImport___init_anoimport_t)CALL((recv), (SFT_parser___parser_prod[3] + 1)))
+#define CALL_parser___parser_prod___APublicVisibility___empty_init(recv) ((parser___parser_prod___APublicVisibility___empty_init_t)CALL((recv), (SFT_parser___parser_prod[4] + 0)))
+#define CALL_parser___parser_prod___APublicVisibility___init_apublicvisibility(recv) ((parser___parser_prod___APublicVisibility___init_apublicvisibility_t)CALL((recv), (SFT_parser___parser_prod[4] + 1)))
+#define CALL_parser___parser_prod___APrivateVisibility___empty_init(recv) ((parser___parser_prod___APrivateVisibility___empty_init_t)CALL((recv), (SFT_parser___parser_prod[5] + 0)))
+#define CALL_parser___parser_prod___APrivateVisibility___init_aprivatevisibility(recv) ((parser___parser_prod___APrivateVisibility___init_aprivatevisibility_t)CALL((recv), (SFT_parser___parser_prod[5] + 1)))
+#define CALL_parser___parser_prod___AProtectedVisibility___empty_init(recv) ((parser___parser_prod___AProtectedVisibility___empty_init_t)CALL((recv), (SFT_parser___parser_prod[6] + 0)))
+#define CALL_parser___parser_prod___AProtectedVisibility___init_aprotectedvisibility(recv) ((parser___parser_prod___AProtectedVisibility___init_aprotectedvisibility_t)CALL((recv), (SFT_parser___parser_prod[6] + 1)))
+#define CALL_parser___parser_prod___AIntrudeVisibility___empty_init(recv) ((parser___parser_prod___AIntrudeVisibility___empty_init_t)CALL((recv), (SFT_parser___parser_prod[7] + 0)))
+#define CALL_parser___parser_prod___AIntrudeVisibility___init_aintrudevisibility(recv) ((parser___parser_prod___AIntrudeVisibility___init_aintrudevisibility_t)CALL((recv), (SFT_parser___parser_prod[7] + 1)))
+#define CALL_parser___parser_prod___AStdClassdef___empty_init(recv) ((parser___parser_prod___AStdClassdef___empty_init_t)CALL((recv), (SFT_parser___parser_prod[8] + 0)))
+#define CALL_parser___parser_prod___AStdClassdef___init_astdclassdef(recv) ((parser___parser_prod___AStdClassdef___init_astdclassdef_t)CALL((recv), (SFT_parser___parser_prod[8] + 1)))
+#define CALL_parser___parser_prod___ATopClassdef___empty_init(recv) ((parser___parser_prod___ATopClassdef___empty_init_t)CALL((recv), (SFT_parser___parser_prod[9] + 0)))
+#define CALL_parser___parser_prod___ATopClassdef___init_atopclassdef(recv) ((parser___parser_prod___ATopClassdef___init_atopclassdef_t)CALL((recv), (SFT_parser___parser_prod[9] + 1)))
+#define CALL_parser___parser_prod___AMainClassdef___empty_init(recv) ((parser___parser_prod___AMainClassdef___empty_init_t)CALL((recv), (SFT_parser___parser_prod[10] + 0)))
+#define CALL_parser___parser_prod___AMainClassdef___init_amainclassdef(recv) ((parser___parser_prod___AMainClassdef___init_amainclassdef_t)CALL((recv), (SFT_parser___parser_prod[10] + 1)))
+#define CALL_parser___parser_prod___AConcreteClasskind___empty_init(recv) ((parser___parser_prod___AConcreteClasskind___empty_init_t)CALL((recv), (SFT_parser___parser_prod[11] + 0)))
+#define CALL_parser___parser_prod___AConcreteClasskind___init_aconcreteclasskind(recv) ((parser___parser_prod___AConcreteClasskind___init_aconcreteclasskind_t)CALL((recv), (SFT_parser___parser_prod[11] + 1)))
+#define CALL_parser___parser_prod___AAbstractClasskind___empty_init(recv) ((parser___parser_prod___AAbstractClasskind___empty_init_t)CALL((recv), (SFT_parser___parser_prod[12] + 0)))
+#define CALL_parser___parser_prod___AAbstractClasskind___init_aabstractclasskind(recv) ((parser___parser_prod___AAbstractClasskind___init_aabstractclasskind_t)CALL((recv), (SFT_parser___parser_prod[12] + 1)))
+#define CALL_parser___parser_prod___AInterfaceClasskind___empty_init(recv) ((parser___parser_prod___AInterfaceClasskind___empty_init_t)CALL((recv), (SFT_parser___parser_prod[13] + 0)))
+#define CALL_parser___parser_prod___AInterfaceClasskind___init_ainterfaceclasskind(recv) ((parser___parser_prod___AInterfaceClasskind___init_ainterfaceclasskind_t)CALL((recv), (SFT_parser___parser_prod[13] + 1)))
+#define CALL_parser___parser_prod___AEnumClasskind___empty_init(recv) ((parser___parser_prod___AEnumClasskind___empty_init_t)CALL((recv), (SFT_parser___parser_prod[14] + 0)))
+#define CALL_parser___parser_prod___AEnumClasskind___init_aenumclasskind(recv) ((parser___parser_prod___AEnumClasskind___init_aenumclasskind_t)CALL((recv), (SFT_parser___parser_prod[14] + 1)))
+#define CALL_parser___parser_prod___AExternClasskind___empty_init(recv) ((parser___parser_prod___AExternClasskind___empty_init_t)CALL((recv), (SFT_parser___parser_prod[15] + 0)))
+#define CALL_parser___parser_prod___AExternClasskind___init_aexternclasskind(recv) ((parser___parser_prod___AExternClasskind___init_aexternclasskind_t)CALL((recv), (SFT_parser___parser_prod[15] + 1)))
+#define CALL_parser___parser_prod___AFormaldef___empty_init(recv) ((parser___parser_prod___AFormaldef___empty_init_t)CALL((recv), (SFT_parser___parser_prod[16] + 0)))
+#define CALL_parser___parser_prod___AFormaldef___init_aformaldef(recv) ((parser___parser_prod___AFormaldef___init_aformaldef_t)CALL((recv), (SFT_parser___parser_prod[16] + 1)))
+#define CALL_parser___parser_prod___ASuperclass___empty_init(recv) ((parser___parser_prod___ASuperclass___empty_init_t)CALL((recv), (SFT_parser___parser_prod[17] + 0)))
+#define CALL_parser___parser_prod___ASuperclass___init_asuperclass(recv) ((parser___parser_prod___ASuperclass___init_asuperclass_t)CALL((recv), (SFT_parser___parser_prod[17] + 1)))
+#define CALL_parser___parser_prod___AAttrPropdef___empty_init(recv) ((parser___parser_prod___AAttrPropdef___empty_init_t)CALL((recv), (SFT_parser___parser_prod[18] + 0)))
+#define CALL_parser___parser_prod___AAttrPropdef___init_aattrpropdef(recv) ((parser___parser_prod___AAttrPropdef___init_aattrpropdef_t)CALL((recv), (SFT_parser___parser_prod[18] + 1)))
+#define CALL_parser___parser_prod___AMethPropdef___empty_init(recv) ((parser___parser_prod___AMethPropdef___empty_init_t)CALL((recv), (SFT_parser___parser_prod[19] + 0)))
+#define CALL_parser___parser_prod___AMethPropdef___init_amethpropdef(recv) ((parser___parser_prod___AMethPropdef___init_amethpropdef_t)CALL((recv), (SFT_parser___parser_prod[19] + 1)))
+#define CALL_parser___parser_prod___ADeferredMethPropdef___empty_init(recv) ((parser___parser_prod___ADeferredMethPropdef___empty_init_t)CALL((recv), (SFT_parser___parser_prod[20] + 0)))
+#define CALL_parser___parser_prod___ADeferredMethPropdef___init_adeferredmethpropdef(recv) ((parser___parser_prod___ADeferredMethPropdef___init_adeferredmethpropdef_t)CALL((recv), (SFT_parser___parser_prod[20] + 1)))
+#define CALL_parser___parser_prod___AInternMethPropdef___empty_init(recv) ((parser___parser_prod___AInternMethPropdef___empty_init_t)CALL((recv), (SFT_parser___parser_prod[21] + 0)))
+#define CALL_parser___parser_prod___AInternMethPropdef___init_ainternmethpropdef(recv) ((parser___parser_prod___AInternMethPropdef___init_ainternmethpropdef_t)CALL((recv), (SFT_parser___parser_prod[21] + 1)))
+#define CALL_parser___parser_prod___AExternMethPropdef___empty_init(recv) ((parser___parser_prod___AExternMethPropdef___empty_init_t)CALL((recv), (SFT_parser___parser_prod[22] + 0)))
+#define CALL_parser___parser_prod___AExternMethPropdef___init_aexternmethpropdef(recv) ((parser___parser_prod___AExternMethPropdef___init_aexternmethpropdef_t)CALL((recv), (SFT_parser___parser_prod[22] + 1)))
+#define CALL_parser___parser_prod___AConcreteMethPropdef___empty_init(recv) ((parser___parser_prod___AConcreteMethPropdef___empty_init_t)CALL((recv), (SFT_parser___parser_prod[23] + 0)))
+#define CALL_parser___parser_prod___AConcreteMethPropdef___init_aconcretemethpropdef(recv) ((parser___parser_prod___AConcreteMethPropdef___init_aconcretemethpropdef_t)CALL((recv), (SFT_parser___parser_prod[23] + 1)))
+#define CALL_parser___parser_prod___AConcreteInitPropdef___empty_init(recv) ((parser___parser_prod___AConcreteInitPropdef___empty_init_t)CALL((recv), (SFT_parser___parser_prod[24] + 0)))
+#define CALL_parser___parser_prod___AConcreteInitPropdef___init_aconcreteinitpropdef(recv) ((parser___parser_prod___AConcreteInitPropdef___init_aconcreteinitpropdef_t)CALL((recv), (SFT_parser___parser_prod[24] + 1)))
+#define CALL_parser___parser_prod___AExternInitPropdef___empty_init(recv) ((parser___parser_prod___AExternInitPropdef___empty_init_t)CALL((recv), (SFT_parser___parser_prod[25] + 0)))
+#define CALL_parser___parser_prod___AExternInitPropdef___init_aexterninitpropdef(recv) ((parser___parser_prod___AExternInitPropdef___init_aexterninitpropdef_t)CALL((recv), (SFT_parser___parser_prod[25] + 1)))
+#define CALL_parser___parser_prod___AMainMethPropdef___empty_init(recv) ((parser___parser_prod___AMainMethPropdef___empty_init_t)CALL((recv), (SFT_parser___parser_prod[26] + 0)))
+#define CALL_parser___parser_prod___AMainMethPropdef___init_amainmethpropdef(recv) ((parser___parser_prod___AMainMethPropdef___init_amainmethpropdef_t)CALL((recv), (SFT_parser___parser_prod[26] + 1)))
+#define CALL_parser___parser_prod___ATypePropdef___empty_init(recv) ((parser___parser_prod___ATypePropdef___empty_init_t)CALL((recv), (SFT_parser___parser_prod[27] + 0)))
+#define CALL_parser___parser_prod___ATypePropdef___init_atypepropdef(recv) ((parser___parser_prod___ATypePropdef___init_atypepropdef_t)CALL((recv), (SFT_parser___parser_prod[27] + 1)))
+#define CALL_parser___parser_prod___AReadAble___empty_init(recv) ((parser___parser_prod___AReadAble___empty_init_t)CALL((recv), (SFT_parser___parser_prod[28] + 0)))
+#define CALL_parser___parser_prod___AReadAble___init_areadable(recv) ((parser___parser_prod___AReadAble___init_areadable_t)CALL((recv), (SFT_parser___parser_prod[28] + 1)))
+#define CALL_parser___parser_prod___AWriteAble___empty_init(recv) ((parser___parser_prod___AWriteAble___empty_init_t)CALL((recv), (SFT_parser___parser_prod[29] + 0)))
+#define CALL_parser___parser_prod___AWriteAble___init_awriteable(recv) ((parser___parser_prod___AWriteAble___init_awriteable_t)CALL((recv), (SFT_parser___parser_prod[29] + 1)))
+#define CALL_parser___parser_prod___AIdMethid___empty_init(recv) ((parser___parser_prod___AIdMethid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[30] + 0)))
+#define CALL_parser___parser_prod___AIdMethid___init_aidmethid(recv) ((parser___parser_prod___AIdMethid___init_aidmethid_t)CALL((recv), (SFT_parser___parser_prod[30] + 1)))
+#define CALL_parser___parser_prod___APlusMethid___empty_init(recv) ((parser___parser_prod___APlusMethid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[31] + 0)))
+#define CALL_parser___parser_prod___APlusMethid___init_aplusmethid(recv) ((parser___parser_prod___APlusMethid___init_aplusmethid_t)CALL((recv), (SFT_parser___parser_prod[31] + 1)))
+#define CALL_parser___parser_prod___AMinusMethid___empty_init(recv) ((parser___parser_prod___AMinusMethid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[32] + 0)))
+#define CALL_parser___parser_prod___AMinusMethid___init_aminusmethid(recv) ((parser___parser_prod___AMinusMethid___init_aminusmethid_t)CALL((recv), (SFT_parser___parser_prod[32] + 1)))
+#define CALL_parser___parser_prod___AStarMethid___empty_init(recv) ((parser___parser_prod___AStarMethid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[33] + 0)))
+#define CALL_parser___parser_prod___AStarMethid___init_astarmethid(recv) ((parser___parser_prod___AStarMethid___init_astarmethid_t)CALL((recv), (SFT_parser___parser_prod[33] + 1)))
+#define CALL_parser___parser_prod___ASlashMethid___empty_init(recv) ((parser___parser_prod___ASlashMethid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[34] + 0)))
+#define CALL_parser___parser_prod___ASlashMethid___init_aslashmethid(recv) ((parser___parser_prod___ASlashMethid___init_aslashmethid_t)CALL((recv), (SFT_parser___parser_prod[34] + 1)))
+#define CALL_parser___parser_prod___APercentMethid___empty_init(recv) ((parser___parser_prod___APercentMethid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[35] + 0)))
+#define CALL_parser___parser_prod___APercentMethid___init_apercentmethid(recv) ((parser___parser_prod___APercentMethid___init_apercentmethid_t)CALL((recv), (SFT_parser___parser_prod[35] + 1)))
+#define CALL_parser___parser_prod___AEqMethid___empty_init(recv) ((parser___parser_prod___AEqMethid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[36] + 0)))
+#define CALL_parser___parser_prod___AEqMethid___init_aeqmethid(recv) ((parser___parser_prod___AEqMethid___init_aeqmethid_t)CALL((recv), (SFT_parser___parser_prod[36] + 1)))
+#define CALL_parser___parser_prod___ANeMethid___empty_init(recv) ((parser___parser_prod___ANeMethid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[37] + 0)))
+#define CALL_parser___parser_prod___ANeMethid___init_anemethid(recv) ((parser___parser_prod___ANeMethid___init_anemethid_t)CALL((recv), (SFT_parser___parser_prod[37] + 1)))
+#define CALL_parser___parser_prod___ALeMethid___empty_init(recv) ((parser___parser_prod___ALeMethid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[38] + 0)))
+#define CALL_parser___parser_prod___ALeMethid___init_alemethid(recv) ((parser___parser_prod___ALeMethid___init_alemethid_t)CALL((recv), (SFT_parser___parser_prod[38] + 1)))
+#define CALL_parser___parser_prod___AGeMethid___empty_init(recv) ((parser___parser_prod___AGeMethid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[39] + 0)))
+#define CALL_parser___parser_prod___AGeMethid___init_agemethid(recv) ((parser___parser_prod___AGeMethid___init_agemethid_t)CALL((recv), (SFT_parser___parser_prod[39] + 1)))
+#define CALL_parser___parser_prod___ALtMethid___empty_init(recv) ((parser___parser_prod___ALtMethid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[40] + 0)))
+#define CALL_parser___parser_prod___ALtMethid___init_altmethid(recv) ((parser___parser_prod___ALtMethid___init_altmethid_t)CALL((recv), (SFT_parser___parser_prod[40] + 1)))
+#define CALL_parser___parser_prod___AGtMethid___empty_init(recv) ((parser___parser_prod___AGtMethid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[41] + 0)))
+#define CALL_parser___parser_prod___AGtMethid___init_agtmethid(recv) ((parser___parser_prod___AGtMethid___init_agtmethid_t)CALL((recv), (SFT_parser___parser_prod[41] + 1)))
+#define CALL_parser___parser_prod___ALlMethid___empty_init(recv) ((parser___parser_prod___ALlMethid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[42] + 0)))
+#define CALL_parser___parser_prod___ALlMethid___init_allmethid(recv) ((parser___parser_prod___ALlMethid___init_allmethid_t)CALL((recv), (SFT_parser___parser_prod[42] + 1)))
+#define CALL_parser___parser_prod___AGgMethid___empty_init(recv) ((parser___parser_prod___AGgMethid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[43] + 0)))
+#define CALL_parser___parser_prod___AGgMethid___init_aggmethid(recv) ((parser___parser_prod___AGgMethid___init_aggmethid_t)CALL((recv), (SFT_parser___parser_prod[43] + 1)))
+#define CALL_parser___parser_prod___ABraMethid___empty_init(recv) ((parser___parser_prod___ABraMethid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[44] + 0)))
+#define CALL_parser___parser_prod___ABraMethid___init_abramethid(recv) ((parser___parser_prod___ABraMethid___init_abramethid_t)CALL((recv), (SFT_parser___parser_prod[44] + 1)))
+#define CALL_parser___parser_prod___AStarshipMethid___empty_init(recv) ((parser___parser_prod___AStarshipMethid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[45] + 0)))
+#define CALL_parser___parser_prod___AStarshipMethid___init_astarshipmethid(recv) ((parser___parser_prod___AStarshipMethid___init_astarshipmethid_t)CALL((recv), (SFT_parser___parser_prod[45] + 1)))
+#define CALL_parser___parser_prod___AAssignMethid___empty_init(recv) ((parser___parser_prod___AAssignMethid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[46] + 0)))
+#define CALL_parser___parser_prod___AAssignMethid___init_aassignmethid(recv) ((parser___parser_prod___AAssignMethid___init_aassignmethid_t)CALL((recv), (SFT_parser___parser_prod[46] + 1)))
+#define CALL_parser___parser_prod___ABraassignMethid___empty_init(recv) ((parser___parser_prod___ABraassignMethid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[47] + 0)))
+#define CALL_parser___parser_prod___ABraassignMethid___init_abraassignmethid(recv) ((parser___parser_prod___ABraassignMethid___init_abraassignmethid_t)CALL((recv), (SFT_parser___parser_prod[47] + 1)))
+#define CALL_parser___parser_prod___ASignature___empty_init(recv) ((parser___parser_prod___ASignature___empty_init_t)CALL((recv), (SFT_parser___parser_prod[48] + 0)))
+#define CALL_parser___parser_prod___ASignature___init_asignature(recv) ((parser___parser_prod___ASignature___init_asignature_t)CALL((recv), (SFT_parser___parser_prod[48] + 1)))
+#define CALL_parser___parser_prod___AParam___empty_init(recv) ((parser___parser_prod___AParam___empty_init_t)CALL((recv), (SFT_parser___parser_prod[49] + 0)))
+#define CALL_parser___parser_prod___AParam___init_aparam(recv) ((parser___parser_prod___AParam___init_aparam_t)CALL((recv), (SFT_parser___parser_prod[49] + 1)))
+#define CALL_parser___parser_prod___AClosureDecl___empty_init(recv) ((parser___parser_prod___AClosureDecl___empty_init_t)CALL((recv), (SFT_parser___parser_prod[50] + 0)))
+#define CALL_parser___parser_prod___AClosureDecl___init_aclosuredecl(recv) ((parser___parser_prod___AClosureDecl___init_aclosuredecl_t)CALL((recv), (SFT_parser___parser_prod[50] + 1)))
+#define CALL_parser___parser_prod___AType___empty_init(recv) ((parser___parser_prod___AType___empty_init_t)CALL((recv), (SFT_parser___parser_prod[51] + 0)))
+#define CALL_parser___parser_prod___AType___init_atype(recv) ((parser___parser_prod___AType___init_atype_t)CALL((recv), (SFT_parser___parser_prod[51] + 1)))
+#define CALL_parser___parser_prod___ALabel___empty_init(recv) ((parser___parser_prod___ALabel___empty_init_t)CALL((recv), (SFT_parser___parser_prod[52] + 0)))
+#define CALL_parser___parser_prod___ALabel___init_alabel(recv) ((parser___parser_prod___ALabel___init_alabel_t)CALL((recv), (SFT_parser___parser_prod[52] + 1)))
+#define CALL_parser___parser_prod___ABlockExpr___empty_init(recv) ((parser___parser_prod___ABlockExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[53] + 0)))
+#define CALL_parser___parser_prod___ABlockExpr___init_ablockexpr(recv) ((parser___parser_prod___ABlockExpr___init_ablockexpr_t)CALL((recv), (SFT_parser___parser_prod[53] + 1)))
+#define CALL_parser___parser_prod___AVardeclExpr___empty_init(recv) ((parser___parser_prod___AVardeclExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[54] + 0)))
+#define CALL_parser___parser_prod___AVardeclExpr___init_avardeclexpr(recv) ((parser___parser_prod___AVardeclExpr___init_avardeclexpr_t)CALL((recv), (SFT_parser___parser_prod[54] + 1)))
+#define CALL_parser___parser_prod___AReturnExpr___empty_init(recv) ((parser___parser_prod___AReturnExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[55] + 0)))
+#define CALL_parser___parser_prod___AReturnExpr___init_areturnexpr(recv) ((parser___parser_prod___AReturnExpr___init_areturnexpr_t)CALL((recv), (SFT_parser___parser_prod[55] + 1)))
+#define CALL_parser___parser_prod___ABreakExpr___empty_init(recv) ((parser___parser_prod___ABreakExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[56] + 0)))
+#define CALL_parser___parser_prod___ABreakExpr___init_abreakexpr(recv) ((parser___parser_prod___ABreakExpr___init_abreakexpr_t)CALL((recv), (SFT_parser___parser_prod[56] + 1)))
+#define CALL_parser___parser_prod___AAbortExpr___empty_init(recv) ((parser___parser_prod___AAbortExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[57] + 0)))
+#define CALL_parser___parser_prod___AAbortExpr___init_aabortexpr(recv) ((parser___parser_prod___AAbortExpr___init_aabortexpr_t)CALL((recv), (SFT_parser___parser_prod[57] + 1)))
+#define CALL_parser___parser_prod___AContinueExpr___empty_init(recv) ((parser___parser_prod___AContinueExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[58] + 0)))
+#define CALL_parser___parser_prod___AContinueExpr___init_acontinueexpr(recv) ((parser___parser_prod___AContinueExpr___init_acontinueexpr_t)CALL((recv), (SFT_parser___parser_prod[58] + 1)))
+#define CALL_parser___parser_prod___ADoExpr___empty_init(recv) ((parser___parser_prod___ADoExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[59] + 0)))
+#define CALL_parser___parser_prod___ADoExpr___init_adoexpr(recv) ((parser___parser_prod___ADoExpr___init_adoexpr_t)CALL((recv), (SFT_parser___parser_prod[59] + 1)))
+#define CALL_parser___parser_prod___AIfExpr___empty_init(recv) ((parser___parser_prod___AIfExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[60] + 0)))
+#define CALL_parser___parser_prod___AIfExpr___init_aifexpr(recv) ((parser___parser_prod___AIfExpr___init_aifexpr_t)CALL((recv), (SFT_parser___parser_prod[60] + 1)))
+#define CALL_parser___parser_prod___AIfexprExpr___empty_init(recv) ((parser___parser_prod___AIfexprExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[61] + 0)))
+#define CALL_parser___parser_prod___AIfexprExpr___init_aifexprexpr(recv) ((parser___parser_prod___AIfexprExpr___init_aifexprexpr_t)CALL((recv), (SFT_parser___parser_prod[61] + 1)))
+#define CALL_parser___parser_prod___AWhileExpr___empty_init(recv) ((parser___parser_prod___AWhileExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[62] + 0)))
+#define CALL_parser___parser_prod___AWhileExpr___init_awhileexpr(recv) ((parser___parser_prod___AWhileExpr___init_awhileexpr_t)CALL((recv), (SFT_parser___parser_prod[62] + 1)))
+#define CALL_parser___parser_prod___ALoopExpr___empty_init(recv) ((parser___parser_prod___ALoopExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[63] + 0)))
+#define CALL_parser___parser_prod___ALoopExpr___init_aloopexpr(recv) ((parser___parser_prod___ALoopExpr___init_aloopexpr_t)CALL((recv), (SFT_parser___parser_prod[63] + 1)))
+#define CALL_parser___parser_prod___AForExpr___empty_init(recv) ((parser___parser_prod___AForExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[64] + 0)))
+#define CALL_parser___parser_prod___AForExpr___init_aforexpr(recv) ((parser___parser_prod___AForExpr___init_aforexpr_t)CALL((recv), (SFT_parser___parser_prod[64] + 1)))
+#define CALL_parser___parser_prod___AAssertExpr___empty_init(recv) ((parser___parser_prod___AAssertExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[65] + 0)))
+#define CALL_parser___parser_prod___AAssertExpr___init_aassertexpr(recv) ((parser___parser_prod___AAssertExpr___init_aassertexpr_t)CALL((recv), (SFT_parser___parser_prod[65] + 1)))
+#define CALL_parser___parser_prod___AOnceExpr___empty_init(recv) ((parser___parser_prod___AOnceExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[66] + 0)))
+#define CALL_parser___parser_prod___AOnceExpr___init_aonceexpr(recv) ((parser___parser_prod___AOnceExpr___init_aonceexpr_t)CALL((recv), (SFT_parser___parser_prod[66] + 1)))
+#define CALL_parser___parser_prod___ASendExpr___empty_init(recv) ((parser___parser_prod___ASendExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[67] + 0)))
+#define CALL_parser___parser_prod___ASendExpr___init_asendexpr(recv) ((parser___parser_prod___ASendExpr___init_asendexpr_t)CALL((recv), (SFT_parser___parser_prod[67] + 1)))
+#define CALL_parser___parser_prod___ABinopExpr___empty_init(recv) ((parser___parser_prod___ABinopExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[68] + 0)))
+#define CALL_parser___parser_prod___ABinopExpr___init_abinopexpr(recv) ((parser___parser_prod___ABinopExpr___init_abinopexpr_t)CALL((recv), (SFT_parser___parser_prod[68] + 1)))
+#define CALL_parser___parser_prod___AOrExpr___empty_init(recv) ((parser___parser_prod___AOrExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[69] + 0)))
+#define CALL_parser___parser_prod___AOrExpr___init_aorexpr(recv) ((parser___parser_prod___AOrExpr___init_aorexpr_t)CALL((recv), (SFT_parser___parser_prod[69] + 1)))
+#define CALL_parser___parser_prod___AAndExpr___empty_init(recv) ((parser___parser_prod___AAndExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[70] + 0)))
+#define CALL_parser___parser_prod___AAndExpr___init_aandexpr(recv) ((parser___parser_prod___AAndExpr___init_aandexpr_t)CALL((recv), (SFT_parser___parser_prod[70] + 1)))
+#define CALL_parser___parser_prod___AOrElseExpr___empty_init(recv) ((parser___parser_prod___AOrElseExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[71] + 0)))
+#define CALL_parser___parser_prod___AOrElseExpr___init_aorelseexpr(recv) ((parser___parser_prod___AOrElseExpr___init_aorelseexpr_t)CALL((recv), (SFT_parser___parser_prod[71] + 1)))
+#define CALL_parser___parser_prod___ANotExpr___empty_init(recv) ((parser___parser_prod___ANotExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[72] + 0)))
+#define CALL_parser___parser_prod___ANotExpr___init_anotexpr(recv) ((parser___parser_prod___ANotExpr___init_anotexpr_t)CALL((recv), (SFT_parser___parser_prod[72] + 1)))
+#define CALL_parser___parser_prod___AEqExpr___empty_init(recv) ((parser___parser_prod___AEqExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[73] + 0)))
+#define CALL_parser___parser_prod___AEqExpr___init_aeqexpr(recv) ((parser___parser_prod___AEqExpr___init_aeqexpr_t)CALL((recv), (SFT_parser___parser_prod[73] + 1)))
+#define CALL_parser___parser_prod___AEeExpr___empty_init(recv) ((parser___parser_prod___AEeExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[74] + 0)))
+#define CALL_parser___parser_prod___AEeExpr___init_aeeexpr(recv) ((parser___parser_prod___AEeExpr___init_aeeexpr_t)CALL((recv), (SFT_parser___parser_prod[74] + 1)))
+#define CALL_parser___parser_prod___ANeExpr___empty_init(recv) ((parser___parser_prod___ANeExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[75] + 0)))
+#define CALL_parser___parser_prod___ANeExpr___init_aneexpr(recv) ((parser___parser_prod___ANeExpr___init_aneexpr_t)CALL((recv), (SFT_parser___parser_prod[75] + 1)))
+#define CALL_parser___parser_prod___ALtExpr___empty_init(recv) ((parser___parser_prod___ALtExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[76] + 0)))
+#define CALL_parser___parser_prod___ALtExpr___init_altexpr(recv) ((parser___parser_prod___ALtExpr___init_altexpr_t)CALL((recv), (SFT_parser___parser_prod[76] + 1)))
+#define CALL_parser___parser_prod___ALeExpr___empty_init(recv) ((parser___parser_prod___ALeExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[77] + 0)))
+#define CALL_parser___parser_prod___ALeExpr___init_aleexpr(recv) ((parser___parser_prod___ALeExpr___init_aleexpr_t)CALL((recv), (SFT_parser___parser_prod[77] + 1)))
+#define CALL_parser___parser_prod___ALlExpr___empty_init(recv) ((parser___parser_prod___ALlExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[78] + 0)))
+#define CALL_parser___parser_prod___ALlExpr___init_allexpr(recv) ((parser___parser_prod___ALlExpr___init_allexpr_t)CALL((recv), (SFT_parser___parser_prod[78] + 1)))
+#define CALL_parser___parser_prod___AGtExpr___empty_init(recv) ((parser___parser_prod___AGtExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[79] + 0)))
+#define CALL_parser___parser_prod___AGtExpr___init_agtexpr(recv) ((parser___parser_prod___AGtExpr___init_agtexpr_t)CALL((recv), (SFT_parser___parser_prod[79] + 1)))
+#define CALL_parser___parser_prod___AGeExpr___empty_init(recv) ((parser___parser_prod___AGeExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[80] + 0)))
+#define CALL_parser___parser_prod___AGeExpr___init_ageexpr(recv) ((parser___parser_prod___AGeExpr___init_ageexpr_t)CALL((recv), (SFT_parser___parser_prod[80] + 1)))
+#define CALL_parser___parser_prod___AGgExpr___empty_init(recv) ((parser___parser_prod___AGgExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[81] + 0)))
+#define CALL_parser___parser_prod___AGgExpr___init_aggexpr(recv) ((parser___parser_prod___AGgExpr___init_aggexpr_t)CALL((recv), (SFT_parser___parser_prod[81] + 1)))
+#define CALL_parser___parser_prod___AIsaExpr___empty_init(recv) ((parser___parser_prod___AIsaExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[82] + 0)))
+#define CALL_parser___parser_prod___AIsaExpr___init_aisaexpr(recv) ((parser___parser_prod___AIsaExpr___init_aisaexpr_t)CALL((recv), (SFT_parser___parser_prod[82] + 1)))
+#define CALL_parser___parser_prod___APlusExpr___empty_init(recv) ((parser___parser_prod___APlusExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[83] + 0)))
+#define CALL_parser___parser_prod___APlusExpr___init_aplusexpr(recv) ((parser___parser_prod___APlusExpr___init_aplusexpr_t)CALL((recv), (SFT_parser___parser_prod[83] + 1)))
+#define CALL_parser___parser_prod___AMinusExpr___empty_init(recv) ((parser___parser_prod___AMinusExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[84] + 0)))
+#define CALL_parser___parser_prod___AMinusExpr___init_aminusexpr(recv) ((parser___parser_prod___AMinusExpr___init_aminusexpr_t)CALL((recv), (SFT_parser___parser_prod[84] + 1)))
+#define CALL_parser___parser_prod___AStarshipExpr___empty_init(recv) ((parser___parser_prod___AStarshipExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[85] + 0)))
+#define CALL_parser___parser_prod___AStarshipExpr___init_astarshipexpr(recv) ((parser___parser_prod___AStarshipExpr___init_astarshipexpr_t)CALL((recv), (SFT_parser___parser_prod[85] + 1)))
+#define CALL_parser___parser_prod___AStarExpr___empty_init(recv) ((parser___parser_prod___AStarExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[86] + 0)))
+#define CALL_parser___parser_prod___AStarExpr___init_astarexpr(recv) ((parser___parser_prod___AStarExpr___init_astarexpr_t)CALL((recv), (SFT_parser___parser_prod[86] + 1)))
+#define CALL_parser___parser_prod___ASlashExpr___empty_init(recv) ((parser___parser_prod___ASlashExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[87] + 0)))
+#define CALL_parser___parser_prod___ASlashExpr___init_aslashexpr(recv) ((parser___parser_prod___ASlashExpr___init_aslashexpr_t)CALL((recv), (SFT_parser___parser_prod[87] + 1)))
+#define CALL_parser___parser_prod___APercentExpr___empty_init(recv) ((parser___parser_prod___APercentExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[88] + 0)))
+#define CALL_parser___parser_prod___APercentExpr___init_apercentexpr(recv) ((parser___parser_prod___APercentExpr___init_apercentexpr_t)CALL((recv), (SFT_parser___parser_prod[88] + 1)))
+#define CALL_parser___parser_prod___AUminusExpr___empty_init(recv) ((parser___parser_prod___AUminusExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[89] + 0)))
+#define CALL_parser___parser_prod___AUminusExpr___init_auminusexpr(recv) ((parser___parser_prod___AUminusExpr___init_auminusexpr_t)CALL((recv), (SFT_parser___parser_prod[89] + 1)))
+#define CALL_parser___parser_prod___ANewExpr___empty_init(recv) ((parser___parser_prod___ANewExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[90] + 0)))
+#define CALL_parser___parser_prod___ANewExpr___init_anewexpr(recv) ((parser___parser_prod___ANewExpr___init_anewexpr_t)CALL((recv), (SFT_parser___parser_prod[90] + 1)))
+#define CALL_parser___parser_prod___AAttrExpr___empty_init(recv) ((parser___parser_prod___AAttrExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[91] + 0)))
+#define CALL_parser___parser_prod___AAttrExpr___init_aattrexpr(recv) ((parser___parser_prod___AAttrExpr___init_aattrexpr_t)CALL((recv), (SFT_parser___parser_prod[91] + 1)))
+#define CALL_parser___parser_prod___AAttrAssignExpr___empty_init(recv) ((parser___parser_prod___AAttrAssignExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[92] + 0)))
+#define CALL_parser___parser_prod___AAttrAssignExpr___init_aattrassignexpr(recv) ((parser___parser_prod___AAttrAssignExpr___init_aattrassignexpr_t)CALL((recv), (SFT_parser___parser_prod[92] + 1)))
+#define CALL_parser___parser_prod___AAttrReassignExpr___empty_init(recv) ((parser___parser_prod___AAttrReassignExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[93] + 0)))
+#define CALL_parser___parser_prod___AAttrReassignExpr___init_aattrreassignexpr(recv) ((parser___parser_prod___AAttrReassignExpr___init_aattrreassignexpr_t)CALL((recv), (SFT_parser___parser_prod[93] + 1)))
+#define CALL_parser___parser_prod___ACallExpr___empty_init(recv) ((parser___parser_prod___ACallExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[94] + 0)))
+#define CALL_parser___parser_prod___ACallExpr___init_acallexpr(recv) ((parser___parser_prod___ACallExpr___init_acallexpr_t)CALL((recv), (SFT_parser___parser_prod[94] + 1)))
+#define CALL_parser___parser_prod___ACallAssignExpr___empty_init(recv) ((parser___parser_prod___ACallAssignExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[95] + 0)))
+#define CALL_parser___parser_prod___ACallAssignExpr___init_acallassignexpr(recv) ((parser___parser_prod___ACallAssignExpr___init_acallassignexpr_t)CALL((recv), (SFT_parser___parser_prod[95] + 1)))
+#define CALL_parser___parser_prod___ACallReassignExpr___empty_init(recv) ((parser___parser_prod___ACallReassignExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[96] + 0)))
+#define CALL_parser___parser_prod___ACallReassignExpr___init_acallreassignexpr(recv) ((parser___parser_prod___ACallReassignExpr___init_acallreassignexpr_t)CALL((recv), (SFT_parser___parser_prod[96] + 1)))
+#define CALL_parser___parser_prod___ASuperExpr___empty_init(recv) ((parser___parser_prod___ASuperExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[97] + 0)))
+#define CALL_parser___parser_prod___ASuperExpr___init_asuperexpr(recv) ((parser___parser_prod___ASuperExpr___init_asuperexpr_t)CALL((recv), (SFT_parser___parser_prod[97] + 1)))
+#define CALL_parser___parser_prod___AInitExpr___empty_init(recv) ((parser___parser_prod___AInitExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[98] + 0)))
+#define CALL_parser___parser_prod___AInitExpr___init_ainitexpr(recv) ((parser___parser_prod___AInitExpr___init_ainitexpr_t)CALL((recv), (SFT_parser___parser_prod[98] + 1)))
+#define CALL_parser___parser_prod___ABraExpr___empty_init(recv) ((parser___parser_prod___ABraExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[99] + 0)))
+#define CALL_parser___parser_prod___ABraExpr___init_abraexpr(recv) ((parser___parser_prod___ABraExpr___init_abraexpr_t)CALL((recv), (SFT_parser___parser_prod[99] + 1)))
+#define CALL_parser___parser_prod___ABraAssignExpr___empty_init(recv) ((parser___parser_prod___ABraAssignExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[100] + 0)))
+#define CALL_parser___parser_prod___ABraAssignExpr___init_abraassignexpr(recv) ((parser___parser_prod___ABraAssignExpr___init_abraassignexpr_t)CALL((recv), (SFT_parser___parser_prod[100] + 1)))
+#define CALL_parser___parser_prod___ABraReassignExpr___empty_init(recv) ((parser___parser_prod___ABraReassignExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[101] + 0)))
+#define CALL_parser___parser_prod___ABraReassignExpr___init_abrareassignexpr(recv) ((parser___parser_prod___ABraReassignExpr___init_abrareassignexpr_t)CALL((recv), (SFT_parser___parser_prod[101] + 1)))
+#define CALL_parser___parser_prod___AClosureCallExpr___empty_init(recv) ((parser___parser_prod___AClosureCallExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[102] + 0)))
+#define CALL_parser___parser_prod___AClosureCallExpr___init_aclosurecallexpr(recv) ((parser___parser_prod___AClosureCallExpr___init_aclosurecallexpr_t)CALL((recv), (SFT_parser___parser_prod[102] + 1)))
+#define CALL_parser___parser_prod___AVarExpr___empty_init(recv) ((parser___parser_prod___AVarExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[103] + 0)))
+#define CALL_parser___parser_prod___AVarExpr___init_avarexpr(recv) ((parser___parser_prod___AVarExpr___init_avarexpr_t)CALL((recv), (SFT_parser___parser_prod[103] + 1)))
+#define CALL_parser___parser_prod___AVarAssignExpr___empty_init(recv) ((parser___parser_prod___AVarAssignExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[104] + 0)))
+#define CALL_parser___parser_prod___AVarAssignExpr___init_avarassignexpr(recv) ((parser___parser_prod___AVarAssignExpr___init_avarassignexpr_t)CALL((recv), (SFT_parser___parser_prod[104] + 1)))
+#define CALL_parser___parser_prod___AVarReassignExpr___empty_init(recv) ((parser___parser_prod___AVarReassignExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[105] + 0)))
+#define CALL_parser___parser_prod___AVarReassignExpr___init_avarreassignexpr(recv) ((parser___parser_prod___AVarReassignExpr___init_avarreassignexpr_t)CALL((recv), (SFT_parser___parser_prod[105] + 1)))
+#define CALL_parser___parser_prod___ARangeExpr___empty_init(recv) ((parser___parser_prod___ARangeExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[106] + 0)))
+#define CALL_parser___parser_prod___ARangeExpr___init_arangeexpr(recv) ((parser___parser_prod___ARangeExpr___init_arangeexpr_t)CALL((recv), (SFT_parser___parser_prod[106] + 1)))
+#define CALL_parser___parser_prod___ACrangeExpr___empty_init(recv) ((parser___parser_prod___ACrangeExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[107] + 0)))
+#define CALL_parser___parser_prod___ACrangeExpr___init_acrangeexpr(recv) ((parser___parser_prod___ACrangeExpr___init_acrangeexpr_t)CALL((recv), (SFT_parser___parser_prod[107] + 1)))
+#define CALL_parser___parser_prod___AOrangeExpr___empty_init(recv) ((parser___parser_prod___AOrangeExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[108] + 0)))
+#define CALL_parser___parser_prod___AOrangeExpr___init_aorangeexpr(recv) ((parser___parser_prod___AOrangeExpr___init_aorangeexpr_t)CALL((recv), (SFT_parser___parser_prod[108] + 1)))
+#define CALL_parser___parser_prod___AArrayExpr___empty_init(recv) ((parser___parser_prod___AArrayExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[109] + 0)))
+#define CALL_parser___parser_prod___AArrayExpr___init_aarrayexpr(recv) ((parser___parser_prod___AArrayExpr___init_aarrayexpr_t)CALL((recv), (SFT_parser___parser_prod[109] + 1)))
+#define CALL_parser___parser_prod___ASelfExpr___empty_init(recv) ((parser___parser_prod___ASelfExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[110] + 0)))
+#define CALL_parser___parser_prod___ASelfExpr___init_aselfexpr(recv) ((parser___parser_prod___ASelfExpr___init_aselfexpr_t)CALL((recv), (SFT_parser___parser_prod[110] + 1)))
+#define CALL_parser___parser_prod___AImplicitSelfExpr___empty_init(recv) ((parser___parser_prod___AImplicitSelfExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[111] + 0)))
+#define CALL_parser___parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr(recv) ((parser___parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr_t)CALL((recv), (SFT_parser___parser_prod[111] + 1)))
+#define CALL_parser___parser_prod___ATrueExpr___empty_init(recv) ((parser___parser_prod___ATrueExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[112] + 0)))
+#define CALL_parser___parser_prod___ATrueExpr___init_atrueexpr(recv) ((parser___parser_prod___ATrueExpr___init_atrueexpr_t)CALL((recv), (SFT_parser___parser_prod[112] + 1)))
+#define CALL_parser___parser_prod___AFalseExpr___empty_init(recv) ((parser___parser_prod___AFalseExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[113] + 0)))
+#define CALL_parser___parser_prod___AFalseExpr___init_afalseexpr(recv) ((parser___parser_prod___AFalseExpr___init_afalseexpr_t)CALL((recv), (SFT_parser___parser_prod[113] + 1)))
+#define CALL_parser___parser_prod___ANullExpr___empty_init(recv) ((parser___parser_prod___ANullExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[114] + 0)))
+#define CALL_parser___parser_prod___ANullExpr___init_anullexpr(recv) ((parser___parser_prod___ANullExpr___init_anullexpr_t)CALL((recv), (SFT_parser___parser_prod[114] + 1)))
+#define CALL_parser___parser_prod___AIntExpr___empty_init(recv) ((parser___parser_prod___AIntExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[115] + 0)))
+#define CALL_parser___parser_prod___AIntExpr___init_aintexpr(recv) ((parser___parser_prod___AIntExpr___init_aintexpr_t)CALL((recv), (SFT_parser___parser_prod[115] + 1)))
+#define CALL_parser___parser_prod___AFloatExpr___empty_init(recv) ((parser___parser_prod___AFloatExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[116] + 0)))
+#define CALL_parser___parser_prod___AFloatExpr___init_afloatexpr(recv) ((parser___parser_prod___AFloatExpr___init_afloatexpr_t)CALL((recv), (SFT_parser___parser_prod[116] + 1)))
+#define CALL_parser___parser_prod___ACharExpr___empty_init(recv) ((parser___parser_prod___ACharExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[117] + 0)))
+#define CALL_parser___parser_prod___ACharExpr___init_acharexpr(recv) ((parser___parser_prod___ACharExpr___init_acharexpr_t)CALL((recv), (SFT_parser___parser_prod[117] + 1)))
+#define CALL_parser___parser_prod___AStringExpr___empty_init(recv) ((parser___parser_prod___AStringExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[118] + 0)))
+#define CALL_parser___parser_prod___AStringExpr___init_astringexpr(recv) ((parser___parser_prod___AStringExpr___init_astringexpr_t)CALL((recv), (SFT_parser___parser_prod[118] + 1)))
+#define CALL_parser___parser_prod___AStartStringExpr___empty_init(recv) ((parser___parser_prod___AStartStringExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[119] + 0)))
+#define CALL_parser___parser_prod___AStartStringExpr___init_astartstringexpr(recv) ((parser___parser_prod___AStartStringExpr___init_astartstringexpr_t)CALL((recv), (SFT_parser___parser_prod[119] + 1)))
+#define CALL_parser___parser_prod___AMidStringExpr___empty_init(recv) ((parser___parser_prod___AMidStringExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[120] + 0)))
+#define CALL_parser___parser_prod___AMidStringExpr___init_amidstringexpr(recv) ((parser___parser_prod___AMidStringExpr___init_amidstringexpr_t)CALL((recv), (SFT_parser___parser_prod[120] + 1)))
+#define CALL_parser___parser_prod___AEndStringExpr___empty_init(recv) ((parser___parser_prod___AEndStringExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[121] + 0)))
+#define CALL_parser___parser_prod___AEndStringExpr___init_aendstringexpr(recv) ((parser___parser_prod___AEndStringExpr___init_aendstringexpr_t)CALL((recv), (SFT_parser___parser_prod[121] + 1)))
+#define CALL_parser___parser_prod___ASuperstringExpr___empty_init(recv) ((parser___parser_prod___ASuperstringExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[122] + 0)))
+#define CALL_parser___parser_prod___ASuperstringExpr___init_asuperstringexpr(recv) ((parser___parser_prod___ASuperstringExpr___init_asuperstringexpr_t)CALL((recv), (SFT_parser___parser_prod[122] + 1)))
+#define CALL_parser___parser_prod___AParExpr___empty_init(recv) ((parser___parser_prod___AParExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[123] + 0)))
+#define CALL_parser___parser_prod___AParExpr___init_aparexpr(recv) ((parser___parser_prod___AParExpr___init_aparexpr_t)CALL((recv), (SFT_parser___parser_prod[123] + 1)))
+#define CALL_parser___parser_prod___AAsCastExpr___empty_init(recv) ((parser___parser_prod___AAsCastExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[124] + 0)))
+#define CALL_parser___parser_prod___AAsCastExpr___init_aascastexpr(recv) ((parser___parser_prod___AAsCastExpr___init_aascastexpr_t)CALL((recv), (SFT_parser___parser_prod[124] + 1)))
+#define CALL_parser___parser_prod___AAsNotnullExpr___empty_init(recv) ((parser___parser_prod___AAsNotnullExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[125] + 0)))
+#define CALL_parser___parser_prod___AAsNotnullExpr___init_aasnotnullexpr(recv) ((parser___parser_prod___AAsNotnullExpr___init_aasnotnullexpr_t)CALL((recv), (SFT_parser___parser_prod[125] + 1)))
+#define CALL_parser___parser_prod___AIssetAttrExpr___empty_init(recv) ((parser___parser_prod___AIssetAttrExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[126] + 0)))
+#define CALL_parser___parser_prod___AIssetAttrExpr___init_aissetattrexpr(recv) ((parser___parser_prod___AIssetAttrExpr___init_aissetattrexpr_t)CALL((recv), (SFT_parser___parser_prod[126] + 1)))
+#define CALL_parser___parser_prod___ADebugTypeExpr___empty_init(recv) ((parser___parser_prod___ADebugTypeExpr___empty_init_t)CALL((recv), (SFT_parser___parser_prod[127] + 0)))
+#define CALL_parser___parser_prod___ADebugTypeExpr___init_adebugtypeexpr(recv) ((parser___parser_prod___ADebugTypeExpr___init_adebugtypeexpr_t)CALL((recv), (SFT_parser___parser_prod[127] + 1)))
+#define CALL_parser___parser_prod___AListExprs___empty_init(recv) ((parser___parser_prod___AListExprs___empty_init_t)CALL((recv), (SFT_parser___parser_prod[128] + 0)))
+#define CALL_parser___parser_prod___AListExprs___init_alistexprs(recv) ((parser___parser_prod___AListExprs___init_alistexprs_t)CALL((recv), (SFT_parser___parser_prod[128] + 1)))
+#define CALL_parser___parser_prod___AParExprs___empty_init(recv) ((parser___parser_prod___AParExprs___empty_init_t)CALL((recv), (SFT_parser___parser_prod[129] + 0)))
+#define CALL_parser___parser_prod___AParExprs___init_aparexprs(recv) ((parser___parser_prod___AParExprs___init_aparexprs_t)CALL((recv), (SFT_parser___parser_prod[129] + 1)))
+#define CALL_parser___parser_prod___ABraExprs___empty_init(recv) ((parser___parser_prod___ABraExprs___empty_init_t)CALL((recv), (SFT_parser___parser_prod[130] + 0)))
+#define CALL_parser___parser_prod___ABraExprs___init_abraexprs(recv) ((parser___parser_prod___ABraExprs___init_abraexprs_t)CALL((recv), (SFT_parser___parser_prod[130] + 1)))
+#define CALL_parser___parser_prod___APlusAssignOp___empty_init(recv) ((parser___parser_prod___APlusAssignOp___empty_init_t)CALL((recv), (SFT_parser___parser_prod[131] + 0)))
+#define CALL_parser___parser_prod___APlusAssignOp___init_aplusassignop(recv) ((parser___parser_prod___APlusAssignOp___init_aplusassignop_t)CALL((recv), (SFT_parser___parser_prod[131] + 1)))
+#define CALL_parser___parser_prod___AMinusAssignOp___empty_init(recv) ((parser___parser_prod___AMinusAssignOp___empty_init_t)CALL((recv), (SFT_parser___parser_prod[132] + 0)))
+#define CALL_parser___parser_prod___AMinusAssignOp___init_aminusassignop(recv) ((parser___parser_prod___AMinusAssignOp___init_aminusassignop_t)CALL((recv), (SFT_parser___parser_prod[132] + 1)))
+#define CALL_parser___parser_prod___AClosureDef___empty_init(recv) ((parser___parser_prod___AClosureDef___empty_init_t)CALL((recv), (SFT_parser___parser_prod[133] + 0)))
+#define CALL_parser___parser_prod___AClosureDef___init_aclosuredef(recv) ((parser___parser_prod___AClosureDef___init_aclosuredef_t)CALL((recv), (SFT_parser___parser_prod[133] + 1)))
+#define CALL_parser___parser_prod___ASimpleClosureId___empty_init(recv) ((parser___parser_prod___ASimpleClosureId___empty_init_t)CALL((recv), (SFT_parser___parser_prod[134] + 0)))
+#define CALL_parser___parser_prod___ASimpleClosureId___init_asimpleclosureid(recv) ((parser___parser_prod___ASimpleClosureId___init_asimpleclosureid_t)CALL((recv), (SFT_parser___parser_prod[134] + 1)))
+#define CALL_parser___parser_prod___ABreakClosureId___empty_init(recv) ((parser___parser_prod___ABreakClosureId___empty_init_t)CALL((recv), (SFT_parser___parser_prod[135] + 0)))
+#define CALL_parser___parser_prod___ABreakClosureId___init_abreakclosureid(recv) ((parser___parser_prod___ABreakClosureId___init_abreakclosureid_t)CALL((recv), (SFT_parser___parser_prod[135] + 1)))
+#define CALL_parser___parser_prod___AModuleName___empty_init(recv) ((parser___parser_prod___AModuleName___empty_init_t)CALL((recv), (SFT_parser___parser_prod[136] + 0)))
+#define CALL_parser___parser_prod___AModuleName___init_amodulename(recv) ((parser___parser_prod___AModuleName___init_amodulename_t)CALL((recv), (SFT_parser___parser_prod[136] + 1)))
+#define CALL_parser___parser_prod___AExternCalls___empty_init(recv) ((parser___parser_prod___AExternCalls___empty_init_t)CALL((recv), (SFT_parser___parser_prod[137] + 0)))
+#define CALL_parser___parser_prod___AExternCalls___init_aexterncalls(recv) ((parser___parser_prod___AExternCalls___init_aexterncalls_t)CALL((recv), (SFT_parser___parser_prod[137] + 1)))
+#define CALL_parser___parser_prod___AExternCall___empty_init(recv) ((parser___parser_prod___AExternCall___empty_init_t)CALL((recv), (SFT_parser___parser_prod[138] + 0)))
+#define CALL_parser___parser_prod___AExternCall___init_aexterncall(recv) ((parser___parser_prod___AExternCall___init_aexterncall_t)CALL((recv), (SFT_parser___parser_prod[138] + 1)))
+#define CALL_parser___parser_prod___ASuperExternCall___empty_init(recv) ((parser___parser_prod___ASuperExternCall___empty_init_t)CALL((recv), (SFT_parser___parser_prod[139] + 0)))
+#define CALL_parser___parser_prod___ASuperExternCall___init_asuperexterncall(recv) ((parser___parser_prod___ASuperExternCall___init_asuperexterncall_t)CALL((recv), (SFT_parser___parser_prod[139] + 1)))
+#define CALL_parser___parser_prod___ALocalPropExternCall___empty_init(recv) ((parser___parser_prod___ALocalPropExternCall___empty_init_t)CALL((recv), (SFT_parser___parser_prod[140] + 0)))
+#define CALL_parser___parser_prod___ALocalPropExternCall___init_alocalpropexterncall(recv) ((parser___parser_prod___ALocalPropExternCall___init_alocalpropexterncall_t)CALL((recv), (SFT_parser___parser_prod[140] + 1)))
+#define CALL_parser___parser_prod___AFullPropExternCall___empty_init(recv) ((parser___parser_prod___AFullPropExternCall___empty_init_t)CALL((recv), (SFT_parser___parser_prod[141] + 0)))
+#define CALL_parser___parser_prod___AFullPropExternCall___init_afullpropexterncall(recv) ((parser___parser_prod___AFullPropExternCall___init_afullpropexterncall_t)CALL((recv), (SFT_parser___parser_prod[141] + 1)))
+#define CALL_parser___parser_prod___AInitPropExternCall___empty_init(recv) ((parser___parser_prod___AInitPropExternCall___empty_init_t)CALL((recv), (SFT_parser___parser_prod[142] + 0)))
+#define CALL_parser___parser_prod___AInitPropExternCall___init_ainitpropexterncall(recv) ((parser___parser_prod___AInitPropExternCall___init_ainitpropexterncall_t)CALL((recv), (SFT_parser___parser_prod[142] + 1)))
+#define CALL_parser___parser_prod___ACastAsExternCall___empty_init(recv) ((parser___parser_prod___ACastAsExternCall___empty_init_t)CALL((recv), (SFT_parser___parser_prod[143] + 0)))
+#define CALL_parser___parser_prod___ACastAsExternCall___init_acastasexterncall(recv) ((parser___parser_prod___ACastAsExternCall___init_acastasexterncall_t)CALL((recv), (SFT_parser___parser_prod[143] + 1)))
+#define CALL_parser___parser_prod___AAsNullableExternCall___empty_init(recv) ((parser___parser_prod___AAsNullableExternCall___empty_init_t)CALL((recv), (SFT_parser___parser_prod[144] + 0)))
+#define CALL_parser___parser_prod___AAsNullableExternCall___init_aasnullableexterncall(recv) ((parser___parser_prod___AAsNullableExternCall___init_aasnullableexterncall_t)CALL((recv), (SFT_parser___parser_prod[144] + 1)))
+#define CALL_parser___parser_prod___AAsNotNullableExternCall___empty_init(recv) ((parser___parser_prod___AAsNotNullableExternCall___empty_init_t)CALL((recv), (SFT_parser___parser_prod[145] + 0)))
+#define CALL_parser___parser_prod___AAsNotNullableExternCall___init_aasnotnullableexterncall(recv) ((parser___parser_prod___AAsNotNullableExternCall___init_aasnotnullableexterncall_t)CALL((recv), (SFT_parser___parser_prod[145] + 1)))
+#define CALL_parser___parser_prod___AInLanguage___empty_init(recv) ((parser___parser_prod___AInLanguage___empty_init_t)CALL((recv), (SFT_parser___parser_prod[146] + 0)))
+#define CALL_parser___parser_prod___AInLanguage___init_ainlanguage(recv) ((parser___parser_prod___AInLanguage___init_ainlanguage_t)CALL((recv), (SFT_parser___parser_prod[146] + 1)))
+#define CALL_parser___parser_prod___AExternCodeBlock___empty_init(recv) ((parser___parser_prod___AExternCodeBlock___empty_init_t)CALL((recv), (SFT_parser___parser_prod[147] + 0)))
+#define CALL_parser___parser_prod___AExternCodeBlock___init_aexterncodeblock(recv) ((parser___parser_prod___AExternCodeBlock___init_aexterncodeblock_t)CALL((recv), (SFT_parser___parser_prod[147] + 1)))
+#define CALL_parser___parser_prod___AQualified___empty_init(recv) ((parser___parser_prod___AQualified___empty_init_t)CALL((recv), (SFT_parser___parser_prod[148] + 0)))
+#define CALL_parser___parser_prod___AQualified___init_aqualified(recv) ((parser___parser_prod___AQualified___init_aqualified_t)CALL((recv), (SFT_parser___parser_prod[148] + 1)))
+#define CALL_parser___parser_prod___ADoc___empty_init(recv) ((parser___parser_prod___ADoc___empty_init_t)CALL((recv), (SFT_parser___parser_prod[149] + 0)))
+#define CALL_parser___parser_prod___ADoc___init_adoc(recv) ((parser___parser_prod___ADoc___init_adoc_t)CALL((recv), (SFT_parser___parser_prod[149] + 1)))
+#define CALL_parser___parser_prod___AAnnotations___empty_init(recv) ((parser___parser_prod___AAnnotations___empty_init_t)CALL((recv), (SFT_parser___parser_prod[150] + 0)))
+#define CALL_parser___parser_prod___AAnnotations___init_aannotations(recv) ((parser___parser_prod___AAnnotations___init_aannotations_t)CALL((recv), (SFT_parser___parser_prod[150] + 1)))
+#define CALL_parser___parser_prod___AAnnotation___empty_init(recv) ((parser___parser_prod___AAnnotation___empty_init_t)CALL((recv), (SFT_parser___parser_prod[151] + 0)))
+#define CALL_parser___parser_prod___AAnnotation___init_aannotation(recv) ((parser___parser_prod___AAnnotation___init_aannotation_t)CALL((recv), (SFT_parser___parser_prod[151] + 1)))
+#define CALL_parser___parser_prod___ATypeAtArg___empty_init(recv) ((parser___parser_prod___ATypeAtArg___empty_init_t)CALL((recv), (SFT_parser___parser_prod[152] + 0)))
+#define CALL_parser___parser_prod___ATypeAtArg___init_atypeatarg(recv) ((parser___parser_prod___ATypeAtArg___init_atypeatarg_t)CALL((recv), (SFT_parser___parser_prod[152] + 1)))
+#define CALL_parser___parser_prod___AExprAtArg___empty_init(recv) ((parser___parser_prod___AExprAtArg___empty_init_t)CALL((recv), (SFT_parser___parser_prod[153] + 0)))
+#define CALL_parser___parser_prod___AExprAtArg___init_aexpratarg(recv) ((parser___parser_prod___AExprAtArg___init_aexpratarg_t)CALL((recv), (SFT_parser___parser_prod[153] + 1)))
+#define CALL_parser___parser_prod___AAtAtArg___empty_init(recv) ((parser___parser_prod___AAtAtArg___empty_init_t)CALL((recv), (SFT_parser___parser_prod[154] + 0)))
+#define CALL_parser___parser_prod___AAtAtArg___init_aatatarg(recv) ((parser___parser_prod___AAtAtArg___init_aatatarg_t)CALL((recv), (SFT_parser___parser_prod[154] + 1)))
+#define CALL_parser___parser_prod___AIdAtid___empty_init(recv) ((parser___parser_prod___AIdAtid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[155] + 0)))
+#define CALL_parser___parser_prod___AIdAtid___init_aidatid(recv) ((parser___parser_prod___AIdAtid___init_aidatid_t)CALL((recv), (SFT_parser___parser_prod[155] + 1)))
+#define CALL_parser___parser_prod___AKwexternAtid___empty_init(recv) ((parser___parser_prod___AKwexternAtid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[156] + 0)))
+#define CALL_parser___parser_prod___AKwexternAtid___init_akwexternatid(recv) ((parser___parser_prod___AKwexternAtid___init_akwexternatid_t)CALL((recv), (SFT_parser___parser_prod[156] + 1)))
+#define CALL_parser___parser_prod___AKwinternAtid___empty_init(recv) ((parser___parser_prod___AKwinternAtid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[157] + 0)))
+#define CALL_parser___parser_prod___AKwinternAtid___init_akwinternatid(recv) ((parser___parser_prod___AKwinternAtid___init_akwinternatid_t)CALL((recv), (SFT_parser___parser_prod[157] + 1)))
+#define CALL_parser___parser_prod___AKwreadableAtid___empty_init(recv) ((parser___parser_prod___AKwreadableAtid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[158] + 0)))
+#define CALL_parser___parser_prod___AKwreadableAtid___init_akwreadableatid(recv) ((parser___parser_prod___AKwreadableAtid___init_akwreadableatid_t)CALL((recv), (SFT_parser___parser_prod[158] + 1)))
+#define CALL_parser___parser_prod___AKwwritableAtid___empty_init(recv) ((parser___parser_prod___AKwwritableAtid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[159] + 0)))
+#define CALL_parser___parser_prod___AKwwritableAtid___init_akwwritableatid(recv) ((parser___parser_prod___AKwwritableAtid___init_akwwritableatid_t)CALL((recv), (SFT_parser___parser_prod[159] + 1)))
+#define CALL_parser___parser_prod___AKwimportAtid___empty_init(recv) ((parser___parser_prod___AKwimportAtid___empty_init_t)CALL((recv), (SFT_parser___parser_prod[160] + 0)))
+#define CALL_parser___parser_prod___AKwimportAtid___init_akwimportatid(recv) ((parser___parser_prod___AKwimportAtid___init_akwimportatid_t)CALL((recv), (SFT_parser___parser_prod[160] + 1)))
 void parser___parser_prod___AModule___empty_init(val_t p0, int* init_table);
 typedef void (*parser___parser_prod___AModule___empty_init_t)(val_t p0, int* init_table);
 val_t NEW_AModule_parser___parser_prod___AModule___empty_init();
@@ -392,6 +344,8 @@ typedef void (*parser___parser_prod___AModule___init_amodule_t)(val_t p0, val_t 
 val_t NEW_AModule_parser___parser_prod___AModule___init_amodule(val_t p0, val_t p1, val_t p2, val_t p3);
 void parser___parser_prod___AModule___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AModule___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AModule___n_moduledecl__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AModule___n_moduledecl__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AModule___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AModule___visit_all_t)(val_t p0, val_t p1);
   typedef void (*CLOS_OC_parser___parser_prod___AModule___visit_all_1_0)(struct stack_frame_t *);
@@ -412,6 +366,14 @@ typedef void (*parser___parser_prod___AModuledecl___init_amoduledecl_t)(val_t p0
 val_t NEW_AModuledecl_parser___parser_prod___AModuledecl___init_amoduledecl(val_t p0, val_t p1, val_t p2, val_t p3);
 void parser___parser_prod___AModuledecl___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AModuledecl___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AModuledecl___n_doc__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AModuledecl___n_doc__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AModuledecl___n_kwmodule__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AModuledecl___n_kwmodule__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AModuledecl___n_name__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AModuledecl___n_name__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AModuledecl___n_annotations__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AModuledecl___n_annotations__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AModuledecl___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AModuledecl___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AModuledecl_parser___parser_nodes___ANode___init();
@@ -423,6 +385,14 @@ typedef void (*parser___parser_prod___AStdImport___init_astdimport_t)(val_t p0, 
 val_t NEW_AStdImport_parser___parser_prod___AStdImport___init_astdimport(val_t p0, val_t p1, val_t p2, val_t p3);
 void parser___parser_prod___AStdImport___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AStdImport___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AStdImport___n_visibility__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AStdImport___n_visibility__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AStdImport___n_kwimport__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AStdImport___n_kwimport__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AStdImport___n_name__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AStdImport___n_name__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AStdImport___n_annotations__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AStdImport___n_annotations__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AStdImport___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AStdImport___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AStdImport_parser___parser_nodes___ANode___init();
@@ -434,6 +404,12 @@ typedef void (*parser___parser_prod___ANoImport___init_anoimport_t)(val_t p0, va
 val_t NEW_ANoImport_parser___parser_prod___ANoImport___init_anoimport(val_t p0, val_t p1, val_t p2);
 void parser___parser_prod___ANoImport___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ANoImport___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ANoImport___n_visibility__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ANoImport___n_visibility__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ANoImport___n_kwimport__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ANoImport___n_kwimport__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ANoImport___n_kwend__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ANoImport___n_kwend__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ANoImport___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ANoImport___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_ANoImport_parser___parser_nodes___ANode___init();
@@ -456,6 +432,8 @@ typedef void (*parser___parser_prod___APrivateVisibility___init_aprivatevisibili
 val_t NEW_APrivateVisibility_parser___parser_prod___APrivateVisibility___init_aprivatevisibility(val_t p0);
 void parser___parser_prod___APrivateVisibility___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___APrivateVisibility___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___APrivateVisibility___n_kwprivate__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___APrivateVisibility___n_kwprivate__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___APrivateVisibility___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___APrivateVisibility___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_APrivateVisibility_parser___parser_nodes___ANode___init();
@@ -467,6 +445,8 @@ typedef void (*parser___parser_prod___AProtectedVisibility___init_aprotectedvisi
 val_t NEW_AProtectedVisibility_parser___parser_prod___AProtectedVisibility___init_aprotectedvisibility(val_t p0);
 void parser___parser_prod___AProtectedVisibility___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AProtectedVisibility___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AProtectedVisibility___n_kwprotected__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AProtectedVisibility___n_kwprotected__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AProtectedVisibility___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AProtectedVisibility___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AProtectedVisibility_parser___parser_nodes___ANode___init();
@@ -478,6 +458,8 @@ typedef void (*parser___parser_prod___AIntrudeVisibility___init_aintrudevisibili
 val_t NEW_AIntrudeVisibility_parser___parser_prod___AIntrudeVisibility___init_aintrudevisibility(val_t p0);
 void parser___parser_prod___AIntrudeVisibility___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AIntrudeVisibility___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AIntrudeVisibility___n_kwintrude__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AIntrudeVisibility___n_kwintrude__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AIntrudeVisibility___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AIntrudeVisibility___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AIntrudeVisibility_parser___parser_nodes___ANode___init();
@@ -498,6 +480,22 @@ typedef void (*parser___parser_prod___AStdClassdef___init_astdclassdef_t)(val_t 
 val_t NEW_AStdClassdef_parser___parser_prod___AStdClassdef___init_astdclassdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6, val_t p7, val_t p8, val_t p9, val_t p10);
 void parser___parser_prod___AStdClassdef___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AStdClassdef___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AStdClassdef___n_doc__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AStdClassdef___n_doc__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AStdClassdef___n_kwredef__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AStdClassdef___n_kwredef__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AStdClassdef___n_visibility__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AStdClassdef___n_visibility__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AStdClassdef___n_classkind__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AStdClassdef___n_classkind__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AStdClassdef___n_id__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AStdClassdef___n_id__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AStdClassdef___n_annotations__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AStdClassdef___n_annotations__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AStdClassdef___n_extern_code_block__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AStdClassdef___n_extern_code_block__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AStdClassdef___n_kwend__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AStdClassdef___n_kwend__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AStdClassdef___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AStdClassdef___visit_all_t)(val_t p0, val_t p1);
   typedef void (*CLOS_OC_parser___parser_prod___AStdClassdef___visit_all_1_0)(struct stack_frame_t *);
@@ -552,6 +550,8 @@ typedef void (*parser___parser_prod___AConcreteClasskind___init_aconcreteclasski
 val_t NEW_AConcreteClasskind_parser___parser_prod___AConcreteClasskind___init_aconcreteclasskind(val_t p0);
 void parser___parser_prod___AConcreteClasskind___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AConcreteClasskind___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AConcreteClasskind___n_kwclass__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AConcreteClasskind___n_kwclass__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AConcreteClasskind___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AConcreteClasskind___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AConcreteClasskind_parser___parser_nodes___ANode___init();
@@ -563,6 +563,10 @@ typedef void (*parser___parser_prod___AAbstractClasskind___init_aabstractclasski
 val_t NEW_AAbstractClasskind_parser___parser_prod___AAbstractClasskind___init_aabstractclasskind(val_t p0, val_t p1);
 void parser___parser_prod___AAbstractClasskind___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AAbstractClasskind___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AAbstractClasskind___n_kwabstract__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAbstractClasskind___n_kwabstract__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AAbstractClasskind___n_kwclass__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAbstractClasskind___n_kwclass__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AAbstractClasskind___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AAbstractClasskind___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AAbstractClasskind_parser___parser_nodes___ANode___init();
@@ -574,6 +578,8 @@ typedef void (*parser___parser_prod___AInterfaceClasskind___init_ainterfaceclass
 val_t NEW_AInterfaceClasskind_parser___parser_prod___AInterfaceClasskind___init_ainterfaceclasskind(val_t p0);
 void parser___parser_prod___AInterfaceClasskind___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AInterfaceClasskind___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AInterfaceClasskind___n_kwinterface__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AInterfaceClasskind___n_kwinterface__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AInterfaceClasskind___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AInterfaceClasskind___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AInterfaceClasskind_parser___parser_nodes___ANode___init();
@@ -585,6 +591,8 @@ typedef void (*parser___parser_prod___AEnumClasskind___init_aenumclasskind_t)(va
 val_t NEW_AEnumClasskind_parser___parser_prod___AEnumClasskind___init_aenumclasskind(val_t p0);
 void parser___parser_prod___AEnumClasskind___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AEnumClasskind___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AEnumClasskind___n_kwenum__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AEnumClasskind___n_kwenum__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AEnumClasskind___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AEnumClasskind___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AEnumClasskind_parser___parser_nodes___ANode___init();
@@ -596,6 +604,10 @@ typedef void (*parser___parser_prod___AExternClasskind___init_aexternclasskind_t
 val_t NEW_AExternClasskind_parser___parser_prod___AExternClasskind___init_aexternclasskind(val_t p0, val_t p1);
 void parser___parser_prod___AExternClasskind___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AExternClasskind___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AExternClasskind___n_kwextern__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AExternClasskind___n_kwextern__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AExternClasskind___n_kwclass__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AExternClasskind___n_kwclass__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AExternClasskind___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AExternClasskind___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AExternClasskind_parser___parser_nodes___ANode___init();
@@ -607,6 +619,12 @@ typedef void (*parser___parser_prod___AFormaldef___init_aformaldef_t)(val_t p0, 
 val_t NEW_AFormaldef_parser___parser_prod___AFormaldef___init_aformaldef(val_t p0, val_t p1, val_t p2);
 void parser___parser_prod___AFormaldef___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AFormaldef___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AFormaldef___n_id__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AFormaldef___n_id__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AFormaldef___n_type__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AFormaldef___n_type__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AFormaldef___n_annotations__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AFormaldef___n_annotations__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AFormaldef___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AFormaldef___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AFormaldef_parser___parser_nodes___ANode___init();
@@ -618,6 +636,12 @@ typedef void (*parser___parser_prod___ASuperclass___init_asuperclass_t)(val_t p0
 val_t NEW_ASuperclass_parser___parser_prod___ASuperclass___init_asuperclass(val_t p0, val_t p1, val_t p2);
 void parser___parser_prod___ASuperclass___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ASuperclass___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ASuperclass___n_kwsuper__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ASuperclass___n_kwsuper__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ASuperclass___n_type__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ASuperclass___n_type__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ASuperclass___n_annotations__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ASuperclass___n_annotations__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ASuperclass___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ASuperclass___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_ASuperclass_parser___parser_nodes___ANode___init();
@@ -629,6 +653,28 @@ typedef void (*parser___parser_prod___AAttrPropdef___init_aattrpropdef_t)(val_t 
 val_t NEW_AAttrPropdef_parser___parser_prod___AAttrPropdef___init_aattrpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6, val_t p7, val_t p8, val_t p9, val_t p10);
 void parser___parser_prod___AAttrPropdef___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AAttrPropdef___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AAttrPropdef___n_doc__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAttrPropdef___n_doc__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AAttrPropdef___n_readable__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAttrPropdef___n_readable__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AAttrPropdef___n_writable__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAttrPropdef___n_writable__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AAttrPropdef___n_kwredef__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAttrPropdef___n_kwredef__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AAttrPropdef___n_visibility__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAttrPropdef___n_visibility__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AAttrPropdef___n_kwvar__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAttrPropdef___n_kwvar__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AAttrPropdef___n_id__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAttrPropdef___n_id__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AAttrPropdef___n_id2__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAttrPropdef___n_id2__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AAttrPropdef___n_type__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAttrPropdef___n_type__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AAttrPropdef___n_annotations__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAttrPropdef___n_annotations__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AAttrPropdef___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAttrPropdef___n_expr__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AAttrPropdef___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AAttrPropdef___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AAttrPropdef_parser___parser_nodes___ANode___init();
@@ -640,6 +686,16 @@ typedef void (*parser___parser_prod___AMethPropdef___init_amethpropdef_t)(val_t 
 val_t NEW_AMethPropdef_parser___parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
 void parser___parser_prod___AMethPropdef___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AMethPropdef___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AMethPropdef___n_doc__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AMethPropdef___n_doc__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AMethPropdef___n_kwredef__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AMethPropdef___n_kwredef__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AMethPropdef___n_visibility__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AMethPropdef___n_visibility__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AMethPropdef___n_methid__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AMethPropdef___n_methid__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AMethPropdef___n_signature__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AMethPropdef___n_signature__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AMethPropdef___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AMethPropdef___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AMethPropdef_parser___parser_nodes___ANode___init();
@@ -652,6 +708,20 @@ typedef void (*parser___parser_prod___ADeferredMethPropdef___init_adeferredmethp
 val_t NEW_ADeferredMethPropdef_parser___parser_prod___ADeferredMethPropdef___init_adeferredmethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6);
 void parser___parser_prod___ADeferredMethPropdef___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ADeferredMethPropdef___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ADeferredMethPropdef___n_doc__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ADeferredMethPropdef___n_doc__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ADeferredMethPropdef___n_kwredef__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ADeferredMethPropdef___n_kwredef__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ADeferredMethPropdef___n_visibility__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ADeferredMethPropdef___n_visibility__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ADeferredMethPropdef___n_kwmeth__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ADeferredMethPropdef___n_kwmeth__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ADeferredMethPropdef___n_methid__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ADeferredMethPropdef___n_methid__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ADeferredMethPropdef___n_signature__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ADeferredMethPropdef___n_signature__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ADeferredMethPropdef___n_annotations__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ADeferredMethPropdef___n_annotations__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ADeferredMethPropdef___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ADeferredMethPropdef___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_ADeferredMethPropdef_parser___parser_nodes___ANode___init();
@@ -665,6 +735,18 @@ typedef void (*parser___parser_prod___AInternMethPropdef___init_ainternmethpropd
 val_t NEW_AInternMethPropdef_parser___parser_prod___AInternMethPropdef___init_ainternmethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5);
 void parser___parser_prod___AInternMethPropdef___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AInternMethPropdef___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AInternMethPropdef___n_doc__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AInternMethPropdef___n_doc__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AInternMethPropdef___n_kwredef__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AInternMethPropdef___n_kwredef__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AInternMethPropdef___n_visibility__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AInternMethPropdef___n_visibility__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AInternMethPropdef___n_kwmeth__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AInternMethPropdef___n_kwmeth__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AInternMethPropdef___n_methid__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AInternMethPropdef___n_methid__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AInternMethPropdef___n_signature__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AInternMethPropdef___n_signature__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AInternMethPropdef___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AInternMethPropdef___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AInternMethPropdef_parser___parser_nodes___ANode___init();
@@ -678,6 +760,24 @@ typedef void (*parser___parser_prod___AExternMethPropdef___init_aexternmethpropd
 val_t NEW_AExternMethPropdef_parser___parser_prod___AExternMethPropdef___init_aexternmethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6, val_t p7, val_t p8);
 void parser___parser_prod___AExternMethPropdef___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AExternMethPropdef___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AExternMethPropdef___n_doc__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AExternMethPropdef___n_doc__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AExternMethPropdef___n_kwredef__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AExternMethPropdef___n_kwredef__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AExternMethPropdef___n_visibility__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AExternMethPropdef___n_visibility__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AExternMethPropdef___n_kwmeth__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AExternMethPropdef___n_kwmeth__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AExternMethPropdef___n_methid__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AExternMethPropdef___n_methid__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AExternMethPropdef___n_signature__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AExternMethPropdef___n_signature__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AExternMethPropdef___n_extern__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AExternMethPropdef___n_extern__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AExternMethPropdef___n_extern_calls__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AExternMethPropdef___n_extern_calls__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AExternMethPropdef___n_extern_code_block__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AExternMethPropdef___n_extern_code_block__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AExternMethPropdef___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AExternMethPropdef___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AExternMethPropdef_parser___parser_nodes___ANode___init();
@@ -691,6 +791,22 @@ typedef void (*parser___parser_prod___AConcreteMethPropdef___init_aconcretemethp
 val_t NEW_AConcreteMethPropdef_parser___parser_prod___AConcreteMethPropdef___init_aconcretemethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6, val_t p7);
 void parser___parser_prod___AConcreteMethPropdef___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AConcreteMethPropdef___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AConcreteMethPropdef___n_doc__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AConcreteMethPropdef___n_doc__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AConcreteMethPropdef___n_kwredef__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AConcreteMethPropdef___n_kwredef__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AConcreteMethPropdef___n_visibility__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AConcreteMethPropdef___n_visibility__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AConcreteMethPropdef___n_kwmeth__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AConcreteMethPropdef___n_kwmeth__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AConcreteMethPropdef___n_methid__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AConcreteMethPropdef___n_methid__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AConcreteMethPropdef___n_signature__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AConcreteMethPropdef___n_signature__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AConcreteMethPropdef___n_annotations__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AConcreteMethPropdef___n_annotations__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AConcreteMethPropdef___n_block__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AConcreteMethPropdef___n_block__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AConcreteMethPropdef___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AConcreteMethPropdef___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AConcreteMethPropdef_parser___parser_nodes___ANode___init();
@@ -704,6 +820,22 @@ typedef void (*parser___parser_prod___AConcreteInitPropdef___init_aconcreteinitp
 val_t NEW_AConcreteInitPropdef_parser___parser_prod___AConcreteInitPropdef___init_aconcreteinitpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6, val_t p7);
 void parser___parser_prod___AConcreteInitPropdef___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AConcreteInitPropdef___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AConcreteInitPropdef___n_doc__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AConcreteInitPropdef___n_doc__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AConcreteInitPropdef___n_kwredef__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AConcreteInitPropdef___n_kwredef__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AConcreteInitPropdef___n_visibility__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AConcreteInitPropdef___n_visibility__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AConcreteInitPropdef___n_kwinit__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AConcreteInitPropdef___n_kwinit__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AConcreteInitPropdef___n_methid__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AConcreteInitPropdef___n_methid__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AConcreteInitPropdef___n_signature__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AConcreteInitPropdef___n_signature__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AConcreteInitPropdef___n_annotations__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AConcreteInitPropdef___n_annotations__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AConcreteInitPropdef___n_block__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AConcreteInitPropdef___n_block__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AConcreteInitPropdef___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AConcreteInitPropdef___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AConcreteInitPropdef_parser___parser_nodes___ANode___init();
@@ -719,6 +851,24 @@ typedef void (*parser___parser_prod___AExternInitPropdef___init_aexterninitpropd
 val_t NEW_AExternInitPropdef_parser___parser_prod___AExternInitPropdef___init_aexterninitpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6, val_t p7, val_t p8);
 void parser___parser_prod___AExternInitPropdef___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AExternInitPropdef___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AExternInitPropdef___n_doc__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AExternInitPropdef___n_doc__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AExternInitPropdef___n_kwredef__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AExternInitPropdef___n_kwredef__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AExternInitPropdef___n_visibility__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AExternInitPropdef___n_visibility__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AExternInitPropdef___n_kwnew__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AExternInitPropdef___n_kwnew__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AExternInitPropdef___n_methid__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AExternInitPropdef___n_methid__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AExternInitPropdef___n_signature__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AExternInitPropdef___n_signature__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AExternInitPropdef___n_extern__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AExternInitPropdef___n_extern__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AExternInitPropdef___n_extern_calls__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AExternInitPropdef___n_extern_calls__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AExternInitPropdef___n_extern_code_block__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AExternInitPropdef___n_extern_code_block__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AExternInitPropdef___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AExternInitPropdef___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AExternInitPropdef_parser___parser_nodes___ANode___init();
@@ -732,6 +882,10 @@ typedef void (*parser___parser_prod___AMainMethPropdef___init_amainmethpropdef_t
 val_t NEW_AMainMethPropdef_parser___parser_prod___AMainMethPropdef___init_amainmethpropdef(val_t p0, val_t p1);
 void parser___parser_prod___AMainMethPropdef___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AMainMethPropdef___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AMainMethPropdef___n_kwredef__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AMainMethPropdef___n_kwredef__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AMainMethPropdef___n_block__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AMainMethPropdef___n_block__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AMainMethPropdef___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AMainMethPropdef___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AMainMethPropdef_parser___parser_nodes___ANode___init();
@@ -746,6 +900,20 @@ typedef void (*parser___parser_prod___ATypePropdef___init_atypepropdef_t)(val_t 
 val_t NEW_ATypePropdef_parser___parser_prod___ATypePropdef___init_atypepropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6);
 void parser___parser_prod___ATypePropdef___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ATypePropdef___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ATypePropdef___n_doc__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ATypePropdef___n_doc__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ATypePropdef___n_kwredef__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ATypePropdef___n_kwredef__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ATypePropdef___n_visibility__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ATypePropdef___n_visibility__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ATypePropdef___n_kwtype__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ATypePropdef___n_kwtype__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ATypePropdef___n_id__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ATypePropdef___n_id__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ATypePropdef___n_type__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ATypePropdef___n_type__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ATypePropdef___n_annotations__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ATypePropdef___n_annotations__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ATypePropdef___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ATypePropdef___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_ATypePropdef_parser___parser_nodes___ANode___init();
@@ -757,6 +925,10 @@ typedef void (*parser___parser_prod___AReadAble___init_areadable_t)(val_t p0, va
 val_t NEW_AReadAble_parser___parser_prod___AReadAble___init_areadable(val_t p0, val_t p1);
 void parser___parser_prod___AReadAble___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AReadAble___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AReadAble___n_kwredef__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AReadAble___n_kwredef__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AReadAble___n_kwreadable__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AReadAble___n_kwreadable__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AReadAble___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AReadAble___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AReadAble_parser___parser_nodes___ANode___init();
@@ -768,6 +940,12 @@ typedef void (*parser___parser_prod___AWriteAble___init_awriteable_t)(val_t p0, 
 val_t NEW_AWriteAble_parser___parser_prod___AWriteAble___init_awriteable(val_t p0, val_t p1, val_t p2);
 void parser___parser_prod___AWriteAble___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AWriteAble___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AWriteAble___n_kwredef__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AWriteAble___n_kwredef__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AWriteAble___n_visibility__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AWriteAble___n_visibility__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AWriteAble___n_kwwritable__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AWriteAble___n_kwwritable__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AWriteAble___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AWriteAble___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AWriteAble_parser___parser_nodes___ANode___init();
@@ -779,6 +957,8 @@ typedef void (*parser___parser_prod___AIdMethid___init_aidmethid_t)(val_t p0, va
 val_t NEW_AIdMethid_parser___parser_prod___AIdMethid___init_aidmethid(val_t p0);
 void parser___parser_prod___AIdMethid___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AIdMethid___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AIdMethid___n_id__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AIdMethid___n_id__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AIdMethid___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AIdMethid___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AIdMethid_parser___parser_nodes___ANode___init();
@@ -790,6 +970,8 @@ typedef void (*parser___parser_prod___APlusMethid___init_aplusmethid_t)(val_t p0
 val_t NEW_APlusMethid_parser___parser_prod___APlusMethid___init_aplusmethid(val_t p0);
 void parser___parser_prod___APlusMethid___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___APlusMethid___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___APlusMethid___n_plus__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___APlusMethid___n_plus__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___APlusMethid___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___APlusMethid___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_APlusMethid_parser___parser_nodes___ANode___init();
@@ -801,6 +983,8 @@ typedef void (*parser___parser_prod___AMinusMethid___init_aminusmethid_t)(val_t 
 val_t NEW_AMinusMethid_parser___parser_prod___AMinusMethid___init_aminusmethid(val_t p0);
 void parser___parser_prod___AMinusMethid___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AMinusMethid___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AMinusMethid___n_minus__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AMinusMethid___n_minus__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AMinusMethid___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AMinusMethid___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AMinusMethid_parser___parser_nodes___ANode___init();
@@ -812,6 +996,8 @@ typedef void (*parser___parser_prod___AStarMethid___init_astarmethid_t)(val_t p0
 val_t NEW_AStarMethid_parser___parser_prod___AStarMethid___init_astarmethid(val_t p0);
 void parser___parser_prod___AStarMethid___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AStarMethid___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AStarMethid___n_star__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AStarMethid___n_star__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AStarMethid___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AStarMethid___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AStarMethid_parser___parser_nodes___ANode___init();
@@ -823,6 +1009,8 @@ typedef void (*parser___parser_prod___ASlashMethid___init_aslashmethid_t)(val_t 
 val_t NEW_ASlashMethid_parser___parser_prod___ASlashMethid___init_aslashmethid(val_t p0);
 void parser___parser_prod___ASlashMethid___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ASlashMethid___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ASlashMethid___n_slash__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ASlashMethid___n_slash__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ASlashMethid___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ASlashMethid___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_ASlashMethid_parser___parser_nodes___ANode___init();
@@ -834,6 +1022,8 @@ typedef void (*parser___parser_prod___APercentMethid___init_apercentmethid_t)(va
 val_t NEW_APercentMethid_parser___parser_prod___APercentMethid___init_apercentmethid(val_t p0);
 void parser___parser_prod___APercentMethid___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___APercentMethid___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___APercentMethid___n_percent__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___APercentMethid___n_percent__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___APercentMethid___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___APercentMethid___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_APercentMethid_parser___parser_nodes___ANode___init();
@@ -845,6 +1035,8 @@ typedef void (*parser___parser_prod___AEqMethid___init_aeqmethid_t)(val_t p0, va
 val_t NEW_AEqMethid_parser___parser_prod___AEqMethid___init_aeqmethid(val_t p0);
 void parser___parser_prod___AEqMethid___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AEqMethid___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AEqMethid___n_eq__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AEqMethid___n_eq__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AEqMethid___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AEqMethid___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AEqMethid_parser___parser_nodes___ANode___init();
@@ -856,6 +1048,8 @@ typedef void (*parser___parser_prod___ANeMethid___init_anemethid_t)(val_t p0, va
 val_t NEW_ANeMethid_parser___parser_prod___ANeMethid___init_anemethid(val_t p0);
 void parser___parser_prod___ANeMethid___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ANeMethid___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ANeMethid___n_ne__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ANeMethid___n_ne__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ANeMethid___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ANeMethid___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_ANeMethid_parser___parser_nodes___ANode___init();
@@ -867,6 +1061,8 @@ typedef void (*parser___parser_prod___ALeMethid___init_alemethid_t)(val_t p0, va
 val_t NEW_ALeMethid_parser___parser_prod___ALeMethid___init_alemethid(val_t p0);
 void parser___parser_prod___ALeMethid___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ALeMethid___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ALeMethid___n_le__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ALeMethid___n_le__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ALeMethid___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ALeMethid___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_ALeMethid_parser___parser_nodes___ANode___init();
@@ -878,6 +1074,8 @@ typedef void (*parser___parser_prod___AGeMethid___init_agemethid_t)(val_t p0, va
 val_t NEW_AGeMethid_parser___parser_prod___AGeMethid___init_agemethid(val_t p0);
 void parser___parser_prod___AGeMethid___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AGeMethid___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AGeMethid___n_ge__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AGeMethid___n_ge__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AGeMethid___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AGeMethid___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AGeMethid_parser___parser_nodes___ANode___init();
@@ -889,6 +1087,8 @@ typedef void (*parser___parser_prod___ALtMethid___init_altmethid_t)(val_t p0, va
 val_t NEW_ALtMethid_parser___parser_prod___ALtMethid___init_altmethid(val_t p0);
 void parser___parser_prod___ALtMethid___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ALtMethid___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ALtMethid___n_lt__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ALtMethid___n_lt__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ALtMethid___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ALtMethid___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_ALtMethid_parser___parser_nodes___ANode___init();
@@ -900,6 +1100,8 @@ typedef void (*parser___parser_prod___AGtMethid___init_agtmethid_t)(val_t p0, va
 val_t NEW_AGtMethid_parser___parser_prod___AGtMethid___init_agtmethid(val_t p0);
 void parser___parser_prod___AGtMethid___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AGtMethid___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AGtMethid___n_gt__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AGtMethid___n_gt__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AGtMethid___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AGtMethid___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AGtMethid_parser___parser_nodes___ANode___init();
@@ -911,6 +1113,8 @@ typedef void (*parser___parser_prod___ALlMethid___init_allmethid_t)(val_t p0, va
 val_t NEW_ALlMethid_parser___parser_prod___ALlMethid___init_allmethid(val_t p0);
 void parser___parser_prod___ALlMethid___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ALlMethid___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ALlMethid___n_ll__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ALlMethid___n_ll__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ALlMethid___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ALlMethid___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_ALlMethid_parser___parser_nodes___ANode___init();
@@ -922,6 +1126,8 @@ typedef void (*parser___parser_prod___AGgMethid___init_aggmethid_t)(val_t p0, va
 val_t NEW_AGgMethid_parser___parser_prod___AGgMethid___init_aggmethid(val_t p0);
 void parser___parser_prod___AGgMethid___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AGgMethid___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AGgMethid___n_gg__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AGgMethid___n_gg__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AGgMethid___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AGgMethid___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AGgMethid_parser___parser_nodes___ANode___init();
@@ -933,6 +1139,10 @@ typedef void (*parser___parser_prod___ABraMethid___init_abramethid_t)(val_t p0, 
 val_t NEW_ABraMethid_parser___parser_prod___ABraMethid___init_abramethid(val_t p0, val_t p1);
 void parser___parser_prod___ABraMethid___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ABraMethid___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ABraMethid___n_obra__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ABraMethid___n_obra__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ABraMethid___n_cbra__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ABraMethid___n_cbra__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ABraMethid___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ABraMethid___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_ABraMethid_parser___parser_nodes___ANode___init();
@@ -944,6 +1154,8 @@ typedef void (*parser___parser_prod___AStarshipMethid___init_astarshipmethid_t)(
 val_t NEW_AStarshipMethid_parser___parser_prod___AStarshipMethid___init_astarshipmethid(val_t p0);
 void parser___parser_prod___AStarshipMethid___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AStarshipMethid___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AStarshipMethid___n_starship__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AStarshipMethid___n_starship__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AStarshipMethid___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AStarshipMethid___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AStarshipMethid_parser___parser_nodes___ANode___init();
@@ -955,6 +1167,10 @@ typedef void (*parser___parser_prod___AAssignMethid___init_aassignmethid_t)(val_
 val_t NEW_AAssignMethid_parser___parser_prod___AAssignMethid___init_aassignmethid(val_t p0, val_t p1);
 void parser___parser_prod___AAssignMethid___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AAssignMethid___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AAssignMethid___n_id__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAssignMethid___n_id__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AAssignMethid___n_assign__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAssignMethid___n_assign__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AAssignMethid___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AAssignMethid___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AAssignMethid_parser___parser_nodes___ANode___init();
@@ -966,6 +1182,12 @@ typedef void (*parser___parser_prod___ABraassignMethid___init_abraassignmethid_t
 val_t NEW_ABraassignMethid_parser___parser_prod___ABraassignMethid___init_abraassignmethid(val_t p0, val_t p1, val_t p2);
 void parser___parser_prod___ABraassignMethid___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ABraassignMethid___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ABraassignMethid___n_obra__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ABraassignMethid___n_obra__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ABraassignMethid___n_cbra__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ABraassignMethid___n_cbra__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ABraassignMethid___n_assign__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ABraassignMethid___n_assign__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ABraassignMethid___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ABraassignMethid___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_ABraassignMethid_parser___parser_nodes___ANode___init();
@@ -983,6 +1205,12 @@ typedef void (*parser___parser_prod___ASignature___init_asignature_t)(val_t p0, 
 val_t NEW_ASignature_parser___parser_prod___ASignature___init_asignature(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
 void parser___parser_prod___ASignature___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ASignature___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ASignature___n_opar__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ASignature___n_opar__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ASignature___n_cpar__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ASignature___n_cpar__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ASignature___n_type__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ASignature___n_type__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ASignature___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ASignature___visit_all_t)(val_t p0, val_t p1);
   typedef void (*CLOS_OC_parser___parser_prod___ASignature___visit_all_1_0)(struct stack_frame_t *);
@@ -1000,6 +1228,14 @@ typedef void (*parser___parser_prod___AParam___init_aparam_t)(val_t p0, val_t p1
 val_t NEW_AParam_parser___parser_prod___AParam___init_aparam(val_t p0, val_t p1, val_t p2, val_t p3);
 void parser___parser_prod___AParam___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AParam___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AParam___n_id__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AParam___n_id__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AParam___n_type__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AParam___n_type__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AParam___n_dotdotdot__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AParam___n_dotdotdot__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AParam___n_annotations__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AParam___n_annotations__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AParam___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AParam___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AParam_parser___parser_nodes___ANode___init();
@@ -1011,6 +1247,16 @@ typedef void (*parser___parser_prod___AClosureDecl___init_aclosuredecl_t)(val_t 
 val_t NEW_AClosureDecl_parser___parser_prod___AClosureDecl___init_aclosuredecl(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
 void parser___parser_prod___AClosureDecl___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AClosureDecl___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AClosureDecl___n_kwbreak__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AClosureDecl___n_kwbreak__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AClosureDecl___n_bang__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AClosureDecl___n_bang__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AClosureDecl___n_id__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AClosureDecl___n_id__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AClosureDecl___n_signature__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AClosureDecl___n_signature__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AClosureDecl___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AClosureDecl___n_expr__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AClosureDecl___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AClosureDecl___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AClosureDecl_parser___parser_nodes___ANode___init();
@@ -1025,6 +1271,12 @@ typedef void (*parser___parser_prod___AType___init_atype_t)(val_t p0, val_t p1, 
 val_t NEW_AType_parser___parser_prod___AType___init_atype(val_t p0, val_t p1, val_t p2, val_t p3);
 void parser___parser_prod___AType___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AType___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AType___n_kwnullable__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AType___n_kwnullable__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AType___n_id__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AType___n_id__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AType___n_annotations__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AType___n_annotations__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AType___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AType___visit_all_t)(val_t p0, val_t p1);
   typedef void (*CLOS_OC_parser___parser_prod___AType___visit_all_1_0)(struct stack_frame_t *);
@@ -1039,6 +1291,10 @@ typedef void (*parser___parser_prod___ALabel___init_alabel_t)(val_t p0, val_t p1
 val_t NEW_ALabel_parser___parser_prod___ALabel___init_alabel(val_t p0, val_t p1);
 void parser___parser_prod___ALabel___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ALabel___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ALabel___n_kwlabel__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ALabel___n_kwlabel__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ALabel___n_id__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ALabel___n_id__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ALabel___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ALabel___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_ALabel_parser___parser_nodes___ANode___init();
@@ -1053,6 +1309,8 @@ typedef void (*parser___parser_prod___ABlockExpr___init_ablockexpr_t)(val_t p0, 
 val_t NEW_ABlockExpr_parser___parser_prod___ABlockExpr___init_ablockexpr(val_t p0, val_t p1);
 void parser___parser_prod___ABlockExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ABlockExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ABlockExpr___n_kwend__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ABlockExpr___n_kwend__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ABlockExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ABlockExpr___visit_all_t)(val_t p0, val_t p1);
   typedef void (*CLOS_OC_parser___parser_prod___ABlockExpr___visit_all_1_0)(struct stack_frame_t *);
@@ -1067,6 +1325,18 @@ typedef void (*parser___parser_prod___AVardeclExpr___init_avardeclexpr_t)(val_t 
 val_t NEW_AVardeclExpr_parser___parser_prod___AVardeclExpr___init_avardeclexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5);
 void parser___parser_prod___AVardeclExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AVardeclExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AVardeclExpr___n_kwvar__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AVardeclExpr___n_kwvar__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AVardeclExpr___n_id__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AVardeclExpr___n_id__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AVardeclExpr___n_type__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AVardeclExpr___n_type__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AVardeclExpr___n_assign__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AVardeclExpr___n_assign__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AVardeclExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AVardeclExpr___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AVardeclExpr___n_annotations__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AVardeclExpr___n_annotations__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AVardeclExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AVardeclExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AVardeclExpr_parser___parser_nodes___ANode___init();
@@ -1078,6 +1348,10 @@ typedef void (*parser___parser_prod___AReturnExpr___init_areturnexpr_t)(val_t p0
 val_t NEW_AReturnExpr_parser___parser_prod___AReturnExpr___init_areturnexpr(val_t p0, val_t p1);
 void parser___parser_prod___AReturnExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AReturnExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AReturnExpr___n_kwreturn__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AReturnExpr___n_kwreturn__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AReturnExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AReturnExpr___n_expr__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AReturnExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AReturnExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AReturnExpr_parser___parser_nodes___ANode___init();
@@ -1089,6 +1363,12 @@ typedef void (*parser___parser_prod___ABreakExpr___init_abreakexpr_t)(val_t p0, 
 val_t NEW_ABreakExpr_parser___parser_prod___ABreakExpr___init_abreakexpr(val_t p0, val_t p1, val_t p2);
 void parser___parser_prod___ABreakExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ABreakExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ABreakExpr___n_kwbreak__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ABreakExpr___n_kwbreak__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ABreakExpr___n_label__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ABreakExpr___n_label__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ABreakExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ABreakExpr___n_expr__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ABreakExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ABreakExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_ABreakExpr_parser___parser_nodes___ANode___init();
@@ -1100,6 +1380,8 @@ typedef void (*parser___parser_prod___AAbortExpr___init_aabortexpr_t)(val_t p0, 
 val_t NEW_AAbortExpr_parser___parser_prod___AAbortExpr___init_aabortexpr(val_t p0);
 void parser___parser_prod___AAbortExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AAbortExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AAbortExpr___n_kwabort__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAbortExpr___n_kwabort__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AAbortExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AAbortExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AAbortExpr_parser___parser_nodes___ANode___init();
@@ -1111,6 +1393,12 @@ typedef void (*parser___parser_prod___AContinueExpr___init_acontinueexpr_t)(val_
 val_t NEW_AContinueExpr_parser___parser_prod___AContinueExpr___init_acontinueexpr(val_t p0, val_t p1, val_t p2);
 void parser___parser_prod___AContinueExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AContinueExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AContinueExpr___n_kwcontinue__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AContinueExpr___n_kwcontinue__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AContinueExpr___n_label__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AContinueExpr___n_label__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AContinueExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AContinueExpr___n_expr__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AContinueExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AContinueExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AContinueExpr_parser___parser_nodes___ANode___init();
@@ -1122,6 +1410,12 @@ typedef void (*parser___parser_prod___ADoExpr___init_adoexpr_t)(val_t p0, val_t 
 val_t NEW_ADoExpr_parser___parser_prod___ADoExpr___init_adoexpr(val_t p0, val_t p1, val_t p2);
 void parser___parser_prod___ADoExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ADoExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ADoExpr___n_kwdo__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ADoExpr___n_kwdo__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ADoExpr___n_block__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ADoExpr___n_block__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ADoExpr___n_label__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ADoExpr___n_label__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ADoExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ADoExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_ADoExpr_parser___parser_nodes___ANode___init();
@@ -1133,6 +1427,14 @@ typedef void (*parser___parser_prod___AIfExpr___init_aifexpr_t)(val_t p0, val_t 
 val_t NEW_AIfExpr_parser___parser_prod___AIfExpr___init_aifexpr(val_t p0, val_t p1, val_t p2, val_t p3);
 void parser___parser_prod___AIfExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AIfExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AIfExpr___n_kwif__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AIfExpr___n_kwif__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AIfExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AIfExpr___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AIfExpr___n_then__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AIfExpr___n_then__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AIfExpr___n_else__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AIfExpr___n_else__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AIfExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AIfExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AIfExpr_parser___parser_nodes___ANode___init();
@@ -1144,6 +1446,18 @@ typedef void (*parser___parser_prod___AIfexprExpr___init_aifexprexpr_t)(val_t p0
 val_t NEW_AIfexprExpr_parser___parser_prod___AIfexprExpr___init_aifexprexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5);
 void parser___parser_prod___AIfexprExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AIfexprExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AIfexprExpr___n_kwif__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AIfexprExpr___n_kwif__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AIfexprExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AIfexprExpr___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AIfexprExpr___n_kwthen__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AIfexprExpr___n_kwthen__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AIfexprExpr___n_then__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AIfexprExpr___n_then__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AIfexprExpr___n_kwelse__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AIfexprExpr___n_kwelse__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AIfexprExpr___n_else__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AIfexprExpr___n_else__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AIfexprExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AIfexprExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AIfexprExpr_parser___parser_nodes___ANode___init();
@@ -1155,6 +1469,16 @@ typedef void (*parser___parser_prod___AWhileExpr___init_awhileexpr_t)(val_t p0, 
 val_t NEW_AWhileExpr_parser___parser_prod___AWhileExpr___init_awhileexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
 void parser___parser_prod___AWhileExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AWhileExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AWhileExpr___n_kwwhile__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AWhileExpr___n_kwwhile__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AWhileExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AWhileExpr___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AWhileExpr___n_kwdo__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AWhileExpr___n_kwdo__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AWhileExpr___n_block__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AWhileExpr___n_block__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AWhileExpr___n_label__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AWhileExpr___n_label__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AWhileExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AWhileExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AWhileExpr_parser___parser_nodes___ANode___init();
@@ -1166,6 +1490,12 @@ typedef void (*parser___parser_prod___ALoopExpr___init_aloopexpr_t)(val_t p0, va
 val_t NEW_ALoopExpr_parser___parser_prod___ALoopExpr___init_aloopexpr(val_t p0, val_t p1, val_t p2);
 void parser___parser_prod___ALoopExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ALoopExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ALoopExpr___n_kwloop__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ALoopExpr___n_kwloop__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ALoopExpr___n_block__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ALoopExpr___n_block__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ALoopExpr___n_label__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ALoopExpr___n_label__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ALoopExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ALoopExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_ALoopExpr_parser___parser_nodes___ANode___init();
@@ -1180,6 +1510,16 @@ typedef void (*parser___parser_prod___AForExpr___init_aforexpr_t)(val_t p0, val_
 val_t NEW_AForExpr_parser___parser_prod___AForExpr___init_aforexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5);
 void parser___parser_prod___AForExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AForExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AForExpr___n_kwfor__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AForExpr___n_kwfor__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AForExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AForExpr___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AForExpr___n_kwdo__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AForExpr___n_kwdo__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AForExpr___n_block__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AForExpr___n_block__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AForExpr___n_label__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AForExpr___n_label__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AForExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AForExpr___visit_all_t)(val_t p0, val_t p1);
   typedef void (*CLOS_OC_parser___parser_prod___AForExpr___visit_all_1_0)(struct stack_frame_t *);
@@ -1194,6 +1534,14 @@ typedef void (*parser___parser_prod___AAssertExpr___init_aassertexpr_t)(val_t p0
 val_t NEW_AAssertExpr_parser___parser_prod___AAssertExpr___init_aassertexpr(val_t p0, val_t p1, val_t p2, val_t p3);
 void parser___parser_prod___AAssertExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AAssertExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AAssertExpr___n_kwassert__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAssertExpr___n_kwassert__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AAssertExpr___n_id__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAssertExpr___n_id__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AAssertExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAssertExpr___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AAssertExpr___n_else__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAssertExpr___n_else__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AAssertExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AAssertExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AAssertExpr_parser___parser_nodes___ANode___init();
@@ -1205,6 +1553,10 @@ typedef void (*parser___parser_prod___AOnceExpr___init_aonceexpr_t)(val_t p0, va
 val_t NEW_AOnceExpr_parser___parser_prod___AOnceExpr___init_aonceexpr(val_t p0, val_t p1);
 void parser___parser_prod___AOnceExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AOnceExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AOnceExpr___n_kwonce__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AOnceExpr___n_kwonce__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AOnceExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AOnceExpr___n_expr__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AOnceExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AOnceExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AOnceExpr_parser___parser_nodes___ANode___init();
@@ -1216,6 +1568,8 @@ typedef void (*parser___parser_prod___ASendExpr___init_asendexpr_t)(val_t p0, va
 val_t NEW_ASendExpr_parser___parser_prod___ASendExpr___init_asendexpr(val_t p0);
 void parser___parser_prod___ASendExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ASendExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ASendExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ASendExpr___n_expr__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ASendExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ASendExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_ASendExpr_parser___parser_nodes___ANode___init();
@@ -1228,6 +1582,10 @@ typedef void (*parser___parser_prod___ABinopExpr___init_abinopexpr_t)(val_t p0, 
 val_t NEW_ABinopExpr_parser___parser_prod___ABinopExpr___init_abinopexpr(val_t p0, val_t p1);
 void parser___parser_prod___ABinopExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ABinopExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ABinopExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ABinopExpr___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ABinopExpr___n_expr2__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ABinopExpr___n_expr2__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ABinopExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ABinopExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_ABinopExpr_parser___parser_nodes___ANode___init();
@@ -1240,6 +1598,10 @@ typedef void (*parser___parser_prod___AOrExpr___init_aorexpr_t)(val_t p0, val_t 
 val_t NEW_AOrExpr_parser___parser_prod___AOrExpr___init_aorexpr(val_t p0, val_t p1);
 void parser___parser_prod___AOrExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AOrExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AOrExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AOrExpr___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AOrExpr___n_expr2__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AOrExpr___n_expr2__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AOrExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AOrExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AOrExpr_parser___parser_nodes___ANode___init();
@@ -1251,6 +1613,10 @@ typedef void (*parser___parser_prod___AAndExpr___init_aandexpr_t)(val_t p0, val_
 val_t NEW_AAndExpr_parser___parser_prod___AAndExpr___init_aandexpr(val_t p0, val_t p1);
 void parser___parser_prod___AAndExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AAndExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AAndExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAndExpr___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AAndExpr___n_expr2__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAndExpr___n_expr2__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AAndExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AAndExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AAndExpr_parser___parser_nodes___ANode___init();
@@ -1262,6 +1628,10 @@ typedef void (*parser___parser_prod___AOrElseExpr___init_aorelseexpr_t)(val_t p0
 val_t NEW_AOrElseExpr_parser___parser_prod___AOrElseExpr___init_aorelseexpr(val_t p0, val_t p1);
 void parser___parser_prod___AOrElseExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AOrElseExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AOrElseExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AOrElseExpr___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AOrElseExpr___n_expr2__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AOrElseExpr___n_expr2__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AOrElseExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AOrElseExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AOrElseExpr_parser___parser_nodes___ANode___init();
@@ -1273,6 +1643,10 @@ typedef void (*parser___parser_prod___ANotExpr___init_anotexpr_t)(val_t p0, val_
 val_t NEW_ANotExpr_parser___parser_prod___ANotExpr___init_anotexpr(val_t p0, val_t p1);
 void parser___parser_prod___ANotExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ANotExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ANotExpr___n_kwnot__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ANotExpr___n_kwnot__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ANotExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ANotExpr___n_expr__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ANotExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ANotExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_ANotExpr_parser___parser_nodes___ANode___init();
@@ -1285,6 +1659,10 @@ typedef void (*parser___parser_prod___AEqExpr___init_aeqexpr_t)(val_t p0, val_t 
 val_t NEW_AEqExpr_parser___parser_prod___AEqExpr___init_aeqexpr(val_t p0, val_t p1);
 void parser___parser_prod___AEqExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AEqExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AEqExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AEqExpr___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AEqExpr___n_expr2__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AEqExpr___n_expr2__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AEqExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AEqExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AEqExpr_parser___parser_nodes___ANode___init();
@@ -1299,6 +1677,10 @@ typedef void (*parser___parser_prod___AEeExpr___init_aeeexpr_t)(val_t p0, val_t 
 val_t NEW_AEeExpr_parser___parser_prod___AEeExpr___init_aeeexpr(val_t p0, val_t p1);
 void parser___parser_prod___AEeExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AEeExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AEeExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AEeExpr___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AEeExpr___n_expr2__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AEeExpr___n_expr2__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AEeExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AEeExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AEeExpr_parser___parser_nodes___ANode___init();
@@ -1311,6 +1693,10 @@ typedef void (*parser___parser_prod___ANeExpr___init_aneexpr_t)(val_t p0, val_t 
 val_t NEW_ANeExpr_parser___parser_prod___ANeExpr___init_aneexpr(val_t p0, val_t p1);
 void parser___parser_prod___ANeExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ANeExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ANeExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ANeExpr___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ANeExpr___n_expr2__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ANeExpr___n_expr2__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ANeExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ANeExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_ANeExpr_parser___parser_nodes___ANode___init();
@@ -1326,6 +1712,10 @@ typedef void (*parser___parser_prod___ALtExpr___init_altexpr_t)(val_t p0, val_t 
 val_t NEW_ALtExpr_parser___parser_prod___ALtExpr___init_altexpr(val_t p0, val_t p1);
 void parser___parser_prod___ALtExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ALtExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ALtExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ALtExpr___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ALtExpr___n_expr2__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ALtExpr___n_expr2__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ALtExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ALtExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_ALtExpr_parser___parser_nodes___ANode___init();
@@ -1341,6 +1731,10 @@ typedef void (*parser___parser_prod___ALeExpr___init_aleexpr_t)(val_t p0, val_t 
 val_t NEW_ALeExpr_parser___parser_prod___ALeExpr___init_aleexpr(val_t p0, val_t p1);
 void parser___parser_prod___ALeExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ALeExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ALeExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ALeExpr___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ALeExpr___n_expr2__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ALeExpr___n_expr2__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ALeExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ALeExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_ALeExpr_parser___parser_nodes___ANode___init();
@@ -1356,6 +1750,10 @@ typedef void (*parser___parser_prod___ALlExpr___init_allexpr_t)(val_t p0, val_t 
 val_t NEW_ALlExpr_parser___parser_prod___ALlExpr___init_allexpr(val_t p0, val_t p1);
 void parser___parser_prod___ALlExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ALlExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ALlExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ALlExpr___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ALlExpr___n_expr2__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ALlExpr___n_expr2__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ALlExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ALlExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_ALlExpr_parser___parser_nodes___ANode___init();
@@ -1371,6 +1769,10 @@ typedef void (*parser___parser_prod___AGtExpr___init_agtexpr_t)(val_t p0, val_t 
 val_t NEW_AGtExpr_parser___parser_prod___AGtExpr___init_agtexpr(val_t p0, val_t p1);
 void parser___parser_prod___AGtExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AGtExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AGtExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AGtExpr___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AGtExpr___n_expr2__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AGtExpr___n_expr2__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AGtExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AGtExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AGtExpr_parser___parser_nodes___ANode___init();
@@ -1386,6 +1788,10 @@ typedef void (*parser___parser_prod___AGeExpr___init_ageexpr_t)(val_t p0, val_t 
 val_t NEW_AGeExpr_parser___parser_prod___AGeExpr___init_ageexpr(val_t p0, val_t p1);
 void parser___parser_prod___AGeExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AGeExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AGeExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AGeExpr___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AGeExpr___n_expr2__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AGeExpr___n_expr2__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AGeExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AGeExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AGeExpr_parser___parser_nodes___ANode___init();
@@ -1401,6 +1807,10 @@ typedef void (*parser___parser_prod___AGgExpr___init_aggexpr_t)(val_t p0, val_t 
 val_t NEW_AGgExpr_parser___parser_prod___AGgExpr___init_aggexpr(val_t p0, val_t p1);
 void parser___parser_prod___AGgExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AGgExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AGgExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AGgExpr___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AGgExpr___n_expr2__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AGgExpr___n_expr2__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AGgExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AGgExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AGgExpr_parser___parser_nodes___ANode___init();
@@ -1415,6 +1825,10 @@ typedef void (*parser___parser_prod___AIsaExpr___init_aisaexpr_t)(val_t p0, val_
 val_t NEW_AIsaExpr_parser___parser_prod___AIsaExpr___init_aisaexpr(val_t p0, val_t p1);
 void parser___parser_prod___AIsaExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AIsaExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AIsaExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AIsaExpr___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AIsaExpr___n_type__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AIsaExpr___n_type__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AIsaExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AIsaExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AIsaExpr_parser___parser_nodes___ANode___init();
@@ -1427,6 +1841,10 @@ typedef void (*parser___parser_prod___APlusExpr___init_aplusexpr_t)(val_t p0, va
 val_t NEW_APlusExpr_parser___parser_prod___APlusExpr___init_aplusexpr(val_t p0, val_t p1);
 void parser___parser_prod___APlusExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___APlusExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___APlusExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___APlusExpr___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___APlusExpr___n_expr2__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___APlusExpr___n_expr2__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___APlusExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___APlusExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_APlusExpr_parser___parser_nodes___ANode___init();
@@ -1442,6 +1860,10 @@ typedef void (*parser___parser_prod___AMinusExpr___init_aminusexpr_t)(val_t p0, 
 val_t NEW_AMinusExpr_parser___parser_prod___AMinusExpr___init_aminusexpr(val_t p0, val_t p1);
 void parser___parser_prod___AMinusExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AMinusExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AMinusExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AMinusExpr___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AMinusExpr___n_expr2__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AMinusExpr___n_expr2__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AMinusExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AMinusExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AMinusExpr_parser___parser_nodes___ANode___init();
@@ -1457,6 +1879,10 @@ typedef void (*parser___parser_prod___AStarshipExpr___init_astarshipexpr_t)(val_
 val_t NEW_AStarshipExpr_parser___parser_prod___AStarshipExpr___init_astarshipexpr(val_t p0, val_t p1);
 void parser___parser_prod___AStarshipExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AStarshipExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AStarshipExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AStarshipExpr___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AStarshipExpr___n_expr2__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AStarshipExpr___n_expr2__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AStarshipExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AStarshipExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AStarshipExpr_parser___parser_nodes___ANode___init();
@@ -1472,6 +1898,10 @@ typedef void (*parser___parser_prod___AStarExpr___init_astarexpr_t)(val_t p0, va
 val_t NEW_AStarExpr_parser___parser_prod___AStarExpr___init_astarexpr(val_t p0, val_t p1);
 void parser___parser_prod___AStarExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AStarExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AStarExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AStarExpr___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AStarExpr___n_expr2__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AStarExpr___n_expr2__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AStarExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AStarExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AStarExpr_parser___parser_nodes___ANode___init();
@@ -1487,6 +1917,10 @@ typedef void (*parser___parser_prod___ASlashExpr___init_aslashexpr_t)(val_t p0, 
 val_t NEW_ASlashExpr_parser___parser_prod___ASlashExpr___init_aslashexpr(val_t p0, val_t p1);
 void parser___parser_prod___ASlashExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ASlashExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ASlashExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ASlashExpr___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ASlashExpr___n_expr2__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ASlashExpr___n_expr2__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ASlashExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ASlashExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_ASlashExpr_parser___parser_nodes___ANode___init();
@@ -1502,6 +1936,10 @@ typedef void (*parser___parser_prod___APercentExpr___init_apercentexpr_t)(val_t 
 val_t NEW_APercentExpr_parser___parser_prod___APercentExpr___init_apercentexpr(val_t p0, val_t p1);
 void parser___parser_prod___APercentExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___APercentExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___APercentExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___APercentExpr___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___APercentExpr___n_expr2__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___APercentExpr___n_expr2__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___APercentExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___APercentExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_APercentExpr_parser___parser_nodes___ANode___init();
@@ -1517,6 +1955,10 @@ typedef void (*parser___parser_prod___AUminusExpr___init_auminusexpr_t)(val_t p0
 val_t NEW_AUminusExpr_parser___parser_prod___AUminusExpr___init_auminusexpr(val_t p0, val_t p1);
 void parser___parser_prod___AUminusExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AUminusExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AUminusExpr___n_minus__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AUminusExpr___n_minus__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AUminusExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AUminusExpr___n_expr__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AUminusExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AUminusExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AUminusExpr_parser___parser_nodes___ANode___init();
@@ -1529,6 +1971,14 @@ typedef void (*parser___parser_prod___ANewExpr___init_anewexpr_t)(val_t p0, val_
 val_t NEW_ANewExpr_parser___parser_prod___ANewExpr___init_anewexpr(val_t p0, val_t p1, val_t p2, val_t p3);
 void parser___parser_prod___ANewExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ANewExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ANewExpr___n_kwnew__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ANewExpr___n_kwnew__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ANewExpr___n_type__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ANewExpr___n_type__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ANewExpr___n_id__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ANewExpr___n_id__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ANewExpr___n_args__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ANewExpr___n_args__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ANewExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ANewExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_ANewExpr_parser___parser_nodes___ANode___init();
@@ -1540,6 +1990,10 @@ typedef void (*parser___parser_prod___AAttrExpr___init_aattrexpr_t)(val_t p0, va
 val_t NEW_AAttrExpr_parser___parser_prod___AAttrExpr___init_aattrexpr(val_t p0, val_t p1);
 void parser___parser_prod___AAttrExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AAttrExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AAttrExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAttrExpr___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AAttrExpr___n_id__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAttrExpr___n_id__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AAttrExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AAttrExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AAttrExpr_parser___parser_nodes___ANode___init();
@@ -1551,6 +2005,14 @@ typedef void (*parser___parser_prod___AAttrAssignExpr___init_aattrassignexpr_t)(
 val_t NEW_AAttrAssignExpr_parser___parser_prod___AAttrAssignExpr___init_aattrassignexpr(val_t p0, val_t p1, val_t p2, val_t p3);
 void parser___parser_prod___AAttrAssignExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AAttrAssignExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AAttrAssignExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAttrAssignExpr___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AAttrAssignExpr___n_id__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAttrAssignExpr___n_id__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AAttrAssignExpr___n_assign__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAttrAssignExpr___n_assign__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AAttrAssignExpr___n_value__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAttrAssignExpr___n_value__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AAttrAssignExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AAttrAssignExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AAttrAssignExpr_parser___parser_nodes___ANode___init();
@@ -1562,6 +2024,14 @@ typedef void (*parser___parser_prod___AAttrReassignExpr___init_aattrreassignexpr
 val_t NEW_AAttrReassignExpr_parser___parser_prod___AAttrReassignExpr___init_aattrreassignexpr(val_t p0, val_t p1, val_t p2, val_t p3);
 void parser___parser_prod___AAttrReassignExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AAttrReassignExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AAttrReassignExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAttrReassignExpr___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AAttrReassignExpr___n_id__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAttrReassignExpr___n_id__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AAttrReassignExpr___n_assign_op__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAttrReassignExpr___n_assign_op__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AAttrReassignExpr___n_value__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAttrReassignExpr___n_value__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AAttrReassignExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AAttrReassignExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AAttrReassignExpr_parser___parser_nodes___ANode___init();
@@ -1577,6 +2047,12 @@ typedef void (*parser___parser_prod___ACallExpr___init_acallexpr_t)(val_t p0, va
 val_t NEW_ACallExpr_parser___parser_prod___ACallExpr___init_acallexpr(val_t p0, val_t p1, val_t p2, val_t p3);
 void parser___parser_prod___ACallExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ACallExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ACallExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ACallExpr___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ACallExpr___n_id__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ACallExpr___n_id__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ACallExpr___n_args__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ACallExpr___n_args__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ACallExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ACallExpr___visit_all_t)(val_t p0, val_t p1);
   typedef void (*CLOS_OC_parser___parser_prod___ACallExpr___visit_all_1_0)(struct stack_frame_t *);
@@ -1593,6 +2069,16 @@ typedef void (*parser___parser_prod___ACallAssignExpr___init_acallassignexpr_t)(
 val_t NEW_ACallAssignExpr_parser___parser_prod___ACallAssignExpr___init_acallassignexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
 void parser___parser_prod___ACallAssignExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ACallAssignExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ACallAssignExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ACallAssignExpr___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ACallAssignExpr___n_id__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ACallAssignExpr___n_id__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ACallAssignExpr___n_args__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ACallAssignExpr___n_args__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ACallAssignExpr___n_assign__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ACallAssignExpr___n_assign__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ACallAssignExpr___n_value__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ACallAssignExpr___n_value__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ACallAssignExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ACallAssignExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_ACallAssignExpr_parser___parser_nodes___ANode___init();
@@ -1606,6 +2092,16 @@ typedef void (*parser___parser_prod___ACallReassignExpr___init_acallreassignexpr
 val_t NEW_ACallReassignExpr_parser___parser_prod___ACallReassignExpr___init_acallreassignexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
 void parser___parser_prod___ACallReassignExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ACallReassignExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ACallReassignExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ACallReassignExpr___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ACallReassignExpr___n_id__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ACallReassignExpr___n_id__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ACallReassignExpr___n_args__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ACallReassignExpr___n_args__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ACallReassignExpr___n_assign_op__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ACallReassignExpr___n_assign_op__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ACallReassignExpr___n_value__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ACallReassignExpr___n_value__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ACallReassignExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ACallReassignExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_ACallReassignExpr_parser___parser_nodes___ANode___init();
@@ -1618,6 +2114,12 @@ typedef void (*parser___parser_prod___ASuperExpr___init_asuperexpr_t)(val_t p0, 
 val_t NEW_ASuperExpr_parser___parser_prod___ASuperExpr___init_asuperexpr(val_t p0, val_t p1, val_t p2);
 void parser___parser_prod___ASuperExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ASuperExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ASuperExpr___n_qualified__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ASuperExpr___n_qualified__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ASuperExpr___n_kwsuper__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ASuperExpr___n_kwsuper__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ASuperExpr___n_args__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ASuperExpr___n_args__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ASuperExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ASuperExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_ASuperExpr_parser___parser_nodes___ANode___init();
@@ -1630,6 +2132,12 @@ typedef void (*parser___parser_prod___AInitExpr___init_ainitexpr_t)(val_t p0, va
 val_t NEW_AInitExpr_parser___parser_prod___AInitExpr___init_ainitexpr(val_t p0, val_t p1, val_t p2);
 void parser___parser_prod___AInitExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AInitExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AInitExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AInitExpr___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AInitExpr___n_kwinit__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AInitExpr___n_kwinit__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AInitExpr___n_args__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AInitExpr___n_args__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AInitExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AInitExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AInitExpr_parser___parser_nodes___ANode___init();
@@ -1646,6 +2154,10 @@ typedef void (*parser___parser_prod___ABraExpr___init_abraexpr_t)(val_t p0, val_
 val_t NEW_ABraExpr_parser___parser_prod___ABraExpr___init_abraexpr(val_t p0, val_t p1, val_t p2);
 void parser___parser_prod___ABraExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ABraExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ABraExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ABraExpr___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ABraExpr___n_args__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ABraExpr___n_args__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ABraExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ABraExpr___visit_all_t)(val_t p0, val_t p1);
   typedef void (*CLOS_OC_parser___parser_prod___ABraExpr___visit_all_1_0)(struct stack_frame_t *);
@@ -1662,6 +2174,14 @@ typedef void (*parser___parser_prod___ABraAssignExpr___init_abraassignexpr_t)(va
 val_t NEW_ABraAssignExpr_parser___parser_prod___ABraAssignExpr___init_abraassignexpr(val_t p0, val_t p1, val_t p2, val_t p3);
 void parser___parser_prod___ABraAssignExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ABraAssignExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ABraAssignExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ABraAssignExpr___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ABraAssignExpr___n_args__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ABraAssignExpr___n_args__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ABraAssignExpr___n_assign__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ABraAssignExpr___n_assign__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ABraAssignExpr___n_value__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ABraAssignExpr___n_value__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ABraAssignExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ABraAssignExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_ABraAssignExpr_parser___parser_nodes___ANode___init();
@@ -1675,6 +2195,14 @@ typedef void (*parser___parser_prod___ABraReassignExpr___init_abrareassignexpr_t
 val_t NEW_ABraReassignExpr_parser___parser_prod___ABraReassignExpr___init_abrareassignexpr(val_t p0, val_t p1, val_t p2, val_t p3);
 void parser___parser_prod___ABraReassignExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ABraReassignExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ABraReassignExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ABraReassignExpr___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ABraReassignExpr___n_args__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ABraReassignExpr___n_args__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ABraReassignExpr___n_assign_op__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ABraReassignExpr___n_assign_op__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ABraReassignExpr___n_value__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ABraReassignExpr___n_value__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ABraReassignExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ABraReassignExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_ABraReassignExpr_parser___parser_nodes___ANode___init();
@@ -1690,6 +2218,10 @@ typedef void (*parser___parser_prod___AClosureCallExpr___init_aclosurecallexpr_t
 val_t NEW_AClosureCallExpr_parser___parser_prod___AClosureCallExpr___init_aclosurecallexpr(val_t p0, val_t p1, val_t p2);
 void parser___parser_prod___AClosureCallExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AClosureCallExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AClosureCallExpr___n_id__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AClosureCallExpr___n_id__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AClosureCallExpr___n_args__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AClosureCallExpr___n_args__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AClosureCallExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AClosureCallExpr___visit_all_t)(val_t p0, val_t p1);
   typedef void (*CLOS_OC_parser___parser_prod___AClosureCallExpr___visit_all_1_0)(struct stack_frame_t *);
@@ -1704,6 +2236,8 @@ typedef void (*parser___parser_prod___AVarExpr___init_avarexpr_t)(val_t p0, val_
 val_t NEW_AVarExpr_parser___parser_prod___AVarExpr___init_avarexpr(val_t p0);
 void parser___parser_prod___AVarExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AVarExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AVarExpr___n_id__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AVarExpr___n_id__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AVarExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AVarExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AVarExpr_parser___parser_nodes___ANode___init();
@@ -1715,6 +2249,12 @@ typedef void (*parser___parser_prod___AVarAssignExpr___init_avarassignexpr_t)(va
 val_t NEW_AVarAssignExpr_parser___parser_prod___AVarAssignExpr___init_avarassignexpr(val_t p0, val_t p1, val_t p2);
 void parser___parser_prod___AVarAssignExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AVarAssignExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AVarAssignExpr___n_id__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AVarAssignExpr___n_id__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AVarAssignExpr___n_assign__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AVarAssignExpr___n_assign__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AVarAssignExpr___n_value__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AVarAssignExpr___n_value__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AVarAssignExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AVarAssignExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AVarAssignExpr_parser___parser_nodes___ANode___init();
@@ -1726,6 +2266,12 @@ typedef void (*parser___parser_prod___AVarReassignExpr___init_avarreassignexpr_t
 val_t NEW_AVarReassignExpr_parser___parser_prod___AVarReassignExpr___init_avarreassignexpr(val_t p0, val_t p1, val_t p2);
 void parser___parser_prod___AVarReassignExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AVarReassignExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AVarReassignExpr___n_id__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AVarReassignExpr___n_id__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AVarReassignExpr___n_assign_op__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AVarReassignExpr___n_assign_op__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AVarReassignExpr___n_value__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AVarReassignExpr___n_value__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AVarReassignExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AVarReassignExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AVarReassignExpr_parser___parser_nodes___ANode___init();
@@ -1737,6 +2283,12 @@ typedef void (*parser___parser_prod___ARangeExpr___init_arangeexpr_t)(val_t p0, 
 val_t NEW_ARangeExpr_parser___parser_prod___ARangeExpr___init_arangeexpr(val_t p0, val_t p1, val_t p2);
 void parser___parser_prod___ARangeExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ARangeExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ARangeExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ARangeExpr___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ARangeExpr___n_expr2__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ARangeExpr___n_expr2__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ARangeExpr___n_annotations__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ARangeExpr___n_annotations__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ARangeExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ARangeExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_ARangeExpr_parser___parser_nodes___ANode___init();
@@ -1749,6 +2301,16 @@ typedef void (*parser___parser_prod___ACrangeExpr___init_acrangeexpr_t)(val_t p0
 val_t NEW_ACrangeExpr_parser___parser_prod___ACrangeExpr___init_acrangeexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
 void parser___parser_prod___ACrangeExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ACrangeExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ACrangeExpr___n_obra__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ACrangeExpr___n_obra__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ACrangeExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ACrangeExpr___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ACrangeExpr___n_expr2__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ACrangeExpr___n_expr2__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ACrangeExpr___n_cbra__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ACrangeExpr___n_cbra__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ACrangeExpr___n_annotations__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ACrangeExpr___n_annotations__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ACrangeExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ACrangeExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_ACrangeExpr_parser___parser_nodes___ANode___init();
@@ -1762,6 +2324,16 @@ typedef void (*parser___parser_prod___AOrangeExpr___init_aorangeexpr_t)(val_t p0
 val_t NEW_AOrangeExpr_parser___parser_prod___AOrangeExpr___init_aorangeexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
 void parser___parser_prod___AOrangeExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AOrangeExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AOrangeExpr___n_obra__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AOrangeExpr___n_obra__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AOrangeExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AOrangeExpr___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AOrangeExpr___n_expr2__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AOrangeExpr___n_expr2__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AOrangeExpr___n_cbra__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AOrangeExpr___n_cbra__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AOrangeExpr___n_annotations__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AOrangeExpr___n_annotations__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AOrangeExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AOrangeExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AOrangeExpr_parser___parser_nodes___ANode___init();
@@ -1774,6 +2346,10 @@ typedef void (*parser___parser_prod___AArrayExpr___init_aarrayexpr_t)(val_t p0, 
 val_t NEW_AArrayExpr_parser___parser_prod___AArrayExpr___init_aarrayexpr(val_t p0, val_t p1);
 void parser___parser_prod___AArrayExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AArrayExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AArrayExpr___n_exprs__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AArrayExpr___n_exprs__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AArrayExpr___n_annotations__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AArrayExpr___n_annotations__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AArrayExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AArrayExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AArrayExpr_parser___parser_nodes___ANode___init();
@@ -1785,6 +2361,10 @@ typedef void (*parser___parser_prod___ASelfExpr___init_aselfexpr_t)(val_t p0, va
 val_t NEW_ASelfExpr_parser___parser_prod___ASelfExpr___init_aselfexpr(val_t p0, val_t p1);
 void parser___parser_prod___ASelfExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ASelfExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ASelfExpr___n_kwself__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ASelfExpr___n_kwself__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ASelfExpr___n_annotations__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ASelfExpr___n_annotations__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ASelfExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ASelfExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_ASelfExpr_parser___parser_nodes___ANode___init();
@@ -1809,6 +2389,10 @@ typedef void (*parser___parser_prod___ATrueExpr___init_atrueexpr_t)(val_t p0, va
 val_t NEW_ATrueExpr_parser___parser_prod___ATrueExpr___init_atrueexpr(val_t p0, val_t p1);
 void parser___parser_prod___ATrueExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ATrueExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ATrueExpr___n_kwtrue__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ATrueExpr___n_kwtrue__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ATrueExpr___n_annotations__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ATrueExpr___n_annotations__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ATrueExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ATrueExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_ATrueExpr_parser___parser_nodes___ANode___init();
@@ -1820,6 +2404,10 @@ typedef void (*parser___parser_prod___AFalseExpr___init_afalseexpr_t)(val_t p0, 
 val_t NEW_AFalseExpr_parser___parser_prod___AFalseExpr___init_afalseexpr(val_t p0, val_t p1);
 void parser___parser_prod___AFalseExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AFalseExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AFalseExpr___n_kwfalse__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AFalseExpr___n_kwfalse__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AFalseExpr___n_annotations__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AFalseExpr___n_annotations__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AFalseExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AFalseExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AFalseExpr_parser___parser_nodes___ANode___init();
@@ -1831,6 +2419,10 @@ typedef void (*parser___parser_prod___ANullExpr___init_anullexpr_t)(val_t p0, va
 val_t NEW_ANullExpr_parser___parser_prod___ANullExpr___init_anullexpr(val_t p0, val_t p1);
 void parser___parser_prod___ANullExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ANullExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ANullExpr___n_kwnull__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ANullExpr___n_kwnull__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ANullExpr___n_annotations__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ANullExpr___n_annotations__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ANullExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ANullExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_ANullExpr_parser___parser_nodes___ANode___init();
@@ -1842,6 +2434,10 @@ typedef void (*parser___parser_prod___AIntExpr___init_aintexpr_t)(val_t p0, val_
 val_t NEW_AIntExpr_parser___parser_prod___AIntExpr___init_aintexpr(val_t p0, val_t p1);
 void parser___parser_prod___AIntExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AIntExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AIntExpr___n_number__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AIntExpr___n_number__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AIntExpr___n_annotations__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AIntExpr___n_annotations__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AIntExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AIntExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AIntExpr_parser___parser_nodes___ANode___init();
@@ -1853,6 +2449,10 @@ typedef void (*parser___parser_prod___AFloatExpr___init_afloatexpr_t)(val_t p0, 
 val_t NEW_AFloatExpr_parser___parser_prod___AFloatExpr___init_afloatexpr(val_t p0, val_t p1);
 void parser___parser_prod___AFloatExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AFloatExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AFloatExpr___n_float__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AFloatExpr___n_float__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AFloatExpr___n_annotations__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AFloatExpr___n_annotations__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AFloatExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AFloatExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AFloatExpr_parser___parser_nodes___ANode___init();
@@ -1864,6 +2464,10 @@ typedef void (*parser___parser_prod___ACharExpr___init_acharexpr_t)(val_t p0, va
 val_t NEW_ACharExpr_parser___parser_prod___ACharExpr___init_acharexpr(val_t p0, val_t p1);
 void parser___parser_prod___ACharExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ACharExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ACharExpr___n_char__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ACharExpr___n_char__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ACharExpr___n_annotations__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ACharExpr___n_annotations__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ACharExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ACharExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_ACharExpr_parser___parser_nodes___ANode___init();
@@ -1875,6 +2479,10 @@ typedef void (*parser___parser_prod___AStringExpr___init_astringexpr_t)(val_t p0
 val_t NEW_AStringExpr_parser___parser_prod___AStringExpr___init_astringexpr(val_t p0, val_t p1);
 void parser___parser_prod___AStringExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AStringExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AStringExpr___n_string__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AStringExpr___n_string__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AStringExpr___n_annotations__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AStringExpr___n_annotations__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AStringExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AStringExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AStringExpr_parser___parser_nodes___ANode___init();
@@ -1886,6 +2494,8 @@ typedef void (*parser___parser_prod___AStartStringExpr___init_astartstringexpr_t
 val_t NEW_AStartStringExpr_parser___parser_prod___AStartStringExpr___init_astartstringexpr(val_t p0);
 void parser___parser_prod___AStartStringExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AStartStringExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AStartStringExpr___n_string__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AStartStringExpr___n_string__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AStartStringExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AStartStringExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AStartStringExpr_parser___parser_nodes___ANode___init();
@@ -1897,6 +2507,8 @@ typedef void (*parser___parser_prod___AMidStringExpr___init_amidstringexpr_t)(va
 val_t NEW_AMidStringExpr_parser___parser_prod___AMidStringExpr___init_amidstringexpr(val_t p0);
 void parser___parser_prod___AMidStringExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AMidStringExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AMidStringExpr___n_string__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AMidStringExpr___n_string__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AMidStringExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AMidStringExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AMidStringExpr_parser___parser_nodes___ANode___init();
@@ -1908,6 +2520,8 @@ typedef void (*parser___parser_prod___AEndStringExpr___init_aendstringexpr_t)(va
 val_t NEW_AEndStringExpr_parser___parser_prod___AEndStringExpr___init_aendstringexpr(val_t p0);
 void parser___parser_prod___AEndStringExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AEndStringExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AEndStringExpr___n_string__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AEndStringExpr___n_string__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AEndStringExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AEndStringExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AEndStringExpr_parser___parser_nodes___ANode___init();
@@ -1922,6 +2536,8 @@ typedef void (*parser___parser_prod___ASuperstringExpr___init_asuperstringexpr_t
 val_t NEW_ASuperstringExpr_parser___parser_prod___ASuperstringExpr___init_asuperstringexpr(val_t p0, val_t p1);
 void parser___parser_prod___ASuperstringExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ASuperstringExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ASuperstringExpr___n_annotations__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ASuperstringExpr___n_annotations__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ASuperstringExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ASuperstringExpr___visit_all_t)(val_t p0, val_t p1);
   typedef void (*CLOS_OC_parser___parser_prod___ASuperstringExpr___visit_all_1_0)(struct stack_frame_t *);
@@ -1936,6 +2552,14 @@ typedef void (*parser___parser_prod___AParExpr___init_aparexpr_t)(val_t p0, val_
 val_t NEW_AParExpr_parser___parser_prod___AParExpr___init_aparexpr(val_t p0, val_t p1, val_t p2, val_t p3);
 void parser___parser_prod___AParExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AParExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AParExpr___n_opar__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AParExpr___n_opar__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AParExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AParExpr___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AParExpr___n_cpar__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AParExpr___n_cpar__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AParExpr___n_annotations__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AParExpr___n_annotations__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AParExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AParExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AParExpr_parser___parser_nodes___ANode___init();
@@ -1947,6 +2571,16 @@ typedef void (*parser___parser_prod___AAsCastExpr___init_aascastexpr_t)(val_t p0
 val_t NEW_AAsCastExpr_parser___parser_prod___AAsCastExpr___init_aascastexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
 void parser___parser_prod___AAsCastExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AAsCastExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AAsCastExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAsCastExpr___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AAsCastExpr___n_kwas__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAsCastExpr___n_kwas__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AAsCastExpr___n_opar__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAsCastExpr___n_opar__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AAsCastExpr___n_type__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAsCastExpr___n_type__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AAsCastExpr___n_cpar__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAsCastExpr___n_cpar__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AAsCastExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AAsCastExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AAsCastExpr_parser___parser_nodes___ANode___init();
@@ -1958,6 +2592,18 @@ typedef void (*parser___parser_prod___AAsNotnullExpr___init_aasnotnullexpr_t)(va
 val_t NEW_AAsNotnullExpr_parser___parser_prod___AAsNotnullExpr___init_aasnotnullexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5);
 void parser___parser_prod___AAsNotnullExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AAsNotnullExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AAsNotnullExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAsNotnullExpr___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AAsNotnullExpr___n_kwas__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAsNotnullExpr___n_kwas__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AAsNotnullExpr___n_opar__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAsNotnullExpr___n_opar__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AAsNotnullExpr___n_kwnot__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAsNotnullExpr___n_kwnot__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AAsNotnullExpr___n_kwnull__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAsNotnullExpr___n_kwnull__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AAsNotnullExpr___n_cpar__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAsNotnullExpr___n_cpar__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AAsNotnullExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AAsNotnullExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AAsNotnullExpr_parser___parser_nodes___ANode___init();
@@ -1969,6 +2615,12 @@ typedef void (*parser___parser_prod___AIssetAttrExpr___init_aissetattrexpr_t)(va
 val_t NEW_AIssetAttrExpr_parser___parser_prod___AIssetAttrExpr___init_aissetattrexpr(val_t p0, val_t p1, val_t p2);
 void parser___parser_prod___AIssetAttrExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AIssetAttrExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AIssetAttrExpr___n_kwisset__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AIssetAttrExpr___n_kwisset__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AIssetAttrExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AIssetAttrExpr___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AIssetAttrExpr___n_id__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AIssetAttrExpr___n_id__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AIssetAttrExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AIssetAttrExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AIssetAttrExpr_parser___parser_nodes___ANode___init();
@@ -1980,6 +2632,14 @@ typedef void (*parser___parser_prod___ADebugTypeExpr___init_adebugtypeexpr_t)(va
 val_t NEW_ADebugTypeExpr_parser___parser_prod___ADebugTypeExpr___init_adebugtypeexpr(val_t p0, val_t p1, val_t p2, val_t p3);
 void parser___parser_prod___ADebugTypeExpr___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ADebugTypeExpr___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ADebugTypeExpr___n_kwdebug__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ADebugTypeExpr___n_kwdebug__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ADebugTypeExpr___n_kwtype__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ADebugTypeExpr___n_kwtype__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ADebugTypeExpr___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ADebugTypeExpr___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ADebugTypeExpr___n_type__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ADebugTypeExpr___n_type__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ADebugTypeExpr___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ADebugTypeExpr___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_ADebugTypeExpr_parser___parser_nodes___ANode___init();
@@ -2011,6 +2671,10 @@ typedef void (*parser___parser_prod___AParExprs___init_aparexprs_t)(val_t p0, va
 val_t NEW_AParExprs_parser___parser_prod___AParExprs___init_aparexprs(val_t p0, val_t p1, val_t p2);
 void parser___parser_prod___AParExprs___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AParExprs___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AParExprs___n_opar__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AParExprs___n_opar__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AParExprs___n_cpar__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AParExprs___n_cpar__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AParExprs___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AParExprs___visit_all_t)(val_t p0, val_t p1);
   typedef void (*CLOS_OC_parser___parser_prod___AParExprs___visit_all_1_0)(struct stack_frame_t *);
@@ -2028,6 +2692,10 @@ typedef void (*parser___parser_prod___ABraExprs___init_abraexprs_t)(val_t p0, va
 val_t NEW_ABraExprs_parser___parser_prod___ABraExprs___init_abraexprs(val_t p0, val_t p1, val_t p2);
 void parser___parser_prod___ABraExprs___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ABraExprs___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ABraExprs___n_obra__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ABraExprs___n_obra__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ABraExprs___n_cbra__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ABraExprs___n_cbra__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ABraExprs___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ABraExprs___visit_all_t)(val_t p0, val_t p1);
   typedef void (*CLOS_OC_parser___parser_prod___ABraExprs___visit_all_1_0)(struct stack_frame_t *);
@@ -2042,6 +2710,8 @@ typedef void (*parser___parser_prod___APlusAssignOp___init_aplusassignop_t)(val_
 val_t NEW_APlusAssignOp_parser___parser_prod___APlusAssignOp___init_aplusassignop(val_t p0);
 void parser___parser_prod___APlusAssignOp___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___APlusAssignOp___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___APlusAssignOp___n_pluseq__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___APlusAssignOp___n_pluseq__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___APlusAssignOp___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___APlusAssignOp___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_APlusAssignOp_parser___parser_nodes___ANode___init();
@@ -2053,6 +2723,8 @@ typedef void (*parser___parser_prod___AMinusAssignOp___init_aminusassignop_t)(va
 val_t NEW_AMinusAssignOp_parser___parser_prod___AMinusAssignOp___init_aminusassignop(val_t p0);
 void parser___parser_prod___AMinusAssignOp___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AMinusAssignOp___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AMinusAssignOp___n_minuseq__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AMinusAssignOp___n_minuseq__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AMinusAssignOp___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AMinusAssignOp___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AMinusAssignOp_parser___parser_nodes___ANode___init();
@@ -2067,6 +2739,16 @@ typedef void (*parser___parser_prod___AClosureDef___init_aclosuredef_t)(val_t p0
 val_t NEW_AClosureDef_parser___parser_prod___AClosureDef___init_aclosuredef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5);
 void parser___parser_prod___AClosureDef___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AClosureDef___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AClosureDef___n_bang__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AClosureDef___n_bang__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AClosureDef___n_id__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AClosureDef___n_id__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AClosureDef___n_kwdo__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AClosureDef___n_kwdo__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AClosureDef___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AClosureDef___n_expr__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AClosureDef___n_label__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AClosureDef___n_label__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AClosureDef___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AClosureDef___visit_all_t)(val_t p0, val_t p1);
   typedef void (*CLOS_OC_parser___parser_prod___AClosureDef___visit_all_1_0)(struct stack_frame_t *);
@@ -2081,6 +2763,8 @@ typedef void (*parser___parser_prod___ASimpleClosureId___init_asimpleclosureid_t
 val_t NEW_ASimpleClosureId_parser___parser_prod___ASimpleClosureId___init_asimpleclosureid(val_t p0);
 void parser___parser_prod___ASimpleClosureId___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ASimpleClosureId___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ASimpleClosureId___n_id__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ASimpleClosureId___n_id__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ASimpleClosureId___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ASimpleClosureId___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_ASimpleClosureId_parser___parser_nodes___ANode___init();
@@ -2092,6 +2776,8 @@ typedef void (*parser___parser_prod___ABreakClosureId___init_abreakclosureid_t)(
 val_t NEW_ABreakClosureId_parser___parser_prod___ABreakClosureId___init_abreakclosureid(val_t p0);
 void parser___parser_prod___ABreakClosureId___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ABreakClosureId___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ABreakClosureId___n_kwbreak__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ABreakClosureId___n_kwbreak__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ABreakClosureId___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ABreakClosureId___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_ABreakClosureId_parser___parser_nodes___ANode___init();
@@ -2106,6 +2792,10 @@ typedef void (*parser___parser_prod___AModuleName___init_amodulename_t)(val_t p0
 val_t NEW_AModuleName_parser___parser_prod___AModuleName___init_amodulename(val_t p0, val_t p1, val_t p2);
 void parser___parser_prod___AModuleName___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AModuleName___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AModuleName___n_quad__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AModuleName___n_quad__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AModuleName___n_id__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AModuleName___n_id__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AModuleName___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AModuleName___visit_all_t)(val_t p0, val_t p1);
   typedef void (*CLOS_OC_parser___parser_prod___AModuleName___visit_all_1_0)(struct stack_frame_t *);
@@ -2123,6 +2813,8 @@ typedef void (*parser___parser_prod___AExternCalls___init_aexterncalls_t)(val_t 
 val_t NEW_AExternCalls_parser___parser_prod___AExternCalls___init_aexterncalls(val_t p0, val_t p1);
 void parser___parser_prod___AExternCalls___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AExternCalls___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AExternCalls___n_kwimport__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AExternCalls___n_kwimport__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AExternCalls___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AExternCalls___visit_all_t)(val_t p0, val_t p1);
   typedef void (*CLOS_OC_parser___parser_prod___AExternCalls___visit_all_1_0)(struct stack_frame_t *);
@@ -2149,6 +2841,8 @@ typedef void (*parser___parser_prod___ASuperExternCall___init_asuperexterncall_t
 val_t NEW_ASuperExternCall_parser___parser_prod___ASuperExternCall___init_asuperexterncall(val_t p0);
 void parser___parser_prod___ASuperExternCall___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ASuperExternCall___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ASuperExternCall___n_kwsuper__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ASuperExternCall___n_kwsuper__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ASuperExternCall___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ASuperExternCall___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_ASuperExternCall_parser___parser_nodes___ANode___init();
@@ -2162,6 +2856,8 @@ typedef void (*parser___parser_prod___ALocalPropExternCall___init_alocalpropexte
 val_t NEW_ALocalPropExternCall_parser___parser_prod___ALocalPropExternCall___init_alocalpropexterncall(val_t p0);
 void parser___parser_prod___ALocalPropExternCall___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ALocalPropExternCall___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ALocalPropExternCall___n_methid__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ALocalPropExternCall___n_methid__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ALocalPropExternCall___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ALocalPropExternCall___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_ALocalPropExternCall_parser___parser_nodes___ANode___init();
@@ -2175,6 +2871,12 @@ typedef void (*parser___parser_prod___AFullPropExternCall___init_afullpropextern
 val_t NEW_AFullPropExternCall_parser___parser_prod___AFullPropExternCall___init_afullpropexterncall(val_t p0, val_t p1, val_t p2);
 void parser___parser_prod___AFullPropExternCall___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AFullPropExternCall___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AFullPropExternCall___n_classid__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AFullPropExternCall___n_classid__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AFullPropExternCall___n_quad__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AFullPropExternCall___n_quad__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AFullPropExternCall___n_methid__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AFullPropExternCall___n_methid__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AFullPropExternCall___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AFullPropExternCall___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AFullPropExternCall_parser___parser_nodes___ANode___init();
@@ -2188,6 +2890,8 @@ typedef void (*parser___parser_prod___AInitPropExternCall___init_ainitpropextern
 val_t NEW_AInitPropExternCall_parser___parser_prod___AInitPropExternCall___init_ainitpropexterncall(val_t p0);
 void parser___parser_prod___AInitPropExternCall___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AInitPropExternCall___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AInitPropExternCall___n_classid__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AInitPropExternCall___n_classid__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AInitPropExternCall___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AInitPropExternCall___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AInitPropExternCall_parser___parser_nodes___ANode___init();
@@ -2201,6 +2905,12 @@ typedef void (*parser___parser_prod___ACastAsExternCall___init_acastasexterncall
 val_t NEW_ACastAsExternCall_parser___parser_prod___ACastAsExternCall___init_acastasexterncall(val_t p0, val_t p1, val_t p2);
 void parser___parser_prod___ACastAsExternCall___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ACastAsExternCall___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ACastAsExternCall___n_from_type__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ACastAsExternCall___n_from_type__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ACastAsExternCall___n_kwas__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ACastAsExternCall___n_kwas__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___ACastAsExternCall___n_to_type__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ACastAsExternCall___n_to_type__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ACastAsExternCall___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ACastAsExternCall___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_ACastAsExternCall_parser___parser_nodes___ANode___init();
@@ -2214,6 +2924,12 @@ typedef void (*parser___parser_prod___AAsNullableExternCall___init_aasnullableex
 val_t NEW_AAsNullableExternCall_parser___parser_prod___AAsNullableExternCall___init_aasnullableexterncall(val_t p0, val_t p1, val_t p2);
 void parser___parser_prod___AAsNullableExternCall___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AAsNullableExternCall___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AAsNullableExternCall___n_type__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAsNullableExternCall___n_type__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AAsNullableExternCall___n_kwas__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAsNullableExternCall___n_kwas__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AAsNullableExternCall___n_kwnullable__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAsNullableExternCall___n_kwnullable__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AAsNullableExternCall___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AAsNullableExternCall___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AAsNullableExternCall_parser___parser_nodes___ANode___init();
@@ -2227,6 +2943,14 @@ typedef void (*parser___parser_prod___AAsNotNullableExternCall___init_aasnotnull
 val_t NEW_AAsNotNullableExternCall_parser___parser_prod___AAsNotNullableExternCall___init_aasnotnullableexterncall(val_t p0, val_t p1, val_t p2, val_t p3);
 void parser___parser_prod___AAsNotNullableExternCall___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AAsNotNullableExternCall___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AAsNotNullableExternCall___n_type__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAsNotNullableExternCall___n_type__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AAsNotNullableExternCall___n_kwas__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAsNotNullableExternCall___n_kwas__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AAsNotNullableExternCall___n_kwnot__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAsNotNullableExternCall___n_kwnot__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AAsNotNullableExternCall___n_kwnullable__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAsNotNullableExternCall___n_kwnullable__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AAsNotNullableExternCall___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AAsNotNullableExternCall___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AAsNotNullableExternCall_parser___parser_nodes___ANode___init();
@@ -2239,6 +2963,10 @@ typedef void (*parser___parser_prod___AInLanguage___init_ainlanguage_t)(val_t p0
 val_t NEW_AInLanguage_parser___parser_prod___AInLanguage___init_ainlanguage(val_t p0, val_t p1);
 void parser___parser_prod___AInLanguage___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AInLanguage___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AInLanguage___n_kwin__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AInLanguage___n_kwin__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AInLanguage___n_string__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AInLanguage___n_string__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AInLanguage___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AInLanguage___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AInLanguage_parser___parser_nodes___ANode___init();
@@ -2250,6 +2978,10 @@ typedef void (*parser___parser_prod___AExternCodeBlock___init_aexterncodeblock_t
 val_t NEW_AExternCodeBlock_parser___parser_prod___AExternCodeBlock___init_aexterncodeblock(val_t p0, val_t p1);
 void parser___parser_prod___AExternCodeBlock___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AExternCodeBlock___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AExternCodeBlock___n_in_language__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AExternCodeBlock___n_in_language__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AExternCodeBlock___n_extern_code_segment__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AExternCodeBlock___n_extern_code_segment__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AExternCodeBlock___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AExternCodeBlock___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AExternCodeBlock_parser___parser_nodes___ANode___init();
@@ -2264,6 +2996,8 @@ typedef void (*parser___parser_prod___AQualified___init_aqualified_t)(val_t p0, 
 val_t NEW_AQualified_parser___parser_prod___AQualified___init_aqualified(val_t p0, val_t p1);
 void parser___parser_prod___AQualified___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AQualified___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AQualified___n_classid__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AQualified___n_classid__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AQualified___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AQualified___visit_all_t)(val_t p0, val_t p1);
   typedef void (*CLOS_OC_parser___parser_prod___AQualified___visit_all_1_0)(struct stack_frame_t *);
@@ -2298,6 +3032,12 @@ typedef void (*parser___parser_prod___AAnnotations___init_aannotations_t)(val_t 
 val_t NEW_AAnnotations_parser___parser_prod___AAnnotations___init_aannotations(val_t p0, val_t p1, val_t p2, val_t p3);
 void parser___parser_prod___AAnnotations___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AAnnotations___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AAnnotations___n_at__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAnnotations___n_at__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AAnnotations___n_opar__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAnnotations___n_opar__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AAnnotations___n_cpar__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAnnotations___n_cpar__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AAnnotations___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AAnnotations___visit_all_t)(val_t p0, val_t p1);
   typedef void (*CLOS_OC_parser___parser_prod___AAnnotations___visit_all_1_0)(struct stack_frame_t *);
@@ -2315,6 +3055,14 @@ typedef void (*parser___parser_prod___AAnnotation___init_aannotation_t)(val_t p0
 val_t NEW_AAnnotation_parser___parser_prod___AAnnotation___init_aannotation(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
 void parser___parser_prod___AAnnotation___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AAnnotation___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AAnnotation___n_atid__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAnnotation___n_atid__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AAnnotation___n_opar__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAnnotation___n_opar__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AAnnotation___n_cpar__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAnnotation___n_cpar__eq_t)(val_t p0, val_t p1);
+void parser___parser_prod___AAnnotation___n_annotations__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAnnotation___n_annotations__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AAnnotation___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AAnnotation___visit_all_t)(val_t p0, val_t p1);
   typedef void (*CLOS_OC_parser___parser_prod___AAnnotation___visit_all_1_0)(struct stack_frame_t *);
@@ -2329,6 +3077,8 @@ typedef void (*parser___parser_prod___ATypeAtArg___init_atypeatarg_t)(val_t p0, 
 val_t NEW_ATypeAtArg_parser___parser_prod___ATypeAtArg___init_atypeatarg(val_t p0);
 void parser___parser_prod___ATypeAtArg___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___ATypeAtArg___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___ATypeAtArg___n_type__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___ATypeAtArg___n_type__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___ATypeAtArg___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___ATypeAtArg___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_ATypeAtArg_parser___parser_nodes___ANode___init();
@@ -2340,6 +3090,8 @@ typedef void (*parser___parser_prod___AExprAtArg___init_aexpratarg_t)(val_t p0, 
 val_t NEW_AExprAtArg_parser___parser_prod___AExprAtArg___init_aexpratarg(val_t p0);
 void parser___parser_prod___AExprAtArg___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AExprAtArg___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AExprAtArg___n_expr__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AExprAtArg___n_expr__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AExprAtArg___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AExprAtArg___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AExprAtArg_parser___parser_nodes___ANode___init();
@@ -2351,6 +3103,8 @@ typedef void (*parser___parser_prod___AAtAtArg___init_aatatarg_t)(val_t p0, val_
 val_t NEW_AAtAtArg_parser___parser_prod___AAtAtArg___init_aatatarg(val_t p0);
 void parser___parser_prod___AAtAtArg___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AAtAtArg___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AAtAtArg___n_annotations__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AAtAtArg___n_annotations__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AAtAtArg___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AAtAtArg___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AAtAtArg_parser___parser_nodes___ANode___init();
@@ -2362,6 +3116,8 @@ typedef void (*parser___parser_prod___AIdAtid___init_aidatid_t)(val_t p0, val_t 
 val_t NEW_AIdAtid_parser___parser_prod___AIdAtid___init_aidatid(val_t p0);
 void parser___parser_prod___AIdAtid___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AIdAtid___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AIdAtid___n_id__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AIdAtid___n_id__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AIdAtid___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AIdAtid___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AIdAtid_parser___parser_nodes___ANode___init();
@@ -2373,6 +3129,8 @@ typedef void (*parser___parser_prod___AKwexternAtid___init_akwexternatid_t)(val_
 val_t NEW_AKwexternAtid_parser___parser_prod___AKwexternAtid___init_akwexternatid(val_t p0);
 void parser___parser_prod___AKwexternAtid___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AKwexternAtid___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AKwexternAtid___n_id__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AKwexternAtid___n_id__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AKwexternAtid___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AKwexternAtid___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AKwexternAtid_parser___parser_nodes___ANode___init();
@@ -2384,6 +3142,8 @@ typedef void (*parser___parser_prod___AKwinternAtid___init_akwinternatid_t)(val_
 val_t NEW_AKwinternAtid_parser___parser_prod___AKwinternAtid___init_akwinternatid(val_t p0);
 void parser___parser_prod___AKwinternAtid___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AKwinternAtid___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AKwinternAtid___n_id__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AKwinternAtid___n_id__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AKwinternAtid___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AKwinternAtid___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AKwinternAtid_parser___parser_nodes___ANode___init();
@@ -2395,6 +3155,8 @@ typedef void (*parser___parser_prod___AKwreadableAtid___init_akwreadableatid_t)(
 val_t NEW_AKwreadableAtid_parser___parser_prod___AKwreadableAtid___init_akwreadableatid(val_t p0);
 void parser___parser_prod___AKwreadableAtid___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AKwreadableAtid___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AKwreadableAtid___n_id__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AKwreadableAtid___n_id__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AKwreadableAtid___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AKwreadableAtid___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AKwreadableAtid_parser___parser_nodes___ANode___init();
@@ -2406,6 +3168,8 @@ typedef void (*parser___parser_prod___AKwwritableAtid___init_akwwritableatid_t)(
 val_t NEW_AKwwritableAtid_parser___parser_prod___AKwwritableAtid___init_akwwritableatid(val_t p0);
 void parser___parser_prod___AKwwritableAtid___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AKwwritableAtid___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AKwwritableAtid___n_id__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AKwwritableAtid___n_id__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AKwwritableAtid___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AKwwritableAtid___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AKwwritableAtid_parser___parser_nodes___ANode___init();
@@ -2417,6 +3181,8 @@ typedef void (*parser___parser_prod___AKwimportAtid___init_akwimportatid_t)(val_
 val_t NEW_AKwimportAtid_parser___parser_prod___AKwimportAtid___init_akwimportatid(val_t p0);
 void parser___parser_prod___AKwimportAtid___replace_child(val_t p0, val_t p1, val_t p2);
 typedef void (*parser___parser_prod___AKwimportAtid___replace_child_t)(val_t p0, val_t p1, val_t p2);
+void parser___parser_prod___AKwimportAtid___n_id__eq(val_t p0, val_t p1);
+typedef void (*parser___parser_prod___AKwimportAtid___n_id__eq_t)(val_t p0, val_t p1);
 void parser___parser_prod___AKwimportAtid___visit_all(val_t p0, val_t p1);
 typedef void (*parser___parser_prod___AKwimportAtid___visit_all_t)(val_t p0, val_t p1);
 val_t NEW_AKwimportAtid_parser___parser_nodes___ANode___init();

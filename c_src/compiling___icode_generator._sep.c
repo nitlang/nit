@@ -114,16 +114,16 @@ void compiling___icode_generator___FileICodeDumper___write(val_t p0, val_t p1){
   /* compiling/icode_generator.nit:48 */
   REGB0 = TAG_Int(0);
   REGB1 = CALL_analysis___icode_dump___ICodeDumper___indent_level(fra.me.REG[0])(fra.me.REG[0]);
-  /* ../lib/standard/kernel.nit:355 */
+  /* ../lib/standard/kernel.nit:404 */
   while(1) {
     REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
     if (UNTAG_Bool(REGB2)) {
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:242 */
     REGB2 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-    /* ../lib/standard/kernel.nit:355 */
+    /* ../lib/standard/kernel.nit:404 */
     if (UNTAG_Bool(REGB2)) {
       /* compiling/icode_generator.nit:49 */
       REGB2 = TAG_Bool(ATTR_compiling___icode_generator___FileICodeDumper____file(fra.me.REG[0])!=NIT_NULL);
@@ -135,20 +135,20 @@ void compiling___icode_generator___FileICodeDumper___write(val_t p0, val_t p1){
       if (!once_value_1) {
         fra.me.REG[3] = BOX_NativeString("    ");
         REGB2 = TAG_Int(4);
-        fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB2);
+        fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB2);
         once_value_1 = fra.me.REG[3];
         register_static_object(&once_value_1);
       } else fra.me.REG[3] = once_value_1;
       fra.me.REG[3] = fra.me.REG[3];
       CALL_standard___stream___OStream___write(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
-      /* ../lib/standard/kernel.nit:357 */
+      /* ../lib/standard/kernel.nit:406 */
       REGB2 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB2 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB2));
-      /* ../lib/standard/kernel.nit:357 */
+      /* ../lib/standard/kernel.nit:406 */
       REGB0 = REGB2;
     } else {
-      /* ../lib/standard/kernel.nit:355 */
+      /* ../lib/standard/kernel.nit:404 */
       goto label2;
     }
   }
@@ -171,7 +171,7 @@ void compiling___icode_generator___FileICodeDumper___write(val_t p0, val_t p1){
   if (!once_value_3) {
     fra.me.REG[1] = BOX_NativeString("\n");
     REGB0 = TAG_Int(1);
-    fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+    fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
     once_value_3 = fra.me.REG[1];
     register_static_object(&once_value_3);
   } else fra.me.REG[1] = once_value_3;
@@ -212,7 +212,7 @@ void compiling___icode_generator___MMLocalClass___generate_icode_file(val_t p0, 
   if (!once_value_1) {
     fra.me.REG[3] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_1 = fra.me.REG[3];
     register_static_object(&once_value_1);
   } else fra.me.REG[3] = once_value_1;
@@ -222,7 +222,7 @@ void compiling___icode_generator___MMLocalClass___generate_icode_file(val_t p0, 
   if (!once_value_2) {
     fra.me.REG[1] = BOX_NativeString("/");
     REGB0 = TAG_Int(1);
-    fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+    fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
     once_value_2 = fra.me.REG[1];
     register_static_object(&once_value_2);
   } else fra.me.REG[1] = once_value_2;
@@ -233,7 +233,7 @@ void compiling___icode_generator___MMLocalClass___generate_icode_file(val_t p0, 
   if (!once_value_3) {
     fra.me.REG[1] = BOX_NativeString(".icode");
     REGB0 = TAG_Int(6);
-    fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+    fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
     once_value_3 = fra.me.REG[1];
     register_static_object(&once_value_3);
   } else fra.me.REG[1] = once_value_3;
@@ -280,7 +280,7 @@ void compiling___icode_generator___MMLocalClass___generate_icode_file(val_t p0, 
       if (!once_value_4) {
         fra.me.REG[3] = BOX_NativeString("Init var iroutine::\n");
         REGB0 = TAG_Int(20);
-        fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+        fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
         once_value_4 = fra.me.REG[3];
         register_static_object(&once_value_4);
       } else fra.me.REG[3] = once_value_4;
@@ -297,7 +297,7 @@ void compiling___icode_generator___MMLocalClass___generate_icode_file(val_t p0, 
       if (!once_value_5) {
         fra.me.REG[1] = BOX_NativeString("\n\n");
         REGB0 = TAG_Int(2);
-        fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+        fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
         once_value_5 = fra.me.REG[1];
         register_static_object(&once_value_5);
       } else fra.me.REG[1] = once_value_5;
@@ -328,7 +328,7 @@ void compiling___icode_generator___MMLocalClass___generate_icode_file(val_t p0, 
       if (!once_value_6) {
         fra.me.REG[3] = BOX_NativeString("Check new instance iroutine::\n");
         REGB0 = TAG_Int(30);
-        fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+        fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
         once_value_6 = fra.me.REG[3];
         register_static_object(&once_value_6);
       } else fra.me.REG[3] = once_value_6;
@@ -345,7 +345,7 @@ void compiling___icode_generator___MMLocalClass___generate_icode_file(val_t p0, 
       if (!once_value_7) {
         fra.me.REG[1] = BOX_NativeString("\n\n");
         REGB0 = TAG_Int(2);
-        fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+        fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
         once_value_7 = fra.me.REG[1];
         register_static_object(&once_value_7);
       } else fra.me.REG[1] = once_value_7;
@@ -418,7 +418,7 @@ void compiling___icode_generator___MMLocalClass___generate_icode_file(val_t p0, 
       if (!once_value_10) {
         fra.me.REG[3] = BOX_NativeString("New instance:: ");
         REGB0 = TAG_Int(15);
-        fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+        fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
         once_value_10 = fra.me.REG[3];
         register_static_object(&once_value_10);
       } else fra.me.REG[3] = once_value_10;
@@ -429,7 +429,7 @@ void compiling___icode_generator___MMLocalClass___generate_icode_file(val_t p0, 
       if (!once_value_11) {
         fra.me.REG[3] = BOX_NativeString("\n");
         REGB0 = TAG_Int(1);
-        fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+        fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
         once_value_11 = fra.me.REG[3];
         register_static_object(&once_value_11);
       } else fra.me.REG[3] = once_value_11;
@@ -449,7 +449,7 @@ void compiling___icode_generator___MMLocalClass___generate_icode_file(val_t p0, 
       if (!once_value_12) {
         fra.me.REG[1] = BOX_NativeString("\n\n");
         REGB0 = TAG_Int(2);
-        fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+        fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
         once_value_12 = fra.me.REG[1];
         register_static_object(&once_value_12);
       } else fra.me.REG[1] = once_value_12;
@@ -533,7 +533,7 @@ void compiling___icode_generator___MMMethod___generate_icode(val_t p0, val_t p1)
   if (!once_value_1) {
     fra.me.REG[4] = BOX_NativeString("Method:: ");
     REGB0 = TAG_Int(9);
-    fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+    fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
     once_value_1 = fra.me.REG[4];
     register_static_object(&once_value_1);
   } else fra.me.REG[4] = once_value_1;
@@ -544,7 +544,7 @@ void compiling___icode_generator___MMMethod___generate_icode(val_t p0, val_t p1)
   if (!once_value_2) {
     fra.me.REG[4] = BOX_NativeString("\n");
     REGB0 = TAG_Int(1);
-    fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+    fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
     once_value_2 = fra.me.REG[4];
     register_static_object(&once_value_2);
   } else fra.me.REG[4] = once_value_2;
@@ -563,7 +563,7 @@ void compiling___icode_generator___MMMethod___generate_icode(val_t p0, val_t p1)
   if (!once_value_3) {
     fra.me.REG[2] = BOX_NativeString("\n\n");
     REGB0 = TAG_Int(2);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_3 = fra.me.REG[2];
     register_static_object(&once_value_3);
   } else fra.me.REG[2] = once_value_3;

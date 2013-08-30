@@ -10,7 +10,6 @@ extern const int SFT_ffi[];
 void ffi___MMSrcModule___compile_separate_module(val_t p0, val_t p1);
 typedef void (*ffi___MMSrcModule___compile_separate_module_t)(val_t p0, val_t p1);
 val_t NEW_MMSrcModule_syntax___syntax_base___MMSrcModule___init(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
-val_t NEW_MMLocalClass_metamodel___abstractmetamodel___MMLocalClass___init(val_t p0, val_t p1, val_t p2);
 void ffi___FFIVisitor___compile(val_t p0);
 typedef void (*ffi___FFIVisitor___compile_t)(val_t p0);
 val_t NEW_FFIVisitor_ffi___ffi_base___FFIVisitor___init(val_t p0, val_t p1);

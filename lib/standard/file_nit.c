@@ -31,7 +31,7 @@ C implementation of file::String::files
 Imported methods signatures:
 	HashSet new_HashSet(  ) for hash_collection::HashSet::init
 	void HashSet_add( HashSet recv, Object item ) for hash_collection::HashSet::(abstract_collection::SimpleCollection::add)
-	String new_String_from_cstring( char * str ) for string::String::from_cstring
+	String NativeString_to_s() for string::NativeString::to_s
 	int HashSet_is_a_Set( HashSet value ) to check if a HashSet[String] is a Set[String]
 	Set HashSet_as_Set( HashSet value ) to cast from HashSet[String] to Set[String]
 */
@@ -58,7 +58,7 @@ Set String_files___impl( String recv )
 			if ( strcmp( de->d_name, ".." ) != 0 &&
 				strcmp( de->d_name, "." ) != 0 )
 			{
-				file_name = new_String_from_cstring( strdup( de->d_name ) );
+				file_name = NativeString_to_s( strdup( de->d_name ) );
 				HashSet_add( results, String_as_Object( file_name ) );
 			}
 

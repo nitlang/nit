@@ -1685,13 +1685,13 @@ void icode___icode_base___INative___init(val_t p0, val_t p1, val_t p2, int* init
   }
   REGB1 = CALL_metamodel___static_type___MMSignature___arity(fra.me.REG[4])(fra.me.REG[4]);
   REGB2 = TAG_Int(1);
-  /* ../lib/standard/kernel.nit:238 */
+  /* ../lib/standard/kernel.nit:245 */
   REGB2 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB2));
   /* icode/icode_base.nit:338 */
   REGB1 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB2));
   if (UNTAG_Bool(REGB1)) {
   } else {
-    /* ../lib/standard/kernel.nit:230 */
+    /* ../lib/standard/kernel.nit:237 */
     REGB2 = TAG_Bool((REGB0)==(REGB2));
     /* icode/icode_base.nit:338 */
     REGB1 = REGB2;

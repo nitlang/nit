@@ -1,7 +1,5 @@
 /* This file is part of NIT ( http://www.nitlanguage.org ).
  *
- * Copyright 2012 Alexis Laferrière <alexis.laf@xymus.net>
- *
  * This file is free software, which comes along with NIT.  This software is
  * distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
  * without  even  the implied warranty of  MERCHANTABILITY or  FITNESS FOR A
@@ -12,3 +10,10 @@
  */
 
 #include "string_nit.h"
+
+// Integer to NativeString method
+char* native_int_to_s(int recv, int len){
+	char* str = malloc(len + 1);
+	sprintf(str, "%d", recv);
+	return str;
+}

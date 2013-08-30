@@ -178,7 +178,7 @@ val_t toolcontext___Message___to_s(val_t p0){
     if (!once_value_2) {
       fra.me.REG[4] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+      fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
       once_value_2 = fra.me.REG[4];
       register_static_object(&once_value_2);
     } else fra.me.REG[4] = once_value_2;
@@ -189,7 +189,7 @@ val_t toolcontext___Message___to_s(val_t p0){
     if (!once_value_3) {
       fra.me.REG[1] = BOX_NativeString(": ");
       REGB0 = TAG_Int(2);
-      fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+      fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
       once_value_3 = fra.me.REG[1];
       register_static_object(&once_value_3);
     } else fra.me.REG[1] = once_value_3;
@@ -200,7 +200,7 @@ val_t toolcontext___Message___to_s(val_t p0){
     if (!once_value_4) {
       fra.me.REG[0] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+      fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
       once_value_4 = fra.me.REG[0];
       register_static_object(&once_value_4);
     } else fra.me.REG[0] = once_value_4;
@@ -259,7 +259,7 @@ val_t toolcontext___Message___to_color_string(val_t p0){
   fra.me.REG[0] = p0;
   /* toolcontext.nit:52 */
   REGB0 = TAG_Int(27);
-  /* ../lib/standard/kernel.nit:300 */
+  /* ../lib/standard/kernel.nit:318 */
   REGB0 = TAG_Char(UNTAG_Int(REGB0));
   /* toolcontext.nit:53 */
   REGB1 = TAG_Int(3);
@@ -267,7 +267,7 @@ val_t toolcontext___Message___to_color_string(val_t p0){
   if (!once_value_1) {
     fra.me.REG[2] = BOX_NativeString("");
     REGB1 = TAG_Int(0);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB1);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB1);
     once_value_1 = fra.me.REG[2];
     register_static_object(&once_value_1);
   } else fra.me.REG[2] = once_value_1;
@@ -278,7 +278,7 @@ val_t toolcontext___Message___to_color_string(val_t p0){
   if (!once_value_2) {
     fra.me.REG[2] = BOX_NativeString("[0;31m");
     REGB1 = TAG_Int(6);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB1);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB1);
     once_value_2 = fra.me.REG[2];
     register_static_object(&once_value_2);
   } else fra.me.REG[2] = once_value_2;
@@ -291,7 +291,7 @@ val_t toolcontext___Message___to_color_string(val_t p0){
   if (!once_value_3) {
     fra.me.REG[2] = BOX_NativeString("");
     REGB1 = TAG_Int(0);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB1);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB1);
     once_value_3 = fra.me.REG[2];
     register_static_object(&once_value_3);
   } else fra.me.REG[2] = once_value_3;
@@ -302,7 +302,7 @@ val_t toolcontext___Message___to_color_string(val_t p0){
   if (!once_value_4) {
     fra.me.REG[2] = BOX_NativeString("[1;31m");
     REGB1 = TAG_Int(6);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB1);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB1);
     once_value_4 = fra.me.REG[2];
     register_static_object(&once_value_4);
   } else fra.me.REG[2] = once_value_4;
@@ -315,7 +315,7 @@ val_t toolcontext___Message___to_color_string(val_t p0){
   if (!once_value_5) {
     fra.me.REG[2] = BOX_NativeString("");
     REGB1 = TAG_Int(0);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB1);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB1);
     once_value_5 = fra.me.REG[2];
     register_static_object(&once_value_5);
   } else fra.me.REG[2] = once_value_5;
@@ -326,7 +326,7 @@ val_t toolcontext___Message___to_color_string(val_t p0){
   if (!once_value_6) {
     fra.me.REG[2] = BOX_NativeString("[0;32m");
     REGB1 = TAG_Int(6);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB1);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB1);
     once_value_6 = fra.me.REG[2];
     register_static_object(&once_value_6);
   } else fra.me.REG[2] = once_value_6;
@@ -339,7 +339,7 @@ val_t toolcontext___Message___to_color_string(val_t p0){
   if (!once_value_7) {
     fra.me.REG[2] = BOX_NativeString("");
     REGB1 = TAG_Int(0);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB1);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB1);
     once_value_7 = fra.me.REG[2];
     register_static_object(&once_value_7);
   } else fra.me.REG[2] = once_value_7;
@@ -350,7 +350,7 @@ val_t toolcontext___Message___to_color_string(val_t p0){
   if (!once_value_8) {
     fra.me.REG[2] = BOX_NativeString("[0;33m");
     REGB1 = TAG_Int(6);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB1);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB1);
     once_value_8 = fra.me.REG[2];
     register_static_object(&once_value_8);
   } else fra.me.REG[2] = once_value_8;
@@ -363,7 +363,7 @@ val_t toolcontext___Message___to_color_string(val_t p0){
   if (!once_value_9) {
     fra.me.REG[3] = BOX_NativeString("");
     REGB1 = TAG_Int(0);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB1);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB1);
     once_value_9 = fra.me.REG[3];
     register_static_object(&once_value_9);
   } else fra.me.REG[3] = once_value_9;
@@ -374,7 +374,7 @@ val_t toolcontext___Message___to_color_string(val_t p0){
   if (!once_value_10) {
     fra.me.REG[3] = BOX_NativeString("[0m");
     REGB0 = TAG_Int(3);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_10 = fra.me.REG[3];
     register_static_object(&once_value_10);
   } else fra.me.REG[3] = once_value_10;
@@ -426,7 +426,7 @@ val_t toolcontext___Message___to_color_string(val_t p0){
       if (!once_value_12) {
         fra.me.REG[6] = BOX_NativeString("");
         REGB0 = TAG_Int(0);
-        fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB0);
+        fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB0);
         once_value_12 = fra.me.REG[6];
         register_static_object(&once_value_12);
       } else fra.me.REG[6] = once_value_12;
@@ -436,7 +436,7 @@ val_t toolcontext___Message___to_color_string(val_t p0){
       if (!once_value_13) {
         fra.me.REG[6] = BOX_NativeString("");
         REGB0 = TAG_Int(0);
-        fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB0);
+        fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB0);
         once_value_13 = fra.me.REG[6];
         register_static_object(&once_value_13);
       } else fra.me.REG[6] = once_value_13;
@@ -447,7 +447,7 @@ val_t toolcontext___Message___to_color_string(val_t p0){
       if (!once_value_14) {
         fra.me.REG[6] = BOX_NativeString("");
         REGB0 = TAG_Int(0);
-        fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB0);
+        fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB0);
         once_value_14 = fra.me.REG[6];
         register_static_object(&once_value_14);
       } else fra.me.REG[6] = once_value_14;
@@ -457,7 +457,7 @@ val_t toolcontext___Message___to_color_string(val_t p0){
       if (!once_value_15) {
         fra.me.REG[6] = BOX_NativeString(": ");
         REGB0 = TAG_Int(2);
-        fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB0);
+        fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB0);
         once_value_15 = fra.me.REG[6];
         register_static_object(&once_value_15);
       } else fra.me.REG[6] = once_value_15;
@@ -468,7 +468,7 @@ val_t toolcontext___Message___to_color_string(val_t p0){
       if (!once_value_16) {
         fra.me.REG[6] = BOX_NativeString("");
         REGB0 = TAG_Int(0);
-        fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB0);
+        fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB0);
         once_value_16 = fra.me.REG[6];
         register_static_object(&once_value_16);
       } else fra.me.REG[6] = once_value_16;
@@ -484,7 +484,7 @@ val_t toolcontext___Message___to_color_string(val_t p0){
       if (!once_value_17) {
         fra.me.REG[6] = BOX_NativeString("");
         REGB0 = TAG_Int(0);
-        fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB0);
+        fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB0);
         once_value_17 = fra.me.REG[6];
         register_static_object(&once_value_17);
       } else fra.me.REG[6] = once_value_17;
@@ -494,7 +494,7 @@ val_t toolcontext___Message___to_color_string(val_t p0){
       if (!once_value_18) {
         fra.me.REG[1] = BOX_NativeString("");
         REGB0 = TAG_Int(0);
-        fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+        fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
         once_value_18 = fra.me.REG[1];
         register_static_object(&once_value_18);
       } else fra.me.REG[1] = once_value_18;
@@ -505,7 +505,7 @@ val_t toolcontext___Message___to_color_string(val_t p0){
       if (!once_value_19) {
         fra.me.REG[1] = BOX_NativeString("");
         REGB0 = TAG_Int(0);
-        fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+        fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
         once_value_19 = fra.me.REG[1];
         register_static_object(&once_value_19);
       } else fra.me.REG[1] = once_value_19;
@@ -515,7 +515,7 @@ val_t toolcontext___Message___to_color_string(val_t p0){
       if (!once_value_20) {
         fra.me.REG[2] = BOX_NativeString(": ");
         REGB0 = TAG_Int(2);
-        fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+        fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
         once_value_20 = fra.me.REG[2];
         register_static_object(&once_value_20);
       } else fra.me.REG[2] = once_value_20;
@@ -526,7 +526,7 @@ val_t toolcontext___Message___to_color_string(val_t p0){
       if (!once_value_21) {
         fra.me.REG[0] = BOX_NativeString("\n");
         REGB0 = TAG_Int(1);
-        fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+        fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
         once_value_21 = fra.me.REG[0];
         register_static_object(&once_value_21);
       } else fra.me.REG[0] = once_value_21;
@@ -535,7 +535,7 @@ val_t toolcontext___Message___to_color_string(val_t p0){
       if (!once_value_22) {
         fra.me.REG[0] = BOX_NativeString("1;31");
         REGB0 = TAG_Int(4);
-        fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+        fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
         once_value_22 = fra.me.REG[0];
         register_static_object(&once_value_22);
       } else fra.me.REG[0] = once_value_22;
@@ -549,7 +549,7 @@ val_t toolcontext___Message___to_color_string(val_t p0){
       if (!once_value_23) {
         fra.me.REG[0] = BOX_NativeString("");
         REGB0 = TAG_Int(0);
-        fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+        fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
         once_value_23 = fra.me.REG[0];
         register_static_object(&once_value_23);
       } else fra.me.REG[0] = once_value_23;
@@ -708,7 +708,7 @@ void toolcontext___ToolContext___check_errors(val_t p0){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:237 */
+  /* ../lib/standard/kernel.nit:244 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)>UNTAG_Int(REGB1));
   /* toolcontext.nit:87 */
   if (UNTAG_Bool(REGB1)) {
@@ -733,18 +733,18 @@ void toolcontext___ToolContext___check_errors(val_t p0){
       nit_abort("Uninitialized attribute %s", "_messages", LOCATE_toolcontext, 90);
     }
     fra.me.REG[2] = ATTR_toolcontext___ToolContext____messages(fra.me.REG[0]);
-    /* ../lib/standard/collection/array.nit:269 */
-    REGB1 = TAG_Int(0);
     /* ../lib/standard/collection/array.nit:270 */
+    REGB1 = TAG_Int(0);
+    /* ../lib/standard/collection/array.nit:271 */
     REGB0 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2])!=NIT_NULL);
     if (UNTAG_Bool(REGB0)) {
     } else {
-      nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 270);
+      nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 271);
     }
     REGB0 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2]);
-    /* ../lib/standard/collection/array.nit:271 */
-    fra.me.REG[1] = ATTR_standard___collection___array___Array____items(fra.me.REG[2]);
     /* ../lib/standard/collection/array.nit:272 */
+    fra.me.REG[1] = ATTR_standard___collection___array___Array____items(fra.me.REG[2]);
+    /* ../lib/standard/collection/array.nit:273 */
     while(1) {
       /* ../lib/standard/collection/array.nit:24 */
       REGB0 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2])!=NIT_NULL);
@@ -758,16 +758,16 @@ void toolcontext___ToolContext___check_errors(val_t p0){
       } else {
         nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
       }
-      /* ../lib/standard/kernel.nit:235 */
+      /* ../lib/standard/kernel.nit:242 */
       REGB0 = TAG_Bool(UNTAG_Int(REGB1)<UNTAG_Int(REGB0));
-      /* ../lib/standard/collection/array.nit:272 */
+      /* ../lib/standard/collection/array.nit:273 */
       if (UNTAG_Bool(REGB0)) {
-        /* ../lib/standard/collection/array.nit:273 */
+        /* ../lib/standard/collection/array.nit:274 */
         REGB0 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
         if (UNTAG_Bool(REGB0)) {
-          nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 273);
+          nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 274);
         }
-        /* ../lib/standard/collection/array.nit:724 */
+        /* ../lib/standard/collection/array.nit:725 */
         fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[1])->val[UNTAG_Int(REGB1)];
         /* toolcontext.nit:91 */
         fra.me.REG[4] = CALL_toolcontext___ToolContext___opt_no_color(fra.me.REG[0])(fra.me.REG[0]);
@@ -780,7 +780,7 @@ void toolcontext___ToolContext___check_errors(val_t p0){
           if (!once_value_1) {
             fra.me.REG[6] = BOX_NativeString("");
             REGB0 = TAG_Int(0);
-            fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB0);
+            fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB0);
             once_value_1 = fra.me.REG[6];
             register_static_object(&once_value_1);
           } else fra.me.REG[6] = once_value_1;
@@ -791,7 +791,7 @@ void toolcontext___ToolContext___check_errors(val_t p0){
           if (!once_value_2) {
             fra.me.REG[6] = BOX_NativeString("\n");
             REGB0 = TAG_Int(1);
-            fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB0);
+            fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB0);
             once_value_2 = fra.me.REG[6];
             register_static_object(&once_value_2);
           } else fra.me.REG[6] = once_value_2;
@@ -807,7 +807,7 @@ void toolcontext___ToolContext___check_errors(val_t p0){
           if (!once_value_3) {
             fra.me.REG[6] = BOX_NativeString("");
             REGB0 = TAG_Int(0);
-            fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB0);
+            fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB0);
             once_value_3 = fra.me.REG[6];
             register_static_object(&once_value_3);
           } else fra.me.REG[6] = once_value_3;
@@ -818,7 +818,7 @@ void toolcontext___ToolContext___check_errors(val_t p0){
           if (!once_value_4) {
             fra.me.REG[3] = BOX_NativeString("\n");
             REGB0 = TAG_Int(1);
-            fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+            fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
             once_value_4 = fra.me.REG[3];
             register_static_object(&once_value_4);
           } else fra.me.REG[3] = once_value_4;
@@ -827,14 +827,14 @@ void toolcontext___ToolContext___check_errors(val_t p0){
           fra.me.REG[4] = CALL_standard___string___Object___to_s(fra.me.REG[4])(fra.me.REG[4]);
           CALL_standard___stream___OStream___write(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[4]);
         }
-        /* ../lib/standard/collection/array.nit:274 */
+        /* ../lib/standard/collection/array.nit:275 */
         REGB0 = TAG_Int(1);
-        /* ../lib/standard/kernel.nit:238 */
+        /* ../lib/standard/kernel.nit:245 */
         REGB0 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB0));
-        /* ../lib/standard/collection/array.nit:274 */
+        /* ../lib/standard/collection/array.nit:275 */
         REGB1 = REGB0;
       } else {
-        /* ../lib/standard/collection/array.nit:272 */
+        /* ../lib/standard/collection/array.nit:273 */
         goto label5;
       }
     }
@@ -856,7 +856,7 @@ void toolcontext___ToolContext___check_errors(val_t p0){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:237 */
+  /* ../lib/standard/kernel.nit:244 */
   REGB0 = TAG_Bool(UNTAG_Int(REGB1)>UNTAG_Int(REGB0));
   /* toolcontext.nit:101 */
   if (UNTAG_Bool(REGB0)) {
@@ -903,7 +903,7 @@ void toolcontext___ToolContext___error(val_t p0, val_t p1, val_t p2){
   }
   REGB0 = ATTR_toolcontext___ToolContext____error_count(fra.me.REG[0]);
   REGB1 = TAG_Int(1);
-  /* ../lib/standard/kernel.nit:238 */
+  /* ../lib/standard/kernel.nit:245 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
   /* toolcontext.nit:108 */
   ATTR_toolcontext___ToolContext____error_count(fra.me.REG[0]) = REGB1;
@@ -978,7 +978,7 @@ void toolcontext___ToolContext___warning(val_t p0, val_t p1, val_t p2){
       REGB2 = TAG_Bool(0);
       REGB1 = REGB2;
     } else {
-      /* ../lib/standard/kernel.nit:230 */
+      /* ../lib/standard/kernel.nit:237 */
       REGB0 = TAG_Bool((fra.me.REG[3])==(REGB0));
       /* toolcontext.nit:122 */
       REGB1 = REGB0;
@@ -1004,7 +1004,7 @@ void toolcontext___ToolContext___warning(val_t p0, val_t p1, val_t p2){
   }
   REGB1 = ATTR_toolcontext___ToolContext____warning_count(fra.me.REG[0]);
   REGB0 = TAG_Int(1);
-  /* ../lib/standard/kernel.nit:238 */
+  /* ../lib/standard/kernel.nit:245 */
   REGB0 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB0));
   /* toolcontext.nit:124 */
   ATTR_toolcontext___ToolContext____warning_count(fra.me.REG[0]) = REGB0;
@@ -1048,7 +1048,7 @@ void toolcontext___ToolContext___info(val_t p0, val_t p1, val_t p2){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:234 */
+  /* ../lib/standard/kernel.nit:241 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)<=UNTAG_Int(REGB1));
   /* toolcontext.nit:131 */
   if (UNTAG_Bool(REGB1)) {
@@ -1058,7 +1058,7 @@ void toolcontext___ToolContext___info(val_t p0, val_t p1, val_t p2){
     if (!once_value_1) {
       fra.me.REG[3] = BOX_NativeString("");
       REGB1 = TAG_Int(0);
-      fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB1);
+      fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB1);
       once_value_1 = fra.me.REG[3];
       register_static_object(&once_value_1);
     } else fra.me.REG[3] = once_value_1;
@@ -1068,7 +1068,7 @@ void toolcontext___ToolContext___info(val_t p0, val_t p1, val_t p2){
     if (!once_value_2) {
       fra.me.REG[1] = BOX_NativeString("");
       REGB1 = TAG_Int(0);
-      fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB1);
+      fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB1);
       once_value_2 = fra.me.REG[1];
       register_static_object(&once_value_2);
     } else fra.me.REG[1] = once_value_2;

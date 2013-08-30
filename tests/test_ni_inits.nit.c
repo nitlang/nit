@@ -44,7 +44,7 @@ void A_set___impl( A recv, char v )
 C implementation of test_ni_inits::A::(string::Object::to_s)
 
 Imported methods signatures:
-	String new_String_from_cstring( char * str ) for string::String::from_cstring
+	String NativeString_to_s( char * str ) for string::NativeString::to_s
 */
 String A_to_s___impl( A recv )
 {
@@ -52,5 +52,5 @@ String A_to_s___impl( A recv )
 	str[0] = *recv;
 	str[1] = 0;
 
-	return new_String_from_cstring( str );
+	return NativeString_to_s( str );
 }
