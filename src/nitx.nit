@@ -401,31 +401,30 @@ class NitIndex
 	end
 
 	private fun seek_returns(entry: String): List[MProperty] do
-		# TODO how to match with generic types?
 		var matches = new List[MProperty]
 		for mprop in model.mproperties do
 			var intro = mprop.intro
 			if intro isa MMethodDef then
-				if intro.msignature.return_mtype != null and intro.msignature.return_mtype.to_s == entry then matches.add(mprop)
+				if intro.msignature.return_mtype != null and intro.msignature.return_mtype.to_console.has_prefix(entry) then matches.add(mprop)
 			else if intro isa MAttributeDef then
-				if intro.static_mtype.to_s == entry then matches.add(mprop)
+				if intro.static_mtype.to_console.has_prefix(entry) then matches.add(mprop)
 			end
 		end
 		return matches
 	end
 
 	private fun seek_params(entry: String): List[MProperty] do
-		# TODO how to match with generic types?
 		var matches = new List[MProperty]
 		for mprop in model.mproperties do
 			var intro = mprop.intro
 			if intro isa MMethodDef then
 				var mparameters = intro.msignature.mparameters
 				for mparameter in mparameters do
-					if mparameter.mtype.to_s == entry then matches.add(mprop)
+					print mparameter.mtype.to_console
+					if mparameter.mtype.to_console.has_prefix(entry) then matches.add(mprop)
 				end
 			else if intro isa MAttributeDef then
-				if intro.static_mtype.to_s == entry then matches.add(mprop)
+				if intro.static_mtype.to_console.has_prefix(entry) then matches.add(mprop)
 			end
 		end
 		return matches
