@@ -17,6 +17,7 @@ module nitx
 
 import model_utils
 import modelize_property
+import frontend
 
 private class Pager
 	var content = new Buffer
@@ -24,6 +25,22 @@ private class Pager
 	fun addn(text: String) do content.append(text.escape)
 	fun add_rule do add("\n---\n")
 	fun render do sys.system("echo \"{content}\" | pager -r")
+end
+
+private class Query
+	var keyword: String
+	init(keyword: String) do
+		self.keyword = keyword
+	end
+end
+
+private class QueryPair
+	super Query
+	var category: String
+	init(keyword: String, category: String) do
+		super(keyword)
+		self.category = category
+	end
 end
 
 # Main class of the nit index tool
@@ -90,8 +107,9 @@ class NitIndex
 		print "\tname\t\tlookup module, class and property with the corresponding 'name'"
 		print "\tparam: Type\tlookup methods using the corresponding 'Type' as parameter"
 		print "\treturn: Type\tlookup methods returning the corresponding 'Type'"
-		print "\tEnter ':q' to exit"
-		print "\tEnter ':h' to display this help message"
+		print "\tnew: Type\tlookup methods creating new instances of 'Type'"
+		print "\t:h\t\tdisplay this help message"
+		print "\t:q\t\texit"
 		print ""
 	end
 
@@ -112,15 +130,21 @@ class NitIndex
 		end
 		if entry == ":q" then exit(0)
 		var pager = new Pager
-		# seek return types
-		if entry.has_prefix("return:") then
-			var ret = entry.split_with(":")[1].replace(" ", "")
-			var matches = seek_returns(ret)
-			props_fulldoc(pager, matches)
-		else if entry.has_prefix("param:") then
-			var param = entry.split_with(":")[1].replace(" ", "")
-			var matches = seek_params(param)
-			props_fulldoc(pager, matches)
+		var query = parse_query(entry)
+		if query isa QueryPair then
+			# seek return types
+			if query.category == "return" then
+				var matches = seek_returns(query.keyword)
+				props_fulldoc(pager, matches)
+			# seek param types
+			else if query.category == "param" then
+				var matches = seek_params(query.keyword)
+				props_fulldoc(pager, matches)
+			# seek type inits
+			else if query.category == "new" then
+				var matches = seek_inits(query.keyword)
+				props_fulldoc(pager, matches)
+			end
 		else
 			# seek for modules
 			var mmatches = new List[MModule]
@@ -148,6 +172,18 @@ class NitIndex
 			pager.render
 		end
 		if arguments.length == 1 then prompt
+	end
+
+	private fun parse_query(str: String): Query do
+		var parts = str.split_with(":")
+		if parts.length == 1 then
+			return new Query(parts[0])
+		else
+			var category = parts[0]
+			var keyword = parts[1]
+			if keyword.first == ' ' then keyword = keyword.substring_from(1)
+			return new QueryPair(keyword, category)
+		end
 	end
 
 	private fun modules_fulldoc(pager: Pager, mmodules: List[MModule]) do
@@ -428,6 +464,58 @@ class NitIndex
 			end
 		end
 		return matches
+	end
+
+	#TODO should be returning a List[MPropDef]
+	private fun seek_inits(entry: String): List[MProperty] do
+		var mtype2mpropdefs = toolcontext.nitx_phase.mtype2mpropdefs
+		var matches = new List[MProperty]
+		for mtype in mtype2mpropdefs.keys do
+			if mtype.to_console.has_prefix(entry) then
+				for mpropdef in mtype2mpropdefs[mtype] do
+					matches.add(mpropdef.mproperty)
+				end
+			end
+		end
+		return matches
+	end
+end
+
+# Code Analysis
+
+redef class ToolContext
+	var nitx_phase: NitxPhase = new NitxPhase(self, [typing_phase])
+end
+
+# Compiler phase for nitx
+private class NitxPhase
+	super Phase
+
+	var mtype2mpropdefs = new HashMap[MType, Set[MPropDef]]
+	redef fun process_npropdef(npropdef) do
+		var visitor = new TypeInitVisitor
+		visitor.enter_visit(npropdef)
+		for mtype in visitor.inits do
+			if not mtype2mpropdefs.has_key(mtype) then
+				mtype2mpropdefs[mtype] = new HashSet[MPropDef]
+			end
+			mtype2mpropdefs[mtype].add(npropdef.mpropdef.as(not null))
+		end
+	end
+end
+
+# Visitor looking for initialized mtype (new T)
+private class TypeInitVisitor
+	super Visitor
+
+	var inits = new HashSet[MType]
+	redef fun visit(node)
+	do
+		node.visit_all(self)
+		# look for init
+		if not node isa ANewExpr then return
+		var mtype = node.n_type.mtype
+		if mtype != null then inits.add(mtype)
 	end
 end
 
