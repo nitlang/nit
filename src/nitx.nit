@@ -157,7 +157,7 @@ class NitIndex
 			# comment
 			if mbuilder.mmodule2nmodule.has_key(mmodule) then
 				var nmodule = mbuilder.mmodule2nmodule[mmodule]
-				if not nmodule.n_moduledecl.n_doc == null then
+				if nmodule.n_moduledecl != null and nmodule.n_moduledecl.n_doc != null then
 					for comment in nmodule.n_moduledecl.n_doc.comment do pager.add(comment.green)
 				end
 			end
