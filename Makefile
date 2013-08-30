@@ -49,7 +49,7 @@ doc/nitc/index.html: bin/nitdoc
 		--source "https://github.com/privat/nit/blob/$$(git show --format="%H" | head -1)/%f#L%l-%L"
 
 doc/newmodel/index.html: bin/nitdoc
-	bin/nitdox src/nit.nit src/nitmetrics.nit src/nitg.nit src/nitx.nit src/nitunit.nit -d doc/newmodel \
+	bin/nitdox src/nit.nit src/nitmetrics.nit src/nitg.nit src/nitx.nit src/nitunit.nit src/nitlight.nit src/ni_nitdoc.nit src/dbgcli.nit src/netdbg.nit -d doc/newmodel \
 		--custom-title "Nit New Model" \
 		--custom-menu-items "<li><a href=\"http://nitlanguage.org/\">Nitlanguage.org</a></li>" \
 		--custom-overview-text "<p>Documentation for the Nit tools based on the new metamodel<br/>Version $$(git describe)<br/>Date: $$(git show --format="%cd" | head -1)</p>" \
