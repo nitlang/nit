@@ -92,7 +92,7 @@ extern SDLDisplay in "C" `{SDL_Surface *`}
 		return events
 	end
 
-	private fun poll_event: nullable IE is extern import SDLKeyEvent, SDLMouseButtonEvent, SDLMouseMotionEvent, SDLQuitEvent, String::from_cstring, SDLMouseButtonEvent as (nullable IE), SDLMouseMotionEvent as (nullable IE), SDLKeyEvent as (nullable IE), SDLQuitEvent as (nullable IE) `{
+	private fun poll_event: nullable IE is extern import SDLKeyEvent, SDLMouseButtonEvent, SDLMouseMotionEvent, SDLQuitEvent, NativeString::to_s, SDLMouseButtonEvent as (nullable IE), SDLMouseMotionEvent as (nullable IE), SDLKeyEvent as (nullable IE), SDLQuitEvent as (nullable IE) `{
 		SDL_Event event;
 
 		SDL_PumpEvents();
@@ -108,7 +108,7 @@ extern SDLDisplay in "C" `{SDL_Surface *`}
 	#endif
 
 					return SDLKeyEvent_as_nullable_InputEvent(
-							new_SDLKeyEvent( new_String_from_cstring(
+							new_SDLKeyEvent( NativeString_to_s(
 								SDL_GetKeyName(event.key.keysym.sym) ),
 								event.type==SDL_KEYDOWN ) );
 
@@ -408,7 +408,7 @@ extern SDLFont in "C" `{TTF_Font *`}
 		if ( fn == NULL )
 			return null_String();
 		else
-			return String_as_nullable( new_String_from_cstring( fn ) );
+			return String_as_nullable( NativeString_to_s( fn ) );
 	`}
 	fun style_name: nullable String is extern import String::to_cstring, String as nullable `{
 		char *sn = TTF_FontFaceStyleName( recv );
@@ -416,10 +416,10 @@ extern SDLFont in "C" `{TTF_Font *`}
 		if ( sn == NULL )
 			return null_String();
 		else
-			return String_as_nullable( new_String_from_cstring( sn ) );
+			return String_as_nullable( NativeString_to_s( sn ) );
 	`}
 
-	fun width_of( text: String ): Int is extern import String::from_cstring `{
+	fun width_of( text: String ): Int is extern import NativeString::to_s `{
 		char *ctext = String_to_cstring( text );
 		int w;
 		if ( TTF_SizeText( recv, ctext, &w, NULL ) )
