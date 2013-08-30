@@ -31,7 +31,7 @@ doc/stdlib/index.html: bin/nitdoc
 	@echo '***************************************************************'
 	@echo '* Generate doc for NIT standard library                       *'
 	@echo '***************************************************************'
-	bin/nitdoc lib/*.nit $$(find lib/* -maxdepth 0 -type d ) -d doc/stdlib --public \
+	bin/nitdoc lib/*.nit $$(find lib/* -maxdepth 0 -type d ) -d doc/stdlib \
 		--custom-title "Nit Standard Library" \
 		--custom-menu-items "<li><a href=\"http://nitlanguage.org/\">Nitlanguage.org</a></li>" \
 		--custom-overview-text "<p>Documentation for the standard library of Nit<br/>Version $$(git describe)<br/>Date: $$(git show --format="%cd" | head -1)</p>" \
