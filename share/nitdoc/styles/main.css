@@ -314,7 +314,7 @@ article .info .code {
 
 .content section.concerns {
 	padding: 10px;
-	background: #EEE;
+	border: 1px solid #ccc;
 }
 
 .content section.concerns h2 {

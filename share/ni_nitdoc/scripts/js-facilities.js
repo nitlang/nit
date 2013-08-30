@@ -20,11 +20,6 @@ var currentIndex = -1;
 $(document).ready(function() {
 
 	/*
-	* Highlight the spoted element
-	*/
-	highlightBlock(currentAnchor());
-
-	/*
 	* Nav block folding
 	*/
 
@@ -64,7 +59,6 @@ $(document).ready(function() {
 				// Key management
 				.keyup(function(e) {
 					switch(e.keyCode) {
-
 						// Select previous result on "Up"
 						case 38:
 							// If already on first result, focus search input
@@ -134,7 +128,8 @@ $(document).ready(function() {
 							currentTable = $(document.createElement("table"));
 
 							// Escape regexp related characters in query
-							var query = $("#search").val();
+							var origQuery = $("#search").val();
+							var query = origQuery;
 							query = query.replace(/\\/gi, "\\\\");
 							query = query.replace(/\[/gi, "\\[");
 							query = query.replace(/\|/gi, "\\|");
@@ -144,11 +139,9 @@ $(document).ready(function() {
 							query = query.replace(/\(/gi, "\\(");
 							query = query.replace(/\)/gi, "\\)");
 							query = query.replace(/&/gi, "&&");
-							query = query.replace(/>/gi, "&gt;");
-							query = query.replace(/</gi, "&lt;");
 
 							var index = 0;
-							var regexp = new RegExp("^" + query, "i");
+							var regexp = new RegExp("^" + query);
 							var overflow = 0;
 							for(var entry in entries) {
 								var result = entry.match(regexp);
@@ -189,7 +182,7 @@ $(document).ready(function() {
 									.append(
 										$("<td colspan='2'>")
 										.append(
-											$("<a href='#' title='Show all results' data-query='"+ query +"'>" + overflow + " more results for '" + query + "'</a>")
+											$("<a href='#' title='Show all results' data-query='"+ origQuery +"'>" + overflow + " more results for '" + origQuery + "'</a>")
 											.click(function() {
 												window.location = "search.html#q=" + $(this).attr("data-query");
 												if(window.location.href.indexOf("search.html") > -1) {
@@ -363,13 +356,6 @@ $(document).ready(function() {
 		})
 	);
 
-	/*
-	* Anchors jumps
-	*/
-	$("a[href*='#']").click( function() {
-		highlightBlock($(this).attr("href").split(/#/)[1]);
-	});
-
 	//Preload filter fields with query string
 	preloadFilters();
 
@@ -415,20 +401,3 @@ function preloadFilters() {
 
 }
 
-/* Hightlight the spoted block */
-function highlightBlock(a) {
-	if(a == undefined) {
-		return;
-	}
-
-	$(".highlighted").removeClass("highlighted");
-
-	var target = $("#" + a);
-
-	if(target.is("article")) {
-		target.parent().addClass("highlighted");
-	}
-
-	target.addClass("highlighted");
-	target.show();
-}
