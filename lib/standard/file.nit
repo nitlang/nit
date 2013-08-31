@@ -20,6 +20,14 @@ intrude import string
 import string_search
 import time
 
+in "C Header" `{
+	#include <dirent.h>
+	#include <string.h>
+	#include <sys/types.h>
+	#include <sys/stat.h>
+	#include <unistd.h>
+`}
+
 redef class Object
 # Simple I/O
 
@@ -353,7 +361,36 @@ redef class String
 	end
 
 	# returns files contained within the directory represented by self
-	fun files : Set[ String ] is extern import HashSet, HashSet::add, NativeString::to_s, String::to_cstring, HashSet[String] as( Set[String] ), String as( Object )
+	fun files : Set[ String ] is extern import HashSet[String], HashSet[String].add, NativeString.to_s, String.to_cstring, HashSet[String].as(Set[String]) `{
+		char *dir_path;
+		DIR *dir;
+
+		dir_path = String_to_cstring( recv );
+		if ((dir = opendir(dir_path)) == NULL)
+		{
+			perror( dir_path );
+			exit( 1 );
+		}
+		else
+		{
+			HashSet_of_String results;
+			String file_name;
+			struct dirent *de;
+
+			results = new_HashSet_of_String();
+
+			while ( ( de = readdir( dir ) ) != NULL )
+				if ( strcmp( de->d_name, ".." ) != 0 &&
+					strcmp( de->d_name, "." ) != 0 )
+				{
+					file_name = NativeString_to_s( strdup( de->d_name ) );
+					HashSet_of_String_add( results, file_name );
+				}
+
+			closedir( dir );
+			return HashSet_of_String_as_Set_of_String( results );
+		}
+	`}
 end
 
 redef class NativeString
