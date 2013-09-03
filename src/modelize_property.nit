@@ -341,8 +341,6 @@ end
 redef class AMethPropdef
 	redef type MPROPDEF: MMethodDef
 
-	# The associated super init if any
-	var super_init: nullable MMethod
 	redef fun build_property(modelbuilder, nclassdef)
 	do
 		var is_init = self isa AInitPropdef
