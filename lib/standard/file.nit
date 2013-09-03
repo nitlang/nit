@@ -224,11 +224,24 @@ redef class String
 	end
 
 	# Extract the dirname of a path
+	#
+	#     assert "/path/to/a_file.ext".dirname         == "/path/to"
+	#     assert "path/to/a_file.ext".dirname          == "path/to"
+	#     assert "path/to".dirname                     == "path"
+	#     assert "path/to/".dirname                    == "path"
+	#     assert "path".dirname                        == "."
+	#     assert "/path".dirname                       == "/"
+	#     assert "/".dirname                           == "/"
+	#     assert "".dirname                            == "."
 	fun dirname: String
 	do
-		var pos = last_index_of_from('/', _length - 1)
-		if pos >= 0 then
+		var l = _length - 1 # Index of the last char
+		if l > 0 and self[l] == '/' then l -= 1 # remove trailing `/`
+		var pos = last_index_of_from('/', l)
+		if pos > 0 then
 			return substring(0, pos)
+		else if pos == 0 then
+			return "/"
 		else
 			return "."
 		end
