@@ -373,7 +373,7 @@ redef class MModule
 	redef fun preview(index, pager) do
 		if index.mbuilder.mmodule2nmodule.has_key(self) then
 			var node = index.mbuilder.mmodule2nmodule[self]
-			if not node.n_moduledecl.n_doc == null and not node.n_moduledecl.n_doc.short_comment.is_empty then
+			if node.n_moduledecl != null and not node.n_moduledecl.n_doc == null and not node.n_moduledecl.n_doc.short_comment.is_empty then
 				pager.add(node.n_moduledecl.n_doc.short_comment.green)
 			end
 		end
@@ -384,7 +384,7 @@ redef class MModule
 	redef fun content(index, pager) do
 		if index.mbuilder.mmodule2nmodule.has_key(self) then
 			var node = index.mbuilder.mmodule2nmodule[self]
-			if not node.n_moduledecl.n_doc == null and not node.n_moduledecl.n_doc.comment.is_empty then
+			if node.n_moduledecl != null and not node.n_moduledecl.n_doc == null and not node.n_moduledecl.n_doc.comment.is_empty then
 				for comment in node.n_moduledecl.n_doc.comment do pager.add(comment.green)
 			end
 		end
