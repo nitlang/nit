@@ -237,18 +237,33 @@ class SeparateCompiler
 
 		var class_layout_builder = new MClassColorer(self.mainmodule)
 		class_layout_builder.build_layout(mclasses)
-		method_layout_builder = new MMethodColorer(self.mainmodule, class_layout_builder)
-		attribute_layout_builder = new MAttributeColorer(self.mainmodule, class_layout_builder)
+		method_layout_builder = new MPropertyColorer[MMethod](self.mainmodule, class_layout_builder)
+		attribute_layout_builder = new MPropertyColorer[MAttribute](self.mainmodule, class_layout_builder)
 		#end
 
+		# lookup properties to build layout with
+		var mmethods = new HashMap[MClass, Set[MMethod]]
+		var mattributes = new HashMap[MClass, Set[MAttribute]]
+		for mclass in mclasses do
+			mmethods[mclass] = new HashSet[MMethod]
+			mattributes[mclass] = new HashSet[MAttribute]
+			for mprop in self.mainmodule.properties(mclass) do
+				if mprop isa MMethod then
+					mmethods[mclass].add(mprop)
+				else if mprop isa MAttribute then
+					mattributes[mclass].add(mprop)
+				end
+			end
+		end
+
 		# methods coloration
-		var method_layout = method_layout_builder.build_layout(mclasses)
+		var method_layout = method_layout_builder.build_layout(mmethods)
 		self.method_tables = build_method_tables(mclasses, method_layout)
 		self.compile_color_consts(method_layout.pos)
 		self.method_layout = method_layout
 
 		# attributes coloration
-		var attr_layout = attribute_layout_builder.build_layout(mclasses)
+		var attr_layout = attribute_layout_builder.build_layout(mattributes)
 		self.attr_tables = build_attr_tables(mclasses, attr_layout)
 		self.compile_color_consts(attr_layout.pos)
 		self.attr_layout = attr_layout
