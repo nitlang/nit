@@ -47,6 +47,10 @@ redef class Object
 	do
 		return stdin.read_line
 	end
+
+	# Return the working (current) directory
+	protected fun getcwd: String do return file_getcwd.to_s
+	private fun file_getcwd: NativeString is extern "string_NativeString_NativeString_file_getcwd_0"
 end
 
 # File Abstract Stream
