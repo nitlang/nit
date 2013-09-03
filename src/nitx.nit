@@ -252,7 +252,7 @@ end
 # Code Analysis
 
 redef class ToolContext
-	var nitx_phase: NitxPhase = new NitxPhase(self, [typing_phase])
+	private var nitx_phase: NitxPhase = new NitxPhase(self, [typing_phase])
 end
 
 # Compiler phase for nitx
