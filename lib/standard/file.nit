@@ -321,6 +321,16 @@ redef class String
 		end
 	end
 
+	# Change the current working directory
+	#
+	#     "/etc".chdir
+	#     assert getcwd == "/etc"
+	#     "..".chdir
+	#     assert getcwd == "/"
+	#
+	# TODO: errno
+	fun chdir do to_cstring.file_chdir
+
 	# Return right-most extension (without the dot)
 	fun file_extension : nullable String
 	do
@@ -349,6 +359,7 @@ redef class NativeString
 	`}
 	private fun file_mkdir: Bool is extern "string_NativeString_NativeString_file_mkdir_0"
 	private fun file_delete: Bool is extern "string_NativeString_NativeString_file_delete_0"
+	private fun file_chdir is extern "string_NativeString_NativeString_file_chdir_0"
 end
 
 extern FileStat `{ struct stat * `}
