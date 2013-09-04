@@ -913,6 +913,9 @@ redef class AExternMethPropdef
 			else if pname == "file_mkdir" then
 				recvval.to_s.mkdir
 				return null
+			else if pname == "file_chdir" then
+				recvval.to_s.chdir
+				return null
 			else if pname == "get_environ" then
 				var txt = recvval.to_s.environ
 				return v.native_string_instance(txt)
@@ -972,6 +975,8 @@ redef class AExternMethPropdef
 			return v.int_instance(parser_goto(args[1].to_i, args[2].to_i))
 		else if pname == "parser_action" then
 			return v.int_instance(parser_action(args[1].to_i, args[2].to_i))
+		else if pname == "file_getcwd" then
+			return v.native_string_instance(getcwd)
 		end
 		fatal(v, "NOT YET IMPLEMENTED extern {mpropdef}")
 		abort

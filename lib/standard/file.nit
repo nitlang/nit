@@ -47,6 +47,10 @@ redef class Object
 	do
 		return stdin.read_line
 	end
+
+	# Return the working (current) directory
+	protected fun getcwd: String do return file_getcwd.to_s
+	private fun file_getcwd: NativeString is extern "string_NativeString_NativeString_file_getcwd_0"
 end
 
 # File Abstract Stream
@@ -224,11 +228,24 @@ redef class String
 	end
 
 	# Extract the dirname of a path
+	#
+	#     assert "/path/to/a_file.ext".dirname         == "/path/to"
+	#     assert "path/to/a_file.ext".dirname          == "path/to"
+	#     assert "path/to".dirname                     == "path"
+	#     assert "path/to/".dirname                    == "path"
+	#     assert "path".dirname                        == "."
+	#     assert "/path".dirname                       == "/"
+	#     assert "/".dirname                           == "/"
+	#     assert "".dirname                            == "."
 	fun dirname: String
 	do
-		var pos = last_index_of_from('/', _length - 1)
-		if pos >= 0 then
+		var l = _length - 1 # Index of the last char
+		if l > 0 and self[l] == '/' then l -= 1 # remove trailing `/`
+		var pos = last_index_of_from('/', l)
+		if pos > 0 then
 			return substring(0, pos)
+		else if pos == 0 then
+			return "/"
 		else
 			return "."
 		end
@@ -304,6 +321,16 @@ redef class String
 		end
 	end
 
+	# Change the current working directory
+	#
+	#     "/etc".chdir
+	#     assert getcwd == "/etc"
+	#     "..".chdir
+	#     assert getcwd == "/"
+	#
+	# TODO: errno
+	fun chdir do to_cstring.file_chdir
+
 	# Return right-most extension (without the dot)
 	fun file_extension : nullable String
 	do
@@ -332,6 +359,7 @@ redef class NativeString
 	`}
 	private fun file_mkdir: Bool is extern "string_NativeString_NativeString_file_mkdir_0"
 	private fun file_delete: Bool is extern "string_NativeString_NativeString_file_delete_0"
+	private fun file_chdir is extern "string_NativeString_NativeString_file_chdir_0"
 end
 
 extern FileStat `{ struct stat * `}
