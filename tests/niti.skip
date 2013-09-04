@@ -6,6 +6,7 @@ test_mem
 shoot_logic
 bench_
 nit_args1
+nit_args3
 nitc_args1
 nitg_args1
 nitg_args3
