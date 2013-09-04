@@ -39,13 +39,16 @@ class InterpretCommons
 		# Add an option "-o" to enable compatibilit with the tests.sh script
 		var opt = new OptionString("compatibility (does noting)", "-o")
 		toolcontext.option_context.add_option(opt)
+		var opt_mixins = new OptionArray("Additionals module to min-in", "-m")
+		toolcontext.option_context.add_option(opt_mixins)
 		# We do not add other options, so process them now!
 		toolcontext.process_options
 		
 		# We need a model to collect stufs
-		model = new Model
+		var model = new Model
+		self.model = model
 		# An a model builder to parse files
-		modelbuilder = new ModelBuilder(model.as(not null), toolcontext.as(not null))
+		modelbuilder = new ModelBuilder(model, toolcontext.as(not null))
 		
 		arguments = toolcontext.option_context.rest
 		if arguments.is_empty or toolcontext.opt_help.value then
@@ -56,13 +59,18 @@ class InterpretCommons
 		
 		# Here we load an process all modules passed on the command line
 		var mmodules = modelbuilder.parse([progname])
+		mmodules.add_all modelbuilder.parse(opt_mixins.value)
 		modelbuilder.run_phases
 		
 		if toolcontext.opt_only_metamodel.value then exit(0)
 		
 		# Here we launch the interpreter on the main module
-		assert mmodules.length == 1
-		mainmodule = mmodules.first
+		if mmodules.length == 1 then
+			mainmodule = mmodules.first
+		else
+			mainmodule = new MModule(model, null, mmodules.first.name, mmodules.first.location)
+			mainmodule.set_imported_mmodules(mmodules)
+		end
 	end
 
 end

@@ -33,3 +33,4 @@
   --erasure                   Erase generic types
   --no-check-erasure-cast     Disable implicit casts on unsafe return with erasure-typing policy (dangerous)
   --global                    Use global compilation
+  -m                          Additionals module to min-in

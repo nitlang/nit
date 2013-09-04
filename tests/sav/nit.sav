@@ -14,3 +14,4 @@
   -d                      Launches the target program with the debugger attached to it
   -c                      Launches the target program with the interpreter, such as when the program fails, the debugging prompt is summoned
   -o                      compatibility (does noting)
+  -m                      Additionals module to min-in
