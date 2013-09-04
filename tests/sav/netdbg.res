@@ -15,3 +15,4 @@
   -c                      Launches the target program with the interpreter, such as when the program fails, the debugging prompt is summoned
   --port                  Sets the debug port (Defaults to 22125) - Must be contained between 0 and 65535
   -o                      compatibility (does noting)
+  -m                      Additionals module to min-in
