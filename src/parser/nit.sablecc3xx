@@ -92,7 +92,8 @@ blank = (' ' | tab)+;
 eol = eol_helper;
 comment = '#' any* eol_helper?;
 
-kwmodule = 'package'|'module';
+kwpackage = 'package';
+kwmodule = 'module';
 kwimport = 'import';
 kwclass = 'class';
 kwabstract = 'abstract';

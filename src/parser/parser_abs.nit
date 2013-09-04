@@ -10,6 +10,9 @@ end
 class TComment
 	super Token
 end
+class TKwpackage
+	super Token
+end
 class TKwmodule
 	super Token
 end

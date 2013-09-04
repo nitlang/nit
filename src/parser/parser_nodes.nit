@@ -223,6 +223,9 @@ abstract class TokenKeyword
 		return "keyword '{text}'"
 	end
 end
+class TKwpackage
+	super TokenKeyword
+end
 class TKwmodule
 	super TokenKeyword
 end
