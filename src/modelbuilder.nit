@@ -316,7 +316,12 @@ class ModelBuilder
 				if candidate == null then
 					candidate = try_file
 				else if candidate != try_file then
-					error(anode, "Error: conflicting module file for {name}: {candidate} {try_file}")
+					# try to disambiguate conflicting modules
+					var abs_candidate = module_absolute_path(candidate)
+					var abs_try_file = module_absolute_path(try_file)
+					if abs_candidate != abs_try_file then
+						error(anode, "Error: conflicting module file for {name}: {candidate} {try_file}")
+					end
 				end
 			end
 			try_file = (dirname + "/" + name + "/" + name + ".nit").simplify_path
@@ -324,7 +329,12 @@ class ModelBuilder
 				if candidate == null then
 					candidate = try_file
 				else if candidate != try_file then
-					error(anode, "Error: conflicting module file for {name}: {candidate} {try_file}")
+					# try to disambiguate conflicting modules
+					var abs_candidate = module_absolute_path(candidate)
+					var abs_try_file = module_absolute_path(try_file)
+					if abs_candidate != abs_try_file then
+						error(anode, "Error: conflicting module file for {name}: {candidate} {try_file}")
+					end
 				end
 			end
 		end
@@ -339,6 +349,14 @@ class ModelBuilder
 		var res = self.load_module(mmodule, candidate)
 		if res == null then return null # Forward error
 		return res.mmodule.as(not null)
+	end
+
+	# Transform relative paths (starting with '../') into absolute paths
+	private fun module_absolute_path(path: String): String do
+		if path.has_prefix("..") then
+			return getcwd.join_path(path).simplify_path
+		end
+		return path
 	end
 
 	# Try to load a module using a path.

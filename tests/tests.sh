@@ -21,6 +21,8 @@
 export LANG=C
 export NIT_TESTING=true
 
+unset NIT_DIR
+
 usage()
 {
 	e=`basename "$0"`
