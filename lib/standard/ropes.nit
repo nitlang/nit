@@ -87,7 +87,7 @@ abstract class Rope
 			iter.next
 		end
 
-		return new String.with_native(native_final_str, length)
+		return native_final_str.to_s_with_length(length)
 	end
 
 	# Gets a node containing the substring to seek the char at the require position
