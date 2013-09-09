@@ -300,13 +300,9 @@ private class NaiveInterpreter
 
 	# Execute `mpropdef` for a `args` (where `args[0]` is the receiver).
 	# Return a falue if `mpropdef` is a function, or null if it is a procedure.
-	# The call is direct/static. There is no message-seding/late-bindng.
+	# The call is direct/static. There is no message-seding/late-binding.
 	fun call(mpropdef: MMethodDef, args: Array[Instance]): nullable Instance
 	do
-		if self.modelbuilder.toolcontext.opt_discover_call_trace.value and not self.discover_call_trace.has(mpropdef) then
-			self.discover_call_trace.add mpropdef
-			self.debug("Discovered {mpropdef}")
-		end
 		var vararg_rank = mpropdef.msignature.vararg_rank
 		if vararg_rank >= 0 then
 			assert args.length >= mpropdef.msignature.arity + 1 # because of self
@@ -331,6 +327,19 @@ private class NaiveInterpreter
 			for i in [vararg_lastrank+1..rawargs.length-1[ do
 				args.add(rawargs[i+1])
 			end
+		end
+		return call_without_varargs(mpropdef, args)
+	end
+
+	# Common code to call and this function
+	#
+	# Call only executes the variadic part, this avoids
+	# double encapsulation of variadic parameters into an Array
+	fun call_without_varargs(mpropdef: MMethodDef, args: Array[Instance]): nullable Instance
+	do
+		if self.modelbuilder.toolcontext.opt_discover_call_trace.value and not self.discover_call_trace.has(mpropdef) then
+			self.discover_call_trace.add mpropdef
+			self.debug("Discovered {mpropdef}")
 		end
 		if args.length < mpropdef.msignature.arity + 1 or args.length > mpropdef.msignature.arity + 1 + mpropdef.msignature.mclosures.length then
 			fatal("NOT YET IMPLEMENTED: Invalid arity for {mpropdef}. {args.length} arguments given.")
@@ -1630,7 +1639,7 @@ redef class ASuperExpr
 		var mpropdef = v.frame.mpropdef
 		mpropdef = mpropdef.lookup_next_definition(v.mainmodule, recv.mtype)
 		assert mpropdef isa MMethodDef
-		var res = v.call(mpropdef, args)
+		var res = v.call_without_varargs(mpropdef, args)
 		return res
 	end
 end
