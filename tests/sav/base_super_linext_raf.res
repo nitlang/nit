@@ -1,8 +1,8 @@
 a[A]
 Aa
-b[B[a[A]]]
-AaBb
-c[C[a[A]]]
-AaCc
-d[D[c[C[b[B[a[A]]]]]]]
-AaBbCcDd
+b[B[A]]
+ABb
+c[C[A]]
+ACc
+d[D[C[B[A]]]]
+ABCDd

@@ -98,9 +98,20 @@ class SeparateErasureCompiler
 		self.class_layout = layout_builder.build_layout(mclasses)
 		self.class_tables = self.build_class_typing_tables(mclasses)
 
+		# lookup vt to build layout with
+		var vts = new HashMap[MClass, Set[MVirtualTypeProp]]
+		for mclass in mclasses do
+			vts[mclass] = new HashSet[MVirtualTypeProp]
+			for mprop in self.mainmodule.properties(mclass) do
+				if mprop isa MVirtualTypeProp then
+					vts[mclass].add(mprop)
+				end
+			end
+		end
+
 		# vt coloration
-		var vt_coloring = new MVirtualTypePropColorer(mainmodule, class_colorer)
-		var vt_layout = vt_coloring.build_layout(mclasses)
+		var vt_coloring = new MPropertyColorer[MVirtualTypeProp](mainmodule, class_colorer)
+		var vt_layout = vt_coloring.build_layout(vts)
 		self.vt_tables = build_vt_tables(mclasses, vt_layout)
 		self.vt_layout = vt_layout
 	end
