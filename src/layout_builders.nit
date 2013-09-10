@@ -60,10 +60,23 @@ interface TypingLayoutBuilder[E: Object]
 end
 
 # Layout builder dedicated to vft, attribute & VT tables
-interface PropertyLayoutBuilder[E: MProperty]
+interface PropertyLayoutBuilder[E: PropertyLayoutElement]
 	# Build table layout for attributes, methods and virtual types
 	# elements: the associative map between classes and properties to use in table layout
 	fun build_layout(elements: Map[MClass, Set[E]]): Layout[E] is abstract
+end
+
+# Used to create a common ancestors to MProperty and MPropDef
+# Required for polymorphic calls
+# FIXME: there should be a better way
+interface PropertyLayoutElement end
+
+redef class MProperty
+	super PropertyLayoutElement
+end
+
+redef class MPropDef
+	super PropertyLayoutElement
 end
 
 # For resolution tables (generics)
@@ -179,7 +192,7 @@ class ResolutionBMizer
 end
 
 # Abstract Layout builder for mproperties using Binary Matrix (BM)
-class MPropertyBMizer[E: MProperty]
+class MPropertyBMizer[E: PropertyLayoutElement]
 	super PropertyLayoutBuilder[E]
 
 	var mmodule: MModule
@@ -375,7 +388,7 @@ class MClassColorer
 end
 
 # Abstract Layout builder for properties tables using coloration (CL)
-class MPropertyColorer[E: MProperty]
+class MPropertyColorer[E: PropertyLayoutElement]
 	super PropertyLayoutBuilder[E]
 
 	private var mmodule: MModule
@@ -665,7 +678,7 @@ class MClassHasher
 end
 
 # Abstract layout builder for properties tables using perfect hashing (PH)
-class MPropertyHasher[E: MProperty]
+class MPropertyHasher[E: PropertyLayoutElement]
 	super PerfectHasher[MClass, E]
 	super PropertyLayoutBuilder[E]
 
