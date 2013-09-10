@@ -728,8 +728,9 @@ class NitdocClass
 			for pclassdef in pclass.mclassdefs do
 				for mprop in pclassdef.intro_mproperties do
 					var mpropdef = mprop.intro
-					if mprop.visibility < ctx.min_visibility then continue
-					if locals.has(mprop) then continue
+					if mprop.visibility < ctx.min_visibility then continue # skip if not correct visibiility
+					if locals.has(mprop) then continue # skip if local
+					if mclass.name != "Object" and mprop.intro_mclassdef.mclass.name == "Object" and (mprop.visibility <= protected_visibility or mprop.intro_mclassdef.mmodule.public_owner == null or mprop.intro_mclassdef.mmodule.public_owner.name != "standard") then continue # skip toplevels
 					if mpropdef isa MVirtualTypeDef then vtypes.add(mpropdef)
 					if mpropdef isa MMethodDef then
 						if mpropdef.mproperty.is_init then
@@ -819,7 +820,6 @@ class NitdocClass
 			append("<h4>Methods</h4>")
 			append("<ul>")
 			for mprop in mts do
-				if mclass.name != "Object" and mprop.mproperty.intro_mclassdef.mclass.name == "Object" and mprop.mproperty.visibility <= protected_visibility then continue
 				mprop.html_sidebar_item(self)
 			end
 			append("</ul>")
