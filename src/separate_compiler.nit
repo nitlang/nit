@@ -106,6 +106,8 @@ end
 class SeparateCompiler
 	super AbstractCompiler
 
+	redef type VISITOR: SeparateCompilerVisitor
+
 	# The result of the RTA (used to know live types and methods)
 	var runtime_type_analysis: RapidTypeAnalysis
 
@@ -115,7 +117,7 @@ class SeparateCompiler
 
 	private var type_layout: nullable Layout[MType]
 	private var resolution_layout: nullable Layout[MType]
-	protected var method_layout: nullable Layout[MMethod]
+	protected var method_layout: nullable Layout[PropertyLayoutElement]
 	protected var attr_layout: nullable Layout[MAttribute]
 
 	init(mainmodule: MModule, mmbuilder: ModelBuilder, runtime_type_analysis: RapidTypeAnalysis) do
@@ -194,24 +196,35 @@ class SeparateCompiler
 	fun compile_color_consts(colors: Map[Object, Int]) do
 		var v = new_visitor
 		for m, c in colors do
-			if color_consts_done.has(m) then continue
-			if m isa MProperty then
-				if modelbuilder.toolcontext.opt_inline_coloring_numbers.value then
-					self.provide_declaration(m.const_color, "#define {m.const_color} {c}")
-				else
-					self.provide_declaration(m.const_color, "extern const int {m.const_color};")
-					v.add("const int {m.const_color} = {c};")
-				end
-			else if m isa MType then
-				if modelbuilder.toolcontext.opt_inline_coloring_numbers.value then
-					self.provide_declaration(m.const_color, "#define {m.const_color} {c}")
-				else
-					self.provide_declaration(m.const_color, "extern const int {m.const_color};")
-					v.add("const int {m.const_color} = {c};")
-				end
-			end
-			color_consts_done.add(m)
+			compile_color_const(v, m, c)
 		end
+	end
+
+	fun compile_color_const(v: SeparateCompilerVisitor, m: Object, color: Int) do
+		if color_consts_done.has(m) then return
+		if m isa MProperty then
+			if modelbuilder.toolcontext.opt_inline_coloring_numbers.value then
+				self.provide_declaration(m.const_color, "#define {m.const_color} {color}")
+			else
+				self.provide_declaration(m.const_color, "extern const int {m.const_color};")
+				v.add("const int {m.const_color} = {color};")
+			end
+		else if m isa MPropDef then
+			if modelbuilder.toolcontext.opt_inline_coloring_numbers.value then
+				self.provide_declaration(m.const_color, "#define {m.const_color} {color}")
+			else
+				self.provide_declaration(m.const_color, "extern const int {m.const_color};")
+				v.add("const int {m.const_color} = {color};")
+			end
+		else if m isa MType then
+			if modelbuilder.toolcontext.opt_inline_coloring_numbers.value then
+				self.provide_declaration(m.const_color, "#define {m.const_color} {color}")
+			else
+				self.provide_declaration(m.const_color, "extern const int {m.const_color};")
+				v.add("const int {m.const_color} = {color};")
+			end
+		end
+		color_consts_done.add(m)
 	end
 
 	private var color_consts_done = new HashSet[Object]
@@ -221,7 +234,7 @@ class SeparateCompiler
 		var mclasses = new HashSet[MClass].from(modelbuilder.model.mclasses)
 
 		# Layouts
-		var method_layout_builder: PropertyLayoutBuilder[MMethod]
+		var method_layout_builder: PropertyLayoutBuilder[PropertyLayoutElement]
 		var attribute_layout_builder: PropertyLayoutBuilder[MAttribute]
 		#FIXME PH and BM layouts too slow for large programs
 		#if modelbuilder.toolcontext.opt_bm_typing.value then
@@ -237,33 +250,71 @@ class SeparateCompiler
 
 		var class_layout_builder = new MClassColorer(self.mainmodule)
 		class_layout_builder.build_layout(mclasses)
-		method_layout_builder = new MMethodColorer(self.mainmodule, class_layout_builder)
-		attribute_layout_builder = new MAttributeColorer(self.mainmodule, class_layout_builder)
+		method_layout_builder = new MPropertyColorer[PropertyLayoutElement](self.mainmodule, class_layout_builder)
+		attribute_layout_builder = new MPropertyColorer[MAttribute](self.mainmodule, class_layout_builder)
 		#end
 
+		# lookup properties to build layout with
+		var mmethods = new HashMap[MClass, Set[PropertyLayoutElement]]
+		var mattributes = new HashMap[MClass, Set[MAttribute]]
+		for mclass in mclasses do
+			mmethods[mclass] = new HashSet[PropertyLayoutElement]
+			mattributes[mclass] = new HashSet[MAttribute]
+			for mprop in self.mainmodule.properties(mclass) do
+				if mprop isa MMethod then
+					mmethods[mclass].add(mprop)
+				else if mprop isa MAttribute then
+					mattributes[mclass].add(mprop)
+				end
+			end
+		end
+
+		# lookup super calls and add it to the list of mmethods to build layout with
+		var super_calls = runtime_type_analysis.live_super_sends
+		for mmethoddef in super_calls do
+			var mclass = mmethoddef.mclassdef.mclass
+			mmethods[mclass].add(mmethoddef)
+			for descendant in mclass.in_hierarchy(self.mainmodule).smallers do
+				mmethods[descendant].add(mmethoddef)
+			end
+		end
+
 		# methods coloration
-		var method_layout = method_layout_builder.build_layout(mclasses)
-		self.method_tables = build_method_tables(mclasses, method_layout)
+		self.method_layout = method_layout_builder.build_layout(mmethods)
+		self.method_tables = build_method_tables(mclasses, super_calls)
 		self.compile_color_consts(method_layout.pos)
-		self.method_layout = method_layout
+
+		# attribute null color to dead supercalls
+		for mmodule in self.mainmodule.in_importation.greaters do
+			for mclassdef in mmodule.mclassdefs do
+				for mpropdef in mclassdef.mpropdefs do
+					if mpropdef.has_supercall then
+						compile_color_const(new_visitor, mpropdef, -1)
+					end
+				end
+			end
+		end
 
 		# attributes coloration
-		var attr_layout = attribute_layout_builder.build_layout(mclasses)
-		self.attr_tables = build_attr_tables(mclasses, attr_layout)
+		self.attr_layout = attribute_layout_builder.build_layout(mattributes)
+		self.attr_tables = build_attr_tables(mclasses)
 		self.compile_color_consts(attr_layout.pos)
-		self.attr_layout = attr_layout
 	end
 
-	fun build_method_tables(mclasses: Set[MClass], layout: Layout[MProperty]): Map[MClass, Array[nullable MPropDef]] do
+	fun build_method_tables(mclasses: Set[MClass], super_calls: Set[MMethodDef]): Map[MClass, Array[nullable MPropDef]] do
+		var layout = self.method_layout
 		var tables = new HashMap[MClass, Array[nullable MPropDef]]
 		for mclass in mclasses do
 			var table = new Array[nullable MPropDef]
+			var supercalls = new List[MMethodDef]
+
 			# first, fill table from parents by reverse linearization order
 			var parents = new Array[MClass]
 			if mainmodule.flatten_mclass_hierarchy.has(mclass) then
 				parents = mclass.in_hierarchy(mainmodule).greaters.to_a
 				self.mainmodule.linearize_mclasses(parents)
 			end
+
 			for parent in parents do
 				if parent == mclass then continue
 				for mproperty in self.mainmodule.properties(parent) do
@@ -277,6 +328,15 @@ class SeparateCompiler
 					for mpropdef in mproperty.mpropdefs do
 						if mpropdef.mclassdef.mclass == parent then
 							table[color] = mpropdef
+						end
+					end
+				end
+
+				# lookup for super calls in super classes
+				for mmethoddef in super_calls do
+					for mclassdef in parent.mclassdefs do
+						if mclassdef.mpropdefs.has(mmethoddef) then
+							supercalls.add(mmethoddef)
 						end
 					end
 				end
@@ -297,12 +357,33 @@ class SeparateCompiler
 					end
 				end
 			end
+
+			# lookup for super calls in local class
+			for mmethoddef in super_calls do
+				for mclassdef in mclass.mclassdefs do
+					if mclassdef.mpropdefs.has(mmethoddef) then
+						supercalls.add(mmethoddef)
+					end
+				end
+			end
+			# insert super calls in table according to receiver
+			for supercall in supercalls do
+				var color = layout.pos[supercall]
+				if table.length <= color then
+					for i in [table.length .. color[ do
+						table[i] = null
+					end
+				end
+				var mmethoddef = supercall.lookup_next_definition(self.mainmodule, mclass.intro.bound_mtype)
+				table[color] = mmethoddef
+			end
 			tables[mclass] = table
 		end
 		return tables
 	end
 
-	fun build_attr_tables(mclasses: Set[MClass], layout: Layout[MProperty]): Map[MClass, Array[nullable MPropDef]] do
+	fun build_attr_tables(mclasses: Set[MClass]): Map[MClass, Array[nullable MPropDef]] do
+		var layout = self.attr_layout
 		var tables = new HashMap[MClass, Array[nullable MPropDef]]
 		for mclass in mclasses do
 			var table = new Array[nullable MPropDef]
@@ -892,6 +973,12 @@ class SeparateCompilerVisitor
 
 	redef fun send(mmethod, arguments)
 	do
+		self.varargize(mmethod.intro, mmethod.intro.msignature.as(not null), arguments)
+		return table_send(mmethod, arguments, mmethod.const_color)
+	end
+
+	private fun table_send(mmethod: MMethod, arguments: Array[RuntimeVariable], const_color: String): nullable RuntimeVariable
+	do
 		if arguments.first.mcasttype.ctype != "val*" then
 			# In order to shortcut the primitive, we need to find the most specific method
 			# Howverr, because of performance (no flattening), we always work on the realmainmodule
@@ -920,7 +1007,6 @@ class SeparateCompilerVisitor
 		var recv = arguments.first
 		s.append("val*")
 		ss.append("{recv}")
-		self.varargize(mmethod.intro, mmethod.intro.msignature.as(not null), arguments)
 		for i in [0..msignature.arity[ do
 			var a = arguments[i+1]
 			var t = msignature.mparameters[i].mtype
@@ -980,8 +1066,8 @@ class SeparateCompilerVisitor
 
 		var r
 		if ret == null then r = "void" else r = ret.ctype
-		self.require_declaration(mmethod.const_color)
-		var call = "(({r} (*)({s}))({arguments.first}->class->vft[{mmethod.const_color}]))({ss}) /* {mmethod} on {arguments.first.inspect}*/"
+		self.require_declaration(const_color)
+		var call = "(({r} (*)({s}))({arguments.first}->class->vft[{const_color}]))({ss}) /* {mmethod} on {arguments.first.inspect}*/"
 
 		if res != null then
 			self.add("{res} = {call};")
@@ -1040,11 +1126,9 @@ class SeparateCompilerVisitor
 		return res
 	end
 
-	redef fun supercall(m: MMethodDef, recvtype: MClassType, args: Array[RuntimeVariable]): nullable RuntimeVariable
+	redef fun supercall(m: MMethodDef, recvtype: MClassType, arguments: Array[RuntimeVariable]): nullable RuntimeVariable
 	do
-		# FIXME implements a polymorphic access in tables
-		m = m.lookup_next_definition(m.mclassdef.mmodule, m.mclassdef.bound_mtype)
-		return self.call(m, recvtype, args)
+		return table_send(m.mproperty, arguments, m.const_color)
 	end
 
 	redef fun vararg_instance(mpropdef, recv, varargs, elttype)
@@ -1692,5 +1776,9 @@ redef class MType
 end
 
 redef class MProperty
+	fun const_color: String do return "COLOR_{c_name}"
+end
+
+redef class MPropDef
 	fun const_color: String do return "COLOR_{c_name}"
 end

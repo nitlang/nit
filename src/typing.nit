@@ -27,6 +27,11 @@ redef class ToolContext
 	var typing_phase: Phase = new TypingPhase(self, [flow_phase, modelize_property_phase, local_var_init_phase])
 end
 
+redef class MPropDef
+	# Does the MPropDef contains a call to super or a call of a super-constructor?
+	var has_supercall: Bool = false
+end
+
 private class TypingPhase
 	super Phase
 	redef fun process_npropdef(npropdef) do npropdef.do_typing(toolcontext.modelbuilder)
@@ -1452,6 +1457,7 @@ redef class ASuperExpr
 		end
 		self.mtype = msignature.return_mtype
 		self.is_typed = true
+		v.mpropdef.has_supercall = true
 	end
 
 	private fun process_superinit(v: TypeVisitor)

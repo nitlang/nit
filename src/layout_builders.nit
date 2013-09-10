@@ -60,10 +60,23 @@ interface TypingLayoutBuilder[E: Object]
 end
 
 # Layout builder dedicated to vft, attribute & VT tables
-interface PropertyLayoutBuilder[E: MProperty]
+interface PropertyLayoutBuilder[E: PropertyLayoutElement]
 	# Build table layout for attributes, methods and virtual types
-	# elements: the set of classes containing the properties to use in table layout
-	fun build_layout(elements: Set[MClass]): Layout[E] is abstract
+	# elements: the associative map between classes and properties to use in table layout
+	fun build_layout(elements: Map[MClass, Set[E]]): Layout[E] is abstract
+end
+
+# Used to create a common ancestors to MProperty and MPropDef
+# Required for polymorphic calls
+# FIXME: there should be a better way
+interface PropertyLayoutElement end
+
+redef class MProperty
+	super PropertyLayoutElement
+end
+
+redef class MPropDef
+	super PropertyLayoutElement
 end
 
 # For resolution tables (generics)
@@ -179,10 +192,8 @@ class ResolutionBMizer
 end
 
 # Abstract Layout builder for mproperties using Binary Matrix (BM)
-abstract class MPropertyBMizer[E: MProperty]
+class MPropertyBMizer[E: PropertyLayoutElement]
 	super PropertyLayoutBuilder[E]
-
-	type MPROP: MProperty
 
 	var mmodule: MModule
 
@@ -192,10 +203,10 @@ abstract class MPropertyBMizer[E: MProperty]
 		var result = new Layout[E]
 		var ids = new HashMap[E, Int]
 		var lin = new Array[MClass]
-		lin.add_all(elements)
+		lin.add_all(elements.keys)
 		self.mmodule.linearize_mclasses(lin)
 		for mclass in lin do
-			for mproperty in properties(mclass) do
+			for mproperty in elements[mclass] do
 				if ids.has_key(mproperty) then continue
 				ids[mproperty] = ids.length
 			end
@@ -203,36 +214,6 @@ abstract class MPropertyBMizer[E: MProperty]
 		result.pos = ids
 		return result
 	end
-
-	# extract properties of a mclass
-	private fun properties(mclass: MClass): Set[E] do
-		var properties = new HashSet[E]
-		for mprop in self.mmodule.properties(mclass) do
-			if mprop isa MPROP then properties.add(mprop)
-		end
-		return properties
-	end
-end
-
-# Layout builder for vft using Binary Matrix (BM)
-class MMethodBMizer
-	super MPropertyBMizer[MMethod]
-	redef type MPROP: MMethod
-	init(mmodule: MModule) do super(mmodule)
-end
-
-# Layout builder for attribute tables using Binary Matrix (BM)
-class MAttributeBMizer
-	super MPropertyBMizer[MAttribute]
-	redef type MPROP: MAttribute
-	init(mmodule: MModule) do super(mmodule)
-end
-
-# BMizing for MVirtualTypeProps
-class MVirtualTypePropBMizer
-	super MPropertyBMizer[MVirtualTypeProp]
-	redef type MPROP: MVirtualTypeProp
-	init(mmodule: MModule) do super(mmodule)
 end
 
 # Colorers
@@ -407,10 +388,8 @@ class MClassColorer
 end
 
 # Abstract Layout builder for properties tables using coloration (CL)
-abstract class MPropertyColorer[E: MProperty]
+class MPropertyColorer[E: PropertyLayoutElement]
 	super PropertyLayoutBuilder[E]
-
-	type MPROP: MProperty
 
 	private var mmodule: MModule
 	private var class_colorer: MClassColorer
@@ -422,41 +401,41 @@ abstract class MPropertyColorer[E: MProperty]
 	end
 
 	# Compute mclasses ids and position using BM
-	redef fun build_layout(mclasses: Set[MClass]): Layout[E] do
+	redef fun build_layout(elements: Map[MClass, Set[E]]): Layout[E] do
 		var result = new Layout[E]
-		result.pos = self.colorize(mclasses)
+		result.pos = self.colorize(elements)
 		return result
 	end
 
-	private fun colorize(mclasses: Set[MClass]): Map[E, Int] do
-		self.colorize_core(self.class_colorer.core)
-		self.colorize_crown(self.class_colorer.crown)
+	private fun colorize(elements: Map[MClass, Set[E]]): Map[E, Int] do
+		self.colorize_core(elements)
+		self.colorize_crown(elements)
 		return self.coloration_result
 	end
 
 	# Colorize properties of the core hierarchy
-	private fun colorize_core(mclasses: Set[MClass]) do
+	private fun colorize_core(elements: Map[MClass, Set[E]]) do
 		var min_color = 0
-		for mclass in mclasses do
+		for mclass in self.class_colorer.core do
 			var color = min_color
 			# check last color used by parents
-			color = max_color(color, mclass.in_hierarchy(mmodule).direct_greaters)
+			color = max_color(color, mclass.in_hierarchy(mmodule).direct_greaters, elements)
 			# check max color used in conflicts
 			if self.class_colorer.conflicts_graph.has_key(mclass) then
-				color = max_color(color, self.class_colorer.conflicts_graph[mclass])
+				color = max_color(color, self.class_colorer.conflicts_graph[mclass], elements)
 			end
-			colorize_elements(self.properties(mclass), color)
+			colorize_elements(elements[mclass], color)
 		end
 	end
 
 	# Colorize properties of the crown hierarchy
-	private fun colorize_crown(mclasses: Set[MClass]) do
-		for mclass in mclasses do
+	private fun colorize_crown(elements: Map[MClass, Set[E]]) do
+		for mclass in self.class_colorer.crown do
 			var parents = new HashSet[MClass]
 			if mmodule.flatten_mclass_hierarchy.has(mclass) then
 				parents.add_all(mclass.in_hierarchy(mmodule).direct_greaters)
 			end
-			colorize_elements(self.properties(mclass), max_color(0, parents))
+			colorize_elements(elements[mclass], max_color(0, parents, elements))
 		end
 	end
 
@@ -469,11 +448,11 @@ abstract class MPropertyColorer[E: MProperty]
 		end
 	end
 
-	private fun max_color(min_color: Int, mclasses: Collection[MClass]): Int do
+	private fun max_color(min_color: Int, mclasses: Collection[MClass], elements: Map[MClass, Set[E]]): Int do
 		var max_color = min_color
 
 		for mclass in mclasses do
-			for mproperty in self.properties(mclass) do
+			for mproperty in elements[mclass] do
 				var color = min_color
 				if self.coloration_result.has_key(mproperty) then
 					color = self.coloration_result[mproperty]
@@ -483,39 +462,6 @@ abstract class MPropertyColorer[E: MProperty]
 		end
 		return max_color
 	end
-
-	# Filter properties
-	private fun properties(mclass: MClass): Set[E] do
-		var properties = new HashSet[E]
-		for mprop in self.mmodule.properties(mclass) do
-			if mprop isa MPROP then properties.add(mprop)
-		end
-		return properties
-	end
-end
-
-# Layout builder for vft using coloration (CL)
-class MMethodColorer
-	super MPropertyColorer[MMethod]
-
-	redef type MPROP: MMethod
-	init(mmodule: MModule, class_colorer: MClassColorer) do super(mmodule, class_colorer)
-end
-
-# Layout builder for attributes using coloration (CL)
-class MAttributeColorer
-	super MPropertyColorer[MAttribute]
-
-	redef type MPROP: MAttribute
-	init(mmodule: MModule, class_colorer: MClassColorer) do super(mmodule, class_colorer)
-end
-
-# Layout builder for virtual types using coloration (CL)
-class MVirtualTypePropColorer
-	super MPropertyColorer[MVirtualTypeProp]
-
-	redef type MPROP: MVirtualTypeProp
-	init(mmodule: MModule, class_colorer: MClassColorer) do super(mmodule, class_colorer)
 end
 
 # Layout builder for resolution tables using coloration (CL)
@@ -732,11 +678,9 @@ class MClassHasher
 end
 
 # Abstract layout builder for properties tables using perfect hashing (PH)
-class MPropertyHasher[E: MProperty]
+class MPropertyHasher[E: PropertyLayoutElement]
 	super PerfectHasher[MClass, E]
 	super PropertyLayoutBuilder[E]
-
-	type MPROP: MProperty
 
 	var mmodule: MModule
 
@@ -757,20 +701,19 @@ class MPropertyHasher[E: MProperty]
 		return poset
 	end
 
-	redef fun build_layout(mclasses) do
+	redef fun build_layout(elements) do
 		var result = new PHLayout[MClass, E]
 		var ids = new HashMap[E, Int]
-		var elements = new HashMap[MClass, Set[E]]
+		var mclasses = new HashSet[MClass]
+		mclasses.add_all(elements.keys)
 		var poset = build_poset(mclasses)
 		var lin = poset.to_a
 		poset.sort(lin)
 		for mclass in lin.reversed do
-			var mproperties = properties(mclass)
-			for mproperty in mproperties do
+			for mproperty in elements[mclass] do
 				if ids.has_key(mproperty) then continue
 				ids[mproperty] = ids.length + 1
 			end
-			elements[mclass] = mproperties
 		end
 		result.ids = ids
 		result.pos = ids
@@ -778,36 +721,6 @@ class MPropertyHasher[E: MProperty]
 		result.hashes = self.compute_hashes(elements, ids, result.masks)
 		return result
 	end
-
-	# extract set of properties from mclass
-	private fun properties(mclass: MClass): Set[E] do
-		var properties = new HashSet[E]
-		for mprop in self.mmodule.properties(mclass) do
-			if mprop isa MPROP then properties.add(mprop)
-		end
-		return properties
-	end
-end
-
-# Layout builder for vft using perfect hashing (PH)
-class MMethodHasher
-	super MPropertyHasher[MMethod]
-	redef type MPROP: MMethod
-	init(operator: PHOperator, mmodule: MModule) do super(operator, mmodule)
-end
-
-# Layout builder for attributes tables using perfect hashing (PH)
-class MAttributeHasher
-	super MPropertyHasher[MAttribute]
-	redef type MPROP: MAttribute
-	init(operator: PHOperator, mmodule: MModule) do super(operator, mmodule)
-end
-
-# Layout builder for virtual types tables using perfect hashing (PH)
-class MVirtualTypePropHasher
-	super MPropertyHasher[MVirtualTypeProp]
-	redef type MPROP: MVirtualTypeProp
-	init(operator: PHOperator, mmodule: MModule) do super(operator, mmodule)
 end
 
 # Layout builder for resolution tables using perfect hashing (PH)
