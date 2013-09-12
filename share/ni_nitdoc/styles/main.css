@@ -304,8 +304,7 @@ header nav.main ul li.current {
 	padding-left: 10px;
 }
 
-nav ul li span,
-.content article ul li span {
+nav ul li span {
 	color: #CCC;
 	text-align: center;
 	font-family: monospace;
