@@ -105,16 +105,25 @@ Nitdoc.QuickSearch.search = function(query) {
 	var results = new Array();
 	var regexp = new RegExp("^" + query, "i");
 	for(var entry in entries) {
-		var match = entry.match(regexp);
-		if(match != null) {
-			for(var i in entries[entry]) {
-				var result = entries[entry][i];
-				result.entry = entry;
-				results[results.length] = result;
-			}
+		for(var i in entries[entry]) {
+			var result = entries[entry][i];
+			result.entry = entry;
+			result.distance = query.dice(entry);
+			results[results.length] = result;
 		}
 	}
+	results.sort(Nitdoc.QuickSearch.resultSorter);
 	return results;
+}
+
+// Sort an array of results
+Nitdoc.QuickSearch.resultSorter = function(a, b){
+	if(a.distance < b.distance) {
+		return 1;
+	} else if(a.distance > b.distance) {
+		return -1;
+	}
+	return 0;
 }
 
 // Display resulsts in popup table
@@ -242,3 +251,66 @@ Nitdoc.QuickSearch.close = function(target) {
 	}
 }
 
+/* Utils */
+
+// Calculate levenshtein distance beetween two strings
+// see: http://en.wikipedia.org/wiki/Levenshtein_distance
+String.prototype.levenshtein = function(other) {
+	var matrix = new Array();
+
+	for(var i = 0; i <= this.length; i++) {
+		matrix[i] = new Array();
+		matrix[i][0] = i;
+	}
+	for(var j = 0; j <= other.length; j++) {
+		matrix[0][j] = j;
+	}
+	var cost = 0;
+	for(var i = 1; i <= this.length; i++) {
+		for(var j = 1; j <= other.length; j++) {
+			if(this.charAt(i - 1) == other.charAt(j - 1)) {
+				cost = 0;
+			} else if(this.charAt(i - 1).toLowerCase() == other.charAt(j - 1).toLowerCase()) {
+				cost = 0.5;
+			} else {
+				cost = 1;
+			}
+			matrix[i][j] = Math.min(
+				matrix[i - 1][j] + 1, // deletion
+				matrix[i][j - 1] + 1, // insertion
+				matrix[i - 1][j - 1] + cost // substitution
+			);
+		}
+	}
+	return matrix[this.length][other.length]
+}
+
+// Compare two strings using Sorensen-Dice Coefficient
+// see: http://en.wikipedia.org/wiki/S%C3%B8rensen%E2%80%93Dice_coefficient
+String.prototype.dice = function(other) {
+	var length1 = this.length - 1;
+	var length2 = other.length - 1;
+	if(length1 < 1 || length2 < 1) return 0;
+
+	var bigrams2 = [];
+	for(var i = 0; i < length2; i++) {
+		bigrams2.push(other.substr(i, 2));
+	}
+
+	var intersection = 0;
+	for(var i = 0; i < length1; i++) {
+		var bigram1 = this.substr(i, 2);
+		for(var j = 0; j < length2; j++) {
+			if(bigram1 == bigrams2[j]) {
+				intersection += 2;
+				bigrams2[j] = null;
+				break;
+			} else if (bigram1 && bigrams2[j] && bigram1.toLowerCase() == bigrams2[j].toLowerCase()) {
+				intersection += 1;
+				bigrams2[j] = null;
+				break;
+			}
+		}
+	}
+	return (2.0 * intersection) / (length1 + length2);
+}
