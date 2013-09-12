@@ -215,6 +215,7 @@ abstract class NitdocPage
 		append("<script type='text/javascript' src='scripts/base64.js'></script>")
 		append("<script type='text/javascript' src='scripts/github.js'></script>")
 		append("<script type='text/javascript' src='scripts/js-facilities.js'></script>")
+		append("<script type='text/javascript' src='scripts/Nitdoc.QuickSearch.js'></script>")
 		append("<link rel='stylesheet' href='styles/main.css' type='text/css' media='screen'/>")
 		append("<link rel='stylesheet' href='styles/github.css' type='text/css' media='screen'/>")
 		var title = ""
