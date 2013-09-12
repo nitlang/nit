@@ -1,7 +1,6 @@
 /* General */
 
 body {
-	margin: 0;
 	font: 14px "Helvetica Neue", Helvetica, Tahoma, sans-serif;
 }
 
@@ -65,43 +64,57 @@ h3 {
 
 /* Page display */
 
-body {
-	overflow: hidden;
+html {
 	height: 100%;
+	overflow: hidden;
+}
+
+body {
+	height: 100%;
+	margin: 0;
 }
 
 header {
+	position: fixed;
+	left: 0;
+	right: 0;
 }
 
 .page {
-	width: 937px;
 	margin: auto;
+	height: 100%;
 }
 
 .menu {
 	position: fixed;
 	top: 50px;
-	bottom: 2em;
+	bottom: 1em;
 	width: 250px;
 	overflow-y:	scroll;
+}
+
+.menu nav:last-child {
+	margin-bottom: 0;
 }
 
 .content {
 	position: fixed;
 	top: 50px;
-	bottom: 0em;
+	bottom: 1em;
+	left: 0;
+	right: 0;
 	margin-left: 265px;
-	width: 667px;
 	overflow-y:	scroll;
+	margin-right: 5px;
 	padding-right: 10px;
 }
 
 .content.fullpage {
 	margin-left: 20px;
-	width: 910px;
+	width: auto;
 }
 
-.content.footed {
+.page.footed .content, .page.footed .menu {
 	bottom: 2em;
 }
 
@@ -174,7 +187,6 @@ article:hover > .signature .copyButton, .copyButton.zeroclipboard-is-hover {
 header nav ul {
 	padding: 0;
 	list-style-type: none;
-	width: 900px;
 	margin: auto;
 }
 
@@ -292,8 +304,7 @@ header nav.main ul li.current {
 	padding-left: 10px;
 }
 
-nav ul li span,
-.content article ul li span {
+nav ul li span {
 	color: #CCC;
 	text-align: center;
 	font-family: monospace;

@@ -215,6 +215,7 @@ abstract class NitdocPage
 		append("<script type='text/javascript' src='scripts/base64.js'></script>")
 		append("<script type='text/javascript' src='scripts/github.js'></script>")
 		append("<script type='text/javascript' src='scripts/js-facilities.js'></script>")
+		append("<script type='text/javascript' src='scripts/Nitdoc.QuickSearch.js'></script>")
 		append("<link rel='stylesheet' href='styles/main.css' type='text/css' media='screen'/>")
 		append("<link rel='stylesheet' href='styles/github.css' type='text/css' media='screen'/>")
 		var title = ""
@@ -296,7 +297,9 @@ abstract class NitdocPage
 		end
 		append(">")
 		header
-		append("<div class='page'>")
+		var footed = ""
+		if ctx.opt_custom_footer_text.value != null then footed = "footed"
+		append("<div class='page {footed}'>")
 		content
 		append("</div>")
 		footer
@@ -351,9 +354,7 @@ class NitdocOverview
 	end
 
 	redef fun content do
-		var footed = ""
-		if ctx.opt_custom_footer_text.value != null then footed = "footed"
-		append("<div class='content fullpage {footed}'>")
+		append("<div class='content fullpage'>")
 		var title = "Overview"
 		if ctx.opt_custom_title.value != null then
 			title = ctx.opt_custom_title.value.to_s
@@ -428,9 +429,7 @@ class NitdocSearch
 	end
 
 	redef fun content do
-		var footed = ""
-		if ctx.opt_custom_footer_text.value != null then footed = "footed"
-		append("<div class='content fullpage {footed}'>")
+		append("<div class='content fullpage'>")
 		append("<h1>{title}</h1>")
 		module_column
 		classes_column
@@ -547,9 +546,7 @@ class NitdocModule
 		classes_column
 		importation_column
 		append("</div>")
-		var footed = ""
-		if ctx.opt_custom_footer_text.value != null then footed = "footed"
-		append("<div class='content {footed}'>")
+		append("<div class='content'>")
 		module_doc
 		append("</div>")
 	end
@@ -728,8 +725,9 @@ class NitdocClass
 			for pclassdef in pclass.mclassdefs do
 				for mprop in pclassdef.intro_mproperties do
 					var mpropdef = mprop.intro
-					if mprop.visibility < ctx.min_visibility then continue
-					if locals.has(mprop) then continue
+					if mprop.visibility < ctx.min_visibility then continue # skip if not correct visibiility
+					if locals.has(mprop) then continue # skip if local
+					if mclass.name != "Object" and mprop.intro_mclassdef.mclass.name == "Object" and (mprop.visibility <= protected_visibility or mprop.intro_mclassdef.mmodule.public_owner == null or mprop.intro_mclassdef.mmodule.public_owner.name != "standard") then continue # skip toplevels
 					if mpropdef isa MVirtualTypeDef then vtypes.add(mpropdef)
 					if mpropdef isa MMethodDef then
 						if mpropdef.mproperty.is_init then
@@ -775,9 +773,7 @@ class NitdocClass
 		properties_column
 		inheritance_column
 		append("</div>")
-		var footed = ""
-		if ctx.opt_custom_footer_text.value != null then footed = "footed"
-		append("<div class='content {footed}'>")
+		append("<div class='content'>")
 		class_doc
 		append("</div>")
 	end
@@ -819,7 +815,6 @@ class NitdocClass
 			append("<h4>Methods</h4>")
 			append("<ul>")
 			for mprop in mts do
-				if mclass.name != "Object" and mprop.mproperty.intro_mclassdef.mclass.name == "Object" and mprop.mproperty.visibility <= protected_visibility then continue
 				mprop.html_sidebar_item(self)
 			end
 			append("</ul>")
