@@ -85,7 +85,7 @@ header {
 	height: 100%;
 }
 
-.menu {
+.sidebar {
 	position: fixed;
 	top: 50px;
 	bottom: 1em;
@@ -93,7 +93,7 @@ header {
 	overflow-y:	scroll;
 }
 
-.menu nav:last-child {
+.sidebar nav:last-child {
 	margin-bottom: 0;
 }
 
@@ -114,7 +114,7 @@ header {
 	width: auto;
 }
 
-.page.footed .content, .page.footed .menu {
+.page.footed .content, .page.footed .sidebar {
 	bottom: 2em;
 }
 
@@ -124,59 +124,34 @@ footer {
 	width: 100%;
 }
 
-article:hover > .signature .copyButton, .copyButton.zeroclipboard-is-hover {
-	visibility: visible;
-}
-
-.copyButton.zeroclipboard-is-active {
-	border-color: #0D8921;
-}
-
-.copyButton {
-	visibility: hidden;
-	vertical-align: middle;
-	margin: -2px 0px 0px 10px;
-	width: 22px;
-	height: 19px;
-	padding: 1px;
-	cursor: pointer;
-	background: #eee;
-	border: 1px solid #ccc;
-	box-shadow: none;
-}
-
-.copyButton img {
-	width: 16px;
-}
-
 /* Webkit scroll bars */
 
-.menu {
+.sidebar {
     overflow-y: hidden;
 }
 
-.menu:hover {
+.sidebar:hover {
     overflow-y: scroll;
 }
 
-.menu::-webkit-scrollbar, .content::-webkit-scrollbar {
+.sidebar::-webkit-scrollbar, .content::-webkit-scrollbar {
     width: 10px;
 }
 
-.menu::-webkit-scrollbar-thumb, .content::-webkit-scrollbar-thumb {
+.sidebar::-webkit-scrollbar-thumb, .content::-webkit-scrollbar-thumb {
 	background: #CCC;
 	-webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,0.10),inset 0 -1px 0 rgba(0,0,0,0.07);
 }
 
-.menu::-webkit-scrollbar-thumb:hover, .content::-webkit-scrollbar-thumb:hover {
+.sidebar::-webkit-scrollbar-thumb:hover, .content::-webkit-scrollbar-thumb:hover {
 	background: #999;
 }
 
-.menu::-webkit-scrollbar-corner, .content::-webkit-scrollbar-corner {
+.sidebar::-webkit-scrollbar-corner, .content::-webkit-scrollbar-corner {
 	background: transparent;
 }
 
-.menu::-webkit-scrollbar-button, .content::-webkit-scrollbar-button {
+.sidebar::-webkit-scrollbar-button, .content::-webkit-scrollbar-button {
 	width: 0;
 	height: 0;
 	display: none;
@@ -223,43 +198,43 @@ header nav.main ul li.current {
 	color: white;
 }
 
-/* Latteral Menu */
+/* Sidebar */
 
-.menu nav {
+.sidebar nav {
 	margin: 20px;
 	width: 208px;
 	border: 1px solid #CCC;
 }
 
-.menu nav:first-child {
+.sidebar nav:first-child {
 	margin-top: 0;
 }
 
-.menu nav h3 {
+.sidebar nav h3 {
 	margin: 0;
 	padding: 5px;
 	background: #CCC;
 	font-size: 1em;
 }
 
-.menu nav h4 {
+.sidebar nav h4 {
 	font-weight: bold;
 	color: #555555;
 	margin: 10px 0 0 10px;
 	font-size: 12px;
 }
 
-.menu nav h4:last-child {
+.sidebar nav h4:last-child {
 	margin-bottom: 5px;
 }
 
-.menu nav ul {
+.sidebar nav ul {
 	margin: 10px;
 	padding: 0;
 	list-style-type: none;
 }
 
-.menu nav ul li {
+.sidebar nav ul li {
 	overflow: hidden;
 	color: #CCC;
 }
@@ -410,23 +385,25 @@ article .info .code {
 	margin: 0;
 }
 
-/* JS facilities */
+/* Icons */
+
+.type.public, .interface.public, .abstract.class.public { background-image: url('../resources/icons/vtype_public.png')}
+.type.protected, .interface.protected, .abstract.class.protected { background-image: url('../resources/icons/vtype_protected.png')}
+.type.private, .interface.private, .abstract.class.private { background-image: url('../resources/icons/vtype_private.png')}
+.init.public, .enum.public { background-image: url('../resources/icons/const_public.png')}
+.init.protected, .enum.protected { background-image: url('../resources/icons/const_protected.png')}
+.init.private, .enum.private { background-image: url('../resources/icons/const_private.png')}
+.fun.public, .class.public, .extern.public { background-image: url('../resources/icons/meth_public.png')}
+.fun.protected, .class.protected, .extern.protected { background-image: url('../resources/icons/meth_protected.png')}
+.fun.private, .class.private, .extern.private { background-image: url('../resources/icons/meth_private.png')}
+
+/* Form elements */
 
 input[type=text] {
 	width: 150px;
 	border: 1px solid #CCC;
 	margin-right: 5px;
 	padding: 1px 2px;
-}
-
-input[type=text].notUsed {
-	color: #999;
-	font-style: italic;
-}
-
-nav .filter {
-	text-align: center;
-	padding: 5px;
 }
 
 nav.main input[type=text] {
@@ -438,48 +415,6 @@ nav.main input[type=text] {
 nav.main form {
 	float: right;
 }
-
-.filter a {
-	color: #0D8921;
-	cursor: pointer;
-	font-family: monospace;
-	margin-right: 5px;
-   font-weight: bold;
-}
-
-.filter a.hidden {
-	color: #999;
-   font-weight: normal;
-}
-
-.filter a:hover {
-	text-decoration: underline;
-}
-
-nav h3 a.fold {
-	margin: 0 5px;
-	color: #999;
-	font-family: monospace;
-	font-weight: bold;
-	font-size: 120%;
-	cursor: pointer;
-}
-
-.hide {
-	overflow-y: hidden;
-	height: 0;
-}
-
-/* Icons */
-.type.public, .interface.public, .abstract.class.public { background-image: url('../resources/icons/vtype_public.png')}
-.type.protected, .interface.protected, .abstract.class.protected { background-image: url('../resources/icons/vtype_protected.png')}
-.type.private, .interface.private, .abstract.class.private { background-image: url('../resources/icons/vtype_private.png')}
-.init.public, .enum.public { background-image: url('../resources/icons/const_public.png')}
-.init.protected, .enum.protected { background-image: url('../resources/icons/const_protected.png')}
-.init.private, .enum.private { background-image: url('../resources/icons/const_private.png')}
-.fun.public, .class.public, .extern.public { background-image: url('../resources/icons/meth_public.png')}
-.fun.protected, .class.protected, .extern.protected { background-image: url('../resources/icons/meth_protected.png')}
-.fun.private, .class.private, .extern.private { background-image: url('../resources/icons/meth_private.png')}
 
 /* Quick Search */
 

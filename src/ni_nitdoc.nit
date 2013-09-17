@@ -210,13 +210,14 @@ abstract class NitdocPage
 		append("<meta charset='utf-8'/>")
 		append("<script type='text/javascript' src='scripts/jquery-1.7.1.min.js'></script>")
 		append("<script type='text/javascript' src='scripts/ZeroClipboard.min.js'></script>")
+		append("<script type='text/javascript' src='scripts/Nitdoc.UI.js'></script>")
 		append("<script type='text/javascript' src='scripts/Markdown.Converter.js'></script>")
 		append("<script type='text/javascript' src='quicksearch-list.js'></script>")
 		append("<script type='text/javascript' src='scripts/base64.js'></script>")
 		append("<script type='text/javascript' src='scripts/github.js'></script>")
-		append("<script type='text/javascript' src='scripts/js-facilities.js'></script>")
 		append("<script type='text/javascript' src='scripts/Nitdoc.QuickSearch.js'></script>")
 		append("<link rel='stylesheet' href='styles/main.css' type='text/css' media='screen'/>")
+		append("<link rel='stylesheet' href='styles/Nitdoc.UI.css' type='text/css' media='screen'/>")
 		append("<link rel='stylesheet' href='styles/github.css' type='text/css' media='screen'/>")
 		var title = ""
 		if ctx.opt_custom_title.value != null then
@@ -542,7 +543,7 @@ class NitdocModule
 	end
 
 	redef fun content do
-		append("<div class='menu'>")
+		append("<div class='sidebar'>")
 		classes_column
 		importation_column
 		append("</div>")
@@ -769,7 +770,7 @@ class NitdocClass
 	end
 
 	redef fun content do
-		append("<div class='menu'>")
+		append("<div class='sidebar'>")
 		properties_column
 		inheritance_column
 		append("</div>")

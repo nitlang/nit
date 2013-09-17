@@ -86,7 +86,7 @@ $(document).ready(function() {
 	 });
 });
 
-var Nitdoc = {};
+var Nitdoc = Nitdoc || {};
 Nitdoc.QuickSearch = {};
 
 // Do search
