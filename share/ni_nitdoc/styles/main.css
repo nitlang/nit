@@ -416,44 +416,6 @@ nav.main form {
 	float: right;
 }
 
-/* Quick Search */
-
-#search {
-	width: 300px;
-}
-
-#searchTable {
-	background-color: #FFFFFF;
-	border: 1px solid #E0E0E0;
-	border-spacing: 0px;
-	z-index: 10; /* the menu must be over the rest of the page. */
-}
-
-#searchTable .activeSearchResult {
-	cursor: pointer;
-	background: #EEE;
-}
-
-#searchTable td {
-	white-space: nowrap;
-	overflow: hidden;
-	line-height: 22px;
-	padding: 2px;
-	width: 25%;
-}
-
-#searchTable td.entryInfo {
-	color: #0D8921;
-	font-size: small;
-	width: 75%;
-	text-align: right;
-}
-
-#searchTable tr.overflow td {
-	text-align: center;
-	background-color: #E0E0E0;
-}
-
 /* New comments style */
 
 .content .nitdoc {

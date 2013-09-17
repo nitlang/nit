@@ -163,7 +163,7 @@ class NitdocContext
 
 	private fun quicksearch_list do
 		var file = new OFStream.open("{output_dir.to_s}/quicksearch-list.js")
-		file.write("var entries = \{ ")
+		file.write("var nitdocQuickSearchRawList = \{ ")
 		for mmodule in model.mmodules do
 			file.write("\"{mmodule.name}\": [")
 			file.write("\{txt: \"{mmodule.full_name}\", url:\"{mmodule.url}\" \},")
@@ -212,12 +212,13 @@ abstract class NitdocPage
 		append("<script type='text/javascript' src='scripts/ZeroClipboard.min.js'></script>")
 		append("<script type='text/javascript' src='scripts/Nitdoc.UI.js'></script>")
 		append("<script type='text/javascript' src='scripts/Markdown.Converter.js'></script>")
-		append("<script type='text/javascript' src='quicksearch-list.js'></script>")
 		append("<script type='text/javascript' src='scripts/base64.js'></script>")
 		append("<script type='text/javascript' src='scripts/github.js'></script>")
+		append("<script type='text/javascript' src='quicksearch-list.js'></script>")
 		append("<script type='text/javascript' src='scripts/Nitdoc.QuickSearch.js'></script>")
 		append("<link rel='stylesheet' href='styles/main.css' type='text/css' media='screen'/>")
 		append("<link rel='stylesheet' href='styles/Nitdoc.UI.css' type='text/css' media='screen'/>")
+		append("<link rel='stylesheet' href='styles/Nitdoc.QuickSearch.css' type='text/css' media='screen'/>")
 		append("<link rel='stylesheet' href='styles/github.css' type='text/css' media='screen'/>")
 		var title = ""
 		if ctx.opt_custom_title.value != null then
