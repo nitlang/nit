@@ -811,7 +811,7 @@ abstract class AbstractCompilerVisitor
 		var nat = self.new_var(native_mtype)
 		self.add("{nat} = \"{string.escape_to_c}\";")
 		var length = self.int_instance(string.length)
-		self.add("{res} = {self.monomorphic_send(self.get_property("to_s_with_length", native_mtype), native_mtype, [nat, length]).as(not null)};")
+		self.add("{res} = {self.send(self.get_property("to_s_with_length", native_mtype), [nat, length]).as(not null)};")
 		self.add("{name} = {res};")
 		self.add("\}")
 		return res
