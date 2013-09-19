@@ -811,7 +811,7 @@ abstract class AbstractCompilerVisitor
 		var nat = self.new_var(native_mtype)
 		self.add("{nat} = \"{string.escape_to_c}\";")
 		var length = self.int_instance(string.length)
-		self.add("{res} = {self.monomorphic_send(self.get_property("to_s_with_length", native_mtype), native_mtype, [nat, length]).as(not null)};")
+		self.add("{res} = {self.send(self.get_property("to_s_with_length", native_mtype), [nat, length]).as(not null)};")
 		self.add("{name} = {res};")
 		self.add("\}")
 		return res
@@ -1406,7 +1406,7 @@ redef class AInternMethPropdef
 				v.add("printf(\"%c\", {arguments.first});")
 				return
 			else if pname == "object_id" then
-				v.ret(arguments.first)
+				v.ret(v.new_expr("(long){arguments.first}", ret.as(not null)))
 				return
 			else if pname == "+" then
 				v.ret(v.new_expr("{arguments[0]} + {arguments[1]}", ret.as(not null)))
@@ -1451,7 +1451,7 @@ redef class AInternMethPropdef
 				v.add("printf({arguments.first}?\"true\\n\":\"false\\n\");")
 				return
 			else if pname == "object_id" then
-				v.ret(arguments.first)
+				v.ret(v.new_expr("(long){arguments.first}", ret.as(not null)))
 				return
 			else if pname == "==" then
 				v.ret(v.equal_test(arguments[0], arguments[1]))
@@ -1510,24 +1510,6 @@ redef class AInternMethPropdef
 				return
 			else if pname == "to_i" then
 				v.ret(v.new_expr("(long){arguments[0]}", ret.as(not null)))
-				return
-			end
-		else if cname == "Char" then
-			if pname == "output" then
-				v.add("printf(\"%c\", {arguments.first});")
-				return
-			else if pname == "object_id" then
-				v.ret(arguments.first)
-				return
-			else if pname == "==" then
-				v.ret(v.equal_test(arguments[0], arguments[1]))
-				return
-			else if pname == "!=" then
-				var res = v.equal_test(arguments[0], arguments[1])
-				v.ret(v.new_expr("!{res}", ret.as(not null)))
-				return
-			else if pname == "ascii" then
-				v.ret(v.new_expr("{arguments[0]}", ret.as(not null)))
 				return
 			end
 		else if cname == "NativeString" then
