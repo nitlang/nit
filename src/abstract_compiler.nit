@@ -1406,7 +1406,7 @@ redef class AInternMethPropdef
 				v.add("printf(\"%c\", {arguments.first});")
 				return
 			else if pname == "object_id" then
-				v.ret(arguments.first)
+				v.ret(v.new_expr("(long){arguments.first}", ret.as(not null)))
 				return
 			else if pname == "+" then
 				v.ret(v.new_expr("{arguments[0]} + {arguments[1]}", ret.as(not null)))
@@ -1451,7 +1451,7 @@ redef class AInternMethPropdef
 				v.add("printf({arguments.first}?\"true\\n\":\"false\\n\");")
 				return
 			else if pname == "object_id" then
-				v.ret(arguments.first)
+				v.ret(v.new_expr("(long){arguments.first}", ret.as(not null)))
 				return
 			else if pname == "==" then
 				v.ret(v.equal_test(arguments[0], arguments[1]))
@@ -1510,24 +1510,6 @@ redef class AInternMethPropdef
 				return
 			else if pname == "to_i" then
 				v.ret(v.new_expr("(long){arguments[0]}", ret.as(not null)))
-				return
-			end
-		else if cname == "Char" then
-			if pname == "output" then
-				v.add("printf(\"%c\", {arguments.first});")
-				return
-			else if pname == "object_id" then
-				v.ret(arguments.first)
-				return
-			else if pname == "==" then
-				v.ret(v.equal_test(arguments[0], arguments[1]))
-				return
-			else if pname == "!=" then
-				var res = v.equal_test(arguments[0], arguments[1])
-				v.ret(v.new_expr("!{res}", ret.as(not null)))
-				return
-			else if pname == "ascii" then
-				v.ret(v.new_expr("{arguments[0]}", ret.as(not null)))
 				return
 			end
 		else if cname == "NativeString" then
