@@ -15,7 +15,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module gtk_assistant
+module gtk_assistant is pkgconfig("gtk+-3.0")
+
 import gtk_core
 
 in "C Header" `{
