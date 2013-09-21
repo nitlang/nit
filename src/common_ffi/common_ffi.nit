@@ -27,6 +27,7 @@ import nitni
 import ffi_base
 import extern_classes
 import header_dependency
+import pkgconfig
 import c
 
 redef class MModule
