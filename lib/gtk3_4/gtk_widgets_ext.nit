@@ -15,7 +15,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module gtk_widgets_ext
+module gtk_widgets_ext is pkgconfig("gtk+-3.0")
+
 import gtk_core
 
 #Displays a calendar and allows the user to select a date
