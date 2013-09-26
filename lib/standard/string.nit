@@ -297,6 +297,43 @@ abstract class AbstractString
 		end
 		return b.to_s
 	end
+
+	# Return a string where Nit escape sequences are transformed.
+	#
+	# Example:
+	#     var s = "\\n"
+	#     assert s.length        ==  2
+	#     var u = s.unescape_nit
+	#     assert u.length        ==  1
+	#     assert u[0].ascii      ==  10 # (the ASCII value of the "new line" character)
+	fun unescape_nit: String
+	do
+		var res = new Buffer.with_capacity(self.length)
+		var was_slash = false
+		for c in self do
+			if not was_slash then
+				if c == '\\' then
+					was_slash = true
+				else
+					res.add(c)
+				end
+				continue
+			end
+			was_slash = false
+			if c == 'n' then
+				res.add('\n')
+			else if c == 'r' then
+				res.add('\r')
+			else if c == 't' then
+				res.add('\t')
+			else if c == '0' then
+				res.add('\0')
+			else
+				res.add(c)
+			end
+		end
+		return res.to_s
+	end
 end
 
 # Immutable strings of characters.
