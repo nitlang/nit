@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Binding of C libCurl which allow us to interact with network.
-module curl_c
+module curl_c is pkgconfig("libcurl")
 
 import pipeline
 
