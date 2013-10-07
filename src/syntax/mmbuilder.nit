@@ -321,7 +321,7 @@ redef class MMImplicitInit
 			var sig = a.signature
 			if sig == null then return # Broken attribute definition
 			var name = a.name
-			if name.to_s.first == '_' or name.to_s.first == '@' then
+			if name.to_s.chars.first == '_' or name.to_s.chars.first == '@' then
 				name = a.to_s.substring_from(1).to_symbol
 			end
 			params.add(new MMParam(sig.return_type.as(not null), name))

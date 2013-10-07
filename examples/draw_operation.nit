@@ -124,7 +124,7 @@ redef class String
 		end
 
 		var ci = 0
-		for c in self do
+		for c in self.chars do
 			var local_dispc
 			if c.override_dispc then
 				local_dispc = c
@@ -193,10 +193,10 @@ else
 	b = gets.to_i
 
 	printn "Operator (+, -, *, /, %): "
-	op_char = gets[0]
+	op_char = gets.chars[0]
 
 	printn "Char to display: "
-	disp_char = gets[0]
+	disp_char = gets.chars[0]
 
 	printn "Size of text: "
 	disp_size = gets.to_i

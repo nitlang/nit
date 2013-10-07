@@ -310,7 +310,7 @@ class SDLKeyEvent
 
 	redef fun to_c: nullable Char
 	do
-		if key_name.length == 1 then return key_name.first
+		if key_name.length == 1 then return key_name.chars.first
 		return null
 	end
 

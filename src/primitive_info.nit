@@ -207,7 +207,7 @@ redef class MMMethod
 				native_fun_name = "_left"
 			else if method_name == "<=>" then
 				native_fun_name = "_starship"
-			else if method_name[ method_name.length-1 ] == '=' then
+			else if method_name.chars[ method_name.length-1 ] == '=' then
 				native_fun_name = "{method_name.substring(0,method_name.length-1)}__assign"
 			else
 				native_fun_name = method_name

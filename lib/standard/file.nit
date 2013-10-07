@@ -240,7 +240,7 @@ redef class String
 	fun dirname: String
 	do
 		var l = _length - 1 # Index of the last char
-		if l > 0 and self[l] == '/' then l -= 1 # remove trailing `/`
+		if l > 0 and self.chars[l] == '/' then l -= 1 # remove trailing `/`
 		var pos = last_index_of_from('/', l)
 		if pos > 0 then
 			return substring(0, pos)
@@ -299,7 +299,7 @@ redef class String
 	do
 		if path.is_empty then return self
 		if self.is_empty then return path
-		if path[0] == '/' then return path
+		if path.chars[0] == '/' then return path
 		return "{self}/{path}"
 	end
 

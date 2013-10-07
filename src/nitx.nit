@@ -146,7 +146,7 @@ class NitIndex
 		else
 			var category = parts[0]
 			var keyword = parts[1]
-			if keyword.first == ' ' then keyword = keyword.substring_from(1)
+			if keyword.chars.first == ' ' then keyword = keyword.substring_from(1)
 			return new IndexQueryPair(str, keyword, category)
 		end
 	end
@@ -863,7 +863,7 @@ redef class String
 	private fun escape: String
 	do
 		var b = new Buffer
-		for c in self do
+		for c in self.chars do
 			if c == '\n' then
 				b.append("\\n")
 			else if c == '\0' then

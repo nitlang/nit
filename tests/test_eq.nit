@@ -45,7 +45,7 @@ print(not s is b)
 print(not s is b)
 
 print("* different type object")
-a = s.iterator
+a = s.chars.iterator
 print(not s is a)
 a = 5
 print(not s is a)

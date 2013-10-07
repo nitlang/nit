@@ -34,7 +34,7 @@ do
 		var underscore = false
 		var normal = true
 		var s = sym.to_s
-		for c in s do
+		for c in s.chars do
 			if (c >= 'a' and c <= 'z') or (c >='A' and c <= 'Z') or (c >= '0' and c <= '9') then
 				res.add(c)
 				underscore = false

@@ -961,7 +961,7 @@ redef class AStringFormExpr
 	protected fun compute_string_infos
 	do
 		var str = n_string.text
-		if str.length >= 6 and str[0] == str[1] then
+		if str.length >= 6 and str.chars[0] == str.chars[1] then
 			str = str.substring(3, str.length - 6)
 		else
 			str = str.substring(1, str.length - 2)
@@ -970,10 +970,10 @@ redef class AStringFormExpr
 		var len = 0
 		var i = 0
 		while i < str.length do
-			var c = str[i]
+			var c = str.chars[i]
 			if c == '\\' then
 				i = i + 1
-				var c2 = str[i]
+				var c2 = str.chars[i]
 				if c2 != '{' and c2 != '}' then
 					res.add(c)
 				end

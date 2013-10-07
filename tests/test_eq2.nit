@@ -47,7 +47,7 @@ b = u
 print(not b == s)
 
 print("* different type object")
-a = s.iterator
+a = s.chars.iterator
 print(not a == s)
 a = 5
 print(not a == s)

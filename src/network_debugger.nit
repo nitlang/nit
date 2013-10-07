@@ -167,7 +167,7 @@ redef class Stdin
 	do
 		var loc_buf = new Buffer
 		if connection.ready_to_read(0) then buf.append(connection.read)
-		for i in [buf_pos .. buf.length-1] do loc_buf.add(buf[i])
+		for i in [buf_pos .. buf.length-1] do loc_buf.add(buf.chars[i])
 		buf.clear
 		buf_pos = 0
 		return loc_buf.to_s
@@ -185,7 +185,7 @@ redef class Stdin
 			buf.append(connection.read)
 		end
 		buf_pos += 1
-		return buf[buf_pos-1].ascii
+		return buf.chars[buf_pos-1].ascii
 	end
 
 	# Reads a line on the network if available
@@ -204,8 +204,8 @@ redef class Stdin
 				buf.append(connection.read)
 			end
 			buf_pos += 1
-			if buf[buf_pos-1] == '\n' then break
-			line_buf.add(buf[buf_pos-1])
+			if buf.chars[buf_pos-1] == '\n' then break
+			line_buf.add(buf.chars[buf_pos-1])
 		end
 		return line_buf.to_s
 	end

@@ -1726,7 +1726,7 @@ redef class ADoc
 		for t in n_comment do
 			var text = t.text
 			text = text.substring_from(1)
-			if text.first == ' ' then text = text.substring_from(1)
+			if text.chars.first == ' ' then text = text.substring_from(1)
 			res.append(text.html_escape)
 		end
 		var str = res.to_s

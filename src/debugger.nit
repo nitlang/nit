@@ -373,7 +373,7 @@ class Debugger
 			print "\nEnd of current instruction \n"
 		else if parts_of_command[1] == "stack" then
 			print self.stack_trace
-		else if parts_of_command[1].has('[') and parts_of_command[1].has(']') then
+		else if parts_of_command[1].chars.has('[') and parts_of_command[1].chars.has(']') then
 			process_array_command(parts_of_command)
 		else
 			var instance = seek_variable(get_real_variable_name(parts_of_command[1]), frame)
@@ -613,7 +613,7 @@ class Debugger
 		var trigger_string_escape = false
 		var trigger_concat_in_string = false
 
-		for i in instruction do
+		for i in instruction.chars do
 			if trigger_char_escape then
 				if i == '\'' then trigger_char_escape = false
 			else if trigger_string_escape then
@@ -625,7 +625,7 @@ class Debugger
 				if i.is_alphanumeric or i == '_' then
 					instruction_buffer.add(i)
 				else if i == '.' then
-					if instruction_buffer.is_numeric or (instruction_buffer[0] >= 'A' and instruction_buffer[0] <= 'Z') then
+					if instruction_buffer.is_numeric or (instruction_buffer.chars[0] >= 'A' and instruction_buffer.chars[0] <= 'Z') then
 						instruction_buffer.clear
 					else
 						result_array.push(instruction_buffer.to_s)
@@ -639,13 +639,13 @@ class Debugger
 					trigger_concat_in_string = false
 					trigger_string_escape = true
 				else
-					if instruction_buffer.length > 0 and not instruction_buffer.is_numeric and not (instruction_buffer[0] >= 'A' and instruction_buffer[0] <= 'Z') then result_array.push(instruction_buffer.to_s)
+					if instruction_buffer.length > 0 and not instruction_buffer.is_numeric and not (instruction_buffer.chars[0] >= 'A' and instruction_buffer.chars[0] <= 'Z') then result_array.push(instruction_buffer.to_s)
 					instruction_buffer.clear
 				end
 			end
 		end
 
-		if instruction_buffer.length > 0 and not instruction_buffer.is_numeric and not (instruction_buffer[0] >= 'A' and instruction_buffer[0] <= 'Z') then result_array.push(instruction_buffer.to_s)
+		if instruction_buffer.length > 0 and not instruction_buffer.is_numeric and not (instruction_buffer.chars[0] >= 'A' and instruction_buffer.chars[0] <= 'Z') then result_array.push(instruction_buffer.to_s)
 
 		return result_array
 	end
@@ -657,7 +657,7 @@ class Debugger
 		var buf = new Buffer
 		var trigger_copy = false
 
-		for i in function do
+		for i in function.chars do
 			if i == ')' then break
 			if trigger_copy then buf.add(i)
 			if i == '(' then trigger_copy = true
@@ -947,7 +947,7 @@ class Debugger
 
 		var last_was_opening_bracket = false
 
-		for i in braces do
+		for i in braces.chars do
 			if i == '[' then
 				if last_was_opening_bracket then
 					return null
@@ -1127,7 +1127,7 @@ class Debugger
 	fun get_char(value: String): nullable Instance
 	do
 		if value.length >= 1 then
-			return char_instance(value[0])
+			return char_instance(value.chars[0])
 		else
 			return null
 		end

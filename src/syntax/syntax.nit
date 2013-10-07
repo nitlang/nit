@@ -34,8 +34,8 @@ class SrcModuleLoader
 
 	redef fun parse_file(context, file, filename, name, dir)
 	do
-		var name_is_valid = name.to_s.length > 0 and name.to_s[0].is_lower
-		for char in name.to_s do	if not char.is_digit and not char.is_letter and not char == '_'
+		var name_is_valid = name.to_s.length > 0 and name.to_s.chars[0].is_lower
+		for char in name.to_s.chars do if not char.is_digit and not char.is_letter and not char == '_'
 		then
 			name_is_valid = false
 			break
