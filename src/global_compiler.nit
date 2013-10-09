@@ -88,7 +88,7 @@ class GlobalCompiler
 	init(mainmodule: MModule, modelbuilder: ModelBuilder, runtime_type_analysis: RapidTypeAnalysis)
 	do
 		super(mainmodule, modelbuilder)
-		var file = new_file(mainmodule.name)
+		var file = new_file("{mainmodule.name}.nitgg")
 		self.header = new CodeWriter(file)
 		self.runtime_type_analysis = runtime_type_analysis
 		self.live_primitive_types = new Array[MClassType]
