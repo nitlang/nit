@@ -54,6 +54,7 @@ doc/newmodel/index.html: bin/nitdoc
 		--custom-menu-items "<li><a href=\"http://nitlanguage.org/\">Nitlanguage.org</a></li>" \
 		--custom-overview-text "<p>Documentation for the Nit tools based on the new metamodel<br/>Version $$(git describe)<br/>Date: $$(git show --format="%cd" | head -1)</p>" \
 		--custom-footer-text "Nit new metamodel. Version $$(git describe)." \
+		--github-origin "privat:nit:master" \
 		--source "https://github.com/privat/nit/blob/$$(git show --format="%H" | head -1)/%f#L%l-%L"
 
 clean:

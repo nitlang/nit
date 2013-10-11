@@ -46,8 +46,7 @@ class NitdocContext
 	private var opt_custom_overview_text: OptionString = new OptionString("Text displayed as introduction of Overview page before the modules list", "--custom-overview-text")
 	private var opt_custom_footer_text: OptionString = new OptionString("Text displayed as footer of all pages", "--custom-footer-text")
 
-	private var opt_github_base: OptionString = new OptionString("The branch (or git ref) edited commits will be pulled into (ex: octocat:master)", "--github-base")
-	private var opt_github_head: OptionString = new OptionString("The reference branch name used to create pull requests (ex: master)", "--github-head")
+	private var opt_github_origin: OptionString = new OptionString("The branch where edited commits will be pulled into (ex: user:repo:branch)", "--github-origin")
 
 	init do
 		toolcontext.option_context.add_option(opt_dir)
@@ -59,8 +58,7 @@ class NitdocContext
 		toolcontext.option_context.add_option(opt_custom_footer_text)
 		toolcontext.option_context.add_option(opt_custom_overview_text)
 		toolcontext.option_context.add_option(opt_custom_menu_items)
-		toolcontext.option_context.add_option(opt_github_base)
-		toolcontext.option_context.add_option(opt_github_head)
+		toolcontext.option_context.add_option(opt_github_origin)
 		toolcontext.process_options
 		self.arguments = toolcontext.option_context.rest
 
@@ -293,9 +291,8 @@ abstract class NitdocPage
 		head
 		append("</head>")
 		append("<body")
-		if not ctx.opt_github_base.value == null and not ctx.opt_github_head.value == null then
-			append(" data-github-base='{ctx.opt_github_base.value.as(not null)}'")
-			append(" data-github-head='{ctx.opt_github_head.value.as(not null)}'")
+		if not ctx.opt_github_origin.value == null then
+			append(" data-github-origin='{ctx.opt_github_origin.value.as(not null)}'")
 		end
 		append(">")
 		header

@@ -29,32 +29,35 @@ Nitdoc.GitHub = {}; // Declare Nitdoc.GitHub submodule
 // Load GitHub UI
 $(document).ready(function() {
 	//FIXME base should be choosen by user
-	var base = $("body").attr("data-github-base");
-	var head = $("body").attr("data-github-head");
-	if(base && head) {
-		Nitdoc.GitHub.UI.init(base, head);
+	var origin = $("body").attr("data-github-origin");
+	if(origin) {
+		Nitdoc.GitHub.UI.init(origin);
 	}
 });
 
 /*
  * Nitdoc.Github.UI for comment edition module
  */
-Nitdoc.GitHub.UI = function(base, head) {
-	var base;
-	var head;
-
+Nitdoc.GitHub.UI = function() {
 	var openedComments = 0; // currently edited comments count
 	var user = false; // logged user
+	var origin;
 
-	var init = function(baseStr, headStr) {
-		base = baseStr;
-		head = headStr;
-		console.log("init GitHub module (base: "+ base +", head: "+ head +")");
+	var init = function(originStr) {
+		console.log("init GitHub module (origin: "+ originStr +")");
+
+		// parse origin
+		var parts = originStr.split(":");
+		origin = {
+			user: parts[0],
+			repo: parts[1],
+			branch: parts[2]
+		};
 
 		// check local session
 		if(localStorage.user) {
 			var session = JSON.parse(localStorage.user);
-			var user = tryLogin(session.login, Base64.decode(session.password), session.repo);
+			var user = tryLogin(session.login, Base64.decode(session.password), session.repo, session.branch);
 			if(!user) {
 				console.log("Session found but authentification failed");
 				localStorage.clear();
@@ -66,7 +69,7 @@ Nitdoc.GitHub.UI = function(base, head) {
 		// activate ui
 		Nitdoc.GitHub.LoginBox.init("nav.main ul");
 		if(user) {
-			Nitdoc.GitHub.LoginBox.displayLogout(base, head, user);
+			Nitdoc.GitHub.LoginBox.displayLogout(origin, user);
 			activate(user);
 		} else {
 			Nitdoc.GitHub.LoginBox.displayLogin();
@@ -86,16 +89,11 @@ Nitdoc.GitHub.UI = function(base, head) {
 		user = loggedUser;
 		saveSession(user);
 		
-		// get lastest commit
-		var latest = Nitdoc.GitHub.API.getLastCommit(user, head);
-		if(!latest || !latest.sha) {
-			Nitdoc.GitHub.ModalBox.open("Head branch not found!", latest.status + ": " + latest.statusText, true);
-			return;
-		}
-		if(localStorage.latestCommit != latest.sha) {
+		// check local storage synchro with branch
+		if(localStorage.latestCommit != user.latest.sha) {
 			console.log("Latest commit changed: cleaned cache");
 			localStorage.requests = "[]";
-			localStorage.latestCommit = latest.sha;
+			localStorage.latestCommit = user.latest.sha;
 		}
 		console.log("Latest commit sha: " + localStorage.latestCommit);
 
@@ -117,11 +115,17 @@ Nitdoc.GitHub.UI = function(base, head) {
 	}
 
 	// Attempt login through GitHub API
-	var tryLogin = function(login, password, repo) {
-		var user = new Nitdoc.GitHub.User(login, password, repo);
+	var tryLogin = function(login, password, repo, branch) {
+		var user = new Nitdoc.GitHub.User(login, password, repo, branch);
 		if(!Nitdoc.GitHub.API.login(user)) {
 			return false;
 		}
+		// get lastest commit
+		var latest = Nitdoc.GitHub.API.getLastCommit(user);
+		if(!latest || !latest.sha) {
+			return false;
+		}
+		user.latest = latest;
 		return user;
 	}
 
@@ -311,7 +315,7 @@ Nitdoc.GitHub.UI = function(base, head) {
 			return false;
 		}
 		console.log("New commit: " + newCommit.url);
-		var pullRequest = Nitdoc.GitHub.API.createPullRequest(user, infos.message.split("\n\n")[0], infos.message, base, newCommit.sha);
+		var pullRequest = Nitdoc.GitHub.API.createPullRequest(user, infos.message.split("\n\n")[0], infos.message, origin, newCommit.sha);
 		if(!pullRequest.number) {
 			Nitdoc.GitHub.ModalBox.open("Unable to create pull request!", pullRequest.status + ": " + pullRequest.statusText, true);
 			return false;
@@ -322,23 +326,25 @@ Nitdoc.GitHub.UI = function(base, head) {
 
 	// close previously opened pull request
 	var closePullRequest = function(number) {
+		var requests = JSON.parse(localStorage.requests);
+		if(!requests[number]) {
+			Nitdoc.GitHub.ModalBox.open("Unable to close pull request!", "Pull request " + number + "not found", true);
+			return false;
+		}
 		// close pull request
-		var res = Nitdoc.GitHub.API.updatePullRequest(user, "Canceled from Wikidoc", "", "closed", number);
+		var res = Nitdoc.GitHub.API.updatePullRequest(user, "Canceled from Nitdoc", "", "closed", requests[number].request);
 		if(!res.id) {
 			Nitdoc.GitHub.ModalBox.open("Unable to close pull request!", res.status + ": " + res.statusText, true);
 			return false;
 		}
 		// update in localstorage
-		var requests = JSON.parse(localStorage.requests);
-		if(!!requests[number]) {
-			requests[number].isClosed = true;
-		}
+		requests[number].isClosed = true;
 		localStorage.requests = JSON.stringify(requests);
 	}
 
 	// Get file content from github
 	var getFileContent = function(githubUrl) {
-		var origFile = Nitdoc.GitHub.API.getFile(user, githubUrl, head);
+		var origFile = Nitdoc.GitHub.API.getFile(user, githubUrl);
 		if(!origFile.content) {
 			Nitdoc.GitHub.ModalBox.open("Unable to locate source file!", origFile.status + ": " + origFile.statusText, true);
 			return;
@@ -364,7 +370,8 @@ Nitdoc.GitHub.UI = function(base, head) {
 		var session = {
 			login: user.login,
 			password: Base64.encode(user.password),
-			repo: user.repo
+			repo: user.repo,
+			branch: user.branch,
 		};
 		localStorage.user = JSON.stringify(session);
 	}
@@ -372,8 +379,7 @@ Nitdoc.GitHub.UI = function(base, head) {
 	// accessors
 
 	var getUser = function() { return user; }
-	var getBase = function() { return base; }
-	var getHead = function() { return head; }
+	var getOrigin = function() { return origin; }
 	var getOpenedComments = function() { return openedComments; }
 	var addOpenedComments = function() { openedComments += 1; }
 	var remOpenedComments = function() { openedComments -= 1; }
@@ -385,8 +391,7 @@ Nitdoc.GitHub.UI = function(base, head) {
 		activate: activate,
 		disactivate: disactivate,
 		getUser: getUser,
-		getBase: getBase,
-		getHead: getHead,
+		getOrigin: getOrigin,
 		getOpenedComments: getOpenedComments,
 		addOpenedComments: addOpenedComments,
 		remOpenedComments: remOpenedComments,
@@ -401,11 +406,12 @@ Nitdoc.GitHub.UI = function(base, head) {
 /*
  * GitHub API user object
  */
-Nitdoc.GitHub.User = function(login, password, repo) {
+Nitdoc.GitHub.User = function(login, password, repo, branch) {
 	this.login = login;
 	this.password = password;
 	this.repo = repo;
 	this.auth = "Basic " +  Base64.encode(login + ':' + password);
+	this.branch = branch;
 };
 
 /* 
@@ -459,17 +465,38 @@ Nitdoc.GitHub.API = function() {
 		return user.infos.name + " &lt;" + user.infos.email + "&gt;";
 	}
 
-	/* GitHub commits */
-
-	// get the latest commit on `branchName`
-	var getLastCommit = function(user, branchName) {
+	// get the branches list from a repo
+	var getBranches = function(user) {
 		var res = false;
 		$.ajax({
 			beforeSend: function (xhr) {
 				xhr.setRequestHeader ("Authorization", user.auth);
 			},
 			type: "GET",
-			url: "https://api.github.com/repos/" + user.login + "/" + user.repo + "/git/refs/heads/" + branchName,
+			url: "https://api.github.com/repos/" + user.login + "/" + user.repo + "/branches",
+			async: false,
+			dataType: 'json',
+			success: function(response) {
+				res = response;
+			},
+			error: function(response) {
+				res = response;
+			}
+		});
+		return res;
+    }
+
+	/* GitHub commits */
+
+	// get the latest commit on `branchName`
+	var getLastCommit = function(user) {
+		var res = false;
+		$.ajax({
+			beforeSend: function (xhr) {
+				xhr.setRequestHeader ("Authorization", user.auth);
+			},
+			type: "GET",
+			url: "https://api.github.com/repos/" + user.login + "/" + user.repo + "/git/refs/heads/" + user.branch,
 			async: false,
 			dataType: 'json',
 			success: function(response) {
@@ -585,19 +612,19 @@ Nitdoc.GitHub.API = function() {
 	}
 
 	// create a pull request
-	var createPullRequest = function(user, title, body, base, head) {
+	var createPullRequest = function(user, title, body, origin, head) {
 		var res = false;
 		$.ajax({
 			beforeSend: function (xhr) {
 				xhr.setRequestHeader ("Authorization", user.auth);
 			},
 			type: "POST",
-			url: "https://api.github.com/repos/" + user.login + "/" + user.repo + "/pulls",
+			url: "https://api.github.com/repos/" + origin.user + "/" + origin.repo + "/pulls",
 			data: JSON.stringify({
 				title: title,
 				body: body,
-				base: base,
-				head: head
+				base: origin.branch,
+				head: user.login + ":" + head
 			}),
 			async: false,
 			dataType: 'json',
@@ -612,14 +639,14 @@ Nitdoc.GitHub.API = function() {
 	}
 
 	// update a pull request
-	var updatePullRequest = function(user, title, body, state, number) {
+	var updatePullRequest = function(user, title, body, state, request) {
 		var res = false;
 			$.ajax({
 			beforeSend: function (xhr) {
 					xhr.setRequestHeader ("Authorization", user.auth);
 			},
 			type: "PATCH",
-			url: "https://api.github.com/repos/" + user.login + "/" + user.repo + "/pulls/" + number,
+			url: request.url,
 			data: JSON.stringify({
 				title: title,
 				body: body,
@@ -662,6 +689,7 @@ Nitdoc.GitHub.API = function() {
 	var api = {
 		login: login,
 		getLastCommit: getLastCommit,
+		getBranches: getBranches,
 		getTree: getTree,
 		createBlob: createBlob,
 		createTree: createTree,
@@ -719,7 +747,7 @@ Nitdoc.GitHub.LoginBox = function() {
 	}
 
 	// Panel of login box to display when the user is logged in
-	var displayLogout = function(base, head, user) {
+	var displayLogout = function(origin, user) {
 		var panel = $(document.createElement("div"))
 		.append(
 			$(document.createElement("h4"))
@@ -732,30 +760,16 @@ Nitdoc.GitHub.LoginBox = function() {
 		)
 		.append(
 			$(document.createElement("label"))
-			.attr("for", "github-repo")
-			.append("Repo")
+			.attr("for", "github-origin")
+			.append("Origin")
 		)
 		.append(
 			$(document.createElement("input"))
 			.attr({
-				id: "github-repo",
+				id: "github-origin",
 				type: "text",
 				disabled: "disabled",
-				value: user.repo
-			})
-		)
-		.append(
-			$(document.createElement("label"))
-			.attr("for", "github-head")
-			.append("Head")
-		)
-		.append(
-			$(document.createElement("input"))
-			.attr({
-				id: "github-head",
-				type: "text",
-				disabled: "disabled",
-				value: head
+				value: origin.user + ":" + origin.repo + ":" + origin.branch
 			})
 		)
 		.append(
@@ -769,7 +783,7 @@ Nitdoc.GitHub.LoginBox = function() {
 				id: "github-base",
 				type: "text",
 				disabled: "disabled",
-				value: base
+				value: user.login + ":" + user.repo + ":" + user.branch
 			})
 		)
 		.append(
@@ -829,6 +843,18 @@ Nitdoc.GitHub.LoginBox = function() {
 			})
 		)
 		.append(
+			$(document.createElement("label"))
+			.attr("for", "nitdoc-github-branch-field")
+			.append("Branch")
+		)
+		.append(
+			$(document.createElement("input"))
+			.attr({
+				id: "nitdoc-github-branch-field",
+				type: "text"
+			})
+		)
+		.append(
 			$(document.createElement("button"))
 			.addClass("nitdoc-github-button")
 			.append(
@@ -839,17 +865,17 @@ Nitdoc.GitHub.LoginBox = function() {
 				var login = $('#nitdoc-github-login-field').val();
 				var password = $('#nitdoc-github-password-field').val();
 				var repo = $('#nitdoc-github-repo-field').val();
-				if(!login || !password || !repo) {
-					Nitdoc.GitHub.ModalBox.open("Sign in error", "Please enter your GitHub username, password and repository.", true);
+				var branch = $('#nitdoc-github-branch-field').val();
+				if(!login || !password || !repo || !branch) {
+					Nitdoc.GitHub.ModalBox.open("Sign in error", "Please enter your GitHub username, password, repository and branch.", true);
 				} else {
-					var user = Nitdoc.GitHub.UI.tryLogin(login, password, repo);
+					var user = Nitdoc.GitHub.UI.tryLogin(login, password, repo, branch);
 					if(!user) {
-						Nitdoc.GitHub.ModalBox.open("Sign in error", "The username, password or repo you entered is incorrect.", true);
+						Nitdoc.GitHub.ModalBox.open("Sign in error", "The username, password, repo or branch you entered is incorrect.", true);
 					} else {
 						Nitdoc.GitHub.UI.activate(user);
-						var base = Nitdoc.GitHub.UI.getBase();
-						var head = Nitdoc.GitHub.UI.getHead();
-						Nitdoc.GitHub.LoginBox.displayLogout(base, head, user);
+						var origin = Nitdoc.GitHub.UI.getOrigin();
+						Nitdoc.GitHub.LoginBox.displayLogout(origin, user);
 					}
 				}
 				return false;
