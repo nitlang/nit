@@ -39,8 +39,8 @@
 	cursor: default;
 	position: absolute;
 	width : 220px;
-	margin-top: 10px;
-	margin-left: -215px;
+	margin-top: 2px;
+	margin-left: -208px;
 	display: block;
 	padding: 10px;
 	text-align: left;
@@ -48,12 +48,12 @@
 	background-color: #ffffff;
 	border: 1px solid #ccc;
 	border: 1px solid rgba(0, 0, 0, 0.2);
-	-webkit-border-radius: 6px;
-	-moz-border-radius: 6px;
-	border-radius: 6px;
-	-webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-	-moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	-webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 	-webkit-background-clip: padding-box;
 	-moz-background-clip: padding;
 	background-clip: padding-box;
@@ -66,10 +66,10 @@
 	height: 0;
 	border-color: transparent;
 	border-style: solid;
-	border-width: 11px;
-	top: -11px;
+	border-width: 7px;
+	top: -7px;
 	left: 50%;
-	margin-left: 93px;
+	margin-left: 90px;
 	border-bottom-color: #999;
 	border-bottom-color: rgba(0, 0, 0, 0.25);
 	border-top-width: 0;
@@ -108,12 +108,13 @@
 #nitdoc-github-loginbox button {
 	margin-top: 15px;
 	width: 220px;
+	font-weight: bold;
 }
 
 #nitdoc-github-loginbox h4 {
 	display: block;
 	width: 100%;
-	color: black;
+	color: #6C6C6C;
 	font-style: normal;
 	text-align: center;
 	margin-bottom: 20px;
@@ -134,9 +135,9 @@ button.nitdoc-github-button {
 	background-image:      -o-linear-gradient(top, #92C929, #1d7900); /* Opera 11.10+ */
 	background-image:         linear-gradient(top, #92C929, #1d7900);
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#92C929', EndColorStr='#1d7900'); /* IE6–IE9 */
-	border-radius: 4px;
-	-moz-border-radius: 4px;
-	-webkit-border-radius: 4px;
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
 	-moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;
 	box-shadow: 0px 2px 4px rgba(0,0,0, .2);
 	-moz-box-shadow: 0px 2px 4px rgba(0,0,0, .2);
@@ -146,7 +147,6 @@ button.nitdoc-github-button {
 	-webkit-text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2);
 	border: 1px solid #1d7900;
 	color: #fff;
-	font-weight: bold;
 	font-size: 14px;
 	padding: 5px 7px 5px 7px;
 	text-align: center;
@@ -187,7 +187,7 @@ button.nitdoc-github-button img {
 .nitdoc-github-modal {
 	background: #fff;
 	padding: 20px;
-	border: 3px solid #ddd;
+	border: 1px solid #ddd;
 	float: left;
 	position: fixed;
 	z-index: 99999;
@@ -196,9 +196,9 @@ button.nitdoc-github-button img {
 	-moz-box-shadow: 0px 0px 20px #000;
 	box-shadow: 0px 0px 20px #000;
 	/* round corners CSS3 */
-	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
-	border-radius: 10px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
 	text-align: left;
 }
 
@@ -224,8 +224,11 @@ button.nitdoc-github-button img {
 
 .nitdoc-github-close {
 	float: right;
-	margin: -35px -35px 0 0;
+	margin: -22px -17px 0 0;
 	cursor: pointer;
+	font-size: 1.3em;
+	font-weight: bold;
+	text-transform: lowercase;
 }
 
 /* Comment editing */
@@ -252,13 +255,13 @@ button.nitdoc-github-button img {
 
 .nitdoc-github-button.nitdoc-github-cancel {
 	background-color: #b33630;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#b33630), to(#9f312c)); /* Saf4+, Chrome */
-	background-image: -webkit-linear-gradient(top, #b33630, #9f312c); /* Chrome 10+, Saf5.1+ */
-	background-image:    -moz-linear-gradient(top, #b33630, #9f312c); /* FF3.6 */
-	background-image:     -ms-linear-gradient(top, #b33630, #9f312c); /* IE10 */
-	background-image:      -o-linear-gradient(top, #b33630, #9f312c); /* Opera 11.10+ */
-	background-image:         linear-gradient(top, #b33630, #9f312c);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#b33630', EndColorStr='##9f312c'); /* IE6–IE9 */
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#E97A74), to(#9f312c)); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient(top, #E97A74, #9f312c); /* Chrome 10+, Saf5.1+ */
+	background-image:    -moz-linear-gradient(top, #E97A74, #9f312c); /* FF3.6 */
+	background-image:     -ms-linear-gradient(top, #E97A74, #9f312c); /* IE10 */
+	background-image:      -o-linear-gradient(top, #E97A74, #9f312c); /* Opera 11.10+ */
+	background-image:         linear-gradient(top, #E97A74, #9f312c);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#E97A74', EndColorStr='#9f312c'); /* IE6–IE9 */
 	border: 1px solid #9f312c;
 }
 

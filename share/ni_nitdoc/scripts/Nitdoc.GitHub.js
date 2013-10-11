@@ -789,6 +789,7 @@ Nitdoc.GitHub.LoginBox = function() {
 		.append(
 			$(document.createElement("button"))
 			.addClass("nitdoc-github-button")
+			.addClass("nitdoc-github-cancel")
 			.append(
 				$(document.createElement("img"))
 				.attr("src", "resources/icons/github-icon.png")
@@ -1020,16 +1021,9 @@ Nitdoc.GitHub.ModalBox = function() {
 			.append(
 				$(document.createElement("a"))
 				.addClass("nitdoc-github-close")
-				.append(
-					$(document.createElement("img"))
-					.addClass("nitdoc-github-imgClose")
-					.attr({
-						src: "resources/icons/close.png",
-						title: "Close",
-						alt: "Close"
-				
-					})
-				).click(function() { Nitdoc.GitHub.ModalBox.close() })
+				.attr("title", "Close")
+				.append("x")
+				.click(function() { Nitdoc.GitHub.ModalBox.close() })
 			)
 			.append("<h3>" + title + "</h3>")
 			.append("<div>" + content + "</div>")
@@ -1093,16 +1087,9 @@ Nitdoc.GitHub.CommitBox = function() {
 			.append(
 				$(document.createElement("a"))
 				.addClass("nitdoc-github-close")
-				.append(
-					$(document.createElement("img"))
-					.addClass("nitdoc-github-imgClose")
-					.attr({
-						src: "resources/icons/close.png",
-						title: "Close",
-						alt: "Close"
-				
-					})
-				).click(function() { Nitdoc.GitHub.CommitBox.close() })
+				.attr("title", "Close")
+				.append("x")
+				.click(function() { Nitdoc.GitHub.CommitBox.close() })
 			)
 			.append("<h3>Commit changes</h3>")
 			.append(
