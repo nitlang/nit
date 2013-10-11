@@ -60,14 +60,19 @@ article:hover > .signature button.nitdoc-ui-copy, button.nitdoc-ui-copy.zeroclip
 
 /* Side bar boxes text filtering */
 
-.nitdoc-ui-filter .nitdoc-ui-notused {
-	color: #999;
-	font-style: italic;
-}
-
 .nitdoc-ui-filter {
 	text-align: center;
 	padding: 5px;
+}
+
+.nitdoc-ui-filter-field {
+	width: 150px;
+	margin-right: 5px;
+}
+
+.nitdoc-ui-filter-field-notused {
+	color: #999;
+	font-style: italic;
 }
 
 /* Side bar boxes type filtering */

@@ -38,32 +38,27 @@ Nitdoc.QuickSearch = function() {
 			autocomplete: "off",
 			value: "quick search..."
 		})
-		.addClass("nitdoc-qs-notused")
+		.addClass("nitdoc-qs-field-notused")
 		.keyup(function(event) {
 			Nitdoc.QuickSearch.doKeyAction(event.keyCode);
 		})
 		.focusout(function() {
 			if($(this).val() == "") {
-				$(this).addClass("nitdoc-qs-notused");
+				$(this).addClass("nitdoc-qs-field-notused");
 				$(this).val("quick search...");
 			}
 		})
 		.focusin(function() {
 			if($(this).val() == "quick search...") {
-				$(this).removeClass("nitdoc-qs-notused");
+				$(this).removeClass("nitdoc-qs-field-notused");
 				$(this).val("");
 			}
 		});
 
 		$(containerSelector).append(
 			$(document.createElement("li"))
-			.append(
-				$(document.createElement("form"))
-				.append(searchField)
-				.submit(function() {
-					return false;
-				})
-			)
+			.attr("id", "nitdoc-qs-li")
+			.append(searchField)
 		);
 
 		// Close quicksearch list on click

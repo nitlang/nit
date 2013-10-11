@@ -76,6 +76,7 @@ body {
 
 header {
 	position: fixed;
+	z-index: 600;
 	left: 0;
 	right: 0;
 }
@@ -87,6 +88,7 @@ header {
 
 .sidebar {
 	position: fixed;
+	z-index: 500;
 	top: 50px;
 	bottom: 1em;
 	width: 250px;
@@ -99,6 +101,7 @@ header {
 
 .content {
 	position: fixed;
+	z-index: 500;
 	top: 50px;
 	bottom: 1em;
 	left: 0;
@@ -120,6 +123,7 @@ header {
 
 footer {
 	position: fixed;
+	z-index: 500;
 	bottom: 0;
 	width: 100%;
 }
@@ -400,9 +404,7 @@ article .info .code {
 /* Form elements */
 
 input[type=text] {
-	width: 150px;
 	border: 1px solid #CCC;
-	margin-right: 5px;
 	padding: 1px 2px;
 }
 
@@ -410,10 +412,6 @@ nav.main input[type=text] {
 	margin: -2px 10px;
 	color: black;
 	font-style: normal;
-}
-
-nav.main form {
-	float: right;
 }
 
 /* New comments style */

@@ -73,7 +73,8 @@ Nitdoc.UI = function() {
 		.addClass("nitdoc-ui-filter")
 		.append(
 			$(document.createElement("input"))
-			.addClass("nitdoc-ui-notused")
+			.addClass("nitdoc-ui-filter-field")
+			.addClass("nitdoc-ui-filter-field-notused")
 			.attr("type", "text")
 			.attr("value",	"filter...")
 			.keyup(function() {
@@ -84,13 +85,13 @@ Nitdoc.UI = function() {
 			})
 			.focusout(function() {
 				if($(this).val() == "") {
-					$(this).addClass("nitdoc-ui-notused");
+					$(this).addClass("nitdoc-ui-filter-field-notused");
 					$(this).val("filter...");
 				}
 			})
 			.focusin(function() {
 				if($(this).val() == "filter...") {
-					$(this).removeClass("nitdoc-ui-notused");
+					$(this).removeClass("nitdoc-ui-filter-field-notused");
 					$(this).val("");
 				}
 			})

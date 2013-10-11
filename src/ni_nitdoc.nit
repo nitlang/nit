@@ -213,13 +213,13 @@ abstract class NitdocPage
 		append("<script type='text/javascript' src='scripts/Nitdoc.UI.js'></script>")
 		append("<script type='text/javascript' src='scripts/Markdown.Converter.js'></script>")
 		append("<script type='text/javascript' src='scripts/base64.js'></script>")
-		append("<script type='text/javascript' src='scripts/github.js'></script>")
+		append("<script type='text/javascript' src='scripts/Nitdoc.GitHub.js'></script>")
 		append("<script type='text/javascript' src='quicksearch-list.js'></script>")
 		append("<script type='text/javascript' src='scripts/Nitdoc.QuickSearch.js'></script>")
 		append("<link rel='stylesheet' href='styles/main.css' type='text/css' media='screen'/>")
 		append("<link rel='stylesheet' href='styles/Nitdoc.UI.css' type='text/css' media='screen'/>")
 		append("<link rel='stylesheet' href='styles/Nitdoc.QuickSearch.css' type='text/css' media='screen'/>")
-		append("<link rel='stylesheet' href='styles/github.css' type='text/css' media='screen'/>")
+		append("<link rel='stylesheet' href='styles/Nitdoc.GitHub.css' type='text/css' media='screen'/>")
 		var title = ""
 		if ctx.opt_custom_title.value != null then
 			title = " | {ctx.opt_custom_title.value.to_s}"

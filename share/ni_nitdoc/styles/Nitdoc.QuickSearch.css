@@ -20,11 +20,17 @@
  * Nitdoc Quick Search JS module 
  */
 
+#nitdoc-qs-li {
+	float: right;
+	padding: 0;
+	margin: 0;
+}
+
 #nitdoc-qs-field {
 	width: 300px;
 }
 
-#nitdoc-qs-field.nitdoc-qs-notused {
+#nitdoc-qs-field.nitdoc-qs-field-notused {
 	color: #999;
 	font-style: italic;
 }
@@ -33,7 +39,7 @@
 	background-color: #FFFFFF;
 	border: 1px solid #E0E0E0;
 	border-spacing: 0px;
-	z-index: 10; /* the menu must be over the rest of the page. */
+	z-index: 1000;
 }
 
 #nitdoc-qs-table .nitdoc-qs-active {
