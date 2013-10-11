@@ -76,6 +76,7 @@ body {
 
 header {
 	position: fixed;
+	z-index: 600;
 	left: 0;
 	right: 0;
 }
@@ -85,20 +86,22 @@ header {
 	height: 100%;
 }
 
-.menu {
+.sidebar {
 	position: fixed;
+	z-index: 500;
 	top: 50px;
 	bottom: 1em;
 	width: 250px;
 	overflow-y:	scroll;
 }
 
-.menu nav:last-child {
+.sidebar nav:last-child {
 	margin-bottom: 0;
 }
 
 .content {
 	position: fixed;
+	z-index: 500;
 	top: 50px;
 	bottom: 1em;
 	left: 0;
@@ -114,69 +117,45 @@ header {
 	width: auto;
 }
 
-.page.footed .content, .page.footed .menu {
+.page.footed .content, .page.footed .sidebar {
 	bottom: 2em;
 }
 
 footer {
 	position: fixed;
+	z-index: 500;
 	bottom: 0;
 	width: 100%;
 }
 
-article:hover > .signature .copyButton, .copyButton.zeroclipboard-is-hover {
-	visibility: visible;
-}
-
-.copyButton.zeroclipboard-is-active {
-	border-color: #0D8921;
-}
-
-.copyButton {
-	visibility: hidden;
-	vertical-align: middle;
-	margin: -2px 0px 0px 10px;
-	width: 22px;
-	height: 19px;
-	padding: 1px;
-	cursor: pointer;
-	background: #eee;
-	border: 1px solid #ccc;
-	box-shadow: none;
-}
-
-.copyButton img {
-	width: 16px;
-}
-
 /* Webkit scroll bars */
 
-.menu {
+.sidebar {
     overflow-y: hidden;
 }
 
-.menu:hover {
+.sidebar:hover {
     overflow-y: scroll;
 }
 
-.menu::-webkit-scrollbar, .content::-webkit-scrollbar {
+.sidebar::-webkit-scrollbar, .content::-webkit-scrollbar {
     width: 10px;
 }
 
-.menu::-webkit-scrollbar-thumb, .content::-webkit-scrollbar-thumb {
+.sidebar::-webkit-scrollbar-thumb, .content::-webkit-scrollbar-thumb {
 	background: #CCC;
 	-webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,0.10),inset 0 -1px 0 rgba(0,0,0,0.07);
 }
 
-.menu::-webkit-scrollbar-thumb:hover, .content::-webkit-scrollbar-thumb:hover {
+.sidebar::-webkit-scrollbar-thumb:hover, .content::-webkit-scrollbar-thumb:hover {
 	background: #999;
 }
 
-.menu::-webkit-scrollbar-corner, .content::-webkit-scrollbar-corner {
+.sidebar::-webkit-scrollbar-corner, .content::-webkit-scrollbar-corner {
 	background: transparent;
 }
 
-.menu::-webkit-scrollbar-button, .content::-webkit-scrollbar-button {
+.sidebar::-webkit-scrollbar-button, .content::-webkit-scrollbar-button {
 	width: 0;
 	height: 0;
 	display: none;
@@ -197,14 +176,6 @@ header nav ul li {
 	color: #999;
 }
 
-header nav ul li a {
-	color: black;
-}
-
-header nav ul li a:hover {
-	color: #0D8921;
-}
-
 footer {
 	text-align: center;
 	padding-bottom: 10px;
@@ -214,52 +185,60 @@ footer {
 /* Main menu */
 
 header nav.main {
-	background: #E0E0E0 url(../resources/top_back.gif) repeat-x top left;
+	background: #f1f1f1;
+	border-bottom: 1px solid #ddd;
 	padding: 7px 0;
 }
 
 header nav.main ul li.current {
 	background: #0D8921;
-	color: white;
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border: 1px solid #1d7900;
+	color: #fff;
+	text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2);
+	-moz-text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2);
+	-webkit-text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2);
 }
 
-/* Latteral Menu */
+/* Sidebar */
 
-.menu nav {
+.sidebar nav {
 	margin: 20px;
 	width: 208px;
-	border: 1px solid #CCC;
+	border: 1px solid #ddd;
 }
 
-.menu nav:first-child {
+.sidebar nav:first-child {
 	margin-top: 0;
 }
 
-.menu nav h3 {
+.sidebar nav h3 {
 	margin: 0;
 	padding: 5px;
-	background: #CCC;
+	background: #f1f1f1;
 	font-size: 1em;
 }
 
-.menu nav h4 {
+.sidebar nav h4 {
 	font-weight: bold;
 	color: #555555;
 	margin: 10px 0 0 10px;
 	font-size: 12px;
 }
 
-.menu nav h4:last-child {
+.sidebar nav h4:last-child {
 	margin-bottom: 5px;
 }
 
-.menu nav ul {
+.sidebar nav ul {
 	margin: 10px;
 	padding: 0;
 	list-style-type: none;
 }
 
-.menu nav ul li {
+.sidebar nav ul li {
 	overflow: hidden;
 	color: #CCC;
 }
@@ -410,67 +389,8 @@ article .info .code {
 	margin: 0;
 }
 
-/* JS facilities */
-
-input[type=text] {
-	width: 150px;
-	border: 1px solid #CCC;
-	margin-right: 5px;
-	padding: 1px 2px;
-}
-
-input[type=text].notUsed {
-	color: #999;
-	font-style: italic;
-}
-
-nav .filter {
-	text-align: center;
-	padding: 5px;
-}
-
-nav.main input[type=text] {
-	margin: -2px 10px;
-	color: black;
-	font-style: normal;
-}
-
-nav.main form {
-	float: right;
-}
-
-.filter a {
-	color: #0D8921;
-	cursor: pointer;
-	font-family: monospace;
-	margin-right: 5px;
-   font-weight: bold;
-}
-
-.filter a.hidden {
-	color: #999;
-   font-weight: normal;
-}
-
-.filter a:hover {
-	text-decoration: underline;
-}
-
-nav h3 a.fold {
-	margin: 0 5px;
-	color: #999;
-	font-family: monospace;
-	font-weight: bold;
-	font-size: 120%;
-	cursor: pointer;
-}
-
-.hide {
-	overflow-y: hidden;
-	height: 0;
-}
-
 /* Icons */
+
 .type.public, .interface.public, .abstract.class.public { background-image: url('../resources/icons/vtype_public.png')}
 .type.protected, .interface.protected, .abstract.class.protected { background-image: url('../resources/icons/vtype_protected.png')}
 .type.private, .interface.private, .abstract.class.private { background-image: url('../resources/icons/vtype_private.png')}
@@ -481,42 +401,17 @@ nav h3 a.fold {
 .fun.protected, .class.protected, .extern.protected { background-image: url('../resources/icons/meth_protected.png')}
 .fun.private, .class.private, .extern.private { background-image: url('../resources/icons/meth_private.png')}
 
-/* Quick Search */
+/* Form elements */
 
-#search {
-	width: 300px;
+input[type=text] {
+	border: 1px solid #CCC;
+	padding: 1px 2px;
 }
 
-#searchTable {
-	background-color: #FFFFFF;
-	border: 1px solid #E0E0E0;
-	border-spacing: 0px;
-	z-index: 10; /* the menu must be over the rest of the page. */
-}
-
-#searchTable .activeSearchResult {
-	cursor: pointer;
-	background: #EEE;
-}
-
-#searchTable td {
-	white-space: nowrap;
-	overflow: hidden;
-	line-height: 22px;
-	padding: 2px;
-	width: 25%;
-}
-
-#searchTable td.entryInfo {
-	color: #0D8921;
-	font-size: small;
-	width: 75%;
-	text-align: right;
-}
-
-#searchTable tr.overflow td {
-	text-align: center;
-	background-color: #E0E0E0;
+nav.main input[type=text] {
+	margin: -2px 10px;
+	color: black;
+	font-style: normal;
 }
 
 /* New comments style */

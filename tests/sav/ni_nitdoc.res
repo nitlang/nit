@@ -20,5 +20,4 @@ usage: nitdoc [options] file...
   --custom-footer-text     Text displayed as footer of all pages
   --custom-overview-text   Text displayed as introduction of Overview page before the modules list
   --custom-menu-items      Items displayed in menu before the 'Overview' item (Each item must be enclosed in 'li' tags)
-  --github-base            The branch (or git ref) edited commits will be pulled into (ex: octocat:master)
-  --github-head            The reference branch name used to create pull requests (ex: master)
+  --github-origin          The branch where edited commits will be pulled into (ex: user:repo:branch)

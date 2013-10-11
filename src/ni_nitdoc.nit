@@ -46,8 +46,7 @@ class NitdocContext
 	private var opt_custom_overview_text: OptionString = new OptionString("Text displayed as introduction of Overview page before the modules list", "--custom-overview-text")
 	private var opt_custom_footer_text: OptionString = new OptionString("Text displayed as footer of all pages", "--custom-footer-text")
 
-	private var opt_github_base: OptionString = new OptionString("The branch (or git ref) edited commits will be pulled into (ex: octocat:master)", "--github-base")
-	private var opt_github_head: OptionString = new OptionString("The reference branch name used to create pull requests (ex: master)", "--github-head")
+	private var opt_github_origin: OptionString = new OptionString("The branch where edited commits will be pulled into (ex: user:repo:branch)", "--github-origin")
 
 	init do
 		toolcontext.option_context.add_option(opt_dir)
@@ -59,8 +58,7 @@ class NitdocContext
 		toolcontext.option_context.add_option(opt_custom_footer_text)
 		toolcontext.option_context.add_option(opt_custom_overview_text)
 		toolcontext.option_context.add_option(opt_custom_menu_items)
-		toolcontext.option_context.add_option(opt_github_base)
-		toolcontext.option_context.add_option(opt_github_head)
+		toolcontext.option_context.add_option(opt_github_origin)
 		toolcontext.process_options
 		self.arguments = toolcontext.option_context.rest
 
@@ -163,7 +161,7 @@ class NitdocContext
 
 	private fun quicksearch_list do
 		var file = new OFStream.open("{output_dir.to_s}/quicksearch-list.js")
-		file.write("var entries = \{ ")
+		file.write("var nitdocQuickSearchRawList = \{ ")
 		for mmodule in model.mmodules do
 			file.write("\"{mmodule.name}\": [")
 			file.write("\{txt: \"{mmodule.full_name}\", url:\"{mmodule.url}\" \},")
@@ -210,14 +208,16 @@ abstract class NitdocPage
 		append("<meta charset='utf-8'/>")
 		append("<script type='text/javascript' src='scripts/jquery-1.7.1.min.js'></script>")
 		append("<script type='text/javascript' src='scripts/ZeroClipboard.min.js'></script>")
+		append("<script type='text/javascript' src='scripts/Nitdoc.UI.js'></script>")
 		append("<script type='text/javascript' src='scripts/Markdown.Converter.js'></script>")
-		append("<script type='text/javascript' src='quicksearch-list.js'></script>")
 		append("<script type='text/javascript' src='scripts/base64.js'></script>")
-		append("<script type='text/javascript' src='scripts/github.js'></script>")
-		append("<script type='text/javascript' src='scripts/js-facilities.js'></script>")
+		append("<script type='text/javascript' src='scripts/Nitdoc.GitHub.js'></script>")
+		append("<script type='text/javascript' src='quicksearch-list.js'></script>")
 		append("<script type='text/javascript' src='scripts/Nitdoc.QuickSearch.js'></script>")
 		append("<link rel='stylesheet' href='styles/main.css' type='text/css' media='screen'/>")
-		append("<link rel='stylesheet' href='styles/github.css' type='text/css' media='screen'/>")
+		append("<link rel='stylesheet' href='styles/Nitdoc.UI.css' type='text/css' media='screen'/>")
+		append("<link rel='stylesheet' href='styles/Nitdoc.QuickSearch.css' type='text/css' media='screen'/>")
+		append("<link rel='stylesheet' href='styles/Nitdoc.GitHub.css' type='text/css' media='screen'/>")
 		var title = ""
 		if ctx.opt_custom_title.value != null then
 			title = " | {ctx.opt_custom_title.value.to_s}"
@@ -291,9 +291,8 @@ abstract class NitdocPage
 		head
 		append("</head>")
 		append("<body")
-		if not ctx.opt_github_base.value == null and not ctx.opt_github_head.value == null then
-			append(" data-github-base='{ctx.opt_github_base.value.as(not null)}'")
-			append(" data-github-head='{ctx.opt_github_head.value.as(not null)}'")
+		if not ctx.opt_github_origin.value == null then
+			append(" data-github-origin='{ctx.opt_github_origin.value.as(not null)}'")
 		end
 		append(">")
 		header
@@ -542,7 +541,7 @@ class NitdocModule
 	end
 
 	redef fun content do
-		append("<div class='menu'>")
+		append("<div class='sidebar'>")
 		classes_column
 		importation_column
 		append("</div>")
@@ -769,7 +768,7 @@ class NitdocClass
 	end
 
 	redef fun content do
-		append("<div class='menu'>")
+		append("<div class='sidebar'>")
 		properties_column
 		inheritance_column
 		append("</div>")
