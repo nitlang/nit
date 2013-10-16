@@ -130,17 +130,6 @@ class PartialOrder[E: Object]
 		return poe
 	end
 
-	# Are all these elements in the order
-	fun has_all(e: Collection[E]): Bool
-	do
-		for i in e do
-			if not has(i) then
-				return false
-			end
-		end
-		return true
-	end
-
 	# factory for partial order elements
 	protected fun new_poe(e: E, directs: Array[E]): PartialOrderElement[E]
 	do
