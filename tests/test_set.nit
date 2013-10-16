@@ -18,8 +18,11 @@ do
 	s1.add(2)
 	s2.add(2)
 	s2.add(1)
-	#print s1.hash == s2.hash
+	s2.add(2)
+	print s1.hash == s2.hash
 	print s1 == s2
+	s2.add(3)
+	print s1 != s2
 	print ""
 end
 
