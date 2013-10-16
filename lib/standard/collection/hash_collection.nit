@@ -14,7 +14,6 @@
 module hash_collection
 
 import array
-import hash
 
 # A HashCollection is an array of HashNode[K] indexed by the K hash value
 private abstract class HashCollection[K: Object, N: HashNode[Object]]

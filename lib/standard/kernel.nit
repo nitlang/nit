@@ -66,6 +66,12 @@ interface Object
 
 	# Return the global sys object, the only instance of the `Sys` class.
 	protected fun sys: Sys is intern
+
+	# The hash code of the object.
+	# Assuming that a == b -> a.hash == b.hash
+	##
+	# Without redefinition, it is based on the `object_id` of the instance.
+	fun hash: Int do return object_id / 8
 end
 
 # The main class of the program.
@@ -199,6 +205,14 @@ universal Bool
 	redef fun ==(b) is intern
 	redef fun !=(b) is intern
 	redef fun output is intern
+	redef fun hash
+	do
+		if self then
+			return 1
+		else
+			return 0
+		end
+	end
 end
 
 # Native floating point numbers.
@@ -234,6 +248,7 @@ universal Int
 	redef type OTHER: Int
 
 	redef fun object_id is intern
+	redef fun hash do return self
 	redef fun ==(i) is intern
 	redef fun !=(i) is intern
 	redef fun output is intern
@@ -431,6 +446,7 @@ universal Char
 	redef type OTHER: Char
 
 	redef fun object_id is intern
+	redef fun hash do return ascii
 	redef fun ==(o) is intern
 	redef fun !=(o) is intern
 	redef fun output is intern
