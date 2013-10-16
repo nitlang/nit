@@ -1,0 +1,13 @@
+Grammar lisp;
+Lexer
+id = ('a'..'z')+;
+blank = ' ' | #9 | #10 | #13;
+
+Parser
+Ignored blank;
+
+item = {par:} '(' list ')' |
+       {nil:} '(' ')' |
+       {id:} id ;
+list = {many:} item list |
+       {one:} item ;

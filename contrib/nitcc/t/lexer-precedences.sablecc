@@ -1,0 +1,14 @@
+Grammar re;
+Lexer
+        //alt1,2,3 a = 'a'; b = 'a' | 'b' ;
+        //alt4,5 a = 'a' | 'c' ; b = 'a' | 'b' ;
+        //alt6,7 a = 'a' ; b = 'b' ;
+        //alt8 a = ('a' Lookahead 'b') | 'c'; b = 'a';
+        //alt9,10 a = 'a'; b = 'b';
+
+xa = a; xb =b; //alt2,5,7,10 xa = a ; xb = b - a; //Precedence a > b; //alt3 xa = a - b ; xb = b; //Precedence b > a;
+blank = #10 | #13;
+
+Parser
+Ignored blank;
+t = xa | xb;

@@ -1,0 +1,19 @@
+Grammar re;
+Lexer
+
+        notst = Any - '*';
+        notstsl = notst - '/';
+
+        com1 = '/*' (notst | '*'+ notstsl)* '*'+ '/';
+        com2 = '/*' notst* ('*' (notstsl notst*)?)* '*/'; //alt1 //alt2 //alt3 //alt4
+        //alt1 com2 = Shortest ('/*' Any* '*/');
+        //alt2 com2 = '/*' (Any* - '*/') '*/';
+        //alt3 com2 = '/*' (('' Lookahead Not '*/') Any)* '*/';
+        //alt4 com2 = '/*' (Any* Except (Any* '*/' Any*)) '*/';
+
+        dummy = notst | notstsl;
+
+Parser
+
+p = com1 | com2 | dummy;
+

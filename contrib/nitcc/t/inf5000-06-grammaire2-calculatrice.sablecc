@@ -1,0 +1,15 @@
+Grammar calc;
+Lexer
+   int = ('0'..'9')+;
+   blank = ' ' | #9 | #10 | #13;
+
+Parser
+   Ignored blank;
+   exprs = expr*;
+   expr =
+      {add:} [left:]expr '+' [right:]expr |
+      {sub:} [left:]expr '-' [right:]expr |
+      {mul:} [left:]expr '*' [right:]expr |
+      {int:} int |
+      {par:} '(' expr ')' ;
+      Precedence Left mul; Left add, sub;

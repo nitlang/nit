@@ -1,0 +1,7 @@
+Grammar trans;
+
+Parser
+
+a = a a2 | a2;
+a2 {-> a} = 'x' | a3 {-> a3};
+a3 {-> a} = 'y';

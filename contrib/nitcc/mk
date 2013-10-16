@@ -1,0 +1,33 @@
+set -e
+set -x
+
+NITC=../../bin/nitg
+
+echo "**************************"
+
+$NITC nitcc_parser_gen.nit -v
+./nitcc_parser_gen
+
+echo "**************************"
+
+$NITC nitcc.nit -v
+cp nitcc nitcc0
+
+echo "**************************"
+
+./nitcc nitcc.sablecc
+$NITC nitcc.nit
+cp nitcc nitcc1
+
+echo "**************************"
+
+./nitcc nitcc.sablecc
+$NITC nitcc.nit
+
+echo "**************************"
+
+cd examples
+../nitcc calc.sablecc
+../$NITC calc.nit -v -I ..
+./calc -e "1+2*3-40/5+9------1"
+

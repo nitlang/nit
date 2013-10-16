@@ -1,0 +1,31 @@
+Grammar json;
+
+Lexer
+
+number = int frac? exp;
+int = '-'? d+;
+d = '0'..'9';
+frac = '.' d+;
+exp = e d+;
+e = ('e'|'E') ('+'|'-')?;
+
+string = '"' (ch-'\\'-'"' | '\\'ch)+ '"';
+ch = ' '..'~';
+
+blank = (' '|'\n'|'\t')+;
+
+Parser
+Ignored blank;
+
+value =
+	{object:} '{' members? '}' |
+	{array:} '[' elements? ']' |
+	number |
+	string |
+	'true' |
+	'false' |
+	'null' ;
+
+members = members ',' pair | pair ;
+pair = string ':' value ;
+elements = elements ',' value | value ;

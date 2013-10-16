@@ -1,0 +1,12 @@
+T_Int@1,1:1
+TAnonymous@1,2:+
+T_Int@1,3:2
+TAnonymous@1,4:*
+TAnonymous@1,5:(
+T_Int@1,6:3
+TAnonymous@1,7:+
+T_Int@1,8:4
+TAnonymous@1,9:)
+TAnonymous@1,10:+
+T_Int@1,11:5
+TEnd@2,1:

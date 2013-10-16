@@ -1,0 +1,15 @@
+Grammar re;
+Lexer
+
+        //alt1 a = '';
+        //alt2 a = 'a' - 'a';
+        //alt3 a = a;
+        //alt4 a = b; b = a;
+        //alt5 a = fail;
+        //alt6 a = 'a'; i = 'i';
+        //alt7 a = '' Lookahead 'a';
+        //alt8 a = 'a';
+
+Parser
+//alt8 Ignored fail;
+t = a;

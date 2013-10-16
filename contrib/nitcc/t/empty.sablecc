@@ -1,0 +1,15 @@
+//alt1 /*
+Grammar x;
+//alt2 /*
+Lexer
+//alt3 /*
+a = 'a';
+//alt4 /*
+Parser
+//alt5 /*
+Ignored a;
+//alt6 /*
+p = a;
+
+/* //alt1 //alt2 //alt3 //alt4 //alt5 //alt6
+*/

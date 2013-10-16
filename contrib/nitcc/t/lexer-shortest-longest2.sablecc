@@ -1,0 +1,12 @@
+Grammar re;
+Lexer
+a = 'a' 'b'?;
+la = Longest(a);
+sa = Shortest(a);
+sla = Shortest(la);
+dummy = 'X' (a|la|sa|sla);
+blank = #10 | #13 | #32;
+Parser
+Ignored blank;
+t = dummy |
+a | la; //alt1 a | sa; //alt2 a | sla; //alt3 la | sa; //alt4 la | sla;

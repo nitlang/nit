@@ -1,0 +1,95 @@
+// The grammar of nitcc (subset of sablecc4)
+Grammar nitcc;
+
+Lexer
+
+// Identifier, used for production, expressions, alternatives, etc.
+id = ('a'..'z')('a'..'z'|'0'..'9'|'_')*;
+
+// A printable character (inside strings)
+ch = ' ' .. '~';
+
+// Literal strings
+str = '\'' (ch-'\\'-'\''|'\\'ch)* '\'';
+
+// A char by decimal ascii
+ch_dec = '#' ('0'..'9')+ ;
+
+// A single-line comment
+comment = '//' ch* '\n'?;
+
+any = '\t'..'~';
+not_star = any - '*';
+not_star_not_slash = not_star - '/';
+
+ccomment = '/*' not_star* ('*' (not_star_not_slash not_star*)?)* '*/';
+
+unknown_keyword = 'A..Z'('A'..'Z'|'a'..'z'|'0'..'9'|'_')*;
+
+// Igndored stufs
+blank = '\n' | '\t' | ' ' | comment | ccomment;
+
+Parser
+
+Ignored blank;
+
+grammar = 'Grammar' id ';' lexer_part? parser_part? reject?;
+
+reject = 'XXX' unknown_keyword ';';
+
+lexer_part = 'Lexer' expr*;
+
+expr = id '=' re ';';
+
+// No priority (yet) so just decompose
+re =
+	{alter:} re '|' re1 |
+	re1 ;
+
+re1 {-> re} =
+	{minus:} re1 '-' re2 |
+	re2 ;
+
+re2 {-> re} =
+	{conc:} re2 re3 |
+	re3 ;
+
+re3 {-> re} =
+	{ques:} re3 '?' |
+	{star:} re3 '*' |
+	{plus:} re3 '+' |
+	{id:} id |
+	{str:} str |
+	{par:} '(' re ')' |
+	{class:} str '.' '.' str |
+	{any:} 'Any' |
+	{ch_dec:} ch_dec ;
+
+
+parser_part = 'Parser' ign? prod*;
+
+ign = 'Ignored' id ';' ;
+
+prod = id ptrans? '=' alts ';';
+
+ptrans = '{' '->' id '}';
+atrans = '{' '->' id '}';
+
+alts =
+	{more:} alts '|' alt |
+	{one:} alt ;
+
+alt = altid? nelem* atrans?;
+
+altid = '{' id ':' '}' | '{' id '}';
+
+nelem = elem | elemid elem;
+
+elemid = '[' id ':' ']' | '[' id ']' ':';
+
+elem =
+	{id:} id |
+	{str:} str |
+	{star:} elem '*' |
+	{ques:} elem '?' |
+	{plus:} elem '+' ;
