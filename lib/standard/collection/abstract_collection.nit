@@ -57,13 +57,19 @@ interface Collection[E]
 	#
 	#     assert [1,2,3].is_empty  == false
 	#     assert [1..1[.is_empty   == true
-	fun is_empty: Bool is abstract 
+	fun is_empty: Bool do return length == 0
 
 	# Number of items in the collection.
 	#
 	#     assert [10,20,30].length == 3
 	#     assert [20..30[.length   == 10
-	fun length: Int is abstract
+	fun length: Int
+	do
+		var nb = 0
+		for i in self do nb += 1
+		return nb
+	end
+
 
 	# Is `item` in the collection ?
 	# Comparisons are done with ==
@@ -72,7 +78,11 @@ interface Collection[E]
 	#     assert [1,2,3].has(9)    == false
 	#     assert [1..5[.has(2)     == true
 	#     assert [1..5[.has(9)     == false
-	fun has(item: E): Bool is abstract
+	fun has(item: E): Bool
+	do
+		for i in self do if i == item then return true
+		return false
+	end
 
 	# Is the collection contain only `item`?
 	# Comparisons are done with ==
@@ -85,18 +95,31 @@ interface Collection[E]
 	#     assert [3..3[.has_only(1)          == true # empty collection
 	#
 	# ENSURE `is_empty implies result == true`
-	fun has_only(item: E): Bool is abstract
+	fun has_only(item: E): Bool
+	do
+		for i in self do if i != item then return false
+		return true
+	end
 
 	# How many occurrences of `item` are in the collection?
 	# Comparisons are done with ==
 	#
 	#    assert [10,20,10].count(10)         == 2
-	fun count(item: E): Int is abstract
+	fun count(item: E): Int
+	do
+		var nb = 0
+		for i in self do if i == item then nb += 1
+		return nb
+	end
 
 	# Return one the item of the collection
 	#
 	#    assert [1,2,3].first                == 1
-	fun first: E is abstract
+	fun first: E
+	do
+		assert length > 0
+		return iterator.item
+	end
 
 	# Is the collection contains all the elements of `other`?
 	#
@@ -115,39 +138,6 @@ end
 # You only have to define iterator!
 interface NaiveCollection[E]
 	super Collection[E]
-	redef fun is_empty do return length == 0
-
-	redef fun length
-	do
-		var nb = 0
-		for i in self do nb += 1 
-		return nb
-	end
-
-	redef fun has(item)
-	do
-		for i in self do if i == item then return true
-		return false
-	end
-
-	redef fun has_only(item)
-	do
-		for i in self do if i != item then return false
-		return true
-	end
-
-	redef fun count(item)
-	do
-		var nb = 0
-		for i in self do if i == item then nb += 1
-		return nb
-	end
-
-	redef fun first
-	do
-		assert length > 0
-		return iterator.item
-	end
 end
 
 # Instances of the Iterator class generates a series of elements, one at a time.
