@@ -275,6 +275,14 @@ interface Set[E: Object]
 		if other.length != length then return false
 		return has_all(other)
 	end
+
+	# because of the law between `==` and `hash`, hash is redefined to be the sum of the hash of the elements
+	redef fun hash
+	do
+		var res = 0
+		for e in self do res += res.hash
+		return res
+	end
 end
 
 # MapRead are abstract associative collections: `key` -> `item`.
@@ -466,6 +474,14 @@ interface SequenceRead[E]
 			i += 1
 		end
 		return true
+	end
+
+	# because of the law between `==` and `hash`, hash is redefined to be the sum of the hash of the elements
+	redef fun hash
+	do
+		var res = 0
+		for e in self do res += res.hash
+		return res
 	end
 end
 
