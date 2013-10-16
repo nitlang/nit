@@ -137,20 +137,6 @@ abstract class AbstractArrayRead[E]
 	end
 
 	redef fun iterator: ArrayIterator[E] do return new ArrayIterator[E](self)
-
-	# Two arrays are equals if they have the same items in the same order.
-	redef fun ==(o)
-	do
-		if not o isa AbstractArray[nullable Object] or o is null then return false
-		var l = length
-		if o.length != l then return false
-		var i = 0
-		while i < l do
-			if self[i] != o[i] then return false
-			i += 1
-		end
-		return true
-	end
 end
 
 # Resizable one dimension array of objects.

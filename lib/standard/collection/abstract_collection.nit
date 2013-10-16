@@ -453,6 +453,20 @@ interface SequenceRead[E]
 	end
 
 	redef fun iterator: IndexedIterator[E] is abstract
+
+	# Two sequences are equals if they have the same items in the same order.
+	redef fun ==(o)
+	do
+		if not o isa SequenceRead[nullable Object] or o is null then return false
+		var l = length
+		if o.length != l then return false
+		var i = 0
+		while i < l do
+			if self[i] != o[i] then return false
+			i += 1
+		end
+		return true
+	end
 end
 
 # Sequence are indexed collection.
