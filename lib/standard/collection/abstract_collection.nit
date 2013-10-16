@@ -97,6 +97,18 @@ interface Collection[E]
 	#
 	#    assert [1,2,3].first                == 1
 	fun first: E is abstract
+
+	# Is the collection contains all the elements of `other`?
+	#
+	#    assert [1,1,1].has_all([1])         == true
+	#    assert [1,1,1].has_all([1,2])       == false
+	#    assert [1,3,4,2].has_all([1..2])    == true
+	#    assert [1,3,4,2].has_all([1..5])    == false
+	fun has_all(other: Collection[E]): Bool
+	do
+		for x in other do if not has(x) then return false
+		return true
+	end
 end
 
 # Naive implementation of collections method
