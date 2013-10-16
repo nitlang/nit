@@ -271,6 +271,14 @@ interface Set[E: Object]
 
 	# Synonym of remove since there is only one item
 	redef fun remove_all(item) do remove(item)
+
+	# Equality is defined on set and means that each set contains the same elements
+	redef fun ==(other)
+	do
+		if not other isa Set[Object] then return false
+		if other.length != length then return false
+		return has_all(other)
+	end
 end
 
 # MapRead are abstract associative collections: `key` -> `item`.
