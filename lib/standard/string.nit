@@ -298,6 +298,27 @@ abstract class AbstractString
 		return b.to_s
 	end
 
+	# Escape additionnal characters
+	# The result might no be legal in C but be used in other languages
+	#
+	#     assert "ab|\{\}".escape_more_to_c("|\{\}") == "ab\\|\\\{\\\}"
+	fun escape_more_to_c(chars: String): String
+	do
+		var b = new Buffer
+		for c in escape_to_c do
+			if chars.has(c) then
+				b.add('\\')
+			end
+			b.add(c)
+		end
+		return b.to_s
+	end
+
+	# Escape to c plus braces
+	#
+	#     assert "\n\"'\\\{\}".escape_to_nit      == "\\n\\\"\\'\\\\\\\{\\\}"
+	fun escape_to_nit: String do return escape_more_to_c("\{\}")
+
 	# Return a string where Nit escape sequences are transformed.
 	#
 	# Example:
