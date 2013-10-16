@@ -134,12 +134,6 @@ interface Collection[E]
 	end
 end
 
-# Naive implementation of collections method
-# You only have to define iterator!
-interface NaiveCollection[E]
-	super Collection[E]
-end
-
 # Instances of the Iterator class generates a series of elements, one at a time.
 # They are mainly used with collections.
 interface Iterator[E]
