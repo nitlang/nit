@@ -17,16 +17,31 @@ import kernel
 
 # The root of the collection hierarchy.
 #
-# Instances of this class offers an iterator method.
+# Collections modelize finite groups of objects, called elements.
 #
-# Collections instances can use the "for" structure:
+# The specific behavior and representation of collections is determined
+# by the subclasses of the hierarchy.
+#
+# The main service of Collection is to provide a stable `iterator`
+# method usable to retrieve all the elements of the collection.
+#
+# Additional services are provided.
+# For an implementation point of view, Collection provide a basic
+# implementation of these services using the `iterator` method.
+# Subclasses often provide a more efficient implementation.
+#
+# Because of the `iterator` method, Collections instances can use
+# the `for` control structure:
+#
 #         var x: Collection[U]
 #         # ...
 #         for u in x do
 #             # u is a U
 #             # ...
 #         end
+#
 # that is equivalent with
+#
 #         var x: Collection[U]
 #         # ...
 #         var i = x.iterator
@@ -35,9 +50,6 @@ import kernel
 #             # ...
 #             i.next
 #         end
-#
-# This abstract class implements its others methods with an iterator.
-# Subclasses may redefine them with an efficient implementation.
 interface Collection[E]
 	# Get a new iterator on the collection.
 	fun iterator: Iterator[E] is abstract
