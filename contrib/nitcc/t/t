@@ -87,7 +87,7 @@ do
 			if test -f "${t}.nit"
 			then
 				echo -n ". "
-				$NITC -I .. "${t}.nit" >/dev/null 2>&1
+				$NITC "${t}.nit" >/dev/null 2>&1
 				if test $? != 0
 				then
 					echo -n "!nitc "
