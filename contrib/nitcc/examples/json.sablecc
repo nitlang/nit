@@ -2,7 +2,7 @@ Grammar json;
 
 Lexer
 
-number = int frac? exp;
+number = int frac? exp?;
 int = '-'? d+;
 d = '0'..'9';
 frac = '.' d+;
