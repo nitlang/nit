@@ -269,11 +269,13 @@ redef class ModelBuilder
 		makefile.write("all: {outpath}\n\n")
 
 		var ofiles = new Array[String]
+		var dep_rules = new Array[String]
 		# Compile each generated file
 		for f in cfiles do
 			var o = f.strip_extension(".c") + ".o"
 			makefile.write("{o}: {f}\n\t$(CC) $(CFLAGS) $(CINCL) -D NONITCNI -c -o {o} {f}\n\n")
 			ofiles.add(o)
+			dep_rules.add(o)
 		end
 
 		# Compile each required extern body into a specific .o
@@ -284,6 +286,15 @@ redef class ModelBuilder
 				var ff = f.filename.basename("")
 				makefile.write("{o}: {ff}\n\t$(CC) $(CFLAGS) -D NONITCNI {f.cflags} -c -o {o} {ff}\n\n")
 				ofiles.add(o)
+				dep_rules.add(o)
+			else
+				var o = f.makefile_rule_name
+				var ff = orig_dir.join_path(f.filename).simplify_path
+				makefile.write("{o}: {ff}\n")
+				makefile.write("\t{f.makefile_rule_content}\n")
+				dep_rules.add(f.makefile_rule_name)
+
+				if f isa ExternCppFile then ofiles.add(o)
 			end
 		end
 
