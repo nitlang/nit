@@ -12,5 +12,5 @@ nitcc_parser_gen
 nitcc0
 nitcc1
 nitcc
-examples/calc
-examples/minilang
+calc
+minilang
