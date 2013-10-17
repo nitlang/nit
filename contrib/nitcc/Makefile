@@ -26,3 +26,9 @@ calc: nitcc examples/calc.sablecc examples/calc.nit
 	./nitcc examples/calc.sablecc
 	${NITC} examples/calc.nit -v -I .
 	./calc -e "1+2*3-40/5+9------1"
+
+minilang: nitcc examples/minilang.sablecc examples/minilang.nit
+	@echo "*** Example program, minilang"
+	./nitcc examples/minilang.sablecc
+	${NITC} examples/minilang.nit -v -I .
+	printf "10\n42\n" | ./minilang examples/minilang.minilang
