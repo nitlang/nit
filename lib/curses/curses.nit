@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # Curses for Nit
-module curses
+module curses is pkgconfig("curses")
 
 in "C header" `{
 	#include <ncurses.h>
