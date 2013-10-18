@@ -66,9 +66,11 @@ re3 {-> re} =
 	{ch_dec:} ch_dec ;
 
 
-parser_part = 'Parser' ign? prod*;
+parser_part = 'Parser' ign? rej? prod*;
 
 ign = 'Ignored' id ';' ;
+
+rej = 'Rejected' elem_list ';' ;
 
 prod = id ptrans? '=' alts ';';
 
@@ -86,6 +88,10 @@ altid = '{' id ':' '}' | '{' id '}';
 nelem = elem | elemid elem;
 
 elemid = '[' id ':' ']' | '[' id ']' ':';
+
+elem_list =
+	{more:} elem_list ',' elem |
+	{one:} elem ;
 
 elem =
 	{id:} id |

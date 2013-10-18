@@ -100,6 +100,9 @@ private class CheckNameVisitor
 	# Is the alternative transformed, for the alternative
 	var trans = false
 
+	# Known rejected tokens
+	var rejecteds = new Array[Token]
+
 	# Pool of elements that are modified with + (reuse them!)
 	private var plusizes = new HashMap[Element, Production]
 
@@ -268,6 +271,26 @@ redef class Nign
 	end
 end
 
+redef class Nrej
+	redef fun accept_check_name_visitor(v) do
+		v.elems = new Array[Element]
+		super
+		for e in v.elems do
+			if e isa Production then
+				print "Error: cannot reject {e}, it is a production"
+				exit(1)
+				abort
+			else if e isa Token then
+				# The token was build and registered during the visit
+				# Just add it to the rejected list
+				v.rejecteds.add(e)
+			else
+				abort
+			end
+		end
+	end
+end
+
 redef class Nprod
 	# The associated production
 	var prod: nullable Production
@@ -374,6 +397,24 @@ end
 redef class Nelem
 	# The associated element
 	var elem: nullable Element
+
+	# Set the element and check things
+	fun set_elem(v: CheckNameVisitor, pos: nullable Position, elem: Element)
+	do
+		assert self.elem == null
+		self.elem = elem
+		v.elems.push(elem)
+		if elem isa Token and v.rejecteds.has(elem) then
+			if pos != null then
+				print "{pos} Error: {elem.name} is already a rejected token."
+			else
+				print "Error: {elem.name} is already a rejected token."
+			end
+			exit(1)
+		end
+
+	end
+
 end
 
 redef class Token
@@ -432,8 +473,7 @@ redef class Nelem_id
 			abort
 		end
 		assert elem != null
-		self.elem = elem
-		v.elems.add(elem)
+		set_elem(v, id.position, elem)
 		if v.elemname == null then v.elemname = name
 	end
 end
@@ -453,8 +493,7 @@ redef class Nelem_str
 			v.v1.gram.tokens.add(elem)
 			v.v1.names[name] = self
 		end
-		self.elem = elem
-		v.elems.add(elem)
+		set_elem(v, str.position, elem)
 	end
 end
 
@@ -464,7 +503,7 @@ redef class Nelem_star
 		var elem = v.elems.pop
 		elem = v.plusize(elem)
 		elem = v.quesize(elem)
-		v.elems.add elem
+		set_elem(v, null, elem)
 	end
 end
 
@@ -473,7 +512,7 @@ redef class Nelem_ques
 		super
 		var elem = v.elems.pop
 		elem = v.quesize(elem)
-		v.elems.add elem
+		set_elem(v, null, elem)
 	end
 end
 
@@ -482,6 +521,6 @@ redef class Nelem_plus
 		super
 		var elem = v.elems.pop
 		elem = v.plusize(elem)
-		v.elems.add elem
+		set_elem(v, null, elem)
 	end
 end

@@ -62,6 +62,8 @@ class Lexer_nitcc
 				tokens.add new Nccur
 			else if c == '|' then
 				tokens.add new Npipe
+			else if c == ',' then
+				tokens.add new Ncomma
 			else if c == ':' then
 				tokens.add new Ncolo
 			else if c == ';' then
