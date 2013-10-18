@@ -23,12 +23,12 @@ nitcc: nitcc1 nitcc.nit
 
 calc: nitcc examples/calc.sablecc examples/calc.nit
 	@echo "*** Example program, calc"
-	./nitcc examples/calc.sablecc
+	cd examples && ../nitcc calc.sablecc
 	${NITC} examples/calc.nit -v
 	./calc -e "1+2*3-40/5+9------1"
 
 minilang: nitcc examples/minilang.sablecc examples/minilang.nit
 	@echo "*** Example program, minilang"
-	./nitcc examples/minilang.sablecc
+	cd examples && ../nitcc minilang.sablecc
 	${NITC} examples/minilang.nit -v
 	printf "10\n42\n" | ./minilang examples/minilang.minilang
