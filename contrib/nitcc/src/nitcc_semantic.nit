@@ -101,7 +101,7 @@ private class CheckNameVisitor
 	var trans = false
 
 	# Known rejected tokens
-	var rejecteds = new Array[Token]
+	var rejecteds = new Array[Element]
 
 	# Pool of elements that are modified with + (reuse them!)
 	private var plusizes = new HashMap[Element, Production]
@@ -273,7 +273,8 @@ end
 
 redef class Nrej
 	redef fun accept_check_name_visitor(v) do
-		v.elems = new Array[Element]
+		# Add elements to the rejected list
+		v.elems = v.rejecteds
 		super
 		for e in v.elems do
 			if e isa Production then
@@ -282,8 +283,6 @@ redef class Nrej
 				abort
 			else if e isa Token then
 				# The token was build and registered during the visit
-				# Just add it to the rejected list
-				v.rejecteds.add(e)
 			else
 				abort
 			end
@@ -403,7 +402,6 @@ redef class Nelem
 	do
 		assert self.elem == null
 		self.elem = elem
-		v.elems.push(elem)
 		if elem isa Token and v.rejecteds.has(elem) then
 			if pos != null then
 				print "{pos} Error: {elem.name} is already a rejected token."
@@ -412,9 +410,8 @@ redef class Nelem
 			end
 			exit(1)
 		end
-
+		v.elems.push(elem)
 	end
-
 end
 
 redef class Token
