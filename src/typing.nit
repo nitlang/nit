@@ -830,16 +830,44 @@ redef class AForExpr
 
 	private fun do_type_iterator(v: TypeVisitor, mtype: MType)
 	do
+		# get obj class
 		var objcla = v.get_mclass(self, "Object")
 		if objcla == null then return
 
+		# check iterator method
+		var unsafe_type = v.anchor_to(mtype)
+		if v.try_get_mproperty_by_name2(self, unsafe_type, "iterator") == null then
+			if v.try_get_mproperty_by_name2(self, unsafe_type, "iterate") == null then
+				v.error(self, "Type Error: Expected method 'iterator' in type {mtype}")
+			else
+				v.modelbuilder.error(self, "NOT YET IMPLEMENTED: Do 'for' on {mtype}")
+			end
+			return
+		end
+
+		var itdef = v.get_method(self, mtype, "iterator", true)
+		if itdef == null then
+			v.error(self, "Type Error: Expected method 'iterator' in type {mtype}")
+			return
+		end
+		self.method_iterator = itdef.mproperty
+
+		# check that iterator return something
+		var ittype = itdef.msignature.return_mtype
+		if ittype == null then
+			v.error(self, "Type Error: Expected method 'iterator' to return an Iterator or MapIterator type")
+			return
+		end
+
+		# get iterator type
+		var colit_cla = v.try_get_mclass(self, "Iterator")
+		var mapit_cla = v.try_get_mclass(self, "MapIterator")
 		var is_col = false
 		var is_map = false
 
-		var colcla = v.try_get_mclass(self, "Collection")
-		if colcla != null and v.is_subtype(mtype, colcla.get_mtype([objcla.mclass_type.as_nullable])) then
-			var coltype = mtype.supertype_to(v.mmodule, v.anchor, colcla)
-			self.coltype = coltype
+		if colit_cla != null and v.is_subtype(ittype, colit_cla.get_mtype([objcla.mclass_type.as_nullable])) then
+			# Iterator
+			var coltype = ittype.supertype_to(v.mmodule, v.anchor, colit_cla)
 			var variables =  self.variables
 			if variables.length != 1 then
 				v.error(self, "Type Error: Expected one variable")
@@ -849,10 +877,9 @@ redef class AForExpr
 			is_col = true
 		end
 
-		var mapcla = v.try_get_mclass(self, "Map")
-		if mapcla != null and v.is_subtype(mtype, mapcla.get_mtype([objcla.mclass_type.as_nullable, objcla.mclass_type.as_nullable])) then
-			var coltype = mtype.supertype_to(v.mmodule, v.anchor, mapcla)
-			self.coltype = coltype
+		if mapit_cla != null and v.is_subtype(ittype, mapit_cla.get_mtype([objcla.mclass_type, objcla.mclass_type.as_nullable])) then
+			# Map Iterator
+			var coltype = ittype.supertype_to(v.mmodule, v.anchor, mapit_cla)
 			var variables = self.variables
 			if variables.length != 2 then
 				v.error(self, "Type Error: Expected two variables")
@@ -863,57 +890,42 @@ redef class AForExpr
 			is_map = true
 		end
 
-		if is_col or is_map then
-			# get iterator method
-			var coltype = self.coltype.as(not null)
-			var itdef = v.get_method(self, coltype, "iterator", true)
-			if itdef == null then
-				v.error(self, "Type Error: Expected method 'iterator' in type {coltype}")
-				return
-			end
-			self.method_iterator = itdef.mproperty
-
-			# get iterator type
-			var ittype = itdef.msignature.return_mtype
-			if ittype == null then
-				v.error(self, "Type Error: Expected method 'iterator' to return an Iterator type")
-				return
-			end
-
-			# get methods is_ok, next, item
-			var ikdef = v.get_method(self, ittype, "is_ok", false)
-			if ikdef == null then
-				v.error(self, "Type Error: Expected method 'is_ok' in Iterator type {ittype}")
-				return
-			end
-			self.method_is_ok = ikdef.mproperty
-
-			var itemdef = v.get_method(self, ittype, "item", false)
-			if itemdef == null then
-				v.error(self, "Type Error: Expected method 'item' in Iterator type {ittype}")
-				return
-			end
-			self.method_item = itemdef.mproperty
-
-			var nextdef = v.get_method(self, ittype, "next", false)
-			if nextdef == null then
-				v.error(self, "Type Error: Expected method 'next' in Iterator type {ittype}")
-				return
-			end
-			self.method_next = nextdef.mproperty
-
-			if is_map then
-				var keydef = v.get_method(self, ittype, "key", false)
-				if keydef == null then
-					v.error(self, "Type Error: Expected method 'key' in Iterator type {ittype}")
-					return
-				end
-				self.method_key = keydef.mproperty
-			end
+		if not is_col and not is_map then
+			v.error(self, "Type Error: Expected method 'iterator' to return an Iterator of MapIterator type")
 			return
 		end
+		self.coltype = mtype.as(MClassType)
 
-		v.modelbuilder.error(self, "NOT YET IMPLEMENTED: Do 'for' on {mtype}")
+		# get methods is_ok, next, item
+		var ikdef = v.get_method(self, ittype, "is_ok", false)
+		if ikdef == null then
+			v.error(self, "Type Error: Expected method 'is_ok' in Iterator type {ittype}")
+			return
+		end
+		self.method_is_ok = ikdef.mproperty
+
+		var itemdef = v.get_method(self, ittype, "item", false)
+		if itemdef == null then
+			v.error(self, "Type Error: Expected method 'item' in Iterator type {ittype}")
+			return
+		end
+		self.method_item = itemdef.mproperty
+
+		var nextdef = v.get_method(self, ittype, "next", false)
+		if nextdef == null then
+			v.error(self, "Type Error: Expected method 'next' in Iterator type {ittype}")
+			return
+		end
+		self.method_next = nextdef.mproperty
+
+		if is_map then
+			var keydef = v.get_method(self, ittype, "key", false)
+			if keydef == null then
+				v.error(self, "Type Error: Expected method 'key' in Iterator type {ittype}")
+				return
+			end
+			self.method_key = keydef.mproperty
+		end
 	end
 
 	redef fun accept_typing(v)
