@@ -32,3 +32,8 @@ minilang: nitcc examples/minilang.sablecc examples/minilang.nit
 	cd examples && ../nitcc minilang.sablecc
 	${NITC} examples/minilang.nit -v
 	printf "10\n42\n" | ./minilang examples/minilang.minilang
+
+tests:
+	cd tests && ./run
+
+.PHONY: tests
