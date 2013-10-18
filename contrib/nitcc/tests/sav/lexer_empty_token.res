@@ -1,1 +1,1 @@
-ERROR: Empty tokens b a
+Error: Empty tokens b a

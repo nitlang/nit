@@ -1,1 +1,1 @@
-ERROR: Conflicting tokens: xa xb
+Error: Conflicting tokens: xa xb

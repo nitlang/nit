@@ -213,13 +213,13 @@ redef class Nre_id
 		var id = children.first.as(Nid)
 		var name = id.text
 		if not v.v1.names.has_key(name) then
-			print "Error: unknown name {name}"
+			print "{id.position} Error: unknown name {name}"
 			exit(1)
 			abort
 		end
 		var node = v.v1.names[name]
 		if node isa Nprod then
-			print "Error: cannot use production {name} in a regular expression"
+			print "{id.position} Error: cannot use production {name} in a regular expression"
 			exit(1)
 			abort
 		else if not node isa Nexpr then
@@ -243,14 +243,14 @@ redef class Nign
 		var id = children[1].as(Nid)
 		var name = id.text
 		if not v.v1.names.has_key(name) then
-			print "Error: unknown name {name}"
+			print "{id.position} Error: unknown name {name}"
 			exit(1)
 			abort
 		end
 		var node = v.v1.names[name]
 		var elem: nullable Element
 		if node isa Nprod then
-			print "Error cannot ignore a production"
+			print "{id.position} Error: cannot ignore a production"
 			exit(1)
 			abort
 		else if node isa Nexpr then
@@ -412,7 +412,7 @@ redef class Nelem_id
 		var id = children.first.as(Nid)
 		var name = id.text
 		if not v.v1.names.has_key(name) then
-			print "Error: unknown name {name}"
+			print "{id.position} Error: unknown name {name}"
 			exit(1)
 			abort
 		end
