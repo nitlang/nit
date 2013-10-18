@@ -24,7 +24,7 @@ not_star_not_slash = not_star - '/';
 
 ccomment = '/*' not_star* ('*' (not_star_not_slash not_star*)?)* '*/';
 
-unknown_keyword = 'A..Z'('A'..'Z'|'a'..'z'|'0'..'9'|'_')*;
+unknown_keyword = 'A'..'Z'('A'..'Z'|'a'..'z'|'0'..'9'|'_')*;
 
 // Igndored stufs
 blank = '\n' | '\t' | ' ' | comment | ccomment;
@@ -32,10 +32,9 @@ blank = '\n' | '\t' | ' ' | comment | ccomment;
 Parser
 
 Ignored blank;
+Rejected unknown_keyword;
 
-grammar = 'Grammar' id ';' lexer_part? parser_part? reject?;
-
-reject = 'XXX' unknown_keyword ';';
+grammar = 'Grammar' id ';' lexer_part? parser_part?;
 
 lexer_part = 'Lexer' expr*;
 

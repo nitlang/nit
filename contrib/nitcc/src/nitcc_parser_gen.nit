@@ -108,9 +108,8 @@ p_re3.new_alt("re_class", t_str, t_dot, t_dot, t_str)
 p_re3.new_alt("re_any", t_any)
 p_re3.new_alt("re_id", t_id)
 
-p_par.new_alt("par", t_kw, p_ign, p_prods)
+p_par.new_alt("par", t_kw, p_ign, p_rej, p_prods)
 
-p_ign.new_alt0("ign_none")
 p_ign.new_alt("ign", t_kw, t_id, t_semi)
 
 p_rej.new_alt("rej", t_kw, p_elem_list, t_semi)
@@ -135,6 +134,9 @@ p_altid.new_alt("altid", t_ocur, t_id, t_colo, t_ccur)
 
 p_elems.new_alt("elems_many", p_elems, p_elem)
 p_elems.new_alt0("elems_none")
+
+p_elem_list.new_alt("elem_list_many", p_elem_list, t_comma, p_elem)
+p_elem_list.new_alt("elem_list_one", p_elem)
 
 p_elem.new_alt("elem_id", t_id)
 p_elem.new_alt("elem_str", t_str)
