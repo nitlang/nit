@@ -14,15 +14,20 @@ Just run `make` in the `contrib/nitcc/` directory
 
 Usage:
 
-   nitcc file.sablecc
+    nitcc file.sablecc
 
-Generate a bunches of control files, a lexer, a parser, and a tester.
+nitcc generates a bunches of control files, a lexer, a parser, and a tester.
+
+To compile and run the tester:
+
+    nitg file_test_parser.nit
+    ./file_test_parser an_input_file_to_parse
 
 ## Examples and regression tests
 
 The sub-directory `examples/` contains simple grammars and interpretors.
 
-The sub-directory `t/` contains regression tests.
+The sub-directory `tests/` contains regression tests.
 
 ## Features (aka TODO list)
 
