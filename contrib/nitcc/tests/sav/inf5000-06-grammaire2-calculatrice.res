@@ -1,2 +1,1 @@
-* parse error in state grammar on token NLexerError@(15:7-15:8)='Pr'
-NLexerError@(15:7-15:8)='Pr'
+15:7-15:8 Syntax Error: Unexpected character 'P'; is acceptable instead: Eof

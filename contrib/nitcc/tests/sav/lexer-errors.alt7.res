@@ -1,2 +1,1 @@
-* parse error in state 'Grammar' id ';' 'Lexer' id '=' re on token NLexerError@(10:16-10:17)='Lo'
-NLexerError@(10:16-10:17)='Lo'
+10:16-10:17 Syntax Error: Unexpected character 'L'; is acceptable instead: ';', '|'
