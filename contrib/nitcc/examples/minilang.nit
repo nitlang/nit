@@ -175,7 +175,7 @@ redef class Ne_read
 	end
 end
 
-var t = new MyTest
+var t = new TestParser_minilang
 var n = t.main
 
 var v = new Interpretor 

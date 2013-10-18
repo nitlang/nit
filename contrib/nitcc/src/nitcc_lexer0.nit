@@ -22,7 +22,7 @@ import nitcc_parser
 
 # Hand-writen lexer of nitcc
 # Used only for the boostrap of the tool.
-class MyLexer
+class Lexer_nitcc
 	var text: String
 
 	var iter: Iterator[Char] = "".iterator

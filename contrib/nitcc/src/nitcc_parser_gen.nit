@@ -143,7 +143,7 @@ var a = g.lr0
 print "LR automaton: {a.states.length} states (see nitcc0.lr.dot)"
 a.to_dot("nitcc0.lr.dot")
 
-a.gen_to_nit("nitcc_parser.nit")
+a.gen_to_nit("nitcc_parser.nit", "nitcc")
 
 var f = new OFStream.open("nitcc_lexer.nit")
 f.write("import nitcc_lexer0\n")

@@ -75,7 +75,7 @@ redef class Ne_div
 	end
 end
 
-var t = new MyTest
+var t = new TestParser_calc
 var n = t.main
 var v = new Calulator
 v.enter_visit(n)
