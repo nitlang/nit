@@ -107,3 +107,4 @@ Nodes
     alt_0
       altid@(5:30-5:37)='{none:}'
       atoms_none
+  NLexerError@(5:38-5:38)='E'

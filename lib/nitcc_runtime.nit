@@ -76,6 +76,7 @@ abstract class Parser
 		#print "  expected: {state.error_msg}"
 		#print "  node_stack={node_stack.join(", ")}"
 		#print "  state_stack={state_stack.join(", ")}"
+		node_stack.add(token)
 		var error: NError
 		if token isa NLexerError then
 			error = token
