@@ -4,9 +4,9 @@
 *_test_parser
 *.concrete_grammar.txt
 *.lr.txt
-t/alt
-t/out
-t/tap.output
+tests/alt
+tests/out
+tests/tap.output
 
 nitcc_parser_gen
 nitcc0
