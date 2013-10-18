@@ -1,1 +1,1 @@
-6:34-6:34 Syntax Error: Unexpected character 'E'; is acceptable instead: ';', '|'
+6:34-6:40 Syntax Error: Unexpected unknown_keyword 'Except'; is acceptable instead: ';', '|'

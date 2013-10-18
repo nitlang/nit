@@ -435,7 +435,15 @@ class NParserError
 	# The unexpected token
 	var token: nullable NToken
 
-	redef fun unexpected do return token.node_name
+	redef fun unexpected
+	do
+		var res = token.node_name
+		var text = token.text
+		if not text.is_empty and res != "'{text}'" then
+			res += " '{text.escape_to_c}'"
+		end
+		return res
+	end
 end
 
 # A hogeneous sequence of node, used to represent unbounded lists (and + modifier)

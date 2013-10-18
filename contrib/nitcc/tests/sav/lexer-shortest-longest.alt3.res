@@ -1,1 +1,1 @@
-6:22-6:23 Syntax Error: Unexpected character 'L'; is acceptable instead: ';', '|'
+6:22-6:31 Syntax Error: Unexpected unknown_keyword 'Lookahead'; is acceptable instead: ';', '|'
