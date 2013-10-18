@@ -18,7 +18,7 @@
 
 # This program is used to perform regression tests of nitcc.
 
-NITCC=../nitcc
+NITCC=../src/nitcc
 NITC=../../../bin/nitc
 
 mkdir alt out 2>/dev/null
