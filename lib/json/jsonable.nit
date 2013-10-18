@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Basic json related functionalities
-module jsonable
+module jsonable is pkgconfig("json")
 
 in "C Header" `{
 	#define __STRICT_ANSI__
