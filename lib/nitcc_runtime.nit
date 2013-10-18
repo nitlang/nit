@@ -72,21 +72,21 @@ abstract class Parser
 	fun parse_error
 	do
 		var token = peek_token
-		print "* parse error in state {state} on token {token}"
-		print "  expected: {state.error_msg}"
-		print "  node_stack={node_stack.join(", ")}"
-		print "  state_stack={state_stack.join(", ")}"
-		var error: Node
+		#print "* parse error in state {state} on token {token}"
+		#print "  expected: {state.error_msg}"
+		#print "  node_stack={node_stack.join(", ")}"
+		#print "  state_stack={state_stack.join(", ")}"
+		var error: NError
 		if token isa NLexerError then
 			error = token
-			token.error_tree.items.add_all(node_stack)
 		else
 			error = new NParserError
 			error.position = token.position
 			error.text = token.text
 			error.token = token
-			error.error_tree.items.add_all(node_stack)
 		end
+		error.error_tree.items.add_all(node_stack)
+		error.expected = state.error_msg
 		node_stack.clear
 		node_stack.add error
 		stop = true
@@ -402,11 +402,28 @@ abstract class NError
 
 	# All the partially built tree during parsing (aka the node_stack)
 	var error_tree = new Nodes[Node]
+
+	# The things unexpected
+	fun unexpected: String is abstract
+
+	# The things expected (if any)
+	var expected: nullable String = null
+
+	# The error message,using `expected` and `unexpected`
+	fun message: String
+	do
+		var exp = expected
+		var res = "Unexpected {unexpected}"
+		if exp != null then res += "; is acceptable instead: {exp}"
+		return res
+	end
 end
 
 # A lexer error as a token for the unexpected characted
 class NLexerError
 	super NError
+
+	redef fun unexpected do return "character '{text.first}'"
 end
 
 # A parser error linked to a unexpected token
@@ -414,6 +431,8 @@ class NParserError
 	super NError
 	# The unexpected token
 	var token: nullable NToken
+
+	redef fun unexpected do return token.node_name
 end
 
 # A hogeneous sequence of node, used to represent unbounded lists (and + modifier)
@@ -528,6 +547,7 @@ abstract class TestParser
 		var tpv = new TreePrinterVisitor(f)
 		var astdotout = "{name}.ast.dot"
 		if n isa NError then
+			print "Syntax error: {n.message}"
 			print "ERROR: {n} (see {astout} and {astdotout})"
 			tpv.enter_visit(n)
 			n = n.error_tree

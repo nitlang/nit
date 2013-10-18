@@ -45,7 +45,8 @@ p.tokens.add_all ts
 var node = p.parse
 
 if not node isa NProd then
-	print node
+	assert node isa NError
+	print "{node.position} Syntax Error: {node.message}"
 	exit 1
 	abort
 end
