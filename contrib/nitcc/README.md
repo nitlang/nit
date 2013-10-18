@@ -55,7 +55,7 @@ For the parser (and grammar and LR)
 
 [X] Modifiers (`?`, `*`, `+`)
 [X] Ignored
-[ ] Rejected
+[X] Rejected
 [ ] Opportunistic
 [ ] Precedence
 [ ] Separator
