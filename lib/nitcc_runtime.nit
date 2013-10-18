@@ -192,20 +192,22 @@ abstract class Lexer
 			end
 			var next = state.trans(c)
 			if next == null then
-				if last_state == null then
-					var token = new NLexerError
-					var position = new Position(pos_start, pos, line_start, line, col_start, col)
-					token.position = position
-					token.text = text.substring(pos_start, pos-pos_start+1)
-					res.add token
-					break
+				if pos_start < length then
+					if last_state == null then
+						var token = new NLexerError
+						var position = new Position(pos_start, pos, line_start, line, col_start, col)
+						token.position = position
+						token.text = text.substring(pos_start, pos-pos_start+1)
+						res.add token
+						break
+					end
+					var position = new Position(pos_start, pos_end, line_start, line_end, col_start, col_end)
+					var token = last_state.make_token(position, text.substring(pos_start, pos_end-pos_start+1))
+					if token != null then res.add(token)
 				end
-				var position = new Position(pos_start, pos_end, line_start, line_end, col_start, col_end)
-				var token = last_state.make_token(position, text.substring(pos_start, pos_end-pos_start+1))
-				if token != null then res.add(token)
 				if pos >= length then
-					token = new NEof
-					position = new Position(pos, pos, line, line, col, col)
+					var token = new NEof
+					var position = new Position(pos, pos, line, line, col, col)
 					token.position = position
 					token.text = ""
 					res.add token
