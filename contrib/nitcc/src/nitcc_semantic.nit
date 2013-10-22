@@ -347,6 +347,10 @@ redef class Natrans
 	end
 end
 
+redef class Alternative
+	var short_name: nullable String
+end
+
 redef class Nalt
 	# The associated alternative
 	var alt: nullable Alternative
@@ -383,6 +387,7 @@ redef class Nalt
 			name = prodabs.name + "_" + name
 		end
 		var alt = prod.new_alt2(name, v.elems)
+		alt.short_name = v.altname
 		alt.elems_names.add_all(v.elems_names)
 		self.alt = alt
 		if v.trans then
@@ -398,6 +403,15 @@ redef class Naltid
 		var id = children[1].as(Nid)
 		var name = id.text
 		v.altname = name
+		var prod = v.prod.as(not null)
+		var prodabs = prod.spe
+		if prodabs == null then prodabs = prod
+		for x in prodabs.alts do
+			if x.short_name == name then
+				print "{id.position} Error: already an alternative named {name}"
+				exit(1)
+			end
+		end
 	end
 end
 
