@@ -449,6 +449,12 @@ redef class Nelemid
 	do
 		var id = children[1].as(Nid)
 		var name = id.text
+		for n2 in v.elems_names do
+			if name == n2 then
+				print "{id.position} Error: already an element named {name}."
+				exit(1)
+			end
+		end
 		v.elemname = name
 	end
 end

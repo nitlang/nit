@@ -6,4 +6,6 @@ Parser
 //alt2 a = 'b';
 b =
 	{a:} '1' [a:]a
+//alt3 |{b:} '3' [a:]a [a:]a
+//alt4 |{b:} '4' a [a:]a
 	;
