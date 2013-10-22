@@ -1,0 +1,9 @@
+Grammar names;
+Lexer
+a = 'a';
+//alt1 a = 'b';
+Parser
+//alt2 a = 'b';
+b =
+	{a:} '1' [a:]a
+	;

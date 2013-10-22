@@ -170,6 +170,10 @@ redef class Nexpr
 	redef fun accept_collect_prod(v) do
 		var id = children.first.as(Nid)
 		var name = id.text
+		if v.names.has_key(name) then
+			print "{id.position} Error {name} already defined."
+			exit(1)
+		end
 		v.names[name] = self
 		self.name = name
 	end
@@ -297,6 +301,10 @@ redef class Nprod
 	redef fun accept_collect_prod(v) do
 		var id = children.first.as(Nid)
 		var name = id.text
+		if v.names.has_key(name) then
+			print "{id.position} Error {name} already defined."
+			exit(1)
+		end
 		v.names[name] = self
 		v.nprods.add(self)
 		prod = new Production(name)
