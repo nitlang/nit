@@ -29,11 +29,11 @@ else = 'else' stmts;
 e = 
 	{add:} [left:]e '+' [right:]e2 |
 	{sub:} [left:]e '-' [right:]e2 |
-	e2 {->e2};
+	e2 {->};
 e2 {->e} =
 	{mul:} [left:]e2 '*' [right:]e3 |
 	{div:} [left:]e2 '/' [right:]e3 |
-	e3 {->e3};
+	e3 {->};
 e3 {->e} =
 	{neg:} '-' e3 |
 	{lit:} int |
@@ -43,10 +43,10 @@ e3 {->e} =
 
 c =
 	{or:} [left:]c '||' [right:]c2 |
-	c2 {->c2};
+	c2 {->};
 c2 {->c} =
 	{and:} [left:]c2 '&&' [right:]c3 |
-	c3 {->c3};
+	c3 {->};
 c3 {->c} =
 	{not:} 'not' [c:]c3 |
 	{eq:} [left:]e '=' [right:]e |

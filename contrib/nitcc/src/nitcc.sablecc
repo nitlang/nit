@@ -74,7 +74,7 @@ rej = 'Rejected' elem_list ';' ;
 prod = id ptrans? '=' alts ';';
 
 ptrans = '{' '->' id '}';
-atrans = '{' '->' id '}';
+atrans = '{' '->' '}';
 
 alts =
 	{more:} alts '|' alt |

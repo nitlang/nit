@@ -340,9 +340,6 @@ end
 
 redef class Natrans
 	redef fun accept_check_name_visitor(v) do
-		var id = children[2].as(Nid)
-		var name = id.text
-
 		v.trans = true
 	end
 end
