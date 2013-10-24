@@ -93,6 +93,8 @@ p_re.new_alt("re_alter", p_re, t_pipe, p_re1)
 p_re.new_alt("re_re2", p_re1)
 
 p_re1.new_alt("re_minus", p_re1, t_minus, p_re2)
+p_re1.new_alt("re_except", p_re1, t_minus, t_minus, p_re2) # hack to force the creation on the alternative
+p_re1.new_alt("re_and", p_re1, t_minus, t_minus, t_minus, p_re2) # samek hack
 p_re1.new_alt("re_re1", p_re2)
 
 p_re2.new_alt("re_conc", p_re2, p_re3)

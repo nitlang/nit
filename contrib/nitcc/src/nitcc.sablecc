@@ -47,6 +47,8 @@ re =
 
 re1 {-> re} =
 	{minus:} re1 '-' re2 |
+	{except:} re1 'Except' re2 |
+	{and:} re1 'And' re2 |
 	re2 ;
 
 re2 {-> re} =
