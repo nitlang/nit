@@ -72,10 +72,8 @@ class CollectNameVisitor
 			else
 				nfa2 = nexpr.build_nfa
 			end
-			nfa.states.add_all nfa2.states
-			nfa.start.add_trans(nfa2.start, null)
-			for s in nfa2.accept do nfa.add_tag(s, t)
-			nfa.accept.add_all nfa2.accept
+			nfa2.tag_accept(t)
+			nfa.absorb(nfa2)
 		end
 	end
 

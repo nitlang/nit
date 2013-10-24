@@ -37,6 +37,12 @@ class Automaton
 	# use `add_tag` to update
 	var retrotags = new HashMap[Token, Set[State]]
 
+	# Tag all accept states
+	fun tag_accept(t: Token)
+	do
+		for s in accept do add_tag(s, t)
+	end
+
 	# Add a token to a state
 	fun add_tag(s: State, t: Token)
 	do
@@ -161,6 +167,16 @@ class Automaton
 		states.add s
 		states.add a
 		states.add_all other.states
+	end
+
+	# `self` absorbs all states, transisions, tags, and acceptations of `other`
+	# An epsilon transition is added between `self.start` and `other.start`
+	fun absorb(other: Automaton)
+	do
+		states.add_all other.states
+		start.add_trans(other.start, null)
+		for s, ts in other.tags do for t in ts do add_tag(s, t)
+		accept.add_all other.accept
 	end
 
 	# Do the Kleene closure (*) on self
