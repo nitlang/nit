@@ -1,5 +1,7 @@
-T_Ab@1,1:ab
-T_L@1,3:a
-T_Ab@1,4:ab
-T_L@1,6:a
-TEnd@2,1:
+NLexerError@(1:3-1:4)='aa'
+Nodes
+  p
+    Nodes
+      t_0
+        l@(1:1-1:3)='ab'
+  NLexerError@(1:3-1:4)='aa'
