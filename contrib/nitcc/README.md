@@ -47,6 +47,7 @@ For the lexer (and regexp, NFA en DFA)
 [X] Any
 [X] interval of characters and subtraction of characters
 [X] implicit priorities (by inclusion of languages)
+[X] Except and And
 [ ] Shortest
 [ ] DFA minimization
 [ ] efficient implementation of intervals
