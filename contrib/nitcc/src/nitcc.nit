@@ -114,6 +114,9 @@ print "NFA automaton: {nfa.states.length} states (see {name}.nfa.dot)"
 nfa.to_dot("{name}.nfa.dot")
 
 var dfa = nfa.to_dfa
+print "DFA automaton: {dfa.states.length} states (see {name}.dfa.dot)"
+dfa.to_dot("{name}.dfa.dot")
+
 if dfa.tags.has_key(dfa.start) then
 	print "Error: Empty tokens {dfa.tags[dfa.start].join(" ")}"
 	exit(1)
@@ -124,8 +127,6 @@ for s, tks in dfa.tags do
 	print "Error: Conflicting tokens: {tks.join(" ")}"
 	exit(1)
 end
-print "DFA automaton: {dfa.states.length} states (see {name}.dfa.dot)"
-dfa.to_dot("{name}.dfa.dot")
 
 # Generate Nit code
 
