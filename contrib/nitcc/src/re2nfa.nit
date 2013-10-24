@@ -137,6 +137,30 @@ redef class Nre_except
 	end
 end
 
+redef class Nre_shortest
+	redef fun make_rfa
+	do
+		var a = children[2].make_rfa
+		a = a.to_dfa
+		for s in a.accept do
+			for t in s.outs.to_a do t.delete
+		end
+		return a
+	end
+end
+
+redef class Nre_longest
+	redef fun make_rfa
+	do
+		var a = children[2].make_rfa
+		a = a.to_dfa
+		for s in a.accept.to_a do
+			if not s.outs.is_empty then a.accept.remove(s)
+		end
+		return a
+	end
+end
+
 redef class Nre_conc
 	redef fun make_rfa
 	do

@@ -79,6 +79,8 @@ var t_kw = new Token("kw")
 var t_any = new Token("any")
 var t_and = new Token("and")
 var t_except = new Token("except")
+var t_shortest = new Token("shortest")
+var t_longest = new Token("longest")
 var t_ch_dec = new Token("ch_dec")
 g.tokens.add_all([t_opar,
 	t_cpar,
@@ -101,6 +103,8 @@ g.tokens.add_all([t_opar,
 	t_any,
 	t_and,
 	t_except,
+	t_shortest,
+	t_longest,
 	t_ch_dec])
 
 p_gr.new_alt("gr", t_kw, t_id, t_semi, p_lex, p_par)
@@ -126,6 +130,8 @@ p_re2.new_alt("re_re3", p_re3)
 p_re3.new_alt("re_star", p_re3, t_star)
 p_re3.new_alt("re_ques", p_re3, t_ques)
 p_re3.new_alt("re_plus", p_re3, t_plus)
+p_re3.new_alt("re_shortest", t_shortest, t_opar, p_re, t_cpar)
+p_re3.new_alt("re_longest", t_longest, t_opar, p_re, t_cpar)
 p_re3.new_alt("re_par", t_opar, p_re, t_cpar)
 p_re3.new_alt("re_str", t_str)
 p_re3.new_alt("re_ch_dec", t_ch_dec)

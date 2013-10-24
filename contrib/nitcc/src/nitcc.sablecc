@@ -59,6 +59,8 @@ re3 {-> re} =
 	{ques:} re3 '?' |
 	{star:} re3 '*' |
 	{plus:} re3 '+' |
+	{shortest:} 'Shortest' '(' re ')' |
+	{longest:} 'Longest' '(' re ')' |
 	{id:} id |
 	{str:} str |
 	{par:} '(' re ')' |
