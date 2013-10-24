@@ -127,6 +127,12 @@ for s, tks in dfa.tags do
 	print "Error: Conflicting tokens: {tks.join(" ")}"
 	exit(1)
 end
+for t in gram.tokens do
+	if t.name == "Eof" then continue
+	if dfa.retrotags.has_key(t) and not dfa.retrotags[t].is_empty then continue
+	print "Error: Token {t} matches nothing"
+	exit(1)
+end
 
 # Generate Nit code
 
