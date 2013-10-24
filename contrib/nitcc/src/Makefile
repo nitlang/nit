@@ -11,12 +11,12 @@ nitcc0: nitcc.nit nitcc_parser_gen
 	./nitcc_parser_gen
 	${NITC} nitcc.nit -v -o nitcc0
 
-nitcc1: nitcc0 nitcc.nit
+nitcc1: nitcc0 nitcc.nit nitcc.sablecc
 	@echo "*** Compile the intermediate nitcc --- bootstrap level 1"
 	./nitcc0 nitcc.sablecc
 	${NITC} nitcc.nit -v -o nitcc1
 
-nitcc: nitcc1 nitcc.nit
+nitcc: nitcc1 nitcc.nit nitcc.sablecc
 	@echo "*** Compile the final nitcc --- bootstrap level 2"
 	./nitcc1 nitcc.sablecc
 	${NITC} nitcc.nit -v
