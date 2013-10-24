@@ -77,8 +77,31 @@ var t_str = new Token("str")
 var t_id = new Token("id")
 var t_kw = new Token("kw")
 var t_any = new Token("any")
+var t_and = new Token("and")
+var t_except = new Token("except")
 var t_ch_dec = new Token("ch_dec")
-g.tokens.add_all([t_opar, t_cpar, t_ocur, t_ccur, t_pipe, t_star, t_ques, t_plus, t_minus, t_comma, t_colo, t_semi, t_dot, t_eq, t_arrow, t_str, t_id, t_kw, t_any, t_ch_dec])
+g.tokens.add_all([t_opar,
+	t_cpar,
+	t_ocur,
+	t_ccur,
+	t_pipe,
+	t_star,
+	t_ques,
+	t_plus,
+	t_minus,
+	t_comma,
+	t_colo,
+	t_semi,
+	t_dot,
+	t_eq,
+	t_arrow,
+	t_str,
+	t_id,
+	t_kw,
+	t_any,
+	t_and,
+	t_except,
+	t_ch_dec])
 
 p_gr.new_alt("gr", t_kw, t_id, t_semi, p_lex, p_par)
 
@@ -93,8 +116,8 @@ p_re.new_alt("re_alter", p_re, t_pipe, p_re1)
 p_re.new_alt("re_re2", p_re1)
 
 p_re1.new_alt("re_minus", p_re1, t_minus, p_re2)
-p_re1.new_alt("re_except", p_re1, t_minus, t_minus, p_re2) # hack to force the creation on the alternative
-p_re1.new_alt("re_and", p_re1, t_minus, t_minus, t_minus, p_re2) # samek hack
+p_re1.new_alt("re_except", p_re1, t_and, p_re2)
+p_re1.new_alt("re_and", p_re1, t_except, p_re2)
 p_re1.new_alt("re_re1", p_re2)
 
 p_re2.new_alt("re_conc", p_re2, p_re3)
