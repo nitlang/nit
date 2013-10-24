@@ -1,1 +1,1 @@
-Usage ./out/curl_http.bin <method wished [POST, GET, GET_FILE]> <target url>
+Usage: curl_http <method wished [POST, GET, GET_FILE]> <target url>
