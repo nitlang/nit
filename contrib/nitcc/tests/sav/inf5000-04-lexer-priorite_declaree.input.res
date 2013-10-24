@@ -1,6 +1,14 @@
-T_Identifier@1,1:z10
-T_Hexinteger@2,1:00ff1
-T_Identifier@3,1:fff
-T_Hexinteger@4,1:00f
-T_Identifier@4,4:g1
-TEnd@5,1:
+Start
+  p
+    Nodes
+      t_0
+        identifier@(1:1-1:4)='z10'
+      t_1
+        hexinteger@(2:1-2:6)='00ff1'
+      t_0
+        identifier@(3:1-3:4)='fff'
+      t_1
+        hexinteger@(4:1-4:4)='00f'
+      t_0
+        identifier@(4:4-4:6)='g1'
+  Eof@(5:1-5:1)=''
