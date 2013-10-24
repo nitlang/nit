@@ -260,17 +260,17 @@ class Automaton
                 f.write("digraph g \{\n")
 
 		for s in states do
-			f.write("s{s.object_id}[")
+			f.write("s{s.object_id}[shape=oval")
 			#f.write("label=\"\",")
 			if accept.has(s) then
-				f.write("color=blue")
-				if tags.has_key(s) then
-					f.write(",label=\"")
-					for token in tags[s] do
-						f.write("{token.name.escape_to_c}\\n")
-					end
-					f.write("\"")
+				f.write(",color=blue")
+			end
+			if tags.has_key(s) then
+				f.write(",label=\"")
+				for token in tags[s] do
+					f.write("{token.name.escape_to_c}\\n")
 				end
+				f.write("\"")
 			end
 			f.write("];\n")
 			var outs = new HashMap[State, Array[nullable Int]]
