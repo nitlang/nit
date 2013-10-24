@@ -415,7 +415,7 @@ redef class Nelem
 	var elem: nullable Element
 
 	# Set the element and check things
-	fun set_elem(v: CheckNameVisitor, pos: nullable Position, elem: Element)
+	private fun set_elem(v: CheckNameVisitor, pos: nullable Position, elem: Element)
 	do
 		assert self.elem == null
 		self.elem = elem
