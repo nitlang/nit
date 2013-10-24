@@ -61,6 +61,21 @@ class Automaton
 		else
 			retrotags[t].add s
 		end
+
+		assert tags[s].has(t)
+		assert retrotags[t].has(s)
+	end
+
+	# Remove all occurences of a tag in an automaton
+	fun clear_tag(t: Token)
+	do
+		if not retrotags.has_key(t) then return
+		for s in retrotags[t] do
+			if not tags.has_key(s) then continue
+			tags[s].remove(t)
+			if tags[s].is_empty then tags.keys.remove(s)
+		end
+		retrotags.keys.remove(t)
 	end
 
 	# Remove tokens from conflicting state according the the inclusion of language
