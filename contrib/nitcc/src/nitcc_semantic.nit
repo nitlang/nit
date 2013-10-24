@@ -169,7 +169,7 @@ redef class Nexpr
 		var id = children.first.as(Nid)
 		var name = id.text
 		if v.names.has_key(name) then
-			print "{id.position} Error {name} already defined."
+			print "{id.position.to_s} Error {name} already defined."
 			exit(1)
 		end
 		v.names[name] = self
@@ -218,13 +218,13 @@ redef class Nre_id
 		var id = children.first.as(Nid)
 		var name = id.text
 		if not v.v1.names.has_key(name) then
-			print "{id.position} Error: unknown name {name}"
+			print "{id.position.to_s} Error: unknown name {name}"
 			exit(1)
 			abort
 		end
 		var node = v.v1.names[name]
 		if node isa Nprod then
-			print "{id.position} Error: cannot use production {name} in a regular expression"
+			print "{id.position.to_s} Error: cannot use production {name} in a regular expression"
 			exit(1)
 			abort
 		else if not node isa Nexpr then
@@ -248,14 +248,14 @@ redef class Nign
 		var id = children[1].as(Nid)
 		var name = id.text
 		if not v.v1.names.has_key(name) then
-			print "{id.position} Error: unknown name {name}"
+			print "{id.position.to_s} Error: unknown name {name}"
 			exit(1)
 			abort
 		end
 		var node = v.v1.names[name]
 		var elem: nullable Element
 		if node isa Nprod then
-			print "{id.position} Error: cannot ignore a production"
+			print "{id.position.to_s} Error: cannot ignore a production"
 			exit(1)
 			abort
 		else if node isa Nexpr then
@@ -300,7 +300,7 @@ redef class Nprod
 		var id = children.first.as(Nid)
 		var name = id.text
 		if v.names.has_key(name) then
-			print "{id.position} Error {name} already defined."
+			print "{id.position.to_s} Error {name} already defined."
 			exit(1)
 		end
 		v.names[name] = self
@@ -403,7 +403,7 @@ redef class Naltid
 		if prodabs == null then prodabs = prod
 		for x in prodabs.alts do
 			if x.short_name == name then
-				print "{id.position} Error: already an alternative named {name}"
+				print "{id.position.to_s} Error: already an alternative named {name}"
 				exit(1)
 			end
 		end
@@ -460,7 +460,7 @@ redef class Nelemid
 		var name = id.text
 		for n2 in v.elems_names do
 			if name == n2 then
-				print "{id.position} Error: already an element named {name}."
+				print "{id.position.to_s} Error: already an element named {name}."
 				exit(1)
 			end
 		end
@@ -473,7 +473,7 @@ redef class Nelem_id
 		var id = children.first.as(Nid)
 		var name = id.text
 		if not v.v1.names.has_key(name) then
-			print "{id.position} Error: unknown name {name}"
+			print "{id.position.to_s} Error: unknown name {name}"
 			exit(1)
 			abort
 		end
