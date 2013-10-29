@@ -49,8 +49,8 @@ For the lexer (and regexp, NFA en DFA)
 [X] implicit priorities (by inclusion of languages)
 [X] Except and And
 [X] Shortest and Longest (but dummy semantic without lookahead)
+[X] efficient implementation of intervals
 [ ] DFA minimization
-[ ] efficient implementation of intervals
 
 For the parser (and grammar and LR)
 

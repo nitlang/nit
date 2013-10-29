@@ -126,7 +126,8 @@ class Automaton
 	do
 		var s = new State
 		var a = new State
-		s.add_trans(a, symbol)
+		var sym = new TSymbol(symbol, symbol)
+		s.add_trans(a, sym)
 		start = s
 		accept.add a
 		states.add s
@@ -135,13 +136,12 @@ class Automaton
 
 	# Initialize a new automation for the language that accepts only a range of symbols
 	# Two state, the second is accept, one transition for `from` to `to`
-	init cla(from, to: Int)
+	init cla(first: Int, last: nullable Int)
 	do
 		var s = new State
 		var a = new State
-		for symbol in [from..to] do
-			s.add_trans(a, symbol)
-		end
+		var sym = new TSymbol(first, last)
+		s.add_trans(a, sym)
 		start = s
 		accept.add a
 		states.add s
@@ -218,11 +218,36 @@ class Automaton
 	end
 
 	# Remove all transitions on a given symbol
-	fun minus_sym(symbol: Int)
+	fun minus_sym(symbol: TSymbol)
 	do
+		var f = symbol.first
+		var l = symbol.last
 		for s in states do
 			for t in s.outs.to_a do
-				if t.symbol == symbol then t.delete
+				if t.symbol == null then continue
+
+				# Check overlaps
+				var tf = t.symbol.first
+				var tl = t.symbol.last
+				if l != null and tf > l then continue
+				if tl != null and f > tl then continue
+
+				t.delete
+
+				# Add left and right part if non empty
+				if tf < f then
+					var sym = new TSymbol(tf,f-1)
+					s.add_trans(t.to, sym)
+				end
+				if l != null then
+					if tl == null then
+						var sym = new TSymbol(l+1, null)
+						s.add_trans(t.to, sym)
+					else if tl > l then
+						var sym = new TSymbol(l+1, tl)
+						s.add_trans(t.to, sym)
+					end
+				end
 			end
 		end
 	end
@@ -273,7 +298,7 @@ class Automaton
 				f.write("\"")
 			end
 			f.write("];\n")
-			var outs = new HashMap[State, Array[nullable Int]]
+			var outs = new HashMap[State, Array[nullable TSymbol]]
 			for t in s.outs do
 				var a
 				var s2 = t.to
@@ -281,35 +306,19 @@ class Automaton
 				if outs.has_key(s2) then
 					a = outs[s2]
 				else
-					a = new Array[nullable Int]
+					a = new Array[nullable TSymbol]
 					outs[s2] = a
 				end
 				a.add(c)
 			end
 			for s2, a in outs do
 				var labe = ""
-				var lastc: nullable Int = null
-				var elip = 0
-				a.add(-1)
 				for c in a do
+					if not labe.is_empty then labe += "\n"
 					if c == null then
-						if not labe.is_empty then labe += "\n"
 						labe += "''"
-					else if lastc == c - 1 then
-						elip += 1
-						lastc = c
 					else
-						if elip == 1 then
-							assert lastc != null
-							labe += "\n{sym_to_s(lastc)}"
-						else if elip > 1 then
-							assert lastc != null
-							labe += " .. {sym_to_s(lastc)}"
-						end
-						if c == -1 then break
-						if not labe.is_empty then labe += "\n"
-						labe += sym_to_s(c)
-						lastc = c
+						labe += c.to_s
 					end
 				end
 				f.write("s{s.object_id}->s{s2.object_id} [label=\"{labe.escape_to_c}\"];\n")
@@ -321,19 +330,6 @@ class Automaton
 		f.close
 	end
 
-	# Transform a symbol to a string
-	# Used by `to_dot`
-	private fun sym_to_s(symbol: nullable Int): String
-	do
-		if symbol == null then
-			return "''"
-		else if symbol <= 32 then
-			return "#{symbol}"
-		else
-			return symbol.ascii.to_s
-		end
-	end
-
 	# Transform a NFA to a DFA
 	# note: the DFA is not miminized
 	fun to_dfa: Automaton
@@ -341,7 +337,7 @@ class Automaton
 		var dfa = new Automaton.empty
 		var n2d = new ArrayMap[Set[State], State]
 		var seen = new ArraySet[Set[State]] 
-		var ts = new HashSet[Int]
+		var alphabet = new HashSet[Int]
 		var st = eclosure([start])
 		var todo = [st]
 		n2d[st] = dfa.start
@@ -350,8 +346,18 @@ class Automaton
 			var nfa_states = todo.pop
 			#print "* work on {nfa_states.inspect}={nfa_states} (remains {todo.length}/{seen.length})"
 			var dfa_state = n2d[nfa_states]
-			ts.clear
+			alphabet.clear
 			for s in nfa_states do
+				# Collect important values to build the alphabet
+				for t in s.outs do
+					var sym = t.symbol
+					if sym == null then continue
+					alphabet.add(sym.first)
+					var l = sym.last
+					if l != null then alphabet.add(l)
+				end
+
+				# Mark accept and tags
 				if accept.has(s) then
 					if tags.has_key(s) then
 						for t in tags[s] do
@@ -360,25 +366,49 @@ class Automaton
 					end
 					dfa.accept.add(dfa_state)
 				end
-				for t in s.outs do
-					var sym = t.symbol
-					if sym == null or ts.has(sym) then continue
-					ts.add(sym)
-					var nfa_dest = eclosure(trans(nfa_states, sym))
-					#print "{nfa_states} -> {sym} -> {nfa_dest}"
-					var dfa_dest
-					if seen.has(nfa_dest) then
-						#print "* reuse {nfa_dest.inspect}={nfa_dest}"
-						dfa_dest = n2d[nfa_dest]
-					else
-						#print "* new {nfa_dest.inspect}={nfa_dest}"
-						dfa_dest = new State
-						dfa.states.add(dfa_dest)
-						n2d[nfa_dest] = dfa_dest
-						todo.add(nfa_dest)
-						seen.add(nfa_dest)
-					end
-					dfa_state.add_trans(dfa_dest, sym)
+			end
+
+			# From the important values, build a sequence of TSymbols
+			var a = alphabet.to_a
+			(new ComparableSorter[Int]).sort(a)
+			var tsyms = new Array[TSymbol]
+			var last = 0
+			for i in a do
+				if last > 0 and last <= i-1 then
+					tsyms.add(new TSymbol(last,i-1))
+				end
+				tsyms.add(new TSymbol(i,i))
+				last = i+1
+			end
+			if last > 0 then
+				tsyms.add(new TSymbol(last,null))
+			end
+			#print "Alphabet: {tsyms.join(", ")}"
+
+			var lastst: nullable Transition = null
+			for sym in tsyms do
+				var nfa_dest = eclosure(trans(nfa_states, sym.first))
+				if nfa_dest.is_empty then
+					lastst = null
+					continue
+				end
+				#print "{nfa_states} -> {sym} -> {nfa_dest}"
+				var dfa_dest
+				if seen.has(nfa_dest) then
+					#print "* reuse {nfa_dest.inspect}={nfa_dest}"
+					dfa_dest = n2d[nfa_dest]
+				else
+					#print "* new {nfa_dest.inspect}={nfa_dest}"
+					dfa_dest = new State
+					dfa.states.add(dfa_dest)
+					n2d[nfa_dest] = dfa_dest
+					todo.add(nfa_dest)
+					seen.add(nfa_dest)
+				end
+				if lastst != null and lastst.to == dfa_dest then
+					lastst.symbol.last = sym.last
+				else
+					lastst = dfa_state.add_trans(dfa_dest, sym)
 				end
 			end
 		end
@@ -412,7 +442,11 @@ class Automaton
 		var res = new ArraySet[State]
 		for s in states do
 			for t in s.outs do
-				if t.symbol != symbol then continue
+				var sym = t.symbol
+				if sym == null then continue
+				if sym.first > symbol then continue
+				var l = sym.last
+				if l != null and l < symbol then continue
 				var to = t.to
 				if res.has(to) then continue 
 				res.add(to)
@@ -507,7 +541,7 @@ private class DFAGenerator
 				end
 				add("\tend\n")
 			end
-			var trans = new ArrayMap[Int, State]
+			var trans = new ArrayMap[TSymbol, State]
 			for t in s.outs do
 				var sym = t.symbol
 				assert sym != null
@@ -515,19 +549,26 @@ private class DFAGenerator
 			end
 			if trans.is_empty then
 				# Do nothing, inherit the trans
-			else if trans.length == 1 then
-				var sym = trans.keys.first
-				var next = trans.values.first
-				add("\tredef fun trans(c) do\n")
-				add("\t\tif c.ascii == {sym} then return dfastate_{names[next]}\n")
-				add("\t\treturn null\n")
-				add("\tend\n")
 			else
-				add("\tredef fun trans(c) do\n")
+				add("\tredef fun trans(char) do\n")
+
+				add("\t\tvar c = char.ascii\n")
+				var haslast = false
+				var last = -1
 				for sym, next in trans do
-					add("\t\tif c.ascii == {sym} then return dfastate_{names[next]}\n")
+					assert not haslast
+					assert sym.first > last
+					if sym.first > last + 1 then add("\t\tif c <= {sym.first-1} then return null\n")
+					var l = sym.last
+					if l == null then
+						add("\t\treturn dfastate_{names[next]}\n")
+						haslast= true
+					else
+						add("\t\tif c <= {l} then return dfastate_{names[next]}\n")
+						last = l
+					end
 				end
-				add("\t\treturn null\n")
+				if not haslast then add("\t\treturn null\n")
 				add("\tend\n")
 			end
 			add("end\n")
@@ -546,12 +587,35 @@ class State
 	var ins = new Array[Transition]
 
 	# Add a transitions to `to` on `symbol` (null means epsilon)
-	fun add_trans(to: State, symbol: nullable Int): Transition
+	fun add_trans(to: State, symbol: nullable TSymbol): Transition
 	do
 		var t = new Transition(self, to, symbol)
 		outs.add(t)
 		to.ins.add(t)
 		return t
+	end
+end
+
+# A range of symbols on a transition
+class TSymbol
+	var first: Int
+	var last: nullable Int
+
+	redef fun to_s
+	do
+		var res
+		var f = first
+		if f <= 32 then
+			res = "#{f}"
+		else
+			res = f.ascii.to_s
+		end
+		var l = last
+		if f == l then return res
+		res += " .. "
+		if l == null then return res
+		if l <= 32 or l >= 127 then return res + "#{l}"
+		return res + l.ascii.to_s
 	end
 end
 
@@ -562,7 +626,7 @@ class Transition
 	# The destination state
 	var to: State
 	# The symbol on the transition (null means epsilon)
-	var symbol: nullable Int
+	var symbol: nullable TSymbol
 
 	# Remove the transition from the automaton
 	# Detash from `from` and `to`

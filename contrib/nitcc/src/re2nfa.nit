@@ -223,7 +223,7 @@ end
 redef class Nre_any
 	redef fun make_rfa: Automaton
 	do
-		var a = new Automaton.cla(0, 127)
+		var a = new Automaton.cla(0, null)
 		return a
 	end
 end
