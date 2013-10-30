@@ -1,6 +1,6 @@
 # nitcc, a parser and lexer generator for Nit
 
-nitcc is a simple LALR generator for Nit programs.
+nitcc is a simple LR generator for Nit programs.
 It features a small subset of the functionalities of [SableCC] 3 and 4.
 
   [SableCC]: http://sablecc.org
@@ -34,7 +34,8 @@ The sub-directory `tests/` contains regression tests.
 [X] command line tool (`nitcc`)
 [X] Grammar syntax of SableCC4 (with pieces of SableCC3)
 [X] Generates a Lexer
-[X] Generates a LALR parser
+[X] Generates a SLR parser
+[ ] Generates a LALR parser
 [X] Generates classes for the AST and utils
 
 For the tool (and the code)
@@ -77,7 +78,7 @@ For the AST (generated classes, utils and their API)
 ## BUGS and limitations
 
 * Limited error checking; bad grammars can produce uncompilable, or worse buggy, nit code.
-* The LALR automaton is buggy; do not except to parse big and complex language like Nit or Java.
+* The SLR automaton is not very expressive; do not except to parse big and complex language like Nit or Java.
 * The generated Nit code is inefficient and large; do not except to parse big and complex language like Nit or Java.
 * No unicode.
 * Advanced features of SableCC4 are not planed.

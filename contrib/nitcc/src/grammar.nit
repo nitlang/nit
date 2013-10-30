@@ -115,14 +115,15 @@ class Gram
 	# Compute a LR automaton
 	fun lr0: LRAutomaton
 	do
-		analyse
-
 		var start = new Production("_start")
 		start.accept = true
 		var eof = new Token("Eof")
 		tokens.add(eof)
 		start.new_alt("Start", self.prods.first, eof)
 		prods.add(start)
+
+		analyse
+
 		var first = new LRState("Start")
 		first.number = 0
 		for i in start.start_state do first.add(i)
@@ -164,18 +165,17 @@ class Gram
 
 				#print "#states: {seen.length}"
 
+				# Look for an existing LR0 state in the automaton
 				var new_state = true
 				for n in seen do
 					if n == next then
-						for i in next.items do
-							if n.add(i) then n.extends(i)
-						end
 						next = n
 						new_state = false
 						break
 					end
 				end
 
+				# If not, add it to the pool and the todo-list
 				if new_state then
 					next.number = seen.length
 					assert not seen.has(next)
@@ -183,6 +183,7 @@ class Gram
 					todo.add(next)
 				end
 
+				# Add the transition
 				var t = new LRTransition(state, next, e)
 				state.outs.add t
 				next.ins.add t
@@ -486,12 +487,12 @@ class LRAutomaton
 			res.add "s{s.number} {s.name}\n"
 			res.add "\tCORE\n"
 			for i in s.core do
-				res.add "\t\t{i}\n"
+				res.add "\t\t{s.item_to_s(i)}\n"
 			end
 			res.add "\tOTHER ITEMS\n"
 			for i in s.items do
 				if s.core.has(i) then continue
-				res.add "\t\t{i}\n"
+				res.add "\t\t{s.item_to_s(i)}\n"
 			end
 			res.add "\tTRANSITIONS {s.outs.length}\n"
 			for t in s.outs do
@@ -501,7 +502,7 @@ class LRAutomaton
 			if s.is_lr0 then
 				res.add "\t\tSTATE LR0\n"
 			else
-				res.add "\t\tSTATE LALR\n"
+				res.add "\t\tSTATE SLR\n"
 				for t, a in s.guarded_reduce do
 					if a.length > 1 then
 						res.add "\t\t/!\\ REDUCE/REDUCE CONFLICT\n"
@@ -533,12 +534,12 @@ class LRAutomaton
 		for s in states do
 			f.write "s{s.number} [label=\"{s.number} {s.name.escape_to_dot}|"
 			for i in s.core do
-				f.write "{i.to_s.escape_to_dot}\\l"
+				f.write "{s.item_to_s(i).escape_to_dot}\\l"
 			end
 			f.write("|")
 			for i in s.items do
 				if s.core.has(i) then continue
-				f.write "{i.to_s.escape_to_dot}\\l"
+				f.write "{s.item_to_s(i).escape_to_dot}\\l"
 			end
 			f.write "\""
 			if not s.is_lr0 then
@@ -877,23 +878,10 @@ class LRState
 	# Add and item in the core
 	fun add(i: Item): Bool
 	do
-		#if items.has(i) then return
+		if items.has(i) then return false
 
-		#print "add {i} in {inspect}={self}"
-		var found = false
-		for i2 in items do
-			if i.alt == i2.alt and i.pos == i2.pos then
-				if i2.future.has_all(i.future) then return false
-				i2.future.add_all(i.future)
-				found = true
-
-				break
-			end
-		end
-		if not found then
-			items.add(i)
-			if i.pos > 0 or i.alt.prod.accept then core.add(i)
-		end
+		items.add(i)
+		if i.pos > 0 or i.alt.prod.accept then core.add(i)
 		return true
 	end
 
@@ -903,11 +891,22 @@ class LRState
 		var e = i.next
 		if e == null then return
 		if not e isa Production then return
-		var la = i.lookahead
 		for i2 in e.start_state do
-			i2.future.add_all(la)
 			if add(i2) then extends(i2)
 		end
+	end
+
+	# SLR lookahead
+	fun lookahead(i: Item): Set[Token]
+	do
+		return i.alt.prod.afters
+	end
+
+	fun item_to_s(i: Item): String
+	do
+		var l = lookahead(i)
+		if l.is_empty then return i.to_s
+		return "{i} \{ {l.join(" ")} \}"
 	end
 
 	# Set of all reductions
@@ -924,22 +923,23 @@ class LRState
 	# Does the state need a guard to perform an action?
 	fun need_guard: Bool do return not shifts.is_empty or reduces.length > 1
 
-	# Is the state LR0
+	# Is the state LR0?
 	fun is_lr0: Bool do return reduces.length <= 1 and shifts.is_empty or reduces.is_empty
 
 	# compute guards and conflicts
 	fun analysis
 	do
+		# Extends the core
 		for i in items.to_a do
 			extends(i)
 		end
 
+		# Collect action and conflicts
 		for i in items do
 			var n = i.next
 			if n == null then
 				reduces.add(i.alt)
-				#for t in i.alt.prod.afters do
-				for t in i.future do
+				for t in lookahead(i) do
 					t.reduces.add(self)
 					if guarded_reduce.has_key(t) then
 						guarded_reduce[t].add(i)
@@ -985,14 +985,12 @@ class LRTransition
 	var elem: Element
 end
 
-# A alternative with a cursor (dot) and possibly a future
+# A alternative with a cursor (dot) before an element
 class Item
 	# The alternative
 	var alt: Alternative
 	# The dot index (0 means before the first element)
 	var pos: Int
-	# The possible future
-	var future = new ArraySet[Token]
 
 	redef fun ==(o) do return o isa Item and alt == o.alt and pos == o.pos
 	redef fun hash do return alt.hash + pos
@@ -1007,11 +1005,6 @@ class Item
 			b.append(alt.elems[i].to_s)
 		end
 		if pos == alt.elems.length then b.append(".")
-		if not future.is_empty then
-			b.append("/\{")
-			b.append(future.join(" "))
-			b.append("\}")
-		end
 		return b.to_s
 	end
 
@@ -1038,9 +1031,6 @@ class Item
 			end
 			p += 1
 		end
-		if p >= alt.elems.length then
-			res.add_all(future)
-		end
 		return res
 	end
 
@@ -1048,7 +1038,6 @@ class Item
 	fun avance: Item
 	do
 		var res = new Item(alt, pos+1)
-		res.future.add_all(future)
 		return res
 	end
 end
