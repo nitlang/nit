@@ -278,6 +278,35 @@ class Automaton
 		return res
 	end
 
+	# Reverse an automaton in place
+	fun reverse
+	do
+		for s in states do
+			var tmp = s.ins
+			s.ins = s.outs
+			s.outs = tmp
+			for t in s.outs do
+				var tmp2 = t.from
+				t.from = t.to
+				t.to = tmp2
+			end
+		end
+		var st = start
+		if accept.length == 1 then
+			start = accept.first
+		else
+			var st2 = new State
+			start = st2
+			states.add(st2)
+
+			for s in accept do
+				st2.add_trans(s, null)
+			end
+		end
+		accept.clear
+		accept.add(st)
+	end
+
 	# Generate a minimal DFA
 	# REQUIRE: self is a DFA
 	fun to_minimal_dfa: Automaton
