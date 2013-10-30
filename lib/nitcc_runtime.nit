@@ -306,6 +306,9 @@ abstract class Node
 	# A point of view on the direct children of the node
 	fun children: SequenceRead[nullable Node] is abstract
 
+	# A point of view of a depth-first visit of all non-null children
+	var depth: Collection[Node] = new DephCollection(self)
+
 	# Visit all the children of the node with the visitor `v`
 	protected fun visit_children(v: Visitor)
 	do
@@ -358,6 +361,42 @@ abstract class Node
 			return "{node_name}"
 		else
 			return "{node_name}@({pos})"
+		end
+	end
+end
+
+private class DephCollection
+	super NaiveCollection[Node]
+	var node: Node
+	redef fun iterator do return new DephIterator([node].iterator)
+end
+
+private class DephIterator
+	super Iterator[Node]
+	var stack = new List[Iterator[nullable Node]]
+
+	init(i: Iterator[nullable Node])
+	do
+		stack.add i
+	end
+
+	redef fun is_ok do return not stack.is_empty
+	redef fun item do return stack.last.item.as(not null)
+	redef fun next
+	do
+		var i = stack.last
+		stack.push i.item.children.iterator
+		i.next
+		while is_ok do
+			if not stack.last.is_ok then
+				stack.pop
+				continue
+			end
+			if stack.last.item == null then
+				stack.last.next
+				continue
+			end
+			return
 		end
 	end
 end
@@ -562,7 +601,7 @@ abstract class TestParser
 			tpv.enter_visit(n)
 			n = n.error_tree
 		else
-			print "ROOT: {n} (see {astout} and {astdotout})"
+			print "ROOT: {n}; {n.depth.length} nodes (see {astout} and {astdotout})"
 		end
 		tpv.enter_visit(n)
 		n.to_dot(astdotout)
