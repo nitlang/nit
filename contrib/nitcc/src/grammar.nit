@@ -226,9 +226,12 @@ class Gram
 			for p in prods do
 				var fs = p.firsts
 				for a in p.alts do
-					for e in a.elems do
+					var i = a.first_item
+					loop
+						var e = i.next
+						if e == null then break
 						if e isa Token then
-							if try_add(fs, e) then changed = true
+							if try_add(fs, i) then changed = true
 							break
 						else if e isa Production then
 							for t in e.firsts do
@@ -238,6 +241,7 @@ class Gram
 						else
 							abort
 						end
+						i = i.avance
 					end
 				end
 			end
@@ -249,15 +253,21 @@ class Gram
 			for p1 in prods do
 				for a in p1.alts do
 					var p0: nullable Production = null
-					for e in a.elems do
+					var i = a.first_item
+					loop
+						var e = i.next
+						if e == null then break
 						var p = p0
 						if e isa Production then p0 = e else p0 = null
-						if p == null then continue
+						if p == null then
+							i = i.avance
+							continue
+						end
 
 						var afs = p.afters
 
 						if e isa Token then
-							if try_add(afs, e) then changed = true
+							if try_add(afs, i) then changed = true
 						else if e isa Production then
 							for t in e.firsts do
 								if try_add(afs, t) then changed = true
@@ -270,6 +280,7 @@ class Gram
 						else
 							abort
 						end
+						i = i.avance
 					end
 					if p0 != null then
 						var afs = p0.afters
@@ -284,7 +295,7 @@ class Gram
 	end
 
 	# used by `analyse`
-	private fun try_add(set: Set[Token], t: Token): Bool
+	private fun try_add(set: Set[Item], t: Item): Bool
 	do
 		var res = not set.has(t)
 		if res then set.add(t)
@@ -323,9 +334,9 @@ class Production
 	# Is the production nullable
 	var is_nullable = false
 	# The first tokens of the production
-	var firsts = new HashSet[Token]
+	var firsts = new HashSet[Item]
 	# The tokens that may follows the production (as in SLR)
-	var afters = new HashSet[Token]
+	var afters = new HashSet[Item]
 
 
 	# Crate a new empty alternative
@@ -357,7 +368,7 @@ class Production
 	do
 		var res = new Array[Item]
 		for a in alts do
-			res.add new Item(a, 0)
+			res.add a.first_item
 		end
 		return res
 	end
@@ -376,6 +387,9 @@ class Alternative
 
 	# The elements of the alternative
 	var elems: Array[Element]
+
+	# The first item of the alternative
+	var first_item = new Item(self, 0)
 
 	# The name of the elements
 	var elems_names = new Array[nullable String]
@@ -897,7 +911,7 @@ class LRState
 	end
 
 	# SLR lookahead
-	fun lookahead(i: Item): Set[Token]
+	fun lookahead(i: Item): Set[Item]
 	do
 		return i.alt.prod.afters
 	end
@@ -916,9 +930,9 @@ class LRState
 	# Set of all goto
 	var gotos = new ArraySet[Production]
 	# Reduction guarded by tokens
-	var guarded_reduce = new HashMap[Token, Array[Item]]
+	var guarded_reduce = new HashMap[Token, Set[Item]]
 	# Shitfs guarded by tokens
-	var guarded_shift = new HashMap[Token, Array[Item]]
+	var guarded_shift = new HashMap[Token, Set[Item]]
 
 	# Does the state need a guard to perform an action?
 	fun need_guard: Bool do return not shifts.is_empty or reduces.length > 1
@@ -939,22 +953,22 @@ class LRState
 			var n = i.next
 			if n == null then
 				reduces.add(i.alt)
-				for t in lookahead(i) do
+				for i2 in lookahead(i) do
+					var t = i2.next
+					assert t isa Token
 					t.reduces.add(self)
-					if guarded_reduce.has_key(t) then
-						guarded_reduce[t].add(i)
-					else
-						guarded_reduce[t] = [i]
+					if not guarded_reduce.has_key(t) then
+						guarded_reduce[t] = new ArraySet[Item]
 					end
+					guarded_reduce[t].add(i)
 				end
 			else if n isa Token then
 				shifts.add(n)
 				n.shifts.add(self)
-				if guarded_shift.has_key(n) then
-					guarded_shift[n].add(i)
-				else
-					guarded_shift[n] = [i]
+				if not guarded_shift.has_key(n) then
+					guarded_shift[n] = new ArraySet[Item]
 				end
+				guarded_shift[n].add(i)
 			else if n isa Production then
 				gotos.add(n)
 				n.gotos.add(self)
@@ -1026,7 +1040,7 @@ class Item
 				res.add(e)
 				break
 			else if e isa Production then
-				res.add_all(e.firsts)
+				#res.add_all(e.firsts)
 				if not e.is_nullable then break
 			end
 			p += 1
