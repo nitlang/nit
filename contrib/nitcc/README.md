@@ -50,7 +50,7 @@ For the lexer (and regexp, NFA en DFA)
 [X] Except and And
 [X] Shortest and Longest (but dummy semantic without lookahead)
 [X] efficient implementation of intervals
-[ ] DFA minimization
+[X] DFA minimization
 
 For the parser (and grammar and LR)
 

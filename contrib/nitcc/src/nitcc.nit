@@ -113,7 +113,7 @@ var nfa = v2.nfa
 print "NFA automaton: {nfa.states.length} states (see {name}.nfa.dot)"
 nfa.to_dot("{name}.nfa.dot")
 
-var dfa = nfa.to_dfa
+var dfa = nfa.to_dfa.to_minimal_dfa
 print "DFA automaton: {dfa.states.length} states (see {name}.dfa.dot)"
 dfa.to_dot("{name}.dfa.dot")
 

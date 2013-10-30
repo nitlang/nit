@@ -278,6 +278,69 @@ class Automaton
 		return res
 	end
 
+	# Generate a minimal DFA
+	# REQUIRE: self is a DFA
+	fun to_minimal_dfa: Automaton
+	do
+		var distincts = new HashMap[State, Set[State]]
+		for s in states do
+			distincts[s] = new HashSet[State]
+		end
+
+		# split accept states
+		for s1 in states do
+			for s2 in states do
+				if distincts[s1].has(s2) then continue
+				if not accept.has(s1) then continue
+				if not accept.has(s2) then
+					distincts[s1].add(s2)
+					distincts[s2].add(s1)
+					continue
+				end
+				if tags[s1] != tags[s2] then
+					distincts[s1].add(s2)
+					distincts[s2].add(s1)
+					continue
+				end
+			end
+		end
+
+		var changed = true
+		var ints = new Array[Int]
+		while changed do
+			changed = false
+			for s1 in states do for s2 in states do
+				if distincts[s1].has(s2) then continue
+				ints.clear
+				for t in s1.outs do
+					var sym = t.symbol
+					assert sym != null
+					ints.add sym.first
+					var l = sym.last
+					if l != null then ints.add l
+				end
+				for i in ints do
+					var ds1 = s1.trans(i)
+					var ds2 = s2.trans(i)
+					if ds1 == null and ds2 == null then continue
+					if ds1 != null and ds2 != null and not distincts[ds1].has(ds2) then continue
+					distincts[s1].add(s2)
+					distincts[s2].add(s1)
+					changed = true
+					break
+				end
+			end
+		end
+			print '2'
+
+		for s1 in states do for s2 in states do
+			if distincts[s1].has(s2) then continue
+			s1.add_trans(s2, null)
+		end
+
+		return to_dfa
+	end
+
 	# Produce a graphvis file for the automaton
 	fun to_dot(filepath: String)
 	do
@@ -593,6 +656,20 @@ class State
 		outs.add(t)
 		to.ins.add(t)
 		return t
+	end
+
+	fun trans(i: Int): nullable State
+	do
+		for t in outs do
+			var sym = t.symbol
+			assert sym != null
+			var f = sym.first
+			var l = sym.last
+			if i < f then continue
+			if l != null and i > l then continue
+			return t.to
+		end
+		return null
 	end
 end
 
