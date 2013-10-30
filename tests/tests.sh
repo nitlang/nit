@@ -441,6 +441,7 @@ if [ -n "$tap" ]; then
 	exit
 fi
 
+echo "engine: $engine"
 echo "ok: " `echo $ok | wc -w` "/" `echo $ok $nok $nos $todos | wc -w`
 
 if [ -n "$nok" ]; then

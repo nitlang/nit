@@ -569,4 +569,6 @@ end
 
 # Pointer classes are used to manipulate extern C structures.
 extern Pointer
+	# Is the address behind this Object at NULL?
+	fun address_is_null: Bool `{ return recv == NULL; `}
 end

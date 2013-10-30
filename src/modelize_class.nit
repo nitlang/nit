@@ -165,6 +165,7 @@ redef class ModelBuilder
 	do
 		var mmodule = nmodule.mmodule.as(not null)
 		var objectclass = try_get_mclass_by_name(nmodule, mmodule, "Object")
+		var pointerclass = try_get_mclass_by_name(nmodule, mmodule, "Pointer")
 		var mclass = nclassdef.mclass.as(not null)
 		var mclassdef = nclassdef.mclassdef.as(not null)
 
@@ -184,8 +185,16 @@ redef class ModelBuilder
 				#print "new super : {mclass} < {mtype}"
 			end
 		end
-		if specobject and mclass.name != "Object" and objectclass != null and mclassdef.is_intro then
-			supertypes.add objectclass.mclass_type
+		if specobject and mclassdef.is_intro then
+			if mclass.kind == extern_kind then
+				if mclass.name == "Pointer" then
+					supertypes.add objectclass.mclass_type
+				else
+					supertypes.add pointerclass.mclass_type
+				end
+			else if mclass.name != "Object" and objectclass != null then
+				supertypes.add objectclass.mclass_type
+			end
 		end
 
 		mclassdef.set_supertypes(supertypes)
