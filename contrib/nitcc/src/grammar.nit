@@ -979,13 +979,57 @@ class LRState
 		for t, a in guarded_reduce do
 			if a.length > 1 then
 				print "REDUCE/REDUCE Conflict on state {self.number} {self.name} for token {t}:"
-				for i in a do print "\t{i}"
+				for i in a do print "\treduce: {i}"
 			else if guarded_shift.has_key(t) then
-				print "SHIFT/REDUCE Conflict on state {self.number} {self.name} for token {t}:"
-				for i in a do print "\t{i}"
-				for i in guarded_shift[t] do print "\t{i}"
+				for ri in a.to_a do for si in guarded_shift[t] do
+					if lookahead(ri).has(si) then
+						var p = ri.alt.prod
+						var csi: nullable Item = null
+						for bsi in back_expand(si) do
+							if bsi.alt.prod == p then
+								csi = bsi
+								break
+							end
+						end
+						if csi == null then continue
+						print "Automatic Dangling on state {self.number} {self.name} for token {t}:"
+						print "\treduce: {ri}"
+						print "\tshift:  {si}"
+						if si != csi then
+							print "\tcore shift: {csi}"
+						end
+						a.remove(ri)
+					end
+				end
+				if a.is_empty then
+					guarded_reduce.keys.remove(t)
+				else
+					print "SHIFT/REDUCE Conflict on state {self.number} {self.name} for token {t}:"
+					for i in a do print "\treduce: {i}"
+					for i in guarded_shift[t] do print "\tshift:  {i}"
+				end
 			end
 		end
+	end
+
+	# Return `i` and all other items of the state that expands, directly or undirectly, to `i`
+	fun back_expand(i: Item): Set[Item]
+	do
+		var res = new ArraySet[Item]
+		var todo = [i]
+		res.add(i)
+		while not todo.is_empty do
+			var x = todo.pop
+			if x.pos > 0 then continue
+			var p = x.alt.prod
+			for y in items do
+				if y.next != p then continue
+				if res.has(y) then continue
+				res.add(y)
+				todo.add(y)
+			end
+		end
+		return res
 	end
 end
 

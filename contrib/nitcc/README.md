@@ -61,7 +61,7 @@ For the parser (and grammar and LR)
 [ ] Opportunistic
 [ ] Precedence
 [ ] Separator
-[ ] Dangling
+[X] Dangling (automatic, so mitigate the SLR limitations)
 [X] simple transformation
 [x] simple inlining
 
