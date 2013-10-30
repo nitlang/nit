@@ -1,1 +1,1 @@
-Error: Conflicting tokens: s a
+Error: Conflicting tokens: a s
