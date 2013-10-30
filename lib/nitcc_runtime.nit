@@ -86,7 +86,7 @@ abstract class Parser
 			error.text = token.text
 			error.token = token
 		end
-		error.error_tree.items.add_all(node_stack)
+		error.error_tree.children.add_all(node_stack)
 		error.expected = state.error_msg
 		node_stack.clear
 		node_stack.add error
@@ -303,7 +303,7 @@ abstract class Node
 	# The name of the node (as used in the grammar file)
 	fun node_name: String do return class_name
 
-	# A point of view on the direct childrens of the node
+	# A point of view on the direct children of the node
 	fun children: SequenceRead[nullable Node] is abstract
 
 	# Visit all the children of the node with the visitor `v`
@@ -449,11 +449,10 @@ end
 # A hogeneous sequence of node, used to represent unbounded lists (and + modifier)
 class Nodes[T: Node]
 	super Node
-	redef fun children do return items
-	var items = new Array[T]
+	redef var children = new Array[T]
 end
 
-# A production with a specific, named and statically typed childrens
+# A production with a specific, named and statically typed children
 class NProd
 	super Node
 	redef var children: SequenceRead[nullable Node] = new NProdChildren(self)

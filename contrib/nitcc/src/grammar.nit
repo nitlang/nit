@@ -788,10 +788,10 @@ private class Generator
 
 		if alt.name.has_suffix("+_more") then
 			add "\t\tvar prod = n0"
-			add "\t\tn0.items.add(n1)"
+			add "\t\tn0.children.add(n1)"
 		else if alt.name.has_suffix("+_one") then
 			add "\t\tvar prod = new {alt.prod.acname}"
-			add "\t\tprod.items.add(n0)"
+			add "\t\tprod.children.add(n0)"
 		else
 			alt.make_codes
 			var cpt = 0
