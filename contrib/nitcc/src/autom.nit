@@ -360,7 +360,6 @@ class Automaton
 				end
 			end
 		end
-			print '2'
 
 		for s1 in states do for s2 in states do
 			if distincts[s1].has(s2) then continue
