@@ -387,6 +387,8 @@ class Automaton
 					f.write("{token.name.escape_to_c}\\n")
 				end
 				f.write("\"")
+			else
+				f.write(",label=\"\"")
 			end
 			f.write("];\n")
 			var outs = new HashMap[State, Array[nullable TSymbol]]
