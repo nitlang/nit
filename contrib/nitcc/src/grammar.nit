@@ -988,31 +988,41 @@ class LRState
 				print "REDUCE/REDUCE Conflict on state {self.number} {self.name} for token {t}:"
 				for i in a do print "\treduce: {i}"
 			else if guarded_shift.has_key(t) then
-				for ri in a.to_a do for si in guarded_shift[t] do
-					if lookahead(ri).has(si) then
-						var p = ri.alt.prod
-						var csi: nullable Item = null
-						for bsi in back_expand(si) do
-							if bsi.alt.prod == p then
-								csi = bsi
-								break
-							end
+				var ri = a.first
+				var confs = new Array[Item]
+				var ress = new Array[String]
+				var g = guarded_shift[t]
+				for si in lookahead(ri) do
+					if si.next != t then continue
+					if not g.has(si) then
+						confs.add(si)
+						continue
+					end
+					var p = ri.alt.prod
+					var csi: nullable Item = null
+					for bsi in back_expand(si) do
+						if bsi.alt.prod == p then
+							csi = bsi
+							break
 						end
-						if csi == null then continue
-						print "Automatic Dangling on state {self.number} {self.name} for token {t}:"
-						print "\treduce: {ri}"
-						print "\tshift:  {si}"
-						if si != csi then
-							print "\tcore shift: {csi}"
-						end
-						a.remove(ri)
+					end
+					if csi == null then
+						confs.add(si)
+						continue
+					end
+					ress.add "\tshift:  {si}"
+					if si != csi then
+						ress.add "\tcore shift: {csi}"
 					end
 				end
-				if a.is_empty then
+				if confs.is_empty then
+					print "Automatic Dangling on state {self.number} {self.name} for token {t}:"
+					print "\treduce: {ri}"
+					for r in ress do print r
 					guarded_reduce.keys.remove(t)
 				else
 					print "SHIFT/REDUCE Conflict on state {self.number} {self.name} for token {t}:"
-					for i in a do print "\treduce: {i}"
+					print "\treduce: {ri}"
 					for i in guarded_shift[t] do print "\tshift:  {i}"
 				end
 			end
