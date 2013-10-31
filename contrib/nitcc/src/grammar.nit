@@ -42,8 +42,14 @@ class Gram
 				if a == last then res.append(" ;\n") else res.append(" |\n")
 			end
 			if p.is_nullable then res.append "\t// is nullable\n"
-			if not p.firsts.is_empty then res.append "\t// firsts: {p.firsts.join(" ")}\n"
-			if not p.afters.is_empty then res.append "\t// afters: {p.afters.join(" ")}\n"
+			if not p.firsts.is_empty then
+				res.append "\t// firsts:\n"
+				for x in p.firsts do res.append "\t//   {x}\n"
+			end
+			if not p.afters.is_empty then
+				res.append "\t// afters:\n"
+				for x in p.afters do res.append "\t//   {x}\n"
+			end
 		end
 		return res.to_s
 	end
@@ -501,12 +507,20 @@ class LRAutomaton
 			res.add "s{s.number} {s.name}\n"
 			res.add "\tCORE\n"
 			for i in s.core do
-				res.add "\t\t{s.item_to_s(i)}\n"
+				res.add "\t\t{i}\n"
+				if i.next != null then continue
+				for i2 in s.lookahead(i) do
+					res.add "\t\t\t{i2}\n"
+				end
 			end
 			res.add "\tOTHER ITEMS\n"
 			for i in s.items do
 				if s.core.has(i) then continue
-				res.add "\t\t{s.item_to_s(i)}\n"
+				res.add "\t\t{i}\n"
+				if i.next != null then continue
+				for i2 in s.lookahead(i) do
+					res.add "\t\t\t{i2}\n"
+				end
 			end
 			res.add "\tTRANSITIONS {s.outs.length}\n"
 			for t in s.outs do
@@ -548,12 +562,12 @@ class LRAutomaton
 		for s in states do
 			f.write "s{s.number} [label=\"{s.number} {s.name.escape_to_dot}|"
 			for i in s.core do
-				f.write "{s.item_to_s(i).escape_to_dot}\\l"
+				f.write "{i.to_s.escape_to_dot}\\l"
 			end
 			f.write("|")
 			for i in s.items do
 				if s.core.has(i) then continue
-				f.write "{s.item_to_s(i).escape_to_dot}\\l"
+				f.write "{i.to_s.escape_to_dot}\\l"
 			end
 			f.write "\""
 			if not s.is_lr0 then
@@ -914,13 +928,6 @@ class LRState
 	fun lookahead(i: Item): Set[Item]
 	do
 		return i.alt.prod.afters
-	end
-
-	fun item_to_s(i: Item): String
-	do
-		var l = lookahead(i)
-		if l.is_empty then return i.to_s
-		return "{i} \{ {l.join(" ")} \}"
 	end
 
 	# Set of all reductions
