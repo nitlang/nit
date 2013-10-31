@@ -1,3 +1,4 @@
-NParserError@(1:2-1:2)=''
-Nodes
+Start
+  p
+    a@(1:1-1:2)='a'
   Eof@(1:2-1:2)=''
