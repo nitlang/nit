@@ -101,4 +101,5 @@ elem =
 	{str:} str |
 	{star:} elem '*' |
 	{ques:} elem '?' |
-	{plus:} elem '+' ;
+	{plus:} elem '+' |
+	{empty:} 'Empty' ;
