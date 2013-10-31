@@ -144,7 +144,7 @@ p_text.new_alt("re_ch_dec", t_ch_dec)
 
 p_par.new_alt("par", t_kw, p_ign, p_rej, p_prods)
 
-p_ign.new_alt("ign", t_kw, t_id, t_semi)
+p_ign.new_alt("ign", t_kw, p_elem_list, t_semi)
 
 p_rej.new_alt("rej", t_kw, p_elem_list, t_semi)
 

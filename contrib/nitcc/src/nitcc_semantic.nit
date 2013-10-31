@@ -66,6 +66,19 @@ class CollectNameVisitor
 			nfa2.tag_accept(t)
 			nfa.absorb(nfa2)
 		end
+
+		if not v2.ignoreds.is_empty then
+			var ign = new Token("Ignored")
+			var nfa2 = new Automaton.empty
+			for t in v2.ignoreds do
+				assert t isa Token
+				var nfa3 = t.build_nfa
+				nfa2.alternate(nfa3)
+			end
+			nfa2.tag_accept(ign)
+			nfa.absorb(nfa2)
+		end
+
 	end
 
 	redef fun visit(n) do n.accept_collect_prod(self)
@@ -88,6 +101,9 @@ private class CheckNameVisitor
 
 	# Is the alternative transformed, for the alternative
 	var trans = false
+
+	# Known ignored tokens
+	var ignoreds = new Array[Element]
 
 	# Known rejected tokens
 	var rejecteds = new Array[Element]
@@ -232,35 +248,23 @@ redef class Nre_id
 end
 
 redef class Nign
-	# The named element
-	var elem: nullable Element
-
 	redef fun accept_check_name_visitor(v) do
-		var id = children[1].as(Nid)
-		var name = id.text
-		if not v.v1.names.has_key(name) then
-			print "{id.position.to_s} Error: unknown name {name}"
-			exit(1)
-			abort
-		end
-		var node = v.v1.names[name]
-		var elem: nullable Element
-		if node isa Nprod then
-			print "{id.position.to_s} Error: cannot ignore a production"
-			exit(1)
-			abort
-		else if node isa Nexpr then
-			elem = node.token
-			if elem == null then
-				elem = new Token("Ignored")
-				elem.nexpr = node
-				v.v1.gram.tokens.add(elem)
-				node.token = elem
+		# Add elements to the ignored list
+		v.elems = v.ignoreds
+		super
+		for e in v.elems do
+			if e isa Production then
+				print "Error: cannot ignore {e}, it is a production"
+				exit(1)
+				abort
+			else if e isa Token then
+				# The token was build and registered during the visit
+				# So, unregister then, the bit Ignred token will be build later
+				v.v1.gram.tokens.remove(e)
+			else
+				abort
 			end
-		else
-			abort
 		end
-		self.elem = elem
 	end
 end
 
@@ -410,13 +414,23 @@ redef class Nelem
 	do
 		assert self.elem == null
 		self.elem = elem
-		if elem isa Token and v.rejecteds.has(elem) then
-			if pos != null then
-				print "{pos} Error: {elem.name} is already a rejected token."
-			else
-				print "Error: {elem.name} is already a rejected token."
+		if elem isa Token then
+			if v.ignoreds.has(elem) then
+				if pos != null then
+					print "{pos} Error: {elem.name} is already an ignored token."
+				else
+					print "Error: {elem.name} is already an ignored token."
+				end
+				exit(1)
 			end
-			exit(1)
+			if v.rejecteds.has(elem) then
+				if pos != null then
+					print "{pos} Error: {elem.name} is already a rejected token."
+				else
+					print "Error: {elem.name} is already a rejected token."
+				end
+				exit(1)
+			end
 		end
 		v.elems.push(elem)
 	end
