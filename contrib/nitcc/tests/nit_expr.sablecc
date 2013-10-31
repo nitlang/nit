@@ -1,0 +1,11 @@
+Grammar nit_expr;
+Parser
+e =
+	e '[' e ']' |
+	'[' e ']' |
+	'[' e '..' e '[' |
+	'[' e '..' e ']' |
+	'id' e |
+	'id';
+	
+	

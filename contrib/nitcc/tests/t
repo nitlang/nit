@@ -1,0 +1,139 @@
+#!/bin/bash
+
+# This file is part of Nit ( http://nitlanguage.org ).
+#
+# See the NOTICE file distributed with this work for copyright information.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# This program is used to perform regression tests of nitcc.
+
+NITCC=../src/nitcc
+NITC=../../../bin/nitc
+
+mkdir alt out 2>/dev/null
+
+if test "x$#" = "x0"
+then
+        echo usage: `basename $0` [-v] grammar-files*
+        exit
+fi
+
+
+verbose=false
+stop=false
+while [ $stop = false ]; do
+        case $1 in
+                -v) verbose=true; shift;;
+                *) stop=true
+        esac
+done
+
+# empty tap output
+tap="tap.output"
+>"$tap"
+tapcount=0
+
+differ() {
+	tapcount=$((tapcount + 1))
+        r="$1"
+        if test \! -f "sav/$r"
+        then
+                if test -s "out/$r"
+                then
+                        echo "[***no sav***] cp 'out/$r' sav/"
+                        test $verbose = true && { cat "out/$r" ; echo ; }
+			echo >>"$tap" "not ok $tapcount - $name # TODO no sav"
+                else
+                        echo "[0K]"
+			echo >>"$tap" "ok $tapcount - $name"
+                fi
+        elif diff "sav/$r" "out/$r" >/dev/null
+        then
+                echo "[OK]"
+		echo >>"$tap" "ok $tapcount - $name"
+        else
+                echo "[******failed******] diff -u {sav,out}/$r"
+                test $verbose = true && { diff -u "sav/$r" "out/$r" ; echo ; }
+		echo >>"$tap" "not ok $tapcount - $name"
+        fi
+}
+
+for f in "$@"
+do
+        for a in "$f" `./alterner.pl $f`
+        do
+                cla=""
+		langname=""
+                echo -n "* $a: "
+		bn=`basename "$a" .sablecc`
+                res="$bn".res
+                $NITCC "$a" >"out/$bn.nitcc.log" 2>&1
+                if test $? != 0
+                then
+                        echo -n "!nitcc "
+		else
+			t=`grep -o '[^ ]*_test_parser' < "out/$bn.nitcc.log"`
+			if test -f "${t}.nit"
+			then
+				echo -n ". "
+				$NITC "${t}.nit" >/dev/null 2>&1
+				if test $? != 0
+				then
+					echo -n "!nitc "
+				else
+					echo -n ". "
+					cla="${t}"
+					langname="${t/_test_parser}"
+				fi
+			else
+				echo -n "!res "
+				echo
+				tapcount=$((tapcount + 1))
+				echo >>"$tap" "not ok $tapcount - $a # TODO no res"
+				continue
+			fi
+		fi
+
+		grep -i "error" "out/$bn.nitcc.log" > "out/$res"
+		name="$a"
+                differ $res
+
+                if test \! -z $cla
+                then
+                        bf=`basename "$f" .sablecc`
+                        for i in "$bf".input*
+                        do
+                                test -f $i || { echo "   - no input: $i" ; continue ; }
+                                ni=${i#$bf}
+                                resi="$bn$ni".res
+				rm "$langname.ast.out" 2>/dev/null
+                                echo -n "  - $i: "
+                                ./"$cla" "$i" > "out/$bn.$ni.log"
+                                if test $? != 0
+                                then
+                                        echo -n "!run "
+                                else
+                                        echo -n ". "
+                                fi
+
+				cp "$langname.ast.out" "out/$resi"
+				name="$a $i"
+                                differ "$resi"
+                        done
+                fi
+        done
+done
+
+echo >>"$tap" "1..$tapcount"
+#prove --formatter=TAP::Formatter::JUnit /bin/cat :: tap.output > tap.xml

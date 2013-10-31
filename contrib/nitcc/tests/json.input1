@@ -1,0 +1,42 @@
+{"albums": [
+    {
+        "id": "1",
+        "title": "Hide your heart",
+        "artist": "Bonnie Tyler",
+        "instock": false,
+        "price": 9.9,
+        "year": 1988
+    },
+    {
+        "id": "2",
+        "title": "Greatest Hits",
+        "artist": "Dolly Parton",
+        "instock": true,
+        "price": 9.9,
+        "year": 1982
+    },
+    {
+        "id": "3",
+        "title": "Still got the blues",
+        "artist": "Gary Moore",
+        "instock": true,
+        "price": 10.2,
+        "year": 1990
+    },
+    {
+        "id": "4",
+        "title": "Eros",
+        "artist": "Eros Ramazzotti",
+        "instock": true,
+        "price": 9.9,
+        "year": 1997
+    },
+    {
+        "id": "5",
+        "title": "One night only",
+        "artist": "Bee Gees",
+        "instock": false,
+        "price": 10.9,
+        "year": 1998
+    }
+]}

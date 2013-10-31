@@ -1,0 +1,5 @@
+Grammar lalr;
+Parser
+p = q 'a' | r 'b' ;
+q = 'x' ;
+r = 'x';

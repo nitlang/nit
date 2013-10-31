@@ -1,0 +1,16 @@
+*.dot
+*_parser.nit
+*_lexer.nit
+*_test_parser
+*.concrete_grammar.txt
+*.lr.txt
+tests/alt
+tests/out
+tests/tap.output
+
+nitcc_parser_gen
+nitcc0
+nitcc1
+nitcc
+calc
+minilang

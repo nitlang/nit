@@ -1,0 +1,5 @@
+Grammar not_lalr;
+Parser
+p = 'a' x 'a' | 'a' y 'b' | 'b' y 'a' | 'b' x 'b' ;
+x = 'a';
+y = 'a';

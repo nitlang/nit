@@ -1,0 +1,11 @@
+Grammar priorite_declaree;
+Lexer
+  letter = 'a'..'z';
+  digit = '0'..'9';
+  identifier = letter(letter|digit)*;
+  hexinteger = (digit|'a'..'f')+ Except identifier;
+  blank = ' ' | #9 | #10 | #13;
+Parser
+  Ignored blank;
+  p = t*;
+  t = identifier | hexinteger;

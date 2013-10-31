@@ -1,0 +1,28 @@
+a=1+2;
+a=a*3;
+print(a-4);
+println();
+
+f = 1;
+fn = 0;
+while (f < 500) {
+        t = f;
+        f = f + fn;
+        fn = t;
+}
+print("le plus petit nombre de Fibbonacci > 500 est ");
+print(f);
+println();
+
+print("Plus ou moins ? (hint la reponse est 42)");
+println();
+goal = 42;
+lu = -1;
+while (lu != goal) {
+        print("Votre choix: ");
+        lu = read();
+        if (lu > goal) { print("c'est plus petit."); println(); }
+        if (lu < goal) { print("c'est plus grand."); println(); }
+}
+print("C'est bon.");
+println();
