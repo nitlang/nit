@@ -62,16 +62,7 @@ class CollectNameVisitor
 
 		# Build the NFA automaton
 		for t in gram.tokens do
-			var nexpr = t.nexpr
-			var nfa2
-			if nexpr == null then
-				nfa2 = new Automaton.epsilon
-				for c in t.text.as(not null) do
-					nfa2.concat(new Automaton.atom(c.ascii))
-				end
-			else
-				nfa2 = nexpr.build_nfa
-			end
+			var nfa2 = t.build_nfa
 			nfa2.tag_accept(t)
 			nfa.absorb(nfa2)
 		end
@@ -436,6 +427,26 @@ redef class Token
 	var nexpr: nullable Nexpr
 	# The associated text (if any, ie defined in the parser part)
 	var text: nullable String
+
+	# Build a NFA according to nexpr or text
+	# Does not tag it!
+	fun build_nfa: Automaton
+	do
+		var nexpr = self.nexpr
+		if nexpr != null then
+			assert self.text == null
+			return nexpr.build_nfa
+		end
+		var text = self.text
+		if text != null then
+			var nfa = new Automaton.epsilon
+			for c in text.as(not null) do
+				nfa.concat(new Automaton.atom(c.ascii))
+			end
+			return nfa
+		end
+		abort
+	end
 end
 
 redef class Nnelem
