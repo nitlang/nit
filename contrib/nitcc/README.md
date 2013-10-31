@@ -31,56 +31,59 @@ The sub-directory `tests/` contains regression tests.
 
 ## Features (aka TODO list)
 
-[X] command line tool (`nitcc`)
-[X] Grammar syntax of SableCC4 (with pieces of SableCC3)
-[X] Generates a Lexer
-[X] Generates a SLR parser
-[ ] Generates a LALR parser
-[X] Generates classes for the AST and utils
+ - [x] command line tool (`nitcc`)
+ - [x] Grammar syntax of SableCC4 (with pieces of SableCC3)
+ - [x] Generates a Lexer
+ - [x] Generates a SLR parser
+ - [ ] Generates a LALR parser
+ - [x] Generates classes for the AST and utils
 
 For the tool (and the code)
 
-[X] usable
-[X] bootstrap itself (see `nitcc.sablecc`)
+ - [x] usable
+ - [x] bootstrap itself (see `nitcc.sablecc`)
 
-For the lexer (and regexp, NFA en DFA)
+For the lexer (and regexp, NFA, and DFA)
 
-[X] Any
-[X] interval of characters and subtraction of characters
-[X] implicit priorities (by inclusion of languages)
-[X] Except and And
-[X] Shortest and Longest (but dummy semantic without lookahead)
-[X] efficient implementation of intervals
-[X] DFA minimization
+ - [x] Any
+ - [x] interval of characters and subtraction of characters
+ - [x] implicit priorities (by inclusion of languages)
+ - [x] Except and And
+ - [x] Shortest and Longest (but dummy semantic without lookahead)
+ - [x] efficient implementation of intervals
+ - [x] DFA minimization
 
 For the parser (and grammar and LR)
 
-[X] Modifiers (`?`, `*`, `+`)
-[X] Ignored
-[X] Rejected
-[X] Empty (but not mandatory)
-[ ] Opportunistic
-[ ] Precedence
-[ ] Separator
-[X] Dangling (automatic, so mitigate the SLR limitations)
-[X] simple transformation
-[x] simple inlining
+ - [x] Modifiers (`?`, `*`, `+`)
+ - [x] Ignored
+ - [x] Rejected
+ - [x] Empty (but not mandatory)
+ - [ ] Opportunistic
+ - [ ] Precedence
+ - [ ] Separator
+ - [x] Dangling (automatic, so mitigate the SLR limitations)
+ - [x] simple transformation (unchecked)
+ - [x] simple inlining (non automatic, except for `?` and `*`)
 
 For the AST (generated classes, utils and their API)
 
-[X] Common runtime-library `nitcc_runtime.nit`
-[X] Terminal nodes; see `NToken`.
-[X] Heterogeneous non-terminal nodes: named fields; see `NProd`.
-[X] Homogeneous nodes for lists (`+` and `*`); see `Nodes`.
-[X] Visitor design pattern; see `Visitor`.
-[X] Syntactic and lexical errors; see `Nerror`.
-[X] positions of tokens in the input stream; see `Position`
+ - [x] Common runtime-library `nitcc_runtime.nit`
+ - [x] Terminal nodes; see `NToken`.
+ - [x] Heterogeneous non-terminal nodes with named fields; see `NProd`.
+ - [x] Homogeneous non-terminal nodes for lists (`+` and `*`); see `Nodes`.
+ - [x] Visitor design pattern; see `Visitor`.
+ - [x] Syntactic and lexical errors; see `NError`.
+ - [x] positions of tokens in the input stream; see `Position`
+ - [ ] positions of non-terminal nodes.
+ - [ ] API for the *input source*
+ - [ ] sane API to invoke/initialize the parser (and the lexer)
 
 ## BUGS and limitations
 
 * Limited error checking; bad grammars can produce uncompilable, or worse buggy, nit code.
 * The SLR automaton is not very expressive; do not except to parse big and complex language like Nit or Java.
-* The generated Nit code is inefficient and large; do not except to parse big and complex language like Nit or Java.
-* No unicode.
+* The generated Nit code is inefficient and large; even if you get an acceptable grammar, do not except to parse efficiently big and complex language like Nit or Java.
+* No real unicode support.
 * Advanced features of SableCC4 are not planed.
 
