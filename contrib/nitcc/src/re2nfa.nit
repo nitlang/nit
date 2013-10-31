@@ -24,11 +24,16 @@ redef class Node
 		print inspect
 		abort
 	end
+
+	# The real value of the string
+	fun value: String do
+		print inspect
+		abort
+	end
 end
 
 redef class Nstr
-	# The real value of the string
-	fun value: String do return text.substring(1, text.length-2).unescape_nit
+	redef fun value: String do return text.substring(1, text.length-2).unescape_nit
 	redef fun make_rfa: Automaton
 	do
 		var a = new Automaton.epsilon
@@ -42,8 +47,7 @@ redef class Nstr
 end
 
 redef class Nch_dec
-	# The real value of the char
-	fun value: String do return text.substring_from(1).to_i.ascii.to_s
+	redef fun value: String do return text.substring_from(1).to_i.ascii.to_s
 	redef fun make_rfa: Automaton
 	do
 		var a = new Automaton.atom(self.value.first.ascii)
@@ -208,8 +212,8 @@ end
 redef class Nre_class
 	redef fun make_rfa: Automaton
 	do
-		var c1 = children[0].as(Nstr).value
-		var c2 = children[3].as(Nstr).value
+		var c1 = children[0].children[0].value
+		var c2 = children[3].children[0].value
 		if c1.length != 1 or c2.length != 1 then
 			print "Classes only works on single char"
 			exit(1)

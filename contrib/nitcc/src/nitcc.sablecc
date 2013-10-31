@@ -62,12 +62,14 @@ re3 {-> re} =
 	{shortest:} 'Shortest' '(' re ')' |
 	{longest:} 'Longest' '(' re ')' |
 	{id:} id |
-	{str:} str |
 	{par:} '(' re ')' |
-	{class:} str '.' '.' str |
+	{class:} text '.' '.' text |
 	{any:} 'Any' |
-	{ch_dec:} ch_dec ;
+	{text:} text ;
 
+text {-> re} =
+	{str:} str |
+	{ch_dec:} ch_dec ;
 
 parser_part = 'Parser' ign? rej? prod*;
 
@@ -98,7 +100,7 @@ elem_list =
 
 elem =
 	{id:} id |
-	{str:} str |
+	{str:} text |
 	{star:} elem '*' |
 	{ques:} elem '?' |
 	{plus:} elem '+' |

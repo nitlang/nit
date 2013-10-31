@@ -500,7 +500,7 @@ end
 
 redef class Nelem_str
 	redef fun accept_check_name_visitor(v) do
-		var str = children.first.as(Nstr)
+		var str = children.first.children.first.as(NToken)
 		var text = str.value
 		var name = str.text
 		var elem: nullable Element
