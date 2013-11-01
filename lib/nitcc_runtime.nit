@@ -366,7 +366,7 @@ abstract class Node
 end
 
 private class DephCollection
-	super NaiveCollection[Node]
+	super Collection[Node]
 	var node: Node
 	redef fun iterator do return new DephIterator([node].iterator)
 end
