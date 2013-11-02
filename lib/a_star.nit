@@ -60,19 +60,19 @@ end
 
 # General graph node
 class Node
-	type E: Node
+	type N: Node
 
 	# parent graph
-	var graph: Graph[E, Link[E]]
+	var graph: Graph[N, Link[N]]
 
-	init(graph: Graph[E, Link[E]])
+	init(graph: Graph[N, Link[N]])
 	do
 		self.graph = graph
 		graph.add_node(self)
 	end
 
 	# adjacent nodes
-	var links: Set[Link[E]] = new HashSet[Link[E]]
+	var links: Set[Link[N]] = new HashSet[Link[N]]
 
 	# used to check if node has been searched in one pathfinding
 	private var last_pathfinding_evocation: Int = 0
@@ -83,17 +83,17 @@ class Node
 
 	# source node
 	# lifetime limited to evocation of path_to
-	private var best_source: nullable E = null
+	private var best_source: nullable N = null
 
 	# is in frontier or buckets
 	# lifetime limited to evocation of path_to
 	private var open: Bool = false
 
 	# Heuristic, to redef
-	protected fun cost_to(other: E): Int do return 1
+	protected fun cost_to(other: N): Int do return 1
 
 	# Main functionnality, returns path from `self` to `dest`
-	fun path_to(dest: Node, max_cost: Int, context: PathContext[E, Link[E]]): nullable Path[E]
+	fun path_to(dest: Node, max_cost: Int, context: PathContext[N, Link[N]]): nullable Path[N]
 	do
 		var cost: Int = 0
 
@@ -145,7 +145,7 @@ class Node
 			else if frontier_node == dest then
 				debug "picked {frontier_node}, is destination"
 
-				var path = new Path[E](cost)
+				var path = new Path[N](cost)
 
 				while frontier_node != self do
 					path.nodes.unshift(frontier_node)
@@ -189,11 +189,11 @@ class Node
 
 	# Find closes node with matching caracteristic
 	# TODO remove closures
-	fun find_closest(max_to_search: Int): nullable E !with(n: E): Bool
+	fun find_closest(max_to_search: Int): nullable N !with(n: N): Bool
 	do
 		if with(self) then return self
 
-		var frontier = new List[E]
+		var frontier = new List[N]
 		graph.pathfinding_current_evocation += 1
 		var current_evocation = graph.pathfinding_current_evocation
 

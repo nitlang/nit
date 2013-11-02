@@ -9,11 +9,11 @@ import a_star
 class NamedNode
 	super Node
 
-	redef type E: NamedNode
+	redef type N: NamedNode
 
 	var name: String
 
-	init(graph: Graph[E, Link[E]], name: String)
+	init(graph: Graph[N, Link[N]], name: String)
 	do
 		self.name = name
 		super
