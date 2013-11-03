@@ -296,3 +296,13 @@ redef interface Object
 
 	private fun intern_poll( in_fds : Array[Int], out_fds : Array[Int] ) : nullable Int is extern import Array::length, Array::[], nullable Object as ( Int ), Int as nullable
 end
+
+# Stream to a String. Mainly used for compatibility with OStream type and tests.
+class StringOStream
+	super OStream
+
+	private var content = new Array[String]
+	redef fun to_s do return content.to_s
+	redef fun is_writable do return true
+	redef fun write(str) do content.add(str)
+end
