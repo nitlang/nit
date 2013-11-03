@@ -63,16 +63,16 @@ class Node
 	type N: Node
 
 	# parent graph
-	var graph: Graph[N, Link[N]]
+	var graph: Graph[N, Link]
 
-	init(graph: Graph[N, Link[N]])
+	init(graph: Graph[N, Link])
 	do
 		self.graph = graph
 		graph.add_node(self)
 	end
 
 	# adjacent nodes
-	var links: Set[Link[N]] = new HashSet[Link[N]]
+	var links: Set[Link] = new HashSet[Link]
 
 	# used to check if node has been searched in one pathfinding
 	private var last_pathfinding_evocation: Int = 0
@@ -93,7 +93,7 @@ class Node
 	protected fun cost_to(other: N): Int do return 1
 
 	# Main functionnality, returns path from `self` to `dest`
-	fun path_to(dest: Node, max_cost: Int, context: PathContext[N, Link[N]]): nullable Path[N]
+	fun path_to(dest: Node, max_cost: Int, context: PathContext): nullable Path[N]
 	do
 		var cost: Int = 0
 
@@ -222,8 +222,9 @@ class Node
 	end
 end
 
-class Link[N:Node]
-	type L: Link[N]
+class Link
+	type N: Node
+	type L: Link
 
 	var graph: Graph[N, L]
 
@@ -241,12 +242,9 @@ class Link[N:Node]
 end
 
 # General graph
-class Graph[N:Node, L:Link[N]]
+class Graph[N: Node, L: Link]
 	var nodes: Set[N] = new HashSet[N]
 	var links: Set[L] = new HashSet[L]
-
-	#var max_link_cost: Int = 0
-	#var max_heuristic_cost: Int = 0
 
 	fun add_node(node: N): N
 	do
@@ -258,8 +256,6 @@ class Graph[N:Node, L:Link[N]]
 	fun add_link(link: L): L
 	do
 		links.add(link)
-
-		#if link.cost > max_link_cost then max_link_cost = link.cost
 
 		link.from.links.add(link)
 
@@ -296,22 +292,26 @@ class Path[N]
 end
 
 # Context related to an evocation of pathfinding
-class PathContext[N: Node, L: Link[N]]
+class PathContext
+	type N: Node
+	type L: Link
+
 	var graph: Graph[N, L]
 
 	# Worst cost of all the link's costs
 	fun worst_cost: Int is abstract
 
 	# Get cost of a link
-	fun cost(link: Link[N]): Int is abstract
+	fun cost(link: Link): Int is abstract
 
 	# Is that link blocked?
-	fun is_blocked(link: Link[N]): Bool is abstract
+	fun is_blocked(link: Link): Bool is abstract
 
 	# Heuristic
 	fun heuristic_cost(a, b: Node): Int is abstract
-end
 
+	fun worst_heuristic_cost: Int is abstract
+end
 
 #
 ### Additionnal classes, may be useful
@@ -319,26 +319,29 @@ end
 
 # Simple context with constant cost on each links
 # Warning: A* is not optimize for such a case
-class ConstantPathContext[N: Node, L: Link[N]]
-	super PathContext[N, L]
+class ConstantPathContext
+	super PathContext
 
 	redef fun worst_cost do return 1
 	redef fun cost(l) do return 1
 	redef fun is_blocked(l) do return false
-	redef fun heuristic_cost(a, b) do return 1 # TODO
+	redef fun heuristic_cost(a, b) do return 0
+	redef fun worst_heuristic_cost do return 0
 end
 
-class WeightedPathContext[N: Node, L: WeigthedLink[N]]
-	super PathContext[N,L]
+class WeightedPathContext
+	super PathContext
 
-	init(graph: Graph[N,L])
+	redef type L: WeightedLink
+
+	init(graph: Graph[N, L])
 	do
 		super
 
 		var worst_cost = 0
 		for l in graph.links do
 			var cost = l.weight
-			if cost > worst_cost then worst_cost = cost
+			if cost >= worst_cost then worst_cost = cost + 1
 		end
 		self.worst_cost = worst_cost
 	end
@@ -350,15 +353,16 @@ class WeightedPathContext[N: Node, L: WeigthedLink[N]]
 		return l.weight
 	end
 	redef fun is_blocked(l) do return false
-	redef fun heuristic_cost(a, b) do return 10 # TODO
+	redef fun heuristic_cost(a, b) do return 0
+	redef fun worst_heuristic_cost do return 0
 end
 
-class WeigthedLink[N: Node]
-	super Link[N]
+class WeightedLink
+	super Link
 
 	var weight: Int
 
-	init(graph: Graph[N,L], from, to: N, weight: Int)
+	init(graph: Graph[N, L], from, to: N, weight: Int)
 	do
 		super
 
