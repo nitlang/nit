@@ -35,13 +35,13 @@
 #    var nd = new Node(graph)
 #    var ne = new Node(graph)
 #
-#    var lab = new WeigthedLink[Node](graph, na, nb, 2)
-#    var lac = new WeigthedLink[Node](graph, na, nc, 3)
-#    var lbd = new WeigthedLink[Node](graph, nb, nd, 1)
-#    var lcd = new WeigthedLink[Node](graph, nc, nd, 3)
-#    var lde = new WeigthedLink[Node](graph, nd, ne, 8)
+#    var lab = new WeightedLink(graph, na, nb, 2)
+#    var lac = new WeightedLink(graph, na, nc, 3)
+#    var lbd = new WeightedLink(graph, nb, nd, 1)
+#    var lcd = new WeightedLink(graph, nc, nd, 3)
+#    var lde = new WeightedLink(graph, nd, ne, 8)
 #
-#    var context = new WeightedPathContext[Node, WeigthedLink[Node]](graph)
+#    var context = new WeightedPathContext(graph)
 #
 #    var path = na.path_to(ne, 100, context)
 #    assert path != null else print "No possible path"
