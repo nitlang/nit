@@ -141,11 +141,13 @@ do
 end
 
 # Big weighted graph
+#
 #     a -2- b -1- f -1- g
 #    /     /       \   /
 #   3     1        4  1
 #  /     /         \ /
 # c -3- d -8- e -2- h -2- i -3- j
+#
 fun case_weighted_big
 do
 	var graph = new Graph[NamedNode,WeightedLink]

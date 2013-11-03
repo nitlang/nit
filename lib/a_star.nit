@@ -100,10 +100,8 @@ class Node
 		var nbr_buckets = context.worst_cost + 1 # graph.max_heuristic_cost
 		var buckets = new Array[List[Node]].with_capacity(nbr_buckets)
 
-		for i in [0 .. nbr_buckets [ do
-			var l = new List[Node]
-			buckets.add(l)
-			#print l.hash
+		for i in [0 .. nbr_buckets[ do
+			buckets.add(new List[Node])
 		end
 
 		graph.pathfinding_current_evocation += 1
