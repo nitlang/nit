@@ -58,6 +58,12 @@ article:hover > .signature button.nitdoc-ui-copy, button.nitdoc-ui-copy.zeroclip
 	visibility: visible;
 }
 
+/* Search page field */
+
+.nitdoc-ui-searchpage-field {
+	width: 750px;
+}
+
 /* Side bar boxes text filtering */
 
 .nitdoc-ui-filter {
