@@ -12,7 +12,7 @@
 # another product.
 
 # This module introduces the standard array structure.
-# It also implements two other abstract collections : ArrayMap and ArraySet
+# It also implements two other abstract collections : ArrayMap and ArraySettest
 module array
 
 import abstract_collection
