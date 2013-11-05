@@ -601,6 +601,7 @@ class ArrayMapKeys[K: Object, E]
 	var map: ArrayMap[K, E]
 	redef fun count(k) do if self.has(k) then return 1 else return 0
 	redef fun first do return self.map._items.first.first
+# newcomment
 	redef fun has(k) do return self.map.index(k) >= 0
 	redef fun has_only(k) do return (self.has(k) and self.length == 1) or self.is_empty
 	redef fun is_empty do return self.map.is_empty
