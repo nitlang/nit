@@ -1,5 +1,7 @@
 *.bak
+*.swp
 *~
+.project
 EIFGENs
 
 .nit_compile*
@@ -40,6 +42,7 @@ lib/*.dot
 tests/alt
 tests/errlist
 tests/out
+tests/*.xml
 
 *.stub.nit.[ch]
 
