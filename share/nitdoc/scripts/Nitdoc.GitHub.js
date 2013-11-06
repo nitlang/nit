@@ -29,9 +29,10 @@ Nitdoc.GitHub = {}; // Declare Nitdoc.GitHub submodule
 // Load GitHub UI
 $(document).ready(function() {
 	//FIXME base should be choosen by user
-	var origin = $("body").attr("data-github-origin");
-	if(origin) {
-		Nitdoc.GitHub.UI.init(origin);
+	var upstream = $("body").attr("data-github-upstream");
+	var basesha1 = $("body").attr("data-github-base-sha1");
+	if(upstream && basesha1) {
+		Nitdoc.GitHub.UI.init(upstream, basesha1);
 	}
 });
 
@@ -43,22 +44,23 @@ Nitdoc.GitHub.UI = function() {
 	var user = false; // logged user
 	var origin;
 
-	var init = function(originStr) {
-		console.log("init GitHub module (origin: "+ originStr +")");
+	var init = function(upstream, basesha1) {
+		console.log("init GitHub module (upstream: "+ upstream +", base: " + basesha1 + ")");
 
 		// parse origin
-		var parts = originStr.split(":");
+		var parts = upstream.split(":");
 		origin = {
 			user: parts[0],
 			repo: parts[1],
-			branch: parts[2]
+			branch: parts[2],
+			sha: basesha1
 		};
 
 		// check local session
 		if(localStorage.user) {
 			var session = JSON.parse(localStorage.user);
 			var user = tryLogin(session.login, Base64.decode(session.password), session.repo, session.branch);
-			if(!user) {
+			if(!user.login) {
 				console.log("Session found but authentification failed");
 				localStorage.clear();
 			}
@@ -68,7 +70,7 @@ Nitdoc.GitHub.UI = function() {
 
 		// activate ui
 		Nitdoc.GitHub.LoginBox.init("nav.main ul");
-		if(user) {
+		if(user && user.login) {
 			Nitdoc.GitHub.LoginBox.displayLogout(origin, user);
 			activate(user);
 		} else {
@@ -90,12 +92,11 @@ Nitdoc.GitHub.UI = function() {
 		saveSession(user);
 		
 		// check local storage synchro with branch
-		if(localStorage.latestCommit != user.latest.sha) {
-			console.log("Latest commit changed: cleaned cache");
+		if(localStorage.base != origin.sha) {
+			console.log("Base changed: cleaned cache");
 			localStorage.requests = "[]";
-			localStorage.latestCommit = user.latest.sha;
+			localStorage.base = origin.sha;
 		}
-		console.log("Latest commit sha: " + localStorage.latestCommit);
 
 		attachCommentEvents();
 		reloadComments();
@@ -118,14 +119,17 @@ Nitdoc.GitHub.UI = function() {
 	var tryLogin = function(login, password, repo, branch) {
 		var user = new Nitdoc.GitHub.User(login, password, repo, branch);
 		if(!Nitdoc.GitHub.API.login(user)) {
-			return false;
+			return "error:login";
 		}
-		// get lastest commit
-		var latest = Nitdoc.GitHub.API.getLastCommit(user);
-		if(!latest || !latest.sha) {
-			return false;
+		// check github profile fields
+		if(!user.infos.name || !user.infos.email) {
+			return "error:profile";
 		}
-		user.latest = latest;
+		// check correct base commit
+		var commit = Nitdoc.GitHub.API.getCommit(user, origin.sha);
+		if(!commit || !commit.sha) {
+			return "error:sha";
+		}
 		return user;
 	}
 
@@ -136,7 +140,7 @@ Nitdoc.GitHub.UI = function() {
 			//FIXME this should be done by nitdoc
 			var baseComment = $(this).parent().prev();
 			var location = Nitdoc.GitHub.Utils.parseLocation(baseComment.attr("data-comment-location"));
-			var locString = "../" + location.path + ":" + location.lstart + "," + location.tabpos + "--" + location.lstart + ",0";
+			var locString = location.path + ":" + location.lstart + "," + location.tabpos + "--" + location.lstart + ",0";
 			baseComment.attr("data-comment-location", locString);
 			$(this).html("<a class='nitdoc-github-editComment noComment'>add comment</a> for ");
 			$(this).addClass("nitdoc-github-editComment");
@@ -291,7 +295,7 @@ Nitdoc.GitHub.UI = function() {
 		5. create the pull request
 	*/
 	var pushChanges = function(infos) {
-		var baseTree = Nitdoc.GitHub.API.getTree(user, localStorage.latestCommit);
+		var baseTree = Nitdoc.GitHub.API.getTree(user, origin.sha);
 		if(!baseTree.sha) {
 			Nitdoc.GitHub.ModalBox.open("Unable to locate base tree!", baseTree.status + ": " + baseTree.statusText, true);
 			return false;
@@ -309,13 +313,13 @@ Nitdoc.GitHub.UI = function() {
 			return false;
 		}
 		console.log("New tree: " + newTree.url);
-		var newCommit = Nitdoc.GitHub.API.createCommit(user, infos.message, localStorage.latestCommit, newTree);
+		var newCommit = Nitdoc.GitHub.API.createCommit(user, infos.message, baseTree.sha, newTree);
 		if(!newCommit.sha) {
 			Nitdoc.GitHub.ModalBox.open("Unable to create new commit!", newCommit.status + ": " + newCommit.statusText, true);
 			return false;
 		}
 		console.log("New commit: " + newCommit.url);
-		var pullRequest = Nitdoc.GitHub.API.createPullRequest(user, infos.message.split("\n\n")[0], infos.message, origin, newCommit.sha);
+		var pullRequest = Nitdoc.GitHub.API.createPullRequest(user, infos.message.split("\n\n")[0], "Pull request from Nitdoc", origin, newCommit.sha);
 		if(!pullRequest.number) {
 			Nitdoc.GitHub.ModalBox.open("Unable to create pull request!", pullRequest.status + ": " + pullRequest.statusText, true);
 			return false;
@@ -462,7 +466,7 @@ Nitdoc.GitHub.API = function() {
 
 	// build signedoff user default signature
 	var getSignedOff = function(user) {
-		return user.infos.name + " &lt;" + user.infos.email + "&gt;";
+		return user.infos.name + " <" + user.infos.email + ">";
 	}
 
 	// get the branches list from a repo
@@ -489,18 +493,18 @@ Nitdoc.GitHub.API = function() {
 	/* GitHub commits */
 
 	// get the latest commit on `branchName`
-	var getLastCommit = function(user) {
+	var getCommit = function(user, sha) {
 		var res = false;
 		$.ajax({
 			beforeSend: function (xhr) {
 				xhr.setRequestHeader ("Authorization", user.auth);
 			},
 			type: "GET",
-			url: "https://api.github.com/repos/" + user.login + "/" + user.repo + "/git/refs/heads/" + user.branch,
+			url: "https://api.github.com/repos/" + user.login + "/" + user.repo + "/git/commits/" + sha,
 			async: false,
 			dataType: 'json',
 			success: function(response) {
-				res = response.object;
+				res = response;
 			},
 			error: function(response) {
 				res = response;
@@ -688,7 +692,7 @@ Nitdoc.GitHub.API = function() {
 
 	var api = {
 		login: login,
-		getLastCommit: getLastCommit,
+		getCommit: getCommit,
 		getBranches: getBranches,
 		getTree: getTree,
 		createBlob: createBlob,
@@ -871,8 +875,12 @@ Nitdoc.GitHub.LoginBox = function() {
 					Nitdoc.GitHub.ModalBox.open("Sign in error", "Please enter your GitHub username, password, repository and branch.", true);
 				} else {
 					var user = Nitdoc.GitHub.UI.tryLogin(login, password, repo, branch);
-					if(!user) {
+					if(user == "error:login") {
 						Nitdoc.GitHub.ModalBox.open("Sign in error", "The username, password, repo or branch you entered is incorrect.", true);
+					} else if(user == "error:sha") {
+						Nitdoc.GitHub.ModalBox.open("Base commit not found", "The provided GitHub repository must contains the base commit '" + Nitdoc.GitHub.UI.getOrigin().sha + "'", true);
+					} else if(user == "error:profile") {
+						Nitdoc.GitHub.ModalBox.open("Incomplete GitHub profile", "Please set your public name and email in your <a href='https://github.com/settings/profile'>GitHub profile</a>.<br/><br/>Your public profile informations are used to sign-off your commits.", true);
 					} else {
 						Nitdoc.GitHub.UI.activate(user);
 						var origin = Nitdoc.GitHub.UI.getOrigin();
@@ -1043,12 +1051,14 @@ Nitdoc.GitHub.ModalBox = function() {
 			$("#nitdoc-github-modal").addClass("nitdoc-github-error");
 		}
 
-		$("#nitdoc-github-modal").css({
+		$("#nitdoc-github-modal")
+		.css({
 			top: "50%",
 			marginTop: -($("#nitdoc-github-modal").outerHeight() / 2) + "px",
 			left: "50%",
 			marginLeft: -($("#nitdoc-github-modal").outerWidth() / 2) + "px"
-		});
+		})
+		.find("button.nitdoc-github-button").focus();
 	}
 
 	// Close modal box instance
@@ -1123,7 +1133,7 @@ Nitdoc.GitHub.CommitBox = function() {
 				.append(
 					$(document.createElement("label"))
 					.attr("for", "nitdoc-github-commit-signedoff")
-					.append("Signed-off-by: " + infos.user.signedOff)
+					.text("Signed-off-by: " + infos.user.signedOff)
 				)
 			).append(
 				$(document.createElement("div"))
@@ -1151,12 +1161,14 @@ Nitdoc.GitHub.CommitBox = function() {
 			)
 		);
 
-		$("#nitdoc-github-commitBox").css({
+		$("#nitdoc-github-commitBox")
+		.css({
 			top: "50%",
 			marginTop: -($("#nitdoc-github-commitBox").outerHeight() / 2) + "px",
 			left: "50%",
 			marginLeft: -($("#nitdoc-github-commitBox").outerWidth() / 2) + "px"
-		});
+		})
+		.find("#nitdoc-github-commit-message").focus();
 	}
 
 	// Close commit box instance
@@ -1178,20 +1190,19 @@ Nitdoc.GitHub.CommitBox = function() {
  */
 
 Nitdoc.GitHub.Utils = function() {
-	// Extract infos from string location "../lib/standard/collection/array.nit:457,1--458,0"
-	//FIXME this should be done by nitdoc
+	// Extract infos from string location "lib/standard/collection/array.nit:457,1--458,0"
 	var parseLocation = function(location) {
 		var parts = location.split(":");
 		var loc = new Object();
 		loc.origin = location;
-		loc.path = parts[0].substr(3, parts[0].length);
+		loc.path = parts[0];
 		loc.lstart = parseInt(parts[1].split("--")[0].split(",")[0]);
 		loc.tabpos = parseInt(parts[1].split("--")[0].split(",")[1]);
 		loc.lend = parseInt(parts[1].split("--")[1].split(",")[0]);
 		return loc;
 	}
 
-	// Meld modified comment into file content
+	// Meld modified comment into file conten
 	var mergeComment = function(fileContent, comment, location) {
 		// replace comment in file content
 		var res = new String();
