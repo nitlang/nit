@@ -99,8 +99,9 @@ abstract class AbstractString
 
 	# Is this string prefixed by `prefix`?
 	#
-	#     assert "abcd".has_prefix("ab")	     ==  true
-	#     assert "abcbc".has_prefix("bc")	     ==  false
+	#     assert "abcd".has_prefix("ab")           ==  true
+	#     assert "abcbc".has_prefix("bc")          ==  false
+	#     assert "ab".has_prefix("abcd")           ==  false
 	fun has_prefix(prefix: String): Bool do return has_substring(prefix,0)
 
 	# Is this string suffixed by `suffix`?
