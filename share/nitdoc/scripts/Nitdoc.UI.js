@@ -149,12 +149,60 @@ Nitdoc.UI = function() {
 		}
 	}
 
+	// Allow user to filter sidebar box entries by name
+	var enableSearchPageField = function(filterSelector) {
+		var div = $(document.createElement("div"))
+		.addClass("nitdoc-ui-searchpage-filter")
+		.append(
+			$(document.createElement("input"))
+			.addClass("nitdoc-ui-searchpage-field")
+			.addClass("nitdoc-ui-filter-field-notused")
+			.attr("type", "text")
+			.attr("value",	"filter...")
+			.keyup(function() {
+				var box = $(this).parents(".content.fullpage").find("article.filterable");
+				var value = $(this).val();
+				box.find("ul li:not(:icontains('" + value + "'))").hide();
+				box.find("ul li:icontains('" + value + "')").show();
+			})
+			.focusout(function() {
+				if($(this).val() == "") {
+					$(this).addClass("nitdoc-ui-filter-field-notused");
+					$(this).val("filter...");
+				}
+			})
+			.focusin(function() {
+				if($(this).val() == "filter...") {
+					$(this).removeClass("nitdoc-ui-filter-field-notused");
+					$(this).val("");
+				}
+			})
+		);
+		$(filterSelector).after(div);
+		preloadSearchPageField();
+	}
+
+	// Prealod filter using search query
+	var preloadSearchPageField = function() {
+		var anchor = Nitdoc.Utils.extractAnchor(document.location.hash);
+		if(!anchor || anchor.indexOf("q=") == -1) return;
+
+		var query = anchor.substring(2);
+		if(!query) return;
+
+		$(".nitdoc-ui-searchpage-field")
+		.val(query)
+		.removeClass("nitdoc-ui-notused")
+		.trigger("keyup");
+	}
+
 	// Public interface
 	var ui = {
 		enableFolding: enableFolding,
 		enableCopyToClipboard: enableCopyToClipboard,
 		enableSidebarTextFilters: enableSidebarTextFilters,
-		enableSidebarTypeFilters: enableSidebarTypeFilters
+		enableSidebarTypeFilters: enableSidebarTypeFilters,
+		enableSearchPageField: enableSearchPageField
 	};
 
 	return ui;
@@ -166,6 +214,7 @@ $(document).ready(function() {
 	Nitdoc.UI.enableCopyToClipboard(".signature");
 	Nitdoc.UI.enableSidebarTextFilters("nav.filterable h3");
 	Nitdoc.UI.enableSidebarTypeFilters("nav.filterable");
+	Nitdoc.UI.enableSearchPageField(".content.fullpage h1:contains('Search')");
 });
 
 /*
@@ -198,5 +247,3 @@ $.expr[':'].icontains = function(obj, index, meta, stack){
 	return (obj.textContent.replace(/\[[0-9]+\]/g, "") || obj.innerText.replace(/\[[0-9]+\]/g, "") || jQuery(obj).text().replace(/\[[0-9]+\]/g, "") || '').toLowerCase().indexOf(meta[3].toLowerCase()) >= 0;
 };
 
-//rename file
-//commit

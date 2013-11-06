@@ -31,12 +31,11 @@ doc/stdlib/index.html: bin/nitdoc
 	@echo '***************************************************************'
 	@echo '* Generate doc for NIT standard library                       *'
 	@echo '***************************************************************'
-	bin/nitdoc lib/*.nit $$(find lib/* -maxdepth 0 -type d ) -d doc/stdlib \
+	bin/nitdoc lib/*.nit $$(find lib/*/*.nit -maxdepth 0 -type f ) -d doc/stdlib \
 		--custom-title "Nit Standard Library" \
 		--custom-menu-items "<li><a href=\"http://nitlanguage.org/\">Nitlanguage.org</a></li>" \
 		--custom-overview-text "<p>Documentation for the standard library of Nit<br/>Version $$(git describe)<br/>Date: $$(git show --format="%cd" | head -1)</p>" \
 		--custom-footer-text "Nit standard library. Version $$(git describe)." \
-		--github nit \
 		--source "https://github.com/privat/nit/blob/$$(git show --format="%H" | head -1)/%f#L%l-%L"
 
 doc/nitc/index.html: bin/nitdoc
@@ -45,16 +44,17 @@ doc/nitc/index.html: bin/nitdoc
 		--custom-menu-items "<li><a href=\"http://nitlanguage.org/\">Nitlanguage.org</a></li>" \
 		--custom-overview-text "<p>Documentation for the Nit compiler and tools<br/>Version $$(git describe)<br/>Date: $$(git show --format="%cd" | head -1)</p>" \
 		--custom-footer-text "Nit compiler. Version $$(git describe)." \
-		--github nit \
 		--source "https://github.com/privat/nit/blob/$$(git show --format="%H" | head -1)/%f#L%l-%L"
 
 doc/newmodel/index.html: bin/nitdoc
-	bin/nitdox src/nit.nit src/nitmetrics.nit src/nitg.nit src/nitx.nit src/nitunit.nit src/nitlight.nit src/ni_nitdoc.nit src/dbgcli.nit src/netdbg.nit -d doc/newmodel \
+	bin/nitdoc src/nit.nit src/nitmetrics.nit src/nitg.nit src/nitx.nit src/nitunit.nit src/nitlight.nit src/dbgcli.nit src/netdbg.nit -d doc/newmodel \
 		--custom-title "Nit New Model" \
 		--custom-menu-items "<li><a href=\"http://nitlanguage.org/\">Nitlanguage.org</a></li>" \
 		--custom-overview-text "<p>Documentation for the Nit tools based on the new metamodel<br/>Version $$(git describe)<br/>Date: $$(git show --format="%cd" | head -1)</p>" \
 		--custom-footer-text "Nit new metamodel. Version $$(git describe)." \
-		--github-origin "privat:nit:master" \
+		--github-upstream "privat:nit:master" \
+		--github-base-sha1 "$$(git show | head -1 | cut -c8-)" \
+		--github-gitdir "." \
 		--source "https://github.com/privat/nit/blob/$$(git show --format="%H" | head -1)/%f#L%l-%L"
 
 clean:
