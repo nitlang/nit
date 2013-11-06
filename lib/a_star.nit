@@ -89,15 +89,13 @@ class Node
 	# lifetime limited to evocation of path_to
 	private var open: Bool = false
 
-	# Heuristic, to redef
-	protected fun cost_to(other: N): Int do return 1
 
 	# Main functionnality, returns path from `self` to `dest`
 	fun path_to(dest: Node, max_cost: Int, context: PathContext): nullable Path[N]
 	do
 		var cost: Int = 0
 
-		var nbr_buckets = context.worst_cost + 1 # graph.max_heuristic_cost
+		var nbr_buckets = context.worst_cost + context.worst_heuristic_cost + 1
 		var buckets = new Array[List[Node]].with_capacity(nbr_buckets)
 
 		for i in [0 .. nbr_buckets[ do
@@ -172,10 +170,11 @@ class Node
 						peek_node.best_cost_up_to = cost + context.cost(link)
 						peek_node.best_source = frontier_node
 
-						var at_bucket = buckets[(peek_node.best_cost_up_to+peek_node.cost_to(dest)) % nbr_buckets]
+						var est_cost = peek_node.best_cost_up_to+context.heuristic_cost(link.from, peek_node)
+						var at_bucket = buckets[est_cost % nbr_buckets]
 						at_bucket.add(peek_node)
 
-						debug "u putting {peek_node} at {peek_node.best_cost_up_to+peek_node.cost_to(dest)} -> {(peek_node.best_cost_up_to+peek_node.cost_to(dest)) % nbr_buckets} {at_bucket.hash}, {cost}+{context.cost(link)}"
+						debug "u putting {peek_node} at {est_cost} -> {est_cost % nbr_buckets} {at_bucket.hash}, {cost}+{context.cost(link)}"
 					end
 				end
 			end
