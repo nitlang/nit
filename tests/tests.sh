@@ -216,17 +216,17 @@ find_nitc()
 	recent=`ls -t ../src/$name ../src/$name_[0-9] ../bin/$name ../c_src/$name 2>/dev/null | head -1`
 	if [[ "x$recent" == "x" ]]; then
 		if [ -n "$tap" ]; then
-			echo "not ok - find engine $name"
-			echo "Bail out! Could not find engine $name, aborting"
+			echo "not ok - find binary for $engine"
+			echo "Bail out! Could not find binary for engine $engine, aborting"
 		else
-			echo "Could not find engine $name, aborting"
+			echo "Could not find binary for engine $engine, aborting"
 		fi
 		exit 1
 	fi
 	if [ -n "$tap" ]; then
-		echo "ok - find engine $name: $recent"
+		echo "ok - find binary for $engine: $recent $OPT"
 	else
-		echo "Using engine $name from: $recent"
+		echo "Find binary for engine $engine: $recent $OPT"
 	fi
 	NITC=$recent
 }
@@ -442,7 +442,7 @@ if [ -n "$tap" ]; then
 	exit
 fi
 
-echo "engine: $engine"
+echo "engine: $engine ($enginebinname $OPT)"
 echo "ok: " `echo $ok | wc -w` "/" `echo $ok $nok $nos $todos | wc -w`
 
 if [ -n "$nok" ]; then
