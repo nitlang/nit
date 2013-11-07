@@ -252,9 +252,10 @@ done
 enginebinname=$engine
 case $engine in
 	nitc) ;;
-	nitg) OPT="--global $OPT";;
+	nitg) engine=nitg-s; enginebinname=nitg; OPT="--separate $OPT";;
 	nitg-s) enginebinname=nitg; OPT="--separate $OPT";;
 	nitg-e) enginebinname=nitg; OPT="--erasure $OPT";;
+	nitg-g) enginebinname=nitg; OPT="--global $OPT";;
 	nit) engine=niti ;;
 	niti) enginebinname=nit ;;
 esac
