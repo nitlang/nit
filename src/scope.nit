@@ -148,7 +148,6 @@ private class ScopeVisitor
 	# Display an error on toolcontext if a label with the same name is masked.
 	private fun make_escape_mark(nlabel: nullable ALabel, for_loop: Bool): EscapeMark
 	do
-		assert named_or_for_loop: nlabel != null or for_loop
 		var name: nullable String
 		if nlabel != null then
 			name = nlabel.n_id.text
@@ -181,7 +180,7 @@ private class ScopeVisitor
 		else
 			for scope in scopes do
 				var res = scope.escapemark
-				if res != null and res.for_loop then
+				if res != null then
 					return res
 				end
 			end
@@ -311,9 +310,7 @@ redef class ADoExpr
 	var escapemark: nullable EscapeMark
 	redef fun accept_scope_visitor(v)
 	do
-		if n_label != null then
-			self.escapemark = v.make_escape_mark(n_label, false)
-		end
+		self.escapemark = v.make_escape_mark(n_label, false)
 		v.enter_visit_block(n_block, self.escapemark)
 	end
 end

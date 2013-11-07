@@ -30,11 +30,11 @@ do
 		#alt3#break label l4
 		#alt4#break
 		#alt5#continue label l1
+		#alt8#continue
 		end
 		if maybe then break label l1
 		4.output
-	end label l2#alt6#
-	#alt6#end label l1
+	end label l2#alt6# end label l1
 	5.output
 end label l1
 6.output
