@@ -93,7 +93,7 @@ class Node
 	# Main functionnality, returns path from `self` to `dest`
 	fun path_to(dest: Node, max_cost: Int, context: PathContext): nullable Path[N]
 	do
-		var cost: Int = 0
+		var cost = 0
 
 		var nbr_buckets = context.worst_cost + context.worst_heuristic_cost + 1
 		var buckets = new Array[List[Node]].with_capacity(nbr_buckets)
@@ -110,7 +110,7 @@ class Node
 		self.last_pathfinding_evocation = graph.pathfinding_current_evocation
 		self.best_cost_up_to = 0
 
-		while cost < max_cost do
+		loop
 			var frontier_node: nullable Node = null
 
 			var bucket_searched: Int = 0
@@ -122,6 +122,7 @@ class Node
 				if current_bucket.is_empty then # move to next bucket
 					debug "b {cost} {cost % nbr_buckets} {buckets[cost % nbr_buckets].hash}"
 					cost += 1
+					if cost > max_cost then return null
 					bucket_searched += 1
 
 					if bucket_searched > nbr_buckets then break
@@ -179,9 +180,6 @@ class Node
 				end
 			end
 		end
-
-		# costs over max
-		return null
 	end
 
 	# Find closes node with matching caracteristic
