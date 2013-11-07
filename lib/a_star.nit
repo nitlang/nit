@@ -299,13 +299,13 @@ class PathContext
 	fun worst_cost: Int is abstract
 
 	# Get cost of a link
-	fun cost(link: Link): Int is abstract
+	fun cost(link: L): Int is abstract
 
 	# Is that link blocked?
-	fun is_blocked(link: Link): Bool is abstract
+	fun is_blocked(link: L): Bool is abstract
 
 	# Heuristic
-	fun heuristic_cost(a, b: Node): Int is abstract
+	fun heuristic_cost(a, b: N): Int is abstract
 
 	fun worst_heuristic_cost: Int is abstract
 end
@@ -346,7 +346,6 @@ class WeightedPathContext
 	redef var worst_cost: Int
 
 	redef fun cost(l) do
-		assert l isa L
 		return l.weight
 	end
 	redef fun is_blocked(l) do return false
