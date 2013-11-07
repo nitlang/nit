@@ -894,6 +894,10 @@ redef class AForExpr
 			v.error(self, "Type Error: Expected method 'iterator' to return an Iterator of MapIterator type")
 			return
 		end
+
+		# anchor formal and virtual types
+		if mtype.need_anchor then mtype = v.anchor_to(mtype)
+
 		self.coltype = mtype.as(MClassType)
 
 		# get methods is_ok, next, item
