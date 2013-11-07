@@ -6,6 +6,7 @@ import a_star
 #	redef fun debug_a_star do return true
 #end
 
+# Simple node with a name
 class NamedNode
 	super Node
 
@@ -20,6 +21,74 @@ class NamedNode
 	end
 
 	redef fun to_s do return "node:{name}"
+end
+
+# Node with a name and position
+class PositionedNamedNode
+	super NamedNode
+
+	redef type N: PositionedNamedNode
+
+	var x: Int
+	var y: Int
+
+	init(graph: Graph[N, Link], name: String, x, y: Int)
+	do
+		super
+
+		self.x = x
+		self.y = y
+	end
+
+	redef fun to_s do return "{super}-at-({x},{y})"
+
+	fun dist_with(o: PositionedNamedNode): Int
+	do
+		var dx = o.x - x
+		var dy = o.y - y
+		var d2 = dx*dx + dy*dy
+		return d2.sqrt
+	end
+end
+
+# Link for nodes with a position
+class PositionedLink
+	super Link
+
+	redef type N: PositionedNamedNode
+end
+
+# Context for a graph with positions
+class PositionPathContext
+	super PathContext
+
+	redef type N: PositionedNamedNode
+	redef type L: PositionedLink
+
+	init(graph: Graph[N,L])
+	do
+		super
+
+		for l in graph.links do
+			var this_cost = cost(l)
+			if this_cost > worst_cost then worst_cost = this_cost
+		end
+	end
+
+	redef var worst_cost = 0
+
+	redef fun cost(link) do return link.from.dist_with(link.to)
+
+	redef fun is_blocked(link) do return false
+
+	redef fun heuristic_cost(a, b)
+	do
+		var cost = a.dist_with(b)
+		if cost > 100 then return 100
+		return cost
+	end
+
+	redef fun worst_heuristic_cost do return 100
 end
 
 fun print_path(path: nullable Path[NamedNode]) do if path == null then
@@ -140,7 +209,7 @@ do
 	print_path(path)
 end
 
-# Big weighted graph
+# "Big" weighted graph
 #
 #     a -2- b -1- f -1- g
 #    /     /       \   /
@@ -182,8 +251,49 @@ do
 	print_path(path)
 end
 
+# Double-edge graph with coordinates on nodes
+#
+# a--b--d--e
+#  \       |
+#   c------f
+#
+fun cases_with_positions_and_heuristic
+do
+	var graph = new Graph[PositionedNamedNode,PositionedLink]
+
+	var na = new PositionedNamedNode(graph, "a", 0, 0)
+	var nb = new PositionedNamedNode(graph, "b", 2, 0)
+	var nc = new PositionedNamedNode(graph, "c", 2, 2)
+	var nd = new PositionedNamedNode(graph, "d", 5, 0)
+	var ne = new PositionedNamedNode(graph, "e", 8, 0)
+	var nf = new PositionedNamedNode(graph, "f", 8, 2)
+
+	var lab = new PositionedLink(graph, na, nb)
+	var lac = new PositionedLink(graph, na, nc)
+	var lbd = new PositionedLink(graph, nb, nd)
+	var lde = new PositionedLink(graph, nd, ne)
+	var lef = new PositionedLink(graph, ne, nf)
+	var lcf = new PositionedLink(graph, nc, nf)
+
+	# inverted
+	var lba = new PositionedLink(graph, nb, na)
+	var lca = new PositionedLink(graph, nc, na)
+	var ldb = new PositionedLink(graph, nd, nb)
+	var led = new PositionedLink(graph, ne, nd)
+	var lfe = new PositionedLink(graph, nf, ne)
+	var lfc = new PositionedLink(graph, nf, nc)
+
+	var context = new PositionPathContext(graph)
+
+	print_path(na.path_to(nf, 100, context))
+	print_path(nf.path_to(na, 100, context))
+	print_path(nc.path_to(ne, 100, context))
+	print_path(nd.path_to(nc, 100, context))
+end
+
 case_simple
 case_failed
 case_weighted
 case_weighted_too_long
 case_weighted_big
+cases_with_positions_and_heuristic
