@@ -105,15 +105,19 @@ redef class ModelBuilder
 		var time0 = get_time
 		self.toolcontext.info("*** WRITING C ***", 1)
 
-		".nit_compile".mkdir
+		var compile_dir = ".nit_compile"
+		compile_dir.mkdir
+
+		var orig_dir=".." # FIXME only works if `compile_dir` is a subdirectory of cwd
 
 		var outname = self.toolcontext.opt_output.value
 		if outname == null then
 			outname = "{mainmodule.name}"
 		end
+		var outpath = orig_dir.join_path(outname).simplify_path
 
 		var hfilename = compiler.header.file.name + ".h"
-		var hfilepath = ".nit_compile/{hfilename}"
+		var hfilepath = "{compile_dir}/{hfilename}"
 		var h = new OFStream.open(hfilepath)
 		for l in compiler.header.decl_lines do
 			h.write l
@@ -131,8 +135,9 @@ redef class ModelBuilder
 			var i = 0
 			var hfile: nullable OFStream = null
 			var count = 0
-			var cfilename = ".nit_compile/{f.name}.0.h"
-			hfile = new OFStream.open(cfilename)
+			var cfilename = "{f.name}.0.h"
+			var cfilepath = "{compile_dir}/{cfilename}"
+			hfile = new OFStream.open(cfilepath)
 			hfile.write "#include \"{hfilename}\"\n"
 			for key in f.required_declarations do
 				if not compiler.provided_declarations.has_key(key) then
@@ -152,10 +157,11 @@ redef class ModelBuilder
 				if file == null or count > 10000  then
 					i += 1
 					if file != null then file.close
-					cfilename = ".nit_compile/{f.name}.{i}.c"
-					self.toolcontext.info("new C source files to compile: {cfilename}", 3)
+					cfilename = "{f.name}.{i}.c"
+					cfilepath = "{compile_dir}/{cfilename}"
+					self.toolcontext.info("new C source files to compile: {cfilepath}", 3)
 					cfiles.add(cfilename)
-					file = new OFStream.open(cfilename)
+					file = new OFStream.open(cfilepath)
 					file.write "#include \"{f.name}.0.h\"\n"
 					count = total_lines
 				end
@@ -175,16 +181,17 @@ redef class ModelBuilder
 
 		# Generate the Makefile
 
-		var makename = ".nit_compile/{mainmodule.name}.mk"
-		var makefile = new OFStream.open(makename)
+		var makename = "{mainmodule.name}.mk"
+		var makepath = "{compile_dir}/{makename}"
+		var makefile = new OFStream.open(makepath)
 
 		var cc_includes = ""
 		for p in cc_paths do
-			#p = "..".join_path(p)
+			p = orig_dir.join_path(p).simplify_path
 			cc_includes += " -I \"" + p + "\""
 		end
 		makefile.write("CC = ccache cc\nCFLAGS = -g -O2\nCINCL = {cc_includes}\nLDFLAGS ?= \nLDLIBS  ?= -lm -lgc\n\n")
-		makefile.write("all: {outname}\n\n")
+		makefile.write("all: {outpath}\n\n")
 
 		var ofiles = new Array[String]
 		# Compile each generated file
@@ -201,17 +208,18 @@ redef class ModelBuilder
 		# Compile each required extern body into a specific .o
 		for f in compiler.extern_bodies do
 			var basename = f.filename.basename(".c")
-			var o = ".nit_compile/{basename}.extern.o"
-			makefile.write("{o}: {f.filename}\n\t$(CC) $(CFLAGS) -D NONITCNI {f.cflags} -c -o {o} {f.filename}\n\n")
+			var o = "{basename}.extern.o"
+			var ff = orig_dir.join_path(f.filename).simplify_path
+			makefile.write("{o}: {ff}\n\t$(CC) $(CFLAGS) -D NONITCNI {f.cflags} -c -o {o} {ff}\n\n")
 			ofiles.add(o)
 		end
 
 		# Link edition
-		makefile.write("{outname}: {ofiles.join(" ")}\n\t$(CC) $(LDFLAGS) -o {outname} {ofiles.join(" ")} $(LDLIBS)\n\n")
+		makefile.write("{outpath}: {ofiles.join(" ")}\n\t$(CC) $(LDFLAGS) -o {outpath} {ofiles.join(" ")} $(LDLIBS)\n\n")
 		# Clean
 		makefile.write("clean:\n\trm {ofiles.join(" ")} 2>/dev/null\n\n")
 		makefile.close
-		self.toolcontext.info("Generated makefile: {makename}", 2)
+		self.toolcontext.info("Generated makefile: {makepath}", 2)
 
 		var time1 = get_time
 		self.toolcontext.info("*** END WRITING C: {time1-time0} ***", 2)
@@ -224,13 +232,13 @@ redef class ModelBuilder
 		self.toolcontext.info("*** COMPILING C ***", 1)
 		var makeflags = self.toolcontext.opt_make_flags.value
 		if makeflags == null then makeflags = ""
-		self.toolcontext.info("make -B -f {makename} -j 4 {makeflags}", 2)
+		self.toolcontext.info("make -B -C {compile_dir} -f {makename} -j 4 {makeflags}", 2)
 
 		var res
 		if self.toolcontext.verbose_level >= 3 then
-			res = sys.system("make -B -f {makename} -j 4 {makeflags} 2>&1")
+			res = sys.system("make -B -C {compile_dir} -f {makename} -j 4 {makeflags} 2>&1")
 		else
-			res = sys.system("make -B -f {makename} -j 4 {makeflags} 2>&1 >/dev/null")
+			res = sys.system("make -B -C {compile_dir} -f {makename} -j 4 {makeflags} 2>&1 >/dev/null")
 		end
 		if res != 0 then
 			toolcontext.error(null, "make failed! Error code: {res}.")
