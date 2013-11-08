@@ -32,6 +32,8 @@ redef class ToolContext
 	var opt_cc_path: OptionArray = new OptionArray("Set include path for C header files (may be used more than once)", "--cc-path")
 	# --make-flags
 	var opt_make_flags: OptionString = new OptionString("Additional options to make", "--make-flags")
+	# --compile-dir
+	var opt_compile_dir: OptionString = new OptionString("Directory used to generate temporary files", "--compile-dir")
 	# --hardening
 	var opt_hardening: OptionBool = new OptionBool("Generate contracts in the C code against bugs in the compiler", "--hardening")
 	# --no-shortcut-range
@@ -52,7 +54,7 @@ redef class ToolContext
 	redef init
 	do
 		super
-		self.option_context.add_option(self.opt_output, self.opt_no_cc, self.opt_make_flags, self.opt_hardening, self.opt_no_shortcut_range)
+		self.option_context.add_option(self.opt_output, self.opt_no_cc, self.opt_make_flags, self.opt_compile_dir, self.opt_hardening, self.opt_no_shortcut_range)
 		self.option_context.add_option(self.opt_no_check_covariance, self.opt_no_check_initialization, self.opt_no_check_assert, self.opt_no_check_autocast, self.opt_no_check_other)
 		self.option_context.add_option(self.opt_typing_test_metrics)
 	end
@@ -105,9 +107,10 @@ redef class ModelBuilder
 		var time0 = get_time
 		self.toolcontext.info("*** WRITING C ***", 1)
 
-		var compile_dir = ".nit_compile"
-		compile_dir.mkdir
+		var compile_dir = toolcontext.opt_compile_dir.value
+		if compile_dir == null then compile_dir = ".nit_compile"
 
+		compile_dir.mkdir
 		var orig_dir=".." # FIXME only works if `compile_dir` is a subdirectory of cwd
 
 		var outname = self.toolcontext.opt_output.value
