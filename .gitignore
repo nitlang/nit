@@ -36,6 +36,8 @@ c_src/*.o
 c_src/*.cksum
 c_src/nitc
 
+csrc2/
+
 lib/*.log
 lib/*.dot
 
