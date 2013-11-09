@@ -93,7 +93,7 @@ redef class Sequence[ E ]
 end
 
 redef class String
-	redef fun to_json_object import NativeString::to_s `{
+	redef fun to_json_object import NativeString.to_s `{
 		char *native_recv = String_to_cstring( recv );
 		return json_object_new_string( native_recv );
 	`}
@@ -121,7 +121,7 @@ redef class JsonObject
 	new `{ return json_object_new_object(); `}
 
 	# Add a key and value to the object
-	fun add( key : String, val : nullable JsonObject ) import String::to_cstring, nullable JsonObject as not nullable `{
+	fun add( key : String, val : nullable JsonObject ) import String.to_cstring, nullable JsonObject as not nullable `{
 		char* native_key;
 
 		native_key = String_to_cstring( key );
