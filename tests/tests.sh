@@ -83,47 +83,66 @@ function process_result()
 	NSOSO=""
 	SOSOF=""
 	NSOSOF=""
+	OLD=""
+	LIST=""
+	FIRST=""
 	echo >>$xml "<testcase classname='$pack' name='$description'>"
-	for sav in "sav/$engine/$pattern.res" "sav/$pattern.res" "sav/$pattern.sav"; do
+	#for sav in "sav/$engine/fixme/$pattern.res" "sav/$engine/$pattern.res" "sav/fixme/$pattern.res" "sav/$pattern.res" "sav/$pattern.sav"; do
+	for savdir in $savdirs; do
+		sav=$savdir/$pattern.res
 		compare_to_result "$pattern" "$sav"
-		case "$?" in
-			0)
-				;; # no file
-			1)
-				SAV="$sav" ;;
-			2)
-				SOSO="$sav" ;;
-			3)
-				NSAV="$sav";;
-		esac
-	done
-	for sav in "sav/$engine/fixme/$pattern.res" "sav/fixme/$pattern.res" "sav/$pattern.fail"; do
-		compare_to_result "$pattern" "$sav"
-		case "$?" in
-			0)
-				;; # no file
-			1)
-				FIXME="$sav" ;;
-			2)
+
+		case "$? $sav" in
+			0*)
+				continue;; # no file
+			1*/fixme/*)
+				OLD="$LIST"
+				FIXME="$sav"
+				;;
+			1*)
+				OLD="$LIST"
+				SAV="$sav"
+				;;
+			2*/fixme/*)
 				SOSOF="$sav" ;;
-			3)
-				NFIXME="$sav";;
+			2*)
+				SOSO="$sav" ;;
+			3*/fixme/*)
+				if [ -z "$FIRST" ]; then
+					NFIXME="$sav"
+					FIRST="$sav"
+				fi
+				;;
+			3*)
+				if [ -z "$FIRST" ]; then
+					NSAV="$sav"
+					FIRST="$sav"
+				fi
+				;;
 		esac
+		LIST="$LIST $sav"
 	done
+	OLD=`echo "$OLD" | sed -e 's/   */ /g' -e 's/^ //' -e 's/ $//'`
 	grep 'NOT YET IMPLEMENTED' "out/$pattern.res" >/dev/null
 	NYI="$?"
 	if [ -n "$SAV" ]; then
 		if [ -n "$tap" ]; then
 			echo "ok - $description"
-		elif [ -z "$FIXME" ]; then
-			echo "[ok] out/$pattern.res $SAV"
+		elif [ -n "$OLD" ]; then
+			echo "[*ok*] out/$pattern.res $SAV - but $OLD remains!"
+			echo >>$xml "<error message='ok out/$pattern.res - but $OLD remains'/>"
+			remains="$remains $OLD"
 		else
-			echo "[ok] out/$pattern.res $SAV - but $FIXME remains!"
+			echo "[ok] out/$pattern.res $SAV"
 		fi
 		ok="$ok $pattern"
 	elif [ -n "$FIXME" ]; then
 		if [ -n "$tap" ]; then
 			echo "not ok - $description # TODO expected failure"
+		elif [ -n "$OLD" ]; then
+			echo "[*fixme*] out/$pattern.res $FIXME - but $OLD remains!"
+			echo >>$xml "<error message='ok out/$pattern.res - but $OLD remains'/>"
+			remains="$remains $OLD"
 		else
 			echo "[fixme] out/$pattern.res $FIXME"
 		fi
@@ -251,13 +270,38 @@ while [ $stop = false ]; do
 done
 enginebinname=$engine
 case $engine in
-	nitc) ;;
-	nitg) engine=nitg-s; enginebinname=nitg; OPT="--separate $OPT";;
-	nitg-s) enginebinname=nitg; OPT="--separate $OPT";;
-	nitg-e) enginebinname=nitg; OPT="--erasure $OPT";;
-	nitg-g) enginebinname=nitg; OPT="--global $OPT";;
-	nit) engine=niti ;;
-	niti) enginebinname=nit ;;
+	nitc)
+		savdirs="sav/$engine/fixme/ sav/$engine/ sav/sav/ sav/"
+		;;
+	nitg)
+		engine=nitg-s;
+		enginebinname=nitg;
+		savdirs="sav/$engine/fixme/ sav/$engine/ sav/fixme/ sav/"
+		OPT="--separate $OPT"
+		;;
+	nitg-s)
+		enginebinname=nitg;
+		savdirs="sav/$engine/fixme/ sav/$engine/ sav/fixme/ sav/"
+		OPT="--separate $OPT"
+		;;
+	nitg-e)
+		enginebinname=nitg;
+		savdirs="sav/$engine/fixme/ sav/$engine/ sav/fixme/ sav/"
+		OPT="--erasure $OPT"
+		;;
+	nitg-g)
+		enginebinname=nitg;
+		savdirs="sav/$engine/fixme/ sav/$engine/ sav/fixme/ sav/"
+		OPT="--global $OPT"
+		;;
+	nit)
+		engine=niti
+		savdirs="sav/$engine/fixme/ sav/$engine/ sav/fixme/ sav/"
+		;;
+	niti)
+		enginebinname=nit
+		savdirs="sav/$engine/fixme/ sav/$engine/ sav/fixme/ sav/"
+		;;
 esac
 
 # The default nitc compiler
@@ -439,6 +483,7 @@ if [ -n "$tap" ]; then
 	echo "# not ok:" `echo $nok | wc -w`
 	echo "# no sav:" `echo $nos | wc -w`
 	echo "# todo/fixme:" `echo $todos | wc -w`
+	echo "# of sav that remains:" `echo $remains | wc -w`
 	exit
 fi
 
@@ -454,6 +499,9 @@ if [ -n "$nos" ]; then
 fi
 if [ -n "$todos" ]; then
 	echo "todo/fixme: $todos"
+fi
+if [ -n "$remains" ]; then
+	echo "sav that remains: $remains"
 fi
 
 # write $ERRLIST
