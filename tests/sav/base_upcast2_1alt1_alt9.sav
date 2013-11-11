@@ -1,2 +1,0 @@
-alt/base_upcast2_1alt1_alt9.nit:26,14--20: Warning: Expression is already a T since it is a C.
-alt/base_upcast2_1alt1_alt9.nit:35,22: Type error: expected B[Bool], got T
