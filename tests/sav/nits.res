@@ -1,4 +1,3 @@
-../src/syntax/mmbuilder.nit:998,8--28: Warning: Expression is already a AMethPropdef since it is a AInitPropdef.
 usage: nits [options] file...
   -W, --warn              Show warnings
   -q, --quiet             Do not show warnings

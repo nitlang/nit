@@ -14,10 +14,12 @@ usage: nitdoc [options] file...
   -d, --dir                Directory where doc is generated
   --source                 What link for source (%f for filename, %l for first line, %L for last line)
   --sharedir               Directory containing the nitdoc files
-  --no-dot                 Do not generate graphes with graphiviz
+  --no-dot                 Do not generate graphes with graphviz
   --private                Generate the private API
   --custom-title           Title displayed in the top of the Overview page and as suffix of all page names
   --custom-footer-text     Text displayed as footer of all pages
   --custom-overview-text   Text displayed as introduction of Overview page before the modules list
   --custom-menu-items      Items displayed in menu before the 'Overview' item (Each item must be enclosed in 'li' tags)
-  --github-origin          The branch where edited commits will be pulled into (ex: user:repo:branch)
+  --github-upstream        The branch where edited commits will be pulled into (ex: user:repo:branch)
+  --github-base-sha1       The sha1 of the base commit used to create pull request
+  --github-gitdir          The git working directory used to resolve path name (ex: /home/me/myproject/)
