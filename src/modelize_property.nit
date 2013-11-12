@@ -837,6 +837,10 @@ redef class ATypePropdef
 		if mprop == null then
 			var mvisibility = new_property_visibility(modelbuilder, nclassdef, self.n_visibility)
 			mprop = new MVirtualTypeProp(mclassdef, name, mvisibility)
+			for c in name do if c >= 'a' and c<= 'z' then
+				modelbuilder.warning(n_id, "Warning: lowercase in the virtual type {name}")
+				break
+			end
 			if not self.check_redef_keyword(modelbuilder, nclassdef, self.n_kwredef, false, mprop) then return
 		else
 			if not self.check_redef_keyword(modelbuilder, nclassdef, self.n_kwredef, true, mprop) then return
