@@ -35,13 +35,13 @@ private import more_collections
 
 redef class ToolContext
 	# Option --path
-	readable var _opt_path: OptionArray = new OptionArray("Set include path for loaders (may be used more than once)", "-I", "--path")
+	var opt_path: OptionArray = new OptionArray("Set include path for loaders (may be used more than once)", "-I", "--path")
 
 	# Option --only-metamodel
-	readable var _opt_only_metamodel: OptionBool = new OptionBool("Stop after meta-model processing", "--only-metamodel")
+	var opt_only_metamodel: OptionBool = new OptionBool("Stop after meta-model processing", "--only-metamodel")
 
 	# Option --only-parse
-	readable var _opt_only_parse: OptionBool = new OptionBool("Only proceed to parse step of loaders", "--only-parse")
+	var opt_only_parse: OptionBool = new OptionBool("Only proceed to parse step of loaders", "--only-parse")
 
 	redef init
 	do
