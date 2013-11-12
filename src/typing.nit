@@ -1006,7 +1006,11 @@ redef class AOrElseExpr
 
 		var t = v.merge_types(self, [t1, t2])
 		if t == null then
-			v.error(self, "Type Error: ambiguous type {t1} vs {t2}")
+			t = v.mmodule.object_type
+			if t2 isa MNullableType then
+				t = t.as_nullable
+			end
+			#v.error(self, "Type Error: ambiguous type {t1} vs {t2}")
 		end
 		self.mtype = t
 	end
