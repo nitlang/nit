@@ -25,8 +25,6 @@ import toolcontext
 import parser
 import phase
 
-import modelbuilder #FIXME useless
-
 redef class ToolContext
 	var simple_misc_analysis_phase: Phase = new SimpleMiscAnalysisPhase(self, null)
 end

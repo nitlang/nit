@@ -21,8 +21,6 @@ import parser
 import toolcontext
 import phase
 
-import modelbuilder #FIXME useless
-
 redef class ToolContext
 	var scope_phase: Phase = new ScopePhase(self, null)
 end
