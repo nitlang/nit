@@ -84,7 +84,7 @@ private class LocalVarInitVisitor
 
 	redef fun visit(n)
 	do
-		if n != null then n.accept_local_var_visitor(self)
+		n.accept_local_var_visitor(self)
 	end
 end
 

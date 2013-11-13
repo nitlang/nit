@@ -18,7 +18,7 @@ class A
 	fun is_int_null( ni : nullable Int ) : Bool is extern import Int as not nullable
 	fun is_a_null( na : nullable A ) : Bool is extern import A as not nullable
 
-	fun get_nullable_string( get_nulled : Bool ) : nullable String is extern import String::from_cstring, String as nullable
+	fun get_nullable_string( get_nulled : Bool ) : nullable String is extern import NativeString::to_s, String as nullable
 end
 
 var a = new A

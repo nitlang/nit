@@ -11,10 +11,9 @@
 # another product.
 
 # Introduce Hashmap and Hashset.
-package hash_collection
+module hash_collection
 
 import array
-import hash
 
 # A HashCollection is an array of HashNode[K] indexed by the K hash value
 private abstract class HashCollection[K: Object, N: HashNode[Object]]
@@ -44,7 +43,7 @@ private abstract class HashCollection[K: Object, N: HashNode[Object]]
 	# Return the node assosiated with the key
 	fun node_at(k: K): nullable N
 	do
-		# cache: `is' is used instead of `==' because it is a faster filter (even if not exact)
+		# cache: `is` is used instead of `==` because it is a faster filter (even if not exact)
 		if k is _last_accessed_key then return _last_accessed_node
 
 		var res = node_at_idx(index_at(k), k)
@@ -59,7 +58,7 @@ private abstract class HashCollection[K: Object, N: HashNode[Object]]
 		var c = _array[i]
 		while c != null do
 			var ck = c._key
-			if ck is k or ck == k then # prefilter with `is' because the compiler is not smart enought yet
+			if ck is k or ck == k then # prefilter with `is` because the compiler is not smart enought yet
 				break
 			end
 			c = c._next_in_bucklet
@@ -200,7 +199,7 @@ private abstract class HashNode[K: Object]
 end
 
 # A map implemented with a hash table.
-# Keys of such a map cannot be null and require a working `hash' method
+# Keys of such a map cannot be null and require a working `hash` method
 class HashMap[K: Object, V]
 	super Map[K, V]
 	super HashCollection[K, HashMapNode[K, V]]
@@ -401,8 +400,8 @@ class HashMapIterator[K: Object, V]
 	end
 end
 
-# A `Set' implemented with a hash table.
-# Keys of such a map cannot be null and require a working `hash' method
+# A `Set` implemented with a hash table.
+# Keys of such a map cannot be null and require a working `hash` method
 class HashSet[E: Object]
 	super Set[E]
 	super HashCollection[E, HashSetNode[E]]
@@ -446,7 +445,7 @@ class HashSet[E: Object]
 		enlarge(0)
 	end
 
-	# Build a list filled with the items of `coll'.
+	# Build a list filled with the items of `coll`.
 	init from(coll: Collection[E]) do
 		init
 		add_all(coll)

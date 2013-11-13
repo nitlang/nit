@@ -1,0 +1,8 @@
+Grammar re;
+Lexer
+a = 'a' Lookahead 'b'; //alt1 a = 'a'  Lookahead ('b'|'c');
+b = 'ab';
+blank = #10 | #13 | #32;
+Parser
+Ignored blank;
+t = a | b;

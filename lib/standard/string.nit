@@ -12,10 +12,9 @@
 # another product.
 
 # Basic manipulations of strings of characters
-package string
+module string
 
 intrude import collection # FIXME should be collection::array
-import hash
 
 `{
 #include <stdio.h>
@@ -31,14 +30,21 @@ abstract class AbstractString
 
 	readable private var _items: NativeString
 
+	# Access a character at `index` in the string.
+	#
+	#     assert "abcd"[2]         == 'c'
 	redef fun [](index) do return _items[index]
 
 	# Create a substring.
 	#
-	# "abcd".substring(1, 2) 	# --> "bc"
-	# "abcd".substring(-1, 2)	# --> "a"
-	# "abcd".substring(1, 0)     # --> ""
-	# "abcd".substring(2, 5)     # --> "cd"
+	#     assert "abcd".substring(1, 2)      ==  "bc"
+	#     assert "abcd".substring(-1, 2)     ==  "a"
+	#     assert "abcd".substring(1, 0)      ==  ""
+	#     assert "abcd".substring(2, 5)      ==  "cd"
+	#
+	# A `from` index < 0 will be replaced by 0.
+	# Unless a `count` value is > 0 at the same time.
+	# In this case, `from += count` and `count -= from`.
 	fun substring(from: Int, count: Int): String
 	do
 		assert count >= 0
@@ -57,21 +63,23 @@ abstract class AbstractString
 		end
 	end
 
-	# Create a substring from `self' beginning at the 'from' position
+	# Create a substring from `self` beginning at the `from` position
 	#
-	# "abcd".substring(1) 	# --> "bcd"
-	# "abcd".substring(-1)	# --> "abcd"
-	# "abcd".substring(2)     # --> "cd"
+	#     assert "abcd".substring_from(1)    ==  "bcd"
+	#     assert "abcd".substring_from(-1)   ==  "abcd"
+	#     assert "abcd".substring_from(2)    ==  "cd"
+	#
+	# As with substring, a `from` index < 0 will be replaced by 0
 	fun substring_from(from: Int): String
 	do
 		assert from < length
 		return substring(from, length - from)
 	end
 
-	# Does self have a substring 'str' starting from position 'pos
+	# Does self have a substring `str` starting from position `pos`?
 	#
-	# "abcd".has_substring("bc",1) 	# --> true
-	# "abcd".has_substring("bc",2) 	# --> false
+	#     assert "abcd".has_substring("bc",1)	     ==  true
+	#     assert "abcd".has_substring("bc",2)	     ==  false
 	fun has_substring(str: String, pos: Int): Bool
 	do
 		var itsindex = str.length - 1
@@ -89,36 +97,46 @@ abstract class AbstractString
 		return true
 	end
 
-	# Is this string prefixed by 'prefix'
+	# Is this string prefixed by `prefix`?
 	#
-	# "abc".is_prefix("abcd") 	# --> true
-	# "bc".is_prefix("abcd") 	# --> false
+	#     assert "abcd".has_prefix("ab")           ==  true
+	#     assert "abcbc".has_prefix("bc")          ==  false
+	#     assert "ab".has_prefix("abcd")           ==  false
 	fun has_prefix(prefix: String): Bool do return has_substring(prefix,0)
 
-	# Is this string suffixed by 'suffix'
+	# Is this string suffixed by `suffix`?
 	#
-	# "abcd".has_suffix("abc") 	# --> false
-	# "abcd".has_suffix("bcd") 	# --> true
+	#     assert "abcd".has_suffix("abc")	     ==  false
+	#     assert "abcd".has_suffix("bcd")	     ==  true
 	fun has_suffix(suffix: String): Bool do return has_substring(suffix, length - suffix.length)
 
-	# If `self' contains only digits, return the corresponding integer
+	# If `self` contains only digits, return the corresponding integer
+	#
+	#     assert "123".to_i        == 123
+	#     assert "-1".to_i         == -1
 	fun to_i: Int
 	do
 		# Shortcut
 		return to_s.to_cstring.atoi
 	end
 
-	# If `self' contains a float, return the corresponding float
+	# If `self` contains a float, return the corresponding float
+	#
+	#     assert "123".to_f        == 123.0
+	#     assert "-1".to_f         == -1.0
+	#     assert "-1.2e-3".to_f    == -0.0012
 	fun to_f: Float
 	do
 		# Shortcut
 		return to_s.to_cstring.atof
 	end
 
-	# If `self' contains only digits and alpha <= 'f', return the corresponding integer.
+	# If `self` contains only digits and alpha <= 'f', return the corresponding integer.
 	fun to_hex: Int do return a_to(16)
 
-	# If `self' contains only digits and letters, return the corresponding integer in a given base
+	# If `self` contains only digits and letters, return the corresponding integer in a given base
+	#
+	#     assert "120".a_to(3)     == 15
 	fun a_to(base: Int) : Int
 	do
 		var i = 0
@@ -146,7 +164,12 @@ abstract class AbstractString
 		end
 	end
 
-	# Returns true if the string contains only Numeric values (and one "," or one "." character)
+	# Returns `true` if the string contains only Numeric values (and one "," or one "." character)
+	#
+	#     assert "123".is_numeric  == true
+	#     assert "1.2".is_numeric  == true
+	#     assert "1,2".is_numeric  == true
+	#     assert "1..2".is_numeric == false
 	fun is_numeric: Bool
 	do
 		var has_point_or_comma = false
@@ -165,7 +188,9 @@ abstract class AbstractString
 		return true
 	end
 
-	# A upper case version of `self'
+	# A upper case version of `self`
+	#
+	#     assert "Hello World!".to_upper     == "HELLO WORLD!"
 	fun to_upper: String
 	do
 		var s = new Buffer.with_capacity(length)
@@ -173,7 +198,9 @@ abstract class AbstractString
 		return s.to_s
 	end
 
-	# A lower case version of `self'
+	# A lower case version of `self`
+	#
+	#     assert "Hello World!".to_lower     == "hello world!"
 	fun to_lower : String
 	do
 		var s = new Buffer.with_capacity(length)
@@ -183,6 +210,9 @@ abstract class AbstractString
 
 	# Trims trailing and preceding white spaces
 	# A whitespace is defined as any character which ascii value is less than or equal to 32
+	#
+	#     assert "  Hello  World !  ".trim   == "Hello  World !"
+	#     assert "\na\nb\tc\t".trim          == "a\nb\tc"
 	fun trim: String
 	do
 		if self._length == 0 then return self.to_s
@@ -209,6 +239,122 @@ abstract class AbstractString
 			i += 1
 		end
 	end
+
+	# Mangle a string to be a unique string only made of alphanumeric characters
+	fun to_cmangle: String
+	do
+		var res = new Buffer
+		var underscore = false
+		for c in self do
+			if (c >= 'a' and c <= 'z') or (c >='A' and c <= 'Z') then
+				res.add(c)
+				underscore = false
+				continue
+			end
+			if underscore then
+				res.append('_'.ascii.to_s)
+				res.add('d')
+			end
+			if c >= '0' and c <= '9' then
+				res.add(c)
+				underscore = false
+			else if c == '_' then
+				res.add(c)
+				underscore = true
+			else
+				res.add('_')
+				res.append(c.ascii.to_s)
+				res.add('d')
+				underscore = false
+			end
+		end
+		return res.to_s
+	end
+
+	# Escape " \ ' and non printable characters using the rules of literal C strings and characters
+	#
+	#     assert "abAB12<>&".escape_to_c         == "abAB12<>&"
+	#     assert "\n\"'\\".escape_to_c         == "\\n\\\"\\'\\\\"
+	fun escape_to_c: String
+	do
+		var b = new Buffer
+		for c in self do
+			if c == '\n' then
+				b.append("\\n")
+			else if c == '\0' then
+				b.append("\\0")
+			else if c == '"' then
+				b.append("\\\"")
+			else if c == '\'' then
+				b.append("\\\'")
+			else if c == '\\' then
+				b.append("\\\\")
+			else if c.ascii < 32 then
+				b.append("\\{c.ascii.to_base(8, false)}")
+			else
+				b.add(c)
+			end
+		end
+		return b.to_s
+	end
+
+	# Escape additionnal characters
+	# The result might no be legal in C but be used in other languages
+	#
+	#     assert "ab|\{\}".escape_more_to_c("|\{\}") == "ab\\|\\\{\\\}"
+	fun escape_more_to_c(chars: String): String
+	do
+		var b = new Buffer
+		for c in escape_to_c do
+			if chars.has(c) then
+				b.add('\\')
+			end
+			b.add(c)
+		end
+		return b.to_s
+	end
+
+	# Escape to c plus braces
+	#
+	#     assert "\n\"'\\\{\}".escape_to_nit      == "\\n\\\"\\'\\\\\\\{\\\}"
+	fun escape_to_nit: String do return escape_more_to_c("\{\}")
+
+	# Return a string where Nit escape sequences are transformed.
+	#
+	# Example:
+	#     var s = "\\n"
+	#     assert s.length        ==  2
+	#     var u = s.unescape_nit
+	#     assert u.length        ==  1
+	#     assert u[0].ascii      ==  10 # (the ASCII value of the "new line" character)
+	fun unescape_nit: String
+	do
+		var res = new Buffer.with_capacity(self.length)
+		var was_slash = false
+		for c in self do
+			if not was_slash then
+				if c == '\\' then
+					was_slash = true
+				else
+					res.add(c)
+				end
+				continue
+			end
+			was_slash = false
+			if c == 'n' then
+				res.add('\n')
+			else if c == 'r' then
+				res.add('\r')
+			else if c == 't' then
+				res.add('\t')
+			else if c == '0' then
+				res.add('\0')
+			else
+				res.add(c)
+			end
+		end
+		return res.to_s
+	end
 end
 
 # Immutable strings of characters.
@@ -229,8 +375,6 @@ class String
 	#       AbstractString specific methods        #
 	################################################
 
-	# Access a character at index in String
-	#
 	redef fun [](index) do
 		assert index >= 0
 		# Check that the index (+ index_from) is not larger than indexTo
@@ -239,17 +383,6 @@ class String
 		return _items[index + _index_from]
 	end
 
-	# Create a substring.
-	#
-	# "abcd".substring(1, 2) 	# --> "bc"
-	# "abcd".substring(-1, 2)	# --> "a"
-	# "abcd".substring(1, 0)    # --> ""
-	# "abcd".substring(2, 5)    # --> "cd"
-	#
-	# A "from" index < 0 will be replaced by 0
-	# Unless a count value is > 0 at the same time
-	# In this case, from += count and count -= from
-	#
 	redef fun substring(from: Int, count: Int): String
 	do
 		assert count >= 0
@@ -269,14 +402,6 @@ class String
 		return new String.from_substring(realFrom, realFrom + count - 1, _items)
 	end
 
-	# Create a substring from `self' beginning at the 'from' position
-	#
-	# "abcd".substring_from(1) 	# --> "bcd"
-	# "abcd".substring_from(-1)	# --> "abcd"
-	# "abcd".substring_from(2)  # --> "cd"
-	#
-	# As with substring, a "from" index < 0 will be replaced by 0
-	#
 	redef fun substring_from(from: Int): String
 	do
 		if from > _length then return ""
@@ -284,10 +409,6 @@ class String
 		return substring(from, _length)
 	end
 
-	# Does self have a substring 'str' starting from position 'pos
-	#
-	# "abcd".has_substring("bc",1) 	# --> true
-	# "abcd".has_substring("bc",2) 	# --> false
 	redef fun has_substring(str: String, pos: Int): Bool
 	do
 		var itsindex = str._length - 1
@@ -312,7 +433,6 @@ class String
 		return true
 	end
 
-	# A upper case version of `self'
 	redef fun to_upper: String
 	do
 		var outstr = calloc_string(self._length + 1)
@@ -330,10 +450,9 @@ class String
 
 		outstr[self.length] = '\0'
 
-		return new String.with_native(outstr, self._length)
+		return outstr.to_s_with_length(self._length)
 	end
 
-	# A lower case version of `self'
 	redef fun to_lower : String
 	do
 		var outstr = calloc_string(self._length + 1)
@@ -351,7 +470,7 @@ class String
 
 		outstr[self.length] = '\0'
 
-		return new String.with_native(outstr, self._length)
+		return outstr.to_s_with_length(self._length)
 	end
 
 	redef fun trim: String
@@ -402,39 +521,17 @@ class String
 		_length = to - from + 1
 	end
 
-	# Create a new string from a given char *.
-	init with_native(nat: NativeString, size: Int)
+	private init with_infos(items: NativeString, len: Int, from: Int, to: Int)
 	do
-		assert size >= 0
-		_items = nat
-		_length = size
-		_index_from = 0
-		_index_to = _length - 1
-	end
-
-	# Create a new string from a null terminated char *.
-	init from_cstring(str: NativeString)
-	do
-		with_native(str,str.cstring_length)
-	end
-
-	# Creates a new Nit String from an existing CString
-	# Pretty much equals to from_cstring but copies instead
-	# of passing a reference
-	# Avoids manual/automatic dealloc problems when dealing with native C code
-	init copy_from_native(str: NativeString)
-	do
-		var temp_length = str.cstring_length
-		var new_str = calloc_string(temp_length + 1)
-		str.copy_to(new_str, temp_length, 0, 0)
-		new_str[temp_length] = '\0'
-		with_native(new_str, temp_length)
+		self._items = items
+		_length = len
+		_index_from = from
+		_index_to = to
 	end
 
 	# Return a null terminated char *
 	fun to_cstring: NativeString
 	do
-		#return items
 		if _index_from > 0 or _index_to != items.cstring_length - 1 then
 			var newItems = calloc_string(_length + 1)
 			self.items.copy_to(newItems, _length, _index_from, 0)
@@ -472,7 +569,8 @@ class String
 	end
 
 	# The comparison between two strings is done on a lexicographical basis
-	# Eg : "aa" < "b" => true
+	#
+	#     assert ("aa" < "b")      ==  true
 	redef fun <(other)
 	do
 		if self.object_id == other.object_id then return false
@@ -507,23 +605,31 @@ class String
 		return my_length < its_length
 	end
 
-	# The concatenation of `self' with `r'
+	# The concatenation of `self` with `s`
+	#
+	#     assert "hello " + "world!"         == "hello world!"
 	fun +(s: String): String
 	do
 		var my_length = self._length
 		var its_length = s._length
+
+		var total_length = my_length + its_length
 
 		var target_string = calloc_string(my_length + its_length + 1)
 
 		self._items.copy_to(target_string, my_length, _index_from, 0)
 		s._items.copy_to(target_string, its_length, s._index_from, my_length)
 
-		target_string[my_length + its_length] = '\0'
+		target_string[total_length] = '\0'
 
-		return new String.with_native(target_string, my_length + its_length)
+		return target_string.to_s_with_length(total_length)
 	end
 
-	# i repetitions of self
+	# `i` repetitions of `self`
+	#
+	#     assert "abc"*3           == "abcabcabc"
+	#     assert "abc"*1           == "abc"
+	#     assert "abc"*0           == ""
 	fun *(i: Int): String
 	do
 		assert i >= 0
@@ -545,7 +651,7 @@ class String
 			current_last += my_length
 		end
 
-		return new String.with_native(target_string, final_length)
+		return target_string.to_s_with_length(final_length)
 	end
 
 	redef fun to_s do return self
@@ -628,7 +734,7 @@ class Buffer
 		# Ensure the afterlast byte is '\0' to nul-terminated char *
 		a[length] = '\0'
 
-		return new String.with_native(a, length)
+		return a.to_s_with_length(length)
 	end
 
 	redef fun <(s)
@@ -692,7 +798,7 @@ class Buffer
 		return true
 	end
 
-	readable private var _capacity: Int 
+	readable private var _capacity: Int
 end
 
 ###############################################################################
@@ -700,19 +806,18 @@ end
 ###############################################################################
 
 redef class Object
-	# User readable representation of `self'.
+	# User readable representation of `self`.
 	fun to_s: String do return inspect
 
 	# The class name of the object in NativeString format.
 	private fun native_class_name: NativeString is intern
 
 	# The class name of the object.
-	# FIXME: real type information is not available at runtime.
-	# Therefore, for instance, an instance of List[Bool] has just
-	# "List" for class_name
-	fun class_name: String do return new String.from_cstring(native_class_name)
+	#
+	#    assert 5.class_name == "Int"
+	fun class_name: String do return native_class_name.to_s
 
-	# Developer readable representation of `self'.
+	# Developer readable representation of `self`.
 	# Usually, it uses the form "<CLASSNAME:#OBJECTID bla bla bla>"
 	fun inspect: String
 	do
@@ -733,6 +838,8 @@ redef class Object
 end
 
 redef class Bool
+	#     assert true.to_s         == "true"
+	#     assert false.to_s        == "false"
 	redef fun to_s
 	do 
 		if self then 
@@ -744,9 +851,9 @@ redef class Bool
 end
 
 redef class Int
-	fun fill_buffer(s: Buffer, base: Int, signed: Bool)
-	# Fill `s' with the digits in base 'base' of `self' (and with the '-' sign if 'signed' and negative).
+	# Fill `s` with the digits in base `base` of `self` (and with the '-' sign if 'signed' and negative).
 	# assume < to_c max const of char
+	fun fill_buffer(s: Buffer, base: Int, signed: Bool)
 	do
 		var n: Int
 		# Sign
@@ -768,9 +875,18 @@ redef class Int
 		end
 	end
 
+	# C function to convert an nit Int to a NativeString (char*)
+	private fun native_int_to_s(len: Int): NativeString is extern "native_int_to_s"
+
 	# return displayable int in base 10 and signed
-	redef fun to_s do return to_base(10,true)
-	
+	#
+	#     assert 1.to_s            == "1"
+	#     assert (-123).to_s       == "-123"
+	redef fun to_s do
+		var len = digit_count(10)
+		return native_int_to_s(len).to_s_with_length(len)
+	end
+
 	# return displayable int in hexadecimal (unsigned (not now))
 	fun to_hex: String do return to_base(16,false)
 
@@ -785,7 +901,7 @@ redef class Int
 end
 
 redef class Float
-	# Pretty print self, print needed decimals up to a max of 6.
+	# Pretty print self, print needoed decimals up to a max of 3.
 	redef fun to_s do
 		var str = to_precision( 3 )
 		var len = str.length
@@ -803,7 +919,7 @@ redef class Float
 		return str
 	end
 
-	# `self' representation with `nb' digits after the '.'.
+	# `self` representation with `nb` digits after the '.'.
 	fun to_precision(nb: Int): String
 	do
 		if nb == 0 then return self.to_i.to_s
@@ -827,7 +943,7 @@ redef class Float
 		end
 	end
 
-	fun to_precision_native(nb: Int): String import String::from_cstring `{
+	fun to_precision_native(nb: Int): String import NativeString::to_s `{
 		int size;
 		char *str;
 
@@ -835,11 +951,12 @@ redef class Float
 		str = malloc(size + 1);
 		sprintf(str, "%.*f", (int)nb, recv );
 
-		return new_String_from_cstring( str );
+		return NativeString_to_s( str );
 	`}
 end
 
 redef class Char
+	#     assert 'x'.to_s    == "x"
 	redef fun to_s
 	do
 		var s = new Buffer.with_capacity(1)
@@ -881,7 +998,10 @@ redef class Collection[E]
 		return s.to_s
 	end
 
-	# Concatenate and separate each elements with `sep'. 
+	# Concatenate and separate each elements with `sep`.
+	#
+	#     assert [1, 2, 3].join(":")         == "1:2:3"
+	#     assert [1..3].join(":")            == "1:2:3"
 	fun join(sep: String): String
 	do
 		if is_empty then return ""
@@ -923,8 +1043,13 @@ end
 
 redef class Map[K,V]
 	# Concatenate couple of 'key value'.
-	# key and value are separated by 'couple_sep'.
-	# each couple is separated each couple with `sep'.
+	# key and value are separated by `couple_sep`.
+	# each couple is separated each couple with `sep`.
+	#
+	#     var m = new ArrayMap[Int, String]
+	#     m[1] = "one"
+	#     m[10] = "ten"
+	#     assert m.join("; ", "=") == "1=one; 10=ten"
 	fun join(sep: String, couple_sep: String): String
 	do
 		if is_empty then return ""
@@ -956,10 +1081,12 @@ end
 
 # Native strings are simple C char *
 class NativeString
+	super StringCapable
+
 	fun [](index: Int): Char is intern
 	fun []=(index: Int, item: Char) is intern
 	fun copy_to(dest: NativeString, length: Int, from: Int, to: Int) is intern
-	
+
 	# Position of the first nul character.
 	fun cstring_length: Int
 	do
@@ -969,6 +1096,26 @@ class NativeString
 	end
 	fun atoi: Int is intern
 	fun atof: Float is extern "atof"
+
+	redef fun to_s
+	do
+		return to_s_with_length(cstring_length)
+	end
+
+	fun to_s_with_length(length: Int): String
+	do
+		assert length >= 0
+		return new String.with_infos(self, length, 0, length - 1)
+	end
+
+	fun to_s_with_copy: String
+	do
+		var length = cstring_length
+		var new_self = calloc_string(length + 1)
+		copy_to(new_self, length, 0, 0)
+		return new String.with_infos(new_self, length, 0, length - 1)
+	end
+
 end
 
 # StringCapable objects can create native strings
@@ -988,17 +1135,17 @@ redef class Sys
 	# The name of the program as given by the OS
 	fun program_name: String
 	do
-		return new String.from_cstring(native_argv(0))
+		return native_argv(0).to_s
 	end
 
-	# Initialize `args' with the contents of `native_argc' and `native_argv'.
+	# Initialize `args` with the contents of `native_argc` and `native_argv`.
 	private fun init_args
 	do
 		var argc = native_argc
 		var args = new Array[String].with_capacity(0)
 		var i = 1
 		while i < argc do
-			args[i-1] = new String.from_cstring(native_argv(i))
+			args[i-1] = native_argv(i).to_s
 			i += 1
 		end
 		_args_cache = args

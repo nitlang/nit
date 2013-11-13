@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Manage nested escapable blocks (while, for and closure) and escape statements (break and continue)
-package scope
+module scope
 
 import syntax_base
 import flow

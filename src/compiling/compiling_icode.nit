@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Generate C code from intermediate code representation
-package compiling_icode
+module compiling_icode
 
 import icode
 private import analysis

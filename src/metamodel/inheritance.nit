@@ -16,7 +16,7 @@
 # limitations under the License.
 
 # Compute importation of classes and inheritance of properties
-package inheritance
+module inheritance
 
 intrude import static_type
 

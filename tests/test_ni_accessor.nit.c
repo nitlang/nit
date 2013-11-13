@@ -32,14 +32,14 @@ void A_print_all___impl( A recv )
 C implementation of test_ni_accessor::A::modify
 
 Imported methods signatures:
-	String new_String_from_cstring( char * str ) for string::String::from_cstring
+	String NativeString_to_s( char * str ) for string::NativeString::to_s
 	void A_w__eq( A recv, String w ) for test_ni_accessor::A::w=
 	void A_rw__eq( A recv, String rw ) for test_ni_accessor::A::rw=
 */
 void A_modify___impl( A recv )
 {
-	A_w__assign( recv, new_String_from_cstring( "w set from native" ) );
-	A_rw__assign( recv, new_String_from_cstring( "rw set from native" ) );
+	A_w__assign( recv, NativeString_to_s( "w set from native" ) );
+	A_rw__assign( recv, NativeString_to_s( "rw set from native" ) );
 }
 
 /*
@@ -49,11 +49,11 @@ Imported methods signatures:
 	String A_rw( A recv ) for test_ni_accessor::A::rw
 	void A_rw__assign( A recv, String value ) for test_ni_accessor::A::rw=
 	char * String_to_cstring( String recv ) for string::String::to_cstring
-	String new_String_from_cstring( char * str ) for string::String::from_cstring
+	String NativeString_to_s( char * str ) for string::NativeString::to_s
 */
 void B_print_and_modify___impl( B recv, A a )
 {
 	printf( "%s\n", String_to_cstring( A_rw( a ) ) );
-	A_rw__assign( a, new_String_from_cstring( "set from native" ) );
+	A_rw__assign( a, NativeString_to_s( "set from native" ) );
 	printf( "%s\n", String_to_cstring( A_rw( a ) ) );
 }

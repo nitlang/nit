@@ -74,7 +74,7 @@ void ffi___FFIVisitor___compile(val_t p0){
   static val_t once_value_25; /* Once value */
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_ffi;
-  fra.me.line = 47;
+  fra.me.line = 43;
   fra.me.meth = LOCATE_ffi___FFIVisitor___compile;
   fra.me.has_broke = 0;
   fra.me.REG_size = 9;
@@ -89,23 +89,23 @@ void ffi___FFIVisitor___compile(val_t p0){
   fra.me.REG[7] = NIT_NULL;
   fra.me.REG[8] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ffi/ffi.nit:47 */
+  /* ffi/ffi.nit:43 */
   fra.me.REG[1] = fra.me.REG[0];
-  /* ffi/ffi.nit:49 */
+  /* ffi/ffi.nit:45 */
   fra.me.REG[2] = CALL_ffi___ffi_base___FFIVisitor___tc(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[2] = CALL_compiling___compiling_base___ToolContext___compdir(fra.me.REG[2])(fra.me.REG[2]);
   REGB0 = TAG_Bool((fra.me.REG[2]!=NIT_NULL) && VAL_ISA(fra.me.REG[2], COLOR_standard___string___String, ID_standard___string___String)) /*cast String*/;
   if (UNTAG_Bool(REGB0)) {
   } else {
-    nit_abort("Cast failed", NULL, LOCATE_ffi, 49);
+    nit_abort("Cast failed", NULL, LOCATE_ffi, 45);
   }
-  /* ffi/ffi.nit:50 */
+  /* ffi/ffi.nit:46 */
   REGB0 = TAG_Int(3);
   fra.me.REG[0] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
   if (!once_value_1) {
     fra.me.REG[3] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_1 = fra.me.REG[3];
     register_static_object(&once_value_1);
   } else fra.me.REG[3] = once_value_1;
@@ -117,20 +117,20 @@ void ffi___FFIVisitor___compile(val_t p0){
   if (!once_value_2) {
     fra.me.REG[3] = BOX_NativeString("._ffi");
     REGB0 = TAG_Int(5);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_2 = fra.me.REG[3];
     register_static_object(&once_value_2);
   } else fra.me.REG[3] = once_value_2;
   fra.me.REG[3] = fra.me.REG[3];
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
   fra.me.REG[0] = CALL_standard___string___Object___to_s(fra.me.REG[0])(fra.me.REG[0]);
-  /* ffi/ffi.nit:51 */
+  /* ffi/ffi.nit:47 */
   REGB0 = TAG_Int(3);
   fra.me.REG[3] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
   if (!once_value_3) {
     fra.me.REG[4] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+    fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
     once_value_3 = fra.me.REG[4];
     register_static_object(&once_value_3);
   } else fra.me.REG[4] = once_value_3;
@@ -140,20 +140,20 @@ void ffi___FFIVisitor___compile(val_t p0){
   if (!once_value_4) {
     fra.me.REG[4] = BOX_NativeString(".c");
     REGB0 = TAG_Int(2);
-    fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+    fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
     once_value_4 = fra.me.REG[4];
     register_static_object(&once_value_4);
   } else fra.me.REG[4] = once_value_4;
   fra.me.REG[4] = fra.me.REG[4];
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[3])(fra.me.REG[3], fra.me.REG[4]);
   fra.me.REG[3] = CALL_standard___string___Object___to_s(fra.me.REG[3])(fra.me.REG[3]);
-  /* ffi/ffi.nit:52 */
+  /* ffi/ffi.nit:48 */
   REGB0 = TAG_Int(3);
   fra.me.REG[4] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
   if (!once_value_5) {
     fra.me.REG[5] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB0);
+    fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB0);
     once_value_5 = fra.me.REG[5];
     register_static_object(&once_value_5);
   } else fra.me.REG[5] = once_value_5;
@@ -163,20 +163,20 @@ void ffi___FFIVisitor___compile(val_t p0){
   if (!once_value_6) {
     fra.me.REG[0] = BOX_NativeString(".h");
     REGB0 = TAG_Int(2);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_6 = fra.me.REG[0];
     register_static_object(&once_value_6);
   } else fra.me.REG[0] = once_value_6;
   fra.me.REG[0] = fra.me.REG[0];
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[4])(fra.me.REG[4], fra.me.REG[0]);
   fra.me.REG[4] = CALL_standard___string___Object___to_s(fra.me.REG[4])(fra.me.REG[4]);
-  /* ffi/ffi.nit:55 */
+  /* ffi/ffi.nit:51 */
   REGB0 = TAG_Int(3);
   fra.me.REG[0] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
   if (!once_value_7) {
     fra.me.REG[5] = BOX_NativeString("/*\n\tExtern implementation of Nit module ");
     REGB0 = TAG_Int(40);
-    fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB0);
+    fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB0);
     once_value_7 = fra.me.REG[5];
     register_static_object(&once_value_7);
   } else fra.me.REG[5] = once_value_7;
@@ -189,20 +189,20 @@ void ffi___FFIVisitor___compile(val_t p0){
   if (!once_value_8) {
     fra.me.REG[5] = BOX_NativeString("\n*/\n");
     REGB0 = TAG_Int(4);
-    fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB0);
+    fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB0);
     once_value_8 = fra.me.REG[5];
     register_static_object(&once_value_8);
   } else fra.me.REG[5] = once_value_8;
   fra.me.REG[5] = fra.me.REG[5];
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[5]);
   fra.me.REG[0] = CALL_standard___string___Object___to_s(fra.me.REG[0])(fra.me.REG[0]);
-  /* ffi/ffi.nit:58 */
+  /* ffi/ffi.nit:54 */
   REGB0 = TAG_Int(3);
   fra.me.REG[5] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
   if (!once_value_9) {
     fra.me.REG[6] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB0);
+    fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB0);
     once_value_9 = fra.me.REG[6];
     register_static_object(&once_value_9);
   } else fra.me.REG[6] = once_value_9;
@@ -216,20 +216,20 @@ void ffi___FFIVisitor___compile(val_t p0){
   if (!once_value_10) {
     fra.me.REG[6] = BOX_NativeString("_NIT_H");
     REGB0 = TAG_Int(6);
-    fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB0);
+    fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB0);
     once_value_10 = fra.me.REG[6];
     register_static_object(&once_value_10);
   } else fra.me.REG[6] = once_value_10;
   fra.me.REG[6] = fra.me.REG[6];
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[5])(fra.me.REG[5], fra.me.REG[6]);
   fra.me.REG[5] = CALL_standard___string___Object___to_s(fra.me.REG[5])(fra.me.REG[5]);
-  /* ffi/ffi.nit:61 */
+  /* ffi/ffi.nit:57 */
   REGB0 = TAG_Int(5);
   fra.me.REG[6] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
   if (!once_value_11) {
     fra.me.REG[7] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[7] = NEW_String_standard___string___String___with_native(fra.me.REG[7], REGB0);
+    fra.me.REG[7] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[7])(fra.me.REG[7], REGB0);
     once_value_11 = fra.me.REG[7];
     register_static_object(&once_value_11);
   } else fra.me.REG[7] = once_value_11;
@@ -239,7 +239,7 @@ void ffi___FFIVisitor___compile(val_t p0){
   if (!once_value_12) {
     fra.me.REG[7] = BOX_NativeString("/");
     REGB0 = TAG_Int(1);
-    fra.me.REG[7] = NEW_String_standard___string___String___with_native(fra.me.REG[7], REGB0);
+    fra.me.REG[7] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[7])(fra.me.REG[7], REGB0);
     once_value_12 = fra.me.REG[7];
     register_static_object(&once_value_12);
   } else fra.me.REG[7] = once_value_12;
@@ -249,7 +249,7 @@ void ffi___FFIVisitor___compile(val_t p0){
   if (!once_value_13) {
     fra.me.REG[7] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[7] = NEW_String_standard___string___String___with_native(fra.me.REG[7], REGB0);
+    fra.me.REG[7] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[7])(fra.me.REG[7], REGB0);
     once_value_13 = fra.me.REG[7];
     register_static_object(&once_value_13);
   } else fra.me.REG[7] = once_value_13;
@@ -257,15 +257,15 @@ void ffi___FFIVisitor___compile(val_t p0){
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[7]);
   fra.me.REG[6] = CALL_standard___string___Object___to_s(fra.me.REG[6])(fra.me.REG[6]);
   fra.me.REG[6] = NEW_OFStream_standard___file___OFStream___open(fra.me.REG[6]);
-  /* ffi/ffi.nit:62 */
+  /* ffi/ffi.nit:58 */
   CALL_standard___stream___OStream___write(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[0]);
-  /* ffi/ffi.nit:63 */
+  /* ffi/ffi.nit:59 */
   REGB0 = TAG_Int(3);
   fra.me.REG[7] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
   if (!once_value_14) {
     fra.me.REG[8] = BOX_NativeString("#include <");
     REGB0 = TAG_Int(10);
-    fra.me.REG[8] = NEW_String_standard___string___String___with_native(fra.me.REG[8], REGB0);
+    fra.me.REG[8] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[8])(fra.me.REG[8], REGB0);
     once_value_14 = fra.me.REG[8];
     register_static_object(&once_value_14);
   } else fra.me.REG[8] = once_value_14;
@@ -278,7 +278,7 @@ void ffi___FFIVisitor___compile(val_t p0){
   if (!once_value_15) {
     fra.me.REG[8] = BOX_NativeString("._nitni.h>\n\n");
     REGB0 = TAG_Int(12);
-    fra.me.REG[8] = NEW_String_standard___string___String___with_native(fra.me.REG[8], REGB0);
+    fra.me.REG[8] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[8])(fra.me.REG[8], REGB0);
     once_value_15 = fra.me.REG[8];
     register_static_object(&once_value_15);
   } else fra.me.REG[8] = once_value_15;
@@ -286,13 +286,13 @@ void ffi___FFIVisitor___compile(val_t p0){
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[7])(fra.me.REG[7], fra.me.REG[8]);
   fra.me.REG[7] = CALL_standard___string___Object___to_s(fra.me.REG[7])(fra.me.REG[7]);
   CALL_standard___stream___OStream___write(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[7]);
-  /* ffi/ffi.nit:64 */
+  /* ffi/ffi.nit:60 */
   REGB0 = TAG_Int(3);
   fra.me.REG[7] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
   if (!once_value_16) {
     fra.me.REG[8] = BOX_NativeString("#ifndef ");
     REGB0 = TAG_Int(8);
-    fra.me.REG[8] = NEW_String_standard___string___String___with_native(fra.me.REG[8], REGB0);
+    fra.me.REG[8] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[8])(fra.me.REG[8], REGB0);
     once_value_16 = fra.me.REG[8];
     register_static_object(&once_value_16);
   } else fra.me.REG[8] = once_value_16;
@@ -302,7 +302,7 @@ void ffi___FFIVisitor___compile(val_t p0){
   if (!once_value_17) {
     fra.me.REG[8] = BOX_NativeString("\n");
     REGB0 = TAG_Int(1);
-    fra.me.REG[8] = NEW_String_standard___string___String___with_native(fra.me.REG[8], REGB0);
+    fra.me.REG[8] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[8])(fra.me.REG[8], REGB0);
     once_value_17 = fra.me.REG[8];
     register_static_object(&once_value_17);
   } else fra.me.REG[8] = once_value_17;
@@ -310,13 +310,13 @@ void ffi___FFIVisitor___compile(val_t p0){
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[7])(fra.me.REG[7], fra.me.REG[8]);
   fra.me.REG[7] = CALL_standard___string___Object___to_s(fra.me.REG[7])(fra.me.REG[7]);
   CALL_standard___stream___OStream___write(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[7]);
-  /* ffi/ffi.nit:65 */
+  /* ffi/ffi.nit:61 */
   REGB0 = TAG_Int(3);
   fra.me.REG[7] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
   if (!once_value_18) {
     fra.me.REG[8] = BOX_NativeString("#define ");
     REGB0 = TAG_Int(8);
-    fra.me.REG[8] = NEW_String_standard___string___String___with_native(fra.me.REG[8], REGB0);
+    fra.me.REG[8] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[8])(fra.me.REG[8], REGB0);
     once_value_18 = fra.me.REG[8];
     register_static_object(&once_value_18);
   } else fra.me.REG[8] = once_value_18;
@@ -326,7 +326,7 @@ void ffi___FFIVisitor___compile(val_t p0){
   if (!once_value_19) {
     fra.me.REG[5] = BOX_NativeString("\n\n");
     REGB0 = TAG_Int(2);
-    fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB0);
+    fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB0);
     once_value_19 = fra.me.REG[5];
     register_static_object(&once_value_19);
   } else fra.me.REG[5] = once_value_19;
@@ -334,41 +334,41 @@ void ffi___FFIVisitor___compile(val_t p0){
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[7])(fra.me.REG[7], fra.me.REG[5]);
   fra.me.REG[7] = CALL_standard___string___Object___to_s(fra.me.REG[7])(fra.me.REG[7]);
   CALL_standard___stream___OStream___write(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[7]);
-  /* ffi/ffi.nit:66 */
+  /* ffi/ffi.nit:62 */
   fra.me.REG[7] = CALL_ffi___ffi_base___FFIVisitor___compilation_unit(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[7] = CALL_c_tools___CCompilationUnit___header_c_base(fra.me.REG[7])(fra.me.REG[7]);
   CALL_compiling_writer___Writer___write_to_stream(fra.me.REG[7])(fra.me.REG[7], fra.me.REG[6]);
-  /* ffi/ffi.nit:67 */
+  /* ffi/ffi.nit:63 */
   fra.me.REG[7] = CALL_ffi___ffi_base___FFIVisitor___compilation_unit(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[7] = CALL_c_tools___CCompilationUnit___header_custom(fra.me.REG[7])(fra.me.REG[7]);
   CALL_compiling_writer___Writer___write_to_stream(fra.me.REG[7])(fra.me.REG[7], fra.me.REG[6]);
-  /* ffi/ffi.nit:68 */
+  /* ffi/ffi.nit:64 */
   fra.me.REG[7] = CALL_ffi___ffi_base___FFIVisitor___compilation_unit(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[7] = CALL_c_tools___CCompilationUnit___header_c_types(fra.me.REG[7])(fra.me.REG[7]);
   CALL_compiling_writer___Writer___write_to_stream(fra.me.REG[7])(fra.me.REG[7], fra.me.REG[6]);
-  /* ffi/ffi.nit:69 */
+  /* ffi/ffi.nit:65 */
   fra.me.REG[7] = CALL_ffi___ffi_base___FFIVisitor___compilation_unit(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[7] = CALL_c_tools___CCompilationUnit___header_decl(fra.me.REG[7])(fra.me.REG[7]);
   CALL_compiling_writer___Writer___write_to_stream(fra.me.REG[7])(fra.me.REG[7], fra.me.REG[6]);
-  /* ffi/ffi.nit:70 */
+  /* ffi/ffi.nit:66 */
   if (!once_value_20) {
     fra.me.REG[7] = BOX_NativeString("#endif\n");
     REGB0 = TAG_Int(7);
-    fra.me.REG[7] = NEW_String_standard___string___String___with_native(fra.me.REG[7], REGB0);
+    fra.me.REG[7] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[7])(fra.me.REG[7], REGB0);
     once_value_20 = fra.me.REG[7];
     register_static_object(&once_value_20);
   } else fra.me.REG[7] = once_value_20;
   fra.me.REG[7] = fra.me.REG[7];
   CALL_standard___stream___OStream___write(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[7]);
-  /* ffi/ffi.nit:71 */
+  /* ffi/ffi.nit:67 */
   CALL_standard___stream___IOS___close(fra.me.REG[6])(fra.me.REG[6]);
-  /* ffi/ffi.nit:74 */
+  /* ffi/ffi.nit:70 */
   REGB0 = TAG_Int(5);
   fra.me.REG[7] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
   if (!once_value_21) {
     fra.me.REG[5] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB0);
+    fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB0);
     once_value_21 = fra.me.REG[5];
     register_static_object(&once_value_21);
   } else fra.me.REG[5] = once_value_21;
@@ -378,7 +378,7 @@ void ffi___FFIVisitor___compile(val_t p0){
   if (!once_value_22) {
     fra.me.REG[2] = BOX_NativeString("/");
     REGB0 = TAG_Int(1);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_22 = fra.me.REG[2];
     register_static_object(&once_value_22);
   } else fra.me.REG[2] = once_value_22;
@@ -388,7 +388,7 @@ void ffi___FFIVisitor___compile(val_t p0){
   if (!once_value_23) {
     fra.me.REG[3] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_23 = fra.me.REG[3];
     register_static_object(&once_value_23);
   } else fra.me.REG[3] = once_value_23;
@@ -397,15 +397,15 @@ void ffi___FFIVisitor___compile(val_t p0){
   fra.me.REG[7] = CALL_standard___string___Object___to_s(fra.me.REG[7])(fra.me.REG[7]);
   fra.me.REG[7] = NEW_OFStream_standard___file___OFStream___open(fra.me.REG[7]);
   fra.me.REG[6] = fra.me.REG[7];
-  /* ffi/ffi.nit:75 */
+  /* ffi/ffi.nit:71 */
   CALL_standard___stream___OStream___write(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[0]);
-  /* ffi/ffi.nit:76 */
+  /* ffi/ffi.nit:72 */
   REGB0 = TAG_Int(3);
   fra.me.REG[0] = NEW_Array_standard___collection___array___Array___with_capacity(REGB0);
   if (!once_value_24) {
     fra.me.REG[7] = BOX_NativeString("#include \"");
     REGB0 = TAG_Int(10);
-    fra.me.REG[7] = NEW_String_standard___string___String___with_native(fra.me.REG[7], REGB0);
+    fra.me.REG[7] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[7])(fra.me.REG[7], REGB0);
     once_value_24 = fra.me.REG[7];
     register_static_object(&once_value_24);
   } else fra.me.REG[7] = once_value_24;
@@ -415,7 +415,7 @@ void ffi___FFIVisitor___compile(val_t p0){
   if (!once_value_25) {
     fra.me.REG[4] = BOX_NativeString("\"\n");
     REGB0 = TAG_Int(2);
-    fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+    fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
     once_value_25 = fra.me.REG[4];
     register_static_object(&once_value_25);
   } else fra.me.REG[4] = once_value_25;
@@ -423,19 +423,19 @@ void ffi___FFIVisitor___compile(val_t p0){
   CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[4]);
   fra.me.REG[0] = CALL_standard___string___Object___to_s(fra.me.REG[0])(fra.me.REG[0]);
   CALL_standard___stream___OStream___write(fra.me.REG[6])(fra.me.REG[6], fra.me.REG[0]);
-  /* ffi/ffi.nit:77 */
+  /* ffi/ffi.nit:73 */
   fra.me.REG[0] = CALL_ffi___ffi_base___FFIVisitor___compilation_unit(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[0] = CALL_c_tools___CCompilationUnit___body_decl(fra.me.REG[0])(fra.me.REG[0]);
   CALL_compiling_writer___Writer___write_to_stream(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[6]);
-  /* ffi/ffi.nit:78 */
+  /* ffi/ffi.nit:74 */
   fra.me.REG[0] = CALL_ffi___ffi_base___FFIVisitor___compilation_unit(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[0] = CALL_c_tools___CCompilationUnit___body_custom(fra.me.REG[0])(fra.me.REG[0]);
   CALL_compiling_writer___Writer___write_to_stream(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[6]);
-  /* ffi/ffi.nit:79 */
+  /* ffi/ffi.nit:75 */
   fra.me.REG[1] = CALL_ffi___ffi_base___FFIVisitor___compilation_unit(fra.me.REG[1])(fra.me.REG[1]);
   fra.me.REG[1] = CALL_c_tools___CCompilationUnit___body_impl(fra.me.REG[1])(fra.me.REG[1]);
   CALL_compiling_writer___Writer___write_to_stream(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[6]);
-  /* ffi/ffi.nit:80 */
+  /* ffi/ffi.nit:76 */
   CALL_standard___stream___IOS___close(fra.me.REG[6])(fra.me.REG[6]);
   stack_frame_head = fra.me.prev;
   return;

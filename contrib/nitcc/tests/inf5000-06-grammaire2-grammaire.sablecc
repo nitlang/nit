@@ -1,0 +1,15 @@
+Grammar grammaire;
+Lexer
+id = ('a'..'z')+;
+altid = '{' id ':}';
+str = '\'' (Any* - '\'') '\'';
+blank = ' ' | #9 | #10 | #13;
+
+Parser
+Ignored blank;
+prods = {many:} prods prod  | {one:} prod ;
+prod = id '=' alts ';' ;
+alts = {many:} alts '|' alt | {one:} alt ;
+alt = altid atoms | atoms ;
+atoms = {many:} atoms atom | {none:} ;
+atom = {id:} id | {str:} str ;

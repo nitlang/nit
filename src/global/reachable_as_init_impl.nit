@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # This module introduces an analysis that flags all initializers called as new A.x
-package reachable_as_init_impl
+module reachable_as_init_impl
 
 import reachable_method_analysis
 import reachable_as_init

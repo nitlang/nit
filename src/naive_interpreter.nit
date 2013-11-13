@@ -20,6 +20,7 @@ module naive_interpreter
 import literal
 import typing
 import auto_super_init
+import frontend
 
 redef class ToolContext
 	# --discover-call-trace
@@ -33,8 +34,8 @@ redef class ToolContext
 end
 
 redef class ModelBuilder
-	# Execute the program from the entry point (Sys::main) of the `mainmodule'
-	# `arguments' are the command-line arguments in order
+	# Execute the program from the entry point (`Sys::main`) of the `mainmodule`
+	# `arguments` are the command-line arguments in order
 	# REQUIRE that:
 	#   1. the AST is fully loaded.
 	#   2. the model is fully built.
@@ -57,12 +58,12 @@ redef class ModelBuilder
 		var mainobj = new MutableInstance(sys_type)
 		interpreter.mainobj = mainobj
 		interpreter.init_instance(mainobj)
-		var initprop = mainmodule.try_get_primitive_method("init", sys_type)
+		var initprop = mainmodule.try_get_primitive_method("init", sys_type.mclass)
 		if initprop != null then
 			interpreter.send(initprop, [mainobj])
 		end
 		interpreter.check_init_instance(mainobj)
-		var mainprop = mainmodule.try_get_primitive_method("main", sys_type)
+		var mainprop = mainmodule.try_get_primitive_method("main", sys_type.mclass)
 		if mainprop != null then
 			interpreter.send(mainprop, [mainobj])
 		end
@@ -102,7 +103,8 @@ private class NaiveInterpreter
 
 	fun force_get_primitive_method(name: String, recv: MType): MMethod
 	do
-		return self.modelbuilder.force_get_primitive_method(self.frame.current_node, name, recv, self.mainmodule)
+		assert recv isa MClassType
+		return self.modelbuilder.force_get_primitive_method(self.frame.current_node, name, recv.mclass, self.mainmodule)
 	end
 
 	# Is a return executed?
@@ -110,11 +112,11 @@ private class NaiveInterpreter
 	var returnmark: nullable Frame = null
 
 	# Is a break executed?
-	# Set this mark to skip the evaluation until a labeled statement catch it with `is_break'
+	# Set this mark to skip the evaluation until a labeled statement catch it with `is_break`
 	var breakmark: nullable EscapeMark = null
 
 	# Is a continue executed?
-	# Set this mark to skip the evaluation until a labeled statement catch it with `is_continue'
+	# Set this mark to skip the evaluation until a labeled statement catch it with `is_continue`
 	var continuemark: nullable EscapeMark = null
 
 	# Is a return or a break or a continue executed?
@@ -126,8 +128,8 @@ private class NaiveInterpreter
 	# Read the value when you catch a mark or reach the end of a method
 	var escapevalue: nullable Instance = null
 
-	# If there is a break and is associated with `escapemark', then return true an clear the mark.
-	# If there is no break or if `escapemark' is null then return false.
+	# If there is a break and is associated with `escapemark`, then return true an clear the mark.
+	# If there is no break or if `escapemark` is null then return false.
 	# Use this function to catch a potential break.
 	fun is_break(escapemark: nullable EscapeMark): Bool
 	do
@@ -139,8 +141,8 @@ private class NaiveInterpreter
 		end
 	end
 
-	# If there is a continue and is associated with `escapemark', then return true an clear the mark.
-	# If there is no continue or if `escapemark' is null then return false.
+	# If there is a continue and is associated with `escapemark`, then return true an clear the mark.
+	# If there is no continue or if `escapemark` is null then return false.
 	# Use this function to catch a potential continue.
 	fun is_continue(escapemark: nullable EscapeMark): Bool
 	do
@@ -152,9 +154,9 @@ private class NaiveInterpreter
 		end
 	end
 
-	# Evaluate `n' as an expression in the current context.
+	# Evaluate `n` as an expression in the current context.
 	# Return the value of the expression.
-	# If `n' cannot be evaluated, then aborts.
+	# If `n` cannot be evaluated, then aborts.
 	fun expr(n: AExpr): nullable Instance
 	do
 		var frame = self.frame
@@ -177,9 +179,9 @@ private class NaiveInterpreter
 		return i
 	end
 
-	# Evaluate `n' as a statement in the current context.
-	# Do nothing if `n' is sull.
-	# If `n' cannot be evaluated, then aborts.
+	# Evaluate `n` as a statement in the current context.
+	# Do nothing if `n` is null.
+	# If `n` cannot be evaluated, then aborts.
 	fun stmt(n: nullable AExpr)
 	do
 		if n != null then
@@ -192,46 +194,46 @@ private class NaiveInterpreter
 		end
 	end
 
-	# Map used to store values of nodes that must be evaluated once in the system (AOnceExpr)
+	# Map used to store values of nodes that must be evaluated once in the system (`AOnceExpr`)
 	var onces: Map[ANode, Instance] = new HashMap[ANode, Instance]
 
-	# Return the boolean instance associated with `val'.
+	# Return the boolean instance associated with `val`.
 	fun bool_instance(val: Bool): Instance
 	do
 		if val then return self.true_instance else return self.false_instance
 	end
 
-	# Return the integer instance associated with `val'.
+	# Return the integer instance associated with `val`.
 	fun int_instance(val: Int): Instance
 	do
 		var ic = self.mainmodule.get_primitive_class("Int")
 		return new PrimitiveInstance[Int](ic.mclass_type, val)
 	end
 
-	# Return the char instance associated with `val'.
+	# Return the char instance associated with `val`.
 	fun char_instance(val: Char): Instance
 	do
 		var ic = self.mainmodule.get_primitive_class("Char")
 		return new PrimitiveInstance[Char](ic.mclass_type, val)
 	end
 
-	# Return the float instance associated with `val'.
+	# Return the float instance associated with `val`.
 	fun float_instance(val: Float): Instance
 	do
 		var ic = self.mainmodule.get_primitive_class("Float")
 		return new PrimitiveInstance[Float](ic.mclass_type, val)
 	end
 
-	# The unique intance of the `true' value.
+	# The unique intance of the `true` value.
 	var true_instance: Instance
 
-	# The unique intance of the `false' value.
+	# The unique intance of the `false` value.
 	var false_instance: Instance
 
-	# The unique intance of the `null' value.
+	# The unique intance of the `null` value.
 	var null_instance: Instance
 
-	# Return a new array made of `values'.
+	# Return a new array made of `values`.
 	# The dynamic type of the result is Array[elttype].
 	fun array_instance(values: Array[Instance], elttype: MType): Instance
 	do
@@ -245,7 +247,7 @@ private class NaiveInterpreter
 		return res
 	end
 
-	# Return a new native string initialized with `txt'
+	# Return a new native string initialized with `txt`
 	fun native_string_instance(txt: String): Instance
 	do
 		var val = new Buffer.from(txt)
@@ -296,15 +298,11 @@ private class NaiveInterpreter
 	# Store known method, used to trace methods as thez are reached
 	var discover_call_trace: Set[MMethodDef] = new HashSet[MMethodDef]
 
-	# Execute `mpropdef' for a `args' (where args[0] is the receiver).
-	# Return a falue if `mpropdef' is a function, or null if it is a procedure.
-	# The call is direct/static. There is no message-seding/late-bindng.
+	# Execute `mpropdef` for a `args` (where `args[0]` is the receiver).
+	# Return a falue if `mpropdef` is a function, or null if it is a procedure.
+	# The call is direct/static. There is no message-seding/late-binding.
 	fun call(mpropdef: MMethodDef, args: Array[Instance]): nullable Instance
 	do
-		if self.modelbuilder.toolcontext.opt_discover_call_trace.value and not self.discover_call_trace.has(mpropdef) then
-			self.discover_call_trace.add mpropdef
-			self.debug("Discovered {mpropdef}")
-		end
 		var vararg_rank = mpropdef.msignature.vararg_rank
 		if vararg_rank >= 0 then
 			assert args.length >= mpropdef.msignature.arity + 1 # because of self
@@ -329,6 +327,19 @@ private class NaiveInterpreter
 			for i in [vararg_lastrank+1..rawargs.length-1[ do
 				args.add(rawargs[i+1])
 			end
+		end
+		return call_without_varargs(mpropdef, args)
+	end
+
+	# Common code to call and this function
+	#
+	# Call only executes the variadic part, this avoids
+	# double encapsulation of variadic parameters into an Array
+	fun call_without_varargs(mpropdef: MMethodDef, args: Array[Instance]): nullable Instance
+	do
+		if self.modelbuilder.toolcontext.opt_discover_call_trace.value and not self.discover_call_trace.has(mpropdef) then
+			self.discover_call_trace.add mpropdef
+			self.debug("Discovered {mpropdef}")
 		end
 		if args.length < mpropdef.msignature.arity + 1 or args.length > mpropdef.msignature.arity + 1 + mpropdef.msignature.mclosures.length then
 			fatal("NOT YET IMPLEMENTED: Invalid arity for {mpropdef}. {args.length} arguments given.")
@@ -398,8 +409,8 @@ private class NaiveInterpreter
 		return null
 	end
 
-	# Execute `mproperty' for a `args' (where args[0] is the receiver).
-	# Return a falue if `mproperty' is a function, or null if it is a procedure.
+	# Execute `mproperty` for a `args` (where `args[0]` is the receiver).
+	# Return a falue if `mproperty` is a function, or null if it is a procedure.
 	# The call is polimotphic. There is a message-seding/late-bindng according to te receiver (args[0]).
 	fun send(mproperty: MMethod, args: Array[Instance]): nullable Instance
 	do
@@ -419,7 +430,7 @@ private class NaiveInterpreter
 		return self.call(propdef, args)
 	end
 
-	# Read the attribute `mproperty' of an instance `recv' and return its value.
+	# Read the attribute `mproperty` of an instance `recv` and return its value.
 	# If the attribute in not yet initialized, then aborts with an error message.
 	fun read_attribute(mproperty: MAttribute, recv: Instance): Instance
 	do
@@ -455,8 +466,8 @@ private class NaiveInterpreter
 
 	var collect_attr_propdef_cache = new HashMap[MType, Array[AAttrPropdef]]
 
-	# Fill the initial values of the newly created instance `recv'.
-	# `recv.mtype' is used to know what must be filled.
+	# Fill the initial values of the newly created instance `recv`.
+	# `recv.mtype` is used to know what must be filled.
 	fun init_instance(recv: Instance)
 	do
 		for npropdef in collect_attr_propdef(recv.mtype) do
@@ -464,7 +475,7 @@ private class NaiveInterpreter
 		end
 	end
 
-	# Check that non nullable attributes of `recv' are correctly initialized.
+	# Check that non nullable attributes of `recv` are correctly initialized.
 	# This function is used as the last instruction of a new
 	fun check_init_instance(recv: Instance)
 	do
@@ -495,7 +506,7 @@ abstract class Instance
 	# else aborts
 	fun is_true: Bool do abort
 
-	# Return true if `self' IS `o' (using the Nit semantic of is)
+	# Return true if `self` IS `o` (using the Nit semantic of is)
 	fun eq_is(o: Instance): Bool do return self is o
 
 	# Human readable object identity "Type#number"
@@ -593,7 +604,7 @@ end
 
 redef class ANode
 	# Aborts the program with a message
-	# `v' is used to know if a colored message is displayed or not
+	# `v` is used to know if a colored message is displayed or not
 	private fun fatal(v: NaiveInterpreter, message: String)
 	do
 		if v.modelbuilder.toolcontext.opt_no_color.value == true then
@@ -608,7 +619,7 @@ redef class ANode
 end
 
 redef class APropdef
-	# Execute a `mpropdef' associated with the current node.
+	# Execute a `mpropdef` associated with the current node.
 	private fun call(v: NaiveInterpreter, mpropdef: MMethodDef, args: Array[Instance]): nullable Instance
 	do
 		fatal(v, "NOT YET IMPLEMENTED method kind {class_name}. {mpropdef}")
@@ -886,6 +897,8 @@ redef class AExternMethPropdef
 			if pname == "rand" then
 				var res = recvval.rand
 				return v.int_instance(res)
+			else if pname == "native_int_to_s" then
+				return v.native_string_instance(recvval.to_s)
 			end
 		else if cname == "NativeFile" then
 			var recvval = args.first.val
@@ -908,6 +921,9 @@ redef class AExternMethPropdef
 				return v.bool_instance(recvval.to_s.file_exists)
 			else if pname == "file_mkdir" then
 				recvval.to_s.mkdir
+				return null
+			else if pname == "file_chdir" then
+				recvval.to_s.chdir
 				return null
 			else if pname == "get_environ" then
 				var txt = recvval.to_s.environ
@@ -968,6 +984,8 @@ redef class AExternMethPropdef
 			return v.int_instance(parser_goto(args[1].to_i, args[2].to_i))
 		else if pname == "parser_action" then
 			return v.int_instance(parser_action(args[1].to_i, args[2].to_i))
+		else if pname == "file_getcwd" then
+			return v.native_string_instance(getcwd)
 		end
 		fatal(v, "NOT YET IMPLEMENTED extern {mpropdef}")
 		abort
@@ -989,7 +1007,7 @@ redef class AAttrPropdef
 		end
 	end
 
-	# Evaluate and set the default value of the attribute in `recv'
+	# Evaluate and set the default value of the attribute in `recv`
 	private fun init_expr(v: NaiveInterpreter, recv: Instance)
 	do
 		assert recv isa MutableInstance
@@ -1005,8 +1023,7 @@ redef class AAttrPropdef
 			return
 		end
 		var mtype = self.mpropdef.static_mtype.as(not null)
-		# TODO The needinit info is statically computed, move it to modelbuilder or whatever
-		mtype = mtype.resolve_for(self.mpropdef.mclassdef.bound_mtype, self.mpropdef.mclassdef.bound_mtype, self.mpropdef.mclassdef.mmodule, true)
+		mtype = mtype.anchor_to(v.mainmodule, recv.mtype.as(MClassType))
 		if mtype isa MNullableType then
 			recv.attributes[self.mpropdef.mproperty] = v.null_instance
 		end
@@ -1022,7 +1039,7 @@ redef class ADeferredMethPropdef
 end
 
 redef class AClassdef
-	# Execute an implicit `mpropdef' associated with the current node.
+	# Execute an implicit `mpropdef` associated with the current node.
 	private fun call(v: NaiveInterpreter, mpropdef: MMethodDef, args: Array[Instance]): nullable Instance
 	do
 		var super_inits = self.super_inits
@@ -1050,7 +1067,7 @@ end
 redef class AExpr
 	# Evaluate the node as a possible expression.
 	# Return a possible value
-	# NOTE: Do not call this method directly, but use `v.expr'
+	# NOTE: Do not call this method directly, but use `v.expr`
 	# This method is here to be implemented by subclasses.
 	private fun expr(v: NaiveInterpreter): nullable Instance
 	do
@@ -1059,7 +1076,7 @@ redef class AExpr
 	end
 
 	# Evaluate the node as a statement.
-	# NOTE: Do not call this method directly, but use `v.stmt'
+	# NOTE: Do not call this method directly, but use `v.stmt`
 	# This method is here to be implemented by subclasses (no need to return something).
 	private fun stmt(v: NaiveInterpreter)
 	do
@@ -1069,6 +1086,17 @@ redef class AExpr
 end
 
 redef class ABlockExpr
+	redef fun expr(v)
+	do
+		var last = self.n_expr.last
+		for e in self.n_expr do
+			if e == last then break
+			v.stmt(e)
+			if v.is_escaping then return null
+		end
+		return last.expr(v)
+	end
+
 	redef fun stmt(v)
 	do
 		for e in self.n_expr do
@@ -1098,11 +1126,12 @@ redef class AVarExpr
 end
 
 redef class AVarAssignExpr
-	redef fun stmt(v)
+	redef fun expr(v)
 	do
 		var i = v.expr(self.n_value)
-		if i == null then return
+		if i == null then return null
 		v.frame.map[self.variable.as(not null)] = i
+		return i
 	end
 end
 
@@ -1173,6 +1202,17 @@ redef class AAbortExpr
 end
 
 redef class AIfExpr
+	redef fun expr(v)
+	do
+		var cond = v.expr(self.n_expr)
+		if cond == null then return null
+		if cond.is_true then
+			return v.expr(self.n_then.as(not null))
+		else
+			return v.expr(self.n_else.as(not null))
+		end
+	end
+
 	redef fun stmt(v)
 	do
 		var cond = v.expr(self.n_expr)
@@ -1294,6 +1334,16 @@ redef class AOrExpr
 	end
 end
 
+redef class AImpliesExpr
+	redef fun expr(v)
+	do
+		var cond = v.expr(self.n_expr)
+		if cond == null then return null
+		if not cond.is_true then return v.true_instance
+		return v.expr(self.n_expr2)
+	end
+end
+
 redef class AAndExpr
 	redef fun expr(v)
 	do
@@ -1375,10 +1425,7 @@ redef class AStringFormExpr
 	do
 		var txt = self.value.as(not null)
 		var nat = v.native_string_instance(txt)
-		var res = new MutableInstance(v.mainmodule.get_primitive_class("String").mclass_type)
-		v.init_instance(res)
-		v.send(v.force_get_primitive_method("from_cstring", res.mtype), [res, nat])
-		v.check_init_instance(res)
+		var res = v.send(v.force_get_primitive_method("to_s", nat.mtype), [nat]).as(not null)
 		return res
 	end
 end
@@ -1592,7 +1639,7 @@ redef class ASuperExpr
 		var mpropdef = v.frame.mpropdef
 		mpropdef = mpropdef.lookup_next_definition(v.mainmodule, recv.mtype)
 		assert mpropdef isa MMethodDef
-		var res = v.call(mpropdef, args)
+		var res = v.call_without_varargs(mpropdef, args)
 		return res
 	end
 end

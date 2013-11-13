@@ -53,28 +53,40 @@ $ end foreach
 		_file = file
 	end
 
+	# The last peeked token to chain them
+	private var last_token: nullable Token = null
+
 	# Give the next token (but do not consume it)
 	fun peek: Token
 	do
-		while _token == null do
-			_token = get_token
+		var t = _token
+		if t != null then return t
+
+		t = get_token
+		while t == null do t = get_token
+
+		var l = last_token
+		if l != null then
+			l.next_token = t
+			t.prev_token = l
 		end
-		return _token.as(not null)
+
+		last_token = t
+		_token = t
+		return t
 	end
 
 	# Give and consume the next token
 	fun next: Token
 	do
-		var result = _token
-		while result == null do
-			result = get_token
-		end
+		var result = peek
 		_token = null
 		return result
 	end
 
-	# Get a token, or null if it is discarded
-	private fun get_token: nullable Token
+	# Primitive method to return a token, or return null if it is discarded
+	# Is used to implement `peek` and `next`
+	protected fun get_token: nullable Token
 	do
 		var dfa_state = 0
 

@@ -27,6 +27,7 @@ in "C Header" `{
 	#include <netinet/in.h>
 	#include <arpa/inet.h>
 	#include <netdb.h>
+	#include <sys/poll.h>
 	#include <errno.h>
 
 	typedef int S_DESCRIPTOR;
@@ -39,6 +40,67 @@ in "C Header" `{
 	typedef fd_set S_FD_SET;
 	typedef socklen_t S_LEN;
 `}
+
+# Wrapper for the data structure PollFD used for polling on a socket
+class PollFD
+
+	# The PollFD object
+	private var poll_struct: FFSocketPollFD
+
+	# A collection of the events to be watched
+	var events: Array[FFSocketPollValues]
+
+	init(pid: Int, events: Array[FFSocketPollValues])
+	do
+		assert events.length >= 1
+		self.events = events
+
+		var events_in_one = events[0]
+
+		for i in [1 .. events.length-1] do
+			events_in_one += events[i]
+		end
+
+		self.poll_struct = new FFSocketPollFD(pid, events_in_one)
+	end
+
+	# Reads the response and returns an array with the type of events that have been found
+	private fun check_response(response: Int): Array[FFSocketPollValues]
+	do
+		var resp_array = new Array[FFSocketPollValues]
+		for i in events do
+			if c_check_resp(response, i) != 0 then
+				resp_array.push(i)
+			end
+		end
+		return resp_array
+	end
+
+	# Checks if the poll call has returned true for a particular type of event
+	private fun c_check_resp(response: Int, mask: FFSocketPollValues): Int
+	`{
+		return response & mask;
+	`}
+
+end
+
+# Data structure used by the poll function
+private extern FFSocketPollFD `{ struct pollfd `}
+	# File descriptor id
+	private fun fd: Int `{ return recv.fd; `}
+	# List of events to be watched
+	private fun events: Int `{ return recv.events; `}
+	# List of events received by the last poll function
+	private fun revents: Int `{  return recv.revents; `}
+
+	new (pid: Int, events: FFSocketPollValues) `{
+		struct pollfd poll;
+		poll.fd = pid;
+		poll.events = events;
+		return poll;
+	`}
+
+end
 
 extern FFSocket `{ S_DESCRIPTOR* `}
 	new socket(domain: FFSocketAddressFamilies, socketType: FFSocketTypes, protocol: FFSocketProtocolFamilies) `{
@@ -57,20 +119,48 @@ extern FFSocket `{ S_DESCRIPTOR* `}
 	fun write(buffer: String): Int import String::to_cstring, String::length `{ return write(*recv, (char*)String_to_cstring(buffer), String_length(buffer)); `}
 
 	fun read: String `{
-		char c[1024];
-		int n = read(*recv, c, (sizeof(c)-1));
+		char *c = (char*)malloc(1024);
+		int n = read(*recv, c, 1023);
 		if(n < 0) exit(-1);
 		c[n] = '\0';
-		return new_String_from_cstring(c);
+		return NativeString_to_s(c);
 	`}
 
 	fun bind(addrIn: FFSocketAddrIn): Int `{ return bind(*recv, (S_ADDR*)addrIn, sizeof(*addrIn)); `}
 	fun listen(size: Int): Int `{ return listen(*recv, size); `}
 
+	# Checks if the buffer is ready for any event specified when creating the pollfd structure
+	fun socket_poll(filedesc: PollFD, timeout: Int): Array[FFSocketPollValues]
+	do
+		var result = i_poll(filedesc.poll_struct, timeout)
+		assert result != -1
+		return filedesc.check_response(result)
+	end
+
+	# Call to the poll function of the C socket
+	#
+	# Signature :
+	# int poll(struct pollfd fds[], nfds_t nfds, int timeout);
+	#
+	# Official documentation of the poll function :
+	#
+	# The poll() function provides applications with a mechanism for multiplexing input/output over a set of file descriptors.
+	# For each member of the array pointed to by fds, poll() shall examine the given file descriptor for the event(s) specified in events.
+	# The number of pollfd structures in the fds array is specified by nfds.
+	# The poll() function shall identify those file descriptors on which an application can read or write data, or on which certain events have occurred.
+	# The fds argument specifies the file descriptors to be examined and the events of interest for each file descriptor.
+	# It is a pointer to an array with one member for each open file descriptor of interest.
+	# The array's members are pollfd structures within which fd specifies an open file descriptor and events and revents are bitmasks constructed by
+	# OR'ing a combination of the pollfd flags.
+	private fun i_poll(filedesc: FFSocketPollFD, timeout: Int): Int `{
+		int poll_return = poll(&filedesc, 1, timeout);
+		return poll_return;
+	`}
+
 	private fun i_accept(addrIn: FFSocketAddrIn): FFSocket `{
 		S_LEN s = sizeof(S_ADDR);
 		S_DESCRIPTOR *d = NULL;
-		d = malloc(sizeof(S_DESCRIPTOR*));
+		d = malloc(sizeof(S_DESCRIPTOR));
 		*d = accept(*recv,(S_ADDR*)addrIn, &s);
 		return d;
 	`}
@@ -85,7 +175,7 @@ end
 extern FFSocketAcceptResult `{ S_ACCEPT_RESULT* `}
 	new (socket: FFSocket, addrIn: FFSocketAddrIn) `{
 		S_ACCEPT_RESULT *sar = NULL;
-		sar = malloc( sizeof(S_ACCEPT_RESULT*) );
+		sar = malloc( sizeof(S_ACCEPT_RESULT) );
 		sar->s_desc = *socket;
 		sar->addr_in = *addrIn;
 		return sar;
@@ -98,12 +188,12 @@ end
 extern FFSocketAddrIn `{ S_ADDR_IN* `}
 	new `{
 		S_ADDR_IN *sai = NULL;
-		sai = malloc( sizeof(S_ADDR_IN*) );
+		sai = malloc( sizeof(S_ADDR_IN) );
 		return sai;
 	`}
 	new with(port: Int, family: FFSocketAddressFamilies) `{
 		S_ADDR_IN *sai = NULL;
-		sai = malloc( sizeof(S_ADDR_IN*) );
+		sai = malloc( sizeof(S_ADDR_IN) );
 		sai->sin_family = family;
 		sai->sin_port = htons(port);
 		sai->sin_addr.s_addr = INADDR_ANY;
@@ -111,20 +201,20 @@ extern FFSocketAddrIn `{ S_ADDR_IN* `}
 	`}
 	new with_hostent(hostent: FFSocketHostent, port: Int) `{
 		S_ADDR_IN *sai = NULL;
-		sai = malloc( sizeof(S_ADDR_IN*) );
+		sai = malloc( sizeof(S_ADDR_IN) );
 		sai->sin_family = hostent->h_addrtype;
 		sai->sin_port = htons(port);
 		memcpy( (char*)&sai->sin_addr.s_addr, (char*)hostent->h_addr, hostent->h_length );
 		return sai;
 	`}
-	fun address: String `{ return new_String_from_cstring( (char*)inet_ntoa(recv->sin_addr) ); `}
+	fun address: String `{ return NativeString_to_s( (char*)inet_ntoa(recv->sin_addr) ); `}
 	fun family: FFSocketAddressFamilies `{ return recv->sin_family; `}
 	fun port: Int `{ return ntohs(recv->sin_port); `}
 	fun destroy `{ free(recv); `}
 end
 
 extern FFSocketHostent `{ S_HOSTENT* `}
-	private fun i_h_aliases(i: Int): String `{ return new_String_from_cstring(recv->h_aliases[i]); `}
+	private fun i_h_aliases(i: Int): String `{ return NativeString_to_s(recv->h_aliases[i]); `}
 	private fun i_h_aliases_reachable(i: Int): Bool `{ return (recv->h_aliases[i] != NULL); `}
 	fun h_aliases: Array[String]
 	do
@@ -137,16 +227,16 @@ extern FFSocketHostent `{ S_HOSTENT* `}
 		end
 		return d
 	end
-	fun h_addr: String `{ return new_String_from_cstring( (char*)inet_ntoa(*(S_IN_ADDR*)recv->h_addr) ); `}
+	fun h_addr: String `{ return NativeString_to_s( (char*)inet_ntoa(*(S_IN_ADDR*)recv->h_addr) ); `}
 	fun h_addrtype: Int `{ return recv->h_addrtype; `}
 	fun h_length: Int `{ return recv->h_length; `}
-	fun h_name: String `{ return new_String_from_cstring(recv->h_name); `}
+	fun h_name: String `{ return NativeString_to_s(recv->h_name); `}
 end
 
 extern FFTimeval `{ S_TIMEVAL* `}
 	new (seconds: Int, microseconds: Int) `{
 		S_TIMEVAL* tv = NULL;
-		tv = malloc( sizeof(S_TIMEVAL*) );
+		tv = malloc( sizeof(S_TIMEVAL) );
 		tv->tv_sec = seconds;
 		tv->tv_usec = microseconds;
 		return tv;
@@ -159,7 +249,7 @@ end
 extern FFSocketSet `{ S_FD_SET* `}
 	new `{
 		S_FD_SET *f = NULL;
-		f = malloc( sizeof(S_FD_SET*) );
+		f = malloc( sizeof(S_FD_SET) );
 		return f;
 	`}
 	fun set(s: FFSocket) `{ FD_SET( *s, recv ); `}
@@ -218,3 +308,21 @@ extern FFSocketProtocolFamilies `{ int `}
 	new pf_max `{ return PF_MAX; `}
 end
 
+# Used for the poll function of a socket, mix several Poll values to check for events on more than one type of event
+extern FFSocketPollValues `{ int `}
+	new pollin `{ return POLLIN; `}           # Data other than high-priority data may be read without blocking.
+	new pollrdnorm `{ return POLLRDNORM; `}   # Normal data may be read without blocking.
+	new pollrdband `{ return POLLRDBAND; `}   # Priority data may be read without blocking.
+	new pollpri `{ return POLLPRI; `}         # High-priority data may be read without blocking.
+	new pollout `{ return POLLOUT; `}         # Normal data may be written without blocking.
+	new pollwrnorm `{ return POLLWRNORM; `}   # Equivalent to POLLOUT
+	new pollwrband `{ return POLLWRBAND; `}   # Priority data may be written.
+	new pollerr `{ return POLLERR; `}         # An error has occurred on the device or stream. This flag is only valid in the revents bitmask; it shall be ignored in the events member.
+	new pollhup `{ return POLLHUP; `}         # The device has been disconnected. This event and POLLOUT are mutually-exclusive; a stream can never be writable if a hangup has occurred. However, this event and POLLIN, POLLRDNORM, POLLRDBAND, or POLLPRI are not mutually-exclusive. This flag is only valid in the revents bitmask; it shall be ignored in the events member.
+	new pollnval `{ return POLLNVAL; `}       # The specified fd value is invalid. This flag is only valid in the revents member; it shall ignored in the events member.
+
+	# Combines two FFSocketPollValues
+	private fun +(other: FFSocketPollValues): FFSocketPollValues `{
+		return recv | other;
+	`}
+end

@@ -19,6 +19,7 @@ module nitg
 
 import modelbuilder
 import frontend
+import transform
 import rapid_type_analysis
 import global_compiler
 import separate_erasure_compiler
@@ -30,6 +31,9 @@ var toolcontext = new ToolContext
 # Create a new option for --global
 var opt_global = new OptionBool("Use global compilation", "--global")
 toolcontext.option_context.add_option(opt_global)
+
+var opt_mixins = new OptionArray("Additionals module to min-in", "-m")
+toolcontext.option_context.add_option(opt_mixins)
 
 # We do not add other options, so process them now!
 toolcontext.process_options
@@ -53,13 +57,19 @@ var progname = arguments.first
 
 # Here we load an process all modules passed on the command line
 var mmodules = modelbuilder.parse([progname])
+mmodules.add_all modelbuilder.parse(opt_mixins.value)
 
 if mmodules.is_empty then return
 modelbuilder.run_phases
 
-# Here we launch the interpreter on the main module
-assert mmodules.length == 1
-var mainmodule = mmodules.first
+var mainmodule
+if mmodules.length == 1 then
+	mainmodule = mmodules.first
+else
+	mainmodule = new MModule(model, null, mmodules.first.name, mmodules.first.location)
+	mainmodule.set_imported_mmodules(mmodules)
+end
+
 var analysis = modelbuilder.do_rapid_type_analysis(mainmodule)
 
 if toolcontext.opt_erasure.value then

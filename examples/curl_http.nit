@@ -49,7 +49,7 @@ end
 
 # Program
 if args.length < 2 then
-  print "Usage {sys.program_name} <method wished [POST, GET, GET_FILE]> <target url>"
+  print "Usage: curl_http <method wished [POST, GET, GET_FILE]> <target url>"
 else
 
   var myHttpFetcher = new MyHttpFetcher

@@ -1,0 +1,8 @@
+Grammar qualified;
+
+Parser
+	e = r q id;
+	r = e '.' | ;
+	q = qe+ | ;
+	qe = id '::' ;
+	id = 'id';

@@ -94,13 +94,14 @@ extern const int SFT_standard___collection___abstract_collection[];
 #define COLOR_standard___collection___abstract_collection___MapRead (SFT_standard___collection___abstract_collection[27])
 #define INIT_TABLE_POS_standard___collection___abstract_collection___MapRead (SFT_standard___collection___abstract_collection[28] + 0)
 #define CALL_standard___collection___abstract_collection___MapRead_____bra(recv) ((standard___collection___abstract_collection___MapRead_____bra_t)CALL((recv), (SFT_standard___collection___abstract_collection[28] + 1)))
-#define CALL_standard___collection___abstract_collection___MapRead___has_key(recv) ((standard___collection___abstract_collection___MapRead___has_key_t)CALL((recv), (SFT_standard___collection___abstract_collection[28] + 2)))
-#define CALL_standard___collection___abstract_collection___MapRead___iterator(recv) ((standard___collection___abstract_collection___MapRead___iterator_t)CALL((recv), (SFT_standard___collection___abstract_collection[28] + 3)))
-#define CALL_standard___collection___abstract_collection___MapRead___iterate(recv) ((standard___collection___abstract_collection___MapRead___iterate_t)CALL((recv), (SFT_standard___collection___abstract_collection[28] + 4)))
-#define CALL_standard___collection___abstract_collection___MapRead___values(recv) ((standard___collection___abstract_collection___MapRead___values_t)CALL((recv), (SFT_standard___collection___abstract_collection[28] + 5)))
-#define CALL_standard___collection___abstract_collection___MapRead___keys(recv) ((standard___collection___abstract_collection___MapRead___keys_t)CALL((recv), (SFT_standard___collection___abstract_collection[28] + 6)))
-#define CALL_standard___collection___abstract_collection___MapRead___is_empty(recv) ((standard___collection___abstract_collection___MapRead___is_empty_t)CALL((recv), (SFT_standard___collection___abstract_collection[28] + 7)))
-#define CALL_standard___collection___abstract_collection___MapRead___length(recv) ((standard___collection___abstract_collection___MapRead___length_t)CALL((recv), (SFT_standard___collection___abstract_collection[28] + 8)))
+#define CALL_standard___collection___abstract_collection___MapRead___get_or_default(recv) ((standard___collection___abstract_collection___MapRead___get_or_default_t)CALL((recv), (SFT_standard___collection___abstract_collection[28] + 2)))
+#define CALL_standard___collection___abstract_collection___MapRead___has_key(recv) ((standard___collection___abstract_collection___MapRead___has_key_t)CALL((recv), (SFT_standard___collection___abstract_collection[28] + 3)))
+#define CALL_standard___collection___abstract_collection___MapRead___iterator(recv) ((standard___collection___abstract_collection___MapRead___iterator_t)CALL((recv), (SFT_standard___collection___abstract_collection[28] + 4)))
+#define CALL_standard___collection___abstract_collection___MapRead___iterate(recv) ((standard___collection___abstract_collection___MapRead___iterate_t)CALL((recv), (SFT_standard___collection___abstract_collection[28] + 5)))
+#define CALL_standard___collection___abstract_collection___MapRead___values(recv) ((standard___collection___abstract_collection___MapRead___values_t)CALL((recv), (SFT_standard___collection___abstract_collection[28] + 6)))
+#define CALL_standard___collection___abstract_collection___MapRead___keys(recv) ((standard___collection___abstract_collection___MapRead___keys_t)CALL((recv), (SFT_standard___collection___abstract_collection[28] + 7)))
+#define CALL_standard___collection___abstract_collection___MapRead___is_empty(recv) ((standard___collection___abstract_collection___MapRead___is_empty_t)CALL((recv), (SFT_standard___collection___abstract_collection[28] + 8)))
+#define CALL_standard___collection___abstract_collection___MapRead___length(recv) ((standard___collection___abstract_collection___MapRead___length_t)CALL((recv), (SFT_standard___collection___abstract_collection[28] + 9)))
 #define ID_standard___collection___abstract_collection___Map (SFT_standard___collection___abstract_collection[29])
 #define COLOR_standard___collection___abstract_collection___Map (SFT_standard___collection___abstract_collection[30])
 #define INIT_TABLE_POS_standard___collection___abstract_collection___Map (SFT_standard___collection___abstract_collection[31] + 0)
@@ -267,6 +268,8 @@ void standard___collection___abstract_collection___Set___remove_all(val_t p0, va
 typedef void (*standard___collection___abstract_collection___Set___remove_all_t)(val_t p0, val_t p1);
 val_t standard___collection___abstract_collection___MapRead_____bra(val_t p0, val_t p1);
 typedef val_t (*standard___collection___abstract_collection___MapRead_____bra_t)(val_t p0, val_t p1);
+val_t standard___collection___abstract_collection___MapRead___get_or_default(val_t p0, val_t p1, val_t p2);
+typedef val_t (*standard___collection___abstract_collection___MapRead___get_or_default_t)(val_t p0, val_t p1, val_t p2);
 val_t standard___collection___abstract_collection___MapRead___has_key(val_t p0, val_t p1);
 typedef val_t (*standard___collection___abstract_collection___MapRead___has_key_t)(val_t p0, val_t p1);
 val_t standard___collection___abstract_collection___MapRead___iterator(val_t p0);

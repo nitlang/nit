@@ -359,7 +359,7 @@ val_t standard___math___Collection___rand(val_t p0){
     REGB1 = TAG_Bool(IS_EQUAL_OO(closctx->REG[2],REGB0));
     if (UNTAG_Bool(REGB1)) {
     } else {
-      /* ../lib/standard/kernel.nit:230 */
+      /* ../lib/standard/kernel.nit:237 */
       REGB0 = TAG_Bool((closctx->REG[2])==(REGB0));
       /* ../lib/standard/math.nit:51 */
       REGB1 = REGB0;
@@ -371,7 +371,7 @@ val_t standard___math___Collection___rand(val_t p0){
     }
     /* ../lib/standard/math.nit:52 */
     REGB1 = TAG_Int(1);
-    /* ../lib/standard/kernel.nit:240 */
+    /* ../lib/standard/kernel.nit:247 */
     REGB1 = TAG_Int(UNTAG_Int(closctx->REG[2])-UNTAG_Int(REGB1));
     /* ../lib/standard/math.nit:52 */
     closctx->REG[2] = REGB1;

@@ -72,7 +72,7 @@ redef class String
 			end
 		end
 
-		return new String.from_cstring( result )
+		return result.to_s
 	end
 
 	# Decodes the receiver string from base64.
@@ -131,6 +131,6 @@ redef class String
 			result[s*3] = e.rshift(2*8).bin_and( mask_8bit ).ascii
 		end
 
-		return new String.from_cstring( result )
+		return result.to_s
 	end
 end

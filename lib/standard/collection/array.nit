@@ -13,7 +13,7 @@
 
 # This module introduces the standard array structure.
 # It also implements two other abstract collections : ArrayMap and ArraySet
-package array
+module array
 
 import abstract_collection
 
@@ -95,9 +95,9 @@ abstract class AbstractArrayRead[E]
 		return -1
 	end
 
-	# Return a new array that is the reverse of `self'
+	# Return a new array that is the reverse of `self`
 	#
-	#     [1,2,3].reversed # -> [3, 2, 1]
+	#     assert [1,2,3].reversed      ==  [3, 2, 1]
 	fun reversed: Array[E]
 	do
 		var cmp = _length
@@ -109,12 +109,12 @@ abstract class AbstractArrayRead[E]
 		return result
 	end
 
-	# Copy a portion of `self' to an other array.
+	# Copy a portion of `self` to an other array.
 	#
 	#     var a = [1, 2, 3, 4]
 	#     var b = [10, 20, 30, 40, 50]
 	#     a.copy_to(1, 2, b, 2)
-	#     b # -> [10, 20, 2, 3, 50]
+	#     assert b      ==  [10, 20, 2, 3, 50]
 	protected fun copy_to(start: Int, len: Int, dest: AbstractArray[E], new_start: Int)
 	do
 		# TODO native one
@@ -137,20 +137,6 @@ abstract class AbstractArrayRead[E]
 	end
 
 	redef fun iterator: ArrayIterator[E] do return new ArrayIterator[E](self)
-
-	# Two arrays are equals if they have the same items in the same order.
-	redef fun ==(o)
-	do
-		if not o isa AbstractArray[nullable Object] or o is null then return false
-		var l = length
-		if o.length != l then return false
-		var i = 0
-		while i < l do
-			if self[i] != o[i] then return false
-			i += 1
-		end
-		return true
-	end
 end
 
 # Resizable one dimension array of objects.
@@ -158,7 +144,7 @@ abstract class AbstractArray[E]
 	super AbstractArrayRead[E]
 	super Sequence[E]
 
-	# Force the capacity to be at least `cap'.
+	# Force the capacity to be at least `cap`.
 	# The capacity of the array is an internal information.
 	# However, this method can be used to prepare a large amount of add
 	fun enlarge(cap: Int) is abstract
@@ -201,7 +187,7 @@ abstract class AbstractArray[E]
 	#
 	#     var a= [10, 20, 30, 40]
 	#     a.insert(100, 2)
-	#     a # -> [10, 20, 100, 30, 40]
+	#     assert a      ==  [10, 20, 100, 30, 40]
 	fun insert(item: E, pos: Int)
 	do
 		enlarge(length + 1)
@@ -241,11 +227,11 @@ abstract class AbstractArray[E]
 	#
 	#     var a = [10, 20, 30, 40]
 	#     a.swap_at(1, 3)
-	#     a # -> [10, 40, 30, 20]
+	#     assert a      ==  [10, 40, 30, 20]
 	fun swap_at(a: Int,b: Int)
 	do
 	    var e = self[a]
-	    self[a] = b
+	    self[a] = self[b]
 	    self[b] = e
 	end
 end
@@ -253,12 +239,13 @@ end
 # Resizable one dimension array of objects.
 #
 # Arrays have a literal representation.
-#     a = [12, 32, 8]
-# is equivalent with:
-#     a = new Array[Int]
-#     a.push(12)
-#     a.push(32)
-#     a.push(8)
+#     var a = [12, 32, 8]
+#     # is equivalent with:
+#     var b = new Array[Int]
+#     b.push(12)
+#     b.push(32)
+#     b.push(8)
+#     assert a == b
 class Array[E]
 	super AbstractArray[E]
 	super ArrayCapable[E]
@@ -327,7 +314,7 @@ class Array[E]
 		self.add_all(items)
 	end
 
-	# Create an array with some `items'.
+	# Create an array with some `objects`.
 	init with_items(objects: E...)
 	do
 		_items = objects._items
@@ -344,7 +331,7 @@ class Array[E]
 		_length = 0
 	end
 
-	# Create an array of `count' elements
+	# Create an array of `count` elements
 	init filled_with(value: E, count: Int)
 	do
 		assert positive: count >= 0
@@ -374,7 +361,7 @@ class Array[E]
 	# FIXME: Remove it once modules can intrude non local modules
 	fun intern_items: NativeArray[E] do return _items.as(not null)
 
-	# The size of `_items'.
+	# The size of `_items`.
 	var _capacity: Int = 0
 
 	# Sort the array using the !cmp function.
@@ -384,7 +371,7 @@ class Array[E]
 		sub_sort(0, length-1) !cmp(x,y) = cmp(x, y)
 	end
 
-	# Sort `array' between `from' and `to' indices
+	# Sort `array` between `from` and `to` indices
 	private fun sub_sort(from: Int, to: Int)
 		!cmp(e1,e2: E): Int
 	do
@@ -430,7 +417,7 @@ class Array[E]
 	end
 end
 
-# An `Iterator' on `AbstractArray'
+# An `Iterator` on `AbstractArray`
 class ArrayIterator[E]
 	super IndexedIterator[E]
 
@@ -487,7 +474,7 @@ class ArraySet[E: Object]
 
 	redef fun iterator do return new ArraySetIterator[E](_array.iterator)
 
-	# Assume the capacity is at least `cap'.
+	# Assume the capacity is at least `cap`.
 	fun enlarge(cap: Int) do _array.enlarge(cap)
 
 	private fun remove_at(i: Int)
@@ -557,7 +544,7 @@ class ArrayMap[K: Object, E]
 
 	redef fun clear do _items.clear
 
-	# Assume the capacity to be at least `cap'.
+	# Assume the capacity to be at least `cap`.
 	fun enlarge(cap: Int) do _items.enlarge(cap)
 
 	redef fun couple_at(key)
@@ -583,7 +570,7 @@ class ArrayMap[K: Object, E]
 	# The last positive result given by a index(1) call
 	var _last_index: Int = 0
 
-	# Where is the `key' in `_item'?
+	# Where is the `key` in `_item`?
 	# return -1 if not found
 	private fun index(key: K): Int
 	do
@@ -691,7 +678,7 @@ end
 # Others tools ################################################################
 
 redef class Iterator[E]
-	# Interate on `self' and build an array
+	# Interate on `self` and build an array
 	fun to_a: Array[E]
 	do
 		var res = new Array[E]
@@ -715,7 +702,7 @@ end
 
 # Subclasses of this class can create native arrays
 interface ArrayCapable[E]
-	# Get a new array of `size' elements.
+	# Get a new array of `size` elements.
 	protected fun calloc_array(size: Int): NativeArray[E] is intern
 end
 

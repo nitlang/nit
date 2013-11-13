@@ -16,7 +16,7 @@
 # limitations under the License.
 
 # Intermediate code global analysis and optimizations
-package global
+module global
 
 # Global imports
 import icode

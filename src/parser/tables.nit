@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # Module that interfaces the parsing tables.
-package tables
+module tables
 
 # Interface allowing the acces of the tables used during the parsing.
 interface TablesCapable

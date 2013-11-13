@@ -109,15 +109,15 @@ void standard___kernel___Object___output(val_t p0){
   fra.me.REG[0] = p0;
   /* ../lib/standard/kernel.nit:54 */
   REGB0 = TAG_Char('<');
-  /* ../lib/standard/kernel.nit:383 */
+  /* ../lib/standard/kernel.nit:436 */
   printf("%c", (unsigned char)UNTAG_Char(REGB0));;
   /* ../lib/standard/kernel.nit:55 */
   REGB0 = CALL_standard___kernel___Object___object_id(fra.me.REG[0])(fra.me.REG[0]);
-  /* ../lib/standard/kernel.nit:232 */
+  /* ../lib/standard/kernel.nit:239 */
   printf("%ld\n", UNTAG_Int(REGB0));;
   /* ../lib/standard/kernel.nit:56 */
   REGB0 = TAG_Char('>');
-  /* ../lib/standard/kernel.nit:383 */
+  /* ../lib/standard/kernel.nit:436 */
   printf("%c", (unsigned char)UNTAG_Char(REGB0));;
   stack_frame_head = fra.me.prev;
   return;
@@ -350,7 +350,7 @@ val_t standard___kernel___Comparable_____leqg(val_t p0, val_t p1){
   if (UNTAG_Bool(REGB0)) {
     /* ../lib/standard/kernel.nit:108 */
     REGB0 = TAG_Int(1);
-    /* ../lib/standard/kernel.nit:239 */
+    /* ../lib/standard/kernel.nit:246 */
     REGB0 = TAG_Int(-UNTAG_Int(REGB0));
     /* ../lib/standard/kernel.nit:108 */
     goto label1;
@@ -586,49 +586,49 @@ val_t standard___kernel___Discrete___distance(val_t p0, val_t p1){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:168 */
+  /* ../lib/standard/kernel.nit:169 */
   REGB0 = CALL_standard___kernel___Comparable_____l(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
   if (UNTAG_Bool(REGB0)) {
-    /* ../lib/standard/kernel.nit:169 */
-    fra.me.REG[2] = fra.me.REG[0];
     /* ../lib/standard/kernel.nit:170 */
+    fra.me.REG[2] = fra.me.REG[0];
+    /* ../lib/standard/kernel.nit:171 */
     fra.me.REG[3] = fra.me.REG[1];
   } else {
-    /* ../lib/standard/kernel.nit:171 */
+    /* ../lib/standard/kernel.nit:172 */
     REGB0 = CALL_standard___kernel___Comparable_____g(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1]);
     if (UNTAG_Bool(REGB0)) {
-      /* ../lib/standard/kernel.nit:172 */
-      fra.me.REG[2] = fra.me.REG[1];
       /* ../lib/standard/kernel.nit:173 */
+      fra.me.REG[2] = fra.me.REG[1];
+      /* ../lib/standard/kernel.nit:174 */
       fra.me.REG[3] = fra.me.REG[0];
     } else {
-      /* ../lib/standard/kernel.nit:175 */
+      /* ../lib/standard/kernel.nit:176 */
       REGB0 = TAG_Int(0);
       goto label1;
     }
   }
-  /* ../lib/standard/kernel.nit:178 */
-  REGB1 = TAG_Int(0);
   /* ../lib/standard/kernel.nit:179 */
+  REGB1 = TAG_Int(0);
+  /* ../lib/standard/kernel.nit:180 */
   while(1) {
     REGB2 = CALL_standard___kernel___Comparable_____l(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
     if (UNTAG_Bool(REGB2)) {
-      /* ../lib/standard/kernel.nit:180 */
+      /* ../lib/standard/kernel.nit:181 */
       fra.me.REG[0] = CALL_standard___kernel___Discrete___succ(fra.me.REG[2])(fra.me.REG[2]);
       fra.me.REG[2] = fra.me.REG[0];
-      /* ../lib/standard/kernel.nit:181 */
+      /* ../lib/standard/kernel.nit:182 */
       REGB2 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB2 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB2));
-      /* ../lib/standard/kernel.nit:181 */
+      /* ../lib/standard/kernel.nit:182 */
       REGB1 = REGB2;
     } else {
-      /* ../lib/standard/kernel.nit:179 */
+      /* ../lib/standard/kernel.nit:180 */
       goto label2;
     }
   }
   label2: while(0);
-  /* ../lib/standard/kernel.nit:183 */
+  /* ../lib/standard/kernel.nit:184 */
   REGB0 = REGB1;
   goto label1;
   label1: while(0);
@@ -642,13 +642,13 @@ val_t standard___kernel___Bool___object_id(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 197;
+  fra.me.line = 198;
   fra.me.meth = LOCATE_standard___kernel___Bool___object_id;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ../lib/standard/kernel.nit:197 */
+  /* ../lib/standard/kernel.nit:198 */
   REGB0 = TAG_Int(UNTAG_Bool(REGB0));
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -660,7 +660,7 @@ val_t standard___kernel___Bool_____eqeq(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 198;
+  fra.me.line = 199;
   fra.me.meth = LOCATE_standard___kernel___Bool_____eqeq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
@@ -668,7 +668,7 @@ val_t standard___kernel___Bool_____eqeq(val_t p0, val_t p1){
   fra.me.REG[0] = NIT_NULL;
   REGB0 = p0;
   fra.me.REG[0] = p1;
-  /* ../lib/standard/kernel.nit:198 */
+  /* ../lib/standard/kernel.nit:199 */
   REGB0 = TAG_Bool((REGB0)==(fra.me.REG[0]));
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -680,7 +680,7 @@ val_t standard___kernel___Bool_____neq(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 199;
+  fra.me.line = 200;
   fra.me.meth = LOCATE_standard___kernel___Bool_____neq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
@@ -688,7 +688,7 @@ val_t standard___kernel___Bool_____neq(val_t p0, val_t p1){
   fra.me.REG[0] = NIT_NULL;
   REGB0 = p0;
   fra.me.REG[0] = p1;
-  /* ../lib/standard/kernel.nit:199 */
+  /* ../lib/standard/kernel.nit:200 */
   REGB0 = TAG_Bool((REGB0)!=(fra.me.REG[0]));
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -700,13 +700,13 @@ void standard___kernel___Bool___output(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 200;
+  fra.me.line = 201;
   fra.me.meth = LOCATE_standard___kernel___Bool___output;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ../lib/standard/kernel.nit:200 */
+  /* ../lib/standard/kernel.nit:201 */
   (void)printf(UNTAG_Bool(REGB0)?"true\n":"false\n");;
   stack_frame_head = fra.me.prev;
   return;
@@ -718,14 +718,14 @@ val_t standard___kernel___Float___object_id(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 206;
+  fra.me.line = 207;
   fra.me.meth = LOCATE_standard___kernel___Float___object_id;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ../lib/standard/kernel.nit:206 */
+  /* ../lib/standard/kernel.nit:207 */
   REGB0 = TAG_Int((bigint)UNBOX_Float(fra.me.REG[0]));
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -736,14 +736,14 @@ void standard___kernel___Float___output(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 207;
+  fra.me.line = 208;
   fra.me.meth = LOCATE_standard___kernel___Float___output;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ../lib/standard/kernel.nit:207 */
+  /* ../lib/standard/kernel.nit:208 */
   printf("%f\n", UNBOX_Float(fra.me.REG[0]));;
   stack_frame_head = fra.me.prev;
   return;
@@ -755,7 +755,7 @@ val_t standard___kernel___Float_____leq(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 209;
+  fra.me.line = 210;
   fra.me.meth = LOCATE_standard___kernel___Float_____leq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -764,7 +764,7 @@ val_t standard___kernel___Float_____leq(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ../lib/standard/kernel.nit:209 */
+  /* ../lib/standard/kernel.nit:210 */
   REGB0 = TAG_Bool(UNBOX_Float(fra.me.REG[0])<=UNBOX_Float(fra.me.REG[1]));
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -776,7 +776,7 @@ val_t standard___kernel___Float_____l(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 210;
+  fra.me.line = 211;
   fra.me.meth = LOCATE_standard___kernel___Float_____l;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -785,7 +785,7 @@ val_t standard___kernel___Float_____l(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ../lib/standard/kernel.nit:210 */
+  /* ../lib/standard/kernel.nit:211 */
   REGB0 = TAG_Bool(UNBOX_Float(fra.me.REG[0])<UNBOX_Float(fra.me.REG[1]));
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -797,7 +797,7 @@ val_t standard___kernel___Float_____geq(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 211;
+  fra.me.line = 212;
   fra.me.meth = LOCATE_standard___kernel___Float_____geq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -806,7 +806,7 @@ val_t standard___kernel___Float_____geq(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ../lib/standard/kernel.nit:211 */
+  /* ../lib/standard/kernel.nit:212 */
   REGB0 = TAG_Bool(UNBOX_Float(fra.me.REG[0])>=UNBOX_Float(fra.me.REG[1]));
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -818,7 +818,7 @@ val_t standard___kernel___Float_____g(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 212;
+  fra.me.line = 213;
   fra.me.meth = LOCATE_standard___kernel___Float_____g;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -827,7 +827,7 @@ val_t standard___kernel___Float_____g(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ../lib/standard/kernel.nit:212 */
+  /* ../lib/standard/kernel.nit:213 */
   REGB0 = TAG_Bool(UNBOX_Float(fra.me.REG[0])>UNBOX_Float(fra.me.REG[1]));
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -838,7 +838,7 @@ val_t standard___kernel___Float_____plus(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 213;
+  fra.me.line = 214;
   fra.me.meth = LOCATE_standard___kernel___Float_____plus;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -847,7 +847,7 @@ val_t standard___kernel___Float_____plus(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ../lib/standard/kernel.nit:213 */
+  /* ../lib/standard/kernel.nit:214 */
   fra.me.REG[1] = BOX_Float(UNBOX_Float(fra.me.REG[0])+UNBOX_Float(fra.me.REG[1]));
   stack_frame_head = fra.me.prev;
   return fra.me.REG[1];
@@ -858,14 +858,14 @@ val_t standard___kernel___Float___unary__minus(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 214;
+  fra.me.line = 215;
   fra.me.meth = LOCATE_standard___kernel___Float___unary__minus;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ../lib/standard/kernel.nit:214 */
+  /* ../lib/standard/kernel.nit:215 */
   fra.me.REG[0] = BOX_Float(-UNBOX_Float(fra.me.REG[0]));
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -876,7 +876,7 @@ val_t standard___kernel___Float_____minus(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 215;
+  fra.me.line = 216;
   fra.me.meth = LOCATE_standard___kernel___Float_____minus;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -885,7 +885,7 @@ val_t standard___kernel___Float_____minus(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ../lib/standard/kernel.nit:215 */
+  /* ../lib/standard/kernel.nit:216 */
   fra.me.REG[1] = BOX_Float(UNBOX_Float(fra.me.REG[0])-UNBOX_Float(fra.me.REG[1]));
   stack_frame_head = fra.me.prev;
   return fra.me.REG[1];
@@ -896,7 +896,7 @@ val_t standard___kernel___Float_____star(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 216;
+  fra.me.line = 217;
   fra.me.meth = LOCATE_standard___kernel___Float_____star;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -905,7 +905,7 @@ val_t standard___kernel___Float_____star(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ../lib/standard/kernel.nit:216 */
+  /* ../lib/standard/kernel.nit:217 */
   fra.me.REG[1] = BOX_Float(UNBOX_Float(fra.me.REG[0])*UNBOX_Float(fra.me.REG[1]));
   stack_frame_head = fra.me.prev;
   return fra.me.REG[1];
@@ -916,7 +916,7 @@ val_t standard___kernel___Float_____slash(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 217;
+  fra.me.line = 218;
   fra.me.meth = LOCATE_standard___kernel___Float_____slash;
   fra.me.has_broke = 0;
   fra.me.REG_size = 2;
@@ -925,7 +925,7 @@ val_t standard___kernel___Float_____slash(val_t p0, val_t p1){
   fra.me.REG[1] = NIT_NULL;
   fra.me.REG[0] = p0;
   fra.me.REG[1] = p1;
-  /* ../lib/standard/kernel.nit:217 */
+  /* ../lib/standard/kernel.nit:218 */
   fra.me.REG[1] = BOX_Float(UNBOX_Float(fra.me.REG[0])/UNBOX_Float(fra.me.REG[1]));
   stack_frame_head = fra.me.prev;
   return fra.me.REG[1];
@@ -937,14 +937,14 @@ val_t standard___kernel___Float___to_i(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 219;
+  fra.me.line = 220;
   fra.me.meth = LOCATE_standard___kernel___Float___to_i;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   fra.me.REG[0] = p0;
-  /* ../lib/standard/kernel.nit:219 */
+  /* ../lib/standard/kernel.nit:220 */
   REGB0 = TAG_Int((bigint)UNBOX_Float(fra.me.REG[0]));
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -956,13 +956,13 @@ val_t standard___kernel___Int___object_id(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 229;
+  fra.me.line = 236;
   fra.me.meth = LOCATE_standard___kernel___Int___object_id;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ../lib/standard/kernel.nit:229 */
+  /* ../lib/standard/kernel.nit:236 */
   REGB0 = REGB0;
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -974,7 +974,7 @@ val_t standard___kernel___Int_____eqeq(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 230;
+  fra.me.line = 237;
   fra.me.meth = LOCATE_standard___kernel___Int_____eqeq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
@@ -982,7 +982,7 @@ val_t standard___kernel___Int_____eqeq(val_t p0, val_t p1){
   fra.me.REG[0] = NIT_NULL;
   REGB0 = p0;
   fra.me.REG[0] = p1;
-  /* ../lib/standard/kernel.nit:230 */
+  /* ../lib/standard/kernel.nit:237 */
   REGB0 = TAG_Bool((REGB0)==(fra.me.REG[0]));
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -994,7 +994,7 @@ val_t standard___kernel___Int_____neq(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 231;
+  fra.me.line = 238;
   fra.me.meth = LOCATE_standard___kernel___Int_____neq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
@@ -1002,7 +1002,7 @@ val_t standard___kernel___Int_____neq(val_t p0, val_t p1){
   fra.me.REG[0] = NIT_NULL;
   REGB0 = p0;
   fra.me.REG[0] = p1;
-  /* ../lib/standard/kernel.nit:231 */
+  /* ../lib/standard/kernel.nit:238 */
   REGB0 = TAG_Bool((REGB0)!=(fra.me.REG[0]));
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -1014,13 +1014,13 @@ void standard___kernel___Int___output(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 232;
+  fra.me.line = 239;
   fra.me.meth = LOCATE_standard___kernel___Int___output;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ../lib/standard/kernel.nit:232 */
+  /* ../lib/standard/kernel.nit:239 */
   printf("%ld\n", UNTAG_Int(REGB0));;
   stack_frame_head = fra.me.prev;
   return;
@@ -1034,7 +1034,7 @@ val_t standard___kernel___Int_____leq(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 234;
+  fra.me.line = 241;
   fra.me.meth = LOCATE_standard___kernel___Int_____leq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
@@ -1046,7 +1046,7 @@ val_t standard___kernel___Int_____leq(val_t p0, val_t p1){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:234 */
+  /* ../lib/standard/kernel.nit:241 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)<=UNTAG_Int(REGB1));
   stack_frame_head = fra.me.prev;
   return REGB1;
@@ -1060,7 +1060,7 @@ val_t standard___kernel___Int_____l(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 235;
+  fra.me.line = 242;
   fra.me.meth = LOCATE_standard___kernel___Int_____l;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
@@ -1072,7 +1072,7 @@ val_t standard___kernel___Int_____l(val_t p0, val_t p1){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:235 */
+  /* ../lib/standard/kernel.nit:242 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
   stack_frame_head = fra.me.prev;
   return REGB1;
@@ -1086,7 +1086,7 @@ val_t standard___kernel___Int_____geq(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 236;
+  fra.me.line = 243;
   fra.me.meth = LOCATE_standard___kernel___Int_____geq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
@@ -1098,7 +1098,7 @@ val_t standard___kernel___Int_____geq(val_t p0, val_t p1){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:236 */
+  /* ../lib/standard/kernel.nit:243 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)>=UNTAG_Int(REGB1));
   stack_frame_head = fra.me.prev;
   return REGB1;
@@ -1112,7 +1112,7 @@ val_t standard___kernel___Int_____g(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 237;
+  fra.me.line = 244;
   fra.me.meth = LOCATE_standard___kernel___Int_____g;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
@@ -1124,7 +1124,7 @@ val_t standard___kernel___Int_____g(val_t p0, val_t p1){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:237 */
+  /* ../lib/standard/kernel.nit:244 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)>UNTAG_Int(REGB1));
   stack_frame_head = fra.me.prev;
   return REGB1;
@@ -1137,14 +1137,14 @@ val_t standard___kernel___Int_____plus(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 238;
+  fra.me.line = 245;
   fra.me.meth = LOCATE_standard___kernel___Int_____plus;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   REGB1 = p1;
-  /* ../lib/standard/kernel.nit:238 */
+  /* ../lib/standard/kernel.nit:245 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
   stack_frame_head = fra.me.prev;
   return REGB1;
@@ -1156,13 +1156,13 @@ val_t standard___kernel___Int___unary__minus(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 239;
+  fra.me.line = 246;
   fra.me.meth = LOCATE_standard___kernel___Int___unary__minus;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ../lib/standard/kernel.nit:239 */
+  /* ../lib/standard/kernel.nit:246 */
   REGB0 = TAG_Int(-UNTAG_Int(REGB0));
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -1175,14 +1175,14 @@ val_t standard___kernel___Int_____minus(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 240;
+  fra.me.line = 247;
   fra.me.meth = LOCATE_standard___kernel___Int_____minus;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   REGB1 = p1;
-  /* ../lib/standard/kernel.nit:240 */
+  /* ../lib/standard/kernel.nit:247 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB1));
   stack_frame_head = fra.me.prev;
   return REGB1;
@@ -1195,14 +1195,14 @@ val_t standard___kernel___Int_____star(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 241;
+  fra.me.line = 248;
   fra.me.meth = LOCATE_standard___kernel___Int_____star;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   REGB1 = p1;
-  /* ../lib/standard/kernel.nit:241 */
+  /* ../lib/standard/kernel.nit:248 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)*UNTAG_Int(REGB1));
   stack_frame_head = fra.me.prev;
   return REGB1;
@@ -1215,14 +1215,14 @@ val_t standard___kernel___Int_____slash(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 242;
+  fra.me.line = 249;
   fra.me.meth = LOCATE_standard___kernel___Int_____slash;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   REGB1 = p1;
-  /* ../lib/standard/kernel.nit:242 */
+  /* ../lib/standard/kernel.nit:249 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)/UNTAG_Int(REGB1));
   stack_frame_head = fra.me.prev;
   return REGB1;
@@ -1235,14 +1235,14 @@ val_t standard___kernel___Int_____percent(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 243;
+  fra.me.line = 250;
   fra.me.meth = LOCATE_standard___kernel___Int_____percent;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   REGB1 = p1;
-  /* ../lib/standard/kernel.nit:243 */
+  /* ../lib/standard/kernel.nit:250 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)%UNTAG_Int(REGB1));
   stack_frame_head = fra.me.prev;
   return REGB1;
@@ -1255,14 +1255,14 @@ val_t standard___kernel___Int___lshift(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 244;
+  fra.me.line = 252;
   fra.me.meth = LOCATE_standard___kernel___Int___lshift;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   REGB1 = p1;
-  /* ../lib/standard/kernel.nit:244 */
+  /* ../lib/standard/kernel.nit:252 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)<<UNTAG_Int(REGB1));
   stack_frame_head = fra.me.prev;
   return REGB1;
@@ -1275,14 +1275,14 @@ val_t standard___kernel___Int___rshift(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 245;
+  fra.me.line = 257;
   fra.me.meth = LOCATE_standard___kernel___Int___rshift;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   REGB1 = p1;
-  /* ../lib/standard/kernel.nit:245 */
+  /* ../lib/standard/kernel.nit:257 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)>>UNTAG_Int(REGB1));
   stack_frame_head = fra.me.prev;
   return REGB1;
@@ -1294,14 +1294,14 @@ val_t standard___kernel___Int___to_f(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 247;
+  fra.me.line = 262;
   fra.me.meth = LOCATE_standard___kernel___Int___to_f;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
   fra.me.nitni_local_ref_head = NULL;
   fra.me.REG[0] = NIT_NULL;
   REGB0 = p0;
-  /* ../lib/standard/kernel.nit:247 */
+  /* ../lib/standard/kernel.nit:262 */
   fra.me.REG[0] = BOX_Float((float)UNTAG_Int(REGB0));
   stack_frame_head = fra.me.prev;
   return fra.me.REG[0];
@@ -1313,13 +1313,13 @@ val_t standard___kernel___Int___succ(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 250;
+  fra.me.line = 268;
   fra.me.meth = LOCATE_standard___kernel___Int___succ;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ../lib/standard/kernel.nit:250 */
+  /* ../lib/standard/kernel.nit:268 */
   REGB0 = TAG_Int(UNTAG_Int(REGB0)+1);
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -1331,13 +1331,13 @@ val_t standard___kernel___Int___prec(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 251;
+  fra.me.line = 269;
   fra.me.meth = LOCATE_standard___kernel___Int___prec;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ../lib/standard/kernel.nit:251 */
+  /* ../lib/standard/kernel.nit:269 */
   REGB0 = TAG_Int(UNTAG_Int(REGB0)-1);
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -1351,7 +1351,7 @@ val_t standard___kernel___Int___distance(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 252;
+  fra.me.line = 270;
   fra.me.meth = LOCATE_standard___kernel___Int___distance;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
@@ -1363,26 +1363,26 @@ val_t standard___kernel___Int___distance(val_t p0, val_t p1){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:240 */
+  /* ../lib/standard/kernel.nit:247 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB1));
-  /* ../lib/standard/kernel.nit:255 */
+  /* ../lib/standard/kernel.nit:273 */
   REGB0 = TAG_Int(0);
   REGB2 = TAG_Bool(VAL_ISA(REGB0, VTCOLOR_standard___kernel___Comparable___OTHER(REGB1), VTID_standard___kernel___Comparable___OTHER(REGB1))) /*cast OTHER*/;
   if (UNTAG_Bool(REGB2)) {
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:236 */
+  /* ../lib/standard/kernel.nit:243 */
   REGB0 = TAG_Bool(UNTAG_Int(REGB1)>=UNTAG_Int(REGB0));
-  /* ../lib/standard/kernel.nit:255 */
+  /* ../lib/standard/kernel.nit:273 */
   if (UNTAG_Bool(REGB0)) {
-    /* ../lib/standard/kernel.nit:256 */
+    /* ../lib/standard/kernel.nit:274 */
     REGB0 = REGB1;
     goto label1;
   } else {
-    /* ../lib/standard/kernel.nit:239 */
+    /* ../lib/standard/kernel.nit:246 */
     REGB1 = TAG_Int(-UNTAG_Int(REGB1));
-    /* ../lib/standard/kernel.nit:258 */
+    /* ../lib/standard/kernel.nit:276 */
     REGB0 = REGB1;
     goto label1;
   }
@@ -1400,7 +1400,7 @@ val_t standard___kernel___Int_____leqg(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 262;
+  fra.me.line = 280;
   fra.me.meth = LOCATE_standard___kernel___Int_____leqg;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
@@ -1417,15 +1417,15 @@ val_t standard___kernel___Int_____leqg(val_t p0, val_t p1){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:235 */
+  /* ../lib/standard/kernel.nit:242 */
   REGB2 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-  /* ../lib/standard/kernel.nit:264 */
+  /* ../lib/standard/kernel.nit:282 */
   if (UNTAG_Bool(REGB2)) {
-    /* ../lib/standard/kernel.nit:265 */
+    /* ../lib/standard/kernel.nit:283 */
     REGB2 = TAG_Int(1);
-    /* ../lib/standard/kernel.nit:239 */
+    /* ../lib/standard/kernel.nit:246 */
     REGB2 = TAG_Int(-UNTAG_Int(REGB2));
-    /* ../lib/standard/kernel.nit:265 */
+    /* ../lib/standard/kernel.nit:283 */
     goto label1;
   } else {
     REGB3 = TAG_Bool(VAL_ISA(REGB0, VTCOLOR_standard___kernel___Comparable___OTHER(REGB1), VTID_standard___kernel___Comparable___OTHER(REGB1))) /*cast OTHER*/;
@@ -1433,16 +1433,16 @@ val_t standard___kernel___Int_____leqg(val_t p0, val_t p1){
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:242 */
     REGB0 = TAG_Bool(UNTAG_Int(REGB1)<UNTAG_Int(REGB0));
-    /* ../lib/standard/kernel.nit:266 */
+    /* ../lib/standard/kernel.nit:284 */
     if (UNTAG_Bool(REGB0)) {
-      /* ../lib/standard/kernel.nit:267 */
+      /* ../lib/standard/kernel.nit:285 */
       REGB0 = TAG_Int(1);
       REGB2 = REGB0;
       goto label1;
     } else {
-      /* ../lib/standard/kernel.nit:269 */
+      /* ../lib/standard/kernel.nit:287 */
       REGB0 = TAG_Int(0);
       REGB2 = REGB0;
       goto label1;
@@ -1462,7 +1462,7 @@ val_t standard___kernel___Int___is_between(val_t p0, val_t p1, val_t p2){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 273;
+  fra.me.line = 291;
   fra.me.meth = LOCATE_standard___kernel___Int___is_between;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
@@ -1485,9 +1485,9 @@ val_t standard___kernel___Int___is_between(val_t p0, val_t p1, val_t p2){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:235 */
+  /* ../lib/standard/kernel.nit:242 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-  /* ../lib/standard/kernel.nit:275 */
+  /* ../lib/standard/kernel.nit:293 */
   if (UNTAG_Bool(REGB1)) {
     REGB1 = TAG_Bool(1);
   } else {
@@ -1496,17 +1496,17 @@ val_t standard___kernel___Int___is_between(val_t p0, val_t p1, val_t p2){
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:242 */
     REGB0 = TAG_Bool(UNTAG_Int(REGB2)<UNTAG_Int(REGB0));
-    /* ../lib/standard/kernel.nit:275 */
+    /* ../lib/standard/kernel.nit:293 */
     REGB1 = REGB0;
   }
   if (UNTAG_Bool(REGB1)) {
-    /* ../lib/standard/kernel.nit:276 */
+    /* ../lib/standard/kernel.nit:294 */
     REGB1 = TAG_Bool(0);
     goto label1;
   } else {
-    /* ../lib/standard/kernel.nit:278 */
+    /* ../lib/standard/kernel.nit:296 */
     REGB0 = TAG_Bool(1);
     REGB1 = REGB0;
     goto label1;
@@ -1524,7 +1524,7 @@ val_t standard___kernel___Int___max(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 282;
+  fra.me.line = 300;
   fra.me.meth = LOCATE_standard___kernel___Int___max;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
@@ -1541,14 +1541,14 @@ val_t standard___kernel___Int___max(val_t p0, val_t p1){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:235 */
+  /* ../lib/standard/kernel.nit:242 */
   REGB2 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-  /* ../lib/standard/kernel.nit:284 */
+  /* ../lib/standard/kernel.nit:302 */
   if (UNTAG_Bool(REGB2)) {
-    /* ../lib/standard/kernel.nit:285 */
+    /* ../lib/standard/kernel.nit:303 */
     goto label1;
   } else {
-    /* ../lib/standard/kernel.nit:287 */
+    /* ../lib/standard/kernel.nit:305 */
     REGB1 = REGB0;
     goto label1;
   }
@@ -1565,7 +1565,7 @@ val_t standard___kernel___Int___min(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 291;
+  fra.me.line = 309;
   fra.me.meth = LOCATE_standard___kernel___Int___min;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
@@ -1582,14 +1582,14 @@ val_t standard___kernel___Int___min(val_t p0, val_t p1){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:235 */
+  /* ../lib/standard/kernel.nit:242 */
   REGB2 = TAG_Bool(UNTAG_Int(REGB1)<UNTAG_Int(REGB0));
-  /* ../lib/standard/kernel.nit:293 */
+  /* ../lib/standard/kernel.nit:311 */
   if (UNTAG_Bool(REGB2)) {
-    /* ../lib/standard/kernel.nit:294 */
+    /* ../lib/standard/kernel.nit:312 */
     goto label1;
   } else {
-    /* ../lib/standard/kernel.nit:296 */
+    /* ../lib/standard/kernel.nit:314 */
     REGB1 = REGB0;
     goto label1;
   }
@@ -1604,13 +1604,13 @@ val_t standard___kernel___Int___ascii(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 300;
+  fra.me.line = 318;
   fra.me.meth = LOCATE_standard___kernel___Int___ascii;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ../lib/standard/kernel.nit:300 */
+  /* ../lib/standard/kernel.nit:318 */
   REGB0 = TAG_Char(UNTAG_Int(REGB0));
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -1624,88 +1624,230 @@ val_t standard___kernel___Int___digit_count(val_t p0, val_t p1){
   val_t REGB3;
   val_t REGB4;
   val_t REGB5;
+  val_t REGB6;
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 303;
+  fra.me.line = 324;
   fra.me.meth = LOCATE_standard___kernel___Int___digit_count;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   REGB1 = p1;
-  /* ../lib/standard/kernel.nit:309 */
-  REGB2 = TAG_Int(0);
-  REGB3 = TAG_Bool(VAL_ISA(REGB2, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
+  /* ../lib/standard/kernel.nit:330 */
+  REGB2 = TAG_Int(10);
+  REGB3 = TAG_Bool(IS_EQUAL_OO(REGB1,REGB2));
   if (UNTAG_Bool(REGB3)) {
+  } else {
+    /* ../lib/standard/kernel.nit:237 */
+    REGB2 = TAG_Bool((REGB1)==(REGB2));
+    /* ../lib/standard/kernel.nit:330 */
+    REGB3 = REGB2;
+  }
+  if (UNTAG_Bool(REGB3)) {
+    REGB3 = CALL_standard___kernel___Int___digit_count_base_10(REGB0)(REGB0);
+    goto label1;
+  }
+  /* ../lib/standard/kernel.nit:334 */
+  REGB2 = TAG_Int(0);
+  REGB4 = TAG_Bool(VAL_ISA(REGB2, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
+  if (UNTAG_Bool(REGB4)) {
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:235 */
+  /* ../lib/standard/kernel.nit:242 */
   REGB2 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB2));
-  /* ../lib/standard/kernel.nit:309 */
+  /* ../lib/standard/kernel.nit:334 */
   if (UNTAG_Bool(REGB2)) {
-    /* ../lib/standard/kernel.nit:310 */
+    /* ../lib/standard/kernel.nit:335 */
     REGB2 = TAG_Int(1);
-    /* ../lib/standard/kernel.nit:239 */
-    REGB3 = TAG_Int(-UNTAG_Int(REGB0));
+    /* ../lib/standard/kernel.nit:246 */
+    REGB4 = TAG_Int(-UNTAG_Int(REGB0));
   } else {
-    /* ../lib/standard/kernel.nit:312 */
-    REGB4 = TAG_Int(0);
-    REGB5 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB4));
-    if (UNTAG_Bool(REGB5)) {
+    /* ../lib/standard/kernel.nit:337 */
+    REGB5 = TAG_Int(0);
+    REGB6 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB5));
+    if (UNTAG_Bool(REGB6)) {
     } else {
-      /* ../lib/standard/kernel.nit:230 */
-      REGB4 = TAG_Bool((REGB0)==(REGB4));
-      /* ../lib/standard/kernel.nit:312 */
-      REGB5 = REGB4;
+      /* ../lib/standard/kernel.nit:237 */
+      REGB5 = TAG_Bool((REGB0)==(REGB5));
+      /* ../lib/standard/kernel.nit:337 */
+      REGB6 = REGB5;
     }
-    if (UNTAG_Bool(REGB5)) {
-      /* ../lib/standard/kernel.nit:313 */
-      REGB5 = TAG_Int(1);
+    if (UNTAG_Bool(REGB6)) {
+      /* ../lib/standard/kernel.nit:338 */
+      REGB6 = TAG_Int(1);
+      REGB3 = REGB6;
       goto label1;
     } else {
-      /* ../lib/standard/kernel.nit:315 */
-      REGB4 = TAG_Int(0);
-      REGB2 = REGB4;
-      /* ../lib/standard/kernel.nit:316 */
-      REGB3 = REGB0;
+      /* ../lib/standard/kernel.nit:340 */
+      REGB6 = TAG_Int(0);
+      REGB2 = REGB6;
+      /* ../lib/standard/kernel.nit:341 */
+      REGB4 = REGB0;
     }
   }
-  /* ../lib/standard/kernel.nit:319 */
+  /* ../lib/standard/kernel.nit:344 */
   while(1) {
     REGB0 = TAG_Int(0);
-    REGB4 = TAG_Bool(VAL_ISA(REGB0, VTCOLOR_standard___kernel___Comparable___OTHER(REGB3), VTID_standard___kernel___Comparable___OTHER(REGB3))) /*cast OTHER*/;
-    if (UNTAG_Bool(REGB4)) {
+    REGB6 = TAG_Bool(VAL_ISA(REGB0, VTCOLOR_standard___kernel___Comparable___OTHER(REGB4), VTID_standard___kernel___Comparable___OTHER(REGB4))) /*cast OTHER*/;
+    if (UNTAG_Bool(REGB6)) {
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:237 */
-    REGB0 = TAG_Bool(UNTAG_Int(REGB3)>UNTAG_Int(REGB0));
-    /* ../lib/standard/kernel.nit:319 */
+    /* ../lib/standard/kernel.nit:244 */
+    REGB0 = TAG_Bool(UNTAG_Int(REGB4)>UNTAG_Int(REGB0));
+    /* ../lib/standard/kernel.nit:344 */
     if (UNTAG_Bool(REGB0)) {
-      /* ../lib/standard/kernel.nit:320 */
+      /* ../lib/standard/kernel.nit:345 */
       REGB0 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB0 = TAG_Int(UNTAG_Int(REGB2)+UNTAG_Int(REGB0));
-      /* ../lib/standard/kernel.nit:320 */
+      /* ../lib/standard/kernel.nit:345 */
       REGB2 = REGB0;
-      /* ../lib/standard/kernel.nit:242 */
-      REGB0 = TAG_Int(UNTAG_Int(REGB3)/UNTAG_Int(REGB1));
-      /* ../lib/standard/kernel.nit:321 */
-      REGB3 = REGB0;
+      /* ../lib/standard/kernel.nit:249 */
+      REGB0 = TAG_Int(UNTAG_Int(REGB4)/UNTAG_Int(REGB1));
+      /* ../lib/standard/kernel.nit:346 */
+      REGB4 = REGB0;
     } else {
-      /* ../lib/standard/kernel.nit:319 */
+      /* ../lib/standard/kernel.nit:344 */
       goto label2;
     }
   }
   label2: while(0);
-  /* ../lib/standard/kernel.nit:323 */
-  REGB5 = REGB2;
+  /* ../lib/standard/kernel.nit:348 */
+  REGB3 = REGB2;
   goto label1;
   label1: while(0);
   stack_frame_head = fra.me.prev;
-  return REGB5;
+  return REGB3;
+}
+static const char LOCATE_standard___kernel___Int___digit_count_base_10[] = "kernel::Int::digit_count_base_10";
+val_t standard___kernel___Int___digit_count_base_10(val_t p0){
+  struct {struct stack_frame_t me;} fra;
+  val_t REGB0;
+  val_t REGB1;
+  val_t REGB2;
+  val_t REGB3;
+  val_t REGB4;
+  val_t tmp;
+  fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
+  fra.me.file = LOCATE_standard___kernel;
+  fra.me.line = 351;
+  fra.me.meth = LOCATE_standard___kernel___Int___digit_count_base_10;
+  fra.me.has_broke = 0;
+  fra.me.REG_size = 0;
+  fra.me.nitni_local_ref_head = NULL;
+  REGB0 = p0;
+  /* ../lib/standard/kernel.nit:356 */
+  REGB1 = TAG_Int(0);
+  REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
+  if (UNTAG_Bool(REGB2)) {
+  } else {
+    nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
+  }
+  /* ../lib/standard/kernel.nit:242 */
+  REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
+  /* ../lib/standard/kernel.nit:356 */
+  if (UNTAG_Bool(REGB1)) {
+    /* ../lib/standard/kernel.nit:357 */
+    REGB1 = TAG_Int(2);
+    /* ../lib/standard/kernel.nit:246 */
+    REGB2 = TAG_Int(-UNTAG_Int(REGB0));
+  } else {
+    /* ../lib/standard/kernel.nit:360 */
+    REGB3 = TAG_Int(1);
+    REGB1 = REGB3;
+    /* ../lib/standard/kernel.nit:361 */
+    REGB2 = REGB0;
+  }
+  /* ../lib/standard/kernel.nit:363 */
+  while(1) {
+    /* ../lib/standard/kernel.nit:364 */
+    REGB0 = TAG_Int(10);
+    REGB3 = TAG_Bool(VAL_ISA(REGB0, VTCOLOR_standard___kernel___Comparable___OTHER(REGB2), VTID_standard___kernel___Comparable___OTHER(REGB2))) /*cast OTHER*/;
+    if (UNTAG_Bool(REGB3)) {
+    } else {
+      nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
+    }
+    /* ../lib/standard/kernel.nit:242 */
+    REGB0 = TAG_Bool(UNTAG_Int(REGB2)<UNTAG_Int(REGB0));
+    /* ../lib/standard/kernel.nit:364 */
+    if (UNTAG_Bool(REGB0)) {
+      REGB0 = REGB1;
+      goto label1;
+    }
+    /* ../lib/standard/kernel.nit:365 */
+    REGB3 = TAG_Int(100);
+    REGB4 = TAG_Bool(VAL_ISA(REGB3, VTCOLOR_standard___kernel___Comparable___OTHER(REGB2), VTID_standard___kernel___Comparable___OTHER(REGB2))) /*cast OTHER*/;
+    if (UNTAG_Bool(REGB4)) {
+    } else {
+      nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
+    }
+    /* ../lib/standard/kernel.nit:242 */
+    REGB3 = TAG_Bool(UNTAG_Int(REGB2)<UNTAG_Int(REGB3));
+    /* ../lib/standard/kernel.nit:365 */
+    if (UNTAG_Bool(REGB3)) {
+      REGB3 = TAG_Int(1);
+      /* ../lib/standard/kernel.nit:245 */
+      REGB3 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB3));
+      /* ../lib/standard/kernel.nit:365 */
+      REGB0 = REGB3;
+      goto label1;
+    }
+    /* ../lib/standard/kernel.nit:366 */
+    REGB3 = TAG_Int(1000);
+    REGB4 = TAG_Bool(VAL_ISA(REGB3, VTCOLOR_standard___kernel___Comparable___OTHER(REGB2), VTID_standard___kernel___Comparable___OTHER(REGB2))) /*cast OTHER*/;
+    if (UNTAG_Bool(REGB4)) {
+    } else {
+      nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
+    }
+    /* ../lib/standard/kernel.nit:242 */
+    REGB3 = TAG_Bool(UNTAG_Int(REGB2)<UNTAG_Int(REGB3));
+    /* ../lib/standard/kernel.nit:366 */
+    if (UNTAG_Bool(REGB3)) {
+      REGB3 = TAG_Int(2);
+      /* ../lib/standard/kernel.nit:245 */
+      REGB3 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB3));
+      /* ../lib/standard/kernel.nit:366 */
+      REGB0 = REGB3;
+      goto label1;
+    }
+    /* ../lib/standard/kernel.nit:367 */
+    REGB3 = TAG_Int(10000);
+    REGB4 = TAG_Bool(VAL_ISA(REGB3, VTCOLOR_standard___kernel___Comparable___OTHER(REGB2), VTID_standard___kernel___Comparable___OTHER(REGB2))) /*cast OTHER*/;
+    if (UNTAG_Bool(REGB4)) {
+    } else {
+      nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
+    }
+    /* ../lib/standard/kernel.nit:242 */
+    REGB3 = TAG_Bool(UNTAG_Int(REGB2)<UNTAG_Int(REGB3));
+    /* ../lib/standard/kernel.nit:367 */
+    if (UNTAG_Bool(REGB3)) {
+      REGB3 = TAG_Int(3);
+      /* ../lib/standard/kernel.nit:245 */
+      REGB3 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB3));
+      /* ../lib/standard/kernel.nit:367 */
+      REGB0 = REGB3;
+      goto label1;
+    }
+    /* ../lib/standard/kernel.nit:368 */
+    REGB3 = TAG_Int(10000);
+    /* ../lib/standard/kernel.nit:249 */
+    REGB3 = TAG_Int(UNTAG_Int(REGB2)/UNTAG_Int(REGB3));
+    /* ../lib/standard/kernel.nit:368 */
+    REGB2 = REGB3;
+    /* ../lib/standard/kernel.nit:369 */
+    REGB3 = TAG_Int(4);
+    /* ../lib/standard/kernel.nit:245 */
+    REGB3 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB3));
+    /* ../lib/standard/kernel.nit:369 */
+    REGB1 = REGB3;
+  }
+  label1: while(0);
+  stack_frame_head = fra.me.prev;
+  return REGB0;
 }
 static const char LOCATE_standard___kernel___Int___to_c[] = "kernel::Int::to_c";
 val_t standard___kernel___Int___to_c(val_t p0){
@@ -1717,22 +1859,22 @@ val_t standard___kernel___Int___to_c(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 326;
+  fra.me.line = 373;
   fra.me.meth = LOCATE_standard___kernel___Int___to_c;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ../lib/standard/kernel.nit:331 */
+  /* ../lib/standard/kernel.nit:380 */
   REGB1 = TAG_Int(0);
   REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
   if (UNTAG_Bool(REGB2)) {
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:236 */
+  /* ../lib/standard/kernel.nit:243 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)>=UNTAG_Int(REGB1));
-  /* ../lib/standard/kernel.nit:331 */
+  /* ../lib/standard/kernel.nit:380 */
   if (UNTAG_Bool(REGB1)) {
     REGB1 = TAG_Int(36);
     REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
@@ -1740,52 +1882,52 @@ val_t standard___kernel___Int___to_c(val_t p0){
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:234 */
+    /* ../lib/standard/kernel.nit:241 */
     REGB1 = TAG_Bool(UNTAG_Int(REGB0)<=UNTAG_Int(REGB1));
   } else {
-    /* ../lib/standard/kernel.nit:331 */
+    /* ../lib/standard/kernel.nit:380 */
     REGB2 = TAG_Bool(0);
     REGB1 = REGB2;
   }
   if (UNTAG_Bool(REGB1)) {
   } else {
-    nit_abort("Assert failed", NULL, LOCATE_standard___kernel, 331);
+    nit_abort("Assert failed", NULL, LOCATE_standard___kernel, 380);
   }
-  /* ../lib/standard/kernel.nit:332 */
+  /* ../lib/standard/kernel.nit:381 */
   REGB1 = TAG_Int(10);
   REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
   if (UNTAG_Bool(REGB2)) {
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:235 */
+  /* ../lib/standard/kernel.nit:242 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-  /* ../lib/standard/kernel.nit:332 */
+  /* ../lib/standard/kernel.nit:381 */
   if (UNTAG_Bool(REGB1)) {
-    /* ../lib/standard/kernel.nit:333 */
+    /* ../lib/standard/kernel.nit:382 */
     REGB1 = TAG_Char('0');
-    /* ../lib/standard/kernel.nit:416 */
+    /* ../lib/standard/kernel.nit:471 */
     REGB1 = TAG_Int((unsigned char)UNTAG_Char(REGB1));
-    /* ../lib/standard/kernel.nit:238 */
+    /* ../lib/standard/kernel.nit:245 */
     REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
-    /* ../lib/standard/kernel.nit:300 */
+    /* ../lib/standard/kernel.nit:318 */
     REGB1 = TAG_Char(UNTAG_Int(REGB1));
-    /* ../lib/standard/kernel.nit:333 */
+    /* ../lib/standard/kernel.nit:382 */
     goto label1;
   } else {
-    /* ../lib/standard/kernel.nit:335 */
+    /* ../lib/standard/kernel.nit:384 */
     REGB2 = TAG_Char('a');
-    /* ../lib/standard/kernel.nit:416 */
+    /* ../lib/standard/kernel.nit:471 */
     REGB2 = TAG_Int((unsigned char)UNTAG_Char(REGB2));
-    /* ../lib/standard/kernel.nit:335 */
+    /* ../lib/standard/kernel.nit:384 */
     REGB3 = TAG_Int(10);
-    /* ../lib/standard/kernel.nit:240 */
+    /* ../lib/standard/kernel.nit:247 */
     REGB3 = TAG_Int(UNTAG_Int(REGB2)-UNTAG_Int(REGB3));
-    /* ../lib/standard/kernel.nit:238 */
+    /* ../lib/standard/kernel.nit:245 */
     REGB3 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB3));
-    /* ../lib/standard/kernel.nit:300 */
+    /* ../lib/standard/kernel.nit:318 */
     REGB3 = TAG_Char(UNTAG_Int(REGB3));
-    /* ../lib/standard/kernel.nit:335 */
+    /* ../lib/standard/kernel.nit:384 */
     REGB1 = REGB3;
     goto label1;
   }
@@ -1803,7 +1945,7 @@ void standard___kernel___Int___enumerate_to(val_t p0, val_t p1, struct stack_fra
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 339;
+  fra.me.line = 388;
   fra.me.meth = LOCATE_standard___kernel___Int___enumerate_to;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
@@ -1813,30 +1955,30 @@ void standard___kernel___Int___enumerate_to(val_t p0, val_t p1, struct stack_fra
   REGB0 = p0;
   REGB1 = p1;
   CREG[0] = clos_fun0;
-  /* ../lib/standard/kernel.nit:344 */
+  /* ../lib/standard/kernel.nit:393 */
   while(1) {
     REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
     if (UNTAG_Bool(REGB2)) {
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:234 */
+    /* ../lib/standard/kernel.nit:241 */
     REGB2 = TAG_Bool(UNTAG_Int(REGB0)<=UNTAG_Int(REGB1));
-    /* ../lib/standard/kernel.nit:344 */
+    /* ../lib/standard/kernel.nit:393 */
     if (UNTAG_Bool(REGB2)) {
-      /* ../lib/standard/kernel.nit:345 */
+      /* ../lib/standard/kernel.nit:394 */
       ((void (*)(struct stack_frame_t *, val_t))(CREG[0]))(closctx_param, REGB0);
       if (closctx_param->has_broke) {
         goto label1;
       }
-      /* ../lib/standard/kernel.nit:346 */
+      /* ../lib/standard/kernel.nit:395 */
       REGB2 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB2 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB2));
-      /* ../lib/standard/kernel.nit:346 */
+      /* ../lib/standard/kernel.nit:395 */
       REGB0 = REGB2;
     } else {
-      /* ../lib/standard/kernel.nit:344 */
+      /* ../lib/standard/kernel.nit:393 */
       goto label2;
     }
   }
@@ -1855,7 +1997,7 @@ void standard___kernel___Int___enumerate_before(val_t p0, val_t p1, struct stack
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 350;
+  fra.me.line = 399;
   fra.me.meth = LOCATE_standard___kernel___Int___enumerate_before;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
@@ -1865,30 +2007,30 @@ void standard___kernel___Int___enumerate_before(val_t p0, val_t p1, struct stack
   REGB0 = p0;
   REGB1 = p1;
   CREG[0] = clos_fun0;
-  /* ../lib/standard/kernel.nit:355 */
+  /* ../lib/standard/kernel.nit:404 */
   while(1) {
     REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
     if (UNTAG_Bool(REGB2)) {
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:242 */
     REGB2 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB1));
-    /* ../lib/standard/kernel.nit:355 */
+    /* ../lib/standard/kernel.nit:404 */
     if (UNTAG_Bool(REGB2)) {
-      /* ../lib/standard/kernel.nit:356 */
+      /* ../lib/standard/kernel.nit:405 */
       ((void (*)(struct stack_frame_t *, val_t))(CREG[0]))(closctx_param, REGB0);
       if (closctx_param->has_broke) {
         goto label1;
       }
-      /* ../lib/standard/kernel.nit:357 */
+      /* ../lib/standard/kernel.nit:406 */
       REGB2 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB2 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB2));
-      /* ../lib/standard/kernel.nit:357 */
+      /* ../lib/standard/kernel.nit:406 */
       REGB0 = REGB2;
     } else {
-      /* ../lib/standard/kernel.nit:355 */
+      /* ../lib/standard/kernel.nit:404 */
       goto label2;
     }
   }
@@ -1906,34 +2048,34 @@ val_t standard___kernel___Int___abs(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 361;
+  fra.me.line = 410;
   fra.me.meth = LOCATE_standard___kernel___Int___abs;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ../lib/standard/kernel.nit:364 */
+  /* ../lib/standard/kernel.nit:417 */
   REGB1 = TAG_Int(0);
   REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
   if (UNTAG_Bool(REGB2)) {
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:236 */
+  /* ../lib/standard/kernel.nit:243 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)>=UNTAG_Int(REGB1));
-  /* ../lib/standard/kernel.nit:364 */
+  /* ../lib/standard/kernel.nit:417 */
   if (UNTAG_Bool(REGB1)) {
-    /* ../lib/standard/kernel.nit:366 */
+    /* ../lib/standard/kernel.nit:419 */
     REGB1 = REGB0;
     goto label1;
   } else {
-    /* ../lib/standard/kernel.nit:368 */
+    /* ../lib/standard/kernel.nit:421 */
     REGB2 = TAG_Int(1);
-    /* ../lib/standard/kernel.nit:239 */
+    /* ../lib/standard/kernel.nit:246 */
     REGB2 = TAG_Int(-UNTAG_Int(REGB2));
-    /* ../lib/standard/kernel.nit:241 */
+    /* ../lib/standard/kernel.nit:248 */
     REGB0 = TAG_Int(UNTAG_Int(REGB2)*UNTAG_Int(REGB0));
-    /* ../lib/standard/kernel.nit:368 */
+    /* ../lib/standard/kernel.nit:421 */
     REGB1 = REGB0;
     goto label1;
   }
@@ -1948,13 +2090,13 @@ val_t standard___kernel___Char___object_id(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 380;
+  fra.me.line = 433;
   fra.me.meth = LOCATE_standard___kernel___Char___object_id;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ../lib/standard/kernel.nit:380 */
+  /* ../lib/standard/kernel.nit:433 */
   REGB0 = TAG_Int(UNTAG_Char(REGB0));
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -1966,7 +2108,7 @@ val_t standard___kernel___Char_____eqeq(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 381;
+  fra.me.line = 434;
   fra.me.meth = LOCATE_standard___kernel___Char_____eqeq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
@@ -1974,7 +2116,7 @@ val_t standard___kernel___Char_____eqeq(val_t p0, val_t p1){
   fra.me.REG[0] = NIT_NULL;
   REGB0 = p0;
   fra.me.REG[0] = p1;
-  /* ../lib/standard/kernel.nit:381 */
+  /* ../lib/standard/kernel.nit:434 */
   REGB0 = TAG_Bool((REGB0)==(fra.me.REG[0]));
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -1986,7 +2128,7 @@ val_t standard___kernel___Char_____neq(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 382;
+  fra.me.line = 435;
   fra.me.meth = LOCATE_standard___kernel___Char_____neq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 1;
@@ -1994,7 +2136,7 @@ val_t standard___kernel___Char_____neq(val_t p0, val_t p1){
   fra.me.REG[0] = NIT_NULL;
   REGB0 = p0;
   fra.me.REG[0] = p1;
-  /* ../lib/standard/kernel.nit:382 */
+  /* ../lib/standard/kernel.nit:435 */
   REGB0 = TAG_Bool((REGB0)!=(fra.me.REG[0]));
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -2006,13 +2148,13 @@ void standard___kernel___Char___output(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 383;
+  fra.me.line = 436;
   fra.me.meth = LOCATE_standard___kernel___Char___output;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ../lib/standard/kernel.nit:383 */
+  /* ../lib/standard/kernel.nit:436 */
   printf("%c", (unsigned char)UNTAG_Char(REGB0));;
   stack_frame_head = fra.me.prev;
   return;
@@ -2026,7 +2168,7 @@ val_t standard___kernel___Char_____leq(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 385;
+  fra.me.line = 438;
   fra.me.meth = LOCATE_standard___kernel___Char_____leq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
@@ -2038,7 +2180,7 @@ val_t standard___kernel___Char_____leq(val_t p0, val_t p1){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:385 */
+  /* ../lib/standard/kernel.nit:438 */
   REGB1 = TAG_Bool(UNTAG_Char(REGB0)<=UNTAG_Char(REGB1));
   stack_frame_head = fra.me.prev;
   return REGB1;
@@ -2052,7 +2194,7 @@ val_t standard___kernel___Char_____l(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 386;
+  fra.me.line = 439;
   fra.me.meth = LOCATE_standard___kernel___Char_____l;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
@@ -2064,7 +2206,7 @@ val_t standard___kernel___Char_____l(val_t p0, val_t p1){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:386 */
+  /* ../lib/standard/kernel.nit:439 */
   REGB1 = TAG_Bool(UNTAG_Char(REGB0)<UNTAG_Char(REGB1));
   stack_frame_head = fra.me.prev;
   return REGB1;
@@ -2078,7 +2220,7 @@ val_t standard___kernel___Char_____geq(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 387;
+  fra.me.line = 440;
   fra.me.meth = LOCATE_standard___kernel___Char_____geq;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
@@ -2090,7 +2232,7 @@ val_t standard___kernel___Char_____geq(val_t p0, val_t p1){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:387 */
+  /* ../lib/standard/kernel.nit:440 */
   REGB1 = TAG_Bool(UNTAG_Char(REGB0)>=UNTAG_Char(REGB1));
   stack_frame_head = fra.me.prev;
   return REGB1;
@@ -2104,7 +2246,7 @@ val_t standard___kernel___Char_____g(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 388;
+  fra.me.line = 441;
   fra.me.meth = LOCATE_standard___kernel___Char_____g;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
@@ -2116,7 +2258,7 @@ val_t standard___kernel___Char_____g(val_t p0, val_t p1){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:388 */
+  /* ../lib/standard/kernel.nit:441 */
   REGB1 = TAG_Bool(UNTAG_Char(REGB0)>UNTAG_Char(REGB1));
   stack_frame_head = fra.me.prev;
   return REGB1;
@@ -2128,13 +2270,13 @@ val_t standard___kernel___Char___succ(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 390;
+  fra.me.line = 443;
   fra.me.meth = LOCATE_standard___kernel___Char___succ;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ../lib/standard/kernel.nit:390 */
+  /* ../lib/standard/kernel.nit:443 */
   REGB0 = TAG_Char(UNTAG_Char(REGB0)+1);
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -2146,13 +2288,13 @@ val_t standard___kernel___Char___prec(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 391;
+  fra.me.line = 444;
   fra.me.meth = LOCATE_standard___kernel___Char___prec;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ../lib/standard/kernel.nit:391 */
+  /* ../lib/standard/kernel.nit:444 */
   REGB0 = TAG_Char(UNTAG_Char(REGB0)-1);
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -2166,7 +2308,7 @@ val_t standard___kernel___Char___distance(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 393;
+  fra.me.line = 446;
   fra.me.meth = LOCATE_standard___kernel___Char___distance;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
@@ -2178,29 +2320,29 @@ val_t standard___kernel___Char___distance(val_t p0, val_t p1){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:416 */
+  /* ../lib/standard/kernel.nit:471 */
   REGB0 = TAG_Int((unsigned char)UNTAG_Char(REGB0));
   REGB1 = TAG_Int((unsigned char)UNTAG_Char(REGB1));
-  /* ../lib/standard/kernel.nit:240 */
+  /* ../lib/standard/kernel.nit:247 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB1));
-  /* ../lib/standard/kernel.nit:396 */
+  /* ../lib/standard/kernel.nit:449 */
   REGB0 = TAG_Int(0);
   REGB2 = TAG_Bool(VAL_ISA(REGB0, VTCOLOR_standard___kernel___Comparable___OTHER(REGB1), VTID_standard___kernel___Comparable___OTHER(REGB1))) /*cast OTHER*/;
   if (UNTAG_Bool(REGB2)) {
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:236 */
+  /* ../lib/standard/kernel.nit:243 */
   REGB0 = TAG_Bool(UNTAG_Int(REGB1)>=UNTAG_Int(REGB0));
-  /* ../lib/standard/kernel.nit:396 */
+  /* ../lib/standard/kernel.nit:449 */
   if (UNTAG_Bool(REGB0)) {
-    /* ../lib/standard/kernel.nit:397 */
+    /* ../lib/standard/kernel.nit:450 */
     REGB0 = REGB1;
     goto label1;
   } else {
-    /* ../lib/standard/kernel.nit:239 */
+    /* ../lib/standard/kernel.nit:246 */
     REGB1 = TAG_Int(-UNTAG_Int(REGB1));
-    /* ../lib/standard/kernel.nit:399 */
+    /* ../lib/standard/kernel.nit:452 */
     REGB0 = REGB1;
     goto label1;
   }
@@ -2218,60 +2360,60 @@ val_t standard___kernel___Char___to_i(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 403;
+  fra.me.line = 456;
   fra.me.meth = LOCATE_standard___kernel___Char___to_i;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ../lib/standard/kernel.nit:407 */
+  /* ../lib/standard/kernel.nit:462 */
   REGB1 = TAG_Char('-');
   REGB2 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
   if (UNTAG_Bool(REGB2)) {
   } else {
-    /* ../lib/standard/kernel.nit:381 */
+    /* ../lib/standard/kernel.nit:434 */
     REGB1 = TAG_Bool((REGB0)==(REGB1));
-    /* ../lib/standard/kernel.nit:407 */
+    /* ../lib/standard/kernel.nit:462 */
     REGB2 = REGB1;
   }
   if (UNTAG_Bool(REGB2)) {
-    /* ../lib/standard/kernel.nit:408 */
+    /* ../lib/standard/kernel.nit:463 */
     REGB2 = TAG_Int(1);
-    /* ../lib/standard/kernel.nit:239 */
+    /* ../lib/standard/kernel.nit:246 */
     REGB2 = TAG_Int(-UNTAG_Int(REGB2));
-    /* ../lib/standard/kernel.nit:408 */
+    /* ../lib/standard/kernel.nit:463 */
     goto label1;
   } else {
-    /* ../lib/standard/kernel.nit:409 */
+    /* ../lib/standard/kernel.nit:464 */
     REGB1 = CALL_standard___kernel___Char___is_digit(REGB0)(REGB0);
     if (UNTAG_Bool(REGB1)) {
-      /* ../lib/standard/kernel.nit:416 */
+      /* ../lib/standard/kernel.nit:471 */
       REGB1 = TAG_Int((unsigned char)UNTAG_Char(REGB0));
-      /* ../lib/standard/kernel.nit:410 */
+      /* ../lib/standard/kernel.nit:465 */
       REGB3 = TAG_Char('0');
-      /* ../lib/standard/kernel.nit:416 */
+      /* ../lib/standard/kernel.nit:471 */
       REGB3 = TAG_Int((unsigned char)UNTAG_Char(REGB3));
-      /* ../lib/standard/kernel.nit:240 */
+      /* ../lib/standard/kernel.nit:247 */
       REGB3 = TAG_Int(UNTAG_Int(REGB1)-UNTAG_Int(REGB3));
-      /* ../lib/standard/kernel.nit:410 */
+      /* ../lib/standard/kernel.nit:465 */
       REGB2 = REGB3;
       goto label1;
     } else {
-      /* ../lib/standard/kernel.nit:412 */
+      /* ../lib/standard/kernel.nit:467 */
       REGB0 = CALL_standard___kernel___Char___to_lower(REGB0)(REGB0);
-      /* ../lib/standard/kernel.nit:416 */
+      /* ../lib/standard/kernel.nit:471 */
       REGB0 = TAG_Int((unsigned char)UNTAG_Char(REGB0));
-      /* ../lib/standard/kernel.nit:412 */
+      /* ../lib/standard/kernel.nit:467 */
       REGB3 = TAG_Char('a');
-      /* ../lib/standard/kernel.nit:416 */
+      /* ../lib/standard/kernel.nit:471 */
       REGB3 = TAG_Int((unsigned char)UNTAG_Char(REGB3));
-      /* ../lib/standard/kernel.nit:412 */
+      /* ../lib/standard/kernel.nit:467 */
       REGB1 = TAG_Int(10);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB1 = TAG_Int(UNTAG_Int(REGB3)+UNTAG_Int(REGB1));
-      /* ../lib/standard/kernel.nit:240 */
+      /* ../lib/standard/kernel.nit:247 */
       REGB1 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB1));
-      /* ../lib/standard/kernel.nit:412 */
+      /* ../lib/standard/kernel.nit:467 */
       REGB2 = REGB1;
       goto label1;
     }
@@ -2287,13 +2429,13 @@ val_t standard___kernel___Char___ascii(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 416;
+  fra.me.line = 471;
   fra.me.meth = LOCATE_standard___kernel___Char___ascii;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ../lib/standard/kernel.nit:416 */
+  /* ../lib/standard/kernel.nit:471 */
   REGB0 = TAG_Int((unsigned char)UNTAG_Char(REGB0));
   stack_frame_head = fra.me.prev;
   return REGB0;
@@ -2306,14 +2448,14 @@ val_t standard___kernel___Char_____plus(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 419;
+  fra.me.line = 477;
   fra.me.meth = LOCATE_standard___kernel___Char_____plus;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   REGB1 = p1;
-  /* ../lib/standard/kernel.nit:419 */
+  /* ../lib/standard/kernel.nit:477 */
   REGB1 = TAG_Char(UNTAG_Char(REGB0)+UNTAG_Char(REGB1));
   stack_frame_head = fra.me.prev;
   return REGB1;
@@ -2326,14 +2468,14 @@ val_t standard___kernel___Char_____minus(val_t p0, val_t p1){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 420;
+  fra.me.line = 478;
   fra.me.meth = LOCATE_standard___kernel___Char_____minus;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
   REGB1 = p1;
-  /* ../lib/standard/kernel.nit:420 */
+  /* ../lib/standard/kernel.nit:478 */
   REGB1 = TAG_Char(UNTAG_Char(REGB0)-UNTAG_Char(REGB1));
   stack_frame_head = fra.me.prev;
   return REGB1;
@@ -2348,29 +2490,29 @@ val_t standard___kernel___Char___to_lower(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 422;
+  fra.me.line = 480;
   fra.me.meth = LOCATE_standard___kernel___Char___to_lower;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ../lib/standard/kernel.nit:426 */
+  /* ../lib/standard/kernel.nit:488 */
   REGB1 = CALL_standard___kernel___Char___is_upper(REGB0)(REGB0);
   if (UNTAG_Bool(REGB1)) {
-    /* ../lib/standard/kernel.nit:416 */
+    /* ../lib/standard/kernel.nit:471 */
     REGB1 = TAG_Int((unsigned char)UNTAG_Char(REGB0));
-    /* ../lib/standard/kernel.nit:427 */
+    /* ../lib/standard/kernel.nit:489 */
     REGB2 = TAG_Char('a');
     REGB3 = TAG_Char('A');
     REGB3 = CALL_standard___kernel___Discrete___distance(REGB2)(REGB2, REGB3);
-    /* ../lib/standard/kernel.nit:238 */
+    /* ../lib/standard/kernel.nit:245 */
     REGB3 = TAG_Int(UNTAG_Int(REGB1)+UNTAG_Int(REGB3));
-    /* ../lib/standard/kernel.nit:300 */
+    /* ../lib/standard/kernel.nit:318 */
     REGB3 = TAG_Char(UNTAG_Int(REGB3));
-    /* ../lib/standard/kernel.nit:427 */
+    /* ../lib/standard/kernel.nit:489 */
     goto label1;
   } else {
-    /* ../lib/standard/kernel.nit:429 */
+    /* ../lib/standard/kernel.nit:491 */
     REGB3 = REGB0;
     goto label1;
   }
@@ -2388,29 +2530,29 @@ val_t standard___kernel___Char___to_upper(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 433;
+  fra.me.line = 495;
   fra.me.meth = LOCATE_standard___kernel___Char___to_upper;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ../lib/standard/kernel.nit:437 */
+  /* ../lib/standard/kernel.nit:503 */
   REGB1 = CALL_standard___kernel___Char___is_lower(REGB0)(REGB0);
   if (UNTAG_Bool(REGB1)) {
-    /* ../lib/standard/kernel.nit:416 */
+    /* ../lib/standard/kernel.nit:471 */
     REGB1 = TAG_Int((unsigned char)UNTAG_Char(REGB0));
-    /* ../lib/standard/kernel.nit:438 */
+    /* ../lib/standard/kernel.nit:504 */
     REGB2 = TAG_Char('a');
     REGB3 = TAG_Char('A');
     REGB3 = CALL_standard___kernel___Discrete___distance(REGB2)(REGB2, REGB3);
-    /* ../lib/standard/kernel.nit:240 */
+    /* ../lib/standard/kernel.nit:247 */
     REGB3 = TAG_Int(UNTAG_Int(REGB1)-UNTAG_Int(REGB3));
-    /* ../lib/standard/kernel.nit:300 */
+    /* ../lib/standard/kernel.nit:318 */
     REGB3 = TAG_Char(UNTAG_Int(REGB3));
-    /* ../lib/standard/kernel.nit:438 */
+    /* ../lib/standard/kernel.nit:504 */
     goto label1;
   } else {
-    /* ../lib/standard/kernel.nit:440 */
+    /* ../lib/standard/kernel.nit:506 */
     REGB3 = REGB0;
     goto label1;
   }
@@ -2427,22 +2569,22 @@ val_t standard___kernel___Char___is_digit(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 444;
+  fra.me.line = 510;
   fra.me.meth = LOCATE_standard___kernel___Char___is_digit;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ../lib/standard/kernel.nit:447 */
+  /* ../lib/standard/kernel.nit:517 */
   REGB1 = TAG_Char('0');
   REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
   if (UNTAG_Bool(REGB2)) {
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:387 */
+  /* ../lib/standard/kernel.nit:440 */
   REGB1 = TAG_Bool(UNTAG_Char(REGB0)>=UNTAG_Char(REGB1));
-  /* ../lib/standard/kernel.nit:447 */
+  /* ../lib/standard/kernel.nit:517 */
   if (UNTAG_Bool(REGB1)) {
     REGB1 = TAG_Char('9');
     REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
@@ -2450,10 +2592,10 @@ val_t standard___kernel___Char___is_digit(val_t p0){
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:385 */
+    /* ../lib/standard/kernel.nit:438 */
     REGB1 = TAG_Bool(UNTAG_Char(REGB0)<=UNTAG_Char(REGB1));
   } else {
-    /* ../lib/standard/kernel.nit:447 */
+    /* ../lib/standard/kernel.nit:517 */
     REGB0 = TAG_Bool(0);
     REGB1 = REGB0;
   }
@@ -2471,22 +2613,22 @@ val_t standard___kernel___Char___is_lower(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 450;
+  fra.me.line = 520;
   fra.me.meth = LOCATE_standard___kernel___Char___is_lower;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ../lib/standard/kernel.nit:453 */
+  /* ../lib/standard/kernel.nit:528 */
   REGB1 = TAG_Char('a');
   REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
   if (UNTAG_Bool(REGB2)) {
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:387 */
+  /* ../lib/standard/kernel.nit:440 */
   REGB1 = TAG_Bool(UNTAG_Char(REGB0)>=UNTAG_Char(REGB1));
-  /* ../lib/standard/kernel.nit:453 */
+  /* ../lib/standard/kernel.nit:528 */
   if (UNTAG_Bool(REGB1)) {
     REGB1 = TAG_Char('z');
     REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
@@ -2494,10 +2636,10 @@ val_t standard___kernel___Char___is_lower(val_t p0){
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:385 */
+    /* ../lib/standard/kernel.nit:438 */
     REGB1 = TAG_Bool(UNTAG_Char(REGB0)<=UNTAG_Char(REGB1));
   } else {
-    /* ../lib/standard/kernel.nit:453 */
+    /* ../lib/standard/kernel.nit:528 */
     REGB0 = TAG_Bool(0);
     REGB1 = REGB0;
   }
@@ -2515,22 +2657,22 @@ val_t standard___kernel___Char___is_upper(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 456;
+  fra.me.line = 531;
   fra.me.meth = LOCATE_standard___kernel___Char___is_upper;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ../lib/standard/kernel.nit:459 */
+  /* ../lib/standard/kernel.nit:539 */
   REGB1 = TAG_Char('A');
   REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
   if (UNTAG_Bool(REGB2)) {
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:387 */
+  /* ../lib/standard/kernel.nit:440 */
   REGB1 = TAG_Bool(UNTAG_Char(REGB0)>=UNTAG_Char(REGB1));
-  /* ../lib/standard/kernel.nit:459 */
+  /* ../lib/standard/kernel.nit:539 */
   if (UNTAG_Bool(REGB1)) {
     REGB1 = TAG_Char('Z');
     REGB2 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
@@ -2538,10 +2680,10 @@ val_t standard___kernel___Char___is_upper(val_t p0){
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:385 */
+    /* ../lib/standard/kernel.nit:438 */
     REGB1 = TAG_Bool(UNTAG_Char(REGB0)<=UNTAG_Char(REGB1));
   } else {
-    /* ../lib/standard/kernel.nit:459 */
+    /* ../lib/standard/kernel.nit:539 */
     REGB0 = TAG_Bool(0);
     REGB1 = REGB0;
   }
@@ -2558,13 +2700,13 @@ val_t standard___kernel___Char___is_letter(val_t p0){
   val_t tmp;
   fra.me.prev = stack_frame_head; stack_frame_head = &fra.me;
   fra.me.file = LOCATE_standard___kernel;
-  fra.me.line = 462;
+  fra.me.line = 542;
   fra.me.meth = LOCATE_standard___kernel___Char___is_letter;
   fra.me.has_broke = 0;
   fra.me.REG_size = 0;
   fra.me.nitni_local_ref_head = NULL;
   REGB0 = p0;
-  /* ../lib/standard/kernel.nit:465 */
+  /* ../lib/standard/kernel.nit:550 */
   REGB1 = CALL_standard___kernel___Char___is_lower(REGB0)(REGB0);
   if (UNTAG_Bool(REGB1)) {
     REGB1 = TAG_Bool(1);

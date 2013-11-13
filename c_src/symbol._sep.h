@@ -15,10 +15,8 @@ extern const int SFT_symbol[];
 #define CALL_symbol___Symbol___init(recv) ((symbol___Symbol___init_t)CALL((recv), (SFT_symbol[4] + 1)))
 val_t symbol___String___to_symbol(val_t p0);
 typedef val_t (*symbol___String___to_symbol_t)(val_t p0);
-val_t NEW_String_standard___string___String___with_native(val_t p0, val_t p1);
-val_t NEW_String_standard___string___String___from_cstring(val_t p0);
 val_t NEW_String_standard___string___String___from_substring(val_t p0, val_t p1, val_t p2);
-val_t NEW_String_standard___string___String___copy_from_native(val_t p0);
+val_t NEW_String_standard___string___String___with_infos(val_t p0, val_t p1, val_t p2, val_t p3);
 val_t symbol___Symbol___to_s(val_t p0);
 typedef val_t (*symbol___Symbol___to_s_t)(val_t p0);
 void symbol___Symbol___init(val_t p0, val_t p1, int* init_table);

@@ -33,7 +33,7 @@ private class ModelizeClassPhase
 end
 
 redef class ModelBuilder
-	# Visit the AST and create the MClass objects
+	# Visit the AST and create the `MClass` objects
 	private fun build_a_mclass(nmodule: AModule, nclassdef: AClassdef)
 	do
 		var mmodule = nmodule.mmodule.as(not null)
@@ -51,6 +51,13 @@ redef class ModelBuilder
 			nvisibility = nclassdef.n_visibility
 			mvisibility = nvisibility.mvisibility
 			arity = nclassdef.n_formaldefs.length
+			if mvisibility == protected_visibility then
+				error(nvisibility, "Error: only properties can be protected.")
+				return
+			else if mvisibility == intrude_visibility then
+				error(nvisibility, "Error: intrude is not a legal visibility for classes.")
+				return
+			end
 		else if nclassdef isa ATopClassdef then
 			name = "Object"
 			nkind = null
@@ -89,7 +96,7 @@ redef class ModelBuilder
 		nmodule.mclass2nclassdef[mclass] = nclassdef
 	end
 
-	# Visit the AST and create the MClassDef objects
+	# Visit the AST and create the `MClassDef` objects
 	private fun build_a_mclassdef(nmodule: AModule, nclassdef: AClassdef)
 	do
 		var mmodule = nmodule.mmodule.as(not null)
@@ -109,7 +116,12 @@ redef class ModelBuilder
 					error(nfd, "Error: A formal parameter type `{ptname}' already exists")
 					return
 				end
+				for c in ptname do if c >= 'a' and c<= 'z' then
+					warning(nfd, "Warning: lowercase in the formal parameter type {ptname}")
+					break
+				end
 				names.add(ptname)
+				nfd.mtype = mclass.mclass_type.arguments[i].as(MParameterType)
 			end
 
 			# Revolve bound for formal parameter names
@@ -124,13 +136,18 @@ redef class ModelBuilder
 						error(nfd, "Error: Formal parameter type `{names[i]}' bounded with a formal parameter type")
 					else
 						bounds.add(bound)
+						nfd.bound = bound
 					end
 				else if mclass.mclassdefs.is_empty then
 					# No bound, then implicitely bound by nullable Object
-					bounds.add(objectclass.mclass_type.as_nullable)
+					var bound = objectclass.mclass_type.as_nullable
+					bounds.add(bound)
+					nfd.bound = bound
 				else
 					# Inherit the bound
-					bounds.add(mclass.intro.bound_mtype.arguments[i])
+					var bound = mclass.intro.bound_mtype.arguments[i]
+					bounds.add(bound)
+					nfd.bound = bound
 				end
 			end
 		end
@@ -147,7 +164,7 @@ redef class ModelBuilder
 		end
 	end
 
-	# Visit the AST and set the super-types of the MClassdef objects
+	# Visit the AST and set the super-types of the `MClassDef` objects
 	private fun collect_a_mclassdef_inheritance(nmodule: AModule, nclassdef: AClassdef)
 	do
 		var mmodule = nmodule.mmodule.as(not null)
@@ -203,10 +220,11 @@ redef class ModelBuilder
 		end
 	end
 
-	# Build the classes of the module `nmodule'.
-	# REQUIRE: classes of imported modules are already build. (let `phase' do the job)
+	# Build the classes of the module `nmodule`.
+	# REQUIRE: classes of imported modules are already build. (let `phase` do the job)
 	private fun build_classes(nmodule: AModule)
 	do
+		var errcount = toolcontext.error_count
 		# Force building recursively
 		if nmodule.build_classes_is_done then return
 		nmodule.build_classes_is_done = true
@@ -216,24 +234,28 @@ redef class ModelBuilder
 			build_classes(mmodule2nmodule[imp])
 		end
 
+		if errcount != toolcontext.error_count then return
+
 		# Create all classes
 		for nclassdef in nmodule.n_classdefs do
 			self.build_a_mclass(nmodule, nclassdef)
 		end
+
+		if errcount != toolcontext.error_count then return
 
 		# Create all classdefs
 		for nclassdef in nmodule.n_classdefs do
 			self.build_a_mclassdef(nmodule, nclassdef)
 		end
 
-		for nclassdef in nmodule.n_classdefs do
-			if nclassdef.mclassdef == null then return # forward error
-		end
+		if errcount != toolcontext.error_count then return
 
 		# Create inheritance on all classdefs
 		for nclassdef in nmodule.n_classdefs do
 			self.collect_a_mclassdef_inheritance(nmodule, nclassdef)
 		end
+
+		if errcount != toolcontext.error_count then return
 
 		# Create the mclassdef hierarchy
 		for nclassdef in nmodule.n_classdefs do
@@ -241,10 +263,14 @@ redef class ModelBuilder
 			mclassdef.add_in_hierarchy
 		end
 
+		if errcount != toolcontext.error_count then return
+
 		# Check inheritance
 		for nclassdef in nmodule.n_classdefs do
 			self.check_supertypes(nmodule, nclassdef)
 		end
+
+		if errcount != toolcontext.error_count then return
 
 		# Check unchecked ntypes
 		for nclassdef in nmodule.n_classdefs do
@@ -266,22 +292,77 @@ redef class ModelBuilder
 					end
 				end
 			end
-
 		end
+
+		if errcount != toolcontext.error_count then return
+
+		# Check clash of ancestors
+		for nclassdef in nmodule.n_classdefs do
+			var mclassdef = nclassdef.mclassdef.as(not null)
+			var superclasses = new HashMap[MClass, MClassType]
+			for scd in mclassdef.in_hierarchy.greaters do
+				for st in scd.supertypes do
+					if not superclasses.has_key(st.mclass) then
+						superclasses[st.mclass] = st
+					else if superclasses[st.mclass] != st then
+						var st1 = superclasses[st.mclass].resolve_for(mclassdef.mclass.mclass_type, mclassdef.bound_mtype, mmodule, false)
+						var st2 = st.resolve_for(mclassdef.mclass.mclass_type, mclassdef.bound_mtype, mmodule, false)
+						if st1 != st2 then
+							error(nclassdef, "Error: Incompatibles ancestors for {mclassdef.mclass}: {st1}, {st2}")
+						end
+					end
+				end
+			end
+		end
+
+		if errcount != toolcontext.error_count then return
 
 		# TODO: Check that the super-class is not intrusive
 
-		# TODO: Check that the super-class is not already known (by transitivity)
+		# Check that the superclasses are not already known (by transitivity)
+		for nclassdef in nmodule.n_classdefs do
+			if not nclassdef isa AStdClassdef then continue
+			var mclassdef = nclassdef.mclassdef.as(not null)
+
+			# Get the direct superclasses
+			# Since we are a mclassdef, just look at the mclassdef hierarchy
+			var parents = new Array[MClass]
+			for sup in mclassdef.in_hierarchy.direct_greaters do
+				parents.add(sup.mclass)
+			end
+
+			# Used to track duplicates of superclasses
+			var seen_parents = new ArrayMap[MClass, AType]
+
+			# The Object class
+			var objectclass = try_get_mclass_by_name(nmodule, mmodule, "Object")
+
+			# Check each declared superclass to see if it belong to the direct superclass
+			for nsc in nclassdef.n_superclasses do
+				var ntype = nsc.n_type
+				var mtype = ntype.mtype
+				if mtype == null then continue
+				assert mtype isa MClassType
+				var sc = mtype.mclass
+				if not parents.has(sc) or sc == objectclass then
+					warning(ntype, "Warning: superfluous super-class {mtype} in class {mclassdef.mclass}.")
+				else if not seen_parents.has_key(sc) then
+					seen_parents[sc] = ntype
+				else
+					warning(ntype, "Warning: duplicated super-class {mtype} in class {mclassdef.mclass}.")
+				end
+			end
+		end
 	end
 
 	# Register the nclassdef associated to each mclassdef
-	# FIXME: why not refine the MClassDef class with a nullable attribute?
+	# FIXME: why not refine the `MClassDef` class with a nullable attribute?
 	var mclassdef2nclassdef: HashMap[MClassDef, AClassdef] = new HashMap[MClassDef, AClassdef]
 
-	# Return the static type associated to the node `ntype'.
-	# `classdef' is the context where the call is made (used to understand formal types)
-	# The mmodule used as context is `nclassdef.mmodule'
-	# In case of problem, an error is displayed on `ntype' and null is returned.
+	# Return the static type associated to the node `ntype`.
+	# `nclassdef` is the context where the call is made (used to understand formal types)
+	# The mmodule used as context is `nclassdef.mmodule`
+	# In case of problem, an error is displayed on `ntype` and null is returned.
 	# FIXME: the name "resolve_mtype" is awful
 	fun resolve_mtype_unchecked(nclassdef: AClassdef, ntype: AType, with_virtual: Bool): nullable MType
 	do
@@ -358,10 +439,10 @@ redef class ModelBuilder
 		return null
 	end
 
-	# Return the static type associated to the node `ntype'.
-	# `classdef' is the context where the call is made (used to understand formal types)
-	# The mmodule used as context is `nclassdef.mmodule'
-	# In case of problem, an error is displayed on `ntype' and null is returned.
+	# Return the static type associated to the node `ntype`.
+	# `nclassdef` is the context where the call is made (used to understand formal types)
+	# The mmodule used as context is `nclassdef.mmodule`
+	# In case of problem, an error is displayed on `ntype` and null is returned.
 	# FIXME: the name "resolve_mtype" is awful
 	fun resolve_mtype(nclassdef: AClassdef, ntype: AType): nullable MType
 	do
@@ -394,15 +475,15 @@ end
 redef class AModule
 	# Flag that indicate if the class building is already completed
 	var build_classes_is_done: Bool = false
-	# What is the AClassdef associated to a MClass?
+	# What is the AClassdef associated to a `MClass`?
 	# Used to check multiple definition of a class.
 	var mclass2nclassdef: Map[MClass, AClassdef] = new HashMap[MClass, AClassdef]
 end
 
 redef class AClassdef
-	# The associated MClass once build by a `ModelBuilder'
+	# The associated MClass once build by a `ModelBuilder`
 	var mclass: nullable MClass
-	# The associated MClassDef once build by a `ModelBuilder'
+	# The associated MClassDef once build by a `ModelBuilder`
 	var mclassdef: nullable MClassDef
 end
 
@@ -424,6 +505,14 @@ redef class AEnumClasskind
 end
 redef class AExternClasskind
 	redef fun mkind do return extern_kind
+end
+
+redef class AFormaldef
+	# The associated parameter type
+	var mtype: nullable MParameterType = null
+
+	# The associated bound
+	var bound: nullable MType = null
 end
 
 redef class AType

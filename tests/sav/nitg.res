@@ -13,6 +13,7 @@
   -o, --output                Output file
   --no-cc                     Do not invoke C compiler
   --make-flags                Additional options to make
+  --compile-dir               Directory used to generate temporary files
   --hardening                 Generate contracts in the C code against bugs in the compiler
   --no-shortcut-range         Always insantiate a range and its iterator on 'for' loops
   --no-check-covariance       Disable type tests of covariant parameters (dangerous)
@@ -33,3 +34,4 @@
   --erasure                   Erase generic types
   --no-check-erasure-cast     Disable implicit casts on unsafe return with erasure-typing policy (dangerous)
   --global                    Use global compilation
+  -m                          Additionals module to min-in

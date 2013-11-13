@@ -13,39 +13,44 @@
 # another product.
 
 # File manipulations (create, read, write, etc.)
-package file
+module file
 
 intrude import stream
 intrude import string
 import string_search
+import time
 
 redef class Object
 # Simple I/O
 
-	# Print `objects' on the standard output (`stdout').
+	# Print `objects` on the standard output (`stdout`).
 	protected fun printn(objects: Object...)
 	do
 		stdout.write(objects.to_s)
 	end
 
-	# Print an `object' on the standard output (`stdout') and add a newline.
+	# Print an `object` on the standard output (`stdout`) and add a newline.
 	protected fun print(object: Object)
 	do
 		stdout.write(object.to_s)
 		stdout.write("\n")
 	end
 
-	# Read a character from the standard input (`stdin').
+	# Read a character from the standard input (`stdin`).
 	protected fun getc: Char
 	do
 		return stdin.read_char.ascii
 	end
 
-	# Read a line from the standard input (`stdin').
+	# Read a line from the standard input (`stdin`).
 	protected fun gets: String
 	do
 		return stdin.read_line
 	end
+
+	# Return the working (current) directory
+	protected fun getcwd: String do return file_getcwd.to_s
+	private fun file_getcwd: NativeString is extern "string_NativeString_NativeString_file_getcwd_0"
 end
 
 # File Abstract Stream
@@ -98,7 +103,7 @@ class IFStream
 	# End of file?
 	redef readable var _end_reached: Bool = false
 
-	# Open the file at `path' for reading.
+	# Open the file at `path` for reading.
 	init open(path: String)
 	do
 		_path = path
@@ -133,7 +138,7 @@ class OFStream
 	# Is the file open in write mode
 	var _writable: Bool
 	
-	# Write `len' bytes from `native'.
+	# Write `len` bytes from `native`.
 	private fun write_native(native: NativeString, len: Int)
 	do
 		assert _writable
@@ -144,7 +149,7 @@ class OFStream
 		end
 	end
 	
-	# Open the file at `path' for writing.
+	# Open the file at `path` for writing.
 	init open(path: String)
 	do
 		_file = new NativeFile.io_open_write(path.to_cstring)
@@ -197,6 +202,7 @@ redef class String
 	fun file_exists: Bool do return to_cstring.file_exists
 
 	fun file_stat: FileStat do return to_cstring.file_stat
+	fun file_lstat: FileStat do return to_cstring.file_lstat
 
 	# Remove a file, return true if success
 	fun file_delete: Bool do return to_cstring.file_delete
@@ -222,11 +228,24 @@ redef class String
 	end
 
 	# Extract the dirname of a path
+	#
+	#     assert "/path/to/a_file.ext".dirname         == "/path/to"
+	#     assert "path/to/a_file.ext".dirname          == "path/to"
+	#     assert "path/to".dirname                     == "path"
+	#     assert "path/to/".dirname                    == "path"
+	#     assert "path".dirname                        == "."
+	#     assert "/path".dirname                       == "/"
+	#     assert "/".dirname                           == "/"
+	#     assert "".dirname                            == "."
 	fun dirname: String
 	do
-		var pos = last_index_of_from('/', _length - 1)
-		if pos >= 0 then
+		var l = _length - 1 # Index of the last char
+		if l > 0 and self[l] == '/' then l -= 1 # remove trailing `/`
+		var pos = last_index_of_from('/', l)
+		if pos > 0 then
 			return substring(0, pos)
+		else if pos == 0 then
+			return "/"
 		else
 			return "."
 		end
@@ -241,10 +260,10 @@ redef class String
 	#  * no I/O access is performed
 	#  * the validity of the path is not checked
 	#
-	#     "some/./complex/../../path/from/../to/a////file//".simplify_path	# -> "path/to/a/file"
-	#     "../dir/file" # -> "../dir/file"
-	#     "dir/../../" # -> ".."
-	#     "//absolute//path/" # -> "/absolute/path"
+	#     assert "some/./complex/../../path/from/../to/a////file//".simplify_path	     ==  "path/to/a/file"
+	#     assert "../dir/file".simplify_path      ==  "../dir/file"
+	#     assert "dir/../../".simplify_path      ==  ".."
+	#     assert "//absolute//path/".simplify_path      ==  "/absolute/path"
 	fun simplify_path: String
 	do
 		var a = self.split_with("/")
@@ -263,15 +282,15 @@ redef class String
 
 	# Correctly join two path using the directory separator.
 	#
-	# Using a standard "{self}/{path}" does not work when `self' is the empty string.
+	# Using a standard "{self}/{path}" does not work when `self` is the empty string.
 	# This method ensure that the join is valid.
 	#
-	#     "hello".join_path("world") # -> "hello/world"
-	#     "hel/lo".join_path("wor/ld") # -> "hel/lo/wor/ld"
-	#     "".join_path("world") # -> "world"
-	#     "/hello".join_path("/world") # -> "/world"
+	#     assert "hello".join_path("world")      ==  "hello/world"
+	#     assert "hel/lo".join_path("wor/ld")      ==  "hel/lo/wor/ld"
+	#     assert "".join_path("world")      ==  "world"
+	#     assert "/hello".join_path("/world")      ==  "/world"
 	#
-	# Note: you may want to use `simplify_path' on the result
+	# Note: you may want to use `simplify_path` on the result
 	#
 	# Note: I you want to join a great number of path, you can write
 	#
@@ -302,6 +321,16 @@ redef class String
 		end
 	end
 
+	# Change the current working directory
+	#
+	#     "/etc".chdir
+	#     assert getcwd == "/etc"
+	#     "..".chdir
+	#     assert getcwd == "/"
+	#
+	# TODO: errno
+	fun chdir do to_cstring.file_chdir
+
 	# Return right-most extension (without the dot)
 	fun file_extension : nullable String
 	do
@@ -314,23 +343,40 @@ redef class String
 	end
 
 	# returns files contained within the directory represented by self
-	fun files : Set[ String ] is extern import HashSet, HashSet::add, String::from_cstring, String::to_cstring, HashSet[String] as( Set[String] ), String as( Object )
+	fun files : Set[ String ] is extern import HashSet, HashSet::add, NativeString::to_s, String::to_cstring, HashSet[String] as( Set[String] ), String as( Object )
 end
 
 redef class NativeString
 	private fun file_exists: Bool is extern "string_NativeString_NativeString_file_exists_0"
 	private fun file_stat: FileStat is extern "string_NativeString_NativeString_file_stat_0"
+	private fun file_lstat: FileStat `{
+		struct stat* stat_element;
+		int res;
+		stat_element = malloc(sizeof(struct stat));
+		res = lstat(recv, stat_element);
+		if (res == -1) return NULL;
+		return stat_element;
+	`}
 	private fun file_mkdir: Bool is extern "string_NativeString_NativeString_file_mkdir_0"
 	private fun file_delete: Bool is extern "string_NativeString_NativeString_file_delete_0"
+	private fun file_chdir is extern "string_NativeString_NativeString_file_chdir_0"
 end
 
-extern FileStat
+extern FileStat `{ struct stat * `}
 # This class is system dependent ... must reify the vfs
 	fun mode: Int is extern "file_FileStat_FileStat_mode_0"
 	fun atime: Int is extern "file_FileStat_FileStat_atime_0"
 	fun ctime: Int is extern "file_FileStat_FileStat_ctime_0"
 	fun mtime: Int is extern "file_FileStat_FileStat_mtime_0"
 	fun size: Int is extern "file_FileStat_FileStat_size_0"
+
+	fun is_reg: Bool `{ return S_ISREG(recv->st_mode); `}
+	fun is_dir: Bool `{ return S_ISDIR(recv->st_mode); `}
+	fun is_chr: Bool `{ return S_ISCHR(recv->st_mode); `}
+	fun is_blk: Bool `{ return S_ISBLK(recv->st_mode); `}
+	fun is_fifo: Bool `{ return S_ISFIFO(recv->st_mode); `}
+	fun is_lnk: Bool `{ return S_ISLNK(recv->st_mode); `}
+	fun is_sock: Bool `{ return S_ISSOCK(recv->st_mode); `}
 end
 
 # Instance of this class are standard FILE * pointers

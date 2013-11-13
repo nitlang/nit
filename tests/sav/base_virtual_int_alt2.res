@@ -1,3 +1,3 @@
-Runtime error: Cast failed (../lib/standard/kernel.nit:234)
+Runtime error: Cast failed (../lib/standard/kernel.nit:256)
 true
 true

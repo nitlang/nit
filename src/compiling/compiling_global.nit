@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Compute and generate tables for classes and modules.
-package compiling_global
+module compiling_global
 
 import table_computation
 private import compiling_icode
@@ -191,13 +191,17 @@ redef class TableEltSuper
 		var lin = c.che.linear_extension
 		var found = false
 		for s in lin do
-			#print "{c.module}::{c} for {pc.module}::{pc}::{_property} try {s.module}:{s}"
+			#print "{c.mmmodule}::{c} for {pc.mmmodule}::{pc}::{property} try {s.mmmodule}:{s}"
+			if not s.has_global_property(g) then continue
+
+			var p = s[g]
+			if p.local_class != s then continue
 			if s == pc then
 				found = true
 			else if found and c.che < s then
 				if s.has_global_property(g) then
-					#print "found {s.module}::{s}::{p}"
-					return s[g].cname
+					#print "found {s.mmmodule}::{s} {p.local_class}::{p} {p.cname}"
+					return p.cname
 				end
 			end
 		end

@@ -12,7 +12,7 @@
 
 # Symbol classes
 # FIXME: Should be deprecated soon
-package symbol
+module symbol
 
 redef class String
 	# Get the unique corresponding to the string

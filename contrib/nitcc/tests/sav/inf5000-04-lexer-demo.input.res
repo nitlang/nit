@@ -1,0 +1,22 @@
+Start
+  p
+    Nodes
+      t_2
+        if@(1:1-1:3)='if'
+      t_0
+        identifier@(1:4-1:7)='iff'
+      t_0
+        identifier@(1:8-1:11)='iff'
+      t_0
+        identifier@(1:12-1:13)='i'
+      t_0
+        identifier@(1:14-1:15)='f'
+      t_0
+        identifier@(2:1-2:6)='if50i'
+      t_2
+        if@(3:1-3:3)='if'
+      t_1
+        comma@(3:3-3:4)=','
+      t_0
+        identifier@(3:4-3:5)='i'
+  Eof@(4:1-4:1)=''

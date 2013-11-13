@@ -16,7 +16,7 @@
 # limitations under the License.
 
 # Various functions for NIT tools
-package utils
+module utils
 
 import symbol
 

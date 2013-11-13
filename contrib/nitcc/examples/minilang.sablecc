@@ -1,0 +1,57 @@
+/* Grammar of a mini procedural programming language */
+Grammar minilang;
+
+Lexer
+l = 'a'..'z'|'A'..'Z'|'_';
+d = '0'..'9';
+id = l (l|d)*;
+int = d+;
+str = '"' (Any - '"')* '"';
+blank = ' ' | '\n' | '\t';
+
+Parser
+Ignored blank;
+
+prog = s*;
+
+s =
+	{assign:} id '=' e ';' |
+	{print:} 'print' '(' e ')' ';' |
+	{print_str:} 'print' '(' str ')' ';' |
+	{println:} 'println' '(' ')' ';' |
+	{while:} 'while' '(' c ')' stmts |
+	{if:} 'if' '(' c ')' [then:]stmts else? ;
+
+stmts = '{' s* '}' ;
+
+else = 'else' stmts;
+
+e = 
+	{add:} [left:]e '+' [right:]e2 |
+	{sub:} [left:]e '-' [right:]e2 |
+	e2 {->};
+e2 {->e} =
+	{mul:} [left:]e2 '*' [right:]e3 |
+	{div:} [left:]e2 '/' [right:]e3 |
+	e3 {->};
+e3 {->e} =
+	{neg:} '-' e3 |
+	{lit:} int |
+	{par:} '(' e ')' |
+	{var:} id |
+	{read:} 'read' '(' ')' ;
+
+c =
+	{or:} [left:]c '||' [right:]c2 |
+	c2 {->};
+c2 {->c} =
+	{and:} [left:]c2 '&&' [right:]c3 |
+	c3 {->};
+c3 {->c} =
+	{not:} 'not' [c:]c3 |
+	{eq:} [left:]e '=' [right:]e |
+	{ne:} [left:]e '!=' [right:]e |
+	{lt:} [left:]e '<' [right:]e |
+	{le:} [left:]e '<=' [right:]e |
+	{gt:} [left:]e '>' [right:]e |
+	{ge:} [left:]e '>=' [right:]e ;

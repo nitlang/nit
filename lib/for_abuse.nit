@@ -25,13 +25,26 @@ module for_abuse
 # The service is not effectively started until the iterate method
 # is called. Then, each step of the iteration is a step in the service.
 #
-# While, for a typing point of view, abusers are just collections,
-# the point of this class is to tag services that return a ForAbuser
-# object.
-# Note that using abuser as genuine collection should work but is not
-# recommended since it may cause mental health issues.
+# While, for a typing point of view, abusers are just classes with an
+# iterator method, the point of this class is to tag services that return
+# a ForAbuser object.
+#
+# Note that using having `ForAbuser` as a genuine subclass of `Collection`
+# works but is not recommended since it may cause mental health issues.
 interface ForAbuser[E]
-	super Collection[E]
+	# Starts and control the service
+	fun iterator: Iterator[E] is abstract
+
+	# Starts and contol the service (for `nitc`)
+	fun iterate
+		!each(e: E)
+	do
+		var i = iterator
+		while i.is_ok do
+			each(i.item)
+			i.next
+		end
+	end
 end
 
 # Abuser to read a file, see `file_open`
@@ -140,7 +153,7 @@ redef class Array[E]
 	#
 	#     var a = [1, 3, 2]
 	#     for q in a do q.res = q.a <=> q.b
-	#     print a # => 123
+	#     assert print a      ==  123
 	#
 	# Implements a sort by permutation.
 	fun sort_fa: ForAbuser[CompareQuery[E]]
@@ -154,8 +167,8 @@ end
 # Open and read a file trough a `for` abuse.
 # The abuse just ensures that the file is closed after the reading.
 #
-#     for f in file_open(path) do
-#       print path.read_line
+#     for f in file_open("/etc/issue") do
+#       print f.read_line
 #     end # f is automatically closed here
 fun file_open(path: String): ForAbuser[IFStream]
 do

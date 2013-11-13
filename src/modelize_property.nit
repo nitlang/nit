@@ -35,10 +35,10 @@ end
 
 redef class ModelBuilder
 	# Register the npropdef associated to each mpropdef
-	# FIXME: why not refine the MPropDef class with a nullable attribute?
+	# FIXME: why not refine the `MPropDef` class with a nullable attribute?
 	var mpropdef2npropdef: HashMap[MPropDef, APropdef] = new HashMap[MPropDef, APropdef]
 
-	# Build the properties of `nclassdef'.
+	# Build the properties of `nclassdef`.
 	# REQUIRE: all superclasses are built.
 	private fun build_properties(nclassdef: AClassdef)
 	do
@@ -64,7 +64,7 @@ redef class ModelBuilder
 	end
 
 	# Introduce or inherit default constructor
-	# This is the last part of `build_properties'.
+	# This is the last part of `build_properties`.
 	private fun process_default_constructors(nclassdef: AClassdef)
 	do
 		var mclassdef = nclassdef.mclassdef.as(not null)
@@ -167,7 +167,7 @@ redef class AClassdef
 	# The free init (implicitely constructed by the class if required)
 	var mfree_init: nullable MMethodDef = null
 
-	# What is the APropdef associated to a MProperty?
+	# What is the `APropdef` associated to a `MProperty`?
 	# Used to check multiple definition of a property.
 	var mprop2npropdef: Map[MProperty, APropdef] = new HashMap[MProperty, APropdef]
 end
@@ -198,22 +198,22 @@ redef class APropdef
 	# The associated main model entity
 	type MPROPDEF: MPropDef
 
-	# The associated propdef once build by a `ModelBuilder'
+	# The associated propdef once build by a `ModelBuilder`
 	var mpropdef: nullable MPROPDEF writable
 
-	private fun build_property(modelbuilder: ModelBuilder, nclassdef: AClassdef)
-	do
-	end
-	private fun build_signature(modelbuilder: ModelBuilder, nclassdef: AClassdef)
-	do
-	end
-	private fun check_signature(modelbuilder: ModelBuilder, nclassdef: AClassdef)
-	do
-	end
+	private fun build_property(modelbuilder: ModelBuilder, nclassdef: AClassdef) is abstract
+	private fun build_signature(modelbuilder: ModelBuilder, nclassdef: AClassdef) is abstract
+	private fun check_signature(modelbuilder: ModelBuilder, nclassdef: AClassdef) is abstract
 	private fun new_property_visibility(modelbuilder: ModelBuilder, nclassdef: AClassdef, nvisibility: nullable AVisibility): MVisibility
 	do
 		var mvisibility = public_visibility
-		if nvisibility != null then mvisibility = nvisibility.mvisibility
+		if nvisibility != null then
+			mvisibility = nvisibility.mvisibility
+			if mvisibility == intrude_visibility then
+				modelbuilder.error(nvisibility, "Error: intrude is not a legal visibility for properties.")
+				mvisibility = public_visibility
+			end
+		end
 		if nclassdef.mclassdef.mclass.visibility == private_visibility then
 			if mvisibility == protected_visibility then
 				assert nvisibility != null
@@ -324,6 +324,7 @@ redef class ASignature
 		var mparameters = new Array[MParameter]
 		for i in [0..param_names.length[ do
 			var mparameter = new MParameter(param_names[i], param_types[i], i == vararg_rank)
+			self.n_params[i].mparameter = mparameter
 			mparameters.add(mparameter)
 		end
 
@@ -332,11 +333,14 @@ redef class ASignature
 	end
 end
 
+redef class AParam
+	# The associated mparameter if any
+	var mparameter: nullable MParameter = null
+end
+
 redef class AMethPropdef
 	redef type MPROPDEF: MMethodDef
 
-	# The associated super init if any
-	var super_init: nullable MMethod
 	redef fun build_property(modelbuilder, nclassdef)
 	do
 		var is_init = self isa AInitPropdef
@@ -471,11 +475,13 @@ redef class AMethPropdef
 		var mparameters = new Array[MParameter]
 		for i in [0..param_names.length[ do
 			var mparameter = new MParameter(param_names[i], param_types[i], i == vararg_rank)
+			if nsig != null then nsig.n_params[i].mparameter = mparameter
 			mparameters.add(mparameter)
 		end
 
 		msignature = new MSignature(mparameters, ret_type)
 		mpropdef.msignature = msignature
+		mpropdef.is_abstract = self isa ADeferredMethPropdef
 
 		if nsig != null then
 			for nclosure in nsig.n_closure_decls do
@@ -681,8 +687,8 @@ redef class AAttrPropdef
 			if mtype == null then return
 		end
 
+		var nexpr = self.n_expr
 		if mtype == null then
-			var nexpr = self.n_expr
 			if nexpr != null then
 				if nexpr isa ANewExpr then
 					mtype = modelbuilder.resolve_mtype(nclassdef, nexpr.n_type)
@@ -710,6 +716,14 @@ redef class AAttrPropdef
 
 			else
 				modelbuilder.error(self, "Error: Untyped attribute {mpropdef}")
+			end
+		else
+			assert ntype != null
+			if nexpr isa ANewExpr then
+				var xmtype = modelbuilder.resolve_mtype(nclassdef, nexpr.n_type)
+				if xmtype == mtype and modelbuilder.toolcontext.opt_warn.value >= 2 then
+					modelbuilder.warning(ntype, "Warning: useless type definition")
+				end
 			end
 		end
 
@@ -831,6 +845,10 @@ redef class ATypePropdef
 		if mprop == null then
 			var mvisibility = new_property_visibility(modelbuilder, nclassdef, self.n_visibility)
 			mprop = new MVirtualTypeProp(mclassdef, name, mvisibility)
+			for c in name do if c >= 'a' and c<= 'z' then
+				modelbuilder.warning(n_id, "Warning: lowercase in the virtual type {name}")
+				break
+			end
 			if not self.check_redef_keyword(modelbuilder, nclassdef, self.n_kwredef, false, mprop) then return
 		else
 			if not self.check_redef_keyword(modelbuilder, nclassdef, self.n_kwredef, true, mprop) then return

@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Partial ordered sets (ie hierarchies)
-package partial_order
+module partial_order
 
 # Handles partial ordered sets (ie hierarchies)
 # Thez are built by adding new element at the bottom of the hierarchy
@@ -128,17 +128,6 @@ class PartialOrder[E: Object]
 			_roots.add(e)
 		end
 		return poe
-	end
-
-	# Are all these elements in the order
-	fun has_all(e: Collection[E]): Bool
-	do
-		for i in e do
-			if not has(i) then
-				return false
-			end
-		end
-		return true
 	end
 
 	# factory for partial order elements

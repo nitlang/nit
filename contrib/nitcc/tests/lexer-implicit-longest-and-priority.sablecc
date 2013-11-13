@@ -1,0 +1,10 @@
+Grammar re;
+Lexer
+a='a';
+anb='a' Lookahead Not 'b';
+ab='ab'; //alt1 ab='DUMMY';
+b='b';
+blank=#10|#13|#32;
+Parser
+Ignored blank;
+t = a | anb | ab | b;

@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Things needed by typing.nit to generate intermediate code from AST
-package icode_generation
+module icode_generation
 
 import icode
 import syntax_base
@@ -787,6 +787,28 @@ redef class AOrExpr
 	end
 end
 
+redef class AImpliesExpr
+	redef fun generate_icode(v)
+	do
+		# Prepare result
+		var reg = v.new_register(stype)
+
+		# Process left operand (in a if/then)
+		var iif = new IIf(v.generate_expr(n_expr))
+		v.stmt(iif)
+		var seq_old = v.seq
+		v.seq = iif.else_seq
+		v.add_assignment(reg, v.lit_true_reg)
+
+		# Process right operand (in the else)
+		v.seq = iif.then_seq
+		v.add_assignment(reg, v.generate_expr(n_expr2))
+
+		v.seq = seq_old
+		return reg
+	end
+end
+
 redef class AAndExpr
 	redef fun generate_icode(v)
 	do
@@ -916,10 +938,11 @@ redef class AStringFormExpr
 		var ionce = new IOnce
 		var reg = v.expr(ionce, stype)
 		v.seq = ionce.body
-		var ns = v.expr(new IStringValue(_cstring.as(not null)), v.visitor.type_nativestring)
+		var native_type = v.visitor.type_nativestring
+		var ns = v.expr(new IStringValue(_cstring.as(not null)), native_type)
 		var ni = v.expr(new IIntValue(_cstring_length.to_s), v.visitor.type_int)
-		var prop = v.visitor.get_method(stype, once "with_native".to_symbol)
-		var e = v.expr(new INew(stype, prop, [ns, ni]), stype)
+		var prop = v.visitor.get_method(native_type, once "to_s_with_length".to_symbol)
+		var e = v.expr(new ICall(prop, [ns, ni]), stype)
 		v.add_assignment(reg, e)
 		v.seq = old_seq
 		return reg

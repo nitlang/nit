@@ -16,7 +16,7 @@
 # limitations under the License.
 
 # Virtual type (property of type type)
-package virtualtype
+module virtualtype
 
 import type_formal
 

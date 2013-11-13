@@ -15,7 +15,7 @@
 # Utils and tools related to parsers and AST
 module parser_util
 
-import parser
+intrude import parser
 import toolcontext
 
 redef class ToolContext
@@ -82,6 +82,111 @@ redef class ToolContext
 		var nexpr = nmodule.n_classdefs.first.n_propdefs.first.as(AMainMethPropdef).n_block.as(ABlockExpr).n_expr.first.as(AVardeclExpr).n_expr.as(not null)
 		return nexpr
 	end
+
+	# Try to parse the `string` as something
+	#
+	# Returns the first possible syntacticaly correct type among:
+	#
+	# - a type `AType`
+	# - a single `Token`
+	# - an expression `AExpr`
+	# - a block of statements `ABlockExpr`
+	# - a full module `AModule`
+	# - a `AError` if nothing else matches
+	fun parse_something(string: String): ANode
+	do
+		var source = new SourceFile.from_string("", string)
+		var error
+		var tree
+		var eof
+		var lexer
+
+		lexer = new InjectedLexer(source)
+		lexer.injected_before.add new TKwvar
+		lexer.injected_before.add new TId
+		lexer.injected_before.add new TColumn
+		lexer.injected_before.add new TClassid
+		lexer.injected_before.add new TObra
+		lexer.injected_after.add new TCbra
+		tree = (new Parser(lexer)).parse
+		eof = tree.n_eof
+		if not eof isa AError then
+			var ntype = tree.n_base.n_classdefs.first.n_propdefs.first.as(AMainMethPropdef).n_block.as(ABlockExpr).n_expr.first.as(AVardeclExpr).n_type.n_types.first
+			return ntype
+		end
+		error = eof
+
+		lexer = new Lexer(source)
+		var first = lexer.next
+		if not first isa EOF then
+			var second = lexer.next
+			if second isa EOF and not second isa AError then
+				return first
+			end
+		end
+
+		lexer = new InjectedLexer(source)
+		lexer.injected_before.add new TKwvar
+		lexer.injected_before.add new TId
+		lexer.injected_before.add new TAssign
+		lexer.injected_before.add new TOpar
+		lexer.injected_after.add new TCpar
+		tree = (new Parser(lexer)).parse
+		eof = tree.n_eof
+		if not eof isa AError then
+			var nexpr = tree.n_base.n_classdefs.first.n_propdefs.first.as(AMainMethPropdef).n_block.as(ABlockExpr).n_expr.first.as(AVardeclExpr).n_expr.as(AParExpr).n_expr
+			return nexpr
+		end
+		if eof.location > error.location then error = eof
+
+		lexer = new InjectedLexer(source)
+		lexer.injected_before.add new TKwdo
+		lexer.injected_after.add new TKwend
+		tree = (new Parser(lexer)).parse
+		eof = tree.n_eof
+		if not eof isa AError then
+			var nblock = tree.n_base.n_classdefs.first.n_propdefs.first.as(AMainMethPropdef).n_block.as(ABlockExpr).n_expr.first.as(ADoExpr).n_block.as(not null)
+			return nblock
+		end
+		if eof.location > error.location then error = eof
+
+		lexer = new Lexer(source)
+		tree = (new Parser(lexer)).parse
+		eof = tree.n_eof
+		if not eof isa AError then
+			return tree.n_base.as(not null)
+		end
+		if eof.location > error.location then error = eof
+
+		return error
+	end
+end
+
+class InjectedLexer
+	super Lexer
+
+	var injected_before = new List[Token]
+	var injected_after = new List[Token]
+	private var is_finished = false
+
+	redef fun get_token
+	do
+		if not injected_before.is_empty then
+			var tok = injected_before.shift
+			if tok._location == null then tok._location = new Location(file, 1, 1, 1, 0)
+			return tok
+		end
+		if not is_finished then
+			var next = super
+			if not next isa EOF then return next
+			injected_after.push(next)
+			is_finished = true
+		end
+
+		var tok = injected_after.shift
+		if tok._location == null then tok._location = new Location(file, 1, 1, 1, 0)
+		return tok
+	end
 end
 
 redef class ANode
@@ -110,7 +215,6 @@ private class CollectTokensByTextVisitor
 	var result = new Array[Token]
 	redef fun visit(node)
 	do
-		if node == null then return
 		node.visit_all(self)
 		if node isa Token and node.text == text then result.add(node)
 	end
@@ -123,7 +227,6 @@ private class CollectAnnotationsByNameVisitor
 	var result = new Array[AAnnotation]
 	redef fun visit(node)
 	do
-		if node == null then return
 		node.visit_all(self)
 		if node isa AAnnotation and node.n_atid.n_id.text == name then result.add(node)
 	end

@@ -17,44 +17,26 @@
 # A naive Nit interpreter
 module nit
 
-import modelbuilder
-import frontend
 import naive_interpreter
 import debugger
-#import interpretor_type_test
+import nitdbg_commons
 
-# Create a tool context to handle options and paths
-var toolcontext = new ToolContext
-# Add an option "-o" to enable compatibilit with the tests.sh script
-var opt = new OptionString("compatibility (does noting)", "-o")
-toolcontext.option_context.add_option(opt)
-# We do not add other options, so process them now!
-toolcontext.process_options
+redef class InterpretCommons
 
-# We need a model to collect stufs
-var model = new Model
-# An a model builder to parse files
-var modelbuilder = new ModelBuilder(model, toolcontext)
+	redef fun launch
+	do
+		super
+		var self_mm = mainmodule.as(not null)
+		var self_args = arguments.as(not null)
+		if toolcontext.opt_debugger_autorun.value then
+			modelbuilder.run_debugger_autorun(self_mm, self_args)
+		else if toolcontext.opt_debugger_mode.value then
+			modelbuilder.run_debugger(self_mm, self_args)
+		else
+			modelbuilder.run_naive_interpreter(self_mm, self_args)
+		end
+	end
 
-var arguments = toolcontext.option_context.rest
-if arguments.is_empty or toolcontext.opt_help.value then
-	toolcontext.option_context.usage
-	return
 end
-var progname = arguments.first
 
-# Here we load an process all modules passed on the command line
-var mmodules = modelbuilder.parse([progname])
-modelbuilder.run_phases
-
-# Here we launch the interpreter on the main module
-assert mmodules.length == 1
-var mainmodule = mmodules.first
-
-if toolcontext.opt_debugger_autorun.value then
-	modelbuilder.run_debugger_autorun(mainmodule, arguments)
-else if toolcontext.opt_debugger_mode.value then
-	modelbuilder.run_debugger(mainmodule, arguments)
-else
-	modelbuilder.run_naive_interpreter(mainmodule, arguments)
-end
+(new InterpretCommons).launch

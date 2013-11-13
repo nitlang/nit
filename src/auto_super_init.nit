@@ -39,7 +39,6 @@ private class AutoSuperInitVisitor
 
 	redef fun visit(n)
 	do
-		if n == null then return
 		n.accept_auto_super_init(self)
 		n.visit_all(self)
 	end

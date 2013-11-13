@@ -19,7 +19,7 @@ val_t syntax___SrcModuleLoader___file_type(val_t p0){
   if (!once_value_1) {
     fra.me.REG[0] = BOX_NativeString("nit");
     REGB0 = TAG_Int(3);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_1 = fra.me.REG[0];
     register_static_object(&once_value_1);
   } else fra.me.REG[0] = once_value_1;
@@ -76,7 +76,7 @@ val_t syntax___SrcModuleLoader___parse_file(val_t p0, val_t p1, val_t p2, val_t 
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:237 */
+  /* ../lib/standard/kernel.nit:244 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)>UNTAG_Int(REGB1));
   /* syntax/syntax.nit:37 */
   if (UNTAG_Bool(REGB1)) {
@@ -106,7 +106,7 @@ val_t syntax___SrcModuleLoader___parse_file(val_t p0, val_t p1, val_t p2, val_t 
     if (!once_value_4) {
       fra.me.REG[7] = BOX_NativeString("");
       REGB1 = TAG_Int(0);
-      fra.me.REG[7] = NEW_String_standard___string___String___with_native(fra.me.REG[7], REGB1);
+      fra.me.REG[7] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[7])(fra.me.REG[7], REGB1);
       once_value_4 = fra.me.REG[7];
       register_static_object(&once_value_4);
     } else fra.me.REG[7] = once_value_4;
@@ -116,7 +116,7 @@ val_t syntax___SrcModuleLoader___parse_file(val_t p0, val_t p1, val_t p2, val_t 
     if (!once_value_5) {
       fra.me.REG[7] = BOX_NativeString(": Error module name \"");
       REGB1 = TAG_Int(21);
-      fra.me.REG[7] = NEW_String_standard___string___String___with_native(fra.me.REG[7], REGB1);
+      fra.me.REG[7] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[7])(fra.me.REG[7], REGB1);
       once_value_5 = fra.me.REG[7];
       register_static_object(&once_value_5);
     } else fra.me.REG[7] = once_value_5;
@@ -127,7 +127,7 @@ val_t syntax___SrcModuleLoader___parse_file(val_t p0, val_t p1, val_t p2, val_t 
     if (!once_value_6) {
       fra.me.REG[7] = BOX_NativeString("\", must start with a lower case letter and contain only letters, digits and '_'.");
       REGB1 = TAG_Int(80);
-      fra.me.REG[7] = NEW_String_standard___string___String___with_native(fra.me.REG[7], REGB1);
+      fra.me.REG[7] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[7])(fra.me.REG[7], REGB1);
       once_value_6 = fra.me.REG[7];
       register_static_object(&once_value_6);
     } else fra.me.REG[7] = once_value_6;
@@ -236,7 +236,7 @@ val_t syntax___SrcModuleLoader___parse_file(val_t p0, val_t p1, val_t p2, val_t 
       REGB2 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
       if (UNTAG_Bool(REGB2)) {
       } else {
-        /* ../lib/standard/kernel.nit:381 */
+        /* ../lib/standard/kernel.nit:434 */
         REGB1 = TAG_Bool((REGB0)==(REGB1));
         /* syntax/syntax.nit:38 */
         REGB2 = REGB1;
@@ -292,7 +292,7 @@ void syntax___SrcModuleLoader___process_metamodel(val_t p0, val_t p1, val_t p2){
   if (!once_value_1) {
     fra.me.REG[3] = BOX_NativeString("Syntax analysis for module: ");
     REGB0 = TAG_Int(28);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_1 = fra.me.REG[3];
     register_static_object(&once_value_1);
   } else fra.me.REG[3] = once_value_1;
@@ -304,7 +304,7 @@ void syntax___SrcModuleLoader___process_metamodel(val_t p0, val_t p1, val_t p2){
   if (!once_value_2) {
     fra.me.REG[3] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_2 = fra.me.REG[3];
     register_static_object(&once_value_2);
   } else fra.me.REG[3] = once_value_2;

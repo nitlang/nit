@@ -1,0 +1,7 @@
+args -b args
+args --bool args -- args -c 
+-b -b -c -c -s 1 -s 2 -i 1 -i 2 -a 1 -a 2 -e one -e two
+-s
+-i one
+-a
+-e 1

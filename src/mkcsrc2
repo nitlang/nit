@@ -1,0 +1,9 @@
+#!/bin/bash
+cd ..
+out=csrc2
+rm -r "$out/" 2> /dev/null
+set -e
+set -x
+src/nitg src/nitg.nit -v "$@" --compile-dir "$out" -o "$out/nitg" --no-cc
+mv "$out/nitg.mk" "$out/Makefile"
+sed -i -e "s#../$out/##g" "$out/Makefile"

@@ -41,7 +41,7 @@ int A_is_a_null___impl( A recv, nullable_A na )
 C implementation of test_ni_null::A::get_nullable_string
 
 Imported methods signatures:
-	String new_String_from_cstring( char * str ) for string::String::from_cstring
+	String NativeString_to_s( char * str ) for string::NativeString::to_s
 	nullable_String String_as_nullable( String value ) to cast from String to nullable String
 */
 nullable_String A_get_nullable_string___impl( A recv, int get_nulled )
@@ -52,6 +52,6 @@ nullable_String A_get_nullable_string___impl( A recv, int get_nulled )
     }
     else
     {
-        return String_as_nullable( new_String_from_cstring( "something" ) );
+        return String_as_nullable( NativeString_to_s( "something" ) );
     }
 }

@@ -27,7 +27,7 @@ redef class String
 		# FIXME: There is no proper way to handle NULL C string yet. What a pitty.
 		var nulstr = once ("".to_cstring.get_environ)
 		if res != nulstr then
-			return new String.from_cstring(res)
+			return res.to_s
 		else
 			return ""
 		end

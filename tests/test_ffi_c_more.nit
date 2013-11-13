@@ -38,8 +38,8 @@ extern A
 
 	fun m : Int is extern `{ return 10; `}
 
-	fun n : String is extern import String::from_cstring `{
-		return new_String_from_cstring( "allo" );
+	fun n : String is extern import NativeString::to_s `{
+		return NativeString_to_s( "allo" );
 	`}
 
 	fun o ( str : String ) is extern import String::to_cstring `{

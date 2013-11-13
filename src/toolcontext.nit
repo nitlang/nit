@@ -17,7 +17,7 @@
 # limitations under the License.
 
 # Common command-line tool infractructure than handle options and error messages
-package toolcontext
+module toolcontext
 
 import opts
 import location
@@ -26,8 +26,8 @@ class Message
 	super Comparable
 	redef type OTHER: Message
 
-	readable var _location: nullable Location
-	readable var _text: String
+	var location: nullable Location
+	var text: String
 
 	# Comparisons are made on message locations.
 	redef fun <(other: OTHER): Bool do
@@ -70,24 +70,24 @@ end
 # Global context for tools
 class ToolContext
 	# Number of errors
-	readable var _error_count: Int = 0
+	var error_count: Int = 0
 
 	# Number of warnings
-	readable var _warning_count: Int = 0
+	var warning_count: Int = 0
 
 	# Directory where to generate log files
-	readable var _log_directory: String = "logs"
+	var log_directory: String = "logs"
 
 	# Messages
-	var _messages: Array[Message] = new Array[Message]
-	var _message_sorter: ComparableSorter[Message] = new ComparableSorter[Message]
+	private var messages: Array[Message] = new Array[Message]
+	private var message_sorter: ComparableSorter[Message] = new ComparableSorter[Message]
 
 	fun check_errors
 	do
-		if _messages.length > 0 then
-			_message_sorter.sort(_messages)
+		if messages.length > 0 then
+			message_sorter.sort(messages)
 
-			for m in _messages do
+			for m in messages do
 				if opt_no_color.value then
 					stderr.write("{m}\n")
 				else
@@ -95,7 +95,7 @@ class ToolContext
 				end
 			end
 
-			_messages.clear
+			messages.clear
 		end
 
 		if error_count > 0 then exit(1)
@@ -104,8 +104,8 @@ class ToolContext
 	# Display an error
 	fun error(l: nullable Location, s: String)
 	do
-		_messages.add(new Message(l,s))
-		_error_count = _error_count + 1
+		messages.add(new Message(l,s))
+		error_count = error_count + 1
 		if opt_stop_on_first_error.value then check_errors
 	end
 
@@ -119,9 +119,9 @@ class ToolContext
 	# Display a warning
 	fun warning(l: nullable Location, s: String)
 	do
-		if _opt_warn.value == 0 then return
-		_messages.add(new Message(l,s))
-		_warning_count = _warning_count + 1
+		if opt_warn.value == 0 then return
+		messages.add(new Message(l,s))
+		warning_count = warning_count + 1
 		if opt_stop_on_first_error.value then check_errors
 	end
 
@@ -134,37 +134,37 @@ class ToolContext
 	end
 
 	# Global OptionContext
-	readable var _option_context: OptionContext = new OptionContext
+	var option_context: OptionContext = new OptionContext
 
 	# Option --warn
-	readable var _opt_warn: OptionCount = new OptionCount("Show warnings", "-W", "--warn")
+	var opt_warn: OptionCount = new OptionCount("Show warnings", "-W", "--warn")
 
 	# Option --quiet
-	readable var _opt_quiet: OptionBool = new OptionBool("Do not show warnings", "-q", "--quiet")
+	var opt_quiet: OptionBool = new OptionBool("Do not show warnings", "-q", "--quiet")
 
 	# Option --log
-	readable var _opt_log: OptionBool = new OptionBool("Generate various log files", "--log")
+	var opt_log: OptionBool = new OptionBool("Generate various log files", "--log")
 
 	# Option --log-dir
-	readable var _opt_log_dir: OptionString = new OptionString("Directory where to generate log files", "--log-dir")
+	var opt_log_dir: OptionString = new OptionString("Directory where to generate log files", "--log-dir")
 
 	# Option --help
-	readable var _opt_help: OptionBool = new OptionBool("Show Help (This screen)", "-h", "-?", "--help")
+	var opt_help: OptionBool = new OptionBool("Show Help (This screen)", "-h", "-?", "--help")
 
 	# Option --version
-	readable var _opt_version: OptionBool = new OptionBool("Show version and exit", "--version")
+	var opt_version: OptionBool = new OptionBool("Show version and exit", "--version")
 
 	# Option --verbose
-	readable var _opt_verbose: OptionCount = new OptionCount("Verbose", "-v", "--verbose")
+	var opt_verbose: OptionCount = new OptionCount("Verbose", "-v", "--verbose")
 
 	# Option --stop-on-first-error
-	readable var _opt_stop_on_first_error: OptionBool = new OptionBool("Stop on first error", "--stop-on-first-error")
+	var opt_stop_on_first_error: OptionBool = new OptionBool("Stop on first error", "--stop-on-first-error")
 
 	# Option --no-color
-	readable var _opt_no_color: OptionBool = new OptionBool("Do not use color to display errors and warnings", "--no-color")
+	var opt_no_color: OptionBool = new OptionBool("Do not use color to display errors and warnings", "--no-color")
 
 	# Verbose level
-	readable var _verbose_level: Int = 0
+	var verbose_level: Int = 0
 
 	init
 	do
@@ -180,12 +180,12 @@ class ToolContext
 		option_context.parse(args)
 
 		# Set verbose level
-		_verbose_level = opt_verbose.value
+		verbose_level = opt_verbose.value
 
 		if self.opt_quiet.value then self.opt_warn.value = 0
 
-		if opt_log_dir.value != null then _log_directory = opt_log_dir.value.as(not null)
-		if _opt_log.value then
+		if opt_log_dir.value != null then log_directory = opt_log_dir.value.as(not null)
+		if opt_log.value then
 			# Make sure the output directory exists
 			log_directory.mkdir
 		end

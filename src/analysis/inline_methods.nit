@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Detect inlinable methods and inline them
-package inline_methods
+module inline_methods
 
 import icode
 

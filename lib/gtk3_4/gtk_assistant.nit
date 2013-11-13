@@ -72,7 +72,7 @@ extern GtkAssistant `{GtkAssistant *`}
 	`}
 
 	fun get_page_title( page : GtkWidget ) : String is extern `{
-		return new_String_from_cstring( (char *)gtk_assistant_get_page_title( recv, page ) );
+		return NativeString_to_s( (char *)gtk_assistant_get_page_title( recv, page ) );
 	`}
 
 	fun set_page_title( page : GtkWidget, title : String) is extern import String::to_cstring`{

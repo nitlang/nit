@@ -64,7 +64,6 @@ redef class ToolContext
 					assert phase.toolcontext == self
 					phase.process_nclassdef(nclassdef)
 					for npropdef in nclassdef.n_propdefs do
-						self.info(" phase: {phase.class_name} for {npropdef.location}", 4)
 						assert phase.toolcontext == self
 						phase.process_npropdef(npropdef)
 					end

@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Compute and generate tables for classes and modules.
-package compiling
+module compiling
 
 import table_computation
 import compiling_base

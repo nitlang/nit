@@ -16,7 +16,7 @@
 # limitations under the License.
 
 # Static types and property signatures
-package static_type
+module static_type
 
 intrude import abstractmetamodel
 

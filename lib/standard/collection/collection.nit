@@ -11,7 +11,7 @@
 # another product.
 
 # This module define several collection classes.
-package collection
+module collection
 
 import abstract_collection
 import range

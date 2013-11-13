@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # This module is used to model Nit source-file and locations in source-file
-package location
+module location
 
 # A raw text Nit source file
 class SourceFile
@@ -50,19 +50,25 @@ class Location
 	super Comparable
 	redef type OTHER: Location
 
-	readable var _file: nullable SourceFile
-	readable var _line_start: Int
-	readable var _line_end: Int
-	readable var _column_start: Int
-	readable var _column_end: Int
+	var file: nullable SourceFile
+	var line_start: Int
+	var line_end: Int
+	var column_start: Int
+	var column_end: Int
 
 	init(f: nullable SourceFile, line_s: Int, line_e: Int, column_s: Int, column_e: Int) do
-		_file = f
-		_line_start = line_s
-		_line_end = line_e
-		_column_start = column_s
-		_column_end = column_e
+		file = f
+		line_start = line_s
+		line_end = line_e
+		column_start = column_s
+		column_end = column_e
 	end
+
+	# The index in the start character in the source
+	fun pstart: Int do return file.line_starts[line_start-1] + column_start-1
+
+	# The index on the end character in the source
+	fun pend: Int do return file.line_starts[line_end-1] + column_end-1
 
 	# The verbatim associated text in the source-file
 	fun text: String
@@ -70,8 +76,8 @@ class Location
 		var res = self.text_cache
 		if res != null then return res
 		var l = self
-		var pstart = l.file.line_starts[l.line_start-1] + l.column_start-1
-		var pend = l.file.line_starts[l.line_end-1] + l.column_end-1
+		var pstart = self.pstart
+		var pend = self.pend
 		res = l.file.string.substring(pstart, pend-pstart+1)
 		self.text_cache = res
 		return res
@@ -153,10 +159,10 @@ class Location
 	end
 
 	# Return the associated line with the location highlihted with color and a carret under the starting position
-	# `color' must be and terminal escape sequence used as "{escape}[{color}m;"
-	# "0;31" for red
-	# "1;31" for bright red
-	# "0;32" for green
+	# `color` must be and terminal escape sequence used as `"{escape}[{color}m;"`
+	# * `"0;31"` for red
+	# * `"1;31"` for bright red
+	# * `"0;32"` for green
 	fun colored_line(color: String): String
 	do
 		var esc = 27.ascii

@@ -1,0 +1,15 @@
+Grammar if;
+Lexer
+Parser
+
+p = 'e' e | 'f' f;
+
+e =
+	'if' e 'then' e else? |
+	'e' ;
+else = 'else' e;
+
+f =
+	'if' f 'then' f |
+	'if' f 'then' f 'else' f |
+	'f' ;

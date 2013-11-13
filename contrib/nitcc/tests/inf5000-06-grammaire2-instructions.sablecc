@@ -1,0 +1,22 @@
+Grammar instuctions;
+Lexer
+id = ('a'..'z')+;
+blank = ' ' | #9 | #10 | #13;
+
+Parser
+Ignored blank;
+
+prog = stmt* ;
+stmt =
+  {assign:} id '=' expr ';' |
+  {print:} 'print' '(' expr ')' ';' |
+  {while:} 'while' '(' expr ')' '{' stmt* '}'
+//alt1 | {until:} 'do' '{' stmt* '}' 'until' '(' expr ')' ';'
+//alt2 | {if:} 'if' '('expr')' '{'stmt*'}' elsex?
+//alt3 | {call:} id '(' args ')' ';'
+  ;
+
+//alt2 elsex = 'else' '{' stmt* '}' ;
+//alt3 args = (expr Separator ',')* ;
+
+expr = id;

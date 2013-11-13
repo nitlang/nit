@@ -35,8 +35,8 @@ redef class ToolContext
 end
 
 redef class ModelBuilder
-	# Execute the program from the entry point (Sys::main) of the `mainmodule'
-	# `arguments' are the command-line arguments in order
+	# Execute the program from the entry point (Sys::main) of the `mainmodule`
+	# `arguments` are the command-line arguments in order
 	# REQUIRE that:
 	#   1. the AST is fully loaded.
 	#   2. the model is fully built.
@@ -69,7 +69,7 @@ redef class ModelBuilder
 	end
 end
 
-# The class extending NaiveInterpreter by adding debugging methods
+# The class extending `NaiveInterpreter` by adding debugging methods
 class Debugger
 	super NaiveInterpreter
 
@@ -713,6 +713,8 @@ class Debugger
 	# If it is a primitive type, its value is directly printed
 	fun print_instance(instance: Instance)
 	do
+		print "Printing innards of a variable"
+
 		if instance isa MutableInstance then
 			var attributes = instance.attributes
 			print "Object : {instance}"
@@ -723,6 +725,8 @@ class Debugger
 		else
 			print "Found variable {instance}"
 		end
+
+		print "Stopping printing innards of a variable"
 	end
 
 	# Prints the attributes demanded in a SequenceRead

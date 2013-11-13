@@ -17,7 +17,7 @@
 # limitations under the License.
 
 # This module is used to load a metamodel
-package mmloader
+module mmloader
 
 import metamodel
 import opts

@@ -16,7 +16,7 @@
 # limitations under the License.
 
 # Generic classes, generic types and generic formal parameters
-package genericity
+module genericity
 
 intrude import type_formal
 intrude import inheritance

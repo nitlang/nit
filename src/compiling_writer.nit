@@ -16,7 +16,7 @@
 
 # Helps to generate complex strings.
 # Can be used to simplify complex file generation where text addition is not only done at the end
-package compiling_writer
+module compiling_writer
 
 # A writer is used to store a sequence of strings and sub-writers
 class Writer

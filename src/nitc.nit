@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Nit compiler main module
-package nitc
+module nitc
 
 import abstracttool
 import analysis

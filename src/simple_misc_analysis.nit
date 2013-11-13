@@ -19,13 +19,11 @@
 #  * superfluous parentheses
 #  * nested "once" expressions
 #  * use of "while true" instead of "loop"
-package simple_misc_analysis
+module simple_misc_analysis
 
 import toolcontext
 import parser
 import phase
-
-import modelbuilder #FIXME useless
 
 redef class ToolContext
 	var simple_misc_analysis_phase: Phase = new SimpleMiscAnalysisPhase(self, null)
@@ -50,7 +48,7 @@ private class SimpleMiscVisitor
 	super Visitor
 	redef fun visit(n)
 	do
-		if n != null then n.accept_simple_misc(self)
+		n.accept_simple_misc(self)
 	end
 
 	# Number of nested once

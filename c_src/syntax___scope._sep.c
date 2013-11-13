@@ -36,7 +36,7 @@ val_t syntax___scope___ScopeContext_____bra(val_t p0, val_t p1){
   REGB0 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2]);
   /* syntax/scope.nit:43 */
   REGB1 = TAG_Int(1);
-  /* ../lib/standard/kernel.nit:240 */
+  /* ../lib/standard/kernel.nit:247 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB1));
   /* syntax/scope.nit:44 */
   while(1) {
@@ -46,7 +46,7 @@ val_t syntax___scope___ScopeContext_____bra(val_t p0, val_t p1){
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:236 */
+    /* ../lib/standard/kernel.nit:243 */
     REGB0 = TAG_Bool(UNTAG_Int(REGB1)>=UNTAG_Int(REGB0));
     /* syntax/scope.nit:44 */
     if (UNTAG_Bool(REGB0)) {
@@ -57,23 +57,23 @@ val_t syntax___scope___ScopeContext_____bra(val_t p0, val_t p1){
         nit_abort("Uninitialized attribute %s", "_stack", LOCATE_syntax___scope, 45);
       }
       fra.me.REG[2] = ATTR_syntax___scope___ScopeContext____stack(fra.me.REG[0]);
-      /* ../lib/standard/collection/array.nit:278 */
+      /* ../lib/standard/collection/array.nit:279 */
       REGB0 = REGB1;
-      /* ../lib/standard/collection/array.nit:280 */
+      /* ../lib/standard/collection/array.nit:281 */
       REGB2 = TAG_Int(0);
       REGB3 = TAG_Bool(VAL_ISA(REGB2, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
       if (UNTAG_Bool(REGB3)) {
       } else {
         nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
       }
-      /* ../lib/standard/kernel.nit:236 */
+      /* ../lib/standard/kernel.nit:243 */
       REGB2 = TAG_Bool(UNTAG_Int(REGB0)>=UNTAG_Int(REGB2));
-      /* ../lib/standard/collection/array.nit:280 */
+      /* ../lib/standard/collection/array.nit:281 */
       if (UNTAG_Bool(REGB2)) {
         REGB2 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2])!=NIT_NULL);
         if (UNTAG_Bool(REGB2)) {
         } else {
-          nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 280);
+          nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 281);
         }
         REGB2 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2]);
         REGB3 = TAG_Bool(VAL_ISA(REGB2, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
@@ -81,26 +81,26 @@ val_t syntax___scope___ScopeContext_____bra(val_t p0, val_t p1){
         } else {
           nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
         }
-        /* ../lib/standard/kernel.nit:235 */
+        /* ../lib/standard/kernel.nit:242 */
         REGB2 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB2));
       } else {
-        /* ../lib/standard/collection/array.nit:280 */
+        /* ../lib/standard/collection/array.nit:281 */
         REGB3 = TAG_Bool(0);
         REGB2 = REGB3;
       }
       if (UNTAG_Bool(REGB2)) {
       } else {
-        nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 280);
+        nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 281);
       }
-      /* ../lib/standard/collection/array.nit:281 */
+      /* ../lib/standard/collection/array.nit:282 */
       fra.me.REG[2] = ATTR_standard___collection___array___Array____items(fra.me.REG[2]);
       REGB2 = TAG_Bool(fra.me.REG[2]==NIT_NULL);
       if (UNTAG_Bool(REGB2)) {
-        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
+        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 282);
       }
-      /* ../lib/standard/collection/array.nit:724 */
+      /* ../lib/standard/collection/array.nit:725 */
       fra.me.REG[2] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB0)];
-      /* ../lib/standard/collection/array.nit:281 */
+      /* ../lib/standard/collection/array.nit:282 */
       goto label1;
       label1: while(0);
       /* syntax/scope.nit:46 */
@@ -124,7 +124,7 @@ val_t syntax___scope___ScopeContext_____bra(val_t p0, val_t p1){
       }
       /* syntax/scope.nit:48 */
       REGB0 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:240 */
+      /* ../lib/standard/kernel.nit:247 */
       REGB0 = TAG_Int(UNTAG_Int(REGB1)-UNTAG_Int(REGB0));
       /* syntax/scope.nit:48 */
       REGB1 = REGB0;
@@ -197,7 +197,7 @@ void syntax___scope___ScopeContext___add_variable(val_t p0, val_t p1){
     if (!once_value_1) {
       fra.me.REG[6] = BOX_NativeString("Error: '");
       REGB0 = TAG_Int(8);
-      fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB0);
+      fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB0);
       once_value_1 = fra.me.REG[6];
       register_static_object(&once_value_1);
     } else fra.me.REG[6] = once_value_1;
@@ -208,7 +208,7 @@ void syntax___scope___ScopeContext___add_variable(val_t p0, val_t p1){
     if (!once_value_2) {
       fra.me.REG[6] = BOX_NativeString("' already defined at ");
       REGB0 = TAG_Int(21);
-      fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB0);
+      fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB0);
       once_value_2 = fra.me.REG[6];
       register_static_object(&once_value_2);
     } else fra.me.REG[6] = once_value_2;
@@ -235,7 +235,7 @@ void syntax___scope___ScopeContext___add_variable(val_t p0, val_t p1){
     if (!once_value_3) {
       fra.me.REG[6] = BOX_NativeString(".");
       REGB0 = TAG_Int(1);
-      fra.me.REG[6] = NEW_String_standard___string___String___with_native(fra.me.REG[6], REGB0);
+      fra.me.REG[6] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[6])(fra.me.REG[6], REGB0);
       once_value_3 = fra.me.REG[6];
       register_static_object(&once_value_3);
     } else fra.me.REG[6] = once_value_3;
@@ -372,7 +372,7 @@ void syntax___scope___ScopeContext___push_escapable(val_t p0, val_t p1, val_t p2
     REGB0 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[4]);
     /* syntax/scope.nit:79 */
     REGB1 = TAG_Int(1);
-    /* ../lib/standard/kernel.nit:240 */
+    /* ../lib/standard/kernel.nit:247 */
     REGB1 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB1));
     /* syntax/scope.nit:80 */
     while(1) {
@@ -382,7 +382,7 @@ void syntax___scope___ScopeContext___push_escapable(val_t p0, val_t p1, val_t p2
       } else {
         nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
       }
-      /* ../lib/standard/kernel.nit:236 */
+      /* ../lib/standard/kernel.nit:243 */
       REGB0 = TAG_Bool(UNTAG_Int(REGB1)>=UNTAG_Int(REGB0));
       /* syntax/scope.nit:80 */
       if (UNTAG_Bool(REGB0)) {
@@ -393,23 +393,23 @@ void syntax___scope___ScopeContext___push_escapable(val_t p0, val_t p1, val_t p2
           nit_abort("Uninitialized attribute %s", "_stack", LOCATE_syntax___scope, 81);
         }
         fra.me.REG[4] = ATTR_syntax___scope___ScopeContext____stack(fra.me.REG[0]);
-        /* ../lib/standard/collection/array.nit:278 */
+        /* ../lib/standard/collection/array.nit:279 */
         REGB0 = REGB1;
-        /* ../lib/standard/collection/array.nit:280 */
+        /* ../lib/standard/collection/array.nit:281 */
         REGB2 = TAG_Int(0);
         REGB3 = TAG_Bool(VAL_ISA(REGB2, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
         if (UNTAG_Bool(REGB3)) {
         } else {
           nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
         }
-        /* ../lib/standard/kernel.nit:236 */
+        /* ../lib/standard/kernel.nit:243 */
         REGB2 = TAG_Bool(UNTAG_Int(REGB0)>=UNTAG_Int(REGB2));
-        /* ../lib/standard/collection/array.nit:280 */
+        /* ../lib/standard/collection/array.nit:281 */
         if (UNTAG_Bool(REGB2)) {
           REGB2 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[4])!=NIT_NULL);
           if (UNTAG_Bool(REGB2)) {
           } else {
-            nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 280);
+            nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 281);
           }
           REGB2 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[4]);
           REGB3 = TAG_Bool(VAL_ISA(REGB2, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
@@ -417,26 +417,26 @@ void syntax___scope___ScopeContext___push_escapable(val_t p0, val_t p1, val_t p2
           } else {
             nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
           }
-          /* ../lib/standard/kernel.nit:235 */
+          /* ../lib/standard/kernel.nit:242 */
           REGB2 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB2));
         } else {
-          /* ../lib/standard/collection/array.nit:280 */
+          /* ../lib/standard/collection/array.nit:281 */
           REGB3 = TAG_Bool(0);
           REGB2 = REGB3;
         }
         if (UNTAG_Bool(REGB2)) {
         } else {
-          nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 280);
+          nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 281);
         }
-        /* ../lib/standard/collection/array.nit:281 */
+        /* ../lib/standard/collection/array.nit:282 */
         fra.me.REG[4] = ATTR_standard___collection___array___Array____items(fra.me.REG[4]);
         REGB2 = TAG_Bool(fra.me.REG[4]==NIT_NULL);
         if (UNTAG_Bool(REGB2)) {
-          nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
+          nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 282);
         }
-        /* ../lib/standard/collection/array.nit:724 */
+        /* ../lib/standard/collection/array.nit:725 */
         fra.me.REG[4] = ((Nit_NativeArray)fra.me.REG[4])->val[UNTAG_Int(REGB0)];
-        /* ../lib/standard/collection/array.nit:281 */
+        /* ../lib/standard/collection/array.nit:282 */
         goto label1;
         label1: while(0);
         /* syntax/scope.nit:82 */
@@ -467,7 +467,7 @@ void syntax___scope___ScopeContext___push_escapable(val_t p0, val_t p1, val_t p2
           if (!once_value_2) {
             fra.me.REG[7] = BOX_NativeString("Syntax error: label ");
             REGB0 = TAG_Int(20);
-            fra.me.REG[7] = NEW_String_standard___string___String___with_native(fra.me.REG[7], REGB0);
+            fra.me.REG[7] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[7])(fra.me.REG[7], REGB0);
             once_value_2 = fra.me.REG[7];
             register_static_object(&once_value_2);
           } else fra.me.REG[7] = once_value_2;
@@ -478,7 +478,7 @@ void syntax___scope___ScopeContext___push_escapable(val_t p0, val_t p1, val_t p2
           if (!once_value_3) {
             fra.me.REG[7] = BOX_NativeString(" already defined at ");
             REGB0 = TAG_Int(20);
-            fra.me.REG[7] = NEW_String_standard___string___String___with_native(fra.me.REG[7], REGB0);
+            fra.me.REG[7] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[7])(fra.me.REG[7], REGB0);
             once_value_3 = fra.me.REG[7];
             register_static_object(&once_value_3);
           } else fra.me.REG[7] = once_value_3;
@@ -499,7 +499,7 @@ void syntax___scope___ScopeContext___push_escapable(val_t p0, val_t p1, val_t p2
           if (!once_value_4) {
             fra.me.REG[7] = BOX_NativeString(".");
             REGB0 = TAG_Int(1);
-            fra.me.REG[7] = NEW_String_standard___string___String___with_native(fra.me.REG[7], REGB0);
+            fra.me.REG[7] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[7])(fra.me.REG[7], REGB0);
             once_value_4 = fra.me.REG[7];
             register_static_object(&once_value_4);
           } else fra.me.REG[7] = once_value_4;
@@ -512,7 +512,7 @@ void syntax___scope___ScopeContext___push_escapable(val_t p0, val_t p1, val_t p2
         }
         /* syntax/scope.nit:86 */
         REGB0 = TAG_Int(1);
-        /* ../lib/standard/kernel.nit:240 */
+        /* ../lib/standard/kernel.nit:247 */
         REGB0 = TAG_Int(UNTAG_Int(REGB1)-UNTAG_Int(REGB0));
         /* syntax/scope.nit:86 */
         REGB1 = REGB0;
@@ -570,7 +570,7 @@ val_t syntax___scope___ScopeContext___head(val_t p0){
   REGB0 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1]);
   /* syntax/scope.nit:96 */
   REGB1 = TAG_Int(1);
-  /* ../lib/standard/kernel.nit:240 */
+  /* ../lib/standard/kernel.nit:247 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB1));
   /* syntax/scope.nit:97 */
   while(1) {
@@ -580,7 +580,7 @@ val_t syntax___scope___ScopeContext___head(val_t p0){
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:236 */
+    /* ../lib/standard/kernel.nit:243 */
     REGB0 = TAG_Bool(UNTAG_Int(REGB1)>=UNTAG_Int(REGB0));
     /* syntax/scope.nit:97 */
     if (UNTAG_Bool(REGB0)) {
@@ -591,23 +591,23 @@ val_t syntax___scope___ScopeContext___head(val_t p0){
         nit_abort("Uninitialized attribute %s", "_stack", LOCATE_syntax___scope, 98);
       }
       fra.me.REG[1] = ATTR_syntax___scope___ScopeContext____stack(fra.me.REG[0]);
-      /* ../lib/standard/collection/array.nit:278 */
+      /* ../lib/standard/collection/array.nit:279 */
       REGB0 = REGB1;
-      /* ../lib/standard/collection/array.nit:280 */
+      /* ../lib/standard/collection/array.nit:281 */
       REGB2 = TAG_Int(0);
       REGB3 = TAG_Bool(VAL_ISA(REGB2, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
       if (UNTAG_Bool(REGB3)) {
       } else {
         nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
       }
-      /* ../lib/standard/kernel.nit:236 */
+      /* ../lib/standard/kernel.nit:243 */
       REGB2 = TAG_Bool(UNTAG_Int(REGB0)>=UNTAG_Int(REGB2));
-      /* ../lib/standard/collection/array.nit:280 */
+      /* ../lib/standard/collection/array.nit:281 */
       if (UNTAG_Bool(REGB2)) {
         REGB2 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1])!=NIT_NULL);
         if (UNTAG_Bool(REGB2)) {
         } else {
-          nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 280);
+          nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 281);
         }
         REGB2 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1]);
         REGB3 = TAG_Bool(VAL_ISA(REGB2, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
@@ -615,26 +615,26 @@ val_t syntax___scope___ScopeContext___head(val_t p0){
         } else {
           nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
         }
-        /* ../lib/standard/kernel.nit:235 */
+        /* ../lib/standard/kernel.nit:242 */
         REGB2 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB2));
       } else {
-        /* ../lib/standard/collection/array.nit:280 */
+        /* ../lib/standard/collection/array.nit:281 */
         REGB3 = TAG_Bool(0);
         REGB2 = REGB3;
       }
       if (UNTAG_Bool(REGB2)) {
       } else {
-        nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 280);
+        nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 281);
       }
-      /* ../lib/standard/collection/array.nit:281 */
+      /* ../lib/standard/collection/array.nit:282 */
       fra.me.REG[1] = ATTR_standard___collection___array___Array____items(fra.me.REG[1]);
       REGB2 = TAG_Bool(fra.me.REG[1]==NIT_NULL);
       if (UNTAG_Bool(REGB2)) {
-        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
+        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 282);
       }
-      /* ../lib/standard/collection/array.nit:724 */
+      /* ../lib/standard/collection/array.nit:725 */
       fra.me.REG[1] = ((Nit_NativeArray)fra.me.REG[1])->val[UNTAG_Int(REGB0)];
-      /* ../lib/standard/collection/array.nit:281 */
+      /* ../lib/standard/collection/array.nit:282 */
       goto label1;
       label1: while(0);
       /* syntax/scope.nit:99 */
@@ -651,7 +651,7 @@ val_t syntax___scope___ScopeContext___head(val_t p0){
       }
       /* syntax/scope.nit:100 */
       REGB0 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:240 */
+      /* ../lib/standard/kernel.nit:247 */
       REGB0 = TAG_Int(UNTAG_Int(REGB1)-UNTAG_Int(REGB0));
       /* syntax/scope.nit:100 */
       REGB1 = REGB0;
@@ -709,7 +709,7 @@ val_t syntax___scope___ScopeContext___get_by_label(val_t p0, val_t p1){
   REGB0 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[2]);
   /* syntax/scope.nit:109 */
   REGB1 = TAG_Int(1);
-  /* ../lib/standard/kernel.nit:240 */
+  /* ../lib/standard/kernel.nit:247 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB1));
   /* syntax/scope.nit:110 */
   fra.me.REG[2] = CALL_parser___parser_nodes___ALabel___n_id(fra.me.REG[1])(fra.me.REG[1]);
@@ -722,7 +722,7 @@ val_t syntax___scope___ScopeContext___get_by_label(val_t p0, val_t p1){
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:236 */
+    /* ../lib/standard/kernel.nit:243 */
     REGB0 = TAG_Bool(UNTAG_Int(REGB1)>=UNTAG_Int(REGB0));
     /* syntax/scope.nit:111 */
     if (UNTAG_Bool(REGB0)) {
@@ -733,23 +733,23 @@ val_t syntax___scope___ScopeContext___get_by_label(val_t p0, val_t p1){
         nit_abort("Uninitialized attribute %s", "_stack", LOCATE_syntax___scope, 112);
       }
       fra.me.REG[3] = ATTR_syntax___scope___ScopeContext____stack(fra.me.REG[0]);
-      /* ../lib/standard/collection/array.nit:278 */
+      /* ../lib/standard/collection/array.nit:279 */
       REGB0 = REGB1;
-      /* ../lib/standard/collection/array.nit:280 */
+      /* ../lib/standard/collection/array.nit:281 */
       REGB2 = TAG_Int(0);
       REGB3 = TAG_Bool(VAL_ISA(REGB2, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
       if (UNTAG_Bool(REGB3)) {
       } else {
         nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
       }
-      /* ../lib/standard/kernel.nit:236 */
+      /* ../lib/standard/kernel.nit:243 */
       REGB2 = TAG_Bool(UNTAG_Int(REGB0)>=UNTAG_Int(REGB2));
-      /* ../lib/standard/collection/array.nit:280 */
+      /* ../lib/standard/collection/array.nit:281 */
       if (UNTAG_Bool(REGB2)) {
         REGB2 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[3])!=NIT_NULL);
         if (UNTAG_Bool(REGB2)) {
         } else {
-          nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 280);
+          nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 281);
         }
         REGB2 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[3]);
         REGB3 = TAG_Bool(VAL_ISA(REGB2, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
@@ -757,26 +757,26 @@ val_t syntax___scope___ScopeContext___get_by_label(val_t p0, val_t p1){
         } else {
           nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
         }
-        /* ../lib/standard/kernel.nit:235 */
+        /* ../lib/standard/kernel.nit:242 */
         REGB2 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB2));
       } else {
-        /* ../lib/standard/collection/array.nit:280 */
+        /* ../lib/standard/collection/array.nit:281 */
         REGB3 = TAG_Bool(0);
         REGB2 = REGB3;
       }
       if (UNTAG_Bool(REGB2)) {
       } else {
-        nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 280);
+        nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 281);
       }
-      /* ../lib/standard/collection/array.nit:281 */
+      /* ../lib/standard/collection/array.nit:282 */
       fra.me.REG[3] = ATTR_standard___collection___array___Array____items(fra.me.REG[3]);
       REGB2 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
       if (UNTAG_Bool(REGB2)) {
-        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
+        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 282);
       }
-      /* ../lib/standard/collection/array.nit:724 */
+      /* ../lib/standard/collection/array.nit:725 */
       fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB0)];
-      /* ../lib/standard/collection/array.nit:281 */
+      /* ../lib/standard/collection/array.nit:282 */
       goto label1;
       label1: while(0);
       /* syntax/scope.nit:113 */
@@ -804,7 +804,7 @@ val_t syntax___scope___ScopeContext___get_by_label(val_t p0, val_t p1){
       }
       /* syntax/scope.nit:114 */
       REGB0 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:240 */
+      /* ../lib/standard/kernel.nit:247 */
       REGB0 = TAG_Int(UNTAG_Int(REGB1)-UNTAG_Int(REGB0));
       /* syntax/scope.nit:114 */
       REGB1 = REGB0;
@@ -821,7 +821,7 @@ val_t syntax___scope___ScopeContext___get_by_label(val_t p0, val_t p1){
   if (!once_value_4) {
     fra.me.REG[5] = BOX_NativeString("Syntax error: invalid label ");
     REGB1 = TAG_Int(28);
-    fra.me.REG[5] = NEW_String_standard___string___String___with_native(fra.me.REG[5], REGB1);
+    fra.me.REG[5] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[5])(fra.me.REG[5], REGB1);
     once_value_4 = fra.me.REG[5];
     register_static_object(&once_value_4);
   } else fra.me.REG[5] = once_value_4;
@@ -832,7 +832,7 @@ val_t syntax___scope___ScopeContext___get_by_label(val_t p0, val_t p1){
   if (!once_value_5) {
     fra.me.REG[2] = BOX_NativeString(".");
     REGB1 = TAG_Int(1);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB1);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB1);
     once_value_5 = fra.me.REG[2];
     register_static_object(&once_value_5);
   } else fra.me.REG[2] = once_value_5;
@@ -1496,7 +1496,7 @@ val_t syntax___scope___AEscapeExpr___compute_escapable_block(val_t p0, val_t p1)
       if (!once_value_1) {
         fra.me.REG[4] = BOX_NativeString("Syntax Error: '");
         REGB0 = TAG_Int(15);
-        fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+        fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
         once_value_1 = fra.me.REG[4];
         register_static_object(&once_value_1);
       } else fra.me.REG[4] = once_value_1;
@@ -1507,7 +1507,7 @@ val_t syntax___scope___AEscapeExpr___compute_escapable_block(val_t p0, val_t p1)
       if (!once_value_2) {
         fra.me.REG[4] = BOX_NativeString("' statment outside block.");
         REGB0 = TAG_Int(25);
-        fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+        fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
         once_value_2 = fra.me.REG[4];
         register_static_object(&once_value_2);
       } else fra.me.REG[4] = once_value_2;
@@ -1544,7 +1544,7 @@ val_t syntax___scope___AContinueExpr___kwname(val_t p0){
   if (!once_value_1) {
     fra.me.REG[0] = BOX_NativeString("continue");
     REGB0 = TAG_Int(8);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_1 = fra.me.REG[0];
     register_static_object(&once_value_1);
   } else fra.me.REG[0] = once_value_1;
@@ -1573,7 +1573,7 @@ val_t syntax___scope___ABreakExpr___kwname(val_t p0){
   if (!once_value_1) {
     fra.me.REG[0] = BOX_NativeString("break");
     REGB0 = TAG_Int(5);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_1 = fra.me.REG[0];
     register_static_object(&once_value_1);
   } else fra.me.REG[0] = once_value_1;

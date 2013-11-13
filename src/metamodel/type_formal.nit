@@ -16,7 +16,7 @@
 # limitations under the License.
 
 # Formal types
-package type_formal
+module type_formal
 
 import inheritance
 

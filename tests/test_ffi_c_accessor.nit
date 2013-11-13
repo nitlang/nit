@@ -24,16 +24,16 @@ class A
 	        	String_to_cstring( A_r( recv ) ),
 	        	String_to_cstring( A_rw( recv ) ) );
 	`}
-	fun modify import String::from_cstring, w=, rw= `{
-		A_w__assign( recv, new_String_from_cstring( "w set from native" ) );
-		A_rw__assign( recv, new_String_from_cstring( "rw set from native" ) );
+	fun modify import NativeString::to_s, w=, rw= `{
+		A_w__assign( recv, NativeString_to_s( "w set from native" ) );
+		A_rw__assign( recv, NativeString_to_s( "rw set from native" ) );
 	`}
 end
 
 class B
-	fun print_and_modify( a : A ) import A::rw, A::rw=, String::to_cstring, String::from_cstring `{
+	fun print_and_modify( a : A ) import A::rw, A::rw=, String::to_cstring, NativeString::to_s `{
 		printf( "%s\n", String_to_cstring( A_rw( a ) ) );
-		A_rw__assign( a, new_String_from_cstring( "set from native" ) );
+		A_rw__assign( a, NativeString_to_s( "set from native" ) );
 		printf( "%s\n", String_to_cstring( A_rw( a ) ) );
 	`}
 end

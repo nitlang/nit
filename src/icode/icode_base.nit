@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Base classes for Nit intermediate code representation
-package icode_base
+module icode_base
 
 import metamodel
 

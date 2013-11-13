@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Common syntax structures for syntax analysis of NIT AST.
-package syntax_base
+module syntax_base
 
 import parser
 import mmloader

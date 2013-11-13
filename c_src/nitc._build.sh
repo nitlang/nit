@@ -38,15 +38,17 @@ CLIBDIR="clib"
   standard___collection___array._sep.c\
   standard___collection___hash_collection._sep.c\
   standard___hash._sep.c\
-  time._nitni.c\
-  time_nit.c\
-  standard___time._sep.c\
   file._nitni.c\
   file_nit.c\
+  standard___file._ffi.c\
   standard___file._sep.c\
   stream._nitni.c\
   stream_nit.c\
   standard___stream._sep.c\
+  time._nitni.c\
+  time_nit.c\
+  standard___time._ffi.c\
+  standard___time._sep.c\
   standard___string_search._sep.c\
   exec._nitni.c\
   exec_nit.c\

@@ -1,0 +1,10 @@
+Grammar lexer_conflict_token;
+
+Lexer
+
+a = 'a'|'x';
+b = 'b'|'x';
+
+Parser
+
+p = a | b;

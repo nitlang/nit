@@ -88,7 +88,7 @@ class GlobalCompiler
 	init(mainmodule: MModule, modelbuilder: ModelBuilder, runtime_type_analysis: RapidTypeAnalysis)
 	do
 		super(mainmodule, modelbuilder)
-		var file = new_file(mainmodule.name)
+		var file = new_file("{mainmodule.name}.nitgg")
 		self.header = new CodeWriter(file)
 		self.runtime_type_analysis = runtime_type_analysis
 		self.live_primitive_types = new Array[MClassType]
@@ -125,9 +125,9 @@ class GlobalCompiler
 	protected var classids: HashMap[MClassType, String] = new HashMap[MClassType, String]
 
 	# Declaration of structures the live Nit types
-	# Each live type is generated as an independent C `struct' type.
+	# Each live type is generated as an independent C `struct` type.
 	# They only share a common first field `classid` used to implement the polymorphism.
-	# Usualy, all C variables that refers to a Nit object are typed on the abstract struct `val' that contains only the `classid` field.
+	# Usualy, all C variables that refers to a Nit object are typed on the abstract struct `val` that contains only the `classid` field.
 	redef fun compile_header_structs do
 		self.header.add_decl("typedef struct \{int classid;\} val; /* general C type representing a Nit instance. */")
 	end
@@ -438,27 +438,58 @@ class GlobalCompilerVisitor
 		abort
 	end
 
-	redef fun call(m, recvtype, args)
+	# Subpart of old call function
+	#
+	# Checks if the type of the receiver is valid and corrects it if necessary
+	private fun get_recvtype(m: MMethodDef, recvtype: MClassType, args: Array[RuntimeVariable]): MClassType
 	do
 		check_valid_reciever(recvtype)
 		#debug("call {m} on {recvtype} on {args.first}:{args.first.mtype}")
 		if m.mclassdef.mclass.name == "Object" and recvtype.ctype == "val*" then
 			recvtype = m.mclassdef.bound_mtype
 		end
-		var recv = self.autobox(args.first, recvtype)
-		recv = self.autoadapt(recv, recvtype)
+		return recvtype
+	end
 
-		args = args.to_a
-		self.varargize(m, m.msignature.as(not null), args)
+	# Subpart of old call function
+	# Gets the receiver boxed and casted if necessary
+	private fun get_recv(recvtype: MClassType, args: Array[RuntimeVariable]): RuntimeVariable
+	do
+		return self.autoadapt(self.autobox(args.first, recvtype), recvtype)
+	end
+
+	# Finalizes a call to a method ´m´ on type ´recvtype´ with arguments ´args´
+	private fun finalize_call(m: MMethodDef, recvtype: MClassType, args: Array[RuntimeVariable]): nullable RuntimeVariable
+	do
 		if args.length != m.msignature.arity + 1 then # because of self
 			add("printf(\"NOT YET IMPLEMENTED: Invalid arity for {m}. {args.length} arguments given.\\n\"); exit(1);")
 			debug("NOT YET IMPLEMENTED: Invalid arity for {m}. {args.length} arguments given.")
 			return null
 		end
 
-		args.first = recv
 		var rm = new CustomizedRuntimeFunction(m, recvtype)
 		return rm.call(self, args)
+	end
+
+	redef fun call(m, recvtype, args)
+	do
+		var recv_type = get_recvtype(m, recvtype, args)
+		var recv = get_recv(recv_type, args)
+		var new_args = args.to_a
+		self.varargize(m, m.msignature.as(not null), new_args)
+		new_args.first = recv
+		return finalize_call(m, recv_type, new_args)
+	end
+
+	# Does a call without encapsulating varargs into an array
+	# Avoids multiple encapsulation when calling a super in a variadic function
+	fun call_without_varargize(m: MMethodDef, recvtype: MClassType, args: Array[RuntimeVariable]): nullable RuntimeVariable
+	do
+		var recv_type = get_recvtype(m, recvtype, args)
+		var recv = get_recv(recv_type, args)
+		var new_args = args.to_a
+		new_args.first = recv
+		return finalize_call(m, recv_type, new_args)
 	end
 
 	redef fun supercall(m: MMethodDef, recvtype: MClassType, args: Array[RuntimeVariable]): nullable RuntimeVariable
@@ -482,7 +513,7 @@ class GlobalCompilerVisitor
 				return res
 			end
 			var propdef = m.lookup_next_definition(self.compiler.mainmodule, mclasstype)
-			var res2 = self.call(propdef, mclasstype, args)
+			var res2 = self.call_without_varargize(propdef, mclasstype, args)
 			if res != null then self.assign(res, res2.as(not null))
 			return res
 		end
@@ -504,7 +535,7 @@ class GlobalCompilerVisitor
 			else
 				self.add("case {self.compiler.classid(t)}: /* test {t} */")
 			end
-			var res2 = self.call(propdef, t, args)
+			var res2 = self.call_without_varargize(propdef, t, args)
 			if res != null then self.assign(res, res2.as(not null))
 			self.add "break;"
 		end

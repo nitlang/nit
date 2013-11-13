@@ -16,7 +16,7 @@
 
 # This package introduces an algorithm to find all methods reachable
 # from at least one reachable initializer
-package reachable_from_init_method_analysis_impl
+module reachable_from_init_method_analysis_impl
 
 import reachable_from_init_method_analysis
 import reachable_method_analysis

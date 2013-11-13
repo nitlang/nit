@@ -13,7 +13,7 @@
 
 # Most minimal classes and methods.
 # This module is the root of the standard module hierarchy.
-package kernel
+module kernel
 
 import end # Mark this module is a top level one. (must be only one)
 
@@ -31,17 +31,17 @@ interface Object
 	# The identifier is used internally to provide a hash value.
 	fun object_id: Int is intern
 
-	# Return true if `self' and `other' have the same dynamic type.
+	# Return true if `self` and `other` have the same dynamic type.
 	# Unless specific code, you should not use this method.
 	fun is_same_type(other: Object): Bool is intern
 
-	# Have `self' and `other' the same value?
+	# Have `self` and `other` the same value?
 	##
 	# The exact meaning of "same value" is let to the subclasses.
-	# Implicitly, the default implementation, is `is'
+	# Implicitly, the default implementation, is `is`
 	fun ==(other: nullable Object): Bool do return self is other
 
-	# Have `self' and `other' different values?
+	# Have `self` and `other` different values?
 	##
 	# != is equivalent with "not ==".
 	fun !=(other: nullable Object): Bool do return not (self == other)
@@ -64,13 +64,19 @@ interface Object
 	# Quit the program with a specific return code
 	protected fun exit(exit_value: Int) is intern
 
-	# Return the global sys object, the only instance of the `Sys' class.
+	# Return the global sys object, the only instance of the `Sys` class.
 	protected fun sys: Sys is intern
+
+	# The hash code of the object.
+	# Assuming that a == b -> a.hash == b.hash
+	##
+	# Without redefinition, it is based on the `object_id` of the instance.
+	fun hash: Int do return object_id / 8
 end
 
 # The main class of the program.
-# `Sys' is a singleton class, its only instance is `sys' defined in `Object'.
-# `sys' is used to invoke methods on the program on the system.
+# `Sys` is a singleton class, its only instance is `sys` defined in `Object`.
+# `sys` is used to invoke methods on the program on the system.
 class Sys
 	# Instructions outside classes implicitly redefine this method.
 	fun main do end
@@ -83,21 +89,21 @@ end
 # The ancestor of class where objects are in a total order.
 # In order to work, the method '<' has to be redefined.
 interface Comparable
-	# What `self' can be compared to?
+	# What `self` can be compared to?
 	type OTHER: Comparable
 
-	# Is `self' lesser than `other'?
+	# Is `self` lesser than `other`?
 	fun <(other: OTHER): Bool is abstract 
 
-	# not `other' < `self'
-	# Note, the implementation must ensure that: (x<=y) == (x<y or x==y)
+	# not `other` < `self`
+	# Note, the implementation must ensure that: `(x<=y) == (x<y or x==y)`
 	fun <=(other: OTHER): Bool do return not other < self
 
-	# not `self' < `other' 
-	# Note, the implementation must ensure that: (x>=y) == (x>y or x==y)
+	# not `self` < `other`
+	# Note, the implementation must ensure that: `(x>=y) == (x>y or x==y)`
 	fun >=(other: OTHER): Bool do return not self < other
 
-	# `other' < `self'
+	# `other` < `self`
 	fun >(other: OTHER): Bool do return other < self
 
 	# -1 if <, +1 if > and 0 otherwise
@@ -119,7 +125,7 @@ interface Comparable
 		return c <= self and self <= d
 	end
 
-	# The maximum between `self' and `other' (prefers `self' if equals).
+	# The maximum between `self` and `other` (prefers `self` if equals).
 	fun max(other: OTHER): OTHER
 	do
 		if self < other then
@@ -129,7 +135,7 @@ interface Comparable
 		end
 	end
 
-	# The minimum between `self' and `c' (prefer `self' if equals)
+	# The minimum between `self` and `c` (prefer `self` if equals)
 	fun min(c: OTHER): OTHER
 	do
 		if c < self then
@@ -152,15 +158,16 @@ interface Discrete
 	# The previous element.
 	fun prec: OTHER do return self - 1
 
-	# The `i'-th successor element.
+	# The `i`-th successor element.
 	fun +(i: Int): OTHER is abstract
 
-	# The `i'-th previous element.
+	# The `i`-th previous element.
 	fun -(i: Int): OTHER is abstract
 
 	# The distance between self and d.
-	# 10.distance(15)	# --> 5
-	# 'Z'.distance('A')	# --> 25
+	#
+	#     assert 10.distance(15)	     ==  5
+	#     assert 'Z'.distance('A')	     ==  25
 	fun distance(d: OTHER): Int
 	do
 		var cursor: OTHER
@@ -189,15 +196,23 @@ end
 ###############################################################################
 
 # Native Booleans.
-# `true' and `false' are the only instances.
+# `true` and `false` are the only instances.
 # Boolean are manipulated trough three special operators:
-#	 `and', `or', `not'.
+#	 `and`, `or`, `not`.
 # Booleans are mainly used by conditional statement and loops.
 universal Bool
 	redef fun object_id is intern
 	redef fun ==(b) is intern
 	redef fun !=(b) is intern
 	redef fun output is intern
+	redef fun hash
+	do
+		if self then
+			return 1
+		else
+			return 0
+		end
+	end
 end
 
 # Native floating point numbers.
@@ -215,8 +230,14 @@ universal Float
 	fun -(i: Float): Float is intern
 	fun *(i: Float): Float is intern
 	fun /(i: Float): Float is intern
-	
-	# The integer part of `self'.
+
+	# The integer part of `self`.
+	#
+	#     assert (0.0).to_i      == 0
+	#     assert (0.9).to_i      == 0
+	#     assert (-0.9).to_i     == 0
+	#     assert (9.9).to_i      == 9
+	#     assert (-9.9).to_i     == -9
 	fun to_i: Int is intern
 end
 
@@ -227,6 +248,7 @@ universal Int
 	redef type OTHER: Int
 
 	redef fun object_id is intern
+	redef fun hash do return self
 	redef fun ==(i) is intern
 	redef fun !=(i) is intern
 	redef fun output is intern
@@ -240,11 +262,22 @@ universal Int
 	redef fun -(i) is intern
 	fun *(i: Int): Int is intern
 	fun /(i: Int): Int is intern
-	fun %(i: Int): Int is intern   
-	fun lshift(i: Int): Int is intern
-	fun rshift(i: Int): Int is intern   
+	fun %(i: Int): Int is intern
 
-	# The float equivalent of `self'
+	# `i` bits shift fo the left (aka <<)
+	#
+	#     assert 5.lshift(1)    == 10
+	fun lshift(i: Int): Int is intern
+
+	# `i` bits shift fo the right (aka >>)
+	#
+	#     assert 5.rshift(1)    == 2
+	fun rshift(i: Int): Int is intern
+
+	# The float equivalent of `self`
+	#
+	#     assert 5.to_f         == 5.0
+	#     assert 5.to_f         != 5 # Float and Int are not equals
 	fun to_f: Float is intern
 
 	redef fun succ is intern
@@ -258,7 +291,7 @@ universal Int
 			return -d
 		end
 	end
-	
+
 	redef fun <=>(other)
 	do
 		if self < other then
@@ -297,12 +330,19 @@ universal Int
 		end
 	end
 
-	# The character whose ASCII value is `self'.
+	# The character whose ASCII value is `self`.
+	#
+	#      assert 65.ascii   == 'A'
+	#      assert 10.ascii   == '\n'
 	fun ascii: Char is intern
 
-	# Number of digits of an integer in base `b' (plus one if negative)
+	# Number of digits of an integer in base `b` (plus one if negative)
+	#
+	#     assert 123.digit_count(10) == 3
+	#     assert 123.digit_count(2) == 7 # 1111011 in binary
 	fun digit_count(b: Int): Int
 	do
+		if b == 10 then return digit_count_base_10
 		var d: Int # number of digits
 		var n: Int # current number
 		# Sign
@@ -323,9 +363,33 @@ universal Int
 		return d
 	end
 
+	# Optimized version for base 10
+	fun digit_count_base_10: Int
+	do
+		var val: Int
+		var result: Int
+		if self < 0 then
+			result = 2
+			val = -self
+		else
+			result = 1
+			val = self
+		end
+		loop
+			if val < 10 then return result
+			if val < 100 then return result+1
+			if val < 1000 then return result+2
+			if val < 10000 then return result+3
+			val = val / 10000
+			result += 4
+		end
+	end
+
 	# Return the corresponding digit character
-	# If 0 <= `self' <= 9, return the corresponding character.
-	# If 10 <= `self' <= 36, return the corresponding letter [a..z].
+	# If 0 <= `self` <= 9, return the corresponding character.
+	#     assert 5.to_c    == '5'
+	# If 10 <= `self` <= 36, return the corresponding letter [a..z].
+	#     assert 15.to_c   == 'f'
 	fun to_c: Char
 	do
 		assert self >= 0 and self <= 36 # TODO plan for this
@@ -359,6 +423,10 @@ universal Int
 	end
 
 	# The absolute value of self
+	#
+	#     assert (-10).abs   == 10
+	#     assert 10.abs    == 10
+	#     assert 0.abs     == 0
 	fun abs: Int
 	do
 	    if self >= 0
@@ -372,12 +440,13 @@ end
 
 # Native characters.
 # Characters are denoted with simple quote.
-# eg. 'a' or '\n'.
+# eg. `'a'` or `'\n'`.
 universal Char
 	super Discrete
 	redef type OTHER: Char
 
 	redef fun object_id is intern
+	redef fun hash do return ascii
 	redef fun ==(o) is intern
 	redef fun !=(o) is intern
 	redef fun output is intern
@@ -400,7 +469,9 @@ universal Char
 		end
 	end
 
-	# If `self' is a digit then return this digit else return -1.
+	# If `self` is a digit then return this digit else return -1.
+	#
+	#     assert '5'.to_i    == 5
 	fun to_i: Int
 	do
 
@@ -414,6 +485,9 @@ universal Char
 	end
 
 	# the ascii value of self
+	#
+	#     assert 'a'.ascii    == 97
+	#     assert '\n'.ascii   == 10
 	fun ascii: Int is intern
 
 	redef fun +(i) is intern
@@ -421,6 +495,10 @@ universal Char
 
 	# Return the lower case version of self.
 	# If self is not a letter, then return self
+	#
+	#     assert 'A'.to_lower  == 'a'
+	#     assert 'a'.to_lower  == 'a'
+	#     assert '$'.to_lower  == '$'
 	fun to_lower: Char
 	do
 		if is_upper then
@@ -432,6 +510,10 @@ universal Char
 
 	# Return the upper case version of self.
 	# If self is not a letter, then return self
+	#
+	#     assert 'a'.to_upper  == 'A'
+	#     assert 'A'.to_upper  == 'A'
+	#     assert '$'.to_upper  == '$'
 	fun to_upper: Char
 	do
 		if is_lower then
@@ -440,26 +522,45 @@ universal Char
 			return self
 		end
 	end
-	
+
 	# Is self a digit? (from '0' to '9')
+	#
+	#     assert '0'.is_digit   == true
+	#     assert '9'.is_digit   == true
+	#     assert 'a'.is_digit   == false
 	fun is_digit : Bool
 	do
 		return self >= '0' and self <= '9'
 	end
-	
+
 	# Is self a lower case letter? (from 'a' to 'z')
+	#
+	#     assert 'a'.is_lower   == true
+	#     assert 'z'.is_lower   == true
+	#     assert 'A'.is_lower   == false
+	#     assert '$'.is_lower   == false
 	fun is_lower : Bool
 	do
 		return self >= 'a' and self <= 'z'
 	end
-	
+
 	# Is self a upper case letter? (from 'A' to 'Z')
+	#
+	#     assert 'A'.is_upper   == true
+	#     assert 'A'.is_upper   == true
+	#     assert 'z'.is_upper   == false
+	#     assert '$'.is_upper   == false
 	fun is_upper : Bool
 	do
 		return self >= 'A' and self <= 'Z'
 	end
-	
+
 	# Is self a letter? (from 'A' to 'Z' and 'a' to 'z')
+	#
+	#     assert 'A'.is_letter  == true
+	#     assert 'A'.is_letter  == true
+	#     assert 'z'.is_letter  == true
+	#     assert '$'.is_letter  == false
 	fun is_letter : Bool
 	do
 		return is_lower or is_upper

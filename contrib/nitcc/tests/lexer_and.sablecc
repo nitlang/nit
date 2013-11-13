@@ -1,0 +1,14 @@
+Grammar and;
+
+Lexer
+e1 = ('a'|'b')+;
+e2 = ('a'|'c')+;
+
+t1 = e1 Except e2; // any sequence of `a` and `b` with at least a `b`
+t2 = e2 Except e1; // any sequence of `a` and `c` with at least a `c`
+t3 = e1 And e2; // 'a'+
+
+Parser
+
+p = q+;
+q = t1|t2|t3;

@@ -21,8 +21,6 @@ import parser
 import toolcontext
 import phase
 
-import modelbuilder #FIXME useless
-
 redef class ToolContext
 	var scope_phase: Phase = new ScopePhase(self, null)
 end
@@ -38,7 +36,7 @@ class Variable
 	# The name of the variable (as used in the program)
 	var name: String
 
-	# Alias of `name'
+	# Alias of `name`
 	redef fun to_s do return self.name
 end
 
@@ -67,8 +65,8 @@ end
 # Visit a npropdef and:
 #  * Identify variables, closures and labels
 #  * Associate each break and continue to its escapemark
-#  * Transform ACallFormExpr that access a variable into AVarFormExpr
-#  * Transform ACallFormExpr that call a closure into AClosureCallExpr
+#  * Transform `ACallFormExpr` that access a variable into `AVarFormExpr`
+#  * Transform `ACallFormExpr` that call a closure into `AClosureCallExpr`
 # FIXME: Should the class be private?
 private class ScopeVisitor
 	super Visitor
@@ -84,7 +82,7 @@ private class ScopeVisitor
 		scopes.add(new Scope)
 	end
 
-	# All stacked scope. `scopes.first' is the current scope
+	# All stacked scope. `scopes.first` is the current scope
 	private var scopes: List[Scope] = new List[Scope]
 
 	# Regiter a local variable.
@@ -101,7 +99,7 @@ private class ScopeVisitor
 		return true
 	end
 
-	# Look for a variable named `name'.
+	# Look for a variable named `name`.
 	# Return null if no such a variable is found.
 	fun search_variable(name: String): nullable Variable
 	do
@@ -114,13 +112,13 @@ private class ScopeVisitor
 		return null
 	end
 
-	redef fun visit(n: nullable ANode)
+	redef fun visit(n)
 	do
 		n.accept_scope_visitor(self)
 	end
 
-	# Enter in a statement block `node' as inside a new scope.
-	# The block can be optionally attached to an `escapemark'.
+	# Enter in a statement block `node` as inside a new scope.
+	# The block can be optionally attached to an `escapemark`.
 	private fun enter_visit_block(node: nullable AExpr, escapemark: nullable EscapeMark)
 	do
 		if node == null then return
@@ -131,7 +129,7 @@ private class ScopeVisitor
 		scopes.shift
 	end
 
-	# Look for a label `name'.
+	# Look for a label `name`.
 	# Return nulll if no such a label is found.
 	private fun search_label(name: String): nullable EscapeMark
 	do
@@ -148,7 +146,6 @@ private class ScopeVisitor
 	# Display an error on toolcontext if a label with the same name is masked.
 	private fun make_escape_mark(nlabel: nullable ALabel, for_loop: Bool): EscapeMark
 	do
-		assert named_or_for_loop: nlabel != null or for_loop
 		var name: nullable String
 		if nlabel != null then
 			name = nlabel.n_id.text
@@ -165,7 +162,7 @@ private class ScopeVisitor
 
 	# Look for an escape mark optionally associated with a label.
 	# If a label is given, the the escapemark of this label is returned.
-	# If there is no label, the nearest escapemark that is `for loop' ir returned.
+	# If there is no label, the nearest escapemark that is `for loop` is returned.
 	# If there is no valid escapemark, then an error is displayed ans null is returned.
 	# Return nulll if no such a label is found.
 	private fun get_escapemark(node: ANode, nlabel: nullable ALabel): nullable EscapeMark
@@ -181,7 +178,7 @@ private class ScopeVisitor
 		else
 			for scope in scopes do
 				var res = scope.escapemark
-				if res != null and res.for_loop then
+				if res != null then
 					return res
 				end
 			end
@@ -311,9 +308,7 @@ redef class ADoExpr
 	var escapemark: nullable EscapeMark
 	redef fun accept_scope_visitor(v)
 	do
-		if n_label != null then
-			self.escapemark = v.make_escape_mark(n_label, false)
-		end
+		self.escapemark = v.make_escape_mark(n_label, false)
 		v.enter_visit_block(n_block, self.escapemark)
 	end
 end

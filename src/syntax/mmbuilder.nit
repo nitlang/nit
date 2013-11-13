@@ -17,7 +17,7 @@
 # Build MM entity from NIT AST and check conformance of these entities.
 # This module introduce specific MM class (MMSrcXXX) that specialize the abstract one from metamodel
 #
-package mmbuilder
+module mmbuilder
 
 import syntax_base
 private import primitive_info

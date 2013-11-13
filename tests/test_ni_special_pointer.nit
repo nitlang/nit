@@ -19,7 +19,7 @@ extern ExternInt super Pointer
 	new as_1 is extern
 	new as_2 is extern
 
-	redef fun to_s : String is extern import String::from_cstring
+	redef fun to_s : String is extern import NativeString::to_s
 	fun to_i : Int is extern
 end
 

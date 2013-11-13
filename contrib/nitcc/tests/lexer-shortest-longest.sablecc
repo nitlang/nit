@@ -1,0 +1,20 @@
+Grammar re;
+Lexer
+        a = 'a';
+        ab = 'ab';
+        a_ab = a | ab;
+        //alb_ab = 'a' Lookahead Not 'b' | 'ab';
+        s = Shortest(a_ab);
+        l = Longest(a_ab);
+        dummy = 'x' (a|ab|s|l);
+	blank = #10 | #13 | #32; 
+
+Parser
+Ignored blank;
+	p = t+;
+        t = 
+        l | //alt1
+//alt1        a | s |
+//alt2        a |
+        dummy;
+

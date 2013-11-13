@@ -73,7 +73,7 @@ val_t metamodel___vararg___MMSignature___has_vararg(val_t p0){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:236 */
+  /* ../lib/standard/kernel.nit:243 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)>=UNTAG_Int(REGB1));
   /* metamodel/vararg.nit:30 */
   goto label1;
@@ -178,7 +178,7 @@ void metamodel___vararg___MMSignature___init(val_t p0, val_t p1, val_t p2, val_t
   CALL_SUPER_metamodel___vararg___MMSignature___init(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[1], fra.me.REG[2], fra.me.REG[3], init_table);
   /* metamodel/vararg.nit:50 */
   REGB0 = TAG_Int(1);
-  /* ../lib/standard/kernel.nit:239 */
+  /* ../lib/standard/kernel.nit:246 */
   REGB0 = TAG_Int(-UNTAG_Int(REGB0));
   /* metamodel/vararg.nit:50 */
   ATTR_metamodel___vararg___MMSignature____vararg_rank(fra.me.REG[4]) = REGB0;

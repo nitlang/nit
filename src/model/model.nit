@@ -21,7 +21,7 @@
 #
 # It also provide an API to build and query models.
 #
-# All model classes starts with the M letter (MModule, MClass, etc.)
+# All model classes starts with the M letter (`MModule`, `MClass`, etc.)
 #
 # TODO: better doc
 #
@@ -70,7 +70,7 @@ redef class Model
 	# Collections of classes grouped by their short name
 	private var mclasses_by_name: MultiHashMap[String, MClass] = new MultiHashMap[String, MClass]
 
-	# Return all class named `name'.
+	# Return all class named `name`.
 	#
 	# If such a class does not exist, null is returned
 	# (instead of an empty array)
@@ -88,7 +88,7 @@ redef class Model
 	# Collections of properties grouped by their short name
 	private var mproperties_by_name: MultiHashMap[String, MProperty] = new MultiHashMap[String, MProperty]
 
-	# Return all properties named `name'.
+	# Return all properties named `name`.
 	#
 	# If such a property does not exist, null is returned
 	# (instead of an empty array)
@@ -115,7 +115,7 @@ redef class MModule
 	# (introduction and refinement)
 	var mclassdefs: Array[MClassDef] = new Array[MClassDef]
 
-	# Does the current module has a given class `mclass'?
+	# Does the current module has a given class `mclass`?
 	# Return true if the mmodule introduces, refines or imports a class.
 	# Visibility is not considered.
 	fun has_mclass(mclass: MClass): Bool
@@ -140,6 +140,7 @@ redef class MModule
 		for m in self.in_importation.greaters do
 			for cd in m.mclassdefs do
 				var c = cd.mclass
+				res.add_node(c)
 				for s in cd.supertypes do
 					res.add_edge(c, s.mclass)
 				end
@@ -176,7 +177,7 @@ redef class MModule
 
 	private var flatten_mclass_hierarchy_cache: nullable POSet[MClass] = null
 
-	# The primitive type Object, the root of the class hierarchy
+	# The primitive type `Object`, the root of the class hierarchy
 	fun object_type: MClassType
 	do
 		var res = self.object_type_cache
@@ -188,7 +189,7 @@ redef class MModule
 
 	private var object_type_cache: nullable MClassType
 
-	# The primitive type Bool
+	# The primitive type `Bool`
 	fun bool_type: MClassType
 	do
 		var res = self.bool_type_cache
@@ -200,7 +201,7 @@ redef class MModule
 
 	private var bool_type_cache: nullable MClassType
 
-	# The primitive type Sys, the main type of the program, if any
+	# The primitive type `Sys`, the main type of the program, if any
 	fun sys_type: nullable MClassType
 	do
 		var clas = self.model.get_mclasses_by_name("Sys")
@@ -208,7 +209,7 @@ redef class MModule
 		return get_primitive_class("Sys").mclass_type
 	end
 
-	# Force to get the primitive class named `name' or abort
+	# Force to get the primitive class named `name` or abort
 	fun get_primitive_class(name: String): MClass
 	do
 		var cla = self.model.get_mclasses_by_name(name)
@@ -225,20 +226,24 @@ redef class MModule
 		return cla.first
 	end
 
-	# Try to get the primitive method named `name' on the type `recv'
-	fun try_get_primitive_method(name: String, recv: MType): nullable MMethod
+	# Try to get the primitive method named `name` on the type `recv`
+	fun try_get_primitive_method(name: String, recv: MClass): nullable MMethod
 	do
 		var props = self.model.get_mproperties_by_name(name)
 		if props == null then return null
 		var res: nullable MMethod = null
 		for mprop in props do
 			assert mprop isa MMethod
-			if not recv.has_mproperty(self, mprop) then continue
-			if res == null then
-				res = mprop
-			else
-				print("Fatal Error: ambigous property name '{name}'; conflict between {mprop.full_name} and {res.full_name}")
-				abort
+			var intro = mprop.intro_mclassdef
+			for mclassdef in recv.mclassdefs do
+				if not self.in_importation.greaters.has(mclassdef.mmodule) then continue
+				if not mclassdef.in_hierarchy.greaters.has(intro) then continue
+				if res == null then
+					res = mprop
+				else if res != mprop then
+					print("Fatal Error: ambigous property name '{name}'; conflict between {mprop.full_name} and {res.full_name}")
+					abort
+				end
 			end
 		end
 		return res
@@ -273,12 +278,12 @@ end
 
 # A named class
 #
-# MClass are global to the model; it means that a MClass is not bound to a
+# `MClass` are global to the model; it means that a `MClass` is not bound to a
 # specific `MModule`.
 #
 # This characteristic helps the reasoning about classes in a program since a
-# single MClass object always denote the same class.
-# However, because a MClass is global, it does not really have properties nor
+# single `MClass` object always denote the same class.
+# However, because a `MClass` is global, it does not really have properties nor
 # belong to a hierarchy since the property and the
 # hierarchy of a class depends of a module.
 class MClass
@@ -292,7 +297,7 @@ class MClass
 	var name: String
 
 	# The canonical name of the class
-	# Example: "owner::module::MyClass"
+	# Example: `"owner::module::MyClass"`
 	fun full_name: String
 	do
 		return "{self.intro_mmodule.full_name}::{name}"
@@ -340,11 +345,11 @@ class MClass
 	# All class definitions (introduction and refinements)
 	var mclassdefs: Array[MClassDef] = new Array[MClassDef]
 
-	# Alias for `name'
+	# Alias for `name`
 	redef fun to_s do return self.name
 
 	# The definition that introduced the class
-	# Warning: the introduction is the first `MClassDef' object associated
+	# Warning: the introduction is the first `MClassDef` object associated
 	# to self.  If self is just created without having any associated
 	# definition, this method will abort
 	fun intro: MClassDef
@@ -353,10 +358,10 @@ class MClass
 		return mclassdefs.first
 	end
 
-	# Return the class `self' in the class hierarchy of the module `mmodule'.
+	# Return the class `self` in the class hierarchy of the module `mmodule`.
 	#
-	# SEE: MModule::flatten_mclass_hierarchy
-	# REQUIRE: mmodule.has_mclass(self)
+	# SEE: `MModule::flatten_mclass_hierarchy`
+	# REQUIRE: `mmodule.has_mclass(self)`
 	fun in_hierarchy(mmodule: MModule): POSetElement[MClass]
 	do
 		return mmodule.flatten_mclass_hierarchy[self]
@@ -364,25 +369,25 @@ class MClass
 
 	# The principal static type of the class.
 	#
-	# For non-generic class, mclass_type is the only MClassType based
+	# For non-generic class, mclass_type is the only `MClassType` based
 	# on self.
 	#
 	# For a generic class, the arguments are the formal parameters.
-	# i.e.: for the class `Array[E:Object]', the mtype is Array[E].
-	# If you want `Array[Object]' the see `MClassDef::bound_mtype'
+	# i.e.: for the class Array[E:Object], the `mclass_type` is Array[E].
+	# If you want Array[Object] the see `MClassDef::bound_mtype`
 	#
 	# For generic classes, the mclass_type is also the way to get a formal
 	# generic parameter type.
 	#
-	# To get other types based on a generic class, see `get_mtype'.
+	# To get other types based on a generic class, see `get_mtype`.
 	#
-	# ENSURE: mclass_type.mclass == self
+	# ENSURE: `mclass_type.mclass == self`
 	var mclass_type: MClassType
 
 	# Return a generic type based on the class
-	# Is the class is not generic, then the result is `mclass_type'
+	# Is the class is not generic, then the result is `mclass_type`
 	#
-	# REQUIRE: type_arguments.length == self.arity
+	# REQUIRE: `mtype_arguments.length == self.arity`
 	fun get_mtype(mtype_arguments: Array[MType]): MClassType
 	do
 		assert mtype_arguments.length == self.arity
@@ -403,26 +408,26 @@ end
 
 # A definition (an introduction or a refinement) of a class in a module
 #
-# A MClassDef is associated with an explicit (or almost) definition of a
-# class. Unlike MClass, a MClassDef is a local definition that belong to
+# A `MClassDef` is associated with an explicit (or almost) definition of a
+# class. Unlike `MClass`, a `MClassDef` is a local definition that belong to
 # a specific module
 class MClassDef
 	# The module where the definition is
 	var mmodule: MModule
 
-	# The associated MClass
+	# The associated `MClass`
 	var mclass: MClass
 
 	# The bounded type associated to the mclassdef
 	#
-	# For a non-generic class, `bound_mtype' and `mclass.mclass_type'
+	# For a non-generic class, `bound_mtype` and `mclass.mclass_type`
 	# are the same type.
 	#
 	# Example:
 	# For the classdef Array[E: Object], the bound_mtype is Array[Object].
-	# If you want Array[E], then see `mclass.mclass_type'
+	# If you want Array[E], then see `mclass.mclass_type`
 	#
-	# ENSURE: bound_mtype.mclass = self.mclass
+	# ENSURE: `bound_mtype.mclass == self.mclass`
 	var bound_mtype: MClassType
 
 	# Name of each formal generic parameter (in order of declaration)
@@ -433,7 +438,7 @@ class MClassDef
 
 	# Internal name combining the module and the class
 	# Example: "mymodule#MyClass"
-	redef fun to_s do return "{mmodule}#{mclass}"
+	redef var to_s: String
 
 	init(mmodule: MModule, bound_mtype: MClassType, location: Location, parameter_names: Array[String])
 	do
@@ -445,6 +450,7 @@ class MClassDef
 		mmodule.mclassdefs.add(self)
 		mclass.mclassdefs.add(self)
 		self.parameter_names = parameter_names
+		self.to_s = "{mmodule}#{mclass}"
 	end
 
 	# All declared super-types
@@ -454,7 +460,7 @@ class MClassDef
 	# Register some super-types for the class (ie "super SomeType")
 	#
 	# The hierarchy must not already be set
-	# REQUIRE: self.in_hierarchy == null
+	# REQUIRE: `self.in_hierarchy == null`
 	fun set_supertypes(supertypes: Array[MClassType])
 	do
 		assert unique_invocation: self.in_hierarchy == null
@@ -478,8 +484,8 @@ class MClassDef
 	# Collect the super-types (set by set_supertypes) to build the hierarchy
 	#
 	# This function can only invoked once by class
-	# REQUIRE: self.in_hierarchy == null
-	# ENSURE: self.in_hierarchy != null
+	# REQUIRE: `self.in_hierarchy == null`
+	# ENSURE: `self.in_hierarchy != null`
 	fun add_in_hierarchy
 	do
 		assert unique_invocation: self.in_hierarchy == null
@@ -495,7 +501,7 @@ class MClassDef
 		end
 	end
 
-	# The view of the class definition in `mclassdef_hierarchy'
+	# The view of the class definition in `mclassdef_hierarchy`
 	var in_hierarchy: nullable POSetElement[MClassDef] = null
 
 	# Is the definition the one that introduced `mclass`?
@@ -510,12 +516,12 @@ end
 
 # A global static type
 #
-# MType are global to the model; it means that a MType is not bound to a
+# MType are global to the model; it means that a `MType` is not bound to a
 # specific `MModule`.
 # This characteristic helps the reasoning about static types in a program
-# since a single MType object always denote the same type.
+# since a single `MType` object always denote the same type.
 #
-# However, because a MType is global, it does not really have properties
+# However, because a `MType` is global, it does not really have properties
 # nor have subtypes to a hierarchy since the property and the class hierarchy
 # depends of a module.
 # Moreover, virtual types an formal generic parameter types also depends on
@@ -527,29 +533,24 @@ end
 # The anchor is used to know what is the bound of the virtual types and formal
 # generic parameter types.
 #
-# MType are not directly usable to get properties. See the `anchor_to' method
-# and the `MClassType' class.
+# MType are not directly usable to get properties. See the `anchor_to` method
+# and the `MClassType` class.
 #
 # FIXME: the order of the parameters is not the best. We mus pick on from:
 #  * foo(mmodule, anchor, othertype)
 #  * foo(othertype, anchor, mmodule)
 #  * foo(anchor, mmodule, othertype)
 #  * foo(othertype, mmodule, anchor)
-#
-# FIXME: Add a 'is_valid_anchor' to improve imputability.
-# Currently, anchors are used "as it" without check thus if the caller gives a
-# bad anchor, then the method will likely crash (abort) in a bad case
-#
-# FIXME: maybe allways add an anchor with a nullable type (as in is_subtype)
 abstract class MType
 
 	# The model of the type
 	fun model: Model is abstract
 
-	# Return true if `self' is an subtype of `sup'.
+	# Return true if `self` is an subtype of `sup`.
 	# The typing is done using the standard typing policy of Nit.
 	#
-	# REQUIRE: anchor == null implies not self.need_anchor and not sup.need_anchor
+	# REQUIRE: `anchor == null implies not self.need_anchor and not sup.need_anchor`
+	# REQUIRE: `anchor != null implies self.can_resolve_for(anchor, null, mmodule) and sup.can_resolve_for(anchor, null, mmodule)`
 	fun is_subtype(mmodule: MModule, anchor: nullable MClassType, sup: MType): Bool
 	do
 		var sub = self
@@ -557,6 +558,9 @@ abstract class MType
 		if anchor == null then
 			assert not sub.need_anchor
 			assert not sup.need_anchor
+		else
+			assert sub.can_resolve_for(anchor, null, mmodule)
+			assert sup.can_resolve_for(anchor, null, mmodule)
 		end
 
 		# First, resolve the formal types to a common version in the receiver
@@ -652,34 +656,38 @@ abstract class MType
 	# types to their bounds.
 	#
 	# Example
+	#     class A end
+	#     class B super A end
+	#     class X end
+	#     class Y super X end
 	#     class G[T: A]
 	#       type U: X
 	#     end
 	#     class H
-	#       super G[C]
+	#       super G[B]
 	#       redef type U: Y
 	#     end
-	# Map[T,U]  anchor_to  H  #->  Map[C,Y]
+	# Map[T,U]  anchor_to  H  #->  Map[B,Y]
 	#
 	# Explanation of the example:
-	# In H, T is set to C, because "H super G[C]", and U is bound to Y,
+	# In H, T is set to B, because "H super G[B]", and U is bound to Y,
         # because "redef type U: Y". Therefore, Map[T, U] is bound to
-	# Map[C, Y]
+	# Map[B, Y]
 	#
-	# ENSURE: not self.need_anchor implies return == self
-	# ENSURE: not return.need_anchor
+	# ENSURE: `not self.need_anchor implies result == self`
+	# ENSURE: `not result.need_anchor`
 	fun anchor_to(mmodule: MModule, anchor: MClassType): MType
 	do
 		if not need_anchor then return self
 		assert not anchor.need_anchor
 		# Just resolve to the anchor and clear all the virtual types
-		var res = self.resolve_for(anchor, anchor, mmodule, true)
+		var res = self.resolve_for(anchor, null, mmodule, true)
 		assert not res.need_anchor
 		return res
 	end
 
-	# Does `self' contain a virtual type or a formal generic parameter type?
-	# In order to remove those types, you usually want to use `anchor_to'.
+	# Does `self` contain a virtual type or a formal generic parameter type?
+	# In order to remove those types, you usually want to use `anchor_to`.
 	fun need_anchor: Bool do return true
 
 	# Return the supertype when adapted to a class.
@@ -687,17 +695,24 @@ abstract class MType
 	# In Nit, for each super-class of a type, there is a equivalent super-type.
 	#
 	# Example:
-	#     class G[T, U]
-	#     class H[V] super G[V, Bool]
+	#     class G[T, U] end
+	#     class H[V] super G[V, Bool] end
 	# H[Int]  supertype_to  G  #->  G[Int, Bool]
 	#
-	# REQUIRE: `super_mclass' is a super-class of `self'
-	# ENSURE: return.mclass = mclass
-	fun supertype_to(mmodule: MModule, anchor: MClassType, super_mclass: MClass): MClassType
+	# REQUIRE: `super_mclass` is a super-class of `self`
+	# REQUIRE: `self.need_anchor implies anchor != null and self.can_resolve_for(anchor, null, mmodule)`
+	# ENSURE: `result.mclass = super_mclass`
+	fun supertype_to(mmodule: MModule, anchor: nullable MClassType, super_mclass: MClass): MClassType
 	do
 		if super_mclass.arity == 0 then return super_mclass.mclass_type
 		if self isa MClassType and self.mclass == super_mclass then return self
-		var resolved_self = self.anchor_to(mmodule, anchor)
+		var resolved_self
+		if self.need_anchor then
+			assert anchor != null
+			resolved_self = self.anchor_to(mmodule, anchor)
+		else
+			resolved_self = self
+		end
 		var supertypes = resolved_self.collect_mtypes(mmodule)
 		for supertype in supertypes do
 			if supertype.mclass == super_mclass then
@@ -708,46 +723,99 @@ abstract class MType
 		abort
 	end
 
-	# Replace formals generic types in self with resolved values in `mtype'
-	# If `cleanup_virtual' is true, then virtual types are also replaced
+	# Replace formals generic types in self with resolved values in `mtype`
+	# If `cleanup_virtual` is true, then virtual types are also replaced
 	# with their bounds
 	#
-	# This function returns self if `need_anchor' is false.
+	# This function returns self if `need_anchor` is false.
 	#
-	# Example:
-	#     class G[E]
-	#     class H[F] super G[F]
-	# Array[E]  resolve_for  H[Int]  #->  Array[Int]
+	# ## Example 1
+	#
+	#     class G[E] end
+	#     class H[F] super G[F] end
+	#     class X[Z] end
+	#
+	#  * Array[E].resolve_for(H[Int])  #->  Array[Int]
+	#  * Array[E].resolve_for(G[Z], X[Int]) #->  Array[Z]
 	#
 	# Explanation of the example:
-	#  * Array[E].need_anchor is true because there is a formal generic
-	#    parameter type E
-	#  * E makes sense for H[Int] because E is a formal parameter of G
-	#    and H specialize G
+	#  * Array[E].need_anchor is true because there is a formal generic parameter type E
+	#  * E makes sense for H[Int] because E is a formal parameter of G and H specialize G
 	#  * Since "H[F] super G[F]", E is in fact F for H
 	#  * More specifically, in H[Int], E is Int
 	#  * So, in H[Int], Array[E] is Array[Int]
 	#
 	# This function is mainly used to inherit a signature.
-	# Because, unlike `anchor_type', we do not want a full resolution of
+	# Because, unlike `anchor_to`, we do not want a full resolution of
 	# a type but only an adapted version of it.
 	#
-	# Example:
-        #     class A[E]
-	#         foo(e:E):E
+	# ## Example 2
+	#
+	#     class A[E]
+	#         fun foo(e:E):E is abstract
 	#     end
 	#     class B super A[Int] end
 	#
 	# The signature on foo is (e: E): E
 	# If we resolve the signature for B, we get (e:Int):Int
 	#
+	# ## Example 3
+	#
+	#     class A[E]
+	#         fun foo(e:E) is abstract
+	#     end
+	#     class B[F]
+	#         var a: A[Array[F]]
+	#         fun bar do a.foo(x) # <- x is here
+	#     end
+	#
+	# The first question is: is foo available on `a`?
+	#
+	# The static type of a is `A[Array[F]]`, that is an open type.
+	# in order to find a method `foo`, whe must look at a resolved type.
+	#
+	#   A[Array[F]].anchor_to(B[nullable Object])  #->  A[Array[nullable Object]]
+	#
+	# the method `foo` exists in `A[Array[nullable Object]]`, therefore `foo` exists for `a`.
+	#
+	# The next question is: what is the accepted types for `x`?
+	#
+	# the signature of `foo` is `foo(e:E)`, thus we must resolve the type E
+	#
+	#   E.resolve_for(A[Array[F]],B[nullable Object])  #->  Array[F]
+	#
+	# The resolution can be done because `E` make sense for the class A (see `can_resolve_for`)
+	#
 	# TODO: Explain the cleanup_virtual
 	#
-	# FIXME: the parameter `cleanup_virtual' is just a bad idea, but having
+	# FIXME: the parameter `cleanup_virtual` is just a bad idea, but having
 	# two function instead of one seems also to be a bad idea.
 	#
-	# ENSURE: not self.need_anchor implies return == self
-	fun resolve_for(mtype: MType, anchor: MClassType, mmodule: MModule, cleanup_virtual: Bool): MType is abstract
+	# REQUIRE: `can_resolve_for(mtype, anchor, mmodule)`
+	# ENSURE: `not self.need_anchor implies result == self`
+	fun resolve_for(mtype: MType, anchor: nullable MClassType, mmodule: MModule, cleanup_virtual: Bool): MType is abstract
+
+	# Can the type be resolved?
+	#
+	# In order to resolve open types, the formal types must make sence.
+	#
+	# ## Example
+	#
+	#     class A[E]
+	#     end
+	#     class B[F]
+	#     end
+	#
+	#  * E.can_resolve_for(A[Int])  #->  true, E make sense in A
+	#  * E.can_resolve_for(B[Int])  #->  false, E does not make sense in B
+	#  * B[E].can_resolve_for(A[F], B[Object])  #->  true,
+	#    B[E] is a red hearing only the E is important,
+	#    E make sense in A
+	#
+	# REQUIRE: `anchor != null implies not anchor.need_anchor`
+	# REQUIRE: `mtype.need_anchor implies anchor != null and mtype.can_resolve_for(anchor, null, mmodule)`
+	# ENSURE: `not self.need_anchor implies result == true`
+	fun can_resolve_for(mtype: MType, anchor: nullable MClassType, mmodule: MModule): Bool is abstract
 
 	# Return the nullable version of the type
 	# If the type is already nullable then self is returned
@@ -765,13 +833,26 @@ abstract class MType
 
 	# The deph of the type seen as a tree.
 	#
-	# A -> 1
-	# G[A] -> 2
-	# H[A, B] -> 2
-	# H[G[A], B] -> 3
+	# * A -> 1
+	# * G[A] -> 2
+	# * H[A, B] -> 2
+	# * H[G[A], B] -> 3
 	#
 	# Formal types have a depth of 1.
 	fun depth: Int
+	do
+		return 1
+	end
+
+	# The length of the type seen as a tree.
+	#
+	# * A -> 1
+	# * G[A] -> 2
+	# * H[A, B] -> 3
+	# * H[G[A], B] -> 4
+	#
+	# Formal types have a length of 1.
+	fun length: Int
 	do
 		return 1
 	end
@@ -783,26 +864,26 @@ abstract class MType
 	#
 	# This function is used mainly internally.
 	#
-	# REQUIRE: not self.need_anchor
+	# REQUIRE: `not self.need_anchor`
 	fun collect_mclassdefs(mmodule: MModule): Set[MClassDef] is abstract
 
 	# Compute all the super-classes.
 	# This function is used mainly internally.
 	#
-	# REQUIRE: not self.need_anchor
+	# REQUIRE: `not self.need_anchor`
 	fun collect_mclasses(mmodule: MModule): Set[MClass] is abstract
 
 	# Compute all the declared super-types.
 	# Super-types are returned as declared in the classdefs (verbatim).
 	# This function is used mainly internally.
 	#
-	# REQUIRE: not self.need_anchor
+	# REQUIRE: `not self.need_anchor`
 	fun collect_mtypes(mmodule: MModule): Set[MClassType] is abstract
 
 	# Is the property in self for a given module
 	# This method does not filter visibility or whatever
 	#
-	# REQUIRE: not self.need_anchor
+	# REQUIRE: `not self.need_anchor`
 	fun has_mproperty(mmodule: MModule, mproperty: MProperty): Bool
 	do
 		assert not self.need_anchor
@@ -812,7 +893,7 @@ end
 
 # A type based on a class.
 #
-# MClassType have properties (see `has_property').
+# `MClassType` have properties (see `has_mproperty`).
 class MClassType
 	super MType
 
@@ -827,7 +908,7 @@ class MClassType
 	end
 
 	# The formal arguments of the type
-	# ENSURE: return.length == self.mclass.arity
+	# ENSURE: `result.length == self.mclass.arity`
 	var arguments: Array[MType] = new Array[MType]
 
 	redef fun to_s do return mclass.to_s
@@ -839,7 +920,9 @@ class MClassType
 		return super.as(MClassType)
 	end
 
-	redef fun resolve_for(mtype: MType, anchor: MClassType, mmodule: MModule, cleanup_virtual: Bool): MClassType do return self
+	redef fun resolve_for(mtype: MType, anchor: nullable MClassType, mmodule: MModule, cleanup_virtual: Bool): MClassType do return self
+
+	redef fun can_resolve_for(mtype, anchor, mmodule) do return true
 
 	redef fun collect_mclassdefs(mmodule)
 	do
@@ -871,7 +954,7 @@ class MClassType
 		return cache[mmodule]
 	end
 
-	# common implementation for `collect_mclassdefs', `collect_mclasses', and `collect_mtypes'.
+	# common implementation for `collect_mclassdefs`, `collect_mclasses`, and `collect_mtypes`.
 	private fun collect_things(mmodule: MModule)
 	do
 		var res = new HashSet[MClassDef]
@@ -925,26 +1008,36 @@ class MGenericType
 				break
 			end
 		end
+
+		self.to_s = "{mclass}[{arguments.join(", ")}]"
 	end
 
 	# Recursively print the type of the arguments within brackets.
-	# Example: "Map[String, List[Int]]"
-	redef fun to_s
-	do
-		return "{mclass}[{arguments.join(", ")}]"
-	end
+	# Example: `"Map[String, List[Int]]"`
+	redef var to_s: String
 
 	redef var need_anchor: Bool
 
 	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual)
 	do
 		if not need_anchor then return self
+		assert can_resolve_for(mtype, anchor, mmodule)
 		var types = new Array[MType]
 		for t in arguments do
 			types.add(t.resolve_for(mtype, anchor, mmodule, cleanup_virtual))
 		end
 		return mclass.get_mtype(types)
 	end
+
+	redef fun can_resolve_for(mtype, anchor, mmodule)
+	do
+		if not need_anchor then return true
+		for t in arguments do
+			if not t.can_resolve_for(mtype, anchor, mmodule) then return false
+		end
+		return true
+	end
+
 
 	redef fun depth
 	do
@@ -954,6 +1047,15 @@ class MGenericType
 			if d > dmax then dmax = d
 		end
 		return dmax + 1
+	end
+
+	redef fun length
+	do
+		var res = 1
+		for a in self.arguments do
+			res += a.length
+		end
+		return res
 	end
 end
 
@@ -994,11 +1096,18 @@ class MVirtualType
 
 	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual)
 	do
+		assert can_resolve_for(mtype, anchor, mmodule)
 		# self is a virtual type declared (or inherited) in mtype
 		# The point of the function it to get the bound of the virtual type that make sense for mtype
 		# But because mtype is maybe a virtual/formal type, we need to get a real receiver first
 		#print "{class_name}: {self}/{mtype}/{anchor}?"
-		var resolved_reciever = mtype.resolve_for(anchor, anchor, mmodule, true)
+		var resolved_reciever
+		if mtype.need_anchor then
+			assert anchor != null
+			resolved_reciever = mtype.resolve_for(anchor, null, mmodule, true)
+		else
+			resolved_reciever = mtype
+		end
 		# Now, we can get the bound
 		var verbatim_bound = lookup_bound(mmodule, resolved_reciever)
 		# The bound is exactly as declared in the "type" property, so we must resolve it again
@@ -1021,6 +1130,15 @@ class MVirtualType
 
 		# If anything apply, then `self' cannot be resolved, so return self
 		return self
+	end
+
+	redef fun can_resolve_for(mtype, anchor, mmodule)
+	do
+		if mtype.need_anchor then
+			assert anchor != null
+			mtype = mtype.anchor_to(mmodule, anchor)
+		end
+		return mtype.has_mproperty(mmodule, mproperty)
 	end
 
 	redef fun to_s do return self.mproperty.to_s
@@ -1049,13 +1167,13 @@ end
 #     class B[F]
 #         super A[Array[F]]
 #     end
-# In the class definition B[F], `F' is a valid type but `E' is not.
-# However, `self.e' is a valid method call, and the signature of `e' is
-# declared `e: E'.
+# In the class definition B[F], `F` is a valid type but `E` is not.
+# However, `self.e` is a valid method call, and the signature of `e` is
+# declared `e: E`.
 #
 # Note that parameter types are shared among class refinements.
-# Therefore parameter only have an internal name (see `to_s' for details).
-# TODO: Add a 'name_for' to get better messages.
+# Therefore parameter only have an internal name (see `to_s` for details).
+# TODO: Add a `name_for` to get better messages.
 class MParameterType
 	super MType
 
@@ -1065,7 +1183,7 @@ class MParameterType
 	redef fun model do return self.mclass.intro_mmodule.model
 
 	# The position of the parameter (0 for the first parameter)
-	# FIXME: is `position' a better name?
+	# FIXME: is `position` a better name?
 	var rank: Int
 
 	# Internal name of the parameter type
@@ -1095,6 +1213,7 @@ class MParameterType
 
 	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual)
 	do
+		assert can_resolve_for(mtype, anchor, mmodule)
 		#print "{class_name}: {self}/{mtype}/{anchor}?"
 
 		if mtype isa MGenericType and mtype.mclass == self.mclass then
@@ -1105,14 +1224,20 @@ class MParameterType
 		# The point of the function it to get the bound of the virtual type that make sense for mtype
 		# But because mtype is maybe a virtual/formal type, we need to get a real receiver first
 		# FIXME: What happend here is far from clear. Thus this part must be validated and clarified
-		var resolved_receiver = mtype.resolve_for(anchor.mclass.mclass_type, anchor, mmodule, true)
+		var resolved_receiver
+		if mtype.need_anchor then
+			assert anchor != null
+			resolved_receiver = mtype.resolve_for(anchor.mclass.mclass_type, anchor, mmodule, true)
+		else
+			resolved_receiver = mtype
+		end
 		if resolved_receiver isa MNullableType then resolved_receiver = resolved_receiver.mtype
 		if resolved_receiver isa MParameterType then
 			assert resolved_receiver.mclass == anchor.mclass
 			resolved_receiver = anchor.arguments[resolved_receiver.rank]
 			if resolved_receiver isa MNullableType then resolved_receiver = resolved_receiver.mtype
 		end
-		assert resolved_receiver isa MClassType else print "{class_name}: {self}/{mtype}/{anchor}? {resolved_receiver}"
+		assert resolved_receiver isa MClassType
 
 		# Eh! The parameter is in the current class.
 		# So we return the corresponding argument, no mater what!
@@ -1122,7 +1247,10 @@ class MParameterType
 			return res
 		end
 
-		resolved_receiver = resolved_receiver.resolve_for(anchor, anchor, mmodule, false)
+		if resolved_receiver.need_anchor then
+			assert anchor != null
+			resolved_receiver = resolved_receiver.resolve_for(anchor, null, mmodule, false)
+		end
 		# Now, we can get the bound
 		var verbatim_bound = lookup_bound(mmodule, resolved_receiver)
 		# The bound is exactly as declared in the "type" property, so we must resolve it again
@@ -1131,6 +1259,15 @@ class MParameterType
 		#print "{class_name}: {self}/{mtype}/{anchor} -> indirect {res}"
 
 		return res
+	end
+
+	redef fun can_resolve_for(mtype, anchor, mmodule)
+	do
+		if mtype.need_anchor then
+			assert anchor != null
+			mtype = mtype.anchor_to(mmodule, anchor)
+		end
+		return mtype.collect_mclassdefs(mmodule).has(mclass.intro)
 	end
 
 	init(mclass: MClass, rank: Int)
@@ -1152,9 +1289,10 @@ class MNullableType
 	init(mtype: MType)
 	do
 		self.mtype = mtype
+		self.to_s = "nullable {mtype}"
 	end
 
-	redef fun to_s do return "nullable {mtype}"
+	redef var to_s: String
 
 	redef fun need_anchor do return mtype.need_anchor
 	redef fun as_nullable do return self
@@ -1164,7 +1302,14 @@ class MNullableType
 		return res.as_nullable
 	end
 
+	redef fun can_resolve_for(mtype, anchor, mmodule)
+	do
+		return self.mtype.can_resolve_for(mtype, anchor, mmodule)
+	end
+
 	redef fun depth do return self.mtype.depth
+
+	redef fun length do return self.mtype.length
 
 	redef fun collect_mclassdefs(mmodule)
 	do
@@ -1187,7 +1332,7 @@ end
 
 # The type of the only value null
 #
-# The is only one null type per model, see `MModel::null_type'.
+# The is only one null type per model, see `MModel::null_type`.
 class MNullType
 	super MType
 	redef var model: Model
@@ -1199,6 +1344,7 @@ class MNullType
 	redef fun as_nullable do return self
 	redef fun need_anchor do return false
 	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual) do return self
+	redef fun can_resolve_for(mtype, anchor, mmodule) do return true
 
 	redef fun collect_mclassdefs(mmodule) do return new HashSet[MClassDef]
 
@@ -1235,6 +1381,20 @@ class MSignature
 		return dmax + 1
 	end
 
+	redef fun length
+	do
+		var res = 1
+		var t = self.return_mtype
+		if t != null then res += t.length
+		for p in mparameters do
+			res += p.mtype.length
+		end
+		for p in mclosures do
+			res += p.mtype.length
+		end
+		return res
+	end
+
 	# REQUIRE: 1 <= mparameters.count p -> p.is_vararg
 	init(mparameters: Array[MParameter], return_mtype: nullable MType)
 	do
@@ -1251,7 +1411,7 @@ class MSignature
 		self.vararg_rank = vararg_rank
 	end
 
-	# The rank of the ellipsis (...) for vararg (starting from 0).
+	# The rank of the ellipsis (`...`) for vararg (starting from 0).
 	# value is -1 if there is no vararg.
 	# Example: for "(a: Int, b: Bool..., c: Char)" #-> vararg_rank=1
 	var vararg_rank: Int
@@ -1284,7 +1444,7 @@ class MSignature
 		return b.to_s
 	end
 
-	redef fun resolve_for(mtype: MType, anchor: MClassType, mmodule: MModule, cleanup_virtual: Bool): MSignature
+	redef fun resolve_for(mtype: MType, anchor: nullable MClassType, mmodule: MModule, cleanup_virtual: Bool): MSignature
 	do
 		var params = new Array[MParameter]
 		for p in self.mparameters do
@@ -1313,7 +1473,7 @@ class MParameter
 	# Is the parameter a vararg?
 	var is_vararg: Bool
 
-	fun resolve_for(mtype: MType, anchor: MClassType, mmodule: MModule, cleanup_virtual: Bool): MParameter
+	fun resolve_for(mtype: MType, anchor: nullable MClassType, mmodule: MModule, cleanup_virtual: Bool): MParameter
 	do
 		if not self.mtype.need_anchor then return self
 		var newtype = self.mtype.resolve_for(mtype, anchor, mmodule, cleanup_virtual)
@@ -1324,15 +1484,15 @@ end
 
 # A service (global property) that generalize method, attribute, etc.
 #
-# MProperty are global to the model; it means that a MProperty is not bound
+# `MProperty` are global to the model; it means that a `MProperty` is not bound
 # to a specific `MModule` nor a specific `MClass`.
 #
-# A MProperty gather definitions (see `mpropdefs') ; one for the introduction
+# A MProperty gather definitions (see `mpropdefs`) ; one for the introduction
 # and the other in subclasses and in refinements.
 #
-# A MProperty is used to denotes services in polymorphic way (ie. independent
+# A `MProperty` is used to denotes services in polymorphic way (ie. independent
 # of any dynamic type).
-# For instance, a call site "x.foo" is associated to a MProperty.
+# For instance, a call site "x.foo" is associated to a `MProperty`.
 abstract class MProperty
 	# The associated MPropDef subclass.
 	# The two specialization hierarchy are symmetric.
@@ -1373,12 +1533,12 @@ abstract class MProperty
 	var mpropdefs: Array[MPROPDEF] = new Array[MPROPDEF]
 
 	# The definition that introduced the property
-	# Warning: the introduction is the first `MPropDef' object
+	# Warning: the introduction is the first `MPropDef` object
 	# associated to self. If self is just created without having any
 	# associated definition, this method will abort
 	fun intro: MPROPDEF do return mpropdefs.first
 
-	# Alias for `name'
+	# Alias for `name`
 	redef fun to_s do return name
 
 	# Return the most specific property definitions defined or inherited by a type.
@@ -1455,7 +1615,7 @@ abstract class MProperty
 	#
 	# If you want the really most specific property, then look at `lookup_next_definition`
 	#
-	# FIXME: Move to MPropDef?
+	# FIXME: Move to `MPropDef`?
 	fun lookup_super_definitions(mmodule: MModule, mtype: MType): Array[MPropDef]
 	do
 		assert not mtype.need_anchor
@@ -1516,10 +1676,11 @@ abstract class MProperty
 	#
 	# FIXME: the linearisation is still unspecified
 	#
-	# REQUIRE: not mtype.need_anchor
-	# REQUIRE: mtype.has_mproperty(mmodule, self)
+	# REQUIRE: `not mtype.need_anchor`
+	# REQUIRE: `mtype.has_mproperty(mmodule, self)`
 	fun lookup_first_definition(mmodule: MModule, mtype: MType): MPROPDEF
 	do
+		assert mtype.has_mproperty(mmodule, self)
 		return lookup_all_definitions(mmodule, mtype).first
 	end
 
@@ -1572,7 +1733,7 @@ class MMethod
 
 	# Is the property a constructor?
 	# Warning, this property can be inherited by subclasses with or without being a constructor
-	# therefore, you should use `is_init_for' the verify if the property is a legal constructor for a given class
+	# therefore, you should use `is_init_for` the verify if the property is a legal constructor for a given class
 	var is_init: Bool writable = false
 
 	# The the property a 'new' contructor?
@@ -1616,11 +1777,11 @@ end
 
 # A definition of a property (local property)
 #
-# Unlike MProperty, a MPropDef is a local definition that belong to a
+# Unlike `MProperty`, a `MPropDef` is a local definition that belong to a
 # specific class definition (which belong to a specific module)
 abstract class MPropDef
 
-	# The associated MProperty subclass.
+	# The associated `MProperty` subclass.
 	# the two specialization hierarchy are symmetric
 	type MPROPERTY: MProperty
 
@@ -1643,14 +1804,12 @@ abstract class MPropDef
 		self.location = location
 		mclassdef.mpropdefs.add(self)
 		mproperty.mpropdefs.add(self)
+		self.to_s = "{mclassdef}#{mproperty}"
 	end
 
 	# Internal name combining the module, the class and the property
 	# Example: "mymodule#MyClass#mymethod"
-	redef fun to_s
-	do
-		return "{mclassdef}#{mproperty}"
-	end
+	redef var to_s: String
 
 	# Is self the definition that introduce the property?
 	fun is_intro: Bool do return mproperty.intro == self
@@ -1659,7 +1818,7 @@ abstract class MPropDef
 	#
 	# This method is used to determine what method is called by a super.
 	#
-	# REQUIRE: not mtype.need_anchor
+	# REQUIRE: `not mtype.need_anchor`
 	fun lookup_next_definition(mmodule: MModule, mtype: MType): MPROPDEF
 	do
 		assert not mtype.need_anchor
@@ -1688,6 +1847,9 @@ class MMethodDef
 
 	# The signature attached to the property definition
 	var msignature: nullable MSignature writable = null
+
+	# The the method definition abstract?
+	var is_abstract: Bool writable = false
 end
 
 # A local definition of an attribute
@@ -1724,11 +1886,11 @@ end
 
 # A kind of class.
 #
-#  * abstract_kind
-#  * concrete_kind
-#  * interface_kind
-#  * enum_kind
-#  * extern_kind
+#  * `abstract_kind`
+#  * `concrete_kind`
+#  * `interface_kind`
+#  * `enum_kind`
+#  * `extern_kind`
 #
 # Note this class is basically an enum.
 # FIXME: use a real enum once user-defined enums are available

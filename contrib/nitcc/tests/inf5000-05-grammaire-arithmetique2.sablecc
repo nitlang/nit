@@ -1,0 +1,17 @@
+Grammar arithmetique;
+Lexer
+int = ('0'..'9')+;
+blank = ' ' | #9 | #10 | #13;
+
+Parser
+Ignored blank;
+
+exps = exp*;
+
+exp = {add:} exp '+' factor |
+      {min:} exp '-' factor |
+      {factor:} factor ;
+factor = {mul:} factor '*' term |
+         {term:} term ;
+term = {int:} int |
+       {par:} '(' exp ')' ;

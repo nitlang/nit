@@ -13,15 +13,16 @@
 
 # Standard classes and methods used by default by Nit programs and libraries.
 # This module is implicitly imported by every module.
-package standard
+module standard
 
+import posix
+import ropes
 import environ 
 import time
 import string_search
 import file
 import exec
 import stream
-import hash
 import string
 import collection
 import math

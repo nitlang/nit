@@ -21,10 +21,6 @@ class CircularList[E]
 	# Like standard Array or LinkedList, CircularList is a Sequence.
 	super Sequence[E]
 
-	# NaiveCollection contains working (but inefficient) implementation of
-	# the methods of Collection.
-	super NaiveCollection[E]
-	
 	# The first node of the list if any
 	# The special case of an empty list is handled by a null node
 	private var node: nullable CLNode[E] = null

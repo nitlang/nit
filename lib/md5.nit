@@ -492,7 +492,7 @@ in "C Header" `{
 redef class String
 	# returns the md5 digest of the receiver string
 	# algorithm implemented by L. Peter Deutsch <ghost@aladdin.com>
-	fun md5: String import String::to_cstring, String::from_cstring, String::print `{
+	fun md5: String import String::to_cstring, NativeString::to_s, String::print `{
 		md5_state_t state;
 		md5_byte_t digest[16]; /* result */
 		char *hex_output = malloc(33*sizeof(char));
@@ -509,6 +509,6 @@ redef class String
 			sprintf(hex_output + di * 2, "%02x", digest[di]);
 		hex_output[32] = '\0';
 
-		return new_String_from_cstring(hex_output);
+		return NativeString_to_s(hex_output);
 	`}
 end

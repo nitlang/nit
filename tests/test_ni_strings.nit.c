@@ -18,23 +18,23 @@
 C implementation of test_ni_strings::A::get_str_from_nstr
 
 Imported methods signatures:
-	String new_String_from_cstring( char * str ) for string::String::from_cstring
+	String NativeString_to_s( char * str ) for string::NativeString::to_s
 */
 String A_get_str_from_nstr___impl( A recv, char * nstr )
 {
-	return new_String_from_cstring( nstr );
+	return NativeString_to_s( nstr );
 }
 
 /*
 C implementation of test_ni_strings::A::get_str_from_nstr_with_len
 
 Imported methods signatures:
-	String new_String_with_native( char * nat, bigint size ) for string::String::with_native
+	String NativeString_to_s_with_length( char * nat, bigint size ) for string::NativeString::to_s_with_length
 	bigint NativeString_cstring_length( char * recv ) for string::NativeString::cstring_length
 */
 String A_get_str_from_nstr_with_len___impl( A recv, char * nstr )
 {
-	return new_String_with_native( nstr, NativeString_cstring_length( nstr ) );
+	return NativeString_to_s_with_length( nstr, NativeString_cstring_length( nstr ) );
 }
 
 /*
@@ -53,9 +53,9 @@ char * A_get_nstr_from_str___impl( A recv, String str )
 C implementation of test_ni_strings::A::get_something
 
 Imported methods signatures:
-	String new_String_from_cstring( char * str ) for string::String::from_cstring
+	String NativeString_to_s( char * str ) for string::NativeString::to_s
 */
 String A_get_something___impl( A recv )
 {
-	return new_String_from_cstring( "something" );
+	return NativeString_to_s( "something" );
 }

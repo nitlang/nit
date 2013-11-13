@@ -1,0 +1,13 @@
+Grammar grammaire;
+Lexer
+id = ('a'..'z')+;
+altid = '{' id ':}';
+str = '\'' (Any* - '\'') '\'';
+blank = ' ' | #9 | #10 | #13;
+
+Parser
+Ignored blank;
+prods = prod+;
+prod = id '=' (alt Separator '|')+ ';' ;
+alt = altid? atom* ;
+atom = {id:} id | {str:} str ;

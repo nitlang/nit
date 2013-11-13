@@ -17,7 +17,7 @@
 import kernel
 
 class Gen1[E, F]
-	super Object
+
    readable writable var _e: E
    var _f_: F
    fun f: F do return _f_ end 

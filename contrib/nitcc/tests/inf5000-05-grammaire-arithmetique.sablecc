@@ -1,0 +1,18 @@
+Grammar arithmetique;
+Lexer
+int = ('0'..'9')+;
+blank = ' ' | #9 | #10 | #13;
+
+Parser
+Ignored blank;
+
+exps = exp*;
+
+exp = {add:} exp '+' exp |
+      {min:} exp '-' exp |
+      {mul:} exp '*' exp |
+      {int:} int |
+      {par:} '(' exp ')' ;
+//alt1   Precedence
+//alt1      Left mul;
+//alt1      Left add, min;

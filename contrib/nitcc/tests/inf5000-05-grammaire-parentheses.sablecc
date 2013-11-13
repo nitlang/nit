@@ -1,0 +1,9 @@
+Grammar parentheses;
+Lexer
+blank = ' ' | #9 | #10 | #13;
+
+Parser
+Ignored blank;
+
+par = {item:} '(' par ')' |
+      {empty:} '(' ')' ;

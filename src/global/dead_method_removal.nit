@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # This module introduces an algorithm to remove the body of dead methods
-package dead_method_removal
+module dead_method_removal
 
 import reachable_method_analysis
 

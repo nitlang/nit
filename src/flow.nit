@@ -52,24 +52,22 @@ private class FlowVisitor
 
 	redef fun visit(node)
 	do
-		if node != null then
-			if first == null then first = node
+		if first == null then first = node
 
-			if current_flow_context.node == null then current_flow_context.node = node
-			node.accept_flow_visitor(self)
-			if node isa AExpr then
-				var flow = self.current_flow_context
-				node.after_flow_context = flow
-				# Force the creation of a specific merge after the analysis of the node.
-				if flow.when_true != flow or flow.when_false != flow then
-					self.make_sub_flow
-					self.current_flow_context.name = "AUTOSUB"
-				end
+		if current_flow_context.node == null then current_flow_context.node = node
+		node.accept_flow_visitor(self)
+		if node isa AExpr then
+			var flow = self.current_flow_context
+			node.after_flow_context = flow
+			# Force the creation of a specific merge after the analysis of the node.
+			if flow.when_true != flow or flow.when_false != flow then
+				self.make_sub_flow
+				self.current_flow_context.name = "AUTOSUB"
 			end
+		end
 
-			if first == node then
-				#self.printflow
-			end
+		if first == node then
+			#self.printflow
 		end
 	end
 
@@ -189,13 +187,13 @@ private class FlowVisitor
 end
 
 # A Node in the static flow graph.
-# A same FlowContext can be shared by more than one ANode.
+# A same `FlowContext` can be shared by more than one `ANode`.
 class FlowContext
 	# The reachable previous flow
 	var previous: Array[FlowContext] = new Array[FlowContext]
 
 	# Additional reachable flow that loop up to self.
-	# Loops apears in 'loop', 'while', 'for', closure and with 'continue'
+	# Loops apears in `loop`, `while`, `for`, closure and with `continue`
 	var loops: Array[FlowContext] = new Array[FlowContext]
 
 	private var is_marked_unreachable: Bool = false
@@ -481,6 +479,21 @@ redef class AOrExpr
 		var after_expr2 = v.visit_expr(self.n_expr2)
 
 		var merge_true = v.make_merge_flow(after_expr.when_true, after_expr2.when_true)
+		merge_true.name = "OR TRUE"
+
+		v.make_true_false_flow(merge_true, after_expr2.when_false)
+	end
+end
+
+redef class AImpliesExpr
+	redef fun accept_flow_visitor(v)
+	do
+		var after_expr = v.visit_expr(self.n_expr)
+
+		v.current_flow_context = after_expr.when_true
+		var after_expr2 = v.visit_expr(self.n_expr2)
+
+		var merge_true = v.make_merge_flow(after_expr.when_false, after_expr2.when_true)
 		merge_true.name = "OR TRUE"
 
 		v.make_true_false_flow(merge_true, after_expr2.when_false)

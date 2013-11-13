@@ -20,6 +20,7 @@ module abstract_compiler
 import literal
 import typing
 import auto_super_init
+import frontend
 
 # Add compiling options
 redef class ToolContext
@@ -31,6 +32,8 @@ redef class ToolContext
 	var opt_cc_path: OptionArray = new OptionArray("Set include path for C header files (may be used more than once)", "--cc-path")
 	# --make-flags
 	var opt_make_flags: OptionString = new OptionString("Additional options to make", "--make-flags")
+	# --compile-dir
+	var opt_compile_dir: OptionString = new OptionString("Directory used to generate temporary files", "--compile-dir")
 	# --hardening
 	var opt_hardening: OptionBool = new OptionBool("Generate contracts in the C code against bugs in the compiler", "--hardening")
 	# --no-shortcut-range
@@ -51,7 +54,7 @@ redef class ToolContext
 	redef init
 	do
 		super
-		self.option_context.add_option(self.opt_output, self.opt_no_cc, self.opt_make_flags, self.opt_hardening, self.opt_no_shortcut_range)
+		self.option_context.add_option(self.opt_output, self.opt_no_cc, self.opt_make_flags, self.opt_compile_dir, self.opt_hardening, self.opt_no_shortcut_range)
 		self.option_context.add_option(self.opt_no_check_covariance, self.opt_no_check_initialization, self.opt_no_check_assert, self.opt_no_check_autocast, self.opt_no_check_other)
 		self.option_context.add_option(self.opt_typing_test_metrics)
 	end
@@ -104,15 +107,20 @@ redef class ModelBuilder
 		var time0 = get_time
 		self.toolcontext.info("*** WRITING C ***", 1)
 
-		".nit_compile".mkdir
+		var compile_dir = toolcontext.opt_compile_dir.value
+		if compile_dir == null then compile_dir = ".nit_compile"
+
+		compile_dir.mkdir
+		var orig_dir=".." # FIXME only works if `compile_dir` is a subdirectory of cwd
 
 		var outname = self.toolcontext.opt_output.value
 		if outname == null then
 			outname = "{mainmodule.name}"
 		end
+		var outpath = orig_dir.join_path(outname).simplify_path
 
 		var hfilename = compiler.header.file.name + ".h"
-		var hfilepath = ".nit_compile/{hfilename}"
+		var hfilepath = "{compile_dir}/{hfilename}"
 		var h = new OFStream.open(hfilepath)
 		for l in compiler.header.decl_lines do
 			h.write l
@@ -130,8 +138,9 @@ redef class ModelBuilder
 			var i = 0
 			var hfile: nullable OFStream = null
 			var count = 0
-			var cfilename = ".nit_compile/{f.name}.0.h"
-			hfile = new OFStream.open(cfilename)
+			var cfilename = "{f.name}.0.h"
+			var cfilepath = "{compile_dir}/{cfilename}"
+			hfile = new OFStream.open(cfilepath)
 			hfile.write "#include \"{hfilename}\"\n"
 			for key in f.required_declarations do
 				if not compiler.provided_declarations.has_key(key) then
@@ -151,10 +160,11 @@ redef class ModelBuilder
 				if file == null or count > 10000  then
 					i += 1
 					if file != null then file.close
-					cfilename = ".nit_compile/{f.name}.{i}.c"
-					self.toolcontext.info("new C source files to compile: {cfilename}", 3)
+					cfilename = "{f.name}.{i}.c"
+					cfilepath = "{compile_dir}/{cfilename}"
+					self.toolcontext.info("new C source files to compile: {cfilepath}", 3)
 					cfiles.add(cfilename)
-					file = new OFStream.open(cfilename)
+					file = new OFStream.open(cfilepath)
 					file.write "#include \"{f.name}.0.h\"\n"
 					count = total_lines
 				end
@@ -174,16 +184,17 @@ redef class ModelBuilder
 
 		# Generate the Makefile
 
-		var makename = ".nit_compile/{mainmodule.name}.mk"
-		var makefile = new OFStream.open(makename)
+		var makename = "{mainmodule.name}.mk"
+		var makepath = "{compile_dir}/{makename}"
+		var makefile = new OFStream.open(makepath)
 
 		var cc_includes = ""
 		for p in cc_paths do
-			#p = "..".join_path(p)
+			p = orig_dir.join_path(p).simplify_path
 			cc_includes += " -I \"" + p + "\""
 		end
 		makefile.write("CC = ccache cc\nCFLAGS = -g -O2\nCINCL = {cc_includes}\nLDFLAGS ?= \nLDLIBS  ?= -lm -lgc\n\n")
-		makefile.write("all: {outname}\n\n")
+		makefile.write("all: {outpath}\n\n")
 
 		var ofiles = new Array[String]
 		# Compile each generated file
@@ -200,17 +211,18 @@ redef class ModelBuilder
 		# Compile each required extern body into a specific .o
 		for f in compiler.extern_bodies do
 			var basename = f.filename.basename(".c")
-			var o = ".nit_compile/{basename}.extern.o"
-			makefile.write("{o}: {f.filename}\n\t$(CC) $(CFLAGS) -D NONITCNI {f.cflags} -c -o {o} {f.filename}\n\n")
+			var o = "{basename}.extern.o"
+			var ff = orig_dir.join_path(f.filename).simplify_path
+			makefile.write("{o}: {ff}\n\t$(CC) $(CFLAGS) -D NONITCNI {f.cflags} -c -o {o} {ff}\n\n")
 			ofiles.add(o)
 		end
 
 		# Link edition
-		makefile.write("{outname}: {ofiles.join(" ")}\n\t$(CC) $(LDFLAGS) -o {outname} {ofiles.join(" ")} $(LDLIBS)\n\n")
+		makefile.write("{outpath}: {ofiles.join(" ")}\n\t$(CC) $(LDFLAGS) -o {outpath} {ofiles.join(" ")} $(LDLIBS)\n\n")
 		# Clean
 		makefile.write("clean:\n\trm {ofiles.join(" ")} 2>/dev/null\n\n")
 		makefile.close
-		self.toolcontext.info("Generated makefile: {makename}", 2)
+		self.toolcontext.info("Generated makefile: {makepath}", 2)
 
 		var time1 = get_time
 		self.toolcontext.info("*** END WRITING C: {time1-time0} ***", 2)
@@ -223,13 +235,13 @@ redef class ModelBuilder
 		self.toolcontext.info("*** COMPILING C ***", 1)
 		var makeflags = self.toolcontext.opt_make_flags.value
 		if makeflags == null then makeflags = ""
-		self.toolcontext.info("make -B -f {makename} -j 4 {makeflags}", 2)
+		self.toolcontext.info("make -B -C {compile_dir} -f {makename} -j 4 {makeflags}", 2)
 
 		var res
 		if self.toolcontext.verbose_level >= 3 then
-			res = sys.system("make -B -f {makename} -j 4 {makeflags} 2>&1")
+			res = sys.system("make -B -C {compile_dir} -f {makename} -j 4 {makeflags} 2>&1")
 		else
-			res = sys.system("make -B -f {makename} -j 4 {makeflags} 2>&1 >/dev/null")
+			res = sys.system("make -B -C {compile_dir} -f {makename} -j 4 {makeflags} 2>&1 >/dev/null")
 		end
 		if res != 0 then
 			toolcontext.error(null, "make failed! Error code: {res}.")
@@ -344,11 +356,11 @@ abstract class AbstractCompiler
 			var mainmodule = v.compiler.mainmodule
 			var glob_sys = v.init_instance(main_type)
 			v.add("glob_sys = {glob_sys};")
-			var main_init = mainmodule.try_get_primitive_method("init", main_type)
+			var main_init = mainmodule.try_get_primitive_method("init", main_type.mclass)
 			if main_init != null then
 				v.send(main_init, [glob_sys])
 			end
-			var main_method = mainmodule.try_get_primitive_method("main", main_type)
+			var main_method = mainmodule.try_get_primitive_method("main", main_type.mclass)
 			if main_method != null then
 				v.send(main_method, [glob_sys])
 			end
@@ -440,8 +452,8 @@ abstract class AbstractCompiler
 
 	# Display stats about compilation process
 	# Metrics used:
-	#	* type tests against resolved types (x isa Collection[Animal])
-	#	* type tests against unresolved types (x isa Collection[E])
+	#	* type tests against resolved types (`x isa Collection[Animal]`)
+	#	* type tests against unresolved types (`x isa Collection[E]`)
 	#	* type tests skipped
 	#	* type tests total
 	# 	*
@@ -524,7 +536,7 @@ abstract class AbstractCompilerVisitor
 	# The current visited AST node
 	var current_node: nullable ANode writable = null
 
-	# The current Frame
+	# The current `Frame`
 	var frame: nullable Frame writable
 
 	# Alias for self.compiler.mainmodule.object_type
@@ -541,13 +553,14 @@ abstract class AbstractCompilerVisitor
 		self.writer = new CodeWriter(compiler.files.last)
 	end
 
-	# Force to get the primitive class named `name' or abort
+	# Force to get the primitive class named `name` or abort
 	fun get_class(name: String): MClass do return self.compiler.mainmodule.get_primitive_class(name)
 
-	# Force to get the primitive property named `name' in the instance `recv' or abort
+	# Force to get the primitive property named `name` in the instance `recv` or abort
 	fun get_property(name: String, recv: MType): MMethod
 	do
-		return self.compiler.modelbuilder.force_get_primitive_method(self.current_node.as(not null), name, recv, self.compiler.mainmodule)
+		assert recv isa MClassType
+		return self.compiler.modelbuilder.force_get_primitive_method(self.current_node.as(not null), name, recv.mclass, self.compiler.mainmodule)
 	end
 
 	fun compile_callsite(callsite: CallSite, args: Array[RuntimeVariable]): nullable RuntimeVariable
@@ -559,7 +572,7 @@ abstract class AbstractCompilerVisitor
 
 	fun native_array_def(pname: String, ret_type: nullable MType, arguments: Array[RuntimeVariable]) is abstract
 
-	# Transform varargs, in raw arguments, into a single argument of type Array
+	# Transform varargs, in raw arguments, into a single argument of type `Array`
 	# Note: this method modify the given `args`
 	# If there is no vararg, then `args` is not modified.
 	fun varargize(mpropdef: MPropDef, msignature: MSignature, args: Array[RuntimeVariable])
@@ -611,8 +624,8 @@ abstract class AbstractCompilerVisitor
 
 	# Unsafely cast a value to a new type
 	# ie the result share the same C variable but my have a different mcasttype
-	# NOTE: if the adaptation is useless then `value' is returned as it.
-	# ENSURE: return.name == value.name
+	# NOTE: if the adaptation is useless then `value` is returned as it.
+	# ENSURE: `result.name == value.name`
 	fun autoadapt(value: RuntimeVariable, mtype: MType): RuntimeVariable
 	do
 		mtype = self.anchor(mtype)
@@ -636,7 +649,7 @@ abstract class AbstractCompilerVisitor
 	fun adapt_signature(m: MMethodDef, args: Array[RuntimeVariable]) is abstract
 
 	# Box or unbox a value to another type iff a C type conversion is needed
- 	# ENSURE: result.mtype.ctype == mtype.ctype
+	# ENSURE: `result.mtype.ctype == mtype.ctype`
 	fun autobox(value: RuntimeVariable, mtype: MType): RuntimeVariable is abstract
 
 	#  Generate a polymorphic subtype test
@@ -653,10 +666,10 @@ abstract class AbstractCompilerVisitor
 	#  Generate a static call on a method definition
 	fun call(m: MMethodDef, recvtype: MClassType, args: Array[RuntimeVariable]): nullable RuntimeVariable is abstract
 
-	#  Generate a polymorphic send for the method `m' and the arguments `args'
+	#  Generate a polymorphic send for the method `m` and the arguments `args`
 	fun send(m: MMethod, args: Array[RuntimeVariable]): nullable RuntimeVariable is abstract
 
-	# Generate a monomorphic send for the method `m', the type `t' and the arguments `args'
+	# Generate a monomorphic send for the method `m`, the type `t` and the arguments `args`
 	fun monomorphic_send(m: MMethod, t: MType, args: Array[RuntimeVariable]): nullable RuntimeVariable
 	do
 		assert t isa MClassType
@@ -698,7 +711,7 @@ abstract class AbstractCompilerVisitor
 	private var names: HashSet[String] = new HashSet[String]
 	private var last: Int = 0
 
-	# Return a new name based on `s' and unique in the visitor
+	# Return a new name based on `s` and unique in the visitor
 	fun get_name(s: String): String
 	do
 		if not self.names.has(s) then
@@ -732,7 +745,7 @@ abstract class AbstractCompilerVisitor
 	private var escapemark_names = new HashMap[EscapeMark, String]
 
 	# Return a "const char*" variable associated to the classname of the dynamic type of an object
- 	# NOTE: we do not return a RuntimeVariable "NativeString" as the class may not exist in the module/program
+ 	# NOTE: we do not return a `RuntimeVariable` "NativeString" as the class may not exist in the module/program
 	fun class_name_string(value: RuntimeVariable): String is abstract
 
 	# Variables handling
@@ -805,13 +818,11 @@ abstract class AbstractCompilerVisitor
 		self.add("if ({name}) \{")
 		self.add("{res} = {name};")
 		self.add("\} else \{")
-		var nat = self.new_var(self.get_class("NativeString").mclass_type)
+		var native_mtype = self.get_class("NativeString").mclass_type
+		var nat = self.new_var(native_mtype)
 		self.add("{nat} = \"{string.escape_to_c}\";")
-		var res2 = self.init_instance(mtype)
-		self.add("{res} = {res2};")
 		var length = self.int_instance(string.length)
-		self.send(self.get_property("with_native", mtype), [res, nat, length])
-		self.check_init_instance(res, mtype)
+		self.add("{res} = {self.send(self.get_property("to_s_with_length", native_mtype), [nat, length]).as(not null)};")
 		self.add("{name} = {res};")
 		self.add("\}")
 		return res
@@ -847,7 +858,7 @@ abstract class AbstractCompilerVisitor
 	end
 
 	# look for a needed .h and .c file for a given .nit source-file
-	# FIXME: bad API, parameter should be a MModule, not its source-file
+	# FIXME: bad API, parameter should be a `MModule`, not its source-file
 	fun add_extern(file: String)
 	do
 		file = file.strip_extension(".nit")
@@ -871,7 +882,7 @@ abstract class AbstractCompilerVisitor
 		self.compiler.extern_bodies.add(f)
 	end
 
-	# Return a new local runtime_variable initialized with the C expression `cexpr'.
+	# Return a new local runtime_variable initialized with the C expression `cexpr`.
 	fun new_expr(cexpr: String, mtype: MType): RuntimeVariable
 	do
 		var res = new_var(mtype)
@@ -891,7 +902,7 @@ abstract class AbstractCompilerVisitor
 		self.add("exit(1);")
 	end
 
-	# Generate a return with the value `s'
+	# Generate a return with the value `s`
 	fun ret(s: RuntimeVariable)
 	do
 		self.assign(self.frame.returnvar.as(not null), s)
@@ -932,7 +943,7 @@ abstract class AbstractCompilerVisitor
 		return res
 	end
 
-	# Alias for `self.expr(nexpr, self.bool_type)'
+	# Alias for `self.expr(nexpr, self.bool_type)`
 	fun expr_bool(nexpr: AExpr): RuntimeVariable do return expr(nexpr, bool_type)
 
 	# Safely show a debug message on the current node and repeat the message in the C code as a comment
@@ -978,7 +989,7 @@ abstract class AbstractRuntimeFunction
 	# May inline the body or generate a C function call
 	fun call(v: VISITOR, arguments: Array[RuntimeVariable]): nullable RuntimeVariable is abstract
 
-	# Generate the code for the RuntimeFunction
+	# Generate the code for the `AbstractRuntimeFunction`
 	# Warning: compile more than once compilation makes CC unhappy
 	fun compile_to_c(compiler: COMPILER) is abstract
 end
@@ -986,7 +997,7 @@ end
 # A runtime variable hold a runtime value in C.
 # Runtime variables are associated to Nit local variables and intermediate results in Nit expressions.
 #
-# The tricky point is that a single C variable can be associated to more than one RuntimeVariable because the static knowledge of the type of an expression can vary in the C code.
+# The tricky point is that a single C variable can be associated to more than one `RuntimeVariable` because the static knowledge of the type of an expression can vary in the C code.
 class RuntimeVariable
 	# The name of the variable in the C code
 	var name: String
@@ -1030,7 +1041,7 @@ class RuntimeVariable
 	end
 end
 
-# A frame correspond to a visited property in a GlobalCompilerVisitor
+# A frame correspond to a visited property in a `GlobalCompilerVisitor`
 class Frame
 
 	type VISITOR: AbstractCompilerVisitor
@@ -1061,63 +1072,6 @@ class ExternCFile
 	var filename: String
 	# Additionnal specific CC compiler -c flags
 	var cflags: String
-end
-
-redef class String
-	# Mangle a string to be a unique valid C identifier
-	fun to_cmangle: String
-	do
-		var res = new Buffer
-		var underscore = false
-		for c in self do
-			if (c >= 'a' and c <= 'z') or (c >='A' and c <= 'Z') then
-				res.add(c)
-				underscore = false
-				continue
-			end
-			if underscore then
-				res.append('_'.ascii.to_s)
-				res.add('d')
-			end
-			if c >= '0' and c <= '9' then
-				res.add(c)
-				underscore = false
-			else if c == '_' then
-				res.add(c)
-				underscore = true
-			else
-				res.add('_')
-				res.append(c.ascii.to_s)
-				res.add('d')
-				underscore = false
-			end
-		end
-		return res.to_s
-	end
-
-	# Escape " \ ' and non printable characters for literal C strings or characters
-	fun escape_to_c: String
-	do
-		var b = new Buffer
-		for c in self do
-			if c == '\n' then
-				b.append("\\n")
-			else if c == '\0' then
-				b.append("\\0")
-			else if c == '"' then
-				b.append("\\\"")
-			else if c == '\'' then
-				b.append("\\\'")
-			else if c == '\\' then
-				b.append("\\\\")
-			else if c.ascii < 32 then
-				b.append("\\{c.ascii.to_base(8, false)}")
-			else
-				b.add(c)
-			end
-		end
-		return b.to_s
-	end
 end
 
 redef class MType
@@ -1463,7 +1417,7 @@ redef class AInternMethPropdef
 				v.add("printf(\"%c\", {arguments.first});")
 				return
 			else if pname == "object_id" then
-				v.ret(arguments.first)
+				v.ret(v.new_expr("(long){arguments.first}", ret.as(not null)))
 				return
 			else if pname == "+" then
 				v.ret(v.new_expr("{arguments[0]} + {arguments[1]}", ret.as(not null)))
@@ -1508,7 +1462,7 @@ redef class AInternMethPropdef
 				v.add("printf({arguments.first}?\"true\\n\":\"false\\n\");")
 				return
 			else if pname == "object_id" then
-				v.ret(arguments.first)
+				v.ret(v.new_expr("(long){arguments.first}", ret.as(not null)))
 				return
 			else if pname == "==" then
 				v.ret(v.equal_test(arguments[0], arguments[1]))
@@ -1567,24 +1521,6 @@ redef class AInternMethPropdef
 				return
 			else if pname == "to_i" then
 				v.ret(v.new_expr("(long){arguments[0]}", ret.as(not null)))
-				return
-			end
-		else if cname == "Char" then
-			if pname == "output" then
-				v.add("printf(\"%c\", {arguments.first});")
-				return
-			else if pname == "object_id" then
-				v.ret(arguments.first)
-				return
-			else if pname == "==" then
-				v.ret(v.equal_test(arguments[0], arguments[1]))
-				return
-			else if pname == "!=" then
-				var res = v.equal_test(arguments[0], arguments[1])
-				v.ret(v.new_expr("!{res}", ret.as(not null)))
-				return
-			else if pname == "ascii" then
-				v.ret(v.new_expr("{arguments[0]}", ret.as(not null)))
 				return
 			end
 		else if cname == "NativeString" then
@@ -1782,7 +1718,7 @@ end
 
 redef class AExpr
 	# Try to compile self as an expression
-	# Do not call this method directly, use `v.expr' instead
+	# Do not call this method directly, use `v.expr` instead
 	private fun expr(v: AbstractCompilerVisitor): nullable RuntimeVariable
 	do
 		v.add("printf(\"NOT YET IMPLEMENTED {class_name}:{location.to_s}\\n\");")
@@ -1797,7 +1733,7 @@ redef class AExpr
 	end
 
 	# Try to compile self as a statement
-	# Do not call this method directly, use `v.stmt' instead
+	# Do not call this method directly, use `v.stmt` instead
 	private fun stmt(v: AbstractCompilerVisitor)
 	do
 		var res = expr(v)
@@ -1809,6 +1745,15 @@ redef class ABlockExpr
 	redef fun stmt(v)
 	do
 		for e in self.n_expr do v.stmt(e)
+	end
+	redef fun expr(v)
+	do
+		var last = self.n_expr.last
+		for e in self.n_expr do
+			if e == last then break
+			v.stmt(e)
+		end
+		return v.expr(last, null)
 	end
 end
 
@@ -1839,6 +1784,13 @@ redef class AVarAssignExpr
 		var variable = self.variable.as(not null)
 		var i = v.expr(self.n_value, variable.declared_type)
 		v.assign(v.variable(variable), i)
+	end
+	redef fun expr(v)
+	do
+		var variable = self.variable.as(not null)
+		var i = v.expr(self.n_value, variable.declared_type)
+		v.assign(v.variable(variable), i)
+		return i
 	end
 end
 
@@ -1892,6 +1844,18 @@ redef class AIfExpr
 		v.add("\} else \{")
 		v.stmt(self.n_else)
 		v.add("\}")
+	end
+
+	redef fun expr(v)
+	do
+		var res = v.new_var(self.mtype.as(not null))
+		var cond = v.expr_bool(self.n_expr)
+		v.add("if ({cond})\{")
+		v.assign(res, v.expr(self.n_then.as(not null), null))
+		v.add("\} else \{")
+		v.assign(res, v.expr(self.n_else.as(not null), null))
+		v.add("\}")
+		return res
 	end
 end
 
@@ -2047,6 +2011,21 @@ redef class AOrExpr
 	end
 end
 
+redef class AImpliesExpr
+	redef fun expr(v)
+	do
+		var res = v.new_var(self.mtype.as(not null))
+		var i1 = v.expr_bool(self.n_expr)
+		v.add("if (!{i1}) \{")
+		v.add("{res} = 1;")
+		v.add("\} else \{")
+		var i2 = v.expr_bool(self.n_expr2)
+		v.add("{res} = {i2};")
+		v.add("\}")
+		return res
+	end
+end
+
 redef class AAndExpr
 	redef fun expr(v)
 	do
@@ -2095,15 +2074,15 @@ redef class AEeExpr
 end
 
 redef class AIntExpr
-	redef fun expr(v) do return v.new_expr("{self.n_number.text}", self.mtype.as(not null))
+	redef fun expr(v) do return v.new_expr("{self.value.to_s}", self.mtype.as(not null))
 end
 
 redef class AFloatExpr
-	redef fun expr(v) do return v.new_expr("{self.n_float.text}", self.mtype.as(not null))
+	redef fun expr(v) do return v.new_expr("{self.n_float.text}", self.mtype.as(not null)) # FIXME use value, not n_float
 end
 
 redef class ACharExpr
-	redef fun expr(v) do return v.new_expr("{self.n_char.text}", self.mtype.as(not null))
+	redef fun expr(v) do return v.new_expr("'{self.value.to_s.escape_to_c}'", self.mtype.as(not null))
 end
 
 redef class AArrayExpr
@@ -2375,7 +2354,7 @@ end
 # Utils
 
 redef class Array[E]
-	# Return a new Array with the elements only contened in 'self' and not in 'o'
+	# Return a new `Array` with the elements only contened in self and not in `o`
 	fun -(o: Array[E]): Array[E] do
 		var res = new Array[E]
 		for e in self do if not o.has(e) then res.add(e)
@@ -2384,208 +2363,25 @@ redef class Array[E]
 end
 
 redef class MModule
-
-	# Return a linearization of a set of mtypes
-	fun linearize_mtypes(mtypes: Set[MType]): Array[MType] do
-		var lin = new Array[MType].from(mtypes)
-		var sorter = new TypeSorter(self)
-		sorter.sort(lin)
-		return lin
-	end
-
-	# Return a reverse linearization of a set of mtypes
-	fun reverse_linearize_mtypes(mtypes: Set[MType]): Array[MType] do
-		var lin = new Array[MType].from(mtypes)
-		var sorter = new ReverseTypeSorter(self)
-		sorter.sort(lin)
-		return lin
-	end
-
-	# Return super types of a `mtype` in `self`
-	fun super_mtypes(mtype: MType, mtypes: Set[MType]): Set[MType] do
-		if not self.super_mtypes_cache.has_key(mtype) then
-			var supers = new HashSet[MType]
-			for otype in mtypes do
-				if otype == mtype then continue
-				if mtype.is_subtype(self, null, otype) then
-					supers.add(otype)
-				end
-			end
-			self.super_mtypes_cache[mtype] = supers
-		end
-		return self.super_mtypes_cache[mtype]
-	end
-
-	private var super_mtypes_cache: Map[MType, Set[MType]] = new HashMap[MType, Set[MType]]
-
-	# Return all sub mtypes (directs and indirects) of a `mtype` in `self`
-	fun sub_mtypes(mtype: MType, mtypes: Set[MType]): Set[MType] do
-		if not self.sub_mtypes_cache.has_key(mtype) then
-			var subs = new HashSet[MType]
-			for otype in mtypes do
-				if otype == mtype then continue
-				if otype.is_subtype(self, null, mtype) then
-					subs.add(otype)
-				end
-			end
-			self.sub_mtypes_cache[mtype] = subs
-		end
-		return self.sub_mtypes_cache[mtype]
-	end
-
-	private var sub_mtypes_cache: Map[MType, Set[MType]] = new HashMap[MType, Set[MType]]
-
-	# Return a linearization of a set of mclasses
-	fun linearize_mclasses_2(mclasses: Set[MClass]): Array[MClass] do
-		var lin = new Array[MClass].from(mclasses)
-		var sorter = new ClassSorter(self)
-		sorter.sort(lin)
-		return lin
-	end
-
-	# Return a reverse linearization of a set of mtypes
-	fun reverse_linearize_mclasses(mclasses: Set[MClass]): Array[MClass] do
-		var lin = new Array[MClass].from(mclasses)
-		var sorter = new ReverseClassSorter(self)
-		sorter.sort(lin)
-		return lin
-	end
-
-	# Return all super mclasses (directs and indirects) of a `mclass` in `self`
-	fun super_mclasses(mclass: MClass): Set[MClass] do
-		if not self.super_mclasses_cache.has_key(mclass) then
-			var supers = new HashSet[MClass]
-			if self.flatten_mclass_hierarchy.has(mclass) then
-				for sup in self.flatten_mclass_hierarchy[mclass].greaters do
-					if sup == mclass then continue
-					supers.add(sup)
-				end
-			end
-			self.super_mclasses_cache[mclass] = supers
-		end
-		return self.super_mclasses_cache[mclass]
-	end
-
-	private var super_mclasses_cache: Map[MClass, Set[MClass]] = new HashMap[MClass, Set[MClass]]
-
-	# Return all parents of a `mclass` in `self`
-	fun parent_mclasses(mclass: MClass): Set[MClass] do
-		if not self.parent_mclasses_cache.has_key(mclass) then
-			var parents = new HashSet[MClass]
-			if self.flatten_mclass_hierarchy.has(mclass) then
-				for sup in self.flatten_mclass_hierarchy[mclass].direct_greaters do
-					if sup == mclass then continue
-					parents.add(sup)
-				end
-			end
-			self.parent_mclasses_cache[mclass] = parents
-		end
-		return self.parent_mclasses_cache[mclass]
-	end
-
-	private var parent_mclasses_cache: Map[MClass, Set[MClass]] = new HashMap[MClass, Set[MClass]]
-
-	# Return all sub mclasses (directs and indirects) of a `mclass` in `self`
-	fun sub_mclasses(mclass: MClass): Set[MClass] do
-		if not self.sub_mclasses_cache.has_key(mclass) then
-			var subs = new HashSet[MClass]
-			if self.flatten_mclass_hierarchy.has(mclass) then
-				for sub in self.flatten_mclass_hierarchy[mclass].smallers do
-					if sub == mclass then continue
-					subs.add(sub)
-				end
-			end
-			self.sub_mclasses_cache[mclass] = subs
-		end
-		return self.sub_mclasses_cache[mclass]
-	end
-
-	private var sub_mclasses_cache: Map[MClass, Set[MClass]] = new HashMap[MClass, Set[MClass]]
-
-	# All 'mproperties' associated to all 'mclassdefs' of `mclass`
+	# All `MProperty` associated to all `MClassDef` of `mclass`
 	fun properties(mclass: MClass): Set[MProperty] do
 		if not self.properties_cache.has_key(mclass) then
 			var properties = new HashSet[MProperty]
-			var parents = self.super_mclasses(mclass)
+			var parents = new Array[MClass]
+			if self.flatten_mclass_hierarchy.has(mclass) then
+				parents.add_all(mclass.in_hierarchy(self).direct_greaters)
+			end
 			for parent in parents do
 				properties.add_all(self.properties(parent))
 			end
-
 			for mclassdef in mclass.mclassdefs do
-				for mpropdef in mclassdef.mpropdefs do
-					properties.add(mpropdef.mproperty)
+				for mprop in mclassdef.intro_mproperties do
+					properties.add(mprop)
 				end
 			end
 			self.properties_cache[mclass] = properties
 		end
 		return properties_cache[mclass]
 	end
-
 	private var properties_cache: Map[MClass, Set[MProperty]] = new HashMap[MClass, Set[MProperty]]
-end
-
-# A sorter for linearize list of types
-private class TypeSorter
-	super AbstractSorter[MType]
-
-	private var mmodule: MModule
-
-	init(mmodule: MModule) do self.mmodule = mmodule
-
-	redef fun compare(a, b) do
-		if a == b then
-			return 0
-		else if a.is_subtype(self.mmodule, null, b) then
-			return -1
-		end
-		return 1
-	end
-end
-
-# A sorter for reverse linearization
-private class ReverseTypeSorter
-	super TypeSorter
-
-	init(mmodule: MModule) do end
-
-	redef fun compare(a, b) do
-		if a == b then
-			return 0
-		else if a.is_subtype(self.mmodule, null, b) then
-			return 1
-		end
-		return -1
-	end
-end
-
-# A sorter for linearize list of classes
-private class ClassSorter
-	super AbstractSorter[MClass]
-
-	var mmodule: MModule
-
-	redef fun compare(a, b) do
-		if a == b then
-			return 0
-		else if self.mmodule.flatten_mclass_hierarchy.has(a) and self.mmodule.flatten_mclass_hierarchy[a].greaters.has(b) then
-			return -1
-		end
-		return 1
-	end
-end
-
-# A sorter for reverse linearization
-private class ReverseClassSorter
-	super AbstractSorter[MClass]
-
-	var mmodule: MModule
-
-	redef fun compare(a, b) do
-		if a == b then
-			return 0
-		else if self.mmodule.flatten_mclass_hierarchy.has(a) and self.mmodule.flatten_mclass_hierarchy[a].greaters.has(b) then
-			return 1
-		end
-		return -1
-	end
 end

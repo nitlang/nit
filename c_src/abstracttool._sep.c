@@ -96,7 +96,7 @@ void abstracttool___AbstractCompiler___exec_cmd_line(val_t p0){
     if (!once_value_1) {
       fra.me.REG[2] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+      fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
       once_value_1 = fra.me.REG[2];
       register_static_object(&once_value_1);
     } else fra.me.REG[2] = once_value_1;
@@ -107,7 +107,7 @@ void abstracttool___AbstractCompiler___exec_cmd_line(val_t p0){
     if (!once_value_2) {
       fra.me.REG[2] = BOX_NativeString(" version ");
       REGB0 = TAG_Int(9);
-      fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+      fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
       once_value_2 = fra.me.REG[2];
       register_static_object(&once_value_2);
     } else fra.me.REG[2] = once_value_2;
@@ -118,7 +118,7 @@ void abstracttool___AbstractCompiler___exec_cmd_line(val_t p0){
     if (!once_value_3) {
       fra.me.REG[2] = BOX_NativeString("");
       REGB0 = TAG_Int(0);
-      fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+      fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
       once_value_3 = fra.me.REG[2];
       register_static_object(&once_value_3);
     } else fra.me.REG[2] = once_value_3;
@@ -140,7 +140,7 @@ void abstracttool___AbstractCompiler___exec_cmd_line(val_t p0){
     if (!once_value_4) {
       fra.me.REG[2] = BOX_NativeString("usage: ");
       REGB0 = TAG_Int(7);
-      fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+      fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
       once_value_4 = fra.me.REG[2];
       register_static_object(&once_value_4);
     } else fra.me.REG[2] = once_value_4;
@@ -151,7 +151,7 @@ void abstracttool___AbstractCompiler___exec_cmd_line(val_t p0){
     if (!once_value_5) {
       fra.me.REG[2] = BOX_NativeString(" [options] file...");
       REGB0 = TAG_Int(18);
-      fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+      fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
       once_value_5 = fra.me.REG[2];
       register_static_object(&once_value_5);
     } else fra.me.REG[2] = once_value_5;
@@ -181,7 +181,7 @@ void abstracttool___AbstractCompiler___exec_cmd_line(val_t p0){
   REGB2 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
   if (UNTAG_Bool(REGB2)) {
   } else {
-    /* ../lib/standard/kernel.nit:230 */
+    /* ../lib/standard/kernel.nit:237 */
     REGB1 = TAG_Bool((REGB0)==(REGB1));
     /* abstracttool.nit:55 */
     REGB2 = REGB1;
@@ -193,7 +193,7 @@ void abstracttool___AbstractCompiler___exec_cmd_line(val_t p0){
     if (!once_value_6) {
       fra.me.REG[2] = BOX_NativeString("usage: ");
       REGB2 = TAG_Int(7);
-      fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB2);
+      fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB2);
       once_value_6 = fra.me.REG[2];
       register_static_object(&once_value_6);
     } else fra.me.REG[2] = once_value_6;
@@ -204,7 +204,7 @@ void abstracttool___AbstractCompiler___exec_cmd_line(val_t p0){
     if (!once_value_7) {
       fra.me.REG[2] = BOX_NativeString(" [options] file...");
       REGB2 = TAG_Int(18);
-      fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB2);
+      fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB2);
       once_value_7 = fra.me.REG[2];
       register_static_object(&once_value_7);
     } else fra.me.REG[2] = once_value_7;
@@ -228,7 +228,7 @@ void abstracttool___AbstractCompiler___exec_cmd_line(val_t p0){
   if (!once_value_8) {
     fra.me.REG[3] = BOX_NativeString("Syntax analysis");
     REGB2 = TAG_Int(15);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB2);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB2);
     once_value_8 = fra.me.REG[3];
     register_static_object(&once_value_8);
   } else fra.me.REG[3] = once_value_8;
@@ -244,36 +244,36 @@ void abstracttool___AbstractCompiler___exec_cmd_line(val_t p0){
     nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 24);
   }
   REGB1 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[1]);
-  /* ../lib/standard/kernel.nit:355 */
+  /* ../lib/standard/kernel.nit:404 */
   while(1) {
     REGB0 = TAG_Bool(VAL_ISA(REGB1, VTCOLOR_standard___kernel___Comparable___OTHER(REGB2), VTID_standard___kernel___Comparable___OTHER(REGB2))) /*cast OTHER*/;
     if (UNTAG_Bool(REGB0)) {
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:235 */
+    /* ../lib/standard/kernel.nit:242 */
     REGB0 = TAG_Bool(UNTAG_Int(REGB2)<UNTAG_Int(REGB1));
-    /* ../lib/standard/kernel.nit:355 */
+    /* ../lib/standard/kernel.nit:404 */
     if (UNTAG_Bool(REGB0)) {
       /* abstracttool.nit:64 */
       REGB0 = REGB2;
-      /* ../lib/standard/collection/array.nit:278 */
+      /* ../lib/standard/collection/array.nit:279 */
       fra.me.REG[3] = fra.me.REG[1];
-      /* ../lib/standard/collection/array.nit:280 */
+      /* ../lib/standard/collection/array.nit:281 */
       REGB3 = TAG_Int(0);
       REGB4 = TAG_Bool(VAL_ISA(REGB3, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
       if (UNTAG_Bool(REGB4)) {
       } else {
         nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
       }
-      /* ../lib/standard/kernel.nit:236 */
+      /* ../lib/standard/kernel.nit:243 */
       REGB3 = TAG_Bool(UNTAG_Int(REGB0)>=UNTAG_Int(REGB3));
-      /* ../lib/standard/collection/array.nit:280 */
+      /* ../lib/standard/collection/array.nit:281 */
       if (UNTAG_Bool(REGB3)) {
         REGB3 = TAG_Bool(ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[3])!=NIT_NULL);
         if (UNTAG_Bool(REGB3)) {
         } else {
-          nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 280);
+          nit_abort("Uninitialized attribute %s", "_length", LOCATE_standard___collection___array, 281);
         }
         REGB3 = ATTR_standard___collection___array___AbstractArrayRead____length(fra.me.REG[3]);
         REGB4 = TAG_Bool(VAL_ISA(REGB3, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
@@ -281,40 +281,40 @@ void abstracttool___AbstractCompiler___exec_cmd_line(val_t p0){
         } else {
           nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
         }
-        /* ../lib/standard/kernel.nit:235 */
+        /* ../lib/standard/kernel.nit:242 */
         REGB3 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB3));
       } else {
-        /* ../lib/standard/collection/array.nit:280 */
+        /* ../lib/standard/collection/array.nit:281 */
         REGB4 = TAG_Bool(0);
         REGB3 = REGB4;
       }
       if (UNTAG_Bool(REGB3)) {
       } else {
-        nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 280);
+        nit_abort("Assert '%s' failed", "index", LOCATE_standard___collection___array, 281);
       }
-      /* ../lib/standard/collection/array.nit:281 */
+      /* ../lib/standard/collection/array.nit:282 */
       fra.me.REG[3] = ATTR_standard___collection___array___Array____items(fra.me.REG[3]);
       REGB3 = TAG_Bool(fra.me.REG[3]==NIT_NULL);
       if (UNTAG_Bool(REGB3)) {
-        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 281);
+        nit_abort("Reciever is null", NULL, LOCATE_standard___collection___array, 282);
       }
-      /* ../lib/standard/collection/array.nit:724 */
+      /* ../lib/standard/collection/array.nit:725 */
       fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB0)];
-      /* ../lib/standard/collection/array.nit:281 */
+      /* ../lib/standard/collection/array.nit:282 */
       goto label9;
       label9: while(0);
       /* abstracttool.nit:65 */
       fra.me.REG[3] = CALL_mmloader___ToolContext___get_module_from_filename(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
       /* abstracttool.nit:66 */
       CALL_standard___collection___abstract_collection___SimpleCollection___add(fra.me.REG[2])(fra.me.REG[2], fra.me.REG[3]);
-      /* ../lib/standard/kernel.nit:357 */
+      /* ../lib/standard/kernel.nit:406 */
       REGB0 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:238 */
+      /* ../lib/standard/kernel.nit:245 */
       REGB0 = TAG_Int(UNTAG_Int(REGB2)+UNTAG_Int(REGB0));
-      /* ../lib/standard/kernel.nit:357 */
+      /* ../lib/standard/kernel.nit:406 */
       REGB2 = REGB0;
     } else {
-      /* ../lib/standard/kernel.nit:355 */
+      /* ../lib/standard/kernel.nit:404 */
       goto label10;
     }
   }
@@ -407,7 +407,7 @@ void abstracttool___AbstractCompiler___dump_context_info(val_t p0){
   if (!once_value_2) {
     fra.me.REG[2] = BOX_NativeString("-");
     REGB0 = TAG_Int(1);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_2 = fra.me.REG[2];
     register_static_object(&once_value_2);
   } else fra.me.REG[2] = once_value_2;
@@ -419,7 +419,7 @@ void abstracttool___AbstractCompiler___dump_context_info(val_t p0){
   if (!once_value_3) {
     fra.me.REG[3] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_3 = fra.me.REG[3];
     register_static_object(&once_value_3);
   } else fra.me.REG[3] = once_value_3;
@@ -430,7 +430,7 @@ void abstracttool___AbstractCompiler___dump_context_info(val_t p0){
   if (!once_value_4) {
     fra.me.REG[3] = BOX_NativeString("/");
     REGB0 = TAG_Int(1);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_4 = fra.me.REG[3];
     register_static_object(&once_value_4);
   } else fra.me.REG[3] = once_value_4;
@@ -440,7 +440,7 @@ void abstracttool___AbstractCompiler___dump_context_info(val_t p0){
   if (!once_value_5) {
     fra.me.REG[3] = BOX_NativeString(".full_class_hierarchy.new.dot");
     REGB0 = TAG_Int(29);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_5 = fra.me.REG[3];
     register_static_object(&once_value_5);
   } else fra.me.REG[3] = once_value_5;
@@ -460,7 +460,7 @@ void abstracttool___AbstractCompiler___dump_context_info(val_t p0){
   if (!once_value_6) {
     fra.me.REG[4] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+    fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
     once_value_6 = fra.me.REG[4];
     register_static_object(&once_value_6);
   } else fra.me.REG[4] = once_value_6;
@@ -471,7 +471,7 @@ void abstracttool___AbstractCompiler___dump_context_info(val_t p0){
   if (!once_value_7) {
     fra.me.REG[4] = BOX_NativeString("/");
     REGB0 = TAG_Int(1);
-    fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+    fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
     once_value_7 = fra.me.REG[4];
     register_static_object(&once_value_7);
   } else fra.me.REG[4] = once_value_7;
@@ -481,7 +481,7 @@ void abstracttool___AbstractCompiler___dump_context_info(val_t p0){
   if (!once_value_8) {
     fra.me.REG[2] = BOX_NativeString(".module_hierarchy.new.dot");
     REGB0 = TAG_Int(25);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_8 = fra.me.REG[2];
     register_static_object(&once_value_8);
   } else fra.me.REG[2] = once_value_8;
@@ -554,7 +554,7 @@ void abstracttool___MMModule___dump_module_info(val_t p0, val_t p1){
   if (!once_value_1) {
     fra.me.REG[3] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_1 = fra.me.REG[3];
     register_static_object(&once_value_1);
   } else fra.me.REG[3] = once_value_1;
@@ -564,7 +564,7 @@ void abstracttool___MMModule___dump_module_info(val_t p0, val_t p1){
   if (!once_value_2) {
     fra.me.REG[1] = BOX_NativeString("/");
     REGB0 = TAG_Int(1);
-    fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+    fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
     once_value_2 = fra.me.REG[1];
     register_static_object(&once_value_2);
   } else fra.me.REG[1] = once_value_2;
@@ -576,7 +576,7 @@ void abstracttool___MMModule___dump_module_info(val_t p0, val_t p1){
   if (!once_value_3) {
     fra.me.REG[1] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[1] = NEW_String_standard___string___String___with_native(fra.me.REG[1], REGB0);
+    fra.me.REG[1] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[1])(fra.me.REG[1], REGB0);
     once_value_3 = fra.me.REG[1];
     register_static_object(&once_value_3);
   } else fra.me.REG[1] = once_value_3;
@@ -589,7 +589,7 @@ void abstracttool___MMModule___dump_module_info(val_t p0, val_t p1){
   if (!once_value_4) {
     fra.me.REG[3] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_4 = fra.me.REG[3];
     register_static_object(&once_value_4);
   } else fra.me.REG[3] = once_value_4;
@@ -599,7 +599,7 @@ void abstracttool___MMModule___dump_module_info(val_t p0, val_t p1){
   if (!once_value_5) {
     fra.me.REG[3] = BOX_NativeString(".class_hierarchy.new.dot");
     REGB0 = TAG_Int(24);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_5 = fra.me.REG[3];
     register_static_object(&once_value_5);
   } else fra.me.REG[3] = once_value_5;
@@ -619,7 +619,7 @@ void abstracttool___MMModule___dump_module_info(val_t p0, val_t p1){
   if (!once_value_6) {
     fra.me.REG[4] = BOX_NativeString("");
     REGB0 = TAG_Int(0);
-    fra.me.REG[4] = NEW_String_standard___string___String___with_native(fra.me.REG[4], REGB0);
+    fra.me.REG[4] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[4])(fra.me.REG[4], REGB0);
     once_value_6 = fra.me.REG[4];
     register_static_object(&once_value_6);
   } else fra.me.REG[4] = once_value_6;
@@ -629,7 +629,7 @@ void abstracttool___MMModule___dump_module_info(val_t p0, val_t p1){
   if (!once_value_7) {
     fra.me.REG[2] = BOX_NativeString(".properties.log");
     REGB0 = TAG_Int(15);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_7 = fra.me.REG[2];
     register_static_object(&once_value_7);
   } else fra.me.REG[2] = once_value_7;
@@ -670,7 +670,7 @@ void abstracttool___MMModule___dump_module_info(val_t p0, val_t p1){
     if (!once_value_9) {
       fra.me.REG[0] = BOX_NativeString("\n");
       REGB0 = TAG_Int(1);
-      fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+      fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
       once_value_9 = fra.me.REG[0];
       register_static_object(&once_value_9);
     } else fra.me.REG[0] = once_value_9;
@@ -711,7 +711,7 @@ void abstracttool___MMLocalClass___dump_properties(val_t p0, val_t p1){
   if (!once_value_1) {
     fra.me.REG[3] = BOX_NativeString("class ");
     REGB0 = TAG_Int(6);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_1 = fra.me.REG[3];
     register_static_object(&once_value_1);
   } else fra.me.REG[3] = once_value_1;
@@ -722,7 +722,7 @@ void abstracttool___MMLocalClass___dump_properties(val_t p0, val_t p1){
   if (!once_value_2) {
     fra.me.REG[3] = BOX_NativeString("\n");
     REGB0 = TAG_Int(1);
-    fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+    fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
     once_value_2 = fra.me.REG[3];
     register_static_object(&once_value_2);
   } else fra.me.REG[3] = once_value_2;
@@ -737,7 +737,7 @@ void abstracttool___MMLocalClass___dump_properties(val_t p0, val_t p1){
   REGB2 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
   if (UNTAG_Bool(REGB2)) {
   } else {
-    /* ../lib/standard/kernel.nit:230 */
+    /* ../lib/standard/kernel.nit:237 */
     REGB1 = TAG_Bool((REGB0)==(REGB1));
     /* abstracttool.nit:119 */
     REGB2 = REGB1;
@@ -761,7 +761,7 @@ void abstracttool___MMLocalClass___dump_properties(val_t p0, val_t p1){
     if (!once_value_3) {
       fra.me.REG[2] = BOX_NativeString("\tclass not visible in this module\n");
       REGB2 = TAG_Int(34);
-      fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB2);
+      fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB2);
       once_value_3 = fra.me.REG[2];
       register_static_object(&once_value_3);
     } else fra.me.REG[2] = once_value_3;
@@ -777,7 +777,7 @@ void abstracttool___MMLocalClass___dump_properties(val_t p0, val_t p1){
     REGB0 = TAG_Bool(IS_EQUAL_OO(REGB2,REGB1));
     if (UNTAG_Bool(REGB0)) {
     } else {
-      /* ../lib/standard/kernel.nit:230 */
+      /* ../lib/standard/kernel.nit:237 */
       REGB1 = TAG_Bool((REGB2)==(REGB1));
       /* abstracttool.nit:121 */
       REGB0 = REGB1;
@@ -787,7 +787,7 @@ void abstracttool___MMLocalClass___dump_properties(val_t p0, val_t p1){
       if (!once_value_4) {
         fra.me.REG[3] = BOX_NativeString("\tclass is defined later in the hierarchy\n");
         REGB0 = TAG_Int(41);
-        fra.me.REG[3] = NEW_String_standard___string___String___with_native(fra.me.REG[3], REGB0);
+        fra.me.REG[3] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[3])(fra.me.REG[3], REGB0);
         once_value_4 = fra.me.REG[3];
         register_static_object(&once_value_4);
       } else fra.me.REG[3] = once_value_4;
@@ -805,7 +805,7 @@ void abstracttool___MMLocalClass___dump_properties(val_t p0, val_t p1){
   if (!once_value_9) {
     fra.me.REG[2] = BOX_NativeString("end # ");
     REGB0 = TAG_Int(6);
-    fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+    fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
     once_value_9 = fra.me.REG[2];
     register_static_object(&once_value_9);
   } else fra.me.REG[2] = once_value_9;
@@ -816,7 +816,7 @@ void abstracttool___MMLocalClass___dump_properties(val_t p0, val_t p1){
   if (!once_value_10) {
     fra.me.REG[0] = BOX_NativeString("\n");
     REGB0 = TAG_Int(1);
-    fra.me.REG[0] = NEW_String_standard___string___String___with_native(fra.me.REG[0], REGB0);
+    fra.me.REG[0] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[0])(fra.me.REG[0], REGB0);
     once_value_10 = fra.me.REG[0];
     register_static_object(&once_value_10);
   } else fra.me.REG[0] = once_value_10;
@@ -857,7 +857,7 @@ void abstracttool___MMLocalClass___dump_properties(val_t p0, val_t p1){
         if (!once_value_6) {
           fra.me.REG[2] = BOX_NativeString("\t");
           REGB0 = TAG_Int(1);
-          fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+          fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
           once_value_6 = fra.me.REG[2];
           register_static_object(&once_value_6);
         } else fra.me.REG[2] = once_value_6;
@@ -868,7 +868,7 @@ void abstracttool___MMLocalClass___dump_properties(val_t p0, val_t p1){
         if (!once_value_7) {
           fra.me.REG[2] = BOX_NativeString("");
           REGB0 = TAG_Int(0);
-          fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+          fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
           once_value_7 = fra.me.REG[2];
           register_static_object(&once_value_7);
         } else fra.me.REG[2] = once_value_7;
@@ -881,7 +881,7 @@ void abstracttool___MMLocalClass___dump_properties(val_t p0, val_t p1){
         if (!once_value_8) {
           fra.me.REG[2] = BOX_NativeString("\n");
           REGB0 = TAG_Int(1);
-          fra.me.REG[2] = NEW_String_standard___string___String___with_native(fra.me.REG[2], REGB0);
+          fra.me.REG[2] = CALL_standard___string___NativeString___to_s_with_length(fra.me.REG[2])(fra.me.REG[2], REGB0);
           once_value_8 = fra.me.REG[2];
           register_static_object(&once_value_8);
         } else fra.me.REG[2] = once_value_8;
@@ -892,7 +892,7 @@ void abstracttool___MMLocalClass___dump_properties(val_t p0, val_t p1){
         stack_frame_head = fra.me.prev;
         return;
       }
-static const char LOCATE_abstracttool___AAnnotations___visit_all[] = "abstracttool::AAnnotations::(parser_prod::ANode::visit_all)";
+static const char LOCATE_abstracttool___AAnnotations___visit_all[] = "abstracttool::AAnnotations::(parser_nodes::ANode::visit_all)";
 void abstracttool___AAnnotations___visit_all(val_t p0, val_t p1){
   struct {struct stack_frame_t me; val_t MORE_REG[1];} fra;
   val_t tmp;

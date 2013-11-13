@@ -1,0 +1,14 @@
+Grammar demo;
+Lexer
+  letter = 'a'..'z';
+  digit = '0'..'9';
+  identifier = letter (letter | digit)*;
+  comma = ',';
+  blank = (' ' | #9 | #10 | #13)+;
+  if = 'if';
+  else = 'else';
+Parser
+  Ignored
+    blank;
+  p = t*;
+  t = identifier | comma | if | else;

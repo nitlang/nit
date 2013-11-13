@@ -18,7 +18,7 @@ extern A
 super Pointer
 	new is extern
 
-	redef fun to_s : String is extern import String::from_cstring
+	redef fun to_s : String is extern import NativeString::to_s
 end
 
 var a = new A

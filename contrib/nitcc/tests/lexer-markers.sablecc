@@ -1,0 +1,10 @@
+Grammar re;
+Lexer
+a = 'a';
+b = 'a' 'b' 'a' 'c'; //alt1 //alt2
+//alt1 b = 'a' 'b' 'a'* 'c';
+//alt2 b = 'a'* 'b' 'a' 'c';
+blank = #10 | #13 | #32;
+Parser
+Ignored blank;
+t = a | b;

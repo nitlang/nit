@@ -35,23 +35,6 @@ private class RTAMetricsPhase
 	end
 end
 
-redef class RapidTypeAnalysis
-	redef fun add_type(mtype)
-	do
-		mtype.nlvt += 1
-		mtype.mclass.nlvt += 1
-		mtype.mclass.live_types.add(mtype)
-		super(mtype)
-	end
-
-	redef fun add_cast_type(mtype)
-	do
-		mtype.nlct += 1
-		mtype.mclass.nlct += 1
-		mtype.mclass.cast_types.add(mtype)
-		super(mtype)
-	end
-end
 
 redef class MType
 	private var nlvt: Int = 0
@@ -107,6 +90,8 @@ do
 	for mtype in analysis.live_types do
 		mtypes.add(mtype)
 		nlvt += 1
+		mtype.mclass.nlvt += 1
+		mtype.mclass.live_types.add(mtype)
 		if mtype isa MGenericType then nlvtg += 1
 		if mtype.is_user_defined then
 			nlvtudud += 1
@@ -120,6 +105,8 @@ do
 	for mtype in analysis.live_cast_types do
 		mtypes.add(mtype)
 		nlct += 1
+		mtype.mclass.nlct += 1
+		mtype.mclass.cast_types.add(mtype)
 		if mtype isa MGenericType then nlctg += 1
 		if mtype.is_user_defined then
 			nlctudud += 1
@@ -172,12 +159,23 @@ do
 	end
 
 	print "--- RTA metrics ---"
+	print "Number of live runtime classes: {analysis.live_classes.length}"
+	if analysis.live_classes.length < 8 then print "\t{analysis.live_classes.join(" ")}"
 	print "Number of live runtime types (instantied resolved type): {analysis.live_types.length}"
 	if analysis.live_types.length < 8 then print "\t{analysis.live_types.join(" ")}"
+	print "Number of live methods: {analysis.live_methods.length}"
+	if analysis.live_methods.length < 8 then print "\t{analysis.live_methods.join(" ")}"
 	print "Number of live method definitions: {analysis.live_methoddefs.length}"
 	if analysis.live_methoddefs.length < 8 then print "\t{analysis.live_methoddefs.join(" ")}"
-	print "Number of live customized method definitions: {analysis.live_customized_methoddefs.length}"
-	if analysis.live_customized_methoddefs.length < 8 then print "\t{analysis.live_customized_methoddefs.join(" ")}"
 	print "Number of live runtime cast types (ie used in as and isa): {analysis.live_cast_types.length}"
 	if analysis.live_cast_types.length < 8 then print "\t{analysis.live_cast_types.join(" ")}"
+
+	var x = 0
+	for p in analysis.live_methods do
+		for d in p.mpropdefs do
+			if analysis.live_methoddefs.has(d) or d.is_abstract then continue
+			x += 1
+		end
+	end
+	print "Number of dead method definitions of live methods: {x}"
 end

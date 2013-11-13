@@ -17,7 +17,7 @@
 
 
 # Base module for nit tools that load, manipulate or transform NIT models
-package abstracttool
+module abstracttool
 
 import mmloader
 import syntax

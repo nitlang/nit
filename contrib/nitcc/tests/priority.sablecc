@@ -1,0 +1,7 @@
+Grammar priority;
+Parser
+e =
+	e '+' e |
+	e '-' e |
+	e '*' e |
+	'0' ;

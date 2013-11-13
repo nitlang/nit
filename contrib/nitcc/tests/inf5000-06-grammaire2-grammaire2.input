@@ -1,0 +1,6 @@
+prods = {many:} prods prod  | {one:} prod ;
+prod = id '=' alts ';' ;
+alts = {many:} alts '|' alt | {one:} alt ;
+alt = altid atoms | atoms ;
+atoms = {many:} atoms atom | {none:} Empty;
+atom = {id:} id | {str:} str ;

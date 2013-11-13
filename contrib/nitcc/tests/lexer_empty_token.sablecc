@@ -1,0 +1,10 @@
+Grammar lexer_empty_token;
+
+Lexer
+
+a= 'a'*;
+b= '';
+
+Parser
+
+p = a | b;

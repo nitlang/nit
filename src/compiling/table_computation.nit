@@ -16,7 +16,7 @@
 # limitations under the License.
 
 # Compute tables for classes and modules.
-package table_computation
+module table_computation
 
 import mmloader
 private import primitive_info

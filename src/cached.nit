@@ -76,7 +76,7 @@ private class CachedPhase
 		cache_mpropdef.static_mtype = mtype.as_nullable
 
 		# Create another new private attribute to store the boolean «is the function cached?»
-		# The point is to manage the case where `null' is a genuine return value of the method
+		# The point is to manage the case where `null` is a genuine return value of the method
 		var is_cached_mpropdef = new MAttributeDef(mclassdef, new MAttribute(mclassdef, "@{name}<is_cached>", private_visibility), location)
 		is_cached_mpropdef.static_mtype = mclassdef.mmodule.get_primitive_class("Bool").mclass_type
 		# FIXME? Because there is a default value ("false") a real propdef is required
@@ -109,15 +109,15 @@ private class CachedPhase
 		proxy_body.collect_tokens_by_text("_cache_write").first.text = cache_mpropdef.mproperty.name
 		proxy_body.collect_tokens_by_text("call_real").first.text = real_mpropdef.mproperty.name
 
-		# FIXME a last transformation cannot be done yet. So, the call to `super` (ASuperExpr) is broken in cached methods.
+		# FIXME a last transformation cannot be done yet. So, the call to `super` (`ASuperExpr`) is broken in cached methods.
 
 		# Give the original body to the private real methoddef
 		real_npropdef.n_block.replace_with(real_body)
 	end
 
 	# Detach `n` from its original AST and attach it to `m` (and its related AST)
-	# `n' must not be already attached to an existing model entity
-	# `m' must not be already attached to an existing AST node
+	# `n` must not be already attached to an existing model entity
+	# `m` must not be already attached to an existing AST node
 	fun associate_propdef(m: MPropDef, n: APropdef)
 	do
 		# FIXME: the model-AST relations **must** be rationalized:
@@ -136,9 +136,6 @@ private class CachedPhase
 		var nclassdef = toolcontext.modelbuilder.mclassdef2nclassdef[mclassdef]
 		# Sanity checks
 		assert nclassdef.mclassdef == mclassdef
-
-		# Required so that some visit can use nclassdef as a context # FIXME it is ugly
-		n.parent = nclassdef
 
 		# Required so that propdef are visited in visitors
 		if not nclassdef.n_propdefs.has(n) then nclassdef.n_propdefs.add(n)

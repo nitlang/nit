@@ -27,8 +27,8 @@ end
 class A
 	annot
 	super Toto is annot
-	super Toto is annot, annot2
-	super Toto is
+	super Tata is annot, annot2
+	super Titi is
 		annot
 		annot2
 	end
@@ -50,5 +50,9 @@ class A
 	end
 end
 
-class Toto
+interface Toto
+end
+interface Tata
+end
+interface Titi
 end

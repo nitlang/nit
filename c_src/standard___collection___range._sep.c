@@ -152,15 +152,21 @@ val_t standard___collection___range___Range___has_only(val_t p0, val_t p1){
     } else {
       nit_abort("Uninitialized attribute %s", "_last", LOCATE_standard___collection___range, 32);
     }
-    fra.me.REG[0] = ATTR_standard___collection___range___Range____last(fra.me.REG[0]);
-    REGB0 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[1],fra.me.REG[0]));
+    fra.me.REG[2] = ATTR_standard___collection___range___Range____last(fra.me.REG[0]);
+    REGB0 = TAG_Bool(IS_EQUAL_OO(fra.me.REG[1],fra.me.REG[2]));
     if (UNTAG_Bool(REGB0)) {
     } else {
-      REGB1 = CALL_standard___kernel___Object_____eqeq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[0]);
+      REGB1 = CALL_standard___kernel___Object_____eqeq(fra.me.REG[1])(fra.me.REG[1], fra.me.REG[2]);
       REGB0 = REGB1;
     }
   } else {
     REGB1 = TAG_Bool(0);
+    REGB0 = REGB1;
+  }
+  if (UNTAG_Bool(REGB0)) {
+    REGB0 = TAG_Bool(1);
+  } else {
+    REGB1 = CALL_standard___collection___abstract_collection___Collection___is_empty(fra.me.REG[0])(fra.me.REG[0]);
     REGB0 = REGB1;
   }
   goto label1;
@@ -315,7 +321,7 @@ val_t standard___collection___range___Range___length(val_t p0){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:237 */
+  /* ../lib/standard/kernel.nit:244 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)>UNTAG_Int(REGB1));
   /* ../lib/standard/collection/range.nit:59 */
   if (UNTAG_Bool(REGB1)) {

@@ -14,14 +14,14 @@
 
 # Table layout builders
 # Tables are used to implement objects mecanisms like:
-#   * message sending
-#	* attribute accessing
-#	* typing
-#	* resolution (for generic types)
+#  * message sending
+#  * attribute accessing
+#  * typing
+#  * resolution (for generic types)
 # This module provides various layout for object tables:
-#	* coloring
-#	* binary matrix
-#	* perfect hashing (and & mod operators)
+#  * coloring
+#  * binary matrix
+#  * perfect hashing (and & mod operators)
 module layout_builders
 
 import abstract_compiler
@@ -54,13 +54,29 @@ interface TypingLayoutBuilder[E: Object]
 	# Build typing table layout
 	# elements: the set of elements (classes or types) used in typing tables
 	fun build_layout(elements: Set[E]): Layout[E] is abstract
+	# Get the poset used for table layout construction
+	# REQUIRE: build_layout
+	fun poset: nullable POSet[E] is abstract
 end
 
 # Layout builder dedicated to vft, attribute & VT tables
-interface PropertyLayoutBuilder[E: MProperty]
+interface PropertyLayoutBuilder[E: PropertyLayoutElement]
 	# Build table layout for attributes, methods and virtual types
-	# elements: the set of classes containing the properties to use in table layout
-	fun build_layout(elements: Set[MClass]): Layout[E] is abstract
+	# elements: the associative map between classes and properties to use in table layout
+	fun build_layout(elements: Map[MClass, Set[E]]): Layout[E] is abstract
+end
+
+# Used to create a common ancestors to MProperty and MPropDef
+# Required for polymorphic calls
+# FIXME: there should be a better way
+interface PropertyLayoutElement end
+
+redef class MProperty
+	super PropertyLayoutElement
+end
+
+redef class MPropDef
+	super PropertyLayoutElement
 end
 
 # For resolution tables (generics)
@@ -70,23 +86,67 @@ interface ResolutionLayoutBuilder
 	fun build_layout(elements: Map[MClassType, Set[MType]]): Layout[MType] is abstract
 end
 
+# POSet builders
+
+# A POSet builder build a poset for a set of MType or MClass
+# the resulting poset is used by the layout builders
+private abstract class POSetBuilder[E: Object]
+	private var mmodule: MModule
+	init(mmodule: MModule) do self.mmodule = mmodule
+	# Build the poset from `elements`
+	private fun build_poset(elements: Set[E]): POSet[E] is abstract
+end
+
+# A TypingLayoutBuilder used for MType based typing
+# such as in separate compilers
+private class MTypePOSetBuilder
+	super POSetBuilder[MType]
+	redef fun build_poset(elements) do
+		var poset = new POSet[MType]
+		for e in elements do
+			poset.add_node(e)
+			for o in elements do
+				if e == o then continue
+				if e.is_subtype(mmodule, null, o) then
+					poset.add_edge(e, o)
+				end
+			end
+		end
+		return poset
+	end
+end
+
+# A TypingLayoutBuilder used for MClass based typing
+# such as in erased compilers or used in property coloring
+private class MClassPOSetBuilder
+	super POSetBuilder[MClass]
+	redef fun build_poset(elements) do return mmodule.flatten_mclass_hierarchy
+end
+
 # Matrice computers
 
 # Abstract layout builder for resolution tables using Binary Matrix (BM)
 abstract class TypingBMizer[E: Object]
 	super TypingLayoutBuilder[E]
 
-	var mmodule: MModule
+	private var mmodule: MModule
+	private var poset_builder: POSetBuilder[E]
+	private var poset_cache: nullable POSet[E]
 
-	init(mmodule: MModule) do
+	private init(mmodule: MModule, poset_builder: POSetBuilder[E]) do
 		self.mmodule = mmodule
+		self.poset_builder = poset_builder
 	end
+
+	redef fun poset do return poset_cache
 
 	# Compute mtypes ids and position using BM
 	redef fun build_layout(elements: Set[E]): Layout[E] do
 		var result = new Layout[E]
 		var ids = new HashMap[E, Int]
-		var lin = self.reverse_linearize(elements)
+		poset_cache = poset_builder.build_poset(elements)
+		var lin = poset.to_a
+		poset.sort(lin)
 		for element in lin do
 			ids[element] = ids.length
 		end
@@ -94,30 +154,18 @@ abstract class TypingBMizer[E: Object]
 		result.pos = ids
 		return result
 	end
-
-	private fun reverse_linearize(elements: Set[E]): Array[E] is abstract
 end
 
 # Layout builder for typing tables based on classes using Binary Matrix (BM)
 class MTypeBMizer
 	super TypingBMizer[MType]
-
-	init(mmodule: MModule) do super(mmodule)
-
-	redef fun reverse_linearize(elements) do
-		return self.mmodule.reverse_linearize_mtypes(elements)
-	end
+	init(mmodule: MModule) do super(mmodule, new MTypePOSetBuilder(mmodule))
 end
 
 # Layout builder for typing tables based on types using Binary Matrix (BM)
 class MClassBMizer
 	super TypingBMizer[MClass]
-
-	init(mmodule: MModule) do super(mmodule)
-
-	redef fun reverse_linearize(elements) do
-		return self.mmodule.reverse_linearize_mclasses(elements)
-	end
+	init(mmodule: MModule) do super(mmodule, new MClassPOSetBuilder(mmodule))
 end
 
 # Layout builder for resolution tables using Binary Matrix (BM)
@@ -144,10 +192,8 @@ class ResolutionBMizer
 end
 
 # Abstract Layout builder for mproperties using Binary Matrix (BM)
-abstract class MPropertyBMizer[E: MProperty]
+class MPropertyBMizer[E: PropertyLayoutElement]
 	super PropertyLayoutBuilder[E]
-
-	type MPROP: MProperty
 
 	var mmodule: MModule
 
@@ -156,9 +202,11 @@ abstract class MPropertyBMizer[E: MProperty]
 	redef fun build_layout(elements) do
 		var result = new Layout[E]
 		var ids = new HashMap[E, Int]
-		var lin = linearize_mclasses(elements)
+		var lin = new Array[MClass]
+		lin.add_all(elements.keys)
+		self.mmodule.linearize_mclasses(lin)
 		for mclass in lin do
-			for mproperty in properties(mclass) do
+			for mproperty in elements[mclass] do
 				if ids.has_key(mproperty) then continue
 				ids[mproperty] = ids.length
 			end
@@ -166,47 +214,6 @@ abstract class MPropertyBMizer[E: MProperty]
 		result.pos = ids
 		return result
 	end
-
-	# extract properties of a mclass
-	private fun properties(mclass: MClass): Set[E] do
-		var properties = new HashSet[E]
-		for mprop in self.mmodule.properties(mclass) do
-			if mprop isa MPROP then properties.add(mprop)
-		end
-		return properties
-	end
-
-	private fun linearize_mclasses(mclasses: Set[MClass]): Array[MClass] is abstract
-end
-
-# Layout builder for vft using Binary Matrix (BM)
-class MMethodBMizer
-	super MPropertyBMizer[MMethod]
-
-	redef type MPROP: MMethod
-	init(mmodule: MModule) do super(mmodule)
-	# Less holes in tables with reverse linearization for method tables
-	redef fun linearize_mclasses(mclasses) do return self.mmodule.reverse_linearize_mclasses(mclasses)
-end
-
-# Layout builder for attribute tables using Binary Matrix (BM)
-class MAttributeBMizer
-	super MPropertyBMizer[MAttribute]
-
-	redef type MPROP: MAttribute
-	init(mmodule: MModule) do super(mmodule)
-	# Less holes in tables with linearization for attribute tables
-	redef fun linearize_mclasses(mclasses) do return self.mmodule.linearize_mclasses_2(mclasses)
-end
-
-# BMizing for MVirtualTypeProps
-class MVirtualTypePropBMizer
-	super MPropertyBMizer[MVirtualTypeProp]
-
-	redef type MPROP: MVirtualTypeProp
-	init(mmodule: MModule) do super(mmodule)
-	# Less holes in tables with reverse linearization for method tables
-	redef fun linearize_mclasses(mclasses) do return self.mmodule.reverse_linearize_mclasses(mclasses)
 end
 
 # Colorers
@@ -218,13 +225,22 @@ abstract class TypingColorer[E: Object]
 	private var core: Set[E] = new HashSet[E]
 	private var crown: Set[E] = new HashSet[E]
 	private var border: Set[E] = new HashSet[E]
-
 	private var coloration_result: Map[E, Int] = new HashMap[E, Int]
 
-	init do end
+	private var mmodule: MModule
+	private var poset_builder: POSetBuilder[E]
+	private var poset_cache: nullable POSet[E]
+
+	private init(mmodule: MModule, poset_builder: POSetBuilder[E]) do
+		self.mmodule = mmodule
+		self.poset_builder = poset_builder
+	end
+
+	redef fun poset do return poset_cache
 
 	# Compute the layout with coloring
 	redef fun build_layout(elements: Set[E]): Layout[E] do
+		poset_cache = poset_builder.build_poset(elements)
 		var result = new Layout[E]
 		result.ids = compute_ids(elements)
 		result.pos = colorize(elements)
@@ -233,8 +249,7 @@ abstract class TypingColorer[E: Object]
 
 	private fun compute_ids(elements: Set[E]): Map[E, Int] do
 		var ids = new HashMap[E, Int]
-		var lin = reverse_linearize(elements)
-		for element in lin do
+		for element in reverse_linearize(elements) do
 			ids[element] = ids.length
 		end
 		return ids
@@ -242,7 +257,7 @@ abstract class TypingColorer[E: Object]
 
 	private fun colorize(elements: Set[E]): Map[E, Int] do
 		tag_elements(elements)
-		build_conflicts_graph(elements)
+		build_conflicts_graph
 		colorize_elements(core)
 		colorize_elements(border)
 		colorize_elements(crown)
@@ -271,7 +286,8 @@ abstract class TypingColorer[E: Object]
 				if coloration_result.has_key(st) and coloration_result[st] == color then return false
 			end
 		end
-		for st in self.super_elements(element, elements) do
+		for st in self.poset[element].greaters do
+			if st == element then continue
 			if coloration_result.has_key(st) and coloration_result[st] == color then return false
 		end
 		return true
@@ -282,23 +298,21 @@ abstract class TypingColorer[E: Object]
 		for element in elements do
 			# Check if sub elements are all in single inheritance
 			var all_subelements_si = true
-			for subelem in self.sub_elements(element, elements) do
-				if self.is_element_mi(subelem, elements) then
+			for subelem in self.poset[element].smallers do
+				if self.poset[subelem].direct_greaters.length > 1 then
 					all_subelements_si = false
 					break
 				end
 			end
 
 			# Tag as core, crown or border
-			if self.is_element_mi(element, elements) then
-				core.add_all(self.super_elements(element, elements))
-				core.add(element)
+			if self.poset[element].direct_greaters.length > 1 then
+				core.add_all(self.poset[element].greaters)
 				if all_subelements_si then
 					border.add(element)
 				end
 			else if not all_subelements_si then
-				core.add_all(self.super_elements(element, elements))
-				core.add(element)
+				core.add_all(self.poset[element].greaters)
 			else
 				crown.add(element)
 			end
@@ -306,18 +320,18 @@ abstract class TypingColorer[E: Object]
 	end
 
 	# Conflicts graph of elements hierarchy (two types are in conflict if they have common subelements)
-	private fun build_conflicts_graph(elements: Set[E]) do
+	private fun build_conflicts_graph do
 		self.conflicts_graph = new HashMap[E, HashSet[E]]
 		var core = reverse_linearize(self.core)
 		for t in core do
-			for i in self.linear_extension(t, elements) do
+			for i in self.linear_extension(t) do
 				if t == i then continue
 
-				var lin_i = self.linear_extension(i, elements)
+				var lin_i = self.linear_extension(i)
 
-				for j in self.linear_extension(t, elements) do
+				for j in self.linear_extension(t) do
 					if i == j or j == t then continue
-					var lin_j = self.linear_extension(j, elements)
+					var lin_j = self.linear_extension(j)
 
 					var d_ij = lin_i - lin_j
 					var d_ji = lin_j - lin_i
@@ -343,109 +357,85 @@ abstract class TypingColorer[E: Object]
 	private var linear_extensions_cache: Map[E, Array[E]] = new HashMap[E, Array[E]]
 
 	# Return a linear_extension of super_elements of the element
-	private fun linear_extension(element: E, elements: Set[E]): Array[E] do
+	private fun linear_extension(element: E): Array[E] do
 		if not self.linear_extensions_cache.has_key(element) then
 			var supers = new HashSet[E]
-			supers.add(element)
-			supers.add_all(self.super_elements(element, elements))
+			supers.add_all(self.poset[element].greaters)
 			self.linear_extensions_cache[element] = self.linearize(supers)
 		end
 		return self.linear_extensions_cache[element]
 	end
 
-	private fun super_elements(element: E, elements: Set[E]): Set[E] is abstract
-	private fun sub_elements(element: E, elements: Set[E]): Set[E] is abstract
-	private fun is_element_mi(element: E, elements: Set[E]): Bool is abstract
-	private fun linearize(elements: Set[E]): Array[E] is abstract
-	private fun reverse_linearize(elements: Set[E]): Array[E] is abstract
+	private fun reverse_linearize(elements: Set[E]): Array[E] do
+		var lin = new Array[E]
+		lin.add_all(elements)
+		poset.sort(lin)
+		return lin
+	end
+	private fun linearize(elements: Set[E]): Array[E] do return reverse_linearize(elements).reversed
 end
 
 # Layout builder for typing tables based on types using coloration (CL)
 class MTypeColorer
 	super TypingColorer[MType]
-
-	var mmodule: MModule
-
-	init(mmodule: MModule) do self.mmodule = mmodule
-
-	redef fun super_elements(element, elements) do return self.mmodule.super_mtypes(element, elements)
-	redef fun is_element_mi(element, elements) do return self.super_elements(element, elements).length > 1
-	redef fun sub_elements(element, elements) do do return self.mmodule.sub_mtypes(element, elements)
-	redef fun linearize(elements) do return self.mmodule.linearize_mtypes(elements)
-	redef fun reverse_linearize(elements) do return self.mmodule.reverse_linearize_mtypes(elements)
+	init(mmodule: MModule) do super(mmodule, new MTypePOSetBuilder(mmodule))
 end
 
 # Layout builder for typing tables based on classes using coloration (CL)
 class MClassColorer
 	super TypingColorer[MClass]
-
-	private var mmodule: MModule
-
-	init(mmodule: MModule) do self.mmodule = mmodule
-
-	redef fun super_elements(element, elements) do return self.mmodule.super_mclasses(element)
-	fun parent_elements(element: MClass): Set[MClass] do return self.mmodule.parent_mclasses(element)
-	redef fun is_element_mi(element, elements) do return self.parent_elements(element).length > 1
-	redef fun sub_elements(element, elements) do do return self.mmodule.sub_mclasses(element)
-	redef fun linearize(elements) do return self.mmodule.linearize_mclasses_2(elements)
-	redef fun reverse_linearize(elements) do return self.mmodule.reverse_linearize_mclasses(elements)
+	init(mmodule: MModule) do super(mmodule, new MClassPOSetBuilder(mmodule))
 end
 
 # Abstract Layout builder for properties tables using coloration (CL)
-abstract class MPropertyColorer[E: MProperty]
+class MPropertyColorer[E: PropertyLayoutElement]
 	super PropertyLayoutBuilder[E]
-
-	type MPROP: MProperty
 
 	private var mmodule: MModule
 	private var class_colorer: MClassColorer
 	private var coloration_result: Map[E, Int] = new HashMap[E, Int]
 
-	init(mmodule: MModule) do
+	init(mmodule: MModule, class_colorer: MClassColorer) do
 		self.mmodule = mmodule
-		self.class_colorer = new MClassColorer(mmodule)
+		self.class_colorer = class_colorer
 	end
 
 	# Compute mclasses ids and position using BM
-	redef fun build_layout(mclasses: Set[MClass]): Layout[E] do
+	redef fun build_layout(elements: Map[MClass, Set[E]]): Layout[E] do
 		var result = new Layout[E]
-		result.pos = self.colorize(mclasses)
+		result.pos = self.colorize(elements)
 		return result
 	end
 
-	private fun colorize(mclasses: Set[MClass]): Map[E, Int] do
-		self.class_colorer.tag_elements(mclasses)
-		self.class_colorer.build_conflicts_graph(mclasses)
-		self.colorize_core(self.class_colorer.core)
-		self.colorize_crown(self.class_colorer.crown)
+	private fun colorize(elements: Map[MClass, Set[E]]): Map[E, Int] do
+		self.colorize_core(elements)
+		self.colorize_crown(elements)
 		return self.coloration_result
 	end
 
 	# Colorize properties of the core hierarchy
-	private fun colorize_core(mclasses: Set[MClass]) do
+	private fun colorize_core(elements: Map[MClass, Set[E]]) do
 		var min_color = 0
-		for mclass in mclasses do
+		for mclass in self.class_colorer.core do
 			var color = min_color
-
-			# if the class is root, get the minimal color
-			if self.mmodule.parent_mclasses(mclass).length == 0 then
-				colorize_elements(self.properties(mclass), color)
-			else
-				# check last color used by parents
-				color = max_color(color, self.mmodule.parent_mclasses(mclass))
-				# check max color used in conflicts
-				if self.class_colorer.conflicts_graph.has_key(mclass) then
-					color = max_color(color, self.class_colorer.conflicts_graph[mclass])
-				end
-				colorize_elements(self.properties(mclass), color)
+			# check last color used by parents
+			color = max_color(color, mclass.in_hierarchy(mmodule).direct_greaters, elements)
+			# check max color used in conflicts
+			if self.class_colorer.conflicts_graph.has_key(mclass) then
+				color = max_color(color, self.class_colorer.conflicts_graph[mclass], elements)
 			end
+			colorize_elements(elements[mclass], color)
 		end
 	end
 
 	# Colorize properties of the crown hierarchy
-	private fun colorize_crown(mclasses: Set[MClass]) do
-		for mclass in mclasses do
-			colorize_elements(self.properties(mclass), max_color(0, self.mmodule.parent_mclasses(mclass)))
+	private fun colorize_crown(elements: Map[MClass, Set[E]]) do
+		for mclass in self.class_colorer.crown do
+			var parents = new HashSet[MClass]
+			if mmodule.flatten_mclass_hierarchy.has(mclass) then
+				parents.add_all(mclass.in_hierarchy(mmodule).direct_greaters)
+			end
+			colorize_elements(elements[mclass], max_color(0, parents, elements))
 		end
 	end
 
@@ -458,11 +448,11 @@ abstract class MPropertyColorer[E: MProperty]
 		end
 	end
 
-	private fun max_color(min_color: Int, mclasses: Collection[MClass]): Int do
+	private fun max_color(min_color: Int, mclasses: Collection[MClass], elements: Map[MClass, Set[E]]): Int do
 		var max_color = min_color
 
 		for mclass in mclasses do
-			for mproperty in self.properties(mclass) do
+			for mproperty in elements[mclass] do
 				var color = min_color
 				if self.coloration_result.has_key(mproperty) then
 					color = self.coloration_result[mproperty]
@@ -472,39 +462,6 @@ abstract class MPropertyColorer[E: MProperty]
 		end
 		return max_color
 	end
-
-	# Filter properties
-	private fun properties(mclass: MClass): Set[E] do
-		var properties = new HashSet[E]
-		for mprop in self.mmodule.properties(mclass) do
-			if mprop isa MPROP then properties.add(mprop)
-		end
-		return properties
-	end
-end
-
-# Layout builder for vft using coloration (CL)
-class MMethodColorer
-	super MPropertyColorer[MMethod]
-
-	redef type MPROP: MMethod
-	init(mmodule: MModule) do super
-end
-
-# Layout builder for attributes using coloration (CL)
-class MAttributeColorer
-	super MPropertyColorer[MAttribute]
-
-	redef type MPROP: MAttribute
-	init(mmodule: MModule) do super
-end
-
-# Layout builder for virtual types using coloration (CL)
-class MVirtualTypePropColorer
-	super MPropertyColorer[MVirtualTypeProp]
-
-	redef type MPROP: MVirtualTypeProp
-	init(mmodule: MModule) do super
 end
 
 # Layout builder for resolution tables using coloration (CL)
@@ -594,7 +551,7 @@ private class PerfectHasher[T: Object, U: Object]
 
 	var operator: PHOperator
 
-	init(operator: PHOperator) do self.operator = operator
+	init do end
 
 	# Compute mask for each holders
 	fun compute_masks(conflicts: Map[T, Set[U]], ids: Map[U, Int]): Map[T, Int] do
@@ -665,26 +622,31 @@ class TypingHasher[E: Object]
 	super PerfectHasher[E, E]
 	super TypingLayoutBuilder[E]
 
-	var mmodule: MModule
+	private var mmodule: MModule
+	private var poset_builder: POSetBuilder[E]
+	private var poset_cache: nullable POSet[E]
 
-	init(operator: PHOperator, mmodule: MModule) do
-		super(operator)
+	private init(mmodule: MModule, poset_builder: POSetBuilder[E], operator: PHOperator) do
+		self.operator = operator
 		self.mmodule = mmodule
+		self.poset_builder = poset_builder
 	end
 
 	redef fun build_layout(elements: Set[E]): PHLayout[E, E] do
+		poset_cache = poset_builder.build_poset(elements)
 		var result = new PHLayout[E, E]
 		var conflicts = self.build_conflicts(elements)
-		result.ids = self.compute_ids(elements)
+		result.ids = self.compute_ids
 		result.masks = self.compute_masks(conflicts, result.ids)
 		result.hashes = self.compute_hashes(conflicts, result.ids, result.masks)
 		return result
 	end
 
 	# Ids start from 1 instead of 0
-	private fun compute_ids(elements: Set[E]): Map[E, Int] do
+	private fun compute_ids: Map[E, Int] do
 		var ids = new HashMap[E, Int]
-		var lin = self.reverse_linearize(elements)
+		var lin = poset.to_a
+		poset.sort(lin)
 		for e in lin do
 			ids[e] = ids.length + 1
 		end
@@ -694,73 +656,64 @@ class TypingHasher[E: Object]
 	private fun build_conflicts(elements: Set[E]): Map[E, Set[E]] do
 		var conflicts = new HashMap[E, Set[E]]
 		for e in elements do
-			var supers = self.super_elements(e, elements)
+			var supers = new HashSet[E]
+			supers.add_all(self.poset[e].greaters)
 			supers.add(e)
 			conflicts[e] = supers
 		end
 		return conflicts
 	end
-
-	private fun super_elements(element: E, elements: Set[E]): Set[E] is abstract
-	private fun reverse_linearize(elements: Set[E]): Array[E] is abstract
 end
 
 # Layout builder for typing tables with types using perfect hashing (PH)
 class MTypeHasher
 	super TypingHasher[MType]
-
-	init(operator: PHOperator, mmodule: MModule) do super(operator, mmodule)
-
-	redef fun super_elements(element, elements) do
-		return self.mmodule.super_mtypes(element, elements)
-	end
-
-	redef fun reverse_linearize(elements) do
-		return self.mmodule.reverse_linearize_mtypes(elements)
-	end
+	init(operator: PHOperator, mmodule: MModule) do super(mmodule, new MTypePOSetBuilder(mmodule), operator)
 end
 
 # Layout builder for typing tables with classes using perfect hashing (PH)
 class MClassHasher
 	super TypingHasher[MClass]
-
-	init(operator: PHOperator, mmodule: MModule) do super(operator, mmodule)
-
-	redef fun super_elements(element, elements) do
-		return self.mmodule.super_mclasses(element)
-	end
-
-	redef fun reverse_linearize(elements) do
-		return self.mmodule.reverse_linearize_mclasses(elements)
-	end
+	init(operator: PHOperator, mmodule: MModule) do super(mmodule, new MClassPOSetBuilder(mmodule), operator)
 end
 
 # Abstract layout builder for properties tables using perfect hashing (PH)
-class MPropertyHasher[E: MProperty]
+class MPropertyHasher[E: PropertyLayoutElement]
 	super PerfectHasher[MClass, E]
 	super PropertyLayoutBuilder[E]
-
-	type MPROP: MProperty
 
 	var mmodule: MModule
 
 	init(operator: PHOperator, mmodule: MModule) do
-		super(operator)
+		self.operator = operator
 		self.mmodule = mmodule
 	end
 
-	redef fun build_layout(mclasses) do
+	fun build_poset(mclasses: Set[MClass]): POSet[MClass] do
+		var poset = new POSet[MClass]
+		for e in mclasses do
+			poset.add_node(e)
+			for o in mclasses do
+				if e == o or not mmodule.flatten_mclass_hierarchy.has(e) then continue
+				if e.in_hierarchy(mmodule) < o then poset.add_edge(e, o)
+			end
+		end
+		return poset
+	end
+
+	redef fun build_layout(elements) do
 		var result = new PHLayout[MClass, E]
 		var ids = new HashMap[E, Int]
-		var elements = new HashMap[MClass, Set[E]]
-		var lin = linearize_mclasses(mclasses)
-		for mclass in lin do
-			var mproperties = properties(mclass)
-			for mproperty in mproperties do
+		var mclasses = new HashSet[MClass]
+		mclasses.add_all(elements.keys)
+		var poset = build_poset(mclasses)
+		var lin = poset.to_a
+		poset.sort(lin)
+		for mclass in lin.reversed do
+			for mproperty in elements[mclass] do
 				if ids.has_key(mproperty) then continue
 				ids[mproperty] = ids.length + 1
 			end
-			elements[mclass] = mproperties
 		end
 		result.ids = ids
 		result.pos = ids
@@ -768,44 +721,6 @@ class MPropertyHasher[E: MProperty]
 		result.hashes = self.compute_hashes(elements, ids, result.masks)
 		return result
 	end
-
-	# extract set of properties from mclass
-	private fun properties(mclass: MClass): Set[E] do
-		var properties = new HashSet[E]
-		for mprop in self.mmodule.properties(mclass) do
-			if mprop isa MPROP then properties.add(mprop)
-		end
-		return properties
-	end
-
-	private fun linearize_mclasses(mclasses: Set[MClass]): Array[MClass] is abstract
-end
-
-# Layout builder for vft using perfect hashing (PH)
-class MMethodHasher
-	super MPropertyHasher[MMethod]
-
-	redef type MPROP: MMethod
-	init(operator: PHOperator, mmodule: MModule) do super(operator, mmodule)
-	redef fun linearize_mclasses(mclasses) do return self.mmodule.reverse_linearize_mclasses(mclasses)
-end
-
-# Layout builder for attributes tables using perfect hashing (PH)
-class MAttributeHasher
-	super MPropertyHasher[MAttribute]
-
-	redef type MPROP: MAttribute
-	init(operator: PHOperator, mmodule: MModule) do super(operator, mmodule)
-	redef fun linearize_mclasses(mclasses) do return self.mmodule.linearize_mclasses_2(mclasses)
-end
-
-# Layout builder for virtual types tables using perfect hashing (PH)
-class MVirtualTypePropHasher
-	super MPropertyHasher[MVirtualTypeProp]
-
-	redef type MPROP: MVirtualTypeProp
-	init(operator: PHOperator, mmodule: MModule) do super(operator, mmodule)
-	redef fun linearize_mclasses(mclasses) do return self.mmodule.reverse_linearize_mclasses(mclasses)
 end
 
 # Layout builder for resolution tables using perfect hashing (PH)
@@ -813,7 +728,7 @@ class ResolutionHasher
 	super PerfectHasher[MClassType, MType]
 	super ResolutionLayoutBuilder
 
-	init(operator: PHOperator) do super(operator)
+	init(operator: PHOperator) do self.operator = operator
 
 	# Compute resolved types masks and hashes
 	redef fun build_layout(elements) do

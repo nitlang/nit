@@ -44,7 +44,7 @@ val_t standard___collection___hash_collection___HashCollection___index_at(val_t 
     nit_abort("Uninitialized attribute %s", "_capacity", LOCATE_standard___collection___hash_collection, 39);
   }
   REGB1 = ATTR_standard___collection___hash_collection___HashCollection____capacity(fra.me.REG[0]);
-  /* ../lib/standard/kernel.nit:243 */
+  /* ../lib/standard/kernel.nit:250 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)%UNTAG_Int(REGB1));
   /* ../lib/standard/collection/hash_collection.nit:40 */
   REGB0 = TAG_Int(0);
@@ -53,11 +53,11 @@ val_t standard___collection___hash_collection___HashCollection___index_at(val_t 
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:235 */
+  /* ../lib/standard/kernel.nit:242 */
   REGB0 = TAG_Bool(UNTAG_Int(REGB1)<UNTAG_Int(REGB0));
   /* ../lib/standard/collection/hash_collection.nit:40 */
   if (UNTAG_Bool(REGB0)) {
-    /* ../lib/standard/kernel.nit:239 */
+    /* ../lib/standard/kernel.nit:246 */
     REGB0 = TAG_Int(-UNTAG_Int(REGB1));
     /* ../lib/standard/collection/hash_collection.nit:40 */
     REGB1 = REGB0;
@@ -133,7 +133,7 @@ val_t standard___collection___hash_collection___HashCollection___node_at_idx(val
   if (UNTAG_Bool(REGB1)) {
     nit_abort("Reciever is null", NULL, LOCATE_standard___collection___hash_collection, 59);
   }
-  /* ../lib/standard/collection/array.nit:724 */
+  /* ../lib/standard/collection/array.nit:725 */
   fra.me.REG[0] = ((Nit_NativeArray)fra.me.REG[0])->val[UNTAG_Int(REGB0)];
   /* ../lib/standard/collection/hash_collection.nit:60 */
   while(1) {
@@ -250,7 +250,7 @@ void standard___collection___hash_collection___HashCollection___store(val_t p0, 
   if (UNTAG_Bool(REGB1)) {
     nit_abort("Reciever is null", NULL, LOCATE_standard___collection___hash_collection, 84);
   }
-  /* ../lib/standard/collection/array.nit:724 */
+  /* ../lib/standard/collection/array.nit:725 */
   fra.me.REG[2] = ((Nit_NativeArray)fra.me.REG[2])->val[UNTAG_Int(REGB0)];
   /* ../lib/standard/collection/hash_collection.nit:85 */
   fra.me.REG[3] = ATTR_standard___collection___hash_collection___HashCollection____array(fra.me.REG[0]);
@@ -258,7 +258,7 @@ void standard___collection___hash_collection___HashCollection___store(val_t p0, 
   if (UNTAG_Bool(REGB1)) {
     nit_abort("Reciever is null", NULL, LOCATE_standard___collection___hash_collection, 85);
   }
-  /* ../lib/standard/collection/array.nit:725 */
+  /* ../lib/standard/collection/array.nit:726 */
   ((Nit_NativeArray)fra.me.REG[3])->val[UNTAG_Int(REGB0)]=fra.me.REG[1];
   /* ../lib/standard/collection/hash_collection.nit:86 */
   ATTR_standard___collection___hash_collection___HashNode____next_in_bucklet(fra.me.REG[1]) = fra.me.REG[2];
@@ -298,21 +298,21 @@ void standard___collection___hash_collection___HashCollection___store(val_t p0, 
   REGB0 = ATTR_standard___collection___hash_collection___HashCollection____length(fra.me.REG[0]);
   /* ../lib/standard/collection/hash_collection.nit:94 */
   REGB1 = TAG_Int(1);
-  /* ../lib/standard/kernel.nit:238 */
+  /* ../lib/standard/kernel.nit:245 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
   /* ../lib/standard/collection/hash_collection.nit:94 */
   ATTR_standard___collection___hash_collection___HashCollection____length(fra.me.REG[0]) = REGB1;
   /* ../lib/standard/collection/hash_collection.nit:95 */
   REGB1 = TAG_Int(5);
-  /* ../lib/standard/kernel.nit:238 */
+  /* ../lib/standard/kernel.nit:245 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
   /* ../lib/standard/collection/hash_collection.nit:95 */
   REGB2 = TAG_Int(3);
-  /* ../lib/standard/kernel.nit:241 */
+  /* ../lib/standard/kernel.nit:248 */
   REGB2 = TAG_Int(UNTAG_Int(REGB1)*UNTAG_Int(REGB2));
   /* ../lib/standard/collection/hash_collection.nit:95 */
   REGB1 = TAG_Int(2);
-  /* ../lib/standard/kernel.nit:242 */
+  /* ../lib/standard/kernel.nit:249 */
   REGB1 = TAG_Int(UNTAG_Int(REGB2)/UNTAG_Int(REGB1));
   /* ../lib/standard/collection/hash_collection.nit:95 */
   REGB0 = REGB1;
@@ -328,13 +328,13 @@ void standard___collection___hash_collection___HashCollection___store(val_t p0, 
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:236 */
+  /* ../lib/standard/kernel.nit:243 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)>=UNTAG_Int(REGB1));
   /* ../lib/standard/collection/hash_collection.nit:96 */
   if (UNTAG_Bool(REGB1)) {
     /* ../lib/standard/collection/hash_collection.nit:97 */
     REGB1 = TAG_Int(2);
-    /* ../lib/standard/kernel.nit:241 */
+    /* ../lib/standard/kernel.nit:248 */
     REGB1 = TAG_Int(UNTAG_Int(REGB0)*UNTAG_Int(REGB1));
     /* ../lib/standard/collection/hash_collection.nit:97 */
     CALL_standard___collection___hash_collection___HashCollection___enlarge(fra.me.REG[0])(fra.me.REG[0], REGB1);
@@ -432,7 +432,7 @@ void standard___collection___hash_collection___HashCollection___remove_node(val_
   /* ../lib/standard/collection/hash_collection.nit:123 */
   REGB1 = ATTR_standard___collection___hash_collection___HashCollection____length(fra.me.REG[0]);
   REGB2 = TAG_Int(1);
-  /* ../lib/standard/kernel.nit:240 */
+  /* ../lib/standard/kernel.nit:247 */
   REGB2 = TAG_Int(UNTAG_Int(REGB1)-UNTAG_Int(REGB2));
   /* ../lib/standard/collection/hash_collection.nit:123 */
   ATTR_standard___collection___hash_collection___HashCollection____length(fra.me.REG[0]) = REGB2;
@@ -466,7 +466,7 @@ void standard___collection___hash_collection___HashCollection___remove_node(val_
     if (UNTAG_Bool(REGB2)) {
       nit_abort("Reciever is null", NULL, LOCATE_standard___collection___hash_collection, 129);
     }
-    /* ../lib/standard/collection/array.nit:725 */
+    /* ../lib/standard/collection/array.nit:726 */
     ((Nit_NativeArray)fra.me.REG[1])->val[UNTAG_Int(REGB0)]=fra.me.REG[3];
   }
   /* ../lib/standard/collection/hash_collection.nit:131 */
@@ -518,7 +518,7 @@ void standard___collection___hash_collection___HashCollection___raz(val_t p0){
   }
   REGB0 = ATTR_standard___collection___hash_collection___HashCollection____capacity(fra.me.REG[0]);
   REGB1 = TAG_Int(1);
-  /* ../lib/standard/kernel.nit:240 */
+  /* ../lib/standard/kernel.nit:247 */
   REGB1 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB1));
   /* ../lib/standard/collection/hash_collection.nit:142 */
   while(1) {
@@ -528,7 +528,7 @@ void standard___collection___hash_collection___HashCollection___raz(val_t p0){
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:236 */
+    /* ../lib/standard/kernel.nit:243 */
     REGB0 = TAG_Bool(UNTAG_Int(REGB1)>=UNTAG_Int(REGB0));
     /* ../lib/standard/collection/hash_collection.nit:142 */
     if (UNTAG_Bool(REGB0)) {
@@ -538,11 +538,11 @@ void standard___collection___hash_collection___HashCollection___raz(val_t p0){
       if (UNTAG_Bool(REGB0)) {
         nit_abort("Reciever is null", NULL, LOCATE_standard___collection___hash_collection, 143);
       }
-      /* ../lib/standard/collection/array.nit:725 */
+      /* ../lib/standard/collection/array.nit:726 */
       ((Nit_NativeArray)fra.me.REG[1])->val[UNTAG_Int(REGB1)]=NIT_NULL;
       /* ../lib/standard/collection/hash_collection.nit:144 */
       REGB0 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:240 */
+      /* ../lib/standard/kernel.nit:247 */
       REGB0 = TAG_Int(UNTAG_Int(REGB1)-UNTAG_Int(REGB0));
       /* ../lib/standard/collection/hash_collection.nit:144 */
       REGB1 = REGB0;
@@ -600,14 +600,14 @@ void standard___collection___hash_collection___HashCollection___enlarge(val_t p0
   }
   REGB2 = ATTR_standard___collection___hash_collection___HashCollection____length(fra.me.REG[0]);
   REGB3 = TAG_Int(1);
-  /* ../lib/standard/kernel.nit:238 */
+  /* ../lib/standard/kernel.nit:245 */
   REGB3 = TAG_Int(UNTAG_Int(REGB2)+UNTAG_Int(REGB3));
   REGB2 = TAG_Bool(VAL_ISA(REGB3, VTCOLOR_standard___kernel___Comparable___OTHER(REGB0), VTID_standard___kernel___Comparable___OTHER(REGB0))) /*cast OTHER*/;
   if (UNTAG_Bool(REGB2)) {
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:235 */
+  /* ../lib/standard/kernel.nit:242 */
   REGB3 = TAG_Bool(UNTAG_Int(REGB0)<UNTAG_Int(REGB3));
   /* ../lib/standard/collection/hash_collection.nit:157 */
   if (UNTAG_Bool(REGB3)) {
@@ -618,7 +618,7 @@ void standard___collection___hash_collection___HashCollection___enlarge(val_t p0
     }
     REGB3 = ATTR_standard___collection___hash_collection___HashCollection____length(fra.me.REG[0]);
     REGB2 = TAG_Int(1);
-    /* ../lib/standard/kernel.nit:238 */
+    /* ../lib/standard/kernel.nit:245 */
     REGB2 = TAG_Int(UNTAG_Int(REGB3)+UNTAG_Int(REGB2));
     /* ../lib/standard/collection/hash_collection.nit:157 */
     REGB0 = REGB2;
@@ -635,7 +635,7 @@ void standard___collection___hash_collection___HashCollection___enlarge(val_t p0
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:234 */
+  /* ../lib/standard/kernel.nit:241 */
   REGB2 = TAG_Bool(UNTAG_Int(REGB0)<=UNTAG_Int(REGB2));
   /* ../lib/standard/collection/hash_collection.nit:158 */
   if (UNTAG_Bool(REGB2)) {
@@ -645,13 +645,13 @@ void standard___collection___hash_collection___HashCollection___enlarge(val_t p0
   ATTR_standard___collection___hash_collection___HashCollection____capacity(fra.me.REG[0]) = REGB0;
   /* ../lib/standard/collection/hash_collection.nit:160 */
   ATTR_standard___collection___hash_collection___HashCollection____last_accessed_key(fra.me.REG[0]) = NIT_NULL;
-  /* ../lib/standard/collection/array.nit:718 */
+  /* ../lib/standard/collection/array.nit:719 */
   fra.me.REG[1] = NEW_NativeArray(UNTAG_Int(REGB0), sizeof(val_t));
   /* ../lib/standard/collection/hash_collection.nit:164 */
   ATTR_standard___collection___hash_collection___HashCollection____array(fra.me.REG[0]) = fra.me.REG[1];
   /* ../lib/standard/collection/hash_collection.nit:167 */
   REGB2 = TAG_Int(1);
-  /* ../lib/standard/kernel.nit:240 */
+  /* ../lib/standard/kernel.nit:247 */
   REGB2 = TAG_Int(UNTAG_Int(REGB0)-UNTAG_Int(REGB2));
   /* ../lib/standard/collection/hash_collection.nit:168 */
   while(1) {
@@ -661,15 +661,15 @@ void standard___collection___hash_collection___HashCollection___enlarge(val_t p0
     } else {
       nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
     }
-    /* ../lib/standard/kernel.nit:236 */
+    /* ../lib/standard/kernel.nit:243 */
     REGB0 = TAG_Bool(UNTAG_Int(REGB2)>=UNTAG_Int(REGB0));
     /* ../lib/standard/collection/hash_collection.nit:168 */
     if (UNTAG_Bool(REGB0)) {
-      /* ../lib/standard/collection/array.nit:725 */
+      /* ../lib/standard/collection/array.nit:726 */
       ((Nit_NativeArray)fra.me.REG[1])->val[UNTAG_Int(REGB2)]=NIT_NULL;
       /* ../lib/standard/collection/hash_collection.nit:170 */
       REGB0 = TAG_Int(1);
-      /* ../lib/standard/kernel.nit:240 */
+      /* ../lib/standard/kernel.nit:247 */
       REGB0 = TAG_Int(UNTAG_Int(REGB2)-UNTAG_Int(REGB0));
       /* ../lib/standard/collection/hash_collection.nit:170 */
       REGB2 = REGB0;
@@ -691,7 +691,7 @@ void standard___collection___hash_collection___HashCollection___enlarge(val_t p0
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:234 */
+  /* ../lib/standard/kernel.nit:241 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB2)<=UNTAG_Int(REGB1));
   /* ../lib/standard/collection/hash_collection.nit:173 */
   if (UNTAG_Bool(REGB1)) {
@@ -723,9 +723,9 @@ void standard___collection___hash_collection___HashCollection___enlarge(val_t p0
       }
       fra.me.REG[3] = ATTR_standard___collection___hash_collection___HashNode____key(fra.me.REG[2]);
       REGB1 = CALL_standard___collection___hash_collection___HashCollection___index_at(fra.me.REG[0])(fra.me.REG[0], fra.me.REG[3]);
-      /* ../lib/standard/collection/array.nit:724 */
-      fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[1])->val[UNTAG_Int(REGB1)];
       /* ../lib/standard/collection/array.nit:725 */
+      fra.me.REG[3] = ((Nit_NativeArray)fra.me.REG[1])->val[UNTAG_Int(REGB1)];
+      /* ../lib/standard/collection/array.nit:726 */
       ((Nit_NativeArray)fra.me.REG[1])->val[UNTAG_Int(REGB1)]=fra.me.REG[2];
       /* ../lib/standard/collection/hash_collection.nit:182 */
       ATTR_standard___collection___hash_collection___HashNode____next_in_bucklet(fra.me.REG[2]) = fra.me.REG[3];
@@ -1056,7 +1056,7 @@ val_t standard___collection___hash_collection___HashMap___is_empty(val_t p0){
   REGB2 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
   if (UNTAG_Bool(REGB2)) {
   } else {
-    /* ../lib/standard/kernel.nit:230 */
+    /* ../lib/standard/kernel.nit:237 */
     REGB1 = TAG_Bool((REGB0)==(REGB1));
     /* ../lib/standard/collection/hash_collection.nit:232 */
     REGB2 = REGB1;
@@ -1428,7 +1428,7 @@ val_t standard___collection___hash_collection___HashMapKeys___has_only(val_t p0,
     REGB2 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
     if (UNTAG_Bool(REGB2)) {
     } else {
-      /* ../lib/standard/kernel.nit:230 */
+      /* ../lib/standard/kernel.nit:237 */
       REGB1 = TAG_Bool((REGB0)==(REGB1));
       /* ../lib/standard/collection/hash_collection.nit:268 */
       REGB2 = REGB1;
@@ -1697,7 +1697,7 @@ val_t standard___collection___hash_collection___HashMapValues___count(val_t p0, 
       }
       if (UNTAG_Bool(REGB1)) {
         REGB1 = TAG_Int(1);
-        /* ../lib/standard/kernel.nit:238 */
+        /* ../lib/standard/kernel.nit:245 */
         REGB1 = TAG_Int(UNTAG_Int(REGB0)+UNTAG_Int(REGB1));
         /* ../lib/standard/collection/hash_collection.nit:291 */
         REGB0 = REGB1;
@@ -2394,7 +2394,7 @@ val_t standard___collection___hash_collection___HashSet___is_empty(val_t p0){
   REGB2 = TAG_Bool(IS_EQUAL_OO(REGB0,REGB1));
   if (UNTAG_Bool(REGB2)) {
   } else {
-    /* ../lib/standard/kernel.nit:230 */
+    /* ../lib/standard/kernel.nit:237 */
     REGB1 = TAG_Bool((REGB0)==(REGB1));
     /* ../lib/standard/collection/hash_collection.nit:412 */
     REGB2 = REGB1;
@@ -2433,7 +2433,7 @@ val_t standard___collection___hash_collection___HashSet___first(val_t p0){
   } else {
     nit_abort("Cast failed", NULL, LOCATE_standard___kernel, 0);
   }
-  /* ../lib/standard/kernel.nit:237 */
+  /* ../lib/standard/kernel.nit:244 */
   REGB1 = TAG_Bool(UNTAG_Int(REGB0)>UNTAG_Int(REGB1));
   /* ../lib/standard/collection/hash_collection.nit:416 */
   if (UNTAG_Bool(REGB1)) {
