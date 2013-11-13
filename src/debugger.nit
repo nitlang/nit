@@ -19,6 +19,30 @@ module debugger
 
 import breakpoint
 intrude import naive_interpreter
+intrude import nitx
+
+redef class NitIndex
+
+	# New constructor to use the pre-calculated model when interpreting a module
+	init with_infos(model: Model, mbuilder: ModelBuilder, mmodule: MModule, toolctx: ToolContext) do
+
+		self.model = model
+		self.mbuilder = mbuilder
+
+		self.mainmodule = mmodule
+		self.toolcontext = toolctx
+		self.arguments = toolctx.option_context.rest
+
+		renderer = new PagerMatchesRenderer(self)
+	end
+
+	redef fun search(s)
+	do
+		if s == ":q" then return
+		super
+	end
+
+end
 
 redef class ToolContext
 	# -d
@@ -272,6 +296,10 @@ class Debugger
 		# Step-over command
 		else if command == "n" then
 			return step_over
+		# Opens a new NitIndex prompt on current model
+		else if command == "nitx" then
+			new NitIndex.with_infos(modelbuilder.model, modelbuilder, self.mainmodule, self.modelbuilder.toolcontext).prompt
+			return true
 		# Continues execution until the end
 		else if command == "c" then
 			return continue_exec
