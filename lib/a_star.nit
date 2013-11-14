@@ -46,9 +46,10 @@
 #    var path = na.path_to(ne, 100, context)
 #    assert path != null else print "No possible path"
 #
-#    while not path.at_end_of_path do
-#        print path.step
-#    end
+#    assert path.step == nb
+#    assert path.step == nd
+#    assert path.step == ne
+#    assert path.at_end_of_path
 module a_star
 
 redef class Object
