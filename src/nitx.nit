@@ -30,6 +30,19 @@ class NitIndex
 	private var arguments: Array[String]
 	private var renderer: PagerMatchesRenderer
 
+	# New constructor to use the pre-calculated model when interpreting a module
+	init with_infos(mbuilder: ModelBuilder, mmodule: MModule) do
+
+		self.model = mbuilder.model
+		self.mbuilder = mbuilder
+
+		self.mainmodule = mmodule
+		self.toolcontext = mbuilder.toolcontext
+		self.arguments = toolcontext.option_context.rest
+
+		renderer = new PagerMatchesRenderer(self)
+	end
+
 	init(toolcontext: ToolContext) do
 		# We need a model to collect stufs
 		self.toolcontext = toolcontext
@@ -107,7 +120,7 @@ class NitIndex
 			prompt
 			return
 		end
-		if entry == ":q" then exit(0)
+		if entry == ":q" then return
 
 		# Parse query string
 		var query = parse_query(entry)
