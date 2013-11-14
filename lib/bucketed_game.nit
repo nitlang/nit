@@ -36,20 +36,20 @@ end
 # Optiomized organization of `Bucketable` instances
 class Buckets[G: Game]
 	super Turnable[G]
-	type Bucket: HashSet[Bucketable[G]]
+	type BUCKET: HashSet[Bucketable[G]]
 
-	private var buckets: Array[Bucket]
+	private var buckets: Array[BUCKET]
 
-	private var next_bucket: nullable Bucket = null
+	private var next_bucket: nullable BUCKET = null
 	private var current_bucket_key: Int = -1
 
 	init
 	do
 		var n_buckets = 100
-		buckets = new Array[Bucket].with_capacity(n_buckets)
+		buckets = new Array[BUCKET].with_capacity(n_buckets)
 
 		for b in [0 .. n_buckets [do
-			buckets[b] = new Bucket
+			buckets[b] = new HashSet[Bucketable[G]]
 		end
 	end
 
@@ -76,7 +76,7 @@ class Buckets[G: Game]
 		current_bucket_key = key_for_tick(turn.tick)
 		var current_bucket = buckets[current_bucket_key]
 
-		next_bucket = new Bucket
+		next_bucket = new HashSet[Bucketable[G]]
 
 		for e in current_bucket do
 			if e.act_at == turn.tick then
