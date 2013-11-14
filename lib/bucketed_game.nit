@@ -94,6 +94,7 @@ end
 
 # Game related event
 class GameEvent
+	fun apply( game : ThinGame ) is abstract
 end
 
 # Event raised at the first turn
@@ -134,6 +135,12 @@ class GameTurn[G: Game]
 	fun act_in(e: Bucketable[G], t: Int)
 	do
 		game.buckets.add_at(e, tick + t)
+	end
+
+	fun add_event( event : GameEvent )
+	do
+		event.apply( game )
+		events.add( event )
 	end
 end
 
