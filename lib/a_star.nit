@@ -218,6 +218,7 @@ class Node
 	end
 end
 
+# Link between two nodes and associated to a graph
 class Link
 	type N: Node
 	type L: Link
