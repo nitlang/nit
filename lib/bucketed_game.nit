@@ -93,7 +93,7 @@ class Buckets[G: Game]
 end
 
 # Game related event
-class GameEvent
+interface GameEvent
 	fun apply( game : ThinGame ) is abstract
 end
 
