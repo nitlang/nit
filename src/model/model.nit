@@ -1680,6 +1680,7 @@ abstract class MProperty
 	# REQUIRE: `mtype.has_mproperty(mmodule, self)`
 	fun lookup_first_definition(mmodule: MModule, mtype: MType): MPROPDEF
 	do
+		assert mtype.has_mproperty(mmodule, self)
 		return lookup_all_definitions(mmodule, mtype).first
 	end
 

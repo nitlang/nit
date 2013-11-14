@@ -21,8 +21,6 @@ import parser
 import toolcontext
 import phase
 
-import modelbuilder #FIXME useless
-
 redef class ToolContext
 	var literal_phase: Phase = new LiteralPhase(self, null)
 end

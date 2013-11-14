@@ -35,13 +35,13 @@ private import more_collections
 
 redef class ToolContext
 	# Option --path
-	readable var _opt_path: OptionArray = new OptionArray("Set include path for loaders (may be used more than once)", "-I", "--path")
+	var opt_path: OptionArray = new OptionArray("Set include path for loaders (may be used more than once)", "-I", "--path")
 
 	# Option --only-metamodel
-	readable var _opt_only_metamodel: OptionBool = new OptionBool("Stop after meta-model processing", "--only-metamodel")
+	var opt_only_metamodel: OptionBool = new OptionBool("Stop after meta-model processing", "--only-metamodel")
 
 	# Option --only-parse
-	readable var _opt_only_parse: OptionBool = new OptionBool("Only proceed to parse step of loaders", "--only-parse")
+	var opt_only_parse: OptionBool = new OptionBool("Only proceed to parse step of loaders", "--only-parse")
 
 	redef init
 	do
@@ -359,14 +359,26 @@ class ModelBuilder
 		return path
 	end
 
+	# loaded module by absolute path
+	private var loaded_nmodules = new HashMap[String, AModule]
+
 	# Try to load a module using a path.
 	# Display an error if there is a problem (IO / lexer / parser) and return null
 	# Note: usually, you do not need this method, use `get_mmodule_by_name` instead.
 	fun load_module(owner: nullable MModule, filename: String): nullable AModule
 	do
+		if filename.file_extension != "nit" then
+			self.toolcontext.error(null, "Error: file {filename} is not a valid nit module.")
+			return null
+		end
 		if not filename.file_exists then
 			self.toolcontext.error(null, "Error: file {filename} not found.")
 			return null
+		end
+
+		var module_path = module_absolute_path(filename)
+		if loaded_nmodules.keys.has(module_path) then
+			return loaded_nmodules[module_path]
 		end
 
 		var x = if owner != null then owner.to_s else "."
@@ -405,6 +417,7 @@ class ModelBuilder
 		nmodule.mmodule = mmodule
 		nmodules.add(nmodule)
 		self.mmodule2nmodule[mmodule] = nmodule
+		self.loaded_nmodules[module_path] = nmodule
 
 		build_module_importation(nmodule)
 

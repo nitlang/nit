@@ -1,5 +1,7 @@
 *.bak
+*.swp
 *~
+.project
 EIFGENs
 
 .nit_compile*
@@ -34,12 +36,15 @@ c_src/*.o
 c_src/*.cksum
 c_src/nitc
 
+csrc2/
+
 lib/*.log
 lib/*.dot
 
 tests/alt
 tests/errlist
 tests/out
+tests/*.xml
 
 *.stub.nit.[ch]
 

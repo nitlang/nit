@@ -81,7 +81,7 @@ extern SDLDisplay in "C" `{SDL_Surface *`}
 	do
 		var new_event: nullable Object = null
 		var events = new List[ IE ]
-		loop do
+		loop
 			new_event = poll_event
 			if new_event != null then # new_event isa Event then #
 				events.add( new_event )

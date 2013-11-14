@@ -16,7 +16,7 @@
 
 NITCOPT=
 
-all: ../bin/nitc ../bin/nitdoc ../bin/nits ../bin/nitmetrics ../bin/nitg ../bin/nit ../bin/nitx ../bin/netdbg ../bin/dbgcli ../bin/nitdox ../bin/nitunit ../bin/nitlight
+all: ../bin/nitc ../bin/nitdoc ../bin/nits ../bin/nitmetrics ../bin/nitg ../bin/nit ../bin/nitx ../bin/netdbg ../bin/dbgcli ../bin/nitunit ../bin/nitlight
 
 ../bin/nitc: ../c_src/nitc parser/parser.nit
 	@echo '***************************************************************'
@@ -66,13 +66,6 @@ all: ../bin/nitc ../bin/nitdoc ../bin/nits ../bin/nitmetrics ../bin/nitg ../bin/
 	@echo '***************************************************************'
 	./git-gen-version.sh
 	../bin/nitg ${NITCOPT} -o ../bin/nitx -v nitx.nit
-
-../bin/nitdox: ../bin/nitg
-	@echo '***************************************************************'
-	@echo '* Compile nitdcx from NIT source files                        *'
-	@echo '***************************************************************'
-	./git-gen-version.sh
-	../bin/nitg ${NITCOPT} -o ../bin/nitdox -v ni_nitdoc.nit
 
 ../bin/netdbg : ../bin/nitc
 	@echo '***************************************************************'
