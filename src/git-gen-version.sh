@@ -32,12 +32,12 @@ END
 	fi
 }
 
-# Are we in the nitc.nit directory?
-if [ ! -f nitc.nit ]; then
-	if [ -f src/nitc.nit ]; then
+# Are we in the nit.nit directory?
+if [ ! -f nit.nit ]; then
+	if [ -f src/nit.nit ]; then
 		cd src
 	else
-		echo "Error: no nitc.nit found." >&2
+		echo "Error: no nit.nit found." >&2
 		exit 1
 	fi
 fi
