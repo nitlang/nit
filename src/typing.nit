@@ -501,12 +501,6 @@ redef class AConcreteMethPropdef
 			assert variable != null
 			variable.declared_type = mtype
 		end
-		for i in [0..mmethoddef.msignature.mclosures.length[ do
-			var mclosure = mmethoddef.msignature.mclosures[i]
-			var variable = self.n_signature.n_closure_decls[i].variable
-			assert variable != null
-			variable.declared_type = mclosure.mtype
-		end
 		v.visit_stmt(nblock)
 
 		if not nblock.after_flow_context.is_unreachable and mmethoddef.msignature.return_mtype != null then
@@ -1243,14 +1237,6 @@ redef class ASendExpr
 		else
 			self.is_typed = true
 		end
-
-		if self.n_closure_defs.length == msignature.mclosures.length then
-			for i in [0..self.n_closure_defs.length[ do
-				self.n_closure_defs[i].accept_typing(v, msignature.mclosures[i])
-			end
-		else
-			debug("closure: got {self.n_closure_defs.length}, want {msignature.mclosures.length}")
-		end
 	end
 
 	# The name of the property
@@ -1657,50 +1643,6 @@ redef class AIssetAttrExpr
 			v.error(self, "Error: isset on a nullable attribute.")
 		end
 		self.mtype = v.type_bool(self)
-	end
-end
-
-###
-
-redef class AClosureCallExpr
-	redef fun accept_typing(v)
-	do
-		var variable = self.variable
-		if variable == null then return # Skip error
-
-		var recvtype = v.nclassdef.mclassdef.bound_mtype
-		var msignature = variable.declared_type.as(not null)
-		msignature = v.resolve_for(msignature, recvtype, false).as(MSignature)
-
-		var args = n_args.to_a
-		v.check_signature(self, args, variable.name, msignature)
-
-		self.is_typed = true
-		self.mtype = msignature.return_mtype
-	end
-end
-
-redef class AClosureDef
-	var mclosure: nullable MParameter
-
-	private fun accept_typing(v: TypeVisitor, mparameter: MParameter)
-	do
-		var variables = self.variables
-		if variables == null then return
-
-		self.mclosure = mparameter
-		var msignature = mparameter.mtype.as(MSignature)
-
-		if msignature.arity != variables.length then
-			v.error(self, "Type error: closure {mparameter.name} expects {msignature.arity} parameters, {variables.length} given")
-			return
-		end
-
-		for i in [0..variables.length[ do
-			variables[i].declared_type = msignature.mparameters[i].mtype
-		end
-
-		v.visit_stmt(self.n_expr)
 	end
 end
 
