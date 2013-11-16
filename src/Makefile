@@ -16,14 +16,14 @@
 
 NITCOPT=
 
-all: ../bin/nitc ../bin/nitdoc ../bin/nits ../bin/nitmetrics ../bin/nitg ../bin/nit ../bin/nitx ../bin/netdbg ../bin/dbgcli ../bin/nitunit ../bin/nitlight
+all: ../bin/nitdoc ../bin/nitmetrics ../bin/nitg ../bin/nit ../bin/nitx ../bin/nitunit ../bin/nitlight
 
-../bin/nitc: ../c_src/nitc parser/parser.nit
+../bin/nitg: ../c_src/nitg parser/parser.nit
 	@echo '***************************************************************'
-	@echo '* Compile nitc from NIT source files                          *'
+	@echo '* Compile nitg from NIT source files                          *'
 	@echo '***************************************************************'
 	./git-gen-version.sh
-	../c_src/nitc ${NITCOPT} --clibdir ../c_src/clib -o ../bin/nitc -O -v nitc.nit
+	../c_src/nitg ${NITCOPT} -o ../bin/nitg -v nitg.nit
 
 ../bin/nitdoc: ../bin/nitg
 	@echo '***************************************************************'
@@ -32,26 +32,12 @@ all: ../bin/nitc ../bin/nitdoc ../bin/nits ../bin/nitmetrics ../bin/nitg ../bin/
 	./git-gen-version.sh
 	../bin/nitg ${NITCOPT} -o ../bin/nitdoc -v nitdoc.nit
 
-../bin/nits: ../bin/nitg
-	@echo '***************************************************************'
-	@echo '* Compile nits from NIT source files                          *'
-	@echo '***************************************************************'
-	./git-gen-version.sh
-	../bin/nitg ${NITCOPT} -o ../bin/nits -v nits.nit
-
 ../bin/nitmetrics: ../bin/nitg
 	@echo '***************************************************************'
 	@echo '* Compile nitmetrics from NIT source files                      *'
 	@echo '***************************************************************'
 	./git-gen-version.sh
 	../bin/nitg ${NITCOPT} -o ../bin/nitmetrics -v nitmetrics.nit
-
-../bin/nitg: ../bin/nitc
-	@echo '***************************************************************'
-	@echo '* Compile nitg from NIT source files                          *'
-	@echo '***************************************************************'
-	./git-gen-version.sh
-	../bin/nitc ${NITCOPT} -O -o ../bin/nitg -v nitg.nit
 
 ../bin/nit: ../bin/nitg
 	@echo '***************************************************************'
@@ -67,20 +53,6 @@ all: ../bin/nitc ../bin/nitdoc ../bin/nits ../bin/nitmetrics ../bin/nitg ../bin/
 	./git-gen-version.sh
 	../bin/nitg ${NITCOPT} -o ../bin/nitx -v nitx.nit
 
-../bin/netdbg : ../bin/nitc
-	@echo '***************************************************************'
-	@echo '* Compile netdbg from NIT source files                          *'
-	@echo '***************************************************************'
-	./git-gen-version.sh
-	../bin/nitc ${NITCOPT} -o ../bin/netdbg -O -v netdbg.nit
-
-../bin/dbgcli : ../bin/nitc
-	@echo '***************************************************************'
-	@echo '* Compile dbgcli from NIT source files                          *'
-	@echo '***************************************************************'
-	./git-gen-version.sh
-	../bin/nitc ${NITCOPT} -o ../bin/dbgcli -O -v dbgcli.nit
-
 ../bin/nitunit : ../bin/nitg
 	@echo '***************************************************************'
 	@echo '* Compile nitunit from NIT source files                       *'
@@ -95,9 +67,9 @@ all: ../bin/nitc ../bin/nitdoc ../bin/nits ../bin/nitmetrics ../bin/nitg ../bin/
 	./git-gen-version.sh
 	../bin/nitg ${NITCOPT} -o ../bin/nitlight -v nitlight.nit
 
-../c_src/nitc: ../c_src/*.c ../c_src/*.h ../c_src/nitc._build.sh ../c_src/Makefile
+../c_src/nitg: ../c_src/*.c ../c_src/*.h ../c_src/Makefile
 	@echo '***************************************************************'
-	@echo '* Compile nitc from C source files                            *'
+	@echo '* Compile nitg from C source files                            *'
 	@echo '***************************************************************'
 	cd ../c_src; make
 

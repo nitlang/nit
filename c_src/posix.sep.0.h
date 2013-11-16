@@ -1,0 +1,24 @@
+#include "nit.common.h"
+short int posix__Sys__uid_61d(val* self, long p0);
+long posix__Sys__uid(val* self);
+short int posix__Sys__gid_61d(val* self, long p0);
+long posix__Sys__gid(val* self);
+short int posix__Sys__euid_61d(val* self, long p0);
+long posix__Sys__euid(val* self);
+short int posix__Sys__egid_61d(val* self, long p0);
+long posix__Sys__egid(val* self);
+void* posix__Passwd__from_uid(void* self, long p0);
+void* posix__Passwd__from_name(void* self, val* p0);
+val* posix__Passwd__name(void* self);
+val* posix__Passwd__passwd(void* self);
+long posix__Passwd__uid(void* self);
+long posix__Passwd__gid(void* self);
+val* posix__Passwd__gecos(void* self);
+val* posix__Passwd__dir(void* self);
+val* posix__Passwd__shell(void* self);
+void* posix__Group__from_gid(void* self, long p0);
+void* posix__Group__from_name(void* self, val* p0);
+val* posix__Group__name(void* self);
+val* posix__Group__passwd(void* self);
+long posix__Group__gid(void* self);
+val* posix__Group__mem(void* self);
