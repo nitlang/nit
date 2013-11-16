@@ -400,28 +400,6 @@ universal Int
 		end
 	end
 
-	# Execute 'each' for each integer in [self..last]
-	fun enumerate_to(last: Int)
-		!each(i: Int)
-	do
-		var cur = self
-		while cur <= last do
-			each(cur)
-			cur += 1
-		end
-	end
-
-	# Execute 'each' for each integer in [self..after[
-	fun enumerate_before(after: Int)
-		!each(i: Int)
-	do
-		var cur = self
-		while cur < after do
-			each(cur)
-			cur += 1
-		end
-	end
-
 	# The absolute value of self
 	#
 	#     assert (-10).abs   == 10

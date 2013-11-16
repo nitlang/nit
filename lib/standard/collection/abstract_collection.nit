@@ -54,17 +54,6 @@ interface Collection[E]
 	# Get a new iterator on the collection.
 	fun iterator: Iterator[E] is abstract
 
-	# Iterate over each element of the collection
-	fun iterate
-		!each(e: E)
-	do
-		var i = iterator
-		while i.is_ok do
-			each(i.item)
-			i.next
-		end
-	end
-
 	# Is there no item in the collection?
 	#
 	#     assert [1,2,3].is_empty  == false
@@ -302,17 +291,6 @@ interface MapRead[K: Object, E]
 
 	# Get a new iterator on the map.
 	fun iterator: MapIterator[K, E] is abstract
-
-	# Iterate over each element of the collection
-	fun iterate
-		!each(k: K, v: E)
-	do
-		var i = iterator
-		while i.is_ok do
-			each(i.key, i.item)
-			i.next
-		end
-	end
 
 	# Return the point of view of self on the values only.
 	# Note that `self` and `values` are views on the same data;
