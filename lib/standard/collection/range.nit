@@ -101,10 +101,10 @@ class IteratorRange[E: Discrete]
 	end
 end
 
-redef class Discrete
+redef class Int
 	# Returns the range from 0 to `self-1`, is used to do:
 	#
 	#    for i in 3.times do print "Cool"
 	#    for i in 100.times do print "{i}/100"
-	fun times: Range[OTHER] do return new Range[OTHER](0, self-1)
+	fun times: Range[Int] do return [0 .. self[
 end
