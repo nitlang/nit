@@ -1,6 +1,6 @@
 Start
   p
-    Nodes
+    Nodes[Nq]
       q_0
         t1@(1:1-1:11)='aabbaabbaa'
       q_1

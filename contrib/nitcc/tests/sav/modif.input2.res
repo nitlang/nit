@@ -1,17 +1,17 @@
 Start
   p
     'a'@(1:1-1:2)
-    Nodes
+    Nodes[Nq]
       q
         'b'@(1:2-1:3)
-        Nodes
+        Nodes[Nr]
           r
             'c'@(1:3-1:4)
             'c'@(1:4-1:5)
         'b'@(1:5-1:6)
       q
         'b'@(1:6-1:7)
-        Nodes
+        Nodes[Nr]
           r
             'c'@(1:7-1:8)
             'c'@(1:8-1:9)

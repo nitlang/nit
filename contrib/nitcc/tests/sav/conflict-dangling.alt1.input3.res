@@ -1,5 +1,5 @@
 NLexerError@(1:5-1:5)='3'
-Nodes
+Nodes[Node]
   f
     e_1
       '1'@(1:1-1:2)

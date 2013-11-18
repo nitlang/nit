@@ -1,5 +1,5 @@
 NParserError@(1:6-1:7)=']'
-Nodes
+Nodes[Node]
   '['@(1:1-1:2)
   e_2
     e_0
