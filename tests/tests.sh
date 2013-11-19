@@ -299,6 +299,14 @@ case $engine in
 		enginebinname=nit
 		savdirs="sav/$engine/fixme/ sav/$engine/ sav/fixme/ sav/"
 		;;
+	nitc)
+		echo "disabled engine $engine"
+		exit 0
+		;;
+	*)
+		echo "unknown engine $engine"
+		exit 1
+		;;
 esac
 
 # The default nitc compiler
