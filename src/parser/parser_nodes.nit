@@ -989,7 +989,6 @@ class ASignature
 	readable var _n_params: ANodes[AParam] = new ANodes[AParam](self)
 	readable writable var _n_cpar: nullable TCpar = null
 	readable writable var _n_type: nullable AType = null
-	readable var _n_closure_decls: ANodes[AClosureDecl] = new ANodes[AClosureDecl](self)
 end
 
 # A parameter definition in a signature. eg `x:X`
@@ -998,15 +997,6 @@ class AParam
 	readable writable var _n_id: TId
 	readable writable var _n_type: nullable AType = null
 	readable writable var _n_dotdotdot: nullable TDotdotdot = null
-end
-
-class AClosureDecl
-	super Prod
-	readable writable var _n_kwbreak: nullable TKwbreak = null
-	readable writable var _n_bang: TBang
-	readable writable var _n_id: TId
-	readable writable var _n_signature: ASignature
-	readable writable var _n_expr: nullable AExpr = null
 end
 
 # A static type. eg `nullable X[Y]`
@@ -1181,7 +1171,6 @@ abstract class ASendExpr
 	super AExpr
 	# The receiver of the method invocation
 	readable writable var _n_expr: AExpr
-	readable var _n_closure_defs: ANodes[AClosureDef] = new ANodes[AClosureDef](self)
 end
 
 # A binary operation on a method
@@ -1446,13 +1435,6 @@ class ABraReassignExpr
 	super ASendReassignFormExpr
 end
 
-class AClosureCallExpr
-	super AExpr
-	readable writable var _n_id: TId
-	readable writable var _n_args: AExprs
-	readable var _n_closure_defs: ANodes[AClosureDef] = new ANodes[AClosureDef](self)
-end
-
 # A local variable read access.
 # The parser cannot instantiate them, see `ACallExpr`.
 class AVarExpr
@@ -1660,26 +1642,6 @@ class AMinusAssignOp
 	readable writable var _n_minuseq: TMinuseq
 end
 
-class AClosureDef
-	super ALabelable
-	readable writable var _n_bang: TBang
-	readable writable var _n_id: AClosureId
-	readable var _n_ids: ANodes[TId] = new ANodes[TId](self)
-	readable writable var _n_kwdo: nullable TKwdo = null
-	readable writable var _n_expr: nullable AExpr = null
-	redef fun hot_location do return n_id.location
-end
-abstract class AClosureId
-	super Prod
-end
-class ASimpleClosureId
-	super AClosureId
-	readable writable var _n_id: TId
-end
-class ABreakClosureId
-	super AClosureId
-	readable writable var _n_kwbreak: TKwbreak
-end
 class AModuleName
 	super Prod
 	readable writable var _n_quad: nullable TQuad = null
