@@ -3999,8 +3999,7 @@ redef class ASignature
             n_opar: nullable TOpar,
             n_params: Collection[Object], # Should be Collection[AParam]
             n_cpar: nullable TCpar,
-            n_type: nullable AType,
-            n_closure_decls: Collection[Object] # Should be Collection[AClosureDecl]
+            n_type: nullable AType
     )
     do
         empty_init
@@ -4020,11 +4019,6 @@ redef class ASignature
         _n_type = n_type
 	if n_type != null then
 		n_type.parent = self
-	end
-	for n in n_closure_decls do
-		assert n isa AClosureDecl
-		_n_closure_decls.add(n)
-		n.parent = self
 	end
     end
 
@@ -4072,18 +4066,6 @@ redef class ASignature
             end
             return
 	end
-        for i in [0.._n_closure_decls.length[ do
-            if _n_closure_decls[i] == old_child then
-                if new_child != null then
-		    assert new_child isa AClosureDecl
-                    _n_closure_decls[i] = new_child
-                    new_child.parent = self
-                else
-                    _n_closure_decls.remove_at(i)
-                end
-                return
-            end
-        end
     end
 
 		redef fun n_opar=(node)
@@ -4123,9 +4105,6 @@ redef class ASignature
         if _n_type != null then
             v.enter_visit(_n_type.as(not null))
         end
-            for n in _n_closure_decls do
-                v.enter_visit(n)
-	    end
     end
 end
 redef class AParam
@@ -4238,132 +4217,6 @@ redef class AParam
         end
         if _n_annotations != null then
             v.enter_visit(_n_annotations.as(not null))
-        end
-    end
-end
-redef class AClosureDecl
-    private init empty_init do end
-
-    init init_aclosuredecl (
-            n_kwbreak: nullable TKwbreak,
-            n_bang: nullable TBang,
-            n_id: nullable TId,
-            n_signature: nullable ASignature,
-            n_expr: nullable AExpr
-    )
-    do
-        empty_init
-        _n_kwbreak = n_kwbreak
-	if n_kwbreak != null then
-		n_kwbreak.parent = self
-	end
-        _n_bang = n_bang.as(not null)
-	n_bang.parent = self
-        _n_id = n_id.as(not null)
-	n_id.parent = self
-        _n_signature = n_signature.as(not null)
-	n_signature.parent = self
-        _n_expr = n_expr
-	if n_expr != null then
-		n_expr.parent = self
-	end
-    end
-
-    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
-    do
-        if _n_kwbreak == old_child then
-            if new_child != null then
-                new_child.parent = self
-		assert new_child isa TKwbreak
-                _n_kwbreak = new_child
-	    else
-		_n_kwbreak = null
-            end
-            return
-	end
-        if _n_bang == old_child then
-            if new_child != null then
-                new_child.parent = self
-		assert new_child isa TBang
-                _n_bang = new_child
-	    else
-		abort
-            end
-            return
-	end
-        if _n_id == old_child then
-            if new_child != null then
-                new_child.parent = self
-		assert new_child isa TId
-                _n_id = new_child
-	    else
-		abort
-            end
-            return
-	end
-        if _n_signature == old_child then
-            if new_child != null then
-                new_child.parent = self
-		assert new_child isa ASignature
-                _n_signature = new_child
-	    else
-		abort
-            end
-            return
-	end
-        if _n_expr == old_child then
-            if new_child != null then
-                new_child.parent = self
-		assert new_child isa AExpr
-                _n_expr = new_child
-	    else
-		_n_expr = null
-            end
-            return
-	end
-    end
-
-		redef fun n_kwbreak=(node)
-		do
-			_n_kwbreak = node
-			if node != null then
-				node.parent = self
-			end
-		end
-		redef fun n_bang=(node)
-		do
-			_n_bang = node
-			node.parent = self
-		end
-		redef fun n_id=(node)
-		do
-			_n_id = node
-			node.parent = self
-		end
-		redef fun n_signature=(node)
-		do
-			_n_signature = node
-			node.parent = self
-		end
-		redef fun n_expr=(node)
-		do
-			_n_expr = node
-			if node != null then
-				node.parent = self
-			end
-		end
-
-
-    redef fun visit_all(v: Visitor)
-    do
-        if _n_kwbreak != null then
-            v.enter_visit(_n_kwbreak.as(not null))
-        end
-        v.enter_visit(_n_bang)
-        v.enter_visit(_n_id)
-        v.enter_visit(_n_signature)
-        if _n_expr != null then
-            v.enter_visit(_n_expr.as(not null))
         end
     end
 end
@@ -7600,8 +7453,7 @@ redef class ACallExpr
     init init_acallexpr (
             n_expr: nullable AExpr,
             n_id: nullable TId,
-            n_args: nullable AExprs,
-            n_closure_defs: Collection[Object] # Should be Collection[AClosureDef]
+            n_args: nullable AExprs
     )
     do
         empty_init
@@ -7611,11 +7463,6 @@ redef class ACallExpr
 	n_id.parent = self
         _n_args = n_args.as(not null)
 	n_args.parent = self
-	for n in n_closure_defs do
-		assert n isa AClosureDef
-		_n_closure_defs.add(n)
-		n.parent = self
-	end
     end
 
     redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -7650,18 +7497,6 @@ redef class ACallExpr
             end
             return
 	end
-        for i in [0.._n_closure_defs.length[ do
-            if _n_closure_defs[i] == old_child then
-                if new_child != null then
-		    assert new_child isa AClosureDef
-                    _n_closure_defs[i] = new_child
-                    new_child.parent = self
-                else
-                    _n_closure_defs.remove_at(i)
-                end
-                return
-            end
-        end
     end
 
 		redef fun n_expr=(node)
@@ -7686,9 +7521,6 @@ redef class ACallExpr
         v.enter_visit(_n_expr)
         v.enter_visit(_n_id)
         v.enter_visit(_n_args)
-            for n in _n_closure_defs do
-                v.enter_visit(n)
-	    end
     end
 end
 redef class ACallAssignExpr
@@ -8082,8 +7914,7 @@ redef class ABraExpr
 
     init init_abraexpr (
             n_expr: nullable AExpr,
-            n_args: nullable AExprs,
-            n_closure_defs: Collection[Object] # Should be Collection[AClosureDef]
+            n_args: nullable AExprs
     )
     do
         empty_init
@@ -8091,11 +7922,6 @@ redef class ABraExpr
 	n_expr.parent = self
         _n_args = n_args.as(not null)
 	n_args.parent = self
-	for n in n_closure_defs do
-		assert n isa AClosureDef
-		_n_closure_defs.add(n)
-		n.parent = self
-	end
     end
 
     redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -8120,18 +7946,6 @@ redef class ABraExpr
             end
             return
 	end
-        for i in [0.._n_closure_defs.length[ do
-            if _n_closure_defs[i] == old_child then
-                if new_child != null then
-		    assert new_child isa AClosureDef
-                    _n_closure_defs[i] = new_child
-                    new_child.parent = self
-                else
-                    _n_closure_defs.remove_at(i)
-                end
-                return
-            end
-        end
     end
 
 		redef fun n_expr=(node)
@@ -8150,9 +7964,6 @@ redef class ABraExpr
     do
         v.enter_visit(_n_expr)
         v.enter_visit(_n_args)
-            for n in _n_closure_defs do
-                v.enter_visit(n)
-	    end
     end
 end
 redef class ABraAssignExpr
@@ -8343,84 +8154,6 @@ redef class ABraReassignExpr
         v.enter_visit(_n_args)
         v.enter_visit(_n_assign_op)
         v.enter_visit(_n_value)
-    end
-end
-redef class AClosureCallExpr
-    private init empty_init do end
-
-    init init_aclosurecallexpr (
-            n_id: nullable TId,
-            n_args: nullable AExprs,
-            n_closure_defs: Collection[Object] # Should be Collection[AClosureDef]
-    )
-    do
-        empty_init
-        _n_id = n_id.as(not null)
-	n_id.parent = self
-        _n_args = n_args.as(not null)
-	n_args.parent = self
-	for n in n_closure_defs do
-		assert n isa AClosureDef
-		_n_closure_defs.add(n)
-		n.parent = self
-	end
-    end
-
-    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
-    do
-        if _n_id == old_child then
-            if new_child != null then
-                new_child.parent = self
-		assert new_child isa TId
-                _n_id = new_child
-	    else
-		abort
-            end
-            return
-	end
-        if _n_args == old_child then
-            if new_child != null then
-                new_child.parent = self
-		assert new_child isa AExprs
-                _n_args = new_child
-	    else
-		abort
-            end
-            return
-	end
-        for i in [0.._n_closure_defs.length[ do
-            if _n_closure_defs[i] == old_child then
-                if new_child != null then
-		    assert new_child isa AClosureDef
-                    _n_closure_defs[i] = new_child
-                    new_child.parent = self
-                else
-                    _n_closure_defs.remove_at(i)
-                end
-                return
-            end
-        end
-    end
-
-		redef fun n_id=(node)
-		do
-			_n_id = node
-			node.parent = self
-		end
-		redef fun n_args=(node)
-		do
-			_n_args = node
-			node.parent = self
-		end
-
-
-    redef fun visit_all(v: Visitor)
-    do
-        v.enter_visit(_n_id)
-        v.enter_visit(_n_args)
-            for n in _n_closure_defs do
-                v.enter_visit(n)
-	    end
     end
 end
 redef class AVarExpr
@@ -10488,235 +10221,6 @@ redef class AMinusAssignOp
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_minuseq)
-    end
-end
-redef class AClosureDef
-    private init empty_init do end
-
-    init init_aclosuredef (
-            n_bang: nullable TBang,
-            n_id: nullable AClosureId,
-            n_ids: Collection[Object], # Should be Collection[TId]
-            n_kwdo: nullable TKwdo,
-            n_expr: nullable AExpr,
-            n_label: nullable ALabel
-    )
-    do
-        empty_init
-        _n_bang = n_bang.as(not null)
-	n_bang.parent = self
-        _n_id = n_id.as(not null)
-	n_id.parent = self
-	for n in n_ids do
-		assert n isa TId
-		_n_ids.add(n)
-		n.parent = self
-	end
-        _n_kwdo = n_kwdo
-	if n_kwdo != null then
-		n_kwdo.parent = self
-	end
-        _n_expr = n_expr
-	if n_expr != null then
-		n_expr.parent = self
-	end
-        _n_label = n_label
-	if n_label != null then
-		n_label.parent = self
-	end
-    end
-
-    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
-    do
-        if _n_bang == old_child then
-            if new_child != null then
-                new_child.parent = self
-		assert new_child isa TBang
-                _n_bang = new_child
-	    else
-		abort
-            end
-            return
-	end
-        if _n_id == old_child then
-            if new_child != null then
-                new_child.parent = self
-		assert new_child isa AClosureId
-                _n_id = new_child
-	    else
-		abort
-            end
-            return
-	end
-        for i in [0.._n_ids.length[ do
-            if _n_ids[i] == old_child then
-                if new_child != null then
-		    assert new_child isa TId
-                    _n_ids[i] = new_child
-                    new_child.parent = self
-                else
-                    _n_ids.remove_at(i)
-                end
-                return
-            end
-        end
-        if _n_kwdo == old_child then
-            if new_child != null then
-                new_child.parent = self
-		assert new_child isa TKwdo
-                _n_kwdo = new_child
-	    else
-		_n_kwdo = null
-            end
-            return
-	end
-        if _n_expr == old_child then
-            if new_child != null then
-                new_child.parent = self
-		assert new_child isa AExpr
-                _n_expr = new_child
-	    else
-		_n_expr = null
-            end
-            return
-	end
-        if _n_label == old_child then
-            if new_child != null then
-                new_child.parent = self
-		assert new_child isa ALabel
-                _n_label = new_child
-	    else
-		_n_label = null
-            end
-            return
-	end
-    end
-
-		redef fun n_bang=(node)
-		do
-			_n_bang = node
-			node.parent = self
-		end
-		redef fun n_id=(node)
-		do
-			_n_id = node
-			node.parent = self
-		end
-		redef fun n_kwdo=(node)
-		do
-			_n_kwdo = node
-			if node != null then
-				node.parent = self
-			end
-		end
-		redef fun n_expr=(node)
-		do
-			_n_expr = node
-			if node != null then
-				node.parent = self
-			end
-		end
-		redef fun n_label=(node)
-		do
-			_n_label = node
-			if node != null then
-				node.parent = self
-			end
-		end
-
-
-    redef fun visit_all(v: Visitor)
-    do
-        v.enter_visit(_n_bang)
-        v.enter_visit(_n_id)
-            for n in _n_ids do
-                v.enter_visit(n)
-	    end
-        if _n_kwdo != null then
-            v.enter_visit(_n_kwdo.as(not null))
-        end
-        if _n_expr != null then
-            v.enter_visit(_n_expr.as(not null))
-        end
-        if _n_label != null then
-            v.enter_visit(_n_label.as(not null))
-        end
-    end
-end
-redef class ASimpleClosureId
-    private init empty_init do end
-
-    init init_asimpleclosureid (
-            n_id: nullable TId
-    )
-    do
-        empty_init
-        _n_id = n_id.as(not null)
-	n_id.parent = self
-    end
-
-    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
-    do
-        if _n_id == old_child then
-            if new_child != null then
-                new_child.parent = self
-		assert new_child isa TId
-                _n_id = new_child
-	    else
-		abort
-            end
-            return
-	end
-    end
-
-		redef fun n_id=(node)
-		do
-			_n_id = node
-			node.parent = self
-		end
-
-
-    redef fun visit_all(v: Visitor)
-    do
-        v.enter_visit(_n_id)
-    end
-end
-redef class ABreakClosureId
-    private init empty_init do end
-
-    init init_abreakclosureid (
-            n_kwbreak: nullable TKwbreak
-    )
-    do
-        empty_init
-        _n_kwbreak = n_kwbreak.as(not null)
-	n_kwbreak.parent = self
-    end
-
-    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
-    do
-        if _n_kwbreak == old_child then
-            if new_child != null then
-                new_child.parent = self
-		assert new_child isa TKwbreak
-                _n_kwbreak = new_child
-	    else
-		abort
-            end
-            return
-	end
-    end
-
-		redef fun n_kwbreak=(node)
-		do
-			_n_kwbreak = node
-			node.parent = self
-		end
-
-
-    redef fun visit_all(v: Visitor)
-    do
-        v.enter_visit(_n_kwbreak)
     end
 end
 redef class AModuleName
