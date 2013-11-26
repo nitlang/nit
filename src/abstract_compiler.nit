@@ -894,10 +894,16 @@ abstract class AbstractCompilerVisitor
 	# used by aborts, asserts, casts, etc.
 	fun add_abort(message: String)
 	do
+		self.add("fprintf(stderr, \"Runtime error: %s\", \"{message.escape_to_c}\");")
+		add_raw_abort
+	end
+
+	fun add_raw_abort
+	do
 		if self.current_node != null and self.current_node.location.file != null then
-			self.add("fprintf(stderr, \"Runtime error: %s (%s:%d)\\n\", \"{message.escape_to_c}\", \"{self.current_node.location.file.filename.escape_to_c}\", {current_node.location.line_start});")
+			self.add("fprintf(stderr, \" (%s:%d)\\n\", \"{self.current_node.location.file.filename.escape_to_c}\", {current_node.location.line_start});")
 		else
-			self.add("fprintf(stderr, \"Runtime error: %s\\n\", \"{message.escape_to_c}\");")
+			self.add("fprintf(stderr, \"\\n\");")
 		end
 		self.add("exit(1);")
 	end
