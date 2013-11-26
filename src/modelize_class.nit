@@ -76,6 +76,10 @@ redef class ModelBuilder
 
 		var mclass = try_get_mclass_by_name(nclassdef, mmodule, name)
 		if mclass == null then
+			if nclassdef isa AStdClassdef and nclassdef.n_kwredef != null then
+				error(nclassdef, "Redef error: No imported class {name} to refine.")
+				return
+			end
 			mclass = new MClass(mmodule, name, arity, mkind, mvisibility)
 			#print "new class {mclass}"
 		else if nclassdef isa AStdClassdef and nmodule.mclass2nclassdef.has_key(mclass) then
