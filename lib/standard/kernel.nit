@@ -35,11 +35,15 @@ interface Object
 	# Unless specific code, you should not use this method.
 	fun is_same_type(other: Object): Bool is intern
 
+	# Return true if `self` and `other` are the same instance.
+	# Unless specific code, you should use `==` instead.
+	fun is_same_instance(other: nullable Object): Bool do return self is other #is intern
+
 	# Have `self` and `other` the same value?
 	##
 	# The exact meaning of "same value" is let to the subclasses.
-	# Implicitly, the default implementation, is `is`
-	fun ==(other: nullable Object): Bool do return self is other
+	# Implicitly, the default implementation, is `is_same_instance`
+	fun ==(other: nullable Object): Bool do return self.is_same_instance(other)
 
 	# Have `self` and `other` different values?
 	##
