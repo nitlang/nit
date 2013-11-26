@@ -1033,7 +1033,7 @@ end
 redef class ADeferredMethPropdef
 	redef fun call(v, mpropdef, args)
 	do
-		fatal(v, "Deferred method called")
+		fatal(v, "Abstract method `{mpropdef.mproperty.name}` called on `{args.first.mtype}`")
 		abort
 	end
 end

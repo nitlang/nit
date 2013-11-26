@@ -1718,7 +1718,11 @@ redef class AClassdef
 end
 
 redef class ADeferredMethPropdef
-	redef fun compile_to_c(v, mpropdef, arguments) do v.add_abort("Deferred method called")
+	redef fun compile_to_c(v, mpropdef, arguments) do
+		var cn = v.class_name_string(arguments.first)
+		v.add("fprintf(stderr, \"Runtime error: Abstract method `%s` called on `%s`\", \"{mpropdef.mproperty.name.escape_to_c}\", {cn});")
+		v.add_raw_abort
+	end
 	redef fun can_inline do return true
 end
 
