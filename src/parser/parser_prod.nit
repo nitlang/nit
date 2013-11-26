@@ -6187,63 +6187,6 @@ redef class AEqExpr
         v.enter_visit(_n_expr2)
     end
 end
-redef class AEeExpr
-    private init empty_init do end
-
-    init init_aeeexpr (
-            n_expr: nullable AExpr,
-            n_expr2: nullable AExpr
-    )
-    do
-        empty_init
-        _n_expr = n_expr.as(not null)
-	n_expr.parent = self
-        _n_expr2 = n_expr2.as(not null)
-	n_expr2.parent = self
-    end
-
-    redef fun replace_child(old_child: ANode, new_child: nullable ANode)
-    do
-        if _n_expr == old_child then
-            if new_child != null then
-                new_child.parent = self
-		assert new_child isa AExpr
-                _n_expr = new_child
-	    else
-		abort
-            end
-            return
-	end
-        if _n_expr2 == old_child then
-            if new_child != null then
-                new_child.parent = self
-		assert new_child isa AExpr
-                _n_expr2 = new_child
-	    else
-		abort
-            end
-            return
-	end
-    end
-
-		redef fun n_expr=(node)
-		do
-			_n_expr = node
-			node.parent = self
-		end
-		redef fun n_expr2=(node)
-		do
-			_n_expr2 = node
-			node.parent = self
-		end
-
-
-    redef fun visit_all(v: Visitor)
-    do
-        v.enter_visit(_n_expr)
-        v.enter_visit(_n_expr2)
-    end
-end
 redef class ANeExpr
     private init empty_init do end
 
