@@ -37,7 +37,7 @@ interface Object
 
 	# Return true if `self` and `other` are the same instance.
 	# Unless specific code, you should use `==` instead.
-	fun is_same_instance(other: nullable Object): Bool do return self is other #is intern
+	fun is_same_instance(other: nullable Object): Bool is intern
 
 	# Have `self` and `other` the same value?
 	##
