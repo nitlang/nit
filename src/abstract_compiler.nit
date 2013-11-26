@@ -913,7 +913,9 @@ abstract class AbstractCompilerVisitor
 	do
 		var res = self.type_test(value, mtype, tag)
 		self.add("if (!{res}) \{")
-		self.add_abort("Cast failed")
+		var cn = self.class_name_string(value)
+		self.add("fprintf(stderr, \"Runtime error: Cast failed. Expected `%s`, got `%s`\", \"{mtype.to_s.escape_to_c}\", {cn});")
+		self.add_raw_abort
 		self.add("\}")
 	end
 
