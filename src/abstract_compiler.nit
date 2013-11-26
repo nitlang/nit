@@ -1570,6 +1570,9 @@ redef class AInternMethPropdef
 		else if pname == "is_same_type" then
 			v.ret(v.is_same_type_test(arguments[0], arguments[1]))
 			return
+		else if pname == "is_same_instance" then
+			v.ret(v.equal_test(arguments[0], arguments[1]))
+			return
 		else if pname == "output_class_name" then
 			var nat = v.class_name_string(arguments.first)
 			v.add("printf(\"%s\\n\", {nat});")
