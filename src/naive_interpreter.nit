@@ -170,7 +170,7 @@ private class NaiveInterpreter
 		var implicit_cast_to = n.implicit_cast_to
 		if implicit_cast_to != null then
 			var mtype = self.unanchor_type(implicit_cast_to)
-			if not self.is_subtype(i.mtype, mtype) then n.fatal(self, "Cast failed")
+			if not self.is_subtype(i.mtype, mtype) then n.fatal(self, "Cast failed. Expected `{implicit_cast_to}`, got `{i.mtype}`")
 		end
 
 		#n.debug("OUT Execute expr: value is {i}")
@@ -379,9 +379,9 @@ private class NaiveInterpreter
 			# get the parameter type
 			var mtype = msignature.mparameters[i].mtype
 			var anchor = args.first.mtype.as(MClassType)
-			mtype = mtype.anchor_to(self.mainmodule, anchor)
-			if not args[i+1].mtype.is_subtype(self.mainmodule, anchor, mtype) then
-				node.fatal(self, "Cast failed")
+			var amtype = mtype.anchor_to(self.mainmodule, anchor)
+			if not args[i+1].mtype.is_subtype(self.mainmodule, anchor, amtype) then
+				node.fatal(self, "Cast failed. Expected `{mtype}`, got `{args[i+1].mtype}`")
 			end
 		end
 	end
@@ -1514,10 +1514,10 @@ redef class AAsCastExpr
 	do
 		var i = v.expr(self.n_expr)
 		if i == null then return null
-		var mtype = v.unanchor_type(self.mtype.as(not null))
-		if not v.is_subtype(i.mtype, mtype) then
-			#fatal(v, "Cast failed expected {mtype}, got {i}")
-			fatal(v, "Cast failed")
+		var mtype = self.mtype.as(not null)
+		var amtype = v.unanchor_type(mtype)
+		if not v.is_subtype(i.mtype, amtype) then
+			fatal(v, "Cast failed. Expected `{amtype}`, got `{i.mtype}`")
 		end
 		return i
 	end
