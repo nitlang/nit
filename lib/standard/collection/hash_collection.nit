@@ -216,16 +216,6 @@ class HashMap[K: Object, V]
 
 	redef fun iterator: HashMapIterator[K, V] do return new HashMapIterator[K,V](self)
 
-	redef fun iterate
-		!each(k: K, v: V)
-	do
-		var c = _first_item
-		while c != null do
-			each(c._key, c._value)
-			c = c._next_item
-		end
-	end
-
 	redef fun length do return _length
 
 	redef fun is_empty do return _length == 0

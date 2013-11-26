@@ -59,7 +59,6 @@ class Counter[E: Object]
 		var res = map.keys.to_a
 		var sorter = new CounterSorter[E](self)
 		sorter.sort(res)
-		#res.sort !cmp a, b = map[a] <=> map[b]
 		return res
 	end
 

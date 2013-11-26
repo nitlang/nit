@@ -86,6 +86,7 @@ class Game
 		end
 
 		# sort for blitting, firsts and in the back
+		# FIXME: remove closure
 		entities.sort !cmp( a, b ) = b.pos.y <=> a.pos.y
 
 		return turn

@@ -341,11 +341,8 @@ private class NaiveInterpreter
 			self.discover_call_trace.add mpropdef
 			self.debug("Discovered {mpropdef}")
 		end
-		if args.length < mpropdef.msignature.arity + 1 or args.length > mpropdef.msignature.arity + 1 + mpropdef.msignature.mclosures.length then
+		if args.length < mpropdef.msignature.arity + 1 or args.length > mpropdef.msignature.arity + 1 then
 			fatal("NOT YET IMPLEMENTED: Invalid arity for {mpropdef}. {args.length} arguments given.")
-		end
-		if args.length < mpropdef.msignature.arity + 1 + mpropdef.msignature.mclosures.length then
-			fatal("NOT YET IMPLEMENTED: default closures")
 		end
 
 		# Look for the AST node that implements the property
@@ -384,29 +381,6 @@ private class NaiveInterpreter
 				node.fatal(self, "Cast failed. Expected `{mtype}`, got `{args[i+1].mtype}`")
 			end
 		end
-	end
-
-	fun call_closure(closure: ClosureInstance, args: Array[Instance]): nullable Instance
-	do
-		var nclosuredef = closure.nclosuredef
-		var f = closure.frame
-		for i in [0..closure.nclosuredef.mclosure.mtype.as(MSignature).arity[ do
-			var variable = nclosuredef.variables[i]
-			f.map[variable] = args[i]
-		end
-
-		self.frames.unshift(f)
-
-		self.stmt(nclosuredef.n_expr)
-
-		self.frames.shift
-
-		if self.is_continue(nclosuredef.escapemark) then
-			var res = self.escapevalue
-			self.escapevalue = null
-			return res
-		end
-		return null
 	end
 
 	# Execute `mproperty` for a `args` (where `args[0]` is the receiver).
@@ -573,21 +547,6 @@ class PrimitiveInstance[E: Object]
 	redef fun to_f do return val.as(Float)
 end
 
-private class ClosureInstance
-	super Instance
-
-	var frame: Frame
-
-	var nclosuredef: AClosureDef
-
-	init(mtype: MType, frame: Frame, nclosuredef: AClosureDef)
-	do
-		super(mtype)
-		self.frame = frame
-		self.nclosuredef = nclosuredef
-	end
-end
-
 # Information about local variables in a running method
 private class Frame
 	# The current visited node
@@ -635,12 +594,6 @@ redef class AConcreteMethPropdef
 			var variable = self.n_signature.n_params[i].variable
 			assert variable != null
 			f.map[variable] = args[i+1]
-		end
-		for i in [0..mpropdef.msignature.mclosures.length[ do
-			var c = mpropdef.msignature.mclosures[i]
-			var variable = self.n_signature.n_closure_decls[i].variable
-			assert variable != null
-			f.map[variable] = args[i + 1 + mpropdef.msignature.arity]
 		end
 
 		v.frames.unshift(f)
@@ -1568,18 +1521,9 @@ redef class ASendExpr
 			if i == null then return null
 			args.add(i)
 		end
-		for c in self.n_closure_defs do
-			var mtype = c.mclosure.mtype
-			var instance = new ClosureInstance(mtype, v.frame, c)
-			args.add(instance)
-		end
 		var mproperty = self.mproperty.as(not null)
 
 		var res = v.send(mproperty, args)
-		if v.is_break(self.escapemark) then
-			res = v.escapevalue
-			v.escapevalue = null
-		end
 		return res
 	end
 end
@@ -1718,22 +1662,6 @@ redef class AIssetAttrExpr
 		var mproperty = self.mproperty.as(not null)
 		assert recv isa MutableInstance
 		return v.bool_instance(recv.attributes.has_key(mproperty))
-	end
-end
-
-redef class AClosureCallExpr
-	redef fun expr(v)
-	do
-		var args = new Array[Instance]
-		for a in self.n_args.n_exprs do
-			var i = v.expr(a)
-			if i == null then return null
-			args.add(i)
-		end
-		var i = v.frame.map[self.variable.as(not null)]
-		assert i isa ClosureInstance
-		var res = v.call_closure(i, args)
-		return res
 	end
 end
 

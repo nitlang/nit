@@ -40,18 +40,13 @@ class Variable
 	redef fun to_s do return self.name
 end
 
-# A local variable associated to a closure definition
-class ClosureVariable
-	super Variable
-end
-
 # Mark where break and continue will branch.
 # Marks are either associated with a label of with a for_loop structure
 class EscapeMark
 	# The name of the label (unless the mark is an anonymous loop mark)
 	var name: nullable String
 
-	# Is the mark atached to a loop (loop, while, for, closure)
+	# Is the mark atached to a loop (loop, while, for)
 	# Such a mark is a candidate to a labelless 'continue' or 'break'
 	var for_loop: Bool
 
@@ -63,10 +58,9 @@ class EscapeMark
 end
 
 # Visit a npropdef and:
-#  * Identify variables, closures and labels
+#  * Identify variables and labels
 #  * Associate each break and continue to its escapemark
 #  * Transform `ACallFormExpr` that access a variable into `AVarFormExpr`
-#  * Transform `ACallFormExpr` that call a closure into `AClosureCallExpr`
 # FIXME: Should the class be private?
 private class ScopeVisitor
 	super Visitor
@@ -238,18 +232,6 @@ redef class AParam
 	end
 end
 
-redef class AClosureDecl
-	# The variable associated with the closure declaration
-	var variable: nullable ClosureVariable
-	redef fun accept_scope_visitor(v)
-	do
-		var nid = self.n_id
-		var variable = new ClosureVariable(nid.text)
-		v.register_variable(nid, variable)
-		self.variable = variable
-	end
-end
-
 redef class AVardeclExpr
 	# The variable associated with the variable declaration
 	var variable: nullable Variable
@@ -389,17 +371,12 @@ redef class ACallFormExpr
 			var variable = v.search_variable(name)
 			if variable != null then
 				var n: AExpr
-				if variable isa ClosureVariable then
-					n = new AClosureCallExpr.init_aclosurecallexpr(n_id, n_args, n_closure_defs)
-					n.variable = variable
-				else
-					if not n_args.n_exprs.is_empty or n_args isa AParExprs then
-						v.error(self, "Error: {name} is variable, not a function.")
-						return
-					end
-					n = variable_create(variable)
-					n.variable = variable
+				if not n_args.n_exprs.is_empty or n_args isa AParExprs then
+					v.error(self, "Error: {name} is variable, not a function.")
+					return
 				end
+				n = variable_create(variable)
+				n.variable = variable
 				replace_with(n)
 				n.accept_scope_visitor(v)
 				return
@@ -431,51 +408,5 @@ redef class ACallReassignExpr
 	redef fun variable_create(variable)
 	do
 		return new AVarReassignExpr.init_avarreassignexpr(n_id, n_assign_op, n_value)
-	end
-end
-
-redef class AClosureCallExpr
-	# the associate closure variable
-	var variable: nullable ClosureVariable
-end
-
-redef class ASendExpr
-	# The escape mark used with the closures if any
-	var escapemark: nullable EscapeMark
-
-	redef fun accept_scope_visitor(v)
-	do
-		if self.n_closure_defs.length > 0 then
-			var escapemark = v.make_escape_mark(self.n_closure_defs.last.n_label, true)
-			self.escapemark = escapemark
-		end
-		super
-	end
-end
-
-redef class AClosureDef
-	# The automatic variables in order
-	var variables: nullable Array[Variable]
-
-	# The escape mark used with the closure
-	var escapemark: nullable EscapeMark
-
-	redef fun accept_scope_visitor(v)
-	do
-		v.scopes.unshift(new Scope)
-
-		var variables = new Array[Variable]
-		self.variables = variables
-
-		for nid in self.n_ids do
-			var va = new Variable(nid.text)
-			v.register_variable(nid, va)
-			variables.add(va)
-		end
-
-		self.escapemark = self.parent.as(ASendExpr).escapemark
-		v.enter_visit_block(self.n_expr, escapemark)
-
-		v.scopes.shift
 	end
 end

@@ -304,10 +304,6 @@ redef class ASignature
 			if self.ret_type == null then return false # Skip errir
 		end
 
-		for nclosure in self.n_closure_decls do
-			if not nclosure.n_signature.visit_signature(modelbuilder, nclassdef) then return false
-		end
-
 		self.is_visited = true
 		return true
 	end
@@ -482,16 +478,6 @@ redef class AMethPropdef
 		msignature = new MSignature(mparameters, ret_type)
 		mpropdef.msignature = msignature
 		mpropdef.is_abstract = self isa ADeferredMethPropdef
-
-		if nsig != null then
-			for nclosure in nsig.n_closure_decls do
-				var clos_signature = nclosure.n_signature.build_signature(modelbuilder, nclassdef)
-				if clos_signature == null then return
-				var mparameter = new MParameter(nclosure.n_id.text, clos_signature, false)
-				msignature.mclosures.add(mparameter)
-			end
-		end
-
 	end
 
 	redef fun check_signature(modelbuilder, nclassdef)
