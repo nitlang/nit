@@ -1328,17 +1328,6 @@ redef class AOrElseExpr
 	end
 end
 
-redef class AEeExpr
-	redef fun expr(v)
-	do
-		var i = v.expr(self.n_expr)
-		if i == null then return null
-		var i2 = v.expr(self.n_expr2)
-		if i2 == null then return null
-		return v.bool_instance(i.eq_is(i2))
-	end
-end
-
 redef class AIntExpr
 	redef fun expr(v)
 	do

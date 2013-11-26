@@ -2082,15 +2082,6 @@ redef class AOrElseExpr
 	end
 end
 
-redef class AEeExpr
-	redef fun expr(v)
-	do
-		var value1 = v.expr(self.n_expr, null)
-		var value2 = v.expr(self.n_expr2, null)
-		return v.equal_test(value1, value2)
-	end
-end
-
 redef class AIntExpr
 	redef fun expr(v) do return v.new_expr("{self.value.to_s}", self.mtype.as(not null))
 end
