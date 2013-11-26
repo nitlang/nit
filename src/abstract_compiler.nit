@@ -908,6 +908,15 @@ abstract class AbstractCompilerVisitor
 		self.add("exit(1);")
 	end
 
+	# Add a dynamic cast
+	fun add_cast(value: RuntimeVariable, mtype: MType, tag: String)
+	do
+		var res = self.type_test(value, mtype, tag)
+		self.add("if (!{res}) \{")
+		self.add_abort("Cast failed")
+		self.add("\}")
+	end
+
 	# Generate a return with the value `s`
 	fun ret(s: RuntimeVariable)
 	do
@@ -939,10 +948,7 @@ abstract class AbstractCompilerVisitor
 		res = autoadapt(res, nexpr.mtype.as(not null))
 		var implicit_cast_to = nexpr.implicit_cast_to
 		if implicit_cast_to != null and not self.compiler.modelbuilder.toolcontext.opt_no_check_autocast.value then
-			var castres = self.type_test(res, implicit_cast_to, "auto")
-			self.add("if (!{castres}) \{")
-			self.add_abort("Cast failed")
-			self.add("\}")
+			add_cast(res, implicit_cast_to, "auto")
 			res = autoadapt(res, implicit_cast_to)
 		end
 		self.current_node = old
@@ -1290,10 +1296,7 @@ redef class MMethodDef
 			# generate the cast
 			# note that v decides if and how to implements the cast
 			v.add("/* Covariant cast for argument {i} ({self.msignature.mparameters[i].name}) {arguments[i+1].inspect} isa {mtype} */")
-			var cond = v.type_test(arguments[i+1], mtype, "covariance")
-			v.add("if (!{cond}) \{")
-			v.add_abort("Cast failed")
-			v.add("\}")
+			v.add_cast(arguments[i+1], mtype, "covariance")
 		end
 	end
 end
@@ -2179,10 +2182,7 @@ redef class AAsCastExpr
 		var i = v.expr(self.n_expr, null)
 		if v.compiler.modelbuilder.toolcontext.opt_no_check_assert.value then return i
 
-		var cond = v.type_test(i, self.mtype.as(not null), "as")
-		v.add("if (!{cond}) \{")
-		v.add_abort("Cast failed")
-		v.add("\}")
+		v.add_cast(i, self.mtype.as(not null), "as")
 		return i
 	end
 end
