@@ -47,9 +47,9 @@ alt/error_expr_not_ok_alt6.nit:82,7--18: Type error: expected A, got Bool
 alt/error_expr_not_ok_alt6.nit:83,7--15: Type error: expected A, got Bool
 alt/error_expr_not_ok_alt6.nit:84,7--15: Type error: expected A, got Bool
 alt/error_expr_not_ok_alt6.nit:85,7--18: Type error: expected A, got Bool
-alt/error_expr_not_ok_alt6.nit:86,7--15: Type error: expected A, got Bool
-alt/error_expr_not_ok_alt6.nit:87,7--15: Type error: expected A, got Bool
-alt/error_expr_not_ok_alt6.nit:88,7--18: Type error: expected A, got Bool
+alt/error_expr_not_ok_alt6.nit:86,7--30: Type error: expected A, got Bool
+alt/error_expr_not_ok_alt6.nit:87,7--30: Type error: expected A, got Bool
+alt/error_expr_not_ok_alt6.nit:88,7--33: Type error: expected A, got Bool
 alt/error_expr_not_ok_alt6.nit:89,7--14: Type error: expected A, got Bool
 alt/error_expr_not_ok_alt6.nit:90,7--14: Type error: expected A, got Bool
 alt/error_expr_not_ok_alt6.nit:91,7--17: Type error: expected A, got Bool

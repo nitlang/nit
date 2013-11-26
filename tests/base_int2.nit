@@ -39,8 +39,8 @@ fun three: Int do return 3
 (two==two).output
 '\n'.output
 
-(not one is two).output
-(two is two).output
+(not one.is_same_instance(two)).output
+(two.is_same_instance(two)).output
 '\n'.output
 
 (not one>two).output

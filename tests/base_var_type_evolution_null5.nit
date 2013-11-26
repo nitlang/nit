@@ -15,10 +15,10 @@
 import end
 
 class Object
-	fun ==(o: nullable Object): Bool do return self is o
-	fun !=(o: nullable Object): Bool do return not self is o
+	fun ==(o: nullable Object): Bool do return self.is_same_instance(o)
+	fun !=(o: nullable Object): Bool do return not self.is_same_instance(o)
+	fun is_same_instance(other: nullable Object): Bool is intern
 end
-
 class A
 end
 
