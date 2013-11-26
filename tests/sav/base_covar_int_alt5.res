@@ -1,4 +1,4 @@
-Runtime error: Cast failed (../lib/standard/kernel.nit:257)
+Runtime error: Cast failed. Expected `OTHER`, got `Char` (../lib/standard/kernel.nit:257)
 true
 true
 true
