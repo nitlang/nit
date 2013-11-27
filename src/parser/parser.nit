@@ -23479,15 +23479,20 @@ private class ReduceAction570
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var ptypenode2 = nodearraylist1
 					assert ptypenode2 isa nullable AType
-					var tkwasnode3 = nodearraylist2
+					var tkwasnode3 = nodearraylist3
 					assert tkwasnode3 isa nullable TKwas
-					var ptypenode4 = nodearraylist4
+					var ptypenode4 = nodearraylist7
 					assert ptypenode4 isa nullable AType
 					var pexterncallnode1: nullable ACastAsExternCall = new ACastAsExternCall.init_acastasexterncall(
 						ptypenode2,

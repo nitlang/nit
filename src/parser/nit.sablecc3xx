@@ -351,7 +351,7 @@ extern_call_prop {-> extern_call}
 	| {init} type {-> New extern_call.init_prop( type )}
 	;
 extern_call_cast {-> extern_call}
-    = {as_cast} [from_type]:type kwas [n2]:no [to_type]:type {-> New extern_call.cast_as(from_type, kwas, to_type)}
+    = {as_cast} [from_type]:type dot kwas [n2]:no opar [n3]:no [to_type]:type [n4]:no cpar {-> New extern_call.cast_as(from_type, kwas, to_type)}
 	| {as_nullable} type kwas [n2]:no kwnullable {-> New extern_call.as_nullable( type, kwas, kwnullable)}
 	| {as_not_nullable} type kwas [n2]:no kwnot [n3]:no kwnullable {-> New extern_call.as_not_nullable( type, kwas, kwnot, kwnullable)}
 	;
