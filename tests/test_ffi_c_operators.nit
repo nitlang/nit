@@ -45,7 +45,7 @@ class A
 		return new_A( s / by );
 	`}
 
-	redef fun ==( other ) import value, nullable Object as(A) `{
+	redef fun ==( other ) import value, nullable Object.as(A) `{
 		if ( nullable_Object_is_a_A( other ) &&
 			 A_value( nullable_Object_as_A(other) ) == A_value( recv ) )
 			return 1;
