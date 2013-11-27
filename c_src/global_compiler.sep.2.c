@@ -89,6 +89,7 @@ val* var78 /* : MType */;
 short int var79 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 val* var_mtype1 /* var mtype1: MClassType */;
 static val* varonce80;
 val* var81 /* : String */;
@@ -458,7 +459,9 @@ var79 = 0;
 var79 = var78->type->type_table[cltype] == idtype;
 }
 if (!var79) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/global_compiler.nit", 807);
+var_class_name = var78 == NULL ? "null" : var78->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MClassType", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 807);
 exit(1);
 }
 var_mtype1 = var78;
@@ -911,6 +914,7 @@ val* var6 /* : MType */;
 short int var7 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 val* var8 /* : AbstractCompiler */;
 val* var9 /* : RapidTypeAnalysis */;
 val* var10 /* : HashSet[MClassType] */;
@@ -972,7 +976,9 @@ var7 = 0;
 var7 = var6->type->type_table[cltype] == idtype;
 }
 if (!var7) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/global_compiler.nit", 833);
+var_class_name = var6 == NULL ? "null" : var6->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MClassType", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 833);
 exit(1);
 }
 var_mtype = var6;
@@ -1479,7 +1485,8 @@ val* var /* : MClassType */;
 val* var1 /* : MClassType */;
 var1 = self->attrs[COLOR_global_compiler__CustomizedRuntimeFunction___64drecv].val; /* @recv on <self:CustomizedRuntimeFunction> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @recv", "src/global_compiler.nit", 869);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @recv");
+fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 869);
 exit(1);
 }
 var = var1;
@@ -1846,6 +1853,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_compiler /* var compiler: GlobalCompiler */;
 val* var1 /* : MClassType */;
 val* var_recv /* var recv: MClassType */;
@@ -2140,7 +2148,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/global_compiler.nit", 913);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "COMPILER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 913);
 exit(1);
 }
 var_compiler = p0;
@@ -2196,7 +2206,8 @@ CHECK_NEW_array__Array(var23);
 }
 var26 = ((val* (*)(val*))(var23->class->vft[COLOR_string__Object__to_s]))(var23) /* to_s on <var23:Array[Object]>*/;
 ((void (*)(val*, val*))(self->class->vft[COLOR_file__Object__print]))(self, var26) /* print on <self:CustomizedRuntimeFunction>*/;
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Aborted", "src/global_compiler.nit", 920);
+fprintf(stderr, "Runtime error: %s", "Aborted");
+fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 920);
 exit(1);
 } else {
 }
@@ -2242,7 +2253,8 @@ CHECK_NEW_string__Buffer(var41);
 var_comment = var41;
 var42 = ((val* (*)(val*))(var_mmethoddef->class->vft[COLOR_model__MMethodDef__msignature]))(var_mmethoddef) /* msignature on <var_mmethoddef:MMethodDef>*/;
 if (var42 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/global_compiler.nit", 934);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 934);
 exit(1);
 } else {
 var43 = ((val* (*)(val*))(var42->class->vft[COLOR_model__MSignature__return_mtype]))(var42) /* return_mtype on <var42:nullable MSignature>*/;
@@ -2376,7 +2388,8 @@ var99 = NEW_range__Range(&type_range__Rangekernel__Int);
 var100 = 0;
 var101 = ((val* (*)(val*))(var_mmethoddef->class->vft[COLOR_model__MMethodDef__msignature]))(var_mmethoddef) /* msignature on <var_mmethoddef:MMethodDef>*/;
 if (var101 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/global_compiler.nit", 948);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 948);
 exit(1);
 } else {
 var102 = ((long (*)(val*))(var101->class->vft[COLOR_model__MSignature__arity]))(var101) /* arity on <var101:nullable MSignature>*/;
@@ -2394,7 +2407,8 @@ var108 = ((struct instance_kernel__Int*)var107)->value; /* autounbox from nullab
 var_i = var108;
 var109 = ((val* (*)(val*))(var_mmethoddef->class->vft[COLOR_model__MMethodDef__msignature]))(var_mmethoddef) /* msignature on <var_mmethoddef:MMethodDef>*/;
 if (var109 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/global_compiler.nit", 949);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 949);
 exit(1);
 } else {
 var110 = ((val* (*)(val*))(var109->class->vft[COLOR_model__MSignature__mparameters]))(var109) /* mparameters on <var109:nullable MSignature>*/;
@@ -2404,7 +2418,8 @@ var112 = ((val* (*)(val*))(var111->class->vft[COLOR_model__MParameter__mtype]))(
 var_mtype = var112;
 var113 = ((val* (*)(val*))(var_mmethoddef->class->vft[COLOR_model__MMethodDef__msignature]))(var_mmethoddef) /* msignature on <var_mmethoddef:MMethodDef>*/;
 if (var113 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/global_compiler.nit", 950);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 950);
 exit(1);
 } else {
 var114 = ((long (*)(val*))(var113->class->vft[COLOR_model__MSignature__vararg_rank]))(var113) /* vararg_rank on <var113:nullable MSignature>*/;
@@ -2687,7 +2702,8 @@ var237 = ((val* (*)(val*, val*, val*))(var_mmethoddef->class->vft[COLOR_abstract
 var237;
 var238 = ((val* (*)(val*))(var_frame->class->vft[COLOR_abstract_compiler__Frame__returnlabel]))(var_frame) /* returnlabel on <var_frame:Frame>*/;
 if (var238 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/global_compiler.nit", 976);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 976);
 exit(1);
 }
 if (varonce239) {
@@ -2728,7 +2744,8 @@ varonce250 = var251;
 }
 var255 = ((val* (*)(val*))(var_frame->class->vft[COLOR_abstract_compiler__Frame__returnvar]))(var_frame) /* returnvar on <var_frame:Frame>*/;
 if (var255 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/global_compiler.nit", 978);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 978);
 exit(1);
 }
 if (varonce256) {
@@ -2778,6 +2795,7 @@ short int var1 /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_v /* var v: GlobalCompilerVisitor */;
 val* var_arguments /* var arguments: Array[RuntimeVariable] */;
 val* var2 /* : MMethodDef */;
@@ -2917,7 +2935,9 @@ var1 = 0;
 var1 = p0->type->type_table[cltype] == idtype;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/global_compiler.nit", 983);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "VISITOR", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 983);
 exit(1);
 }
 var_v = p0;
@@ -2925,7 +2945,8 @@ var_arguments = p1;
 var2 = ((val* (*)(val*))(self->class->vft[COLOR_abstract_compiler__AbstractRuntimeFunction__mmethoddef]))(self) /* mmethoddef on <self:CustomizedRuntimeFunction>*/;
 var3 = ((val* (*)(val*))(var2->class->vft[COLOR_model__MMethodDef__msignature]))(var2) /* msignature on <var2:MMethodDef>*/;
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/global_compiler.nit", 985);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 985);
 exit(1);
 } else {
 var4 = ((val* (*)(val*))(var3->class->vft[COLOR_model__MSignature__return_mtype]))(var3) /* return_mtype on <var3:nullable MSignature>*/;
@@ -3041,7 +3062,8 @@ var53 = ((val* (*)(val*, val*, val*))(var52->class->vft[COLOR_abstract_compiler_
 var53;
 var54 = ((val* (*)(val*))(var_frame->class->vft[COLOR_abstract_compiler__Frame__returnlabel]))(var_frame) /* returnlabel on <var_frame:Frame>*/;
 if (var54 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/global_compiler.nit", 1002);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 1002);
 exit(1);
 }
 if (varonce55) {

@@ -33,7 +33,8 @@ val* var /* : String */;
 val* var1 /* : String */;
 var1 = self->attrs[COLOR_toolcontext__Message___64dtext].val; /* @text on <self:Message> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @text", "src/toolcontext.nit", 30);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @text");
+fprintf(stderr, " (%s:%d)\n", "src/toolcontext.nit", 30);
 exit(1);
 }
 var = var1;
@@ -66,6 +67,7 @@ short int var1 /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_other /* var other: Message */;
 val* var2 /* : nullable Location */;
 val* var3 /* : null */;
@@ -89,7 +91,9 @@ var1 = 0;
 var1 = p0->type->type_table[cltype] == idtype;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/toolcontext.nit", 32);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/toolcontext.nit", 32);
 exit(1);
 }
 var_other = p0;
@@ -121,12 +125,14 @@ goto RET_LABEL;
 }
 var10 = ((val* (*)(val*))(self->class->vft[COLOR_toolcontext__Message__location]))(self) /* location on <self:Message>*/;
 if (var10 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/toolcontext.nit", 37);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/toolcontext.nit", 37);
 exit(1);
 }
 var11 = ((val* (*)(val*))(var_other->class->vft[COLOR_toolcontext__Message__location]))(var_other) /* location on <var_other:Message>*/;
 if (var11 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/toolcontext.nit", 37);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/toolcontext.nit", 37);
 exit(1);
 }
 var12 = ((short int (*)(val*, val*))(var10->class->vft[COLOR_kernel__Comparable___60d]))(var10, var11) /* < on <var10:nullable Location(Location)>*/;
@@ -814,7 +820,8 @@ val* var /* : String */;
 val* var1 /* : String */;
 var1 = self->attrs[COLOR_toolcontext__ToolContext___64dlog_directory].val; /* @log_directory on <self:ToolContext> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @log_directory", "src/toolcontext.nit", 78);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @log_directory");
+fprintf(stderr, " (%s:%d)\n", "src/toolcontext.nit", 78);
 exit(1);
 }
 var = var1;
@@ -846,7 +853,8 @@ val* var /* : Array[Message] */;
 val* var1 /* : Array[Message] */;
 var1 = self->attrs[COLOR_toolcontext__ToolContext___64dmessages].val; /* @messages on <self:ToolContext> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @messages", "src/toolcontext.nit", 81);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @messages");
+fprintf(stderr, " (%s:%d)\n", "src/toolcontext.nit", 81);
 exit(1);
 }
 var = var1;
@@ -878,7 +886,8 @@ val* var /* : ComparableSorter[Message] */;
 val* var1 /* : ComparableSorter[Message] */;
 var1 = self->attrs[COLOR_toolcontext__ToolContext___64dmessage_sorter].val; /* @message_sorter on <self:ToolContext> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @message_sorter", "src/toolcontext.nit", 83);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @message_sorter");
+fprintf(stderr, " (%s:%d)\n", "src/toolcontext.nit", 83);
 exit(1);
 }
 var = var1;
@@ -913,6 +922,7 @@ short int var3 /* : Bool */;
 short int var5 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 short int var6 /* : Bool */;
 val* var7 /* : ComparableSorter[Message] */;
 val* var8 /* : Array[Message] */;
@@ -952,8 +962,9 @@ short int var39 /* : Bool */;
 short int var41 /* : Bool */;
 int cltype42;
 int idtype43;
-short int var44 /* : Bool */;
-long var45 /* : Int */;
+const char* var_class_name44;
+short int var45 /* : Bool */;
+long var46 /* : Int */;
 var = ((val* (*)(val*))(self->class->vft[COLOR_toolcontext__ToolContext__messages]))(self) /* messages on <self:ToolContext>*/;
 var1 = ((long (*)(val*))(var->class->vft[COLOR_abstract_collection__Collection__length]))(var) /* length on <var:Array[Message]>*/;
 var2 = 0;
@@ -962,7 +973,9 @@ var2 = 0;
 /* <var2:Int> isa OTHER */
 var5 = 1; /* easy <var2:Int> isa OTHER*/
 if (!var5) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 259);
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
 exit(1);
 }
 var6 = var1 > var2;
@@ -1045,17 +1058,19 @@ var38 = 0;
 /* <var38:Int> isa OTHER */
 var41 = 1; /* easy <var38:Int> isa OTHER*/
 if (!var41) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 259);
+var_class_name44 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name44);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
 exit(1);
 }
-var44 = var37 > var38;
-var39 = var44;
+var45 = var37 > var38;
+var39 = var45;
 goto RET_LABEL40;
 RET_LABEL40:(void)0;
 }
 if (var39){
-var45 = 1;
-((void (*)(val*, long))(self->class->vft[COLOR_kernel__Object__exit]))(self, var45) /* exit on <self:ToolContext>*/;
+var46 = 1;
+((void (*)(val*, long))(self->class->vft[COLOR_kernel__Object__exit]))(self, var46) /* exit on <self:ToolContext>*/;
 } else {
 }
 RET_LABEL:;
@@ -1198,6 +1213,7 @@ short int var1 /* : Bool */;
 short int var3 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 short int var4 /* : Bool */;
 val* var5 /* : Array[Object] */;
 long var6 /* : Int */;
@@ -1211,7 +1227,9 @@ var = ((long (*)(val*))(self->class->vft[COLOR_toolcontext__ToolContext__verbose
 /* <var:Int> isa OTHER */
 var3 = 1; /* easy <var:Int> isa OTHER*/
 if (!var3) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 256);
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
 exit(1);
 }
 var4 = var_level <= var;
@@ -1245,7 +1263,8 @@ val* var /* : OptionContext */;
 val* var1 /* : OptionContext */;
 var1 = self->attrs[COLOR_toolcontext__ToolContext___64doption_context].val; /* @option_context on <self:ToolContext> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @option_context", "src/toolcontext.nit", 136);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @option_context");
+fprintf(stderr, " (%s:%d)\n", "src/toolcontext.nit", 136);
 exit(1);
 }
 var = var1;
@@ -1277,7 +1296,8 @@ val* var /* : OptionCount */;
 val* var1 /* : OptionCount */;
 var1 = self->attrs[COLOR_toolcontext__ToolContext___64dopt_warn].val; /* @opt_warn on <self:ToolContext> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @opt_warn", "src/toolcontext.nit", 139);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @opt_warn");
+fprintf(stderr, " (%s:%d)\n", "src/toolcontext.nit", 139);
 exit(1);
 }
 var = var1;
@@ -1309,7 +1329,8 @@ val* var /* : OptionBool */;
 val* var1 /* : OptionBool */;
 var1 = self->attrs[COLOR_toolcontext__ToolContext___64dopt_quiet].val; /* @opt_quiet on <self:ToolContext> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @opt_quiet", "src/toolcontext.nit", 142);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @opt_quiet");
+fprintf(stderr, " (%s:%d)\n", "src/toolcontext.nit", 142);
 exit(1);
 }
 var = var1;
@@ -1341,7 +1362,8 @@ val* var /* : OptionBool */;
 val* var1 /* : OptionBool */;
 var1 = self->attrs[COLOR_toolcontext__ToolContext___64dopt_log].val; /* @opt_log on <self:ToolContext> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @opt_log", "src/toolcontext.nit", 145);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @opt_log");
+fprintf(stderr, " (%s:%d)\n", "src/toolcontext.nit", 145);
 exit(1);
 }
 var = var1;
@@ -1373,7 +1395,8 @@ val* var /* : OptionString */;
 val* var1 /* : OptionString */;
 var1 = self->attrs[COLOR_toolcontext__ToolContext___64dopt_log_dir].val; /* @opt_log_dir on <self:ToolContext> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @opt_log_dir", "src/toolcontext.nit", 148);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @opt_log_dir");
+fprintf(stderr, " (%s:%d)\n", "src/toolcontext.nit", 148);
 exit(1);
 }
 var = var1;
@@ -1405,7 +1428,8 @@ val* var /* : OptionBool */;
 val* var1 /* : OptionBool */;
 var1 = self->attrs[COLOR_toolcontext__ToolContext___64dopt_help].val; /* @opt_help on <self:ToolContext> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @opt_help", "src/toolcontext.nit", 151);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @opt_help");
+fprintf(stderr, " (%s:%d)\n", "src/toolcontext.nit", 151);
 exit(1);
 }
 var = var1;
@@ -1437,7 +1461,8 @@ val* var /* : OptionBool */;
 val* var1 /* : OptionBool */;
 var1 = self->attrs[COLOR_toolcontext__ToolContext___64dopt_version].val; /* @opt_version on <self:ToolContext> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @opt_version", "src/toolcontext.nit", 154);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @opt_version");
+fprintf(stderr, " (%s:%d)\n", "src/toolcontext.nit", 154);
 exit(1);
 }
 var = var1;
@@ -1469,7 +1494,8 @@ val* var /* : OptionCount */;
 val* var1 /* : OptionCount */;
 var1 = self->attrs[COLOR_toolcontext__ToolContext___64dopt_verbose].val; /* @opt_verbose on <self:ToolContext> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @opt_verbose", "src/toolcontext.nit", 157);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @opt_verbose");
+fprintf(stderr, " (%s:%d)\n", "src/toolcontext.nit", 157);
 exit(1);
 }
 var = var1;
@@ -1501,7 +1527,8 @@ val* var /* : OptionBool */;
 val* var1 /* : OptionBool */;
 var1 = self->attrs[COLOR_toolcontext__ToolContext___64dopt_stop_on_first_error].val; /* @opt_stop_on_first_error on <self:ToolContext> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @opt_stop_on_first_error", "src/toolcontext.nit", 160);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @opt_stop_on_first_error");
+fprintf(stderr, " (%s:%d)\n", "src/toolcontext.nit", 160);
 exit(1);
 }
 var = var1;
@@ -1533,7 +1560,8 @@ val* var /* : OptionBool */;
 val* var1 /* : OptionBool */;
 var1 = self->attrs[COLOR_toolcontext__ToolContext___64dopt_no_color].val; /* @opt_no_color on <self:ToolContext> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @opt_no_color", "src/toolcontext.nit", 163);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @opt_no_color");
+fprintf(stderr, " (%s:%d)\n", "src/toolcontext.nit", 163);
 exit(1);
 }
 var = var1;
@@ -1695,7 +1723,8 @@ if (var17){
 var18 = ((val* (*)(val*))(self->class->vft[COLOR_toolcontext__ToolContext__opt_log_dir]))(self) /* opt_log_dir on <self:ToolContext>*/;
 var19 = ((val* (*)(val*))(var18->class->vft[COLOR_opts__Option__value]))(var18) /* value on <var18:OptionString>*/;
 if (var19 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/toolcontext.nit", 187);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/toolcontext.nit", 187);
 exit(1);
 }
 ((void (*)(val*, val*))(self->class->vft[COLOR_toolcontext__ToolContext__log_directory_61d]))(self, var19) /* log_directory= on <self:ToolContext>*/;

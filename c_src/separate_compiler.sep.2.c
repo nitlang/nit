@@ -74,6 +74,7 @@ val* var65 /* : MType */;
 short int var66 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 val* var_valtype /* var valtype: MClassType */;
 val* var67 /* : RuntimeVariable */;
 val* var_res /* var res: RuntimeVariable */;
@@ -335,7 +336,9 @@ var66 = 0;
 var66 = var65->type->type_table[cltype] == idtype;
 }
 if (!var66) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/separate_compiler.nit", 944);
+var_class_name = var65 == NULL ? "null" : var65->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MClassType", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 944);
 exit(1);
 }
 var_valtype = var65;
@@ -778,7 +781,8 @@ var1 = ((val* (*)(val*))(var_mmethod->class->vft[COLOR_model__MProperty__intro])
 var2 = ((val* (*)(val*))(var_mmethod->class->vft[COLOR_model__MProperty__intro]))(var_mmethod) /* intro on <var_mmethod:MMethod>*/;
 var3 = ((val* (*)(val*))(var2->class->vft[COLOR_model__MMethodDef__msignature]))(var2) /* msignature on <var2:MPropDef(MMethodDef)>*/;
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/separate_compiler.nit", 976);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 976);
 exit(1);
 }
 ((void (*)(val*, val*, val*, val*))(self->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__varargize]))(self, var1, var3, var_arguments) /* varargize on <self:SeparateCompilerVisitor>*/;
@@ -1282,7 +1286,8 @@ var27 = ((val* (*)(val*))(var26->class->vft[COLOR_model__MPropDef__mclassdef]))(
 var28 = ((val* (*)(val*))(var27->class->vft[COLOR_model__MClassDef__mmodule]))(var27) /* mmodule on <var27:MClassDef>*/;
 var29 = 1;
 if (var19 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/separate_compiler.nit", 993);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 993);
 exit(1);
 } else {
 var30 = ((val* (*)(val*, val*, val*, val*, short int))(var19->class->vft[COLOR_model__MType__resolve_for]))(var19, var22, var25, var28, var29) /* resolve_for on <var19:nullable MSignature>*/;
@@ -1544,7 +1549,8 @@ var150 = 0; /* is null */
 var150 = 1; /* arg is null and recv is not */
 }
 if (!var150) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "src/separate_compiler.nit", 1026);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 1026);
 exit(1);
 }
 var151 = 1;
@@ -1677,7 +1683,8 @@ var207 = 0; /* is null */
 var207 = 1; /* arg is null and recv is not */
 }
 if (!var207) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "src/separate_compiler.nit", 1036);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 1036);
 exit(1);
 }
 var208 = 1;
@@ -1864,7 +1871,8 @@ var293 = 0; /* is null */
 var293 = 1; /* arg is null and recv is not */
 }
 if (!var293) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "src/separate_compiler.nit", 1051);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 1051);
 exit(1);
 }
 var294 = 1;
@@ -2315,7 +2323,8 @@ var_recvtype = p1;
 var_arguments = p2;
 var1 = ((val* (*)(val*))(var_mmethoddef->class->vft[COLOR_model__MMethodDef__msignature]))(var_mmethoddef) /* msignature on <var_mmethoddef:MMethodDef>*/;
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/separate_compiler.nit", 1088);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 1088);
 exit(1);
 } else {
 var2 = ((val* (*)(val*))(var1->class->vft[COLOR_model__MSignature__return_mtype]))(var1) /* return_mtype on <var1:nullable MSignature>*/;
@@ -2463,7 +2472,8 @@ var71 = ((val* (*)(val*, val*, val*))(var_mmethoddef->class->vft[COLOR_abstract_
 var71;
 var72 = ((val* (*)(val*))(var_frame->class->vft[COLOR_abstract_compiler__Frame__returnlabel]))(var_frame) /* returnlabel on <var_frame:Frame>*/;
 if (var72 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/separate_compiler.nit", 1109);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 1109);
 exit(1);
 }
 if (varonce73) {
@@ -2855,7 +2865,8 @@ var_res = var2;
 var3 = ((val* (*)(val*))(var_a->class->vft[COLOR_model__MProperty__intro]))(var_a) /* intro on <var_a:MAttribute>*/;
 var4 = ((val* (*)(val*))(var3->class->vft[COLOR_model__MAttributeDef__static_mtype]))(var3) /* static_mtype on <var3:MPropDef(MAttributeDef)>*/;
 if (var4 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/separate_compiler.nit", 1159);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 1159);
 exit(1);
 }
 var_mtype = var4;
@@ -3336,7 +3347,8 @@ var_recv = p1;
 var1 = ((val* (*)(val*))(var_a->class->vft[COLOR_model__MProperty__intro]))(var_a) /* intro on <var_a:MAttribute>*/;
 var2 = ((val* (*)(val*))(var1->class->vft[COLOR_model__MAttributeDef__static_mtype]))(var1) /* static_mtype on <var1:MPropDef(MAttributeDef)>*/;
 if (var2 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/separate_compiler.nit", 1187);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 1187);
 exit(1);
 }
 var_ret = var2;
@@ -3930,7 +3942,8 @@ var_value = p2;
 var = ((val* (*)(val*))(var_a->class->vft[COLOR_model__MProperty__intro]))(var_a) /* intro on <var_a:MAttribute>*/;
 var1 = ((val* (*)(val*))(var->class->vft[COLOR_model__MAttributeDef__static_mtype]))(var) /* static_mtype on <var:MPropDef(MAttributeDef)>*/;
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/separate_compiler.nit", 1230);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 1230);
 exit(1);
 }
 var_mtype = var1;
@@ -4015,7 +4028,8 @@ var42 = 0;
 var42 = var_mtype->type->type_table[cltype] == idtype;
 }
 if (!var42) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "src/separate_compiler.nit", 1241);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 1241);
 exit(1);
 }
 if (varonce43) {
@@ -4528,7 +4542,8 @@ var12 = var_;
 if (var12){
 var15 = ((val* (*)(val*))(self->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__frame]))(self) /* frame on <self:SeparateCompilerVisitor>*/;
 if (var15 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/separate_compiler.nit", 1264);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 1264);
 exit(1);
 } else {
 var16 = ((val* (*)(val*))(var15->class->vft[COLOR_abstract_compiler__Frame__mpropdef]))(var15) /* mpropdef on <var15:nullable Frame>*/;
@@ -4537,7 +4552,8 @@ var17 = ((val* (*)(val*))(var16->class->vft[COLOR_model__MPropDef__mclassdef]))(
 ((void (*)(val*, val*, val*))(self->class->vft[COLOR_separate_compiler__SeparateCompilerVisitor__link_unresolved_type]))(self, var17, var_mtype) /* link_unresolved_type on <self:SeparateCompilerVisitor>*/;
 var18 = ((val* (*)(val*))(self->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__frame]))(self) /* frame on <self:SeparateCompilerVisitor>*/;
 if (var18 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/separate_compiler.nit", 1265);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 1265);
 exit(1);
 } else {
 var19 = ((val* (*)(val*))(var18->class->vft[COLOR_abstract_compiler__Frame__arguments]))(var18) /* arguments on <var18:nullable Frame>*/;
@@ -5516,7 +5532,8 @@ var20 = ((val* (*)(val*))(self->class->vft[COLOR_abstract_compiler__AbstractComp
 var_compiler = var20;
 var21 = ((val* (*)(val*))(self->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__frame]))(self) /* frame on <self:SeparateCompilerVisitor>*/;
 if (var21 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/separate_compiler.nit", 1291);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 1291);
 exit(1);
 } else {
 var22 = ((val* (*)(val*))(var21->class->vft[COLOR_abstract_compiler__Frame__arguments]))(var21) /* arguments on <var21:nullable Frame>*/;
@@ -5649,7 +5666,8 @@ var_accept_null = var76;
 var80 = ((val* (*)(val*))(var_value->class->vft[COLOR_abstract_compiler__RuntimeVariable__mcasttype]))(var_value) /* mcasttype on <var_value:RuntimeVariable>*/;
 var81 = ((val* (*)(val*))(self->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__frame]))(self) /* frame on <self:SeparateCompilerVisitor>*/;
 if (var81 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/separate_compiler.nit", 1309);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 1309);
 exit(1);
 } else {
 var82 = ((val* (*)(val*))(var81->class->vft[COLOR_abstract_compiler__Frame__mpropdef]))(var81) /* mpropdef on <var81:nullable Frame>*/;
@@ -5658,7 +5676,8 @@ var83 = ((val* (*)(val*))(var82->class->vft[COLOR_model__MPropDef__mclassdef]))(
 var84 = ((val* (*)(val*))(var83->class->vft[COLOR_model__MClassDef__mmodule]))(var83) /* mmodule on <var83:MClassDef>*/;
 var85 = ((val* (*)(val*))(self->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__frame]))(self) /* frame on <self:SeparateCompilerVisitor>*/;
 if (var85 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/separate_compiler.nit", 1309);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 1309);
 exit(1);
 } else {
 var86 = ((val* (*)(val*))(var85->class->vft[COLOR_abstract_compiler__Frame__mpropdef]))(var85) /* mpropdef on <var85:nullable Frame>*/;
@@ -5812,7 +5831,8 @@ var159 = ((val* (*)(val*))(var156->class->vft[COLOR_string__Object__to_s]))(var1
 ((void (*)(val*, val*))(self->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__add_decl]))(self, var159) /* add_decl on <self:SeparateCompilerVisitor>*/;
 var160 = ((val* (*)(val*))(self->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__frame]))(self) /* frame on <self:SeparateCompilerVisitor>*/;
 if (var160 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/separate_compiler.nit", 1323);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 1323);
 exit(1);
 } else {
 var161 = ((val* (*)(val*))(var160->class->vft[COLOR_abstract_compiler__Frame__mpropdef]))(var160) /* mpropdef on <var160:nullable Frame>*/;
@@ -6730,6 +6750,7 @@ val* var80 /* : MType */;
 short int var81 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 val* var_mtype1 /* var mtype1: MClassType */;
 static val* varonce82;
 val* var83 /* : String */;
@@ -6976,7 +6997,9 @@ var81 = 0;
 var81 = var80->type->type_table[cltype] == idtype;
 }
 if (!var81) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/separate_compiler.nit", 1392);
+var_class_name = var80 == NULL ? "null" : var80->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MClassType", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 1392);
 exit(1);
 }
 var_mtype1 = var80;
@@ -7496,6 +7519,7 @@ val* var78 /* : MType */;
 short int var79 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 val* var_mtype1 /* var mtype1: MClassType */;
 static val* varonce80;
 val* var81 /* : String */;
@@ -8057,7 +8081,9 @@ var79 = 0;
 var79 = var78->type->type_table[cltype] == idtype;
 }
 if (!var79) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/separate_compiler.nit", 1429);
+var_class_name = var78 == NULL ? "null" : var78->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MClassType", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 1429);
 exit(1);
 }
 var_mtype1 = var78;
@@ -9631,7 +9657,8 @@ var21 = 0;
 var21 = var_mtype->type->type_table[cltype] == idtype;
 }
 if (!var21) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "src/separate_compiler.nit", 1543);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 1543);
 exit(1);
 }
 var22 = ((val* (*)(val*))(self->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__compiler]))(self) /* compiler on <self:SeparateCompilerVisitor>*/;
@@ -9640,7 +9667,8 @@ var23 = ((short int (*)(val*))(var_mtype->class->vft[COLOR_model__MType__need_an
 if (var23){
 var24 = ((val* (*)(val*))(self->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__frame]))(self) /* frame on <self:SeparateCompilerVisitor>*/;
 if (var24 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/separate_compiler.nit", 1546);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 1546);
 exit(1);
 } else {
 var25 = ((val* (*)(val*))(var24->class->vft[COLOR_abstract_compiler__Frame__mpropdef]))(var24) /* mpropdef on <var24:nullable Frame>*/;
@@ -9649,7 +9677,8 @@ var26 = ((val* (*)(val*))(var25->class->vft[COLOR_model__MPropDef__mclassdef]))(
 ((void (*)(val*, val*, val*))(self->class->vft[COLOR_separate_compiler__SeparateCompilerVisitor__link_unresolved_type]))(self, var26, var_mtype) /* link_unresolved_type on <self:SeparateCompilerVisitor>*/;
 var27 = ((val* (*)(val*))(self->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__frame]))(self) /* frame on <self:SeparateCompilerVisitor>*/;
 if (var27 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/separate_compiler.nit", 1547);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 1547);
 exit(1);
 } else {
 var28 = ((val* (*)(val*))(var27->class->vft[COLOR_abstract_compiler__Frame__arguments]))(var27) /* arguments on <var27:nullable Frame>*/;

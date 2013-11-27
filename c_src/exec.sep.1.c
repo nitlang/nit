@@ -49,7 +49,8 @@ var = ((void* (*)(val*))(self->class->vft[COLOR_exec__Process__data]))(self) /* 
 exec__NativeProcess__wait(var);
 var1 = ((short int (*)(val*))(self->class->vft[COLOR_exec__Process__is_finished]))(self) /* is_finished on <self:Process>*/;
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "lib/standard/exec.nit", 32);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/exec.nit", 32);
 exit(1);
 }
 RET_LABEL:;
@@ -67,7 +68,8 @@ void* var2 /* : NativeProcess */;
 long var3 /* : Int */;
 var1 = ((short int (*)(val*))(self->class->vft[COLOR_exec__Process__is_finished]))(self) /* is_finished on <self:Process>*/;
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "lib/standard/exec.nit", 38);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/exec.nit", 38);
 exit(1);
 }
 var2 = ((void* (*)(val*))(self->class->vft[COLOR_exec__Process__data]))(self) /* data on <self:Process>*/;
@@ -264,7 +266,8 @@ val* var /* : FDIStream */;
 val* var1 /* : FDIStream */;
 var1 = self->attrs[COLOR_exec__IProcess___64dstream_in].val; /* @stream_in on <self:IProcess> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @stream_in", "lib/standard/exec.nit", 83);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @stream_in");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/exec.nit", 83);
 exit(1);
 }
 var = var1;
@@ -425,7 +428,8 @@ val* var /* : OStream */;
 val* var1 /* : OStream */;
 var1 = self->attrs[COLOR_exec__OProcess___64dstream_out].val; /* @stream_out on <self:OProcess> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @stream_out", "lib/standard/exec.nit", 114);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @stream_out");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/exec.nit", 114);
 exit(1);
 }
 var = var1;

@@ -5,7 +5,8 @@ val* var /* : Phase */;
 val* var1 /* : Phase */;
 var1 = self->attrs[COLOR_simple_misc_analysis__ToolContext___64dsimple_misc_analysis_phase].val; /* @simple_misc_analysis_phase on <self:ToolContext> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @simple_misc_analysis_phase", "src/simple_misc_analysis.nit", 29);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @simple_misc_analysis_phase");
+fprintf(stderr, " (%s:%d)\n", "src/simple_misc_analysis.nit", 29);
 exit(1);
 }
 var = var1;
@@ -109,7 +110,8 @@ val* var /* : ToolContext */;
 val* var1 /* : ToolContext */;
 var1 = self->attrs[COLOR_simple_misc_analysis__SimpleMiscVisitor___64dtoolcontext].val; /* @toolcontext on <self:SimpleMiscVisitor> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @toolcontext", "src/simple_misc_analysis.nit", 57);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @toolcontext");
+fprintf(stderr, " (%s:%d)\n", "src/simple_misc_analysis.nit", 57);
 exit(1);
 }
 var = var1;
@@ -488,6 +490,7 @@ short int var2 /* : Bool */;
 short int var4 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 short int var5 /* : Bool */;
 static val* varonce;
 val* var6 /* : String */;
@@ -510,7 +513,9 @@ var1 = 0;
 /* <var1:Int> isa OTHER */
 var4 = 1; /* easy <var1:Int> isa OTHER*/
 if (!var4) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 259);
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
 exit(1);
 }
 var5 = var > var1;

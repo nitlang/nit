@@ -117,6 +117,7 @@ short int var9 /* : Bool */;
 short int var11 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 short int var12 /* : Bool */;
 long var13 /* : Int */;
 long var15 /* : Int */;
@@ -137,24 +138,26 @@ short int var29 /* : Bool */;
 short int var31 /* : Bool */;
 int cltype32;
 int idtype33;
-short int var34 /* : Bool */;
-long var35 /* : Int */;
+const char* var_class_name34;
+short int var35 /* : Bool */;
 long var36 /* : Int */;
-long var38 /* : Int */;
-short int var39 /* : Bool */;
-short int var41 /* : Bool */;
-int cltype42;
-int idtype43;
-short int var44 /* : Bool */;
-long var45 /* : Int */;
-long var46 /* : Int */;
+long var37 /* : Int */;
+long var39 /* : Int */;
+short int var40 /* : Bool */;
+short int var42 /* : Bool */;
+int cltype43;
+int idtype44;
+const char* var_class_name45;
+short int var46 /* : Bool */;
+long var47 /* : Int */;
 long var48 /* : Int */;
-long var49 /* : Int */;
 long var50 /* : Int */;
+long var51 /* : Int */;
 long var52 /* : Int */;
-long var53 /* : Int */;
 long var54 /* : Int */;
 long var55 /* : Int */;
+long var56 /* : Int */;
+long var57 /* : Int */;
 var_index = p0;
 var1 = ((long (*)(val*))(self->class->vft[COLOR_parser__Parser__state]))(self) /* state on <self:Parser>*/;
 var_state = var1;
@@ -176,7 +179,9 @@ for(;;) {
 /* <var_high:Int> isa OTHER */
 var11 = 1; /* easy <var_high:Int> isa OTHER*/
 if (!var11) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 256);
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
 exit(1);
 }
 var12 = var_low <= var_high;
@@ -221,65 +226,69 @@ var_goal = var28;
 /* <var_goal:Int> isa OTHER */
 var31 = 1; /* easy <var_goal:Int> isa OTHER*/
 if (!var31) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 257);
+var_class_name34 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name34);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
 exit(1);
 }
-var34 = var_state < var_goal;
-var29 = var34;
+var35 = var_state < var_goal;
+var29 = var35;
 goto RET_LABEL30;
 RET_LABEL30:(void)0;
 }
 if (var29){
-var35 = 1;
-{ /* Inline kernel#Int#- (var_middle,var35) */
-var38 = var_middle - var35;
-var36 = var38;
-goto RET_LABEL37;
-RET_LABEL37:(void)0;
+var36 = 1;
+{ /* Inline kernel#Int#- (var_middle,var36) */
+var39 = var_middle - var36;
+var37 = var39;
+goto RET_LABEL38;
+RET_LABEL38:(void)0;
 }
-var_high = var36;
+var_high = var37;
 } else {
 { /* Inline kernel#Int#> (var_state,var_goal) */
 /* Covariant cast for argument 0 (i) <var_goal:Int> isa OTHER */
 /* <var_goal:Int> isa OTHER */
-var41 = 1; /* easy <var_goal:Int> isa OTHER*/
-if (!var41) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 259);
+var42 = 1; /* easy <var_goal:Int> isa OTHER*/
+if (!var42) {
+var_class_name45 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name45);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
 exit(1);
 }
-var44 = var_state > var_goal;
-var39 = var44;
-goto RET_LABEL40;
-RET_LABEL40:(void)0;
+var46 = var_state > var_goal;
+var40 = var46;
+goto RET_LABEL41;
+RET_LABEL41:(void)0;
 }
-if (var39){
-var45 = 1;
-{ /* Inline kernel#Int#+ (var_middle,var45) */
-var48 = var_middle + var45;
-var46 = var48;
-goto RET_LABEL47;
-RET_LABEL47:(void)0;
+if (var40){
+var47 = 1;
+{ /* Inline kernel#Int#+ (var_middle,var47) */
+var50 = var_middle + var47;
+var48 = var50;
+goto RET_LABEL49;
+RET_LABEL49:(void)0;
 }
-var_low = var46;
+var_low = var48;
 } else {
-var49 = 1;
-{ /* Inline kernel#Int#+ (var_subindex,var49) */
-var52 = var_subindex + var49;
-var50 = var52;
-goto RET_LABEL51;
-RET_LABEL51:(void)0;
+var51 = 1;
+{ /* Inline kernel#Int#+ (var_subindex,var51) */
+var54 = var_subindex + var51;
+var52 = var54;
+goto RET_LABEL53;
+RET_LABEL53:(void)0;
 }
-var53 = ((long (*)(val*, long, long))(self->class->vft[COLOR_tables__TablesCapable__parser_goto]))(self, var_index, var50) /* parser_goto on <self:Parser>*/;
-var = var53;
+var55 = ((long (*)(val*, long, long))(self->class->vft[COLOR_tables__TablesCapable__parser_goto]))(self, var_index, var52) /* parser_goto on <self:Parser>*/;
+var = var55;
 goto RET_LABEL;
 }
 }
 CONTINUE_label: (void)0;
 }
 BREAK_label: (void)0;
-var54 = 2;
-var55 = ((long (*)(val*, long, long))(self->class->vft[COLOR_tables__TablesCapable__parser_goto]))(self, var_index, var54) /* parser_goto on <self:Parser>*/;
-var = var55;
+var56 = 2;
+var57 = ((long (*)(val*, long, long))(self->class->vft[COLOR_tables__TablesCapable__parser_goto]))(self, var_index, var56) /* parser_goto on <self:Parser>*/;
+var = var57;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -308,6 +317,7 @@ short int var7 /* : Bool */;
 short int var9 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 short int var10 /* : Bool */;
 val* var11 /* : Array[State] */;
 val* var12 /* : nullable Object */;
@@ -328,7 +338,8 @@ var_pos = var2;
 self->attrs[COLOR_parser__Parser___stack_pos].l = var_pos; /* _stack_pos on <self:Parser> */
 var5 = self->attrs[COLOR_parser__Parser___stack].val; /* _stack on <self:Parser> */
 if (var5 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _stack", "src/parser/parser.nit", 72);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _stack");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 72);
 exit(1);
 }
 var6 = ((long (*)(val*))(var5->class->vft[COLOR_abstract_collection__Collection__length]))(var5) /* length on <var5:Array[State]>*/;
@@ -337,7 +348,9 @@ var6 = ((long (*)(val*))(var5->class->vft[COLOR_abstract_collection__Collection_
 /* <var6:Int> isa OTHER */
 var9 = 1; /* easy <var6:Int> isa OTHER*/
 if (!var9) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 257);
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
 exit(1);
 }
 var10 = var_pos < var6;
@@ -348,7 +361,8 @@ RET_LABEL8:(void)0;
 if (var7){
 var11 = self->attrs[COLOR_parser__Parser___stack].val; /* _stack on <self:Parser> */
 if (var11 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _stack", "src/parser/parser.nit", 73);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _stack");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 73);
 exit(1);
 }
 var12 = ((val* (*)(val*, long))(var11->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var11, var_pos) /* [] on <var11:Array[State]>*/;
@@ -358,7 +372,8 @@ var_state = var12;
 } else {
 var13 = self->attrs[COLOR_parser__Parser___stack].val; /* _stack on <self:Parser> */
 if (var13 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _stack", "src/parser/parser.nit", 77);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _stack");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 77);
 exit(1);
 }
 var14 = NEW_parser__State(&type_parser__State);
@@ -382,7 +397,8 @@ val* var3 /* : nullable Object */;
 long var4 /* : Int */;
 var1 = self->attrs[COLOR_parser__Parser___stack].val; /* _stack on <self:Parser> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _stack", "src/parser/parser.nit", 84);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _stack");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 84);
 exit(1);
 }
 var2 = self->attrs[COLOR_parser__Parser___stack_pos].l; /* _stack_pos on <self:Parser> */
@@ -416,7 +432,8 @@ long var7 /* : Int */;
 long var9 /* : Int */;
 var1 = self->attrs[COLOR_parser__Parser___stack].val; /* _stack on <self:Parser> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _stack", "src/parser/parser.nit", 90);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _stack");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 90);
 exit(1);
 }
 var2 = self->attrs[COLOR_parser__Parser___stack_pos].l; /* _stack_pos on <self:Parser> */
@@ -482,6 +499,7 @@ short int var21 /* : Bool */;
 short int var23 /* : Bool */;
 int cltype24;
 int idtype25;
+const char* var_class_name;
 short int var26 /* : Bool */;
 long var27 /* : Int */;
 long var29 /* : Int */;
@@ -502,80 +520,83 @@ short int var43 /* : Bool */;
 short int var45 /* : Bool */;
 int cltype46;
 int idtype47;
-short int var48 /* : Bool */;
-long var49 /* : Int */;
+const char* var_class_name48;
+short int var49 /* : Bool */;
 long var50 /* : Int */;
-long var52 /* : Int */;
-short int var53 /* : Bool */;
-short int var55 /* : Bool */;
-int cltype56;
-int idtype57;
-short int var58 /* : Bool */;
-long var59 /* : Int */;
-long var60 /* : Int */;
+long var51 /* : Int */;
+long var53 /* : Int */;
+short int var54 /* : Bool */;
+short int var56 /* : Bool */;
+int cltype57;
+int idtype58;
+const char* var_class_name59;
+short int var60 /* : Bool */;
+long var61 /* : Int */;
 long var62 /* : Int */;
-long var63 /* : Int */;
 long var64 /* : Int */;
+long var65 /* : Int */;
 long var66 /* : Int */;
-long var67 /* : Int */;
 long var68 /* : Int */;
 long var69 /* : Int */;
+long var70 /* : Int */;
 long var71 /* : Int */;
-long var72 /* : Int */;
 long var73 /* : Int */;
-short int var74 /* : Bool */;
+long var74 /* : Int */;
+long var75 /* : Int */;
 short int var76 /* : Bool */;
-val* var77 /* : Token */;
-long var78 /* : Int */;
-short int var79 /* : Bool */;
+short int var78 /* : Bool */;
+val* var79 /* : Token */;
+long var80 /* : Int */;
 short int var81 /* : Bool */;
-val* var82 /* : Array[ReduceAction] */;
-val* var83 /* : nullable Object */;
-long var84 /* : Int */;
-short int var85 /* : Bool */;
+short int var83 /* : Bool */;
+val* var84 /* : Array[ReduceAction] */;
+val* var85 /* : nullable Object */;
+long var86 /* : Int */;
 short int var87 /* : Bool */;
-val* var88 /* : Token */;
-val* var_node2 /* var node2: Token */;
 short int var89 /* : Bool */;
-int cltype90;
-int idtype91;
-val* var92 /* : nullable Object */;
+val* var90 /* : Token */;
+val* var_node2 /* var node2: Token */;
+short int var91 /* : Bool */;
+int cltype92;
+int idtype93;
+val* var94 /* : nullable Object */;
 val* var_node1 /* var node1: nullable Object */;
-short int var93 /* : Bool */;
-int cltype94;
-int idtype95;
-val* var96 /* : Start */;
+short int var95 /* : Bool */;
+int cltype96;
+int idtype97;
+val* var98 /* : Start */;
 val* var_node /* var node: Start */;
-val* var97 /* : ComputeProdLocationVisitor */;
-long var98 /* : Int */;
-short int var99 /* : Bool */;
+val* var99 /* : ComputeProdLocationVisitor */;
+long var100 /* : Int */;
 short int var101 /* : Bool */;
-val* var102 /* : AParserError */;
-val* var103 /* : Array[Object] */;
-long var104 /* : Int */;
+short int var103 /* : Bool */;
+val* var104 /* : AParserError */;
+val* var105 /* : Array[Object] */;
+long var106 /* : Int */;
 val* var_ /* var : Array[Object] */;
 static val* varonce;
-val* var105 /* : String */;
-char* var106 /* : NativeString */;
-long var107 /* : Int */;
-val* var108 /* : String */;
-static val* varonce109;
+val* var107 /* : String */;
+char* var108 /* : NativeString */;
+long var109 /* : Int */;
 val* var110 /* : String */;
-char* var111 /* : NativeString */;
-long var112 /* : Int */;
-val* var113 /* : String */;
-val* var114 /* : String */;
-val* var115 /* : Location */;
-val* var_node2116 /* var node2: AParserError */;
-val* var117 /* : Start */;
-val* var118 /* : null */;
-val* var_node119 /* var node: Start */;
+static val* varonce111;
+val* var112 /* : String */;
+char* var113 /* : NativeString */;
+long var114 /* : Int */;
+val* var115 /* : String */;
+val* var116 /* : String */;
+val* var117 /* : Location */;
+val* var_node2118 /* var node2: AParserError */;
+val* var119 /* : Start */;
+val* var120 /* : null */;
+val* var_node121 /* var node: Start */;
 var1 = 0;
 var2 = NULL;
 ((void (*)(val*, long, val*))(self->class->vft[COLOR_parser__Parser__push]))(self, var1, var2) /* push on <self:Parser>*/;
 var3 = self->attrs[COLOR_parser__Parser___lexer].val; /* _lexer on <self:Parser> */
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _lexer", "src/parser/parser.nit", 100);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _lexer");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 100);
 exit(1);
 }
 var_lexer = var3;
@@ -627,7 +648,9 @@ for(;;) {
 /* <var_high:Int> isa OTHER */
 var23 = 1; /* easy <var_high:Int> isa OTHER*/
 if (!var23) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 256);
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
 exit(1);
 }
 var26 = var_low <= var_high;
@@ -672,204 +695,211 @@ var_goal = var42;
 /* <var_goal:Int> isa OTHER */
 var45 = 1; /* easy <var_goal:Int> isa OTHER*/
 if (!var45) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 257);
+var_class_name48 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name48);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
 exit(1);
 }
-var48 = var_index < var_goal;
-var43 = var48;
+var49 = var_index < var_goal;
+var43 = var49;
 goto RET_LABEL44;
 RET_LABEL44:(void)0;
 }
 if (var43){
-var49 = 1;
-{ /* Inline kernel#Int#- (var_middle,var49) */
-var52 = var_middle - var49;
-var50 = var52;
-goto RET_LABEL51;
-RET_LABEL51:(void)0;
+var50 = 1;
+{ /* Inline kernel#Int#- (var_middle,var50) */
+var53 = var_middle - var50;
+var51 = var53;
+goto RET_LABEL52;
+RET_LABEL52:(void)0;
 }
-var_high = var50;
+var_high = var51;
 } else {
 { /* Inline kernel#Int#> (var_index,var_goal) */
 /* Covariant cast for argument 0 (i) <var_goal:Int> isa OTHER */
 /* <var_goal:Int> isa OTHER */
-var55 = 1; /* easy <var_goal:Int> isa OTHER*/
-if (!var55) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 259);
+var56 = 1; /* easy <var_goal:Int> isa OTHER*/
+if (!var56) {
+var_class_name59 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name59);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
 exit(1);
 }
-var58 = var_index > var_goal;
-var53 = var58;
-goto RET_LABEL54;
-RET_LABEL54:(void)0;
+var60 = var_index > var_goal;
+var54 = var60;
+goto RET_LABEL55;
+RET_LABEL55:(void)0;
 }
-if (var53){
-var59 = 1;
-{ /* Inline kernel#Int#+ (var_middle,var59) */
-var62 = var_middle + var59;
-var60 = var62;
-goto RET_LABEL61;
-RET_LABEL61:(void)0;
+if (var54){
+var61 = 1;
+{ /* Inline kernel#Int#+ (var_middle,var61) */
+var64 = var_middle + var61;
+var62 = var64;
+goto RET_LABEL63;
+RET_LABEL63:(void)0;
 }
-var_low = var60;
+var_low = var62;
 } else {
-var63 = 1;
-{ /* Inline kernel#Int#+ (var_subindex,var63) */
-var66 = var_subindex + var63;
-var64 = var66;
-goto RET_LABEL65;
-RET_LABEL65:(void)0;
+var65 = 1;
+{ /* Inline kernel#Int#+ (var_subindex,var65) */
+var68 = var_subindex + var65;
+var66 = var68;
+goto RET_LABEL67;
+RET_LABEL67:(void)0;
 }
-var67 = ((long (*)(val*, long, long))(self->class->vft[COLOR_tables__TablesCapable__parser_action]))(self, var_state, var64) /* parser_action on <self:Parser>*/;
-var_action_type = var67;
-var68 = 2;
-{ /* Inline kernel#Int#+ (var_subindex,var68) */
-var71 = var_subindex + var68;
-var69 = var71;
-goto RET_LABEL70;
-RET_LABEL70:(void)0;
+var69 = ((long (*)(val*, long, long))(self->class->vft[COLOR_tables__TablesCapable__parser_action]))(self, var_state, var66) /* parser_action on <self:Parser>*/;
+var_action_type = var69;
+var70 = 2;
+{ /* Inline kernel#Int#+ (var_subindex,var70) */
+var73 = var_subindex + var70;
+var71 = var73;
+goto RET_LABEL72;
+RET_LABEL72:(void)0;
 }
-var72 = ((long (*)(val*, long, long))(self->class->vft[COLOR_tables__TablesCapable__parser_action]))(self, var_state, var69) /* parser_action on <self:Parser>*/;
-var_action_value = var72;
+var74 = ((long (*)(val*, long, long))(self->class->vft[COLOR_tables__TablesCapable__parser_action]))(self, var_state, var71) /* parser_action on <self:Parser>*/;
+var_action_value = var74;
 goto BREAK_label;
 }
 }
 CONTINUE_label: (void)0;
 }
 BREAK_label: (void)0;
-var73 = 0;
-{ /* Inline kernel#Int#== (var_action_type,var73) */
-var76 = var_action_type == var73;
-var74 = var76;
-goto RET_LABEL75;
-RET_LABEL75:(void)0;
+var75 = 0;
+{ /* Inline kernel#Int#== (var_action_type,var75) */
+var78 = var_action_type == var75;
+var76 = var78;
+goto RET_LABEL77;
+RET_LABEL77:(void)0;
 }
-if (var74){
-var77 = ((val* (*)(val*))(var_lexer->class->vft[COLOR_lexer__Lexer__next]))(var_lexer) /* next on <var_lexer:Lexer>*/;
-((void (*)(val*, long, val*))(self->class->vft[COLOR_parser__Parser__push]))(self, var_action_value, var77) /* push on <self:Parser>*/;
+if (var76){
+var79 = ((val* (*)(val*))(var_lexer->class->vft[COLOR_lexer__Lexer__next]))(var_lexer) /* next on <var_lexer:Lexer>*/;
+((void (*)(val*, long, val*))(self->class->vft[COLOR_parser__Parser__push]))(self, var_action_value, var79) /* push on <self:Parser>*/;
 } else {
-var78 = 1;
-{ /* Inline kernel#Int#== (var_action_type,var78) */
-var81 = var_action_type == var78;
-var79 = var81;
-goto RET_LABEL80;
-RET_LABEL80:(void)0;
+var80 = 1;
+{ /* Inline kernel#Int#== (var_action_type,var80) */
+var83 = var_action_type == var80;
+var81 = var83;
+goto RET_LABEL82;
+RET_LABEL82:(void)0;
 }
-if (var79){
-var82 = self->attrs[COLOR_parser__Parser___reduce_table].val; /* _reduce_table on <self:Parser> */
-if (var82 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _reduce_table", "src/parser/parser.nit", 134);
+if (var81){
+var84 = self->attrs[COLOR_parser__Parser___reduce_table].val; /* _reduce_table on <self:Parser> */
+if (var84 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _reduce_table");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 134);
 exit(1);
 }
-var83 = ((val* (*)(val*, long))(var82->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var82, var_action_value) /* [] on <var82:Array[ReduceAction]>*/;
-((void (*)(val*, val*))(var83->class->vft[COLOR_parser__ReduceAction__action]))(var83, self) /* action on <var83:nullable Object(ReduceAction)>*/;
+var85 = ((val* (*)(val*, long))(var84->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var84, var_action_value) /* [] on <var84:Array[ReduceAction]>*/;
+((void (*)(val*, val*))(var85->class->vft[COLOR_parser__ReduceAction__action]))(var85, self) /* action on <var85:nullable Object(ReduceAction)>*/;
 } else {
-var84 = 2;
-{ /* Inline kernel#Int#== (var_action_type,var84) */
-var87 = var_action_type == var84;
-var85 = var87;
-goto RET_LABEL86;
-RET_LABEL86:(void)0;
+var86 = 2;
+{ /* Inline kernel#Int#== (var_action_type,var86) */
+var89 = var_action_type == var86;
+var87 = var89;
+goto RET_LABEL88;
+RET_LABEL88:(void)0;
 }
-if (var85){
-var88 = ((val* (*)(val*))(var_lexer->class->vft[COLOR_lexer__Lexer__next]))(var_lexer) /* next on <var_lexer:Lexer>*/;
-var_node2 = var88;
+if (var87){
+var90 = ((val* (*)(val*))(var_lexer->class->vft[COLOR_lexer__Lexer__next]))(var_lexer) /* next on <var_lexer:Lexer>*/;
+var_node2 = var90;
 /* <var_node2:Token> isa EOF */
-cltype90 = type_parser_nodes__EOF.color;
-idtype91 = type_parser_nodes__EOF.id;
-if(cltype90 >= var_node2->type->table_size) {
-var89 = 0;
+cltype92 = type_parser_nodes__EOF.color;
+idtype93 = type_parser_nodes__EOF.id;
+if(cltype92 >= var_node2->type->table_size) {
+var91 = 0;
 } else {
-var89 = var_node2->type->type_table[cltype90] == idtype91;
+var91 = var_node2->type->type_table[cltype92] == idtype93;
 }
-if (!var89) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "src/parser/parser.nit", 137);
+if (!var91) {
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 137);
 exit(1);
 }
-var92 = ((val* (*)(val*))(self->class->vft[COLOR_parser__Parser__pop]))(self) /* pop on <self:Parser>*/;
-var_node1 = var92;
+var94 = ((val* (*)(val*))(self->class->vft[COLOR_parser__Parser__pop]))(self) /* pop on <self:Parser>*/;
+var_node1 = var94;
 /* <var_node1:nullable Object> isa AModule */
-cltype94 = type_parser_nodes__AModule.color;
-idtype95 = type_parser_nodes__AModule.id;
+cltype96 = type_parser_nodes__AModule.color;
+idtype97 = type_parser_nodes__AModule.id;
 if(var_node1 == NULL) {
-var93 = 0;
+var95 = 0;
 } else {
-if(cltype94 >= var_node1->type->table_size) {
-var93 = 0;
+if(cltype96 >= var_node1->type->table_size) {
+var95 = 0;
 } else {
-var93 = var_node1->type->type_table[cltype94] == idtype95;
+var95 = var_node1->type->type_table[cltype96] == idtype97;
 }
 }
-if (!var93) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "src/parser/parser.nit", 139);
+if (!var95) {
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 139);
 exit(1);
 }
-var96 = NEW_parser_nodes__Start(&type_parser_nodes__Start);
-((void (*)(val*, val*, val*))(var96->class->vft[COLOR_parser_nodes__Start__init]))(var96, var_node1, var_node2) /* init on <var96:Start>*/;
-CHECK_NEW_parser_nodes__Start(var96);
-var_node = var96;
-var97 = NEW_parser__ComputeProdLocationVisitor(&type_parser__ComputeProdLocationVisitor);
-((void (*)(val*))(var97->class->vft[COLOR_parser__ComputeProdLocationVisitor__init]))(var97) /* init on <var97:ComputeProdLocationVisitor>*/;
-CHECK_NEW_parser__ComputeProdLocationVisitor(var97);
-((void (*)(val*, val*))(var97->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var97, var_node) /* enter_visit on <var97:ComputeProdLocationVisitor>*/;
+var98 = NEW_parser_nodes__Start(&type_parser_nodes__Start);
+((void (*)(val*, val*, val*))(var98->class->vft[COLOR_parser_nodes__Start__init]))(var98, var_node1, var_node2) /* init on <var98:Start>*/;
+CHECK_NEW_parser_nodes__Start(var98);
+var_node = var98;
+var99 = NEW_parser__ComputeProdLocationVisitor(&type_parser__ComputeProdLocationVisitor);
+((void (*)(val*))(var99->class->vft[COLOR_parser__ComputeProdLocationVisitor__init]))(var99) /* init on <var99:ComputeProdLocationVisitor>*/;
+CHECK_NEW_parser__ComputeProdLocationVisitor(var99);
+((void (*)(val*, val*))(var99->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var99, var_node) /* enter_visit on <var99:ComputeProdLocationVisitor>*/;
 var = var_node;
 goto RET_LABEL;
 } else {
-var98 = 3;
-{ /* Inline kernel#Int#== (var_action_type,var98) */
-var101 = var_action_type == var98;
-var99 = var101;
-goto RET_LABEL100;
-RET_LABEL100:(void)0;
+var100 = 3;
+{ /* Inline kernel#Int#== (var_action_type,var100) */
+var103 = var_action_type == var100;
+var101 = var103;
+goto RET_LABEL102;
+RET_LABEL102:(void)0;
 }
-if (var99){
-var102 = NEW_parser_nodes__AParserError(&type_parser_nodes__AParserError);
-var103 = NEW_array__Array(&type_array__Arraykernel__Object);
-var104 = 3;
-((void (*)(val*, long))(var103->class->vft[COLOR_array__Array__with_capacity]))(var103, var104) /* with_capacity on <var103:Array[Object]>*/;
-CHECK_NEW_array__Array(var103);
-var_ = var103;
+if (var101){
+var104 = NEW_parser_nodes__AParserError(&type_parser_nodes__AParserError);
+var105 = NEW_array__Array(&type_array__Arraykernel__Object);
+var106 = 3;
+((void (*)(val*, long))(var105->class->vft[COLOR_array__Array__with_capacity]))(var105, var106) /* with_capacity on <var105:Array[Object]>*/;
+CHECK_NEW_array__Array(var105);
+var_ = var105;
 if (varonce) {
-var105 = varonce;
+var107 = varonce;
 } else {
-var106 = "Syntax error: unexpected ";
-var107 = 25;
-var108 = string__NativeString__to_s_with_length(var106, var107);
-var105 = var108;
-varonce = var105;
+var108 = "Syntax error: unexpected ";
+var109 = 25;
+var110 = string__NativeString__to_s_with_length(var108, var109);
+var107 = var110;
+varonce = var107;
 }
-((void (*)(val*, val*))(var_->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_, var105) /* add on <var_:Array[Object]>*/;
+((void (*)(val*, val*))(var_->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_, var107) /* add on <var_:Array[Object]>*/;
 ((void (*)(val*, val*))(var_->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_, var_token) /* add on <var_:Array[Object]>*/;
-if (varonce109) {
-var110 = varonce109;
+if (varonce111) {
+var112 = varonce111;
 } else {
-var111 = ".";
-var112 = 1;
-var113 = string__NativeString__to_s_with_length(var111, var112);
-var110 = var113;
-varonce109 = var110;
+var113 = ".";
+var114 = 1;
+var115 = string__NativeString__to_s_with_length(var113, var114);
+var112 = var115;
+varonce111 = var112;
 }
-((void (*)(val*, val*))(var_->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_, var110) /* add on <var_:Array[Object]>*/;
-var114 = ((val* (*)(val*))(var_->class->vft[COLOR_string__Object__to_s]))(var_) /* to_s on <var_:Array[Object]>*/;
-var115 = ((val* (*)(val*))(var_token->class->vft[COLOR_parser_nodes__ANode__location]))(var_token) /* location on <var_token:Token>*/;
-((void (*)(val*, val*, val*, val*))(var102->class->vft[COLOR_lexer__AParserError__init_parser_error]))(var102, var114, var115, var_token) /* init_parser_error on <var102:AParserError>*/;
-CHECK_NEW_parser_nodes__AParserError(var102);
-var_node2116 = var102;
-var117 = NEW_parser_nodes__Start(&type_parser_nodes__Start);
-var118 = NULL;
-((void (*)(val*, val*, val*))(var117->class->vft[COLOR_parser_nodes__Start__init]))(var117, var118, var_node2116) /* init on <var117:Start>*/;
-CHECK_NEW_parser_nodes__Start(var117);
-var_node119 = var117;
-var = var_node119;
+((void (*)(val*, val*))(var_->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_, var112) /* add on <var_:Array[Object]>*/;
+var116 = ((val* (*)(val*))(var_->class->vft[COLOR_string__Object__to_s]))(var_) /* to_s on <var_:Array[Object]>*/;
+var117 = ((val* (*)(val*))(var_token->class->vft[COLOR_parser_nodes__ANode__location]))(var_token) /* location on <var_token:Token>*/;
+((void (*)(val*, val*, val*, val*))(var104->class->vft[COLOR_lexer__AParserError__init_parser_error]))(var104, var116, var117, var_token) /* init_parser_error on <var104:AParserError>*/;
+CHECK_NEW_parser_nodes__AParserError(var104);
+var_node2118 = var104;
+var119 = NEW_parser_nodes__Start(&type_parser_nodes__Start);
+var120 = NULL;
+((void (*)(val*, val*, val*))(var119->class->vft[COLOR_parser_nodes__Start__init]))(var119, var120, var_node2118) /* init on <var119:Start>*/;
+CHECK_NEW_parser_nodes__Start(var119);
+var_node121 = var119;
+var = var_node121;
 goto RET_LABEL;
 } else {
 }
 }
 }
 }
-CONTINUE_label120: (void)0;
+CONTINUE_label122: (void)0;
 }
-BREAK_label120: (void)0;
+BREAK_label122: (void)0;
 RET_LABEL:;
 return var;
 }

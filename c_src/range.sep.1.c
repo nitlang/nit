@@ -5,7 +5,8 @@ val* var /* : Discrete */;
 val* var1 /* : Discrete */;
 var1 = self->attrs[COLOR_range__Range___first].val; /* _first on <self:Range[Discrete]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _first", "lib/standard/collection/range.nit", 22);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _first");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/range.nit", 22);
 exit(1);
 }
 var = var1;
@@ -27,7 +28,8 @@ val* var /* : Discrete */;
 val* var1 /* : Discrete */;
 var1 = self->attrs[COLOR_range__Range___last].val; /* _last on <self:Range[Discrete]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _last", "lib/standard/collection/range.nit", 24);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _last");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/range.nit", 24);
 exit(1);
 }
 var = var1;
@@ -49,7 +51,8 @@ val* var /* : Discrete */;
 val* var1 /* : Discrete */;
 var1 = self->attrs[COLOR_range__Range___after].val; /* _after on <self:Range[Discrete]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _after", "lib/standard/collection/range.nit", 27);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _after");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/range.nit", 27);
 exit(1);
 }
 var = var1;
@@ -72,6 +75,7 @@ short int var1 /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_item /* var item: Discrete */;
 short int var2 /* : Bool */;
 val* var3 /* : Discrete */;
@@ -90,13 +94,16 @@ var1 = 0;
 var1 = p0->type->type_table[cltype] == idtype;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/range.nit", 30);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Collection#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/range.nit", 30);
 exit(1);
 }
 var_item = p0;
 var3 = self->attrs[COLOR_range__Range___first].val; /* _first on <self:Range[Discrete]> */
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _first", "lib/standard/collection/range.nit", 30);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _first");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/range.nit", 30);
 exit(1);
 }
 var4 = ((short int (*)(val*, val*))(var_item->class->vft[COLOR_kernel__Comparable___62d_61d]))(var_item, var3) /* >= on <var_item:Discrete>*/;
@@ -104,7 +111,8 @@ var_ = var4;
 if (var4){
 var5 = self->attrs[COLOR_range__Range___last].val; /* _last on <self:Range[Discrete]> */
 if (var5 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _last", "lib/standard/collection/range.nit", 30);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _last");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/range.nit", 30);
 exit(1);
 }
 var6 = ((short int (*)(val*, val*))(var_item->class->vft[COLOR_kernel__Comparable___60d_61d]))(var_item, var5) /* <= on <var_item:Discrete>*/;
@@ -133,6 +141,7 @@ short int var1 /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_item /* var item: Discrete */;
 short int var2 /* : Bool */;
 short int var3 /* : Bool */;
@@ -154,13 +163,16 @@ var1 = 0;
 var1 = p0->type->type_table[cltype] == idtype;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/range.nit", 32);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Collection#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/range.nit", 32);
 exit(1);
 }
 var_item = p0;
 var4 = self->attrs[COLOR_range__Range___first].val; /* _first on <self:Range[Discrete]> */
 if (var4 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _first", "lib/standard/collection/range.nit", 32);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _first");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/range.nit", 32);
 exit(1);
 }
 var5 = ((short int (*)(val*, val*))(var4->class->vft[COLOR_kernel__Object___61d_61d]))(var4, var_item) /* == on <var4:Discrete>*/;
@@ -168,7 +180,8 @@ var_ = var5;
 if (var5){
 var6 = self->attrs[COLOR_range__Range___last].val; /* _last on <self:Range[Discrete]> */
 if (var6 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _last", "lib/standard/collection/range.nit", 32);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _last");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/range.nit", 32);
 exit(1);
 }
 var7 = ((short int (*)(val*, val*))(var_item->class->vft[COLOR_kernel__Object___61d_61d]))(var_item, var6) /* == on <var_item:Discrete>*/;
@@ -204,6 +217,7 @@ short int var1 /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_item /* var item: Discrete */;
 short int var2 /* : Bool */;
 long var3 /* : Int */;
@@ -219,7 +233,9 @@ var1 = 0;
 var1 = p0->type->type_table[cltype] == idtype;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/range.nit", 34);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Collection#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/range.nit", 34);
 exit(1);
 }
 var_item = p0;
@@ -266,59 +282,6 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method range#Range#iterate for (self: Range[Discrete]) */
-void range__Range__iterate(val* self) {
-val* var /* : Discrete */;
-val* var_c /* var c: Discrete */;
-val* var1 /* : Discrete */;
-val* var_l /* var l: Discrete */;
-short int var2 /* : Bool */;
-val* var3 /* : Discrete */;
-short int var4 /* : Bool */;
-int cltype;
-int idtype;
-const struct type* type_struct;
-var = self->attrs[COLOR_range__Range___first].val; /* _first on <self:Range[Discrete]> */
-if (var == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _first", "lib/standard/collection/range.nit", 48);
-exit(1);
-}
-var_c = var;
-var1 = self->attrs[COLOR_range__Range___last].val; /* _last on <self:Range[Discrete]> */
-if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _last", "lib/standard/collection/range.nit", 49);
-exit(1);
-}
-var_l = var1;
-for(;;) {
-var2 = ((short int (*)(val*, val*))(var_c->class->vft[COLOR_kernel__Comparable___60d_61d]))(var_c, var_l) /* <= on <var_c:Discrete>*/;
-if (!var2) break;
-printf("NOT YET IMPLEMENTED AClosureCallExpr:lib/standard/collection/range.nit:51,4--10\n");
-var3 = ((val* (*)(val*))(var_c->class->vft[COLOR_kernel__Discrete__succ]))(var_c) /* succ on <var_c:Discrete>*/;
-/* <var3:Discrete> isa Range#0 */
-type_struct = self->type->resolution_table->types[COLOR_range__Range_FT0];
-cltype = type_struct->color;
-idtype = type_struct->id;
-if(cltype >= var3->type->table_size) {
-var4 = 0;
-} else {
-var4 = var3->type->type_table[cltype] == idtype;
-}
-if (!var4) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/range.nit", 52);
-exit(1);
-}
-var_c = var3;
-CONTINUE_label: (void)0;
-}
-BREAK_label: (void)0;
-RET_LABEL:;
-}
-/* method range#Range#iterate for (self: Object) */
-void VIRTUAL_range__Range__iterate(val* self) {
-range__Range__iterate(self);
-RET_LABEL:;
-}
 /* method range#Range#length for (self: Range[Discrete]): Int */
 long range__Range__length(val* self) {
 long var /* : Int */;
@@ -331,16 +294,19 @@ short int var5 /* : Bool */;
 short int var7 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 short int var8 /* : Bool */;
 long var9 /* : Int */;
 var1 = self->attrs[COLOR_range__Range___first].val; /* _first on <self:Range[Discrete]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _first", "lib/standard/collection/range.nit", 58);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _first");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/range.nit", 47);
 exit(1);
 }
 var2 = self->attrs[COLOR_range__Range___after].val; /* _after on <self:Range[Discrete]> */
 if (var2 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _after", "lib/standard/collection/range.nit", 58);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _after");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/range.nit", 47);
 exit(1);
 }
 var3 = ((long (*)(val*, val*))(var1->class->vft[COLOR_kernel__Discrete__distance]))(var1, var2) /* distance on <var1:Discrete>*/;
@@ -351,7 +317,9 @@ var4 = 0;
 /* <var4:Int> isa OTHER */
 var7 = 1; /* easy <var4:Int> isa OTHER*/
 if (!var7) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 259);
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
 exit(1);
 }
 var8 = var_nb > var4;
@@ -387,12 +355,14 @@ val* var2 /* : Discrete */;
 short int var3 /* : Bool */;
 var1 = self->attrs[COLOR_range__Range___first].val; /* _first on <self:Range[Discrete]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _first", "lib/standard/collection/range.nit", 66);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _first");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/range.nit", 55);
 exit(1);
 }
 var2 = self->attrs[COLOR_range__Range___after].val; /* _after on <self:Range[Discrete]> */
 if (var2 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _after", "lib/standard/collection/range.nit", 66);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _after");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/range.nit", 55);
 exit(1);
 }
 var3 = ((short int (*)(val*, val*))(var1->class->vft[COLOR_kernel__Comparable___62d_61d]))(var1, var2) /* >= on <var1:Discrete>*/;
@@ -416,17 +386,20 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 short int var1 /* : Bool */;
 int cltype2;
 int idtype3;
 const struct type* type_struct4;
+const char* var_class_name5;
 val* var_from /* var from: Discrete */;
 val* var_to /* var to: Discrete */;
-val* var5 /* : Discrete */;
-short int var6 /* : Bool */;
-int cltype7;
-int idtype8;
-const struct type* type_struct9;
+val* var6 /* : Discrete */;
+short int var7 /* : Bool */;
+int cltype8;
+int idtype9;
+const struct type* type_struct10;
+const char* var_class_name11;
 /* Covariant cast for argument 0 (from) <p0:Discrete> isa Range#0 */
 /* <p0:Discrete> isa Range#0 */
 type_struct = self->type->resolution_table->types[COLOR_range__Range_FT0];
@@ -438,7 +411,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/range.nit", 68);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Range#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/range.nit", 57);
 exit(1);
 }
 /* Covariant cast for argument 1 (to) <p1:Discrete> isa Range#0 */
@@ -452,28 +427,32 @@ var1 = 0;
 var1 = p1->type->type_table[cltype2] == idtype3;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/range.nit", 68);
+var_class_name5 = p1 == NULL ? "null" : p1->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Range#0", var_class_name5);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/range.nit", 57);
 exit(1);
 }
 var_from = p0;
 var_to = p1;
 self->attrs[COLOR_range__Range___first].val = var_from; /* _first on <self:Range[Discrete]> */
 self->attrs[COLOR_range__Range___last].val = var_to; /* _last on <self:Range[Discrete]> */
-var5 = ((val* (*)(val*))(var_to->class->vft[COLOR_kernel__Discrete__succ]))(var_to) /* succ on <var_to:Discrete>*/;
-/* <var5:Discrete> isa Range#0 */
-type_struct9 = self->type->resolution_table->types[COLOR_range__Range_FT0];
-cltype7 = type_struct9->color;
-idtype8 = type_struct9->id;
-if(cltype7 >= var5->type->table_size) {
-var6 = 0;
+var6 = ((val* (*)(val*))(var_to->class->vft[COLOR_kernel__Discrete__succ]))(var_to) /* succ on <var_to:Discrete>*/;
+/* <var6:Discrete> isa Range#0 */
+type_struct10 = self->type->resolution_table->types[COLOR_range__Range_FT0];
+cltype8 = type_struct10->color;
+idtype9 = type_struct10->id;
+if(cltype8 >= var6->type->table_size) {
+var7 = 0;
 } else {
-var6 = var5->type->type_table[cltype7] == idtype8;
+var7 = var6->type->type_table[cltype8] == idtype9;
 }
-if (!var6) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/range.nit", 74);
+if (!var7) {
+var_class_name11 = var6 == NULL ? "null" : var6->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Range#0", var_class_name11);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/range.nit", 63);
 exit(1);
 }
-self->attrs[COLOR_range__Range___after].val = var5; /* _after on <self:Range[Discrete]> */
+self->attrs[COLOR_range__Range___after].val = var6; /* _after on <self:Range[Discrete]> */
 RET_LABEL:;
 }
 /* method range#Range#init for (self: Object, Discrete, Discrete) */
@@ -487,17 +466,20 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 short int var1 /* : Bool */;
 int cltype2;
 int idtype3;
 const struct type* type_struct4;
+const char* var_class_name5;
 val* var_from /* var from: Discrete */;
 val* var_to /* var to: Discrete */;
-val* var5 /* : Discrete */;
-short int var6 /* : Bool */;
-int cltype7;
-int idtype8;
-const struct type* type_struct9;
+val* var6 /* : Discrete */;
+short int var7 /* : Bool */;
+int cltype8;
+int idtype9;
+const struct type* type_struct10;
+const char* var_class_name11;
 /* Covariant cast for argument 0 (from) <p0:Discrete> isa Range#0 */
 /* <p0:Discrete> isa Range#0 */
 type_struct = self->type->resolution_table->types[COLOR_range__Range_FT0];
@@ -509,7 +491,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/range.nit", 77);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Range#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/range.nit", 66);
 exit(1);
 }
 /* Covariant cast for argument 1 (to) <p1:Discrete> isa Range#0 */
@@ -523,27 +507,31 @@ var1 = 0;
 var1 = p1->type->type_table[cltype2] == idtype3;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/range.nit", 77);
+var_class_name5 = p1 == NULL ? "null" : p1->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Range#0", var_class_name5);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/range.nit", 66);
 exit(1);
 }
 var_from = p0;
 var_to = p1;
 self->attrs[COLOR_range__Range___first].val = var_from; /* _first on <self:Range[Discrete]> */
-var5 = ((val* (*)(val*))(var_to->class->vft[COLOR_kernel__Discrete__prec]))(var_to) /* prec on <var_to:Discrete>*/;
-/* <var5:Discrete> isa Range#0 */
-type_struct9 = self->type->resolution_table->types[COLOR_range__Range_FT0];
-cltype7 = type_struct9->color;
-idtype8 = type_struct9->id;
-if(cltype7 >= var5->type->table_size) {
-var6 = 0;
+var6 = ((val* (*)(val*))(var_to->class->vft[COLOR_kernel__Discrete__prec]))(var_to) /* prec on <var_to:Discrete>*/;
+/* <var6:Discrete> isa Range#0 */
+type_struct10 = self->type->resolution_table->types[COLOR_range__Range_FT0];
+cltype8 = type_struct10->color;
+idtype9 = type_struct10->id;
+if(cltype8 >= var6->type->table_size) {
+var7 = 0;
 } else {
-var6 = var5->type->type_table[cltype7] == idtype8;
+var7 = var6->type->type_table[cltype8] == idtype9;
 }
-if (!var6) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/range.nit", 82);
+if (!var7) {
+var_class_name11 = var6 == NULL ? "null" : var6->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Range#0", var_class_name11);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/range.nit", 71);
 exit(1);
 }
-self->attrs[COLOR_range__Range___last].val = var5; /* _last on <self:Range[Discrete]> */
+self->attrs[COLOR_range__Range___last].val = var6; /* _last on <self:Range[Discrete]> */
 self->attrs[COLOR_range__Range___after].val = var_to; /* _after on <self:Range[Discrete]> */
 RET_LABEL:;
 }
@@ -558,7 +546,8 @@ val* var /* : Discrete */;
 val* var1 /* : Discrete */;
 var1 = self->attrs[COLOR_range__IteratorRange___item].val; /* _item on <self:IteratorRange[Discrete]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _item", "lib/standard/collection/range.nit", 91);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _item");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/range.nit", 80);
 exit(1);
 }
 var = var1;
@@ -583,12 +572,14 @@ val* var3 /* : Discrete */;
 short int var4 /* : Bool */;
 var1 = self->attrs[COLOR_range__IteratorRange___item].val; /* _item on <self:IteratorRange[Discrete]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _item", "lib/standard/collection/range.nit", 93);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _item");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/range.nit", 82);
 exit(1);
 }
 var2 = self->attrs[COLOR_range__IteratorRange___range].val; /* _range on <self:IteratorRange[Discrete]> */
 if (var2 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _range", "lib/standard/collection/range.nit", 93);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _range");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/range.nit", 82);
 exit(1);
 }
 var3 = ((val* (*)(val*))(var2->class->vft[COLOR_range__Range__after]))(var2) /* after on <var2:Range[Discrete]>*/;
@@ -615,9 +606,11 @@ short int var2 /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 var = self->attrs[COLOR_range__IteratorRange___item].val; /* _item on <self:IteratorRange[Discrete]> */
 if (var == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _item", "lib/standard/collection/range.nit", 95);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _item");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/range.nit", 84);
 exit(1);
 }
 var1 = ((val* (*)(val*))(var->class->vft[COLOR_kernel__Discrete__succ]))(var) /* succ on <var:Discrete>*/;
@@ -631,7 +624,9 @@ var2 = 0;
 var2 = var1->type->type_table[cltype] == idtype;
 }
 if (!var2) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/range.nit", 95);
+var_class_name = var1 == NULL ? "null" : var1->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "IteratorRange#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/range.nit", 84);
 exit(1);
 }
 self->attrs[COLOR_range__IteratorRange___item].val = var1; /* _item on <self:IteratorRange[Discrete]> */
@@ -648,6 +643,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_r /* var r: Range[Discrete] */;
 val* var1 /* : nullable Object */;
 /* Covariant cast for argument 0 (r) <p0:Range[Discrete]> isa Range[IteratorRange#0] */
@@ -661,7 +657,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/range.nit", 97);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Range[IteratorRange#0]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/range.nit", 86);
 exit(1);
 }
 var_r = p0;
@@ -684,6 +682,7 @@ short int var3 /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 long var4 /* : Int */;
 val* var5 /* : Discrete */;
 val* var6 /* : Discrete */;
@@ -699,7 +698,9 @@ var3 = 0;
 var3 = (&type_kernel__Int)->type_table[cltype] == idtype;
 }
 if (!var3) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/range.nit", 109);
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/range.nit", 98);
 exit(1);
 }
 var4 = 1;

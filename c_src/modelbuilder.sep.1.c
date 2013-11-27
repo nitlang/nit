@@ -5,7 +5,8 @@ val* var /* : OptionArray */;
 val* var1 /* : OptionArray */;
 var1 = self->attrs[COLOR_modelbuilder__ToolContext___64dopt_path].val; /* @opt_path on <self:ToolContext> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @opt_path", "src/modelbuilder.nit", 37);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @opt_path");
+fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 37);
 exit(1);
 }
 var = var1;
@@ -37,7 +38,8 @@ val* var /* : OptionBool */;
 val* var1 /* : OptionBool */;
 var1 = self->attrs[COLOR_modelbuilder__ToolContext___64dopt_only_metamodel].val; /* @opt_only_metamodel on <self:ToolContext> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @opt_only_metamodel", "src/modelbuilder.nit", 40);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @opt_only_metamodel");
+fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 40);
 exit(1);
 }
 var = var1;
@@ -69,7 +71,8 @@ val* var /* : OptionBool */;
 val* var1 /* : OptionBool */;
 var1 = self->attrs[COLOR_modelbuilder__ToolContext___64dopt_only_parse].val; /* @opt_only_parse on <self:ToolContext> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @opt_only_parse", "src/modelbuilder.nit", 43);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @opt_only_parse");
+fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 43);
 exit(1);
 }
 var = var1;
@@ -133,7 +136,8 @@ val* var /* : ModelBuilder */;
 val* var1 /* : nullable ModelBuilder */;
 var1 = ((val* (*)(val*))(self->class->vft[COLOR_modelbuilder__ToolContext__modelbuilder_real]))(self) /* modelbuilder_real on <self:ToolContext>*/;
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/modelbuilder.nit", 52);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 52);
 exit(1);
 }
 var = var1;
@@ -184,7 +188,8 @@ val* var /* : Model */;
 val* var1 /* : Model */;
 var1 = self->attrs[COLOR_modelbuilder__ModelBuilder___64dmodel].val; /* @model on <self:ModelBuilder> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @model", "src/modelbuilder.nit", 59);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @model");
+fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 59);
 exit(1);
 }
 var = var1;
@@ -216,7 +221,8 @@ val* var /* : ToolContext */;
 val* var1 /* : ToolContext */;
 var1 = self->attrs[COLOR_modelbuilder__ModelBuilder___64dtoolcontext].val; /* @toolcontext on <self:ModelBuilder> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @toolcontext", "src/modelbuilder.nit", 62);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @toolcontext");
+fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 62);
 exit(1);
 }
 var = var1;
@@ -406,7 +412,8 @@ var2 = 1; /* is null */
 var2 = 0; /* arg is null but recv is not */
 }
 if (!var2) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "src/modelbuilder.nit", 88);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 88);
 exit(1);
 }
 ((void (*)(val*, val*))(var_toolcontext->class->vft[COLOR_modelbuilder__ToolContext__modelbuilder_real_61d]))(var_toolcontext, self) /* modelbuilder_real= on <var_toolcontext:ToolContext>*/;
@@ -629,7 +636,8 @@ goto CONTINUE_label;
 }
 var16 = ((val* (*)(val*))(var_nmodule->class->vft[COLOR_modelbuilder__AModule__mmodule]))(var_nmodule) /* mmodule on <var_nmodule:nullable AModule(AModule)>*/;
 if (var16 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/modelbuilder.nit", 125);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 125);
 exit(1);
 }
 ((void (*)(val*, val*))(var_mmodules->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_mmodules, var16) /* add on <var_mmodules:Array[MModule]>*/;
@@ -1084,7 +1092,8 @@ var36 = 1; /* arg is null and recv is not */
 }
 if (var36){
 if (var_res == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/modelbuilder.nit", 203);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 203);
 exit(1);
 } else {
 var37 = ((val* (*)(val*))(var_res->class->vft[COLOR_model__MProperty__intro_mclassdef]))(var_res) /* intro_mclassdef on <var_res:nullable MProperty>*/;
@@ -1142,7 +1151,8 @@ var66 = var69;
 varonce65 = var66;
 }
 if (var_res == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/modelbuilder.nit", 207);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 207);
 exit(1);
 } else {
 var70 = ((val* (*)(val*))(var_res->class->vft[COLOR_model__MProperty__full_name]))(var_res) /* full_name on <var_res:nullable MProperty>*/;
@@ -1197,7 +1207,8 @@ val* var /* : HashMap3[MModule, MType, String, nullable MProperty] */;
 val* var1 /* : HashMap3[MModule, MType, String, nullable MProperty] */;
 var1 = self->attrs[COLOR_modelbuilder__ModelBuilder___64dtry_get_mproperty_by_name2_cache].val; /* @try_get_mproperty_by_name2_cache on <self:ModelBuilder> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @try_get_mproperty_by_name2_cache", "src/modelbuilder.nit", 217);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @try_get_mproperty_by_name2_cache");
+fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 217);
 exit(1);
 }
 var = var1;
@@ -1258,7 +1269,8 @@ val* var /* : Array[String] */;
 val* var1 /* : Array[String] */;
 var1 = self->attrs[COLOR_modelbuilder__ModelBuilder___64dpaths].val; /* @paths on <self:ModelBuilder> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @paths", "src/modelbuilder.nit", 226);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @paths");
+fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 226);
 exit(1);
 }
 var = var1;
@@ -1580,7 +1592,8 @@ if (!var5) break;
 var6 = ((val* (*)(val*))(var_mmodule->class->vft[COLOR_model_base__MModule__location]))(var_mmodule) /* location on <var_mmodule:nullable MModule(MModule)>*/;
 var7 = ((val* (*)(val*))(var6->class->vft[COLOR_location__Location__file]))(var6) /* file on <var6:Location>*/;
 if (var7 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/modelbuilder.nit", 248);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 248);
 exit(1);
 } else {
 var8 = ((val* (*)(val*))(var7->class->vft[COLOR_location__SourceFile__filename]))(var7) /* filename on <var7:nullable SourceFile>*/;
@@ -1677,7 +1690,8 @@ goto RET_LABEL;
 }
 var44 = ((val* (*)(val*))(var_res->class->vft[COLOR_modelbuilder__AModule__mmodule]))(var_res) /* mmodule on <var_res:nullable AModule(AModule)>*/;
 if (var44 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/modelbuilder.nit", 273);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 273);
 exit(1);
 }
 var = var44;
@@ -1736,7 +1750,8 @@ goto RET_LABEL;
 }
 var72 = ((val* (*)(val*))(var_res68->class->vft[COLOR_modelbuilder__AModule__mmodule]))(var_res68) /* mmodule on <var_res68:nullable AModule(AModule)>*/;
 if (var72 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/modelbuilder.nit", 281);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 281);
 exit(1);
 }
 var = var72;
@@ -1792,7 +1807,8 @@ if (var87){
 var88 = ((val* (*)(val*))(var_lastmodule->class->vft[COLOR_model_base__MModule__location]))(var_lastmodule) /* location on <var_lastmodule:nullable MModule(MModule)>*/;
 var89 = ((val* (*)(val*))(var88->class->vft[COLOR_location__Location__file]))(var88) /* file on <var88:Location>*/;
 if (var89 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/modelbuilder.nit", 301);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 301);
 exit(1);
 } else {
 var90 = ((val* (*)(val*))(var89->class->vft[COLOR_location__SourceFile__filename]))(var89) /* filename on <var89:nullable SourceFile>*/;
@@ -2162,7 +2178,8 @@ goto RET_LABEL;
 }
 var257 = ((val* (*)(val*))(var_res253->class->vft[COLOR_modelbuilder__AModule__mmodule]))(var_res253) /* mmodule on <var_res253:nullable AModule(AModule)>*/;
 if (var257 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/modelbuilder.nit", 351);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 351);
 exit(1);
 }
 var = var257;
@@ -2231,7 +2248,8 @@ val* var /* : HashMap[String, AModule] */;
 val* var1 /* : HashMap[String, AModule] */;
 var1 = self->attrs[COLOR_modelbuilder__ModelBuilder___64dloaded_nmodules].val; /* @loaded_nmodules on <self:ModelBuilder> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @loaded_nmodules", "src/modelbuilder.nit", 362);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @loaded_nmodules");
+fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 362);
 exit(1);
 }
 var = var1;
@@ -2596,7 +2614,8 @@ var83 = 0;
 var83 = var_neof->type->type_table[cltype] == idtype;
 }
 if (!var83) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "src/modelbuilder.nit", 398);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 398);
 exit(1);
 }
 var84 = ((val* (*)(val*))(var_neof->class->vft[COLOR_lexer__AError__message]))(var_neof) /* message on <var_neof:EOF(AError)>*/;
@@ -2776,7 +2795,8 @@ var1 = 1;
 ((void (*)(val*, short int))(var_nmodule->class->vft[COLOR_modelbuilder__AModule__is_importation_done_61d]))(var_nmodule, var1) /* is_importation_done= on <var_nmodule:AModule>*/;
 var2 = ((val* (*)(val*))(var_nmodule->class->vft[COLOR_modelbuilder__AModule__mmodule]))(var_nmodule) /* mmodule on <var_nmodule:AModule>*/;
 if (var2 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/modelbuilder.nit", 432);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 432);
 exit(1);
 }
 var_mmodule = var2;
@@ -2927,7 +2947,8 @@ val* var /* : Array[AModule] */;
 val* var1 /* : Array[AModule] */;
 var1 = self->attrs[COLOR_modelbuilder__ModelBuilder___64dnmodules].val; /* @nmodules on <self:ModelBuilder> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @nmodules", "src/modelbuilder.nit", 464);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @nmodules");
+fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 464);
 exit(1);
 }
 var = var1;
@@ -2959,7 +2980,8 @@ val* var /* : HashMap[MModule, AModule] */;
 val* var1 /* : HashMap[MModule, AModule] */;
 var1 = self->attrs[COLOR_modelbuilder__ModelBuilder___64dmmodule2nmodule].val; /* @mmodule2nmodule on <self:ModelBuilder> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @mmodule2nmodule", "src/modelbuilder.nit", 467);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @mmodule2nmodule");
+fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 467);
 exit(1);
 }
 var = var1;
@@ -3109,7 +3131,8 @@ CHECK_NEW_array__Array(var20);
 }
 var23 = ((val* (*)(val*))(var20->class->vft[COLOR_string__Object__to_s]))(var20) /* to_s on <var20:Array[Object]>*/;
 ((void (*)(val*, val*, val*))(var4->class->vft[COLOR_toolcontext__ToolContext__fatal_error]))(var4, var5, var23) /* fatal_error on <var4:ToolContext>*/;
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Aborted", "src/modelbuilder.nit", 491);
+fprintf(stderr, "Runtime error: %s", "Aborted");
+fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 491);
 exit(1);
 } else {
 }
@@ -3214,7 +3237,10 @@ RET_LABEL:;
 /* method modelbuilder#AVisibility#mvisibility for (self: AVisibility): MVisibility */
 val* modelbuilder__AVisibility__mvisibility(val* self) {
 val* var /* : MVisibility */;
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Deferred method called", "src/modelbuilder.nit", 510);
+const char* var_class_name;
+var_class_name = self == NULL ? "null" : self->type->name;
+fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "mvisibility", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 510);
 exit(1);
 RET_LABEL:;
 return var;

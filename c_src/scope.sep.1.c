@@ -5,7 +5,8 @@ val* var /* : Phase */;
 val* var1 /* : Phase */;
 var1 = self->attrs[COLOR_scope__ToolContext___64dscope_phase].val; /* @scope_phase on <self:ToolContext> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @scope_phase", "src/scope.nit", 25);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @scope_phase");
+fprintf(stderr, " (%s:%d)\n", "src/scope.nit", 25);
 exit(1);
 }
 var = var1;
@@ -51,7 +52,8 @@ val* var /* : String */;
 val* var1 /* : String */;
 var1 = self->attrs[COLOR_scope__Variable___64dname].val; /* @name on <self:Variable> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @name", "src/scope.nit", 36);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @name");
+fprintf(stderr, " (%s:%d)\n", "src/scope.nit", 36);
 exit(1);
 }
 var = var1;
@@ -168,7 +170,8 @@ val* var /* : Array[AContinueExpr] */;
 val* var1 /* : Array[AContinueExpr] */;
 var1 = self->attrs[COLOR_scope__EscapeMark___64dcontinues].val; /* @continues on <self:EscapeMark> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @continues", "src/scope.nit", 58);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @continues");
+fprintf(stderr, " (%s:%d)\n", "src/scope.nit", 53);
 exit(1);
 }
 var = var1;
@@ -200,7 +203,8 @@ val* var /* : Array[ABreakExpr] */;
 val* var1 /* : Array[ABreakExpr] */;
 var1 = self->attrs[COLOR_scope__EscapeMark___64dbreaks].val; /* @breaks on <self:EscapeMark> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @breaks", "src/scope.nit", 61);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @breaks");
+fprintf(stderr, " (%s:%d)\n", "src/scope.nit", 56);
 exit(1);
 }
 var = var1;
@@ -243,7 +247,8 @@ val* var /* : ToolContext */;
 val* var1 /* : ToolContext */;
 var1 = self->attrs[COLOR_scope__ScopeVisitor___64dtoolcontext].val; /* @toolcontext on <self:ScopeVisitor> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @toolcontext", "src/scope.nit", 74);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @toolcontext");
+fprintf(stderr, " (%s:%d)\n", "src/scope.nit", 68);
 exit(1);
 }
 var = var1;
@@ -275,7 +280,8 @@ val* var /* : Variable */;
 val* var1 /* : Variable */;
 var1 = self->attrs[COLOR_scope__ScopeVisitor___64dselfvariable].val; /* @selfvariable on <self:ScopeVisitor> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @selfvariable", "src/scope.nit", 77);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @selfvariable");
+fprintf(stderr, " (%s:%d)\n", "src/scope.nit", 71);
 exit(1);
 }
 var = var1;
@@ -327,7 +333,8 @@ val* var /* : List[Scope] */;
 val* var1 /* : List[Scope] */;
 var1 = self->attrs[COLOR_scope__ScopeVisitor___64dscopes].val; /* @scopes on <self:ScopeVisitor> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @scopes", "src/scope.nit", 85);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @scopes");
+fprintf(stderr, " (%s:%d)\n", "src/scope.nit", 79);
 exit(1);
 }
 var = var1;
@@ -910,7 +917,8 @@ val* var /* : HashMap[String, Variable] */;
 val* var1 /* : HashMap[String, Variable] */;
 var1 = self->attrs[COLOR_scope__Scope___64dvariables].val; /* @variables on <self:Scope> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @variables", "src/scope.nit", 198);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @variables");
+fprintf(stderr, " (%s:%d)\n", "src/scope.nit", 192);
 exit(1);
 }
 var = var1;
@@ -1091,61 +1099,6 @@ RET_LABEL:;
 /* method scope#AParam#accept_scope_visitor for (self: Object, ScopeVisitor) */
 void VIRTUAL_scope__AParam__accept_scope_visitor(val* self, val* p0) {
 scope__AParam__accept_scope_visitor(self, p0);
-RET_LABEL:;
-}
-/* method scope#AClosureDecl#variable for (self: AClosureDecl): nullable ClosureVariable */
-val* scope__AClosureDecl__variable(val* self) {
-val* var /* : nullable ClosureVariable */;
-val* var1 /* : nullable ClosureVariable */;
-var1 = self->attrs[COLOR_scope__AClosureDecl___64dvariable].val; /* @variable on <self:AClosureDecl> */
-var = var1;
-RET_LABEL:;
-return var;
-}
-/* method scope#AClosureDecl#variable for (self: Object): nullable ClosureVariable */
-val* VIRTUAL_scope__AClosureDecl__variable(val* self) {
-val* var /* : nullable ClosureVariable */;
-val* var1 /* : nullable ClosureVariable */;
-var1 = scope__AClosureDecl__variable(self);
-var = var1;
-RET_LABEL:;
-return var;
-}
-/* method scope#AClosureDecl#variable= for (self: AClosureDecl, nullable ClosureVariable) */
-void scope__AClosureDecl__variable_61d(val* self, val* p0) {
-self->attrs[COLOR_scope__AClosureDecl___64dvariable].val = p0; /* @variable on <self:AClosureDecl> */
-RET_LABEL:;
-}
-/* method scope#AClosureDecl#variable= for (self: Object, nullable ClosureVariable) */
-void VIRTUAL_scope__AClosureDecl__variable_61d(val* self, val* p0) {
-scope__AClosureDecl__variable_61d(self, p0);
-RET_LABEL:;
-}
-/* method scope#AClosureDecl#accept_scope_visitor for (self: AClosureDecl, ScopeVisitor) */
-void scope__AClosureDecl__accept_scope_visitor(val* self, val* p0) {
-val* var_v /* var v: ScopeVisitor */;
-val* var /* : TId */;
-val* var_nid /* var nid: TId */;
-val* var1 /* : ClosureVariable */;
-val* var2 /* : String */;
-val* var_variable /* var variable: ClosureVariable */;
-short int var3 /* : Bool */;
-var_v = p0;
-var = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AClosureDecl__n_id]))(self) /* n_id on <self:AClosureDecl>*/;
-var_nid = var;
-var1 = NEW_scope__ClosureVariable(&type_scope__ClosureVariable);
-var2 = ((val* (*)(val*))(var_nid->class->vft[COLOR_parser_nodes__Token__text]))(var_nid) /* text on <var_nid:TId>*/;
-((void (*)(val*, val*))(var1->class->vft[COLOR_scope__Variable__init]))(var1, var2) /* init on <var1:ClosureVariable>*/;
-CHECK_NEW_scope__ClosureVariable(var1);
-var_variable = var1;
-var3 = ((short int (*)(val*, val*, val*))(var_v->class->vft[COLOR_scope__ScopeVisitor__register_variable]))(var_v, var_nid, var_variable) /* register_variable on <var_v:ScopeVisitor>*/;
-var3;
-((void (*)(val*, val*))(self->class->vft[COLOR_scope__AClosureDecl__variable_61d]))(self, var_variable) /* variable= on <self:AClosureDecl>*/;
-RET_LABEL:;
-}
-/* method scope#AClosureDecl#accept_scope_visitor for (self: Object, ScopeVisitor) */
-void VIRTUAL_scope__AClosureDecl__accept_scope_visitor(val* self, val* p0) {
-scope__AClosureDecl__accept_scope_visitor(self, p0);
 RET_LABEL:;
 }
 /* method scope#AVardeclExpr#variable for (self: AVardeclExpr): nullable Variable */
@@ -1745,37 +1698,30 @@ val* var_variable /* var variable: nullable Variable */;
 val* var5 /* : null */;
 short int var6 /* : Bool */;
 short int var7 /* : Bool */;
-int cltype8;
-int idtype9;
-val* var10 /* : AClosureCallExpr */;
-val* var11 /* : TId */;
+val* var8 /* : AExprs */;
+val* var9 /* : ANodes[AExpr] */;
+short int var10 /* : Bool */;
+short int var11 /* : Bool */;
 val* var12 /* : AExprs */;
-val* var13 /* : ANodes[AClosureDef] */;
-val* var_n /* var n: AExpr */;
-short int var14 /* : Bool */;
-val* var15 /* : AExprs */;
-val* var16 /* : ANodes[AExpr] */;
-short int var17 /* : Bool */;
-short int var18 /* : Bool */;
-val* var19 /* : AExprs */;
-short int var20 /* : Bool */;
-int cltype21;
-int idtype22;
+short int var13 /* : Bool */;
+int cltype14;
+int idtype15;
 static val* varonce;
-val* var23 /* : String */;
-char* var24 /* : NativeString */;
-long var25 /* : Int */;
-val* var26 /* : String */;
-static val* varonce27;
+val* var16 /* : String */;
+char* var17 /* : NativeString */;
+long var18 /* : Int */;
+val* var19 /* : String */;
+static val* varonce20;
+val* var21 /* : String */;
+char* var22 /* : NativeString */;
+long var23 /* : Int */;
+val* var24 /* : String */;
+val* var25 /* : Array[Object] */;
+long var26 /* : Int */;
+val* var27 /* : NativeArray[Object] */;
 val* var28 /* : String */;
-char* var29 /* : NativeString */;
-long var30 /* : Int */;
-val* var31 /* : String */;
-val* var32 /* : Array[Object] */;
-long var33 /* : Int */;
-val* var34 /* : NativeArray[Object] */;
-val* var35 /* : String */;
-val* var36 /* : AVarFormExpr */;
+val* var29 /* : AVarFormExpr */;
+val* var_n /* var n: AExpr */;
 var_v = p0;
 var = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ASendExpr__n_expr]))(self) /* n_expr on <self:ACallFormExpr>*/;
 /* <var:AExpr> isa AImplicitSelfExpr */
@@ -1799,82 +1745,63 @@ var6 = 0; /* is null */
 var6 = 1; /* arg is null and recv is not */
 }
 if (var6){
-/* <var_variable:nullable Variable(Variable)> isa ClosureVariable */
-cltype8 = type_scope__ClosureVariable.color;
-idtype9 = type_scope__ClosureVariable.id;
-if(cltype8 >= var_variable->type->table_size) {
-var7 = 0;
+var8 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ACallFormExpr__n_args]))(self) /* n_args on <self:ACallFormExpr>*/;
+var9 = ((val* (*)(val*))(var8->class->vft[COLOR_parser_nodes__AExprs__n_exprs]))(var8) /* n_exprs on <var8:AExprs>*/;
+var10 = ((short int (*)(val*))(var9->class->vft[COLOR_abstract_collection__Collection__is_empty]))(var9) /* is_empty on <var9:ANodes[AExpr]>*/;
+var11 = !var10;
+if (var11) {
+var7 = 1;
 } else {
-var7 = var_variable->type->type_table[cltype8] == idtype9;
+var12 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ACallFormExpr__n_args]))(self) /* n_args on <self:ACallFormExpr>*/;
+/* <var12:AExprs> isa AParExprs */
+cltype14 = type_parser_nodes__AParExprs.color;
+idtype15 = type_parser_nodes__AParExprs.id;
+if(cltype14 >= var12->type->table_size) {
+var13 = 0;
+} else {
+var13 = var12->type->type_table[cltype14] == idtype15;
+}
+var7 = var13;
 }
 if (var7){
-var10 = NEW_parser_nodes__AClosureCallExpr(&type_parser_nodes__AClosureCallExpr);
-var11 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ACallFormExpr__n_id]))(self) /* n_id on <self:ACallFormExpr>*/;
-var12 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ACallFormExpr__n_args]))(self) /* n_args on <self:ACallFormExpr>*/;
-var13 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ASendExpr__n_closure_defs]))(self) /* n_closure_defs on <self:ACallFormExpr>*/;
-((void (*)(val*, val*, val*, val*))(var10->class->vft[COLOR_parser_prod__AClosureCallExpr__init_aclosurecallexpr]))(var10, var11, var12, var13) /* init_aclosurecallexpr on <var10:AClosureCallExpr>*/;
-CHECK_NEW_parser_nodes__AClosureCallExpr(var10);
-var_n = var10;
-((void (*)(val*, val*))(var_n->class->vft[COLOR_scope__AClosureCallExpr__variable_61d]))(var_n, var_variable) /* variable= on <var_n:AExpr(AClosureCallExpr)>*/;
-} else {
-var15 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ACallFormExpr__n_args]))(self) /* n_args on <self:ACallFormExpr>*/;
-var16 = ((val* (*)(val*))(var15->class->vft[COLOR_parser_nodes__AExprs__n_exprs]))(var15) /* n_exprs on <var15:AExprs>*/;
-var17 = ((short int (*)(val*))(var16->class->vft[COLOR_abstract_collection__Collection__is_empty]))(var16) /* is_empty on <var16:ANodes[AExpr]>*/;
-var18 = !var17;
-if (var18) {
-var14 = 1;
-} else {
-var19 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ACallFormExpr__n_args]))(self) /* n_args on <self:ACallFormExpr>*/;
-/* <var19:AExprs> isa AParExprs */
-cltype21 = type_parser_nodes__AParExprs.color;
-idtype22 = type_parser_nodes__AParExprs.id;
-if(cltype21 >= var19->type->table_size) {
-var20 = 0;
-} else {
-var20 = var19->type->type_table[cltype21] == idtype22;
-}
-var14 = var20;
-}
-if (var14){
 if (varonce) {
-var23 = varonce;
+var16 = varonce;
 } else {
-var24 = "Error: ";
-var25 = 7;
-var26 = string__NativeString__to_s_with_length(var24, var25);
-var23 = var26;
-varonce = var23;
+var17 = "Error: ";
+var18 = 7;
+var19 = string__NativeString__to_s_with_length(var17, var18);
+var16 = var19;
+varonce = var16;
 }
-if (varonce27) {
-var28 = varonce27;
+if (varonce20) {
+var21 = varonce20;
 } else {
-var29 = " is variable, not a function.";
-var30 = 29;
-var31 = string__NativeString__to_s_with_length(var29, var30);
-var28 = var31;
-varonce27 = var28;
+var22 = " is variable, not a function.";
+var23 = 29;
+var24 = string__NativeString__to_s_with_length(var22, var23);
+var21 = var24;
+varonce20 = var21;
 }
-var32 = NEW_array__Array(&type_array__Arraykernel__Object);
-{ /* var32 = array_instance Array[Object] */
-var33 = 3;
-var34 = NEW_array__NativeArray(var33, &type_array__NativeArraykernel__Object);
-((struct instance_array__NativeArray*)var34)->values[0] = (val*) var23;
-((struct instance_array__NativeArray*)var34)->values[1] = (val*) var_name;
-((struct instance_array__NativeArray*)var34)->values[2] = (val*) var28;
-((void (*)(val*, val*, long))(var32->class->vft[COLOR_array__Array__with_native]))(var32, var34, var33) /* with_native on <var32:Array[Object]>*/;
-CHECK_NEW_array__Array(var32);
+var25 = NEW_array__Array(&type_array__Arraykernel__Object);
+{ /* var25 = array_instance Array[Object] */
+var26 = 3;
+var27 = NEW_array__NativeArray(var26, &type_array__NativeArraykernel__Object);
+((struct instance_array__NativeArray*)var27)->values[0] = (val*) var16;
+((struct instance_array__NativeArray*)var27)->values[1] = (val*) var_name;
+((struct instance_array__NativeArray*)var27)->values[2] = (val*) var21;
+((void (*)(val*, val*, long))(var25->class->vft[COLOR_array__Array__with_native]))(var25, var27, var26) /* with_native on <var25:Array[Object]>*/;
+CHECK_NEW_array__Array(var25);
 }
-var35 = ((val* (*)(val*))(var32->class->vft[COLOR_string__Object__to_s]))(var32) /* to_s on <var32:Array[Object]>*/;
-((void (*)(val*, val*, val*))(var_v->class->vft[COLOR_scope__ScopeVisitor__error]))(var_v, self, var35) /* error on <var_v:ScopeVisitor>*/;
+var28 = ((val* (*)(val*))(var25->class->vft[COLOR_string__Object__to_s]))(var25) /* to_s on <var25:Array[Object]>*/;
+((void (*)(val*, val*, val*))(var_v->class->vft[COLOR_scope__ScopeVisitor__error]))(var_v, self, var28) /* error on <var_v:ScopeVisitor>*/;
 goto RET_LABEL;
 } else {
 }
-var36 = ((val* (*)(val*, val*))(self->class->vft[COLOR_scope__ACallFormExpr__variable_create]))(self, var_variable) /* variable_create on <self:ACallFormExpr>*/;
-var_n = var36;
+var29 = ((val* (*)(val*, val*))(self->class->vft[COLOR_scope__ACallFormExpr__variable_create]))(self, var_variable) /* variable_create on <self:ACallFormExpr>*/;
+var_n = var29;
 ((void (*)(val*, val*))(var_n->class->vft[COLOR_scope__AVarFormExpr__variable_61d]))(var_n, var_variable) /* variable= on <var_n:AExpr(AVarFormExpr)>*/;
-}
 ((void (*)(val*, val*))(self->class->vft[COLOR_parser_nodes__ANode__replace_with]))(self, var_n) /* replace_with on <self:ACallFormExpr>*/;
-((void (*)(val*, val*))(var_n->class->vft[COLOR_scope__ANode__accept_scope_visitor]))(var_n, var_v) /* accept_scope_visitor on <var_n:AExpr>*/;
+((void (*)(val*, val*))(var_n->class->vft[COLOR_scope__ANode__accept_scope_visitor]))(var_n, var_v) /* accept_scope_visitor on <var_n:AExpr(AVarFormExpr)>*/;
 goto RET_LABEL;
 } else {
 }
@@ -1891,7 +1818,10 @@ RET_LABEL:;
 /* method scope#ACallFormExpr#variable_create for (self: ACallFormExpr, Variable): AVarFormExpr */
 val* scope__ACallFormExpr__variable_create(val* self, val* p0) {
 val* var /* : AVarFormExpr */;
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Deferred method called", "src/scope.nit", 412);
+const char* var_class_name;
+var_class_name = self == NULL ? "null" : self->type->name;
+fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "variable_create", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/scope.nit", 389);
 exit(1);
 RET_LABEL:;
 return var;
@@ -1987,255 +1917,4 @@ var1 = scope__ACallReassignExpr__variable_create(self, p0);
 var = var1;
 RET_LABEL:;
 return var;
-}
-/* method scope#AClosureCallExpr#variable for (self: AClosureCallExpr): nullable ClosureVariable */
-val* scope__AClosureCallExpr__variable(val* self) {
-val* var /* : nullable ClosureVariable */;
-val* var1 /* : nullable ClosureVariable */;
-var1 = self->attrs[COLOR_scope__AClosureCallExpr___64dvariable].val; /* @variable on <self:AClosureCallExpr> */
-var = var1;
-RET_LABEL:;
-return var;
-}
-/* method scope#AClosureCallExpr#variable for (self: Object): nullable ClosureVariable */
-val* VIRTUAL_scope__AClosureCallExpr__variable(val* self) {
-val* var /* : nullable ClosureVariable */;
-val* var1 /* : nullable ClosureVariable */;
-var1 = scope__AClosureCallExpr__variable(self);
-var = var1;
-RET_LABEL:;
-return var;
-}
-/* method scope#AClosureCallExpr#variable= for (self: AClosureCallExpr, nullable ClosureVariable) */
-void scope__AClosureCallExpr__variable_61d(val* self, val* p0) {
-self->attrs[COLOR_scope__AClosureCallExpr___64dvariable].val = p0; /* @variable on <self:AClosureCallExpr> */
-RET_LABEL:;
-}
-/* method scope#AClosureCallExpr#variable= for (self: Object, nullable ClosureVariable) */
-void VIRTUAL_scope__AClosureCallExpr__variable_61d(val* self, val* p0) {
-scope__AClosureCallExpr__variable_61d(self, p0);
-RET_LABEL:;
-}
-/* method scope#ASendExpr#escapemark for (self: ASendExpr): nullable EscapeMark */
-val* scope__ASendExpr__escapemark(val* self) {
-val* var /* : nullable EscapeMark */;
-val* var1 /* : nullable EscapeMark */;
-var1 = self->attrs[COLOR_scope__ASendExpr___64descapemark].val; /* @escapemark on <self:ASendExpr> */
-var = var1;
-RET_LABEL:;
-return var;
-}
-/* method scope#ASendExpr#escapemark for (self: Object): nullable EscapeMark */
-val* VIRTUAL_scope__ASendExpr__escapemark(val* self) {
-val* var /* : nullable EscapeMark */;
-val* var1 /* : nullable EscapeMark */;
-var1 = scope__ASendExpr__escapemark(self);
-var = var1;
-RET_LABEL:;
-return var;
-}
-/* method scope#ASendExpr#escapemark= for (self: ASendExpr, nullable EscapeMark) */
-void scope__ASendExpr__escapemark_61d(val* self, val* p0) {
-self->attrs[COLOR_scope__ASendExpr___64descapemark].val = p0; /* @escapemark on <self:ASendExpr> */
-RET_LABEL:;
-}
-/* method scope#ASendExpr#escapemark= for (self: Object, nullable EscapeMark) */
-void VIRTUAL_scope__ASendExpr__escapemark_61d(val* self, val* p0) {
-scope__ASendExpr__escapemark_61d(self, p0);
-RET_LABEL:;
-}
-/* method scope#ASendExpr#accept_scope_visitor for (self: ASendExpr, ScopeVisitor) */
-void scope__ASendExpr__accept_scope_visitor(val* self, val* p0) {
-val* var_v /* var v: ScopeVisitor */;
-val* var /* : ANodes[AClosureDef] */;
-long var1 /* : Int */;
-long var2 /* : Int */;
-short int var3 /* : Bool */;
-short int var5 /* : Bool */;
-int cltype;
-int idtype;
-short int var6 /* : Bool */;
-val* var7 /* : ANodes[AClosureDef] */;
-val* var8 /* : nullable Object */;
-val* var9 /* : nullable ALabel */;
-short int var10 /* : Bool */;
-val* var11 /* : EscapeMark */;
-val* var_escapemark /* var escapemark: EscapeMark */;
-var_v = p0;
-var = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ASendExpr__n_closure_defs]))(self) /* n_closure_defs on <self:ASendExpr>*/;
-var1 = ((long (*)(val*))(var->class->vft[COLOR_abstract_collection__Collection__length]))(var) /* length on <var:ANodes[AClosureDef]>*/;
-var2 = 0;
-{ /* Inline kernel#Int#> (var1,var2) */
-/* Covariant cast for argument 0 (i) <var2:Int> isa OTHER */
-/* <var2:Int> isa OTHER */
-var5 = 1; /* easy <var2:Int> isa OTHER*/
-if (!var5) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 259);
-exit(1);
-}
-var6 = var1 > var2;
-var3 = var6;
-goto RET_LABEL4;
-RET_LABEL4:(void)0;
-}
-if (var3){
-var7 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ASendExpr__n_closure_defs]))(self) /* n_closure_defs on <self:ASendExpr>*/;
-var8 = ((val* (*)(val*))(var7->class->vft[COLOR_abstract_collection__SequenceRead__last]))(var7) /* last on <var7:ANodes[AClosureDef]>*/;
-var9 = ((val* (*)(val*))(var8->class->vft[COLOR_parser_nodes__ALabelable__n_label]))(var8) /* n_label on <var8:nullable Object(AClosureDef)>*/;
-var10 = 1;
-var11 = ((val* (*)(val*, val*, short int))(var_v->class->vft[COLOR_scope__ScopeVisitor__make_escape_mark]))(var_v, var9, var10) /* make_escape_mark on <var_v:ScopeVisitor>*/;
-var_escapemark = var11;
-((void (*)(val*, val*))(self->class->vft[COLOR_scope__ASendExpr__escapemark_61d]))(self, var_escapemark) /* escapemark= on <self:ASendExpr>*/;
-} else {
-}
-((void (*)(val*, val*))(self->class->vft[COLOR_scope__ASendExpr__accept_scope_visitor]))(self, p0) /* accept_scope_visitor on <self:ASendExpr>*/;
-RET_LABEL:;
-}
-/* method scope#ASendExpr#accept_scope_visitor for (self: Object, ScopeVisitor) */
-void VIRTUAL_scope__ASendExpr__accept_scope_visitor(val* self, val* p0) {
-scope__ASendExpr__accept_scope_visitor(self, p0);
-RET_LABEL:;
-}
-/* method scope#AClosureDef#variables for (self: AClosureDef): nullable Array[Variable] */
-val* scope__AClosureDef__variables(val* self) {
-val* var /* : nullable Array[Variable] */;
-val* var1 /* : nullable Array[Variable] */;
-var1 = self->attrs[COLOR_scope__AClosureDef___64dvariables].val; /* @variables on <self:AClosureDef> */
-var = var1;
-RET_LABEL:;
-return var;
-}
-/* method scope#AClosureDef#variables for (self: Object): nullable Array[Variable] */
-val* VIRTUAL_scope__AClosureDef__variables(val* self) {
-val* var /* : nullable Array[Variable] */;
-val* var1 /* : nullable Array[Variable] */;
-var1 = scope__AClosureDef__variables(self);
-var = var1;
-RET_LABEL:;
-return var;
-}
-/* method scope#AClosureDef#variables= for (self: AClosureDef, nullable Array[Variable]) */
-void scope__AClosureDef__variables_61d(val* self, val* p0) {
-self->attrs[COLOR_scope__AClosureDef___64dvariables].val = p0; /* @variables on <self:AClosureDef> */
-RET_LABEL:;
-}
-/* method scope#AClosureDef#variables= for (self: Object, nullable Array[Variable]) */
-void VIRTUAL_scope__AClosureDef__variables_61d(val* self, val* p0) {
-scope__AClosureDef__variables_61d(self, p0);
-RET_LABEL:;
-}
-/* method scope#AClosureDef#escapemark for (self: AClosureDef): nullable EscapeMark */
-val* scope__AClosureDef__escapemark(val* self) {
-val* var /* : nullable EscapeMark */;
-val* var1 /* : nullable EscapeMark */;
-var1 = self->attrs[COLOR_scope__AClosureDef___64descapemark].val; /* @escapemark on <self:AClosureDef> */
-var = var1;
-RET_LABEL:;
-return var;
-}
-/* method scope#AClosureDef#escapemark for (self: Object): nullable EscapeMark */
-val* VIRTUAL_scope__AClosureDef__escapemark(val* self) {
-val* var /* : nullable EscapeMark */;
-val* var1 /* : nullable EscapeMark */;
-var1 = scope__AClosureDef__escapemark(self);
-var = var1;
-RET_LABEL:;
-return var;
-}
-/* method scope#AClosureDef#escapemark= for (self: AClosureDef, nullable EscapeMark) */
-void scope__AClosureDef__escapemark_61d(val* self, val* p0) {
-self->attrs[COLOR_scope__AClosureDef___64descapemark].val = p0; /* @escapemark on <self:AClosureDef> */
-RET_LABEL:;
-}
-/* method scope#AClosureDef#escapemark= for (self: Object, nullable EscapeMark) */
-void VIRTUAL_scope__AClosureDef__escapemark_61d(val* self, val* p0) {
-scope__AClosureDef__escapemark_61d(self, p0);
-RET_LABEL:;
-}
-/* method scope#AClosureDef#accept_scope_visitor for (self: AClosureDef, ScopeVisitor) */
-void scope__AClosureDef__accept_scope_visitor(val* self, val* p0) {
-val* var_v /* var v: ScopeVisitor */;
-val* var /* : List[Scope] */;
-val* var1 /* : Scope */;
-val* var2 /* : Array[Variable] */;
-val* var_variables /* var variables: Array[Variable] */;
-val* var3 /* : ANodes[TId] */;
-val* var4 /* : Iterator[nullable Object] */;
-short int var5 /* : Bool */;
-val* var6 /* : nullable Object */;
-val* var_nid /* var nid: TId */;
-val* var7 /* : Variable */;
-val* var8 /* : String */;
-val* var_va /* var va: Variable */;
-short int var9 /* : Bool */;
-val* var10 /* : nullable ANode */;
-short int var11 /* : Bool */;
-int cltype;
-int idtype;
-val* var12 /* : nullable EscapeMark */;
-val* var13 /* : nullable AExpr */;
-val* var14 /* : nullable EscapeMark */;
-val* var15 /* : List[Scope] */;
-val* var16 /* : nullable Object */;
-var_v = p0;
-var = ((val* (*)(val*))(var_v->class->vft[COLOR_scope__ScopeVisitor__scopes]))(var_v) /* scopes on <var_v:ScopeVisitor>*/;
-var1 = NEW_scope__Scope(&type_scope__Scope);
-((void (*)(val*))(var1->class->vft[COLOR_scope__Scope__init]))(var1) /* init on <var1:Scope>*/;
-CHECK_NEW_scope__Scope(var1);
-((void (*)(val*, val*))(var->class->vft[COLOR_abstract_collection__Sequence__unshift]))(var, var1) /* unshift on <var:List[Scope]>*/;
-var2 = NEW_array__Array(&type_array__Arrayscope__Variable);
-((void (*)(val*))(var2->class->vft[COLOR_array__Array__init]))(var2) /* init on <var2:Array[Variable]>*/;
-CHECK_NEW_array__Array(var2);
-var_variables = var2;
-((void (*)(val*, val*))(self->class->vft[COLOR_scope__AClosureDef__variables_61d]))(self, var_variables) /* variables= on <self:AClosureDef>*/;
-var3 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AClosureDef__n_ids]))(self) /* n_ids on <self:AClosureDef>*/;
-var4 = ((val* (*)(val*))(var3->class->vft[COLOR_abstract_collection__Collection__iterator]))(var3) /* iterator on <var3:ANodes[TId]>*/;
-for(;;) {
-var5 = ((short int (*)(val*))(var4->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var4) /* is_ok on <var4:Iterator[nullable Object]>*/;
-if(!var5) break;
-var6 = ((val* (*)(val*))(var4->class->vft[COLOR_abstract_collection__Iterator__item]))(var4) /* item on <var4:Iterator[nullable Object]>*/;
-var_nid = var6;
-var7 = NEW_scope__Variable(&type_scope__Variable);
-var8 = ((val* (*)(val*))(var_nid->class->vft[COLOR_parser_nodes__Token__text]))(var_nid) /* text on <var_nid:TId>*/;
-((void (*)(val*, val*))(var7->class->vft[COLOR_scope__Variable__init]))(var7, var8) /* init on <var7:Variable>*/;
-CHECK_NEW_scope__Variable(var7);
-var_va = var7;
-var9 = ((short int (*)(val*, val*, val*))(var_v->class->vft[COLOR_scope__ScopeVisitor__register_variable]))(var_v, var_nid, var_va) /* register_variable on <var_v:ScopeVisitor>*/;
-var9;
-((void (*)(val*, val*))(var_variables->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_variables, var_va) /* add on <var_variables:Array[Variable]>*/;
-CONTINUE_label: (void)0;
-((void (*)(val*))(var4->class->vft[COLOR_abstract_collection__Iterator__next]))(var4) /* next on <var4:Iterator[nullable Object]>*/;
-}
-BREAK_label: (void)0;
-var10 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ANode__parent]))(self) /* parent on <self:AClosureDef>*/;
-/* <var10:nullable ANode> isa ASendExpr */
-cltype = type_parser_nodes__ASendExpr.color;
-idtype = type_parser_nodes__ASendExpr.id;
-if(var10 == NULL) {
-var11 = 0;
-} else {
-if(cltype >= var10->type->table_size) {
-var11 = 0;
-} else {
-var11 = var10->type->type_table[cltype] == idtype;
-}
-}
-if (!var11) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/scope.nit", 476);
-exit(1);
-}
-var12 = ((val* (*)(val*))(var10->class->vft[COLOR_scope__ASendExpr__escapemark]))(var10) /* escapemark on <var10:nullable ANode(ASendExpr)>*/;
-((void (*)(val*, val*))(self->class->vft[COLOR_scope__AClosureDef__escapemark_61d]))(self, var12) /* escapemark= on <self:AClosureDef>*/;
-var13 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AClosureDef__n_expr]))(self) /* n_expr on <self:AClosureDef>*/;
-var14 = ((val* (*)(val*))(self->class->vft[COLOR_scope__AClosureDef__escapemark]))(self) /* escapemark on <self:AClosureDef>*/;
-((void (*)(val*, val*, val*))(var_v->class->vft[COLOR_scope__ScopeVisitor__enter_visit_block]))(var_v, var13, var14) /* enter_visit_block on <var_v:ScopeVisitor>*/;
-var15 = ((val* (*)(val*))(var_v->class->vft[COLOR_scope__ScopeVisitor__scopes]))(var_v) /* scopes on <var_v:ScopeVisitor>*/;
-var16 = ((val* (*)(val*))(var15->class->vft[COLOR_abstract_collection__Sequence__shift]))(var15) /* shift on <var15:List[Scope]>*/;
-var16;
-RET_LABEL:;
-}
-/* method scope#AClosureDef#accept_scope_visitor for (self: Object, ScopeVisitor) */
-void VIRTUAL_scope__AClosureDef__accept_scope_visitor(val* self, val* p0) {
-scope__AClosureDef__accept_scope_visitor(self, p0);
-RET_LABEL:;
 }

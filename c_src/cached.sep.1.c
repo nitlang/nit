@@ -5,7 +5,8 @@ val* var /* : Phase */;
 val* var1 /* : Phase */;
 var1 = self->attrs[COLOR_cached__ToolContext___64dcached_phase].val; /* @cached_phase on <self:ToolContext> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @cached_phase", "src/cached.nit", 26);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @cached_phase");
+fprintf(stderr, " (%s:%d)\n", "src/cached.nit", 26);
 exit(1);
 }
 var = var1;
@@ -105,6 +106,7 @@ val* var39 /* : nullable ANode */;
 short int var40 /* : Bool */;
 int cltype41;
 int idtype42;
+const char* var_class_name;
 val* var_nclassdef /* var nclassdef: AStdClassdef */;
 val* var43 /* : nullable MClassDef */;
 val* var_mclassdef /* var mclassdef: MClassDef */;
@@ -163,93 +165,95 @@ val* var92 /* : APropdef */;
 short int var93 /* : Bool */;
 int cltype94;
 int idtype95;
+const char* var_class_name96;
 val* var_is_cached_npropdef /* var is_cached_npropdef: AAttrPropdef */;
-val* var96 /* : MMethodDef */;
-val* var97 /* : MMethod */;
-val* var98 /* : Array[Object] */;
-long var99 /* : Int */;
-val* var_100 /* var : Array[Object] */;
-static val* varonce101;
-val* var102 /* : String */;
-char* var103 /* : NativeString */;
-long var104 /* : Int */;
-val* var105 /* : String */;
-static val* varonce106;
-val* var107 /* : String */;
-char* var108 /* : NativeString */;
-long var109 /* : Int */;
-val* var110 /* : String */;
+val* var97 /* : MMethodDef */;
+val* var98 /* : MMethod */;
+val* var99 /* : Array[Object] */;
+long var100 /* : Int */;
+val* var_101 /* var : Array[Object] */;
+static val* varonce102;
+val* var103 /* : String */;
+char* var104 /* : NativeString */;
+long var105 /* : Int */;
+val* var106 /* : String */;
+static val* varonce107;
+val* var108 /* : String */;
+char* var109 /* : NativeString */;
+long var110 /* : Int */;
 val* var111 /* : String */;
-val* var112 /* : MVisibility */;
+val* var112 /* : String */;
+val* var113 /* : MVisibility */;
 val* var_real_mpropdef /* var real_mpropdef: MMethodDef */;
-val* var113 /* : nullable MSignature */;
-val* var114 /* : ToolContext */;
-static val* varonce115;
-val* var116 /* : String */;
-char* var117 /* : NativeString */;
-long var118 /* : Int */;
-val* var119 /* : String */;
-val* var120 /* : APropdef */;
-short int var121 /* : Bool */;
-int cltype122;
-int idtype123;
+val* var114 /* : nullable MSignature */;
+val* var115 /* : ToolContext */;
+static val* varonce116;
+val* var117 /* : String */;
+char* var118 /* : NativeString */;
+long var119 /* : Int */;
+val* var120 /* : String */;
+val* var121 /* : APropdef */;
+short int var122 /* : Bool */;
+int cltype123;
+int idtype124;
+const char* var_class_name125;
 val* var_real_npropdef /* var real_npropdef: AConcreteMethPropdef */;
-val* var124 /* : nullable AExpr */;
+val* var126 /* : nullable AExpr */;
 val* var_real_body /* var real_body: AExpr */;
-val* var125 /* : ToolContext */;
-static val* varonce126;
-val* var127 /* : String */;
-char* var128 /* : NativeString */;
-long var129 /* : Int */;
-val* var130 /* : String */;
-val* var131 /* : AExpr */;
+val* var127 /* : ToolContext */;
+static val* varonce128;
+val* var129 /* : String */;
+char* var130 /* : NativeString */;
+long var131 /* : Int */;
+val* var132 /* : String */;
+val* var133 /* : AExpr */;
 val* var_proxy_body /* var proxy_body: AExpr */;
-static val* varonce132;
-val* var133 /* : String */;
-char* var134 /* : NativeString */;
-long var135 /* : Int */;
-val* var136 /* : String */;
-val* var137 /* : Array[Token] */;
-val* var138 /* : nullable Object */;
-val* var139 /* : MProperty */;
-val* var140 /* : String */;
-static val* varonce141;
+static val* varonce134;
+val* var135 /* : String */;
+char* var136 /* : NativeString */;
+long var137 /* : Int */;
+val* var138 /* : String */;
+val* var139 /* : Array[Token] */;
+val* var140 /* : nullable Object */;
+val* var141 /* : MProperty */;
 val* var142 /* : String */;
-char* var143 /* : NativeString */;
-long var144 /* : Int */;
-val* var145 /* : String */;
-val* var146 /* : Array[Token] */;
-val* var147 /* : nullable Object */;
-val* var148 /* : MProperty */;
-val* var149 /* : String */;
-static val* varonce150;
+static val* varonce143;
+val* var144 /* : String */;
+char* var145 /* : NativeString */;
+long var146 /* : Int */;
+val* var147 /* : String */;
+val* var148 /* : Array[Token] */;
+val* var149 /* : nullable Object */;
+val* var150 /* : MProperty */;
 val* var151 /* : String */;
-char* var152 /* : NativeString */;
-long var153 /* : Int */;
-val* var154 /* : String */;
-val* var155 /* : Array[Token] */;
-val* var156 /* : nullable Object */;
-val* var157 /* : MProperty */;
-val* var158 /* : String */;
-static val* varonce159;
+static val* varonce152;
+val* var153 /* : String */;
+char* var154 /* : NativeString */;
+long var155 /* : Int */;
+val* var156 /* : String */;
+val* var157 /* : Array[Token] */;
+val* var158 /* : nullable Object */;
+val* var159 /* : MProperty */;
 val* var160 /* : String */;
-char* var161 /* : NativeString */;
-long var162 /* : Int */;
-val* var163 /* : String */;
-val* var164 /* : Array[Token] */;
-val* var165 /* : nullable Object */;
-val* var166 /* : MProperty */;
-val* var167 /* : String */;
-static val* varonce168;
+static val* varonce161;
+val* var162 /* : String */;
+char* var163 /* : NativeString */;
+long var164 /* : Int */;
+val* var165 /* : String */;
+val* var166 /* : Array[Token] */;
+val* var167 /* : nullable Object */;
+val* var168 /* : MProperty */;
 val* var169 /* : String */;
-char* var170 /* : NativeString */;
-long var171 /* : Int */;
-val* var172 /* : String */;
-val* var173 /* : Array[Token] */;
-val* var174 /* : nullable Object */;
-val* var175 /* : MProperty */;
-val* var176 /* : String */;
-val* var177 /* : nullable AExpr */;
+static val* varonce170;
+val* var171 /* : String */;
+char* var172 /* : NativeString */;
+long var173 /* : Int */;
+val* var174 /* : String */;
+val* var175 /* : Array[Token] */;
+val* var176 /* : nullable Object */;
+val* var177 /* : MProperty */;
+val* var178 /* : String */;
+val* var179 /* : nullable AExpr */;
 var_npropdef = p0;
 var_nat = p1;
 var = ((val* (*)(val*))(var_nat->class->vft[COLOR_parser_nodes__AAnnotation__n_atid]))(var_nat) /* n_atid on <var_nat:AAnnotation>*/;
@@ -297,13 +301,15 @@ goto RET_LABEL;
 }
 var17 = ((val* (*)(val*))(var_npropdef->class->vft[COLOR_modelize_property__APropdef__mpropdef]))(var_npropdef) /* mpropdef on <var_npropdef:ANode(AConcreteMethPropdef)>*/;
 if (var17 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/cached.nit", 54);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/cached.nit", 54);
 exit(1);
 }
 var_mpropdef = var17;
 var18 = ((val* (*)(val*))(var_mpropdef->class->vft[COLOR_model__MMethodDef__msignature]))(var_mpropdef) /* msignature on <var_mpropdef:MMethodDef>*/;
 if (var18 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/cached.nit", 56);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/cached.nit", 56);
 exit(1);
 } else {
 var19 = ((val* (*)(val*))(var18->class->vft[COLOR_model__MSignature__return_mtype]))(var18) /* return_mtype on <var18:nullable MSignature>*/;
@@ -331,7 +337,8 @@ goto RET_LABEL;
 }
 var27 = ((val* (*)(val*))(var_npropdef->class->vft[COLOR_parser_nodes__AMethPropdef__n_signature]))(var_npropdef) /* n_signature on <var_npropdef:ANode(AConcreteMethPropdef)>*/;
 if (var27 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/cached.nit", 62);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/cached.nit", 62);
 exit(1);
 } else {
 var28 = ((val* (*)(val*))(var27->class->vft[COLOR_parser_nodes__ASignature__n_params]))(var27) /* n_params on <var27:nullable ASignature>*/;
@@ -371,13 +378,16 @@ var40 = var39->type->type_table[cltype41] == idtype42;
 }
 }
 if (!var40) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/cached.nit", 71);
+var_class_name = var39 == NULL ? "null" : var39->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "AStdClassdef", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/cached.nit", 71);
 exit(1);
 }
 var_nclassdef = var39;
 var43 = ((val* (*)(val*))(var_nclassdef->class->vft[COLOR_modelize_class__AClassdef__mclassdef]))(var_nclassdef) /* mclassdef on <var_nclassdef:AStdClassdef>*/;
 if (var43 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/cached.nit", 72);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/cached.nit", 72);
 exit(1);
 }
 var_mclassdef = var43;
@@ -486,168 +496,174 @@ var93 = 0;
 var93 = var92->type->type_table[cltype94] == idtype95;
 }
 if (!var93) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/cached.nit", 83);
+var_class_name96 = var92 == NULL ? "null" : var92->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "AAttrPropdef", var_class_name96);
+fprintf(stderr, " (%s:%d)\n", "src/cached.nit", 83);
 exit(1);
 }
 var_is_cached_npropdef = var92;
 ((void (*)(val*, val*, val*))(self->class->vft[COLOR_cached__CachedPhase__associate_propdef]))(self, var_is_cached_mpropdef, var_is_cached_npropdef) /* associate_propdef on <self:CachedPhase>*/;
-var96 = NEW_model__MMethodDef(&type_model__MMethodDef);
-var97 = NEW_model__MMethod(&type_model__MMethod);
-var98 = NEW_array__Array(&type_array__Arraykernel__Object);
-var99 = 3;
-((void (*)(val*, long))(var98->class->vft[COLOR_array__Array__with_capacity]))(var98, var99) /* with_capacity on <var98:Array[Object]>*/;
-CHECK_NEW_array__Array(var98);
-var_100 = var98;
-if (varonce101) {
-var102 = varonce101;
+var97 = NEW_model__MMethodDef(&type_model__MMethodDef);
+var98 = NEW_model__MMethod(&type_model__MMethod);
+var99 = NEW_array__Array(&type_array__Arraykernel__Object);
+var100 = 3;
+((void (*)(val*, long))(var99->class->vft[COLOR_array__Array__with_capacity]))(var99, var100) /* with_capacity on <var99:Array[Object]>*/;
+CHECK_NEW_array__Array(var99);
+var_101 = var99;
+if (varonce102) {
+var103 = varonce102;
 } else {
-var103 = "";
-var104 = 0;
-var105 = string__NativeString__to_s_with_length(var103, var104);
-var102 = var105;
-varonce101 = var102;
+var104 = "";
+var105 = 0;
+var106 = string__NativeString__to_s_with_length(var104, var105);
+var103 = var106;
+varonce102 = var103;
 }
-((void (*)(val*, val*))(var_100->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_100, var102) /* add on <var_100:Array[Object]>*/;
-((void (*)(val*, val*))(var_100->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_100, var_name) /* add on <var_100:Array[Object]>*/;
-if (varonce106) {
-var107 = varonce106;
+((void (*)(val*, val*))(var_101->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_101, var103) /* add on <var_101:Array[Object]>*/;
+((void (*)(val*, val*))(var_101->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_101, var_name) /* add on <var_101:Array[Object]>*/;
+if (varonce107) {
+var108 = varonce107;
 } else {
-var108 = "<real>";
-var109 = 6;
-var110 = string__NativeString__to_s_with_length(var108, var109);
-var107 = var110;
-varonce106 = var107;
+var109 = "<real>";
+var110 = 6;
+var111 = string__NativeString__to_s_with_length(var109, var110);
+var108 = var111;
+varonce107 = var108;
 }
-((void (*)(val*, val*))(var_100->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_100, var107) /* add on <var_100:Array[Object]>*/;
-var111 = ((val* (*)(val*))(var_100->class->vft[COLOR_string__Object__to_s]))(var_100) /* to_s on <var_100:Array[Object]>*/;
-var112 = ((val* (*)(val*))(self->class->vft[COLOR_model_base__Object__private_visibility]))(self) /* private_visibility on <self:CachedPhase>*/;
-((void (*)(val*, val*, val*, val*))(var97->class->vft[COLOR_model__MMethod__init]))(var97, var_mclassdef, var111, var112) /* init on <var97:MMethod>*/;
-CHECK_NEW_model__MMethod(var97);
-((void (*)(val*, val*, val*, val*))(var96->class->vft[COLOR_model__MMethodDef__init]))(var96, var_mclassdef, var97, var_location) /* init on <var96:MMethodDef>*/;
-CHECK_NEW_model__MMethodDef(var96);
-var_real_mpropdef = var96;
-var113 = ((val* (*)(val*))(var_mpropdef->class->vft[COLOR_model__MMethodDef__msignature]))(var_mpropdef) /* msignature on <var_mpropdef:MMethodDef>*/;
-((void (*)(val*, val*))(var_real_mpropdef->class->vft[COLOR_model__MMethodDef__msignature_61d]))(var_real_mpropdef, var113) /* msignature= on <var_real_mpropdef:MMethodDef>*/;
-var114 = ((val* (*)(val*))(self->class->vft[COLOR_phase__Phase__toolcontext]))(self) /* toolcontext on <self:CachedPhase>*/;
-if (varonce115) {
-var116 = varonce115;
+((void (*)(val*, val*))(var_101->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_101, var108) /* add on <var_101:Array[Object]>*/;
+var112 = ((val* (*)(val*))(var_101->class->vft[COLOR_string__Object__to_s]))(var_101) /* to_s on <var_101:Array[Object]>*/;
+var113 = ((val* (*)(val*))(self->class->vft[COLOR_model_base__Object__private_visibility]))(self) /* private_visibility on <self:CachedPhase>*/;
+((void (*)(val*, val*, val*, val*))(var98->class->vft[COLOR_model__MMethod__init]))(var98, var_mclassdef, var112, var113) /* init on <var98:MMethod>*/;
+CHECK_NEW_model__MMethod(var98);
+((void (*)(val*, val*, val*, val*))(var97->class->vft[COLOR_model__MMethodDef__init]))(var97, var_mclassdef, var98, var_location) /* init on <var97:MMethodDef>*/;
+CHECK_NEW_model__MMethodDef(var97);
+var_real_mpropdef = var97;
+var114 = ((val* (*)(val*))(var_mpropdef->class->vft[COLOR_model__MMethodDef__msignature]))(var_mpropdef) /* msignature on <var_mpropdef:MMethodDef>*/;
+((void (*)(val*, val*))(var_real_mpropdef->class->vft[COLOR_model__MMethodDef__msignature_61d]))(var_real_mpropdef, var114) /* msignature= on <var_real_mpropdef:MMethodDef>*/;
+var115 = ((val* (*)(val*))(self->class->vft[COLOR_phase__Phase__toolcontext]))(self) /* toolcontext on <self:CachedPhase>*/;
+if (varonce116) {
+var117 = varonce116;
 } else {
-var117 = "fun real do end";
-var118 = 15;
-var119 = string__NativeString__to_s_with_length(var117, var118);
-var116 = var119;
-varonce115 = var116;
+var118 = "fun real do end";
+var119 = 15;
+var120 = string__NativeString__to_s_with_length(var118, var119);
+var117 = var120;
+varonce116 = var117;
 }
-var120 = ((val* (*)(val*, val*))(var114->class->vft[COLOR_parser_util__ToolContext__parse_propdef]))(var114, var116) /* parse_propdef on <var114:ToolContext>*/;
-/* <var120:APropdef> isa AConcreteMethPropdef */
-cltype122 = type_parser_nodes__AConcreteMethPropdef.color;
-idtype123 = type_parser_nodes__AConcreteMethPropdef.id;
-if(cltype122 >= var120->type->table_size) {
-var121 = 0;
+var121 = ((val* (*)(val*, val*))(var115->class->vft[COLOR_parser_util__ToolContext__parse_propdef]))(var115, var117) /* parse_propdef on <var115:ToolContext>*/;
+/* <var121:APropdef> isa AConcreteMethPropdef */
+cltype123 = type_parser_nodes__AConcreteMethPropdef.color;
+idtype124 = type_parser_nodes__AConcreteMethPropdef.id;
+if(cltype123 >= var121->type->table_size) {
+var122 = 0;
 } else {
-var121 = var120->type->type_table[cltype122] == idtype123;
+var122 = var121->type->type_table[cltype123] == idtype124;
 }
-if (!var121) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/cached.nit", 90);
+if (!var122) {
+var_class_name125 = var121 == NULL ? "null" : var121->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "AConcreteMethPropdef", var_class_name125);
+fprintf(stderr, " (%s:%d)\n", "src/cached.nit", 90);
 exit(1);
 }
-var_real_npropdef = var120;
+var_real_npropdef = var121;
 ((void (*)(val*, val*, val*))(self->class->vft[COLOR_cached__CachedPhase__associate_propdef]))(self, var_real_mpropdef, var_real_npropdef) /* associate_propdef on <self:CachedPhase>*/;
-var124 = ((val* (*)(val*))(var_npropdef->class->vft[COLOR_parser_nodes__AConcreteMethPropdef__n_block]))(var_npropdef) /* n_block on <var_npropdef:ANode(AConcreteMethPropdef)>*/;
-if (var124 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/cached.nit", 95);
+var126 = ((val* (*)(val*))(var_npropdef->class->vft[COLOR_parser_nodes__AConcreteMethPropdef__n_block]))(var_npropdef) /* n_block on <var_npropdef:ANode(AConcreteMethPropdef)>*/;
+if (var126 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/cached.nit", 95);
 exit(1);
 }
-var_real_body = var124;
-var125 = ((val* (*)(val*))(self->class->vft[COLOR_phase__Phase__toolcontext]))(self) /* toolcontext on <self:CachedPhase>*/;
-if (varonce126) {
-var127 = varonce126;
+var_real_body = var126;
+var127 = ((val* (*)(val*))(self->class->vft[COLOR_phase__Phase__toolcontext]))(self) /* toolcontext on <self:CachedPhase>*/;
+if (varonce128) {
+var129 = varonce128;
 } else {
-var128 = "if self._is_cached then return self._cache.as(not null)\nvar res = call_real\nself._cache_write = res\nself._is_cached_write = true\nreturn res";
-var129 = 139;
-var130 = string__NativeString__to_s_with_length(var128, var129);
-var127 = var130;
-varonce126 = var127;
+var130 = "if self._is_cached then return self._cache.as(not null)\nvar res = call_real\nself._cache_write = res\nself._is_cached_write = true\nreturn res";
+var131 = 139;
+var132 = string__NativeString__to_s_with_length(var130, var131);
+var129 = var132;
+varonce128 = var129;
 }
-var131 = ((val* (*)(val*, val*))(var125->class->vft[COLOR_parser_util__ToolContext__parse_stmts]))(var125, var127) /* parse_stmts on <var125:ToolContext>*/;
-var_proxy_body = var131;
+var133 = ((val* (*)(val*, val*))(var127->class->vft[COLOR_parser_util__ToolContext__parse_stmts]))(var127, var129) /* parse_stmts on <var127:ToolContext>*/;
+var_proxy_body = var133;
 ((void (*)(val*, val*))(var_real_body->class->vft[COLOR_parser_nodes__ANode__replace_with]))(var_real_body, var_proxy_body) /* replace_with on <var_real_body:AExpr>*/;
-if (varonce132) {
-var133 = varonce132;
+if (varonce134) {
+var135 = varonce134;
 } else {
-var134 = "_is_cached";
-var135 = 10;
-var136 = string__NativeString__to_s_with_length(var134, var135);
-var133 = var136;
-varonce132 = var133;
+var136 = "_is_cached";
+var137 = 10;
+var138 = string__NativeString__to_s_with_length(var136, var137);
+var135 = var138;
+varonce134 = var135;
 }
-var137 = ((val* (*)(val*, val*))(var_proxy_body->class->vft[COLOR_parser_util__ANode__collect_tokens_by_text]))(var_proxy_body, var133) /* collect_tokens_by_text on <var_proxy_body:AExpr>*/;
-var138 = ((val* (*)(val*))(var137->class->vft[COLOR_abstract_collection__Collection__first]))(var137) /* first on <var137:Array[Token]>*/;
-var139 = ((val* (*)(val*))(var_is_cached_mpropdef->class->vft[COLOR_model__MPropDef__mproperty]))(var_is_cached_mpropdef) /* mproperty on <var_is_cached_mpropdef:MAttributeDef>*/;
-var140 = ((val* (*)(val*))(var139->class->vft[COLOR_model__MProperty__name]))(var139) /* name on <var139:MProperty(MAttribute)>*/;
-((void (*)(val*, val*))(var138->class->vft[COLOR_parser_nodes__Token__text_61d]))(var138, var140) /* text= on <var138:nullable Object(Token)>*/;
-if (varonce141) {
-var142 = varonce141;
+var139 = ((val* (*)(val*, val*))(var_proxy_body->class->vft[COLOR_parser_util__ANode__collect_tokens_by_text]))(var_proxy_body, var135) /* collect_tokens_by_text on <var_proxy_body:AExpr>*/;
+var140 = ((val* (*)(val*))(var139->class->vft[COLOR_abstract_collection__Collection__first]))(var139) /* first on <var139:Array[Token]>*/;
+var141 = ((val* (*)(val*))(var_is_cached_mpropdef->class->vft[COLOR_model__MPropDef__mproperty]))(var_is_cached_mpropdef) /* mproperty on <var_is_cached_mpropdef:MAttributeDef>*/;
+var142 = ((val* (*)(val*))(var141->class->vft[COLOR_model__MProperty__name]))(var141) /* name on <var141:MProperty(MAttribute)>*/;
+((void (*)(val*, val*))(var140->class->vft[COLOR_parser_nodes__Token__text_61d]))(var140, var142) /* text= on <var140:nullable Object(Token)>*/;
+if (varonce143) {
+var144 = varonce143;
 } else {
-var143 = "_is_cached_write";
-var144 = 16;
-var145 = string__NativeString__to_s_with_length(var143, var144);
-var142 = var145;
-varonce141 = var142;
+var145 = "_is_cached_write";
+var146 = 16;
+var147 = string__NativeString__to_s_with_length(var145, var146);
+var144 = var147;
+varonce143 = var144;
 }
-var146 = ((val* (*)(val*, val*))(var_proxy_body->class->vft[COLOR_parser_util__ANode__collect_tokens_by_text]))(var_proxy_body, var142) /* collect_tokens_by_text on <var_proxy_body:AExpr>*/;
-var147 = ((val* (*)(val*))(var146->class->vft[COLOR_abstract_collection__Collection__first]))(var146) /* first on <var146:Array[Token]>*/;
-var148 = ((val* (*)(val*))(var_is_cached_mpropdef->class->vft[COLOR_model__MPropDef__mproperty]))(var_is_cached_mpropdef) /* mproperty on <var_is_cached_mpropdef:MAttributeDef>*/;
-var149 = ((val* (*)(val*))(var148->class->vft[COLOR_model__MProperty__name]))(var148) /* name on <var148:MProperty(MAttribute)>*/;
-((void (*)(val*, val*))(var147->class->vft[COLOR_parser_nodes__Token__text_61d]))(var147, var149) /* text= on <var147:nullable Object(Token)>*/;
-if (varonce150) {
-var151 = varonce150;
+var148 = ((val* (*)(val*, val*))(var_proxy_body->class->vft[COLOR_parser_util__ANode__collect_tokens_by_text]))(var_proxy_body, var144) /* collect_tokens_by_text on <var_proxy_body:AExpr>*/;
+var149 = ((val* (*)(val*))(var148->class->vft[COLOR_abstract_collection__Collection__first]))(var148) /* first on <var148:Array[Token]>*/;
+var150 = ((val* (*)(val*))(var_is_cached_mpropdef->class->vft[COLOR_model__MPropDef__mproperty]))(var_is_cached_mpropdef) /* mproperty on <var_is_cached_mpropdef:MAttributeDef>*/;
+var151 = ((val* (*)(val*))(var150->class->vft[COLOR_model__MProperty__name]))(var150) /* name on <var150:MProperty(MAttribute)>*/;
+((void (*)(val*, val*))(var149->class->vft[COLOR_parser_nodes__Token__text_61d]))(var149, var151) /* text= on <var149:nullable Object(Token)>*/;
+if (varonce152) {
+var153 = varonce152;
 } else {
-var152 = "_cache";
-var153 = 6;
-var154 = string__NativeString__to_s_with_length(var152, var153);
-var151 = var154;
-varonce150 = var151;
+var154 = "_cache";
+var155 = 6;
+var156 = string__NativeString__to_s_with_length(var154, var155);
+var153 = var156;
+varonce152 = var153;
 }
-var155 = ((val* (*)(val*, val*))(var_proxy_body->class->vft[COLOR_parser_util__ANode__collect_tokens_by_text]))(var_proxy_body, var151) /* collect_tokens_by_text on <var_proxy_body:AExpr>*/;
-var156 = ((val* (*)(val*))(var155->class->vft[COLOR_abstract_collection__Collection__first]))(var155) /* first on <var155:Array[Token]>*/;
-var157 = ((val* (*)(val*))(var_cache_mpropdef->class->vft[COLOR_model__MPropDef__mproperty]))(var_cache_mpropdef) /* mproperty on <var_cache_mpropdef:MAttributeDef>*/;
-var158 = ((val* (*)(val*))(var157->class->vft[COLOR_model__MProperty__name]))(var157) /* name on <var157:MProperty(MAttribute)>*/;
-((void (*)(val*, val*))(var156->class->vft[COLOR_parser_nodes__Token__text_61d]))(var156, var158) /* text= on <var156:nullable Object(Token)>*/;
-if (varonce159) {
-var160 = varonce159;
+var157 = ((val* (*)(val*, val*))(var_proxy_body->class->vft[COLOR_parser_util__ANode__collect_tokens_by_text]))(var_proxy_body, var153) /* collect_tokens_by_text on <var_proxy_body:AExpr>*/;
+var158 = ((val* (*)(val*))(var157->class->vft[COLOR_abstract_collection__Collection__first]))(var157) /* first on <var157:Array[Token]>*/;
+var159 = ((val* (*)(val*))(var_cache_mpropdef->class->vft[COLOR_model__MPropDef__mproperty]))(var_cache_mpropdef) /* mproperty on <var_cache_mpropdef:MAttributeDef>*/;
+var160 = ((val* (*)(val*))(var159->class->vft[COLOR_model__MProperty__name]))(var159) /* name on <var159:MProperty(MAttribute)>*/;
+((void (*)(val*, val*))(var158->class->vft[COLOR_parser_nodes__Token__text_61d]))(var158, var160) /* text= on <var158:nullable Object(Token)>*/;
+if (varonce161) {
+var162 = varonce161;
 } else {
-var161 = "_cache_write";
-var162 = 12;
-var163 = string__NativeString__to_s_with_length(var161, var162);
-var160 = var163;
-varonce159 = var160;
+var163 = "_cache_write";
+var164 = 12;
+var165 = string__NativeString__to_s_with_length(var163, var164);
+var162 = var165;
+varonce161 = var162;
 }
-var164 = ((val* (*)(val*, val*))(var_proxy_body->class->vft[COLOR_parser_util__ANode__collect_tokens_by_text]))(var_proxy_body, var160) /* collect_tokens_by_text on <var_proxy_body:AExpr>*/;
-var165 = ((val* (*)(val*))(var164->class->vft[COLOR_abstract_collection__Collection__first]))(var164) /* first on <var164:Array[Token]>*/;
-var166 = ((val* (*)(val*))(var_cache_mpropdef->class->vft[COLOR_model__MPropDef__mproperty]))(var_cache_mpropdef) /* mproperty on <var_cache_mpropdef:MAttributeDef>*/;
-var167 = ((val* (*)(val*))(var166->class->vft[COLOR_model__MProperty__name]))(var166) /* name on <var166:MProperty(MAttribute)>*/;
-((void (*)(val*, val*))(var165->class->vft[COLOR_parser_nodes__Token__text_61d]))(var165, var167) /* text= on <var165:nullable Object(Token)>*/;
-if (varonce168) {
-var169 = varonce168;
+var166 = ((val* (*)(val*, val*))(var_proxy_body->class->vft[COLOR_parser_util__ANode__collect_tokens_by_text]))(var_proxy_body, var162) /* collect_tokens_by_text on <var_proxy_body:AExpr>*/;
+var167 = ((val* (*)(val*))(var166->class->vft[COLOR_abstract_collection__Collection__first]))(var166) /* first on <var166:Array[Token]>*/;
+var168 = ((val* (*)(val*))(var_cache_mpropdef->class->vft[COLOR_model__MPropDef__mproperty]))(var_cache_mpropdef) /* mproperty on <var_cache_mpropdef:MAttributeDef>*/;
+var169 = ((val* (*)(val*))(var168->class->vft[COLOR_model__MProperty__name]))(var168) /* name on <var168:MProperty(MAttribute)>*/;
+((void (*)(val*, val*))(var167->class->vft[COLOR_parser_nodes__Token__text_61d]))(var167, var169) /* text= on <var167:nullable Object(Token)>*/;
+if (varonce170) {
+var171 = varonce170;
 } else {
-var170 = "call_real";
-var171 = 9;
-var172 = string__NativeString__to_s_with_length(var170, var171);
-var169 = var172;
-varonce168 = var169;
+var172 = "call_real";
+var173 = 9;
+var174 = string__NativeString__to_s_with_length(var172, var173);
+var171 = var174;
+varonce170 = var171;
 }
-var173 = ((val* (*)(val*, val*))(var_proxy_body->class->vft[COLOR_parser_util__ANode__collect_tokens_by_text]))(var_proxy_body, var169) /* collect_tokens_by_text on <var_proxy_body:AExpr>*/;
-var174 = ((val* (*)(val*))(var173->class->vft[COLOR_abstract_collection__Collection__first]))(var173) /* first on <var173:Array[Token]>*/;
-var175 = ((val* (*)(val*))(var_real_mpropdef->class->vft[COLOR_model__MPropDef__mproperty]))(var_real_mpropdef) /* mproperty on <var_real_mpropdef:MMethodDef>*/;
-var176 = ((val* (*)(val*))(var175->class->vft[COLOR_model__MProperty__name]))(var175) /* name on <var175:MProperty(MMethod)>*/;
-((void (*)(val*, val*))(var174->class->vft[COLOR_parser_nodes__Token__text_61d]))(var174, var176) /* text= on <var174:nullable Object(Token)>*/;
-var177 = ((val* (*)(val*))(var_real_npropdef->class->vft[COLOR_parser_nodes__AConcreteMethPropdef__n_block]))(var_real_npropdef) /* n_block on <var_real_npropdef:AConcreteMethPropdef>*/;
-if (var177 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/cached.nit", 115);
+var175 = ((val* (*)(val*, val*))(var_proxy_body->class->vft[COLOR_parser_util__ANode__collect_tokens_by_text]))(var_proxy_body, var171) /* collect_tokens_by_text on <var_proxy_body:AExpr>*/;
+var176 = ((val* (*)(val*))(var175->class->vft[COLOR_abstract_collection__Collection__first]))(var175) /* first on <var175:Array[Token]>*/;
+var177 = ((val* (*)(val*))(var_real_mpropdef->class->vft[COLOR_model__MPropDef__mproperty]))(var_real_mpropdef) /* mproperty on <var_real_mpropdef:MMethodDef>*/;
+var178 = ((val* (*)(val*))(var177->class->vft[COLOR_model__MProperty__name]))(var177) /* name on <var177:MProperty(MMethod)>*/;
+((void (*)(val*, val*))(var176->class->vft[COLOR_parser_nodes__Token__text_61d]))(var176, var178) /* text= on <var176:nullable Object(Token)>*/;
+var179 = ((val* (*)(val*))(var_real_npropdef->class->vft[COLOR_parser_nodes__AConcreteMethPropdef__n_block]))(var_real_npropdef) /* n_block on <var_real_npropdef:AConcreteMethPropdef>*/;
+if (var179 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/cached.nit", 115);
 exit(1);
 } else {
-((void (*)(val*, val*))(var177->class->vft[COLOR_parser_nodes__ANode__replace_with]))(var177, var_real_body) /* replace_with on <var177:nullable AExpr>*/;
+((void (*)(val*, val*))(var179->class->vft[COLOR_parser_nodes__ANode__replace_with]))(var179, var_real_body) /* replace_with on <var179:nullable AExpr>*/;
 }
 RET_LABEL:;
 }
@@ -694,7 +710,8 @@ var2 = 1; /* is null */
 var2 = 0; /* arg is null but recv is not */
 }
 if (!var2) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "src/cached.nit", 128);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "src/cached.nit", 128);
 exit(1);
 }
 ((void (*)(val*, val*))(var_n->class->vft[COLOR_modelize_property__APropdef__mpropdef_61d]))(var_n, var_m) /* mpropdef= on <var_n:APropdef>*/;
@@ -704,7 +721,8 @@ var5 = ((val* (*)(val*))(var4->class->vft[COLOR_modelize_property__ModelBuilder_
 var6 = ((short int (*)(val*, val*))(var5->class->vft[COLOR_abstract_collection__MapRead__has_key]))(var5, var_m) /* has_key on <var5:HashMap[MPropDef, APropdef]>*/;
 var7 = !var6;
 if (!var7) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "src/cached.nit", 132);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "src/cached.nit", 132);
 exit(1);
 }
 var8 = ((val* (*)(val*))(self->class->vft[COLOR_phase__Phase__toolcontext]))(self) /* toolcontext on <self:CachedPhase>*/;
@@ -725,7 +743,8 @@ var17 = 0; /* <var_mclassdef:MClassDef> cannot be null */
 var17 = ((short int (*)(val*, val*))(var16->class->vft[COLOR_kernel__Object___61d_61d]))(var16, var_mclassdef) /* == on <var16:nullable MClassDef>*/;
 }
 if (!var17) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "src/cached.nit", 138);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "src/cached.nit", 138);
 exit(1);
 }
 var18 = ((val* (*)(val*))(var_nclassdef->class->vft[COLOR_parser_nodes__AClassdef__n_propdefs]))(var_nclassdef) /* n_propdefs on <var_nclassdef:AClassdef>*/;

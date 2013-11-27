@@ -450,7 +450,8 @@ CONTINUE_label: (void)0;
 ((void (*)(val*))(var5->class->vft[COLOR_abstract_collection__Iterator__next]))(var5) /* next on <var5:Iterator[nullable Object]>*/;
 }
 BREAK_label: (void)0;
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Aborted", "lib/standard/math.nit", 57);
+fprintf(stderr, "Runtime error: %s", "Aborted");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/math.nit", 57);
 exit(1);
 RET_LABEL:;
 return var;

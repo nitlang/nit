@@ -5,7 +5,8 @@ val* var /* : Location */;
 val* var1 /* : nullable Location */;
 var1 = self->attrs[COLOR_parser_nodes__ANode___location].val; /* _location on <self:ANode> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/parser/parser_nodes.nit", 27);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 27);
 exit(1);
 }
 var = var1;
@@ -175,7 +176,10 @@ RET_LABEL:;
 }
 /* method parser_nodes#ANode#replace_child for (self: ANode, ANode, nullable ANode) */
 void parser_nodes__ANode__replace_child(val* self, val* p0, val* p1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Deferred method called", "src/parser/parser_nodes.nit", 44);
+const char* var_class_name;
+var_class_name = self == NULL ? "null" : self->type->name;
+fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "replace_child", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 44);
 exit(1);
 RET_LABEL:;
 }
@@ -200,13 +204,15 @@ var2 = 0; /* is null */
 var2 = 1; /* arg is null and recv is not */
 }
 if (!var2) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "src/parser/parser_nodes.nit", 54);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 54);
 exit(1);
 }
 var3 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ANode__parent]))(self) /* parent on <self:ANode>*/;
 var4 = NULL;
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/parser/parser_nodes.nit", 55);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 55);
 exit(1);
 } else {
 ((void (*)(val*, val*, val*))(var3->class->vft[COLOR_parser_nodes__ANode__replace_child]))(var3, self, var4) /* replace_child on <var3:nullable ANode>*/;
@@ -237,12 +243,14 @@ var2 = 0; /* is null */
 var2 = 1; /* arg is null and recv is not */
 }
 if (!var2) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "src/parser/parser_nodes.nit", 65);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 65);
 exit(1);
 }
 var3 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ANode__parent]))(self) /* parent on <self:ANode>*/;
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/parser/parser_nodes.nit", 66);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 66);
 exit(1);
 } else {
 ((void (*)(val*, val*, val*))(var3->class->vft[COLOR_parser_nodes__ANode__replace_child]))(var3, self, var_node) /* replace_child on <var3:nullable ANode>*/;
@@ -258,7 +266,10 @@ RET_LABEL:;
 }
 /* method parser_nodes#ANode#visit_all for (self: ANode, Visitor) */
 void parser_nodes__ANode__visit_all(val* self, val* p0) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Deferred method called", "src/parser/parser_nodes.nit", 70);
+const char* var_class_name;
+var_class_name = self == NULL ? "null" : self->type->name;
+fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "visit_all", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 70);
 exit(1);
 RET_LABEL:;
 }
@@ -273,7 +284,8 @@ val* var /* : ANode */;
 val* var1 /* : ANode */;
 var1 = self->attrs[COLOR_parser_nodes__ANodes___64dparent].val; /* @parent on <self:ANodes[ANode]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @parent", "src/parser/parser_nodes.nit", 79);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @parent");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 79);
 exit(1);
 }
 var = var1;
@@ -305,7 +317,8 @@ val* var /* : Array[ANode] */;
 val* var1 /* : Array[ANode] */;
 var1 = self->attrs[COLOR_parser_nodes__ANodes___64ditems].val; /* @items on <self:ANodes[ANode]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @items", "src/parser/parser_nodes.nit", 80);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @items");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 80);
 exit(1);
 }
 var = var1;
@@ -327,6 +340,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 /* Covariant cast for argument 0 (items) <p0:Array[ANode]> isa Array[ANodes#0] */
 /* <p0:Array[ANode]> isa Array[ANodes#0] */
 type_struct = self->type->resolution_table->types[COLOR_array__Arrayparser_nodes__ANodes_FT0];
@@ -338,7 +352,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/parser/parser_nodes.nit", 80);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Array[ANodes#0]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 80);
 exit(1);
 }
 self->attrs[COLOR_parser_nodes__ANodes___64ditems].val = p0; /* @items on <self:ANodes[ANode]> */
@@ -418,6 +434,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_e /* var e: ANode */;
 val* var1 /* : Array[ANode] */;
 /* Covariant cast for argument 0 (e) <p0:ANode> isa Sequence#0 */
@@ -431,7 +448,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/parser/parser_nodes.nit", 84);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Sequence#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 84);
 exit(1);
 }
 var_e = p0;
@@ -475,6 +494,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_e /* var e: ANode */;
 val* var1 /* : Array[ANode] */;
 /* Covariant cast for argument 0 (e) <p0:ANode> isa Sequence#0 */
@@ -488,7 +508,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/parser/parser_nodes.nit", 95);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Sequence#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 95);
 exit(1);
 }
 var_e = p0;
@@ -533,6 +555,7 @@ short int var1 /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_e /* var e: ANode */;
 val* var2 /* : Array[ANode] */;
 short int var3 /* : Bool */;
@@ -547,7 +570,9 @@ var1 = 0;
 var1 = p0->type->type_table[cltype] == idtype;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/parser/parser_nodes.nit", 106);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Collection#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 106);
 exit(1);
 }
 var_e = p0;
@@ -596,6 +621,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 long var_index /* var index: Int */;
 val* var_e /* var e: ANode */;
 val* var1 /* : nullable Object */;
@@ -611,7 +637,9 @@ var = 0;
 var = p1->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/parser/parser_nodes.nit", 114);
+var_class_name = p1 == NULL ? "null" : p1->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Sequence#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 114);
 exit(1);
 }
 var_index = p0;
@@ -653,6 +681,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_e /* var e: ANode */;
 val* var1 /* : ANode */;
 /* Covariant cast for argument 0 (e) <p0:ANode> isa ANodes#0 */
@@ -666,7 +695,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/parser/parser_nodes.nit", 125);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "ANodes#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 125);
 exit(1);
 }
 var_e = p0;
@@ -685,6 +716,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_e /* var e: ANode */;
 val* var1 /* : nullable ANode */;
 val* var2 /* : ANode */;
@@ -701,7 +733,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/parser/parser_nodes.nit", 130);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "ANodes#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 130);
 exit(1);
 }
 var_e = p0;
@@ -713,7 +747,8 @@ var3 = 0; /* <var2:ANode> cannot be null */
 var3 = ((short int (*)(val*, val*))(var1->class->vft[COLOR_kernel__Object___61d_61d]))(var1, var2) /* == on <var1:nullable ANode>*/;
 }
 if (!var3) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "src/parser/parser_nodes.nit", 132);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 132);
 exit(1);
 }
 var4 = NULL;
@@ -738,7 +773,10 @@ RET_LABEL:;
 /* method parser_nodes#Token#text for (self: Token): String */
 val* parser_nodes__Token__text(val* self) {
 val* var /* : String */;
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Deferred method called", "src/parser/parser_nodes.nit", 142);
+const char* var_class_name;
+var_class_name = self == NULL ? "null" : self->type->name;
+fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "text", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 142);
 exit(1);
 RET_LABEL:;
 return var;
@@ -754,7 +792,10 @@ return var;
 }
 /* method parser_nodes#Token#text= for (self: Token, String) */
 void parser_nodes__Token__text_61d(val* self, val* p0) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Deferred method called", "src/parser/parser_nodes.nit", 144);
+const char* var_class_name;
+var_class_name = self == NULL ? "null" : self->type->name;
+fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "text=", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 144);
 exit(1);
 RET_LABEL:;
 }
@@ -974,7 +1015,8 @@ var = 0;
 var = var_n->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "src/parser/parser_nodes.nit", 175);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 175);
 exit(1);
 }
 var1 = var_n->attrs[COLOR_parser_nodes__ANode___location].val; /* _location on <var_n:ANode(Prod)> */
@@ -1008,7 +1050,10 @@ RET_LABEL:;
 }
 /* method parser_nodes#Visitor#visit for (self: Visitor, ANode) */
 void parser_nodes__Visitor__visit(val* self, val* p0) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Deferred method called", "src/parser/parser_nodes.nit", 182);
+const char* var_class_name;
+var_class_name = self == NULL ? "null" : self->type->name;
+fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "visit", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 182);
 exit(1);
 RET_LABEL:;
 }
@@ -2686,7 +2731,8 @@ val* var /* : ANodes[AImport] */;
 val* var1 /* : ANodes[AImport] */;
 var1 = self->attrs[COLOR_parser_nodes__AModule___n_imports].val; /* _n_imports on <self:AModule> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_imports", "src/parser/parser_nodes.nit", 580);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_imports");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 580);
 exit(1);
 }
 var = var1;
@@ -2708,7 +2754,8 @@ val* var /* : ANodes[AExternCodeBlock] */;
 val* var1 /* : ANodes[AExternCodeBlock] */;
 var1 = self->attrs[COLOR_parser_nodes__AModule___n_extern_code_blocks].val; /* _n_extern_code_blocks on <self:AModule> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_extern_code_blocks", "src/parser/parser_nodes.nit", 581);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_extern_code_blocks");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 581);
 exit(1);
 }
 var = var1;
@@ -2730,7 +2777,8 @@ val* var /* : ANodes[AClassdef] */;
 val* var1 /* : ANodes[AClassdef] */;
 var1 = self->attrs[COLOR_parser_nodes__AModule___n_classdefs].val; /* _n_classdefs on <self:AModule> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_classdefs", "src/parser/parser_nodes.nit", 582);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_classdefs");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 582);
 exit(1);
 }
 var = var1;
@@ -2790,7 +2838,8 @@ val* var /* : TKwmodule */;
 val* var1 /* : TKwmodule */;
 var1 = self->attrs[COLOR_parser_nodes__AModuledecl___n_kwmodule].val; /* _n_kwmodule on <self:AModuledecl> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwmodule", "src/parser/parser_nodes.nit", 589);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwmodule");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 589);
 exit(1);
 }
 var = var1;
@@ -2822,7 +2871,8 @@ val* var /* : AModuleName */;
 val* var1 /* : AModuleName */;
 var1 = self->attrs[COLOR_parser_nodes__AModuledecl___n_name].val; /* _n_name on <self:AModuledecl> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_name", "src/parser/parser_nodes.nit", 590);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_name");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 590);
 exit(1);
 }
 var = var1;
@@ -2874,7 +2924,8 @@ val* var /* : AVisibility */;
 val* var1 /* : AVisibility */;
 var1 = self->attrs[COLOR_parser_nodes__AStdImport___n_visibility].val; /* _n_visibility on <self:AStdImport> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_visibility", "src/parser/parser_nodes.nit", 601);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_visibility");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 601);
 exit(1);
 }
 var = var1;
@@ -2906,7 +2957,8 @@ val* var /* : TKwimport */;
 val* var1 /* : TKwimport */;
 var1 = self->attrs[COLOR_parser_nodes__AStdImport___n_kwimport].val; /* _n_kwimport on <self:AStdImport> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwimport", "src/parser/parser_nodes.nit", 602);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwimport");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 602);
 exit(1);
 }
 var = var1;
@@ -2938,7 +2990,8 @@ val* var /* : AModuleName */;
 val* var1 /* : AModuleName */;
 var1 = self->attrs[COLOR_parser_nodes__AStdImport___n_name].val; /* _n_name on <self:AStdImport> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_name", "src/parser/parser_nodes.nit", 603);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_name");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 603);
 exit(1);
 }
 var = var1;
@@ -2980,7 +3033,8 @@ val* var /* : AVisibility */;
 val* var1 /* : AVisibility */;
 var1 = self->attrs[COLOR_parser_nodes__ANoImport___n_visibility].val; /* _n_visibility on <self:ANoImport> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_visibility", "src/parser/parser_nodes.nit", 609);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_visibility");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 609);
 exit(1);
 }
 var = var1;
@@ -3012,7 +3066,8 @@ val* var /* : TKwimport */;
 val* var1 /* : TKwimport */;
 var1 = self->attrs[COLOR_parser_nodes__ANoImport___n_kwimport].val; /* _n_kwimport on <self:ANoImport> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwimport", "src/parser/parser_nodes.nit", 610);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwimport");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 610);
 exit(1);
 }
 var = var1;
@@ -3044,7 +3099,8 @@ val* var /* : TKwend */;
 val* var1 /* : TKwend */;
 var1 = self->attrs[COLOR_parser_nodes__ANoImport___n_kwend].val; /* _n_kwend on <self:ANoImport> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwend", "src/parser/parser_nodes.nit", 611);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwend");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 611);
 exit(1);
 }
 var = var1;
@@ -3106,7 +3162,8 @@ val* var /* : TKwprivate */;
 val* var1 /* : TKwprivate */;
 var1 = self->attrs[COLOR_parser_nodes__APrivateVisibility___n_kwprivate].val; /* _n_kwprivate on <self:APrivateVisibility> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwprivate", "src/parser/parser_nodes.nit", 628);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwprivate");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 628);
 exit(1);
 }
 var = var1;
@@ -3148,7 +3205,8 @@ val* var /* : TKwprotected */;
 val* var1 /* : TKwprotected */;
 var1 = self->attrs[COLOR_parser_nodes__AProtectedVisibility___n_kwprotected].val; /* _n_kwprotected on <self:AProtectedVisibility> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwprotected", "src/parser/parser_nodes.nit", 632);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwprotected");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 632);
 exit(1);
 }
 var = var1;
@@ -3190,7 +3248,8 @@ val* var /* : TKwintrude */;
 val* var1 /* : TKwintrude */;
 var1 = self->attrs[COLOR_parser_nodes__AIntrudeVisibility___n_kwintrude].val; /* _n_kwintrude on <self:AIntrudeVisibility> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwintrude", "src/parser/parser_nodes.nit", 636);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwintrude");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 636);
 exit(1);
 }
 var = var1;
@@ -3232,7 +3291,8 @@ val* var /* : ANodes[APropdef] */;
 val* var1 /* : ANodes[APropdef] */;
 var1 = self->attrs[COLOR_parser_nodes__AClassdef___n_propdefs].val; /* _n_propdefs on <self:AClassdef> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_propdefs", "src/parser/parser_nodes.nit", 643);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_propdefs");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 643);
 exit(1);
 }
 var = var1;
@@ -3320,7 +3380,8 @@ val* var /* : AVisibility */;
 val* var1 /* : AVisibility */;
 var1 = self->attrs[COLOR_parser_nodes__AStdClassdef___n_visibility].val; /* _n_visibility on <self:AStdClassdef> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_visibility", "src/parser/parser_nodes.nit", 651);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_visibility");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 651);
 exit(1);
 }
 var = var1;
@@ -3352,7 +3413,8 @@ val* var /* : AClasskind */;
 val* var1 /* : AClasskind */;
 var1 = self->attrs[COLOR_parser_nodes__AStdClassdef___n_classkind].val; /* _n_classkind on <self:AStdClassdef> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_classkind", "src/parser/parser_nodes.nit", 652);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_classkind");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 652);
 exit(1);
 }
 var = var1;
@@ -3412,7 +3474,8 @@ val* var /* : ANodes[AFormaldef] */;
 val* var1 /* : ANodes[AFormaldef] */;
 var1 = self->attrs[COLOR_parser_nodes__AStdClassdef___n_formaldefs].val; /* _n_formaldefs on <self:AStdClassdef> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_formaldefs", "src/parser/parser_nodes.nit", 654);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_formaldefs");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 654);
 exit(1);
 }
 var = var1;
@@ -3462,7 +3525,8 @@ val* var /* : ANodes[ASuperclass] */;
 val* var1 /* : ANodes[ASuperclass] */;
 var1 = self->attrs[COLOR_parser_nodes__AStdClassdef___n_superclasses].val; /* _n_superclasses on <self:AStdClassdef> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_superclasses", "src/parser/parser_nodes.nit", 656);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_superclasses");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 656);
 exit(1);
 }
 var = var1;
@@ -3484,7 +3548,8 @@ val* var /* : TKwend */;
 val* var1 /* : TKwend */;
 var1 = self->attrs[COLOR_parser_nodes__AStdClassdef___n_kwend].val; /* _n_kwend on <self:AStdClassdef> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwend", "src/parser/parser_nodes.nit", 657);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwend");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 657);
 exit(1);
 }
 var = var1;
@@ -3517,7 +3582,8 @@ val* var1 /* : nullable TClassid */;
 val* var2 /* : Location */;
 var1 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AStdClassdef__n_id]))(self) /* n_id on <self:AStdClassdef>*/;
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/parser/parser_nodes.nit", 658);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 658);
 exit(1);
 } else {
 var2 = ((val* (*)(val*))(var1->class->vft[COLOR_parser_nodes__ANode__location]))(var1) /* location on <var1:nullable TClassid>*/;
@@ -3582,7 +3648,8 @@ val* var /* : TKwclass */;
 val* var1 /* : TKwclass */;
 var1 = self->attrs[COLOR_parser_nodes__AConcreteClasskind___n_kwclass].val; /* _n_kwclass on <self:AConcreteClasskind> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwclass", "src/parser/parser_nodes.nit", 677);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwclass");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 677);
 exit(1);
 }
 var = var1;
@@ -3624,7 +3691,8 @@ val* var /* : TKwabstract */;
 val* var1 /* : TKwabstract */;
 var1 = self->attrs[COLOR_parser_nodes__AAbstractClasskind___n_kwabstract].val; /* _n_kwabstract on <self:AAbstractClasskind> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwabstract", "src/parser/parser_nodes.nit", 681);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwabstract");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 681);
 exit(1);
 }
 var = var1;
@@ -3656,7 +3724,8 @@ val* var /* : TKwclass */;
 val* var1 /* : TKwclass */;
 var1 = self->attrs[COLOR_parser_nodes__AAbstractClasskind___n_kwclass].val; /* _n_kwclass on <self:AAbstractClasskind> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwclass", "src/parser/parser_nodes.nit", 682);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwclass");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 682);
 exit(1);
 }
 var = var1;
@@ -3698,7 +3767,8 @@ val* var /* : TKwinterface */;
 val* var1 /* : TKwinterface */;
 var1 = self->attrs[COLOR_parser_nodes__AInterfaceClasskind___n_kwinterface].val; /* _n_kwinterface on <self:AInterfaceClasskind> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwinterface", "src/parser/parser_nodes.nit", 686);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwinterface");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 686);
 exit(1);
 }
 var = var1;
@@ -3740,7 +3810,8 @@ val* var /* : TKwenum */;
 val* var1 /* : TKwenum */;
 var1 = self->attrs[COLOR_parser_nodes__AEnumClasskind___n_kwenum].val; /* _n_kwenum on <self:AEnumClasskind> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwenum", "src/parser/parser_nodes.nit", 690);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwenum");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 690);
 exit(1);
 }
 var = var1;
@@ -3782,7 +3853,8 @@ val* var /* : TKwextern */;
 val* var1 /* : TKwextern */;
 var1 = self->attrs[COLOR_parser_nodes__AExternClasskind___n_kwextern].val; /* _n_kwextern on <self:AExternClasskind> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwextern", "src/parser/parser_nodes.nit", 694);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwextern");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 694);
 exit(1);
 }
 var = var1;
@@ -3852,7 +3924,8 @@ val* var /* : TClassid */;
 val* var1 /* : TClassid */;
 var1 = self->attrs[COLOR_parser_nodes__AFormaldef___n_id].val; /* _n_id on <self:AFormaldef> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_id", "src/parser/parser_nodes.nit", 701);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_id");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 701);
 exit(1);
 }
 var = var1;
@@ -3922,7 +3995,8 @@ val* var /* : TKwsuper */;
 val* var1 /* : TKwsuper */;
 var1 = self->attrs[COLOR_parser_nodes__ASuperclass___n_kwsuper].val; /* _n_kwsuper on <self:ASuperclass> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwsuper", "src/parser/parser_nodes.nit", 709);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwsuper");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 709);
 exit(1);
 }
 var = var1;
@@ -3954,7 +4028,8 @@ val* var /* : AType */;
 val* var1 /* : AType */;
 var1 = self->attrs[COLOR_parser_nodes__ASuperclass___n_type].val; /* _n_type on <self:ASuperclass> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_type", "src/parser/parser_nodes.nit", 710);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_type");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 710);
 exit(1);
 }
 var = var1;
@@ -4062,7 +4137,8 @@ val* var /* : AVisibility */;
 val* var1 /* : AVisibility */;
 var1 = self->attrs[COLOR_parser_nodes__AAttrPropdef___n_visibility].val; /* _n_visibility on <self:AAttrPropdef> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_visibility", "src/parser/parser_nodes.nit", 724);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_visibility");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 724);
 exit(1);
 }
 var = var1;
@@ -4094,7 +4170,8 @@ val* var /* : TKwvar */;
 val* var1 /* : TKwvar */;
 var1 = self->attrs[COLOR_parser_nodes__AAttrPropdef___n_kwvar].val; /* _n_kwvar on <self:AAttrPropdef> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwvar", "src/parser/parser_nodes.nit", 725);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwvar");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 725);
 exit(1);
 }
 var = var1;
@@ -4308,7 +4385,8 @@ var3 = 1; /* arg is null and recv is not */
 if (var3){
 var4 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AAttrPropdef__n_id]))(self) /* n_id on <self:AAttrPropdef>*/;
 if (var4 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/parser/parser_nodes.nit", 741);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 741);
 exit(1);
 } else {
 var5 = ((val* (*)(val*))(var4->class->vft[COLOR_parser_nodes__ANode__location]))(var4) /* location on <var4:nullable TAttrid>*/;
@@ -4318,7 +4396,8 @@ goto RET_LABEL;
 } else {
 var6 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AAttrPropdef__n_id2]))(self) /* n_id2 on <self:AAttrPropdef>*/;
 if (var6 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/parser/parser_nodes.nit", 741);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 741);
 exit(1);
 } else {
 var7 = ((val* (*)(val*))(var6->class->vft[COLOR_parser_nodes__ANode__location]))(var6) /* location on <var6:nullable TId>*/;
@@ -4479,7 +4558,8 @@ var3 = 1; /* arg is null and recv is not */
 if (var3){
 var4 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AMethPropdef__n_methid]))(self) /* n_methid on <self:AMethPropdef>*/;
 if (var4 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/parser/parser_nodes.nit", 755);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 755);
 exit(1);
 } else {
 var5 = ((val* (*)(val*))(var4->class->vft[COLOR_parser_nodes__ANode__location]))(var4) /* location on <var4:nullable AMethid>*/;
@@ -4519,7 +4599,8 @@ val* var /* : TKwmeth */;
 val* var1 /* : TKwmeth */;
 var1 = self->attrs[COLOR_parser_nodes__ADeferredMethPropdef___n_kwmeth].val; /* _n_kwmeth on <self:ADeferredMethPropdef> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwmeth", "src/parser/parser_nodes.nit", 766);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwmeth");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 766);
 exit(1);
 }
 var = var1;
@@ -4561,7 +4642,8 @@ val* var /* : TKwmeth */;
 val* var1 /* : TKwmeth */;
 var1 = self->attrs[COLOR_parser_nodes__AInternMethPropdef___n_kwmeth].val; /* _n_kwmeth on <self:AInternMethPropdef> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwmeth", "src/parser/parser_nodes.nit", 772);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwmeth");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 772);
 exit(1);
 }
 var = var1;
@@ -4697,7 +4779,8 @@ val* var /* : TKwmeth */;
 val* var1 /* : TKwmeth */;
 var1 = self->attrs[COLOR_parser_nodes__AExternMethPropdef___n_kwmeth].val; /* _n_kwmeth on <self:AExternMethPropdef> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwmeth", "src/parser/parser_nodes.nit", 786);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwmeth");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 786);
 exit(1);
 }
 var = var1;
@@ -4815,7 +4898,8 @@ val* var /* : TKwinit */;
 val* var1 /* : TKwinit */;
 var1 = self->attrs[COLOR_parser_nodes__AConcreteInitPropdef___n_kwinit].val; /* _n_kwinit on <self:AConcreteInitPropdef> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwinit", "src/parser/parser_nodes.nit", 805);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwinit");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 805);
 exit(1);
 }
 var = var1;
@@ -4879,7 +4963,8 @@ val* var /* : TKwnew */;
 val* var1 /* : TKwnew */;
 var1 = self->attrs[COLOR_parser_nodes__AExternInitPropdef___n_kwnew].val; /* _n_kwnew on <self:AExternInitPropdef> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwnew", "src/parser/parser_nodes.nit", 813);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwnew");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 813);
 exit(1);
 }
 var = var1;
@@ -4932,7 +5017,8 @@ val* var /* : TKwimport */;
 val* var1 /* : TKwimport */;
 var1 = self->attrs[COLOR_parser_nodes__AExternCalls___n_kwimport].val; /* _n_kwimport on <self:AExternCalls> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwimport", "src/parser/parser_nodes.nit", 824);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwimport");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 824);
 exit(1);
 }
 var = var1;
@@ -4964,7 +5050,8 @@ val* var /* : ANodes[AExternCall] */;
 val* var1 /* : ANodes[AExternCall] */;
 var1 = self->attrs[COLOR_parser_nodes__AExternCalls___n_extern_calls].val; /* _n_extern_calls on <self:AExternCalls> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_extern_calls", "src/parser/parser_nodes.nit", 825);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_extern_calls");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 825);
 exit(1);
 }
 var = var1;
@@ -5016,7 +5103,8 @@ val* var /* : AMethid */;
 val* var1 /* : AMethid */;
 var1 = self->attrs[COLOR_parser_nodes__ALocalPropExternCall___n_methid].val; /* _n_methid on <self:ALocalPropExternCall> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_methid", "src/parser/parser_nodes.nit", 835);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_methid");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 835);
 exit(1);
 }
 var = var1;
@@ -5058,7 +5146,8 @@ val* var /* : TClassid */;
 val* var1 /* : TClassid */;
 var1 = self->attrs[COLOR_parser_nodes__AFullPropExternCall___n_classid].val; /* _n_classid on <self:AFullPropExternCall> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_classid", "src/parser/parser_nodes.nit", 839);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_classid");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 839);
 exit(1);
 }
 var = var1;
@@ -5118,7 +5207,8 @@ val* var /* : AMethid */;
 val* var1 /* : AMethid */;
 var1 = self->attrs[COLOR_parser_nodes__AFullPropExternCall___n_methid].val; /* _n_methid on <self:AFullPropExternCall> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_methid", "src/parser/parser_nodes.nit", 841);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_methid");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 841);
 exit(1);
 }
 var = var1;
@@ -5160,7 +5250,8 @@ val* var /* : TClassid */;
 val* var1 /* : TClassid */;
 var1 = self->attrs[COLOR_parser_nodes__AInitPropExternCall___n_classid].val; /* _n_classid on <self:AInitPropExternCall> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_classid", "src/parser/parser_nodes.nit", 845);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_classid");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 845);
 exit(1);
 }
 var = var1;
@@ -5202,7 +5293,8 @@ val* var /* : TKwsuper */;
 val* var1 /* : TKwsuper */;
 var1 = self->attrs[COLOR_parser_nodes__ASuperExternCall___n_kwsuper].val; /* _n_kwsuper on <self:ASuperExternCall> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwsuper", "src/parser/parser_nodes.nit", 849);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwsuper");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 849);
 exit(1);
 }
 var = var1;
@@ -5254,7 +5346,8 @@ val* var /* : AType */;
 val* var1 /* : AType */;
 var1 = self->attrs[COLOR_parser_nodes__ACastAsExternCall___n_from_type].val; /* _n_from_type on <self:ACastAsExternCall> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_from_type", "src/parser/parser_nodes.nit", 856);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_from_type");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 856);
 exit(1);
 }
 var = var1;
@@ -5286,7 +5379,8 @@ val* var /* : TKwas */;
 val* var1 /* : TKwas */;
 var1 = self->attrs[COLOR_parser_nodes__ACastAsExternCall___n_kwas].val; /* _n_kwas on <self:ACastAsExternCall> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwas", "src/parser/parser_nodes.nit", 857);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwas");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 857);
 exit(1);
 }
 var = var1;
@@ -5318,7 +5412,8 @@ val* var /* : AType */;
 val* var1 /* : AType */;
 var1 = self->attrs[COLOR_parser_nodes__ACastAsExternCall___n_to_type].val; /* _n_to_type on <self:ACastAsExternCall> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_to_type", "src/parser/parser_nodes.nit", 858);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_to_type");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 858);
 exit(1);
 }
 var = var1;
@@ -5360,7 +5455,8 @@ val* var /* : AType */;
 val* var1 /* : AType */;
 var1 = self->attrs[COLOR_parser_nodes__AAsNullableExternCall___n_type].val; /* _n_type on <self:AAsNullableExternCall> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_type", "src/parser/parser_nodes.nit", 862);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_type");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 862);
 exit(1);
 }
 var = var1;
@@ -5392,7 +5488,8 @@ val* var /* : TKwas */;
 val* var1 /* : TKwas */;
 var1 = self->attrs[COLOR_parser_nodes__AAsNullableExternCall___n_kwas].val; /* _n_kwas on <self:AAsNullableExternCall> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwas", "src/parser/parser_nodes.nit", 863);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwas");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 863);
 exit(1);
 }
 var = var1;
@@ -5424,7 +5521,8 @@ val* var /* : TKwnullable */;
 val* var1 /* : TKwnullable */;
 var1 = self->attrs[COLOR_parser_nodes__AAsNullableExternCall___n_kwnullable].val; /* _n_kwnullable on <self:AAsNullableExternCall> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwnullable", "src/parser/parser_nodes.nit", 864);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwnullable");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 864);
 exit(1);
 }
 var = var1;
@@ -5466,7 +5564,8 @@ val* var /* : AType */;
 val* var1 /* : AType */;
 var1 = self->attrs[COLOR_parser_nodes__AAsNotNullableExternCall___n_type].val; /* _n_type on <self:AAsNotNullableExternCall> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_type", "src/parser/parser_nodes.nit", 868);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_type");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 868);
 exit(1);
 }
 var = var1;
@@ -5498,7 +5597,8 @@ val* var /* : TKwas */;
 val* var1 /* : TKwas */;
 var1 = self->attrs[COLOR_parser_nodes__AAsNotNullableExternCall___n_kwas].val; /* _n_kwas on <self:AAsNotNullableExternCall> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwas", "src/parser/parser_nodes.nit", 869);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwas");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 869);
 exit(1);
 }
 var = var1;
@@ -5530,7 +5630,8 @@ val* var /* : TKwnot */;
 val* var1 /* : TKwnot */;
 var1 = self->attrs[COLOR_parser_nodes__AAsNotNullableExternCall___n_kwnot].val; /* _n_kwnot on <self:AAsNotNullableExternCall> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwnot", "src/parser/parser_nodes.nit", 870);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwnot");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 870);
 exit(1);
 }
 var = var1;
@@ -5562,7 +5663,8 @@ val* var /* : TKwnullable */;
 val* var1 /* : TKwnullable */;
 var1 = self->attrs[COLOR_parser_nodes__AAsNotNullableExternCall___n_kwnullable].val; /* _n_kwnullable on <self:AAsNotNullableExternCall> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwnullable", "src/parser/parser_nodes.nit", 871);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwnullable");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 871);
 exit(1);
 }
 var = var1;
@@ -5632,7 +5734,8 @@ val* var /* : AVisibility */;
 val* var1 /* : AVisibility */;
 var1 = self->attrs[COLOR_parser_nodes__ATypePropdef___n_visibility].val; /* _n_visibility on <self:ATypePropdef> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_visibility", "src/parser/parser_nodes.nit", 878);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_visibility");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 878);
 exit(1);
 }
 var = var1;
@@ -5664,7 +5767,8 @@ val* var /* : TKwtype */;
 val* var1 /* : TKwtype */;
 var1 = self->attrs[COLOR_parser_nodes__ATypePropdef___n_kwtype].val; /* _n_kwtype on <self:ATypePropdef> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwtype", "src/parser/parser_nodes.nit", 879);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwtype");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 879);
 exit(1);
 }
 var = var1;
@@ -5696,7 +5800,8 @@ val* var /* : TClassid */;
 val* var1 /* : TClassid */;
 var1 = self->attrs[COLOR_parser_nodes__ATypePropdef___n_id].val; /* _n_id on <self:ATypePropdef> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_id", "src/parser/parser_nodes.nit", 880);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_id");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 880);
 exit(1);
 }
 var = var1;
@@ -5728,7 +5833,8 @@ val* var /* : AType */;
 val* var1 /* : AType */;
 var1 = self->attrs[COLOR_parser_nodes__ATypePropdef___n_type].val; /* _n_type on <self:ATypePropdef> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_type", "src/parser/parser_nodes.nit", 881);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_type");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 881);
 exit(1);
 }
 var = var1;
@@ -5836,7 +5942,8 @@ val* var /* : TKwreadable */;
 val* var1 /* : TKwreadable */;
 var1 = self->attrs[COLOR_parser_nodes__AReadAble___n_kwreadable].val; /* _n_kwreadable on <self:AReadAble> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwreadable", "src/parser/parser_nodes.nit", 894);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwreadable");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 894);
 exit(1);
 }
 var = var1;
@@ -5878,7 +5985,8 @@ val* var /* : TKwwritable */;
 val* var1 /* : TKwwritable */;
 var1 = self->attrs[COLOR_parser_nodes__AWriteAble___n_kwwritable].val; /* _n_kwwritable on <self:AWriteAble> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwwritable", "src/parser/parser_nodes.nit", 900);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwwritable");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 900);
 exit(1);
 }
 var = var1;
@@ -5930,7 +6038,8 @@ val* var /* : TId */;
 val* var1 /* : TId */;
 var1 = self->attrs[COLOR_parser_nodes__AIdMethid___n_id].val; /* _n_id on <self:AIdMethid> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_id", "src/parser/parser_nodes.nit", 910);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_id");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 910);
 exit(1);
 }
 var = var1;
@@ -5972,7 +6081,8 @@ val* var /* : TPlus */;
 val* var1 /* : TPlus */;
 var1 = self->attrs[COLOR_parser_nodes__APlusMethid___n_plus].val; /* _n_plus on <self:APlusMethid> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_plus", "src/parser/parser_nodes.nit", 914);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_plus");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 914);
 exit(1);
 }
 var = var1;
@@ -6014,7 +6124,8 @@ val* var /* : TMinus */;
 val* var1 /* : TMinus */;
 var1 = self->attrs[COLOR_parser_nodes__AMinusMethid___n_minus].val; /* _n_minus on <self:AMinusMethid> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_minus", "src/parser/parser_nodes.nit", 918);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_minus");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 918);
 exit(1);
 }
 var = var1;
@@ -6056,7 +6167,8 @@ val* var /* : TStar */;
 val* var1 /* : TStar */;
 var1 = self->attrs[COLOR_parser_nodes__AStarMethid___n_star].val; /* _n_star on <self:AStarMethid> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_star", "src/parser/parser_nodes.nit", 922);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_star");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 922);
 exit(1);
 }
 var = var1;
@@ -6098,7 +6210,8 @@ val* var /* : TSlash */;
 val* var1 /* : TSlash */;
 var1 = self->attrs[COLOR_parser_nodes__ASlashMethid___n_slash].val; /* _n_slash on <self:ASlashMethid> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_slash", "src/parser/parser_nodes.nit", 926);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_slash");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 926);
 exit(1);
 }
 var = var1;
@@ -6140,7 +6253,8 @@ val* var /* : TPercent */;
 val* var1 /* : TPercent */;
 var1 = self->attrs[COLOR_parser_nodes__APercentMethid___n_percent].val; /* _n_percent on <self:APercentMethid> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_percent", "src/parser/parser_nodes.nit", 930);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_percent");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 930);
 exit(1);
 }
 var = var1;
@@ -6182,7 +6296,8 @@ val* var /* : TEq */;
 val* var1 /* : TEq */;
 var1 = self->attrs[COLOR_parser_nodes__AEqMethid___n_eq].val; /* _n_eq on <self:AEqMethid> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_eq", "src/parser/parser_nodes.nit", 934);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_eq");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 934);
 exit(1);
 }
 var = var1;
@@ -6224,7 +6339,8 @@ val* var /* : TNe */;
 val* var1 /* : TNe */;
 var1 = self->attrs[COLOR_parser_nodes__ANeMethid___n_ne].val; /* _n_ne on <self:ANeMethid> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_ne", "src/parser/parser_nodes.nit", 938);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_ne");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 938);
 exit(1);
 }
 var = var1;
@@ -6266,7 +6382,8 @@ val* var /* : TLe */;
 val* var1 /* : TLe */;
 var1 = self->attrs[COLOR_parser_nodes__ALeMethid___n_le].val; /* _n_le on <self:ALeMethid> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_le", "src/parser/parser_nodes.nit", 942);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_le");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 942);
 exit(1);
 }
 var = var1;
@@ -6308,7 +6425,8 @@ val* var /* : TGe */;
 val* var1 /* : TGe */;
 var1 = self->attrs[COLOR_parser_nodes__AGeMethid___n_ge].val; /* _n_ge on <self:AGeMethid> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_ge", "src/parser/parser_nodes.nit", 946);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_ge");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 946);
 exit(1);
 }
 var = var1;
@@ -6350,7 +6468,8 @@ val* var /* : TLt */;
 val* var1 /* : TLt */;
 var1 = self->attrs[COLOR_parser_nodes__ALtMethid___n_lt].val; /* _n_lt on <self:ALtMethid> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_lt", "src/parser/parser_nodes.nit", 950);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_lt");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 950);
 exit(1);
 }
 var = var1;
@@ -6392,7 +6511,8 @@ val* var /* : TGt */;
 val* var1 /* : TGt */;
 var1 = self->attrs[COLOR_parser_nodes__AGtMethid___n_gt].val; /* _n_gt on <self:AGtMethid> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_gt", "src/parser/parser_nodes.nit", 954);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_gt");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 954);
 exit(1);
 }
 var = var1;
@@ -6434,7 +6554,8 @@ val* var /* : TLl */;
 val* var1 /* : TLl */;
 var1 = self->attrs[COLOR_parser_nodes__ALlMethid___n_ll].val; /* _n_ll on <self:ALlMethid> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_ll", "src/parser/parser_nodes.nit", 958);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_ll");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 958);
 exit(1);
 }
 var = var1;
@@ -6476,7 +6597,8 @@ val* var /* : TGg */;
 val* var1 /* : TGg */;
 var1 = self->attrs[COLOR_parser_nodes__AGgMethid___n_gg].val; /* _n_gg on <self:AGgMethid> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_gg", "src/parser/parser_nodes.nit", 962);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_gg");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 962);
 exit(1);
 }
 var = var1;
@@ -6518,7 +6640,8 @@ val* var /* : TObra */;
 val* var1 /* : TObra */;
 var1 = self->attrs[COLOR_parser_nodes__ABraMethid___n_obra].val; /* _n_obra on <self:ABraMethid> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_obra", "src/parser/parser_nodes.nit", 966);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_obra");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 966);
 exit(1);
 }
 var = var1;
@@ -6550,7 +6673,8 @@ val* var /* : TCbra */;
 val* var1 /* : TCbra */;
 var1 = self->attrs[COLOR_parser_nodes__ABraMethid___n_cbra].val; /* _n_cbra on <self:ABraMethid> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_cbra", "src/parser/parser_nodes.nit", 967);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_cbra");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 967);
 exit(1);
 }
 var = var1;
@@ -6592,7 +6716,8 @@ val* var /* : TStarship */;
 val* var1 /* : TStarship */;
 var1 = self->attrs[COLOR_parser_nodes__AStarshipMethid___n_starship].val; /* _n_starship on <self:AStarshipMethid> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_starship", "src/parser/parser_nodes.nit", 971);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_starship");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 971);
 exit(1);
 }
 var = var1;
@@ -6634,7 +6759,8 @@ val* var /* : TId */;
 val* var1 /* : TId */;
 var1 = self->attrs[COLOR_parser_nodes__AAssignMethid___n_id].val; /* _n_id on <self:AAssignMethid> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_id", "src/parser/parser_nodes.nit", 975);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_id");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 975);
 exit(1);
 }
 var = var1;
@@ -6666,7 +6792,8 @@ val* var /* : TAssign */;
 val* var1 /* : TAssign */;
 var1 = self->attrs[COLOR_parser_nodes__AAssignMethid___n_assign].val; /* _n_assign on <self:AAssignMethid> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_assign", "src/parser/parser_nodes.nit", 976);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_assign");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 976);
 exit(1);
 }
 var = var1;
@@ -6708,7 +6835,8 @@ val* var /* : TObra */;
 val* var1 /* : TObra */;
 var1 = self->attrs[COLOR_parser_nodes__ABraassignMethid___n_obra].val; /* _n_obra on <self:ABraassignMethid> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_obra", "src/parser/parser_nodes.nit", 980);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_obra");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 980);
 exit(1);
 }
 var = var1;
@@ -6740,7 +6868,8 @@ val* var /* : TCbra */;
 val* var1 /* : TCbra */;
 var1 = self->attrs[COLOR_parser_nodes__ABraassignMethid___n_cbra].val; /* _n_cbra on <self:ABraassignMethid> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_cbra", "src/parser/parser_nodes.nit", 981);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_cbra");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 981);
 exit(1);
 }
 var = var1;
@@ -6772,7 +6901,8 @@ val* var /* : TAssign */;
 val* var1 /* : TAssign */;
 var1 = self->attrs[COLOR_parser_nodes__ABraassignMethid___n_assign].val; /* _n_assign on <self:ABraassignMethid> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_assign", "src/parser/parser_nodes.nit", 982);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_assign");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 982);
 exit(1);
 }
 var = var1;
@@ -6842,7 +6972,8 @@ val* var /* : ANodes[AParam] */;
 val* var1 /* : ANodes[AParam] */;
 var1 = self->attrs[COLOR_parser_nodes__ASignature___n_params].val; /* _n_params on <self:ASignature> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_params", "src/parser/parser_nodes.nit", 989);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_params");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 989);
 exit(1);
 }
 var = var1;
@@ -6914,28 +7045,6 @@ void VIRTUAL_parser_nodes__ASignature__n_type_61d(val* self, val* p0) {
 parser_nodes__ASignature__n_type_61d(self, p0);
 RET_LABEL:;
 }
-/* method parser_nodes#ASignature#n_closure_decls for (self: ASignature): ANodes[AClosureDecl] */
-val* parser_nodes__ASignature__n_closure_decls(val* self) {
-val* var /* : ANodes[AClosureDecl] */;
-val* var1 /* : ANodes[AClosureDecl] */;
-var1 = self->attrs[COLOR_parser_nodes__ASignature___n_closure_decls].val; /* _n_closure_decls on <self:ASignature> */
-if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_closure_decls", "src/parser/parser_nodes.nit", 992);
-exit(1);
-}
-var = var1;
-RET_LABEL:;
-return var;
-}
-/* method parser_nodes#ASignature#n_closure_decls for (self: Object): ANodes[AClosureDecl] */
-val* VIRTUAL_parser_nodes__ASignature__n_closure_decls(val* self) {
-val* var /* : ANodes[AClosureDecl] */;
-val* var1 /* : ANodes[AClosureDecl] */;
-var1 = parser_nodes__ASignature__n_closure_decls(self);
-var = var1;
-RET_LABEL:;
-return var;
-}
 /* method parser_nodes#ASignature#init for (self: ASignature) */
 void parser_nodes__ASignature__init(val* self) {
 ((void (*)(val*))(self->class->vft[COLOR_parser_nodes__Prod__init]))(self) /* init on <self:ASignature>*/;
@@ -6952,7 +7061,8 @@ val* var /* : TId */;
 val* var1 /* : TId */;
 var1 = self->attrs[COLOR_parser_nodes__AParam___n_id].val; /* _n_id on <self:AParam> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_id", "src/parser/parser_nodes.nit", 998);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_id");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 997);
 exit(1);
 }
 var = var1;
@@ -7044,168 +7154,6 @@ void VIRTUAL_parser_nodes__AParam__init(val* self) {
 parser_nodes__AParam__init(self);
 RET_LABEL:;
 }
-/* method parser_nodes#AClosureDecl#n_kwbreak for (self: AClosureDecl): nullable TKwbreak */
-val* parser_nodes__AClosureDecl__n_kwbreak(val* self) {
-val* var /* : nullable TKwbreak */;
-val* var1 /* : nullable TKwbreak */;
-var1 = self->attrs[COLOR_parser_nodes__AClosureDecl___n_kwbreak].val; /* _n_kwbreak on <self:AClosureDecl> */
-var = var1;
-RET_LABEL:;
-return var;
-}
-/* method parser_nodes#AClosureDecl#n_kwbreak for (self: Object): nullable TKwbreak */
-val* VIRTUAL_parser_nodes__AClosureDecl__n_kwbreak(val* self) {
-val* var /* : nullable TKwbreak */;
-val* var1 /* : nullable TKwbreak */;
-var1 = parser_nodes__AClosureDecl__n_kwbreak(self);
-var = var1;
-RET_LABEL:;
-return var;
-}
-/* method parser_nodes#AClosureDecl#n_kwbreak= for (self: AClosureDecl, nullable TKwbreak) */
-void parser_nodes__AClosureDecl__n_kwbreak_61d(val* self, val* p0) {
-self->attrs[COLOR_parser_nodes__AClosureDecl___n_kwbreak].val = p0; /* _n_kwbreak on <self:AClosureDecl> */
-RET_LABEL:;
-}
-/* method parser_nodes#AClosureDecl#n_kwbreak= for (self: Object, nullable TKwbreak) */
-void VIRTUAL_parser_nodes__AClosureDecl__n_kwbreak_61d(val* self, val* p0) {
-parser_nodes__AClosureDecl__n_kwbreak_61d(self, p0);
-RET_LABEL:;
-}
-/* method parser_nodes#AClosureDecl#n_bang for (self: AClosureDecl): TBang */
-val* parser_nodes__AClosureDecl__n_bang(val* self) {
-val* var /* : TBang */;
-val* var1 /* : TBang */;
-var1 = self->attrs[COLOR_parser_nodes__AClosureDecl___n_bang].val; /* _n_bang on <self:AClosureDecl> */
-if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_bang", "src/parser/parser_nodes.nit", 1006);
-exit(1);
-}
-var = var1;
-RET_LABEL:;
-return var;
-}
-/* method parser_nodes#AClosureDecl#n_bang for (self: Object): TBang */
-val* VIRTUAL_parser_nodes__AClosureDecl__n_bang(val* self) {
-val* var /* : TBang */;
-val* var1 /* : TBang */;
-var1 = parser_nodes__AClosureDecl__n_bang(self);
-var = var1;
-RET_LABEL:;
-return var;
-}
-/* method parser_nodes#AClosureDecl#n_bang= for (self: AClosureDecl, TBang) */
-void parser_nodes__AClosureDecl__n_bang_61d(val* self, val* p0) {
-self->attrs[COLOR_parser_nodes__AClosureDecl___n_bang].val = p0; /* _n_bang on <self:AClosureDecl> */
-RET_LABEL:;
-}
-/* method parser_nodes#AClosureDecl#n_bang= for (self: Object, TBang) */
-void VIRTUAL_parser_nodes__AClosureDecl__n_bang_61d(val* self, val* p0) {
-parser_nodes__AClosureDecl__n_bang_61d(self, p0);
-RET_LABEL:;
-}
-/* method parser_nodes#AClosureDecl#n_id for (self: AClosureDecl): TId */
-val* parser_nodes__AClosureDecl__n_id(val* self) {
-val* var /* : TId */;
-val* var1 /* : TId */;
-var1 = self->attrs[COLOR_parser_nodes__AClosureDecl___n_id].val; /* _n_id on <self:AClosureDecl> */
-if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_id", "src/parser/parser_nodes.nit", 1007);
-exit(1);
-}
-var = var1;
-RET_LABEL:;
-return var;
-}
-/* method parser_nodes#AClosureDecl#n_id for (self: Object): TId */
-val* VIRTUAL_parser_nodes__AClosureDecl__n_id(val* self) {
-val* var /* : TId */;
-val* var1 /* : TId */;
-var1 = parser_nodes__AClosureDecl__n_id(self);
-var = var1;
-RET_LABEL:;
-return var;
-}
-/* method parser_nodes#AClosureDecl#n_id= for (self: AClosureDecl, TId) */
-void parser_nodes__AClosureDecl__n_id_61d(val* self, val* p0) {
-self->attrs[COLOR_parser_nodes__AClosureDecl___n_id].val = p0; /* _n_id on <self:AClosureDecl> */
-RET_LABEL:;
-}
-/* method parser_nodes#AClosureDecl#n_id= for (self: Object, TId) */
-void VIRTUAL_parser_nodes__AClosureDecl__n_id_61d(val* self, val* p0) {
-parser_nodes__AClosureDecl__n_id_61d(self, p0);
-RET_LABEL:;
-}
-/* method parser_nodes#AClosureDecl#n_signature for (self: AClosureDecl): ASignature */
-val* parser_nodes__AClosureDecl__n_signature(val* self) {
-val* var /* : ASignature */;
-val* var1 /* : ASignature */;
-var1 = self->attrs[COLOR_parser_nodes__AClosureDecl___n_signature].val; /* _n_signature on <self:AClosureDecl> */
-if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_signature", "src/parser/parser_nodes.nit", 1008);
-exit(1);
-}
-var = var1;
-RET_LABEL:;
-return var;
-}
-/* method parser_nodes#AClosureDecl#n_signature for (self: Object): ASignature */
-val* VIRTUAL_parser_nodes__AClosureDecl__n_signature(val* self) {
-val* var /* : ASignature */;
-val* var1 /* : ASignature */;
-var1 = parser_nodes__AClosureDecl__n_signature(self);
-var = var1;
-RET_LABEL:;
-return var;
-}
-/* method parser_nodes#AClosureDecl#n_signature= for (self: AClosureDecl, ASignature) */
-void parser_nodes__AClosureDecl__n_signature_61d(val* self, val* p0) {
-self->attrs[COLOR_parser_nodes__AClosureDecl___n_signature].val = p0; /* _n_signature on <self:AClosureDecl> */
-RET_LABEL:;
-}
-/* method parser_nodes#AClosureDecl#n_signature= for (self: Object, ASignature) */
-void VIRTUAL_parser_nodes__AClosureDecl__n_signature_61d(val* self, val* p0) {
-parser_nodes__AClosureDecl__n_signature_61d(self, p0);
-RET_LABEL:;
-}
-/* method parser_nodes#AClosureDecl#n_expr for (self: AClosureDecl): nullable AExpr */
-val* parser_nodes__AClosureDecl__n_expr(val* self) {
-val* var /* : nullable AExpr */;
-val* var1 /* : nullable AExpr */;
-var1 = self->attrs[COLOR_parser_nodes__AClosureDecl___n_expr].val; /* _n_expr on <self:AClosureDecl> */
-var = var1;
-RET_LABEL:;
-return var;
-}
-/* method parser_nodes#AClosureDecl#n_expr for (self: Object): nullable AExpr */
-val* VIRTUAL_parser_nodes__AClosureDecl__n_expr(val* self) {
-val* var /* : nullable AExpr */;
-val* var1 /* : nullable AExpr */;
-var1 = parser_nodes__AClosureDecl__n_expr(self);
-var = var1;
-RET_LABEL:;
-return var;
-}
-/* method parser_nodes#AClosureDecl#n_expr= for (self: AClosureDecl, nullable AExpr) */
-void parser_nodes__AClosureDecl__n_expr_61d(val* self, val* p0) {
-self->attrs[COLOR_parser_nodes__AClosureDecl___n_expr].val = p0; /* _n_expr on <self:AClosureDecl> */
-RET_LABEL:;
-}
-/* method parser_nodes#AClosureDecl#n_expr= for (self: Object, nullable AExpr) */
-void VIRTUAL_parser_nodes__AClosureDecl__n_expr_61d(val* self, val* p0) {
-parser_nodes__AClosureDecl__n_expr_61d(self, p0);
-RET_LABEL:;
-}
-/* method parser_nodes#AClosureDecl#init for (self: AClosureDecl) */
-void parser_nodes__AClosureDecl__init(val* self) {
-((void (*)(val*))(self->class->vft[COLOR_parser_nodes__Prod__init]))(self) /* init on <self:AClosureDecl>*/;
-RET_LABEL:;
-}
-/* method parser_nodes#AClosureDecl#init for (self: Object) */
-void VIRTUAL_parser_nodes__AClosureDecl__init(val* self) {
-parser_nodes__AClosureDecl__init(self);
-RET_LABEL:;
-}
 /* method parser_nodes#AType#n_kwnullable for (self: AType): nullable TKwnullable */
 val* parser_nodes__AType__n_kwnullable(val* self) {
 val* var /* : nullable TKwnullable */;
@@ -7240,7 +7188,8 @@ val* var /* : TClassid */;
 val* var1 /* : TClassid */;
 var1 = self->attrs[COLOR_parser_nodes__AType___n_id].val; /* _n_id on <self:AType> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_id", "src/parser/parser_nodes.nit", 1017);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_id");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1007);
 exit(1);
 }
 var = var1;
@@ -7272,7 +7221,8 @@ val* var /* : ANodes[AType] */;
 val* var1 /* : ANodes[AType] */;
 var1 = self->attrs[COLOR_parser_nodes__AType___n_types].val; /* _n_types on <self:AType> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_types", "src/parser/parser_nodes.nit", 1020);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_types");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1010);
 exit(1);
 }
 var = var1;
@@ -7304,7 +7254,8 @@ val* var /* : TKwlabel */;
 val* var1 /* : TKwlabel */;
 var1 = self->attrs[COLOR_parser_nodes__ALabel___n_kwlabel].val; /* _n_kwlabel on <self:ALabel> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwlabel", "src/parser/parser_nodes.nit", 1027);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwlabel");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1017);
 exit(1);
 }
 var = var1;
@@ -7336,7 +7287,8 @@ val* var /* : TId */;
 val* var1 /* : TId */;
 var1 = self->attrs[COLOR_parser_nodes__ALabel___n_id].val; /* _n_id on <self:ALabel> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_id", "src/parser/parser_nodes.nit", 1028);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_id");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1018);
 exit(1);
 }
 var = var1;
@@ -7388,7 +7340,8 @@ val* var /* : ANodes[AExpr] */;
 val* var1 /* : ANodes[AExpr] */;
 var1 = self->attrs[COLOR_parser_nodes__ABlockExpr___n_expr].val; /* _n_expr on <self:ABlockExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr", "src/parser/parser_nodes.nit", 1041);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_expr");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1031);
 exit(1);
 }
 var = var1;
@@ -7448,7 +7401,8 @@ val* var /* : TKwvar */;
 val* var1 /* : TKwvar */;
 var1 = self->attrs[COLOR_parser_nodes__AVardeclExpr___n_kwvar].val; /* _n_kwvar on <self:AVardeclExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwvar", "src/parser/parser_nodes.nit", 1048);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwvar");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1038);
 exit(1);
 }
 var = var1;
@@ -7480,7 +7434,8 @@ val* var /* : TId */;
 val* var1 /* : TId */;
 var1 = self->attrs[COLOR_parser_nodes__AVardeclExpr___n_id].val; /* _n_id on <self:AVardeclExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_id", "src/parser/parser_nodes.nit", 1049);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_id");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1039);
 exit(1);
 }
 var = var1;
@@ -7710,7 +7665,8 @@ val* var /* : TKwbreak */;
 val* var1 /* : TKwbreak */;
 var1 = self->attrs[COLOR_parser_nodes__ABreakExpr___n_kwbreak].val; /* _n_kwbreak on <self:ABreakExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwbreak", "src/parser/parser_nodes.nit", 1074);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwbreak");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1064);
 exit(1);
 }
 var = var1;
@@ -7781,7 +7737,8 @@ val* var /* : TKwabort */;
 val* var1 /* : TKwabort */;
 var1 = self->attrs[COLOR_parser_nodes__AAbortExpr___n_kwabort].val; /* _n_kwabort on <self:AAbortExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwabort", "src/parser/parser_nodes.nit", 1081);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwabort");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1071);
 exit(1);
 }
 var = var1;
@@ -7890,7 +7847,8 @@ val* var /* : TKwdo */;
 val* var1 /* : TKwdo */;
 var1 = self->attrs[COLOR_parser_nodes__ADoExpr___n_kwdo].val; /* _n_kwdo on <self:ADoExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwdo", "src/parser/parser_nodes.nit", 1096);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwdo");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1086);
 exit(1);
 }
 var = var1;
@@ -7961,7 +7919,8 @@ val* var /* : TKwif */;
 val* var1 /* : TKwif */;
 var1 = self->attrs[COLOR_parser_nodes__AIfExpr___n_kwif].val; /* _n_kwif on <self:AIfExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwif", "src/parser/parser_nodes.nit", 1103);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwif");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1093);
 exit(1);
 }
 var = var1;
@@ -7993,7 +7952,8 @@ val* var /* : AExpr */;
 val* var1 /* : AExpr */;
 var1 = self->attrs[COLOR_parser_nodes__AIfExpr___n_expr].val; /* _n_expr on <self:AIfExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr", "src/parser/parser_nodes.nit", 1104);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_expr");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1094);
 exit(1);
 }
 var = var1;
@@ -8091,7 +8051,8 @@ val* var /* : TKwif */;
 val* var1 /* : TKwif */;
 var1 = self->attrs[COLOR_parser_nodes__AIfexprExpr___n_kwif].val; /* _n_kwif on <self:AIfexprExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwif", "src/parser/parser_nodes.nit", 1112);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwif");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1102);
 exit(1);
 }
 var = var1;
@@ -8123,7 +8084,8 @@ val* var /* : AExpr */;
 val* var1 /* : AExpr */;
 var1 = self->attrs[COLOR_parser_nodes__AIfexprExpr___n_expr].val; /* _n_expr on <self:AIfexprExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr", "src/parser/parser_nodes.nit", 1113);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_expr");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1103);
 exit(1);
 }
 var = var1;
@@ -8155,7 +8117,8 @@ val* var /* : TKwthen */;
 val* var1 /* : TKwthen */;
 var1 = self->attrs[COLOR_parser_nodes__AIfexprExpr___n_kwthen].val; /* _n_kwthen on <self:AIfexprExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwthen", "src/parser/parser_nodes.nit", 1114);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwthen");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1104);
 exit(1);
 }
 var = var1;
@@ -8187,7 +8150,8 @@ val* var /* : AExpr */;
 val* var1 /* : AExpr */;
 var1 = self->attrs[COLOR_parser_nodes__AIfexprExpr___n_then].val; /* _n_then on <self:AIfexprExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_then", "src/parser/parser_nodes.nit", 1115);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_then");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1105);
 exit(1);
 }
 var = var1;
@@ -8219,7 +8183,8 @@ val* var /* : TKwelse */;
 val* var1 /* : TKwelse */;
 var1 = self->attrs[COLOR_parser_nodes__AIfexprExpr___n_kwelse].val; /* _n_kwelse on <self:AIfexprExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwelse", "src/parser/parser_nodes.nit", 1116);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwelse");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1106);
 exit(1);
 }
 var = var1;
@@ -8251,7 +8216,8 @@ val* var /* : AExpr */;
 val* var1 /* : AExpr */;
 var1 = self->attrs[COLOR_parser_nodes__AIfexprExpr___n_else].val; /* _n_else on <self:AIfexprExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_else", "src/parser/parser_nodes.nit", 1117);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_else");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1107);
 exit(1);
 }
 var = var1;
@@ -8293,7 +8259,8 @@ val* var /* : TKwwhile */;
 val* var1 /* : TKwwhile */;
 var1 = self->attrs[COLOR_parser_nodes__AWhileExpr___n_kwwhile].val; /* _n_kwwhile on <self:AWhileExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwwhile", "src/parser/parser_nodes.nit", 1124);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwwhile");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1114);
 exit(1);
 }
 var = var1;
@@ -8325,7 +8292,8 @@ val* var /* : AExpr */;
 val* var1 /* : AExpr */;
 var1 = self->attrs[COLOR_parser_nodes__AWhileExpr___n_expr].val; /* _n_expr on <self:AWhileExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr", "src/parser/parser_nodes.nit", 1125);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_expr");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1115);
 exit(1);
 }
 var = var1;
@@ -8357,7 +8325,8 @@ val* var /* : TKwdo */;
 val* var1 /* : TKwdo */;
 var1 = self->attrs[COLOR_parser_nodes__AWhileExpr___n_kwdo].val; /* _n_kwdo on <self:AWhileExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwdo", "src/parser/parser_nodes.nit", 1126);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwdo");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1116);
 exit(1);
 }
 var = var1;
@@ -8428,7 +8397,8 @@ val* var /* : TKwloop */;
 val* var1 /* : TKwloop */;
 var1 = self->attrs[COLOR_parser_nodes__ALoopExpr___n_kwloop].val; /* _n_kwloop on <self:ALoopExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwloop", "src/parser/parser_nodes.nit", 1134);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwloop");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1124);
 exit(1);
 }
 var = var1;
@@ -8499,7 +8469,8 @@ val* var /* : TKwfor */;
 val* var1 /* : TKwfor */;
 var1 = self->attrs[COLOR_parser_nodes__AForExpr___n_kwfor].val; /* _n_kwfor on <self:AForExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwfor", "src/parser/parser_nodes.nit", 1142);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwfor");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1132);
 exit(1);
 }
 var = var1;
@@ -8531,7 +8502,8 @@ val* var /* : ANodes[TId] */;
 val* var1 /* : ANodes[TId] */;
 var1 = self->attrs[COLOR_parser_nodes__AForExpr___n_ids].val; /* _n_ids on <self:AForExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_ids", "src/parser/parser_nodes.nit", 1143);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_ids");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1133);
 exit(1);
 }
 var = var1;
@@ -8553,7 +8525,8 @@ val* var /* : AExpr */;
 val* var1 /* : AExpr */;
 var1 = self->attrs[COLOR_parser_nodes__AForExpr___n_expr].val; /* _n_expr on <self:AForExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr", "src/parser/parser_nodes.nit", 1144);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_expr");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1134);
 exit(1);
 }
 var = var1;
@@ -8585,7 +8558,8 @@ val* var /* : TKwdo */;
 val* var1 /* : TKwdo */;
 var1 = self->attrs[COLOR_parser_nodes__AForExpr___n_kwdo].val; /* _n_kwdo on <self:AForExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwdo", "src/parser/parser_nodes.nit", 1145);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwdo");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1135);
 exit(1);
 }
 var = var1;
@@ -8656,7 +8630,8 @@ val* var /* : TKwassert */;
 val* var1 /* : TKwassert */;
 var1 = self->attrs[COLOR_parser_nodes__AAssertExpr___n_kwassert].val; /* _n_kwassert on <self:AAssertExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwassert", "src/parser/parser_nodes.nit", 1152);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwassert");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1142);
 exit(1);
 }
 var = var1;
@@ -8716,7 +8691,8 @@ val* var /* : AExpr */;
 val* var1 /* : AExpr */;
 var1 = self->attrs[COLOR_parser_nodes__AAssertExpr___n_expr].val; /* _n_expr on <self:AAssertExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr", "src/parser/parser_nodes.nit", 1154);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_expr");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1144);
 exit(1);
 }
 var = var1;
@@ -8786,7 +8762,8 @@ val* var /* : TAssign */;
 val* var1 /* : TAssign */;
 var1 = self->attrs[COLOR_parser_nodes__AAssignFormExpr___n_assign].val; /* _n_assign on <self:AAssignFormExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_assign", "src/parser/parser_nodes.nit", 1161);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_assign");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1151);
 exit(1);
 }
 var = var1;
@@ -8818,7 +8795,8 @@ val* var /* : AExpr */;
 val* var1 /* : AExpr */;
 var1 = self->attrs[COLOR_parser_nodes__AAssignFormExpr___n_value].val; /* _n_value on <self:AAssignFormExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_value", "src/parser/parser_nodes.nit", 1162);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_value");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1152);
 exit(1);
 }
 var = var1;
@@ -8860,7 +8838,8 @@ val* var /* : AAssignOp */;
 val* var1 /* : AAssignOp */;
 var1 = self->attrs[COLOR_parser_nodes__AReassignFormExpr___n_assign_op].val; /* _n_assign_op on <self:AReassignFormExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_assign_op", "src/parser/parser_nodes.nit", 1168);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_assign_op");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1158);
 exit(1);
 }
 var = var1;
@@ -8892,7 +8871,8 @@ val* var /* : AExpr */;
 val* var1 /* : AExpr */;
 var1 = self->attrs[COLOR_parser_nodes__AReassignFormExpr___n_value].val; /* _n_value on <self:AReassignFormExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_value", "src/parser/parser_nodes.nit", 1169);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_value");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1159);
 exit(1);
 }
 var = var1;
@@ -8934,7 +8914,8 @@ val* var /* : TKwonce */;
 val* var1 /* : TKwonce */;
 var1 = self->attrs[COLOR_parser_nodes__AOnceExpr___n_kwonce].val; /* _n_kwonce on <self:AOnceExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwonce", "src/parser/parser_nodes.nit", 1175);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwonce");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1165);
 exit(1);
 }
 var = var1;
@@ -8976,7 +8957,8 @@ val* var /* : AExpr */;
 val* var1 /* : AExpr */;
 var1 = self->attrs[COLOR_parser_nodes__ASendExpr___n_expr].val; /* _n_expr on <self:ASendExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr", "src/parser/parser_nodes.nit", 1182);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_expr");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1172);
 exit(1);
 }
 var = var1;
@@ -9002,28 +8984,6 @@ void VIRTUAL_parser_nodes__ASendExpr__n_expr_61d(val* self, val* p0) {
 parser_nodes__ASendExpr__n_expr_61d(self, p0);
 RET_LABEL:;
 }
-/* method parser_nodes#ASendExpr#n_closure_defs for (self: ASendExpr): ANodes[AClosureDef] */
-val* parser_nodes__ASendExpr__n_closure_defs(val* self) {
-val* var /* : ANodes[AClosureDef] */;
-val* var1 /* : ANodes[AClosureDef] */;
-var1 = self->attrs[COLOR_parser_nodes__ASendExpr___n_closure_defs].val; /* _n_closure_defs on <self:ASendExpr> */
-if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_closure_defs", "src/parser/parser_nodes.nit", 1184);
-exit(1);
-}
-var = var1;
-RET_LABEL:;
-return var;
-}
-/* method parser_nodes#ASendExpr#n_closure_defs for (self: Object): ANodes[AClosureDef] */
-val* VIRTUAL_parser_nodes__ASendExpr__n_closure_defs(val* self) {
-val* var /* : ANodes[AClosureDef] */;
-val* var1 /* : ANodes[AClosureDef] */;
-var1 = parser_nodes__ASendExpr__n_closure_defs(self);
-var = var1;
-RET_LABEL:;
-return var;
-}
 /* method parser_nodes#ASendExpr#init for (self: ASendExpr) */
 void parser_nodes__ASendExpr__init(val* self) {
 ((void (*)(val*))(self->class->vft[COLOR_parser_nodes__AExpr__init]))(self) /* init on <self:ASendExpr>*/;
@@ -9040,7 +9000,8 @@ val* var /* : AExpr */;
 val* var1 /* : AExpr */;
 var1 = self->attrs[COLOR_parser_nodes__ABinopExpr___n_expr2].val; /* _n_expr2 on <self:ABinopExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr2", "src/parser/parser_nodes.nit", 1190);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_expr2");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1179);
 exit(1);
 }
 var = var1;
@@ -9092,7 +9053,8 @@ val* var /* : AExpr */;
 val* var1 /* : AExpr */;
 var1 = self->attrs[COLOR_parser_nodes__AOrExpr___n_expr].val; /* _n_expr on <self:AOrExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr", "src/parser/parser_nodes.nit", 1203);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_expr");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1192);
 exit(1);
 }
 var = var1;
@@ -9124,7 +9086,8 @@ val* var /* : AExpr */;
 val* var1 /* : AExpr */;
 var1 = self->attrs[COLOR_parser_nodes__AOrExpr___n_expr2].val; /* _n_expr2 on <self:AOrExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr2", "src/parser/parser_nodes.nit", 1204);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_expr2");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1193);
 exit(1);
 }
 var = var1;
@@ -9166,7 +9129,8 @@ val* var /* : AExpr */;
 val* var1 /* : AExpr */;
 var1 = self->attrs[COLOR_parser_nodes__AAndExpr___n_expr].val; /* _n_expr on <self:AAndExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr", "src/parser/parser_nodes.nit", 1210);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_expr");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1199);
 exit(1);
 }
 var = var1;
@@ -9198,7 +9162,8 @@ val* var /* : AExpr */;
 val* var1 /* : AExpr */;
 var1 = self->attrs[COLOR_parser_nodes__AAndExpr___n_expr2].val; /* _n_expr2 on <self:AAndExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr2", "src/parser/parser_nodes.nit", 1211);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_expr2");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1200);
 exit(1);
 }
 var = var1;
@@ -9240,7 +9205,8 @@ val* var /* : AExpr */;
 val* var1 /* : AExpr */;
 var1 = self->attrs[COLOR_parser_nodes__AOrElseExpr___n_expr].val; /* _n_expr on <self:AOrElseExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr", "src/parser/parser_nodes.nit", 1217);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_expr");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1206);
 exit(1);
 }
 var = var1;
@@ -9272,7 +9238,8 @@ val* var /* : AExpr */;
 val* var1 /* : AExpr */;
 var1 = self->attrs[COLOR_parser_nodes__AOrElseExpr___n_expr2].val; /* _n_expr2 on <self:AOrElseExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr2", "src/parser/parser_nodes.nit", 1218);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_expr2");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1207);
 exit(1);
 }
 var = var1;
@@ -9314,7 +9281,8 @@ val* var /* : AExpr */;
 val* var1 /* : AExpr */;
 var1 = self->attrs[COLOR_parser_nodes__AImpliesExpr___n_expr].val; /* _n_expr on <self:AImpliesExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr", "src/parser/parser_nodes.nit", 1224);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_expr");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1213);
 exit(1);
 }
 var = var1;
@@ -9346,7 +9314,8 @@ val* var /* : AExpr */;
 val* var1 /* : AExpr */;
 var1 = self->attrs[COLOR_parser_nodes__AImpliesExpr___n_expr2].val; /* _n_expr2 on <self:AImpliesExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr2", "src/parser/parser_nodes.nit", 1225);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_expr2");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1214);
 exit(1);
 }
 var = var1;
@@ -9388,7 +9357,8 @@ val* var /* : TKwnot */;
 val* var1 /* : TKwnot */;
 var1 = self->attrs[COLOR_parser_nodes__ANotExpr___n_kwnot].val; /* _n_kwnot on <self:ANotExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwnot", "src/parser/parser_nodes.nit", 1231);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwnot");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1220);
 exit(1);
 }
 var = var1;
@@ -9420,7 +9390,8 @@ val* var /* : AExpr */;
 val* var1 /* : AExpr */;
 var1 = self->attrs[COLOR_parser_nodes__ANotExpr___n_expr].val; /* _n_expr on <self:ANotExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr", "src/parser/parser_nodes.nit", 1232);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_expr");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1221);
 exit(1);
 }
 var = var1;
@@ -9464,80 +9435,6 @@ RET_LABEL:;
 /* method parser_nodes#AEqExpr#init for (self: Object) */
 void VIRTUAL_parser_nodes__AEqExpr__init(val* self) {
 parser_nodes__AEqExpr__init(self);
-RET_LABEL:;
-}
-/* method parser_nodes#AEeExpr#n_expr for (self: AEeExpr): AExpr */
-val* parser_nodes__AEeExpr__n_expr(val* self) {
-val* var /* : AExpr */;
-val* var1 /* : AExpr */;
-var1 = self->attrs[COLOR_parser_nodes__AEeExpr___n_expr].val; /* _n_expr on <self:AEeExpr> */
-if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr", "src/parser/parser_nodes.nit", 1243);
-exit(1);
-}
-var = var1;
-RET_LABEL:;
-return var;
-}
-/* method parser_nodes#AEeExpr#n_expr for (self: Object): AExpr */
-val* VIRTUAL_parser_nodes__AEeExpr__n_expr(val* self) {
-val* var /* : AExpr */;
-val* var1 /* : AExpr */;
-var1 = parser_nodes__AEeExpr__n_expr(self);
-var = var1;
-RET_LABEL:;
-return var;
-}
-/* method parser_nodes#AEeExpr#n_expr= for (self: AEeExpr, AExpr) */
-void parser_nodes__AEeExpr__n_expr_61d(val* self, val* p0) {
-self->attrs[COLOR_parser_nodes__AEeExpr___n_expr].val = p0; /* _n_expr on <self:AEeExpr> */
-RET_LABEL:;
-}
-/* method parser_nodes#AEeExpr#n_expr= for (self: Object, AExpr) */
-void VIRTUAL_parser_nodes__AEeExpr__n_expr_61d(val* self, val* p0) {
-parser_nodes__AEeExpr__n_expr_61d(self, p0);
-RET_LABEL:;
-}
-/* method parser_nodes#AEeExpr#n_expr2 for (self: AEeExpr): AExpr */
-val* parser_nodes__AEeExpr__n_expr2(val* self) {
-val* var /* : AExpr */;
-val* var1 /* : AExpr */;
-var1 = self->attrs[COLOR_parser_nodes__AEeExpr___n_expr2].val; /* _n_expr2 on <self:AEeExpr> */
-if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr2", "src/parser/parser_nodes.nit", 1244);
-exit(1);
-}
-var = var1;
-RET_LABEL:;
-return var;
-}
-/* method parser_nodes#AEeExpr#n_expr2 for (self: Object): AExpr */
-val* VIRTUAL_parser_nodes__AEeExpr__n_expr2(val* self) {
-val* var /* : AExpr */;
-val* var1 /* : AExpr */;
-var1 = parser_nodes__AEeExpr__n_expr2(self);
-var = var1;
-RET_LABEL:;
-return var;
-}
-/* method parser_nodes#AEeExpr#n_expr2= for (self: AEeExpr, AExpr) */
-void parser_nodes__AEeExpr__n_expr2_61d(val* self, val* p0) {
-self->attrs[COLOR_parser_nodes__AEeExpr___n_expr2].val = p0; /* _n_expr2 on <self:AEeExpr> */
-RET_LABEL:;
-}
-/* method parser_nodes#AEeExpr#n_expr2= for (self: Object, AExpr) */
-void VIRTUAL_parser_nodes__AEeExpr__n_expr2_61d(val* self, val* p0) {
-parser_nodes__AEeExpr__n_expr2_61d(self, p0);
-RET_LABEL:;
-}
-/* method parser_nodes#AEeExpr#init for (self: AEeExpr) */
-void parser_nodes__AEeExpr__init(val* self) {
-((void (*)(val*))(self->class->vft[COLOR_parser_nodes__ABoolExpr__init]))(self) /* init on <self:AEeExpr>*/;
-RET_LABEL:;
-}
-/* method parser_nodes#AEeExpr#init for (self: Object) */
-void VIRTUAL_parser_nodes__AEeExpr__init(val* self) {
-parser_nodes__AEeExpr__init(self);
 RET_LABEL:;
 }
 /* method parser_nodes#ANeExpr#init for (self: ANeExpr) */
@@ -9616,7 +9513,8 @@ val* var /* : AExpr */;
 val* var1 /* : AExpr */;
 var1 = self->attrs[COLOR_parser_nodes__AIsaExpr___n_expr].val; /* _n_expr on <self:AIsaExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr", "src/parser/parser_nodes.nit", 1285);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_expr");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1267);
 exit(1);
 }
 var = var1;
@@ -9648,7 +9546,8 @@ val* var /* : AType */;
 val* var1 /* : AType */;
 var1 = self->attrs[COLOR_parser_nodes__AIsaExpr___n_type].val; /* _n_type on <self:AIsaExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_type", "src/parser/parser_nodes.nit", 1286);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_type");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1268);
 exit(1);
 }
 var = var1;
@@ -9750,7 +9649,8 @@ val* var /* : TMinus */;
 val* var1 /* : TMinus */;
 var1 = self->attrs[COLOR_parser_nodes__AUminusExpr___n_minus].val; /* _n_minus on <self:AUminusExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_minus", "src/parser/parser_nodes.nit", 1322);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_minus");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1304);
 exit(1);
 }
 var = var1;
@@ -9792,7 +9692,8 @@ val* var /* : TKwnew */;
 val* var1 /* : TKwnew */;
 var1 = self->attrs[COLOR_parser_nodes__ANewExpr___n_kwnew].val; /* _n_kwnew on <self:ANewExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwnew", "src/parser/parser_nodes.nit", 1328);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwnew");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1310);
 exit(1);
 }
 var = var1;
@@ -9824,7 +9725,8 @@ val* var /* : AType */;
 val* var1 /* : AType */;
 var1 = self->attrs[COLOR_parser_nodes__ANewExpr___n_type].val; /* _n_type on <self:ANewExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_type", "src/parser/parser_nodes.nit", 1329);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_type");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1311);
 exit(1);
 }
 var = var1;
@@ -9884,7 +9786,8 @@ val* var /* : AExprs */;
 val* var1 /* : AExprs */;
 var1 = self->attrs[COLOR_parser_nodes__ANewExpr___n_args].val; /* _n_args on <self:ANewExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_args", "src/parser/parser_nodes.nit", 1333);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_args");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1315);
 exit(1);
 }
 var = var1;
@@ -9926,7 +9829,8 @@ val* var /* : AExpr */;
 val* var1 /* : AExpr */;
 var1 = self->attrs[COLOR_parser_nodes__AAttrFormExpr___n_expr].val; /* _n_expr on <self:AAttrFormExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr", "src/parser/parser_nodes.nit", 1340);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_expr");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1322);
 exit(1);
 }
 var = var1;
@@ -9958,7 +9862,8 @@ val* var /* : TAttrid */;
 val* var1 /* : TAttrid */;
 var1 = self->attrs[COLOR_parser_nodes__AAttrFormExpr___n_id].val; /* _n_id on <self:AAttrFormExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_id", "src/parser/parser_nodes.nit", 1343);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_id");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1325);
 exit(1);
 }
 var = var1;
@@ -9997,5 +9902,97 @@ RET_LABEL:;
 /* method parser_nodes#AAttrExpr#init for (self: AAttrExpr) */
 void parser_nodes__AAttrExpr__init(val* self) {
 ((void (*)(val*))(self->class->vft[COLOR_parser_nodes__AAttrFormExpr__init]))(self) /* init on <self:AAttrExpr>*/;
+RET_LABEL:;
+}
+/* method parser_nodes#AAttrExpr#init for (self: Object) */
+void VIRTUAL_parser_nodes__AAttrExpr__init(val* self) {
+parser_nodes__AAttrExpr__init(self);
+RET_LABEL:;
+}
+/* method parser_nodes#AAttrAssignExpr#init for (self: AAttrAssignExpr) */
+void parser_nodes__AAttrAssignExpr__init(val* self) {
+((void (*)(val*))(self->class->vft[COLOR_parser_nodes__AAttrFormExpr__init]))(self) /* init on <self:AAttrAssignExpr>*/;
+((void (*)(val*))(self->class->vft[COLOR_parser_nodes__AAssignFormExpr__init]))(self) /* init on <self:AAttrAssignExpr>*/;
+RET_LABEL:;
+}
+/* method parser_nodes#AAttrAssignExpr#init for (self: Object) */
+void VIRTUAL_parser_nodes__AAttrAssignExpr__init(val* self) {
+parser_nodes__AAttrAssignExpr__init(self);
+RET_LABEL:;
+}
+/* method parser_nodes#ACallFormExpr#n_id for (self: ACallFormExpr): TId */
+val* parser_nodes__ACallFormExpr__n_id(val* self) {
+val* var /* : TId */;
+val* var1 /* : TId */;
+var1 = self->attrs[COLOR_parser_nodes__ACallFormExpr___n_id].val; /* _n_id on <self:ACallFormExpr> */
+if (var1 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_id");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1344);
+exit(1);
+}
+var = var1;
+RET_LABEL:;
+return var;
+}
+/* method parser_nodes#ACallFormExpr#n_id for (self: Object): TId */
+val* VIRTUAL_parser_nodes__ACallFormExpr__n_id(val* self) {
+val* var /* : TId */;
+val* var1 /* : TId */;
+var1 = parser_nodes__ACallFormExpr__n_id(self);
+var = var1;
+RET_LABEL:;
+return var;
+}
+/* method parser_nodes#ACallFormExpr#n_id= for (self: ACallFormExpr, TId) */
+void parser_nodes__ACallFormExpr__n_id_61d(val* self, val* p0) {
+self->attrs[COLOR_parser_nodes__ACallFormExpr___n_id].val = p0; /* _n_id on <self:ACallFormExpr> */
+RET_LABEL:;
+}
+/* method parser_nodes#ACallFormExpr#n_id= for (self: Object, TId) */
+void VIRTUAL_parser_nodes__ACallFormExpr__n_id_61d(val* self, val* p0) {
+parser_nodes__ACallFormExpr__n_id_61d(self, p0);
+RET_LABEL:;
+}
+/* method parser_nodes#ACallFormExpr#n_args for (self: ACallFormExpr): AExprs */
+val* parser_nodes__ACallFormExpr__n_args(val* self) {
+val* var /* : AExprs */;
+val* var1 /* : AExprs */;
+var1 = self->attrs[COLOR_parser_nodes__ACallFormExpr___n_args].val; /* _n_args on <self:ACallFormExpr> */
+if (var1 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_args");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1347);
+exit(1);
+}
+var = var1;
+RET_LABEL:;
+return var;
+}
+/* method parser_nodes#ACallFormExpr#n_args for (self: Object): AExprs */
+val* VIRTUAL_parser_nodes__ACallFormExpr__n_args(val* self) {
+val* var /* : AExprs */;
+val* var1 /* : AExprs */;
+var1 = parser_nodes__ACallFormExpr__n_args(self);
+var = var1;
+RET_LABEL:;
+return var;
+}
+/* method parser_nodes#ACallFormExpr#n_args= for (self: ACallFormExpr, AExprs) */
+void parser_nodes__ACallFormExpr__n_args_61d(val* self, val* p0) {
+self->attrs[COLOR_parser_nodes__ACallFormExpr___n_args].val = p0; /* _n_args on <self:ACallFormExpr> */
+RET_LABEL:;
+}
+/* method parser_nodes#ACallFormExpr#n_args= for (self: Object, AExprs) */
+void VIRTUAL_parser_nodes__ACallFormExpr__n_args_61d(val* self, val* p0) {
+parser_nodes__ACallFormExpr__n_args_61d(self, p0);
+RET_LABEL:;
+}
+/* method parser_nodes#ACallFormExpr#init for (self: ACallFormExpr) */
+void parser_nodes__ACallFormExpr__init(val* self) {
+((void (*)(val*))(self->class->vft[COLOR_parser_nodes__ASendExpr__init]))(self) /* init on <self:ACallFormExpr>*/;
+RET_LABEL:;
+}
+/* method parser_nodes#ACallFormExpr#init for (self: Object) */
+void VIRTUAL_parser_nodes__ACallFormExpr__init(val* self) {
+parser_nodes__ACallFormExpr__init(self);
 RET_LABEL:;
 }

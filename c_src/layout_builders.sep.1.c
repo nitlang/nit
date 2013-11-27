@@ -5,7 +5,8 @@ val* var /* : Map[Object, Int] */;
 val* var1 /* : Map[Object, Int] */;
 var1 = self->attrs[COLOR_layout_builders__Layout___64dids].val; /* @ids on <self:Layout[Object]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @ids", "src/layout_builders.nit", 34);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @ids");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 34);
 exit(1);
 }
 var = var1;
@@ -27,6 +28,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 /* Covariant cast for argument 0 (ids) <p0:Map[Object, Int]> isa Map[Layout#0, Int] */
 /* <p0:Map[Object, Int]> isa Map[Layout#0, Int] */
 type_struct = self->type->resolution_table->types[COLOR_abstract_collection__Maplayout_builders__Layout_FT0kernel__Int];
@@ -38,7 +40,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 34);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Map[Layout#0, Int]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 34);
 exit(1);
 }
 self->attrs[COLOR_layout_builders__Layout___64dids].val = p0; /* @ids on <self:Layout[Object]> */
@@ -55,7 +59,8 @@ val* var /* : Map[Object, Int] */;
 val* var1 /* : Map[Object, Int] */;
 var1 = self->attrs[COLOR_layout_builders__Layout___64dpos].val; /* @pos on <self:Layout[Object]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @pos", "src/layout_builders.nit", 36);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @pos");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 36);
 exit(1);
 }
 var = var1;
@@ -77,6 +82,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 /* Covariant cast for argument 0 (pos) <p0:Map[Object, Int]> isa Map[Layout#0, Int] */
 /* <p0:Map[Object, Int]> isa Map[Layout#0, Int] */
 type_struct = self->type->resolution_table->types[COLOR_abstract_collection__Maplayout_builders__Layout_FT0kernel__Int];
@@ -88,7 +94,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 36);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Map[Layout#0, Int]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 36);
 exit(1);
 }
 self->attrs[COLOR_layout_builders__Layout___64dpos].val = p0; /* @pos on <self:Layout[Object]> */
@@ -114,7 +122,8 @@ val* var /* : Map[Object, Int] */;
 val* var1 /* : Map[Object, Int] */;
 var1 = self->attrs[COLOR_layout_builders__PHLayout___64dmasks].val; /* @masks on <self:PHLayout[Object, Object]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @masks", "src/layout_builders.nit", 44);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @masks");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 44);
 exit(1);
 }
 var = var1;
@@ -136,6 +145,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 /* Covariant cast for argument 0 (masks) <p0:Map[Object, Int]> isa Map[PHLayout#0, Int] */
 /* <p0:Map[Object, Int]> isa Map[PHLayout#0, Int] */
 type_struct = self->type->resolution_table->types[COLOR_abstract_collection__Maplayout_builders__PHLayout_FT0kernel__Int];
@@ -147,7 +157,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 44);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Map[PHLayout#0, Int]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 44);
 exit(1);
 }
 self->attrs[COLOR_layout_builders__PHLayout___64dmasks].val = p0; /* @masks on <self:PHLayout[Object, Object]> */
@@ -164,7 +176,8 @@ val* var /* : Map[Object, Map[Object, Int]] */;
 val* var1 /* : Map[Object, Map[Object, Int]] */;
 var1 = self->attrs[COLOR_layout_builders__PHLayout___64dhashes].val; /* @hashes on <self:PHLayout[Object, Object]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @hashes", "src/layout_builders.nit", 46);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @hashes");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 46);
 exit(1);
 }
 var = var1;
@@ -186,6 +199,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 /* Covariant cast for argument 0 (hashes) <p0:Map[Object, Map[Object, Int]]> isa Map[PHLayout#0, Map[PHLayout#1, Int]] */
 /* <p0:Map[Object, Map[Object, Int]]> isa Map[PHLayout#0, Map[PHLayout#1, Int]] */
 type_struct = self->type->resolution_table->types[COLOR_abstract_collection__Maplayout_builders__PHLayout_FT0abstract_collection__Maplayout_builders__PHLayout_FT1kernel__Int];
@@ -197,7 +211,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 46);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Map[PHLayout#0, Map[PHLayout#1, Int]]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 46);
 exit(1);
 }
 self->attrs[COLOR_layout_builders__PHLayout___64dhashes].val = p0; /* @hashes on <self:PHLayout[Object, Object]> */
@@ -225,6 +241,8 @@ short int var1 /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
+const char* var_class_name2;
 /* Covariant cast for argument 0 (elements) <p0:Set[Object]> isa Set[TypingLayoutBuilder#0] */
 /* <p0:Set[Object]> isa Set[TypingLayoutBuilder#0] */
 type_struct = self->type->resolution_table->types[COLOR_abstract_collection__Setlayout_builders__TypingLayoutBuilder_FT0];
@@ -236,10 +254,14 @@ var1 = 0;
 var1 = p0->type->type_table[cltype] == idtype;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 54);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Set[TypingLayoutBuilder#0]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 54);
 exit(1);
 }
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Deferred method called", "src/layout_builders.nit", 54);
+var_class_name2 = self == NULL ? "null" : self->type->name;
+fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "build_layout", var_class_name2);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 54);
 exit(1);
 RET_LABEL:;
 return var;
@@ -256,7 +278,10 @@ return var;
 /* method layout_builders#TypingLayoutBuilder#poset for (self: TypingLayoutBuilder[Object]): nullable POSet[Object] */
 val* layout_builders__TypingLayoutBuilder__poset(val* self) {
 val* var /* : nullable POSet[Object] */;
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Deferred method called", "src/layout_builders.nit", 57);
+const char* var_class_name;
+var_class_name = self == NULL ? "null" : self->type->name;
+fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "poset", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 57);
 exit(1);
 RET_LABEL:;
 return var;
@@ -277,6 +302,8 @@ short int var1 /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
+const char* var_class_name2;
 /* Covariant cast for argument 0 (elements) <p0:Map[MClass, Set[PropertyLayoutElement]]> isa Map[MClass, Set[PropertyLayoutBuilder#0]] */
 /* <p0:Map[MClass, Set[PropertyLayoutElement]]> isa Map[MClass, Set[PropertyLayoutBuilder#0]] */
 type_struct = self->type->resolution_table->types[COLOR_abstract_collection__Mapmodel__MClassabstract_collection__Setlayout_builders__PropertyLayoutBuilder_FT0];
@@ -288,10 +315,14 @@ var1 = 0;
 var1 = p0->type->type_table[cltype] == idtype;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 64);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Map[MClass, Set[PropertyLayoutBuilder#0]]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 64);
 exit(1);
 }
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Deferred method called", "src/layout_builders.nit", 64);
+var_class_name2 = self == NULL ? "null" : self->type->name;
+fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "build_layout", var_class_name2);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 64);
 exit(1);
 RET_LABEL:;
 return var;
@@ -308,7 +339,10 @@ return var;
 /* method layout_builders#ResolutionLayoutBuilder#build_layout for (self: ResolutionLayoutBuilder, Map[MClassType, Set[MType]]): Layout[MType] */
 val* layout_builders__ResolutionLayoutBuilder__build_layout(val* self, val* p0) {
 val* var /* : Layout[MType] */;
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Deferred method called", "src/layout_builders.nit", 84);
+const char* var_class_name;
+var_class_name = self == NULL ? "null" : self->type->name;
+fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "build_layout", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 84);
 exit(1);
 RET_LABEL:;
 return var;
@@ -328,7 +362,8 @@ val* var /* : MModule */;
 val* var1 /* : MModule */;
 var1 = self->attrs[COLOR_layout_builders__POSetBuilder___64dmmodule].val; /* @mmodule on <self:POSetBuilder[Object]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @mmodule", "src/layout_builders.nit", 94);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @mmodule");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 94);
 exit(1);
 }
 var = var1;
@@ -373,6 +408,8 @@ short int var1 /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
+const char* var_class_name2;
 /* Covariant cast for argument 0 (elements) <p0:Set[Object]> isa Set[POSetBuilder#0] */
 /* <p0:Set[Object]> isa Set[POSetBuilder#0] */
 type_struct = self->type->resolution_table->types[COLOR_abstract_collection__Setlayout_builders__POSetBuilder_FT0];
@@ -384,10 +421,14 @@ var1 = 0;
 var1 = p0->type->type_table[cltype] == idtype;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 96);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Set[POSetBuilder#0]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 96);
 exit(1);
 }
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Deferred method called", "src/layout_builders.nit", 96);
+var_class_name2 = self == NULL ? "null" : self->type->name;
+fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "build_poset", var_class_name2);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 96);
 exit(1);
 RET_LABEL:;
 return var;
@@ -407,6 +448,7 @@ val* var /* : POSet[MType] */;
 short int var1 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 val* var_elements /* var elements: Set[MType] */;
 val* var2 /* : POSet[MType] */;
 val* var_poset /* var poset: POSet[MType] */;
@@ -427,7 +469,9 @@ short int var13 /* : Bool */;
 /* <p0:Set[MType]> isa Set[POSetBuilder#0] */
 var1 = 1; /* easy <p0:Set[MType]> isa Set[POSetBuilder#0]*/
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 104);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Set[POSetBuilder#0]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 104);
 exit(1);
 }
 var_elements = p0;
@@ -489,6 +533,7 @@ val* var /* : POSet[MClass] */;
 short int var1 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 val* var_elements /* var elements: Set[MClass] */;
 val* var2 /* : MModule */;
 val* var3 /* : POSet[MClass] */;
@@ -496,7 +541,9 @@ val* var3 /* : POSet[MClass] */;
 /* <p0:Set[MClass]> isa Set[POSetBuilder#0] */
 var1 = 1; /* easy <p0:Set[MClass]> isa Set[POSetBuilder#0]*/
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 123);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Set[POSetBuilder#0]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 123);
 exit(1);
 }
 var_elements = p0;
@@ -522,7 +569,8 @@ val* var /* : MModule */;
 val* var1 /* : MModule */;
 var1 = self->attrs[COLOR_layout_builders__TypingBMizer___64dmmodule].val; /* @mmodule on <self:TypingBMizer[Object]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @mmodule", "src/layout_builders.nit", 132);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @mmodule");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 132);
 exit(1);
 }
 var = var1;
@@ -554,7 +602,8 @@ val* var /* : POSetBuilder[Object] */;
 val* var1 /* : POSetBuilder[Object] */;
 var1 = self->attrs[COLOR_layout_builders__TypingBMizer___64dposet_builder].val; /* @poset_builder on <self:TypingBMizer[Object]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @poset_builder", "src/layout_builders.nit", 133);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @poset_builder");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 133);
 exit(1);
 }
 var = var1;
@@ -576,6 +625,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 /* Covariant cast for argument 0 (poset_builder) <p0:POSetBuilder[Object]> isa POSetBuilder[TypingBMizer#0] */
 /* <p0:POSetBuilder[Object]> isa POSetBuilder[TypingBMizer#0] */
 type_struct = self->type->resolution_table->types[COLOR_layout_builders__POSetBuilderlayout_builders__TypingBMizer_FT0];
@@ -587,7 +637,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 133);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "POSetBuilder[TypingBMizer#0]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 133);
 exit(1);
 }
 self->attrs[COLOR_layout_builders__TypingBMizer___64dposet_builder].val = p0; /* @poset_builder on <self:TypingBMizer[Object]> */
@@ -622,6 +674,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 /* Covariant cast for argument 0 (poset_cache) <p0:nullable POSet[Object]> isa nullable POSet[TypingBMizer#0] */
 /* <p0:nullable POSet[Object]> isa nullable POSet[TypingBMizer#0] */
 type_struct = self->type->resolution_table->types[COLOR_poset__POSetlayout_builders__TypingBMizer_FT0];
@@ -637,7 +690,9 @@ var = p0->type->type_table[cltype] == idtype;
 }
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 134);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable POSet[TypingBMizer#0]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 134);
 exit(1);
 }
 self->attrs[COLOR_layout_builders__TypingBMizer___64dposet_cache].val = p0; /* @poset_cache on <self:TypingBMizer[Object]> */
@@ -654,6 +709,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_mmodule /* var mmodule: MModule */;
 val* var_poset_builder /* var poset_builder: POSetBuilder[Object] */;
 /* Covariant cast for argument 1 (poset_builder) <p1:POSetBuilder[Object]> isa POSetBuilder[TypingBMizer#0] */
@@ -667,7 +723,9 @@ var = 0;
 var = p1->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 136);
+var_class_name = p1 == NULL ? "null" : p1->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "POSetBuilder[TypingBMizer#0]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 136);
 exit(1);
 }
 var_mmodule = p0;
@@ -707,6 +765,7 @@ short int var1 /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_elements /* var elements: Set[Object] */;
 val* var2 /* : Layout[Object] */;
 val* var_result /* var result: Layout[Object] */;
@@ -735,7 +794,9 @@ var1 = 0;
 var1 = p0->type->type_table[cltype] == idtype;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 143);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Set[TypingBMizer#0]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 143);
 exit(1);
 }
 var_elements = p0;
@@ -752,7 +813,8 @@ var5 = ((val* (*)(val*, val*))(var4->class->vft[COLOR_layout_builders__POSetBuil
 ((void (*)(val*, val*))(self->class->vft[COLOR_layout_builders__TypingBMizer__poset_cache_61d]))(self, var5) /* poset_cache= on <self:TypingBMizer[Object]>*/;
 var6 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingLayoutBuilder__poset]))(self) /* poset on <self:TypingBMizer[Object]>*/;
 if (var6 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/layout_builders.nit", 148);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 148);
 exit(1);
 } else {
 var7 = ((val* (*)(val*))(var6->class->vft[COLOR_array__Collection__to_a]))(var6) /* to_a on <var6:nullable POSet[Object]>*/;
@@ -760,7 +822,8 @@ var7 = ((val* (*)(val*))(var6->class->vft[COLOR_array__Collection__to_a]))(var6)
 var_lin = var7;
 var8 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingLayoutBuilder__poset]))(self) /* poset on <self:TypingBMizer[Object]>*/;
 if (var8 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/layout_builders.nit", 149);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 149);
 exit(1);
 } else {
 ((void (*)(val*, val*))(var8->class->vft[COLOR_sorter__AbstractSorter__sort]))(var8, var_lin) /* sort on <var8:nullable POSet[Object]>*/;
@@ -930,7 +993,8 @@ val* var /* : MModule */;
 val* var1 /* : MModule */;
 var1 = self->attrs[COLOR_layout_builders__MPropertyBMizer___64dmmodule].val; /* @mmodule on <self:MPropertyBMizer[PropertyLayoutElement]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @mmodule", "src/layout_builders.nit", 198);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @mmodule");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 198);
 exit(1);
 }
 var = var1;
@@ -975,6 +1039,7 @@ short int var1 /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_elements /* var elements: Map[MClass, Set[PropertyLayoutElement]] */;
 val* var2 /* : Layout[PropertyLayoutElement] */;
 val* var_result /* var result: Layout[PropertyLayoutElement] */;
@@ -1007,7 +1072,9 @@ var1 = 0;
 var1 = p0->type->type_table[cltype] == idtype;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 202);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Map[MClass, Set[PropertyLayoutBuilder#0]]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 202);
 exit(1);
 }
 var_elements = p0;
@@ -1077,7 +1144,8 @@ val* var /* : Set[Object] */;
 val* var1 /* : Set[Object] */;
 var1 = self->attrs[COLOR_layout_builders__TypingColorer___64dcore].val; /* @core on <self:TypingColorer[Object]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @core", "src/layout_builders.nit", 225);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @core");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 225);
 exit(1);
 }
 var = var1;
@@ -1099,6 +1167,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 /* Covariant cast for argument 0 (core) <p0:Set[Object]> isa Set[TypingColorer#0] */
 /* <p0:Set[Object]> isa Set[TypingColorer#0] */
 type_struct = self->type->resolution_table->types[COLOR_abstract_collection__Setlayout_builders__TypingColorer_FT0];
@@ -1110,7 +1179,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 225);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Set[TypingColorer#0]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 225);
 exit(1);
 }
 self->attrs[COLOR_layout_builders__TypingColorer___64dcore].val = p0; /* @core on <self:TypingColorer[Object]> */
@@ -1127,7 +1198,8 @@ val* var /* : Set[Object] */;
 val* var1 /* : Set[Object] */;
 var1 = self->attrs[COLOR_layout_builders__TypingColorer___64dcrown].val; /* @crown on <self:TypingColorer[Object]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @crown", "src/layout_builders.nit", 226);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @crown");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 226);
 exit(1);
 }
 var = var1;
@@ -1149,6 +1221,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 /* Covariant cast for argument 0 (crown) <p0:Set[Object]> isa Set[TypingColorer#0] */
 /* <p0:Set[Object]> isa Set[TypingColorer#0] */
 type_struct = self->type->resolution_table->types[COLOR_abstract_collection__Setlayout_builders__TypingColorer_FT0];
@@ -1160,7 +1233,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 226);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Set[TypingColorer#0]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 226);
 exit(1);
 }
 self->attrs[COLOR_layout_builders__TypingColorer___64dcrown].val = p0; /* @crown on <self:TypingColorer[Object]> */
@@ -1177,7 +1252,8 @@ val* var /* : Set[Object] */;
 val* var1 /* : Set[Object] */;
 var1 = self->attrs[COLOR_layout_builders__TypingColorer___64dborder].val; /* @border on <self:TypingColorer[Object]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @border", "src/layout_builders.nit", 227);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @border");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 227);
 exit(1);
 }
 var = var1;
@@ -1199,6 +1275,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 /* Covariant cast for argument 0 (border) <p0:Set[Object]> isa Set[TypingColorer#0] */
 /* <p0:Set[Object]> isa Set[TypingColorer#0] */
 type_struct = self->type->resolution_table->types[COLOR_abstract_collection__Setlayout_builders__TypingColorer_FT0];
@@ -1210,7 +1287,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 227);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Set[TypingColorer#0]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 227);
 exit(1);
 }
 self->attrs[COLOR_layout_builders__TypingColorer___64dborder].val = p0; /* @border on <self:TypingColorer[Object]> */
@@ -1227,7 +1306,8 @@ val* var /* : Map[Object, Int] */;
 val* var1 /* : Map[Object, Int] */;
 var1 = self->attrs[COLOR_layout_builders__TypingColorer___64dcoloration_result].val; /* @coloration_result on <self:TypingColorer[Object]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @coloration_result", "src/layout_builders.nit", 228);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @coloration_result");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 228);
 exit(1);
 }
 var = var1;
@@ -1249,6 +1329,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 /* Covariant cast for argument 0 (coloration_result) <p0:Map[Object, Int]> isa Map[TypingColorer#0, Int] */
 /* <p0:Map[Object, Int]> isa Map[TypingColorer#0, Int] */
 type_struct = self->type->resolution_table->types[COLOR_abstract_collection__Maplayout_builders__TypingColorer_FT0kernel__Int];
@@ -1260,7 +1341,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 228);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Map[TypingColorer#0, Int]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 228);
 exit(1);
 }
 self->attrs[COLOR_layout_builders__TypingColorer___64dcoloration_result].val = p0; /* @coloration_result on <self:TypingColorer[Object]> */
@@ -1277,7 +1360,8 @@ val* var /* : MModule */;
 val* var1 /* : MModule */;
 var1 = self->attrs[COLOR_layout_builders__TypingColorer___64dmmodule].val; /* @mmodule on <self:TypingColorer[Object]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @mmodule", "src/layout_builders.nit", 230);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @mmodule");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 230);
 exit(1);
 }
 var = var1;
@@ -1309,7 +1393,8 @@ val* var /* : POSetBuilder[Object] */;
 val* var1 /* : POSetBuilder[Object] */;
 var1 = self->attrs[COLOR_layout_builders__TypingColorer___64dposet_builder].val; /* @poset_builder on <self:TypingColorer[Object]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @poset_builder", "src/layout_builders.nit", 231);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @poset_builder");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 231);
 exit(1);
 }
 var = var1;
@@ -1331,6 +1416,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 /* Covariant cast for argument 0 (poset_builder) <p0:POSetBuilder[Object]> isa POSetBuilder[TypingColorer#0] */
 /* <p0:POSetBuilder[Object]> isa POSetBuilder[TypingColorer#0] */
 type_struct = self->type->resolution_table->types[COLOR_layout_builders__POSetBuilderlayout_builders__TypingColorer_FT0];
@@ -1342,7 +1428,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 231);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "POSetBuilder[TypingColorer#0]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 231);
 exit(1);
 }
 self->attrs[COLOR_layout_builders__TypingColorer___64dposet_builder].val = p0; /* @poset_builder on <self:TypingColorer[Object]> */
@@ -1377,6 +1465,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 /* Covariant cast for argument 0 (poset_cache) <p0:nullable POSet[Object]> isa nullable POSet[TypingColorer#0] */
 /* <p0:nullable POSet[Object]> isa nullable POSet[TypingColorer#0] */
 type_struct = self->type->resolution_table->types[COLOR_poset__POSetlayout_builders__TypingColorer_FT0];
@@ -1392,7 +1481,9 @@ var = p0->type->type_table[cltype] == idtype;
 }
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 232);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable POSet[TypingColorer#0]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 232);
 exit(1);
 }
 self->attrs[COLOR_layout_builders__TypingColorer___64dposet_cache].val = p0; /* @poset_cache on <self:TypingColorer[Object]> */
@@ -1409,6 +1500,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_mmodule /* var mmodule: MModule */;
 val* var_poset_builder /* var poset_builder: POSetBuilder[Object] */;
 /* Covariant cast for argument 1 (poset_builder) <p1:POSetBuilder[Object]> isa POSetBuilder[TypingColorer#0] */
@@ -1422,7 +1514,9 @@ var = 0;
 var = p1->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 234);
+var_class_name = p1 == NULL ? "null" : p1->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "POSetBuilder[TypingColorer#0]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 234);
 exit(1);
 }
 var_mmodule = p0;
@@ -1462,6 +1556,7 @@ short int var1 /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_elements /* var elements: Set[Object] */;
 val* var2 /* : POSetBuilder[Object] */;
 val* var3 /* : POSet[Object] */;
@@ -1480,7 +1575,9 @@ var1 = 0;
 var1 = p0->type->type_table[cltype] == idtype;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 241);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Set[TypingColorer#0]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 241);
 exit(1);
 }
 var_elements = p0;
@@ -1516,6 +1613,7 @@ short int var1 /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_elements /* var elements: Set[Object] */;
 val* var2 /* : HashMap[Object, Int] */;
 val* var_ids /* var ids: HashMap[Object, Int] */;
@@ -1537,7 +1635,9 @@ var1 = 0;
 var1 = p0->type->type_table[cltype] == idtype;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 250);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Set[TypingColorer#0]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 250);
 exit(1);
 }
 var_elements = p0;
@@ -1580,6 +1680,7 @@ short int var1 /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_elements /* var elements: Set[Object] */;
 val* var2 /* : Set[Object] */;
 val* var3 /* : Set[Object] */;
@@ -1596,7 +1697,9 @@ var1 = 0;
 var1 = p0->type->type_table[cltype] == idtype;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 258);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Set[TypingColorer#0]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 258);
 exit(1);
 }
 var_elements = p0;
@@ -1629,6 +1732,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_elements /* var elements: Set[Object] */;
 long var1 /* : Int */;
 long var_min_color /* var min_color: Int */;
@@ -1657,7 +1761,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 267);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Set[TypingColorer#0]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 267);
 exit(1);
 }
 var_elements = p0;
@@ -1709,50 +1815,52 @@ short int var1 /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 short int var2 /* : Bool */;
 int cltype3;
 int idtype4;
 const struct type* type_struct5;
+const char* var_class_name6;
 val* var_element /* var element: Object */;
 val* var_elements /* var elements: Set[Object] */;
 long var_color /* var color: Int */;
-val* var6 /* : nullable HashMap[Object, Set[Object]] */;
-short int var7 /* : Bool */;
-val* var8 /* : nullable HashMap[Object, Set[Object]] */;
-val* var9 /* : nullable Object */;
-val* var10 /* : Iterator[nullable Object] */;
-short int var11 /* : Bool */;
-val* var12 /* : nullable Object */;
+val* var7 /* : nullable HashMap[Object, Set[Object]] */;
+short int var8 /* : Bool */;
+val* var9 /* : nullable HashMap[Object, Set[Object]] */;
+val* var10 /* : nullable Object */;
+val* var11 /* : Iterator[nullable Object] */;
+short int var12 /* : Bool */;
+val* var13 /* : nullable Object */;
 val* var_st /* var st: Object */;
-short int var13 /* : Bool */;
-val* var14 /* : Map[Object, Int] */;
-short int var15 /* : Bool */;
+short int var14 /* : Bool */;
+val* var15 /* : Map[Object, Int] */;
+short int var16 /* : Bool */;
 short int var_ /* var : Bool */;
-val* var16 /* : Map[Object, Int] */;
-val* var17 /* : nullable Object */;
-short int var18 /* : Bool */;
-short int var20 /* : Bool */;
-long var21 /* : Int */;
-short int var22 /* : Bool */;
-val* var23 /* : nullable POSet[Object] */;
-val* var24 /* : POSetElement[Object] */;
-val* var25 /* : Collection[Object] */;
-val* var26 /* : Iterator[nullable Object] */;
-short int var27 /* : Bool */;
-val* var28 /* : nullable Object */;
-val* var_st29 /* var st: Object */;
-short int var30 /* : Bool */;
-short int var32 /* : Bool */;
-val* var33 /* : Map[Object, Int] */;
-short int var34 /* : Bool */;
-short int var_35 /* var : Bool */;
-val* var36 /* : Map[Object, Int] */;
-val* var37 /* : nullable Object */;
-short int var38 /* : Bool */;
-short int var40 /* : Bool */;
-long var41 /* : Int */;
-short int var42 /* : Bool */;
+val* var17 /* : Map[Object, Int] */;
+val* var18 /* : nullable Object */;
+short int var19 /* : Bool */;
+short int var21 /* : Bool */;
+long var22 /* : Int */;
+short int var23 /* : Bool */;
+val* var24 /* : nullable POSet[Object] */;
+val* var25 /* : POSetElement[Object] */;
+val* var26 /* : Collection[Object] */;
+val* var27 /* : Iterator[nullable Object] */;
+short int var28 /* : Bool */;
+val* var29 /* : nullable Object */;
+val* var_st30 /* var st: Object */;
+short int var31 /* : Bool */;
+short int var33 /* : Bool */;
+val* var34 /* : Map[Object, Int] */;
+short int var35 /* : Bool */;
+short int var_36 /* var : Bool */;
+val* var37 /* : Map[Object, Int] */;
+val* var38 /* : nullable Object */;
+short int var39 /* : Bool */;
+short int var41 /* : Bool */;
+long var42 /* : Int */;
 short int var43 /* : Bool */;
+short int var44 /* : Bool */;
 /* Covariant cast for argument 0 (element) <p0:Object> isa TypingColorer#0 */
 /* <p0:Object> isa TypingColorer#0 */
 type_struct = self->type->resolution_table->types[COLOR_layout_builders__TypingColorer_FT0];
@@ -1764,7 +1872,9 @@ var1 = 0;
 var1 = p0->type->type_table[cltype] == idtype;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 282);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "TypingColorer#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 282);
 exit(1);
 }
 /* Covariant cast for argument 1 (elements) <p1:Set[Object]> isa Set[TypingColorer#0] */
@@ -1778,116 +1888,121 @@ var2 = 0;
 var2 = p1->type->type_table[cltype3] == idtype4;
 }
 if (!var2) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 282);
+var_class_name6 = p1 == NULL ? "null" : p1->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Set[TypingColorer#0]", var_class_name6);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 282);
 exit(1);
 }
 var_element = p0;
 var_elements = p1;
 var_color = p2;
-var6 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingColorer__conflicts_graph]))(self) /* conflicts_graph on <self:TypingColorer[Object]>*/;
-if (var6 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/layout_builders.nit", 284);
+var7 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingColorer__conflicts_graph]))(self) /* conflicts_graph on <self:TypingColorer[Object]>*/;
+if (var7 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 284);
 exit(1);
 } else {
-var7 = ((short int (*)(val*, val*))(var6->class->vft[COLOR_abstract_collection__MapRead__has_key]))(var6, var_element) /* has_key on <var6:nullable HashMap[Object, Set[Object]]>*/;
+var8 = ((short int (*)(val*, val*))(var7->class->vft[COLOR_abstract_collection__MapRead__has_key]))(var7, var_element) /* has_key on <var7:nullable HashMap[Object, Set[Object]]>*/;
 }
-if (var7){
-var8 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingColorer__conflicts_graph]))(self) /* conflicts_graph on <self:TypingColorer[Object]>*/;
-if (var8 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/layout_builders.nit", 285);
+if (var8){
+var9 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingColorer__conflicts_graph]))(self) /* conflicts_graph on <self:TypingColorer[Object]>*/;
+if (var9 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 285);
 exit(1);
 } else {
-var9 = ((val* (*)(val*, val*))(var8->class->vft[COLOR_abstract_collection__MapRead___91d_93d]))(var8, var_element) /* [] on <var8:nullable HashMap[Object, Set[Object]]>*/;
+var10 = ((val* (*)(val*, val*))(var9->class->vft[COLOR_abstract_collection__MapRead___91d_93d]))(var9, var_element) /* [] on <var9:nullable HashMap[Object, Set[Object]]>*/;
 }
-var10 = ((val* (*)(val*))(var9->class->vft[COLOR_abstract_collection__Collection__iterator]))(var9) /* iterator on <var9:nullable Object(Set[Object])>*/;
+var11 = ((val* (*)(val*))(var10->class->vft[COLOR_abstract_collection__Collection__iterator]))(var10) /* iterator on <var10:nullable Object(Set[Object])>*/;
 for(;;) {
-var11 = ((short int (*)(val*))(var10->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var10) /* is_ok on <var10:Iterator[nullable Object]>*/;
-if(!var11) break;
-var12 = ((val* (*)(val*))(var10->class->vft[COLOR_abstract_collection__Iterator__item]))(var10) /* item on <var10:Iterator[nullable Object]>*/;
-var_st = var12;
-var14 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingColorer__coloration_result]))(self) /* coloration_result on <self:TypingColorer[Object]>*/;
-var15 = ((short int (*)(val*, val*))(var14->class->vft[COLOR_abstract_collection__MapRead__has_key]))(var14, var_st) /* has_key on <var14:Map[Object, Int]>*/;
-var_ = var15;
-if (var15){
-var16 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingColorer__coloration_result]))(self) /* coloration_result on <self:TypingColorer[Object]>*/;
-var17 = ((val* (*)(val*, val*))(var16->class->vft[COLOR_abstract_collection__MapRead___91d_93d]))(var16, var_st) /* [] on <var16:Map[Object, Int]>*/;
-{ /* Inline kernel#Int#== (var17,var_color) */
-var20 = (var17 != NULL) && (var17->class == &class_kernel__Int);
-if (var20) {
-var21 = ((struct instance_kernel__Int*)var17)->value; /* autounbox from nullable Object to Int */;
-var20 = (var21 == var_color);
+var12 = ((short int (*)(val*))(var11->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var11) /* is_ok on <var11:Iterator[nullable Object]>*/;
+if(!var12) break;
+var13 = ((val* (*)(val*))(var11->class->vft[COLOR_abstract_collection__Iterator__item]))(var11) /* item on <var11:Iterator[nullable Object]>*/;
+var_st = var13;
+var15 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingColorer__coloration_result]))(self) /* coloration_result on <self:TypingColorer[Object]>*/;
+var16 = ((short int (*)(val*, val*))(var15->class->vft[COLOR_abstract_collection__MapRead__has_key]))(var15, var_st) /* has_key on <var15:Map[Object, Int]>*/;
+var_ = var16;
+if (var16){
+var17 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingColorer__coloration_result]))(self) /* coloration_result on <self:TypingColorer[Object]>*/;
+var18 = ((val* (*)(val*, val*))(var17->class->vft[COLOR_abstract_collection__MapRead___91d_93d]))(var17, var_st) /* [] on <var17:Map[Object, Int]>*/;
+{ /* Inline kernel#Int#== (var18,var_color) */
+var21 = (var18 != NULL) && (var18->class == &class_kernel__Int);
+if (var21) {
+var22 = ((struct instance_kernel__Int*)var18)->value; /* autounbox from nullable Object to Int */;
+var21 = (var22 == var_color);
 }
-var18 = var20;
-goto RET_LABEL19;
-RET_LABEL19:(void)0;
+var19 = var21;
+goto RET_LABEL20;
+RET_LABEL20:(void)0;
 }
-var13 = var18;
+var14 = var19;
 } else {
-var13 = var_;
+var14 = var_;
 }
-if (var13){
-var22 = 0;
-var = var22;
+if (var14){
+var23 = 0;
+var = var23;
 goto RET_LABEL;
 } else {
 }
 CONTINUE_label: (void)0;
-((void (*)(val*))(var10->class->vft[COLOR_abstract_collection__Iterator__next]))(var10) /* next on <var10:Iterator[nullable Object]>*/;
+((void (*)(val*))(var11->class->vft[COLOR_abstract_collection__Iterator__next]))(var11) /* next on <var11:Iterator[nullable Object]>*/;
 }
 BREAK_label: (void)0;
 } else {
 }
-var23 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingLayoutBuilder__poset]))(self) /* poset on <self:TypingColorer[Object]>*/;
-if (var23 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/layout_builders.nit", 289);
+var24 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingLayoutBuilder__poset]))(self) /* poset on <self:TypingColorer[Object]>*/;
+if (var24 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 289);
 exit(1);
 } else {
-var24 = ((val* (*)(val*, val*))(var23->class->vft[COLOR_poset__POSet___91d_93d]))(var23, var_element) /* [] on <var23:nullable POSet[Object]>*/;
+var25 = ((val* (*)(val*, val*))(var24->class->vft[COLOR_poset__POSet___91d_93d]))(var24, var_element) /* [] on <var24:nullable POSet[Object]>*/;
 }
-var25 = ((val* (*)(val*))(var24->class->vft[COLOR_poset__POSetElement__greaters]))(var24) /* greaters on <var24:POSetElement[Object]>*/;
-var26 = ((val* (*)(val*))(var25->class->vft[COLOR_abstract_collection__Collection__iterator]))(var25) /* iterator on <var25:Collection[Object]>*/;
+var26 = ((val* (*)(val*))(var25->class->vft[COLOR_poset__POSetElement__greaters]))(var25) /* greaters on <var25:POSetElement[Object]>*/;
+var27 = ((val* (*)(val*))(var26->class->vft[COLOR_abstract_collection__Collection__iterator]))(var26) /* iterator on <var26:Collection[Object]>*/;
 for(;;) {
-var27 = ((short int (*)(val*))(var26->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var26) /* is_ok on <var26:Iterator[nullable Object]>*/;
-if(!var27) break;
-var28 = ((val* (*)(val*))(var26->class->vft[COLOR_abstract_collection__Iterator__item]))(var26) /* item on <var26:Iterator[nullable Object]>*/;
-var_st29 = var28;
-var30 = ((short int (*)(val*, val*))(var_st29->class->vft[COLOR_kernel__Object___61d_61d]))(var_st29, var_element) /* == on <var_st29:Object>*/;
-if (var30){
-goto CONTINUE_label31;
+var28 = ((short int (*)(val*))(var27->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var27) /* is_ok on <var27:Iterator[nullable Object]>*/;
+if(!var28) break;
+var29 = ((val* (*)(val*))(var27->class->vft[COLOR_abstract_collection__Iterator__item]))(var27) /* item on <var27:Iterator[nullable Object]>*/;
+var_st30 = var29;
+var31 = ((short int (*)(val*, val*))(var_st30->class->vft[COLOR_kernel__Object___61d_61d]))(var_st30, var_element) /* == on <var_st30:Object>*/;
+if (var31){
+goto CONTINUE_label32;
 } else {
 }
-var33 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingColorer__coloration_result]))(self) /* coloration_result on <self:TypingColorer[Object]>*/;
-var34 = ((short int (*)(val*, val*))(var33->class->vft[COLOR_abstract_collection__MapRead__has_key]))(var33, var_st29) /* has_key on <var33:Map[Object, Int]>*/;
-var_35 = var34;
-if (var34){
-var36 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingColorer__coloration_result]))(self) /* coloration_result on <self:TypingColorer[Object]>*/;
-var37 = ((val* (*)(val*, val*))(var36->class->vft[COLOR_abstract_collection__MapRead___91d_93d]))(var36, var_st29) /* [] on <var36:Map[Object, Int]>*/;
-{ /* Inline kernel#Int#== (var37,var_color) */
-var40 = (var37 != NULL) && (var37->class == &class_kernel__Int);
-if (var40) {
-var41 = ((struct instance_kernel__Int*)var37)->value; /* autounbox from nullable Object to Int */;
-var40 = (var41 == var_color);
+var34 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingColorer__coloration_result]))(self) /* coloration_result on <self:TypingColorer[Object]>*/;
+var35 = ((short int (*)(val*, val*))(var34->class->vft[COLOR_abstract_collection__MapRead__has_key]))(var34, var_st30) /* has_key on <var34:Map[Object, Int]>*/;
+var_36 = var35;
+if (var35){
+var37 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingColorer__coloration_result]))(self) /* coloration_result on <self:TypingColorer[Object]>*/;
+var38 = ((val* (*)(val*, val*))(var37->class->vft[COLOR_abstract_collection__MapRead___91d_93d]))(var37, var_st30) /* [] on <var37:Map[Object, Int]>*/;
+{ /* Inline kernel#Int#== (var38,var_color) */
+var41 = (var38 != NULL) && (var38->class == &class_kernel__Int);
+if (var41) {
+var42 = ((struct instance_kernel__Int*)var38)->value; /* autounbox from nullable Object to Int */;
+var41 = (var42 == var_color);
 }
-var38 = var40;
-goto RET_LABEL39;
-RET_LABEL39:(void)0;
+var39 = var41;
+goto RET_LABEL40;
+RET_LABEL40:(void)0;
 }
-var32 = var38;
+var33 = var39;
 } else {
-var32 = var_35;
+var33 = var_36;
 }
-if (var32){
-var42 = 0;
-var = var42;
+if (var33){
+var43 = 0;
+var = var43;
 goto RET_LABEL;
 } else {
 }
-CONTINUE_label31: (void)0;
-((void (*)(val*))(var26->class->vft[COLOR_abstract_collection__Iterator__next]))(var26) /* next on <var26:Iterator[nullable Object]>*/;
+CONTINUE_label32: (void)0;
+((void (*)(val*))(var27->class->vft[COLOR_abstract_collection__Iterator__next]))(var27) /* next on <var27:Iterator[nullable Object]>*/;
 }
-BREAK_label31: (void)0;
-var43 = 1;
-var = var43;
+BREAK_label32: (void)0;
+var44 = 1;
+var = var44;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -1907,6 +2022,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_elements /* var elements: Set[Object] */;
 val* var1 /* : Iterator[nullable Object] */;
 short int var2 /* : Bool */;
@@ -1930,29 +2046,31 @@ short int var16 /* : Bool */;
 short int var18 /* : Bool */;
 int cltype19;
 int idtype20;
-short int var21 /* : Bool */;
+const char* var_class_name21;
 short int var22 /* : Bool */;
-val* var23 /* : nullable POSet[Object] */;
-val* var24 /* : POSetElement[Object] */;
-val* var25 /* : Collection[Object] */;
-long var26 /* : Int */;
+short int var23 /* : Bool */;
+val* var24 /* : nullable POSet[Object] */;
+val* var25 /* : POSetElement[Object] */;
+val* var26 /* : Collection[Object] */;
 long var27 /* : Int */;
-short int var28 /* : Bool */;
-short int var30 /* : Bool */;
-int cltype31;
-int idtype32;
-short int var33 /* : Bool */;
-val* var34 /* : Set[Object] */;
-val* var35 /* : nullable POSet[Object] */;
-val* var36 /* : POSetElement[Object] */;
-val* var37 /* : Collection[Object] */;
-val* var38 /* : Set[Object] */;
-short int var39 /* : Bool */;
+long var28 /* : Int */;
+short int var29 /* : Bool */;
+short int var31 /* : Bool */;
+int cltype32;
+int idtype33;
+const char* var_class_name34;
+short int var35 /* : Bool */;
+val* var36 /* : Set[Object] */;
+val* var37 /* : nullable POSet[Object] */;
+val* var38 /* : POSetElement[Object] */;
+val* var39 /* : Collection[Object] */;
 val* var40 /* : Set[Object] */;
-val* var41 /* : nullable POSet[Object] */;
-val* var42 /* : POSetElement[Object] */;
-val* var43 /* : Collection[Object] */;
-val* var44 /* : Set[Object] */;
+short int var41 /* : Bool */;
+val* var42 /* : Set[Object] */;
+val* var43 /* : nullable POSet[Object] */;
+val* var44 /* : POSetElement[Object] */;
+val* var45 /* : Collection[Object] */;
+val* var46 /* : Set[Object] */;
 /* Covariant cast for argument 0 (elements) <p0:Set[Object]> isa Set[TypingColorer#0] */
 /* <p0:Set[Object]> isa Set[TypingColorer#0] */
 type_struct = self->type->resolution_table->types[COLOR_abstract_collection__Setlayout_builders__TypingColorer_FT0];
@@ -1964,7 +2082,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 296);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Set[TypingColorer#0]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 296);
 exit(1);
 }
 var_elements = p0;
@@ -1978,7 +2098,8 @@ var4 = 1;
 var_all_subelements_si = var4;
 var5 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingLayoutBuilder__poset]))(self) /* poset on <self:TypingColorer[Object]>*/;
 if (var5 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/layout_builders.nit", 301);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 301);
 exit(1);
 } else {
 var6 = ((val* (*)(val*, val*))(var5->class->vft[COLOR_poset__POSet___91d_93d]))(var5, var_element) /* [] on <var5:nullable POSet[Object]>*/;
@@ -1992,7 +2113,8 @@ var10 = ((val* (*)(val*))(var8->class->vft[COLOR_abstract_collection__Iterator__
 var_subelem = var10;
 var11 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingLayoutBuilder__poset]))(self) /* poset on <self:TypingColorer[Object]>*/;
 if (var11 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/layout_builders.nit", 302);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 302);
 exit(1);
 } else {
 var12 = ((val* (*)(val*, val*))(var11->class->vft[COLOR_poset__POSet___91d_93d]))(var11, var_subelem) /* [] on <var11:nullable POSet[Object]>*/;
@@ -2005,17 +2127,19 @@ var15 = 1;
 /* <var15:Int> isa OTHER */
 var18 = 1; /* easy <var15:Int> isa OTHER*/
 if (!var18) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 259);
+var_class_name21 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name21);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
 exit(1);
 }
-var21 = var14 > var15;
-var16 = var21;
+var22 = var14 > var15;
+var16 = var22;
 goto RET_LABEL17;
 RET_LABEL17:(void)0;
 }
 if (var16){
-var22 = 0;
-var_all_subelements_si = var22;
+var23 = 0;
+var_all_subelements_si = var23;
 goto BREAK_label;
 } else {
 }
@@ -2023,67 +2147,72 @@ CONTINUE_label: (void)0;
 ((void (*)(val*))(var8->class->vft[COLOR_abstract_collection__Iterator__next]))(var8) /* next on <var8:Iterator[nullable Object]>*/;
 }
 BREAK_label: (void)0;
-var23 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingLayoutBuilder__poset]))(self) /* poset on <self:TypingColorer[Object]>*/;
-if (var23 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/layout_builders.nit", 309);
+var24 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingLayoutBuilder__poset]))(self) /* poset on <self:TypingColorer[Object]>*/;
+if (var24 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 309);
 exit(1);
 } else {
-var24 = ((val* (*)(val*, val*))(var23->class->vft[COLOR_poset__POSet___91d_93d]))(var23, var_element) /* [] on <var23:nullable POSet[Object]>*/;
+var25 = ((val* (*)(val*, val*))(var24->class->vft[COLOR_poset__POSet___91d_93d]))(var24, var_element) /* [] on <var24:nullable POSet[Object]>*/;
 }
-var25 = ((val* (*)(val*))(var24->class->vft[COLOR_poset__POSetElement__direct_greaters]))(var24) /* direct_greaters on <var24:POSetElement[Object]>*/;
-var26 = ((long (*)(val*))(var25->class->vft[COLOR_abstract_collection__Collection__length]))(var25) /* length on <var25:Collection[Object]>*/;
-var27 = 1;
-{ /* Inline kernel#Int#> (var26,var27) */
-/* Covariant cast for argument 0 (i) <var27:Int> isa OTHER */
-/* <var27:Int> isa OTHER */
-var30 = 1; /* easy <var27:Int> isa OTHER*/
-if (!var30) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 259);
+var26 = ((val* (*)(val*))(var25->class->vft[COLOR_poset__POSetElement__direct_greaters]))(var25) /* direct_greaters on <var25:POSetElement[Object]>*/;
+var27 = ((long (*)(val*))(var26->class->vft[COLOR_abstract_collection__Collection__length]))(var26) /* length on <var26:Collection[Object]>*/;
+var28 = 1;
+{ /* Inline kernel#Int#> (var27,var28) */
+/* Covariant cast for argument 0 (i) <var28:Int> isa OTHER */
+/* <var28:Int> isa OTHER */
+var31 = 1; /* easy <var28:Int> isa OTHER*/
+if (!var31) {
+var_class_name34 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name34);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
 exit(1);
 }
-var33 = var26 > var27;
-var28 = var33;
-goto RET_LABEL29;
-RET_LABEL29:(void)0;
+var35 = var27 > var28;
+var29 = var35;
+goto RET_LABEL30;
+RET_LABEL30:(void)0;
 }
-if (var28){
-var34 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingColorer__core]))(self) /* core on <self:TypingColorer[Object]>*/;
-var35 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingLayoutBuilder__poset]))(self) /* poset on <self:TypingColorer[Object]>*/;
-if (var35 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/layout_builders.nit", 310);
+if (var29){
+var36 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingColorer__core]))(self) /* core on <self:TypingColorer[Object]>*/;
+var37 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingLayoutBuilder__poset]))(self) /* poset on <self:TypingColorer[Object]>*/;
+if (var37 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 310);
 exit(1);
 } else {
-var36 = ((val* (*)(val*, val*))(var35->class->vft[COLOR_poset__POSet___91d_93d]))(var35, var_element) /* [] on <var35:nullable POSet[Object]>*/;
+var38 = ((val* (*)(val*, val*))(var37->class->vft[COLOR_poset__POSet___91d_93d]))(var37, var_element) /* [] on <var37:nullable POSet[Object]>*/;
 }
-var37 = ((val* (*)(val*))(var36->class->vft[COLOR_poset__POSetElement__greaters]))(var36) /* greaters on <var36:POSetElement[Object]>*/;
-((void (*)(val*, val*))(var34->class->vft[COLOR_abstract_collection__SimpleCollection__add_all]))(var34, var37) /* add_all on <var34:Set[Object]>*/;
+var39 = ((val* (*)(val*))(var38->class->vft[COLOR_poset__POSetElement__greaters]))(var38) /* greaters on <var38:POSetElement[Object]>*/;
+((void (*)(val*, val*))(var36->class->vft[COLOR_abstract_collection__SimpleCollection__add_all]))(var36, var39) /* add_all on <var36:Set[Object]>*/;
 if (var_all_subelements_si){
-var38 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingColorer__border]))(self) /* border on <self:TypingColorer[Object]>*/;
-((void (*)(val*, val*))(var38->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var38, var_element) /* add on <var38:Set[Object]>*/;
+var40 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingColorer__border]))(self) /* border on <self:TypingColorer[Object]>*/;
+((void (*)(val*, val*))(var40->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var40, var_element) /* add on <var40:Set[Object]>*/;
 } else {
 }
 } else {
-var39 = !var_all_subelements_si;
-if (var39){
-var40 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingColorer__core]))(self) /* core on <self:TypingColorer[Object]>*/;
-var41 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingLayoutBuilder__poset]))(self) /* poset on <self:TypingColorer[Object]>*/;
-if (var41 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/layout_builders.nit", 315);
+var41 = !var_all_subelements_si;
+if (var41){
+var42 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingColorer__core]))(self) /* core on <self:TypingColorer[Object]>*/;
+var43 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingLayoutBuilder__poset]))(self) /* poset on <self:TypingColorer[Object]>*/;
+if (var43 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 315);
 exit(1);
 } else {
-var42 = ((val* (*)(val*, val*))(var41->class->vft[COLOR_poset__POSet___91d_93d]))(var41, var_element) /* [] on <var41:nullable POSet[Object]>*/;
+var44 = ((val* (*)(val*, val*))(var43->class->vft[COLOR_poset__POSet___91d_93d]))(var43, var_element) /* [] on <var43:nullable POSet[Object]>*/;
 }
-var43 = ((val* (*)(val*))(var42->class->vft[COLOR_poset__POSetElement__greaters]))(var42) /* greaters on <var42:POSetElement[Object]>*/;
-((void (*)(val*, val*))(var40->class->vft[COLOR_abstract_collection__SimpleCollection__add_all]))(var40, var43) /* add_all on <var40:Set[Object]>*/;
+var45 = ((val* (*)(val*))(var44->class->vft[COLOR_poset__POSetElement__greaters]))(var44) /* greaters on <var44:POSetElement[Object]>*/;
+((void (*)(val*, val*))(var42->class->vft[COLOR_abstract_collection__SimpleCollection__add_all]))(var42, var45) /* add_all on <var42:Set[Object]>*/;
 } else {
-var44 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingColorer__crown]))(self) /* crown on <self:TypingColorer[Object]>*/;
-((void (*)(val*, val*))(var44->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var44, var_element) /* add on <var44:Set[Object]>*/;
+var46 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingColorer__crown]))(self) /* crown on <self:TypingColorer[Object]>*/;
+((void (*)(val*, val*))(var46->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var46, var_element) /* add on <var46:Set[Object]>*/;
 }
 }
-CONTINUE_label45: (void)0;
+CONTINUE_label47: (void)0;
 ((void (*)(val*))(var1->class->vft[COLOR_abstract_collection__Iterator__next]))(var1) /* next on <var1:Iterator[nullable Object]>*/;
 }
-BREAK_label45: (void)0;
+BREAK_label47: (void)0;
 RET_LABEL:;
 }
 /* method layout_builders#TypingColorer#tag_elements for (self: Object, Set[Object]) */
@@ -2214,7 +2343,8 @@ var25 = ((val* (*)(val*))(var23->class->vft[COLOR_abstract_collection__Iterator_
 var_ed1 = var25;
 var26 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingColorer__conflicts_graph]))(self) /* conflicts_graph on <self:TypingColorer[Object]>*/;
 if (var26 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/layout_builders.nit", 340);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 340);
 exit(1);
 } else {
 var27 = ((short int (*)(val*, val*))(var26->class->vft[COLOR_abstract_collection__MapRead__has_key]))(var26, var_ed1) /* has_key on <var26:nullable HashMap[Object, Set[Object]]>*/;
@@ -2226,7 +2356,8 @@ var30 = NEW_hash_collection__HashSet(self->type->resolution_table->types[COLOR_h
 ((void (*)(val*))(var30->class->vft[COLOR_hash_collection__HashSet__init]))(var30) /* init on <var30:HashSet[Object]>*/;
 CHECK_NEW_hash_collection__HashSet(var30);
 if (var29 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/layout_builders.nit", 340);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 340);
 exit(1);
 } else {
 ((void (*)(val*, val*, val*))(var29->class->vft[COLOR_abstract_collection__Map___91d_93d_61d]))(var29, var_ed1, var30) /* []= on <var29:nullable HashMap[Object, Set[Object]]>*/;
@@ -2241,7 +2372,8 @@ var33 = ((val* (*)(val*))(var31->class->vft[COLOR_abstract_collection__Iterator_
 var_ed2 = var33;
 var34 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingColorer__conflicts_graph]))(self) /* conflicts_graph on <self:TypingColorer[Object]>*/;
 if (var34 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/layout_builders.nit", 342);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 342);
 exit(1);
 } else {
 var35 = ((val* (*)(val*, val*))(var34->class->vft[COLOR_abstract_collection__MapRead___91d_93d]))(var34, var_ed1) /* [] on <var34:nullable HashMap[Object, Set[Object]]>*/;
@@ -2263,7 +2395,8 @@ var40 = ((val* (*)(val*))(var38->class->vft[COLOR_abstract_collection__Iterator_
 var_ed141 = var40;
 var42 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingColorer__conflicts_graph]))(self) /* conflicts_graph on <self:TypingColorer[Object]>*/;
 if (var42 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/layout_builders.nit", 345);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 345);
 exit(1);
 } else {
 var43 = ((short int (*)(val*, val*))(var42->class->vft[COLOR_abstract_collection__MapRead__has_key]))(var42, var_ed141) /* has_key on <var42:nullable HashMap[Object, Set[Object]]>*/;
@@ -2275,7 +2408,8 @@ var46 = NEW_hash_collection__HashSet(self->type->resolution_table->types[COLOR_h
 ((void (*)(val*))(var46->class->vft[COLOR_hash_collection__HashSet__init]))(var46) /* init on <var46:HashSet[Object]>*/;
 CHECK_NEW_hash_collection__HashSet(var46);
 if (var45 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/layout_builders.nit", 345);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 345);
 exit(1);
 } else {
 ((void (*)(val*, val*, val*))(var45->class->vft[COLOR_abstract_collection__Map___91d_93d_61d]))(var45, var_ed141, var46) /* []= on <var45:nullable HashMap[Object, Set[Object]]>*/;
@@ -2290,7 +2424,8 @@ var49 = ((val* (*)(val*))(var47->class->vft[COLOR_abstract_collection__Iterator_
 var_ed250 = var49;
 var51 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingColorer__conflicts_graph]))(self) /* conflicts_graph on <self:TypingColorer[Object]>*/;
 if (var51 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/layout_builders.nit", 347);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 347);
 exit(1);
 } else {
 var52 = ((val* (*)(val*, val*))(var51->class->vft[COLOR_abstract_collection__MapRead___91d_93d]))(var51, var_ed141) /* [] on <var51:nullable HashMap[Object, Set[Object]]>*/;
@@ -2347,6 +2482,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 /* Covariant cast for argument 0 (conflicts_graph) <p0:nullable HashMap[Object, Set[Object]]> isa nullable HashMap[TypingColorer#0, Set[TypingColorer#0]] */
 /* <p0:nullable HashMap[Object, Set[Object]]> isa nullable HashMap[TypingColorer#0, Set[TypingColorer#0]] */
 type_struct = self->type->resolution_table->types[COLOR_hash_collection__HashMaplayout_builders__TypingColorer_FT0abstract_collection__Setlayout_builders__TypingColorer_FT0];
@@ -2362,7 +2498,9 @@ var = p0->type->type_table[cltype] == idtype;
 }
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 354);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable HashMap[TypingColorer#0, Set[TypingColorer#0]]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 354);
 exit(1);
 }
 self->attrs[COLOR_layout_builders__TypingColorer___64dconflicts_graph].val = p0; /* @conflicts_graph on <self:TypingColorer[Object]> */
@@ -2379,7 +2517,8 @@ val* var /* : Map[Object, Array[Object]] */;
 val* var1 /* : Map[Object, Array[Object]] */;
 var1 = self->attrs[COLOR_layout_builders__TypingColorer___64dlinear_extensions_cache].val; /* @linear_extensions_cache on <self:TypingColorer[Object]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @linear_extensions_cache", "src/layout_builders.nit", 356);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @linear_extensions_cache");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 356);
 exit(1);
 }
 var = var1;
@@ -2401,6 +2540,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 /* Covariant cast for argument 0 (linear_extensions_cache) <p0:Map[Object, Array[Object]]> isa Map[TypingColorer#0, Array[TypingColorer#0]] */
 /* <p0:Map[Object, Array[Object]]> isa Map[TypingColorer#0, Array[TypingColorer#0]] */
 type_struct = self->type->resolution_table->types[COLOR_abstract_collection__Maplayout_builders__TypingColorer_FT0array__Arraylayout_builders__TypingColorer_FT0];
@@ -2412,7 +2552,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 356);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Map[TypingColorer#0, Array[TypingColorer#0]]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 356);
 exit(1);
 }
 self->attrs[COLOR_layout_builders__TypingColorer___64dlinear_extensions_cache].val = p0; /* @linear_extensions_cache on <self:TypingColorer[Object]> */
@@ -2430,6 +2572,7 @@ short int var1 /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_element /* var element: Object */;
 val* var2 /* : Map[Object, Array[Object]] */;
 short int var3 /* : Bool */;
@@ -2454,7 +2597,9 @@ var1 = 0;
 var1 = p0->type->type_table[cltype] == idtype;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 359);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "TypingColorer#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 359);
 exit(1);
 }
 var_element = p0;
@@ -2468,7 +2613,8 @@ CHECK_NEW_hash_collection__HashSet(var5);
 var_supers = var5;
 var6 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingLayoutBuilder__poset]))(self) /* poset on <self:TypingColorer[Object]>*/;
 if (var6 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/layout_builders.nit", 363);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 363);
 exit(1);
 } else {
 var7 = ((val* (*)(val*, val*))(var6->class->vft[COLOR_poset__POSet___91d_93d]))(var6, var_element) /* [] on <var6:nullable POSet[Object]>*/;
@@ -2503,6 +2649,7 @@ short int var1 /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_elements /* var elements: Set[Object] */;
 val* var2 /* : Array[Object] */;
 val* var_lin /* var lin: Array[Object] */;
@@ -2518,7 +2665,9 @@ var1 = 0;
 var1 = p0->type->type_table[cltype] == idtype;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 369);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Set[TypingColorer#0]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 369);
 exit(1);
 }
 var_elements = p0;
@@ -2529,7 +2678,8 @@ var_lin = var2;
 ((void (*)(val*, val*))(var_lin->class->vft[COLOR_abstract_collection__SimpleCollection__add_all]))(var_lin, var_elements) /* add_all on <var_lin:Array[Object]>*/;
 var3 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingLayoutBuilder__poset]))(self) /* poset on <self:TypingColorer[Object]>*/;
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/layout_builders.nit", 372);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 372);
 exit(1);
 } else {
 ((void (*)(val*, val*))(var3->class->vft[COLOR_sorter__AbstractSorter__sort]))(var3, var_lin) /* sort on <var3:nullable POSet[Object]>*/;
@@ -2555,6 +2705,7 @@ short int var1 /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_elements /* var elements: Set[Object] */;
 val* var2 /* : Array[Object] */;
 val* var3 /* : Array[nullable Object] */;
@@ -2569,7 +2720,9 @@ var1 = 0;
 var1 = p0->type->type_table[cltype] == idtype;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 375);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Set[TypingColorer#0]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 375);
 exit(1);
 }
 var_elements = p0;
@@ -2627,7 +2780,8 @@ val* var /* : MModule */;
 val* var1 /* : MModule */;
 var1 = self->attrs[COLOR_layout_builders__MPropertyColorer___64dmmodule].val; /* @mmodule on <self:MPropertyColorer[PropertyLayoutElement]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @mmodule", "src/layout_builders.nit", 394);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @mmodule");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 394);
 exit(1);
 }
 var = var1;
@@ -2659,7 +2813,8 @@ val* var /* : MClassColorer */;
 val* var1 /* : MClassColorer */;
 var1 = self->attrs[COLOR_layout_builders__MPropertyColorer___64dclass_colorer].val; /* @class_colorer on <self:MPropertyColorer[PropertyLayoutElement]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @class_colorer", "src/layout_builders.nit", 395);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @class_colorer");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 395);
 exit(1);
 }
 var = var1;
@@ -2691,7 +2846,8 @@ val* var /* : Map[PropertyLayoutElement, Int] */;
 val* var1 /* : Map[PropertyLayoutElement, Int] */;
 var1 = self->attrs[COLOR_layout_builders__MPropertyColorer___64dcoloration_result].val; /* @coloration_result on <self:MPropertyColorer[PropertyLayoutElement]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @coloration_result", "src/layout_builders.nit", 396);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @coloration_result");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 396);
 exit(1);
 }
 var = var1;
@@ -2713,6 +2869,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 /* Covariant cast for argument 0 (coloration_result) <p0:Map[PropertyLayoutElement, Int]> isa Map[MPropertyColorer#0, Int] */
 /* <p0:Map[PropertyLayoutElement, Int]> isa Map[MPropertyColorer#0, Int] */
 type_struct = self->type->resolution_table->types[COLOR_abstract_collection__Maplayout_builders__MPropertyColorer_FT0kernel__Int];
@@ -2724,7 +2881,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 396);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Map[MPropertyColorer#0, Int]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 396);
 exit(1);
 }
 self->attrs[COLOR_layout_builders__MPropertyColorer___64dcoloration_result].val = p0; /* @coloration_result on <self:MPropertyColorer[PropertyLayoutElement]> */
@@ -2757,6 +2916,7 @@ short int var1 /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_elements /* var elements: Map[MClass, Set[PropertyLayoutElement]] */;
 val* var2 /* : Layout[PropertyLayoutElement] */;
 val* var_result /* var result: Layout[PropertyLayoutElement] */;
@@ -2772,7 +2932,9 @@ var1 = 0;
 var1 = p0->type->type_table[cltype] == idtype;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 403);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Map[MClass, Set[MPropertyColorer#0]]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 403);
 exit(1);
 }
 var_elements = p0;
@@ -2803,6 +2965,7 @@ short int var1 /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_elements /* var elements: Map[MClass, Set[PropertyLayoutElement]] */;
 val* var2 /* : Map[PropertyLayoutElement, Int] */;
 /* Covariant cast for argument 0 (elements) <p0:Map[MClass, Set[PropertyLayoutElement]]> isa Map[MClass, Set[MPropertyColorer#0]] */
@@ -2816,7 +2979,9 @@ var1 = 0;
 var1 = p0->type->type_table[cltype] == idtype;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 410);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Map[MClass, Set[MPropertyColorer#0]]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 410);
 exit(1);
 }
 var_elements = p0;
@@ -2843,6 +3008,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_elements /* var elements: Map[MClass, Set[PropertyLayoutElement]] */;
 long var1 /* : Int */;
 long var_min_color /* var min_color: Int */;
@@ -2876,7 +3042,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 416);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Map[MClass, Set[MPropertyColorer#0]]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 416);
 exit(1);
 }
 var_elements = p0;
@@ -2899,7 +3067,8 @@ var_color = var10;
 var11 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__MPropertyColorer__class_colorer]))(self) /* class_colorer on <self:MPropertyColorer[PropertyLayoutElement]>*/;
 var12 = ((val* (*)(val*))(var11->class->vft[COLOR_layout_builders__TypingColorer__conflicts_graph]))(var11) /* conflicts_graph on <var11:MClassColorer>*/;
 if (var12 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/layout_builders.nit", 424);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 424);
 exit(1);
 } else {
 var13 = ((short int (*)(val*, val*))(var12->class->vft[COLOR_abstract_collection__MapRead__has_key]))(var12, var_mclass) /* has_key on <var12:nullable HashMap[Object, Set[Object]](nullable HashMap[MClass, Set[MClass]])>*/;
@@ -2908,7 +3077,8 @@ if (var13){
 var14 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__MPropertyColorer__class_colorer]))(self) /* class_colorer on <self:MPropertyColorer[PropertyLayoutElement]>*/;
 var15 = ((val* (*)(val*))(var14->class->vft[COLOR_layout_builders__TypingColorer__conflicts_graph]))(var14) /* conflicts_graph on <var14:MClassColorer>*/;
 if (var15 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/layout_builders.nit", 425);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 425);
 exit(1);
 } else {
 var16 = ((val* (*)(val*, val*))(var15->class->vft[COLOR_abstract_collection__MapRead___91d_93d]))(var15, var_mclass) /* [] on <var15:nullable HashMap[Object, Set[Object]](nullable HashMap[MClass, Set[MClass]])>*/;
@@ -2936,6 +3106,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_elements /* var elements: Map[MClass, Set[PropertyLayoutElement]] */;
 val* var1 /* : MClassColorer */;
 val* var2 /* : Set[Object] */;
@@ -2965,7 +3136,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 431);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Map[MClass, Set[MPropertyColorer#0]]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 431);
 exit(1);
 }
 var_elements = p0;
@@ -3012,6 +3185,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_elements /* var elements: Collection[PropertyLayoutElement] */;
 long var_start_color /* var start_color: Int */;
 val* var1 /* : Iterator[nullable Object] */;
@@ -3036,7 +3210,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 442);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Collection[MPropertyColorer#0]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 442);
 exit(1);
 }
 var_elements = p0;
@@ -3082,6 +3258,7 @@ short int var1 /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 long var_min_color /* var min_color: Int */;
 val* var_mclasses /* var mclasses: Collection[MClass] */;
 val* var_elements /* var elements: Map[MClass, Set[PropertyLayoutElement]] */;
@@ -3105,10 +3282,11 @@ short int var14 /* : Bool */;
 short int var16 /* : Bool */;
 int cltype17;
 int idtype18;
-short int var19 /* : Bool */;
-long var20 /* : Int */;
+const char* var_class_name19;
+short int var20 /* : Bool */;
 long var21 /* : Int */;
-long var23 /* : Int */;
+long var22 /* : Int */;
+long var24 /* : Int */;
 /* Covariant cast for argument 2 (elements) <p2:Map[MClass, Set[PropertyLayoutElement]]> isa Map[MClass, Set[MPropertyColorer#0]] */
 /* <p2:Map[MClass, Set[PropertyLayoutElement]]> isa Map[MClass, Set[MPropertyColorer#0]] */
 type_struct = self->type->resolution_table->types[COLOR_abstract_collection__Mapmodel__MClassabstract_collection__Setlayout_builders__MPropertyColorer_FT0];
@@ -3120,7 +3298,9 @@ var1 = 0;
 var1 = p2->type->type_table[cltype] == idtype;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 451);
+var_class_name = p2 == NULL ? "null" : p2->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Map[MClass, Set[MPropertyColorer#0]]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 451);
 exit(1);
 }
 var_min_color = p0;
@@ -3153,23 +3333,25 @@ var_color = var13;
 /* <var_max_color:Int> isa OTHER */
 var16 = 1; /* easy <var_max_color:Int> isa OTHER*/
 if (!var16) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 258);
+var_class_name19 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name19);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
 exit(1);
 }
-var19 = var_color >= var_max_color;
-var14 = var19;
+var20 = var_color >= var_max_color;
+var14 = var20;
 goto RET_LABEL15;
 RET_LABEL15:(void)0;
 }
 if (var14){
-var20 = 1;
-{ /* Inline kernel#Int#+ (var_color,var20) */
-var23 = var_color + var20;
-var21 = var23;
-goto RET_LABEL22;
-RET_LABEL22:(void)0;
+var21 = 1;
+{ /* Inline kernel#Int#+ (var_color,var21) */
+var24 = var_color + var21;
+var22 = var24;
+goto RET_LABEL23;
+RET_LABEL23:(void)0;
 }
-var_max_color = var21;
+var_max_color = var22;
 } else {
 }
 } else {
@@ -3178,10 +3360,10 @@ CONTINUE_label: (void)0;
 ((void (*)(val*))(var6->class->vft[COLOR_abstract_collection__Iterator__next]))(var6) /* next on <var6:Iterator[nullable Object]>*/;
 }
 BREAK_label: (void)0;
-CONTINUE_label24: (void)0;
+CONTINUE_label25: (void)0;
 ((void (*)(val*))(var2->class->vft[COLOR_abstract_collection__Iterator__next]))(var2) /* next on <var2:Iterator[nullable Object]>*/;
 }
-BREAK_label24: (void)0;
+BREAK_label25: (void)0;
 var = var_max_color;
 goto RET_LABEL;
 RET_LABEL:;
@@ -3202,7 +3384,8 @@ val* var /* : Map[MType, Int] */;
 val* var1 /* : Map[MType, Int] */;
 var1 = self->attrs[COLOR_layout_builders__ResolutionColorer___64dcoloration_result].val; /* @coloration_result on <self:ResolutionColorer> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @coloration_result", "src/layout_builders.nit", 471);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @coloration_result");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 471);
 exit(1);
 }
 var = var1;
@@ -3597,7 +3780,8 @@ val* var /* : Map[MType, Set[MType]] */;
 val* var1 /* : Map[MType, Set[MType]] */;
 var1 = self->attrs[COLOR_layout_builders__ResolutionColorer___64dconflicts_graph].val; /* @conflicts_graph on <self:ResolutionColorer> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @conflicts_graph", "src/layout_builders.nit", 536);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @conflicts_graph");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 536);
 exit(1);
 }
 var = var1;
@@ -3690,7 +3874,8 @@ val* var /* : PHOperator */;
 val* var1 /* : PHOperator */;
 var1 = self->attrs[COLOR_layout_builders__PerfectHasher___64doperator].val; /* @operator on <self:PerfectHasher[Object, Object]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @operator", "src/layout_builders.nit", 552);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @operator");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 552);
 exit(1);
 }
 var = var1;
@@ -3732,22 +3917,24 @@ short int var1 /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 short int var2 /* : Bool */;
 int cltype3;
 int idtype4;
 const struct type* type_struct5;
+const char* var_class_name6;
 val* var_conflicts /* var conflicts: Map[Object, Set[Object]] */;
 val* var_ids /* var ids: Map[Object, Int] */;
-val* var6 /* : HashMap[Object, Int] */;
+val* var7 /* : HashMap[Object, Int] */;
 val* var_masks /* var masks: HashMap[Object, Int] */;
-val* var7 /* : MapIterator[Object, nullable Object] */;
-short int var8 /* : Bool */;
-val* var9 /* : Object */;
+val* var8 /* : MapIterator[Object, nullable Object] */;
+short int var9 /* : Bool */;
+val* var10 /* : Object */;
 val* var_mclasstype /* var mclasstype: Object */;
-val* var10 /* : nullable Object */;
+val* var11 /* : nullable Object */;
 val* var_mtypes /* var mtypes: Set[Object] */;
-long var11 /* : Int */;
-val* var12 /* : nullable Object */;
+long var12 /* : Int */;
+val* var13 /* : nullable Object */;
 /* Covariant cast for argument 0 (conflicts) <p0:Map[Object, Set[Object]]> isa Map[PerfectHasher#0, Set[PerfectHasher#1]] */
 /* <p0:Map[Object, Set[Object]]> isa Map[PerfectHasher#0, Set[PerfectHasher#1]] */
 type_struct = self->type->resolution_table->types[COLOR_abstract_collection__Maplayout_builders__PerfectHasher_FT0abstract_collection__Setlayout_builders__PerfectHasher_FT1];
@@ -3759,7 +3946,9 @@ var1 = 0;
 var1 = p0->type->type_table[cltype] == idtype;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 556);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Map[PerfectHasher#0, Set[PerfectHasher#1]]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 556);
 exit(1);
 }
 /* Covariant cast for argument 1 (ids) <p1:Map[Object, Int]> isa Map[PerfectHasher#1, Int] */
@@ -3773,28 +3962,30 @@ var2 = 0;
 var2 = p1->type->type_table[cltype3] == idtype4;
 }
 if (!var2) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 556);
+var_class_name6 = p1 == NULL ? "null" : p1->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Map[PerfectHasher#1, Int]", var_class_name6);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 556);
 exit(1);
 }
 var_conflicts = p0;
 var_ids = p1;
-var6 = NEW_hash_collection__HashMap(self->type->resolution_table->types[COLOR_hash_collection__HashMaplayout_builders__PerfectHasher_FT0kernel__Int]);
-((void (*)(val*))(var6->class->vft[COLOR_hash_collection__HashMap__init]))(var6) /* init on <var6:HashMap[Object, Int]>*/;
-CHECK_NEW_hash_collection__HashMap(var6);
-var_masks = var6;
-var7 = ((val* (*)(val*))(var_conflicts->class->vft[COLOR_abstract_collection__MapRead__iterator]))(var_conflicts) /* iterator on <var_conflicts:Map[Object, Set[Object]]>*/;
+var7 = NEW_hash_collection__HashMap(self->type->resolution_table->types[COLOR_hash_collection__HashMaplayout_builders__PerfectHasher_FT0kernel__Int]);
+((void (*)(val*))(var7->class->vft[COLOR_hash_collection__HashMap__init]))(var7) /* init on <var7:HashMap[Object, Int]>*/;
+CHECK_NEW_hash_collection__HashMap(var7);
+var_masks = var7;
+var8 = ((val* (*)(val*))(var_conflicts->class->vft[COLOR_abstract_collection__MapRead__iterator]))(var_conflicts) /* iterator on <var_conflicts:Map[Object, Set[Object]]>*/;
 for(;;) {
-var8 = ((short int (*)(val*))(var7->class->vft[COLOR_abstract_collection__MapIterator__is_ok]))(var7) /* is_ok on <var7:MapIterator[Object, nullable Object]>*/;
-if(!var8) break;
-var9 = ((val* (*)(val*))(var7->class->vft[COLOR_abstract_collection__MapIterator__key]))(var7) /* key on <var7:MapIterator[Object, nullable Object]>*/;
-var_mclasstype = var9;
-var10 = ((val* (*)(val*))(var7->class->vft[COLOR_abstract_collection__MapIterator__item]))(var7) /* item on <var7:MapIterator[Object, nullable Object]>*/;
-var_mtypes = var10;
-var11 = ((long (*)(val*, val*, val*))(self->class->vft[COLOR_layout_builders__PerfectHasher__compute_mask]))(self, var_mtypes, var_ids) /* compute_mask on <self:PerfectHasher[Object, Object]>*/;
-var12 = BOX_kernel__Int(var11); /* autobox from Int to nullable Object */
-((void (*)(val*, val*, val*))(var_masks->class->vft[COLOR_abstract_collection__Map___91d_93d_61d]))(var_masks, var_mclasstype, var12) /* []= on <var_masks:HashMap[Object, Int]>*/;
+var9 = ((short int (*)(val*))(var8->class->vft[COLOR_abstract_collection__MapIterator__is_ok]))(var8) /* is_ok on <var8:MapIterator[Object, nullable Object]>*/;
+if(!var9) break;
+var10 = ((val* (*)(val*))(var8->class->vft[COLOR_abstract_collection__MapIterator__key]))(var8) /* key on <var8:MapIterator[Object, nullable Object]>*/;
+var_mclasstype = var10;
+var11 = ((val* (*)(val*))(var8->class->vft[COLOR_abstract_collection__MapIterator__item]))(var8) /* item on <var8:MapIterator[Object, nullable Object]>*/;
+var_mtypes = var11;
+var12 = ((long (*)(val*, val*, val*))(self->class->vft[COLOR_layout_builders__PerfectHasher__compute_mask]))(self, var_mtypes, var_ids) /* compute_mask on <self:PerfectHasher[Object, Object]>*/;
+var13 = BOX_kernel__Int(var12); /* autobox from Int to nullable Object */
+((void (*)(val*, val*, val*))(var_masks->class->vft[COLOR_abstract_collection__Map___91d_93d_61d]))(var_masks, var_mclasstype, var13) /* []= on <var_masks:HashMap[Object, Int]>*/;
 CONTINUE_label: (void)0;
-((void (*)(val*))(var7->class->vft[COLOR_abstract_collection__MapIterator__next]))(var7) /* next on <var7:MapIterator[Object, nullable Object]>*/;
+((void (*)(val*))(var8->class->vft[COLOR_abstract_collection__MapIterator__next]))(var8) /* next on <var8:MapIterator[Object, nullable Object]>*/;
 }
 BREAK_label: (void)0;
 var = var_masks;
@@ -3818,35 +4009,37 @@ short int var1 /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 short int var2 /* : Bool */;
 int cltype3;
 int idtype4;
 const struct type* type_struct5;
+const char* var_class_name6;
 val* var_mtypes /* var mtypes: Set[Object] */;
 val* var_ids /* var ids: Map[Object, Int] */;
-long var6 /* : Int */;
+long var7 /* : Int */;
 long var_mask /* var mask: Int */;
-val* var7 /* : List[Int] */;
+val* var8 /* : List[Int] */;
 val* var_used /* var used: List[Int] */;
-val* var8 /* : Iterator[nullable Object] */;
-short int var9 /* : Bool */;
-val* var10 /* : nullable Object */;
+val* var9 /* : Iterator[nullable Object] */;
+short int var10 /* : Bool */;
+val* var11 /* : nullable Object */;
 val* var_mtype /* var mtype: Object */;
-val* var11 /* : PHOperator */;
-val* var12 /* : nullable Object */;
-long var13 /* : Int */;
+val* var12 /* : PHOperator */;
+val* var13 /* : nullable Object */;
 long var14 /* : Int */;
+long var15 /* : Int */;
 long var_res /* var res: Int */;
-short int var15 /* : Bool */;
-val* var16 /* : nullable Object */;
+short int var16 /* : Bool */;
 val* var17 /* : nullable Object */;
-long var18 /* : Int */;
+val* var18 /* : nullable Object */;
 long var19 /* : Int */;
-short int var20 /* : Bool */;
-short int var22 /* : Bool */;
-long var24 /* : Int */;
+long var20 /* : Int */;
+short int var21 /* : Bool */;
+short int var23 /* : Bool */;
 long var25 /* : Int */;
-long var27 /* : Int */;
+long var26 /* : Int */;
+long var28 /* : Int */;
 /* Covariant cast for argument 0 (mtypes) <p0:Set[Object]> isa Set[PerfectHasher#1] */
 /* <p0:Set[Object]> isa Set[PerfectHasher#1] */
 type_struct = self->type->resolution_table->types[COLOR_abstract_collection__Setlayout_builders__PerfectHasher_FT1];
@@ -3858,7 +4051,9 @@ var1 = 0;
 var1 = p0->type->type_table[cltype] == idtype;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 565);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Set[PerfectHasher#1]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 565);
 exit(1);
 }
 /* Covariant cast for argument 1 (ids) <p1:Map[Object, Int]> isa Map[PerfectHasher#1, Int] */
@@ -3872,64 +4067,66 @@ var2 = 0;
 var2 = p1->type->type_table[cltype3] == idtype4;
 }
 if (!var2) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 565);
+var_class_name6 = p1 == NULL ? "null" : p1->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Map[PerfectHasher#1, Int]", var_class_name6);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 565);
 exit(1);
 }
 var_mtypes = p0;
 var_ids = p1;
-var6 = 0;
-var_mask = var6;
+var7 = 0;
+var_mask = var7;
 for(;;) {
-var7 = NEW_list__List(&type_list__Listkernel__Int);
-((void (*)(val*))(var7->class->vft[COLOR_list__List__init]))(var7) /* init on <var7:List[Int]>*/;
-CHECK_NEW_list__List(var7);
-var_used = var7;
-var8 = ((val* (*)(val*))(var_mtypes->class->vft[COLOR_abstract_collection__Collection__iterator]))(var_mtypes) /* iterator on <var_mtypes:Set[Object]>*/;
+var8 = NEW_list__List(&type_list__Listkernel__Int);
+((void (*)(val*))(var8->class->vft[COLOR_list__List__init]))(var8) /* init on <var8:List[Int]>*/;
+CHECK_NEW_list__List(var8);
+var_used = var8;
+var9 = ((val* (*)(val*))(var_mtypes->class->vft[COLOR_abstract_collection__Collection__iterator]))(var_mtypes) /* iterator on <var_mtypes:Set[Object]>*/;
 for(;;) {
-var9 = ((short int (*)(val*))(var8->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var8) /* is_ok on <var8:Iterator[nullable Object]>*/;
-if(!var9) break;
-var10 = ((val* (*)(val*))(var8->class->vft[COLOR_abstract_collection__Iterator__item]))(var8) /* item on <var8:Iterator[nullable Object]>*/;
-var_mtype = var10;
-var11 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__PerfectHasher__operator]))(self) /* operator on <self:PerfectHasher[Object, Object]>*/;
-var12 = ((val* (*)(val*, val*))(var_ids->class->vft[COLOR_abstract_collection__MapRead___91d_93d]))(var_ids, var_mtype) /* [] on <var_ids:Map[Object, Int]>*/;
-var14 = ((struct instance_kernel__Int*)var12)->value; /* autounbox from nullable Object to Int */;
-var13 = ((long (*)(val*, long, long))(var11->class->vft[COLOR_layout_builders__PHOperator__op]))(var11, var_mask, var14) /* op on <var11:PHOperator>*/;
-var_res = var13;
-var16 = BOX_kernel__Int(var_res); /* autobox from Int to nullable Object */
-var15 = ((short int (*)(val*, val*))(var_used->class->vft[COLOR_abstract_collection__Collection__has]))(var_used, var16) /* has on <var_used:List[Int]>*/;
-if (var15){
+var10 = ((short int (*)(val*))(var9->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var9) /* is_ok on <var9:Iterator[nullable Object]>*/;
+if(!var10) break;
+var11 = ((val* (*)(val*))(var9->class->vft[COLOR_abstract_collection__Iterator__item]))(var9) /* item on <var9:Iterator[nullable Object]>*/;
+var_mtype = var11;
+var12 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__PerfectHasher__operator]))(self) /* operator on <self:PerfectHasher[Object, Object]>*/;
+var13 = ((val* (*)(val*, val*))(var_ids->class->vft[COLOR_abstract_collection__MapRead___91d_93d]))(var_ids, var_mtype) /* [] on <var_ids:Map[Object, Int]>*/;
+var15 = ((struct instance_kernel__Int*)var13)->value; /* autounbox from nullable Object to Int */;
+var14 = ((long (*)(val*, long, long))(var12->class->vft[COLOR_layout_builders__PHOperator__op]))(var12, var_mask, var15) /* op on <var12:PHOperator>*/;
+var_res = var14;
+var17 = BOX_kernel__Int(var_res); /* autobox from Int to nullable Object */
+var16 = ((short int (*)(val*, val*))(var_used->class->vft[COLOR_abstract_collection__Collection__has]))(var_used, var17) /* has on <var_used:List[Int]>*/;
+if (var16){
 goto BREAK_label;
 } else {
-var17 = BOX_kernel__Int(var_res); /* autobox from Int to nullable Object */
-((void (*)(val*, val*))(var_used->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_used, var17) /* add on <var_used:List[Int]>*/;
+var18 = BOX_kernel__Int(var_res); /* autobox from Int to nullable Object */
+((void (*)(val*, val*))(var_used->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_used, var18) /* add on <var_used:List[Int]>*/;
 }
 CONTINUE_label: (void)0;
-((void (*)(val*))(var8->class->vft[COLOR_abstract_collection__Iterator__next]))(var8) /* next on <var8:Iterator[nullable Object]>*/;
+((void (*)(val*))(var9->class->vft[COLOR_abstract_collection__Iterator__next]))(var9) /* next on <var9:Iterator[nullable Object]>*/;
 }
 BREAK_label: (void)0;
-var18 = ((long (*)(val*))(var_used->class->vft[COLOR_abstract_collection__Collection__length]))(var_used) /* length on <var_used:List[Int]>*/;
-var19 = ((long (*)(val*))(var_mtypes->class->vft[COLOR_abstract_collection__Collection__length]))(var_mtypes) /* length on <var_mtypes:Set[Object]>*/;
-{ /* Inline kernel#Int#== (var18,var19) */
-var22 = var18 == var19;
-var20 = var22;
-goto RET_LABEL21;
-RET_LABEL21:(void)0;
+var19 = ((long (*)(val*))(var_used->class->vft[COLOR_abstract_collection__Collection__length]))(var_used) /* length on <var_used:List[Int]>*/;
+var20 = ((long (*)(val*))(var_mtypes->class->vft[COLOR_abstract_collection__Collection__length]))(var_mtypes) /* length on <var_mtypes:Set[Object]>*/;
+{ /* Inline kernel#Int#== (var19,var20) */
+var23 = var19 == var20;
+var21 = var23;
+goto RET_LABEL22;
+RET_LABEL22:(void)0;
 }
-if (var20){
-goto BREAK_label23;
+if (var21){
+goto BREAK_label24;
 } else {
 }
-var24 = 1;
-{ /* Inline kernel#Int#+ (var_mask,var24) */
-var27 = var_mask + var24;
-var25 = var27;
-goto RET_LABEL26;
-RET_LABEL26:(void)0;
+var25 = 1;
+{ /* Inline kernel#Int#+ (var_mask,var25) */
+var28 = var_mask + var25;
+var26 = var28;
+goto RET_LABEL27;
+RET_LABEL27:(void)0;
 }
-var_mask = var25;
-CONTINUE_label23: (void)0;
+var_mask = var26;
+CONTINUE_label24: (void)0;
 }
-BREAK_label23: (void)0;
+BREAK_label24: (void)0;
 var = var_mask;
 goto RET_LABEL;
 RET_LABEL:;
@@ -3951,39 +4148,42 @@ short int var1 /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 short int var2 /* : Bool */;
 int cltype3;
 int idtype4;
 const struct type* type_struct5;
-short int var6 /* : Bool */;
-int cltype7;
-int idtype8;
-const struct type* type_struct9;
+const char* var_class_name6;
+short int var7 /* : Bool */;
+int cltype8;
+int idtype9;
+const struct type* type_struct10;
+const char* var_class_name11;
 val* var_elements /* var elements: Map[Object, Set[Object]] */;
 val* var_ids /* var ids: Map[Object, Int] */;
 val* var_masks /* var masks: Map[Object, Int] */;
-val* var10 /* : HashMap[Object, Map[Object, Int]] */;
+val* var12 /* : HashMap[Object, Map[Object, Int]] */;
 val* var_hashes /* var hashes: HashMap[Object, Map[Object, Int]] */;
-val* var11 /* : MapIterator[Object, nullable Object] */;
-short int var12 /* : Bool */;
-val* var13 /* : Object */;
+val* var13 /* : MapIterator[Object, nullable Object] */;
+short int var14 /* : Bool */;
+val* var15 /* : Object */;
 val* var_mclasstype /* var mclasstype: Object */;
-val* var14 /* : nullable Object */;
+val* var16 /* : nullable Object */;
 val* var_mtypes /* var mtypes: Set[Object] */;
-val* var15 /* : nullable Object */;
-long var16 /* : Int */;
+val* var17 /* : nullable Object */;
+long var18 /* : Int */;
 long var_mask /* var mask: Int */;
-val* var17 /* : HashMap[Object, Int] */;
+val* var19 /* : HashMap[Object, Int] */;
 val* var_inhashes /* var inhashes: HashMap[Object, Int] */;
-val* var18 /* : Iterator[nullable Object] */;
-short int var19 /* : Bool */;
-val* var20 /* : nullable Object */;
-val* var_mtype /* var mtype: Object */;
-val* var21 /* : PHOperator */;
+val* var20 /* : Iterator[nullable Object] */;
+short int var21 /* : Bool */;
 val* var22 /* : nullable Object */;
-long var23 /* : Int */;
-long var24 /* : Int */;
-val* var25 /* : nullable Object */;
+val* var_mtype /* var mtype: Object */;
+val* var23 /* : PHOperator */;
+val* var24 /* : nullable Object */;
+long var25 /* : Int */;
+long var26 /* : Int */;
+val* var27 /* : nullable Object */;
 /* Covariant cast for argument 0 (elements) <p0:Map[Object, Set[Object]]> isa Map[PerfectHasher#0, Set[PerfectHasher#1]] */
 /* <p0:Map[Object, Set[Object]]> isa Map[PerfectHasher#0, Set[PerfectHasher#1]] */
 type_struct = self->type->resolution_table->types[COLOR_abstract_collection__Maplayout_builders__PerfectHasher_FT0abstract_collection__Setlayout_builders__PerfectHasher_FT1];
@@ -3995,7 +4195,9 @@ var1 = 0;
 var1 = p0->type->type_table[cltype] == idtype;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 583);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Map[PerfectHasher#0, Set[PerfectHasher#1]]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 583);
 exit(1);
 }
 /* Covariant cast for argument 1 (ids) <p1:Map[Object, Int]> isa Map[PerfectHasher#1, Int] */
@@ -4009,66 +4211,70 @@ var2 = 0;
 var2 = p1->type->type_table[cltype3] == idtype4;
 }
 if (!var2) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 583);
+var_class_name6 = p1 == NULL ? "null" : p1->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Map[PerfectHasher#1, Int]", var_class_name6);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 583);
 exit(1);
 }
 /* Covariant cast for argument 2 (masks) <p2:Map[Object, Int]> isa Map[PerfectHasher#0, Int] */
 /* <p2:Map[Object, Int]> isa Map[PerfectHasher#0, Int] */
-type_struct9 = self->type->resolution_table->types[COLOR_abstract_collection__Maplayout_builders__PerfectHasher_FT0kernel__Int];
-cltype7 = type_struct9->color;
-idtype8 = type_struct9->id;
-if(cltype7 >= p2->type->table_size) {
-var6 = 0;
+type_struct10 = self->type->resolution_table->types[COLOR_abstract_collection__Maplayout_builders__PerfectHasher_FT0kernel__Int];
+cltype8 = type_struct10->color;
+idtype9 = type_struct10->id;
+if(cltype8 >= p2->type->table_size) {
+var7 = 0;
 } else {
-var6 = p2->type->type_table[cltype7] == idtype8;
+var7 = p2->type->type_table[cltype8] == idtype9;
 }
-if (!var6) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 583);
+if (!var7) {
+var_class_name11 = p2 == NULL ? "null" : p2->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Map[PerfectHasher#0, Int]", var_class_name11);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 583);
 exit(1);
 }
 var_elements = p0;
 var_ids = p1;
 var_masks = p2;
-var10 = NEW_hash_collection__HashMap(self->type->resolution_table->types[COLOR_hash_collection__HashMaplayout_builders__PerfectHasher_FT0abstract_collection__Maplayout_builders__PerfectHasher_FT1kernel__Int]);
-((void (*)(val*))(var10->class->vft[COLOR_hash_collection__HashMap__init]))(var10) /* init on <var10:HashMap[Object, Map[Object, Int]]>*/;
-CHECK_NEW_hash_collection__HashMap(var10);
-var_hashes = var10;
-var11 = ((val* (*)(val*))(var_elements->class->vft[COLOR_abstract_collection__MapRead__iterator]))(var_elements) /* iterator on <var_elements:Map[Object, Set[Object]]>*/;
+var12 = NEW_hash_collection__HashMap(self->type->resolution_table->types[COLOR_hash_collection__HashMaplayout_builders__PerfectHasher_FT0abstract_collection__Maplayout_builders__PerfectHasher_FT1kernel__Int]);
+((void (*)(val*))(var12->class->vft[COLOR_hash_collection__HashMap__init]))(var12) /* init on <var12:HashMap[Object, Map[Object, Int]]>*/;
+CHECK_NEW_hash_collection__HashMap(var12);
+var_hashes = var12;
+var13 = ((val* (*)(val*))(var_elements->class->vft[COLOR_abstract_collection__MapRead__iterator]))(var_elements) /* iterator on <var_elements:Map[Object, Set[Object]]>*/;
 for(;;) {
-var12 = ((short int (*)(val*))(var11->class->vft[COLOR_abstract_collection__MapIterator__is_ok]))(var11) /* is_ok on <var11:MapIterator[Object, nullable Object]>*/;
-if(!var12) break;
-var13 = ((val* (*)(val*))(var11->class->vft[COLOR_abstract_collection__MapIterator__key]))(var11) /* key on <var11:MapIterator[Object, nullable Object]>*/;
-var_mclasstype = var13;
-var14 = ((val* (*)(val*))(var11->class->vft[COLOR_abstract_collection__MapIterator__item]))(var11) /* item on <var11:MapIterator[Object, nullable Object]>*/;
-var_mtypes = var14;
-var15 = ((val* (*)(val*, val*))(var_masks->class->vft[COLOR_abstract_collection__MapRead___91d_93d]))(var_masks, var_mclasstype) /* [] on <var_masks:Map[Object, Int]>*/;
-var16 = ((struct instance_kernel__Int*)var15)->value; /* autounbox from nullable Object to Int */;
-var_mask = var16;
-var17 = NEW_hash_collection__HashMap(self->type->resolution_table->types[COLOR_hash_collection__HashMaplayout_builders__PerfectHasher_FT1kernel__Int]);
-((void (*)(val*))(var17->class->vft[COLOR_hash_collection__HashMap__init]))(var17) /* init on <var17:HashMap[Object, Int]>*/;
-CHECK_NEW_hash_collection__HashMap(var17);
-var_inhashes = var17;
-var18 = ((val* (*)(val*))(var_mtypes->class->vft[COLOR_abstract_collection__Collection__iterator]))(var_mtypes) /* iterator on <var_mtypes:Set[Object]>*/;
+var14 = ((short int (*)(val*))(var13->class->vft[COLOR_abstract_collection__MapIterator__is_ok]))(var13) /* is_ok on <var13:MapIterator[Object, nullable Object]>*/;
+if(!var14) break;
+var15 = ((val* (*)(val*))(var13->class->vft[COLOR_abstract_collection__MapIterator__key]))(var13) /* key on <var13:MapIterator[Object, nullable Object]>*/;
+var_mclasstype = var15;
+var16 = ((val* (*)(val*))(var13->class->vft[COLOR_abstract_collection__MapIterator__item]))(var13) /* item on <var13:MapIterator[Object, nullable Object]>*/;
+var_mtypes = var16;
+var17 = ((val* (*)(val*, val*))(var_masks->class->vft[COLOR_abstract_collection__MapRead___91d_93d]))(var_masks, var_mclasstype) /* [] on <var_masks:Map[Object, Int]>*/;
+var18 = ((struct instance_kernel__Int*)var17)->value; /* autounbox from nullable Object to Int */;
+var_mask = var18;
+var19 = NEW_hash_collection__HashMap(self->type->resolution_table->types[COLOR_hash_collection__HashMaplayout_builders__PerfectHasher_FT1kernel__Int]);
+((void (*)(val*))(var19->class->vft[COLOR_hash_collection__HashMap__init]))(var19) /* init on <var19:HashMap[Object, Int]>*/;
+CHECK_NEW_hash_collection__HashMap(var19);
+var_inhashes = var19;
+var20 = ((val* (*)(val*))(var_mtypes->class->vft[COLOR_abstract_collection__Collection__iterator]))(var_mtypes) /* iterator on <var_mtypes:Set[Object]>*/;
 for(;;) {
-var19 = ((short int (*)(val*))(var18->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var18) /* is_ok on <var18:Iterator[nullable Object]>*/;
-if(!var19) break;
-var20 = ((val* (*)(val*))(var18->class->vft[COLOR_abstract_collection__Iterator__item]))(var18) /* item on <var18:Iterator[nullable Object]>*/;
-var_mtype = var20;
-var21 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__PerfectHasher__operator]))(self) /* operator on <self:PerfectHasher[Object, Object]>*/;
-var22 = ((val* (*)(val*, val*))(var_ids->class->vft[COLOR_abstract_collection__MapRead___91d_93d]))(var_ids, var_mtype) /* [] on <var_ids:Map[Object, Int]>*/;
-var24 = ((struct instance_kernel__Int*)var22)->value; /* autounbox from nullable Object to Int */;
-var23 = ((long (*)(val*, long, long))(var21->class->vft[COLOR_layout_builders__PHOperator__op]))(var21, var_mask, var24) /* op on <var21:PHOperator>*/;
-var25 = BOX_kernel__Int(var23); /* autobox from Int to nullable Object */
-((void (*)(val*, val*, val*))(var_inhashes->class->vft[COLOR_abstract_collection__Map___91d_93d_61d]))(var_inhashes, var_mtype, var25) /* []= on <var_inhashes:HashMap[Object, Int]>*/;
+var21 = ((short int (*)(val*))(var20->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var20) /* is_ok on <var20:Iterator[nullable Object]>*/;
+if(!var21) break;
+var22 = ((val* (*)(val*))(var20->class->vft[COLOR_abstract_collection__Iterator__item]))(var20) /* item on <var20:Iterator[nullable Object]>*/;
+var_mtype = var22;
+var23 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__PerfectHasher__operator]))(self) /* operator on <self:PerfectHasher[Object, Object]>*/;
+var24 = ((val* (*)(val*, val*))(var_ids->class->vft[COLOR_abstract_collection__MapRead___91d_93d]))(var_ids, var_mtype) /* [] on <var_ids:Map[Object, Int]>*/;
+var26 = ((struct instance_kernel__Int*)var24)->value; /* autounbox from nullable Object to Int */;
+var25 = ((long (*)(val*, long, long))(var23->class->vft[COLOR_layout_builders__PHOperator__op]))(var23, var_mask, var26) /* op on <var23:PHOperator>*/;
+var27 = BOX_kernel__Int(var25); /* autobox from Int to nullable Object */
+((void (*)(val*, val*, val*))(var_inhashes->class->vft[COLOR_abstract_collection__Map___91d_93d_61d]))(var_inhashes, var_mtype, var27) /* []= on <var_inhashes:HashMap[Object, Int]>*/;
 CONTINUE_label: (void)0;
-((void (*)(val*))(var18->class->vft[COLOR_abstract_collection__Iterator__next]))(var18) /* next on <var18:Iterator[nullable Object]>*/;
+((void (*)(val*))(var20->class->vft[COLOR_abstract_collection__Iterator__next]))(var20) /* next on <var20:Iterator[nullable Object]>*/;
 }
 BREAK_label: (void)0;
 ((void (*)(val*, val*, val*))(var_hashes->class->vft[COLOR_abstract_collection__Map___91d_93d_61d]))(var_hashes, var_mclasstype, var_inhashes) /* []= on <var_hashes:HashMap[Object, Map[Object, Int]]>*/;
-CONTINUE_label26: (void)0;
-((void (*)(val*))(var11->class->vft[COLOR_abstract_collection__MapIterator__next]))(var11) /* next on <var11:MapIterator[Object, nullable Object]>*/;
+CONTINUE_label28: (void)0;
+((void (*)(val*))(var13->class->vft[COLOR_abstract_collection__MapIterator__next]))(var13) /* next on <var13:MapIterator[Object, nullable Object]>*/;
 }
-BREAK_label26: (void)0;
+BREAK_label28: (void)0;
 var = var_hashes;
 goto RET_LABEL;
 RET_LABEL:;
@@ -4086,7 +4292,10 @@ return var;
 /* method layout_builders#PHOperator#op for (self: PHOperator, Int, Int): Int */
 long layout_builders__PHOperator__op(val* self, long p0, long p1) {
 long var /* : Int */;
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Deferred method called", "src/layout_builders.nit", 600);
+const char* var_class_name;
+var_class_name = self == NULL ? "null" : self->type->name;
+fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "op", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 600);
 exit(1);
 RET_LABEL:;
 return var;
@@ -4187,7 +4396,8 @@ val* var /* : MModule */;
 val* var1 /* : MModule */;
 var1 = self->attrs[COLOR_layout_builders__TypingHasher___64dmmodule].val; /* @mmodule on <self:TypingHasher[Object]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @mmodule", "src/layout_builders.nit", 625);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @mmodule");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 625);
 exit(1);
 }
 var = var1;
@@ -4219,7 +4429,8 @@ val* var /* : POSetBuilder[Object] */;
 val* var1 /* : POSetBuilder[Object] */;
 var1 = self->attrs[COLOR_layout_builders__TypingHasher___64dposet_builder].val; /* @poset_builder on <self:TypingHasher[Object]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @poset_builder", "src/layout_builders.nit", 626);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @poset_builder");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 626);
 exit(1);
 }
 var = var1;
@@ -4241,6 +4452,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 /* Covariant cast for argument 0 (poset_builder) <p0:POSetBuilder[Object]> isa POSetBuilder[TypingHasher#0] */
 /* <p0:POSetBuilder[Object]> isa POSetBuilder[TypingHasher#0] */
 type_struct = self->type->resolution_table->types[COLOR_layout_builders__POSetBuilderlayout_builders__TypingHasher_FT0];
@@ -4252,7 +4464,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 626);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "POSetBuilder[TypingHasher#0]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 626);
 exit(1);
 }
 self->attrs[COLOR_layout_builders__TypingHasher___64dposet_builder].val = p0; /* @poset_builder on <self:TypingHasher[Object]> */
@@ -4287,6 +4501,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 /* Covariant cast for argument 0 (poset_cache) <p0:nullable POSet[Object]> isa nullable POSet[TypingHasher#0] */
 /* <p0:nullable POSet[Object]> isa nullable POSet[TypingHasher#0] */
 type_struct = self->type->resolution_table->types[COLOR_poset__POSetlayout_builders__TypingHasher_FT0];
@@ -4302,7 +4517,9 @@ var = p0->type->type_table[cltype] == idtype;
 }
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 627);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable POSet[TypingHasher#0]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 627);
 exit(1);
 }
 self->attrs[COLOR_layout_builders__TypingHasher___64dposet_cache].val = p0; /* @poset_cache on <self:TypingHasher[Object]> */
@@ -4319,6 +4536,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_mmodule /* var mmodule: MModule */;
 val* var_poset_builder /* var poset_builder: POSetBuilder[Object] */;
 val* var_operator /* var operator: PHOperator */;
@@ -4333,7 +4551,9 @@ var = 0;
 var = p1->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 629);
+var_class_name = p1 == NULL ? "null" : p1->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "POSetBuilder[TypingHasher#0]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 629);
 exit(1);
 }
 var_mmodule = p0;
@@ -4357,6 +4577,7 @@ short int var1 /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_elements /* var elements: Set[Object] */;
 val* var2 /* : POSetBuilder[Object] */;
 val* var3 /* : POSet[Object] */;
@@ -4381,7 +4602,9 @@ var1 = 0;
 var1 = p0->type->type_table[cltype] == idtype;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 635);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Set[TypingHasher#0]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 635);
 exit(1);
 }
 var_elements = p0;
@@ -4441,7 +4664,8 @@ CHECK_NEW_hash_collection__HashMap(var1);
 var_ids = var1;
 var2 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingLayoutBuilder__poset]))(self) /* poset on <self:TypingHasher[Object]>*/;
 if (var2 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/layout_builders.nit", 648);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 648);
 exit(1);
 } else {
 var3 = ((val* (*)(val*))(var2->class->vft[COLOR_array__Collection__to_a]))(var2) /* to_a on <var2:nullable POSet[Object]>*/;
@@ -4449,7 +4673,8 @@ var3 = ((val* (*)(val*))(var2->class->vft[COLOR_array__Collection__to_a]))(var2)
 var_lin = var3;
 var4 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingLayoutBuilder__poset]))(self) /* poset on <self:TypingHasher[Object]>*/;
 if (var4 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/layout_builders.nit", 649);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 649);
 exit(1);
 } else {
 ((void (*)(val*, val*))(var4->class->vft[COLOR_sorter__AbstractSorter__sort]))(var4, var_lin) /* sort on <var4:nullable POSet[Object]>*/;
@@ -4495,6 +4720,7 @@ short int var1 /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_elements /* var elements: Set[Object] */;
 val* var2 /* : HashMap[Object, Set[Object]] */;
 val* var_conflicts /* var conflicts: HashMap[Object, Set[Object]] */;
@@ -4518,7 +4744,9 @@ var1 = 0;
 var1 = p0->type->type_table[cltype] == idtype;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 656);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Set[TypingHasher#0]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 656);
 exit(1);
 }
 var_elements = p0;
@@ -4538,7 +4766,8 @@ CHECK_NEW_hash_collection__HashSet(var6);
 var_supers = var6;
 var7 = ((val* (*)(val*))(self->class->vft[COLOR_layout_builders__TypingLayoutBuilder__poset]))(self) /* poset on <self:TypingHasher[Object]>*/;
 if (var7 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/layout_builders.nit", 660);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 660);
 exit(1);
 } else {
 var8 = ((val* (*)(val*, val*))(var7->class->vft[COLOR_poset__POSet___91d_93d]))(var7, var_e) /* [] on <var7:nullable POSet[Object]>*/;
@@ -4607,7 +4836,8 @@ val* var /* : MModule */;
 val* var1 /* : MModule */;
 var1 = self->attrs[COLOR_layout_builders__MPropertyHasher___64dmmodule].val; /* @mmodule on <self:MPropertyHasher[PropertyLayoutElement]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @mmodule", "src/layout_builders.nit", 685);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @mmodule");
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 685);
 exit(1);
 }
 var = var1;
@@ -4744,6 +4974,7 @@ short int var1 /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_elements /* var elements: Map[MClass, Set[PropertyLayoutElement]] */;
 val* var2 /* : PHLayout[MClass, PropertyLayoutElement] */;
 val* var_result /* var result: PHLayout[MClass, PropertyLayoutElement] */;
@@ -4786,7 +5017,9 @@ var1 = 0;
 var1 = p0->type->type_table[cltype] == idtype;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/layout_builders.nit", 704);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Map[MClass, Set[PropertyLayoutBuilder#0]]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/layout_builders.nit", 704);
 exit(1);
 }
 var_elements = p0;

@@ -5,7 +5,8 @@ val* var /* : Array[MModule] */;
 val* var1 /* : Array[MModule] */;
 var1 = self->attrs[COLOR_model_base__Model___64dmmodules].val; /* @mmodules on <self:Model> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @mmodules", "src/model/model_base.nit", 26);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @mmodules");
+fprintf(stderr, " (%s:%d)\n", "src/model/model_base.nit", 26);
 exit(1);
 }
 var = var1;
@@ -37,7 +38,8 @@ val* var /* : POSet[MModule] */;
 val* var1 /* : POSet[MModule] */;
 var1 = self->attrs[COLOR_model_base__Model___64dmmodule_nesting_hierarchy].val; /* @mmodule_nesting_hierarchy on <self:Model> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @mmodule_nesting_hierarchy", "src/model/model_base.nit", 29);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @mmodule_nesting_hierarchy");
+fprintf(stderr, " (%s:%d)\n", "src/model/model_base.nit", 29);
 exit(1);
 }
 var = var1;
@@ -69,7 +71,8 @@ val* var /* : POSet[MModule] */;
 val* var1 /* : POSet[MModule] */;
 var1 = self->attrs[COLOR_model_base__Model___64dmmodule_importation_hierarchy].val; /* @mmodule_importation_hierarchy on <self:Model> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @mmodule_importation_hierarchy", "src/model/model_base.nit", 33);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @mmodule_importation_hierarchy");
+fprintf(stderr, " (%s:%d)\n", "src/model/model_base.nit", 33);
 exit(1);
 }
 var = var1;
@@ -101,7 +104,8 @@ val* var /* : MultiHashMap[String, MModule] */;
 val* var1 /* : MultiHashMap[String, MModule] */;
 var1 = self->attrs[COLOR_model_base__Model___64dmmodules_by_name].val; /* @mmodules_by_name on <self:Model> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @mmodules_by_name", "src/model/model_base.nit", 36);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @mmodules_by_name");
+fprintf(stderr, " (%s:%d)\n", "src/model/model_base.nit", 36);
 exit(1);
 }
 var = var1;
@@ -176,7 +180,8 @@ val* var /* : Model */;
 val* var1 /* : Model */;
 var1 = self->attrs[COLOR_model_base__MModule___64dmodel].val; /* @model on <self:MModule> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @model", "src/model/model_base.nit", 56);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @model");
+fprintf(stderr, " (%s:%d)\n", "src/model/model_base.nit", 56);
 exit(1);
 }
 var = var1;
@@ -236,7 +241,8 @@ val* var /* : String */;
 val* var1 /* : String */;
 var1 = self->attrs[COLOR_model_base__MModule___64dname].val; /* @name on <self:MModule> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @name", "src/model/model_base.nit", 62);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @name");
+fprintf(stderr, " (%s:%d)\n", "src/model/model_base.nit", 62);
 exit(1);
 }
 var = var1;
@@ -268,7 +274,8 @@ val* var /* : Location */;
 val* var1 /* : Location */;
 var1 = self->attrs[COLOR_model_base__MModule___64dlocation].val; /* @location on <self:MModule> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @location", "src/model/model_base.nit", 65);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @location");
+fprintf(stderr, " (%s:%d)\n", "src/model/model_base.nit", 65);
 exit(1);
 }
 var = var1;
@@ -319,7 +326,8 @@ val* var /* : POSetElement[MModule] */;
 val* var1 /* : POSetElement[MModule] */;
 var1 = self->attrs[COLOR_model_base__MModule___64din_nesting].val; /* @in_nesting on <self:MModule> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @in_nesting", "src/model/model_base.nit", 71);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @in_nesting");
+fprintf(stderr, " (%s:%d)\n", "src/model/model_base.nit", 71);
 exit(1);
 }
 var = var1;
@@ -351,7 +359,8 @@ val* var /* : POSetElement[MModule] */;
 val* var1 /* : POSetElement[MModule] */;
 var1 = self->attrs[COLOR_model_base__MModule___64din_importation].val; /* @in_importation on <self:MModule> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @in_importation", "src/model/model_base.nit", 74);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @in_importation");
+fprintf(stderr, " (%s:%d)\n", "src/model/model_base.nit", 74);
 exit(1);
 }
 var = var1;
@@ -542,7 +551,8 @@ var = ((val* (*)(val*))(self->class->vft[COLOR_model_base__MModule__in_importati
 var1 = ((val* (*)(val*))(var->class->vft[COLOR_poset__POSetElement__direct_greaters]))(var) /* direct_greaters on <var:POSetElement[MModule]>*/;
 var2 = ((short int (*)(val*))(var1->class->vft[COLOR_abstract_collection__Collection__is_empty]))(var1) /* is_empty on <var1:Collection[Object](Collection[MModule])>*/;
 if (!var2) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert \'unique_invocation\' failed", "src/model/model_base.nit", 111);
+fprintf(stderr, "Runtime error: %s", "Assert \'unique_invocation\' failed");
+fprintf(stderr, " (%s:%d)\n", "src/model/model_base.nit", 111);
 exit(1);
 }
 var3 = ((val* (*)(val*))(var_imported_mmodules->class->vft[COLOR_abstract_collection__Collection__iterator]))(var_imported_mmodules) /* iterator on <var_imported_mmodules:Array[MModule]>*/;
@@ -571,7 +581,8 @@ val* var /* : HashSet[MModule] */;
 val* var1 /* : HashSet[MModule] */;
 var1 = self->attrs[COLOR_model_base__MModule___64dintrude_mmodules].val; /* @intrude_mmodules on <self:MModule> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @intrude_mmodules", "src/model/model_base.nit", 117);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @intrude_mmodules");
+fprintf(stderr, " (%s:%d)\n", "src/model/model_base.nit", 117);
 exit(1);
 }
 var = var1;
@@ -603,7 +614,8 @@ val* var /* : HashSet[MModule] */;
 val* var1 /* : HashSet[MModule] */;
 var1 = self->attrs[COLOR_model_base__MModule___64dpublic_mmodules].val; /* @public_mmodules on <self:MModule> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @public_mmodules", "src/model/model_base.nit", 118);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @public_mmodules");
+fprintf(stderr, " (%s:%d)\n", "src/model/model_base.nit", 118);
 exit(1);
 }
 var = var1;
@@ -635,7 +647,8 @@ val* var /* : HashSet[MModule] */;
 val* var1 /* : HashSet[MModule] */;
 var1 = self->attrs[COLOR_model_base__MModule___64dprivate_mmodules].val; /* @private_mmodules on <self:MModule> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @private_mmodules", "src/model/model_base.nit", 119);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @private_mmodules");
+fprintf(stderr, " (%s:%d)\n", "src/model/model_base.nit", 119);
 exit(1);
 }
 var = var1;
@@ -838,7 +851,8 @@ CHECK_NEW_array__Array(var32);
 }
 var35 = ((val* (*)(val*))(var32->class->vft[COLOR_string__Object__to_s]))(var32) /* to_s on <var32:Array[Object]>*/;
 ((void (*)(val*, val*))(self->class->vft[COLOR_file__Object__print]))(self, var35) /* print on <self:MModule>*/;
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Aborted", "src/model/model_base.nit", 150);
+fprintf(stderr, "Runtime error: %s", "Aborted");
+fprintf(stderr, " (%s:%d)\n", "src/model/model_base.nit", 150);
 exit(1);
 }
 }
@@ -956,7 +970,8 @@ var16 = 0;
 var = var16;
 goto RET_LABEL;
 } else {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Aborted", "src/model/model_base.nit", 181);
+fprintf(stderr, "Runtime error: %s", "Aborted");
+fprintf(stderr, " (%s:%d)\n", "src/model/model_base.nit", 181);
 exit(1);
 }
 }
@@ -980,7 +995,8 @@ val* var /* : String */;
 val* var1 /* : String */;
 var1 = self->attrs[COLOR_model_base__MVisibility___64dto_s].val; /* @to_s on <self:MVisibility> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @to_s", "src/model/model_base.nit", 200);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @to_s");
+fprintf(stderr, " (%s:%d)\n", "src/model/model_base.nit", 200);
 exit(1);
 }
 var = var1;
@@ -1056,6 +1072,7 @@ short int var1 /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_other /* var other: MVisibility */;
 long var2 /* : Int */;
 long var3 /* : Int */;
@@ -1063,7 +1080,8 @@ short int var4 /* : Bool */;
 short int var6 /* : Bool */;
 int cltype7;
 int idtype8;
-short int var9 /* : Bool */;
+const char* var_class_name9;
+short int var10 /* : Bool */;
 /* Covariant cast for argument 0 (other) <p0:MVisibility> isa OTHER */
 /* <p0:MVisibility> isa OTHER */
 type_struct = self->type->resolution_table->types[COLOR_kernel__Comparable_VTOTHER];
@@ -1075,7 +1093,9 @@ var1 = 0;
 var1 = p0->type->type_table[cltype] == idtype;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/model/model_base.nit", 210);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/model/model_base.nit", 210);
 exit(1);
 }
 var_other = p0;
@@ -1086,11 +1106,13 @@ var3 = ((long (*)(val*))(var_other->class->vft[COLOR_model_base__MVisibility__le
 /* <var3:Int> isa OTHER */
 var6 = 1; /* easy <var3:Int> isa OTHER*/
 if (!var6) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 257);
+var_class_name9 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name9);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
 exit(1);
 }
-var9 = var2 < var3;
-var4 = var9;
+var10 = var2 < var3;
+var4 = var10;
 goto RET_LABEL5;
 RET_LABEL5:(void)0;
 }

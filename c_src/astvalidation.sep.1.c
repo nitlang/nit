@@ -25,7 +25,8 @@ val* var /* : List[ANode] */;
 val* var1 /* : List[ANode] */;
 var1 = self->attrs[COLOR_astvalidation__ASTValidationVisitor___64dpath].val; /* @path on <self:ASTValidationVisitor> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @path", "src/astvalidation.nit", 30);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @path");
+fprintf(stderr, " (%s:%d)\n", "src/astvalidation.nit", 30);
 exit(1);
 }
 var = var1;
@@ -57,7 +58,8 @@ val* var /* : HashSet[ANode] */;
 val* var1 /* : HashSet[ANode] */;
 var1 = self->attrs[COLOR_astvalidation__ASTValidationVisitor___64dseen].val; /* @seen on <self:ASTValidationVisitor> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @seen", "src/astvalidation.nit", 31);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @seen");
+fprintf(stderr, " (%s:%d)\n", "src/astvalidation.nit", 31);
 exit(1);
 }
 var = var1;
@@ -105,6 +107,7 @@ short int var4 /* : Bool */;
 short int var6 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 short int var7 /* : Bool */;
 val* var8 /* : List[ANode] */;
 long var9 /* : Int */;
@@ -151,7 +154,9 @@ var3 = 1;
 /* <var3:Int> isa OTHER */
 var6 = 1; /* easy <var3:Int> isa OTHER*/
 if (!var6) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 259);
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
 exit(1);
 }
 var7 = var2 > var3;
@@ -239,7 +244,8 @@ var37 = 0; /* arg is null but recv is not */
 if (var37){
 var38 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ANode__parent]))(self) /* parent on <self:ANode>*/;
 if (var38 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/astvalidation.nit", 57);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/astvalidation.nit", 57);
 exit(1);
 } else {
 var39 = ((val* (*)(val*))(var38->class->vft[COLOR_parser_nodes__ANode__location]))(var38) /* location on <var38:nullable ANode>*/;

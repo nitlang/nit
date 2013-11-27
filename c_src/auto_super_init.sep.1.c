@@ -5,7 +5,8 @@ val* var /* : Phase */;
 val* var1 /* : Phase */;
 var1 = self->attrs[COLOR_auto_super_init__ToolContext___64dauto_super_init_phase].val; /* @auto_super_init_phase on <self:ToolContext> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @auto_super_init_phase", "src/auto_super_init.nit", 26);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @auto_super_init_phase");
+fprintf(stderr, " (%s:%d)\n", "src/auto_super_init.nit", 26);
 exit(1);
 }
 var = var1;
@@ -147,6 +148,7 @@ val* var /* : nullable ANode */;
 short int var1 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 val* var2 /* : nullable MClassDef */;
 val* var_mclassdef /* var mclassdef: MClassDef */;
 val* var3 /* : nullable MPropDef */;
@@ -295,18 +297,22 @@ var1 = var->type->type_table[cltype] == idtype;
 }
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/auto_super_init.nit", 56);
+var_class_name = var == NULL ? "null" : var->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "AClassdef", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/auto_super_init.nit", 56);
 exit(1);
 }
 var2 = ((val* (*)(val*))(var->class->vft[COLOR_modelize_class__AClassdef__mclassdef]))(var) /* mclassdef on <var:nullable ANode(AClassdef)>*/;
 if (var2 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/auto_super_init.nit", 56);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/auto_super_init.nit", 56);
 exit(1);
 }
 var_mclassdef = var2;
 var3 = ((val* (*)(val*))(self->class->vft[COLOR_modelize_property__APropdef__mpropdef]))(self) /* mpropdef on <self:AConcreteMethPropdef>*/;
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/auto_super_init.nit", 57);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/auto_super_init.nit", 57);
 exit(1);
 }
 var_mpropdef = var3;
@@ -331,7 +337,8 @@ var12 = 1;
 var_skip = var12;
 var13 = ((val* (*)(val*))(var_mclassdef->class->vft[COLOR_model__MClassDef__in_hierarchy]))(var_mclassdef) /* in_hierarchy on <var_mclassdef:MClassDef>*/;
 if (var13 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/auto_super_init.nit", 68);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/auto_super_init.nit", 68);
 exit(1);
 } else {
 var14 = ((val* (*)(val*))(var13->class->vft[COLOR_poset__POSetElement__direct_greaters]))(var13) /* direct_greaters on <var13:nullable POSetElement[MClassDef]>*/;
@@ -498,7 +505,8 @@ var77 = 0;
 var77 = var_candidate->type->type_table[cltype78] == idtype79;
 }
 if (!var77) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "src/auto_super_init.nit", 98);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "src/auto_super_init.nit", 98);
 exit(1);
 }
 ((void (*)(val*, val*))(var_auto_super_inits->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_auto_super_inits, var_candidate) /* add on <var_auto_super_inits:Array[MMethod]>*/;
@@ -531,19 +539,22 @@ var89 = ((val* (*)(val*))(var_auto_super_init->class->vft[COLOR_model__MProperty
 var_auto_super_init_def = var89;
 var90 = ((val* (*)(val*))(var_mpropdef->class->vft[COLOR_model__MMethodDef__msignature]))(var_mpropdef) /* msignature on <var_mpropdef:MMethodDef>*/;
 if (var90 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/auto_super_init.nit", 107);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/auto_super_init.nit", 107);
 exit(1);
 }
 var_msig = var90;
 var91 = ((val* (*)(val*))(var_auto_super_init_def->class->vft[COLOR_model__MMethodDef__msignature]))(var_auto_super_init_def) /* msignature on <var_auto_super_init_def:MMethodDef>*/;
 if (var91 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/auto_super_init.nit", 108);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/auto_super_init.nit", 108);
 exit(1);
 }
 var_supermsig = var91;
 var93 = ((val* (*)(val*))(var_auto_super_init_def->class->vft[COLOR_model__MMethodDef__msignature]))(var_auto_super_init_def) /* msignature on <var_auto_super_init_def:MMethodDef>*/;
 if (var93 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/auto_super_init.nit", 109);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/auto_super_init.nit", 109);
 exit(1);
 } else {
 var94 = ((long (*)(val*))(var93->class->vft[COLOR_model__MSignature__arity]))(var93) /* arity on <var93:nullable MSignature>*/;
@@ -560,14 +571,16 @@ var_ = var96;
 if (var96){
 var100 = ((val* (*)(val*))(var_auto_super_init_def->class->vft[COLOR_model__MMethodDef__msignature]))(var_auto_super_init_def) /* msignature on <var_auto_super_init_def:MMethodDef>*/;
 if (var100 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/auto_super_init.nit", 109);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/auto_super_init.nit", 109);
 exit(1);
 } else {
 var101 = ((long (*)(val*))(var100->class->vft[COLOR_model__MSignature__arity]))(var100) /* arity on <var100:nullable MSignature>*/;
 }
 var102 = ((val* (*)(val*))(var_mpropdef->class->vft[COLOR_model__MMethodDef__msignature]))(var_mpropdef) /* msignature on <var_mpropdef:MMethodDef>*/;
 if (var102 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/auto_super_init.nit", 109);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/auto_super_init.nit", 109);
 exit(1);
 } else {
 var103 = ((long (*)(val*))(var102->class->vft[COLOR_model__MSignature__arity]))(var102) /* arity on <var102:nullable MSignature>*/;
