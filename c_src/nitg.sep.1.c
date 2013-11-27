@@ -56,6 +56,7 @@ short int var44 /* : Bool */;
 short int var46 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 short int var47 /* : Bool */;
 static val* varonce48;
 val* var49 /* : String */;
@@ -212,7 +213,9 @@ var43 = 1;
 /* <var43:Int> isa OTHER */
 var46 = 1; /* easy <var43:Int> isa OTHER*/
 if (!var46) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 259);
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
 exit(1);
 }
 var47 = var42 > var43;

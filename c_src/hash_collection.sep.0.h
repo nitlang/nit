@@ -7,6 +7,7 @@ extern const int COLOR_hash_collection__HashCollection___capacity;
 extern const struct type type_kernel__Int;
 long hash_collection__HashCollection__index_at(val* self, val* p0);
 extern const int COLOR_hash_collection__HashCollection___last_accessed_key;
+extern const int COLOR_kernel__Object__is_same_instance;
 extern const int COLOR_hash_collection__HashCollection___last_accessed_node;
 extern const int COLOR_hash_collection__HashCollection__index_at;
 extern const int COLOR_hash_collection__HashCollection__node_at_idx;
@@ -47,7 +48,6 @@ extern const int COLOR_hash_collection__HashMapIteratorhash_collection__HashMap_
 extern const int COLOR_hash_collection__HashMapIterator__init;
 void CHECK_NEW_hash_collection__HashMapIterator(val*);
 val* hash_collection__HashMap__iterator(val* self);
-void hash_collection__HashMap__iterate(val* self);
 long hash_collection__HashMap__length(val* self);
 short int hash_collection__HashMap__is_empty(val* self);
 extern const int COLOR_abstract_collection__Map_FT0;

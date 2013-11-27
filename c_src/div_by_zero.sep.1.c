@@ -5,7 +5,8 @@ val* var /* : Phase */;
 val* var1 /* : Phase */;
 var1 = self->attrs[COLOR_div_by_zero__ToolContext___64ddiv_by_zero_phase].val; /* @div_by_zero_phase on <self:ToolContext> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @div_by_zero_phase", "src/div_by_zero.nit", 26);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @div_by_zero_phase");
+fprintf(stderr, " (%s:%d)\n", "src/div_by_zero.nit", 26);
 exit(1);
 }
 var = var1;
@@ -42,7 +43,8 @@ val* var_visitor /* var visitor: DivByZeroVisitor */;
 var_nmodule = p0;
 var = ((val* (*)(val*))(var_nmodule->class->vft[COLOR_modelbuilder__AModule__mmodule]))(var_nmodule) /* mmodule on <var_nmodule:AModule>*/;
 if (var == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/div_by_zero.nit", 41);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/div_by_zero.nit", 41);
 exit(1);
 }
 var_mmodule = var;
@@ -65,7 +67,8 @@ val* var /* : ToolContext */;
 val* var1 /* : ToolContext */;
 var1 = self->attrs[COLOR_div_by_zero__DivByZeroVisitor___64dtoolcontext].val; /* @toolcontext on <self:DivByZeroVisitor> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @toolcontext", "src/div_by_zero.nit", 53);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @toolcontext");
+fprintf(stderr, " (%s:%d)\n", "src/div_by_zero.nit", 53);
 exit(1);
 }
 var = var1;
@@ -97,7 +100,8 @@ val* var /* : MModule */;
 val* var1 /* : MModule */;
 var1 = self->attrs[COLOR_div_by_zero__DivByZeroVisitor___64dmmodule].val; /* @mmodule on <self:DivByZeroVisitor> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @mmodule", "src/div_by_zero.nit", 56);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @mmodule");
+fprintf(stderr, " (%s:%d)\n", "src/div_by_zero.nit", 56);
 exit(1);
 }
 var = var1;
@@ -240,7 +244,8 @@ var19 = ((val* (*)(val*))(var_op1->class->vft[COLOR_typing__AExpr__mtype]))(var_
 var20 = ((val* (*)(val*))(self->class->vft[COLOR_div_by_zero__DivByZeroVisitor__mmodule]))(self) /* mmodule on <self:DivByZeroVisitor>*/;
 var21 = NULL;
 if (var19 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/div_by_zero.nit", 86);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/div_by_zero.nit", 86);
 exit(1);
 } else {
 var22 = ((short int (*)(val*, val*, val*, val*))(var19->class->vft[COLOR_model__MType__is_subtype]))(var19, var20, var21, var_int_type) /* is_subtype on <var19:nullable MType>*/;

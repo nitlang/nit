@@ -5,7 +5,8 @@ val* var /* : MModule */;
 val* var1 /* : MModule */;
 var1 = self->attrs[COLOR_astbuilder__ASTBuilder___64dmmodule].val; /* @mmodule on <self:ASTBuilder> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @mmodule", "src/astbuilder.nit", 25);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @mmodule");
+fprintf(stderr, " (%s:%d)\n", "src/astbuilder.nit", 25);
 exit(1);
 }
 var = var1;
@@ -153,7 +154,8 @@ var_args = p2;
 var1 = ((val* (*)(val*))(var_mmethod->class->vft[COLOR_model__MProperty__intro]))(var_mmethod) /* intro on <var_mmethod:MMethod>*/;
 var2 = ((val* (*)(val*))(var1->class->vft[COLOR_model__MMethodDef__msignature]))(var1) /* msignature on <var1:MPropDef(MMethodDef)>*/;
 if (var2 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/astbuilder.nit", 47);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/astbuilder.nit", 47);
 exit(1);
 } else {
 var3 = ((val* (*)(val*))(var2->class->vft[COLOR_model__MSignature__return_mtype]))(var2) /* return_mtype on <var2:nullable MSignature>*/;
@@ -168,7 +170,8 @@ var5 = 1; /* arg is null and recv is not */
 if (var5){
 var6 = ((val* (*)(val*))(var_recv->class->vft[COLOR_typing__AExpr__mtype]))(var_recv) /* mtype on <var_recv:AExpr>*/;
 if (var6 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/astbuilder.nit", 48);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/astbuilder.nit", 48);
 exit(1);
 }
 var7 = ((val* (*)(val*))(self->class->vft[COLOR_astbuilder__ASTBuilder__anchor]))(self) /* anchor on <self:ASTBuilder>*/;
@@ -284,14 +287,16 @@ var1 = ((val* (*)(val*))(var_attribute->class->vft[COLOR_model__MProperty__intro
 var2 = ((val* (*)(val*))(var1->class->vft[COLOR_model__MAttributeDef__static_mtype]))(var1) /* static_mtype on <var1:MPropDef(MAttributeDef)>*/;
 var3 = ((val* (*)(val*))(var_recv->class->vft[COLOR_typing__AExpr__mtype]))(var_recv) /* mtype on <var_recv:AExpr>*/;
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/astbuilder.nit", 73);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/astbuilder.nit", 73);
 exit(1);
 }
 var4 = ((val* (*)(val*))(self->class->vft[COLOR_astbuilder__ASTBuilder__anchor]))(self) /* anchor on <self:ASTBuilder>*/;
 var5 = ((val* (*)(val*))(self->class->vft[COLOR_astbuilder__ASTBuilder__mmodule]))(self) /* mmodule on <self:ASTBuilder>*/;
 var6 = 1;
 if (var2 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/astbuilder.nit", 73);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/astbuilder.nit", 73);
 exit(1);
 } else {
 var7 = ((val* (*)(val*, val*, val*, val*, short int))(var2->class->vft[COLOR_model__MType__resolve_for]))(var2, var3, var4, var5, var6) /* resolve_for on <var2:nullable MType>*/;
@@ -437,7 +442,8 @@ var6 = 0; /* is null */
 var6 = 1; /* arg is null and recv is not */
 }
 if (!var6) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "src/astbuilder.nit", 107);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "src/astbuilder.nit", 107);
 exit(1);
 }
 var7 = ((val* (*)(val*))(self->class->vft[COLOR_astbuilder__AExpr__detach_with_placeholder]))(self) /* detach_with_placeholder on <self:AExpr>*/;
@@ -538,7 +544,8 @@ return var;
 void astbuilder__AExpr__add(val* self, val* p0) {
 val* var_expr /* var expr: AExpr */;
 var_expr = p0;
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Aborted", "src/astbuilder.nit", 147);
+fprintf(stderr, "Runtime error: %s", "Aborted");
+fprintf(stderr, " (%s:%d)\n", "src/astbuilder.nit", 147);
 exit(1);
 RET_LABEL:;
 }
@@ -682,7 +689,8 @@ self->attrs[COLOR_parser_nodes__AIfExpr___n_kwif].val = var; /* _n_kwif on <self
 self->attrs[COLOR_parser_nodes__AIfExpr___n_expr].val = var_condition; /* _n_expr on <self:AIfExpr> */
 var1 = self->attrs[COLOR_parser_nodes__AIfExpr___n_expr].val; /* _n_expr on <self:AIfExpr> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr", "src/astbuilder.nit", 208);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_expr");
+fprintf(stderr, " (%s:%d)\n", "src/astbuilder.nit", 208);
 exit(1);
 }
 ((void (*)(val*, val*))(var1->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var1, self) /* parent= on <var1:AExpr>*/;
@@ -791,7 +799,8 @@ var9 = ((val* (*)(val*))(var_mmethod->class->vft[COLOR_model__MProperty__intro])
 var10 = ((val* (*)(val*))(var_mmethod->class->vft[COLOR_model__MProperty__intro]))(var_mmethod) /* intro on <var_mmethod:MMethod>*/;
 var11 = ((val* (*)(val*))(var10->class->vft[COLOR_model__MMethodDef__msignature]))(var10) /* msignature on <var10:MPropDef(MMethodDef)>*/;
 if (var11 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/astbuilder.nit", 241);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/astbuilder.nit", 241);
 exit(1);
 }
 var12 = 0;
@@ -866,7 +875,8 @@ var7 = ((val* (*)(val*))(var6->class->vft[COLOR_parser_nodes__AExprs__n_exprs]))
 }
 var8 = ((val* (*)(val*))(var_recv->class->vft[COLOR_typing__AExpr__mtype]))(var_recv) /* mtype on <var_recv:AExpr>*/;
 if (var8 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/astbuilder.nit", 257);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/astbuilder.nit", 257);
 exit(1);
 }
 var_mtype = var8;
@@ -876,7 +886,8 @@ var11 = ((val* (*)(val*))(var_mmethod->class->vft[COLOR_model__MProperty__intro]
 var12 = ((val* (*)(val*))(var_mmethod->class->vft[COLOR_model__MProperty__intro]))(var_mmethod) /* intro on <var_mmethod:MMethod>*/;
 var13 = ((val* (*)(val*))(var12->class->vft[COLOR_model__MMethodDef__msignature]))(var12) /* msignature on <var12:MPropDef(MMethodDef)>*/;
 if (var13 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/astbuilder.nit", 258);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/astbuilder.nit", 258);
 exit(1);
 }
 var14 = 0;

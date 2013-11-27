@@ -10,4 +10,4 @@ end
 
 var a = new A
 a.foo
-#alt1# if a is a then 2.output
+#alt1# if a isa Int then 2.output

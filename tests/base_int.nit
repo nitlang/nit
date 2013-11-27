@@ -35,8 +35,8 @@ import kernel
 (2==2).output
 '\n'.output
 
-(not 1 is 2).output
-(2 is 2).output
+(not 1.is_same_instance(2)).output
+(2.is_same_instance(2)).output
 '\n'.output
 
 (not 1>2).output

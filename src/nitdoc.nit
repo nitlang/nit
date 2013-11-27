@@ -95,12 +95,12 @@ class NitdocContext
 	end
 
 	private fun process_options do
-		if not opt_dir.value is null then
+		if opt_dir.value != null then
 			output_dir = opt_dir.value
 		else
 			output_dir = "doc"
 		end
-		if not opt_sharedir.value is null then
+		if opt_sharedir.value != null then
 			share_dir = opt_sharedir.value
 		else
 			var dir = "NIT_DIR".environ
@@ -110,12 +110,12 @@ class NitdocContext
 				dir = "{dir}/share/nitdoc"
 			end
 			share_dir = dir
-			if share_dir is null then
+			if share_dir == null then
 				print "Error: Cannot locate nitdoc share files. Uses --sharedir or envvar NIT_DIR"
 				abort
 			end
 			dir = "{share_dir.to_s}/scripts/js-facilities.js"
-			if share_dir is null then
+			if share_dir == null then
 				print "Error: Invalid nitdoc share files. Check --sharedir or envvar NIT_DIR"
 				abort
 			end
@@ -778,7 +778,7 @@ class NitdocClass
 		super
 		append("<li><a href='index.html'>Overview</a></li>")
 		var public_owner = mclass.public_owner
-		if public_owner is null then
+		if public_owner == null then
 			append("<li>")
 			mclass.intro_mmodule.html_link(self)
 			append("</li>")
@@ -1205,7 +1205,7 @@ redef class MModule
 		page.append("<div class='description'>")
 		if page.ctx.mbuilder.mmodule2nmodule.has_key(self) then
 			var nmodule = page.ctx.mbuilder.mmodule2nmodule[self]
-			if not page.ctx.github_gitdir is null then
+			if page.ctx.github_gitdir != null then
 				var loc = nmodule.doc_location.github(page.ctx.github_gitdir.as(not null))
 				page.append("<textarea class='baseComment' data-comment-namespace='{full_name}' data-comment-location='{loc}'>{nmodule.full_comment}</textarea>")
 			end
@@ -1410,7 +1410,7 @@ redef class MClass
 				if page.ctx.mbuilder.mclassdef2nclassdef.has_key(mclassdef) then
 					var nclass = page.ctx.mbuilder.mclassdef2nclassdef[mclassdef]
 					if nclass isa AStdClassdef then
-						if not page.ctx.github_gitdir is null then
+						if page.ctx.github_gitdir != null then
 							var loc = nclass.doc_location.github(page.ctx.github_gitdir.as(not null))
 							page.append("<textarea class='baseComment' data-comment-namespace='{mclassdef.mmodule.full_name}::{name}' data-comment-location='{loc}'>{nclass.full_comment}</textarea>")
 						end
@@ -1436,7 +1436,7 @@ redef class MClass
 			if page.ctx.mbuilder.mclassdef2nclassdef.has_key(intro) then
 				var nclass = page.ctx.mbuilder.mclassdef2nclassdef[intro]
 				if nclass isa AStdClassdef then
-					if not page.ctx.github_gitdir is null then
+					if page.ctx.github_gitdir != null then
 						var loc = nclass.doc_location.github(page.ctx.github_gitdir.as(not null))
 						page.append("<textarea class='baseComment' data-comment-namespace='{intro.mmodule.full_name}::{name}' data-comment-location='{loc}'>{nclass.full_comment}</textarea>")
 					end

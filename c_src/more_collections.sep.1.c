@@ -5,18 +5,20 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 short int var1 /* : Bool */;
 int cltype2;
 int idtype3;
 const struct type* type_struct4;
 short int is_nullable;
+const char* var_class_name5;
 val* var_k /* var k: Object */;
 val* var_v /* var v: nullable Object */;
-short int var5 /* : Bool */;
-val* var6 /* : nullable Object */;
-val* var7 /* : Array[nullable Object] */;
-long var8 /* : Int */;
-val* var9 /* : NativeArray[nullable Object] */;
+short int var6 /* : Bool */;
+val* var7 /* : nullable Object */;
+val* var8 /* : Array[nullable Object] */;
+long var9 /* : Int */;
+val* var10 /* : NativeArray[nullable Object] */;
 /* Covariant cast for argument 0 (k) <p0:Object> isa MultiHashMap#0 */
 /* <p0:Object> isa MultiHashMap#0 */
 type_struct = self->type->resolution_table->types[COLOR_more_collections__MultiHashMap_FT0];
@@ -28,7 +30,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/more_collections.nit", 22);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MultiHashMap#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 22);
 exit(1);
 }
 /* Covariant cast for argument 1 (v) <p1:nullable Object> isa MultiHashMap#1 */
@@ -47,25 +51,27 @@ var1 = p1->type->type_table[cltype2] == idtype3;
 }
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/more_collections.nit", 22);
+var_class_name5 = p1 == NULL ? "null" : p1->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MultiHashMap#1", var_class_name5);
+fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 22);
 exit(1);
 }
 var_k = p0;
 var_v = p1;
-var5 = ((short int (*)(val*, val*))(self->class->vft[COLOR_abstract_collection__MapRead__has_key]))(self, var_k) /* has_key on <self:MultiHashMap[Object, nullable Object]>*/;
-if (var5){
-var6 = ((val* (*)(val*, val*))(self->class->vft[COLOR_abstract_collection__MapRead___91d_93d]))(self, var_k) /* [] on <self:MultiHashMap[Object, nullable Object]>*/;
-((void (*)(val*, val*))(var6->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var6, var_v) /* add on <var6:nullable Object(Array[nullable Object])>*/;
+var6 = ((short int (*)(val*, val*))(self->class->vft[COLOR_abstract_collection__MapRead__has_key]))(self, var_k) /* has_key on <self:MultiHashMap[Object, nullable Object]>*/;
+if (var6){
+var7 = ((val* (*)(val*, val*))(self->class->vft[COLOR_abstract_collection__MapRead___91d_93d]))(self, var_k) /* [] on <self:MultiHashMap[Object, nullable Object]>*/;
+((void (*)(val*, val*))(var7->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var7, var_v) /* add on <var7:nullable Object(Array[nullable Object])>*/;
 } else {
-var7 = NEW_array__Array(self->type->resolution_table->types[COLOR_array__Arraymore_collections__MultiHashMap_FT1]);
-{ /* var7 = array_instance Array[MultiHashMap#1] */
-var8 = 1;
-var9 = NEW_array__NativeArray(var8, self->type->resolution_table->types[COLOR_array__NativeArraymore_collections__MultiHashMap_FT1]);
-((struct instance_array__NativeArray*)var9)->values[0] = (val*) var_v;
-((void (*)(val*, val*, long))(var7->class->vft[COLOR_array__Array__with_native]))(var7, var9, var8) /* with_native on <var7:Array[nullable Object]>*/;
-CHECK_NEW_array__Array(var7);
+var8 = NEW_array__Array(self->type->resolution_table->types[COLOR_array__Arraymore_collections__MultiHashMap_FT1]);
+{ /* var8 = array_instance Array[MultiHashMap#1] */
+var9 = 1;
+var10 = NEW_array__NativeArray(var9, self->type->resolution_table->types[COLOR_array__NativeArraymore_collections__MultiHashMap_FT1]);
+((struct instance_array__NativeArray*)var10)->values[0] = (val*) var_v;
+((void (*)(val*, val*, long))(var8->class->vft[COLOR_array__Array__with_native]))(var8, var10, var9) /* with_native on <var8:Array[nullable Object]>*/;
+CHECK_NEW_array__Array(var8);
 }
-((void (*)(val*, val*, val*))(self->class->vft[COLOR_abstract_collection__Map___91d_93d_61d]))(self, var_k, var7) /* []= on <self:MultiHashMap[Object, nullable Object]>*/;
+((void (*)(val*, val*, val*))(self->class->vft[COLOR_abstract_collection__Map___91d_93d_61d]))(self, var_k, var8) /* []= on <self:MultiHashMap[Object, nullable Object]>*/;
 }
 RET_LABEL:;
 }
@@ -90,7 +96,8 @@ val* var /* : HashMap[Object, HashMap[Object, nullable Object]] */;
 val* var1 /* : HashMap[Object, HashMap[Object, nullable Object]] */;
 var1 = self->attrs[COLOR_more_collections__HashMap2___64dlevel1].val; /* @level1 on <self:HashMap2[Object, Object, nullable Object]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @level1", "lib/more_collections.nit", 38);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @level1");
+fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 38);
 exit(1);
 }
 var = var1;
@@ -112,6 +119,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 /* Covariant cast for argument 0 (level1) <p0:HashMap[Object, HashMap[Object, nullable Object]]> isa HashMap[HashMap2#0, HashMap[HashMap2#1, HashMap2#2]] */
 /* <p0:HashMap[Object, HashMap[Object, nullable Object]]> isa HashMap[HashMap2#0, HashMap[HashMap2#1, HashMap2#2]] */
 type_struct = self->type->resolution_table->types[COLOR_hash_collection__HashMapmore_collections__HashMap2_FT0hash_collection__HashMapmore_collections__HashMap2_FT1more_collections__HashMap2_FT2];
@@ -123,7 +131,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/more_collections.nit", 38);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashMap[HashMap2#0, HashMap[HashMap2#1, HashMap2#2]]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 38);
 exit(1);
 }
 self->attrs[COLOR_more_collections__HashMap2___64dlevel1].val = p0; /* @level1 on <self:HashMap2[Object, Object, nullable Object]> */
@@ -141,23 +151,25 @@ short int var1 /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 short int var2 /* : Bool */;
 int cltype3;
 int idtype4;
 const struct type* type_struct5;
+const char* var_class_name6;
 val* var_k1 /* var k1: Object */;
 val* var_k2 /* var k2: Object */;
-val* var6 /* : HashMap[Object, HashMap[Object, nullable Object]] */;
+val* var7 /* : HashMap[Object, HashMap[Object, nullable Object]] */;
 val* var_level1 /* var level1: HashMap[Object, HashMap[Object, nullable Object]] */;
-short int var7 /* : Bool */;
 short int var8 /* : Bool */;
-val* var9 /* : null */;
-val* var10 /* : nullable Object */;
+short int var9 /* : Bool */;
+val* var10 /* : null */;
+val* var11 /* : nullable Object */;
 val* var_level2 /* var level2: HashMap[Object, nullable Object] */;
-short int var11 /* : Bool */;
 short int var12 /* : Bool */;
-val* var13 /* : null */;
-val* var14 /* : nullable Object */;
+short int var13 /* : Bool */;
+val* var14 /* : null */;
+val* var15 /* : nullable Object */;
 /* Covariant cast for argument 0 (k1) <p0:Object> isa HashMap2#0 */
 /* <p0:Object> isa HashMap2#0 */
 type_struct = self->type->resolution_table->types[COLOR_more_collections__HashMap2_FT0];
@@ -169,7 +181,9 @@ var1 = 0;
 var1 = p0->type->type_table[cltype] == idtype;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/more_collections.nit", 40);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashMap2#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 40);
 exit(1);
 }
 /* Covariant cast for argument 1 (k2) <p1:Object> isa HashMap2#1 */
@@ -183,33 +197,35 @@ var2 = 0;
 var2 = p1->type->type_table[cltype3] == idtype4;
 }
 if (!var2) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/more_collections.nit", 40);
+var_class_name6 = p1 == NULL ? "null" : p1->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashMap2#1", var_class_name6);
+fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 40);
 exit(1);
 }
 var_k1 = p0;
 var_k2 = p1;
-var6 = ((val* (*)(val*))(self->class->vft[COLOR_more_collections__HashMap2__level1]))(self) /* level1 on <self:HashMap2[Object, Object, nullable Object]>*/;
-var_level1 = var6;
-var7 = ((short int (*)(val*, val*))(var_level1->class->vft[COLOR_abstract_collection__MapRead__has_key]))(var_level1, var_k1) /* has_key on <var_level1:HashMap[Object, HashMap[Object, nullable Object]]>*/;
-var8 = !var7;
-if (var8){
-var9 = NULL;
-var = var9;
+var7 = ((val* (*)(val*))(self->class->vft[COLOR_more_collections__HashMap2__level1]))(self) /* level1 on <self:HashMap2[Object, Object, nullable Object]>*/;
+var_level1 = var7;
+var8 = ((short int (*)(val*, val*))(var_level1->class->vft[COLOR_abstract_collection__MapRead__has_key]))(var_level1, var_k1) /* has_key on <var_level1:HashMap[Object, HashMap[Object, nullable Object]]>*/;
+var9 = !var8;
+if (var9){
+var10 = NULL;
+var = var10;
 goto RET_LABEL;
 } else {
 }
-var10 = ((val* (*)(val*, val*))(var_level1->class->vft[COLOR_abstract_collection__MapRead___91d_93d]))(var_level1, var_k1) /* [] on <var_level1:HashMap[Object, HashMap[Object, nullable Object]]>*/;
-var_level2 = var10;
-var11 = ((short int (*)(val*, val*))(var_level2->class->vft[COLOR_abstract_collection__MapRead__has_key]))(var_level2, var_k2) /* has_key on <var_level2:HashMap[Object, nullable Object]>*/;
-var12 = !var11;
-if (var12){
-var13 = NULL;
-var = var13;
-goto RET_LABEL;
-} else {
-}
-var14 = ((val* (*)(val*, val*))(var_level2->class->vft[COLOR_abstract_collection__MapRead___91d_93d]))(var_level2, var_k2) /* [] on <var_level2:HashMap[Object, nullable Object]>*/;
+var11 = ((val* (*)(val*, val*))(var_level1->class->vft[COLOR_abstract_collection__MapRead___91d_93d]))(var_level1, var_k1) /* [] on <var_level1:HashMap[Object, HashMap[Object, nullable Object]]>*/;
+var_level2 = var11;
+var12 = ((short int (*)(val*, val*))(var_level2->class->vft[COLOR_abstract_collection__MapRead__has_key]))(var_level2, var_k2) /* has_key on <var_level2:HashMap[Object, nullable Object]>*/;
+var13 = !var12;
+if (var13){
+var14 = NULL;
 var = var14;
+goto RET_LABEL;
+} else {
+}
+var15 = ((val* (*)(val*, val*))(var_level2->class->vft[COLOR_abstract_collection__MapRead___91d_93d]))(var_level2, var_k2) /* [] on <var_level2:HashMap[Object, nullable Object]>*/;
+var = var15;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -229,25 +245,28 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 short int var1 /* : Bool */;
 int cltype2;
 int idtype3;
 const struct type* type_struct4;
-short int var5 /* : Bool */;
-int cltype6;
-int idtype7;
-const struct type* type_struct8;
+const char* var_class_name5;
+short int var6 /* : Bool */;
+int cltype7;
+int idtype8;
+const struct type* type_struct9;
 short int is_nullable;
+const char* var_class_name10;
 val* var_k1 /* var k1: Object */;
 val* var_k2 /* var k2: Object */;
 val* var_v /* var v: nullable Object */;
-val* var9 /* : HashMap[Object, HashMap[Object, nullable Object]] */;
+val* var11 /* : HashMap[Object, HashMap[Object, nullable Object]] */;
 val* var_level1 /* var level1: HashMap[Object, HashMap[Object, nullable Object]] */;
-short int var10 /* : Bool */;
-short int var11 /* : Bool */;
-val* var12 /* : HashMap[Object, nullable Object] */;
+short int var12 /* : Bool */;
+short int var13 /* : Bool */;
+val* var14 /* : HashMap[Object, nullable Object] */;
 val* var_level2 /* var level2: HashMap[Object, nullable Object] */;
-val* var13 /* : nullable Object */;
+val* var15 /* : nullable Object */;
 /* Covariant cast for argument 0 (k1) <p0:Object> isa HashMap2#0 */
 /* <p0:Object> isa HashMap2#0 */
 type_struct = self->type->resolution_table->types[COLOR_more_collections__HashMap2_FT0];
@@ -259,7 +278,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/more_collections.nit", 51);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashMap2#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 51);
 exit(1);
 }
 /* Covariant cast for argument 1 (k2) <p1:Object> isa HashMap2#1 */
@@ -273,44 +294,48 @@ var1 = 0;
 var1 = p1->type->type_table[cltype2] == idtype3;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/more_collections.nit", 51);
+var_class_name5 = p1 == NULL ? "null" : p1->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashMap2#1", var_class_name5);
+fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 51);
 exit(1);
 }
 /* Covariant cast for argument 2 (v) <p2:nullable Object> isa HashMap2#2 */
 /* <p2:nullable Object> isa HashMap2#2 */
-type_struct8 = self->type->resolution_table->types[COLOR_more_collections__HashMap2_FT2];
-cltype6 = type_struct8->color;
-idtype7 = type_struct8->id;
-is_nullable = type_struct8->is_nullable;
+type_struct9 = self->type->resolution_table->types[COLOR_more_collections__HashMap2_FT2];
+cltype7 = type_struct9->color;
+idtype8 = type_struct9->id;
+is_nullable = type_struct9->is_nullable;
 if(p2 == NULL) {
-var5 = is_nullable;
+var6 = is_nullable;
 } else {
-if(cltype6 >= p2->type->table_size) {
-var5 = 0;
+if(cltype7 >= p2->type->table_size) {
+var6 = 0;
 } else {
-var5 = p2->type->type_table[cltype6] == idtype7;
+var6 = p2->type->type_table[cltype7] == idtype8;
 }
 }
-if (!var5) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/more_collections.nit", 51);
+if (!var6) {
+var_class_name10 = p2 == NULL ? "null" : p2->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashMap2#2", var_class_name10);
+fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 51);
 exit(1);
 }
 var_k1 = p0;
 var_k2 = p1;
 var_v = p2;
-var9 = ((val* (*)(val*))(self->class->vft[COLOR_more_collections__HashMap2__level1]))(self) /* level1 on <self:HashMap2[Object, Object, nullable Object]>*/;
-var_level1 = var9;
-var10 = ((short int (*)(val*, val*))(var_level1->class->vft[COLOR_abstract_collection__MapRead__has_key]))(var_level1, var_k1) /* has_key on <var_level1:HashMap[Object, HashMap[Object, nullable Object]]>*/;
-var11 = !var10;
-if (var11){
-var12 = NEW_hash_collection__HashMap(self->type->resolution_table->types[COLOR_hash_collection__HashMapmore_collections__HashMap2_FT1more_collections__HashMap2_FT2]);
-((void (*)(val*))(var12->class->vft[COLOR_hash_collection__HashMap__init]))(var12) /* init on <var12:HashMap[Object, nullable Object]>*/;
-CHECK_NEW_hash_collection__HashMap(var12);
-var_level2 = var12;
+var11 = ((val* (*)(val*))(self->class->vft[COLOR_more_collections__HashMap2__level1]))(self) /* level1 on <self:HashMap2[Object, Object, nullable Object]>*/;
+var_level1 = var11;
+var12 = ((short int (*)(val*, val*))(var_level1->class->vft[COLOR_abstract_collection__MapRead__has_key]))(var_level1, var_k1) /* has_key on <var_level1:HashMap[Object, HashMap[Object, nullable Object]]>*/;
+var13 = !var12;
+if (var13){
+var14 = NEW_hash_collection__HashMap(self->type->resolution_table->types[COLOR_hash_collection__HashMapmore_collections__HashMap2_FT1more_collections__HashMap2_FT2]);
+((void (*)(val*))(var14->class->vft[COLOR_hash_collection__HashMap__init]))(var14) /* init on <var14:HashMap[Object, nullable Object]>*/;
+CHECK_NEW_hash_collection__HashMap(var14);
+var_level2 = var14;
 ((void (*)(val*, val*, val*))(var_level1->class->vft[COLOR_abstract_collection__Map___91d_93d_61d]))(var_level1, var_k1, var_level2) /* []= on <var_level1:HashMap[Object, HashMap[Object, nullable Object]]>*/;
 } else {
-var13 = ((val* (*)(val*, val*))(var_level1->class->vft[COLOR_abstract_collection__MapRead___91d_93d]))(var_level1, var_k1) /* [] on <var_level1:HashMap[Object, HashMap[Object, nullable Object]]>*/;
-var_level2 = var13;
+var15 = ((val* (*)(val*, val*))(var_level1->class->vft[COLOR_abstract_collection__MapRead___91d_93d]))(var_level1, var_k1) /* [] on <var_level1:HashMap[Object, HashMap[Object, nullable Object]]>*/;
+var_level2 = var15;
 }
 ((void (*)(val*, val*, val*))(var_level2->class->vft[COLOR_abstract_collection__Map___91d_93d_61d]))(var_level2, var_k2, var_v) /* []= on <var_level2:HashMap[Object, nullable Object]>*/;
 RET_LABEL:;
@@ -335,7 +360,8 @@ val* var /* : HashMap[Object, HashMap2[Object, Object, nullable Object]] */;
 val* var1 /* : HashMap[Object, HashMap2[Object, Object, nullable Object]] */;
 var1 = self->attrs[COLOR_more_collections__HashMap3___64dlevel1].val; /* @level1 on <self:HashMap3[Object, Object, Object, nullable Object]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @level1", "lib/more_collections.nit", 68);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @level1");
+fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 68);
 exit(1);
 }
 var = var1;
@@ -357,6 +383,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 /* Covariant cast for argument 0 (level1) <p0:HashMap[Object, HashMap2[Object, Object, nullable Object]]> isa HashMap[HashMap3#0, HashMap2[HashMap3#1, HashMap3#2, HashMap3#3]] */
 /* <p0:HashMap[Object, HashMap2[Object, Object, nullable Object]]> isa HashMap[HashMap3#0, HashMap2[HashMap3#1, HashMap3#2, HashMap3#3]] */
 type_struct = self->type->resolution_table->types[COLOR_hash_collection__HashMapmore_collections__HashMap3_FT0more_collections__HashMap2more_collections__HashMap3_FT1more_collections__HashMap3_FT2more_collections__HashMap3_FT3];
@@ -368,7 +395,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/more_collections.nit", 68);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashMap[HashMap3#0, HashMap2[HashMap3#1, HashMap3#2, HashMap3#3]]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 68);
 exit(1);
 }
 self->attrs[COLOR_more_collections__HashMap3___64dlevel1].val = p0; /* @level1 on <self:HashMap3[Object, Object, Object, nullable Object]> */
@@ -386,25 +415,28 @@ short int var1 /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 short int var2 /* : Bool */;
 int cltype3;
 int idtype4;
 const struct type* type_struct5;
-short int var6 /* : Bool */;
-int cltype7;
-int idtype8;
-const struct type* type_struct9;
+const char* var_class_name6;
+short int var7 /* : Bool */;
+int cltype8;
+int idtype9;
+const struct type* type_struct10;
+const char* var_class_name11;
 val* var_k1 /* var k1: Object */;
 val* var_k2 /* var k2: Object */;
 val* var_k3 /* var k3: Object */;
-val* var10 /* : HashMap[Object, HashMap2[Object, Object, nullable Object]] */;
+val* var12 /* : HashMap[Object, HashMap2[Object, Object, nullable Object]] */;
 val* var_level1 /* var level1: HashMap[Object, HashMap2[Object, Object, nullable Object]] */;
-short int var11 /* : Bool */;
-short int var12 /* : Bool */;
-val* var13 /* : null */;
-val* var14 /* : nullable Object */;
+short int var13 /* : Bool */;
+short int var14 /* : Bool */;
+val* var15 /* : null */;
+val* var16 /* : nullable Object */;
 val* var_level2 /* var level2: HashMap2[Object, Object, nullable Object] */;
-val* var15 /* : nullable Object */;
+val* var17 /* : nullable Object */;
 /* Covariant cast for argument 0 (k1) <p0:Object> isa HashMap3#0 */
 /* <p0:Object> isa HashMap3#0 */
 type_struct = self->type->resolution_table->types[COLOR_more_collections__HashMap3_FT0];
@@ -416,7 +448,9 @@ var1 = 0;
 var1 = p0->type->type_table[cltype] == idtype;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/more_collections.nit", 70);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashMap3#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 70);
 exit(1);
 }
 /* Covariant cast for argument 1 (k2) <p1:Object> isa HashMap3#1 */
@@ -430,40 +464,44 @@ var2 = 0;
 var2 = p1->type->type_table[cltype3] == idtype4;
 }
 if (!var2) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/more_collections.nit", 70);
+var_class_name6 = p1 == NULL ? "null" : p1->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashMap3#1", var_class_name6);
+fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 70);
 exit(1);
 }
 /* Covariant cast for argument 2 (k3) <p2:Object> isa HashMap3#2 */
 /* <p2:Object> isa HashMap3#2 */
-type_struct9 = self->type->resolution_table->types[COLOR_more_collections__HashMap3_FT2];
-cltype7 = type_struct9->color;
-idtype8 = type_struct9->id;
-if(cltype7 >= p2->type->table_size) {
-var6 = 0;
+type_struct10 = self->type->resolution_table->types[COLOR_more_collections__HashMap3_FT2];
+cltype8 = type_struct10->color;
+idtype9 = type_struct10->id;
+if(cltype8 >= p2->type->table_size) {
+var7 = 0;
 } else {
-var6 = p2->type->type_table[cltype7] == idtype8;
+var7 = p2->type->type_table[cltype8] == idtype9;
 }
-if (!var6) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/more_collections.nit", 70);
+if (!var7) {
+var_class_name11 = p2 == NULL ? "null" : p2->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashMap3#2", var_class_name11);
+fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 70);
 exit(1);
 }
 var_k1 = p0;
 var_k2 = p1;
 var_k3 = p2;
-var10 = ((val* (*)(val*))(self->class->vft[COLOR_more_collections__HashMap3__level1]))(self) /* level1 on <self:HashMap3[Object, Object, Object, nullable Object]>*/;
-var_level1 = var10;
-var11 = ((short int (*)(val*, val*))(var_level1->class->vft[COLOR_abstract_collection__MapRead__has_key]))(var_level1, var_k1) /* has_key on <var_level1:HashMap[Object, HashMap2[Object, Object, nullable Object]]>*/;
-var12 = !var11;
-if (var12){
-var13 = NULL;
-var = var13;
+var12 = ((val* (*)(val*))(self->class->vft[COLOR_more_collections__HashMap3__level1]))(self) /* level1 on <self:HashMap3[Object, Object, Object, nullable Object]>*/;
+var_level1 = var12;
+var13 = ((short int (*)(val*, val*))(var_level1->class->vft[COLOR_abstract_collection__MapRead__has_key]))(var_level1, var_k1) /* has_key on <var_level1:HashMap[Object, HashMap2[Object, Object, nullable Object]]>*/;
+var14 = !var13;
+if (var14){
+var15 = NULL;
+var = var15;
 goto RET_LABEL;
 } else {
 }
-var14 = ((val* (*)(val*, val*))(var_level1->class->vft[COLOR_abstract_collection__MapRead___91d_93d]))(var_level1, var_k1) /* [] on <var_level1:HashMap[Object, HashMap2[Object, Object, nullable Object]]>*/;
-var_level2 = var14;
-var15 = ((val* (*)(val*, val*, val*))(var_level2->class->vft[COLOR_more_collections__HashMap2___91d_93d]))(var_level2, var_k2, var_k3) /* [] on <var_level2:HashMap2[Object, Object, nullable Object]>*/;
-var = var15;
+var16 = ((val* (*)(val*, val*))(var_level1->class->vft[COLOR_abstract_collection__MapRead___91d_93d]))(var_level1, var_k1) /* [] on <var_level1:HashMap[Object, HashMap2[Object, Object, nullable Object]]>*/;
+var_level2 = var16;
+var17 = ((val* (*)(val*, val*, val*))(var_level2->class->vft[COLOR_more_collections__HashMap2___91d_93d]))(var_level2, var_k2, var_k3) /* [] on <var_level2:HashMap2[Object, Object, nullable Object]>*/;
+var = var17;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -483,30 +521,34 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 short int var1 /* : Bool */;
 int cltype2;
 int idtype3;
 const struct type* type_struct4;
-short int var5 /* : Bool */;
-int cltype6;
-int idtype7;
-const struct type* type_struct8;
-short int var9 /* : Bool */;
-int cltype10;
-int idtype11;
-const struct type* type_struct12;
+const char* var_class_name5;
+short int var6 /* : Bool */;
+int cltype7;
+int idtype8;
+const struct type* type_struct9;
+const char* var_class_name10;
+short int var11 /* : Bool */;
+int cltype12;
+int idtype13;
+const struct type* type_struct14;
 short int is_nullable;
+const char* var_class_name15;
 val* var_k1 /* var k1: Object */;
 val* var_k2 /* var k2: Object */;
 val* var_k3 /* var k3: Object */;
 val* var_v /* var v: nullable Object */;
-val* var13 /* : HashMap[Object, HashMap2[Object, Object, nullable Object]] */;
+val* var16 /* : HashMap[Object, HashMap2[Object, Object, nullable Object]] */;
 val* var_level1 /* var level1: HashMap[Object, HashMap2[Object, Object, nullable Object]] */;
-short int var14 /* : Bool */;
-short int var15 /* : Bool */;
-val* var16 /* : HashMap2[Object, Object, nullable Object] */;
+short int var17 /* : Bool */;
+short int var18 /* : Bool */;
+val* var19 /* : HashMap2[Object, Object, nullable Object] */;
 val* var_level2 /* var level2: HashMap2[Object, Object, nullable Object] */;
-val* var17 /* : nullable Object */;
+val* var20 /* : nullable Object */;
 /* Covariant cast for argument 0 (k1) <p0:Object> isa HashMap3#0 */
 /* <p0:Object> isa HashMap3#0 */
 type_struct = self->type->resolution_table->types[COLOR_more_collections__HashMap3_FT0];
@@ -518,7 +560,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/more_collections.nit", 80);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashMap3#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 80);
 exit(1);
 }
 /* Covariant cast for argument 1 (k2) <p1:Object> isa HashMap3#1 */
@@ -532,59 +576,65 @@ var1 = 0;
 var1 = p1->type->type_table[cltype2] == idtype3;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/more_collections.nit", 80);
+var_class_name5 = p1 == NULL ? "null" : p1->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashMap3#1", var_class_name5);
+fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 80);
 exit(1);
 }
 /* Covariant cast for argument 2 (k3) <p2:Object> isa HashMap3#2 */
 /* <p2:Object> isa HashMap3#2 */
-type_struct8 = self->type->resolution_table->types[COLOR_more_collections__HashMap3_FT2];
-cltype6 = type_struct8->color;
-idtype7 = type_struct8->id;
-if(cltype6 >= p2->type->table_size) {
-var5 = 0;
+type_struct9 = self->type->resolution_table->types[COLOR_more_collections__HashMap3_FT2];
+cltype7 = type_struct9->color;
+idtype8 = type_struct9->id;
+if(cltype7 >= p2->type->table_size) {
+var6 = 0;
 } else {
-var5 = p2->type->type_table[cltype6] == idtype7;
+var6 = p2->type->type_table[cltype7] == idtype8;
 }
-if (!var5) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/more_collections.nit", 80);
+if (!var6) {
+var_class_name10 = p2 == NULL ? "null" : p2->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashMap3#2", var_class_name10);
+fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 80);
 exit(1);
 }
 /* Covariant cast for argument 3 (v) <p3:nullable Object> isa HashMap3#3 */
 /* <p3:nullable Object> isa HashMap3#3 */
-type_struct12 = self->type->resolution_table->types[COLOR_more_collections__HashMap3_FT3];
-cltype10 = type_struct12->color;
-idtype11 = type_struct12->id;
-is_nullable = type_struct12->is_nullable;
+type_struct14 = self->type->resolution_table->types[COLOR_more_collections__HashMap3_FT3];
+cltype12 = type_struct14->color;
+idtype13 = type_struct14->id;
+is_nullable = type_struct14->is_nullable;
 if(p3 == NULL) {
-var9 = is_nullable;
+var11 = is_nullable;
 } else {
-if(cltype10 >= p3->type->table_size) {
-var9 = 0;
+if(cltype12 >= p3->type->table_size) {
+var11 = 0;
 } else {
-var9 = p3->type->type_table[cltype10] == idtype11;
+var11 = p3->type->type_table[cltype12] == idtype13;
 }
 }
-if (!var9) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/more_collections.nit", 80);
+if (!var11) {
+var_class_name15 = p3 == NULL ? "null" : p3->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashMap3#3", var_class_name15);
+fprintf(stderr, " (%s:%d)\n", "lib/more_collections.nit", 80);
 exit(1);
 }
 var_k1 = p0;
 var_k2 = p1;
 var_k3 = p2;
 var_v = p3;
-var13 = ((val* (*)(val*))(self->class->vft[COLOR_more_collections__HashMap3__level1]))(self) /* level1 on <self:HashMap3[Object, Object, Object, nullable Object]>*/;
-var_level1 = var13;
-var14 = ((short int (*)(val*, val*))(var_level1->class->vft[COLOR_abstract_collection__MapRead__has_key]))(var_level1, var_k1) /* has_key on <var_level1:HashMap[Object, HashMap2[Object, Object, nullable Object]]>*/;
-var15 = !var14;
-if (var15){
-var16 = NEW_more_collections__HashMap2(self->type->resolution_table->types[COLOR_more_collections__HashMap2more_collections__HashMap3_FT1more_collections__HashMap3_FT2more_collections__HashMap3_FT3]);
-((void (*)(val*))(var16->class->vft[COLOR_more_collections__HashMap2__init]))(var16) /* init on <var16:HashMap2[Object, Object, nullable Object]>*/;
-CHECK_NEW_more_collections__HashMap2(var16);
-var_level2 = var16;
+var16 = ((val* (*)(val*))(self->class->vft[COLOR_more_collections__HashMap3__level1]))(self) /* level1 on <self:HashMap3[Object, Object, Object, nullable Object]>*/;
+var_level1 = var16;
+var17 = ((short int (*)(val*, val*))(var_level1->class->vft[COLOR_abstract_collection__MapRead__has_key]))(var_level1, var_k1) /* has_key on <var_level1:HashMap[Object, HashMap2[Object, Object, nullable Object]]>*/;
+var18 = !var17;
+if (var18){
+var19 = NEW_more_collections__HashMap2(self->type->resolution_table->types[COLOR_more_collections__HashMap2more_collections__HashMap3_FT1more_collections__HashMap3_FT2more_collections__HashMap3_FT3]);
+((void (*)(val*))(var19->class->vft[COLOR_more_collections__HashMap2__init]))(var19) /* init on <var19:HashMap2[Object, Object, nullable Object]>*/;
+CHECK_NEW_more_collections__HashMap2(var19);
+var_level2 = var19;
 ((void (*)(val*, val*, val*))(var_level1->class->vft[COLOR_abstract_collection__Map___91d_93d_61d]))(var_level1, var_k1, var_level2) /* []= on <var_level1:HashMap[Object, HashMap2[Object, Object, nullable Object]]>*/;
 } else {
-var17 = ((val* (*)(val*, val*))(var_level1->class->vft[COLOR_abstract_collection__MapRead___91d_93d]))(var_level1, var_k1) /* [] on <var_level1:HashMap[Object, HashMap2[Object, Object, nullable Object]]>*/;
-var_level2 = var17;
+var20 = ((val* (*)(val*, val*))(var_level1->class->vft[COLOR_abstract_collection__MapRead___91d_93d]))(var_level1, var_k1) /* [] on <var_level1:HashMap[Object, HashMap2[Object, Object, nullable Object]]>*/;
+var_level2 = var20;
 }
 ((void (*)(val*, val*, val*, val*))(var_level2->class->vft[COLOR_more_collections__HashMap2___91d_93d_61d]))(var_level2, var_k2, var_k3, var_v) /* []= on <var_level2:HashMap2[Object, Object, nullable Object]>*/;
 RET_LABEL:;

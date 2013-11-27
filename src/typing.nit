@@ -1010,15 +1010,6 @@ redef class AOrElseExpr
 	end
 end
 
-redef class AEeExpr
-	redef fun accept_typing(v)
-	do
-		v.visit_expr(n_expr)
-		v.visit_expr(n_expr2)
-		self.mtype = v.type_bool(self)
-	end
-end
-
 redef class ATrueExpr
 	redef fun accept_typing(v)
 	do

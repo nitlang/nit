@@ -520,7 +520,8 @@ var44 = 0;
 var44 = var_mproperty->type->type_table[cltype45] == idtype46;
 }
 if (!var44) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "src/typing.nit", 1602);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "src/typing.nit", 1579);
 exit(1);
 }
 ((void (*)(val*, val*))(self->class->vft[COLOR_typing__AAttrFormExpr__mproperty_61d]))(self, var_mproperty) /* mproperty= on <self:AAttrFormExpr>*/;
@@ -536,14 +537,16 @@ goto RET_LABEL52;
 RET_LABEL52:(void)0;
 }
 if (!var51) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "src/typing.nit", 1606);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "src/typing.nit", 1583);
 exit(1);
 }
 var54 = ((val* (*)(val*))(var_mpropdefs->class->vft[COLOR_abstract_collection__Collection__first]))(var_mpropdefs) /* first on <var_mpropdefs:Array[MAttributeDef]>*/;
 var_mpropdef = var54;
 var55 = ((val* (*)(val*))(var_mpropdef->class->vft[COLOR_model__MAttributeDef__static_mtype]))(var_mpropdef) /* static_mtype on <var_mpropdef:MAttributeDef>*/;
 if (var55 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/typing.nit", 1608);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/typing.nit", 1585);
 exit(1);
 }
 var_attr_type = var55;
@@ -678,7 +681,8 @@ goto RET_LABEL;
 var3 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AAttrFormExpr__n_expr]))(self) /* n_expr on <self:AIssetAttrExpr>*/;
 var4 = ((val* (*)(val*))(var3->class->vft[COLOR_typing__AExpr__mtype]))(var3) /* mtype on <var3:AExpr>*/;
 if (var4 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/typing.nit", 1654);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/typing.nit", 1631);
 exit(1);
 }
 var_recvtype = var4;
@@ -713,312 +717,6 @@ RET_LABEL:;
 /* method typing#AIssetAttrExpr#accept_typing for (self: Object, TypeVisitor) */
 void VIRTUAL_typing__AIssetAttrExpr__accept_typing(val* self, val* p0) {
 typing__AIssetAttrExpr__accept_typing(self, p0);
-RET_LABEL:;
-}
-/* method typing#AClosureCallExpr#accept_typing for (self: AClosureCallExpr, TypeVisitor) */
-void typing__AClosureCallExpr__accept_typing(val* self, val* p0) {
-val* var_v /* var v: TypeVisitor */;
-val* var /* : nullable ClosureVariable */;
-val* var_variable /* var variable: nullable ClosureVariable */;
-val* var1 /* : null */;
-short int var2 /* : Bool */;
-val* var3 /* : AClassdef */;
-val* var4 /* : nullable MClassDef */;
-val* var5 /* : MClassType */;
-val* var_recvtype /* var recvtype: MClassType */;
-val* var6 /* : nullable MType */;
-val* var_msignature /* var msignature: MType */;
-short int var7 /* : Bool */;
-val* var8 /* : MType */;
-short int var9 /* : Bool */;
-int cltype;
-int idtype;
-val* var10 /* : AExprs */;
-val* var11 /* : Array[AExpr] */;
-val* var_args /* var args: Array[AExpr] */;
-val* var12 /* : String */;
-short int var13 /* : Bool */;
-short int var14 /* : Bool */;
-val* var15 /* : nullable MType */;
-var_v = p0;
-var = ((val* (*)(val*))(self->class->vft[COLOR_scope__AClosureCallExpr__variable]))(self) /* variable on <self:AClosureCallExpr>*/;
-var_variable = var;
-var1 = NULL;
-if (var_variable == NULL) {
-var2 = 1; /* is null */
-} else {
-var2 = 0; /* arg is null but recv is not */
-}
-if (var2){
-goto RET_LABEL;
-} else {
-}
-var3 = ((val* (*)(val*))(var_v->class->vft[COLOR_typing__TypeVisitor__nclassdef]))(var_v) /* nclassdef on <var_v:TypeVisitor>*/;
-var4 = ((val* (*)(val*))(var3->class->vft[COLOR_modelize_class__AClassdef__mclassdef]))(var3) /* mclassdef on <var3:AClassdef>*/;
-if (var4 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/typing.nit", 1671);
-exit(1);
-} else {
-var5 = ((val* (*)(val*))(var4->class->vft[COLOR_model__MClassDef__bound_mtype]))(var4) /* bound_mtype on <var4:nullable MClassDef>*/;
-}
-var_recvtype = var5;
-var6 = ((val* (*)(val*))(var_variable->class->vft[COLOR_typing__Variable__declared_type]))(var_variable) /* declared_type on <var_variable:nullable ClosureVariable(ClosureVariable)>*/;
-if (var6 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/typing.nit", 1672);
-exit(1);
-}
-var_msignature = var6;
-var7 = 0;
-var8 = ((val* (*)(val*, val*, val*, short int))(var_v->class->vft[COLOR_typing__TypeVisitor__resolve_for]))(var_v, var_msignature, var_recvtype, var7) /* resolve_for on <var_v:TypeVisitor>*/;
-/* <var8:MType> isa MSignature */
-cltype = type_model__MSignature.color;
-idtype = type_model__MSignature.id;
-if(cltype >= var8->type->table_size) {
-var9 = 0;
-} else {
-var9 = var8->type->type_table[cltype] == idtype;
-}
-if (!var9) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/typing.nit", 1673);
-exit(1);
-}
-var_msignature = var8;
-var10 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AClosureCallExpr__n_args]))(self) /* n_args on <self:AClosureCallExpr>*/;
-var11 = ((val* (*)(val*))(var10->class->vft[COLOR_typing__AExprs__to_a]))(var10) /* to_a on <var10:AExprs>*/;
-var_args = var11;
-var12 = ((val* (*)(val*))(var_variable->class->vft[COLOR_scope__Variable__name]))(var_variable) /* name on <var_variable:nullable ClosureVariable(ClosureVariable)>*/;
-var13 = ((short int (*)(val*, val*, val*, val*, val*))(var_v->class->vft[COLOR_typing__TypeVisitor__check_signature]))(var_v, self, var_args, var12, var_msignature) /* check_signature on <var_v:TypeVisitor>*/;
-var13;
-var14 = 1;
-((void (*)(val*, short int))(self->class->vft[COLOR_typing__AExpr__is_typed_61d]))(self, var14) /* is_typed= on <self:AClosureCallExpr>*/;
-var15 = ((val* (*)(val*))(var_msignature->class->vft[COLOR_model__MSignature__return_mtype]))(var_msignature) /* return_mtype on <var_msignature:MType(MSignature)>*/;
-((void (*)(val*, val*))(self->class->vft[COLOR_typing__AExpr__mtype_61d]))(self, var15) /* mtype= on <self:AClosureCallExpr>*/;
-RET_LABEL:;
-}
-/* method typing#AClosureCallExpr#accept_typing for (self: Object, TypeVisitor) */
-void VIRTUAL_typing__AClosureCallExpr__accept_typing(val* self, val* p0) {
-typing__AClosureCallExpr__accept_typing(self, p0);
-RET_LABEL:;
-}
-/* method typing#AClosureDef#mclosure for (self: AClosureDef): nullable MParameter */
-val* typing__AClosureDef__mclosure(val* self) {
-val* var /* : nullable MParameter */;
-val* var1 /* : nullable MParameter */;
-var1 = self->attrs[COLOR_typing__AClosureDef___64dmclosure].val; /* @mclosure on <self:AClosureDef> */
-var = var1;
-RET_LABEL:;
-return var;
-}
-/* method typing#AClosureDef#mclosure for (self: Object): nullable MParameter */
-val* VIRTUAL_typing__AClosureDef__mclosure(val* self) {
-val* var /* : nullable MParameter */;
-val* var1 /* : nullable MParameter */;
-var1 = typing__AClosureDef__mclosure(self);
-var = var1;
-RET_LABEL:;
-return var;
-}
-/* method typing#AClosureDef#mclosure= for (self: AClosureDef, nullable MParameter) */
-void typing__AClosureDef__mclosure_61d(val* self, val* p0) {
-self->attrs[COLOR_typing__AClosureDef___64dmclosure].val = p0; /* @mclosure on <self:AClosureDef> */
-RET_LABEL:;
-}
-/* method typing#AClosureDef#mclosure= for (self: Object, nullable MParameter) */
-void VIRTUAL_typing__AClosureDef__mclosure_61d(val* self, val* p0) {
-typing__AClosureDef__mclosure_61d(self, p0);
-RET_LABEL:;
-}
-/* method typing#AClosureDef#accept_typing for (self: AClosureDef, TypeVisitor, MParameter) */
-void typing__AClosureDef__accept_typing(val* self, val* p0, val* p1) {
-val* var_v /* var v: TypeVisitor */;
-val* var_mparameter /* var mparameter: MParameter */;
-val* var /* : nullable Array[Variable] */;
-val* var_variables /* var variables: nullable Array[Variable] */;
-val* var1 /* : null */;
-short int var2 /* : Bool */;
-val* var3 /* : MType */;
-short int var4 /* : Bool */;
-int cltype;
-int idtype;
-val* var_msignature /* var msignature: MSignature */;
-long var5 /* : Int */;
-long var6 /* : Int */;
-short int var7 /* : Bool */;
-short int var9 /* : Bool */;
-short int var10 /* : Bool */;
-static val* varonce;
-val* var11 /* : String */;
-char* var12 /* : NativeString */;
-long var13 /* : Int */;
-val* var14 /* : String */;
-val* var15 /* : String */;
-static val* varonce16;
-val* var17 /* : String */;
-char* var18 /* : NativeString */;
-long var19 /* : Int */;
-val* var20 /* : String */;
-long var21 /* : Int */;
-static val* varonce22;
-val* var23 /* : String */;
-char* var24 /* : NativeString */;
-long var25 /* : Int */;
-val* var26 /* : String */;
-long var27 /* : Int */;
-static val* varonce28;
-val* var29 /* : String */;
-char* var30 /* : NativeString */;
-long var31 /* : Int */;
-val* var32 /* : String */;
-val* var33 /* : Array[Object] */;
-long var34 /* : Int */;
-val* var35 /* : NativeArray[Object] */;
-val* var36 /* : Object */;
-val* var37 /* : Object */;
-val* var38 /* : String */;
-val* var39 /* : Range[Int] */;
-long var40 /* : Int */;
-long var41 /* : Int */;
-val* var42 /* : Discrete */;
-val* var43 /* : Discrete */;
-val* var44 /* : Iterator[nullable Object] */;
-short int var45 /* : Bool */;
-val* var46 /* : nullable Object */;
-long var_i /* var i: Int */;
-long var47 /* : Int */;
-val* var48 /* : nullable Object */;
-val* var49 /* : Array[MParameter] */;
-val* var50 /* : nullable Object */;
-val* var51 /* : MType */;
-val* var52 /* : nullable AExpr */;
-var_v = p0;
-var_mparameter = p1;
-var = ((val* (*)(val*))(self->class->vft[COLOR_scope__AClosureDef__variables]))(self) /* variables on <self:AClosureDef>*/;
-var_variables = var;
-var1 = NULL;
-if (var_variables == NULL) {
-var2 = 1; /* is null */
-} else {
-var2 = 0; /* arg is null but recv is not */
-}
-if (var2){
-goto RET_LABEL;
-} else {
-}
-((void (*)(val*, val*))(self->class->vft[COLOR_typing__AClosureDef__mclosure_61d]))(self, var_mparameter) /* mclosure= on <self:AClosureDef>*/;
-var3 = ((val* (*)(val*))(var_mparameter->class->vft[COLOR_model__MParameter__mtype]))(var_mparameter) /* mtype on <var_mparameter:MParameter>*/;
-/* <var3:MType> isa MSignature */
-cltype = type_model__MSignature.color;
-idtype = type_model__MSignature.id;
-if(cltype >= var3->type->table_size) {
-var4 = 0;
-} else {
-var4 = var3->type->type_table[cltype] == idtype;
-}
-if (!var4) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/typing.nit", 1692);
-exit(1);
-}
-var_msignature = var3;
-var5 = ((long (*)(val*))(var_msignature->class->vft[COLOR_model__MSignature__arity]))(var_msignature) /* arity on <var_msignature:MSignature>*/;
-var6 = ((long (*)(val*))(var_variables->class->vft[COLOR_abstract_collection__Collection__length]))(var_variables) /* length on <var_variables:nullable Array[Variable](Array[Variable])>*/;
-{ /* Inline kernel#Int#!= (var5,var6) */
-var9 = var5 == var6;
-var10 = !var9;
-var7 = var10;
-goto RET_LABEL8;
-RET_LABEL8:(void)0;
-}
-if (var7){
-if (varonce) {
-var11 = varonce;
-} else {
-var12 = "Type error: closure ";
-var13 = 20;
-var14 = string__NativeString__to_s_with_length(var12, var13);
-var11 = var14;
-varonce = var11;
-}
-var15 = ((val* (*)(val*))(var_mparameter->class->vft[COLOR_model__MParameter__name]))(var_mparameter) /* name on <var_mparameter:MParameter>*/;
-if (varonce16) {
-var17 = varonce16;
-} else {
-var18 = " expects ";
-var19 = 9;
-var20 = string__NativeString__to_s_with_length(var18, var19);
-var17 = var20;
-varonce16 = var17;
-}
-var21 = ((long (*)(val*))(var_msignature->class->vft[COLOR_model__MSignature__arity]))(var_msignature) /* arity on <var_msignature:MSignature>*/;
-if (varonce22) {
-var23 = varonce22;
-} else {
-var24 = " parameters, ";
-var25 = 13;
-var26 = string__NativeString__to_s_with_length(var24, var25);
-var23 = var26;
-varonce22 = var23;
-}
-var27 = ((long (*)(val*))(var_variables->class->vft[COLOR_abstract_collection__Collection__length]))(var_variables) /* length on <var_variables:nullable Array[Variable](Array[Variable])>*/;
-if (varonce28) {
-var29 = varonce28;
-} else {
-var30 = " given";
-var31 = 6;
-var32 = string__NativeString__to_s_with_length(var30, var31);
-var29 = var32;
-varonce28 = var29;
-}
-var33 = NEW_array__Array(&type_array__Arraykernel__Object);
-{ /* var33 = array_instance Array[Object] */
-var34 = 7;
-var35 = NEW_array__NativeArray(var34, &type_array__NativeArraykernel__Object);
-((struct instance_array__NativeArray*)var35)->values[0] = (val*) var11;
-((struct instance_array__NativeArray*)var35)->values[1] = (val*) var15;
-((struct instance_array__NativeArray*)var35)->values[2] = (val*) var17;
-var36 = BOX_kernel__Int(var21); /* autobox from Int to Object */
-((struct instance_array__NativeArray*)var35)->values[3] = (val*) var36;
-((struct instance_array__NativeArray*)var35)->values[4] = (val*) var23;
-var37 = BOX_kernel__Int(var27); /* autobox from Int to Object */
-((struct instance_array__NativeArray*)var35)->values[5] = (val*) var37;
-((struct instance_array__NativeArray*)var35)->values[6] = (val*) var29;
-((void (*)(val*, val*, long))(var33->class->vft[COLOR_array__Array__with_native]))(var33, var35, var34) /* with_native on <var33:Array[Object]>*/;
-CHECK_NEW_array__Array(var33);
-}
-var38 = ((val* (*)(val*))(var33->class->vft[COLOR_string__Object__to_s]))(var33) /* to_s on <var33:Array[Object]>*/;
-((void (*)(val*, val*, val*))(var_v->class->vft[COLOR_typing__TypeVisitor__error]))(var_v, self, var38) /* error on <var_v:TypeVisitor>*/;
-goto RET_LABEL;
-} else {
-}
-var39 = NEW_range__Range(&type_range__Rangekernel__Int);
-var40 = 0;
-var41 = ((long (*)(val*))(var_variables->class->vft[COLOR_abstract_collection__Collection__length]))(var_variables) /* length on <var_variables:nullable Array[Variable](Array[Variable])>*/;
-var42 = BOX_kernel__Int(var40); /* autobox from Int to Discrete */
-var43 = BOX_kernel__Int(var41); /* autobox from Int to Discrete */
-((void (*)(val*, val*, val*))(var39->class->vft[COLOR_range__Range__without_last]))(var39, var42, var43) /* without_last on <var39:Range[Int]>*/;
-CHECK_NEW_range__Range(var39);
-var44 = ((val* (*)(val*))(var39->class->vft[COLOR_abstract_collection__Collection__iterator]))(var39) /* iterator on <var39:Range[Int]>*/;
-for(;;) {
-var45 = ((short int (*)(val*))(var44->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var44) /* is_ok on <var44:Iterator[nullable Object]>*/;
-if(!var45) break;
-var46 = ((val* (*)(val*))(var44->class->vft[COLOR_abstract_collection__Iterator__item]))(var44) /* item on <var44:Iterator[nullable Object]>*/;
-var47 = ((struct instance_kernel__Int*)var46)->value; /* autounbox from nullable Object to Int */;
-var_i = var47;
-var48 = ((val* (*)(val*, long))(var_variables->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var_variables, var_i) /* [] on <var_variables:nullable Array[Variable](Array[Variable])>*/;
-var49 = ((val* (*)(val*))(var_msignature->class->vft[COLOR_model__MSignature__mparameters]))(var_msignature) /* mparameters on <var_msignature:MSignature>*/;
-var50 = ((val* (*)(val*, long))(var49->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var49, var_i) /* [] on <var49:Array[MParameter]>*/;
-var51 = ((val* (*)(val*))(var50->class->vft[COLOR_model__MParameter__mtype]))(var50) /* mtype on <var50:nullable Object(MParameter)>*/;
-((void (*)(val*, val*))(var48->class->vft[COLOR_typing__Variable__declared_type_61d]))(var48, var51) /* declared_type= on <var48:nullable Object(Variable)>*/;
-CONTINUE_label: (void)0;
-((void (*)(val*))(var44->class->vft[COLOR_abstract_collection__Iterator__next]))(var44) /* next on <var44:Iterator[nullable Object]>*/;
-}
-BREAK_label: (void)0;
-var52 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AClosureDef__n_expr]))(self) /* n_expr on <self:AClosureDef>*/;
-((void (*)(val*, val*))(var_v->class->vft[COLOR_typing__TypeVisitor__visit_stmt]))(var_v, var52) /* visit_stmt on <var_v:TypeVisitor>*/;
-RET_LABEL:;
-}
-/* method typing#AClosureDef#accept_typing for (self: Object, TypeVisitor, MParameter) */
-void VIRTUAL_typing__AClosureDef__accept_typing(val* self, val* p0, val* p1) {
-typing__AClosureDef__accept_typing(self, p0, p1);
 RET_LABEL:;
 }
 /* method typing#ADebugTypeExpr#accept_typing for (self: ADebugTypeExpr, TypeVisitor) */

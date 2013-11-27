@@ -24,6 +24,7 @@ short int var1 /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_k /* var k: Object */;
 long var2 /* : Int */;
 long var3 /* : Int */;
@@ -35,9 +36,10 @@ short int var8 /* : Bool */;
 short int var10 /* : Bool */;
 int cltype11;
 int idtype12;
-short int var13 /* : Bool */;
-long var14 /* : Int */;
-long var16 /* : Int */;
+const char* var_class_name13;
+short int var14 /* : Bool */;
+long var15 /* : Int */;
+long var17 /* : Int */;
 /* Covariant cast for argument 0 (k) <p0:Object> isa HashCollection#0 */
 /* <p0:Object> isa HashCollection#0 */
 type_struct = self->type->resolution_table->types[COLOR_hash_collection__HashCollection_FT0];
@@ -49,7 +51,9 @@ var1 = 0;
 var1 = p0->type->type_table[cltype] == idtype;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/hash_collection.nit", 35);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashCollection#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 35);
 exit(1);
 }
 var_k = p0;
@@ -68,22 +72,24 @@ var7 = 0;
 /* <var7:Int> isa OTHER */
 var10 = 1; /* easy <var7:Int> isa OTHER*/
 if (!var10) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 257);
+var_class_name13 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name13);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
 exit(1);
 }
-var13 = var_i < var7;
-var8 = var13;
+var14 = var_i < var7;
+var8 = var14;
 goto RET_LABEL9;
 RET_LABEL9:(void)0;
 }
 if (var8){
 { /* Inline kernel#Int#unary - (var_i) */
-var16 = -var_i;
-var14 = var16;
-goto RET_LABEL15;
-RET_LABEL15:(void)0;
+var17 = -var_i;
+var15 = var17;
+goto RET_LABEL16;
+RET_LABEL16:(void)0;
 }
-var_i = var14;
+var_i = var15;
 } else {
 }
 var = var_i;
@@ -107,6 +113,7 @@ short int var1 /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_k /* var k: Object */;
 val* var2 /* : nullable Object */;
 short int var3 /* : Bool */;
@@ -125,12 +132,14 @@ var1 = 0;
 var1 = p0->type->type_table[cltype] == idtype;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/hash_collection.nit", 43);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashCollection#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 43);
 exit(1);
 }
 var_k = p0;
 var2 = self->attrs[COLOR_hash_collection__HashCollection___last_accessed_key].val; /* _last_accessed_key on <self:HashCollection[Object, HashNode[Object]]> */
-var3 = var_k == var2 || (var2 != NULL && var_k->class == var2->class && ((var_k->class->box_kind == 1 && ((struct instance_kernel__Int*)var_k)->value == ((struct instance_kernel__Int*)var2)->value) || (var_k->class->box_kind == 2 && ((struct instance_kernel__Bool*)var_k)->value == ((struct instance_kernel__Bool*)var2)->value) || (var_k->class->box_kind == 3 && ((struct instance_kernel__Char*)var_k)->value == ((struct instance_kernel__Char*)var2)->value) || (var_k->class->box_kind == 4 && ((struct instance_kernel__Float*)var_k)->value == ((struct instance_kernel__Float*)var2)->value) || (var_k->class->box_kind == 5 && ((struct instance_string__NativeString*)var_k)->value == ((struct instance_string__NativeString*)var2)->value) || (var_k->class->box_kind == 6 && ((struct instance_kernel__Pointer*)var_k)->value == ((struct instance_kernel__Pointer*)var2)->value)));
+var3 = ((short int (*)(val*, val*))(var_k->class->vft[COLOR_kernel__Object__is_same_instance]))(var_k, var2) /* is_same_instance on <var_k:Object>*/;
 if (var3){
 var4 = self->attrs[COLOR_hash_collection__HashCollection___last_accessed_node].val; /* _last_accessed_node on <self:HashCollection[Object, HashNode[Object]]> */
 var = var4;
@@ -163,6 +172,7 @@ short int var1 /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 long var_i /* var i: Int */;
 val* var_k /* var k: Object */;
 val* var2 /* : nullable NativeArray[nullable HashNode[Object]] */;
@@ -181,6 +191,7 @@ short int var11 /* : Bool */;
 int cltype12;
 int idtype13;
 const struct type* type_struct14;
+const char* var_class_name15;
 /* Covariant cast for argument 1 (k) <p1:Object> isa HashCollection#0 */
 /* <p1:Object> isa HashCollection#0 */
 type_struct = self->type->resolution_table->types[COLOR_hash_collection__HashCollection_FT0];
@@ -192,14 +203,17 @@ var1 = 0;
 var1 = p1->type->type_table[cltype] == idtype;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/hash_collection.nit", 55);
+var_class_name = p1 == NULL ? "null" : p1->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashCollection#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 55);
 exit(1);
 }
 var_i = p0;
 var_k = p1;
 var2 = self->attrs[COLOR_hash_collection__HashCollection___array].val; /* _array on <self:HashCollection[Object, HashNode[Object]]> */
 if (var2 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "lib/standard/collection/hash_collection.nit", 58);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 58);
 exit(1);
 } else {
 var3 = ((val* (*)(val*, long))(var2->class->vft[COLOR_array__NativeArray___91d_93d]))(var2, var_i) /* [] on <var2:nullable NativeArray[nullable HashNode[Object]]>*/;
@@ -215,11 +229,12 @@ var5 = 1; /* arg is null and recv is not */
 if (!var5) break;
 var6 = var_c->attrs[COLOR_hash_collection__HashNode___key].val; /* _key on <var_c:nullable HashNode[Object](HashNode[Object])> */
 if (var6 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _key", "lib/standard/collection/hash_collection.nit", 60);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _key");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 60);
 exit(1);
 }
 var_ck = var6;
-var8 = var_ck == var_k || (var_ck->class == var_k->class && ((var_ck->class->box_kind == 1 && ((struct instance_kernel__Int*)var_ck)->value == ((struct instance_kernel__Int*)var_k)->value) || (var_ck->class->box_kind == 2 && ((struct instance_kernel__Bool*)var_ck)->value == ((struct instance_kernel__Bool*)var_k)->value) || (var_ck->class->box_kind == 3 && ((struct instance_kernel__Char*)var_ck)->value == ((struct instance_kernel__Char*)var_k)->value) || (var_ck->class->box_kind == 4 && ((struct instance_kernel__Float*)var_ck)->value == ((struct instance_kernel__Float*)var_k)->value) || (var_ck->class->box_kind == 5 && ((struct instance_string__NativeString*)var_ck)->value == ((struct instance_string__NativeString*)var_k)->value) || (var_ck->class->box_kind == 6 && ((struct instance_kernel__Pointer*)var_ck)->value == ((struct instance_kernel__Pointer*)var_k)->value)));
+var8 = ((short int (*)(val*, val*))(var_ck->class->vft[COLOR_kernel__Object__is_same_instance]))(var_ck, var_k) /* is_same_instance on <var_ck:Object>*/;
 var_ = var8;
 if (var8){
 var7 = var_;
@@ -246,7 +261,9 @@ var11 = var10->type->type_table[cltype12] == idtype13;
 }
 }
 if (!var11) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/hash_collection.nit", 64);
+var_class_name15 = var10 == NULL ? "null" : var10->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable HashCollection#1", var_class_name15);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 64);
 exit(1);
 }
 var_c = var10;
@@ -273,6 +290,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 long var_index /* var index: Int */;
 val* var_node /* var node: HashNode[Object] */;
 val* var1 /* : nullable HashNode[Object] */;
@@ -292,29 +310,31 @@ short int var13 /* : Bool */;
 int cltype14;
 int idtype15;
 const struct type* type_struct16;
-long var17 /* : Int */;
-long var_l /* var l: Int */;
+const char* var_class_name17;
 long var18 /* : Int */;
+long var_l /* var l: Int */;
 long var19 /* : Int */;
-long var21 /* : Int */;
+long var20 /* : Int */;
 long var22 /* : Int */;
 long var23 /* : Int */;
-long var25 /* : Int */;
+long var24 /* : Int */;
 long var26 /* : Int */;
 long var27 /* : Int */;
-long var29 /* : Int */;
+long var28 /* : Int */;
 long var30 /* : Int */;
 long var31 /* : Int */;
-long var33 /* : Int */;
+long var32 /* : Int */;
 long var34 /* : Int */;
-short int var35 /* : Bool */;
-short int var37 /* : Bool */;
-int cltype38;
-int idtype39;
-short int var40 /* : Bool */;
-long var41 /* : Int */;
-long var42 /* : Int */;
+long var35 /* : Int */;
+short int var36 /* : Bool */;
+short int var38 /* : Bool */;
+int cltype39;
+int idtype40;
+const char* var_class_name41;
+short int var42 /* : Bool */;
+long var43 /* : Int */;
 long var44 /* : Int */;
+long var46 /* : Int */;
 /* Covariant cast for argument 1 (node) <p1:HashNode[Object]> isa HashCollection#1 */
 /* <p1:HashNode[Object]> isa HashCollection#1 */
 type_struct = self->type->resolution_table->types[COLOR_hash_collection__HashCollection_FT1];
@@ -326,7 +346,9 @@ var = 0;
 var = p1->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/hash_collection.nit", 69);
+var_class_name = p1 == NULL ? "null" : p1->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashCollection#1", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 69);
 exit(1);
 }
 var_index = p0;
@@ -343,7 +365,8 @@ self->attrs[COLOR_hash_collection__HashCollection___first_item].val = var_node; 
 } else {
 var4 = self->attrs[COLOR_hash_collection__HashCollection___last_item].val; /* _last_item on <self:HashCollection[Object, HashNode[Object]]> */
 if (var4 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "lib/standard/collection/hash_collection.nit", 76);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 76);
 exit(1);
 }
 var4->attrs[COLOR_hash_collection__HashNode___next_item].val = var_node; /* _next_item on <var4:nullable HashNode[Object]> */
@@ -355,7 +378,8 @@ var_node->attrs[COLOR_hash_collection__HashNode___next_item].val = var6; /* _nex
 self->attrs[COLOR_hash_collection__HashCollection___last_item].val = var_node; /* _last_item on <self:HashCollection[Object, HashNode[Object]]> */
 var7 = self->attrs[COLOR_hash_collection__HashCollection___array].val; /* _array on <self:HashCollection[Object, HashNode[Object]]> */
 if (var7 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "lib/standard/collection/hash_collection.nit", 83);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 83);
 exit(1);
 } else {
 var8 = ((val* (*)(val*, long))(var7->class->vft[COLOR_array__NativeArray___91d_93d]))(var7, var_index) /* [] on <var7:nullable NativeArray[nullable HashNode[Object]]>*/;
@@ -363,7 +387,8 @@ var8 = ((val* (*)(val*, long))(var7->class->vft[COLOR_array__NativeArray___91d_9
 var_next = var8;
 var9 = self->attrs[COLOR_hash_collection__HashCollection___array].val; /* _array on <self:HashCollection[Object, HashNode[Object]]> */
 if (var9 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "lib/standard/collection/hash_collection.nit", 84);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 84);
 exit(1);
 } else {
 ((void (*)(val*, long, val*))(var9->class->vft[COLOR_array__NativeArray___91d_93d_61d]))(var9, var_index, var_node) /* []= on <var9:nullable NativeArray[nullable HashNode[Object]]>*/;
@@ -381,7 +406,8 @@ var_next->attrs[COLOR_hash_collection__HashNode___prev_in_bucklet].val = var_nod
 }
 var12 = var_node->attrs[COLOR_hash_collection__HashNode___key].val; /* _key on <var_node:HashNode[Object]> */
 if (var12 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _key", "lib/standard/collection/hash_collection.nit", 88);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _key");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 88);
 exit(1);
 }
 /* <var12:Object> isa nullable HashCollection#0 */
@@ -394,66 +420,70 @@ var13 = 0;
 var13 = var12->type->type_table[cltype14] == idtype15;
 }
 if (!var13) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/hash_collection.nit", 88);
+var_class_name17 = var12 == NULL ? "null" : var12->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable HashCollection#0", var_class_name17);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 88);
 exit(1);
 }
 self->attrs[COLOR_hash_collection__HashCollection___last_accessed_key].val = var12; /* _last_accessed_key on <self:HashCollection[Object, HashNode[Object]]> */
 self->attrs[COLOR_hash_collection__HashCollection___last_accessed_node].val = var_node; /* _last_accessed_node on <self:HashCollection[Object, HashNode[Object]]> */
-var17 = self->attrs[COLOR_hash_collection__HashCollection___length].l; /* _length on <self:HashCollection[Object, HashNode[Object]]> */
-var_l = var17;
-var18 = 1;
-{ /* Inline kernel#Int#+ (var_l,var18) */
-var21 = var_l + var18;
-var19 = var21;
-goto RET_LABEL20;
-RET_LABEL20:(void)0;
+var18 = self->attrs[COLOR_hash_collection__HashCollection___length].l; /* _length on <self:HashCollection[Object, HashNode[Object]]> */
+var_l = var18;
+var19 = 1;
+{ /* Inline kernel#Int#+ (var_l,var19) */
+var22 = var_l + var19;
+var20 = var22;
+goto RET_LABEL21;
+RET_LABEL21:(void)0;
 }
-self->attrs[COLOR_hash_collection__HashCollection___length].l = var19; /* _length on <self:HashCollection[Object, HashNode[Object]]> */
-var22 = 5;
-{ /* Inline kernel#Int#+ (var_l,var22) */
-var25 = var_l + var22;
-var23 = var25;
-goto RET_LABEL24;
-RET_LABEL24:(void)0;
+self->attrs[COLOR_hash_collection__HashCollection___length].l = var20; /* _length on <self:HashCollection[Object, HashNode[Object]]> */
+var23 = 5;
+{ /* Inline kernel#Int#+ (var_l,var23) */
+var26 = var_l + var23;
+var24 = var26;
+goto RET_LABEL25;
+RET_LABEL25:(void)0;
 }
-var26 = 3;
-{ /* Inline kernel#Int#* (var23,var26) */
-var29 = var23 * var26;
-var27 = var29;
-goto RET_LABEL28;
-RET_LABEL28:(void)0;
+var27 = 3;
+{ /* Inline kernel#Int#* (var24,var27) */
+var30 = var24 * var27;
+var28 = var30;
+goto RET_LABEL29;
+RET_LABEL29:(void)0;
 }
-var30 = 2;
-{ /* Inline kernel#Int#/ (var27,var30) */
-var33 = var27 / var30;
-var31 = var33;
-goto RET_LABEL32;
-RET_LABEL32:(void)0;
+var31 = 2;
+{ /* Inline kernel#Int#/ (var28,var31) */
+var34 = var28 / var31;
+var32 = var34;
+goto RET_LABEL33;
+RET_LABEL33:(void)0;
 }
-var_l = var31;
-var34 = self->attrs[COLOR_hash_collection__HashCollection___capacity].l; /* _capacity on <self:HashCollection[Object, HashNode[Object]]> */
-{ /* Inline kernel#Int#>= (var_l,var34) */
-/* Covariant cast for argument 0 (i) <var34:Int> isa OTHER */
-/* <var34:Int> isa OTHER */
-var37 = 1; /* easy <var34:Int> isa OTHER*/
-if (!var37) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 258);
+var_l = var32;
+var35 = self->attrs[COLOR_hash_collection__HashCollection___capacity].l; /* _capacity on <self:HashCollection[Object, HashNode[Object]]> */
+{ /* Inline kernel#Int#>= (var_l,var35) */
+/* Covariant cast for argument 0 (i) <var35:Int> isa OTHER */
+/* <var35:Int> isa OTHER */
+var38 = 1; /* easy <var35:Int> isa OTHER*/
+if (!var38) {
+var_class_name41 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name41);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
 exit(1);
 }
-var40 = var_l >= var34;
-var35 = var40;
-goto RET_LABEL36;
-RET_LABEL36:(void)0;
+var42 = var_l >= var35;
+var36 = var42;
+goto RET_LABEL37;
+RET_LABEL37:(void)0;
 }
-if (var35){
-var41 = 2;
-{ /* Inline kernel#Int#* (var_l,var41) */
-var44 = var_l * var41;
-var42 = var44;
-goto RET_LABEL43;
-RET_LABEL43:(void)0;
+if (var36){
+var43 = 2;
+{ /* Inline kernel#Int#* (var_l,var43) */
+var46 = var_l * var43;
+var44 = var46;
+goto RET_LABEL45;
+RET_LABEL45:(void)0;
 }
-((void (*)(val*, long))(self->class->vft[COLOR_hash_collection__HashCollection__enlarge]))(self, var42) /* enlarge on <self:HashCollection[Object, HashNode[Object]]>*/;
+((void (*)(val*, long))(self->class->vft[COLOR_hash_collection__HashCollection__enlarge]))(self, var44) /* enlarge on <self:HashCollection[Object, HashNode[Object]]>*/;
 } else {
 }
 RET_LABEL:;
@@ -469,6 +499,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_k /* var k: Object */;
 long var1 /* : Int */;
 long var_i /* var i: Int */;
@@ -486,29 +517,32 @@ short int var9 /* : Bool */;
 int cltype10;
 int idtype11;
 const struct type* type_struct12;
-val* var13 /* : null */;
-short int var14 /* : Bool */;
+const char* var_class_name13;
+val* var14 /* : null */;
 short int var15 /* : Bool */;
-int cltype16;
-int idtype17;
-const struct type* type_struct18;
+short int var16 /* : Bool */;
+int cltype17;
+int idtype18;
+const struct type* type_struct19;
+const char* var_class_name20;
 val* var_ /* var : HashCollection[Object, HashNode[Object]] */;
-long var19 /* : Int */;
-long var20 /* : Int */;
 long var21 /* : Int */;
+long var22 /* : Int */;
 long var23 /* : Int */;
-val* var24 /* : nullable HashNode[Object] */;
-val* var25 /* : nullable HashNode[Object] */;
-val* var26 /* : null */;
-short int var27 /* : Bool */;
-val* var28 /* : nullable NativeArray[nullable HashNode[Object]] */;
+long var25 /* : Int */;
+val* var26 /* : nullable HashNode[Object] */;
+val* var27 /* : nullable HashNode[Object] */;
+val* var28 /* : null */;
 short int var29 /* : Bool */;
-int cltype30;
-int idtype31;
-const struct type* type_struct32;
-val* var33 /* : null */;
-short int var34 /* : Bool */;
-val* var35 /* : null */;
+val* var30 /* : nullable NativeArray[nullable HashNode[Object]] */;
+short int var31 /* : Bool */;
+int cltype32;
+int idtype33;
+const struct type* type_struct34;
+const char* var_class_name35;
+val* var36 /* : null */;
+short int var37 /* : Bool */;
+val* var38 /* : null */;
 /* Covariant cast for argument 0 (k) <p0:Object> isa HashCollection#0 */
 /* <p0:Object> isa HashCollection#0 */
 type_struct = self->type->resolution_table->types[COLOR_hash_collection__HashCollection_FT0];
@@ -520,7 +554,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/hash_collection.nit", 100);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashCollection#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 100);
 exit(1);
 }
 var_k = p0;
@@ -565,99 +601,106 @@ var9 = var_next->type->type_table[cltype10] == idtype11;
 }
 }
 if (!var9) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/hash_collection.nit", 113);
+var_class_name13 = var_next == NULL ? "null" : var_next->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable HashCollection#1", var_class_name13);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 113);
 exit(1);
 }
 self->attrs[COLOR_hash_collection__HashCollection___first_item].val = var_next; /* _first_item on <self:HashCollection[Object, HashNode[Object]]> */
 }
-var13 = NULL;
+var14 = NULL;
 if (var_next == NULL) {
-var14 = 0; /* is null */
+var15 = 0; /* is null */
 } else {
-var14 = 1; /* arg is null and recv is not */
+var15 = 1; /* arg is null and recv is not */
 }
-if (var14){
+if (var15){
 var_next->attrs[COLOR_hash_collection__HashNode___prev_item].val = var_prev; /* _prev_item on <var_next:nullable HashNode[Object](HashNode[Object])> */
 } else {
 /* <var_prev:nullable HashNode[Object]> isa nullable HashCollection#1 */
-type_struct18 = self->type->resolution_table->types[COLOR_hash_collection__HashCollection_FT1];
-cltype16 = type_struct18->color;
-idtype17 = type_struct18->id;
+type_struct19 = self->type->resolution_table->types[COLOR_hash_collection__HashCollection_FT1];
+cltype17 = type_struct19->color;
+idtype18 = type_struct19->id;
 if(var_prev == NULL) {
-var15 = 1;
+var16 = 1;
 } else {
-if(cltype16 >= var_prev->type->table_size) {
-var15 = 0;
+if(cltype17 >= var_prev->type->table_size) {
+var16 = 0;
 } else {
-var15 = var_prev->type->type_table[cltype16] == idtype17;
+var16 = var_prev->type->type_table[cltype17] == idtype18;
 }
 }
-if (!var15) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/hash_collection.nit", 118);
+if (!var16) {
+var_class_name20 = var_prev == NULL ? "null" : var_prev->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable HashCollection#1", var_class_name20);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 118);
 exit(1);
 }
 self->attrs[COLOR_hash_collection__HashCollection___last_item].val = var_prev; /* _last_item on <self:HashCollection[Object, HashNode[Object]]> */
 }
 var_ = self;
-var19 = var_->attrs[COLOR_hash_collection__HashCollection___length].l; /* _length on <var_:HashCollection[Object, HashNode[Object]]> */
-var20 = 1;
-{ /* Inline kernel#Int#- (var19,var20) */
-var23 = var19 - var20;
-var21 = var23;
-goto RET_LABEL22;
-RET_LABEL22:(void)0;
+var21 = var_->attrs[COLOR_hash_collection__HashCollection___length].l; /* _length on <var_:HashCollection[Object, HashNode[Object]]> */
+var22 = 1;
+{ /* Inline kernel#Int#- (var21,var22) */
+var25 = var21 - var22;
+var23 = var25;
+goto RET_LABEL24;
+RET_LABEL24:(void)0;
 }
-var_->attrs[COLOR_hash_collection__HashCollection___length].l = var21; /* _length on <var_:HashCollection[Object, HashNode[Object]]> */
-var24 = var_node->attrs[COLOR_hash_collection__HashNode___prev_in_bucklet].val; /* _prev_in_bucklet on <var_node:nullable HashNode[Object](HashNode[Object])> */
-var_prev = var24;
-var25 = var_node->attrs[COLOR_hash_collection__HashNode___next_in_bucklet].val; /* _next_in_bucklet on <var_node:nullable HashNode[Object](HashNode[Object])> */
-var_next = var25;
-var26 = NULL;
+var_->attrs[COLOR_hash_collection__HashCollection___length].l = var23; /* _length on <var_:HashCollection[Object, HashNode[Object]]> */
+var26 = var_node->attrs[COLOR_hash_collection__HashNode___prev_in_bucklet].val; /* _prev_in_bucklet on <var_node:nullable HashNode[Object](HashNode[Object])> */
+var_prev = var26;
+var27 = var_node->attrs[COLOR_hash_collection__HashNode___next_in_bucklet].val; /* _next_in_bucklet on <var_node:nullable HashNode[Object](HashNode[Object])> */
+var_next = var27;
+var28 = NULL;
 if (var_prev == NULL) {
-var27 = 0; /* is null */
+var29 = 0; /* is null */
 } else {
-var27 = 1; /* arg is null and recv is not */
+var29 = 1; /* arg is null and recv is not */
 }
-if (var27){
+if (var29){
 var_prev->attrs[COLOR_hash_collection__HashNode___next_in_bucklet].val = var_next; /* _next_in_bucklet on <var_prev:nullable HashNode[Object](HashNode[Object])> */
 } else {
-var28 = self->attrs[COLOR_hash_collection__HashCollection___array].val; /* _array on <self:HashCollection[Object, HashNode[Object]]> */
+var30 = self->attrs[COLOR_hash_collection__HashCollection___array].val; /* _array on <self:HashCollection[Object, HashNode[Object]]> */
 /* <var_next:nullable HashNode[Object]> isa nullable HashCollection#1 */
-type_struct32 = self->type->resolution_table->types[COLOR_hash_collection__HashCollection_FT1];
-cltype30 = type_struct32->color;
-idtype31 = type_struct32->id;
+type_struct34 = self->type->resolution_table->types[COLOR_hash_collection__HashCollection_FT1];
+cltype32 = type_struct34->color;
+idtype33 = type_struct34->id;
 if(var_next == NULL) {
-var29 = 1;
+var31 = 1;
 } else {
-if(cltype30 >= var_next->type->table_size) {
-var29 = 0;
+if(cltype32 >= var_next->type->table_size) {
+var31 = 0;
 } else {
-var29 = var_next->type->type_table[cltype30] == idtype31;
+var31 = var_next->type->type_table[cltype32] == idtype33;
 }
 }
-if (!var29) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/hash_collection.nit", 128);
+if (!var31) {
+var_class_name35 = var_next == NULL ? "null" : var_next->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable HashCollection#1", var_class_name35);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 128);
 exit(1);
 }
-if (var28 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "lib/standard/collection/hash_collection.nit", 128);
+if (var30 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 128);
 exit(1);
 } else {
-((void (*)(val*, long, val*))(var28->class->vft[COLOR_array__NativeArray___91d_93d_61d]))(var28, var_i, var_next) /* []= on <var28:nullable NativeArray[nullable HashNode[Object]]>*/;
+((void (*)(val*, long, val*))(var30->class->vft[COLOR_array__NativeArray___91d_93d_61d]))(var30, var_i, var_next) /* []= on <var30:nullable NativeArray[nullable HashNode[Object]]>*/;
 }
 }
-var33 = NULL;
+var36 = NULL;
 if (var_next == NULL) {
-var34 = 0; /* is null */
+var37 = 0; /* is null */
 } else {
-var34 = 1; /* arg is null and recv is not */
+var37 = 1; /* arg is null and recv is not */
 }
-if (var34){
+if (var37){
 var_next->attrs[COLOR_hash_collection__HashNode___prev_in_bucklet].val = var_prev; /* _prev_in_bucklet on <var_next:nullable HashNode[Object](HashNode[Object])> */
 } else {
 }
-var35 = NULL;
-self->attrs[COLOR_hash_collection__HashCollection___last_accessed_key].val = var35; /* _last_accessed_key on <self:HashCollection[Object, HashNode[Object]]> */
+var38 = NULL;
+self->attrs[COLOR_hash_collection__HashCollection___last_accessed_key].val = var38; /* _last_accessed_key on <self:HashCollection[Object, HashNode[Object]]> */
 RET_LABEL:;
 }
 /* method hash_collection#HashCollection#remove_node for (self: Object, Object) */
@@ -677,6 +720,7 @@ short int var6 /* : Bool */;
 short int var8 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 short int var9 /* : Bool */;
 val* var10 /* : nullable NativeArray[nullable HashNode[Object]] */;
 val* var11 /* : null */;
@@ -703,7 +747,9 @@ var5 = 0;
 /* <var5:Int> isa OTHER */
 var8 = 1; /* easy <var5:Int> isa OTHER*/
 if (!var8) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 258);
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
 exit(1);
 }
 var9 = var_i >= var5;
@@ -715,7 +761,8 @@ if (!var6) break;
 var10 = self->attrs[COLOR_hash_collection__HashCollection___array].val; /* _array on <self:HashCollection[Object, HashNode[Object]]> */
 var11 = NULL;
 if (var10 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "lib/standard/collection/hash_collection.nit", 142);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 142);
 exit(1);
 } else {
 ((void (*)(val*, long, val*))(var10->class->vft[COLOR_array__NativeArray___91d_93d_61d]))(var10, var_i, var11) /* []= on <var10:nullable NativeArray[nullable HashNode[Object]]>*/;
@@ -759,6 +806,7 @@ short int var6 /* : Bool */;
 short int var8 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 short int var9 /* : Bool */;
 long var10 /* : Int */;
 long var11 /* : Int */;
@@ -769,50 +817,55 @@ short int var16 /* : Bool */;
 short int var18 /* : Bool */;
 int cltype19;
 int idtype20;
-short int var21 /* : Bool */;
-val* var22 /* : null */;
-val* var23 /* : NativeArray[nullable Object] */;
+const char* var_class_name21;
+short int var22 /* : Bool */;
+val* var23 /* : null */;
+val* var24 /* : NativeArray[nullable Object] */;
 val* var_new_array /* var new_array: NativeArray[nullable HashNode[Object]] */;
-long var24 /* : Int */;
 long var25 /* : Int */;
-long var27 /* : Int */;
-long var_i /* var i: Int */;
+long var26 /* : Int */;
 long var28 /* : Int */;
-short int var29 /* : Bool */;
-short int var31 /* : Bool */;
-int cltype32;
-int idtype33;
-short int var34 /* : Bool */;
-val* var35 /* : null */;
-long var36 /* : Int */;
-long var37 /* : Int */;
+long var_i /* var i: Int */;
+long var29 /* : Int */;
+short int var30 /* : Bool */;
+short int var32 /* : Bool */;
+int cltype33;
+int idtype34;
+const char* var_class_name35;
+short int var36 /* : Bool */;
+val* var37 /* : null */;
+long var38 /* : Int */;
 long var39 /* : Int */;
-long var40 /* : Int */;
-short int var41 /* : Bool */;
+long var41 /* : Int */;
+long var42 /* : Int */;
 short int var43 /* : Bool */;
-int cltype44;
-int idtype45;
-short int var46 /* : Bool */;
-val* var47 /* : nullable HashNode[Object] */;
-val* var_node /* var node: nullable HashNode[Object] */;
-val* var48 /* : null */;
+short int var45 /* : Bool */;
+int cltype46;
+int idtype47;
+const char* var_class_name48;
 short int var49 /* : Bool */;
-val* var50 /* : Object */;
-short int var51 /* : Bool */;
-int cltype52;
-int idtype53;
+val* var50 /* : nullable HashNode[Object] */;
+val* var_node /* var node: nullable HashNode[Object] */;
+val* var51 /* : null */;
+short int var52 /* : Bool */;
+val* var53 /* : Object */;
+short int var54 /* : Bool */;
+int cltype55;
+int idtype56;
 const struct type* type_struct;
-long var54 /* : Int */;
+const char* var_class_name57;
+long var58 /* : Int */;
 long var_index /* var index: Int */;
-val* var55 /* : nullable Object */;
+val* var59 /* : nullable Object */;
 val* var_next /* var next: nullable HashNode[Object] */;
-val* var56 /* : null */;
-short int var57 /* : Bool */;
-val* var58 /* : nullable HashNode[Object] */;
-short int var59 /* : Bool */;
-int cltype60;
-int idtype61;
-const struct type* type_struct62;
+val* var60 /* : null */;
+short int var61 /* : Bool */;
+val* var62 /* : nullable HashNode[Object] */;
+short int var63 /* : Bool */;
+int cltype64;
+int idtype65;
+const struct type* type_struct66;
+const char* var_class_name67;
 var_cap = p0;
 var = self->attrs[COLOR_hash_collection__HashCollection___capacity].l; /* _capacity on <self:HashCollection[Object, HashNode[Object]]> */
 var_old_cap = var;
@@ -829,7 +882,9 @@ RET_LABEL4:(void)0;
 /* <var3:Int> isa OTHER */
 var8 = 1; /* easy <var3:Int> isa OTHER*/
 if (!var8) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 257);
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
 exit(1);
 }
 var9 = var_cap < var3;
@@ -855,11 +910,13 @@ var15 = self->attrs[COLOR_hash_collection__HashCollection___capacity].l; /* _cap
 /* <var15:Int> isa OTHER */
 var18 = 1; /* easy <var15:Int> isa OTHER*/
 if (!var18) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 256);
+var_class_name21 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name21);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
 exit(1);
 }
-var21 = var_cap <= var15;
-var16 = var21;
+var22 = var_cap <= var15;
+var16 = var22;
 goto RET_LABEL17;
 RET_LABEL17:(void)0;
 }
@@ -868,132 +925,141 @@ goto RET_LABEL;
 } else {
 }
 self->attrs[COLOR_hash_collection__HashCollection___capacity].l = var_cap; /* _capacity on <self:HashCollection[Object, HashNode[Object]]> */
-var22 = NULL;
-self->attrs[COLOR_hash_collection__HashCollection___last_accessed_key].val = var22; /* _last_accessed_key on <self:HashCollection[Object, HashNode[Object]]> */
-var23 = ((val* (*)(val*, long))(self->class->vft[COLOR_array__ArrayCapable__calloc_array]))(self, var_cap) /* calloc_array on <self:HashCollection[Object, HashNode[Object]]>*/;
-var_new_array = var23;
+var23 = NULL;
+self->attrs[COLOR_hash_collection__HashCollection___last_accessed_key].val = var23; /* _last_accessed_key on <self:HashCollection[Object, HashNode[Object]]> */
+var24 = ((val* (*)(val*, long))(self->class->vft[COLOR_array__ArrayCapable__calloc_array]))(self, var_cap) /* calloc_array on <self:HashCollection[Object, HashNode[Object]]>*/;
+var_new_array = var24;
 self->attrs[COLOR_hash_collection__HashCollection___array].val = var_new_array; /* _array on <self:HashCollection[Object, HashNode[Object]]> */
-var24 = 1;
-{ /* Inline kernel#Int#- (var_cap,var24) */
-var27 = var_cap - var24;
-var25 = var27;
-goto RET_LABEL26;
-RET_LABEL26:(void)0;
+var25 = 1;
+{ /* Inline kernel#Int#- (var_cap,var25) */
+var28 = var_cap - var25;
+var26 = var28;
+goto RET_LABEL27;
+RET_LABEL27:(void)0;
 }
-var_i = var25;
+var_i = var26;
 for(;;) {
-var28 = 0;
-{ /* Inline kernel#Int#>= (var_i,var28) */
-/* Covariant cast for argument 0 (i) <var28:Int> isa OTHER */
-/* <var28:Int> isa OTHER */
-var31 = 1; /* easy <var28:Int> isa OTHER*/
-if (!var31) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 258);
+var29 = 0;
+{ /* Inline kernel#Int#>= (var_i,var29) */
+/* Covariant cast for argument 0 (i) <var29:Int> isa OTHER */
+/* <var29:Int> isa OTHER */
+var32 = 1; /* easy <var29:Int> isa OTHER*/
+if (!var32) {
+var_class_name35 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name35);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
 exit(1);
 }
-var34 = var_i >= var28;
-var29 = var34;
-goto RET_LABEL30;
-RET_LABEL30:(void)0;
+var36 = var_i >= var29;
+var30 = var36;
+goto RET_LABEL31;
+RET_LABEL31:(void)0;
 }
-if (!var29) break;
-var35 = NULL;
-((void (*)(val*, long, val*))(var_new_array->class->vft[COLOR_array__NativeArray___91d_93d_61d]))(var_new_array, var_i, var35) /* []= on <var_new_array:NativeArray[nullable HashNode[Object]]>*/;
-var36 = 1;
-{ /* Inline kernel#Int#- (var_i,var36) */
-var39 = var_i - var36;
-var37 = var39;
-goto RET_LABEL38;
-RET_LABEL38:(void)0;
+if (!var30) break;
+var37 = NULL;
+((void (*)(val*, long, val*))(var_new_array->class->vft[COLOR_array__NativeArray___91d_93d_61d]))(var_new_array, var_i, var37) /* []= on <var_new_array:NativeArray[nullable HashNode[Object]]>*/;
+var38 = 1;
+{ /* Inline kernel#Int#- (var_i,var38) */
+var41 = var_i - var38;
+var39 = var41;
+goto RET_LABEL40;
+RET_LABEL40:(void)0;
 }
-var_i = var37;
+var_i = var39;
 CONTINUE_label: (void)0;
 }
 BREAK_label: (void)0;
-var40 = self->attrs[COLOR_hash_collection__HashCollection___capacity].l; /* _capacity on <self:HashCollection[Object, HashNode[Object]]> */
-{ /* Inline kernel#Int#<= (var40,var_old_cap) */
+var42 = self->attrs[COLOR_hash_collection__HashCollection___capacity].l; /* _capacity on <self:HashCollection[Object, HashNode[Object]]> */
+{ /* Inline kernel#Int#<= (var42,var_old_cap) */
 /* Covariant cast for argument 0 (i) <var_old_cap:Int> isa OTHER */
 /* <var_old_cap:Int> isa OTHER */
-var43 = 1; /* easy <var_old_cap:Int> isa OTHER*/
-if (!var43) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 256);
+var45 = 1; /* easy <var_old_cap:Int> isa OTHER*/
+if (!var45) {
+var_class_name48 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name48);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
 exit(1);
 }
-var46 = var40 <= var_old_cap;
-var41 = var46;
-goto RET_LABEL42;
-RET_LABEL42:(void)0;
+var49 = var42 <= var_old_cap;
+var43 = var49;
+goto RET_LABEL44;
+RET_LABEL44:(void)0;
 }
-if (var41){
+if (var43){
 goto RET_LABEL;
 } else {
 }
-var47 = self->attrs[COLOR_hash_collection__HashCollection___first_item].val; /* _first_item on <self:HashCollection[Object, HashNode[Object]]> */
-var_node = var47;
+var50 = self->attrs[COLOR_hash_collection__HashCollection___first_item].val; /* _first_item on <self:HashCollection[Object, HashNode[Object]]> */
+var_node = var50;
 for(;;) {
-var48 = NULL;
+var51 = NULL;
 if (var_node == NULL) {
-var49 = 0; /* is null */
+var52 = 0; /* is null */
 } else {
-var49 = 1; /* arg is null and recv is not */
+var52 = 1; /* arg is null and recv is not */
 }
-if (!var49) break;
-var50 = var_node->attrs[COLOR_hash_collection__HashNode___key].val; /* _key on <var_node:nullable HashNode[Object](HashNode[Object])> */
-if (var50 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _key", "lib/standard/collection/hash_collection.nit", 177);
+if (!var52) break;
+var53 = var_node->attrs[COLOR_hash_collection__HashNode___key].val; /* _key on <var_node:nullable HashNode[Object](HashNode[Object])> */
+if (var53 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _key");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 177);
 exit(1);
 }
-/* <var50:Object> isa HashCollection#0 */
+/* <var53:Object> isa HashCollection#0 */
 type_struct = self->type->resolution_table->types[COLOR_hash_collection__HashCollection_FT0];
-cltype52 = type_struct->color;
-idtype53 = type_struct->id;
-if(cltype52 >= var50->type->table_size) {
-var51 = 0;
+cltype55 = type_struct->color;
+idtype56 = type_struct->id;
+if(cltype55 >= var53->type->table_size) {
+var54 = 0;
 } else {
-var51 = var50->type->type_table[cltype52] == idtype53;
+var54 = var53->type->type_table[cltype55] == idtype56;
 }
-if (!var51) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/hash_collection.nit", 177);
+if (!var54) {
+var_class_name57 = var53 == NULL ? "null" : var53->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashCollection#0", var_class_name57);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 177);
 exit(1);
 }
-var54 = ((long (*)(val*, val*))(self->class->vft[COLOR_hash_collection__HashCollection__index_at]))(self, var50) /* index_at on <self:HashCollection[Object, HashNode[Object]]>*/;
-var_index = var54;
-var55 = ((val* (*)(val*, long))(var_new_array->class->vft[COLOR_array__NativeArray___91d_93d]))(var_new_array, var_index) /* [] on <var_new_array:NativeArray[nullable HashNode[Object]]>*/;
-var_next = var55;
+var58 = ((long (*)(val*, val*))(self->class->vft[COLOR_hash_collection__HashCollection__index_at]))(self, var53) /* index_at on <self:HashCollection[Object, HashNode[Object]]>*/;
+var_index = var58;
+var59 = ((val* (*)(val*, long))(var_new_array->class->vft[COLOR_array__NativeArray___91d_93d]))(var_new_array, var_index) /* [] on <var_new_array:NativeArray[nullable HashNode[Object]]>*/;
+var_next = var59;
 ((void (*)(val*, long, val*))(var_new_array->class->vft[COLOR_array__NativeArray___91d_93d_61d]))(var_new_array, var_index, var_node) /* []= on <var_new_array:NativeArray[nullable HashNode[Object]]>*/;
 var_node->attrs[COLOR_hash_collection__HashNode___next_in_bucklet].val = var_next; /* _next_in_bucklet on <var_node:nullable HashNode[Object](HashNode[Object])> */
-var56 = NULL;
+var60 = NULL;
 if (var_next == NULL) {
-var57 = 0; /* is null */
+var61 = 0; /* is null */
 } else {
-var57 = 1; /* arg is null and recv is not */
+var61 = 1; /* arg is null and recv is not */
 }
-if (var57){
+if (var61){
 var_next->attrs[COLOR_hash_collection__HashNode___prev_in_bucklet].val = var_node; /* _prev_in_bucklet on <var_next:nullable HashNode[Object](HashNode[Object])> */
 } else {
 }
-var58 = var_node->attrs[COLOR_hash_collection__HashNode___next_item].val; /* _next_item on <var_node:nullable HashNode[Object](HashNode[Object])> */
-/* <var58:nullable HashNode[Object]> isa nullable HashCollection#1 */
-type_struct62 = self->type->resolution_table->types[COLOR_hash_collection__HashCollection_FT1];
-cltype60 = type_struct62->color;
-idtype61 = type_struct62->id;
-if(var58 == NULL) {
-var59 = 1;
+var62 = var_node->attrs[COLOR_hash_collection__HashNode___next_item].val; /* _next_item on <var_node:nullable HashNode[Object](HashNode[Object])> */
+/* <var62:nullable HashNode[Object]> isa nullable HashCollection#1 */
+type_struct66 = self->type->resolution_table->types[COLOR_hash_collection__HashCollection_FT1];
+cltype64 = type_struct66->color;
+idtype65 = type_struct66->id;
+if(var62 == NULL) {
+var63 = 1;
 } else {
-if(cltype60 >= var58->type->table_size) {
-var59 = 0;
+if(cltype64 >= var62->type->table_size) {
+var63 = 0;
 } else {
-var59 = var58->type->type_table[cltype60] == idtype61;
+var63 = var62->type->type_table[cltype64] == idtype65;
 }
 }
-if (!var59) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/hash_collection.nit", 183);
+if (!var63) {
+var_class_name67 = var62 == NULL ? "null" : var62->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable HashCollection#1", var_class_name67);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 183);
 exit(1);
 }
-var_node = var58;
-CONTINUE_label63: (void)0;
+var_node = var62;
+CONTINUE_label68: (void)0;
 }
-BREAK_label63: (void)0;
+BREAK_label68: (void)0;
 RET_LABEL:;
 }
 /* method hash_collection#HashCollection#enlarge for (self: Object, Int) */
@@ -1034,6 +1100,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 /* Covariant cast for argument 0 (next_item) <p0:nullable HashNode[Object]> isa nullable N */
 /* <p0:nullable HashNode[Object]> isa nullable N */
 type_struct = self->type->resolution_table->types[COLOR_hash_collection__HashNode_VTN];
@@ -1049,7 +1116,9 @@ var = p0->type->type_table[cltype] == idtype;
 }
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/hash_collection.nit", 191);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable N", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 191);
 exit(1);
 }
 self->attrs[COLOR_hash_collection__HashNode___next_item].val = p0; /* _next_item on <self:HashNode[Object]> */
@@ -1084,6 +1153,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 /* Covariant cast for argument 0 (prev_item) <p0:nullable HashNode[Object]> isa nullable N */
 /* <p0:nullable HashNode[Object]> isa nullable N */
 type_struct = self->type->resolution_table->types[COLOR_hash_collection__HashNode_VTN];
@@ -1099,7 +1169,9 @@ var = p0->type->type_table[cltype] == idtype;
 }
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/hash_collection.nit", 192);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "nullable N", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 192);
 exit(1);
 }
 self->attrs[COLOR_hash_collection__HashNode___prev_item].val = p0; /* _prev_item on <self:HashNode[Object]> */
@@ -1116,6 +1188,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_k /* var k: Object */;
 /* Covariant cast for argument 0 (k) <p0:Object> isa HashNode#0 */
 /* <p0:Object> isa HashNode#0 */
@@ -1128,7 +1201,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/hash_collection.nit", 195);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashNode#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 195);
 exit(1);
 }
 var_k = p0;
@@ -1147,6 +1222,7 @@ short int var1 /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_key /* var key: Object */;
 val* var2 /* : nullable HashNode[Object] */;
 val* var_c /* var c: nullable HashMapNode[Object, nullable Object] */;
@@ -1164,7 +1240,9 @@ var1 = 0;
 var1 = p0->type->type_table[cltype] == idtype;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/hash_collection.nit", 207);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MapRead#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 207);
 exit(1);
 }
 var_key = p0;
@@ -1177,7 +1255,8 @@ var4 = 1; /* is null */
 var4 = 0; /* arg is null but recv is not */
 }
 if (var4){
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Aborted", "lib/standard/collection/hash_collection.nit", 211);
+fprintf(stderr, "Runtime error: %s", "Aborted");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 211);
 exit(1);
 } else {
 var5 = var_c->attrs[COLOR_hash_collection__HashMapNode___value].val; /* _value on <var_c:nullable HashMapNode[Object, nullable Object](HashMapNode[Object, nullable Object])> */
@@ -1216,36 +1295,6 @@ var1 = hash_collection__HashMap__iterator(self);
 var = var1;
 RET_LABEL:;
 return var;
-}
-/* method hash_collection#HashMap#iterate for (self: HashMap[Object, nullable Object]) */
-void hash_collection__HashMap__iterate(val* self) {
-val* var /* : nullable HashNode[Object] */;
-val* var_c /* var c: nullable HashMapNode[Object, nullable Object] */;
-val* var1 /* : null */;
-short int var2 /* : Bool */;
-val* var3 /* : nullable HashNode[Object] */;
-var = self->attrs[COLOR_hash_collection__HashCollection___first_item].val; /* _first_item on <self:HashMap[Object, nullable Object]> */
-var_c = var;
-for(;;) {
-var1 = NULL;
-if (var_c == NULL) {
-var2 = 0; /* is null */
-} else {
-var2 = 1; /* arg is null and recv is not */
-}
-if (!var2) break;
-printf("NOT YET IMPLEMENTED AClosureCallExpr:lib/standard/collection/hash_collection.nit:224,4--25\n");
-var3 = var_c->attrs[COLOR_hash_collection__HashNode___next_item].val; /* _next_item on <var_c:nullable HashMapNode[Object, nullable Object](HashMapNode[Object, nullable Object])> */
-var_c = var3;
-CONTINUE_label: (void)0;
-}
-BREAK_label: (void)0;
-RET_LABEL:;
-}
-/* method hash_collection#HashMap#iterate for (self: Object) */
-void VIRTUAL_hash_collection__HashMap__iterate(val* self) {
-hash_collection__HashMap__iterate(self);
-RET_LABEL:;
 }
 /* method hash_collection#HashMap#length for (self: HashMap[Object, nullable Object]): Int */
 long hash_collection__HashMap__length(val* self) {
@@ -1301,20 +1350,22 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 short int var1 /* : Bool */;
 int cltype2;
 int idtype3;
 const struct type* type_struct4;
 short int is_nullable;
+const char* var_class_name5;
 val* var_key /* var key: Object */;
 val* var_v /* var v: nullable Object */;
-long var5 /* : Int */;
+long var6 /* : Int */;
 long var_i /* var i: Int */;
-val* var6 /* : nullable HashNode[Object] */;
+val* var7 /* : nullable HashNode[Object] */;
 val* var_c /* var c: nullable HashMapNode[Object, nullable Object] */;
-val* var7 /* : null */;
-short int var8 /* : Bool */;
-val* var9 /* : HashMapNode[Object, nullable Object] */;
+val* var8 /* : null */;
+short int var9 /* : Bool */;
+val* var10 /* : HashMapNode[Object, nullable Object] */;
 /* Covariant cast for argument 0 (key) <p0:Object> isa Map#0 */
 /* <p0:Object> isa Map#0 */
 type_struct = self->type->resolution_table->types[COLOR_abstract_collection__Map_FT0];
@@ -1326,7 +1377,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/hash_collection.nit", 233);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Map#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 223);
 exit(1);
 }
 /* Covariant cast for argument 1 (v) <p1:nullable Object> isa Map#1 */
@@ -1345,29 +1398,31 @@ var1 = p1->type->type_table[cltype2] == idtype3;
 }
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/hash_collection.nit", 233);
+var_class_name5 = p1 == NULL ? "null" : p1->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Map#1", var_class_name5);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 223);
 exit(1);
 }
 var_key = p0;
 var_v = p1;
-var5 = ((long (*)(val*, val*))(self->class->vft[COLOR_hash_collection__HashCollection__index_at]))(self, var_key) /* index_at on <self:HashMap[Object, nullable Object]>*/;
-var_i = var5;
-var6 = ((val* (*)(val*, long, val*))(self->class->vft[COLOR_hash_collection__HashCollection__node_at_idx]))(self, var_i, var_key) /* node_at_idx on <self:HashMap[Object, nullable Object]>*/;
-var_c = var6;
-var7 = NULL;
+var6 = ((long (*)(val*, val*))(self->class->vft[COLOR_hash_collection__HashCollection__index_at]))(self, var_key) /* index_at on <self:HashMap[Object, nullable Object]>*/;
+var_i = var6;
+var7 = ((val* (*)(val*, long, val*))(self->class->vft[COLOR_hash_collection__HashCollection__node_at_idx]))(self, var_i, var_key) /* node_at_idx on <self:HashMap[Object, nullable Object]>*/;
+var_c = var7;
+var8 = NULL;
 if (var_c == NULL) {
-var8 = 0; /* is null */
+var9 = 0; /* is null */
 } else {
-var8 = 1; /* arg is null and recv is not */
+var9 = 1; /* arg is null and recv is not */
 }
-if (var8){
+if (var9){
 var_c->attrs[COLOR_hash_collection__HashNode___key].val = var_key; /* _key on <var_c:nullable HashMapNode[Object, nullable Object](HashMapNode[Object, nullable Object])> */
 var_c->attrs[COLOR_hash_collection__HashMapNode___value].val = var_v; /* _value on <var_c:nullable HashMapNode[Object, nullable Object](HashMapNode[Object, nullable Object])> */
 } else {
-var9 = NEW_hash_collection__HashMapNode(self->type->resolution_table->types[COLOR_hash_collection__HashMapNodehash_collection__HashMap_FT0hash_collection__HashMap_FT1]);
-((void (*)(val*, val*, val*))(var9->class->vft[COLOR_hash_collection__HashMapNode__init]))(var9, var_key, var_v) /* init on <var9:HashMapNode[Object, nullable Object]>*/;
-CHECK_NEW_hash_collection__HashMapNode(var9);
-((void (*)(val*, long, val*))(self->class->vft[COLOR_hash_collection__HashCollection__store]))(self, var_i, var9) /* store on <self:HashMap[Object, nullable Object]>*/;
+var10 = NEW_hash_collection__HashMapNode(self->type->resolution_table->types[COLOR_hash_collection__HashMapNodehash_collection__HashMap_FT0hash_collection__HashMap_FT1]);
+((void (*)(val*, val*, val*))(var10->class->vft[COLOR_hash_collection__HashMapNode__init]))(var10, var_key, var_v) /* init on <var10:HashMapNode[Object, nullable Object]>*/;
+CHECK_NEW_hash_collection__HashMapNode(var10);
+((void (*)(val*, long, val*))(self->class->vft[COLOR_hash_collection__HashCollection__store]))(self, var_i, var10) /* store on <self:HashMap[Object, nullable Object]>*/;
 }
 RET_LABEL:;
 }
@@ -1411,7 +1466,8 @@ val* var /* : HashMapKeys[Object, nullable Object] */;
 val* var1 /* : HashMapKeys[Object, nullable Object] */;
 var1 = self->attrs[COLOR_hash_collection__HashMap___64dkeys].val; /* @keys on <self:HashMap[Object, nullable Object]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @keys", "lib/standard/collection/hash_collection.nit", 254);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @keys");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 244);
 exit(1);
 }
 var = var1;
@@ -1433,6 +1489,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 /* Covariant cast for argument 0 (keys) <p0:HashMapKeys[Object, nullable Object]> isa HashMapKeys[HashMap#0, HashMap#1] */
 /* <p0:HashMapKeys[Object, nullable Object]> isa HashMapKeys[HashMap#0, HashMap#1] */
 type_struct = self->type->resolution_table->types[COLOR_hash_collection__HashMapKeyshash_collection__HashMap_FT0hash_collection__HashMap_FT1];
@@ -1444,7 +1501,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/hash_collection.nit", 254);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashMapKeys[HashMap#0, HashMap#1]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 244);
 exit(1);
 }
 self->attrs[COLOR_hash_collection__HashMap___64dkeys].val = p0; /* @keys on <self:HashMap[Object, nullable Object]> */
@@ -1461,7 +1520,8 @@ val* var /* : HashMapValues[Object, nullable Object] */;
 val* var1 /* : HashMapValues[Object, nullable Object] */;
 var1 = self->attrs[COLOR_hash_collection__HashMap___64dvalues].val; /* @values on <self:HashMap[Object, nullable Object]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @values", "lib/standard/collection/hash_collection.nit", 255);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @values");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 245);
 exit(1);
 }
 var = var1;
@@ -1483,6 +1543,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 /* Covariant cast for argument 0 (values) <p0:HashMapValues[Object, nullable Object]> isa HashMapValues[HashMap#0, HashMap#1] */
 /* <p0:HashMapValues[Object, nullable Object]> isa HashMapValues[HashMap#0, HashMap#1] */
 type_struct = self->type->resolution_table->types[COLOR_hash_collection__HashMapValueshash_collection__HashMap_FT0hash_collection__HashMap_FT1];
@@ -1494,7 +1555,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/hash_collection.nit", 255);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashMapValues[HashMap#0, HashMap#1]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 245);
 exit(1);
 }
 self->attrs[COLOR_hash_collection__HashMap___64dvalues].val = p0; /* @values on <self:HashMap[Object, nullable Object]> */
@@ -1511,7 +1574,8 @@ val* var /* : HashMap[Object, nullable Object] */;
 val* var1 /* : HashMap[Object, nullable Object] */;
 var1 = self->attrs[COLOR_hash_collection__HashMapKeys___64dmap].val; /* @map on <self:HashMapKeys[Object, nullable Object]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @map", "lib/standard/collection/hash_collection.nit", 261);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @map");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 251);
 exit(1);
 }
 var = var1;
@@ -1533,6 +1597,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 /* Covariant cast for argument 0 (map) <p0:HashMap[Object, nullable Object]> isa HashMap[HashMapKeys#0, HashMapKeys#1] */
 /* <p0:HashMap[Object, nullable Object]> isa HashMap[HashMapKeys#0, HashMapKeys#1] */
 type_struct = self->type->resolution_table->types[COLOR_hash_collection__HashMaphash_collection__HashMapKeys_FT0hash_collection__HashMapKeys_FT1];
@@ -1544,7 +1609,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/hash_collection.nit", 261);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashMap[HashMapKeys#0, HashMapKeys#1]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 251);
 exit(1);
 }
 self->attrs[COLOR_hash_collection__HashMapKeys___64dmap].val = p0; /* @map on <self:HashMapKeys[Object, nullable Object]> */
@@ -1562,6 +1629,7 @@ short int var1 /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_k /* var k: Object */;
 short int var2 /* : Bool */;
 long var3 /* : Int */;
@@ -1577,7 +1645,9 @@ var1 = 0;
 var1 = p0->type->type_table[cltype] == idtype;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/hash_collection.nit", 264);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Collection#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 254);
 exit(1);
 }
 var_k = p0;
@@ -1612,12 +1682,14 @@ val* var3 /* : Object */;
 var1 = ((val* (*)(val*))(self->class->vft[COLOR_hash_collection__HashMapKeys__map]))(self) /* map on <self:HashMapKeys[Object, nullable Object]>*/;
 var2 = var1->attrs[COLOR_hash_collection__HashCollection___first_item].val; /* _first_item on <var1:HashMap[Object, nullable Object]> */
 if (var2 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "lib/standard/collection/hash_collection.nit", 265);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 255);
 exit(1);
 }
 var3 = var2->attrs[COLOR_hash_collection__HashNode___key].val; /* _key on <var2:nullable HashNode[Object](nullable HashMapNode[Object, nullable Object])> */
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _key", "lib/standard/collection/hash_collection.nit", 265);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _key");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 255);
 exit(1);
 }
 var = var3;
@@ -1641,6 +1713,7 @@ short int var1 /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_k /* var k: Object */;
 val* var2 /* : HashMap[Object, nullable Object] */;
 val* var3 /* : nullable HashNode[Object] */;
@@ -1657,7 +1730,9 @@ var1 = 0;
 var1 = p0->type->type_table[cltype] == idtype;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/hash_collection.nit", 266);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Collection#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 256);
 exit(1);
 }
 var_k = p0;
@@ -1690,6 +1765,7 @@ short int var1 /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_k /* var k: Object */;
 short int var2 /* : Bool */;
 short int var3 /* : Bool */;
@@ -1712,7 +1788,9 @@ var1 = 0;
 var1 = p0->type->type_table[cltype] == idtype;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/hash_collection.nit", 267);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Collection#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 257);
 exit(1);
 }
 var_k = p0;
@@ -1837,6 +1915,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_key /* var key: Object */;
 val* var1 /* : HashMap[Object, nullable Object] */;
 /* Covariant cast for argument 0 (key) <p0:Object> isa RemovableCollection#0 */
@@ -1850,7 +1929,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/hash_collection.nit", 275);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "RemovableCollection#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 265);
 exit(1);
 }
 var_key = p0;
@@ -1869,6 +1950,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_key /* var key: Object */;
 val* var1 /* : HashMap[Object, nullable Object] */;
 /* Covariant cast for argument 0 (key) <p0:Object> isa RemovableCollection#0 */
@@ -1882,7 +1964,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/hash_collection.nit", 276);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "RemovableCollection#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 266);
 exit(1);
 }
 var_key = p0;
@@ -1901,6 +1985,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 /* Covariant cast for argument 0 (map) <p0:HashMap[Object, nullable Object]> isa HashMap[HashMapKeys#0, HashMapKeys#1] */
 /* <p0:HashMap[Object, nullable Object]> isa HashMap[HashMapKeys#0, HashMapKeys#1] */
 type_struct = self->type->resolution_table->types[COLOR_hash_collection__HashMaphash_collection__HashMapKeys_FT0hash_collection__HashMapKeys_FT1];
@@ -1912,7 +1997,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/hash_collection.nit", 258);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashMap[HashMapKeys#0, HashMapKeys#1]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 248);
 exit(1);
 }
 self->attrs[COLOR_hash_collection__HashMapKeys___64dmap].val = p0; /* @map on <self:HashMapKeys[Object, nullable Object]> */
@@ -1929,7 +2016,8 @@ val* var /* : HashMap[Object, nullable Object] */;
 val* var1 /* : HashMap[Object, nullable Object] */;
 var1 = self->attrs[COLOR_hash_collection__HashMapValues___64dmap].val; /* @map on <self:HashMapValues[Object, nullable Object]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @map", "lib/standard/collection/hash_collection.nit", 282);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @map");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 272);
 exit(1);
 }
 var = var1;
@@ -1951,6 +2039,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 /* Covariant cast for argument 0 (map) <p0:HashMap[Object, nullable Object]> isa HashMap[HashMapValues#0, HashMapValues#1] */
 /* <p0:HashMap[Object, nullable Object]> isa HashMap[HashMapValues#0, HashMapValues#1] */
 type_struct = self->type->resolution_table->types[COLOR_hash_collection__HashMaphash_collection__HashMapValues_FT0hash_collection__HashMapValues_FT1];
@@ -1962,7 +2051,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/hash_collection.nit", 282);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashMap[HashMapValues#0, HashMapValues#1]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 272);
 exit(1);
 }
 self->attrs[COLOR_hash_collection__HashMapValues___64dmap].val = p0; /* @map on <self:HashMapValues[Object, nullable Object]> */
@@ -1981,6 +2072,7 @@ int cltype;
 int idtype;
 const struct type* type_struct;
 short int is_nullable;
+const char* var_class_name;
 val* var_item /* var item: nullable Object */;
 long var2 /* : Int */;
 long var_nb /* var nb: Int */;
@@ -2011,7 +2103,9 @@ var1 = p0->type->type_table[cltype] == idtype;
 }
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/hash_collection.nit", 285);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Collection#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 275);
 exit(1);
 }
 var_item = p0;
@@ -2073,7 +2167,8 @@ val* var3 /* : nullable Object */;
 var1 = ((val* (*)(val*))(self->class->vft[COLOR_hash_collection__HashMapValues__map]))(self) /* map on <self:HashMapValues[Object, nullable Object]>*/;
 var2 = var1->attrs[COLOR_hash_collection__HashCollection___first_item].val; /* _first_item on <var1:HashMap[Object, nullable Object]> */
 if (var2 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "lib/standard/collection/hash_collection.nit", 295);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 285);
 exit(1);
 }
 var3 = var2->attrs[COLOR_hash_collection__HashMapNode___value].val; /* _value on <var2:nullable HashNode[Object](nullable HashMapNode[Object, nullable Object])> */
@@ -2099,6 +2194,7 @@ int cltype;
 int idtype;
 const struct type* type_struct;
 short int is_nullable;
+const char* var_class_name;
 val* var_item /* var item: nullable Object */;
 val* var2 /* : HashMap[Object, nullable Object] */;
 val* var3 /* : nullable HashNode[Object] */;
@@ -2126,7 +2222,9 @@ var1 = p0->type->type_table[cltype] == idtype;
 }
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/hash_collection.nit", 297);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Collection#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 287);
 exit(1);
 }
 var_item = p0;
@@ -2181,6 +2279,7 @@ int cltype;
 int idtype;
 const struct type* type_struct;
 short int is_nullable;
+const char* var_class_name;
 val* var_item /* var item: nullable Object */;
 val* var2 /* : HashMap[Object, nullable Object] */;
 val* var3 /* : nullable HashNode[Object] */;
@@ -2208,7 +2307,9 @@ var1 = p0->type->type_table[cltype] == idtype;
 }
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/hash_collection.nit", 307);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Collection#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 297);
 exit(1);
 }
 var_item = p0;
@@ -2341,6 +2442,7 @@ int cltype;
 int idtype;
 const struct type* type_struct;
 short int is_nullable;
+const char* var_class_name;
 val* var_item /* var item: nullable Object */;
 val* var1 /* : HashMap[Object, nullable Object] */;
 val* var_map /* var map: HashMap[Object, nullable Object] */;
@@ -2368,7 +2470,9 @@ var = p0->type->type_table[cltype] == idtype;
 }
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/hash_collection.nit", 324);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "RemovableCollection#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 314);
 exit(1);
 }
 var_item = p0;
@@ -2393,7 +2497,8 @@ var6 = ((short int (*)(val*, val*))(var5->class->vft[COLOR_kernel__Object___61d_
 if (var6){
 var7 = var_c->attrs[COLOR_hash_collection__HashNode___key].val; /* _key on <var_c:nullable HashMapNode[Object, nullable Object](HashMapNode[Object, nullable Object])> */
 if (var7 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _key", "lib/standard/collection/hash_collection.nit", 330);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _key");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 320);
 exit(1);
 }
 ((void (*)(val*, val*))(var_map->class->vft[COLOR_hash_collection__HashCollection__remove_node]))(var_map, var7) /* remove_node on <var_map:HashMap[Object, nullable Object]>*/;
@@ -2419,6 +2524,7 @@ int cltype;
 int idtype;
 const struct type* type_struct;
 short int is_nullable;
+const char* var_class_name;
 val* var_item /* var item: nullable Object */;
 val* var1 /* : HashMap[Object, nullable Object] */;
 val* var_map /* var map: HashMap[Object, nullable Object] */;
@@ -2446,7 +2552,9 @@ var = p0->type->type_table[cltype] == idtype;
 }
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/hash_collection.nit", 337);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "RemovableCollection#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 327);
 exit(1);
 }
 var_item = p0;
@@ -2471,7 +2579,8 @@ var6 = ((short int (*)(val*, val*))(var5->class->vft[COLOR_kernel__Object___61d_
 if (var6){
 var7 = var_c->attrs[COLOR_hash_collection__HashNode___key].val; /* _key on <var_c:nullable HashMapNode[Object, nullable Object](HashMapNode[Object, nullable Object])> */
 if (var7 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _key", "lib/standard/collection/hash_collection.nit", 343);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _key");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 333);
 exit(1);
 }
 ((void (*)(val*, val*))(var_map->class->vft[COLOR_hash_collection__HashCollection__remove_node]))(var_map, var7) /* remove_node on <var_map:HashMap[Object, nullable Object]>*/;
@@ -2495,6 +2604,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 /* Covariant cast for argument 0 (map) <p0:HashMap[Object, nullable Object]> isa HashMap[HashMapValues#0, HashMapValues#1] */
 /* <p0:HashMap[Object, nullable Object]> isa HashMap[HashMapValues#0, HashMapValues#1] */
 type_struct = self->type->resolution_table->types[COLOR_hash_collection__HashMaphash_collection__HashMapValues_FT0hash_collection__HashMapValues_FT1];
@@ -2506,7 +2616,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/hash_collection.nit", 279);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashMap[HashMapValues#0, HashMapValues#1]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 269);
 exit(1);
 }
 self->attrs[COLOR_hash_collection__HashMapValues___64dmap].val = p0; /* @map on <self:HashMapValues[Object, nullable Object]> */
@@ -2523,11 +2635,13 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 short int var1 /* : Bool */;
 int cltype2;
 int idtype3;
 const struct type* type_struct4;
 short int is_nullable;
+const char* var_class_name5;
 val* var_k /* var k: Object */;
 val* var_v /* var v: nullable Object */;
 /* Covariant cast for argument 0 (k) <p0:Object> isa HashMapNode#0 */
@@ -2541,7 +2655,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/hash_collection.nit", 355);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashMapNode#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 345);
 exit(1);
 }
 /* Covariant cast for argument 1 (v) <p1:nullable Object> isa HashMapNode#1 */
@@ -2560,7 +2676,9 @@ var1 = p1->type->type_table[cltype2] == idtype3;
 }
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/hash_collection.nit", 355);
+var_class_name5 = p1 == NULL ? "null" : p1->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashMapNode#1", var_class_name5);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 345);
 exit(1);
 }
 var_k = p0;
@@ -2609,12 +2727,14 @@ val* var2 /* : nullable HashMapNode[Object, nullable Object] */;
 val* var3 /* : nullable Object */;
 var1 = ((short int (*)(val*))(self->class->vft[COLOR_abstract_collection__MapIterator__is_ok]))(self) /* is_ok on <self:HashMapIterator[Object, nullable Object]>*/;
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "lib/standard/collection/hash_collection.nit", 368);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 358);
 exit(1);
 }
 var2 = self->attrs[COLOR_hash_collection__HashMapIterator___node].val; /* _node on <self:HashMapIterator[Object, nullable Object]> */
 if (var2 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "lib/standard/collection/hash_collection.nit", 369);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 359);
 exit(1);
 }
 var3 = var2->attrs[COLOR_hash_collection__HashMapNode___value].val; /* _value on <var2:nullable HashMapNode[Object, nullable Object]> */
@@ -2640,17 +2760,20 @@ val* var2 /* : nullable HashMapNode[Object, nullable Object] */;
 val* var3 /* : Object */;
 var1 = ((short int (*)(val*))(self->class->vft[COLOR_abstract_collection__MapIterator__is_ok]))(self) /* is_ok on <self:HashMapIterator[Object, nullable Object]>*/;
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "lib/standard/collection/hash_collection.nit", 380);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 370);
 exit(1);
 }
 var2 = self->attrs[COLOR_hash_collection__HashMapIterator___node].val; /* _node on <self:HashMapIterator[Object, nullable Object]> */
 if (var2 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "lib/standard/collection/hash_collection.nit", 381);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 371);
 exit(1);
 }
 var3 = var2->attrs[COLOR_hash_collection__HashNode___key].val; /* _key on <var2:nullable HashMapNode[Object, nullable Object]> */
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _key", "lib/standard/collection/hash_collection.nit", 381);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _key");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 371);
 exit(1);
 }
 var = var3;
@@ -2674,12 +2797,14 @@ val* var1 /* : nullable HashMapNode[Object, nullable Object] */;
 val* var2 /* : nullable HashNode[Object] */;
 var = ((short int (*)(val*))(self->class->vft[COLOR_abstract_collection__MapIterator__is_ok]))(self) /* is_ok on <self:HashMapIterator[Object, nullable Object]>*/;
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "lib/standard/collection/hash_collection.nit", 386);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 376);
 exit(1);
 }
 var1 = self->attrs[COLOR_hash_collection__HashMapIterator___node].val; /* _node on <self:HashMapIterator[Object, nullable Object]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "lib/standard/collection/hash_collection.nit", 387);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 377);
 exit(1);
 }
 var2 = var1->attrs[COLOR_hash_collection__HashNode___next_item].val; /* _next_item on <var1:nullable HashMapNode[Object, nullable Object]> */
@@ -2697,6 +2822,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_map /* var map: HashMap[Object, nullable Object] */;
 val* var1 /* : nullable HashNode[Object] */;
 /* Covariant cast for argument 0 (map) <p0:HashMap[Object, nullable Object]> isa HashMap[HashMapIterator#0, HashMapIterator#1] */
@@ -2710,7 +2836,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/hash_collection.nit", 396);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashMap[HashMapIterator#0, HashMapIterator#1]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 386);
 exit(1);
 }
 var_map = p0;
@@ -2781,6 +2909,7 @@ short int var3 /* : Bool */;
 short int var5 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 short int var6 /* : Bool */;
 val* var7 /* : nullable HashNode[Object] */;
 val* var8 /* : Object */;
@@ -2791,7 +2920,9 @@ var2 = 0;
 /* <var2:Int> isa OTHER */
 var5 = 1; /* easy <var2:Int> isa OTHER*/
 if (!var5) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 259);
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
 exit(1);
 }
 var6 = var1 > var2;
@@ -2800,17 +2931,20 @@ goto RET_LABEL4;
 RET_LABEL4:(void)0;
 }
 if (!var3) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "lib/standard/collection/hash_collection.nit", 415);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 405);
 exit(1);
 }
 var7 = self->attrs[COLOR_hash_collection__HashCollection___first_item].val; /* _first_item on <self:HashSet[Object]> */
 if (var7 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "lib/standard/collection/hash_collection.nit", 416);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 406);
 exit(1);
 }
 var8 = var7->attrs[COLOR_hash_collection__HashNode___key].val; /* _key on <var7:nullable HashNode[Object](nullable HashSetNode[Object])> */
 if (var8 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _key", "lib/standard/collection/hash_collection.nit", 416);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _key");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 406);
 exit(1);
 }
 var = var8;
@@ -2834,6 +2968,7 @@ short int var1 /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_item /* var item: Object */;
 val* var2 /* : nullable HashNode[Object] */;
 val* var3 /* : null */;
@@ -2849,7 +2984,9 @@ var1 = 0;
 var1 = p0->type->type_table[cltype] == idtype;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/hash_collection.nit", 419);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Collection#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 409);
 exit(1);
 }
 var_item = p0;
@@ -2880,6 +3017,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_item /* var item: Object */;
 long var1 /* : Int */;
 long var_i /* var i: Int */;
@@ -2899,7 +3037,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/hash_collection.nit", 424);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "SimpleCollection#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 414);
 exit(1);
 }
 var_item = p0;
@@ -2934,6 +3074,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_item /* var item: Object */;
 /* Covariant cast for argument 0 (item) <p0:Object> isa RemovableCollection#0 */
 /* <p0:Object> isa RemovableCollection#0 */
@@ -2946,7 +3087,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/hash_collection.nit", 435);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "RemovableCollection#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 425);
 exit(1);
 }
 var_item = p0;
@@ -3014,6 +3157,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_coll /* var coll: Collection[Object] */;
 /* Covariant cast for argument 0 (coll) <p0:Collection[Object]> isa Collection[HashSet#0] */
 /* <p0:Collection[Object]> isa Collection[HashSet#0] */
@@ -3026,7 +3170,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/hash_collection.nit", 448);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Collection[HashSet#0]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 438);
 exit(1);
 }
 var_coll = p0;
@@ -3045,6 +3191,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_e /* var e: Object */;
 /* Covariant cast for argument 0 (e) <p0:Object> isa HashSetNode#0 */
 /* <p0:Object> isa HashSetNode#0 */
@@ -3057,7 +3204,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/hash_collection.nit", 459);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashSetNode#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 449);
 exit(1);
 }
 var_e = p0;
@@ -3105,17 +3254,20 @@ val* var2 /* : nullable HashSetNode[Object] */;
 val* var3 /* : Object */;
 var1 = ((short int (*)(val*))(self->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(self) /* is_ok on <self:HashSetIterator[Object]>*/;
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "lib/standard/collection/hash_collection.nit", 471);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 461);
 exit(1);
 }
 var2 = self->attrs[COLOR_hash_collection__HashSetIterator___node].val; /* _node on <self:HashSetIterator[Object]> */
 if (var2 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "lib/standard/collection/hash_collection.nit", 472);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 462);
 exit(1);
 }
 var3 = var2->attrs[COLOR_hash_collection__HashNode___key].val; /* _key on <var2:nullable HashSetNode[Object]> */
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _key", "lib/standard/collection/hash_collection.nit", 472);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _key");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 462);
 exit(1);
 }
 var = var3;
@@ -3139,12 +3291,14 @@ val* var1 /* : nullable HashSetNode[Object] */;
 val* var2 /* : nullable HashNode[Object] */;
 var = ((short int (*)(val*))(self->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(self) /* is_ok on <self:HashSetIterator[Object]>*/;
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "lib/standard/collection/hash_collection.nit", 477);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 467);
 exit(1);
 }
 var1 = self->attrs[COLOR_hash_collection__HashSetIterator___node].val; /* _node on <self:HashSetIterator[Object]> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "lib/standard/collection/hash_collection.nit", 478);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 468);
 exit(1);
 }
 var2 = var1->attrs[COLOR_hash_collection__HashNode___next_item].val; /* _next_item on <var1:nullable HashSetNode[Object]> */
@@ -3162,6 +3316,7 @@ short int var /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_set /* var set: HashSet[Object] */;
 val* var1 /* : nullable HashNode[Object] */;
 /* Covariant cast for argument 0 (set) <p0:HashSet[Object]> isa HashSet[HashSetIterator#0] */
@@ -3175,7 +3330,9 @@ var = 0;
 var = p0->type->type_table[cltype] == idtype;
 }
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/collection/hash_collection.nit", 487);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashSet[HashSetIterator#0]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/hash_collection.nit", 477);
 exit(1);
 }
 var_set = p0;

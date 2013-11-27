@@ -481,7 +481,7 @@ abstract class Instance
 	fun is_true: Bool do abort
 
 	# Return true if `self` IS `o` (using the Nit semantic of is)
-	fun eq_is(o: Instance): Bool do return self is o
+	fun eq_is(o: Instance): Bool do return self.is_same_instance(o)
 
 	# Human readable object identity "Type#number"
 	redef fun to_s do return "{mtype}"
@@ -537,7 +537,7 @@ class PrimitiveInstance[E: Object]
 	redef fun eq_is(o)
 	do
 		if not o isa PrimitiveInstance[Object] then return false
-		return self.val is o.val
+		return self.val.is_same_instance(o.val)
 	end
 
 	redef fun to_s do return "{mtype}#{val.object_id}({val})"
@@ -654,6 +654,8 @@ redef class AInternMethPropdef
 			return v.bool_instance(args[0] != args[1])
 		else if pname == "is_same_type" then
 			return v.bool_instance(args[0].mtype == args[1].mtype)
+		else if pname == "is_same_instance" then
+			return v.bool_instance(args[1] != null and args[0].eq_is(args[1]))
 		else if pname == "exit" then
 			exit(args[1].to_i)
 			abort
@@ -1323,17 +1325,6 @@ redef class AOrElseExpr
 		if i == null then return null
 		if i != v.null_instance then return i
 		return v.expr(self.n_expr2)
-	end
-end
-
-redef class AEeExpr
-	redef fun expr(v)
-	do
-		var i = v.expr(self.n_expr)
-		if i == null then return null
-		var i2 = v.expr(self.n_expr2)
-		if i2 == null then return null
-		return v.bool_instance(i.eq_is(i2))
 	end
 end
 

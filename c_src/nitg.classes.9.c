@@ -1,2584 +1,11 @@
 #include "nitg.classes.0.h"
-/* runtime class parser_nodes__AGgExpr */
-const struct class class_parser_nodes__AGgExpr = {
-0, /* box_kind */
-{
-(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:AGgExpr:kernel#Object#object_id */
-(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:AGgExpr:kernel#Object#is_same_type */
-(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:AGgExpr:kernel#Object#== */
-(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:AGgExpr:kernel#Object#!= */
-(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:AGgExpr:kernel#Object#output */
-(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to parser_nodes:AGgExpr:kernel#Object#output_class_name */
-(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to parser_nodes:AGgExpr:kernel#Object#exit */
-(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to parser_nodes:AGgExpr:kernel#Object#sys */
-(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to parser_nodes:AGgExpr:kernel#Object#hash */
-(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to parser_nodes:AGgExpr:string#Object#to_s */
-(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to parser_nodes:AGgExpr:string#Object#native_class_name */
-(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to parser_nodes:AGgExpr:string#Object#class_name */
-(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to parser_nodes:AGgExpr:string#Object#inspect */
-(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to parser_nodes:AGgExpr:string#Object#inspect_head */
-(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to parser_nodes:AGgExpr:string#Object#args */
-(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to parser_nodes:AGgExpr:math#Object#atan2 */
-(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to parser_nodes:AGgExpr:math#Object#pi */
-(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to parser_nodes:AGgExpr:math#Object#srand_from */
-(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to parser_nodes:AGgExpr:math#Object#srand */
-(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to parser_nodes:AGgExpr:stream#Object#poll */
-(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to parser_nodes:AGgExpr:stream#Object#intern_poll */
-(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to parser_nodes:AGgExpr:time#Object#get_time */
-(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to parser_nodes:AGgExpr:file#Object#printn */
-(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to parser_nodes:AGgExpr:file#Object#print */
-(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to parser_nodes:AGgExpr:file#Object#getc */
-(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to parser_nodes:AGgExpr:file#Object#gets */
-(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to parser_nodes:AGgExpr:file#Object#getcwd */
-(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to parser_nodes:AGgExpr:file#Object#file_getcwd */
-(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to parser_nodes:AGgExpr:file#Object#stdin */
-(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to parser_nodes:AGgExpr:file#Object#stdout */
-(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to parser_nodes:AGgExpr:file#Object#stderr */
-(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to parser_nodes:AGgExpr:model_base#Object#intrude_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to parser_nodes:AGgExpr:model_base#Object#public_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to parser_nodes:AGgExpr:model_base#Object#protected_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to parser_nodes:AGgExpr:model_base#Object#private_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to parser_nodes:AGgExpr:model_base#Object#none_visibility */
-(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to parser_nodes:AGgExpr:model#Object#abstract_kind */
-(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to parser_nodes:AGgExpr:model#Object#concrete_kind */
-(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to parser_nodes:AGgExpr:model#Object#interface_kind */
-(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to parser_nodes:AGgExpr:model#Object#enum_kind */
-(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to parser_nodes:AGgExpr:model#Object#extern_kind */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__location, /* pointer to parser_nodes:AGgExpr:parser_nodes#ANode#location */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__hot_location, /* pointer to parser_nodes:AGgExpr:parser_nodes#ANode#hot_location */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__debug, /* pointer to parser_nodes:AGgExpr:parser_nodes#ANode#debug */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent, /* pointer to parser_nodes:AGgExpr:parser_nodes#ANode#parent */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent_61d, /* pointer to parser_nodes:AGgExpr:parser_nodes#ANode#parent= */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__init, /* pointer to parser_nodes:AGgExpr:parser_nodes#ANode#init */
-(nitmethod_t)VIRTUAL_parser_prod__AGgExpr__replace_child, /* pointer to parser_nodes:AGgExpr:parser_prod#AGgExpr#replace_child */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__detach, /* pointer to parser_nodes:AGgExpr:parser_nodes#ANode#detach */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__replace_with, /* pointer to parser_nodes:AGgExpr:parser_nodes#Prod#replace_with */
-(nitmethod_t)VIRTUAL_parser_prod__AGgExpr__visit_all, /* pointer to parser_nodes:AGgExpr:parser_prod#AGgExpr#visit_all */
-(nitmethod_t)VIRTUAL_parser_util__ANode__collect_tokens_by_text, /* pointer to parser_nodes:AGgExpr:parser_util#ANode#collect_tokens_by_text */
-(nitmethod_t)VIRTUAL_parser_util__ANode__collect_annotations_by_name, /* pointer to parser_nodes:AGgExpr:parser_util#ANode#collect_annotations_by_name */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__accept_simple_misc, /* pointer to parser_nodes:AGgExpr:simple_misc_analysis#ANode#accept_simple_misc */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__after_simple_misc, /* pointer to parser_nodes:AGgExpr:simple_misc_analysis#ANode#after_simple_misc */
-(nitmethod_t)VIRTUAL_literal__ANode__accept_literal, /* pointer to parser_nodes:AGgExpr:literal#ANode#accept_literal */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__accept_scope_visitor, /* pointer to parser_nodes:AGgExpr:scope#ASendExpr#accept_scope_visitor */
-(nitmethod_t)VIRTUAL_flow__ANode__accept_flow_visitor, /* pointer to parser_nodes:AGgExpr:flow#ANode#accept_flow_visitor */
-(nitmethod_t)VIRTUAL_local_var_init__ANode__accept_local_var_visitor, /* pointer to parser_nodes:AGgExpr:local_var_init#ANode#accept_local_var_visitor */
-(nitmethod_t)VIRTUAL_auto_super_init__ASendExpr__accept_auto_super_init, /* pointer to parser_nodes:AGgExpr:auto_super_init#ASendExpr#accept_auto_super_init */
-(nitmethod_t)VIRTUAL_rapid_type_analysis__ASendExpr__accept_rapid_type_visitor, /* pointer to parser_nodes:AGgExpr:rapid_type_analysis#ASendExpr#accept_rapid_type_visitor */
-(nitmethod_t)VIRTUAL_astvalidation__AExpr__accept_ast_validation, /* pointer to parser_nodes:AGgExpr:astvalidation#AExpr#accept_ast_validation */
-(nitmethod_t)VIRTUAL_transform__ANode__accept_transform_visitor, /* pointer to parser_nodes:AGgExpr:transform#ANode#accept_transform_visitor */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__location_61d, /* pointer to parser_nodes:AGgExpr:parser_nodes#Prod#location= */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations, /* pointer to parser_nodes:AGgExpr:parser_nodes#Prod#n_annotations */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations_61d, /* pointer to parser_nodes:AGgExpr:parser_nodes#Prod#n_annotations= */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__init, /* pointer to parser_nodes:AGgExpr:parser_nodes#Prod#init */
-(nitmethod_t)VIRTUAL_modelize_property__Prod__collect_text, /* pointer to parser_nodes:AGgExpr:modelize_property#Prod#collect_text */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__replace_with, /* pointer to parser_nodes:AGgExpr:parser_nodes#ANode#replace_with */
-(nitmethod_t)VIRTUAL_parser_nodes__AExpr__init, /* pointer to parser_nodes:AGgExpr:parser_nodes#AExpr#init */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__AExpr__warn_parentheses, /* pointer to parser_nodes:AGgExpr:simple_misc_analysis#AExpr#warn_parentheses */
-(nitmethod_t)VIRTUAL_flow__AExpr__after_flow_context, /* pointer to parser_nodes:AGgExpr:flow#AExpr#after_flow_context */
-(nitmethod_t)VIRTUAL_flow__AExpr__after_flow_context_61d, /* pointer to parser_nodes:AGgExpr:flow#AExpr#after_flow_context= */
-(nitmethod_t)VIRTUAL_typing__AExpr__mtype, /* pointer to parser_nodes:AGgExpr:typing#AExpr#mtype */
-(nitmethod_t)VIRTUAL_typing__AExpr__mtype_61d, /* pointer to parser_nodes:AGgExpr:typing#AExpr#mtype= */
-(nitmethod_t)VIRTUAL_typing__AExpr__is_typed, /* pointer to parser_nodes:AGgExpr:typing#AExpr#is_typed */
-(nitmethod_t)VIRTUAL_typing__AExpr__is_typed_61d, /* pointer to parser_nodes:AGgExpr:typing#AExpr#is_typed= */
-(nitmethod_t)VIRTUAL_typing__AExpr__implicit_cast_to, /* pointer to parser_nodes:AGgExpr:typing#AExpr#implicit_cast_to */
-(nitmethod_t)VIRTUAL_typing__AExpr__implicit_cast_to_61d, /* pointer to parser_nodes:AGgExpr:typing#AExpr#implicit_cast_to= */
-(nitmethod_t)VIRTUAL_typing__AExpr__its_variable, /* pointer to parser_nodes:AGgExpr:typing#AExpr#its_variable */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__accept_typing, /* pointer to parser_nodes:AGgExpr:typing#ASendExpr#accept_typing */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__make_var_read, /* pointer to parser_nodes:AGgExpr:astbuilder#AExpr#make_var_read */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__variable_cache, /* pointer to parser_nodes:AGgExpr:astbuilder#AExpr#variable_cache */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__variable_cache_61d, /* pointer to parser_nodes:AGgExpr:astbuilder#AExpr#variable_cache= */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__detach_with_placeholder, /* pointer to parser_nodes:AGgExpr:astbuilder#AExpr#detach_with_placeholder */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__add, /* pointer to parser_nodes:AGgExpr:astbuilder#AExpr#add */
-(nitmethod_t)VIRTUAL_abstract_compiler__ASendExpr__expr, /* pointer to parser_nodes:AGgExpr:abstract_compiler#ASendExpr#expr */
-(nitmethod_t)VIRTUAL_abstract_compiler__AExpr__stmt, /* pointer to parser_nodes:AGgExpr:abstract_compiler#AExpr#stmt */
-(nitmethod_t)VIRTUAL_astvalidation__ANode__accept_ast_validation, /* pointer to parser_nodes:AGgExpr:astvalidation#ANode#accept_ast_validation */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-(nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__n_expr, /* pointer to parser_nodes:AGgExpr:parser_nodes#ASendExpr#n_expr */
-(nitmethod_t)VIRTUAL_parser_prod__AGgExpr__n_expr_61d, /* pointer to parser_nodes:AGgExpr:parser_prod#AGgExpr#n_expr= */
-(nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__n_closure_defs, /* pointer to parser_nodes:AGgExpr:parser_nodes#ASendExpr#n_closure_defs */
-(nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__init, /* pointer to parser_nodes:AGgExpr:parser_nodes#ASendExpr#init */
-(nitmethod_t)VIRTUAL_parser_prod__ASendExpr__empty_init, /* pointer to parser_nodes:AGgExpr:parser_prod#ASendExpr#empty_init */
-(nitmethod_t)VIRTUAL_parser_prod__ASendExpr__init_asendexpr, /* pointer to parser_nodes:AGgExpr:parser_prod#ASendExpr#init_asendexpr */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__escapemark, /* pointer to parser_nodes:AGgExpr:scope#ASendExpr#escapemark */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__escapemark_61d, /* pointer to parser_nodes:AGgExpr:scope#ASendExpr#escapemark= */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__mproperty, /* pointer to parser_nodes:AGgExpr:typing#ASendExpr#mproperty */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__callsite, /* pointer to parser_nodes:AGgExpr:typing#ASendExpr#callsite */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__callsite_61d, /* pointer to parser_nodes:AGgExpr:typing#ASendExpr#callsite= */
-(nitmethod_t)VIRTUAL_typing__AGgExpr__property_name, /* pointer to parser_nodes:AGgExpr:typing#AGgExpr#property_name */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__raw_arguments, /* pointer to parser_nodes:AGgExpr:typing#ASendExpr#raw_arguments */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__raw_arguments_61d, /* pointer to parser_nodes:AGgExpr:typing#ASendExpr#raw_arguments= */
-(nitmethod_t)VIRTUAL_typing__ABinopExpr__compute_raw_arguments, /* pointer to parser_nodes:AGgExpr:typing#ABinopExpr#compute_raw_arguments */
-(nitmethod_t)VIRTUAL_scope__ANode__accept_scope_visitor, /* pointer to parser_nodes:AGgExpr:scope#ANode#accept_scope_visitor */
-(nitmethod_t)VIRTUAL_parser_nodes__ABinopExpr__n_expr2, /* pointer to parser_nodes:AGgExpr:parser_nodes#ABinopExpr#n_expr2 */
-(nitmethod_t)VIRTUAL_parser_prod__AGgExpr__n_expr2_61d, /* pointer to parser_nodes:AGgExpr:parser_prod#AGgExpr#n_expr2= */
-(nitmethod_t)VIRTUAL_parser_nodes__ABinopExpr__init, /* pointer to parser_nodes:AGgExpr:parser_nodes#ABinopExpr#init */
-(nitmethod_t)VIRTUAL_parser_prod__ABinopExpr__empty_init, /* pointer to parser_nodes:AGgExpr:parser_prod#ABinopExpr#empty_init */
-(nitmethod_t)VIRTUAL_parser_prod__ABinopExpr__init_abinopexpr, /* pointer to parser_nodes:AGgExpr:parser_prod#ABinopExpr#init_abinopexpr */
-(nitmethod_t)VIRTUAL_parser_nodes__AGgExpr__init, /* pointer to parser_nodes:AGgExpr:parser_nodes#AGgExpr#init */
-(nitmethod_t)VIRTUAL_parser_prod__AGgExpr__empty_init, /* pointer to parser_nodes:AGgExpr:parser_prod#AGgExpr#empty_init */
-(nitmethod_t)VIRTUAL_parser_prod__AGgExpr__init_aggexpr, /* pointer to parser_nodes:AGgExpr:parser_prod#AGgExpr#init_aggexpr */
-}
-};
-/* allocate AGgExpr */
-val* NEW_parser_nodes__AGgExpr(const struct type* type) {
-val* self /* : AGgExpr */;
-val* var /* : null */;
-val* var1 /* : null */;
-val* var2 /* : null */;
-val* var3 /* : null */;
-short int var4 /* : Bool */;
-val* var5 /* : null */;
-val* var6 /* : ANodes[AClosureDef] */;
-self = nit_alloc(sizeof(struct instance) + 19*sizeof(nitattribute_t));
-self->type = type;
-self->class = &class_parser_nodes__AGgExpr;
-var = NULL;
-self->attrs[COLOR_parser_nodes__ANode___location].val = var; /* _location on <self:AGgExpr exact> */
-var1 = NULL;
-self->attrs[COLOR_parser_nodes__ANode___64dparent].val = var1; /* @parent on <self:AGgExpr exact> */
-var2 = NULL;
-self->attrs[COLOR_parser_nodes__Prod___n_annotations].val = var2; /* _n_annotations on <self:AGgExpr exact> */
-var3 = NULL;
-self->attrs[COLOR_typing__AExpr___64dmtype].val = var3; /* @mtype on <self:AGgExpr exact> */
-var4 = 0;
-self->attrs[COLOR_typing__AExpr___64dis_typed].s = var4; /* @is_typed on <self:AGgExpr exact> */
-var5 = NULL;
-self->attrs[COLOR_typing__AExpr___64dimplicit_cast_to].val = var5; /* @implicit_cast_to on <self:AGgExpr exact> */
-var6 = NEW_parser_nodes__ANodes(&type_parser_nodes__ANodesparser_nodes__AClosureDef);
-((void (*)(val*, val*))(var6->class->vft[COLOR_parser_nodes__ANodes__init]))(var6, self) /* init on <var6:ANodes[AClosureDef]>*/;
-CHECK_NEW_parser_nodes__ANodes(var6);
-self->attrs[COLOR_parser_nodes__ASendExpr___n_closure_defs].val = var6; /* _n_closure_defs on <self:AGgExpr exact> */
-return self;
-}
-/* allocate AGgExpr */
-void CHECK_NEW_parser_nodes__AGgExpr(val* self) {
-val* var /* : nullable Location */;
-val* var1 /* : nullable FlowContext */;
-val* var2 /* : nullable Variable */;
-val* var3 /* : AExpr */;
-val* var4 /* : nullable EscapeMark */;
-val* var5 /* : nullable CallSite */;
-val* var6 /* : nullable Array[AExpr] */;
-val* var7 /* : AExpr */;
-var = self->attrs[COLOR_parser__Prod___first_location].val; /* _first_location on <self:AGgExpr> */
-var1 = self->attrs[COLOR_flow__AExpr___64dafter_flow_context].val; /* @after_flow_context on <self:AGgExpr> */
-var2 = self->attrs[COLOR_astbuilder__AExpr___64dvariable_cache].val; /* @variable_cache on <self:AGgExpr> */
-var3 = self->attrs[COLOR_parser_nodes__ASendExpr___n_expr].val; /* _n_expr on <self:AGgExpr> */
-if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr", "src/parser/parser_nodes.nit", 1182);
-exit(1);
-}
-var4 = self->attrs[COLOR_scope__ASendExpr___64descapemark].val; /* @escapemark on <self:AGgExpr> */
-var5 = self->attrs[COLOR_typing__ASendExpr___64dcallsite].val; /* @callsite on <self:AGgExpr> */
-var6 = self->attrs[COLOR_typing__ASendExpr___64draw_arguments].val; /* @raw_arguments on <self:AGgExpr> */
-var7 = self->attrs[COLOR_parser_nodes__ABinopExpr___n_expr2].val; /* _n_expr2 on <self:AGgExpr> */
-if (var7 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr2", "src/parser/parser_nodes.nit", 1190);
-exit(1);
-}
-}
-/* runtime class parser_nodes__AIsaExpr */
-const struct class class_parser_nodes__AIsaExpr = {
-0, /* box_kind */
-{
-(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:AIsaExpr:kernel#Object#object_id */
-(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:AIsaExpr:kernel#Object#is_same_type */
-(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:AIsaExpr:kernel#Object#== */
-(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:AIsaExpr:kernel#Object#!= */
-(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:AIsaExpr:kernel#Object#output */
-(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to parser_nodes:AIsaExpr:kernel#Object#output_class_name */
-(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to parser_nodes:AIsaExpr:kernel#Object#exit */
-(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to parser_nodes:AIsaExpr:kernel#Object#sys */
-(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to parser_nodes:AIsaExpr:kernel#Object#hash */
-(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to parser_nodes:AIsaExpr:string#Object#to_s */
-(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to parser_nodes:AIsaExpr:string#Object#native_class_name */
-(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to parser_nodes:AIsaExpr:string#Object#class_name */
-(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to parser_nodes:AIsaExpr:string#Object#inspect */
-(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to parser_nodes:AIsaExpr:string#Object#inspect_head */
-(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to parser_nodes:AIsaExpr:string#Object#args */
-(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to parser_nodes:AIsaExpr:math#Object#atan2 */
-(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to parser_nodes:AIsaExpr:math#Object#pi */
-(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to parser_nodes:AIsaExpr:math#Object#srand_from */
-(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to parser_nodes:AIsaExpr:math#Object#srand */
-(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to parser_nodes:AIsaExpr:stream#Object#poll */
-(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to parser_nodes:AIsaExpr:stream#Object#intern_poll */
-(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to parser_nodes:AIsaExpr:time#Object#get_time */
-(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to parser_nodes:AIsaExpr:file#Object#printn */
-(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to parser_nodes:AIsaExpr:file#Object#print */
-(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to parser_nodes:AIsaExpr:file#Object#getc */
-(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to parser_nodes:AIsaExpr:file#Object#gets */
-(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to parser_nodes:AIsaExpr:file#Object#getcwd */
-(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to parser_nodes:AIsaExpr:file#Object#file_getcwd */
-(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to parser_nodes:AIsaExpr:file#Object#stdin */
-(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to parser_nodes:AIsaExpr:file#Object#stdout */
-(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to parser_nodes:AIsaExpr:file#Object#stderr */
-(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to parser_nodes:AIsaExpr:model_base#Object#intrude_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to parser_nodes:AIsaExpr:model_base#Object#public_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to parser_nodes:AIsaExpr:model_base#Object#protected_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to parser_nodes:AIsaExpr:model_base#Object#private_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to parser_nodes:AIsaExpr:model_base#Object#none_visibility */
-(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to parser_nodes:AIsaExpr:model#Object#abstract_kind */
-(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to parser_nodes:AIsaExpr:model#Object#concrete_kind */
-(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to parser_nodes:AIsaExpr:model#Object#interface_kind */
-(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to parser_nodes:AIsaExpr:model#Object#enum_kind */
-(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to parser_nodes:AIsaExpr:model#Object#extern_kind */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__location, /* pointer to parser_nodes:AIsaExpr:parser_nodes#ANode#location */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__hot_location, /* pointer to parser_nodes:AIsaExpr:parser_nodes#ANode#hot_location */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__debug, /* pointer to parser_nodes:AIsaExpr:parser_nodes#ANode#debug */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent, /* pointer to parser_nodes:AIsaExpr:parser_nodes#ANode#parent */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent_61d, /* pointer to parser_nodes:AIsaExpr:parser_nodes#ANode#parent= */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__init, /* pointer to parser_nodes:AIsaExpr:parser_nodes#ANode#init */
-(nitmethod_t)VIRTUAL_parser_prod__AIsaExpr__replace_child, /* pointer to parser_nodes:AIsaExpr:parser_prod#AIsaExpr#replace_child */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__detach, /* pointer to parser_nodes:AIsaExpr:parser_nodes#ANode#detach */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__replace_with, /* pointer to parser_nodes:AIsaExpr:parser_nodes#Prod#replace_with */
-(nitmethod_t)VIRTUAL_parser_prod__AIsaExpr__visit_all, /* pointer to parser_nodes:AIsaExpr:parser_prod#AIsaExpr#visit_all */
-(nitmethod_t)VIRTUAL_parser_util__ANode__collect_tokens_by_text, /* pointer to parser_nodes:AIsaExpr:parser_util#ANode#collect_tokens_by_text */
-(nitmethod_t)VIRTUAL_parser_util__ANode__collect_annotations_by_name, /* pointer to parser_nodes:AIsaExpr:parser_util#ANode#collect_annotations_by_name */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__accept_simple_misc, /* pointer to parser_nodes:AIsaExpr:simple_misc_analysis#ANode#accept_simple_misc */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__after_simple_misc, /* pointer to parser_nodes:AIsaExpr:simple_misc_analysis#ANode#after_simple_misc */
-(nitmethod_t)VIRTUAL_literal__ANode__accept_literal, /* pointer to parser_nodes:AIsaExpr:literal#ANode#accept_literal */
-(nitmethod_t)VIRTUAL_scope__ANode__accept_scope_visitor, /* pointer to parser_nodes:AIsaExpr:scope#ANode#accept_scope_visitor */
-(nitmethod_t)VIRTUAL_flow__AIsaExpr__accept_flow_visitor, /* pointer to parser_nodes:AIsaExpr:flow#AIsaExpr#accept_flow_visitor */
-(nitmethod_t)VIRTUAL_local_var_init__ANode__accept_local_var_visitor, /* pointer to parser_nodes:AIsaExpr:local_var_init#ANode#accept_local_var_visitor */
-(nitmethod_t)VIRTUAL_auto_super_init__ANode__accept_auto_super_init, /* pointer to parser_nodes:AIsaExpr:auto_super_init#ANode#accept_auto_super_init */
-(nitmethod_t)VIRTUAL_rapid_type_analysis__AIsaExpr__accept_rapid_type_visitor, /* pointer to parser_nodes:AIsaExpr:rapid_type_analysis#AIsaExpr#accept_rapid_type_visitor */
-(nitmethod_t)VIRTUAL_astvalidation__AExpr__accept_ast_validation, /* pointer to parser_nodes:AIsaExpr:astvalidation#AExpr#accept_ast_validation */
-(nitmethod_t)VIRTUAL_transform__ANode__accept_transform_visitor, /* pointer to parser_nodes:AIsaExpr:transform#ANode#accept_transform_visitor */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__location_61d, /* pointer to parser_nodes:AIsaExpr:parser_nodes#Prod#location= */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations, /* pointer to parser_nodes:AIsaExpr:parser_nodes#Prod#n_annotations */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations_61d, /* pointer to parser_nodes:AIsaExpr:parser_nodes#Prod#n_annotations= */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__init, /* pointer to parser_nodes:AIsaExpr:parser_nodes#Prod#init */
-(nitmethod_t)VIRTUAL_modelize_property__Prod__collect_text, /* pointer to parser_nodes:AIsaExpr:modelize_property#Prod#collect_text */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__replace_with, /* pointer to parser_nodes:AIsaExpr:parser_nodes#ANode#replace_with */
-(nitmethod_t)VIRTUAL_parser_nodes__AExpr__init, /* pointer to parser_nodes:AIsaExpr:parser_nodes#AExpr#init */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__AExpr__warn_parentheses, /* pointer to parser_nodes:AIsaExpr:simple_misc_analysis#AExpr#warn_parentheses */
-(nitmethod_t)VIRTUAL_flow__AExpr__after_flow_context, /* pointer to parser_nodes:AIsaExpr:flow#AExpr#after_flow_context */
-(nitmethod_t)VIRTUAL_flow__AExpr__after_flow_context_61d, /* pointer to parser_nodes:AIsaExpr:flow#AExpr#after_flow_context= */
-(nitmethod_t)VIRTUAL_typing__AExpr__mtype, /* pointer to parser_nodes:AIsaExpr:typing#AExpr#mtype */
-(nitmethod_t)VIRTUAL_typing__AExpr__mtype_61d, /* pointer to parser_nodes:AIsaExpr:typing#AExpr#mtype= */
-(nitmethod_t)VIRTUAL_typing__AExpr__is_typed, /* pointer to parser_nodes:AIsaExpr:typing#AExpr#is_typed */
-(nitmethod_t)VIRTUAL_typing__AExpr__is_typed_61d, /* pointer to parser_nodes:AIsaExpr:typing#AExpr#is_typed= */
-(nitmethod_t)VIRTUAL_typing__AExpr__implicit_cast_to, /* pointer to parser_nodes:AIsaExpr:typing#AExpr#implicit_cast_to */
-(nitmethod_t)VIRTUAL_typing__AExpr__implicit_cast_to_61d, /* pointer to parser_nodes:AIsaExpr:typing#AExpr#implicit_cast_to= */
-(nitmethod_t)VIRTUAL_typing__AExpr__its_variable, /* pointer to parser_nodes:AIsaExpr:typing#AExpr#its_variable */
-(nitmethod_t)VIRTUAL_typing__AIsaExpr__accept_typing, /* pointer to parser_nodes:AIsaExpr:typing#AIsaExpr#accept_typing */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__make_var_read, /* pointer to parser_nodes:AIsaExpr:astbuilder#AExpr#make_var_read */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__variable_cache, /* pointer to parser_nodes:AIsaExpr:astbuilder#AExpr#variable_cache */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__variable_cache_61d, /* pointer to parser_nodes:AIsaExpr:astbuilder#AExpr#variable_cache= */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__detach_with_placeholder, /* pointer to parser_nodes:AIsaExpr:astbuilder#AExpr#detach_with_placeholder */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__add, /* pointer to parser_nodes:AIsaExpr:astbuilder#AExpr#add */
-(nitmethod_t)VIRTUAL_abstract_compiler__AIsaExpr__expr, /* pointer to parser_nodes:AIsaExpr:abstract_compiler#AIsaExpr#expr */
-(nitmethod_t)VIRTUAL_abstract_compiler__AExpr__stmt, /* pointer to parser_nodes:AIsaExpr:abstract_compiler#AExpr#stmt */
-(nitmethod_t)VIRTUAL_astvalidation__ANode__accept_ast_validation, /* pointer to parser_nodes:AIsaExpr:astvalidation#ANode#accept_ast_validation */
-(nitmethod_t)VIRTUAL_parser_nodes__ABoolExpr__init, /* pointer to parser_nodes:AIsaExpr:parser_nodes#ABoolExpr#init */
-(nitmethod_t)VIRTUAL_parser_nodes__AIsaExpr__n_expr, /* pointer to parser_nodes:AIsaExpr:parser_nodes#AIsaExpr#n_expr */
-(nitmethod_t)VIRTUAL_parser_prod__AIsaExpr__n_expr_61d, /* pointer to parser_nodes:AIsaExpr:parser_prod#AIsaExpr#n_expr= */
-(nitmethod_t)VIRTUAL_parser_nodes__AIsaExpr__n_type, /* pointer to parser_nodes:AIsaExpr:parser_nodes#AIsaExpr#n_type */
-(nitmethod_t)VIRTUAL_parser_prod__AIsaExpr__n_type_61d, /* pointer to parser_nodes:AIsaExpr:parser_prod#AIsaExpr#n_type= */
-(nitmethod_t)VIRTUAL_parser_nodes__AIsaExpr__init, /* pointer to parser_nodes:AIsaExpr:parser_nodes#AIsaExpr#init */
-(nitmethod_t)VIRTUAL_parser_prod__AIsaExpr__empty_init, /* pointer to parser_nodes:AIsaExpr:parser_prod#AIsaExpr#empty_init */
-(nitmethod_t)VIRTUAL_parser_prod__AIsaExpr__init_aisaexpr, /* pointer to parser_nodes:AIsaExpr:parser_prod#AIsaExpr#init_aisaexpr */
-(nitmethod_t)VIRTUAL_typing__AIsaExpr__cast_type, /* pointer to parser_nodes:AIsaExpr:typing#AIsaExpr#cast_type */
-(nitmethod_t)VIRTUAL_typing__AIsaExpr__cast_type_61d, /* pointer to parser_nodes:AIsaExpr:typing#AIsaExpr#cast_type= */
-(nitmethod_t)VIRTUAL_flow__ANode__accept_flow_visitor, /* pointer to parser_nodes:AIsaExpr:flow#ANode#accept_flow_visitor */
-}
-};
-/* allocate AIsaExpr */
-val* NEW_parser_nodes__AIsaExpr(const struct type* type) {
-val* self /* : AIsaExpr */;
-val* var /* : null */;
-val* var1 /* : null */;
-val* var2 /* : null */;
-val* var3 /* : null */;
-short int var4 /* : Bool */;
-val* var5 /* : null */;
-self = nit_alloc(sizeof(struct instance) + 12*sizeof(nitattribute_t));
-self->type = type;
-self->class = &class_parser_nodes__AIsaExpr;
-var = NULL;
-self->attrs[COLOR_parser_nodes__ANode___location].val = var; /* _location on <self:AIsaExpr exact> */
-var1 = NULL;
-self->attrs[COLOR_parser_nodes__ANode___64dparent].val = var1; /* @parent on <self:AIsaExpr exact> */
-var2 = NULL;
-self->attrs[COLOR_parser_nodes__Prod___n_annotations].val = var2; /* _n_annotations on <self:AIsaExpr exact> */
-var3 = NULL;
-self->attrs[COLOR_typing__AExpr___64dmtype].val = var3; /* @mtype on <self:AIsaExpr exact> */
-var4 = 0;
-self->attrs[COLOR_typing__AExpr___64dis_typed].s = var4; /* @is_typed on <self:AIsaExpr exact> */
-var5 = NULL;
-self->attrs[COLOR_typing__AExpr___64dimplicit_cast_to].val = var5; /* @implicit_cast_to on <self:AIsaExpr exact> */
-return self;
-}
-/* allocate AIsaExpr */
-void CHECK_NEW_parser_nodes__AIsaExpr(val* self) {
-val* var /* : nullable Location */;
-val* var1 /* : nullable FlowContext */;
-val* var2 /* : nullable Variable */;
-val* var3 /* : AExpr */;
-val* var4 /* : AType */;
-val* var5 /* : nullable MType */;
-var = self->attrs[COLOR_parser__Prod___first_location].val; /* _first_location on <self:AIsaExpr> */
-var1 = self->attrs[COLOR_flow__AExpr___64dafter_flow_context].val; /* @after_flow_context on <self:AIsaExpr> */
-var2 = self->attrs[COLOR_astbuilder__AExpr___64dvariable_cache].val; /* @variable_cache on <self:AIsaExpr> */
-var3 = self->attrs[COLOR_parser_nodes__AIsaExpr___n_expr].val; /* _n_expr on <self:AIsaExpr> */
-if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr", "src/parser/parser_nodes.nit", 1285);
-exit(1);
-}
-var4 = self->attrs[COLOR_parser_nodes__AIsaExpr___n_type].val; /* _n_type on <self:AIsaExpr> */
-if (var4 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_type", "src/parser/parser_nodes.nit", 1286);
-exit(1);
-}
-var5 = self->attrs[COLOR_typing__AIsaExpr___64dcast_type].val; /* @cast_type on <self:AIsaExpr> */
-}
-/* runtime class parser_nodes__APlusExpr */
-const struct class class_parser_nodes__APlusExpr = {
-0, /* box_kind */
-{
-(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:APlusExpr:kernel#Object#object_id */
-(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:APlusExpr:kernel#Object#is_same_type */
-(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:APlusExpr:kernel#Object#== */
-(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:APlusExpr:kernel#Object#!= */
-(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:APlusExpr:kernel#Object#output */
-(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to parser_nodes:APlusExpr:kernel#Object#output_class_name */
-(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to parser_nodes:APlusExpr:kernel#Object#exit */
-(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to parser_nodes:APlusExpr:kernel#Object#sys */
-(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to parser_nodes:APlusExpr:kernel#Object#hash */
-(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to parser_nodes:APlusExpr:string#Object#to_s */
-(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to parser_nodes:APlusExpr:string#Object#native_class_name */
-(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to parser_nodes:APlusExpr:string#Object#class_name */
-(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to parser_nodes:APlusExpr:string#Object#inspect */
-(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to parser_nodes:APlusExpr:string#Object#inspect_head */
-(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to parser_nodes:APlusExpr:string#Object#args */
-(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to parser_nodes:APlusExpr:math#Object#atan2 */
-(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to parser_nodes:APlusExpr:math#Object#pi */
-(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to parser_nodes:APlusExpr:math#Object#srand_from */
-(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to parser_nodes:APlusExpr:math#Object#srand */
-(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to parser_nodes:APlusExpr:stream#Object#poll */
-(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to parser_nodes:APlusExpr:stream#Object#intern_poll */
-(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to parser_nodes:APlusExpr:time#Object#get_time */
-(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to parser_nodes:APlusExpr:file#Object#printn */
-(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to parser_nodes:APlusExpr:file#Object#print */
-(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to parser_nodes:APlusExpr:file#Object#getc */
-(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to parser_nodes:APlusExpr:file#Object#gets */
-(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to parser_nodes:APlusExpr:file#Object#getcwd */
-(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to parser_nodes:APlusExpr:file#Object#file_getcwd */
-(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to parser_nodes:APlusExpr:file#Object#stdin */
-(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to parser_nodes:APlusExpr:file#Object#stdout */
-(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to parser_nodes:APlusExpr:file#Object#stderr */
-(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to parser_nodes:APlusExpr:model_base#Object#intrude_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to parser_nodes:APlusExpr:model_base#Object#public_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to parser_nodes:APlusExpr:model_base#Object#protected_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to parser_nodes:APlusExpr:model_base#Object#private_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to parser_nodes:APlusExpr:model_base#Object#none_visibility */
-(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to parser_nodes:APlusExpr:model#Object#abstract_kind */
-(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to parser_nodes:APlusExpr:model#Object#concrete_kind */
-(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to parser_nodes:APlusExpr:model#Object#interface_kind */
-(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to parser_nodes:APlusExpr:model#Object#enum_kind */
-(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to parser_nodes:APlusExpr:model#Object#extern_kind */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__location, /* pointer to parser_nodes:APlusExpr:parser_nodes#ANode#location */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__hot_location, /* pointer to parser_nodes:APlusExpr:parser_nodes#ANode#hot_location */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__debug, /* pointer to parser_nodes:APlusExpr:parser_nodes#ANode#debug */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent, /* pointer to parser_nodes:APlusExpr:parser_nodes#ANode#parent */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent_61d, /* pointer to parser_nodes:APlusExpr:parser_nodes#ANode#parent= */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__init, /* pointer to parser_nodes:APlusExpr:parser_nodes#ANode#init */
-(nitmethod_t)VIRTUAL_parser_prod__APlusExpr__replace_child, /* pointer to parser_nodes:APlusExpr:parser_prod#APlusExpr#replace_child */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__detach, /* pointer to parser_nodes:APlusExpr:parser_nodes#ANode#detach */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__replace_with, /* pointer to parser_nodes:APlusExpr:parser_nodes#Prod#replace_with */
-(nitmethod_t)VIRTUAL_parser_prod__APlusExpr__visit_all, /* pointer to parser_nodes:APlusExpr:parser_prod#APlusExpr#visit_all */
-(nitmethod_t)VIRTUAL_parser_util__ANode__collect_tokens_by_text, /* pointer to parser_nodes:APlusExpr:parser_util#ANode#collect_tokens_by_text */
-(nitmethod_t)VIRTUAL_parser_util__ANode__collect_annotations_by_name, /* pointer to parser_nodes:APlusExpr:parser_util#ANode#collect_annotations_by_name */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__accept_simple_misc, /* pointer to parser_nodes:APlusExpr:simple_misc_analysis#ANode#accept_simple_misc */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__after_simple_misc, /* pointer to parser_nodes:APlusExpr:simple_misc_analysis#ANode#after_simple_misc */
-(nitmethod_t)VIRTUAL_literal__ANode__accept_literal, /* pointer to parser_nodes:APlusExpr:literal#ANode#accept_literal */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__accept_scope_visitor, /* pointer to parser_nodes:APlusExpr:scope#ASendExpr#accept_scope_visitor */
-(nitmethod_t)VIRTUAL_flow__ANode__accept_flow_visitor, /* pointer to parser_nodes:APlusExpr:flow#ANode#accept_flow_visitor */
-(nitmethod_t)VIRTUAL_local_var_init__ANode__accept_local_var_visitor, /* pointer to parser_nodes:APlusExpr:local_var_init#ANode#accept_local_var_visitor */
-(nitmethod_t)VIRTUAL_auto_super_init__ASendExpr__accept_auto_super_init, /* pointer to parser_nodes:APlusExpr:auto_super_init#ASendExpr#accept_auto_super_init */
-(nitmethod_t)VIRTUAL_rapid_type_analysis__ASendExpr__accept_rapid_type_visitor, /* pointer to parser_nodes:APlusExpr:rapid_type_analysis#ASendExpr#accept_rapid_type_visitor */
-(nitmethod_t)VIRTUAL_astvalidation__AExpr__accept_ast_validation, /* pointer to parser_nodes:APlusExpr:astvalidation#AExpr#accept_ast_validation */
-(nitmethod_t)VIRTUAL_transform__ANode__accept_transform_visitor, /* pointer to parser_nodes:APlusExpr:transform#ANode#accept_transform_visitor */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__location_61d, /* pointer to parser_nodes:APlusExpr:parser_nodes#Prod#location= */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations, /* pointer to parser_nodes:APlusExpr:parser_nodes#Prod#n_annotations */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations_61d, /* pointer to parser_nodes:APlusExpr:parser_nodes#Prod#n_annotations= */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__init, /* pointer to parser_nodes:APlusExpr:parser_nodes#Prod#init */
-(nitmethod_t)VIRTUAL_modelize_property__Prod__collect_text, /* pointer to parser_nodes:APlusExpr:modelize_property#Prod#collect_text */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__replace_with, /* pointer to parser_nodes:APlusExpr:parser_nodes#ANode#replace_with */
-(nitmethod_t)VIRTUAL_parser_nodes__AExpr__init, /* pointer to parser_nodes:APlusExpr:parser_nodes#AExpr#init */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__AExpr__warn_parentheses, /* pointer to parser_nodes:APlusExpr:simple_misc_analysis#AExpr#warn_parentheses */
-(nitmethod_t)VIRTUAL_flow__AExpr__after_flow_context, /* pointer to parser_nodes:APlusExpr:flow#AExpr#after_flow_context */
-(nitmethod_t)VIRTUAL_flow__AExpr__after_flow_context_61d, /* pointer to parser_nodes:APlusExpr:flow#AExpr#after_flow_context= */
-(nitmethod_t)VIRTUAL_typing__AExpr__mtype, /* pointer to parser_nodes:APlusExpr:typing#AExpr#mtype */
-(nitmethod_t)VIRTUAL_typing__AExpr__mtype_61d, /* pointer to parser_nodes:APlusExpr:typing#AExpr#mtype= */
-(nitmethod_t)VIRTUAL_typing__AExpr__is_typed, /* pointer to parser_nodes:APlusExpr:typing#AExpr#is_typed */
-(nitmethod_t)VIRTUAL_typing__AExpr__is_typed_61d, /* pointer to parser_nodes:APlusExpr:typing#AExpr#is_typed= */
-(nitmethod_t)VIRTUAL_typing__AExpr__implicit_cast_to, /* pointer to parser_nodes:APlusExpr:typing#AExpr#implicit_cast_to */
-(nitmethod_t)VIRTUAL_typing__AExpr__implicit_cast_to_61d, /* pointer to parser_nodes:APlusExpr:typing#AExpr#implicit_cast_to= */
-(nitmethod_t)VIRTUAL_typing__AExpr__its_variable, /* pointer to parser_nodes:APlusExpr:typing#AExpr#its_variable */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__accept_typing, /* pointer to parser_nodes:APlusExpr:typing#ASendExpr#accept_typing */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__make_var_read, /* pointer to parser_nodes:APlusExpr:astbuilder#AExpr#make_var_read */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__variable_cache, /* pointer to parser_nodes:APlusExpr:astbuilder#AExpr#variable_cache */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__variable_cache_61d, /* pointer to parser_nodes:APlusExpr:astbuilder#AExpr#variable_cache= */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__detach_with_placeholder, /* pointer to parser_nodes:APlusExpr:astbuilder#AExpr#detach_with_placeholder */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__add, /* pointer to parser_nodes:APlusExpr:astbuilder#AExpr#add */
-(nitmethod_t)VIRTUAL_abstract_compiler__ASendExpr__expr, /* pointer to parser_nodes:APlusExpr:abstract_compiler#ASendExpr#expr */
-(nitmethod_t)VIRTUAL_abstract_compiler__AExpr__stmt, /* pointer to parser_nodes:APlusExpr:abstract_compiler#AExpr#stmt */
-(nitmethod_t)VIRTUAL_astvalidation__ANode__accept_ast_validation, /* pointer to parser_nodes:APlusExpr:astvalidation#ANode#accept_ast_validation */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-(nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__n_expr, /* pointer to parser_nodes:APlusExpr:parser_nodes#ASendExpr#n_expr */
-(nitmethod_t)VIRTUAL_parser_prod__APlusExpr__n_expr_61d, /* pointer to parser_nodes:APlusExpr:parser_prod#APlusExpr#n_expr= */
-(nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__n_closure_defs, /* pointer to parser_nodes:APlusExpr:parser_nodes#ASendExpr#n_closure_defs */
-(nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__init, /* pointer to parser_nodes:APlusExpr:parser_nodes#ASendExpr#init */
-(nitmethod_t)VIRTUAL_parser_prod__ASendExpr__empty_init, /* pointer to parser_nodes:APlusExpr:parser_prod#ASendExpr#empty_init */
-(nitmethod_t)VIRTUAL_parser_prod__ASendExpr__init_asendexpr, /* pointer to parser_nodes:APlusExpr:parser_prod#ASendExpr#init_asendexpr */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__escapemark, /* pointer to parser_nodes:APlusExpr:scope#ASendExpr#escapemark */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__escapemark_61d, /* pointer to parser_nodes:APlusExpr:scope#ASendExpr#escapemark= */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__mproperty, /* pointer to parser_nodes:APlusExpr:typing#ASendExpr#mproperty */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__callsite, /* pointer to parser_nodes:APlusExpr:typing#ASendExpr#callsite */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__callsite_61d, /* pointer to parser_nodes:APlusExpr:typing#ASendExpr#callsite= */
-(nitmethod_t)VIRTUAL_typing__APlusExpr__property_name, /* pointer to parser_nodes:APlusExpr:typing#APlusExpr#property_name */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__raw_arguments, /* pointer to parser_nodes:APlusExpr:typing#ASendExpr#raw_arguments */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__raw_arguments_61d, /* pointer to parser_nodes:APlusExpr:typing#ASendExpr#raw_arguments= */
-(nitmethod_t)VIRTUAL_typing__ABinopExpr__compute_raw_arguments, /* pointer to parser_nodes:APlusExpr:typing#ABinopExpr#compute_raw_arguments */
-(nitmethod_t)VIRTUAL_scope__ANode__accept_scope_visitor, /* pointer to parser_nodes:APlusExpr:scope#ANode#accept_scope_visitor */
-(nitmethod_t)VIRTUAL_parser_nodes__ABinopExpr__n_expr2, /* pointer to parser_nodes:APlusExpr:parser_nodes#ABinopExpr#n_expr2 */
-(nitmethod_t)VIRTUAL_parser_prod__APlusExpr__n_expr2_61d, /* pointer to parser_nodes:APlusExpr:parser_prod#APlusExpr#n_expr2= */
-(nitmethod_t)VIRTUAL_parser_nodes__ABinopExpr__init, /* pointer to parser_nodes:APlusExpr:parser_nodes#ABinopExpr#init */
-(nitmethod_t)VIRTUAL_parser_prod__ABinopExpr__empty_init, /* pointer to parser_nodes:APlusExpr:parser_prod#ABinopExpr#empty_init */
-(nitmethod_t)VIRTUAL_parser_prod__ABinopExpr__init_abinopexpr, /* pointer to parser_nodes:APlusExpr:parser_prod#ABinopExpr#init_abinopexpr */
-(nitmethod_t)VIRTUAL_parser_nodes__APlusExpr__init, /* pointer to parser_nodes:APlusExpr:parser_nodes#APlusExpr#init */
-(nitmethod_t)VIRTUAL_parser_prod__APlusExpr__empty_init, /* pointer to parser_nodes:APlusExpr:parser_prod#APlusExpr#empty_init */
-(nitmethod_t)VIRTUAL_parser_prod__APlusExpr__init_aplusexpr, /* pointer to parser_nodes:APlusExpr:parser_prod#APlusExpr#init_aplusexpr */
-}
-};
-/* allocate APlusExpr */
-val* NEW_parser_nodes__APlusExpr(const struct type* type) {
-val* self /* : APlusExpr */;
-val* var /* : null */;
-val* var1 /* : null */;
-val* var2 /* : null */;
-val* var3 /* : null */;
-short int var4 /* : Bool */;
-val* var5 /* : null */;
-val* var6 /* : ANodes[AClosureDef] */;
-self = nit_alloc(sizeof(struct instance) + 19*sizeof(nitattribute_t));
-self->type = type;
-self->class = &class_parser_nodes__APlusExpr;
-var = NULL;
-self->attrs[COLOR_parser_nodes__ANode___location].val = var; /* _location on <self:APlusExpr exact> */
-var1 = NULL;
-self->attrs[COLOR_parser_nodes__ANode___64dparent].val = var1; /* @parent on <self:APlusExpr exact> */
-var2 = NULL;
-self->attrs[COLOR_parser_nodes__Prod___n_annotations].val = var2; /* _n_annotations on <self:APlusExpr exact> */
-var3 = NULL;
-self->attrs[COLOR_typing__AExpr___64dmtype].val = var3; /* @mtype on <self:APlusExpr exact> */
-var4 = 0;
-self->attrs[COLOR_typing__AExpr___64dis_typed].s = var4; /* @is_typed on <self:APlusExpr exact> */
-var5 = NULL;
-self->attrs[COLOR_typing__AExpr___64dimplicit_cast_to].val = var5; /* @implicit_cast_to on <self:APlusExpr exact> */
-var6 = NEW_parser_nodes__ANodes(&type_parser_nodes__ANodesparser_nodes__AClosureDef);
-((void (*)(val*, val*))(var6->class->vft[COLOR_parser_nodes__ANodes__init]))(var6, self) /* init on <var6:ANodes[AClosureDef]>*/;
-CHECK_NEW_parser_nodes__ANodes(var6);
-self->attrs[COLOR_parser_nodes__ASendExpr___n_closure_defs].val = var6; /* _n_closure_defs on <self:APlusExpr exact> */
-return self;
-}
-/* allocate APlusExpr */
-void CHECK_NEW_parser_nodes__APlusExpr(val* self) {
-val* var /* : nullable Location */;
-val* var1 /* : nullable FlowContext */;
-val* var2 /* : nullable Variable */;
-val* var3 /* : AExpr */;
-val* var4 /* : nullable EscapeMark */;
-val* var5 /* : nullable CallSite */;
-val* var6 /* : nullable Array[AExpr] */;
-val* var7 /* : AExpr */;
-var = self->attrs[COLOR_parser__Prod___first_location].val; /* _first_location on <self:APlusExpr> */
-var1 = self->attrs[COLOR_flow__AExpr___64dafter_flow_context].val; /* @after_flow_context on <self:APlusExpr> */
-var2 = self->attrs[COLOR_astbuilder__AExpr___64dvariable_cache].val; /* @variable_cache on <self:APlusExpr> */
-var3 = self->attrs[COLOR_parser_nodes__ASendExpr___n_expr].val; /* _n_expr on <self:APlusExpr> */
-if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr", "src/parser/parser_nodes.nit", 1182);
-exit(1);
-}
-var4 = self->attrs[COLOR_scope__ASendExpr___64descapemark].val; /* @escapemark on <self:APlusExpr> */
-var5 = self->attrs[COLOR_typing__ASendExpr___64dcallsite].val; /* @callsite on <self:APlusExpr> */
-var6 = self->attrs[COLOR_typing__ASendExpr___64draw_arguments].val; /* @raw_arguments on <self:APlusExpr> */
-var7 = self->attrs[COLOR_parser_nodes__ABinopExpr___n_expr2].val; /* _n_expr2 on <self:APlusExpr> */
-if (var7 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr2", "src/parser/parser_nodes.nit", 1190);
-exit(1);
-}
-}
-/* runtime class parser_nodes__AMinusExpr */
-const struct class class_parser_nodes__AMinusExpr = {
-0, /* box_kind */
-{
-(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:AMinusExpr:kernel#Object#object_id */
-(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:AMinusExpr:kernel#Object#is_same_type */
-(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:AMinusExpr:kernel#Object#== */
-(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:AMinusExpr:kernel#Object#!= */
-(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:AMinusExpr:kernel#Object#output */
-(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to parser_nodes:AMinusExpr:kernel#Object#output_class_name */
-(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to parser_nodes:AMinusExpr:kernel#Object#exit */
-(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to parser_nodes:AMinusExpr:kernel#Object#sys */
-(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to parser_nodes:AMinusExpr:kernel#Object#hash */
-(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to parser_nodes:AMinusExpr:string#Object#to_s */
-(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to parser_nodes:AMinusExpr:string#Object#native_class_name */
-(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to parser_nodes:AMinusExpr:string#Object#class_name */
-(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to parser_nodes:AMinusExpr:string#Object#inspect */
-(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to parser_nodes:AMinusExpr:string#Object#inspect_head */
-(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to parser_nodes:AMinusExpr:string#Object#args */
-(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to parser_nodes:AMinusExpr:math#Object#atan2 */
-(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to parser_nodes:AMinusExpr:math#Object#pi */
-(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to parser_nodes:AMinusExpr:math#Object#srand_from */
-(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to parser_nodes:AMinusExpr:math#Object#srand */
-(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to parser_nodes:AMinusExpr:stream#Object#poll */
-(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to parser_nodes:AMinusExpr:stream#Object#intern_poll */
-(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to parser_nodes:AMinusExpr:time#Object#get_time */
-(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to parser_nodes:AMinusExpr:file#Object#printn */
-(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to parser_nodes:AMinusExpr:file#Object#print */
-(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to parser_nodes:AMinusExpr:file#Object#getc */
-(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to parser_nodes:AMinusExpr:file#Object#gets */
-(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to parser_nodes:AMinusExpr:file#Object#getcwd */
-(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to parser_nodes:AMinusExpr:file#Object#file_getcwd */
-(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to parser_nodes:AMinusExpr:file#Object#stdin */
-(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to parser_nodes:AMinusExpr:file#Object#stdout */
-(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to parser_nodes:AMinusExpr:file#Object#stderr */
-(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to parser_nodes:AMinusExpr:model_base#Object#intrude_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to parser_nodes:AMinusExpr:model_base#Object#public_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to parser_nodes:AMinusExpr:model_base#Object#protected_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to parser_nodes:AMinusExpr:model_base#Object#private_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to parser_nodes:AMinusExpr:model_base#Object#none_visibility */
-(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to parser_nodes:AMinusExpr:model#Object#abstract_kind */
-(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to parser_nodes:AMinusExpr:model#Object#concrete_kind */
-(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to parser_nodes:AMinusExpr:model#Object#interface_kind */
-(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to parser_nodes:AMinusExpr:model#Object#enum_kind */
-(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to parser_nodes:AMinusExpr:model#Object#extern_kind */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__location, /* pointer to parser_nodes:AMinusExpr:parser_nodes#ANode#location */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__hot_location, /* pointer to parser_nodes:AMinusExpr:parser_nodes#ANode#hot_location */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__debug, /* pointer to parser_nodes:AMinusExpr:parser_nodes#ANode#debug */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent, /* pointer to parser_nodes:AMinusExpr:parser_nodes#ANode#parent */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent_61d, /* pointer to parser_nodes:AMinusExpr:parser_nodes#ANode#parent= */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__init, /* pointer to parser_nodes:AMinusExpr:parser_nodes#ANode#init */
-(nitmethod_t)VIRTUAL_parser_prod__AMinusExpr__replace_child, /* pointer to parser_nodes:AMinusExpr:parser_prod#AMinusExpr#replace_child */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__detach, /* pointer to parser_nodes:AMinusExpr:parser_nodes#ANode#detach */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__replace_with, /* pointer to parser_nodes:AMinusExpr:parser_nodes#Prod#replace_with */
-(nitmethod_t)VIRTUAL_parser_prod__AMinusExpr__visit_all, /* pointer to parser_nodes:AMinusExpr:parser_prod#AMinusExpr#visit_all */
-(nitmethod_t)VIRTUAL_parser_util__ANode__collect_tokens_by_text, /* pointer to parser_nodes:AMinusExpr:parser_util#ANode#collect_tokens_by_text */
-(nitmethod_t)VIRTUAL_parser_util__ANode__collect_annotations_by_name, /* pointer to parser_nodes:AMinusExpr:parser_util#ANode#collect_annotations_by_name */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__accept_simple_misc, /* pointer to parser_nodes:AMinusExpr:simple_misc_analysis#ANode#accept_simple_misc */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__after_simple_misc, /* pointer to parser_nodes:AMinusExpr:simple_misc_analysis#ANode#after_simple_misc */
-(nitmethod_t)VIRTUAL_literal__ANode__accept_literal, /* pointer to parser_nodes:AMinusExpr:literal#ANode#accept_literal */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__accept_scope_visitor, /* pointer to parser_nodes:AMinusExpr:scope#ASendExpr#accept_scope_visitor */
-(nitmethod_t)VIRTUAL_flow__ANode__accept_flow_visitor, /* pointer to parser_nodes:AMinusExpr:flow#ANode#accept_flow_visitor */
-(nitmethod_t)VIRTUAL_local_var_init__ANode__accept_local_var_visitor, /* pointer to parser_nodes:AMinusExpr:local_var_init#ANode#accept_local_var_visitor */
-(nitmethod_t)VIRTUAL_auto_super_init__ASendExpr__accept_auto_super_init, /* pointer to parser_nodes:AMinusExpr:auto_super_init#ASendExpr#accept_auto_super_init */
-(nitmethod_t)VIRTUAL_rapid_type_analysis__ASendExpr__accept_rapid_type_visitor, /* pointer to parser_nodes:AMinusExpr:rapid_type_analysis#ASendExpr#accept_rapid_type_visitor */
-(nitmethod_t)VIRTUAL_astvalidation__AExpr__accept_ast_validation, /* pointer to parser_nodes:AMinusExpr:astvalidation#AExpr#accept_ast_validation */
-(nitmethod_t)VIRTUAL_transform__ANode__accept_transform_visitor, /* pointer to parser_nodes:AMinusExpr:transform#ANode#accept_transform_visitor */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__location_61d, /* pointer to parser_nodes:AMinusExpr:parser_nodes#Prod#location= */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations, /* pointer to parser_nodes:AMinusExpr:parser_nodes#Prod#n_annotations */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations_61d, /* pointer to parser_nodes:AMinusExpr:parser_nodes#Prod#n_annotations= */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__init, /* pointer to parser_nodes:AMinusExpr:parser_nodes#Prod#init */
-(nitmethod_t)VIRTUAL_modelize_property__Prod__collect_text, /* pointer to parser_nodes:AMinusExpr:modelize_property#Prod#collect_text */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__replace_with, /* pointer to parser_nodes:AMinusExpr:parser_nodes#ANode#replace_with */
-(nitmethod_t)VIRTUAL_parser_nodes__AExpr__init, /* pointer to parser_nodes:AMinusExpr:parser_nodes#AExpr#init */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__AExpr__warn_parentheses, /* pointer to parser_nodes:AMinusExpr:simple_misc_analysis#AExpr#warn_parentheses */
-(nitmethod_t)VIRTUAL_flow__AExpr__after_flow_context, /* pointer to parser_nodes:AMinusExpr:flow#AExpr#after_flow_context */
-(nitmethod_t)VIRTUAL_flow__AExpr__after_flow_context_61d, /* pointer to parser_nodes:AMinusExpr:flow#AExpr#after_flow_context= */
-(nitmethod_t)VIRTUAL_typing__AExpr__mtype, /* pointer to parser_nodes:AMinusExpr:typing#AExpr#mtype */
-(nitmethod_t)VIRTUAL_typing__AExpr__mtype_61d, /* pointer to parser_nodes:AMinusExpr:typing#AExpr#mtype= */
-(nitmethod_t)VIRTUAL_typing__AExpr__is_typed, /* pointer to parser_nodes:AMinusExpr:typing#AExpr#is_typed */
-(nitmethod_t)VIRTUAL_typing__AExpr__is_typed_61d, /* pointer to parser_nodes:AMinusExpr:typing#AExpr#is_typed= */
-(nitmethod_t)VIRTUAL_typing__AExpr__implicit_cast_to, /* pointer to parser_nodes:AMinusExpr:typing#AExpr#implicit_cast_to */
-(nitmethod_t)VIRTUAL_typing__AExpr__implicit_cast_to_61d, /* pointer to parser_nodes:AMinusExpr:typing#AExpr#implicit_cast_to= */
-(nitmethod_t)VIRTUAL_typing__AExpr__its_variable, /* pointer to parser_nodes:AMinusExpr:typing#AExpr#its_variable */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__accept_typing, /* pointer to parser_nodes:AMinusExpr:typing#ASendExpr#accept_typing */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__make_var_read, /* pointer to parser_nodes:AMinusExpr:astbuilder#AExpr#make_var_read */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__variable_cache, /* pointer to parser_nodes:AMinusExpr:astbuilder#AExpr#variable_cache */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__variable_cache_61d, /* pointer to parser_nodes:AMinusExpr:astbuilder#AExpr#variable_cache= */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__detach_with_placeholder, /* pointer to parser_nodes:AMinusExpr:astbuilder#AExpr#detach_with_placeholder */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__add, /* pointer to parser_nodes:AMinusExpr:astbuilder#AExpr#add */
-(nitmethod_t)VIRTUAL_abstract_compiler__ASendExpr__expr, /* pointer to parser_nodes:AMinusExpr:abstract_compiler#ASendExpr#expr */
-(nitmethod_t)VIRTUAL_abstract_compiler__AExpr__stmt, /* pointer to parser_nodes:AMinusExpr:abstract_compiler#AExpr#stmt */
-(nitmethod_t)VIRTUAL_astvalidation__ANode__accept_ast_validation, /* pointer to parser_nodes:AMinusExpr:astvalidation#ANode#accept_ast_validation */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-(nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__n_expr, /* pointer to parser_nodes:AMinusExpr:parser_nodes#ASendExpr#n_expr */
-(nitmethod_t)VIRTUAL_parser_prod__AMinusExpr__n_expr_61d, /* pointer to parser_nodes:AMinusExpr:parser_prod#AMinusExpr#n_expr= */
-(nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__n_closure_defs, /* pointer to parser_nodes:AMinusExpr:parser_nodes#ASendExpr#n_closure_defs */
-(nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__init, /* pointer to parser_nodes:AMinusExpr:parser_nodes#ASendExpr#init */
-(nitmethod_t)VIRTUAL_parser_prod__ASendExpr__empty_init, /* pointer to parser_nodes:AMinusExpr:parser_prod#ASendExpr#empty_init */
-(nitmethod_t)VIRTUAL_parser_prod__ASendExpr__init_asendexpr, /* pointer to parser_nodes:AMinusExpr:parser_prod#ASendExpr#init_asendexpr */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__escapemark, /* pointer to parser_nodes:AMinusExpr:scope#ASendExpr#escapemark */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__escapemark_61d, /* pointer to parser_nodes:AMinusExpr:scope#ASendExpr#escapemark= */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__mproperty, /* pointer to parser_nodes:AMinusExpr:typing#ASendExpr#mproperty */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__callsite, /* pointer to parser_nodes:AMinusExpr:typing#ASendExpr#callsite */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__callsite_61d, /* pointer to parser_nodes:AMinusExpr:typing#ASendExpr#callsite= */
-(nitmethod_t)VIRTUAL_typing__AMinusExpr__property_name, /* pointer to parser_nodes:AMinusExpr:typing#AMinusExpr#property_name */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__raw_arguments, /* pointer to parser_nodes:AMinusExpr:typing#ASendExpr#raw_arguments */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__raw_arguments_61d, /* pointer to parser_nodes:AMinusExpr:typing#ASendExpr#raw_arguments= */
-(nitmethod_t)VIRTUAL_typing__ABinopExpr__compute_raw_arguments, /* pointer to parser_nodes:AMinusExpr:typing#ABinopExpr#compute_raw_arguments */
-(nitmethod_t)VIRTUAL_scope__ANode__accept_scope_visitor, /* pointer to parser_nodes:AMinusExpr:scope#ANode#accept_scope_visitor */
-(nitmethod_t)VIRTUAL_parser_nodes__ABinopExpr__n_expr2, /* pointer to parser_nodes:AMinusExpr:parser_nodes#ABinopExpr#n_expr2 */
-(nitmethod_t)VIRTUAL_parser_prod__AMinusExpr__n_expr2_61d, /* pointer to parser_nodes:AMinusExpr:parser_prod#AMinusExpr#n_expr2= */
-(nitmethod_t)VIRTUAL_parser_nodes__ABinopExpr__init, /* pointer to parser_nodes:AMinusExpr:parser_nodes#ABinopExpr#init */
-(nitmethod_t)VIRTUAL_parser_prod__ABinopExpr__empty_init, /* pointer to parser_nodes:AMinusExpr:parser_prod#ABinopExpr#empty_init */
-(nitmethod_t)VIRTUAL_parser_prod__ABinopExpr__init_abinopexpr, /* pointer to parser_nodes:AMinusExpr:parser_prod#ABinopExpr#init_abinopexpr */
-(nitmethod_t)VIRTUAL_parser_nodes__AMinusExpr__init, /* pointer to parser_nodes:AMinusExpr:parser_nodes#AMinusExpr#init */
-(nitmethod_t)VIRTUAL_parser_prod__AMinusExpr__empty_init, /* pointer to parser_nodes:AMinusExpr:parser_prod#AMinusExpr#empty_init */
-(nitmethod_t)VIRTUAL_parser_prod__AMinusExpr__init_aminusexpr, /* pointer to parser_nodes:AMinusExpr:parser_prod#AMinusExpr#init_aminusexpr */
-}
-};
-/* allocate AMinusExpr */
-val* NEW_parser_nodes__AMinusExpr(const struct type* type) {
-val* self /* : AMinusExpr */;
-val* var /* : null */;
-val* var1 /* : null */;
-val* var2 /* : null */;
-val* var3 /* : null */;
-short int var4 /* : Bool */;
-val* var5 /* : null */;
-val* var6 /* : ANodes[AClosureDef] */;
-self = nit_alloc(sizeof(struct instance) + 19*sizeof(nitattribute_t));
-self->type = type;
-self->class = &class_parser_nodes__AMinusExpr;
-var = NULL;
-self->attrs[COLOR_parser_nodes__ANode___location].val = var; /* _location on <self:AMinusExpr exact> */
-var1 = NULL;
-self->attrs[COLOR_parser_nodes__ANode___64dparent].val = var1; /* @parent on <self:AMinusExpr exact> */
-var2 = NULL;
-self->attrs[COLOR_parser_nodes__Prod___n_annotations].val = var2; /* _n_annotations on <self:AMinusExpr exact> */
-var3 = NULL;
-self->attrs[COLOR_typing__AExpr___64dmtype].val = var3; /* @mtype on <self:AMinusExpr exact> */
-var4 = 0;
-self->attrs[COLOR_typing__AExpr___64dis_typed].s = var4; /* @is_typed on <self:AMinusExpr exact> */
-var5 = NULL;
-self->attrs[COLOR_typing__AExpr___64dimplicit_cast_to].val = var5; /* @implicit_cast_to on <self:AMinusExpr exact> */
-var6 = NEW_parser_nodes__ANodes(&type_parser_nodes__ANodesparser_nodes__AClosureDef);
-((void (*)(val*, val*))(var6->class->vft[COLOR_parser_nodes__ANodes__init]))(var6, self) /* init on <var6:ANodes[AClosureDef]>*/;
-CHECK_NEW_parser_nodes__ANodes(var6);
-self->attrs[COLOR_parser_nodes__ASendExpr___n_closure_defs].val = var6; /* _n_closure_defs on <self:AMinusExpr exact> */
-return self;
-}
-/* allocate AMinusExpr */
-void CHECK_NEW_parser_nodes__AMinusExpr(val* self) {
-val* var /* : nullable Location */;
-val* var1 /* : nullable FlowContext */;
-val* var2 /* : nullable Variable */;
-val* var3 /* : AExpr */;
-val* var4 /* : nullable EscapeMark */;
-val* var5 /* : nullable CallSite */;
-val* var6 /* : nullable Array[AExpr] */;
-val* var7 /* : AExpr */;
-var = self->attrs[COLOR_parser__Prod___first_location].val; /* _first_location on <self:AMinusExpr> */
-var1 = self->attrs[COLOR_flow__AExpr___64dafter_flow_context].val; /* @after_flow_context on <self:AMinusExpr> */
-var2 = self->attrs[COLOR_astbuilder__AExpr___64dvariable_cache].val; /* @variable_cache on <self:AMinusExpr> */
-var3 = self->attrs[COLOR_parser_nodes__ASendExpr___n_expr].val; /* _n_expr on <self:AMinusExpr> */
-if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr", "src/parser/parser_nodes.nit", 1182);
-exit(1);
-}
-var4 = self->attrs[COLOR_scope__ASendExpr___64descapemark].val; /* @escapemark on <self:AMinusExpr> */
-var5 = self->attrs[COLOR_typing__ASendExpr___64dcallsite].val; /* @callsite on <self:AMinusExpr> */
-var6 = self->attrs[COLOR_typing__ASendExpr___64draw_arguments].val; /* @raw_arguments on <self:AMinusExpr> */
-var7 = self->attrs[COLOR_parser_nodes__ABinopExpr___n_expr2].val; /* _n_expr2 on <self:AMinusExpr> */
-if (var7 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr2", "src/parser/parser_nodes.nit", 1190);
-exit(1);
-}
-}
-/* runtime class parser_nodes__AStarshipExpr */
-const struct class class_parser_nodes__AStarshipExpr = {
-0, /* box_kind */
-{
-(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:AStarshipExpr:kernel#Object#object_id */
-(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:AStarshipExpr:kernel#Object#is_same_type */
-(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:AStarshipExpr:kernel#Object#== */
-(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:AStarshipExpr:kernel#Object#!= */
-(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:AStarshipExpr:kernel#Object#output */
-(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to parser_nodes:AStarshipExpr:kernel#Object#output_class_name */
-(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to parser_nodes:AStarshipExpr:kernel#Object#exit */
-(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to parser_nodes:AStarshipExpr:kernel#Object#sys */
-(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to parser_nodes:AStarshipExpr:kernel#Object#hash */
-(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to parser_nodes:AStarshipExpr:string#Object#to_s */
-(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to parser_nodes:AStarshipExpr:string#Object#native_class_name */
-(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to parser_nodes:AStarshipExpr:string#Object#class_name */
-(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to parser_nodes:AStarshipExpr:string#Object#inspect */
-(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to parser_nodes:AStarshipExpr:string#Object#inspect_head */
-(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to parser_nodes:AStarshipExpr:string#Object#args */
-(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to parser_nodes:AStarshipExpr:math#Object#atan2 */
-(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to parser_nodes:AStarshipExpr:math#Object#pi */
-(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to parser_nodes:AStarshipExpr:math#Object#srand_from */
-(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to parser_nodes:AStarshipExpr:math#Object#srand */
-(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to parser_nodes:AStarshipExpr:stream#Object#poll */
-(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to parser_nodes:AStarshipExpr:stream#Object#intern_poll */
-(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to parser_nodes:AStarshipExpr:time#Object#get_time */
-(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to parser_nodes:AStarshipExpr:file#Object#printn */
-(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to parser_nodes:AStarshipExpr:file#Object#print */
-(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to parser_nodes:AStarshipExpr:file#Object#getc */
-(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to parser_nodes:AStarshipExpr:file#Object#gets */
-(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to parser_nodes:AStarshipExpr:file#Object#getcwd */
-(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to parser_nodes:AStarshipExpr:file#Object#file_getcwd */
-(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to parser_nodes:AStarshipExpr:file#Object#stdin */
-(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to parser_nodes:AStarshipExpr:file#Object#stdout */
-(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to parser_nodes:AStarshipExpr:file#Object#stderr */
-(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to parser_nodes:AStarshipExpr:model_base#Object#intrude_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to parser_nodes:AStarshipExpr:model_base#Object#public_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to parser_nodes:AStarshipExpr:model_base#Object#protected_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to parser_nodes:AStarshipExpr:model_base#Object#private_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to parser_nodes:AStarshipExpr:model_base#Object#none_visibility */
-(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to parser_nodes:AStarshipExpr:model#Object#abstract_kind */
-(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to parser_nodes:AStarshipExpr:model#Object#concrete_kind */
-(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to parser_nodes:AStarshipExpr:model#Object#interface_kind */
-(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to parser_nodes:AStarshipExpr:model#Object#enum_kind */
-(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to parser_nodes:AStarshipExpr:model#Object#extern_kind */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__location, /* pointer to parser_nodes:AStarshipExpr:parser_nodes#ANode#location */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__hot_location, /* pointer to parser_nodes:AStarshipExpr:parser_nodes#ANode#hot_location */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__debug, /* pointer to parser_nodes:AStarshipExpr:parser_nodes#ANode#debug */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent, /* pointer to parser_nodes:AStarshipExpr:parser_nodes#ANode#parent */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent_61d, /* pointer to parser_nodes:AStarshipExpr:parser_nodes#ANode#parent= */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__init, /* pointer to parser_nodes:AStarshipExpr:parser_nodes#ANode#init */
-(nitmethod_t)VIRTUAL_parser_prod__AStarshipExpr__replace_child, /* pointer to parser_nodes:AStarshipExpr:parser_prod#AStarshipExpr#replace_child */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__detach, /* pointer to parser_nodes:AStarshipExpr:parser_nodes#ANode#detach */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__replace_with, /* pointer to parser_nodes:AStarshipExpr:parser_nodes#Prod#replace_with */
-(nitmethod_t)VIRTUAL_parser_prod__AStarshipExpr__visit_all, /* pointer to parser_nodes:AStarshipExpr:parser_prod#AStarshipExpr#visit_all */
-(nitmethod_t)VIRTUAL_parser_util__ANode__collect_tokens_by_text, /* pointer to parser_nodes:AStarshipExpr:parser_util#ANode#collect_tokens_by_text */
-(nitmethod_t)VIRTUAL_parser_util__ANode__collect_annotations_by_name, /* pointer to parser_nodes:AStarshipExpr:parser_util#ANode#collect_annotations_by_name */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__accept_simple_misc, /* pointer to parser_nodes:AStarshipExpr:simple_misc_analysis#ANode#accept_simple_misc */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__after_simple_misc, /* pointer to parser_nodes:AStarshipExpr:simple_misc_analysis#ANode#after_simple_misc */
-(nitmethod_t)VIRTUAL_literal__ANode__accept_literal, /* pointer to parser_nodes:AStarshipExpr:literal#ANode#accept_literal */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__accept_scope_visitor, /* pointer to parser_nodes:AStarshipExpr:scope#ASendExpr#accept_scope_visitor */
-(nitmethod_t)VIRTUAL_flow__ANode__accept_flow_visitor, /* pointer to parser_nodes:AStarshipExpr:flow#ANode#accept_flow_visitor */
-(nitmethod_t)VIRTUAL_local_var_init__ANode__accept_local_var_visitor, /* pointer to parser_nodes:AStarshipExpr:local_var_init#ANode#accept_local_var_visitor */
-(nitmethod_t)VIRTUAL_auto_super_init__ASendExpr__accept_auto_super_init, /* pointer to parser_nodes:AStarshipExpr:auto_super_init#ASendExpr#accept_auto_super_init */
-(nitmethod_t)VIRTUAL_rapid_type_analysis__ASendExpr__accept_rapid_type_visitor, /* pointer to parser_nodes:AStarshipExpr:rapid_type_analysis#ASendExpr#accept_rapid_type_visitor */
-(nitmethod_t)VIRTUAL_astvalidation__AExpr__accept_ast_validation, /* pointer to parser_nodes:AStarshipExpr:astvalidation#AExpr#accept_ast_validation */
-(nitmethod_t)VIRTUAL_transform__ANode__accept_transform_visitor, /* pointer to parser_nodes:AStarshipExpr:transform#ANode#accept_transform_visitor */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__location_61d, /* pointer to parser_nodes:AStarshipExpr:parser_nodes#Prod#location= */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations, /* pointer to parser_nodes:AStarshipExpr:parser_nodes#Prod#n_annotations */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations_61d, /* pointer to parser_nodes:AStarshipExpr:parser_nodes#Prod#n_annotations= */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__init, /* pointer to parser_nodes:AStarshipExpr:parser_nodes#Prod#init */
-(nitmethod_t)VIRTUAL_modelize_property__Prod__collect_text, /* pointer to parser_nodes:AStarshipExpr:modelize_property#Prod#collect_text */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__replace_with, /* pointer to parser_nodes:AStarshipExpr:parser_nodes#ANode#replace_with */
-(nitmethod_t)VIRTUAL_parser_nodes__AExpr__init, /* pointer to parser_nodes:AStarshipExpr:parser_nodes#AExpr#init */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__AExpr__warn_parentheses, /* pointer to parser_nodes:AStarshipExpr:simple_misc_analysis#AExpr#warn_parentheses */
-(nitmethod_t)VIRTUAL_flow__AExpr__after_flow_context, /* pointer to parser_nodes:AStarshipExpr:flow#AExpr#after_flow_context */
-(nitmethod_t)VIRTUAL_flow__AExpr__after_flow_context_61d, /* pointer to parser_nodes:AStarshipExpr:flow#AExpr#after_flow_context= */
-(nitmethod_t)VIRTUAL_typing__AExpr__mtype, /* pointer to parser_nodes:AStarshipExpr:typing#AExpr#mtype */
-(nitmethod_t)VIRTUAL_typing__AExpr__mtype_61d, /* pointer to parser_nodes:AStarshipExpr:typing#AExpr#mtype= */
-(nitmethod_t)VIRTUAL_typing__AExpr__is_typed, /* pointer to parser_nodes:AStarshipExpr:typing#AExpr#is_typed */
-(nitmethod_t)VIRTUAL_typing__AExpr__is_typed_61d, /* pointer to parser_nodes:AStarshipExpr:typing#AExpr#is_typed= */
-(nitmethod_t)VIRTUAL_typing__AExpr__implicit_cast_to, /* pointer to parser_nodes:AStarshipExpr:typing#AExpr#implicit_cast_to */
-(nitmethod_t)VIRTUAL_typing__AExpr__implicit_cast_to_61d, /* pointer to parser_nodes:AStarshipExpr:typing#AExpr#implicit_cast_to= */
-(nitmethod_t)VIRTUAL_typing__AExpr__its_variable, /* pointer to parser_nodes:AStarshipExpr:typing#AExpr#its_variable */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__accept_typing, /* pointer to parser_nodes:AStarshipExpr:typing#ASendExpr#accept_typing */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__make_var_read, /* pointer to parser_nodes:AStarshipExpr:astbuilder#AExpr#make_var_read */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__variable_cache, /* pointer to parser_nodes:AStarshipExpr:astbuilder#AExpr#variable_cache */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__variable_cache_61d, /* pointer to parser_nodes:AStarshipExpr:astbuilder#AExpr#variable_cache= */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__detach_with_placeholder, /* pointer to parser_nodes:AStarshipExpr:astbuilder#AExpr#detach_with_placeholder */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__add, /* pointer to parser_nodes:AStarshipExpr:astbuilder#AExpr#add */
-(nitmethod_t)VIRTUAL_abstract_compiler__ASendExpr__expr, /* pointer to parser_nodes:AStarshipExpr:abstract_compiler#ASendExpr#expr */
-(nitmethod_t)VIRTUAL_abstract_compiler__AExpr__stmt, /* pointer to parser_nodes:AStarshipExpr:abstract_compiler#AExpr#stmt */
-(nitmethod_t)VIRTUAL_astvalidation__ANode__accept_ast_validation, /* pointer to parser_nodes:AStarshipExpr:astvalidation#ANode#accept_ast_validation */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-(nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__n_expr, /* pointer to parser_nodes:AStarshipExpr:parser_nodes#ASendExpr#n_expr */
-(nitmethod_t)VIRTUAL_parser_prod__AStarshipExpr__n_expr_61d, /* pointer to parser_nodes:AStarshipExpr:parser_prod#AStarshipExpr#n_expr= */
-(nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__n_closure_defs, /* pointer to parser_nodes:AStarshipExpr:parser_nodes#ASendExpr#n_closure_defs */
-(nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__init, /* pointer to parser_nodes:AStarshipExpr:parser_nodes#ASendExpr#init */
-(nitmethod_t)VIRTUAL_parser_prod__ASendExpr__empty_init, /* pointer to parser_nodes:AStarshipExpr:parser_prod#ASendExpr#empty_init */
-(nitmethod_t)VIRTUAL_parser_prod__ASendExpr__init_asendexpr, /* pointer to parser_nodes:AStarshipExpr:parser_prod#ASendExpr#init_asendexpr */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__escapemark, /* pointer to parser_nodes:AStarshipExpr:scope#ASendExpr#escapemark */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__escapemark_61d, /* pointer to parser_nodes:AStarshipExpr:scope#ASendExpr#escapemark= */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__mproperty, /* pointer to parser_nodes:AStarshipExpr:typing#ASendExpr#mproperty */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__callsite, /* pointer to parser_nodes:AStarshipExpr:typing#ASendExpr#callsite */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__callsite_61d, /* pointer to parser_nodes:AStarshipExpr:typing#ASendExpr#callsite= */
-(nitmethod_t)VIRTUAL_typing__AStarshipExpr__property_name, /* pointer to parser_nodes:AStarshipExpr:typing#AStarshipExpr#property_name */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__raw_arguments, /* pointer to parser_nodes:AStarshipExpr:typing#ASendExpr#raw_arguments */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__raw_arguments_61d, /* pointer to parser_nodes:AStarshipExpr:typing#ASendExpr#raw_arguments= */
-(nitmethod_t)VIRTUAL_typing__ABinopExpr__compute_raw_arguments, /* pointer to parser_nodes:AStarshipExpr:typing#ABinopExpr#compute_raw_arguments */
-(nitmethod_t)VIRTUAL_scope__ANode__accept_scope_visitor, /* pointer to parser_nodes:AStarshipExpr:scope#ANode#accept_scope_visitor */
-(nitmethod_t)VIRTUAL_parser_nodes__ABinopExpr__n_expr2, /* pointer to parser_nodes:AStarshipExpr:parser_nodes#ABinopExpr#n_expr2 */
-(nitmethod_t)VIRTUAL_parser_prod__AStarshipExpr__n_expr2_61d, /* pointer to parser_nodes:AStarshipExpr:parser_prod#AStarshipExpr#n_expr2= */
-(nitmethod_t)VIRTUAL_parser_nodes__ABinopExpr__init, /* pointer to parser_nodes:AStarshipExpr:parser_nodes#ABinopExpr#init */
-(nitmethod_t)VIRTUAL_parser_prod__ABinopExpr__empty_init, /* pointer to parser_nodes:AStarshipExpr:parser_prod#ABinopExpr#empty_init */
-(nitmethod_t)VIRTUAL_parser_prod__ABinopExpr__init_abinopexpr, /* pointer to parser_nodes:AStarshipExpr:parser_prod#ABinopExpr#init_abinopexpr */
-(nitmethod_t)VIRTUAL_parser_nodes__AStarshipExpr__init, /* pointer to parser_nodes:AStarshipExpr:parser_nodes#AStarshipExpr#init */
-(nitmethod_t)VIRTUAL_parser_prod__AStarshipExpr__empty_init, /* pointer to parser_nodes:AStarshipExpr:parser_prod#AStarshipExpr#empty_init */
-(nitmethod_t)VIRTUAL_parser_prod__AStarshipExpr__init_astarshipexpr, /* pointer to parser_nodes:AStarshipExpr:parser_prod#AStarshipExpr#init_astarshipexpr */
-}
-};
-/* allocate AStarshipExpr */
-val* NEW_parser_nodes__AStarshipExpr(const struct type* type) {
-val* self /* : AStarshipExpr */;
-val* var /* : null */;
-val* var1 /* : null */;
-val* var2 /* : null */;
-val* var3 /* : null */;
-short int var4 /* : Bool */;
-val* var5 /* : null */;
-val* var6 /* : ANodes[AClosureDef] */;
-self = nit_alloc(sizeof(struct instance) + 19*sizeof(nitattribute_t));
-self->type = type;
-self->class = &class_parser_nodes__AStarshipExpr;
-var = NULL;
-self->attrs[COLOR_parser_nodes__ANode___location].val = var; /* _location on <self:AStarshipExpr exact> */
-var1 = NULL;
-self->attrs[COLOR_parser_nodes__ANode___64dparent].val = var1; /* @parent on <self:AStarshipExpr exact> */
-var2 = NULL;
-self->attrs[COLOR_parser_nodes__Prod___n_annotations].val = var2; /* _n_annotations on <self:AStarshipExpr exact> */
-var3 = NULL;
-self->attrs[COLOR_typing__AExpr___64dmtype].val = var3; /* @mtype on <self:AStarshipExpr exact> */
-var4 = 0;
-self->attrs[COLOR_typing__AExpr___64dis_typed].s = var4; /* @is_typed on <self:AStarshipExpr exact> */
-var5 = NULL;
-self->attrs[COLOR_typing__AExpr___64dimplicit_cast_to].val = var5; /* @implicit_cast_to on <self:AStarshipExpr exact> */
-var6 = NEW_parser_nodes__ANodes(&type_parser_nodes__ANodesparser_nodes__AClosureDef);
-((void (*)(val*, val*))(var6->class->vft[COLOR_parser_nodes__ANodes__init]))(var6, self) /* init on <var6:ANodes[AClosureDef]>*/;
-CHECK_NEW_parser_nodes__ANodes(var6);
-self->attrs[COLOR_parser_nodes__ASendExpr___n_closure_defs].val = var6; /* _n_closure_defs on <self:AStarshipExpr exact> */
-return self;
-}
-/* allocate AStarshipExpr */
-void CHECK_NEW_parser_nodes__AStarshipExpr(val* self) {
-val* var /* : nullable Location */;
-val* var1 /* : nullable FlowContext */;
-val* var2 /* : nullable Variable */;
-val* var3 /* : AExpr */;
-val* var4 /* : nullable EscapeMark */;
-val* var5 /* : nullable CallSite */;
-val* var6 /* : nullable Array[AExpr] */;
-val* var7 /* : AExpr */;
-var = self->attrs[COLOR_parser__Prod___first_location].val; /* _first_location on <self:AStarshipExpr> */
-var1 = self->attrs[COLOR_flow__AExpr___64dafter_flow_context].val; /* @after_flow_context on <self:AStarshipExpr> */
-var2 = self->attrs[COLOR_astbuilder__AExpr___64dvariable_cache].val; /* @variable_cache on <self:AStarshipExpr> */
-var3 = self->attrs[COLOR_parser_nodes__ASendExpr___n_expr].val; /* _n_expr on <self:AStarshipExpr> */
-if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr", "src/parser/parser_nodes.nit", 1182);
-exit(1);
-}
-var4 = self->attrs[COLOR_scope__ASendExpr___64descapemark].val; /* @escapemark on <self:AStarshipExpr> */
-var5 = self->attrs[COLOR_typing__ASendExpr___64dcallsite].val; /* @callsite on <self:AStarshipExpr> */
-var6 = self->attrs[COLOR_typing__ASendExpr___64draw_arguments].val; /* @raw_arguments on <self:AStarshipExpr> */
-var7 = self->attrs[COLOR_parser_nodes__ABinopExpr___n_expr2].val; /* _n_expr2 on <self:AStarshipExpr> */
-if (var7 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr2", "src/parser/parser_nodes.nit", 1190);
-exit(1);
-}
-}
-/* runtime class parser_nodes__AStarExpr */
-const struct class class_parser_nodes__AStarExpr = {
-0, /* box_kind */
-{
-(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:AStarExpr:kernel#Object#object_id */
-(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:AStarExpr:kernel#Object#is_same_type */
-(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:AStarExpr:kernel#Object#== */
-(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:AStarExpr:kernel#Object#!= */
-(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:AStarExpr:kernel#Object#output */
-(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to parser_nodes:AStarExpr:kernel#Object#output_class_name */
-(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to parser_nodes:AStarExpr:kernel#Object#exit */
-(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to parser_nodes:AStarExpr:kernel#Object#sys */
-(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to parser_nodes:AStarExpr:kernel#Object#hash */
-(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to parser_nodes:AStarExpr:string#Object#to_s */
-(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to parser_nodes:AStarExpr:string#Object#native_class_name */
-(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to parser_nodes:AStarExpr:string#Object#class_name */
-(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to parser_nodes:AStarExpr:string#Object#inspect */
-(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to parser_nodes:AStarExpr:string#Object#inspect_head */
-(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to parser_nodes:AStarExpr:string#Object#args */
-(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to parser_nodes:AStarExpr:math#Object#atan2 */
-(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to parser_nodes:AStarExpr:math#Object#pi */
-(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to parser_nodes:AStarExpr:math#Object#srand_from */
-(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to parser_nodes:AStarExpr:math#Object#srand */
-(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to parser_nodes:AStarExpr:stream#Object#poll */
-(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to parser_nodes:AStarExpr:stream#Object#intern_poll */
-(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to parser_nodes:AStarExpr:time#Object#get_time */
-(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to parser_nodes:AStarExpr:file#Object#printn */
-(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to parser_nodes:AStarExpr:file#Object#print */
-(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to parser_nodes:AStarExpr:file#Object#getc */
-(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to parser_nodes:AStarExpr:file#Object#gets */
-(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to parser_nodes:AStarExpr:file#Object#getcwd */
-(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to parser_nodes:AStarExpr:file#Object#file_getcwd */
-(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to parser_nodes:AStarExpr:file#Object#stdin */
-(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to parser_nodes:AStarExpr:file#Object#stdout */
-(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to parser_nodes:AStarExpr:file#Object#stderr */
-(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to parser_nodes:AStarExpr:model_base#Object#intrude_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to parser_nodes:AStarExpr:model_base#Object#public_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to parser_nodes:AStarExpr:model_base#Object#protected_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to parser_nodes:AStarExpr:model_base#Object#private_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to parser_nodes:AStarExpr:model_base#Object#none_visibility */
-(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to parser_nodes:AStarExpr:model#Object#abstract_kind */
-(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to parser_nodes:AStarExpr:model#Object#concrete_kind */
-(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to parser_nodes:AStarExpr:model#Object#interface_kind */
-(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to parser_nodes:AStarExpr:model#Object#enum_kind */
-(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to parser_nodes:AStarExpr:model#Object#extern_kind */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__location, /* pointer to parser_nodes:AStarExpr:parser_nodes#ANode#location */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__hot_location, /* pointer to parser_nodes:AStarExpr:parser_nodes#ANode#hot_location */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__debug, /* pointer to parser_nodes:AStarExpr:parser_nodes#ANode#debug */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent, /* pointer to parser_nodes:AStarExpr:parser_nodes#ANode#parent */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent_61d, /* pointer to parser_nodes:AStarExpr:parser_nodes#ANode#parent= */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__init, /* pointer to parser_nodes:AStarExpr:parser_nodes#ANode#init */
-(nitmethod_t)VIRTUAL_parser_prod__AStarExpr__replace_child, /* pointer to parser_nodes:AStarExpr:parser_prod#AStarExpr#replace_child */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__detach, /* pointer to parser_nodes:AStarExpr:parser_nodes#ANode#detach */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__replace_with, /* pointer to parser_nodes:AStarExpr:parser_nodes#Prod#replace_with */
-(nitmethod_t)VIRTUAL_parser_prod__AStarExpr__visit_all, /* pointer to parser_nodes:AStarExpr:parser_prod#AStarExpr#visit_all */
-(nitmethod_t)VIRTUAL_parser_util__ANode__collect_tokens_by_text, /* pointer to parser_nodes:AStarExpr:parser_util#ANode#collect_tokens_by_text */
-(nitmethod_t)VIRTUAL_parser_util__ANode__collect_annotations_by_name, /* pointer to parser_nodes:AStarExpr:parser_util#ANode#collect_annotations_by_name */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__accept_simple_misc, /* pointer to parser_nodes:AStarExpr:simple_misc_analysis#ANode#accept_simple_misc */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__after_simple_misc, /* pointer to parser_nodes:AStarExpr:simple_misc_analysis#ANode#after_simple_misc */
-(nitmethod_t)VIRTUAL_literal__ANode__accept_literal, /* pointer to parser_nodes:AStarExpr:literal#ANode#accept_literal */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__accept_scope_visitor, /* pointer to parser_nodes:AStarExpr:scope#ASendExpr#accept_scope_visitor */
-(nitmethod_t)VIRTUAL_flow__ANode__accept_flow_visitor, /* pointer to parser_nodes:AStarExpr:flow#ANode#accept_flow_visitor */
-(nitmethod_t)VIRTUAL_local_var_init__ANode__accept_local_var_visitor, /* pointer to parser_nodes:AStarExpr:local_var_init#ANode#accept_local_var_visitor */
-(nitmethod_t)VIRTUAL_auto_super_init__ASendExpr__accept_auto_super_init, /* pointer to parser_nodes:AStarExpr:auto_super_init#ASendExpr#accept_auto_super_init */
-(nitmethod_t)VIRTUAL_rapid_type_analysis__ASendExpr__accept_rapid_type_visitor, /* pointer to parser_nodes:AStarExpr:rapid_type_analysis#ASendExpr#accept_rapid_type_visitor */
-(nitmethod_t)VIRTUAL_astvalidation__AExpr__accept_ast_validation, /* pointer to parser_nodes:AStarExpr:astvalidation#AExpr#accept_ast_validation */
-(nitmethod_t)VIRTUAL_transform__ANode__accept_transform_visitor, /* pointer to parser_nodes:AStarExpr:transform#ANode#accept_transform_visitor */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__location_61d, /* pointer to parser_nodes:AStarExpr:parser_nodes#Prod#location= */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations, /* pointer to parser_nodes:AStarExpr:parser_nodes#Prod#n_annotations */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations_61d, /* pointer to parser_nodes:AStarExpr:parser_nodes#Prod#n_annotations= */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__init, /* pointer to parser_nodes:AStarExpr:parser_nodes#Prod#init */
-(nitmethod_t)VIRTUAL_modelize_property__Prod__collect_text, /* pointer to parser_nodes:AStarExpr:modelize_property#Prod#collect_text */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__replace_with, /* pointer to parser_nodes:AStarExpr:parser_nodes#ANode#replace_with */
-(nitmethod_t)VIRTUAL_parser_nodes__AExpr__init, /* pointer to parser_nodes:AStarExpr:parser_nodes#AExpr#init */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__AExpr__warn_parentheses, /* pointer to parser_nodes:AStarExpr:simple_misc_analysis#AExpr#warn_parentheses */
-(nitmethod_t)VIRTUAL_flow__AExpr__after_flow_context, /* pointer to parser_nodes:AStarExpr:flow#AExpr#after_flow_context */
-(nitmethod_t)VIRTUAL_flow__AExpr__after_flow_context_61d, /* pointer to parser_nodes:AStarExpr:flow#AExpr#after_flow_context= */
-(nitmethod_t)VIRTUAL_typing__AExpr__mtype, /* pointer to parser_nodes:AStarExpr:typing#AExpr#mtype */
-(nitmethod_t)VIRTUAL_typing__AExpr__mtype_61d, /* pointer to parser_nodes:AStarExpr:typing#AExpr#mtype= */
-(nitmethod_t)VIRTUAL_typing__AExpr__is_typed, /* pointer to parser_nodes:AStarExpr:typing#AExpr#is_typed */
-(nitmethod_t)VIRTUAL_typing__AExpr__is_typed_61d, /* pointer to parser_nodes:AStarExpr:typing#AExpr#is_typed= */
-(nitmethod_t)VIRTUAL_typing__AExpr__implicit_cast_to, /* pointer to parser_nodes:AStarExpr:typing#AExpr#implicit_cast_to */
-(nitmethod_t)VIRTUAL_typing__AExpr__implicit_cast_to_61d, /* pointer to parser_nodes:AStarExpr:typing#AExpr#implicit_cast_to= */
-(nitmethod_t)VIRTUAL_typing__AExpr__its_variable, /* pointer to parser_nodes:AStarExpr:typing#AExpr#its_variable */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__accept_typing, /* pointer to parser_nodes:AStarExpr:typing#ASendExpr#accept_typing */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__make_var_read, /* pointer to parser_nodes:AStarExpr:astbuilder#AExpr#make_var_read */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__variable_cache, /* pointer to parser_nodes:AStarExpr:astbuilder#AExpr#variable_cache */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__variable_cache_61d, /* pointer to parser_nodes:AStarExpr:astbuilder#AExpr#variable_cache= */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__detach_with_placeholder, /* pointer to parser_nodes:AStarExpr:astbuilder#AExpr#detach_with_placeholder */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__add, /* pointer to parser_nodes:AStarExpr:astbuilder#AExpr#add */
-(nitmethod_t)VIRTUAL_abstract_compiler__ASendExpr__expr, /* pointer to parser_nodes:AStarExpr:abstract_compiler#ASendExpr#expr */
-(nitmethod_t)VIRTUAL_abstract_compiler__AExpr__stmt, /* pointer to parser_nodes:AStarExpr:abstract_compiler#AExpr#stmt */
-(nitmethod_t)VIRTUAL_astvalidation__ANode__accept_ast_validation, /* pointer to parser_nodes:AStarExpr:astvalidation#ANode#accept_ast_validation */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-(nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__n_expr, /* pointer to parser_nodes:AStarExpr:parser_nodes#ASendExpr#n_expr */
-(nitmethod_t)VIRTUAL_parser_prod__AStarExpr__n_expr_61d, /* pointer to parser_nodes:AStarExpr:parser_prod#AStarExpr#n_expr= */
-(nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__n_closure_defs, /* pointer to parser_nodes:AStarExpr:parser_nodes#ASendExpr#n_closure_defs */
-(nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__init, /* pointer to parser_nodes:AStarExpr:parser_nodes#ASendExpr#init */
-(nitmethod_t)VIRTUAL_parser_prod__ASendExpr__empty_init, /* pointer to parser_nodes:AStarExpr:parser_prod#ASendExpr#empty_init */
-(nitmethod_t)VIRTUAL_parser_prod__ASendExpr__init_asendexpr, /* pointer to parser_nodes:AStarExpr:parser_prod#ASendExpr#init_asendexpr */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__escapemark, /* pointer to parser_nodes:AStarExpr:scope#ASendExpr#escapemark */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__escapemark_61d, /* pointer to parser_nodes:AStarExpr:scope#ASendExpr#escapemark= */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__mproperty, /* pointer to parser_nodes:AStarExpr:typing#ASendExpr#mproperty */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__callsite, /* pointer to parser_nodes:AStarExpr:typing#ASendExpr#callsite */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__callsite_61d, /* pointer to parser_nodes:AStarExpr:typing#ASendExpr#callsite= */
-(nitmethod_t)VIRTUAL_typing__AStarExpr__property_name, /* pointer to parser_nodes:AStarExpr:typing#AStarExpr#property_name */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__raw_arguments, /* pointer to parser_nodes:AStarExpr:typing#ASendExpr#raw_arguments */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__raw_arguments_61d, /* pointer to parser_nodes:AStarExpr:typing#ASendExpr#raw_arguments= */
-(nitmethod_t)VIRTUAL_typing__ABinopExpr__compute_raw_arguments, /* pointer to parser_nodes:AStarExpr:typing#ABinopExpr#compute_raw_arguments */
-(nitmethod_t)VIRTUAL_scope__ANode__accept_scope_visitor, /* pointer to parser_nodes:AStarExpr:scope#ANode#accept_scope_visitor */
-(nitmethod_t)VIRTUAL_parser_nodes__ABinopExpr__n_expr2, /* pointer to parser_nodes:AStarExpr:parser_nodes#ABinopExpr#n_expr2 */
-(nitmethod_t)VIRTUAL_parser_prod__AStarExpr__n_expr2_61d, /* pointer to parser_nodes:AStarExpr:parser_prod#AStarExpr#n_expr2= */
-(nitmethod_t)VIRTUAL_parser_nodes__ABinopExpr__init, /* pointer to parser_nodes:AStarExpr:parser_nodes#ABinopExpr#init */
-(nitmethod_t)VIRTUAL_parser_prod__ABinopExpr__empty_init, /* pointer to parser_nodes:AStarExpr:parser_prod#ABinopExpr#empty_init */
-(nitmethod_t)VIRTUAL_parser_prod__ABinopExpr__init_abinopexpr, /* pointer to parser_nodes:AStarExpr:parser_prod#ABinopExpr#init_abinopexpr */
-(nitmethod_t)VIRTUAL_parser_nodes__AStarExpr__init, /* pointer to parser_nodes:AStarExpr:parser_nodes#AStarExpr#init */
-(nitmethod_t)VIRTUAL_parser_prod__AStarExpr__empty_init, /* pointer to parser_nodes:AStarExpr:parser_prod#AStarExpr#empty_init */
-(nitmethod_t)VIRTUAL_parser_prod__AStarExpr__init_astarexpr, /* pointer to parser_nodes:AStarExpr:parser_prod#AStarExpr#init_astarexpr */
-}
-};
-/* allocate AStarExpr */
-val* NEW_parser_nodes__AStarExpr(const struct type* type) {
-val* self /* : AStarExpr */;
-val* var /* : null */;
-val* var1 /* : null */;
-val* var2 /* : null */;
-val* var3 /* : null */;
-short int var4 /* : Bool */;
-val* var5 /* : null */;
-val* var6 /* : ANodes[AClosureDef] */;
-self = nit_alloc(sizeof(struct instance) + 19*sizeof(nitattribute_t));
-self->type = type;
-self->class = &class_parser_nodes__AStarExpr;
-var = NULL;
-self->attrs[COLOR_parser_nodes__ANode___location].val = var; /* _location on <self:AStarExpr exact> */
-var1 = NULL;
-self->attrs[COLOR_parser_nodes__ANode___64dparent].val = var1; /* @parent on <self:AStarExpr exact> */
-var2 = NULL;
-self->attrs[COLOR_parser_nodes__Prod___n_annotations].val = var2; /* _n_annotations on <self:AStarExpr exact> */
-var3 = NULL;
-self->attrs[COLOR_typing__AExpr___64dmtype].val = var3; /* @mtype on <self:AStarExpr exact> */
-var4 = 0;
-self->attrs[COLOR_typing__AExpr___64dis_typed].s = var4; /* @is_typed on <self:AStarExpr exact> */
-var5 = NULL;
-self->attrs[COLOR_typing__AExpr___64dimplicit_cast_to].val = var5; /* @implicit_cast_to on <self:AStarExpr exact> */
-var6 = NEW_parser_nodes__ANodes(&type_parser_nodes__ANodesparser_nodes__AClosureDef);
-((void (*)(val*, val*))(var6->class->vft[COLOR_parser_nodes__ANodes__init]))(var6, self) /* init on <var6:ANodes[AClosureDef]>*/;
-CHECK_NEW_parser_nodes__ANodes(var6);
-self->attrs[COLOR_parser_nodes__ASendExpr___n_closure_defs].val = var6; /* _n_closure_defs on <self:AStarExpr exact> */
-return self;
-}
-/* allocate AStarExpr */
-void CHECK_NEW_parser_nodes__AStarExpr(val* self) {
-val* var /* : nullable Location */;
-val* var1 /* : nullable FlowContext */;
-val* var2 /* : nullable Variable */;
-val* var3 /* : AExpr */;
-val* var4 /* : nullable EscapeMark */;
-val* var5 /* : nullable CallSite */;
-val* var6 /* : nullable Array[AExpr] */;
-val* var7 /* : AExpr */;
-var = self->attrs[COLOR_parser__Prod___first_location].val; /* _first_location on <self:AStarExpr> */
-var1 = self->attrs[COLOR_flow__AExpr___64dafter_flow_context].val; /* @after_flow_context on <self:AStarExpr> */
-var2 = self->attrs[COLOR_astbuilder__AExpr___64dvariable_cache].val; /* @variable_cache on <self:AStarExpr> */
-var3 = self->attrs[COLOR_parser_nodes__ASendExpr___n_expr].val; /* _n_expr on <self:AStarExpr> */
-if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr", "src/parser/parser_nodes.nit", 1182);
-exit(1);
-}
-var4 = self->attrs[COLOR_scope__ASendExpr___64descapemark].val; /* @escapemark on <self:AStarExpr> */
-var5 = self->attrs[COLOR_typing__ASendExpr___64dcallsite].val; /* @callsite on <self:AStarExpr> */
-var6 = self->attrs[COLOR_typing__ASendExpr___64draw_arguments].val; /* @raw_arguments on <self:AStarExpr> */
-var7 = self->attrs[COLOR_parser_nodes__ABinopExpr___n_expr2].val; /* _n_expr2 on <self:AStarExpr> */
-if (var7 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr2", "src/parser/parser_nodes.nit", 1190);
-exit(1);
-}
-}
-/* runtime class parser_nodes__ASlashExpr */
-const struct class class_parser_nodes__ASlashExpr = {
-0, /* box_kind */
-{
-(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:ASlashExpr:kernel#Object#object_id */
-(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:ASlashExpr:kernel#Object#is_same_type */
-(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:ASlashExpr:kernel#Object#== */
-(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:ASlashExpr:kernel#Object#!= */
-(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:ASlashExpr:kernel#Object#output */
-(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to parser_nodes:ASlashExpr:kernel#Object#output_class_name */
-(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to parser_nodes:ASlashExpr:kernel#Object#exit */
-(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to parser_nodes:ASlashExpr:kernel#Object#sys */
-(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to parser_nodes:ASlashExpr:kernel#Object#hash */
-(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to parser_nodes:ASlashExpr:string#Object#to_s */
-(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to parser_nodes:ASlashExpr:string#Object#native_class_name */
-(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to parser_nodes:ASlashExpr:string#Object#class_name */
-(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to parser_nodes:ASlashExpr:string#Object#inspect */
-(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to parser_nodes:ASlashExpr:string#Object#inspect_head */
-(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to parser_nodes:ASlashExpr:string#Object#args */
-(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to parser_nodes:ASlashExpr:math#Object#atan2 */
-(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to parser_nodes:ASlashExpr:math#Object#pi */
-(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to parser_nodes:ASlashExpr:math#Object#srand_from */
-(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to parser_nodes:ASlashExpr:math#Object#srand */
-(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to parser_nodes:ASlashExpr:stream#Object#poll */
-(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to parser_nodes:ASlashExpr:stream#Object#intern_poll */
-(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to parser_nodes:ASlashExpr:time#Object#get_time */
-(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to parser_nodes:ASlashExpr:file#Object#printn */
-(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to parser_nodes:ASlashExpr:file#Object#print */
-(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to parser_nodes:ASlashExpr:file#Object#getc */
-(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to parser_nodes:ASlashExpr:file#Object#gets */
-(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to parser_nodes:ASlashExpr:file#Object#getcwd */
-(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to parser_nodes:ASlashExpr:file#Object#file_getcwd */
-(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to parser_nodes:ASlashExpr:file#Object#stdin */
-(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to parser_nodes:ASlashExpr:file#Object#stdout */
-(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to parser_nodes:ASlashExpr:file#Object#stderr */
-(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to parser_nodes:ASlashExpr:model_base#Object#intrude_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to parser_nodes:ASlashExpr:model_base#Object#public_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to parser_nodes:ASlashExpr:model_base#Object#protected_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to parser_nodes:ASlashExpr:model_base#Object#private_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to parser_nodes:ASlashExpr:model_base#Object#none_visibility */
-(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to parser_nodes:ASlashExpr:model#Object#abstract_kind */
-(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to parser_nodes:ASlashExpr:model#Object#concrete_kind */
-(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to parser_nodes:ASlashExpr:model#Object#interface_kind */
-(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to parser_nodes:ASlashExpr:model#Object#enum_kind */
-(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to parser_nodes:ASlashExpr:model#Object#extern_kind */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__location, /* pointer to parser_nodes:ASlashExpr:parser_nodes#ANode#location */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__hot_location, /* pointer to parser_nodes:ASlashExpr:parser_nodes#ANode#hot_location */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__debug, /* pointer to parser_nodes:ASlashExpr:parser_nodes#ANode#debug */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent, /* pointer to parser_nodes:ASlashExpr:parser_nodes#ANode#parent */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent_61d, /* pointer to parser_nodes:ASlashExpr:parser_nodes#ANode#parent= */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__init, /* pointer to parser_nodes:ASlashExpr:parser_nodes#ANode#init */
-(nitmethod_t)VIRTUAL_parser_prod__ASlashExpr__replace_child, /* pointer to parser_nodes:ASlashExpr:parser_prod#ASlashExpr#replace_child */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__detach, /* pointer to parser_nodes:ASlashExpr:parser_nodes#ANode#detach */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__replace_with, /* pointer to parser_nodes:ASlashExpr:parser_nodes#Prod#replace_with */
-(nitmethod_t)VIRTUAL_parser_prod__ASlashExpr__visit_all, /* pointer to parser_nodes:ASlashExpr:parser_prod#ASlashExpr#visit_all */
-(nitmethod_t)VIRTUAL_parser_util__ANode__collect_tokens_by_text, /* pointer to parser_nodes:ASlashExpr:parser_util#ANode#collect_tokens_by_text */
-(nitmethod_t)VIRTUAL_parser_util__ANode__collect_annotations_by_name, /* pointer to parser_nodes:ASlashExpr:parser_util#ANode#collect_annotations_by_name */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__accept_simple_misc, /* pointer to parser_nodes:ASlashExpr:simple_misc_analysis#ANode#accept_simple_misc */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__after_simple_misc, /* pointer to parser_nodes:ASlashExpr:simple_misc_analysis#ANode#after_simple_misc */
-(nitmethod_t)VIRTUAL_literal__ANode__accept_literal, /* pointer to parser_nodes:ASlashExpr:literal#ANode#accept_literal */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__accept_scope_visitor, /* pointer to parser_nodes:ASlashExpr:scope#ASendExpr#accept_scope_visitor */
-(nitmethod_t)VIRTUAL_flow__ANode__accept_flow_visitor, /* pointer to parser_nodes:ASlashExpr:flow#ANode#accept_flow_visitor */
-(nitmethod_t)VIRTUAL_local_var_init__ANode__accept_local_var_visitor, /* pointer to parser_nodes:ASlashExpr:local_var_init#ANode#accept_local_var_visitor */
-(nitmethod_t)VIRTUAL_auto_super_init__ASendExpr__accept_auto_super_init, /* pointer to parser_nodes:ASlashExpr:auto_super_init#ASendExpr#accept_auto_super_init */
-(nitmethod_t)VIRTUAL_rapid_type_analysis__ASendExpr__accept_rapid_type_visitor, /* pointer to parser_nodes:ASlashExpr:rapid_type_analysis#ASendExpr#accept_rapid_type_visitor */
-(nitmethod_t)VIRTUAL_astvalidation__AExpr__accept_ast_validation, /* pointer to parser_nodes:ASlashExpr:astvalidation#AExpr#accept_ast_validation */
-(nitmethod_t)VIRTUAL_transform__ANode__accept_transform_visitor, /* pointer to parser_nodes:ASlashExpr:transform#ANode#accept_transform_visitor */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__location_61d, /* pointer to parser_nodes:ASlashExpr:parser_nodes#Prod#location= */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations, /* pointer to parser_nodes:ASlashExpr:parser_nodes#Prod#n_annotations */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations_61d, /* pointer to parser_nodes:ASlashExpr:parser_nodes#Prod#n_annotations= */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__init, /* pointer to parser_nodes:ASlashExpr:parser_nodes#Prod#init */
-(nitmethod_t)VIRTUAL_modelize_property__Prod__collect_text, /* pointer to parser_nodes:ASlashExpr:modelize_property#Prod#collect_text */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__replace_with, /* pointer to parser_nodes:ASlashExpr:parser_nodes#ANode#replace_with */
-(nitmethod_t)VIRTUAL_parser_nodes__AExpr__init, /* pointer to parser_nodes:ASlashExpr:parser_nodes#AExpr#init */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__AExpr__warn_parentheses, /* pointer to parser_nodes:ASlashExpr:simple_misc_analysis#AExpr#warn_parentheses */
-(nitmethod_t)VIRTUAL_flow__AExpr__after_flow_context, /* pointer to parser_nodes:ASlashExpr:flow#AExpr#after_flow_context */
-(nitmethod_t)VIRTUAL_flow__AExpr__after_flow_context_61d, /* pointer to parser_nodes:ASlashExpr:flow#AExpr#after_flow_context= */
-(nitmethod_t)VIRTUAL_typing__AExpr__mtype, /* pointer to parser_nodes:ASlashExpr:typing#AExpr#mtype */
-(nitmethod_t)VIRTUAL_typing__AExpr__mtype_61d, /* pointer to parser_nodes:ASlashExpr:typing#AExpr#mtype= */
-(nitmethod_t)VIRTUAL_typing__AExpr__is_typed, /* pointer to parser_nodes:ASlashExpr:typing#AExpr#is_typed */
-(nitmethod_t)VIRTUAL_typing__AExpr__is_typed_61d, /* pointer to parser_nodes:ASlashExpr:typing#AExpr#is_typed= */
-(nitmethod_t)VIRTUAL_typing__AExpr__implicit_cast_to, /* pointer to parser_nodes:ASlashExpr:typing#AExpr#implicit_cast_to */
-(nitmethod_t)VIRTUAL_typing__AExpr__implicit_cast_to_61d, /* pointer to parser_nodes:ASlashExpr:typing#AExpr#implicit_cast_to= */
-(nitmethod_t)VIRTUAL_typing__AExpr__its_variable, /* pointer to parser_nodes:ASlashExpr:typing#AExpr#its_variable */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__accept_typing, /* pointer to parser_nodes:ASlashExpr:typing#ASendExpr#accept_typing */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__make_var_read, /* pointer to parser_nodes:ASlashExpr:astbuilder#AExpr#make_var_read */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__variable_cache, /* pointer to parser_nodes:ASlashExpr:astbuilder#AExpr#variable_cache */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__variable_cache_61d, /* pointer to parser_nodes:ASlashExpr:astbuilder#AExpr#variable_cache= */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__detach_with_placeholder, /* pointer to parser_nodes:ASlashExpr:astbuilder#AExpr#detach_with_placeholder */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__add, /* pointer to parser_nodes:ASlashExpr:astbuilder#AExpr#add */
-(nitmethod_t)VIRTUAL_abstract_compiler__ASendExpr__expr, /* pointer to parser_nodes:ASlashExpr:abstract_compiler#ASendExpr#expr */
-(nitmethod_t)VIRTUAL_abstract_compiler__AExpr__stmt, /* pointer to parser_nodes:ASlashExpr:abstract_compiler#AExpr#stmt */
-(nitmethod_t)VIRTUAL_astvalidation__ANode__accept_ast_validation, /* pointer to parser_nodes:ASlashExpr:astvalidation#ANode#accept_ast_validation */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-(nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__n_expr, /* pointer to parser_nodes:ASlashExpr:parser_nodes#ASendExpr#n_expr */
-(nitmethod_t)VIRTUAL_parser_prod__ASlashExpr__n_expr_61d, /* pointer to parser_nodes:ASlashExpr:parser_prod#ASlashExpr#n_expr= */
-(nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__n_closure_defs, /* pointer to parser_nodes:ASlashExpr:parser_nodes#ASendExpr#n_closure_defs */
-(nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__init, /* pointer to parser_nodes:ASlashExpr:parser_nodes#ASendExpr#init */
-(nitmethod_t)VIRTUAL_parser_prod__ASendExpr__empty_init, /* pointer to parser_nodes:ASlashExpr:parser_prod#ASendExpr#empty_init */
-(nitmethod_t)VIRTUAL_parser_prod__ASendExpr__init_asendexpr, /* pointer to parser_nodes:ASlashExpr:parser_prod#ASendExpr#init_asendexpr */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__escapemark, /* pointer to parser_nodes:ASlashExpr:scope#ASendExpr#escapemark */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__escapemark_61d, /* pointer to parser_nodes:ASlashExpr:scope#ASendExpr#escapemark= */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__mproperty, /* pointer to parser_nodes:ASlashExpr:typing#ASendExpr#mproperty */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__callsite, /* pointer to parser_nodes:ASlashExpr:typing#ASendExpr#callsite */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__callsite_61d, /* pointer to parser_nodes:ASlashExpr:typing#ASendExpr#callsite= */
-(nitmethod_t)VIRTUAL_typing__ASlashExpr__property_name, /* pointer to parser_nodes:ASlashExpr:typing#ASlashExpr#property_name */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__raw_arguments, /* pointer to parser_nodes:ASlashExpr:typing#ASendExpr#raw_arguments */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__raw_arguments_61d, /* pointer to parser_nodes:ASlashExpr:typing#ASendExpr#raw_arguments= */
-(nitmethod_t)VIRTUAL_typing__ABinopExpr__compute_raw_arguments, /* pointer to parser_nodes:ASlashExpr:typing#ABinopExpr#compute_raw_arguments */
-(nitmethod_t)VIRTUAL_scope__ANode__accept_scope_visitor, /* pointer to parser_nodes:ASlashExpr:scope#ANode#accept_scope_visitor */
-(nitmethod_t)VIRTUAL_parser_nodes__ABinopExpr__n_expr2, /* pointer to parser_nodes:ASlashExpr:parser_nodes#ABinopExpr#n_expr2 */
-(nitmethod_t)VIRTUAL_parser_prod__ASlashExpr__n_expr2_61d, /* pointer to parser_nodes:ASlashExpr:parser_prod#ASlashExpr#n_expr2= */
-(nitmethod_t)VIRTUAL_parser_nodes__ABinopExpr__init, /* pointer to parser_nodes:ASlashExpr:parser_nodes#ABinopExpr#init */
-(nitmethod_t)VIRTUAL_parser_prod__ABinopExpr__empty_init, /* pointer to parser_nodes:ASlashExpr:parser_prod#ABinopExpr#empty_init */
-(nitmethod_t)VIRTUAL_parser_prod__ABinopExpr__init_abinopexpr, /* pointer to parser_nodes:ASlashExpr:parser_prod#ABinopExpr#init_abinopexpr */
-(nitmethod_t)VIRTUAL_parser_nodes__ASlashExpr__init, /* pointer to parser_nodes:ASlashExpr:parser_nodes#ASlashExpr#init */
-(nitmethod_t)VIRTUAL_parser_prod__ASlashExpr__empty_init, /* pointer to parser_nodes:ASlashExpr:parser_prod#ASlashExpr#empty_init */
-(nitmethod_t)VIRTUAL_parser_prod__ASlashExpr__init_aslashexpr, /* pointer to parser_nodes:ASlashExpr:parser_prod#ASlashExpr#init_aslashexpr */
-}
-};
-/* allocate ASlashExpr */
-val* NEW_parser_nodes__ASlashExpr(const struct type* type) {
-val* self /* : ASlashExpr */;
-val* var /* : null */;
-val* var1 /* : null */;
-val* var2 /* : null */;
-val* var3 /* : null */;
-short int var4 /* : Bool */;
-val* var5 /* : null */;
-val* var6 /* : ANodes[AClosureDef] */;
-self = nit_alloc(sizeof(struct instance) + 19*sizeof(nitattribute_t));
-self->type = type;
-self->class = &class_parser_nodes__ASlashExpr;
-var = NULL;
-self->attrs[COLOR_parser_nodes__ANode___location].val = var; /* _location on <self:ASlashExpr exact> */
-var1 = NULL;
-self->attrs[COLOR_parser_nodes__ANode___64dparent].val = var1; /* @parent on <self:ASlashExpr exact> */
-var2 = NULL;
-self->attrs[COLOR_parser_nodes__Prod___n_annotations].val = var2; /* _n_annotations on <self:ASlashExpr exact> */
-var3 = NULL;
-self->attrs[COLOR_typing__AExpr___64dmtype].val = var3; /* @mtype on <self:ASlashExpr exact> */
-var4 = 0;
-self->attrs[COLOR_typing__AExpr___64dis_typed].s = var4; /* @is_typed on <self:ASlashExpr exact> */
-var5 = NULL;
-self->attrs[COLOR_typing__AExpr___64dimplicit_cast_to].val = var5; /* @implicit_cast_to on <self:ASlashExpr exact> */
-var6 = NEW_parser_nodes__ANodes(&type_parser_nodes__ANodesparser_nodes__AClosureDef);
-((void (*)(val*, val*))(var6->class->vft[COLOR_parser_nodes__ANodes__init]))(var6, self) /* init on <var6:ANodes[AClosureDef]>*/;
-CHECK_NEW_parser_nodes__ANodes(var6);
-self->attrs[COLOR_parser_nodes__ASendExpr___n_closure_defs].val = var6; /* _n_closure_defs on <self:ASlashExpr exact> */
-return self;
-}
-/* allocate ASlashExpr */
-void CHECK_NEW_parser_nodes__ASlashExpr(val* self) {
-val* var /* : nullable Location */;
-val* var1 /* : nullable FlowContext */;
-val* var2 /* : nullable Variable */;
-val* var3 /* : AExpr */;
-val* var4 /* : nullable EscapeMark */;
-val* var5 /* : nullable CallSite */;
-val* var6 /* : nullable Array[AExpr] */;
-val* var7 /* : AExpr */;
-var = self->attrs[COLOR_parser__Prod___first_location].val; /* _first_location on <self:ASlashExpr> */
-var1 = self->attrs[COLOR_flow__AExpr___64dafter_flow_context].val; /* @after_flow_context on <self:ASlashExpr> */
-var2 = self->attrs[COLOR_astbuilder__AExpr___64dvariable_cache].val; /* @variable_cache on <self:ASlashExpr> */
-var3 = self->attrs[COLOR_parser_nodes__ASendExpr___n_expr].val; /* _n_expr on <self:ASlashExpr> */
-if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr", "src/parser/parser_nodes.nit", 1182);
-exit(1);
-}
-var4 = self->attrs[COLOR_scope__ASendExpr___64descapemark].val; /* @escapemark on <self:ASlashExpr> */
-var5 = self->attrs[COLOR_typing__ASendExpr___64dcallsite].val; /* @callsite on <self:ASlashExpr> */
-var6 = self->attrs[COLOR_typing__ASendExpr___64draw_arguments].val; /* @raw_arguments on <self:ASlashExpr> */
-var7 = self->attrs[COLOR_parser_nodes__ABinopExpr___n_expr2].val; /* _n_expr2 on <self:ASlashExpr> */
-if (var7 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr2", "src/parser/parser_nodes.nit", 1190);
-exit(1);
-}
-}
-/* runtime class parser_nodes__APercentExpr */
-const struct class class_parser_nodes__APercentExpr = {
-0, /* box_kind */
-{
-(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:APercentExpr:kernel#Object#object_id */
-(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:APercentExpr:kernel#Object#is_same_type */
-(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:APercentExpr:kernel#Object#== */
-(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:APercentExpr:kernel#Object#!= */
-(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:APercentExpr:kernel#Object#output */
-(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to parser_nodes:APercentExpr:kernel#Object#output_class_name */
-(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to parser_nodes:APercentExpr:kernel#Object#exit */
-(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to parser_nodes:APercentExpr:kernel#Object#sys */
-(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to parser_nodes:APercentExpr:kernel#Object#hash */
-(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to parser_nodes:APercentExpr:string#Object#to_s */
-(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to parser_nodes:APercentExpr:string#Object#native_class_name */
-(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to parser_nodes:APercentExpr:string#Object#class_name */
-(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to parser_nodes:APercentExpr:string#Object#inspect */
-(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to parser_nodes:APercentExpr:string#Object#inspect_head */
-(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to parser_nodes:APercentExpr:string#Object#args */
-(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to parser_nodes:APercentExpr:math#Object#atan2 */
-(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to parser_nodes:APercentExpr:math#Object#pi */
-(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to parser_nodes:APercentExpr:math#Object#srand_from */
-(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to parser_nodes:APercentExpr:math#Object#srand */
-(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to parser_nodes:APercentExpr:stream#Object#poll */
-(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to parser_nodes:APercentExpr:stream#Object#intern_poll */
-(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to parser_nodes:APercentExpr:time#Object#get_time */
-(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to parser_nodes:APercentExpr:file#Object#printn */
-(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to parser_nodes:APercentExpr:file#Object#print */
-(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to parser_nodes:APercentExpr:file#Object#getc */
-(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to parser_nodes:APercentExpr:file#Object#gets */
-(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to parser_nodes:APercentExpr:file#Object#getcwd */
-(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to parser_nodes:APercentExpr:file#Object#file_getcwd */
-(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to parser_nodes:APercentExpr:file#Object#stdin */
-(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to parser_nodes:APercentExpr:file#Object#stdout */
-(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to parser_nodes:APercentExpr:file#Object#stderr */
-(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to parser_nodes:APercentExpr:model_base#Object#intrude_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to parser_nodes:APercentExpr:model_base#Object#public_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to parser_nodes:APercentExpr:model_base#Object#protected_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to parser_nodes:APercentExpr:model_base#Object#private_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to parser_nodes:APercentExpr:model_base#Object#none_visibility */
-(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to parser_nodes:APercentExpr:model#Object#abstract_kind */
-(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to parser_nodes:APercentExpr:model#Object#concrete_kind */
-(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to parser_nodes:APercentExpr:model#Object#interface_kind */
-(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to parser_nodes:APercentExpr:model#Object#enum_kind */
-(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to parser_nodes:APercentExpr:model#Object#extern_kind */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__location, /* pointer to parser_nodes:APercentExpr:parser_nodes#ANode#location */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__hot_location, /* pointer to parser_nodes:APercentExpr:parser_nodes#ANode#hot_location */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__debug, /* pointer to parser_nodes:APercentExpr:parser_nodes#ANode#debug */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent, /* pointer to parser_nodes:APercentExpr:parser_nodes#ANode#parent */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent_61d, /* pointer to parser_nodes:APercentExpr:parser_nodes#ANode#parent= */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__init, /* pointer to parser_nodes:APercentExpr:parser_nodes#ANode#init */
-(nitmethod_t)VIRTUAL_parser_prod__APercentExpr__replace_child, /* pointer to parser_nodes:APercentExpr:parser_prod#APercentExpr#replace_child */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__detach, /* pointer to parser_nodes:APercentExpr:parser_nodes#ANode#detach */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__replace_with, /* pointer to parser_nodes:APercentExpr:parser_nodes#Prod#replace_with */
-(nitmethod_t)VIRTUAL_parser_prod__APercentExpr__visit_all, /* pointer to parser_nodes:APercentExpr:parser_prod#APercentExpr#visit_all */
-(nitmethod_t)VIRTUAL_parser_util__ANode__collect_tokens_by_text, /* pointer to parser_nodes:APercentExpr:parser_util#ANode#collect_tokens_by_text */
-(nitmethod_t)VIRTUAL_parser_util__ANode__collect_annotations_by_name, /* pointer to parser_nodes:APercentExpr:parser_util#ANode#collect_annotations_by_name */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__accept_simple_misc, /* pointer to parser_nodes:APercentExpr:simple_misc_analysis#ANode#accept_simple_misc */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__after_simple_misc, /* pointer to parser_nodes:APercentExpr:simple_misc_analysis#ANode#after_simple_misc */
-(nitmethod_t)VIRTUAL_literal__ANode__accept_literal, /* pointer to parser_nodes:APercentExpr:literal#ANode#accept_literal */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__accept_scope_visitor, /* pointer to parser_nodes:APercentExpr:scope#ASendExpr#accept_scope_visitor */
-(nitmethod_t)VIRTUAL_flow__ANode__accept_flow_visitor, /* pointer to parser_nodes:APercentExpr:flow#ANode#accept_flow_visitor */
-(nitmethod_t)VIRTUAL_local_var_init__ANode__accept_local_var_visitor, /* pointer to parser_nodes:APercentExpr:local_var_init#ANode#accept_local_var_visitor */
-(nitmethod_t)VIRTUAL_auto_super_init__ASendExpr__accept_auto_super_init, /* pointer to parser_nodes:APercentExpr:auto_super_init#ASendExpr#accept_auto_super_init */
-(nitmethod_t)VIRTUAL_rapid_type_analysis__ASendExpr__accept_rapid_type_visitor, /* pointer to parser_nodes:APercentExpr:rapid_type_analysis#ASendExpr#accept_rapid_type_visitor */
-(nitmethod_t)VIRTUAL_astvalidation__AExpr__accept_ast_validation, /* pointer to parser_nodes:APercentExpr:astvalidation#AExpr#accept_ast_validation */
-(nitmethod_t)VIRTUAL_transform__ANode__accept_transform_visitor, /* pointer to parser_nodes:APercentExpr:transform#ANode#accept_transform_visitor */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__location_61d, /* pointer to parser_nodes:APercentExpr:parser_nodes#Prod#location= */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations, /* pointer to parser_nodes:APercentExpr:parser_nodes#Prod#n_annotations */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations_61d, /* pointer to parser_nodes:APercentExpr:parser_nodes#Prod#n_annotations= */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__init, /* pointer to parser_nodes:APercentExpr:parser_nodes#Prod#init */
-(nitmethod_t)VIRTUAL_modelize_property__Prod__collect_text, /* pointer to parser_nodes:APercentExpr:modelize_property#Prod#collect_text */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__replace_with, /* pointer to parser_nodes:APercentExpr:parser_nodes#ANode#replace_with */
-(nitmethod_t)VIRTUAL_parser_nodes__AExpr__init, /* pointer to parser_nodes:APercentExpr:parser_nodes#AExpr#init */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__AExpr__warn_parentheses, /* pointer to parser_nodes:APercentExpr:simple_misc_analysis#AExpr#warn_parentheses */
-(nitmethod_t)VIRTUAL_flow__AExpr__after_flow_context, /* pointer to parser_nodes:APercentExpr:flow#AExpr#after_flow_context */
-(nitmethod_t)VIRTUAL_flow__AExpr__after_flow_context_61d, /* pointer to parser_nodes:APercentExpr:flow#AExpr#after_flow_context= */
-(nitmethod_t)VIRTUAL_typing__AExpr__mtype, /* pointer to parser_nodes:APercentExpr:typing#AExpr#mtype */
-(nitmethod_t)VIRTUAL_typing__AExpr__mtype_61d, /* pointer to parser_nodes:APercentExpr:typing#AExpr#mtype= */
-(nitmethod_t)VIRTUAL_typing__AExpr__is_typed, /* pointer to parser_nodes:APercentExpr:typing#AExpr#is_typed */
-(nitmethod_t)VIRTUAL_typing__AExpr__is_typed_61d, /* pointer to parser_nodes:APercentExpr:typing#AExpr#is_typed= */
-(nitmethod_t)VIRTUAL_typing__AExpr__implicit_cast_to, /* pointer to parser_nodes:APercentExpr:typing#AExpr#implicit_cast_to */
-(nitmethod_t)VIRTUAL_typing__AExpr__implicit_cast_to_61d, /* pointer to parser_nodes:APercentExpr:typing#AExpr#implicit_cast_to= */
-(nitmethod_t)VIRTUAL_typing__AExpr__its_variable, /* pointer to parser_nodes:APercentExpr:typing#AExpr#its_variable */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__accept_typing, /* pointer to parser_nodes:APercentExpr:typing#ASendExpr#accept_typing */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__make_var_read, /* pointer to parser_nodes:APercentExpr:astbuilder#AExpr#make_var_read */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__variable_cache, /* pointer to parser_nodes:APercentExpr:astbuilder#AExpr#variable_cache */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__variable_cache_61d, /* pointer to parser_nodes:APercentExpr:astbuilder#AExpr#variable_cache= */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__detach_with_placeholder, /* pointer to parser_nodes:APercentExpr:astbuilder#AExpr#detach_with_placeholder */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__add, /* pointer to parser_nodes:APercentExpr:astbuilder#AExpr#add */
-(nitmethod_t)VIRTUAL_abstract_compiler__ASendExpr__expr, /* pointer to parser_nodes:APercentExpr:abstract_compiler#ASendExpr#expr */
-(nitmethod_t)VIRTUAL_abstract_compiler__AExpr__stmt, /* pointer to parser_nodes:APercentExpr:abstract_compiler#AExpr#stmt */
-(nitmethod_t)VIRTUAL_astvalidation__ANode__accept_ast_validation, /* pointer to parser_nodes:APercentExpr:astvalidation#ANode#accept_ast_validation */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-(nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__n_expr, /* pointer to parser_nodes:APercentExpr:parser_nodes#ASendExpr#n_expr */
-(nitmethod_t)VIRTUAL_parser_prod__APercentExpr__n_expr_61d, /* pointer to parser_nodes:APercentExpr:parser_prod#APercentExpr#n_expr= */
-(nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__n_closure_defs, /* pointer to parser_nodes:APercentExpr:parser_nodes#ASendExpr#n_closure_defs */
-(nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__init, /* pointer to parser_nodes:APercentExpr:parser_nodes#ASendExpr#init */
-(nitmethod_t)VIRTUAL_parser_prod__ASendExpr__empty_init, /* pointer to parser_nodes:APercentExpr:parser_prod#ASendExpr#empty_init */
-(nitmethod_t)VIRTUAL_parser_prod__ASendExpr__init_asendexpr, /* pointer to parser_nodes:APercentExpr:parser_prod#ASendExpr#init_asendexpr */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__escapemark, /* pointer to parser_nodes:APercentExpr:scope#ASendExpr#escapemark */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__escapemark_61d, /* pointer to parser_nodes:APercentExpr:scope#ASendExpr#escapemark= */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__mproperty, /* pointer to parser_nodes:APercentExpr:typing#ASendExpr#mproperty */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__callsite, /* pointer to parser_nodes:APercentExpr:typing#ASendExpr#callsite */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__callsite_61d, /* pointer to parser_nodes:APercentExpr:typing#ASendExpr#callsite= */
-(nitmethod_t)VIRTUAL_typing__APercentExpr__property_name, /* pointer to parser_nodes:APercentExpr:typing#APercentExpr#property_name */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__raw_arguments, /* pointer to parser_nodes:APercentExpr:typing#ASendExpr#raw_arguments */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__raw_arguments_61d, /* pointer to parser_nodes:APercentExpr:typing#ASendExpr#raw_arguments= */
-(nitmethod_t)VIRTUAL_typing__ABinopExpr__compute_raw_arguments, /* pointer to parser_nodes:APercentExpr:typing#ABinopExpr#compute_raw_arguments */
-(nitmethod_t)VIRTUAL_scope__ANode__accept_scope_visitor, /* pointer to parser_nodes:APercentExpr:scope#ANode#accept_scope_visitor */
-(nitmethod_t)VIRTUAL_parser_nodes__ABinopExpr__n_expr2, /* pointer to parser_nodes:APercentExpr:parser_nodes#ABinopExpr#n_expr2 */
-(nitmethod_t)VIRTUAL_parser_prod__APercentExpr__n_expr2_61d, /* pointer to parser_nodes:APercentExpr:parser_prod#APercentExpr#n_expr2= */
-(nitmethod_t)VIRTUAL_parser_nodes__ABinopExpr__init, /* pointer to parser_nodes:APercentExpr:parser_nodes#ABinopExpr#init */
-(nitmethod_t)VIRTUAL_parser_prod__ABinopExpr__empty_init, /* pointer to parser_nodes:APercentExpr:parser_prod#ABinopExpr#empty_init */
-(nitmethod_t)VIRTUAL_parser_prod__ABinopExpr__init_abinopexpr, /* pointer to parser_nodes:APercentExpr:parser_prod#ABinopExpr#init_abinopexpr */
-(nitmethod_t)VIRTUAL_parser_nodes__APercentExpr__init, /* pointer to parser_nodes:APercentExpr:parser_nodes#APercentExpr#init */
-(nitmethod_t)VIRTUAL_parser_prod__APercentExpr__empty_init, /* pointer to parser_nodes:APercentExpr:parser_prod#APercentExpr#empty_init */
-(nitmethod_t)VIRTUAL_parser_prod__APercentExpr__init_apercentexpr, /* pointer to parser_nodes:APercentExpr:parser_prod#APercentExpr#init_apercentexpr */
-}
-};
-/* allocate APercentExpr */
-val* NEW_parser_nodes__APercentExpr(const struct type* type) {
-val* self /* : APercentExpr */;
-val* var /* : null */;
-val* var1 /* : null */;
-val* var2 /* : null */;
-val* var3 /* : null */;
-short int var4 /* : Bool */;
-val* var5 /* : null */;
-val* var6 /* : ANodes[AClosureDef] */;
-self = nit_alloc(sizeof(struct instance) + 19*sizeof(nitattribute_t));
-self->type = type;
-self->class = &class_parser_nodes__APercentExpr;
-var = NULL;
-self->attrs[COLOR_parser_nodes__ANode___location].val = var; /* _location on <self:APercentExpr exact> */
-var1 = NULL;
-self->attrs[COLOR_parser_nodes__ANode___64dparent].val = var1; /* @parent on <self:APercentExpr exact> */
-var2 = NULL;
-self->attrs[COLOR_parser_nodes__Prod___n_annotations].val = var2; /* _n_annotations on <self:APercentExpr exact> */
-var3 = NULL;
-self->attrs[COLOR_typing__AExpr___64dmtype].val = var3; /* @mtype on <self:APercentExpr exact> */
-var4 = 0;
-self->attrs[COLOR_typing__AExpr___64dis_typed].s = var4; /* @is_typed on <self:APercentExpr exact> */
-var5 = NULL;
-self->attrs[COLOR_typing__AExpr___64dimplicit_cast_to].val = var5; /* @implicit_cast_to on <self:APercentExpr exact> */
-var6 = NEW_parser_nodes__ANodes(&type_parser_nodes__ANodesparser_nodes__AClosureDef);
-((void (*)(val*, val*))(var6->class->vft[COLOR_parser_nodes__ANodes__init]))(var6, self) /* init on <var6:ANodes[AClosureDef]>*/;
-CHECK_NEW_parser_nodes__ANodes(var6);
-self->attrs[COLOR_parser_nodes__ASendExpr___n_closure_defs].val = var6; /* _n_closure_defs on <self:APercentExpr exact> */
-return self;
-}
-/* allocate APercentExpr */
-void CHECK_NEW_parser_nodes__APercentExpr(val* self) {
-val* var /* : nullable Location */;
-val* var1 /* : nullable FlowContext */;
-val* var2 /* : nullable Variable */;
-val* var3 /* : AExpr */;
-val* var4 /* : nullable EscapeMark */;
-val* var5 /* : nullable CallSite */;
-val* var6 /* : nullable Array[AExpr] */;
-val* var7 /* : AExpr */;
-var = self->attrs[COLOR_parser__Prod___first_location].val; /* _first_location on <self:APercentExpr> */
-var1 = self->attrs[COLOR_flow__AExpr___64dafter_flow_context].val; /* @after_flow_context on <self:APercentExpr> */
-var2 = self->attrs[COLOR_astbuilder__AExpr___64dvariable_cache].val; /* @variable_cache on <self:APercentExpr> */
-var3 = self->attrs[COLOR_parser_nodes__ASendExpr___n_expr].val; /* _n_expr on <self:APercentExpr> */
-if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr", "src/parser/parser_nodes.nit", 1182);
-exit(1);
-}
-var4 = self->attrs[COLOR_scope__ASendExpr___64descapemark].val; /* @escapemark on <self:APercentExpr> */
-var5 = self->attrs[COLOR_typing__ASendExpr___64dcallsite].val; /* @callsite on <self:APercentExpr> */
-var6 = self->attrs[COLOR_typing__ASendExpr___64draw_arguments].val; /* @raw_arguments on <self:APercentExpr> */
-var7 = self->attrs[COLOR_parser_nodes__ABinopExpr___n_expr2].val; /* _n_expr2 on <self:APercentExpr> */
-if (var7 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr2", "src/parser/parser_nodes.nit", 1190);
-exit(1);
-}
-}
-/* runtime class parser_nodes__AUminusExpr */
-const struct class class_parser_nodes__AUminusExpr = {
-0, /* box_kind */
-{
-(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:AUminusExpr:kernel#Object#object_id */
-(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:AUminusExpr:kernel#Object#is_same_type */
-(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:AUminusExpr:kernel#Object#== */
-(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:AUminusExpr:kernel#Object#!= */
-(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:AUminusExpr:kernel#Object#output */
-(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to parser_nodes:AUminusExpr:kernel#Object#output_class_name */
-(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to parser_nodes:AUminusExpr:kernel#Object#exit */
-(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to parser_nodes:AUminusExpr:kernel#Object#sys */
-(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to parser_nodes:AUminusExpr:kernel#Object#hash */
-(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to parser_nodes:AUminusExpr:string#Object#to_s */
-(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to parser_nodes:AUminusExpr:string#Object#native_class_name */
-(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to parser_nodes:AUminusExpr:string#Object#class_name */
-(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to parser_nodes:AUminusExpr:string#Object#inspect */
-(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to parser_nodes:AUminusExpr:string#Object#inspect_head */
-(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to parser_nodes:AUminusExpr:string#Object#args */
-(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to parser_nodes:AUminusExpr:math#Object#atan2 */
-(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to parser_nodes:AUminusExpr:math#Object#pi */
-(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to parser_nodes:AUminusExpr:math#Object#srand_from */
-(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to parser_nodes:AUminusExpr:math#Object#srand */
-(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to parser_nodes:AUminusExpr:stream#Object#poll */
-(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to parser_nodes:AUminusExpr:stream#Object#intern_poll */
-(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to parser_nodes:AUminusExpr:time#Object#get_time */
-(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to parser_nodes:AUminusExpr:file#Object#printn */
-(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to parser_nodes:AUminusExpr:file#Object#print */
-(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to parser_nodes:AUminusExpr:file#Object#getc */
-(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to parser_nodes:AUminusExpr:file#Object#gets */
-(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to parser_nodes:AUminusExpr:file#Object#getcwd */
-(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to parser_nodes:AUminusExpr:file#Object#file_getcwd */
-(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to parser_nodes:AUminusExpr:file#Object#stdin */
-(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to parser_nodes:AUminusExpr:file#Object#stdout */
-(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to parser_nodes:AUminusExpr:file#Object#stderr */
-(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to parser_nodes:AUminusExpr:model_base#Object#intrude_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to parser_nodes:AUminusExpr:model_base#Object#public_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to parser_nodes:AUminusExpr:model_base#Object#protected_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to parser_nodes:AUminusExpr:model_base#Object#private_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to parser_nodes:AUminusExpr:model_base#Object#none_visibility */
-(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to parser_nodes:AUminusExpr:model#Object#abstract_kind */
-(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to parser_nodes:AUminusExpr:model#Object#concrete_kind */
-(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to parser_nodes:AUminusExpr:model#Object#interface_kind */
-(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to parser_nodes:AUminusExpr:model#Object#enum_kind */
-(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to parser_nodes:AUminusExpr:model#Object#extern_kind */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__location, /* pointer to parser_nodes:AUminusExpr:parser_nodes#ANode#location */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__hot_location, /* pointer to parser_nodes:AUminusExpr:parser_nodes#ANode#hot_location */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__debug, /* pointer to parser_nodes:AUminusExpr:parser_nodes#ANode#debug */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent, /* pointer to parser_nodes:AUminusExpr:parser_nodes#ANode#parent */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent_61d, /* pointer to parser_nodes:AUminusExpr:parser_nodes#ANode#parent= */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__init, /* pointer to parser_nodes:AUminusExpr:parser_nodes#ANode#init */
-(nitmethod_t)VIRTUAL_parser_prod__AUminusExpr__replace_child, /* pointer to parser_nodes:AUminusExpr:parser_prod#AUminusExpr#replace_child */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__detach, /* pointer to parser_nodes:AUminusExpr:parser_nodes#ANode#detach */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__replace_with, /* pointer to parser_nodes:AUminusExpr:parser_nodes#Prod#replace_with */
-(nitmethod_t)VIRTUAL_parser_prod__AUminusExpr__visit_all, /* pointer to parser_nodes:AUminusExpr:parser_prod#AUminusExpr#visit_all */
-(nitmethod_t)VIRTUAL_parser_util__ANode__collect_tokens_by_text, /* pointer to parser_nodes:AUminusExpr:parser_util#ANode#collect_tokens_by_text */
-(nitmethod_t)VIRTUAL_parser_util__ANode__collect_annotations_by_name, /* pointer to parser_nodes:AUminusExpr:parser_util#ANode#collect_annotations_by_name */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__accept_simple_misc, /* pointer to parser_nodes:AUminusExpr:simple_misc_analysis#ANode#accept_simple_misc */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__after_simple_misc, /* pointer to parser_nodes:AUminusExpr:simple_misc_analysis#ANode#after_simple_misc */
-(nitmethod_t)VIRTUAL_literal__ANode__accept_literal, /* pointer to parser_nodes:AUminusExpr:literal#ANode#accept_literal */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__accept_scope_visitor, /* pointer to parser_nodes:AUminusExpr:scope#ASendExpr#accept_scope_visitor */
-(nitmethod_t)VIRTUAL_flow__ANode__accept_flow_visitor, /* pointer to parser_nodes:AUminusExpr:flow#ANode#accept_flow_visitor */
-(nitmethod_t)VIRTUAL_local_var_init__ANode__accept_local_var_visitor, /* pointer to parser_nodes:AUminusExpr:local_var_init#ANode#accept_local_var_visitor */
-(nitmethod_t)VIRTUAL_auto_super_init__ASendExpr__accept_auto_super_init, /* pointer to parser_nodes:AUminusExpr:auto_super_init#ASendExpr#accept_auto_super_init */
-(nitmethod_t)VIRTUAL_rapid_type_analysis__ASendExpr__accept_rapid_type_visitor, /* pointer to parser_nodes:AUminusExpr:rapid_type_analysis#ASendExpr#accept_rapid_type_visitor */
-(nitmethod_t)VIRTUAL_astvalidation__AExpr__accept_ast_validation, /* pointer to parser_nodes:AUminusExpr:astvalidation#AExpr#accept_ast_validation */
-(nitmethod_t)VIRTUAL_transform__ANode__accept_transform_visitor, /* pointer to parser_nodes:AUminusExpr:transform#ANode#accept_transform_visitor */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__location_61d, /* pointer to parser_nodes:AUminusExpr:parser_nodes#Prod#location= */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations, /* pointer to parser_nodes:AUminusExpr:parser_nodes#Prod#n_annotations */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations_61d, /* pointer to parser_nodes:AUminusExpr:parser_nodes#Prod#n_annotations= */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__init, /* pointer to parser_nodes:AUminusExpr:parser_nodes#Prod#init */
-(nitmethod_t)VIRTUAL_modelize_property__Prod__collect_text, /* pointer to parser_nodes:AUminusExpr:modelize_property#Prod#collect_text */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__replace_with, /* pointer to parser_nodes:AUminusExpr:parser_nodes#ANode#replace_with */
-(nitmethod_t)VIRTUAL_parser_nodes__AExpr__init, /* pointer to parser_nodes:AUminusExpr:parser_nodes#AExpr#init */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__AExpr__warn_parentheses, /* pointer to parser_nodes:AUminusExpr:simple_misc_analysis#AExpr#warn_parentheses */
-(nitmethod_t)VIRTUAL_flow__AExpr__after_flow_context, /* pointer to parser_nodes:AUminusExpr:flow#AExpr#after_flow_context */
-(nitmethod_t)VIRTUAL_flow__AExpr__after_flow_context_61d, /* pointer to parser_nodes:AUminusExpr:flow#AExpr#after_flow_context= */
-(nitmethod_t)VIRTUAL_typing__AExpr__mtype, /* pointer to parser_nodes:AUminusExpr:typing#AExpr#mtype */
-(nitmethod_t)VIRTUAL_typing__AExpr__mtype_61d, /* pointer to parser_nodes:AUminusExpr:typing#AExpr#mtype= */
-(nitmethod_t)VIRTUAL_typing__AExpr__is_typed, /* pointer to parser_nodes:AUminusExpr:typing#AExpr#is_typed */
-(nitmethod_t)VIRTUAL_typing__AExpr__is_typed_61d, /* pointer to parser_nodes:AUminusExpr:typing#AExpr#is_typed= */
-(nitmethod_t)VIRTUAL_typing__AExpr__implicit_cast_to, /* pointer to parser_nodes:AUminusExpr:typing#AExpr#implicit_cast_to */
-(nitmethod_t)VIRTUAL_typing__AExpr__implicit_cast_to_61d, /* pointer to parser_nodes:AUminusExpr:typing#AExpr#implicit_cast_to= */
-(nitmethod_t)VIRTUAL_typing__AExpr__its_variable, /* pointer to parser_nodes:AUminusExpr:typing#AExpr#its_variable */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__accept_typing, /* pointer to parser_nodes:AUminusExpr:typing#ASendExpr#accept_typing */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__make_var_read, /* pointer to parser_nodes:AUminusExpr:astbuilder#AExpr#make_var_read */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__variable_cache, /* pointer to parser_nodes:AUminusExpr:astbuilder#AExpr#variable_cache */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__variable_cache_61d, /* pointer to parser_nodes:AUminusExpr:astbuilder#AExpr#variable_cache= */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__detach_with_placeholder, /* pointer to parser_nodes:AUminusExpr:astbuilder#AExpr#detach_with_placeholder */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__add, /* pointer to parser_nodes:AUminusExpr:astbuilder#AExpr#add */
-(nitmethod_t)VIRTUAL_abstract_compiler__ASendExpr__expr, /* pointer to parser_nodes:AUminusExpr:abstract_compiler#ASendExpr#expr */
-(nitmethod_t)VIRTUAL_abstract_compiler__AExpr__stmt, /* pointer to parser_nodes:AUminusExpr:abstract_compiler#AExpr#stmt */
-(nitmethod_t)VIRTUAL_astvalidation__ANode__accept_ast_validation, /* pointer to parser_nodes:AUminusExpr:astvalidation#ANode#accept_ast_validation */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-(nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__n_expr, /* pointer to parser_nodes:AUminusExpr:parser_nodes#ASendExpr#n_expr */
-(nitmethod_t)VIRTUAL_parser_prod__AUminusExpr__n_expr_61d, /* pointer to parser_nodes:AUminusExpr:parser_prod#AUminusExpr#n_expr= */
-(nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__n_closure_defs, /* pointer to parser_nodes:AUminusExpr:parser_nodes#ASendExpr#n_closure_defs */
-(nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__init, /* pointer to parser_nodes:AUminusExpr:parser_nodes#ASendExpr#init */
-(nitmethod_t)VIRTUAL_parser_prod__ASendExpr__empty_init, /* pointer to parser_nodes:AUminusExpr:parser_prod#ASendExpr#empty_init */
-(nitmethod_t)VIRTUAL_parser_prod__ASendExpr__init_asendexpr, /* pointer to parser_nodes:AUminusExpr:parser_prod#ASendExpr#init_asendexpr */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__escapemark, /* pointer to parser_nodes:AUminusExpr:scope#ASendExpr#escapemark */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__escapemark_61d, /* pointer to parser_nodes:AUminusExpr:scope#ASendExpr#escapemark= */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__mproperty, /* pointer to parser_nodes:AUminusExpr:typing#ASendExpr#mproperty */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__callsite, /* pointer to parser_nodes:AUminusExpr:typing#ASendExpr#callsite */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__callsite_61d, /* pointer to parser_nodes:AUminusExpr:typing#ASendExpr#callsite= */
-(nitmethod_t)VIRTUAL_typing__AUminusExpr__property_name, /* pointer to parser_nodes:AUminusExpr:typing#AUminusExpr#property_name */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__raw_arguments, /* pointer to parser_nodes:AUminusExpr:typing#ASendExpr#raw_arguments */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__raw_arguments_61d, /* pointer to parser_nodes:AUminusExpr:typing#ASendExpr#raw_arguments= */
-(nitmethod_t)VIRTUAL_typing__AUminusExpr__compute_raw_arguments, /* pointer to parser_nodes:AUminusExpr:typing#AUminusExpr#compute_raw_arguments */
-(nitmethod_t)VIRTUAL_scope__ANode__accept_scope_visitor, /* pointer to parser_nodes:AUminusExpr:scope#ANode#accept_scope_visitor */
-(nitmethod_t)VIRTUAL_parser_nodes__AUminusExpr__n_minus, /* pointer to parser_nodes:AUminusExpr:parser_nodes#AUminusExpr#n_minus */
-(nitmethod_t)VIRTUAL_parser_prod__AUminusExpr__n_minus_61d, /* pointer to parser_nodes:AUminusExpr:parser_prod#AUminusExpr#n_minus= */
-(nitmethod_t)VIRTUAL_parser_nodes__AUminusExpr__init, /* pointer to parser_nodes:AUminusExpr:parser_nodes#AUminusExpr#init */
-(nitmethod_t)VIRTUAL_parser_prod__AUminusExpr__empty_init, /* pointer to parser_nodes:AUminusExpr:parser_prod#AUminusExpr#empty_init */
-(nitmethod_t)VIRTUAL_parser_prod__AUminusExpr__init_auminusexpr, /* pointer to parser_nodes:AUminusExpr:parser_prod#AUminusExpr#init_auminusexpr */
-}
-};
-/* allocate AUminusExpr */
-val* NEW_parser_nodes__AUminusExpr(const struct type* type) {
-val* self /* : AUminusExpr */;
-val* var /* : null */;
-val* var1 /* : null */;
-val* var2 /* : null */;
-val* var3 /* : null */;
-short int var4 /* : Bool */;
-val* var5 /* : null */;
-val* var6 /* : ANodes[AClosureDef] */;
-self = nit_alloc(sizeof(struct instance) + 19*sizeof(nitattribute_t));
-self->type = type;
-self->class = &class_parser_nodes__AUminusExpr;
-var = NULL;
-self->attrs[COLOR_parser_nodes__ANode___location].val = var; /* _location on <self:AUminusExpr exact> */
-var1 = NULL;
-self->attrs[COLOR_parser_nodes__ANode___64dparent].val = var1; /* @parent on <self:AUminusExpr exact> */
-var2 = NULL;
-self->attrs[COLOR_parser_nodes__Prod___n_annotations].val = var2; /* _n_annotations on <self:AUminusExpr exact> */
-var3 = NULL;
-self->attrs[COLOR_typing__AExpr___64dmtype].val = var3; /* @mtype on <self:AUminusExpr exact> */
-var4 = 0;
-self->attrs[COLOR_typing__AExpr___64dis_typed].s = var4; /* @is_typed on <self:AUminusExpr exact> */
-var5 = NULL;
-self->attrs[COLOR_typing__AExpr___64dimplicit_cast_to].val = var5; /* @implicit_cast_to on <self:AUminusExpr exact> */
-var6 = NEW_parser_nodes__ANodes(&type_parser_nodes__ANodesparser_nodes__AClosureDef);
-((void (*)(val*, val*))(var6->class->vft[COLOR_parser_nodes__ANodes__init]))(var6, self) /* init on <var6:ANodes[AClosureDef]>*/;
-CHECK_NEW_parser_nodes__ANodes(var6);
-self->attrs[COLOR_parser_nodes__ASendExpr___n_closure_defs].val = var6; /* _n_closure_defs on <self:AUminusExpr exact> */
-return self;
-}
-/* allocate AUminusExpr */
-void CHECK_NEW_parser_nodes__AUminusExpr(val* self) {
-val* var /* : nullable Location */;
-val* var1 /* : nullable FlowContext */;
-val* var2 /* : nullable Variable */;
-val* var3 /* : AExpr */;
-val* var4 /* : nullable EscapeMark */;
-val* var5 /* : nullable CallSite */;
-val* var6 /* : nullable Array[AExpr] */;
-val* var7 /* : TMinus */;
-var = self->attrs[COLOR_parser__Prod___first_location].val; /* _first_location on <self:AUminusExpr> */
-var1 = self->attrs[COLOR_flow__AExpr___64dafter_flow_context].val; /* @after_flow_context on <self:AUminusExpr> */
-var2 = self->attrs[COLOR_astbuilder__AExpr___64dvariable_cache].val; /* @variable_cache on <self:AUminusExpr> */
-var3 = self->attrs[COLOR_parser_nodes__ASendExpr___n_expr].val; /* _n_expr on <self:AUminusExpr> */
-if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr", "src/parser/parser_nodes.nit", 1182);
-exit(1);
-}
-var4 = self->attrs[COLOR_scope__ASendExpr___64descapemark].val; /* @escapemark on <self:AUminusExpr> */
-var5 = self->attrs[COLOR_typing__ASendExpr___64dcallsite].val; /* @callsite on <self:AUminusExpr> */
-var6 = self->attrs[COLOR_typing__ASendExpr___64draw_arguments].val; /* @raw_arguments on <self:AUminusExpr> */
-var7 = self->attrs[COLOR_parser_nodes__AUminusExpr___n_minus].val; /* _n_minus on <self:AUminusExpr> */
-if (var7 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_minus", "src/parser/parser_nodes.nit", 1322);
-exit(1);
-}
-}
-/* runtime class parser_nodes__ANewExpr */
-const struct class class_parser_nodes__ANewExpr = {
-0, /* box_kind */
-{
-(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:ANewExpr:kernel#Object#object_id */
-(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:ANewExpr:kernel#Object#is_same_type */
-(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:ANewExpr:kernel#Object#== */
-(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:ANewExpr:kernel#Object#!= */
-(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:ANewExpr:kernel#Object#output */
-(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to parser_nodes:ANewExpr:kernel#Object#output_class_name */
-(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to parser_nodes:ANewExpr:kernel#Object#exit */
-(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to parser_nodes:ANewExpr:kernel#Object#sys */
-(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to parser_nodes:ANewExpr:kernel#Object#hash */
-(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to parser_nodes:ANewExpr:string#Object#to_s */
-(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to parser_nodes:ANewExpr:string#Object#native_class_name */
-(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to parser_nodes:ANewExpr:string#Object#class_name */
-(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to parser_nodes:ANewExpr:string#Object#inspect */
-(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to parser_nodes:ANewExpr:string#Object#inspect_head */
-(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to parser_nodes:ANewExpr:string#Object#args */
-(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to parser_nodes:ANewExpr:math#Object#atan2 */
-(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to parser_nodes:ANewExpr:math#Object#pi */
-(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to parser_nodes:ANewExpr:math#Object#srand_from */
-(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to parser_nodes:ANewExpr:math#Object#srand */
-(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to parser_nodes:ANewExpr:stream#Object#poll */
-(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to parser_nodes:ANewExpr:stream#Object#intern_poll */
-(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to parser_nodes:ANewExpr:time#Object#get_time */
-(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to parser_nodes:ANewExpr:file#Object#printn */
-(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to parser_nodes:ANewExpr:file#Object#print */
-(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to parser_nodes:ANewExpr:file#Object#getc */
-(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to parser_nodes:ANewExpr:file#Object#gets */
-(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to parser_nodes:ANewExpr:file#Object#getcwd */
-(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to parser_nodes:ANewExpr:file#Object#file_getcwd */
-(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to parser_nodes:ANewExpr:file#Object#stdin */
-(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to parser_nodes:ANewExpr:file#Object#stdout */
-(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to parser_nodes:ANewExpr:file#Object#stderr */
-(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to parser_nodes:ANewExpr:model_base#Object#intrude_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to parser_nodes:ANewExpr:model_base#Object#public_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to parser_nodes:ANewExpr:model_base#Object#protected_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to parser_nodes:ANewExpr:model_base#Object#private_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to parser_nodes:ANewExpr:model_base#Object#none_visibility */
-(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to parser_nodes:ANewExpr:model#Object#abstract_kind */
-(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to parser_nodes:ANewExpr:model#Object#concrete_kind */
-(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to parser_nodes:ANewExpr:model#Object#interface_kind */
-(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to parser_nodes:ANewExpr:model#Object#enum_kind */
-(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to parser_nodes:ANewExpr:model#Object#extern_kind */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__location, /* pointer to parser_nodes:ANewExpr:parser_nodes#ANode#location */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__hot_location, /* pointer to parser_nodes:ANewExpr:parser_nodes#ANode#hot_location */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__debug, /* pointer to parser_nodes:ANewExpr:parser_nodes#ANode#debug */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent, /* pointer to parser_nodes:ANewExpr:parser_nodes#ANode#parent */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent_61d, /* pointer to parser_nodes:ANewExpr:parser_nodes#ANode#parent= */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__init, /* pointer to parser_nodes:ANewExpr:parser_nodes#ANode#init */
-(nitmethod_t)VIRTUAL_parser_prod__ANewExpr__replace_child, /* pointer to parser_nodes:ANewExpr:parser_prod#ANewExpr#replace_child */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__detach, /* pointer to parser_nodes:ANewExpr:parser_nodes#ANode#detach */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__replace_with, /* pointer to parser_nodes:ANewExpr:parser_nodes#Prod#replace_with */
-(nitmethod_t)VIRTUAL_parser_prod__ANewExpr__visit_all, /* pointer to parser_nodes:ANewExpr:parser_prod#ANewExpr#visit_all */
-(nitmethod_t)VIRTUAL_parser_util__ANode__collect_tokens_by_text, /* pointer to parser_nodes:ANewExpr:parser_util#ANode#collect_tokens_by_text */
-(nitmethod_t)VIRTUAL_parser_util__ANode__collect_annotations_by_name, /* pointer to parser_nodes:ANewExpr:parser_util#ANode#collect_annotations_by_name */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__accept_simple_misc, /* pointer to parser_nodes:ANewExpr:simple_misc_analysis#ANode#accept_simple_misc */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__after_simple_misc, /* pointer to parser_nodes:ANewExpr:simple_misc_analysis#ANode#after_simple_misc */
-(nitmethod_t)VIRTUAL_literal__ANode__accept_literal, /* pointer to parser_nodes:ANewExpr:literal#ANode#accept_literal */
-(nitmethod_t)VIRTUAL_scope__ANode__accept_scope_visitor, /* pointer to parser_nodes:ANewExpr:scope#ANode#accept_scope_visitor */
-(nitmethod_t)VIRTUAL_flow__ANode__accept_flow_visitor, /* pointer to parser_nodes:ANewExpr:flow#ANode#accept_flow_visitor */
-(nitmethod_t)VIRTUAL_local_var_init__ANode__accept_local_var_visitor, /* pointer to parser_nodes:ANewExpr:local_var_init#ANode#accept_local_var_visitor */
-(nitmethod_t)VIRTUAL_auto_super_init__ANode__accept_auto_super_init, /* pointer to parser_nodes:ANewExpr:auto_super_init#ANode#accept_auto_super_init */
-(nitmethod_t)VIRTUAL_rapid_type_analysis__ANewExpr__accept_rapid_type_visitor, /* pointer to parser_nodes:ANewExpr:rapid_type_analysis#ANewExpr#accept_rapid_type_visitor */
-(nitmethod_t)VIRTUAL_astvalidation__AExpr__accept_ast_validation, /* pointer to parser_nodes:ANewExpr:astvalidation#AExpr#accept_ast_validation */
-(nitmethod_t)VIRTUAL_transform__ANode__accept_transform_visitor, /* pointer to parser_nodes:ANewExpr:transform#ANode#accept_transform_visitor */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__location_61d, /* pointer to parser_nodes:ANewExpr:parser_nodes#Prod#location= */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations, /* pointer to parser_nodes:ANewExpr:parser_nodes#Prod#n_annotations */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations_61d, /* pointer to parser_nodes:ANewExpr:parser_nodes#Prod#n_annotations= */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__init, /* pointer to parser_nodes:ANewExpr:parser_nodes#Prod#init */
-(nitmethod_t)VIRTUAL_modelize_property__Prod__collect_text, /* pointer to parser_nodes:ANewExpr:modelize_property#Prod#collect_text */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__replace_with, /* pointer to parser_nodes:ANewExpr:parser_nodes#ANode#replace_with */
-(nitmethod_t)VIRTUAL_parser_nodes__AExpr__init, /* pointer to parser_nodes:ANewExpr:parser_nodes#AExpr#init */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__AExpr__warn_parentheses, /* pointer to parser_nodes:ANewExpr:simple_misc_analysis#AExpr#warn_parentheses */
-(nitmethod_t)VIRTUAL_flow__AExpr__after_flow_context, /* pointer to parser_nodes:ANewExpr:flow#AExpr#after_flow_context */
-(nitmethod_t)VIRTUAL_flow__AExpr__after_flow_context_61d, /* pointer to parser_nodes:ANewExpr:flow#AExpr#after_flow_context= */
-(nitmethod_t)VIRTUAL_typing__AExpr__mtype, /* pointer to parser_nodes:ANewExpr:typing#AExpr#mtype */
-(nitmethod_t)VIRTUAL_typing__AExpr__mtype_61d, /* pointer to parser_nodes:ANewExpr:typing#AExpr#mtype= */
-(nitmethod_t)VIRTUAL_typing__AExpr__is_typed, /* pointer to parser_nodes:ANewExpr:typing#AExpr#is_typed */
-(nitmethod_t)VIRTUAL_typing__AExpr__is_typed_61d, /* pointer to parser_nodes:ANewExpr:typing#AExpr#is_typed= */
-(nitmethod_t)VIRTUAL_typing__AExpr__implicit_cast_to, /* pointer to parser_nodes:ANewExpr:typing#AExpr#implicit_cast_to */
-(nitmethod_t)VIRTUAL_typing__AExpr__implicit_cast_to_61d, /* pointer to parser_nodes:ANewExpr:typing#AExpr#implicit_cast_to= */
-(nitmethod_t)VIRTUAL_typing__AExpr__its_variable, /* pointer to parser_nodes:ANewExpr:typing#AExpr#its_variable */
-(nitmethod_t)VIRTUAL_typing__ANewExpr__accept_typing, /* pointer to parser_nodes:ANewExpr:typing#ANewExpr#accept_typing */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__make_var_read, /* pointer to parser_nodes:ANewExpr:astbuilder#AExpr#make_var_read */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__variable_cache, /* pointer to parser_nodes:ANewExpr:astbuilder#AExpr#variable_cache */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__variable_cache_61d, /* pointer to parser_nodes:ANewExpr:astbuilder#AExpr#variable_cache= */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__detach_with_placeholder, /* pointer to parser_nodes:ANewExpr:astbuilder#AExpr#detach_with_placeholder */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__add, /* pointer to parser_nodes:ANewExpr:astbuilder#AExpr#add */
-(nitmethod_t)VIRTUAL_abstract_compiler__ANewExpr__expr, /* pointer to parser_nodes:ANewExpr:abstract_compiler#ANewExpr#expr */
-(nitmethod_t)VIRTUAL_abstract_compiler__AExpr__stmt, /* pointer to parser_nodes:ANewExpr:abstract_compiler#AExpr#stmt */
-(nitmethod_t)VIRTUAL_astvalidation__ANode__accept_ast_validation, /* pointer to parser_nodes:ANewExpr:astvalidation#ANode#accept_ast_validation */
-(nitmethod_t)VIRTUAL_parser_nodes__ANewExpr__n_kwnew, /* pointer to parser_nodes:ANewExpr:parser_nodes#ANewExpr#n_kwnew */
-(nitmethod_t)VIRTUAL_parser_prod__ANewExpr__n_kwnew_61d, /* pointer to parser_nodes:ANewExpr:parser_prod#ANewExpr#n_kwnew= */
-(nitmethod_t)VIRTUAL_parser_nodes__ANewExpr__n_type, /* pointer to parser_nodes:ANewExpr:parser_nodes#ANewExpr#n_type */
-(nitmethod_t)VIRTUAL_parser_prod__ANewExpr__n_type_61d, /* pointer to parser_nodes:ANewExpr:parser_prod#ANewExpr#n_type= */
-(nitmethod_t)VIRTUAL_parser_nodes__ANewExpr__n_id, /* pointer to parser_nodes:ANewExpr:parser_nodes#ANewExpr#n_id */
-(nitmethod_t)VIRTUAL_parser_prod__ANewExpr__n_id_61d, /* pointer to parser_nodes:ANewExpr:parser_prod#ANewExpr#n_id= */
-(nitmethod_t)VIRTUAL_parser_nodes__ANewExpr__n_args, /* pointer to parser_nodes:ANewExpr:parser_nodes#ANewExpr#n_args */
-(nitmethod_t)VIRTUAL_parser_prod__ANewExpr__n_args_61d, /* pointer to parser_nodes:ANewExpr:parser_prod#ANewExpr#n_args= */
-(nitmethod_t)VIRTUAL_parser_nodes__ANewExpr__init, /* pointer to parser_nodes:ANewExpr:parser_nodes#ANewExpr#init */
-(nitmethod_t)VIRTUAL_parser_prod__ANewExpr__empty_init, /* pointer to parser_nodes:ANewExpr:parser_prod#ANewExpr#empty_init */
-(nitmethod_t)VIRTUAL_parser_prod__ANewExpr__init_anewexpr, /* pointer to parser_nodes:ANewExpr:parser_prod#ANewExpr#init_anewexpr */
-(nitmethod_t)VIRTUAL_typing__ANewExpr__mproperty, /* pointer to parser_nodes:ANewExpr:typing#ANewExpr#mproperty */
-(nitmethod_t)VIRTUAL_typing__ANewExpr__callsite, /* pointer to parser_nodes:ANewExpr:typing#ANewExpr#callsite */
-(nitmethod_t)VIRTUAL_typing__ANewExpr__callsite_61d, /* pointer to parser_nodes:ANewExpr:typing#ANewExpr#callsite= */
-(nitmethod_t)VIRTUAL_astbuilder__ANewExpr__make, /* pointer to parser_nodes:ANewExpr:astbuilder#ANewExpr#make */
-}
-};
-/* allocate ANewExpr */
-val* NEW_parser_nodes__ANewExpr(const struct type* type) {
-val* self /* : ANewExpr */;
-val* var /* : null */;
-val* var1 /* : null */;
-val* var2 /* : null */;
-val* var3 /* : null */;
-short int var4 /* : Bool */;
-val* var5 /* : null */;
-val* var6 /* : null */;
-self = nit_alloc(sizeof(struct instance) + 14*sizeof(nitattribute_t));
-self->type = type;
-self->class = &class_parser_nodes__ANewExpr;
-var = NULL;
-self->attrs[COLOR_parser_nodes__ANode___location].val = var; /* _location on <self:ANewExpr exact> */
-var1 = NULL;
-self->attrs[COLOR_parser_nodes__ANode___64dparent].val = var1; /* @parent on <self:ANewExpr exact> */
-var2 = NULL;
-self->attrs[COLOR_parser_nodes__Prod___n_annotations].val = var2; /* _n_annotations on <self:ANewExpr exact> */
-var3 = NULL;
-self->attrs[COLOR_typing__AExpr___64dmtype].val = var3; /* @mtype on <self:ANewExpr exact> */
-var4 = 0;
-self->attrs[COLOR_typing__AExpr___64dis_typed].s = var4; /* @is_typed on <self:ANewExpr exact> */
-var5 = NULL;
-self->attrs[COLOR_typing__AExpr___64dimplicit_cast_to].val = var5; /* @implicit_cast_to on <self:ANewExpr exact> */
-var6 = NULL;
-self->attrs[COLOR_parser_nodes__ANewExpr___n_id].val = var6; /* _n_id on <self:ANewExpr exact> */
-return self;
-}
-/* allocate ANewExpr */
-void CHECK_NEW_parser_nodes__ANewExpr(val* self) {
-val* var /* : nullable Location */;
-val* var1 /* : nullable FlowContext */;
-val* var2 /* : nullable Variable */;
-val* var3 /* : TKwnew */;
-val* var4 /* : AType */;
-val* var5 /* : AExprs */;
-val* var6 /* : nullable CallSite */;
-var = self->attrs[COLOR_parser__Prod___first_location].val; /* _first_location on <self:ANewExpr> */
-var1 = self->attrs[COLOR_flow__AExpr___64dafter_flow_context].val; /* @after_flow_context on <self:ANewExpr> */
-var2 = self->attrs[COLOR_astbuilder__AExpr___64dvariable_cache].val; /* @variable_cache on <self:ANewExpr> */
-var3 = self->attrs[COLOR_parser_nodes__ANewExpr___n_kwnew].val; /* _n_kwnew on <self:ANewExpr> */
-if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwnew", "src/parser/parser_nodes.nit", 1328);
-exit(1);
-}
-var4 = self->attrs[COLOR_parser_nodes__ANewExpr___n_type].val; /* _n_type on <self:ANewExpr> */
-if (var4 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_type", "src/parser/parser_nodes.nit", 1329);
-exit(1);
-}
-var5 = self->attrs[COLOR_parser_nodes__ANewExpr___n_args].val; /* _n_args on <self:ANewExpr> */
-if (var5 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_args", "src/parser/parser_nodes.nit", 1333);
-exit(1);
-}
-var6 = self->attrs[COLOR_typing__ANewExpr___64dcallsite].val; /* @callsite on <self:ANewExpr> */
-}
-/* runtime class parser_nodes__AAttrExpr */
-const struct class class_parser_nodes__AAttrExpr = {
-0, /* box_kind */
-{
-(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:AAttrExpr:kernel#Object#object_id */
-(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:AAttrExpr:kernel#Object#is_same_type */
-(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:AAttrExpr:kernel#Object#== */
-(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:AAttrExpr:kernel#Object#!= */
-(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:AAttrExpr:kernel#Object#output */
-(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to parser_nodes:AAttrExpr:kernel#Object#output_class_name */
-(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to parser_nodes:AAttrExpr:kernel#Object#exit */
-(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to parser_nodes:AAttrExpr:kernel#Object#sys */
-(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to parser_nodes:AAttrExpr:kernel#Object#hash */
-(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to parser_nodes:AAttrExpr:string#Object#to_s */
-(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to parser_nodes:AAttrExpr:string#Object#native_class_name */
-(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to parser_nodes:AAttrExpr:string#Object#class_name */
-(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to parser_nodes:AAttrExpr:string#Object#inspect */
-(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to parser_nodes:AAttrExpr:string#Object#inspect_head */
-(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to parser_nodes:AAttrExpr:string#Object#args */
-(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to parser_nodes:AAttrExpr:math#Object#atan2 */
-(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to parser_nodes:AAttrExpr:math#Object#pi */
-(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to parser_nodes:AAttrExpr:math#Object#srand_from */
-(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to parser_nodes:AAttrExpr:math#Object#srand */
-(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to parser_nodes:AAttrExpr:stream#Object#poll */
-(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to parser_nodes:AAttrExpr:stream#Object#intern_poll */
-(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to parser_nodes:AAttrExpr:time#Object#get_time */
-(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to parser_nodes:AAttrExpr:file#Object#printn */
-(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to parser_nodes:AAttrExpr:file#Object#print */
-(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to parser_nodes:AAttrExpr:file#Object#getc */
-(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to parser_nodes:AAttrExpr:file#Object#gets */
-(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to parser_nodes:AAttrExpr:file#Object#getcwd */
-(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to parser_nodes:AAttrExpr:file#Object#file_getcwd */
-(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to parser_nodes:AAttrExpr:file#Object#stdin */
-(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to parser_nodes:AAttrExpr:file#Object#stdout */
-(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to parser_nodes:AAttrExpr:file#Object#stderr */
-(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to parser_nodes:AAttrExpr:model_base#Object#intrude_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to parser_nodes:AAttrExpr:model_base#Object#public_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to parser_nodes:AAttrExpr:model_base#Object#protected_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to parser_nodes:AAttrExpr:model_base#Object#private_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to parser_nodes:AAttrExpr:model_base#Object#none_visibility */
-(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to parser_nodes:AAttrExpr:model#Object#abstract_kind */
-(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to parser_nodes:AAttrExpr:model#Object#concrete_kind */
-(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to parser_nodes:AAttrExpr:model#Object#interface_kind */
-(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to parser_nodes:AAttrExpr:model#Object#enum_kind */
-(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to parser_nodes:AAttrExpr:model#Object#extern_kind */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__location, /* pointer to parser_nodes:AAttrExpr:parser_nodes#ANode#location */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__hot_location, /* pointer to parser_nodes:AAttrExpr:parser_nodes#ANode#hot_location */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__debug, /* pointer to parser_nodes:AAttrExpr:parser_nodes#ANode#debug */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent, /* pointer to parser_nodes:AAttrExpr:parser_nodes#ANode#parent */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent_61d, /* pointer to parser_nodes:AAttrExpr:parser_nodes#ANode#parent= */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__init, /* pointer to parser_nodes:AAttrExpr:parser_nodes#ANode#init */
-(nitmethod_t)VIRTUAL_parser_prod__AAttrExpr__replace_child, /* pointer to parser_nodes:AAttrExpr:parser_prod#AAttrExpr#replace_child */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__detach, /* pointer to parser_nodes:AAttrExpr:parser_nodes#ANode#detach */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__replace_with, /* pointer to parser_nodes:AAttrExpr:parser_nodes#Prod#replace_with */
-(nitmethod_t)VIRTUAL_parser_prod__AAttrExpr__visit_all, /* pointer to parser_nodes:AAttrExpr:parser_prod#AAttrExpr#visit_all */
-(nitmethod_t)VIRTUAL_parser_util__ANode__collect_tokens_by_text, /* pointer to parser_nodes:AAttrExpr:parser_util#ANode#collect_tokens_by_text */
-(nitmethod_t)VIRTUAL_parser_util__ANode__collect_annotations_by_name, /* pointer to parser_nodes:AAttrExpr:parser_util#ANode#collect_annotations_by_name */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__accept_simple_misc, /* pointer to parser_nodes:AAttrExpr:simple_misc_analysis#ANode#accept_simple_misc */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__after_simple_misc, /* pointer to parser_nodes:AAttrExpr:simple_misc_analysis#ANode#after_simple_misc */
-(nitmethod_t)VIRTUAL_literal__ANode__accept_literal, /* pointer to parser_nodes:AAttrExpr:literal#ANode#accept_literal */
-(nitmethod_t)VIRTUAL_scope__ANode__accept_scope_visitor, /* pointer to parser_nodes:AAttrExpr:scope#ANode#accept_scope_visitor */
-(nitmethod_t)VIRTUAL_flow__ANode__accept_flow_visitor, /* pointer to parser_nodes:AAttrExpr:flow#ANode#accept_flow_visitor */
-(nitmethod_t)VIRTUAL_local_var_init__ANode__accept_local_var_visitor, /* pointer to parser_nodes:AAttrExpr:local_var_init#ANode#accept_local_var_visitor */
-(nitmethod_t)VIRTUAL_auto_super_init__ANode__accept_auto_super_init, /* pointer to parser_nodes:AAttrExpr:auto_super_init#ANode#accept_auto_super_init */
-(nitmethod_t)VIRTUAL_rapid_type_analysis__ANode__accept_rapid_type_visitor, /* pointer to parser_nodes:AAttrExpr:rapid_type_analysis#ANode#accept_rapid_type_visitor */
-(nitmethod_t)VIRTUAL_astvalidation__AExpr__accept_ast_validation, /* pointer to parser_nodes:AAttrExpr:astvalidation#AExpr#accept_ast_validation */
-(nitmethod_t)VIRTUAL_transform__ANode__accept_transform_visitor, /* pointer to parser_nodes:AAttrExpr:transform#ANode#accept_transform_visitor */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__location_61d, /* pointer to parser_nodes:AAttrExpr:parser_nodes#Prod#location= */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations, /* pointer to parser_nodes:AAttrExpr:parser_nodes#Prod#n_annotations */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations_61d, /* pointer to parser_nodes:AAttrExpr:parser_nodes#Prod#n_annotations= */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__init, /* pointer to parser_nodes:AAttrExpr:parser_nodes#Prod#init */
-(nitmethod_t)VIRTUAL_modelize_property__Prod__collect_text, /* pointer to parser_nodes:AAttrExpr:modelize_property#Prod#collect_text */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__replace_with, /* pointer to parser_nodes:AAttrExpr:parser_nodes#ANode#replace_with */
-(nitmethod_t)VIRTUAL_parser_nodes__AExpr__init, /* pointer to parser_nodes:AAttrExpr:parser_nodes#AExpr#init */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__AExpr__warn_parentheses, /* pointer to parser_nodes:AAttrExpr:simple_misc_analysis#AExpr#warn_parentheses */
-(nitmethod_t)VIRTUAL_flow__AExpr__after_flow_context, /* pointer to parser_nodes:AAttrExpr:flow#AExpr#after_flow_context */
-(nitmethod_t)VIRTUAL_flow__AExpr__after_flow_context_61d, /* pointer to parser_nodes:AAttrExpr:flow#AExpr#after_flow_context= */
-(nitmethod_t)VIRTUAL_typing__AExpr__mtype, /* pointer to parser_nodes:AAttrExpr:typing#AExpr#mtype */
-(nitmethod_t)VIRTUAL_typing__AExpr__mtype_61d, /* pointer to parser_nodes:AAttrExpr:typing#AExpr#mtype= */
-(nitmethod_t)VIRTUAL_typing__AExpr__is_typed, /* pointer to parser_nodes:AAttrExpr:typing#AExpr#is_typed */
-(nitmethod_t)VIRTUAL_typing__AExpr__is_typed_61d, /* pointer to parser_nodes:AAttrExpr:typing#AExpr#is_typed= */
-(nitmethod_t)VIRTUAL_typing__AExpr__implicit_cast_to, /* pointer to parser_nodes:AAttrExpr:typing#AExpr#implicit_cast_to */
-(nitmethod_t)VIRTUAL_typing__AExpr__implicit_cast_to_61d, /* pointer to parser_nodes:AAttrExpr:typing#AExpr#implicit_cast_to= */
-(nitmethod_t)VIRTUAL_typing__AExpr__its_variable, /* pointer to parser_nodes:AAttrExpr:typing#AExpr#its_variable */
-(nitmethod_t)VIRTUAL_typing__AAttrExpr__accept_typing, /* pointer to parser_nodes:AAttrExpr:typing#AAttrExpr#accept_typing */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__make_var_read, /* pointer to parser_nodes:AAttrExpr:astbuilder#AExpr#make_var_read */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__variable_cache, /* pointer to parser_nodes:AAttrExpr:astbuilder#AExpr#variable_cache */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__variable_cache_61d, /* pointer to parser_nodes:AAttrExpr:astbuilder#AExpr#variable_cache= */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__detach_with_placeholder, /* pointer to parser_nodes:AAttrExpr:astbuilder#AExpr#detach_with_placeholder */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__add, /* pointer to parser_nodes:AAttrExpr:astbuilder#AExpr#add */
-(nitmethod_t)VIRTUAL_abstract_compiler__AAttrExpr__expr, /* pointer to parser_nodes:AAttrExpr:abstract_compiler#AAttrExpr#expr */
-(nitmethod_t)VIRTUAL_abstract_compiler__AExpr__stmt, /* pointer to parser_nodes:AAttrExpr:abstract_compiler#AExpr#stmt */
-(nitmethod_t)VIRTUAL_astvalidation__ANode__accept_ast_validation, /* pointer to parser_nodes:AAttrExpr:astvalidation#ANode#accept_ast_validation */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-(nitmethod_t)VIRTUAL_parser_nodes__AAttrFormExpr__n_expr, /* pointer to parser_nodes:AAttrExpr:parser_nodes#AAttrFormExpr#n_expr */
-(nitmethod_t)VIRTUAL_parser_prod__AAttrExpr__n_expr_61d, /* pointer to parser_nodes:AAttrExpr:parser_prod#AAttrExpr#n_expr= */
-(nitmethod_t)VIRTUAL_parser_nodes__AAttrFormExpr__n_id, /* pointer to parser_nodes:AAttrExpr:parser_nodes#AAttrFormExpr#n_id */
-(nitmethod_t)VIRTUAL_parser_prod__AAttrExpr__n_id_61d, /* pointer to parser_nodes:AAttrExpr:parser_prod#AAttrExpr#n_id= */
-(nitmethod_t)VIRTUAL_parser_nodes__AAttrFormExpr__init, /* pointer to parser_nodes:AAttrExpr:parser_nodes#AAttrFormExpr#init */
-(nitmethod_t)VIRTUAL_typing__AAttrFormExpr__mproperty, /* pointer to parser_nodes:AAttrExpr:typing#AAttrFormExpr#mproperty */
-(nitmethod_t)VIRTUAL_typing__AAttrFormExpr__mproperty_61d, /* pointer to parser_nodes:AAttrExpr:typing#AAttrFormExpr#mproperty= */
-(nitmethod_t)VIRTUAL_typing__AAttrFormExpr__attr_type, /* pointer to parser_nodes:AAttrExpr:typing#AAttrFormExpr#attr_type */
-(nitmethod_t)VIRTUAL_typing__AAttrFormExpr__attr_type_61d, /* pointer to parser_nodes:AAttrExpr:typing#AAttrFormExpr#attr_type= */
-(nitmethod_t)VIRTUAL_typing__AAttrFormExpr__resolve_property, /* pointer to parser_nodes:AAttrExpr:typing#AAttrFormExpr#resolve_property */
-(nitmethod_t)VIRTUAL_parser_nodes__AAttrExpr__init, /* pointer to parser_nodes:AAttrExpr:parser_nodes#AAttrExpr#init */
-(nitmethod_t)VIRTUAL_parser_prod__AAttrExpr__empty_init, /* pointer to parser_nodes:AAttrExpr:parser_prod#AAttrExpr#empty_init */
-(nitmethod_t)VIRTUAL_parser_prod__AAttrExpr__init_aattrexpr, /* pointer to parser_nodes:AAttrExpr:parser_prod#AAttrExpr#init_aattrexpr */
-(nitmethod_t)VIRTUAL_astbuilder__AAttrExpr__make, /* pointer to parser_nodes:AAttrExpr:astbuilder#AAttrExpr#make */
-}
-};
-/* allocate AAttrExpr */
-val* NEW_parser_nodes__AAttrExpr(const struct type* type) {
-val* self /* : AAttrExpr */;
-val* var /* : null */;
-val* var1 /* : null */;
-val* var2 /* : null */;
-val* var3 /* : null */;
-short int var4 /* : Bool */;
-val* var5 /* : null */;
-self = nit_alloc(sizeof(struct instance) + 17*sizeof(nitattribute_t));
-self->type = type;
-self->class = &class_parser_nodes__AAttrExpr;
-var = NULL;
-self->attrs[COLOR_parser_nodes__ANode___location].val = var; /* _location on <self:AAttrExpr exact> */
-var1 = NULL;
-self->attrs[COLOR_parser_nodes__ANode___64dparent].val = var1; /* @parent on <self:AAttrExpr exact> */
-var2 = NULL;
-self->attrs[COLOR_parser_nodes__Prod___n_annotations].val = var2; /* _n_annotations on <self:AAttrExpr exact> */
-var3 = NULL;
-self->attrs[COLOR_typing__AExpr___64dmtype].val = var3; /* @mtype on <self:AAttrExpr exact> */
-var4 = 0;
-self->attrs[COLOR_typing__AExpr___64dis_typed].s = var4; /* @is_typed on <self:AAttrExpr exact> */
-var5 = NULL;
-self->attrs[COLOR_typing__AExpr___64dimplicit_cast_to].val = var5; /* @implicit_cast_to on <self:AAttrExpr exact> */
-return self;
-}
-/* allocate AAttrExpr */
-void CHECK_NEW_parser_nodes__AAttrExpr(val* self) {
-val* var /* : nullable Location */;
-val* var1 /* : nullable FlowContext */;
-val* var2 /* : nullable Variable */;
-val* var3 /* : AExpr */;
-val* var4 /* : TAttrid */;
-val* var5 /* : nullable MAttribute */;
-val* var6 /* : nullable MType */;
-var = self->attrs[COLOR_parser__Prod___first_location].val; /* _first_location on <self:AAttrExpr> */
-var1 = self->attrs[COLOR_flow__AExpr___64dafter_flow_context].val; /* @after_flow_context on <self:AAttrExpr> */
-var2 = self->attrs[COLOR_astbuilder__AExpr___64dvariable_cache].val; /* @variable_cache on <self:AAttrExpr> */
-var3 = self->attrs[COLOR_parser_nodes__AAttrFormExpr___n_expr].val; /* _n_expr on <self:AAttrExpr> */
-if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr", "src/parser/parser_nodes.nit", 1340);
-exit(1);
-}
-var4 = self->attrs[COLOR_parser_nodes__AAttrFormExpr___n_id].val; /* _n_id on <self:AAttrExpr> */
-if (var4 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_id", "src/parser/parser_nodes.nit", 1343);
-exit(1);
-}
-var5 = self->attrs[COLOR_typing__AAttrFormExpr___64dmproperty].val; /* @mproperty on <self:AAttrExpr> */
-var6 = self->attrs[COLOR_typing__AAttrFormExpr___64dattr_type].val; /* @attr_type on <self:AAttrExpr> */
-}
-/* runtime class parser_nodes__AAttrAssignExpr */
-const struct class class_parser_nodes__AAttrAssignExpr = {
-0, /* box_kind */
-{
-(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:AAttrAssignExpr:kernel#Object#object_id */
-(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:AAttrAssignExpr:kernel#Object#is_same_type */
-(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:AAttrAssignExpr:kernel#Object#== */
-(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:AAttrAssignExpr:kernel#Object#!= */
-(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:AAttrAssignExpr:kernel#Object#output */
-(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to parser_nodes:AAttrAssignExpr:kernel#Object#output_class_name */
-(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to parser_nodes:AAttrAssignExpr:kernel#Object#exit */
-(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to parser_nodes:AAttrAssignExpr:kernel#Object#sys */
-(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to parser_nodes:AAttrAssignExpr:kernel#Object#hash */
-(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to parser_nodes:AAttrAssignExpr:string#Object#to_s */
-(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to parser_nodes:AAttrAssignExpr:string#Object#native_class_name */
-(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to parser_nodes:AAttrAssignExpr:string#Object#class_name */
-(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to parser_nodes:AAttrAssignExpr:string#Object#inspect */
-(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to parser_nodes:AAttrAssignExpr:string#Object#inspect_head */
-(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to parser_nodes:AAttrAssignExpr:string#Object#args */
-(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to parser_nodes:AAttrAssignExpr:math#Object#atan2 */
-(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to parser_nodes:AAttrAssignExpr:math#Object#pi */
-(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to parser_nodes:AAttrAssignExpr:math#Object#srand_from */
-(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to parser_nodes:AAttrAssignExpr:math#Object#srand */
-(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to parser_nodes:AAttrAssignExpr:stream#Object#poll */
-(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to parser_nodes:AAttrAssignExpr:stream#Object#intern_poll */
-(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to parser_nodes:AAttrAssignExpr:time#Object#get_time */
-(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to parser_nodes:AAttrAssignExpr:file#Object#printn */
-(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to parser_nodes:AAttrAssignExpr:file#Object#print */
-(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to parser_nodes:AAttrAssignExpr:file#Object#getc */
-(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to parser_nodes:AAttrAssignExpr:file#Object#gets */
-(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to parser_nodes:AAttrAssignExpr:file#Object#getcwd */
-(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to parser_nodes:AAttrAssignExpr:file#Object#file_getcwd */
-(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to parser_nodes:AAttrAssignExpr:file#Object#stdin */
-(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to parser_nodes:AAttrAssignExpr:file#Object#stdout */
-(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to parser_nodes:AAttrAssignExpr:file#Object#stderr */
-(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to parser_nodes:AAttrAssignExpr:model_base#Object#intrude_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to parser_nodes:AAttrAssignExpr:model_base#Object#public_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to parser_nodes:AAttrAssignExpr:model_base#Object#protected_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to parser_nodes:AAttrAssignExpr:model_base#Object#private_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to parser_nodes:AAttrAssignExpr:model_base#Object#none_visibility */
-(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to parser_nodes:AAttrAssignExpr:model#Object#abstract_kind */
-(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to parser_nodes:AAttrAssignExpr:model#Object#concrete_kind */
-(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to parser_nodes:AAttrAssignExpr:model#Object#interface_kind */
-(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to parser_nodes:AAttrAssignExpr:model#Object#enum_kind */
-(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to parser_nodes:AAttrAssignExpr:model#Object#extern_kind */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__location, /* pointer to parser_nodes:AAttrAssignExpr:parser_nodes#ANode#location */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__hot_location, /* pointer to parser_nodes:AAttrAssignExpr:parser_nodes#ANode#hot_location */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__debug, /* pointer to parser_nodes:AAttrAssignExpr:parser_nodes#ANode#debug */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent, /* pointer to parser_nodes:AAttrAssignExpr:parser_nodes#ANode#parent */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent_61d, /* pointer to parser_nodes:AAttrAssignExpr:parser_nodes#ANode#parent= */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__init, /* pointer to parser_nodes:AAttrAssignExpr:parser_nodes#ANode#init */
-(nitmethod_t)VIRTUAL_parser_prod__AAttrAssignExpr__replace_child, /* pointer to parser_nodes:AAttrAssignExpr:parser_prod#AAttrAssignExpr#replace_child */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__detach, /* pointer to parser_nodes:AAttrAssignExpr:parser_nodes#ANode#detach */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__replace_with, /* pointer to parser_nodes:AAttrAssignExpr:parser_nodes#Prod#replace_with */
-(nitmethod_t)VIRTUAL_parser_prod__AAttrAssignExpr__visit_all, /* pointer to parser_nodes:AAttrAssignExpr:parser_prod#AAttrAssignExpr#visit_all */
-(nitmethod_t)VIRTUAL_parser_util__ANode__collect_tokens_by_text, /* pointer to parser_nodes:AAttrAssignExpr:parser_util#ANode#collect_tokens_by_text */
-(nitmethod_t)VIRTUAL_parser_util__ANode__collect_annotations_by_name, /* pointer to parser_nodes:AAttrAssignExpr:parser_util#ANode#collect_annotations_by_name */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__accept_simple_misc, /* pointer to parser_nodes:AAttrAssignExpr:simple_misc_analysis#ANode#accept_simple_misc */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__after_simple_misc, /* pointer to parser_nodes:AAttrAssignExpr:simple_misc_analysis#ANode#after_simple_misc */
-(nitmethod_t)VIRTUAL_literal__ANode__accept_literal, /* pointer to parser_nodes:AAttrAssignExpr:literal#ANode#accept_literal */
-(nitmethod_t)VIRTUAL_scope__ANode__accept_scope_visitor, /* pointer to parser_nodes:AAttrAssignExpr:scope#ANode#accept_scope_visitor */
-(nitmethod_t)VIRTUAL_flow__ANode__accept_flow_visitor, /* pointer to parser_nodes:AAttrAssignExpr:flow#ANode#accept_flow_visitor */
-(nitmethod_t)VIRTUAL_local_var_init__ANode__accept_local_var_visitor, /* pointer to parser_nodes:AAttrAssignExpr:local_var_init#ANode#accept_local_var_visitor */
-(nitmethod_t)VIRTUAL_auto_super_init__ANode__accept_auto_super_init, /* pointer to parser_nodes:AAttrAssignExpr:auto_super_init#ANode#accept_auto_super_init */
-(nitmethod_t)VIRTUAL_rapid_type_analysis__ANode__accept_rapid_type_visitor, /* pointer to parser_nodes:AAttrAssignExpr:rapid_type_analysis#ANode#accept_rapid_type_visitor */
-(nitmethod_t)VIRTUAL_astvalidation__AExpr__accept_ast_validation, /* pointer to parser_nodes:AAttrAssignExpr:astvalidation#AExpr#accept_ast_validation */
-(nitmethod_t)VIRTUAL_transform__ANode__accept_transform_visitor, /* pointer to parser_nodes:AAttrAssignExpr:transform#ANode#accept_transform_visitor */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__location_61d, /* pointer to parser_nodes:AAttrAssignExpr:parser_nodes#Prod#location= */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations, /* pointer to parser_nodes:AAttrAssignExpr:parser_nodes#Prod#n_annotations */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations_61d, /* pointer to parser_nodes:AAttrAssignExpr:parser_nodes#Prod#n_annotations= */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__init, /* pointer to parser_nodes:AAttrAssignExpr:parser_nodes#Prod#init */
-(nitmethod_t)VIRTUAL_modelize_property__Prod__collect_text, /* pointer to parser_nodes:AAttrAssignExpr:modelize_property#Prod#collect_text */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__replace_with, /* pointer to parser_nodes:AAttrAssignExpr:parser_nodes#ANode#replace_with */
-(nitmethod_t)VIRTUAL_parser_nodes__AExpr__init, /* pointer to parser_nodes:AAttrAssignExpr:parser_nodes#AExpr#init */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__AExpr__warn_parentheses, /* pointer to parser_nodes:AAttrAssignExpr:simple_misc_analysis#AExpr#warn_parentheses */
-(nitmethod_t)VIRTUAL_flow__AExpr__after_flow_context, /* pointer to parser_nodes:AAttrAssignExpr:flow#AExpr#after_flow_context */
-(nitmethod_t)VIRTUAL_flow__AExpr__after_flow_context_61d, /* pointer to parser_nodes:AAttrAssignExpr:flow#AExpr#after_flow_context= */
-(nitmethod_t)VIRTUAL_typing__AExpr__mtype, /* pointer to parser_nodes:AAttrAssignExpr:typing#AExpr#mtype */
-(nitmethod_t)VIRTUAL_typing__AExpr__mtype_61d, /* pointer to parser_nodes:AAttrAssignExpr:typing#AExpr#mtype= */
-(nitmethod_t)VIRTUAL_typing__AExpr__is_typed, /* pointer to parser_nodes:AAttrAssignExpr:typing#AExpr#is_typed */
-(nitmethod_t)VIRTUAL_typing__AExpr__is_typed_61d, /* pointer to parser_nodes:AAttrAssignExpr:typing#AExpr#is_typed= */
-(nitmethod_t)VIRTUAL_typing__AExpr__implicit_cast_to, /* pointer to parser_nodes:AAttrAssignExpr:typing#AExpr#implicit_cast_to */
-(nitmethod_t)VIRTUAL_typing__AExpr__implicit_cast_to_61d, /* pointer to parser_nodes:AAttrAssignExpr:typing#AExpr#implicit_cast_to= */
-(nitmethod_t)VIRTUAL_typing__AExpr__its_variable, /* pointer to parser_nodes:AAttrAssignExpr:typing#AExpr#its_variable */
-(nitmethod_t)VIRTUAL_typing__AAttrAssignExpr__accept_typing, /* pointer to parser_nodes:AAttrAssignExpr:typing#AAttrAssignExpr#accept_typing */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__make_var_read, /* pointer to parser_nodes:AAttrAssignExpr:astbuilder#AExpr#make_var_read */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__variable_cache, /* pointer to parser_nodes:AAttrAssignExpr:astbuilder#AExpr#variable_cache */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__variable_cache_61d, /* pointer to parser_nodes:AAttrAssignExpr:astbuilder#AExpr#variable_cache= */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__detach_with_placeholder, /* pointer to parser_nodes:AAttrAssignExpr:astbuilder#AExpr#detach_with_placeholder */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__add, /* pointer to parser_nodes:AAttrAssignExpr:astbuilder#AExpr#add */
-(nitmethod_t)VIRTUAL_abstract_compiler__AExpr__expr, /* pointer to parser_nodes:AAttrAssignExpr:abstract_compiler#AExpr#expr */
-(nitmethod_t)VIRTUAL_abstract_compiler__AAttrAssignExpr__stmt, /* pointer to parser_nodes:AAttrAssignExpr:abstract_compiler#AAttrAssignExpr#stmt */
-(nitmethod_t)VIRTUAL_astvalidation__ANode__accept_ast_validation, /* pointer to parser_nodes:AAttrAssignExpr:astvalidation#ANode#accept_ast_validation */
-(nitmethod_t)VIRTUAL_parser_nodes__AAssignFormExpr__n_assign, /* pointer to parser_nodes:AAttrAssignExpr:parser_nodes#AAssignFormExpr#n_assign */
-(nitmethod_t)VIRTUAL_parser_prod__AAttrAssignExpr__n_assign_61d, /* pointer to parser_nodes:AAttrAssignExpr:parser_prod#AAttrAssignExpr#n_assign= */
-(nitmethod_t)VIRTUAL_parser_nodes__AAssignFormExpr__n_value, /* pointer to parser_nodes:AAttrAssignExpr:parser_nodes#AAssignFormExpr#n_value */
-(nitmethod_t)VIRTUAL_parser_prod__AAttrAssignExpr__n_value_61d, /* pointer to parser_nodes:AAttrAssignExpr:parser_prod#AAttrAssignExpr#n_value= */
-(nitmethod_t)VIRTUAL_parser_nodes__AAssignFormExpr__init, /* pointer to parser_nodes:AAttrAssignExpr:parser_nodes#AAssignFormExpr#init */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-(nitmethod_t)VIRTUAL_parser_nodes__AAttrFormExpr__n_expr, /* pointer to parser_nodes:AAttrAssignExpr:parser_nodes#AAttrFormExpr#n_expr */
-(nitmethod_t)VIRTUAL_parser_prod__AAttrAssignExpr__n_expr_61d, /* pointer to parser_nodes:AAttrAssignExpr:parser_prod#AAttrAssignExpr#n_expr= */
-(nitmethod_t)VIRTUAL_parser_nodes__AAttrFormExpr__n_id, /* pointer to parser_nodes:AAttrAssignExpr:parser_nodes#AAttrFormExpr#n_id */
-(nitmethod_t)VIRTUAL_parser_prod__AAttrAssignExpr__n_id_61d, /* pointer to parser_nodes:AAttrAssignExpr:parser_prod#AAttrAssignExpr#n_id= */
-(nitmethod_t)VIRTUAL_parser_nodes__AAttrFormExpr__init, /* pointer to parser_nodes:AAttrAssignExpr:parser_nodes#AAttrFormExpr#init */
-(nitmethod_t)VIRTUAL_typing__AAttrFormExpr__mproperty, /* pointer to parser_nodes:AAttrAssignExpr:typing#AAttrFormExpr#mproperty */
-(nitmethod_t)VIRTUAL_typing__AAttrFormExpr__mproperty_61d, /* pointer to parser_nodes:AAttrAssignExpr:typing#AAttrFormExpr#mproperty= */
-(nitmethod_t)VIRTUAL_typing__AAttrFormExpr__attr_type, /* pointer to parser_nodes:AAttrAssignExpr:typing#AAttrFormExpr#attr_type */
-(nitmethod_t)VIRTUAL_typing__AAttrFormExpr__attr_type_61d, /* pointer to parser_nodes:AAttrAssignExpr:typing#AAttrFormExpr#attr_type= */
-(nitmethod_t)VIRTUAL_typing__AAttrFormExpr__resolve_property, /* pointer to parser_nodes:AAttrAssignExpr:typing#AAttrFormExpr#resolve_property */
-(nitmethod_t)VIRTUAL_parser_nodes__AAttrAssignExpr__init, /* pointer to parser_nodes:AAttrAssignExpr:parser_nodes#AAttrAssignExpr#init */
-(nitmethod_t)VIRTUAL_parser_prod__AAttrAssignExpr__empty_init, /* pointer to parser_nodes:AAttrAssignExpr:parser_prod#AAttrAssignExpr#empty_init */
-(nitmethod_t)VIRTUAL_parser_prod__AAttrAssignExpr__init_aattrassignexpr, /* pointer to parser_nodes:AAttrAssignExpr:parser_prod#AAttrAssignExpr#init_aattrassignexpr */
-(nitmethod_t)VIRTUAL_astbuilder__AAttrAssignExpr__make, /* pointer to parser_nodes:AAttrAssignExpr:astbuilder#AAttrAssignExpr#make */
-}
-};
-/* allocate AAttrAssignExpr */
-val* NEW_parser_nodes__AAttrAssignExpr(const struct type* type) {
-val* self /* : AAttrAssignExpr */;
-val* var /* : null */;
-val* var1 /* : null */;
-val* var2 /* : null */;
-val* var3 /* : null */;
-short int var4 /* : Bool */;
-val* var5 /* : null */;
-self = nit_alloc(sizeof(struct instance) + 17*sizeof(nitattribute_t));
-self->type = type;
-self->class = &class_parser_nodes__AAttrAssignExpr;
-var = NULL;
-self->attrs[COLOR_parser_nodes__ANode___location].val = var; /* _location on <self:AAttrAssignExpr exact> */
-var1 = NULL;
-self->attrs[COLOR_parser_nodes__ANode___64dparent].val = var1; /* @parent on <self:AAttrAssignExpr exact> */
-var2 = NULL;
-self->attrs[COLOR_parser_nodes__Prod___n_annotations].val = var2; /* _n_annotations on <self:AAttrAssignExpr exact> */
-var3 = NULL;
-self->attrs[COLOR_typing__AExpr___64dmtype].val = var3; /* @mtype on <self:AAttrAssignExpr exact> */
-var4 = 0;
-self->attrs[COLOR_typing__AExpr___64dis_typed].s = var4; /* @is_typed on <self:AAttrAssignExpr exact> */
-var5 = NULL;
-self->attrs[COLOR_typing__AExpr___64dimplicit_cast_to].val = var5; /* @implicit_cast_to on <self:AAttrAssignExpr exact> */
-return self;
-}
-/* allocate AAttrAssignExpr */
-void CHECK_NEW_parser_nodes__AAttrAssignExpr(val* self) {
-val* var /* : nullable Location */;
-val* var1 /* : nullable FlowContext */;
-val* var2 /* : nullable Variable */;
-val* var3 /* : TAssign */;
-val* var4 /* : AExpr */;
-val* var5 /* : AExpr */;
-val* var6 /* : TAttrid */;
-val* var7 /* : nullable MAttribute */;
-val* var8 /* : nullable MType */;
-var = self->attrs[COLOR_parser__Prod___first_location].val; /* _first_location on <self:AAttrAssignExpr> */
-var1 = self->attrs[COLOR_flow__AExpr___64dafter_flow_context].val; /* @after_flow_context on <self:AAttrAssignExpr> */
-var2 = self->attrs[COLOR_astbuilder__AExpr___64dvariable_cache].val; /* @variable_cache on <self:AAttrAssignExpr> */
-var3 = self->attrs[COLOR_parser_nodes__AAssignFormExpr___n_assign].val; /* _n_assign on <self:AAttrAssignExpr> */
-if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_assign", "src/parser/parser_nodes.nit", 1161);
-exit(1);
-}
-var4 = self->attrs[COLOR_parser_nodes__AAssignFormExpr___n_value].val; /* _n_value on <self:AAttrAssignExpr> */
-if (var4 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_value", "src/parser/parser_nodes.nit", 1162);
-exit(1);
-}
-var5 = self->attrs[COLOR_parser_nodes__AAttrFormExpr___n_expr].val; /* _n_expr on <self:AAttrAssignExpr> */
-if (var5 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr", "src/parser/parser_nodes.nit", 1340);
-exit(1);
-}
-var6 = self->attrs[COLOR_parser_nodes__AAttrFormExpr___n_id].val; /* _n_id on <self:AAttrAssignExpr> */
-if (var6 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_id", "src/parser/parser_nodes.nit", 1343);
-exit(1);
-}
-var7 = self->attrs[COLOR_typing__AAttrFormExpr___64dmproperty].val; /* @mproperty on <self:AAttrAssignExpr> */
-var8 = self->attrs[COLOR_typing__AAttrFormExpr___64dattr_type].val; /* @attr_type on <self:AAttrAssignExpr> */
-}
-/* runtime class parser_nodes__AAttrReassignExpr */
-const struct class class_parser_nodes__AAttrReassignExpr = {
-0, /* box_kind */
-{
-(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:AAttrReassignExpr:kernel#Object#object_id */
-(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:AAttrReassignExpr:kernel#Object#is_same_type */
-(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:AAttrReassignExpr:kernel#Object#== */
-(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:AAttrReassignExpr:kernel#Object#!= */
-(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:AAttrReassignExpr:kernel#Object#output */
-(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to parser_nodes:AAttrReassignExpr:kernel#Object#output_class_name */
-(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to parser_nodes:AAttrReassignExpr:kernel#Object#exit */
-(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to parser_nodes:AAttrReassignExpr:kernel#Object#sys */
-(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to parser_nodes:AAttrReassignExpr:kernel#Object#hash */
-(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to parser_nodes:AAttrReassignExpr:string#Object#to_s */
-(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to parser_nodes:AAttrReassignExpr:string#Object#native_class_name */
-(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to parser_nodes:AAttrReassignExpr:string#Object#class_name */
-(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to parser_nodes:AAttrReassignExpr:string#Object#inspect */
-(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to parser_nodes:AAttrReassignExpr:string#Object#inspect_head */
-(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to parser_nodes:AAttrReassignExpr:string#Object#args */
-(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to parser_nodes:AAttrReassignExpr:math#Object#atan2 */
-(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to parser_nodes:AAttrReassignExpr:math#Object#pi */
-(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to parser_nodes:AAttrReassignExpr:math#Object#srand_from */
-(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to parser_nodes:AAttrReassignExpr:math#Object#srand */
-(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to parser_nodes:AAttrReassignExpr:stream#Object#poll */
-(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to parser_nodes:AAttrReassignExpr:stream#Object#intern_poll */
-(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to parser_nodes:AAttrReassignExpr:time#Object#get_time */
-(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to parser_nodes:AAttrReassignExpr:file#Object#printn */
-(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to parser_nodes:AAttrReassignExpr:file#Object#print */
-(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to parser_nodes:AAttrReassignExpr:file#Object#getc */
-(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to parser_nodes:AAttrReassignExpr:file#Object#gets */
-(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to parser_nodes:AAttrReassignExpr:file#Object#getcwd */
-(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to parser_nodes:AAttrReassignExpr:file#Object#file_getcwd */
-(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to parser_nodes:AAttrReassignExpr:file#Object#stdin */
-(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to parser_nodes:AAttrReassignExpr:file#Object#stdout */
-(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to parser_nodes:AAttrReassignExpr:file#Object#stderr */
-(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to parser_nodes:AAttrReassignExpr:model_base#Object#intrude_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to parser_nodes:AAttrReassignExpr:model_base#Object#public_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to parser_nodes:AAttrReassignExpr:model_base#Object#protected_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to parser_nodes:AAttrReassignExpr:model_base#Object#private_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to parser_nodes:AAttrReassignExpr:model_base#Object#none_visibility */
-(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to parser_nodes:AAttrReassignExpr:model#Object#abstract_kind */
-(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to parser_nodes:AAttrReassignExpr:model#Object#concrete_kind */
-(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to parser_nodes:AAttrReassignExpr:model#Object#interface_kind */
-(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to parser_nodes:AAttrReassignExpr:model#Object#enum_kind */
-(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to parser_nodes:AAttrReassignExpr:model#Object#extern_kind */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__location, /* pointer to parser_nodes:AAttrReassignExpr:parser_nodes#ANode#location */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__hot_location, /* pointer to parser_nodes:AAttrReassignExpr:parser_nodes#ANode#hot_location */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__debug, /* pointer to parser_nodes:AAttrReassignExpr:parser_nodes#ANode#debug */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent, /* pointer to parser_nodes:AAttrReassignExpr:parser_nodes#ANode#parent */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent_61d, /* pointer to parser_nodes:AAttrReassignExpr:parser_nodes#ANode#parent= */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__init, /* pointer to parser_nodes:AAttrReassignExpr:parser_nodes#ANode#init */
-(nitmethod_t)VIRTUAL_parser_prod__AAttrReassignExpr__replace_child, /* pointer to parser_nodes:AAttrReassignExpr:parser_prod#AAttrReassignExpr#replace_child */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__detach, /* pointer to parser_nodes:AAttrReassignExpr:parser_nodes#ANode#detach */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__replace_with, /* pointer to parser_nodes:AAttrReassignExpr:parser_nodes#Prod#replace_with */
-(nitmethod_t)VIRTUAL_parser_prod__AAttrReassignExpr__visit_all, /* pointer to parser_nodes:AAttrReassignExpr:parser_prod#AAttrReassignExpr#visit_all */
-(nitmethod_t)VIRTUAL_parser_util__ANode__collect_tokens_by_text, /* pointer to parser_nodes:AAttrReassignExpr:parser_util#ANode#collect_tokens_by_text */
-(nitmethod_t)VIRTUAL_parser_util__ANode__collect_annotations_by_name, /* pointer to parser_nodes:AAttrReassignExpr:parser_util#ANode#collect_annotations_by_name */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__accept_simple_misc, /* pointer to parser_nodes:AAttrReassignExpr:simple_misc_analysis#ANode#accept_simple_misc */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__after_simple_misc, /* pointer to parser_nodes:AAttrReassignExpr:simple_misc_analysis#ANode#after_simple_misc */
-(nitmethod_t)VIRTUAL_literal__ANode__accept_literal, /* pointer to parser_nodes:AAttrReassignExpr:literal#ANode#accept_literal */
-(nitmethod_t)VIRTUAL_scope__ANode__accept_scope_visitor, /* pointer to parser_nodes:AAttrReassignExpr:scope#ANode#accept_scope_visitor */
-(nitmethod_t)VIRTUAL_flow__AReassignFormExpr__accept_flow_visitor, /* pointer to parser_nodes:AAttrReassignExpr:flow#AReassignFormExpr#accept_flow_visitor */
-(nitmethod_t)VIRTUAL_local_var_init__ANode__accept_local_var_visitor, /* pointer to parser_nodes:AAttrReassignExpr:local_var_init#ANode#accept_local_var_visitor */
-(nitmethod_t)VIRTUAL_auto_super_init__ANode__accept_auto_super_init, /* pointer to parser_nodes:AAttrReassignExpr:auto_super_init#ANode#accept_auto_super_init */
-(nitmethod_t)VIRTUAL_rapid_type_analysis__AAttrReassignExpr__accept_rapid_type_visitor, /* pointer to parser_nodes:AAttrReassignExpr:rapid_type_analysis#AAttrReassignExpr#accept_rapid_type_visitor */
-(nitmethod_t)VIRTUAL_astvalidation__AExpr__accept_ast_validation, /* pointer to parser_nodes:AAttrReassignExpr:astvalidation#AExpr#accept_ast_validation */
-(nitmethod_t)VIRTUAL_transform__AAttrReassignExpr__accept_transform_visitor, /* pointer to parser_nodes:AAttrReassignExpr:transform#AAttrReassignExpr#accept_transform_visitor */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__location_61d, /* pointer to parser_nodes:AAttrReassignExpr:parser_nodes#Prod#location= */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations, /* pointer to parser_nodes:AAttrReassignExpr:parser_nodes#Prod#n_annotations */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations_61d, /* pointer to parser_nodes:AAttrReassignExpr:parser_nodes#Prod#n_annotations= */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__init, /* pointer to parser_nodes:AAttrReassignExpr:parser_nodes#Prod#init */
-(nitmethod_t)VIRTUAL_modelize_property__Prod__collect_text, /* pointer to parser_nodes:AAttrReassignExpr:modelize_property#Prod#collect_text */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__replace_with, /* pointer to parser_nodes:AAttrReassignExpr:parser_nodes#ANode#replace_with */
-(nitmethod_t)VIRTUAL_parser_nodes__AExpr__init, /* pointer to parser_nodes:AAttrReassignExpr:parser_nodes#AExpr#init */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__AExpr__warn_parentheses, /* pointer to parser_nodes:AAttrReassignExpr:simple_misc_analysis#AExpr#warn_parentheses */
-(nitmethod_t)VIRTUAL_flow__AExpr__after_flow_context, /* pointer to parser_nodes:AAttrReassignExpr:flow#AExpr#after_flow_context */
-(nitmethod_t)VIRTUAL_flow__AExpr__after_flow_context_61d, /* pointer to parser_nodes:AAttrReassignExpr:flow#AExpr#after_flow_context= */
-(nitmethod_t)VIRTUAL_typing__AExpr__mtype, /* pointer to parser_nodes:AAttrReassignExpr:typing#AExpr#mtype */
-(nitmethod_t)VIRTUAL_typing__AExpr__mtype_61d, /* pointer to parser_nodes:AAttrReassignExpr:typing#AExpr#mtype= */
-(nitmethod_t)VIRTUAL_typing__AExpr__is_typed, /* pointer to parser_nodes:AAttrReassignExpr:typing#AExpr#is_typed */
-(nitmethod_t)VIRTUAL_typing__AExpr__is_typed_61d, /* pointer to parser_nodes:AAttrReassignExpr:typing#AExpr#is_typed= */
-(nitmethod_t)VIRTUAL_typing__AExpr__implicit_cast_to, /* pointer to parser_nodes:AAttrReassignExpr:typing#AExpr#implicit_cast_to */
-(nitmethod_t)VIRTUAL_typing__AExpr__implicit_cast_to_61d, /* pointer to parser_nodes:AAttrReassignExpr:typing#AExpr#implicit_cast_to= */
-(nitmethod_t)VIRTUAL_typing__AExpr__its_variable, /* pointer to parser_nodes:AAttrReassignExpr:typing#AExpr#its_variable */
-(nitmethod_t)VIRTUAL_typing__AAttrReassignExpr__accept_typing, /* pointer to parser_nodes:AAttrReassignExpr:typing#AAttrReassignExpr#accept_typing */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__make_var_read, /* pointer to parser_nodes:AAttrReassignExpr:astbuilder#AExpr#make_var_read */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__variable_cache, /* pointer to parser_nodes:AAttrReassignExpr:astbuilder#AExpr#variable_cache */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__variable_cache_61d, /* pointer to parser_nodes:AAttrReassignExpr:astbuilder#AExpr#variable_cache= */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__detach_with_placeholder, /* pointer to parser_nodes:AAttrReassignExpr:astbuilder#AExpr#detach_with_placeholder */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__add, /* pointer to parser_nodes:AAttrReassignExpr:astbuilder#AExpr#add */
-(nitmethod_t)VIRTUAL_abstract_compiler__AExpr__expr, /* pointer to parser_nodes:AAttrReassignExpr:abstract_compiler#AExpr#expr */
-(nitmethod_t)VIRTUAL_abstract_compiler__AAttrReassignExpr__stmt, /* pointer to parser_nodes:AAttrReassignExpr:abstract_compiler#AAttrReassignExpr#stmt */
-(nitmethod_t)VIRTUAL_astvalidation__ANode__accept_ast_validation, /* pointer to parser_nodes:AAttrReassignExpr:astvalidation#ANode#accept_ast_validation */
-(nitmethod_t)VIRTUAL_parser_nodes__AReassignFormExpr__n_assign_op, /* pointer to parser_nodes:AAttrReassignExpr:parser_nodes#AReassignFormExpr#n_assign_op */
-(nitmethod_t)VIRTUAL_parser_prod__AAttrReassignExpr__n_assign_op_61d, /* pointer to parser_nodes:AAttrReassignExpr:parser_prod#AAttrReassignExpr#n_assign_op= */
-(nitmethod_t)VIRTUAL_parser_nodes__AReassignFormExpr__n_value, /* pointer to parser_nodes:AAttrReassignExpr:parser_nodes#AReassignFormExpr#n_value */
-(nitmethod_t)VIRTUAL_parser_prod__AAttrReassignExpr__n_value_61d, /* pointer to parser_nodes:AAttrReassignExpr:parser_prod#AAttrReassignExpr#n_value= */
-(nitmethod_t)VIRTUAL_parser_nodes__AReassignFormExpr__init, /* pointer to parser_nodes:AAttrReassignExpr:parser_nodes#AReassignFormExpr#init */
-(nitmethod_t)VIRTUAL_typing__AReassignFormExpr__reassign_property, /* pointer to parser_nodes:AAttrReassignExpr:typing#AReassignFormExpr#reassign_property */
-(nitmethod_t)VIRTUAL_typing__AReassignFormExpr__reassign_callsite, /* pointer to parser_nodes:AAttrReassignExpr:typing#AReassignFormExpr#reassign_callsite */
-(nitmethod_t)VIRTUAL_typing__AReassignFormExpr__reassign_callsite_61d, /* pointer to parser_nodes:AAttrReassignExpr:typing#AReassignFormExpr#reassign_callsite= */
-(nitmethod_t)VIRTUAL_typing__AReassignFormExpr__read_type, /* pointer to parser_nodes:AAttrReassignExpr:typing#AReassignFormExpr#read_type */
-(nitmethod_t)VIRTUAL_typing__AReassignFormExpr__read_type_61d, /* pointer to parser_nodes:AAttrReassignExpr:typing#AReassignFormExpr#read_type= */
-(nitmethod_t)VIRTUAL_typing__AReassignFormExpr__resolve_reassignment, /* pointer to parser_nodes:AAttrReassignExpr:typing#AReassignFormExpr#resolve_reassignment */
-(nitmethod_t)VIRTUAL_flow__ANode__accept_flow_visitor, /* pointer to parser_nodes:AAttrReassignExpr:flow#ANode#accept_flow_visitor */
-(nitmethod_t)VIRTUAL_parser_nodes__AAttrFormExpr__n_expr, /* pointer to parser_nodes:AAttrReassignExpr:parser_nodes#AAttrFormExpr#n_expr */
-(nitmethod_t)VIRTUAL_parser_prod__AAttrReassignExpr__n_expr_61d, /* pointer to parser_nodes:AAttrReassignExpr:parser_prod#AAttrReassignExpr#n_expr= */
-(nitmethod_t)VIRTUAL_parser_nodes__AAttrFormExpr__n_id, /* pointer to parser_nodes:AAttrReassignExpr:parser_nodes#AAttrFormExpr#n_id */
-(nitmethod_t)VIRTUAL_parser_prod__AAttrReassignExpr__n_id_61d, /* pointer to parser_nodes:AAttrReassignExpr:parser_prod#AAttrReassignExpr#n_id= */
-(nitmethod_t)VIRTUAL_parser_nodes__AAttrFormExpr__init, /* pointer to parser_nodes:AAttrReassignExpr:parser_nodes#AAttrFormExpr#init */
-(nitmethod_t)VIRTUAL_typing__AAttrFormExpr__mproperty, /* pointer to parser_nodes:AAttrReassignExpr:typing#AAttrFormExpr#mproperty */
-(nitmethod_t)VIRTUAL_typing__AAttrFormExpr__mproperty_61d, /* pointer to parser_nodes:AAttrReassignExpr:typing#AAttrFormExpr#mproperty= */
-(nitmethod_t)VIRTUAL_typing__AAttrFormExpr__attr_type, /* pointer to parser_nodes:AAttrReassignExpr:typing#AAttrFormExpr#attr_type */
-(nitmethod_t)VIRTUAL_typing__AAttrFormExpr__attr_type_61d, /* pointer to parser_nodes:AAttrReassignExpr:typing#AAttrFormExpr#attr_type= */
-(nitmethod_t)VIRTUAL_typing__AAttrFormExpr__resolve_property, /* pointer to parser_nodes:AAttrReassignExpr:typing#AAttrFormExpr#resolve_property */
-(nitmethod_t)VIRTUAL_parser_nodes__AAttrReassignExpr__init, /* pointer to parser_nodes:AAttrReassignExpr:parser_nodes#AAttrReassignExpr#init */
-(nitmethod_t)VIRTUAL_parser_prod__AAttrReassignExpr__empty_init, /* pointer to parser_nodes:AAttrReassignExpr:parser_prod#AAttrReassignExpr#empty_init */
-(nitmethod_t)VIRTUAL_parser_prod__AAttrReassignExpr__init_aattrreassignexpr, /* pointer to parser_nodes:AAttrReassignExpr:parser_prod#AAttrReassignExpr#init_aattrreassignexpr */
-}
-};
-/* allocate AAttrReassignExpr */
-val* NEW_parser_nodes__AAttrReassignExpr(const struct type* type) {
-val* self /* : AAttrReassignExpr */;
-val* var /* : null */;
-val* var1 /* : null */;
-val* var2 /* : null */;
-val* var3 /* : null */;
-short int var4 /* : Bool */;
-val* var5 /* : null */;
-val* var6 /* : null */;
-self = nit_alloc(sizeof(struct instance) + 17*sizeof(nitattribute_t));
-self->type = type;
-self->class = &class_parser_nodes__AAttrReassignExpr;
-var = NULL;
-self->attrs[COLOR_parser_nodes__ANode___location].val = var; /* _location on <self:AAttrReassignExpr exact> */
-var1 = NULL;
-self->attrs[COLOR_parser_nodes__ANode___64dparent].val = var1; /* @parent on <self:AAttrReassignExpr exact> */
-var2 = NULL;
-self->attrs[COLOR_parser_nodes__Prod___n_annotations].val = var2; /* _n_annotations on <self:AAttrReassignExpr exact> */
-var3 = NULL;
-self->attrs[COLOR_typing__AExpr___64dmtype].val = var3; /* @mtype on <self:AAttrReassignExpr exact> */
-var4 = 0;
-self->attrs[COLOR_typing__AExpr___64dis_typed].s = var4; /* @is_typed on <self:AAttrReassignExpr exact> */
-var5 = NULL;
-self->attrs[COLOR_typing__AExpr___64dimplicit_cast_to].val = var5; /* @implicit_cast_to on <self:AAttrReassignExpr exact> */
-var6 = NULL;
-self->attrs[COLOR_typing__AReassignFormExpr___64dread_type].val = var6; /* @read_type on <self:AAttrReassignExpr exact> */
-return self;
-}
-/* allocate AAttrReassignExpr */
-void CHECK_NEW_parser_nodes__AAttrReassignExpr(val* self) {
-val* var /* : nullable Location */;
-val* var1 /* : nullable FlowContext */;
-val* var2 /* : nullable Variable */;
-val* var3 /* : AAssignOp */;
-val* var4 /* : AExpr */;
-val* var5 /* : nullable CallSite */;
-val* var6 /* : AExpr */;
-val* var7 /* : TAttrid */;
-val* var8 /* : nullable MAttribute */;
-val* var9 /* : nullable MType */;
-var = self->attrs[COLOR_parser__Prod___first_location].val; /* _first_location on <self:AAttrReassignExpr> */
-var1 = self->attrs[COLOR_flow__AExpr___64dafter_flow_context].val; /* @after_flow_context on <self:AAttrReassignExpr> */
-var2 = self->attrs[COLOR_astbuilder__AExpr___64dvariable_cache].val; /* @variable_cache on <self:AAttrReassignExpr> */
-var3 = self->attrs[COLOR_parser_nodes__AReassignFormExpr___n_assign_op].val; /* _n_assign_op on <self:AAttrReassignExpr> */
-if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_assign_op", "src/parser/parser_nodes.nit", 1168);
-exit(1);
-}
-var4 = self->attrs[COLOR_parser_nodes__AReassignFormExpr___n_value].val; /* _n_value on <self:AAttrReassignExpr> */
-if (var4 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_value", "src/parser/parser_nodes.nit", 1169);
-exit(1);
-}
-var5 = self->attrs[COLOR_typing__AReassignFormExpr___64dreassign_callsite].val; /* @reassign_callsite on <self:AAttrReassignExpr> */
-var6 = self->attrs[COLOR_parser_nodes__AAttrFormExpr___n_expr].val; /* _n_expr on <self:AAttrReassignExpr> */
-if (var6 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr", "src/parser/parser_nodes.nit", 1340);
-exit(1);
-}
-var7 = self->attrs[COLOR_parser_nodes__AAttrFormExpr___n_id].val; /* _n_id on <self:AAttrReassignExpr> */
-if (var7 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_id", "src/parser/parser_nodes.nit", 1343);
-exit(1);
-}
-var8 = self->attrs[COLOR_typing__AAttrFormExpr___64dmproperty].val; /* @mproperty on <self:AAttrReassignExpr> */
-var9 = self->attrs[COLOR_typing__AAttrFormExpr___64dattr_type].val; /* @attr_type on <self:AAttrReassignExpr> */
-}
-/* runtime class parser_nodes__ACallExpr */
-const struct class class_parser_nodes__ACallExpr = {
-0, /* box_kind */
-{
-(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:ACallExpr:kernel#Object#object_id */
-(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:ACallExpr:kernel#Object#is_same_type */
-(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:ACallExpr:kernel#Object#== */
-(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:ACallExpr:kernel#Object#!= */
-(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:ACallExpr:kernel#Object#output */
-(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to parser_nodes:ACallExpr:kernel#Object#output_class_name */
-(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to parser_nodes:ACallExpr:kernel#Object#exit */
-(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to parser_nodes:ACallExpr:kernel#Object#sys */
-(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to parser_nodes:ACallExpr:kernel#Object#hash */
-(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to parser_nodes:ACallExpr:string#Object#to_s */
-(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to parser_nodes:ACallExpr:string#Object#native_class_name */
-(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to parser_nodes:ACallExpr:string#Object#class_name */
-(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to parser_nodes:ACallExpr:string#Object#inspect */
-(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to parser_nodes:ACallExpr:string#Object#inspect_head */
-(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to parser_nodes:ACallExpr:string#Object#args */
-(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to parser_nodes:ACallExpr:math#Object#atan2 */
-(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to parser_nodes:ACallExpr:math#Object#pi */
-(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to parser_nodes:ACallExpr:math#Object#srand_from */
-(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to parser_nodes:ACallExpr:math#Object#srand */
-(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to parser_nodes:ACallExpr:stream#Object#poll */
-(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to parser_nodes:ACallExpr:stream#Object#intern_poll */
-(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to parser_nodes:ACallExpr:time#Object#get_time */
-(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to parser_nodes:ACallExpr:file#Object#printn */
-(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to parser_nodes:ACallExpr:file#Object#print */
-(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to parser_nodes:ACallExpr:file#Object#getc */
-(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to parser_nodes:ACallExpr:file#Object#gets */
-(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to parser_nodes:ACallExpr:file#Object#getcwd */
-(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to parser_nodes:ACallExpr:file#Object#file_getcwd */
-(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to parser_nodes:ACallExpr:file#Object#stdin */
-(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to parser_nodes:ACallExpr:file#Object#stdout */
-(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to parser_nodes:ACallExpr:file#Object#stderr */
-(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to parser_nodes:ACallExpr:model_base#Object#intrude_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to parser_nodes:ACallExpr:model_base#Object#public_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to parser_nodes:ACallExpr:model_base#Object#protected_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to parser_nodes:ACallExpr:model_base#Object#private_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to parser_nodes:ACallExpr:model_base#Object#none_visibility */
-(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to parser_nodes:ACallExpr:model#Object#abstract_kind */
-(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to parser_nodes:ACallExpr:model#Object#concrete_kind */
-(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to parser_nodes:ACallExpr:model#Object#interface_kind */
-(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to parser_nodes:ACallExpr:model#Object#enum_kind */
-(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to parser_nodes:ACallExpr:model#Object#extern_kind */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__location, /* pointer to parser_nodes:ACallExpr:parser_nodes#ANode#location */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__hot_location, /* pointer to parser_nodes:ACallExpr:parser_nodes#ANode#hot_location */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__debug, /* pointer to parser_nodes:ACallExpr:parser_nodes#ANode#debug */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent, /* pointer to parser_nodes:ACallExpr:parser_nodes#ANode#parent */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent_61d, /* pointer to parser_nodes:ACallExpr:parser_nodes#ANode#parent= */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__init, /* pointer to parser_nodes:ACallExpr:parser_nodes#ANode#init */
-(nitmethod_t)VIRTUAL_parser_prod__ACallExpr__replace_child, /* pointer to parser_nodes:ACallExpr:parser_prod#ACallExpr#replace_child */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__detach, /* pointer to parser_nodes:ACallExpr:parser_nodes#ANode#detach */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__replace_with, /* pointer to parser_nodes:ACallExpr:parser_nodes#Prod#replace_with */
-(nitmethod_t)VIRTUAL_parser_prod__ACallExpr__visit_all, /* pointer to parser_nodes:ACallExpr:parser_prod#ACallExpr#visit_all */
-(nitmethod_t)VIRTUAL_parser_util__ANode__collect_tokens_by_text, /* pointer to parser_nodes:ACallExpr:parser_util#ANode#collect_tokens_by_text */
-(nitmethod_t)VIRTUAL_parser_util__ANode__collect_annotations_by_name, /* pointer to parser_nodes:ACallExpr:parser_util#ANode#collect_annotations_by_name */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__accept_simple_misc, /* pointer to parser_nodes:ACallExpr:simple_misc_analysis#ANode#accept_simple_misc */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__after_simple_misc, /* pointer to parser_nodes:ACallExpr:simple_misc_analysis#ANode#after_simple_misc */
-(nitmethod_t)VIRTUAL_literal__ANode__accept_literal, /* pointer to parser_nodes:ACallExpr:literal#ANode#accept_literal */
-(nitmethod_t)VIRTUAL_scope__ACallFormExpr__accept_scope_visitor, /* pointer to parser_nodes:ACallExpr:scope#ACallFormExpr#accept_scope_visitor */
-(nitmethod_t)VIRTUAL_flow__ANode__accept_flow_visitor, /* pointer to parser_nodes:ACallExpr:flow#ANode#accept_flow_visitor */
-(nitmethod_t)VIRTUAL_local_var_init__ANode__accept_local_var_visitor, /* pointer to parser_nodes:ACallExpr:local_var_init#ANode#accept_local_var_visitor */
-(nitmethod_t)VIRTUAL_auto_super_init__ASendExpr__accept_auto_super_init, /* pointer to parser_nodes:ACallExpr:auto_super_init#ASendExpr#accept_auto_super_init */
-(nitmethod_t)VIRTUAL_rapid_type_analysis__ASendExpr__accept_rapid_type_visitor, /* pointer to parser_nodes:ACallExpr:rapid_type_analysis#ASendExpr#accept_rapid_type_visitor */
-(nitmethod_t)VIRTUAL_astvalidation__AExpr__accept_ast_validation, /* pointer to parser_nodes:ACallExpr:astvalidation#AExpr#accept_ast_validation */
-(nitmethod_t)VIRTUAL_transform__ANode__accept_transform_visitor, /* pointer to parser_nodes:ACallExpr:transform#ANode#accept_transform_visitor */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__location_61d, /* pointer to parser_nodes:ACallExpr:parser_nodes#Prod#location= */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations, /* pointer to parser_nodes:ACallExpr:parser_nodes#Prod#n_annotations */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations_61d, /* pointer to parser_nodes:ACallExpr:parser_nodes#Prod#n_annotations= */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__init, /* pointer to parser_nodes:ACallExpr:parser_nodes#Prod#init */
-(nitmethod_t)VIRTUAL_modelize_property__Prod__collect_text, /* pointer to parser_nodes:ACallExpr:modelize_property#Prod#collect_text */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__replace_with, /* pointer to parser_nodes:ACallExpr:parser_nodes#ANode#replace_with */
-(nitmethod_t)VIRTUAL_parser_nodes__AExpr__init, /* pointer to parser_nodes:ACallExpr:parser_nodes#AExpr#init */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__AExpr__warn_parentheses, /* pointer to parser_nodes:ACallExpr:simple_misc_analysis#AExpr#warn_parentheses */
-(nitmethod_t)VIRTUAL_flow__AExpr__after_flow_context, /* pointer to parser_nodes:ACallExpr:flow#AExpr#after_flow_context */
-(nitmethod_t)VIRTUAL_flow__AExpr__after_flow_context_61d, /* pointer to parser_nodes:ACallExpr:flow#AExpr#after_flow_context= */
-(nitmethod_t)VIRTUAL_typing__AExpr__mtype, /* pointer to parser_nodes:ACallExpr:typing#AExpr#mtype */
-(nitmethod_t)VIRTUAL_typing__AExpr__mtype_61d, /* pointer to parser_nodes:ACallExpr:typing#AExpr#mtype= */
-(nitmethod_t)VIRTUAL_typing__AExpr__is_typed, /* pointer to parser_nodes:ACallExpr:typing#AExpr#is_typed */
-(nitmethod_t)VIRTUAL_typing__AExpr__is_typed_61d, /* pointer to parser_nodes:ACallExpr:typing#AExpr#is_typed= */
-(nitmethod_t)VIRTUAL_typing__AExpr__implicit_cast_to, /* pointer to parser_nodes:ACallExpr:typing#AExpr#implicit_cast_to */
-(nitmethod_t)VIRTUAL_typing__AExpr__implicit_cast_to_61d, /* pointer to parser_nodes:ACallExpr:typing#AExpr#implicit_cast_to= */
-(nitmethod_t)VIRTUAL_typing__AExpr__its_variable, /* pointer to parser_nodes:ACallExpr:typing#AExpr#its_variable */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__accept_typing, /* pointer to parser_nodes:ACallExpr:typing#ASendExpr#accept_typing */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__make_var_read, /* pointer to parser_nodes:ACallExpr:astbuilder#AExpr#make_var_read */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__variable_cache, /* pointer to parser_nodes:ACallExpr:astbuilder#AExpr#variable_cache */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__variable_cache_61d, /* pointer to parser_nodes:ACallExpr:astbuilder#AExpr#variable_cache= */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__detach_with_placeholder, /* pointer to parser_nodes:ACallExpr:astbuilder#AExpr#detach_with_placeholder */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__add, /* pointer to parser_nodes:ACallExpr:astbuilder#AExpr#add */
-(nitmethod_t)VIRTUAL_abstract_compiler__ASendExpr__expr, /* pointer to parser_nodes:ACallExpr:abstract_compiler#ASendExpr#expr */
-(nitmethod_t)VIRTUAL_abstract_compiler__AExpr__stmt, /* pointer to parser_nodes:ACallExpr:abstract_compiler#AExpr#stmt */
-(nitmethod_t)VIRTUAL_astvalidation__ANode__accept_ast_validation, /* pointer to parser_nodes:ACallExpr:astvalidation#ANode#accept_ast_validation */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-(nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__n_expr, /* pointer to parser_nodes:ACallExpr:parser_nodes#ASendExpr#n_expr */
-(nitmethod_t)VIRTUAL_parser_prod__ACallExpr__n_expr_61d, /* pointer to parser_nodes:ACallExpr:parser_prod#ACallExpr#n_expr= */
-(nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__n_closure_defs, /* pointer to parser_nodes:ACallExpr:parser_nodes#ASendExpr#n_closure_defs */
-(nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__init, /* pointer to parser_nodes:ACallExpr:parser_nodes#ASendExpr#init */
-(nitmethod_t)VIRTUAL_parser_prod__ASendExpr__empty_init, /* pointer to parser_nodes:ACallExpr:parser_prod#ASendExpr#empty_init */
-(nitmethod_t)VIRTUAL_parser_prod__ASendExpr__init_asendexpr, /* pointer to parser_nodes:ACallExpr:parser_prod#ASendExpr#init_asendexpr */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__escapemark, /* pointer to parser_nodes:ACallExpr:scope#ASendExpr#escapemark */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__escapemark_61d, /* pointer to parser_nodes:ACallExpr:scope#ASendExpr#escapemark= */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__mproperty, /* pointer to parser_nodes:ACallExpr:typing#ASendExpr#mproperty */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__callsite, /* pointer to parser_nodes:ACallExpr:typing#ASendExpr#callsite */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__callsite_61d, /* pointer to parser_nodes:ACallExpr:typing#ASendExpr#callsite= */
-(nitmethod_t)VIRTUAL_typing__ACallExpr__property_name, /* pointer to parser_nodes:ACallExpr:typing#ACallExpr#property_name */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__raw_arguments, /* pointer to parser_nodes:ACallExpr:typing#ASendExpr#raw_arguments */
-(nitmethod_t)VIRTUAL_typing__ASendExpr__raw_arguments_61d, /* pointer to parser_nodes:ACallExpr:typing#ASendExpr#raw_arguments= */
-(nitmethod_t)VIRTUAL_typing__ACallExpr__compute_raw_arguments, /* pointer to parser_nodes:ACallExpr:typing#ACallExpr#compute_raw_arguments */
-(nitmethod_t)VIRTUAL_scope__ANode__accept_scope_visitor, /* pointer to parser_nodes:ACallExpr:scope#ANode#accept_scope_visitor */
-(nitmethod_t)VIRTUAL_parser_nodes__ACallFormExpr__n_id, /* pointer to parser_nodes:ACallExpr:parser_nodes#ACallFormExpr#n_id */
-(nitmethod_t)VIRTUAL_parser_prod__ACallExpr__n_id_61d, /* pointer to parser_nodes:ACallExpr:parser_prod#ACallExpr#n_id= */
-(nitmethod_t)VIRTUAL_parser_nodes__ACallFormExpr__n_args, /* pointer to parser_nodes:ACallExpr:parser_nodes#ACallFormExpr#n_args */
-(nitmethod_t)VIRTUAL_parser_prod__ACallExpr__n_args_61d, /* pointer to parser_nodes:ACallExpr:parser_prod#ACallExpr#n_args= */
-(nitmethod_t)VIRTUAL_parser_nodes__ACallFormExpr__init, /* pointer to parser_nodes:ACallExpr:parser_nodes#ACallFormExpr#init */
-(nitmethod_t)VIRTUAL_scope__ACallExpr__variable_create, /* pointer to parser_nodes:ACallExpr:scope#ACallExpr#variable_create */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__accept_scope_visitor, /* pointer to parser_nodes:ACallExpr:scope#ASendExpr#accept_scope_visitor */
-(nitmethod_t)VIRTUAL_parser_nodes__ACallExpr__init, /* pointer to parser_nodes:ACallExpr:parser_nodes#ACallExpr#init */
-(nitmethod_t)VIRTUAL_parser_prod__ACallExpr__empty_init, /* pointer to parser_nodes:ACallExpr:parser_prod#ACallExpr#empty_init */
-(nitmethod_t)VIRTUAL_parser_prod__ACallExpr__init_acallexpr, /* pointer to parser_nodes:ACallExpr:parser_prod#ACallExpr#init_acallexpr */
-(nitmethod_t)VIRTUAL_astbuilder__ACallExpr__make, /* pointer to parser_nodes:ACallExpr:astbuilder#ACallExpr#make */
-}
-};
-/* allocate ACallExpr */
-val* NEW_parser_nodes__ACallExpr(const struct type* type) {
-val* self /* : ACallExpr */;
-val* var /* : null */;
-val* var1 /* : null */;
-val* var2 /* : null */;
-val* var3 /* : null */;
-short int var4 /* : Bool */;
-val* var5 /* : null */;
-val* var6 /* : ANodes[AClosureDef] */;
-self = nit_alloc(sizeof(struct instance) + 20*sizeof(nitattribute_t));
-self->type = type;
-self->class = &class_parser_nodes__ACallExpr;
-var = NULL;
-self->attrs[COLOR_parser_nodes__ANode___location].val = var; /* _location on <self:ACallExpr exact> */
-var1 = NULL;
-self->attrs[COLOR_parser_nodes__ANode___64dparent].val = var1; /* @parent on <self:ACallExpr exact> */
-var2 = NULL;
-self->attrs[COLOR_parser_nodes__Prod___n_annotations].val = var2; /* _n_annotations on <self:ACallExpr exact> */
-var3 = NULL;
-self->attrs[COLOR_typing__AExpr___64dmtype].val = var3; /* @mtype on <self:ACallExpr exact> */
-var4 = 0;
-self->attrs[COLOR_typing__AExpr___64dis_typed].s = var4; /* @is_typed on <self:ACallExpr exact> */
-var5 = NULL;
-self->attrs[COLOR_typing__AExpr___64dimplicit_cast_to].val = var5; /* @implicit_cast_to on <self:ACallExpr exact> */
-var6 = NEW_parser_nodes__ANodes(&type_parser_nodes__ANodesparser_nodes__AClosureDef);
-((void (*)(val*, val*))(var6->class->vft[COLOR_parser_nodes__ANodes__init]))(var6, self) /* init on <var6:ANodes[AClosureDef]>*/;
-CHECK_NEW_parser_nodes__ANodes(var6);
-self->attrs[COLOR_parser_nodes__ASendExpr___n_closure_defs].val = var6; /* _n_closure_defs on <self:ACallExpr exact> */
-return self;
-}
-/* allocate ACallExpr */
-void CHECK_NEW_parser_nodes__ACallExpr(val* self) {
-val* var /* : nullable Location */;
-val* var1 /* : nullable FlowContext */;
-val* var2 /* : nullable Variable */;
-val* var3 /* : AExpr */;
-val* var4 /* : nullable EscapeMark */;
-val* var5 /* : nullable CallSite */;
-val* var6 /* : nullable Array[AExpr] */;
-val* var7 /* : TId */;
-val* var8 /* : AExprs */;
-var = self->attrs[COLOR_parser__Prod___first_location].val; /* _first_location on <self:ACallExpr> */
-var1 = self->attrs[COLOR_flow__AExpr___64dafter_flow_context].val; /* @after_flow_context on <self:ACallExpr> */
-var2 = self->attrs[COLOR_astbuilder__AExpr___64dvariable_cache].val; /* @variable_cache on <self:ACallExpr> */
-var3 = self->attrs[COLOR_parser_nodes__ASendExpr___n_expr].val; /* _n_expr on <self:ACallExpr> */
-if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr", "src/parser/parser_nodes.nit", 1182);
-exit(1);
-}
-var4 = self->attrs[COLOR_scope__ASendExpr___64descapemark].val; /* @escapemark on <self:ACallExpr> */
-var5 = self->attrs[COLOR_typing__ASendExpr___64dcallsite].val; /* @callsite on <self:ACallExpr> */
-var6 = self->attrs[COLOR_typing__ASendExpr___64draw_arguments].val; /* @raw_arguments on <self:ACallExpr> */
-var7 = self->attrs[COLOR_parser_nodes__ACallFormExpr___n_id].val; /* _n_id on <self:ACallExpr> */
-if (var7 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_id", "src/parser/parser_nodes.nit", 1362);
-exit(1);
-}
-var8 = self->attrs[COLOR_parser_nodes__ACallFormExpr___n_args].val; /* _n_args on <self:ACallExpr> */
-if (var8 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_args", "src/parser/parser_nodes.nit", 1365);
-exit(1);
-}
-}
 /* runtime class parser_nodes__ACallAssignExpr */
 const struct class class_parser_nodes__ACallAssignExpr = {
 0, /* box_kind */
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:ACallAssignExpr:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:ACallAssignExpr:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:ACallAssignExpr:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:ACallAssignExpr:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:ACallAssignExpr:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:ACallAssignExpr:kernel#Object#output */
@@ -2680,12 +107,9 @@ NULL, /* empty */
 NULL, /* empty */
 (nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__n_expr, /* pointer to parser_nodes:ACallAssignExpr:parser_nodes#ASendExpr#n_expr */
 (nitmethod_t)VIRTUAL_parser_prod__ACallAssignExpr__n_expr_61d, /* pointer to parser_nodes:ACallAssignExpr:parser_prod#ACallAssignExpr#n_expr= */
-(nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__n_closure_defs, /* pointer to parser_nodes:ACallAssignExpr:parser_nodes#ASendExpr#n_closure_defs */
 (nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__init, /* pointer to parser_nodes:ACallAssignExpr:parser_nodes#ASendExpr#init */
 (nitmethod_t)VIRTUAL_parser_prod__ASendExpr__empty_init, /* pointer to parser_nodes:ACallAssignExpr:parser_prod#ASendExpr#empty_init */
 (nitmethod_t)VIRTUAL_parser_prod__ASendExpr__init_asendexpr, /* pointer to parser_nodes:ACallAssignExpr:parser_prod#ASendExpr#init_asendexpr */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__escapemark, /* pointer to parser_nodes:ACallAssignExpr:scope#ASendExpr#escapemark */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__escapemark_61d, /* pointer to parser_nodes:ACallAssignExpr:scope#ASendExpr#escapemark= */
 (nitmethod_t)VIRTUAL_typing__ASendExpr__mproperty, /* pointer to parser_nodes:ACallAssignExpr:typing#ASendExpr#mproperty */
 (nitmethod_t)VIRTUAL_typing__ASendExpr__callsite, /* pointer to parser_nodes:ACallAssignExpr:typing#ASendExpr#callsite */
 (nitmethod_t)VIRTUAL_typing__ASendExpr__callsite_61d, /* pointer to parser_nodes:ACallAssignExpr:typing#ASendExpr#callsite= */
@@ -2693,14 +117,13 @@ NULL, /* empty */
 (nitmethod_t)VIRTUAL_typing__ASendExpr__raw_arguments, /* pointer to parser_nodes:ACallAssignExpr:typing#ASendExpr#raw_arguments */
 (nitmethod_t)VIRTUAL_typing__ASendExpr__raw_arguments_61d, /* pointer to parser_nodes:ACallAssignExpr:typing#ASendExpr#raw_arguments= */
 (nitmethod_t)VIRTUAL_typing__ACallAssignExpr__compute_raw_arguments, /* pointer to parser_nodes:ACallAssignExpr:typing#ACallAssignExpr#compute_raw_arguments */
-(nitmethod_t)VIRTUAL_scope__ANode__accept_scope_visitor, /* pointer to parser_nodes:ACallAssignExpr:scope#ANode#accept_scope_visitor */
 (nitmethod_t)VIRTUAL_parser_nodes__ACallFormExpr__n_id, /* pointer to parser_nodes:ACallAssignExpr:parser_nodes#ACallFormExpr#n_id */
 (nitmethod_t)VIRTUAL_parser_prod__ACallAssignExpr__n_id_61d, /* pointer to parser_nodes:ACallAssignExpr:parser_prod#ACallAssignExpr#n_id= */
 (nitmethod_t)VIRTUAL_parser_nodes__ACallFormExpr__n_args, /* pointer to parser_nodes:ACallAssignExpr:parser_nodes#ACallFormExpr#n_args */
 (nitmethod_t)VIRTUAL_parser_prod__ACallAssignExpr__n_args_61d, /* pointer to parser_nodes:ACallAssignExpr:parser_prod#ACallAssignExpr#n_args= */
 (nitmethod_t)VIRTUAL_parser_nodes__ACallFormExpr__init, /* pointer to parser_nodes:ACallAssignExpr:parser_nodes#ACallFormExpr#init */
 (nitmethod_t)VIRTUAL_scope__ACallAssignExpr__variable_create, /* pointer to parser_nodes:ACallAssignExpr:scope#ACallAssignExpr#variable_create */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__accept_scope_visitor, /* pointer to parser_nodes:ACallAssignExpr:scope#ASendExpr#accept_scope_visitor */
+(nitmethod_t)VIRTUAL_scope__ANode__accept_scope_visitor, /* pointer to parser_nodes:ACallAssignExpr:scope#ANode#accept_scope_visitor */
 (nitmethod_t)VIRTUAL_parser_nodes__ACallAssignExpr__init, /* pointer to parser_nodes:ACallAssignExpr:parser_nodes#ACallAssignExpr#init */
 (nitmethod_t)VIRTUAL_parser_prod__ACallAssignExpr__empty_init, /* pointer to parser_nodes:ACallAssignExpr:parser_prod#ACallAssignExpr#empty_init */
 (nitmethod_t)VIRTUAL_parser_prod__ACallAssignExpr__init_acallassignexpr, /* pointer to parser_nodes:ACallAssignExpr:parser_prod#ACallAssignExpr#init_acallassignexpr */
@@ -2715,8 +138,7 @@ val* var2 /* : null */;
 val* var3 /* : null */;
 short int var4 /* : Bool */;
 val* var5 /* : null */;
-val* var6 /* : ANodes[AClosureDef] */;
-self = nit_alloc(sizeof(struct instance) + 20*sizeof(nitattribute_t));
+self = nit_alloc(sizeof(struct instance) + 18*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser_nodes__ACallAssignExpr;
 var = NULL;
@@ -2731,10 +153,6 @@ var4 = 0;
 self->attrs[COLOR_typing__AExpr___64dis_typed].s = var4; /* @is_typed on <self:ACallAssignExpr exact> */
 var5 = NULL;
 self->attrs[COLOR_typing__AExpr___64dimplicit_cast_to].val = var5; /* @implicit_cast_to on <self:ACallAssignExpr exact> */
-var6 = NEW_parser_nodes__ANodes(&type_parser_nodes__ANodesparser_nodes__AClosureDef);
-((void (*)(val*, val*))(var6->class->vft[COLOR_parser_nodes__ANodes__init]))(var6, self) /* init on <var6:ANodes[AClosureDef]>*/;
-CHECK_NEW_parser_nodes__ANodes(var6);
-self->attrs[COLOR_parser_nodes__ASendExpr___n_closure_defs].val = var6; /* _n_closure_defs on <self:ACallAssignExpr exact> */
 return self;
 }
 /* allocate ACallAssignExpr */
@@ -2743,42 +161,45 @@ val* var /* : nullable Location */;
 val* var1 /* : nullable FlowContext */;
 val* var2 /* : nullable Variable */;
 val* var3 /* : AExpr */;
-val* var4 /* : nullable EscapeMark */;
-val* var5 /* : nullable CallSite */;
-val* var6 /* : nullable Array[AExpr] */;
-val* var7 /* : TAssign */;
-val* var8 /* : AExpr */;
-val* var9 /* : TId */;
-val* var10 /* : AExprs */;
+val* var4 /* : nullable CallSite */;
+val* var5 /* : nullable Array[AExpr] */;
+val* var6 /* : TAssign */;
+val* var7 /* : AExpr */;
+val* var8 /* : TId */;
+val* var9 /* : AExprs */;
 var = self->attrs[COLOR_parser__Prod___first_location].val; /* _first_location on <self:ACallAssignExpr> */
 var1 = self->attrs[COLOR_flow__AExpr___64dafter_flow_context].val; /* @after_flow_context on <self:ACallAssignExpr> */
 var2 = self->attrs[COLOR_astbuilder__AExpr___64dvariable_cache].val; /* @variable_cache on <self:ACallAssignExpr> */
 var3 = self->attrs[COLOR_parser_nodes__ASendExpr___n_expr].val; /* _n_expr on <self:ACallAssignExpr> */
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr", "src/parser/parser_nodes.nit", 1182);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_expr");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1172);
 exit(1);
 }
-var4 = self->attrs[COLOR_scope__ASendExpr___64descapemark].val; /* @escapemark on <self:ACallAssignExpr> */
-var5 = self->attrs[COLOR_typing__ASendExpr___64dcallsite].val; /* @callsite on <self:ACallAssignExpr> */
-var6 = self->attrs[COLOR_typing__ASendExpr___64draw_arguments].val; /* @raw_arguments on <self:ACallAssignExpr> */
-var7 = self->attrs[COLOR_parser_nodes__AAssignFormExpr___n_assign].val; /* _n_assign on <self:ACallAssignExpr> */
+var4 = self->attrs[COLOR_typing__ASendExpr___64dcallsite].val; /* @callsite on <self:ACallAssignExpr> */
+var5 = self->attrs[COLOR_typing__ASendExpr___64draw_arguments].val; /* @raw_arguments on <self:ACallAssignExpr> */
+var6 = self->attrs[COLOR_parser_nodes__AAssignFormExpr___n_assign].val; /* _n_assign on <self:ACallAssignExpr> */
+if (var6 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_assign");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1151);
+exit(1);
+}
+var7 = self->attrs[COLOR_parser_nodes__AAssignFormExpr___n_value].val; /* _n_value on <self:ACallAssignExpr> */
 if (var7 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_assign", "src/parser/parser_nodes.nit", 1161);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_value");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1152);
 exit(1);
 }
-var8 = self->attrs[COLOR_parser_nodes__AAssignFormExpr___n_value].val; /* _n_value on <self:ACallAssignExpr> */
+var8 = self->attrs[COLOR_parser_nodes__ACallFormExpr___n_id].val; /* _n_id on <self:ACallAssignExpr> */
 if (var8 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_value", "src/parser/parser_nodes.nit", 1162);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_id");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1344);
 exit(1);
 }
-var9 = self->attrs[COLOR_parser_nodes__ACallFormExpr___n_id].val; /* _n_id on <self:ACallAssignExpr> */
+var9 = self->attrs[COLOR_parser_nodes__ACallFormExpr___n_args].val; /* _n_args on <self:ACallAssignExpr> */
 if (var9 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_id", "src/parser/parser_nodes.nit", 1362);
-exit(1);
-}
-var10 = self->attrs[COLOR_parser_nodes__ACallFormExpr___n_args].val; /* _n_args on <self:ACallAssignExpr> */
-if (var10 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_args", "src/parser/parser_nodes.nit", 1365);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_args");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1347);
 exit(1);
 }
 }
@@ -2788,6 +209,7 @@ const struct class class_parser_nodes__ACallReassignExpr = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:ACallReassignExpr:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:ACallReassignExpr:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:ACallReassignExpr:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:ACallReassignExpr:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:ACallReassignExpr:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:ACallReassignExpr:kernel#Object#output */
@@ -2889,12 +311,9 @@ const struct class class_parser_nodes__ACallReassignExpr = {
 (nitmethod_t)VIRTUAL_flow__ANode__accept_flow_visitor, /* pointer to parser_nodes:ACallReassignExpr:flow#ANode#accept_flow_visitor */
 (nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__n_expr, /* pointer to parser_nodes:ACallReassignExpr:parser_nodes#ASendExpr#n_expr */
 (nitmethod_t)VIRTUAL_parser_prod__ACallReassignExpr__n_expr_61d, /* pointer to parser_nodes:ACallReassignExpr:parser_prod#ACallReassignExpr#n_expr= */
-(nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__n_closure_defs, /* pointer to parser_nodes:ACallReassignExpr:parser_nodes#ASendExpr#n_closure_defs */
 (nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__init, /* pointer to parser_nodes:ACallReassignExpr:parser_nodes#ASendExpr#init */
 (nitmethod_t)VIRTUAL_parser_prod__ASendExpr__empty_init, /* pointer to parser_nodes:ACallReassignExpr:parser_prod#ASendExpr#empty_init */
 (nitmethod_t)VIRTUAL_parser_prod__ASendExpr__init_asendexpr, /* pointer to parser_nodes:ACallReassignExpr:parser_prod#ASendExpr#init_asendexpr */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__escapemark, /* pointer to parser_nodes:ACallReassignExpr:scope#ASendExpr#escapemark */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__escapemark_61d, /* pointer to parser_nodes:ACallReassignExpr:scope#ASendExpr#escapemark= */
 (nitmethod_t)VIRTUAL_typing__ASendExpr__mproperty, /* pointer to parser_nodes:ACallReassignExpr:typing#ASendExpr#mproperty */
 (nitmethod_t)VIRTUAL_typing__ASendExpr__callsite, /* pointer to parser_nodes:ACallReassignExpr:typing#ASendExpr#callsite */
 (nitmethod_t)VIRTUAL_typing__ASendExpr__callsite_61d, /* pointer to parser_nodes:ACallReassignExpr:typing#ASendExpr#callsite= */
@@ -2902,14 +321,13 @@ const struct class class_parser_nodes__ACallReassignExpr = {
 (nitmethod_t)VIRTUAL_typing__ASendExpr__raw_arguments, /* pointer to parser_nodes:ACallReassignExpr:typing#ASendExpr#raw_arguments */
 (nitmethod_t)VIRTUAL_typing__ASendExpr__raw_arguments_61d, /* pointer to parser_nodes:ACallReassignExpr:typing#ASendExpr#raw_arguments= */
 (nitmethod_t)VIRTUAL_typing__ACallReassignExpr__compute_raw_arguments, /* pointer to parser_nodes:ACallReassignExpr:typing#ACallReassignExpr#compute_raw_arguments */
-(nitmethod_t)VIRTUAL_scope__ANode__accept_scope_visitor, /* pointer to parser_nodes:ACallReassignExpr:scope#ANode#accept_scope_visitor */
 (nitmethod_t)VIRTUAL_parser_nodes__ACallFormExpr__n_id, /* pointer to parser_nodes:ACallReassignExpr:parser_nodes#ACallFormExpr#n_id */
 (nitmethod_t)VIRTUAL_parser_prod__ACallReassignExpr__n_id_61d, /* pointer to parser_nodes:ACallReassignExpr:parser_prod#ACallReassignExpr#n_id= */
 (nitmethod_t)VIRTUAL_parser_nodes__ACallFormExpr__n_args, /* pointer to parser_nodes:ACallReassignExpr:parser_nodes#ACallFormExpr#n_args */
 (nitmethod_t)VIRTUAL_parser_prod__ACallReassignExpr__n_args_61d, /* pointer to parser_nodes:ACallReassignExpr:parser_prod#ACallReassignExpr#n_args= */
 (nitmethod_t)VIRTUAL_parser_nodes__ACallFormExpr__init, /* pointer to parser_nodes:ACallReassignExpr:parser_nodes#ACallFormExpr#init */
 (nitmethod_t)VIRTUAL_scope__ACallReassignExpr__variable_create, /* pointer to parser_nodes:ACallReassignExpr:scope#ACallReassignExpr#variable_create */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__accept_scope_visitor, /* pointer to parser_nodes:ACallReassignExpr:scope#ASendExpr#accept_scope_visitor */
+(nitmethod_t)VIRTUAL_scope__ANode__accept_scope_visitor, /* pointer to parser_nodes:ACallReassignExpr:scope#ANode#accept_scope_visitor */
 (nitmethod_t)VIRTUAL_parser_nodes__ASendReassignFormExpr__init, /* pointer to parser_nodes:ACallReassignExpr:parser_nodes#ASendReassignFormExpr#init */
 (nitmethod_t)VIRTUAL_typing__ASendReassignFormExpr__write_mproperty, /* pointer to parser_nodes:ACallReassignExpr:typing#ASendReassignFormExpr#write_mproperty */
 (nitmethod_t)VIRTUAL_typing__ASendReassignFormExpr__write_callsite, /* pointer to parser_nodes:ACallReassignExpr:typing#ASendReassignFormExpr#write_callsite */
@@ -2928,9 +346,8 @@ val* var2 /* : null */;
 val* var3 /* : null */;
 short int var4 /* : Bool */;
 val* var5 /* : null */;
-val* var6 /* : ANodes[AClosureDef] */;
-val* var7 /* : null */;
-self = nit_alloc(sizeof(struct instance) + 21*sizeof(nitattribute_t));
+val* var6 /* : null */;
+self = nit_alloc(sizeof(struct instance) + 19*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser_nodes__ACallReassignExpr;
 var = NULL;
@@ -2945,12 +362,8 @@ var4 = 0;
 self->attrs[COLOR_typing__AExpr___64dis_typed].s = var4; /* @is_typed on <self:ACallReassignExpr exact> */
 var5 = NULL;
 self->attrs[COLOR_typing__AExpr___64dimplicit_cast_to].val = var5; /* @implicit_cast_to on <self:ACallReassignExpr exact> */
-var6 = NEW_parser_nodes__ANodes(&type_parser_nodes__ANodesparser_nodes__AClosureDef);
-((void (*)(val*, val*))(var6->class->vft[COLOR_parser_nodes__ANodes__init]))(var6, self) /* init on <var6:ANodes[AClosureDef]>*/;
-CHECK_NEW_parser_nodes__ANodes(var6);
-self->attrs[COLOR_parser_nodes__ASendExpr___n_closure_defs].val = var6; /* _n_closure_defs on <self:ACallReassignExpr exact> */
-var7 = NULL;
-self->attrs[COLOR_typing__AReassignFormExpr___64dread_type].val = var7; /* @read_type on <self:ACallReassignExpr exact> */
+var6 = NULL;
+self->attrs[COLOR_typing__AReassignFormExpr___64dread_type].val = var6; /* @read_type on <self:ACallReassignExpr exact> */
 return self;
 }
 /* allocate ACallReassignExpr */
@@ -2959,48 +372,51 @@ val* var /* : nullable Location */;
 val* var1 /* : nullable FlowContext */;
 val* var2 /* : nullable Variable */;
 val* var3 /* : AExpr */;
-val* var4 /* : nullable EscapeMark */;
-val* var5 /* : nullable CallSite */;
-val* var6 /* : nullable Array[AExpr] */;
-val* var7 /* : AAssignOp */;
-val* var8 /* : AExpr */;
-val* var9 /* : nullable CallSite */;
-val* var10 /* : TId */;
-val* var11 /* : AExprs */;
-val* var12 /* : nullable CallSite */;
+val* var4 /* : nullable CallSite */;
+val* var5 /* : nullable Array[AExpr] */;
+val* var6 /* : AAssignOp */;
+val* var7 /* : AExpr */;
+val* var8 /* : nullable CallSite */;
+val* var9 /* : TId */;
+val* var10 /* : AExprs */;
+val* var11 /* : nullable CallSite */;
 var = self->attrs[COLOR_parser__Prod___first_location].val; /* _first_location on <self:ACallReassignExpr> */
 var1 = self->attrs[COLOR_flow__AExpr___64dafter_flow_context].val; /* @after_flow_context on <self:ACallReassignExpr> */
 var2 = self->attrs[COLOR_astbuilder__AExpr___64dvariable_cache].val; /* @variable_cache on <self:ACallReassignExpr> */
 var3 = self->attrs[COLOR_parser_nodes__ASendExpr___n_expr].val; /* _n_expr on <self:ACallReassignExpr> */
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr", "src/parser/parser_nodes.nit", 1182);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_expr");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1172);
 exit(1);
 }
-var4 = self->attrs[COLOR_scope__ASendExpr___64descapemark].val; /* @escapemark on <self:ACallReassignExpr> */
-var5 = self->attrs[COLOR_typing__ASendExpr___64dcallsite].val; /* @callsite on <self:ACallReassignExpr> */
-var6 = self->attrs[COLOR_typing__ASendExpr___64draw_arguments].val; /* @raw_arguments on <self:ACallReassignExpr> */
-var7 = self->attrs[COLOR_parser_nodes__AReassignFormExpr___n_assign_op].val; /* _n_assign_op on <self:ACallReassignExpr> */
+var4 = self->attrs[COLOR_typing__ASendExpr___64dcallsite].val; /* @callsite on <self:ACallReassignExpr> */
+var5 = self->attrs[COLOR_typing__ASendExpr___64draw_arguments].val; /* @raw_arguments on <self:ACallReassignExpr> */
+var6 = self->attrs[COLOR_parser_nodes__AReassignFormExpr___n_assign_op].val; /* _n_assign_op on <self:ACallReassignExpr> */
+if (var6 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_assign_op");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1158);
+exit(1);
+}
+var7 = self->attrs[COLOR_parser_nodes__AReassignFormExpr___n_value].val; /* _n_value on <self:ACallReassignExpr> */
 if (var7 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_assign_op", "src/parser/parser_nodes.nit", 1168);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_value");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1159);
 exit(1);
 }
-var8 = self->attrs[COLOR_parser_nodes__AReassignFormExpr___n_value].val; /* _n_value on <self:ACallReassignExpr> */
-if (var8 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_value", "src/parser/parser_nodes.nit", 1169);
+var8 = self->attrs[COLOR_typing__AReassignFormExpr___64dreassign_callsite].val; /* @reassign_callsite on <self:ACallReassignExpr> */
+var9 = self->attrs[COLOR_parser_nodes__ACallFormExpr___n_id].val; /* _n_id on <self:ACallReassignExpr> */
+if (var9 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_id");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1344);
 exit(1);
 }
-var9 = self->attrs[COLOR_typing__AReassignFormExpr___64dreassign_callsite].val; /* @reassign_callsite on <self:ACallReassignExpr> */
-var10 = self->attrs[COLOR_parser_nodes__ACallFormExpr___n_id].val; /* _n_id on <self:ACallReassignExpr> */
+var10 = self->attrs[COLOR_parser_nodes__ACallFormExpr___n_args].val; /* _n_args on <self:ACallReassignExpr> */
 if (var10 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_id", "src/parser/parser_nodes.nit", 1362);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_args");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1347);
 exit(1);
 }
-var11 = self->attrs[COLOR_parser_nodes__ACallFormExpr___n_args].val; /* _n_args on <self:ACallReassignExpr> */
-if (var11 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_args", "src/parser/parser_nodes.nit", 1365);
-exit(1);
-}
-var12 = self->attrs[COLOR_typing__ASendReassignFormExpr___64dwrite_callsite].val; /* @write_callsite on <self:ACallReassignExpr> */
+var11 = self->attrs[COLOR_typing__ASendReassignFormExpr___64dwrite_callsite].val; /* @write_callsite on <self:ACallReassignExpr> */
 }
 /* runtime class parser_nodes__ASuperExpr */
 const struct class class_parser_nodes__ASuperExpr = {
@@ -3008,6 +424,7 @@ const struct class class_parser_nodes__ASuperExpr = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:ASuperExpr:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:ASuperExpr:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:ASuperExpr:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:ASuperExpr:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:ASuperExpr:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:ASuperExpr:kernel#Object#output */
@@ -3151,12 +568,14 @@ var1 = self->attrs[COLOR_flow__AExpr___64dafter_flow_context].val; /* @after_flo
 var2 = self->attrs[COLOR_astbuilder__AExpr___64dvariable_cache].val; /* @variable_cache on <self:ASuperExpr> */
 var3 = self->attrs[COLOR_parser_nodes__ASuperExpr___n_kwsuper].val; /* _n_kwsuper on <self:ASuperExpr> */
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwsuper", "src/parser/parser_nodes.nit", 1408);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwsuper");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1390);
 exit(1);
 }
 var4 = self->attrs[COLOR_parser_nodes__ASuperExpr___n_args].val; /* _n_args on <self:ASuperExpr> */
 if (var4 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_args", "src/parser/parser_nodes.nit", 1409);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_args");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1391);
 exit(1);
 }
 var5 = self->attrs[COLOR_typing__ASuperExpr___64dmproperty].val; /* @mproperty on <self:ASuperExpr> */
@@ -3167,6 +586,7 @@ const struct class class_parser_nodes__AInitExpr = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:AInitExpr:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:AInitExpr:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:AInitExpr:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:AInitExpr:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:AInitExpr:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:AInitExpr:kernel#Object#output */
@@ -3221,7 +641,7 @@ const struct class class_parser_nodes__AInitExpr = {
 (nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__accept_simple_misc, /* pointer to parser_nodes:AInitExpr:simple_misc_analysis#ANode#accept_simple_misc */
 (nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__after_simple_misc, /* pointer to parser_nodes:AInitExpr:simple_misc_analysis#ANode#after_simple_misc */
 (nitmethod_t)VIRTUAL_literal__ANode__accept_literal, /* pointer to parser_nodes:AInitExpr:literal#ANode#accept_literal */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__accept_scope_visitor, /* pointer to parser_nodes:AInitExpr:scope#ASendExpr#accept_scope_visitor */
+(nitmethod_t)VIRTUAL_scope__ANode__accept_scope_visitor, /* pointer to parser_nodes:AInitExpr:scope#ANode#accept_scope_visitor */
 (nitmethod_t)VIRTUAL_flow__ANode__accept_flow_visitor, /* pointer to parser_nodes:AInitExpr:flow#ANode#accept_flow_visitor */
 (nitmethod_t)VIRTUAL_local_var_init__ANode__accept_local_var_visitor, /* pointer to parser_nodes:AInitExpr:local_var_init#ANode#accept_local_var_visitor */
 (nitmethod_t)VIRTUAL_auto_super_init__ASendExpr__accept_auto_super_init, /* pointer to parser_nodes:AInitExpr:auto_super_init#ASendExpr#accept_auto_super_init */
@@ -3268,12 +688,9 @@ NULL, /* empty */
 NULL, /* empty */
 (nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__n_expr, /* pointer to parser_nodes:AInitExpr:parser_nodes#ASendExpr#n_expr */
 (nitmethod_t)VIRTUAL_parser_prod__AInitExpr__n_expr_61d, /* pointer to parser_nodes:AInitExpr:parser_prod#AInitExpr#n_expr= */
-(nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__n_closure_defs, /* pointer to parser_nodes:AInitExpr:parser_nodes#ASendExpr#n_closure_defs */
 (nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__init, /* pointer to parser_nodes:AInitExpr:parser_nodes#ASendExpr#init */
 (nitmethod_t)VIRTUAL_parser_prod__ASendExpr__empty_init, /* pointer to parser_nodes:AInitExpr:parser_prod#ASendExpr#empty_init */
 (nitmethod_t)VIRTUAL_parser_prod__ASendExpr__init_asendexpr, /* pointer to parser_nodes:AInitExpr:parser_prod#ASendExpr#init_asendexpr */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__escapemark, /* pointer to parser_nodes:AInitExpr:scope#ASendExpr#escapemark */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__escapemark_61d, /* pointer to parser_nodes:AInitExpr:scope#ASendExpr#escapemark= */
 (nitmethod_t)VIRTUAL_typing__ASendExpr__mproperty, /* pointer to parser_nodes:AInitExpr:typing#ASendExpr#mproperty */
 (nitmethod_t)VIRTUAL_typing__ASendExpr__callsite, /* pointer to parser_nodes:AInitExpr:typing#ASendExpr#callsite */
 (nitmethod_t)VIRTUAL_typing__ASendExpr__callsite_61d, /* pointer to parser_nodes:AInitExpr:typing#ASendExpr#callsite= */
@@ -3281,7 +698,6 @@ NULL, /* empty */
 (nitmethod_t)VIRTUAL_typing__ASendExpr__raw_arguments, /* pointer to parser_nodes:AInitExpr:typing#ASendExpr#raw_arguments */
 (nitmethod_t)VIRTUAL_typing__ASendExpr__raw_arguments_61d, /* pointer to parser_nodes:AInitExpr:typing#ASendExpr#raw_arguments= */
 (nitmethod_t)VIRTUAL_typing__AInitExpr__compute_raw_arguments, /* pointer to parser_nodes:AInitExpr:typing#AInitExpr#compute_raw_arguments */
-(nitmethod_t)VIRTUAL_scope__ANode__accept_scope_visitor, /* pointer to parser_nodes:AInitExpr:scope#ANode#accept_scope_visitor */
 (nitmethod_t)VIRTUAL_parser_nodes__AInitExpr__n_kwinit, /* pointer to parser_nodes:AInitExpr:parser_nodes#AInitExpr#n_kwinit */
 (nitmethod_t)VIRTUAL_parser_prod__AInitExpr__n_kwinit_61d, /* pointer to parser_nodes:AInitExpr:parser_prod#AInitExpr#n_kwinit= */
 (nitmethod_t)VIRTUAL_parser_nodes__AInitExpr__n_args, /* pointer to parser_nodes:AInitExpr:parser_nodes#AInitExpr#n_args */
@@ -3300,8 +716,7 @@ val* var2 /* : null */;
 val* var3 /* : null */;
 short int var4 /* : Bool */;
 val* var5 /* : null */;
-val* var6 /* : ANodes[AClosureDef] */;
-self = nit_alloc(sizeof(struct instance) + 20*sizeof(nitattribute_t));
+self = nit_alloc(sizeof(struct instance) + 18*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser_nodes__AInitExpr;
 var = NULL;
@@ -3316,10 +731,6 @@ var4 = 0;
 self->attrs[COLOR_typing__AExpr___64dis_typed].s = var4; /* @is_typed on <self:AInitExpr exact> */
 var5 = NULL;
 self->attrs[COLOR_typing__AExpr___64dimplicit_cast_to].val = var5; /* @implicit_cast_to on <self:AInitExpr exact> */
-var6 = NEW_parser_nodes__ANodes(&type_parser_nodes__ANodesparser_nodes__AClosureDef);
-((void (*)(val*, val*))(var6->class->vft[COLOR_parser_nodes__ANodes__init]))(var6, self) /* init on <var6:ANodes[AClosureDef]>*/;
-CHECK_NEW_parser_nodes__ANodes(var6);
-self->attrs[COLOR_parser_nodes__ASendExpr___n_closure_defs].val = var6; /* _n_closure_defs on <self:AInitExpr exact> */
 return self;
 }
 /* allocate AInitExpr */
@@ -3328,30 +739,31 @@ val* var /* : nullable Location */;
 val* var1 /* : nullable FlowContext */;
 val* var2 /* : nullable Variable */;
 val* var3 /* : AExpr */;
-val* var4 /* : nullable EscapeMark */;
-val* var5 /* : nullable CallSite */;
-val* var6 /* : nullable Array[AExpr] */;
-val* var7 /* : TKwinit */;
-val* var8 /* : AExprs */;
+val* var4 /* : nullable CallSite */;
+val* var5 /* : nullable Array[AExpr] */;
+val* var6 /* : TKwinit */;
+val* var7 /* : AExprs */;
 var = self->attrs[COLOR_parser__Prod___first_location].val; /* _first_location on <self:AInitExpr> */
 var1 = self->attrs[COLOR_flow__AExpr___64dafter_flow_context].val; /* @after_flow_context on <self:AInitExpr> */
 var2 = self->attrs[COLOR_astbuilder__AExpr___64dvariable_cache].val; /* @variable_cache on <self:AInitExpr> */
 var3 = self->attrs[COLOR_parser_nodes__ASendExpr___n_expr].val; /* _n_expr on <self:AInitExpr> */
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr", "src/parser/parser_nodes.nit", 1182);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_expr");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1172);
 exit(1);
 }
-var4 = self->attrs[COLOR_scope__ASendExpr___64descapemark].val; /* @escapemark on <self:AInitExpr> */
-var5 = self->attrs[COLOR_typing__ASendExpr___64dcallsite].val; /* @callsite on <self:AInitExpr> */
-var6 = self->attrs[COLOR_typing__ASendExpr___64draw_arguments].val; /* @raw_arguments on <self:AInitExpr> */
-var7 = self->attrs[COLOR_parser_nodes__AInitExpr___n_kwinit].val; /* _n_kwinit on <self:AInitExpr> */
+var4 = self->attrs[COLOR_typing__ASendExpr___64dcallsite].val; /* @callsite on <self:AInitExpr> */
+var5 = self->attrs[COLOR_typing__ASendExpr___64draw_arguments].val; /* @raw_arguments on <self:AInitExpr> */
+var6 = self->attrs[COLOR_parser_nodes__AInitExpr___n_kwinit].val; /* _n_kwinit on <self:AInitExpr> */
+if (var6 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwinit");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1398);
+exit(1);
+}
+var7 = self->attrs[COLOR_parser_nodes__AInitExpr___n_args].val; /* _n_args on <self:AInitExpr> */
 if (var7 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwinit", "src/parser/parser_nodes.nit", 1416);
-exit(1);
-}
-var8 = self->attrs[COLOR_parser_nodes__AInitExpr___n_args].val; /* _n_args on <self:AInitExpr> */
-if (var8 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_args", "src/parser/parser_nodes.nit", 1417);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_args");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1399);
 exit(1);
 }
 }
@@ -3361,6 +773,7 @@ const struct class class_parser_nodes__ABraExpr = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:ABraExpr:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:ABraExpr:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:ABraExpr:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:ABraExpr:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:ABraExpr:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:ABraExpr:kernel#Object#output */
@@ -3415,7 +828,7 @@ const struct class class_parser_nodes__ABraExpr = {
 (nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__accept_simple_misc, /* pointer to parser_nodes:ABraExpr:simple_misc_analysis#ANode#accept_simple_misc */
 (nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__after_simple_misc, /* pointer to parser_nodes:ABraExpr:simple_misc_analysis#ANode#after_simple_misc */
 (nitmethod_t)VIRTUAL_literal__ANode__accept_literal, /* pointer to parser_nodes:ABraExpr:literal#ANode#accept_literal */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__accept_scope_visitor, /* pointer to parser_nodes:ABraExpr:scope#ASendExpr#accept_scope_visitor */
+(nitmethod_t)VIRTUAL_scope__ANode__accept_scope_visitor, /* pointer to parser_nodes:ABraExpr:scope#ANode#accept_scope_visitor */
 (nitmethod_t)VIRTUAL_flow__ANode__accept_flow_visitor, /* pointer to parser_nodes:ABraExpr:flow#ANode#accept_flow_visitor */
 (nitmethod_t)VIRTUAL_local_var_init__ANode__accept_local_var_visitor, /* pointer to parser_nodes:ABraExpr:local_var_init#ANode#accept_local_var_visitor */
 (nitmethod_t)VIRTUAL_auto_super_init__ASendExpr__accept_auto_super_init, /* pointer to parser_nodes:ABraExpr:auto_super_init#ASendExpr#accept_auto_super_init */
@@ -3462,12 +875,9 @@ NULL, /* empty */
 NULL, /* empty */
 (nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__n_expr, /* pointer to parser_nodes:ABraExpr:parser_nodes#ASendExpr#n_expr */
 (nitmethod_t)VIRTUAL_parser_prod__ABraExpr__n_expr_61d, /* pointer to parser_nodes:ABraExpr:parser_prod#ABraExpr#n_expr= */
-(nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__n_closure_defs, /* pointer to parser_nodes:ABraExpr:parser_nodes#ASendExpr#n_closure_defs */
 (nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__init, /* pointer to parser_nodes:ABraExpr:parser_nodes#ASendExpr#init */
 (nitmethod_t)VIRTUAL_parser_prod__ASendExpr__empty_init, /* pointer to parser_nodes:ABraExpr:parser_prod#ASendExpr#empty_init */
 (nitmethod_t)VIRTUAL_parser_prod__ASendExpr__init_asendexpr, /* pointer to parser_nodes:ABraExpr:parser_prod#ASendExpr#init_asendexpr */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__escapemark, /* pointer to parser_nodes:ABraExpr:scope#ASendExpr#escapemark */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__escapemark_61d, /* pointer to parser_nodes:ABraExpr:scope#ASendExpr#escapemark= */
 (nitmethod_t)VIRTUAL_typing__ASendExpr__mproperty, /* pointer to parser_nodes:ABraExpr:typing#ASendExpr#mproperty */
 (nitmethod_t)VIRTUAL_typing__ASendExpr__callsite, /* pointer to parser_nodes:ABraExpr:typing#ASendExpr#callsite */
 (nitmethod_t)VIRTUAL_typing__ASendExpr__callsite_61d, /* pointer to parser_nodes:ABraExpr:typing#ASendExpr#callsite= */
@@ -3475,7 +885,6 @@ NULL, /* empty */
 (nitmethod_t)VIRTUAL_typing__ASendExpr__raw_arguments, /* pointer to parser_nodes:ABraExpr:typing#ASendExpr#raw_arguments */
 (nitmethod_t)VIRTUAL_typing__ASendExpr__raw_arguments_61d, /* pointer to parser_nodes:ABraExpr:typing#ASendExpr#raw_arguments= */
 (nitmethod_t)VIRTUAL_typing__ABraExpr__compute_raw_arguments, /* pointer to parser_nodes:ABraExpr:typing#ABraExpr#compute_raw_arguments */
-(nitmethod_t)VIRTUAL_scope__ANode__accept_scope_visitor, /* pointer to parser_nodes:ABraExpr:scope#ANode#accept_scope_visitor */
 NULL, /* empty */
 NULL, /* empty */
 NULL, /* empty */
@@ -3504,8 +913,7 @@ val* var2 /* : null */;
 val* var3 /* : null */;
 short int var4 /* : Bool */;
 val* var5 /* : null */;
-val* var6 /* : ANodes[AClosureDef] */;
-self = nit_alloc(sizeof(struct instance) + 22*sizeof(nitattribute_t));
+self = nit_alloc(sizeof(struct instance) + 20*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser_nodes__ABraExpr;
 var = NULL;
@@ -3520,10 +928,6 @@ var4 = 0;
 self->attrs[COLOR_typing__AExpr___64dis_typed].s = var4; /* @is_typed on <self:ABraExpr exact> */
 var5 = NULL;
 self->attrs[COLOR_typing__AExpr___64dimplicit_cast_to].val = var5; /* @implicit_cast_to on <self:ABraExpr exact> */
-var6 = NEW_parser_nodes__ANodes(&type_parser_nodes__ANodesparser_nodes__AClosureDef);
-((void (*)(val*, val*))(var6->class->vft[COLOR_parser_nodes__ANodes__init]))(var6, self) /* init on <var6:ANodes[AClosureDef]>*/;
-CHECK_NEW_parser_nodes__ANodes(var6);
-self->attrs[COLOR_parser_nodes__ASendExpr___n_closure_defs].val = var6; /* _n_closure_defs on <self:ABraExpr exact> */
 return self;
 }
 /* allocate ABraExpr */
@@ -3532,24 +936,24 @@ val* var /* : nullable Location */;
 val* var1 /* : nullable FlowContext */;
 val* var2 /* : nullable Variable */;
 val* var3 /* : AExpr */;
-val* var4 /* : nullable EscapeMark */;
-val* var5 /* : nullable CallSite */;
-val* var6 /* : nullable Array[AExpr] */;
-val* var7 /* : AExprs */;
+val* var4 /* : nullable CallSite */;
+val* var5 /* : nullable Array[AExpr] */;
+val* var6 /* : AExprs */;
 var = self->attrs[COLOR_parser__Prod___first_location].val; /* _first_location on <self:ABraExpr> */
 var1 = self->attrs[COLOR_flow__AExpr___64dafter_flow_context].val; /* @after_flow_context on <self:ABraExpr> */
 var2 = self->attrs[COLOR_astbuilder__AExpr___64dvariable_cache].val; /* @variable_cache on <self:ABraExpr> */
 var3 = self->attrs[COLOR_parser_nodes__ASendExpr___n_expr].val; /* _n_expr on <self:ABraExpr> */
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr", "src/parser/parser_nodes.nit", 1182);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_expr");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1172);
 exit(1);
 }
-var4 = self->attrs[COLOR_scope__ASendExpr___64descapemark].val; /* @escapemark on <self:ABraExpr> */
-var5 = self->attrs[COLOR_typing__ASendExpr___64dcallsite].val; /* @callsite on <self:ABraExpr> */
-var6 = self->attrs[COLOR_typing__ASendExpr___64draw_arguments].val; /* @raw_arguments on <self:ABraExpr> */
-var7 = self->attrs[COLOR_parser_nodes__ABraFormExpr___n_args].val; /* _n_args on <self:ABraExpr> */
-if (var7 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_args", "src/parser/parser_nodes.nit", 1423);
+var4 = self->attrs[COLOR_typing__ASendExpr___64dcallsite].val; /* @callsite on <self:ABraExpr> */
+var5 = self->attrs[COLOR_typing__ASendExpr___64draw_arguments].val; /* @raw_arguments on <self:ABraExpr> */
+var6 = self->attrs[COLOR_parser_nodes__ABraFormExpr___n_args].val; /* _n_args on <self:ABraExpr> */
+if (var6 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_args");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1405);
 exit(1);
 }
 }
@@ -3559,6 +963,7 @@ const struct class class_parser_nodes__ABraAssignExpr = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:ABraAssignExpr:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:ABraAssignExpr:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:ABraAssignExpr:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:ABraAssignExpr:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:ABraAssignExpr:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:ABraAssignExpr:kernel#Object#output */
@@ -3613,7 +1018,7 @@ const struct class class_parser_nodes__ABraAssignExpr = {
 (nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__accept_simple_misc, /* pointer to parser_nodes:ABraAssignExpr:simple_misc_analysis#ANode#accept_simple_misc */
 (nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__after_simple_misc, /* pointer to parser_nodes:ABraAssignExpr:simple_misc_analysis#ANode#after_simple_misc */
 (nitmethod_t)VIRTUAL_literal__ANode__accept_literal, /* pointer to parser_nodes:ABraAssignExpr:literal#ANode#accept_literal */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__accept_scope_visitor, /* pointer to parser_nodes:ABraAssignExpr:scope#ASendExpr#accept_scope_visitor */
+(nitmethod_t)VIRTUAL_scope__ANode__accept_scope_visitor, /* pointer to parser_nodes:ABraAssignExpr:scope#ANode#accept_scope_visitor */
 (nitmethod_t)VIRTUAL_flow__ANode__accept_flow_visitor, /* pointer to parser_nodes:ABraAssignExpr:flow#ANode#accept_flow_visitor */
 (nitmethod_t)VIRTUAL_local_var_init__ANode__accept_local_var_visitor, /* pointer to parser_nodes:ABraAssignExpr:local_var_init#ANode#accept_local_var_visitor */
 (nitmethod_t)VIRTUAL_auto_super_init__ASendExpr__accept_auto_super_init, /* pointer to parser_nodes:ABraAssignExpr:auto_super_init#ASendExpr#accept_auto_super_init */
@@ -3660,12 +1065,9 @@ NULL, /* empty */
 NULL, /* empty */
 (nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__n_expr, /* pointer to parser_nodes:ABraAssignExpr:parser_nodes#ASendExpr#n_expr */
 (nitmethod_t)VIRTUAL_parser_prod__ABraAssignExpr__n_expr_61d, /* pointer to parser_nodes:ABraAssignExpr:parser_prod#ABraAssignExpr#n_expr= */
-(nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__n_closure_defs, /* pointer to parser_nodes:ABraAssignExpr:parser_nodes#ASendExpr#n_closure_defs */
 (nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__init, /* pointer to parser_nodes:ABraAssignExpr:parser_nodes#ASendExpr#init */
 (nitmethod_t)VIRTUAL_parser_prod__ASendExpr__empty_init, /* pointer to parser_nodes:ABraAssignExpr:parser_prod#ASendExpr#empty_init */
 (nitmethod_t)VIRTUAL_parser_prod__ASendExpr__init_asendexpr, /* pointer to parser_nodes:ABraAssignExpr:parser_prod#ASendExpr#init_asendexpr */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__escapemark, /* pointer to parser_nodes:ABraAssignExpr:scope#ASendExpr#escapemark */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__escapemark_61d, /* pointer to parser_nodes:ABraAssignExpr:scope#ASendExpr#escapemark= */
 (nitmethod_t)VIRTUAL_typing__ASendExpr__mproperty, /* pointer to parser_nodes:ABraAssignExpr:typing#ASendExpr#mproperty */
 (nitmethod_t)VIRTUAL_typing__ASendExpr__callsite, /* pointer to parser_nodes:ABraAssignExpr:typing#ASendExpr#callsite */
 (nitmethod_t)VIRTUAL_typing__ASendExpr__callsite_61d, /* pointer to parser_nodes:ABraAssignExpr:typing#ASendExpr#callsite= */
@@ -3673,7 +1075,6 @@ NULL, /* empty */
 (nitmethod_t)VIRTUAL_typing__ASendExpr__raw_arguments, /* pointer to parser_nodes:ABraAssignExpr:typing#ASendExpr#raw_arguments */
 (nitmethod_t)VIRTUAL_typing__ASendExpr__raw_arguments_61d, /* pointer to parser_nodes:ABraAssignExpr:typing#ASendExpr#raw_arguments= */
 (nitmethod_t)VIRTUAL_typing__ABraAssignExpr__compute_raw_arguments, /* pointer to parser_nodes:ABraAssignExpr:typing#ABraAssignExpr#compute_raw_arguments */
-(nitmethod_t)VIRTUAL_scope__ANode__accept_scope_visitor, /* pointer to parser_nodes:ABraAssignExpr:scope#ANode#accept_scope_visitor */
 NULL, /* empty */
 NULL, /* empty */
 NULL, /* empty */
@@ -3702,8 +1103,7 @@ val* var2 /* : null */;
 val* var3 /* : null */;
 short int var4 /* : Bool */;
 val* var5 /* : null */;
-val* var6 /* : ANodes[AClosureDef] */;
-self = nit_alloc(sizeof(struct instance) + 22*sizeof(nitattribute_t));
+self = nit_alloc(sizeof(struct instance) + 20*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser_nodes__ABraAssignExpr;
 var = NULL;
@@ -3718,10 +1118,6 @@ var4 = 0;
 self->attrs[COLOR_typing__AExpr___64dis_typed].s = var4; /* @is_typed on <self:ABraAssignExpr exact> */
 var5 = NULL;
 self->attrs[COLOR_typing__AExpr___64dimplicit_cast_to].val = var5; /* @implicit_cast_to on <self:ABraAssignExpr exact> */
-var6 = NEW_parser_nodes__ANodes(&type_parser_nodes__ANodesparser_nodes__AClosureDef);
-((void (*)(val*, val*))(var6->class->vft[COLOR_parser_nodes__ANodes__init]))(var6, self) /* init on <var6:ANodes[AClosureDef]>*/;
-CHECK_NEW_parser_nodes__ANodes(var6);
-self->attrs[COLOR_parser_nodes__ASendExpr___n_closure_defs].val = var6; /* _n_closure_defs on <self:ABraAssignExpr exact> */
 return self;
 }
 /* allocate ABraAssignExpr */
@@ -3730,36 +1126,38 @@ val* var /* : nullable Location */;
 val* var1 /* : nullable FlowContext */;
 val* var2 /* : nullable Variable */;
 val* var3 /* : AExpr */;
-val* var4 /* : nullable EscapeMark */;
-val* var5 /* : nullable CallSite */;
-val* var6 /* : nullable Array[AExpr] */;
-val* var7 /* : TAssign */;
-val* var8 /* : AExpr */;
-val* var9 /* : AExprs */;
+val* var4 /* : nullable CallSite */;
+val* var5 /* : nullable Array[AExpr] */;
+val* var6 /* : TAssign */;
+val* var7 /* : AExpr */;
+val* var8 /* : AExprs */;
 var = self->attrs[COLOR_parser__Prod___first_location].val; /* _first_location on <self:ABraAssignExpr> */
 var1 = self->attrs[COLOR_flow__AExpr___64dafter_flow_context].val; /* @after_flow_context on <self:ABraAssignExpr> */
 var2 = self->attrs[COLOR_astbuilder__AExpr___64dvariable_cache].val; /* @variable_cache on <self:ABraAssignExpr> */
 var3 = self->attrs[COLOR_parser_nodes__ASendExpr___n_expr].val; /* _n_expr on <self:ABraAssignExpr> */
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr", "src/parser/parser_nodes.nit", 1182);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_expr");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1172);
 exit(1);
 }
-var4 = self->attrs[COLOR_scope__ASendExpr___64descapemark].val; /* @escapemark on <self:ABraAssignExpr> */
-var5 = self->attrs[COLOR_typing__ASendExpr___64dcallsite].val; /* @callsite on <self:ABraAssignExpr> */
-var6 = self->attrs[COLOR_typing__ASendExpr___64draw_arguments].val; /* @raw_arguments on <self:ABraAssignExpr> */
-var7 = self->attrs[COLOR_parser_nodes__AAssignFormExpr___n_assign].val; /* _n_assign on <self:ABraAssignExpr> */
+var4 = self->attrs[COLOR_typing__ASendExpr___64dcallsite].val; /* @callsite on <self:ABraAssignExpr> */
+var5 = self->attrs[COLOR_typing__ASendExpr___64draw_arguments].val; /* @raw_arguments on <self:ABraAssignExpr> */
+var6 = self->attrs[COLOR_parser_nodes__AAssignFormExpr___n_assign].val; /* _n_assign on <self:ABraAssignExpr> */
+if (var6 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_assign");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1151);
+exit(1);
+}
+var7 = self->attrs[COLOR_parser_nodes__AAssignFormExpr___n_value].val; /* _n_value on <self:ABraAssignExpr> */
 if (var7 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_assign", "src/parser/parser_nodes.nit", 1161);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_value");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1152);
 exit(1);
 }
-var8 = self->attrs[COLOR_parser_nodes__AAssignFormExpr___n_value].val; /* _n_value on <self:ABraAssignExpr> */
+var8 = self->attrs[COLOR_parser_nodes__ABraFormExpr___n_args].val; /* _n_args on <self:ABraAssignExpr> */
 if (var8 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_value", "src/parser/parser_nodes.nit", 1162);
-exit(1);
-}
-var9 = self->attrs[COLOR_parser_nodes__ABraFormExpr___n_args].val; /* _n_args on <self:ABraAssignExpr> */
-if (var9 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_args", "src/parser/parser_nodes.nit", 1423);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_args");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1405);
 exit(1);
 }
 }
@@ -3769,6 +1167,7 @@ const struct class class_parser_nodes__ABraReassignExpr = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:ABraReassignExpr:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:ABraReassignExpr:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:ABraReassignExpr:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:ABraReassignExpr:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:ABraReassignExpr:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:ABraReassignExpr:kernel#Object#output */
@@ -3823,7 +1222,7 @@ const struct class class_parser_nodes__ABraReassignExpr = {
 (nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__accept_simple_misc, /* pointer to parser_nodes:ABraReassignExpr:simple_misc_analysis#ANode#accept_simple_misc */
 (nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__after_simple_misc, /* pointer to parser_nodes:ABraReassignExpr:simple_misc_analysis#ANode#after_simple_misc */
 (nitmethod_t)VIRTUAL_literal__ANode__accept_literal, /* pointer to parser_nodes:ABraReassignExpr:literal#ANode#accept_literal */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__accept_scope_visitor, /* pointer to parser_nodes:ABraReassignExpr:scope#ASendExpr#accept_scope_visitor */
+(nitmethod_t)VIRTUAL_scope__ANode__accept_scope_visitor, /* pointer to parser_nodes:ABraReassignExpr:scope#ANode#accept_scope_visitor */
 (nitmethod_t)VIRTUAL_flow__AReassignFormExpr__accept_flow_visitor, /* pointer to parser_nodes:ABraReassignExpr:flow#AReassignFormExpr#accept_flow_visitor */
 (nitmethod_t)VIRTUAL_local_var_init__ANode__accept_local_var_visitor, /* pointer to parser_nodes:ABraReassignExpr:local_var_init#ANode#accept_local_var_visitor */
 (nitmethod_t)VIRTUAL_auto_super_init__ASendExpr__accept_auto_super_init, /* pointer to parser_nodes:ABraReassignExpr:auto_super_init#ASendExpr#accept_auto_super_init */
@@ -3870,12 +1269,9 @@ const struct class class_parser_nodes__ABraReassignExpr = {
 (nitmethod_t)VIRTUAL_flow__ANode__accept_flow_visitor, /* pointer to parser_nodes:ABraReassignExpr:flow#ANode#accept_flow_visitor */
 (nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__n_expr, /* pointer to parser_nodes:ABraReassignExpr:parser_nodes#ASendExpr#n_expr */
 (nitmethod_t)VIRTUAL_parser_prod__ABraReassignExpr__n_expr_61d, /* pointer to parser_nodes:ABraReassignExpr:parser_prod#ABraReassignExpr#n_expr= */
-(nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__n_closure_defs, /* pointer to parser_nodes:ABraReassignExpr:parser_nodes#ASendExpr#n_closure_defs */
 (nitmethod_t)VIRTUAL_parser_nodes__ASendExpr__init, /* pointer to parser_nodes:ABraReassignExpr:parser_nodes#ASendExpr#init */
 (nitmethod_t)VIRTUAL_parser_prod__ASendExpr__empty_init, /* pointer to parser_nodes:ABraReassignExpr:parser_prod#ASendExpr#empty_init */
 (nitmethod_t)VIRTUAL_parser_prod__ASendExpr__init_asendexpr, /* pointer to parser_nodes:ABraReassignExpr:parser_prod#ASendExpr#init_asendexpr */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__escapemark, /* pointer to parser_nodes:ABraReassignExpr:scope#ASendExpr#escapemark */
-(nitmethod_t)VIRTUAL_scope__ASendExpr__escapemark_61d, /* pointer to parser_nodes:ABraReassignExpr:scope#ASendExpr#escapemark= */
 (nitmethod_t)VIRTUAL_typing__ASendExpr__mproperty, /* pointer to parser_nodes:ABraReassignExpr:typing#ASendExpr#mproperty */
 (nitmethod_t)VIRTUAL_typing__ASendExpr__callsite, /* pointer to parser_nodes:ABraReassignExpr:typing#ASendExpr#callsite */
 (nitmethod_t)VIRTUAL_typing__ASendExpr__callsite_61d, /* pointer to parser_nodes:ABraReassignExpr:typing#ASendExpr#callsite= */
@@ -3883,7 +1279,6 @@ const struct class class_parser_nodes__ABraReassignExpr = {
 (nitmethod_t)VIRTUAL_typing__ASendExpr__raw_arguments, /* pointer to parser_nodes:ABraReassignExpr:typing#ASendExpr#raw_arguments */
 (nitmethod_t)VIRTUAL_typing__ASendExpr__raw_arguments_61d, /* pointer to parser_nodes:ABraReassignExpr:typing#ASendExpr#raw_arguments= */
 (nitmethod_t)VIRTUAL_typing__ABraReassignExpr__compute_raw_arguments, /* pointer to parser_nodes:ABraReassignExpr:typing#ABraReassignExpr#compute_raw_arguments */
-(nitmethod_t)VIRTUAL_scope__ANode__accept_scope_visitor, /* pointer to parser_nodes:ABraReassignExpr:scope#ANode#accept_scope_visitor */
 NULL, /* empty */
 NULL, /* empty */
 NULL, /* empty */
@@ -3912,9 +1307,8 @@ val* var2 /* : null */;
 val* var3 /* : null */;
 short int var4 /* : Bool */;
 val* var5 /* : null */;
-val* var6 /* : ANodes[AClosureDef] */;
-val* var7 /* : null */;
-self = nit_alloc(sizeof(struct instance) + 22*sizeof(nitattribute_t));
+val* var6 /* : null */;
+self = nit_alloc(sizeof(struct instance) + 20*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser_nodes__ABraReassignExpr;
 var = NULL;
@@ -3929,12 +1323,8 @@ var4 = 0;
 self->attrs[COLOR_typing__AExpr___64dis_typed].s = var4; /* @is_typed on <self:ABraReassignExpr exact> */
 var5 = NULL;
 self->attrs[COLOR_typing__AExpr___64dimplicit_cast_to].val = var5; /* @implicit_cast_to on <self:ABraReassignExpr exact> */
-var6 = NEW_parser_nodes__ANodes(&type_parser_nodes__ANodesparser_nodes__AClosureDef);
-((void (*)(val*, val*))(var6->class->vft[COLOR_parser_nodes__ANodes__init]))(var6, self) /* init on <var6:ANodes[AClosureDef]>*/;
-CHECK_NEW_parser_nodes__ANodes(var6);
-self->attrs[COLOR_parser_nodes__ASendExpr___n_closure_defs].val = var6; /* _n_closure_defs on <self:ABraReassignExpr exact> */
-var7 = NULL;
-self->attrs[COLOR_typing__AReassignFormExpr___64dread_type].val = var7; /* @read_type on <self:ABraReassignExpr exact> */
+var6 = NULL;
+self->attrs[COLOR_typing__AReassignFormExpr___64dread_type].val = var6; /* @read_type on <self:ABraReassignExpr exact> */
 return self;
 }
 /* allocate ABraReassignExpr */
@@ -3943,202 +1333,44 @@ val* var /* : nullable Location */;
 val* var1 /* : nullable FlowContext */;
 val* var2 /* : nullable Variable */;
 val* var3 /* : AExpr */;
-val* var4 /* : nullable EscapeMark */;
-val* var5 /* : nullable CallSite */;
-val* var6 /* : nullable Array[AExpr] */;
-val* var7 /* : AAssignOp */;
-val* var8 /* : AExpr */;
-val* var9 /* : nullable CallSite */;
-val* var10 /* : AExprs */;
-val* var11 /* : nullable CallSite */;
+val* var4 /* : nullable CallSite */;
+val* var5 /* : nullable Array[AExpr] */;
+val* var6 /* : AAssignOp */;
+val* var7 /* : AExpr */;
+val* var8 /* : nullable CallSite */;
+val* var9 /* : AExprs */;
+val* var10 /* : nullable CallSite */;
 var = self->attrs[COLOR_parser__Prod___first_location].val; /* _first_location on <self:ABraReassignExpr> */
 var1 = self->attrs[COLOR_flow__AExpr___64dafter_flow_context].val; /* @after_flow_context on <self:ABraReassignExpr> */
 var2 = self->attrs[COLOR_astbuilder__AExpr___64dvariable_cache].val; /* @variable_cache on <self:ABraReassignExpr> */
 var3 = self->attrs[COLOR_parser_nodes__ASendExpr___n_expr].val; /* _n_expr on <self:ABraReassignExpr> */
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr", "src/parser/parser_nodes.nit", 1182);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_expr");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1172);
 exit(1);
 }
-var4 = self->attrs[COLOR_scope__ASendExpr___64descapemark].val; /* @escapemark on <self:ABraReassignExpr> */
-var5 = self->attrs[COLOR_typing__ASendExpr___64dcallsite].val; /* @callsite on <self:ABraReassignExpr> */
-var6 = self->attrs[COLOR_typing__ASendExpr___64draw_arguments].val; /* @raw_arguments on <self:ABraReassignExpr> */
-var7 = self->attrs[COLOR_parser_nodes__AReassignFormExpr___n_assign_op].val; /* _n_assign_op on <self:ABraReassignExpr> */
+var4 = self->attrs[COLOR_typing__ASendExpr___64dcallsite].val; /* @callsite on <self:ABraReassignExpr> */
+var5 = self->attrs[COLOR_typing__ASendExpr___64draw_arguments].val; /* @raw_arguments on <self:ABraReassignExpr> */
+var6 = self->attrs[COLOR_parser_nodes__AReassignFormExpr___n_assign_op].val; /* _n_assign_op on <self:ABraReassignExpr> */
+if (var6 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_assign_op");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1158);
+exit(1);
+}
+var7 = self->attrs[COLOR_parser_nodes__AReassignFormExpr___n_value].val; /* _n_value on <self:ABraReassignExpr> */
 if (var7 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_assign_op", "src/parser/parser_nodes.nit", 1168);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_value");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1159);
 exit(1);
 }
-var8 = self->attrs[COLOR_parser_nodes__AReassignFormExpr___n_value].val; /* _n_value on <self:ABraReassignExpr> */
-if (var8 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_value", "src/parser/parser_nodes.nit", 1169);
+var8 = self->attrs[COLOR_typing__AReassignFormExpr___64dreassign_callsite].val; /* @reassign_callsite on <self:ABraReassignExpr> */
+var9 = self->attrs[COLOR_parser_nodes__ABraFormExpr___n_args].val; /* _n_args on <self:ABraReassignExpr> */
+if (var9 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_args");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1405);
 exit(1);
 }
-var9 = self->attrs[COLOR_typing__AReassignFormExpr___64dreassign_callsite].val; /* @reassign_callsite on <self:ABraReassignExpr> */
-var10 = self->attrs[COLOR_parser_nodes__ABraFormExpr___n_args].val; /* _n_args on <self:ABraReassignExpr> */
-if (var10 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_args", "src/parser/parser_nodes.nit", 1423);
-exit(1);
-}
-var11 = self->attrs[COLOR_typing__ASendReassignFormExpr___64dwrite_callsite].val; /* @write_callsite on <self:ABraReassignExpr> */
-}
-/* runtime class parser_nodes__AClosureCallExpr */
-const struct class class_parser_nodes__AClosureCallExpr = {
-0, /* box_kind */
-{
-(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:AClosureCallExpr:kernel#Object#object_id */
-(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:AClosureCallExpr:kernel#Object#is_same_type */
-(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:AClosureCallExpr:kernel#Object#== */
-(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:AClosureCallExpr:kernel#Object#!= */
-(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:AClosureCallExpr:kernel#Object#output */
-(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to parser_nodes:AClosureCallExpr:kernel#Object#output_class_name */
-(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to parser_nodes:AClosureCallExpr:kernel#Object#exit */
-(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to parser_nodes:AClosureCallExpr:kernel#Object#sys */
-(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to parser_nodes:AClosureCallExpr:kernel#Object#hash */
-(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to parser_nodes:AClosureCallExpr:string#Object#to_s */
-(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to parser_nodes:AClosureCallExpr:string#Object#native_class_name */
-(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to parser_nodes:AClosureCallExpr:string#Object#class_name */
-(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to parser_nodes:AClosureCallExpr:string#Object#inspect */
-(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to parser_nodes:AClosureCallExpr:string#Object#inspect_head */
-(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to parser_nodes:AClosureCallExpr:string#Object#args */
-(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to parser_nodes:AClosureCallExpr:math#Object#atan2 */
-(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to parser_nodes:AClosureCallExpr:math#Object#pi */
-(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to parser_nodes:AClosureCallExpr:math#Object#srand_from */
-(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to parser_nodes:AClosureCallExpr:math#Object#srand */
-(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to parser_nodes:AClosureCallExpr:stream#Object#poll */
-(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to parser_nodes:AClosureCallExpr:stream#Object#intern_poll */
-(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to parser_nodes:AClosureCallExpr:time#Object#get_time */
-(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to parser_nodes:AClosureCallExpr:file#Object#printn */
-(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to parser_nodes:AClosureCallExpr:file#Object#print */
-(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to parser_nodes:AClosureCallExpr:file#Object#getc */
-(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to parser_nodes:AClosureCallExpr:file#Object#gets */
-(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to parser_nodes:AClosureCallExpr:file#Object#getcwd */
-(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to parser_nodes:AClosureCallExpr:file#Object#file_getcwd */
-(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to parser_nodes:AClosureCallExpr:file#Object#stdin */
-(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to parser_nodes:AClosureCallExpr:file#Object#stdout */
-(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to parser_nodes:AClosureCallExpr:file#Object#stderr */
-(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to parser_nodes:AClosureCallExpr:model_base#Object#intrude_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to parser_nodes:AClosureCallExpr:model_base#Object#public_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to parser_nodes:AClosureCallExpr:model_base#Object#protected_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to parser_nodes:AClosureCallExpr:model_base#Object#private_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to parser_nodes:AClosureCallExpr:model_base#Object#none_visibility */
-(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to parser_nodes:AClosureCallExpr:model#Object#abstract_kind */
-(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to parser_nodes:AClosureCallExpr:model#Object#concrete_kind */
-(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to parser_nodes:AClosureCallExpr:model#Object#interface_kind */
-(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to parser_nodes:AClosureCallExpr:model#Object#enum_kind */
-(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to parser_nodes:AClosureCallExpr:model#Object#extern_kind */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__location, /* pointer to parser_nodes:AClosureCallExpr:parser_nodes#ANode#location */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__hot_location, /* pointer to parser_nodes:AClosureCallExpr:parser_nodes#ANode#hot_location */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__debug, /* pointer to parser_nodes:AClosureCallExpr:parser_nodes#ANode#debug */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent, /* pointer to parser_nodes:AClosureCallExpr:parser_nodes#ANode#parent */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent_61d, /* pointer to parser_nodes:AClosureCallExpr:parser_nodes#ANode#parent= */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__init, /* pointer to parser_nodes:AClosureCallExpr:parser_nodes#ANode#init */
-(nitmethod_t)VIRTUAL_parser_prod__AClosureCallExpr__replace_child, /* pointer to parser_nodes:AClosureCallExpr:parser_prod#AClosureCallExpr#replace_child */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__detach, /* pointer to parser_nodes:AClosureCallExpr:parser_nodes#ANode#detach */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__replace_with, /* pointer to parser_nodes:AClosureCallExpr:parser_nodes#Prod#replace_with */
-(nitmethod_t)VIRTUAL_parser_prod__AClosureCallExpr__visit_all, /* pointer to parser_nodes:AClosureCallExpr:parser_prod#AClosureCallExpr#visit_all */
-(nitmethod_t)VIRTUAL_parser_util__ANode__collect_tokens_by_text, /* pointer to parser_nodes:AClosureCallExpr:parser_util#ANode#collect_tokens_by_text */
-(nitmethod_t)VIRTUAL_parser_util__ANode__collect_annotations_by_name, /* pointer to parser_nodes:AClosureCallExpr:parser_util#ANode#collect_annotations_by_name */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__accept_simple_misc, /* pointer to parser_nodes:AClosureCallExpr:simple_misc_analysis#ANode#accept_simple_misc */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__after_simple_misc, /* pointer to parser_nodes:AClosureCallExpr:simple_misc_analysis#ANode#after_simple_misc */
-(nitmethod_t)VIRTUAL_literal__ANode__accept_literal, /* pointer to parser_nodes:AClosureCallExpr:literal#ANode#accept_literal */
-(nitmethod_t)VIRTUAL_scope__ANode__accept_scope_visitor, /* pointer to parser_nodes:AClosureCallExpr:scope#ANode#accept_scope_visitor */
-(nitmethod_t)VIRTUAL_flow__AClosureCallExpr__accept_flow_visitor, /* pointer to parser_nodes:AClosureCallExpr:flow#AClosureCallExpr#accept_flow_visitor */
-(nitmethod_t)VIRTUAL_local_var_init__ANode__accept_local_var_visitor, /* pointer to parser_nodes:AClosureCallExpr:local_var_init#ANode#accept_local_var_visitor */
-(nitmethod_t)VIRTUAL_auto_super_init__ANode__accept_auto_super_init, /* pointer to parser_nodes:AClosureCallExpr:auto_super_init#ANode#accept_auto_super_init */
-(nitmethod_t)VIRTUAL_rapid_type_analysis__ANode__accept_rapid_type_visitor, /* pointer to parser_nodes:AClosureCallExpr:rapid_type_analysis#ANode#accept_rapid_type_visitor */
-(nitmethod_t)VIRTUAL_astvalidation__AExpr__accept_ast_validation, /* pointer to parser_nodes:AClosureCallExpr:astvalidation#AExpr#accept_ast_validation */
-(nitmethod_t)VIRTUAL_transform__ANode__accept_transform_visitor, /* pointer to parser_nodes:AClosureCallExpr:transform#ANode#accept_transform_visitor */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__location_61d, /* pointer to parser_nodes:AClosureCallExpr:parser_nodes#Prod#location= */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations, /* pointer to parser_nodes:AClosureCallExpr:parser_nodes#Prod#n_annotations */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations_61d, /* pointer to parser_nodes:AClosureCallExpr:parser_nodes#Prod#n_annotations= */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__init, /* pointer to parser_nodes:AClosureCallExpr:parser_nodes#Prod#init */
-(nitmethod_t)VIRTUAL_modelize_property__Prod__collect_text, /* pointer to parser_nodes:AClosureCallExpr:modelize_property#Prod#collect_text */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__replace_with, /* pointer to parser_nodes:AClosureCallExpr:parser_nodes#ANode#replace_with */
-(nitmethod_t)VIRTUAL_parser_nodes__AExpr__init, /* pointer to parser_nodes:AClosureCallExpr:parser_nodes#AExpr#init */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__AExpr__warn_parentheses, /* pointer to parser_nodes:AClosureCallExpr:simple_misc_analysis#AExpr#warn_parentheses */
-(nitmethod_t)VIRTUAL_flow__AExpr__after_flow_context, /* pointer to parser_nodes:AClosureCallExpr:flow#AExpr#after_flow_context */
-(nitmethod_t)VIRTUAL_flow__AExpr__after_flow_context_61d, /* pointer to parser_nodes:AClosureCallExpr:flow#AExpr#after_flow_context= */
-(nitmethod_t)VIRTUAL_typing__AExpr__mtype, /* pointer to parser_nodes:AClosureCallExpr:typing#AExpr#mtype */
-(nitmethod_t)VIRTUAL_typing__AExpr__mtype_61d, /* pointer to parser_nodes:AClosureCallExpr:typing#AExpr#mtype= */
-(nitmethod_t)VIRTUAL_typing__AExpr__is_typed, /* pointer to parser_nodes:AClosureCallExpr:typing#AExpr#is_typed */
-(nitmethod_t)VIRTUAL_typing__AExpr__is_typed_61d, /* pointer to parser_nodes:AClosureCallExpr:typing#AExpr#is_typed= */
-(nitmethod_t)VIRTUAL_typing__AExpr__implicit_cast_to, /* pointer to parser_nodes:AClosureCallExpr:typing#AExpr#implicit_cast_to */
-(nitmethod_t)VIRTUAL_typing__AExpr__implicit_cast_to_61d, /* pointer to parser_nodes:AClosureCallExpr:typing#AExpr#implicit_cast_to= */
-(nitmethod_t)VIRTUAL_typing__AExpr__its_variable, /* pointer to parser_nodes:AClosureCallExpr:typing#AExpr#its_variable */
-(nitmethod_t)VIRTUAL_typing__AClosureCallExpr__accept_typing, /* pointer to parser_nodes:AClosureCallExpr:typing#AClosureCallExpr#accept_typing */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__make_var_read, /* pointer to parser_nodes:AClosureCallExpr:astbuilder#AExpr#make_var_read */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__variable_cache, /* pointer to parser_nodes:AClosureCallExpr:astbuilder#AExpr#variable_cache */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__variable_cache_61d, /* pointer to parser_nodes:AClosureCallExpr:astbuilder#AExpr#variable_cache= */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__detach_with_placeholder, /* pointer to parser_nodes:AClosureCallExpr:astbuilder#AExpr#detach_with_placeholder */
-(nitmethod_t)VIRTUAL_astbuilder__AExpr__add, /* pointer to parser_nodes:AClosureCallExpr:astbuilder#AExpr#add */
-(nitmethod_t)VIRTUAL_abstract_compiler__AExpr__expr, /* pointer to parser_nodes:AClosureCallExpr:abstract_compiler#AExpr#expr */
-(nitmethod_t)VIRTUAL_abstract_compiler__AExpr__stmt, /* pointer to parser_nodes:AClosureCallExpr:abstract_compiler#AExpr#stmt */
-(nitmethod_t)VIRTUAL_astvalidation__ANode__accept_ast_validation, /* pointer to parser_nodes:AClosureCallExpr:astvalidation#ANode#accept_ast_validation */
-(nitmethod_t)VIRTUAL_parser_nodes__AClosureCallExpr__n_id, /* pointer to parser_nodes:AClosureCallExpr:parser_nodes#AClosureCallExpr#n_id */
-(nitmethod_t)VIRTUAL_parser_prod__AClosureCallExpr__n_id_61d, /* pointer to parser_nodes:AClosureCallExpr:parser_prod#AClosureCallExpr#n_id= */
-(nitmethod_t)VIRTUAL_parser_nodes__AClosureCallExpr__n_args, /* pointer to parser_nodes:AClosureCallExpr:parser_nodes#AClosureCallExpr#n_args */
-(nitmethod_t)VIRTUAL_parser_prod__AClosureCallExpr__n_args_61d, /* pointer to parser_nodes:AClosureCallExpr:parser_prod#AClosureCallExpr#n_args= */
-(nitmethod_t)VIRTUAL_parser_nodes__AClosureCallExpr__n_closure_defs, /* pointer to parser_nodes:AClosureCallExpr:parser_nodes#AClosureCallExpr#n_closure_defs */
-(nitmethod_t)VIRTUAL_parser_nodes__AClosureCallExpr__init, /* pointer to parser_nodes:AClosureCallExpr:parser_nodes#AClosureCallExpr#init */
-(nitmethod_t)VIRTUAL_parser_prod__AClosureCallExpr__empty_init, /* pointer to parser_nodes:AClosureCallExpr:parser_prod#AClosureCallExpr#empty_init */
-(nitmethod_t)VIRTUAL_parser_prod__AClosureCallExpr__init_aclosurecallexpr, /* pointer to parser_nodes:AClosureCallExpr:parser_prod#AClosureCallExpr#init_aclosurecallexpr */
-(nitmethod_t)VIRTUAL_scope__AClosureCallExpr__variable, /* pointer to parser_nodes:AClosureCallExpr:scope#AClosureCallExpr#variable */
-(nitmethod_t)VIRTUAL_scope__AClosureCallExpr__variable_61d, /* pointer to parser_nodes:AClosureCallExpr:scope#AClosureCallExpr#variable= */
-(nitmethod_t)VIRTUAL_flow__ANode__accept_flow_visitor, /* pointer to parser_nodes:AClosureCallExpr:flow#ANode#accept_flow_visitor */
-}
-};
-/* allocate AClosureCallExpr */
-val* NEW_parser_nodes__AClosureCallExpr(const struct type* type) {
-val* self /* : AClosureCallExpr */;
-val* var /* : null */;
-val* var1 /* : null */;
-val* var2 /* : null */;
-val* var3 /* : null */;
-short int var4 /* : Bool */;
-val* var5 /* : null */;
-val* var6 /* : ANodes[AClosureDef] */;
-self = nit_alloc(sizeof(struct instance) + 13*sizeof(nitattribute_t));
-self->type = type;
-self->class = &class_parser_nodes__AClosureCallExpr;
-var = NULL;
-self->attrs[COLOR_parser_nodes__ANode___location].val = var; /* _location on <self:AClosureCallExpr exact> */
-var1 = NULL;
-self->attrs[COLOR_parser_nodes__ANode___64dparent].val = var1; /* @parent on <self:AClosureCallExpr exact> */
-var2 = NULL;
-self->attrs[COLOR_parser_nodes__Prod___n_annotations].val = var2; /* _n_annotations on <self:AClosureCallExpr exact> */
-var3 = NULL;
-self->attrs[COLOR_typing__AExpr___64dmtype].val = var3; /* @mtype on <self:AClosureCallExpr exact> */
-var4 = 0;
-self->attrs[COLOR_typing__AExpr___64dis_typed].s = var4; /* @is_typed on <self:AClosureCallExpr exact> */
-var5 = NULL;
-self->attrs[COLOR_typing__AExpr___64dimplicit_cast_to].val = var5; /* @implicit_cast_to on <self:AClosureCallExpr exact> */
-var6 = NEW_parser_nodes__ANodes(&type_parser_nodes__ANodesparser_nodes__AClosureDef);
-((void (*)(val*, val*))(var6->class->vft[COLOR_parser_nodes__ANodes__init]))(var6, self) /* init on <var6:ANodes[AClosureDef]>*/;
-CHECK_NEW_parser_nodes__ANodes(var6);
-self->attrs[COLOR_parser_nodes__AClosureCallExpr___n_closure_defs].val = var6; /* _n_closure_defs on <self:AClosureCallExpr exact> */
-return self;
-}
-/* allocate AClosureCallExpr */
-void CHECK_NEW_parser_nodes__AClosureCallExpr(val* self) {
-val* var /* : nullable Location */;
-val* var1 /* : nullable FlowContext */;
-val* var2 /* : nullable Variable */;
-val* var3 /* : TId */;
-val* var4 /* : AExprs */;
-val* var5 /* : nullable ClosureVariable */;
-var = self->attrs[COLOR_parser__Prod___first_location].val; /* _first_location on <self:AClosureCallExpr> */
-var1 = self->attrs[COLOR_flow__AExpr___64dafter_flow_context].val; /* @after_flow_context on <self:AClosureCallExpr> */
-var2 = self->attrs[COLOR_astbuilder__AExpr___64dvariable_cache].val; /* @variable_cache on <self:AClosureCallExpr> */
-var3 = self->attrs[COLOR_parser_nodes__AClosureCallExpr___n_id].val; /* _n_id on <self:AClosureCallExpr> */
-if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_id", "src/parser/parser_nodes.nit", 1451);
-exit(1);
-}
-var4 = self->attrs[COLOR_parser_nodes__AClosureCallExpr___n_args].val; /* _n_args on <self:AClosureCallExpr> */
-if (var4 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_args", "src/parser/parser_nodes.nit", 1452);
-exit(1);
-}
-var5 = self->attrs[COLOR_scope__AClosureCallExpr___64dvariable].val; /* @variable on <self:AClosureCallExpr> */
+var10 = self->attrs[COLOR_typing__ASendReassignFormExpr___64dwrite_callsite].val; /* @write_callsite on <self:ABraReassignExpr> */
 }
 /* runtime class parser_nodes__AVarExpr */
 const struct class class_parser_nodes__AVarExpr = {
@@ -4146,6 +1378,7 @@ const struct class class_parser_nodes__AVarExpr = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:AVarExpr:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:AVarExpr:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:AVarExpr:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:AVarExpr:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:AVarExpr:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:AVarExpr:kernel#Object#output */
@@ -4295,7 +1528,8 @@ var1 = self->attrs[COLOR_flow__AExpr___64dafter_flow_context].val; /* @after_flo
 var2 = self->attrs[COLOR_astbuilder__AExpr___64dvariable_cache].val; /* @variable_cache on <self:AVarExpr> */
 var3 = self->attrs[COLOR_parser_nodes__AVarFormExpr___n_id].val; /* _n_id on <self:AVarExpr> */
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_id", "src/parser/parser_nodes.nit", 1440);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_id");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1422);
 exit(1);
 }
 var4 = self->attrs[COLOR_scope__AVarFormExpr___64dvariable].val; /* @variable on <self:AVarExpr> */
@@ -4306,6 +1540,7 @@ const struct class class_parser_nodes__AVarAssignExpr = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:AVarAssignExpr:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:AVarAssignExpr:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:AVarAssignExpr:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:AVarAssignExpr:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:AVarAssignExpr:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:AVarAssignExpr:kernel#Object#output */
@@ -4458,17 +1693,20 @@ var1 = self->attrs[COLOR_flow__AExpr___64dafter_flow_context].val; /* @after_flo
 var2 = self->attrs[COLOR_astbuilder__AExpr___64dvariable_cache].val; /* @variable_cache on <self:AVarAssignExpr> */
 var3 = self->attrs[COLOR_parser_nodes__AAssignFormExpr___n_assign].val; /* _n_assign on <self:AVarAssignExpr> */
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_assign", "src/parser/parser_nodes.nit", 1161);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_assign");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1151);
 exit(1);
 }
 var4 = self->attrs[COLOR_parser_nodes__AAssignFormExpr___n_value].val; /* _n_value on <self:AVarAssignExpr> */
 if (var4 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_value", "src/parser/parser_nodes.nit", 1162);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_value");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1152);
 exit(1);
 }
 var5 = self->attrs[COLOR_parser_nodes__AVarFormExpr___n_id].val; /* _n_id on <self:AVarAssignExpr> */
 if (var5 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_id", "src/parser/parser_nodes.nit", 1440);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_id");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1422);
 exit(1);
 }
 var6 = self->attrs[COLOR_scope__AVarFormExpr___64dvariable].val; /* @variable on <self:AVarAssignExpr> */
@@ -4479,6 +1717,7 @@ const struct class class_parser_nodes__AVarReassignExpr = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:AVarReassignExpr:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:AVarReassignExpr:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:AVarReassignExpr:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:AVarReassignExpr:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:AVarReassignExpr:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:AVarReassignExpr:kernel#Object#output */
@@ -4633,18 +1872,21 @@ var1 = self->attrs[COLOR_flow__AExpr___64dafter_flow_context].val; /* @after_flo
 var2 = self->attrs[COLOR_astbuilder__AExpr___64dvariable_cache].val; /* @variable_cache on <self:AVarReassignExpr> */
 var3 = self->attrs[COLOR_parser_nodes__AReassignFormExpr___n_assign_op].val; /* _n_assign_op on <self:AVarReassignExpr> */
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_assign_op", "src/parser/parser_nodes.nit", 1168);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_assign_op");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1158);
 exit(1);
 }
 var4 = self->attrs[COLOR_parser_nodes__AReassignFormExpr___n_value].val; /* _n_value on <self:AVarReassignExpr> */
 if (var4 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_value", "src/parser/parser_nodes.nit", 1169);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_value");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1159);
 exit(1);
 }
 var5 = self->attrs[COLOR_typing__AReassignFormExpr___64dreassign_callsite].val; /* @reassign_callsite on <self:AVarReassignExpr> */
 var6 = self->attrs[COLOR_parser_nodes__AVarFormExpr___n_id].val; /* _n_id on <self:AVarReassignExpr> */
 if (var6 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_id", "src/parser/parser_nodes.nit", 1440);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_id");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1422);
 exit(1);
 }
 var7 = self->attrs[COLOR_scope__AVarFormExpr___64dvariable].val; /* @variable on <self:AVarReassignExpr> */
@@ -4655,6 +1897,7 @@ const struct class class_parser_nodes__ACrangeExpr = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:ACrangeExpr:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:ACrangeExpr:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:ACrangeExpr:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:ACrangeExpr:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:ACrangeExpr:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:ACrangeExpr:kernel#Object#output */
@@ -4798,22 +2041,26 @@ var1 = self->attrs[COLOR_flow__AExpr___64dafter_flow_context].val; /* @after_flo
 var2 = self->attrs[COLOR_astbuilder__AExpr___64dvariable_cache].val; /* @variable_cache on <self:ACrangeExpr> */
 var3 = self->attrs[COLOR_parser_nodes__ARangeExpr___n_expr].val; /* _n_expr on <self:ACrangeExpr> */
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr", "src/parser/parser_nodes.nit", 1479);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_expr");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1454);
 exit(1);
 }
 var4 = self->attrs[COLOR_parser_nodes__ARangeExpr___n_expr2].val; /* _n_expr2 on <self:ACrangeExpr> */
 if (var4 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr2", "src/parser/parser_nodes.nit", 1480);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_expr2");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1455);
 exit(1);
 }
 var5 = self->attrs[COLOR_parser_nodes__ACrangeExpr___n_obra].val; /* _n_obra on <self:ACrangeExpr> */
 if (var5 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_obra", "src/parser/parser_nodes.nit", 1486);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_obra");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1461);
 exit(1);
 }
 var6 = self->attrs[COLOR_parser_nodes__ACrangeExpr___n_cbra].val; /* _n_cbra on <self:ACrangeExpr> */
 if (var6 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_cbra", "src/parser/parser_nodes.nit", 1487);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_cbra");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1462);
 exit(1);
 }
 }
@@ -4823,6 +2070,7 @@ const struct class class_parser_nodes__AOrangeExpr = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:AOrangeExpr:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:AOrangeExpr:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:AOrangeExpr:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:AOrangeExpr:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:AOrangeExpr:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:AOrangeExpr:kernel#Object#output */
@@ -4966,22 +2214,26 @@ var1 = self->attrs[COLOR_flow__AExpr___64dafter_flow_context].val; /* @after_flo
 var2 = self->attrs[COLOR_astbuilder__AExpr___64dvariable_cache].val; /* @variable_cache on <self:AOrangeExpr> */
 var3 = self->attrs[COLOR_parser_nodes__ARangeExpr___n_expr].val; /* _n_expr on <self:AOrangeExpr> */
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr", "src/parser/parser_nodes.nit", 1479);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_expr");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1454);
 exit(1);
 }
 var4 = self->attrs[COLOR_parser_nodes__ARangeExpr___n_expr2].val; /* _n_expr2 on <self:AOrangeExpr> */
 if (var4 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr2", "src/parser/parser_nodes.nit", 1480);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_expr2");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1455);
 exit(1);
 }
 var5 = self->attrs[COLOR_parser_nodes__AOrangeExpr___n_obra].val; /* _n_obra on <self:AOrangeExpr> */
 if (var5 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_obra", "src/parser/parser_nodes.nit", 1493);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_obra");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1468);
 exit(1);
 }
 var6 = self->attrs[COLOR_parser_nodes__AOrangeExpr___n_cbra].val; /* _n_cbra on <self:AOrangeExpr> */
 if (var6 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_cbra", "src/parser/parser_nodes.nit", 1494);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_cbra");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1469);
 exit(1);
 }
 }
@@ -4991,6 +2243,7 @@ const struct class class_parser_nodes__AArrayExpr = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:AArrayExpr:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:AArrayExpr:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:AArrayExpr:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:AArrayExpr:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:AArrayExpr:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:AArrayExpr:kernel#Object#output */
@@ -5122,7 +2375,8 @@ var1 = self->attrs[COLOR_flow__AExpr___64dafter_flow_context].val; /* @after_flo
 var2 = self->attrs[COLOR_astbuilder__AExpr___64dvariable_cache].val; /* @variable_cache on <self:AArrayExpr> */
 var3 = self->attrs[COLOR_parser_nodes__AArrayExpr___n_exprs].val; /* _n_exprs on <self:AArrayExpr> */
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_exprs", "src/parser/parser_nodes.nit", 1500);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_exprs");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1475);
 exit(1);
 }
 }
@@ -5132,6 +2386,7 @@ const struct class class_parser_nodes__ASelfExpr = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:ASelfExpr:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:ASelfExpr:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:ASelfExpr:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:ASelfExpr:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:ASelfExpr:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:ASelfExpr:kernel#Object#output */
@@ -5277,6 +2532,7 @@ const struct class class_parser_nodes__AImplicitSelfExpr = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:AImplicitSelfExpr:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:AImplicitSelfExpr:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:AImplicitSelfExpr:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:AImplicitSelfExpr:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:AImplicitSelfExpr:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:AImplicitSelfExpr:kernel#Object#output */
@@ -5425,6 +2681,7 @@ const struct class class_parser_nodes__ATrueExpr = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:ATrueExpr:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:ATrueExpr:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:ATrueExpr:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:ATrueExpr:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:ATrueExpr:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:ATrueExpr:kernel#Object#output */
@@ -5557,7 +2814,8 @@ var1 = self->attrs[COLOR_flow__AExpr___64dafter_flow_context].val; /* @after_flo
 var2 = self->attrs[COLOR_astbuilder__AExpr___64dvariable_cache].val; /* @variable_cache on <self:ATrueExpr> */
 var3 = self->attrs[COLOR_parser_nodes__ATrueExpr___n_kwtrue].val; /* _n_kwtrue on <self:ATrueExpr> */
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwtrue", "src/parser/parser_nodes.nit", 1517);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwtrue");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1492);
 exit(1);
 }
 }
@@ -5567,6 +2825,7 @@ const struct class class_parser_nodes__AFalseExpr = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:AFalseExpr:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:AFalseExpr:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:AFalseExpr:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:AFalseExpr:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:AFalseExpr:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:AFalseExpr:kernel#Object#output */
@@ -5699,7 +2958,8 @@ var1 = self->attrs[COLOR_flow__AExpr___64dafter_flow_context].val; /* @after_flo
 var2 = self->attrs[COLOR_astbuilder__AExpr___64dvariable_cache].val; /* @variable_cache on <self:AFalseExpr> */
 var3 = self->attrs[COLOR_parser_nodes__AFalseExpr___n_kwfalse].val; /* _n_kwfalse on <self:AFalseExpr> */
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwfalse", "src/parser/parser_nodes.nit", 1522);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwfalse");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1497);
 exit(1);
 }
 }
@@ -5709,6 +2969,7 @@ const struct class class_parser_nodes__ANullExpr = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:ANullExpr:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:ANullExpr:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:ANullExpr:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:ANullExpr:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:ANullExpr:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:ANullExpr:kernel#Object#output */
@@ -5840,7 +3101,8 @@ var1 = self->attrs[COLOR_flow__AExpr___64dafter_flow_context].val; /* @after_flo
 var2 = self->attrs[COLOR_astbuilder__AExpr___64dvariable_cache].val; /* @variable_cache on <self:ANullExpr> */
 var3 = self->attrs[COLOR_parser_nodes__ANullExpr___n_kwnull].val; /* _n_kwnull on <self:ANullExpr> */
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwnull", "src/parser/parser_nodes.nit", 1527);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwnull");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1502);
 exit(1);
 }
 }
@@ -5850,6 +3112,7 @@ const struct class class_parser_nodes__AIntExpr = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:AIntExpr:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:AIntExpr:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:AIntExpr:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:AIntExpr:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:AIntExpr:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:AIntExpr:kernel#Object#output */
@@ -5985,7 +3248,8 @@ var1 = self->attrs[COLOR_flow__AExpr___64dafter_flow_context].val; /* @after_flo
 var2 = self->attrs[COLOR_astbuilder__AExpr___64dvariable_cache].val; /* @variable_cache on <self:AIntExpr> */
 var3 = self->attrs[COLOR_parser_nodes__AIntExpr___n_number].val; /* _n_number on <self:AIntExpr> */
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_number", "src/parser/parser_nodes.nit", 1532);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_number");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1507);
 exit(1);
 }
 var4 = self->attrs[COLOR_literal__AIntExpr___64dvalue].val; /* @value on <self:AIntExpr> */
@@ -5996,6 +3260,7 @@ const struct class class_parser_nodes__AFloatExpr = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:AFloatExpr:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:AFloatExpr:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:AFloatExpr:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:AFloatExpr:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:AFloatExpr:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:AFloatExpr:kernel#Object#output */
@@ -6130,7 +3395,8 @@ var1 = self->attrs[COLOR_flow__AExpr___64dafter_flow_context].val; /* @after_flo
 var2 = self->attrs[COLOR_astbuilder__AExpr___64dvariable_cache].val; /* @variable_cache on <self:AFloatExpr> */
 var3 = self->attrs[COLOR_parser_nodes__AFloatExpr___n_float].val; /* _n_float on <self:AFloatExpr> */
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_float", "src/parser/parser_nodes.nit", 1537);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_float");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1512);
 exit(1);
 }
 var4 = self->attrs[COLOR_literal__AFloatExpr___64dvalue].val; /* @value on <self:AFloatExpr> */
@@ -6141,6 +3407,7 @@ const struct class class_parser_nodes__ACharExpr = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:ACharExpr:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:ACharExpr:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:ACharExpr:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:ACharExpr:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:ACharExpr:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:ACharExpr:kernel#Object#output */
@@ -6275,7 +3542,8 @@ var1 = self->attrs[COLOR_flow__AExpr___64dafter_flow_context].val; /* @after_flo
 var2 = self->attrs[COLOR_astbuilder__AExpr___64dvariable_cache].val; /* @variable_cache on <self:ACharExpr> */
 var3 = self->attrs[COLOR_parser_nodes__ACharExpr___n_char].val; /* _n_char on <self:ACharExpr> */
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_char", "src/parser/parser_nodes.nit", 1542);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_char");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1517);
 exit(1);
 }
 var4 = self->attrs[COLOR_literal__ACharExpr___64dvalue].val; /* @value on <self:ACharExpr> */
@@ -6286,6 +3554,7 @@ const struct class class_parser_nodes__AStringExpr = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:AStringExpr:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:AStringExpr:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:AStringExpr:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:AStringExpr:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:AStringExpr:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:AStringExpr:kernel#Object#output */
@@ -6421,7 +3690,8 @@ var1 = self->attrs[COLOR_flow__AExpr___64dafter_flow_context].val; /* @after_flo
 var2 = self->attrs[COLOR_astbuilder__AExpr___64dvariable_cache].val; /* @variable_cache on <self:AStringExpr> */
 var3 = self->attrs[COLOR_parser_nodes__AStringFormExpr___n_string].val; /* _n_string on <self:AStringExpr> */
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_string", "src/parser/parser_nodes.nit", 1547);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_string");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1522);
 exit(1);
 }
 var4 = self->attrs[COLOR_literal__AStringFormExpr___64dvalue].val; /* @value on <self:AStringExpr> */
@@ -6432,6 +3702,7 @@ const struct class class_parser_nodes__AStartStringExpr = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:AStartStringExpr:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:AStartStringExpr:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:AStartStringExpr:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:AStartStringExpr:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:AStartStringExpr:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:AStartStringExpr:kernel#Object#output */
@@ -6567,7 +3838,8 @@ var1 = self->attrs[COLOR_flow__AExpr___64dafter_flow_context].val; /* @after_flo
 var2 = self->attrs[COLOR_astbuilder__AExpr___64dvariable_cache].val; /* @variable_cache on <self:AStartStringExpr> */
 var3 = self->attrs[COLOR_parser_nodes__AStringFormExpr___n_string].val; /* _n_string on <self:AStartStringExpr> */
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_string", "src/parser/parser_nodes.nit", 1547);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_string");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1522);
 exit(1);
 }
 var4 = self->attrs[COLOR_literal__AStringFormExpr___64dvalue].val; /* @value on <self:AStartStringExpr> */
@@ -6578,6 +3850,7 @@ const struct class class_parser_nodes__AMidStringExpr = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:AMidStringExpr:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:AMidStringExpr:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:AMidStringExpr:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:AMidStringExpr:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:AMidStringExpr:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:AMidStringExpr:kernel#Object#output */
@@ -6713,7 +3986,8 @@ var1 = self->attrs[COLOR_flow__AExpr___64dafter_flow_context].val; /* @after_flo
 var2 = self->attrs[COLOR_astbuilder__AExpr___64dvariable_cache].val; /* @variable_cache on <self:AMidStringExpr> */
 var3 = self->attrs[COLOR_parser_nodes__AStringFormExpr___n_string].val; /* _n_string on <self:AMidStringExpr> */
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_string", "src/parser/parser_nodes.nit", 1547);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_string");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1522);
 exit(1);
 }
 var4 = self->attrs[COLOR_literal__AStringFormExpr___64dvalue].val; /* @value on <self:AMidStringExpr> */
@@ -6724,6 +3998,7 @@ const struct class class_parser_nodes__AEndStringExpr = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:AEndStringExpr:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:AEndStringExpr:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:AEndStringExpr:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:AEndStringExpr:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:AEndStringExpr:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:AEndStringExpr:kernel#Object#output */
@@ -6859,7 +4134,8 @@ var1 = self->attrs[COLOR_flow__AExpr___64dafter_flow_context].val; /* @after_flo
 var2 = self->attrs[COLOR_astbuilder__AExpr___64dvariable_cache].val; /* @variable_cache on <self:AEndStringExpr> */
 var3 = self->attrs[COLOR_parser_nodes__AStringFormExpr___n_string].val; /* _n_string on <self:AEndStringExpr> */
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_string", "src/parser/parser_nodes.nit", 1547);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_string");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1522);
 exit(1);
 }
 var4 = self->attrs[COLOR_literal__AStringFormExpr___64dvalue].val; /* @value on <self:AEndStringExpr> */
@@ -6870,6 +4146,7 @@ const struct class class_parser_nodes__ASuperstringExpr = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:ASuperstringExpr:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:ASuperstringExpr:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:ASuperstringExpr:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:ASuperstringExpr:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:ASuperstringExpr:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:ASuperstringExpr:kernel#Object#output */
@@ -7009,6 +4286,7 @@ const struct class class_parser_nodes__AParExpr = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:AParExpr:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:AParExpr:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:AParExpr:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:AParExpr:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:AParExpr:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:AParExpr:kernel#Object#output */
@@ -7147,17 +4425,20 @@ var1 = self->attrs[COLOR_flow__AExpr___64dafter_flow_context].val; /* @after_flo
 var2 = self->attrs[COLOR_astbuilder__AExpr___64dvariable_cache].val; /* @variable_cache on <self:AParExpr> */
 var3 = self->attrs[COLOR_parser_nodes__AProxyExpr___n_expr].val; /* _n_expr on <self:AParExpr> */
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr", "src/parser/parser_nodes.nit", 1587);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_expr");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1562);
 exit(1);
 }
 var4 = self->attrs[COLOR_parser_nodes__AParExpr___n_opar].val; /* _n_opar on <self:AParExpr> */
 if (var4 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_opar", "src/parser/parser_nodes.nit", 1580);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_opar");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1555);
 exit(1);
 }
 var5 = self->attrs[COLOR_parser_nodes__AParExpr___n_cpar].val; /* _n_cpar on <self:AParExpr> */
 if (var5 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_cpar", "src/parser/parser_nodes.nit", 1581);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_cpar");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1556);
 exit(1);
 }
 }
@@ -7167,6 +4448,7 @@ const struct class class_parser_nodes__AAsCastExpr = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:AAsCastExpr:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:AAsCastExpr:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:AAsCastExpr:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:AAsCastExpr:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:AAsCastExpr:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:AAsCastExpr:kernel#Object#output */
@@ -7310,27 +4592,32 @@ var1 = self->attrs[COLOR_flow__AExpr___64dafter_flow_context].val; /* @after_flo
 var2 = self->attrs[COLOR_astbuilder__AExpr___64dvariable_cache].val; /* @variable_cache on <self:AAsCastExpr> */
 var3 = self->attrs[COLOR_parser_nodes__AAsCastExpr___n_expr].val; /* _n_expr on <self:AAsCastExpr> */
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr", "src/parser/parser_nodes.nit", 1593);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_expr");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1568);
 exit(1);
 }
 var4 = self->attrs[COLOR_parser_nodes__AAsCastExpr___n_kwas].val; /* _n_kwas on <self:AAsCastExpr> */
 if (var4 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwas", "src/parser/parser_nodes.nit", 1594);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwas");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1569);
 exit(1);
 }
 var5 = self->attrs[COLOR_parser_nodes__AAsCastExpr___n_opar].val; /* _n_opar on <self:AAsCastExpr> */
 if (var5 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_opar", "src/parser/parser_nodes.nit", 1595);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_opar");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1570);
 exit(1);
 }
 var6 = self->attrs[COLOR_parser_nodes__AAsCastExpr___n_type].val; /* _n_type on <self:AAsCastExpr> */
 if (var6 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_type", "src/parser/parser_nodes.nit", 1596);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_type");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1571);
 exit(1);
 }
 var7 = self->attrs[COLOR_parser_nodes__AAsCastExpr___n_cpar].val; /* _n_cpar on <self:AAsCastExpr> */
 if (var7 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_cpar", "src/parser/parser_nodes.nit", 1597);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_cpar");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1572);
 exit(1);
 }
 }
@@ -7340,6 +4627,7 @@ const struct class class_parser_nodes__AAsNotnullExpr = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:AAsNotnullExpr:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:AAsNotnullExpr:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:AAsNotnullExpr:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:AAsNotnullExpr:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:AAsNotnullExpr:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:AAsNotnullExpr:kernel#Object#output */
@@ -7486,32 +4774,38 @@ var1 = self->attrs[COLOR_flow__AExpr___64dafter_flow_context].val; /* @after_flo
 var2 = self->attrs[COLOR_astbuilder__AExpr___64dvariable_cache].val; /* @variable_cache on <self:AAsNotnullExpr> */
 var3 = self->attrs[COLOR_parser_nodes__AAsNotnullExpr___n_expr].val; /* _n_expr on <self:AAsNotnullExpr> */
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr", "src/parser/parser_nodes.nit", 1603);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_expr");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1578);
 exit(1);
 }
 var4 = self->attrs[COLOR_parser_nodes__AAsNotnullExpr___n_kwas].val; /* _n_kwas on <self:AAsNotnullExpr> */
 if (var4 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwas", "src/parser/parser_nodes.nit", 1604);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwas");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1579);
 exit(1);
 }
 var5 = self->attrs[COLOR_parser_nodes__AAsNotnullExpr___n_opar].val; /* _n_opar on <self:AAsNotnullExpr> */
 if (var5 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_opar", "src/parser/parser_nodes.nit", 1605);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_opar");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1580);
 exit(1);
 }
 var6 = self->attrs[COLOR_parser_nodes__AAsNotnullExpr___n_kwnot].val; /* _n_kwnot on <self:AAsNotnullExpr> */
 if (var6 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwnot", "src/parser/parser_nodes.nit", 1606);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwnot");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1581);
 exit(1);
 }
 var7 = self->attrs[COLOR_parser_nodes__AAsNotnullExpr___n_kwnull].val; /* _n_kwnull on <self:AAsNotnullExpr> */
 if (var7 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwnull", "src/parser/parser_nodes.nit", 1607);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwnull");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1582);
 exit(1);
 }
 var8 = self->attrs[COLOR_parser_nodes__AAsNotnullExpr___n_cpar].val; /* _n_cpar on <self:AAsNotnullExpr> */
 if (var8 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_cpar", "src/parser/parser_nodes.nit", 1608);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_cpar");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1583);
 exit(1);
 }
 }
@@ -7521,6 +4815,7 @@ const struct class class_parser_nodes__AIssetAttrExpr = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:AIssetAttrExpr:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:AIssetAttrExpr:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:AIssetAttrExpr:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:AIssetAttrExpr:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:AIssetAttrExpr:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:AIssetAttrExpr:kernel#Object#output */
@@ -7678,19 +4973,22 @@ var1 = self->attrs[COLOR_flow__AExpr___64dafter_flow_context].val; /* @after_flo
 var2 = self->attrs[COLOR_astbuilder__AExpr___64dvariable_cache].val; /* @variable_cache on <self:AIssetAttrExpr> */
 var3 = self->attrs[COLOR_parser_nodes__AAttrFormExpr___n_expr].val; /* _n_expr on <self:AIssetAttrExpr> */
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr", "src/parser/parser_nodes.nit", 1340);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_expr");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1322);
 exit(1);
 }
 var4 = self->attrs[COLOR_parser_nodes__AAttrFormExpr___n_id].val; /* _n_id on <self:AIssetAttrExpr> */
 if (var4 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_id", "src/parser/parser_nodes.nit", 1343);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_id");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1325);
 exit(1);
 }
 var5 = self->attrs[COLOR_typing__AAttrFormExpr___64dmproperty].val; /* @mproperty on <self:AIssetAttrExpr> */
 var6 = self->attrs[COLOR_typing__AAttrFormExpr___64dattr_type].val; /* @attr_type on <self:AIssetAttrExpr> */
 var7 = self->attrs[COLOR_parser_nodes__AIssetAttrExpr___n_kwisset].val; /* _n_kwisset on <self:AIssetAttrExpr> */
 if (var7 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwisset", "src/parser/parser_nodes.nit", 1614);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwisset");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1589);
 exit(1);
 }
 }
@@ -7700,6 +4998,7 @@ const struct class class_parser_nodes__ADebugTypeExpr = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:ADebugTypeExpr:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:ADebugTypeExpr:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:ADebugTypeExpr:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:ADebugTypeExpr:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:ADebugTypeExpr:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:ADebugTypeExpr:kernel#Object#output */
@@ -7840,22 +5139,26 @@ var1 = self->attrs[COLOR_flow__AExpr___64dafter_flow_context].val; /* @after_flo
 var2 = self->attrs[COLOR_astbuilder__AExpr___64dvariable_cache].val; /* @variable_cache on <self:ADebugTypeExpr> */
 var3 = self->attrs[COLOR_parser_nodes__ADebugTypeExpr___n_kwdebug].val; /* _n_kwdebug on <self:ADebugTypeExpr> */
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwdebug", "src/parser/parser_nodes.nit", 1625);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwdebug");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1600);
 exit(1);
 }
 var4 = self->attrs[COLOR_parser_nodes__ADebugTypeExpr___n_kwtype].val; /* _n_kwtype on <self:ADebugTypeExpr> */
 if (var4 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwtype", "src/parser/parser_nodes.nit", 1626);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwtype");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1601);
 exit(1);
 }
 var5 = self->attrs[COLOR_parser_nodes__ADebugTypeExpr___n_expr].val; /* _n_expr on <self:ADebugTypeExpr> */
 if (var5 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr", "src/parser/parser_nodes.nit", 1627);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_expr");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1602);
 exit(1);
 }
 var6 = self->attrs[COLOR_parser_nodes__ADebugTypeExpr___n_type].val; /* _n_type on <self:ADebugTypeExpr> */
 if (var6 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_type", "src/parser/parser_nodes.nit", 1628);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_type");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1603);
 exit(1);
 }
 }
@@ -7865,6 +5168,7 @@ const struct class class_parser_nodes__AListExprs = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:AListExprs:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:AListExprs:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:AListExprs:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:AListExprs:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:AListExprs:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:AListExprs:kernel#Object#output */
@@ -7973,6 +5277,7 @@ const struct class class_parser_nodes__AParExprs = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:AParExprs:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:AParExprs:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:AParExprs:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:AParExprs:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:AParExprs:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:AParExprs:kernel#Object#output */
@@ -8082,12 +5387,14 @@ val* var2 /* : TCpar */;
 var = self->attrs[COLOR_parser__Prod___first_location].val; /* _first_location on <self:AParExprs> */
 var1 = self->attrs[COLOR_parser_nodes__AParExprs___n_opar].val; /* _n_opar on <self:AParExprs> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_opar", "src/parser/parser_nodes.nit", 1639);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_opar");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1614);
 exit(1);
 }
 var2 = self->attrs[COLOR_parser_nodes__AParExprs___n_cpar].val; /* _n_cpar on <self:AParExprs> */
 if (var2 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_cpar", "src/parser/parser_nodes.nit", 1640);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_cpar");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1615);
 exit(1);
 }
 }
@@ -8097,6 +5404,7 @@ const struct class class_parser_nodes__ABraExprs = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:ABraExprs:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:ABraExprs:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:ABraExprs:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:ABraExprs:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:ABraExprs:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:ABraExprs:kernel#Object#output */
@@ -8206,12 +5514,14 @@ val* var2 /* : TCbra */;
 var = self->attrs[COLOR_parser__Prod___first_location].val; /* _first_location on <self:ABraExprs> */
 var1 = self->attrs[COLOR_parser_nodes__ABraExprs___n_obra].val; /* _n_obra on <self:ABraExprs> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_obra", "src/parser/parser_nodes.nit", 1646);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_obra");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1621);
 exit(1);
 }
 var2 = self->attrs[COLOR_parser_nodes__ABraExprs___n_cbra].val; /* _n_cbra on <self:ABraExprs> */
 if (var2 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_cbra", "src/parser/parser_nodes.nit", 1647);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_cbra");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1622);
 exit(1);
 }
 }
@@ -8221,6 +5531,7 @@ const struct class class_parser_nodes__APlusAssignOp = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:APlusAssignOp:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:APlusAssignOp:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:APlusAssignOp:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:APlusAssignOp:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:APlusAssignOp:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:APlusAssignOp:kernel#Object#output */
@@ -8320,7 +5631,8 @@ val* var1 /* : TPluseq */;
 var = self->attrs[COLOR_parser__Prod___first_location].val; /* _first_location on <self:APlusAssignOp> */
 var1 = self->attrs[COLOR_parser_nodes__APlusAssignOp___n_pluseq].val; /* _n_pluseq on <self:APlusAssignOp> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_pluseq", "src/parser/parser_nodes.nit", 1656);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_pluseq");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1631);
 exit(1);
 }
 }
@@ -8330,6 +5642,7 @@ const struct class class_parser_nodes__AMinusAssignOp = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:AMinusAssignOp:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:AMinusAssignOp:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:AMinusAssignOp:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:AMinusAssignOp:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:AMinusAssignOp:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:AMinusAssignOp:kernel#Object#output */
@@ -8429,396 +5742,8 @@ val* var1 /* : TMinuseq */;
 var = self->attrs[COLOR_parser__Prod___first_location].val; /* _first_location on <self:AMinusAssignOp> */
 var1 = self->attrs[COLOR_parser_nodes__AMinusAssignOp___n_minuseq].val; /* _n_minuseq on <self:AMinusAssignOp> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_minuseq", "src/parser/parser_nodes.nit", 1660);
-exit(1);
-}
-}
-/* runtime class parser_nodes__AClosureDef */
-const struct class class_parser_nodes__AClosureDef = {
-0, /* box_kind */
-{
-(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:AClosureDef:kernel#Object#object_id */
-(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:AClosureDef:kernel#Object#is_same_type */
-(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:AClosureDef:kernel#Object#== */
-(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:AClosureDef:kernel#Object#!= */
-(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:AClosureDef:kernel#Object#output */
-(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to parser_nodes:AClosureDef:kernel#Object#output_class_name */
-(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to parser_nodes:AClosureDef:kernel#Object#exit */
-(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to parser_nodes:AClosureDef:kernel#Object#sys */
-(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to parser_nodes:AClosureDef:kernel#Object#hash */
-(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to parser_nodes:AClosureDef:string#Object#to_s */
-(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to parser_nodes:AClosureDef:string#Object#native_class_name */
-(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to parser_nodes:AClosureDef:string#Object#class_name */
-(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to parser_nodes:AClosureDef:string#Object#inspect */
-(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to parser_nodes:AClosureDef:string#Object#inspect_head */
-(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to parser_nodes:AClosureDef:string#Object#args */
-(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to parser_nodes:AClosureDef:math#Object#atan2 */
-(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to parser_nodes:AClosureDef:math#Object#pi */
-(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to parser_nodes:AClosureDef:math#Object#srand_from */
-(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to parser_nodes:AClosureDef:math#Object#srand */
-(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to parser_nodes:AClosureDef:stream#Object#poll */
-(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to parser_nodes:AClosureDef:stream#Object#intern_poll */
-(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to parser_nodes:AClosureDef:time#Object#get_time */
-(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to parser_nodes:AClosureDef:file#Object#printn */
-(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to parser_nodes:AClosureDef:file#Object#print */
-(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to parser_nodes:AClosureDef:file#Object#getc */
-(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to parser_nodes:AClosureDef:file#Object#gets */
-(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to parser_nodes:AClosureDef:file#Object#getcwd */
-(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to parser_nodes:AClosureDef:file#Object#file_getcwd */
-(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to parser_nodes:AClosureDef:file#Object#stdin */
-(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to parser_nodes:AClosureDef:file#Object#stdout */
-(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to parser_nodes:AClosureDef:file#Object#stderr */
-(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to parser_nodes:AClosureDef:model_base#Object#intrude_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to parser_nodes:AClosureDef:model_base#Object#public_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to parser_nodes:AClosureDef:model_base#Object#protected_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to parser_nodes:AClosureDef:model_base#Object#private_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to parser_nodes:AClosureDef:model_base#Object#none_visibility */
-(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to parser_nodes:AClosureDef:model#Object#abstract_kind */
-(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to parser_nodes:AClosureDef:model#Object#concrete_kind */
-(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to parser_nodes:AClosureDef:model#Object#interface_kind */
-(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to parser_nodes:AClosureDef:model#Object#enum_kind */
-(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to parser_nodes:AClosureDef:model#Object#extern_kind */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__location, /* pointer to parser_nodes:AClosureDef:parser_nodes#ANode#location */
-(nitmethod_t)VIRTUAL_parser_nodes__AClosureDef__hot_location, /* pointer to parser_nodes:AClosureDef:parser_nodes#AClosureDef#hot_location */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__debug, /* pointer to parser_nodes:AClosureDef:parser_nodes#ANode#debug */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent, /* pointer to parser_nodes:AClosureDef:parser_nodes#ANode#parent */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent_61d, /* pointer to parser_nodes:AClosureDef:parser_nodes#ANode#parent= */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__init, /* pointer to parser_nodes:AClosureDef:parser_nodes#ANode#init */
-(nitmethod_t)VIRTUAL_parser_prod__AClosureDef__replace_child, /* pointer to parser_nodes:AClosureDef:parser_prod#AClosureDef#replace_child */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__detach, /* pointer to parser_nodes:AClosureDef:parser_nodes#ANode#detach */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__replace_with, /* pointer to parser_nodes:AClosureDef:parser_nodes#Prod#replace_with */
-(nitmethod_t)VIRTUAL_parser_prod__AClosureDef__visit_all, /* pointer to parser_nodes:AClosureDef:parser_prod#AClosureDef#visit_all */
-(nitmethod_t)VIRTUAL_parser_util__ANode__collect_tokens_by_text, /* pointer to parser_nodes:AClosureDef:parser_util#ANode#collect_tokens_by_text */
-(nitmethod_t)VIRTUAL_parser_util__ANode__collect_annotations_by_name, /* pointer to parser_nodes:AClosureDef:parser_util#ANode#collect_annotations_by_name */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__accept_simple_misc, /* pointer to parser_nodes:AClosureDef:simple_misc_analysis#ANode#accept_simple_misc */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__after_simple_misc, /* pointer to parser_nodes:AClosureDef:simple_misc_analysis#ANode#after_simple_misc */
-(nitmethod_t)VIRTUAL_literal__ANode__accept_literal, /* pointer to parser_nodes:AClosureDef:literal#ANode#accept_literal */
-(nitmethod_t)VIRTUAL_scope__AClosureDef__accept_scope_visitor, /* pointer to parser_nodes:AClosureDef:scope#AClosureDef#accept_scope_visitor */
-(nitmethod_t)VIRTUAL_flow__AClosureDef__accept_flow_visitor, /* pointer to parser_nodes:AClosureDef:flow#AClosureDef#accept_flow_visitor */
-(nitmethod_t)VIRTUAL_local_var_init__ANode__accept_local_var_visitor, /* pointer to parser_nodes:AClosureDef:local_var_init#ANode#accept_local_var_visitor */
-(nitmethod_t)VIRTUAL_auto_super_init__ANode__accept_auto_super_init, /* pointer to parser_nodes:AClosureDef:auto_super_init#ANode#accept_auto_super_init */
-(nitmethod_t)VIRTUAL_rapid_type_analysis__ANode__accept_rapid_type_visitor, /* pointer to parser_nodes:AClosureDef:rapid_type_analysis#ANode#accept_rapid_type_visitor */
-(nitmethod_t)VIRTUAL_astvalidation__ANode__accept_ast_validation, /* pointer to parser_nodes:AClosureDef:astvalidation#ANode#accept_ast_validation */
-(nitmethod_t)VIRTUAL_transform__ANode__accept_transform_visitor, /* pointer to parser_nodes:AClosureDef:transform#ANode#accept_transform_visitor */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__location_61d, /* pointer to parser_nodes:AClosureDef:parser_nodes#Prod#location= */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations, /* pointer to parser_nodes:AClosureDef:parser_nodes#Prod#n_annotations */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations_61d, /* pointer to parser_nodes:AClosureDef:parser_nodes#Prod#n_annotations= */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__init, /* pointer to parser_nodes:AClosureDef:parser_nodes#Prod#init */
-(nitmethod_t)VIRTUAL_modelize_property__Prod__collect_text, /* pointer to parser_nodes:AClosureDef:modelize_property#Prod#collect_text */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__replace_with, /* pointer to parser_nodes:AClosureDef:parser_nodes#ANode#replace_with */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-(nitmethod_t)VIRTUAL_parser_nodes__ALabelable__n_label, /* pointer to parser_nodes:AClosureDef:parser_nodes#ALabelable#n_label */
-(nitmethod_t)VIRTUAL_parser_prod__AClosureDef__n_label_61d, /* pointer to parser_nodes:AClosureDef:parser_prod#AClosureDef#n_label= */
-(nitmethod_t)VIRTUAL_parser_nodes__ALabelable__init, /* pointer to parser_nodes:AClosureDef:parser_nodes#ALabelable#init */
-(nitmethod_t)VIRTUAL_parser_nodes__AClosureDef__n_bang, /* pointer to parser_nodes:AClosureDef:parser_nodes#AClosureDef#n_bang */
-(nitmethod_t)VIRTUAL_parser_prod__AClosureDef__n_bang_61d, /* pointer to parser_nodes:AClosureDef:parser_prod#AClosureDef#n_bang= */
-(nitmethod_t)VIRTUAL_parser_nodes__AClosureDef__n_id, /* pointer to parser_nodes:AClosureDef:parser_nodes#AClosureDef#n_id */
-(nitmethod_t)VIRTUAL_parser_prod__AClosureDef__n_id_61d, /* pointer to parser_nodes:AClosureDef:parser_prod#AClosureDef#n_id= */
-(nitmethod_t)VIRTUAL_parser_nodes__AClosureDef__n_ids, /* pointer to parser_nodes:AClosureDef:parser_nodes#AClosureDef#n_ids */
-(nitmethod_t)VIRTUAL_parser_nodes__AClosureDef__n_kwdo, /* pointer to parser_nodes:AClosureDef:parser_nodes#AClosureDef#n_kwdo */
-(nitmethod_t)VIRTUAL_parser_prod__AClosureDef__n_kwdo_61d, /* pointer to parser_nodes:AClosureDef:parser_prod#AClosureDef#n_kwdo= */
-(nitmethod_t)VIRTUAL_parser_nodes__AClosureDef__n_expr, /* pointer to parser_nodes:AClosureDef:parser_nodes#AClosureDef#n_expr */
-(nitmethod_t)VIRTUAL_parser_prod__AClosureDef__n_expr_61d, /* pointer to parser_nodes:AClosureDef:parser_prod#AClosureDef#n_expr= */
-(nitmethod_t)VIRTUAL_parser_nodes__AClosureDef__init, /* pointer to parser_nodes:AClosureDef:parser_nodes#AClosureDef#init */
-(nitmethod_t)VIRTUAL_parser_prod__AClosureDef__empty_init, /* pointer to parser_nodes:AClosureDef:parser_prod#AClosureDef#empty_init */
-(nitmethod_t)VIRTUAL_parser_prod__AClosureDef__init_aclosuredef, /* pointer to parser_nodes:AClosureDef:parser_prod#AClosureDef#init_aclosuredef */
-(nitmethod_t)VIRTUAL_scope__AClosureDef__variables, /* pointer to parser_nodes:AClosureDef:scope#AClosureDef#variables */
-(nitmethod_t)VIRTUAL_scope__AClosureDef__variables_61d, /* pointer to parser_nodes:AClosureDef:scope#AClosureDef#variables= */
-(nitmethod_t)VIRTUAL_scope__AClosureDef__escapemark, /* pointer to parser_nodes:AClosureDef:scope#AClosureDef#escapemark */
-(nitmethod_t)VIRTUAL_scope__AClosureDef__escapemark_61d, /* pointer to parser_nodes:AClosureDef:scope#AClosureDef#escapemark= */
-(nitmethod_t)VIRTUAL_typing__AClosureDef__mclosure, /* pointer to parser_nodes:AClosureDef:typing#AClosureDef#mclosure */
-(nitmethod_t)VIRTUAL_typing__AClosureDef__mclosure_61d, /* pointer to parser_nodes:AClosureDef:typing#AClosureDef#mclosure= */
-(nitmethod_t)VIRTUAL_typing__AClosureDef__accept_typing, /* pointer to parser_nodes:AClosureDef:typing#AClosureDef#accept_typing */
-}
-};
-/* allocate AClosureDef */
-val* NEW_parser_nodes__AClosureDef(const struct type* type) {
-val* self /* : AClosureDef */;
-val* var /* : null */;
-val* var1 /* : null */;
-val* var2 /* : null */;
-val* var3 /* : null */;
-val* var4 /* : ANodes[TId] */;
-val* var5 /* : null */;
-val* var6 /* : null */;
-self = nit_alloc(sizeof(struct instance) + 18*sizeof(nitattribute_t));
-self->type = type;
-self->class = &class_parser_nodes__AClosureDef;
-var = NULL;
-self->attrs[COLOR_parser_nodes__ANode___location].val = var; /* _location on <self:AClosureDef exact> */
-var1 = NULL;
-self->attrs[COLOR_parser_nodes__ANode___64dparent].val = var1; /* @parent on <self:AClosureDef exact> */
-var2 = NULL;
-self->attrs[COLOR_parser_nodes__Prod___n_annotations].val = var2; /* _n_annotations on <self:AClosureDef exact> */
-var3 = NULL;
-self->attrs[COLOR_parser_nodes__ALabelable___n_label].val = var3; /* _n_label on <self:AClosureDef exact> */
-var4 = NEW_parser_nodes__ANodes(&type_parser_nodes__ANodesparser_nodes__TId);
-((void (*)(val*, val*))(var4->class->vft[COLOR_parser_nodes__ANodes__init]))(var4, self) /* init on <var4:ANodes[TId]>*/;
-CHECK_NEW_parser_nodes__ANodes(var4);
-self->attrs[COLOR_parser_nodes__AClosureDef___n_ids].val = var4; /* _n_ids on <self:AClosureDef exact> */
-var5 = NULL;
-self->attrs[COLOR_parser_nodes__AClosureDef___n_kwdo].val = var5; /* _n_kwdo on <self:AClosureDef exact> */
-var6 = NULL;
-self->attrs[COLOR_parser_nodes__AClosureDef___n_expr].val = var6; /* _n_expr on <self:AClosureDef exact> */
-return self;
-}
-/* allocate AClosureDef */
-void CHECK_NEW_parser_nodes__AClosureDef(val* self) {
-val* var /* : nullable Location */;
-val* var1 /* : TBang */;
-val* var2 /* : AClosureId */;
-val* var3 /* : nullable Array[Variable] */;
-val* var4 /* : nullable EscapeMark */;
-val* var5 /* : nullable MParameter */;
-var = self->attrs[COLOR_parser__Prod___first_location].val; /* _first_location on <self:AClosureDef> */
-var1 = self->attrs[COLOR_parser_nodes__AClosureDef___n_bang].val; /* _n_bang on <self:AClosureDef> */
-if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_bang", "src/parser/parser_nodes.nit", 1665);
-exit(1);
-}
-var2 = self->attrs[COLOR_parser_nodes__AClosureDef___n_id].val; /* _n_id on <self:AClosureDef> */
-if (var2 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_id", "src/parser/parser_nodes.nit", 1666);
-exit(1);
-}
-var3 = self->attrs[COLOR_scope__AClosureDef___64dvariables].val; /* @variables on <self:AClosureDef> */
-var4 = self->attrs[COLOR_scope__AClosureDef___64descapemark].val; /* @escapemark on <self:AClosureDef> */
-var5 = self->attrs[COLOR_typing__AClosureDef___64dmclosure].val; /* @mclosure on <self:AClosureDef> */
-}
-/* runtime class parser_nodes__ASimpleClosureId */
-const struct class class_parser_nodes__ASimpleClosureId = {
-0, /* box_kind */
-{
-(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:ASimpleClosureId:kernel#Object#object_id */
-(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:ASimpleClosureId:kernel#Object#is_same_type */
-(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:ASimpleClosureId:kernel#Object#== */
-(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:ASimpleClosureId:kernel#Object#!= */
-(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:ASimpleClosureId:kernel#Object#output */
-(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to parser_nodes:ASimpleClosureId:kernel#Object#output_class_name */
-(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to parser_nodes:ASimpleClosureId:kernel#Object#exit */
-(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to parser_nodes:ASimpleClosureId:kernel#Object#sys */
-(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to parser_nodes:ASimpleClosureId:kernel#Object#hash */
-(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to parser_nodes:ASimpleClosureId:string#Object#to_s */
-(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to parser_nodes:ASimpleClosureId:string#Object#native_class_name */
-(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to parser_nodes:ASimpleClosureId:string#Object#class_name */
-(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to parser_nodes:ASimpleClosureId:string#Object#inspect */
-(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to parser_nodes:ASimpleClosureId:string#Object#inspect_head */
-(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to parser_nodes:ASimpleClosureId:string#Object#args */
-(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to parser_nodes:ASimpleClosureId:math#Object#atan2 */
-(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to parser_nodes:ASimpleClosureId:math#Object#pi */
-(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to parser_nodes:ASimpleClosureId:math#Object#srand_from */
-(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to parser_nodes:ASimpleClosureId:math#Object#srand */
-(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to parser_nodes:ASimpleClosureId:stream#Object#poll */
-(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to parser_nodes:ASimpleClosureId:stream#Object#intern_poll */
-(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to parser_nodes:ASimpleClosureId:time#Object#get_time */
-(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to parser_nodes:ASimpleClosureId:file#Object#printn */
-(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to parser_nodes:ASimpleClosureId:file#Object#print */
-(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to parser_nodes:ASimpleClosureId:file#Object#getc */
-(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to parser_nodes:ASimpleClosureId:file#Object#gets */
-(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to parser_nodes:ASimpleClosureId:file#Object#getcwd */
-(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to parser_nodes:ASimpleClosureId:file#Object#file_getcwd */
-(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to parser_nodes:ASimpleClosureId:file#Object#stdin */
-(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to parser_nodes:ASimpleClosureId:file#Object#stdout */
-(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to parser_nodes:ASimpleClosureId:file#Object#stderr */
-(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to parser_nodes:ASimpleClosureId:model_base#Object#intrude_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to parser_nodes:ASimpleClosureId:model_base#Object#public_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to parser_nodes:ASimpleClosureId:model_base#Object#protected_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to parser_nodes:ASimpleClosureId:model_base#Object#private_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to parser_nodes:ASimpleClosureId:model_base#Object#none_visibility */
-(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to parser_nodes:ASimpleClosureId:model#Object#abstract_kind */
-(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to parser_nodes:ASimpleClosureId:model#Object#concrete_kind */
-(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to parser_nodes:ASimpleClosureId:model#Object#interface_kind */
-(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to parser_nodes:ASimpleClosureId:model#Object#enum_kind */
-(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to parser_nodes:ASimpleClosureId:model#Object#extern_kind */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__location, /* pointer to parser_nodes:ASimpleClosureId:parser_nodes#ANode#location */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__hot_location, /* pointer to parser_nodes:ASimpleClosureId:parser_nodes#ANode#hot_location */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__debug, /* pointer to parser_nodes:ASimpleClosureId:parser_nodes#ANode#debug */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent, /* pointer to parser_nodes:ASimpleClosureId:parser_nodes#ANode#parent */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent_61d, /* pointer to parser_nodes:ASimpleClosureId:parser_nodes#ANode#parent= */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__init, /* pointer to parser_nodes:ASimpleClosureId:parser_nodes#ANode#init */
-(nitmethod_t)VIRTUAL_parser_prod__ASimpleClosureId__replace_child, /* pointer to parser_nodes:ASimpleClosureId:parser_prod#ASimpleClosureId#replace_child */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__detach, /* pointer to parser_nodes:ASimpleClosureId:parser_nodes#ANode#detach */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__replace_with, /* pointer to parser_nodes:ASimpleClosureId:parser_nodes#Prod#replace_with */
-(nitmethod_t)VIRTUAL_parser_prod__ASimpleClosureId__visit_all, /* pointer to parser_nodes:ASimpleClosureId:parser_prod#ASimpleClosureId#visit_all */
-(nitmethod_t)VIRTUAL_parser_util__ANode__collect_tokens_by_text, /* pointer to parser_nodes:ASimpleClosureId:parser_util#ANode#collect_tokens_by_text */
-(nitmethod_t)VIRTUAL_parser_util__ANode__collect_annotations_by_name, /* pointer to parser_nodes:ASimpleClosureId:parser_util#ANode#collect_annotations_by_name */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__accept_simple_misc, /* pointer to parser_nodes:ASimpleClosureId:simple_misc_analysis#ANode#accept_simple_misc */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__after_simple_misc, /* pointer to parser_nodes:ASimpleClosureId:simple_misc_analysis#ANode#after_simple_misc */
-(nitmethod_t)VIRTUAL_literal__ANode__accept_literal, /* pointer to parser_nodes:ASimpleClosureId:literal#ANode#accept_literal */
-(nitmethod_t)VIRTUAL_scope__ANode__accept_scope_visitor, /* pointer to parser_nodes:ASimpleClosureId:scope#ANode#accept_scope_visitor */
-(nitmethod_t)VIRTUAL_flow__ANode__accept_flow_visitor, /* pointer to parser_nodes:ASimpleClosureId:flow#ANode#accept_flow_visitor */
-(nitmethod_t)VIRTUAL_local_var_init__ANode__accept_local_var_visitor, /* pointer to parser_nodes:ASimpleClosureId:local_var_init#ANode#accept_local_var_visitor */
-(nitmethod_t)VIRTUAL_auto_super_init__ANode__accept_auto_super_init, /* pointer to parser_nodes:ASimpleClosureId:auto_super_init#ANode#accept_auto_super_init */
-(nitmethod_t)VIRTUAL_rapid_type_analysis__ANode__accept_rapid_type_visitor, /* pointer to parser_nodes:ASimpleClosureId:rapid_type_analysis#ANode#accept_rapid_type_visitor */
-(nitmethod_t)VIRTUAL_astvalidation__ANode__accept_ast_validation, /* pointer to parser_nodes:ASimpleClosureId:astvalidation#ANode#accept_ast_validation */
-(nitmethod_t)VIRTUAL_transform__ANode__accept_transform_visitor, /* pointer to parser_nodes:ASimpleClosureId:transform#ANode#accept_transform_visitor */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__location_61d, /* pointer to parser_nodes:ASimpleClosureId:parser_nodes#Prod#location= */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations, /* pointer to parser_nodes:ASimpleClosureId:parser_nodes#Prod#n_annotations */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations_61d, /* pointer to parser_nodes:ASimpleClosureId:parser_nodes#Prod#n_annotations= */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__init, /* pointer to parser_nodes:ASimpleClosureId:parser_nodes#Prod#init */
-(nitmethod_t)VIRTUAL_modelize_property__Prod__collect_text, /* pointer to parser_nodes:ASimpleClosureId:modelize_property#Prod#collect_text */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__replace_with, /* pointer to parser_nodes:ASimpleClosureId:parser_nodes#ANode#replace_with */
-(nitmethod_t)VIRTUAL_parser_nodes__AClosureId__init, /* pointer to parser_nodes:ASimpleClosureId:parser_nodes#AClosureId#init */
-(nitmethod_t)VIRTUAL_parser_nodes__ASimpleClosureId__n_id, /* pointer to parser_nodes:ASimpleClosureId:parser_nodes#ASimpleClosureId#n_id */
-(nitmethod_t)VIRTUAL_parser_prod__ASimpleClosureId__n_id_61d, /* pointer to parser_nodes:ASimpleClosureId:parser_prod#ASimpleClosureId#n_id= */
-(nitmethod_t)VIRTUAL_parser_nodes__ASimpleClosureId__init, /* pointer to parser_nodes:ASimpleClosureId:parser_nodes#ASimpleClosureId#init */
-(nitmethod_t)VIRTUAL_parser_prod__ASimpleClosureId__empty_init, /* pointer to parser_nodes:ASimpleClosureId:parser_prod#ASimpleClosureId#empty_init */
-(nitmethod_t)VIRTUAL_parser_prod__ASimpleClosureId__init_asimpleclosureid, /* pointer to parser_nodes:ASimpleClosureId:parser_prod#ASimpleClosureId#init_asimpleclosureid */
-}
-};
-/* allocate ASimpleClosureId */
-val* NEW_parser_nodes__ASimpleClosureId(const struct type* type) {
-val* self /* : ASimpleClosureId */;
-val* var /* : null */;
-val* var1 /* : null */;
-val* var2 /* : null */;
-self = nit_alloc(sizeof(struct instance) + 5*sizeof(nitattribute_t));
-self->type = type;
-self->class = &class_parser_nodes__ASimpleClosureId;
-var = NULL;
-self->attrs[COLOR_parser_nodes__ANode___location].val = var; /* _location on <self:ASimpleClosureId exact> */
-var1 = NULL;
-self->attrs[COLOR_parser_nodes__ANode___64dparent].val = var1; /* @parent on <self:ASimpleClosureId exact> */
-var2 = NULL;
-self->attrs[COLOR_parser_nodes__Prod___n_annotations].val = var2; /* _n_annotations on <self:ASimpleClosureId exact> */
-return self;
-}
-/* allocate ASimpleClosureId */
-void CHECK_NEW_parser_nodes__ASimpleClosureId(val* self) {
-val* var /* : nullable Location */;
-val* var1 /* : TId */;
-var = self->attrs[COLOR_parser__Prod___first_location].val; /* _first_location on <self:ASimpleClosureId> */
-var1 = self->attrs[COLOR_parser_nodes__ASimpleClosureId___n_id].val; /* _n_id on <self:ASimpleClosureId> */
-if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_id", "src/parser/parser_nodes.nit", 1677);
-exit(1);
-}
-}
-/* runtime class parser_nodes__ABreakClosureId */
-const struct class class_parser_nodes__ABreakClosureId = {
-0, /* box_kind */
-{
-(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:ABreakClosureId:kernel#Object#object_id */
-(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:ABreakClosureId:kernel#Object#is_same_type */
-(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:ABreakClosureId:kernel#Object#== */
-(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:ABreakClosureId:kernel#Object#!= */
-(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:ABreakClosureId:kernel#Object#output */
-(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to parser_nodes:ABreakClosureId:kernel#Object#output_class_name */
-(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to parser_nodes:ABreakClosureId:kernel#Object#exit */
-(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to parser_nodes:ABreakClosureId:kernel#Object#sys */
-(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to parser_nodes:ABreakClosureId:kernel#Object#hash */
-(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to parser_nodes:ABreakClosureId:string#Object#to_s */
-(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to parser_nodes:ABreakClosureId:string#Object#native_class_name */
-(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to parser_nodes:ABreakClosureId:string#Object#class_name */
-(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to parser_nodes:ABreakClosureId:string#Object#inspect */
-(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to parser_nodes:ABreakClosureId:string#Object#inspect_head */
-(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to parser_nodes:ABreakClosureId:string#Object#args */
-(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to parser_nodes:ABreakClosureId:math#Object#atan2 */
-(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to parser_nodes:ABreakClosureId:math#Object#pi */
-(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to parser_nodes:ABreakClosureId:math#Object#srand_from */
-(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to parser_nodes:ABreakClosureId:math#Object#srand */
-(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to parser_nodes:ABreakClosureId:stream#Object#poll */
-(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to parser_nodes:ABreakClosureId:stream#Object#intern_poll */
-(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to parser_nodes:ABreakClosureId:time#Object#get_time */
-(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to parser_nodes:ABreakClosureId:file#Object#printn */
-(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to parser_nodes:ABreakClosureId:file#Object#print */
-(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to parser_nodes:ABreakClosureId:file#Object#getc */
-(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to parser_nodes:ABreakClosureId:file#Object#gets */
-(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to parser_nodes:ABreakClosureId:file#Object#getcwd */
-(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to parser_nodes:ABreakClosureId:file#Object#file_getcwd */
-(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to parser_nodes:ABreakClosureId:file#Object#stdin */
-(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to parser_nodes:ABreakClosureId:file#Object#stdout */
-(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to parser_nodes:ABreakClosureId:file#Object#stderr */
-(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to parser_nodes:ABreakClosureId:model_base#Object#intrude_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to parser_nodes:ABreakClosureId:model_base#Object#public_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to parser_nodes:ABreakClosureId:model_base#Object#protected_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to parser_nodes:ABreakClosureId:model_base#Object#private_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to parser_nodes:ABreakClosureId:model_base#Object#none_visibility */
-(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to parser_nodes:ABreakClosureId:model#Object#abstract_kind */
-(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to parser_nodes:ABreakClosureId:model#Object#concrete_kind */
-(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to parser_nodes:ABreakClosureId:model#Object#interface_kind */
-(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to parser_nodes:ABreakClosureId:model#Object#enum_kind */
-(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to parser_nodes:ABreakClosureId:model#Object#extern_kind */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__location, /* pointer to parser_nodes:ABreakClosureId:parser_nodes#ANode#location */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__hot_location, /* pointer to parser_nodes:ABreakClosureId:parser_nodes#ANode#hot_location */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__debug, /* pointer to parser_nodes:ABreakClosureId:parser_nodes#ANode#debug */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent, /* pointer to parser_nodes:ABreakClosureId:parser_nodes#ANode#parent */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent_61d, /* pointer to parser_nodes:ABreakClosureId:parser_nodes#ANode#parent= */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__init, /* pointer to parser_nodes:ABreakClosureId:parser_nodes#ANode#init */
-(nitmethod_t)VIRTUAL_parser_prod__ABreakClosureId__replace_child, /* pointer to parser_nodes:ABreakClosureId:parser_prod#ABreakClosureId#replace_child */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__detach, /* pointer to parser_nodes:ABreakClosureId:parser_nodes#ANode#detach */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__replace_with, /* pointer to parser_nodes:ABreakClosureId:parser_nodes#Prod#replace_with */
-(nitmethod_t)VIRTUAL_parser_prod__ABreakClosureId__visit_all, /* pointer to parser_nodes:ABreakClosureId:parser_prod#ABreakClosureId#visit_all */
-(nitmethod_t)VIRTUAL_parser_util__ANode__collect_tokens_by_text, /* pointer to parser_nodes:ABreakClosureId:parser_util#ANode#collect_tokens_by_text */
-(nitmethod_t)VIRTUAL_parser_util__ANode__collect_annotations_by_name, /* pointer to parser_nodes:ABreakClosureId:parser_util#ANode#collect_annotations_by_name */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__accept_simple_misc, /* pointer to parser_nodes:ABreakClosureId:simple_misc_analysis#ANode#accept_simple_misc */
-(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__after_simple_misc, /* pointer to parser_nodes:ABreakClosureId:simple_misc_analysis#ANode#after_simple_misc */
-(nitmethod_t)VIRTUAL_literal__ANode__accept_literal, /* pointer to parser_nodes:ABreakClosureId:literal#ANode#accept_literal */
-(nitmethod_t)VIRTUAL_scope__ANode__accept_scope_visitor, /* pointer to parser_nodes:ABreakClosureId:scope#ANode#accept_scope_visitor */
-(nitmethod_t)VIRTUAL_flow__ANode__accept_flow_visitor, /* pointer to parser_nodes:ABreakClosureId:flow#ANode#accept_flow_visitor */
-(nitmethod_t)VIRTUAL_local_var_init__ANode__accept_local_var_visitor, /* pointer to parser_nodes:ABreakClosureId:local_var_init#ANode#accept_local_var_visitor */
-(nitmethod_t)VIRTUAL_auto_super_init__ANode__accept_auto_super_init, /* pointer to parser_nodes:ABreakClosureId:auto_super_init#ANode#accept_auto_super_init */
-(nitmethod_t)VIRTUAL_rapid_type_analysis__ANode__accept_rapid_type_visitor, /* pointer to parser_nodes:ABreakClosureId:rapid_type_analysis#ANode#accept_rapid_type_visitor */
-(nitmethod_t)VIRTUAL_astvalidation__ANode__accept_ast_validation, /* pointer to parser_nodes:ABreakClosureId:astvalidation#ANode#accept_ast_validation */
-(nitmethod_t)VIRTUAL_transform__ANode__accept_transform_visitor, /* pointer to parser_nodes:ABreakClosureId:transform#ANode#accept_transform_visitor */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__location_61d, /* pointer to parser_nodes:ABreakClosureId:parser_nodes#Prod#location= */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations, /* pointer to parser_nodes:ABreakClosureId:parser_nodes#Prod#n_annotations */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations_61d, /* pointer to parser_nodes:ABreakClosureId:parser_nodes#Prod#n_annotations= */
-(nitmethod_t)VIRTUAL_parser_nodes__Prod__init, /* pointer to parser_nodes:ABreakClosureId:parser_nodes#Prod#init */
-(nitmethod_t)VIRTUAL_modelize_property__Prod__collect_text, /* pointer to parser_nodes:ABreakClosureId:modelize_property#Prod#collect_text */
-(nitmethod_t)VIRTUAL_parser_nodes__ANode__replace_with, /* pointer to parser_nodes:ABreakClosureId:parser_nodes#ANode#replace_with */
-(nitmethod_t)VIRTUAL_parser_nodes__AClosureId__init, /* pointer to parser_nodes:ABreakClosureId:parser_nodes#AClosureId#init */
-(nitmethod_t)VIRTUAL_parser_nodes__ABreakClosureId__n_kwbreak, /* pointer to parser_nodes:ABreakClosureId:parser_nodes#ABreakClosureId#n_kwbreak */
-(nitmethod_t)VIRTUAL_parser_prod__ABreakClosureId__n_kwbreak_61d, /* pointer to parser_nodes:ABreakClosureId:parser_prod#ABreakClosureId#n_kwbreak= */
-(nitmethod_t)VIRTUAL_parser_nodes__ABreakClosureId__init, /* pointer to parser_nodes:ABreakClosureId:parser_nodes#ABreakClosureId#init */
-(nitmethod_t)VIRTUAL_parser_prod__ABreakClosureId__empty_init, /* pointer to parser_nodes:ABreakClosureId:parser_prod#ABreakClosureId#empty_init */
-(nitmethod_t)VIRTUAL_parser_prod__ABreakClosureId__init_abreakclosureid, /* pointer to parser_nodes:ABreakClosureId:parser_prod#ABreakClosureId#init_abreakclosureid */
-}
-};
-/* allocate ABreakClosureId */
-val* NEW_parser_nodes__ABreakClosureId(const struct type* type) {
-val* self /* : ABreakClosureId */;
-val* var /* : null */;
-val* var1 /* : null */;
-val* var2 /* : null */;
-self = nit_alloc(sizeof(struct instance) + 5*sizeof(nitattribute_t));
-self->type = type;
-self->class = &class_parser_nodes__ABreakClosureId;
-var = NULL;
-self->attrs[COLOR_parser_nodes__ANode___location].val = var; /* _location on <self:ABreakClosureId exact> */
-var1 = NULL;
-self->attrs[COLOR_parser_nodes__ANode___64dparent].val = var1; /* @parent on <self:ABreakClosureId exact> */
-var2 = NULL;
-self->attrs[COLOR_parser_nodes__Prod___n_annotations].val = var2; /* _n_annotations on <self:ABreakClosureId exact> */
-return self;
-}
-/* allocate ABreakClosureId */
-void CHECK_NEW_parser_nodes__ABreakClosureId(val* self) {
-val* var /* : nullable Location */;
-val* var1 /* : TKwbreak */;
-var = self->attrs[COLOR_parser__Prod___first_location].val; /* _first_location on <self:ABreakClosureId> */
-var1 = self->attrs[COLOR_parser_nodes__ABreakClosureId___n_kwbreak].val; /* _n_kwbreak on <self:ABreakClosureId> */
-if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwbreak", "src/parser/parser_nodes.nit", 1681);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_minuseq");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1635);
 exit(1);
 }
 }
@@ -8828,6 +5753,7 @@ const struct class class_parser_nodes__AModuleName = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:AModuleName:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:AModuleName:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:AModuleName:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:AModuleName:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:AModuleName:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:AModuleName:kernel#Object#output */
@@ -8937,7 +5863,8 @@ val* var1 /* : TId */;
 var = self->attrs[COLOR_parser__Prod___first_location].val; /* _first_location on <self:AModuleName> */
 var1 = self->attrs[COLOR_parser_nodes__AModuleName___n_id].val; /* _n_id on <self:AModuleName> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_id", "src/parser/parser_nodes.nit", 1687);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_id");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1642);
 exit(1);
 }
 }
@@ -8947,6 +5874,7 @@ const struct class class_parser_nodes__AInLanguage = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:AInLanguage:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:AInLanguage:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:AInLanguage:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:AInLanguage:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:AInLanguage:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:AInLanguage:kernel#Object#output */
@@ -9048,12 +5976,14 @@ val* var2 /* : TString */;
 var = self->attrs[COLOR_parser__Prod___first_location].val; /* _first_location on <self:AInLanguage> */
 var1 = self->attrs[COLOR_parser_nodes__AInLanguage___n_kwin].val; /* _n_kwin on <self:AInLanguage> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_kwin", "src/parser/parser_nodes.nit", 1691);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwin");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1646);
 exit(1);
 }
 var2 = self->attrs[COLOR_parser_nodes__AInLanguage___n_string].val; /* _n_string on <self:AInLanguage> */
 if (var2 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_string", "src/parser/parser_nodes.nit", 1692);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_string");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1647);
 exit(1);
 }
 }
@@ -9063,6 +5993,7 @@ const struct class class_parser_nodes__AExternCodeBlock = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:AExternCodeBlock:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:AExternCodeBlock:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:AExternCodeBlock:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:AExternCodeBlock:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:AExternCodeBlock:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:AExternCodeBlock:kernel#Object#output */
@@ -9166,7 +6097,8 @@ val* var1 /* : TExternCodeSegment */;
 var = self->attrs[COLOR_parser__Prod___first_location].val; /* _first_location on <self:AExternCodeBlock> */
 var1 = self->attrs[COLOR_parser_nodes__AExternCodeBlock___n_extern_code_segment].val; /* _n_extern_code_segment on <self:AExternCodeBlock> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_extern_code_segment", "src/parser/parser_nodes.nit", 1697);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_extern_code_segment");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1652);
 exit(1);
 }
 }
@@ -9176,6 +6108,7 @@ const struct class class_parser_nodes__AQualified = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:AQualified:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:AQualified:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:AQualified:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:AQualified:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:AQualified:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:AQualified:kernel#Object#output */
@@ -9292,6 +6225,7 @@ const struct class class_parser_nodes__ADoc = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:ADoc:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:ADoc:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:ADoc:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:ADoc:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:ADoc:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:ADoc:kernel#Object#output */
@@ -9398,6 +6332,7 @@ const struct class class_parser_nodes__AAnnotations = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:AAnnotations:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:AAnnotations:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:AAnnotations:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:AAnnotations:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:AAnnotations:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:AAnnotations:kernel#Object#output */
@@ -9519,6 +6454,7 @@ const struct class class_parser_nodes__AAnnotation = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:AAnnotation:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:AAnnotation:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:AAnnotation:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:AAnnotation:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:AAnnotation:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:AAnnotation:kernel#Object#output */
@@ -9633,7 +6569,8 @@ val* var1 /* : AAtid */;
 var = self->attrs[COLOR_parser__Prod___first_location].val; /* _first_location on <self:AAnnotation> */
 var1 = self->attrs[COLOR_parser_nodes__AAnnotation___n_atid].val; /* _n_atid on <self:AAnnotation> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_atid", "src/parser/parser_nodes.nit", 1722);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_atid");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1677);
 exit(1);
 }
 }
@@ -9643,6 +6580,7 @@ const struct class class_parser_nodes__ATypeAtArg = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:ATypeAtArg:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:ATypeAtArg:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:ATypeAtArg:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:ATypeAtArg:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:ATypeAtArg:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:ATypeAtArg:kernel#Object#output */
@@ -9742,7 +6680,8 @@ val* var1 /* : AType */;
 var = self->attrs[COLOR_parser__Prod___first_location].val; /* _first_location on <self:ATypeAtArg> */
 var1 = self->attrs[COLOR_parser_nodes__ATypeAtArg___n_type].val; /* _n_type on <self:ATypeAtArg> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_type", "src/parser/parser_nodes.nit", 1732);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_type");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1687);
 exit(1);
 }
 }
@@ -9752,6 +6691,7 @@ const struct class class_parser_nodes__AExprAtArg = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:AExprAtArg:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:AExprAtArg:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:AExprAtArg:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:AExprAtArg:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:AExprAtArg:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:AExprAtArg:kernel#Object#output */
@@ -9851,7 +6791,8 @@ val* var1 /* : AExpr */;
 var = self->attrs[COLOR_parser__Prod___first_location].val; /* _first_location on <self:AExprAtArg> */
 var1 = self->attrs[COLOR_parser_nodes__AExprAtArg___n_expr].val; /* _n_expr on <self:AExprAtArg> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute _n_expr", "src/parser/parser_nodes.nit", 1736);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_expr");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1691);
 exit(1);
 }
 }
@@ -9861,6 +6802,7 @@ const struct class class_parser_nodes__AAtAtArg = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:AAtAtArg:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:AAtAtArg:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:AAtAtArg:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:AAtAtArg:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:AAtAtArg:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:AAtAtArg:kernel#Object#output */
@@ -9955,4 +6897,3049 @@ return self;
 void CHECK_NEW_parser_nodes__AAtAtArg(val* self) {
 val* var /* : nullable Location */;
 var = self->attrs[COLOR_parser__Prod___first_location].val; /* _first_location on <self:AAtAtArg> */
+}
+/* runtime class parser_nodes__AIdAtid */
+const struct class class_parser_nodes__AIdAtid = {
+0, /* box_kind */
+{
+(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:AIdAtid:kernel#Object#object_id */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:AIdAtid:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:AIdAtid:kernel#Object#is_same_instance */
+(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:AIdAtid:kernel#Object#== */
+(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:AIdAtid:kernel#Object#!= */
+(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:AIdAtid:kernel#Object#output */
+(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to parser_nodes:AIdAtid:kernel#Object#output_class_name */
+(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to parser_nodes:AIdAtid:kernel#Object#exit */
+(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to parser_nodes:AIdAtid:kernel#Object#sys */
+(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to parser_nodes:AIdAtid:kernel#Object#hash */
+(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to parser_nodes:AIdAtid:string#Object#to_s */
+(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to parser_nodes:AIdAtid:string#Object#native_class_name */
+(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to parser_nodes:AIdAtid:string#Object#class_name */
+(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to parser_nodes:AIdAtid:string#Object#inspect */
+(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to parser_nodes:AIdAtid:string#Object#inspect_head */
+(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to parser_nodes:AIdAtid:string#Object#args */
+(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to parser_nodes:AIdAtid:math#Object#atan2 */
+(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to parser_nodes:AIdAtid:math#Object#pi */
+(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to parser_nodes:AIdAtid:math#Object#srand_from */
+(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to parser_nodes:AIdAtid:math#Object#srand */
+(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to parser_nodes:AIdAtid:stream#Object#poll */
+(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to parser_nodes:AIdAtid:stream#Object#intern_poll */
+(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to parser_nodes:AIdAtid:time#Object#get_time */
+(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to parser_nodes:AIdAtid:file#Object#printn */
+(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to parser_nodes:AIdAtid:file#Object#print */
+(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to parser_nodes:AIdAtid:file#Object#getc */
+(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to parser_nodes:AIdAtid:file#Object#gets */
+(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to parser_nodes:AIdAtid:file#Object#getcwd */
+(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to parser_nodes:AIdAtid:file#Object#file_getcwd */
+(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to parser_nodes:AIdAtid:file#Object#stdin */
+(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to parser_nodes:AIdAtid:file#Object#stdout */
+(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to parser_nodes:AIdAtid:file#Object#stderr */
+(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to parser_nodes:AIdAtid:model_base#Object#intrude_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to parser_nodes:AIdAtid:model_base#Object#public_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to parser_nodes:AIdAtid:model_base#Object#protected_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to parser_nodes:AIdAtid:model_base#Object#private_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to parser_nodes:AIdAtid:model_base#Object#none_visibility */
+(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to parser_nodes:AIdAtid:model#Object#abstract_kind */
+(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to parser_nodes:AIdAtid:model#Object#concrete_kind */
+(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to parser_nodes:AIdAtid:model#Object#interface_kind */
+(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to parser_nodes:AIdAtid:model#Object#enum_kind */
+(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to parser_nodes:AIdAtid:model#Object#extern_kind */
+(nitmethod_t)VIRTUAL_parser_nodes__ANode__location, /* pointer to parser_nodes:AIdAtid:parser_nodes#ANode#location */
+(nitmethod_t)VIRTUAL_parser_nodes__ANode__hot_location, /* pointer to parser_nodes:AIdAtid:parser_nodes#ANode#hot_location */
+(nitmethod_t)VIRTUAL_parser_nodes__ANode__debug, /* pointer to parser_nodes:AIdAtid:parser_nodes#ANode#debug */
+(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent, /* pointer to parser_nodes:AIdAtid:parser_nodes#ANode#parent */
+(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent_61d, /* pointer to parser_nodes:AIdAtid:parser_nodes#ANode#parent= */
+(nitmethod_t)VIRTUAL_parser_nodes__ANode__init, /* pointer to parser_nodes:AIdAtid:parser_nodes#ANode#init */
+(nitmethod_t)VIRTUAL_parser_prod__AIdAtid__replace_child, /* pointer to parser_nodes:AIdAtid:parser_prod#AIdAtid#replace_child */
+(nitmethod_t)VIRTUAL_parser_nodes__ANode__detach, /* pointer to parser_nodes:AIdAtid:parser_nodes#ANode#detach */
+(nitmethod_t)VIRTUAL_parser_nodes__Prod__replace_with, /* pointer to parser_nodes:AIdAtid:parser_nodes#Prod#replace_with */
+(nitmethod_t)VIRTUAL_parser_prod__AIdAtid__visit_all, /* pointer to parser_nodes:AIdAtid:parser_prod#AIdAtid#visit_all */
+(nitmethod_t)VIRTUAL_parser_util__ANode__collect_tokens_by_text, /* pointer to parser_nodes:AIdAtid:parser_util#ANode#collect_tokens_by_text */
+(nitmethod_t)VIRTUAL_parser_util__ANode__collect_annotations_by_name, /* pointer to parser_nodes:AIdAtid:parser_util#ANode#collect_annotations_by_name */
+(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__accept_simple_misc, /* pointer to parser_nodes:AIdAtid:simple_misc_analysis#ANode#accept_simple_misc */
+(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__after_simple_misc, /* pointer to parser_nodes:AIdAtid:simple_misc_analysis#ANode#after_simple_misc */
+(nitmethod_t)VIRTUAL_literal__ANode__accept_literal, /* pointer to parser_nodes:AIdAtid:literal#ANode#accept_literal */
+(nitmethod_t)VIRTUAL_scope__ANode__accept_scope_visitor, /* pointer to parser_nodes:AIdAtid:scope#ANode#accept_scope_visitor */
+(nitmethod_t)VIRTUAL_flow__ANode__accept_flow_visitor, /* pointer to parser_nodes:AIdAtid:flow#ANode#accept_flow_visitor */
+(nitmethod_t)VIRTUAL_local_var_init__ANode__accept_local_var_visitor, /* pointer to parser_nodes:AIdAtid:local_var_init#ANode#accept_local_var_visitor */
+(nitmethod_t)VIRTUAL_auto_super_init__ANode__accept_auto_super_init, /* pointer to parser_nodes:AIdAtid:auto_super_init#ANode#accept_auto_super_init */
+(nitmethod_t)VIRTUAL_rapid_type_analysis__ANode__accept_rapid_type_visitor, /* pointer to parser_nodes:AIdAtid:rapid_type_analysis#ANode#accept_rapid_type_visitor */
+(nitmethod_t)VIRTUAL_astvalidation__ANode__accept_ast_validation, /* pointer to parser_nodes:AIdAtid:astvalidation#ANode#accept_ast_validation */
+(nitmethod_t)VIRTUAL_transform__ANode__accept_transform_visitor, /* pointer to parser_nodes:AIdAtid:transform#ANode#accept_transform_visitor */
+(nitmethod_t)VIRTUAL_parser_nodes__Prod__location_61d, /* pointer to parser_nodes:AIdAtid:parser_nodes#Prod#location= */
+(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations, /* pointer to parser_nodes:AIdAtid:parser_nodes#Prod#n_annotations */
+(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations_61d, /* pointer to parser_nodes:AIdAtid:parser_nodes#Prod#n_annotations= */
+(nitmethod_t)VIRTUAL_parser_nodes__Prod__init, /* pointer to parser_nodes:AIdAtid:parser_nodes#Prod#init */
+(nitmethod_t)VIRTUAL_modelize_property__Prod__collect_text, /* pointer to parser_nodes:AIdAtid:modelize_property#Prod#collect_text */
+(nitmethod_t)VIRTUAL_parser_nodes__ANode__replace_with, /* pointer to parser_nodes:AIdAtid:parser_nodes#ANode#replace_with */
+(nitmethod_t)VIRTUAL_parser_nodes__AAtid__n_id, /* pointer to parser_nodes:AIdAtid:parser_nodes#AAtid#n_id */
+(nitmethod_t)VIRTUAL_parser_prod__AIdAtid__n_id_61d, /* pointer to parser_nodes:AIdAtid:parser_prod#AIdAtid#n_id= */
+(nitmethod_t)VIRTUAL_parser_nodes__AAtid__init, /* pointer to parser_nodes:AIdAtid:parser_nodes#AAtid#init */
+(nitmethod_t)VIRTUAL_parser_nodes__AIdAtid__init, /* pointer to parser_nodes:AIdAtid:parser_nodes#AIdAtid#init */
+(nitmethod_t)VIRTUAL_parser_prod__AIdAtid__empty_init, /* pointer to parser_nodes:AIdAtid:parser_prod#AIdAtid#empty_init */
+(nitmethod_t)VIRTUAL_parser_prod__AIdAtid__init_aidatid, /* pointer to parser_nodes:AIdAtid:parser_prod#AIdAtid#init_aidatid */
+}
+};
+/* allocate AIdAtid */
+val* NEW_parser_nodes__AIdAtid(const struct type* type) {
+val* self /* : AIdAtid */;
+val* var /* : null */;
+val* var1 /* : null */;
+val* var2 /* : null */;
+self = nit_alloc(sizeof(struct instance) + 5*sizeof(nitattribute_t));
+self->type = type;
+self->class = &class_parser_nodes__AIdAtid;
+var = NULL;
+self->attrs[COLOR_parser_nodes__ANode___location].val = var; /* _location on <self:AIdAtid exact> */
+var1 = NULL;
+self->attrs[COLOR_parser_nodes__ANode___64dparent].val = var1; /* @parent on <self:AIdAtid exact> */
+var2 = NULL;
+self->attrs[COLOR_parser_nodes__Prod___n_annotations].val = var2; /* _n_annotations on <self:AIdAtid exact> */
+return self;
+}
+/* allocate AIdAtid */
+void CHECK_NEW_parser_nodes__AIdAtid(val* self) {
+val* var /* : nullable Location */;
+val* var1 /* : Token */;
+var = self->attrs[COLOR_parser__Prod___first_location].val; /* _first_location on <self:AIdAtid> */
+var1 = self->attrs[COLOR_parser_nodes__AAtid___n_id].val; /* _n_id on <self:AIdAtid> */
+if (var1 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_id");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1698);
+exit(1);
+}
+}
+/* runtime class parser_nodes__AKwexternAtid */
+/* allocate AKwexternAtid */
+val* NEW_parser_nodes__AKwexternAtid(const struct type* type) {
+fprintf(stderr, "Runtime error: %s", "AKwexternAtid is DEAD");
+fprintf(stderr, "\n");
+exit(1);
+}
+/* allocate AKwexternAtid */
+void CHECK_NEW_parser_nodes__AKwexternAtid(val* self) {
+fprintf(stderr, "Runtime error: %s", "AKwexternAtid is DEAD");
+fprintf(stderr, "\n");
+exit(1);
+}
+/* runtime class parser_nodes__AKwinternAtid */
+/* allocate AKwinternAtid */
+val* NEW_parser_nodes__AKwinternAtid(const struct type* type) {
+fprintf(stderr, "Runtime error: %s", "AKwinternAtid is DEAD");
+fprintf(stderr, "\n");
+exit(1);
+}
+/* allocate AKwinternAtid */
+void CHECK_NEW_parser_nodes__AKwinternAtid(val* self) {
+fprintf(stderr, "Runtime error: %s", "AKwinternAtid is DEAD");
+fprintf(stderr, "\n");
+exit(1);
+}
+/* runtime class parser_nodes__AKwreadableAtid */
+const struct class class_parser_nodes__AKwreadableAtid = {
+0, /* box_kind */
+{
+(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:AKwreadableAtid:kernel#Object#object_id */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:AKwreadableAtid:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:AKwreadableAtid:kernel#Object#is_same_instance */
+(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:AKwreadableAtid:kernel#Object#== */
+(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:AKwreadableAtid:kernel#Object#!= */
+(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:AKwreadableAtid:kernel#Object#output */
+(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to parser_nodes:AKwreadableAtid:kernel#Object#output_class_name */
+(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to parser_nodes:AKwreadableAtid:kernel#Object#exit */
+(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to parser_nodes:AKwreadableAtid:kernel#Object#sys */
+(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to parser_nodes:AKwreadableAtid:kernel#Object#hash */
+(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to parser_nodes:AKwreadableAtid:string#Object#to_s */
+(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to parser_nodes:AKwreadableAtid:string#Object#native_class_name */
+(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to parser_nodes:AKwreadableAtid:string#Object#class_name */
+(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to parser_nodes:AKwreadableAtid:string#Object#inspect */
+(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to parser_nodes:AKwreadableAtid:string#Object#inspect_head */
+(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to parser_nodes:AKwreadableAtid:string#Object#args */
+(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to parser_nodes:AKwreadableAtid:math#Object#atan2 */
+(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to parser_nodes:AKwreadableAtid:math#Object#pi */
+(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to parser_nodes:AKwreadableAtid:math#Object#srand_from */
+(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to parser_nodes:AKwreadableAtid:math#Object#srand */
+(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to parser_nodes:AKwreadableAtid:stream#Object#poll */
+(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to parser_nodes:AKwreadableAtid:stream#Object#intern_poll */
+(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to parser_nodes:AKwreadableAtid:time#Object#get_time */
+(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to parser_nodes:AKwreadableAtid:file#Object#printn */
+(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to parser_nodes:AKwreadableAtid:file#Object#print */
+(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to parser_nodes:AKwreadableAtid:file#Object#getc */
+(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to parser_nodes:AKwreadableAtid:file#Object#gets */
+(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to parser_nodes:AKwreadableAtid:file#Object#getcwd */
+(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to parser_nodes:AKwreadableAtid:file#Object#file_getcwd */
+(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to parser_nodes:AKwreadableAtid:file#Object#stdin */
+(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to parser_nodes:AKwreadableAtid:file#Object#stdout */
+(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to parser_nodes:AKwreadableAtid:file#Object#stderr */
+(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to parser_nodes:AKwreadableAtid:model_base#Object#intrude_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to parser_nodes:AKwreadableAtid:model_base#Object#public_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to parser_nodes:AKwreadableAtid:model_base#Object#protected_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to parser_nodes:AKwreadableAtid:model_base#Object#private_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to parser_nodes:AKwreadableAtid:model_base#Object#none_visibility */
+(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to parser_nodes:AKwreadableAtid:model#Object#abstract_kind */
+(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to parser_nodes:AKwreadableAtid:model#Object#concrete_kind */
+(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to parser_nodes:AKwreadableAtid:model#Object#interface_kind */
+(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to parser_nodes:AKwreadableAtid:model#Object#enum_kind */
+(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to parser_nodes:AKwreadableAtid:model#Object#extern_kind */
+(nitmethod_t)VIRTUAL_parser_nodes__ANode__location, /* pointer to parser_nodes:AKwreadableAtid:parser_nodes#ANode#location */
+(nitmethod_t)VIRTUAL_parser_nodes__ANode__hot_location, /* pointer to parser_nodes:AKwreadableAtid:parser_nodes#ANode#hot_location */
+(nitmethod_t)VIRTUAL_parser_nodes__ANode__debug, /* pointer to parser_nodes:AKwreadableAtid:parser_nodes#ANode#debug */
+(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent, /* pointer to parser_nodes:AKwreadableAtid:parser_nodes#ANode#parent */
+(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent_61d, /* pointer to parser_nodes:AKwreadableAtid:parser_nodes#ANode#parent= */
+(nitmethod_t)VIRTUAL_parser_nodes__ANode__init, /* pointer to parser_nodes:AKwreadableAtid:parser_nodes#ANode#init */
+(nitmethod_t)VIRTUAL_parser_prod__AKwreadableAtid__replace_child, /* pointer to parser_nodes:AKwreadableAtid:parser_prod#AKwreadableAtid#replace_child */
+(nitmethod_t)VIRTUAL_parser_nodes__ANode__detach, /* pointer to parser_nodes:AKwreadableAtid:parser_nodes#ANode#detach */
+(nitmethod_t)VIRTUAL_parser_nodes__Prod__replace_with, /* pointer to parser_nodes:AKwreadableAtid:parser_nodes#Prod#replace_with */
+(nitmethod_t)VIRTUAL_parser_prod__AKwreadableAtid__visit_all, /* pointer to parser_nodes:AKwreadableAtid:parser_prod#AKwreadableAtid#visit_all */
+(nitmethod_t)VIRTUAL_parser_util__ANode__collect_tokens_by_text, /* pointer to parser_nodes:AKwreadableAtid:parser_util#ANode#collect_tokens_by_text */
+(nitmethod_t)VIRTUAL_parser_util__ANode__collect_annotations_by_name, /* pointer to parser_nodes:AKwreadableAtid:parser_util#ANode#collect_annotations_by_name */
+(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__accept_simple_misc, /* pointer to parser_nodes:AKwreadableAtid:simple_misc_analysis#ANode#accept_simple_misc */
+(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__after_simple_misc, /* pointer to parser_nodes:AKwreadableAtid:simple_misc_analysis#ANode#after_simple_misc */
+(nitmethod_t)VIRTUAL_literal__ANode__accept_literal, /* pointer to parser_nodes:AKwreadableAtid:literal#ANode#accept_literal */
+(nitmethod_t)VIRTUAL_scope__ANode__accept_scope_visitor, /* pointer to parser_nodes:AKwreadableAtid:scope#ANode#accept_scope_visitor */
+(nitmethod_t)VIRTUAL_flow__ANode__accept_flow_visitor, /* pointer to parser_nodes:AKwreadableAtid:flow#ANode#accept_flow_visitor */
+(nitmethod_t)VIRTUAL_local_var_init__ANode__accept_local_var_visitor, /* pointer to parser_nodes:AKwreadableAtid:local_var_init#ANode#accept_local_var_visitor */
+(nitmethod_t)VIRTUAL_auto_super_init__ANode__accept_auto_super_init, /* pointer to parser_nodes:AKwreadableAtid:auto_super_init#ANode#accept_auto_super_init */
+(nitmethod_t)VIRTUAL_rapid_type_analysis__ANode__accept_rapid_type_visitor, /* pointer to parser_nodes:AKwreadableAtid:rapid_type_analysis#ANode#accept_rapid_type_visitor */
+(nitmethod_t)VIRTUAL_astvalidation__ANode__accept_ast_validation, /* pointer to parser_nodes:AKwreadableAtid:astvalidation#ANode#accept_ast_validation */
+(nitmethod_t)VIRTUAL_transform__ANode__accept_transform_visitor, /* pointer to parser_nodes:AKwreadableAtid:transform#ANode#accept_transform_visitor */
+(nitmethod_t)VIRTUAL_parser_nodes__Prod__location_61d, /* pointer to parser_nodes:AKwreadableAtid:parser_nodes#Prod#location= */
+(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations, /* pointer to parser_nodes:AKwreadableAtid:parser_nodes#Prod#n_annotations */
+(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations_61d, /* pointer to parser_nodes:AKwreadableAtid:parser_nodes#Prod#n_annotations= */
+(nitmethod_t)VIRTUAL_parser_nodes__Prod__init, /* pointer to parser_nodes:AKwreadableAtid:parser_nodes#Prod#init */
+(nitmethod_t)VIRTUAL_modelize_property__Prod__collect_text, /* pointer to parser_nodes:AKwreadableAtid:modelize_property#Prod#collect_text */
+(nitmethod_t)VIRTUAL_parser_nodes__ANode__replace_with, /* pointer to parser_nodes:AKwreadableAtid:parser_nodes#ANode#replace_with */
+(nitmethod_t)VIRTUAL_parser_nodes__AAtid__n_id, /* pointer to parser_nodes:AKwreadableAtid:parser_nodes#AAtid#n_id */
+(nitmethod_t)VIRTUAL_parser_prod__AKwreadableAtid__n_id_61d, /* pointer to parser_nodes:AKwreadableAtid:parser_prod#AKwreadableAtid#n_id= */
+(nitmethod_t)VIRTUAL_parser_nodes__AAtid__init, /* pointer to parser_nodes:AKwreadableAtid:parser_nodes#AAtid#init */
+(nitmethod_t)VIRTUAL_parser_nodes__AKwreadableAtid__init, /* pointer to parser_nodes:AKwreadableAtid:parser_nodes#AKwreadableAtid#init */
+(nitmethod_t)VIRTUAL_parser_prod__AKwreadableAtid__empty_init, /* pointer to parser_nodes:AKwreadableAtid:parser_prod#AKwreadableAtid#empty_init */
+(nitmethod_t)VIRTUAL_parser_prod__AKwreadableAtid__init_akwreadableatid, /* pointer to parser_nodes:AKwreadableAtid:parser_prod#AKwreadableAtid#init_akwreadableatid */
+}
+};
+/* allocate AKwreadableAtid */
+val* NEW_parser_nodes__AKwreadableAtid(const struct type* type) {
+val* self /* : AKwreadableAtid */;
+val* var /* : null */;
+val* var1 /* : null */;
+val* var2 /* : null */;
+self = nit_alloc(sizeof(struct instance) + 5*sizeof(nitattribute_t));
+self->type = type;
+self->class = &class_parser_nodes__AKwreadableAtid;
+var = NULL;
+self->attrs[COLOR_parser_nodes__ANode___location].val = var; /* _location on <self:AKwreadableAtid exact> */
+var1 = NULL;
+self->attrs[COLOR_parser_nodes__ANode___64dparent].val = var1; /* @parent on <self:AKwreadableAtid exact> */
+var2 = NULL;
+self->attrs[COLOR_parser_nodes__Prod___n_annotations].val = var2; /* _n_annotations on <self:AKwreadableAtid exact> */
+return self;
+}
+/* allocate AKwreadableAtid */
+void CHECK_NEW_parser_nodes__AKwreadableAtid(val* self) {
+val* var /* : nullable Location */;
+val* var1 /* : Token */;
+var = self->attrs[COLOR_parser__Prod___first_location].val; /* _first_location on <self:AKwreadableAtid> */
+var1 = self->attrs[COLOR_parser_nodes__AAtid___n_id].val; /* _n_id on <self:AKwreadableAtid> */
+if (var1 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_id");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1698);
+exit(1);
+}
+}
+/* runtime class parser_nodes__AKwwritableAtid */
+const struct class class_parser_nodes__AKwwritableAtid = {
+0, /* box_kind */
+{
+(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:AKwwritableAtid:kernel#Object#object_id */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:AKwwritableAtid:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:AKwwritableAtid:kernel#Object#is_same_instance */
+(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:AKwwritableAtid:kernel#Object#== */
+(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:AKwwritableAtid:kernel#Object#!= */
+(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:AKwwritableAtid:kernel#Object#output */
+(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to parser_nodes:AKwwritableAtid:kernel#Object#output_class_name */
+(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to parser_nodes:AKwwritableAtid:kernel#Object#exit */
+(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to parser_nodes:AKwwritableAtid:kernel#Object#sys */
+(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to parser_nodes:AKwwritableAtid:kernel#Object#hash */
+(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to parser_nodes:AKwwritableAtid:string#Object#to_s */
+(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to parser_nodes:AKwwritableAtid:string#Object#native_class_name */
+(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to parser_nodes:AKwwritableAtid:string#Object#class_name */
+(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to parser_nodes:AKwwritableAtid:string#Object#inspect */
+(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to parser_nodes:AKwwritableAtid:string#Object#inspect_head */
+(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to parser_nodes:AKwwritableAtid:string#Object#args */
+(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to parser_nodes:AKwwritableAtid:math#Object#atan2 */
+(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to parser_nodes:AKwwritableAtid:math#Object#pi */
+(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to parser_nodes:AKwwritableAtid:math#Object#srand_from */
+(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to parser_nodes:AKwwritableAtid:math#Object#srand */
+(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to parser_nodes:AKwwritableAtid:stream#Object#poll */
+(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to parser_nodes:AKwwritableAtid:stream#Object#intern_poll */
+(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to parser_nodes:AKwwritableAtid:time#Object#get_time */
+(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to parser_nodes:AKwwritableAtid:file#Object#printn */
+(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to parser_nodes:AKwwritableAtid:file#Object#print */
+(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to parser_nodes:AKwwritableAtid:file#Object#getc */
+(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to parser_nodes:AKwwritableAtid:file#Object#gets */
+(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to parser_nodes:AKwwritableAtid:file#Object#getcwd */
+(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to parser_nodes:AKwwritableAtid:file#Object#file_getcwd */
+(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to parser_nodes:AKwwritableAtid:file#Object#stdin */
+(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to parser_nodes:AKwwritableAtid:file#Object#stdout */
+(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to parser_nodes:AKwwritableAtid:file#Object#stderr */
+(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to parser_nodes:AKwwritableAtid:model_base#Object#intrude_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to parser_nodes:AKwwritableAtid:model_base#Object#public_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to parser_nodes:AKwwritableAtid:model_base#Object#protected_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to parser_nodes:AKwwritableAtid:model_base#Object#private_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to parser_nodes:AKwwritableAtid:model_base#Object#none_visibility */
+(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to parser_nodes:AKwwritableAtid:model#Object#abstract_kind */
+(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to parser_nodes:AKwwritableAtid:model#Object#concrete_kind */
+(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to parser_nodes:AKwwritableAtid:model#Object#interface_kind */
+(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to parser_nodes:AKwwritableAtid:model#Object#enum_kind */
+(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to parser_nodes:AKwwritableAtid:model#Object#extern_kind */
+(nitmethod_t)VIRTUAL_parser_nodes__ANode__location, /* pointer to parser_nodes:AKwwritableAtid:parser_nodes#ANode#location */
+(nitmethod_t)VIRTUAL_parser_nodes__ANode__hot_location, /* pointer to parser_nodes:AKwwritableAtid:parser_nodes#ANode#hot_location */
+(nitmethod_t)VIRTUAL_parser_nodes__ANode__debug, /* pointer to parser_nodes:AKwwritableAtid:parser_nodes#ANode#debug */
+(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent, /* pointer to parser_nodes:AKwwritableAtid:parser_nodes#ANode#parent */
+(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent_61d, /* pointer to parser_nodes:AKwwritableAtid:parser_nodes#ANode#parent= */
+(nitmethod_t)VIRTUAL_parser_nodes__ANode__init, /* pointer to parser_nodes:AKwwritableAtid:parser_nodes#ANode#init */
+(nitmethod_t)VIRTUAL_parser_prod__AKwwritableAtid__replace_child, /* pointer to parser_nodes:AKwwritableAtid:parser_prod#AKwwritableAtid#replace_child */
+(nitmethod_t)VIRTUAL_parser_nodes__ANode__detach, /* pointer to parser_nodes:AKwwritableAtid:parser_nodes#ANode#detach */
+(nitmethod_t)VIRTUAL_parser_nodes__Prod__replace_with, /* pointer to parser_nodes:AKwwritableAtid:parser_nodes#Prod#replace_with */
+(nitmethod_t)VIRTUAL_parser_prod__AKwwritableAtid__visit_all, /* pointer to parser_nodes:AKwwritableAtid:parser_prod#AKwwritableAtid#visit_all */
+(nitmethod_t)VIRTUAL_parser_util__ANode__collect_tokens_by_text, /* pointer to parser_nodes:AKwwritableAtid:parser_util#ANode#collect_tokens_by_text */
+(nitmethod_t)VIRTUAL_parser_util__ANode__collect_annotations_by_name, /* pointer to parser_nodes:AKwwritableAtid:parser_util#ANode#collect_annotations_by_name */
+(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__accept_simple_misc, /* pointer to parser_nodes:AKwwritableAtid:simple_misc_analysis#ANode#accept_simple_misc */
+(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__after_simple_misc, /* pointer to parser_nodes:AKwwritableAtid:simple_misc_analysis#ANode#after_simple_misc */
+(nitmethod_t)VIRTUAL_literal__ANode__accept_literal, /* pointer to parser_nodes:AKwwritableAtid:literal#ANode#accept_literal */
+(nitmethod_t)VIRTUAL_scope__ANode__accept_scope_visitor, /* pointer to parser_nodes:AKwwritableAtid:scope#ANode#accept_scope_visitor */
+(nitmethod_t)VIRTUAL_flow__ANode__accept_flow_visitor, /* pointer to parser_nodes:AKwwritableAtid:flow#ANode#accept_flow_visitor */
+(nitmethod_t)VIRTUAL_local_var_init__ANode__accept_local_var_visitor, /* pointer to parser_nodes:AKwwritableAtid:local_var_init#ANode#accept_local_var_visitor */
+(nitmethod_t)VIRTUAL_auto_super_init__ANode__accept_auto_super_init, /* pointer to parser_nodes:AKwwritableAtid:auto_super_init#ANode#accept_auto_super_init */
+(nitmethod_t)VIRTUAL_rapid_type_analysis__ANode__accept_rapid_type_visitor, /* pointer to parser_nodes:AKwwritableAtid:rapid_type_analysis#ANode#accept_rapid_type_visitor */
+(nitmethod_t)VIRTUAL_astvalidation__ANode__accept_ast_validation, /* pointer to parser_nodes:AKwwritableAtid:astvalidation#ANode#accept_ast_validation */
+(nitmethod_t)VIRTUAL_transform__ANode__accept_transform_visitor, /* pointer to parser_nodes:AKwwritableAtid:transform#ANode#accept_transform_visitor */
+(nitmethod_t)VIRTUAL_parser_nodes__Prod__location_61d, /* pointer to parser_nodes:AKwwritableAtid:parser_nodes#Prod#location= */
+(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations, /* pointer to parser_nodes:AKwwritableAtid:parser_nodes#Prod#n_annotations */
+(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations_61d, /* pointer to parser_nodes:AKwwritableAtid:parser_nodes#Prod#n_annotations= */
+(nitmethod_t)VIRTUAL_parser_nodes__Prod__init, /* pointer to parser_nodes:AKwwritableAtid:parser_nodes#Prod#init */
+(nitmethod_t)VIRTUAL_modelize_property__Prod__collect_text, /* pointer to parser_nodes:AKwwritableAtid:modelize_property#Prod#collect_text */
+(nitmethod_t)VIRTUAL_parser_nodes__ANode__replace_with, /* pointer to parser_nodes:AKwwritableAtid:parser_nodes#ANode#replace_with */
+(nitmethod_t)VIRTUAL_parser_nodes__AAtid__n_id, /* pointer to parser_nodes:AKwwritableAtid:parser_nodes#AAtid#n_id */
+(nitmethod_t)VIRTUAL_parser_prod__AKwwritableAtid__n_id_61d, /* pointer to parser_nodes:AKwwritableAtid:parser_prod#AKwwritableAtid#n_id= */
+(nitmethod_t)VIRTUAL_parser_nodes__AAtid__init, /* pointer to parser_nodes:AKwwritableAtid:parser_nodes#AAtid#init */
+(nitmethod_t)VIRTUAL_parser_nodes__AKwwritableAtid__init, /* pointer to parser_nodes:AKwwritableAtid:parser_nodes#AKwwritableAtid#init */
+(nitmethod_t)VIRTUAL_parser_prod__AKwwritableAtid__empty_init, /* pointer to parser_nodes:AKwwritableAtid:parser_prod#AKwwritableAtid#empty_init */
+(nitmethod_t)VIRTUAL_parser_prod__AKwwritableAtid__init_akwwritableatid, /* pointer to parser_nodes:AKwwritableAtid:parser_prod#AKwwritableAtid#init_akwwritableatid */
+}
+};
+/* allocate AKwwritableAtid */
+val* NEW_parser_nodes__AKwwritableAtid(const struct type* type) {
+val* self /* : AKwwritableAtid */;
+val* var /* : null */;
+val* var1 /* : null */;
+val* var2 /* : null */;
+self = nit_alloc(sizeof(struct instance) + 5*sizeof(nitattribute_t));
+self->type = type;
+self->class = &class_parser_nodes__AKwwritableAtid;
+var = NULL;
+self->attrs[COLOR_parser_nodes__ANode___location].val = var; /* _location on <self:AKwwritableAtid exact> */
+var1 = NULL;
+self->attrs[COLOR_parser_nodes__ANode___64dparent].val = var1; /* @parent on <self:AKwwritableAtid exact> */
+var2 = NULL;
+self->attrs[COLOR_parser_nodes__Prod___n_annotations].val = var2; /* _n_annotations on <self:AKwwritableAtid exact> */
+return self;
+}
+/* allocate AKwwritableAtid */
+void CHECK_NEW_parser_nodes__AKwwritableAtid(val* self) {
+val* var /* : nullable Location */;
+val* var1 /* : Token */;
+var = self->attrs[COLOR_parser__Prod___first_location].val; /* _first_location on <self:AKwwritableAtid> */
+var1 = self->attrs[COLOR_parser_nodes__AAtid___n_id].val; /* _n_id on <self:AKwwritableAtid> */
+if (var1 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_id");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1698);
+exit(1);
+}
+}
+/* runtime class parser_nodes__AKwimportAtid */
+const struct class class_parser_nodes__AKwimportAtid = {
+0, /* box_kind */
+{
+(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:AKwimportAtid:kernel#Object#object_id */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:AKwimportAtid:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:AKwimportAtid:kernel#Object#is_same_instance */
+(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:AKwimportAtid:kernel#Object#== */
+(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:AKwimportAtid:kernel#Object#!= */
+(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:AKwimportAtid:kernel#Object#output */
+(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to parser_nodes:AKwimportAtid:kernel#Object#output_class_name */
+(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to parser_nodes:AKwimportAtid:kernel#Object#exit */
+(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to parser_nodes:AKwimportAtid:kernel#Object#sys */
+(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to parser_nodes:AKwimportAtid:kernel#Object#hash */
+(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to parser_nodes:AKwimportAtid:string#Object#to_s */
+(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to parser_nodes:AKwimportAtid:string#Object#native_class_name */
+(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to parser_nodes:AKwimportAtid:string#Object#class_name */
+(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to parser_nodes:AKwimportAtid:string#Object#inspect */
+(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to parser_nodes:AKwimportAtid:string#Object#inspect_head */
+(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to parser_nodes:AKwimportAtid:string#Object#args */
+(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to parser_nodes:AKwimportAtid:math#Object#atan2 */
+(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to parser_nodes:AKwimportAtid:math#Object#pi */
+(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to parser_nodes:AKwimportAtid:math#Object#srand_from */
+(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to parser_nodes:AKwimportAtid:math#Object#srand */
+(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to parser_nodes:AKwimportAtid:stream#Object#poll */
+(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to parser_nodes:AKwimportAtid:stream#Object#intern_poll */
+(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to parser_nodes:AKwimportAtid:time#Object#get_time */
+(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to parser_nodes:AKwimportAtid:file#Object#printn */
+(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to parser_nodes:AKwimportAtid:file#Object#print */
+(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to parser_nodes:AKwimportAtid:file#Object#getc */
+(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to parser_nodes:AKwimportAtid:file#Object#gets */
+(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to parser_nodes:AKwimportAtid:file#Object#getcwd */
+(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to parser_nodes:AKwimportAtid:file#Object#file_getcwd */
+(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to parser_nodes:AKwimportAtid:file#Object#stdin */
+(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to parser_nodes:AKwimportAtid:file#Object#stdout */
+(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to parser_nodes:AKwimportAtid:file#Object#stderr */
+(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to parser_nodes:AKwimportAtid:model_base#Object#intrude_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to parser_nodes:AKwimportAtid:model_base#Object#public_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to parser_nodes:AKwimportAtid:model_base#Object#protected_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to parser_nodes:AKwimportAtid:model_base#Object#private_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to parser_nodes:AKwimportAtid:model_base#Object#none_visibility */
+(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to parser_nodes:AKwimportAtid:model#Object#abstract_kind */
+(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to parser_nodes:AKwimportAtid:model#Object#concrete_kind */
+(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to parser_nodes:AKwimportAtid:model#Object#interface_kind */
+(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to parser_nodes:AKwimportAtid:model#Object#enum_kind */
+(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to parser_nodes:AKwimportAtid:model#Object#extern_kind */
+(nitmethod_t)VIRTUAL_parser_nodes__ANode__location, /* pointer to parser_nodes:AKwimportAtid:parser_nodes#ANode#location */
+(nitmethod_t)VIRTUAL_parser_nodes__ANode__hot_location, /* pointer to parser_nodes:AKwimportAtid:parser_nodes#ANode#hot_location */
+(nitmethod_t)VIRTUAL_parser_nodes__ANode__debug, /* pointer to parser_nodes:AKwimportAtid:parser_nodes#ANode#debug */
+(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent, /* pointer to parser_nodes:AKwimportAtid:parser_nodes#ANode#parent */
+(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent_61d, /* pointer to parser_nodes:AKwimportAtid:parser_nodes#ANode#parent= */
+(nitmethod_t)VIRTUAL_parser_nodes__ANode__init, /* pointer to parser_nodes:AKwimportAtid:parser_nodes#ANode#init */
+(nitmethod_t)VIRTUAL_parser_prod__AKwimportAtid__replace_child, /* pointer to parser_nodes:AKwimportAtid:parser_prod#AKwimportAtid#replace_child */
+(nitmethod_t)VIRTUAL_parser_nodes__ANode__detach, /* pointer to parser_nodes:AKwimportAtid:parser_nodes#ANode#detach */
+(nitmethod_t)VIRTUAL_parser_nodes__Prod__replace_with, /* pointer to parser_nodes:AKwimportAtid:parser_nodes#Prod#replace_with */
+(nitmethod_t)VIRTUAL_parser_prod__AKwimportAtid__visit_all, /* pointer to parser_nodes:AKwimportAtid:parser_prod#AKwimportAtid#visit_all */
+(nitmethod_t)VIRTUAL_parser_util__ANode__collect_tokens_by_text, /* pointer to parser_nodes:AKwimportAtid:parser_util#ANode#collect_tokens_by_text */
+(nitmethod_t)VIRTUAL_parser_util__ANode__collect_annotations_by_name, /* pointer to parser_nodes:AKwimportAtid:parser_util#ANode#collect_annotations_by_name */
+(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__accept_simple_misc, /* pointer to parser_nodes:AKwimportAtid:simple_misc_analysis#ANode#accept_simple_misc */
+(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__after_simple_misc, /* pointer to parser_nodes:AKwimportAtid:simple_misc_analysis#ANode#after_simple_misc */
+(nitmethod_t)VIRTUAL_literal__ANode__accept_literal, /* pointer to parser_nodes:AKwimportAtid:literal#ANode#accept_literal */
+(nitmethod_t)VIRTUAL_scope__ANode__accept_scope_visitor, /* pointer to parser_nodes:AKwimportAtid:scope#ANode#accept_scope_visitor */
+(nitmethod_t)VIRTUAL_flow__ANode__accept_flow_visitor, /* pointer to parser_nodes:AKwimportAtid:flow#ANode#accept_flow_visitor */
+(nitmethod_t)VIRTUAL_local_var_init__ANode__accept_local_var_visitor, /* pointer to parser_nodes:AKwimportAtid:local_var_init#ANode#accept_local_var_visitor */
+(nitmethod_t)VIRTUAL_auto_super_init__ANode__accept_auto_super_init, /* pointer to parser_nodes:AKwimportAtid:auto_super_init#ANode#accept_auto_super_init */
+(nitmethod_t)VIRTUAL_rapid_type_analysis__ANode__accept_rapid_type_visitor, /* pointer to parser_nodes:AKwimportAtid:rapid_type_analysis#ANode#accept_rapid_type_visitor */
+(nitmethod_t)VIRTUAL_astvalidation__ANode__accept_ast_validation, /* pointer to parser_nodes:AKwimportAtid:astvalidation#ANode#accept_ast_validation */
+(nitmethod_t)VIRTUAL_transform__ANode__accept_transform_visitor, /* pointer to parser_nodes:AKwimportAtid:transform#ANode#accept_transform_visitor */
+(nitmethod_t)VIRTUAL_parser_nodes__Prod__location_61d, /* pointer to parser_nodes:AKwimportAtid:parser_nodes#Prod#location= */
+(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations, /* pointer to parser_nodes:AKwimportAtid:parser_nodes#Prod#n_annotations */
+(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations_61d, /* pointer to parser_nodes:AKwimportAtid:parser_nodes#Prod#n_annotations= */
+(nitmethod_t)VIRTUAL_parser_nodes__Prod__init, /* pointer to parser_nodes:AKwimportAtid:parser_nodes#Prod#init */
+(nitmethod_t)VIRTUAL_modelize_property__Prod__collect_text, /* pointer to parser_nodes:AKwimportAtid:modelize_property#Prod#collect_text */
+(nitmethod_t)VIRTUAL_parser_nodes__ANode__replace_with, /* pointer to parser_nodes:AKwimportAtid:parser_nodes#ANode#replace_with */
+(nitmethod_t)VIRTUAL_parser_nodes__AAtid__n_id, /* pointer to parser_nodes:AKwimportAtid:parser_nodes#AAtid#n_id */
+(nitmethod_t)VIRTUAL_parser_prod__AKwimportAtid__n_id_61d, /* pointer to parser_nodes:AKwimportAtid:parser_prod#AKwimportAtid#n_id= */
+(nitmethod_t)VIRTUAL_parser_nodes__AAtid__init, /* pointer to parser_nodes:AKwimportAtid:parser_nodes#AAtid#init */
+(nitmethod_t)VIRTUAL_parser_nodes__AKwimportAtid__init, /* pointer to parser_nodes:AKwimportAtid:parser_nodes#AKwimportAtid#init */
+(nitmethod_t)VIRTUAL_parser_prod__AKwimportAtid__empty_init, /* pointer to parser_nodes:AKwimportAtid:parser_prod#AKwimportAtid#empty_init */
+(nitmethod_t)VIRTUAL_parser_prod__AKwimportAtid__init_akwimportatid, /* pointer to parser_nodes:AKwimportAtid:parser_prod#AKwimportAtid#init_akwimportatid */
+}
+};
+/* allocate AKwimportAtid */
+val* NEW_parser_nodes__AKwimportAtid(const struct type* type) {
+val* self /* : AKwimportAtid */;
+val* var /* : null */;
+val* var1 /* : null */;
+val* var2 /* : null */;
+self = nit_alloc(sizeof(struct instance) + 5*sizeof(nitattribute_t));
+self->type = type;
+self->class = &class_parser_nodes__AKwimportAtid;
+var = NULL;
+self->attrs[COLOR_parser_nodes__ANode___location].val = var; /* _location on <self:AKwimportAtid exact> */
+var1 = NULL;
+self->attrs[COLOR_parser_nodes__ANode___64dparent].val = var1; /* @parent on <self:AKwimportAtid exact> */
+var2 = NULL;
+self->attrs[COLOR_parser_nodes__Prod___n_annotations].val = var2; /* _n_annotations on <self:AKwimportAtid exact> */
+return self;
+}
+/* allocate AKwimportAtid */
+void CHECK_NEW_parser_nodes__AKwimportAtid(val* self) {
+val* var /* : nullable Location */;
+val* var1 /* : Token */;
+var = self->attrs[COLOR_parser__Prod___first_location].val; /* _first_location on <self:AKwimportAtid> */
+var1 = self->attrs[COLOR_parser_nodes__AAtid___n_id].val; /* _n_id on <self:AKwimportAtid> */
+if (var1 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_id");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1698);
+exit(1);
+}
+}
+/* runtime class parser_nodes__Start */
+const struct class class_parser_nodes__Start = {
+0, /* box_kind */
+{
+(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser_nodes:Start:kernel#Object#object_id */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser_nodes:Start:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser_nodes:Start:kernel#Object#is_same_instance */
+(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser_nodes:Start:kernel#Object#== */
+(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser_nodes:Start:kernel#Object#!= */
+(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser_nodes:Start:kernel#Object#output */
+(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to parser_nodes:Start:kernel#Object#output_class_name */
+(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to parser_nodes:Start:kernel#Object#exit */
+(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to parser_nodes:Start:kernel#Object#sys */
+(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to parser_nodes:Start:kernel#Object#hash */
+(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to parser_nodes:Start:string#Object#to_s */
+(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to parser_nodes:Start:string#Object#native_class_name */
+(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to parser_nodes:Start:string#Object#class_name */
+(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to parser_nodes:Start:string#Object#inspect */
+(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to parser_nodes:Start:string#Object#inspect_head */
+(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to parser_nodes:Start:string#Object#args */
+(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to parser_nodes:Start:math#Object#atan2 */
+(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to parser_nodes:Start:math#Object#pi */
+(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to parser_nodes:Start:math#Object#srand_from */
+(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to parser_nodes:Start:math#Object#srand */
+(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to parser_nodes:Start:stream#Object#poll */
+(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to parser_nodes:Start:stream#Object#intern_poll */
+(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to parser_nodes:Start:time#Object#get_time */
+(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to parser_nodes:Start:file#Object#printn */
+(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to parser_nodes:Start:file#Object#print */
+(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to parser_nodes:Start:file#Object#getc */
+(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to parser_nodes:Start:file#Object#gets */
+(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to parser_nodes:Start:file#Object#getcwd */
+(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to parser_nodes:Start:file#Object#file_getcwd */
+(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to parser_nodes:Start:file#Object#stdin */
+(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to parser_nodes:Start:file#Object#stdout */
+(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to parser_nodes:Start:file#Object#stderr */
+(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to parser_nodes:Start:model_base#Object#intrude_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to parser_nodes:Start:model_base#Object#public_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to parser_nodes:Start:model_base#Object#protected_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to parser_nodes:Start:model_base#Object#private_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to parser_nodes:Start:model_base#Object#none_visibility */
+(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to parser_nodes:Start:model#Object#abstract_kind */
+(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to parser_nodes:Start:model#Object#concrete_kind */
+(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to parser_nodes:Start:model#Object#interface_kind */
+(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to parser_nodes:Start:model#Object#enum_kind */
+(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to parser_nodes:Start:model#Object#extern_kind */
+(nitmethod_t)VIRTUAL_parser_nodes__ANode__location, /* pointer to parser_nodes:Start:parser_nodes#ANode#location */
+(nitmethod_t)VIRTUAL_parser_nodes__ANode__hot_location, /* pointer to parser_nodes:Start:parser_nodes#ANode#hot_location */
+(nitmethod_t)VIRTUAL_parser_nodes__ANode__debug, /* pointer to parser_nodes:Start:parser_nodes#ANode#debug */
+(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent, /* pointer to parser_nodes:Start:parser_nodes#ANode#parent */
+(nitmethod_t)VIRTUAL_parser_nodes__ANode__parent_61d, /* pointer to parser_nodes:Start:parser_nodes#ANode#parent= */
+(nitmethod_t)VIRTUAL_parser_nodes__ANode__init, /* pointer to parser_nodes:Start:parser_nodes#ANode#init */
+(nitmethod_t)VIRTUAL_parser_prod__Start__replace_child, /* pointer to parser_nodes:Start:parser_prod#Start#replace_child */
+(nitmethod_t)VIRTUAL_parser_nodes__ANode__detach, /* pointer to parser_nodes:Start:parser_nodes#ANode#detach */
+(nitmethod_t)VIRTUAL_parser_nodes__Prod__replace_with, /* pointer to parser_nodes:Start:parser_nodes#Prod#replace_with */
+(nitmethod_t)VIRTUAL_parser_prod__Start__visit_all, /* pointer to parser_nodes:Start:parser_prod#Start#visit_all */
+(nitmethod_t)VIRTUAL_parser_util__ANode__collect_tokens_by_text, /* pointer to parser_nodes:Start:parser_util#ANode#collect_tokens_by_text */
+(nitmethod_t)VIRTUAL_parser_util__ANode__collect_annotations_by_name, /* pointer to parser_nodes:Start:parser_util#ANode#collect_annotations_by_name */
+(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__accept_simple_misc, /* pointer to parser_nodes:Start:simple_misc_analysis#ANode#accept_simple_misc */
+(nitmethod_t)VIRTUAL_simple_misc_analysis__ANode__after_simple_misc, /* pointer to parser_nodes:Start:simple_misc_analysis#ANode#after_simple_misc */
+(nitmethod_t)VIRTUAL_literal__ANode__accept_literal, /* pointer to parser_nodes:Start:literal#ANode#accept_literal */
+(nitmethod_t)VIRTUAL_scope__ANode__accept_scope_visitor, /* pointer to parser_nodes:Start:scope#ANode#accept_scope_visitor */
+(nitmethod_t)VIRTUAL_flow__ANode__accept_flow_visitor, /* pointer to parser_nodes:Start:flow#ANode#accept_flow_visitor */
+(nitmethod_t)VIRTUAL_local_var_init__ANode__accept_local_var_visitor, /* pointer to parser_nodes:Start:local_var_init#ANode#accept_local_var_visitor */
+(nitmethod_t)VIRTUAL_auto_super_init__ANode__accept_auto_super_init, /* pointer to parser_nodes:Start:auto_super_init#ANode#accept_auto_super_init */
+(nitmethod_t)VIRTUAL_rapid_type_analysis__ANode__accept_rapid_type_visitor, /* pointer to parser_nodes:Start:rapid_type_analysis#ANode#accept_rapid_type_visitor */
+(nitmethod_t)VIRTUAL_astvalidation__ANode__accept_ast_validation, /* pointer to parser_nodes:Start:astvalidation#ANode#accept_ast_validation */
+(nitmethod_t)VIRTUAL_transform__ANode__accept_transform_visitor, /* pointer to parser_nodes:Start:transform#ANode#accept_transform_visitor */
+(nitmethod_t)VIRTUAL_parser_nodes__Prod__location_61d, /* pointer to parser_nodes:Start:parser_nodes#Prod#location= */
+(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations, /* pointer to parser_nodes:Start:parser_nodes#Prod#n_annotations */
+(nitmethod_t)VIRTUAL_parser_nodes__Prod__n_annotations_61d, /* pointer to parser_nodes:Start:parser_nodes#Prod#n_annotations= */
+(nitmethod_t)VIRTUAL_parser_nodes__Prod__init, /* pointer to parser_nodes:Start:parser_nodes#Prod#init */
+(nitmethod_t)VIRTUAL_modelize_property__Prod__collect_text, /* pointer to parser_nodes:Start:modelize_property#Prod#collect_text */
+(nitmethod_t)VIRTUAL_parser_nodes__ANode__replace_with, /* pointer to parser_nodes:Start:parser_nodes#ANode#replace_with */
+(nitmethod_t)VIRTUAL_parser_nodes__Start__n_base, /* pointer to parser_nodes:Start:parser_nodes#Start#n_base */
+(nitmethod_t)VIRTUAL_parser_nodes__Start__n_base_61d, /* pointer to parser_nodes:Start:parser_nodes#Start#n_base= */
+(nitmethod_t)VIRTUAL_parser_nodes__Start__n_eof, /* pointer to parser_nodes:Start:parser_nodes#Start#n_eof */
+(nitmethod_t)VIRTUAL_parser_nodes__Start__n_eof_61d, /* pointer to parser_nodes:Start:parser_nodes#Start#n_eof= */
+(nitmethod_t)VIRTUAL_parser_nodes__Start__init, /* pointer to parser_nodes:Start:parser_nodes#Start#init */
+}
+};
+/* allocate Start */
+val* NEW_parser_nodes__Start(const struct type* type) {
+val* self /* : Start */;
+val* var /* : null */;
+val* var1 /* : null */;
+val* var2 /* : null */;
+self = nit_alloc(sizeof(struct instance) + 6*sizeof(nitattribute_t));
+self->type = type;
+self->class = &class_parser_nodes__Start;
+var = NULL;
+self->attrs[COLOR_parser_nodes__ANode___location].val = var; /* _location on <self:Start exact> */
+var1 = NULL;
+self->attrs[COLOR_parser_nodes__ANode___64dparent].val = var1; /* @parent on <self:Start exact> */
+var2 = NULL;
+self->attrs[COLOR_parser_nodes__Prod___n_annotations].val = var2; /* _n_annotations on <self:Start exact> */
+return self;
+}
+/* allocate Start */
+void CHECK_NEW_parser_nodes__Start(val* self) {
+val* var /* : nullable Location */;
+val* var1 /* : nullable AModule */;
+val* var2 /* : EOF */;
+var = self->attrs[COLOR_parser__Prod___first_location].val; /* _first_location on <self:Start> */
+var1 = self->attrs[COLOR_parser_nodes__Start___n_base].val; /* _n_base on <self:Start> */
+var2 = self->attrs[COLOR_parser_nodes__Start___n_eof].val; /* _n_eof on <self:Start> */
+if (var2 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_eof");
+fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 1723);
+exit(1);
+}
+}
+/* runtime class location__SourceFile */
+const struct class class_location__SourceFile = {
+0, /* box_kind */
+{
+(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to location:SourceFile:kernel#Object#object_id */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to location:SourceFile:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to location:SourceFile:kernel#Object#is_same_instance */
+(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to location:SourceFile:kernel#Object#== */
+(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to location:SourceFile:kernel#Object#!= */
+(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to location:SourceFile:kernel#Object#output */
+(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to location:SourceFile:kernel#Object#output_class_name */
+(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to location:SourceFile:kernel#Object#exit */
+(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to location:SourceFile:kernel#Object#sys */
+(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to location:SourceFile:kernel#Object#hash */
+(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to location:SourceFile:string#Object#to_s */
+(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to location:SourceFile:string#Object#native_class_name */
+(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to location:SourceFile:string#Object#class_name */
+(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to location:SourceFile:string#Object#inspect */
+(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to location:SourceFile:string#Object#inspect_head */
+(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to location:SourceFile:string#Object#args */
+(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to location:SourceFile:math#Object#atan2 */
+(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to location:SourceFile:math#Object#pi */
+(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to location:SourceFile:math#Object#srand_from */
+(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to location:SourceFile:math#Object#srand */
+(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to location:SourceFile:stream#Object#poll */
+(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to location:SourceFile:stream#Object#intern_poll */
+(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to location:SourceFile:time#Object#get_time */
+(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to location:SourceFile:file#Object#printn */
+(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to location:SourceFile:file#Object#print */
+(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to location:SourceFile:file#Object#getc */
+(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to location:SourceFile:file#Object#gets */
+(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to location:SourceFile:file#Object#getcwd */
+(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to location:SourceFile:file#Object#file_getcwd */
+(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to location:SourceFile:file#Object#stdin */
+(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to location:SourceFile:file#Object#stdout */
+(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to location:SourceFile:file#Object#stderr */
+(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to location:SourceFile:model_base#Object#intrude_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to location:SourceFile:model_base#Object#public_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to location:SourceFile:model_base#Object#protected_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to location:SourceFile:model_base#Object#private_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to location:SourceFile:model_base#Object#none_visibility */
+(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to location:SourceFile:model#Object#abstract_kind */
+(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to location:SourceFile:model#Object#concrete_kind */
+(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to location:SourceFile:model#Object#interface_kind */
+(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to location:SourceFile:model#Object#enum_kind */
+(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to location:SourceFile:model#Object#extern_kind */
+(nitmethod_t)VIRTUAL_location__SourceFile__filename, /* pointer to location:SourceFile:location#SourceFile#filename */
+(nitmethod_t)VIRTUAL_location__SourceFile__filename_61d, /* pointer to location:SourceFile:location#SourceFile#filename= */
+(nitmethod_t)VIRTUAL_location__SourceFile__string, /* pointer to location:SourceFile:location#SourceFile#string */
+(nitmethod_t)VIRTUAL_location__SourceFile__string_61d, /* pointer to location:SourceFile:location#SourceFile#string= */
+(nitmethod_t)VIRTUAL_location__SourceFile__init, /* pointer to location:SourceFile:location#SourceFile#init */
+(nitmethod_t)VIRTUAL_location__SourceFile__from_string, /* pointer to location:SourceFile:location#SourceFile#from_string */
+(nitmethod_t)VIRTUAL_location__SourceFile__line_starts, /* pointer to location:SourceFile:location#SourceFile#line_starts */
+(nitmethod_t)VIRTUAL_location__SourceFile__line_starts_61d, /* pointer to location:SourceFile:location#SourceFile#line_starts= */
+}
+};
+/* allocate SourceFile */
+val* NEW_location__SourceFile(const struct type* type) {
+val* self /* : SourceFile */;
+val* var /* : Array[Int] */;
+self = nit_alloc(sizeof(struct instance) + 3*sizeof(nitattribute_t));
+self->type = type;
+self->class = &class_location__SourceFile;
+var = NEW_array__Array(&type_array__Arraykernel__Int);
+((void (*)(val*))(var->class->vft[COLOR_array__Array__init]))(var) /* init on <var:Array[Int]>*/;
+CHECK_NEW_array__Array(var);
+self->attrs[COLOR_location__SourceFile___64dline_starts].val = var; /* @line_starts on <self:SourceFile exact> */
+return self;
+}
+/* allocate SourceFile */
+void CHECK_NEW_location__SourceFile(val* self) {
+val* var /* : String */;
+val* var1 /* : String */;
+var = self->attrs[COLOR_location__SourceFile___64dfilename].val; /* @filename on <self:SourceFile> */
+if (var == NULL) {
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @filename");
+fprintf(stderr, " (%s:%d)\n", "src/location.nit", 22);
+exit(1);
+}
+var1 = self->attrs[COLOR_location__SourceFile___64dstring].val; /* @string on <self:SourceFile> */
+if (var1 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @string");
+fprintf(stderr, " (%s:%d)\n", "src/location.nit", 25);
+exit(1);
+}
+}
+/* runtime class location__Location */
+const struct class class_location__Location = {
+0, /* box_kind */
+{
+(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to location:Location:kernel#Object#object_id */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to location:Location:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to location:Location:kernel#Object#is_same_instance */
+(nitmethod_t)VIRTUAL_location__Location___61d_61d, /* pointer to location:Location:location#Location#== */
+(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to location:Location:kernel#Object#!= */
+(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to location:Location:kernel#Object#output */
+(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to location:Location:kernel#Object#output_class_name */
+(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to location:Location:kernel#Object#exit */
+(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to location:Location:kernel#Object#sys */
+(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to location:Location:kernel#Object#hash */
+(nitmethod_t)VIRTUAL_location__Location__to_s, /* pointer to location:Location:location#Location#to_s */
+(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to location:Location:string#Object#native_class_name */
+(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to location:Location:string#Object#class_name */
+(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to location:Location:string#Object#inspect */
+(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to location:Location:string#Object#inspect_head */
+(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to location:Location:string#Object#args */
+(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to location:Location:math#Object#atan2 */
+(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to location:Location:math#Object#pi */
+(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to location:Location:math#Object#srand_from */
+(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to location:Location:math#Object#srand */
+(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to location:Location:stream#Object#poll */
+(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to location:Location:stream#Object#intern_poll */
+(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to location:Location:time#Object#get_time */
+(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to location:Location:file#Object#printn */
+(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to location:Location:file#Object#print */
+(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to location:Location:file#Object#getc */
+(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to location:Location:file#Object#gets */
+(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to location:Location:file#Object#getcwd */
+(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to location:Location:file#Object#file_getcwd */
+(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to location:Location:file#Object#stdin */
+(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to location:Location:file#Object#stdout */
+(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to location:Location:file#Object#stderr */
+(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to location:Location:model_base#Object#intrude_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to location:Location:model_base#Object#public_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to location:Location:model_base#Object#protected_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to location:Location:model_base#Object#private_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to location:Location:model_base#Object#none_visibility */
+(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to location:Location:model#Object#abstract_kind */
+(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to location:Location:model#Object#concrete_kind */
+(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to location:Location:model#Object#interface_kind */
+(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to location:Location:model#Object#enum_kind */
+(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to location:Location:model#Object#extern_kind */
+(nitmethod_t)VIRTUAL_location__Location___60d, /* pointer to location:Location:location#Location#< */
+(nitmethod_t)VIRTUAL_kernel__Comparable___60d_61d, /* pointer to location:Location:kernel#Comparable#<= */
+(nitmethod_t)VIRTUAL_kernel__Comparable___62d_61d, /* pointer to location:Location:kernel#Comparable#>= */
+(nitmethod_t)VIRTUAL_kernel__Comparable___62d, /* pointer to location:Location:kernel#Comparable#> */
+(nitmethod_t)VIRTUAL_kernel__Comparable___60d_61d_62d, /* pointer to location:Location:kernel#Comparable#<=> */
+(nitmethod_t)VIRTUAL_kernel__Comparable__is_between, /* pointer to location:Location:kernel#Comparable#is_between */
+(nitmethod_t)VIRTUAL_kernel__Comparable__max, /* pointer to location:Location:kernel#Comparable#max */
+(nitmethod_t)VIRTUAL_kernel__Comparable__min, /* pointer to location:Location:kernel#Comparable#min */
+(nitmethod_t)VIRTUAL_location__Location__file, /* pointer to location:Location:location#Location#file */
+(nitmethod_t)VIRTUAL_location__Location__file_61d, /* pointer to location:Location:location#Location#file= */
+(nitmethod_t)VIRTUAL_location__Location__line_start, /* pointer to location:Location:location#Location#line_start */
+(nitmethod_t)VIRTUAL_location__Location__line_start_61d, /* pointer to location:Location:location#Location#line_start= */
+(nitmethod_t)VIRTUAL_location__Location__line_end, /* pointer to location:Location:location#Location#line_end */
+(nitmethod_t)VIRTUAL_location__Location__line_end_61d, /* pointer to location:Location:location#Location#line_end= */
+(nitmethod_t)VIRTUAL_location__Location__column_start, /* pointer to location:Location:location#Location#column_start */
+(nitmethod_t)VIRTUAL_location__Location__column_start_61d, /* pointer to location:Location:location#Location#column_start= */
+(nitmethod_t)VIRTUAL_location__Location__column_end, /* pointer to location:Location:location#Location#column_end */
+(nitmethod_t)VIRTUAL_location__Location__column_end_61d, /* pointer to location:Location:location#Location#column_end= */
+(nitmethod_t)VIRTUAL_location__Location__init, /* pointer to location:Location:location#Location#init */
+(nitmethod_t)VIRTUAL_location__Location__pstart, /* pointer to location:Location:location#Location#pstart */
+(nitmethod_t)VIRTUAL_location__Location__pend, /* pointer to location:Location:location#Location#pend */
+(nitmethod_t)VIRTUAL_location__Location__text, /* pointer to location:Location:location#Location#text */
+(nitmethod_t)VIRTUAL_location__Location__text_cache, /* pointer to location:Location:location#Location#text_cache */
+(nitmethod_t)VIRTUAL_location__Location__text_cache_61d, /* pointer to location:Location:location#Location#text_cache= */
+(nitmethod_t)VIRTUAL_location__Location__with_file, /* pointer to location:Location:location#Location#with_file */
+(nitmethod_t)VIRTUAL_location__Location__located_in, /* pointer to location:Location:location#Location#located_in */
+(nitmethod_t)VIRTUAL_location__Location__relative_to, /* pointer to location:Location:location#Location#relative_to */
+(nitmethod_t)VIRTUAL_location__Location__colored_line, /* pointer to location:Location:location#Location#colored_line */
+}
+};
+/* allocate Location */
+val* NEW_location__Location(const struct type* type) {
+val* self /* : Location */;
+self = nit_alloc(sizeof(struct instance) + 6*sizeof(nitattribute_t));
+self->type = type;
+self->class = &class_location__Location;
+return self;
+}
+/* allocate Location */
+void CHECK_NEW_location__Location(val* self) {
+val* var /* : nullable SourceFile */;
+long var1 /* : Int */;
+long var2 /* : Int */;
+long var3 /* : Int */;
+long var4 /* : Int */;
+val* var5 /* : nullable String */;
+var = self->attrs[COLOR_location__Location___64dfile].val; /* @file on <self:Location> */
+var1 = self->attrs[COLOR_location__Location___64dline_start].l; /* @line_start on <self:Location> */
+var2 = self->attrs[COLOR_location__Location___64dline_end].l; /* @line_end on <self:Location> */
+var3 = self->attrs[COLOR_location__Location___64dcolumn_start].l; /* @column_start on <self:Location> */
+var4 = self->attrs[COLOR_location__Location___64dcolumn_end].l; /* @column_end on <self:Location> */
+var5 = self->attrs[COLOR_location__Location___64dtext_cache].val; /* @text_cache on <self:Location> */
+}
+/* runtime class posix__Passwd */
+const struct class class_posix__Passwd = {
+6, /* box_kind */
+{
+(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to posix:Passwd:kernel#Object#object_id */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to posix:Passwd:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to posix:Passwd:kernel#Object#is_same_instance */
+(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to posix:Passwd:kernel#Object#== */
+(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to posix:Passwd:kernel#Object#!= */
+(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to posix:Passwd:kernel#Object#output */
+(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to posix:Passwd:kernel#Object#output_class_name */
+(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to posix:Passwd:kernel#Object#exit */
+(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to posix:Passwd:kernel#Object#sys */
+(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to posix:Passwd:kernel#Object#hash */
+(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to posix:Passwd:string#Object#to_s */
+(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to posix:Passwd:string#Object#native_class_name */
+(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to posix:Passwd:string#Object#class_name */
+(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to posix:Passwd:string#Object#inspect */
+(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to posix:Passwd:string#Object#inspect_head */
+(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to posix:Passwd:string#Object#args */
+(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to posix:Passwd:math#Object#atan2 */
+(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to posix:Passwd:math#Object#pi */
+(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to posix:Passwd:math#Object#srand_from */
+(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to posix:Passwd:math#Object#srand */
+(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to posix:Passwd:stream#Object#poll */
+(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to posix:Passwd:stream#Object#intern_poll */
+(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to posix:Passwd:time#Object#get_time */
+(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to posix:Passwd:file#Object#printn */
+(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to posix:Passwd:file#Object#print */
+(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to posix:Passwd:file#Object#getc */
+(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to posix:Passwd:file#Object#gets */
+(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to posix:Passwd:file#Object#getcwd */
+(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to posix:Passwd:file#Object#file_getcwd */
+(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to posix:Passwd:file#Object#stdin */
+(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to posix:Passwd:file#Object#stdout */
+(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to posix:Passwd:file#Object#stderr */
+(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to posix:Passwd:model_base#Object#intrude_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to posix:Passwd:model_base#Object#public_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to posix:Passwd:model_base#Object#protected_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to posix:Passwd:model_base#Object#private_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to posix:Passwd:model_base#Object#none_visibility */
+(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to posix:Passwd:model#Object#abstract_kind */
+(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to posix:Passwd:model#Object#concrete_kind */
+(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to posix:Passwd:model#Object#interface_kind */
+(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to posix:Passwd:model#Object#enum_kind */
+(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to posix:Passwd:model#Object#extern_kind */
+(nitmethod_t)VIRTUAL_kernel__Pointer__address_is_null, /* pointer to posix:Passwd:kernel#Pointer#address_is_null */
+(nitmethod_t)VIRTUAL_posix__Passwd__from_uid, /* pointer to posix:Passwd:posix#Passwd#from_uid */
+(nitmethod_t)VIRTUAL_posix__Passwd__from_name, /* pointer to posix:Passwd:posix#Passwd#from_name */
+(nitmethod_t)VIRTUAL_posix__Passwd__name, /* pointer to posix:Passwd:posix#Passwd#name */
+(nitmethod_t)VIRTUAL_posix__Passwd__passwd, /* pointer to posix:Passwd:posix#Passwd#passwd */
+(nitmethod_t)VIRTUAL_posix__Passwd__uid, /* pointer to posix:Passwd:posix#Passwd#uid */
+(nitmethod_t)VIRTUAL_posix__Passwd__gid, /* pointer to posix:Passwd:posix#Passwd#gid */
+(nitmethod_t)VIRTUAL_posix__Passwd__gecos, /* pointer to posix:Passwd:posix#Passwd#gecos */
+(nitmethod_t)VIRTUAL_posix__Passwd__dir, /* pointer to posix:Passwd:posix#Passwd#dir */
+(nitmethod_t)VIRTUAL_posix__Passwd__shell, /* pointer to posix:Passwd:posix#Passwd#shell */
+}
+};
+/* runtime class posix__Group */
+const struct class class_posix__Group = {
+6, /* box_kind */
+{
+(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to posix:Group:kernel#Object#object_id */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to posix:Group:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to posix:Group:kernel#Object#is_same_instance */
+(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to posix:Group:kernel#Object#== */
+(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to posix:Group:kernel#Object#!= */
+(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to posix:Group:kernel#Object#output */
+(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to posix:Group:kernel#Object#output_class_name */
+(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to posix:Group:kernel#Object#exit */
+(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to posix:Group:kernel#Object#sys */
+(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to posix:Group:kernel#Object#hash */
+(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to posix:Group:string#Object#to_s */
+(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to posix:Group:string#Object#native_class_name */
+(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to posix:Group:string#Object#class_name */
+(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to posix:Group:string#Object#inspect */
+(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to posix:Group:string#Object#inspect_head */
+(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to posix:Group:string#Object#args */
+(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to posix:Group:math#Object#atan2 */
+(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to posix:Group:math#Object#pi */
+(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to posix:Group:math#Object#srand_from */
+(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to posix:Group:math#Object#srand */
+(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to posix:Group:stream#Object#poll */
+(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to posix:Group:stream#Object#intern_poll */
+(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to posix:Group:time#Object#get_time */
+(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to posix:Group:file#Object#printn */
+(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to posix:Group:file#Object#print */
+(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to posix:Group:file#Object#getc */
+(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to posix:Group:file#Object#gets */
+(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to posix:Group:file#Object#getcwd */
+(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to posix:Group:file#Object#file_getcwd */
+(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to posix:Group:file#Object#stdin */
+(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to posix:Group:file#Object#stdout */
+(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to posix:Group:file#Object#stderr */
+(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to posix:Group:model_base#Object#intrude_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to posix:Group:model_base#Object#public_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to posix:Group:model_base#Object#protected_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to posix:Group:model_base#Object#private_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to posix:Group:model_base#Object#none_visibility */
+(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to posix:Group:model#Object#abstract_kind */
+(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to posix:Group:model#Object#concrete_kind */
+(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to posix:Group:model#Object#interface_kind */
+(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to posix:Group:model#Object#enum_kind */
+(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to posix:Group:model#Object#extern_kind */
+(nitmethod_t)VIRTUAL_kernel__Pointer__address_is_null, /* pointer to posix:Group:kernel#Pointer#address_is_null */
+(nitmethod_t)VIRTUAL_posix__Group__from_gid, /* pointer to posix:Group:posix#Group#from_gid */
+(nitmethod_t)VIRTUAL_posix__Group__from_name, /* pointer to posix:Group:posix#Group#from_name */
+(nitmethod_t)VIRTUAL_posix__Group__name, /* pointer to posix:Group:posix#Group#name */
+(nitmethod_t)VIRTUAL_posix__Group__passwd, /* pointer to posix:Group:posix#Group#passwd */
+(nitmethod_t)VIRTUAL_posix__Group__gid, /* pointer to posix:Group:posix#Group#gid */
+(nitmethod_t)VIRTUAL_posix__Group__mem, /* pointer to posix:Group:posix#Group#mem */
+}
+};
+/* runtime class string__String */
+const struct class class_string__String = {
+0, /* box_kind */
+{
+(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to string:String:kernel#Object#object_id */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to string:String:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to string:String:kernel#Object#is_same_instance */
+(nitmethod_t)VIRTUAL_ropes__String___61d_61d, /* pointer to string:String:ropes#String#== */
+(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to string:String:kernel#Object#!= */
+(nitmethod_t)VIRTUAL_string__String__output, /* pointer to string:String:string#String#output */
+(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to string:String:kernel#Object#output_class_name */
+(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to string:String:kernel#Object#exit */
+(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to string:String:kernel#Object#sys */
+(nitmethod_t)VIRTUAL_string__String__hash, /* pointer to string:String:string#String#hash */
+(nitmethod_t)VIRTUAL_string__String__to_s, /* pointer to string:String:string#String#to_s */
+(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to string:String:string#Object#native_class_name */
+(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to string:String:string#Object#class_name */
+(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to string:String:string#Object#inspect */
+(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to string:String:string#Object#inspect_head */
+(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to string:String:string#Object#args */
+(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to string:String:math#Object#atan2 */
+(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to string:String:math#Object#pi */
+(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to string:String:math#Object#srand_from */
+(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to string:String:math#Object#srand */
+(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to string:String:stream#Object#poll */
+(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to string:String:stream#Object#intern_poll */
+(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to string:String:time#Object#get_time */
+(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to string:String:file#Object#printn */
+(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to string:String:file#Object#print */
+(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to string:String:file#Object#getc */
+(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to string:String:file#Object#gets */
+(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to string:String:file#Object#getcwd */
+(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to string:String:file#Object#file_getcwd */
+(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to string:String:file#Object#stdin */
+(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to string:String:file#Object#stdout */
+(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to string:String:file#Object#stderr */
+(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to string:String:model_base#Object#intrude_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to string:String:model_base#Object#public_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to string:String:model_base#Object#protected_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to string:String:model_base#Object#private_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to string:String:model_base#Object#none_visibility */
+(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to string:String:model#Object#abstract_kind */
+(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to string:String:model#Object#concrete_kind */
+(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to string:String:model#Object#interface_kind */
+(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to string:String:model#Object#enum_kind */
+(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to string:String:model#Object#extern_kind */
+(nitmethod_t)VIRTUAL_string__String___60d, /* pointer to string:String:string#String#< */
+(nitmethod_t)VIRTUAL_kernel__Comparable___60d_61d, /* pointer to string:String:kernel#Comparable#<= */
+(nitmethod_t)VIRTUAL_kernel__Comparable___62d_61d, /* pointer to string:String:kernel#Comparable#>= */
+(nitmethod_t)VIRTUAL_kernel__Comparable___62d, /* pointer to string:String:kernel#Comparable#> */
+(nitmethod_t)VIRTUAL_kernel__Comparable___60d_61d_62d, /* pointer to string:String:kernel#Comparable#<=> */
+(nitmethod_t)VIRTUAL_kernel__Comparable__is_between, /* pointer to string:String:kernel#Comparable#is_between */
+(nitmethod_t)VIRTUAL_kernel__Comparable__max, /* pointer to string:String:kernel#Comparable#max */
+(nitmethod_t)VIRTUAL_kernel__Comparable__min, /* pointer to string:String:kernel#Comparable#min */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+(nitmethod_t)VIRTUAL_string_search__String__search_index_in, /* pointer to string:String:string_search#String#search_index_in */
+(nitmethod_t)VIRTUAL_string_search__String__search_in, /* pointer to string:String:string_search#String#search_in */
+(nitmethod_t)VIRTUAL_string_search__Pattern__search_all_in, /* pointer to string:String:string_search#Pattern#search_all_in */
+(nitmethod_t)VIRTUAL_string_search__Pattern__split_in, /* pointer to string:String:string_search#Pattern#split_in */
+(nitmethod_t)VIRTUAL_array__AbstractArrayRead__iterator, /* pointer to string:String:array#AbstractArrayRead#iterator */
+(nitmethod_t)VIRTUAL_array__AbstractArrayRead__is_empty, /* pointer to string:String:array#AbstractArrayRead#is_empty */
+(nitmethod_t)VIRTUAL_array__AbstractArrayRead__length, /* pointer to string:String:array#AbstractArrayRead#length */
+(nitmethod_t)VIRTUAL_array__AbstractArrayRead__has, /* pointer to string:String:array#AbstractArrayRead#has */
+(nitmethod_t)VIRTUAL_array__AbstractArrayRead__has_only, /* pointer to string:String:array#AbstractArrayRead#has_only */
+(nitmethod_t)VIRTUAL_array__AbstractArrayRead__count, /* pointer to string:String:array#AbstractArrayRead#count */
+(nitmethod_t)VIRTUAL_abstract_collection__SequenceRead__first, /* pointer to string:String:abstract_collection#SequenceRead#first */
+(nitmethod_t)VIRTUAL_abstract_collection__Collection__has_all, /* pointer to string:String:abstract_collection#Collection#has_all */
+(nitmethod_t)VIRTUAL_array__Collection__to_a, /* pointer to string:String:array#Collection#to_a */
+(nitmethod_t)VIRTUAL_string__Collection__join, /* pointer to string:String:string#Collection#join */
+(nitmethod_t)VIRTUAL_math__Collection__rand, /* pointer to string:String:math#Collection#rand */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+(nitmethod_t)VIRTUAL_string__String___91d_93d, /* pointer to string:String:string#String#[] */
+(nitmethod_t)VIRTUAL_abstract_collection__SequenceRead__last, /* pointer to string:String:abstract_collection#SequenceRead#last */
+(nitmethod_t)VIRTUAL_array__AbstractArrayRead__index_of, /* pointer to string:String:array#AbstractArrayRead#index_of */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+(nitmethod_t)VIRTUAL_array__AbstractArrayRead__last_index_of, /* pointer to string:String:array#AbstractArrayRead#last_index_of */
+(nitmethod_t)VIRTUAL_array__AbstractArrayRead__index_of_from, /* pointer to string:String:array#AbstractArrayRead#index_of_from */
+(nitmethod_t)VIRTUAL_array__AbstractArrayRead__last_index_of_from, /* pointer to string:String:array#AbstractArrayRead#last_index_of_from */
+(nitmethod_t)VIRTUAL_array__AbstractArrayRead__reversed, /* pointer to string:String:array#AbstractArrayRead#reversed */
+(nitmethod_t)VIRTUAL_array__AbstractArrayRead__copy_to, /* pointer to string:String:array#AbstractArrayRead#copy_to */
+(nitmethod_t)VIRTUAL_array__AbstractArrayRead__init, /* pointer to string:String:array#AbstractArrayRead#init */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+(nitmethod_t)VIRTUAL_string__AbstractString__items, /* pointer to string:String:string#AbstractString#items */
+(nitmethod_t)VIRTUAL_string__String__substring, /* pointer to string:String:string#String#substring */
+(nitmethod_t)VIRTUAL_string__String__substring_from, /* pointer to string:String:string#String#substring_from */
+(nitmethod_t)VIRTUAL_string__String__has_substring, /* pointer to string:String:string#String#has_substring */
+(nitmethod_t)VIRTUAL_string__AbstractString__has_prefix, /* pointer to string:String:string#AbstractString#has_prefix */
+(nitmethod_t)VIRTUAL_string__AbstractString__has_suffix, /* pointer to string:String:string#AbstractString#has_suffix */
+(nitmethod_t)VIRTUAL_string__AbstractString__to_i, /* pointer to string:String:string#AbstractString#to_i */
+(nitmethod_t)VIRTUAL_string__AbstractString__to_f, /* pointer to string:String:string#AbstractString#to_f */
+(nitmethod_t)VIRTUAL_string__AbstractString__to_hex, /* pointer to string:String:string#AbstractString#to_hex */
+(nitmethod_t)VIRTUAL_string__AbstractString__a_to, /* pointer to string:String:string#AbstractString#a_to */
+(nitmethod_t)VIRTUAL_string__AbstractString__is_numeric, /* pointer to string:String:string#AbstractString#is_numeric */
+(nitmethod_t)VIRTUAL_string__String__to_upper, /* pointer to string:String:string#String#to_upper */
+(nitmethod_t)VIRTUAL_string__String__to_lower, /* pointer to string:String:string#String#to_lower */
+(nitmethod_t)VIRTUAL_string__String__trim, /* pointer to string:String:string#String#trim */
+(nitmethod_t)VIRTUAL_string__AbstractString__to_cmangle, /* pointer to string:String:string#AbstractString#to_cmangle */
+(nitmethod_t)VIRTUAL_string__AbstractString__escape_to_c, /* pointer to string:String:string#AbstractString#escape_to_c */
+(nitmethod_t)VIRTUAL_string__AbstractString__escape_more_to_c, /* pointer to string:String:string#AbstractString#escape_more_to_c */
+(nitmethod_t)VIRTUAL_string__AbstractString__escape_to_nit, /* pointer to string:String:string#AbstractString#escape_to_nit */
+(nitmethod_t)VIRTUAL_string__AbstractString__unescape_nit, /* pointer to string:String:string#AbstractString#unescape_nit */
+(nitmethod_t)VIRTUAL_string__AbstractString__init, /* pointer to string:String:string#AbstractString#init */
+(nitmethod_t)VIRTUAL_string__StringCapable__calloc_string, /* pointer to string:String:string#StringCapable#calloc_string */
+(nitmethod_t)VIRTUAL_string__String__index_from, /* pointer to string:String:string#String#index_from */
+(nitmethod_t)VIRTUAL_string__String__index_to, /* pointer to string:String:string#String#index_to */
+(nitmethod_t)VIRTUAL_string__String__from_substring, /* pointer to string:String:string#String#from_substring */
+(nitmethod_t)VIRTUAL_string__String__with_infos, /* pointer to string:String:string#String#with_infos */
+(nitmethod_t)VIRTUAL_string__String__to_cstring, /* pointer to string:String:string#String#to_cstring */
+(nitmethod_t)VIRTUAL_string__String___43d, /* pointer to string:String:string#String#+ */
+(nitmethod_t)VIRTUAL_string__String___42d, /* pointer to string:String:string#String#* */
+(nitmethod_t)VIRTUAL_string_search__String__search, /* pointer to string:String:string_search#String#search */
+(nitmethod_t)VIRTUAL_string_search__String__search_from, /* pointer to string:String:string_search#String#search_from */
+(nitmethod_t)VIRTUAL_string_search__String__search_all, /* pointer to string:String:string_search#String#search_all */
+(nitmethod_t)VIRTUAL_string_search__String__split, /* pointer to string:String:string_search#String#split */
+(nitmethod_t)VIRTUAL_string_search__String__split_with, /* pointer to string:String:string_search#String#split_with */
+(nitmethod_t)VIRTUAL_string_search__String__replace, /* pointer to string:String:string_search#String#replace */
+(nitmethod_t)VIRTUAL_string_search__String__html_escape, /* pointer to string:String:string_search#String#html_escape */
+(nitmethod_t)VIRTUAL_environ__String__environ, /* pointer to string:String:environ#String#environ */
+(nitmethod_t)VIRTUAL_environ__String__setenv, /* pointer to string:String:environ#String#setenv */
+(nitmethod_t)VIRTUAL_file__String__file_exists, /* pointer to string:String:file#String#file_exists */
+(nitmethod_t)VIRTUAL_file__String__file_stat, /* pointer to string:String:file#String#file_stat */
+(nitmethod_t)VIRTUAL_file__String__file_lstat, /* pointer to string:String:file#String#file_lstat */
+(nitmethod_t)VIRTUAL_file__String__file_delete, /* pointer to string:String:file#String#file_delete */
+(nitmethod_t)VIRTUAL_file__String__strip_extension, /* pointer to string:String:file#String#strip_extension */
+(nitmethod_t)VIRTUAL_file__String__basename, /* pointer to string:String:file#String#basename */
+(nitmethod_t)VIRTUAL_file__String__dirname, /* pointer to string:String:file#String#dirname */
+(nitmethod_t)VIRTUAL_file__String__simplify_path, /* pointer to string:String:file#String#simplify_path */
+(nitmethod_t)VIRTUAL_file__String__join_path, /* pointer to string:String:file#String#join_path */
+(nitmethod_t)VIRTUAL_file__String__mkdir, /* pointer to string:String:file#String#mkdir */
+(nitmethod_t)VIRTUAL_file__String__chdir, /* pointer to string:String:file#String#chdir */
+(nitmethod_t)VIRTUAL_file__String__file_extension, /* pointer to string:String:file#String#file_extension */
+(nitmethod_t)VIRTUAL_file__String__files, /* pointer to string:String:file#String#files */
+(nitmethod_t)VIRTUAL_string__String___61d_61d, /* pointer to string:String:string#String#== */
+}
+};
+/* allocate String */
+val* NEW_string__String(const struct type* type) {
+val* self /* : String */;
+long var /* : Int */;
+self = nit_alloc(sizeof(struct instance) + 4*sizeof(nitattribute_t));
+self->type = type;
+self->class = &class_string__String;
+var = 0;
+self->attrs[COLOR_array__AbstractArrayRead___length].l = var; /* _length on <self:String exact> */
+return self;
+}
+/* allocate String */
+void CHECK_NEW_string__String(val* self) {
+char* var /* : NativeString */;
+long var1 /* : Int */;
+long var2 /* : Int */;
+var = self->attrs[COLOR_string__AbstractString___items].str; /* _items on <self:String> */
+var1 = self->attrs[COLOR_string__String___index_from].l; /* _index_from on <self:String> */
+var2 = self->attrs[COLOR_string__String___index_to].l; /* _index_to on <self:String> */
+}
+/* runtime class string__Buffer */
+const struct class class_string__Buffer = {
+0, /* box_kind */
+{
+(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to string:Buffer:kernel#Object#object_id */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to string:Buffer:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to string:Buffer:kernel#Object#is_same_instance */
+(nitmethod_t)VIRTUAL_ropes__Buffer___61d_61d, /* pointer to string:Buffer:ropes#Buffer#== */
+(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to string:Buffer:kernel#Object#!= */
+(nitmethod_t)VIRTUAL_string__AbstractString__output, /* pointer to string:Buffer:string#AbstractString#output */
+(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to string:Buffer:kernel#Object#output_class_name */
+(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to string:Buffer:kernel#Object#exit */
+(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to string:Buffer:kernel#Object#sys */
+(nitmethod_t)VIRTUAL_abstract_collection__SequenceRead__hash, /* pointer to string:Buffer:abstract_collection#SequenceRead#hash */
+(nitmethod_t)VIRTUAL_string__Buffer__to_s, /* pointer to string:Buffer:string#Buffer#to_s */
+(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to string:Buffer:string#Object#native_class_name */
+(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to string:Buffer:string#Object#class_name */
+(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to string:Buffer:string#Object#inspect */
+(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to string:Buffer:string#Object#inspect_head */
+(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to string:Buffer:string#Object#args */
+(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to string:Buffer:math#Object#atan2 */
+(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to string:Buffer:math#Object#pi */
+(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to string:Buffer:math#Object#srand_from */
+(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to string:Buffer:math#Object#srand */
+(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to string:Buffer:stream#Object#poll */
+(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to string:Buffer:stream#Object#intern_poll */
+(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to string:Buffer:time#Object#get_time */
+(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to string:Buffer:file#Object#printn */
+(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to string:Buffer:file#Object#print */
+(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to string:Buffer:file#Object#getc */
+(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to string:Buffer:file#Object#gets */
+(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to string:Buffer:file#Object#getcwd */
+(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to string:Buffer:file#Object#file_getcwd */
+(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to string:Buffer:file#Object#stdin */
+(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to string:Buffer:file#Object#stdout */
+(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to string:Buffer:file#Object#stderr */
+(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to string:Buffer:model_base#Object#intrude_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to string:Buffer:model_base#Object#public_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to string:Buffer:model_base#Object#protected_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to string:Buffer:model_base#Object#private_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to string:Buffer:model_base#Object#none_visibility */
+(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to string:Buffer:model#Object#abstract_kind */
+(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to string:Buffer:model#Object#concrete_kind */
+(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to string:Buffer:model#Object#interface_kind */
+(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to string:Buffer:model#Object#enum_kind */
+(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to string:Buffer:model#Object#extern_kind */
+(nitmethod_t)VIRTUAL_string__Buffer___60d, /* pointer to string:Buffer:string#Buffer#< */
+(nitmethod_t)VIRTUAL_kernel__Comparable___60d_61d, /* pointer to string:Buffer:kernel#Comparable#<= */
+(nitmethod_t)VIRTUAL_kernel__Comparable___62d_61d, /* pointer to string:Buffer:kernel#Comparable#>= */
+(nitmethod_t)VIRTUAL_kernel__Comparable___62d, /* pointer to string:Buffer:kernel#Comparable#> */
+(nitmethod_t)VIRTUAL_kernel__Comparable___60d_61d_62d, /* pointer to string:Buffer:kernel#Comparable#<=> */
+(nitmethod_t)VIRTUAL_kernel__Comparable__is_between, /* pointer to string:Buffer:kernel#Comparable#is_between */
+(nitmethod_t)VIRTUAL_kernel__Comparable__max, /* pointer to string:Buffer:kernel#Comparable#max */
+(nitmethod_t)VIRTUAL_kernel__Comparable__min, /* pointer to string:Buffer:kernel#Comparable#min */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+(nitmethod_t)VIRTUAL_array__AbstractArrayRead__iterator, /* pointer to string:Buffer:array#AbstractArrayRead#iterator */
+(nitmethod_t)VIRTUAL_array__AbstractArrayRead__is_empty, /* pointer to string:Buffer:array#AbstractArrayRead#is_empty */
+(nitmethod_t)VIRTUAL_array__AbstractArrayRead__length, /* pointer to string:Buffer:array#AbstractArrayRead#length */
+(nitmethod_t)VIRTUAL_array__AbstractArrayRead__has, /* pointer to string:Buffer:array#AbstractArrayRead#has */
+(nitmethod_t)VIRTUAL_array__AbstractArrayRead__has_only, /* pointer to string:Buffer:array#AbstractArrayRead#has_only */
+(nitmethod_t)VIRTUAL_array__AbstractArrayRead__count, /* pointer to string:Buffer:array#AbstractArrayRead#count */
+(nitmethod_t)VIRTUAL_abstract_collection__SequenceRead__first, /* pointer to string:Buffer:abstract_collection#SequenceRead#first */
+(nitmethod_t)VIRTUAL_abstract_collection__Collection__has_all, /* pointer to string:Buffer:abstract_collection#Collection#has_all */
+(nitmethod_t)VIRTUAL_array__Collection__to_a, /* pointer to string:Buffer:array#Collection#to_a */
+(nitmethod_t)VIRTUAL_string__Collection__join, /* pointer to string:Buffer:string#Collection#join */
+(nitmethod_t)VIRTUAL_math__Collection__rand, /* pointer to string:Buffer:math#Collection#rand */
+(nitmethod_t)VIRTUAL_array__AbstractArray__clear, /* pointer to string:Buffer:array#AbstractArray#clear */
+(nitmethod_t)VIRTUAL_array__AbstractArray__remove, /* pointer to string:Buffer:array#AbstractArray#remove */
+(nitmethod_t)VIRTUAL_array__AbstractArray__remove_all, /* pointer to string:Buffer:array#AbstractArray#remove_all */
+(nitmethod_t)VIRTUAL_string__Buffer__add, /* pointer to string:Buffer:string#Buffer#add */
+(nitmethod_t)VIRTUAL_abstract_collection__SimpleCollection__add_all, /* pointer to string:Buffer:abstract_collection#SimpleCollection#add_all */
+(nitmethod_t)VIRTUAL_string__AbstractString___91d_93d, /* pointer to string:Buffer:string#AbstractString#[] */
+(nitmethod_t)VIRTUAL_abstract_collection__SequenceRead__last, /* pointer to string:Buffer:abstract_collection#SequenceRead#last */
+(nitmethod_t)VIRTUAL_array__AbstractArrayRead__index_of, /* pointer to string:Buffer:array#AbstractArrayRead#index_of */
+(nitmethod_t)VIRTUAL_abstract_collection__Sequence__first_61d, /* pointer to string:Buffer:abstract_collection#Sequence#first= */
+(nitmethod_t)VIRTUAL_abstract_collection__Sequence__last_61d, /* pointer to string:Buffer:abstract_collection#Sequence#last= */
+(nitmethod_t)VIRTUAL_array__AbstractArray__push, /* pointer to string:Buffer:array#AbstractArray#push */
+(nitmethod_t)VIRTUAL_string__Buffer__append, /* pointer to string:Buffer:string#Buffer#append */
+(nitmethod_t)VIRTUAL_array__AbstractArray__pop, /* pointer to string:Buffer:array#AbstractArray#pop */
+(nitmethod_t)VIRTUAL_array__AbstractArray__unshift, /* pointer to string:Buffer:array#AbstractArray#unshift */
+(nitmethod_t)VIRTUAL_array__AbstractArray__shift, /* pointer to string:Buffer:array#AbstractArray#shift */
+(nitmethod_t)VIRTUAL_string__Buffer___91d_93d_61d, /* pointer to string:Buffer:string#Buffer#[]= */
+(nitmethod_t)VIRTUAL_array__AbstractArray__remove_at, /* pointer to string:Buffer:array#AbstractArray#remove_at */
+(nitmethod_t)VIRTUAL_collection__Sequence__subarray, /* pointer to string:Buffer:collection#Sequence#subarray */
+(nitmethod_t)VIRTUAL_array__AbstractArrayRead__last_index_of, /* pointer to string:Buffer:array#AbstractArrayRead#last_index_of */
+(nitmethod_t)VIRTUAL_array__AbstractArrayRead__index_of_from, /* pointer to string:Buffer:array#AbstractArrayRead#index_of_from */
+(nitmethod_t)VIRTUAL_array__AbstractArrayRead__last_index_of_from, /* pointer to string:Buffer:array#AbstractArrayRead#last_index_of_from */
+(nitmethod_t)VIRTUAL_array__AbstractArrayRead__reversed, /* pointer to string:Buffer:array#AbstractArrayRead#reversed */
+(nitmethod_t)VIRTUAL_array__AbstractArrayRead__copy_to, /* pointer to string:Buffer:array#AbstractArrayRead#copy_to */
+(nitmethod_t)VIRTUAL_array__AbstractArrayRead__init, /* pointer to string:Buffer:array#AbstractArrayRead#init */
+(nitmethod_t)VIRTUAL_string__Buffer__enlarge, /* pointer to string:Buffer:string#Buffer#enlarge */
+(nitmethod_t)VIRTUAL_array__AbstractArray__insert, /* pointer to string:Buffer:array#AbstractArray#insert */
+(nitmethod_t)VIRTUAL_array__AbstractArray__swap_at, /* pointer to string:Buffer:array#AbstractArray#swap_at */
+(nitmethod_t)VIRTUAL_array__AbstractArray__init, /* pointer to string:Buffer:array#AbstractArray#init */
+(nitmethod_t)VIRTUAL_string__AbstractString__items, /* pointer to string:Buffer:string#AbstractString#items */
+(nitmethod_t)VIRTUAL_string__AbstractString__substring, /* pointer to string:Buffer:string#AbstractString#substring */
+(nitmethod_t)VIRTUAL_string__AbstractString__substring_from, /* pointer to string:Buffer:string#AbstractString#substring_from */
+(nitmethod_t)VIRTUAL_string__AbstractString__has_substring, /* pointer to string:Buffer:string#AbstractString#has_substring */
+(nitmethod_t)VIRTUAL_string__AbstractString__has_prefix, /* pointer to string:Buffer:string#AbstractString#has_prefix */
+(nitmethod_t)VIRTUAL_string__AbstractString__has_suffix, /* pointer to string:Buffer:string#AbstractString#has_suffix */
+(nitmethod_t)VIRTUAL_string__AbstractString__to_i, /* pointer to string:Buffer:string#AbstractString#to_i */
+(nitmethod_t)VIRTUAL_string__AbstractString__to_f, /* pointer to string:Buffer:string#AbstractString#to_f */
+(nitmethod_t)VIRTUAL_string__AbstractString__to_hex, /* pointer to string:Buffer:string#AbstractString#to_hex */
+(nitmethod_t)VIRTUAL_string__AbstractString__a_to, /* pointer to string:Buffer:string#AbstractString#a_to */
+(nitmethod_t)VIRTUAL_string__AbstractString__is_numeric, /* pointer to string:Buffer:string#AbstractString#is_numeric */
+(nitmethod_t)VIRTUAL_string__AbstractString__to_upper, /* pointer to string:Buffer:string#AbstractString#to_upper */
+(nitmethod_t)VIRTUAL_string__AbstractString__to_lower, /* pointer to string:Buffer:string#AbstractString#to_lower */
+(nitmethod_t)VIRTUAL_string__AbstractString__trim, /* pointer to string:Buffer:string#AbstractString#trim */
+(nitmethod_t)VIRTUAL_string__AbstractString__to_cmangle, /* pointer to string:Buffer:string#AbstractString#to_cmangle */
+(nitmethod_t)VIRTUAL_string__AbstractString__escape_to_c, /* pointer to string:Buffer:string#AbstractString#escape_to_c */
+(nitmethod_t)VIRTUAL_string__AbstractString__escape_more_to_c, /* pointer to string:Buffer:string#AbstractString#escape_more_to_c */
+(nitmethod_t)VIRTUAL_string__AbstractString__escape_to_nit, /* pointer to string:Buffer:string#AbstractString#escape_to_nit */
+(nitmethod_t)VIRTUAL_string__AbstractString__unescape_nit, /* pointer to string:Buffer:string#AbstractString#unescape_nit */
+(nitmethod_t)VIRTUAL_string__AbstractString__init, /* pointer to string:Buffer:string#AbstractString#init */
+(nitmethod_t)VIRTUAL_string__StringCapable__calloc_string, /* pointer to string:Buffer:string#StringCapable#calloc_string */
+(nitmethod_t)VIRTUAL_string__Buffer__init, /* pointer to string:Buffer:string#Buffer#init */
+(nitmethod_t)VIRTUAL_string__Buffer__from, /* pointer to string:Buffer:string#Buffer#from */
+(nitmethod_t)VIRTUAL_string__Buffer__with_capacity, /* pointer to string:Buffer:string#Buffer#with_capacity */
+(nitmethod_t)VIRTUAL_string__Buffer__capacity, /* pointer to string:Buffer:string#Buffer#capacity */
+(nitmethod_t)VIRTUAL_string__Buffer___61d_61d, /* pointer to string:Buffer:string#Buffer#== */
+(nitmethod_t)VIRTUAL_abstract_collection__Sequence__append, /* pointer to string:Buffer:abstract_collection#Sequence#append */
+}
+};
+/* allocate Buffer */
+val* NEW_string__Buffer(const struct type* type) {
+val* self /* : Buffer */;
+long var /* : Int */;
+self = nit_alloc(sizeof(struct instance) + 3*sizeof(nitattribute_t));
+self->type = type;
+self->class = &class_string__Buffer;
+var = 0;
+self->attrs[COLOR_array__AbstractArrayRead___length].l = var; /* _length on <self:Buffer exact> */
+return self;
+}
+/* allocate Buffer */
+void CHECK_NEW_string__Buffer(val* self) {
+char* var /* : NativeString */;
+long var1 /* : Int */;
+var = self->attrs[COLOR_string__AbstractString___items].str; /* _items on <self:Buffer> */
+var1 = self->attrs[COLOR_string__Buffer___capacity].l; /* _capacity on <self:Buffer> */
+}
+/* runtime class string__NativeString */
+const struct class class_string__NativeString = {
+5, /* box_kind */
+{
+(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to string:NativeString:kernel#Object#object_id */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to string:NativeString:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to string:NativeString:kernel#Object#is_same_instance */
+(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to string:NativeString:kernel#Object#== */
+(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to string:NativeString:kernel#Object#!= */
+(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to string:NativeString:kernel#Object#output */
+(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to string:NativeString:kernel#Object#output_class_name */
+(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to string:NativeString:kernel#Object#exit */
+(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to string:NativeString:kernel#Object#sys */
+(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to string:NativeString:kernel#Object#hash */
+(nitmethod_t)VIRTUAL_string__NativeString__to_s, /* pointer to string:NativeString:string#NativeString#to_s */
+(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to string:NativeString:string#Object#native_class_name */
+(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to string:NativeString:string#Object#class_name */
+(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to string:NativeString:string#Object#inspect */
+(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to string:NativeString:string#Object#inspect_head */
+(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to string:NativeString:string#Object#args */
+(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to string:NativeString:math#Object#atan2 */
+(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to string:NativeString:math#Object#pi */
+(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to string:NativeString:math#Object#srand_from */
+(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to string:NativeString:math#Object#srand */
+(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to string:NativeString:stream#Object#poll */
+(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to string:NativeString:stream#Object#intern_poll */
+(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to string:NativeString:time#Object#get_time */
+(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to string:NativeString:file#Object#printn */
+(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to string:NativeString:file#Object#print */
+(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to string:NativeString:file#Object#getc */
+(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to string:NativeString:file#Object#gets */
+(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to string:NativeString:file#Object#getcwd */
+(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to string:NativeString:file#Object#file_getcwd */
+(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to string:NativeString:file#Object#stdin */
+(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to string:NativeString:file#Object#stdout */
+(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to string:NativeString:file#Object#stderr */
+(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to string:NativeString:model_base#Object#intrude_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to string:NativeString:model_base#Object#public_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to string:NativeString:model_base#Object#protected_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to string:NativeString:model_base#Object#private_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to string:NativeString:model_base#Object#none_visibility */
+(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to string:NativeString:model#Object#abstract_kind */
+(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to string:NativeString:model#Object#concrete_kind */
+(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to string:NativeString:model#Object#interface_kind */
+(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to string:NativeString:model#Object#enum_kind */
+(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to string:NativeString:model#Object#extern_kind */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+(nitmethod_t)VIRTUAL_string__StringCapable__calloc_string, /* pointer to string:NativeString:string#StringCapable#calloc_string */
+(nitmethod_t)VIRTUAL_string__NativeString___91d_93d, /* pointer to string:NativeString:string#NativeString#[] */
+(nitmethod_t)VIRTUAL_string__NativeString___91d_93d_61d, /* pointer to string:NativeString:string#NativeString#[]= */
+(nitmethod_t)VIRTUAL_string__NativeString__copy_to, /* pointer to string:NativeString:string#NativeString#copy_to */
+(nitmethod_t)VIRTUAL_string__NativeString__cstring_length, /* pointer to string:NativeString:string#NativeString#cstring_length */
+(nitmethod_t)VIRTUAL_string__NativeString__atoi, /* pointer to string:NativeString:string#NativeString#atoi */
+(nitmethod_t)VIRTUAL_string__NativeString__atof, /* pointer to string:NativeString:string#NativeString#atof */
+(nitmethod_t)VIRTUAL_string__NativeString__to_s_with_length, /* pointer to string:NativeString:string#NativeString#to_s_with_length */
+(nitmethod_t)VIRTUAL_string__NativeString__to_s_with_copy, /* pointer to string:NativeString:string#NativeString#to_s_with_copy */
+(nitmethod_t)VIRTUAL_string__NativeString__init, /* pointer to string:NativeString:string#NativeString#init */
+(nitmethod_t)VIRTUAL_environ__NativeString__get_environ, /* pointer to string:NativeString:environ#NativeString#get_environ */
+(nitmethod_t)VIRTUAL_environ__NativeString__setenv, /* pointer to string:NativeString:environ#NativeString#setenv */
+(nitmethod_t)VIRTUAL_exec__NativeString__system, /* pointer to string:NativeString:exec#NativeString#system */
+(nitmethod_t)VIRTUAL_file__NativeString__file_exists, /* pointer to string:NativeString:file#NativeString#file_exists */
+(nitmethod_t)VIRTUAL_file__NativeString__file_stat, /* pointer to string:NativeString:file#NativeString#file_stat */
+(nitmethod_t)VIRTUAL_file__NativeString__file_lstat, /* pointer to string:NativeString:file#NativeString#file_lstat */
+(nitmethod_t)VIRTUAL_file__NativeString__file_mkdir, /* pointer to string:NativeString:file#NativeString#file_mkdir */
+(nitmethod_t)VIRTUAL_file__NativeString__file_delete, /* pointer to string:NativeString:file#NativeString#file_delete */
+(nitmethod_t)VIRTUAL_file__NativeString__file_chdir, /* pointer to string:NativeString:file#NativeString#file_chdir */
+}
+};
+/* allocate NativeString */
+val* BOX_string__NativeString(char* value) {
+struct instance_string__NativeString*res = nit_alloc(sizeof(struct instance_string__NativeString));
+res->type = &type_string__NativeString;
+res->class = &class_string__NativeString;
+res->value = value;
+return (val*)res;
+}
+/* runtime class abstract_collection__Container */
+/* allocate Container[nullable Object] */
+val* NEW_abstract_collection__Container(const struct type* type) {
+fprintf(stderr, "Runtime error: %s", "Container is DEAD");
+fprintf(stderr, "\n");
+exit(1);
+}
+/* allocate Container[nullable Object] */
+void CHECK_NEW_abstract_collection__Container(val* self) {
+fprintf(stderr, "Runtime error: %s", "Container is DEAD");
+fprintf(stderr, "\n");
+exit(1);
+}
+/* runtime class abstract_collection__ContainerIterator */
+const struct class class_abstract_collection__ContainerIterator = {
+0, /* box_kind */
+{
+(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to abstract_collection:ContainerIterator:kernel#Object#object_id */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to abstract_collection:ContainerIterator:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to abstract_collection:ContainerIterator:kernel#Object#is_same_instance */
+(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to abstract_collection:ContainerIterator:kernel#Object#== */
+(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to abstract_collection:ContainerIterator:kernel#Object#!= */
+(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to abstract_collection:ContainerIterator:kernel#Object#output */
+(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to abstract_collection:ContainerIterator:kernel#Object#output_class_name */
+(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to abstract_collection:ContainerIterator:kernel#Object#exit */
+(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to abstract_collection:ContainerIterator:kernel#Object#sys */
+(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to abstract_collection:ContainerIterator:kernel#Object#hash */
+(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to abstract_collection:ContainerIterator:string#Object#to_s */
+(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to abstract_collection:ContainerIterator:string#Object#native_class_name */
+(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to abstract_collection:ContainerIterator:string#Object#class_name */
+(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to abstract_collection:ContainerIterator:string#Object#inspect */
+(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to abstract_collection:ContainerIterator:string#Object#inspect_head */
+(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to abstract_collection:ContainerIterator:string#Object#args */
+(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to abstract_collection:ContainerIterator:math#Object#atan2 */
+(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to abstract_collection:ContainerIterator:math#Object#pi */
+(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to abstract_collection:ContainerIterator:math#Object#srand_from */
+(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to abstract_collection:ContainerIterator:math#Object#srand */
+(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to abstract_collection:ContainerIterator:stream#Object#poll */
+(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to abstract_collection:ContainerIterator:stream#Object#intern_poll */
+(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to abstract_collection:ContainerIterator:time#Object#get_time */
+(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to abstract_collection:ContainerIterator:file#Object#printn */
+(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to abstract_collection:ContainerIterator:file#Object#print */
+(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to abstract_collection:ContainerIterator:file#Object#getc */
+(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to abstract_collection:ContainerIterator:file#Object#gets */
+(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to abstract_collection:ContainerIterator:file#Object#getcwd */
+(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to abstract_collection:ContainerIterator:file#Object#file_getcwd */
+(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to abstract_collection:ContainerIterator:file#Object#stdin */
+(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to abstract_collection:ContainerIterator:file#Object#stdout */
+(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to abstract_collection:ContainerIterator:file#Object#stderr */
+(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to abstract_collection:ContainerIterator:model_base#Object#intrude_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to abstract_collection:ContainerIterator:model_base#Object#public_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to abstract_collection:ContainerIterator:model_base#Object#protected_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to abstract_collection:ContainerIterator:model_base#Object#private_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to abstract_collection:ContainerIterator:model_base#Object#none_visibility */
+(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to abstract_collection:ContainerIterator:model#Object#abstract_kind */
+(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to abstract_collection:ContainerIterator:model#Object#concrete_kind */
+(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to abstract_collection:ContainerIterator:model#Object#interface_kind */
+(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to abstract_collection:ContainerIterator:model#Object#enum_kind */
+(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to abstract_collection:ContainerIterator:model#Object#extern_kind */
+(nitmethod_t)VIRTUAL_abstract_collection__ContainerIterator__item, /* pointer to abstract_collection:ContainerIterator:abstract_collection#ContainerIterator#item */
+(nitmethod_t)VIRTUAL_abstract_collection__ContainerIterator__next, /* pointer to abstract_collection:ContainerIterator:abstract_collection#ContainerIterator#next */
+(nitmethod_t)VIRTUAL_abstract_collection__ContainerIterator__is_ok, /* pointer to abstract_collection:ContainerIterator:abstract_collection#ContainerIterator#is_ok */
+(nitmethod_t)VIRTUAL_array__Iterator__to_a, /* pointer to abstract_collection:ContainerIterator:array#Iterator#to_a */
+(nitmethod_t)VIRTUAL_abstract_collection__ContainerIterator__init, /* pointer to abstract_collection:ContainerIterator:abstract_collection#ContainerIterator#init */
+}
+};
+/* allocate ContainerIterator[nullable Object] */
+val* NEW_abstract_collection__ContainerIterator(const struct type* type) {
+val* self /* : ContainerIterator[nullable Object] */;
+short int var /* : Bool */;
+self = nit_alloc(sizeof(struct instance) + 2*sizeof(nitattribute_t));
+self->type = type;
+self->class = &class_abstract_collection__ContainerIterator;
+var = 1;
+self->attrs[COLOR_abstract_collection__ContainerIterator___is_ok].s = var; /* _is_ok on <self:ContainerIterator[nullable Object] exact> */
+return self;
+}
+/* allocate ContainerIterator[nullable Object] */
+void CHECK_NEW_abstract_collection__ContainerIterator(val* self) {
+val* var /* : Container[nullable Object] */;
+var = self->attrs[COLOR_abstract_collection__ContainerIterator___container].val; /* _container on <self:ContainerIterator[nullable Object]> */
+if (var == NULL) {
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _container");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 196);
+exit(1);
+}
+}
+/* runtime class abstract_collection__MapKeysIterator */
+const struct class class_abstract_collection__MapKeysIterator = {
+0, /* box_kind */
+{
+(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to abstract_collection:MapKeysIterator:kernel#Object#object_id */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to abstract_collection:MapKeysIterator:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to abstract_collection:MapKeysIterator:kernel#Object#is_same_instance */
+(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to abstract_collection:MapKeysIterator:kernel#Object#== */
+(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to abstract_collection:MapKeysIterator:kernel#Object#!= */
+(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to abstract_collection:MapKeysIterator:kernel#Object#output */
+(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to abstract_collection:MapKeysIterator:kernel#Object#output_class_name */
+(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to abstract_collection:MapKeysIterator:kernel#Object#exit */
+(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to abstract_collection:MapKeysIterator:kernel#Object#sys */
+(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to abstract_collection:MapKeysIterator:kernel#Object#hash */
+(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to abstract_collection:MapKeysIterator:string#Object#to_s */
+(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to abstract_collection:MapKeysIterator:string#Object#native_class_name */
+(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to abstract_collection:MapKeysIterator:string#Object#class_name */
+(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to abstract_collection:MapKeysIterator:string#Object#inspect */
+(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to abstract_collection:MapKeysIterator:string#Object#inspect_head */
+(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to abstract_collection:MapKeysIterator:string#Object#args */
+(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to abstract_collection:MapKeysIterator:math#Object#atan2 */
+(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to abstract_collection:MapKeysIterator:math#Object#pi */
+(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to abstract_collection:MapKeysIterator:math#Object#srand_from */
+(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to abstract_collection:MapKeysIterator:math#Object#srand */
+(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to abstract_collection:MapKeysIterator:stream#Object#poll */
+(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to abstract_collection:MapKeysIterator:stream#Object#intern_poll */
+(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to abstract_collection:MapKeysIterator:time#Object#get_time */
+(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to abstract_collection:MapKeysIterator:file#Object#printn */
+(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to abstract_collection:MapKeysIterator:file#Object#print */
+(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to abstract_collection:MapKeysIterator:file#Object#getc */
+(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to abstract_collection:MapKeysIterator:file#Object#gets */
+(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to abstract_collection:MapKeysIterator:file#Object#getcwd */
+(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to abstract_collection:MapKeysIterator:file#Object#file_getcwd */
+(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to abstract_collection:MapKeysIterator:file#Object#stdin */
+(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to abstract_collection:MapKeysIterator:file#Object#stdout */
+(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to abstract_collection:MapKeysIterator:file#Object#stderr */
+(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to abstract_collection:MapKeysIterator:model_base#Object#intrude_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to abstract_collection:MapKeysIterator:model_base#Object#public_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to abstract_collection:MapKeysIterator:model_base#Object#protected_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to abstract_collection:MapKeysIterator:model_base#Object#private_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to abstract_collection:MapKeysIterator:model_base#Object#none_visibility */
+(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to abstract_collection:MapKeysIterator:model#Object#abstract_kind */
+(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to abstract_collection:MapKeysIterator:model#Object#concrete_kind */
+(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to abstract_collection:MapKeysIterator:model#Object#interface_kind */
+(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to abstract_collection:MapKeysIterator:model#Object#enum_kind */
+(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to abstract_collection:MapKeysIterator:model#Object#extern_kind */
+(nitmethod_t)VIRTUAL_abstract_collection__MapKeysIterator__item, /* pointer to abstract_collection:MapKeysIterator:abstract_collection#MapKeysIterator#item */
+(nitmethod_t)VIRTUAL_abstract_collection__MapKeysIterator__next, /* pointer to abstract_collection:MapKeysIterator:abstract_collection#MapKeysIterator#next */
+(nitmethod_t)VIRTUAL_abstract_collection__MapKeysIterator__is_ok, /* pointer to abstract_collection:MapKeysIterator:abstract_collection#MapKeysIterator#is_ok */
+(nitmethod_t)VIRTUAL_array__Iterator__to_a, /* pointer to abstract_collection:MapKeysIterator:array#Iterator#to_a */
+(nitmethod_t)VIRTUAL_abstract_collection__MapKeysIterator__iterator, /* pointer to abstract_collection:MapKeysIterator:abstract_collection#MapKeysIterator#iterator */
+(nitmethod_t)VIRTUAL_abstract_collection__MapKeysIterator__iterator_61d, /* pointer to abstract_collection:MapKeysIterator:abstract_collection#MapKeysIterator#iterator= */
+(nitmethod_t)VIRTUAL_abstract_collection__MapKeysIterator__init, /* pointer to abstract_collection:MapKeysIterator:abstract_collection#MapKeysIterator#init */
+}
+};
+/* allocate MapKeysIterator[Object, nullable Object] */
+val* NEW_abstract_collection__MapKeysIterator(const struct type* type) {
+val* self /* : MapKeysIterator[Object, nullable Object] */;
+self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
+self->type = type;
+self->class = &class_abstract_collection__MapKeysIterator;
+return self;
+}
+/* allocate MapKeysIterator[Object, nullable Object] */
+void CHECK_NEW_abstract_collection__MapKeysIterator(val* self) {
+val* var /* : MapIterator[Object, nullable Object] */;
+var = self->attrs[COLOR_abstract_collection__MapKeysIterator___64diterator].val; /* @iterator on <self:MapKeysIterator[Object, nullable Object]> */
+if (var == NULL) {
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @iterator");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 384);
+exit(1);
+}
+}
+/* runtime class abstract_collection__MapValuesIterator */
+const struct class class_abstract_collection__MapValuesIterator = {
+0, /* box_kind */
+{
+(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to abstract_collection:MapValuesIterator:kernel#Object#object_id */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to abstract_collection:MapValuesIterator:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to abstract_collection:MapValuesIterator:kernel#Object#is_same_instance */
+(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to abstract_collection:MapValuesIterator:kernel#Object#== */
+(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to abstract_collection:MapValuesIterator:kernel#Object#!= */
+(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to abstract_collection:MapValuesIterator:kernel#Object#output */
+(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to abstract_collection:MapValuesIterator:kernel#Object#output_class_name */
+(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to abstract_collection:MapValuesIterator:kernel#Object#exit */
+(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to abstract_collection:MapValuesIterator:kernel#Object#sys */
+(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to abstract_collection:MapValuesIterator:kernel#Object#hash */
+(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to abstract_collection:MapValuesIterator:string#Object#to_s */
+(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to abstract_collection:MapValuesIterator:string#Object#native_class_name */
+(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to abstract_collection:MapValuesIterator:string#Object#class_name */
+(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to abstract_collection:MapValuesIterator:string#Object#inspect */
+(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to abstract_collection:MapValuesIterator:string#Object#inspect_head */
+(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to abstract_collection:MapValuesIterator:string#Object#args */
+(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to abstract_collection:MapValuesIterator:math#Object#atan2 */
+(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to abstract_collection:MapValuesIterator:math#Object#pi */
+(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to abstract_collection:MapValuesIterator:math#Object#srand_from */
+(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to abstract_collection:MapValuesIterator:math#Object#srand */
+(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to abstract_collection:MapValuesIterator:stream#Object#poll */
+(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to abstract_collection:MapValuesIterator:stream#Object#intern_poll */
+(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to abstract_collection:MapValuesIterator:time#Object#get_time */
+(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to abstract_collection:MapValuesIterator:file#Object#printn */
+(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to abstract_collection:MapValuesIterator:file#Object#print */
+(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to abstract_collection:MapValuesIterator:file#Object#getc */
+(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to abstract_collection:MapValuesIterator:file#Object#gets */
+(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to abstract_collection:MapValuesIterator:file#Object#getcwd */
+(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to abstract_collection:MapValuesIterator:file#Object#file_getcwd */
+(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to abstract_collection:MapValuesIterator:file#Object#stdin */
+(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to abstract_collection:MapValuesIterator:file#Object#stdout */
+(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to abstract_collection:MapValuesIterator:file#Object#stderr */
+(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to abstract_collection:MapValuesIterator:model_base#Object#intrude_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to abstract_collection:MapValuesIterator:model_base#Object#public_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to abstract_collection:MapValuesIterator:model_base#Object#protected_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to abstract_collection:MapValuesIterator:model_base#Object#private_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to abstract_collection:MapValuesIterator:model_base#Object#none_visibility */
+(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to abstract_collection:MapValuesIterator:model#Object#abstract_kind */
+(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to abstract_collection:MapValuesIterator:model#Object#concrete_kind */
+(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to abstract_collection:MapValuesIterator:model#Object#interface_kind */
+(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to abstract_collection:MapValuesIterator:model#Object#enum_kind */
+(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to abstract_collection:MapValuesIterator:model#Object#extern_kind */
+(nitmethod_t)VIRTUAL_abstract_collection__MapValuesIterator__item, /* pointer to abstract_collection:MapValuesIterator:abstract_collection#MapValuesIterator#item */
+(nitmethod_t)VIRTUAL_abstract_collection__MapValuesIterator__next, /* pointer to abstract_collection:MapValuesIterator:abstract_collection#MapValuesIterator#next */
+(nitmethod_t)VIRTUAL_abstract_collection__MapValuesIterator__is_ok, /* pointer to abstract_collection:MapValuesIterator:abstract_collection#MapValuesIterator#is_ok */
+(nitmethod_t)VIRTUAL_array__Iterator__to_a, /* pointer to abstract_collection:MapValuesIterator:array#Iterator#to_a */
+(nitmethod_t)VIRTUAL_abstract_collection__MapValuesIterator__iterator, /* pointer to abstract_collection:MapValuesIterator:abstract_collection#MapValuesIterator#iterator */
+(nitmethod_t)VIRTUAL_abstract_collection__MapValuesIterator__iterator_61d, /* pointer to abstract_collection:MapValuesIterator:abstract_collection#MapValuesIterator#iterator= */
+(nitmethod_t)VIRTUAL_abstract_collection__MapValuesIterator__init, /* pointer to abstract_collection:MapValuesIterator:abstract_collection#MapValuesIterator#init */
+}
+};
+/* allocate MapValuesIterator[Object, nullable Object] */
+val* NEW_abstract_collection__MapValuesIterator(const struct type* type) {
+val* self /* : MapValuesIterator[Object, nullable Object] */;
+self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
+self->type = type;
+self->class = &class_abstract_collection__MapValuesIterator;
+return self;
+}
+/* allocate MapValuesIterator[Object, nullable Object] */
+void CHECK_NEW_abstract_collection__MapValuesIterator(val* self) {
+val* var /* : MapIterator[Object, nullable Object] */;
+var = self->attrs[COLOR_abstract_collection__MapValuesIterator___64diterator].val; /* @iterator on <self:MapValuesIterator[Object, nullable Object]> */
+if (var == NULL) {
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @iterator");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 395);
+exit(1);
+}
+}
+/* runtime class abstract_collection__CoupleMapIterator */
+const struct class class_abstract_collection__CoupleMapIterator = {
+0, /* box_kind */
+{
+(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to abstract_collection:CoupleMapIterator:kernel#Object#object_id */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to abstract_collection:CoupleMapIterator:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to abstract_collection:CoupleMapIterator:kernel#Object#is_same_instance */
+(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to abstract_collection:CoupleMapIterator:kernel#Object#== */
+(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to abstract_collection:CoupleMapIterator:kernel#Object#!= */
+(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to abstract_collection:CoupleMapIterator:kernel#Object#output */
+(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to abstract_collection:CoupleMapIterator:kernel#Object#output_class_name */
+(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to abstract_collection:CoupleMapIterator:kernel#Object#exit */
+(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to abstract_collection:CoupleMapIterator:kernel#Object#sys */
+(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to abstract_collection:CoupleMapIterator:kernel#Object#hash */
+(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to abstract_collection:CoupleMapIterator:string#Object#to_s */
+(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to abstract_collection:CoupleMapIterator:string#Object#native_class_name */
+(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to abstract_collection:CoupleMapIterator:string#Object#class_name */
+(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to abstract_collection:CoupleMapIterator:string#Object#inspect */
+(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to abstract_collection:CoupleMapIterator:string#Object#inspect_head */
+(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to abstract_collection:CoupleMapIterator:string#Object#args */
+(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to abstract_collection:CoupleMapIterator:math#Object#atan2 */
+(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to abstract_collection:CoupleMapIterator:math#Object#pi */
+(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to abstract_collection:CoupleMapIterator:math#Object#srand_from */
+(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to abstract_collection:CoupleMapIterator:math#Object#srand */
+(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to abstract_collection:CoupleMapIterator:stream#Object#poll */
+(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to abstract_collection:CoupleMapIterator:stream#Object#intern_poll */
+(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to abstract_collection:CoupleMapIterator:time#Object#get_time */
+(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to abstract_collection:CoupleMapIterator:file#Object#printn */
+(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to abstract_collection:CoupleMapIterator:file#Object#print */
+(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to abstract_collection:CoupleMapIterator:file#Object#getc */
+(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to abstract_collection:CoupleMapIterator:file#Object#gets */
+(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to abstract_collection:CoupleMapIterator:file#Object#getcwd */
+(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to abstract_collection:CoupleMapIterator:file#Object#file_getcwd */
+(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to abstract_collection:CoupleMapIterator:file#Object#stdin */
+(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to abstract_collection:CoupleMapIterator:file#Object#stdout */
+(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to abstract_collection:CoupleMapIterator:file#Object#stderr */
+(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to abstract_collection:CoupleMapIterator:model_base#Object#intrude_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to abstract_collection:CoupleMapIterator:model_base#Object#public_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to abstract_collection:CoupleMapIterator:model_base#Object#protected_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to abstract_collection:CoupleMapIterator:model_base#Object#private_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to abstract_collection:CoupleMapIterator:model_base#Object#none_visibility */
+(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to abstract_collection:CoupleMapIterator:model#Object#abstract_kind */
+(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to abstract_collection:CoupleMapIterator:model#Object#concrete_kind */
+(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to abstract_collection:CoupleMapIterator:model#Object#interface_kind */
+(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to abstract_collection:CoupleMapIterator:model#Object#enum_kind */
+(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to abstract_collection:CoupleMapIterator:model#Object#extern_kind */
+(nitmethod_t)VIRTUAL_abstract_collection__CoupleMapIterator__item, /* pointer to abstract_collection:CoupleMapIterator:abstract_collection#CoupleMapIterator#item */
+(nitmethod_t)VIRTUAL_abstract_collection__CoupleMapIterator__key, /* pointer to abstract_collection:CoupleMapIterator:abstract_collection#CoupleMapIterator#key */
+(nitmethod_t)VIRTUAL_abstract_collection__CoupleMapIterator__next, /* pointer to abstract_collection:CoupleMapIterator:abstract_collection#CoupleMapIterator#next */
+(nitmethod_t)VIRTUAL_abstract_collection__CoupleMapIterator__is_ok, /* pointer to abstract_collection:CoupleMapIterator:abstract_collection#CoupleMapIterator#is_ok */
+(nitmethod_t)VIRTUAL_abstract_collection__CoupleMapIterator__init, /* pointer to abstract_collection:CoupleMapIterator:abstract_collection#CoupleMapIterator#init */
+}
+};
+/* allocate CoupleMapIterator[Object, nullable Object] */
+val* NEW_abstract_collection__CoupleMapIterator(const struct type* type) {
+val* self /* : CoupleMapIterator[Object, nullable Object] */;
+self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
+self->type = type;
+self->class = &class_abstract_collection__CoupleMapIterator;
+return self;
+}
+/* allocate CoupleMapIterator[Object, nullable Object] */
+void CHECK_NEW_abstract_collection__CoupleMapIterator(val* self) {
+val* var /* : Iterator[Couple[Object, nullable Object]] */;
+var = self->attrs[COLOR_abstract_collection__CoupleMapIterator___iter].val; /* _iter on <self:CoupleMapIterator[Object, nullable Object]> */
+if (var == NULL) {
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _iter");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/abstract_collection.nit", 558);
+exit(1);
+}
+}
+/* runtime class abstract_collection__Couple */
+const struct class class_abstract_collection__Couple = {
+0, /* box_kind */
+{
+(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to abstract_collection:Couple:kernel#Object#object_id */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to abstract_collection:Couple:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to abstract_collection:Couple:kernel#Object#is_same_instance */
+(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to abstract_collection:Couple:kernel#Object#== */
+(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to abstract_collection:Couple:kernel#Object#!= */
+(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to abstract_collection:Couple:kernel#Object#output */
+(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to abstract_collection:Couple:kernel#Object#output_class_name */
+(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to abstract_collection:Couple:kernel#Object#exit */
+(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to abstract_collection:Couple:kernel#Object#sys */
+(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to abstract_collection:Couple:kernel#Object#hash */
+(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to abstract_collection:Couple:string#Object#to_s */
+(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to abstract_collection:Couple:string#Object#native_class_name */
+(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to abstract_collection:Couple:string#Object#class_name */
+(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to abstract_collection:Couple:string#Object#inspect */
+(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to abstract_collection:Couple:string#Object#inspect_head */
+(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to abstract_collection:Couple:string#Object#args */
+(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to abstract_collection:Couple:math#Object#atan2 */
+(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to abstract_collection:Couple:math#Object#pi */
+(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to abstract_collection:Couple:math#Object#srand_from */
+(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to abstract_collection:Couple:math#Object#srand */
+(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to abstract_collection:Couple:stream#Object#poll */
+(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to abstract_collection:Couple:stream#Object#intern_poll */
+(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to abstract_collection:Couple:time#Object#get_time */
+(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to abstract_collection:Couple:file#Object#printn */
+(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to abstract_collection:Couple:file#Object#print */
+(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to abstract_collection:Couple:file#Object#getc */
+(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to abstract_collection:Couple:file#Object#gets */
+(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to abstract_collection:Couple:file#Object#getcwd */
+(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to abstract_collection:Couple:file#Object#file_getcwd */
+(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to abstract_collection:Couple:file#Object#stdin */
+(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to abstract_collection:Couple:file#Object#stdout */
+(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to abstract_collection:Couple:file#Object#stderr */
+(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to abstract_collection:Couple:model_base#Object#intrude_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to abstract_collection:Couple:model_base#Object#public_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to abstract_collection:Couple:model_base#Object#protected_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to abstract_collection:Couple:model_base#Object#private_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to abstract_collection:Couple:model_base#Object#none_visibility */
+(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to abstract_collection:Couple:model#Object#abstract_kind */
+(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to abstract_collection:Couple:model#Object#concrete_kind */
+(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to abstract_collection:Couple:model#Object#interface_kind */
+(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to abstract_collection:Couple:model#Object#enum_kind */
+(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to abstract_collection:Couple:model#Object#extern_kind */
+(nitmethod_t)VIRTUAL_abstract_collection__Couple__first, /* pointer to abstract_collection:Couple:abstract_collection#Couple#first */
+(nitmethod_t)VIRTUAL_abstract_collection__Couple__first_61d, /* pointer to abstract_collection:Couple:abstract_collection#Couple#first= */
+(nitmethod_t)VIRTUAL_abstract_collection__Couple__second, /* pointer to abstract_collection:Couple:abstract_collection#Couple#second */
+(nitmethod_t)VIRTUAL_abstract_collection__Couple__second_61d, /* pointer to abstract_collection:Couple:abstract_collection#Couple#second= */
+(nitmethod_t)VIRTUAL_abstract_collection__Couple__init, /* pointer to abstract_collection:Couple:abstract_collection#Couple#init */
+}
+};
+/* allocate Couple[nullable Object, nullable Object] */
+val* NEW_abstract_collection__Couple(const struct type* type) {
+val* self /* : Couple[nullable Object, nullable Object] */;
+self = nit_alloc(sizeof(struct instance) + 2*sizeof(nitattribute_t));
+self->type = type;
+self->class = &class_abstract_collection__Couple;
+return self;
+}
+/* allocate Couple[nullable Object, nullable Object] */
+void CHECK_NEW_abstract_collection__Couple(val* self) {
+val* var /* : nullable Object */;
+val* var1 /* : nullable Object */;
+var = self->attrs[COLOR_abstract_collection__Couple___first].val; /* _first on <self:Couple[nullable Object, nullable Object]> */
+var1 = self->attrs[COLOR_abstract_collection__Couple___second].val; /* _second on <self:Couple[nullable Object, nullable Object]> */
+}
+/* runtime class kernel__Sys */
+const struct class class_kernel__Sys = {
+0, /* box_kind */
+{
+(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to kernel:Sys:kernel#Object#object_id */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to kernel:Sys:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to kernel:Sys:kernel#Object#is_same_instance */
+(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to kernel:Sys:kernel#Object#== */
+(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to kernel:Sys:kernel#Object#!= */
+(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to kernel:Sys:kernel#Object#output */
+(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to kernel:Sys:kernel#Object#output_class_name */
+(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to kernel:Sys:kernel#Object#exit */
+(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to kernel:Sys:kernel#Object#sys */
+(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to kernel:Sys:kernel#Object#hash */
+(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to kernel:Sys:string#Object#to_s */
+(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to kernel:Sys:string#Object#native_class_name */
+(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to kernel:Sys:string#Object#class_name */
+(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to kernel:Sys:string#Object#inspect */
+(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to kernel:Sys:string#Object#inspect_head */
+(nitmethod_t)VIRTUAL_string__Sys__args, /* pointer to kernel:Sys:string#Sys#args */
+(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to kernel:Sys:math#Object#atan2 */
+(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to kernel:Sys:math#Object#pi */
+(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to kernel:Sys:math#Object#srand_from */
+(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to kernel:Sys:math#Object#srand */
+(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to kernel:Sys:stream#Object#poll */
+(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to kernel:Sys:stream#Object#intern_poll */
+(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to kernel:Sys:time#Object#get_time */
+(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to kernel:Sys:file#Object#printn */
+(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to kernel:Sys:file#Object#print */
+(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to kernel:Sys:file#Object#getc */
+(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to kernel:Sys:file#Object#gets */
+(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to kernel:Sys:file#Object#getcwd */
+(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to kernel:Sys:file#Object#file_getcwd */
+(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to kernel:Sys:file#Object#stdin */
+(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to kernel:Sys:file#Object#stdout */
+(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to kernel:Sys:file#Object#stderr */
+(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to kernel:Sys:model_base#Object#intrude_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to kernel:Sys:model_base#Object#public_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to kernel:Sys:model_base#Object#protected_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to kernel:Sys:model_base#Object#private_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to kernel:Sys:model_base#Object#none_visibility */
+(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to kernel:Sys:model#Object#abstract_kind */
+(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to kernel:Sys:model#Object#concrete_kind */
+(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to kernel:Sys:model#Object#interface_kind */
+(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to kernel:Sys:model#Object#enum_kind */
+(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to kernel:Sys:model#Object#extern_kind */
+(nitmethod_t)VIRTUAL_nitg__Sys__main, /* pointer to kernel:Sys:nitg#Sys#main */
+(nitmethod_t)VIRTUAL_kernel__Sys__init, /* pointer to kernel:Sys:kernel#Sys#init */
+(nitmethod_t)VIRTUAL_gc__Sys__force_garbage_collection, /* pointer to kernel:Sys:gc#Sys#force_garbage_collection */
+(nitmethod_t)VIRTUAL_string__Sys__program_name, /* pointer to kernel:Sys:string#Sys#program_name */
+(nitmethod_t)VIRTUAL_string__Sys__init_args, /* pointer to kernel:Sys:string#Sys#init_args */
+(nitmethod_t)VIRTUAL_string__Sys__native_argc, /* pointer to kernel:Sys:string#Sys#native_argc */
+(nitmethod_t)VIRTUAL_string__Sys__native_argv, /* pointer to kernel:Sys:string#Sys#native_argv */
+(nitmethod_t)VIRTUAL_posix__Sys__uid_61d, /* pointer to kernel:Sys:posix#Sys#uid= */
+(nitmethod_t)VIRTUAL_posix__Sys__uid, /* pointer to kernel:Sys:posix#Sys#uid */
+(nitmethod_t)VIRTUAL_posix__Sys__gid_61d, /* pointer to kernel:Sys:posix#Sys#gid= */
+(nitmethod_t)VIRTUAL_posix__Sys__gid, /* pointer to kernel:Sys:posix#Sys#gid */
+(nitmethod_t)VIRTUAL_posix__Sys__euid_61d, /* pointer to kernel:Sys:posix#Sys#euid= */
+(nitmethod_t)VIRTUAL_posix__Sys__euid, /* pointer to kernel:Sys:posix#Sys#euid */
+(nitmethod_t)VIRTUAL_posix__Sys__egid_61d, /* pointer to kernel:Sys:posix#Sys#egid= */
+(nitmethod_t)VIRTUAL_posix__Sys__egid, /* pointer to kernel:Sys:posix#Sys#egid */
+(nitmethod_t)VIRTUAL_time__Sys__nanosleep, /* pointer to kernel:Sys:time#Sys#nanosleep */
+(nitmethod_t)VIRTUAL_exec__Sys__system, /* pointer to kernel:Sys:exec#Sys#system */
+}
+};
+/* allocate Sys */
+val* NEW_kernel__Sys(const struct type* type) {
+val* self /* : Sys */;
+self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
+self->type = type;
+self->class = &class_kernel__Sys;
+return self;
+}
+/* allocate Sys */
+void CHECK_NEW_kernel__Sys(val* self) {
+val* var /* : nullable Sequence[String] */;
+var = self->attrs[COLOR_string__Sys___args_cache].val; /* _args_cache on <self:Sys> */
+}
+/* runtime class kernel__Bool */
+const struct class class_kernel__Bool = {
+2, /* box_kind */
+{
+(nitmethod_t)VIRTUAL_kernel__Bool__object_id, /* pointer to kernel:Bool:kernel#Bool#object_id */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to kernel:Bool:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to kernel:Bool:kernel#Object#is_same_instance */
+(nitmethod_t)VIRTUAL_kernel__Bool___61d_61d, /* pointer to kernel:Bool:kernel#Bool#== */
+(nitmethod_t)VIRTUAL_kernel__Bool___33d_61d, /* pointer to kernel:Bool:kernel#Bool#!= */
+(nitmethod_t)VIRTUAL_kernel__Bool__output, /* pointer to kernel:Bool:kernel#Bool#output */
+(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to kernel:Bool:kernel#Object#output_class_name */
+(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to kernel:Bool:kernel#Object#exit */
+(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to kernel:Bool:kernel#Object#sys */
+(nitmethod_t)VIRTUAL_kernel__Bool__hash, /* pointer to kernel:Bool:kernel#Bool#hash */
+(nitmethod_t)VIRTUAL_string__Bool__to_s, /* pointer to kernel:Bool:string#Bool#to_s */
+(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to kernel:Bool:string#Object#native_class_name */
+(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to kernel:Bool:string#Object#class_name */
+(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to kernel:Bool:string#Object#inspect */
+(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to kernel:Bool:string#Object#inspect_head */
+(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to kernel:Bool:string#Object#args */
+(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to kernel:Bool:math#Object#atan2 */
+(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to kernel:Bool:math#Object#pi */
+(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to kernel:Bool:math#Object#srand_from */
+(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to kernel:Bool:math#Object#srand */
+(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to kernel:Bool:stream#Object#poll */
+(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to kernel:Bool:stream#Object#intern_poll */
+(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to kernel:Bool:time#Object#get_time */
+(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to kernel:Bool:file#Object#printn */
+(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to kernel:Bool:file#Object#print */
+(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to kernel:Bool:file#Object#getc */
+(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to kernel:Bool:file#Object#gets */
+(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to kernel:Bool:file#Object#getcwd */
+(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to kernel:Bool:file#Object#file_getcwd */
+(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to kernel:Bool:file#Object#stdin */
+(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to kernel:Bool:file#Object#stdout */
+(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to kernel:Bool:file#Object#stderr */
+(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to kernel:Bool:model_base#Object#intrude_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to kernel:Bool:model_base#Object#public_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to kernel:Bool:model_base#Object#protected_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to kernel:Bool:model_base#Object#private_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to kernel:Bool:model_base#Object#none_visibility */
+(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to kernel:Bool:model#Object#abstract_kind */
+(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to kernel:Bool:model#Object#concrete_kind */
+(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to kernel:Bool:model#Object#interface_kind */
+(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to kernel:Bool:model#Object#enum_kind */
+(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to kernel:Bool:model#Object#extern_kind */
+}
+};
+/* allocate Bool */
+val* BOX_kernel__Bool(short int value) {
+struct instance_kernel__Bool*res = nit_alloc(sizeof(struct instance_kernel__Bool));
+res->type = &type_kernel__Bool;
+res->class = &class_kernel__Bool;
+res->value = value;
+return (val*)res;
+}
+/* runtime class kernel__Float */
+const struct class class_kernel__Float = {
+4, /* box_kind */
+{
+(nitmethod_t)VIRTUAL_kernel__Float__object_id, /* pointer to kernel:Float:kernel#Float#object_id */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to kernel:Float:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to kernel:Float:kernel#Object#is_same_instance */
+(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to kernel:Float:kernel#Object#== */
+(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to kernel:Float:kernel#Object#!= */
+(nitmethod_t)VIRTUAL_kernel__Float__output, /* pointer to kernel:Float:kernel#Float#output */
+(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to kernel:Float:kernel#Object#output_class_name */
+(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to kernel:Float:kernel#Object#exit */
+(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to kernel:Float:kernel#Object#sys */
+(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to kernel:Float:kernel#Object#hash */
+(nitmethod_t)VIRTUAL_string__Float__to_s, /* pointer to kernel:Float:string#Float#to_s */
+(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to kernel:Float:string#Object#native_class_name */
+(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to kernel:Float:string#Object#class_name */
+(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to kernel:Float:string#Object#inspect */
+(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to kernel:Float:string#Object#inspect_head */
+(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to kernel:Float:string#Object#args */
+(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to kernel:Float:math#Object#atan2 */
+(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to kernel:Float:math#Object#pi */
+(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to kernel:Float:math#Object#srand_from */
+(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to kernel:Float:math#Object#srand */
+(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to kernel:Float:stream#Object#poll */
+(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to kernel:Float:stream#Object#intern_poll */
+(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to kernel:Float:time#Object#get_time */
+(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to kernel:Float:file#Object#printn */
+(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to kernel:Float:file#Object#print */
+(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to kernel:Float:file#Object#getc */
+(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to kernel:Float:file#Object#gets */
+(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to kernel:Float:file#Object#getcwd */
+(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to kernel:Float:file#Object#file_getcwd */
+(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to kernel:Float:file#Object#stdin */
+(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to kernel:Float:file#Object#stdout */
+(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to kernel:Float:file#Object#stderr */
+(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to kernel:Float:model_base#Object#intrude_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to kernel:Float:model_base#Object#public_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to kernel:Float:model_base#Object#protected_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to kernel:Float:model_base#Object#private_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to kernel:Float:model_base#Object#none_visibility */
+(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to kernel:Float:model#Object#abstract_kind */
+(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to kernel:Float:model#Object#concrete_kind */
+(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to kernel:Float:model#Object#interface_kind */
+(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to kernel:Float:model#Object#enum_kind */
+(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to kernel:Float:model#Object#extern_kind */
+(nitmethod_t)VIRTUAL_kernel__Float___60d_61d, /* pointer to kernel:Float:kernel#Float#<= */
+(nitmethod_t)VIRTUAL_kernel__Float___60d, /* pointer to kernel:Float:kernel#Float#< */
+(nitmethod_t)VIRTUAL_kernel__Float___62d_61d, /* pointer to kernel:Float:kernel#Float#>= */
+(nitmethod_t)VIRTUAL_kernel__Float___62d, /* pointer to kernel:Float:kernel#Float#> */
+(nitmethod_t)VIRTUAL_kernel__Float___43d, /* pointer to kernel:Float:kernel#Float#+ */
+(nitmethod_t)VIRTUAL_kernel__Float__unary_32d_45d, /* pointer to kernel:Float:kernel#Float#unary - */
+(nitmethod_t)VIRTUAL_kernel__Float___45d, /* pointer to kernel:Float:kernel#Float#- */
+(nitmethod_t)VIRTUAL_kernel__Float___42d, /* pointer to kernel:Float:kernel#Float#* */
+(nitmethod_t)VIRTUAL_kernel__Float___47d, /* pointer to kernel:Float:kernel#Float#/ */
+(nitmethod_t)VIRTUAL_kernel__Float__to_i, /* pointer to kernel:Float:kernel#Float#to_i */
+(nitmethod_t)VIRTUAL_string__Float__to_precision, /* pointer to kernel:Float:string#Float#to_precision */
+(nitmethod_t)VIRTUAL_string__Float__to_precision_native, /* pointer to kernel:Float:string#Float#to_precision_native */
+(nitmethod_t)VIRTUAL_math__Float__sqrt, /* pointer to kernel:Float:math#Float#sqrt */
+(nitmethod_t)VIRTUAL_math__Float__cos, /* pointer to kernel:Float:math#Float#cos */
+(nitmethod_t)VIRTUAL_math__Float__sin, /* pointer to kernel:Float:math#Float#sin */
+(nitmethod_t)VIRTUAL_math__Float__tan, /* pointer to kernel:Float:math#Float#tan */
+(nitmethod_t)VIRTUAL_math__Float__acos, /* pointer to kernel:Float:math#Float#acos */
+(nitmethod_t)VIRTUAL_math__Float__asin, /* pointer to kernel:Float:math#Float#asin */
+(nitmethod_t)VIRTUAL_math__Float__atan, /* pointer to kernel:Float:math#Float#atan */
+(nitmethod_t)VIRTUAL_math__Float__pow, /* pointer to kernel:Float:math#Float#pow */
+(nitmethod_t)VIRTUAL_math__Float__log, /* pointer to kernel:Float:math#Float#log */
+(nitmethod_t)VIRTUAL_math__Float__exp, /* pointer to kernel:Float:math#Float#exp */
+(nitmethod_t)VIRTUAL_math__Float__rand, /* pointer to kernel:Float:math#Float#rand */
+(nitmethod_t)VIRTUAL_math__Float__hypot_with, /* pointer to kernel:Float:math#Float#hypot_with */
+}
+};
+/* allocate Float */
+val* BOX_kernel__Float(double value) {
+struct instance_kernel__Float*res = nit_alloc(sizeof(struct instance_kernel__Float));
+res->type = &type_kernel__Float;
+res->class = &class_kernel__Float;
+res->value = value;
+return (val*)res;
+}
+/* runtime class kernel__Int */
+const struct class class_kernel__Int = {
+1, /* box_kind */
+{
+(nitmethod_t)VIRTUAL_kernel__Int__object_id, /* pointer to kernel:Int:kernel#Int#object_id */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to kernel:Int:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to kernel:Int:kernel#Object#is_same_instance */
+(nitmethod_t)VIRTUAL_kernel__Int___61d_61d, /* pointer to kernel:Int:kernel#Int#== */
+(nitmethod_t)VIRTUAL_kernel__Int___33d_61d, /* pointer to kernel:Int:kernel#Int#!= */
+(nitmethod_t)VIRTUAL_kernel__Int__output, /* pointer to kernel:Int:kernel#Int#output */
+(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to kernel:Int:kernel#Object#output_class_name */
+(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to kernel:Int:kernel#Object#exit */
+(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to kernel:Int:kernel#Object#sys */
+(nitmethod_t)VIRTUAL_kernel__Int__hash, /* pointer to kernel:Int:kernel#Int#hash */
+(nitmethod_t)VIRTUAL_string__Int__to_s, /* pointer to kernel:Int:string#Int#to_s */
+(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to kernel:Int:string#Object#native_class_name */
+(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to kernel:Int:string#Object#class_name */
+(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to kernel:Int:string#Object#inspect */
+(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to kernel:Int:string#Object#inspect_head */
+(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to kernel:Int:string#Object#args */
+(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to kernel:Int:math#Object#atan2 */
+(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to kernel:Int:math#Object#pi */
+(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to kernel:Int:math#Object#srand_from */
+(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to kernel:Int:math#Object#srand */
+(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to kernel:Int:stream#Object#poll */
+(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to kernel:Int:stream#Object#intern_poll */
+(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to kernel:Int:time#Object#get_time */
+(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to kernel:Int:file#Object#printn */
+(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to kernel:Int:file#Object#print */
+(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to kernel:Int:file#Object#getc */
+(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to kernel:Int:file#Object#gets */
+(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to kernel:Int:file#Object#getcwd */
+(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to kernel:Int:file#Object#file_getcwd */
+(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to kernel:Int:file#Object#stdin */
+(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to kernel:Int:file#Object#stdout */
+(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to kernel:Int:file#Object#stderr */
+(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to kernel:Int:model_base#Object#intrude_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to kernel:Int:model_base#Object#public_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to kernel:Int:model_base#Object#protected_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to kernel:Int:model_base#Object#private_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to kernel:Int:model_base#Object#none_visibility */
+(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to kernel:Int:model#Object#abstract_kind */
+(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to kernel:Int:model#Object#concrete_kind */
+(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to kernel:Int:model#Object#interface_kind */
+(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to kernel:Int:model#Object#enum_kind */
+(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to kernel:Int:model#Object#extern_kind */
+(nitmethod_t)VIRTUAL_kernel__Int___60d, /* pointer to kernel:Int:kernel#Int#< */
+(nitmethod_t)VIRTUAL_kernel__Int___60d_61d, /* pointer to kernel:Int:kernel#Int#<= */
+(nitmethod_t)VIRTUAL_kernel__Int___62d_61d, /* pointer to kernel:Int:kernel#Int#>= */
+(nitmethod_t)VIRTUAL_kernel__Int___62d, /* pointer to kernel:Int:kernel#Int#> */
+(nitmethod_t)VIRTUAL_kernel__Int___60d_61d_62d, /* pointer to kernel:Int:kernel#Int#<=> */
+(nitmethod_t)VIRTUAL_kernel__Int__is_between, /* pointer to kernel:Int:kernel#Int#is_between */
+(nitmethod_t)VIRTUAL_kernel__Int__max, /* pointer to kernel:Int:kernel#Int#max */
+(nitmethod_t)VIRTUAL_kernel__Int__min, /* pointer to kernel:Int:kernel#Int#min */
+(nitmethod_t)VIRTUAL_kernel__Int__succ, /* pointer to kernel:Int:kernel#Int#succ */
+(nitmethod_t)VIRTUAL_kernel__Int__prec, /* pointer to kernel:Int:kernel#Int#prec */
+(nitmethod_t)VIRTUAL_kernel__Int___43d, /* pointer to kernel:Int:kernel#Int#+ */
+(nitmethod_t)VIRTUAL_kernel__Int___45d, /* pointer to kernel:Int:kernel#Int#- */
+(nitmethod_t)VIRTUAL_kernel__Int__distance, /* pointer to kernel:Int:kernel#Int#distance */
+(nitmethod_t)VIRTUAL_range__Discrete__times, /* pointer to kernel:Int:range#Discrete#times */
+(nitmethod_t)VIRTUAL_kernel__Int__unary_32d_45d, /* pointer to kernel:Int:kernel#Int#unary - */
+(nitmethod_t)VIRTUAL_kernel__Int___42d, /* pointer to kernel:Int:kernel#Int#* */
+(nitmethod_t)VIRTUAL_kernel__Int___47d, /* pointer to kernel:Int:kernel#Int#/ */
+(nitmethod_t)VIRTUAL_kernel__Int___37d, /* pointer to kernel:Int:kernel#Int#% */
+(nitmethod_t)VIRTUAL_kernel__Int__lshift, /* pointer to kernel:Int:kernel#Int#lshift */
+(nitmethod_t)VIRTUAL_kernel__Int__rshift, /* pointer to kernel:Int:kernel#Int#rshift */
+(nitmethod_t)VIRTUAL_kernel__Int__to_f, /* pointer to kernel:Int:kernel#Int#to_f */
+(nitmethod_t)VIRTUAL_kernel__Int__ascii, /* pointer to kernel:Int:kernel#Int#ascii */
+(nitmethod_t)VIRTUAL_kernel__Int__digit_count, /* pointer to kernel:Int:kernel#Int#digit_count */
+(nitmethod_t)VIRTUAL_kernel__Int__digit_count_base_95d10, /* pointer to kernel:Int:kernel#Int#digit_count_base_10 */
+(nitmethod_t)VIRTUAL_kernel__Int__to_c, /* pointer to kernel:Int:kernel#Int#to_c */
+(nitmethod_t)VIRTUAL_kernel__Int__abs, /* pointer to kernel:Int:kernel#Int#abs */
+(nitmethod_t)VIRTUAL_string__Int__fill_buffer, /* pointer to kernel:Int:string#Int#fill_buffer */
+(nitmethod_t)VIRTUAL_string__Int__native_int_to_s, /* pointer to kernel:Int:string#Int#native_int_to_s */
+(nitmethod_t)VIRTUAL_string__Int__to_hex, /* pointer to kernel:Int:string#Int#to_hex */
+(nitmethod_t)VIRTUAL_string__Int__to_base, /* pointer to kernel:Int:string#Int#to_base */
+(nitmethod_t)VIRTUAL_math__Int__rand, /* pointer to kernel:Int:math#Int#rand */
+(nitmethod_t)VIRTUAL_math__Int__bin_and, /* pointer to kernel:Int:math#Int#bin_and */
+(nitmethod_t)VIRTUAL_math__Int__bin_or, /* pointer to kernel:Int:math#Int#bin_or */
+(nitmethod_t)VIRTUAL_math__Int__bin_xor, /* pointer to kernel:Int:math#Int#bin_xor */
+(nitmethod_t)VIRTUAL_math__Int__sqrt, /* pointer to kernel:Int:math#Int#sqrt */
+(nitmethod_t)VIRTUAL_math__Int__sin, /* pointer to kernel:Int:math#Int#sin */
+(nitmethod_t)VIRTUAL_math__Int__cos, /* pointer to kernel:Int:math#Int#cos */
+}
+};
+/* allocate Int */
+val* BOX_kernel__Int(long value) {
+struct instance_kernel__Int*res = nit_alloc(sizeof(struct instance_kernel__Int));
+res->type = &type_kernel__Int;
+res->class = &class_kernel__Int;
+res->value = value;
+return (val*)res;
+}
+/* runtime class kernel__Char */
+const struct class class_kernel__Char = {
+3, /* box_kind */
+{
+(nitmethod_t)VIRTUAL_kernel__Char__object_id, /* pointer to kernel:Char:kernel#Char#object_id */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to kernel:Char:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to kernel:Char:kernel#Object#is_same_instance */
+(nitmethod_t)VIRTUAL_kernel__Char___61d_61d, /* pointer to kernel:Char:kernel#Char#== */
+(nitmethod_t)VIRTUAL_kernel__Char___33d_61d, /* pointer to kernel:Char:kernel#Char#!= */
+(nitmethod_t)VIRTUAL_kernel__Char__output, /* pointer to kernel:Char:kernel#Char#output */
+(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to kernel:Char:kernel#Object#output_class_name */
+(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to kernel:Char:kernel#Object#exit */
+(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to kernel:Char:kernel#Object#sys */
+(nitmethod_t)VIRTUAL_kernel__Char__hash, /* pointer to kernel:Char:kernel#Char#hash */
+(nitmethod_t)VIRTUAL_string__Char__to_s, /* pointer to kernel:Char:string#Char#to_s */
+(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to kernel:Char:string#Object#native_class_name */
+(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to kernel:Char:string#Object#class_name */
+(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to kernel:Char:string#Object#inspect */
+(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to kernel:Char:string#Object#inspect_head */
+(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to kernel:Char:string#Object#args */
+(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to kernel:Char:math#Object#atan2 */
+(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to kernel:Char:math#Object#pi */
+(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to kernel:Char:math#Object#srand_from */
+(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to kernel:Char:math#Object#srand */
+(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to kernel:Char:stream#Object#poll */
+(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to kernel:Char:stream#Object#intern_poll */
+(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to kernel:Char:time#Object#get_time */
+(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to kernel:Char:file#Object#printn */
+(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to kernel:Char:file#Object#print */
+(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to kernel:Char:file#Object#getc */
+(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to kernel:Char:file#Object#gets */
+(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to kernel:Char:file#Object#getcwd */
+(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to kernel:Char:file#Object#file_getcwd */
+(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to kernel:Char:file#Object#stdin */
+(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to kernel:Char:file#Object#stdout */
+(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to kernel:Char:file#Object#stderr */
+(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to kernel:Char:model_base#Object#intrude_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to kernel:Char:model_base#Object#public_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to kernel:Char:model_base#Object#protected_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to kernel:Char:model_base#Object#private_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to kernel:Char:model_base#Object#none_visibility */
+(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to kernel:Char:model#Object#abstract_kind */
+(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to kernel:Char:model#Object#concrete_kind */
+(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to kernel:Char:model#Object#interface_kind */
+(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to kernel:Char:model#Object#enum_kind */
+(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to kernel:Char:model#Object#extern_kind */
+(nitmethod_t)VIRTUAL_kernel__Char___60d, /* pointer to kernel:Char:kernel#Char#< */
+(nitmethod_t)VIRTUAL_kernel__Char___60d_61d, /* pointer to kernel:Char:kernel#Char#<= */
+(nitmethod_t)VIRTUAL_kernel__Char___62d_61d, /* pointer to kernel:Char:kernel#Char#>= */
+(nitmethod_t)VIRTUAL_kernel__Char___62d, /* pointer to kernel:Char:kernel#Char#> */
+(nitmethod_t)VIRTUAL_kernel__Comparable___60d_61d_62d, /* pointer to kernel:Char:kernel#Comparable#<=> */
+(nitmethod_t)VIRTUAL_kernel__Comparable__is_between, /* pointer to kernel:Char:kernel#Comparable#is_between */
+(nitmethod_t)VIRTUAL_kernel__Comparable__max, /* pointer to kernel:Char:kernel#Comparable#max */
+(nitmethod_t)VIRTUAL_kernel__Comparable__min, /* pointer to kernel:Char:kernel#Comparable#min */
+(nitmethod_t)VIRTUAL_kernel__Char__succ, /* pointer to kernel:Char:kernel#Char#succ */
+(nitmethod_t)VIRTUAL_kernel__Char__prec, /* pointer to kernel:Char:kernel#Char#prec */
+(nitmethod_t)VIRTUAL_kernel__Char___43d, /* pointer to kernel:Char:kernel#Char#+ */
+(nitmethod_t)VIRTUAL_kernel__Char___45d, /* pointer to kernel:Char:kernel#Char#- */
+(nitmethod_t)VIRTUAL_kernel__Char__distance, /* pointer to kernel:Char:kernel#Char#distance */
+(nitmethod_t)VIRTUAL_range__Discrete__times, /* pointer to kernel:Char:range#Discrete#times */
+(nitmethod_t)VIRTUAL_string_search__Char__search_index_in, /* pointer to kernel:Char:string_search#Char#search_index_in */
+(nitmethod_t)VIRTUAL_string_search__Char__search_in, /* pointer to kernel:Char:string_search#Char#search_in */
+(nitmethod_t)VIRTUAL_string_search__Pattern__search_all_in, /* pointer to kernel:Char:string_search#Pattern#search_all_in */
+(nitmethod_t)VIRTUAL_string_search__Pattern__split_in, /* pointer to kernel:Char:string_search#Pattern#split_in */
+(nitmethod_t)VIRTUAL_kernel__Char__to_i, /* pointer to kernel:Char:kernel#Char#to_i */
+(nitmethod_t)VIRTUAL_kernel__Char__ascii, /* pointer to kernel:Char:kernel#Char#ascii */
+(nitmethod_t)VIRTUAL_kernel__Char__to_lower, /* pointer to kernel:Char:kernel#Char#to_lower */
+(nitmethod_t)VIRTUAL_kernel__Char__to_upper, /* pointer to kernel:Char:kernel#Char#to_upper */
+(nitmethod_t)VIRTUAL_kernel__Char__is_digit, /* pointer to kernel:Char:kernel#Char#is_digit */
+(nitmethod_t)VIRTUAL_kernel__Char__is_lower, /* pointer to kernel:Char:kernel#Char#is_lower */
+(nitmethod_t)VIRTUAL_kernel__Char__is_upper, /* pointer to kernel:Char:kernel#Char#is_upper */
+(nitmethod_t)VIRTUAL_kernel__Char__is_letter, /* pointer to kernel:Char:kernel#Char#is_letter */
+(nitmethod_t)VIRTUAL_string__Char__is_numeric, /* pointer to kernel:Char:string#Char#is_numeric */
+(nitmethod_t)VIRTUAL_string__Char__is_alpha, /* pointer to kernel:Char:string#Char#is_alpha */
+(nitmethod_t)VIRTUAL_string__Char__is_alphanumeric, /* pointer to kernel:Char:string#Char#is_alphanumeric */
+}
+};
+/* allocate Char */
+val* BOX_kernel__Char(char value) {
+struct instance_kernel__Char*res = nit_alloc(sizeof(struct instance_kernel__Char));
+res->type = &type_kernel__Char;
+res->class = &class_kernel__Char;
+res->value = value;
+return (val*)res;
+}
+/* runtime class kernel__Pointer */
+const struct class class_kernel__Pointer = {
+6, /* box_kind */
+{
+(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to kernel:Pointer:kernel#Object#object_id */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to kernel:Pointer:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to kernel:Pointer:kernel#Object#is_same_instance */
+(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to kernel:Pointer:kernel#Object#== */
+(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to kernel:Pointer:kernel#Object#!= */
+(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to kernel:Pointer:kernel#Object#output */
+(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to kernel:Pointer:kernel#Object#output_class_name */
+(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to kernel:Pointer:kernel#Object#exit */
+(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to kernel:Pointer:kernel#Object#sys */
+(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to kernel:Pointer:kernel#Object#hash */
+(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to kernel:Pointer:string#Object#to_s */
+(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to kernel:Pointer:string#Object#native_class_name */
+(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to kernel:Pointer:string#Object#class_name */
+(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to kernel:Pointer:string#Object#inspect */
+(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to kernel:Pointer:string#Object#inspect_head */
+(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to kernel:Pointer:string#Object#args */
+(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to kernel:Pointer:math#Object#atan2 */
+(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to kernel:Pointer:math#Object#pi */
+(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to kernel:Pointer:math#Object#srand_from */
+(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to kernel:Pointer:math#Object#srand */
+(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to kernel:Pointer:stream#Object#poll */
+(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to kernel:Pointer:stream#Object#intern_poll */
+(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to kernel:Pointer:time#Object#get_time */
+(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to kernel:Pointer:file#Object#printn */
+(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to kernel:Pointer:file#Object#print */
+(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to kernel:Pointer:file#Object#getc */
+(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to kernel:Pointer:file#Object#gets */
+(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to kernel:Pointer:file#Object#getcwd */
+(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to kernel:Pointer:file#Object#file_getcwd */
+(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to kernel:Pointer:file#Object#stdin */
+(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to kernel:Pointer:file#Object#stdout */
+(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to kernel:Pointer:file#Object#stderr */
+(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to kernel:Pointer:model_base#Object#intrude_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to kernel:Pointer:model_base#Object#public_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to kernel:Pointer:model_base#Object#protected_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to kernel:Pointer:model_base#Object#private_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to kernel:Pointer:model_base#Object#none_visibility */
+(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to kernel:Pointer:model#Object#abstract_kind */
+(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to kernel:Pointer:model#Object#concrete_kind */
+(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to kernel:Pointer:model#Object#interface_kind */
+(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to kernel:Pointer:model#Object#enum_kind */
+(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to kernel:Pointer:model#Object#extern_kind */
+(nitmethod_t)VIRTUAL_kernel__Pointer__address_is_null, /* pointer to kernel:Pointer:kernel#Pointer#address_is_null */
+}
+};
+/* runtime class range__Range */
+const struct class class_range__Range = {
+0, /* box_kind */
+{
+(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to range:Range:kernel#Object#object_id */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to range:Range:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to range:Range:kernel#Object#is_same_instance */
+(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to range:Range:kernel#Object#== */
+(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to range:Range:kernel#Object#!= */
+(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to range:Range:kernel#Object#output */
+(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to range:Range:kernel#Object#output_class_name */
+(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to range:Range:kernel#Object#exit */
+(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to range:Range:kernel#Object#sys */
+(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to range:Range:kernel#Object#hash */
+(nitmethod_t)VIRTUAL_string__Collection__to_s, /* pointer to range:Range:string#Collection#to_s */
+(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to range:Range:string#Object#native_class_name */
+(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to range:Range:string#Object#class_name */
+(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to range:Range:string#Object#inspect */
+(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to range:Range:string#Object#inspect_head */
+(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to range:Range:string#Object#args */
+(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to range:Range:math#Object#atan2 */
+(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to range:Range:math#Object#pi */
+(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to range:Range:math#Object#srand_from */
+(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to range:Range:math#Object#srand */
+(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to range:Range:stream#Object#poll */
+(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to range:Range:stream#Object#intern_poll */
+(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to range:Range:time#Object#get_time */
+(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to range:Range:file#Object#printn */
+(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to range:Range:file#Object#print */
+(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to range:Range:file#Object#getc */
+(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to range:Range:file#Object#gets */
+(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to range:Range:file#Object#getcwd */
+(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to range:Range:file#Object#file_getcwd */
+(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to range:Range:file#Object#stdin */
+(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to range:Range:file#Object#stdout */
+(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to range:Range:file#Object#stderr */
+(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to range:Range:model_base#Object#intrude_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to range:Range:model_base#Object#public_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to range:Range:model_base#Object#protected_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to range:Range:model_base#Object#private_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to range:Range:model_base#Object#none_visibility */
+(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to range:Range:model#Object#abstract_kind */
+(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to range:Range:model#Object#concrete_kind */
+(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to range:Range:model#Object#interface_kind */
+(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to range:Range:model#Object#enum_kind */
+(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to range:Range:model#Object#extern_kind */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+(nitmethod_t)VIRTUAL_range__Range__iterator, /* pointer to range:Range:range#Range#iterator */
+(nitmethod_t)VIRTUAL_range__Range__is_empty, /* pointer to range:Range:range#Range#is_empty */
+(nitmethod_t)VIRTUAL_range__Range__length, /* pointer to range:Range:range#Range#length */
+(nitmethod_t)VIRTUAL_range__Range__has, /* pointer to range:Range:range#Range#has */
+(nitmethod_t)VIRTUAL_range__Range__has_only, /* pointer to range:Range:range#Range#has_only */
+(nitmethod_t)VIRTUAL_range__Range__count, /* pointer to range:Range:range#Range#count */
+(nitmethod_t)VIRTUAL_range__Range__first, /* pointer to range:Range:range#Range#first */
+(nitmethod_t)VIRTUAL_abstract_collection__Collection__has_all, /* pointer to range:Range:abstract_collection#Collection#has_all */
+(nitmethod_t)VIRTUAL_array__Collection__to_a, /* pointer to range:Range:array#Collection#to_a */
+(nitmethod_t)VIRTUAL_string__Collection__join, /* pointer to range:Range:string#Collection#join */
+(nitmethod_t)VIRTUAL_math__Collection__rand, /* pointer to range:Range:math#Collection#rand */
+(nitmethod_t)VIRTUAL_range__Range__last, /* pointer to range:Range:range#Range#last */
+(nitmethod_t)VIRTUAL_range__Range__after, /* pointer to range:Range:range#Range#after */
+(nitmethod_t)VIRTUAL_range__Range__init, /* pointer to range:Range:range#Range#init */
+(nitmethod_t)VIRTUAL_range__Range__without_last, /* pointer to range:Range:range#Range#without_last */
+}
+};
+/* allocate Range[Discrete] */
+val* NEW_range__Range(const struct type* type) {
+val* self /* : Range[Discrete] */;
+self = nit_alloc(sizeof(struct instance) + 3*sizeof(nitattribute_t));
+self->type = type;
+self->class = &class_range__Range;
+return self;
+}
+/* allocate Range[Discrete] */
+void CHECK_NEW_range__Range(val* self) {
+val* var /* : Discrete */;
+val* var1 /* : Discrete */;
+val* var2 /* : Discrete */;
+var = self->attrs[COLOR_range__Range___first].val; /* _first on <self:Range[Discrete]> */
+if (var == NULL) {
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _first");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/range.nit", 22);
+exit(1);
+}
+var1 = self->attrs[COLOR_range__Range___last].val; /* _last on <self:Range[Discrete]> */
+if (var1 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _last");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/range.nit", 24);
+exit(1);
+}
+var2 = self->attrs[COLOR_range__Range___after].val; /* _after on <self:Range[Discrete]> */
+if (var2 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _after");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/range.nit", 27);
+exit(1);
+}
+}
+/* runtime class range__IteratorRange */
+const struct class class_range__IteratorRange = {
+0, /* box_kind */
+{
+(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to range:IteratorRange:kernel#Object#object_id */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to range:IteratorRange:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to range:IteratorRange:kernel#Object#is_same_instance */
+(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to range:IteratorRange:kernel#Object#== */
+(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to range:IteratorRange:kernel#Object#!= */
+(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to range:IteratorRange:kernel#Object#output */
+(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to range:IteratorRange:kernel#Object#output_class_name */
+(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to range:IteratorRange:kernel#Object#exit */
+(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to range:IteratorRange:kernel#Object#sys */
+(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to range:IteratorRange:kernel#Object#hash */
+(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to range:IteratorRange:string#Object#to_s */
+(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to range:IteratorRange:string#Object#native_class_name */
+(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to range:IteratorRange:string#Object#class_name */
+(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to range:IteratorRange:string#Object#inspect */
+(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to range:IteratorRange:string#Object#inspect_head */
+(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to range:IteratorRange:string#Object#args */
+(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to range:IteratorRange:math#Object#atan2 */
+(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to range:IteratorRange:math#Object#pi */
+(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to range:IteratorRange:math#Object#srand_from */
+(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to range:IteratorRange:math#Object#srand */
+(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to range:IteratorRange:stream#Object#poll */
+(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to range:IteratorRange:stream#Object#intern_poll */
+(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to range:IteratorRange:time#Object#get_time */
+(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to range:IteratorRange:file#Object#printn */
+(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to range:IteratorRange:file#Object#print */
+(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to range:IteratorRange:file#Object#getc */
+(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to range:IteratorRange:file#Object#gets */
+(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to range:IteratorRange:file#Object#getcwd */
+(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to range:IteratorRange:file#Object#file_getcwd */
+(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to range:IteratorRange:file#Object#stdin */
+(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to range:IteratorRange:file#Object#stdout */
+(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to range:IteratorRange:file#Object#stderr */
+(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to range:IteratorRange:model_base#Object#intrude_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to range:IteratorRange:model_base#Object#public_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to range:IteratorRange:model_base#Object#protected_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to range:IteratorRange:model_base#Object#private_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to range:IteratorRange:model_base#Object#none_visibility */
+(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to range:IteratorRange:model#Object#abstract_kind */
+(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to range:IteratorRange:model#Object#concrete_kind */
+(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to range:IteratorRange:model#Object#interface_kind */
+(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to range:IteratorRange:model#Object#enum_kind */
+(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to range:IteratorRange:model#Object#extern_kind */
+(nitmethod_t)VIRTUAL_range__IteratorRange__item, /* pointer to range:IteratorRange:range#IteratorRange#item */
+(nitmethod_t)VIRTUAL_range__IteratorRange__next, /* pointer to range:IteratorRange:range#IteratorRange#next */
+(nitmethod_t)VIRTUAL_range__IteratorRange__is_ok, /* pointer to range:IteratorRange:range#IteratorRange#is_ok */
+(nitmethod_t)VIRTUAL_array__Iterator__to_a, /* pointer to range:IteratorRange:array#Iterator#to_a */
+(nitmethod_t)VIRTUAL_range__IteratorRange__init, /* pointer to range:IteratorRange:range#IteratorRange#init */
+}
+};
+/* allocate IteratorRange[Discrete] */
+val* NEW_range__IteratorRange(const struct type* type) {
+val* self /* : IteratorRange[Discrete] */;
+self = nit_alloc(sizeof(struct instance) + 2*sizeof(nitattribute_t));
+self->type = type;
+self->class = &class_range__IteratorRange;
+return self;
+}
+/* allocate IteratorRange[Discrete] */
+void CHECK_NEW_range__IteratorRange(val* self) {
+val* var /* : Range[Discrete] */;
+val* var1 /* : Discrete */;
+var = self->attrs[COLOR_range__IteratorRange___range].val; /* _range on <self:IteratorRange[Discrete]> */
+if (var == NULL) {
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _range");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/range.nit", 79);
+exit(1);
+}
+var1 = self->attrs[COLOR_range__IteratorRange___item].val; /* _item on <self:IteratorRange[Discrete]> */
+if (var1 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _item");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/range.nit", 80);
+exit(1);
+}
+}
+/* runtime class list__List */
+const struct class class_list__List = {
+0, /* box_kind */
+{
+(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to list:List:kernel#Object#object_id */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to list:List:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to list:List:kernel#Object#is_same_instance */
+(nitmethod_t)VIRTUAL_abstract_collection__SequenceRead___61d_61d, /* pointer to list:List:abstract_collection#SequenceRead#== */
+(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to list:List:kernel#Object#!= */
+(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to list:List:kernel#Object#output */
+(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to list:List:kernel#Object#output_class_name */
+(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to list:List:kernel#Object#exit */
+(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to list:List:kernel#Object#sys */
+(nitmethod_t)VIRTUAL_abstract_collection__SequenceRead__hash, /* pointer to list:List:abstract_collection#SequenceRead#hash */
+(nitmethod_t)VIRTUAL_string__Collection__to_s, /* pointer to list:List:string#Collection#to_s */
+(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to list:List:string#Object#native_class_name */
+(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to list:List:string#Object#class_name */
+(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to list:List:string#Object#inspect */
+(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to list:List:string#Object#inspect_head */
+(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to list:List:string#Object#args */
+(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to list:List:math#Object#atan2 */
+(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to list:List:math#Object#pi */
+(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to list:List:math#Object#srand_from */
+(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to list:List:math#Object#srand */
+(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to list:List:stream#Object#poll */
+(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to list:List:stream#Object#intern_poll */
+(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to list:List:time#Object#get_time */
+(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to list:List:file#Object#printn */
+(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to list:List:file#Object#print */
+(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to list:List:file#Object#getc */
+(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to list:List:file#Object#gets */
+(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to list:List:file#Object#getcwd */
+(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to list:List:file#Object#file_getcwd */
+(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to list:List:file#Object#stdin */
+(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to list:List:file#Object#stdout */
+(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to list:List:file#Object#stderr */
+(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to list:List:model_base#Object#intrude_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to list:List:model_base#Object#public_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to list:List:model_base#Object#protected_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to list:List:model_base#Object#private_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to list:List:model_base#Object#none_visibility */
+(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to list:List:model#Object#abstract_kind */
+(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to list:List:model#Object#concrete_kind */
+(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to list:List:model#Object#interface_kind */
+(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to list:List:model#Object#enum_kind */
+(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to list:List:model#Object#extern_kind */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+(nitmethod_t)VIRTUAL_list__List__iterator, /* pointer to list:List:list#List#iterator */
+(nitmethod_t)VIRTUAL_list__List__is_empty, /* pointer to list:List:list#List#is_empty */
+(nitmethod_t)VIRTUAL_list__List__length, /* pointer to list:List:list#List#length */
+(nitmethod_t)VIRTUAL_list__List__has, /* pointer to list:List:list#List#has */
+(nitmethod_t)VIRTUAL_list__List__has_only, /* pointer to list:List:list#List#has_only */
+(nitmethod_t)VIRTUAL_list__List__count, /* pointer to list:List:list#List#count */
+(nitmethod_t)VIRTUAL_list__List__first, /* pointer to list:List:list#List#first */
+(nitmethod_t)VIRTUAL_abstract_collection__Collection__has_all, /* pointer to list:List:abstract_collection#Collection#has_all */
+(nitmethod_t)VIRTUAL_array__Collection__to_a, /* pointer to list:List:array#Collection#to_a */
+(nitmethod_t)VIRTUAL_string__Collection__join, /* pointer to list:List:string#Collection#join */
+(nitmethod_t)VIRTUAL_math__Collection__rand, /* pointer to list:List:math#Collection#rand */
+(nitmethod_t)VIRTUAL_list__List__clear, /* pointer to list:List:list#List#clear */
+(nitmethod_t)VIRTUAL_list__List__remove, /* pointer to list:List:list#List#remove */
+(nitmethod_t)VIRTUAL_abstract_collection__RemovableCollection__remove_all, /* pointer to list:List:abstract_collection#RemovableCollection#remove_all */
+(nitmethod_t)VIRTUAL_abstract_collection__Sequence__add, /* pointer to list:List:abstract_collection#Sequence#add */
+(nitmethod_t)VIRTUAL_abstract_collection__SimpleCollection__add_all, /* pointer to list:List:abstract_collection#SimpleCollection#add_all */
+(nitmethod_t)VIRTUAL_list__List___91d_93d, /* pointer to list:List:list#List#[] */
+(nitmethod_t)VIRTUAL_list__List__last, /* pointer to list:List:list#List#last */
+(nitmethod_t)VIRTUAL_abstract_collection__SequenceRead__index_of, /* pointer to list:List:abstract_collection#SequenceRead#index_of */
+(nitmethod_t)VIRTUAL_list__List__first_61d, /* pointer to list:List:list#List#first= */
+(nitmethod_t)VIRTUAL_list__List__last_61d, /* pointer to list:List:list#List#last= */
+(nitmethod_t)VIRTUAL_list__List__push, /* pointer to list:List:list#List#push */
+(nitmethod_t)VIRTUAL_abstract_collection__Sequence__append, /* pointer to list:List:abstract_collection#Sequence#append */
+(nitmethod_t)VIRTUAL_list__List__pop, /* pointer to list:List:list#List#pop */
+(nitmethod_t)VIRTUAL_list__List__unshift, /* pointer to list:List:list#List#unshift */
+(nitmethod_t)VIRTUAL_list__List__shift, /* pointer to list:List:list#List#shift */
+(nitmethod_t)VIRTUAL_list__List___91d_93d_61d, /* pointer to list:List:list#List#[]= */
+(nitmethod_t)VIRTUAL_list__List__remove_at, /* pointer to list:List:list#List#remove_at */
+(nitmethod_t)VIRTUAL_collection__Sequence__subarray, /* pointer to list:List:collection#Sequence#subarray */
+(nitmethod_t)VIRTUAL_list__List__slice, /* pointer to list:List:list#List#slice */
+(nitmethod_t)VIRTUAL_list__List__link, /* pointer to list:List:list#List#link */
+(nitmethod_t)VIRTUAL_list__List__init, /* pointer to list:List:list#List#init */
+(nitmethod_t)VIRTUAL_list__List__from, /* pointer to list:List:list#List#from */
+(nitmethod_t)VIRTUAL_list__List__get_node, /* pointer to list:List:list#List#get_node */
+(nitmethod_t)VIRTUAL_list__List__search_node_after, /* pointer to list:List:list#List#search_node_after */
+(nitmethod_t)VIRTUAL_list__List__remove_node, /* pointer to list:List:list#List#remove_node */
+(nitmethod_t)VIRTUAL_list__List__insert_before, /* pointer to list:List:list#List#insert_before */
+}
+};
+/* allocate List[nullable Object] */
+val* NEW_list__List(const struct type* type) {
+val* self /* : List[nullable Object] */;
+self = nit_alloc(sizeof(struct instance) + 2*sizeof(nitattribute_t));
+self->type = type;
+self->class = &class_list__List;
+return self;
+}
+/* allocate List[nullable Object] */
+void CHECK_NEW_list__List(val* self) {
+val* var /* : nullable ListNode[nullable Object] */;
+val* var1 /* : nullable ListNode[nullable Object] */;
+var = self->attrs[COLOR_list__List___head].val; /* _head on <self:List[nullable Object]> */
+var1 = self->attrs[COLOR_list__List___tail].val; /* _tail on <self:List[nullable Object]> */
+}
+/* runtime class list__ListIterator */
+const struct class class_list__ListIterator = {
+0, /* box_kind */
+{
+(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to list:ListIterator:kernel#Object#object_id */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to list:ListIterator:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to list:ListIterator:kernel#Object#is_same_instance */
+(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to list:ListIterator:kernel#Object#== */
+(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to list:ListIterator:kernel#Object#!= */
+(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to list:ListIterator:kernel#Object#output */
+(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to list:ListIterator:kernel#Object#output_class_name */
+(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to list:ListIterator:kernel#Object#exit */
+(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to list:ListIterator:kernel#Object#sys */
+(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to list:ListIterator:kernel#Object#hash */
+(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to list:ListIterator:string#Object#to_s */
+(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to list:ListIterator:string#Object#native_class_name */
+(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to list:ListIterator:string#Object#class_name */
+(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to list:ListIterator:string#Object#inspect */
+(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to list:ListIterator:string#Object#inspect_head */
+(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to list:ListIterator:string#Object#args */
+(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to list:ListIterator:math#Object#atan2 */
+(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to list:ListIterator:math#Object#pi */
+(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to list:ListIterator:math#Object#srand_from */
+(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to list:ListIterator:math#Object#srand */
+(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to list:ListIterator:stream#Object#poll */
+(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to list:ListIterator:stream#Object#intern_poll */
+(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to list:ListIterator:time#Object#get_time */
+(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to list:ListIterator:file#Object#printn */
+(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to list:ListIterator:file#Object#print */
+(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to list:ListIterator:file#Object#getc */
+(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to list:ListIterator:file#Object#gets */
+(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to list:ListIterator:file#Object#getcwd */
+(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to list:ListIterator:file#Object#file_getcwd */
+(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to list:ListIterator:file#Object#stdin */
+(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to list:ListIterator:file#Object#stdout */
+(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to list:ListIterator:file#Object#stderr */
+(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to list:ListIterator:model_base#Object#intrude_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to list:ListIterator:model_base#Object#public_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to list:ListIterator:model_base#Object#protected_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to list:ListIterator:model_base#Object#private_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to list:ListIterator:model_base#Object#none_visibility */
+(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to list:ListIterator:model#Object#abstract_kind */
+(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to list:ListIterator:model#Object#concrete_kind */
+(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to list:ListIterator:model#Object#interface_kind */
+(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to list:ListIterator:model#Object#enum_kind */
+(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to list:ListIterator:model#Object#extern_kind */
+(nitmethod_t)VIRTUAL_list__ListIterator__item, /* pointer to list:ListIterator:list#ListIterator#item */
+(nitmethod_t)VIRTUAL_list__ListIterator__next, /* pointer to list:ListIterator:list#ListIterator#next */
+(nitmethod_t)VIRTUAL_list__ListIterator__is_ok, /* pointer to list:ListIterator:list#ListIterator#is_ok */
+(nitmethod_t)VIRTUAL_array__Iterator__to_a, /* pointer to list:ListIterator:array#Iterator#to_a */
+(nitmethod_t)VIRTUAL_list__ListIterator__index, /* pointer to list:ListIterator:list#ListIterator#index */
+(nitmethod_t)VIRTUAL_list__ListIterator__item_61d, /* pointer to list:ListIterator:list#ListIterator#item= */
+(nitmethod_t)VIRTUAL_list__ListIterator__init, /* pointer to list:ListIterator:list#ListIterator#init */
+(nitmethod_t)VIRTUAL_list__ListIterator__delete, /* pointer to list:ListIterator:list#ListIterator#delete */
+(nitmethod_t)VIRTUAL_list__ListIterator__insert_before, /* pointer to list:ListIterator:list#ListIterator#insert_before */
+}
+};
+/* allocate ListIterator[nullable Object] */
+val* NEW_list__ListIterator(const struct type* type) {
+val* self /* : ListIterator[nullable Object] */;
+self = nit_alloc(sizeof(struct instance) + 3*sizeof(nitattribute_t));
+self->type = type;
+self->class = &class_list__ListIterator;
+return self;
+}
+/* allocate ListIterator[nullable Object] */
+void CHECK_NEW_list__ListIterator(val* self) {
+val* var /* : List[nullable Object] */;
+val* var1 /* : nullable ListNode[nullable Object] */;
+long var2 /* : Int */;
+var = self->attrs[COLOR_list__ListIterator___list].val; /* _list on <self:ListIterator[nullable Object]> */
+if (var == NULL) {
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _list");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/list.nit", 276);
+exit(1);
+}
+var1 = self->attrs[COLOR_list__ListIterator___node].val; /* _node on <self:ListIterator[nullable Object]> */
+var2 = self->attrs[COLOR_list__ListIterator___index].l; /* _index on <self:ListIterator[nullable Object]> */
+}
+/* runtime class list__ListNode */
+const struct class class_list__ListNode = {
+0, /* box_kind */
+{
+(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to list:ListNode:kernel#Object#object_id */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to list:ListNode:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to list:ListNode:kernel#Object#is_same_instance */
+(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to list:ListNode:kernel#Object#== */
+(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to list:ListNode:kernel#Object#!= */
+(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to list:ListNode:kernel#Object#output */
+(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to list:ListNode:kernel#Object#output_class_name */
+(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to list:ListNode:kernel#Object#exit */
+(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to list:ListNode:kernel#Object#sys */
+(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to list:ListNode:kernel#Object#hash */
+(nitmethod_t)VIRTUAL_string__Collection__to_s, /* pointer to list:ListNode:string#Collection#to_s */
+(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to list:ListNode:string#Object#native_class_name */
+(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to list:ListNode:string#Object#class_name */
+(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to list:ListNode:string#Object#inspect */
+(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to list:ListNode:string#Object#inspect_head */
+(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to list:ListNode:string#Object#args */
+(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to list:ListNode:math#Object#atan2 */
+(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to list:ListNode:math#Object#pi */
+(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to list:ListNode:math#Object#srand_from */
+(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to list:ListNode:math#Object#srand */
+(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to list:ListNode:stream#Object#poll */
+(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to list:ListNode:stream#Object#intern_poll */
+(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to list:ListNode:time#Object#get_time */
+(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to list:ListNode:file#Object#printn */
+(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to list:ListNode:file#Object#print */
+(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to list:ListNode:file#Object#getc */
+(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to list:ListNode:file#Object#gets */
+(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to list:ListNode:file#Object#getcwd */
+(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to list:ListNode:file#Object#file_getcwd */
+(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to list:ListNode:file#Object#stdin */
+(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to list:ListNode:file#Object#stdout */
+(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to list:ListNode:file#Object#stderr */
+(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to list:ListNode:model_base#Object#intrude_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to list:ListNode:model_base#Object#public_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to list:ListNode:model_base#Object#protected_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to list:ListNode:model_base#Object#private_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to list:ListNode:model_base#Object#none_visibility */
+(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to list:ListNode:model#Object#abstract_kind */
+(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to list:ListNode:model#Object#concrete_kind */
+(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to list:ListNode:model#Object#interface_kind */
+(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to list:ListNode:model#Object#enum_kind */
+(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to list:ListNode:model#Object#extern_kind */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+(nitmethod_t)VIRTUAL_abstract_collection__Container__iterator, /* pointer to list:ListNode:abstract_collection#Container#iterator */
+(nitmethod_t)VIRTUAL_abstract_collection__Container__is_empty, /* pointer to list:ListNode:abstract_collection#Container#is_empty */
+(nitmethod_t)VIRTUAL_abstract_collection__Container__length, /* pointer to list:ListNode:abstract_collection#Container#length */
+(nitmethod_t)VIRTUAL_abstract_collection__Container__has, /* pointer to list:ListNode:abstract_collection#Container#has */
+(nitmethod_t)VIRTUAL_abstract_collection__Container__has_only, /* pointer to list:ListNode:abstract_collection#Container#has_only */
+(nitmethod_t)VIRTUAL_abstract_collection__Container__count, /* pointer to list:ListNode:abstract_collection#Container#count */
+(nitmethod_t)VIRTUAL_abstract_collection__Container__first, /* pointer to list:ListNode:abstract_collection#Container#first */
+(nitmethod_t)VIRTUAL_abstract_collection__Collection__has_all, /* pointer to list:ListNode:abstract_collection#Collection#has_all */
+(nitmethod_t)VIRTUAL_array__Collection__to_a, /* pointer to list:ListNode:array#Collection#to_a */
+(nitmethod_t)VIRTUAL_string__Collection__join, /* pointer to list:ListNode:string#Collection#join */
+(nitmethod_t)VIRTUAL_math__Collection__rand, /* pointer to list:ListNode:math#Collection#rand */
+(nitmethod_t)VIRTUAL_abstract_collection__Container__init, /* pointer to list:ListNode:abstract_collection#Container#init */
+(nitmethod_t)VIRTUAL_abstract_collection__Container__item, /* pointer to list:ListNode:abstract_collection#Container#item */
+(nitmethod_t)VIRTUAL_abstract_collection__Container__item_61d, /* pointer to list:ListNode:abstract_collection#Container#item= */
+(nitmethod_t)VIRTUAL_list__ListNode__init, /* pointer to list:ListNode:list#ListNode#init */
+(nitmethod_t)VIRTUAL_list__ListNode__next, /* pointer to list:ListNode:list#ListNode#next */
+(nitmethod_t)VIRTUAL_list__ListNode__next_61d, /* pointer to list:ListNode:list#ListNode#next= */
+(nitmethod_t)VIRTUAL_list__ListNode__prev, /* pointer to list:ListNode:list#ListNode#prev */
+(nitmethod_t)VIRTUAL_list__ListNode__prev_61d, /* pointer to list:ListNode:list#ListNode#prev= */
+}
+};
+/* allocate ListNode[nullable Object] */
+val* NEW_list__ListNode(const struct type* type) {
+val* self /* : ListNode[nullable Object] */;
+self = nit_alloc(sizeof(struct instance) + 3*sizeof(nitattribute_t));
+self->type = type;
+self->class = &class_list__ListNode;
+return self;
+}
+/* allocate ListNode[nullable Object] */
+void CHECK_NEW_list__ListNode(val* self) {
+val* var /* : nullable Object */;
+val* var1 /* : nullable ListNode[nullable Object] */;
+val* var2 /* : nullable ListNode[nullable Object] */;
+var = self->attrs[COLOR_abstract_collection__Container___item].val; /* _item on <self:ListNode[nullable Object]> */
+var1 = self->attrs[COLOR_list__ListNode___next].val; /* _next on <self:ListNode[nullable Object]> */
+var2 = self->attrs[COLOR_list__ListNode___prev].val; /* _prev on <self:ListNode[nullable Object]> */
+}
+/* runtime class array__Array */
+const struct class class_array__Array = {
+0, /* box_kind */
+{
+(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to array:Array:kernel#Object#object_id */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to array:Array:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to array:Array:kernel#Object#is_same_instance */
+(nitmethod_t)VIRTUAL_abstract_collection__SequenceRead___61d_61d, /* pointer to array:Array:abstract_collection#SequenceRead#== */
+(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to array:Array:kernel#Object#!= */
+(nitmethod_t)VIRTUAL_array__AbstractArrayRead__output, /* pointer to array:Array:array#AbstractArrayRead#output */
+(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to array:Array:kernel#Object#output_class_name */
+(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to array:Array:kernel#Object#exit */
+(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to array:Array:kernel#Object#sys */
+(nitmethod_t)VIRTUAL_abstract_collection__SequenceRead__hash, /* pointer to array:Array:abstract_collection#SequenceRead#hash */
+(nitmethod_t)VIRTUAL_string__Array__to_s, /* pointer to array:Array:string#Array#to_s */
+(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to array:Array:string#Object#native_class_name */
+(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to array:Array:string#Object#class_name */
+(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to array:Array:string#Object#inspect */
+(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to array:Array:string#Object#inspect_head */
+(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to array:Array:string#Object#args */
+(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to array:Array:math#Object#atan2 */
+(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to array:Array:math#Object#pi */
+(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to array:Array:math#Object#srand_from */
+(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to array:Array:math#Object#srand */
+(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to array:Array:stream#Object#poll */
+(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to array:Array:stream#Object#intern_poll */
+(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to array:Array:time#Object#get_time */
+(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to array:Array:file#Object#printn */
+(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to array:Array:file#Object#print */
+(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to array:Array:file#Object#getc */
+(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to array:Array:file#Object#gets */
+(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to array:Array:file#Object#getcwd */
+(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to array:Array:file#Object#file_getcwd */
+(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to array:Array:file#Object#stdin */
+(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to array:Array:file#Object#stdout */
+(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to array:Array:file#Object#stderr */
+(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to array:Array:model_base#Object#intrude_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to array:Array:model_base#Object#public_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to array:Array:model_base#Object#protected_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to array:Array:model_base#Object#private_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to array:Array:model_base#Object#none_visibility */
+(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to array:Array:model#Object#abstract_kind */
+(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to array:Array:model#Object#concrete_kind */
+(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to array:Array:model#Object#interface_kind */
+(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to array:Array:model#Object#enum_kind */
+(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to array:Array:model#Object#extern_kind */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+(nitmethod_t)VIRTUAL_array__AbstractArrayRead__iterator, /* pointer to array:Array:array#AbstractArrayRead#iterator */
+(nitmethod_t)VIRTUAL_array__AbstractArrayRead__is_empty, /* pointer to array:Array:array#AbstractArrayRead#is_empty */
+(nitmethod_t)VIRTUAL_array__AbstractArrayRead__length, /* pointer to array:Array:array#AbstractArrayRead#length */
+(nitmethod_t)VIRTUAL_array__AbstractArrayRead__has, /* pointer to array:Array:array#AbstractArrayRead#has */
+(nitmethod_t)VIRTUAL_array__AbstractArrayRead__has_only, /* pointer to array:Array:array#AbstractArrayRead#has_only */
+(nitmethod_t)VIRTUAL_array__AbstractArrayRead__count, /* pointer to array:Array:array#AbstractArrayRead#count */
+(nitmethod_t)VIRTUAL_abstract_collection__SequenceRead__first, /* pointer to array:Array:abstract_collection#SequenceRead#first */
+(nitmethod_t)VIRTUAL_abstract_collection__Collection__has_all, /* pointer to array:Array:abstract_collection#Collection#has_all */
+(nitmethod_t)VIRTUAL_array__Collection__to_a, /* pointer to array:Array:array#Collection#to_a */
+(nitmethod_t)VIRTUAL_string__Collection__join, /* pointer to array:Array:string#Collection#join */
+(nitmethod_t)VIRTUAL_math__Collection__rand, /* pointer to array:Array:math#Collection#rand */
+(nitmethod_t)VIRTUAL_array__AbstractArray__clear, /* pointer to array:Array:array#AbstractArray#clear */
+(nitmethod_t)VIRTUAL_array__AbstractArray__remove, /* pointer to array:Array:array#AbstractArray#remove */
+(nitmethod_t)VIRTUAL_array__AbstractArray__remove_all, /* pointer to array:Array:array#AbstractArray#remove_all */
+(nitmethod_t)VIRTUAL_array__Array__add, /* pointer to array:Array:array#Array#add */
+(nitmethod_t)VIRTUAL_abstract_collection__SimpleCollection__add_all, /* pointer to array:Array:abstract_collection#SimpleCollection#add_all */
+(nitmethod_t)VIRTUAL_array__Array___91d_93d, /* pointer to array:Array:array#Array#[] */
+(nitmethod_t)VIRTUAL_abstract_collection__SequenceRead__last, /* pointer to array:Array:abstract_collection#SequenceRead#last */
+(nitmethod_t)VIRTUAL_array__AbstractArrayRead__index_of, /* pointer to array:Array:array#AbstractArrayRead#index_of */
+(nitmethod_t)VIRTUAL_abstract_collection__Sequence__first_61d, /* pointer to array:Array:abstract_collection#Sequence#first= */
+(nitmethod_t)VIRTUAL_abstract_collection__Sequence__last_61d, /* pointer to array:Array:abstract_collection#Sequence#last= */
+(nitmethod_t)VIRTUAL_array__AbstractArray__push, /* pointer to array:Array:array#AbstractArray#push */
+(nitmethod_t)VIRTUAL_abstract_collection__Sequence__append, /* pointer to array:Array:abstract_collection#Sequence#append */
+(nitmethod_t)VIRTUAL_array__AbstractArray__pop, /* pointer to array:Array:array#AbstractArray#pop */
+(nitmethod_t)VIRTUAL_array__AbstractArray__unshift, /* pointer to array:Array:array#AbstractArray#unshift */
+(nitmethod_t)VIRTUAL_array__AbstractArray__shift, /* pointer to array:Array:array#AbstractArray#shift */
+(nitmethod_t)VIRTUAL_array__Array___91d_93d_61d, /* pointer to array:Array:array#Array#[]= */
+(nitmethod_t)VIRTUAL_array__AbstractArray__remove_at, /* pointer to array:Array:array#AbstractArray#remove_at */
+(nitmethod_t)VIRTUAL_collection__Sequence__subarray, /* pointer to array:Array:collection#Sequence#subarray */
+(nitmethod_t)VIRTUAL_array__AbstractArrayRead__last_index_of, /* pointer to array:Array:array#AbstractArrayRead#last_index_of */
+(nitmethod_t)VIRTUAL_array__AbstractArrayRead__index_of_from, /* pointer to array:Array:array#AbstractArrayRead#index_of_from */
+(nitmethod_t)VIRTUAL_array__AbstractArrayRead__last_index_of_from, /* pointer to array:Array:array#AbstractArrayRead#last_index_of_from */
+(nitmethod_t)VIRTUAL_array__AbstractArrayRead__reversed, /* pointer to array:Array:array#AbstractArrayRead#reversed */
+(nitmethod_t)VIRTUAL_array__AbstractArrayRead__copy_to, /* pointer to array:Array:array#AbstractArrayRead#copy_to */
+(nitmethod_t)VIRTUAL_array__AbstractArrayRead__init, /* pointer to array:Array:array#AbstractArrayRead#init */
+(nitmethod_t)VIRTUAL_array__Array__enlarge, /* pointer to array:Array:array#Array#enlarge */
+(nitmethod_t)VIRTUAL_array__AbstractArray__insert, /* pointer to array:Array:array#AbstractArray#insert */
+(nitmethod_t)VIRTUAL_array__AbstractArray__swap_at, /* pointer to array:Array:array#AbstractArray#swap_at */
+(nitmethod_t)VIRTUAL_array__AbstractArray__init, /* pointer to array:Array:array#AbstractArray#init */
+(nitmethod_t)VIRTUAL_array__ArrayCapable__calloc_array, /* pointer to array:Array:array#ArrayCapable#calloc_array */
+(nitmethod_t)VIRTUAL_array__Array__init, /* pointer to array:Array:array#Array#init */
+(nitmethod_t)VIRTUAL_array__Array__from, /* pointer to array:Array:array#Array#from */
+(nitmethod_t)VIRTUAL_array__Array__with_items, /* pointer to array:Array:array#Array#with_items */
+(nitmethod_t)VIRTUAL_array__Array__with_capacity, /* pointer to array:Array:array#Array#with_capacity */
+(nitmethod_t)VIRTUAL_array__Array__filled_with, /* pointer to array:Array:array#Array#filled_with */
+(nitmethod_t)VIRTUAL_array__Array__with_native, /* pointer to array:Array:array#Array#with_native */
+(nitmethod_t)VIRTUAL_array__Array__intern_items, /* pointer to array:Array:array#Array#intern_items */
+(nitmethod_t)VIRTUAL_abstract_compiler__Array___45d, /* pointer to array:Array:abstract_compiler#Array#- */
+}
+};
+/* allocate Array[nullable Object] */
+val* NEW_array__Array(const struct type* type) {
+val* self /* : Array[nullable Object] */;
+long var /* : Int */;
+val* var1 /* : null */;
+long var2 /* : Int */;
+self = nit_alloc(sizeof(struct instance) + 3*sizeof(nitattribute_t));
+self->type = type;
+self->class = &class_array__Array;
+var = 0;
+self->attrs[COLOR_array__AbstractArrayRead___length].l = var; /* _length on <self:Array[nullable Object] exact> */
+var1 = NULL;
+self->attrs[COLOR_array__Array___items].val = var1; /* _items on <self:Array[nullable Object] exact> */
+var2 = 0;
+self->attrs[COLOR_array__Array___capacity].l = var2; /* _capacity on <self:Array[nullable Object] exact> */
+return self;
+}
+/* allocate Array[nullable Object] */
+void CHECK_NEW_array__Array(val* self) {
+}
+/* runtime class array__ArrayIterator */
+const struct class class_array__ArrayIterator = {
+0, /* box_kind */
+{
+(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to array:ArrayIterator:kernel#Object#object_id */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to array:ArrayIterator:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to array:ArrayIterator:kernel#Object#is_same_instance */
+(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to array:ArrayIterator:kernel#Object#== */
+(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to array:ArrayIterator:kernel#Object#!= */
+(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to array:ArrayIterator:kernel#Object#output */
+(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to array:ArrayIterator:kernel#Object#output_class_name */
+(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to array:ArrayIterator:kernel#Object#exit */
+(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to array:ArrayIterator:kernel#Object#sys */
+(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to array:ArrayIterator:kernel#Object#hash */
+(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to array:ArrayIterator:string#Object#to_s */
+(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to array:ArrayIterator:string#Object#native_class_name */
+(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to array:ArrayIterator:string#Object#class_name */
+(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to array:ArrayIterator:string#Object#inspect */
+(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to array:ArrayIterator:string#Object#inspect_head */
+(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to array:ArrayIterator:string#Object#args */
+(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to array:ArrayIterator:math#Object#atan2 */
+(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to array:ArrayIterator:math#Object#pi */
+(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to array:ArrayIterator:math#Object#srand_from */
+(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to array:ArrayIterator:math#Object#srand */
+(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to array:ArrayIterator:stream#Object#poll */
+(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to array:ArrayIterator:stream#Object#intern_poll */
+(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to array:ArrayIterator:time#Object#get_time */
+(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to array:ArrayIterator:file#Object#printn */
+(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to array:ArrayIterator:file#Object#print */
+(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to array:ArrayIterator:file#Object#getc */
+(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to array:ArrayIterator:file#Object#gets */
+(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to array:ArrayIterator:file#Object#getcwd */
+(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to array:ArrayIterator:file#Object#file_getcwd */
+(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to array:ArrayIterator:file#Object#stdin */
+(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to array:ArrayIterator:file#Object#stdout */
+(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to array:ArrayIterator:file#Object#stderr */
+(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to array:ArrayIterator:model_base#Object#intrude_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to array:ArrayIterator:model_base#Object#public_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to array:ArrayIterator:model_base#Object#protected_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to array:ArrayIterator:model_base#Object#private_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to array:ArrayIterator:model_base#Object#none_visibility */
+(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to array:ArrayIterator:model#Object#abstract_kind */
+(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to array:ArrayIterator:model#Object#concrete_kind */
+(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to array:ArrayIterator:model#Object#interface_kind */
+(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to array:ArrayIterator:model#Object#enum_kind */
+(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to array:ArrayIterator:model#Object#extern_kind */
+(nitmethod_t)VIRTUAL_array__ArrayIterator__item, /* pointer to array:ArrayIterator:array#ArrayIterator#item */
+(nitmethod_t)VIRTUAL_array__ArrayIterator__next, /* pointer to array:ArrayIterator:array#ArrayIterator#next */
+(nitmethod_t)VIRTUAL_array__ArrayIterator__is_ok, /* pointer to array:ArrayIterator:array#ArrayIterator#is_ok */
+(nitmethod_t)VIRTUAL_array__Iterator__to_a, /* pointer to array:ArrayIterator:array#Iterator#to_a */
+(nitmethod_t)VIRTUAL_array__ArrayIterator__index, /* pointer to array:ArrayIterator:array#ArrayIterator#index */
+(nitmethod_t)VIRTUAL_array__ArrayIterator__init, /* pointer to array:ArrayIterator:array#ArrayIterator#init */
+}
+};
+/* allocate ArrayIterator[nullable Object] */
+val* NEW_array__ArrayIterator(const struct type* type) {
+val* self /* : ArrayIterator[nullable Object] */;
+long var /* : Int */;
+self = nit_alloc(sizeof(struct instance) + 2*sizeof(nitattribute_t));
+self->type = type;
+self->class = &class_array__ArrayIterator;
+var = 0;
+self->attrs[COLOR_array__ArrayIterator___index].l = var; /* _index on <self:ArrayIterator[nullable Object] exact> */
+return self;
+}
+/* allocate ArrayIterator[nullable Object] */
+void CHECK_NEW_array__ArrayIterator(val* self) {
+val* var /* : AbstractArrayRead[nullable Object] */;
+var = self->attrs[COLOR_array__ArrayIterator___array].val; /* _array on <self:ArrayIterator[nullable Object]> */
+if (var == NULL) {
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _array");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 375);
+exit(1);
+}
+}
+/* runtime class array__ArraySet */
+const struct class class_array__ArraySet = {
+0, /* box_kind */
+{
+(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to array:ArraySet:kernel#Object#object_id */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to array:ArraySet:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to array:ArraySet:kernel#Object#is_same_instance */
+(nitmethod_t)VIRTUAL_abstract_collection__Set___61d_61d, /* pointer to array:ArraySet:abstract_collection#Set#== */
+(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to array:ArraySet:kernel#Object#!= */
+(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to array:ArraySet:kernel#Object#output */
+(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to array:ArraySet:kernel#Object#output_class_name */
+(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to array:ArraySet:kernel#Object#exit */
+(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to array:ArraySet:kernel#Object#sys */
+(nitmethod_t)VIRTUAL_abstract_collection__Set__hash, /* pointer to array:ArraySet:abstract_collection#Set#hash */
+(nitmethod_t)VIRTUAL_string__Collection__to_s, /* pointer to array:ArraySet:string#Collection#to_s */
+(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to array:ArraySet:string#Object#native_class_name */
+(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to array:ArraySet:string#Object#class_name */
+(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to array:ArraySet:string#Object#inspect */
+(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to array:ArraySet:string#Object#inspect_head */
+(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to array:ArraySet:string#Object#args */
+(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to array:ArraySet:math#Object#atan2 */
+(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to array:ArraySet:math#Object#pi */
+(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to array:ArraySet:math#Object#srand_from */
+(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to array:ArraySet:math#Object#srand */
+(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to array:ArraySet:stream#Object#poll */
+(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to array:ArraySet:stream#Object#intern_poll */
+(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to array:ArraySet:time#Object#get_time */
+(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to array:ArraySet:file#Object#printn */
+(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to array:ArraySet:file#Object#print */
+(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to array:ArraySet:file#Object#getc */
+(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to array:ArraySet:file#Object#gets */
+(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to array:ArraySet:file#Object#getcwd */
+(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to array:ArraySet:file#Object#file_getcwd */
+(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to array:ArraySet:file#Object#stdin */
+(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to array:ArraySet:file#Object#stdout */
+(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to array:ArraySet:file#Object#stderr */
+(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to array:ArraySet:model_base#Object#intrude_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to array:ArraySet:model_base#Object#public_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to array:ArraySet:model_base#Object#protected_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to array:ArraySet:model_base#Object#private_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to array:ArraySet:model_base#Object#none_visibility */
+(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to array:ArraySet:model#Object#abstract_kind */
+(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to array:ArraySet:model#Object#concrete_kind */
+(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to array:ArraySet:model#Object#interface_kind */
+(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to array:ArraySet:model#Object#enum_kind */
+(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to array:ArraySet:model#Object#extern_kind */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+(nitmethod_t)VIRTUAL_array__ArraySet__iterator, /* pointer to array:ArraySet:array#ArraySet#iterator */
+(nitmethod_t)VIRTUAL_array__ArraySet__is_empty, /* pointer to array:ArraySet:array#ArraySet#is_empty */
+(nitmethod_t)VIRTUAL_array__ArraySet__length, /* pointer to array:ArraySet:array#ArraySet#length */
+(nitmethod_t)VIRTUAL_array__ArraySet__has, /* pointer to array:ArraySet:array#ArraySet#has */
+(nitmethod_t)VIRTUAL_abstract_collection__Set__has_only, /* pointer to array:ArraySet:abstract_collection#Set#has_only */
+(nitmethod_t)VIRTUAL_abstract_collection__Set__count, /* pointer to array:ArraySet:abstract_collection#Set#count */
+(nitmethod_t)VIRTUAL_array__ArraySet__first, /* pointer to array:ArraySet:array#ArraySet#first */
+(nitmethod_t)VIRTUAL_abstract_collection__Collection__has_all, /* pointer to array:ArraySet:abstract_collection#Collection#has_all */
+(nitmethod_t)VIRTUAL_array__Collection__to_a, /* pointer to array:ArraySet:array#Collection#to_a */
+(nitmethod_t)VIRTUAL_string__Collection__join, /* pointer to array:ArraySet:string#Collection#join */
+(nitmethod_t)VIRTUAL_math__Collection__rand, /* pointer to array:ArraySet:math#Collection#rand */
+(nitmethod_t)VIRTUAL_array__ArraySet__clear, /* pointer to array:ArraySet:array#ArraySet#clear */
+(nitmethod_t)VIRTUAL_array__ArraySet__remove, /* pointer to array:ArraySet:array#ArraySet#remove */
+(nitmethod_t)VIRTUAL_array__ArraySet__remove_all, /* pointer to array:ArraySet:array#ArraySet#remove_all */
+(nitmethod_t)VIRTUAL_array__ArraySet__add, /* pointer to array:ArraySet:array#ArraySet#add */
+(nitmethod_t)VIRTUAL_abstract_collection__SimpleCollection__add_all, /* pointer to array:ArraySet:abstract_collection#SimpleCollection#add_all */
+(nitmethod_t)VIRTUAL_array__ArraySet__enlarge, /* pointer to array:ArraySet:array#ArraySet#enlarge */
+(nitmethod_t)VIRTUAL_array__ArraySet__remove_at, /* pointer to array:ArraySet:array#ArraySet#remove_at */
+(nitmethod_t)VIRTUAL_array__ArraySet__init, /* pointer to array:ArraySet:array#ArraySet#init */
+(nitmethod_t)VIRTUAL_array__ArraySet__with_capacity, /* pointer to array:ArraySet:array#ArraySet#with_capacity */
+}
+};
+/* allocate ArraySet[Object] */
+val* NEW_array__ArraySet(const struct type* type) {
+val* self /* : ArraySet[Object] */;
+self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
+self->type = type;
+self->class = &class_array__ArraySet;
+return self;
+}
+/* allocate ArraySet[Object] */
+void CHECK_NEW_array__ArraySet(val* self) {
+val* var /* : Array[Object] */;
+var = self->attrs[COLOR_array__ArraySet___array].val; /* _array on <self:ArraySet[Object]> */
+if (var == NULL) {
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _array");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 384);
+exit(1);
+}
+}
+/* runtime class array__ArraySetIterator */
+const struct class class_array__ArraySetIterator = {
+0, /* box_kind */
+{
+(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to array:ArraySetIterator:kernel#Object#object_id */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to array:ArraySetIterator:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to array:ArraySetIterator:kernel#Object#is_same_instance */
+(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to array:ArraySetIterator:kernel#Object#== */
+(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to array:ArraySetIterator:kernel#Object#!= */
+(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to array:ArraySetIterator:kernel#Object#output */
+(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to array:ArraySetIterator:kernel#Object#output_class_name */
+(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to array:ArraySetIterator:kernel#Object#exit */
+(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to array:ArraySetIterator:kernel#Object#sys */
+(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to array:ArraySetIterator:kernel#Object#hash */
+(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to array:ArraySetIterator:string#Object#to_s */
+(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to array:ArraySetIterator:string#Object#native_class_name */
+(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to array:ArraySetIterator:string#Object#class_name */
+(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to array:ArraySetIterator:string#Object#inspect */
+(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to array:ArraySetIterator:string#Object#inspect_head */
+(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to array:ArraySetIterator:string#Object#args */
+(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to array:ArraySetIterator:math#Object#atan2 */
+(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to array:ArraySetIterator:math#Object#pi */
+(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to array:ArraySetIterator:math#Object#srand_from */
+(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to array:ArraySetIterator:math#Object#srand */
+(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to array:ArraySetIterator:stream#Object#poll */
+(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to array:ArraySetIterator:stream#Object#intern_poll */
+(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to array:ArraySetIterator:time#Object#get_time */
+(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to array:ArraySetIterator:file#Object#printn */
+(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to array:ArraySetIterator:file#Object#print */
+(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to array:ArraySetIterator:file#Object#getc */
+(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to array:ArraySetIterator:file#Object#gets */
+(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to array:ArraySetIterator:file#Object#getcwd */
+(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to array:ArraySetIterator:file#Object#file_getcwd */
+(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to array:ArraySetIterator:file#Object#stdin */
+(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to array:ArraySetIterator:file#Object#stdout */
+(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to array:ArraySetIterator:file#Object#stderr */
+(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to array:ArraySetIterator:model_base#Object#intrude_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to array:ArraySetIterator:model_base#Object#public_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to array:ArraySetIterator:model_base#Object#protected_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to array:ArraySetIterator:model_base#Object#private_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to array:ArraySetIterator:model_base#Object#none_visibility */
+(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to array:ArraySetIterator:model#Object#abstract_kind */
+(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to array:ArraySetIterator:model#Object#concrete_kind */
+(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to array:ArraySetIterator:model#Object#interface_kind */
+(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to array:ArraySetIterator:model#Object#enum_kind */
+(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to array:ArraySetIterator:model#Object#extern_kind */
+(nitmethod_t)VIRTUAL_array__ArraySetIterator__item, /* pointer to array:ArraySetIterator:array#ArraySetIterator#item */
+(nitmethod_t)VIRTUAL_array__ArraySetIterator__next, /* pointer to array:ArraySetIterator:array#ArraySetIterator#next */
+(nitmethod_t)VIRTUAL_array__ArraySetIterator__is_ok, /* pointer to array:ArraySetIterator:array#ArraySetIterator#is_ok */
+(nitmethod_t)VIRTUAL_array__Iterator__to_a, /* pointer to array:ArraySetIterator:array#Iterator#to_a */
+(nitmethod_t)VIRTUAL_array__ArraySetIterator__init, /* pointer to array:ArraySetIterator:array#ArraySetIterator#init */
+}
+};
+/* allocate ArraySetIterator[Object] */
+val* NEW_array__ArraySetIterator(const struct type* type) {
+val* self /* : ArraySetIterator[Object] */;
+self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
+self->type = type;
+self->class = &class_array__ArraySetIterator;
+return self;
+}
+/* allocate ArraySetIterator[Object] */
+void CHECK_NEW_array__ArraySetIterator(val* self) {
+val* var /* : ArrayIterator[Object] */;
+var = self->attrs[COLOR_array__ArraySetIterator___iter].val; /* _iter on <self:ArraySetIterator[Object]> */
+if (var == NULL) {
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _iter");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 441);
+exit(1);
+}
 }

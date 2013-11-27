@@ -5,7 +5,8 @@ val* var /* : Phase */;
 val* var1 /* : Phase */;
 var1 = self->attrs[COLOR_transform__ToolContext___64dtransform_phase].val; /* @transform_phase on <self:ToolContext> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @transform_phase", "src/transform.nit", 24);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @transform_phase");
+fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 24);
 exit(1);
 }
 var = var1;
@@ -62,7 +63,8 @@ val* var /* : TransformPhase */;
 val* var1 /* : TransformPhase */;
 var1 = self->attrs[COLOR_transform__TransformVisitor___64dphase].val; /* @phase on <self:TransformVisitor> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @phase", "src/transform.nit", 45);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @phase");
+fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 45);
 exit(1);
 }
 var = var1;
@@ -94,7 +96,8 @@ val* var /* : MModule */;
 val* var1 /* : MModule */;
 var1 = self->attrs[COLOR_transform__TransformVisitor___64dmmodule].val; /* @mmodule on <self:TransformVisitor> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @mmodule", "src/transform.nit", 46);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @mmodule");
+fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 46);
 exit(1);
 }
 var = var1;
@@ -126,7 +129,8 @@ val* var /* : MClassDef */;
 val* var1 /* : MClassDef */;
 var1 = self->attrs[COLOR_transform__TransformVisitor___64dmclassdef].val; /* @mclassdef on <self:TransformVisitor> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @mclassdef", "src/transform.nit", 47);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @mclassdef");
+fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 47);
 exit(1);
 }
 var = var1;
@@ -158,7 +162,8 @@ val* var /* : MPropDef */;
 val* var1 /* : MPropDef */;
 var1 = self->attrs[COLOR_transform__TransformVisitor___64dmpropdef].val; /* @mpropdef on <self:TransformVisitor> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @mpropdef", "src/transform.nit", 48);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @mpropdef");
+fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 48);
 exit(1);
 }
 var = var1;
@@ -190,7 +195,8 @@ val* var /* : ASTBuilder */;
 val* var1 /* : ASTBuilder */;
 var1 = self->attrs[COLOR_transform__TransformVisitor___64dbuilder].val; /* @builder on <self:TransformVisitor> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @builder", "src/transform.nit", 49);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @builder");
+fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 49);
 exit(1);
 }
 var = var1;
@@ -236,7 +242,8 @@ var_npropdef = p1;
 ((void (*)(val*, val*))(self->class->vft[COLOR_transform__TransformVisitor__phase_61d]))(self, var_phase) /* phase= on <self:TransformVisitor>*/;
 var = ((val* (*)(val*))(var_npropdef->class->vft[COLOR_modelize_property__APropdef__mpropdef]))(var_npropdef) /* mpropdef on <var_npropdef:APropdef>*/;
 if (var == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/transform.nit", 54);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 54);
 exit(1);
 }
 ((void (*)(val*, val*))(self->class->vft[COLOR_transform__TransformVisitor__mpropdef_61d]))(self, var) /* mpropdef= on <self:TransformVisitor>*/;
@@ -384,7 +391,8 @@ if (var2){
 var3 = ((val* (*)(val*))(var_v->class->vft[COLOR_transform__TransformVisitor__builder]))(var_v) /* builder on <var_v:TransformVisitor>*/;
 var4 = ((val* (*)(val*))(self->class->vft[COLOR_scope__AVardeclExpr__variable]))(self) /* variable on <self:AVardeclExpr>*/;
 if (var4 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/transform.nit", 99);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 99);
 exit(1);
 }
 var5 = ((val* (*)(val*, val*, val*))(var3->class->vft[COLOR_astbuilder__ASTBuilder__make_var_assign]))(var3, var4, var_nexpr) /* make_var_assign on <var3:ASTBuilder>*/;
@@ -419,7 +427,8 @@ var_nif = var3;
 var4 = ((val* (*)(val*))(var_nif->class->vft[COLOR_parser_nodes__AIfExpr__n_then]))(var_nif) /* n_then on <var_nif:AIfExpr>*/;
 var5 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AIfexprExpr__n_then]))(self) /* n_then on <self:AIfexprExpr>*/;
 if (var4 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/transform.nit", 112);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 112);
 exit(1);
 } else {
 ((void (*)(val*, val*))(var4->class->vft[COLOR_astbuilder__AExpr__add]))(var4, var5) /* add on <var4:nullable AExpr>*/;
@@ -427,7 +436,8 @@ exit(1);
 var6 = ((val* (*)(val*))(var_nif->class->vft[COLOR_parser_nodes__AIfExpr__n_else]))(var_nif) /* n_else on <var_nif:AIfExpr>*/;
 var7 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AIfexprExpr__n_else]))(self) /* n_else on <self:AIfexprExpr>*/;
 if (var6 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/transform.nit", 113);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 113);
 exit(1);
 } else {
 ((void (*)(val*, val*))(var6->class->vft[COLOR_astbuilder__AExpr__add]))(var6, var7) /* add on <var6:nullable AExpr>*/;
@@ -463,7 +473,8 @@ var4 = ((val* (*)(val*))(var_nif->class->vft[COLOR_parser_nodes__AIfExpr__n_then
 var5 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AOrExpr__n_expr]))(self) /* n_expr on <self:AOrExpr>*/;
 var6 = ((val* (*)(val*))(var5->class->vft[COLOR_astbuilder__AExpr__make_var_read]))(var5) /* make_var_read on <var5:AExpr>*/;
 if (var4 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/transform.nit", 124);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 124);
 exit(1);
 } else {
 ((void (*)(val*, val*))(var4->class->vft[COLOR_astbuilder__AExpr__add]))(var4, var6) /* add on <var4:nullable AExpr>*/;
@@ -471,7 +482,8 @@ exit(1);
 var7 = ((val* (*)(val*))(var_nif->class->vft[COLOR_parser_nodes__AIfExpr__n_else]))(var_nif) /* n_else on <var_nif:AIfExpr>*/;
 var8 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AOrExpr__n_expr2]))(self) /* n_expr2 on <self:AOrExpr>*/;
 if (var7 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/transform.nit", 125);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 125);
 exit(1);
 } else {
 ((void (*)(val*, val*))(var7->class->vft[COLOR_astbuilder__AExpr__add]))(var7, var8) /* add on <var7:nullable AExpr>*/;
@@ -517,7 +529,8 @@ var_nif = var3;
 var4 = ((val* (*)(val*))(var_nif->class->vft[COLOR_parser_nodes__AIfExpr__n_then]))(var_nif) /* n_then on <var_nif:AIfExpr>*/;
 var5 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AAndExpr__n_expr2]))(self) /* n_expr2 on <self:AAndExpr>*/;
 if (var4 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/transform.nit", 143);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 143);
 exit(1);
 } else {
 ((void (*)(val*, val*))(var4->class->vft[COLOR_astbuilder__AExpr__add]))(var4, var5) /* add on <var4:nullable AExpr>*/;
@@ -526,7 +539,8 @@ var6 = ((val* (*)(val*))(var_nif->class->vft[COLOR_parser_nodes__AIfExpr__n_else
 var7 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AAndExpr__n_expr]))(self) /* n_expr on <self:AAndExpr>*/;
 var8 = ((val* (*)(val*))(var7->class->vft[COLOR_astbuilder__AExpr__make_var_read]))(var7) /* make_var_read on <var7:AExpr>*/;
 if (var6 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/transform.nit", 144);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 144);
 exit(1);
 } else {
 ((void (*)(val*, val*))(var6->class->vft[COLOR_astbuilder__AExpr__add]))(var6, var8) /* add on <var6:nullable AExpr>*/;
@@ -568,6 +582,7 @@ val* var /* : nullable MType */;
 short int var1 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 val* var_mtype /* var mtype: MClassType */;
 val* var2 /* : ASTBuilder */;
 val* var3 /* : ABlockExpr */;
@@ -629,7 +644,9 @@ var1 = var->type->type_table[cltype] == idtype;
 }
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/transform.nit", 173);
+var_class_name = var == NULL ? "null" : var->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MClassType", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 173);
 exit(1);
 }
 var_mtype = var;
@@ -920,6 +937,7 @@ val* var /* : nullable MType */;
 short int var1 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 val* var_mtype /* var mtype: MClassType */;
 static val* varonce;
 val* var2 /* : String */;
@@ -951,7 +969,9 @@ var1 = var->type->type_table[cltype] == idtype;
 }
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/transform.nit", 227);
+var_class_name = var == NULL ? "null" : var->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MClassType", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 227);
 exit(1);
 }
 var_mtype = var;
@@ -995,6 +1015,7 @@ val* var /* : nullable MType */;
 short int var1 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 val* var_mtype /* var mtype: MClassType */;
 static val* varonce;
 val* var2 /* : String */;
@@ -1026,7 +1047,9 @@ var1 = var->type->type_table[cltype] == idtype;
 }
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/transform.nit", 238);
+var_class_name = var == NULL ? "null" : var->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MClassType", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 238);
 exit(1);
 }
 var_mtype = var;
@@ -1134,7 +1157,8 @@ CHECK_NEW_array__Array(var4);
 var_write_args = var4;
 var5 = ((val* (*)(val*))(self->class->vft[COLOR_typing__ASendExpr__raw_arguments]))(self) /* raw_arguments on <self:ASendReassignFormExpr>*/;
 if (var5 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/transform.nit", 268);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 268);
 exit(1);
 }
 var6 = ((val* (*)(val*))(var5->class->vft[COLOR_abstract_collection__Collection__iterator]))(var5) /* iterator on <var5:nullable Array[AExpr](Array[AExpr])>*/;
@@ -1157,7 +1181,8 @@ var12 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ASendExpr__n_expr
 var13 = ((val* (*)(val*))(var12->class->vft[COLOR_astbuilder__AExpr__make_var_read]))(var12) /* make_var_read on <var12:AExpr>*/;
 var14 = ((val* (*)(val*))(self->class->vft[COLOR_typing__ASendExpr__callsite]))(self) /* callsite on <self:ASendReassignFormExpr>*/;
 if (var14 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/transform.nit", 274);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 274);
 exit(1);
 } else {
 var15 = ((val* (*)(val*))(var14->class->vft[COLOR_typing__CallSite__mproperty]))(var14) /* mproperty on <var14:nullable CallSite>*/;
@@ -1167,7 +1192,8 @@ var_nread = var16;
 var17 = ((val* (*)(val*))(var_v->class->vft[COLOR_transform__TransformVisitor__builder]))(var_v) /* builder on <var_v:TransformVisitor>*/;
 var18 = ((val* (*)(val*))(self->class->vft[COLOR_typing__AReassignFormExpr__reassign_callsite]))(self) /* reassign_callsite on <self:ASendReassignFormExpr>*/;
 if (var18 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/transform.nit", 276);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 276);
 exit(1);
 } else {
 var19 = ((val* (*)(val*))(var18->class->vft[COLOR_typing__CallSite__mproperty]))(var18) /* mproperty on <var18:nullable CallSite>*/;
@@ -1189,7 +1215,8 @@ var26 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ASendExpr__n_expr
 var27 = ((val* (*)(val*))(var26->class->vft[COLOR_astbuilder__AExpr__make_var_read]))(var26) /* make_var_read on <var26:AExpr>*/;
 var28 = ((val* (*)(val*))(self->class->vft[COLOR_typing__ASendReassignFormExpr__write_callsite]))(self) /* write_callsite on <self:ASendReassignFormExpr>*/;
 if (var28 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/transform.nit", 279);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 279);
 exit(1);
 } else {
 var29 = ((val* (*)(val*))(var28->class->vft[COLOR_typing__CallSite__mproperty]))(var28) /* mproperty on <var28:nullable CallSite>*/;
@@ -1228,7 +1255,8 @@ val* var_nwrite /* var nwrite: AVarAssignExpr */;
 var_v = p0;
 var = ((val* (*)(val*))(self->class->vft[COLOR_scope__AVarFormExpr__variable]))(self) /* variable on <self:AVarReassignExpr>*/;
 if (var == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/transform.nit", 290);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 290);
 exit(1);
 }
 var_variable = var;
@@ -1238,7 +1266,8 @@ var_nread = var2;
 var3 = ((val* (*)(val*))(var_v->class->vft[COLOR_transform__TransformVisitor__builder]))(var_v) /* builder on <var_v:TransformVisitor>*/;
 var4 = ((val* (*)(val*))(self->class->vft[COLOR_typing__AReassignFormExpr__reassign_callsite]))(self) /* reassign_callsite on <self:AVarReassignExpr>*/;
 if (var4 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/transform.nit", 293);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 293);
 exit(1);
 } else {
 var5 = ((val* (*)(val*))(var4->class->vft[COLOR_typing__CallSite__mproperty]))(var4) /* mproperty on <var4:nullable CallSite>*/;
@@ -1301,7 +1330,8 @@ var2 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AAttrFormExpr__n_e
 ((void (*)(val*, val*))(var_nblock->class->vft[COLOR_astbuilder__AExpr__add]))(var_nblock, var2) /* add on <var_nblock:ABlockExpr>*/;
 var3 = ((val* (*)(val*))(self->class->vft[COLOR_typing__AAttrFormExpr__mproperty]))(self) /* mproperty on <self:AAttrReassignExpr>*/;
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/transform.nit", 306);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 306);
 exit(1);
 }
 var_attribute = var3;
@@ -1313,7 +1343,8 @@ var_nread = var7;
 var8 = ((val* (*)(val*))(var_v->class->vft[COLOR_transform__TransformVisitor__builder]))(var_v) /* builder on <var_v:TransformVisitor>*/;
 var9 = ((val* (*)(val*))(self->class->vft[COLOR_typing__AReassignFormExpr__reassign_callsite]))(self) /* reassign_callsite on <self:AAttrReassignExpr>*/;
 if (var9 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/transform.nit", 309);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 309);
 exit(1);
 } else {
 var10 = ((val* (*)(val*))(var9->class->vft[COLOR_typing__CallSite__mproperty]))(var9) /* mproperty on <var9:nullable CallSite>*/;

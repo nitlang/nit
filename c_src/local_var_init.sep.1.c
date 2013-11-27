@@ -5,7 +5,8 @@ val* var /* : Phase */;
 val* var1 /* : Phase */;
 var1 = self->attrs[COLOR_local_var_init__ToolContext___64dlocal_var_init_phase].val; /* @local_var_init_phase on <self:ToolContext> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @local_var_init_phase", "src/local_var_init.nit", 26);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @local_var_init_phase");
+fprintf(stderr, " (%s:%d)\n", "src/local_var_init.nit", 26);
 exit(1);
 }
 var = var1;
@@ -69,7 +70,8 @@ val* var /* : ToolContext */;
 val* var1 /* : ToolContext */;
 var1 = self->attrs[COLOR_local_var_init__LocalVarInitVisitor___64dtoolcontext].val; /* @toolcontext on <self:LocalVarInitVisitor> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @toolcontext", "src/local_var_init.nit", 47);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @toolcontext");
+fprintf(stderr, " (%s:%d)\n", "src/local_var_init.nit", 47);
 exit(1);
 }
 var = var1;
@@ -114,7 +116,8 @@ val* var /* : Set[Variable] */;
 val* var1 /* : Set[Variable] */;
 var1 = self->attrs[COLOR_local_var_init__LocalVarInitVisitor___64dmaybe_unset_vars].val; /* @maybe_unset_vars on <self:LocalVarInitVisitor> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @maybe_unset_vars", "src/local_var_init.nit", 54);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @maybe_unset_vars");
+fprintf(stderr, " (%s:%d)\n", "src/local_var_init.nit", 54);
 exit(1);
 }
 var = var1;
@@ -156,7 +159,8 @@ var1 = 0; /* is null */
 var1 = 1; /* arg is null and recv is not */
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "src/local_var_init.nit", 59);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "src/local_var_init.nit", 59);
 exit(1);
 }
 var2 = ((val* (*)(val*))(self->class->vft[COLOR_local_var_init__LocalVarInitVisitor__maybe_unset_vars]))(self) /* maybe_unset_vars on <self:LocalVarInitVisitor>*/;
@@ -189,7 +193,8 @@ var1 = 0; /* is null */
 var1 = 1; /* arg is null and recv is not */
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "src/local_var_init.nit", 65);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "src/local_var_init.nit", 65);
 exit(1);
 }
 var2 = ((val* (*)(val*))(self->class->vft[COLOR_local_var_init__LocalVarInitVisitor__maybe_unset_vars]))(self) /* maybe_unset_vars on <self:LocalVarInitVisitor>*/;
@@ -201,7 +206,8 @@ goto RET_LABEL;
 }
 var5 = ((val* (*)(val*))(var_node->class->vft[COLOR_flow__AExpr__after_flow_context]))(var_node) /* after_flow_context on <var_node:AExpr>*/;
 if (var5 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/local_var_init.nit", 68);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/local_var_init.nit", 68);
 exit(1);
 }
 var_flow = var5;
@@ -253,7 +259,8 @@ var1 = 0; /* is null */
 var1 = 1; /* arg is null and recv is not */
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "src/local_var_init.nit", 74);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "src/local_var_init.nit", 74);
 exit(1);
 }
 var2 = ((val* (*)(val*))(self->class->vft[COLOR_local_var_init__LocalVarInitVisitor__maybe_unset_vars]))(self) /* maybe_unset_vars on <self:LocalVarInitVisitor>*/;
@@ -265,7 +272,8 @@ goto RET_LABEL;
 }
 var5 = ((val* (*)(val*))(var_node->class->vft[COLOR_flow__AExpr__after_flow_context]))(var_node) /* after_flow_context on <var_node:AExpr>*/;
 if (var5 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/local_var_init.nit", 77);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/local_var_init.nit", 77);
 exit(1);
 }
 var_flow = var5;
@@ -333,7 +341,8 @@ val* var /* : Set[Variable] */;
 val* var1 /* : Set[Variable] */;
 var1 = self->attrs[COLOR_local_var_init__FlowContext___64dset_vars].val; /* @set_vars on <self:FlowContext> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @set_vars", "src/local_var_init.nit", 92);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @set_vars");
+fprintf(stderr, " (%s:%d)\n", "src/local_var_init.nit", 92);
 exit(1);
 }
 var = var1;

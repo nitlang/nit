@@ -776,11 +776,6 @@ class AEqExpr
     readable var _n_expr: AExpr
     readable var _n_expr2: AExpr
 end
-class AEeExpr
-	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
-end
 class ANeExpr
 	super AExpr
     readable var _n_expr: AExpr

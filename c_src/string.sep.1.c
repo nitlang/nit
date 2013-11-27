@@ -58,6 +58,7 @@ short int var2 /* : Bool */;
 short int var4 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 short int var5 /* : Bool */;
 long var6 /* : Int */;
 long var8 /* : Int */;
@@ -66,42 +67,46 @@ short int var10 /* : Bool */;
 short int var12 /* : Bool */;
 int cltype13;
 int idtype14;
-short int var15 /* : Bool */;
-long var16 /* : Int */;
+const char* var_class_name15;
+short int var16 /* : Bool */;
 long var17 /* : Int */;
-short int var18 /* : Bool */;
-short int var20 /* : Bool */;
-int cltype21;
-int idtype22;
-short int var23 /* : Bool */;
-long var24 /* : Int */;
+long var18 /* : Int */;
+short int var19 /* : Bool */;
+short int var21 /* : Bool */;
+int cltype22;
+int idtype23;
+const char* var_class_name24;
 short int var25 /* : Bool */;
+long var26 /* : Int */;
 short int var27 /* : Bool */;
-int cltype28;
-int idtype29;
-short int var30 /* : Bool */;
-val* var31 /* : Buffer */;
-long var32 /* : Int */;
-long var34 /* : Int */;
+short int var29 /* : Bool */;
+int cltype30;
+int idtype31;
+const char* var_class_name32;
+short int var33 /* : Bool */;
+val* var34 /* : Buffer */;
+long var35 /* : Int */;
+long var37 /* : Int */;
 val* var_r /* var r: Buffer */;
-short int var35 /* : Bool */;
-short int var37 /* : Bool */;
-int cltype38;
-int idtype39;
+short int var38 /* : Bool */;
 short int var40 /* : Bool */;
-char* var41 /* : NativeString */;
-char var42 /* : Char */;
-char var44 /* : Char */;
-val* var45 /* : nullable Object */;
-long var46 /* : Int */;
-long var47 /* : Int */;
-long var49 /* : Int */;
-val* var50 /* : String */;
-static val* varonce;
-val* var51 /* : String */;
-char* var52 /* : NativeString */;
+int cltype41;
+int idtype42;
+const char* var_class_name43;
+short int var44 /* : Bool */;
+char* var45 /* : NativeString */;
+char var46 /* : Char */;
+char var48 /* : Char */;
+val* var49 /* : nullable Object */;
+long var50 /* : Int */;
+long var51 /* : Int */;
 long var53 /* : Int */;
 val* var54 /* : String */;
+static val* varonce;
+val* var55 /* : String */;
+char* var56 /* : NativeString */;
+long var57 /* : Int */;
+val* var58 /* : String */;
 var_from = p0;
 var_count = p1;
 var1 = 0;
@@ -110,7 +115,9 @@ var1 = 0;
 /* <var1:Int> isa OTHER */
 var4 = 1; /* easy <var1:Int> isa OTHER*/
 if (!var4) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 258);
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
 exit(1);
 }
 var5 = var_count >= var1;
@@ -119,7 +126,8 @@ goto RET_LABEL3;
 RET_LABEL3:(void)0;
 }
 if (!var2) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "lib/standard/string.nit", 50);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/string.nit", 50);
 exit(1);
 }
 { /* Inline kernel#Int#+ (var_count,var_from) */
@@ -135,111 +143,119 @@ var9 = 0;
 /* <var9:Int> isa OTHER */
 var12 = 1; /* easy <var9:Int> isa OTHER*/
 if (!var12) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 257);
+var_class_name15 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name15);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
 exit(1);
 }
-var15 = var_from < var9;
-var10 = var15;
+var16 = var_from < var9;
+var10 = var16;
 goto RET_LABEL11;
 RET_LABEL11:(void)0;
 }
 if (var10){
-var16 = 0;
-var_from = var16;
+var17 = 0;
+var_from = var17;
 } else {
 }
-var17 = ((long (*)(val*))(self->class->vft[COLOR_abstract_collection__Collection__length]))(self) /* length on <self:AbstractString>*/;
-{ /* Inline kernel#Int#> (var_count,var17) */
-/* Covariant cast for argument 0 (i) <var17:Int> isa OTHER */
-/* <var17:Int> isa OTHER */
-var20 = 1; /* easy <var17:Int> isa OTHER*/
-if (!var20) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 259);
+var18 = ((long (*)(val*))(self->class->vft[COLOR_abstract_collection__Collection__length]))(self) /* length on <self:AbstractString>*/;
+{ /* Inline kernel#Int#> (var_count,var18) */
+/* Covariant cast for argument 0 (i) <var18:Int> isa OTHER */
+/* <var18:Int> isa OTHER */
+var21 = 1; /* easy <var18:Int> isa OTHER*/
+if (!var21) {
+var_class_name24 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name24);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
 exit(1);
 }
-var23 = var_count > var17;
-var18 = var23;
-goto RET_LABEL19;
-RET_LABEL19:(void)0;
+var25 = var_count > var18;
+var19 = var25;
+goto RET_LABEL20;
+RET_LABEL20:(void)0;
 }
-if (var18){
-var24 = ((long (*)(val*))(self->class->vft[COLOR_abstract_collection__Collection__length]))(self) /* length on <self:AbstractString>*/;
-var_count = var24;
+if (var19){
+var26 = ((long (*)(val*))(self->class->vft[COLOR_abstract_collection__Collection__length]))(self) /* length on <self:AbstractString>*/;
+var_count = var26;
 } else {
 }
 { /* Inline kernel#Int#< (var_from,var_count) */
 /* Covariant cast for argument 0 (i) <var_count:Int> isa OTHER */
 /* <var_count:Int> isa OTHER */
-var27 = 1; /* easy <var_count:Int> isa OTHER*/
-if (!var27) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 257);
+var29 = 1; /* easy <var_count:Int> isa OTHER*/
+if (!var29) {
+var_class_name32 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name32);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
 exit(1);
 }
-var30 = var_from < var_count;
-var25 = var30;
-goto RET_LABEL26;
-RET_LABEL26:(void)0;
+var33 = var_from < var_count;
+var27 = var33;
+goto RET_LABEL28;
+RET_LABEL28:(void)0;
 }
-if (var25){
-var31 = NEW_string__Buffer(&type_string__Buffer);
+if (var27){
+var34 = NEW_string__Buffer(&type_string__Buffer);
 { /* Inline kernel#Int#- (var_count,var_from) */
-var34 = var_count - var_from;
-var32 = var34;
-goto RET_LABEL33;
-RET_LABEL33:(void)0;
+var37 = var_count - var_from;
+var35 = var37;
+goto RET_LABEL36;
+RET_LABEL36:(void)0;
 }
-((void (*)(val*, long))(var31->class->vft[COLOR_string__Buffer__with_capacity]))(var31, var32) /* with_capacity on <var31:Buffer>*/;
-CHECK_NEW_string__Buffer(var31);
-var_r = var31;
+((void (*)(val*, long))(var34->class->vft[COLOR_string__Buffer__with_capacity]))(var34, var35) /* with_capacity on <var34:Buffer>*/;
+CHECK_NEW_string__Buffer(var34);
+var_r = var34;
 for(;;) {
 { /* Inline kernel#Int#< (var_from,var_count) */
 /* Covariant cast for argument 0 (i) <var_count:Int> isa OTHER */
 /* <var_count:Int> isa OTHER */
-var37 = 1; /* easy <var_count:Int> isa OTHER*/
-if (!var37) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 257);
+var40 = 1; /* easy <var_count:Int> isa OTHER*/
+if (!var40) {
+var_class_name43 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name43);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
 exit(1);
 }
-var40 = var_from < var_count;
-var35 = var40;
-goto RET_LABEL36;
-RET_LABEL36:(void)0;
+var44 = var_from < var_count;
+var38 = var44;
+goto RET_LABEL39;
+RET_LABEL39:(void)0;
 }
-if (!var35) break;
-var41 = self->attrs[COLOR_string__AbstractString___items].str; /* _items on <self:AbstractString> */
-{ /* Inline string#NativeString#[] (var41,var_from) */
-var44 = var41[var_from];
-var42 = var44;
-goto RET_LABEL43;
-RET_LABEL43:(void)0;
+if (!var38) break;
+var45 = self->attrs[COLOR_string__AbstractString___items].str; /* _items on <self:AbstractString> */
+{ /* Inline string#NativeString#[] (var45,var_from) */
+var48 = var45[var_from];
+var46 = var48;
+goto RET_LABEL47;
+RET_LABEL47:(void)0;
 }
-var45 = BOX_kernel__Char(var42); /* autobox from Char to nullable Object */
-((void (*)(val*, val*))(var_r->class->vft[COLOR_abstract_collection__Sequence__push]))(var_r, var45) /* push on <var_r:Buffer>*/;
-var46 = 1;
-{ /* Inline kernel#Int#+ (var_from,var46) */
-var49 = var_from + var46;
-var47 = var49;
-goto RET_LABEL48;
-RET_LABEL48:(void)0;
+var49 = BOX_kernel__Char(var46); /* autobox from Char to nullable Object */
+((void (*)(val*, val*))(var_r->class->vft[COLOR_abstract_collection__Sequence__push]))(var_r, var49) /* push on <var_r:Buffer>*/;
+var50 = 1;
+{ /* Inline kernel#Int#+ (var_from,var50) */
+var53 = var_from + var50;
+var51 = var53;
+goto RET_LABEL52;
+RET_LABEL52:(void)0;
 }
-var_from = var47;
+var_from = var51;
 CONTINUE_label: (void)0;
 }
 BREAK_label: (void)0;
-var50 = ((val* (*)(val*))(var_r->class->vft[COLOR_string__Object__to_s]))(var_r) /* to_s on <var_r:Buffer>*/;
-var = var50;
+var54 = ((val* (*)(val*))(var_r->class->vft[COLOR_string__Object__to_s]))(var_r) /* to_s on <var_r:Buffer>*/;
+var = var54;
 goto RET_LABEL;
 } else {
 if (varonce) {
-var51 = varonce;
+var55 = varonce;
 } else {
-var52 = "";
-var53 = 0;
-var54 = string__NativeString__to_s_with_length(var52, var53);
-var51 = var54;
-varonce = var51;
+var56 = "";
+var57 = 0;
+var58 = string__NativeString__to_s_with_length(var56, var57);
+var55 = var58;
+varonce = var55;
 }
-var = var51;
+var = var55;
 goto RET_LABEL;
 }
 RET_LABEL:;
@@ -263,6 +279,7 @@ short int var2 /* : Bool */;
 short int var4 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 short int var5 /* : Bool */;
 long var6 /* : Int */;
 long var7 /* : Int */;
@@ -275,7 +292,9 @@ var1 = ((long (*)(val*))(self->class->vft[COLOR_abstract_collection__Collection_
 /* <var1:Int> isa OTHER */
 var4 = 1; /* easy <var1:Int> isa OTHER*/
 if (!var4) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 257);
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
 exit(1);
 }
 var5 = var_from < var1;
@@ -284,7 +303,8 @@ goto RET_LABEL3;
 RET_LABEL3:(void)0;
 }
 if (!var2) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "lib/standard/string.nit", 75);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/string.nit", 75);
 exit(1);
 }
 var6 = ((long (*)(val*))(self->class->vft[COLOR_abstract_collection__Collection__length]))(self) /* length on <self:AbstractString>*/;
@@ -332,38 +352,41 @@ short int var13 /* : Bool */;
 short int var15 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 short int var16 /* : Bool */;
 short int var_ /* var : Bool */;
 short int var17 /* : Bool */;
 short int var19 /* : Bool */;
 int cltype20;
 int idtype21;
-short int var22 /* : Bool */;
+const char* var_class_name22;
 short int var23 /* : Bool */;
-long var24 /* : Int */;
-long var_its_index_from /* var its_index_from: Int */;
+short int var24 /* : Bool */;
 long var25 /* : Int */;
-long var27 /* : Int */;
-short int var28 /* : Bool */;
-short int var30 /* : Bool */;
-int cltype31;
-int idtype32;
-short int var33 /* : Bool */;
-char var34 /* : Char */;
+long var_its_index_from /* var its_index_from: Int */;
+long var26 /* : Int */;
+long var28 /* : Int */;
+short int var29 /* : Bool */;
+short int var31 /* : Bool */;
+int cltype32;
+int idtype33;
+const char* var_class_name34;
+short int var35 /* : Bool */;
 char var36 /* : Char */;
-char var37 /* : Char */;
+char var38 /* : Char */;
 char var39 /* : Char */;
-short int var40 /* : Bool */;
+char var41 /* : Char */;
 short int var42 /* : Bool */;
-short int var43 /* : Bool */;
 short int var44 /* : Bool */;
-long var45 /* : Int */;
-long var46 /* : Int */;
+short int var45 /* : Bool */;
+short int var46 /* : Bool */;
+long var47 /* : Int */;
 long var48 /* : Int */;
-long var49 /* : Int */;
 long var50 /* : Int */;
+long var51 /* : Int */;
 long var52 /* : Int */;
-short int var53 /* : Bool */;
+long var54 /* : Int */;
+short int var55 /* : Bool */;
 var_str = p0;
 var_pos = p1;
 var1 = ((long (*)(val*))(var_str->class->vft[COLOR_abstract_collection__Collection__length]))(var_str) /* length on <var_str:String>*/;
@@ -392,7 +415,9 @@ var12 = ((long (*)(val*))(self->class->vft[COLOR_abstract_collection__Collection
 /* <var12:Int> isa OTHER */
 var15 = 1; /* easy <var12:Int> isa OTHER*/
 if (!var15) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 259);
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
 exit(1);
 }
 var16 = var_myindex > var12;
@@ -409,92 +434,96 @@ var11 = var_;
 /* <var_myindex:Int> isa OTHER */
 var19 = 1; /* easy <var_myindex:Int> isa OTHER*/
 if (!var19) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 259);
+var_class_name22 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name22);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
 exit(1);
 }
-var22 = var_itsindex > var_myindex;
-var17 = var22;
+var23 = var_itsindex > var_myindex;
+var17 = var23;
 goto RET_LABEL18;
 RET_LABEL18:(void)0;
 }
 var11 = var17;
 }
 if (var11){
-var23 = 0;
-var = var23;
+var24 = 0;
+var = var24;
 goto RET_LABEL;
 } else {
 }
-var24 = var_str->attrs[COLOR_string__String___index_from].l; /* _index_from on <var_str:String> */
-var_its_index_from = var24;
+var25 = var_str->attrs[COLOR_string__String___index_from].l; /* _index_from on <var_str:String> */
+var_its_index_from = var25;
 { /* Inline kernel#Int#+ (var_itsindex,var_its_index_from) */
-var27 = var_itsindex + var_its_index_from;
-var25 = var27;
-goto RET_LABEL26;
-RET_LABEL26:(void)0;
+var28 = var_itsindex + var_its_index_from;
+var26 = var28;
+goto RET_LABEL27;
+RET_LABEL27:(void)0;
 }
-var_itsindex = var25;
+var_itsindex = var26;
 for(;;) {
 { /* Inline kernel#Int#>= (var_itsindex,var_its_index_from) */
 /* Covariant cast for argument 0 (i) <var_its_index_from:Int> isa OTHER */
 /* <var_its_index_from:Int> isa OTHER */
-var30 = 1; /* easy <var_its_index_from:Int> isa OTHER*/
-if (!var30) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 258);
+var31 = 1; /* easy <var_its_index_from:Int> isa OTHER*/
+if (!var31) {
+var_class_name34 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name34);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
 exit(1);
 }
-var33 = var_itsindex >= var_its_index_from;
-var28 = var33;
-goto RET_LABEL29;
-RET_LABEL29:(void)0;
+var35 = var_itsindex >= var_its_index_from;
+var29 = var35;
+goto RET_LABEL30;
+RET_LABEL30:(void)0;
 }
-if (!var28) break;
+if (!var29) break;
 { /* Inline string#NativeString#[] (var_myitems,var_myindex) */
-var36 = var_myitems[var_myindex];
-var34 = var36;
-goto RET_LABEL35;
-RET_LABEL35:(void)0;
+var38 = var_myitems[var_myindex];
+var36 = var38;
+goto RET_LABEL37;
+RET_LABEL37:(void)0;
 }
 { /* Inline string#NativeString#[] (var_itsitems,var_itsindex) */
-var39 = var_itsitems[var_itsindex];
-var37 = var39;
-goto RET_LABEL38;
-RET_LABEL38:(void)0;
+var41 = var_itsitems[var_itsindex];
+var39 = var41;
+goto RET_LABEL40;
+RET_LABEL40:(void)0;
 }
-{ /* Inline kernel#Char#!= (var34,var37) */
-var42 = var34 == var37;
-var43 = !var42;
-var40 = var43;
-goto RET_LABEL41;
-RET_LABEL41:(void)0;
+{ /* Inline kernel#Char#!= (var36,var39) */
+var44 = var36 == var39;
+var45 = !var44;
+var42 = var45;
+goto RET_LABEL43;
+RET_LABEL43:(void)0;
 }
-if (var40){
-var44 = 0;
-var = var44;
+if (var42){
+var46 = 0;
+var = var46;
 goto RET_LABEL;
 } else {
 }
-var45 = 1;
-{ /* Inline kernel#Int#- (var_myindex,var45) */
-var48 = var_myindex - var45;
-var46 = var48;
-goto RET_LABEL47;
-RET_LABEL47:(void)0;
+var47 = 1;
+{ /* Inline kernel#Int#- (var_myindex,var47) */
+var50 = var_myindex - var47;
+var48 = var50;
+goto RET_LABEL49;
+RET_LABEL49:(void)0;
 }
-var_myindex = var46;
-var49 = 1;
-{ /* Inline kernel#Int#- (var_itsindex,var49) */
-var52 = var_itsindex - var49;
-var50 = var52;
-goto RET_LABEL51;
-RET_LABEL51:(void)0;
+var_myindex = var48;
+var51 = 1;
+{ /* Inline kernel#Int#- (var_itsindex,var51) */
+var54 = var_itsindex - var51;
+var52 = var54;
+goto RET_LABEL53;
+RET_LABEL53:(void)0;
 }
-var_itsindex = var50;
+var_itsindex = var52;
 CONTINUE_label: (void)0;
 }
 BREAK_label: (void)0;
-var53 = 1;
-var = var53;
+var55 = 1;
+var = var55;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -656,6 +685,7 @@ short int var8 /* : Bool */;
 short int var10 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 short int var11 /* : Bool */;
 long var12 /* : Int */;
 long var14 /* : Int */;
@@ -664,14 +694,15 @@ short int var16 /* : Bool */;
 short int var18 /* : Bool */;
 int cltype19;
 int idtype20;
-short int var21 /* : Bool */;
+const char* var_class_name21;
 short int var22 /* : Bool */;
-long var23 /* : Int */;
-long var25 /* : Int */;
+short int var23 /* : Bool */;
+long var24 /* : Int */;
 long var26 /* : Int */;
-long var28 /* : Int */;
+long var27 /* : Int */;
 long var29 /* : Int */;
-long var31 /* : Int */;
+long var30 /* : Int */;
+long var32 /* : Int */;
 var_base = p0;
 var1 = 0;
 var_i = var1;
@@ -691,7 +722,9 @@ var_v = var7;
 /* <var_base:Int> isa OTHER */
 var10 = 1; /* easy <var_base:Int> isa OTHER*/
 if (!var10) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 259);
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
 exit(1);
 }
 var11 = var_v > var_base;
@@ -720,31 +753,33 @@ var15 = 0;
 /* <var15:Int> isa OTHER */
 var18 = 1; /* easy <var15:Int> isa OTHER*/
 if (!var18) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 257);
+var_class_name21 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name21);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
 exit(1);
 }
-var21 = var_v < var15;
-var16 = var21;
+var22 = var_v < var15;
+var16 = var22;
 goto RET_LABEL17;
 RET_LABEL17:(void)0;
 }
 if (var16){
-var22 = 1;
-var_neg = var22;
+var23 = 1;
+var_neg = var23;
 } else {
 { /* Inline kernel#Int#* (var_i,var_base) */
-var25 = var_i * var_base;
-var23 = var25;
-goto RET_LABEL24;
-RET_LABEL24:(void)0;
+var26 = var_i * var_base;
+var24 = var26;
+goto RET_LABEL25;
+RET_LABEL25:(void)0;
 }
-{ /* Inline kernel#Int#+ (var23,var_v) */
-var28 = var23 + var_v;
-var26 = var28;
-goto RET_LABEL27;
-RET_LABEL27:(void)0;
+{ /* Inline kernel#Int#+ (var24,var_v) */
+var29 = var24 + var_v;
+var27 = var29;
+goto RET_LABEL28;
+RET_LABEL28:(void)0;
 }
-var_i = var26;
+var_i = var27;
 }
 }
 CONTINUE_label: (void)0;
@@ -753,12 +788,12 @@ CONTINUE_label: (void)0;
 BREAK_label: (void)0;
 if (var_neg){
 { /* Inline kernel#Int#unary - (var_i) */
-var31 = -var_i;
-var29 = var31;
-goto RET_LABEL30;
-RET_LABEL30:(void)0;
+var32 = -var_i;
+var30 = var32;
+goto RET_LABEL31;
+RET_LABEL31:(void)0;
 }
-var = var29;
+var = var30;
 goto RET_LABEL;
 } else {
 var = var_i;
@@ -985,6 +1020,7 @@ short int var14 /* : Bool */;
 short int var16 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 short int var17 /* : Bool */;
 long var18 /* : Int */;
 long var19 /* : Int */;
@@ -1011,21 +1047,22 @@ short int var41 /* : Bool */;
 short int var43 /* : Bool */;
 int cltype44;
 int idtype45;
-short int var46 /* : Bool */;
-long var47 /* : Int */;
+const char* var_class_name46;
+short int var47 /* : Bool */;
 long var48 /* : Int */;
-long var50 /* : Int */;
-short int var51 /* : Bool */;
-short int var53 /* : Bool */;
-val* var54 /* : nullable Object */;
-val* var55 /* : String */;
-char var56 /* : Char */;
-long var58 /* : Int */;
-long var60 /* : Int */;
+long var49 /* : Int */;
+long var51 /* : Int */;
+short int var52 /* : Bool */;
+short int var54 /* : Bool */;
+val* var55 /* : nullable Object */;
+val* var56 /* : String */;
+char var57 /* : Char */;
+long var59 /* : Int */;
 long var61 /* : Int */;
 long var62 /* : Int */;
-long var64 /* : Int */;
-val* var65 /* : String */;
+long var63 /* : Int */;
+long var65 /* : Int */;
+val* var66 /* : String */;
 var1 = self->attrs[COLOR_array__AbstractArrayRead___length].l; /* _length on <self:AbstractString> */
 var2 = 0;
 { /* Inline kernel#Int#== (var1,var2) */
@@ -1057,7 +1094,9 @@ var13 = 32;
 /* <var13:Int> isa OTHER */
 var16 = 1; /* easy <var13:Int> isa OTHER*/
 if (!var16) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 256);
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
 exit(1);
 }
 var17 = var9 <= var13;
@@ -1122,55 +1161,57 @@ var40 = 32;
 /* <var40:Int> isa OTHER */
 var43 = 1; /* easy <var40:Int> isa OTHER*/
 if (!var43) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 256);
+var_class_name46 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name46);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
 exit(1);
 }
-var46 = var36 <= var40;
-var41 = var46;
+var47 = var36 <= var40;
+var41 = var47;
 goto RET_LABEL42;
 RET_LABEL42:(void)0;
 }
 if (!var41) break;
-var47 = 1;
-{ /* Inline kernel#Int#- (var_end_pos,var47) */
-var50 = var_end_pos - var47;
-var48 = var50;
-goto RET_LABEL49;
-RET_LABEL49:(void)0;
+var48 = 1;
+{ /* Inline kernel#Int#- (var_end_pos,var48) */
+var51 = var_end_pos - var48;
+var49 = var51;
+goto RET_LABEL50;
+RET_LABEL50:(void)0;
 }
-var_end_pos = var48;
+var_end_pos = var49;
 { /* Inline kernel#Int#== (var_end_pos,var_start_pos) */
-var53 = var_end_pos == var_start_pos;
-var51 = var53;
-goto RET_LABEL52;
-RET_LABEL52:(void)0;
+var54 = var_end_pos == var_start_pos;
+var52 = var54;
+goto RET_LABEL53;
+RET_LABEL53:(void)0;
 }
-if (var51){
-var54 = ((val* (*)(val*, long))(self->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(self, var_start_pos) /* [] on <self:AbstractString>*/;
-var56 = ((struct instance_kernel__Char*)var54)->value; /* autounbox from nullable Object to Char */;
-var55 = string__Char__to_s(var56);
-var = var55;
+if (var52){
+var55 = ((val* (*)(val*, long))(self->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(self, var_start_pos) /* [] on <self:AbstractString>*/;
+var57 = ((struct instance_kernel__Char*)var55)->value; /* autounbox from nullable Object to Char */;
+var56 = string__Char__to_s(var57);
+var = var56;
 goto RET_LABEL;
 } else {
 }
-CONTINUE_label57: (void)0;
+CONTINUE_label58: (void)0;
 }
-BREAK_label57: (void)0;
+BREAK_label58: (void)0;
 { /* Inline kernel#Int#- (var_end_pos,var_start_pos) */
-var60 = var_end_pos - var_start_pos;
-var58 = var60;
-goto RET_LABEL59;
-RET_LABEL59:(void)0;
+var61 = var_end_pos - var_start_pos;
+var59 = var61;
+goto RET_LABEL60;
+RET_LABEL60:(void)0;
 }
-var61 = 1;
-{ /* Inline kernel#Int#+ (var58,var61) */
-var64 = var58 + var61;
-var62 = var64;
-goto RET_LABEL63;
-RET_LABEL63:(void)0;
+var62 = 1;
+{ /* Inline kernel#Int#+ (var59,var62) */
+var65 = var59 + var62;
+var63 = var65;
+goto RET_LABEL64;
+RET_LABEL64:(void)0;
 }
-var65 = ((val* (*)(val*, long, long))(self->class->vft[COLOR_string__AbstractString__substring]))(self, var_start_pos, var62) /* substring on <self:AbstractString>*/;
-var = var65;
+var66 = ((val* (*)(val*, long, long))(self->class->vft[COLOR_string__AbstractString__substring]))(self, var_start_pos, var63) /* substring on <self:AbstractString>*/;
+var = var66;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -1193,6 +1234,7 @@ short int var2 /* : Bool */;
 short int var4 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 short int var5 /* : Bool */;
 char* var6 /* : NativeString */;
 char var7 /* : Char */;
@@ -1209,7 +1251,9 @@ var1 = ((long (*)(val*))(self->class->vft[COLOR_abstract_collection__Collection_
 /* <var1:Int> isa OTHER */
 var4 = 1; /* easy <var1:Int> isa OTHER*/
 if (!var4) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 257);
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
 exit(1);
 }
 var5 = var_i < var1;
@@ -1266,6 +1310,7 @@ short int var10 /* : Bool */;
 short int var12 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 short int var13 /* : Bool */;
 short int var_ /* var : Bool */;
 char var14 /* : Char */;
@@ -1273,60 +1318,65 @@ short int var15 /* : Bool */;
 short int var17 /* : Bool */;
 int cltype18;
 int idtype19;
-short int var20 /* : Bool */;
-short int var_21 /* var : Bool */;
-short int var22 /* : Bool */;
-char var23 /* : Char */;
-short int var24 /* : Bool */;
-short int var26 /* : Bool */;
-int cltype27;
-int idtype28;
-short int var29 /* : Bool */;
-short int var_30 /* var : Bool */;
-char var31 /* : Char */;
-short int var32 /* : Bool */;
+const char* var_class_name20;
+short int var21 /* : Bool */;
+short int var_22 /* var : Bool */;
+short int var23 /* : Bool */;
+char var24 /* : Char */;
+short int var25 /* : Bool */;
+short int var27 /* : Bool */;
+int cltype28;
+int idtype29;
+const char* var_class_name30;
+short int var31 /* : Bool */;
+short int var_32 /* var : Bool */;
+char var33 /* : Char */;
 short int var34 /* : Bool */;
-int cltype35;
-int idtype36;
-short int var37 /* : Bool */;
-val* var38 /* : nullable Object */;
-short int var39 /* : Bool */;
-char var40 /* : Char */;
-long var41 /* : Int */;
-long var43 /* : Int */;
-val* var44 /* : String */;
-char var45 /* : Char */;
-val* var46 /* : nullable Object */;
-short int var47 /* : Bool */;
+short int var36 /* : Bool */;
+int cltype37;
+int idtype38;
+const char* var_class_name39;
+short int var40 /* : Bool */;
+val* var41 /* : nullable Object */;
+short int var42 /* : Bool */;
+char var43 /* : Char */;
+long var44 /* : Int */;
+long var46 /* : Int */;
+val* var47 /* : String */;
 char var48 /* : Char */;
-short int var49 /* : Bool */;
-short int var51 /* : Bool */;
-int cltype52;
-int idtype53;
+val* var49 /* : nullable Object */;
+short int var50 /* : Bool */;
+char var51 /* : Char */;
+short int var52 /* : Bool */;
 short int var54 /* : Bool */;
-short int var_55 /* var : Bool */;
-char var56 /* : Char */;
-short int var57 /* : Bool */;
-short int var59 /* : Bool */;
-int cltype60;
-int idtype61;
-short int var62 /* : Bool */;
-val* var63 /* : nullable Object */;
-short int var64 /* : Bool */;
-char var65 /* : Char */;
-short int var66 /* : Bool */;
-short int var68 /* : Bool */;
-val* var69 /* : nullable Object */;
-short int var70 /* : Bool */;
-char var71 /* : Char */;
-val* var72 /* : nullable Object */;
-long var73 /* : Int */;
-long var75 /* : Int */;
-val* var76 /* : String */;
-char var77 /* : Char */;
-val* var78 /* : nullable Object */;
-short int var79 /* : Bool */;
-val* var80 /* : String */;
+int cltype55;
+int idtype56;
+const char* var_class_name57;
+short int var58 /* : Bool */;
+short int var_59 /* var : Bool */;
+char var60 /* : Char */;
+short int var61 /* : Bool */;
+short int var63 /* : Bool */;
+int cltype64;
+int idtype65;
+const char* var_class_name66;
+short int var67 /* : Bool */;
+val* var68 /* : nullable Object */;
+short int var69 /* : Bool */;
+char var70 /* : Char */;
+short int var71 /* : Bool */;
+short int var73 /* : Bool */;
+val* var74 /* : nullable Object */;
+short int var75 /* : Bool */;
+char var76 /* : Char */;
+val* var77 /* : nullable Object */;
+long var78 /* : Int */;
+long var80 /* : Int */;
+val* var81 /* : String */;
+char var82 /* : Char */;
+val* var83 /* : nullable Object */;
+short int var84 /* : Bool */;
+val* var85 /* : String */;
 var1 = NEW_string__Buffer(&type_string__Buffer);
 ((void (*)(val*))(var1->class->vft[COLOR_string__Buffer__init]))(var1) /* init on <var1:Buffer>*/;
 CHECK_NEW_string__Buffer(var1);
@@ -1346,7 +1396,9 @@ var9 = 'a';
 /* <var9:Char> isa OTHER */
 var12 = 1; /* easy <var9:Char> isa OTHER*/
 if (!var12) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 456);
+var_class_name = type_kernel__Char.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 438);
 exit(1);
 }
 var13 = var_c >= var9;
@@ -1362,11 +1414,13 @@ var14 = 'z';
 /* <var14:Char> isa OTHER */
 var17 = 1; /* easy <var14:Char> isa OTHER*/
 if (!var17) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 454);
+var_class_name20 = type_kernel__Char.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name20);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 436);
 exit(1);
 }
-var20 = var_c <= var14;
-var15 = var20;
+var21 = var_c <= var14;
+var15 = var21;
 goto RET_LABEL16;
 RET_LABEL16:(void)0;
 }
@@ -1374,146 +1428,154 @@ var8 = var15;
 } else {
 var8 = var_;
 }
-var_21 = var8;
+var_22 = var8;
 if (var8){
-var7 = var_21;
+var7 = var_22;
 } else {
-var23 = 'A';
-{ /* Inline kernel#Char#>= (var_c,var23) */
-/* Covariant cast for argument 0 (i) <var23:Char> isa OTHER */
-/* <var23:Char> isa OTHER */
-var26 = 1; /* easy <var23:Char> isa OTHER*/
-if (!var26) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 456);
+var24 = 'A';
+{ /* Inline kernel#Char#>= (var_c,var24) */
+/* Covariant cast for argument 0 (i) <var24:Char> isa OTHER */
+/* <var24:Char> isa OTHER */
+var27 = 1; /* easy <var24:Char> isa OTHER*/
+if (!var27) {
+var_class_name30 = type_kernel__Char.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name30);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 438);
 exit(1);
 }
-var29 = var_c >= var23;
-var24 = var29;
-goto RET_LABEL25;
-RET_LABEL25:(void)0;
+var31 = var_c >= var24;
+var25 = var31;
+goto RET_LABEL26;
+RET_LABEL26:(void)0;
 }
-var_30 = var24;
-if (var24){
-var31 = 'Z';
-{ /* Inline kernel#Char#<= (var_c,var31) */
-/* Covariant cast for argument 0 (i) <var31:Char> isa OTHER */
-/* <var31:Char> isa OTHER */
-var34 = 1; /* easy <var31:Char> isa OTHER*/
-if (!var34) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 454);
+var_32 = var25;
+if (var25){
+var33 = 'Z';
+{ /* Inline kernel#Char#<= (var_c,var33) */
+/* Covariant cast for argument 0 (i) <var33:Char> isa OTHER */
+/* <var33:Char> isa OTHER */
+var36 = 1; /* easy <var33:Char> isa OTHER*/
+if (!var36) {
+var_class_name39 = type_kernel__Char.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name39);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 436);
 exit(1);
 }
-var37 = var_c <= var31;
-var32 = var37;
-goto RET_LABEL33;
-RET_LABEL33:(void)0;
+var40 = var_c <= var33;
+var34 = var40;
+goto RET_LABEL35;
+RET_LABEL35:(void)0;
 }
-var22 = var32;
+var23 = var34;
 } else {
-var22 = var_30;
+var23 = var_32;
 }
-var7 = var22;
+var7 = var23;
 }
 if (var7){
-var38 = BOX_kernel__Char(var_c); /* autobox from Char to nullable Object */
-((void (*)(val*, val*))(var_res->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_res, var38) /* add on <var_res:Buffer>*/;
-var39 = 0;
-var_underscore = var39;
+var41 = BOX_kernel__Char(var_c); /* autobox from Char to nullable Object */
+((void (*)(val*, val*))(var_res->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_res, var41) /* add on <var_res:Buffer>*/;
+var42 = 0;
+var_underscore = var42;
 goto CONTINUE_label;
 } else {
 }
 if (var_underscore){
-var40 = '_';
-{ /* Inline kernel#Char#ascii (var40) */
-var43 = (unsigned char)var40;
-var41 = var43;
-goto RET_LABEL42;
-RET_LABEL42:(void)0;
+var43 = '_';
+{ /* Inline kernel#Char#ascii (var43) */
+var46 = (unsigned char)var43;
+var44 = var46;
+goto RET_LABEL45;
+RET_LABEL45:(void)0;
 }
-var44 = string__Int__to_s(var41);
-((void (*)(val*, val*))(var_res->class->vft[COLOR_abstract_collection__Sequence__append]))(var_res, var44) /* append on <var_res:Buffer>*/;
-var45 = 'd';
-var46 = BOX_kernel__Char(var45); /* autobox from Char to nullable Object */
-((void (*)(val*, val*))(var_res->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_res, var46) /* add on <var_res:Buffer>*/;
+var47 = string__Int__to_s(var44);
+((void (*)(val*, val*))(var_res->class->vft[COLOR_abstract_collection__Sequence__append]))(var_res, var47) /* append on <var_res:Buffer>*/;
+var48 = 'd';
+var49 = BOX_kernel__Char(var48); /* autobox from Char to nullable Object */
+((void (*)(val*, val*))(var_res->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_res, var49) /* add on <var_res:Buffer>*/;
 } else {
 }
-var48 = '0';
-{ /* Inline kernel#Char#>= (var_c,var48) */
-/* Covariant cast for argument 0 (i) <var48:Char> isa OTHER */
-/* <var48:Char> isa OTHER */
-var51 = 1; /* easy <var48:Char> isa OTHER*/
-if (!var51) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 456);
+var51 = '0';
+{ /* Inline kernel#Char#>= (var_c,var51) */
+/* Covariant cast for argument 0 (i) <var51:Char> isa OTHER */
+/* <var51:Char> isa OTHER */
+var54 = 1; /* easy <var51:Char> isa OTHER*/
+if (!var54) {
+var_class_name57 = type_kernel__Char.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name57);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 438);
 exit(1);
 }
-var54 = var_c >= var48;
-var49 = var54;
-goto RET_LABEL50;
-RET_LABEL50:(void)0;
+var58 = var_c >= var51;
+var52 = var58;
+goto RET_LABEL53;
+RET_LABEL53:(void)0;
 }
-var_55 = var49;
-if (var49){
-var56 = '9';
-{ /* Inline kernel#Char#<= (var_c,var56) */
-/* Covariant cast for argument 0 (i) <var56:Char> isa OTHER */
-/* <var56:Char> isa OTHER */
-var59 = 1; /* easy <var56:Char> isa OTHER*/
-if (!var59) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 454);
+var_59 = var52;
+if (var52){
+var60 = '9';
+{ /* Inline kernel#Char#<= (var_c,var60) */
+/* Covariant cast for argument 0 (i) <var60:Char> isa OTHER */
+/* <var60:Char> isa OTHER */
+var63 = 1; /* easy <var60:Char> isa OTHER*/
+if (!var63) {
+var_class_name66 = type_kernel__Char.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name66);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 436);
 exit(1);
 }
-var62 = var_c <= var56;
-var57 = var62;
-goto RET_LABEL58;
-RET_LABEL58:(void)0;
+var67 = var_c <= var60;
+var61 = var67;
+goto RET_LABEL62;
+RET_LABEL62:(void)0;
 }
-var47 = var57;
+var50 = var61;
 } else {
-var47 = var_55;
+var50 = var_59;
 }
-if (var47){
-var63 = BOX_kernel__Char(var_c); /* autobox from Char to nullable Object */
-((void (*)(val*, val*))(var_res->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_res, var63) /* add on <var_res:Buffer>*/;
-var64 = 0;
-var_underscore = var64;
+if (var50){
+var68 = BOX_kernel__Char(var_c); /* autobox from Char to nullable Object */
+((void (*)(val*, val*))(var_res->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_res, var68) /* add on <var_res:Buffer>*/;
+var69 = 0;
+var_underscore = var69;
 } else {
-var65 = '_';
-{ /* Inline kernel#Char#== (var_c,var65) */
-var68 = var_c == var65;
-var66 = var68;
-goto RET_LABEL67;
-RET_LABEL67:(void)0;
+var70 = '_';
+{ /* Inline kernel#Char#== (var_c,var70) */
+var73 = var_c == var70;
+var71 = var73;
+goto RET_LABEL72;
+RET_LABEL72:(void)0;
 }
-if (var66){
-var69 = BOX_kernel__Char(var_c); /* autobox from Char to nullable Object */
-((void (*)(val*, val*))(var_res->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_res, var69) /* add on <var_res:Buffer>*/;
-var70 = 1;
-var_underscore = var70;
+if (var71){
+var74 = BOX_kernel__Char(var_c); /* autobox from Char to nullable Object */
+((void (*)(val*, val*))(var_res->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_res, var74) /* add on <var_res:Buffer>*/;
+var75 = 1;
+var_underscore = var75;
 } else {
-var71 = '_';
-var72 = BOX_kernel__Char(var71); /* autobox from Char to nullable Object */
-((void (*)(val*, val*))(var_res->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_res, var72) /* add on <var_res:Buffer>*/;
+var76 = '_';
+var77 = BOX_kernel__Char(var76); /* autobox from Char to nullable Object */
+((void (*)(val*, val*))(var_res->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_res, var77) /* add on <var_res:Buffer>*/;
 { /* Inline kernel#Char#ascii (var_c) */
-var75 = (unsigned char)var_c;
-var73 = var75;
-goto RET_LABEL74;
-RET_LABEL74:(void)0;
+var80 = (unsigned char)var_c;
+var78 = var80;
+goto RET_LABEL79;
+RET_LABEL79:(void)0;
 }
-var76 = string__Int__to_s(var73);
-((void (*)(val*, val*))(var_res->class->vft[COLOR_abstract_collection__Sequence__append]))(var_res, var76) /* append on <var_res:Buffer>*/;
-var77 = 'd';
-var78 = BOX_kernel__Char(var77); /* autobox from Char to nullable Object */
-((void (*)(val*, val*))(var_res->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_res, var78) /* add on <var_res:Buffer>*/;
-var79 = 0;
-var_underscore = var79;
+var81 = string__Int__to_s(var78);
+((void (*)(val*, val*))(var_res->class->vft[COLOR_abstract_collection__Sequence__append]))(var_res, var81) /* append on <var_res:Buffer>*/;
+var82 = 'd';
+var83 = BOX_kernel__Char(var82); /* autobox from Char to nullable Object */
+((void (*)(val*, val*))(var_res->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_res, var83) /* add on <var_res:Buffer>*/;
+var84 = 0;
+var_underscore = var84;
 }
 }
 CONTINUE_label: (void)0;
 ((void (*)(val*))(var3->class->vft[COLOR_abstract_collection__Iterator__next]))(var3) /* next on <var3:Iterator[nullable Object]>*/;
 }
 BREAK_label: (void)0;
-var80 = ((val* (*)(val*))(var_res->class->vft[COLOR_string__Object__to_s]))(var_res) /* to_s on <var_res:Buffer>*/;
-var = var80;
+var85 = ((val* (*)(val*))(var_res->class->vft[COLOR_string__Object__to_s]))(var_res) /* to_s on <var_res:Buffer>*/;
+var = var85;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -1584,6 +1646,7 @@ short int var54 /* : Bool */;
 short int var56 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 short int var57 /* : Bool */;
 static val* varonce58;
 val* var59 /* : String */;
@@ -1719,7 +1782,9 @@ var53 = 32;
 /* <var53:Int> isa OTHER */
 var56 = 1; /* easy <var53:Int> isa OTHER*/
 if (!var56) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 257);
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
 exit(1);
 }
 var57 = var50 < var53;
@@ -2083,6 +2148,7 @@ short int var2 /* : Bool */;
 short int var4 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 short int var5 /* : Bool */;
 long var6 /* : Int */;
 long var7 /* : Int */;
@@ -2092,13 +2158,14 @@ short int var11 /* : Bool */;
 short int var13 /* : Bool */;
 int cltype14;
 int idtype15;
-short int var16 /* : Bool */;
-char* var17 /* : NativeString */;
-long var18 /* : Int */;
+const char* var_class_name16;
+short int var17 /* : Bool */;
+char* var18 /* : NativeString */;
 long var19 /* : Int */;
-long var21 /* : Int */;
-char var22 /* : Char */;
-char var24 /* : Char */;
+long var20 /* : Int */;
+long var22 /* : Int */;
+char var23 /* : Char */;
+char var25 /* : Char */;
 var_index = p0;
 var1 = 0;
 { /* Inline kernel#Int#>= (var_index,var1) */
@@ -2106,7 +2173,9 @@ var1 = 0;
 /* <var1:Int> isa OTHER */
 var4 = 1; /* easy <var1:Int> isa OTHER*/
 if (!var4) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 258);
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
 exit(1);
 }
 var5 = var_index >= var1;
@@ -2115,7 +2184,8 @@ goto RET_LABEL3;
 RET_LABEL3:(void)0;
 }
 if (!var2) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "lib/standard/string.nit", 379);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/string.nit", 379);
 exit(1);
 }
 var6 = self->attrs[COLOR_string__String___index_from].l; /* _index_from on <self:String> */
@@ -2131,33 +2201,36 @@ var10 = self->attrs[COLOR_string__String___index_to].l; /* _index_to on <self:St
 /* <var10:Int> isa OTHER */
 var13 = 1; /* easy <var10:Int> isa OTHER*/
 if (!var13) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 256);
+var_class_name16 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name16);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
 exit(1);
 }
-var16 = var7 <= var10;
-var11 = var16;
+var17 = var7 <= var10;
+var11 = var17;
 goto RET_LABEL12;
 RET_LABEL12:(void)0;
 }
 if (!var11) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "lib/standard/string.nit", 382);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/string.nit", 382);
 exit(1);
 }
-var17 = self->attrs[COLOR_string__AbstractString___items].str; /* _items on <self:String> */
-var18 = self->attrs[COLOR_string__String___index_from].l; /* _index_from on <self:String> */
-{ /* Inline kernel#Int#+ (var_index,var18) */
-var21 = var_index + var18;
-var19 = var21;
-goto RET_LABEL20;
-RET_LABEL20:(void)0;
+var18 = self->attrs[COLOR_string__AbstractString___items].str; /* _items on <self:String> */
+var19 = self->attrs[COLOR_string__String___index_from].l; /* _index_from on <self:String> */
+{ /* Inline kernel#Int#+ (var_index,var19) */
+var22 = var_index + var19;
+var20 = var22;
+goto RET_LABEL21;
+RET_LABEL21:(void)0;
 }
-{ /* Inline string#NativeString#[] (var17,var19) */
-var24 = var17[var19];
-var22 = var24;
-goto RET_LABEL23;
-RET_LABEL23:(void)0;
+{ /* Inline string#NativeString#[] (var18,var20) */
+var25 = var18[var20];
+var23 = var25;
+goto RET_LABEL24;
+RET_LABEL24:(void)0;
 }
-var = var22;
+var = var23;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -2183,53 +2256,57 @@ short int var2 /* : Bool */;
 short int var4 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 short int var5 /* : Bool */;
 long var6 /* : Int */;
 short int var7 /* : Bool */;
 short int var9 /* : Bool */;
 int cltype10;
 int idtype11;
-short int var12 /* : Bool */;
-long var13 /* : Int */;
-long var15 /* : Int */;
+const char* var_class_name12;
+short int var13 /* : Bool */;
+long var14 /* : Int */;
 long var16 /* : Int */;
-short int var17 /* : Bool */;
-short int var19 /* : Bool */;
-int cltype20;
-int idtype21;
-short int var22 /* : Bool */;
-long var23 /* : Int */;
-long var24 /* : Int */;
+long var17 /* : Int */;
+short int var18 /* : Bool */;
+short int var20 /* : Bool */;
+int cltype21;
+int idtype22;
+const char* var_class_name23;
+short int var24 /* : Bool */;
 long var25 /* : Int */;
 long var26 /* : Int */;
+long var27 /* : Int */;
 long var28 /* : Int */;
+long var30 /* : Int */;
 long var_realFrom /* var realFrom: Int */;
-long var29 /* : Int */;
 long var31 /* : Int */;
-long var32 /* : Int */;
-short int var33 /* : Bool */;
+long var33 /* : Int */;
+long var34 /* : Int */;
 short int var35 /* : Bool */;
-int cltype36;
-int idtype37;
-short int var38 /* : Bool */;
-val* var39 /* : String */;
-long var40 /* : Int */;
-char* var41 /* : NativeString */;
-long var42 /* : Int */;
-short int var43 /* : Bool */;
-short int var45 /* : Bool */;
+short int var37 /* : Bool */;
+int cltype38;
+int idtype39;
+const char* var_class_name40;
+short int var41 /* : Bool */;
+val* var42 /* : String */;
+long var43 /* : Int */;
+char* var44 /* : NativeString */;
+long var45 /* : Int */;
+short int var46 /* : Bool */;
+short int var48 /* : Bool */;
 static val* varonce;
-val* var46 /* : String */;
-char* var47 /* : NativeString */;
-long var48 /* : Int */;
 val* var49 /* : String */;
-val* var50 /* : String */;
+char* var50 /* : NativeString */;
 long var51 /* : Int */;
-long var53 /* : Int */;
+val* var52 /* : String */;
+val* var53 /* : String */;
 long var54 /* : Int */;
-long var55 /* : Int */;
+long var56 /* : Int */;
 long var57 /* : Int */;
-char* var58 /* : NativeString */;
+long var58 /* : Int */;
+long var60 /* : Int */;
+char* var61 /* : NativeString */;
 var_from = p0;
 var_count = p1;
 var1 = 0;
@@ -2238,7 +2315,9 @@ var1 = 0;
 /* <var1:Int> isa OTHER */
 var4 = 1; /* easy <var1:Int> isa OTHER*/
 if (!var4) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 258);
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
 exit(1);
 }
 var5 = var_count >= var1;
@@ -2247,7 +2326,8 @@ goto RET_LABEL3;
 RET_LABEL3:(void)0;
 }
 if (!var2) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "lib/standard/string.nit", 388);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/string.nit", 388);
 exit(1);
 }
 var6 = 0;
@@ -2256,122 +2336,128 @@ var6 = 0;
 /* <var6:Int> isa OTHER */
 var9 = 1; /* easy <var6:Int> isa OTHER*/
 if (!var9) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 257);
+var_class_name12 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name12);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
 exit(1);
 }
-var12 = var_from < var6;
-var7 = var12;
+var13 = var_from < var6;
+var7 = var13;
 goto RET_LABEL8;
 RET_LABEL8:(void)0;
 }
 if (var7){
 { /* Inline kernel#Int#+ (var_count,var_from) */
-var15 = var_count + var_from;
-var13 = var15;
-goto RET_LABEL14;
-RET_LABEL14:(void)0;
+var16 = var_count + var_from;
+var14 = var16;
+goto RET_LABEL15;
+RET_LABEL15:(void)0;
 }
-var_count = var13;
-var16 = 0;
-{ /* Inline kernel#Int#< (var_count,var16) */
-/* Covariant cast for argument 0 (i) <var16:Int> isa OTHER */
-/* <var16:Int> isa OTHER */
-var19 = 1; /* easy <var16:Int> isa OTHER*/
-if (!var19) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 257);
+var_count = var14;
+var17 = 0;
+{ /* Inline kernel#Int#< (var_count,var17) */
+/* Covariant cast for argument 0 (i) <var17:Int> isa OTHER */
+/* <var17:Int> isa OTHER */
+var20 = 1; /* easy <var17:Int> isa OTHER*/
+if (!var20) {
+var_class_name23 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name23);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
 exit(1);
 }
-var22 = var_count < var16;
-var17 = var22;
-goto RET_LABEL18;
-RET_LABEL18:(void)0;
+var24 = var_count < var17;
+var18 = var24;
+goto RET_LABEL19;
+RET_LABEL19:(void)0;
 }
-if (var17){
-var23 = 0;
-var_count = var23;
+if (var18){
+var25 = 0;
+var_count = var25;
 } else {
 }
-var24 = 0;
-var_from = var24;
+var26 = 0;
+var_from = var26;
 } else {
 }
-var25 = self->attrs[COLOR_string__String___index_from].l; /* _index_from on <self:String> */
-{ /* Inline kernel#Int#+ (var25,var_from) */
-var28 = var25 + var_from;
-var26 = var28;
-goto RET_LABEL27;
-RET_LABEL27:(void)0;
+var27 = self->attrs[COLOR_string__String___index_from].l; /* _index_from on <self:String> */
+{ /* Inline kernel#Int#+ (var27,var_from) */
+var30 = var27 + var_from;
+var28 = var30;
+goto RET_LABEL29;
+RET_LABEL29:(void)0;
 }
-var_realFrom = var26;
+var_realFrom = var28;
 { /* Inline kernel#Int#+ (var_realFrom,var_count) */
-var31 = var_realFrom + var_count;
-var29 = var31;
-goto RET_LABEL30;
-RET_LABEL30:(void)0;
+var33 = var_realFrom + var_count;
+var31 = var33;
+goto RET_LABEL32;
+RET_LABEL32:(void)0;
 }
-var32 = self->attrs[COLOR_string__String___index_to].l; /* _index_to on <self:String> */
-{ /* Inline kernel#Int#> (var29,var32) */
-/* Covariant cast for argument 0 (i) <var32:Int> isa OTHER */
-/* <var32:Int> isa OTHER */
-var35 = 1; /* easy <var32:Int> isa OTHER*/
-if (!var35) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 259);
+var34 = self->attrs[COLOR_string__String___index_to].l; /* _index_to on <self:String> */
+{ /* Inline kernel#Int#> (var31,var34) */
+/* Covariant cast for argument 0 (i) <var34:Int> isa OTHER */
+/* <var34:Int> isa OTHER */
+var37 = 1; /* easy <var34:Int> isa OTHER*/
+if (!var37) {
+var_class_name40 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name40);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
 exit(1);
 }
-var38 = var29 > var32;
-var33 = var38;
-goto RET_LABEL34;
-RET_LABEL34:(void)0;
+var41 = var31 > var34;
+var35 = var41;
+goto RET_LABEL36;
+RET_LABEL36:(void)0;
 }
-if (var33){
-var39 = NEW_string__String(&type_string__String);
-var40 = self->attrs[COLOR_string__String___index_to].l; /* _index_to on <self:String> */
-var41 = self->attrs[COLOR_string__AbstractString___items].str; /* _items on <self:String> */
-((void (*)(val*, long, long, char*))(var39->class->vft[COLOR_string__String__from_substring]))(var39, var_realFrom, var40, var41) /* from_substring on <var39:String>*/;
-CHECK_NEW_string__String(var39);
-var = var39;
+if (var35){
+var42 = NEW_string__String(&type_string__String);
+var43 = self->attrs[COLOR_string__String___index_to].l; /* _index_to on <self:String> */
+var44 = self->attrs[COLOR_string__AbstractString___items].str; /* _items on <self:String> */
+((void (*)(val*, long, long, char*))(var42->class->vft[COLOR_string__String__from_substring]))(var42, var_realFrom, var43, var44) /* from_substring on <var42:String>*/;
+CHECK_NEW_string__String(var42);
+var = var42;
 goto RET_LABEL;
 } else {
 }
-var42 = 0;
-{ /* Inline kernel#Int#== (var_count,var42) */
-var45 = var_count == var42;
-var43 = var45;
-goto RET_LABEL44;
-RET_LABEL44:(void)0;
+var45 = 0;
+{ /* Inline kernel#Int#== (var_count,var45) */
+var48 = var_count == var45;
+var46 = var48;
+goto RET_LABEL47;
+RET_LABEL47:(void)0;
 }
-if (var43){
+if (var46){
 if (varonce) {
-var46 = varonce;
+var49 = varonce;
 } else {
-var47 = "";
-var48 = 0;
-var49 = string__NativeString__to_s_with_length(var47, var48);
-var46 = var49;
-varonce = var46;
+var50 = "";
+var51 = 0;
+var52 = string__NativeString__to_s_with_length(var50, var51);
+var49 = var52;
+varonce = var49;
 }
-var = var46;
+var = var49;
 goto RET_LABEL;
 } else {
 }
-var50 = NEW_string__String(&type_string__String);
+var53 = NEW_string__String(&type_string__String);
 { /* Inline kernel#Int#+ (var_realFrom,var_count) */
-var53 = var_realFrom + var_count;
-var51 = var53;
-goto RET_LABEL52;
-RET_LABEL52:(void)0;
+var56 = var_realFrom + var_count;
+var54 = var56;
+goto RET_LABEL55;
+RET_LABEL55:(void)0;
 }
-var54 = 1;
-{ /* Inline kernel#Int#- (var51,var54) */
-var57 = var51 - var54;
-var55 = var57;
-goto RET_LABEL56;
-RET_LABEL56:(void)0;
+var57 = 1;
+{ /* Inline kernel#Int#- (var54,var57) */
+var60 = var54 - var57;
+var58 = var60;
+goto RET_LABEL59;
+RET_LABEL59:(void)0;
 }
-var58 = self->attrs[COLOR_string__AbstractString___items].str; /* _items on <self:String> */
-((void (*)(val*, long, long, char*))(var50->class->vft[COLOR_string__String__from_substring]))(var50, var_realFrom, var55, var58) /* from_substring on <var50:String>*/;
-CHECK_NEW_string__String(var50);
-var = var50;
+var61 = self->attrs[COLOR_string__AbstractString___items].str; /* _items on <self:String> */
+((void (*)(val*, long, long, char*))(var53->class->vft[COLOR_string__String__from_substring]))(var53, var_realFrom, var58, var61) /* from_substring on <var53:String>*/;
+CHECK_NEW_string__String(var53);
+var = var53;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -2394,6 +2480,7 @@ short int var2 /* : Bool */;
 short int var4 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 short int var5 /* : Bool */;
 static val* varonce;
 val* var6 /* : String */;
@@ -2405,10 +2492,11 @@ short int var11 /* : Bool */;
 short int var13 /* : Bool */;
 int cltype14;
 int idtype15;
-short int var16 /* : Bool */;
-long var17 /* : Int */;
+const char* var_class_name16;
+short int var17 /* : Bool */;
 long var18 /* : Int */;
-val* var19 /* : String */;
+long var19 /* : Int */;
+val* var20 /* : String */;
 var_from = p0;
 var1 = self->attrs[COLOR_array__AbstractArrayRead___length].l; /* _length on <self:String> */
 { /* Inline kernel#Int#> (var_from,var1) */
@@ -2416,7 +2504,9 @@ var1 = self->attrs[COLOR_array__AbstractArrayRead___length].l; /* _length on <se
 /* <var1:Int> isa OTHER */
 var4 = 1; /* easy <var1:Int> isa OTHER*/
 if (!var4) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 259);
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
 exit(1);
 }
 var5 = var_from > var1;
@@ -2444,22 +2534,24 @@ var10 = 0;
 /* <var10:Int> isa OTHER */
 var13 = 1; /* easy <var10:Int> isa OTHER*/
 if (!var13) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 257);
+var_class_name16 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name16);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
 exit(1);
 }
-var16 = var_from < var10;
-var11 = var16;
+var17 = var_from < var10;
+var11 = var17;
 goto RET_LABEL12;
 RET_LABEL12:(void)0;
 }
 if (var11){
-var17 = 0;
-var_from = var17;
+var18 = 0;
+var_from = var18;
 } else {
 }
-var18 = self->attrs[COLOR_array__AbstractArrayRead___length].l; /* _length on <self:String> */
-var19 = ((val* (*)(val*, long, long))(self->class->vft[COLOR_string__AbstractString__substring]))(self, var_from, var18) /* substring on <self:String>*/;
-var = var19;
+var19 = self->attrs[COLOR_array__AbstractArrayRead___length].l; /* _length on <self:String> */
+var20 = ((val* (*)(val*, long, long))(self->class->vft[COLOR_string__AbstractString__substring]))(self, var_from, var19) /* substring on <self:String>*/;
+var = var20;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -2496,41 +2588,44 @@ short int var13 /* : Bool */;
 short int var15 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 short int var16 /* : Bool */;
 short int var_ /* var : Bool */;
 short int var17 /* : Bool */;
 short int var19 /* : Bool */;
 int cltype20;
 int idtype21;
-short int var22 /* : Bool */;
+const char* var_class_name22;
 short int var23 /* : Bool */;
-long var24 /* : Int */;
-long var_itsindexfrom /* var itsindexfrom: Int */;
+short int var24 /* : Bool */;
 long var25 /* : Int */;
-long var27 /* : Int */;
+long var_itsindexfrom /* var itsindexfrom: Int */;
+long var26 /* : Int */;
 long var28 /* : Int */;
 long var29 /* : Int */;
-long var31 /* : Int */;
-short int var32 /* : Bool */;
-short int var34 /* : Bool */;
-int cltype35;
-int idtype36;
-short int var37 /* : Bool */;
-char var38 /* : Char */;
+long var30 /* : Int */;
+long var32 /* : Int */;
+short int var33 /* : Bool */;
+short int var35 /* : Bool */;
+int cltype36;
+int idtype37;
+const char* var_class_name38;
+short int var39 /* : Bool */;
 char var40 /* : Char */;
-char var41 /* : Char */;
+char var42 /* : Char */;
 char var43 /* : Char */;
-short int var44 /* : Bool */;
+char var45 /* : Char */;
 short int var46 /* : Bool */;
-short int var47 /* : Bool */;
 short int var48 /* : Bool */;
-long var49 /* : Int */;
-long var50 /* : Int */;
+short int var49 /* : Bool */;
+short int var50 /* : Bool */;
+long var51 /* : Int */;
 long var52 /* : Int */;
-long var53 /* : Int */;
 long var54 /* : Int */;
+long var55 /* : Int */;
 long var56 /* : Int */;
-short int var57 /* : Bool */;
+long var58 /* : Int */;
+short int var59 /* : Bool */;
 var_str = p0;
 var_pos = p1;
 var1 = var_str->attrs[COLOR_array__AbstractArrayRead___length].l; /* _length on <var_str:String> */
@@ -2559,7 +2654,9 @@ var12 = self->attrs[COLOR_array__AbstractArrayRead___length].l; /* _length on <s
 /* <var12:Int> isa OTHER */
 var15 = 1; /* easy <var12:Int> isa OTHER*/
 if (!var15) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 259);
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
 exit(1);
 }
 var16 = var_myindex > var12;
@@ -2576,100 +2673,104 @@ var11 = var_;
 /* <var_myindex:Int> isa OTHER */
 var19 = 1; /* easy <var_myindex:Int> isa OTHER*/
 if (!var19) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 259);
+var_class_name22 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name22);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
 exit(1);
 }
-var22 = var_itsindex > var_myindex;
-var17 = var22;
+var23 = var_itsindex > var_myindex;
+var17 = var23;
 goto RET_LABEL18;
 RET_LABEL18:(void)0;
 }
 var11 = var17;
 }
 if (var11){
-var23 = 0;
-var = var23;
+var24 = 0;
+var = var24;
 goto RET_LABEL;
 } else {
 }
-var24 = ((long (*)(val*))(var_str->class->vft[COLOR_string__String__index_from]))(var_str) /* index_from on <var_str:String>*/;
-var_itsindexfrom = var24;
+var25 = ((long (*)(val*))(var_str->class->vft[COLOR_string__String__index_from]))(var_str) /* index_from on <var_str:String>*/;
+var_itsindexfrom = var25;
 { /* Inline kernel#Int#+ (var_itsindex,var_itsindexfrom) */
-var27 = var_itsindex + var_itsindexfrom;
-var25 = var27;
-goto RET_LABEL26;
-RET_LABEL26:(void)0;
+var28 = var_itsindex + var_itsindexfrom;
+var26 = var28;
+goto RET_LABEL27;
+RET_LABEL27:(void)0;
 }
-var_itsindex = var25;
-var28 = ((long (*)(val*))(self->class->vft[COLOR_string__String__index_from]))(self) /* index_from on <self:String>*/;
-{ /* Inline kernel#Int#+ (var_myindex,var28) */
-var31 = var_myindex + var28;
-var29 = var31;
-goto RET_LABEL30;
-RET_LABEL30:(void)0;
+var_itsindex = var26;
+var29 = ((long (*)(val*))(self->class->vft[COLOR_string__String__index_from]))(self) /* index_from on <self:String>*/;
+{ /* Inline kernel#Int#+ (var_myindex,var29) */
+var32 = var_myindex + var29;
+var30 = var32;
+goto RET_LABEL31;
+RET_LABEL31:(void)0;
 }
-var_myindex = var29;
+var_myindex = var30;
 for(;;) {
 { /* Inline kernel#Int#>= (var_itsindex,var_itsindexfrom) */
 /* Covariant cast for argument 0 (i) <var_itsindexfrom:Int> isa OTHER */
 /* <var_itsindexfrom:Int> isa OTHER */
-var34 = 1; /* easy <var_itsindexfrom:Int> isa OTHER*/
-if (!var34) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 258);
+var35 = 1; /* easy <var_itsindexfrom:Int> isa OTHER*/
+if (!var35) {
+var_class_name38 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name38);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
 exit(1);
 }
-var37 = var_itsindex >= var_itsindexfrom;
-var32 = var37;
-goto RET_LABEL33;
-RET_LABEL33:(void)0;
+var39 = var_itsindex >= var_itsindexfrom;
+var33 = var39;
+goto RET_LABEL34;
+RET_LABEL34:(void)0;
 }
-if (!var32) break;
+if (!var33) break;
 { /* Inline string#NativeString#[] (var_myitems,var_myindex) */
-var40 = var_myitems[var_myindex];
-var38 = var40;
-goto RET_LABEL39;
-RET_LABEL39:(void)0;
+var42 = var_myitems[var_myindex];
+var40 = var42;
+goto RET_LABEL41;
+RET_LABEL41:(void)0;
 }
 { /* Inline string#NativeString#[] (var_itsitems,var_itsindex) */
-var43 = var_itsitems[var_itsindex];
-var41 = var43;
-goto RET_LABEL42;
-RET_LABEL42:(void)0;
+var45 = var_itsitems[var_itsindex];
+var43 = var45;
+goto RET_LABEL44;
+RET_LABEL44:(void)0;
 }
-{ /* Inline kernel#Char#!= (var38,var41) */
-var46 = var38 == var41;
-var47 = !var46;
-var44 = var47;
-goto RET_LABEL45;
-RET_LABEL45:(void)0;
+{ /* Inline kernel#Char#!= (var40,var43) */
+var48 = var40 == var43;
+var49 = !var48;
+var46 = var49;
+goto RET_LABEL47;
+RET_LABEL47:(void)0;
 }
-if (var44){
-var48 = 0;
-var = var48;
+if (var46){
+var50 = 0;
+var = var50;
 goto RET_LABEL;
 } else {
 }
-var49 = 1;
-{ /* Inline kernel#Int#- (var_myindex,var49) */
-var52 = var_myindex - var49;
-var50 = var52;
-goto RET_LABEL51;
-RET_LABEL51:(void)0;
+var51 = 1;
+{ /* Inline kernel#Int#- (var_myindex,var51) */
+var54 = var_myindex - var51;
+var52 = var54;
+goto RET_LABEL53;
+RET_LABEL53:(void)0;
 }
-var_myindex = var50;
-var53 = 1;
-{ /* Inline kernel#Int#- (var_itsindex,var53) */
-var56 = var_itsindex - var53;
-var54 = var56;
-goto RET_LABEL55;
-RET_LABEL55:(void)0;
+var_myindex = var52;
+var55 = 1;
+{ /* Inline kernel#Int#- (var_itsindex,var55) */
+var58 = var_itsindex - var55;
+var56 = var58;
+goto RET_LABEL57;
+RET_LABEL57:(void)0;
 }
-var_itsindex = var54;
+var_itsindex = var56;
 CONTINUE_label: (void)0;
 }
 BREAK_label: (void)0;
-var57 = 1;
-var = var57;
+var59 = 1;
+var = var59;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -2704,6 +2805,7 @@ short int var11 /* : Bool */;
 short int var13 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 short int var14 /* : Bool */;
 char var15 /* : Char */;
 char var17 /* : Char */;
@@ -2742,7 +2844,9 @@ for(;;) {
 /* <var_max:Int> isa OTHER */
 var13 = 1; /* easy <var_max:Int> isa OTHER*/
 if (!var13) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 256);
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
 exit(1);
 }
 var14 = var_index_from <= var_max;
@@ -2824,6 +2928,7 @@ short int var11 /* : Bool */;
 short int var13 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 short int var14 /* : Bool */;
 char var15 /* : Char */;
 char var17 /* : Char */;
@@ -2862,7 +2967,9 @@ for(;;) {
 /* <var_max:Int> isa OTHER */
 var13 = 1; /* easy <var_max:Int> isa OTHER*/
 if (!var13) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 256);
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
 exit(1);
 }
 var14 = var_index_from <= var_max;
@@ -2942,6 +3049,7 @@ short int var15 /* : Bool */;
 short int var17 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 short int var18 /* : Bool */;
 long var19 /* : Int */;
 long var20 /* : Int */;
@@ -2969,28 +3077,29 @@ short int var44 /* : Bool */;
 short int var46 /* : Bool */;
 int cltype47;
 int idtype48;
-short int var49 /* : Bool */;
-long var50 /* : Int */;
+const char* var_class_name49;
+short int var50 /* : Bool */;
 long var51 /* : Int */;
-long var53 /* : Int */;
-short int var54 /* : Bool */;
-short int var56 /* : Bool */;
-char* var57 /* : NativeString */;
-char var58 /* : Char */;
-char var60 /* : Char */;
-val* var61 /* : String */;
-long var63 /* : Int */;
+long var52 /* : Int */;
+long var54 /* : Int */;
+short int var55 /* : Bool */;
+short int var57 /* : Bool */;
+char* var58 /* : NativeString */;
+char var59 /* : Char */;
+char var61 /* : Char */;
+val* var62 /* : String */;
 long var64 /* : Int */;
-long var66 /* : Int */;
+long var65 /* : Int */;
 long var67 /* : Int */;
 long var68 /* : Int */;
-long var70 /* : Int */;
+long var69 /* : Int */;
 long var71 /* : Int */;
-long var73 /* : Int */;
+long var72 /* : Int */;
 long var74 /* : Int */;
 long var75 /* : Int */;
-long var77 /* : Int */;
-val* var78 /* : String */;
+long var76 /* : Int */;
+long var78 /* : Int */;
+val* var79 /* : String */;
 var1 = self->attrs[COLOR_array__AbstractArrayRead___length].l; /* _length on <self:String> */
 var2 = 0;
 { /* Inline kernel#Int#== (var1,var2) */
@@ -3026,7 +3135,9 @@ var14 = 32;
 /* <var14:Int> isa OTHER */
 var17 = 1; /* easy <var14:Int> isa OTHER*/
 if (!var17) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 256);
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
 exit(1);
 }
 var18 = var11 <= var14;
@@ -3096,76 +3207,78 @@ var43 = 32;
 /* <var43:Int> isa OTHER */
 var46 = 1; /* easy <var43:Int> isa OTHER*/
 if (!var46) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 256);
+var_class_name49 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name49);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
 exit(1);
 }
-var49 = var40 <= var43;
-var44 = var49;
+var50 = var40 <= var43;
+var44 = var50;
 goto RET_LABEL45;
 RET_LABEL45:(void)0;
 }
 if (!var44) break;
-var50 = 1;
-{ /* Inline kernel#Int#- (var_end_pos,var50) */
-var53 = var_end_pos - var50;
-var51 = var53;
-goto RET_LABEL52;
-RET_LABEL52:(void)0;
+var51 = 1;
+{ /* Inline kernel#Int#- (var_end_pos,var51) */
+var54 = var_end_pos - var51;
+var52 = var54;
+goto RET_LABEL53;
+RET_LABEL53:(void)0;
 }
-var_end_pos = var51;
+var_end_pos = var52;
 { /* Inline kernel#Int#== (var_end_pos,var_start_pos) */
-var56 = var_end_pos == var_start_pos;
-var54 = var56;
-goto RET_LABEL55;
-RET_LABEL55:(void)0;
+var57 = var_end_pos == var_start_pos;
+var55 = var57;
+goto RET_LABEL56;
+RET_LABEL56:(void)0;
 }
-if (var54){
-var57 = self->attrs[COLOR_string__AbstractString___items].str; /* _items on <self:String> */
-{ /* Inline string#NativeString#[] (var57,var_start_pos) */
-var60 = var57[var_start_pos];
-var58 = var60;
-goto RET_LABEL59;
-RET_LABEL59:(void)0;
+if (var55){
+var58 = self->attrs[COLOR_string__AbstractString___items].str; /* _items on <self:String> */
+{ /* Inline string#NativeString#[] (var58,var_start_pos) */
+var61 = var58[var_start_pos];
+var59 = var61;
+goto RET_LABEL60;
+RET_LABEL60:(void)0;
 }
-var61 = string__Char__to_s(var58);
-var = var61;
+var62 = string__Char__to_s(var59);
+var = var62;
 goto RET_LABEL;
 } else {
 }
-CONTINUE_label62: (void)0;
+CONTINUE_label63: (void)0;
 }
-BREAK_label62: (void)0;
-var63 = ((long (*)(val*))(self->class->vft[COLOR_string__String__index_from]))(self) /* index_from on <self:String>*/;
-{ /* Inline kernel#Int#- (var_start_pos,var63) */
-var66 = var_start_pos - var63;
-var64 = var66;
-goto RET_LABEL65;
-RET_LABEL65:(void)0;
+BREAK_label63: (void)0;
+var64 = ((long (*)(val*))(self->class->vft[COLOR_string__String__index_from]))(self) /* index_from on <self:String>*/;
+{ /* Inline kernel#Int#- (var_start_pos,var64) */
+var67 = var_start_pos - var64;
+var65 = var67;
+goto RET_LABEL66;
+RET_LABEL66:(void)0;
 }
-var_start_pos = var64;
-var67 = ((long (*)(val*))(self->class->vft[COLOR_string__String__index_from]))(self) /* index_from on <self:String>*/;
-{ /* Inline kernel#Int#- (var_end_pos,var67) */
-var70 = var_end_pos - var67;
-var68 = var70;
-goto RET_LABEL69;
-RET_LABEL69:(void)0;
+var_start_pos = var65;
+var68 = ((long (*)(val*))(self->class->vft[COLOR_string__String__index_from]))(self) /* index_from on <self:String>*/;
+{ /* Inline kernel#Int#- (var_end_pos,var68) */
+var71 = var_end_pos - var68;
+var69 = var71;
+goto RET_LABEL70;
+RET_LABEL70:(void)0;
 }
-var_end_pos = var68;
+var_end_pos = var69;
 { /* Inline kernel#Int#- (var_end_pos,var_start_pos) */
-var73 = var_end_pos - var_start_pos;
-var71 = var73;
-goto RET_LABEL72;
-RET_LABEL72:(void)0;
+var74 = var_end_pos - var_start_pos;
+var72 = var74;
+goto RET_LABEL73;
+RET_LABEL73:(void)0;
 }
-var74 = 1;
-{ /* Inline kernel#Int#+ (var71,var74) */
-var77 = var71 + var74;
-var75 = var77;
-goto RET_LABEL76;
-RET_LABEL76:(void)0;
+var75 = 1;
+{ /* Inline kernel#Int#+ (var72,var75) */
+var78 = var72 + var75;
+var76 = var78;
+goto RET_LABEL77;
+RET_LABEL77:(void)0;
 }
-var78 = ((val* (*)(val*, long, long))(self->class->vft[COLOR_string__AbstractString__substring]))(self, var_start_pos, var75) /* substring on <self:String>*/;
-var = var78;
+var79 = ((val* (*)(val*, long, long))(self->class->vft[COLOR_string__AbstractString__substring]))(self, var_start_pos, var76) /* substring on <self:String>*/;
+var = var79;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -3189,6 +3302,7 @@ short int var2 /* : Bool */;
 short int var4 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 short int var5 /* : Bool */;
 char* var6 /* : NativeString */;
 char var7 /* : Char */;
@@ -3206,7 +3320,9 @@ for(;;) {
 /* <var_imax:Int> isa OTHER */
 var4 = 1; /* easy <var_imax:Int> isa OTHER*/
 if (!var4) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 256);
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
 exit(1);
 }
 var5 = var_i <= var_imax;
@@ -3314,6 +3430,7 @@ short int var4 /* : Bool */;
 short int var6 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 short int var7 /* : Bool */;
 short int var_ /* var : Bool */;
 long var8 /* : Int */;
@@ -3345,7 +3462,9 @@ var3 = 0;
 /* <var3:Int> isa OTHER */
 var6 = 1; /* easy <var3:Int> isa OTHER*/
 if (!var6) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 259);
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
 exit(1);
 }
 var7 = var2 > var3;
@@ -3425,191 +3544,182 @@ short int string__String___61d_61d(val* self, val* p0) {
 short int var /* : Bool */;
 val* var_other /* var other: nullable Object */;
 short int var1 /* : Bool */;
-short int var2 /* : Bool */;
 int cltype;
 int idtype;
+short int var2 /* : Bool */;
 short int var3 /* : Bool */;
-short int var_ /* var : Bool */;
-val* var4 /* : null */;
-short int var5 /* : Bool */;
+long var4 /* : Int */;
+long var5 /* : Int */;
 short int var6 /* : Bool */;
-long var7 /* : Int */;
-long var8 /* : Int */;
+short int var8 /* : Bool */;
 short int var9 /* : Bool */;
-short int var11 /* : Bool */;
-short int var12 /* : Bool */;
-long var13 /* : Int */;
+long var10 /* : Int */;
 long var_my_length /* var my_length: Int */;
-long var14 /* : Int */;
+long var11 /* : Int */;
+short int var12 /* : Bool */;
+short int var14 /* : Bool */;
 short int var15 /* : Bool */;
-short int var17 /* : Bool */;
-short int var18 /* : Bool */;
-short int var19 /* : Bool */;
-long var20 /* : Int */;
+short int var16 /* : Bool */;
+long var17 /* : Int */;
 long var_my_index /* var my_index: Int */;
-long var21 /* : Int */;
+long var18 /* : Int */;
 long var_its_index /* var its_index: Int */;
-long var22 /* : Int */;
-long var24 /* : Int */;
+long var19 /* : Int */;
+long var21 /* : Int */;
 long var_last_iteration /* var last_iteration: Int */;
-char* var25 /* : NativeString */;
+char* var22 /* : NativeString */;
 char* var_itsitems /* var itsitems: NativeString */;
-char* var26 /* : NativeString */;
+char* var23 /* : NativeString */;
 char* var_myitems /* var myitems: NativeString */;
-short int var27 /* : Bool */;
+short int var24 /* : Bool */;
+short int var26 /* : Bool */;
+int cltype27;
+int idtype28;
+const char* var_class_name;
 short int var29 /* : Bool */;
-int cltype30;
-int idtype31;
-short int var32 /* : Bool */;
+char var30 /* : Char */;
+char var32 /* : Char */;
 char var33 /* : Char */;
 char var35 /* : Char */;
-char var36 /* : Char */;
-char var38 /* : Char */;
+short int var36 /* : Bool */;
+short int var38 /* : Bool */;
 short int var39 /* : Bool */;
-short int var41 /* : Bool */;
-short int var42 /* : Bool */;
-short int var43 /* : Bool */;
+short int var40 /* : Bool */;
+long var41 /* : Int */;
+long var42 /* : Int */;
 long var44 /* : Int */;
 long var45 /* : Int */;
-long var47 /* : Int */;
+long var46 /* : Int */;
 long var48 /* : Int */;
-long var49 /* : Int */;
-long var51 /* : Int */;
-short int var52 /* : Bool */;
+short int var49 /* : Bool */;
 var_other = p0;
 /* <var_other:nullable Object> isa String */
 cltype = type_string__String.color;
 idtype = type_string__String.id;
 if(var_other == NULL) {
-var2 = 0;
+var1 = 0;
 } else {
 if(cltype >= var_other->type->table_size) {
-var2 = 0;
+var1 = 0;
 } else {
-var2 = var_other->type->type_table[cltype] == idtype;
+var1 = var_other->type->type_table[cltype] == idtype;
 }
 }
-var3 = !var2;
-var_ = var3;
-if (var3){
-var1 = var_;
-} else {
-var4 = NULL;
-var5 = var_other == var4;
-var1 = var5;
-}
-if (var1){
-var6 = 0;
-var = var6;
+var2 = !var1;
+if (var2){
+var3 = 0;
+var = var3;
 goto RET_LABEL;
 } else {
 }
-var7 = ((long (*)(val*))(self->class->vft[COLOR_kernel__Object__object_id]))(self) /* object_id on <self:String>*/;
-var8 = ((long (*)(val*))(var_other->class->vft[COLOR_kernel__Object__object_id]))(var_other) /* object_id on <var_other:nullable Object(String)>*/;
-{ /* Inline kernel#Int#== (var7,var8) */
-var11 = var7 == var8;
-var9 = var11;
-goto RET_LABEL10;
-RET_LABEL10:(void)0;
+var4 = ((long (*)(val*))(self->class->vft[COLOR_kernel__Object__object_id]))(self) /* object_id on <self:String>*/;
+var5 = ((long (*)(val*))(var_other->class->vft[COLOR_kernel__Object__object_id]))(var_other) /* object_id on <var_other:nullable Object(String)>*/;
+{ /* Inline kernel#Int#== (var4,var5) */
+var8 = var4 == var5;
+var6 = var8;
+goto RET_LABEL7;
+RET_LABEL7:(void)0;
 }
-if (var9){
-var12 = 1;
-var = var12;
+if (var6){
+var9 = 1;
+var = var9;
 goto RET_LABEL;
 } else {
 }
-var13 = self->attrs[COLOR_array__AbstractArrayRead___length].l; /* _length on <self:String> */
-var_my_length = var13;
-var14 = var_other->attrs[COLOR_array__AbstractArrayRead___length].l; /* _length on <var_other:nullable Object(String)> */
-{ /* Inline kernel#Int#!= (var14,var_my_length) */
-var17 = var14 == var_my_length;
-var18 = !var17;
-var15 = var18;
-goto RET_LABEL16;
-RET_LABEL16:(void)0;
+var10 = self->attrs[COLOR_array__AbstractArrayRead___length].l; /* _length on <self:String> */
+var_my_length = var10;
+var11 = var_other->attrs[COLOR_array__AbstractArrayRead___length].l; /* _length on <var_other:nullable Object(String)> */
+{ /* Inline kernel#Int#!= (var11,var_my_length) */
+var14 = var11 == var_my_length;
+var15 = !var14;
+var12 = var15;
+goto RET_LABEL13;
+RET_LABEL13:(void)0;
 }
-if (var15){
-var19 = 0;
-var = var19;
+if (var12){
+var16 = 0;
+var = var16;
 goto RET_LABEL;
 } else {
 }
-var20 = self->attrs[COLOR_string__String___index_from].l; /* _index_from on <self:String> */
-var_my_index = var20;
-var21 = var_other->attrs[COLOR_string__String___index_from].l; /* _index_from on <var_other:nullable Object(String)> */
-var_its_index = var21;
+var17 = self->attrs[COLOR_string__String___index_from].l; /* _index_from on <self:String> */
+var_my_index = var17;
+var18 = var_other->attrs[COLOR_string__String___index_from].l; /* _index_from on <var_other:nullable Object(String)> */
+var_its_index = var18;
 { /* Inline kernel#Int#+ (var_my_index,var_my_length) */
-var24 = var_my_index + var_my_length;
-var22 = var24;
-goto RET_LABEL23;
-RET_LABEL23:(void)0;
+var21 = var_my_index + var_my_length;
+var19 = var21;
+goto RET_LABEL20;
+RET_LABEL20:(void)0;
 }
-var_last_iteration = var22;
-var25 = var_other->attrs[COLOR_string__AbstractString___items].str; /* _items on <var_other:nullable Object(String)> */
-var_itsitems = var25;
-var26 = self->attrs[COLOR_string__AbstractString___items].str; /* _items on <self:String> */
-var_myitems = var26;
+var_last_iteration = var19;
+var22 = var_other->attrs[COLOR_string__AbstractString___items].str; /* _items on <var_other:nullable Object(String)> */
+var_itsitems = var22;
+var23 = self->attrs[COLOR_string__AbstractString___items].str; /* _items on <self:String> */
+var_myitems = var23;
 for(;;) {
 { /* Inline kernel#Int#< (var_my_index,var_last_iteration) */
 /* Covariant cast for argument 0 (i) <var_last_iteration:Int> isa OTHER */
 /* <var_last_iteration:Int> isa OTHER */
-var29 = 1; /* easy <var_last_iteration:Int> isa OTHER*/
-if (!var29) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 257);
+var26 = 1; /* easy <var_last_iteration:Int> isa OTHER*/
+if (!var26) {
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
 exit(1);
 }
-var32 = var_my_index < var_last_iteration;
-var27 = var32;
-goto RET_LABEL28;
-RET_LABEL28:(void)0;
+var29 = var_my_index < var_last_iteration;
+var24 = var29;
+goto RET_LABEL25;
+RET_LABEL25:(void)0;
 }
-if (!var27) break;
+if (!var24) break;
 { /* Inline string#NativeString#[] (var_myitems,var_my_index) */
-var35 = var_myitems[var_my_index];
+var32 = var_myitems[var_my_index];
+var30 = var32;
+goto RET_LABEL31;
+RET_LABEL31:(void)0;
+}
+{ /* Inline string#NativeString#[] (var_itsitems,var_its_index) */
+var35 = var_itsitems[var_its_index];
 var33 = var35;
 goto RET_LABEL34;
 RET_LABEL34:(void)0;
 }
-{ /* Inline string#NativeString#[] (var_itsitems,var_its_index) */
-var38 = var_itsitems[var_its_index];
-var36 = var38;
+{ /* Inline kernel#Char#!= (var30,var33) */
+var38 = var30 == var33;
+var39 = !var38;
+var36 = var39;
 goto RET_LABEL37;
 RET_LABEL37:(void)0;
 }
-{ /* Inline kernel#Char#!= (var33,var36) */
-var41 = var33 == var36;
-var42 = !var41;
-var39 = var42;
-goto RET_LABEL40;
-RET_LABEL40:(void)0;
-}
-if (var39){
-var43 = 0;
-var = var43;
+if (var36){
+var40 = 0;
+var = var40;
 goto RET_LABEL;
 } else {
 }
-var44 = 1;
-{ /* Inline kernel#Int#+ (var_my_index,var44) */
-var47 = var_my_index + var44;
-var45 = var47;
-goto RET_LABEL46;
-RET_LABEL46:(void)0;
+var41 = 1;
+{ /* Inline kernel#Int#+ (var_my_index,var41) */
+var44 = var_my_index + var41;
+var42 = var44;
+goto RET_LABEL43;
+RET_LABEL43:(void)0;
 }
-var_my_index = var45;
-var48 = 1;
-{ /* Inline kernel#Int#+ (var_its_index,var48) */
-var51 = var_its_index + var48;
-var49 = var51;
-goto RET_LABEL50;
-RET_LABEL50:(void)0;
+var_my_index = var42;
+var45 = 1;
+{ /* Inline kernel#Int#+ (var_its_index,var45) */
+var48 = var_its_index + var45;
+var46 = var48;
+goto RET_LABEL47;
+RET_LABEL47:(void)0;
 }
-var_its_index = var49;
+var_its_index = var46;
 CONTINUE_label: (void)0;
 }
 BREAK_label: (void)0;
-var52 = 1;
-var = var52;
+var49 = 1;
+var = var49;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -3630,6 +3740,7 @@ short int var1 /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_other /* var other: String */;
 long var2 /* : Int */;
 long var3 /* : Int */;
@@ -3655,34 +3766,37 @@ short int var17 /* : Bool */;
 short int var19 /* : Bool */;
 int cltype20;
 int idtype21;
-short int var22 /* : Bool */;
-char var23 /* : Char */;
-char var25 /* : Char */;
-char var_my_curr_char /* var my_curr_char: Char */;
+const char* var_class_name22;
+short int var23 /* : Bool */;
+char var24 /* : Char */;
 char var26 /* : Char */;
-char var28 /* : Char */;
+char var_my_curr_char /* var my_curr_char: Char */;
+char var27 /* : Char */;
+char var29 /* : Char */;
 char var_its_curr_char /* var its_curr_char: Char */;
-short int var29 /* : Bool */;
-short int var31 /* : Bool */;
+short int var30 /* : Bool */;
 short int var32 /* : Bool */;
 short int var33 /* : Bool */;
-short int var35 /* : Bool */;
-int cltype36;
-int idtype37;
-short int var38 /* : Bool */;
-short int var39 /* : Bool */;
+short int var34 /* : Bool */;
+short int var36 /* : Bool */;
+int cltype37;
+int idtype38;
+const char* var_class_name39;
 short int var40 /* : Bool */;
-long var41 /* : Int */;
-long var42 /* : Int */;
+short int var41 /* : Bool */;
+short int var42 /* : Bool */;
+long var43 /* : Int */;
 long var44 /* : Int */;
-long var45 /* : Int */;
 long var46 /* : Int */;
+long var47 /* : Int */;
 long var48 /* : Int */;
-short int var49 /* : Bool */;
+long var50 /* : Int */;
 short int var51 /* : Bool */;
-int cltype52;
-int idtype53;
-short int var54 /* : Bool */;
+short int var53 /* : Bool */;
+int cltype54;
+int idtype55;
+const char* var_class_name56;
+short int var57 /* : Bool */;
 /* Covariant cast for argument 0 (other) <p0:String> isa OTHER */
 /* <p0:String> isa OTHER */
 type_struct = self->type->resolution_table->types[COLOR_kernel__Comparable_VTOTHER];
@@ -3694,7 +3808,9 @@ var1 = 0;
 var1 = p0->type->type_table[cltype] == idtype;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/string.nit", 571);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/string.nit", 571);
 exit(1);
 }
 var_other = p0;
@@ -3737,94 +3853,100 @@ for(;;) {
 /* <var_max_iterations:Int> isa OTHER */
 var19 = 1; /* easy <var_max_iterations:Int> isa OTHER*/
 if (!var19) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 257);
+var_class_name22 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name22);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
 exit(1);
 }
-var22 = var_curr_id_self < var_max_iterations;
-var17 = var22;
+var23 = var_curr_id_self < var_max_iterations;
+var17 = var23;
 goto RET_LABEL18;
 RET_LABEL18:(void)0;
 }
 if (!var17) break;
 { /* Inline string#NativeString#[] (var_my_items,var_curr_id_self) */
-var25 = var_my_items[var_curr_id_self];
-var23 = var25;
-goto RET_LABEL24;
-RET_LABEL24:(void)0;
+var26 = var_my_items[var_curr_id_self];
+var24 = var26;
+goto RET_LABEL25;
+RET_LABEL25:(void)0;
 }
-var_my_curr_char = var23;
+var_my_curr_char = var24;
 { /* Inline string#NativeString#[] (var_its_items,var_curr_id_other) */
-var28 = var_its_items[var_curr_id_other];
-var26 = var28;
-goto RET_LABEL27;
-RET_LABEL27:(void)0;
+var29 = var_its_items[var_curr_id_other];
+var27 = var29;
+goto RET_LABEL28;
+RET_LABEL28:(void)0;
 }
-var_its_curr_char = var26;
+var_its_curr_char = var27;
 { /* Inline kernel#Char#!= (var_my_curr_char,var_its_curr_char) */
-var31 = var_my_curr_char == var_its_curr_char;
-var32 = !var31;
-var29 = var32;
-goto RET_LABEL30;
-RET_LABEL30:(void)0;
+var32 = var_my_curr_char == var_its_curr_char;
+var33 = !var32;
+var30 = var33;
+goto RET_LABEL31;
+RET_LABEL31:(void)0;
 }
-if (var29){
+if (var30){
 { /* Inline kernel#Char#< (var_my_curr_char,var_its_curr_char) */
 /* Covariant cast for argument 0 (i) <var_its_curr_char:Char> isa OTHER */
 /* <var_its_curr_char:Char> isa OTHER */
-var35 = 1; /* easy <var_its_curr_char:Char> isa OTHER*/
-if (!var35) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 455);
+var36 = 1; /* easy <var_its_curr_char:Char> isa OTHER*/
+if (!var36) {
+var_class_name39 = type_kernel__Char.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name39);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 437);
 exit(1);
 }
-var38 = var_my_curr_char < var_its_curr_char;
-var33 = var38;
-goto RET_LABEL34;
-RET_LABEL34:(void)0;
+var40 = var_my_curr_char < var_its_curr_char;
+var34 = var40;
+goto RET_LABEL35;
+RET_LABEL35:(void)0;
 }
-if (var33){
-var39 = 1;
-var = var39;
-goto RET_LABEL;
-} else {
-}
-var40 = 0;
-var = var40;
-goto RET_LABEL;
-} else {
-}
+if (var34){
 var41 = 1;
-{ /* Inline kernel#Int#+ (var_curr_id_self,var41) */
-var44 = var_curr_id_self + var41;
-var42 = var44;
-goto RET_LABEL43;
-RET_LABEL43:(void)0;
+var = var41;
+goto RET_LABEL;
+} else {
 }
-var_curr_id_self = var42;
-var45 = 1;
-{ /* Inline kernel#Int#+ (var_curr_id_other,var45) */
-var48 = var_curr_id_other + var45;
-var46 = var48;
-goto RET_LABEL47;
-RET_LABEL47:(void)0;
+var42 = 0;
+var = var42;
+goto RET_LABEL;
+} else {
 }
-var_curr_id_other = var46;
+var43 = 1;
+{ /* Inline kernel#Int#+ (var_curr_id_self,var43) */
+var46 = var_curr_id_self + var43;
+var44 = var46;
+goto RET_LABEL45;
+RET_LABEL45:(void)0;
+}
+var_curr_id_self = var44;
+var47 = 1;
+{ /* Inline kernel#Int#+ (var_curr_id_other,var47) */
+var50 = var_curr_id_other + var47;
+var48 = var50;
+goto RET_LABEL49;
+RET_LABEL49:(void)0;
+}
+var_curr_id_other = var48;
 CONTINUE_label: (void)0;
 }
 BREAK_label: (void)0;
 { /* Inline kernel#Int#< (var_my_length,var_its_length) */
 /* Covariant cast for argument 0 (i) <var_its_length:Int> isa OTHER */
 /* <var_its_length:Int> isa OTHER */
-var51 = 1; /* easy <var_its_length:Int> isa OTHER*/
-if (!var51) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 257);
+var53 = 1; /* easy <var_its_length:Int> isa OTHER*/
+if (!var53) {
+var_class_name56 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name56);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
 exit(1);
 }
-var54 = var_my_length < var_its_length;
-var49 = var54;
-goto RET_LABEL50;
-RET_LABEL50:(void)0;
+var57 = var_my_length < var_its_length;
+var51 = var57;
+goto RET_LABEL52;
+RET_LABEL52:(void)0;
 }
-var = var49;
+var = var51;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -3932,6 +4054,7 @@ short int var2 /* : Bool */;
 short int var4 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 short int var5 /* : Bool */;
 long var6 /* : Int */;
 long var_my_length /* var my_length: Int */;
@@ -3968,7 +4091,9 @@ var1 = 0;
 /* <var1:Int> isa OTHER */
 var4 = 1; /* easy <var1:Int> isa OTHER*/
 if (!var4) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 258);
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
 exit(1);
 }
 var5 = var_i >= var1;
@@ -3977,7 +4102,8 @@ goto RET_LABEL3;
 RET_LABEL3:(void)0;
 }
 if (!var2) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "lib/standard/string.nit", 635);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/string.nit", 635);
 exit(1);
 }
 var6 = self->attrs[COLOR_array__AbstractArrayRead___length].l; /* _length on <self:String> */
@@ -4088,6 +4214,7 @@ short int var12 /* : Bool */;
 short int var14 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 short int var15 /* : Bool */;
 long var16 /* : Int */;
 long var17 /* : Int */;
@@ -4132,7 +4259,9 @@ for(;;) {
 /* <var_strStart:Int> isa OTHER */
 var14 = 1; /* easy <var_strStart:Int> isa OTHER*/
 if (!var14) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 258);
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
 exit(1);
 }
 var15 = var_i >= var_strStart;
@@ -4204,6 +4333,7 @@ void string__Buffer___91d_93d_61d(val* self, long p0, char p1) {
 short int var /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 long var_index /* var index: Int */;
 char var_item /* var item: Char */;
 long var1 /* : Int */;
@@ -4216,20 +4346,24 @@ short int var8 /* : Bool */;
 short int var10 /* : Bool */;
 int cltype11;
 int idtype12;
-short int var13 /* : Bool */;
+const char* var_class_name13;
+short int var14 /* : Bool */;
 short int var_ /* var : Bool */;
-long var14 /* : Int */;
-short int var15 /* : Bool */;
-short int var17 /* : Bool */;
-int cltype18;
-int idtype19;
-short int var20 /* : Bool */;
-char* var21 /* : NativeString */;
+long var15 /* : Int */;
+short int var16 /* : Bool */;
+short int var18 /* : Bool */;
+int cltype19;
+int idtype20;
+const char* var_class_name21;
+short int var22 /* : Bool */;
+char* var23 /* : NativeString */;
 /* Covariant cast for argument 1 (item) <p1:Char> isa Sequence#0 */
 /* <p1:Char> isa Sequence#0 */
 var = 1; /* easy <p1:Char> isa Sequence#0*/
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/string.nit", 688);
+var_class_name = type_kernel__Char.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Sequence#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/string.nit", 688);
 exit(1);
 }
 var_index = p0;
@@ -4253,42 +4387,47 @@ var7 = 0;
 /* <var7:Int> isa OTHER */
 var10 = 1; /* easy <var7:Int> isa OTHER*/
 if (!var10) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 258);
+var_class_name13 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name13);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
 exit(1);
 }
-var13 = var_index >= var7;
-var8 = var13;
+var14 = var_index >= var7;
+var8 = var14;
 goto RET_LABEL9;
 RET_LABEL9:(void)0;
 }
 var_ = var8;
 if (var8){
-var14 = ((long (*)(val*))(self->class->vft[COLOR_abstract_collection__Collection__length]))(self) /* length on <self:Buffer>*/;
-{ /* Inline kernel#Int#< (var_index,var14) */
-/* Covariant cast for argument 0 (i) <var14:Int> isa OTHER */
-/* <var14:Int> isa OTHER */
-var17 = 1; /* easy <var14:Int> isa OTHER*/
-if (!var17) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 257);
+var15 = ((long (*)(val*))(self->class->vft[COLOR_abstract_collection__Collection__length]))(self) /* length on <self:Buffer>*/;
+{ /* Inline kernel#Int#< (var_index,var15) */
+/* Covariant cast for argument 0 (i) <var15:Int> isa OTHER */
+/* <var15:Int> isa OTHER */
+var18 = 1; /* easy <var15:Int> isa OTHER*/
+if (!var18) {
+var_class_name21 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name21);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
 exit(1);
 }
-var20 = var_index < var14;
-var15 = var20;
-goto RET_LABEL16;
-RET_LABEL16:(void)0;
+var22 = var_index < var15;
+var16 = var22;
+goto RET_LABEL17;
+RET_LABEL17:(void)0;
 }
-var6 = var15;
+var6 = var16;
 } else {
 var6 = var_;
 }
 if (!var6) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "lib/standard/string.nit", 694);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/string.nit", 694);
 exit(1);
 }
-var21 = self->attrs[COLOR_string__AbstractString___items].str; /* _items on <self:Buffer> */
-{ /* Inline string#NativeString#[]= (var21,var_index,var_item) */
-var21[var_index]=var_item;
-RET_LABEL22:(void)0;
+var23 = self->attrs[COLOR_string__AbstractString___items].str; /* _items on <self:Buffer> */
+{ /* Inline string#NativeString#[]= (var23,var_index,var_item) */
+var23[var_index]=var_item;
+RET_LABEL24:(void)0;
 }
 RET_LABEL:;
 }
@@ -4304,6 +4443,7 @@ void string__Buffer__add(val* self, char p0) {
 short int var /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 char var_c /* var c: Char */;
 long var1 /* : Int */;
 long var2 /* : Int */;
@@ -4311,23 +4451,26 @@ short int var3 /* : Bool */;
 short int var5 /* : Bool */;
 int cltype6;
 int idtype7;
-short int var8 /* : Bool */;
-long var9 /* : Int */;
+const char* var_class_name8;
+short int var9 /* : Bool */;
 long var10 /* : Int */;
 long var11 /* : Int */;
-long var13 /* : Int */;
-char* var14 /* : NativeString */;
-long var15 /* : Int */;
+long var12 /* : Int */;
+long var14 /* : Int */;
+char* var15 /* : NativeString */;
+long var16 /* : Int */;
 val* var_ /* var : Buffer */;
-long var17 /* : Int */;
 long var18 /* : Int */;
 long var19 /* : Int */;
-long var21 /* : Int */;
+long var20 /* : Int */;
+long var22 /* : Int */;
 /* Covariant cast for argument 0 (c) <p0:Char> isa SimpleCollection#0 */
 /* <p0:Char> isa SimpleCollection#0 */
 var = 1; /* easy <p0:Char> isa SimpleCollection#0*/
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/string.nit", 698);
+var_class_name = type_kernel__Char.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "SimpleCollection#0", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/string.nit", 698);
 exit(1);
 }
 var_c = p0;
@@ -4338,42 +4481,44 @@ var2 = ((long (*)(val*))(self->class->vft[COLOR_abstract_collection__Collection_
 /* <var2:Int> isa OTHER */
 var5 = 1; /* easy <var2:Int> isa OTHER*/
 if (!var5) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 256);
+var_class_name8 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name8);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
 exit(1);
 }
-var8 = var1 <= var2;
-var3 = var8;
+var9 = var1 <= var2;
+var3 = var9;
 goto RET_LABEL4;
 RET_LABEL4:(void)0;
 }
 if (var3){
-var9 = ((long (*)(val*))(self->class->vft[COLOR_abstract_collection__Collection__length]))(self) /* length on <self:Buffer>*/;
-var10 = 5;
-{ /* Inline kernel#Int#+ (var9,var10) */
-var13 = var9 + var10;
-var11 = var13;
-goto RET_LABEL12;
-RET_LABEL12:(void)0;
+var10 = ((long (*)(val*))(self->class->vft[COLOR_abstract_collection__Collection__length]))(self) /* length on <self:Buffer>*/;
+var11 = 5;
+{ /* Inline kernel#Int#+ (var10,var11) */
+var14 = var10 + var11;
+var12 = var14;
+goto RET_LABEL13;
+RET_LABEL13:(void)0;
 }
-((void (*)(val*, long))(self->class->vft[COLOR_array__AbstractArray__enlarge]))(self, var11) /* enlarge on <self:Buffer>*/;
+((void (*)(val*, long))(self->class->vft[COLOR_array__AbstractArray__enlarge]))(self, var12) /* enlarge on <self:Buffer>*/;
 } else {
 }
-var14 = self->attrs[COLOR_string__AbstractString___items].str; /* _items on <self:Buffer> */
-var15 = ((long (*)(val*))(self->class->vft[COLOR_abstract_collection__Collection__length]))(self) /* length on <self:Buffer>*/;
-{ /* Inline string#NativeString#[]= (var14,var15,var_c) */
-var14[var15]=var_c;
-RET_LABEL16:(void)0;
+var15 = self->attrs[COLOR_string__AbstractString___items].str; /* _items on <self:Buffer> */
+var16 = ((long (*)(val*))(self->class->vft[COLOR_abstract_collection__Collection__length]))(self) /* length on <self:Buffer>*/;
+{ /* Inline string#NativeString#[]= (var15,var16,var_c) */
+var15[var16]=var_c;
+RET_LABEL17:(void)0;
 }
 var_ = self;
-var17 = var_->attrs[COLOR_array__AbstractArrayRead___length].l; /* _length on <var_:Buffer> */
-var18 = 1;
-{ /* Inline kernel#Int#+ (var17,var18) */
-var21 = var17 + var18;
-var19 = var21;
-goto RET_LABEL20;
-RET_LABEL20:(void)0;
+var18 = var_->attrs[COLOR_array__AbstractArrayRead___length].l; /* _length on <var_:Buffer> */
+var19 = 1;
+{ /* Inline kernel#Int#+ (var18,var19) */
+var22 = var18 + var19;
+var20 = var22;
+goto RET_LABEL21;
+RET_LABEL21:(void)0;
 }
-var_->attrs[COLOR_array__AbstractArrayRead___length].l = var19; /* _length on <var_:Buffer> */
+var_->attrs[COLOR_array__AbstractArrayRead___length].l = var20; /* _length on <var_:Buffer> */
 RET_LABEL:;
 }
 /* method string#Buffer#add for (self: Object, nullable Object) */
@@ -4392,27 +4537,29 @@ short int var1 /* : Bool */;
 short int var3 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 short int var4 /* : Bool */;
 short int var5 /* : Bool */;
 short int var7 /* : Bool */;
 int cltype8;
 int idtype9;
-short int var10 /* : Bool */;
-long var11 /* : Int */;
+const char* var_class_name10;
+short int var11 /* : Bool */;
 long var12 /* : Int */;
-long var14 /* : Int */;
+long var13 /* : Int */;
 long var15 /* : Int */;
 long var16 /* : Int */;
-long var18 /* : Int */;
+long var17 /* : Int */;
 long var19 /* : Int */;
 long var20 /* : Int */;
-long var22 /* : Int */;
-char* var23 /* : NativeString */;
-char* var_a /* var a: NativeString */;
+long var21 /* : Int */;
+long var23 /* : Int */;
 char* var24 /* : NativeString */;
-long var25 /* : Int */;
+char* var_a /* var a: NativeString */;
+char* var25 /* : NativeString */;
 long var26 /* : Int */;
 long var27 /* : Int */;
+long var28 /* : Int */;
 var_cap = p0;
 var = self->attrs[COLOR_string__Buffer___capacity].l; /* _capacity on <self:Buffer> */
 var_c = var;
@@ -4421,7 +4568,9 @@ var_c = var;
 /* <var_c:Int> isa OTHER */
 var3 = 1; /* easy <var_c:Int> isa OTHER*/
 if (!var3) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 256);
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
 exit(1);
 }
 var4 = var_cap <= var_c;
@@ -4439,49 +4588,51 @@ for(;;) {
 /* <var_cap:Int> isa OTHER */
 var7 = 1; /* easy <var_cap:Int> isa OTHER*/
 if (!var7) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 256);
+var_class_name10 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name10);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
 exit(1);
 }
-var10 = var_c <= var_cap;
-var5 = var10;
+var11 = var_c <= var_cap;
+var5 = var11;
 goto RET_LABEL6;
 RET_LABEL6:(void)0;
 }
 if (!var5) break;
-var11 = 2;
-{ /* Inline kernel#Int#* (var_c,var11) */
-var14 = var_c * var11;
-var12 = var14;
-goto RET_LABEL13;
-RET_LABEL13:(void)0;
+var12 = 2;
+{ /* Inline kernel#Int#* (var_c,var12) */
+var15 = var_c * var12;
+var13 = var15;
+goto RET_LABEL14;
+RET_LABEL14:(void)0;
 }
-var15 = 2;
-{ /* Inline kernel#Int#+ (var12,var15) */
-var18 = var12 + var15;
-var16 = var18;
-goto RET_LABEL17;
-RET_LABEL17:(void)0;
+var16 = 2;
+{ /* Inline kernel#Int#+ (var13,var16) */
+var19 = var13 + var16;
+var17 = var19;
+goto RET_LABEL18;
+RET_LABEL18:(void)0;
 }
-var_c = var16;
+var_c = var17;
 CONTINUE_label: (void)0;
 }
 BREAK_label: (void)0;
-var19 = 1;
-{ /* Inline kernel#Int#+ (var_c,var19) */
-var22 = var_c + var19;
-var20 = var22;
-goto RET_LABEL21;
-RET_LABEL21:(void)0;
+var20 = 1;
+{ /* Inline kernel#Int#+ (var_c,var20) */
+var23 = var_c + var20;
+var21 = var23;
+goto RET_LABEL22;
+RET_LABEL22:(void)0;
 }
-var23 = ((char* (*)(val*, long))(self->class->vft[COLOR_string__StringCapable__calloc_string]))(self, var20) /* calloc_string on <self:Buffer>*/;
-var_a = var23;
-var24 = self->attrs[COLOR_string__AbstractString___items].str; /* _items on <self:Buffer> */
-var25 = ((long (*)(val*))(self->class->vft[COLOR_abstract_collection__Collection__length]))(self) /* length on <self:Buffer>*/;
-var26 = 0;
+var24 = ((char* (*)(val*, long))(self->class->vft[COLOR_string__StringCapable__calloc_string]))(self, var21) /* calloc_string on <self:Buffer>*/;
+var_a = var24;
+var25 = self->attrs[COLOR_string__AbstractString___items].str; /* _items on <self:Buffer> */
+var26 = ((long (*)(val*))(self->class->vft[COLOR_abstract_collection__Collection__length]))(self) /* length on <self:Buffer>*/;
 var27 = 0;
-{ /* Inline string#NativeString#copy_to (var24,var_a,var25,var26,var27) */
-memcpy(var_a+var27,var24+var26,var25);
-RET_LABEL28:(void)0;
+var28 = 0;
+{ /* Inline string#NativeString#copy_to (var25,var_a,var26,var27,var28) */
+memcpy(var_a+var28,var25+var27,var26);
+RET_LABEL29:(void)0;
 }
 self->attrs[COLOR_string__AbstractString___items].str = var_a; /* _items on <self:Buffer> */
 self->attrs[COLOR_string__Buffer___capacity].l = var_c; /* _capacity on <self:Buffer> */
@@ -4497,6 +4648,7 @@ void string__Buffer__append(val* self, val* p0) {
 short int var /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 val* var_s /* var s: Collection[Char] */;
 short int var1 /* : Bool */;
 int cltype2;
@@ -4511,23 +4663,26 @@ short int var10 /* : Bool */;
 short int var12 /* : Bool */;
 int cltype13;
 int idtype14;
-short int var15 /* : Bool */;
-long var16 /* : Int */;
+const char* var_class_name15;
+short int var16 /* : Bool */;
 long var17 /* : Int */;
-long var19 /* : Int */;
-char* var20 /* : NativeString */;
+long var18 /* : Int */;
+long var20 /* : Int */;
 char* var21 /* : NativeString */;
-long var22 /* : Int */;
+char* var22 /* : NativeString */;
 long var23 /* : Int */;
+long var24 /* : Int */;
 val* var_ /* var : Buffer */;
-long var25 /* : Int */;
 long var26 /* : Int */;
-long var28 /* : Int */;
+long var27 /* : Int */;
+long var29 /* : Int */;
 /* Covariant cast for argument 0 (s) <p0:Collection[Char]> isa Collection[Sequence#0] */
 /* <p0:Collection[Char]> isa Collection[Sequence#0] */
 var = 1; /* easy <p0:Collection[Char]> isa Collection[Sequence#0]*/
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/string.nit", 716);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Collection[Sequence#0]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/string.nit", 716);
 exit(1);
 }
 var_s = p0;
@@ -4555,42 +4710,44 @@ RET_LABEL8:(void)0;
 /* <var7:Int> isa OTHER */
 var12 = 1; /* easy <var7:Int> isa OTHER*/
 if (!var12) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 257);
+var_class_name15 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name15);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
 exit(1);
 }
-var15 = var5 < var7;
-var10 = var15;
+var16 = var5 < var7;
+var10 = var16;
 goto RET_LABEL11;
 RET_LABEL11:(void)0;
 }
 if (var10){
-var16 = self->attrs[COLOR_array__AbstractArrayRead___length].l; /* _length on <self:Buffer> */
-{ /* Inline kernel#Int#+ (var16,var_sl) */
-var19 = var16 + var_sl;
-var17 = var19;
-goto RET_LABEL18;
-RET_LABEL18:(void)0;
+var17 = self->attrs[COLOR_array__AbstractArrayRead___length].l; /* _length on <self:Buffer> */
+{ /* Inline kernel#Int#+ (var17,var_sl) */
+var20 = var17 + var_sl;
+var18 = var20;
+goto RET_LABEL19;
+RET_LABEL19:(void)0;
 }
-((void (*)(val*, long))(self->class->vft[COLOR_array__AbstractArray__enlarge]))(self, var17) /* enlarge on <self:Buffer>*/;
+((void (*)(val*, long))(self->class->vft[COLOR_array__AbstractArray__enlarge]))(self, var18) /* enlarge on <self:Buffer>*/;
 } else {
 }
-var20 = ((char* (*)(val*))(var_s->class->vft[COLOR_string__AbstractString__items]))(var_s) /* items on <var_s:Collection[Char](String)>*/;
-var21 = self->attrs[COLOR_string__AbstractString___items].str; /* _items on <self:Buffer> */
-var22 = var_s->attrs[COLOR_string__String___index_from].l; /* _index_from on <var_s:Collection[Char](String)> */
-var23 = self->attrs[COLOR_array__AbstractArrayRead___length].l; /* _length on <self:Buffer> */
-{ /* Inline string#NativeString#copy_to (var20,var21,var_sl,var22,var23) */
-memcpy(var21+var23,var20+var22,var_sl);
-RET_LABEL24:(void)0;
+var21 = ((char* (*)(val*))(var_s->class->vft[COLOR_string__AbstractString__items]))(var_s) /* items on <var_s:Collection[Char](String)>*/;
+var22 = self->attrs[COLOR_string__AbstractString___items].str; /* _items on <self:Buffer> */
+var23 = var_s->attrs[COLOR_string__String___index_from].l; /* _index_from on <var_s:Collection[Char](String)> */
+var24 = self->attrs[COLOR_array__AbstractArrayRead___length].l; /* _length on <self:Buffer> */
+{ /* Inline string#NativeString#copy_to (var21,var22,var_sl,var23,var24) */
+memcpy(var22+var24,var21+var23,var_sl);
+RET_LABEL25:(void)0;
 }
 var_ = self;
-var25 = var_->attrs[COLOR_array__AbstractArrayRead___length].l; /* _length on <var_:Buffer> */
-{ /* Inline kernel#Int#+ (var25,var_sl) */
-var28 = var25 + var_sl;
-var26 = var28;
-goto RET_LABEL27;
-RET_LABEL27:(void)0;
+var26 = var_->attrs[COLOR_array__AbstractArrayRead___length].l; /* _length on <var_:Buffer> */
+{ /* Inline kernel#Int#+ (var26,var_sl) */
+var29 = var26 + var_sl;
+var27 = var29;
+goto RET_LABEL28;
+RET_LABEL28:(void)0;
 }
-var_->attrs[COLOR_array__AbstractArrayRead___length].l = var26; /* _length on <var_:Buffer> */
+var_->attrs[COLOR_array__AbstractArrayRead___length].l = var27; /* _length on <var_:Buffer> */
 } else {
 ((void (*)(val*, val*))(self->class->vft[COLOR_string__Buffer__append]))(self, p0) /* append on <self:Buffer>*/;
 }
@@ -4665,6 +4822,7 @@ short int var1 /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_s /* var s: String */;
 long var2 /* : Int */;
 long var_i /* var i: Int */;
@@ -4677,45 +4835,50 @@ short int var6 /* : Bool */;
 short int var8 /* : Bool */;
 int cltype9;
 int idtype10;
-short int var11 /* : Bool */;
-short int var_ /* var : Bool */;
+const char* var_class_name11;
 short int var12 /* : Bool */;
-short int var14 /* : Bool */;
-int cltype15;
-int idtype16;
-short int var17 /* : Bool */;
-val* var18 /* : nullable Object */;
-long var19 /* : Int */;
-char var21 /* : Char */;
-long var22 /* : Int */;
-long var_c1 /* var c1: Int */;
-val* var23 /* : nullable Object */;
+short int var_ /* var : Bool */;
+short int var13 /* : Bool */;
+short int var15 /* : Bool */;
+int cltype16;
+int idtype17;
+const char* var_class_name18;
+short int var19 /* : Bool */;
+val* var20 /* : nullable Object */;
+long var21 /* : Int */;
+char var23 /* : Char */;
 long var24 /* : Int */;
-char var26 /* : Char */;
-long var27 /* : Int */;
+long var_c1 /* var c1: Int */;
+val* var25 /* : nullable Object */;
+long var26 /* : Int */;
+char var28 /* : Char */;
+long var29 /* : Int */;
 long var_c2 /* var c2: Int */;
-short int var28 /* : Bool */;
 short int var30 /* : Bool */;
-int cltype31;
-int idtype32;
-short int var33 /* : Bool */;
-short int var34 /* : Bool */;
-short int var35 /* : Bool */;
+short int var32 /* : Bool */;
+int cltype33;
+int idtype34;
+const char* var_class_name35;
+short int var36 /* : Bool */;
 short int var37 /* : Bool */;
-int cltype38;
-int idtype39;
+short int var38 /* : Bool */;
 short int var40 /* : Bool */;
-short int var41 /* : Bool */;
-long var42 /* : Int */;
-long var43 /* : Int */;
-long var45 /* : Int */;
-short int var46 /* : Bool */;
-short int var48 /* : Bool */;
-int cltype49;
-int idtype50;
-short int var51 /* : Bool */;
+int cltype41;
+int idtype42;
+const char* var_class_name43;
+short int var44 /* : Bool */;
+short int var45 /* : Bool */;
+long var46 /* : Int */;
+long var47 /* : Int */;
+long var49 /* : Int */;
+short int var50 /* : Bool */;
 short int var52 /* : Bool */;
-short int var53 /* : Bool */;
+int cltype53;
+int idtype54;
+const char* var_class_name55;
+short int var56 /* : Bool */;
+short int var57 /* : Bool */;
+short int var58 /* : Bool */;
 /* Covariant cast for argument 0 (s) <p0:String> isa OTHER */
 /* <p0:String> isa OTHER */
 type_struct = self->type->resolution_table->types[COLOR_kernel__Comparable_VTOTHER];
@@ -4727,7 +4890,9 @@ var1 = 0;
 var1 = p0->type->type_table[cltype] == idtype;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/string.nit", 740);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/string.nit", 740);
 exit(1);
 }
 var_s = p0;
@@ -4743,11 +4908,13 @@ for(;;) {
 /* <var_l1:Int> isa OTHER */
 var8 = 1; /* easy <var_l1:Int> isa OTHER*/
 if (!var8) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 257);
+var_class_name11 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name11);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
 exit(1);
 }
-var11 = var_i < var_l1;
-var6 = var11;
+var12 = var_i < var_l1;
+var6 = var12;
 goto RET_LABEL7;
 RET_LABEL7:(void)0;
 }
@@ -4756,108 +4923,116 @@ if (var6){
 { /* Inline kernel#Int#< (var_i,var_l2) */
 /* Covariant cast for argument 0 (i) <var_l2:Int> isa OTHER */
 /* <var_l2:Int> isa OTHER */
-var14 = 1; /* easy <var_l2:Int> isa OTHER*/
-if (!var14) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 257);
+var15 = 1; /* easy <var_l2:Int> isa OTHER*/
+if (!var15) {
+var_class_name18 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name18);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
 exit(1);
 }
-var17 = var_i < var_l2;
-var12 = var17;
-goto RET_LABEL13;
-RET_LABEL13:(void)0;
+var19 = var_i < var_l2;
+var13 = var19;
+goto RET_LABEL14;
+RET_LABEL14:(void)0;
 }
-var5 = var12;
+var5 = var13;
 } else {
 var5 = var_;
 }
 if (!var5) break;
-var18 = ((val* (*)(val*, long))(self->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(self, var_i) /* [] on <self:Buffer>*/;
-{ /* Inline kernel#Char#ascii (var18) */
-var21 = ((struct instance_kernel__Char*)var18)->value; /* autounbox from nullable Object to Char */;
-var22 = (unsigned char)var21;
-var19 = var22;
-goto RET_LABEL20;
-RET_LABEL20:(void)0;
+var20 = ((val* (*)(val*, long))(self->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(self, var_i) /* [] on <self:Buffer>*/;
+{ /* Inline kernel#Char#ascii (var20) */
+var23 = ((struct instance_kernel__Char*)var20)->value; /* autounbox from nullable Object to Char */;
+var24 = (unsigned char)var23;
+var21 = var24;
+goto RET_LABEL22;
+RET_LABEL22:(void)0;
 }
-var_c1 = var19;
-var23 = ((val* (*)(val*, long))(var_s->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var_s, var_i) /* [] on <var_s:String>*/;
-{ /* Inline kernel#Char#ascii (var23) */
-var26 = ((struct instance_kernel__Char*)var23)->value; /* autounbox from nullable Object to Char */;
-var27 = (unsigned char)var26;
-var24 = var27;
-goto RET_LABEL25;
-RET_LABEL25:(void)0;
+var_c1 = var21;
+var25 = ((val* (*)(val*, long))(var_s->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var_s, var_i) /* [] on <var_s:String>*/;
+{ /* Inline kernel#Char#ascii (var25) */
+var28 = ((struct instance_kernel__Char*)var25)->value; /* autounbox from nullable Object to Char */;
+var29 = (unsigned char)var28;
+var26 = var29;
+goto RET_LABEL27;
+RET_LABEL27:(void)0;
 }
-var_c2 = var24;
+var_c2 = var26;
 { /* Inline kernel#Int#< (var_c1,var_c2) */
 /* Covariant cast for argument 0 (i) <var_c2:Int> isa OTHER */
 /* <var_c2:Int> isa OTHER */
-var30 = 1; /* easy <var_c2:Int> isa OTHER*/
-if (!var30) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 257);
+var32 = 1; /* easy <var_c2:Int> isa OTHER*/
+if (!var32) {
+var_class_name35 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name35);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
 exit(1);
 }
-var33 = var_c1 < var_c2;
-var28 = var33;
-goto RET_LABEL29;
-RET_LABEL29:(void)0;
+var36 = var_c1 < var_c2;
+var30 = var36;
+goto RET_LABEL31;
+RET_LABEL31:(void)0;
 }
-if (var28){
-var34 = 1;
-var = var34;
+if (var30){
+var37 = 1;
+var = var37;
 goto RET_LABEL;
 } else {
 { /* Inline kernel#Int#< (var_c2,var_c1) */
 /* Covariant cast for argument 0 (i) <var_c1:Int> isa OTHER */
 /* <var_c1:Int> isa OTHER */
-var37 = 1; /* easy <var_c1:Int> isa OTHER*/
-if (!var37) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 257);
+var40 = 1; /* easy <var_c1:Int> isa OTHER*/
+if (!var40) {
+var_class_name43 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name43);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
 exit(1);
 }
-var40 = var_c2 < var_c1;
-var35 = var40;
-goto RET_LABEL36;
-RET_LABEL36:(void)0;
+var44 = var_c2 < var_c1;
+var38 = var44;
+goto RET_LABEL39;
+RET_LABEL39:(void)0;
 }
-if (var35){
-var41 = 0;
-var = var41;
+if (var38){
+var45 = 0;
+var = var45;
 goto RET_LABEL;
 } else {
 }
 }
-var42 = 1;
-{ /* Inline kernel#Int#+ (var_i,var42) */
-var45 = var_i + var42;
-var43 = var45;
-goto RET_LABEL44;
-RET_LABEL44:(void)0;
+var46 = 1;
+{ /* Inline kernel#Int#+ (var_i,var46) */
+var49 = var_i + var46;
+var47 = var49;
+goto RET_LABEL48;
+RET_LABEL48:(void)0;
 }
-var_i = var43;
+var_i = var47;
 CONTINUE_label: (void)0;
 }
 BREAK_label: (void)0;
 { /* Inline kernel#Int#< (var_l1,var_l2) */
 /* Covariant cast for argument 0 (i) <var_l2:Int> isa OTHER */
 /* <var_l2:Int> isa OTHER */
-var48 = 1; /* easy <var_l2:Int> isa OTHER*/
-if (!var48) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 257);
+var52 = 1; /* easy <var_l2:Int> isa OTHER*/
+if (!var52) {
+var_class_name55 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name55);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
 exit(1);
 }
-var51 = var_l1 < var_l2;
-var46 = var51;
-goto RET_LABEL47;
-RET_LABEL47:(void)0;
+var56 = var_l1 < var_l2;
+var50 = var56;
+goto RET_LABEL51;
+RET_LABEL51:(void)0;
 }
-if (var46){
-var52 = 1;
-var = var52;
+if (var50){
+var57 = 1;
+var = var57;
 goto RET_LABEL;
 } else {
-var53 = 0;
-var = var53;
+var58 = 0;
+var = var58;
 goto RET_LABEL;
 }
 RET_LABEL:;
@@ -4940,6 +5115,7 @@ short int var1 /* : Bool */;
 short int var3 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 short int var4 /* : Bool */;
 long var5 /* : Int */;
 long var6 /* : Int */;
@@ -4955,7 +5131,9 @@ var = 0;
 /* <var:Int> isa OTHER */
 var3 = 1; /* easy <var:Int> isa OTHER*/
 if (!var3) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 258);
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
 exit(1);
 }
 var4 = var_cap >= var;
@@ -4964,7 +5142,8 @@ goto RET_LABEL2;
 RET_LABEL2:(void)0;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "lib/standard/string.nit", 779);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/string.nit", 779);
 exit(1);
 }
 var5 = 1;
@@ -4991,147 +5170,138 @@ short int string__Buffer___61d_61d(val* self, val* p0) {
 short int var /* : Bool */;
 val* var_o /* var o: nullable Object */;
 short int var1 /* : Bool */;
-short int var2 /* : Bool */;
 int cltype;
 int idtype;
+short int var2 /* : Bool */;
 short int var3 /* : Bool */;
-short int var_ /* var : Bool */;
-val* var4 /* : null */;
-short int var5 /* : Bool */;
-short int var6 /* : Bool */;
-long var7 /* : Int */;
+long var4 /* : Int */;
 long var_l /* var l: Int */;
-long var8 /* : Int */;
+long var5 /* : Int */;
+short int var6 /* : Bool */;
+short int var8 /* : Bool */;
 short int var9 /* : Bool */;
-short int var11 /* : Bool */;
-short int var12 /* : Bool */;
-short int var13 /* : Bool */;
-long var14 /* : Int */;
+short int var10 /* : Bool */;
+long var11 /* : Int */;
 long var_i /* var i: Int */;
-char* var15 /* : NativeString */;
+char* var12 /* : NativeString */;
 char* var_it /* var it: NativeString */;
-char* var16 /* : NativeString */;
+char* var13 /* : NativeString */;
 char* var_oit /* var oit: NativeString */;
-short int var17 /* : Bool */;
+short int var14 /* : Bool */;
+short int var16 /* : Bool */;
+int cltype17;
+int idtype18;
+const char* var_class_name;
 short int var19 /* : Bool */;
-int cltype20;
-int idtype21;
-short int var22 /* : Bool */;
+char var20 /* : Char */;
+char var22 /* : Char */;
 char var23 /* : Char */;
 char var25 /* : Char */;
-char var26 /* : Char */;
-char var28 /* : Char */;
+short int var26 /* : Bool */;
+short int var28 /* : Bool */;
 short int var29 /* : Bool */;
-short int var31 /* : Bool */;
-short int var32 /* : Bool */;
-short int var33 /* : Bool */;
+short int var30 /* : Bool */;
+long var31 /* : Int */;
+long var32 /* : Int */;
 long var34 /* : Int */;
-long var35 /* : Int */;
-long var37 /* : Int */;
-short int var38 /* : Bool */;
+short int var35 /* : Bool */;
 var_o = p0;
 /* <var_o:nullable Object> isa Buffer */
 cltype = type_string__Buffer.color;
 idtype = type_string__Buffer.id;
 if(var_o == NULL) {
-var2 = 0;
+var1 = 0;
 } else {
 if(cltype >= var_o->type->table_size) {
-var2 = 0;
+var1 = 0;
 } else {
-var2 = var_o->type->type_table[cltype] == idtype;
+var1 = var_o->type->type_table[cltype] == idtype;
 }
 }
-var3 = !var2;
-var_ = var3;
-if (var3){
-var1 = var_;
-} else {
-var4 = NULL;
-var5 = var_o == var4;
-var1 = var5;
-}
-if (var1){
-var6 = 0;
-var = var6;
+var2 = !var1;
+if (var2){
+var3 = 0;
+var = var3;
 goto RET_LABEL;
 } else {
 }
-var7 = ((long (*)(val*))(self->class->vft[COLOR_abstract_collection__Collection__length]))(self) /* length on <self:Buffer>*/;
-var_l = var7;
-var8 = ((long (*)(val*))(var_o->class->vft[COLOR_abstract_collection__Collection__length]))(var_o) /* length on <var_o:nullable Object(Buffer)>*/;
-{ /* Inline kernel#Int#!= (var8,var_l) */
-var11 = var8 == var_l;
-var12 = !var11;
-var9 = var12;
-goto RET_LABEL10;
-RET_LABEL10:(void)0;
+var4 = ((long (*)(val*))(self->class->vft[COLOR_abstract_collection__Collection__length]))(self) /* length on <self:Buffer>*/;
+var_l = var4;
+var5 = ((long (*)(val*))(var_o->class->vft[COLOR_abstract_collection__Collection__length]))(var_o) /* length on <var_o:nullable Object(Buffer)>*/;
+{ /* Inline kernel#Int#!= (var5,var_l) */
+var8 = var5 == var_l;
+var9 = !var8;
+var6 = var9;
+goto RET_LABEL7;
+RET_LABEL7:(void)0;
 }
-if (var9){
-var13 = 0;
-var = var13;
+if (var6){
+var10 = 0;
+var = var10;
 goto RET_LABEL;
 } else {
 }
-var14 = 0;
-var_i = var14;
-var15 = self->attrs[COLOR_string__AbstractString___items].str; /* _items on <self:Buffer> */
-var_it = var15;
-var16 = var_o->attrs[COLOR_string__AbstractString___items].str; /* _items on <var_o:nullable Object(Buffer)> */
-var_oit = var16;
+var11 = 0;
+var_i = var11;
+var12 = self->attrs[COLOR_string__AbstractString___items].str; /* _items on <self:Buffer> */
+var_it = var12;
+var13 = var_o->attrs[COLOR_string__AbstractString___items].str; /* _items on <var_o:nullable Object(Buffer)> */
+var_oit = var13;
 for(;;) {
 { /* Inline kernel#Int#< (var_i,var_l) */
 /* Covariant cast for argument 0 (i) <var_l:Int> isa OTHER */
 /* <var_l:Int> isa OTHER */
-var19 = 1; /* easy <var_l:Int> isa OTHER*/
-if (!var19) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 257);
+var16 = 1; /* easy <var_l:Int> isa OTHER*/
+if (!var16) {
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
 exit(1);
 }
-var22 = var_i < var_l;
-var17 = var22;
-goto RET_LABEL18;
-RET_LABEL18:(void)0;
+var19 = var_i < var_l;
+var14 = var19;
+goto RET_LABEL15;
+RET_LABEL15:(void)0;
 }
-if (!var17) break;
+if (!var14) break;
 { /* Inline string#NativeString#[] (var_it,var_i) */
-var25 = var_it[var_i];
+var22 = var_it[var_i];
+var20 = var22;
+goto RET_LABEL21;
+RET_LABEL21:(void)0;
+}
+{ /* Inline string#NativeString#[] (var_oit,var_i) */
+var25 = var_oit[var_i];
 var23 = var25;
 goto RET_LABEL24;
 RET_LABEL24:(void)0;
 }
-{ /* Inline string#NativeString#[] (var_oit,var_i) */
-var28 = var_oit[var_i];
-var26 = var28;
+{ /* Inline kernel#Char#!= (var20,var23) */
+var28 = var20 == var23;
+var29 = !var28;
+var26 = var29;
 goto RET_LABEL27;
 RET_LABEL27:(void)0;
 }
-{ /* Inline kernel#Char#!= (var23,var26) */
-var31 = var23 == var26;
-var32 = !var31;
-var29 = var32;
-goto RET_LABEL30;
-RET_LABEL30:(void)0;
-}
-if (var29){
-var33 = 0;
-var = var33;
+if (var26){
+var30 = 0;
+var = var30;
 goto RET_LABEL;
 } else {
 }
-var34 = 1;
-{ /* Inline kernel#Int#+ (var_i,var34) */
-var37 = var_i + var34;
-var35 = var37;
-goto RET_LABEL36;
-RET_LABEL36:(void)0;
+var31 = 1;
+{ /* Inline kernel#Int#+ (var_i,var31) */
+var34 = var_i + var31;
+var32 = var34;
+goto RET_LABEL33;
+RET_LABEL33:(void)0;
 }
-var_i = var35;
+var_i = var32;
 CONTINUE_label: (void)0;
 }
 BREAK_label: (void)0;
-var38 = 1;
-var = var38;
+var35 = 1;
+var = var35;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -5475,6 +5645,7 @@ short int var1 /* : Bool */;
 short int var3 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 short int var4 /* : Bool */;
 long var5 /* : Int */;
 long var7 /* : Int */;
@@ -5499,23 +5670,25 @@ short int var25 /* : Bool */;
 short int var27 /* : Bool */;
 int cltype28;
 int idtype29;
-short int var30 /* : Bool */;
+const char* var_class_name30;
+short int var31 /* : Bool */;
 short int var_ /* var : Bool */;
-long var31 /* : Int */;
-short int var32 /* : Bool */;
-short int var34 /* : Bool */;
-int cltype35;
-int idtype36;
-short int var37 /* : Bool */;
-long var38 /* : Int */;
+long var32 /* : Int */;
+short int var33 /* : Bool */;
+short int var35 /* : Bool */;
+int cltype36;
+int idtype37;
+const char* var_class_name38;
+short int var39 /* : Bool */;
 long var40 /* : Int */;
-char var41 /* : Char */;
-val* var42 /* : nullable Object */;
-long var43 /* : Int */;
+long var42 /* : Int */;
+char var43 /* : Char */;
+val* var44 /* : nullable Object */;
 long var45 /* : Int */;
-long var46 /* : Int */;
 long var47 /* : Int */;
+long var48 /* : Int */;
 long var49 /* : Int */;
+long var51 /* : Int */;
 var_s = p0;
 var_base = p1;
 var_signed = p2;
@@ -5525,7 +5698,9 @@ var = 0;
 /* <var:Int> isa OTHER */
 var3 = 1; /* easy <var:Int> isa OTHER*/
 if (!var3) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 257);
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
 exit(1);
 }
 var4 = self < var;
@@ -5579,59 +5754,63 @@ var24 = 0;
 /* <var24:Int> isa OTHER */
 var27 = 1; /* easy <var24:Int> isa OTHER*/
 if (!var27) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 258);
+var_class_name30 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name30);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
 exit(1);
 }
-var30 = var_pos >= var24;
-var25 = var30;
+var31 = var_pos >= var24;
+var25 = var31;
 goto RET_LABEL26;
 RET_LABEL26:(void)0;
 }
 var_ = var25;
 if (var25){
-var31 = 0;
-{ /* Inline kernel#Int#> (var_n,var31) */
-/* Covariant cast for argument 0 (i) <var31:Int> isa OTHER */
-/* <var31:Int> isa OTHER */
-var34 = 1; /* easy <var31:Int> isa OTHER*/
-if (!var34) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 259);
+var32 = 0;
+{ /* Inline kernel#Int#> (var_n,var32) */
+/* Covariant cast for argument 0 (i) <var32:Int> isa OTHER */
+/* <var32:Int> isa OTHER */
+var35 = 1; /* easy <var32:Int> isa OTHER*/
+if (!var35) {
+var_class_name38 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name38);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
 exit(1);
 }
-var37 = var_n > var31;
-var32 = var37;
-goto RET_LABEL33;
-RET_LABEL33:(void)0;
+var39 = var_n > var32;
+var33 = var39;
+goto RET_LABEL34;
+RET_LABEL34:(void)0;
 }
-var23 = var32;
+var23 = var33;
 } else {
 var23 = var_;
 }
 if (!var23) break;
 { /* Inline kernel#Int#% (var_n,var_base) */
-var40 = var_n % var_base;
-var38 = var40;
-goto RET_LABEL39;
-RET_LABEL39:(void)0;
+var42 = var_n % var_base;
+var40 = var42;
+goto RET_LABEL41;
+RET_LABEL41:(void)0;
 }
-var41 = kernel__Int__to_c(var38);
-var42 = BOX_kernel__Char(var41); /* autobox from Char to nullable Object */
-((void (*)(val*, long, val*))(var_s->class->vft[COLOR_abstract_collection__Sequence___91d_93d_61d]))(var_s, var_pos, var42) /* []= on <var_s:Buffer>*/;
+var43 = kernel__Int__to_c(var40);
+var44 = BOX_kernel__Char(var43); /* autobox from Char to nullable Object */
+((void (*)(val*, long, val*))(var_s->class->vft[COLOR_abstract_collection__Sequence___91d_93d_61d]))(var_s, var_pos, var44) /* []= on <var_s:Buffer>*/;
 { /* Inline kernel#Int#/ (var_n,var_base) */
-var45 = var_n / var_base;
-var43 = var45;
-goto RET_LABEL44;
-RET_LABEL44:(void)0;
+var47 = var_n / var_base;
+var45 = var47;
+goto RET_LABEL46;
+RET_LABEL46:(void)0;
 }
-var_n = var43;
-var46 = 1;
-{ /* Inline kernel#Int#- (var_pos,var46) */
-var49 = var_pos - var46;
-var47 = var49;
-goto RET_LABEL48;
-RET_LABEL48:(void)0;
+var_n = var45;
+var48 = 1;
+{ /* Inline kernel#Int#- (var_pos,var48) */
+var51 = var_pos - var48;
+var49 = var51;
+goto RET_LABEL50;
+RET_LABEL50:(void)0;
 }
-var_pos = var47;
+var_pos = var49;
 CONTINUE_label: (void)0;
 }
 BREAK_label: (void)0;
@@ -5972,6 +6151,7 @@ short int var47 /* : Bool */;
 short int var49 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 short int var50 /* : Bool */;
 long var51 /* : Int */;
 long var52 /* : Int */;
@@ -6115,7 +6295,9 @@ var_sl = var46;
 /* <var_nb:Int> isa OTHER */
 var49 = 1; /* easy <var_nb:Int> isa OTHER*/
 if (!var49) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 259);
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
 exit(1);
 }
 var50 = var_sl > var_nb;
@@ -6263,6 +6445,7 @@ short int var3 /* : Bool */;
 short int var5 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 short int var6 /* : Bool */;
 short int var_ /* var : Bool */;
 char var7 /* : Char */;
@@ -6270,16 +6453,19 @@ short int var8 /* : Bool */;
 short int var10 /* : Bool */;
 int cltype11;
 int idtype12;
-short int var13 /* : Bool */;
+const char* var_class_name13;
 short int var14 /* : Bool */;
 short int var15 /* : Bool */;
+short int var16 /* : Bool */;
 var2 = '0';
 { /* Inline kernel#Char#>= (self,var2) */
 /* Covariant cast for argument 0 (i) <var2:Char> isa OTHER */
 /* <var2:Char> isa OTHER */
 var5 = 1; /* easy <var2:Char> isa OTHER*/
 if (!var5) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 456);
+var_class_name = type_kernel__Char.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 438);
 exit(1);
 }
 var6 = self >= var2;
@@ -6295,11 +6481,13 @@ var7 = '9';
 /* <var7:Char> isa OTHER */
 var10 = 1; /* easy <var7:Char> isa OTHER*/
 if (!var10) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 454);
+var_class_name13 = type_kernel__Char.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name13);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 436);
 exit(1);
 }
-var13 = self <= var7;
-var8 = var13;
+var14 = self <= var7;
+var8 = var14;
 goto RET_LABEL9;
 RET_LABEL9:(void)0;
 }
@@ -6308,13 +6496,13 @@ var1 = var8;
 var1 = var_;
 }
 if (var1){
-var14 = 1;
-var = var14;
+var15 = 1;
+var = var15;
 goto RET_LABEL;
 } else {
 }
-var15 = 0;
-var = var15;
+var16 = 0;
+var = var16;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -6340,6 +6528,7 @@ short int var4 /* : Bool */;
 short int var6 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 short int var7 /* : Bool */;
 short int var_ /* var : Bool */;
 char var8 /* : Char */;
@@ -6347,31 +6536,36 @@ short int var9 /* : Bool */;
 short int var11 /* : Bool */;
 int cltype12;
 int idtype13;
-short int var14 /* : Bool */;
-short int var_15 /* var : Bool */;
-short int var16 /* : Bool */;
-char var17 /* : Char */;
-short int var18 /* : Bool */;
-short int var20 /* : Bool */;
-int cltype21;
-int idtype22;
-short int var23 /* : Bool */;
-short int var_24 /* var : Bool */;
-char var25 /* : Char */;
-short int var26 /* : Bool */;
+const char* var_class_name14;
+short int var15 /* : Bool */;
+short int var_16 /* var : Bool */;
+short int var17 /* : Bool */;
+char var18 /* : Char */;
+short int var19 /* : Bool */;
+short int var21 /* : Bool */;
+int cltype22;
+int idtype23;
+const char* var_class_name24;
+short int var25 /* : Bool */;
+short int var_26 /* var : Bool */;
+char var27 /* : Char */;
 short int var28 /* : Bool */;
-int cltype29;
-int idtype30;
-short int var31 /* : Bool */;
-short int var32 /* : Bool */;
-short int var33 /* : Bool */;
+short int var30 /* : Bool */;
+int cltype31;
+int idtype32;
+const char* var_class_name33;
+short int var34 /* : Bool */;
+short int var35 /* : Bool */;
+short int var36 /* : Bool */;
 var3 = 'a';
 { /* Inline kernel#Char#>= (self,var3) */
 /* Covariant cast for argument 0 (i) <var3:Char> isa OTHER */
 /* <var3:Char> isa OTHER */
 var6 = 1; /* easy <var3:Char> isa OTHER*/
 if (!var6) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 456);
+var_class_name = type_kernel__Char.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 438);
 exit(1);
 }
 var7 = self >= var3;
@@ -6387,11 +6581,13 @@ var8 = 'z';
 /* <var8:Char> isa OTHER */
 var11 = 1; /* easy <var8:Char> isa OTHER*/
 if (!var11) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 454);
+var_class_name14 = type_kernel__Char.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name14);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 436);
 exit(1);
 }
-var14 = self <= var8;
-var9 = var14;
+var15 = self <= var8;
+var9 = var15;
 goto RET_LABEL10;
 RET_LABEL10:(void)0;
 }
@@ -6399,54 +6595,58 @@ var2 = var9;
 } else {
 var2 = var_;
 }
-var_15 = var2;
+var_16 = var2;
 if (var2){
-var1 = var_15;
+var1 = var_16;
 } else {
-var17 = 'A';
-{ /* Inline kernel#Char#>= (self,var17) */
-/* Covariant cast for argument 0 (i) <var17:Char> isa OTHER */
-/* <var17:Char> isa OTHER */
-var20 = 1; /* easy <var17:Char> isa OTHER*/
-if (!var20) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 456);
+var18 = 'A';
+{ /* Inline kernel#Char#>= (self,var18) */
+/* Covariant cast for argument 0 (i) <var18:Char> isa OTHER */
+/* <var18:Char> isa OTHER */
+var21 = 1; /* easy <var18:Char> isa OTHER*/
+if (!var21) {
+var_class_name24 = type_kernel__Char.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name24);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 438);
 exit(1);
 }
-var23 = self >= var17;
-var18 = var23;
-goto RET_LABEL19;
-RET_LABEL19:(void)0;
+var25 = self >= var18;
+var19 = var25;
+goto RET_LABEL20;
+RET_LABEL20:(void)0;
 }
-var_24 = var18;
-if (var18){
-var25 = 'Z';
-{ /* Inline kernel#Char#<= (self,var25) */
-/* Covariant cast for argument 0 (i) <var25:Char> isa OTHER */
-/* <var25:Char> isa OTHER */
-var28 = 1; /* easy <var25:Char> isa OTHER*/
-if (!var28) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 454);
+var_26 = var19;
+if (var19){
+var27 = 'Z';
+{ /* Inline kernel#Char#<= (self,var27) */
+/* Covariant cast for argument 0 (i) <var27:Char> isa OTHER */
+/* <var27:Char> isa OTHER */
+var30 = 1; /* easy <var27:Char> isa OTHER*/
+if (!var30) {
+var_class_name33 = type_kernel__Char.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name33);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 436);
 exit(1);
 }
-var31 = self <= var25;
-var26 = var31;
-goto RET_LABEL27;
-RET_LABEL27:(void)0;
+var34 = self <= var27;
+var28 = var34;
+goto RET_LABEL29;
+RET_LABEL29:(void)0;
 }
-var16 = var26;
+var17 = var28;
 } else {
-var16 = var_24;
+var17 = var_26;
 }
-var1 = var16;
+var1 = var17;
 }
 if (var1){
-var32 = 1;
-var = var32;
+var35 = 1;
+var = var35;
 goto RET_LABEL;
 } else {
 }
-var33 = 0;
-var = var33;
+var36 = 0;
+var = var36;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -6533,7 +6733,8 @@ var6 = 1; /* arg is null and recv is not */
 }
 if (var6){
 if (var_e == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "lib/standard/string.nit", 997);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/string.nit", 997);
 exit(1);
 } else {
 var7 = ((val* (*)(val*))(var_e->class->vft[COLOR_string__Object__to_s]))(var_e) /* to_s on <var_e:nullable Object>*/;
@@ -6617,7 +6818,8 @@ var10 = 1; /* arg is null and recv is not */
 }
 if (var10){
 if (var_e == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "lib/standard/string.nit", 1014);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/string.nit", 1014);
 exit(1);
 } else {
 var11 = ((val* (*)(val*))(var_e->class->vft[COLOR_string__Object__to_s]))(var_e) /* to_s on <var_e:nullable Object>*/;
@@ -6640,7 +6842,8 @@ var15 = 1; /* arg is null and recv is not */
 }
 if (var15){
 if (var_e == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "lib/standard/string.nit", 1021);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/string.nit", 1021);
 exit(1);
 } else {
 var16 = ((val* (*)(val*))(var_e->class->vft[COLOR_string__Object__to_s]))(var_e) /* to_s on <var_e:nullable Object>*/;
@@ -6680,6 +6883,7 @@ short int var4 /* : Bool */;
 short int var6 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 short int var7 /* : Bool */;
 val* var8 /* : nullable Object */;
 val* var_e /* var e: nullable Object */;
@@ -6704,7 +6908,9 @@ for(;;) {
 /* <var_l:Int> isa OTHER */
 var6 = 1; /* easy <var_l:Int> isa OTHER*/
 if (!var6) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 257);
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
 exit(1);
 }
 var7 = var_i < var_l;
@@ -6723,7 +6929,8 @@ var10 = 1; /* arg is null and recv is not */
 }
 if (var10){
 if (var_e == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "lib/standard/string.nit", 1037);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/string.nit", 1037);
 exit(1);
 } else {
 var11 = ((val* (*)(val*))(var_e->class->vft[COLOR_string__Object__to_s]))(var_e) /* to_s on <var_e:nullable Object>*/;
@@ -7085,6 +7292,7 @@ short int var2 /* : Bool */;
 short int var4 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 short int var5 /* : Bool */;
 val* var6 /* : String */;
 long var7 /* : Int */;
@@ -7098,7 +7306,9 @@ var1 = 0;
 /* <var1:Int> isa OTHER */
 var4 = 1; /* easy <var1:Int> isa OTHER*/
 if (!var4) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 258);
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
 exit(1);
 }
 var5 = var_length >= var1;
@@ -7107,7 +7317,8 @@ goto RET_LABEL3;
 RET_LABEL3:(void)0;
 }
 if (!var2) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "lib/standard/string.nit", 1107);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/string.nit", 1107);
 exit(1);
 }
 var6 = NEW_string__String(&type_string__String);
@@ -7262,7 +7473,8 @@ if (var3){
 }
 var4 = self->attrs[COLOR_string__Sys___args_cache].val; /* _args_cache on <self:Sys> */
 if (var4 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/string.nit", 1132);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/string.nit", 1132);
 exit(1);
 }
 var = var4;
@@ -7315,6 +7527,7 @@ short int var4 /* : Bool */;
 short int var6 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 short int var7 /* : Bool */;
 long var8 /* : Int */;
 long var9 /* : Int */;
@@ -7339,7 +7552,9 @@ for(;;) {
 /* <var_argc:Int> isa OTHER */
 var6 = 1; /* easy <var_argc:Int> isa OTHER*/
 if (!var6) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 257);
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
 exit(1);
 }
 var7 = var_i < var_argc;

@@ -5,6 +5,7 @@ const struct class class_parser__ReduceAction89 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction89:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction89:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction89:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction89:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction89:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction89:kernel#Object#output */
@@ -68,6 +69,7 @@ const struct class class_parser__ReduceAction90 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction90:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction90:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction90:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction90:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction90:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction90:kernel#Object#output */
@@ -131,6 +133,7 @@ const struct class class_parser__ReduceAction91 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction91:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction91:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction91:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction91:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction91:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction91:kernel#Object#output */
@@ -194,6 +197,7 @@ const struct class class_parser__ReduceAction92 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction92:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction92:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction92:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction92:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction92:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction92:kernel#Object#output */
@@ -257,6 +261,7 @@ const struct class class_parser__ReduceAction94 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction94:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction94:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction94:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction94:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction94:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction94:kernel#Object#output */
@@ -320,6 +325,7 @@ const struct class class_parser__ReduceAction95 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction95:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction95:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction95:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction95:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction95:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction95:kernel#Object#output */
@@ -383,6 +389,7 @@ const struct class class_parser__ReduceAction97 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction97:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction97:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction97:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction97:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction97:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction97:kernel#Object#output */
@@ -446,6 +453,7 @@ const struct class class_parser__ReduceAction98 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction98:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction98:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction98:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction98:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction98:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction98:kernel#Object#output */
@@ -509,6 +517,7 @@ const struct class class_parser__ReduceAction99 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction99:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction99:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction99:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction99:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction99:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction99:kernel#Object#output */
@@ -572,6 +581,7 @@ const struct class class_parser__ReduceAction100 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction100:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction100:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction100:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction100:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction100:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction100:kernel#Object#output */
@@ -635,6 +645,7 @@ const struct class class_parser__ReduceAction102 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction102:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction102:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction102:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction102:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction102:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction102:kernel#Object#output */
@@ -698,6 +709,7 @@ const struct class class_parser__ReduceAction103 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction103:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction103:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction103:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction103:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction103:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction103:kernel#Object#output */
@@ -761,6 +773,7 @@ const struct class class_parser__ReduceAction105 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction105:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction105:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction105:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction105:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction105:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction105:kernel#Object#output */
@@ -824,6 +837,7 @@ const struct class class_parser__ReduceAction106 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction106:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction106:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction106:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction106:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction106:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction106:kernel#Object#output */
@@ -887,6 +901,7 @@ const struct class class_parser__ReduceAction107 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction107:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction107:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction107:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction107:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction107:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction107:kernel#Object#output */
@@ -950,6 +965,7 @@ const struct class class_parser__ReduceAction108 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction108:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction108:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction108:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction108:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction108:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction108:kernel#Object#output */
@@ -1013,6 +1029,7 @@ const struct class class_parser__ReduceAction110 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction110:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction110:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction110:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction110:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction110:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction110:kernel#Object#output */
@@ -1076,6 +1093,7 @@ const struct class class_parser__ReduceAction111 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction111:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction111:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction111:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction111:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction111:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction111:kernel#Object#output */
@@ -1139,6 +1157,7 @@ const struct class class_parser__ReduceAction113 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction113:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction113:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction113:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction113:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction113:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction113:kernel#Object#output */
@@ -1202,6 +1221,7 @@ const struct class class_parser__ReduceAction114 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction114:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction114:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction114:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction114:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction114:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction114:kernel#Object#output */
@@ -1265,6 +1285,7 @@ const struct class class_parser__ReduceAction115 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction115:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction115:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction115:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction115:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction115:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction115:kernel#Object#output */
@@ -1328,6 +1349,7 @@ const struct class class_parser__ReduceAction116 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction116:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction116:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction116:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction116:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction116:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction116:kernel#Object#output */
@@ -1391,6 +1413,7 @@ const struct class class_parser__ReduceAction118 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction118:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction118:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction118:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction118:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction118:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction118:kernel#Object#output */
@@ -1454,6 +1477,7 @@ const struct class class_parser__ReduceAction119 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction119:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction119:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction119:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction119:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction119:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction119:kernel#Object#output */
@@ -1517,6 +1541,7 @@ const struct class class_parser__ReduceAction121 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction121:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction121:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction121:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction121:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction121:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction121:kernel#Object#output */
@@ -1580,6 +1605,7 @@ const struct class class_parser__ReduceAction122 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction122:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction122:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction122:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction122:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction122:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction122:kernel#Object#output */
@@ -1643,6 +1669,7 @@ const struct class class_parser__ReduceAction123 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction123:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction123:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction123:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction123:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction123:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction123:kernel#Object#output */
@@ -1706,6 +1733,7 @@ const struct class class_parser__ReduceAction124 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction124:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction124:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction124:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction124:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction124:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction124:kernel#Object#output */
@@ -1769,6 +1797,7 @@ const struct class class_parser__ReduceAction126 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction126:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction126:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction126:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction126:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction126:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction126:kernel#Object#output */
@@ -1832,6 +1861,7 @@ const struct class class_parser__ReduceAction127 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction127:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction127:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction127:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction127:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction127:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction127:kernel#Object#output */
@@ -1895,6 +1925,7 @@ const struct class class_parser__ReduceAction129 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction129:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction129:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction129:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction129:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction129:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction129:kernel#Object#output */
@@ -1958,6 +1989,7 @@ const struct class class_parser__ReduceAction130 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction130:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction130:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction130:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction130:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction130:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction130:kernel#Object#output */
@@ -2021,6 +2053,7 @@ const struct class class_parser__ReduceAction131 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction131:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction131:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction131:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction131:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction131:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction131:kernel#Object#output */
@@ -2084,6 +2117,7 @@ const struct class class_parser__ReduceAction132 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction132:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction132:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction132:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction132:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction132:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction132:kernel#Object#output */
@@ -2147,6 +2181,7 @@ const struct class class_parser__ReduceAction134 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction134:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction134:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction134:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction134:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction134:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction134:kernel#Object#output */
@@ -2210,6 +2245,7 @@ const struct class class_parser__ReduceAction135 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction135:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction135:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction135:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction135:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction135:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction135:kernel#Object#output */
@@ -2273,6 +2309,7 @@ const struct class class_parser__ReduceAction137 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction137:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction137:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction137:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction137:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction137:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction137:kernel#Object#output */
@@ -2336,6 +2373,7 @@ const struct class class_parser__ReduceAction138 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction138:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction138:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction138:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction138:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction138:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction138:kernel#Object#output */
@@ -2399,6 +2437,7 @@ const struct class class_parser__ReduceAction139 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction139:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction139:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction139:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction139:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction139:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction139:kernel#Object#output */
@@ -2462,6 +2501,7 @@ const struct class class_parser__ReduceAction140 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction140:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction140:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction140:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction140:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction140:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction140:kernel#Object#output */
@@ -2525,6 +2565,7 @@ const struct class class_parser__ReduceAction142 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction142:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction142:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction142:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction142:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction142:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction142:kernel#Object#output */
@@ -2588,6 +2629,7 @@ const struct class class_parser__ReduceAction143 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction143:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction143:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction143:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction143:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction143:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction143:kernel#Object#output */
@@ -2651,6 +2693,7 @@ const struct class class_parser__ReduceAction145 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction145:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction145:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction145:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction145:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction145:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction145:kernel#Object#output */
@@ -2714,6 +2757,7 @@ const struct class class_parser__ReduceAction146 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction146:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction146:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction146:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction146:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction146:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction146:kernel#Object#output */
@@ -2777,6 +2821,7 @@ const struct class class_parser__ReduceAction147 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction147:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction147:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction147:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction147:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction147:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction147:kernel#Object#output */
@@ -2840,6 +2885,7 @@ const struct class class_parser__ReduceAction148 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction148:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction148:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction148:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction148:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction148:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction148:kernel#Object#output */
@@ -2903,6 +2949,7 @@ const struct class class_parser__ReduceAction150 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction150:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction150:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction150:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction150:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction150:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction150:kernel#Object#output */
@@ -2966,6 +3013,7 @@ const struct class class_parser__ReduceAction151 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction151:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction151:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction151:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction151:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction151:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction151:kernel#Object#output */
@@ -3029,6 +3077,7 @@ const struct class class_parser__ReduceAction153 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction153:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction153:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction153:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction153:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction153:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction153:kernel#Object#output */
@@ -3092,6 +3141,7 @@ const struct class class_parser__ReduceAction154 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction154:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction154:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction154:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction154:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction154:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction154:kernel#Object#output */
@@ -3155,6 +3205,7 @@ const struct class class_parser__ReduceAction155 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction155:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction155:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction155:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction155:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction155:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction155:kernel#Object#output */
@@ -3218,6 +3269,7 @@ const struct class class_parser__ReduceAction156 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction156:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction156:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction156:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction156:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction156:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction156:kernel#Object#output */
@@ -3281,6 +3333,7 @@ const struct class class_parser__ReduceAction158 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction158:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction158:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction158:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction158:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction158:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction158:kernel#Object#output */
@@ -3344,6 +3397,7 @@ const struct class class_parser__ReduceAction159 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction159:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction159:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction159:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction159:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction159:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction159:kernel#Object#output */
@@ -3407,6 +3461,7 @@ const struct class class_parser__ReduceAction161 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction161:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction161:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction161:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction161:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction161:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction161:kernel#Object#output */
@@ -3470,6 +3525,7 @@ const struct class class_parser__ReduceAction162 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction162:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction162:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction162:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction162:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction162:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction162:kernel#Object#output */
@@ -3533,6 +3589,7 @@ const struct class class_parser__ReduceAction163 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction163:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction163:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction163:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction163:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction163:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction163:kernel#Object#output */
@@ -3596,6 +3653,7 @@ const struct class class_parser__ReduceAction164 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction164:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction164:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction164:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction164:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction164:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction164:kernel#Object#output */
@@ -3659,6 +3717,7 @@ const struct class class_parser__ReduceAction166 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction166:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction166:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction166:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction166:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction166:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction166:kernel#Object#output */
@@ -3722,6 +3781,7 @@ const struct class class_parser__ReduceAction167 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction167:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction167:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction167:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction167:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction167:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction167:kernel#Object#output */
@@ -3785,6 +3845,7 @@ const struct class class_parser__ReduceAction169 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction169:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction169:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction169:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction169:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction169:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction169:kernel#Object#output */
@@ -3848,6 +3909,7 @@ const struct class class_parser__ReduceAction170 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction170:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction170:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction170:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction170:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction170:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction170:kernel#Object#output */
@@ -3911,6 +3973,7 @@ const struct class class_parser__ReduceAction171 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction171:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction171:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction171:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction171:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction171:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction171:kernel#Object#output */
@@ -3974,6 +4037,7 @@ const struct class class_parser__ReduceAction172 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction172:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction172:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction172:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction172:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction172:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction172:kernel#Object#output */
@@ -4037,6 +4101,7 @@ const struct class class_parser__ReduceAction174 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction174:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction174:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction174:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction174:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction174:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction174:kernel#Object#output */
@@ -4100,6 +4165,7 @@ const struct class class_parser__ReduceAction175 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction175:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction175:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction175:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction175:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction175:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction175:kernel#Object#output */
@@ -4163,6 +4229,7 @@ const struct class class_parser__ReduceAction177 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction177:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction177:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction177:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction177:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction177:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction177:kernel#Object#output */
@@ -4226,6 +4293,7 @@ const struct class class_parser__ReduceAction178 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction178:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction178:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction178:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction178:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction178:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction178:kernel#Object#output */
@@ -4289,6 +4357,7 @@ const struct class class_parser__ReduceAction179 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction179:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction179:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction179:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction179:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction179:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction179:kernel#Object#output */
@@ -4352,6 +4421,7 @@ const struct class class_parser__ReduceAction180 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction180:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction180:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction180:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction180:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction180:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction180:kernel#Object#output */
@@ -4415,6 +4485,7 @@ const struct class class_parser__ReduceAction182 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction182:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction182:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction182:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction182:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction182:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction182:kernel#Object#output */
@@ -4478,6 +4549,7 @@ const struct class class_parser__ReduceAction183 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction183:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction183:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction183:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction183:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction183:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction183:kernel#Object#output */
@@ -4541,6 +4613,7 @@ const struct class class_parser__ReduceAction185 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction185:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction185:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction185:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction185:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction185:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction185:kernel#Object#output */
@@ -4604,6 +4677,7 @@ const struct class class_parser__ReduceAction186 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction186:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction186:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction186:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction186:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction186:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction186:kernel#Object#output */
@@ -4667,6 +4741,7 @@ const struct class class_parser__ReduceAction187 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction187:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction187:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction187:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction187:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction187:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction187:kernel#Object#output */
@@ -4730,6 +4805,7 @@ const struct class class_parser__ReduceAction188 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction188:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction188:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction188:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction188:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction188:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction188:kernel#Object#output */
@@ -4793,6 +4869,7 @@ const struct class class_parser__ReduceAction190 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction190:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction190:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction190:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction190:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction190:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction190:kernel#Object#output */
@@ -4856,6 +4933,7 @@ const struct class class_parser__ReduceAction191 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction191:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction191:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction191:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction191:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction191:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction191:kernel#Object#output */
@@ -4919,6 +4997,7 @@ const struct class class_parser__ReduceAction193 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction193:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction193:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction193:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction193:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction193:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction193:kernel#Object#output */
@@ -4982,6 +5061,7 @@ const struct class class_parser__ReduceAction194 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction194:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction194:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction194:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction194:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction194:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction194:kernel#Object#output */
@@ -5045,6 +5125,7 @@ const struct class class_parser__ReduceAction195 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction195:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction195:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction195:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction195:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction195:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction195:kernel#Object#output */
@@ -5108,6 +5189,7 @@ const struct class class_parser__ReduceAction196 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction196:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction196:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction196:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction196:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction196:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction196:kernel#Object#output */
@@ -5171,6 +5253,7 @@ const struct class class_parser__ReduceAction198 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction198:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction198:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction198:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction198:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction198:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction198:kernel#Object#output */
@@ -5234,6 +5317,7 @@ const struct class class_parser__ReduceAction199 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction199:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction199:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction199:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction199:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction199:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction199:kernel#Object#output */
@@ -5297,6 +5381,7 @@ const struct class class_parser__ReduceAction201 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction201:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction201:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction201:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction201:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction201:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction201:kernel#Object#output */
@@ -5360,6 +5445,7 @@ const struct class class_parser__ReduceAction202 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction202:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction202:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction202:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction202:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction202:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction202:kernel#Object#output */
@@ -5423,6 +5509,7 @@ const struct class class_parser__ReduceAction203 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction203:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction203:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction203:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction203:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction203:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction203:kernel#Object#output */
@@ -5486,6 +5573,7 @@ const struct class class_parser__ReduceAction204 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction204:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction204:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction204:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction204:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction204:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction204:kernel#Object#output */
@@ -5549,6 +5637,7 @@ const struct class class_parser__ReduceAction206 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction206:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction206:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction206:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction206:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction206:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction206:kernel#Object#output */
@@ -5612,6 +5701,7 @@ const struct class class_parser__ReduceAction207 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction207:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction207:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction207:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction207:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction207:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction207:kernel#Object#output */
@@ -5675,6 +5765,7 @@ const struct class class_parser__ReduceAction209 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction209:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction209:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction209:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction209:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction209:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction209:kernel#Object#output */
@@ -5738,6 +5829,7 @@ const struct class class_parser__ReduceAction210 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction210:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction210:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction210:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction210:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction210:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction210:kernel#Object#output */
@@ -5801,6 +5893,7 @@ const struct class class_parser__ReduceAction211 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction211:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction211:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction211:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction211:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction211:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction211:kernel#Object#output */
@@ -5864,6 +5957,7 @@ const struct class class_parser__ReduceAction212 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction212:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction212:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction212:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction212:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction212:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction212:kernel#Object#output */
@@ -5927,6 +6021,7 @@ const struct class class_parser__ReduceAction214 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction214:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction214:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction214:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction214:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction214:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction214:kernel#Object#output */
@@ -5990,6 +6085,7 @@ const struct class class_parser__ReduceAction215 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction215:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction215:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction215:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction215:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction215:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction215:kernel#Object#output */
@@ -6053,6 +6149,7 @@ const struct class class_parser__ReduceAction217 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction217:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction217:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction217:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction217:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction217:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction217:kernel#Object#output */
@@ -6116,6 +6213,7 @@ const struct class class_parser__ReduceAction218 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction218:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction218:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction218:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction218:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction218:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction218:kernel#Object#output */
@@ -6179,6 +6277,7 @@ const struct class class_parser__ReduceAction219 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction219:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction219:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction219:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction219:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction219:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction219:kernel#Object#output */
@@ -6242,6 +6341,7 @@ const struct class class_parser__ReduceAction220 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction220:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction220:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction220:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction220:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction220:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction220:kernel#Object#output */
@@ -6305,6 +6405,7 @@ const struct class class_parser__ReduceAction222 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction222:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction222:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction222:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction222:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction222:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction222:kernel#Object#output */
@@ -6368,6 +6469,7 @@ const struct class class_parser__ReduceAction223 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction223:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction223:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction223:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction223:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction223:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction223:kernel#Object#output */
@@ -6431,6 +6533,7 @@ const struct class class_parser__ReduceAction225 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction225:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction225:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction225:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction225:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction225:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction225:kernel#Object#output */
@@ -6494,6 +6597,7 @@ const struct class class_parser__ReduceAction226 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction226:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction226:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction226:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction226:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction226:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction226:kernel#Object#output */
@@ -6557,6 +6661,7 @@ const struct class class_parser__ReduceAction227 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction227:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction227:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction227:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction227:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction227:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction227:kernel#Object#output */
@@ -6620,6 +6725,7 @@ const struct class class_parser__ReduceAction228 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction228:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction228:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction228:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction228:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction228:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction228:kernel#Object#output */
@@ -6683,6 +6789,7 @@ const struct class class_parser__ReduceAction230 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction230:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction230:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction230:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction230:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction230:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction230:kernel#Object#output */
@@ -6746,6 +6853,7 @@ const struct class class_parser__ReduceAction231 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction231:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction231:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction231:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction231:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction231:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction231:kernel#Object#output */
@@ -6809,6 +6917,7 @@ const struct class class_parser__ReduceAction233 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction233:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction233:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction233:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction233:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction233:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction233:kernel#Object#output */
@@ -6872,6 +6981,7 @@ const struct class class_parser__ReduceAction234 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction234:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction234:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction234:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction234:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction234:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction234:kernel#Object#output */
@@ -6935,6 +7045,7 @@ const struct class class_parser__ReduceAction235 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction235:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction235:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction235:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction235:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction235:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction235:kernel#Object#output */
@@ -6998,6 +7109,7 @@ const struct class class_parser__ReduceAction236 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction236:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction236:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction236:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction236:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction236:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction236:kernel#Object#output */
@@ -7061,6 +7173,7 @@ const struct class class_parser__ReduceAction238 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction238:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction238:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction238:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction238:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction238:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction238:kernel#Object#output */
@@ -7124,6 +7237,7 @@ const struct class class_parser__ReduceAction239 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction239:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction239:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction239:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction239:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction239:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction239:kernel#Object#output */
@@ -7187,6 +7301,7 @@ const struct class class_parser__ReduceAction241 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction241:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction241:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction241:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction241:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction241:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction241:kernel#Object#output */
@@ -7250,6 +7365,7 @@ const struct class class_parser__ReduceAction242 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction242:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction242:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction242:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction242:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction242:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction242:kernel#Object#output */
@@ -7313,6 +7429,7 @@ const struct class class_parser__ReduceAction243 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction243:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction243:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction243:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction243:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction243:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction243:kernel#Object#output */
@@ -7376,6 +7493,7 @@ const struct class class_parser__ReduceAction244 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction244:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction244:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction244:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction244:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction244:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction244:kernel#Object#output */
@@ -7439,6 +7557,7 @@ const struct class class_parser__ReduceAction246 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction246:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction246:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction246:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction246:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction246:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction246:kernel#Object#output */
@@ -7502,6 +7621,7 @@ const struct class class_parser__ReduceAction247 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction247:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction247:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction247:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction247:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction247:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction247:kernel#Object#output */
@@ -7565,6 +7685,7 @@ const struct class class_parser__ReduceAction249 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction249:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction249:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction249:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction249:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction249:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction249:kernel#Object#output */
@@ -7628,6 +7749,7 @@ const struct class class_parser__ReduceAction250 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction250:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction250:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction250:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction250:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction250:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction250:kernel#Object#output */
@@ -7691,6 +7813,7 @@ const struct class class_parser__ReduceAction251 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction251:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction251:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction251:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction251:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction251:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction251:kernel#Object#output */
@@ -7754,6 +7877,7 @@ const struct class class_parser__ReduceAction252 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction252:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction252:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction252:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction252:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction252:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction252:kernel#Object#output */
@@ -7817,6 +7941,7 @@ const struct class class_parser__ReduceAction254 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction254:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction254:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction254:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction254:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction254:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction254:kernel#Object#output */
@@ -7880,6 +8005,7 @@ const struct class class_parser__ReduceAction255 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction255:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction255:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction255:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction255:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction255:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction255:kernel#Object#output */
@@ -7943,6 +8069,7 @@ const struct class class_parser__ReduceAction257 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction257:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction257:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction257:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction257:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction257:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction257:kernel#Object#output */
@@ -8006,6 +8133,7 @@ const struct class class_parser__ReduceAction258 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction258:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction258:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction258:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction258:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction258:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction258:kernel#Object#output */
@@ -8069,6 +8197,7 @@ const struct class class_parser__ReduceAction259 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction259:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction259:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction259:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction259:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction259:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction259:kernel#Object#output */
@@ -8132,6 +8261,7 @@ const struct class class_parser__ReduceAction260 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction260:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction260:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction260:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction260:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction260:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction260:kernel#Object#output */
@@ -8195,6 +8325,7 @@ const struct class class_parser__ReduceAction262 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction262:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction262:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction262:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction262:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction262:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction262:kernel#Object#output */
@@ -8258,6 +8389,7 @@ const struct class class_parser__ReduceAction263 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction263:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction263:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction263:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction263:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction263:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction263:kernel#Object#output */
@@ -8321,6 +8453,7 @@ const struct class class_parser__ReduceAction265 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction265:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction265:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction265:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction265:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction265:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction265:kernel#Object#output */
@@ -8384,6 +8517,7 @@ const struct class class_parser__ReduceAction266 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction266:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction266:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction266:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction266:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction266:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction266:kernel#Object#output */
@@ -8447,6 +8581,7 @@ const struct class class_parser__ReduceAction267 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction267:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction267:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction267:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction267:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction267:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction267:kernel#Object#output */
@@ -8510,6 +8645,7 @@ const struct class class_parser__ReduceAction268 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction268:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction268:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction268:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction268:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction268:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction268:kernel#Object#output */
@@ -8573,6 +8709,7 @@ const struct class class_parser__ReduceAction270 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction270:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction270:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction270:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction270:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction270:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction270:kernel#Object#output */
@@ -8636,6 +8773,7 @@ const struct class class_parser__ReduceAction271 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction271:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction271:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction271:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction271:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction271:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction271:kernel#Object#output */
@@ -8699,6 +8837,7 @@ const struct class class_parser__ReduceAction273 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction273:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction273:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction273:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction273:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction273:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction273:kernel#Object#output */
@@ -8762,6 +8901,7 @@ const struct class class_parser__ReduceAction274 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction274:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction274:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction274:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction274:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction274:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction274:kernel#Object#output */
@@ -8825,6 +8965,7 @@ const struct class class_parser__ReduceAction275 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction275:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction275:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction275:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction275:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction275:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction275:kernel#Object#output */
@@ -8888,6 +9029,7 @@ const struct class class_parser__ReduceAction276 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction276:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction276:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction276:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction276:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction276:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction276:kernel#Object#output */
@@ -8951,6 +9093,7 @@ const struct class class_parser__ReduceAction278 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction278:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction278:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction278:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction278:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction278:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction278:kernel#Object#output */
@@ -9014,6 +9157,7 @@ const struct class class_parser__ReduceAction279 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction279:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction279:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction279:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction279:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction279:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction279:kernel#Object#output */
@@ -9077,6 +9221,7 @@ const struct class class_parser__ReduceAction281 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction281:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction281:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction281:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction281:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction281:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction281:kernel#Object#output */
@@ -9140,6 +9285,7 @@ const struct class class_parser__ReduceAction282 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction282:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction282:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction282:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction282:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction282:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction282:kernel#Object#output */
@@ -9203,6 +9349,7 @@ const struct class class_parser__ReduceAction283 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction283:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction283:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction283:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction283:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction283:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction283:kernel#Object#output */
@@ -9266,6 +9413,7 @@ const struct class class_parser__ReduceAction284 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction284:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction284:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction284:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction284:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction284:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction284:kernel#Object#output */
@@ -9329,6 +9477,7 @@ const struct class class_parser__ReduceAction286 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction286:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction286:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction286:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction286:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction286:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction286:kernel#Object#output */
@@ -9392,6 +9541,7 @@ const struct class class_parser__ReduceAction287 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction287:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction287:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction287:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction287:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction287:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction287:kernel#Object#output */
@@ -9455,6 +9605,7 @@ const struct class class_parser__ReduceAction289 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction289:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction289:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction289:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction289:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction289:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction289:kernel#Object#output */
@@ -9518,6 +9669,7 @@ const struct class class_parser__ReduceAction290 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction290:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction290:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction290:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction290:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction290:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction290:kernel#Object#output */
@@ -9581,6 +9733,7 @@ const struct class class_parser__ReduceAction291 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction291:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction291:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction291:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction291:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction291:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction291:kernel#Object#output */
@@ -9644,6 +9797,7 @@ const struct class class_parser__ReduceAction292 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction292:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction292:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction292:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction292:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction292:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction292:kernel#Object#output */
@@ -9707,6 +9861,7 @@ const struct class class_parser__ReduceAction294 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction294:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction294:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction294:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction294:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction294:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction294:kernel#Object#output */
@@ -9770,6 +9925,7 @@ const struct class class_parser__ReduceAction295 = {
 {
 (nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction295:kernel#Object#object_id */
 (nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction295:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction295:kernel#Object#is_same_instance */
 (nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction295:kernel#Object#== */
 (nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction295:kernel#Object#!= */
 (nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction295:kernel#Object#output */
@@ -9826,130 +9982,4 @@ return self;
 void CHECK_NEW_parser__ReduceAction295(val* self) {
 long var /* : Int */;
 var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction295> */
-}
-/* runtime class parser__ReduceAction297 */
-const struct class class_parser__ReduceAction297 = {
-0, /* box_kind */
-{
-(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction297:kernel#Object#object_id */
-(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction297:kernel#Object#is_same_type */
-(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction297:kernel#Object#== */
-(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction297:kernel#Object#!= */
-(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction297:kernel#Object#output */
-(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to parser:ReduceAction297:kernel#Object#output_class_name */
-(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to parser:ReduceAction297:kernel#Object#exit */
-(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to parser:ReduceAction297:kernel#Object#sys */
-(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to parser:ReduceAction297:kernel#Object#hash */
-(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to parser:ReduceAction297:string#Object#to_s */
-(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to parser:ReduceAction297:string#Object#native_class_name */
-(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to parser:ReduceAction297:string#Object#class_name */
-(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to parser:ReduceAction297:string#Object#inspect */
-(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to parser:ReduceAction297:string#Object#inspect_head */
-(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to parser:ReduceAction297:string#Object#args */
-(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to parser:ReduceAction297:math#Object#atan2 */
-(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to parser:ReduceAction297:math#Object#pi */
-(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to parser:ReduceAction297:math#Object#srand_from */
-(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to parser:ReduceAction297:math#Object#srand */
-(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to parser:ReduceAction297:stream#Object#poll */
-(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to parser:ReduceAction297:stream#Object#intern_poll */
-(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to parser:ReduceAction297:time#Object#get_time */
-(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to parser:ReduceAction297:file#Object#printn */
-(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to parser:ReduceAction297:file#Object#print */
-(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to parser:ReduceAction297:file#Object#getc */
-(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to parser:ReduceAction297:file#Object#gets */
-(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to parser:ReduceAction297:file#Object#getcwd */
-(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to parser:ReduceAction297:file#Object#file_getcwd */
-(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to parser:ReduceAction297:file#Object#stdin */
-(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to parser:ReduceAction297:file#Object#stdout */
-(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to parser:ReduceAction297:file#Object#stderr */
-(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to parser:ReduceAction297:model_base#Object#intrude_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to parser:ReduceAction297:model_base#Object#public_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to parser:ReduceAction297:model_base#Object#protected_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to parser:ReduceAction297:model_base#Object#private_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to parser:ReduceAction297:model_base#Object#none_visibility */
-(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to parser:ReduceAction297:model#Object#abstract_kind */
-(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to parser:ReduceAction297:model#Object#concrete_kind */
-(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to parser:ReduceAction297:model#Object#interface_kind */
-(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to parser:ReduceAction297:model#Object#enum_kind */
-(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to parser:ReduceAction297:model#Object#extern_kind */
-(nitmethod_t)VIRTUAL_parser__ReduceAction297__action, /* pointer to parser:ReduceAction297:parser#ReduceAction297#action */
-(nitmethod_t)VIRTUAL_parser__ReduceAction__concat, /* pointer to parser:ReduceAction297:parser#ReduceAction#concat */
-(nitmethod_t)VIRTUAL_parser__ReduceAction__init, /* pointer to parser:ReduceAction297:parser#ReduceAction#init */
-}
-};
-/* allocate ReduceAction297 */
-val* NEW_parser__ReduceAction297(const struct type* type) {
-val* self /* : ReduceAction297 */;
-self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
-self->type = type;
-self->class = &class_parser__ReduceAction297;
-return self;
-}
-/* allocate ReduceAction297 */
-void CHECK_NEW_parser__ReduceAction297(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction297> */
-}
-/* runtime class parser__ReduceAction298 */
-const struct class class_parser__ReduceAction298 = {
-0, /* box_kind */
-{
-(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction298:kernel#Object#object_id */
-(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction298:kernel#Object#is_same_type */
-(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction298:kernel#Object#== */
-(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction298:kernel#Object#!= */
-(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction298:kernel#Object#output */
-(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to parser:ReduceAction298:kernel#Object#output_class_name */
-(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to parser:ReduceAction298:kernel#Object#exit */
-(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to parser:ReduceAction298:kernel#Object#sys */
-(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to parser:ReduceAction298:kernel#Object#hash */
-(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to parser:ReduceAction298:string#Object#to_s */
-(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to parser:ReduceAction298:string#Object#native_class_name */
-(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to parser:ReduceAction298:string#Object#class_name */
-(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to parser:ReduceAction298:string#Object#inspect */
-(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to parser:ReduceAction298:string#Object#inspect_head */
-(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to parser:ReduceAction298:string#Object#args */
-(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to parser:ReduceAction298:math#Object#atan2 */
-(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to parser:ReduceAction298:math#Object#pi */
-(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to parser:ReduceAction298:math#Object#srand_from */
-(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to parser:ReduceAction298:math#Object#srand */
-(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to parser:ReduceAction298:stream#Object#poll */
-(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to parser:ReduceAction298:stream#Object#intern_poll */
-(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to parser:ReduceAction298:time#Object#get_time */
-(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to parser:ReduceAction298:file#Object#printn */
-(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to parser:ReduceAction298:file#Object#print */
-(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to parser:ReduceAction298:file#Object#getc */
-(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to parser:ReduceAction298:file#Object#gets */
-(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to parser:ReduceAction298:file#Object#getcwd */
-(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to parser:ReduceAction298:file#Object#file_getcwd */
-(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to parser:ReduceAction298:file#Object#stdin */
-(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to parser:ReduceAction298:file#Object#stdout */
-(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to parser:ReduceAction298:file#Object#stderr */
-(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to parser:ReduceAction298:model_base#Object#intrude_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to parser:ReduceAction298:model_base#Object#public_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to parser:ReduceAction298:model_base#Object#protected_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to parser:ReduceAction298:model_base#Object#private_visibility */
-(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to parser:ReduceAction298:model_base#Object#none_visibility */
-(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to parser:ReduceAction298:model#Object#abstract_kind */
-(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to parser:ReduceAction298:model#Object#concrete_kind */
-(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to parser:ReduceAction298:model#Object#interface_kind */
-(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to parser:ReduceAction298:model#Object#enum_kind */
-(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to parser:ReduceAction298:model#Object#extern_kind */
-(nitmethod_t)VIRTUAL_parser__ReduceAction298__action, /* pointer to parser:ReduceAction298:parser#ReduceAction298#action */
-(nitmethod_t)VIRTUAL_parser__ReduceAction__concat, /* pointer to parser:ReduceAction298:parser#ReduceAction#concat */
-(nitmethod_t)VIRTUAL_parser__ReduceAction__init, /* pointer to parser:ReduceAction298:parser#ReduceAction#init */
-}
-};
-/* allocate ReduceAction298 */
-val* NEW_parser__ReduceAction298(const struct type* type) {
-val* self /* : ReduceAction298 */;
-self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
-self->type = type;
-self->class = &class_parser__ReduceAction298;
-return self;
-}
-/* allocate ReduceAction298 */
-void CHECK_NEW_parser__ReduceAction298(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction298> */
 }

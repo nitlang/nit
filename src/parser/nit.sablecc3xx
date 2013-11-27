@@ -262,7 +262,7 @@ propdef~toplevel {-> propdef}
 !toplevel| {var} [doc]:no readable? writable? redef visibility kwvar attrid typing? {-> New propdef.attr(doc.doc, readable.able, writable.able, redef.kwredef, visibility, kwvar, attrid, Null, typing.type, Null, Null)}
 !toplevel| {var2} [doc]:no readable? writable? redef visibility kwvar attrid typing? assign [n2]:no expr {-> New propdef.attr(doc.doc, readable.able, writable.able, redef.kwredef, visibility, kwvar, attrid, Null, typing.type, Null, expr)}
 !toplevel| {var3} [doc]:no redef visibility kwvar id typing? writable2? annotation_withend? {-> New propdef.attr(doc.doc, Null, writable2.able, redef.kwredef, visibility, kwvar, Null, id, typing.type, annotation_withend.annotations, Null)}
-!toplevel| {var4} [doc]:no redef visibility kwvar id typing? writable2? assign [n2]:no expr_nois annotation_withend? {-> New propdef.attr(doc.doc, Null, writable2.able, redef.kwredef, visibility, kwvar, Null, id, typing.type, annotation_withend.annotations, expr_nois.expr)}
+!toplevel| {var4} [doc]:no redef visibility kwvar id typing? writable2? assign [n2]:no expr annotation_withend? {-> New propdef.attr(doc.doc, Null, writable2.able, redef.kwredef, visibility, kwvar, Null, id, typing.type, annotation_withend.annotations, expr.expr)}
 !toplevel| {init} [doc]:no redef visibility kwinit methid? signature annotation_noend? kwdo stmtso kwend? {-> New propdef.concrete_init(doc.doc, redef.kwredef, visibility, kwinit, methid, signature, annotation_noend.annotations, stmtso.expr)}
 !toplevel| {type} [doc]:no redef visibility kwtype classid typing annotation_withend? {-> New propdef.type(doc.doc, redef.kwredef, visibility, kwtype, classid, typing.type, annotation_withend.annotations)}
 !toplevel| {extern_init} [doc]:no redef visibility kwnew methid? signature kwis kwextern string? extern_calls? extern_code_block? {-> New propdef.extern_init(doc.doc, redef.kwredef, visibility, kwnew, methid, signature, string, extern_calls, extern_code_block)}
@@ -473,35 +473,34 @@ expr_final~nopar~withelse~nobra {-> expr}
 	= expr~nopar~nobra {-> expr~nopar~nobra.expr}
 	;
 
-expr~nopar~nobra~nois {-> expr}
-	= expr_and~nopar~nobra~nois {-> expr_and~nopar~nobra~nois.expr}
-	| {ifexpr} kwif [n1]:no expr [n2]:no kwthen [n3]:no [then]:expr [n4]:no kwelse [n5]:no [else]:expr~nopar~nobra~nois {-> New expr.ifexpr(kwif, expr, kwthen, then, kwelse, else.expr)}
+expr~nopar~nobra {-> expr}
+	= expr_and~nopar~nobra {-> expr_and~nopar~nobra.expr}
+	| {ifexpr} kwif [n1]:no expr [n2]:no kwthen [n3]:no [then]:expr [n4]:no kwelse [n5]:no [else]:expr~nopar~nobra {-> New expr.ifexpr(kwif, expr, kwthen, then, kwelse, else.expr)}
 	;
 
-expr_and~nopar~nobra~nois {-> expr}
-	= expr_not~nopar~nobra~nois {-> expr_not~nopar~nobra~nois.expr}
-	| {:or} expr_and~nopar~nobra~nois :kwor :no expr_not~nopar~nobra~nois
-	| {:and} expr_and~nopar~nobra~nois :kwand :no expr_not~nopar~nobra~nois
-	| {:or_else} expr_and~nopar~nobra~nois :kwor :kwelse :no expr_not~nopar~nobra~nois
-	| {:implies} expr_and~nopar~nobra~nois :kwimplies :no expr_not~nopar~nobra~nois
+expr_and~nopar~nobra {-> expr}
+	= expr_not~nopar~nobra {-> expr_not~nopar~nobra.expr}
+	| {:or} expr_and~nopar~nobra :kwor :no expr_not~nopar~nobra
+	| {:and} expr_and~nopar~nobra :kwand :no expr_not~nopar~nobra
+	| {:or_else} expr_and~nopar~nobra :kwor :kwelse :no expr_not~nopar~nobra
+	| {:implies} expr_and~nopar~nobra :kwimplies :no expr_not~nopar~nobra
 	;
 
-expr_not~nopar~nobra~nois {-> expr}
-	= expr_eq~nopar~nobra~nois {-> expr_eq~nopar~nobra~nois.expr}
-	| {not} kwnot no expr_not~nopar~nobra~nois {-> New expr.not(kwnot, expr_not~nopar~nobra~nois.expr)}
+expr_not~nopar~nobra {-> expr}
+	= expr_eq~nopar~nobra {-> expr_eq~nopar~nobra.expr}
+	| {not} kwnot no expr_not~nopar~nobra {-> New expr.not(kwnot, expr_not~nopar~nobra.expr)}
 	;
 
-expr_eq~nopar~nobra~nois {-> expr}
+expr_eq~nopar~nobra {-> expr}
 	= expr_add~nopar~nobra {-> expr_add~nopar~nobra.expr}
 	| {:eq} expr_add~nopar~nobra :eq :no [expr2]:expr_add~nopar~nobra
-!nois	| {ee} [expr]:expr_add~nopar~nobra kwis no [expr2]:expr_add~nopar~nobra {-> New expr.ee(expr.expr, expr2.expr)}
 	| {:ne} expr_add~nopar~nobra :ne :no [expr2]:expr_add~nopar~nobra
 	| {:lt} expr_add~nopar~nobra :lt :no [expr2]:expr_add~nopar~nobra
 	| {:le} expr_add~nopar~nobra :le :no [expr2]:expr_add~nopar~nobra
-	| {:ll} expr_eq~nopar~nobra~nois :ll :no [expr2]:expr_add~nopar~nobra
+	| {:ll} expr_eq~nopar~nobra :ll :no [expr2]:expr_add~nopar~nobra
 	| {:gt} expr_add~nopar~nobra :gt :no [expr2]:expr_add~nopar~nobra
 	| {:ge} expr_add~nopar~nobra :ge :no [expr2]:expr_add~nopar~nobra
-	| {:gg} expr_eq~nopar~nobra~nois :gg :no [expr2]:expr_add~nopar~nobra
+	| {:gg} expr_eq~nopar~nobra :gg :no [expr2]:expr_add~nopar~nobra
 	| {:starship} expr_add~nopar~nobra :starship :no [expr2]:expr_add~nopar~nobra
 	| {:isa} expr_add~nopar~nobra :kwisa :no type~nobra
 	;
@@ -774,7 +773,6 @@ expr	= {block} expr* kwend?
 	| {implies} expr [expr2]:expr
 	| {not} kwnot expr 
 	| {eq} expr [expr2]:expr 
-	| {ee} expr [expr2]:expr 
 	| {ne} expr [expr2]:expr 
 	| {lt} expr [expr2]:expr 
 	| {le} expr [expr2]:expr 

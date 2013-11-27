@@ -1,132 +1,12 @@
 #include "nitg.types.0.h"
-const struct types resolution_table_parser__ReduceAction695 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction696 */
-const struct type type_parser__ReduceAction696 = {
-1251,
-"ReduceAction696", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction696,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1251, /* ReduceAction696 */
-},
-};
-const struct types resolution_table_parser__ReduceAction696 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction697 */
-const struct type type_parser__ReduceAction697 = {
-1252,
-"ReduceAction697", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction697,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1252, /* ReduceAction697 */
-},
-};
-const struct types resolution_table_parser__ReduceAction697 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction698 */
-const struct type type_parser__ReduceAction698 = {
-1253,
-"ReduceAction698", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction698,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1253, /* ReduceAction698 */
-},
-};
-const struct types resolution_table_parser__ReduceAction698 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction699 */
-const struct type type_parser__ReduceAction699 = {
-1254,
-"ReduceAction699", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction699,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1254, /* ReduceAction699 */
-},
-};
-const struct types resolution_table_parser__ReduceAction699 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction701 */
-const struct type type_parser__ReduceAction701 = {
-1255,
-"ReduceAction701", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction701,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1255, /* ReduceAction701 */
-},
-};
-const struct types resolution_table_parser__ReduceAction701 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction702 */
-const struct type type_parser__ReduceAction702 = {
-1256,
-"ReduceAction702", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction702,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1256, /* ReduceAction702 */
-},
-};
-const struct types resolution_table_parser__ReduceAction702 = {
+const struct types resolution_table_parser__ReduceAction703 = {
 0, /* dummy */
 {
 }
 };
 /* runtime type ReduceAction704 */
 const struct type type_parser__ReduceAction704 = {
-1257,
+1249,
 "ReduceAction704", /* class_name_string */
 3,
 0,
@@ -135,8 +15,8 @@ const struct type type_parser__ReduceAction704 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1257, /* ReduceAction704 */
+244, /* ReduceAction */
+1249, /* ReduceAction704 */
 },
 };
 const struct types resolution_table_parser__ReduceAction704 = {
@@ -146,7 +26,7 @@ const struct types resolution_table_parser__ReduceAction704 = {
 };
 /* runtime type ReduceAction705 */
 const struct type type_parser__ReduceAction705 = {
-1258,
+1250,
 "ReduceAction705", /* class_name_string */
 3,
 0,
@@ -155,8 +35,8 @@ const struct type type_parser__ReduceAction705 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1258, /* ReduceAction705 */
+244, /* ReduceAction */
+1250, /* ReduceAction705 */
 },
 };
 const struct types resolution_table_parser__ReduceAction705 = {
@@ -166,7 +46,7 @@ const struct types resolution_table_parser__ReduceAction705 = {
 };
 /* runtime type ReduceAction706 */
 const struct type type_parser__ReduceAction706 = {
-1259,
+1251,
 "ReduceAction706", /* class_name_string */
 3,
 0,
@@ -175,8 +55,8 @@ const struct type type_parser__ReduceAction706 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1259, /* ReduceAction706 */
+244, /* ReduceAction */
+1251, /* ReduceAction706 */
 },
 };
 const struct types resolution_table_parser__ReduceAction706 = {
@@ -186,7 +66,7 @@ const struct types resolution_table_parser__ReduceAction706 = {
 };
 /* runtime type ReduceAction707 */
 const struct type type_parser__ReduceAction707 = {
-1260,
+1252,
 "ReduceAction707", /* class_name_string */
 3,
 0,
@@ -195,8 +75,8 @@ const struct type type_parser__ReduceAction707 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1260, /* ReduceAction707 */
+244, /* ReduceAction */
+1252, /* ReduceAction707 */
 },
 };
 const struct types resolution_table_parser__ReduceAction707 = {
@@ -204,29 +84,9 @@ const struct types resolution_table_parser__ReduceAction707 = {
 {
 }
 };
-/* runtime type ReduceAction709 */
-const struct type type_parser__ReduceAction709 = {
-1261,
-"ReduceAction709", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction709,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1261, /* ReduceAction709 */
-},
-};
-const struct types resolution_table_parser__ReduceAction709 = {
-0, /* dummy */
-{
-}
-};
 /* runtime type ReduceAction710 */
 const struct type type_parser__ReduceAction710 = {
-1262,
+1253,
 "ReduceAction710", /* class_name_string */
 3,
 0,
@@ -235,8 +95,8 @@ const struct type type_parser__ReduceAction710 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1262, /* ReduceAction710 */
+244, /* ReduceAction */
+1253, /* ReduceAction710 */
 },
 };
 const struct types resolution_table_parser__ReduceAction710 = {
@@ -246,7 +106,7 @@ const struct types resolution_table_parser__ReduceAction710 = {
 };
 /* runtime type ReduceAction712 */
 const struct type type_parser__ReduceAction712 = {
-1263,
+1254,
 "ReduceAction712", /* class_name_string */
 3,
 0,
@@ -255,8 +115,8 @@ const struct type type_parser__ReduceAction712 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1263, /* ReduceAction712 */
+244, /* ReduceAction */
+1254, /* ReduceAction712 */
 },
 };
 const struct types resolution_table_parser__ReduceAction712 = {
@@ -266,7 +126,7 @@ const struct types resolution_table_parser__ReduceAction712 = {
 };
 /* runtime type ReduceAction713 */
 const struct type type_parser__ReduceAction713 = {
-1264,
+1255,
 "ReduceAction713", /* class_name_string */
 3,
 0,
@@ -275,8 +135,8 @@ const struct type type_parser__ReduceAction713 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1264, /* ReduceAction713 */
+244, /* ReduceAction */
+1255, /* ReduceAction713 */
 },
 };
 const struct types resolution_table_parser__ReduceAction713 = {
@@ -286,7 +146,7 @@ const struct types resolution_table_parser__ReduceAction713 = {
 };
 /* runtime type ReduceAction714 */
 const struct type type_parser__ReduceAction714 = {
-1265,
+1256,
 "ReduceAction714", /* class_name_string */
 3,
 0,
@@ -295,8 +155,8 @@ const struct type type_parser__ReduceAction714 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1265, /* ReduceAction714 */
+244, /* ReduceAction */
+1256, /* ReduceAction714 */
 },
 };
 const struct types resolution_table_parser__ReduceAction714 = {
@@ -306,7 +166,7 @@ const struct types resolution_table_parser__ReduceAction714 = {
 };
 /* runtime type ReduceAction715 */
 const struct type type_parser__ReduceAction715 = {
-1266,
+1257,
 "ReduceAction715", /* class_name_string */
 3,
 0,
@@ -315,8 +175,8 @@ const struct type type_parser__ReduceAction715 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1266, /* ReduceAction715 */
+244, /* ReduceAction */
+1257, /* ReduceAction715 */
 },
 };
 const struct types resolution_table_parser__ReduceAction715 = {
@@ -324,49 +184,29 @@ const struct types resolution_table_parser__ReduceAction715 = {
 {
 }
 };
-/* runtime type ReduceAction716 */
-const struct type type_parser__ReduceAction716 = {
-1267,
-"ReduceAction716", /* class_name_string */
+/* runtime type ReduceAction717 */
+const struct type type_parser__ReduceAction717 = {
+1258,
+"ReduceAction717", /* class_name_string */
 3,
 0,
-&resolution_table_parser__ReduceAction716,
+&resolution_table_parser__ReduceAction717,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1267, /* ReduceAction716 */
+244, /* ReduceAction */
+1258, /* ReduceAction717 */
 },
 };
-const struct types resolution_table_parser__ReduceAction716 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction718 */
-const struct type type_parser__ReduceAction718 = {
-1268,
-"ReduceAction718", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction718,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1268, /* ReduceAction718 */
-},
-};
-const struct types resolution_table_parser__ReduceAction718 = {
+const struct types resolution_table_parser__ReduceAction717 = {
 0, /* dummy */
 {
 }
 };
 /* runtime type ReduceAction719 */
 const struct type type_parser__ReduceAction719 = {
-1269,
+1259,
 "ReduceAction719", /* class_name_string */
 3,
 0,
@@ -375,8 +215,8 @@ const struct type type_parser__ReduceAction719 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1269, /* ReduceAction719 */
+244, /* ReduceAction */
+1259, /* ReduceAction719 */
 },
 };
 const struct types resolution_table_parser__ReduceAction719 = {
@@ -384,9 +224,29 @@ const struct types resolution_table_parser__ReduceAction719 = {
 {
 }
 };
+/* runtime type ReduceAction720 */
+const struct type type_parser__ReduceAction720 = {
+1260,
+"ReduceAction720", /* class_name_string */
+3,
+0,
+&resolution_table_parser__ReduceAction720,
+4,
+{
+0, /* nullable Object */
+1, /* Object */
+244, /* ReduceAction */
+1260, /* ReduceAction720 */
+},
+};
+const struct types resolution_table_parser__ReduceAction720 = {
+0, /* dummy */
+{
+}
+};
 /* runtime type ReduceAction721 */
 const struct type type_parser__ReduceAction721 = {
-1270,
+1261,
 "ReduceAction721", /* class_name_string */
 3,
 0,
@@ -395,8 +255,8 @@ const struct type type_parser__ReduceAction721 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1270, /* ReduceAction721 */
+244, /* ReduceAction */
+1261, /* ReduceAction721 */
 },
 };
 const struct types resolution_table_parser__ReduceAction721 = {
@@ -406,7 +266,7 @@ const struct types resolution_table_parser__ReduceAction721 = {
 };
 /* runtime type ReduceAction722 */
 const struct type type_parser__ReduceAction722 = {
-1271,
+1262,
 "ReduceAction722", /* class_name_string */
 3,
 0,
@@ -415,8 +275,8 @@ const struct type type_parser__ReduceAction722 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1271, /* ReduceAction722 */
+244, /* ReduceAction */
+1262, /* ReduceAction722 */
 },
 };
 const struct types resolution_table_parser__ReduceAction722 = {
@@ -426,7 +286,7 @@ const struct types resolution_table_parser__ReduceAction722 = {
 };
 /* runtime type ReduceAction723 */
 const struct type type_parser__ReduceAction723 = {
-1272,
+1263,
 "ReduceAction723", /* class_name_string */
 3,
 0,
@@ -435,8 +295,8 @@ const struct type type_parser__ReduceAction723 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1272, /* ReduceAction723 */
+244, /* ReduceAction */
+1263, /* ReduceAction723 */
 },
 };
 const struct types resolution_table_parser__ReduceAction723 = {
@@ -446,7 +306,7 @@ const struct types resolution_table_parser__ReduceAction723 = {
 };
 /* runtime type ReduceAction724 */
 const struct type type_parser__ReduceAction724 = {
-1273,
+1264,
 "ReduceAction724", /* class_name_string */
 3,
 0,
@@ -455,8 +315,8 @@ const struct type type_parser__ReduceAction724 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1273, /* ReduceAction724 */
+244, /* ReduceAction */
+1264, /* ReduceAction724 */
 },
 };
 const struct types resolution_table_parser__ReduceAction724 = {
@@ -464,9 +324,29 @@ const struct types resolution_table_parser__ReduceAction724 = {
 {
 }
 };
+/* runtime type ReduceAction725 */
+const struct type type_parser__ReduceAction725 = {
+1265,
+"ReduceAction725", /* class_name_string */
+3,
+0,
+&resolution_table_parser__ReduceAction725,
+4,
+{
+0, /* nullable Object */
+1, /* Object */
+244, /* ReduceAction */
+1265, /* ReduceAction725 */
+},
+};
+const struct types resolution_table_parser__ReduceAction725 = {
+0, /* dummy */
+{
+}
+};
 /* runtime type ReduceAction726 */
 const struct type type_parser__ReduceAction726 = {
-1274,
+1266,
 "ReduceAction726", /* class_name_string */
 3,
 0,
@@ -475,8 +355,8 @@ const struct type type_parser__ReduceAction726 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1274, /* ReduceAction726 */
+244, /* ReduceAction */
+1266, /* ReduceAction726 */
 },
 };
 const struct types resolution_table_parser__ReduceAction726 = {
@@ -486,7 +366,7 @@ const struct types resolution_table_parser__ReduceAction726 = {
 };
 /* runtime type ReduceAction727 */
 const struct type type_parser__ReduceAction727 = {
-1275,
+1267,
 "ReduceAction727", /* class_name_string */
 3,
 0,
@@ -495,8 +375,8 @@ const struct type type_parser__ReduceAction727 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1275, /* ReduceAction727 */
+244, /* ReduceAction */
+1267, /* ReduceAction727 */
 },
 };
 const struct types resolution_table_parser__ReduceAction727 = {
@@ -504,29 +384,29 @@ const struct types resolution_table_parser__ReduceAction727 = {
 {
 }
 };
-/* runtime type ReduceAction729 */
-const struct type type_parser__ReduceAction729 = {
-1276,
-"ReduceAction729", /* class_name_string */
+/* runtime type ReduceAction728 */
+const struct type type_parser__ReduceAction728 = {
+1268,
+"ReduceAction728", /* class_name_string */
 3,
 0,
-&resolution_table_parser__ReduceAction729,
+&resolution_table_parser__ReduceAction728,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1276, /* ReduceAction729 */
+244, /* ReduceAction */
+1268, /* ReduceAction728 */
 },
 };
-const struct types resolution_table_parser__ReduceAction729 = {
+const struct types resolution_table_parser__ReduceAction728 = {
 0, /* dummy */
 {
 }
 };
 /* runtime type ReduceAction730 */
 const struct type type_parser__ReduceAction730 = {
-1277,
+1269,
 "ReduceAction730", /* class_name_string */
 3,
 0,
@@ -535,8 +415,8 @@ const struct type type_parser__ReduceAction730 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1277, /* ReduceAction730 */
+244, /* ReduceAction */
+1269, /* ReduceAction730 */
 },
 };
 const struct types resolution_table_parser__ReduceAction730 = {
@@ -546,7 +426,7 @@ const struct types resolution_table_parser__ReduceAction730 = {
 };
 /* runtime type ReduceAction731 */
 const struct type type_parser__ReduceAction731 = {
-1278,
+1270,
 "ReduceAction731", /* class_name_string */
 3,
 0,
@@ -555,8 +435,8 @@ const struct type type_parser__ReduceAction731 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1278, /* ReduceAction731 */
+244, /* ReduceAction */
+1270, /* ReduceAction731 */
 },
 };
 const struct types resolution_table_parser__ReduceAction731 = {
@@ -564,29 +444,9 @@ const struct types resolution_table_parser__ReduceAction731 = {
 {
 }
 };
-/* runtime type ReduceAction732 */
-const struct type type_parser__ReduceAction732 = {
-1279,
-"ReduceAction732", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction732,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1279, /* ReduceAction732 */
-},
-};
-const struct types resolution_table_parser__ReduceAction732 = {
-0, /* dummy */
-{
-}
-};
 /* runtime type ReduceAction733 */
 const struct type type_parser__ReduceAction733 = {
-1280,
+1271,
 "ReduceAction733", /* class_name_string */
 3,
 0,
@@ -595,8 +455,8 @@ const struct type type_parser__ReduceAction733 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1280, /* ReduceAction733 */
+244, /* ReduceAction */
+1271, /* ReduceAction733 */
 },
 };
 const struct types resolution_table_parser__ReduceAction733 = {
@@ -606,7 +466,7 @@ const struct types resolution_table_parser__ReduceAction733 = {
 };
 /* runtime type ReduceAction734 */
 const struct type type_parser__ReduceAction734 = {
-1281,
+1272,
 "ReduceAction734", /* class_name_string */
 3,
 0,
@@ -615,8 +475,8 @@ const struct type type_parser__ReduceAction734 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1281, /* ReduceAction734 */
+244, /* ReduceAction */
+1272, /* ReduceAction734 */
 },
 };
 const struct types resolution_table_parser__ReduceAction734 = {
@@ -626,7 +486,7 @@ const struct types resolution_table_parser__ReduceAction734 = {
 };
 /* runtime type ReduceAction735 */
 const struct type type_parser__ReduceAction735 = {
-1282,
+1273,
 "ReduceAction735", /* class_name_string */
 3,
 0,
@@ -635,8 +495,8 @@ const struct type type_parser__ReduceAction735 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1282, /* ReduceAction735 */
+244, /* ReduceAction */
+1273, /* ReduceAction735 */
 },
 };
 const struct types resolution_table_parser__ReduceAction735 = {
@@ -644,29 +504,9 @@ const struct types resolution_table_parser__ReduceAction735 = {
 {
 }
 };
-/* runtime type ReduceAction736 */
-const struct type type_parser__ReduceAction736 = {
-1283,
-"ReduceAction736", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction736,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1283, /* ReduceAction736 */
-},
-};
-const struct types resolution_table_parser__ReduceAction736 = {
-0, /* dummy */
-{
-}
-};
 /* runtime type ReduceAction737 */
 const struct type type_parser__ReduceAction737 = {
-1284,
+1274,
 "ReduceAction737", /* class_name_string */
 3,
 0,
@@ -675,8 +515,8 @@ const struct type type_parser__ReduceAction737 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1284, /* ReduceAction737 */
+244, /* ReduceAction */
+1274, /* ReduceAction737 */
 },
 };
 const struct types resolution_table_parser__ReduceAction737 = {
@@ -686,7 +526,7 @@ const struct types resolution_table_parser__ReduceAction737 = {
 };
 /* runtime type ReduceAction738 */
 const struct type type_parser__ReduceAction738 = {
-1285,
+1275,
 "ReduceAction738", /* class_name_string */
 3,
 0,
@@ -695,8 +535,8 @@ const struct type type_parser__ReduceAction738 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1285, /* ReduceAction738 */
+244, /* ReduceAction */
+1275, /* ReduceAction738 */
 },
 };
 const struct types resolution_table_parser__ReduceAction738 = {
@@ -704,9 +544,29 @@ const struct types resolution_table_parser__ReduceAction738 = {
 {
 }
 };
+/* runtime type ReduceAction740 */
+const struct type type_parser__ReduceAction740 = {
+1276,
+"ReduceAction740", /* class_name_string */
+3,
+0,
+&resolution_table_parser__ReduceAction740,
+4,
+{
+0, /* nullable Object */
+1, /* Object */
+244, /* ReduceAction */
+1276, /* ReduceAction740 */
+},
+};
+const struct types resolution_table_parser__ReduceAction740 = {
+0, /* dummy */
+{
+}
+};
 /* runtime type ReduceAction741 */
 const struct type type_parser__ReduceAction741 = {
-1286,
+1277,
 "ReduceAction741", /* class_name_string */
 3,
 0,
@@ -715,8 +575,8 @@ const struct type type_parser__ReduceAction741 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1286, /* ReduceAction741 */
+244, /* ReduceAction */
+1277, /* ReduceAction741 */
 },
 };
 const struct types resolution_table_parser__ReduceAction741 = {
@@ -726,7 +586,7 @@ const struct types resolution_table_parser__ReduceAction741 = {
 };
 /* runtime type ReduceAction742 */
 const struct type type_parser__ReduceAction742 = {
-1287,
+1278,
 "ReduceAction742", /* class_name_string */
 3,
 0,
@@ -735,8 +595,8 @@ const struct type type_parser__ReduceAction742 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1287, /* ReduceAction742 */
+244, /* ReduceAction */
+1278, /* ReduceAction742 */
 },
 };
 const struct types resolution_table_parser__ReduceAction742 = {
@@ -746,7 +606,7 @@ const struct types resolution_table_parser__ReduceAction742 = {
 };
 /* runtime type ReduceAction743 */
 const struct type type_parser__ReduceAction743 = {
-1288,
+1279,
 "ReduceAction743", /* class_name_string */
 3,
 0,
@@ -755,8 +615,8 @@ const struct type type_parser__ReduceAction743 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1288, /* ReduceAction743 */
+244, /* ReduceAction */
+1279, /* ReduceAction743 */
 },
 };
 const struct types resolution_table_parser__ReduceAction743 = {
@@ -766,7 +626,7 @@ const struct types resolution_table_parser__ReduceAction743 = {
 };
 /* runtime type ReduceAction744 */
 const struct type type_parser__ReduceAction744 = {
-1289,
+1280,
 "ReduceAction744", /* class_name_string */
 3,
 0,
@@ -775,8 +635,8 @@ const struct type type_parser__ReduceAction744 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1289, /* ReduceAction744 */
+244, /* ReduceAction */
+1280, /* ReduceAction744 */
 },
 };
 const struct types resolution_table_parser__ReduceAction744 = {
@@ -784,29 +644,9 @@ const struct types resolution_table_parser__ReduceAction744 = {
 {
 }
 };
-/* runtime type ReduceAction745 */
-const struct type type_parser__ReduceAction745 = {
-1290,
-"ReduceAction745", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction745,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1290, /* ReduceAction745 */
-},
-};
-const struct types resolution_table_parser__ReduceAction745 = {
-0, /* dummy */
-{
-}
-};
 /* runtime type ReduceAction746 */
 const struct type type_parser__ReduceAction746 = {
-1291,
+1281,
 "ReduceAction746", /* class_name_string */
 3,
 0,
@@ -815,8 +655,8 @@ const struct type type_parser__ReduceAction746 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1291, /* ReduceAction746 */
+244, /* ReduceAction */
+1281, /* ReduceAction746 */
 },
 };
 const struct types resolution_table_parser__ReduceAction746 = {
@@ -826,7 +666,7 @@ const struct types resolution_table_parser__ReduceAction746 = {
 };
 /* runtime type ReduceAction747 */
 const struct type type_parser__ReduceAction747 = {
-1292,
+1282,
 "ReduceAction747", /* class_name_string */
 3,
 0,
@@ -835,8 +675,8 @@ const struct type type_parser__ReduceAction747 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1292, /* ReduceAction747 */
+244, /* ReduceAction */
+1282, /* ReduceAction747 */
 },
 };
 const struct types resolution_table_parser__ReduceAction747 = {
@@ -844,29 +684,9 @@ const struct types resolution_table_parser__ReduceAction747 = {
 {
 }
 };
-/* runtime type ReduceAction748 */
-const struct type type_parser__ReduceAction748 = {
-1293,
-"ReduceAction748", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction748,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1293, /* ReduceAction748 */
-},
-};
-const struct types resolution_table_parser__ReduceAction748 = {
-0, /* dummy */
-{
-}
-};
 /* runtime type ReduceAction749 */
 const struct type type_parser__ReduceAction749 = {
-1294,
+1283,
 "ReduceAction749", /* class_name_string */
 3,
 0,
@@ -875,8 +695,8 @@ const struct type type_parser__ReduceAction749 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1294, /* ReduceAction749 */
+244, /* ReduceAction */
+1283, /* ReduceAction749 */
 },
 };
 const struct types resolution_table_parser__ReduceAction749 = {
@@ -886,7 +706,7 @@ const struct types resolution_table_parser__ReduceAction749 = {
 };
 /* runtime type ReduceAction750 */
 const struct type type_parser__ReduceAction750 = {
-1295,
+1284,
 "ReduceAction750", /* class_name_string */
 3,
 0,
@@ -895,8 +715,8 @@ const struct type type_parser__ReduceAction750 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1295, /* ReduceAction750 */
+244, /* ReduceAction */
+1284, /* ReduceAction750 */
 },
 };
 const struct types resolution_table_parser__ReduceAction750 = {
@@ -906,7 +726,7 @@ const struct types resolution_table_parser__ReduceAction750 = {
 };
 /* runtime type ReduceAction751 */
 const struct type type_parser__ReduceAction751 = {
-1296,
+1285,
 "ReduceAction751", /* class_name_string */
 3,
 0,
@@ -915,8 +735,8 @@ const struct type type_parser__ReduceAction751 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1296, /* ReduceAction751 */
+244, /* ReduceAction */
+1285, /* ReduceAction751 */
 },
 };
 const struct types resolution_table_parser__ReduceAction751 = {
@@ -926,7 +746,7 @@ const struct types resolution_table_parser__ReduceAction751 = {
 };
 /* runtime type ReduceAction752 */
 const struct type type_parser__ReduceAction752 = {
-1297,
+1286,
 "ReduceAction752", /* class_name_string */
 3,
 0,
@@ -935,8 +755,8 @@ const struct type type_parser__ReduceAction752 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1297, /* ReduceAction752 */
+244, /* ReduceAction */
+1286, /* ReduceAction752 */
 },
 };
 const struct types resolution_table_parser__ReduceAction752 = {
@@ -944,149 +764,69 @@ const struct types resolution_table_parser__ReduceAction752 = {
 {
 }
 };
-/* runtime type ReduceAction753 */
-const struct type type_parser__ReduceAction753 = {
-1298,
-"ReduceAction753", /* class_name_string */
+/* runtime type ReduceAction754 */
+const struct type type_parser__ReduceAction754 = {
+1287,
+"ReduceAction754", /* class_name_string */
 3,
 0,
-&resolution_table_parser__ReduceAction753,
+&resolution_table_parser__ReduceAction754,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1298, /* ReduceAction753 */
+244, /* ReduceAction */
+1287, /* ReduceAction754 */
 },
 };
-const struct types resolution_table_parser__ReduceAction753 = {
+const struct types resolution_table_parser__ReduceAction754 = {
 0, /* dummy */
 {
 }
 };
-/* runtime type ReduceAction763 */
-const struct type type_parser__ReduceAction763 = {
-1299,
-"ReduceAction763", /* class_name_string */
+/* runtime type ReduceAction755 */
+const struct type type_parser__ReduceAction755 = {
+1288,
+"ReduceAction755", /* class_name_string */
 3,
 0,
-&resolution_table_parser__ReduceAction763,
+&resolution_table_parser__ReduceAction755,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1299, /* ReduceAction763 */
+244, /* ReduceAction */
+1288, /* ReduceAction755 */
 },
 };
-const struct types resolution_table_parser__ReduceAction763 = {
+const struct types resolution_table_parser__ReduceAction755 = {
 0, /* dummy */
 {
 }
 };
-/* runtime type ReduceAction765 */
-const struct type type_parser__ReduceAction765 = {
-1300,
-"ReduceAction765", /* class_name_string */
+/* runtime type ReduceAction771 */
+const struct type type_parser__ReduceAction771 = {
+1289,
+"ReduceAction771", /* class_name_string */
 3,
 0,
-&resolution_table_parser__ReduceAction765,
+&resolution_table_parser__ReduceAction771,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1300, /* ReduceAction765 */
+244, /* ReduceAction */
+1289, /* ReduceAction771 */
 },
 };
-const struct types resolution_table_parser__ReduceAction765 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction767 */
-const struct type type_parser__ReduceAction767 = {
-1301,
-"ReduceAction767", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction767,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1301, /* ReduceAction767 */
-},
-};
-const struct types resolution_table_parser__ReduceAction767 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction768 */
-const struct type type_parser__ReduceAction768 = {
-1302,
-"ReduceAction768", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction768,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1302, /* ReduceAction768 */
-},
-};
-const struct types resolution_table_parser__ReduceAction768 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction769 */
-const struct type type_parser__ReduceAction769 = {
-1303,
-"ReduceAction769", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction769,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1303, /* ReduceAction769 */
-},
-};
-const struct types resolution_table_parser__ReduceAction769 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction770 */
-const struct type type_parser__ReduceAction770 = {
-1304,
-"ReduceAction770", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction770,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1304, /* ReduceAction770 */
-},
-};
-const struct types resolution_table_parser__ReduceAction770 = {
+const struct types resolution_table_parser__ReduceAction771 = {
 0, /* dummy */
 {
 }
 };
 /* runtime type ReduceAction772 */
 const struct type type_parser__ReduceAction772 = {
-1305,
+1290,
 "ReduceAction772", /* class_name_string */
 3,
 0,
@@ -1095,8 +835,8 @@ const struct type type_parser__ReduceAction772 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1305, /* ReduceAction772 */
+244, /* ReduceAction */
+1290, /* ReduceAction772 */
 },
 };
 const struct types resolution_table_parser__ReduceAction772 = {
@@ -1104,9 +844,29 @@ const struct types resolution_table_parser__ReduceAction772 = {
 {
 }
 };
+/* runtime type ReduceAction773 */
+const struct type type_parser__ReduceAction773 = {
+1291,
+"ReduceAction773", /* class_name_string */
+3,
+0,
+&resolution_table_parser__ReduceAction773,
+4,
+{
+0, /* nullable Object */
+1, /* Object */
+244, /* ReduceAction */
+1291, /* ReduceAction773 */
+},
+};
+const struct types resolution_table_parser__ReduceAction773 = {
+0, /* dummy */
+{
+}
+};
 /* runtime type ReduceAction774 */
 const struct type type_parser__ReduceAction774 = {
-1306,
+1292,
 "ReduceAction774", /* class_name_string */
 3,
 0,
@@ -1115,8 +875,8 @@ const struct type type_parser__ReduceAction774 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1306, /* ReduceAction774 */
+244, /* ReduceAction */
+1292, /* ReduceAction774 */
 },
 };
 const struct types resolution_table_parser__ReduceAction774 = {
@@ -1124,29 +884,9 @@ const struct types resolution_table_parser__ReduceAction774 = {
 {
 }
 };
-/* runtime type ReduceAction775 */
-const struct type type_parser__ReduceAction775 = {
-1307,
-"ReduceAction775", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction775,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1307, /* ReduceAction775 */
-},
-};
-const struct types resolution_table_parser__ReduceAction775 = {
-0, /* dummy */
-{
-}
-};
 /* runtime type ReduceAction776 */
 const struct type type_parser__ReduceAction776 = {
-1308,
+1293,
 "ReduceAction776", /* class_name_string */
 3,
 0,
@@ -1155,8 +895,8 @@ const struct type type_parser__ReduceAction776 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1308, /* ReduceAction776 */
+244, /* ReduceAction */
+1293, /* ReduceAction776 */
 },
 };
 const struct types resolution_table_parser__ReduceAction776 = {
@@ -1166,7 +906,7 @@ const struct types resolution_table_parser__ReduceAction776 = {
 };
 /* runtime type ReduceAction777 */
 const struct type type_parser__ReduceAction777 = {
-1309,
+1294,
 "ReduceAction777", /* class_name_string */
 3,
 0,
@@ -1175,8 +915,8 @@ const struct type type_parser__ReduceAction777 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1309, /* ReduceAction777 */
+244, /* ReduceAction */
+1294, /* ReduceAction777 */
 },
 };
 const struct types resolution_table_parser__ReduceAction777 = {
@@ -1186,7 +926,7 @@ const struct types resolution_table_parser__ReduceAction777 = {
 };
 /* runtime type ReduceAction778 */
 const struct type type_parser__ReduceAction778 = {
-1310,
+1295,
 "ReduceAction778", /* class_name_string */
 3,
 0,
@@ -1195,8 +935,8 @@ const struct type type_parser__ReduceAction778 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1310, /* ReduceAction778 */
+244, /* ReduceAction */
+1295, /* ReduceAction778 */
 },
 };
 const struct types resolution_table_parser__ReduceAction778 = {
@@ -1206,7 +946,7 @@ const struct types resolution_table_parser__ReduceAction778 = {
 };
 /* runtime type ReduceAction779 */
 const struct type type_parser__ReduceAction779 = {
-1311,
+1296,
 "ReduceAction779", /* class_name_string */
 3,
 0,
@@ -1215,8 +955,8 @@ const struct type type_parser__ReduceAction779 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1311, /* ReduceAction779 */
+244, /* ReduceAction */
+1296, /* ReduceAction779 */
 },
 };
 const struct types resolution_table_parser__ReduceAction779 = {
@@ -1226,7 +966,7 @@ const struct types resolution_table_parser__ReduceAction779 = {
 };
 /* runtime type ReduceAction780 */
 const struct type type_parser__ReduceAction780 = {
-1312,
+1297,
 "ReduceAction780", /* class_name_string */
 3,
 0,
@@ -1235,8 +975,8 @@ const struct type type_parser__ReduceAction780 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1312, /* ReduceAction780 */
+244, /* ReduceAction */
+1297, /* ReduceAction780 */
 },
 };
 const struct types resolution_table_parser__ReduceAction780 = {
@@ -1246,7 +986,7 @@ const struct types resolution_table_parser__ReduceAction780 = {
 };
 /* runtime type ReduceAction781 */
 const struct type type_parser__ReduceAction781 = {
-1313,
+1298,
 "ReduceAction781", /* class_name_string */
 3,
 0,
@@ -1255,8 +995,8 @@ const struct type type_parser__ReduceAction781 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1313, /* ReduceAction781 */
+244, /* ReduceAction */
+1298, /* ReduceAction781 */
 },
 };
 const struct types resolution_table_parser__ReduceAction781 = {
@@ -1266,7 +1006,7 @@ const struct types resolution_table_parser__ReduceAction781 = {
 };
 /* runtime type ReduceAction782 */
 const struct type type_parser__ReduceAction782 = {
-1314,
+1299,
 "ReduceAction782", /* class_name_string */
 3,
 0,
@@ -1275,8 +1015,8 @@ const struct type type_parser__ReduceAction782 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1314, /* ReduceAction782 */
+244, /* ReduceAction */
+1299, /* ReduceAction782 */
 },
 };
 const struct types resolution_table_parser__ReduceAction782 = {
@@ -1286,7 +1026,7 @@ const struct types resolution_table_parser__ReduceAction782 = {
 };
 /* runtime type ReduceAction783 */
 const struct type type_parser__ReduceAction783 = {
-1315,
+1300,
 "ReduceAction783", /* class_name_string */
 3,
 0,
@@ -1295,8 +1035,8 @@ const struct type type_parser__ReduceAction783 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1315, /* ReduceAction783 */
+244, /* ReduceAction */
+1300, /* ReduceAction783 */
 },
 };
 const struct types resolution_table_parser__ReduceAction783 = {
@@ -1306,7 +1046,7 @@ const struct types resolution_table_parser__ReduceAction783 = {
 };
 /* runtime type ReduceAction784 */
 const struct type type_parser__ReduceAction784 = {
-1316,
+1301,
 "ReduceAction784", /* class_name_string */
 3,
 0,
@@ -1315,8 +1055,8 @@ const struct type type_parser__ReduceAction784 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1316, /* ReduceAction784 */
+244, /* ReduceAction */
+1301, /* ReduceAction784 */
 },
 };
 const struct types resolution_table_parser__ReduceAction784 = {
@@ -1324,9 +1064,29 @@ const struct types resolution_table_parser__ReduceAction784 = {
 {
 }
 };
+/* runtime type ReduceAction785 */
+const struct type type_parser__ReduceAction785 = {
+1302,
+"ReduceAction785", /* class_name_string */
+3,
+0,
+&resolution_table_parser__ReduceAction785,
+4,
+{
+0, /* nullable Object */
+1, /* Object */
+244, /* ReduceAction */
+1302, /* ReduceAction785 */
+},
+};
+const struct types resolution_table_parser__ReduceAction785 = {
+0, /* dummy */
+{
+}
+};
 /* runtime type ReduceAction786 */
 const struct type type_parser__ReduceAction786 = {
-1317,
+1303,
 "ReduceAction786", /* class_name_string */
 3,
 0,
@@ -1335,8 +1095,8 @@ const struct type type_parser__ReduceAction786 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1317, /* ReduceAction786 */
+244, /* ReduceAction */
+1303, /* ReduceAction786 */
 },
 };
 const struct types resolution_table_parser__ReduceAction786 = {
@@ -1346,7 +1106,7 @@ const struct types resolution_table_parser__ReduceAction786 = {
 };
 /* runtime type ReduceAction787 */
 const struct type type_parser__ReduceAction787 = {
-1318,
+1304,
 "ReduceAction787", /* class_name_string */
 3,
 0,
@@ -1355,8 +1115,8 @@ const struct type type_parser__ReduceAction787 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1318, /* ReduceAction787 */
+244, /* ReduceAction */
+1304, /* ReduceAction787 */
 },
 };
 const struct types resolution_table_parser__ReduceAction787 = {
@@ -1364,9 +1124,29 @@ const struct types resolution_table_parser__ReduceAction787 = {
 {
 }
 };
+/* runtime type ReduceAction788 */
+const struct type type_parser__ReduceAction788 = {
+1305,
+"ReduceAction788", /* class_name_string */
+3,
+0,
+&resolution_table_parser__ReduceAction788,
+4,
+{
+0, /* nullable Object */
+1, /* Object */
+244, /* ReduceAction */
+1305, /* ReduceAction788 */
+},
+};
+const struct types resolution_table_parser__ReduceAction788 = {
+0, /* dummy */
+{
+}
+};
 /* runtime type ReduceAction789 */
 const struct type type_parser__ReduceAction789 = {
-1319,
+1306,
 "ReduceAction789", /* class_name_string */
 3,
 0,
@@ -1375,8 +1155,8 @@ const struct type type_parser__ReduceAction789 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1319, /* ReduceAction789 */
+244, /* ReduceAction */
+1306, /* ReduceAction789 */
 },
 };
 const struct types resolution_table_parser__ReduceAction789 = {
@@ -1386,7 +1166,7 @@ const struct types resolution_table_parser__ReduceAction789 = {
 };
 /* runtime type ReduceAction790 */
 const struct type type_parser__ReduceAction790 = {
-1320,
+1307,
 "ReduceAction790", /* class_name_string */
 3,
 0,
@@ -1395,8 +1175,8 @@ const struct type type_parser__ReduceAction790 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1320, /* ReduceAction790 */
+244, /* ReduceAction */
+1307, /* ReduceAction790 */
 },
 };
 const struct types resolution_table_parser__ReduceAction790 = {
@@ -1406,7 +1186,7 @@ const struct types resolution_table_parser__ReduceAction790 = {
 };
 /* runtime type ReduceAction791 */
 const struct type type_parser__ReduceAction791 = {
-1321,
+1308,
 "ReduceAction791", /* class_name_string */
 3,
 0,
@@ -1415,8 +1195,8 @@ const struct type type_parser__ReduceAction791 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1321, /* ReduceAction791 */
+244, /* ReduceAction */
+1308, /* ReduceAction791 */
 },
 };
 const struct types resolution_table_parser__ReduceAction791 = {
@@ -1424,9 +1204,29 @@ const struct types resolution_table_parser__ReduceAction791 = {
 {
 }
 };
+/* runtime type ReduceAction792 */
+const struct type type_parser__ReduceAction792 = {
+1309,
+"ReduceAction792", /* class_name_string */
+3,
+0,
+&resolution_table_parser__ReduceAction792,
+4,
+{
+0, /* nullable Object */
+1, /* Object */
+244, /* ReduceAction */
+1309, /* ReduceAction792 */
+},
+};
+const struct types resolution_table_parser__ReduceAction792 = {
+0, /* dummy */
+{
+}
+};
 /* runtime type ReduceAction793 */
 const struct type type_parser__ReduceAction793 = {
-1322,
+1310,
 "ReduceAction793", /* class_name_string */
 3,
 0,
@@ -1435,8 +1235,8 @@ const struct type type_parser__ReduceAction793 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1322, /* ReduceAction793 */
+244, /* ReduceAction */
+1310, /* ReduceAction793 */
 },
 };
 const struct types resolution_table_parser__ReduceAction793 = {
@@ -1446,7 +1246,7 @@ const struct types resolution_table_parser__ReduceAction793 = {
 };
 /* runtime type ReduceAction794 */
 const struct type type_parser__ReduceAction794 = {
-1323,
+1311,
 "ReduceAction794", /* class_name_string */
 3,
 0,
@@ -1455,8 +1255,8 @@ const struct type type_parser__ReduceAction794 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1323, /* ReduceAction794 */
+244, /* ReduceAction */
+1311, /* ReduceAction794 */
 },
 };
 const struct types resolution_table_parser__ReduceAction794 = {
@@ -1464,9 +1264,29 @@ const struct types resolution_table_parser__ReduceAction794 = {
 {
 }
 };
+/* runtime type ReduceAction795 */
+const struct type type_parser__ReduceAction795 = {
+1312,
+"ReduceAction795", /* class_name_string */
+3,
+0,
+&resolution_table_parser__ReduceAction795,
+4,
+{
+0, /* nullable Object */
+1, /* Object */
+244, /* ReduceAction */
+1312, /* ReduceAction795 */
+},
+};
+const struct types resolution_table_parser__ReduceAction795 = {
+0, /* dummy */
+{
+}
+};
 /* runtime type ReduceAction796 */
 const struct type type_parser__ReduceAction796 = {
-1324,
+1313,
 "ReduceAction796", /* class_name_string */
 3,
 0,
@@ -1475,8 +1295,8 @@ const struct type type_parser__ReduceAction796 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1324, /* ReduceAction796 */
+244, /* ReduceAction */
+1313, /* ReduceAction796 */
 },
 };
 const struct types resolution_table_parser__ReduceAction796 = {
@@ -1486,7 +1306,7 @@ const struct types resolution_table_parser__ReduceAction796 = {
 };
 /* runtime type ReduceAction797 */
 const struct type type_parser__ReduceAction797 = {
-1325,
+1314,
 "ReduceAction797", /* class_name_string */
 3,
 0,
@@ -1495,8 +1315,8 @@ const struct type type_parser__ReduceAction797 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1325, /* ReduceAction797 */
+244, /* ReduceAction */
+1314, /* ReduceAction797 */
 },
 };
 const struct types resolution_table_parser__ReduceAction797 = {
@@ -1504,29 +1324,9 @@ const struct types resolution_table_parser__ReduceAction797 = {
 {
 }
 };
-/* runtime type ReduceAction798 */
-const struct type type_parser__ReduceAction798 = {
-1326,
-"ReduceAction798", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction798,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1326, /* ReduceAction798 */
-},
-};
-const struct types resolution_table_parser__ReduceAction798 = {
-0, /* dummy */
-{
-}
-};
 /* runtime type ReduceAction799 */
 const struct type type_parser__ReduceAction799 = {
-1327,
+1315,
 "ReduceAction799", /* class_name_string */
 3,
 0,
@@ -1535,8 +1335,8 @@ const struct type type_parser__ReduceAction799 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1327, /* ReduceAction799 */
+244, /* ReduceAction */
+1315, /* ReduceAction799 */
 },
 };
 const struct types resolution_table_parser__ReduceAction799 = {
@@ -1546,7 +1346,7 @@ const struct types resolution_table_parser__ReduceAction799 = {
 };
 /* runtime type ReduceAction800 */
 const struct type type_parser__ReduceAction800 = {
-1328,
+1316,
 "ReduceAction800", /* class_name_string */
 3,
 0,
@@ -1555,8 +1355,8 @@ const struct type type_parser__ReduceAction800 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1328, /* ReduceAction800 */
+244, /* ReduceAction */
+1316, /* ReduceAction800 */
 },
 };
 const struct types resolution_table_parser__ReduceAction800 = {
@@ -1564,9 +1364,29 @@ const struct types resolution_table_parser__ReduceAction800 = {
 {
 }
 };
+/* runtime type ReduceAction801 */
+const struct type type_parser__ReduceAction801 = {
+1317,
+"ReduceAction801", /* class_name_string */
+3,
+0,
+&resolution_table_parser__ReduceAction801,
+4,
+{
+0, /* nullable Object */
+1, /* Object */
+244, /* ReduceAction */
+1317, /* ReduceAction801 */
+},
+};
+const struct types resolution_table_parser__ReduceAction801 = {
+0, /* dummy */
+{
+}
+};
 /* runtime type ReduceAction802 */
 const struct type type_parser__ReduceAction802 = {
-1329,
+1318,
 "ReduceAction802", /* class_name_string */
 3,
 0,
@@ -1575,8 +1395,8 @@ const struct type type_parser__ReduceAction802 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1329, /* ReduceAction802 */
+244, /* ReduceAction */
+1318, /* ReduceAction802 */
 },
 };
 const struct types resolution_table_parser__ReduceAction802 = {
@@ -1586,7 +1406,7 @@ const struct types resolution_table_parser__ReduceAction802 = {
 };
 /* runtime type ReduceAction803 */
 const struct type type_parser__ReduceAction803 = {
-1330,
+1319,
 "ReduceAction803", /* class_name_string */
 3,
 0,
@@ -1595,8 +1415,8 @@ const struct type type_parser__ReduceAction803 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1330, /* ReduceAction803 */
+244, /* ReduceAction */
+1319, /* ReduceAction803 */
 },
 };
 const struct types resolution_table_parser__ReduceAction803 = {
@@ -1604,9 +1424,29 @@ const struct types resolution_table_parser__ReduceAction803 = {
 {
 }
 };
+/* runtime type ReduceAction804 */
+const struct type type_parser__ReduceAction804 = {
+1320,
+"ReduceAction804", /* class_name_string */
+3,
+0,
+&resolution_table_parser__ReduceAction804,
+4,
+{
+0, /* nullable Object */
+1, /* Object */
+244, /* ReduceAction */
+1320, /* ReduceAction804 */
+},
+};
+const struct types resolution_table_parser__ReduceAction804 = {
+0, /* dummy */
+{
+}
+};
 /* runtime type ReduceAction805 */
 const struct type type_parser__ReduceAction805 = {
-1331,
+1321,
 "ReduceAction805", /* class_name_string */
 3,
 0,
@@ -1615,8 +1455,8 @@ const struct type type_parser__ReduceAction805 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1331, /* ReduceAction805 */
+244, /* ReduceAction */
+1321, /* ReduceAction805 */
 },
 };
 const struct types resolution_table_parser__ReduceAction805 = {
@@ -1626,7 +1466,7 @@ const struct types resolution_table_parser__ReduceAction805 = {
 };
 /* runtime type ReduceAction806 */
 const struct type type_parser__ReduceAction806 = {
-1332,
+1322,
 "ReduceAction806", /* class_name_string */
 3,
 0,
@@ -1635,8 +1475,8 @@ const struct type type_parser__ReduceAction806 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1332, /* ReduceAction806 */
+244, /* ReduceAction */
+1322, /* ReduceAction806 */
 },
 };
 const struct types resolution_table_parser__ReduceAction806 = {
@@ -1646,7 +1486,7 @@ const struct types resolution_table_parser__ReduceAction806 = {
 };
 /* runtime type ReduceAction807 */
 const struct type type_parser__ReduceAction807 = {
-1333,
+1323,
 "ReduceAction807", /* class_name_string */
 3,
 0,
@@ -1655,8 +1495,8 @@ const struct type type_parser__ReduceAction807 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1333, /* ReduceAction807 */
+244, /* ReduceAction */
+1323, /* ReduceAction807 */
 },
 };
 const struct types resolution_table_parser__ReduceAction807 = {
@@ -1666,7 +1506,7 @@ const struct types resolution_table_parser__ReduceAction807 = {
 };
 /* runtime type ReduceAction808 */
 const struct type type_parser__ReduceAction808 = {
-1334,
+1324,
 "ReduceAction808", /* class_name_string */
 3,
 0,
@@ -1675,8 +1515,8 @@ const struct type type_parser__ReduceAction808 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1334, /* ReduceAction808 */
+244, /* ReduceAction */
+1324, /* ReduceAction808 */
 },
 };
 const struct types resolution_table_parser__ReduceAction808 = {
@@ -1686,7 +1526,7 @@ const struct types resolution_table_parser__ReduceAction808 = {
 };
 /* runtime type ReduceAction810 */
 const struct type type_parser__ReduceAction810 = {
-1335,
+1325,
 "ReduceAction810", /* class_name_string */
 3,
 0,
@@ -1695,8 +1535,8 @@ const struct type type_parser__ReduceAction810 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1335, /* ReduceAction810 */
+244, /* ReduceAction */
+1325, /* ReduceAction810 */
 },
 };
 const struct types resolution_table_parser__ReduceAction810 = {
@@ -1706,7 +1546,7 @@ const struct types resolution_table_parser__ReduceAction810 = {
 };
 /* runtime type ReduceAction811 */
 const struct type type_parser__ReduceAction811 = {
-1336,
+1326,
 "ReduceAction811", /* class_name_string */
 3,
 0,
@@ -1715,8 +1555,8 @@ const struct type type_parser__ReduceAction811 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1336, /* ReduceAction811 */
+244, /* ReduceAction */
+1326, /* ReduceAction811 */
 },
 };
 const struct types resolution_table_parser__ReduceAction811 = {
@@ -1724,9 +1564,289 @@ const struct types resolution_table_parser__ReduceAction811 = {
 {
 }
 };
+/* runtime type ReduceAction812 */
+const struct type type_parser__ReduceAction812 = {
+1327,
+"ReduceAction812", /* class_name_string */
+3,
+0,
+&resolution_table_parser__ReduceAction812,
+4,
+{
+0, /* nullable Object */
+1, /* Object */
+244, /* ReduceAction */
+1327, /* ReduceAction812 */
+},
+};
+const struct types resolution_table_parser__ReduceAction812 = {
+0, /* dummy */
+{
+}
+};
+/* runtime type ReduceAction813 */
+const struct type type_parser__ReduceAction813 = {
+1328,
+"ReduceAction813", /* class_name_string */
+3,
+0,
+&resolution_table_parser__ReduceAction813,
+4,
+{
+0, /* nullable Object */
+1, /* Object */
+244, /* ReduceAction */
+1328, /* ReduceAction813 */
+},
+};
+const struct types resolution_table_parser__ReduceAction813 = {
+0, /* dummy */
+{
+}
+};
+/* runtime type ReduceAction814 */
+const struct type type_parser__ReduceAction814 = {
+1329,
+"ReduceAction814", /* class_name_string */
+3,
+0,
+&resolution_table_parser__ReduceAction814,
+4,
+{
+0, /* nullable Object */
+1, /* Object */
+244, /* ReduceAction */
+1329, /* ReduceAction814 */
+},
+};
+const struct types resolution_table_parser__ReduceAction814 = {
+0, /* dummy */
+{
+}
+};
+/* runtime type ReduceAction815 */
+const struct type type_parser__ReduceAction815 = {
+1330,
+"ReduceAction815", /* class_name_string */
+3,
+0,
+&resolution_table_parser__ReduceAction815,
+4,
+{
+0, /* nullable Object */
+1, /* Object */
+244, /* ReduceAction */
+1330, /* ReduceAction815 */
+},
+};
+const struct types resolution_table_parser__ReduceAction815 = {
+0, /* dummy */
+{
+}
+};
+/* runtime type ReduceAction816 */
+const struct type type_parser__ReduceAction816 = {
+1331,
+"ReduceAction816", /* class_name_string */
+3,
+0,
+&resolution_table_parser__ReduceAction816,
+4,
+{
+0, /* nullable Object */
+1, /* Object */
+244, /* ReduceAction */
+1331, /* ReduceAction816 */
+},
+};
+const struct types resolution_table_parser__ReduceAction816 = {
+0, /* dummy */
+{
+}
+};
+/* runtime type ReduceAction817 */
+const struct type type_parser__ReduceAction817 = {
+1332,
+"ReduceAction817", /* class_name_string */
+3,
+0,
+&resolution_table_parser__ReduceAction817,
+4,
+{
+0, /* nullable Object */
+1, /* Object */
+244, /* ReduceAction */
+1332, /* ReduceAction817 */
+},
+};
+const struct types resolution_table_parser__ReduceAction817 = {
+0, /* dummy */
+{
+}
+};
+/* runtime type ReduceAction818 */
+const struct type type_parser__ReduceAction818 = {
+1333,
+"ReduceAction818", /* class_name_string */
+3,
+0,
+&resolution_table_parser__ReduceAction818,
+4,
+{
+0, /* nullable Object */
+1, /* Object */
+244, /* ReduceAction */
+1333, /* ReduceAction818 */
+},
+};
+const struct types resolution_table_parser__ReduceAction818 = {
+0, /* dummy */
+{
+}
+};
+/* runtime type ReduceAction819 */
+const struct type type_parser__ReduceAction819 = {
+1334,
+"ReduceAction819", /* class_name_string */
+3,
+0,
+&resolution_table_parser__ReduceAction819,
+4,
+{
+0, /* nullable Object */
+1, /* Object */
+244, /* ReduceAction */
+1334, /* ReduceAction819 */
+},
+};
+const struct types resolution_table_parser__ReduceAction819 = {
+0, /* dummy */
+{
+}
+};
+/* runtime type ReduceAction820 */
+const struct type type_parser__ReduceAction820 = {
+1335,
+"ReduceAction820", /* class_name_string */
+3,
+0,
+&resolution_table_parser__ReduceAction820,
+4,
+{
+0, /* nullable Object */
+1, /* Object */
+244, /* ReduceAction */
+1335, /* ReduceAction820 */
+},
+};
+const struct types resolution_table_parser__ReduceAction820 = {
+0, /* dummy */
+{
+}
+};
+/* runtime type ReduceAction822 */
+const struct type type_parser__ReduceAction822 = {
+1336,
+"ReduceAction822", /* class_name_string */
+3,
+0,
+&resolution_table_parser__ReduceAction822,
+4,
+{
+0, /* nullable Object */
+1, /* Object */
+244, /* ReduceAction */
+1336, /* ReduceAction822 */
+},
+};
+const struct types resolution_table_parser__ReduceAction822 = {
+0, /* dummy */
+{
+}
+};
+/* runtime type ReduceAction823 */
+const struct type type_parser__ReduceAction823 = {
+1337,
+"ReduceAction823", /* class_name_string */
+3,
+0,
+&resolution_table_parser__ReduceAction823,
+4,
+{
+0, /* nullable Object */
+1, /* Object */
+244, /* ReduceAction */
+1337, /* ReduceAction823 */
+},
+};
+const struct types resolution_table_parser__ReduceAction823 = {
+0, /* dummy */
+{
+}
+};
+/* runtime type ReduceAction824 */
+const struct type type_parser__ReduceAction824 = {
+1338,
+"ReduceAction824", /* class_name_string */
+3,
+0,
+&resolution_table_parser__ReduceAction824,
+4,
+{
+0, /* nullable Object */
+1, /* Object */
+244, /* ReduceAction */
+1338, /* ReduceAction824 */
+},
+};
+const struct types resolution_table_parser__ReduceAction824 = {
+0, /* dummy */
+{
+}
+};
+/* runtime type ReduceAction825 */
+const struct type type_parser__ReduceAction825 = {
+1339,
+"ReduceAction825", /* class_name_string */
+3,
+0,
+&resolution_table_parser__ReduceAction825,
+4,
+{
+0, /* nullable Object */
+1, /* Object */
+244, /* ReduceAction */
+1339, /* ReduceAction825 */
+},
+};
+const struct types resolution_table_parser__ReduceAction825 = {
+0, /* dummy */
+{
+}
+};
+/* runtime type ReduceAction826 */
+const struct type type_parser__ReduceAction826 = {
+1340,
+"ReduceAction826", /* class_name_string */
+3,
+0,
+&resolution_table_parser__ReduceAction826,
+4,
+{
+0, /* nullable Object */
+1, /* Object */
+244, /* ReduceAction */
+1340, /* ReduceAction826 */
+},
+};
+const struct types resolution_table_parser__ReduceAction826 = {
+0, /* dummy */
+{
+}
+};
 /* runtime type ReduceAction827 */
 const struct type type_parser__ReduceAction827 = {
-1337,
+1341,
 "ReduceAction827", /* class_name_string */
 3,
 0,
@@ -1735,8 +1855,8 @@ const struct type type_parser__ReduceAction827 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1337, /* ReduceAction827 */
+244, /* ReduceAction */
+1341, /* ReduceAction827 */
 },
 };
 const struct types resolution_table_parser__ReduceAction827 = {
@@ -1746,7 +1866,7 @@ const struct types resolution_table_parser__ReduceAction827 = {
 };
 /* runtime type ReduceAction828 */
 const struct type type_parser__ReduceAction828 = {
-1338,
+1342,
 "ReduceAction828", /* class_name_string */
 3,
 0,
@@ -1755,8 +1875,8 @@ const struct type type_parser__ReduceAction828 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1338, /* ReduceAction828 */
+244, /* ReduceAction */
+1342, /* ReduceAction828 */
 },
 };
 const struct types resolution_table_parser__ReduceAction828 = {
@@ -1766,7 +1886,7 @@ const struct types resolution_table_parser__ReduceAction828 = {
 };
 /* runtime type ReduceAction829 */
 const struct type type_parser__ReduceAction829 = {
-1339,
+1343,
 "ReduceAction829", /* class_name_string */
 3,
 0,
@@ -1775,8 +1895,8 @@ const struct type type_parser__ReduceAction829 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1339, /* ReduceAction829 */
+244, /* ReduceAction */
+1343, /* ReduceAction829 */
 },
 };
 const struct types resolution_table_parser__ReduceAction829 = {
@@ -1786,7 +1906,7 @@ const struct types resolution_table_parser__ReduceAction829 = {
 };
 /* runtime type ReduceAction830 */
 const struct type type_parser__ReduceAction830 = {
-1340,
+1344,
 "ReduceAction830", /* class_name_string */
 3,
 0,
@@ -1795,8 +1915,8 @@ const struct type type_parser__ReduceAction830 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1340, /* ReduceAction830 */
+244, /* ReduceAction */
+1344, /* ReduceAction830 */
 },
 };
 const struct types resolution_table_parser__ReduceAction830 = {
@@ -1804,9 +1924,29 @@ const struct types resolution_table_parser__ReduceAction830 = {
 {
 }
 };
+/* runtime type ReduceAction831 */
+const struct type type_parser__ReduceAction831 = {
+1345,
+"ReduceAction831", /* class_name_string */
+3,
+0,
+&resolution_table_parser__ReduceAction831,
+4,
+{
+0, /* nullable Object */
+1, /* Object */
+244, /* ReduceAction */
+1345, /* ReduceAction831 */
+},
+};
+const struct types resolution_table_parser__ReduceAction831 = {
+0, /* dummy */
+{
+}
+};
 /* runtime type ReduceAction832 */
 const struct type type_parser__ReduceAction832 = {
-1341,
+1346,
 "ReduceAction832", /* class_name_string */
 3,
 0,
@@ -1815,8 +1955,8 @@ const struct type type_parser__ReduceAction832 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1341, /* ReduceAction832 */
+244, /* ReduceAction */
+1346, /* ReduceAction832 */
 },
 };
 const struct types resolution_table_parser__ReduceAction832 = {
@@ -1824,29 +1964,9 @@ const struct types resolution_table_parser__ReduceAction832 = {
 {
 }
 };
-/* runtime type ReduceAction833 */
-const struct type type_parser__ReduceAction833 = {
-1342,
-"ReduceAction833", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction833,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1342, /* ReduceAction833 */
-},
-};
-const struct types resolution_table_parser__ReduceAction833 = {
-0, /* dummy */
-{
-}
-};
 /* runtime type ReduceAction834 */
 const struct type type_parser__ReduceAction834 = {
-1343,
+1347,
 "ReduceAction834", /* class_name_string */
 3,
 0,
@@ -1855,8 +1975,8 @@ const struct type type_parser__ReduceAction834 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1343, /* ReduceAction834 */
+244, /* ReduceAction */
+1347, /* ReduceAction834 */
 },
 };
 const struct types resolution_table_parser__ReduceAction834 = {
@@ -1866,7 +1986,7 @@ const struct types resolution_table_parser__ReduceAction834 = {
 };
 /* runtime type ReduceAction835 */
 const struct type type_parser__ReduceAction835 = {
-1344,
+1348,
 "ReduceAction835", /* class_name_string */
 3,
 0,
@@ -1875,8 +1995,8 @@ const struct type type_parser__ReduceAction835 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1344, /* ReduceAction835 */
+244, /* ReduceAction */
+1348, /* ReduceAction835 */
 },
 };
 const struct types resolution_table_parser__ReduceAction835 = {
@@ -1886,7 +2006,7 @@ const struct types resolution_table_parser__ReduceAction835 = {
 };
 /* runtime type ReduceAction836 */
 const struct type type_parser__ReduceAction836 = {
-1345,
+1349,
 "ReduceAction836", /* class_name_string */
 3,
 0,
@@ -1895,8 +2015,8 @@ const struct type type_parser__ReduceAction836 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1345, /* ReduceAction836 */
+244, /* ReduceAction */
+1349, /* ReduceAction836 */
 },
 };
 const struct types resolution_table_parser__ReduceAction836 = {
@@ -1906,7 +2026,7 @@ const struct types resolution_table_parser__ReduceAction836 = {
 };
 /* runtime type ReduceAction837 */
 const struct type type_parser__ReduceAction837 = {
-1346,
+1350,
 "ReduceAction837", /* class_name_string */
 3,
 0,
@@ -1915,8 +2035,8 @@ const struct type type_parser__ReduceAction837 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1346, /* ReduceAction837 */
+244, /* ReduceAction */
+1350, /* ReduceAction837 */
 },
 };
 const struct types resolution_table_parser__ReduceAction837 = {
@@ -1924,29 +2044,9 @@ const struct types resolution_table_parser__ReduceAction837 = {
 {
 }
 };
-/* runtime type ReduceAction838 */
-const struct type type_parser__ReduceAction838 = {
-1347,
-"ReduceAction838", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction838,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1347, /* ReduceAction838 */
-},
-};
-const struct types resolution_table_parser__ReduceAction838 = {
-0, /* dummy */
-{
-}
-};
 /* runtime type ReduceAction839 */
 const struct type type_parser__ReduceAction839 = {
-1348,
+1351,
 "ReduceAction839", /* class_name_string */
 3,
 0,
@@ -1955,8 +2055,8 @@ const struct type type_parser__ReduceAction839 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1348, /* ReduceAction839 */
+244, /* ReduceAction */
+1351, /* ReduceAction839 */
 },
 };
 const struct types resolution_table_parser__ReduceAction839 = {
@@ -1966,7 +2066,7 @@ const struct types resolution_table_parser__ReduceAction839 = {
 };
 /* runtime type ReduceAction840 */
 const struct type type_parser__ReduceAction840 = {
-1349,
+1352,
 "ReduceAction840", /* class_name_string */
 3,
 0,
@@ -1975,8 +2075,8 @@ const struct type type_parser__ReduceAction840 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1349, /* ReduceAction840 */
+244, /* ReduceAction */
+1352, /* ReduceAction840 */
 },
 };
 const struct types resolution_table_parser__ReduceAction840 = {
@@ -1986,7 +2086,7 @@ const struct types resolution_table_parser__ReduceAction840 = {
 };
 /* runtime type ReduceAction841 */
 const struct type type_parser__ReduceAction841 = {
-1350,
+1353,
 "ReduceAction841", /* class_name_string */
 3,
 0,
@@ -1995,8 +2095,8 @@ const struct type type_parser__ReduceAction841 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1350, /* ReduceAction841 */
+244, /* ReduceAction */
+1353, /* ReduceAction841 */
 },
 };
 const struct types resolution_table_parser__ReduceAction841 = {
@@ -2004,29 +2104,9 @@ const struct types resolution_table_parser__ReduceAction841 = {
 {
 }
 };
-/* runtime type ReduceAction842 */
-const struct type type_parser__ReduceAction842 = {
-1351,
-"ReduceAction842", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction842,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1351, /* ReduceAction842 */
-},
-};
-const struct types resolution_table_parser__ReduceAction842 = {
-0, /* dummy */
-{
-}
-};
 /* runtime type ReduceAction843 */
 const struct type type_parser__ReduceAction843 = {
-1352,
+1354,
 "ReduceAction843", /* class_name_string */
 3,
 0,
@@ -2035,8 +2115,8 @@ const struct type type_parser__ReduceAction843 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1352, /* ReduceAction843 */
+244, /* ReduceAction */
+1354, /* ReduceAction843 */
 },
 };
 const struct types resolution_table_parser__ReduceAction843 = {
@@ -2046,7 +2126,7 @@ const struct types resolution_table_parser__ReduceAction843 = {
 };
 /* runtime type ReduceAction844 */
 const struct type type_parser__ReduceAction844 = {
-1353,
+1355,
 "ReduceAction844", /* class_name_string */
 3,
 0,
@@ -2055,8 +2135,8 @@ const struct type type_parser__ReduceAction844 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1353, /* ReduceAction844 */
+244, /* ReduceAction */
+1355, /* ReduceAction844 */
 },
 };
 const struct types resolution_table_parser__ReduceAction844 = {
@@ -2066,7 +2146,7 @@ const struct types resolution_table_parser__ReduceAction844 = {
 };
 /* runtime type ReduceAction845 */
 const struct type type_parser__ReduceAction845 = {
-1354,
+1356,
 "ReduceAction845", /* class_name_string */
 3,
 0,
@@ -2075,8 +2155,8 @@ const struct type type_parser__ReduceAction845 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1354, /* ReduceAction845 */
+244, /* ReduceAction */
+1356, /* ReduceAction845 */
 },
 };
 const struct types resolution_table_parser__ReduceAction845 = {
@@ -2084,29 +2164,9 @@ const struct types resolution_table_parser__ReduceAction845 = {
 {
 }
 };
-/* runtime type ReduceAction846 */
-const struct type type_parser__ReduceAction846 = {
-1355,
-"ReduceAction846", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction846,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1355, /* ReduceAction846 */
-},
-};
-const struct types resolution_table_parser__ReduceAction846 = {
-0, /* dummy */
-{
-}
-};
 /* runtime type ReduceAction847 */
 const struct type type_parser__ReduceAction847 = {
-1356,
+1357,
 "ReduceAction847", /* class_name_string */
 3,
 0,
@@ -2115,8 +2175,8 @@ const struct type type_parser__ReduceAction847 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1356, /* ReduceAction847 */
+244, /* ReduceAction */
+1357, /* ReduceAction847 */
 },
 };
 const struct types resolution_table_parser__ReduceAction847 = {
@@ -2126,7 +2186,7 @@ const struct types resolution_table_parser__ReduceAction847 = {
 };
 /* runtime type ReduceAction848 */
 const struct type type_parser__ReduceAction848 = {
-1357,
+1358,
 "ReduceAction848", /* class_name_string */
 3,
 0,
@@ -2135,8 +2195,8 @@ const struct type type_parser__ReduceAction848 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1357, /* ReduceAction848 */
+244, /* ReduceAction */
+1358, /* ReduceAction848 */
 },
 };
 const struct types resolution_table_parser__ReduceAction848 = {
@@ -2146,7 +2206,7 @@ const struct types resolution_table_parser__ReduceAction848 = {
 };
 /* runtime type ReduceAction849 */
 const struct type type_parser__ReduceAction849 = {
-1358,
+1359,
 "ReduceAction849", /* class_name_string */
 3,
 0,
@@ -2155,31 +2215,11 @@ const struct type type_parser__ReduceAction849 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1358, /* ReduceAction849 */
+244, /* ReduceAction */
+1359, /* ReduceAction849 */
 },
 };
 const struct types resolution_table_parser__ReduceAction849 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction850 */
-const struct type type_parser__ReduceAction850 = {
-1359,
-"ReduceAction850", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction850,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1359, /* ReduceAction850 */
-},
-};
-const struct types resolution_table_parser__ReduceAction850 = {
 0, /* dummy */
 {
 }
@@ -2195,7 +2235,7 @@ const struct type type_parser__ReduceAction851 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
+244, /* ReduceAction */
 1360, /* ReduceAction851 */
 },
 };
@@ -2215,7 +2255,7 @@ const struct type type_parser__ReduceAction852 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
+244, /* ReduceAction */
 1361, /* ReduceAction852 */
 },
 };
@@ -2235,7 +2275,7 @@ const struct type type_parser__ReduceAction853 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
+244, /* ReduceAction */
 1362, /* ReduceAction853 */
 },
 };
@@ -2255,7 +2295,7 @@ const struct type type_parser__ReduceAction855 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
+244, /* ReduceAction */
 1363, /* ReduceAction855 */
 },
 };
@@ -2264,49 +2304,9 @@ const struct types resolution_table_parser__ReduceAction855 = {
 {
 }
 };
-/* runtime type ReduceAction856 */
-const struct type type_parser__ReduceAction856 = {
-1364,
-"ReduceAction856", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction856,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1364, /* ReduceAction856 */
-},
-};
-const struct types resolution_table_parser__ReduceAction856 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction857 */
-const struct type type_parser__ReduceAction857 = {
-1365,
-"ReduceAction857", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction857,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1365, /* ReduceAction857 */
-},
-};
-const struct types resolution_table_parser__ReduceAction857 = {
-0, /* dummy */
-{
-}
-};
 /* runtime type ReduceAction858 */
 const struct type type_parser__ReduceAction858 = {
-1366,
+1364,
 "ReduceAction858", /* class_name_string */
 3,
 0,
@@ -2315,8 +2315,8 @@ const struct type type_parser__ReduceAction858 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1366, /* ReduceAction858 */
+244, /* ReduceAction */
+1364, /* ReduceAction858 */
 },
 };
 const struct types resolution_table_parser__ReduceAction858 = {
@@ -2326,7 +2326,7 @@ const struct types resolution_table_parser__ReduceAction858 = {
 };
 /* runtime type ReduceAction859 */
 const struct type type_parser__ReduceAction859 = {
-1367,
+1365,
 "ReduceAction859", /* class_name_string */
 3,
 0,
@@ -2335,8 +2335,8 @@ const struct type type_parser__ReduceAction859 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1367, /* ReduceAction859 */
+244, /* ReduceAction */
+1365, /* ReduceAction859 */
 },
 };
 const struct types resolution_table_parser__ReduceAction859 = {
@@ -2346,7 +2346,7 @@ const struct types resolution_table_parser__ReduceAction859 = {
 };
 /* runtime type ReduceAction860 */
 const struct type type_parser__ReduceAction860 = {
-1368,
+1366,
 "ReduceAction860", /* class_name_string */
 3,
 0,
@@ -2355,8 +2355,8 @@ const struct type type_parser__ReduceAction860 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1368, /* ReduceAction860 */
+244, /* ReduceAction */
+1366, /* ReduceAction860 */
 },
 };
 const struct types resolution_table_parser__ReduceAction860 = {
@@ -2366,7 +2366,7 @@ const struct types resolution_table_parser__ReduceAction860 = {
 };
 /* runtime type ReduceAction861 */
 const struct type type_parser__ReduceAction861 = {
-1369,
+1367,
 "ReduceAction861", /* class_name_string */
 3,
 0,
@@ -2375,8 +2375,8 @@ const struct type type_parser__ReduceAction861 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1369, /* ReduceAction861 */
+244, /* ReduceAction */
+1367, /* ReduceAction861 */
 },
 };
 const struct types resolution_table_parser__ReduceAction861 = {
@@ -2386,7 +2386,7 @@ const struct types resolution_table_parser__ReduceAction861 = {
 };
 /* runtime type ReduceAction862 */
 const struct type type_parser__ReduceAction862 = {
-1370,
+1368,
 "ReduceAction862", /* class_name_string */
 3,
 0,
@@ -2395,8 +2395,8 @@ const struct type type_parser__ReduceAction862 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1370, /* ReduceAction862 */
+244, /* ReduceAction */
+1368, /* ReduceAction862 */
 },
 };
 const struct types resolution_table_parser__ReduceAction862 = {
@@ -2406,7 +2406,7 @@ const struct types resolution_table_parser__ReduceAction862 = {
 };
 /* runtime type ReduceAction863 */
 const struct type type_parser__ReduceAction863 = {
-1371,
+1369,
 "ReduceAction863", /* class_name_string */
 3,
 0,
@@ -2415,8 +2415,8 @@ const struct type type_parser__ReduceAction863 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1371, /* ReduceAction863 */
+244, /* ReduceAction */
+1369, /* ReduceAction863 */
 },
 };
 const struct types resolution_table_parser__ReduceAction863 = {
@@ -2426,7 +2426,7 @@ const struct types resolution_table_parser__ReduceAction863 = {
 };
 /* runtime type ReduceAction864 */
 const struct type type_parser__ReduceAction864 = {
-1372,
+1370,
 "ReduceAction864", /* class_name_string */
 3,
 0,
@@ -2435,8 +2435,8 @@ const struct type type_parser__ReduceAction864 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1372, /* ReduceAction864 */
+244, /* ReduceAction */
+1370, /* ReduceAction864 */
 },
 };
 const struct types resolution_table_parser__ReduceAction864 = {
@@ -2444,9 +2444,29 @@ const struct types resolution_table_parser__ReduceAction864 = {
 {
 }
 };
+/* runtime type ReduceAction865 */
+const struct type type_parser__ReduceAction865 = {
+1371,
+"ReduceAction865", /* class_name_string */
+3,
+0,
+&resolution_table_parser__ReduceAction865,
+4,
+{
+0, /* nullable Object */
+1, /* Object */
+244, /* ReduceAction */
+1371, /* ReduceAction865 */
+},
+};
+const struct types resolution_table_parser__ReduceAction865 = {
+0, /* dummy */
+{
+}
+};
 /* runtime type ReduceAction866 */
 const struct type type_parser__ReduceAction866 = {
-1373,
+1372,
 "ReduceAction866", /* class_name_string */
 3,
 0,
@@ -2455,8 +2475,8 @@ const struct type type_parser__ReduceAction866 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1373, /* ReduceAction866 */
+244, /* ReduceAction */
+1372, /* ReduceAction866 */
 },
 };
 const struct types resolution_table_parser__ReduceAction866 = {
@@ -2466,7 +2486,7 @@ const struct types resolution_table_parser__ReduceAction866 = {
 };
 /* runtime type ReduceAction867 */
 const struct type type_parser__ReduceAction867 = {
-1374,
+1373,
 "ReduceAction867", /* class_name_string */
 3,
 0,
@@ -2475,8 +2495,8 @@ const struct type type_parser__ReduceAction867 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1374, /* ReduceAction867 */
+244, /* ReduceAction */
+1373, /* ReduceAction867 */
 },
 };
 const struct types resolution_table_parser__ReduceAction867 = {
@@ -2486,7 +2506,7 @@ const struct types resolution_table_parser__ReduceAction867 = {
 };
 /* runtime type ReduceAction868 */
 const struct type type_parser__ReduceAction868 = {
-1375,
+1374,
 "ReduceAction868", /* class_name_string */
 3,
 0,
@@ -2495,8 +2515,8 @@ const struct type type_parser__ReduceAction868 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1375, /* ReduceAction868 */
+244, /* ReduceAction */
+1374, /* ReduceAction868 */
 },
 };
 const struct types resolution_table_parser__ReduceAction868 = {
@@ -2506,7 +2526,7 @@ const struct types resolution_table_parser__ReduceAction868 = {
 };
 /* runtime type ReduceAction869 */
 const struct type type_parser__ReduceAction869 = {
-1376,
+1375,
 "ReduceAction869", /* class_name_string */
 3,
 0,
@@ -2515,8 +2535,8 @@ const struct type type_parser__ReduceAction869 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1376, /* ReduceAction869 */
+244, /* ReduceAction */
+1375, /* ReduceAction869 */
 },
 };
 const struct types resolution_table_parser__ReduceAction869 = {
@@ -2526,7 +2546,7 @@ const struct types resolution_table_parser__ReduceAction869 = {
 };
 /* runtime type ReduceAction870 */
 const struct type type_parser__ReduceAction870 = {
-1377,
+1376,
 "ReduceAction870", /* class_name_string */
 3,
 0,
@@ -2535,8 +2555,8 @@ const struct type type_parser__ReduceAction870 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1377, /* ReduceAction870 */
+244, /* ReduceAction */
+1376, /* ReduceAction870 */
 },
 };
 const struct types resolution_table_parser__ReduceAction870 = {
@@ -2544,29 +2564,9 @@ const struct types resolution_table_parser__ReduceAction870 = {
 {
 }
 };
-/* runtime type ReduceAction871 */
-const struct type type_parser__ReduceAction871 = {
-1378,
-"ReduceAction871", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction871,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1378, /* ReduceAction871 */
-},
-};
-const struct types resolution_table_parser__ReduceAction871 = {
-0, /* dummy */
-{
-}
-};
 /* runtime type ReduceAction872 */
 const struct type type_parser__ReduceAction872 = {
-1379,
+1377,
 "ReduceAction872", /* class_name_string */
 3,
 0,
@@ -2575,8 +2575,8 @@ const struct type type_parser__ReduceAction872 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1379, /* ReduceAction872 */
+244, /* ReduceAction */
+1377, /* ReduceAction872 */
 },
 };
 const struct types resolution_table_parser__ReduceAction872 = {
@@ -2586,7 +2586,7 @@ const struct types resolution_table_parser__ReduceAction872 = {
 };
 /* runtime type ReduceAction873 */
 const struct type type_parser__ReduceAction873 = {
-1380,
+1378,
 "ReduceAction873", /* class_name_string */
 3,
 0,
@@ -2595,8 +2595,8 @@ const struct type type_parser__ReduceAction873 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1380, /* ReduceAction873 */
+244, /* ReduceAction */
+1378, /* ReduceAction873 */
 },
 };
 const struct types resolution_table_parser__ReduceAction873 = {
@@ -2604,29 +2604,9 @@ const struct types resolution_table_parser__ReduceAction873 = {
 {
 }
 };
-/* runtime type ReduceAction874 */
-const struct type type_parser__ReduceAction874 = {
-1381,
-"ReduceAction874", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction874,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1381, /* ReduceAction874 */
-},
-};
-const struct types resolution_table_parser__ReduceAction874 = {
-0, /* dummy */
-{
-}
-};
 /* runtime type ReduceAction875 */
 const struct type type_parser__ReduceAction875 = {
-1382,
+1379,
 "ReduceAction875", /* class_name_string */
 3,
 0,
@@ -2635,8 +2615,8 @@ const struct type type_parser__ReduceAction875 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1382, /* ReduceAction875 */
+244, /* ReduceAction */
+1379, /* ReduceAction875 */
 },
 };
 const struct types resolution_table_parser__ReduceAction875 = {
@@ -2646,7 +2626,7 @@ const struct types resolution_table_parser__ReduceAction875 = {
 };
 /* runtime type ReduceAction876 */
 const struct type type_parser__ReduceAction876 = {
-1383,
+1380,
 "ReduceAction876", /* class_name_string */
 3,
 0,
@@ -2655,8 +2635,8 @@ const struct type type_parser__ReduceAction876 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1383, /* ReduceAction876 */
+244, /* ReduceAction */
+1380, /* ReduceAction876 */
 },
 };
 const struct types resolution_table_parser__ReduceAction876 = {
@@ -2664,9 +2644,29 @@ const struct types resolution_table_parser__ReduceAction876 = {
 {
 }
 };
+/* runtime type ReduceAction877 */
+const struct type type_parser__ReduceAction877 = {
+1381,
+"ReduceAction877", /* class_name_string */
+3,
+0,
+&resolution_table_parser__ReduceAction877,
+4,
+{
+0, /* nullable Object */
+1, /* Object */
+244, /* ReduceAction */
+1381, /* ReduceAction877 */
+},
+};
+const struct types resolution_table_parser__ReduceAction877 = {
+0, /* dummy */
+{
+}
+};
 /* runtime type ReduceAction878 */
 const struct type type_parser__ReduceAction878 = {
-1384,
+1382,
 "ReduceAction878", /* class_name_string */
 3,
 0,
@@ -2675,8 +2675,8 @@ const struct type type_parser__ReduceAction878 = {
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1384, /* ReduceAction878 */
+244, /* ReduceAction */
+1382, /* ReduceAction878 */
 },
 };
 const struct types resolution_table_parser__ReduceAction878 = {
@@ -2684,1689 +2684,749 @@ const struct types resolution_table_parser__ReduceAction878 = {
 {
 }
 };
-/* runtime type ReduceAction879 */
-const struct type type_parser__ReduceAction879 = {
+/* runtime type ReduceAction1223 */
+const struct type type_parser__ReduceAction1223 = {
+1383,
+"ReduceAction1223", /* class_name_string */
+3,
+0,
+&resolution_table_parser__ReduceAction1223,
+4,
+{
+0, /* nullable Object */
+1, /* Object */
+244, /* ReduceAction */
+1383, /* ReduceAction1223 */
+},
+};
+const struct types resolution_table_parser__ReduceAction1223 = {
+0, /* dummy */
+{
+}
+};
+/* runtime type ReduceAction1224 */
+const struct type type_parser__ReduceAction1224 = {
+1384,
+"ReduceAction1224", /* class_name_string */
+3,
+0,
+&resolution_table_parser__ReduceAction1224,
+4,
+{
+0, /* nullable Object */
+1, /* Object */
+244, /* ReduceAction */
+1384, /* ReduceAction1224 */
+},
+};
+const struct types resolution_table_parser__ReduceAction1224 = {
+0, /* dummy */
+{
+}
+};
+/* runtime type ReduceAction1227 */
+const struct type type_parser__ReduceAction1227 = {
 1385,
-"ReduceAction879", /* class_name_string */
+"ReduceAction1227", /* class_name_string */
 3,
 0,
-&resolution_table_parser__ReduceAction879,
+&resolution_table_parser__ReduceAction1227,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1385, /* ReduceAction879 */
+244, /* ReduceAction */
+1385, /* ReduceAction1227 */
 },
 };
-const struct types resolution_table_parser__ReduceAction879 = {
+const struct types resolution_table_parser__ReduceAction1227 = {
 0, /* dummy */
 {
 }
 };
-/* runtime type ReduceAction880 */
-const struct type type_parser__ReduceAction880 = {
+/* runtime type ReduceAction1228 */
+const struct type type_parser__ReduceAction1228 = {
 1386,
-"ReduceAction880", /* class_name_string */
+"ReduceAction1228", /* class_name_string */
 3,
 0,
-&resolution_table_parser__ReduceAction880,
+&resolution_table_parser__ReduceAction1228,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1386, /* ReduceAction880 */
+244, /* ReduceAction */
+1386, /* ReduceAction1228 */
 },
 };
-const struct types resolution_table_parser__ReduceAction880 = {
+const struct types resolution_table_parser__ReduceAction1228 = {
 0, /* dummy */
 {
 }
 };
-/* runtime type ReduceAction881 */
-const struct type type_parser__ReduceAction881 = {
+/* runtime type ReduceAction1231 */
+const struct type type_parser__ReduceAction1231 = {
 1387,
-"ReduceAction881", /* class_name_string */
+"ReduceAction1231", /* class_name_string */
 3,
 0,
-&resolution_table_parser__ReduceAction881,
+&resolution_table_parser__ReduceAction1231,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1387, /* ReduceAction881 */
+244, /* ReduceAction */
+1387, /* ReduceAction1231 */
 },
 };
-const struct types resolution_table_parser__ReduceAction881 = {
+const struct types resolution_table_parser__ReduceAction1231 = {
 0, /* dummy */
 {
 }
 };
-/* runtime type ReduceAction882 */
-const struct type type_parser__ReduceAction882 = {
+/* runtime type ReduceAction1232 */
+const struct type type_parser__ReduceAction1232 = {
 1388,
-"ReduceAction882", /* class_name_string */
+"ReduceAction1232", /* class_name_string */
 3,
 0,
-&resolution_table_parser__ReduceAction882,
+&resolution_table_parser__ReduceAction1232,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1388, /* ReduceAction882 */
+244, /* ReduceAction */
+1388, /* ReduceAction1232 */
 },
 };
-const struct types resolution_table_parser__ReduceAction882 = {
+const struct types resolution_table_parser__ReduceAction1232 = {
 0, /* dummy */
 {
 }
 };
-/* runtime type ReduceAction883 */
-const struct type type_parser__ReduceAction883 = {
+/* runtime type ReduceAction1239 */
+const struct type type_parser__ReduceAction1239 = {
 1389,
-"ReduceAction883", /* class_name_string */
+"ReduceAction1239", /* class_name_string */
 3,
 0,
-&resolution_table_parser__ReduceAction883,
+&resolution_table_parser__ReduceAction1239,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1389, /* ReduceAction883 */
+244, /* ReduceAction */
+1389, /* ReduceAction1239 */
 },
 };
-const struct types resolution_table_parser__ReduceAction883 = {
+const struct types resolution_table_parser__ReduceAction1239 = {
 0, /* dummy */
 {
 }
 };
-/* runtime type ReduceAction884 */
-const struct type type_parser__ReduceAction884 = {
+/* runtime type ReduceAction1263 */
+const struct type type_parser__ReduceAction1263 = {
 1390,
-"ReduceAction884", /* class_name_string */
+"ReduceAction1263", /* class_name_string */
 3,
 0,
-&resolution_table_parser__ReduceAction884,
+&resolution_table_parser__ReduceAction1263,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1390, /* ReduceAction884 */
+244, /* ReduceAction */
+1390, /* ReduceAction1263 */
 },
 };
-const struct types resolution_table_parser__ReduceAction884 = {
+const struct types resolution_table_parser__ReduceAction1263 = {
 0, /* dummy */
 {
 }
 };
-/* runtime type ReduceAction885 */
-const struct type type_parser__ReduceAction885 = {
+/* runtime type ReduceAction1264 */
+const struct type type_parser__ReduceAction1264 = {
 1391,
-"ReduceAction885", /* class_name_string */
+"ReduceAction1264", /* class_name_string */
 3,
 0,
-&resolution_table_parser__ReduceAction885,
+&resolution_table_parser__ReduceAction1264,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1391, /* ReduceAction885 */
+244, /* ReduceAction */
+1391, /* ReduceAction1264 */
 },
 };
-const struct types resolution_table_parser__ReduceAction885 = {
+const struct types resolution_table_parser__ReduceAction1264 = {
 0, /* dummy */
 {
 }
 };
-/* runtime type ReduceAction886 */
-const struct type type_parser__ReduceAction886 = {
+/* runtime type ReduceAction1538 */
+const struct type type_parser__ReduceAction1538 = {
 1392,
-"ReduceAction886", /* class_name_string */
+"ReduceAction1538", /* class_name_string */
 3,
 0,
-&resolution_table_parser__ReduceAction886,
+&resolution_table_parser__ReduceAction1538,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1392, /* ReduceAction886 */
+244, /* ReduceAction */
+1392, /* ReduceAction1538 */
 },
 };
-const struct types resolution_table_parser__ReduceAction886 = {
+const struct types resolution_table_parser__ReduceAction1538 = {
 0, /* dummy */
 {
 }
 };
-/* runtime type ReduceAction887 */
-const struct type type_parser__ReduceAction887 = {
+/* runtime type ReduceAction1539 */
+const struct type type_parser__ReduceAction1539 = {
 1393,
-"ReduceAction887", /* class_name_string */
+"ReduceAction1539", /* class_name_string */
 3,
 0,
-&resolution_table_parser__ReduceAction887,
+&resolution_table_parser__ReduceAction1539,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1393, /* ReduceAction887 */
+244, /* ReduceAction */
+1393, /* ReduceAction1539 */
 },
 };
-const struct types resolution_table_parser__ReduceAction887 = {
+const struct types resolution_table_parser__ReduceAction1539 = {
 0, /* dummy */
 {
 }
 };
-/* runtime type ReduceAction888 */
-const struct type type_parser__ReduceAction888 = {
+/* runtime type ReduceAction1540 */
+const struct type type_parser__ReduceAction1540 = {
 1394,
-"ReduceAction888", /* class_name_string */
+"ReduceAction1540", /* class_name_string */
 3,
 0,
-&resolution_table_parser__ReduceAction888,
+&resolution_table_parser__ReduceAction1540,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1394, /* ReduceAction888 */
+244, /* ReduceAction */
+1394, /* ReduceAction1540 */
 },
 };
-const struct types resolution_table_parser__ReduceAction888 = {
+const struct types resolution_table_parser__ReduceAction1540 = {
 0, /* dummy */
 {
 }
 };
-/* runtime type ReduceAction890 */
-const struct type type_parser__ReduceAction890 = {
+/* runtime type ReduceAction1541 */
+const struct type type_parser__ReduceAction1541 = {
 1395,
-"ReduceAction890", /* class_name_string */
+"ReduceAction1541", /* class_name_string */
 3,
 0,
-&resolution_table_parser__ReduceAction890,
+&resolution_table_parser__ReduceAction1541,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1395, /* ReduceAction890 */
+244, /* ReduceAction */
+1395, /* ReduceAction1541 */
 },
 };
-const struct types resolution_table_parser__ReduceAction890 = {
+const struct types resolution_table_parser__ReduceAction1541 = {
 0, /* dummy */
 {
 }
 };
-/* runtime type ReduceAction891 */
-const struct type type_parser__ReduceAction891 = {
+/* runtime type ReduceAction1542 */
+const struct type type_parser__ReduceAction1542 = {
 1396,
-"ReduceAction891", /* class_name_string */
+"ReduceAction1542", /* class_name_string */
 3,
 0,
-&resolution_table_parser__ReduceAction891,
+&resolution_table_parser__ReduceAction1542,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1396, /* ReduceAction891 */
+244, /* ReduceAction */
+1396, /* ReduceAction1542 */
 },
 };
-const struct types resolution_table_parser__ReduceAction891 = {
+const struct types resolution_table_parser__ReduceAction1542 = {
 0, /* dummy */
 {
 }
 };
-/* runtime type ReduceAction892 */
-const struct type type_parser__ReduceAction892 = {
+/* runtime type ReduceAction1543 */
+const struct type type_parser__ReduceAction1543 = {
 1397,
-"ReduceAction892", /* class_name_string */
+"ReduceAction1543", /* class_name_string */
 3,
 0,
-&resolution_table_parser__ReduceAction892,
+&resolution_table_parser__ReduceAction1543,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1397, /* ReduceAction892 */
+244, /* ReduceAction */
+1397, /* ReduceAction1543 */
 },
 };
-const struct types resolution_table_parser__ReduceAction892 = {
+const struct types resolution_table_parser__ReduceAction1543 = {
 0, /* dummy */
 {
 }
 };
-/* runtime type ReduceAction893 */
-const struct type type_parser__ReduceAction893 = {
+/* runtime type ReduceAction1544 */
+const struct type type_parser__ReduceAction1544 = {
 1398,
-"ReduceAction893", /* class_name_string */
+"ReduceAction1544", /* class_name_string */
 3,
 0,
-&resolution_table_parser__ReduceAction893,
+&resolution_table_parser__ReduceAction1544,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1398, /* ReduceAction893 */
+244, /* ReduceAction */
+1398, /* ReduceAction1544 */
 },
 };
-const struct types resolution_table_parser__ReduceAction893 = {
+const struct types resolution_table_parser__ReduceAction1544 = {
 0, /* dummy */
 {
 }
 };
-/* runtime type ReduceAction895 */
-const struct type type_parser__ReduceAction895 = {
+/* runtime type ReduceAction1545 */
+const struct type type_parser__ReduceAction1545 = {
 1399,
-"ReduceAction895", /* class_name_string */
+"ReduceAction1545", /* class_name_string */
 3,
 0,
-&resolution_table_parser__ReduceAction895,
+&resolution_table_parser__ReduceAction1545,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1399, /* ReduceAction895 */
+244, /* ReduceAction */
+1399, /* ReduceAction1545 */
 },
 };
-const struct types resolution_table_parser__ReduceAction895 = {
+const struct types resolution_table_parser__ReduceAction1545 = {
 0, /* dummy */
 {
 }
 };
-/* runtime type ReduceAction896 */
-const struct type type_parser__ReduceAction896 = {
+/* runtime type ReduceAction1546 */
+const struct type type_parser__ReduceAction1546 = {
 1400,
-"ReduceAction896", /* class_name_string */
+"ReduceAction1546", /* class_name_string */
 3,
 0,
-&resolution_table_parser__ReduceAction896,
+&resolution_table_parser__ReduceAction1546,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1400, /* ReduceAction896 */
+244, /* ReduceAction */
+1400, /* ReduceAction1546 */
 },
 };
-const struct types resolution_table_parser__ReduceAction896 = {
+const struct types resolution_table_parser__ReduceAction1546 = {
 0, /* dummy */
 {
 }
 };
-/* runtime type ReduceAction897 */
-const struct type type_parser__ReduceAction897 = {
+/* runtime type ReduceAction1547 */
+const struct type type_parser__ReduceAction1547 = {
 1401,
-"ReduceAction897", /* class_name_string */
+"ReduceAction1547", /* class_name_string */
 3,
 0,
-&resolution_table_parser__ReduceAction897,
+&resolution_table_parser__ReduceAction1547,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1401, /* ReduceAction897 */
+244, /* ReduceAction */
+1401, /* ReduceAction1547 */
 },
 };
-const struct types resolution_table_parser__ReduceAction897 = {
+const struct types resolution_table_parser__ReduceAction1547 = {
 0, /* dummy */
 {
 }
 };
-/* runtime type ReduceAction899 */
-const struct type type_parser__ReduceAction899 = {
+/* runtime type ReduceAction1550 */
+const struct type type_parser__ReduceAction1550 = {
 1402,
-"ReduceAction899", /* class_name_string */
+"ReduceAction1550", /* class_name_string */
 3,
 0,
-&resolution_table_parser__ReduceAction899,
+&resolution_table_parser__ReduceAction1550,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1402, /* ReduceAction899 */
+244, /* ReduceAction */
+1402, /* ReduceAction1550 */
 },
 };
-const struct types resolution_table_parser__ReduceAction899 = {
+const struct types resolution_table_parser__ReduceAction1550 = {
 0, /* dummy */
 {
 }
 };
-/* runtime type ReduceAction900 */
-const struct type type_parser__ReduceAction900 = {
+/* runtime type ReduceAction1551 */
+const struct type type_parser__ReduceAction1551 = {
 1403,
-"ReduceAction900", /* class_name_string */
+"ReduceAction1551", /* class_name_string */
 3,
 0,
-&resolution_table_parser__ReduceAction900,
+&resolution_table_parser__ReduceAction1551,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1403, /* ReduceAction900 */
+244, /* ReduceAction */
+1403, /* ReduceAction1551 */
 },
 };
-const struct types resolution_table_parser__ReduceAction900 = {
+const struct types resolution_table_parser__ReduceAction1551 = {
 0, /* dummy */
 {
 }
 };
-/* runtime type ReduceAction901 */
-const struct type type_parser__ReduceAction901 = {
+/* runtime type ReduceAction1552 */
+const struct type type_parser__ReduceAction1552 = {
 1404,
-"ReduceAction901", /* class_name_string */
+"ReduceAction1552", /* class_name_string */
 3,
 0,
-&resolution_table_parser__ReduceAction901,
+&resolution_table_parser__ReduceAction1552,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1404, /* ReduceAction901 */
+244, /* ReduceAction */
+1404, /* ReduceAction1552 */
 },
 };
-const struct types resolution_table_parser__ReduceAction901 = {
+const struct types resolution_table_parser__ReduceAction1552 = {
 0, /* dummy */
 {
 }
 };
-/* runtime type ReduceAction903 */
-const struct type type_parser__ReduceAction903 = {
+/* runtime type ReduceAction1553 */
+const struct type type_parser__ReduceAction1553 = {
 1405,
-"ReduceAction903", /* class_name_string */
+"ReduceAction1553", /* class_name_string */
 3,
 0,
-&resolution_table_parser__ReduceAction903,
+&resolution_table_parser__ReduceAction1553,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1405, /* ReduceAction903 */
+244, /* ReduceAction */
+1405, /* ReduceAction1553 */
 },
 };
-const struct types resolution_table_parser__ReduceAction903 = {
+const struct types resolution_table_parser__ReduceAction1553 = {
 0, /* dummy */
 {
 }
 };
-/* runtime type ReduceAction904 */
-const struct type type_parser__ReduceAction904 = {
+/* runtime type ReduceAction1554 */
+const struct type type_parser__ReduceAction1554 = {
 1406,
-"ReduceAction904", /* class_name_string */
+"ReduceAction1554", /* class_name_string */
 3,
 0,
-&resolution_table_parser__ReduceAction904,
+&resolution_table_parser__ReduceAction1554,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1406, /* ReduceAction904 */
+244, /* ReduceAction */
+1406, /* ReduceAction1554 */
 },
 };
-const struct types resolution_table_parser__ReduceAction904 = {
+const struct types resolution_table_parser__ReduceAction1554 = {
 0, /* dummy */
 {
 }
 };
-/* runtime type ReduceAction905 */
-const struct type type_parser__ReduceAction905 = {
+/* runtime type ReduceAction1555 */
+const struct type type_parser__ReduceAction1555 = {
 1407,
-"ReduceAction905", /* class_name_string */
+"ReduceAction1555", /* class_name_string */
 3,
 0,
-&resolution_table_parser__ReduceAction905,
+&resolution_table_parser__ReduceAction1555,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1407, /* ReduceAction905 */
+244, /* ReduceAction */
+1407, /* ReduceAction1555 */
 },
 };
-const struct types resolution_table_parser__ReduceAction905 = {
+const struct types resolution_table_parser__ReduceAction1555 = {
 0, /* dummy */
 {
 }
 };
-/* runtime type ReduceAction907 */
-const struct type type_parser__ReduceAction907 = {
+/* runtime type ReduceAction1557 */
+const struct type type_parser__ReduceAction1557 = {
 1408,
-"ReduceAction907", /* class_name_string */
+"ReduceAction1557", /* class_name_string */
 3,
 0,
-&resolution_table_parser__ReduceAction907,
+&resolution_table_parser__ReduceAction1557,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1408, /* ReduceAction907 */
+244, /* ReduceAction */
+1408, /* ReduceAction1557 */
 },
 };
-const struct types resolution_table_parser__ReduceAction907 = {
+const struct types resolution_table_parser__ReduceAction1557 = {
 0, /* dummy */
 {
 }
 };
-/* runtime type ReduceAction908 */
-const struct type type_parser__ReduceAction908 = {
+/* runtime type ReduceAction1558 */
+const struct type type_parser__ReduceAction1558 = {
 1409,
-"ReduceAction908", /* class_name_string */
+"ReduceAction1558", /* class_name_string */
 3,
 0,
-&resolution_table_parser__ReduceAction908,
+&resolution_table_parser__ReduceAction1558,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1409, /* ReduceAction908 */
+244, /* ReduceAction */
+1409, /* ReduceAction1558 */
 },
 };
-const struct types resolution_table_parser__ReduceAction908 = {
+const struct types resolution_table_parser__ReduceAction1558 = {
 0, /* dummy */
 {
 }
 };
-/* runtime type ReduceAction909 */
-const struct type type_parser__ReduceAction909 = {
+/* runtime type ReduceAction1559 */
+const struct type type_parser__ReduceAction1559 = {
 1410,
-"ReduceAction909", /* class_name_string */
+"ReduceAction1559", /* class_name_string */
 3,
 0,
-&resolution_table_parser__ReduceAction909,
+&resolution_table_parser__ReduceAction1559,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1410, /* ReduceAction909 */
+244, /* ReduceAction */
+1410, /* ReduceAction1559 */
 },
 };
-const struct types resolution_table_parser__ReduceAction909 = {
+const struct types resolution_table_parser__ReduceAction1559 = {
 0, /* dummy */
 {
 }
 };
-/* runtime type ReduceAction911 */
-const struct type type_parser__ReduceAction911 = {
+/* runtime type ReduceAction1560 */
+const struct type type_parser__ReduceAction1560 = {
 1411,
-"ReduceAction911", /* class_name_string */
+"ReduceAction1560", /* class_name_string */
 3,
 0,
-&resolution_table_parser__ReduceAction911,
+&resolution_table_parser__ReduceAction1560,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1411, /* ReduceAction911 */
+244, /* ReduceAction */
+1411, /* ReduceAction1560 */
 },
 };
-const struct types resolution_table_parser__ReduceAction911 = {
+const struct types resolution_table_parser__ReduceAction1560 = {
 0, /* dummy */
 {
 }
 };
-/* runtime type ReduceAction914 */
-const struct type type_parser__ReduceAction914 = {
+/* runtime type ReduceAction1561 */
+const struct type type_parser__ReduceAction1561 = {
 1412,
-"ReduceAction914", /* class_name_string */
+"ReduceAction1561", /* class_name_string */
 3,
 0,
-&resolution_table_parser__ReduceAction914,
+&resolution_table_parser__ReduceAction1561,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1412, /* ReduceAction914 */
+244, /* ReduceAction */
+1412, /* ReduceAction1561 */
 },
 };
-const struct types resolution_table_parser__ReduceAction914 = {
+const struct types resolution_table_parser__ReduceAction1561 = {
 0, /* dummy */
 {
 }
 };
-/* runtime type ReduceAction915 */
-const struct type type_parser__ReduceAction915 = {
+/* runtime type ReduceAction1563 */
+const struct type type_parser__ReduceAction1563 = {
 1413,
-"ReduceAction915", /* class_name_string */
+"ReduceAction1563", /* class_name_string */
 3,
 0,
-&resolution_table_parser__ReduceAction915,
+&resolution_table_parser__ReduceAction1563,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1413, /* ReduceAction915 */
+244, /* ReduceAction */
+1413, /* ReduceAction1563 */
 },
 };
-const struct types resolution_table_parser__ReduceAction915 = {
+const struct types resolution_table_parser__ReduceAction1563 = {
 0, /* dummy */
 {
 }
 };
-/* runtime type ReduceAction916 */
-const struct type type_parser__ReduceAction916 = {
+/* runtime type ReduceAction1567 */
+const struct type type_parser__ReduceAction1567 = {
 1414,
-"ReduceAction916", /* class_name_string */
+"ReduceAction1567", /* class_name_string */
 3,
 0,
-&resolution_table_parser__ReduceAction916,
+&resolution_table_parser__ReduceAction1567,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1414, /* ReduceAction916 */
+244, /* ReduceAction */
+1414, /* ReduceAction1567 */
 },
 };
-const struct types resolution_table_parser__ReduceAction916 = {
+const struct types resolution_table_parser__ReduceAction1567 = {
 0, /* dummy */
 {
 }
 };
-/* runtime type ReduceAction917 */
-const struct type type_parser__ReduceAction917 = {
+/* runtime type ReduceAction1571 */
+const struct type type_parser__ReduceAction1571 = {
 1415,
-"ReduceAction917", /* class_name_string */
+"ReduceAction1571", /* class_name_string */
 3,
 0,
-&resolution_table_parser__ReduceAction917,
+&resolution_table_parser__ReduceAction1571,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1415, /* ReduceAction917 */
+244, /* ReduceAction */
+1415, /* ReduceAction1571 */
 },
 };
-const struct types resolution_table_parser__ReduceAction917 = {
+const struct types resolution_table_parser__ReduceAction1571 = {
 0, /* dummy */
 {
 }
 };
-/* runtime type ReduceAction918 */
-const struct type type_parser__ReduceAction918 = {
+/* runtime type ReduceAction1572 */
+const struct type type_parser__ReduceAction1572 = {
 1416,
-"ReduceAction918", /* class_name_string */
+"ReduceAction1572", /* class_name_string */
 3,
 0,
-&resolution_table_parser__ReduceAction918,
+&resolution_table_parser__ReduceAction1572,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1416, /* ReduceAction918 */
+244, /* ReduceAction */
+1416, /* ReduceAction1572 */
 },
 };
-const struct types resolution_table_parser__ReduceAction918 = {
+const struct types resolution_table_parser__ReduceAction1572 = {
 0, /* dummy */
 {
 }
 };
-/* runtime type ReduceAction919 */
-const struct type type_parser__ReduceAction919 = {
+/* runtime type ReduceAction1573 */
+const struct type type_parser__ReduceAction1573 = {
 1417,
-"ReduceAction919", /* class_name_string */
+"ReduceAction1573", /* class_name_string */
 3,
 0,
-&resolution_table_parser__ReduceAction919,
+&resolution_table_parser__ReduceAction1573,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1417, /* ReduceAction919 */
+244, /* ReduceAction */
+1417, /* ReduceAction1573 */
 },
 };
-const struct types resolution_table_parser__ReduceAction919 = {
+const struct types resolution_table_parser__ReduceAction1573 = {
 0, /* dummy */
 {
 }
 };
-/* runtime type ReduceAction920 */
-const struct type type_parser__ReduceAction920 = {
+/* runtime type ReduceAction1574 */
+const struct type type_parser__ReduceAction1574 = {
 1418,
-"ReduceAction920", /* class_name_string */
+"ReduceAction1574", /* class_name_string */
 3,
 0,
-&resolution_table_parser__ReduceAction920,
+&resolution_table_parser__ReduceAction1574,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1418, /* ReduceAction920 */
+244, /* ReduceAction */
+1418, /* ReduceAction1574 */
 },
 };
-const struct types resolution_table_parser__ReduceAction920 = {
+const struct types resolution_table_parser__ReduceAction1574 = {
 0, /* dummy */
 {
 }
 };
-/* runtime type ReduceAction921 */
-const struct type type_parser__ReduceAction921 = {
+/* runtime type ReduceAction1575 */
+const struct type type_parser__ReduceAction1575 = {
 1419,
-"ReduceAction921", /* class_name_string */
+"ReduceAction1575", /* class_name_string */
 3,
 0,
-&resolution_table_parser__ReduceAction921,
+&resolution_table_parser__ReduceAction1575,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-246, /* ReduceAction */
-1419, /* ReduceAction921 */
+244, /* ReduceAction */
+1419, /* ReduceAction1575 */
 },
 };
-const struct types resolution_table_parser__ReduceAction921 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction922 */
-const struct type type_parser__ReduceAction922 = {
-1420,
-"ReduceAction922", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction922,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1420, /* ReduceAction922 */
-},
-};
-const struct types resolution_table_parser__ReduceAction922 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction923 */
-const struct type type_parser__ReduceAction923 = {
-1421,
-"ReduceAction923", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction923,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1421, /* ReduceAction923 */
-},
-};
-const struct types resolution_table_parser__ReduceAction923 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction924 */
-const struct type type_parser__ReduceAction924 = {
-1422,
-"ReduceAction924", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction924,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1422, /* ReduceAction924 */
-},
-};
-const struct types resolution_table_parser__ReduceAction924 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction925 */
-const struct type type_parser__ReduceAction925 = {
-1423,
-"ReduceAction925", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction925,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1423, /* ReduceAction925 */
-},
-};
-const struct types resolution_table_parser__ReduceAction925 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction926 */
-const struct type type_parser__ReduceAction926 = {
-1424,
-"ReduceAction926", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction926,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1424, /* ReduceAction926 */
-},
-};
-const struct types resolution_table_parser__ReduceAction926 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction928 */
-const struct type type_parser__ReduceAction928 = {
-1425,
-"ReduceAction928", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction928,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1425, /* ReduceAction928 */
-},
-};
-const struct types resolution_table_parser__ReduceAction928 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction929 */
-const struct type type_parser__ReduceAction929 = {
-1426,
-"ReduceAction929", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction929,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1426, /* ReduceAction929 */
-},
-};
-const struct types resolution_table_parser__ReduceAction929 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction931 */
-const struct type type_parser__ReduceAction931 = {
-1427,
-"ReduceAction931", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction931,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1427, /* ReduceAction931 */
-},
-};
-const struct types resolution_table_parser__ReduceAction931 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction932 */
-const struct type type_parser__ReduceAction932 = {
-1428,
-"ReduceAction932", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction932,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1428, /* ReduceAction932 */
-},
-};
-const struct types resolution_table_parser__ReduceAction932 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction933 */
-const struct type type_parser__ReduceAction933 = {
-1429,
-"ReduceAction933", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction933,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1429, /* ReduceAction933 */
-},
-};
-const struct types resolution_table_parser__ReduceAction933 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction934 */
-const struct type type_parser__ReduceAction934 = {
-1430,
-"ReduceAction934", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction934,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1430, /* ReduceAction934 */
-},
-};
-const struct types resolution_table_parser__ReduceAction934 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction1317 */
-const struct type type_parser__ReduceAction1317 = {
-1431,
-"ReduceAction1317", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction1317,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1431, /* ReduceAction1317 */
-},
-};
-const struct types resolution_table_parser__ReduceAction1317 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction1318 */
-const struct type type_parser__ReduceAction1318 = {
-1432,
-"ReduceAction1318", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction1318,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1432, /* ReduceAction1318 */
-},
-};
-const struct types resolution_table_parser__ReduceAction1318 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction1321 */
-const struct type type_parser__ReduceAction1321 = {
-1433,
-"ReduceAction1321", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction1321,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1433, /* ReduceAction1321 */
-},
-};
-const struct types resolution_table_parser__ReduceAction1321 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction1322 */
-const struct type type_parser__ReduceAction1322 = {
-1434,
-"ReduceAction1322", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction1322,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1434, /* ReduceAction1322 */
-},
-};
-const struct types resolution_table_parser__ReduceAction1322 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction1325 */
-const struct type type_parser__ReduceAction1325 = {
-1435,
-"ReduceAction1325", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction1325,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1435, /* ReduceAction1325 */
-},
-};
-const struct types resolution_table_parser__ReduceAction1325 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction1326 */
-const struct type type_parser__ReduceAction1326 = {
-1436,
-"ReduceAction1326", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction1326,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1436, /* ReduceAction1326 */
-},
-};
-const struct types resolution_table_parser__ReduceAction1326 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction1333 */
-const struct type type_parser__ReduceAction1333 = {
-1437,
-"ReduceAction1333", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction1333,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1437, /* ReduceAction1333 */
-},
-};
-const struct types resolution_table_parser__ReduceAction1333 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction1357 */
-const struct type type_parser__ReduceAction1357 = {
-1438,
-"ReduceAction1357", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction1357,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1438, /* ReduceAction1357 */
-},
-};
-const struct types resolution_table_parser__ReduceAction1357 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction1358 */
-const struct type type_parser__ReduceAction1358 = {
-1439,
-"ReduceAction1358", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction1358,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1439, /* ReduceAction1358 */
-},
-};
-const struct types resolution_table_parser__ReduceAction1358 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction1772 */
-const struct type type_parser__ReduceAction1772 = {
-1440,
-"ReduceAction1772", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction1772,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1440, /* ReduceAction1772 */
-},
-};
-const struct types resolution_table_parser__ReduceAction1772 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction1773 */
-const struct type type_parser__ReduceAction1773 = {
-1441,
-"ReduceAction1773", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction1773,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1441, /* ReduceAction1773 */
-},
-};
-const struct types resolution_table_parser__ReduceAction1773 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction1774 */
-const struct type type_parser__ReduceAction1774 = {
-1442,
-"ReduceAction1774", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction1774,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1442, /* ReduceAction1774 */
-},
-};
-const struct types resolution_table_parser__ReduceAction1774 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction1775 */
-const struct type type_parser__ReduceAction1775 = {
-1443,
-"ReduceAction1775", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction1775,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1443, /* ReduceAction1775 */
-},
-};
-const struct types resolution_table_parser__ReduceAction1775 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction1776 */
-const struct type type_parser__ReduceAction1776 = {
-1444,
-"ReduceAction1776", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction1776,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1444, /* ReduceAction1776 */
-},
-};
-const struct types resolution_table_parser__ReduceAction1776 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction1777 */
-const struct type type_parser__ReduceAction1777 = {
-1445,
-"ReduceAction1777", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction1777,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1445, /* ReduceAction1777 */
-},
-};
-const struct types resolution_table_parser__ReduceAction1777 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction1778 */
-const struct type type_parser__ReduceAction1778 = {
-1446,
-"ReduceAction1778", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction1778,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1446, /* ReduceAction1778 */
-},
-};
-const struct types resolution_table_parser__ReduceAction1778 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction1779 */
-const struct type type_parser__ReduceAction1779 = {
-1447,
-"ReduceAction1779", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction1779,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1447, /* ReduceAction1779 */
-},
-};
-const struct types resolution_table_parser__ReduceAction1779 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction1780 */
-const struct type type_parser__ReduceAction1780 = {
-1448,
-"ReduceAction1780", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction1780,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1448, /* ReduceAction1780 */
-},
-};
-const struct types resolution_table_parser__ReduceAction1780 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction1781 */
-const struct type type_parser__ReduceAction1781 = {
-1449,
-"ReduceAction1781", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction1781,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1449, /* ReduceAction1781 */
-},
-};
-const struct types resolution_table_parser__ReduceAction1781 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction1784 */
-const struct type type_parser__ReduceAction1784 = {
-1450,
-"ReduceAction1784", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction1784,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1450, /* ReduceAction1784 */
-},
-};
-const struct types resolution_table_parser__ReduceAction1784 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction1785 */
-const struct type type_parser__ReduceAction1785 = {
-1451,
-"ReduceAction1785", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction1785,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1451, /* ReduceAction1785 */
-},
-};
-const struct types resolution_table_parser__ReduceAction1785 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction1786 */
-const struct type type_parser__ReduceAction1786 = {
-1452,
-"ReduceAction1786", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction1786,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1452, /* ReduceAction1786 */
-},
-};
-const struct types resolution_table_parser__ReduceAction1786 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction1787 */
-const struct type type_parser__ReduceAction1787 = {
-1453,
-"ReduceAction1787", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction1787,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1453, /* ReduceAction1787 */
-},
-};
-const struct types resolution_table_parser__ReduceAction1787 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction1788 */
-const struct type type_parser__ReduceAction1788 = {
-1454,
-"ReduceAction1788", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction1788,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1454, /* ReduceAction1788 */
-},
-};
-const struct types resolution_table_parser__ReduceAction1788 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction1789 */
-const struct type type_parser__ReduceAction1789 = {
-1455,
-"ReduceAction1789", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction1789,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1455, /* ReduceAction1789 */
-},
-};
-const struct types resolution_table_parser__ReduceAction1789 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction1790 */
-const struct type type_parser__ReduceAction1790 = {
-1456,
-"ReduceAction1790", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction1790,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1456, /* ReduceAction1790 */
-},
-};
-const struct types resolution_table_parser__ReduceAction1790 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction1791 */
-const struct type type_parser__ReduceAction1791 = {
-1457,
-"ReduceAction1791", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction1791,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1457, /* ReduceAction1791 */
-},
-};
-const struct types resolution_table_parser__ReduceAction1791 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction1793 */
-const struct type type_parser__ReduceAction1793 = {
-1458,
-"ReduceAction1793", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction1793,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1458, /* ReduceAction1793 */
-},
-};
-const struct types resolution_table_parser__ReduceAction1793 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction1794 */
-const struct type type_parser__ReduceAction1794 = {
-1459,
-"ReduceAction1794", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction1794,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1459, /* ReduceAction1794 */
-},
-};
-const struct types resolution_table_parser__ReduceAction1794 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction1795 */
-const struct type type_parser__ReduceAction1795 = {
-1460,
-"ReduceAction1795", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction1795,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1460, /* ReduceAction1795 */
-},
-};
-const struct types resolution_table_parser__ReduceAction1795 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction1797 */
-const struct type type_parser__ReduceAction1797 = {
-1461,
-"ReduceAction1797", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction1797,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1461, /* ReduceAction1797 */
-},
-};
-const struct types resolution_table_parser__ReduceAction1797 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction1799 */
-const struct type type_parser__ReduceAction1799 = {
-1462,
-"ReduceAction1799", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction1799,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1462, /* ReduceAction1799 */
-},
-};
-const struct types resolution_table_parser__ReduceAction1799 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction1803 */
-const struct type type_parser__ReduceAction1803 = {
-1463,
-"ReduceAction1803", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction1803,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1463, /* ReduceAction1803 */
-},
-};
-const struct types resolution_table_parser__ReduceAction1803 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction1807 */
-const struct type type_parser__ReduceAction1807 = {
-1464,
-"ReduceAction1807", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction1807,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1464, /* ReduceAction1807 */
-},
-};
-const struct types resolution_table_parser__ReduceAction1807 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction1808 */
-const struct type type_parser__ReduceAction1808 = {
-1465,
-"ReduceAction1808", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction1808,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1465, /* ReduceAction1808 */
-},
-};
-const struct types resolution_table_parser__ReduceAction1808 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction1809 */
-const struct type type_parser__ReduceAction1809 = {
-1466,
-"ReduceAction1809", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction1809,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1466, /* ReduceAction1809 */
-},
-};
-const struct types resolution_table_parser__ReduceAction1809 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction1810 */
-const struct type type_parser__ReduceAction1810 = {
-1467,
-"ReduceAction1810", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction1810,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1467, /* ReduceAction1810 */
-},
-};
-const struct types resolution_table_parser__ReduceAction1810 = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ReduceAction1811 */
-const struct type type_parser__ReduceAction1811 = {
-1468,
-"ReduceAction1811", /* class_name_string */
-3,
-0,
-&resolution_table_parser__ReduceAction1811,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-246, /* ReduceAction */
-1468, /* ReduceAction1811 */
-},
-};
-const struct types resolution_table_parser__ReduceAction1811 = {
+const struct types resolution_table_parser__ReduceAction1575 = {
 0, /* dummy */
 {
 }
 };
 /* runtime type State */
 const struct type type_parser__State = {
-247,
+245,
 "State", /* class_name_string */
 2,
 0,
@@ -4375,7 +3435,7 @@ const struct type type_parser__State = {
 {
 0, /* nullable Object */
 1, /* Object */
-247, /* State */
+245, /* State */
 },
 };
 const struct types resolution_table_parser__State = {
@@ -4385,7 +3445,7 @@ const struct types resolution_table_parser__State = {
 };
 /* runtime type ANodes[AImport] */
 const struct type type_parser_nodes__ANodesparser_nodes__AImport = {
-2470,
+2429,
 "ANodes[AImport]", /* class_name_string */
 6,
 0,
@@ -4394,12 +3454,12 @@ const struct type type_parser_nodes__ANodesparser_nodes__AImport = {
 {
 0, /* nullable Object */
 1, /* Object */
-598, /* Collection[ANode] */
-165, /* SequenceRead[nullable Object] */
-166, /* Collection[Object] */
-1789, /* Collection[Prod] */
-2470, /* ANodes[AImport] */
-1984, /* Collection[AImport] */
+596, /* Collection[ANode] */
+163, /* SequenceRead[nullable Object] */
+164, /* Collection[Object] */
+1739, /* Collection[Prod] */
+2429, /* ANodes[AImport] */
+1933, /* Collection[AImport] */
 },
 };
 const struct types resolution_table_parser_nodes__ANodesparser_nodes__AImport = {
@@ -4424,7 +3484,7 @@ NULL, /* empty */
 };
 /* runtime type Collection[AImport] */
 const struct type type_abstract_collection__Collectionparser_nodes__AImport = {
-1984,
+1933,
 "Collection[AImport]", /* class_name_string */
 7,
 0,
@@ -4433,17 +3493,17 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-598, /* Collection[ANode] */
+596, /* Collection[ANode] */
 -1, /* empty */
-166, /* Collection[Object] */
-1789, /* Collection[Prod] */
+164, /* Collection[Object] */
+1739, /* Collection[Prod] */
 -1, /* empty */
-1984, /* Collection[AImport] */
+1933, /* Collection[AImport] */
 },
 };
 /* runtime type MVisibility */
 const struct type type_model_base__MVisibility = {
-248,
+246,
 "MVisibility", /* class_name_string */
 2,
 0,
@@ -4452,7 +3512,7 @@ const struct type type_model_base__MVisibility = {
 {
 0, /* nullable Object */
 1, /* Object */
-248, /* MVisibility */
+246, /* MVisibility */
 },
 };
 const struct types resolution_table_model_base__MVisibility = {
@@ -4463,7 +3523,7 @@ const struct types resolution_table_model_base__MVisibility = {
 };
 /* runtime type SimpleMiscVisitor */
 const struct type type_simple_misc_analysis__SimpleMiscVisitor = {
-249,
+247,
 "SimpleMiscVisitor", /* class_name_string */
 2,
 0,
@@ -4472,7 +3532,7 @@ const struct type type_simple_misc_analysis__SimpleMiscVisitor = {
 {
 0, /* nullable Object */
 1, /* Object */
-249, /* SimpleMiscVisitor */
+247, /* SimpleMiscVisitor */
 },
 };
 const struct types resolution_table_simple_misc_analysis__SimpleMiscVisitor = {
@@ -4482,7 +3542,7 @@ const struct types resolution_table_simple_misc_analysis__SimpleMiscVisitor = {
 };
 /* runtime type LiteralVisitor */
 const struct type type_literal__LiteralVisitor = {
-250,
+248,
 "LiteralVisitor", /* class_name_string */
 2,
 0,
@@ -4491,7 +3551,7 @@ const struct type type_literal__LiteralVisitor = {
 {
 0, /* nullable Object */
 1, /* Object */
-250, /* LiteralVisitor */
+248, /* LiteralVisitor */
 },
 };
 const struct types resolution_table_literal__LiteralVisitor = {
@@ -4501,7 +3561,7 @@ const struct types resolution_table_literal__LiteralVisitor = {
 };
 /* runtime type HashMap[MClass, MClassType] */
 const struct type type_hash_collection__HashMapmodel__MClassmodel__MClassType = {
-251,
+249,
 "HashMap[MClass, MClassType]", /* class_name_string */
 2,
 0,
@@ -4510,7 +3570,7 @@ const struct type type_hash_collection__HashMapmodel__MClassmodel__MClassType = 
 {
 0, /* nullable Object */
 1, /* Object */
-251, /* HashMap[MClass, MClassType] */
+249, /* HashMap[MClass, MClassType] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapmodel__MClassmodel__MClassType = {
@@ -4536,7 +3596,7 @@ NULL, /* empty (Map[Map#0, Map#1]: Map[MClass, MClassType] not a live type) */
 };
 /* runtime type ArrayMap[MClass, AType] */
 const struct type type_array__ArrayMapmodel__MClassparser_nodes__AType = {
-252,
+250,
 "ArrayMap[MClass, AType]", /* class_name_string */
 2,
 0,
@@ -4545,7 +3605,7 @@ const struct type type_array__ArrayMapmodel__MClassparser_nodes__AType = {
 {
 0, /* nullable Object */
 1, /* Object */
-252, /* ArrayMap[MClass, AType] */
+250, /* ArrayMap[MClass, AType] */
 },
 };
 const struct types resolution_table_array__ArrayMapmodel__MClassparser_nodes__AType = {
@@ -4569,7 +3629,7 @@ NULL, /* empty (Map[Map#0, Map#1]: Map[MClass, AType] not a live type) */
 };
 /* runtime type ScopeVisitor */
 const struct type type_scope__ScopeVisitor = {
-253,
+251,
 "ScopeVisitor", /* class_name_string */
 2,
 0,
@@ -4578,7 +3638,7 @@ const struct type type_scope__ScopeVisitor = {
 {
 0, /* nullable Object */
 1, /* Object */
-253, /* ScopeVisitor */
+251, /* ScopeVisitor */
 },
 };
 const struct types resolution_table_scope__ScopeVisitor = {
@@ -4588,7 +3648,7 @@ const struct types resolution_table_scope__ScopeVisitor = {
 };
 /* runtime type Variable */
 const struct type type_scope__Variable = {
-254,
+252,
 "Variable", /* class_name_string */
 2,
 0,
@@ -4597,7 +3657,7 @@ const struct type type_scope__Variable = {
 {
 0, /* nullable Object */
 1, /* Object */
-254, /* Variable */
+252, /* Variable */
 },
 };
 const struct types resolution_table_scope__Variable = {
@@ -4607,7 +3667,7 @@ const struct types resolution_table_scope__Variable = {
 };
 /* runtime type List[Scope] */
 const struct type type_list__Listscope__Scope = {
-1985,
+1934,
 "List[Scope]", /* class_name_string */
 5,
 0,
@@ -4616,10 +3676,10 @@ const struct type type_list__Listscope__Scope = {
 {
 0, /* nullable Object */
 1, /* Object */
-1469, /* Collection[Scope] */
-165, /* SequenceRead[nullable Object] */
-166, /* Collection[Object] */
-1985, /* List[Scope] */
+1420, /* Collection[Scope] */
+163, /* SequenceRead[nullable Object] */
+164, /* Collection[Object] */
+1934, /* List[Scope] */
 },
 };
 const struct types resolution_table_list__Listscope__Scope = {
@@ -4644,7 +3704,7 @@ NULL, /* empty */
 };
 /* runtime type Collection[Scope] */
 const struct type type_abstract_collection__Collectionscope__Scope = {
-1469,
+1420,
 "Collection[Scope]", /* class_name_string */
 2,
 0,
@@ -4653,14 +3713,14 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-1469, /* Collection[Scope] */
+1420, /* Collection[Scope] */
 -1, /* empty */
-166, /* Collection[Object] */
+164, /* Collection[Object] */
 },
 };
 /* runtime type FlowVisitor */
 const struct type type_flow__FlowVisitor = {
-255,
+253,
 "FlowVisitor", /* class_name_string */
 2,
 0,
@@ -4669,7 +3729,7 @@ const struct type type_flow__FlowVisitor = {
 {
 0, /* nullable Object */
 1, /* Object */
-255, /* FlowVisitor */
+253, /* FlowVisitor */
 },
 };
 const struct types resolution_table_flow__FlowVisitor = {
@@ -4679,7 +3739,7 @@ const struct types resolution_table_flow__FlowVisitor = {
 };
 /* runtime type Array[FlowContext] */
 const struct type type_array__Arrayflow__FlowContext = {
-2567,
+2501,
 "Array[FlowContext]", /* class_name_string */
 7,
 0,
@@ -4688,14 +3748,14 @@ const struct type type_array__Arrayflow__FlowContext = {
 {
 0, /* nullable Object */
 1, /* Object */
-1470, /* Collection[FlowContext] */
-165, /* SequenceRead[nullable Object] */
-166, /* Collection[Object] */
-2280, /* AbstractArrayRead[FlowContext] */
-1778, /* AbstractArrayRead[Object] */
-2567, /* Array[FlowContext] */
+1421, /* Collection[FlowContext] */
+163, /* SequenceRead[nullable Object] */
+164, /* Collection[Object] */
+2221, /* AbstractArrayRead[FlowContext] */
+1728, /* AbstractArrayRead[Object] */
+2501, /* Array[FlowContext] */
 -1, /* empty */
-1962, /* Array[Object] */
+1911, /* Array[Object] */
 },
 };
 const struct types resolution_table_array__Arrayflow__FlowContext = {
@@ -4724,7 +3784,7 @@ NULL, /* empty (AbstractArray[AbstractArrayRead#0]: AbstractArray[FlowContext] n
 };
 /* runtime type Collection[FlowContext] */
 const struct type type_abstract_collection__Collectionflow__FlowContext = {
-1470,
+1421,
 "Collection[FlowContext]", /* class_name_string */
 2,
 0,
@@ -4733,14 +3793,14 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-1470, /* Collection[FlowContext] */
+1421, /* Collection[FlowContext] */
 -1, /* empty */
-166, /* Collection[Object] */
+164, /* Collection[Object] */
 },
 };
 /* runtime type AbstractArrayRead[FlowContext] */
 const struct type type_array__AbstractArrayReadflow__FlowContext = {
-2280,
+2221,
 "AbstractArrayRead[FlowContext]", /* class_name_string */
 5,
 0,
@@ -4749,16 +3809,16 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-1470, /* Collection[FlowContext] */
-165, /* SequenceRead[nullable Object] */
-166, /* Collection[Object] */
-2280, /* AbstractArrayRead[FlowContext] */
-1778, /* AbstractArrayRead[Object] */
+1421, /* Collection[FlowContext] */
+163, /* SequenceRead[nullable Object] */
+164, /* Collection[Object] */
+2221, /* AbstractArrayRead[FlowContext] */
+1728, /* AbstractArrayRead[Object] */
 },
 };
 /* runtime type LocalVarInitVisitor */
 const struct type type_local_var_init__LocalVarInitVisitor = {
-256,
+254,
 "LocalVarInitVisitor", /* class_name_string */
 2,
 0,
@@ -4767,7 +3827,7 @@ const struct type type_local_var_init__LocalVarInitVisitor = {
 {
 0, /* nullable Object */
 1, /* Object */
-256, /* LocalVarInitVisitor */
+254, /* LocalVarInitVisitor */
 },
 };
 const struct types resolution_table_local_var_init__LocalVarInitVisitor = {
@@ -4777,7 +3837,7 @@ const struct types resolution_table_local_var_init__LocalVarInitVisitor = {
 };
 /* runtime type HashSet[Variable] */
 const struct type type_hash_collection__HashSetscope__Variable = {
-2281,
+2222,
 "HashSet[Variable]", /* class_name_string */
 5,
 0,
@@ -4786,11 +3846,11 @@ const struct type type_hash_collection__HashSetscope__Variable = {
 {
 0, /* nullable Object */
 1, /* Object */
-1471, /* Collection[Variable] */
-599, /* Set[Object] */
-166, /* Collection[Object] */
-2281, /* HashSet[Variable] */
-1790, /* HashSet[Object] */
+1422, /* Collection[Variable] */
+597, /* Set[Object] */
+164, /* Collection[Object] */
+2222, /* HashSet[Variable] */
+1740, /* HashSet[Object] */
 },
 };
 const struct types resolution_table_hash_collection__HashSetscope__Variable = {
@@ -4816,7 +3876,7 @@ NULL, /* empty */
 };
 /* runtime type Collection[Variable] */
 const struct type type_abstract_collection__Collectionscope__Variable = {
-1471,
+1422,
 "Collection[Variable]", /* class_name_string */
 2,
 0,
@@ -4825,14 +3885,14 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-1471, /* Collection[Variable] */
+1422, /* Collection[Variable] */
 -1, /* empty */
-166, /* Collection[Object] */
+164, /* Collection[Object] */
 },
 };
 /* runtime type AutoSuperInitVisitor */
 const struct type type_auto_super_init__AutoSuperInitVisitor = {
-257,
+255,
 "AutoSuperInitVisitor", /* class_name_string */
 2,
 0,
@@ -4841,7 +3901,7 @@ const struct type type_auto_super_init__AutoSuperInitVisitor = {
 {
 0, /* nullable Object */
 1, /* Object */
-257, /* AutoSuperInitVisitor */
+255, /* AutoSuperInitVisitor */
 },
 };
 const struct types resolution_table_auto_super_init__AutoSuperInitVisitor = {
@@ -4851,7 +3911,7 @@ const struct types resolution_table_auto_super_init__AutoSuperInitVisitor = {
 };
 /* runtime type Array[MMethod] */
 const struct type type_array__Arraymodel__MMethod = {
-2702,
+2632,
 "Array[MMethod]", /* class_name_string */
 17,
 0,
@@ -4860,22 +3920,22 @@ const struct type type_array__Arraymodel__MMethod = {
 {
 0, /* nullable Object */
 1, /* Object */
-174, /* Collection[nullable MProperty] */
-165, /* SequenceRead[nullable Object] */
-166, /* Collection[Object] */
-592, /* Collection[PropertyLayoutElement] */
-1778, /* AbstractArrayRead[Object] */
-1785, /* AbstractArrayRead[nullable MProperty] */
-1964, /* Array[nullable MProperty] */
-1962, /* Array[Object] */
-1965, /* Collection[MProperty] */
-2253, /* AbstractArrayRead[PropertyLayoutElement] */
-2262, /* Collection[MMethod] */
-2547, /* Array[PropertyLayoutElement] */
-2618, /* AbstractArrayRead[MProperty] */
-2664, /* AbstractArrayRead[MMethod] */
-2675, /* Array[MProperty] */
-2702, /* Array[MMethod] */
+172, /* Collection[nullable MProperty] */
+163, /* SequenceRead[nullable Object] */
+164, /* Collection[Object] */
+590, /* Collection[PropertyLayoutElement] */
+1728, /* AbstractArrayRead[Object] */
+1735, /* AbstractArrayRead[nullable MProperty] */
+1913, /* Array[nullable MProperty] */
+1911, /* Array[Object] */
+1914, /* Collection[MProperty] */
+2194, /* AbstractArrayRead[PropertyLayoutElement] */
+2203, /* Collection[MMethod] */
+2481, /* Array[PropertyLayoutElement] */
+2552, /* AbstractArrayRead[MProperty] */
+2596, /* AbstractArrayRead[MMethod] */
+2607, /* Array[MProperty] */
+2632, /* Array[MMethod] */
 },
 };
 const struct types resolution_table_array__Arraymodel__MMethod = {
@@ -4904,7 +3964,7 @@ NULL, /* empty (AbstractArray[AbstractArrayRead#0]: AbstractArray[MMethod] not a
 };
 /* runtime type AbstractArrayRead[MMethod] */
 const struct type type_array__AbstractArrayReadmodel__MMethod = {
-2664,
+2596,
 "AbstractArrayRead[MMethod]", /* class_name_string */
 15,
 0,
@@ -4913,25 +3973,25 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-174, /* Collection[nullable MProperty] */
-165, /* SequenceRead[nullable Object] */
-166, /* Collection[Object] */
-592, /* Collection[PropertyLayoutElement] */
-1778, /* AbstractArrayRead[Object] */
-1785, /* AbstractArrayRead[nullable MProperty] */
+172, /* Collection[nullable MProperty] */
+163, /* SequenceRead[nullable Object] */
+164, /* Collection[Object] */
+590, /* Collection[PropertyLayoutElement] */
+1728, /* AbstractArrayRead[Object] */
+1735, /* AbstractArrayRead[nullable MProperty] */
 -1, /* empty */
 -1, /* empty */
-1965, /* Collection[MProperty] */
-2253, /* AbstractArrayRead[PropertyLayoutElement] */
-2262, /* Collection[MMethod] */
+1914, /* Collection[MProperty] */
+2194, /* AbstractArrayRead[PropertyLayoutElement] */
+2203, /* Collection[MMethod] */
 -1, /* empty */
-2618, /* AbstractArrayRead[MProperty] */
-2664, /* AbstractArrayRead[MMethod] */
+2552, /* AbstractArrayRead[MProperty] */
+2596, /* AbstractArrayRead[MMethod] */
 },
 };
 /* runtime type ASTBuilder */
 const struct type type_astbuilder__ASTBuilder = {
-258,
+256,
 "ASTBuilder", /* class_name_string */
 2,
 0,
@@ -4940,7 +4000,7 @@ const struct type type_astbuilder__ASTBuilder = {
 {
 0, /* nullable Object */
 1, /* Object */
-258, /* ASTBuilder */
+256, /* ASTBuilder */
 },
 };
 const struct types resolution_table_astbuilder__ASTBuilder = {
@@ -4950,7 +4010,7 @@ const struct types resolution_table_astbuilder__ASTBuilder = {
 };
 /* runtime type Array[MParameterType] */
 const struct type type_array__Arraymodel__MParameterType = {
-2700,
+2630,
 "Array[MParameterType]", /* class_name_string */
 14,
 0,
@@ -4960,19 +4020,19 @@ const struct type type_array__Arraymodel__MParameterType = {
 0, /* nullable Object */
 1, /* Object */
 4, /* nullable Array[nullable MType] */
-165, /* SequenceRead[nullable Object] */
-166, /* Collection[Object] */
-175, /* Collection[nullable MType] */
-1778, /* AbstractArrayRead[Object] */
-1787, /* Collection[MType] */
-1794, /* AbstractArrayRead[nullable MType] */
-1962, /* Array[Object] */
-1986, /* Collection[MParameterType] */
-2266, /* Array[nullable MType] */
-2625, /* AbstractArrayRead[MParameterType] */
-2561, /* AbstractArrayRead[MType] */
-2700, /* Array[MParameterType] */
-2662, /* Array[MType] */
+163, /* SequenceRead[nullable Object] */
+164, /* Collection[Object] */
+173, /* Collection[nullable MType] */
+1728, /* AbstractArrayRead[Object] */
+1737, /* Collection[MType] */
+1744, /* AbstractArrayRead[nullable MType] */
+1911, /* Array[Object] */
+1935, /* Collection[MParameterType] */
+2207, /* Array[nullable MType] */
+2559, /* AbstractArrayRead[MParameterType] */
+2495, /* AbstractArrayRead[MType] */
+2630, /* Array[MParameterType] */
+2594, /* Array[MType] */
 },
 };
 const struct types resolution_table_array__Arraymodel__MParameterType = {
@@ -5001,7 +4061,7 @@ NULL, /* empty (AbstractArray[AbstractArrayRead#0]: AbstractArray[MParameterType
 };
 /* runtime type Collection[MParameterType] */
 const struct type type_abstract_collection__Collectionmodel__MParameterType = {
-1986,
+1935,
 "Collection[MParameterType]", /* class_name_string */
 10,
 0,
@@ -5012,18 +4072,18 @@ NULL,
 1, /* Object */
 -1, /* empty */
 -1, /* empty */
-166, /* Collection[Object] */
-175, /* Collection[nullable MType] */
+164, /* Collection[Object] */
+173, /* Collection[nullable MType] */
 -1, /* empty */
-1787, /* Collection[MType] */
+1737, /* Collection[MType] */
 -1, /* empty */
 -1, /* empty */
-1986, /* Collection[MParameterType] */
+1935, /* Collection[MParameterType] */
 },
 };
 /* runtime type AbstractArrayRead[MParameterType] */
 const struct type type_array__AbstractArrayReadmodel__MParameterType = {
-2625,
+2559,
 "AbstractArrayRead[MParameterType]", /* class_name_string */
 12,
 0,
@@ -5033,22 +4093,22 @@ NULL,
 0, /* nullable Object */
 1, /* Object */
 -1, /* empty */
-165, /* SequenceRead[nullable Object] */
-166, /* Collection[Object] */
-175, /* Collection[nullable MType] */
-1778, /* AbstractArrayRead[Object] */
-1787, /* Collection[MType] */
-1794, /* AbstractArrayRead[nullable MType] */
+163, /* SequenceRead[nullable Object] */
+164, /* Collection[Object] */
+173, /* Collection[nullable MType] */
+1728, /* AbstractArrayRead[Object] */
+1737, /* Collection[MType] */
+1744, /* AbstractArrayRead[nullable MType] */
 -1, /* empty */
-1986, /* Collection[MParameterType] */
+1935, /* Collection[MParameterType] */
 -1, /* empty */
-2625, /* AbstractArrayRead[MParameterType] */
-2561, /* AbstractArrayRead[MType] */
+2559, /* AbstractArrayRead[MParameterType] */
+2495, /* AbstractArrayRead[MType] */
 },
 };
 /* runtime type MParameterType */
 const struct type type_model__MParameterType = {
-1801,
+1751,
 "MParameterType", /* class_name_string */
 4,
 0,
@@ -5058,8 +4118,8 @@ const struct type type_model__MParameterType = {
 0, /* nullable Object */
 1, /* Object */
 2, /* nullable MType */
-596, /* MType */
-1801, /* MParameterType */
+594, /* MType */
+1751, /* MParameterType */
 },
 };
 const struct types resolution_table_model__MParameterType = {
@@ -5069,7 +4129,7 @@ const struct types resolution_table_model__MParameterType = {
 };
 /* runtime type POSet[MClass] */
 const struct type type_poset__POSetmodel__MClass = {
-1987,
+1936,
 "POSet[MClass]", /* class_name_string */
 3,
 0,
@@ -5078,10 +4138,10 @@ const struct type type_poset__POSetmodel__MClass = {
 {
 0, /* nullable Object */
 1, /* Object */
-173, /* Collection[nullable MClass] */
-1987, /* POSet[MClass] */
-166, /* Collection[Object] */
-1783, /* Collection[MClass] */
+171, /* Collection[nullable MClass] */
+1936, /* POSet[MClass] */
+164, /* Collection[Object] */
+1733, /* Collection[MClass] */
 },
 };
 const struct types resolution_table_poset__POSetmodel__MClass = {
@@ -5105,7 +4165,7 @@ NULL, /* empty */
 };
 /* runtime type MClassDefSorter */
 const struct type type_model__MClassDefSorter = {
-259,
+257,
 "MClassDefSorter", /* class_name_string */
 2,
 0,
@@ -5114,7 +4174,7 @@ const struct type type_model__MClassDefSorter = {
 {
 0, /* nullable Object */
 1, /* Object */
-259, /* MClassDefSorter */
+257, /* MClassDefSorter */
 },
 };
 const struct types resolution_table_model__MClassDefSorter = {
@@ -5126,7 +4186,7 @@ const struct types resolution_table_model__MClassDefSorter = {
 };
 /* runtime type Frame */
 const struct type type_abstract_compiler__Frame = {
-260,
+258,
 "Frame", /* class_name_string */
 2,
 0,
@@ -5135,7 +4195,7 @@ const struct type type_abstract_compiler__Frame = {
 {
 0, /* nullable Object */
 1, /* Object */
-260, /* Frame */
+258, /* Frame */
 },
 };
 const struct types resolution_table_abstract_compiler__Frame = {
@@ -5146,7 +4206,7 @@ const struct types resolution_table_abstract_compiler__Frame = {
 };
 /* runtime type ArraySet[MType] */
 const struct type type_array__ArraySetmodel__MType = {
-2471,
+2430,
 "ArraySet[MType]", /* class_name_string */
 6,
 0,
@@ -5155,12 +4215,12 @@ const struct type type_array__ArraySetmodel__MType = {
 {
 0, /* nullable Object */
 1, /* Object */
-2259, /* Set[MType] */
-599, /* Set[Object] */
-166, /* Collection[Object] */
-175, /* Collection[nullable MType] */
-2471, /* ArraySet[MType] */
-1787, /* Collection[MType] */
+2200, /* Set[MType] */
+597, /* Set[Object] */
+164, /* Collection[Object] */
+173, /* Collection[nullable MType] */
+2430, /* ArraySet[MType] */
+1737, /* Collection[MType] */
 },
 };
 const struct types resolution_table_array__ArraySetmodel__MType = {
@@ -5184,7 +4244,7 @@ NULL, /* empty */
 };
 /* runtime type MVirtualType */
 const struct type type_model__MVirtualType = {
-1802,
+1752,
 "MVirtualType", /* class_name_string */
 4,
 0,
@@ -5194,8 +4254,8 @@ const struct type type_model__MVirtualType = {
 0, /* nullable Object */
 1, /* Object */
 2, /* nullable MType */
-596, /* MType */
-1802, /* MVirtualType */
+594, /* MType */
+1752, /* MVirtualType */
 },
 };
 const struct types resolution_table_model__MVirtualType = {
@@ -5205,7 +4265,7 @@ const struct types resolution_table_model__MVirtualType = {
 };
 /* runtime type Layout[MType] */
 const struct type type_layout_builders__Layoutmodel__MType = {
-261,
+259,
 "Layout[MType]", /* class_name_string */
 2,
 0,
@@ -5214,7 +4274,7 @@ const struct type type_layout_builders__Layoutmodel__MType = {
 {
 0, /* nullable Object */
 1, /* Object */
-261, /* Layout[MType] */
+259, /* Layout[MType] */
 },
 };
 const struct types resolution_table_layout_builders__Layoutmodel__MType = {
@@ -5226,7 +4286,7 @@ const struct types resolution_table_layout_builders__Layoutmodel__MType = {
 };
 /* runtime type PHLayout[MClassType, MType] */
 const struct type type_layout_builders__PHLayoutmodel__MClassTypemodel__MType = {
-1803,
+1753,
 "PHLayout[MClassType, MType]", /* class_name_string */
 4,
 0,
@@ -5235,9 +4295,9 @@ const struct type type_layout_builders__PHLayoutmodel__MClassTypemodel__MType = 
 {
 0, /* nullable Object */
 1, /* Object */
-261, /* Layout[MType] */
-1472, /* PHLayout[MType, MType] */
-1803, /* PHLayout[MClassType, MType] */
+259, /* Layout[MType] */
+1423, /* PHLayout[MType, MType] */
+1753, /* PHLayout[MClassType, MType] */
 },
 };
 const struct types resolution_table_layout_builders__PHLayoutmodel__MClassTypemodel__MType = {
@@ -5253,7 +4313,7 @@ const struct types resolution_table_layout_builders__PHLayoutmodel__MClassTypemo
 };
 /* runtime type PHLayout[MType, MType] */
 const struct type type_layout_builders__PHLayoutmodel__MTypemodel__MType = {
-1472,
+1423,
 "PHLayout[MType, MType]", /* class_name_string */
 3,
 0,
@@ -5262,8 +4322,8 @@ const struct type type_layout_builders__PHLayoutmodel__MTypemodel__MType = {
 {
 0, /* nullable Object */
 1, /* Object */
-261, /* Layout[MType] */
-1472, /* PHLayout[MType, MType] */
+259, /* Layout[MType] */
+1423, /* PHLayout[MType, MType] */
 },
 };
 const struct types resolution_table_layout_builders__PHLayoutmodel__MTypemodel__MType = {
@@ -5279,7 +4339,7 @@ const struct types resolution_table_layout_builders__PHLayoutmodel__MTypemodel__
 };
 /* runtime type AModule */
 const struct type type_parser_nodes__AModule = {
-1804,
+1754,
 "AModule", /* class_name_string */
 2,
 0,
@@ -5288,9 +4348,9 @@ const struct type type_parser_nodes__AModule = {
 {
 0, /* nullable Object */
 1, /* Object */
-1804, /* AModule */
-225, /* ANode */
-624, /* Prod */
+1754, /* AModule */
+223, /* ANode */
+622, /* Prod */
 },
 };
 const struct types resolution_table_parser_nodes__AModule = {
@@ -5300,7 +4360,7 @@ const struct types resolution_table_parser_nodes__AModule = {
 };
 /* runtime type ANodes[AExternCodeBlock] */
 const struct type type_parser_nodes__ANodesparser_nodes__AExternCodeBlock = {
-2472,
+2431,
 "ANodes[AExternCodeBlock]", /* class_name_string */
 6,
 0,
@@ -5309,12 +4369,12 @@ const struct type type_parser_nodes__ANodesparser_nodes__AExternCodeBlock = {
 {
 0, /* nullable Object */
 1, /* Object */
-598, /* Collection[ANode] */
-165, /* SequenceRead[nullable Object] */
-166, /* Collection[Object] */
-1789, /* Collection[Prod] */
-2472, /* ANodes[AExternCodeBlock] */
-1988, /* Collection[AExternCodeBlock] */
+596, /* Collection[ANode] */
+163, /* SequenceRead[nullable Object] */
+164, /* Collection[Object] */
+1739, /* Collection[Prod] */
+2431, /* ANodes[AExternCodeBlock] */
+1937, /* Collection[AExternCodeBlock] */
 },
 };
 const struct types resolution_table_parser_nodes__ANodesparser_nodes__AExternCodeBlock = {
@@ -5339,7 +4399,7 @@ NULL, /* empty */
 };
 /* runtime type Collection[AExternCodeBlock] */
 const struct type type_abstract_collection__Collectionparser_nodes__AExternCodeBlock = {
-1988,
+1937,
 "Collection[AExternCodeBlock]", /* class_name_string */
 7,
 0,
@@ -5348,17 +4408,17 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-598, /* Collection[ANode] */
+596, /* Collection[ANode] */
 -1, /* empty */
-166, /* Collection[Object] */
-1789, /* Collection[Prod] */
+164, /* Collection[Object] */
+1739, /* Collection[Prod] */
 -1, /* empty */
-1988, /* Collection[AExternCodeBlock] */
+1937, /* Collection[AExternCodeBlock] */
 },
 };
 /* runtime type HashMap[MClass, AClassdef] */
 const struct type type_hash_collection__HashMapmodel__MClassparser_nodes__AClassdef = {
-262,
+260,
 "HashMap[MClass, AClassdef]", /* class_name_string */
 2,
 0,
@@ -5367,7 +4427,7 @@ const struct type type_hash_collection__HashMapmodel__MClassparser_nodes__AClass
 {
 0, /* nullable Object */
 1, /* Object */
-262, /* HashMap[MClass, AClassdef] */
+260, /* HashMap[MClass, AClassdef] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapmodel__MClassparser_nodes__AClassdef = {
@@ -5393,7 +4453,7 @@ NULL, /* empty (Map[Map#0, Map#1]: Map[MClass, AClassdef] not a live type) */
 };
 /* runtime type ATopClassdef */
 const struct type type_parser_nodes__ATopClassdef = {
-2282,
+2223,
 "ATopClassdef", /* class_name_string */
 6,
 0,
@@ -5403,10 +4463,10 @@ const struct type type_parser_nodes__ATopClassdef = {
 0, /* nullable Object */
 1, /* Object */
 6, /* nullable AClassdef */
-225, /* ANode */
-624, /* Prod */
-1989, /* AClassdef */
-2282, /* ATopClassdef */
+223, /* ANode */
+622, /* Prod */
+1938, /* AClassdef */
+2223, /* ATopClassdef */
 },
 };
 const struct types resolution_table_parser_nodes__ATopClassdef = {
@@ -5416,7 +4476,7 @@ const struct types resolution_table_parser_nodes__ATopClassdef = {
 };
 /* runtime type AClassdef */
 const struct type type_parser_nodes__AClassdef = {
-1989,
+1938,
 "AClassdef", /* class_name_string */
 5,
 0,
@@ -5426,9 +4486,9 @@ NULL,
 0, /* nullable Object */
 1, /* Object */
 6, /* nullable AClassdef */
-225, /* ANode */
-624, /* Prod */
-1989, /* AClassdef */
+223, /* ANode */
+622, /* Prod */
+1938, /* AClassdef */
 },
 };
 /* runtime type nullable AClassdef */
@@ -5447,7 +4507,7 @@ NULL,
 };
 /* runtime type HashMap[MProperty, APropdef] */
 const struct type type_hash_collection__HashMapmodel__MPropertyparser_nodes__APropdef = {
-263,
+261,
 "HashMap[MProperty, APropdef]", /* class_name_string */
 2,
 0,
@@ -5456,7 +4516,7 @@ const struct type type_hash_collection__HashMapmodel__MPropertyparser_nodes__APr
 {
 0, /* nullable Object */
 1, /* Object */
-263, /* HashMap[MProperty, APropdef] */
+261, /* HashMap[MProperty, APropdef] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapmodel__MPropertyparser_nodes__APropdef = {
@@ -5482,7 +4542,7 @@ NULL, /* empty (Map[Map#0, Map#1]: Map[MProperty, APropdef] not a live type) */
 };
 /* runtime type AModuledecl */
 const struct type type_parser_nodes__AModuledecl = {
-1990,
+1939,
 "AModuledecl", /* class_name_string */
 5,
 0,
@@ -5492,9 +4552,9 @@ const struct type type_parser_nodes__AModuledecl = {
 0, /* nullable Object */
 1, /* Object */
 7, /* nullable AModuledecl */
-225, /* ANode */
-624, /* Prod */
-1990, /* AModuledecl */
+223, /* ANode */
+622, /* Prod */
+1939, /* AModuledecl */
 },
 };
 const struct types resolution_table_parser_nodes__AModuledecl = {
@@ -5523,7 +4583,7 @@ const struct types resolution_table_nullable_parser_nodes__AModuledecl = {
 };
 /* runtime type AStdImport */
 const struct type type_parser_nodes__AStdImport = {
-1991,
+1940,
 "AStdImport", /* class_name_string */
 5,
 0,
@@ -5532,10 +4592,10 @@ const struct type type_parser_nodes__AStdImport = {
 {
 0, /* nullable Object */
 1, /* Object */
-1805, /* AImport */
-225, /* ANode */
-624, /* Prod */
-1991, /* AStdImport */
+1755, /* AImport */
+223, /* ANode */
+622, /* Prod */
+1940, /* AStdImport */
 },
 };
 const struct types resolution_table_parser_nodes__AStdImport = {
@@ -5545,7 +4605,7 @@ const struct types resolution_table_parser_nodes__AStdImport = {
 };
 /* runtime type AImport */
 const struct type type_parser_nodes__AImport = {
-1805,
+1755,
 "AImport", /* class_name_string */
 2,
 0,
@@ -5554,14 +4614,14 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-1805, /* AImport */
-225, /* ANode */
-624, /* Prod */
+1755, /* AImport */
+223, /* ANode */
+622, /* Prod */
 },
 };
 /* runtime type ANoImport */
 const struct type type_parser_nodes__ANoImport = {
-1992,
+1941,
 "ANoImport", /* class_name_string */
 5,
 0,
@@ -5570,10 +4630,10 @@ const struct type type_parser_nodes__ANoImport = {
 {
 0, /* nullable Object */
 1, /* Object */
-1805, /* AImport */
-225, /* ANode */
-624, /* Prod */
-1992, /* ANoImport */
+1755, /* AImport */
+223, /* ANode */
+622, /* Prod */
+1941, /* ANoImport */
 },
 };
 const struct types resolution_table_parser_nodes__ANoImport = {
@@ -5583,7 +4643,7 @@ const struct types resolution_table_parser_nodes__ANoImport = {
 };
 /* runtime type AMainClassdef */
 const struct type type_parser_nodes__AMainClassdef = {
-2283,
+2224,
 "AMainClassdef", /* class_name_string */
 6,
 0,
@@ -5593,10 +4653,10 @@ const struct type type_parser_nodes__AMainClassdef = {
 0, /* nullable Object */
 1, /* Object */
 6, /* nullable AClassdef */
-225, /* ANode */
-624, /* Prod */
-1989, /* AClassdef */
-2283, /* AMainClassdef */
+223, /* ANode */
+622, /* Prod */
+1938, /* AClassdef */
+2224, /* AMainClassdef */
 },
 };
 const struct types resolution_table_parser_nodes__AMainClassdef = {
@@ -5606,7 +4666,7 @@ const struct types resolution_table_parser_nodes__AMainClassdef = {
 };
 /* runtime type AMainMethPropdef */
 const struct type type_parser_nodes__AMainMethPropdef = {
-2473,
+2432,
 "AMainMethPropdef", /* class_name_string */
 7,
 0,
@@ -5616,11 +4676,11 @@ const struct type type_parser_nodes__AMainMethPropdef = {
 0, /* nullable Object */
 1, /* Object */
 8, /* nullable APropdef */
-225, /* ANode */
-624, /* Prod */
-1993, /* APropdef */
-2284, /* AConcreteMethPropdef */
-2473, /* AMainMethPropdef */
+223, /* ANode */
+622, /* Prod */
+1942, /* APropdef */
+2225, /* AConcreteMethPropdef */
+2432, /* AMainMethPropdef */
 },
 };
 const struct types resolution_table_parser_nodes__AMainMethPropdef = {
@@ -5631,7 +4691,7 @@ const struct types resolution_table_parser_nodes__AMainMethPropdef = {
 };
 /* runtime type AConcreteMethPropdef */
 const struct type type_parser_nodes__AConcreteMethPropdef = {
-2284,
+2225,
 "AConcreteMethPropdef", /* class_name_string */
 6,
 0,
@@ -5641,10 +4701,10 @@ const struct type type_parser_nodes__AConcreteMethPropdef = {
 0, /* nullable Object */
 1, /* Object */
 8, /* nullable APropdef */
-225, /* ANode */
-624, /* Prod */
-1993, /* APropdef */
-2284, /* AConcreteMethPropdef */
+223, /* ANode */
+622, /* Prod */
+1942, /* APropdef */
+2225, /* AConcreteMethPropdef */
 },
 };
 const struct types resolution_table_parser_nodes__AConcreteMethPropdef = {
@@ -5655,7 +4715,7 @@ const struct types resolution_table_parser_nodes__AConcreteMethPropdef = {
 };
 /* runtime type APropdef */
 const struct type type_parser_nodes__APropdef = {
-1993,
+1942,
 "APropdef", /* class_name_string */
 5,
 0,
@@ -5665,9 +4725,9 @@ NULL,
 0, /* nullable Object */
 1, /* Object */
 8, /* nullable APropdef */
-225, /* ANode */
-624, /* Prod */
-1993, /* APropdef */
+223, /* ANode */
+622, /* Prod */
+1942, /* APropdef */
 },
 };
 /* runtime type nullable APropdef */
@@ -5686,7 +4746,7 @@ NULL,
 };
 /* runtime type AStdClassdef */
 const struct type type_parser_nodes__AStdClassdef = {
-2285,
+2226,
 "AStdClassdef", /* class_name_string */
 6,
 0,
@@ -5696,10 +4756,10 @@ const struct type type_parser_nodes__AStdClassdef = {
 0, /* nullable Object */
 1, /* Object */
 6, /* nullable AClassdef */
-225, /* ANode */
-624, /* Prod */
-1989, /* AClassdef */
-2285, /* AStdClassdef */
+223, /* ANode */
+622, /* Prod */
+1938, /* AClassdef */
+2226, /* AStdClassdef */
 },
 };
 const struct types resolution_table_parser_nodes__AStdClassdef = {
@@ -5709,7 +4769,7 @@ const struct types resolution_table_parser_nodes__AStdClassdef = {
 };
 /* runtime type ANodes[AFormaldef] */
 const struct type type_parser_nodes__ANodesparser_nodes__AFormaldef = {
-2474,
+2433,
 "ANodes[AFormaldef]", /* class_name_string */
 6,
 0,
@@ -5718,12 +4778,12 @@ const struct type type_parser_nodes__ANodesparser_nodes__AFormaldef = {
 {
 0, /* nullable Object */
 1, /* Object */
-598, /* Collection[ANode] */
-165, /* SequenceRead[nullable Object] */
-166, /* Collection[Object] */
-1789, /* Collection[Prod] */
-2474, /* ANodes[AFormaldef] */
-1994, /* Collection[AFormaldef] */
+596, /* Collection[ANode] */
+163, /* SequenceRead[nullable Object] */
+164, /* Collection[Object] */
+1739, /* Collection[Prod] */
+2433, /* ANodes[AFormaldef] */
+1943, /* Collection[AFormaldef] */
 },
 };
 const struct types resolution_table_parser_nodes__ANodesparser_nodes__AFormaldef = {
@@ -5748,7 +4808,7 @@ NULL, /* empty */
 };
 /* runtime type Collection[AFormaldef] */
 const struct type type_abstract_collection__Collectionparser_nodes__AFormaldef = {
-1994,
+1943,
 "Collection[AFormaldef]", /* class_name_string */
 7,
 0,
@@ -5757,17 +4817,17 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-598, /* Collection[ANode] */
+596, /* Collection[ANode] */
 -1, /* empty */
-166, /* Collection[Object] */
-1789, /* Collection[Prod] */
+164, /* Collection[Object] */
+1739, /* Collection[Prod] */
 -1, /* empty */
-1994, /* Collection[AFormaldef] */
+1943, /* Collection[AFormaldef] */
 },
 };
 /* runtime type ANodes[ASuperclass] */
 const struct type type_parser_nodes__ANodesparser_nodes__ASuperclass = {
-2475,
+2434,
 "ANodes[ASuperclass]", /* class_name_string */
 6,
 0,
@@ -5776,12 +4836,12 @@ const struct type type_parser_nodes__ANodesparser_nodes__ASuperclass = {
 {
 0, /* nullable Object */
 1, /* Object */
-598, /* Collection[ANode] */
-165, /* SequenceRead[nullable Object] */
-166, /* Collection[Object] */
-1789, /* Collection[Prod] */
-2475, /* ANodes[ASuperclass] */
-1995, /* Collection[ASuperclass] */
+596, /* Collection[ANode] */
+163, /* SequenceRead[nullable Object] */
+164, /* Collection[Object] */
+1739, /* Collection[Prod] */
+2434, /* ANodes[ASuperclass] */
+1944, /* Collection[ASuperclass] */
 },
 };
 const struct types resolution_table_parser_nodes__ANodesparser_nodes__ASuperclass = {
@@ -5806,7 +4866,7 @@ NULL, /* empty */
 };
 /* runtime type Collection[ASuperclass] */
 const struct type type_abstract_collection__Collectionparser_nodes__ASuperclass = {
-1995,
+1944,
 "Collection[ASuperclass]", /* class_name_string */
 7,
 0,
@@ -5815,17 +4875,17 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-598, /* Collection[ANode] */
+596, /* Collection[ANode] */
 -1, /* empty */
-166, /* Collection[Object] */
-1789, /* Collection[Prod] */
+164, /* Collection[Object] */
+1739, /* Collection[Prod] */
 -1, /* empty */
-1995, /* Collection[ASuperclass] */
+1944, /* Collection[ASuperclass] */
 },
 };
 /* runtime type AAnnotations */
 const struct type type_parser_nodes__AAnnotations = {
-1996,
+1945,
 "AAnnotations", /* class_name_string */
 5,
 0,
@@ -5835,9 +4895,9 @@ const struct type type_parser_nodes__AAnnotations = {
 0, /* nullable Object */
 1, /* Object */
 9, /* nullable AAnnotations */
-225, /* ANode */
-624, /* Prod */
-1996, /* AAnnotations */
+223, /* ANode */
+622, /* Prod */
+1945, /* AAnnotations */
 },
 };
 const struct types resolution_table_parser_nodes__AAnnotations = {
@@ -5866,7 +4926,7 @@ const struct types resolution_table_nullable_parser_nodes__AAnnotations = {
 };
 /* runtime type ANodes[AAnnotation] */
 const struct type type_parser_nodes__ANodesparser_nodes__AAnnotation = {
-2476,
+2435,
 "ANodes[AAnnotation]", /* class_name_string */
 6,
 0,
@@ -5875,12 +4935,12 @@ const struct type type_parser_nodes__ANodesparser_nodes__AAnnotation = {
 {
 0, /* nullable Object */
 1, /* Object */
-598, /* Collection[ANode] */
-165, /* SequenceRead[nullable Object] */
-166, /* Collection[Object] */
-1789, /* Collection[Prod] */
-2476, /* ANodes[AAnnotation] */
-1997, /* Collection[AAnnotation] */
+596, /* Collection[ANode] */
+163, /* SequenceRead[nullable Object] */
+164, /* Collection[Object] */
+1739, /* Collection[Prod] */
+2435, /* ANodes[AAnnotation] */
+1946, /* Collection[AAnnotation] */
 },
 };
 const struct types resolution_table_parser_nodes__ANodesparser_nodes__AAnnotation = {
@@ -5905,7 +4965,7 @@ NULL, /* empty */
 };
 /* runtime type Collection[AAnnotation] */
 const struct type type_abstract_collection__Collectionparser_nodes__AAnnotation = {
-1997,
+1946,
 "Collection[AAnnotation]", /* class_name_string */
 7,
 0,
@@ -5914,17 +4974,17 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-598, /* Collection[ANode] */
+596, /* Collection[ANode] */
 -1, /* empty */
-166, /* Collection[Object] */
-1789, /* Collection[Prod] */
+164, /* Collection[Object] */
+1739, /* Collection[Prod] */
 -1, /* empty */
-1997, /* Collection[AAnnotation] */
+1946, /* Collection[AAnnotation] */
 },
 };
 /* runtime type AConcreteClasskind */
 const struct type type_parser_nodes__AConcreteClasskind = {
-2286,
+2227,
 "AConcreteClasskind", /* class_name_string */
 6,
 0,
@@ -5934,10 +4994,10 @@ const struct type type_parser_nodes__AConcreteClasskind = {
 0, /* nullable Object */
 1, /* Object */
 10, /* nullable AClasskind */
-225, /* ANode */
-624, /* Prod */
-1998, /* AClasskind */
-2286, /* AConcreteClasskind */
+223, /* ANode */
+622, /* Prod */
+1947, /* AClasskind */
+2227, /* AConcreteClasskind */
 },
 };
 const struct types resolution_table_parser_nodes__AConcreteClasskind = {
@@ -5947,7 +5007,7 @@ const struct types resolution_table_parser_nodes__AConcreteClasskind = {
 };
 /* runtime type AClasskind */
 const struct type type_parser_nodes__AClasskind = {
-1998,
+1947,
 "AClasskind", /* class_name_string */
 5,
 0,
@@ -5957,9 +5017,9 @@ NULL,
 0, /* nullable Object */
 1, /* Object */
 10, /* nullable AClasskind */
-225, /* ANode */
-624, /* Prod */
-1998, /* AClasskind */
+223, /* ANode */
+622, /* Prod */
+1947, /* AClasskind */
 },
 };
 /* runtime type nullable AClasskind */
@@ -5978,7 +5038,7 @@ NULL,
 };
 /* runtime type AAbstractClasskind */
 const struct type type_parser_nodes__AAbstractClasskind = {
-2287,
+2228,
 "AAbstractClasskind", /* class_name_string */
 6,
 0,
@@ -5988,10 +5048,10 @@ const struct type type_parser_nodes__AAbstractClasskind = {
 0, /* nullable Object */
 1, /* Object */
 10, /* nullable AClasskind */
-225, /* ANode */
-624, /* Prod */
-1998, /* AClasskind */
-2287, /* AAbstractClasskind */
+223, /* ANode */
+622, /* Prod */
+1947, /* AClasskind */
+2228, /* AAbstractClasskind */
 },
 };
 const struct types resolution_table_parser_nodes__AAbstractClasskind = {
@@ -6001,7 +5061,7 @@ const struct types resolution_table_parser_nodes__AAbstractClasskind = {
 };
 /* runtime type AInterfaceClasskind */
 const struct type type_parser_nodes__AInterfaceClasskind = {
-2288,
+2229,
 "AInterfaceClasskind", /* class_name_string */
 6,
 0,
@@ -6011,10 +5071,10 @@ const struct type type_parser_nodes__AInterfaceClasskind = {
 0, /* nullable Object */
 1, /* Object */
 10, /* nullable AClasskind */
-225, /* ANode */
-624, /* Prod */
-1998, /* AClasskind */
-2288, /* AInterfaceClasskind */
+223, /* ANode */
+622, /* Prod */
+1947, /* AClasskind */
+2229, /* AInterfaceClasskind */
 },
 };
 const struct types resolution_table_parser_nodes__AInterfaceClasskind = {
@@ -6024,7 +5084,7 @@ const struct types resolution_table_parser_nodes__AInterfaceClasskind = {
 };
 /* runtime type AEnumClasskind */
 const struct type type_parser_nodes__AEnumClasskind = {
-2289,
+2230,
 "AEnumClasskind", /* class_name_string */
 6,
 0,
@@ -6034,10 +5094,10 @@ const struct type type_parser_nodes__AEnumClasskind = {
 0, /* nullable Object */
 1, /* Object */
 10, /* nullable AClasskind */
-225, /* ANode */
-624, /* Prod */
-1998, /* AClasskind */
-2289, /* AEnumClasskind */
+223, /* ANode */
+622, /* Prod */
+1947, /* AClasskind */
+2230, /* AEnumClasskind */
 },
 };
 const struct types resolution_table_parser_nodes__AEnumClasskind = {
@@ -6047,7 +5107,7 @@ const struct types resolution_table_parser_nodes__AEnumClasskind = {
 };
 /* runtime type AExternClasskind */
 const struct type type_parser_nodes__AExternClasskind = {
-2290,
+2231,
 "AExternClasskind", /* class_name_string */
 6,
 0,
@@ -6057,10 +5117,10 @@ const struct type type_parser_nodes__AExternClasskind = {
 0, /* nullable Object */
 1, /* Object */
 10, /* nullable AClasskind */
-225, /* ANode */
-624, /* Prod */
-1998, /* AClasskind */
-2290, /* AExternClasskind */
+223, /* ANode */
+622, /* Prod */
+1947, /* AClasskind */
+2231, /* AExternClasskind */
 },
 };
 const struct types resolution_table_parser_nodes__AExternClasskind = {
@@ -6070,7 +5130,7 @@ const struct types resolution_table_parser_nodes__AExternClasskind = {
 };
 /* runtime type AFormaldef */
 const struct type type_parser_nodes__AFormaldef = {
-1806,
+1756,
 "AFormaldef", /* class_name_string */
 2,
 0,
@@ -6079,9 +5139,9 @@ const struct type type_parser_nodes__AFormaldef = {
 {
 0, /* nullable Object */
 1, /* Object */
-1806, /* AFormaldef */
-225, /* ANode */
-624, /* Prod */
+1756, /* AFormaldef */
+223, /* ANode */
+622, /* Prod */
 },
 };
 const struct types resolution_table_parser_nodes__AFormaldef = {
@@ -6091,7 +5151,7 @@ const struct types resolution_table_parser_nodes__AFormaldef = {
 };
 /* runtime type ASuperclass */
 const struct type type_parser_nodes__ASuperclass = {
-1807,
+1757,
 "ASuperclass", /* class_name_string */
 2,
 0,
@@ -6100,9 +5160,9 @@ const struct type type_parser_nodes__ASuperclass = {
 {
 0, /* nullable Object */
 1, /* Object */
-1807, /* ASuperclass */
-225, /* ANode */
-624, /* Prod */
+1757, /* ASuperclass */
+223, /* ANode */
+622, /* Prod */
 },
 };
 const struct types resolution_table_parser_nodes__ASuperclass = {
@@ -6112,7 +5172,7 @@ const struct types resolution_table_parser_nodes__ASuperclass = {
 };
 /* runtime type ADeferredMethPropdef */
 const struct type type_parser_nodes__ADeferredMethPropdef = {
-2291,
+2232,
 "ADeferredMethPropdef", /* class_name_string */
 6,
 0,
@@ -6122,10 +5182,10 @@ const struct type type_parser_nodes__ADeferredMethPropdef = {
 0, /* nullable Object */
 1, /* Object */
 8, /* nullable APropdef */
-225, /* ANode */
-624, /* Prod */
-1993, /* APropdef */
-2291, /* ADeferredMethPropdef */
+223, /* ANode */
+622, /* Prod */
+1942, /* APropdef */
+2232, /* ADeferredMethPropdef */
 },
 };
 const struct types resolution_table_parser_nodes__ADeferredMethPropdef = {
@@ -6136,7 +5196,7 @@ const struct types resolution_table_parser_nodes__ADeferredMethPropdef = {
 };
 /* runtime type AInternMethPropdef */
 const struct type type_parser_nodes__AInternMethPropdef = {
-2292,
+2233,
 "AInternMethPropdef", /* class_name_string */
 6,
 0,
@@ -6146,10 +5206,10 @@ const struct type type_parser_nodes__AInternMethPropdef = {
 0, /* nullable Object */
 1, /* Object */
 8, /* nullable APropdef */
-225, /* ANode */
-624, /* Prod */
-1993, /* APropdef */
-2292, /* AInternMethPropdef */
+223, /* ANode */
+622, /* Prod */
+1942, /* APropdef */
+2233, /* AInternMethPropdef */
 },
 };
 const struct types resolution_table_parser_nodes__AInternMethPropdef = {
@@ -6160,7 +5220,7 @@ const struct types resolution_table_parser_nodes__AInternMethPropdef = {
 };
 /* runtime type AExternMethPropdef */
 const struct type type_parser_nodes__AExternMethPropdef = {
-2293,
+2234,
 "AExternMethPropdef", /* class_name_string */
 6,
 0,
@@ -6170,10 +5230,10 @@ const struct type type_parser_nodes__AExternMethPropdef = {
 0, /* nullable Object */
 1, /* Object */
 8, /* nullable APropdef */
-225, /* ANode */
-624, /* Prod */
-1993, /* APropdef */
-2293, /* AExternMethPropdef */
+223, /* ANode */
+622, /* Prod */
+1942, /* APropdef */
+2234, /* AExternMethPropdef */
 },
 };
 const struct types resolution_table_parser_nodes__AExternMethPropdef = {
@@ -6184,7 +5244,7 @@ const struct types resolution_table_parser_nodes__AExternMethPropdef = {
 };
 /* runtime type AAttrPropdef */
 const struct type type_parser_nodes__AAttrPropdef = {
-2294,
+2235,
 "AAttrPropdef", /* class_name_string */
 6,
 0,
@@ -6194,10 +5254,10 @@ const struct type type_parser_nodes__AAttrPropdef = {
 0, /* nullable Object */
 1, /* Object */
 8, /* nullable APropdef */
-225, /* ANode */
-624, /* Prod */
-1993, /* APropdef */
-2294, /* AAttrPropdef */
+223, /* ANode */
+622, /* Prod */
+1942, /* APropdef */
+2235, /* AAttrPropdef */
 },
 };
 const struct types resolution_table_parser_nodes__AAttrPropdef = {
@@ -6208,7 +5268,7 @@ const struct types resolution_table_parser_nodes__AAttrPropdef = {
 };
 /* runtime type AConcreteInitPropdef */
 const struct type type_parser_nodes__AConcreteInitPropdef = {
-2568,
+2502,
 "AConcreteInitPropdef", /* class_name_string */
 8,
 0,
@@ -6218,12 +5278,12 @@ const struct type type_parser_nodes__AConcreteInitPropdef = {
 0, /* nullable Object */
 1, /* Object */
 8, /* nullable APropdef */
-225, /* ANode */
-624, /* Prod */
-1993, /* APropdef */
-2284, /* AConcreteMethPropdef */
-2295, /* AInitPropdef */
-2568, /* AConcreteInitPropdef */
+223, /* ANode */
+622, /* Prod */
+1942, /* APropdef */
+2225, /* AConcreteMethPropdef */
+2236, /* AInitPropdef */
+2502, /* AConcreteInitPropdef */
 },
 };
 const struct types resolution_table_parser_nodes__AConcreteInitPropdef = {
@@ -6234,7 +5294,7 @@ const struct types resolution_table_parser_nodes__AConcreteInitPropdef = {
 };
 /* runtime type AInitPropdef */
 const struct type type_parser_nodes__AInitPropdef = {
-2295,
+2236,
 "AInitPropdef", /* class_name_string */
 7,
 0,
@@ -6244,16 +5304,16 @@ NULL,
 0, /* nullable Object */
 1, /* Object */
 8, /* nullable APropdef */
-225, /* ANode */
-624, /* Prod */
-1993, /* APropdef */
+223, /* ANode */
+622, /* Prod */
+1942, /* APropdef */
 -1, /* empty */
-2295, /* AInitPropdef */
+2236, /* AInitPropdef */
 },
 };
 /* runtime type ATypePropdef */
 const struct type type_parser_nodes__ATypePropdef = {
-2296,
+2237,
 "ATypePropdef", /* class_name_string */
 6,
 0,
@@ -6263,10 +5323,10 @@ const struct type type_parser_nodes__ATypePropdef = {
 0, /* nullable Object */
 1, /* Object */
 8, /* nullable APropdef */
-225, /* ANode */
-624, /* Prod */
-1993, /* APropdef */
-2296, /* ATypePropdef */
+223, /* ANode */
+622, /* Prod */
+1942, /* APropdef */
+2237, /* ATypePropdef */
 },
 };
 const struct types resolution_table_parser_nodes__ATypePropdef = {
@@ -6277,7 +5337,7 @@ const struct types resolution_table_parser_nodes__ATypePropdef = {
 };
 /* runtime type AExternInitPropdef */
 const struct type type_parser_nodes__AExternInitPropdef = {
-2477,
+2436,
 "AExternInitPropdef", /* class_name_string */
 6,
 0,
@@ -6287,11 +5347,11 @@ const struct type type_parser_nodes__AExternInitPropdef = {
 0, /* nullable Object */
 1, /* Object */
 8, /* nullable APropdef */
-225, /* ANode */
-624, /* Prod */
-1993, /* APropdef */
-2477, /* AExternInitPropdef */
-2295, /* AInitPropdef */
+223, /* ANode */
+622, /* Prod */
+1942, /* APropdef */
+2436, /* AExternInitPropdef */
+2236, /* AInitPropdef */
 },
 };
 const struct types resolution_table_parser_nodes__AExternInitPropdef = {
@@ -6302,7 +5362,7 @@ const struct types resolution_table_parser_nodes__AExternInitPropdef = {
 };
 /* runtime type AReadAble */
 const struct type type_parser_nodes__AReadAble = {
-2297,
+2238,
 "AReadAble", /* class_name_string */
 6,
 0,
@@ -6312,10 +5372,10 @@ const struct type type_parser_nodes__AReadAble = {
 0, /* nullable Object */
 1, /* Object */
 11, /* nullable AAble */
-225, /* ANode */
-624, /* Prod */
-1999, /* AAble */
-2297, /* AReadAble */
+223, /* ANode */
+622, /* Prod */
+1948, /* AAble */
+2238, /* AReadAble */
 },
 };
 const struct types resolution_table_parser_nodes__AReadAble = {
@@ -6325,7 +5385,7 @@ const struct types resolution_table_parser_nodes__AReadAble = {
 };
 /* runtime type AAble */
 const struct type type_parser_nodes__AAble = {
-1999,
+1948,
 "AAble", /* class_name_string */
 5,
 0,
@@ -6335,9 +5395,9 @@ NULL,
 0, /* nullable Object */
 1, /* Object */
 11, /* nullable AAble */
-225, /* ANode */
-624, /* Prod */
-1999, /* AAble */
+223, /* ANode */
+622, /* Prod */
+1948, /* AAble */
 },
 };
 /* runtime type nullable AAble */
@@ -6356,7 +5416,7 @@ NULL,
 };
 /* runtime type AWriteAble */
 const struct type type_parser_nodes__AWriteAble = {
-2298,
+2239,
 "AWriteAble", /* class_name_string */
 6,
 0,
@@ -6366,10 +5426,10 @@ const struct type type_parser_nodes__AWriteAble = {
 0, /* nullable Object */
 1, /* Object */
 11, /* nullable AAble */
-225, /* ANode */
-624, /* Prod */
-1999, /* AAble */
-2298, /* AWriteAble */
+223, /* ANode */
+622, /* Prod */
+1948, /* AAble */
+2239, /* AWriteAble */
 },
 };
 const struct types resolution_table_parser_nodes__AWriteAble = {
@@ -6379,7 +5439,7 @@ const struct types resolution_table_parser_nodes__AWriteAble = {
 };
 /* runtime type APublicVisibility */
 const struct type type_parser_nodes__APublicVisibility = {
-2299,
+2240,
 "APublicVisibility", /* class_name_string */
 6,
 0,
@@ -6389,10 +5449,10 @@ const struct type type_parser_nodes__APublicVisibility = {
 0, /* nullable Object */
 1, /* Object */
 12, /* nullable AVisibility */
-225, /* ANode */
-624, /* Prod */
-2000, /* AVisibility */
-2299, /* APublicVisibility */
+223, /* ANode */
+622, /* Prod */
+1949, /* AVisibility */
+2240, /* APublicVisibility */
 },
 };
 const struct types resolution_table_parser_nodes__APublicVisibility = {
@@ -6402,7 +5462,7 @@ const struct types resolution_table_parser_nodes__APublicVisibility = {
 };
 /* runtime type AVisibility */
 const struct type type_parser_nodes__AVisibility = {
-2000,
+1949,
 "AVisibility", /* class_name_string */
 5,
 0,
@@ -6412,9 +5472,9 @@ NULL,
 0, /* nullable Object */
 1, /* Object */
 12, /* nullable AVisibility */
-225, /* ANode */
-624, /* Prod */
-2000, /* AVisibility */
+223, /* ANode */
+622, /* Prod */
+1949, /* AVisibility */
 },
 };
 /* runtime type nullable AVisibility */
@@ -6433,7 +5493,7 @@ NULL,
 };
 /* runtime type APrivateVisibility */
 const struct type type_parser_nodes__APrivateVisibility = {
-2300,
+2241,
 "APrivateVisibility", /* class_name_string */
 6,
 0,
@@ -6443,10 +5503,10 @@ const struct type type_parser_nodes__APrivateVisibility = {
 0, /* nullable Object */
 1, /* Object */
 12, /* nullable AVisibility */
-225, /* ANode */
-624, /* Prod */
-2000, /* AVisibility */
-2300, /* APrivateVisibility */
+223, /* ANode */
+622, /* Prod */
+1949, /* AVisibility */
+2241, /* APrivateVisibility */
 },
 };
 const struct types resolution_table_parser_nodes__APrivateVisibility = {
@@ -6456,7 +5516,7 @@ const struct types resolution_table_parser_nodes__APrivateVisibility = {
 };
 /* runtime type AProtectedVisibility */
 const struct type type_parser_nodes__AProtectedVisibility = {
-2301,
+2242,
 "AProtectedVisibility", /* class_name_string */
 6,
 0,
@@ -6466,10 +5526,10 @@ const struct type type_parser_nodes__AProtectedVisibility = {
 0, /* nullable Object */
 1, /* Object */
 12, /* nullable AVisibility */
-225, /* ANode */
-624, /* Prod */
-2000, /* AVisibility */
-2301, /* AProtectedVisibility */
+223, /* ANode */
+622, /* Prod */
+1949, /* AVisibility */
+2242, /* AProtectedVisibility */
 },
 };
 const struct types resolution_table_parser_nodes__AProtectedVisibility = {
@@ -6479,7 +5539,7 @@ const struct types resolution_table_parser_nodes__AProtectedVisibility = {
 };
 /* runtime type AIntrudeVisibility */
 const struct type type_parser_nodes__AIntrudeVisibility = {
-2302,
+2243,
 "AIntrudeVisibility", /* class_name_string */
 6,
 0,
@@ -6489,10 +5549,10 @@ const struct type type_parser_nodes__AIntrudeVisibility = {
 0, /* nullable Object */
 1, /* Object */
 12, /* nullable AVisibility */
-225, /* ANode */
-624, /* Prod */
-2000, /* AVisibility */
-2302, /* AIntrudeVisibility */
+223, /* ANode */
+622, /* Prod */
+1949, /* AVisibility */
+2243, /* AIntrudeVisibility */
 },
 };
 const struct types resolution_table_parser_nodes__AIntrudeVisibility = {
@@ -6502,7 +5562,7 @@ const struct types resolution_table_parser_nodes__AIntrudeVisibility = {
 };
 /* runtime type AIdMethid */
 const struct type type_parser_nodes__AIdMethid = {
-2303,
+2244,
 "AIdMethid", /* class_name_string */
 6,
 0,
@@ -6512,10 +5572,10 @@ const struct type type_parser_nodes__AIdMethid = {
 0, /* nullable Object */
 1, /* Object */
 13, /* nullable AMethid */
-225, /* ANode */
-624, /* Prod */
-2001, /* AMethid */
-2303, /* AIdMethid */
+223, /* ANode */
+622, /* Prod */
+1950, /* AMethid */
+2244, /* AIdMethid */
 },
 };
 const struct types resolution_table_parser_nodes__AIdMethid = {
@@ -6525,7 +5585,7 @@ const struct types resolution_table_parser_nodes__AIdMethid = {
 };
 /* runtime type AMethid */
 const struct type type_parser_nodes__AMethid = {
-2001,
+1950,
 "AMethid", /* class_name_string */
 5,
 0,
@@ -6535,9 +5595,9 @@ NULL,
 0, /* nullable Object */
 1, /* Object */
 13, /* nullable AMethid */
-225, /* ANode */
-624, /* Prod */
-2001, /* AMethid */
+223, /* ANode */
+622, /* Prod */
+1950, /* AMethid */
 },
 };
 /* runtime type nullable AMethid */
@@ -6556,7 +5616,7 @@ NULL,
 };
 /* runtime type APlusMethid */
 const struct type type_parser_nodes__APlusMethid = {
-2304,
+2245,
 "APlusMethid", /* class_name_string */
 6,
 0,
@@ -6566,10 +5626,10 @@ const struct type type_parser_nodes__APlusMethid = {
 0, /* nullable Object */
 1, /* Object */
 13, /* nullable AMethid */
-225, /* ANode */
-624, /* Prod */
-2001, /* AMethid */
-2304, /* APlusMethid */
+223, /* ANode */
+622, /* Prod */
+1950, /* AMethid */
+2245, /* APlusMethid */
 },
 };
 const struct types resolution_table_parser_nodes__APlusMethid = {
@@ -6579,7 +5639,7 @@ const struct types resolution_table_parser_nodes__APlusMethid = {
 };
 /* runtime type AMinusMethid */
 const struct type type_parser_nodes__AMinusMethid = {
-2305,
+2246,
 "AMinusMethid", /* class_name_string */
 6,
 0,
@@ -6589,10 +5649,10 @@ const struct type type_parser_nodes__AMinusMethid = {
 0, /* nullable Object */
 1, /* Object */
 13, /* nullable AMethid */
-225, /* ANode */
-624, /* Prod */
-2001, /* AMethid */
-2305, /* AMinusMethid */
+223, /* ANode */
+622, /* Prod */
+1950, /* AMethid */
+2246, /* AMinusMethid */
 },
 };
 const struct types resolution_table_parser_nodes__AMinusMethid = {
@@ -6602,7 +5662,7 @@ const struct types resolution_table_parser_nodes__AMinusMethid = {
 };
 /* runtime type AStarMethid */
 const struct type type_parser_nodes__AStarMethid = {
-2306,
+2247,
 "AStarMethid", /* class_name_string */
 6,
 0,
@@ -6612,10 +5672,10 @@ const struct type type_parser_nodes__AStarMethid = {
 0, /* nullable Object */
 1, /* Object */
 13, /* nullable AMethid */
-225, /* ANode */
-624, /* Prod */
-2001, /* AMethid */
-2306, /* AStarMethid */
+223, /* ANode */
+622, /* Prod */
+1950, /* AMethid */
+2247, /* AStarMethid */
 },
 };
 const struct types resolution_table_parser_nodes__AStarMethid = {
@@ -6625,7 +5685,7 @@ const struct types resolution_table_parser_nodes__AStarMethid = {
 };
 /* runtime type ASlashMethid */
 const struct type type_parser_nodes__ASlashMethid = {
-2307,
+2248,
 "ASlashMethid", /* class_name_string */
 6,
 0,
@@ -6635,10 +5695,10 @@ const struct type type_parser_nodes__ASlashMethid = {
 0, /* nullable Object */
 1, /* Object */
 13, /* nullable AMethid */
-225, /* ANode */
-624, /* Prod */
-2001, /* AMethid */
-2307, /* ASlashMethid */
+223, /* ANode */
+622, /* Prod */
+1950, /* AMethid */
+2248, /* ASlashMethid */
 },
 };
 const struct types resolution_table_parser_nodes__ASlashMethid = {
@@ -6648,7 +5708,7 @@ const struct types resolution_table_parser_nodes__ASlashMethid = {
 };
 /* runtime type APercentMethid */
 const struct type type_parser_nodes__APercentMethid = {
-2308,
+2249,
 "APercentMethid", /* class_name_string */
 6,
 0,
@@ -6658,10 +5718,10 @@ const struct type type_parser_nodes__APercentMethid = {
 0, /* nullable Object */
 1, /* Object */
 13, /* nullable AMethid */
-225, /* ANode */
-624, /* Prod */
-2001, /* AMethid */
-2308, /* APercentMethid */
+223, /* ANode */
+622, /* Prod */
+1950, /* AMethid */
+2249, /* APercentMethid */
 },
 };
 const struct types resolution_table_parser_nodes__APercentMethid = {
@@ -6671,7 +5731,7 @@ const struct types resolution_table_parser_nodes__APercentMethid = {
 };
 /* runtime type AEqMethid */
 const struct type type_parser_nodes__AEqMethid = {
-2309,
+2250,
 "AEqMethid", /* class_name_string */
 6,
 0,
@@ -6681,10 +5741,10 @@ const struct type type_parser_nodes__AEqMethid = {
 0, /* nullable Object */
 1, /* Object */
 13, /* nullable AMethid */
-225, /* ANode */
-624, /* Prod */
-2001, /* AMethid */
-2309, /* AEqMethid */
+223, /* ANode */
+622, /* Prod */
+1950, /* AMethid */
+2250, /* AEqMethid */
 },
 };
 const struct types resolution_table_parser_nodes__AEqMethid = {
@@ -6694,7 +5754,7 @@ const struct types resolution_table_parser_nodes__AEqMethid = {
 };
 /* runtime type ANeMethid */
 const struct type type_parser_nodes__ANeMethid = {
-2310,
+2251,
 "ANeMethid", /* class_name_string */
 6,
 0,
@@ -6704,10 +5764,10 @@ const struct type type_parser_nodes__ANeMethid = {
 0, /* nullable Object */
 1, /* Object */
 13, /* nullable AMethid */
-225, /* ANode */
-624, /* Prod */
-2001, /* AMethid */
-2310, /* ANeMethid */
+223, /* ANode */
+622, /* Prod */
+1950, /* AMethid */
+2251, /* ANeMethid */
 },
 };
 const struct types resolution_table_parser_nodes__ANeMethid = {
@@ -6717,7 +5777,7 @@ const struct types resolution_table_parser_nodes__ANeMethid = {
 };
 /* runtime type ALeMethid */
 const struct type type_parser_nodes__ALeMethid = {
-2311,
+2252,
 "ALeMethid", /* class_name_string */
 6,
 0,
@@ -6727,10 +5787,10 @@ const struct type type_parser_nodes__ALeMethid = {
 0, /* nullable Object */
 1, /* Object */
 13, /* nullable AMethid */
-225, /* ANode */
-624, /* Prod */
-2001, /* AMethid */
-2311, /* ALeMethid */
+223, /* ANode */
+622, /* Prod */
+1950, /* AMethid */
+2252, /* ALeMethid */
 },
 };
 const struct types resolution_table_parser_nodes__ALeMethid = {
@@ -6740,7 +5800,7 @@ const struct types resolution_table_parser_nodes__ALeMethid = {
 };
 /* runtime type AGeMethid */
 const struct type type_parser_nodes__AGeMethid = {
-2312,
+2253,
 "AGeMethid", /* class_name_string */
 6,
 0,
@@ -6750,10 +5810,10 @@ const struct type type_parser_nodes__AGeMethid = {
 0, /* nullable Object */
 1, /* Object */
 13, /* nullable AMethid */
-225, /* ANode */
-624, /* Prod */
-2001, /* AMethid */
-2312, /* AGeMethid */
+223, /* ANode */
+622, /* Prod */
+1950, /* AMethid */
+2253, /* AGeMethid */
 },
 };
 const struct types resolution_table_parser_nodes__AGeMethid = {
@@ -6763,7 +5823,7 @@ const struct types resolution_table_parser_nodes__AGeMethid = {
 };
 /* runtime type ALtMethid */
 const struct type type_parser_nodes__ALtMethid = {
-2313,
+2254,
 "ALtMethid", /* class_name_string */
 6,
 0,
@@ -6773,10 +5833,10 @@ const struct type type_parser_nodes__ALtMethid = {
 0, /* nullable Object */
 1, /* Object */
 13, /* nullable AMethid */
-225, /* ANode */
-624, /* Prod */
-2001, /* AMethid */
-2313, /* ALtMethid */
+223, /* ANode */
+622, /* Prod */
+1950, /* AMethid */
+2254, /* ALtMethid */
 },
 };
 const struct types resolution_table_parser_nodes__ALtMethid = {
@@ -6786,7 +5846,7 @@ const struct types resolution_table_parser_nodes__ALtMethid = {
 };
 /* runtime type AGtMethid */
 const struct type type_parser_nodes__AGtMethid = {
-2314,
+2255,
 "AGtMethid", /* class_name_string */
 6,
 0,
@@ -6796,10 +5856,10 @@ const struct type type_parser_nodes__AGtMethid = {
 0, /* nullable Object */
 1, /* Object */
 13, /* nullable AMethid */
-225, /* ANode */
-624, /* Prod */
-2001, /* AMethid */
-2314, /* AGtMethid */
+223, /* ANode */
+622, /* Prod */
+1950, /* AMethid */
+2255, /* AGtMethid */
 },
 };
 const struct types resolution_table_parser_nodes__AGtMethid = {
@@ -6809,7 +5869,7 @@ const struct types resolution_table_parser_nodes__AGtMethid = {
 };
 /* runtime type ALlMethid */
 const struct type type_parser_nodes__ALlMethid = {
-2315,
+2256,
 "ALlMethid", /* class_name_string */
 6,
 0,
@@ -6819,10 +5879,10 @@ const struct type type_parser_nodes__ALlMethid = {
 0, /* nullable Object */
 1, /* Object */
 13, /* nullable AMethid */
-225, /* ANode */
-624, /* Prod */
-2001, /* AMethid */
-2315, /* ALlMethid */
+223, /* ANode */
+622, /* Prod */
+1950, /* AMethid */
+2256, /* ALlMethid */
 },
 };
 const struct types resolution_table_parser_nodes__ALlMethid = {
@@ -6832,7 +5892,7 @@ const struct types resolution_table_parser_nodes__ALlMethid = {
 };
 /* runtime type AGgMethid */
 const struct type type_parser_nodes__AGgMethid = {
-2316,
+2257,
 "AGgMethid", /* class_name_string */
 6,
 0,
@@ -6842,10 +5902,10 @@ const struct type type_parser_nodes__AGgMethid = {
 0, /* nullable Object */
 1, /* Object */
 13, /* nullable AMethid */
-225, /* ANode */
-624, /* Prod */
-2001, /* AMethid */
-2316, /* AGgMethid */
+223, /* ANode */
+622, /* Prod */
+1950, /* AMethid */
+2257, /* AGgMethid */
 },
 };
 const struct types resolution_table_parser_nodes__AGgMethid = {
@@ -6855,7 +5915,7 @@ const struct types resolution_table_parser_nodes__AGgMethid = {
 };
 /* runtime type ABraMethid */
 const struct type type_parser_nodes__ABraMethid = {
-2317,
+2258,
 "ABraMethid", /* class_name_string */
 6,
 0,
@@ -6865,10 +5925,10 @@ const struct type type_parser_nodes__ABraMethid = {
 0, /* nullable Object */
 1, /* Object */
 13, /* nullable AMethid */
-225, /* ANode */
-624, /* Prod */
-2001, /* AMethid */
-2317, /* ABraMethid */
+223, /* ANode */
+622, /* Prod */
+1950, /* AMethid */
+2258, /* ABraMethid */
 },
 };
 const struct types resolution_table_parser_nodes__ABraMethid = {
@@ -6878,7 +5938,7 @@ const struct types resolution_table_parser_nodes__ABraMethid = {
 };
 /* runtime type AStarshipMethid */
 const struct type type_parser_nodes__AStarshipMethid = {
-2318,
+2259,
 "AStarshipMethid", /* class_name_string */
 6,
 0,
@@ -6888,10 +5948,10 @@ const struct type type_parser_nodes__AStarshipMethid = {
 0, /* nullable Object */
 1, /* Object */
 13, /* nullable AMethid */
-225, /* ANode */
-624, /* Prod */
-2001, /* AMethid */
-2318, /* AStarshipMethid */
+223, /* ANode */
+622, /* Prod */
+1950, /* AMethid */
+2259, /* AStarshipMethid */
 },
 };
 const struct types resolution_table_parser_nodes__AStarshipMethid = {
@@ -6901,7 +5961,7 @@ const struct types resolution_table_parser_nodes__AStarshipMethid = {
 };
 /* runtime type AAssignMethid */
 const struct type type_parser_nodes__AAssignMethid = {
-2319,
+2260,
 "AAssignMethid", /* class_name_string */
 6,
 0,
@@ -6911,10 +5971,10 @@ const struct type type_parser_nodes__AAssignMethid = {
 0, /* nullable Object */
 1, /* Object */
 13, /* nullable AMethid */
-225, /* ANode */
-624, /* Prod */
-2001, /* AMethid */
-2319, /* AAssignMethid */
+223, /* ANode */
+622, /* Prod */
+1950, /* AMethid */
+2260, /* AAssignMethid */
 },
 };
 const struct types resolution_table_parser_nodes__AAssignMethid = {
@@ -6924,7 +5984,7 @@ const struct types resolution_table_parser_nodes__AAssignMethid = {
 };
 /* runtime type ABraassignMethid */
 const struct type type_parser_nodes__ABraassignMethid = {
-2320,
+2261,
 "ABraassignMethid", /* class_name_string */
 6,
 0,
@@ -6934,10 +5994,10 @@ const struct type type_parser_nodes__ABraassignMethid = {
 0, /* nullable Object */
 1, /* Object */
 13, /* nullable AMethid */
-225, /* ANode */
-624, /* Prod */
-2001, /* AMethid */
-2320, /* ABraassignMethid */
+223, /* ANode */
+622, /* Prod */
+1950, /* AMethid */
+2261, /* ABraassignMethid */
 },
 };
 const struct types resolution_table_parser_nodes__ABraassignMethid = {
@@ -6947,7 +6007,7 @@ const struct types resolution_table_parser_nodes__ABraassignMethid = {
 };
 /* runtime type ASignature */
 const struct type type_parser_nodes__ASignature = {
-2002,
+1951,
 "ASignature", /* class_name_string */
 5,
 0,
@@ -6957,9 +6017,9 @@ const struct type type_parser_nodes__ASignature = {
 0, /* nullable Object */
 1, /* Object */
 14, /* nullable ASignature */
-225, /* ANode */
-624, /* Prod */
-2002, /* ASignature */
+223, /* ANode */
+622, /* Prod */
+1951, /* ASignature */
 },
 };
 const struct types resolution_table_parser_nodes__ASignature = {
@@ -6988,7 +6048,7 @@ const struct types resolution_table_nullable_parser_nodes__ASignature = {
 };
 /* runtime type ANodes[AParam] */
 const struct type type_parser_nodes__ANodesparser_nodes__AParam = {
-2478,
+2437,
 "ANodes[AParam]", /* class_name_string */
 6,
 0,
@@ -6997,12 +6057,12 @@ const struct type type_parser_nodes__ANodesparser_nodes__AParam = {
 {
 0, /* nullable Object */
 1, /* Object */
-598, /* Collection[ANode] */
-165, /* SequenceRead[nullable Object] */
-166, /* Collection[Object] */
-1789, /* Collection[Prod] */
-2478, /* ANodes[AParam] */
-2003, /* Collection[AParam] */
+596, /* Collection[ANode] */
+163, /* SequenceRead[nullable Object] */
+164, /* Collection[Object] */
+1739, /* Collection[Prod] */
+2437, /* ANodes[AParam] */
+1952, /* Collection[AParam] */
 },
 };
 const struct types resolution_table_parser_nodes__ANodesparser_nodes__AParam = {
@@ -7027,7 +6087,7 @@ NULL, /* empty */
 };
 /* runtime type Collection[AParam] */
 const struct type type_abstract_collection__Collectionparser_nodes__AParam = {
-2003,
+1952,
 "Collection[AParam]", /* class_name_string */
 7,
 0,
@@ -7036,75 +6096,17 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-598, /* Collection[ANode] */
+596, /* Collection[ANode] */
 -1, /* empty */
-166, /* Collection[Object] */
-1789, /* Collection[Prod] */
+164, /* Collection[Object] */
+1739, /* Collection[Prod] */
 -1, /* empty */
-2003, /* Collection[AParam] */
-},
-};
-/* runtime type ANodes[AClosureDecl] */
-const struct type type_parser_nodes__ANodesparser_nodes__AClosureDecl = {
-2479,
-"ANodes[AClosureDecl]", /* class_name_string */
-6,
-0,
-&resolution_table_parser_nodes__ANodesparser_nodes__AClosureDecl,
-8,
-{
-0, /* nullable Object */
-1, /* Object */
-598, /* Collection[ANode] */
-165, /* SequenceRead[nullable Object] */
-166, /* Collection[Object] */
-1789, /* Collection[Prod] */
-2479, /* ANodes[AClosureDecl] */
-2004, /* Collection[AClosureDecl] */
-},
-};
-const struct types resolution_table_parser_nodes__ANodesparser_nodes__AClosureDecl = {
-0, /* dummy */
-{
-&type_array__Arrayparser_nodes__AClosureDecl, /* Array[ANodes#0]: Array[AClosureDecl] */
-&type_parser_nodes__AClosureDecl, /* ANodes#0: AClosureDecl */
-&type_parser_nodes__AClosureDecl, /* Sequence#0: AClosureDecl */
-&type_parser_nodes__AClosureDecl, /* SimpleCollection#0: AClosureDecl */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-&type_parser_nodes__AClosureDecl, /* RemovableCollection#0: AClosureDecl */
-&type_abstract_collection__Collectionparser_nodes__AClosureDecl, /* Collection[Sequence#0]: Collection[AClosureDecl] */
-&type_array__Arrayparser_nodes__AClosureDecl, /* Array[Sequence#0]: Array[AClosureDecl] */
-&type_abstract_collection__Collectionparser_nodes__AClosureDecl, /* Collection[SimpleCollection#0]: Collection[AClosureDecl] */
-&type_parser_nodes__AClosureDecl, /* Collection#0: AClosureDecl */
-&type_abstract_collection__Collectionparser_nodes__AClosureDecl, /* Collection[Collection#0]: Collection[AClosureDecl] */
-&type_parser_nodes__AClosureDecl, /* SequenceRead#0: AClosureDecl */
-}
-};
-/* runtime type Collection[AClosureDecl] */
-const struct type type_abstract_collection__Collectionparser_nodes__AClosureDecl = {
-2004,
-"Collection[AClosureDecl]", /* class_name_string */
-7,
-0,
-NULL,
-8,
-{
-0, /* nullable Object */
-1, /* Object */
-598, /* Collection[ANode] */
--1, /* empty */
-166, /* Collection[Object] */
-1789, /* Collection[Prod] */
--1, /* empty */
-2004, /* Collection[AClosureDecl] */
+1952, /* Collection[AParam] */
 },
 };
 /* runtime type AParam */
 const struct type type_parser_nodes__AParam = {
-1808,
+1758,
 "AParam", /* class_name_string */
 2,
 0,
@@ -7113,9 +6115,9 @@ const struct type type_parser_nodes__AParam = {
 {
 0, /* nullable Object */
 1, /* Object */
-1808, /* AParam */
-225, /* ANode */
-624, /* Prod */
+1758, /* AParam */
+223, /* ANode */
+622, /* Prod */
 },
 };
 const struct types resolution_table_parser_nodes__AParam = {
@@ -7123,30 +6125,9 @@ const struct types resolution_table_parser_nodes__AParam = {
 {
 }
 };
-/* runtime type AClosureDecl */
-const struct type type_parser_nodes__AClosureDecl = {
-1809,
-"AClosureDecl", /* class_name_string */
-2,
-0,
-&resolution_table_parser_nodes__AClosureDecl,
-5,
-{
-0, /* nullable Object */
-1, /* Object */
-1809, /* AClosureDecl */
-225, /* ANode */
-624, /* Prod */
-},
-};
-const struct types resolution_table_parser_nodes__AClosureDecl = {
-0, /* dummy */
-{
-}
-};
 /* runtime type AReturnExpr */
 const struct type type_parser_nodes__AReturnExpr = {
-2321,
+2262,
 "AReturnExpr", /* class_name_string */
 6,
 0,
@@ -7156,10 +6137,10 @@ const struct type type_parser_nodes__AReturnExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2321, /* AReturnExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2262, /* AReturnExpr */
 },
 };
 const struct types resolution_table_parser_nodes__AReturnExpr = {
@@ -7169,7 +6150,7 @@ const struct types resolution_table_parser_nodes__AReturnExpr = {
 };
 /* runtime type AExpr */
 const struct type type_parser_nodes__AExpr = {
-2005,
+1953,
 "AExpr", /* class_name_string */
 5,
 0,
@@ -7179,9 +6160,9 @@ NULL,
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
 },
 };
 /* runtime type nullable AExpr */
@@ -7200,7 +6181,7 @@ NULL,
 };
 /* runtime type AExternCalls */
 const struct type type_parser_nodes__AExternCalls = {
-2006,
+1954,
 "AExternCalls", /* class_name_string */
 5,
 0,
@@ -7210,9 +6191,9 @@ const struct type type_parser_nodes__AExternCalls = {
 0, /* nullable Object */
 1, /* Object */
 16, /* nullable AExternCalls */
-225, /* ANode */
-624, /* Prod */
-2006, /* AExternCalls */
+223, /* ANode */
+622, /* Prod */
+1954, /* AExternCalls */
 },
 };
 const struct types resolution_table_parser_nodes__AExternCalls = {
@@ -7241,7 +6222,7 @@ const struct types resolution_table_nullable_parser_nodes__AExternCalls = {
 };
 /* runtime type ANodes[AExternCall] */
 const struct type type_parser_nodes__ANodesparser_nodes__AExternCall = {
-2480,
+2438,
 "ANodes[AExternCall]", /* class_name_string */
 6,
 0,
@@ -7250,12 +6231,12 @@ const struct type type_parser_nodes__ANodesparser_nodes__AExternCall = {
 {
 0, /* nullable Object */
 1, /* Object */
-598, /* Collection[ANode] */
-165, /* SequenceRead[nullable Object] */
-166, /* Collection[Object] */
-1789, /* Collection[Prod] */
-2480, /* ANodes[AExternCall] */
-2007, /* Collection[AExternCall] */
+596, /* Collection[ANode] */
+163, /* SequenceRead[nullable Object] */
+164, /* Collection[Object] */
+1739, /* Collection[Prod] */
+2438, /* ANodes[AExternCall] */
+1955, /* Collection[AExternCall] */
 },
 };
 const struct types resolution_table_parser_nodes__ANodesparser_nodes__AExternCall = {
@@ -7280,7 +6261,7 @@ NULL, /* empty */
 };
 /* runtime type Collection[AExternCall] */
 const struct type type_abstract_collection__Collectionparser_nodes__AExternCall = {
-2007,
+1955,
 "Collection[AExternCall]", /* class_name_string */
 7,
 0,
@@ -7289,17 +6270,17 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-598, /* Collection[ANode] */
+596, /* Collection[ANode] */
 -1, /* empty */
-166, /* Collection[Object] */
-1789, /* Collection[Prod] */
+164, /* Collection[Object] */
+1739, /* Collection[Prod] */
 -1, /* empty */
-2007, /* Collection[AExternCall] */
+1955, /* Collection[AExternCall] */
 },
 };
 /* runtime type ASuperExternCall */
 const struct type type_parser_nodes__ASuperExternCall = {
-2322,
+2263,
 "ASuperExternCall", /* class_name_string */
 6,
 0,
@@ -7309,10 +6290,10 @@ const struct type type_parser_nodes__ASuperExternCall = {
 0, /* nullable Object */
 1, /* Object */
 17, /* nullable AExternCall */
-225, /* ANode */
-624, /* Prod */
-2008, /* AExternCall */
-2322, /* ASuperExternCall */
+223, /* ANode */
+622, /* Prod */
+1956, /* AExternCall */
+2263, /* ASuperExternCall */
 },
 };
 const struct types resolution_table_parser_nodes__ASuperExternCall = {
@@ -7322,7 +6303,7 @@ const struct types resolution_table_parser_nodes__ASuperExternCall = {
 };
 /* runtime type AExternCall */
 const struct type type_parser_nodes__AExternCall = {
-2008,
+1956,
 "AExternCall", /* class_name_string */
 5,
 0,
@@ -7332,9 +6313,9 @@ NULL,
 0, /* nullable Object */
 1, /* Object */
 17, /* nullable AExternCall */
-225, /* ANode */
-624, /* Prod */
-2008, /* AExternCall */
+223, /* ANode */
+622, /* Prod */
+1956, /* AExternCall */
 },
 };
 /* runtime type nullable AExternCall */
@@ -7353,7 +6334,7 @@ NULL,
 };
 /* runtime type ALocalPropExternCall */
 const struct type type_parser_nodes__ALocalPropExternCall = {
-2323,
+2264,
 "ALocalPropExternCall", /* class_name_string */
 6,
 0,
@@ -7363,10 +6344,10 @@ const struct type type_parser_nodes__ALocalPropExternCall = {
 0, /* nullable Object */
 1, /* Object */
 17, /* nullable AExternCall */
-225, /* ANode */
-624, /* Prod */
-2008, /* AExternCall */
-2323, /* ALocalPropExternCall */
+223, /* ANode */
+622, /* Prod */
+1956, /* AExternCall */
+2264, /* ALocalPropExternCall */
 },
 };
 const struct types resolution_table_parser_nodes__ALocalPropExternCall = {
@@ -7376,7 +6357,7 @@ const struct types resolution_table_parser_nodes__ALocalPropExternCall = {
 };
 /* runtime type AFullPropExternCall */
 const struct type type_parser_nodes__AFullPropExternCall = {
-2324,
+2265,
 "AFullPropExternCall", /* class_name_string */
 6,
 0,
@@ -7386,10 +6367,10 @@ const struct type type_parser_nodes__AFullPropExternCall = {
 0, /* nullable Object */
 1, /* Object */
 17, /* nullable AExternCall */
-225, /* ANode */
-624, /* Prod */
-2008, /* AExternCall */
-2324, /* AFullPropExternCall */
+223, /* ANode */
+622, /* Prod */
+1956, /* AExternCall */
+2265, /* AFullPropExternCall */
 },
 };
 const struct types resolution_table_parser_nodes__AFullPropExternCall = {
@@ -7399,7 +6380,7 @@ const struct types resolution_table_parser_nodes__AFullPropExternCall = {
 };
 /* runtime type AInitPropExternCall */
 const struct type type_parser_nodes__AInitPropExternCall = {
-2325,
+2266,
 "AInitPropExternCall", /* class_name_string */
 6,
 0,
@@ -7409,10 +6390,10 @@ const struct type type_parser_nodes__AInitPropExternCall = {
 0, /* nullable Object */
 1, /* Object */
 17, /* nullable AExternCall */
-225, /* ANode */
-624, /* Prod */
-2008, /* AExternCall */
-2325, /* AInitPropExternCall */
+223, /* ANode */
+622, /* Prod */
+1956, /* AExternCall */
+2266, /* AInitPropExternCall */
 },
 };
 const struct types resolution_table_parser_nodes__AInitPropExternCall = {
@@ -7422,7 +6403,7 @@ const struct types resolution_table_parser_nodes__AInitPropExternCall = {
 };
 /* runtime type ACastAsExternCall */
 const struct type type_parser_nodes__ACastAsExternCall = {
-2326,
+2267,
 "ACastAsExternCall", /* class_name_string */
 6,
 0,
@@ -7432,10 +6413,10 @@ const struct type type_parser_nodes__ACastAsExternCall = {
 0, /* nullable Object */
 1, /* Object */
 17, /* nullable AExternCall */
-225, /* ANode */
-624, /* Prod */
-2008, /* AExternCall */
-2326, /* ACastAsExternCall */
+223, /* ANode */
+622, /* Prod */
+1956, /* AExternCall */
+2267, /* ACastAsExternCall */
 },
 };
 const struct types resolution_table_parser_nodes__ACastAsExternCall = {
@@ -7445,7 +6426,7 @@ const struct types resolution_table_parser_nodes__ACastAsExternCall = {
 };
 /* runtime type AAsNullableExternCall */
 const struct type type_parser_nodes__AAsNullableExternCall = {
-2327,
+2268,
 "AAsNullableExternCall", /* class_name_string */
 6,
 0,
@@ -7455,10 +6436,10 @@ const struct type type_parser_nodes__AAsNullableExternCall = {
 0, /* nullable Object */
 1, /* Object */
 17, /* nullable AExternCall */
-225, /* ANode */
-624, /* Prod */
-2008, /* AExternCall */
-2327, /* AAsNullableExternCall */
+223, /* ANode */
+622, /* Prod */
+1956, /* AExternCall */
+2268, /* AAsNullableExternCall */
 },
 };
 const struct types resolution_table_parser_nodes__AAsNullableExternCall = {
@@ -7468,7 +6449,7 @@ const struct types resolution_table_parser_nodes__AAsNullableExternCall = {
 };
 /* runtime type AAsNotNullableExternCall */
 const struct type type_parser_nodes__AAsNotNullableExternCall = {
-2328,
+2269,
 "AAsNotNullableExternCall", /* class_name_string */
 6,
 0,
@@ -7478,10 +6459,10 @@ const struct type type_parser_nodes__AAsNotNullableExternCall = {
 0, /* nullable Object */
 1, /* Object */
 17, /* nullable AExternCall */
-225, /* ANode */
-624, /* Prod */
-2008, /* AExternCall */
-2328, /* AAsNotNullableExternCall */
+223, /* ANode */
+622, /* Prod */
+1956, /* AExternCall */
+2269, /* AAsNotNullableExternCall */
 },
 };
 const struct types resolution_table_parser_nodes__AAsNotNullableExternCall = {
@@ -7491,7 +6472,7 @@ const struct types resolution_table_parser_nodes__AAsNotNullableExternCall = {
 };
 /* runtime type AInLanguage */
 const struct type type_parser_nodes__AInLanguage = {
-2009,
+1957,
 "AInLanguage", /* class_name_string */
 5,
 0,
@@ -7501,9 +6482,9 @@ const struct type type_parser_nodes__AInLanguage = {
 0, /* nullable Object */
 1, /* Object */
 18, /* nullable AInLanguage */
-225, /* ANode */
-624, /* Prod */
-2009, /* AInLanguage */
+223, /* ANode */
+622, /* Prod */
+1957, /* AInLanguage */
 },
 };
 const struct types resolution_table_parser_nodes__AInLanguage = {
@@ -7532,7 +6513,7 @@ const struct types resolution_table_nullable_parser_nodes__AInLanguage = {
 };
 /* runtime type AExternCodeBlock */
 const struct type type_parser_nodes__AExternCodeBlock = {
-2010,
+1958,
 "AExternCodeBlock", /* class_name_string */
 5,
 0,
@@ -7542,9 +6523,9 @@ const struct type type_parser_nodes__AExternCodeBlock = {
 0, /* nullable Object */
 1, /* Object */
 19, /* nullable AExternCodeBlock */
-225, /* ANode */
-624, /* Prod */
-2010, /* AExternCodeBlock */
+223, /* ANode */
+622, /* Prod */
+1958, /* AExternCodeBlock */
 },
 };
 const struct types resolution_table_parser_nodes__AExternCodeBlock = {
@@ -7573,7 +6554,7 @@ const struct types resolution_table_nullable_parser_nodes__AExternCodeBlock = {
 };
 /* runtime type AType */
 const struct type type_parser_nodes__AType = {
-2011,
+1959,
 "AType", /* class_name_string */
 5,
 0,
@@ -7583,9 +6564,9 @@ const struct type type_parser_nodes__AType = {
 0, /* nullable Object */
 1, /* Object */
 20, /* nullable AType */
-225, /* ANode */
-624, /* Prod */
-2011, /* AType */
+223, /* ANode */
+622, /* Prod */
+1959, /* AType */
 },
 };
 const struct types resolution_table_parser_nodes__AType = {
@@ -7614,7 +6595,7 @@ const struct types resolution_table_nullable_parser_nodes__AType = {
 };
 /* runtime type ANodes[AType] */
 const struct type type_parser_nodes__ANodesparser_nodes__AType = {
-2481,
+2439,
 "ANodes[AType]", /* class_name_string */
 6,
 0,
@@ -7623,12 +6604,12 @@ const struct type type_parser_nodes__ANodesparser_nodes__AType = {
 {
 0, /* nullable Object */
 1, /* Object */
-598, /* Collection[ANode] */
-165, /* SequenceRead[nullable Object] */
-166, /* Collection[Object] */
-1789, /* Collection[Prod] */
-2481, /* ANodes[AType] */
-2012, /* Collection[AType] */
+596, /* Collection[ANode] */
+163, /* SequenceRead[nullable Object] */
+164, /* Collection[Object] */
+1739, /* Collection[Prod] */
+2439, /* ANodes[AType] */
+1960, /* Collection[AType] */
 },
 };
 const struct types resolution_table_parser_nodes__ANodesparser_nodes__AType = {
@@ -7653,7 +6634,7 @@ NULL, /* empty */
 };
 /* runtime type Collection[AType] */
 const struct type type_abstract_collection__Collectionparser_nodes__AType = {
-2012,
+1960,
 "Collection[AType]", /* class_name_string */
 7,
 0,
@@ -7662,17 +6643,17 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-598, /* Collection[ANode] */
+596, /* Collection[ANode] */
 -1, /* empty */
-166, /* Collection[Object] */
-1789, /* Collection[Prod] */
+164, /* Collection[Object] */
+1739, /* Collection[Prod] */
 -1, /* empty */
-2012, /* Collection[AType] */
+1960, /* Collection[AType] */
 },
 };
 /* runtime type ABlockExpr */
 const struct type type_parser_nodes__ABlockExpr = {
-2329,
+2270,
 "ABlockExpr", /* class_name_string */
 6,
 0,
@@ -7682,10 +6663,10 @@ const struct type type_parser_nodes__ABlockExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2329, /* ABlockExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2270, /* ABlockExpr */
 },
 };
 const struct types resolution_table_parser_nodes__ABlockExpr = {
@@ -7695,7 +6676,7 @@ const struct types resolution_table_parser_nodes__ABlockExpr = {
 };
 /* runtime type ANodes[AExpr] */
 const struct type type_parser_nodes__ANodesparser_nodes__AExpr = {
-2482,
+2440,
 "ANodes[AExpr]", /* class_name_string */
 6,
 0,
@@ -7704,12 +6685,12 @@ const struct type type_parser_nodes__ANodesparser_nodes__AExpr = {
 {
 0, /* nullable Object */
 1, /* Object */
-598, /* Collection[ANode] */
-165, /* SequenceRead[nullable Object] */
-166, /* Collection[Object] */
-1789, /* Collection[Prod] */
-2482, /* ANodes[AExpr] */
-2013, /* Collection[AExpr] */
+596, /* Collection[ANode] */
+163, /* SequenceRead[nullable Object] */
+164, /* Collection[Object] */
+1739, /* Collection[Prod] */
+2440, /* ANodes[AExpr] */
+1961, /* Collection[AExpr] */
 },
 };
 const struct types resolution_table_parser_nodes__ANodesparser_nodes__AExpr = {
@@ -7734,7 +6715,7 @@ NULL, /* empty */
 };
 /* runtime type Collection[AExpr] */
 const struct type type_abstract_collection__Collectionparser_nodes__AExpr = {
-2013,
+1961,
 "Collection[AExpr]", /* class_name_string */
 7,
 0,
@@ -7743,17 +6724,17 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-598, /* Collection[ANode] */
+596, /* Collection[ANode] */
 -1, /* empty */
-166, /* Collection[Object] */
-1789, /* Collection[Prod] */
+164, /* Collection[Object] */
+1739, /* Collection[Prod] */
 -1, /* empty */
-2013, /* Collection[AExpr] */
+1961, /* Collection[AExpr] */
 },
 };
 /* runtime type ABreakExpr */
 const struct type type_parser_nodes__ABreakExpr = {
-2330,
+2271,
 "ABreakExpr", /* class_name_string */
 6,
 0,
@@ -7763,10 +6744,10 @@ const struct type type_parser_nodes__ABreakExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2330, /* ABreakExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2271, /* ABreakExpr */
 },
 };
 const struct types resolution_table_parser_nodes__ABreakExpr = {
@@ -7776,7 +6757,7 @@ const struct types resolution_table_parser_nodes__ABreakExpr = {
 };
 /* runtime type AAbortExpr */
 const struct type type_parser_nodes__AAbortExpr = {
-2331,
+2272,
 "AAbortExpr", /* class_name_string */
 6,
 0,
@@ -7786,10 +6767,10 @@ const struct type type_parser_nodes__AAbortExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2331, /* AAbortExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2272, /* AAbortExpr */
 },
 };
 const struct types resolution_table_parser_nodes__AAbortExpr = {
@@ -7799,7 +6780,7 @@ const struct types resolution_table_parser_nodes__AAbortExpr = {
 };
 /* runtime type AContinueExpr */
 const struct type type_parser_nodes__AContinueExpr = {
-2332,
+2273,
 "AContinueExpr", /* class_name_string */
 6,
 0,
@@ -7809,10 +6790,10 @@ const struct type type_parser_nodes__AContinueExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2332, /* AContinueExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2273, /* AContinueExpr */
 },
 };
 const struct types resolution_table_parser_nodes__AContinueExpr = {
@@ -7822,21 +6803,20 @@ const struct types resolution_table_parser_nodes__AContinueExpr = {
 };
 /* runtime type ACallExpr */
 const struct type type_parser_nodes__ACallExpr = {
-2483,
+2274,
 "ACallExpr", /* class_name_string */
-7,
+6,
 0,
 &resolution_table_parser_nodes__ACallExpr,
-8,
+7,
 {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2333, /* ASendExpr */
-2483, /* ACallExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2274, /* ACallExpr */
 },
 };
 const struct types resolution_table_parser_nodes__ACallExpr = {
@@ -7844,85 +6824,9 @@ const struct types resolution_table_parser_nodes__ACallExpr = {
 {
 }
 };
-/* runtime type ASendExpr */
-const struct type type_parser_nodes__ASendExpr = {
-2333,
-"ASendExpr", /* class_name_string */
-6,
-0,
-NULL,
-7,
-{
-0, /* nullable Object */
-1, /* Object */
-15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2333, /* ASendExpr */
-},
-};
-/* runtime type ANodes[AClosureDef] */
-const struct type type_parser_nodes__ANodesparser_nodes__AClosureDef = {
-2484,
-"ANodes[AClosureDef]", /* class_name_string */
-6,
-0,
-&resolution_table_parser_nodes__ANodesparser_nodes__AClosureDef,
-8,
-{
-0, /* nullable Object */
-1, /* Object */
-598, /* Collection[ANode] */
-165, /* SequenceRead[nullable Object] */
-166, /* Collection[Object] */
-1789, /* Collection[Prod] */
-2484, /* ANodes[AClosureDef] */
-2014, /* Collection[AClosureDef] */
-},
-};
-const struct types resolution_table_parser_nodes__ANodesparser_nodes__AClosureDef = {
-0, /* dummy */
-{
-&type_array__Arrayparser_nodes__AClosureDef, /* Array[ANodes#0]: Array[AClosureDef] */
-&type_parser_nodes__AClosureDef, /* ANodes#0: AClosureDef */
-&type_parser_nodes__AClosureDef, /* Sequence#0: AClosureDef */
-&type_parser_nodes__AClosureDef, /* SimpleCollection#0: AClosureDef */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-NULL, /* empty */
-&type_parser_nodes__AClosureDef, /* RemovableCollection#0: AClosureDef */
-&type_abstract_collection__Collectionparser_nodes__AClosureDef, /* Collection[Sequence#0]: Collection[AClosureDef] */
-&type_array__Arrayparser_nodes__AClosureDef, /* Array[Sequence#0]: Array[AClosureDef] */
-&type_abstract_collection__Collectionparser_nodes__AClosureDef, /* Collection[SimpleCollection#0]: Collection[AClosureDef] */
-&type_parser_nodes__AClosureDef, /* Collection#0: AClosureDef */
-&type_abstract_collection__Collectionparser_nodes__AClosureDef, /* Collection[Collection#0]: Collection[AClosureDef] */
-&type_parser_nodes__AClosureDef, /* SequenceRead#0: AClosureDef */
-}
-};
-/* runtime type Collection[AClosureDef] */
-const struct type type_abstract_collection__Collectionparser_nodes__AClosureDef = {
-2014,
-"Collection[AClosureDef]", /* class_name_string */
-7,
-0,
-NULL,
-8,
-{
-0, /* nullable Object */
-1, /* Object */
-598, /* Collection[ANode] */
--1, /* empty */
-166, /* Collection[Object] */
-1789, /* Collection[Prod] */
--1, /* empty */
-2014, /* Collection[AClosureDef] */
-},
-};
 /* runtime type AImplicitSelfExpr */
 const struct type type_parser_nodes__AImplicitSelfExpr = {
-2485,
+2441,
 "AImplicitSelfExpr", /* class_name_string */
 7,
 0,
@@ -7932,11 +6836,11 @@ const struct type type_parser_nodes__AImplicitSelfExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2334, /* ASelfExpr */
-2485, /* AImplicitSelfExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2275, /* ASelfExpr */
+2441, /* AImplicitSelfExpr */
 },
 };
 const struct types resolution_table_parser_nodes__AImplicitSelfExpr = {
@@ -7946,7 +6850,7 @@ const struct types resolution_table_parser_nodes__AImplicitSelfExpr = {
 };
 /* runtime type ASelfExpr */
 const struct type type_parser_nodes__ASelfExpr = {
-2334,
+2275,
 "ASelfExpr", /* class_name_string */
 6,
 0,
@@ -7956,10 +6860,10 @@ const struct type type_parser_nodes__ASelfExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2334, /* ASelfExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2275, /* ASelfExpr */
 },
 };
 const struct types resolution_table_parser_nodes__ASelfExpr = {
@@ -7969,7 +6873,7 @@ const struct types resolution_table_parser_nodes__ASelfExpr = {
 };
 /* runtime type ASuperExpr */
 const struct type type_parser_nodes__ASuperExpr = {
-2335,
+2276,
 "ASuperExpr", /* class_name_string */
 6,
 0,
@@ -7979,10 +6883,10 @@ const struct type type_parser_nodes__ASuperExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2335, /* ASuperExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2276, /* ASuperExpr */
 },
 };
 const struct types resolution_table_parser_nodes__ASuperExpr = {
@@ -7992,7 +6896,7 @@ const struct types resolution_table_parser_nodes__ASuperExpr = {
 };
 /* runtime type AQualified */
 const struct type type_parser_nodes__AQualified = {
-1810,
+1759,
 "AQualified", /* class_name_string */
 2,
 0,
@@ -8001,9 +6905,9 @@ const struct type type_parser_nodes__AQualified = {
 {
 0, /* nullable Object */
 1, /* Object */
-1810, /* AQualified */
-225, /* ANode */
-624, /* Prod */
+1759, /* AQualified */
+223, /* ANode */
+622, /* Prod */
 },
 };
 const struct types resolution_table_parser_nodes__AQualified = {
@@ -8013,7 +6917,7 @@ const struct types resolution_table_parser_nodes__AQualified = {
 };
 /* runtime type ANodes[TId] */
 const struct type type_parser_nodes__ANodesparser_nodes__TId = {
-2486,
+2442,
 "ANodes[TId]", /* class_name_string */
 6,
 0,
@@ -8022,12 +6926,12 @@ const struct type type_parser_nodes__ANodesparser_nodes__TId = {
 {
 0, /* nullable Object */
 1, /* Object */
-598, /* Collection[ANode] */
-165, /* SequenceRead[nullable Object] */
-166, /* Collection[Object] */
-1811, /* Collection[Token] */
-2486, /* ANodes[TId] */
-2015, /* Collection[TId] */
+596, /* Collection[ANode] */
+163, /* SequenceRead[nullable Object] */
+164, /* Collection[Object] */
+1760, /* Collection[Token] */
+2442, /* ANodes[TId] */
+1962, /* Collection[TId] */
 },
 };
 const struct types resolution_table_parser_nodes__ANodesparser_nodes__TId = {
@@ -8052,7 +6956,7 @@ NULL, /* empty */
 };
 /* runtime type Collection[TId] */
 const struct type type_abstract_collection__Collectionparser_nodes__TId = {
-2015,
+1962,
 "Collection[TId]", /* class_name_string */
 7,
 0,
@@ -8061,17 +6965,17 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-598, /* Collection[ANode] */
+596, /* Collection[ANode] */
 -1, /* empty */
-166, /* Collection[Object] */
-1811, /* Collection[Token] */
+164, /* Collection[Object] */
+1760, /* Collection[Token] */
 -1, /* empty */
-2015, /* Collection[TId] */
+1962, /* Collection[TId] */
 },
 };
 /* runtime type Collection[Token] */
 const struct type type_abstract_collection__Collectionparser_nodes__Token = {
-1811,
+1760,
 "Collection[Token]", /* class_name_string */
 5,
 0,
@@ -8080,29 +6984,28 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-598, /* Collection[ANode] */
+596, /* Collection[ANode] */
 -1, /* empty */
-166, /* Collection[Object] */
-1811, /* Collection[Token] */
+164, /* Collection[Object] */
+1760, /* Collection[Token] */
 },
 };
 /* runtime type AInitExpr */
 const struct type type_parser_nodes__AInitExpr = {
-2487,
+2277,
 "AInitExpr", /* class_name_string */
-7,
+6,
 0,
 &resolution_table_parser_nodes__AInitExpr,
-8,
+7,
 {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2333, /* ASendExpr */
-2487, /* AInitExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2277, /* AInitExpr */
 },
 };
 const struct types resolution_table_parser_nodes__AInitExpr = {
@@ -8112,7 +7015,7 @@ const struct types resolution_table_parser_nodes__AInitExpr = {
 };
 /* runtime type ADebugTypeExpr */
 const struct type type_parser_nodes__ADebugTypeExpr = {
-2336,
+2278,
 "ADebugTypeExpr", /* class_name_string */
 6,
 0,
@@ -8122,10 +7025,10 @@ const struct type type_parser_nodes__ADebugTypeExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2336, /* ADebugTypeExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2278, /* ADebugTypeExpr */
 },
 };
 const struct types resolution_table_parser_nodes__ADebugTypeExpr = {
@@ -8135,7 +7038,7 @@ const struct types resolution_table_parser_nodes__ADebugTypeExpr = {
 };
 /* runtime type ALabel */
 const struct type type_parser_nodes__ALabel = {
-2016,
+1963,
 "ALabel", /* class_name_string */
 5,
 0,
@@ -8145,9 +7048,9 @@ const struct type type_parser_nodes__ALabel = {
 0, /* nullable Object */
 1, /* Object */
 21, /* nullable ALabel */
-225, /* ANode */
-624, /* Prod */
-2016, /* ALabel */
+223, /* ANode */
+622, /* Prod */
+1963, /* ALabel */
 },
 };
 const struct types resolution_table_parser_nodes__ALabel = {
@@ -8174,107 +7077,9 @@ const struct types resolution_table_nullable_parser_nodes__ALabel = {
 {
 }
 };
-/* runtime type AClosureDef */
-const struct type type_parser_nodes__AClosureDef = {
-1812,
-"AClosureDef", /* class_name_string */
-2,
-0,
-&resolution_table_parser_nodes__AClosureDef,
-5,
-{
-0, /* nullable Object */
-1, /* Object */
-1812, /* AClosureDef */
-225, /* ANode */
-624, /* Prod */
-},
-};
-const struct types resolution_table_parser_nodes__AClosureDef = {
-0, /* dummy */
-{
-}
-};
-/* runtime type ASimpleClosureId */
-const struct type type_parser_nodes__ASimpleClosureId = {
-2337,
-"ASimpleClosureId", /* class_name_string */
-6,
-0,
-&resolution_table_parser_nodes__ASimpleClosureId,
-7,
-{
-0, /* nullable Object */
-1, /* Object */
-22, /* nullable AClosureId */
-225, /* ANode */
-624, /* Prod */
-2017, /* AClosureId */
-2337, /* ASimpleClosureId */
-},
-};
-const struct types resolution_table_parser_nodes__ASimpleClosureId = {
-0, /* dummy */
-{
-}
-};
-/* runtime type AClosureId */
-const struct type type_parser_nodes__AClosureId = {
-2017,
-"AClosureId", /* class_name_string */
-5,
-0,
-NULL,
-6,
-{
-0, /* nullable Object */
-1, /* Object */
-22, /* nullable AClosureId */
-225, /* ANode */
-624, /* Prod */
-2017, /* AClosureId */
-},
-};
-/* runtime type nullable AClosureId */
-const struct type type_nullable_parser_nodes__AClosureId = {
-22,
-"nullable AClosureId", /* class_name_string */
-2,
-1,
-NULL,
-3,
-{
-0, /* nullable Object */
--1, /* empty */
-22, /* nullable AClosureId */
-},
-};
-/* runtime type ABreakClosureId */
-const struct type type_parser_nodes__ABreakClosureId = {
-2338,
-"ABreakClosureId", /* class_name_string */
-6,
-0,
-&resolution_table_parser_nodes__ABreakClosureId,
-7,
-{
-0, /* nullable Object */
-1, /* Object */
-22, /* nullable AClosureId */
-225, /* ANode */
-624, /* Prod */
-2017, /* AClosureId */
-2338, /* ABreakClosureId */
-},
-};
-const struct types resolution_table_parser_nodes__ABreakClosureId = {
-0, /* dummy */
-{
-}
-};
 /* runtime type AVardeclExpr */
 const struct type type_parser_nodes__AVardeclExpr = {
-2339,
+2279,
 "AVardeclExpr", /* class_name_string */
 6,
 0,
@@ -8284,10 +7089,10 @@ const struct type type_parser_nodes__AVardeclExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2339, /* AVardeclExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2279, /* AVardeclExpr */
 },
 };
 const struct types resolution_table_parser_nodes__AVardeclExpr = {
@@ -8297,7 +7102,7 @@ const struct types resolution_table_parser_nodes__AVardeclExpr = {
 };
 /* runtime type AAttrAssignExpr */
 const struct type type_parser_nodes__AAttrAssignExpr = {
-2340,
+2280,
 "AAttrAssignExpr", /* class_name_string */
 6,
 0,
@@ -8307,10 +7112,10 @@ const struct type type_parser_nodes__AAttrAssignExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2340, /* AAttrAssignExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2280, /* AAttrAssignExpr */
 },
 };
 const struct types resolution_table_parser_nodes__AAttrAssignExpr = {
@@ -8320,21 +7125,20 @@ const struct types resolution_table_parser_nodes__AAttrAssignExpr = {
 };
 /* runtime type ACallAssignExpr */
 const struct type type_parser_nodes__ACallAssignExpr = {
-2488,
+2281,
 "ACallAssignExpr", /* class_name_string */
-7,
+6,
 0,
 &resolution_table_parser_nodes__ACallAssignExpr,
-8,
+7,
 {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2333, /* ASendExpr */
-2488, /* ACallAssignExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2281, /* ACallAssignExpr */
 },
 };
 const struct types resolution_table_parser_nodes__ACallAssignExpr = {
@@ -8344,21 +7148,20 @@ const struct types resolution_table_parser_nodes__ACallAssignExpr = {
 };
 /* runtime type ABraAssignExpr */
 const struct type type_parser_nodes__ABraAssignExpr = {
-2489,
+2282,
 "ABraAssignExpr", /* class_name_string */
-7,
+6,
 0,
 &resolution_table_parser_nodes__ABraAssignExpr,
-8,
+7,
 {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2333, /* ASendExpr */
-2489, /* ABraAssignExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2282, /* ABraAssignExpr */
 },
 };
 const struct types resolution_table_parser_nodes__ABraAssignExpr = {
@@ -8368,7 +7171,7 @@ const struct types resolution_table_parser_nodes__ABraAssignExpr = {
 };
 /* runtime type AAttrReassignExpr */
 const struct type type_parser_nodes__AAttrReassignExpr = {
-2341,
+2283,
 "AAttrReassignExpr", /* class_name_string */
 6,
 0,
@@ -8378,10 +7181,10 @@ const struct type type_parser_nodes__AAttrReassignExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2341, /* AAttrReassignExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2283, /* AAttrReassignExpr */
 },
 };
 const struct types resolution_table_parser_nodes__AAttrReassignExpr = {
@@ -8391,21 +7194,20 @@ const struct types resolution_table_parser_nodes__AAttrReassignExpr = {
 };
 /* runtime type ACallReassignExpr */
 const struct type type_parser_nodes__ACallReassignExpr = {
-2490,
+2284,
 "ACallReassignExpr", /* class_name_string */
-7,
+6,
 0,
 &resolution_table_parser_nodes__ACallReassignExpr,
-8,
+7,
 {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2333, /* ASendExpr */
-2490, /* ACallReassignExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2284, /* ACallReassignExpr */
 },
 };
 const struct types resolution_table_parser_nodes__ACallReassignExpr = {
@@ -8415,21 +7217,20 @@ const struct types resolution_table_parser_nodes__ACallReassignExpr = {
 };
 /* runtime type ABraReassignExpr */
 const struct type type_parser_nodes__ABraReassignExpr = {
-2491,
+2285,
 "ABraReassignExpr", /* class_name_string */
-7,
+6,
 0,
 &resolution_table_parser_nodes__ABraReassignExpr,
-8,
+7,
 {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2333, /* ASendExpr */
-2491, /* ABraReassignExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2285, /* ABraReassignExpr */
 },
 };
 const struct types resolution_table_parser_nodes__ABraReassignExpr = {
@@ -8439,7 +7240,7 @@ const struct types resolution_table_parser_nodes__ABraReassignExpr = {
 };
 /* runtime type APlusAssignOp */
 const struct type type_parser_nodes__APlusAssignOp = {
-2342,
+2286,
 "APlusAssignOp", /* class_name_string */
 6,
 0,
@@ -8448,11 +7249,11 @@ const struct type type_parser_nodes__APlusAssignOp = {
 {
 0, /* nullable Object */
 1, /* Object */
-23, /* nullable AAssignOp */
-225, /* ANode */
-624, /* Prod */
-2018, /* AAssignOp */
-2342, /* APlusAssignOp */
+22, /* nullable AAssignOp */
+223, /* ANode */
+622, /* Prod */
+1964, /* AAssignOp */
+2286, /* APlusAssignOp */
 },
 };
 const struct types resolution_table_parser_nodes__APlusAssignOp = {
@@ -8462,7 +7263,7 @@ const struct types resolution_table_parser_nodes__APlusAssignOp = {
 };
 /* runtime type AAssignOp */
 const struct type type_parser_nodes__AAssignOp = {
-2018,
+1964,
 "AAssignOp", /* class_name_string */
 5,
 0,
@@ -8471,15 +7272,15 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-23, /* nullable AAssignOp */
-225, /* ANode */
-624, /* Prod */
-2018, /* AAssignOp */
+22, /* nullable AAssignOp */
+223, /* ANode */
+622, /* Prod */
+1964, /* AAssignOp */
 },
 };
 /* runtime type nullable AAssignOp */
 const struct type type_nullable_parser_nodes__AAssignOp = {
-23,
+22,
 "nullable AAssignOp", /* class_name_string */
 2,
 1,
@@ -8488,12 +7289,12 @@ NULL,
 {
 0, /* nullable Object */
 -1, /* empty */
-23, /* nullable AAssignOp */
+22, /* nullable AAssignOp */
 },
 };
 /* runtime type AMinusAssignOp */
 const struct type type_parser_nodes__AMinusAssignOp = {
-2343,
+2287,
 "AMinusAssignOp", /* class_name_string */
 6,
 0,
@@ -8502,11 +7303,11 @@ const struct type type_parser_nodes__AMinusAssignOp = {
 {
 0, /* nullable Object */
 1, /* Object */
-23, /* nullable AAssignOp */
-225, /* ANode */
-624, /* Prod */
-2018, /* AAssignOp */
-2343, /* AMinusAssignOp */
+22, /* nullable AAssignOp */
+223, /* ANode */
+622, /* Prod */
+1964, /* AAssignOp */
+2287, /* AMinusAssignOp */
 },
 };
 const struct types resolution_table_parser_nodes__AMinusAssignOp = {
@@ -8516,7 +7317,7 @@ const struct types resolution_table_parser_nodes__AMinusAssignOp = {
 };
 /* runtime type ADoExpr */
 const struct type type_parser_nodes__ADoExpr = {
-2344,
+2288,
 "ADoExpr", /* class_name_string */
 6,
 0,
@@ -8526,10 +7327,10 @@ const struct type type_parser_nodes__ADoExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2344, /* ADoExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2288, /* ADoExpr */
 },
 };
 const struct types resolution_table_parser_nodes__ADoExpr = {
@@ -8539,7 +7340,7 @@ const struct types resolution_table_parser_nodes__ADoExpr = {
 };
 /* runtime type AIfExpr */
 const struct type type_parser_nodes__AIfExpr = {
-2345,
+2289,
 "AIfExpr", /* class_name_string */
 6,
 0,
@@ -8549,10 +7350,10 @@ const struct type type_parser_nodes__AIfExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2345, /* AIfExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2289, /* AIfExpr */
 },
 };
 const struct types resolution_table_parser_nodes__AIfExpr = {
@@ -8562,7 +7363,7 @@ const struct types resolution_table_parser_nodes__AIfExpr = {
 };
 /* runtime type ALoopExpr */
 const struct type type_parser_nodes__ALoopExpr = {
-2346,
+2290,
 "ALoopExpr", /* class_name_string */
 6,
 0,
@@ -8572,10 +7373,10 @@ const struct type type_parser_nodes__ALoopExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2346, /* ALoopExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2290, /* ALoopExpr */
 },
 };
 const struct types resolution_table_parser_nodes__ALoopExpr = {
@@ -8585,7 +7386,7 @@ const struct types resolution_table_parser_nodes__ALoopExpr = {
 };
 /* runtime type AWhileExpr */
 const struct type type_parser_nodes__AWhileExpr = {
-2347,
+2291,
 "AWhileExpr", /* class_name_string */
 6,
 0,
@@ -8595,10 +7396,10 @@ const struct type type_parser_nodes__AWhileExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2347, /* AWhileExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2291, /* AWhileExpr */
 },
 };
 const struct types resolution_table_parser_nodes__AWhileExpr = {
@@ -8608,7 +7409,7 @@ const struct types resolution_table_parser_nodes__AWhileExpr = {
 };
 /* runtime type AForExpr */
 const struct type type_parser_nodes__AForExpr = {
-2348,
+2292,
 "AForExpr", /* class_name_string */
 6,
 0,
@@ -8618,10 +7419,10 @@ const struct type type_parser_nodes__AForExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2348, /* AForExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2292, /* AForExpr */
 },
 };
 const struct types resolution_table_parser_nodes__AForExpr = {
@@ -8631,7 +7432,7 @@ const struct types resolution_table_parser_nodes__AForExpr = {
 };
 /* runtime type AAssertExpr */
 const struct type type_parser_nodes__AAssertExpr = {
-2349,
+2293,
 "AAssertExpr", /* class_name_string */
 6,
 0,
@@ -8641,10 +7442,10 @@ const struct type type_parser_nodes__AAssertExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2349, /* AAssertExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2293, /* AAssertExpr */
 },
 };
 const struct types resolution_table_parser_nodes__AAssertExpr = {
@@ -8652,33 +7453,9 @@ const struct types resolution_table_parser_nodes__AAssertExpr = {
 {
 }
 };
-/* runtime type ABraExpr */
-const struct type type_parser_nodes__ABraExpr = {
-2492,
-"ABraExpr", /* class_name_string */
-7,
-0,
-&resolution_table_parser_nodes__ABraExpr,
-8,
-{
-0, /* nullable Object */
-1, /* Object */
-15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2333, /* ASendExpr */
-2492, /* ABraExpr */
-},
-};
-const struct types resolution_table_parser_nodes__ABraExpr = {
-0, /* dummy */
-{
-}
-};
 /* runtime type AIfexprExpr */
 const struct type type_parser_nodes__AIfexprExpr = {
-2350,
+2294,
 "AIfexprExpr", /* class_name_string */
 6,
 0,
@@ -8688,10 +7465,10 @@ const struct type type_parser_nodes__AIfexprExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2350, /* AIfexprExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2294, /* AIfexprExpr */
 },
 };
 const struct types resolution_table_parser_nodes__AIfexprExpr = {
@@ -8701,7 +7478,7 @@ const struct types resolution_table_parser_nodes__AIfexprExpr = {
 };
 /* runtime type AOrExpr */
 const struct type type_parser_nodes__AOrExpr = {
-2493,
+2443,
 "AOrExpr", /* class_name_string */
 7,
 0,
@@ -8711,11 +7488,11 @@ const struct type type_parser_nodes__AOrExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2351, /* ABoolExpr */
-2493, /* AOrExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2295, /* ABoolExpr */
+2443, /* AOrExpr */
 },
 };
 const struct types resolution_table_parser_nodes__AOrExpr = {
@@ -8725,7 +7502,7 @@ const struct types resolution_table_parser_nodes__AOrExpr = {
 };
 /* runtime type ABoolExpr */
 const struct type type_parser_nodes__ABoolExpr = {
-2351,
+2295,
 "ABoolExpr", /* class_name_string */
 6,
 0,
@@ -8735,15 +7512,15 @@ NULL,
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2351, /* ABoolExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2295, /* ABoolExpr */
 },
 };
 /* runtime type AAndExpr */
 const struct type type_parser_nodes__AAndExpr = {
-2494,
+2444,
 "AAndExpr", /* class_name_string */
 7,
 0,
@@ -8753,11 +7530,11 @@ const struct type type_parser_nodes__AAndExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2351, /* ABoolExpr */
-2494, /* AAndExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2295, /* ABoolExpr */
+2444, /* AAndExpr */
 },
 };
 const struct types resolution_table_parser_nodes__AAndExpr = {
@@ -8767,7 +7544,7 @@ const struct types resolution_table_parser_nodes__AAndExpr = {
 };
 /* runtime type AOrElseExpr */
 const struct type type_parser_nodes__AOrElseExpr = {
-2495,
+2445,
 "AOrElseExpr", /* class_name_string */
 7,
 0,
@@ -8777,11 +7554,11 @@ const struct type type_parser_nodes__AOrElseExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2351, /* ABoolExpr */
-2495, /* AOrElseExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2295, /* ABoolExpr */
+2445, /* AOrElseExpr */
 },
 };
 const struct types resolution_table_parser_nodes__AOrElseExpr = {
@@ -8791,7 +7568,7 @@ const struct types resolution_table_parser_nodes__AOrElseExpr = {
 };
 /* runtime type AImpliesExpr */
 const struct type type_parser_nodes__AImpliesExpr = {
-2496,
+2446,
 "AImpliesExpr", /* class_name_string */
 7,
 0,
@@ -8801,11 +7578,11 @@ const struct type type_parser_nodes__AImpliesExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2351, /* ABoolExpr */
-2496, /* AImpliesExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2295, /* ABoolExpr */
+2446, /* AImpliesExpr */
 },
 };
 const struct types resolution_table_parser_nodes__AImpliesExpr = {
@@ -8815,7 +7592,7 @@ const struct types resolution_table_parser_nodes__AImpliesExpr = {
 };
 /* runtime type ANotExpr */
 const struct type type_parser_nodes__ANotExpr = {
-2497,
+2447,
 "ANotExpr", /* class_name_string */
 7,
 0,
@@ -8825,11 +7602,11 @@ const struct type type_parser_nodes__ANotExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2351, /* ABoolExpr */
-2497, /* ANotExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2295, /* ABoolExpr */
+2447, /* ANotExpr */
 },
 };
 const struct types resolution_table_parser_nodes__ANotExpr = {
@@ -8839,21 +7616,20 @@ const struct types resolution_table_parser_nodes__ANotExpr = {
 };
 /* runtime type AEqExpr */
 const struct type type_parser_nodes__AEqExpr = {
-2498,
+2296,
 "AEqExpr", /* class_name_string */
-7,
+6,
 0,
 &resolution_table_parser_nodes__AEqExpr,
-8,
+7,
 {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2333, /* ASendExpr */
-2498, /* AEqExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2296, /* AEqExpr */
 },
 };
 const struct types resolution_table_parser_nodes__AEqExpr = {
@@ -8861,47 +7637,22 @@ const struct types resolution_table_parser_nodes__AEqExpr = {
 {
 }
 };
-/* runtime type AEeExpr */
-const struct type type_parser_nodes__AEeExpr = {
-2499,
-"AEeExpr", /* class_name_string */
-7,
-0,
-&resolution_table_parser_nodes__AEeExpr,
-8,
-{
-0, /* nullable Object */
-1, /* Object */
-15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2351, /* ABoolExpr */
-2499, /* AEeExpr */
-},
-};
-const struct types resolution_table_parser_nodes__AEeExpr = {
-0, /* dummy */
-{
-}
-};
 /* runtime type ANeExpr */
 const struct type type_parser_nodes__ANeExpr = {
-2500,
+2297,
 "ANeExpr", /* class_name_string */
-7,
+6,
 0,
 &resolution_table_parser_nodes__ANeExpr,
-8,
+7,
 {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2333, /* ASendExpr */
-2500, /* ANeExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2297, /* ANeExpr */
 },
 };
 const struct types resolution_table_parser_nodes__ANeExpr = {
@@ -8911,21 +7662,20 @@ const struct types resolution_table_parser_nodes__ANeExpr = {
 };
 /* runtime type ALtExpr */
 const struct type type_parser_nodes__ALtExpr = {
-2501,
+2298,
 "ALtExpr", /* class_name_string */
-7,
+6,
 0,
 &resolution_table_parser_nodes__ALtExpr,
-8,
+7,
 {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2333, /* ASendExpr */
-2501, /* ALtExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2298, /* ALtExpr */
 },
 };
 const struct types resolution_table_parser_nodes__ALtExpr = {
@@ -8935,21 +7685,20 @@ const struct types resolution_table_parser_nodes__ALtExpr = {
 };
 /* runtime type ALeExpr */
 const struct type type_parser_nodes__ALeExpr = {
-2502,
+2299,
 "ALeExpr", /* class_name_string */
-7,
+6,
 0,
 &resolution_table_parser_nodes__ALeExpr,
-8,
+7,
 {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2333, /* ASendExpr */
-2502, /* ALeExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2299, /* ALeExpr */
 },
 };
 const struct types resolution_table_parser_nodes__ALeExpr = {
@@ -8959,21 +7708,20 @@ const struct types resolution_table_parser_nodes__ALeExpr = {
 };
 /* runtime type ALlExpr */
 const struct type type_parser_nodes__ALlExpr = {
-2503,
+2300,
 "ALlExpr", /* class_name_string */
-7,
+6,
 0,
 &resolution_table_parser_nodes__ALlExpr,
-8,
+7,
 {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2333, /* ASendExpr */
-2503, /* ALlExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2300, /* ALlExpr */
 },
 };
 const struct types resolution_table_parser_nodes__ALlExpr = {
@@ -8983,21 +7731,20 @@ const struct types resolution_table_parser_nodes__ALlExpr = {
 };
 /* runtime type AGtExpr */
 const struct type type_parser_nodes__AGtExpr = {
-2504,
+2301,
 "AGtExpr", /* class_name_string */
-7,
+6,
 0,
 &resolution_table_parser_nodes__AGtExpr,
-8,
+7,
 {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2333, /* ASendExpr */
-2504, /* AGtExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2301, /* AGtExpr */
 },
 };
 const struct types resolution_table_parser_nodes__AGtExpr = {
@@ -9007,21 +7754,20 @@ const struct types resolution_table_parser_nodes__AGtExpr = {
 };
 /* runtime type AGeExpr */
 const struct type type_parser_nodes__AGeExpr = {
-2505,
+2302,
 "AGeExpr", /* class_name_string */
-7,
+6,
 0,
 &resolution_table_parser_nodes__AGeExpr,
-8,
+7,
 {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2333, /* ASendExpr */
-2505, /* AGeExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2302, /* AGeExpr */
 },
 };
 const struct types resolution_table_parser_nodes__AGeExpr = {
@@ -9031,21 +7777,20 @@ const struct types resolution_table_parser_nodes__AGeExpr = {
 };
 /* runtime type AGgExpr */
 const struct type type_parser_nodes__AGgExpr = {
-2506,
+2303,
 "AGgExpr", /* class_name_string */
-7,
+6,
 0,
 &resolution_table_parser_nodes__AGgExpr,
-8,
+7,
 {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2333, /* ASendExpr */
-2506, /* AGgExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2303, /* AGgExpr */
 },
 };
 const struct types resolution_table_parser_nodes__AGgExpr = {
@@ -9055,21 +7800,20 @@ const struct types resolution_table_parser_nodes__AGgExpr = {
 };
 /* runtime type AStarshipExpr */
 const struct type type_parser_nodes__AStarshipExpr = {
-2507,
+2304,
 "AStarshipExpr", /* class_name_string */
-7,
+6,
 0,
 &resolution_table_parser_nodes__AStarshipExpr,
-8,
+7,
 {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2333, /* ASendExpr */
-2507, /* AStarshipExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2304, /* AStarshipExpr */
 },
 };
 const struct types resolution_table_parser_nodes__AStarshipExpr = {
@@ -9079,7 +7823,7 @@ const struct types resolution_table_parser_nodes__AStarshipExpr = {
 };
 /* runtime type AIsaExpr */
 const struct type type_parser_nodes__AIsaExpr = {
-2508,
+2448,
 "AIsaExpr", /* class_name_string */
 7,
 0,
@@ -9089,11 +7833,11 @@ const struct type type_parser_nodes__AIsaExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2351, /* ABoolExpr */
-2508, /* AIsaExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2295, /* ABoolExpr */
+2448, /* AIsaExpr */
 },
 };
 const struct types resolution_table_parser_nodes__AIsaExpr = {
@@ -9103,21 +7847,20 @@ const struct types resolution_table_parser_nodes__AIsaExpr = {
 };
 /* runtime type APlusExpr */
 const struct type type_parser_nodes__APlusExpr = {
-2509,
+2305,
 "APlusExpr", /* class_name_string */
-7,
+6,
 0,
 &resolution_table_parser_nodes__APlusExpr,
-8,
+7,
 {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2333, /* ASendExpr */
-2509, /* APlusExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2305, /* APlusExpr */
 },
 };
 const struct types resolution_table_parser_nodes__APlusExpr = {
@@ -9127,21 +7870,20 @@ const struct types resolution_table_parser_nodes__APlusExpr = {
 };
 /* runtime type AMinusExpr */
 const struct type type_parser_nodes__AMinusExpr = {
-2510,
+2306,
 "AMinusExpr", /* class_name_string */
-7,
+6,
 0,
 &resolution_table_parser_nodes__AMinusExpr,
-8,
+7,
 {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2333, /* ASendExpr */
-2510, /* AMinusExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2306, /* AMinusExpr */
 },
 };
 const struct types resolution_table_parser_nodes__AMinusExpr = {
@@ -9151,21 +7893,20 @@ const struct types resolution_table_parser_nodes__AMinusExpr = {
 };
 /* runtime type AStarExpr */
 const struct type type_parser_nodes__AStarExpr = {
-2511,
+2307,
 "AStarExpr", /* class_name_string */
-7,
+6,
 0,
 &resolution_table_parser_nodes__AStarExpr,
-8,
+7,
 {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2333, /* ASendExpr */
-2511, /* AStarExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2307, /* AStarExpr */
 },
 };
 const struct types resolution_table_parser_nodes__AStarExpr = {
@@ -9175,21 +7916,20 @@ const struct types resolution_table_parser_nodes__AStarExpr = {
 };
 /* runtime type ASlashExpr */
 const struct type type_parser_nodes__ASlashExpr = {
-2512,
+2308,
 "ASlashExpr", /* class_name_string */
-7,
+6,
 0,
 &resolution_table_parser_nodes__ASlashExpr,
-8,
+7,
 {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2333, /* ASendExpr */
-2512, /* ASlashExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2308, /* ASlashExpr */
 },
 };
 const struct types resolution_table_parser_nodes__ASlashExpr = {
@@ -9199,21 +7939,20 @@ const struct types resolution_table_parser_nodes__ASlashExpr = {
 };
 /* runtime type APercentExpr */
 const struct type type_parser_nodes__APercentExpr = {
-2513,
+2309,
 "APercentExpr", /* class_name_string */
-7,
+6,
 0,
 &resolution_table_parser_nodes__APercentExpr,
-8,
+7,
 {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2333, /* ASendExpr */
-2513, /* APercentExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2309, /* APercentExpr */
 },
 };
 const struct types resolution_table_parser_nodes__APercentExpr = {
@@ -9223,21 +7962,20 @@ const struct types resolution_table_parser_nodes__APercentExpr = {
 };
 /* runtime type AUminusExpr */
 const struct type type_parser_nodes__AUminusExpr = {
-2514,
+2310,
 "AUminusExpr", /* class_name_string */
-7,
+6,
 0,
 &resolution_table_parser_nodes__AUminusExpr,
-8,
+7,
 {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2333, /* ASendExpr */
-2514, /* AUminusExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2310, /* AUminusExpr */
 },
 };
 const struct types resolution_table_parser_nodes__AUminusExpr = {
@@ -9247,7 +7985,7 @@ const struct types resolution_table_parser_nodes__AUminusExpr = {
 };
 /* runtime type AOnceExpr */
 const struct type type_parser_nodes__AOnceExpr = {
-2352,
+2311,
 "AOnceExpr", /* class_name_string */
 6,
 0,
@@ -9257,10 +7995,10 @@ const struct type type_parser_nodes__AOnceExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2352, /* AOnceExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2311, /* AOnceExpr */
 },
 };
 const struct types resolution_table_parser_nodes__AOnceExpr = {
@@ -9270,7 +8008,7 @@ const struct types resolution_table_parser_nodes__AOnceExpr = {
 };
 /* runtime type ANewExpr */
 const struct type type_parser_nodes__ANewExpr = {
-2353,
+2312,
 "ANewExpr", /* class_name_string */
 6,
 0,
@@ -9280,10 +8018,10 @@ const struct type type_parser_nodes__ANewExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2353, /* ANewExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2312, /* ANewExpr */
 },
 };
 const struct types resolution_table_parser_nodes__ANewExpr = {
@@ -9293,7 +8031,7 @@ const struct types resolution_table_parser_nodes__ANewExpr = {
 };
 /* runtime type AIssetAttrExpr */
 const struct type type_parser_nodes__AIssetAttrExpr = {
-2354,
+2313,
 "AIssetAttrExpr", /* class_name_string */
 6,
 0,
@@ -9303,10 +8041,10 @@ const struct type type_parser_nodes__AIssetAttrExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2354, /* AIssetAttrExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2313, /* AIssetAttrExpr */
 },
 };
 const struct types resolution_table_parser_nodes__AIssetAttrExpr = {
@@ -9316,7 +8054,7 @@ const struct types resolution_table_parser_nodes__AIssetAttrExpr = {
 };
 /* runtime type AAttrExpr */
 const struct type type_parser_nodes__AAttrExpr = {
-2355,
+2314,
 "AAttrExpr", /* class_name_string */
 6,
 0,
@@ -9326,10 +8064,10 @@ const struct type type_parser_nodes__AAttrExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2355, /* AAttrExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2314, /* AAttrExpr */
 },
 };
 const struct types resolution_table_parser_nodes__AAttrExpr = {
@@ -9337,9 +8075,32 @@ const struct types resolution_table_parser_nodes__AAttrExpr = {
 {
 }
 };
+/* runtime type ABraExpr */
+const struct type type_parser_nodes__ABraExpr = {
+2315,
+"ABraExpr", /* class_name_string */
+6,
+0,
+&resolution_table_parser_nodes__ABraExpr,
+7,
+{
+0, /* nullable Object */
+1, /* Object */
+15, /* nullable AExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2315, /* ABraExpr */
+},
+};
+const struct types resolution_table_parser_nodes__ABraExpr = {
+0, /* dummy */
+{
+}
+};
 /* runtime type ACrangeExpr */
 const struct type type_parser_nodes__ACrangeExpr = {
-2356,
+2316,
 "ACrangeExpr", /* class_name_string */
 6,
 0,
@@ -9349,10 +8110,10 @@ const struct type type_parser_nodes__ACrangeExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2356, /* ACrangeExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2316, /* ACrangeExpr */
 },
 };
 const struct types resolution_table_parser_nodes__ACrangeExpr = {
@@ -9362,7 +8123,7 @@ const struct types resolution_table_parser_nodes__ACrangeExpr = {
 };
 /* runtime type AOrangeExpr */
 const struct type type_parser_nodes__AOrangeExpr = {
-2357,
+2317,
 "AOrangeExpr", /* class_name_string */
 6,
 0,
@@ -9372,10 +8133,10 @@ const struct type type_parser_nodes__AOrangeExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2357, /* AOrangeExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2317, /* AOrangeExpr */
 },
 };
 const struct types resolution_table_parser_nodes__AOrangeExpr = {
@@ -9385,7 +8146,7 @@ const struct types resolution_table_parser_nodes__AOrangeExpr = {
 };
 /* runtime type AArrayExpr */
 const struct type type_parser_nodes__AArrayExpr = {
-2358,
+2318,
 "AArrayExpr", /* class_name_string */
 6,
 0,
@@ -9395,10 +8156,10 @@ const struct type type_parser_nodes__AArrayExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2358, /* AArrayExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2318, /* AArrayExpr */
 },
 };
 const struct types resolution_table_parser_nodes__AArrayExpr = {
@@ -9408,7 +8169,7 @@ const struct types resolution_table_parser_nodes__AArrayExpr = {
 };
 /* runtime type ATrueExpr */
 const struct type type_parser_nodes__ATrueExpr = {
-2515,
+2449,
 "ATrueExpr", /* class_name_string */
 7,
 0,
@@ -9418,11 +8179,11 @@ const struct type type_parser_nodes__ATrueExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2351, /* ABoolExpr */
-2515, /* ATrueExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2295, /* ABoolExpr */
+2449, /* ATrueExpr */
 },
 };
 const struct types resolution_table_parser_nodes__ATrueExpr = {
@@ -9432,7 +8193,7 @@ const struct types resolution_table_parser_nodes__ATrueExpr = {
 };
 /* runtime type AFalseExpr */
 const struct type type_parser_nodes__AFalseExpr = {
-2516,
+2450,
 "AFalseExpr", /* class_name_string */
 7,
 0,
@@ -9442,11 +8203,11 @@ const struct type type_parser_nodes__AFalseExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2351, /* ABoolExpr */
-2516, /* AFalseExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2295, /* ABoolExpr */
+2450, /* AFalseExpr */
 },
 };
 const struct types resolution_table_parser_nodes__AFalseExpr = {
@@ -9456,7 +8217,7 @@ const struct types resolution_table_parser_nodes__AFalseExpr = {
 };
 /* runtime type ANullExpr */
 const struct type type_parser_nodes__ANullExpr = {
-2359,
+2319,
 "ANullExpr", /* class_name_string */
 6,
 0,
@@ -9466,10 +8227,10 @@ const struct type type_parser_nodes__ANullExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2359, /* ANullExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2319, /* ANullExpr */
 },
 };
 const struct types resolution_table_parser_nodes__ANullExpr = {
@@ -9479,7 +8240,7 @@ const struct types resolution_table_parser_nodes__ANullExpr = {
 };
 /* runtime type AIntExpr */
 const struct type type_parser_nodes__AIntExpr = {
-2360,
+2320,
 "AIntExpr", /* class_name_string */
 6,
 0,
@@ -9489,10 +8250,10 @@ const struct type type_parser_nodes__AIntExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2360, /* AIntExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2320, /* AIntExpr */
 },
 };
 const struct types resolution_table_parser_nodes__AIntExpr = {
@@ -9502,7 +8263,7 @@ const struct types resolution_table_parser_nodes__AIntExpr = {
 };
 /* runtime type AFloatExpr */
 const struct type type_parser_nodes__AFloatExpr = {
-2361,
+2321,
 "AFloatExpr", /* class_name_string */
 6,
 0,
@@ -9512,10 +8273,10 @@ const struct type type_parser_nodes__AFloatExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2361, /* AFloatExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2321, /* AFloatExpr */
 },
 };
 const struct types resolution_table_parser_nodes__AFloatExpr = {
@@ -9525,7 +8286,7 @@ const struct types resolution_table_parser_nodes__AFloatExpr = {
 };
 /* runtime type ACharExpr */
 const struct type type_parser_nodes__ACharExpr = {
-2362,
+2322,
 "ACharExpr", /* class_name_string */
 6,
 0,
@@ -9535,10 +8296,10 @@ const struct type type_parser_nodes__ACharExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2362, /* ACharExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2322, /* ACharExpr */
 },
 };
 const struct types resolution_table_parser_nodes__ACharExpr = {
@@ -9548,7 +8309,7 @@ const struct types resolution_table_parser_nodes__ACharExpr = {
 };
 /* runtime type AStringExpr */
 const struct type type_parser_nodes__AStringExpr = {
-2517,
+2451,
 "AStringExpr", /* class_name_string */
 7,
 0,
@@ -9558,11 +8319,11 @@ const struct type type_parser_nodes__AStringExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2363, /* AStringFormExpr */
-2517, /* AStringExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2323, /* AStringFormExpr */
+2451, /* AStringExpr */
 },
 };
 const struct types resolution_table_parser_nodes__AStringExpr = {
@@ -9572,7 +8333,7 @@ const struct types resolution_table_parser_nodes__AStringExpr = {
 };
 /* runtime type AStringFormExpr */
 const struct type type_parser_nodes__AStringFormExpr = {
-2363,
+2323,
 "AStringFormExpr", /* class_name_string */
 6,
 0,
@@ -9582,15 +8343,15 @@ NULL,
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2363, /* AStringFormExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2323, /* AStringFormExpr */
 },
 };
 /* runtime type AParExpr */
 const struct type type_parser_nodes__AParExpr = {
-2364,
+2324,
 "AParExpr", /* class_name_string */
 6,
 0,
@@ -9600,10 +8361,10 @@ const struct type type_parser_nodes__AParExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2364, /* AParExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2324, /* AParExpr */
 },
 };
 const struct types resolution_table_parser_nodes__AParExpr = {
@@ -9613,7 +8374,7 @@ const struct types resolution_table_parser_nodes__AParExpr = {
 };
 /* runtime type AAsCastExpr */
 const struct type type_parser_nodes__AAsCastExpr = {
-2365,
+2325,
 "AAsCastExpr", /* class_name_string */
 6,
 0,
@@ -9623,10 +8384,10 @@ const struct type type_parser_nodes__AAsCastExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2365, /* AAsCastExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2325, /* AAsCastExpr */
 },
 };
 const struct types resolution_table_parser_nodes__AAsCastExpr = {
@@ -9636,7 +8397,7 @@ const struct types resolution_table_parser_nodes__AAsCastExpr = {
 };
 /* runtime type AAsNotnullExpr */
 const struct type type_parser_nodes__AAsNotnullExpr = {
-2366,
+2326,
 "AAsNotnullExpr", /* class_name_string */
 6,
 0,
@@ -9646,10 +8407,10 @@ const struct type type_parser_nodes__AAsNotnullExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2366, /* AAsNotnullExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2326, /* AAsNotnullExpr */
 },
 };
 const struct types resolution_table_parser_nodes__AAsNotnullExpr = {
@@ -9659,7 +8420,7 @@ const struct types resolution_table_parser_nodes__AAsNotnullExpr = {
 };
 /* runtime type ASuperstringExpr */
 const struct type type_parser_nodes__ASuperstringExpr = {
-2367,
+2327,
 "ASuperstringExpr", /* class_name_string */
 6,
 0,
@@ -9669,10 +8430,10 @@ const struct type type_parser_nodes__ASuperstringExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2367, /* ASuperstringExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2327, /* ASuperstringExpr */
 },
 };
 const struct types resolution_table_parser_nodes__ASuperstringExpr = {
@@ -9682,7 +8443,7 @@ const struct types resolution_table_parser_nodes__ASuperstringExpr = {
 };
 /* runtime type AStartStringExpr */
 const struct type type_parser_nodes__AStartStringExpr = {
-2518,
+2452,
 "AStartStringExpr", /* class_name_string */
 7,
 0,
@@ -9692,11 +8453,11 @@ const struct type type_parser_nodes__AStartStringExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2363, /* AStringFormExpr */
-2518, /* AStartStringExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2323, /* AStringFormExpr */
+2452, /* AStartStringExpr */
 },
 };
 const struct types resolution_table_parser_nodes__AStartStringExpr = {
@@ -9706,7 +8467,7 @@ const struct types resolution_table_parser_nodes__AStartStringExpr = {
 };
 /* runtime type AMidStringExpr */
 const struct type type_parser_nodes__AMidStringExpr = {
-2519,
+2453,
 "AMidStringExpr", /* class_name_string */
 7,
 0,
@@ -9716,11 +8477,11 @@ const struct type type_parser_nodes__AMidStringExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2363, /* AStringFormExpr */
-2519, /* AMidStringExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2323, /* AStringFormExpr */
+2453, /* AMidStringExpr */
 },
 };
 const struct types resolution_table_parser_nodes__AMidStringExpr = {
@@ -9730,7 +8491,7 @@ const struct types resolution_table_parser_nodes__AMidStringExpr = {
 };
 /* runtime type AEndStringExpr */
 const struct type type_parser_nodes__AEndStringExpr = {
-2520,
+2454,
 "AEndStringExpr", /* class_name_string */
 7,
 0,
@@ -9740,11 +8501,11 @@ const struct type type_parser_nodes__AEndStringExpr = {
 0, /* nullable Object */
 1, /* Object */
 15, /* nullable AExpr */
-225, /* ANode */
-624, /* Prod */
-2005, /* AExpr */
-2363, /* AStringFormExpr */
-2520, /* AEndStringExpr */
+223, /* ANode */
+622, /* Prod */
+1953, /* AExpr */
+2323, /* AStringFormExpr */
+2454, /* AEndStringExpr */
 },
 };
 const struct types resolution_table_parser_nodes__AEndStringExpr = {
@@ -9754,7 +8515,7 @@ const struct types resolution_table_parser_nodes__AEndStringExpr = {
 };
 /* runtime type AAnnotation */
 const struct type type_parser_nodes__AAnnotation = {
-2019,
+1965,
 "AAnnotation", /* class_name_string */
 5,
 0,
@@ -9763,10 +8524,10 @@ const struct type type_parser_nodes__AAnnotation = {
 {
 0, /* nullable Object */
 1, /* Object */
-24, /* nullable AAnnotation */
-225, /* ANode */
-624, /* Prod */
-2019, /* AAnnotation */
+23, /* nullable AAnnotation */
+223, /* ANode */
+622, /* Prod */
+1965, /* AAnnotation */
 },
 };
 const struct types resolution_table_parser_nodes__AAnnotation = {
@@ -9776,7 +8537,7 @@ const struct types resolution_table_parser_nodes__AAnnotation = {
 };
 /* runtime type nullable AAnnotation */
 const struct type type_nullable_parser_nodes__AAnnotation = {
-24,
+23,
 "nullable AAnnotation", /* class_name_string */
 2,
 1,
@@ -9785,7 +8546,7 @@ const struct type type_nullable_parser_nodes__AAnnotation = {
 {
 0, /* nullable Object */
 -1, /* empty */
-24, /* nullable AAnnotation */
+23, /* nullable AAnnotation */
 },
 };
 const struct types resolution_table_nullable_parser_nodes__AAnnotation = {
@@ -9795,7 +8556,7 @@ const struct types resolution_table_nullable_parser_nodes__AAnnotation = {
 };
 /* runtime type ANodes[AAtArg] */
 const struct type type_parser_nodes__ANodesparser_nodes__AAtArg = {
-2521,
+2455,
 "ANodes[AAtArg]", /* class_name_string */
 6,
 0,
@@ -9804,12 +8565,12 @@ const struct type type_parser_nodes__ANodesparser_nodes__AAtArg = {
 {
 0, /* nullable Object */
 1, /* Object */
-598, /* Collection[ANode] */
-165, /* SequenceRead[nullable Object] */
-166, /* Collection[Object] */
-1789, /* Collection[Prod] */
-2521, /* ANodes[AAtArg] */
-2020, /* Collection[AAtArg] */
+596, /* Collection[ANode] */
+163, /* SequenceRead[nullable Object] */
+164, /* Collection[Object] */
+1739, /* Collection[Prod] */
+2455, /* ANodes[AAtArg] */
+1966, /* Collection[AAtArg] */
 },
 };
 const struct types resolution_table_parser_nodes__ANodesparser_nodes__AAtArg = {
@@ -9834,7 +8595,7 @@ NULL, /* empty */
 };
 /* runtime type Collection[AAtArg] */
 const struct type type_abstract_collection__Collectionparser_nodes__AAtArg = {
-2020,
+1966,
 "Collection[AAtArg]", /* class_name_string */
 7,
 0,
@@ -9843,17 +8604,17 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-598, /* Collection[ANode] */
+596, /* Collection[ANode] */
 -1, /* empty */
-166, /* Collection[Object] */
-1789, /* Collection[Prod] */
+164, /* Collection[Object] */
+1739, /* Collection[Prod] */
 -1, /* empty */
-2020, /* Collection[AAtArg] */
+1966, /* Collection[AAtArg] */
 },
 };
 /* runtime type ATypeAtArg */
 const struct type type_parser_nodes__ATypeAtArg = {
-2021,
+1967,
 "ATypeAtArg", /* class_name_string */
 5,
 0,
@@ -9862,10 +8623,10 @@ const struct type type_parser_nodes__ATypeAtArg = {
 {
 0, /* nullable Object */
 1, /* Object */
-1813, /* AAtArg */
-225, /* ANode */
-624, /* Prod */
-2021, /* ATypeAtArg */
+1761, /* AAtArg */
+223, /* ANode */
+622, /* Prod */
+1967, /* ATypeAtArg */
 },
 };
 const struct types resolution_table_parser_nodes__ATypeAtArg = {
@@ -9875,7 +8636,7 @@ const struct types resolution_table_parser_nodes__ATypeAtArg = {
 };
 /* runtime type AAtArg */
 const struct type type_parser_nodes__AAtArg = {
-1813,
+1761,
 "AAtArg", /* class_name_string */
 2,
 0,
@@ -9884,14 +8645,14 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-1813, /* AAtArg */
-225, /* ANode */
-624, /* Prod */
+1761, /* AAtArg */
+223, /* ANode */
+622, /* Prod */
 },
 };
 /* runtime type AExprAtArg */
 const struct type type_parser_nodes__AExprAtArg = {
-2022,
+1968,
 "AExprAtArg", /* class_name_string */
 5,
 0,
@@ -9900,10 +8661,10 @@ const struct type type_parser_nodes__AExprAtArg = {
 {
 0, /* nullable Object */
 1, /* Object */
-1813, /* AAtArg */
-225, /* ANode */
-624, /* Prod */
-2022, /* AExprAtArg */
+1761, /* AAtArg */
+223, /* ANode */
+622, /* Prod */
+1968, /* AExprAtArg */
 },
 };
 const struct types resolution_table_parser_nodes__AExprAtArg = {
@@ -9913,7 +8674,7 @@ const struct types resolution_table_parser_nodes__AExprAtArg = {
 };
 /* runtime type AAtAtArg */
 const struct type type_parser_nodes__AAtAtArg = {
-2023,
+1969,
 "AAtAtArg", /* class_name_string */
 5,
 0,
@@ -9922,10 +8683,10 @@ const struct type type_parser_nodes__AAtAtArg = {
 {
 0, /* nullable Object */
 1, /* Object */
-1813, /* AAtArg */
-225, /* ANode */
-624, /* Prod */
-2023, /* AAtAtArg */
+1761, /* AAtArg */
+223, /* ANode */
+622, /* Prod */
+1969, /* AAtAtArg */
 },
 };
 const struct types resolution_table_parser_nodes__AAtAtArg = {
@@ -9935,7 +8696,7 @@ const struct types resolution_table_parser_nodes__AAtAtArg = {
 };
 /* runtime type AIdAtid */
 const struct type type_parser_nodes__AIdAtid = {
-2368,
+2328,
 "AIdAtid", /* class_name_string */
 6,
 0,
@@ -9944,11 +8705,11 @@ const struct type type_parser_nodes__AIdAtid = {
 {
 0, /* nullable Object */
 1, /* Object */
-25, /* nullable AAtid */
-225, /* ANode */
-624, /* Prod */
-2024, /* AAtid */
-2368, /* AIdAtid */
+24, /* nullable AAtid */
+223, /* ANode */
+622, /* Prod */
+1970, /* AAtid */
+2328, /* AIdAtid */
 },
 };
 const struct types resolution_table_parser_nodes__AIdAtid = {
@@ -9958,7 +8719,7 @@ const struct types resolution_table_parser_nodes__AIdAtid = {
 };
 /* runtime type AAtid */
 const struct type type_parser_nodes__AAtid = {
-2024,
+1970,
 "AAtid", /* class_name_string */
 5,
 0,
@@ -9967,15 +8728,15 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-25, /* nullable AAtid */
-225, /* ANode */
-624, /* Prod */
-2024, /* AAtid */
+24, /* nullable AAtid */
+223, /* ANode */
+622, /* Prod */
+1970, /* AAtid */
 },
 };
 /* runtime type nullable AAtid */
 const struct type type_nullable_parser_nodes__AAtid = {
-25,
+24,
 "nullable AAtid", /* class_name_string */
 2,
 1,
@@ -9984,6 +8745,1257 @@ NULL,
 {
 0, /* nullable Object */
 -1, /* empty */
-25, /* nullable AAtid */
+24, /* nullable AAtid */
+},
+};
+/* runtime type AKwreadableAtid */
+const struct type type_parser_nodes__AKwreadableAtid = {
+2329,
+"AKwreadableAtid", /* class_name_string */
+6,
+0,
+&resolution_table_parser_nodes__AKwreadableAtid,
+7,
+{
+0, /* nullable Object */
+1, /* Object */
+24, /* nullable AAtid */
+223, /* ANode */
+622, /* Prod */
+1970, /* AAtid */
+2329, /* AKwreadableAtid */
+},
+};
+const struct types resolution_table_parser_nodes__AKwreadableAtid = {
+0, /* dummy */
+{
+}
+};
+/* runtime type AKwwritableAtid */
+const struct type type_parser_nodes__AKwwritableAtid = {
+2330,
+"AKwwritableAtid", /* class_name_string */
+6,
+0,
+&resolution_table_parser_nodes__AKwwritableAtid,
+7,
+{
+0, /* nullable Object */
+1, /* Object */
+24, /* nullable AAtid */
+223, /* ANode */
+622, /* Prod */
+1970, /* AAtid */
+2330, /* AKwwritableAtid */
+},
+};
+const struct types resolution_table_parser_nodes__AKwwritableAtid = {
+0, /* dummy */
+{
+}
+};
+/* runtime type AKwimportAtid */
+const struct type type_parser_nodes__AKwimportAtid = {
+2331,
+"AKwimportAtid", /* class_name_string */
+6,
+0,
+&resolution_table_parser_nodes__AKwimportAtid,
+7,
+{
+0, /* nullable Object */
+1, /* Object */
+24, /* nullable AAtid */
+223, /* ANode */
+622, /* Prod */
+1970, /* AAtid */
+2331, /* AKwimportAtid */
+},
+};
+const struct types resolution_table_parser_nodes__AKwimportAtid = {
+0, /* dummy */
+{
+}
+};
+/* runtime type AParExprs */
+const struct type type_parser_nodes__AParExprs = {
+2332,
+"AParExprs", /* class_name_string */
+6,
+0,
+&resolution_table_parser_nodes__AParExprs,
+7,
+{
+0, /* nullable Object */
+1, /* Object */
+25, /* nullable AExprs */
+223, /* ANode */
+622, /* Prod */
+1971, /* AExprs */
+2332, /* AParExprs */
+},
+};
+const struct types resolution_table_parser_nodes__AParExprs = {
+0, /* dummy */
+{
+}
+};
+/* runtime type AExprs */
+const struct type type_parser_nodes__AExprs = {
+1971,
+"AExprs", /* class_name_string */
+5,
+0,
+NULL,
+6,
+{
+0, /* nullable Object */
+1, /* Object */
+25, /* nullable AExprs */
+223, /* ANode */
+622, /* Prod */
+1971, /* AExprs */
+},
+};
+/* runtime type nullable AExprs */
+const struct type type_nullable_parser_nodes__AExprs = {
+25,
+"nullable AExprs", /* class_name_string */
+2,
+1,
+NULL,
+3,
+{
+0, /* nullable Object */
+-1, /* empty */
+25, /* nullable AExprs */
+},
+};
+/* runtime type AListExprs */
+const struct type type_parser_nodes__AListExprs = {
+2333,
+"AListExprs", /* class_name_string */
+6,
+0,
+&resolution_table_parser_nodes__AListExprs,
+7,
+{
+0, /* nullable Object */
+1, /* Object */
+25, /* nullable AExprs */
+223, /* ANode */
+622, /* Prod */
+1971, /* AExprs */
+2333, /* AListExprs */
+},
+};
+const struct types resolution_table_parser_nodes__AListExprs = {
+0, /* dummy */
+{
+}
+};
+/* runtime type ABraExprs */
+const struct type type_parser_nodes__ABraExprs = {
+2334,
+"ABraExprs", /* class_name_string */
+6,
+0,
+&resolution_table_parser_nodes__ABraExprs,
+7,
+{
+0, /* nullable Object */
+1, /* Object */
+25, /* nullable AExprs */
+223, /* ANode */
+622, /* Prod */
+1971, /* AExprs */
+2334, /* ABraExprs */
+},
+};
+const struct types resolution_table_parser_nodes__ABraExprs = {
+0, /* dummy */
+{
+}
+};
+/* runtime type AModuleName */
+const struct type type_parser_nodes__AModuleName = {
+1972,
+"AModuleName", /* class_name_string */
+5,
+0,
+&resolution_table_parser_nodes__AModuleName,
+6,
+{
+0, /* nullable Object */
+1, /* Object */
+26, /* nullable AModuleName */
+223, /* ANode */
+622, /* Prod */
+1972, /* AModuleName */
+},
+};
+const struct types resolution_table_parser_nodes__AModuleName = {
+0, /* dummy */
+{
+}
+};
+/* runtime type nullable AModuleName */
+const struct type type_nullable_parser_nodes__AModuleName = {
+26,
+"nullable AModuleName", /* class_name_string */
+2,
+1,
+&resolution_table_nullable_parser_nodes__AModuleName,
+3,
+{
+0, /* nullable Object */
+-1, /* empty */
+26, /* nullable AModuleName */
+},
+};
+const struct types resolution_table_nullable_parser_nodes__AModuleName = {
+0, /* dummy */
+{
+}
+};
+/* runtime type ADoc */
+const struct type type_parser_nodes__ADoc = {
+1973,
+"ADoc", /* class_name_string */
+5,
+0,
+&resolution_table_parser_nodes__ADoc,
+6,
+{
+0, /* nullable Object */
+1, /* Object */
+27, /* nullable ADoc */
+223, /* ANode */
+622, /* Prod */
+1973, /* ADoc */
+},
+};
+const struct types resolution_table_parser_nodes__ADoc = {
+0, /* dummy */
+{
+}
+};
+/* runtime type nullable ADoc */
+const struct type type_nullable_parser_nodes__ADoc = {
+27,
+"nullable ADoc", /* class_name_string */
+2,
+1,
+&resolution_table_nullable_parser_nodes__ADoc,
+3,
+{
+0, /* nullable Object */
+-1, /* empty */
+27, /* nullable ADoc */
+},
+};
+const struct types resolution_table_nullable_parser_nodes__ADoc = {
+0, /* dummy */
+{
+}
+};
+/* runtime type ANodes[TComment] */
+const struct type type_parser_nodes__ANodesparser_nodes__TComment = {
+2456,
+"ANodes[TComment]", /* class_name_string */
+6,
+0,
+&resolution_table_parser_nodes__ANodesparser_nodes__TComment,
+8,
+{
+0, /* nullable Object */
+1, /* Object */
+596, /* Collection[ANode] */
+163, /* SequenceRead[nullable Object] */
+164, /* Collection[Object] */
+1760, /* Collection[Token] */
+2456, /* ANodes[TComment] */
+1974, /* Collection[TComment] */
+},
+};
+const struct types resolution_table_parser_nodes__ANodesparser_nodes__TComment = {
+0, /* dummy */
+{
+&type_array__Arrayparser_nodes__TComment, /* Array[ANodes#0]: Array[TComment] */
+&type_parser_nodes__TComment, /* ANodes#0: TComment */
+&type_parser_nodes__TComment, /* Sequence#0: TComment */
+&type_parser_nodes__TComment, /* SimpleCollection#0: TComment */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+&type_parser_nodes__TComment, /* RemovableCollection#0: TComment */
+&type_abstract_collection__Collectionparser_nodes__TComment, /* Collection[Sequence#0]: Collection[TComment] */
+&type_array__Arrayparser_nodes__TComment, /* Array[Sequence#0]: Array[TComment] */
+&type_abstract_collection__Collectionparser_nodes__TComment, /* Collection[SimpleCollection#0]: Collection[TComment] */
+&type_parser_nodes__TComment, /* Collection#0: TComment */
+&type_abstract_collection__Collectionparser_nodes__TComment, /* Collection[Collection#0]: Collection[TComment] */
+&type_parser_nodes__TComment, /* SequenceRead#0: TComment */
+}
+};
+/* runtime type Collection[TComment] */
+const struct type type_abstract_collection__Collectionparser_nodes__TComment = {
+1974,
+"Collection[TComment]", /* class_name_string */
+7,
+0,
+NULL,
+8,
+{
+0, /* nullable Object */
+1, /* Object */
+596, /* Collection[ANode] */
+-1, /* empty */
+164, /* Collection[Object] */
+1760, /* Collection[Token] */
+-1, /* empty */
+1974, /* Collection[TComment] */
+},
+};
+/* runtime type TEol */
+const struct type type_parser_nodes__TEol = {
+1762,
+"TEol", /* class_name_string */
+2,
+0,
+&resolution_table_parser_nodes__TEol,
+5,
+{
+0, /* nullable Object */
+1, /* Object */
+1762, /* TEol */
+223, /* ANode */
+623, /* Token */
+},
+};
+const struct types resolution_table_parser_nodes__TEol = {
+0, /* dummy */
+{
+}
+};
+/* runtime type TComment */
+const struct type type_parser_nodes__TComment = {
+1763,
+"TComment", /* class_name_string */
+2,
+0,
+&resolution_table_parser_nodes__TComment,
+5,
+{
+0, /* nullable Object */
+1, /* Object */
+1763, /* TComment */
+223, /* ANode */
+623, /* Token */
+},
+};
+const struct types resolution_table_parser_nodes__TComment = {
+0, /* dummy */
+{
+}
+};
+/* runtime type TKwpackage */
+const struct type type_parser_nodes__TKwpackage = {
+1764,
+"TKwpackage", /* class_name_string */
+2,
+0,
+&resolution_table_parser_nodes__TKwpackage,
+5,
+{
+0, /* nullable Object */
+1, /* Object */
+1764, /* TKwpackage */
+223, /* ANode */
+623, /* Token */
+},
+};
+const struct types resolution_table_parser_nodes__TKwpackage = {
+0, /* dummy */
+{
+}
+};
+/* runtime type TKwmodule */
+const struct type type_parser_nodes__TKwmodule = {
+1975,
+"TKwmodule", /* class_name_string */
+5,
+0,
+&resolution_table_parser_nodes__TKwmodule,
+6,
+{
+0, /* nullable Object */
+1, /* Object */
+28, /* nullable TKwmodule */
+223, /* ANode */
+623, /* Token */
+1975, /* TKwmodule */
+},
+};
+const struct types resolution_table_parser_nodes__TKwmodule = {
+0, /* dummy */
+{
+}
+};
+/* runtime type nullable TKwmodule */
+const struct type type_nullable_parser_nodes__TKwmodule = {
+28,
+"nullable TKwmodule", /* class_name_string */
+2,
+1,
+&resolution_table_nullable_parser_nodes__TKwmodule,
+3,
+{
+0, /* nullable Object */
+-1, /* empty */
+28, /* nullable TKwmodule */
+},
+};
+const struct types resolution_table_nullable_parser_nodes__TKwmodule = {
+0, /* dummy */
+{
+}
+};
+/* runtime type TKwimport */
+const struct type type_parser_nodes__TKwimport = {
+1976,
+"TKwimport", /* class_name_string */
+5,
+0,
+&resolution_table_parser_nodes__TKwimport,
+6,
+{
+0, /* nullable Object */
+1, /* Object */
+29, /* nullable TKwimport */
+223, /* ANode */
+623, /* Token */
+1976, /* TKwimport */
+},
+};
+const struct types resolution_table_parser_nodes__TKwimport = {
+0, /* dummy */
+{
+}
+};
+/* runtime type nullable TKwimport */
+const struct type type_nullable_parser_nodes__TKwimport = {
+29,
+"nullable TKwimport", /* class_name_string */
+2,
+1,
+&resolution_table_nullable_parser_nodes__TKwimport,
+3,
+{
+0, /* nullable Object */
+-1, /* empty */
+29, /* nullable TKwimport */
+},
+};
+const struct types resolution_table_nullable_parser_nodes__TKwimport = {
+0, /* dummy */
+{
+}
+};
+/* runtime type TKwclass */
+const struct type type_parser_nodes__TKwclass = {
+1977,
+"TKwclass", /* class_name_string */
+5,
+0,
+&resolution_table_parser_nodes__TKwclass,
+6,
+{
+0, /* nullable Object */
+1, /* Object */
+30, /* nullable TKwclass */
+223, /* ANode */
+623, /* Token */
+1977, /* TKwclass */
+},
+};
+const struct types resolution_table_parser_nodes__TKwclass = {
+0, /* dummy */
+{
+}
+};
+/* runtime type nullable TKwclass */
+const struct type type_nullable_parser_nodes__TKwclass = {
+30,
+"nullable TKwclass", /* class_name_string */
+2,
+1,
+&resolution_table_nullable_parser_nodes__TKwclass,
+3,
+{
+0, /* nullable Object */
+-1, /* empty */
+30, /* nullable TKwclass */
+},
+};
+const struct types resolution_table_nullable_parser_nodes__TKwclass = {
+0, /* dummy */
+{
+}
+};
+/* runtime type TKwabstract */
+const struct type type_parser_nodes__TKwabstract = {
+1978,
+"TKwabstract", /* class_name_string */
+5,
+0,
+&resolution_table_parser_nodes__TKwabstract,
+6,
+{
+0, /* nullable Object */
+1, /* Object */
+31, /* nullable TKwabstract */
+223, /* ANode */
+623, /* Token */
+1978, /* TKwabstract */
+},
+};
+const struct types resolution_table_parser_nodes__TKwabstract = {
+0, /* dummy */
+{
+}
+};
+/* runtime type nullable TKwabstract */
+const struct type type_nullable_parser_nodes__TKwabstract = {
+31,
+"nullable TKwabstract", /* class_name_string */
+2,
+1,
+&resolution_table_nullable_parser_nodes__TKwabstract,
+3,
+{
+0, /* nullable Object */
+-1, /* empty */
+31, /* nullable TKwabstract */
+},
+};
+const struct types resolution_table_nullable_parser_nodes__TKwabstract = {
+0, /* dummy */
+{
+}
+};
+/* runtime type TKwinterface */
+const struct type type_parser_nodes__TKwinterface = {
+1979,
+"TKwinterface", /* class_name_string */
+5,
+0,
+&resolution_table_parser_nodes__TKwinterface,
+6,
+{
+0, /* nullable Object */
+1, /* Object */
+32, /* nullable TKwinterface */
+223, /* ANode */
+623, /* Token */
+1979, /* TKwinterface */
+},
+};
+const struct types resolution_table_parser_nodes__TKwinterface = {
+0, /* dummy */
+{
+}
+};
+/* runtime type nullable TKwinterface */
+const struct type type_nullable_parser_nodes__TKwinterface = {
+32,
+"nullable TKwinterface", /* class_name_string */
+2,
+1,
+&resolution_table_nullable_parser_nodes__TKwinterface,
+3,
+{
+0, /* nullable Object */
+-1, /* empty */
+32, /* nullable TKwinterface */
+},
+};
+const struct types resolution_table_nullable_parser_nodes__TKwinterface = {
+0, /* dummy */
+{
+}
+};
+/* runtime type TKwenum */
+const struct type type_parser_nodes__TKwenum = {
+1980,
+"TKwenum", /* class_name_string */
+5,
+0,
+&resolution_table_parser_nodes__TKwenum,
+6,
+{
+0, /* nullable Object */
+1, /* Object */
+33, /* nullable TKwenum */
+223, /* ANode */
+623, /* Token */
+1980, /* TKwenum */
+},
+};
+const struct types resolution_table_parser_nodes__TKwenum = {
+0, /* dummy */
+{
+}
+};
+/* runtime type nullable TKwenum */
+const struct type type_nullable_parser_nodes__TKwenum = {
+33,
+"nullable TKwenum", /* class_name_string */
+2,
+1,
+&resolution_table_nullable_parser_nodes__TKwenum,
+3,
+{
+0, /* nullable Object */
+-1, /* empty */
+33, /* nullable TKwenum */
+},
+};
+const struct types resolution_table_nullable_parser_nodes__TKwenum = {
+0, /* dummy */
+{
+}
+};
+/* runtime type TKwend */
+const struct type type_parser_nodes__TKwend = {
+1981,
+"TKwend", /* class_name_string */
+5,
+0,
+&resolution_table_parser_nodes__TKwend,
+6,
+{
+0, /* nullable Object */
+1, /* Object */
+34, /* nullable TKwend */
+223, /* ANode */
+623, /* Token */
+1981, /* TKwend */
+},
+};
+const struct types resolution_table_parser_nodes__TKwend = {
+0, /* dummy */
+{
+}
+};
+/* runtime type nullable TKwend */
+const struct type type_nullable_parser_nodes__TKwend = {
+34,
+"nullable TKwend", /* class_name_string */
+2,
+1,
+&resolution_table_nullable_parser_nodes__TKwend,
+3,
+{
+0, /* nullable Object */
+-1, /* empty */
+34, /* nullable TKwend */
+},
+};
+const struct types resolution_table_nullable_parser_nodes__TKwend = {
+0, /* dummy */
+{
+}
+};
+/* runtime type TKwmeth */
+const struct type type_parser_nodes__TKwmeth = {
+1982,
+"TKwmeth", /* class_name_string */
+5,
+0,
+&resolution_table_parser_nodes__TKwmeth,
+6,
+{
+0, /* nullable Object */
+1, /* Object */
+35, /* nullable TKwmeth */
+223, /* ANode */
+623, /* Token */
+1982, /* TKwmeth */
+},
+};
+const struct types resolution_table_parser_nodes__TKwmeth = {
+0, /* dummy */
+{
+}
+};
+/* runtime type nullable TKwmeth */
+const struct type type_nullable_parser_nodes__TKwmeth = {
+35,
+"nullable TKwmeth", /* class_name_string */
+2,
+1,
+&resolution_table_nullable_parser_nodes__TKwmeth,
+3,
+{
+0, /* nullable Object */
+-1, /* empty */
+35, /* nullable TKwmeth */
+},
+};
+const struct types resolution_table_nullable_parser_nodes__TKwmeth = {
+0, /* dummy */
+{
+}
+};
+/* runtime type TKwtype */
+const struct type type_parser_nodes__TKwtype = {
+1983,
+"TKwtype", /* class_name_string */
+5,
+0,
+&resolution_table_parser_nodes__TKwtype,
+6,
+{
+0, /* nullable Object */
+1, /* Object */
+36, /* nullable TKwtype */
+223, /* ANode */
+623, /* Token */
+1983, /* TKwtype */
+},
+};
+const struct types resolution_table_parser_nodes__TKwtype = {
+0, /* dummy */
+{
+}
+};
+/* runtime type nullable TKwtype */
+const struct type type_nullable_parser_nodes__TKwtype = {
+36,
+"nullable TKwtype", /* class_name_string */
+2,
+1,
+&resolution_table_nullable_parser_nodes__TKwtype,
+3,
+{
+0, /* nullable Object */
+-1, /* empty */
+36, /* nullable TKwtype */
+},
+};
+const struct types resolution_table_nullable_parser_nodes__TKwtype = {
+0, /* dummy */
+{
+}
+};
+/* runtime type TKwinit */
+const struct type type_parser_nodes__TKwinit = {
+1984,
+"TKwinit", /* class_name_string */
+5,
+0,
+&resolution_table_parser_nodes__TKwinit,
+6,
+{
+0, /* nullable Object */
+1, /* Object */
+37, /* nullable TKwinit */
+223, /* ANode */
+623, /* Token */
+1984, /* TKwinit */
+},
+};
+const struct types resolution_table_parser_nodes__TKwinit = {
+0, /* dummy */
+{
+}
+};
+/* runtime type nullable TKwinit */
+const struct type type_nullable_parser_nodes__TKwinit = {
+37,
+"nullable TKwinit", /* class_name_string */
+2,
+1,
+&resolution_table_nullable_parser_nodes__TKwinit,
+3,
+{
+0, /* nullable Object */
+-1, /* empty */
+37, /* nullable TKwinit */
+},
+};
+const struct types resolution_table_nullable_parser_nodes__TKwinit = {
+0, /* dummy */
+{
+}
+};
+/* runtime type TKwredef */
+const struct type type_parser_nodes__TKwredef = {
+1985,
+"TKwredef", /* class_name_string */
+5,
+0,
+&resolution_table_parser_nodes__TKwredef,
+6,
+{
+0, /* nullable Object */
+1, /* Object */
+38, /* nullable TKwredef */
+223, /* ANode */
+623, /* Token */
+1985, /* TKwredef */
+},
+};
+const struct types resolution_table_parser_nodes__TKwredef = {
+0, /* dummy */
+{
+}
+};
+/* runtime type nullable TKwredef */
+const struct type type_nullable_parser_nodes__TKwredef = {
+38,
+"nullable TKwredef", /* class_name_string */
+2,
+1,
+&resolution_table_nullable_parser_nodes__TKwredef,
+3,
+{
+0, /* nullable Object */
+-1, /* empty */
+38, /* nullable TKwredef */
+},
+};
+const struct types resolution_table_nullable_parser_nodes__TKwredef = {
+0, /* dummy */
+{
+}
+};
+/* runtime type TKwis */
+const struct type type_parser_nodes__TKwis = {
+1765,
+"TKwis", /* class_name_string */
+2,
+0,
+&resolution_table_parser_nodes__TKwis,
+5,
+{
+0, /* nullable Object */
+1, /* Object */
+1765, /* TKwis */
+223, /* ANode */
+623, /* Token */
+},
+};
+const struct types resolution_table_parser_nodes__TKwis = {
+0, /* dummy */
+{
+}
+};
+/* runtime type TKwdo */
+const struct type type_parser_nodes__TKwdo = {
+1986,
+"TKwdo", /* class_name_string */
+5,
+0,
+&resolution_table_parser_nodes__TKwdo,
+6,
+{
+0, /* nullable Object */
+1, /* Object */
+39, /* nullable TKwdo */
+223, /* ANode */
+623, /* Token */
+1986, /* TKwdo */
+},
+};
+const struct types resolution_table_parser_nodes__TKwdo = {
+0, /* dummy */
+{
+}
+};
+/* runtime type nullable TKwdo */
+const struct type type_nullable_parser_nodes__TKwdo = {
+39,
+"nullable TKwdo", /* class_name_string */
+2,
+1,
+&resolution_table_nullable_parser_nodes__TKwdo,
+3,
+{
+0, /* nullable Object */
+-1, /* empty */
+39, /* nullable TKwdo */
+},
+};
+const struct types resolution_table_nullable_parser_nodes__TKwdo = {
+0, /* dummy */
+{
+}
+};
+/* runtime type TKwreadable */
+const struct type type_parser_nodes__TKwreadable = {
+1987,
+"TKwreadable", /* class_name_string */
+5,
+0,
+&resolution_table_parser_nodes__TKwreadable,
+6,
+{
+0, /* nullable Object */
+1, /* Object */
+40, /* nullable TKwreadable */
+223, /* ANode */
+623, /* Token */
+1987, /* TKwreadable */
+},
+};
+const struct types resolution_table_parser_nodes__TKwreadable = {
+0, /* dummy */
+{
+}
+};
+/* runtime type nullable TKwreadable */
+const struct type type_nullable_parser_nodes__TKwreadable = {
+40,
+"nullable TKwreadable", /* class_name_string */
+2,
+1,
+&resolution_table_nullable_parser_nodes__TKwreadable,
+3,
+{
+0, /* nullable Object */
+-1, /* empty */
+40, /* nullable TKwreadable */
+},
+};
+const struct types resolution_table_nullable_parser_nodes__TKwreadable = {
+0, /* dummy */
+{
+}
+};
+/* runtime type TKwwritable */
+const struct type type_parser_nodes__TKwwritable = {
+1988,
+"TKwwritable", /* class_name_string */
+5,
+0,
+&resolution_table_parser_nodes__TKwwritable,
+6,
+{
+0, /* nullable Object */
+1, /* Object */
+41, /* nullable TKwwritable */
+223, /* ANode */
+623, /* Token */
+1988, /* TKwwritable */
+},
+};
+const struct types resolution_table_parser_nodes__TKwwritable = {
+0, /* dummy */
+{
+}
+};
+/* runtime type nullable TKwwritable */
+const struct type type_nullable_parser_nodes__TKwwritable = {
+41,
+"nullable TKwwritable", /* class_name_string */
+2,
+1,
+&resolution_table_nullable_parser_nodes__TKwwritable,
+3,
+{
+0, /* nullable Object */
+-1, /* empty */
+41, /* nullable TKwwritable */
+},
+};
+const struct types resolution_table_nullable_parser_nodes__TKwwritable = {
+0, /* dummy */
+{
+}
+};
+/* runtime type TKwvar */
+const struct type type_parser_nodes__TKwvar = {
+1989,
+"TKwvar", /* class_name_string */
+5,
+0,
+&resolution_table_parser_nodes__TKwvar,
+6,
+{
+0, /* nullable Object */
+1, /* Object */
+42, /* nullable TKwvar */
+223, /* ANode */
+623, /* Token */
+1989, /* TKwvar */
+},
+};
+const struct types resolution_table_parser_nodes__TKwvar = {
+0, /* dummy */
+{
+}
+};
+/* runtime type nullable TKwvar */
+const struct type type_nullable_parser_nodes__TKwvar = {
+42,
+"nullable TKwvar", /* class_name_string */
+2,
+1,
+&resolution_table_nullable_parser_nodes__TKwvar,
+3,
+{
+0, /* nullable Object */
+-1, /* empty */
+42, /* nullable TKwvar */
+},
+};
+const struct types resolution_table_nullable_parser_nodes__TKwvar = {
+0, /* dummy */
+{
+}
+};
+/* runtime type TKwintern */
+const struct type type_parser_nodes__TKwintern = {
+1766,
+"TKwintern", /* class_name_string */
+2,
+0,
+&resolution_table_parser_nodes__TKwintern,
+5,
+{
+0, /* nullable Object */
+1, /* Object */
+1766, /* TKwintern */
+223, /* ANode */
+623, /* Token */
+},
+};
+const struct types resolution_table_parser_nodes__TKwintern = {
+0, /* dummy */
+{
+}
+};
+/* runtime type TKwextern */
+const struct type type_parser_nodes__TKwextern = {
+1990,
+"TKwextern", /* class_name_string */
+5,
+0,
+&resolution_table_parser_nodes__TKwextern,
+6,
+{
+0, /* nullable Object */
+1, /* Object */
+43, /* nullable TKwextern */
+223, /* ANode */
+623, /* Token */
+1990, /* TKwextern */
+},
+};
+const struct types resolution_table_parser_nodes__TKwextern = {
+0, /* dummy */
+{
+}
+};
+/* runtime type nullable TKwextern */
+const struct type type_nullable_parser_nodes__TKwextern = {
+43,
+"nullable TKwextern", /* class_name_string */
+2,
+1,
+&resolution_table_nullable_parser_nodes__TKwextern,
+3,
+{
+0, /* nullable Object */
+-1, /* empty */
+43, /* nullable TKwextern */
+},
+};
+const struct types resolution_table_nullable_parser_nodes__TKwextern = {
+0, /* dummy */
+{
+}
+};
+/* runtime type TKwprotected */
+const struct type type_parser_nodes__TKwprotected = {
+1991,
+"TKwprotected", /* class_name_string */
+5,
+0,
+&resolution_table_parser_nodes__TKwprotected,
+6,
+{
+0, /* nullable Object */
+1, /* Object */
+44, /* nullable TKwprotected */
+223, /* ANode */
+623, /* Token */
+1991, /* TKwprotected */
+},
+};
+const struct types resolution_table_parser_nodes__TKwprotected = {
+0, /* dummy */
+{
+}
+};
+/* runtime type nullable TKwprotected */
+const struct type type_nullable_parser_nodes__TKwprotected = {
+44,
+"nullable TKwprotected", /* class_name_string */
+2,
+1,
+&resolution_table_nullable_parser_nodes__TKwprotected,
+3,
+{
+0, /* nullable Object */
+-1, /* empty */
+44, /* nullable TKwprotected */
+},
+};
+const struct types resolution_table_nullable_parser_nodes__TKwprotected = {
+0, /* dummy */
+{
+}
+};
+/* runtime type TKwprivate */
+const struct type type_parser_nodes__TKwprivate = {
+1992,
+"TKwprivate", /* class_name_string */
+5,
+0,
+&resolution_table_parser_nodes__TKwprivate,
+6,
+{
+0, /* nullable Object */
+1, /* Object */
+45, /* nullable TKwprivate */
+223, /* ANode */
+623, /* Token */
+1992, /* TKwprivate */
+},
+};
+const struct types resolution_table_parser_nodes__TKwprivate = {
+0, /* dummy */
+{
+}
+};
+/* runtime type nullable TKwprivate */
+const struct type type_nullable_parser_nodes__TKwprivate = {
+45,
+"nullable TKwprivate", /* class_name_string */
+2,
+1,
+&resolution_table_nullable_parser_nodes__TKwprivate,
+3,
+{
+0, /* nullable Object */
+-1, /* empty */
+45, /* nullable TKwprivate */
+},
+};
+const struct types resolution_table_nullable_parser_nodes__TKwprivate = {
+0, /* dummy */
+{
+}
+};
+/* runtime type TKwintrude */
+const struct type type_parser_nodes__TKwintrude = {
+1993,
+"TKwintrude", /* class_name_string */
+5,
+0,
+&resolution_table_parser_nodes__TKwintrude,
+6,
+{
+0, /* nullable Object */
+1, /* Object */
+46, /* nullable TKwintrude */
+223, /* ANode */
+623, /* Token */
+1993, /* TKwintrude */
+},
+};
+const struct types resolution_table_parser_nodes__TKwintrude = {
+0, /* dummy */
+{
+}
+};
+/* runtime type nullable TKwintrude */
+const struct type type_nullable_parser_nodes__TKwintrude = {
+46,
+"nullable TKwintrude", /* class_name_string */
+2,
+1,
+&resolution_table_nullable_parser_nodes__TKwintrude,
+3,
+{
+0, /* nullable Object */
+-1, /* empty */
+46, /* nullable TKwintrude */
+},
+};
+const struct types resolution_table_nullable_parser_nodes__TKwintrude = {
+0, /* dummy */
+{
+}
+};
+/* runtime type TKwif */
+const struct type type_parser_nodes__TKwif = {
+1994,
+"TKwif", /* class_name_string */
+5,
+0,
+&resolution_table_parser_nodes__TKwif,
+6,
+{
+0, /* nullable Object */
+1, /* Object */
+47, /* nullable TKwif */
+223, /* ANode */
+623, /* Token */
+1994, /* TKwif */
+},
+};
+const struct types resolution_table_parser_nodes__TKwif = {
+0, /* dummy */
+{
+}
+};
+/* runtime type nullable TKwif */
+const struct type type_nullable_parser_nodes__TKwif = {
+47,
+"nullable TKwif", /* class_name_string */
+2,
+1,
+&resolution_table_nullable_parser_nodes__TKwif,
+3,
+{
+0, /* nullable Object */
+-1, /* empty */
+47, /* nullable TKwif */
+},
+};
+const struct types resolution_table_nullable_parser_nodes__TKwif = {
+0, /* dummy */
+{
+}
+};
+/* runtime type TKwthen */
+const struct type type_parser_nodes__TKwthen = {
+1995,
+"TKwthen", /* class_name_string */
+5,
+0,
+&resolution_table_parser_nodes__TKwthen,
+6,
+{
+0, /* nullable Object */
+1, /* Object */
+48, /* nullable TKwthen */
+223, /* ANode */
+623, /* Token */
+1995, /* TKwthen */
 },
 };

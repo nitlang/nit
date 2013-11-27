@@ -37,62 +37,62 @@ op.output
 om.output
 o1.output
 
-(fp is fp).output
-(fp is fm).output
-(not fp is f1).output
-(fp is ofp).output
-(fp is ofm).output
-(not fp is of1).output
-(fp is op).output
-(fp is om).output
-(not fp is o1).output
+(fp.is_same_instance(fp)).output
+(fp.is_same_instance(fm)).output
+(not fp.is_same_instance(f1)).output
+(fp.is_same_instance(ofp)).output
+(fp.is_same_instance(ofm)).output
+(not fp.is_same_instance(of1)).output
+(fp.is_same_instance(op)).output
+(fp.is_same_instance(om)).output
+(not fp.is_same_instance(o1)).output
 '\n'.output
-(fm is fp).output
-(fm is fm).output
-(not fm is f1).output
-(fm is ofp).output
-(fm is ofm).output
-(not fm is of1).output
-(fm is op).output
-(fm is om).output
-(not fm is o1).output
+(fm.is_same_instance(fp)).output
+(fm.is_same_instance(fm)).output
+(not fm.is_same_instance(f1)).output
+(fm.is_same_instance(ofp)).output
+(fm.is_same_instance(ofm)).output
+(not fm.is_same_instance(of1)).output
+(fm.is_same_instance(op)).output
+(fm.is_same_instance(om)).output
+(not fm.is_same_instance(o1)).output
 '\n'.output
-(ofp is fp).output
-(ofp is fm).output
-(not ofp is f1).output
-(ofp is ofp).output
-(ofp is ofm).output
-(not ofp is of1).output
-(ofp is op).output
-(ofp is om).output
-(not ofp is o1).output
+(ofp.is_same_instance(fp)).output
+(ofp.is_same_instance(fm)).output
+(not ofp.is_same_instance(f1)).output
+(ofp.is_same_instance(ofp)).output
+(ofp.is_same_instance(ofm)).output
+(not ofp.is_same_instance(of1)).output
+(ofp.is_same_instance(op)).output
+(ofp.is_same_instance(om)).output
+(not ofp.is_same_instance(o1)).output
 '\n'.output
-(ofm is fp).output
-(ofm is fm).output
-(not ofm is f1).output
-(ofm is ofp).output
-(ofm is ofm).output
-(not ofm is of1).output
-(ofm is op).output
-(ofm is om).output
-(not ofm is o1).output
+(ofm.is_same_instance(fp)).output
+(ofm.is_same_instance(fm)).output
+(not ofm.is_same_instance(f1)).output
+(ofm.is_same_instance(ofp)).output
+(ofm.is_same_instance(ofm)).output
+(not ofm.is_same_instance(of1)).output
+(ofm.is_same_instance(op)).output
+(ofm.is_same_instance(om)).output
+(not ofm.is_same_instance(o1)).output
 '\n'.output
-(op is fp).output
-(op is fm).output
-(not op is f1).output
-(op is ofp).output
-(op is ofm).output
-(not op is of1).output
-(op is op).output
-(op is om).output
-(not op is o1).output
+(op.is_same_instance(fp)).output
+(op.is_same_instance(fm)).output
+(not op.is_same_instance(f1)).output
+(op.is_same_instance(ofp)).output
+(op.is_same_instance(ofm)).output
+(not op.is_same_instance(of1)).output
+(op.is_same_instance(op)).output
+(op.is_same_instance(om)).output
+(not op.is_same_instance(o1)).output
 '\n'.output
-(om is fp).output
-(om is fm).output
-(not om is f1).output
-(om is ofp).output
-(om is ofm).output
-(not om is of1).output
-(om is op).output
-(om is om).output
-(not om is o1).output
+(om.is_same_instance(fp)).output
+(om.is_same_instance(fm)).output
+(not om.is_same_instance(f1)).output
+(om.is_same_instance(ofp)).output
+(om.is_same_instance(ofm)).output
+(not om.is_same_instance(of1)).output
+(om.is_same_instance(op)).output
+(om.is_same_instance(om)).output
+(not om.is_same_instance(o1)).output

@@ -443,7 +443,7 @@ interface SequenceRead[E]
 	# Two sequences are equals if they have the same items in the same order.
 	redef fun ==(o)
 	do
-		if not o isa SequenceRead[nullable Object] or o is null then return false
+		if not o isa SequenceRead[nullable Object] then return false
 		var l = length
 		if o.length != l then return false
 		var i = 0

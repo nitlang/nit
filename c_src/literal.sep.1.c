@@ -5,7 +5,8 @@ val* var /* : Phase */;
 val* var1 /* : Phase */;
 var1 = self->attrs[COLOR_literal__ToolContext___64dliteral_phase].val; /* @literal_phase on <self:ToolContext> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @literal_phase", "src/literal.nit", 25);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @literal_phase");
+fprintf(stderr, " (%s:%d)\n", "src/literal.nit", 25);
 exit(1);
 }
 var = var1;
@@ -69,7 +70,8 @@ val* var /* : ToolContext */;
 val* var1 /* : ToolContext */;
 var1 = self->attrs[COLOR_literal__LiteralVisitor___64dtoolcontext].val; /* @toolcontext on <self:LiteralVisitor> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @toolcontext", "src/literal.nit", 47);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @toolcontext");
+fprintf(stderr, " (%s:%d)\n", "src/literal.nit", 47);
 exit(1);
 }
 var = var1;
@@ -381,6 +383,7 @@ short int var13 /* : Bool */;
 short int var15 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 short int var16 /* : Bool */;
 long var17 /* : Int */;
 long var18 /* : Int */;
@@ -416,7 +419,9 @@ var12 = 6;
 /* <var12:Int> isa OTHER */
 var15 = 1; /* easy <var12:Int> isa OTHER*/
 if (!var15) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 258);
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
 exit(1);
 }
 var16 = var11 >= var12;

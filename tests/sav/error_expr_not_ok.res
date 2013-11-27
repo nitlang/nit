@@ -59,12 +59,9 @@ error_expr_not_ok.nit:84,12--15: Error: Method or variable 'fail' unknown in Sys
 error_expr_not_ok.nit:84,7--15: Type error: expected A, got Bool
 error_expr_not_ok.nit:85,7--10: Error: Method or variable 'fail' unknown in Sys.
 error_expr_not_ok.nit:86,7--10: Error: Method or variable 'fail' unknown in Sys.
-error_expr_not_ok.nit:86,7--15: Type error: expected A, got Bool
-error_expr_not_ok.nit:87,12--15: Error: Method or variable 'fail' unknown in Sys.
-error_expr_not_ok.nit:87,7--15: Type error: expected A, got Bool
+error_expr_not_ok.nit:87,26--29: Error: Method or variable 'fail' unknown in Sys.
+error_expr_not_ok.nit:87,7--30: Type error: expected A, got Bool
 error_expr_not_ok.nit:88,7--10: Error: Method or variable 'fail' unknown in Sys.
-error_expr_not_ok.nit:88,15--18: Error: Method or variable 'fail' unknown in Sys.
-error_expr_not_ok.nit:88,7--18: Type error: expected A, got Bool
 error_expr_not_ok.nit:89,7--10: Error: Method or variable 'fail' unknown in Sys.
 error_expr_not_ok.nit:90,11--14: Error: Method or variable 'fail' unknown in Sys.
 error_expr_not_ok.nit:90,7--14: Type error: expected A, got Bool

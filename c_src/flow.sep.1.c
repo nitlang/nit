@@ -5,7 +5,8 @@ val* var /* : Phase */;
 val* var1 /* : Phase */;
 var1 = self->attrs[COLOR_flow__ToolContext___64dflow_phase].val; /* @flow_phase on <self:ToolContext> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @flow_phase", "src/flow.nit", 26);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @flow_phase");
+fprintf(stderr, " (%s:%d)\n", "src/flow.nit", 26);
 exit(1);
 }
 var = var1;
@@ -51,7 +52,8 @@ val* var /* : FlowContext */;
 val* var1 /* : FlowContext */;
 var1 = self->attrs[COLOR_flow__FlowVisitor___64dcurrent_flow_context].val; /* @current_flow_context on <self:FlowVisitor> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @current_flow_context", "src/flow.nit", 39);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @current_flow_context");
+fprintf(stderr, " (%s:%d)\n", "src/flow.nit", 39);
 exit(1);
 }
 var = var1;
@@ -83,7 +85,8 @@ val* var /* : ToolContext */;
 val* var1 /* : ToolContext */;
 var1 = self->attrs[COLOR_flow__FlowVisitor___64dtoolcontext].val; /* @toolcontext on <self:FlowVisitor> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @toolcontext", "src/flow.nit", 41);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @toolcontext");
+fprintf(stderr, " (%s:%d)\n", "src/flow.nit", 41);
 exit(1);
 }
 var = var1;
@@ -287,7 +290,8 @@ var_node = p0;
 ((void (*)(val*, val*))(self->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(self, var_node) /* enter_visit on <self:FlowVisitor>*/;
 var1 = ((val* (*)(val*))(var_node->class->vft[COLOR_flow__AExpr__after_flow_context]))(var_node) /* after_flow_context on <var_node:AExpr>*/;
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/flow.nit", 77);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/flow.nit", 77);
 exit(1);
 }
 var = var1;
@@ -310,7 +314,8 @@ val* var /* : Array[FlowContext] */;
 val* var1 /* : Array[FlowContext] */;
 var1 = self->attrs[COLOR_flow__FlowVisitor___64dflows].val; /* @flows on <self:FlowVisitor> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @flows", "src/flow.nit", 80);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @flows");
+fprintf(stderr, " (%s:%d)\n", "src/flow.nit", 80);
 exit(1);
 }
 var = var1;
@@ -377,6 +382,7 @@ val* var28 /* : nullable ANode */;
 short int var29 /* : Bool */;
 int cltype30;
 int idtype31;
+const char* var_class_name;
 val* var32 /* : nullable FlowContext */;
 long var33 /* : Int */;
 val* var34 /* : nullable Object */;
@@ -597,12 +603,15 @@ var29 = var28->type->type_table[cltype30] == idtype31;
 }
 }
 if (!var29) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/flow.nit", 89);
+var_class_name = var28 == NULL ? "null" : var28->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "AExpr", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/flow.nit", 89);
 exit(1);
 }
 var32 = ((val* (*)(val*))(var28->class->vft[COLOR_flow__AExpr__after_flow_context]))(var28) /* after_flow_context on <var28:nullable ANode(AExpr)>*/;
 if (var32 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/flow.nit", 89);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/flow.nit", 89);
 exit(1);
 } else {
 var33 = ((long (*)(val*))(var32->class->vft[COLOR_kernel__Object__object_id]))(var32) /* object_id on <var32:nullable FlowContext>*/;
@@ -654,7 +663,8 @@ varonce53 = var54;
 }
 var58 = ((val* (*)(val*))(var_f->class->vft[COLOR_flow__FlowContext__node]))(var_f) /* node on <var_f:FlowContext>*/;
 if (var58 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/flow.nit", 91);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/flow.nit", 91);
 exit(1);
 } else {
 var59 = ((val* (*)(val*))(var58->class->vft[COLOR_parser_nodes__ANode__location]))(var58) /* location on <var58:nullable ANode>*/;
@@ -670,7 +680,8 @@ varonce60 = var61;
 }
 var65 = ((val* (*)(val*))(var_f->class->vft[COLOR_flow__FlowContext__node]))(var_f) /* node on <var_f:FlowContext>*/;
 if (var65 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/flow.nit", 91);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/flow.nit", 91);
 exit(1);
 } else {
 var66 = ((val* (*)(val*))(var65->class->vft[COLOR_string__Object__class_name]))(var65) /* class_name on <var65:nullable ANode>*/;
@@ -1243,7 +1254,8 @@ val* var /* : Array[FlowContext] */;
 val* var1 /* : Array[FlowContext] */;
 var1 = self->attrs[COLOR_flow__FlowContext___64dprevious].val; /* @previous on <self:FlowContext> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @previous", "src/flow.nit", 192);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @previous");
+fprintf(stderr, " (%s:%d)\n", "src/flow.nit", 192);
 exit(1);
 }
 var = var1;
@@ -1275,7 +1287,8 @@ val* var /* : Array[FlowContext] */;
 val* var1 /* : Array[FlowContext] */;
 var1 = self->attrs[COLOR_flow__FlowContext___64dloops].val; /* @loops on <self:FlowContext> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @loops", "src/flow.nit", 195);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @loops");
+fprintf(stderr, " (%s:%d)\n", "src/flow.nit", 195);
 exit(1);
 }
 var = var1;
@@ -1477,7 +1490,8 @@ val* var /* : String */;
 val* var1 /* : String */;
 var1 = self->attrs[COLOR_flow__FlowContext___64dname].val; /* @name on <self:FlowContext> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @name", "src/flow.nit", 225);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @name");
+fprintf(stderr, " (%s:%d)\n", "src/flow.nit", 225);
 exit(1);
 }
 var = var1;
@@ -1509,7 +1523,8 @@ val* var /* : FlowContext */;
 val* var1 /* : FlowContext */;
 var1 = self->attrs[COLOR_flow__FlowContext___64dwhen_true].val; /* @when_true on <self:FlowContext> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @when_true", "src/flow.nit", 228);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @when_true");
+fprintf(stderr, " (%s:%d)\n", "src/flow.nit", 228);
 exit(1);
 }
 var = var1;
@@ -1541,7 +1556,8 @@ val* var /* : FlowContext */;
 val* var1 /* : FlowContext */;
 var1 = self->attrs[COLOR_flow__FlowContext___64dwhen_false].val; /* @when_false on <self:FlowContext> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @when_false", "src/flow.nit", 231);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @when_false");
+fprintf(stderr, " (%s:%d)\n", "src/flow.nit", 231);
 exit(1);
 }
 var = var1;
@@ -2475,46 +2491,6 @@ RET_LABEL:;
 /* method flow#ANeExpr#accept_flow_visitor for (self: Object, FlowVisitor) */
 void VIRTUAL_flow__ANeExpr__accept_flow_visitor(val* self, val* p0) {
 flow__ANeExpr__accept_flow_visitor(self, p0);
-RET_LABEL:;
-}
-/* method flow#AClosureCallExpr#accept_flow_visitor for (self: AClosureCallExpr, FlowVisitor) */
-void flow__AClosureCallExpr__accept_flow_visitor(val* self, val* p0) {
-val* var_v /* var v: FlowVisitor */;
-var_v = p0;
-((void (*)(val*, val*))(self->class->vft[COLOR_flow__AClosureCallExpr__accept_flow_visitor]))(self, p0) /* accept_flow_visitor on <self:AClosureCallExpr>*/;
-RET_LABEL:;
-}
-/* method flow#AClosureCallExpr#accept_flow_visitor for (self: Object, FlowVisitor) */
-void VIRTUAL_flow__AClosureCallExpr__accept_flow_visitor(val* self, val* p0) {
-flow__AClosureCallExpr__accept_flow_visitor(self, p0);
-RET_LABEL:;
-}
-/* method flow#AClosureDef#accept_flow_visitor for (self: AClosureDef, FlowVisitor) */
-void flow__AClosureDef__accept_flow_visitor(val* self, val* p0) {
-val* var_v /* var v: FlowVisitor */;
-val* var /* : FlowContext */;
-val* var_before_loop /* var before_loop: FlowContext */;
-val* var1 /* : nullable AExpr */;
-val* var2 /* : FlowContext */;
-val* var_after_block /* var after_block: FlowContext */;
-val* var3 /* : FlowContext */;
-val* var4 /* : FlowContext */;
-var_v = p0;
-var = ((val* (*)(val*))(var_v->class->vft[COLOR_flow__FlowVisitor__make_sub_flow]))(var_v) /* make_sub_flow on <var_v:FlowVisitor>*/;
-var_before_loop = var;
-var1 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AClosureDef__n_expr]))(self) /* n_expr on <self:AClosureDef>*/;
-((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var1) /* enter_visit on <var_v:FlowVisitor>*/;
-var2 = ((val* (*)(val*))(var_v->class->vft[COLOR_flow__FlowVisitor__current_flow_context]))(var_v) /* current_flow_context on <var_v:FlowVisitor>*/;
-var_after_block = var2;
-((void (*)(val*, val*))(var_before_loop->class->vft[COLOR_flow__FlowContext__add_loop]))(var_before_loop, var_after_block) /* add_loop on <var_before_loop:FlowContext>*/;
-var3 = ((val* (*)(val*))(var_v->class->vft[COLOR_flow__FlowVisitor__current_flow_context]))(var_v) /* current_flow_context on <var_v:FlowVisitor>*/;
-var4 = ((val* (*)(val*, val*, val*))(var_v->class->vft[COLOR_flow__FlowVisitor__make_merge_flow]))(var_v, var3, var_before_loop) /* make_merge_flow on <var_v:FlowVisitor>*/;
-var4;
-RET_LABEL:;
-}
-/* method flow#AClosureDef#accept_flow_visitor for (self: Object, FlowVisitor) */
-void VIRTUAL_flow__AClosureDef__accept_flow_visitor(val* self, val* p0) {
-flow__AClosureDef__accept_flow_visitor(self, p0);
 RET_LABEL:;
 }
 /* method flow#AIsaExpr#accept_flow_visitor for (self: AIsaExpr, FlowVisitor) */

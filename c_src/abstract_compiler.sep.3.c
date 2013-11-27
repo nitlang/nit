@@ -1,4 +1,359 @@
 #include "abstract_compiler.sep.0.h"
+/* method abstract_compiler#AVarReassignExpr#stmt for (self: AVarReassignExpr, AbstractCompilerVisitor) */
+void abstract_compiler__AVarReassignExpr__stmt(val* self, val* p0) {
+val* var_v /* var v: AbstractCompilerVisitor */;
+val* var /* : nullable Variable */;
+val* var_variable /* var variable: Variable */;
+val* var1 /* : RuntimeVariable */;
+val* var_vari /* var vari: RuntimeVariable */;
+val* var2 /* : AExpr */;
+val* var3 /* : nullable MType */;
+val* var4 /* : RuntimeVariable */;
+val* var_value /* var value: RuntimeVariable */;
+val* var5 /* : nullable CallSite */;
+val* var6 /* : Array[RuntimeVariable] */;
+long var7 /* : Int */;
+val* var8 /* : NativeArray[RuntimeVariable] */;
+val* var9 /* : nullable RuntimeVariable */;
+val* var_res /* var res: nullable RuntimeVariable */;
+val* var10 /* : null */;
+short int var11 /* : Bool */;
+val* var12 /* : RuntimeVariable */;
+var_v = p0;
+var = ((val* (*)(val*))(self->class->vft[COLOR_scope__AVarFormExpr__variable]))(self) /* variable on <self:AVarReassignExpr>*/;
+if (var == NULL) {
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 1818);
+exit(1);
+}
+var_variable = var;
+var1 = ((val* (*)(val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__variable]))(var_v, var_variable) /* variable on <var_v:AbstractCompilerVisitor>*/;
+var_vari = var1;
+var2 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AReassignFormExpr__n_value]))(self) /* n_value on <self:AVarReassignExpr>*/;
+var3 = ((val* (*)(val*))(var_variable->class->vft[COLOR_typing__Variable__declared_type]))(var_variable) /* declared_type on <var_variable:Variable>*/;
+var4 = ((val* (*)(val*, val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__expr]))(var_v, var2, var3) /* expr on <var_v:AbstractCompilerVisitor>*/;
+var_value = var4;
+var5 = ((val* (*)(val*))(self->class->vft[COLOR_typing__AReassignFormExpr__reassign_callsite]))(self) /* reassign_callsite on <self:AVarReassignExpr>*/;
+if (var5 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 1821);
+exit(1);
+}
+var6 = NEW_array__Array(&type_array__Arrayabstract_compiler__RuntimeVariable);
+{ /* var6 = array_instance Array[RuntimeVariable] */
+var7 = 2;
+var8 = NEW_array__NativeArray(var7, &type_array__NativeArrayabstract_compiler__RuntimeVariable);
+((struct instance_array__NativeArray*)var8)->values[0] = (val*) var_vari;
+((struct instance_array__NativeArray*)var8)->values[1] = (val*) var_value;
+((void (*)(val*, val*, long))(var6->class->vft[COLOR_array__Array__with_native]))(var6, var8, var7) /* with_native on <var6:Array[RuntimeVariable]>*/;
+CHECK_NEW_array__Array(var6);
+}
+var9 = ((val* (*)(val*, val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__compile_callsite]))(var_v, var5, var6) /* compile_callsite on <var_v:AbstractCompilerVisitor>*/;
+var_res = var9;
+var10 = NULL;
+if (var_res == NULL) {
+var11 = 0; /* is null */
+} else {
+var11 = 1; /* arg is null and recv is not */
+}
+if (!var11) {
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 1822);
+exit(1);
+}
+var12 = ((val* (*)(val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__variable]))(var_v, var_variable) /* variable on <var_v:AbstractCompilerVisitor>*/;
+((void (*)(val*, val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__assign]))(var_v, var12, var_res) /* assign on <var_v:AbstractCompilerVisitor>*/;
+RET_LABEL:;
+}
+/* method abstract_compiler#AVarReassignExpr#stmt for (self: Object, AbstractCompilerVisitor) */
+void VIRTUAL_abstract_compiler__AVarReassignExpr__stmt(val* self, val* p0) {
+abstract_compiler__AVarReassignExpr__stmt(self, p0);
+RET_LABEL:;
+}
+/* method abstract_compiler#ASelfExpr#expr for (self: ASelfExpr, AbstractCompilerVisitor): nullable RuntimeVariable */
+val* abstract_compiler__ASelfExpr__expr(val* self, val* p0) {
+val* var /* : nullable RuntimeVariable */;
+val* var_v /* var v: AbstractCompilerVisitor */;
+val* var1 /* : nullable Frame */;
+val* var2 /* : Array[RuntimeVariable] */;
+val* var3 /* : nullable Object */;
+var_v = p0;
+var1 = ((val* (*)(val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__frame]))(var_v) /* frame on <var_v:AbstractCompilerVisitor>*/;
+if (var1 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 1828);
+exit(1);
+} else {
+var2 = ((val* (*)(val*))(var1->class->vft[COLOR_abstract_compiler__Frame__arguments]))(var1) /* arguments on <var1:nullable Frame>*/;
+}
+var3 = ((val* (*)(val*))(var2->class->vft[COLOR_abstract_collection__Collection__first]))(var2) /* first on <var2:Array[RuntimeVariable]>*/;
+var = var3;
+goto RET_LABEL;
+RET_LABEL:;
+return var;
+}
+/* method abstract_compiler#ASelfExpr#expr for (self: Object, AbstractCompilerVisitor): nullable RuntimeVariable */
+val* VIRTUAL_abstract_compiler__ASelfExpr__expr(val* self, val* p0) {
+val* var /* : nullable RuntimeVariable */;
+val* var1 /* : nullable RuntimeVariable */;
+var1 = abstract_compiler__ASelfExpr__expr(self, p0);
+var = var1;
+RET_LABEL:;
+return var;
+}
+/* method abstract_compiler#AContinueExpr#stmt for (self: AContinueExpr, AbstractCompilerVisitor) */
+void abstract_compiler__AContinueExpr__stmt(val* self, val* p0) {
+val* var_v /* var v: AbstractCompilerVisitor */;
+static val* varonce;
+val* var /* : String */;
+char* var1 /* : NativeString */;
+long var2 /* : Int */;
+val* var3 /* : String */;
+val* var4 /* : nullable EscapeMark */;
+val* var5 /* : String */;
+static val* varonce6;
+val* var7 /* : String */;
+char* var8 /* : NativeString */;
+long var9 /* : Int */;
+val* var10 /* : String */;
+val* var11 /* : Array[Object] */;
+long var12 /* : Int */;
+val* var13 /* : NativeArray[Object] */;
+val* var14 /* : String */;
+var_v = p0;
+if (varonce) {
+var = varonce;
+} else {
+var1 = "goto CONTINUE_";
+var2 = 14;
+var3 = string__NativeString__to_s_with_length(var1, var2);
+var = var3;
+varonce = var;
+}
+var4 = ((val* (*)(val*))(self->class->vft[COLOR_scope__AContinueExpr__escapemark]))(self) /* escapemark on <self:AContinueExpr>*/;
+var5 = ((val* (*)(val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__escapemark_name]))(var_v, var4) /* escapemark_name on <var_v:AbstractCompilerVisitor>*/;
+if (varonce6) {
+var7 = varonce6;
+} else {
+var8 = ";";
+var9 = 1;
+var10 = string__NativeString__to_s_with_length(var8, var9);
+var7 = var10;
+varonce6 = var7;
+}
+var11 = NEW_array__Array(&type_array__Arraykernel__Object);
+{ /* var11 = array_instance Array[Object] */
+var12 = 3;
+var13 = NEW_array__NativeArray(var12, &type_array__NativeArraykernel__Object);
+((struct instance_array__NativeArray*)var13)->values[0] = (val*) var;
+((struct instance_array__NativeArray*)var13)->values[1] = (val*) var5;
+((struct instance_array__NativeArray*)var13)->values[2] = (val*) var7;
+((void (*)(val*, val*, long))(var11->class->vft[COLOR_array__Array__with_native]))(var11, var13, var12) /* with_native on <var11:Array[Object]>*/;
+CHECK_NEW_array__Array(var11);
+}
+var14 = ((val* (*)(val*))(var11->class->vft[COLOR_string__Object__to_s]))(var11) /* to_s on <var11:Array[Object]>*/;
+((void (*)(val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__add]))(var_v, var14) /* add on <var_v:AbstractCompilerVisitor>*/;
+RET_LABEL:;
+}
+/* method abstract_compiler#AContinueExpr#stmt for (self: Object, AbstractCompilerVisitor) */
+void VIRTUAL_abstract_compiler__AContinueExpr__stmt(val* self, val* p0) {
+abstract_compiler__AContinueExpr__stmt(self, p0);
+RET_LABEL:;
+}
+/* method abstract_compiler#ABreakExpr#stmt for (self: ABreakExpr, AbstractCompilerVisitor) */
+void abstract_compiler__ABreakExpr__stmt(val* self, val* p0) {
+val* var_v /* var v: AbstractCompilerVisitor */;
+static val* varonce;
+val* var /* : String */;
+char* var1 /* : NativeString */;
+long var2 /* : Int */;
+val* var3 /* : String */;
+val* var4 /* : nullable EscapeMark */;
+val* var5 /* : String */;
+static val* varonce6;
+val* var7 /* : String */;
+char* var8 /* : NativeString */;
+long var9 /* : Int */;
+val* var10 /* : String */;
+val* var11 /* : Array[Object] */;
+long var12 /* : Int */;
+val* var13 /* : NativeArray[Object] */;
+val* var14 /* : String */;
+var_v = p0;
+if (varonce) {
+var = varonce;
+} else {
+var1 = "goto BREAK_";
+var2 = 11;
+var3 = string__NativeString__to_s_with_length(var1, var2);
+var = var3;
+varonce = var;
+}
+var4 = ((val* (*)(val*))(self->class->vft[COLOR_scope__ABreakExpr__escapemark]))(self) /* escapemark on <self:ABreakExpr>*/;
+var5 = ((val* (*)(val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__escapemark_name]))(var_v, var4) /* escapemark_name on <var_v:AbstractCompilerVisitor>*/;
+if (varonce6) {
+var7 = varonce6;
+} else {
+var8 = ";";
+var9 = 1;
+var10 = string__NativeString__to_s_with_length(var8, var9);
+var7 = var10;
+varonce6 = var7;
+}
+var11 = NEW_array__Array(&type_array__Arraykernel__Object);
+{ /* var11 = array_instance Array[Object] */
+var12 = 3;
+var13 = NEW_array__NativeArray(var12, &type_array__NativeArraykernel__Object);
+((struct instance_array__NativeArray*)var13)->values[0] = (val*) var;
+((struct instance_array__NativeArray*)var13)->values[1] = (val*) var5;
+((struct instance_array__NativeArray*)var13)->values[2] = (val*) var7;
+((void (*)(val*, val*, long))(var11->class->vft[COLOR_array__Array__with_native]))(var11, var13, var12) /* with_native on <var11:Array[Object]>*/;
+CHECK_NEW_array__Array(var11);
+}
+var14 = ((val* (*)(val*))(var11->class->vft[COLOR_string__Object__to_s]))(var11) /* to_s on <var11:Array[Object]>*/;
+((void (*)(val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__add]))(var_v, var14) /* add on <var_v:AbstractCompilerVisitor>*/;
+RET_LABEL:;
+}
+/* method abstract_compiler#ABreakExpr#stmt for (self: Object, AbstractCompilerVisitor) */
+void VIRTUAL_abstract_compiler__ABreakExpr__stmt(val* self, val* p0) {
+abstract_compiler__ABreakExpr__stmt(self, p0);
+RET_LABEL:;
+}
+/* method abstract_compiler#AReturnExpr#stmt for (self: AReturnExpr, AbstractCompilerVisitor) */
+void abstract_compiler__AReturnExpr__stmt(val* self, val* p0) {
+val* var_v /* var v: AbstractCompilerVisitor */;
+val* var /* : nullable AExpr */;
+val* var_nexpr /* var nexpr: nullable AExpr */;
+val* var1 /* : null */;
+short int var2 /* : Bool */;
+val* var3 /* : nullable Frame */;
+val* var4 /* : nullable RuntimeVariable */;
+val* var_returnvar /* var returnvar: RuntimeVariable */;
+val* var5 /* : MType */;
+val* var6 /* : RuntimeVariable */;
+val* var_i /* var i: RuntimeVariable */;
+static val* varonce;
+val* var7 /* : String */;
+char* var8 /* : NativeString */;
+long var9 /* : Int */;
+val* var10 /* : String */;
+val* var11 /* : nullable Frame */;
+val* var12 /* : nullable String */;
+static val* varonce13;
+val* var14 /* : String */;
+char* var15 /* : NativeString */;
+long var16 /* : Int */;
+val* var17 /* : String */;
+val* var18 /* : Array[Object] */;
+long var19 /* : Int */;
+val* var20 /* : NativeArray[Object] */;
+val* var21 /* : String */;
+var_v = p0;
+var = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AReturnExpr__n_expr]))(self) /* n_expr on <self:AReturnExpr>*/;
+var_nexpr = var;
+var1 = NULL;
+if (var_nexpr == NULL) {
+var2 = 0; /* is null */
+} else {
+var2 = 1; /* arg is null and recv is not */
+}
+if (var2){
+var3 = ((val* (*)(val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__frame]))(var_v) /* frame on <var_v:AbstractCompilerVisitor>*/;
+if (var3 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 1844);
+exit(1);
+} else {
+var4 = ((val* (*)(val*))(var3->class->vft[COLOR_abstract_compiler__Frame__returnvar]))(var3) /* returnvar on <var3:nullable Frame>*/;
+}
+if (var4 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 1844);
+exit(1);
+}
+var_returnvar = var4;
+var5 = ((val* (*)(val*))(var_returnvar->class->vft[COLOR_abstract_compiler__RuntimeVariable__mtype]))(var_returnvar) /* mtype on <var_returnvar:RuntimeVariable>*/;
+var6 = ((val* (*)(val*, val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__expr]))(var_v, var_nexpr, var5) /* expr on <var_v:AbstractCompilerVisitor>*/;
+var_i = var6;
+((void (*)(val*, val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__assign]))(var_v, var_returnvar, var_i) /* assign on <var_v:AbstractCompilerVisitor>*/;
+} else {
+}
+if (varonce) {
+var7 = varonce;
+} else {
+var8 = "goto ";
+var9 = 5;
+var10 = string__NativeString__to_s_with_length(var8, var9);
+var7 = var10;
+varonce = var7;
+}
+var11 = ((val* (*)(val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__frame]))(var_v) /* frame on <var_v:AbstractCompilerVisitor>*/;
+if (var11 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 1848);
+exit(1);
+} else {
+var12 = ((val* (*)(val*))(var11->class->vft[COLOR_abstract_compiler__Frame__returnlabel]))(var11) /* returnlabel on <var11:nullable Frame>*/;
+}
+if (var12 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 1848);
+exit(1);
+}
+if (varonce13) {
+var14 = varonce13;
+} else {
+var15 = ";";
+var16 = 1;
+var17 = string__NativeString__to_s_with_length(var15, var16);
+var14 = var17;
+varonce13 = var14;
+}
+var18 = NEW_array__Array(&type_array__Arraykernel__Object);
+{ /* var18 = array_instance Array[Object] */
+var19 = 3;
+var20 = NEW_array__NativeArray(var19, &type_array__NativeArraykernel__Object);
+((struct instance_array__NativeArray*)var20)->values[0] = (val*) var7;
+((struct instance_array__NativeArray*)var20)->values[1] = (val*) var12;
+((struct instance_array__NativeArray*)var20)->values[2] = (val*) var14;
+((void (*)(val*, val*, long))(var18->class->vft[COLOR_array__Array__with_native]))(var18, var20, var19) /* with_native on <var18:Array[Object]>*/;
+CHECK_NEW_array__Array(var18);
+}
+var21 = ((val* (*)(val*))(var18->class->vft[COLOR_string__Object__to_s]))(var18) /* to_s on <var18:Array[Object]>*/;
+((void (*)(val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__add]))(var_v, var21) /* add on <var_v:AbstractCompilerVisitor>*/;
+RET_LABEL:;
+}
+/* method abstract_compiler#AReturnExpr#stmt for (self: Object, AbstractCompilerVisitor) */
+void VIRTUAL_abstract_compiler__AReturnExpr__stmt(val* self, val* p0) {
+abstract_compiler__AReturnExpr__stmt(self, p0);
+RET_LABEL:;
+}
+/* method abstract_compiler#AAbortExpr#stmt for (self: AAbortExpr, AbstractCompilerVisitor) */
+void abstract_compiler__AAbortExpr__stmt(val* self, val* p0) {
+val* var_v /* var v: AbstractCompilerVisitor */;
+static val* varonce;
+val* var /* : String */;
+char* var1 /* : NativeString */;
+long var2 /* : Int */;
+val* var3 /* : String */;
+var_v = p0;
+if (varonce) {
+var = varonce;
+} else {
+var1 = "Aborted";
+var2 = 7;
+var3 = string__NativeString__to_s_with_length(var1, var2);
+var = var3;
+varonce = var;
+}
+((void (*)(val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__add_abort]))(var_v, var) /* add_abort on <var_v:AbstractCompilerVisitor>*/;
+RET_LABEL:;
+}
+/* method abstract_compiler#AAbortExpr#stmt for (self: Object, AbstractCompilerVisitor) */
+void VIRTUAL_abstract_compiler__AAbortExpr__stmt(val* self, val* p0) {
+abstract_compiler__AAbortExpr__stmt(self, p0);
+RET_LABEL:;
+}
 /* method abstract_compiler#AIfExpr#stmt for (self: AIfExpr, AbstractCompilerVisitor) */
 void abstract_compiler__AIfExpr__stmt(val* self, val* p0) {
 val* var_v /* var v: AbstractCompilerVisitor */;
@@ -139,7 +494,8 @@ val* var33 /* : String */;
 var_v = p0;
 var1 = ((val* (*)(val*))(self->class->vft[COLOR_typing__AExpr__mtype]))(self) /* mtype on <self:AIfExpr>*/;
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/abstract_compiler.nit", 1851);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 1869);
 exit(1);
 }
 var2 = ((val* (*)(val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__new_var]))(var_v, var1) /* new_var on <var_v:AbstractCompilerVisitor>*/;
@@ -179,7 +535,8 @@ var17 = ((val* (*)(val*))(var14->class->vft[COLOR_string__Object__to_s]))(var14)
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__add]))(var_v, var17) /* add on <var_v:AbstractCompilerVisitor>*/;
 var18 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AIfExpr__n_then]))(self) /* n_then on <self:AIfExpr>*/;
 if (var18 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/abstract_compiler.nit", 1854);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 1872);
 exit(1);
 }
 var19 = NULL;
@@ -197,7 +554,8 @@ varonce21 = var22;
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__add]))(var_v, var22) /* add on <var_v:AbstractCompilerVisitor>*/;
 var26 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AIfExpr__n_else]))(self) /* n_else on <self:AIfExpr>*/;
 if (var26 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/abstract_compiler.nit", 1856);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 1874);
 exit(1);
 }
 var27 = NULL;
@@ -270,7 +628,8 @@ val* var33 /* : String */;
 var_v = p0;
 var1 = ((val* (*)(val*))(self->class->vft[COLOR_typing__AExpr__mtype]))(self) /* mtype on <self:AIfexprExpr>*/;
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/abstract_compiler.nit", 1865);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 1883);
 exit(1);
 }
 var2 = ((val* (*)(val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__new_var]))(var_v, var1) /* new_var on <var_v:AbstractCompilerVisitor>*/;
@@ -1025,7 +1384,8 @@ var = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AForExpr__n_expr]))
 var_nexpr = var;
 var3 = ((val* (*)(val*))(self->class->vft[COLOR_scope__AForExpr__variables]))(self) /* variables on <self:AForExpr>*/;
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/abstract_compiler.nit", 1917);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 1935);
 exit(1);
 } else {
 var4 = ((long (*)(val*))(var3->class->vft[COLOR_abstract_collection__Collection__length]))(var3) /* length on <var3:nullable Array[Variable]>*/;
@@ -1075,7 +1435,8 @@ var23 = ((val* (*)(val*, val*, val*))(var_v->class->vft[COLOR_abstract_compiler_
 var_to = var23;
 var24 = ((val* (*)(val*))(self->class->vft[COLOR_scope__AForExpr__variables]))(self) /* variables on <self:AForExpr>*/;
 if (var24 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/abstract_compiler.nit", 1920);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 1938);
 exit(1);
 } else {
 var25 = ((val* (*)(val*))(var24->class->vft[COLOR_abstract_collection__Collection__first]))(var24) /* first on <var24:nullable Array[Variable]>*/;
@@ -1122,7 +1483,8 @@ var43 = 0; /* is null */
 var43 = 1; /* arg is null and recv is not */
 }
 if (!var43) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "src/abstract_compiler.nit", 1926);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 1944);
 exit(1);
 }
 if (varonce44) {
@@ -1217,7 +1579,8 @@ var87 = 0; /* is null */
 var87 = 1; /* arg is null and recv is not */
 }
 if (!var87) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "src/abstract_compiler.nit", 1933);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 1951);
 exit(1);
 }
 ((void (*)(val*, val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__assign]))(var_v, var_variable, var_succ) /* assign on <var_v:AbstractCompilerVisitor>*/;
@@ -1279,7 +1642,8 @@ var114 = 0; /* is null */
 var114 = 1; /* arg is null and recv is not */
 }
 if (!var114) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "src/abstract_compiler.nit", 1942);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 1960);
 exit(1);
 }
 var115 = NEW_array__Array(&type_array__Arrayabstract_compiler__RuntimeVariable);
@@ -1299,7 +1663,8 @@ var120 = 0; /* is null */
 var120 = 1; /* arg is null and recv is not */
 }
 if (!var120) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "src/abstract_compiler.nit", 1944);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 1962);
 exit(1);
 }
 if (varonce121) {
@@ -1321,7 +1686,8 @@ var128 = 0; /* is null */
 var128 = 1; /* arg is null and recv is not */
 }
 if (!var128) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "src/abstract_compiler.nit", 1947);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 1965);
 exit(1);
 }
 var129 = NEW_array__Array(&type_array__Arrayabstract_compiler__RuntimeVariable);
@@ -1341,7 +1707,8 @@ var135 = 0; /* is null */
 var135 = 1; /* arg is null and recv is not */
 }
 if (!var135) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "src/abstract_compiler.nit", 1949);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 1967);
 exit(1);
 }
 if (varonce136) {
@@ -1376,7 +1743,8 @@ var149 = ((val* (*)(val*))(var146->class->vft[COLOR_string__Object__to_s]))(var1
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__add]))(var_v, var149) /* add on <var_v:AbstractCompilerVisitor>*/;
 var150 = ((val* (*)(val*))(self->class->vft[COLOR_scope__AForExpr__variables]))(self) /* variables on <self:AForExpr>*/;
 if (var150 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/abstract_compiler.nit", 1951);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 1969);
 exit(1);
 } else {
 var151 = ((long (*)(val*))(var150->class->vft[COLOR_abstract_collection__Collection__length]))(var150) /* length on <var150:nullable Array[Variable]>*/;
@@ -1398,7 +1766,8 @@ var158 = 0; /* is null */
 var158 = 1; /* arg is null and recv is not */
 }
 if (!var158) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "src/abstract_compiler.nit", 1953);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 1971);
 exit(1);
 }
 var159 = NEW_array__Array(&type_array__Arrayabstract_compiler__RuntimeVariable);
@@ -1418,12 +1787,14 @@ var164 = 0; /* is null */
 var164 = 1; /* arg is null and recv is not */
 }
 if (!var164) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "src/abstract_compiler.nit", 1955);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 1973);
 exit(1);
 }
 var165 = ((val* (*)(val*))(self->class->vft[COLOR_scope__AForExpr__variables]))(self) /* variables on <self:AForExpr>*/;
 if (var165 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/abstract_compiler.nit", 1956);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 1974);
 exit(1);
 } else {
 var166 = ((val* (*)(val*))(var165->class->vft[COLOR_abstract_collection__Collection__first]))(var165) /* first on <var165:nullable Array[Variable]>*/;
@@ -1433,7 +1804,8 @@ var167 = ((val* (*)(val*, val*))(var_v->class->vft[COLOR_abstract_compiler__Abst
 } else {
 var168 = ((val* (*)(val*))(self->class->vft[COLOR_scope__AForExpr__variables]))(self) /* variables on <self:AForExpr>*/;
 if (var168 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/abstract_compiler.nit", 1957);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 1975);
 exit(1);
 } else {
 var169 = ((long (*)(val*))(var168->class->vft[COLOR_abstract_collection__Collection__length]))(var168) /* length on <var168:nullable Array[Variable]>*/;
@@ -1455,7 +1827,8 @@ var176 = 0; /* is null */
 var176 = 1; /* arg is null and recv is not */
 }
 if (!var176) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "src/abstract_compiler.nit", 1959);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 1977);
 exit(1);
 }
 var177 = NEW_array__Array(&type_array__Arrayabstract_compiler__RuntimeVariable);
@@ -1475,13 +1848,15 @@ var183 = 0; /* is null */
 var183 = 1; /* arg is null and recv is not */
 }
 if (!var183) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "src/abstract_compiler.nit", 1961);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 1979);
 exit(1);
 }
 var184 = ((val* (*)(val*))(self->class->vft[COLOR_scope__AForExpr__variables]))(self) /* variables on <self:AForExpr>*/;
 var185 = 0;
 if (var184 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/abstract_compiler.nit", 1962);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 1980);
 exit(1);
 } else {
 var186 = ((val* (*)(val*, long))(var184->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var184, var185) /* [] on <var184:nullable Array[Variable]>*/;
@@ -1497,7 +1872,8 @@ var191 = 0; /* is null */
 var191 = 1; /* arg is null and recv is not */
 }
 if (!var191) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "src/abstract_compiler.nit", 1964);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 1982);
 exit(1);
 }
 var192 = NEW_array__Array(&type_array__Arrayabstract_compiler__RuntimeVariable);
@@ -1517,13 +1893,15 @@ var197 = 0; /* is null */
 var197 = 1; /* arg is null and recv is not */
 }
 if (!var197) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "src/abstract_compiler.nit", 1966);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 1984);
 exit(1);
 }
 var198 = ((val* (*)(val*))(self->class->vft[COLOR_scope__AForExpr__variables]))(self) /* variables on <self:AForExpr>*/;
 var199 = 1;
 if (var198 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/abstract_compiler.nit", 1967);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 1985);
 exit(1);
 } else {
 var200 = ((val* (*)(val*, long))(var198->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var198, var199) /* [] on <var198:nullable Array[Variable]>*/;
@@ -1531,7 +1909,8 @@ var200 = ((val* (*)(val*, long))(var198->class->vft[COLOR_abstract_collection__S
 var201 = ((val* (*)(val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__variable]))(var_v, var200) /* variable on <var_v:AbstractCompilerVisitor>*/;
 ((void (*)(val*, val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__assign]))(var_v, var201, var_i181) /* assign on <var_v:AbstractCompilerVisitor>*/;
 } else {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Aborted", "src/abstract_compiler.nit", 1969);
+fprintf(stderr, "Runtime error: %s", "Aborted");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 1987);
 exit(1);
 }
 }
@@ -1578,7 +1957,8 @@ var221 = 0; /* is null */
 var221 = 1; /* arg is null and recv is not */
 }
 if (!var221) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "src/abstract_compiler.nit", 1974);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 1992);
 exit(1);
 }
 var222 = NEW_array__Array(&type_array__Arrayabstract_compiler__RuntimeVariable);
@@ -1874,7 +2254,8 @@ val* var52 /* : String */;
 var_v = p0;
 var1 = ((val* (*)(val*))(self->class->vft[COLOR_typing__AExpr__mtype]))(self) /* mtype on <self:AOrExpr>*/;
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/abstract_compiler.nit", 2002);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2020);
 exit(1);
 }
 var2 = ((val* (*)(val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__new_var]))(var_v, var1) /* new_var on <var_v:AbstractCompilerVisitor>*/;
@@ -2063,7 +2444,8 @@ val* var52 /* : String */;
 var_v = p0;
 var1 = ((val* (*)(val*))(self->class->vft[COLOR_typing__AExpr__mtype]))(self) /* mtype on <self:AImpliesExpr>*/;
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/abstract_compiler.nit", 2017);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2035);
 exit(1);
 }
 var2 = ((val* (*)(val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__new_var]))(var_v, var1) /* new_var on <var_v:AbstractCompilerVisitor>*/;
@@ -2252,7 +2634,8 @@ val* var52 /* : String */;
 var_v = p0;
 var1 = ((val* (*)(val*))(self->class->vft[COLOR_typing__AExpr__mtype]))(self) /* mtype on <self:AAndExpr>*/;
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/abstract_compiler.nit", 2032);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2050);
 exit(1);
 }
 var2 = ((val* (*)(val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__new_var]))(var_v, var1) /* new_var on <var_v:AbstractCompilerVisitor>*/;
@@ -2421,7 +2804,8 @@ CHECK_NEW_array__Array(var7);
 var10 = ((val* (*)(val*))(var7->class->vft[COLOR_string__Object__to_s]))(var7) /* to_s on <var7:Array[Object]>*/;
 var11 = ((val* (*)(val*))(self->class->vft[COLOR_typing__AExpr__mtype]))(self) /* mtype on <self:ANotExpr>*/;
 if (var11 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/abstract_compiler.nit", 2048);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2066);
 exit(1);
 }
 var12 = ((val* (*)(val*, val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__new_expr]))(var_v, var10, var11) /* new_expr on <var_v:AbstractCompilerVisitor>*/;
@@ -2481,7 +2865,8 @@ val* var31 /* : String */;
 var_v = p0;
 var1 = ((val* (*)(val*))(self->class->vft[COLOR_typing__AExpr__mtype]))(self) /* mtype on <self:AOrElseExpr>*/;
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/abstract_compiler.nit", 2055);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2073);
 exit(1);
 }
 var2 = ((val* (*)(val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__new_var]))(var_v, var1) /* new_var on <var_v:AbstractCompilerVisitor>*/;
@@ -2560,43 +2945,6 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method abstract_compiler#AEeExpr#expr for (self: AEeExpr, AbstractCompilerVisitor): nullable RuntimeVariable */
-val* abstract_compiler__AEeExpr__expr(val* self, val* p0) {
-val* var /* : nullable RuntimeVariable */;
-val* var_v /* var v: AbstractCompilerVisitor */;
-val* var1 /* : AExpr */;
-val* var2 /* : null */;
-val* var3 /* : RuntimeVariable */;
-val* var_value1 /* var value1: RuntimeVariable */;
-val* var4 /* : AExpr */;
-val* var5 /* : null */;
-val* var6 /* : RuntimeVariable */;
-val* var_value2 /* var value2: RuntimeVariable */;
-val* var7 /* : RuntimeVariable */;
-var_v = p0;
-var1 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AEeExpr__n_expr]))(self) /* n_expr on <self:AEeExpr>*/;
-var2 = NULL;
-var3 = ((val* (*)(val*, val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__expr]))(var_v, var1, var2) /* expr on <var_v:AbstractCompilerVisitor>*/;
-var_value1 = var3;
-var4 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AEeExpr__n_expr2]))(self) /* n_expr2 on <self:AEeExpr>*/;
-var5 = NULL;
-var6 = ((val* (*)(val*, val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__expr]))(var_v, var4, var5) /* expr on <var_v:AbstractCompilerVisitor>*/;
-var_value2 = var6;
-var7 = ((val* (*)(val*, val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__equal_test]))(var_v, var_value1, var_value2) /* equal_test on <var_v:AbstractCompilerVisitor>*/;
-var = var7;
-goto RET_LABEL;
-RET_LABEL:;
-return var;
-}
-/* method abstract_compiler#AEeExpr#expr for (self: Object, AbstractCompilerVisitor): nullable RuntimeVariable */
-val* VIRTUAL_abstract_compiler__AEeExpr__expr(val* self, val* p0) {
-val* var /* : nullable RuntimeVariable */;
-val* var1 /* : nullable RuntimeVariable */;
-var1 = abstract_compiler__AEeExpr__expr(self, p0);
-var = var1;
-RET_LABEL:;
-return var;
-}
 /* method abstract_compiler#AIntExpr#expr for (self: AIntExpr, AbstractCompilerVisitor): nullable RuntimeVariable */
 val* abstract_compiler__AIntExpr__expr(val* self, val* p0) {
 val* var /* : nullable RuntimeVariable */;
@@ -2612,7 +2960,8 @@ val* var8 /* : RuntimeVariable */;
 var_v = p0;
 var1 = ((val* (*)(val*))(self->class->vft[COLOR_literal__AIntExpr__value]))(self) /* value on <self:AIntExpr>*/;
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/abstract_compiler.nit", 2077);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2086);
 exit(1);
 } else {
 var2 = ((val* (*)(val*))(var1->class->vft[COLOR_string__Object__to_s]))(var1) /* to_s on <var1:nullable Int>*/;
@@ -2628,7 +2977,8 @@ CHECK_NEW_array__Array(var3);
 var6 = ((val* (*)(val*))(var3->class->vft[COLOR_string__Object__to_s]))(var3) /* to_s on <var3:Array[Object]>*/;
 var7 = ((val* (*)(val*))(self->class->vft[COLOR_typing__AExpr__mtype]))(self) /* mtype on <self:AIntExpr>*/;
 if (var7 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/abstract_compiler.nit", 2077);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2086);
 exit(1);
 }
 var8 = ((val* (*)(val*, val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__new_expr]))(var_v, var6, var7) /* new_expr on <var_v:AbstractCompilerVisitor>*/;
@@ -2672,7 +3022,8 @@ CHECK_NEW_array__Array(var3);
 var6 = ((val* (*)(val*))(var3->class->vft[COLOR_string__Object__to_s]))(var3) /* to_s on <var3:Array[Object]>*/;
 var7 = ((val* (*)(val*))(self->class->vft[COLOR_typing__AExpr__mtype]))(self) /* mtype on <self:AFloatExpr>*/;
 if (var7 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/abstract_compiler.nit", 2081);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2090);
 exit(1);
 }
 var8 = ((val* (*)(val*, val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__new_expr]))(var_v, var6, var7) /* new_expr on <var_v:AbstractCompilerVisitor>*/;
@@ -2725,7 +3076,8 @@ varonce = var1;
 }
 var5 = ((val* (*)(val*))(self->class->vft[COLOR_literal__ACharExpr__value]))(self) /* value on <self:ACharExpr>*/;
 if (var5 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/abstract_compiler.nit", 2085);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2094);
 exit(1);
 } else {
 var6 = ((val* (*)(val*))(var5->class->vft[COLOR_string__Object__to_s]))(var5) /* to_s on <var5:nullable Char>*/;
@@ -2753,7 +3105,8 @@ CHECK_NEW_array__Array(var13);
 var16 = ((val* (*)(val*))(var13->class->vft[COLOR_string__Object__to_s]))(var13) /* to_s on <var13:Array[Object]>*/;
 var17 = ((val* (*)(val*))(self->class->vft[COLOR_typing__AExpr__mtype]))(self) /* mtype on <self:ACharExpr>*/;
 if (var17 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/abstract_compiler.nit", 2085);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2094);
 exit(1);
 }
 var18 = ((val* (*)(val*, val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__new_expr]))(var_v, var16, var17) /* new_expr on <var_v:AbstractCompilerVisitor>*/;
@@ -2779,6 +3132,7 @@ val* var1 /* : nullable MType */;
 short int var2 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 val* var3 /* : Array[MType] */;
 val* var4 /* : nullable Object */;
 val* var_mtype /* var mtype: MType */;
@@ -2808,7 +3162,9 @@ var2 = var1->type->type_table[cltype] == idtype;
 }
 }
 if (!var2) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/abstract_compiler.nit", 2091);
+var_class_name = var1 == NULL ? "null" : var1->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MClassType", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2100);
 exit(1);
 }
 var3 = ((val* (*)(val*))(var1->class->vft[COLOR_model__MClassType__arguments]))(var1) /* arguments on <var1:nullable MType(MClassType)>*/;
@@ -2857,7 +3213,8 @@ val* var2 /* : RuntimeVariable */;
 var_v = p0;
 var1 = ((val* (*)(val*))(self->class->vft[COLOR_literal__AStringFormExpr__value]))(self) /* value on <self:AStringFormExpr>*/;
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/abstract_compiler.nit", 2102);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2111);
 exit(1);
 }
 var2 = ((val* (*)(val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__string_instance]))(var_v, var1) /* string_instance on <var_v:AbstractCompilerVisitor>*/;
@@ -3023,6 +3380,7 @@ val* var7 /* : nullable MType */;
 short int var8 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 val* var_mtype /* var mtype: MClassType */;
 val* var9 /* : RuntimeVariable */;
 val* var_res /* var res: RuntimeVariable */;
@@ -3061,7 +3419,9 @@ var8 = var7->type->type_table[cltype] == idtype;
 }
 }
 if (!var8) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/abstract_compiler.nit", 2125);
+var_class_name = var7 == NULL ? "null" : var7->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MClassType", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2134);
 exit(1);
 }
 var_mtype = var7;
@@ -3121,6 +3481,7 @@ val* var7 /* : nullable MType */;
 short int var8 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 val* var_mtype /* var mtype: MClassType */;
 val* var9 /* : RuntimeVariable */;
 val* var_res /* var res: RuntimeVariable */;
@@ -3159,7 +3520,9 @@ var8 = var7->type->type_table[cltype] == idtype;
 }
 }
 if (!var8) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/abstract_compiler.nit", 2138);
+var_class_name = var7 == NULL ? "null" : var7->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MClassType", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2147);
 exit(1);
 }
 var_mtype = var7;
@@ -3226,7 +3589,8 @@ varonce = var1;
 }
 var5 = ((val* (*)(val*))(self->class->vft[COLOR_typing__AExpr__mtype]))(self) /* mtype on <self:ATrueExpr>*/;
 if (var5 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/abstract_compiler.nit", 2147);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2156);
 exit(1);
 }
 var6 = ((val* (*)(val*, val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__new_expr]))(var_v, var1, var5) /* new_expr on <var_v:AbstractCompilerVisitor>*/;
@@ -3267,7 +3631,8 @@ varonce = var1;
 }
 var5 = ((val* (*)(val*))(self->class->vft[COLOR_typing__AExpr__mtype]))(self) /* mtype on <self:AFalseExpr>*/;
 if (var5 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/abstract_compiler.nit", 2151);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2160);
 exit(1);
 }
 var6 = ((val* (*)(val*, val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__new_expr]))(var_v, var1, var5) /* new_expr on <var_v:AbstractCompilerVisitor>*/;
@@ -3308,7 +3673,8 @@ varonce = var1;
 }
 var5 = ((val* (*)(val*))(self->class->vft[COLOR_typing__AExpr__mtype]))(self) /* mtype on <self:ANullExpr>*/;
 if (var5 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/abstract_compiler.nit", 2155);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2164);
 exit(1);
 }
 var6 = ((val* (*)(val*, val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__new_expr]))(var_v, var1, var5) /* new_expr on <var_v:AbstractCompilerVisitor>*/;
@@ -3348,7 +3714,8 @@ var3 = ((val* (*)(val*, val*, val*))(var_v->class->vft[COLOR_abstract_compiler__
 var_i = var3;
 var4 = ((val* (*)(val*))(self->class->vft[COLOR_typing__AIsaExpr__cast_type]))(self) /* cast_type on <self:AIsaExpr>*/;
 if (var4 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/abstract_compiler.nit", 2162);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2171);
 exit(1);
 }
 if (varonce) {
@@ -3395,32 +3762,6 @@ val* var11 /* : String */;
 char* var12 /* : NativeString */;
 long var13 /* : Int */;
 val* var14 /* : String */;
-val* var15 /* : RuntimeVariable */;
-val* var_cond /* var cond: RuntimeVariable */;
-static val* varonce16;
-val* var17 /* : String */;
-char* var18 /* : NativeString */;
-long var19 /* : Int */;
-val* var20 /* : String */;
-static val* varonce21;
-val* var22 /* : String */;
-char* var23 /* : NativeString */;
-long var24 /* : Int */;
-val* var25 /* : String */;
-val* var26 /* : Array[Object] */;
-long var27 /* : Int */;
-val* var28 /* : NativeArray[Object] */;
-val* var29 /* : String */;
-static val* varonce30;
-val* var31 /* : String */;
-char* var32 /* : NativeString */;
-long var33 /* : Int */;
-val* var34 /* : String */;
-static val* varonce35;
-val* var36 /* : String */;
-char* var37 /* : NativeString */;
-long var38 /* : Int */;
-val* var39 /* : String */;
 var_v = p0;
 var1 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AAsCastExpr__n_expr]))(self) /* n_expr on <self:AAsCastExpr>*/;
 var2 = NULL;
@@ -3439,7 +3780,8 @@ goto RET_LABEL;
 }
 var10 = ((val* (*)(val*))(self->class->vft[COLOR_typing__AExpr__mtype]))(self) /* mtype on <self:AAsCastExpr>*/;
 if (var10 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/abstract_compiler.nit", 2172);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2181);
 exit(1);
 }
 if (varonce) {
@@ -3451,58 +3793,7 @@ var14 = string__NativeString__to_s_with_length(var12, var13);
 var11 = var14;
 varonce = var11;
 }
-var15 = ((val* (*)(val*, val*, val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__type_test]))(var_v, var_i, var10, var11) /* type_test on <var_v:AbstractCompilerVisitor>*/;
-var_cond = var15;
-if (varonce16) {
-var17 = varonce16;
-} else {
-var18 = "if (!";
-var19 = 5;
-var20 = string__NativeString__to_s_with_length(var18, var19);
-var17 = var20;
-varonce16 = var17;
-}
-if (varonce21) {
-var22 = varonce21;
-} else {
-var23 = ") {";
-var24 = 3;
-var25 = string__NativeString__to_s_with_length(var23, var24);
-var22 = var25;
-varonce21 = var22;
-}
-var26 = NEW_array__Array(&type_array__Arraykernel__Object);
-{ /* var26 = array_instance Array[Object] */
-var27 = 3;
-var28 = NEW_array__NativeArray(var27, &type_array__NativeArraykernel__Object);
-((struct instance_array__NativeArray*)var28)->values[0] = (val*) var17;
-((struct instance_array__NativeArray*)var28)->values[1] = (val*) var_cond;
-((struct instance_array__NativeArray*)var28)->values[2] = (val*) var22;
-((void (*)(val*, val*, long))(var26->class->vft[COLOR_array__Array__with_native]))(var26, var28, var27) /* with_native on <var26:Array[Object]>*/;
-CHECK_NEW_array__Array(var26);
-}
-var29 = ((val* (*)(val*))(var26->class->vft[COLOR_string__Object__to_s]))(var26) /* to_s on <var26:Array[Object]>*/;
-((void (*)(val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__add]))(var_v, var29) /* add on <var_v:AbstractCompilerVisitor>*/;
-if (varonce30) {
-var31 = varonce30;
-} else {
-var32 = "Cast failed";
-var33 = 11;
-var34 = string__NativeString__to_s_with_length(var32, var33);
-var31 = var34;
-varonce30 = var31;
-}
-((void (*)(val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__add_abort]))(var_v, var31) /* add_abort on <var_v:AbstractCompilerVisitor>*/;
-if (varonce35) {
-var36 = varonce35;
-} else {
-var37 = "}";
-var38 = 1;
-var39 = string__NativeString__to_s_with_length(var37, var38);
-var36 = var39;
-varonce35 = var36;
-}
-((void (*)(val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__add]))(var_v, var36) /* add on <var_v:AbstractCompilerVisitor>*/;
+((void (*)(val*, val*, val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__add_cast]))(var_v, var_i, var10, var11) /* add_cast on <var_v:AbstractCompilerVisitor>*/;
 var = var_i;
 goto RET_LABEL;
 RET_LABEL:;
@@ -3798,7 +4089,8 @@ val* var125 /* : String */;
 var_v = p0;
 var1 = ((val* (*)(val*))(self->class->vft[COLOR_typing__AExpr__mtype]))(self) /* mtype on <self:AOnceExpr>*/;
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/abstract_compiler.nit", 2200);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2206);
 exit(1);
 }
 var_mtype = var1;
@@ -4114,7 +4406,8 @@ var_ = var4;
 var_args = var_;
 var6 = ((val* (*)(val*))(self->class->vft[COLOR_typing__ASendExpr__raw_arguments]))(self) /* raw_arguments on <self:ASendExpr>*/;
 if (var6 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/abstract_compiler.nit", 2223);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2229);
 exit(1);
 }
 var7 = ((val* (*)(val*))(var6->class->vft[COLOR_abstract_collection__Collection__iterator]))(var6) /* iterator on <var6:nullable Array[AExpr](Array[AExpr])>*/;
@@ -4132,7 +4425,8 @@ CONTINUE_label: (void)0;
 BREAK_label: (void)0;
 var12 = ((val* (*)(val*))(self->class->vft[COLOR_typing__ASendExpr__callsite]))(self) /* callsite on <self:ASendExpr>*/;
 if (var12 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/abstract_compiler.nit", 2226);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2232);
 exit(1);
 }
 var13 = ((val* (*)(val*, val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__compile_callsite]))(var_v, var12, var_args) /* compile_callsite on <var_v:AbstractCompilerVisitor>*/;
@@ -4201,7 +4495,8 @@ var_ = var3;
 var_args = var_;
 var5 = ((val* (*)(val*))(self->class->vft[COLOR_typing__ASendExpr__raw_arguments]))(self) /* raw_arguments on <self:ASendReassignFormExpr>*/;
 if (var5 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/abstract_compiler.nit", 2235);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2241);
 exit(1);
 }
 var6 = ((val* (*)(val*))(var5->class->vft[COLOR_abstract_collection__Collection__iterator]))(var5) /* iterator on <var5:nullable Array[AExpr](Array[AExpr])>*/;
@@ -4223,7 +4518,8 @@ var13 = ((val* (*)(val*, val*, val*))(var_v->class->vft[COLOR_abstract_compiler_
 var_value = var13;
 var14 = ((val* (*)(val*))(self->class->vft[COLOR_typing__ASendExpr__callsite]))(self) /* callsite on <self:ASendReassignFormExpr>*/;
 if (var14 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/abstract_compiler.nit", 2240);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2246);
 exit(1);
 }
 var15 = ((val* (*)(val*, val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__compile_callsite]))(var_v, var14, var_args) /* compile_callsite on <var_v:AbstractCompilerVisitor>*/;
@@ -4235,12 +4531,14 @@ var17 = 0; /* is null */
 var17 = 1; /* arg is null and recv is not */
 }
 if (!var17) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "src/abstract_compiler.nit", 2241);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2247);
 exit(1);
 }
 var18 = ((val* (*)(val*))(self->class->vft[COLOR_typing__AReassignFormExpr__reassign_callsite]))(self) /* reassign_callsite on <self:ASendReassignFormExpr>*/;
 if (var18 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/abstract_compiler.nit", 2243);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2249);
 exit(1);
 }
 var19 = NEW_array__Array(&type_array__Arrayabstract_compiler__RuntimeVariable);
@@ -4261,13 +4559,15 @@ var24 = 0; /* is null */
 var24 = 1; /* arg is null and recv is not */
 }
 if (!var24) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "src/abstract_compiler.nit", 2244);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2250);
 exit(1);
 }
 ((void (*)(val*, val*))(var_args->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_args, var_res) /* add on <var_args:Array[RuntimeVariable]>*/;
 var25 = ((val* (*)(val*))(self->class->vft[COLOR_typing__ASendReassignFormExpr__write_callsite]))(self) /* write_callsite on <self:ASendReassignFormExpr>*/;
 if (var25 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/abstract_compiler.nit", 2247);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2253);
 exit(1);
 }
 var26 = ((val* (*)(val*, val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__compile_callsite]))(var_v, var25, var_args) /* compile_callsite on <var_v:AbstractCompilerVisitor>*/;
@@ -4325,15 +4625,18 @@ val* var35 /* : MPropDef */;
 short int var36 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 val* var37 /* : MType */;
 short int var38 /* : Bool */;
 int cltype39;
 int idtype40;
-val* var41 /* : nullable RuntimeVariable */;
+const char* var_class_name41;
+val* var42 /* : nullable RuntimeVariable */;
 var_v = p0;
 var1 = ((val* (*)(val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__frame]))(var_v) /* frame on <var_v:AbstractCompilerVisitor>*/;
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/abstract_compiler.nit", 2254);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2260);
 exit(1);
 } else {
 var2 = ((val* (*)(val*))(var1->class->vft[COLOR_abstract_compiler__Frame__arguments]))(var1) /* arguments on <var1:nullable Frame>*/;
@@ -4373,7 +4676,8 @@ RET_LABEL16:(void)0;
 if (var15){
 var18 = ((val* (*)(val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__frame]))(var_v) /* frame on <var_v:AbstractCompilerVisitor>*/;
 if (var18 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/abstract_compiler.nit", 2260);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2266);
 exit(1);
 } else {
 var19 = ((val* (*)(val*))(var18->class->vft[COLOR_abstract_compiler__Frame__arguments]))(var18) /* arguments on <var18:nullable Frame>*/;
@@ -4393,7 +4697,8 @@ if (var22){
 var23 = ((val* (*)(val*))(var_mproperty->class->vft[COLOR_model__MProperty__intro]))(var_mproperty) /* intro on <var_mproperty:nullable MMethod(MMethod)>*/;
 var24 = ((val* (*)(val*))(var23->class->vft[COLOR_model__MMethodDef__msignature]))(var23) /* msignature on <var23:MPropDef(MMethodDef)>*/;
 if (var24 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/abstract_compiler.nit", 2265);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2271);
 exit(1);
 } else {
 var25 = ((long (*)(val*))(var24->class->vft[COLOR_model__MSignature__arity]))(var24) /* arity on <var24:nullable MSignature>*/;
@@ -4423,7 +4728,8 @@ goto RET_LABEL;
 }
 var34 = ((val* (*)(val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__frame]))(var_v) /* frame on <var_v:AbstractCompilerVisitor>*/;
 if (var34 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "src/abstract_compiler.nit", 2274);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2280);
 exit(1);
 } else {
 var35 = ((val* (*)(val*))(var34->class->vft[COLOR_abstract_compiler__Frame__mpropdef]))(var34) /* mpropdef on <var34:nullable Frame>*/;
@@ -4437,7 +4743,9 @@ var36 = 0;
 var36 = var35->type->type_table[cltype] == idtype;
 }
 if (!var36) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/abstract_compiler.nit", 2274);
+var_class_name = var35 == NULL ? "null" : var35->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MMethodDef", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2280);
 exit(1);
 }
 var37 = ((val* (*)(val*))(var_recv->class->vft[COLOR_abstract_compiler__RuntimeVariable__mtype]))(var_recv) /* mtype on <var_recv:RuntimeVariable>*/;
@@ -4450,11 +4758,13 @@ var38 = 0;
 var38 = var37->type->type_table[cltype39] == idtype40;
 }
 if (!var38) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/abstract_compiler.nit", 2274);
+var_class_name41 = var37 == NULL ? "null" : var37->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MClassType", var_class_name41);
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2280);
 exit(1);
 }
-var41 = ((val* (*)(val*, val*, val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__supercall]))(var_v, var35, var37, var_args) /* supercall on <var_v:AbstractCompilerVisitor>*/;
-var = var41;
+var42 = ((val* (*)(val*, val*, val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__supercall]))(var_v, var35, var37, var_args) /* supercall on <var_v:AbstractCompilerVisitor>*/;
+var = var42;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -4476,6 +4786,7 @@ val* var1 /* : nullable MType */;
 short int var2 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 val* var_mtype /* var mtype: MClassType */;
 val* var3 /* : String */;
 val* var_ctype /* var ctype: String */;
@@ -4540,7 +4851,9 @@ var2 = var1->type->type_table[cltype] == idtype;
 }
 }
 if (!var2) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/abstract_compiler.nit", 2281);
+var_class_name = var1 == NULL ? "null" : var1->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MClassType", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2287);
 exit(1);
 }
 var_mtype = var1;
@@ -4603,7 +4916,8 @@ CHECK_NEW_array__Array(var27);
 }
 var30 = ((val* (*)(val*))(var27->class->vft[COLOR_string__Object__to_s]))(var27) /* to_s on <var27:Array[Object]>*/;
 ((void (*)(val*, val*))(self->class->vft[COLOR_parser_nodes__ANode__debug]))(self, var30) /* debug on <self:ANewExpr>*/;
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Aborted", "src/abstract_compiler.nit", 2290);
+fprintf(stderr, "Runtime error: %s", "Aborted");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2296);
 exit(1);
 }
 }
@@ -4631,7 +4945,8 @@ CONTINUE_label: (void)0;
 BREAK_label: (void)0;
 var40 = ((val* (*)(val*))(self->class->vft[COLOR_typing__ANewExpr__callsite]))(self) /* callsite on <self:ANewExpr>*/;
 if (var40 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/abstract_compiler.nit", 2296);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2302);
 exit(1);
 }
 var41 = ((val* (*)(val*, val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__compile_callsite]))(var_v, var40, var_args) /* compile_callsite on <var_v:AbstractCompilerVisitor>*/;
@@ -4680,7 +4995,8 @@ var3 = ((val* (*)(val*, val*, val*))(var_v->class->vft[COLOR_abstract_compiler__
 var_recv = var3;
 var4 = ((val* (*)(val*))(self->class->vft[COLOR_typing__AAttrFormExpr__mproperty]))(self) /* mproperty on <self:AAttrExpr>*/;
 if (var4 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/abstract_compiler.nit", 2310);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2316);
 exit(1);
 }
 var_mproperty = var4;
@@ -4723,7 +5039,8 @@ var5 = ((val* (*)(val*, val*, val*))(var_v->class->vft[COLOR_abstract_compiler__
 var_i = var5;
 var6 = ((val* (*)(val*))(self->class->vft[COLOR_typing__AAttrFormExpr__mproperty]))(self) /* mproperty on <self:AAttrAssignExpr>*/;
 if (var6 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/abstract_compiler.nit", 2320);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2326);
 exit(1);
 }
 var_mproperty = var6;
@@ -4769,7 +5086,8 @@ var5 = ((val* (*)(val*, val*, val*))(var_v->class->vft[COLOR_abstract_compiler__
 var_value = var5;
 var6 = ((val* (*)(val*))(self->class->vft[COLOR_typing__AAttrFormExpr__mproperty]))(self) /* mproperty on <self:AAttrReassignExpr>*/;
 if (var6 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/abstract_compiler.nit", 2330);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2336);
 exit(1);
 }
 var_mproperty = var6;
@@ -4777,7 +5095,8 @@ var7 = ((val* (*)(val*, val*, val*))(var_v->class->vft[COLOR_abstract_compiler__
 var_attr = var7;
 var8 = ((val* (*)(val*))(self->class->vft[COLOR_typing__AReassignFormExpr__reassign_callsite]))(self) /* reassign_callsite on <self:AAttrReassignExpr>*/;
 if (var8 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/abstract_compiler.nit", 2332);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2338);
 exit(1);
 }
 var9 = NEW_array__Array(&type_array__Arrayabstract_compiler__RuntimeVariable);
@@ -4798,7 +5117,8 @@ var14 = 0; /* is null */
 var14 = 1; /* arg is null and recv is not */
 }
 if (!var14) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "src/abstract_compiler.nit", 2333);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2339);
 exit(1);
 }
 ((void (*)(val*, val*, val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__write_attribute]))(var_v, var_mproperty, var_recv, var_res) /* write_attribute on <var_v:AbstractCompilerVisitor>*/;
@@ -4827,7 +5147,8 @@ var3 = ((val* (*)(val*, val*, val*))(var_v->class->vft[COLOR_abstract_compiler__
 var_recv = var3;
 var4 = ((val* (*)(val*))(self->class->vft[COLOR_typing__AAttrFormExpr__mproperty]))(self) /* mproperty on <self:AIssetAttrExpr>*/;
 if (var4 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/abstract_compiler.nit", 2342);
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2348);
 exit(1);
 }
 var_mproperty = var4;
@@ -4864,6 +5185,7 @@ short int var1 /* : Bool */;
 int cltype;
 int idtype;
 const struct type* type_struct;
+const char* var_class_name;
 val* var_o /* var o: Array[nullable Object] */;
 val* var2 /* : Array[nullable Object] */;
 val* var_res /* var res: Array[nullable Object] */;
@@ -4884,7 +5206,9 @@ var1 = 0;
 var1 = p0->type->type_table[cltype] == idtype;
 }
 if (!var1) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "src/abstract_compiler.nit", 2357);
+var_class_name = p0 == NULL ? "null" : p0->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Array[Array#0]", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2363);
 exit(1);
 }
 var_o = p0;
@@ -5037,7 +5361,8 @@ val* var /* : Map[MClass, Set[MProperty]] */;
 val* var1 /* : Map[MClass, Set[MProperty]] */;
 var1 = self->attrs[COLOR_abstract_compiler__MModule___64dproperties_cache].val; /* @properties_cache on <self:MModule> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Uninitialized attribute @properties_cache", "src/abstract_compiler.nit", 2386);
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @properties_cache");
+fprintf(stderr, " (%s:%d)\n", "src/abstract_compiler.nit", 2392);
 exit(1);
 }
 var = var1;

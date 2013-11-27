@@ -1,4 +1,5 @@
 #include "nit.common.h"
+extern const int COLOR_kernel__Object__is_same_instance;
 short int kernel__Object___61d_61d(val* self, val* p0);
 extern const int COLOR_kernel__Object___61d_61d;
 short int kernel__Object___33d_61d(val* self, val* p0);
@@ -40,8 +41,6 @@ long kernel__Int__min(long self, long p0);
 long kernel__Int__digit_count_base_95d10(long self);
 long kernel__Int__digit_count(long self, long p0);
 char kernel__Int__to_c(long self);
-void kernel__Int__enumerate_to(long self, long p0);
-void kernel__Int__enumerate_before(long self, long p0);
 long kernel__Int__abs(long self);
 long kernel__Char__hash(char self);
 extern const struct class class_kernel__Char;

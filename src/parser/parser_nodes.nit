@@ -1226,13 +1226,6 @@ class AEqExpr
 	super ABinopExpr
 end
 
-# A `is` expression
-class AEeExpr
-	super ABoolExpr
-	readable writable var _n_expr: AExpr
-	readable writable var _n_expr2: AExpr
-end
-
 # A `!=` expression
 class ANeExpr
 	super ABinopExpr

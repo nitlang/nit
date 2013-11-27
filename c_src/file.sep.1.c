@@ -163,7 +163,8 @@ val* var1 /* : nullable NativeFile */;
 void* var2 /* : FileStat */;
 var1 = self->attrs[COLOR_file__FStream___file].val; /* _file on <self:FStream> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "lib/standard/file.nit", 66);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 66);
 exit(1);
 } else {
 var2 = ((void* (*)(val*))(var1->class->vft[COLOR_file__NativeFile__file_stat]))(var1) /* file_stat on <var1:nullable NativeFile>*/;
@@ -212,7 +213,8 @@ if (var1){
 var2 = NULL/*special!*/;
 var3 = self->attrs[COLOR_file__FStream___path].val; /* _path on <self:IFStream> */
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "lib/standard/file.nit", 80);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 80);
 exit(1);
 } else {
 var4 = ((char* (*)(val*))(var3->class->vft[COLOR_string__String__to_cstring]))(var3) /* to_cstring on <var3:nullable String>*/;
@@ -226,7 +228,8 @@ var8 = 0;
 self->attrs[COLOR_stream__BufferedIStream___buffer_pos].l = var8; /* _buffer_pos on <self:IFStream> */
 var9 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:IFStream> */
 if (var9 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "lib/standard/file.nit", 83);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 83);
 exit(1);
 } else {
 ((void (*)(val*))(var9->class->vft[COLOR_abstract_collection__RemovableCollection__clear]))(var9) /* clear on <var9:nullable Buffer>*/;
@@ -246,7 +249,8 @@ long var_i /* var i: Int */;
 short int var2 /* : Bool */;
 var = self->attrs[COLOR_file__FStream___file].val; /* _file on <self:IFStream> */
 if (var == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "lib/standard/file.nit", 88);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 88);
 exit(1);
 } else {
 var1 = ((long (*)(val*))(var->class->vft[COLOR_file__NativeFile__io_close]))(var) /* io_close on <var:nullable NativeFile>*/;
@@ -275,6 +279,7 @@ short int var7 /* : Bool */;
 short int var9 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 short int var10 /* : Bool */;
 short int var11 /* : Bool */;
 long var12 /* : Int */;
@@ -283,18 +288,21 @@ long var14 /* : Int */;
 var = self->attrs[COLOR_file__FStream___file].val; /* _file on <self:IFStream> */
 var1 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:IFStream> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "lib/standard/file.nit", 94);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 94);
 exit(1);
 }
 var2 = var1->attrs[COLOR_string__AbstractString___items].str; /* _items on <var1:nullable Buffer> */
 var3 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:IFStream> */
 if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "lib/standard/file.nit", 94);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 94);
 exit(1);
 }
 var4 = var3->attrs[COLOR_string__Buffer___capacity].l; /* _capacity on <var3:nullable Buffer> */
 if (var == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "lib/standard/file.nit", 94);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 94);
 exit(1);
 } else {
 var5 = ((long (*)(val*, char*, long))(var->class->vft[COLOR_file__NativeFile__io_read]))(var, var2, var4) /* io_read on <var:nullable NativeFile>*/;
@@ -306,7 +314,9 @@ var6 = 0;
 /* <var6:Int> isa OTHER */
 var9 = 1; /* easy <var6:Int> isa OTHER*/
 if (!var9) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 256);
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
 exit(1);
 }
 var10 = var_nb <= var6;
@@ -323,7 +333,8 @@ var_nb = var12;
 }
 var13 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:IFStream> */
 if (var13 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "lib/standard/file.nit", 99);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 99);
 exit(1);
 }
 var13->attrs[COLOR_array__AbstractArrayRead___length].l = var_nb; /* _length on <var13:nullable Buffer> */
@@ -375,7 +386,8 @@ var = 10;
 var1 = NULL/*special!*/;
 var2 = self->attrs[COLOR_file__FStream___path].val; /* _path on <self:IFStream> */
 if (var2 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "lib/standard/file.nit", 111);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 111);
 exit(1);
 } else {
 var3 = ((char* (*)(val*))(var2->class->vft[COLOR_string__String__to_cstring]))(var2) /* to_cstring on <var2:nullable String>*/;
@@ -391,7 +403,8 @@ var8 = 0; /* is null */
 var8 = 1; /* arg is null and recv is not */
 }
 if (!var8) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert \'cant_open_file\' failed", "lib/standard/file.nit", 112);
+fprintf(stderr, "Runtime error: %s", "Assert \'cant_open_file\' failed");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 112);
 exit(1);
 }
 RET_LABEL:;
@@ -432,7 +445,8 @@ long var2 /* : Int */;
 var_s = p0;
 var = self->attrs[COLOR_file__OFStream___writable].s; /* _writable on <self:OFStream> */
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "lib/standard/file.nit", 126);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 126);
 exit(1);
 }
 var1 = ((char* (*)(val*))(var_s->class->vft[COLOR_string__String__to_cstring]))(var_s) /* to_cstring on <var_s:String>*/;
@@ -472,7 +486,8 @@ long var_i /* var i: Int */;
 short int var2 /* : Bool */;
 var = self->attrs[COLOR_file__FStream___file].val; /* _file on <self:OFStream> */
 if (var == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "lib/standard/file.nit", 134);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 134);
 exit(1);
 } else {
 var1 = ((long (*)(val*))(var->class->vft[COLOR_file__NativeFile__io_close]))(var) /* io_close on <var:nullable NativeFile>*/;
@@ -522,12 +537,14 @@ var_native = p0;
 var_len = p1;
 var = self->attrs[COLOR_file__OFStream___writable].s; /* _writable on <self:OFStream> */
 if (!var) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert failed", "lib/standard/file.nit", 144);
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 144);
 exit(1);
 }
 var1 = self->attrs[COLOR_file__FStream___file].val; /* _file on <self:OFStream> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Reciever is null", "lib/standard/file.nit", 145);
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 145);
 exit(1);
 } else {
 var2 = ((long (*)(val*, char*, long))(var1->class->vft[COLOR_file__NativeFile__io_write]))(var1, var_native, var_len) /* io_write on <var1:nullable NativeFile>*/;
@@ -618,7 +635,8 @@ var6 = 0; /* is null */
 var6 = 1; /* arg is null and recv is not */
 }
 if (!var6) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Assert \'cant_open_file\' failed", "lib/standard/file.nit", 156);
+fprintf(stderr, "Runtime error: %s", "Assert \'cant_open_file\' failed");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 156);
 exit(1);
 }
 self->attrs[COLOR_file__FStream___path].val = var_path; /* _path on <self:OFStream> */
@@ -919,6 +937,7 @@ short int var10 /* : Bool */;
 short int var12 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 short int var13 /* : Bool */;
 long var14 /* : Int */;
 long var15 /* : Int */;
@@ -945,7 +964,9 @@ var9 = 0;
 /* <var9:Int> isa OTHER */
 var12 = 1; /* easy <var9:Int> isa OTHER*/
 if (!var12) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 258);
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
 exit(1);
 }
 var13 = var_pos >= var9;
@@ -994,6 +1015,7 @@ short int var8 /* : Bool */;
 short int var10 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 short int var11 /* : Bool */;
 short int var_ /* var : Bool */;
 val* var12 /* : nullable Object */;
@@ -1013,22 +1035,23 @@ short int var26 /* : Bool */;
 short int var28 /* : Bool */;
 int cltype29;
 int idtype30;
-short int var31 /* : Bool */;
-long var32 /* : Int */;
-val* var33 /* : String */;
-long var34 /* : Int */;
-short int var35 /* : Bool */;
-short int var37 /* : Bool */;
+const char* var_class_name31;
+short int var32 /* : Bool */;
+long var33 /* : Int */;
+val* var34 /* : String */;
+long var35 /* : Int */;
+short int var36 /* : Bool */;
+short int var38 /* : Bool */;
 static val* varonce;
-val* var38 /* : String */;
-char* var39 /* : NativeString */;
-long var40 /* : Int */;
-val* var41 /* : String */;
-static val* varonce42;
-val* var43 /* : String */;
-char* var44 /* : NativeString */;
-long var45 /* : Int */;
-val* var46 /* : String */;
+val* var39 /* : String */;
+char* var40 /* : NativeString */;
+long var41 /* : Int */;
+val* var42 /* : String */;
+static val* varonce43;
+val* var44 /* : String */;
+char* var45 /* : NativeString */;
+long var46 /* : Int */;
+val* var47 /* : String */;
 var1 = self->attrs[COLOR_array__AbstractArrayRead___length].l; /* _length on <self:String> */
 var2 = 1;
 { /* Inline kernel#Int#- (var1,var2) */
@@ -1044,7 +1067,9 @@ var7 = 0;
 /* <var7:Int> isa OTHER */
 var10 = 1; /* easy <var7:Int> isa OTHER*/
 if (!var10) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 259);
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
 exit(1);
 }
 var11 = var_l > var7;
@@ -1091,50 +1116,52 @@ var25 = 0;
 /* <var25:Int> isa OTHER */
 var28 = 1; /* easy <var25:Int> isa OTHER*/
 if (!var28) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 259);
+var_class_name31 = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name31);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
 exit(1);
 }
-var31 = var_pos > var25;
-var26 = var31;
+var32 = var_pos > var25;
+var26 = var32;
 goto RET_LABEL27;
 RET_LABEL27:(void)0;
 }
 if (var26){
-var32 = 0;
-var33 = ((val* (*)(val*, long, long))(self->class->vft[COLOR_string__AbstractString__substring]))(self, var32, var_pos) /* substring on <self:String>*/;
-var = var33;
+var33 = 0;
+var34 = ((val* (*)(val*, long, long))(self->class->vft[COLOR_string__AbstractString__substring]))(self, var33, var_pos) /* substring on <self:String>*/;
+var = var34;
 goto RET_LABEL;
 } else {
-var34 = 0;
-{ /* Inline kernel#Int#== (var_pos,var34) */
-var37 = var_pos == var34;
-var35 = var37;
-goto RET_LABEL36;
-RET_LABEL36:(void)0;
+var35 = 0;
+{ /* Inline kernel#Int#== (var_pos,var35) */
+var38 = var_pos == var35;
+var36 = var38;
+goto RET_LABEL37;
+RET_LABEL37:(void)0;
 }
-if (var35){
+if (var36){
 if (varonce) {
-var38 = varonce;
+var39 = varonce;
 } else {
-var39 = "/";
-var40 = 1;
-var41 = string__NativeString__to_s_with_length(var39, var40);
-var38 = var41;
-varonce = var38;
+var40 = "/";
+var41 = 1;
+var42 = string__NativeString__to_s_with_length(var40, var41);
+var39 = var42;
+varonce = var39;
 }
-var = var38;
+var = var39;
 goto RET_LABEL;
 } else {
-if (varonce42) {
-var43 = varonce42;
+if (varonce43) {
+var44 = varonce43;
 } else {
-var44 = ".";
-var45 = 1;
-var46 = string__NativeString__to_s_with_length(var44, var45);
-var43 = var46;
-varonce42 = var43;
+var45 = ".";
+var46 = 1;
+var47 = string__NativeString__to_s_with_length(var45, var46);
+var44 = var47;
+varonce43 = var44;
 }
-var = var43;
+var = var44;
 goto RET_LABEL;
 }
 }
@@ -1559,6 +1586,7 @@ short int var5 /* : Bool */;
 short int var7 /* : Bool */;
 int cltype;
 int idtype;
+const char* var_class_name;
 short int var8 /* : Bool */;
 long var9 /* : Int */;
 long var10 /* : Int */;
@@ -1576,7 +1604,9 @@ var4 = 0;
 /* <var4:Int> isa OTHER */
 var7 = 1; /* easy <var4:Int> isa OTHER*/
 if (!var7) {
-fprintf(stderr, "Runtime error: %s (%s:%d)\n", "Cast failed", "lib/standard/kernel.nit", 258);
+var_class_name = type_kernel__Int.name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
 exit(1);
 }
 var8 = var_last_slash >= var4;

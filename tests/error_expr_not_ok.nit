@@ -83,9 +83,9 @@ trash(fail == fail) # no rtype
 trash(fail != 1) # no rtype
 trash(1 != fail)
 trash(fail != fail) # no rtype
-trash(fail is 1)
-trash(1 is fail)
-trash(fail is fail)
+trash(fail.is_same_instance(1))
+trash(1.is_same_instance(fail))
+trash(fail.is_same_instance(fail))
 trash(fail < 1) # no rtype
 trash(1 < fail)
 trash(fail < fail) # no rtype
