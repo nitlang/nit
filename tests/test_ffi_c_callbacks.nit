@@ -24,7 +24,7 @@ fun call_a_fun import foo `{
 	Object_foo(recv);
 `}
 
-fun call_a_constructor import A, A::bar `{
+fun call_a_constructor import A, A.bar `{
 	A a = new_A();
 	A_bar(a);
 `}
