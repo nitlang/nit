@@ -25,6 +25,7 @@ module global_compiler
 
 import abstract_compiler
 import rapid_type_analysis
+import compiler_ffi
 
 redef class ModelBuilder
 	# Entry point to performs a global compilation on the AST of a complete program.
@@ -250,12 +251,16 @@ class GlobalCompiler
 		v.add("res->value = value;")
 		v.add("return (val*)res;")
 		v.add("\}")
-
 	end
 
 	redef fun new_visitor do return new GlobalCompilerVisitor(self)
 
 	private var collect_types_cache: HashMap[MType, Array[MClassType]] = new HashMap[MType, Array[MClassType]]
+
+	redef fun compile_nitni_structs
+	do
+		self.header.add_decl("struct nitni_instance \{ val *value; \};")
+	end
 end
 
 # A visitor on the AST of property definition that generate the C code.

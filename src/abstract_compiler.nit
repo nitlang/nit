@@ -21,6 +21,7 @@ import literal
 import typing
 import auto_super_init
 import frontend
+import common_ffi
 
 # Add compiling options
 redef class ToolContext
@@ -182,6 +183,14 @@ redef class ModelBuilder
 
 		self.toolcontext.info("Total C source files to compile: {cfiles.length}", 2)
 
+		# FFI
+		for m in mainmodule.in_importation.greaters do if mmodule2nmodule.keys.has(m) then
+			var amodule = mmodule2nmodule[m]
+			if m.uses_ffi or amodule.uses_legacy_ni then
+				compiler.finalize_ffi_for_module(amodule)
+			end
+		end
+
 		# Generate the Makefile
 
 		var makename = "{mainmodule.name}.mk"
@@ -193,7 +202,14 @@ redef class ModelBuilder
 			p = orig_dir.join_path(p).simplify_path
 			cc_includes += " -I \"" + p + "\""
 		end
-		makefile.write("CC = ccache cc\nCFLAGS = -g -O2\nCINCL = {cc_includes}\nLDFLAGS ?= \nLDLIBS  ?= -lunwind -lm -lgc\n\n")
+
+		var linker_options = new HashSet[String]
+		for m in mainmodule.in_importation.greaters do if mmodule2nmodule.keys.has(m) then
+			var amod = mmodule2nmodule[m]
+			linker_options.add(amod.c_linker_options)
+		end
+
+		makefile.write("CC = ccache cc\nCFLAGS = -g -O2\nCINCL = {cc_includes}\nLDFLAGS ?= \nLDLIBS  ?= -lunwind -lm -lgc {linker_options.join(" ")}\n\n")
 		makefile.write("all: {outpath}\n\n")
 
 		var ofiles = new Array[String]
@@ -210,11 +226,13 @@ redef class ModelBuilder
 
 		# Compile each required extern body into a specific .o
 		for f in compiler.extern_bodies do
-			var basename = f.filename.basename(".c")
-			var o = "{basename}.extern.o"
-			var ff = orig_dir.join_path(f.filename).simplify_path
-			makefile.write("{o}: {ff}\n\t$(CC) $(CFLAGS) -D NONITCNI {f.cflags} -c -o {o} {ff}\n\n")
-			ofiles.add(o)
+			if f isa ExternCFile then
+				var basename = f.filename.basename(".c")
+				var o = "{basename}.extern.o"
+				var ff = orig_dir.join_path(f.filename).simplify_path
+				makefile.write("{o}: {ff}\n\t$(CC) $(CFLAGS) -D NONITCNI {f.cflags} -c -o {o} {ff}\n\n")
+				ofiles.add(o)
+			end
 		end
 
 		# Link edition
@@ -319,18 +337,22 @@ abstract class AbstractCompiler
 		self.header.add_decl("#include <gc_chooser.h>")
 
 		compile_header_structs
+		compile_nitni_structs
 
 		# Signal handler function prototype
 		self.header.add_decl("void show_backtrace(int);")
 
-		# Global variable used by the legacy native interface
+		# Global variable used by intern methods
 		self.header.add_decl("extern int glob_argc;")
 		self.header.add_decl("extern char **glob_argv;")
 		self.header.add_decl("extern val *glob_sys;")
 	end
 
-	# Declaration of structures the live Nit types
+	# Declaration of structures for live Nit types
 	protected fun compile_header_structs is abstract
+
+	# Declaration of structures for nitni undelying the FFI
+	protected fun compile_nitni_structs is abstract
 
 	# Generate the main C function.
 	# This function:
@@ -433,8 +455,8 @@ abstract class AbstractCompiler
 		v.add("\}")
 	end
 
-	# List of additional .c files required to compile (native interface)
-	var extern_bodies = new Array[ExternCFile]
+	# List of additional files required to compile (FFI)
+	var extern_bodies = new Array[ExternFile]
 
 	# This is used to avoid adding an extern file more than once
 	private var seen_extern = new ArraySet[String]
@@ -532,6 +554,13 @@ abstract class AbstractCompiler
 	do
 		if b == 0 then return "n/a"
 		return ((a*10000/b).to_f / 100.0).to_precision(2)
+	end
+
+	fun finalize_ffi_for_module(nmodule: AModule)
+	do
+		var visitor = new_visitor
+		nmodule.finalize_ffi(visitor, modelbuilder)
+		nmodule.finalize_nitni(visitor)
 	end
 end
 
@@ -1124,14 +1153,6 @@ class Frame
 
 	# The label at the end of the property
 	var returnlabel: nullable String writable = null
-end
-
-# An extern C file to compile
-class ExternCFile
-	# The filename of the file
-	var filename: String
-	# Additionnal specific CC compiler -c flags
-	var cflags: String
 end
 
 redef class MType
@@ -2436,4 +2457,15 @@ redef class MModule
 		return properties_cache[mclass]
 	end
 	private var properties_cache: Map[MClass, Set[MProperty]] = new HashMap[MClass, Set[MProperty]]
+end
+
+redef class AModule
+	# Does this module use the legacy native interface?
+	fun uses_legacy_ni: Bool is abstract
+
+	# Write FFI results to file
+	fun finalize_ffi(v: AbstractCompilerVisitor, modelbuilder: ModelBuilder) is abstract
+
+	# Write nitni results to file
+	fun finalize_nitni(v: AbstractCompilerVisitor) is abstract
 end
