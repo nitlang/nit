@@ -45,7 +45,7 @@ class CCompilationUnit
 	var body_impl : Writer = new Writer
 
 	# files to compile TODO check is appropriate
-	#var files = new Array[String]
+	var files = new Array[String]
 
 	fun add_local_function( efc : CFunction )
 	do
