@@ -75,7 +75,7 @@ extern GtkAssistant `{GtkAssistant *`}
 		return NativeString_to_s( (char *)gtk_assistant_get_page_title( recv, page ) );
 	`}
 
-	fun set_page_title( page : GtkWidget, title : String) is extern import String::to_cstring`{
+	fun set_page_title( page : GtkWidget, title : String) is extern import String.to_cstring `{
 		gtk_assistant_set_page_title( recv, page, String_to_cstring( title ) );
 	`}
 
