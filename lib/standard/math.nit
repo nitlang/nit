@@ -16,6 +16,10 @@ module math
 import kernel
 import collection
 
+in "C header" `{
+#include <math.h>
+`}
+
 redef class Int
 	fun rand: Int is extern "kernel_Int_Int_rand_0"
 	fun bin_and(i: Int): Int is extern "kernel_Int_Int_binand_0"
