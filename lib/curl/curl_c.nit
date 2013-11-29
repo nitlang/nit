@@ -194,7 +194,7 @@ extern CCurl `{ CURL * `}
 		return curl_easy_setopt( recv, CURLOPT_READDATA, d);
 	`}
 	# Internal method used to configure callbacks in terms of given type
-	private fun i_register_callback(delegate: CCurlCallbacks, cbtype: CURLCallbackType):CURLCode is extern import CCurlCallbacks.header_callback,	CCurlCallbacks.body_callback, CCurlCallbacks.stream_callback	`{
+	private fun i_register_callback(delegate: CCurlCallbacks, cbtype: CURLCallbackType):CURLCode is extern import CCurlCallbacks.header_callback, CCurlCallbacks.body_callback, CCurlCallbacks.stream_callback, NativeString.to_s_with_copy, NativeString.to_s `{
 		CURLCallbackDatas *d = malloc(sizeof(CURLCallbackDatas));
 		CCurlCallbacks_incr_ref(delegate);
 		d->type = cbtype;
@@ -309,7 +309,7 @@ extern CURLSList `{ struct curl_slist * `}
 	# Internal method to check for reachability of next element
 	private fun i_next_reachable(c: CURLSList):Bool `{ return (c != NULL && c->next != NULL); `}
 	# Internal method to get current data
-	private fun i_data(c: CURLSList):String `{ return NativeString_to_s(c->data); `}
+	private fun i_data(c: CURLSList):String import NativeString.to_s `{ return NativeString_to_s(c->data); `}
 	# Internal method to get next element
 	private fun i_next(c: CURLSList):CURLSList `{ return c->next; `}
 	# Convert current low level List to an Array[String] object
