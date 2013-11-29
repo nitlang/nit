@@ -15,6 +15,11 @@ module json_writer
 
 intrude import jsonable
 
+in "C Header" `{
+	#define __STRICT_ANSI__
+	#include <json/json.h>
+`}
+
 redef interface Jsonable
 	# Get a JsonObject representing this instance, specific to the C library
 	private fun to_json_object : JsonObject is abstract
@@ -31,7 +36,7 @@ redef class Map[ K, V ]
 		const char *json_native_string;
 		String json_string;
 
-		jobj = Map_to_json_object( recv );
+		jobj = Map_of_Object_nullable_Object_to_json_object( recv );
 #ifdef JSON_C_TO_STRING_PRETTY
 		if ( pretty )
 			json_native_string = json_object_to_json_string_ext( jobj, JSON_C_TO_STRING_PRETTY );
@@ -121,16 +126,16 @@ redef class JsonObject
 	new `{ return json_object_new_object(); `}
 
 	# Add a key and value to the object
-	fun add( key : String, val : nullable JsonObject ) import String.to_cstring, nullable JsonObject as not nullable `{
+	fun add( key : String, val : nullable JsonObject ) import String.to_cstring, JsonObject as not nullable `{
 		char* native_key;
 
 		native_key = String_to_cstring( key );
 
-		if ( JsonObject_is_null(val) ) {
+		if ( nullable_JsonObject_is_null(val) ) {
 			json_object_object_add( recv, native_key, NULL );
 		} else {
 			json_object *jobj;
-			jobj = JsonObject_as_not_null( val );
+			jobj = nullable_JsonObject_as_JsonObject( val );
 			json_object_object_add( recv, native_key, jobj );
 		}
 	`}
@@ -142,9 +147,9 @@ private extern JsonArray
 	new `{ return json_object_new_array(); `}
 
 	fun push( val : nullable JsonObject ) `{
-		if ( JsonObject_is_null(val) )
+		if ( nullable_JsonObject_is_null(val) )
 			json_object_array_add( recv, NULL );
 		else
-			json_object_array_add( recv, JsonObject_as_not_null(val) );
+			json_object_array_add( recv, nullable_JsonObject_as_JsonObject(val) );
 	`}
 end

@@ -15,6 +15,11 @@ module json_reader
 
 intrude import jsonable
 
+in "C Header" `{
+	#define __STRICT_ANSI__
+	#include <json/json.h>
+`}
+
 redef class String
 	# Deserializes this String and return its value as a Map[String, nullable Jsonable]
 	# On error, null is returned.
@@ -34,7 +39,7 @@ end
 
 redef extern JsonObject
 	# Get this json object as a Map
-	private fun json_to_map : nullable Map[String, nullable Jsonable] import NativeString.to_s, String.to_cstring, HashMap[String,nullable Jsonable], HashMap[String,nullable Jsonable].[]=, json_cross `{
+	private fun json_to_map : nullable Map[String, nullable Jsonable] import NativeString.to_s, String.to_cstring, HashMap[String,nullable Jsonable], HashMap[String,nullable Jsonable].[]=, json_cross, HashMap[String, nullable Jsonable].as(nullable Map[String, nullable Jsonable]) `{
 		HashMap_of_String_nullable_Jsonable map;
 		String nit_key;
 		nullable_Jsonable nit_val;
@@ -51,7 +56,7 @@ redef extern JsonObject
 
 			nit_val = JsonObject_json_cross( val, type );
 
-			HashMap_of_String_nullable_Jsonable__index_assign( map, String_as_Object( nit_key ), nullable_Jsonable_as_nullable_Object( nit_val ) );
+			HashMap_of_String_nullable_Jsonable__index_assign( map, nit_key, nit_val );
 		}
 		}
 
