@@ -186,12 +186,14 @@ abstract class Lexer
 				last_state = state
 			end
 			var c
+			var next
 			if pos >= length then
 				c = '\0'
+				next = null
 			else
 				c = text[pos]
+				next = state.trans(c)
 			end
-			var next = state.trans(c)
 			if next == null then
 				if pos_start < length then
 					if last_state == null then
