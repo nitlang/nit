@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module sqlite3
+module sqlite3 is pkgconfig("sqlite3")
 
 in "C header" `{
 	#include <sqlite3.h>
