@@ -26,6 +26,7 @@ end
 
 redef class AModule
 	private var cpp_file: nullable CPPCompilationUnit = null
+	var cpp_compiler_options writable = ""
 end
 
 class CPPLanguage
@@ -169,15 +170,22 @@ class CPPCompilationUnit
 
 		files.add("{compdir}/{c_file}")
 
-		return new ExternCppFile("{compdir}/{c_file}")
+		return new ExternCppFile("{compdir}/{c_file}", amodule)
 	end
 end
 
 class ExternCppFile
 	super ExternFile
 
+	var amodule: AModule
+	init(path: String, amodule: AModule)
+	do
+		super
+		self.amodule = amodule
+	end
+
 	redef fun makefile_rule_name do return "{filename.basename("")}.o"
-	redef fun makefile_rule_content do return "g++ -c {filename.basename("")} -o {filename.basename("")}.o"
+	redef fun makefile_rule_content do return "g++ {amodule.cpp_compiler_options} -c {filename.basename("")} -o {filename.basename("")}.o"
 end
 
 class ForeignCppType
