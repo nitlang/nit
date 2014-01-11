@@ -22,6 +22,7 @@ import flow
 import modelize_property
 import phase
 import local_var_init
+import maybeSameWord
 
 redef class ToolContext
 	var typing_phase: Phase = new TypingPhase(self, [flow_phase, modelize_property_phase, local_var_init_phase])
@@ -41,6 +42,8 @@ private class TypeVisitor
 	var modelbuilder:  ModelBuilder
 	var nclassdef: AClassdef
 	var mpropdef: MPropDef
+
+	var arrayNameVar = new Array[String]
 
 	var selfvariable: Variable = new Variable("self")
 
@@ -283,6 +286,74 @@ private class TypeVisitor
 		return callsite
 	end
 
+	fun get_methodWithSuggestion(node: ANode, recvtype: MType, name: String, recv_is_self: Bool): nullable CallSite
+	do
+		var unsafe_type = self.anchor_to(recvtype)
+		
+		#debug("recv: {recvtype} (aka {unsafe_type})")
+		if recvtype isa MNullType then
+			self.error(node, "Error: Method '{name}' call on 'null'.")
+			return null
+		end
+
+		var mproperty = self.try_get_mproperty_by_name2(node, unsafe_type, name)
+		if mproperty == null then
+			#self.modelbuilder.error(node, "Type error: property {name} not found in {unsafe_type} (ie {recvtype})")
+			if recv_is_self then
+
+				var alternative = compareWordWithArray(name, arrayNameVar)
+
+				# if compareWordWithArray return null it's because it doesn't find any alternative
+				if alternative != null then
+					alternative = alternative.to_s
+					self.modelbuilder.error(node, "Error: Method or variable '{name}' unknown in {recvtype}. Maybe you want to say '{alternative}'")
+				else
+					self.modelbuilder.error(node, "Error: Method or variable '{name}' unknown in {recvtype}.")
+				end
+				
+			else
+				self.modelbuilder.error(node, "Error: Method '{name}' doesn't exists in {recvtype}.")
+			end
+			return null
+		end
+
+		assert mproperty isa MMethod
+		if mproperty.visibility == protected_visibility and not recv_is_self and self.mmodule.visibility_for(mproperty.intro_mclassdef.mmodule) < intrude_visibility then
+			self.modelbuilder.error(node, "Error: Method '{name}' is protected and can only acceded by self. {mproperty.intro_mclassdef.mmodule.visibility_for(self.mmodule)}")
+			return null
+		end
+
+		var propdefs = mproperty.lookup_definitions(self.mmodule, unsafe_type)
+		var mpropdef
+		if propdefs.length == 0 then
+			self.modelbuilder.error(node, "Type error: no definition found for property {name} in {unsafe_type}")
+			return null
+		else if propdefs.length == 1 then
+			mpropdef = propdefs.first
+		else
+			self.modelbuilder.warning(node, "Warning: confliting property definitions for property {name} in {unsafe_type}: {propdefs.join(" ")}")
+			mpropdef = mproperty.intro
+		end
+
+
+		var msignature = self.resolve_signature_for(mpropdef, recvtype, recv_is_self)
+
+		var erasure_cast = false
+		var rettype = mpropdef.msignature.return_mtype
+		if not recv_is_self and rettype != null then
+			if rettype isa MNullableType then rettype = rettype.mtype
+			if rettype isa MParameterType then
+				var erased_rettype = msignature.return_mtype
+				assert erased_rettype != null
+				#node.debug("Erasure cast: Really a {rettype} but unsafely a {erased_rettype}")
+				erasure_cast = true
+			end
+		end
+
+		var callsite = new CallSite(node, recvtype, recv_is_self, mproperty, mpropdef, msignature, erasure_cast)
+		return callsite
+	end
+
 	# Visit the expressions of args and cheik their conformity with the corresponding typi in signature
 	# The point of this method is to handle varargs correctly
 	# Note: The signature must be correctly adapted
@@ -330,6 +401,7 @@ private class TypeVisitor
 
 	fun get_variable(node: AExpr, variable: Variable): nullable MType
 	do
+		arrayNameVar.add(variable.name)
 		var flow = node.after_flow_context
 		if flow == null then
 			self.error(node, "No context!")
@@ -1220,7 +1292,8 @@ redef class ASendExpr
 			return
 		end
 
-		var callsite = v.get_method(self, recvtype, name, self.n_expr isa ASelfExpr)
+		var callsite = v.get_methodWithSuggestion(self, recvtype, name, self.n_expr isa ASelfExpr)
+
 		if callsite == null then return
 		self.callsite = callsite
 		var msignature = callsite.msignature
