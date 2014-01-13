@@ -117,7 +117,7 @@ class CalculatorGui
 
 		win = new GtkWindow( 0 )
 
-		container = new GtkGrid(2,1,true)
+		container = new GtkGrid(5,5,true)
 		win.add( container )
 
 		lbl_disp = new GtkLabel( "_" )
@@ -139,7 +139,7 @@ class CalculatorGui
 			var but = new GtkButton.with_label( op.to_s )
 			but.request_size( 64, 64 )
 			but.signal_connect( "clicked", self, op )
-			container.attach( but, 4, r, 1, 1 )
+			container.attach( but, 3, r, 1, 1 )
 			r+=1
 		end
 
@@ -147,7 +147,7 @@ class CalculatorGui
 		but_eq = new GtkButton.with_label( "=" )
 		but_eq.request_size( 64, 64 )
 		but_eq.signal_connect( "clicked", self, '=' )
-		container.attach( but_eq, 5, 3, 1, 2 )
+		container.attach( but_eq, 4, 3, 1, 2 )
 
 		# .
 		var but_dot = new GtkButton.with_label( "." )
