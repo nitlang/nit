@@ -96,18 +96,38 @@ class CalculatorGui
 
 	redef fun signal( sender, user_data )
 	do
+		var after_point = context.after_point
+		if after_point == null then 
+		    after_point = 0
+		else
+		    after_point = (after_point.abs)
+		end
+		
 		if user_data isa Char then # is an operation
 			var c = user_data
 			if c == '.' then
 				context.switch_to_decimals
+				lbl_disp.text = "{context.current.to_i}."
 			else
 				context.push_op( c )
-				lbl_disp.text = context.result.to_s
+				
+				var s = context.result.to_precision_native(6)
+				var index : nullable Int = null
+				for i in s.length.times do
+				    var chiffre = s[i]
+				    if chiffre == '0' and index == null then
+					index = i
+				    else if chiffre != '0' then
+					index = null
+				    end
+				end
+				if index != null then s = s.substring(0, index)
+				lbl_disp.text = s
 			end
 		else if user_data isa Int then # is a number
 			var n = user_data
 			context.push_digit( n )
-			lbl_disp.text = context.current.to_s
+			lbl_disp.text = context.current.to_precision(after_point)
 		end
 	end
 
