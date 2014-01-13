@@ -48,10 +48,11 @@ redef class Float
 end
 
 redef class Collection[ E ]
-	# Return a random element in the collection
-	fun rand : nullable E
+	# Return a random element form the collection
+	# There must be at least one element in the collection
+	fun rand: E
 	do
-		if is_empty then return null
+		if is_empty then abort
 		var rand_index = length.rand
 
 		for e in self do
