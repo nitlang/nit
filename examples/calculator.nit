@@ -126,7 +126,10 @@ class CalculatorGui
 					index = null
 				    end
 				end
-				if index != null then s = s.substring(0, index)
+				if index != null then
+					s = s.substring(0, index)
+					if s[s.length-1] == ',' then s = s.substring(0, s.length-1)
+				end
 				lbl_disp.text = s
 			end
 		else if user_data isa Int then # is a number
