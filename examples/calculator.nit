@@ -27,7 +27,12 @@ class CalculatorContext
 	fun push_op( op : Char )
 	do
 		apply_last_op_if_any
-		last_op = op # store for next push_op
+		if op == 'C' then
+			self.result = 0.0
+			last_op = null
+		else
+			last_op = op # store for next push_op
+		end
 
 		# prepare next current
 		after_point = null
@@ -174,6 +179,12 @@ class CalculatorGui
 		but_dot.request_size( 64, 64 )
 		but_dot.signal_connect( "clicked", self, '.' )
 		container.attach( but_dot, 1, 4, 1, 1 )
+
+		#C
+		var but_c =  new GtkButton.with_label( "C" )
+		but_c.request_size( 64, 64 )
+		but_c.signal_connect("clicked", self, 'C')
+		container.attach( but_c, 2, 4, 1, 1 )
 
 		win.show_all
 	end
