@@ -44,7 +44,7 @@ class CalculatorContext
 			current = current * 10.0 + digit.to_f
 		else
 			current = current + digit.to_f * 10.0.pow(after_point.to_f)
-			after_point -= 1
+			self.after_point -= 1
 		end
 
 		self.current = current
