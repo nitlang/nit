@@ -234,6 +234,32 @@ context.push_op( '=' )
 r = context.result.to_precision( 2 )
 assert r == "14.10" else print r
 
+#test multiple decimals
+context = new CalculatorContext
+context.push_digit( 5 )
+context.push_digit( 0 )
+context.switch_to_decimals
+context.push_digit( 1 )
+context.push_digit( 2 )
+context.push_digit( 3 )
+context.push_op( '+' )
+context.push_digit( 1 )
+context.push_op( '=' )
+r = context.result.to_precision( 3 )
+assert r == "51.123" else print r
+
+#test 'C' button
+context = new CalculatorContext
+context.push_digit( 1 )
+context.push_digit( 0 )
+context.push_op( '+' )
+context.push_digit( 1 )
+context.push_digit( 0 )
+context.push_op( '=' )
+context.push_op( 'C' )
+r = context.result.to_precision( 1 )
+assert r == "0.0" else print r
+
 # graphical application
 
 if "NIT_TESTING".environ != "true" then
