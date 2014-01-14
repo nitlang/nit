@@ -37,7 +37,7 @@ function! SyntaxCheckers_nit_nitc_IsAvailable()
 endfunction
 
 function! SyntaxCheckers_nit_nitc_GetLocList()
-	let makeprg = s:nitc . " --no-color --only-metamodel 2>&1 " . shellescape(expand("%"))
+	let makeprg = s:nitc . " --no-color --only-metamodel "
 
 	" custom NIT_DIR
 	if exists('g:syntastic_nit_dir')
@@ -56,9 +56,22 @@ function! SyntaxCheckers_nit_nitc_GetLocList()
 		endfor
 	end
 
+	" alternative main module
+	if exists('g:nit_main')
+		let makeprg .= " " . g:nit_main
+	else
+		let makeprg .= " " . shellescape(expand("%"))
+	end
+
+	" pipe stderr
+	let makeprg .= " 2>&1 "
+
 	" possible combinations of error messages
-	let ef_start = [ '%f:%l\,%c--%*[0-9]:', '%f:%l\,%c--%*[0-9]\,%*[0-9]:', '%f:%l\,%c:' ]
-	let ef_type = [ ' %tarning: ', '' ]
+	let ef_start = [ '%f:%l\,%c--%*[0-9]:',
+				   \ '%f:%l\,%c--%*[0-9]\,%*[0-9]:',
+				   \ '%f:%l\,%c:' ]
+	let ef_type = [ ' %tarning: ',
+				  \ '' ]
 
 	" generate errorformat from combinations
 	let errorformat = ""
