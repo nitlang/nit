@@ -20,8 +20,31 @@ module debugger
 import breakpoint
 intrude import naive_interpreter
 import nitx
+intrude import toolcontext
 
 redef class ToolContext
+	private var dbg: nullable Debugger = null
+
+	private var had_error: Bool = false
+
+	redef fun check_errors
+	do
+		if dbg == null then
+			super
+		else
+			if messages.length > 0 then
+				message_sorter.sort(messages)
+
+				for m in messages do
+					if "Warning".search_in(m.text, 0) == null then had_error = true
+					stderr.write("{m.to_color_string}\n")
+				end
+			end
+
+			messages.clear
+		end
+	end
+
 	# -d
 	var opt_debugger_mode: OptionBool = new OptionBool("Launches the target program with the debugger attached to it", "-d")
 	# -c
