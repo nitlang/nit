@@ -468,3 +468,26 @@ extern SDLFont in "C" `{TTF_Font *`}
 			return w;
 	`}
 end
+
+# Information on the SDL window
+# Used in other modules to get window handle
+extern class SDLSystemWindowManagerInfo `{SDL_SysWMinfo *`}
+
+	new `{
+		SDL_SysWMinfo *val = malloc(sizeof(SDL_SysWMinfo));
+
+		SDL_VERSION(&val->version);
+
+		if(SDL_GetWMInfo(val) <= 0) {
+			printf("Unable to get window handle");
+			return 0;
+		}
+
+		return val;
+	`}
+
+	# Returns the handle of this window on a X11 window system
+	fun x11_window_handle: Pointer `{
+		return (void*)recv->info.x11.window;
+	`}
+end
