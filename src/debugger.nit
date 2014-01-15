@@ -20,7 +20,41 @@ module debugger
 import breakpoint
 intrude import naive_interpreter
 import nitx
+intrude import local_var_init
+intrude import scope
 intrude import toolcontext
+
+redef class ScopeVisitor
+
+	redef init(toolcontext)
+	do
+		super
+		if toolcontext.dbg != null then
+			var localvars = toolcontext.dbg.frame.map
+			for i in localvars.keys do
+				scopes.first.variables[i.to_s] = i
+			end
+		end
+	end
+
+end
+
+redef class LocalVarInitVisitor
+	redef fun mark_is_unset(node: AExpr, variable: nullable Variable)
+	do
+		super
+		if toolcontext.dbg != null then
+			var varname = variable.to_s
+			var instmap = toolcontext.dbg.frame.map
+			for i in instmap.keys do
+				if i.to_s == varname then
+					mark_is_set(node, variable)
+				end
+			end
+		end
+	end
+
+end
 
 redef class ToolContext
 	private var dbg: nullable Debugger = null
