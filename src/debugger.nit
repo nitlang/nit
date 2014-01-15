@@ -24,6 +24,45 @@ intrude import local_var_init
 intrude import scope
 intrude import toolcontext
 
+redef class Model
+	# Cleans the model to remove a module and what it defines when semantic analysis fails on injected code
+	private fun try_remove_module(m: MModule): Bool
+	do
+		var index = -1
+		for i in [0 .. mmodules.length[ do
+			if mmodules[i] == m then
+				index = i
+				break
+			end
+		end
+		if index == -1 then return false
+		var mmodule = mmodules[index]
+		mmodules.remove_at(index)
+		for classdef in mmodule.mclassdefs do
+			var mclass = classdef.mclass
+			for i in [0 .. mclass.mclassdefs.length[ do
+				if mclass.mclassdefs[i] == classdef then
+					index = i
+					break
+				end
+			end
+			mclass.mclassdefs.remove_at(index)
+			var propdefs = classdef.mpropdefs
+			for propdef in propdefs do
+				var prop = propdef.mproperty
+				for i in [0..prop.mpropdefs.length[ do
+					if prop.mpropdefs[i] == propdef then
+						index = i
+						break
+					end
+				end
+				prop.mpropdefs.remove_at(index)
+			end
+		end
+		return true
+	end
+end
+
 redef class ScopeVisitor
 
 	redef init(toolcontext)
