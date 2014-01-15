@@ -151,16 +151,16 @@ class Debugger
 		if self.stop_after_step_over_trigger then
 			if self.frames.length <= self.step_stack_count then
 				n.debug("Execute stmt {n.to_s}")
-				while process_debug_command(gets) do end
+				while read_cmd do end
 			end
 		else if self.stop_after_step_out_trigger then
 			if frames.length < self.step_stack_count then
 				n.debug("Execute stmt {n.to_s}")
-				while process_debug_command(gets) do end
+				while read_cmd do end
 			end
 		else if step_in_trigger then
 			n.debug("Execute stmt {n.to_s}")
-			while process_debug_command(gets) do end
+			while read_cmd do end
 		end
 	end
 
@@ -183,7 +183,7 @@ class Debugger
 			end
 
 			n.debug("Execute stmt {n.to_s}")
-			while process_debug_command(gets) do end
+			while read_cmd do end
 		end
 	end
 
@@ -198,7 +198,7 @@ class Debugger
 			for j in self.traces do
 				if j.is_variable_traced_in_frame(i, frame) then
 					n.debug("Traced variable {i} used")
-					if j.break_on_encounter then while process_debug_command(gets) do end
+					if j.break_on_encounter then while read_cmd do end
 					break
 				end
 			end
@@ -249,6 +249,12 @@ class Debugger
 	#######################################################################
 	##                   Processing commands functions                   ##
 	#######################################################################
+
+	fun read_cmd: Bool
+	do
+		printn "> "
+		return process_debug_command(gets)
+	end
 
 	# Takes a user command as a parameter
 	#
