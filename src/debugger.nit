@@ -241,6 +241,64 @@ class Debugger
 		frame.current_node = old
 	end
 
+	# Does the same as an usual send, except it will modify the call chain on the first call when injecting code at Runtime using the debugger.
+	# Instead of creating a pristine Frame, it will copy the actual values of the frame, and re-inject them after execution in the current context.
+	fun rt_send(mproperty: MMethod, args: Array[Instance]): nullable Instance
+	do
+		var recv = args.first
+		var mtype = recv.mtype
+		var ret = send_commons(mproperty, args, mtype)
+		if ret != null then return ret
+		var propdef = mproperty.lookup_first_definition(self.mainmodule, mtype)
+		return self.rt_call(propdef, args)
+	end
+
+	# Same as a regular call but for a runtime injected module
+	#
+	fun rt_call(mpropdef: MMethodDef, args: Array[Instance]): nullable Instance
+	do
+		call_commons(mpropdef, args)
+		return rt_call_without_varargs(mpropdef, args)
+	end
+
+	# Common code to call and this function
+	#
+	# Call only executes the variadic part, this avoids
+	# double encapsulation of variadic parameters into an Array
+	fun rt_call_without_varargs(mpropdef: MMethodDef, args: Array[Instance]): nullable Instance
+	do
+		if self.modelbuilder.toolcontext.opt_discover_call_trace.value and not self.discover_call_trace.has(mpropdef) then
+			self.discover_call_trace.add mpropdef
+			self.debug("Discovered {mpropdef}")
+		end
+		if args.length < mpropdef.msignature.arity + 1 or args.length > mpropdef.msignature.arity + 1 then
+			fatal("NOT YET IMPLEMENTED: Invalid arity for {mpropdef}. {args.length} arguments given.")
+		end
+		if args.length < mpropdef.msignature.arity + 1 then
+			fatal("NOT YET IMPLEMENTED: default closures")
+		end
+
+		# Look for the AST node that implements the property
+		var mproperty = mpropdef.mproperty
+		if self.modelbuilder.mpropdef2npropdef.has_key(mpropdef) then
+			var npropdef = self.modelbuilder.mpropdef2npropdef[mpropdef]
+			self.parameter_check(npropdef, mpropdef, args)
+			if npropdef isa AConcreteMethPropdef then
+				return npropdef.rt_call(self, mpropdef, args)
+			else
+				print "Error, invalid propdef to call at runtime !"
+				return null
+			end
+		else if mproperty.name == "init" then
+			var nclassdef = self.modelbuilder.mclassdef2nclassdef[mpropdef.mclassdef]
+			self.parameter_check(nclassdef, mpropdef, args)
+			return nclassdef.call(self, mpropdef, args)
+		else
+			fatal("Fatal Error: method {mpropdef} not found in the AST")
+			abort
+		end
+	end
+
 	# Encpasulates the behaviour for step over/out
 	private fun steps_fun_call(n: AExpr)
 	do
@@ -1281,7 +1339,35 @@ class Debugger
 		print "untrace variable_name : Removes the trace on the variable you chose to trace earlier in the program"
 		print "kill : kills the current program (Exits with an error and stack trace)\n"
 	end
+end
 
+redef class AConcreteMethPropdef
+
+	# Same as call except it will copy local variables of the parent frame to the frame defined in this call.
+	# Not supposed to be used by anyone else than the Debugger.
+	private fun rt_call(v: Debugger, mpropdef: MMethodDef, args: Array[Instance]): nullable Instance
+	do
+		var f = new Frame(self, self.mpropdef.as(not null), args)
+		var curr_instances = v.frame.map
+		for i in curr_instances.keys do
+			f.map[i] = curr_instances[i]
+		end
+		call_commons(v,mpropdef,args,f)
+		var currFra = v.frames.shift
+		for i in curr_instances.keys do
+			if currFra.map.keys.has(i) then
+				curr_instances[i] = currFra.map[i]
+			end
+		end
+		if v.returnmark == f then
+			v.returnmark = null
+			var res = v.escapevalue
+			v.escapevalue = null
+			return res
+		end
+		return null
+
+	end
 end
 
 # Traces the modifications of an object linked to a certain frame
