@@ -465,14 +465,8 @@ class Debugger
 	# continue reading commands from the console input
 	fun process_debug_command(command:String): Bool
 	do
-		# For lisibility
-		print "\n"
-
-		# Kills the current program
-		if command == "kill" then
-			abort
 		# Step-out command
-		else if command == "finish"
+		if command == "finish"
 		then
 			return step_out
 		# Step-in command
@@ -489,6 +483,23 @@ class Debugger
 		# Continues execution until the end
 		else if command == "c" then
 			return continue_exec
+		else if command == "nit" then
+			printn "$~> "
+			command = gets
+			var nit_buf = new Buffer
+			while not command == ":q" do
+				nit_buf.append(command)
+				nit_buf.append("\n")
+				printn "$~> "
+				command = gets
+			end
+			step_in
+			eval(nit_buf.to_s)
+		else if command == "quit" then
+			exit(0)
+		else if command == "abort" then
+			print stack_trace
+			exit(0)
 		else
 			var parts_of_command = command.split_with(' ')
 			# Shows the value of a variable in the current frame
@@ -518,9 +529,8 @@ class Debugger
 			# Untraces the modifications on a variable
 			else if parts_of_command.length == 2 and parts_of_command[0] == "untrace" then
 				process_untrace_command(parts_of_command)
-			# Lists all the commands available
 			else
-				list_commands
+				print "Unknown command \"{command}\""
 			end
 		end
 		return true
@@ -607,8 +617,6 @@ class Debugger
 		var bp = get_breakpoint_from_command(parts_of_command)
 		if bp != null then
 			place_breakpoint(bp)
-		else
-			list_commands
 		end
 	end
 
@@ -631,8 +639,6 @@ class Debugger
 			remove_breakpoint(self.curr_file, parts_of_command[1].to_i)
 		else if parts_of_command.length >= 3 and parts_of_command[2].is_numeric then
 			remove_breakpoint(parts_of_command[1], parts_of_command[2].to_i)
-		else
-			list_commands
 		end
 	end
 
@@ -1218,8 +1224,6 @@ class Debugger
 		then
 			bp.set_max_breaks(1)
 			place_breakpoint(bp)
-		else
-			list_commands
 		end
 	end
 
@@ -1360,34 +1364,6 @@ class Debugger
 		end
 	end
 
-	#######################################################################
-	##                     Command listing function                      ##
-	#######################################################################
-
-	# Lists the commands available when using the debugger
-	fun list_commands
-	do
-		print "\nCommand not recognized\n"
-		print "Commands accepted : \n"
-		print "[break/b] line : Adds a breakpoint on line *line_nb* of the current file\n"
-		print "[break/b] file_name line_nb : Adds a breakpoint on line *line_nb* of file *file_name* \n"
-		print "[p/print] variable : [p/print] * shows the status of all the variables\n"
-		print "[p/print] variable[i] : Prints the value of the variable contained at position *i* in SequenceRead collection *variable*\n"
-		print "[p/print] variable[i..j]: Prints the value of all the variables contained between positions *i* and *j* in SequenceRead collection *variable*\n"
-		print "[p/print] stack: Prints a stack trace at current instruction\n"
-		print "Note : The arrays can be multi-dimensional (Ex : variable[i..j][k] will print all the values at position *k* of all the SequenceRead collections contained between positions *i* and *j* in SequenceRead collection *variable*)\n"
-		print "s : steps in on the current function\n"
-		print "n : steps-over the current instruction\n"
-		print "finish : steps out of the current function\n"
-		print "variable as alias : Adds an alias called *alias* for the variable *variable*"
-		print "An alias can reference another alias\n"
-		print "variable = value : Sets the value of *variable* to *value*\n"
-		print "[d/delete] line_nb : Removes a breakpoint on line *line_nb* of the current file \n"
-		print "[d/delete] file_name line_nb : Removes a breakpoint on line *line_nb* of file *file_name* \n"
-		print "trace variable_name [break/print] : Traces the uses of the variable you chose to trace by printing the statement it appears in or by breaking on each use."
-		print "untrace variable_name : Removes the trace on the variable you chose to trace earlier in the program"
-		print "kill : kills the current program (Exits with an error and stack trace)\n"
-	end
 end
 
 redef class AConcreteMethPropdef
