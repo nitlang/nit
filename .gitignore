@@ -9,6 +9,7 @@ EIFGENs
 *.orig
 bin/nit*
 doc/stdlib
+doc/nitc
 doc/newmodel
 
 *.aux
