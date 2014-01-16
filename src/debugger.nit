@@ -299,6 +299,55 @@ class Debugger
 		end
 	end
 
+	# Evaluates dynamically a snippet of Nit code
+	# `nit_code` : Nit code to be executed
+	fun eval(nit_code: String)
+	do
+		var local_toolctx = modelbuilder.toolcontext
+		local_toolctx.dbg = self
+		var e = local_toolctx.parse_something(nit_code)
+		if e isa AExpr then
+			nit_code = "print " + nit_code
+			e = local_toolctx.parse_something(nit_code)
+		end
+		if e isa AModule then
+			local_toolctx.had_error = false
+			modelbuilder.load_rt_module(self.mainmodule, e, "rt_module")
+			local_toolctx.run_phases([e])
+			if local_toolctx.had_error then
+				modelbuilder.model.try_remove_module(e.mmodule.as(not null))
+				local_toolctx.dbg = null
+				return
+			end
+			var mmod = e.mmodule
+			if mmod != null then
+				self.mainmodule = mmod
+				var local_classdefs = mmod.mclassdefs
+				var sys_type = mmod.sys_type
+				if sys_type == null then
+					print "Fatal error, cannot find Class Sys !\nAborting"
+					abort
+				end
+				var mobj = new MutableInstance(sys_type)
+				init_instance(mobj)
+				var initprop = mmod.try_get_primitive_method("init", sys_type.mclass)
+				if initprop != null then
+					self.send(initprop, [mobj])
+				end
+				self.check_init_instance(mobj)
+				var mainprop = mmod.try_get_primitive_method("main", sys_type.mclass)
+				if mainprop != null then
+					self.rt_send(mainprop, [mobj])
+				end
+			else
+				print "Error while loading_rt_module"
+			end
+		else
+			print "Error when parsing, e = {e.class_name}"
+		end
+		local_toolctx.dbg = null
+	end
+
 	# Encpasulates the behaviour for step over/out
 	private fun steps_fun_call(n: AExpr)
 	do

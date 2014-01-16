@@ -390,7 +390,33 @@ class ModelBuilder
 		var parser = new Parser(lexer)
 		var tree = parser.parse
 		file.close
+		var mod_name = filename.basename(".nit")
+		return load_module_commons(owner, tree, mod_name)
+	end
 
+	fun load_rt_module(owner: MModule, nmodule: AModule, mod_name: String): nullable AModule
+	do
+		# Create the module
+		var mmodule = new MModule(model, owner, mod_name, nmodule.location)
+		nmodule.mmodule = mmodule
+		nmodules.add(nmodule)
+		self.mmodule2nmodule[mmodule] = nmodule
+
+		var imported_modules = new Array[MModule]
+
+		imported_modules.add(owner)
+		mmodule.set_visibility_for(owner, intrude_visibility)
+
+		mmodule.set_imported_mmodules(imported_modules)
+
+		return nmodule
+	end
+
+	# Try to load a module using a path.
+	# Display an error if there is a problem (IO / lexer / parser) and return null
+	# Note: usually, you do not need this method, use `get_mmodule_by_name` instead.
+	private fun load_module_commons(owner: nullable MModule, tree: Start, mod_name: String): nullable AModule
+	do
 		# Handle lexer and parser error
 		var nmodule = tree.n_base
 		if nmodule == null then
@@ -401,7 +427,6 @@ class ModelBuilder
 		end
 
 		# Check the module name
-		var mod_name = filename.basename(".nit")
 		var decl = nmodule.n_moduledecl
 		if decl == null then
 			#warning(nmodule, "Warning: Missing 'module' keyword") #FIXME: NOT YET FOR COMPATIBILITY
@@ -417,7 +442,6 @@ class ModelBuilder
 		nmodule.mmodule = mmodule
 		nmodules.add(nmodule)
 		self.mmodule2nmodule[mmodule] = nmodule
-		self.loaded_nmodules[module_path] = nmodule
 
 		build_module_importation(nmodule)
 
