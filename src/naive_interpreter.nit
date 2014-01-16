@@ -863,6 +863,17 @@ redef class AbstractArray[E]
 	end
 end
 
+redef class Buffer
+	fun copy(start: Int, len: Int, dest: Buffer, new_start: Int)
+	do
+		var self_chars = self.chars
+		var dest_chars = dest.chars
+		for i in [0..len-1] do
+			dest_chars[new_start+i] = self_chars[start+i]
+		end
+	end
+end
+
 redef class AExternInitPropdef
 	redef fun call(v, mpropdef, args)
 	do
