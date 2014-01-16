@@ -54,6 +54,9 @@ class NitdocContext
 	private var opt_github_base_sha1: OptionString = new OptionString("The sha1 of the base commit used to create pull request", "--github-base-sha1")
 	private var opt_github_gitdir: OptionString = new OptionString("The git working directory used to resolve path name (ex: /home/me/myproject/)", "--github-gitdir")
 
+	private var opt_piwik_tracker: OptionString = new OptionString("The URL of the Piwik tracker (ex: nitlanguage.org/piwik/)", "--piwik-tracker")
+	private var opt_piwik_site_id: OptionString = new OptionString("The site ID in Piwik tracker", "--piwik-site-id")
+
 	init do
 		toolcontext.option_context.add_option(opt_dir)
 		toolcontext.option_context.add_option(opt_source)
@@ -67,6 +70,8 @@ class NitdocContext
 		toolcontext.option_context.add_option(opt_github_upstream)
 		toolcontext.option_context.add_option(opt_github_base_sha1)
 		toolcontext.option_context.add_option(opt_github_gitdir)
+		toolcontext.option_context.add_option(opt_piwik_tracker)
+		toolcontext.option_context.add_option(opt_piwik_site_id)
 		toolcontext.process_options
 		self.arguments = toolcontext.option_context.rest
 
@@ -323,6 +328,26 @@ abstract class NitdocPage
 		if ctx.opt_custom_footer_text.value != null then footed = "footed"
 		append("<div class='page {footed}'>")
 		content
+
+		# piwik tracking
+		var tracker_url = ctx.opt_piwik_tracker.value
+		var site_id = ctx.opt_piwik_site_id.value
+		if tracker_url != null and site_id != null then
+			append("<!-- Piwik -->")
+			append("<script type=\"text/javascript\">")
+			append("  var _paq = _paq || [];")
+			append("  _paq.push([\"trackPageView\"]);")
+			append("  _paq.push([\"enableLinkTracking\"]);")
+			append("  (function() \{")
+			append("    var u=((\"https:\" == document.location.protocol) ? \"https\" : \"http\") + \"://{tracker_url}\";")
+			append("    _paq.push([\"setTrackerUrl\", u+\"piwik.php\"]);")
+			append("    _paq.push([\"setSiteId\", \"{site_id}\"]);")
+			append("    var d=document, g=d.createElement(\"script\"), s=d.getElementsByTagName(\"script\")[0]; g.type=\"text/javascript\";")
+			append("    g.defer=true; g.async=true; g.src=u+\"piwik.js\"; s.parentNode.insertBefore(g,s);")
+			append("  \})();")
+			append(" </script>")
+			append("<!-- End Piwik Code -->")
+		end
 		append("</div>")
 		footer
 		append("</body>")
