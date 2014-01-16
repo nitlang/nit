@@ -16,7 +16,7 @@
 module file
 
 intrude import stream
-intrude import flat
+intrude import ropes
 import string_search
 import time
 
@@ -120,7 +120,7 @@ end
 class OFStream
 	super FStream
 	super OStream
-	
+
 	redef fun write(s)
 	do
 		assert _writable

@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-intrude import flat
+intrude import ropes
 
 # Check Bool.object_id
 assert true.object_id.to_s.is_numeric

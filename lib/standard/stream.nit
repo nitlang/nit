@@ -13,7 +13,7 @@
 # Input and output streams of characters
 module stream
 
-import flat
+import ropes
 
 # Abstract stream class
 interface IOS

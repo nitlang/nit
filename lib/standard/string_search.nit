@@ -13,7 +13,7 @@
 # Basic string search, match and replace.
 module string_search
 
-import flat
+import ropes
 
 # Patterns are abstract string motifs (include `String` and `Char`).
 interface Pattern

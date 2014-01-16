@@ -22,15 +22,15 @@ var space = " "
 
 var test = "Je suis ici."
 
-var rope_uniq_test = new ImmutableRope.with_string("zzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+var rope_uniq_test = new RopeString.from("zzzzzzzzzzzzzzzzzzzzzzzzzzzz")
 
-var not_rope_uniq_test = new ImmutableRope.with_string("zzzzzzzzzzzzzezzzzzzzzzzzzzz")
+var not_rope_uniq_test = new RopeString.from("zzzzzzzzzzzzzezzzzzzzzzzzzzz")
 
 ################################
 #      Rope methods tests      #
 ################################
 
-var buf = new Buffer
+var buf = new FlatBuffer
 
 buf.append(str_part_1)
 buf.append(space)
@@ -41,11 +41,32 @@ buf.append(str_part_4)
 
 print buf
 
-var buf_rope = new BufferRope
+var buf_rope = new RopeBuffer
 
-buf_rope.append_multi(str_part_1,space,str_part_2,space,str_part_3,str_part_4)
+buf_rope.append(str_part_1)
+buf_rope.append(space)
+buf_rope.append(str_part_2)
+buf_rope.append(space)
+buf_rope.append(str_part_3)
+buf_rope.append(str_part_4)
 
-var buf_rope_with_str = new BufferRope.with_string(test)
+var buf_rope_with_str = new RopeBuffer.from(test)
+
+var reviter = buf_rope.chars.reverse_iterator
+while reviter.is_ok do
+	print "reviter.item = {reviter.item}"
+	reviter.next
+end
+
+var str_rope: String = new RopeString.from(str_part_1)
+
+str_rope += space
+str_rope += str_part_2
+str_rope += space
+str_rope += str_part_3
+str_rope += str_part_4
+
+print str_rope
 
 print buf_rope*3
 
@@ -57,11 +78,11 @@ assert buf_rope.length == buf_rope_with_str.length
 
 assert buf_rope == buf_rope_with_str
 
-assert buf_rope.multi_concat(buf_rope, buf_rope) == buf_rope * 3
+assert (buf_rope + buf_rope + buf_rope) == buf_rope * 3
 
-print buf_rope.subrope(0, 5)
+print buf_rope.substring(0, 5)
 
-assert buf_rope.subrope(0, 5) == "Je su"
+assert buf_rope.substring(0, 5) == "Je su"
 
 buf_rope.append("Hi !")
 
@@ -73,17 +94,7 @@ assert buf_rope.chars.to_s == buf_rope
 
 assert buf == buf_rope_with_str
 
-######################################
-#      BufferRope methods tests      #
-######################################
-
-assert buf_rope + buf_rope == buf_rope.concat(buf_rope)
-
-assert buf_rope == buf_rope.freeze
-
-######################################
-#      Rope.chars methods tests      #
-######################################
+assert buf_rope == buf_rope.to_s
 
 assert buf_rope.chars[3] == 's'
 
@@ -91,7 +102,9 @@ assert buf_rope.chars.index_of('k') == -1
 
 assert buf_rope.chars.index_of('s') == 3
 
-assert buf_rope.chars.count('s') == 4
+print buf_rope
+
+assert buf_rope.chars.count('s') == 2
 
 assert buf_rope.chars.last == '!'
 
@@ -99,10 +112,8 @@ assert rope_uniq_test.chars.has_only('z')
 
 assert not not_rope_uniq_test.chars.has_only('z')
 
-assert (new BufferRope).chars.has_only('l')
+assert new RopeBuffer.from("l").chars.has_only('l')
 
 print buf_rope.to_lower
 
 print buf_rope.to_upper
-
-

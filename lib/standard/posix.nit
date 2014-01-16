@@ -17,7 +17,7 @@
 # Services conforming to POSIX
 module posix
 
-import flat
+import ropes
 
 `{
 #include <sys/types.h>
