@@ -1,0 +1,30 @@
+#include "nit.common.h"
+#include "time_nit.h"
+long time__Object__get_time(val* self);
+void time__Sys__nanosleep(val* self, long p0, long p1);
+void* time__TimeT__init(void* self);
+void* time__TimeT__from_i(void* self, long p0);
+void time__TimeT__update(void* self);
+val* time__TimeT__ctime(void* self);
+double time__TimeT__difftime(void* self, void* p0);
+val* string__NativeString__to_s_with_length(char* self, long p0);
+extern const int COLOR_string_search__String__replace;
+val* time__TimeT__to_s(void* self);
+long time__TimeT__to_i(void* self);
+void* time__Tm__gmtime(void* self);
+void* time__Tm__gmtime_from_timet(void* self, void* p0);
+void* time__Tm__localtime(void* self);
+void* time__Tm__localtime_from_timet(void* self, void* p0);
+void* time__Tm__to_timet(void* self);
+long time__Tm__sec(void* self);
+long time__Tm__min(void* self);
+long time__Tm__hour(void* self);
+long time__Tm__mday(void* self);
+long time__Tm__mon(void* self);
+long time__Tm__year(void* self);
+long time__Tm__wday(void* self);
+long time__Tm__yday(void* self);
+short int time__Tm__is_dst(void* self);
+val* time__Tm__asctime(void* self);
+val* time__Tm__strftime(void* self, val* p0);
+val* time__Tm__to_s(void* self);

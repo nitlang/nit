@@ -1,6 +1,6 @@
 Start
   p
-    Nodes
+    Nodes[Nt]
       t_0
         l@(1:1-1:3)='ab'
       t_1

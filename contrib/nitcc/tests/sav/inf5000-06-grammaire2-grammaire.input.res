@@ -1,5 +1,5 @@
 NLexerError@(5:38-5:38)='E'
-Nodes
+Nodes[Node]
   prods_many
     prods_many
       prods_many

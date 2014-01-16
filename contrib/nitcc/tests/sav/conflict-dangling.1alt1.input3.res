@@ -1,5 +1,5 @@
 NParserError@(1:5-1:6)='3'
-Nodes
+Nodes[Node]
   f_0
     e_1
       '1'@(1:1-1:2)

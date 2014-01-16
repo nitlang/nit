@@ -1,6 +1,6 @@
 Start
   p
-    Nodes
+    Nodes[Nt]
       t_1
         if@(1:1-1:3)='if'
       t_0

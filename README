@@ -7,6 +7,7 @@ While object-oriented, it allows procedural styles.
 The Nit Compiler (nitc) produces efficient machine language binaries.
 
 Some Nit features:
+
  * Pure Object-Oriented.
  * Multiple Inheritance.
  * Realist typing policy.
@@ -17,10 +18,12 @@ Requirement:
 
 	* gcc		http://gcc.gnu.org/
 	* ccache	http://ccache.samba.org/	to improve recompilation
+	* libgc-dev	http://www.hpl.hp.com/personal/Hans_Boehm/gc/
+	* graphviz	http://www.graphviz.org/	to enable graphes with the nitdoc tool
 
-Optionals tools:
+Those are available in most linux distributions
 
-	* dot		http://www.graphviz.org/	to enable graphes with the nitdoc tool
+    # sudo apt-get install build-essential ccache libgc-dev graphviz
 
 Important files and directory:
 
@@ -48,9 +51,9 @@ Important files and directory:
 
 How to start:
 
- * $ make
- * $ bin/nitc examples/hello_world.nit
- * $ ./hello_world
+    $ make
+    $ bin/nitc examples/hello_world.nit
+    $ ./hello_world
 
 
 More information:

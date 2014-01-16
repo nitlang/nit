@@ -182,40 +182,6 @@ class Node
 			end
 		end
 	end
-
-	# Find closes node with matching caracteristic
-	# TODO remove closures
-	fun find_closest(max_to_search: Int): nullable N !with(n: N): Bool
-	do
-		if with(self) then return self
-
-		var frontier = new List[N]
-		graph.pathfinding_current_evocation += 1
-		var current_evocation = graph.pathfinding_current_evocation
-
-		frontier.add(self)
-		self.last_pathfinding_evocation = current_evocation
-
-		var i = 0
-		while not frontier.is_empty do
-			var node = frontier.shift
-
-			for link in node.links do
-				var to = link.to
-				if to.last_pathfinding_evocation != current_evocation then
-					if with(to) then return to
-
-					frontier.add(to)
-					to.last_pathfinding_evocation = current_evocation
-				end
-			end
-
-			i += 1
-			if i > max_to_search then return null
-		end
-
-		return null
-	end
 end
 
 # Link between two nodes and associated to a graph

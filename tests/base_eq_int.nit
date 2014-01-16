@@ -33,13 +33,13 @@ var e: Object = 5.0
 
 '\n'.output
 
-(a is 5).output
-(not a is 6).output
-(a is a).output
-(a is b).output
-(a is c).output
-(not a is d).output
-(not a is e).output
+(a.is_same_instance(5)).output
+(not a.is_same_instance(6)).output
+(a.is_same_instance(a)).output
+(a.is_same_instance(b)).output
+(a.is_same_instance(c)).output
+(not a.is_same_instance(d)).output
+(not a.is_same_instance(e)).output
 
 '\n'.output
 
@@ -53,13 +53,13 @@ var e: Object = 5.0
 
 '\n'.output
 
-(c is 5).output
-(not c is 6).output
-(c is a).output
-(c is b).output
-(c is c).output
-(not c is d).output
-(not c is e).output
+(c.is_same_instance(5)).output
+(not c.is_same_instance(6)).output
+(c.is_same_instance(a)).output
+(c.is_same_instance(b)).output
+(c.is_same_instance(c)).output
+(not c.is_same_instance(d)).output
+(not c.is_same_instance(e)).output
 
 '\n'.output
 

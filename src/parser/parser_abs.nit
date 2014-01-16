@@ -315,14 +315,11 @@ class AAble super Prod end
 class AMethid super Prod end
 class ASignature super Prod end
 class AParam super Prod end
-class AClosureDecl super Prod end
 class AType super Prod end
 class ALabel super Prod end
 class AExpr super Prod end
 class AExprs super Prod end
 class AAssignOp super Prod end
-class AClosureDef super Prod end
-class AClosureId super Prod end
 class AModuleName super Prod end
 class AExternCalls super Prod end
 class AExternCall super Prod end
@@ -628,7 +625,6 @@ class ASignature
     readable var _n_params: List[AParam] = new List[AParam]
     readable var _n_cpar: nullable TCpar = null
     readable var _n_type: nullable AType = null
-    readable var _n_closure_decls: List[AClosureDecl] = new List[AClosureDecl]
 end
 class AParam
 	super AParam
@@ -636,14 +632,6 @@ class AParam
     readable var _n_type: nullable AType = null
     readable var _n_dotdotdot: nullable TDotdotdot = null
     readable var _n_annotations: nullable AAnnotations = null
-end
-class AClosureDecl
-	super AClosureDecl
-    readable var _n_kwbreak: nullable TKwbreak = null
-    readable var _n_bang: TBang
-    readable var _n_id: TId
-    readable var _n_signature: ASignature
-    readable var _n_expr: nullable AExpr = null
 end
 class AType
 	super AType
@@ -788,11 +776,6 @@ class AEqExpr
     readable var _n_expr: AExpr
     readable var _n_expr2: AExpr
 end
-class AEeExpr
-	super AExpr
-    readable var _n_expr: AExpr
-    readable var _n_expr2: AExpr
-end
 class ANeExpr
 	super AExpr
     readable var _n_expr: AExpr
@@ -899,7 +882,6 @@ class ACallExpr
     readable var _n_expr: AExpr
     readable var _n_id: TId
     readable var _n_args: AExprs
-    readable var _n_closure_defs: List[AClosureDef] = new List[AClosureDef]
 end
 class ACallAssignExpr
 	super AExpr
@@ -933,7 +915,6 @@ class ABraExpr
 	super AExpr
     readable var _n_expr: AExpr
     readable var _n_args: AExprs
-    readable var _n_closure_defs: List[AClosureDef] = new List[AClosureDef]
 end
 class ABraAssignExpr
 	super AExpr
@@ -948,12 +929,6 @@ class ABraReassignExpr
     readable var _n_args: AExprs
     readable var _n_assign_op: AAssignOp
     readable var _n_value: AExpr
-end
-class AClosureCallExpr
-	super AExpr
-    readable var _n_id: TId
-    readable var _n_args: AExprs
-    readable var _n_closure_defs: List[AClosureDef] = new List[AClosureDef]
 end
 class AVarExpr
 	super AExpr
@@ -1118,23 +1093,6 @@ end
 class AMinusAssignOp
 	super AAssignOp
     readable var _n_minuseq: TMinuseq
-end
-class AClosureDef
-	super AClosureDef
-    readable var _n_bang: TBang
-    readable var _n_id: AClosureId
-    readable var _n_ids: List[TId] = new List[TId]
-    readable var _n_kwdo: nullable TKwdo = null
-    readable var _n_expr: nullable AExpr = null
-    readable var _n_label: nullable ALabel = null
-end
-class ASimpleClosureId
-	super AClosureId
-    readable var _n_id: TId
-end
-class ABreakClosureId
-	super AClosureId
-    readable var _n_kwbreak: TKwbreak
 end
 class AModuleName
 	super AModuleName

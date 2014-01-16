@@ -1,4 +1,4 @@
-Runtime error: Cast failed (alt/base_gen_reassign_alt5.nit:23)
+Runtime error: Cast failed. Expected `G#0`, got `Int` (alt/base_gen_reassign_alt5.nit:23)
 11
 21
 31

@@ -1,6 +1,6 @@
 Start
   p
-    Nodes
+    Nodes[Nt]
       t_2
         a3@(1:1-1:4)='aaa'
       t_2

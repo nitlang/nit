@@ -543,7 +543,7 @@ class String
 
 	redef fun ==(other)
 	do
-		if not other isa String or other is null then return false
+		if not other isa String then return false
 
 		if self.object_id == other.object_id then return true
 
@@ -785,7 +785,7 @@ class Buffer
 
 	redef fun ==(o)
 	do
-		if not o isa Buffer or o is null then return false
+		if not o isa Buffer then return false
 		var l = length
 		if o.length != l then return false
 		var i = 0

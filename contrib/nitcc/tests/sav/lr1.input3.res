@@ -1,5 +1,5 @@
 NParserError@(1:4-1:5)='a'
-Nodes
+Nodes[Node]
   q
     'x'@(1:1-1:2)
   'a'@(1:2-1:3)

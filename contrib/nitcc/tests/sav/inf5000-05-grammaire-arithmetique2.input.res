@@ -1,6 +1,6 @@
 Start
   exps
-    Nodes
+    Nodes[Nexp]
       exp_add
         exp_factor
           factor_term

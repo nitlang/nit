@@ -34,17 +34,6 @@ module for_abuse
 interface ForAbuser[E]
 	# Starts and control the service
 	fun iterator: Iterator[E] is abstract
-
-	# Starts and contol the service (for `nitc`)
-	fun iterate
-		!each(e: E)
-	do
-		var i = iterator
-		while i.is_ok do
-			each(i.item)
-			i.next
-		end
-	end
 end
 
 # Abuser to read a file, see `file_open`

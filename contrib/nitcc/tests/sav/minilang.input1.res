@@ -1,6 +1,6 @@
 Start
   prog
-    Nodes
+    Nodes[Ns]
       s_assign
         id@(1:1-1:2)='a'
         '='@(1:3-1:4)

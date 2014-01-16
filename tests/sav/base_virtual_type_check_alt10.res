@@ -1,4 +1,4 @@
-Runtime error: Cast failed (alt/base_virtual_type_check_alt10.nit:37)
+Runtime error: Cast failed. Expected `U`, got `K` (alt/base_virtual_type_check_alt10.nit:37)
 J<Tfalse
 J<Ufalse
 K<Ttrue

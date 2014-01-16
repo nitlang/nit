@@ -33,7 +33,7 @@ class B
 			return false
 		end
 
-		return a.a is _a
+		return a.a.is_same_instance(_a)
 	end
 
 	init(b: Int)
@@ -64,12 +64,12 @@ b1.is_same_type(b2).output
 
 '\n'.output
 
-(a1 is a1).output
-(a1 is a2).output
-(not a1 is a3).output
-(not a1 is b1).output
-(not b1 is b2).output
-(not b1 is b3).output
+(a1.is_same_instance(a1)).output
+(a1.is_same_instance(a2)).output
+(not a1.is_same_instance(a3)).output
+(not a1.is_same_instance(b1)).output
+(not b1.is_same_instance(b2)).output
+(not b1.is_same_instance(b3)).output
 
 '\n'.output
 

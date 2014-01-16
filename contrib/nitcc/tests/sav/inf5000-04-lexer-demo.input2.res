@@ -1,4 +1,4 @@
 NLexerError@(1:1-1:1)='5'
-Nodes
+Nodes[Node]
   p
   NLexerError@(1:1-1:1)='5'

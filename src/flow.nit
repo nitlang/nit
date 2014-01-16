@@ -193,7 +193,7 @@ class FlowContext
 	var previous: Array[FlowContext] = new Array[FlowContext]
 
 	# Additional reachable flow that loop up to self.
-	# Loops apears in `loop`, `while`, `for`, closure and with `continue`
+	# Loops apears in `loop`, `while`, `for`, and with `continue`
 	var loops: Array[FlowContext] = new Array[FlowContext]
 
 	private var is_marked_unreachable: Bool = false
@@ -545,29 +545,6 @@ redef class ANeExpr
 	do
 		super
 		v.make_sub_true_false_flow
-	end
-end
-
-redef class AClosureCallExpr
-	redef fun accept_flow_visitor(v)
-	do
-		super
-		# FIXME: break closure call?
-		# v.make_unreachable_flow
-	end
-end
-
-redef class AClosureDef
-	redef fun accept_flow_visitor(v)
-	do
-		var before_loop = v.make_sub_flow
-
-		v.enter_visit(self.n_expr)
-
-		var after_block = v.current_flow_context
-		before_loop.add_loop(after_block)
-
-		v.make_merge_flow(v.current_flow_context, before_loop)
 	end
 end
 

@@ -429,16 +429,6 @@ class HeaderMap
 		return res
 	end
 
-	fun iterate !each(k, v: String)
-	do
-		var i = arr.iterator
-		while i.is_ok do
-			var item = i.item
-			each(item.first, item.second)
-			i.next
-		end
-	end
-
 	fun iterator: MapIterator[String, String] do return new HeaderMapIterator(self)
 
 	# Convert Self to a single string used to post http fields

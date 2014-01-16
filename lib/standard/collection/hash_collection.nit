@@ -44,7 +44,7 @@ private abstract class HashCollection[K: Object, N: HashNode[Object]]
 	fun node_at(k: K): nullable N
 	do
 		# cache: `is` is used instead of `==` because it is a faster filter (even if not exact)
-		if k is _last_accessed_key then return _last_accessed_node
+		if k.is_same_instance(_last_accessed_key) then return _last_accessed_node
 
 		var res = node_at_idx(index_at(k), k)
 		_last_accessed_key = k
@@ -58,7 +58,7 @@ private abstract class HashCollection[K: Object, N: HashNode[Object]]
 		var c = _array[i]
 		while c != null do
 			var ck = c._key
-			if ck is k or ck == k then # prefilter with `is` because the compiler is not smart enought yet
+			if ck.is_same_instance(k) or ck == k then # FIXME prefilter because the compiler is not smart enought yet
 				break
 			end
 			c = c._next_in_bucklet
@@ -215,16 +215,6 @@ class HashMap[K: Object, V]
 	end
 
 	redef fun iterator: HashMapIterator[K, V] do return new HashMapIterator[K,V](self)
-
-	redef fun iterate
-		!each(k: K, v: V)
-	do
-		var c = _first_item
-		while c != null do
-			each(c._key, c._value)
-			c = c._next_item
-		end
-	end
 
 	redef fun length do return _length
 

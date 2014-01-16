@@ -894,12 +894,29 @@ abstract class AbstractCompilerVisitor
 	# used by aborts, asserts, casts, etc.
 	fun add_abort(message: String)
 	do
+		self.add("fprintf(stderr, \"Runtime error: %s\", \"{message.escape_to_c}\");")
+		add_raw_abort
+	end
+
+	fun add_raw_abort
+	do
 		if self.current_node != null and self.current_node.location.file != null then
-			self.add("fprintf(stderr, \"Runtime error: %s (%s:%d)\\n\", \"{message.escape_to_c}\", \"{self.current_node.location.file.filename.escape_to_c}\", {current_node.location.line_start});")
+			self.add("fprintf(stderr, \" (%s:%d)\\n\", \"{self.current_node.location.file.filename.escape_to_c}\", {current_node.location.line_start});")
 		else
-			self.add("fprintf(stderr, \"Runtime error: %s\\n\", \"{message.escape_to_c}\");")
+			self.add("fprintf(stderr, \"\\n\");")
 		end
 		self.add("exit(1);")
+	end
+
+	# Add a dynamic cast
+	fun add_cast(value: RuntimeVariable, mtype: MType, tag: String)
+	do
+		var res = self.type_test(value, mtype, tag)
+		self.add("if (!{res}) \{")
+		var cn = self.class_name_string(value)
+		self.add("fprintf(stderr, \"Runtime error: Cast failed. Expected `%s`, got `%s`\", \"{mtype.to_s.escape_to_c}\", {cn});")
+		self.add_raw_abort
+		self.add("\}")
 	end
 
 	# Generate a return with the value `s`
@@ -933,10 +950,7 @@ abstract class AbstractCompilerVisitor
 		res = autoadapt(res, nexpr.mtype.as(not null))
 		var implicit_cast_to = nexpr.implicit_cast_to
 		if implicit_cast_to != null and not self.compiler.modelbuilder.toolcontext.opt_no_check_autocast.value then
-			var castres = self.type_test(res, implicit_cast_to, "auto")
-			self.add("if (!{castres}) \{")
-			self.add_abort("Cast failed")
-			self.add("\}")
+			add_cast(res, implicit_cast_to, "auto")
 			res = autoadapt(res, implicit_cast_to)
 		end
 		self.current_node = old
@@ -1284,10 +1298,7 @@ redef class MMethodDef
 			# generate the cast
 			# note that v decides if and how to implements the cast
 			v.add("/* Covariant cast for argument {i} ({self.msignature.mparameters[i].name}) {arguments[i+1].inspect} isa {mtype} */")
-			var cond = v.type_test(arguments[i+1], mtype, "covariance")
-			v.add("if (!{cond}) \{")
-			v.add_abort("Cast failed")
-			v.add("\}")
+			v.add_cast(arguments[i+1], mtype, "covariance")
 		end
 	end
 end
@@ -1559,6 +1570,9 @@ redef class AInternMethPropdef
 		else if pname == "is_same_type" then
 			v.ret(v.is_same_type_test(arguments[0], arguments[1]))
 			return
+		else if pname == "is_same_instance" then
+			v.ret(v.equal_test(arguments[0], arguments[1]))
+			return
 		else if pname == "output_class_name" then
 			var nat = v.class_name_string(arguments.first)
 			v.add("printf(\"%s\\n\", {nat});")
@@ -1712,7 +1726,11 @@ redef class AClassdef
 end
 
 redef class ADeferredMethPropdef
-	redef fun compile_to_c(v, mpropdef, arguments) do v.add_abort("Deferred method called")
+	redef fun compile_to_c(v, mpropdef, arguments) do
+		var cn = v.class_name_string(arguments.first)
+		v.add("fprintf(stderr, \"Runtime error: Abstract method `%s` called on `%s`\", \"{mpropdef.mproperty.name.escape_to_c}\", {cn});")
+		v.add_raw_abort
+	end
 	redef fun can_inline do return true
 end
 
@@ -2064,15 +2082,6 @@ redef class AOrElseExpr
 	end
 end
 
-redef class AEeExpr
-	redef fun expr(v)
-	do
-		var value1 = v.expr(self.n_expr, null)
-		var value2 = v.expr(self.n_expr2, null)
-		return v.equal_test(value1, value2)
-	end
-end
-
 redef class AIntExpr
 	redef fun expr(v) do return v.new_expr("{self.value.to_s}", self.mtype.as(not null))
 end
@@ -2169,10 +2178,7 @@ redef class AAsCastExpr
 		var i = v.expr(self.n_expr, null)
 		if v.compiler.modelbuilder.toolcontext.opt_no_check_assert.value then return i
 
-		var cond = v.type_test(i, self.mtype.as(not null), "as")
-		v.add("if (!{cond}) \{")
-		v.add_abort("Cast failed")
-		v.add("\}")
+		v.add_cast(i, self.mtype.as(not null), "as")
 		return i
 	end
 end

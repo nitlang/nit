@@ -27,12 +27,12 @@ s3.to_s.output
 
 1.output
 (s1.to_s == s2.to_s).output
-(s1.to_s is s2.to_s).output
+(s1.to_s.is_same_instance(s2.to_s)).output
 (s1.to_s == s3.to_s).output
-(s1.to_s is s3.to_s).output
+(s1.to_s.is_same_instance(s3.to_s)).output
 
 2.output
 (s1 == s2).output
-(s1 is s2).output
+(s1.is_same_instance(s2)).output
 (s1 == s3).output
-(s1 is s3).output
+(s1.is_same_instance(s3)).output

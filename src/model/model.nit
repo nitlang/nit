@@ -25,7 +25,7 @@
 #
 # TODO: better doc
 #
-# TODO: liearization, closures, extern stuff
+# TODO: liearization, extern stuff
 # FIXME: better handling of the types
 module model
 
@@ -1353,14 +1353,12 @@ class MNullType
 	redef fun collect_mtypes(mmodule) do return new HashSet[MClassType]
 end
 
-# A signature of a method (or a closure)
+# A signature of a method
 class MSignature
 	super MType
 
 	# The each parameter (in order)
 	var mparameters: Array[MParameter]
-
-	var mclosures = new Array[MParameter]
 
 	# The return type (null for a procedure)
 	var return_mtype: nullable MType
@@ -1374,10 +1372,6 @@ class MSignature
 			var d = p.mtype.depth
 			if d > dmax then dmax = d
 		end
-		for p in mclosures do
-			var d = p.mtype.depth
-			if d > dmax then dmax = d
-		end
 		return dmax + 1
 	end
 
@@ -1387,9 +1381,6 @@ class MSignature
 		var t = self.return_mtype
 		if t != null then res += t.length
 		for p in mparameters do
-			res += p.mtype.length
-		end
-		for p in mclosures do
 			res += p.mtype.length
 		end
 		return res
@@ -1455,9 +1446,6 @@ class MSignature
 			ret = ret.resolve_for(mtype, anchor, mmodule, cleanup_virtual)
 		end
 		var res = new MSignature(params, ret)
-		for p in self.mclosures do
-			res.mclosures.add(p.resolve_for(mtype, anchor, mmodule, cleanup_virtual))
-		end
 		return res
 	end
 end

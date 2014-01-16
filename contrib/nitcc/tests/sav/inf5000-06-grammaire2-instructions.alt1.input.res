@@ -1,6 +1,6 @@
 Start
   prog
-    Nodes
+    Nodes[Nstmt]
       stmt_assign
         id@(1:1-1:2)='x'
         '='@(1:3-1:4)
@@ -14,7 +14,7 @@ Start
           id@(2:8-2:9)='z'
         ')'@(2:9-2:10)
         '{'@(2:11-2:12)
-        Nodes
+        Nodes[Nstmt]
           stmt_print
             'print'@(2:13-2:18)
             '('@(2:18-2:19)

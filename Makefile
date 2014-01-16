@@ -18,7 +18,7 @@ NITCOPT=
 
 all: tools doc/stdlib/index.html
 
-docs: doc/stdlib/index.html doc/nitc/index.html doc/newmodel/index.html
+docs: doc/stdlib/index.html doc/newmodel/index.html
 	#cd doc; make
 
 tools:
@@ -36,14 +36,6 @@ doc/stdlib/index.html: bin/nitdoc
 		--custom-menu-items "<li><a href=\"http://nitlanguage.org/\">Nitlanguage.org</a></li>" \
 		--custom-overview-text "<p>Documentation for the standard library of Nit<br/>Version $$(git describe)<br/>Date: $$(git show --format="%cd" | head -1)</p>" \
 		--custom-footer-text "Nit standard library. Version $$(git describe)." \
-		--source "https://github.com/privat/nit/blob/$$(git rev-parse HEAD)/%f#L%l-%L"
-
-doc/nitc/index.html: bin/nitdoc
-	bin/nitdoc src/nitc.nit src/nitdoc.nit src/nits.nit -d doc/nitc \
-		--custom-title "Nit Compiler and Tools" \
-		--custom-menu-items "<li><a href=\"http://nitlanguage.org/\">Nitlanguage.org</a></li>" \
-		--custom-overview-text "<p>Documentation for the Nit compiler and tools<br/>Version $$(git describe)<br/>Date: $$(git show --format="%cd" | head -1)</p>" \
-		--custom-footer-text "Nit compiler. Version $$(git describe)." \
 		--source "https://github.com/privat/nit/blob/$$(git rev-parse HEAD)/%f#L%l-%L"
 
 doc/newmodel/index.html: bin/nitdoc
@@ -66,7 +58,7 @@ clean:
 	cd tests; make clean
 
 distclean: clean
-	rm -rf -- bin/nitc bin/nitdoc bin/nits doc/stdlib doc/nitc/ 2> /dev/null || true
+	rm -rf -- bin/nitdoc bin/nits doc/stdlib 2> /dev/null || true
 	cd c_src; make distclean
 	cd src/parser; make distclean
 	cd doc; make distclean

@@ -54,17 +54,6 @@ interface Collection[E]
 	# Get a new iterator on the collection.
 	fun iterator: Iterator[E] is abstract
 
-	# Iterate over each element of the collection
-	fun iterate
-		!each(e: E)
-	do
-		var i = iterator
-		while i.is_ok do
-			each(i.item)
-			i.next
-		end
-	end
-
 	# Is there no item in the collection?
 	#
 	#     assert [1,2,3].is_empty  == false
@@ -303,17 +292,6 @@ interface MapRead[K: Object, E]
 	# Get a new iterator on the map.
 	fun iterator: MapIterator[K, E] is abstract
 
-	# Iterate over each element of the collection
-	fun iterate
-		!each(k: K, v: E)
-	do
-		var i = iterator
-		while i.is_ok do
-			each(i.key, i.item)
-			i.next
-		end
-	end
-
 	# Return the point of view of self on the values only.
 	# Note that `self` and `values` are views on the same data;
 	# therefore any modification of one is visible on the other.
@@ -465,7 +443,7 @@ interface SequenceRead[E]
 	# Two sequences are equals if they have the same items in the same order.
 	redef fun ==(o)
 	do
-		if not o isa SequenceRead[nullable Object] or o is null then return false
+		if not o isa SequenceRead[nullable Object] then return false
 		var l = length
 		if o.length != l then return false
 		var i = 0

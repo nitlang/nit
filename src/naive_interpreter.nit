@@ -170,7 +170,7 @@ private class NaiveInterpreter
 		var implicit_cast_to = n.implicit_cast_to
 		if implicit_cast_to != null then
 			var mtype = self.unanchor_type(implicit_cast_to)
-			if not self.is_subtype(i.mtype, mtype) then n.fatal(self, "Cast failed")
+			if not self.is_subtype(i.mtype, mtype) then n.fatal(self, "Cast failed. Expected `{implicit_cast_to}`, got `{i.mtype}`")
 		end
 
 		#n.debug("OUT Execute expr: value is {i}")
@@ -341,11 +341,8 @@ private class NaiveInterpreter
 			self.discover_call_trace.add mpropdef
 			self.debug("Discovered {mpropdef}")
 		end
-		if args.length < mpropdef.msignature.arity + 1 or args.length > mpropdef.msignature.arity + 1 + mpropdef.msignature.mclosures.length then
+		if args.length < mpropdef.msignature.arity + 1 or args.length > mpropdef.msignature.arity + 1 then
 			fatal("NOT YET IMPLEMENTED: Invalid arity for {mpropdef}. {args.length} arguments given.")
-		end
-		if args.length < mpropdef.msignature.arity + 1 + mpropdef.msignature.mclosures.length then
-			fatal("NOT YET IMPLEMENTED: default closures")
 		end
 
 		# Look for the AST node that implements the property
@@ -379,34 +376,11 @@ private class NaiveInterpreter
 			# get the parameter type
 			var mtype = msignature.mparameters[i].mtype
 			var anchor = args.first.mtype.as(MClassType)
-			mtype = mtype.anchor_to(self.mainmodule, anchor)
-			if not args[i+1].mtype.is_subtype(self.mainmodule, anchor, mtype) then
-				node.fatal(self, "Cast failed")
+			var amtype = mtype.anchor_to(self.mainmodule, anchor)
+			if not args[i+1].mtype.is_subtype(self.mainmodule, anchor, amtype) then
+				node.fatal(self, "Cast failed. Expected `{mtype}`, got `{args[i+1].mtype}`")
 			end
 		end
-	end
-
-	fun call_closure(closure: ClosureInstance, args: Array[Instance]): nullable Instance
-	do
-		var nclosuredef = closure.nclosuredef
-		var f = closure.frame
-		for i in [0..closure.nclosuredef.mclosure.mtype.as(MSignature).arity[ do
-			var variable = nclosuredef.variables[i]
-			f.map[variable] = args[i]
-		end
-
-		self.frames.unshift(f)
-
-		self.stmt(nclosuredef.n_expr)
-
-		self.frames.shift
-
-		if self.is_continue(nclosuredef.escapemark) then
-			var res = self.escapevalue
-			self.escapevalue = null
-			return res
-		end
-		return null
 	end
 
 	# Execute `mproperty` for a `args` (where `args[0]` is the receiver).
@@ -507,7 +481,7 @@ abstract class Instance
 	fun is_true: Bool do abort
 
 	# Return true if `self` IS `o` (using the Nit semantic of is)
-	fun eq_is(o: Instance): Bool do return self is o
+	fun eq_is(o: Instance): Bool do return self.is_same_instance(o)
 
 	# Human readable object identity "Type#number"
 	redef fun to_s do return "{mtype}"
@@ -563,7 +537,7 @@ class PrimitiveInstance[E: Object]
 	redef fun eq_is(o)
 	do
 		if not o isa PrimitiveInstance[Object] then return false
-		return self.val is o.val
+		return self.val.is_same_instance(o.val)
 	end
 
 	redef fun to_s do return "{mtype}#{val.object_id}({val})"
@@ -571,21 +545,6 @@ class PrimitiveInstance[E: Object]
 	redef fun to_i do return val.as(Int)
 
 	redef fun to_f do return val.as(Float)
-end
-
-private class ClosureInstance
-	super Instance
-
-	var frame: Frame
-
-	var nclosuredef: AClosureDef
-
-	init(mtype: MType, frame: Frame, nclosuredef: AClosureDef)
-	do
-		super(mtype)
-		self.frame = frame
-		self.nclosuredef = nclosuredef
-	end
 end
 
 # Information about local variables in a running method
@@ -635,12 +594,6 @@ redef class AConcreteMethPropdef
 			var variable = self.n_signature.n_params[i].variable
 			assert variable != null
 			f.map[variable] = args[i+1]
-		end
-		for i in [0..mpropdef.msignature.mclosures.length[ do
-			var c = mpropdef.msignature.mclosures[i]
-			var variable = self.n_signature.n_closure_decls[i].variable
-			assert variable != null
-			f.map[variable] = args[i + 1 + mpropdef.msignature.arity]
 		end
 
 		v.frames.unshift(f)
@@ -701,6 +654,8 @@ redef class AInternMethPropdef
 			return v.bool_instance(args[0] != args[1])
 		else if pname == "is_same_type" then
 			return v.bool_instance(args[0].mtype == args[1].mtype)
+		else if pname == "is_same_instance" then
+			return v.bool_instance(args[1] != null and args[0].eq_is(args[1]))
 		else if pname == "exit" then
 			exit(args[1].to_i)
 			abort
@@ -1033,7 +988,7 @@ end
 redef class ADeferredMethPropdef
 	redef fun call(v, mpropdef, args)
 	do
-		fatal(v, "Deferred method called")
+		fatal(v, "Abstract method `{mpropdef.mproperty.name}` called on `{args.first.mtype}`")
 		abort
 	end
 end
@@ -1373,17 +1328,6 @@ redef class AOrElseExpr
 	end
 end
 
-redef class AEeExpr
-	redef fun expr(v)
-	do
-		var i = v.expr(self.n_expr)
-		if i == null then return null
-		var i2 = v.expr(self.n_expr2)
-		if i2 == null then return null
-		return v.bool_instance(i.eq_is(i2))
-	end
-end
-
 redef class AIntExpr
 	redef fun expr(v)
 	do
@@ -1514,10 +1458,10 @@ redef class AAsCastExpr
 	do
 		var i = v.expr(self.n_expr)
 		if i == null then return null
-		var mtype = v.unanchor_type(self.mtype.as(not null))
-		if not v.is_subtype(i.mtype, mtype) then
-			#fatal(v, "Cast failed expected {mtype}, got {i}")
-			fatal(v, "Cast failed")
+		var mtype = self.mtype.as(not null)
+		var amtype = v.unanchor_type(mtype)
+		if not v.is_subtype(i.mtype, amtype) then
+			fatal(v, "Cast failed. Expected `{amtype}`, got `{i.mtype}`")
 		end
 		return i
 	end
@@ -1568,18 +1512,9 @@ redef class ASendExpr
 			if i == null then return null
 			args.add(i)
 		end
-		for c in self.n_closure_defs do
-			var mtype = c.mclosure.mtype
-			var instance = new ClosureInstance(mtype, v.frame, c)
-			args.add(instance)
-		end
 		var mproperty = self.mproperty.as(not null)
 
 		var res = v.send(mproperty, args)
-		if v.is_break(self.escapemark) then
-			res = v.escapevalue
-			v.escapevalue = null
-		end
 		return res
 	end
 end
@@ -1718,22 +1653,6 @@ redef class AIssetAttrExpr
 		var mproperty = self.mproperty.as(not null)
 		assert recv isa MutableInstance
 		return v.bool_instance(recv.attributes.has_key(mproperty))
-	end
-end
-
-redef class AClosureCallExpr
-	redef fun expr(v)
-	do
-		var args = new Array[Instance]
-		for a in self.n_args.n_exprs do
-			var i = v.expr(a)
-			if i == null then return null
-			args.add(i)
-		end
-		var i = v.frame.map[self.variable.as(not null)]
-		assert i isa ClosureInstance
-		var res = v.call_closure(i, args)
-		return res
 	end
 end
 
