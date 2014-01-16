@@ -66,7 +66,6 @@ Nitdoc.QuickSearch = function() {
 
 		// Close quicksearch list on click
 		$(document).click(function(e) {
-			console.log(e);
 			Nitdoc.QuickSearch.closeResultsTable();
 		});
 	}
