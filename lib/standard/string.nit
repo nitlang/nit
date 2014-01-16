@@ -437,11 +437,13 @@ class String
 
 		var realFrom = _index_from + from
 
-		if (realFrom + count) > _index_to then return new String.from_substring(realFrom, _index_to, _items)
+		if (realFrom + count) > _index_to then return new String.with_infos(_items, _index_to - realFrom + 1, realFrom, _index_to)
 
 		if count == 0 then return ""
 
-		return new String.from_substring(realFrom, realFrom + count - 1, _items)
+		var to = realFrom + count - 1
+
+		return new String.with_infos(_items, to - realFrom + 1, realFrom, to)
 	end
 
 	redef fun substring_from(from: Int): String
@@ -548,20 +550,6 @@ class String
 	##################################################
 	#              String Specific Methods           #
 	##################################################
-
-	# Creates a String object as a substring of another String
-	#
-	# From : index to start at
-	#
-	# To : Index to stop at (from + count -1)
-	#
-	private init from_substring(from: Int, to: Int, internalString: NativeString)
-	do
-		_items = internalString
-		_index_from = from
-		_index_to = to
-		_length = to - from + 1
-	end
 
 	private init with_infos(items: NativeString, len: Int, from: Int, to: Int)
 	do
