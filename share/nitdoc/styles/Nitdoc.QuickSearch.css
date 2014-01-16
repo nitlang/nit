@@ -40,6 +40,9 @@
 	border: 1px solid #E0E0E0;
 	border-spacing: 0px;
 	z-index: 1000;
+	-webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 #nitdoc-qs-table .nitdoc-qs-active {
@@ -47,12 +50,17 @@
 	background: #EEE;
 }
 
-#nitdoc-qs-table td {
+#nitdoc-qs-table td, th {
 	white-space: nowrap;
 	overflow: hidden;
 	line-height: 22px;
 	padding: 2px;
 	width: 25%;
+}
+
+#nitdoc-qs-table td.nitdoc-qs-sub {
+	color: #6C6C6C;
+	padding-left: 12px;
 }
 
 #nitdoc-qs-table td.nitdoc-qs-info {
@@ -62,8 +70,31 @@
 	text-align: right;
 }
 
-#nitdoc-qs-table tr.nitdoc-qs-overflow td {
-	text-align: center;
-	background-color: #E0E0E0;
+#nitdoc-qs-table tr.nitdoc-qs-noresult td {
+	color: #6C6C6C;
+	font-size: small;
+	line-height: 15px;
 }
 
+#nitdoc-qs-table tr.nitdoc-qs-overflow-up td,
+#nitdoc-qs-table tr.nitdoc-qs-overflow-down td {
+	text-align: center;
+	font-size:	x-small;
+	line-height: 10px;
+	color: #FFF;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+#nitdoc-qs-table tr.nitdoc-qs-overflow-active td {
+	color: #0D8921;
+	cursor: pointer;
+}
+
+#nitdoc-qs-table tr.nitdoc-qs-overflow-active td:hover {
+	background-color: #E0E0E0;
+}
