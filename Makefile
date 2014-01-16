@@ -36,6 +36,9 @@ doc/stdlib/index.html: bin/nitdoc
 		--custom-menu-items "<li><a href=\"http://nitlanguage.org/\">Nitlanguage.org</a></li>" \
 		--custom-overview-text "<p>Documentation for the standard library of Nit<br/>Version $$(git describe)<br/>Date: $$(git show --format="%cd" | head -1)</p>" \
 		--custom-footer-text "Nit standard library. Version $$(git describe)." \
+		--github-upstream "privat:nit:master" \
+		--github-base-sha1 "$$(git rev-parse HEAD)" \
+		--github-gitdir "." \
 		--source "https://github.com/privat/nit/blob/$$(git rev-parse HEAD)/%f#L%l-%L"
 
 doc/nitc/index.html: bin/nitdoc
