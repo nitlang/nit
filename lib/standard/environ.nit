@@ -14,7 +14,7 @@
 # Access to the environment variables of the process
 module environ
 
-import string
+import flat
 
 # TODO prevoir une structure pour recup tout un environ, le modifier et le passer a process
 

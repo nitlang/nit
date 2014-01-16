@@ -64,7 +64,7 @@ class PartialOrder[E: Object]
 	# Return a dot representation
 	fun to_dot: String
 	do
-		var s = new Buffer
+		var s = new FlatBuffer
 		s.append(to_dot_header)
 		for e in _elements.values do
 			s.append(to_dot_node(e.value))

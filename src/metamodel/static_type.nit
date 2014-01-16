@@ -145,7 +145,7 @@ class MMSignature
 
 	redef fun to_s
 	do
-		var s = new Buffer
+		var s = new FlatBuffer
 		if _params.length > 0 then
 			var tmp: String
 			var a = new Array[String].with_capacity(_params.length)

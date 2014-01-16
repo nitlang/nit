@@ -17,7 +17,7 @@
 # Services conforming to POSIX
 module posix
 
-import string
+import flat
 
 `{
 #include <sys/types.h>

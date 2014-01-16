@@ -1,4 +1,4 @@
-String
+FlatString
 Int
 Test
 Test

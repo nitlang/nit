@@ -39,7 +39,7 @@ end
 # The generated file contains the description of each entity of the model
 fun generate_model_hyperdoc(toolcontext: ToolContext, model: Model)
 do
-	var buf = new Buffer
+	var buf = new FlatBuffer
 	buf.append("<html>\n<body>\n")
 	buf.append("<h1>Model</h1>\n")
 

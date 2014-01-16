@@ -13,7 +13,7 @@
 # Basic string search, match and replace.
 module string_search
 
-import string
+import flat
 
 # Patterns are abstract string motifs (include `String` and `Char`).
 interface Pattern
@@ -218,7 +218,7 @@ class Match
 	fun after: Int do return _from + _length
 
 	# The contents of the matching part
-	redef fun to_s do return _string.substring(_from, _length)
+	redef fun to_s do return _string.substring(_from, _length).to_s
 
 	# Matches `len` characters of `s` from `f`.
 	init(s: String, f: Int, len: Int)

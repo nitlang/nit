@@ -9,7 +9,7 @@
  * another product.
  */
 
-#include "string_nit.h"
+#include "text_nit.h"
 
 // Integer to NativeString method
 char* native_int_to_s(int recv, int len){

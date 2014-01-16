@@ -24,7 +24,7 @@ import symbol
 fun cmangle(symbols: Symbol...): String
 do
 	var table = once cmangle_table
-	var res = new Buffer
+	var res = new FlatBuffer
 	for sym in symbols do
 		if not res.is_empty then
 			res.add('_')

@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-intrude import string
+intrude import flat
 
 # Check Bool.object_id
 assert true.object_id.to_s.is_numeric
@@ -27,4 +27,4 @@ assert 'd'.object_id.to_s.is_numeric
 assert 1.0.object_id.to_s.is_numeric
 
 # Check NativeString.object_id
-assert "Test"._items.object_id.to_s.is_numeric
+assert "Test".as(FlatText)._items.object_id.to_s.is_numeric

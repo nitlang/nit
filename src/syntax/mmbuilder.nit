@@ -1251,7 +1251,7 @@ end
 # Visitor used to build a full method name from multiple tokens
 private class MethidAccumulator
 	super Visitor
-	readable var _name: Buffer = new Buffer
+	readable var _name: Buffer = new FlatBuffer
 	redef fun visit(n)
 	do
 		if n isa Token then

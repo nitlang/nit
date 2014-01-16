@@ -398,7 +398,7 @@ class NitdocOverview
 			end
 		end
 		# build graph
-		var op = new Buffer
+		var op = new FlatBuffer
 		op.append("digraph dep \{ rankdir=BT; node[shape=none,margin=0,width=0,height=0,fontsize=10]; edge[dir=none,color=gray]; ranksep=0.2; nodesep=0.1;\n")
 		for mmodule in poset do
 			op.append("\"{mmodule.name}\"[URL=\"{mmodule.url}\"];\n")
@@ -670,7 +670,7 @@ class NitdocModule
 			end
 		end
 		# build graph
-		var op = new Buffer
+		var op = new FlatBuffer
 		var name = "dep_{mmodule.name}"
 		op.append("digraph {name} \{ rankdir=BT; node[shape=none,margin=0,width=0,height=0,fontsize=10]; edge[dir=none,color=gray]; ranksep=0.2; nodesep=0.1;\n")
 		for mmodule in poset do
@@ -1056,7 +1056,7 @@ class NitdocClass
 		end
 		cla.add_all(pe.greaters)
 
-		var op = new Buffer
+		var op = new FlatBuffer
 		var name = "dep_{mclass.name}"
 		op.append("digraph {name} \{ rankdir=BT; node[shape=none,margin=0,width=0,height=0,fontsize=10]; edge[dir=none,color=gray]; ranksep=0.2; nodesep=0.1;\n")
 		for c in cla do
@@ -1097,7 +1097,7 @@ redef class MModule
 	#	module_owner_name.html
 	private fun url: String do
 		if url_cache == null then
-			var res = new Buffer
+			var res = new FlatBuffer
 			res.append("module_")
 			var mowner = public_owner
 			if mowner != null then
@@ -1114,7 +1114,7 @@ redef class MModule
 	#	MOD_owner_name
 	private fun anchor: String do
 		if anchor_cache == null then
-			var res = new Buffer
+			var res = new FlatBuffer
 			res.append("MOD_")
 			var mowner = public_owner
 			if mowner != null then
@@ -1131,7 +1131,7 @@ redef class MModule
 	#	<a href="url" title="short_comment">html_name</a>
 	private fun html_link(page: NitdocPage) do
 		if html_link_cache == null then
-			var res = new Buffer
+			var res = new FlatBuffer
 			if page.ctx.mbuilder.mmodule2nmodule.has_key(self) then
 				res.append("<a href='{url}' title='{page.ctx.mbuilder.mmodule2nmodule[self].short_comment}'>{html_name}</a>")
 			else
@@ -1240,7 +1240,7 @@ redef class MClass
 	#	<a href="url" title="short_comment">html_name(signature)</a>
 	private fun html_link(page: NitdocPage) do
 		if html_link_cache == null then
-			var res = new Buffer
+			var res = new FlatBuffer
 			res.append("<a href='{url}'")
 			if page.ctx.mbuilder.mclassdef2nclassdef.has_key(intro) then
 				var nclass = page.ctx.mbuilder.mclassdef2nclassdef[intro]
@@ -1259,7 +1259,7 @@ redef class MClass
 	#	<a href="url" title="short_comment">html_name</a>
 	private fun html_short_link(page: NitdocPage) do
 		if html_short_link_cache == null then
-			var res = new Buffer
+			var res = new FlatBuffer
 			res.append("<a href='{url}'")
 			if page.ctx.mbuilder.mclassdef2nclassdef.has_key(intro) then
 				var nclass = page.ctx.mbuilder.mclassdef2nclassdef[intro]
@@ -1278,7 +1278,7 @@ redef class MClass
 	#	<a href="url" title="short_comment">html_name</a>
 	private fun html_link_anchor(page: NitdocPage) do
 		if html_link_anchor_cache == null then
-			var res = new Buffer
+			var res = new FlatBuffer
 			res.append("<a href='#{anchor}'")
 			if page.ctx.mbuilder.mclassdef2nclassdef.has_key(intro) then
 				var nclass = page.ctx.mbuilder.mclassdef2nclassdef[intro]
@@ -1534,7 +1534,7 @@ redef class MPropDef
 	#	<a href="url" title="short_comment">html_name</a>
 	private fun html_link(page: NitdocPage) do
 		if html_link_cache == null then
-			var res = new Buffer
+			var res = new FlatBuffer
 			if page.ctx.mbuilder.mpropdef2npropdef.has_key(self) then
 				var nprop = page.ctx.mbuilder.mpropdef2npropdef[self]
 				res.append("<a href=\"{url}\" title=\"{nprop.short_comment}\">{mproperty.html_name}</a>")
@@ -1691,7 +1691,7 @@ redef class MSignature
 	end
 
 	private fun untyped_signature(page: NitdocPage): String do
-		var res = new Buffer
+		var res = new FlatBuffer
 		if not mparameters.is_empty then
 			res.append("(")
 			for i in [0..mparameters.length[ do
@@ -1722,7 +1722,7 @@ redef class ADoc
 	end
 
 	private fun full_comment: String do
-		var res = new Buffer
+		var res = new FlatBuffer
 		for t in n_comment do
 			var text = t.text
 			text = text.substring_from(1)

@@ -54,7 +54,7 @@ class Process
 	# Internal code to handle execution
 	protected init execute(command: String, arguments: nullable Array[String], pipeflags: Int)
 	do
-		var args = new Buffer
+		var args = new FlatBuffer
 		var l = 1 # Number of elements in args
 		args.append(command)
 		if arguments != null then

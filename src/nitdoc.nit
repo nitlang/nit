@@ -200,7 +200,7 @@ class DocContext
 		end
 		add("</ul>")
 
-		var op = new Buffer
+		var op = new FlatBuffer
 		op.append("digraph dep \{ rankdir=BT; node[shape=none,margin=0,width=0,height=0,fontsize=10]; edge[dir=none,color=gray]; ranksep=0.2; nodesep=0.1;\n")
 		for mod in modss do
 			if not mod.is_toplevel then continue
@@ -524,7 +524,7 @@ redef class MMModule
 	end
 
 	redef fun qualified_name do
-		var buffer = new Buffer
+		var buffer = new FlatBuffer
 		for m in mnhe.smallers do
 			buffer.append("{m.html_name}::")
 		end
@@ -647,7 +647,7 @@ redef class MMModule
 			dctx.add("</div>\n")
 		end
 
-		var op = new Buffer
+		var op = new FlatBuffer
 		op.append("digraph {name} \{ rankdir=BT; node[shape=none,margin=0,width=0,height=0,fontsize=10]; edge[dir=none,color=gray]; ranksep=0.2; nodesep=0.1;\n")
 		var ms = new Array[nullable MMModule]
 		do
@@ -1242,7 +1242,7 @@ redef class ADoc
 	# Html transcription of the doc
 	fun to_html: String
 	do
-		var res = new Buffer
+		var res = new FlatBuffer
 		for c in n_comment do
 			res.append(c.text.substring_from(1))
 		end
@@ -1467,7 +1467,7 @@ redef class MMLocalClass
 		end
 		cla.add_all(cshe.greaters_and_self)
 
-		var op = new Buffer
+		var op = new FlatBuffer
 		var name = "class_{name}"
 		op.append("digraph {name} \{ rankdir=BT; node[shape=none,margin=0,width=0,height=0,fontsize=10]; edge[dir=none,color=gray]; ranksep=0.2; nodesep=0.1;\n")
 		for c in cla do
@@ -1687,7 +1687,7 @@ redef class MMSignature
 	# Htlm transcription of the signature (with nested links)
 	fun to_html(dctx: DocContext, with_closure: Bool): String
 	do
-		var res = new Buffer
+		var res = new FlatBuffer
 		if arity > 0 then
 			res.append("(")
 			for i in [0..arity[ do
@@ -1731,7 +1731,7 @@ end
 redef class MMTypeGeneric
 	redef fun html_link(dctx)
 	do
-		var res = new Buffer
+		var res = new FlatBuffer
 		res.append(local_class.html_link(dctx))
 		res.append("[")
 		res.append(params[0].html_link(dctx))

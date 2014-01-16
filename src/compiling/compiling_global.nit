@@ -33,7 +33,7 @@ redef class Program
 			c.compile_tables_to_c(v)
 		end
 
-		var s = new Buffer.from("classtable_t TAG2VFT[4] = \{NULL")
+		var s = new FlatBuffer.from("classtable_t TAG2VFT[4] = \{NULL")
 		for t in ["Int","Char","Bool"] do
 			if main_module.has_global_class_named(t.to_symbol) then
 				var c = main_module.class_by_name(t.to_symbol)

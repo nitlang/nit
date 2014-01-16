@@ -234,7 +234,7 @@ redef class MMSrcMethod
 
 		# hook to generated C
 		var rnv = signature.return_ni_variable
-		var s = new Buffer
+		var s = new FlatBuffer
 		if rnv != null then
 			rnv.prepare_for_c( fc )
 			s.append( "{rnv.ni_from_name} = " )
@@ -297,7 +297,7 @@ redef class MMSrcMethod
 			rnv = new ReturnVariable( signature.recv )
 		end
 
-		var s = new Buffer
+		var s = new FlatBuffer
 		if rnv != null then
 			rnv.prepare_for_nit( fc )
 			s.append( "{rnv.ni_from_name} = " )
@@ -638,7 +638,7 @@ redef class MMExplicitImport
 		if rnv == null and method.is_init then
 			rnv = new ReturnVariable( signature.recv )
 		end
-		var s = new Buffer
+		var s = new FlatBuffer
 		if rnv != null then
 			rnv.prepare_for_c( fc )
 			s.append( "{rnv.ni_from_name} = " )

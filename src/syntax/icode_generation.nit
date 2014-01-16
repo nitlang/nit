@@ -966,7 +966,7 @@ redef class AStringFormExpr
 		else
 			str = str.substring(1, str.length - 2)
 		end
-		var res = new Buffer
+		var res = new FlatBuffer
 		var len = 0
 		var i = 0
 		while i < str.length do

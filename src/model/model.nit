@@ -1421,7 +1421,7 @@ class MSignature
 
 	redef fun to_s
 	do
-		var b = new Buffer
+		var b = new FlatBuffer
 		if not mparameters.is_empty then
 			b.append("(")
 			for i in [0..mparameters.length[ do

@@ -21,8 +21,6 @@ import parser
 import toolcontext
 import phase
 
-import modelbuilder #FIXME useless
-
 redef class ToolContext
 	var literal_phase: Phase = new LiteralPhase(self, null)
 end
@@ -119,7 +117,7 @@ redef class String
 	#     assert u.chars[0].ascii      ==  10 # (the ASCII value of the "new line" character)
 	fun unescape_nit: String
 	do
-		var res = new Buffer.with_capacity(self.length)
+		var res = new FlatBuffer.with_capacity(self.length)
 		var was_slash = false
 		for c in self.chars do
 			if not was_slash then

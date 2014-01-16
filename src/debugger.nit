@@ -604,10 +604,10 @@ class Debugger
 
 	# Gets all the identifiers of an instruction (uses the rules of Nit as of Mar 05 2013)
 	#
-	fun get_identifiers_in_current_instruction(instruction: AbstractString): Array[String]
+	fun get_identifiers_in_current_instruction(instruction: Text): Array[String]
 	do
 		var result_array = new Array[String]
-		var instruction_buffer = new Buffer
+		var instruction_buffer = new FlatBuffer
 
 		var trigger_char_escape = false
 		var trigger_string_escape = false
@@ -652,9 +652,9 @@ class Debugger
 
 	# Takes a function call or declaration and strips all but the arguments
 	#
-	fun get_function_arguments(function: AbstractString): String
+	fun get_function_arguments(function: Text): String
 	do
-		var buf = new Buffer
+		var buf = new FlatBuffer
 		var trigger_copy = false
 
 		for i in function.chars do
@@ -690,7 +690,7 @@ class Debugger
 	fun get_real_variable_name(name: String): String
 	do
 		var explode_string = name.split_with(".")
-		var final_string = new Buffer
+		var final_string = new FlatBuffer
 		for i in explode_string do
 			var alias_resolved = get_variable_name_by_alias(i)
 			if alias_resolved != null then
@@ -938,7 +938,7 @@ class Debugger
 	# Returns an array containing their content
 	fun remove_braces(braces: String): nullable Array[String]
 	do
-		var buffer = new Buffer
+		var buffer = new FlatBuffer
 
 		var result_array = new Array[String]
 
