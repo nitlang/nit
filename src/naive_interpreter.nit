@@ -298,10 +298,8 @@ private class NaiveInterpreter
 	# Store known method, used to trace methods as thez are reached
 	var discover_call_trace: Set[MMethodDef] = new HashSet[MMethodDef]
 
-	# Execute `mpropdef` for a `args` (where `args[0]` is the receiver).
-	# Return a falue if `mpropdef` is a function, or null if it is a procedure.
-	# The call is direct/static. There is no message-seding/late-binding.
-	fun call(mpropdef: MMethodDef, args: Array[Instance]): nullable Instance
+	# Common code for calls to injected methods and normal methods
+	fun call_commons(mpropdef: MMethodDef, args: Array[Instance])
 	do
 		var vararg_rank = mpropdef.msignature.vararg_rank
 		if vararg_rank >= 0 then
@@ -328,6 +326,14 @@ private class NaiveInterpreter
 				args.add(rawargs[i+1])
 			end
 		end
+	end
+
+	# Execute `mpropdef` for a `args` (where `args[0]` is the receiver).
+	# Return a falue if `mpropdef` is a function, or null if it is a procedure.
+	# The call is direct/static. There is no message-seding/late-binding.
+	fun call(mpropdef: MMethodDef, args: Array[Instance]): nullable Instance
+	do
+		call_commons(mpropdef, args)
 		return call_without_varargs(mpropdef, args)
 	end
 
@@ -383,13 +389,9 @@ private class NaiveInterpreter
 		end
 	end
 
-	# Execute `mproperty` for a `args` (where `args[0]` is the receiver).
-	# Return a falue if `mproperty` is a function, or null if it is a procedure.
-	# The call is polimotphic. There is a message-seding/late-bindng according to te receiver (args[0]).
-	fun send(mproperty: MMethod, args: Array[Instance]): nullable Instance
+	# Common code for runtime injected calls and normal calls
+	fun send_commons(mproperty: MMethod, args: Array[Instance], mtype: MType): nullable Instance
 	do
-		var recv = args.first
-		var mtype = recv.mtype
 		if mtype isa MNullType then
 			if mproperty.name == "==" then
 				return self.bool_instance(args[0] == args[1])
@@ -398,8 +400,19 @@ private class NaiveInterpreter
 			end
 			#fatal("Reciever is null. {mproperty}. {args.join(" ")} {self.frame.current_node.class_name}")
 			fatal("Reciever is null")
-			abort
 		end
+		return null
+	end
+
+	# Execute `mproperty` for a `args` (where `args[0]` is the receiver).
+	# Return a falue if `mproperty` is a function, or null if it is a procedure.
+	# The call is polimotphic. There is a message-seding/late-bindng according to te receiver (args[0]).
+	fun send(mproperty: MMethod, args: Array[Instance]): nullable Instance
+	do
+		var recv = args.first
+		var mtype = recv.mtype
+		var ret = send_commons(mproperty, args, mtype)
+		if ret != null then return ret
 		var propdef = mproperty.lookup_first_definition(self.mainmodule, mtype)
 		return self.call(propdef, args)
 	end
@@ -587,9 +600,23 @@ redef class APropdef
 end
 
 redef class AConcreteMethPropdef
+
 	redef fun call(v, mpropdef, args)
 	do
 		var f = new Frame(self, self.mpropdef.as(not null), args)
+		call_commons(v, mpropdef, args, f)
+		v.frames.shift
+		if v.returnmark == f then
+			v.returnmark = null
+			var res = v.escapevalue
+			v.escapevalue = null
+			return res
+		end
+		return null
+	end
+
+	private fun call_commons(v: NaiveInterpreter, mpropdef: MMethodDef, args: Array[Instance], f: Frame)
+	do
 		for i in [0..mpropdef.msignature.arity[ do
 			var variable = self.n_signature.n_params[i].variable
 			assert variable != null
@@ -612,14 +639,6 @@ redef class AConcreteMethPropdef
 		end
 
 		v.stmt(self.n_block)
-		v.frames.shift
-		if v.returnmark == f then
-			v.returnmark = null
-			var res = v.escapevalue
-			v.escapevalue = null
-			return res
-		end
-		return null
 	end
 end
 
