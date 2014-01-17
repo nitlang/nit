@@ -40,7 +40,7 @@ doc/stdlib/index.html: bin/nitdoc
 		--github-base-sha1 "$$(git rev-parse HEAD)" \
 		--github-gitdir "." \
 		--source "https://github.com/privat/nit/blob/$$(git rev-parse HEAD)/%f#L%l-%L" \
-		--piwik-tracker "pratchett.info.uqam.ca/~terrasa/piwik/" \
+		--piwik-tracker "pratchett.info.uqam.ca/piwik/" \
 		--piwik-site-id "2"
 
 doc/nitc/index.html: bin/nitdoc
@@ -54,7 +54,7 @@ doc/nitc/index.html: bin/nitdoc
 		--github-base-sha1 "$$(git rev-parse HEAD)" \
 		--github-gitdir "." \
 		--source "https://github.com/privat/nit/blob/$$(git rev-parse HEAD)/%f#L%l-%L" \
-		--piwik-tracker "pratchett.info.uqam.ca/~terrasa/piwik/" \
+		--piwik-tracker "pratchett.info.uqam.ca/piwik/" \
 		--piwik-site-id "3"
 
 clean:
