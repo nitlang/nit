@@ -14,6 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import string
+
 class Test end
 class MyArray[E] end
 
@@ -26,10 +28,16 @@ var test2: Object = new Test
 var test3 = new MyArray[Int]
 var test4 = new Toto
 
-print "".class_name
-print 1.class_name
+"".class_name.output
+'\n'.output
+1.class_name.output
+'\n'.output
 
-print test1.class_name
-print test2.class_name
-print test3.class_name
-print test4.class_name
+test1.class_name.output
+'\n'.output
+test2.class_name.output
+'\n'.output
+test3.class_name.output
+'\n'.output
+test4.class_name.output
+'\n'.output
