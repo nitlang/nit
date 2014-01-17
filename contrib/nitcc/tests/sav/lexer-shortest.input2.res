@@ -1,3 +1,3 @@
 NLexerError@(1:1-1:9)='{gffffdg'
-Nodes
+Nodes[Node]
   NLexerError@(1:1-1:9)='{gffffdg'
