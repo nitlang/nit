@@ -39,7 +39,9 @@ doc/stdlib/index.html: bin/nitdoc
 		--github-upstream "privat:nit:master" \
 		--github-base-sha1 "$$(git rev-parse HEAD)" \
 		--github-gitdir "." \
-		--source "https://github.com/privat/nit/blob/$$(git rev-parse HEAD)/%f#L%l-%L"
+		--source "https://github.com/privat/nit/blob/$$(git rev-parse HEAD)/%f#L%l-%L" \
+		--piwik-tracker "pratchett.info.uqam.ca/piwik/" \
+		--piwik-site-id "2"
 
 doc/nitc/index.html: bin/nitdoc
 	bin/nitdoc src/nit.nit src/nitmetrics.nit src/nitg.nit src/nitx.nit src/nitunit.nit src/nitlight.nit src/dbgcli.nit src/netdbg.nit -d doc/nitc \
@@ -51,7 +53,9 @@ doc/nitc/index.html: bin/nitdoc
 		--github-upstream "privat:nit:master" \
 		--github-base-sha1 "$$(git rev-parse HEAD)" \
 		--github-gitdir "." \
-		--source "https://github.com/privat/nit/blob/$$(git rev-parse HEAD)/%f#L%l-%L"
+		--source "https://github.com/privat/nit/blob/$$(git rev-parse HEAD)/%f#L%l-%L" \
+		--piwik-tracker "pratchett.info.uqam.ca/piwik/" \
+		--piwik-site-id "3"
 
 clean:
 	rm -rf -- .nit_compile 2> /dev/null || true
