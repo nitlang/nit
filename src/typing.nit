@@ -830,6 +830,11 @@ redef class AForExpr
 
 	private fun do_type_iterator(v: TypeVisitor, mtype: MType)
 	do
+		if mtype isa MNullType then
+			v.error(self, "Type error: 'for' cannot iterate over a 'null' type.")
+			return
+		end
+
 		# get obj class
 		var objcla = v.get_mclass(self, "Object")
 		if objcla == null then return
@@ -898,6 +903,7 @@ redef class AForExpr
 		# anchor formal and virtual types
 		if mtype.need_anchor then mtype = v.anchor_to(mtype)
 
+		if mtype isa MNullableType then mtype = mtype.mtype
 		self.coltype = mtype.as(MClassType)
 
 		# get methods is_ok, next, item
