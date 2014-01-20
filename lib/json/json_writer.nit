@@ -31,7 +31,7 @@ redef class Map[ K, V ]
 	fun to_pretty_json: String do return native_to_json(true)
 	fun to_json: String do return native_to_json(false)
 
-	fun native_to_json( pretty: Bool ): String import to_json_object `{
+	fun native_to_json( pretty: Bool ): String import to_json_object, NativeString.to_s `{
 		json_object *jobj;
 		const char *json_native_string;
 		String json_string;
@@ -98,7 +98,7 @@ redef class Sequence[ E ]
 end
 
 redef class String
-	redef fun to_json_object import NativeString.to_s `{
+	redef fun to_json_object import NativeString.to_s, String.to_cstring `{
 		char *native_recv = String_to_cstring( recv );
 		return json_object_new_string( native_recv );
 	`}
