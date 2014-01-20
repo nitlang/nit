@@ -35,16 +35,12 @@ private extern JsonObject `{ struct json_object* `}
 	fun get `{ json_object_get( recv ); `}
 end
 
-redef class Sequence[ V ]
+redef class SequenceRead[ V ]
 	super Jsonable
 end
 
 # Can b converted to a Json object
 redef class Map[ K, V ]
-	super Jsonable
-end
-
-redef class String
 	super Jsonable
 end
 
