@@ -76,7 +76,7 @@ redef class Map[ K, V ]
 	end
 end
 
-redef class Sequence[ E ]
+redef class SequenceRead[ E ]
 	redef fun to_json_object
 	do
 		var jarray = new JsonArray
