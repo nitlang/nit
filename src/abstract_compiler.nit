@@ -677,6 +677,14 @@ abstract class AbstractCompilerVisitor
 		return self.call(propdef, t, args)
 	end
 
+	# Generate a monomorphic super send from the method `m`, the type `t` and the arguments `args`
+	fun monomorphic_super_send(m: MMethodDef, t: MType, args: Array[RuntimeVariable]): nullable RuntimeVariable
+	do
+		assert t isa MClassType
+		m = m.lookup_next_definition(self.compiler.mainmodule, t)
+		return self.call(m, t, args)
+	end
+
 	# Attributes handling
 
 	# Generate a polymorphic attribute is_set test
