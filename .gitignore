@@ -39,6 +39,11 @@ csrc2/
 lib/*.log
 lib/*.dot
 
+examples/mnit_*/doc
+examples/mnit_*/bin
+
+contrib/*/bin
+
 tests/alt
 tests/errlist
 tests/out
