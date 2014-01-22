@@ -1405,6 +1405,8 @@ class SeparateCompilerVisitor
 		self.add_decl("const char* {res};")
 		if value.mtype.ctype == "val*" then
 			self.add "{res} = {value} == NULL ? \"null\" : {value}->type->name;"
+		else if value.mtype isa MClassType and value.mtype.as(MClassType).mclass.kind == extern_kind then
+			self.add "{res} = \"{value.mtype.as(MClassType).mclass}\";"
 		else
 			self.require_declaration("type_{value.mtype.c_name}")
 			self.add "{res} = type_{value.mtype.c_name}.name;"
