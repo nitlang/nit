@@ -974,11 +974,7 @@ class SeparateCompilerVisitor
 	redef fun send(mmethod, arguments)
 	do
 		self.varargize(mmethod.intro, mmethod.intro.msignature.as(not null), arguments)
-		return table_send(mmethod, arguments, mmethod.const_color)
-	end
 
-	private fun table_send(mmethod: MMethod, arguments: Array[RuntimeVariable], const_color: String): nullable RuntimeVariable
-	do
 		if arguments.first.mcasttype.ctype != "val*" then
 			# In order to shortcut the primitive, we need to find the most specific method
 			# Howverr, because of performance (no flattening), we always work on the realmainmodule
@@ -989,6 +985,11 @@ class SeparateCompilerVisitor
 			return res
 		end
 
+		return table_send(mmethod, arguments, mmethod.const_color)
+	end
+
+	private fun table_send(mmethod: MMethod, arguments: Array[RuntimeVariable], const_color: String): nullable RuntimeVariable
+	do
 		var res: nullable RuntimeVariable
 		var msignature = mmethod.intro.msignature.resolve_for(mmethod.intro.mclassdef.bound_mtype, mmethod.intro.mclassdef.bound_mtype, mmethod.intro.mclassdef.mmodule, true)
 		var ret = msignature.return_mtype
@@ -1128,6 +1129,15 @@ class SeparateCompilerVisitor
 
 	redef fun supercall(m: MMethodDef, recvtype: MClassType, arguments: Array[RuntimeVariable]): nullable RuntimeVariable
 	do
+		if arguments.first.mcasttype.ctype != "val*" then
+			# In order to shortcut the primitive, we need to find the most specific method
+			# However, because of performance (no flattening), we always work on the realmainmodule
+			var main = self.compiler.mainmodule
+			self.compiler.mainmodule = self.compiler.realmainmodule
+			var res = self.monomorphic_super_send(m, recvtype, arguments)
+			self.compiler.mainmodule = main
+			return res
+		end
 		return table_send(m.mproperty, arguments, m.const_color)
 	end
 
@@ -1405,6 +1415,8 @@ class SeparateCompilerVisitor
 		self.add_decl("const char* {res};")
 		if value.mtype.ctype == "val*" then
 			self.add "{res} = {value} == NULL ? \"null\" : {value}->type->name;"
+		else if value.mtype isa MClassType and value.mtype.as(MClassType).mclass.kind == extern_kind then
+			self.add "{res} = \"{value.mtype.as(MClassType).mclass}\";"
 		else
 			self.require_declaration("type_{value.mtype.c_name}")
 			self.add "{res} = type_{value.mtype.c_name}.name;"

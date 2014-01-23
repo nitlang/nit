@@ -462,7 +462,7 @@ universal Char
 		else if is_digit then
 			return self.ascii - '0'.ascii
 		else
-			return self.to_lower.ascii - ('a'.ascii + 10)
+			return self.to_lower.ascii - 'a'.ascii + 10
 		end
 	end
 
