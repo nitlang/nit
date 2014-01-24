@@ -94,6 +94,17 @@ extern GtkWidget `{GtkWidget *`}
 	fun fg_color=( state : GtkStateType, color : GdkRGBA ) is extern `{
 		gtk_widget_override_color( recv, state, color);
 	`}
+	
+	#Sets the sensitivity of a widget. sensitive -> the user can interact with it. Insensitive -> widget "grayed out" and the user can"t interact with them
+	fun set_sensitive=(sensitive : Bool) is extern `{
+		gtk_widget_set_sensitive(recv, sensitive);
+	`}
+	
+	#return the sensitivity of the widget
+	fun get_sensitive: Bool is extern `{
+		return gtk_widget_get_sensitive(recv);
+	`}
+
 end
 
 #Base class for widgets which contain other widgets
