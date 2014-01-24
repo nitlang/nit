@@ -57,6 +57,7 @@ class CalculatorContext
 
 	fun switch_to_decimals
 	do
+		if self.current == null then current = 0.0
 		if after_point != null then return
 
 		after_point = -1
@@ -112,11 +113,11 @@ class CalculatorGui
 		if user_data isa Char then # is an operation
 			var c = user_data
 			if c == '.' then
-					but_dot.set_sensitive= false
+					but_dot.sensitive= false
 					context.switch_to_decimals
 					lbl_disp.text = "{context.current.to_i}."
 			else
-				but_dot.set_sensitive= true
+				but_dot.sensitive= true
 				context.push_op( c )
 				
 				var s = context.result.to_precision_native(6)
