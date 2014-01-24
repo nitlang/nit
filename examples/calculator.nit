@@ -96,6 +96,7 @@ class CalculatorGui
 
 	var lbl_disp : GtkLabel
 	var but_eq : GtkButton
+	var but_dot : GtkButton
 
 	var context = new CalculatorContext
 
@@ -111,9 +112,11 @@ class CalculatorGui
 		if user_data isa Char then # is an operation
 			var c = user_data
 			if c == '.' then
-				context.switch_to_decimals
-				lbl_disp.text = "{context.current.to_i}."
+					but_dot.set_sensitive= false
+					context.switch_to_decimals
+					lbl_disp.text = "{context.current.to_i}."
 			else
+				but_dot.set_sensitive= true
 				context.push_op( c )
 				
 				var s = context.result.to_precision_native(6)
@@ -178,7 +181,7 @@ class CalculatorGui
 		container.attach( but_eq, 4, 3, 1, 2 )
 
 		# .
-		var but_dot = new GtkButton.with_label( "." )
+		but_dot = new GtkButton.with_label( "." )
 		but_dot.request_size( 64, 64 )
 		but_dot.signal_connect( "clicked", self, '.' )
 		container.attach( but_dot, 1, 4, 1, 1 )
