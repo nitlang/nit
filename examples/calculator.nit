@@ -135,7 +135,7 @@ class CalculatorGui
 		else if user_data isa Int then # is a number
 			var n = user_data
 			context.push_digit( n )
-			lbl_disp.text = context.current.to_precision(after_point)
+			lbl_disp.text = context.current.to_precision_native(after_point)
 		end
 	end
 
