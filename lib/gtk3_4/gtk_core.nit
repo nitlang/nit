@@ -125,6 +125,12 @@ extern GtkContainer `{GtkContainer *`}
 	fun resize_mode : GtkResizeMode is extern `{
 		return gtk_container_get_resize_mode( recv );
 	`}
+
+	# Set the resize mode of the container
+	fun resize_mode=( resize_mode: GtkResizeMode ) is extern `{
+		gtk_container_set_resize_mode( recv, resize_mode );
+	`}
+
 end
 
 #A container with just one child
