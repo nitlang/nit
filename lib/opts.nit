@@ -68,7 +68,7 @@ abstract class Option
 	# A pretty print for this help
 	fun pretty(off: Int): String
 	do
-		var text = new Buffer.from("  ")
+		var text = new FlatBuffer.from("  ")
 		text.append(_names.join(", "))
 		text.append("  ")
 		var rest = off - text.length
@@ -138,7 +138,7 @@ abstract class OptionParameter
 	redef fun read_param(it)
 	do
 		super
-		if it.is_ok and it.item.first != '-' then
+		if it.is_ok and it.item.chars.first != '-' then
 			value = convert(it.item)
 			it.next
 		else
@@ -273,7 +273,7 @@ class OptionContext
 				if str.last_index_of('-') == 0 and str.length > 2 then
 					var next_called = false
 					for i in [1..str.length] do
-						var short_opt = "-" + str[i].to_s
+						var short_opt = "-" + str.chars[i].to_s
 						if _optmap.has_key(short_opt) then
 							var option = _optmap[short_opt]
 							if option isa OptionParameter then

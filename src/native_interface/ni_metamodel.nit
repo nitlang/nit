@@ -139,7 +139,7 @@ redef class MMMethod
 
 	private fun csignature_with_name( name : nullable String, local_class : MMLocalClass ) : String
 	do
-		var s = new Buffer
+		var s = new FlatBuffer
 
 		# return type
 		if signature.return_type != null then
@@ -201,7 +201,7 @@ redef class MMMethod
 
 	fun out_csignature : String
 	do # boxed types
-		var s = new Buffer
+		var s = new FlatBuffer
 
 		# return type
 		if signature.return_type != null or global.is_init then

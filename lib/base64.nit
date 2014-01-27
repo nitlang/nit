@@ -28,7 +28,7 @@ redef class String
 	do
 		var inv_base64_chars = new HashMap[Char,Int]
 		for k in [0..base64_chars.length[ do
-			inv_base64_chars[ base64_chars[k] ] = k
+			inv_base64_chars[ base64_chars.chars[k] ] = k
 		end
 		return inv_base64_chars
 	end
@@ -52,23 +52,23 @@ redef class String
 		for s in [0..steps[ do
 			var e = 0
 			for ss in [0..3[ do
-				e += self[s*3+ss].ascii.lshift((2-ss)*8)
+				e += self.chars[s*3+ss].ascii.lshift((2-ss)*8)
 			end
 			for ss in [0..4[ do
-				result[s*4+3-ss] = base64_chars[ e.rshift(ss*6).bin_and( mask_6bit ) ]
+				result[s*4+3-ss] = base64_chars.chars[ e.rshift(ss*6).bin_and( mask_6bit ) ]
 			end
 		end
 
 		if chars_in_last_step == 1 then
-			var e = self[length-1].ascii.lshift(16)
+			var e = self.chars[length-1].ascii.lshift(16)
 			for ss in [0..2[ do
-				result[steps*4+1-ss] = base64_chars[ e.rshift((ss+2)*6).bin_and( mask_6bit ) ]
+				result[steps*4+1-ss] = base64_chars.chars[ e.rshift((ss+2)*6).bin_and( mask_6bit ) ]
 			end
 		else if chars_in_last_step == 2 then
-			var e = self[length-2].ascii.lshift(16) +
-				self[length-1].ascii.lshift(8)
+			var e = self.chars[length-2].ascii.lshift(16) +
+				self.chars[length-1].ascii.lshift(8)
 			for ss in [0..3[ do
-				result[steps*4+2-ss] = base64_chars[ e.rshift((ss+1)*6).bin_and( mask_6bit ) ]
+				result[steps*4+2-ss] = base64_chars.chars[ e.rshift((ss+1)*6).bin_and( mask_6bit ) ]
 			end
 		end
 
@@ -104,7 +104,7 @@ redef class String
 		for s in [0..steps[ do
 			var e = 0
 			for ss in [0..4[ do
-				e += inverted_base64_chars[self[s*4+ss]].lshift((3-ss)*6)
+				e += inverted_base64_chars[self.chars[s*4+ss]].lshift((3-ss)*6)
 			end
 
 			for ss in [0..3[ do
@@ -116,7 +116,7 @@ redef class String
 		if padding_count == 1 then
 			var e = 0
 			for ss in [0..3[ do
-				e += inverted_base64_chars[self[s*4+ss]].lshift((3-ss)*6)
+				e += inverted_base64_chars[self.chars[s*4+ss]].lshift((3-ss)*6)
 			end
 
 			for ss in [0..2[ do
@@ -125,7 +125,7 @@ redef class String
 		else if padding_count == 2 then
 			var e = 0
 			for ss in [0..2[ do
-				e += inverted_base64_chars[self[s*4+ss]].lshift((3-ss)*6)
+				e += inverted_base64_chars[self.chars[s*4+ss]].lshift((3-ss)*6)
 			end
 
 			result[s*3] = e.rshift(2*8).bin_and( mask_8bit ).ascii

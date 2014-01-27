@@ -13,7 +13,7 @@
 # Input and output streams of characters
 module stream
 
-import string
+import ropes
 
 # Abstract stream class
 interface IOS
@@ -30,7 +30,7 @@ interface IStream
 	# Read at most i bytes
 	fun read(i: Int): String
 	do
-		var s = new Buffer.with_capacity(i)
+		var s = new FlatBuffer.with_capacity(i)
 		while i > 0 and not eof do
 			var c = read_char
 			if c >= 0 then
@@ -45,7 +45,7 @@ interface IStream
 	fun read_line: String
 	do
 		assert not eof
-		var s = new Buffer
+		var s = new FlatBuffer
 		append_line_to(s)
 		return s.to_s
 	end
@@ -53,7 +53,7 @@ interface IStream
 	# Read all the stream until the eof.
 	fun read_all: String
 	do
-		var s = new Buffer
+		var s = new FlatBuffer
 		while not eof do
 			var c = read_char
 			if c >= 0 then s.add(c.ascii)
@@ -70,7 +70,7 @@ interface IStream
 				if eof then return
 			else
 				var c = x.ascii
-				s.push(c)
+				s.chars.push(c)
 				if c == '\n' then return
 			end
 		end
@@ -102,14 +102,14 @@ abstract class BufferedIStream
 		if _buffer_pos >= _buffer.length then
 			return -1
 		end
-		var c = _buffer[_buffer_pos]
+		var c = _buffer.chars[_buffer_pos]
 		_buffer_pos += 1
 		return c.ascii
 	end
 
 	redef fun read(i)
 	do
-		var s = new Buffer.with_capacity(i)
+		var s = new FlatBuffer.with_capacity(i)
 		var j = _buffer_pos
 		var k = _buffer.length
 		while i > 0 do
@@ -120,7 +120,7 @@ abstract class BufferedIStream
 				k = _buffer.length
 			end
 			while j < k and i > 0 do
-				s.add(_buffer[j])
+				s.add(_buffer.chars[j])
 				j +=  1
 				i -= 1
 			end
@@ -131,12 +131,12 @@ abstract class BufferedIStream
 
 	redef fun read_all
 	do
-		var s = new Buffer
+		var s = new FlatBuffer
 		while not eof do
 			var j = _buffer_pos
 			var k = _buffer.length
 			while j < k do
-				s.add(_buffer[j])
+				s.add(_buffer.chars[j])
 				j += 1
 			end
 			_buffer_pos = j
@@ -150,17 +150,17 @@ abstract class BufferedIStream
 		loop
 			# First phase: look for a '\n'
 			var i = _buffer_pos
-			while i < _buffer.length and _buffer[i] != '\n' do i += 1
+			while i < _buffer.length and _buffer.chars[i] != '\n' do i += 1
 
 			# if there is something to append
 			if i > _buffer_pos then
 				# Enlarge the string (if needed)
-				s.enlarge(s.length + i - _buffer_pos)
+				if s isa FlatBuffer then s.enlarge(s.length + i - _buffer_pos)
 
 				# Copy from the buffer to the string
 				var j = _buffer_pos
 				while j < i do
-					s.add(_buffer[j])
+					s.add(_buffer.chars[j])
 					j += 1
 				end
 			end
@@ -184,7 +184,7 @@ abstract class BufferedIStream
 	redef fun eof do return _buffer_pos >= _buffer.length and end_reached
 
 	# The buffer
-	var _buffer: nullable Buffer = null
+	var _buffer: nullable FlatBuffer = null
 
 	# The current position in the buffer
 	var _buffer_pos: Int = 0
@@ -198,7 +198,7 @@ abstract class BufferedIStream
 	# Allocate a `_buffer` for a given `capacity`.
 	protected fun prepare_buffer(capacity: Int)
 	do
-		_buffer = new Buffer.with_capacity(capacity)
+		_buffer = new FlatBuffer.with_capacity(capacity)
 		_buffer_pos = 0 # need to read
 	end
 end

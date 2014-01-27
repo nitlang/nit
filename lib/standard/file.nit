@@ -16,7 +16,7 @@
 module file
 
 intrude import stream
-intrude import string
+intrude import ropes
 import string_search
 import time
 
@@ -120,7 +120,7 @@ end
 class OFStream
 	super FStream
 	super OStream
-	
+
 	redef fun write(s)
 	do
 		assert _writable
@@ -219,7 +219,7 @@ redef class String
 	# Extract the basename of a path and remove the extension
 	fun basename(ext: String): String
 	do
-		var pos = last_index_of_from('/', _length - 1)
+		var pos = last_index_of_from('/', length - 1)
 		var n = self
 		if pos >= 0 then
 			n = substring_from(pos+1)
@@ -239,8 +239,8 @@ redef class String
 	#     assert "".dirname                            == "."
 	fun dirname: String
 	do
-		var l = _length - 1 # Index of the last char
-		if l > 0 and self[l] == '/' then l -= 1 # remove trailing `/`
+		var l = length - 1 # Index of the last char
+		if l > 0 and self.chars[l] == '/' then l -= 1 # remove trailing `/`
 		var pos = last_index_of_from('/', l)
 		if pos > 0 then
 			return substring(0, pos)
@@ -299,7 +299,7 @@ redef class String
 	do
 		if path.is_empty then return self
 		if self.is_empty then return path
-		if path[0] == '/' then return path
+		if path.chars[0] == '/' then return path
 		return "{self}/{path}"
 	end
 
@@ -307,7 +307,7 @@ redef class String
 	fun mkdir
 	do
 		var dirs = self.split_with("/")
-		var path = new Buffer
+		var path = new FlatBuffer
 		if dirs.is_empty then return
 		if dirs[0].is_empty then
 			# it was a starting /

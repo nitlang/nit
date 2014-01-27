@@ -929,8 +929,8 @@ private class CustomizedRuntimeFunction
 		var frame = new Frame(v, mmethoddef, recv, arguments)
 		v.frame = frame
 
-		var sig = new Buffer
-		var comment = new Buffer
+		var sig = new FlatBuffer
+		var comment = new FlatBuffer
 		var ret = mmethoddef.msignature.return_mtype
 		if ret != null then
 			ret = v.resolve_for(ret, selfvar)

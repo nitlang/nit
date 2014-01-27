@@ -90,7 +90,7 @@ redef class ACharExpr
 			v.toolcontext.error(self.hot_location, "Invalid character literal {txt}")
 			return
 		end
-		self.value = txt[1]
+		self.value = txt.chars[1]
 	end
 end
 
@@ -101,7 +101,46 @@ redef class AStringFormExpr
 	do
 		var txt = self.n_string.text
 		var skip = 1
-		if txt[0] == txt[1] and txt.length >= 6 then skip = 3
+		if txt.chars[0] == txt.chars[1] and txt.length >= 6 then skip = 3
 		self.value = txt.substring(skip, txt.length-(2*skip)).unescape_nit
+	end
+end
+
+redef class String
+	# Return a string where Nit escape sequences are transformed.
+	#
+	# Example:
+	#     var s = "\\n"
+	#     assert s.length        ==  2
+	#     var u = s.unescape_nit
+	#     assert u.length        ==  1
+	#     assert u.chars[0].ascii      ==  10 # (the ASCII value of the "new line" character)
+	fun unescape_nit: String
+	do
+		var res = new FlatBuffer.with_capacity(self.length)
+		var was_slash = false
+		for c in self.chars do
+			if not was_slash then
+				if c == '\\' then
+					was_slash = true
+				else
+					res.add(c)
+				end
+				continue
+			end
+			was_slash = false
+			if c == 'n' then
+				res.add('\n')
+			else if c == 'r' then
+				res.add('\r')
+			else if c == 't' then
+				res.add('\t')
+			else if c == '0' then
+				res.add('\0')
+			else
+				res.add(c)
+			end
+		end
+		return res.to_s
 	end
 end

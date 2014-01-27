@@ -23,7 +23,6 @@ import string_search
 import file
 import exec
 import stream
-import string
 import collection
 import math
 import kernel

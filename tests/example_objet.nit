@@ -101,7 +101,7 @@ private
 	do
 		# Les variables sont déclarées par "var", leur portée va de leur
 		# déclaration jusqu'au "end" correspondant
-		var s = new Buffer		# Là où on calcule le résultat
+		var s = new FlatBuffer		# Là où on calcule le résultat
 		# Les chaînes littérales sont déclarées avec des guillemets
 		s.append("*** Entrepôt ")	# On initialise "s"
 		# puis on concatène des chaînes à "s"
@@ -218,7 +218,7 @@ private
 		# Si une expression est passée comme valeur initiale d'une
 		# variable, le type statique de la variable est implicitement
 		# celui de l'expression.
-		var s = new Buffer
+		var s = new FlatBuffer
 		s.append("* Rayon : ")
 		# Ici, le type statique de s est implicitement String
 
@@ -245,7 +245,7 @@ private
 
 	redef fun to_s: String
 	do
-		var s = new Buffer
+		var s = new FlatBuffer
 		s.append(to_s_head)
 		# Les boucles en NIT sont des structures puissantes, toutefois
 		# la manipulation des itérateurs peut être facilité par la

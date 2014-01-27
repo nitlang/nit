@@ -16,15 +16,15 @@
 
 
 var s = "Bonjour !\n"
-var r = new Buffer.with_capacity(50)
-var r2 = new Buffer
+var r = new FlatBuffer.with_capacity(50)
+var r2 = new FlatBuffer
 
 var i = 0
 while i < 5000 do
     var j = 0
     while j < s.length do
-        r.add(s[j])
-        r2.add(s[j])
+        r.add(s.chars[j])
+        r2.add(s.chars[j])
         j = j + 1
     end
     i = i + 1
