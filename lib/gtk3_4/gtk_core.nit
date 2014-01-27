@@ -116,6 +116,10 @@ extern GtkContainer `{GtkContainer *`}
 	fun add( widget : GtkWidget ) is extern `{
 		gtk_container_add( recv, widget );
 	`}
+	# Remove the widget from the container
+	fun remove_widget( widget : GtkWidget ) is extern `{
+		gtk_container_remove( recv, widget );
+	`}
 end
 
 #A container with just one child
