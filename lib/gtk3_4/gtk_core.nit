@@ -325,6 +325,16 @@ extern GtkGrid `{GtkGrid *`}
 	fun get_child_at( left : Int, top : Int ): GtkWidget is extern `{
 		return gtk_grid_get_child_at( recv, left, top );
 	`}
+
+	# Insert a row at the specified position
+	fun insert_row( position :Int ) is extern `{
+		gtk_grid_insert_row( recv, position );
+	`}
+
+	# Insert a column at the specified position
+	fun insert_column( position : Int ) is extern `{
+		gtk_grid_insert_column( recv, position );
+	`}
 end
 
 #The tree interface used by GtkTreeView
