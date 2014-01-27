@@ -120,6 +120,11 @@ extern GtkContainer `{GtkContainer *`}
 	fun remove_widget( widget : GtkWidget ) is extern `{
 		gtk_container_remove( recv, widget );
 	`}
+
+	# Get the resize mode of the container
+	fun resize_mode : GtkResizeMode is extern `{
+		return gtk_container_get_resize_mode( recv );
+	`}
 end
 
 #A container with just one child
