@@ -1526,6 +1526,14 @@ redef class ANewExpr
 				v.error(self, "Type error: cannot instantiate the formal type {recvtype}.")
 				return
 			end
+		else
+			if recvtype.mclass.kind == abstract_kind then
+				v.error(self, "Cannot instantiate abstract class {recvtype}.")
+				return
+			else if recvtype.mclass.kind == interface_kind then
+				v.error(self, "Cannot instantiate interface {recvtype}.")
+				return
+			end
 		end
 
 		var name: String
