@@ -900,6 +900,8 @@ redef class AExternMethPropdef
 			else if pname == "file_chdir" then
 				recvval.to_s.chdir
 				return null
+			else if pname == "file_realpath" then
+				return v.native_string_instance(recvval.to_s.realpath)
 			else if pname == "get_environ" then
 				var txt = recvval.to_s.environ
 				return v.native_string_instance(txt)
