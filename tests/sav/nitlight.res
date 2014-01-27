@@ -12,5 +12,7 @@ usage: nitlight [options] files...
   --only-parse            Only proceed to parse step of loaders
   --only-metamodel        Stop after meta-model processing
   -f, --fragment          Omit document header and footer
+  --first-line            Start the source file at this line (default: 1)
+  --last-line             End the source file at this line (default: to the end)
   -d, --dir               Output html files in a specific directory (required if more than one module)
   --full                  Process also imported modules

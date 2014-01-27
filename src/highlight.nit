@@ -54,6 +54,15 @@ class HighlightVisitor
 	# Used to print parts of the source betwen tokens of the AST
 	private var pos = 0
 
+	# The line position in the source file.
+	private var line_pos = 0
+
+	# The first line to generate, null if start at the first line
+	var first_line: nullable Int writable = null
+
+	# The last line to generate, null if finish at the last line
+	var last_line: nullable Int writable = null
+
 	init
 	do
 		html.add_class("nitcode")
@@ -77,7 +86,9 @@ class HighlightVisitor
 
 		# Add text between `last_token` and `node`
 		var pstart = node.location.pstart
-		if pos < pstart then
+		var line_start = node.location.line_start
+		var line_end = node.location.line_end
+		if pos < pstart and (first_line == null or first_line <= line_start) and (last_line == null or last_line >= line_end) then
 			var text = node.location.file.string.substring(pos, pstart-pos)
 			token_head.append(text)
 			#node.debug("WRT: {token_head.classes} << '{text.escape_to_c}' ")
@@ -261,6 +272,12 @@ redef class Token
 	# Use `empty_tag` to create the tag ; then fill it and add it to the html
 	redef fun accept_highlight_visitor(v)
 	do
+		var fl = v.first_line
+		if fl != null and fl > location.line_start then return
+
+		var ll = v.last_line
+		if ll != null and ll < location.line_end then return
+
 		var n = make_tag(v)
 		if n.attrs.is_empty and n.classes.is_empty then
 			for c in n.children do

@@ -18,7 +18,7 @@ NITCOPT=
 
 all: tools doc/stdlib/index.html
 
-docs: doc/stdlib/index.html doc/newmodel/index.html
+docs: doc/stdlib/index.html doc/nitc/index.html
 	#cd doc; make
 
 tools:
@@ -36,19 +36,26 @@ doc/stdlib/index.html: bin/nitdoc
 		--custom-menu-items "<li><a href=\"http://nitlanguage.org/\">Nitlanguage.org</a></li>" \
 		--custom-overview-text "<p>Documentation for the standard library of Nit<br/>Version $$(git describe)<br/>Date: $$(git show --format="%cd" | head -1)</p>" \
 		--custom-footer-text "Nit standard library. Version $$(git describe)." \
-		--source "https://github.com/privat/nit/blob/$$(git rev-parse HEAD)/%f#L%l-%L"
-
-doc/newmodel/index.html: bin/nitdoc
-	bin/nitdoc src/nit.nit src/nitmetrics.nit src/nitg.nit src/nitx.nit src/nitunit.nit src/nitlight.nit src/dbgcli.nit src/netdbg.nit -d doc/newmodel \
-		--private \
-		--custom-title "Nit New Model" \
-		--custom-menu-items "<li><a href=\"http://nitlanguage.org/\">Nitlanguage.org</a></li>" \
-		--custom-overview-text "<p>Documentation for the Nit tools based on the new metamodel<br/>Version $$(git describe)<br/>Date: $$(git show --format="%cd" | head -1)</p>" \
-		--custom-footer-text "Nit new metamodel. Version $$(git describe)." \
 		--github-upstream "privat:nit:master" \
 		--github-base-sha1 "$$(git rev-parse HEAD)" \
 		--github-gitdir "." \
-		--source "https://github.com/privat/nit/blob/$$(git rev-parse HEAD)/%f#L%l-%L"
+		--source "https://github.com/privat/nit/blob/$$(git rev-parse HEAD)/%f#L%l-%L" \
+		--piwik-tracker "pratchett.info.uqam.ca/piwik/" \
+		--piwik-site-id "2"
+
+doc/nitc/index.html: bin/nitdoc
+	bin/nitdoc src/nit.nit src/nitmetrics.nit src/nitg.nit src/nitx.nit src/nitunit.nit src/nitlight.nit src/dbgcli.nit src/netdbg.nit -d doc/nitc \
+		--private \
+		--custom-title "Nit Compilers and Tools" \
+		--custom-menu-items "<li><a href=\"http://nitlanguage.org/\">Nitlanguage.org</a></li>" \
+		--custom-overview-text "<p>Documentation for the Nit tools<br/>Version $$(git describe)<br/>Date: $$(git show --format="%cd" | head -1)</p>" \
+		--custom-footer-text "Nit tools. Version $$(git describe)." \
+		--github-upstream "privat:nit:master" \
+		--github-base-sha1 "$$(git rev-parse HEAD)" \
+		--github-gitdir "." \
+		--source "https://github.com/privat/nit/blob/$$(git rev-parse HEAD)/%f#L%l-%L" \
+		--piwik-tracker "pratchett.info.uqam.ca/piwik/" \
+		--piwik-site-id "3"
 
 clean:
 	rm -rf -- .nit_compile 2> /dev/null || true

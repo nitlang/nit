@@ -39,8 +39,11 @@ Nitdoc.QuickSearch = function() {
 			value: "quick search..."
 		})
 		.addClass("nitdoc-qs-field-notused")
+		.keydown(function(event) {
+			return Nitdoc.QuickSearch.doKeyDownAction(event.keyCode);
+		})
 		.keyup(function(event) {
-			Nitdoc.QuickSearch.doKeyAction(event.keyCode);
+			Nitdoc.QuickSearch.doKeyUpAction(event.keyCode);
 		})
 		.focusout(function() {
 			if($(this).val() == "") {
@@ -67,15 +70,23 @@ Nitdoc.QuickSearch = function() {
 		});
 	}
 
-	// Respond to key event
-	var doKeyAction = function(key) {
+	var doKeyDownAction = function(key) {
 		switch(key) {
 			case 38: // Up
 				selectPrevResult();
-			break;
-
+				return false;
 			case 40: // Down
 				selectNextResult();
+				return false;
+			default:
+				return true;
+		 }
+	}
+
+	var doKeyUpAction = function(key) {
+		switch(key) {
+			case 38: // Up
+			case 40: // Down
 			break;
 
 			case 13: // Enter
@@ -93,32 +104,55 @@ Nitdoc.QuickSearch = function() {
 				if(!query) {
 					return false;
 				}
-				var results = rankResults(query);
-				results.sort(resultsSort);
+				var results = getResults(query);
 				displayResultsTable(query, results);
 			break;
 		}
 	}
 
-	// Rank raw list entries corresponding to query
-	var rankResults = function(query) {
-		var results = new Array();
+	// Get results corresponding to search query
+	var getResults = function(query) {
+		var results = {};
+		results.matches = new Array();
 		for(var entry in rawList) {
-			for(var i in rawList[entry]) {
-				var result = rawList[entry][i];
-				result.entry = entry;
-				result.distance = query.dice(entry);
-				results[results.length] = result;
+			if(!entry.startsWith(query, true)) {
+				continue;
 			}
+			var cat = new Object();
+			cat.name = entry;
+			cat.entries = rawList[entry];
+			results.matches[results.matches.length] = cat;
+
+			if(entry == query) {
+				cat.rank = 3;
+			} else if(entry.toUpperCase() == query.toUpperCase()) {
+				cat.rank = 2;
+			} else {
+				cat.rank = 1 + query.dice(entry);
+			}
+		}
+		results.matches.sort(rankSorter);
+		results.partials = new Array();
+		if(results.matches.length == 0) {
+			for(var entry in rawList) {
+				var cat = new Object();
+				cat.name = entry;
+				cat.entries = rawList[entry];
+				cat.rank = query.dice(entry);
+				if(cat.rank > 0) {
+					results.partials[results.partials.length] = cat;
+				}
+			}
+			results.partials.sort(rankSorter);
 		}
 		return results;
 	}
 
-	// Sort an array of results
-	var resultsSort = function(a, b){
-		if(a.distance < b.distance) {
+	// Sort an array of results by rank
+	var rankSorter = function(a, b){
+		if(a.rank < b.rank) {
 			return 1;
-		} else if(a.distance > b.distance) {
+		} else if(a.rank > b.rank) {
 			return -1;
 		}
 		return 0;
@@ -132,91 +166,173 @@ Nitdoc.QuickSearch = function() {
 		// Build results table
 		currentIndex = -1;
 		currentTable = $(document.createElement("table"));
-
-		for(var i in results) {
-			if(i > 10) {
-				break;
-			}
-			var result = results[i];
-			currentTable.append(
-				$(document.createElement("tr"))
-				.data("searchDetails", {name: result.entry, url: result.url})
-				.data("index", i)
-				.append($(document.createElement("td")).html(result.entry))
-				.append(
-					$(document.createElement("td"))
-						.addClass("nitdoc-qs-info")
-						.html(result.txt + "&nbsp;&raquo;")
-				)
-				.mouseover( function() {
-					$(currentTable.find("tr")[currentIndex]).removeClass("nitdoc-qs-active");
-					$(this).addClass("nitdoc-qs-active");
-					currentIndex = $(this).data("index");
-				})
-				.mouseout( function() {
-					$(this).removeClass("nitdoc-qs-active");
-				 })
-				.click( function() {
-					window.location = $(this).data("searchDetails")["url"];
-				})
-			);
-		}
-		currentTable.append(
-			$("<tr class='nitdoc-qs-overflow'>")
-			.append(
-				$("<td colspan='2'>")
-				.html("Best results for '" + query + "'")
-			)
-		);
-
-		// Initialize table properties
 		currentTable.attr("id", "nitdoc-qs-table");
 		currentTable.css("position", "absolute");
 		currentTable.width(searchField.outerWidth());
-		$("body").append(currentTable);
-		currentTable.offset({left: searchField.offset().left + (searchField.outerWidth() - currentTable.outerWidth()), top: searchField.offset().top + searchField.outerHeight()});
-		// Preselect first entry
-		if(currentTable.find("tr").length > 0) {
-			currentIndex = 0;
-			$(currentTable.find("tr")[currentIndex]).addClass("nitdoc-qs-active");
-			searchField.focus();
-		}
-	}
 
-	// Select the previous result on current table
-	var selectPrevResult = function() {
-		// If already on first result, focus search input
-		if(currentIndex == 0) {
-			searchField.val($(currentTable.find("tr")[currentIndex]).data("searchDetails").name);
-			searchField.focus();
-		// Else select previous result
-		} else if(currentIndex > 0) {
-			$(currentTable.find("tr")[currentIndex]).removeClass("nitdoc-qs-active");
-			currentIndex--;
-			$(currentTable.find("tr")[currentIndex]).addClass("nitdoc-qs-active");
-			searchField.val($(currentTable.find("tr")[currentIndex]).data("searchDetails").name);
-			searchField.focus();
+		var maxSize = 10;
+		var count = 0;
+		var resultSet;
+		if(results.matches.length == 0) {
+			resultSet = results.partials
+		} else {
+			resultSet = results.matches
 		}
-	}
+		for(var i in resultSet) {
+			var cat = resultSet[i];
+			var result = cat.entries[0];
 
-	// Select the next result on current table
-	var selectNextResult = function() {
-		if(currentIndex < currentTable.find("tr").length - 1) {
-			if($(currentTable.find("tr")[currentIndex + 1]).hasClass("nitdoc-qs-overflow")) {
-				return;
+			addResultRow(count, cat.name, result.txt, result.url, "nitdoc-qs-cat")
+			if(count >= maxSize) {
+				currentTable.find("tbody").children().last().hide();
 			}
-			$(currentTable.find("tr")[currentIndex]).removeClass("nitdoc-qs-active");
-			currentIndex++;
-			$(currentTable.find("tr")[currentIndex]).addClass("nitdoc-qs-active");
-			searchField.val($(currentTable.find("tr")[currentIndex]).data("searchDetails").name);
-			searchField.focus();
+			count++;
+
+			for(var j = 1; j < cat.entries.length; j++) {
+				var result = cat.entries[j];
+				addResultRow(count, cat.name, result.txt, result.url, "nitdoc-qs-sub")
+				if(count >= maxSize) {
+					currentTable.find("tr.nitdoc-qs-row").last().hide();
+				}
+				count++;
+			}
+		}
+		if(count >= maxSize) {
+			currentTable.prepend(
+				$(document.createElement("tr"))
+				.addClass("nitdoc-qs-overflow-up")
+				.addClass("nitdoc-qs-overflow-inactive")
+				.append(
+					$(document.createElement("td"))
+					.attr("colspan", 2)
+					.html("&#x25B2;")
+				)
+				.click( function(e) {
+					e.stopPropagation();
+					selectPrevResult();
+				})
+			);
+			currentTable.append(
+				$(document.createElement("tr"))
+				.addClass("nitdoc-qs-overflow-down")
+				.addClass(count >= maxSize ? "nitdoc-qs-overflow-active" : "nitdoc-qs-overflow-inactive")
+				.append(
+					$(document.createElement("td"))
+					.attr("colspan", 2)
+					.html("&#x25BC;")
+				)
+				.click( function(e) {
+					e.stopPropagation();
+					console.log("nest");
+					selectNextResult();
+				})
+			);
+		}
+		if(results.matches.length == 0) {
+			currentTable.prepend(
+				$("<tr class='nitdoc-qs-noresult'>")
+				.append(
+					$("<td colspan='2'>")
+					.html("Sorry, there is no match, best results are:")
+				)
+			);
+		}
+
+		// Initialize table
+		$("body").append(currentTable);
+		resizeResultsTable();
+		if(currentTable.find("tr").length > 0) {
+			setIndex(0);
+		}
+	}
+
+	// adds a result row to the current result table
+	var addResultRow = function(index, name, txt, url, cls) {
+		currentTable.append(
+			$(document.createElement("tr"))
+			.addClass("nitdoc-qs-row")
+			.data("searchDetails", {name: name, url: url})
+			.data("index", index)
+			.append(
+				$(document.createElement("td")).html(name)
+				.addClass(cls)
+			)
+			.append(
+				$(document.createElement("td"))
+					.addClass("nitdoc-qs-info")
+					.html(txt + "&nbsp;&raquo;")
+			)
+			.mouseover( function() {
+				setIndex($(this).data("index"));
+			})
+			.mouseout( function() {
+				$(this).removeClass("nitdoc-qs-active");
+			 })
+			.click( function() {
+				window.location = $(this).data("searchDetails")["url"];
+			})
+		);
+	}
+
+	// adapts result table to content
+	var resizeResultsTable = function() {
+		currentTable.offset({
+			left: searchField.offset().left + (searchField.outerWidth() - currentTable.outerWidth()),
+			top: searchField.offset().top + searchField.outerHeight()
+		});
+	}
+
+	// select row at index
+	var setIndex = function(index) {
+		$(currentTable.find("tr.nitdoc-qs-row")[currentIndex]).removeClass("nitdoc-qs-active");
+		currentIndex = index;
+		var currentRow = $(currentTable.find("tr.nitdoc-qs-row")[currentIndex]);
+		currentRow.addClass("nitdoc-qs-active");
+		//searchField.val(currentRow.data("searchDetails").name);
+	}
+
+	var hasPrev = function(index) {
+		return index - 1 >= 0;
+	}
+
+	var hasNext = function(index) {
+		return index + 1 < currentTable.find("tr.nitdoc-qs-row").length;
+	}
+
+	var selectPrevResult = function() {
+		if(hasPrev(currentIndex)) {
+			setIndex(currentIndex - 1);
+			if(!$(currentTable.find("tr.nitdoc-qs-row")[currentIndex]).is(":visible")) {
+				currentTable.find("tr.nitdoc-qs-row:visible").last().hide();
+				currentTable.find("tr.nitdoc-qs-overflow-down").addClass("nitdoc-qs-overflow-active");
+				$(currentTable.find("tr.nitdoc-qs-row")[currentIndex]).show();
+				if(!hasPrev(currentIndex)) {
+					currentTable.find("tr.nitdoc-qs-overflow-up").removeClass("nitdoc-qs-overflow-active");
+				}
+				resizeResultsTable();
+			}
+		}
+	}
+
+	var selectNextResult = function() {
+		if(hasNext(currentIndex)) {
+			setIndex(currentIndex + 1);
+			if(!$(currentTable.find("tr.nitdoc-qs-row")[currentIndex]).is(":visible")) {
+				currentTable.find("tr.nitdoc-qs-row:visible").first().hide();
+				currentTable.find("tr.nitdoc-qs-overflow-up").addClass("nitdoc-qs-overflow-active");
+				$(currentTable.find("tr.nitdoc-qs-row")[currentIndex]).show();
+				if(!hasNext(currentIndex)) {
+					currentTable.find("tr.nitdoc-qs-overflow-down").removeClass("nitdoc-qs-overflow-active");
+				}
+				resizeResultsTable();
+			}
 		}
 	}
 
 	// Load selected search result page
 	var goToResult = function() {
 		if(currentIndex > -1) {
-			window.location = $(currentTable.find("tr")[currentIndex]).data("searchDetails").url;
+			window.location = $(currentTable.find("tr.nitdoc-qs-row")[currentIndex]).data("searchDetails").url;
 			return;
 		}
 
@@ -241,7 +357,8 @@ Nitdoc.QuickSearch = function() {
 	// Public interface
 	var quicksearch = {
 		enableQuickSearch: enableQuickSearch,
-		doKeyAction: doKeyAction,
+		doKeyUpAction: doKeyUpAction,
+		doKeyDownAction: doKeyDownAction,
 		closeResultsTable: closeResultsTable
 	};
 
@@ -256,36 +373,11 @@ $(document).ready(function() {
  * Utils
  */
 
-// Calculate levenshtein distance beetween two strings
-// see: http://en.wikipedia.org/wiki/Levenshtein_distance
-String.prototype.levenshtein = function(other) {
-	var matrix = new Array();
-
-	for(var i = 0; i <= this.length; i++) {
-		matrix[i] = new Array();
-		matrix[i][0] = i;
+String.prototype.startsWith = function(prefix, caseSensitive) {
+	if(caseSensitive) {
+		return this.toUpperCase().indexOf(prefix.toUpperCase()) === 0;
 	}
-	for(var j = 0; j <= other.length; j++) {
-		matrix[0][j] = j;
-	}
-	var cost = 0;
-	for(var i = 1; i <= this.length; i++) {
-		for(var j = 1; j <= other.length; j++) {
-			if(this.charAt(i - 1) == other.charAt(j - 1)) {
-				cost = 0;
-			} else if(this.charAt(i - 1).toLowerCase() == other.charAt(j - 1).toLowerCase()) {
-				cost = 0.5;
-			} else {
-				cost = 1;
-			}
-			matrix[i][j] = Math.min(
-				matrix[i - 1][j] + 1, // deletion
-				matrix[i][j - 1] + 1, // insertion
-				matrix[i - 1][j - 1] + cost // substitution
-			);
-		}
-	}
-	return matrix[this.length][other.length]
+    return this.indexOf(prefix) === 0;
 }
 
 // Compare two strings using Sorensen-Dice Coefficient
@@ -305,11 +397,7 @@ String.prototype.dice = function(other) {
 		var bigram1 = this.substr(i, 2);
 		for(var j = 0; j < length2; j++) {
 			if(bigram1 == bigrams2[j]) {
-				intersection += 2;
-				bigrams2[j] = null;
-				break;
-			} else if (bigram1 && bigrams2[j] && bigram1.toLowerCase() == bigrams2[j].toLowerCase()) {
-				intersection += 1;
+				intersection++;
 				bigrams2[j] = null;
 				break;
 			}

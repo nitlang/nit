@@ -1,0 +1,8 @@
+Grammar x;
+
+Lexer
+    c = Shortest ('{' Any* '}') ;
+
+Parser
+    p = c ;
+
