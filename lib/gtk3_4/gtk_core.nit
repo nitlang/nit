@@ -320,6 +320,11 @@ extern GtkGrid `{GtkGrid *`}
 	fun attach( child : GtkWidget, left, top, width, height : Int ) `{
 		gtk_grid_attach( recv, child, left, top, width, height );
 	`}
+
+	# Get the child of the Grid at the given position
+	fun get_child_at( left : Int, top : Int ): GtkWidget is extern `{
+		return gtk_grid_get_child_at( recv, left, top );
+	`}
 end
 
 #The tree interface used by GtkTreeView
