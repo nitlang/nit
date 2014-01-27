@@ -60,16 +60,16 @@ extern class Group `{struct group*`}
 	fun name: String import NativeString::to_s `{ return NativeString_to_s(recv->gr_name); `}
 	fun passwd: String import NativeString::to_s `{ return NativeString_to_s(recv->gr_passwd); `}
 	fun gid: Int `{ return recv->gr_gid; `}
-	fun mem: Array[String] import Array, Array::add, NativeString::to_s, String as (nullable Object) `{
-		char **mem;
+	fun members: Array[String] import Array, Array::add, NativeString::to_s, String as (nullable Object) `{
+		char **members;
 		int m;
 		Array ret;
 
-		mem = recv->gr_mem;
+		members = recv->gr_mem;
 		ret = new_Array();
 
-		for (m = 0; mem[m] != NULL; m++)
-			Array_add(ret, String_as_nullable_Object( NativeString_to_s(mem[m]) ));
+		for (m = 0; members[m] != NULL; m++)
+			Array_add(ret, String_as_nullable_Object( NativeString_to_s(members[m]) ));
 
 		return ret;
 	`}
