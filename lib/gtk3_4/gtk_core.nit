@@ -112,6 +112,7 @@ end
 extern GtkContainer `{GtkContainer *`}
 	super GtkWidget
 
+	# Add a widget to the container
 	fun add( widget : GtkWidget ) is extern `{
 		gtk_container_add( recv, widget );
 	`}
