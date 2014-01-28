@@ -251,7 +251,7 @@ class List[E]
 end
 
 # This is the iterator class of List
-class ListIterator[E]
+private class ListIterator[E]
 	super IndexedIterator[E]
 	redef fun item do return _node.item
 
