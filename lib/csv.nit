@@ -43,6 +43,20 @@ class CSVDocument
 		for line in lines do str += line.join(";") + "\n"
 		return str
 	end
+	
+	fun read_all: String do
+		var result
+		var lines = new IFStream.open(self.file)
+		lines.fill_buffer
+		if not lines.eof then
+			result = lines.read_all
+			lines.close
+			return result
+		else
+			lines.close
+			return "Fichier vide."
+		end
+	end
 
 	fun save do
 		var out = new OFStream.open(self.file)
