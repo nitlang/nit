@@ -76,7 +76,7 @@ interface IStream
 		end
 	end
 
-	# Is there something to read.
+	# Is there something to read. Returns "false" if there is something to read.
 	fun eof: Bool is abstract
 end
 
