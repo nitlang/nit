@@ -37,6 +37,35 @@ class CSVDocument
 		for value in values do line.add(value.to_s)
 		lines.add(line)
 	end
+	
+	fun get_header: String
+	do
+		var line = new IFStream.open(self.file)
+		line.fill_buffer
+		if not line.eof then
+			var result = line.read_line
+			line.close
+			return result
+		else
+			line.close
+			return "Fichier vide."
+		end
+	end
+	
+	fun read_all: String
+	do
+		var result
+		var lines = new IFStream.open(self.file)
+		lines.fill_buffer
+		if not lines.eof then
+			result = lines.read_all
+			lines.close
+			return result
+		else
+			lines.close
+			return "Fichier vide."
+		end
+	end
 
 	redef fun to_s do
 		var str = header.join(";") + "\n"
