@@ -56,10 +56,17 @@ end
 extern class Group `{struct group*`}
 	new from_gid(gid: Int) `{ return getgrgid(gid); `}
 	new from_name(name: String) import String::to_cstring `{ return getgrnam( String_to_cstring(name) ); `}
-
+	
+	# Return the name of the group
 	fun name: String import NativeString::to_s `{ return NativeString_to_s(recv->gr_name); `}
+	
+	# Return the password of the group
 	fun passwd: String import NativeString::to_s `{ return NativeString_to_s(recv->gr_passwd); `}
+	
+	# Return the id of the group
 	fun gid: Int `{ return recv->gr_gid; `}
+	
+	# Return all the members of the group
 	fun members: Array[String] import Array, Array::add, NativeString::to_s, String as (nullable Object) `{
 		char **members;
 		int m;
