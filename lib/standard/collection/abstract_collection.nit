@@ -151,6 +151,7 @@ interface Iterator[E]
 end
 
 # A collection that contains only one item.
+# Used to pass arguments by reference
 class Container[E]
 	super Collection[E]
 
