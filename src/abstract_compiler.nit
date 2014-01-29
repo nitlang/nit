@@ -193,7 +193,7 @@ redef class ModelBuilder
 			p = orig_dir.join_path(p).simplify_path
 			cc_includes += " -I \"" + p + "\""
 		end
-		makefile.write("CC = ccache cc\nCFLAGS = -g -O2\nCINCL = {cc_includes}\nLDFLAGS ?= \nLDLIBS  ?= -lm -lgc\n\n")
+		makefile.write("CC = ccache cc\nCFLAGS = -g -O2\nCINCL = {cc_includes}\nLDFLAGS ?= \nLDLIBS  ?= -lunwind -lm -lgc\n\n")
 		makefile.write("all: {outpath}\n\n")
 
 		var ofiles = new Array[String]
@@ -310,12 +310,18 @@ abstract class AbstractCompiler
 	# This method call compile_header_strucs method that has to be refined
 	fun compile_header do
 		var v = self.header
+		self.header.add_decl("#define UNW_LOCAL_ONLY")
 		self.header.add_decl("#include <stdlib.h>")
 		self.header.add_decl("#include <stdio.h>")
 		self.header.add_decl("#include <string.h>")
+		self.header.add_decl("#include <libunwind.h>")
+		self.header.add_decl("#include <signal.h>")
 		self.header.add_decl("#include <gc_chooser.h>")
 
 		compile_header_structs
+
+		# Signal handler function prototype
+		self.header.add_decl("void show_backtrace(int);")
 
 		# Global variable used by the legacy native interface
 		self.header.add_decl("extern int glob_argc;")
@@ -348,7 +354,38 @@ abstract class AbstractCompiler
 				v.compiler.header.add_decl("extern long count_type_test_skipped_{tag};")
 			end
 		end
+
+		v.add_decl("void show_backtrace (int signo) \{")
+		v.add_decl("char* opt = getenv(\"NIT_NO_STACK\");")
+		v.add_decl("unw_cursor_t cursor;")
+		v.add_decl("if(opt==NULL)\{")
+		v.add_decl("unw_context_t uc;")
+		v.add_decl("unw_word_t ip;")
+		v.add_decl("char* procname = malloc(sizeof(char) * 100);")
+		v.add_decl("unw_getcontext(&uc);")
+		v.add_decl("unw_init_local(&cursor, &uc);")
+		v.add_decl("printf(\"-------------------------------------------------\\n\");")
+		v.add_decl("printf(\"-- C Stack Trace   ------------------------------\\n\");")
+		v.add_decl("printf(\"-------------------------------------------------\\n\");")
+		v.add_decl("while (unw_step(&cursor) > 0) \{")
+		v.add_decl("	unw_get_proc_name(&cursor, procname, 100, &ip);")
+		v.add_decl("	printf(\"` %s \\n\",procname);")
+		v.add_decl("\}")
+		v.add_decl("printf(\"-------------------------------------------------\\n\");")
+		v.add_decl("free(procname);")
+		v.add_decl("\}")
+		v.add_decl("exit(signo);")
+		v.add_decl("\}")
+
 		v.add_decl("int main(int argc, char** argv) \{")
+
+		v.add("signal(SIGABRT, show_backtrace);")
+		v.add("signal(SIGFPE, show_backtrace);")
+		v.add("signal(SIGILL, show_backtrace);")
+		v.add("signal(SIGINT, show_backtrace);")
+		v.add("signal(SIGTERM, show_backtrace);")
+		v.add("signal(SIGSEGV, show_backtrace);")
+
 		v.add("glob_argc = argc; glob_argv = argv;")
 		v.add("initialize_gc_option();")
 		var main_type = mainmodule.sys_type
@@ -391,6 +428,7 @@ abstract class AbstractCompiler
 				v.add("printf(\"\\t%ld (%.2f%%)\\n\", count_type_test_total_{tag}, 100.0*count_type_test_total_{tag}/count_type_test_total_total);")
 			end
 		end
+
 		v.add("return 0;")
 		v.add("\}")
 	end
@@ -913,7 +951,7 @@ abstract class AbstractCompilerVisitor
 		else
 			self.add("fprintf(stderr, \"\\n\");")
 		end
-		self.add("exit(1);")
+		self.add("show_backtrace(1);")
 	end
 
 	# Add a dynamic cast
@@ -1561,7 +1599,7 @@ redef class AInternMethPropdef
 			return
 		end
 		if pname == "exit" then
-			v.add("exit({arguments[1]});")
+			v.add("show_backtrace({arguments[1]});")
 			return
 		else if pname == "sys" then
 			v.ret(v.new_expr("glob_sys", ret.as(not null)))
@@ -1611,7 +1649,7 @@ redef class AExternMethPropdef
 		var nextern = self.n_extern
 		if nextern == null then
 			v.add("fprintf(stderr, \"NOT YET IMPLEMENTED nitni for {mpropdef} at {location.to_s}\\n\");")
-			v.add("exit(1);")
+			v.add("show_backtrace(1);")
 			return
 		end
 		externname = nextern.text.substring(1, nextern.text.length-2)
@@ -1643,7 +1681,7 @@ redef class AExternInitPropdef
 		var nextern = self.n_extern
 		if nextern == null then
 			v.add("printf(\"NOT YET IMPLEMENTED nitni for {mpropdef} at {location.to_s}\\n\");")
-			v.add("exit(1);")
+			v.add("show_backtrace(1);")
 			return
 		end
 		externname = nextern.text.substring(1, nextern.text.length-2)
