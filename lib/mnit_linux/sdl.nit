@@ -156,6 +156,7 @@ extern SDLDisplay in "C" `{SDL_Surface *`}
 	fun show_cursor( show: Bool ) `{ SDL_ShowCursor( show ); `}
 end
 
+# Basic Drawing figures
 extern SDLDrawable in "C" `{SDL_Surface*`}
 	super Drawable
 
