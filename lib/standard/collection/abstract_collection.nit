@@ -223,7 +223,7 @@ end
 
 # Abstract sets.
 #
-# Set contains contains only one element with the same value (according to ==).
+# Set is a collection without ducplicates (according to ==)
 #      var s: Set[String] = new ArraySet[String]
 #      var a = "Hello"
 #      var b = "Hel" + "lo"
