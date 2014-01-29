@@ -26,7 +26,8 @@ module sort_downloads
 import opts
 
 `{
-#include <errno.h>
+	#include <errno.h>
+	#include <string.h>
 `}
 
 # Local config
