@@ -251,6 +251,14 @@ redef class String
 		end
 	end
 
+	# Return the canonicalized absolute pathname (see POSIX function `realpath`)
+	fun realpath: String do
+		var cs = to_cstring.file_realpath
+		var res = cs.to_s_with_copy
+		# cs.free_malloc # FIXME memory leak
+		return res
+	end
+
 	# Simplify a file path by remove useless ".", removing "//", and resolving ".."
 	# ".." are not resolved if they start the path
 	# starting "/" is not removed
@@ -362,6 +370,7 @@ redef class NativeString
 	private fun file_mkdir: Bool is extern "string_NativeString_NativeString_file_mkdir_0"
 	private fun file_delete: Bool is extern "string_NativeString_NativeString_file_delete_0"
 	private fun file_chdir is extern "string_NativeString_NativeString_file_chdir_0"
+	private fun file_realpath: NativeString is extern "file_NativeString_realpath"
 end
 
 extern FileStat `{ struct stat * `}
