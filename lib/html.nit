@@ -36,6 +36,11 @@ class HTMLPage
 	private var root = new HTMLTag("html")
 	private var current: HTMLTag = root
 	private var stack = new List[HTMLTag]
+	
+	private var version: String
+        init(version: String) do
+                self.version = version
+        end
 
 	# Render the page as a html string
 	fun render: String do
@@ -46,7 +51,7 @@ class HTMLPage
 		open("body")
 		body
 		close("body")
-		return "<!DOCTYPE html>{root.html}"
+		return self.generate_doctype + "{root.html}"
 	end
 
 	# Add a html tag to the current element
@@ -56,6 +61,21 @@ class HTMLPage
 		current.add(node)
 		return node
 	end
+
+	# Return the doctype element
+	private fun generate_doctype: String do
+                # HTML4
+                if version == "html4" then
+                        return "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">"
+                end
+                # xHTML
+                if version == "xhtml" then
+                        return "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict///EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">"
+                end
+
+                # HTML5 or other
+                return "<!DOCTYPE html>"
+        end
 
 	# Add a raw html string
 	# add_html("<a href='#top'>top</a>")
