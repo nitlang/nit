@@ -53,9 +53,9 @@ class List[E]
 	end
 
 	# O(n)
-	redef fun has(e) do return search_node_after(e, _head) != null
+	redef fun contains(e) do return search_node_after(e, _head) != null
 
-	redef fun has_only(e)
+	redef fun contains_only(e)
 	do
 		var node = _head
 		while node != null do
@@ -130,6 +130,33 @@ class List[E]
 		_tail = l._tail
 		l.clear
 	end
+	
+	# Revert the list so that the last item will be the first
+	##
+	# O(n)
+	fun revert
+	do
+		var tmpList = new List[E]
+		var len = self.length
+		
+		#Copie dans le sens décroissant des elements ds liste temporaire
+		for i in [len..0] do
+			var tmpItem = self[i]
+			tmpList.append(tmpItem)
+		end
+		#remplace les élements de la list par ceux de la liste tmp
+		#for j in self do
+		#	self[j] = tmpList[j]
+		#end
+		self.cloneFrom(tmpList)
+	end
+	
+	fun cloneFrom(l : List[E])
+	do
+		for j in l do
+			self[j] = l[j]
+		end
+	end
 
 # Remove elements
 
@@ -180,7 +207,7 @@ class List[E]
 	end
 
 
-	redef fun iterator: ListIterator[E] do return new ListIterator[E](self)
+	#redef fun iterator: ListIterator[E] do return new ListIterator[E](self)
 
 	# Build an empty list.
 	init do end
@@ -251,7 +278,7 @@ class List[E]
 end
 
 # This is the iterator class of List
-class ListIterator[E]
+private class ListIterator[E]
 	super IndexedIterator[E]
 	redef fun item do return _node.item
 
