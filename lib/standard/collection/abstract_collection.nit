@@ -150,52 +150,6 @@ interface Iterator[E]
 	fun is_ok: Bool is abstract
 end
 
-# A collection that contains only one item.
-class Container[E]
-	super Collection[E]
-
-	redef fun first do return _item
-
-	redef fun is_empty do return false
-
-	redef fun length do return 1
-
-	redef fun has(an_item) do return _item == an_item
-
-	redef fun has_only(an_item) do return _item == an_item
-
-	redef fun count(an_item)
-	do
-		if _item == an_item then
-			return 1
-		else
-			return 0
-		end
-	end
-
-	redef fun iterator do return new ContainerIterator[E](self)
-
-	# Create a new instance with a given initial value.
-	init(e: E) do _item = e
-
-	# The stored item
-	readable writable var _item: E
-end
-
-# This iterator is quite stupid since it is used for only one item.
-class ContainerIterator[E]
-	super Iterator[E]
-	redef fun item do return _container.item
-
-	redef fun next do _is_ok = false
-
-	init(c: Container[E]) do _container = c
-
-	redef readable var _is_ok: Bool = true
-
-	var _container: Container[E]
-end
-
 # Items can be removed from this collection
 interface RemovableCollection[E]
 	super Collection[E]
