@@ -53,7 +53,7 @@ class HTMLPage
 	# add("div").attr("id", "mydiv").text("My Div")
 	fun add(tag: String): HTMLTag do
 		var node = new HTMLTag(tag)
-		current.add(node)
+		current.add_inner(node)
 		return node
 	end
 
@@ -157,6 +157,20 @@ class HTMLTag
 	# var ul = new HTMLTag("ul")
 	# ul.add(new HTMLTag("li"))
 	fun add(child: HTMLTag) do children.add(child)
+	
+	# Add a HTML 'parent' to self
+	# var li = new HTMLTag("li")
+	# var ul = new HTMLTag("ul")
+	# li.add_outer(ul)
+	fun add_outer(parent: HTMLTag) do
+                parent.children.add(self)
+        end
+
+	# Add a HTML 'child' to self
+	# var ul = new HTMLTag("ul")
+	# ul.add_inner(new HTMLTag("li"))
+        fun add_inner(child: HTMLTag) do children.add(child)
+
 
 	# List of children HTML elements
 	var children: Set[HTMLTag] = new HashSet[HTMLTag]
