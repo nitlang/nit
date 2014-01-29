@@ -23,9 +23,14 @@ module privileges
 import opts
 
 class UserGroup
+	
+	# Contain the name of the user
 	var user: String
+	
+	# Contain the name of the group and is nullable by default
 	var group: nullable String
 
+	# Drop privileges of a user and set his privileges back to default (program privileges)
 	fun drop_privileges
 	do
 		var passwd = new Passwd.from_name(user)

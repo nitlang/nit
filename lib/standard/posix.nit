@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Services conforming to POSIX
+# User information access and control service conforming to POSIX
 module posix
 
 import string
@@ -56,20 +56,27 @@ end
 extern class Group `{struct group*`}
 	new from_gid(gid: Int) `{ return getgrgid(gid); `}
 	new from_name(name: String) import String::to_cstring `{ return getgrnam( String_to_cstring(name) ); `}
-
+	
+	# Return the name of the group
 	fun name: String import NativeString::to_s `{ return NativeString_to_s(recv->gr_name); `}
+	
+	# Return the password of the group
 	fun passwd: String import NativeString::to_s `{ return NativeString_to_s(recv->gr_passwd); `}
+	
+	# Return the id of the group
 	fun gid: Int `{ return recv->gr_gid; `}
-	fun mem: Array[String] import Array, Array::add, NativeString::to_s, String as (nullable Object) `{
-		char **mem;
+	
+	# Return all the members of the group
+	fun members: Array[String] import Array, Array::add, NativeString::to_s, String as (nullable Object) `{
+		char **members;
 		int m;
 		Array ret;
 
-		mem = recv->gr_mem;
+		members = recv->gr_mem;
 		ret = new_Array();
 
-		for (m = 0; mem[m] != NULL; m++)
-			Array_add(ret, String_as_nullable_Object( NativeString_to_s(mem[m]) ));
+		for (m = 0; members[m] != NULL; m++)
+			Array_add(ret, String_as_nullable_Object( NativeString_to_s(members[m]) ));
 
 		return ret;
 	`}
