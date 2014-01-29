@@ -2365,55 +2365,14 @@ val* var77 /* : Parser */;
 val* var_parser /* var parser: Parser */;
 val* var78 /* : Start */;
 val* var_tree /* var tree: Start */;
-val* var79 /* : nullable AModule */;
-val* var_nmodule /* var nmodule: nullable AModule */;
-val* var80 /* : null */;
-short int var81 /* : Bool */;
-val* var82 /* : EOF */;
-val* var_neof /* var neof: EOF */;
-short int var83 /* : Bool */;
-int cltype;
-int idtype;
+static val* varonce79;
+val* var80 /* : String */;
+char* var81 /* : NativeString */;
+long var82 /* : Int */;
+val* var83 /* : String */;
 val* var84 /* : String */;
-val* var85 /* : null */;
-static val* varonce86;
-val* var87 /* : String */;
-char* var88 /* : NativeString */;
-long var89 /* : Int */;
-val* var90 /* : String */;
-val* var91 /* : String */;
 val* var_mod_name /* var mod_name: String */;
-val* var92 /* : nullable AModuledecl */;
-val* var_decl /* var decl: nullable AModuledecl */;
-val* var93 /* : null */;
-short int var94 /* : Bool */;
-val* var95 /* : AModuleName */;
-val* var96 /* : TId */;
-val* var97 /* : String */;
-val* var_decl_name /* var decl_name: String */;
-short int var98 /* : Bool */;
-val* var99 /* : AModuleName */;
-static val* varonce100;
-val* var101 /* : String */;
-char* var102 /* : NativeString */;
-long var103 /* : Int */;
-val* var104 /* : String */;
-static val* varonce105;
-val* var106 /* : String */;
-char* var107 /* : NativeString */;
-long var108 /* : Int */;
-val* var109 /* : String */;
-val* var110 /* : Array[Object] */;
-long var111 /* : Int */;
-val* var112 /* : NativeArray[Object] */;
-val* var113 /* : String */;
-val* var114 /* : MModule */;
-val* var115 /* : Model */;
-val* var116 /* : Location */;
-val* var_mmodule /* var mmodule: MModule */;
-val* var117 /* : Array[AModule] */;
-val* var118 /* : HashMap[MModule, AModule] */;
-val* var119 /* : HashMap[String, AModule] */;
+val* var85 /* : nullable AModule */;
 var_owner = p0;
 var_filename = p1;
 var1 = ((val* (*)(val*))(var_filename->class->vft[COLOR_file__String__file_extension]))(var_filename) /* file_extension on <var_filename:String>*/;
@@ -2594,114 +2553,19 @@ var_parser = var77;
 var78 = ((val* (*)(val*))(var_parser->class->vft[COLOR_parser__Parser__parse]))(var_parser) /* parse on <var_parser:Parser>*/;
 var_tree = var78;
 ((void (*)(val*))(var_file->class->vft[COLOR_stream__IOS__close]))(var_file) /* close on <var_file:IFStream>*/;
-var79 = ((val* (*)(val*))(var_tree->class->vft[COLOR_parser_nodes__Start__n_base]))(var_tree) /* n_base on <var_tree:Start>*/;
-var_nmodule = var79;
-var80 = NULL;
-if (var_nmodule == NULL) {
-var81 = 1; /* is null */
+if (varonce79) {
+var80 = varonce79;
 } else {
-var81 = 0; /* arg is null but recv is not */
+var81 = ".nit";
+var82 = 4;
+var83 = string__NativeString__to_s_with_length(var81, var82);
+var80 = var83;
+varonce79 = var80;
 }
-if (var81){
-var82 = ((val* (*)(val*))(var_tree->class->vft[COLOR_parser_nodes__Start__n_eof]))(var_tree) /* n_eof on <var_tree:Start>*/;
-var_neof = var82;
-/* <var_neof:EOF> isa AError */
-cltype = type_parser_nodes__AError.color;
-idtype = type_parser_nodes__AError.id;
-if(cltype >= var_neof->type->table_size) {
-var83 = 0;
-} else {
-var83 = var_neof->type->type_table[cltype] == idtype;
-}
-if (!var83) {
-fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 398);
-exit(1);
-}
-var84 = ((val* (*)(val*))(var_neof->class->vft[COLOR_lexer__AError__message]))(var_neof) /* message on <var_neof:EOF(AError)>*/;
-((void (*)(val*, val*, val*))(self->class->vft[COLOR_modelbuilder__ModelBuilder__error]))(self, var_neof, var84) /* error on <self:ModelBuilder>*/;
-var85 = NULL;
+var84 = ((val* (*)(val*, val*))(var_filename->class->vft[COLOR_file__String__basename]))(var_filename, var80) /* basename on <var_filename:String>*/;
+var_mod_name = var84;
+var85 = ((val* (*)(val*, val*, val*, val*))(self->class->vft[COLOR_modelbuilder__ModelBuilder__load_module_commons]))(self, var_owner, var_tree, var_mod_name) /* load_module_commons on <self:ModelBuilder>*/;
 var = var85;
-goto RET_LABEL;
-} else {
-}
-if (varonce86) {
-var87 = varonce86;
-} else {
-var88 = ".nit";
-var89 = 4;
-var90 = string__NativeString__to_s_with_length(var88, var89);
-var87 = var90;
-varonce86 = var87;
-}
-var91 = ((val* (*)(val*, val*))(var_filename->class->vft[COLOR_file__String__basename]))(var_filename, var87) /* basename on <var_filename:String>*/;
-var_mod_name = var91;
-var92 = ((val* (*)(val*))(var_nmodule->class->vft[COLOR_parser_nodes__AModule__n_moduledecl]))(var_nmodule) /* n_moduledecl on <var_nmodule:nullable AModule(AModule)>*/;
-var_decl = var92;
-var93 = NULL;
-if (var_decl == NULL) {
-var94 = 1; /* is null */
-} else {
-var94 = 0; /* arg is null but recv is not */
-}
-if (var94){
-} else {
-var95 = ((val* (*)(val*))(var_decl->class->vft[COLOR_parser_nodes__AModuledecl__n_name]))(var_decl) /* n_name on <var_decl:nullable AModuledecl(AModuledecl)>*/;
-var96 = ((val* (*)(val*))(var95->class->vft[COLOR_parser_nodes__AModuleName__n_id]))(var95) /* n_id on <var95:AModuleName>*/;
-var97 = ((val* (*)(val*))(var96->class->vft[COLOR_parser_nodes__Token__text]))(var96) /* text on <var96:TId>*/;
-var_decl_name = var97;
-var98 = ((short int (*)(val*, val*))(var_decl_name->class->vft[COLOR_kernel__Object___33d_61d]))(var_decl_name, var_mod_name) /* != on <var_decl_name:String>*/;
-if (var98){
-var99 = ((val* (*)(val*))(var_decl->class->vft[COLOR_parser_nodes__AModuledecl__n_name]))(var_decl) /* n_name on <var_decl:nullable AModuledecl(AModuledecl)>*/;
-if (varonce100) {
-var101 = varonce100;
-} else {
-var102 = "Error: module name missmatch; declared ";
-var103 = 39;
-var104 = string__NativeString__to_s_with_length(var102, var103);
-var101 = var104;
-varonce100 = var101;
-}
-if (varonce105) {
-var106 = varonce105;
-} else {
-var107 = " file named ";
-var108 = 12;
-var109 = string__NativeString__to_s_with_length(var107, var108);
-var106 = var109;
-varonce105 = var106;
-}
-var110 = NEW_array__Array(&type_array__Arraykernel__Object);
-{ /* var110 = array_instance Array[Object] */
-var111 = 4;
-var112 = NEW_array__NativeArray(var111, &type_array__NativeArraykernel__Object);
-((struct instance_array__NativeArray*)var112)->values[0] = (val*) var101;
-((struct instance_array__NativeArray*)var112)->values[1] = (val*) var_decl_name;
-((struct instance_array__NativeArray*)var112)->values[2] = (val*) var106;
-((struct instance_array__NativeArray*)var112)->values[3] = (val*) var_mod_name;
-((void (*)(val*, val*, long))(var110->class->vft[COLOR_array__Array__with_native]))(var110, var112, var111) /* with_native on <var110:Array[Object]>*/;
-CHECK_NEW_array__Array(var110);
-}
-var113 = ((val* (*)(val*))(var110->class->vft[COLOR_string__Object__to_s]))(var110) /* to_s on <var110:Array[Object]>*/;
-((void (*)(val*, val*, val*))(self->class->vft[COLOR_modelbuilder__ModelBuilder__error]))(self, var99, var113) /* error on <self:ModelBuilder>*/;
-} else {
-}
-}
-var114 = NEW_model_base__MModule(&type_model_base__MModule);
-var115 = ((val* (*)(val*))(self->class->vft[COLOR_modelbuilder__ModelBuilder__model]))(self) /* model on <self:ModelBuilder>*/;
-var116 = ((val* (*)(val*))(var_nmodule->class->vft[COLOR_parser_nodes__ANode__location]))(var_nmodule) /* location on <var_nmodule:nullable AModule(AModule)>*/;
-((void (*)(val*, val*, val*, val*, val*))(var114->class->vft[COLOR_model_base__MModule__init]))(var114, var115, var_owner, var_mod_name, var116) /* init on <var114:MModule>*/;
-CHECK_NEW_model_base__MModule(var114);
-var_mmodule = var114;
-((void (*)(val*, val*))(var_nmodule->class->vft[COLOR_modelbuilder__AModule__mmodule_61d]))(var_nmodule, var_mmodule) /* mmodule= on <var_nmodule:nullable AModule(AModule)>*/;
-var117 = ((val* (*)(val*))(self->class->vft[COLOR_modelbuilder__ModelBuilder__nmodules]))(self) /* nmodules on <self:ModelBuilder>*/;
-((void (*)(val*, val*))(var117->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var117, var_nmodule) /* add on <var117:Array[AModule]>*/;
-var118 = ((val* (*)(val*))(self->class->vft[COLOR_modelbuilder__ModelBuilder__mmodule2nmodule]))(self) /* mmodule2nmodule on <self:ModelBuilder>*/;
-((void (*)(val*, val*, val*))(var118->class->vft[COLOR_abstract_collection__Map___91d_93d_61d]))(var118, var_mmodule, var_nmodule) /* []= on <var118:HashMap[MModule, AModule]>*/;
-var119 = ((val* (*)(val*))(self->class->vft[COLOR_modelbuilder__ModelBuilder__loaded_nmodules]))(self) /* loaded_nmodules on <self:ModelBuilder>*/;
-((void (*)(val*, val*, val*))(var119->class->vft[COLOR_abstract_collection__Map___91d_93d_61d]))(var119, var_module_path, var_nmodule) /* []= on <var119:HashMap[String, AModule]>*/;
-((void (*)(val*, val*))(self->class->vft[COLOR_modelbuilder__ModelBuilder__build_module_importation]))(self, var_nmodule) /* build_module_importation on <self:ModelBuilder>*/;
-var = var_nmodule;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -2711,6 +2575,215 @@ val* VIRTUAL_modelbuilder__ModelBuilder__load_module(val* self, val* p0, val* p1
 val* var /* : nullable AModule */;
 val* var1 /* : nullable AModule */;
 var1 = modelbuilder__ModelBuilder__load_module(self, p0, p1);
+var = var1;
+RET_LABEL:;
+return var;
+}
+/* method modelbuilder#ModelBuilder#load_rt_module for (self: ModelBuilder, MModule, AModule, String): nullable AModule */
+val* modelbuilder__ModelBuilder__load_rt_module(val* self, val* p0, val* p1, val* p2) {
+val* var /* : nullable AModule */;
+val* var_owner /* var owner: MModule */;
+val* var_nmodule /* var nmodule: AModule */;
+val* var_mod_name /* var mod_name: String */;
+val* var1 /* : MModule */;
+val* var2 /* : Model */;
+val* var3 /* : Location */;
+val* var_mmodule /* var mmodule: MModule */;
+val* var4 /* : Array[AModule] */;
+val* var5 /* : HashMap[MModule, AModule] */;
+val* var6 /* : Array[MModule] */;
+val* var_imported_modules /* var imported_modules: Array[MModule] */;
+val* var7 /* : MVisibility */;
+var_owner = p0;
+var_nmodule = p1;
+var_mod_name = p2;
+var1 = NEW_model_base__MModule(&type_model_base__MModule);
+var2 = ((val* (*)(val*))(self->class->vft[COLOR_modelbuilder__ModelBuilder__model]))(self) /* model on <self:ModelBuilder>*/;
+var3 = ((val* (*)(val*))(var_nmodule->class->vft[COLOR_parser_nodes__ANode__location]))(var_nmodule) /* location on <var_nmodule:AModule>*/;
+((void (*)(val*, val*, val*, val*, val*))(var1->class->vft[COLOR_model_base__MModule__init]))(var1, var2, var_owner, var_mod_name, var3) /* init on <var1:MModule>*/;
+CHECK_NEW_model_base__MModule(var1);
+var_mmodule = var1;
+((void (*)(val*, val*))(var_nmodule->class->vft[COLOR_modelbuilder__AModule__mmodule_61d]))(var_nmodule, var_mmodule) /* mmodule= on <var_nmodule:AModule>*/;
+var4 = ((val* (*)(val*))(self->class->vft[COLOR_modelbuilder__ModelBuilder__nmodules]))(self) /* nmodules on <self:ModelBuilder>*/;
+((void (*)(val*, val*))(var4->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var4, var_nmodule) /* add on <var4:Array[AModule]>*/;
+var5 = ((val* (*)(val*))(self->class->vft[COLOR_modelbuilder__ModelBuilder__mmodule2nmodule]))(self) /* mmodule2nmodule on <self:ModelBuilder>*/;
+((void (*)(val*, val*, val*))(var5->class->vft[COLOR_abstract_collection__Map___91d_93d_61d]))(var5, var_mmodule, var_nmodule) /* []= on <var5:HashMap[MModule, AModule]>*/;
+var6 = NEW_array__Array(&type_array__Arraymodel_base__MModule);
+((void (*)(val*))(var6->class->vft[COLOR_array__Array__init]))(var6) /* init on <var6:Array[MModule]>*/;
+CHECK_NEW_array__Array(var6);
+var_imported_modules = var6;
+((void (*)(val*, val*))(var_imported_modules->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_imported_modules, var_owner) /* add on <var_imported_modules:Array[MModule]>*/;
+var7 = ((val* (*)(val*))(self->class->vft[COLOR_model_base__Object__intrude_visibility]))(self) /* intrude_visibility on <self:ModelBuilder>*/;
+((void (*)(val*, val*, val*))(var_mmodule->class->vft[COLOR_model_base__MModule__set_visibility_for]))(var_mmodule, var_owner, var7) /* set_visibility_for on <var_mmodule:MModule>*/;
+((void (*)(val*, val*))(var_mmodule->class->vft[COLOR_model_base__MModule__set_imported_mmodules]))(var_mmodule, var_imported_modules) /* set_imported_mmodules on <var_mmodule:MModule>*/;
+var = var_nmodule;
+goto RET_LABEL;
+RET_LABEL:;
+return var;
+}
+/* method modelbuilder#ModelBuilder#load_rt_module for (self: Object, MModule, AModule, String): nullable AModule */
+val* VIRTUAL_modelbuilder__ModelBuilder__load_rt_module(val* self, val* p0, val* p1, val* p2) {
+val* var /* : nullable AModule */;
+val* var1 /* : nullable AModule */;
+var1 = modelbuilder__ModelBuilder__load_rt_module(self, p0, p1, p2);
+var = var1;
+RET_LABEL:;
+return var;
+}
+/* method modelbuilder#ModelBuilder#load_module_commons for (self: ModelBuilder, nullable MModule, Start, String): nullable AModule */
+val* modelbuilder__ModelBuilder__load_module_commons(val* self, val* p0, val* p1, val* p2) {
+val* var /* : nullable AModule */;
+val* var_owner /* var owner: nullable MModule */;
+val* var_tree /* var tree: Start */;
+val* var_mod_name /* var mod_name: String */;
+val* var1 /* : nullable AModule */;
+val* var_nmodule /* var nmodule: nullable AModule */;
+val* var2 /* : null */;
+short int var3 /* : Bool */;
+val* var4 /* : EOF */;
+val* var_neof /* var neof: EOF */;
+short int var5 /* : Bool */;
+int cltype;
+int idtype;
+val* var6 /* : String */;
+val* var7 /* : null */;
+val* var8 /* : nullable AModuledecl */;
+val* var_decl /* var decl: nullable AModuledecl */;
+val* var9 /* : null */;
+short int var10 /* : Bool */;
+val* var11 /* : AModuleName */;
+val* var12 /* : TId */;
+val* var13 /* : String */;
+val* var_decl_name /* var decl_name: String */;
+short int var14 /* : Bool */;
+val* var15 /* : AModuleName */;
+static val* varonce;
+val* var16 /* : String */;
+char* var17 /* : NativeString */;
+long var18 /* : Int */;
+val* var19 /* : String */;
+static val* varonce20;
+val* var21 /* : String */;
+char* var22 /* : NativeString */;
+long var23 /* : Int */;
+val* var24 /* : String */;
+val* var25 /* : Array[Object] */;
+long var26 /* : Int */;
+val* var27 /* : NativeArray[Object] */;
+val* var28 /* : String */;
+val* var29 /* : MModule */;
+val* var30 /* : Model */;
+val* var31 /* : Location */;
+val* var_mmodule /* var mmodule: MModule */;
+val* var32 /* : Array[AModule] */;
+val* var33 /* : HashMap[MModule, AModule] */;
+var_owner = p0;
+var_tree = p1;
+var_mod_name = p2;
+var1 = ((val* (*)(val*))(var_tree->class->vft[COLOR_parser_nodes__Start__n_base]))(var_tree) /* n_base on <var_tree:Start>*/;
+var_nmodule = var1;
+var2 = NULL;
+if (var_nmodule == NULL) {
+var3 = 1; /* is null */
+} else {
+var3 = 0; /* arg is null but recv is not */
+}
+if (var3){
+var4 = ((val* (*)(val*))(var_tree->class->vft[COLOR_parser_nodes__Start__n_eof]))(var_tree) /* n_eof on <var_tree:Start>*/;
+var_neof = var4;
+/* <var_neof:EOF> isa AError */
+cltype = type_parser_nodes__AError.color;
+idtype = type_parser_nodes__AError.id;
+if(cltype >= var_neof->type->table_size) {
+var5 = 0;
+} else {
+var5 = var_neof->type->type_table[cltype] == idtype;
+}
+if (!var5) {
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 424);
+exit(1);
+}
+var6 = ((val* (*)(val*))(var_neof->class->vft[COLOR_lexer__AError__message]))(var_neof) /* message on <var_neof:EOF(AError)>*/;
+((void (*)(val*, val*, val*))(self->class->vft[COLOR_modelbuilder__ModelBuilder__error]))(self, var_neof, var6) /* error on <self:ModelBuilder>*/;
+var7 = NULL;
+var = var7;
+goto RET_LABEL;
+} else {
+}
+var8 = ((val* (*)(val*))(var_nmodule->class->vft[COLOR_parser_nodes__AModule__n_moduledecl]))(var_nmodule) /* n_moduledecl on <var_nmodule:nullable AModule(AModule)>*/;
+var_decl = var8;
+var9 = NULL;
+if (var_decl == NULL) {
+var10 = 1; /* is null */
+} else {
+var10 = 0; /* arg is null but recv is not */
+}
+if (var10){
+} else {
+var11 = ((val* (*)(val*))(var_decl->class->vft[COLOR_parser_nodes__AModuledecl__n_name]))(var_decl) /* n_name on <var_decl:nullable AModuledecl(AModuledecl)>*/;
+var12 = ((val* (*)(val*))(var11->class->vft[COLOR_parser_nodes__AModuleName__n_id]))(var11) /* n_id on <var11:AModuleName>*/;
+var13 = ((val* (*)(val*))(var12->class->vft[COLOR_parser_nodes__Token__text]))(var12) /* text on <var12:TId>*/;
+var_decl_name = var13;
+var14 = ((short int (*)(val*, val*))(var_decl_name->class->vft[COLOR_kernel__Object___33d_61d]))(var_decl_name, var_mod_name) /* != on <var_decl_name:String>*/;
+if (var14){
+var15 = ((val* (*)(val*))(var_decl->class->vft[COLOR_parser_nodes__AModuledecl__n_name]))(var_decl) /* n_name on <var_decl:nullable AModuledecl(AModuledecl)>*/;
+if (varonce) {
+var16 = varonce;
+} else {
+var17 = "Error: module name missmatch; declared ";
+var18 = 39;
+var19 = string__NativeString__to_s_with_length(var17, var18);
+var16 = var19;
+varonce = var16;
+}
+if (varonce20) {
+var21 = varonce20;
+} else {
+var22 = " file named ";
+var23 = 12;
+var24 = string__NativeString__to_s_with_length(var22, var23);
+var21 = var24;
+varonce20 = var21;
+}
+var25 = NEW_array__Array(&type_array__Arraykernel__Object);
+{ /* var25 = array_instance Array[Object] */
+var26 = 4;
+var27 = NEW_array__NativeArray(var26, &type_array__NativeArraykernel__Object);
+((struct instance_array__NativeArray*)var27)->values[0] = (val*) var16;
+((struct instance_array__NativeArray*)var27)->values[1] = (val*) var_decl_name;
+((struct instance_array__NativeArray*)var27)->values[2] = (val*) var21;
+((struct instance_array__NativeArray*)var27)->values[3] = (val*) var_mod_name;
+((void (*)(val*, val*, long))(var25->class->vft[COLOR_array__Array__with_native]))(var25, var27, var26) /* with_native on <var25:Array[Object]>*/;
+CHECK_NEW_array__Array(var25);
+}
+var28 = ((val* (*)(val*))(var25->class->vft[COLOR_string__Object__to_s]))(var25) /* to_s on <var25:Array[Object]>*/;
+((void (*)(val*, val*, val*))(self->class->vft[COLOR_modelbuilder__ModelBuilder__error]))(self, var15, var28) /* error on <self:ModelBuilder>*/;
+} else {
+}
+}
+var29 = NEW_model_base__MModule(&type_model_base__MModule);
+var30 = ((val* (*)(val*))(self->class->vft[COLOR_modelbuilder__ModelBuilder__model]))(self) /* model on <self:ModelBuilder>*/;
+var31 = ((val* (*)(val*))(var_nmodule->class->vft[COLOR_parser_nodes__ANode__location]))(var_nmodule) /* location on <var_nmodule:nullable AModule(AModule)>*/;
+((void (*)(val*, val*, val*, val*, val*))(var29->class->vft[COLOR_model_base__MModule__init]))(var29, var30, var_owner, var_mod_name, var31) /* init on <var29:MModule>*/;
+CHECK_NEW_model_base__MModule(var29);
+var_mmodule = var29;
+((void (*)(val*, val*))(var_nmodule->class->vft[COLOR_modelbuilder__AModule__mmodule_61d]))(var_nmodule, var_mmodule) /* mmodule= on <var_nmodule:nullable AModule(AModule)>*/;
+var32 = ((val* (*)(val*))(self->class->vft[COLOR_modelbuilder__ModelBuilder__nmodules]))(self) /* nmodules on <self:ModelBuilder>*/;
+((void (*)(val*, val*))(var32->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var32, var_nmodule) /* add on <var32:Array[AModule]>*/;
+var33 = ((val* (*)(val*))(self->class->vft[COLOR_modelbuilder__ModelBuilder__mmodule2nmodule]))(self) /* mmodule2nmodule on <self:ModelBuilder>*/;
+((void (*)(val*, val*, val*))(var33->class->vft[COLOR_abstract_collection__Map___91d_93d_61d]))(var33, var_mmodule, var_nmodule) /* []= on <var33:HashMap[MModule, AModule]>*/;
+((void (*)(val*, val*))(self->class->vft[COLOR_modelbuilder__ModelBuilder__build_module_importation]))(self, var_nmodule) /* build_module_importation on <self:ModelBuilder>*/;
+var = var_nmodule;
+goto RET_LABEL;
+RET_LABEL:;
+return var;
+}
+/* method modelbuilder#ModelBuilder#load_module_commons for (self: Object, nullable MModule, Start, String): nullable AModule */
+val* VIRTUAL_modelbuilder__ModelBuilder__load_module_commons(val* self, val* p0, val* p1, val* p2) {
+val* var /* : nullable AModule */;
+val* var1 /* : nullable AModule */;
+var1 = modelbuilder__ModelBuilder__load_module_commons(self, p0, p1, p2);
 var = var1;
 RET_LABEL:;
 return var;
@@ -2796,7 +2869,7 @@ var1 = 1;
 var2 = ((val* (*)(val*))(var_nmodule->class->vft[COLOR_modelbuilder__AModule__mmodule]))(var_nmodule) /* mmodule on <var_nmodule:AModule>*/;
 if (var2 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
-fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 432);
+fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 456);
 exit(1);
 }
 var_mmodule = var2;
@@ -2948,7 +3021,7 @@ val* var1 /* : Array[AModule] */;
 var1 = self->attrs[COLOR_modelbuilder__ModelBuilder___64dnmodules].val; /* @nmodules on <self:ModelBuilder> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @nmodules");
-fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 464);
+fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 488);
 exit(1);
 }
 var = var1;
@@ -2981,7 +3054,7 @@ val* var1 /* : HashMap[MModule, AModule] */;
 var1 = self->attrs[COLOR_modelbuilder__ModelBuilder___64dmmodule2nmodule].val; /* @mmodule2nmodule on <self:ModelBuilder> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @mmodule2nmodule");
-fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 467);
+fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 491);
 exit(1);
 }
 var = var1;
@@ -3132,7 +3205,7 @@ CHECK_NEW_array__Array(var20);
 var23 = ((val* (*)(val*))(var20->class->vft[COLOR_string__Object__to_s]))(var20) /* to_s on <var20:Array[Object]>*/;
 ((void (*)(val*, val*, val*))(var4->class->vft[COLOR_toolcontext__ToolContext__fatal_error]))(var4, var5, var23) /* fatal_error on <var4:ToolContext>*/;
 fprintf(stderr, "Runtime error: %s", "Aborted");
-fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 491);
+fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 515);
 exit(1);
 } else {
 }
@@ -3240,7 +3313,7 @@ val* var /* : MVisibility */;
 const char* var_class_name;
 var_class_name = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "mvisibility", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 510);
+fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 534);
 exit(1);
 RET_LABEL:;
 return var;

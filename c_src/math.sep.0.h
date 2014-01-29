@@ -14,6 +14,7 @@ double math__Float__tan(double self);
 double math__Float__acos(double self);
 double math__Float__asin(double self);
 double math__Float__atan(double self);
+double math__Float__abs(double self);
 double math__Float__pow(double self, double p0);
 double math__Float__log(double self);
 double math__Float__exp(double self);

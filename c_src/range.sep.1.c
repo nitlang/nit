@@ -673,51 +673,31 @@ void VIRTUAL_range__IteratorRange__init(val* self, val* p0) {
 range__IteratorRange__init(self, p0);
 RET_LABEL:;
 }
-/* method range#Discrete#times for (self: Discrete): Range[Discrete] */
-val* range__Discrete__times(val* self) {
-val* var /* : Range[Discrete] */;
-val* var1 /* : Range[Discrete] */;
+/* method range#Int#times for (self: Int): Range[Int] */
+val* range__Int__times(long self) {
+val* var /* : Range[Int] */;
+val* var1 /* : Range[Int] */;
 long var2 /* : Int */;
-short int var3 /* : Bool */;
-int cltype;
-int idtype;
-const struct type* type_struct;
-const char* var_class_name;
-long var4 /* : Int */;
-val* var5 /* : Discrete */;
-val* var6 /* : Discrete */;
-var1 = NEW_range__Range(self->type->resolution_table->types[COLOR_range__Rangekernel__Comparable_VTOTHER]);
+val* var3 /* : Discrete */;
+val* var4 /* : Discrete */;
+var1 = NEW_range__Range(&type_range__Rangekernel__Int);
 var2 = 0;
-/* <var2:Int> isa OTHER */
-type_struct = self->type->resolution_table->types[COLOR_kernel__Comparable_VTOTHER];
-cltype = type_struct->color;
-idtype = type_struct->id;
-if(cltype >= (&type_kernel__Int)->table_size) {
-var3 = 0;
-} else {
-var3 = (&type_kernel__Int)->type_table[cltype] == idtype;
-}
-if (!var3) {
-var_class_name = type_kernel__Int.name;
-fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/range.nit", 98);
-exit(1);
-}
-var4 = 1;
-var5 = ((val* (*)(val*, long))(self->class->vft[COLOR_kernel__Discrete___45d]))(self, var4) /* - on <self:Discrete>*/;
-var6 = BOX_kernel__Int(var2); /* autobox from Int to Discrete */
-((void (*)(val*, val*, val*))(var1->class->vft[COLOR_range__Range__init]))(var1, var6, var5) /* init on <var1:Range[Discrete]>*/;
+var3 = BOX_kernel__Int(var2); /* autobox from Int to Discrete */
+var4 = BOX_kernel__Int(self); /* autobox from Int to Discrete */
+((void (*)(val*, val*, val*))(var1->class->vft[COLOR_range__Range__without_last]))(var1, var3, var4) /* without_last on <var1:Range[Int]>*/;
 CHECK_NEW_range__Range(var1);
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method range#Discrete#times for (self: Object): Range[Discrete] */
-val* VIRTUAL_range__Discrete__times(val* self) {
-val* var /* : Range[Discrete] */;
-val* var1 /* : Range[Discrete] */;
-var1 = range__Discrete__times(self);
+/* method range#Int#times for (self: Object): Range[Int] */
+val* VIRTUAL_range__Int__times(val* self) {
+val* var /* : Range[Int] */;
+val* var1 /* : Range[Int] */;
+long var2 /* : Int */;
+var2 = ((struct instance_kernel__Int*)self)->value; /* autounbox from Object to Int */;
+var1 = range__Int__times(var2);
 var = var1;
 RET_LABEL:;
 return var;

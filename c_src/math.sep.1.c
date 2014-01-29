@@ -86,7 +86,7 @@ return var;
 /* method math#Int#sqrt for (self: Int): Int */
 long math__Int__sqrt(long self) {
 long var /* : Int */;
-fprintf(stderr, "NOT YET IMPLEMENTED nitni for math#Int#sqrt at lib/standard/math.nit:24,2--51\n");
+fprintf(stderr, "NOT YET IMPLEMENTED nitni for math#Int#sqrt at lib/standard/math.nit:28,2--51\n");
 exit(1);
 RET_LABEL:;
 return var;
@@ -105,7 +105,7 @@ return var;
 /* method math#Int#sin for (self: Int): Int */
 long math__Int__sin(long self) {
 long var /* : Int */;
-fprintf(stderr, "NOT YET IMPLEMENTED nitni for math#Int#sin at lib/standard/math.nit:25,2--49\n");
+fprintf(stderr, "NOT YET IMPLEMENTED nitni for math#Int#sin at lib/standard/math.nit:29,2--49\n");
 exit(1);
 RET_LABEL:;
 return var;
@@ -124,7 +124,7 @@ return var;
 /* method math#Int#cos for (self: Int): Int */
 long math__Int__cos(long self) {
 long var /* : Int */;
-fprintf(stderr, "NOT YET IMPLEMENTED nitni for math#Int#cos at lib/standard/math.nit:26,2--49\n");
+fprintf(stderr, "NOT YET IMPLEMENTED nitni for math#Int#cos at lib/standard/math.nit:30,2--49\n");
 exit(1);
 RET_LABEL:;
 return var;
@@ -287,6 +287,25 @@ var = var1;
 RET_LABEL:;
 return var;
 }
+/* method math#Float#abs for (self: Float): Float */
+double math__Float__abs(double self) {
+double var /* : Float */;
+fprintf(stderr, "NOT YET IMPLEMENTED nitni for math#Float#abs at lib/standard/math.nit:41,2--39\n");
+exit(1);
+RET_LABEL:;
+return var;
+}
+/* method math#Float#abs for (self: Object): Float */
+double VIRTUAL_math__Float__abs(val* self) {
+double var /* : Float */;
+double var1 /* : Float */;
+double var2 /* : Float */;
+var2 = ((struct instance_kernel__Float*)self)->value; /* autounbox from Object to Float */;
+var1 = math__Float__abs(var2);
+var = var1;
+RET_LABEL:;
+return var;
+}
 /* method math#Float#pow for (self: Float, Float): Float */
 double math__Float__pow(double self, double p0) {
 double var /* : Float */;
@@ -396,62 +415,61 @@ return var;
 val* math__Collection__rand(val* self) {
 val* var /* : nullable Object */;
 short int var1 /* : Bool */;
-val* var2 /* : null */;
+long var2 /* : Int */;
 long var3 /* : Int */;
-long var4 /* : Int */;
 long var_rand_index /* var rand_index: Int */;
-val* var5 /* : Iterator[nullable Object] */;
-short int var6 /* : Bool */;
-val* var7 /* : nullable Object */;
+val* var4 /* : Iterator[nullable Object] */;
+short int var5 /* : Bool */;
+val* var6 /* : nullable Object */;
 val* var_e /* var e: nullable Object */;
-long var8 /* : Int */;
-short int var9 /* : Bool */;
-short int var11 /* : Bool */;
+long var7 /* : Int */;
+short int var8 /* : Bool */;
+short int var10 /* : Bool */;
+long var11 /* : Int */;
 long var12 /* : Int */;
-long var13 /* : Int */;
-long var15 /* : Int */;
+long var14 /* : Int */;
 var1 = ((short int (*)(val*))(self->class->vft[COLOR_abstract_collection__Collection__is_empty]))(self) /* is_empty on <self:Collection[nullable Object]>*/;
 if (var1){
-var2 = NULL;
-var = var2;
-goto RET_LABEL;
+fprintf(stderr, "Runtime error: %s", "Aborted");
+fprintf(stderr, " (%s:%d)\n", "lib/standard/math.nit", 56);
+exit(1);
 } else {
 }
-var3 = ((long (*)(val*))(self->class->vft[COLOR_abstract_collection__Collection__length]))(self) /* length on <self:Collection[nullable Object]>*/;
-var4 = math__Int__rand(var3);
-var_rand_index = var4;
-var5 = ((val* (*)(val*))(self->class->vft[COLOR_abstract_collection__Collection__iterator]))(self) /* iterator on <self:Collection[nullable Object]>*/;
+var2 = ((long (*)(val*))(self->class->vft[COLOR_abstract_collection__Collection__length]))(self) /* length on <self:Collection[nullable Object]>*/;
+var3 = math__Int__rand(var2);
+var_rand_index = var3;
+var4 = ((val* (*)(val*))(self->class->vft[COLOR_abstract_collection__Collection__iterator]))(self) /* iterator on <self:Collection[nullable Object]>*/;
 for(;;) {
-var6 = ((short int (*)(val*))(var5->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var5) /* is_ok on <var5:Iterator[nullable Object]>*/;
-if(!var6) break;
-var7 = ((val* (*)(val*))(var5->class->vft[COLOR_abstract_collection__Iterator__item]))(var5) /* item on <var5:Iterator[nullable Object]>*/;
-var_e = var7;
-var8 = 0;
-{ /* Inline kernel#Int#== (var_rand_index,var8) */
-var11 = var_rand_index == var8;
-var9 = var11;
-goto RET_LABEL10;
-RET_LABEL10:(void)0;
+var5 = ((short int (*)(val*))(var4->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var4) /* is_ok on <var4:Iterator[nullable Object]>*/;
+if(!var5) break;
+var6 = ((val* (*)(val*))(var4->class->vft[COLOR_abstract_collection__Iterator__item]))(var4) /* item on <var4:Iterator[nullable Object]>*/;
+var_e = var6;
+var7 = 0;
+{ /* Inline kernel#Int#== (var_rand_index,var7) */
+var10 = var_rand_index == var7;
+var8 = var10;
+goto RET_LABEL9;
+RET_LABEL9:(void)0;
 }
-if (var9){
+if (var8){
 var = var_e;
 goto RET_LABEL;
 } else {
 }
-var12 = 1;
-{ /* Inline kernel#Int#- (var_rand_index,var12) */
-var15 = var_rand_index - var12;
-var13 = var15;
-goto RET_LABEL14;
-RET_LABEL14:(void)0;
+var11 = 1;
+{ /* Inline kernel#Int#- (var_rand_index,var11) */
+var14 = var_rand_index - var11;
+var12 = var14;
+goto RET_LABEL13;
+RET_LABEL13:(void)0;
 }
-var_rand_index = var13;
+var_rand_index = var12;
 CONTINUE_label: (void)0;
-((void (*)(val*))(var5->class->vft[COLOR_abstract_collection__Iterator__next]))(var5) /* next on <var5:Iterator[nullable Object]>*/;
+((void (*)(val*))(var4->class->vft[COLOR_abstract_collection__Iterator__next]))(var4) /* next on <var4:Iterator[nullable Object]>*/;
 }
 BREAK_label: (void)0;
 fprintf(stderr, "Runtime error: %s", "Aborted");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/math.nit", 57);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/math.nit", 63);
 exit(1);
 RET_LABEL:;
 return var;

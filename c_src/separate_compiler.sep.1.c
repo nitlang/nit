@@ -6,7 +6,7 @@ val* var1 /* : OptionBool */;
 var1 = self->attrs[COLOR_separate_compiler__ToolContext___64dopt_separate].val; /* @opt_separate on <self:ToolContext> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @opt_separate");
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 24);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 25);
 exit(1);
 }
 var = var1;
@@ -39,7 +39,7 @@ val* var1 /* : OptionBool */;
 var1 = self->attrs[COLOR_separate_compiler__ToolContext___64dopt_no_inline_intern].val; /* @opt_no_inline_intern on <self:ToolContext> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @opt_no_inline_intern");
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 26);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 27);
 exit(1);
 }
 var = var1;
@@ -72,7 +72,7 @@ val* var1 /* : OptionBool */;
 var1 = self->attrs[COLOR_separate_compiler__ToolContext___64dopt_no_union_attribute].val; /* @opt_no_union_attribute on <self:ToolContext> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @opt_no_union_attribute");
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 28);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 29);
 exit(1);
 }
 var = var1;
@@ -105,7 +105,7 @@ val* var1 /* : OptionBool */;
 var1 = self->attrs[COLOR_separate_compiler__ToolContext___64dopt_no_shortcut_equate].val; /* @opt_no_shortcut_equate on <self:ToolContext> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @opt_no_shortcut_equate");
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 30);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 31);
 exit(1);
 }
 var = var1;
@@ -138,7 +138,7 @@ val* var1 /* : OptionBool */;
 var1 = self->attrs[COLOR_separate_compiler__ToolContext___64dopt_inline_coloring_numbers].val; /* @opt_inline_coloring_numbers on <self:ToolContext> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @opt_inline_coloring_numbers");
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 32);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 33);
 exit(1);
 }
 var = var1;
@@ -171,7 +171,7 @@ val* var1 /* : OptionBool */;
 var1 = self->attrs[COLOR_separate_compiler__ToolContext___64dopt_bm_typing].val; /* @opt_bm_typing on <self:ToolContext> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @opt_bm_typing");
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 34);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 35);
 exit(1);
 }
 var = var1;
@@ -204,7 +204,7 @@ val* var1 /* : OptionBool */;
 var1 = self->attrs[COLOR_separate_compiler__ToolContext___64dopt_phmod_typing].val; /* @opt_phmod_typing on <self:ToolContext> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @opt_phmod_typing");
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 36);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 37);
 exit(1);
 }
 var = var1;
@@ -237,7 +237,7 @@ val* var1 /* : OptionBool */;
 var1 = self->attrs[COLOR_separate_compiler__ToolContext___64dopt_phand_typing].val; /* @opt_phand_typing on <self:ToolContext> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @opt_phand_typing");
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 38);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 39);
 exit(1);
 }
 var = var1;
@@ -270,7 +270,7 @@ val* var1 /* : OptionBool */;
 var1 = self->attrs[COLOR_separate_compiler__ToolContext___64dopt_tables_metrics].val; /* @opt_tables_metrics on <self:ToolContext> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @opt_tables_metrics");
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 40);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 41);
 exit(1);
 }
 var = var1;
@@ -866,7 +866,7 @@ val* var1 /* : RapidTypeAnalysis */;
 var1 = self->attrs[COLOR_separate_compiler__SeparateCompiler___64druntime_type_analysis].val; /* @runtime_type_analysis on <self:SeparateCompiler> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @runtime_type_analysis");
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 111);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 112);
 exit(1);
 }
 var = var1;
@@ -899,7 +899,7 @@ val* var1 /* : Set[MType] */;
 var1 = self->attrs[COLOR_separate_compiler__SeparateCompiler___64dundead_types].val; /* @undead_types on <self:SeparateCompiler> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @undead_types");
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 114);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 115);
 exit(1);
 }
 var = var1;
@@ -932,7 +932,7 @@ val* var1 /* : Set[MType] */;
 var1 = self->attrs[COLOR_separate_compiler__SeparateCompiler___64dpartial_types].val; /* @partial_types on <self:SeparateCompiler> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @partial_types");
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 115);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 116);
 exit(1);
 }
 var = var1;
@@ -965,7 +965,7 @@ val* var1 /* : Map[MClassDef, Set[MType]] */;
 var1 = self->attrs[COLOR_separate_compiler__SeparateCompiler___64dlive_unresolved_types].val; /* @live_unresolved_types on <self:SeparateCompiler> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @live_unresolved_types");
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 116);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 117);
 exit(1);
 }
 var = var1;
@@ -1700,7 +1700,7 @@ varonce44 = var45;
 var49 = ((val* (*)(val*, val*))(var_classes->class->vft[COLOR_string__Collection__join]))(var_classes, var45) /* join on <var_classes:nullable Array[MClass](Array[MClass])>*/;
 ((void (*)(val*, val*))(self->class->vft[COLOR_file__Object__print]))(self, var49) /* print on <self:SeparateCompiler>*/;
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 177);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 178);
 exit(1);
 }
 var50 = ((val* (*)(val*))(self->class->vft[COLOR_separate_compiler__SeparateCompiler__box_kinds]))(self) /* box_kinds on <self:SeparateCompiler>*/;
@@ -1734,7 +1734,7 @@ val* var1 /* : HashMap[MClass, Int] */;
 var1 = self->attrs[COLOR_separate_compiler__SeparateCompiler___64dbox_kinds].val; /* @box_kinds on <self:SeparateCompiler> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @box_kinds");
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 182);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 183);
 exit(1);
 }
 var = var1;
@@ -2486,7 +2486,7 @@ val* var1 /* : HashSet[Object] */;
 var1 = self->attrs[COLOR_separate_compiler__SeparateCompiler___64dcolor_consts_done].val; /* @color_consts_done on <self:SeparateCompiler> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @color_consts_done");
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 230);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 231);
 exit(1);
 }
 var = var1;
@@ -2730,7 +2730,7 @@ var49 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_separate_compiler__
 var50 = ((val* (*)(val*))(self->class->vft[COLOR_separate_compiler__SeparateCompiler__method_layout]))(self) /* method_layout on <self:SeparateCompiler>*/;
 if (var50 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 285);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 286);
 exit(1);
 } else {
 var51 = ((val* (*)(val*))(var50->class->vft[COLOR_layout_builders__Layout__pos]))(var50) /* pos on <var50:nullable Layout[PropertyLayoutElement]>*/;
@@ -2791,7 +2791,7 @@ var76 = ((val* (*)(val*, val*))(self->class->vft[COLOR_separate_compiler__Separa
 var77 = ((val* (*)(val*))(self->class->vft[COLOR_separate_compiler__SeparateCompiler__attr_layout]))(self) /* attr_layout on <self:SeparateCompiler>*/;
 if (var77 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 301);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 302);
 exit(1);
 } else {
 var78 = ((val* (*)(val*))(var77->class->vft[COLOR_layout_builders__Layout__pos]))(var77) /* pos on <var77:nullable Layout[MAttribute]>*/;
@@ -3039,7 +3039,7 @@ goto CONTINUE_label28;
 }
 if (var_layout == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 322);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 323);
 exit(1);
 } else {
 var29 = ((val* (*)(val*))(var_layout->class->vft[COLOR_layout_builders__Layout__pos]))(var_layout) /* pos on <var_layout:nullable Layout[PropertyLayoutElement]>*/;
@@ -3161,7 +3161,7 @@ goto CONTINUE_label78;
 }
 if (var_layout == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 348);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 349);
 exit(1);
 } else {
 var79 = ((val* (*)(val*))(var_layout->class->vft[COLOR_layout_builders__Layout__pos]))(var_layout) /* pos on <var_layout:nullable Layout[PropertyLayoutElement]>*/;
@@ -3264,7 +3264,7 @@ var126 = ((val* (*)(val*))(var124->class->vft[COLOR_abstract_collection__Iterato
 var_supercall = var126;
 if (var_layout == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 371);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 372);
 exit(1);
 } else {
 var127 = ((val* (*)(val*))(var_layout->class->vft[COLOR_layout_builders__Layout__pos]))(var_layout) /* pos on <var_layout:nullable Layout[PropertyLayoutElement]>*/;
@@ -3514,7 +3514,7 @@ goto CONTINUE_label27;
 }
 if (var_layout == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 400);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 401);
 exit(1);
 } else {
 var28 = ((val* (*)(val*))(var_layout->class->vft[COLOR_layout_builders__Layout__pos]))(var_layout) /* pos on <var_layout:nullable Layout[MAttribute]>*/;
@@ -3609,7 +3609,7 @@ goto CONTINUE_label66;
 }
 if (var_layout == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 417);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 418);
 exit(1);
 } else {
 var67 = ((val* (*)(val*))(var_layout->class->vft[COLOR_layout_builders__Layout__pos]))(var_layout) /* pos on <var_layout:nullable Layout[MAttribute]>*/;
@@ -3842,7 +3842,7 @@ var43 = ((val* (*)(val*, val*))(var_layout_builder->class->vft[COLOR_layout_buil
 var44 = ((val* (*)(val*))(var_layout_builder->class->vft[COLOR_layout_builders__TypingLayoutBuilder__poset]))(var_layout_builder) /* poset on <var_layout_builder:TypingLayoutBuilder[MType]>*/;
 if (var44 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 463);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 464);
 exit(1);
 }
 var_poset = var44;
@@ -3957,7 +3957,7 @@ var_color = var16;
 } else {
 if (var_layout == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 483);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 484);
 exit(1);
 } else {
 var17 = ((val* (*)(val*))(var_layout->class->vft[COLOR_layout_builders__Layout__pos]))(var_layout) /* pos on <var_layout:nullable Layout[MType]>*/;
@@ -4221,7 +4221,7 @@ var_t51 = var50;
 var52 = ((val* (*)(val*))(self->class->vft[COLOR_separate_compiler__SeparateCompiler__resolution_layout]))(self) /* resolution_layout on <self:SeparateCompiler>*/;
 if (var52 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 538);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 539);
 exit(1);
 } else {
 var53 = ((val* (*)(val*))(var52->class->vft[COLOR_layout_builders__Layout__pos]))(var52) /* pos on <var52:nullable Layout[MType]>*/;
@@ -4231,7 +4231,7 @@ if (var54){
 var55 = ((val* (*)(val*))(self->class->vft[COLOR_separate_compiler__SeparateCompiler__resolution_layout]))(self) /* resolution_layout on <self:SeparateCompiler>*/;
 if (var55 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 539);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 540);
 exit(1);
 } else {
 var56 = ((val* (*)(val*))(var55->class->vft[COLOR_layout_builders__Layout__pos]))(var55) /* pos on <var55:nullable Layout[MType]>*/;
@@ -4355,7 +4355,7 @@ var_color = var15;
 } else {
 if (var_layout == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 563);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 564);
 exit(1);
 } else {
 var16 = ((val* (*)(val*))(var_layout->class->vft[COLOR_layout_builders__Layout__pos]))(var_layout) /* pos on <var_layout:nullable Layout[MType]>*/;
@@ -4504,7 +4504,7 @@ varonce = var6;
 }
 ((void (*)(val*, val*))(self->class->vft[COLOR_file__Object__print]))(self, var6) /* print on <self:SeparateCompiler>*/;
 fprintf(stderr, "Runtime error: %s", "Aborted");
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 583);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 584);
 exit(1);
 } else {
 }
@@ -4538,7 +4538,7 @@ var15 = var14->type->type_table[cltype16] == idtype17;
 if (!var15) {
 var_class_name = var14 == NULL ? "null" : var14->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MClassType", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 591);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 592);
 exit(1);
 }
 var_mclass_type = var14;
@@ -4554,7 +4554,7 @@ var18 = var_mtype->type->type_table[cltype19] == idtype20;
 if (!var18) {
 var_class_name21 = var_mtype == NULL ? "null" : var_mtype->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MClassType", var_class_name21);
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 593);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 594);
 exit(1);
 }
 var_mclass_type = var_mtype;
@@ -5004,7 +5004,7 @@ var51 = ((val* (*)(val*))(var48->class->vft[COLOR_string__Object__to_s]))(var48)
 var52 = ((val* (*)(val*))(self->class->vft[COLOR_separate_compiler__SeparateCompiler__type_layout]))(self) /* type_layout on <self:SeparateCompiler>*/;
 if (var52 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 635);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 636);
 exit(1);
 } else {
 var53 = ((val* (*)(val*))(var52->class->vft[COLOR_layout_builders__Layout__ids]))(var52) /* ids on <var52:nullable Layout[MType]>*/;
@@ -5100,7 +5100,7 @@ var90 = ((val* (*)(val*))(var87->class->vft[COLOR_string__Object__to_s]))(var87)
 } else {
 if (var_layout == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 641);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 642);
 exit(1);
 } else {
 var91 = ((val* (*)(val*))(var_layout->class->vft[COLOR_layout_builders__Layout__pos]))(var_layout) /* pos on <var_layout:nullable Layout[MType]>*/;
@@ -5285,7 +5285,7 @@ varonce169 = var170;
 var174 = ((val* (*)(val*))(self->class->vft[COLOR_separate_compiler__SeparateCompiler__type_layout]))(self) /* type_layout on <self:SeparateCompiler>*/;
 if (var174 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 660);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 661);
 exit(1);
 } else {
 var175 = ((val* (*)(val*))(var174->class->vft[COLOR_layout_builders__Layout__ids]))(var174) /* ids on <var174:nullable Layout[MType]>*/;
@@ -5550,7 +5550,7 @@ var3 = var2->type->type_table[cltype4] == idtype5;
 if (!var3) {
 var_class_name = var2 == NULL ? "null" : var2->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MClassType", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 671);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 672);
 exit(1);
 }
 var_mclass_type = var2;
@@ -5566,7 +5566,7 @@ var6 = var_mtype->type->type_table[cltype7] == idtype8;
 if (!var6) {
 var_class_name9 = var_mtype == NULL ? "null" : var_mtype->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MClassType", var_class_name9);
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 673);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 674);
 exit(1);
 }
 var_mclass_type = var_mtype;
@@ -5756,7 +5756,7 @@ var_tv = var93;
 var94 = ((val* (*)(val*))(self->class->vft[COLOR_separate_compiler__SeparateCompiler__type_layout]))(self) /* type_layout on <self:SeparateCompiler>*/;
 if (var94 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 700);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 701);
 exit(1);
 } else {
 var95 = ((val* (*)(val*))(var94->class->vft[COLOR_layout_builders__Layout__ids]))(var94) /* ids on <var94:nullable Layout[MType]>*/;
@@ -6852,7 +6852,7 @@ var113 = var_mpropdef->type->type_table[cltype] == idtype;
 }
 if (!var113) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 740);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 741);
 exit(1);
 }
 var114 = ((val* (*)(val*))(var_mpropdef->class->vft[COLOR_separate_compiler__MMethodDef__virtual_runtime_function]))(var_mpropdef) /* virtual_runtime_function on <var_mpropdef:nullable MPropDef(MMethodDef)>*/;
@@ -8133,7 +8133,7 @@ var = p0->type->type_table[cltype] == idtype;
 if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "VISITOR", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 821);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 822);
 exit(1);
 }
 var_v = p0;
@@ -8635,7 +8635,7 @@ var2 = var1->type->type_table[cltype] == idtype;
 if (!var2) {
 var_class_name = var1 == NULL ? "null" : var1->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "VISITOR", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 852);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 853);
 exit(1);
 }
 var = var1;
@@ -8659,7 +8659,7 @@ val* var1 /* : Map[MType, Array[nullable MType]] */;
 var1 = self->attrs[COLOR_separate_compiler__SeparateCompiler___64dtype_tables].val; /* @type_tables on <self:SeparateCompiler> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @type_tables");
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 856);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 857);
 exit(1);
 }
 var = var1;
@@ -8692,7 +8692,7 @@ val* var1 /* : Map[MClassType, Array[nullable MType]] */;
 var1 = self->attrs[COLOR_separate_compiler__SeparateCompiler___64dresolution_tables].val; /* @resolution_tables on <self:SeparateCompiler> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @resolution_tables");
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 857);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 858);
 exit(1);
 }
 var = var1;
@@ -8725,7 +8725,7 @@ val* var1 /* : Map[MClass, Array[nullable MPropDef]] */;
 var1 = self->attrs[COLOR_separate_compiler__SeparateCompiler___64dmethod_tables].val; /* @method_tables on <self:SeparateCompiler> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @method_tables");
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 858);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 859);
 exit(1);
 }
 var = var1;
@@ -8758,7 +8758,7 @@ val* var1 /* : Map[MClass, Array[nullable MPropDef]] */;
 var1 = self->attrs[COLOR_separate_compiler__SeparateCompiler___64dattr_tables].val; /* @attr_tables on <self:SeparateCompiler> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @attr_tables");
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 859);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 860);
 exit(1);
 }
 var = var1;
@@ -9427,6 +9427,52 @@ void VIRTUAL_separate_compiler__SeparateCompiler__display_sizes(val* self) {
 separate_compiler__SeparateCompiler__display_sizes(self);
 RET_LABEL:;
 }
+/* method separate_compiler#SeparateCompiler#compile_nitni_structs for (self: SeparateCompiler) */
+void separate_compiler__SeparateCompiler__compile_nitni_structs(val* self) {
+val* var /* : CodeWriter */;
+static val* varonce;
+val* var1 /* : String */;
+char* var2 /* : NativeString */;
+long var3 /* : Int */;
+val* var4 /* : String */;
+var = ((val* (*)(val*))(self->class->vft[COLOR_abstract_compiler__AbstractCompiler__header]))(self) /* header on <self:SeparateCompiler>*/;
+if (varonce) {
+var1 = varonce;
+} else {
+var2 = "struct nitni_instance {struct instance *value;};";
+var3 = 48;
+var4 = string__NativeString__to_s_with_length(var2, var3);
+var1 = var4;
+varonce = var1;
+}
+((void (*)(val*, val*))(var->class->vft[COLOR_abstract_compiler__CodeWriter__add_decl]))(var, var1) /* add_decl on <var:CodeWriter>*/;
+RET_LABEL:;
+}
+/* method separate_compiler#SeparateCompiler#compile_nitni_structs for (self: Object) */
+void VIRTUAL_separate_compiler__SeparateCompiler__compile_nitni_structs(val* self) {
+separate_compiler__SeparateCompiler__compile_nitni_structs(self);
+RET_LABEL:;
+}
+/* method separate_compiler#SeparateCompiler#finalize_ffi_for_module for (self: SeparateCompiler, AModule) */
+void separate_compiler__SeparateCompiler__finalize_ffi_for_module(val* self, val* p0) {
+val* var_nmodule /* var nmodule: AModule */;
+val* var /* : nullable MModule */;
+var_nmodule = p0;
+var = ((val* (*)(val*))(var_nmodule->class->vft[COLOR_modelbuilder__AModule__mmodule]))(var_nmodule) /* mmodule on <var_nmodule:AModule>*/;
+if (var == NULL) {
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 920);
+exit(1);
+}
+((void (*)(val*, val*))(self->class->vft[COLOR_abstract_compiler__AbstractCompiler__mainmodule_61d]))(self, var) /* mainmodule= on <self:SeparateCompiler>*/;
+((void (*)(val*, val*))(self->class->vft[COLOR_separate_compiler__SeparateCompiler__finalize_ffi_for_module]))(self, p0) /* finalize_ffi_for_module on <self:SeparateCompiler>*/;
+RET_LABEL:;
+}
+/* method separate_compiler#SeparateCompiler#finalize_ffi_for_module for (self: Object, AModule) */
+void VIRTUAL_separate_compiler__SeparateCompiler__finalize_ffi_for_module(val* self, val* p0) {
+separate_compiler__SeparateCompiler__finalize_ffi_for_module(self, p0);
+RET_LABEL:;
+}
 /* method separate_compiler#SeparateCompilerVisitor#adapt_signature for (self: SeparateCompilerVisitor, MMethodDef, Array[RuntimeVariable]) */
 void separate_compiler__SeparateCompilerVisitor__adapt_signature(val* self, val* p0, val* p1) {
 val* var_m /* var m: MMethodDef */;
@@ -9497,7 +9543,7 @@ var6 = ((val* (*)(val*))(var5->class->vft[COLOR_model__MClassDef__mmodule]))(var
 var7 = 1;
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 921);
+fprintf(stderr, " (%s:%d)\n", "src/separate_compiler.nit", 933);
 exit(1);
 } else {
 var8 = ((val* (*)(val*, val*, val*, val*, short int))(var->class->vft[COLOR_model__MType__resolve_for]))(var, var2, var4, var6, var7) /* resolve_for on <var:nullable MSignature>*/;

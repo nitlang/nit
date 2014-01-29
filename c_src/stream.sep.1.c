@@ -4,7 +4,7 @@ void stream__IOS__close(val* self) {
 const char* var_class_name;
 var_class_name = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "close", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 20);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 27);
 exit(1);
 RET_LABEL:;
 }
@@ -19,7 +19,7 @@ long var /* : Int */;
 const char* var_class_name;
 var_class_name = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "read_char", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 27);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 34);
 exit(1);
 RET_LABEL:;
 return var;
@@ -164,7 +164,7 @@ var1 = ((short int (*)(val*))(self->class->vft[COLOR_stream__IStream__eof]))(sel
 var2 = !var1;
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 47);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 54);
 exit(1);
 }
 var3 = NEW_string__Buffer(&type_string__Buffer);
@@ -341,7 +341,7 @@ short int var /* : Bool */;
 const char* var_class_name;
 var_class_name = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "eof", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 79);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 86);
 exit(1);
 RET_LABEL:;
 return var;
@@ -360,7 +360,7 @@ void stream__OStream__write(val* self, val* p0) {
 const char* var_class_name;
 var_class_name = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "write", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 86);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 93);
 exit(1);
 RET_LABEL:;
 }
@@ -375,7 +375,7 @@ short int var /* : Bool */;
 const char* var_class_name;
 var_class_name = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "is_writable", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 89);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 96);
 exit(1);
 RET_LABEL:;
 return var;
@@ -431,14 +431,14 @@ var1 = ((short int (*)(val*))(self->class->vft[COLOR_stream__IStream__eof]))(sel
 var2 = !var1;
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 98);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 105);
 exit(1);
 }
 var3 = self->attrs[COLOR_stream__BufferedIStream___buffer_pos].l; /* _buffer_pos on <self:BufferedIStream> */
 var4 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:BufferedIStream> */
 if (var4 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 99);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 106);
 exit(1);
 } else {
 var5 = ((long (*)(val*))(var4->class->vft[COLOR_abstract_collection__Collection__length]))(var4) /* length on <var4:nullable Buffer>*/;
@@ -466,7 +466,7 @@ var10 = self->attrs[COLOR_stream__BufferedIStream___buffer_pos].l; /* _buffer_po
 var11 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:BufferedIStream> */
 if (var11 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 102);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 109);
 exit(1);
 } else {
 var12 = ((long (*)(val*))(var11->class->vft[COLOR_abstract_collection__Collection__length]))(var11) /* length on <var11:nullable Buffer>*/;
@@ -502,7 +502,7 @@ var24 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <
 var25 = self->attrs[COLOR_stream__BufferedIStream___buffer_pos].l; /* _buffer_pos on <self:BufferedIStream> */
 if (var24 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 105);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 112);
 exit(1);
 } else {
 var26 = ((val* (*)(val*, long))(var24->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var24, var25) /* [] on <var24:nullable Buffer>*/;
@@ -602,7 +602,7 @@ var_j = var2;
 var3 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:BufferedIStream> */
 if (var3 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 114);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 121);
 exit(1);
 } else {
 var4 = ((long (*)(val*))(var3->class->vft[COLOR_abstract_collection__Collection__length]))(var3) /* length on <var3:nullable Buffer>*/;
@@ -655,7 +655,7 @@ var_j = var19;
 var20 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:BufferedIStream> */
 if (var20 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 120);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 127);
 exit(1);
 } else {
 var21 = ((long (*)(val*))(var20->class->vft[COLOR_abstract_collection__Collection__length]))(var20) /* length on <var20:nullable Buffer>*/;
@@ -705,7 +705,7 @@ if (!var22) break;
 var38 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:BufferedIStream> */
 if (var38 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 123);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 130);
 exit(1);
 } else {
 var39 = ((val* (*)(val*, long))(var38->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var38, var_j) /* [] on <var38:nullable Buffer>*/;
@@ -786,7 +786,7 @@ var_j = var4;
 var5 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:BufferedIStream> */
 if (var5 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 137);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 144);
 exit(1);
 } else {
 var6 = ((long (*)(val*))(var5->class->vft[COLOR_abstract_collection__Collection__length]))(var5) /* length on <var5:nullable Buffer>*/;
@@ -812,7 +812,7 @@ if (!var7) break;
 var11 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:BufferedIStream> */
 if (var11 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 139);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 146);
 exit(1);
 } else {
 var12 = ((val* (*)(val*, long))(var11->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var11, var_j) /* [] on <var11:nullable Buffer>*/;
@@ -920,7 +920,7 @@ for(;;) {
 var2 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:BufferedIStream> */
 if (var2 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 153);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 160);
 exit(1);
 } else {
 var3 = ((long (*)(val*))(var2->class->vft[COLOR_abstract_collection__Collection__length]))(var2) /* length on <var2:nullable Buffer>*/;
@@ -945,7 +945,7 @@ if (var4){
 var8 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:BufferedIStream> */
 if (var8 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 153);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 160);
 exit(1);
 } else {
 var9 = ((val* (*)(val*, long))(var8->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var8, var_i) /* [] on <var8:nullable Buffer>*/;
@@ -1032,7 +1032,7 @@ if (!var37) break;
 var44 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:BufferedIStream> */
 if (var44 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 163);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 170);
 exit(1);
 } else {
 var45 = ((val* (*)(val*, long))(var44->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var44, var_j) /* [] on <var44:nullable Buffer>*/;
@@ -1054,7 +1054,7 @@ BREAK_label50: (void)0;
 var51 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:BufferedIStream> */
 if (var51 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 168);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 175);
 exit(1);
 } else {
 var52 = ((long (*)(val*))(var51->class->vft[COLOR_abstract_collection__Collection__length]))(var51) /* length on <var51:nullable Buffer>*/;
@@ -1122,7 +1122,7 @@ var2 = self->attrs[COLOR_stream__BufferedIStream___buffer_pos].l; /* _buffer_pos
 var3 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:BufferedIStream> */
 if (var3 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 184);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 191);
 exit(1);
 } else {
 var4 = ((long (*)(val*))(var3->class->vft[COLOR_abstract_collection__Collection__length]))(var3) /* length on <var3:nullable Buffer>*/;
@@ -1168,7 +1168,7 @@ void stream__BufferedIStream__fill_buffer(val* self) {
 const char* var_class_name;
 var_class_name = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "fill_buffer", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 192);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 199);
 exit(1);
 RET_LABEL:;
 }
@@ -1183,7 +1183,7 @@ short int var /* : Bool */;
 const char* var_class_name;
 var_class_name = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "end_reached", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 195);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/stream.nit", 202);
 exit(1);
 RET_LABEL:;
 return var;
@@ -1687,7 +1687,7 @@ return var;
 /* method stream#Object#intern_poll for (self: Object, Array[Int], Array[Int]): nullable Int */
 val* stream__Object__intern_poll(val* self, val* p0, val* p1) {
 val* var /* : nullable Int */;
-fprintf(stderr, "NOT YET IMPLEMENTED nitni for stream#Object#intern_poll at lib/standard/stream.nit:297,2--171\n");
+fprintf(stderr, "NOT YET IMPLEMENTED nitni for stream#Object#intern_poll at lib/standard/stream.nit:304,2--354,3\n");
 exit(1);
 RET_LABEL:;
 return var;
