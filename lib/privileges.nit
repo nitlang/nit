@@ -22,12 +22,13 @@ module privileges
 
 import opts
 
+# Class to manage user groups
 class UserGroup
 	
-	# Contain the name of the user
+	# User name
 	var user: String
 	
-	# Contain the name of the group and is nullable by default
+	# Group name
 	var group: nullable String
 
 	# Drop privileges of a user and set his privileges back to default (program privileges)
