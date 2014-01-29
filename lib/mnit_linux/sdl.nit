@@ -343,11 +343,16 @@ class SDLKeyEvent
 		end
 	end
 
+        # Return true if the key is down, false otherwise
 	redef fun is_down do return down
 
+        # Return true if the key is the up arrow
 	redef fun is_arrow_up do return key_name == "up"
+	# Return true if the key is the left arrow
 	redef fun is_arrow_left do return key_name == "left"
+	# Return true if the key is the down arrow
 	redef fun is_arrow_down do return key_name == "down"
+	# Return true if the key is the right arrow
 	redef fun is_arrow_right do return key_name == "right"
 end
 
