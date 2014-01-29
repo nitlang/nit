@@ -824,6 +824,11 @@ redef class AForExpr
 
 	private fun do_type_iterator(v: TypeVisitor, mtype: MType)
 	do
+		if mtype isa MNullType then
+			v.error(self, "Type error: 'for' cannot iterate over a 'null' type.")
+			return
+		end
+
 		# get obj class
 		var objcla = v.get_mclass(self, "Object")
 		if objcla == null then return
@@ -832,7 +837,7 @@ redef class AForExpr
 		var unsafe_type = v.anchor_to(mtype)
 		if v.try_get_mproperty_by_name2(self, unsafe_type, "iterator") == null then
 			if v.try_get_mproperty_by_name2(self, unsafe_type, "iterate") == null then
-				v.error(self, "Type Error: Expected method 'iterator' in type {mtype}")
+				v.error(self, "Type Error: 'for' expects a type providing 'iterator' method, got '{mtype}'.")
 			else
 				v.modelbuilder.error(self, "NOT YET IMPLEMENTED: Do 'for' on {mtype}")
 			end
@@ -841,7 +846,7 @@ redef class AForExpr
 
 		var itdef = v.get_method(self, mtype, "iterator", true)
 		if itdef == null then
-			v.error(self, "Type Error: Expected method 'iterator' in type {mtype}")
+			v.error(self, "Type Error: 'for' expects a type providing 'iterator' method, got '{mtype}'.")
 			return
 		end
 		self.method_iterator = itdef.mproperty
@@ -849,7 +854,7 @@ redef class AForExpr
 		# check that iterator return something
 		var ittype = itdef.msignature.return_mtype
 		if ittype == null then
-			v.error(self, "Type Error: Expected method 'iterator' to return an Iterator or MapIterator type")
+			v.error(self, "Type Error: 'for' expects method 'iterator' to return an 'Iterator' or 'MapIterator' type'.")
 			return
 		end
 
@@ -864,7 +869,7 @@ redef class AForExpr
 			var coltype = ittype.supertype_to(v.mmodule, v.anchor, colit_cla)
 			var variables =  self.variables
 			if variables.length != 1 then
-				v.error(self, "Type Error: Expected one variable")
+				v.error(self, "Type Error: 'for' expects only one variable when using 'Iterator'.")
 			else
 				variables.first.declared_type = coltype.arguments.first
 			end
@@ -876,7 +881,7 @@ redef class AForExpr
 			var coltype = ittype.supertype_to(v.mmodule, v.anchor, mapit_cla)
 			var variables = self.variables
 			if variables.length != 2 then
-				v.error(self, "Type Error: Expected two variables")
+				v.error(self, "Type Error: 'for' expects two variables when using 'MapIterator'.")
 			else
 				variables[0].declared_type = coltype.arguments[0]
 				variables[1].declared_type = coltype.arguments[1]
@@ -885,33 +890,34 @@ redef class AForExpr
 		end
 
 		if not is_col and not is_map then
-			v.error(self, "Type Error: Expected method 'iterator' to return an Iterator of MapIterator type")
+			v.error(self, "Type Error: 'for' expects method 'iterator' to return an 'Iterator' or 'MapIterator' type'.")
 			return
 		end
 
 		# anchor formal and virtual types
 		if mtype.need_anchor then mtype = v.anchor_to(mtype)
 
+		if mtype isa MNullableType then mtype = mtype.mtype
 		self.coltype = mtype.as(MClassType)
 
 		# get methods is_ok, next, item
 		var ikdef = v.get_method(self, ittype, "is_ok", false)
 		if ikdef == null then
-			v.error(self, "Type Error: Expected method 'is_ok' in Iterator type {ittype}")
+			v.error(self, "Type Error: 'for' expects a method 'is_ok' in 'Iterator' type {ittype}.")
 			return
 		end
 		self.method_is_ok = ikdef.mproperty
 
 		var itemdef = v.get_method(self, ittype, "item", false)
 		if itemdef == null then
-			v.error(self, "Type Error: Expected method 'item' in Iterator type {ittype}")
+			v.error(self, "Type Error: 'for' expects a method 'item' in 'Iterator' type {ittype}.")
 			return
 		end
 		self.method_item = itemdef.mproperty
 
 		var nextdef = v.get_method(self, ittype, "next", false)
 		if nextdef == null then
-			v.error(self, "Type Error: Expected method 'next' in Iterator type {ittype}")
+			v.error(self, "Type Error: 'for' expects a method 'next' in 'Iterator' type {ittype}.")
 			return
 		end
 		self.method_next = nextdef.mproperty
@@ -919,7 +925,7 @@ redef class AForExpr
 		if is_map then
 			var keydef = v.get_method(self, ittype, "key", false)
 			if keydef == null then
-				v.error(self, "Type Error: Expected method 'key' in Iterator type {ittype}")
+				v.error(self, "Type Error: 'for' expects a method 'key' in 'Iterator' type {ittype}.")
 				return
 			end
 			self.method_key = keydef.mproperty
