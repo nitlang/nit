@@ -29,11 +29,13 @@ in "C header" `{
 #include <SDL/SDL_ttf.h>
 `}
 
+# Represent a screen surface
 extern SDLDisplay in "C" `{SDL_Surface *`}
 	super Display
 
 	redef type I: SDLImage
-
+        
+        # Initialize a surface with width and height
 	new ( w, h: Int) is extern `{
 		SDL_Init(SDL_INIT_VIDEO);
 
@@ -47,7 +49,8 @@ extern SDLDisplay in "C" `{SDL_Surface *`}
 
 		return SDL_SetVideoMode( w, h, 24, SDL_HWSURFACE );
 	`}
-
+        
+        # Destroy the surface
 	fun destroy is extern `{
 	if ( SDL_WasInit( SDL_INIT_VIDEO ) )
 		SDL_Quit();
@@ -58,6 +61,7 @@ extern SDLDisplay in "C" `{SDL_Surface *`}
 
 	redef fun finish is extern `{ SDL_Flip( recv ); `}
 
+	# Clear the entire window with given RGB color (integer values)
 	fun clear_int( r, g, b: Int ) is extern `{
 		SDL_FillRect( recv, NULL, SDL_MapRGB(recv->format,r,g,b) ); 
 	`}
@@ -65,6 +69,7 @@ extern SDLDisplay in "C" `{SDL_Surface *`}
 	redef fun width: Int is extern `{ return recv->w; `}
 	redef fun height: Int is extern `{ return recv->h; `}
 
+	# Fill a rectangle with given color
 	fun fill_rect( rect: SDLRectangle, r, g, b: Int ) is extern `{
 		SDL_FillRect( recv, rect,  SDL_MapRGB(recv->format,r,g,b) );
 	`}
@@ -144,8 +149,10 @@ extern SDLDisplay in "C" `{SDL_Surface *`}
 		return null_InputEvent();
 	`}
 
+	# Set the position of the cursor to x,y
 	fun warp_mouse( x,y: Int ) `{ SDL_WarpMouse( x, y ); `}
-
+        
+        # Show or hide the cursor
 	fun show_cursor( show: Bool ) `{ SDL_ShowCursor( show ); `}
 end
 
