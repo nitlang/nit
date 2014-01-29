@@ -365,7 +365,9 @@ redef class Int
 	fun delay is extern `{ SDL_Delay( recv ); `}
 end
 
+# Class to load and use TTF_Font
 extern SDLFont in "C" `{TTF_Font *`}
+        #Load a font with a specified name and size
 	new ( name: String, points: Int ) is extern import String::to_cstring `{
 	char * cname = String_to_cstring( name );
 
@@ -379,7 +381,7 @@ extern SDLFont in "C" `{TTF_Font *`}
 	`}
 
 	fun destroy is extern `{ TTF_CloseFont( recv ); `}
-
+        #Create a String with the specified color, return an SDLImage
 	fun render( text: String, r, g, b: Int ): SDLImage is extern import String::to_cstring `{
 		SDL_Color color;
 		SDL_Surface *text_surface;
@@ -424,9 +426,12 @@ extern SDLFont in "C" `{TTF_Font *`}
 		return TTF_FontLineSkip( recv );
 	`}
 
+        # Return true is the font used fixed width for each char
 	fun is_fixed_width: Bool is extern `{
 		return TTF_FontFaceIsFixedWidth( recv );
 	`}
+
+	# Return the family name of the font
 	fun family_name: nullable String is extern import String::to_cstring, String as nullable `{
 		char *fn = TTF_FontFaceFamilyName( recv );
 
@@ -435,6 +440,8 @@ extern SDLFont in "C" `{TTF_Font *`}
 		else
 			return String_as_nullable( NativeString_to_s( fn ) );
 	`}
+
+	# Return the style name of the font
 	fun style_name: nullable String is extern import String::to_cstring, String as nullable `{
 		char *sn = TTF_FontFaceStyleName( recv );
 
@@ -444,6 +451,7 @@ extern SDLFont in "C" `{TTF_Font *`}
 			return String_as_nullable( NativeString_to_s( sn ) );
 	`}
 
+        # Return the estimated width of a String if used with the current font
 	fun width_of( text: String ): Int is extern import NativeString::to_s `{
 		char *ctext = String_to_cstring( text );
 		int w;
