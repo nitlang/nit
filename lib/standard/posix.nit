@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Access and control of user information service conforming to POSIX
+# User information access and control service conforming to POSIX
 module posix
 
 import string
