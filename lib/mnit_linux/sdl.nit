@@ -180,19 +180,23 @@ extern SDLDrawable in "C" `{SDL_Surface*`}
 	end
 end
 
+# A drawable Image
 extern SDLImage in "C" `{SDL_Surface*`} # TODO remove
 	super DrawableImage
 	super SDLDrawable
-
+        
+        # Import image from a file
 	new from_file( path: String ) is extern import String::to_cstring `{
 		SDL_Surface *image = IMG_Load( String_to_cstring( path ) );
 		return image;
 	`}
-
+        
+        
 	new partial( original: Image, clip: SDLRectangle ) is extern `{
 		return NULL;
 	`}
-
+        
+        # Copy of an existing SDLImage
 	new copy_of( image: SDLImage ) is extern `{
 		SDL_Surface *new_image = SDL_CreateRGBSurface( image->flags, image->w, image->h, 24,
 							  0, 0, 0, 0 );
@@ -206,9 +210,11 @@ extern SDLImage in "C" `{SDL_Surface*`} # TODO remove
 
 		return new_image;
 	`}
-
+        
+        # Save the image into the specified file
 	fun save_to_file( path: String ) is extern import String::to_cstring `{ `}
-
+        
+        # Destroy the image and free the memory
 	redef fun destroy is extern `{ SDL_FreeSurface( recv ); `}
 
 	redef fun width: Int is extern `{ return recv->w; `}
