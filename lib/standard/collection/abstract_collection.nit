@@ -113,7 +113,7 @@ interface Collection[E]
 		return nb
 	end
 
-	# Return one the item of the collection
+	# Return the first item of the collection
 	#
 	#    assert [1,2,3].first                == 1
 	fun first: E
