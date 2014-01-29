@@ -223,7 +223,9 @@ extern SDLImage in "C" `{SDL_Surface*`} # TODO remove
 	fun is_ok: Bool do return true # TODO
 end
 
+# A simple rectangle
 extern SDLRectangle in "C" `{SDL_Rect*`}
+        # Constructor with x,y positions width and height of the rectangle
 	new ( x: Int, y: Int, w: Int, h: Int ) is extern `{
 		SDL_Rect *rect = malloc( sizeof( SDL_Rect ) );
 		rect->x = (Sint16)x;
