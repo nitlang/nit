@@ -254,6 +254,7 @@ interface SDLInputEvent
 	super InputEvent
 end
 
+# MouseEvent class containing the cursor position
 class SDLMouseEvent
 	super PointerEvent
 	super SDLInputEvent
@@ -268,6 +269,7 @@ class SDLMouseEvent
 	end
 end
 
+# MouseButtonEvent used to get information when a button is pressed/depressed
 class SDLMouseButtonEvent
 	super SDLMouseEvent
 
@@ -294,6 +296,7 @@ class SDLMouseButtonEvent
 	end
 end
 
+# MouseMotionEvent to get the cursor position when the mouse is moved
 class SDLMouseMotionEvent
 	super SDLMouseEvent
 
@@ -311,6 +314,7 @@ class SDLMouseMotionEvent
 	redef fun to_s do return "MouseMotionEvent at {x}, {y}"
 end
 
+# SDLKeyEvent for when a key is pressed
 class SDLKeyEvent
 	super KeyEvent
 	super SDLInputEvent
