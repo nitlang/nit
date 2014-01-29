@@ -75,11 +75,11 @@ interface Collection[E]
 	# Is `item` in the collection ?
 	# Comparisons are done with ==
 	#
-	#     assert [1,2,3].has(2)    == true
-	#     assert [1,2,3].has(9)    == false
-	#     assert [1..5[.has(2)     == true
-	#     assert [1..5[.has(9)     == false
-	fun has(item: E): Bool
+	#     assert [1,2,3].contains(2)    == true
+	#     assert [1,2,3].contains(9)    == false
+	#     assert [1..5[.contains(2)     == true
+	#     assert [1..5[.contains(9)     == false
+	fun contains(item: E): Bool
 	do
 		for i in self do if i == item then return true
 		return false
@@ -89,14 +89,14 @@ interface Collection[E]
 	# Comparisons are done with ==
 	# Return true if the collection is empty.
 	#
-	#     assert [1,1,1].has_only(1)         == true
-	#     assert [1,2,3].has_only(1)         == false
-	#     assert [1..1].has_only(1)          == true
-	#     assert [1..3].has_only(1)          == false
-	#     assert [3..3[.has_only(1)          == true # empty collection
+	#     assert [1,1,1].contains_only(1)         == true
+	#     assert [1,2,3].contains_only(1)         == false
+	#     assert [1..1].contains_only(1)          == true
+	#     assert [1..3].contains_only(1)          == false
+	#     assert [3..3[.contains_only(1)          == true # empty collection
 	#
 	# ENSURE `is_empty implies result == true`
-	fun has_only(item: E): Bool
+	fun contains_only(item: E): Bool
 	do
 		for i in self do if i != item then return false
 		return true
@@ -124,13 +124,13 @@ interface Collection[E]
 
 	# Is the collection contains all the elements of `other`?
 	#
-	#    assert [1,1,1].has_all([1])         == true
-	#    assert [1,1,1].has_all([1,2])       == false
-	#    assert [1,3,4,2].has_all([1..2])    == true
-	#    assert [1,3,4,2].has_all([1..5])    == false
-	fun has_all(other: Collection[E]): Bool
+	#    assert [1,1,1].contains_all([1])         == true
+	#    assert [1,1,1].contains_all([1,2])       == false
+	#    assert [1,3,4,2].contains_all([1..2])    == true
+	#    assert [1,3,4,2].contains_all([1..5])    == false
+	fun contains_all(other: Collection[E]): Bool
 	do
-		for x in other do if not has(x) then return false
+		for x in other do if not contains(x) then return false
 		return true
 	end
 end
@@ -160,9 +160,9 @@ class Container[E]
 
 	redef fun length do return 1
 
-	redef fun has(an_item) do return _item == an_item
+	redef fun contains(an_item) do return _item == an_item
 
-	redef fun has_only(an_item) do return _item == an_item
+	redef fun contains_only(an_item) do return _item == an_item
 
 	redef fun count(an_item)
 	do
@@ -206,14 +206,14 @@ interface RemovableCollection[E]
 	fun remove(item: E) is abstract
 
 	# Remove all occurences of `item`
-	fun remove_all(item: E) do while has(item) do remove(item)
+	fun remove_all(item: E) do while contains(item) do remove(item)
 end
 
 # Items can be added to these collections.
 interface SimpleCollection[E]
 	super RemovableCollection[E]
 	# Add an item in a collection.
-	# Ensure col.has(item)
+	# Ensure col.contains(item)
 	fun add(item: E) is abstract
 
 	# Add each item of `coll`.
@@ -228,15 +228,15 @@ end
 #      var b = "Hel" + "lo"
 #      # ...
 #      s.add(a)
-#      assert s.has(b)      ==  true
+#      assert s.contains(b)      ==  true
 interface Set[E: Object]
 	super SimpleCollection[E]
 
-	redef fun has_only(item)
+	redef fun contains_only(item)
 	do
 		var l = length
 		if l == 1 then
-			return has(item)
+			return contains(item)
 		else if l == 0 then
 			return true
 		else
@@ -247,7 +247,7 @@ interface Set[E: Object]
 	# Only 0 or 1
 	redef fun count(item)
 	do
-		if has(item) then
+		if contains(item) then
 			return 1
 		else
 			return 0
@@ -286,8 +286,8 @@ interface MapRead[K: Object, E]
 		return default
 	end
 
-	# Depreciated alias for `keys.has`
-	fun has_key(key: K): Bool do return self.keys.has(key)
+	# Depreciated alias for `keys.contains`
+	fun has_key(key: K): Bool do return self.keys.(key)
 
 	# Get a new iterator on the map.
 	fun iterator: MapIterator[K, E] is abstract
@@ -328,10 +328,10 @@ end
 #
 # The keys and values in the map can also be manipulated directly with the `keys` and `values` methods.
 #
-#     assert map.keys.has("one")    ==  true
-#     assert map.keys.has("tree")   ==  false
-#     assert map.values.has(1)      ==  true
-#     assert map.values.has(3)      ==  false
+#     assert map.keys.contains("one")    ==  true
+#     assert map.keys.contains("tree")   ==  false
+#     assert map.values.contains(1)      ==  true
+#     assert map.values.contains(3)      ==  false
 #
 interface Map[K: Object, E]
 	super MapRead[K, E]
