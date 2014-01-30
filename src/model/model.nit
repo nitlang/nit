@@ -31,7 +31,7 @@ module model
 
 import poset
 import location
-import model_base
+import mmodule
 private import more_collections
 
 redef class Model

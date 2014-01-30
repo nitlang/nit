@@ -52,7 +52,21 @@ redef class ToolContext
 	fun modelbuilder: ModelBuilder do return modelbuilder_real.as(not null)
 	private var modelbuilder_real: nullable ModelBuilder = null
 
+	fun run_global_phases(mainmodule: MModule)
+	do
+		for phase in phases_list do
+			phase.process_mainmodule(mainmodule)
+		end
+	end
 end
+
+redef class Phase
+	# Specific action to execute on the whole program
+	# Called by the `ToolContext::run_global_phases`
+	# @toimplement
+	fun process_mainmodule(mainmodule: MModule) do end
+end
+
 
 # A model builder knows how to load nit source files and build the associated model
 class ModelBuilder
