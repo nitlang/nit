@@ -50,6 +50,8 @@ redef class ToolContext
 	var opt_no_check_other: OptionBool = new OptionBool("Disable implicit tests: unset attribute, null receiver (dangerous)", "--no-check-other")
 	# --typing-test-metrics
 	var opt_typing_test_metrics: OptionBool = new OptionBool("Enable static and dynamic count of all type tests", "--typing-test-metrics")
+	# --stack-trace-C-to-Nit-name-binding
+	var opt_stacktrace: OptionBool = new OptionBool("Enables the use of gperf to bind C to Nit function names when encountering a Stack trace at runtime", "--nit-stacktrace")
 
 	redef init
 	do
@@ -57,6 +59,7 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_output, self.opt_no_cc, self.opt_make_flags, self.opt_compile_dir, self.opt_hardening, self.opt_no_shortcut_range)
 		self.option_context.add_option(self.opt_no_check_covariance, self.opt_no_check_initialization, self.opt_no_check_assert, self.opt_no_check_autocast, self.opt_no_check_other)
 		self.option_context.add_option(self.opt_typing_test_metrics)
+		self.option_context.add_option(self.opt_stacktrace)
 	end
 end
 
@@ -111,6 +114,9 @@ redef class ModelBuilder
 		if compile_dir == null then compile_dir = ".nit_compile"
 
 		compile_dir.mkdir
+
+		if self.toolcontext.opt_stacktrace.value then compiler.build_c_to_nit_bindings
+
 		var orig_dir=".." # FIXME only works if `compile_dir` is a subdirectory of cwd
 
 		var outname = self.toolcontext.opt_output.value
@@ -256,6 +262,9 @@ end
 abstract class AbstractCompiler
 	type VISITOR: AbstractCompilerVisitor
 
+	# Table corresponding c_names to nit names (methods)
+	var names = new HashMap[String, String]
+
 	# The main module of the program currently compiled
 	# Is assigned during the separate compilation
 	var mainmodule: MModule writable
@@ -306,6 +315,40 @@ abstract class AbstractCompiler
 
 	private var provided_declarations = new HashMap[String, String]
 
+	# Builds the .c and .h files to be used when generating a Stack Trace
+	# Binds the generated C function names to Nit function names
+	fun build_c_to_nit_bindings
+	do
+		var compile_dir = modelbuilder.toolcontext.opt_compile_dir.value
+		if compile_dir == null then compile_dir = ".nit_compile"
+
+		var stream = new OFStream.open("{compile_dir}/C_fun_names")
+		stream.write("%\{\n#include \"c_functions_hash.h\"\n%\}\n")
+		stream.write("%define lookup-function-name get_nit_name\n")
+		stream.write("struct C_Nit_Names;\n")
+		stream.write("%%\n")
+		stream.write("####\n")
+		for i in names.keys do
+			stream.write(i)
+			stream.write(",\t\"")
+			stream.write(names[i])
+			stream.write("\"\n")
+		end
+		stream.write("####\n")
+		stream.write("%%\n")
+		stream.close
+
+		stream = new OFStream.open("{compile_dir}/c_functions_hash.h")
+		stream.write("typedef struct C_Nit_Names\{char* name; char* nit_name;\}C_Nit_Names;\n")
+		stream.write("const struct C_Nit_Names* get_nit_name(register const char *str, register unsigned int len);\n")
+		stream.close
+
+		var x = new Process("gperf","{compile_dir}/C_fun_names","-t","-7","--output-file={compile_dir}/c_functions_hash.c","-C")
+		x.wait
+
+		extern_bodies.add(new ExternCFile("{compile_dir}/c_functions_hash.c", ""))
+	end
+
 	# Compile C headers
 	# This method call compile_header_strucs method that has to be refined
 	fun compile_header do
@@ -314,6 +357,9 @@ abstract class AbstractCompiler
 		self.header.add_decl("#include <stdlib.h>")
 		self.header.add_decl("#include <stdio.h>")
 		self.header.add_decl("#include <string.h>")
+		if modelbuilder.toolcontext.opt_stacktrace.value then
+			self.header.add_decl("#include \"c_functions_hash.h\"")
+		end
 		self.header.add_decl("#include <libunwind.h>")
 		self.header.add_decl("#include <signal.h>")
 		self.header.add_decl("#include <gc_chooser.h>")
@@ -365,11 +411,20 @@ abstract class AbstractCompiler
 		v.add_decl("unw_getcontext(&uc);")
 		v.add_decl("unw_init_local(&cursor, &uc);")
 		v.add_decl("printf(\"-------------------------------------------------\\n\");")
-		v.add_decl("printf(\"-- C Stack Trace   ------------------------------\\n\");")
+		v.add_decl("printf(\"--   Stack Trace   ------------------------------\\n\");")
 		v.add_decl("printf(\"-------------------------------------------------\\n\");")
 		v.add_decl("while (unw_step(&cursor) > 0) \{")
 		v.add_decl("	unw_get_proc_name(&cursor, procname, 100, &ip);")
+		if modelbuilder.toolcontext.opt_stacktrace.value then
+		v.add_decl("	const C_Nit_Names* recv = get_nit_name(procname, strlen(procname));")
+		v.add_decl("	if (recv != 0)\{")
+		v.add_decl("		printf(\"` %s\\n\", recv->nit_name);")
+		v.add_decl("	\}else\{")
+		v.add_decl("		printf(\"` %s\\n\", procname);")
+		v.add_decl("	\}")
+		else
 		v.add_decl("	printf(\"` %s \\n\",procname);")
+		end
 		v.add_decl("\}")
 		v.add_decl("printf(\"-------------------------------------------------\\n\");")
 		v.add_decl("free(procname);")
