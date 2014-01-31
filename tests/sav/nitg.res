@@ -22,6 +22,7 @@
   --no-check-autocast         Disable implicit casts on unsafe expression usage (dangerous)
   --no-check-other            Disable implicit tests: unset attribute, null receiver (dangerous)
   --typing-test-metrics       Enable static and dynamic count of all type tests
+  --nit-stacktrace            Enables the use of gperf to bind C to Nit function names when encountering a Stack trace at runtime
   --separate                  Use separate compilation
   --no-inline-intern          Do not inline call to intern methods
   --no-union-attribute        Put primitive attibutes in a box instead of an union
