@@ -106,3 +106,19 @@ redef class NativeString
 	redef fun serialize_to_json(v) do to_s.serialize_to_json(v)
 end
 
+redef class Array[E]
+	redef fun serialize_to_json(v) do
+		v.stream.write "["
+		var is_first = true
+		for e in self do
+			if is_first then
+				is_first = false
+			else v.stream.write(", ")
+			
+			if not v.try_to_serialize(e) then
+				v.warn("element of type {e.class_name} is not serializable.")
+			end
+		end
+		v.stream.write "]"
+	end
+end

@@ -12,6 +12,7 @@ class A
 	var i: Int
 	var s: String
 	var n: nullable Int
+	var array: Array[nullable Object] = new Array[nullable Object].with_items(88, "hello", null)
 
 	init(b: Bool, c: Char, f: Float, i: Int, s: String, n: nullable Int)
 	do
