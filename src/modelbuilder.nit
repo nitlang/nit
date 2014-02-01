@@ -132,7 +132,7 @@ class ModelBuilder
 		var time0 = get_time
 		# Parse and recursively load
 		self.toolcontext.info("*** PARSE ***", 1)
-		var mmodules = new Array[MModule]
+		var mmodules = new ArraySet[MModule]
 		for a in modules do
 			var nmodule = self.load_module(null, a)
 			if nmodule == null then continue # Skip error
@@ -148,7 +148,7 @@ class ModelBuilder
 			exit(0)
 		end
 
-		return mmodules
+		return mmodules.to_a
 	end
 
 	# Return a class named `name` visible by the module `mmodule`.
@@ -405,7 +405,11 @@ class ModelBuilder
 		var tree = parser.parse
 		file.close
 		var mod_name = filename.basename(".nit")
-		return load_module_commons(owner, tree, mod_name)
+
+		var nmodule = load_module_commons(owner, tree, mod_name)
+		if nmodule != null then loaded_nmodules[module_path] = nmodule
+
+		return nmodule
 	end
 
 	fun load_rt_module(owner: MModule, nmodule: AModule, mod_name: String): nullable AModule
