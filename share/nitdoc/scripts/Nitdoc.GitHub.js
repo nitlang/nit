@@ -743,10 +743,6 @@ Nitdoc.GitHub.LoginBox = function() {
 			.addClass("nitdoc-github-loginbox-arrow")
 			.append("&nbsp;")
 		)
-		.append(
-			$(document.createElement("h3"))
-			.append("Github Sign In")
-		)
 		.append(loginBoxContent);
 
 		loginBoxLi.append(loginBox);
@@ -756,6 +752,10 @@ Nitdoc.GitHub.LoginBox = function() {
 	// Panel of login box to display when the user is logged in
 	var displayLogout = function(origin, user) {
 		var panel = $(document.createElement("div"))
+		.append(
+			$(document.createElement("h3"))
+			.append("Signed in Github")
+		)
 		.append(
 			$(document.createElement("h4"))
 			.append("Hello ")
@@ -816,6 +816,10 @@ Nitdoc.GitHub.LoginBox = function() {
 	// Panel of login box to display when the user is logged out
 	var displayLogin = function() {
 		var panel = $(document.createElement("form"))
+		.append(
+			$(document.createElement("h3"))
+			.append("Sign in Github")
+		)
 		.append(
 			$(document.createElement("label"))
 			.attr("for", "nitdoc-github-login-field")
