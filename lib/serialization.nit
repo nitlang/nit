@@ -28,13 +28,20 @@ interface Serializer
 	# Serialize an attribute, used by `Serializable::core_serialize_to`
 	fun serialize_attribute(name: String, value: nullable Object)
 	do
+		if not try_to_serialize(value) then
+			warn("argument {value.class_name}::{name} is not serializable.")
+		end
+	end
+
+	# Serialize `value` is possie, i.e. it is `Serializable` or `null`
+	fun try_to_serialize(value: nullable Object): Bool
+	do
 		if value isa Serializable then
 			value.serialize_to_or_delay(self)
 		else if value == null then
 			serialize value
-		else
-			warn("argument {value.class_name}::{name} is not serializable.")
-		end
+		else return false
+		return true
 	end
 
 	# Warn of problems and potential errors (such as if an attribute
