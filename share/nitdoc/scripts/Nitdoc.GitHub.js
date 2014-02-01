@@ -980,7 +980,7 @@ Nitdoc.GitHub.CommentBox.prototype.open = function(baseArea) {
 		$(document.createElement("button"))
 		.addClass("nitdoc-github-button")
 		.addClass("nitdoc-github-commit")
-		.append("Commit")
+		.append("Commit...")
 		.click(function() {
 			instance.infos.newComment = tarea.val();
 			instance.infos.commentBox = instance;
