@@ -54,7 +54,7 @@ class ICodeBuilder
 		stmt(iif)
 		var old_seq = seq
 		seq = iif.then_seq
-		add_abort("Reciever is null")
+		add_abort("Receiver is null")
 		seq = old_seq
 	end
 

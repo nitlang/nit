@@ -698,7 +698,7 @@ abstract class AbstractCompilerVisitor
 		var maybenull = recv.mcasttype isa MNullableType or recv.mcasttype isa MNullType
 		if maybenull then
 			self.add("if ({recv} == NULL) \{")
-			self.add_abort("Reciever is null")
+			self.add_abort("Receiver is null")
 			self.add("\}")
 		end
 	end

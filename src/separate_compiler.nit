@@ -1043,7 +1043,7 @@ class SeparateCompilerVisitor
 					self.add("{res} = 1; /* {arg.inspect} cannot be null */")
 				end
 			else
-				self.add_abort("Reciever is null")
+				self.add_abort("Receiver is null")
 			end
 			self.add("\} else \{")
 		end

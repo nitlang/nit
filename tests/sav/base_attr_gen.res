@@ -1,1 +1,1 @@
-Runtime error: Reciever is null (base_attr_gen.nit:8)
+Runtime error: Receiver is null (base_attr_gen.nit:8)
