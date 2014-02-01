@@ -17,6 +17,7 @@
 module json_serialization
 
 import serialization
+import simple_json_reader
 
 class JsonSerializer
 	super Serializer
@@ -64,6 +65,97 @@ class JsonSerializer
 			return id
 		end
 	end
+end
+
+# Deserializer from a Json string
+class JsonDeserializer
+	super Deserializer
+
+	var root: nullable Object
+	var path = new Array[HashMap[String, nullable Object]]
+	var id_to_object = new HashMap[Int, Object]
+
+	var just_opened_id: nullable Int = null
+
+	init(text: String)
+	do
+		var root = text.json_to_nit_object
+		if root isa HashMap[String, nullable Object] then path.add(root)
+		self.root = root
+	end
+
+	redef fun deserialize_attribute(name)
+	do
+		assert not path.is_empty
+		var current = path.last
+
+		assert current.keys.has(name)
+		var value = current[name]
+		
+		return convert_object(value)
+	end
+
+	# This may be called multiple times by the same object from constructors
+	# in different nclassdef
+	redef fun notify_of_creation(new_object)
+	do
+		var id = just_opened_id
+		assert id != null
+		id_to_object[id] = new_object
+	end
+
+	# Convert from simple Json object to Nit object
+	private fun convert_object(object: nullable Object): nullable Object
+	do
+		if object isa HashMap[String, nullable Object] then
+			assert object.keys.has("__kind")
+			var kind = object["__kind"]
+
+			# ref?
+			if kind == "ref" then
+				assert object.keys.has("__id")
+				var id = object["__id"]
+				assert id isa Int
+
+				assert id_to_object.keys.has(id)
+				return id_to_object[id]
+			end
+
+			# obj?
+			if kind == "obj" then
+				assert object.keys.has("__id")
+				var id = object["__id"]
+				assert id isa Int
+
+				assert object.keys.has("__class")
+				var class_name = object["__class"]
+				assert class_name isa String
+
+				assert not id_to_object.keys.has(id) else print "Error: Object with id '{id}' is deserialized twice."
+
+				# advance on path
+				path.push object
+
+				just_opened_id = id
+				var value = deserialize_class(class_name)
+				just_opened_id = null
+
+				# revert on path
+				path.pop
+
+				return value
+			end
+
+			# char? TODO
+
+			print "Malformed Json string: unexpected Json Object kind '{kind}'"
+			abort
+		end
+
+		return object
+	end
+
+	redef fun deserialize do return convert_object(root)
 end
 
 redef class Serializable

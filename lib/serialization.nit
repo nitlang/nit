@@ -49,6 +49,25 @@ interface Serializer
 	fun warn(msg: String) do print "Serialization warning: {msg}"
 end
 
+# Abstract deserialization service
+#
+# After initialization of one of its sub-classes, call `deserialize`
+interface Deserializer
+	# Main method of this class, returns a Nit object
+	fun deserialize: nullable Object is abstract
+
+	# Internal method to be implemented by sub-classes
+	fun deserialize_attribute(name: String): nullable Object is abstract
+
+	# Internal method called by objects in creation,
+	# to be implemented by sub-classes
+	fun notify_of_creation(new_object: Object) is abstract
+
+	# Mainly generated method to return the next instance of the givent
+	# class by name
+	fun deserialize_class(class_name: String): Object do abort
+end
+
 # Instances of this class can be passed to `Serializer::serialize`
 interface Serializable
 	# Full or true serialization
