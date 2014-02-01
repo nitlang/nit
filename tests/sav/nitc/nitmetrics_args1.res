@@ -241,7 +241,7 @@ Number of dead method definitions of live methods: 0
 --- Explicit vs. Implicit Self ---
 Total number of self: 5
 Total number of implicit self: 4 (80.00%)
---- Sends on Nullable Reciever ---
+--- Sends on Nullable Receiver ---
 Total number of sends: 19
 Number of sends on a nullable receiver: 0 (0.0%)
 Number of buggy sends (cannot determine the type of the receiver): 0 (0.0%)

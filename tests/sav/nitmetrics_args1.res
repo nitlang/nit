@@ -339,7 +339,7 @@ Statistics of type usage:
   C: 1 (11.11%)
   B: 1 (11.11%)
   A: 1 (11.11%)
---- Sends on Nullable Reciever ---
+--- Sends on Nullable Receiver ---
 Total number of sends: 19
 Number of sends on a nullable receiver: 0 (0.0%)
 Number of buggy sends (cannot determine the type of the receiver): 0 (0.0%)
