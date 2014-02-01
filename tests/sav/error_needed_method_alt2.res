@@ -1,2 +1,2 @@
 alt/error_needed_method_alt2.nit:47,10--27: Error: Method 'init' doesn't exists in Collection[Int].
-alt/error_needed_method_alt2.nit:47,1--40: Type Error: Expected method 'iterator' in type Collection[Int]
+alt/error_needed_method_alt2.nit:47,1--40: Type Error: 'for' expects a type providing 'iterator' method, got 'Collection[Int]'.
