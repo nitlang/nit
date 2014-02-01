@@ -572,7 +572,7 @@ Nitdoc.GitHub.API = function() {
 				base_tree: baseTree.sha,
 				tree: [{
 					path: path,
-					mode: 100644, // file (blob)
+					mode: "100644", // file (blob)
 					type: "blob",
 					sha: blob.sha
 				}]
