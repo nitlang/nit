@@ -161,7 +161,7 @@ class NitdocContext
 	end
 
 	private fun overview do
-		var overviewpage = new NitdocOverview(self, dot_dir)
+		var overviewpage = new NitdocOverview(self)
 		overviewpage.save("{output_dir.to_s}/index.html")
 	end
 
@@ -173,14 +173,14 @@ class NitdocContext
 	private fun modules do
 		for mmodule in model.mmodules do
 			if mmodule.name == "<main>" then continue
-			var modulepage = new NitdocModule(mmodule, self, dot_dir)
+			var modulepage = new NitdocModule(mmodule, self)
 			modulepage.save("{output_dir.to_s}/{mmodule.url}")
 		end
 	end
 
 	private fun classes do
 		for mclass in mbuilder.model.mclasses do
-			var classpage = new NitdocClass(mclass, self, dot_dir, source)
+			var classpage = new NitdocClass(mclass, self)
 			classpage.save("{output_dir.to_s}/{mclass.url}")
 		end
 	end
@@ -223,8 +223,6 @@ end
 # Nitdoc base page
 abstract class NitdocPage
 
-	var dot_dir: nullable String
-	var source: nullable String
 	var ctx: NitdocContext
 
 	init(ctx: NitdocContext) do
@@ -280,7 +278,7 @@ abstract class NitdocPage
 
 	# Generate a clickable graphviz image using a dot content
 	protected fun generate_dot(dot: String, name: String, alt: String) do
-		var output_dir = dot_dir
+		var output_dir = ctx.dot_dir
 		if output_dir == null then return
 		var file = new OFStream.open("{output_dir}/{name}.dot")
 		file.write(dot)
@@ -297,6 +295,7 @@ abstract class NitdocPage
 	# Add a (source) link for a given location
 	protected fun show_source(l: Location): String
 	do
+		var source = ctx.source
 		if source == null then
 			return "({l.file.filename.simplify_path})"
 		else
@@ -307,6 +306,7 @@ abstract class NitdocPage
 			source = x.join(l.line_start.to_s)
 			x = source.split_with("%L")
 			source = x.join(l.line_end.to_s)
+			source = source.simplify_path
 			return " (<a target='_blank' title='Show source' href=\"{source.to_s}\">source</a>)"
 		end
 	end
@@ -371,10 +371,9 @@ class NitdocOverview
 	private var mbuilder: ModelBuilder
 	private var mmodules = new Array[MModule]
 
-	init(ctx: NitdocContext, dot_dir: nullable String) do
+	init(ctx: NitdocContext) do
 		super(ctx)
 		self.mbuilder = ctx.mbuilder
-		self.dot_dir = dot_dir
 		# get modules
 		var mmodules = new HashSet[MModule]
 		for mmodule in mbuilder.model.mmodule_importation_hierarchy do
@@ -464,7 +463,6 @@ class NitdocSearch
 
 	init(ctx: NitdocContext) do
 		super(ctx)
-		self.dot_dir = null
 	end
 
 	redef fun title do return "Search"
@@ -553,11 +551,10 @@ class NitdocModule
 	private var intro_mclasses = new HashSet[MClass]
 	private var redef_mclasses = new HashSet[MClass]
 
-	init(mmodule: MModule, ctx: NitdocContext, dot_dir: nullable String) do
+	init(mmodule: MModule, ctx: NitdocContext) do
 		super(ctx)
 		self.mmodule = mmodule
 		self.mbuilder = ctx.mbuilder
-		self.dot_dir = dot_dir
 		# get local mclasses
 		for m in mmodule.in_nesting.greaters do
 			for mclassdef in m.mclassdefs do
@@ -746,11 +743,9 @@ class NitdocClass
 	private var meths = new HashSet[MMethodDef]
 	private var inherited = new HashSet[MPropDef]
 
-	init(mclass: MClass, ctx: NitdocContext, dot_dir: nullable String, source: nullable String) do
+	init(mclass: MClass, ctx: NitdocContext) do
 		super(ctx)
 		self.mclass = mclass
-		self.dot_dir = dot_dir
-		self.source = source
 		# load properties
 		var locals = new HashSet[MProperty]
 		for mclassdef in mclass.mclassdefs do
