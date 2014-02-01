@@ -20,9 +20,10 @@ module literal
 import parser
 import toolcontext
 import phase
+import serialization_phase
 
 redef class ToolContext
-	var literal_phase: Phase = new LiteralPhase(self, null)
+	var literal_phase: Phase = new LiteralPhase(self, [serialization_phase])
 end
 
 private class LiteralPhase
