@@ -49,6 +49,9 @@ Nitdoc.GitHub.UI = function() {
 
 		// parse origin
 		var parts = upstream.split(":");
+		if(parts.length < 3) {
+			console.error("Incorrect upstream name `" + upstream + "`, should be of the form user:repo:branch");
+		}
 		origin = {
 			user: parts[0],
 			repo: parts[1],
