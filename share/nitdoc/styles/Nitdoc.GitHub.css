@@ -120,6 +120,12 @@
 	margin-bottom: 20px;
 }
 
+#nitdoc-github-loginbox a.nitdoc-github-loginbox-githublink {
+	display: block;
+	margin: 10px;
+	color: #0D8921;
+}
+
 /* 
  * Nitdoc Github buttons
  */

@@ -768,30 +768,32 @@ Nitdoc.GitHub.LoginBox = function() {
 		.append(
 			$(document.createElement("label"))
 			.attr("for", "github-origin")
-			.append("Origin")
+			.append("Upstram branch")
 		)
 		.append(
-			$(document.createElement("input"))
+			$(document.createElement("a"))
+			.addClass("nitdoc-github-loginbox-githublink")
 			.attr({
-				id: "github-origin",
-				type: "text",
-				disabled: "disabled",
-				value: origin.user + ":" + origin.repo + ":" + origin.branch
+				title: "Open branch in GitHub",
+				href: "https://github.com/" + origin.user + "/" + origin.repo + "/tree/" + origin.branch,
+				target: "_blank"
 			})
+			.append(origin.user + ":" + origin.repo + ":" + origin.branch)
 		)
 		.append(
 			$(document.createElement("label"))
 			.attr("for", "github-base")
-			.append("Base")
+			.append("Your branch")
 		)
 		.append(
-			$(document.createElement("input"))
+			$(document.createElement("a"))
+			.addClass("nitdoc-github-loginbox-githublink")
 			.attr({
-				id: "github-base",
-				type: "text",
-				disabled: "disabled",
-				value: user.login + ":" + user.repo + ":" + user.branch
+				title: "Open branch in GitHub",
+				href: "https://github.com/" + user.login + "/" + user.repo + "/tree/" + user.branch,
+				target: "_blank"
 			})
+			.append(origin.user + ":" + origin.repo + ":" + origin.branch)
 		)
 		.append(
 			$(document.createElement("button"))
