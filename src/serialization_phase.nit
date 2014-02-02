@@ -54,11 +54,7 @@ private class SerializationPhase
 		code.add "	super"
 
 		for attribute in npropdefs do if attribute isa AAttrPropdef then
-			var name
-			if attribute.n_id == null then 
-				name = attribute.n_id2.text
-			else name = attribute.n_id.text
-
+			var name = attribute.name
 			code.add "	v.serialize_attribute(\"{name}\", {name})"
 		end
 
@@ -66,5 +62,25 @@ private class SerializationPhase
 
 		# Create method Node and add it to the AST
 		npropdefs.push(toolcontext.parse_propdef(code.join("\n")))
+	end
+end
+
+redef class AAttrPropdef
+	private fun name: String
+	do
+		if n_id == null then return n_id2.text
+		return n_id.text
+	end
+
+	private fun type_name: String
+	do
+		var name = n_type.n_id.text
+
+		var types = n_type.n_types
+		if not types.is_empty then
+			var params = new Array[String]
+			for t in types do params.add(t.n_id.text)
+			return "{name}[{params.join(", ")}]"
+		else return name
 	end
 end
