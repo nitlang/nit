@@ -49,6 +49,9 @@ Nitdoc.GitHub.UI = function() {
 
 		// parse origin
 		var parts = upstream.split(":");
+		if(parts.length < 3) {
+			console.error("Incorrect upstream name `" + upstream + "`, should be of the form user:repo:branch");
+		}
 		origin = {
 			user: parts[0],
 			repo: parts[1],
@@ -572,7 +575,7 @@ Nitdoc.GitHub.API = function() {
 				base_tree: baseTree.sha,
 				tree: [{
 					path: path,
-					mode: 100644, // file (blob)
+					mode: "100644", // file (blob)
 					type: "blob",
 					sha: blob.sha
 				}]
@@ -740,10 +743,6 @@ Nitdoc.GitHub.LoginBox = function() {
 			.addClass("nitdoc-github-loginbox-arrow")
 			.append("&nbsp;")
 		)
-		.append(
-			$(document.createElement("h3"))
-			.append("Github Sign In")
-		)
 		.append(loginBoxContent);
 
 		loginBoxLi.append(loginBox);
@@ -753,6 +752,10 @@ Nitdoc.GitHub.LoginBox = function() {
 	// Panel of login box to display when the user is logged in
 	var displayLogout = function(origin, user) {
 		var panel = $(document.createElement("div"))
+		.append(
+			$(document.createElement("h3"))
+			.append("Signed in Github")
+		)
 		.append(
 			$(document.createElement("h4"))
 			.append("Hello ")
@@ -765,30 +768,32 @@ Nitdoc.GitHub.LoginBox = function() {
 		.append(
 			$(document.createElement("label"))
 			.attr("for", "github-origin")
-			.append("Origin")
+			.append("Upstram branch")
 		)
 		.append(
-			$(document.createElement("input"))
+			$(document.createElement("a"))
+			.addClass("nitdoc-github-loginbox-githublink")
 			.attr({
-				id: "github-origin",
-				type: "text",
-				disabled: "disabled",
-				value: origin.user + ":" + origin.repo + ":" + origin.branch
+				title: "Open branch in GitHub",
+				href: "https://github.com/" + origin.user + "/" + origin.repo + "/tree/" + origin.branch,
+				target: "_blank"
 			})
+			.append(origin.user + ":" + origin.repo + ":" + origin.branch)
 		)
 		.append(
 			$(document.createElement("label"))
 			.attr("for", "github-base")
-			.append("Base")
+			.append("Your branch")
 		)
 		.append(
-			$(document.createElement("input"))
+			$(document.createElement("a"))
+			.addClass("nitdoc-github-loginbox-githublink")
 			.attr({
-				id: "github-base",
-				type: "text",
-				disabled: "disabled",
-				value: user.login + ":" + user.repo + ":" + user.branch
+				title: "Open branch in GitHub",
+				href: "https://github.com/" + user.login + "/" + user.repo + "/tree/" + user.branch,
+				target: "_blank"
 			})
+			.append(origin.user + ":" + origin.repo + ":" + origin.branch)
 		)
 		.append(
 			$(document.createElement("button"))
@@ -811,6 +816,10 @@ Nitdoc.GitHub.LoginBox = function() {
 	// Panel of login box to display when the user is logged out
 	var displayLogin = function() {
 		var panel = $(document.createElement("form"))
+		.append(
+			$(document.createElement("h3"))
+			.append("Sign in Github")
+		)
 		.append(
 			$(document.createElement("label"))
 			.attr("for", "nitdoc-github-login-field")
@@ -971,7 +980,7 @@ Nitdoc.GitHub.CommentBox.prototype.open = function(baseArea) {
 		$(document.createElement("button"))
 		.addClass("nitdoc-github-button")
 		.addClass("nitdoc-github-commit")
-		.append("Commit")
+		.append("Commit...")
 		.click(function() {
 			instance.infos.newComment = tarea.val();
 			instance.infos.commentBox = instance;
