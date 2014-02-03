@@ -6,6 +6,6 @@ doc/index.html:
 	../../bin/nitdoc src/pep8analysis.nit
 
 tests: bin/pep8analysis
-	bin/pep8analysis --cfg-long tests/privat/*.pep tests/laf/*.pep tests/terrasa/*.pep
+	bin/pep8analysis --cfg-long tests/privat/*.pep tests/micro/*.pep tests/terrasa/*.pep
 
 .PHONY: bin/pep8analysis tests doc/index.html
