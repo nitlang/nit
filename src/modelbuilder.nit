@@ -376,10 +376,9 @@ class ModelBuilder
 	# loaded module by absolute path
 	private var loaded_nmodules = new HashMap[String, AModule]
 
-	# Try to load a module using a path.
+	# Try to load a module AST using a path.
 	# Display an error if there is a problem (IO / lexer / parser) and return null
-	# Note: usually, you do not need this method, use `get_mmodule_by_name` instead.
-	fun load_module(owner: nullable MModule, filename: String): nullable AModule
+	fun load_module_ast(filename: String): nullable AModule
 	do
 		if filename.file_extension != "nit" then
 			self.toolcontext.error(null, "Error: file {filename} is not a valid nit module.")
@@ -395,8 +394,7 @@ class ModelBuilder
 			return loaded_nmodules[module_path]
 		end
 
-		var x = if owner != null then owner.to_s else "."
-		self.toolcontext.info("load module {filename} in {x}", 2)
+		self.toolcontext.info("load module {filename}", 2)
 
 		# Load the file
 		var file = new IFStream.open(filename)
@@ -406,8 +404,33 @@ class ModelBuilder
 		file.close
 		var mod_name = filename.basename(".nit")
 
-		var nmodule = load_module_commons(owner, tree, mod_name)
-		if nmodule != null then loaded_nmodules[module_path] = nmodule
+		# Handle lexer and parser error
+		var nmodule = tree.n_base
+		if nmodule == null then
+			var neof = tree.n_eof
+			assert neof isa AError
+			error(neof, neof.message)
+			return null
+		end
+
+		loaded_nmodules[module_path] = nmodule
+		return nmodule
+	end
+
+	# Try to load a module and its imported modules using a path.
+	# Display an error if there is a problem (IO / lexer / parser / importation) and return null
+	# Note: usually, you do not need this method, use `get_mmodule_by_name` instead.
+	fun load_module(owner: nullable MModule, filename: String): nullable AModule
+	do
+		var nmodule = load_module_ast(filename)
+		if nmodule == null then return null # forward error
+
+		var mmodule = nmodule.mmodule
+		if mmodule != null then return nmodule
+
+		var mod_name = filename.basename(".nit")
+		mmodule = build_a_mmodule(owner, mod_name, nmodule)
+		if mmodule == null then return null
 
 		return nmodule
 	end
@@ -430,20 +453,10 @@ class ModelBuilder
 		return nmodule
 	end
 
-	# Try to load a module using a path.
-	# Display an error if there is a problem (IO / lexer / parser) and return null
-	# Note: usually, you do not need this method, use `get_mmodule_by_name` instead.
-	private fun load_module_commons(owner: nullable MModule, tree: Start, mod_name: String): nullable AModule
+	# Visit the AST and create the `MModule` object
+	# Then, recursively load imported modules
+	private fun build_a_mmodule(owner: nullable MModule, mod_name: String, nmodule: AModule): nullable MModule
 	do
-		# Handle lexer and parser error
-		var nmodule = tree.n_base
-		if nmodule == null then
-			var neof = tree.n_eof
-			assert neof isa AError
-			error(neof, neof.message)
-			return null
-		end
-
 		# Check the module name
 		var decl = nmodule.n_moduledecl
 		if decl == null then
@@ -463,7 +476,7 @@ class ModelBuilder
 
 		build_module_importation(nmodule)
 
-		return nmodule
+		return mmodule
 	end
 
 	# Analysis the module importation and fill the module_importation_hierarchy
