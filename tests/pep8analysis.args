@@ -1,0 +1,4 @@
+../contrib/pep8analysis/tests/micro/*.pep ../contrib/pep8analysis/tests/privat/*.pep ../contrib/pep8analysis/tests/terrasa/*.pep -o out/pep8analysis_args1
+--ast ../contrib/pep8analysis/tests/micro/*.pep ../contrib/pep8analysis/tests/privat/*.pep ../contrib/pep8analysis/tests/terrasa/*.pep -o out/pep8analysis_args2
+--cfg ../contrib/pep8analysis/tests/micro/*.pep ../contrib/pep8analysis/tests/privat/*.pep ../contrib/pep8analysis/tests/terrasa/*.pep -o out/pep8analysis_args3
+--cfg-long ../contrib/pep8analysis/tests/micro/*.pep ../contrib/pep8analysis/tests/privat/*.pep ../contrib/pep8analysis/tests/terrasa/*.pep -o out/pep8analysis_args4
