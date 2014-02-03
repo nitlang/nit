@@ -1,4 +1,4 @@
-Usage: out/p8 [options] file.pep [other_file.pep [...]]
+Usage: ./out/pep8analysis.bin [options] file.pep [other_file.pep [...]]
 Options:
   --ast                Print the AST
   --cfg                Print the CFG to "cfg.dot" (for debugging purposes)
