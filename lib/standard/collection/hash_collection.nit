@@ -440,6 +440,8 @@ class HashSet[E: Object]
 		init
 		add_all(coll)
 	end
+
+	redef fun new_set do return new HashSet[E]
 end
 
 private class HashSetNode[E: Object]

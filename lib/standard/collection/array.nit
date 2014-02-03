@@ -424,6 +424,8 @@ class ArraySet[E: Object]
 
 	# Create an empty set with a given capacity.
 	init with_capacity(i: Int) do _array = new Array[E].with_capacity(i)
+
+	redef fun new_set do return new ArraySet[E]
 end
 
 # Iterators on sets implemented with arrays.

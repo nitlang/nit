@@ -272,6 +272,25 @@ interface Set[E: Object]
 		for e in self do res += res.hash
 		return res
 	end
+
+	# Returns the union of this set with the `other` set
+	fun union(other: Set[E]): Set[E]
+	do
+		var nhs = new_set
+		nhs.add_all self
+		nhs.add_all other
+		return nhs
+	end
+
+	# Returns the intersection of this set with the `other` set
+	fun intersection(other: Set[E]): Set[E]
+	do
+		var nhs = new_set
+		for v in self do if other.has(v) then nhs.add(v)
+		return nhs
+	end
+
+	protected fun new_set: Set[E] is abstract
 end
 
 # MapRead are abstract associative collections: `key` -> `item`.

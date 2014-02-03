@@ -1,5 +1,4 @@
 import cfg
-import advanced_collections
 
 class FlowAnalysis[S]
 	super Visitor
