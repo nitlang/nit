@@ -1700,6 +1700,7 @@ class SeparateRuntimeFunction
 			v.add("return {frame.returnvar.as(not null)};")
 		end
 		v.add("\}")
+		if not self.c_name.has_substring("VIRTUAL", 0) then compiler.names[self.c_name] = "{mmethoddef.mclassdef.mmodule.name}::{mmethoddef.mclassdef.mclass.name}::{mmethoddef.mproperty.name} ({mmethoddef.location.file.filename}:{mmethoddef.location.line_start})"
 	end
 end
 
@@ -1777,6 +1778,7 @@ class VirtualRuntimeFunction
 			v.add("return {frame.returnvar.as(not null)};")
 		end
 		v.add("\}")
+		if not self.c_name.has_substring("VIRTUAL", 0) then compiler.names[self.c_name] = "{mmethoddef.mclassdef.mmodule.name}::{mmethoddef.mclassdef.mclass.name}::{mmethoddef.mproperty.name} ({mmethoddef.location.file.filename}--{mmethoddef.location.line_start})"
 	end
 
 	# TODO ?
