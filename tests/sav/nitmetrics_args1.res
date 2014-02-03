@@ -362,7 +362,10 @@ Number of live method definitions: 14
 Number of live runtime cast types (ie used in as and isa): 0
 	
 Number of dead method definitions of live methods: 0
+generating out/nitmetrics_args1.write/project_hierarchy.dot
+generating out/nitmetrics_args1.write/module_hierarchy.dot
 class_hierarchy.dot
 classdef_hierarchy.dot
 model.html
 module_hierarchy.dot
+project_hierarchy.dot
