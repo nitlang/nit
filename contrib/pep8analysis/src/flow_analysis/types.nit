@@ -2,7 +2,7 @@ import pipeline
 import opts
 
 import framework
-import range
+import range_analysis
 
 redef class AnalysisManager
 	var opt_report_unknown_types = new OptionBool("Report unknown types", "--report-types-top")

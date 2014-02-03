@@ -1,4 +1,4 @@
-module range
+module range_analysis
 
 import framework
 
