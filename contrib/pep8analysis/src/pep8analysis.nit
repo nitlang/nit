@@ -53,6 +53,15 @@ redef class AnalysisManager
 
 			if failed then continue
 
+			var mangled_filename = filename.replace("/","-").replace("..","up")
+			if opt_ast.value then
+				var printer = new ASTPrinter
+				printer.enter_visit(ast)
+				var of = new OFStream.open("{dir}/{mangled_filename.replace(".pep", ".ast.dot")}")
+				of.write printer.str
+				of.close
+			end
+
 			# Build program model
 			var model = build_model(ast)
 
@@ -65,6 +74,12 @@ redef class AnalysisManager
 
 			# Create CFG
 			var cfg = build_cfg(model)
+
+			if opt_cfg.value or opt_cfg_long.value then
+				var of = new OFStream.open("{dir}/{mangled_filename.replace(".pep", ".cfg.dot")}")
+				cfg.print_dot(of, opt_cfg_long.value)
+				of.close
+			end
 
 			if failed then continue
 
@@ -80,7 +95,7 @@ redef class AnalysisManager
 			do_types_analysis(ast, cfg)
 
 			# Print results
-			var of = new OFStream.open("{dir}/{filename.replace("/","-").replace(".pep",".dot")}")
+			var of = new OFStream.open("{dir}/{mangled_filename.replace(".pep",".analysis.dot")}")
 			cfg.print_dot(of, true)
 			of.close
 		end

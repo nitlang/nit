@@ -39,12 +39,6 @@ redef class AnalysisManager
 			end
 		end
 
-		if opt_cfg.value or opt_cfg_long.value then
-			var of = new OFStream.open("cfg.dot")
-			cfg.print_dot(of, opt_cfg_long.value)
-			of.close
-		end
-
 		verify_cfg_sanity(cfg)
 
 		return cfg

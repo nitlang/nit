@@ -16,12 +16,6 @@ redef class AnalysisManager
 	do
 		var ast = super
 
-		if ast != null and opt_ast.value then
-			var printer = new ASTPrinter
-			printer.enter_visit(ast)
-			print printer.str
-		end
-
 		return ast
 	end
 end
