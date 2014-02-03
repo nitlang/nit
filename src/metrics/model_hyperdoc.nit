@@ -43,17 +43,50 @@ do
 	buf.append("<html>\n<body>\n")
 	buf.append("<h1>Model</h1>\n")
 
+	buf.append("<h2>Projects</h2>\n")
+	for mproject in model.mprojects do
+		buf.append("<h3 id='project-{mproject}'>Project {mproject}</h3>\n")
+		buf.append("<dl>\n")
+		buf.append("<dt>groups</dt>\n")
+		for x in mproject.mgroups do
+			buf.append("<dd>{linkto(x)}</dd>\n")
+		end
+		buf.append("</dl>\n")
+	end
+
+	buf.append("<h2>Groups</h2>\n")
+	for mproject in model.mprojects do
+		for mgroup in mproject.mgroups do
+			buf.append("<h3 id='group-{mgroup}'>Group {mgroup}</h3>\n")
+			buf.append("<dl>\n")
+			buf.append("<dt>project</dt>\n")
+			buf.append("<dd>{linkto(mproject)}</dd>\n")
+			buf.append("<dt>filepath</dt>\n")
+			buf.append("<dd>{mgroup.filepath}</dd>\n")
+			var p = mgroup.parent
+			if p != null then
+				buf.append("<dt>parent group</dt>\n")
+				buf.append("<dd>{linkto(p)}</dd>\n")
+			end
+			buf.append("<dt>nested groups</dt>\n")
+			for x in mgroup.in_nesting.direct_smallers do
+				buf.append("<dd>{linkto(x)}</dd>\n")
+			end
+			buf.append("<dt>modules</dt>\n")
+			for x in mgroup.mmodules do
+				buf.append("<dd>{linkto(x)}</dd>\n")
+			end
+		end
+		buf.append("</dl>\n")
+	end
+
 	buf.append("<h2>Modules</h2>\n")
 	for mmodule in model.mmodules do
 		buf.append("<h3 id='module-{mmodule}'>{mmodule}</h3>\n")
 		buf.append("<dl>\n")
-		buf.append("<dt>direct owner</dt>\n")
-		var own = mmodule.direct_owner
-		if own != null then buf.append("<dd>{linkto(own)}</dd>\n")
-		buf.append("<dt>nested</dt>\n")
-		for x in mmodule.in_nesting.direct_greaters do
-			buf.append("<dd>{linkto(x)}</dd>\n")
-		end
+		buf.append("<dt>group</dt>\n")
+		var grp = mmodule.mgroup
+		if grp != null then buf.append("<dd>{linkto(grp)}</dd>\n")
 		buf.append("<dt>direct import</dt>\n")
 		for x in mmodule.in_importation.direct_greaters do
 			buf.append("<dd>{linkto(x)}</dd>\n")
@@ -163,7 +196,11 @@ end
 
 private fun linkto(o: Object): String
 do
-	if o isa MModule then
+	if o isa MProject then
+		return "<a href='#project-{o}'>{o}</a>"
+	else if o isa MGroup then
+		return "<a href='#group-{o}'>{o}</a>"
+	else if o isa MModule then
 		return "<a href='#module-{o}'>{o}</a>"
 	else if o isa MClass then
 		return "<a href='#class-{o}'>{o}</a>"
