@@ -36,42 +36,6 @@ Distribution of direct smallers
  average value: 0.0
  distribution:
   <=0: sub-population=1 (100.00%); cumulated value=0 (na%)
-## Module nesting hierarchy
-Number of nodes: 1
-Number of edges: 1 (1.00 per node)
-Number of direct edges: 0 (0.0 per node)
-Distribution of greaters
- population: 1
- minimum value: 1
- maximum value: 1
- total value: 1
- average value: 1.00
- distribution:
-  <=1: sub-population=1 (100.00%); cumulated value=1 (100.00%)
-Distribution of direct greaters
- population: 1
- minimum value: 0
- maximum value: 0
- total value: 0
- average value: 0.0
- distribution:
-  <=0: sub-population=1 (100.00%); cumulated value=0 (na%)
-Distribution of smallers
- population: 1
- minimum value: 1
- maximum value: 1
- total value: 1
- average value: 1.00
- distribution:
-  <=1: sub-population=1 (100.00%); cumulated value=1 (100.00%)
-Distribution of direct smallers
- population: 1
- minimum value: 0
- maximum value: 0
- total value: 0
- average value: 0.0
- distribution:
-  <=0: sub-population=1 (100.00%); cumulated value=0 (na%)
 ## Classdef hierarchy
 Number of nodes: 8
 Number of edges: 22 (2.75 per node)
