@@ -19,7 +19,7 @@ module mmodule
 
 import poset
 import location
-import model_base
+import mproject
 private import more_collections
 
 # The container class of a Nit object-oriented model.
@@ -52,14 +52,21 @@ redef class Model
 	end
 end
 
+redef class MGroup
+	# The loaded modules of this group
+	var mmodules = new Array[MModule]
+end
+
 # A Nit module is usually associated with a Nit source file.
-# Modules can be nested (see `direct_owner`, `public_owner`, and `in_nesting`)
 class MModule
 	# The model considered
 	var model: Model
 
 	# The direct nesting module, return null if self is not nested (ie. is a top-level module)
 	var direct_owner: nullable MModule
+
+	# The group of module in the project if any
+	var mgroup: nullable MGroup
 
 	# The short name of the module
 	var name: String
@@ -77,14 +84,14 @@ class MModule
 	var in_importation: POSetElement[MModule]
 
 	# The canonical name of the module
-	# Example: `"owner::name"`
+	# Example: `"project::name"`
 	fun full_name: String
 	do
-		var owner = self.public_owner
-		if owner == null then
+		var mgroup = self.mgroup
+		if mgroup == null or mgroup.mproject.name == self.name then
 			return self.name
 		else
-			return "{owner.full_name}::{self.name}"
+			return "{mgroup.mproject.name}::{self.name}"
 		end
 	end
 
