@@ -435,18 +435,18 @@ class ModelBuilder
 		return nmodule
 	end
 
-	fun load_rt_module(owner: MModule, nmodule: AModule, mod_name: String): nullable AModule
+	fun load_rt_module(parent: MModule, nmodule: AModule, mod_name: String): nullable AModule
 	do
 		# Create the module
-		var mmodule = new MModule(model, owner, mod_name, nmodule.location)
+		var mmodule = new MModule(model, parent, mod_name, nmodule.location)
 		nmodule.mmodule = mmodule
 		nmodules.add(nmodule)
 		self.mmodule2nmodule[mmodule] = nmodule
 
 		var imported_modules = new Array[MModule]
 
-		imported_modules.add(owner)
-		mmodule.set_visibility_for(owner, intrude_visibility)
+		imported_modules.add(parent)
+		mmodule.set_visibility_for(parent, intrude_visibility)
 
 		mmodule.set_imported_mmodules(imported_modules)
 
