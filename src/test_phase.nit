@@ -19,7 +19,6 @@
 module test_phase
 
 import modelbuilder
-import modelize_module
 
 # Create a tool context to handle options and paths
 var toolcontext = new ToolContext
