@@ -25,7 +25,6 @@
 enum gc_option { gc_opt_large, gc_opt_malloc, gc_opt_boehm } gc_option;
 
 #ifdef WITH_LIBGC
-#define GC_DEBUG
 #include <gc/gc.h>
 #endif
 
