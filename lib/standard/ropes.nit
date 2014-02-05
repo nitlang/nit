@@ -15,8 +15,7 @@
 # A rope is a kind of string but instead of being flat, it relies on a binary tree structure to store data.
 module ropes
 
-import file
-intrude import string
+intrude import flat
 
 # Structure, tuple containing a LeafNode and an Int
 # Used for methods like [] or has/has_only
@@ -26,181 +25,110 @@ private class TupleLeafNodePos
 	private var visit_stack: List[TupleVisitNode]
 end
 
+# A tuple representing the state of a node for a tree parsing algorithm
+private class TupleVisitNode
+	init(tgt: ConcatNode)
+	do
+		self.node = tgt
+	end
+
+	init full(tgt: ConcatNode, l_visit: Bool, r_visit: Bool)
+	do
+		self.node = tgt
+		self.left_visited = l_visit
+		self.right_visited = r_visit
+	end
+
+	private var node: ConcatNode
+	private var left_visited = false
+	private var right_visited = false
+end
+
+redef class Text
+	fun ropeize: Rope is abstract
+end
+
+redef class Buffer
+
+	redef fun cache
+	do
+		if self isa RopeBuffer then
+			to_s
+			is_dirty = false
+		end
+		super
+	end
+
+	redef fun to_cstring do
+		if self isa RopeBuffer then
+			if self.is_dirty then
+				str_representation = null
+				flatten
+			end
+			return str_representation._items
+		end
+		return super
+	end
+
+	redef fun ropeize
+	do
+		if self isa FlatText then
+			return new RopeBuffer.from(self.to_s)
+		else if self isa Rope then
+			return self
+		end
+		# Should never happen
+		return super
+	end
+end
+
+redef class String
+
+	redef fun to_cstring
+	do
+		if self isa RopeString then
+			return flatten._items
+		end
+
+		return super
+	end
+
+	redef fun ropeize
+	do
+		if self isa FlatText then
+			return new RopeBuffer.from(self)
+		else if self isa Rope then
+			return self
+		end
+		# Should never happen
+		return super
+	end
+
+end
+
 # Abstract class, represents all the services offered by both mutable and immutable ropes
 abstract class Rope
-	super Comparable
-	super StringCapable
+	super Text
 
-	# Cached version of self as a flat String
-	private var str_representation: nullable String = null
-
-	redef type OTHER: Rope
-
-	# The first node of the hierarchy
-	private var parent_node: RopeNode
-
-	# Needed by the compiler to avoid producing an error with constructors in subclasses
-	init do
-		self.parent_node = new ConcatNode
-	end
-
-	# Initializes a new Rope with a text embedded in directly
-	init with_string(str: AbstractString) do
-		self.parent_node = new ConcatNode
-		parent_node.as(ConcatNode).right_child = new LeafNode(str)
-		parent_node.as(ConcatNode).update_data
-	end
+	private var _chars: SELFVIEW
 
 	# Returns a view on the rope
-	fun chars: SequenceRead[Char]
-	do
-		return new CharRopeView(self)
-	end
+	redef fun chars do return _chars
 
 	# Gets the total length of the Rope
-	fun length: Int
+	redef fun length: Int do return parent_node.length
+
+	init
 	do
-		return parent_node.length
-	end
-
-	# Returns a flat version of self
-	redef fun to_s
-	do
-		if self.str_representation == null then flatten
-		return str_representation.as(not null)
-	end
-
-	# Stores a flat version of self in cache
-	private fun flatten: String
-	do
-		var native_final_str = calloc_string(length + 1)
-
-		native_final_str[length] = '\0'
-
-		var offset = 0
-
-		var iter = new DFSRopeLeafIterator(self)
-
-		while iter.is_ok do
-			iter.item.value._items.copy_to(native_final_str, iter.item.value.length, 0, offset)
-			offset += iter.item.value.length
-			iter.next
-		end
-
-		return native_final_str.to_s_with_length(length)
-	end
-
-	# Gets a node containing the substring to seek the char at the require position
-	private fun get_node_for_pos(position: Int): TupleLeafNodePos
-	do
-		assert position >= 0 and position < self.length
-
-		var curr_node: nullable RopeNode = parent_node
-
-		var visit_stack = new List[TupleVisitNode]
-
-		var curr_visit_tuple: TupleVisitNode
-
-		loop
-			if curr_node isa ConcatNode then
-				curr_visit_tuple = new TupleVisitNode(curr_node)
-				if curr_node.left_child != null and position < curr_node.left_child.length then
-					curr_visit_tuple.left_visited = true
-					curr_node = curr_node.left_child
-				else if curr_node.right_child != null then
-					curr_visit_tuple.left_visited = true
-					curr_visit_tuple.right_visited = true
-					if curr_node.left_child != null then position -= curr_node.left_child.length
-					curr_node = curr_node.right_child
-				else
-					print "Fatal Error"
-					abort
-				end
-				visit_stack.push(curr_visit_tuple)
-			else if curr_node isa LeafNode then
-				return new TupleLeafNodePos(curr_node, position, visit_stack)
-			end
+		self.parent_node = new ConcatNode
+		if self isa RopeString then
+			self._chars = new RopeStringCharView(self)
+		else if self isa RopeBuffer then
+			self._chars = new RopeBufferCharView(self)
 		end
 	end
 
-	# Concats two ropes and returns a new one
-	fun +(other: Rope): Rope do
-		var new_rope = new BufferRope
-
-		var first_iter = new DFSRopeLeafIterator(self)
-
-		while first_iter.is_ok do
-			new_rope.append(first_iter.item.value)
-			first_iter.next
-		end
-
-		var second_iter = new DFSRopeLeafIterator(other)
-
-		while second_iter.is_ok do
-			new_rope.append(second_iter.item.value)
-			second_iter.next
-		end
-
-		return new_rope
-	end
-
-	# Returns a copy of several ropes concatenated
-	#
-	# Is equivalent to a chain of + operations
-	# Except this one is optimized for performance
-	fun multi_concat(ropes: Rope...): Rope
-	do
-		var new_rope = new BufferRope
-
-		var self_iter = self.iterator
-		while self_iter.is_ok do
-			new_rope.append(self_iter.item.value)
-			self_iter.next
-		end
-
-		for i in ropes do
-			var iter = i.iterator
-			while iter.is_ok do
-				new_rope.append(iter.item.value)
-				iter.next
-			end
-		end
-
-		return new_rope
-	end
-
-	# Appends the content of self multiple times in a new Rope object
-	fun *(repeats: Int): Rope do
-
-		var new_rope = new BufferRope
-
-		var str = self.to_s
-
-		for i in [1 .. repeats] do new_rope.append(str)
-
-		return new_rope
-	end
-
-	# Returns an iterator on self
-	#
-	# Unsafe modifications on a MutableRope
-	#
-	private fun iterator: Iterator[LeafNode] do return new DFSRopeLeafIterator(self)
-
-	# Creates a subrope.
-	#
-	# var rope = (new BufferRope).append("abcd")
-	#
-	#	assert rope.subrope(1, 2)         ==  "bc"
-	#	assert rope.subrope(-1, )         ==  "a"
-	#	assert rope.subrope(1, 0)         ==  ""
-	#	assert rope.subrope(2, 5)         ==  "cd"
-	#
-	# A `index_from` index < 0 will be replaced by 0.
-	# Unless a `count` value is > 0 at the same time.
-	# In this case, `index_from += count` and `count -= index_from`.
-	#
-	fun subrope(index_from: Int, count: Int): Rope
+	private fun substring_intern(index_from: Int, count: Int): RopeBuffer
 	do
 		assert count >= 0
 
@@ -212,44 +140,140 @@ abstract class Rope
 
 		if count - index_from >= self.length then count = length - index_from
 
-		var buffer = new BufferRope
+		var buffer = new RopeBuffer
 
-		var iter = new DFSRopeLeafIterator.with_index(self, index_from)
+		var iter = new DFSRopeLeafIterator(self, index_from)
 
-		var curr_subrope_index = index_from - iter.pos
+		if iter.is_ok then
+			if iter.item.length < count then
+				var temp = iter.item.value.substring_from(iter.start_sub_pos)
+				buffer.append(temp)
+				count -= temp.length
+			else
+				buffer.append(iter.item.value.substring(iter.start_sub_pos, count))
+				return buffer
+			end
+		else
+			abort
+		end
+
+		iter.next
 
 		while iter.is_ok do
-			if count == 0 then break
-			if curr_subrope_index > 0 then
-				if count >= iter.item.value.length then
-					buffer.append(iter.item.value.substring(curr_subrope_index, count))
-					count -= iter.item.value.length - curr_subrope_index
-					curr_subrope_index = 0
-				else
-					buffer.append(iter.item.value.substring(curr_subrope_index, count))
-					break
-				end
+			if iter.item.length < count then
+				buffer.append(iter.item.value)
+				count -= iter.item.value.length
 			else
-				if count >= iter.item.value.length then
-					buffer.append(iter.item.value)
-					count -= iter.item.value.length
-				else
-					buffer.append(iter.item.value.substring(0, count))
-					break
-				end
+				buffer.append(iter.item.value.substring(0,count))
+				return buffer
 			end
-
 			iter.next
 		end
 
 		return buffer
 	end
 
-	# Returns an upper (capitalized) version of self
-	fun to_upper: Rope
+	# Initializes a new Rope with a text embedded in directly
+	init from(str: Text) do
+		self.parent_node = new ConcatNode
+		parent_node.right_child = new LeafNode(str.to_s)
+		parent_node.update_data
+		if self isa RopeString then
+			self._chars = new RopeStringCharView(self)
+		else if self isa RopeBuffer then
+			self._chars = new RopeBufferCharView(self)
+		end
+	end
+
+	# Cached version of self as a flat String
+	private var str_representation: nullable FlatString = null
+
+	# The first node of the hierarchy
+	private var parent_node: ConcatNode
+
+	redef fun ==(other) do
+		if other != null and other isa Rope and other.parent_node == self.parent_node then return true
+		return super
+	end
+
+	private fun get_leaf_for_pos(pos: Int): TupleLeafNodePos
 	do
-		var new_rope = new BufferRope
-		var iter = new DFSRopeLeafIterator(self)
+		assert pos >= 0 and pos < length
+
+		var curr: nullable RopeNode = parent_node
+		loop
+			if curr isa ConcatNode then
+				if curr.left_child != null then
+					if pos < curr.left_child.length then
+						curr = curr.left_child.as(not null)
+					else
+						pos -= curr.left_child.length
+						curr = curr.right_child.as(not null)
+					end
+				else
+					curr = curr.right_child.as(not null)
+				end
+			else if curr isa LeafNode then
+				return new TupleLeafNodePos(curr, pos, new List[TupleVisitNode])
+			end
+		end
+	end
+
+	private fun get_dfs_stack(node: LeafNode): List[TupleVisitNode]
+	do
+		var return_list = new List[TupleVisitNode]
+		var curr_node: RopeNode = node
+		var parent: nullable ConcatNode = curr_node.parent
+		while parent != null do
+			if parent.left_child != null and parent.left_child == curr_node then
+				return_list.unshift(new TupleVisitNode.full(parent,true,false))
+			else
+				return_list.unshift(new TupleVisitNode.full(parent,true,true))
+			end
+			curr_node = parent
+			parent = parent.parent
+		end
+		return return_list
+	end
+
+	private fun get_reverse_dfs_stack(node: LeafNode): List[TupleVisitNode]
+	do
+		var return_list = new List[TupleVisitNode]
+		var curr_node: RopeNode = node
+		var parent: nullable ConcatNode = curr_node.parent
+		while parent != null do
+			if parent.left_child != null and parent.left_child == curr_node then
+				return_list.unshift(new TupleVisitNode.full(parent,true,true))
+			else
+				return_list.unshift(new TupleVisitNode.full(parent,false,true))
+			end
+			curr_node = parent
+			parent = parent.parent
+		end
+		return return_list
+	end
+
+	# Stores a flat version of self in cache
+	redef fun flatten: FlatText
+	do
+		if str_representation == null then
+			var str = calloc_string(self.length + 1)
+			var pos = 0
+			for i in self.chars do
+				str[pos] = i
+				pos += 1
+			end
+			str[pos] = '\0'
+			str_representation = str.to_s_with_length(self.length).as(FlatString)
+		end
+		return str_representation.as(not null)
+	end
+
+	# Returns an upper (capitalized) version of self
+	private fun to_upper_intern: RopeBuffer
+	do
+		var new_rope = new RopeBuffer
+		var iter = new DFSRopeLeafIterator(self, 0)
 		while iter.is_ok do
 			new_rope.append(iter.item.value.to_upper)
 			iter.next
@@ -258,10 +282,10 @@ abstract class Rope
 	end
 
 	# Returns a lower (minuscule) version of self
-	fun to_lower: Rope
+	private fun to_lower_intern: RopeBuffer
 	do
-		var new_rope = new BufferRope
-		var iter = new DFSRopeLeafIterator(self)
+		var new_rope = new RopeBuffer
+		var iter = new DFSRopeLeafIterator(self, 0)
 		while iter.is_ok do
 			new_rope.append(iter.item.value.to_lower)
 			iter.next
@@ -269,52 +293,70 @@ abstract class Rope
 		return new_rope
 	end
 
-	############################################################################
-	#                       Comparable Refined Methods                         #
-	############################################################################
-
-	# Compares the current Rope to another object (either another rope or a String)
-	redef fun == (other)
+	private fun reverse_intern: RopeBuffer
 	do
-		if other == null or not (other isa Rope or other isa AbstractString) then return false
-		var self_iter = new RopeCharIterator(self)
-		if other isa Rope then
-			if self.length != other.length then return false
-			var other_iterator = new RopeCharIterator(other)
-			while self_iter.is_ok do
-				if self_iter.item != other_iterator.item then return false
-				self_iter.next
-				other_iterator.next
-			end
-		else if other isa AbstractString then
-			var pos = 0
-			if self.length != other.length then return false
-			while self_iter.is_ok do
-				if self_iter.item != other[pos] then return false
-				pos += 1
-				self_iter.next
-			end
+		var new_buf = new RopeBuffer
+		var reviter = new ReversedDFSRopeLeafIterator(self, length-1)
+		while reviter.is_ok do
+			new_buf.append(reviter.item.value.reverse)
+			reviter.next
 		end
-		return true
+		return new_buf
 	end
 
-	# Checks if self is lesser than other
-	#
-	# Comparison done in lexicographical order
-	# i.e. 'aa' < 'b'
-	#
-	redef fun <(other)
+end
+
+# Immutable version of a Rope
+class RopeString
+	super String
+	super Rope
+
+	redef type SELFTYPE : RopeString
+
+	# Returns a flat version of self
+	redef fun to_s
 	do
-		var other_iter = other.chars.iterator
-		for i in self.chars do
-			if not other_iter.is_ok then return false
-			if i < other_iter.item then return true
-			if i > other_iter.item then return false
-			other_iter.next
-		end
-		if other_iter.is_ok then return true
-		return false
+		return self
 	end
+
+	redef fun *(count) do
+		var finalstr = new RopeString.from(self)
+		for i in [1..count[ do
+			finalstr += self
+		end
+		return finalstr
+	end
+
+	redef fun substring(from, count) do return substring_intern(from, count).freeze
+
+	redef fun+(other) do
+		var return_val = new RopeString
+		return_val.parent_node.left_child = new LeafNode(self)
+		return_val.parent_node.right_child = new LeafNode(other.to_s)
+		return_val.parent_node.update_data
+		return return_val
+	end
+
+	redef fun to_upper do return to_upper_intern.freeze
+
+	redef fun to_lower do return to_lower_intern.freeze
+
+	redef fun reverse do return reverse_intern.freeze
+end
+
+private class RopeStringCharView
+	super StringCharView
+
+	redef type SELFTYPE: RopeString
+
+	redef fun [](pos) do
+		var tuple = target.get_leaf_for_pos(pos)
+		return tuple.curr_node.value.chars[tuple.corrected_pos]
+	end
+
+	redef fun iterator_from(pos) do return new RopeCharIterator(self.target, pos)
+
+	redef fun reverse_iterator_from(pos) do return new ReversedRopeCharIterator(self.target, pos)
 
 end
 
@@ -322,24 +364,11 @@ end
 #
 # /!\ Non Thread-safe /!\
 #
-class BufferRope
+class RopeBuffer
 	super Rope
+	super Buffer
 
-	var is_dirty: Bool = false
-
-	init
-	do
-		super
-	end
-
-	init with_string(str)
-	do
-		super
-	end
-
-	############################################################################
-	#                         Tree Balancing Methods                           #
-	############################################################################
+	redef type SELFTYPE: RopeBuffer
 
 	# Performs a right rotation on a node of the Rope
 	#
@@ -433,7 +462,7 @@ class BufferRope
 				rotate_right(node.right_child.as(ConcatNode))
 				rotate_left(node)
 			end
-		else
+		else if balance_factor > 0 then
 			var left_balance = node.left_child.balance_factor
 			if left_balance > 0 then
 				rotate_right(node)
@@ -444,133 +473,73 @@ class BufferRope
 		end
 	end
 
-	############################################################################
-	#                      BufferRope exclusive Methods                        #
-	############################################################################
-
-	# Appends a new Collection[Char] at the end of the current rope
-	fun append(str: Collection[Char]): BufferRope
+	redef fun append(str)
 	do
-		if str isa AbstractString then
-			var last_node = parent_node
-
-			while last_node isa ConcatNode and last_node.right_child != null do
-				last_node = last_node.right_child.as(not null)
-			end
-
-			if last_node isa ConcatNode then
-				last_node.right_child = new LeafNode(str.to_s)
-			else if last_node isa LeafNode then
-				var last_node_parent = last_node.parent
-				var new_concat = new ConcatNode
-				last_node_parent.right_child = new_concat
-				new_concat.left_child = last_node
-				new_concat.right_child = new LeafNode(str.to_s)
-				last_node = new_concat
-			else
-				print "Fatal Error, please report to the developers for more insight."
-				abort
-			end
-
-			balance_from_node(last_node)
+		var curr_node: nullable RopeNode = parent_node
+		while curr_node isa ConcatNode and curr_node.right_child != null do
+			curr_node = curr_node.right_child.as(not null)
+		end
+		if curr_node isa ConcatNode then
+			curr_node.right_child = new LeafNode(str.to_s)
+		else if curr_node isa LeafNode then
+			var parent = curr_node.parent
+			var concat = new ConcatNode
+			parent.right_child = concat
+			concat.left_child = curr_node
+			concat.right_child = new LeafNode(str.to_s)
+			curr_node = concat
+			parent.update_data
 		else
-			var buf = new Buffer.with_capacity(str.length)
-			for i in str do
-				buf.add(i)
-			end
-			append(buf)
+			# Should not happen
+			abort
 		end
-
-		if not is_dirty then is_dirty = true
-
-		return self
+		curr_node.update_data
+		loop
+			curr_node.update_data
+			balance_node(curr_node)
+			if curr_node.parent == null then break
+			curr_node = curr_node.parent.as(not null)
+		end
+		super
 	end
 
-	# Variatic function to append several collections of Chars
-	fun append_multi(strs: Collection[Char]...): BufferRope
+	# Prepends a string ´str´ at the beginning of the current rope
+	fun prepend(str: Text)
 	do
-		for i in strs do
-			append(i)
+		var visited = new List[ConcatNode]
+		var curr_node: nullable RopeNode = parent_node
+		while curr_node isa ConcatNode and curr_node.left_child != null do
+			curr_node = curr_node.left_child.as(not null)
 		end
-		return self
-	end
-
-	# Adds a new Collection[Char] at the beginning of the rope
-	fun prepend(str: Collection[Char]): BufferRope
-	do
-		if str isa AbstractString then
-			var curr_node = parent_node
-
-			while curr_node isa ConcatNode and curr_node.left_child != null do
-				curr_node = curr_node.left_child.as(not null)
-			end
-
-			if curr_node isa ConcatNode then
-				curr_node.left_child = new LeafNode(str.to_s)
-			else if curr_node isa LeafNode then
-				var parent = curr_node.parent
-				var new_concat = new ConcatNode
-				var new_leaf = new LeafNode(str.to_s)
-				new_concat.left_child = new_leaf
-				new_concat.right_child = curr_node
-				parent.left_child = new_concat
-				curr_node = new_concat
-			else
-				print "Fatal Error"
-				abort
-			end
-
-			balance_from_node(curr_node)
+		if curr_node isa ConcatNode then
+			curr_node.left_child = new LeafNode(str.to_s)
+		else if curr_node isa LeafNode then
+			var parent = curr_node.parent
+			var concat = new ConcatNode
+			parent.left_child = parent
+			parent.left_child = new LeafNode(str.to_s)
+			parent.right_child = curr_node
+			curr_node = concat
+			parent.update_data
 		else
-			var buf = new Buffer.with_capacity(str.length)
-			for i in str do
-				buf.add(i)
-			end
-			prepend(buf.to_s)
+			# Should not happen
+			abort
 		end
-
-		if not is_dirty then is_dirty = true
-
-		return self
+		curr_node.update_data
+		loop
+			balance_node(curr_node)
+			if curr_node.parent == null then break
+			curr_node = curr_node.parent.as(not null)
+		end
+		is_dirty = false
 	end
 
-	# Variatic function to prepend several collections of Chars
-	fun prepend_multi(strs: Collection[Char]...): BufferRope
+	# Copies the content of the current RopeBuffer object as a RopeString
+	redef fun to_s
 	do
-		for i in strs do
-			prepend(i)
-		end
-		return self
-	end
-
-	# Adds the content of `str` after self, does not create a new rope object
-	fun concat(str: Rope): Rope
-	do
-		var other_iter = new DFSRopeLeafIterator(str)
-
-		var modif_list = new List[String]
-
-		while other_iter.is_ok do
-			modif_list.push(other_iter.item.value)
-			other_iter.next
-		end
-
-		while modif_list.length > 0 do
-			self.append(modif_list.shift)
-		end
-
-		if not is_dirty then is_dirty = true
-
-		return self
-	end
-
-	# Returns the content of the current BufferRope object as an ImmutableRope
-	fun freeze: ImmutableRope
-	do
-		var buffer_rope = new BufferRope
-		var new_rope = new ImmutableRope
-
-		var iter = new DFSRopeLeafIterator(self)
+		var buffer_rope = new RopeBuffer
+		var new_rope = new RopeString
+		var iter = new DFSRopeLeafIterator(self, 0)
 
 		while iter.is_ok do
 			buffer_rope.append(iter.item.value)
@@ -584,198 +553,76 @@ class BufferRope
 		return new_rope
 	end
 
-	# Unsafe method to convert self as an ImmutableRope
+	# Unsafe method to convert self as an RopeString (does not copy the contents)
 	#
 	# To be used internally only
-	private fun to_immutable: ImmutableRope
+	private fun freeze: RopeString
 	do
-		var immutable_self = new ImmutableRope
+		var immutable_self = new RopeString
 		immutable_self.parent_node = self.parent_node
 		return immutable_self
 	end
 
-	############################################################################
-	#                          Rope refined Methods                            #
-	############################################################################
+	# Appends the content of self multiple times in a new Rope object
+	redef fun *(repeats) do
 
-	redef fun subrope(index_from: Int, count: Int): BufferRope
-	do
-		return super.as(BufferRope)
+		var new_rope = new RopeBuffer
+
+		var str = self.to_s
+
+		for i in [1 .. repeats] do new_rope.append(str)
+
+		return new_rope
 	end
 
-	redef fun *(repeats: Int): BufferRope
-	do
-		return super.as(BufferRope)
-	end
+	redef fun to_upper do return to_upper_intern
 
-	redef fun +(other: Rope): BufferRope
-	do
-		return super.as(BufferRope)
-	end
+	redef fun to_lower do return to_lower_intern
 
-	redef fun multi_concat(ropes: Rope...): BufferRope
-	do
-		return super.as(BufferRope)
-	end
+	redef fun reverse do return reverse_intern
 
-	# Refines to add a cache method, calculates only once for every modification
-	# the string representation for self
-	redef fun to_s
-	do
-		if self.str_representation == null or is_dirty then
-			self.str_representation = flatten
-			is_dirty = false
+	redef fun substring(from, count) do return substring_intern(from, count)
+
+	# Concats two ropes and returns a new one
+	redef fun +(other) do
+
+		if other isa Buffer then
+			other = other.to_s
 		end
-		return self.str_representation.as(not null)
-	end
 
+		var new_rope = new RopeBuffer
+
+		var first_iter = new DFSRopeLeafIterator(self, 0)
+
+		while first_iter.is_ok do
+			new_rope.append(first_iter.item.value)
+			first_iter.next
+		end
+
+		new_rope.append(other)
+
+		return new_rope
+	end
 end
 
-# Rope that cannot be modified
-class ImmutableRope
-	super Rope
+private class RopeBufferCharView
+	super BufferCharView
 
-	init
-	do
+	redef type SELFTYPE: RopeBuffer
+
+	redef fun [](pos) do
+		var tuple = target.get_leaf_for_pos(pos)
+		return tuple.curr_node.value.chars[tuple.corrected_pos]
+	end
+
+	redef fun iterator_from(pos) do return new RopeCharIterator(self.target, pos)
+
+	redef fun reverse_iterator_from(pos) do return new ReversedRopeCharIterator(self.target, pos)
+
+	redef fun add(c) do
+		target.append(c.to_s)
 		super
 	end
-
-	init with_string(str)
-	do
-		super
-	end
-
-	############################################################################
-	#                          Rope refined Methods                            #
-	############################################################################
-
-	redef fun subrope(index_from: Int, count: Int): ImmutableRope
-	do
-		return (super.as(BufferRope)).to_immutable
-	end
-
-	redef fun *(repeats: Int): ImmutableRope
-	do
-		return (super.as(BufferRope)).to_immutable
-	end
-
-	redef fun +(other: Rope): ImmutableRope
-	do
-		return (super.as(BufferRope)).to_immutable
-	end
-
-	redef fun multi_concat(ropes: Rope...): ImmutableRope
-	do
-		return (super.as(BufferRope)).to_immutable
-	end
-
-end
-
-############################################
-#            Rope view classes             #
-############################################
-
-class CharRopeView
-	super SequenceRead[Char]
-
-	# Targeted Rope for the view
-	private var target: Rope
-
-	init(tgt: Rope)
-	do
-		self.target = tgt
-	end
-
-	redef fun [](position)
-	do
-		var tuple = target.get_node_for_pos(position)
-		return tuple.curr_node.value[tuple.corrected_pos]
-	end
-
-	redef fun first do return self[0]
-
-	redef fun index_of(char)
-	do
-		var intern_iter = new RopeCharIterator(target)
-		while intern_iter.is_ok do
-			if intern_iter.item == char then return intern_iter.index
-			intern_iter.next
-		end
-		return -1
-	end
-
-	redef fun iterator do
-		return new RopeCharIterator(target)
-	end
-
-	redef fun last do return self[self.length-1]
-
-	redef fun length do return target.length
-
-	redef fun count(item)
-	do
-		var count = 0
-		var iter = self.iterator
-
-		for i in self do
-			if i == item then count += 1
-		end
-
-		return count
-	end
-
-	redef fun has_only(item)
-	do
-		for i in self do
-			if i != item then return false
-		end
-		return true
-	end
-
-	redef fun is_empty do return length == 0
-
-	redef fun to_a do
-		return to_s.to_a
-	end
-
-	redef fun to_s do
-		return target.to_s
-	end
-
-	redef fun ==(other)
-	do
-		if not other isa SequenceRead[Char] then return false
-
-		if self.length != other then return false
-
-		var iter = other.iterator
-
-		for i in self do
-			if i != iter.item then return false
-			iter.next
-		end
-
-		return true
-	end
-
-end
-
-###########################################
-#            Iterator classes             #
-###########################################
-
-# A tuple representing the state of a node for a tree parsing algorithm
-private class TupleVisitNode
-
-	init(tgt: ConcatNode)
-	do
-		self.node = tgt
-	end
-
-	private var node: ConcatNode
-
-	private var left_visited = false
-	private var right_visited = false
 
 end
 
@@ -788,70 +635,102 @@ private abstract class RopeIterator
 
 	private fun target: Rope do return self._target
 
-	# Position in target
-	private var pos = 0
+	private var pos: Int
 
-	init(tgt: Rope)
+	init(tgt: Rope, pos: Int)
 	do
 		self._target = tgt
-	end
-
-	init with_index(tgt: Rope, index: Int)
-	do
-		self._target = tgt
+		self.pos = pos
 	end
 
 end
 
 # Iterator returning the content of a rope one char at a time
-class RopeCharIterator
+private class RopeCharIterator
 	super IndexedIterator[Char]
 
-	# The iterator used to visit the rope
-	private var sub_str_iter: DFSRopeLeafIterator
+	# The iterator used to visit the leaves of the rope
+	private var rope_iter: DFSRopeLeafIterator
+
+	private var str_iter: nullable IndexedIterator[Char] = null
 
 	# The current position in the rope
-	private var abs_pos = 0
+	private var pos: Int
 
-	# The position in the current substring
-	private var sub_pos: Int = 0
-
-	# The substring contained in the current node visited by `sub_str_iter`
-	private var curr_substring: nullable String
-
-	init(tgt: Rope)
+	init(tgt: Rope, from: Int)
 	do
-		sub_str_iter = new DFSRopeLeafIterator(tgt)
-		if sub_str_iter.is_ok then curr_substring = sub_str_iter.item.value
+		rope_iter = new DFSRopeLeafIterator(tgt, from)
+		if rope_iter.is_ok then str_iter = rope_iter.item.value.chars.iterator_from(rope_iter.start_sub_pos)
+		pos = from
 	end
 
-	redef fun item do return curr_substring[sub_pos]
+	redef fun item do return str_iter.item
 
 	redef fun is_ok
 	do
-		if sub_str_iter.is_ok then return true
-		if not sub_str_iter.is_ok and curr_substring != null and sub_pos < curr_substring.length then return true
-		return false
+		if str_iter == null then return false
+		return true
 	end
 
 	redef fun next
 	do
 		assert is_ok
-		if sub_pos < curr_substring.length - 1 then
-			sub_pos += 1
-		else
-			sub_str_iter.next
-			if sub_str_iter.is_ok then
-				curr_substring = sub_str_iter.item.value
-				sub_pos = 0
+		str_iter.next
+		pos += 1
+		if not str_iter.is_ok then
+			rope_iter.next
+			if rope_iter.is_ok then
+				str_iter = rope_iter.item.value.chars.iterator
 			else
-				sub_pos = curr_substring.length
+				str_iter = null
 			end
 		end
-		abs_pos += 1
 	end
 
-	redef fun index do return abs_pos
+	redef fun index do return pos
+
+end
+
+private class ReversedRopeCharIterator
+	super IndexedIterator[Char]
+
+	private var rope_iter: ReversedDFSRopeLeafIterator
+
+	private var str_iter: nullable IndexedIterator[Char] = null
+
+	private var pos: Int
+
+	init(tgt: Rope, from: Int)
+	do
+		rope_iter = new ReversedDFSRopeLeafIterator(tgt, from)
+		if rope_iter.is_ok then str_iter = rope_iter.item.value.chars.reverse_iterator_from(rope_iter.start_sub_pos)
+		pos = from
+	end
+
+	redef fun item do return str_iter.item
+
+	redef fun is_ok
+	do
+		if str_iter == null then return false
+		return true
+	end
+
+	redef fun next
+	do
+		assert is_ok
+		str_iter.next
+		pos -= 1
+		if not str_iter.is_ok then
+			rope_iter.next
+			if rope_iter.is_ok then
+				str_iter = rope_iter.item.value.chars.reverse_iterator
+			else
+				str_iter = null
+			end
+		end
+	end
+
+	redef fun index do return pos
 
 end
 
@@ -868,31 +747,17 @@ private class DFSRopeLeafIterator
 	# The leaf node being visited by the iterator
 	private var curr_leaf: nullable LeafNode
 
-	init(tgt: Rope)
+	# The corrected position in the substring for the chosen start position
+	private var start_sub_pos: Int
+
+	init(tgt: Rope, pos: Int)
 	do
 		super
-
-		var first_node = target.parent_node
-
-		if first_node isa ConcatNode then
-			visit_stack.push(new TupleVisitNode(first_node))
-		else if first_node isa LeafNode then
-			curr_leaf = first_node
-			return
-		end
-
-		next_body
-	end
-
-	# Creates a new iterator on `tgt` starting at `index`
-	init with_index(tgt: Rope, index: Int)
-	do
-		super
-
-		var returned_tuple = target.get_node_for_pos(index)
-		curr_leaf = returned_tuple.curr_node
-		visit_stack = returned_tuple.visit_stack
-		pos = index - returned_tuple.corrected_pos
+		var tuple = target.get_leaf_for_pos(pos)
+		tuple.visit_stack = target.get_dfs_stack(tuple.curr_node)
+		curr_leaf = tuple.curr_node
+		visit_stack = tuple.visit_stack
+		start_sub_pos = tuple.corrected_pos
 	end
 
 	redef fun is_ok do return curr_leaf != null
@@ -906,48 +771,129 @@ private class DFSRopeLeafIterator
 
 	private fun next_body
 	do
-		var next_node: nullable RopeNode
-		while not visit_stack.is_empty do
-			var curr_concat_tuple = visit_stack.last
-			if not curr_concat_tuple.left_visited then
-
-				curr_concat_tuple.left_visited = true
-
-				next_node = curr_concat_tuple.node.left_child
-
-				if next_node == null then continue
-
-				if next_node isa ConcatNode then
-					visit_stack.push(new TupleVisitNode(next_node))
-				else if next_node isa LeafNode then
-					curr_leaf = next_node
-					return
-				end
-
-			else if not curr_concat_tuple.right_visited then
-
-				curr_concat_tuple.right_visited = true
-
-				next_node = curr_concat_tuple.node.right_child
-
-				if next_node == null then continue
-
-				if next_node isa ConcatNode then
-					visit_stack.push(new TupleVisitNode(next_node))
-				else if next_node isa LeafNode then
-					curr_leaf = next_node
-					return
-				end
-
-			else
-				visit_stack.pop
-			end
+		if visit_stack.is_empty then
+			curr_leaf = null
+			return
 		end
-		self.curr_leaf = null
+		var last_tuple = visit_stack.last
+		var curr_node = last_tuple.node
+		if not last_tuple.left_visited then
+			last_tuple.left_visited = true
+			var l_child = curr_node.left_child
+			if l_child == null then
+				next_body
+				return
+			end
+			if l_child isa LeafNode then
+				curr_leaf = l_child
+				return
+			else if l_child isa ConcatNode then
+				visit_stack.push(new TupleVisitNode.full(l_child, false, false))
+				next_body
+			end
+		else if not last_tuple.right_visited then
+			last_tuple.right_visited = true
+			var r_child = curr_node.right_child
+			if r_child == null then
+				next_body
+				return
+			end
+			if r_child isa LeafNode then
+				curr_leaf = r_child
+				return
+			else if r_child isa ConcatNode then
+				visit_stack.push(new TupleVisitNode.full(r_child, false, false))
+				next_body
+			end
+		else
+			visit_stack.pop
+			next_body
+		end
 	end
 
 	redef fun item
 	do
+		assert is_ok
+		return curr_leaf.as(not null)
+	end
+
+end
+
+private class ReversedDFSRopeLeafIterator
+	super RopeIterator
+
+	# Stack of the visited nodes in the rope
+	private var visit_stack = new List[TupleVisitNode]
+
+	# The leaf node being visited by the iterator
+	private var curr_leaf: nullable LeafNode
+
+	private var start_sub_pos: Int
+
+	init(tgt: Rope, from: Int)
+	do
+		super
+		var tuple = target.get_leaf_for_pos(pos)
+		tuple.visit_stack = target.get_reverse_dfs_stack(tuple.curr_node)
+		curr_leaf = tuple.curr_node
+		visit_stack = tuple.visit_stack
+		start_sub_pos = tuple.corrected_pos
+	end
+
+	redef fun is_ok do return curr_leaf != null
+
+	redef fun next
+	do
+		assert is_ok
+		pos -= curr_leaf.value.length
+		next_body
+	end
+
+	fun next_body
+	do
+		if visit_stack.is_empty then
+			curr_leaf = null
+			return
+		end
+		var last_tuple = visit_stack.last
+		var curr_node = last_tuple.node
+		if not last_tuple.right_visited then
+			last_tuple.right_visited = true
+			var r_child = curr_node.right_child
+			if r_child == null then
+				next_body
+				return
+			end
+			if r_child isa LeafNode then
+				curr_leaf = r_child
+			else if r_child isa ConcatNode then
+				visit_stack.push(new TupleVisitNode.full(r_child, false, false))
+				next_body
+			else
+				abort
+			end
+		else if not last_tuple.left_visited then
+			last_tuple.left_visited = true
+			var l_child = curr_node.left_child
+			if l_child == null then
+				next_body
+				return
+			end
+			if l_child isa LeafNode then
+				curr_leaf = l_child
+			else if l_child isa ConcatNode then
+				visit_stack.push(new TupleVisitNode.full(l_child, false, false))
+				next_body
+			else
+				abort
+			end
+		else
+			visit_stack.pop
+			next_body
+		end
+	end
+
+	redef fun item do
 		assert is_ok
 		return curr_leaf.as(not null)
 	end
@@ -1053,44 +999,11 @@ private class LeafNode
 	super RopeNode
 
 	# Encapsulated string in the leaf node
-	private var _value: String
+	var value: String
 
-	init(val: AbstractString)
+	init(val: String)
 	do
-		self._value = val.to_s
+		self.value = val
 		self.length = val.length
-	end
-
-	private fun value: String do return self._value
-
-	private fun value= (val: String)
-	do
-		_value = val
-	end
-end
-
-#####################################################
-#            Foreign classes refinement             #
-#####################################################
-
-redef class String
-	redef fun ==(other)
-	do
-		if other isa Rope then
-			return other == self
-		else
-			return super
-		end
-	end
-end
-
-redef class Buffer
-	redef fun ==(other)
-	do
-		if other isa Rope then
-			return other == self
-		else
-			return super
-		end
 	end
 end

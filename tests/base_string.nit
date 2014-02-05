@@ -12,12 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import string
+intrude import ropes
 
-redef class String
+redef class FlatString
 	redef fun output
 	do
-		for c in self do c.output
+		for c in self.chars do c.output
 	end
 end
 

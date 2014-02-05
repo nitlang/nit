@@ -25,7 +25,7 @@ print "45".is_numeric
 #True
 print "45.3".is_numeric
 
-#True
+#False
 print "45,3".is_numeric
 
 #False
@@ -52,7 +52,7 @@ print "585,210.52".is_numeric
 #False
 print "21,52,210.52".is_numeric
 
-var buf = new Buffer
+var buf = new FlatBuffer
 
 buf.append("45.3")
 

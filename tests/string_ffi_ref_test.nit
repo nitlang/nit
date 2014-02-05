@@ -28,7 +28,7 @@ class StringTest
 		referenced_str = null
 	end
 
-	fun get_c_string import String::items, NativeString::to_s, NativeString::to_s_with_copy, StringTest::ref_test, StringTest::copy_test `{
+	fun get_c_string import FlatString::items, NativeString::to_s, NativeString::to_s_with_copy, StringTest::ref_test, StringTest::copy_test `{
 		char* string = "This is a test string";
 
 		String ref_string = NativeString_to_s(string);
@@ -37,7 +37,7 @@ class StringTest
 		String copy_string = NativeString_to_s_with_copy(string);
 		StringTest_copy_test(recv, copy_string);
 
-		int same_refs = String_items(copy_string) == String_items(ref_string);
+		int same_refs = FlatString_items((FlatString)copy_string) == FlatString_items((FlatString)ref_string);
 
 		printf("Do the strings have the same NativeString reference ? ");
 

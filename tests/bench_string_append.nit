@@ -22,7 +22,7 @@ end
 var s = "*"
 var i = 0
 while i < n do
-	var s2 = new Buffer.from("Je dis «")
+	var s2 = new FlatBuffer.from("Je dis «")
 	s2.append(s)
 	s2.append("» et redis «")
 	s2.append(s)
@@ -48,7 +48,7 @@ print(i)
 
 i = 0
 for k in [0..s.length[ do
-	var c = s[k]
+	var c = s.chars[k]
 	if c >= 'a' and c <= 'z' then
 		i = i + 1
 	end

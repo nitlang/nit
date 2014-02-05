@@ -1002,8 +1002,8 @@ class SeparateCompilerVisitor
 			res = self.new_var(ret)
 		end
 
-		var s = new Buffer
-		var ss = new Buffer
+		var s = new FlatBuffer
+		var ss = new FlatBuffer
 
 		var recv = arguments.first
 		s.append("val*")
@@ -1651,8 +1651,8 @@ class SeparateRuntimeFunction
 
 		var msignature = mmethoddef.msignature.resolve_for(mmethoddef.mclassdef.bound_mtype, mmethoddef.mclassdef.bound_mtype, mmethoddef.mclassdef.mmodule, true)
 
-		var sig = new Buffer
-		var comment = new Buffer
+		var sig = new FlatBuffer
+		var comment = new FlatBuffer
 		var ret = msignature.return_mtype
 		if ret != null then
 			sig.append("{ret.ctype} ")
@@ -1724,8 +1724,8 @@ class VirtualRuntimeFunction
 		var frame = new Frame(v, mmethoddef, recv, arguments)
 		v.frame = frame
 
-		var sig = new Buffer
-		var comment = new Buffer
+		var sig = new FlatBuffer
+		var comment = new FlatBuffer
 
 		# Because the function is virtual, the signature must match the one of the original class
 		var intromclassdef = self.mmethoddef.mproperty.intro.mclassdef

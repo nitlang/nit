@@ -90,7 +90,7 @@ class DebugClient
 
 	fun read_command: String
 	do
-		var buff = new Buffer
+		var buff = new FlatBuffer
 		while debugger_connection.ready_to_read(40) do buff.append(debugger_connection.read)
 		return buff.to_s
 	end

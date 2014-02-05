@@ -152,7 +152,7 @@ redef class Stdin
 	var connection: nullable Socket = null
 
 	# Used to store data that has been read from the connection
-	var buf: Buffer = new Buffer
+	var buf: Buffer = new FlatBuffer
 	var buf_pos: Int = 0
 
 	# Checks if data is available for reading
@@ -165,9 +165,9 @@ redef class Stdin
 	# Blocking if the buffer is empty
 	redef fun read_all
 	do
-		var loc_buf = new Buffer
+		var loc_buf = new FlatBuffer
 		if connection.ready_to_read(0) then buf.append(connection.read)
-		for i in [buf_pos .. buf.length-1] do loc_buf.add(buf[i])
+		for i in [buf_pos .. buf.length-1] do loc_buf.add(buf.chars[i])
 		buf.clear
 		buf_pos = 0
 		return loc_buf.to_s
@@ -185,7 +185,7 @@ redef class Stdin
 			buf.append(connection.read)
 		end
 		buf_pos += 1
-		return buf[buf_pos-1].ascii
+		return buf.chars[buf_pos-1].ascii
 	end
 
 	# Reads a line on the network if available
@@ -193,7 +193,7 @@ redef class Stdin
 	# If the buffer is empty, the read_line call is blocking
 	redef fun read_line
 	do
-		var line_buf = new Buffer
+		var line_buf = new FlatBuffer
 		if connection.ready_to_read(0) then buf.append(connection.read)
 		var has_found_eol: Bool = false
 		loop
@@ -204,8 +204,8 @@ redef class Stdin
 				buf.append(connection.read)
 			end
 			buf_pos += 1
-			if buf[buf_pos-1] == '\n' then break
-			line_buf.add(buf[buf_pos-1])
+			if buf.chars[buf_pos-1] == '\n' then break
+			line_buf.add(buf.chars[buf_pos-1])
 		end
 		return line_buf.to_s
 	end

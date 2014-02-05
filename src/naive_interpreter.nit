@@ -250,7 +250,7 @@ private class NaiveInterpreter
 	# Return a new native string initialized with `txt`
 	fun native_string_instance(txt: String): Instance
 	do
-		var val = new Buffer.from(txt)
+		var val = new FlatBuffer.from(txt)
 		val.add('\0')
 		var ic = self.mainmodule.get_primitive_class("NativeString")
 		return new PrimitiveInstance[Buffer](ic.mclass_type, val)
@@ -265,7 +265,7 @@ private class NaiveInterpreter
 	# Return a stack stace. One line per function
 	fun stack_trace: String
 	do
-		var b = new Buffer
+		var b = new FlatBuffer
 		b.append(",---- Stack trace -- - -  -\n")
 		for f in frames do
 			b.append("| {f.mpropdef} ({f.current_node.location})\n")
@@ -766,17 +766,17 @@ redef class AInternMethPropdef
 				if arg1 >= recvval.length or arg1 < 0 then
 					debug("Illegal access on {recvval} for element {arg1}/{recvval.length}")
 				end
-				return v.char_instance(recvval[arg1])
+				return v.char_instance(recvval.chars[arg1])
 			else if pname == "[]=" then
 				var arg1 = args[1].to_i
 				if arg1 >= recvval.length or arg1 < 0 then
 					debug("Illegal access on {recvval} for element {arg1}/{recvval.length}")
 				end
-				recvval[arg1] = args[2].val.as(Char)
+				recvval.chars[arg1] = args[2].val.as(Char)
 				return null
 			else if pname == "copy_to" then
 				# sig= copy_to(dest: NativeString, length: Int, from: Int, to: Int)
-				var destval = args[1].val.as(Buffer)
+				var destval = args[1].val.as(FlatBuffer)
 				var lenval = args[2].to_i
 				var fromval = args[3].to_i
 				var toval = args[4].to_i
@@ -792,7 +792,7 @@ redef class AInternMethPropdef
 				if toval + lenval >= destval.length then
 					debug("Illegal access on {destval} for element {toval}+{lenval}/{destval.length}")
 				end
-				recvval.copy(fromval, lenval, destval, toval)
+				recvval.as(FlatBuffer).copy(fromval, lenval, destval, toval)
 				return null
 			else if pname == "atoi" then
 				return v.int_instance(recvval.to_i)
@@ -838,6 +838,17 @@ redef class AbstractArray[E]
 	end
 end
 
+redef class Buffer
+	fun copy(start: Int, len: Int, dest: Buffer, new_start: Int)
+	do
+		var self_chars = self.chars
+		var dest_chars = dest.chars
+		for i in [0..len-1] do
+			dest_chars[new_start+i] = self_chars[start+i]
+		end
+	end
+end
+
 redef class AExternInitPropdef
 	redef fun call(v, mpropdef, args)
 	do
@@ -879,12 +890,12 @@ redef class AExternMethPropdef
 			var recvval = args.first.val
 			if pname == "io_write" then
 				var a1 = args[1].val.as(Buffer)
-				recvval.as(OStream).write(a1.substring(0, args[2].to_i))
+				recvval.as(OStream).write(a1.substring(0, args[2].to_i).to_s)
 				return args[2]
 			else if pname == "io_read" then
 				var str = recvval.as(IStream).read(args[2].to_i)
 				var a1 = args[1].val.as(Buffer)
-				new Buffer.from(str).copy(0, str.length, a1, 0)
+				new FlatBuffer.from(str).copy(0, str.length, a1.as(FlatBuffer), 0)
 				return v.int_instance(str.length)
 			else if pname == "io_close" then
 				recvval.as(IOS).close
