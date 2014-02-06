@@ -34,8 +34,6 @@ private class PosetMetricsPhase
 		print "--- Poset metrics ---"
 		print "## Module importation hierarchy"
 		model.mmodule_importation_hierarchy.print_metrics
-		print "## Module nesting hierarchy"
-		model.mmodule_nesting_hierarchy.print_metrics
 		print "## Classdef hierarchy"
 		model.mclassdef_hierarchy.print_metrics
 		print "## Class hierarchy"

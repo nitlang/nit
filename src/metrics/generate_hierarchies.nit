@@ -21,6 +21,7 @@ module generate_hierarchies
 import model
 private import metrics_base
 import frontend
+import model_viz
 
 redef class ToolContext
 	var generate_hierarchies_phase: Phase = new GenerateHierarchyPhase(self, null)
@@ -44,40 +45,15 @@ end
 # Nesting relation is represented with nested boxes
 fun generate_module_hierarchy(toolcontext: ToolContext, model: Model)
 do
-	var buf = new Buffer
-	buf.append("digraph \{\n")
-	buf.append("node [shape=box];\n")
-	buf.append("rankdir=BT;\n")
-	for mmodule in model.mmodules do
-		if mmodule.direct_owner == null then
-			generate_module_hierarchy_for(mmodule, buf)
-		end
-	end
-	for mmodule in model.mmodules do
-		for s in mmodule.in_importation.direct_greaters do
-			buf.append("\"{mmodule}\" -> \"{s}\";\n")
-		end
-	end
-	buf.append("\}\n")
-	var f = new OFStream.open(toolcontext.output_dir.join_path("module_hierarchy.dot"))
-	f.write(buf.to_s)
-	f.close
-end
+	var dot = new MProjectDot(model)
 
-# Helper function for `generate_module_hierarchy`.
-# Create graphviz nodes for the module and recusrively for its nested modules
-private fun generate_module_hierarchy_for(mmodule: MModule, buf: Buffer)
-do
-	if mmodule.in_nesting.direct_greaters.is_empty then
-		buf.append("\"{mmodule.name}\";\n")
-	else
-		buf.append("subgraph \"cluster_{mmodule.name}\" \{label=\"\"\n")
-		buf.append("\"{mmodule.name}\";\n")
-		for s in mmodule.in_nesting.direct_greaters do
-			generate_module_hierarchy_for(s, buf)
-		end
-		buf.append("\}\n")
-	end
+	var projectpath = toolcontext.output_dir.join_path("project_hierarchy.dot")
+	dot.mprojects.add(model.mprojects.first)
+	dot.render(projectpath)
+
+	var modulepath = toolcontext.output_dir.join_path("module_hierarchy.dot")
+	dot.mprojects.add_all(model.mprojects)
+	dot.render(modulepath)
 end
 
 # Create a dot file representing the class hierarchy of a model.

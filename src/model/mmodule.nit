@@ -19,7 +19,7 @@ module mmodule
 
 import poset
 import location
-import model_base
+import mproject
 private import more_collections
 
 # The container class of a Nit object-oriented model.
@@ -28,8 +28,10 @@ redef class Model
 	# All known modules
 	var mmodules: Array[MModule] = new Array[MModule]
 
-	# Module nesting hierarchy.
+	# placebo for old module nesting hierarchy.
 	# where mainmodule < mainmodule::nestedmodule
+	#
+	# TODO REMOVE, rely on mgroup instead
 	var mmodule_nesting_hierarchy: POSet[MModule] = new POSet[MModule]
 
 	# Full module importation hierarchy including private or nested links.
@@ -52,14 +54,24 @@ redef class Model
 	end
 end
 
+redef class MGroup
+	# The loaded modules of this group
+	var mmodules = new Array[MModule]
+end
+
 # A Nit module is usually associated with a Nit source file.
-# Modules can be nested (see `direct_owner`, `public_owner`, and `in_nesting`)
 class MModule
 	# The model considered
 	var model: Model
 
-	# The direct nesting module, return null if self is not nested (ie. is a top-level module)
+	# placebo for old module nesting hierarchy
+	# return null if self is not nested (ie. is a top-level module)
+	#
+	# TODO REMOVE, rely on mgroup instead
 	var direct_owner: nullable MModule
+
+	# The group of module in the project if any
+	var mgroup: nullable MGroup
 
 	# The short name of the module
 	var name: String
@@ -70,27 +82,29 @@ class MModule
 	# Alias for `name`
 	redef fun to_s do return self.name
 
+	# placebo for old module nesting hierarchy
 	# The view of the module in the `model.mmodule_nesting_hierarchy`
+	#
+	# TODO REMOVE, rely on mgroup instead
 	var in_nesting: POSetElement[MModule]
 
 	# The view of the module in the `model.mmodule_importation_hierarchy`
 	var in_importation: POSetElement[MModule]
 
 	# The canonical name of the module
-	# Example: `"owner::name"`
+	# Example: `"project::name"`
 	fun full_name: String
 	do
-		var owner = self.public_owner
-		if owner == null then
+		var mgroup = self.mgroup
+		if mgroup == null or mgroup.mproject.name == self.name then
 			return self.name
 		else
-			return "{owner.full_name}::{self.name}"
+			return "{mgroup.mproject.name}::{self.name}"
 		end
 	end
 
 	# Create a new empty module and register it to a model
-	# `direct_owner` is the direct owner (null if top-level module)
-	init(model: Model, direct_owner: nullable MModule, name: String, location: Location)
+	init(model: Model, mgroup: nullable MGroup, name: String, location: Location)
 	do
 		self.model = model
 		self.name = name
@@ -98,9 +112,18 @@ class MModule
 		model.mmodules_by_name.add_one(name, self)
 		model.mmodules.add(self)
 		self.in_nesting = model.mmodule_nesting_hierarchy.add_node(self)
-		self.direct_owner = direct_owner
-		if direct_owner != null then
-			model.mmodule_nesting_hierarchy.add_edge(direct_owner, self)
+		self.mgroup = mgroup
+		if mgroup != null then
+			mgroup.mmodules.add(self)
+			# placebo for old module nesting hierarchy
+			var direct_owner = mgroup.mmodules.first
+			if direct_owner == self and mgroup.parent != null and not mgroup.parent.mmodules.is_empty then
+				direct_owner = mgroup.parent.mmodules.first
+			end
+			if direct_owner != self then
+				self.direct_owner = direct_owner
+				model.mmodule_nesting_hierarchy.add_edge(direct_owner, self)
+			end
 		end
 		self.in_importation = model.mmodule_importation_hierarchy.add_node(self)
 	end
@@ -153,17 +176,15 @@ class MModule
 		end
 	end
 
-	# The first module in the nesting hierarchy to export self as public
-	# This function is used to determine the canonical name of modules, classes and properties.
-	# REQUIRE: the visibility of all nesting modules is already set.
+	# placebo for old module nesting hierarchy
 	fun public_owner: nullable MModule
 	do
-		var res = self.direct_owner
-		var last = res
-		while last != null do
-			if last.visibility_for(self) >= public_visibility then res = last
-			last = last.direct_owner
-		end
+		var mgroup = self.mgroup
+		if mgroup == null then return null
+		mgroup = mgroup.mproject.root
+		if mgroup.mmodules.is_empty then return null
+		var res = mgroup.mmodules.first
+		if res == self then return null
 		return res
 	end
 
