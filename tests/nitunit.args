@@ -1,1 +1,1 @@
-test_nitunit.nit --no-color -o out/nitunit_args1.write
+test_nitunit.nit --no-color -o $WRITE

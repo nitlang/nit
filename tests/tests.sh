@@ -456,7 +456,7 @@ END
 					test -z "$tap" && echo -n "==> $name "
 					echo "./$ff.bin $args" > "./$fff.bin"
 					chmod +x "./$fff.bin"
-					sh -c "NIT_NO_STACK=1 $TIMEOUT ./$fff.bin < $inputs > $fff.res 2>$fff.err"
+					WRITE="$fff.write" sh -c "NIT_NO_STACK=1 $TIMEOUT ./$fff.bin < $inputs > $fff.res 2>$fff.err"
 					if [ "x$verbose" = "xtrue" ]; then
 						cat "$fff.res"
 						cat >&2 "$fff.err"
