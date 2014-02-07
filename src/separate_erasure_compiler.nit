@@ -333,8 +333,6 @@ class SeparateErasureCompiler
 		self.generate_init_attr(v, res, mtype)
 		v.add("return {res};")
 		v.add("\}")
-
-		generate_check_init_instance(mtype)
 	end
 
 	private fun build_class_vts_table(mclass: MClass): Bool do
@@ -604,7 +602,6 @@ class SeparateErasureCompilerVisitor
 		end
 		var length = self.int_instance(array.length)
 		self.send(self.get_property("with_native", arraytype), [res, nat, length])
-		self.check_init_instance(res, arraytype)
 		self.add("\}")
 		return res
 	end

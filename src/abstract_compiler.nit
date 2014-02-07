@@ -494,9 +494,6 @@ abstract class AbstractCompiler
 	# This is used to avoid adding an extern file more than once
 	private var seen_extern = new ArraySet[String]
 
-	# Generate code that check if an instance is correctly initialized
-	fun generate_check_init_instance(mtype: MClassType) is abstract
-
 	# Generate code that initialize the attributes on a new instance
 	fun generate_init_attr(v: VISITOR, recv: RuntimeVariable, mtype: MClassType)
 	do
@@ -803,9 +800,6 @@ abstract class AbstractCompilerVisitor
 			self.add("\}")
 		end
 	end
-
-	# Generate a check-init-instance
-	fun check_init_instance(recv: RuntimeVariable, mtype: MClassType) is abstract
 
 	# Names handling
 
@@ -2235,7 +2229,6 @@ redef class ACrangeExpr
 		var mtype = self.mtype.as(MClassType)
 		var res = v.init_instance(mtype)
 		var it = v.send(v.get_property("init", res.mtype), [res, i1, i2])
-		v.check_init_instance(res, mtype)
 		return res
 	end
 end
@@ -2248,7 +2241,6 @@ redef class AOrangeExpr
 		var mtype = self.mtype.as(MClassType)
 		var res = v.init_instance(mtype)
 		var it = v.send(v.get_property("without_last", res.mtype), [res, i1, i2])
-		v.check_init_instance(res, mtype)
 		return res
 	end
 end
@@ -2405,7 +2397,6 @@ redef class ANewExpr
 			#self.debug("got {res2} from {mproperty}. drop {recv}")
 			return res2
 		end
-		v.check_init_instance(recv, mtype)
 		return recv
 	end
 end
