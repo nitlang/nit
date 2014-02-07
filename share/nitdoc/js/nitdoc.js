@@ -13,5 +13,6 @@ require.config({
 // nitdoc main module
 define([
 	"plugins/ui",
+	"plugins/quicksearch",
 ], function() {});
 
