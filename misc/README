@@ -1,6 +1,16 @@
 # gtksourceview (gedit and other GTK editors)
 To install in your home, just link (or copy) the language definition file in ~/.local/share/gtksourceview-2.0/language-specs
 
+# syntaxhighlighter
+
+Nit brush for the Alex Gorbatchev's JS syntaxhighlighter.
+
+To install the JS syntaxhighlighter, please refer to http://alexgorbatchev.com/SyntaxHighlighter/
+
+Then can add the brush to your html page:
+
+	<script type="text/javascript" src="shBrushNit.js"></script>
+
 # vim
 
 vim is a powerful text editor.
