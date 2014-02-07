@@ -39,6 +39,8 @@ class Game
 	protected var random_radius_diff : Int =
 		random_radius_max - random_radius_min
 
+	var entities_sorter = new EntitiesSorter
+
 	init( cavemen_nbr : Int )
 	do
 		srand
@@ -86,8 +88,7 @@ class Game
 		end
 
 		# sort for blitting, firsts and in the back
-		# FIXME: remove closure
-		entities.sort !cmp( a, b ) = b.pos.y <=> a.pos.y
+		entities_sorter.sort entities
 
 		return turn
 	end
@@ -336,4 +337,11 @@ class Javelin
 			end
 		end
 	end
+end
+
+# Sort entities on screen in order of Y, entities in the back are drawn first
+class EntitiesSorter
+	super AbstractSorter[Entity]
+
+	redef fun compare(a, b) do return b.pos.y <=> a.pos.y
 end
