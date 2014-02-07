@@ -115,7 +115,7 @@ extern SDLDisplay in "C" `{SDL_Surface *`}
 						   SDL_GetKeyName(event.key.keysym.sym));
 	#endif
 
-					return SDLKeyEvent_as_nullable_InputEvent(
+					return SDLKeyEvent_as_nullable_IE(
 							new_SDLKeyEvent( NativeString_to_s(
 								SDL_GetKeyName(event.key.keysym.sym) ),
 								event.type==SDL_KEYDOWN ) );
@@ -127,7 +127,7 @@ extern SDLDisplay in "C" `{SDL_Surface *`}
 						   event.motion.x, event.motion.y);
 	#endif
 
-					return SDLMouseMotionEvent_as_nullable_InputEvent(
+					return SDLMouseMotionEvent_as_nullable_IE(
 							new_SDLMouseMotionEvent( event.motion.x, event.motion.y,
 								event.motion.xrel, event.motion.yrel ) );
 
@@ -137,7 +137,7 @@ extern SDLDisplay in "C" `{SDL_Surface *`}
 					printf("Mouse button \"%d\" pressed at (%d,%d)\n",
 						   event.button.button, event.button.x, event.button.y);
 	#endif
-					return SDLMouseButtonEvent_as_nullable_InputEvent(
+					return SDLMouseButtonEvent_as_nullable_IE(
 							new_SDLMouseButtonEvent( event.button.x, event.button.y,
 								event.button.button, event.type == SDL_MOUSEBUTTONDOWN ) );
 
@@ -145,7 +145,7 @@ extern SDLDisplay in "C" `{SDL_Surface *`}
 	#ifdef DEBUG
 					printf("Quit event\n");
 	#endif
-					return SDLQuitEvent_as_nullable_InputEvent( new_SDLQuitEvent() );
+					return SDLQuitEvent_as_nullable_IE( new_SDLQuitEvent() );
 			}
 		}
 
