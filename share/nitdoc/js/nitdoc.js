@@ -12,5 +12,6 @@ require.config({
 
 // nitdoc main module
 define([
+	"plugins/ui",
 ], function() {});
 
