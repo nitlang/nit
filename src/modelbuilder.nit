@@ -420,10 +420,7 @@ class ModelBuilder
 
 	# Transform relative paths (starting with '../') into absolute paths
 	private fun module_absolute_path(path: String): String do
-		if path.has_prefix("..") then
-			return getcwd.join_path(path).simplify_path
-		end
-		return path
+		return getcwd.join_path(path).simplify_path
 	end
 
 	# loaded module by absolute path
