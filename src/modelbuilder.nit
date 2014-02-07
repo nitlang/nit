@@ -420,14 +420,8 @@ class ModelBuilder
 
 	# Transform relative paths (starting with '../') into absolute paths
 	private fun module_absolute_path(path: String): String do
-		if path.has_prefix("..") then
-			return getcwd.join_path(path).simplify_path
-		end
-		return path
+		return getcwd.join_path(path).simplify_path
 	end
-
-	# loaded module by absolute path
-	private var loaded_nmodules = new HashMap[String, AModule]
 
 	# Try to load a module AST using a path.
 	# Display an error if there is a problem (IO / lexer / parser) and return null
@@ -440,11 +434,6 @@ class ModelBuilder
 		if not filename.file_exists then
 			self.toolcontext.error(null, "Error: file {filename} not found.")
 			return null
-		end
-
-		var module_path = module_absolute_path(filename)
-		if loaded_nmodules.keys.has(module_path) then
-			return loaded_nmodules[module_path]
 		end
 
 		self.toolcontext.info("load module {filename}", 2)
@@ -466,7 +455,6 @@ class ModelBuilder
 			return null
 		end
 
-		loaded_nmodules[module_path] = nmodule
 		return nmodule
 	end
 
