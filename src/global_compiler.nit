@@ -978,6 +978,7 @@ private class CustomizedRuntimeFunction
 			v.add("return {frame.returnvar.as(not null)};")
 		end
 		v.add("\}")
+		if not self.c_name.has_substring("VIRTUAL", 0) then compiler.names[self.c_name] = "{mmethoddef.mclassdef.mmodule.name}::{mmethoddef.mclassdef.mclass.name}::{mmethoddef.mproperty.name} ({mmethoddef.location.file.filename}:{mmethoddef.location.line_start})"
 	end
 
 	redef fun call(v: VISITOR, arguments: Array[RuntimeVariable]): nullable RuntimeVariable

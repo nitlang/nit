@@ -20,10 +20,12 @@ Requirement:
 	* ccache	http://ccache.samba.org/	to improve recompilation
 	* libgc-dev	http://www.hpl.hp.com/personal/Hans_Boehm/gc/
 	* graphviz	http://www.graphviz.org/	to enable graphes with the nitdoc tool
+	* libunwind	http://nongnu.org/libunwind
+	* gperf		http://gnu.org/software/gperf	to enable mapping from C to Nit function names in a stack trace
 
 Those are available in most linux distributions
 
-    # sudo apt-get install build-essential ccache libgc-dev graphviz
+    # sudo apt-get install build-essential ccache libgc-dev graphviz libunwind gperf
 
 Important files and directory:
 
