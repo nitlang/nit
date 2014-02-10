@@ -236,6 +236,11 @@ class Caveman
 	var fear_duration : Int = 80+40.rand
 	var throw_period : Int = 40+8.rand
 
+	var variance_angle: Float = 2.0*pi.rand
+	var variance_dist: Int = throw_distance.to_f.sqrt.to_i-4
+	var variance_x: Int = (variance_angle.cos*variance_dist.to_f).to_i
+	var variance_y: Int = (variance_angle.sin*variance_dist.to_f).to_i
+
 	redef var is_alive : Bool = true
 
 	redef fun speed do return 4
@@ -276,7 +281,8 @@ class Caveman
 					end
 				else
 					# get closer to dino
-					going_to = t.game.dino.pos
+					var dino_pos = t.game.dino.pos
+					going_to = new GamePos(dino_pos.x+variance_x, dino_pos.y+variance_y)
 				end
 			end
 
