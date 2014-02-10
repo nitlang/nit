@@ -243,7 +243,7 @@ class Caveman
 
 	redef var is_alive : Bool = true
 
-	redef fun speed do return 4
+	redef var speed: Int = 3+3.rand
 
 	fun is_afraid( turn : Turn ) : Bool do return turn.nbr < afraid_until
 	fun can_throw( turn : Turn ) : Bool do return cannot_throw_until < turn.nbr
