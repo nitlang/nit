@@ -249,7 +249,7 @@ class Caveman
 			var dwd = squared_dist_with_dino( t.game )
 
 			if dwd < run_over_distance then
-				is_alive = false
+				if t.game.dino.is_alive then is_alive = false
 				return
 			else if is_afraid( t ) then
 				# going to destination
