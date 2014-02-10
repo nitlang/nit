@@ -62,7 +62,6 @@ redef class ModelBuilder
 		if initprop != null then
 			interpreter.send(initprop, [mainobj])
 		end
-		interpreter.check_init_instance(mainobj)
 		var mainprop = mainmodule.try_get_primitive_method("main", sys_type.mclass)
 		if mainprop != null then
 			interpreter.send(mainprop, [mainobj])
@@ -243,7 +242,6 @@ private class NaiveInterpreter
 		var res = new MutableInstance(mtype)
 		self.init_instance(res)
 		self.send(self.force_get_primitive_method("with_native", mtype), [res, nat, self.int_instance(values.length)])
-		self.check_init_instance(res)
 		return res
 	end
 
@@ -460,19 +458,6 @@ private class NaiveInterpreter
 	do
 		for npropdef in collect_attr_propdef(recv.mtype) do
 			npropdef.init_expr(self, recv)
-		end
-	end
-
-	# Check that non nullable attributes of `recv` are correctly initialized.
-	# This function is used as the last instruction of a new
-	fun check_init_instance(recv: Instance)
-	do
-		if not recv isa MutableInstance then return
-		for npropdef in collect_attr_propdef(recv.mtype) do
-			if npropdef.n_expr == null then
-				# Force read to check the initialization
-				self.read_attribute(npropdef.mpropdef.mproperty, recv)
-			end
 		end
 	end
 
@@ -1423,7 +1408,6 @@ redef class ACrangeExpr
 		var res = new MutableInstance(mtype)
 		v.init_instance(res)
 		v.send(v.force_get_primitive_method("init", mtype), [res, e1, e2])
-		v.check_init_instance(res)
 		return res
 	end
 end
@@ -1439,7 +1423,6 @@ redef class AOrangeExpr
 		var res = new MutableInstance(mtype)
 		v.init_instance(res)
 		v.send(v.force_get_primitive_method("without_last", mtype), [res, e1, e2])
-		v.check_init_instance(res)
 		return res
 	end
 end
@@ -1619,7 +1602,6 @@ redef class ANewExpr
 			#self.debug("got {res2} from {mproperty}. drop {recv}")
 			return res2
 		end
-		v.check_init_instance(recv)
 		return recv
 	end
 end

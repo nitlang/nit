@@ -1,1 +1,3 @@
-Runtime error: Uninitialized attribute @j (base_attr_init_val1.nit:29)
+Runtime error: Uninitialized attribute @j (alt/base_attr_init_val_raf_alt1.nit:24)
+1
+1
