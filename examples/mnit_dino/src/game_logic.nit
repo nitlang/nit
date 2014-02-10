@@ -269,6 +269,7 @@ class Caveman
 					var dy = dino_pos.y - pos.y
 					var a = atan2( dy.to_f, dx.to_f )
 					a += pi # get opposite
+					a += [-100..100[.rand.to_f*pi/3.0/100.0
 					var x = a.cos*flee_distance.to_f
 					var y = a.sin*flee_distance.to_f
 					going_to = new GamePos( x.to_i, y.to_i )
