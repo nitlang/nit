@@ -15,7 +15,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module gtk_dialogs
+module gtk_dialogs is pkgconfig("gtk+-3.0")
+
 import gtk_core
 
 in "C Header" `{
@@ -31,7 +32,7 @@ extern GtkDialog `{GtkDialog *`}
 		return (GtkDialog *)gtk_dialog_new( );
 	`}
 
-	new with_buttons( title : String, parent : GtkWindow, flags : GtkDialogFlags) is extern import String::to_cstring`{
+	new with_buttons( title : String, parent : GtkWindow, flags : GtkDialogFlags) is extern import String.to_cstring`{
 		return (GtkDialog *)gtk_dialog_new_with_buttons( String_to_cstring( title ), parent, flags, "", NULL );
 	`}
 
@@ -54,7 +55,7 @@ extern GtkAboutDialog `{GtkAboutDialog *`}
 		return NativeString_to_s( (char *)gtk_about_dialog_get_program_name( recv ) );
 	`}
 
-	fun program_name=( name : String ) is extern import String::to_cstring`{
+	fun program_name=( name : String ) is extern import String.to_cstring`{
 		gtk_about_dialog_set_program_name( recv, String_to_cstring( name ) );
 	`}
 
@@ -62,7 +63,7 @@ extern GtkAboutDialog `{GtkAboutDialog *`}
 		return NativeString_to_s( (char *)gtk_about_dialog_get_version( recv ) );
 	`}
 
-	fun version=( v : String ) is extern import String::to_cstring`{
+	fun version=( v : String ) is extern import String.to_cstring`{
 		gtk_about_dialog_set_version( recv, String_to_cstring( v ) );
 	`}
 
@@ -70,7 +71,7 @@ extern GtkAboutDialog `{GtkAboutDialog *`}
 		return NativeString_to_s( (char *)gtk_about_dialog_get_copyright( recv ) );
 	`}
 
-	fun copyright=( c : String ) is extern import String::to_cstring`{
+	fun copyright=( c : String ) is extern import String.to_cstring`{
 		gtk_about_dialog_set_copyright( recv, String_to_cstring( c ) );
 	`}
 
@@ -78,7 +79,7 @@ extern GtkAboutDialog `{GtkAboutDialog *`}
 		return NativeString_to_s( (char *)gtk_about_dialog_get_comments( recv ) );
 	`}
 
-	fun comments=( com : String ) is extern import String::to_cstring`{
+	fun comments=( com : String ) is extern import String.to_cstring`{
 		gtk_about_dialog_set_comments( recv, String_to_cstring( com ) );
 	`}
 
@@ -86,7 +87,7 @@ extern GtkAboutDialog `{GtkAboutDialog *`}
 		return NativeString_to_s( (char *)gtk_about_dialog_get_license( recv ) );
 	`}
 
-	fun license=( li : String ) is extern import String::to_cstring`{
+	fun license=( li : String ) is extern import String.to_cstring`{
 		gtk_about_dialog_set_license( recv, String_to_cstring( li ) );
 	`}
 
@@ -96,7 +97,7 @@ extern GtkAboutDialog `{GtkAboutDialog *`}
 		return NativeString_to_s( (char *)gtk_about_dialog_get_website( recv ) );
 	`}
 
-	fun website=( link : String ) is extern import String::to_cstring`{
+	fun website=( link : String ) is extern import String.to_cstring`{
 		gtk_about_dialog_set_website( recv, String_to_cstring( link ) );
 	`}
 
@@ -104,7 +105,7 @@ extern GtkAboutDialog `{GtkAboutDialog *`}
 		return NativeString_to_s( (char *) gtk_about_dialog_get_website_label( recv ) );
 	`}
 
-	fun website_label=( link_label : String ) is extern import String::to_cstring`{
+	fun website_label=( link_label : String ) is extern import String.to_cstring`{
 		gtk_about_dialog_set_website_label( recv, String_to_cstring( link_label ) );
 	`}
 
@@ -114,11 +115,11 @@ extern GtkAboutDialog `{GtkAboutDialog *`}
 	#`}
 
 	#TODO
-	#fun authors=( authors_list : String ) is extern import String::to_cstring`{
+	#fun authors=( authors_list : String ) is extern import String.to_cstring`{
 	#	gtk_about_dialog_set_authors( recv, String_to_cstring( authors_list ) );
 	#`}
 
-	fun show ( parent : GtkWindow, params : String ) is extern import String::to_cstring`{
+	fun show ( parent : GtkWindow, params : String ) is extern import String.to_cstring`{
 		gtk_show_about_dialog( parent, String_to_cstring( params ), NULL);
 	`}
 end
@@ -133,7 +134,7 @@ extern GtkAppChooserDialog `{GtkAppChooserDialog *`}
 	#	return (GtkAppChooserDialog *)gtk_app_chooser_dialog_new( parent, flags, file );
 	#`}
 
-	new for_content_type ( parent : GtkWindow, flags : GtkDialogFlags, content_type : String ) is extern  import String::to_cstring `{
+	new for_content_type ( parent : GtkWindow, flags : GtkDialogFlags, content_type : String ) is extern  import String.to_cstring `{
 		return (GtkAppChooserDialog *)gtk_app_chooser_dialog_new_for_content_type( parent, flags, 																							String_to_cstring( content_type ) );
 	`}
 
@@ -143,7 +144,7 @@ extern GtkAppChooserDialog `{GtkAppChooserDialog *`}
 		return NativeString_to_s( (char *)gtk_app_chooser_dialog_get_heading( recv ) );
 	`}
 
-	fun heading=( text : String ) is extern import String::to_cstring `{
+	fun heading=( text : String ) is extern import String.to_cstring `{
 		gtk_app_chooser_dialog_set_heading( recv, String_to_cstring( text ) );
 	`}
 
@@ -154,7 +155,7 @@ end
 extern GtkColorChooserDialog `{GtkColorChooserDialog *`}
 	super GtkDialog
 
-	new ( title : String, parent : GtkWindow ) is extern import String::to_cstring `{
+	new ( title : String, parent : GtkWindow ) is extern import String.to_cstring `{
 		return (GtkColorChooserDialog *)gtk_color_chooser_dialog_new( String_to_cstring( title ), parent );
 	`}
 end
@@ -164,7 +165,7 @@ end
 extern GtkFileChooserDialog `{GtkFileChooserDialog *`}
 	super GtkDialog
 
-	new ( title : String, parent : GtkWindow, action : GtkFileChooserAction ) is extern import String::to_cstring `{
+	new ( title : String, parent : GtkWindow, action : GtkFileChooserAction ) is extern import String.to_cstring `{
 		return (GtkFileChooserDialog *)gtk_file_chooser_dialog_new( String_to_cstring( title ), parent, action, "", NULL );
 	`}
 end
@@ -201,7 +202,7 @@ end
 extern GtkMessageDialog `{GtkMessageDialog *`}
 	super GtkDialog
 
-	new ( parent : GtkWindow, flags : GtkDialogFlags, msg_type : GtkMessageType, btn_type : GtkButtonsType, format : String ) is extern import String::to_cstring `{
+	new ( parent : GtkWindow, flags : GtkDialogFlags, msg_type : GtkMessageType, btn_type : GtkButtonsType, format : String ) is extern import String.to_cstring `{
 		return (GtkMessageDialog *)gtk_message_dialog_new( parent, flags, msg_type, btn_type, String_to_cstring( format ), NULL );
 	`}
 end

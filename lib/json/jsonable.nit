@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Basic json related functionalities
-module jsonable
+module jsonable is pkgconfig("json")
 
 in "C Header" `{
 	#define __STRICT_ANSI__
@@ -27,7 +27,7 @@ interface Jsonable
 end
 
 # Main object type used by C library
-private extern JsonObject `{ json_object* `}
+private extern JsonObject `{ struct json_object* `}
 	# Give up ownership of this object and decrease the reference count.
 	fun put `{ json_object_put( recv ); `}
 
@@ -35,16 +35,12 @@ private extern JsonObject `{ json_object* `}
 	fun get `{ json_object_get( recv ); `}
 end
 
-redef class Sequence[ V ]
+redef class SequenceRead[ V ]
 	super Jsonable
 end
 
 # Can b converted to a Json object
 redef class Map[ K, V ]
-	super Jsonable
-end
-
-redef class String
 	super Jsonable
 end
 

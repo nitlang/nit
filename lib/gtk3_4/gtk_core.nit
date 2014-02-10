@@ -16,7 +16,8 @@
 # limitations under the License.
 
 # Classes and services to use libGTK widgets
-module gtk_core
+module gtk_core is pkgconfig("gtk+-3.0")
+
 import gtk_enums
 import gdk_enums
 
@@ -59,7 +60,7 @@ end
 extern GtkWidget `{GtkWidget *`}
 	fun show_all is extern `{ gtk_widget_show_all( recv ); `}
 
-	fun signal_connect( signal_name : String, to_call : GtkCallable, user_data : nullable Object ) is extern import String::to_cstring, GtkCallable::signal, Object as not nullable `{
+	fun signal_connect( signal_name : String, to_call : GtkCallable, user_data : nullable Object ) is extern import String.to_cstring, GtkCallable.signal, Object as not nullable `{
 		NitGtkSignal *data = malloc( sizeof(NitGtkSignal) );
 
 		GtkCallable_incr_ref( to_call );
@@ -129,7 +130,7 @@ extern GtkWindow `{GtkWindow *`}
 		return win;
 	`}
 
-	fun title=( title : String ) is extern import String::to_cstring `{
+	fun title=( title : String ) is extern import String.to_cstring `{
 		gtk_window_set_title( recv, String_to_cstring( title ) );
 	`}
 
@@ -243,7 +244,7 @@ end
 extern GtkFrame `{GtkFrame *`}
 	super GtkBin
 
-	new ( lbl : String ) is extern import String::to_cstring`{
+	new ( lbl : String ) is extern import String.to_cstring`{
 		return (GtkFrame *)gtk_frame_new( String_to_cstring( lbl ) );
 	`}
 
@@ -251,7 +252,7 @@ extern GtkFrame `{GtkFrame *`}
 		return NativeString_to_s( (char *)gtk_frame_get_label( recv ) );
 	`}
 
-	fun frame_label=( lbl : String ) is extern import String::to_cstring`{
+	fun frame_label=( lbl : String ) is extern import String.to_cstring`{
 		gtk_frame_set_label( recv, String_to_cstring( lbl ) );
 	`}
 
@@ -333,11 +334,11 @@ extern GtkEntry `{GtkEntry *`}
 		 return (GtkEntry *)gtk_entry_new();
 	`}
 
-	fun text : String is extern import String::to_cstring`{
+	fun text : String is extern import String.to_cstring`{
 		return NativeString_to_s( (char *)gtk_entry_get_text( recv ) );
 	`}
 
-	fun text=( value : String) is extern import String::to_cstring`{
+	fun text=( value : String) is extern import String.to_cstring`{
 		gtk_entry_set_text( recv, String_to_cstring( value ) );
 	`}
 
@@ -500,7 +501,7 @@ extern GtkScale `{GtkScale *`}
 		gtk_scale_set_has_origin( recv, orig );
 	`}
 
-	fun add_mark( value : Float, position : GtkPositionType, markup : String ) is extern import String::to_cstring`{
+	fun add_mark( value : Float, position : GtkPositionType, markup : String ) is extern import String.to_cstring`{
 		gtk_scale_add_mark( recv, value, position, String_to_cstring( markup ) );
 	`}
 
@@ -530,17 +531,17 @@ extern GtkLabel `{GtkLabel *`}
 	super GtkMisc
 
 	# Create a GtkLabel with text
-	new ( text : String ) is extern import String::to_cstring `{
+	new ( text : String ) is extern import String.to_cstring `{
 		return (GtkLabel*)gtk_label_new( String_to_cstring( text ) );
 	`}
 
 	# Set the text of the label
-	fun text=( text : String ) import String::to_cstring `{
+	fun text=( text : String ) import String.to_cstring `{
 		gtk_label_set_text( recv, String_to_cstring( text ) );
 	`}
 
 	# Returns the text of the label
-	fun text : String import NativeString::to_s `{
+	fun text : String import NativeString.to_s `{
 		return NativeString_to_s( (char*)gtk_label_get_text( recv ) );
 	`}
 
@@ -568,7 +569,7 @@ extern GtkImage `{GtkImage *`}
 	`}
 
 	# Create a GtkImage with text
-	new file( filename : String ) is extern import String::to_cstring `{
+	new file( filename : String ) is extern import String.to_cstring `{
 		return (GtkImage*)gtk_image_new_from_file( String_to_cstring( filename ) );
 	`}
 
@@ -635,11 +636,11 @@ extern GtkButton `{GtkButton *`}
 	`}
 
 	#Create a GtkButton with text
-	new with_label( text : String ) is extern import String::to_cstring `{
+	new with_label( text : String ) is extern import String.to_cstring `{
 		return (GtkButton *)gtk_button_new_with_label( String_to_cstring( text ) );
 	`}
 
-	new from_stock( stock_id : String ) is extern import String::to_cstring `{
+	new from_stock( stock_id : String ) is extern import String.to_cstring `{
 		return (GtkButton *)gtk_button_new_from_stock( String_to_cstring( stock_id ) );
 	`}
 
@@ -647,7 +648,7 @@ extern GtkButton `{GtkButton *`}
 		return NativeString_to_s( (char *)gtk_button_get_label( recv ) );
 	`}
 
-	fun text=( value : String ) is extern import String::to_cstring`{
+	fun text=( value : String ) is extern import String.to_cstring`{
 		gtk_button_set_label( recv, String_to_cstring( value ) );
 	`}
 
@@ -673,7 +674,7 @@ end
 extern GtkLinkButton `{GtkLinkButton *`}
 	super GtkButton
 
-	new( uri: String ) is extern import String::to_cstring `{
+	new( uri: String ) is extern import String.to_cstring `{
 		return (GtkLinkButton *)gtk_link_button_new( String_to_cstring(uri) );
 	`}
 end
@@ -683,11 +684,11 @@ end
 extern GtkExpander `{GtkExpander *`}
 	super GtkBin
 
-	new( lbl : String) is extern import String::to_cstring`{
+	new( lbl : String) is extern import String.to_cstring`{
 		return (GtkExpander *)gtk_expander_new( String_to_cstring( lbl ) );
 	`}
 
-	new with_mnemonic( lbl : String) is extern import String::to_cstring`{
+	new with_mnemonic( lbl : String) is extern import String.to_cstring`{
 		return (GtkExpander *)gtk_expander_new_with_mnemonic(String_to_cstring( lbl ));
 	`}
 
@@ -711,7 +712,7 @@ extern GtkExpander `{GtkExpander *`}
 		return NativeString_to_s( (char *)gtk_expander_get_label( recv ) );
 	`}
 
-	fun label_text=( lbl : String ) is extern import String::to_cstring`{
+	fun label_text=( lbl : String ) is extern import String.to_cstring`{
 		gtk_expander_set_label( recv, String_to_cstring( lbl ) );
 	`}
 
@@ -836,7 +837,7 @@ extern GtkComboBox `{GtkComboBox *`}
 		return NativeString_to_s( (char *)gtk_combo_box_get_active_id( recv ) );
 	`}
 
-	fun active_id=( id_active : String ) is extern import String::to_cstring`{
+	fun active_id=( id_active : String ) is extern import String.to_cstring`{
 		gtk_combo_box_set_active_id( recv, String_to_cstring( id_active ) );
 	`}
 
@@ -860,7 +861,7 @@ extern GtkComboBox `{GtkComboBox *`}
 		return NativeString_to_s( (char *)gtk_combo_box_get_title( recv ) );
 	`}
 
-	fun title=( t : String ) is extern import String::to_cstring`{
+	fun title=( t : String ) is extern import String.to_cstring `{
 		gtk_combo_box_set_title( recv, String_to_cstring( t ) );
 	`}
 

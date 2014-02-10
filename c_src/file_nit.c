@@ -24,50 +24,6 @@
 
 #include "file_nit.h"
 
-#ifndef NONITCNI
-/*
-C implementation of file::String::files
-
-Imported methods signatures:
-	HashSet new_HashSet(  ) for hash_collection::HashSet::init
-	void HashSet_add( HashSet recv, Object item ) for hash_collection::HashSet::(abstract_collection::SimpleCollection::add)
-	String NativeString_to_s() for string::NativeString::to_s
-	int HashSet_is_a_Set( HashSet value ) to check if a HashSet[String] is a Set[String]
-	Set HashSet_as_Set( HashSet value ) to cast from HashSet[String] to Set[String]
-*/
-Set String_files___impl( String recv )
-{
-	char *dir_path;
-	DIR *dir;
-
-	dir_path = String_to_cstring( recv );
-	if ((dir = opendir(dir_path)) == NULL)
-	{
-		perror( dir_path );
-		exit( 1 );
-	}
-	else
-	{
-		HashSet results;
-		String file_name;
-		struct dirent *de;
-
-		results = new_HashSet();
-
-		while ( ( de = readdir( dir ) ) != NULL )
-			if ( strcmp( de->d_name, ".." ) != 0 &&
-				strcmp( de->d_name, "." ) != 0 )
-			{
-				file_name = NativeString_to_s( strdup( de->d_name ) );
-				HashSet_add( results, String_as_Object( file_name ) );
-			}
-
-		closedir( dir );
-		return HashSet_as_Set( results );
-	}
-}
-#endif
-
 int string_NativeString_NativeString_file_exists_0(char *f){
 	FILE *hdl = fopen(f,"r");
 	if(hdl != NULL){

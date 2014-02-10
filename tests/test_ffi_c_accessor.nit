@@ -19,19 +19,19 @@ class A
 	var w : String = "w"
 	var rw : String = "rw"
 
-	fun print_all import String::to_cstring, r, rw `{
+	fun print_all import String.to_cstring, r, rw `{
 		printf( "%s %s\n",
 	        	String_to_cstring( A_r( recv ) ),
 	        	String_to_cstring( A_rw( recv ) ) );
 	`}
-	fun modify import NativeString::to_s, w=, rw= `{
+	fun modify import NativeString.to_s, w=, rw= `{
 		A_w__assign( recv, NativeString_to_s( "w set from native" ) );
 		A_rw__assign( recv, NativeString_to_s( "rw set from native" ) );
 	`}
 end
 
 class B
-	fun print_and_modify( a : A ) import A::rw, A::rw=, String::to_cstring, NativeString::to_s `{
+	fun print_and_modify( a : A ) import A.rw, A.rw=, String.to_cstring, NativeString.to_s `{
 		printf( "%s\n", String_to_cstring( A_rw( a ) ) );
 		A_rw__assign( a, NativeString_to_s( "set from native" ) );
 		printf( "%s\n", String_to_cstring( A_rw( a ) ) );

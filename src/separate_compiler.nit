@@ -18,6 +18,7 @@ module separate_compiler
 import abstract_compiler
 import layout_builders
 import rapid_type_analysis
+import compiler_ffi
 
 # Add separate compiler specific options
 redef class ToolContext
@@ -908,6 +909,17 @@ class SeparateCompiler
 		end
 		print "\t{total}\t{holes}"
 	end
+
+	redef fun compile_nitni_structs
+	do
+		self.header.add_decl("struct nitni_instance \{struct instance *value;\};")
+	end
+	
+	redef fun finalize_ffi_for_module(nmodule)
+	do
+		self.mainmodule = nmodule.mmodule.as(not null)
+		super
+	end
 end
 
 # A visitor on the AST of property definition that generate the C code of a separate compilation process.
@@ -950,6 +962,8 @@ class SeparateCompilerVisitor
 			end
 			self.add("{res} = BOX_{valtype.c_name}({value}); /* autobox from {value.mtype} to {mtype} */")
 			return res
+		else if value.mtype.cname_blind == "void*" and mtype.cname_blind == "void*" then
+			return value
 		else
 			# Bad things will appen!
 			var res = self.new_var(mtype)

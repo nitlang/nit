@@ -15,11 +15,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module gtk_enums
+module gtk_enums is pkgconfig("gtk+-3.0")
 
 in "C Header" `{
 	#include <gtk/gtk.h>
-
 `}
 
 #enum GtkArrowPlacement

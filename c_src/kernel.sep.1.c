@@ -3671,7 +3671,7 @@ char var24 /* : Char */;
 long var25 /* : Int */;
 long var27 /* : Int */;
 long var28 /* : Int */;
-long var29 /* : Int */;
+long var30 /* : Int */;
 long var31 /* : Int */;
 long var32 /* : Int */;
 long var34 /* : Int */;
@@ -3731,15 +3731,15 @@ var25 = var27;
 goto RET_LABEL26;
 RET_LABEL26:(void)0;
 }
-var28 = 10;
-{ /* Inline kernel#Int#+ (var25,var28) */
-var31 = var25 + var28;
-var29 = var31;
-goto RET_LABEL30;
-RET_LABEL30:(void)0;
+{ /* Inline kernel#Int#- (var21,var25) */
+var30 = var21 - var25;
+var28 = var30;
+goto RET_LABEL29;
+RET_LABEL29:(void)0;
 }
-{ /* Inline kernel#Int#- (var21,var29) */
-var34 = var21 - var29;
+var31 = 10;
+{ /* Inline kernel#Int#+ (var28,var31) */
+var34 = var28 + var31;
 var32 = var34;
 goto RET_LABEL33;
 RET_LABEL33:(void)0;

@@ -23444,15 +23444,15 @@ private class ReduceAction568
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
-					var tclassidnode2 = nodearraylist1
-					assert tclassidnode2 isa nullable TClassid
-					var tquadnode3 = nodearraylist2
-					assert tquadnode3 isa nullable TQuad
+					var ptypenode2 = nodearraylist1
+					assert ptypenode2 isa nullable AType
+					var tdotnode3 = nodearraylist2
+					assert tdotnode3 isa nullable TDot
 					var pmethidnode4 = nodearraylist3
 					assert pmethidnode4 isa nullable AMethid
 					var pexterncallnode1: nullable AFullPropExternCall = new AFullPropExternCall.init_afullpropexterncall(
-						tclassidnode2,
-						tquadnode3,
+						ptypenode2,
+						tdotnode3,
 						pmethidnode4
 					)
 					node_list = pexterncallnode1
@@ -23465,10 +23465,10 @@ private class ReduceAction569
 	do
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
-					var tclassidnode2 = nodearraylist1
-					assert tclassidnode2 isa nullable TClassid
+					var ptypenode2 = nodearraylist1
+					assert ptypenode2 isa nullable AType
 					var pexterncallnode1: nullable AInitPropExternCall = new AInitPropExternCall.init_ainitpropexterncall(
-						tclassidnode2
+						ptypenode2
 					)
 					node_list = pexterncallnode1
 					p.push(p.go_to(_goto), node_list)
@@ -23479,6 +23479,7 @@ private class ReduceAction570
 	redef fun action(p: Parser)
 	do
 					var node_list: nullable Object = null
+					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -23489,9 +23490,9 @@ private class ReduceAction570
 					var nodearraylist1 = p.pop
 					var ptypenode2 = nodearraylist1
 					assert ptypenode2 isa nullable AType
-					var tkwasnode3 = nodearraylist2
+					var tkwasnode3 = nodearraylist3
 					assert tkwasnode3 isa nullable TKwas
-					var ptypenode4 = nodearraylist6
+					var ptypenode4 = nodearraylist7
 					assert ptypenode4 isa nullable AType
 					var pexterncallnode1: nullable ACastAsExternCall = new ACastAsExternCall.init_acastasexterncall(
 						ptypenode2,

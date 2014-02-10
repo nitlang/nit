@@ -222,39 +222,39 @@ void VIRTUAL_parser_prod__AFullPropExternCall__empty_init(val* self) {
 parser_prod__AFullPropExternCall__empty_init(self);
 RET_LABEL:;
 }
-/* method parser_prod#AFullPropExternCall#init_afullpropexterncall for (self: AFullPropExternCall, nullable TClassid, nullable TQuad, nullable AMethid) */
+/* method parser_prod#AFullPropExternCall#init_afullpropexterncall for (self: AFullPropExternCall, nullable AType, nullable TDot, nullable AMethid) */
 void parser_prod__AFullPropExternCall__init_afullpropexterncall(val* self, val* p0, val* p1, val* p2) {
-val* var_n_classid /* var n_classid: nullable TClassid */;
-val* var_n_quad /* var n_quad: nullable TQuad */;
+val* var_n_type /* var n_type: nullable AType */;
+val* var_n_dot /* var n_dot: nullable TDot */;
 val* var_n_methid /* var n_methid: nullable AMethid */;
 val* var /* : null */;
 short int var1 /* : Bool */;
-var_n_classid = p0;
-var_n_quad = p1;
+var_n_type = p0;
+var_n_dot = p1;
 var_n_methid = p2;
 ((void (*)(val*))(self->class->vft[COLOR_parser_prod__AFullPropExternCall__empty_init]))(self) /* empty_init on <self:AFullPropExternCall>*/;
-if (var_n_classid == NULL) {
+if (var_n_type == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 10416);
 exit(1);
 }
-self->attrs[COLOR_parser_nodes__AFullPropExternCall___n_classid].val = var_n_classid; /* _n_classid on <self:AFullPropExternCall> */
-if (var_n_classid == NULL) {
+self->attrs[COLOR_parser_nodes__AFullPropExternCall___n_type].val = var_n_type; /* _n_type on <self:AFullPropExternCall> */
+if (var_n_type == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 10417);
 exit(1);
 } else {
-((void (*)(val*, val*))(var_n_classid->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_classid, self) /* parent= on <var_n_classid:nullable TClassid>*/;
+((void (*)(val*, val*))(var_n_type->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_type, self) /* parent= on <var_n_type:nullable AType>*/;
 }
-self->attrs[COLOR_parser_nodes__AFullPropExternCall___n_quad].val = var_n_quad; /* _n_quad on <self:AFullPropExternCall> */
+self->attrs[COLOR_parser_nodes__AFullPropExternCall___n_dot].val = var_n_dot; /* _n_dot on <self:AFullPropExternCall> */
 var = NULL;
-if (var_n_quad == NULL) {
+if (var_n_dot == NULL) {
 var1 = 0; /* is null */
 } else {
 var1 = 1; /* arg is null and recv is not */
 }
 if (var1){
-((void (*)(val*, val*))(var_n_quad->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_quad, self) /* parent= on <var_n_quad:nullable TQuad(TQuad)>*/;
+((void (*)(val*, val*))(var_n_dot->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_dot, self) /* parent= on <var_n_dot:nullable TDot(TDot)>*/;
 } else {
 }
 if (var_n_methid == NULL) {
@@ -272,7 +272,7 @@ exit(1);
 }
 RET_LABEL:;
 }
-/* method parser_prod#AFullPropExternCall#init_afullpropexterncall for (self: Object, nullable TClassid, nullable TQuad, nullable AMethid) */
+/* method parser_prod#AFullPropExternCall#init_afullpropexterncall for (self: Object, nullable AType, nullable TDot, nullable AMethid) */
 void VIRTUAL_parser_prod__AFullPropExternCall__init_afullpropexterncall(val* self, val* p0, val* p1, val* p2) {
 parser_prod__AFullPropExternCall__init_afullpropexterncall(self, p0, p1, p2);
 RET_LABEL:;
@@ -281,14 +281,14 @@ RET_LABEL:;
 void parser_prod__AFullPropExternCall__replace_child(val* self, val* p0, val* p1) {
 val* var_old_child /* var old_child: ANode */;
 val* var_new_child /* var new_child: nullable ANode */;
-val* var /* : TClassid */;
+val* var /* : AType */;
 short int var1 /* : Bool */;
 val* var2 /* : null */;
 short int var3 /* : Bool */;
 short int var4 /* : Bool */;
 int cltype;
 int idtype;
-val* var5 /* : nullable TQuad */;
+val* var5 /* : nullable TDot */;
 short int var6 /* : Bool */;
 val* var7 /* : null */;
 short int var8 /* : Bool */;
@@ -305,13 +305,13 @@ int cltype18;
 int idtype19;
 var_old_child = p0;
 var_new_child = p1;
-var = self->attrs[COLOR_parser_nodes__AFullPropExternCall___n_classid].val; /* _n_classid on <self:AFullPropExternCall> */
+var = self->attrs[COLOR_parser_nodes__AFullPropExternCall___n_type].val; /* _n_type on <self:AFullPropExternCall> */
 if (var == NULL) {
-fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_classid");
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_type");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 10428);
 exit(1);
 }
-var1 = ((short int (*)(val*, val*))(var->class->vft[COLOR_kernel__Object___61d_61d]))(var, var_old_child) /* == on <var:TClassid>*/;
+var1 = ((short int (*)(val*, val*))(var->class->vft[COLOR_kernel__Object___61d_61d]))(var, var_old_child) /* == on <var:AType>*/;
 if (var1){
 var2 = NULL;
 if (var_new_child == NULL) {
@@ -321,9 +321,9 @@ var3 = 1; /* arg is null and recv is not */
 }
 if (var3){
 ((void (*)(val*, val*))(var_new_child->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_new_child, self) /* parent= on <var_new_child:nullable ANode(ANode)>*/;
-/* <var_new_child:nullable ANode(ANode)> isa TClassid */
-cltype = type_parser_nodes__TClassid.color;
-idtype = type_parser_nodes__TClassid.id;
+/* <var_new_child:nullable ANode(ANode)> isa AType */
+cltype = type_parser_nodes__AType.color;
+idtype = type_parser_nodes__AType.id;
 if(cltype >= var_new_child->type->table_size) {
 var4 = 0;
 } else {
@@ -334,7 +334,7 @@ fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 10431);
 exit(1);
 }
-self->attrs[COLOR_parser_nodes__AFullPropExternCall___n_classid].val = var_new_child; /* _n_classid on <self:AFullPropExternCall> */
+self->attrs[COLOR_parser_nodes__AFullPropExternCall___n_type].val = var_new_child; /* _n_type on <self:AFullPropExternCall> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 10434);
@@ -343,11 +343,11 @@ exit(1);
 goto RET_LABEL;
 } else {
 }
-var5 = self->attrs[COLOR_parser_nodes__AFullPropExternCall___n_quad].val; /* _n_quad on <self:AFullPropExternCall> */
+var5 = self->attrs[COLOR_parser_nodes__AFullPropExternCall___n_dot].val; /* _n_dot on <self:AFullPropExternCall> */
 if (var5 == NULL) {
 var6 = 0; /* <var_old_child:ANode> cannot be null */
 } else {
-var6 = ((short int (*)(val*, val*))(var5->class->vft[COLOR_kernel__Object___61d_61d]))(var5, var_old_child) /* == on <var5:nullable TQuad>*/;
+var6 = ((short int (*)(val*, val*))(var5->class->vft[COLOR_kernel__Object___61d_61d]))(var5, var_old_child) /* == on <var5:nullable TDot>*/;
 }
 if (var6){
 var7 = NULL;
@@ -358,9 +358,9 @@ var8 = 1; /* arg is null and recv is not */
 }
 if (var8){
 ((void (*)(val*, val*))(var_new_child->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_new_child, self) /* parent= on <var_new_child:nullable ANode(ANode)>*/;
-/* <var_new_child:nullable ANode(ANode)> isa TQuad */
-cltype10 = type_parser_nodes__TQuad.color;
-idtype11 = type_parser_nodes__TQuad.id;
+/* <var_new_child:nullable ANode(ANode)> isa TDot */
+cltype10 = type_parser_nodes__TDot.color;
+idtype11 = type_parser_nodes__TDot.id;
 if(cltype10 >= var_new_child->type->table_size) {
 var9 = 0;
 } else {
@@ -371,10 +371,10 @@ fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 10441);
 exit(1);
 }
-self->attrs[COLOR_parser_nodes__AFullPropExternCall___n_quad].val = var_new_child; /* _n_quad on <self:AFullPropExternCall> */
+self->attrs[COLOR_parser_nodes__AFullPropExternCall___n_dot].val = var_new_child; /* _n_dot on <self:AFullPropExternCall> */
 } else {
 var12 = NULL;
-self->attrs[COLOR_parser_nodes__AFullPropExternCall___n_quad].val = var12; /* _n_quad on <self:AFullPropExternCall> */
+self->attrs[COLOR_parser_nodes__AFullPropExternCall___n_dot].val = var12; /* _n_dot on <self:AFullPropExternCall> */
 }
 goto RET_LABEL;
 } else {
@@ -424,26 +424,26 @@ void VIRTUAL_parser_prod__AFullPropExternCall__replace_child(val* self, val* p0,
 parser_prod__AFullPropExternCall__replace_child(self, p0, p1);
 RET_LABEL:;
 }
-/* method parser_prod#AFullPropExternCall#n_classid= for (self: AFullPropExternCall, TClassid) */
-void parser_prod__AFullPropExternCall__n_classid_61d(val* self, val* p0) {
-val* var_node /* var node: TClassid */;
+/* method parser_prod#AFullPropExternCall#n_type= for (self: AFullPropExternCall, AType) */
+void parser_prod__AFullPropExternCall__n_type_61d(val* self, val* p0) {
+val* var_node /* var node: AType */;
 var_node = p0;
-self->attrs[COLOR_parser_nodes__AFullPropExternCall___n_classid].val = var_node; /* _n_classid on <self:AFullPropExternCall> */
-((void (*)(val*, val*))(var_node->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_node, self) /* parent= on <var_node:TClassid>*/;
+self->attrs[COLOR_parser_nodes__AFullPropExternCall___n_type].val = var_node; /* _n_type on <self:AFullPropExternCall> */
+((void (*)(val*, val*))(var_node->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_node, self) /* parent= on <var_node:AType>*/;
 RET_LABEL:;
 }
-/* method parser_prod#AFullPropExternCall#n_classid= for (self: Object, TClassid) */
-void VIRTUAL_parser_prod__AFullPropExternCall__n_classid_61d(val* self, val* p0) {
-parser_prod__AFullPropExternCall__n_classid_61d(self, p0);
+/* method parser_prod#AFullPropExternCall#n_type= for (self: Object, AType) */
+void VIRTUAL_parser_prod__AFullPropExternCall__n_type_61d(val* self, val* p0) {
+parser_prod__AFullPropExternCall__n_type_61d(self, p0);
 RET_LABEL:;
 }
-/* method parser_prod#AFullPropExternCall#n_quad= for (self: AFullPropExternCall, nullable TQuad) */
-void parser_prod__AFullPropExternCall__n_quad_61d(val* self, val* p0) {
-val* var_node /* var node: nullable TQuad */;
+/* method parser_prod#AFullPropExternCall#n_dot= for (self: AFullPropExternCall, nullable TDot) */
+void parser_prod__AFullPropExternCall__n_dot_61d(val* self, val* p0) {
+val* var_node /* var node: nullable TDot */;
 val* var /* : null */;
 short int var1 /* : Bool */;
 var_node = p0;
-self->attrs[COLOR_parser_nodes__AFullPropExternCall___n_quad].val = var_node; /* _n_quad on <self:AFullPropExternCall> */
+self->attrs[COLOR_parser_nodes__AFullPropExternCall___n_dot].val = var_node; /* _n_dot on <self:AFullPropExternCall> */
 var = NULL;
 if (var_node == NULL) {
 var1 = 0; /* is null */
@@ -451,14 +451,14 @@ var1 = 0; /* is null */
 var1 = 1; /* arg is null and recv is not */
 }
 if (var1){
-((void (*)(val*, val*))(var_node->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_node, self) /* parent= on <var_node:nullable TQuad(TQuad)>*/;
+((void (*)(val*, val*))(var_node->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_node, self) /* parent= on <var_node:nullable TDot(TDot)>*/;
 } else {
 }
 RET_LABEL:;
 }
-/* method parser_prod#AFullPropExternCall#n_quad= for (self: Object, nullable TQuad) */
-void VIRTUAL_parser_prod__AFullPropExternCall__n_quad_61d(val* self, val* p0) {
-parser_prod__AFullPropExternCall__n_quad_61d(self, p0);
+/* method parser_prod#AFullPropExternCall#n_dot= for (self: Object, nullable TDot) */
+void VIRTUAL_parser_prod__AFullPropExternCall__n_dot_61d(val* self, val* p0) {
+parser_prod__AFullPropExternCall__n_dot_61d(self, p0);
 RET_LABEL:;
 }
 /* method parser_prod#AFullPropExternCall#n_methid= for (self: AFullPropExternCall, AMethid) */
@@ -477,21 +477,21 @@ RET_LABEL:;
 /* method parser_prod#AFullPropExternCall#visit_all for (self: AFullPropExternCall, Visitor) */
 void parser_prod__AFullPropExternCall__visit_all(val* self, val* p0) {
 val* var_v /* var v: Visitor */;
-val* var /* : TClassid */;
-val* var1 /* : nullable TQuad */;
+val* var /* : AType */;
+val* var1 /* : nullable TDot */;
 val* var2 /* : null */;
 short int var3 /* : Bool */;
-val* var4 /* : nullable TQuad */;
+val* var4 /* : nullable TDot */;
 val* var5 /* : AMethid */;
 var_v = p0;
-var = self->attrs[COLOR_parser_nodes__AFullPropExternCall___n_classid].val; /* _n_classid on <self:AFullPropExternCall> */
+var = self->attrs[COLOR_parser_nodes__AFullPropExternCall___n_type].val; /* _n_type on <self:AFullPropExternCall> */
 if (var == NULL) {
-fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_classid");
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_type");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 10481);
 exit(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var) /* enter_visit on <var_v:Visitor>*/;
-var1 = self->attrs[COLOR_parser_nodes__AFullPropExternCall___n_quad].val; /* _n_quad on <self:AFullPropExternCall> */
+var1 = self->attrs[COLOR_parser_nodes__AFullPropExternCall___n_dot].val; /* _n_dot on <self:AFullPropExternCall> */
 var2 = NULL;
 if (var1 == NULL) {
 var3 = 0; /* is null */
@@ -499,7 +499,7 @@ var3 = 0; /* is null */
 var3 = 1; /* arg is null and recv is not */
 }
 if (var3){
-var4 = self->attrs[COLOR_parser_nodes__AFullPropExternCall___n_quad].val; /* _n_quad on <self:AFullPropExternCall> */
+var4 = self->attrs[COLOR_parser_nodes__AFullPropExternCall___n_dot].val; /* _n_dot on <self:AFullPropExternCall> */
 if (var4 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 10483);
@@ -531,27 +531,27 @@ void VIRTUAL_parser_prod__AInitPropExternCall__empty_init(val* self) {
 parser_prod__AInitPropExternCall__empty_init(self);
 RET_LABEL:;
 }
-/* method parser_prod#AInitPropExternCall#init_ainitpropexterncall for (self: AInitPropExternCall, nullable TClassid) */
+/* method parser_prod#AInitPropExternCall#init_ainitpropexterncall for (self: AInitPropExternCall, nullable AType) */
 void parser_prod__AInitPropExternCall__init_ainitpropexterncall(val* self, val* p0) {
-val* var_n_classid /* var n_classid: nullable TClassid */;
-var_n_classid = p0;
+val* var_n_type /* var n_type: nullable AType */;
+var_n_type = p0;
 ((void (*)(val*))(self->class->vft[COLOR_parser_prod__AInitPropExternCall__empty_init]))(self) /* empty_init on <self:AInitPropExternCall>*/;
-if (var_n_classid == NULL) {
+if (var_n_type == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 10496);
 exit(1);
 }
-self->attrs[COLOR_parser_nodes__AInitPropExternCall___n_classid].val = var_n_classid; /* _n_classid on <self:AInitPropExternCall> */
-if (var_n_classid == NULL) {
+self->attrs[COLOR_parser_nodes__AInitPropExternCall___n_type].val = var_n_type; /* _n_type on <self:AInitPropExternCall> */
+if (var_n_type == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 10497);
 exit(1);
 } else {
-((void (*)(val*, val*))(var_n_classid->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_classid, self) /* parent= on <var_n_classid:nullable TClassid>*/;
+((void (*)(val*, val*))(var_n_type->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_type, self) /* parent= on <var_n_type:nullable AType>*/;
 }
 RET_LABEL:;
 }
-/* method parser_prod#AInitPropExternCall#init_ainitpropexterncall for (self: Object, nullable TClassid) */
+/* method parser_prod#AInitPropExternCall#init_ainitpropexterncall for (self: Object, nullable AType) */
 void VIRTUAL_parser_prod__AInitPropExternCall__init_ainitpropexterncall(val* self, val* p0) {
 parser_prod__AInitPropExternCall__init_ainitpropexterncall(self, p0);
 RET_LABEL:;
@@ -560,7 +560,7 @@ RET_LABEL:;
 void parser_prod__AInitPropExternCall__replace_child(val* self, val* p0, val* p1) {
 val* var_old_child /* var old_child: ANode */;
 val* var_new_child /* var new_child: nullable ANode */;
-val* var /* : TClassid */;
+val* var /* : AType */;
 short int var1 /* : Bool */;
 val* var2 /* : null */;
 short int var3 /* : Bool */;
@@ -569,13 +569,13 @@ int cltype;
 int idtype;
 var_old_child = p0;
 var_new_child = p1;
-var = self->attrs[COLOR_parser_nodes__AInitPropExternCall___n_classid].val; /* _n_classid on <self:AInitPropExternCall> */
+var = self->attrs[COLOR_parser_nodes__AInitPropExternCall___n_type].val; /* _n_type on <self:AInitPropExternCall> */
 if (var == NULL) {
-fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_classid");
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_type");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 10502);
 exit(1);
 }
-var1 = ((short int (*)(val*, val*))(var->class->vft[COLOR_kernel__Object___61d_61d]))(var, var_old_child) /* == on <var:TClassid>*/;
+var1 = ((short int (*)(val*, val*))(var->class->vft[COLOR_kernel__Object___61d_61d]))(var, var_old_child) /* == on <var:AType>*/;
 if (var1){
 var2 = NULL;
 if (var_new_child == NULL) {
@@ -585,9 +585,9 @@ var3 = 1; /* arg is null and recv is not */
 }
 if (var3){
 ((void (*)(val*, val*))(var_new_child->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_new_child, self) /* parent= on <var_new_child:nullable ANode(ANode)>*/;
-/* <var_new_child:nullable ANode(ANode)> isa TClassid */
-cltype = type_parser_nodes__TClassid.color;
-idtype = type_parser_nodes__TClassid.id;
+/* <var_new_child:nullable ANode(ANode)> isa AType */
+cltype = type_parser_nodes__AType.color;
+idtype = type_parser_nodes__AType.id;
 if(cltype >= var_new_child->type->table_size) {
 var4 = 0;
 } else {
@@ -598,7 +598,7 @@ fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 10505);
 exit(1);
 }
-self->attrs[COLOR_parser_nodes__AInitPropExternCall___n_classid].val = var_new_child; /* _n_classid on <self:AInitPropExternCall> */
+self->attrs[COLOR_parser_nodes__AInitPropExternCall___n_type].val = var_new_child; /* _n_type on <self:AInitPropExternCall> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 10508);
@@ -614,27 +614,27 @@ void VIRTUAL_parser_prod__AInitPropExternCall__replace_child(val* self, val* p0,
 parser_prod__AInitPropExternCall__replace_child(self, p0, p1);
 RET_LABEL:;
 }
-/* method parser_prod#AInitPropExternCall#n_classid= for (self: AInitPropExternCall, TClassid) */
-void parser_prod__AInitPropExternCall__n_classid_61d(val* self, val* p0) {
-val* var_node /* var node: TClassid */;
+/* method parser_prod#AInitPropExternCall#n_type= for (self: AInitPropExternCall, AType) */
+void parser_prod__AInitPropExternCall__n_type_61d(val* self, val* p0) {
+val* var_node /* var node: AType */;
 var_node = p0;
-self->attrs[COLOR_parser_nodes__AInitPropExternCall___n_classid].val = var_node; /* _n_classid on <self:AInitPropExternCall> */
-((void (*)(val*, val*))(var_node->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_node, self) /* parent= on <var_node:TClassid>*/;
+self->attrs[COLOR_parser_nodes__AInitPropExternCall___n_type].val = var_node; /* _n_type on <self:AInitPropExternCall> */
+((void (*)(val*, val*))(var_node->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_node, self) /* parent= on <var_node:AType>*/;
 RET_LABEL:;
 }
-/* method parser_prod#AInitPropExternCall#n_classid= for (self: Object, TClassid) */
-void VIRTUAL_parser_prod__AInitPropExternCall__n_classid_61d(val* self, val* p0) {
-parser_prod__AInitPropExternCall__n_classid_61d(self, p0);
+/* method parser_prod#AInitPropExternCall#n_type= for (self: Object, AType) */
+void VIRTUAL_parser_prod__AInitPropExternCall__n_type_61d(val* self, val* p0) {
+parser_prod__AInitPropExternCall__n_type_61d(self, p0);
 RET_LABEL:;
 }
 /* method parser_prod#AInitPropExternCall#visit_all for (self: AInitPropExternCall, Visitor) */
 void parser_prod__AInitPropExternCall__visit_all(val* self, val* p0) {
 val* var_v /* var v: Visitor */;
-val* var /* : TClassid */;
+val* var /* : AType */;
 var_v = p0;
-var = self->attrs[COLOR_parser_nodes__AInitPropExternCall___n_classid].val; /* _n_classid on <self:AInitPropExternCall> */
+var = self->attrs[COLOR_parser_nodes__AInitPropExternCall___n_type].val; /* _n_type on <self:AInitPropExternCall> */
 if (var == NULL) {
-fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_classid");
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_type");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 10523);
 exit(1);
 }

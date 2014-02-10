@@ -836,13 +836,13 @@ class ALocalPropExternCall
 end
 class AFullPropExternCall
 	super APropExternCall
-	readable writable var _n_classid: TClassid
-	readable writable var _n_quad: nullable TQuad = null
-	readable writable var _n_methid: AMethid
+    readable writable var _n_type: AType
+    readable writable var _n_dot: nullable TDot = null
+    readable writable var _n_methid: AMethid
 end
 class AInitPropExternCall
 	super APropExternCall
-	readable writable var _n_classid: TClassid
+    readable writable var _n_type: AType
 end
 class ASuperExternCall
 	super AExternCall

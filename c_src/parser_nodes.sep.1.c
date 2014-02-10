@@ -5140,13 +5140,13 @@ void VIRTUAL_parser_nodes__ALocalPropExternCall__init(val* self) {
 parser_nodes__ALocalPropExternCall__init(self);
 RET_LABEL:;
 }
-/* method parser_nodes#AFullPropExternCall#n_classid for (self: AFullPropExternCall): TClassid */
-val* parser_nodes__AFullPropExternCall__n_classid(val* self) {
-val* var /* : TClassid */;
-val* var1 /* : TClassid */;
-var1 = self->attrs[COLOR_parser_nodes__AFullPropExternCall___n_classid].val; /* _n_classid on <self:AFullPropExternCall> */
+/* method parser_nodes#AFullPropExternCall#n_type for (self: AFullPropExternCall): AType */
+val* parser_nodes__AFullPropExternCall__n_type(val* self) {
+val* var /* : AType */;
+val* var1 /* : AType */;
+var1 = self->attrs[COLOR_parser_nodes__AFullPropExternCall___n_type].val; /* _n_type on <self:AFullPropExternCall> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_classid");
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_type");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 839);
 exit(1);
 }
@@ -5154,51 +5154,51 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method parser_nodes#AFullPropExternCall#n_classid for (self: Object): TClassid */
-val* VIRTUAL_parser_nodes__AFullPropExternCall__n_classid(val* self) {
-val* var /* : TClassid */;
-val* var1 /* : TClassid */;
-var1 = parser_nodes__AFullPropExternCall__n_classid(self);
+/* method parser_nodes#AFullPropExternCall#n_type for (self: Object): AType */
+val* VIRTUAL_parser_nodes__AFullPropExternCall__n_type(val* self) {
+val* var /* : AType */;
+val* var1 /* : AType */;
+var1 = parser_nodes__AFullPropExternCall__n_type(self);
 var = var1;
 RET_LABEL:;
 return var;
 }
-/* method parser_nodes#AFullPropExternCall#n_classid= for (self: AFullPropExternCall, TClassid) */
-void parser_nodes__AFullPropExternCall__n_classid_61d(val* self, val* p0) {
-self->attrs[COLOR_parser_nodes__AFullPropExternCall___n_classid].val = p0; /* _n_classid on <self:AFullPropExternCall> */
+/* method parser_nodes#AFullPropExternCall#n_type= for (self: AFullPropExternCall, AType) */
+void parser_nodes__AFullPropExternCall__n_type_61d(val* self, val* p0) {
+self->attrs[COLOR_parser_nodes__AFullPropExternCall___n_type].val = p0; /* _n_type on <self:AFullPropExternCall> */
 RET_LABEL:;
 }
-/* method parser_nodes#AFullPropExternCall#n_classid= for (self: Object, TClassid) */
-void VIRTUAL_parser_nodes__AFullPropExternCall__n_classid_61d(val* self, val* p0) {
-parser_nodes__AFullPropExternCall__n_classid_61d(self, p0);
+/* method parser_nodes#AFullPropExternCall#n_type= for (self: Object, AType) */
+void VIRTUAL_parser_nodes__AFullPropExternCall__n_type_61d(val* self, val* p0) {
+parser_nodes__AFullPropExternCall__n_type_61d(self, p0);
 RET_LABEL:;
 }
-/* method parser_nodes#AFullPropExternCall#n_quad for (self: AFullPropExternCall): nullable TQuad */
-val* parser_nodes__AFullPropExternCall__n_quad(val* self) {
-val* var /* : nullable TQuad */;
-val* var1 /* : nullable TQuad */;
-var1 = self->attrs[COLOR_parser_nodes__AFullPropExternCall___n_quad].val; /* _n_quad on <self:AFullPropExternCall> */
+/* method parser_nodes#AFullPropExternCall#n_dot for (self: AFullPropExternCall): nullable TDot */
+val* parser_nodes__AFullPropExternCall__n_dot(val* self) {
+val* var /* : nullable TDot */;
+val* var1 /* : nullable TDot */;
+var1 = self->attrs[COLOR_parser_nodes__AFullPropExternCall___n_dot].val; /* _n_dot on <self:AFullPropExternCall> */
 var = var1;
 RET_LABEL:;
 return var;
 }
-/* method parser_nodes#AFullPropExternCall#n_quad for (self: Object): nullable TQuad */
-val* VIRTUAL_parser_nodes__AFullPropExternCall__n_quad(val* self) {
-val* var /* : nullable TQuad */;
-val* var1 /* : nullable TQuad */;
-var1 = parser_nodes__AFullPropExternCall__n_quad(self);
+/* method parser_nodes#AFullPropExternCall#n_dot for (self: Object): nullable TDot */
+val* VIRTUAL_parser_nodes__AFullPropExternCall__n_dot(val* self) {
+val* var /* : nullable TDot */;
+val* var1 /* : nullable TDot */;
+var1 = parser_nodes__AFullPropExternCall__n_dot(self);
 var = var1;
 RET_LABEL:;
 return var;
 }
-/* method parser_nodes#AFullPropExternCall#n_quad= for (self: AFullPropExternCall, nullable TQuad) */
-void parser_nodes__AFullPropExternCall__n_quad_61d(val* self, val* p0) {
-self->attrs[COLOR_parser_nodes__AFullPropExternCall___n_quad].val = p0; /* _n_quad on <self:AFullPropExternCall> */
+/* method parser_nodes#AFullPropExternCall#n_dot= for (self: AFullPropExternCall, nullable TDot) */
+void parser_nodes__AFullPropExternCall__n_dot_61d(val* self, val* p0) {
+self->attrs[COLOR_parser_nodes__AFullPropExternCall___n_dot].val = p0; /* _n_dot on <self:AFullPropExternCall> */
 RET_LABEL:;
 }
-/* method parser_nodes#AFullPropExternCall#n_quad= for (self: Object, nullable TQuad) */
-void VIRTUAL_parser_nodes__AFullPropExternCall__n_quad_61d(val* self, val* p0) {
-parser_nodes__AFullPropExternCall__n_quad_61d(self, p0);
+/* method parser_nodes#AFullPropExternCall#n_dot= for (self: Object, nullable TDot) */
+void VIRTUAL_parser_nodes__AFullPropExternCall__n_dot_61d(val* self, val* p0) {
+parser_nodes__AFullPropExternCall__n_dot_61d(self, p0);
 RET_LABEL:;
 }
 /* method parser_nodes#AFullPropExternCall#n_methid for (self: AFullPropExternCall): AMethid */
@@ -5244,13 +5244,13 @@ void VIRTUAL_parser_nodes__AFullPropExternCall__init(val* self) {
 parser_nodes__AFullPropExternCall__init(self);
 RET_LABEL:;
 }
-/* method parser_nodes#AInitPropExternCall#n_classid for (self: AInitPropExternCall): TClassid */
-val* parser_nodes__AInitPropExternCall__n_classid(val* self) {
-val* var /* : TClassid */;
-val* var1 /* : TClassid */;
-var1 = self->attrs[COLOR_parser_nodes__AInitPropExternCall___n_classid].val; /* _n_classid on <self:AInitPropExternCall> */
+/* method parser_nodes#AInitPropExternCall#n_type for (self: AInitPropExternCall): AType */
+val* parser_nodes__AInitPropExternCall__n_type(val* self) {
+val* var /* : AType */;
+val* var1 /* : AType */;
+var1 = self->attrs[COLOR_parser_nodes__AInitPropExternCall___n_type].val; /* _n_type on <self:AInitPropExternCall> */
 if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_classid");
+fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_type");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_nodes.nit", 845);
 exit(1);
 }
@@ -5258,23 +5258,23 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method parser_nodes#AInitPropExternCall#n_classid for (self: Object): TClassid */
-val* VIRTUAL_parser_nodes__AInitPropExternCall__n_classid(val* self) {
-val* var /* : TClassid */;
-val* var1 /* : TClassid */;
-var1 = parser_nodes__AInitPropExternCall__n_classid(self);
+/* method parser_nodes#AInitPropExternCall#n_type for (self: Object): AType */
+val* VIRTUAL_parser_nodes__AInitPropExternCall__n_type(val* self) {
+val* var /* : AType */;
+val* var1 /* : AType */;
+var1 = parser_nodes__AInitPropExternCall__n_type(self);
 var = var1;
 RET_LABEL:;
 return var;
 }
-/* method parser_nodes#AInitPropExternCall#n_classid= for (self: AInitPropExternCall, TClassid) */
-void parser_nodes__AInitPropExternCall__n_classid_61d(val* self, val* p0) {
-self->attrs[COLOR_parser_nodes__AInitPropExternCall___n_classid].val = p0; /* _n_classid on <self:AInitPropExternCall> */
+/* method parser_nodes#AInitPropExternCall#n_type= for (self: AInitPropExternCall, AType) */
+void parser_nodes__AInitPropExternCall__n_type_61d(val* self, val* p0) {
+self->attrs[COLOR_parser_nodes__AInitPropExternCall___n_type].val = p0; /* _n_type on <self:AInitPropExternCall> */
 RET_LABEL:;
 }
-/* method parser_nodes#AInitPropExternCall#n_classid= for (self: Object, TClassid) */
-void VIRTUAL_parser_nodes__AInitPropExternCall__n_classid_61d(val* self, val* p0) {
-parser_nodes__AInitPropExternCall__n_classid_61d(self, p0);
+/* method parser_nodes#AInitPropExternCall#n_type= for (self: Object, AType) */
+void VIRTUAL_parser_nodes__AInitPropExternCall__n_type_61d(val* self, val* p0) {
+parser_nodes__AInitPropExternCall__n_type_61d(self, p0);
 RET_LABEL:;
 }
 /* method parser_nodes#AInitPropExternCall#init for (self: AInitPropExternCall) */

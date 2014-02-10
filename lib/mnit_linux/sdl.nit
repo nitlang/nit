@@ -15,7 +15,10 @@
 # limitations under the License.
 
 # SDL display support (used in Linux for windows and inputes only)
-module sdl
+module sdl is
+	c_compiler_option(exec("sdl-config", "--cflags"))
+	c_linker_option(exec("sdl-config", "--libs"), "-lSDL_ttf")
+end
 
 import mnit # for
 # import display
@@ -92,7 +95,7 @@ extern SDLDisplay in "C" `{SDL_Surface *`}
 		return events
 	end
 
-	private fun poll_event: nullable IE is extern import SDLKeyEvent, SDLMouseButtonEvent, SDLMouseMotionEvent, SDLQuitEvent, NativeString::to_s, SDLMouseButtonEvent as (nullable IE), SDLMouseMotionEvent as (nullable IE), SDLKeyEvent as (nullable IE), SDLQuitEvent as (nullable IE) `{
+	private fun poll_event: nullable IE is extern import SDLKeyEvent, SDLMouseButtonEvent, SDLMouseMotionEvent, SDLQuitEvent, NativeString.to_s, SDLMouseButtonEvent.as(nullable IE), SDLMouseMotionEvent.as(nullable IE), SDLKeyEvent.as(nullable IE), SDLQuitEvent.as(nullable IE) `{
 		SDL_Event event;
 
 		SDL_PumpEvents();
@@ -176,7 +179,7 @@ extern SDLImage in "C" `{SDL_Surface*`} # TODO remove
 	super DrawableImage
 	super SDLDrawable
 
-	new from_file( path: String ) is extern import String::to_cstring `{
+	new from_file( path: String ) is extern import String.to_cstring `{
 		SDL_Surface *image = IMG_Load( String_to_cstring( path ) );
 		return image;
 	`}
@@ -199,7 +202,7 @@ extern SDLImage in "C" `{SDL_Surface*`} # TODO remove
 		return new_image;
 	`}
 
-	fun save_to_file( path: String ) is extern import String::to_cstring `{ `}
+	fun save_to_file( path: String ) is extern import String.to_cstring `{ `}
 
 	redef fun destroy is extern `{ SDL_FreeSurface( recv ); `}
 
@@ -341,7 +344,7 @@ redef class Int
 end
 
 extern SDLFont in "C" `{TTF_Font *`}
-	new ( name: String, points: Int ) is extern import String::to_cstring `{
+	new ( name: String, points: Int ) is extern import String.to_cstring `{
 	char * cname = String_to_cstring( name );
 
 	TTF_Font *font = TTF_OpenFont( cname, (int)points);
@@ -355,7 +358,7 @@ extern SDLFont in "C" `{TTF_Font *`}
 
 	fun destroy is extern `{ TTF_CloseFont( recv ); `}
 
-	fun render( text: String, r, g, b: Int ): SDLImage is extern import String::to_cstring `{
+	fun render( text: String, r, g, b: Int ): SDLImage is extern import String.to_cstring `{
 		SDL_Color color;
 		SDL_Surface *text_surface;
 		char *ctext;
@@ -394,7 +397,7 @@ extern SDLFont in "C" `{TTF_Font *`}
 		return TTF_FontDescent( recv );
 	`}
 
-	# Get the recommended pixel height of a rendered line of text of the loaded font. This is usually larger than the Font::height.
+	# Get the recommended pixel height of a rendered line of text of the loaded font. This is usually larger than the Font.height.
 	fun line_skip: Int is extern `{
 		return TTF_FontLineSkip( recv );
 	`}
@@ -402,7 +405,7 @@ extern SDLFont in "C" `{TTF_Font *`}
 	fun is_fixed_width: Bool is extern `{
 		return TTF_FontFaceIsFixedWidth( recv );
 	`}
-	fun family_name: nullable String is extern import String::to_cstring, String as nullable `{
+	fun family_name: nullable String is extern import String.to_cstring, String as nullable `{
 		char *fn = TTF_FontFaceFamilyName( recv );
 
 		if ( fn == NULL )
@@ -410,7 +413,7 @@ extern SDLFont in "C" `{TTF_Font *`}
 		else
 			return String_as_nullable( NativeString_to_s( fn ) );
 	`}
-	fun style_name: nullable String is extern import String::to_cstring, String as nullable `{
+	fun style_name: nullable String is extern import String.to_cstring, String as nullable `{
 		char *sn = TTF_FontFaceStyleName( recv );
 
 		if ( sn == NULL )
@@ -419,7 +422,7 @@ extern SDLFont in "C" `{TTF_Font *`}
 			return String_as_nullable( NativeString_to_s( sn ) );
 	`}
 
-	fun width_of( text: String ): Int is extern import NativeString::to_s `{
+	fun width_of( text: String ): Int is extern import NativeString.to_s `{
 		char *ctext = String_to_cstring( text );
 		int w;
 		if ( TTF_SizeText( recv, ctext, &w, NULL ) )

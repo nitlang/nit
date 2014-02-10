@@ -164,7 +164,7 @@ void* var2 /* : FileStat */;
 var1 = self->attrs[COLOR_file__FStream___file].val; /* _file on <self:FStream> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 66);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 74);
 exit(1);
 } else {
 var2 = ((void* (*)(val*))(var1->class->vft[COLOR_file__NativeFile__file_stat]))(var1) /* file_stat on <var1:nullable NativeFile>*/;
@@ -214,7 +214,7 @@ var2 = NULL/*special!*/;
 var3 = self->attrs[COLOR_file__FStream___path].val; /* _path on <self:IFStream> */
 if (var3 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 80);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 88);
 exit(1);
 } else {
 var4 = ((char* (*)(val*))(var3->class->vft[COLOR_string__String__to_cstring]))(var3) /* to_cstring on <var3:nullable String>*/;
@@ -229,7 +229,7 @@ self->attrs[COLOR_stream__BufferedIStream___buffer_pos].l = var8; /* _buffer_pos
 var9 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:IFStream> */
 if (var9 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 83);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 91);
 exit(1);
 } else {
 ((void (*)(val*))(var9->class->vft[COLOR_abstract_collection__RemovableCollection__clear]))(var9) /* clear on <var9:nullable Buffer>*/;
@@ -250,7 +250,7 @@ short int var2 /* : Bool */;
 var = self->attrs[COLOR_file__FStream___file].val; /* _file on <self:IFStream> */
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 88);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 96);
 exit(1);
 } else {
 var1 = ((long (*)(val*))(var->class->vft[COLOR_file__NativeFile__io_close]))(var) /* io_close on <var:nullable NativeFile>*/;
@@ -289,20 +289,20 @@ var = self->attrs[COLOR_file__FStream___file].val; /* _file on <self:IFStream> *
 var1 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:IFStream> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 94);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 102);
 exit(1);
 }
 var2 = var1->attrs[COLOR_string__AbstractString___items].str; /* _items on <var1:nullable Buffer> */
 var3 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:IFStream> */
 if (var3 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 94);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 102);
 exit(1);
 }
 var4 = var3->attrs[COLOR_string__Buffer___capacity].l; /* _capacity on <var3:nullable Buffer> */
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 94);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 102);
 exit(1);
 } else {
 var5 = ((long (*)(val*, char*, long))(var->class->vft[COLOR_file__NativeFile__io_read]))(var, var2, var4) /* io_read on <var:nullable NativeFile>*/;
@@ -334,7 +334,7 @@ var_nb = var12;
 var13 = self->attrs[COLOR_stream__BufferedIStream___buffer].val; /* _buffer on <self:IFStream> */
 if (var13 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 99);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 107);
 exit(1);
 }
 var13->attrs[COLOR_array__AbstractArrayRead___length].l = var_nb; /* _length on <var13:nullable Buffer> */
@@ -387,7 +387,7 @@ var1 = NULL/*special!*/;
 var2 = self->attrs[COLOR_file__FStream___path].val; /* _path on <self:IFStream> */
 if (var2 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 111);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 119);
 exit(1);
 } else {
 var3 = ((char* (*)(val*))(var2->class->vft[COLOR_string__String__to_cstring]))(var2) /* to_cstring on <var2:nullable String>*/;
@@ -404,7 +404,7 @@ var8 = 1; /* arg is null and recv is not */
 }
 if (!var8) {
 fprintf(stderr, "Runtime error: %s", "Assert \'cant_open_file\' failed");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 112);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 120);
 exit(1);
 }
 RET_LABEL:;
@@ -446,7 +446,7 @@ var_s = p0;
 var = self->attrs[COLOR_file__OFStream___writable].s; /* _writable on <self:OFStream> */
 if (!var) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 126);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 134);
 exit(1);
 }
 var1 = ((char* (*)(val*))(var_s->class->vft[COLOR_string__String__to_cstring]))(var_s) /* to_cstring on <var_s:String>*/;
@@ -487,7 +487,7 @@ short int var2 /* : Bool */;
 var = self->attrs[COLOR_file__FStream___file].val; /* _file on <self:OFStream> */
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 134);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 142);
 exit(1);
 } else {
 var1 = ((long (*)(val*))(var->class->vft[COLOR_file__NativeFile__io_close]))(var) /* io_close on <var:nullable NativeFile>*/;
@@ -538,13 +538,13 @@ var_len = p1;
 var = self->attrs[COLOR_file__OFStream___writable].s; /* _writable on <self:OFStream> */
 if (!var) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 144);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 152);
 exit(1);
 }
 var1 = self->attrs[COLOR_file__FStream___file].val; /* _file on <self:OFStream> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 145);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 153);
 exit(1);
 } else {
 var2 = ((long (*)(val*, char*, long))(var1->class->vft[COLOR_file__NativeFile__io_write]))(var1, var_native, var_len) /* io_write on <var1:nullable NativeFile>*/;
@@ -636,7 +636,7 @@ var6 = 1; /* arg is null and recv is not */
 }
 if (!var6) {
 fprintf(stderr, "Runtime error: %s", "Assert \'cant_open_file\' failed");
-fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 156);
+fprintf(stderr, " (%s:%d)\n", "lib/standard/file.nit", 164);
 exit(1);
 }
 self->attrs[COLOR_file__FStream___path].val = var_path; /* _path on <self:OFStream> */
@@ -1646,7 +1646,7 @@ return var;
 /* method file#String#files for (self: String): Set[String] */
 val* file__String__files(val* self) {
 val* var /* : Set[String] */;
-fprintf(stderr, "NOT YET IMPLEMENTED nitni for file#String#files at lib/standard/file.nit:345,2--346,159\n");
+fprintf(stderr, "NOT YET IMPLEMENTED nitni for file#String#files at lib/standard/file.nit:353,2--383,3\n");
 exit(1);
 RET_LABEL:;
 return var;
@@ -1705,7 +1705,7 @@ return var;
 /* method file#NativeString#file_lstat for (self: NativeString): FileStat */
 void* file__NativeString__file_lstat(char* self) {
 void* var /* : FileStat */;
-fprintf(stderr, "NOT YET IMPLEMENTED nitni for file#NativeString#file_lstat at lib/standard/file.nit:352,2--359,3\n");
+fprintf(stderr, "NOT YET IMPLEMENTED nitni for file#NativeString#file_lstat at lib/standard/file.nit:389,2--396,3\n");
 exit(1);
 RET_LABEL:;
 return var;
@@ -1883,7 +1883,7 @@ return var;
 /* method file#FileStat#is_reg for (self: FileStat): Bool */
 short int file__FileStat__is_reg(void* self) {
 short int var /* : Bool */;
-fprintf(stderr, "NOT YET IMPLEMENTED nitni for file#FileStat#is_reg at lib/standard/file.nit:373,2--54\n");
+fprintf(stderr, "NOT YET IMPLEMENTED nitni for file#FileStat#is_reg at lib/standard/file.nit:410,2--54\n");
 exit(1);
 RET_LABEL:;
 return var;
@@ -1902,7 +1902,7 @@ return var;
 /* method file#FileStat#is_dir for (self: FileStat): Bool */
 short int file__FileStat__is_dir(void* self) {
 short int var /* : Bool */;
-fprintf(stderr, "NOT YET IMPLEMENTED nitni for file#FileStat#is_dir at lib/standard/file.nit:374,2--54\n");
+fprintf(stderr, "NOT YET IMPLEMENTED nitni for file#FileStat#is_dir at lib/standard/file.nit:411,2--54\n");
 exit(1);
 RET_LABEL:;
 return var;
@@ -1921,7 +1921,7 @@ return var;
 /* method file#FileStat#is_chr for (self: FileStat): Bool */
 short int file__FileStat__is_chr(void* self) {
 short int var /* : Bool */;
-fprintf(stderr, "NOT YET IMPLEMENTED nitni for file#FileStat#is_chr at lib/standard/file.nit:375,2--54\n");
+fprintf(stderr, "NOT YET IMPLEMENTED nitni for file#FileStat#is_chr at lib/standard/file.nit:412,2--54\n");
 exit(1);
 RET_LABEL:;
 return var;
@@ -1940,7 +1940,7 @@ return var;
 /* method file#FileStat#is_blk for (self: FileStat): Bool */
 short int file__FileStat__is_blk(void* self) {
 short int var /* : Bool */;
-fprintf(stderr, "NOT YET IMPLEMENTED nitni for file#FileStat#is_blk at lib/standard/file.nit:376,2--54\n");
+fprintf(stderr, "NOT YET IMPLEMENTED nitni for file#FileStat#is_blk at lib/standard/file.nit:413,2--54\n");
 exit(1);
 RET_LABEL:;
 return var;
@@ -1959,7 +1959,7 @@ return var;
 /* method file#FileStat#is_fifo for (self: FileStat): Bool */
 short int file__FileStat__is_fifo(void* self) {
 short int var /* : Bool */;
-fprintf(stderr, "NOT YET IMPLEMENTED nitni for file#FileStat#is_fifo at lib/standard/file.nit:377,2--56\n");
+fprintf(stderr, "NOT YET IMPLEMENTED nitni for file#FileStat#is_fifo at lib/standard/file.nit:414,2--56\n");
 exit(1);
 RET_LABEL:;
 return var;
@@ -1978,7 +1978,7 @@ return var;
 /* method file#FileStat#is_lnk for (self: FileStat): Bool */
 short int file__FileStat__is_lnk(void* self) {
 short int var /* : Bool */;
-fprintf(stderr, "NOT YET IMPLEMENTED nitni for file#FileStat#is_lnk at lib/standard/file.nit:378,2--54\n");
+fprintf(stderr, "NOT YET IMPLEMENTED nitni for file#FileStat#is_lnk at lib/standard/file.nit:415,2--54\n");
 exit(1);
 RET_LABEL:;
 return var;
@@ -1997,7 +1997,7 @@ return var;
 /* method file#FileStat#is_sock for (self: FileStat): Bool */
 short int file__FileStat__is_sock(void* self) {
 short int var /* : Bool */;
-fprintf(stderr, "NOT YET IMPLEMENTED nitni for file#FileStat#is_sock at lib/standard/file.nit:379,2--56\n");
+fprintf(stderr, "NOT YET IMPLEMENTED nitni for file#FileStat#is_sock at lib/standard/file.nit:416,2--56\n");
 exit(1);
 RET_LABEL:;
 return var;

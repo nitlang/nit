@@ -159,7 +159,7 @@ return var;
 /* method posix#Passwd#from_name for (self: Passwd, String): Passwd */
 void* posix__Passwd__from_name(void* self, val* p0) {
 void* var /* : Passwd */;
-printf("NOT YET IMPLEMENTED nitni for posix#Passwd#from_name at lib/standard/posix.nit:45,2--104\n");
+printf("NOT YET IMPLEMENTED nitni for posix#Passwd#from_name at lib/standard/posix.nit:45,2--103\n");
 exit(1);
 RET_LABEL:;
 return var;
@@ -180,7 +180,7 @@ return var;
 /* method posix#Passwd#name for (self: Passwd): String */
 val* posix__Passwd__name(void* self) {
 val* var /* : String */;
-fprintf(stderr, "NOT YET IMPLEMENTED nitni for posix#Passwd#name at lib/standard/posix.nit:47,2--90\n");
+fprintf(stderr, "NOT YET IMPLEMENTED nitni for posix#Passwd#name at lib/standard/posix.nit:47,2--89\n");
 exit(1);
 RET_LABEL:;
 return var;
@@ -199,7 +199,7 @@ return var;
 /* method posix#Passwd#passwd for (self: Passwd): String */
 val* posix__Passwd__passwd(void* self) {
 val* var /* : String */;
-fprintf(stderr, "NOT YET IMPLEMENTED nitni for posix#Passwd#passwd at lib/standard/posix.nit:48,2--94\n");
+fprintf(stderr, "NOT YET IMPLEMENTED nitni for posix#Passwd#passwd at lib/standard/posix.nit:48,2--93\n");
 exit(1);
 RET_LABEL:;
 return var;
@@ -256,7 +256,7 @@ return var;
 /* method posix#Passwd#gecos for (self: Passwd): String */
 val* posix__Passwd__gecos(void* self) {
 val* var /* : String */;
-fprintf(stderr, "NOT YET IMPLEMENTED nitni for posix#Passwd#gecos at lib/standard/posix.nit:51,2--92\n");
+fprintf(stderr, "NOT YET IMPLEMENTED nitni for posix#Passwd#gecos at lib/standard/posix.nit:51,2--91\n");
 exit(1);
 RET_LABEL:;
 return var;
@@ -275,7 +275,7 @@ return var;
 /* method posix#Passwd#dir for (self: Passwd): String */
 val* posix__Passwd__dir(void* self) {
 val* var /* : String */;
-fprintf(stderr, "NOT YET IMPLEMENTED nitni for posix#Passwd#dir at lib/standard/posix.nit:52,2--88\n");
+fprintf(stderr, "NOT YET IMPLEMENTED nitni for posix#Passwd#dir at lib/standard/posix.nit:52,2--87\n");
 exit(1);
 RET_LABEL:;
 return var;
@@ -294,7 +294,7 @@ return var;
 /* method posix#Passwd#shell for (self: Passwd): String */
 val* posix__Passwd__shell(void* self) {
 val* var /* : String */;
-fprintf(stderr, "NOT YET IMPLEMENTED nitni for posix#Passwd#shell at lib/standard/posix.nit:53,2--92\n");
+fprintf(stderr, "NOT YET IMPLEMENTED nitni for posix#Passwd#shell at lib/standard/posix.nit:53,2--91\n");
 exit(1);
 RET_LABEL:;
 return var;
@@ -334,7 +334,7 @@ return var;
 /* method posix#Group#from_name for (self: Group, String): Group */
 void* posix__Group__from_name(void* self, val* p0) {
 void* var /* : Group */;
-printf("NOT YET IMPLEMENTED nitni for posix#Group#from_name at lib/standard/posix.nit:58,2--104\n");
+printf("NOT YET IMPLEMENTED nitni for posix#Group#from_name at lib/standard/posix.nit:58,2--103\n");
 exit(1);
 RET_LABEL:;
 return var;
@@ -355,7 +355,7 @@ return var;
 /* method posix#Group#name for (self: Group): String */
 val* posix__Group__name(void* self) {
 val* var /* : String */;
-fprintf(stderr, "NOT YET IMPLEMENTED nitni for posix#Group#name at lib/standard/posix.nit:60,2--90\n");
+fprintf(stderr, "NOT YET IMPLEMENTED nitni for posix#Group#name at lib/standard/posix.nit:60,2--89\n");
 exit(1);
 RET_LABEL:;
 return var;
@@ -374,7 +374,7 @@ return var;
 /* method posix#Group#passwd for (self: Group): String */
 val* posix__Group__passwd(void* self) {
 val* var /* : String */;
-fprintf(stderr, "NOT YET IMPLEMENTED nitni for posix#Group#passwd at lib/standard/posix.nit:61,2--94\n");
+fprintf(stderr, "NOT YET IMPLEMENTED nitni for posix#Group#passwd at lib/standard/posix.nit:61,2--93\n");
 exit(1);
 RET_LABEL:;
 return var;
