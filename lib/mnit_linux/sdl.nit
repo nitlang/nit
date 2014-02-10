@@ -29,11 +29,13 @@ in "C header" `{
 #include <SDL/SDL_ttf.h>
 `}
 
+# Represent a screen surface
 extern SDLDisplay in "C" `{SDL_Surface *`}
 	super Display
 
 	redef type I: SDLImage
-
+        
+        # Initialize a surface with width and height
 	new ( w, h: Int) is extern `{
 		SDL_Init(SDL_INIT_VIDEO);
 
@@ -47,7 +49,8 @@ extern SDLDisplay in "C" `{SDL_Surface *`}
 
 		return SDL_SetVideoMode( w, h, 24, SDL_HWSURFACE );
 	`}
-
+        
+        # Destroy the surface
 	fun destroy is extern `{
 	if ( SDL_WasInit( SDL_INIT_VIDEO ) )
 		SDL_Quit();
@@ -58,6 +61,7 @@ extern SDLDisplay in "C" `{SDL_Surface *`}
 
 	redef fun finish is extern `{ SDL_Flip( recv ); `}
 
+	# Clear the entire window with given RGB color (integer values)
 	fun clear_int( r, g, b: Int ) is extern `{
 		SDL_FillRect( recv, NULL, SDL_MapRGB(recv->format,r,g,b) ); 
 	`}
@@ -65,6 +69,7 @@ extern SDLDisplay in "C" `{SDL_Surface *`}
 	redef fun width: Int is extern `{ return recv->w; `}
 	redef fun height: Int is extern `{ return recv->h; `}
 
+	# Fill a rectangle with given color
 	fun fill_rect( rect: SDLRectangle, r, g, b: Int ) is extern `{
 		SDL_FillRect( recv, rect,  SDL_MapRGB(recv->format,r,g,b) );
 	`}
@@ -144,11 +149,14 @@ extern SDLDisplay in "C" `{SDL_Surface *`}
 		return null_InputEvent();
 	`}
 
+	# Set the position of the cursor to x,y
 	fun warp_mouse( x,y: Int ) `{ SDL_WarpMouse( x, y ); `}
-
+        
+        # Show or hide the cursor
 	fun show_cursor( show: Bool ) `{ SDL_ShowCursor( show ); `}
 end
 
+# Basic Drawing figures
 extern SDLDrawable in "C" `{SDL_Surface*`}
 	super Drawable
 
@@ -172,19 +180,23 @@ extern SDLDrawable in "C" `{SDL_Surface*`}
 	end
 end
 
+# A drawable Image
 extern SDLImage in "C" `{SDL_Surface*`} # TODO remove
 	super DrawableImage
 	super SDLDrawable
-
+        
+        # Import image from a file
 	new from_file( path: String ) is extern import String::to_cstring `{
 		SDL_Surface *image = IMG_Load( String_to_cstring( path ) );
 		return image;
 	`}
-
+        
+        
 	new partial( original: Image, clip: SDLRectangle ) is extern `{
 		return NULL;
 	`}
-
+        
+        # Copy of an existing SDLImage
 	new copy_of( image: SDLImage ) is extern `{
 		SDL_Surface *new_image = SDL_CreateRGBSurface( image->flags, image->w, image->h, 24,
 							  0, 0, 0, 0 );
@@ -198,9 +210,11 @@ extern SDLImage in "C" `{SDL_Surface*`} # TODO remove
 
 		return new_image;
 	`}
-
+        
+        # Save the image into the specified file
 	fun save_to_file( path: String ) is extern import String::to_cstring `{ `}
-
+        
+        # Destroy the image and free the memory
 	redef fun destroy is extern `{ SDL_FreeSurface( recv ); `}
 
 	redef fun width: Int is extern `{ return recv->w; `}
@@ -209,7 +223,9 @@ extern SDLImage in "C" `{SDL_Surface*`} # TODO remove
 	fun is_ok: Bool do return true # TODO
 end
 
+# A simple rectangle
 extern SDLRectangle in "C" `{SDL_Rect*`}
+        # Constructor with x,y positions width and height of the rectangle
 	new ( x: Int, y: Int, w: Int, h: Int ) is extern `{
 		SDL_Rect *rect = malloc( sizeof( SDL_Rect ) );
 		rect->x = (Sint16)x;
@@ -238,6 +254,7 @@ interface SDLInputEvent
 	super InputEvent
 end
 
+# MouseEvent class containing the cursor position
 class SDLMouseEvent
 	super PointerEvent
 	super SDLInputEvent
@@ -252,6 +269,7 @@ class SDLMouseEvent
 	end
 end
 
+# MouseButtonEvent used to get information when a button is pressed/depressed
 class SDLMouseButtonEvent
 	super SDLMouseEvent
 
@@ -278,6 +296,7 @@ class SDLMouseButtonEvent
 	end
 end
 
+# MouseMotionEvent to get the cursor position when the mouse is moved
 class SDLMouseMotionEvent
 	super SDLMouseEvent
 
@@ -295,6 +314,7 @@ class SDLMouseMotionEvent
 	redef fun to_s do return "MouseMotionEvent at {x}, {y}"
 end
 
+# SDLKeyEvent for when a key is pressed 
 class SDLKeyEvent
 	super KeyEvent
 	super SDLInputEvent
@@ -322,12 +342,17 @@ class SDLKeyEvent
 			return "KeyboardEvent key {key_name} up"
 		end
 	end
-
+        
+        # Return true if the key is down, false otherwise
 	redef fun is_down do return down
-
+        
+        # Return true if the key is the up arrow
 	redef fun is_arrow_up do return key_name == "up"
+	# Return true if the key is the left arrow
 	redef fun is_arrow_left do return key_name == "left"
+	# Return true if the key is the down arrow
 	redef fun is_arrow_down do return key_name == "down"
+	# Return true if the key is the right arrow
 	redef fun is_arrow_right do return key_name == "right"
 end
 
@@ -340,7 +365,9 @@ redef class Int
 	fun delay is extern `{ SDL_Delay( recv ); `}
 end
 
+# Class to load and use TTF_Font
 extern SDLFont in "C" `{TTF_Font *`}
+        #Load a font with a specified name and size
 	new ( name: String, points: Int ) is extern import String::to_cstring `{
 	char * cname = String_to_cstring( name );
 
@@ -354,7 +381,7 @@ extern SDLFont in "C" `{TTF_Font *`}
 	`}
 
 	fun destroy is extern `{ TTF_CloseFont( recv ); `}
-
+        #Create a String with the specified color, return an SDLImage
 	fun render( text: String, r, g, b: Int ): SDLImage is extern import String::to_cstring `{
 		SDL_Color color;
 		SDL_Surface *text_surface;
@@ -398,10 +425,13 @@ extern SDLFont in "C" `{TTF_Font *`}
 	fun line_skip: Int is extern `{
 		return TTF_FontLineSkip( recv );
 	`}
-
+        
+        # Return true is the font used fixed width for each char
 	fun is_fixed_width: Bool is extern `{
 		return TTF_FontFaceIsFixedWidth( recv );
 	`}
+	
+	# Return the family name of the font 
 	fun family_name: nullable String is extern import String::to_cstring, String as nullable `{
 		char *fn = TTF_FontFaceFamilyName( recv );
 
@@ -410,6 +440,8 @@ extern SDLFont in "C" `{TTF_Font *`}
 		else
 			return String_as_nullable( NativeString_to_s( fn ) );
 	`}
+	
+	# Return the style name of the font
 	fun style_name: nullable String is extern import String::to_cstring, String as nullable `{
 		char *sn = TTF_FontFaceStyleName( recv );
 
@@ -418,7 +450,8 @@ extern SDLFont in "C" `{TTF_Font *`}
 		else
 			return String_as_nullable( NativeString_to_s( sn ) );
 	`}
-
+        
+        # Return the estimated width of a String if used with the current font
 	fun width_of( text: String ): Int is extern import NativeString::to_s `{
 		char *ctext = String_to_cstring( text );
 		int w;
