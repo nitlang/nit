@@ -814,8 +814,6 @@ class SeparateCompiler
 			v.add("return {res};")
 		end
 		v.add("\}")
-
-		generate_check_init_instance(mtype)
 	end
 
 	# Add a dynamic test to ensure that the type referenced by `t` is a live type
@@ -828,24 +826,6 @@ class SeparateCompiler
 		v.add("if({t}->resolution_table == NULL) \{")
 		v.add("fprintf(stderr, \"Insantiation of a dead type: %s\\n\", {t}->name);")
 		v.add_abort("type dead")
-		v.add("\}")
-	end
-
-	redef fun generate_check_init_instance(mtype)
-	do
-		if self.modelbuilder.toolcontext.opt_no_check_initialization.value then return
-
-		var v = self.new_visitor
-		var c_name = mtype.mclass.c_name
-		var res = new RuntimeVariable("self", mtype, mtype)
-		self.provide_declaration("CHECK_NEW_{c_name}", "void CHECK_NEW_{c_name}({mtype.ctype});")
-		v.add_decl("/* allocate {mtype} */")
-		v.add_decl("void CHECK_NEW_{c_name}({mtype.ctype} {res}) \{")
-		if runtime_type_analysis.live_classes.has(mtype.mclass) then
-			self.generate_check_attr(v, res, mtype)
-		else
-			v.add_abort("{mtype.mclass} is DEAD")
-		end
 		v.add("\}")
 	end
 
@@ -1286,13 +1266,6 @@ class SeparateCompilerVisitor
 		return self.new_expr("NEW_{mtype.mclass.c_name}(&type_{mtype.c_name})", mtype)
 	end
 
-	redef fun check_init_instance(value, mtype)
-	do
-		if self.compiler.modelbuilder.toolcontext.opt_no_check_initialization.value then return
-		self.require_declaration("CHECK_NEW_{mtype.mclass.c_name}")
-		self.add("CHECK_NEW_{mtype.mclass.c_name}({value});")
-	end
-
 	redef fun type_test(value, mtype, tag)
 	do
 		self.add("/* {value.inspect} isa {mtype} */")
@@ -1543,7 +1516,6 @@ class SeparateCompilerVisitor
 			self.add("((struct instance_{nclass.c_name}*){nat})->values[{i}] = (val*) {r};")
 		end
 		self.send(self.get_property("with_native", arrayclass.intro.bound_mtype), [res, nat, length])
-		self.check_init_instance(res, arraytype)
 		self.add("\}")
 		return res
 	end
