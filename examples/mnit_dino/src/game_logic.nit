@@ -43,7 +43,7 @@ class Game
 
 	init( cavemen_nbr : Int )
 	do
-		srand
+		srand_from(cavemen_nbr)
 
 		nbr_wanted_cavemen = cavemen_nbr
 
