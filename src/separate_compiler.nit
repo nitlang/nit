@@ -56,7 +56,7 @@ redef class ToolContext
 end
 
 redef class ModelBuilder
-	fun run_separate_compiler(mainmodule: MModule, runtime_type_analysis: RapidTypeAnalysis)
+	fun run_separate_compiler(mainmodule: MModule, runtime_type_analysis: nullable RapidTypeAnalysis)
 	do
 		var time0 = get_time
 		self.toolcontext.info("*** GENERATING C ***", 1)
@@ -109,7 +109,7 @@ class SeparateCompiler
 	redef type VISITOR: SeparateCompilerVisitor
 
 	# The result of the RTA (used to know live types and methods)
-	var runtime_type_analysis: RapidTypeAnalysis
+	var runtime_type_analysis: nullable RapidTypeAnalysis
 
 	private var undead_types: Set[MType] = new HashSet[MType]
 	private var partial_types: Set[MType] = new HashSet[MType]
@@ -120,7 +120,7 @@ class SeparateCompiler
 	protected var method_layout: nullable Layout[PropertyLayoutElement]
 	protected var attr_layout: nullable Layout[MAttribute]
 
-	init(mainmodule: MModule, mmbuilder: ModelBuilder, runtime_type_analysis: RapidTypeAnalysis) do
+	init(mainmodule: MModule, mmbuilder: ModelBuilder, runtime_type_analysis: nullable RapidTypeAnalysis) do
 		super(mainmodule, mmbuilder)
 		var file = new_file("nit.common")
 		self.header = new CodeWriter(file)
