@@ -163,10 +163,10 @@ redef class Game
 			else
 				concl_img = imgs.you_lost_img
 			end
-			display.blit_centered( concl_img, display.width/2, 80 )
+			display.blit_centered( concl_img, display.width/2, 60+display.top_offset )
 
 			if ready_to_start_over then
-				display.blit_centered( imgs.start_over_img, display.width/2, 120 )
+				display.blit_centered( imgs.start_over_img, display.width/2, 100+display.top_offset )
 			end
 		end
 	end
