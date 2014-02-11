@@ -722,7 +722,7 @@ class SeparateCompiler
 		var attrs = self.attr_tables[mclass]
 		var v = new_visitor
 
-		var is_dead = not runtime_type_analysis.live_classes.has(mclass) and mtype.ctype == "val*" and mclass.name != "NativeArray"
+		var is_dead = runtime_type_analysis != null and not runtime_type_analysis.live_classes.has(mclass) and mtype.ctype == "val*" and mclass.name != "NativeArray"
 
 		v.add_decl("/* runtime class {c_name} */")
 
@@ -923,7 +923,7 @@ class SeparateCompilerVisitor
 		else if mtype.ctype == "val*" then
 			var valtype = value.mtype.as(MClassType)
 			var res = self.new_var(mtype)
-			if not compiler.runtime_type_analysis.live_types.has(valtype) then
+			if compiler.runtime_type_analysis != null and not compiler.runtime_type_analysis.live_types.has(valtype) then
 				self.add("/*no autobox from {value.mtype} to {mtype}: {value.mtype} is not live! */")
 				self.add("printf(\"Dead code executed!\\n\"); show_backtrace(1);")
 				return res
