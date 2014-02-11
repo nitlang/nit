@@ -289,7 +289,8 @@ redef class AVarReassignExpr
 	do
 		var variable = self.variable.as(not null)
 
-		var nread = v.builder.make_var_read(variable)
+		var nread = v.builder.make_var_read(variable, read_type.as(not null))
+
 		var nnewvalue = v.builder.make_call(nread, reassign_callsite.mproperty, [n_value])
 		var nwrite = v.builder.make_var_assign(variable, nnewvalue)
 

@@ -696,6 +696,8 @@ redef class AVarReassignExpr
 		var readtype = v.get_variable(self, variable)
 		if readtype == null then return
 
+		read_type = readtype
+
 		var writetype = variable.declared_type
 		if writetype == null then return
 

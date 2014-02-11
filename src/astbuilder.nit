@@ -56,9 +56,9 @@ class ASTBuilder
 	end
 
 	# Make a new variable read
-	fun make_var_read(variable: Variable): AVarExpr
+	fun make_var_read(variable: Variable, mtype: MType): AVarExpr
 	do
-		return new AVarExpr.make(variable)
+		return new AVarExpr.make(variable, mtype)
 	end
 
 	# Make a new variable assignment
@@ -112,7 +112,7 @@ redef class AExpr
 			place.replace_with(nvar)
 			self.variable_cache = variable
 		end
-		return new AVarExpr.make(variable)
+		return new AVarExpr.make(variable, variable.declared_type.as(not null))
 	end
 
 	private var variable_cache: nullable Variable
@@ -287,11 +287,11 @@ redef class AAttrAssignExpr
 end
 
 redef class AVarExpr
-	private init make(v: Variable)
+	private init make(v: Variable, mtype: MType)
 	do
 		_n_id = new TId
 		variable = v
-		mtype = v.declared_type
+		self.mtype = mtype
 	end
 end
 
