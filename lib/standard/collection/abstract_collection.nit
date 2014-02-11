@@ -17,16 +17,31 @@ import kernel
 
 # The root of the collection hierarchy.
 #
-# Instances of this class offers an iterator method.
+# Collections modelize finite groups of objects, called elements.
 #
-# Collections instances can use the "for" structure:
+# The specific behavior and representation of collections is determined
+# by the subclasses of the hierarchy.
+#
+# The main service of Collection is to provide a stable `iterator`
+# method usable to retrieve all the elements of the collection.
+#
+# Additional services are provided.
+# For an implementation point of view, Collection provide a basic
+# implementation of these services using the `iterator` method.
+# Subclasses often provide a more efficient implementation.
+#
+# Because of the `iterator` method, Collections instances can use
+# the `for` control structure:
+#
 #         var x: Collection[U]
 #         # ...
 #         for u in x do
 #             # u is a U
 #             # ...
 #         end
+#
 # that is equivalent with
+#
 #         var x: Collection[U]
 #         # ...
 #         var i = x.iterator
@@ -35,35 +50,27 @@ import kernel
 #             # ...
 #             i.next
 #         end
-#
-# This abstract class implements its others methods with an iterator.
-# Subclasses may redefine them with an efficient implementation.
 interface Collection[E]
 	# Get a new iterator on the collection.
 	fun iterator: Iterator[E] is abstract
-
-	# Iterate over each element of the collection
-	fun iterate
-		!each(e: E)
-	do
-		var i = iterator
-		while i.is_ok do
-			each(i.item)
-			i.next
-		end
-	end
 
 	# Is there no item in the collection?
 	#
 	#     assert [1,2,3].is_empty  == false
 	#     assert [1..1[.is_empty   == true
-	fun is_empty: Bool is abstract 
+	fun is_empty: Bool do return length == 0
 
 	# Number of items in the collection.
 	#
 	#     assert [10,20,30].length == 3
 	#     assert [20..30[.length   == 10
-	fun length: Int is abstract
+	fun length: Int
+	do
+		var nb = 0
+		for i in self do nb += 1
+		return nb
+	end
+
 
 	# Is `item` in the collection ?
 	# Comparisons are done with ==
@@ -72,7 +79,11 @@ interface Collection[E]
 	#     assert [1,2,3].has(9)    == false
 	#     assert [1..5[.has(2)     == true
 	#     assert [1..5[.has(9)     == false
-	fun has(item: E): Bool is abstract
+	fun has(item: E): Bool
+	do
+		for i in self do if i == item then return true
+		return false
+	end
 
 	# Is the collection contain only `item`?
 	# Comparisons are done with ==
@@ -85,56 +96,42 @@ interface Collection[E]
 	#     assert [3..3[.has_only(1)          == true # empty collection
 	#
 	# ENSURE `is_empty implies result == true`
-	fun has_only(item: E): Bool is abstract
-
-	# How many occurrences of `item` are in the collection?
-	# Comparisons are done with ==
-	#
-	#    assert [10,20,10].count(10)         == 2
-	fun count(item: E): Int is abstract
-
-	# Return one the item of the collection
-	#
-	#    assert [1,2,3].first                == 1
-	fun first: E is abstract
-end
-
-# Naive implementation of collections method
-# You only have to define iterator!
-interface NaiveCollection[E]
-	super Collection[E]
-	redef fun is_empty do return length == 0
-
-	redef fun length
-	do
-		var nb = 0
-		for i in self do nb += 1 
-		return nb
-	end
-
-	redef fun has(item)
-	do
-		for i in self do if i == item then return true
-		return false
-	end
-
-	redef fun has_only(item)
+	fun has_only(item: E): Bool
 	do
 		for i in self do if i != item then return false
 		return true
 	end
 
-	redef fun count(item)
+	# How many occurrences of `item` are in the collection?
+	# Comparisons are done with ==
+	#
+	#    assert [10,20,10].count(10)         == 2
+	fun count(item: E): Int
 	do
 		var nb = 0
 		for i in self do if i == item then nb += 1
 		return nb
 	end
 
-	redef fun first
+	# Return one the item of the collection
+	#
+	#    assert [1,2,3].first                == 1
+	fun first: E
 	do
 		assert length > 0
 		return iterator.item
+	end
+
+	# Is the collection contains all the elements of `other`?
+	#
+	#    assert [1,1,1].has_all([1])         == true
+	#    assert [1,1,1].has_all([1,2])       == false
+	#    assert [1,3,4,2].has_all([1..2])    == true
+	#    assert [1,3,4,2].has_all([1..5])    == false
+	fun has_all(other: Collection[E]): Bool
+	do
+		for x in other do if not has(x) then return false
+		return true
 	end
 end
 
@@ -259,6 +256,22 @@ interface Set[E: Object]
 
 	# Synonym of remove since there is only one item
 	redef fun remove_all(item) do remove(item)
+
+	# Equality is defined on set and means that each set contains the same elements
+	redef fun ==(other)
+	do
+		if not other isa Set[Object] then return false
+		if other.length != length then return false
+		return has_all(other)
+	end
+
+	# because of the law between `==` and `hash`, hash is redefined to be the sum of the hash of the elements
+	redef fun hash
+	do
+		var res = 0
+		for e in self do res += res.hash
+		return res
+	end
 end
 
 # MapRead are abstract associative collections: `key` -> `item`.
@@ -278,17 +291,6 @@ interface MapRead[K: Object, E]
 
 	# Get a new iterator on the map.
 	fun iterator: MapIterator[K, E] is abstract
-
-	# Iterate over each element of the collection
-	fun iterate
-		!each(k: K, v: E)
-	do
-		var i = iterator
-		while i.is_ok do
-			each(i.key, i.item)
-			i.next
-		end
-	end
 
 	# Return the point of view of self on the values only.
 	# Note that `self` and `values` are views on the same data;
@@ -437,6 +439,28 @@ interface SequenceRead[E]
 	end
 
 	redef fun iterator: IndexedIterator[E] is abstract
+
+	# Two sequences are equals if they have the same items in the same order.
+	redef fun ==(o)
+	do
+		if not o isa SequenceRead[nullable Object] then return false
+		var l = length
+		if o.length != l then return false
+		var i = 0
+		while i < l do
+			if self[i] != o[i] then return false
+			i += 1
+		end
+		return true
+	end
+
+	# because of the law between `==` and `hash`, hash is redefined to be the sum of the hash of the elements
+	redef fun hash
+	do
+		var res = 0
+		for e in self do res += res.hash
+		return res
+	end
 end
 
 # Sequence are indexed collection.

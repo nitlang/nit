@@ -53,7 +53,7 @@ private
 
 	redef fun ==(p)
 	do
-		return not p is null and p isa Point and _x == p.x and _y == p.y
+		return p isa Point and _x == p.x and _y == p.y
 	end
 
 

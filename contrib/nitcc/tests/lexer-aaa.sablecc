@@ -1,0 +1,12 @@
+Grammar y;
+
+Lexer
+
+a = 'a' ;
+a2 = 'a' 'a';
+a3 = 'a' 'a' 'a';
+
+Parser
+
+p = t+;
+t = a | a2 | a3;

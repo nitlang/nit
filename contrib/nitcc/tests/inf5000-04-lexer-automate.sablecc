@@ -1,0 +1,14 @@
+Grammar automate;
+Lexer
+  letter = 'a'..'z';
+  digit = '0'..'9';
+  id = letter(letter|digit)*;
+  if = 'if';
+  int = (digit)+;
+  float = (digit)+ '.' (digit)+;
+  dot = '.';
+  blank = #10|#13|#32;
+Parser
+  Ignored blank;
+  p = t*;
+  t = id | if | int | float | dot;

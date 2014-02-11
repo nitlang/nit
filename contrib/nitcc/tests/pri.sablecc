@@ -1,0 +1,7 @@
+Grammar pri;
+Parser
+a = 'p' p | 'q' q | 'r' r? ;
+p = p '+' p | 'p';
+q = q q | 'q' ;
+r = r2?;
+r2 = 'r';

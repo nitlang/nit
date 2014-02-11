@@ -1,5 +1,7 @@
 *.bak
+*.swp
 *~
+.project
 EIFGENs
 
 .nit_compile*
@@ -16,8 +18,6 @@ doc/newmodel
 *.toc
 doc/nit_version.sty
 
-src/nitc
-src/nitc_?
 src/parser/.nit.sablecc3
 src/parser/.nit.sablecc3.dump
 src/parser/.parser-nofact.nit
@@ -32,14 +32,22 @@ src/*.bin
 
 c_src/*.o
 c_src/*.cksum
-c_src/nitc
+c_src/nitg
+
+csrc2/
 
 lib/*.log
 lib/*.dot
 
+examples/mnit_*/doc
+examples/mnit_*/bin
+
+contrib/*/bin
+
 tests/alt
 tests/errlist
 tests/out
+tests/*.xml
 
 *.stub.nit.[ch]
 

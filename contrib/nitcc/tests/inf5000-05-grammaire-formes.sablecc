@@ -1,0 +1,12 @@
+Grammar formes;
+Lexer
+  nombre = ('0'..'9')+;
+  blank = ' ' | #9 | #10 | #13;
+
+Parser
+  Ignored blank;
+  forme = {cercle:} 'centre' point 'rayon' long |
+          {segment:} point '--' point ;
+  point = '(' long ',' long ')' ;
+  long = nombre unite ;
+  unite = 'cm' | 'mm' | 'pt' | 'px' ;

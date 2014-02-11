@@ -140,7 +140,7 @@ end
 ### Specific private collection and iterator classes
 
 private class PipeUniq[E]
-	super NaiveCollection[E]
+	super Collection[E]
 	var source: Collection[E]
 	redef fun iterator do return new PipeUniqIterator[E](source.iterator)
 end
@@ -167,7 +167,7 @@ private class PipeUniqIterator[E]
 end
 
 private class PipeSeqUniq[E]
-	super NaiveCollection[E]
+	super Collection[E]
 	var source: Collection[E]
 	redef fun iterator do return new PipeSeqUniqIterator[E](source.iterator)
 end
@@ -192,7 +192,7 @@ private class PipeSeqUniqIterator[E]
 end
 
 private class PipeJoin[E]
-	super NaiveCollection[E]
+	super Collection[E]
 	var source1: Collection[E]
 	var source2: Collection[E]
 	redef fun iterator do return new PipeJoinIterator[E](source1.iterator, source2.iterator)
@@ -220,7 +220,7 @@ private class PipeJoinIterator[E]
 end
 
 private class PipeAlternate[E]
-	super NaiveCollection[E]
+	super Collection[E]
 	var source: Collection[E]
 	var odd_item: E
 	redef fun iterator do return new PipeAlternateIterator[E](source.iterator, odd_item)
@@ -254,14 +254,14 @@ private class PipeAlternateIterator[E]
 end
 
 private class PipeSkip[E]
-	super NaiveCollection[E]
+	super Collection[E]
 	var source: Collection[E]
 	var skip_item: E
 	redef fun iterator do return new PipeSkipIterator[E](source.iterator, skip_item)
 end
 
 private class PipeSkipIterator[E]
-	super NaiveCollection[E]
+	super Collection[E]
 	super Iterator[E]
 
 	var source: Iterator[E]
@@ -292,7 +292,7 @@ private class PipeSkipIterator[E]
 end
 
 private class PipeHead[E]
-	super NaiveCollection[E]
+	super Collection[E]
 	var source: Collection[E]
 	var pipe_length: Int
 	redef fun iterator do return new PipeHeadIterator[E](source.iterator, pipe_length)
@@ -317,7 +317,7 @@ private class PipeHeadIterator[E]
 end
 
 private class PipeSkipHead[E]
-	super NaiveCollection[E]
+	super Collection[E]
 	var source: Collection[E]
 	var pipe_length: Int
 	redef fun iterator
@@ -333,7 +333,7 @@ private class PipeSkipHead[E]
 end
 
 private class PipeTail[E]
-	super NaiveCollection[E]
+	super Collection[E]
 	var source: Collection[E]
 	var pipe_length: Int
 	redef fun iterator
@@ -351,7 +351,7 @@ private class PipeTail[E]
 end
 
 private class PipeSkipTail[E]
-	super NaiveCollection[E]
+	super Collection[E]
 	var source: Collection[E]
 	var pipe_length: Int
 	redef fun iterator do return new PipeSkipTailIterator[E](source.iterator, pipe_length)

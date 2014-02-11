@@ -1,0 +1,9 @@
+Grammar priorite_d_inclusion;
+Lexer
+  identifier = ('a'..'z')+;
+  if = 'if';
+  blank = ' ' | #9 | #10 | #13;
+Parser
+  Ignored blank;
+  p = t*;
+  t = identifier | if;

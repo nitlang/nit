@@ -16,11 +16,18 @@ module math
 import kernel
 import collection
 
+in "C header" `{
+#include <math.h>
+`}
+
 redef class Int
 	fun rand: Int is extern "kernel_Int_Int_rand_0"
 	fun bin_and(i: Int): Int is extern "kernel_Int_Int_binand_0"
 	fun bin_or(i: Int): Int is extern "kernel_Int_Int_binor_0"
 	fun bin_xor(i: Int): Int is extern "kernel_Int_Int_binxor_0"
+	fun sqrt : Int is extern `{ return sqrtl(recv); `}
+	fun sin : Int is extern `{ return sinl(recv); `}
+	fun cos : Int is extern `{ return cosl(recv); `}
 end
 
 redef class Float
@@ -41,10 +48,11 @@ redef class Float
 end
 
 redef class Collection[ E ]
-	# Return a random element in the collection
-	fun rand : nullable E
+	# Return a random element form the collection
+	# There must be at least one element in the collection
+	fun rand: E
 	do
-		if is_empty then return null
+		if is_empty then abort
 		var rand_index = length.rand
 
 		for e in self do

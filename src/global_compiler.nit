@@ -88,7 +88,7 @@ class GlobalCompiler
 	init(mainmodule: MModule, modelbuilder: ModelBuilder, runtime_type_analysis: RapidTypeAnalysis)
 	do
 		super(mainmodule, modelbuilder)
-		var file = new_file(mainmodule.name)
+		var file = new_file("{mainmodule.name}.nitgg")
 		self.header = new CodeWriter(file)
 		self.runtime_type_analysis = runtime_type_analysis
 		self.live_primitive_types = new Array[MClassType]
@@ -278,7 +278,7 @@ class GlobalCompilerVisitor
 			var res = self.new_var(mtype)
 			if not compiler.runtime_type_analysis.live_types.has(valtype) then
 				self.add("/*no autobox from {value.mtype} to {mtype}: {value.mtype} is not live! */")
-				self.add("printf(\"Dead code executed!\\n\"); exit(1);")
+				self.add("printf(\"Dead code executed!\\n\"); show_backtrace(1);")
 				return res
 			end
 			self.add("{res} = BOX_{valtype.c_name}({value}); /* autobox from {value.mtype} to {mtype} */")
@@ -287,7 +287,7 @@ class GlobalCompilerVisitor
 			# Bad things will appen!
 			var res = self.new_var(mtype)
 			self.add("/* {res} left unintialized (cannot convert {value.mtype} to {mtype}) */")
-			self.add("printf(\"Cast error: Cannot cast %s to %s.\\n\", \"{value.mtype}\", \"{mtype}\"); exit(1);")
+			self.add("printf(\"Cast error: Cannot cast %s to %s.\\n\", \"{value.mtype}\", \"{mtype}\"); show_backtrace(1);")
 			return res
 		end
 	end
@@ -462,7 +462,7 @@ class GlobalCompilerVisitor
 	private fun finalize_call(m: MMethodDef, recvtype: MClassType, args: Array[RuntimeVariable]): nullable RuntimeVariable
 	do
 		if args.length != m.msignature.arity + 1 then # because of self
-			add("printf(\"NOT YET IMPLEMENTED: Invalid arity for {m}. {args.length} arguments given.\\n\"); exit(1);")
+			add("printf(\"NOT YET IMPLEMENTED: Invalid arity for {m}. {args.length} arguments given.\\n\"); show_backtrace(1);")
 			debug("NOT YET IMPLEMENTED: Invalid arity for {m}. {args.length} arguments given.")
 			return null
 		end
@@ -571,7 +571,7 @@ class GlobalCompilerVisitor
 	do
 		if recv.mtype.ctype != "val*" then return
 		self.add("fprintf(stderr, \"BTD BUG: Dynamic type is %s, static type is %s\\n\", class_names[{recv}->classid], \"{recv.mcasttype}\");")
-		self.add("exit(1);")
+		self.add("show_backtrace(1);")
 	end
 
 	redef fun isset_attribute(a, recv)

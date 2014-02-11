@@ -160,7 +160,7 @@ extern FFSocket `{ S_DESCRIPTOR* `}
 	private fun i_accept(addrIn: FFSocketAddrIn): FFSocket `{
 		S_LEN s = sizeof(S_ADDR);
 		S_DESCRIPTOR *d = NULL;
-		d = malloc(sizeof(S_DESCRIPTOR*));
+		d = malloc(sizeof(S_DESCRIPTOR));
 		*d = accept(*recv,(S_ADDR*)addrIn, &s);
 		return d;
 	`}
@@ -175,7 +175,7 @@ end
 extern FFSocketAcceptResult `{ S_ACCEPT_RESULT* `}
 	new (socket: FFSocket, addrIn: FFSocketAddrIn) `{
 		S_ACCEPT_RESULT *sar = NULL;
-		sar = malloc( sizeof(S_ACCEPT_RESULT*) );
+		sar = malloc( sizeof(S_ACCEPT_RESULT) );
 		sar->s_desc = *socket;
 		sar->addr_in = *addrIn;
 		return sar;
@@ -188,12 +188,12 @@ end
 extern FFSocketAddrIn `{ S_ADDR_IN* `}
 	new `{
 		S_ADDR_IN *sai = NULL;
-		sai = malloc( sizeof(S_ADDR_IN*) );
+		sai = malloc( sizeof(S_ADDR_IN) );
 		return sai;
 	`}
 	new with(port: Int, family: FFSocketAddressFamilies) `{
 		S_ADDR_IN *sai = NULL;
-		sai = malloc( sizeof(S_ADDR_IN*) );
+		sai = malloc( sizeof(S_ADDR_IN) );
 		sai->sin_family = family;
 		sai->sin_port = htons(port);
 		sai->sin_addr.s_addr = INADDR_ANY;
@@ -201,7 +201,7 @@ extern FFSocketAddrIn `{ S_ADDR_IN* `}
 	`}
 	new with_hostent(hostent: FFSocketHostent, port: Int) `{
 		S_ADDR_IN *sai = NULL;
-		sai = malloc( sizeof(S_ADDR_IN*) );
+		sai = malloc( sizeof(S_ADDR_IN) );
 		sai->sin_family = hostent->h_addrtype;
 		sai->sin_port = htons(port);
 		memcpy( (char*)&sai->sin_addr.s_addr, (char*)hostent->h_addr, hostent->h_length );
@@ -236,7 +236,7 @@ end
 extern FFTimeval `{ S_TIMEVAL* `}
 	new (seconds: Int, microseconds: Int) `{
 		S_TIMEVAL* tv = NULL;
-		tv = malloc( sizeof(S_TIMEVAL*) );
+		tv = malloc( sizeof(S_TIMEVAL) );
 		tv->tv_sec = seconds;
 		tv->tv_usec = microseconds;
 		return tv;
@@ -249,7 +249,7 @@ end
 extern FFSocketSet `{ S_FD_SET* `}
 	new `{
 		S_FD_SET *f = NULL;
-		f = malloc( sizeof(S_FD_SET*) );
+		f = malloc( sizeof(S_FD_SET) );
 		return f;
 	`}
 	fun set(s: FFSocket) `{ FD_SET( *s, recv ); `}

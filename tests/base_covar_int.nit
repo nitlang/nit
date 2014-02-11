@@ -14,16 +14,28 @@
 
 import kernel
 
+redef class Discrete
+	fun foo(o: OTHER): Bool is abstract
+end
+
+redef class Int
+	redef fun foo(o) do return self < o
+end
+
+redef class Char
+	redef fun foo(o) do return self < o
+end
+
 var d1: Discrete = 1
 var d2: Discrete = 2
 var c1: Discrete = 'a'
 var c2: Discrete = 'b'
-(1<2).output
-(d1<2).output
-#alt1#(c1<2).output
-#alt2#(1<d2).output
-(d1<d2).output
-#alt3#(c1<d2).output
-#alt4#(1<c2).output
-#alt5#(d1<c2).output
-(c1<c2).output
+1.foo(2).output
+d1.foo(2).output
+#alt1#c1.foo(2).output
+#alt2#1.foo(d2).output
+d1.foo(d2).output
+#alt3#c1.foo(d2).output
+#alt4#1.foo(c2).output
+#alt5#d1.foo(c2).output
+c1.foo(c2).output

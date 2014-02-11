@@ -1,0 +1,9 @@
+T_Identifier@1,1:i
+TAnonymous@1,3:if
+T_Identifier@1,6:iff
+T_Identifier@1,10:ifff
+T_Decimal@2,1:70
+T_Zero@3,1:zero
+T_Hex@4,1:0xFFff
+T_IpAddress@5,1:192.168.0.1
+TEnd@6,1:

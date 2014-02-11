@@ -35,11 +35,15 @@ interface Object
 	# Unless specific code, you should not use this method.
 	fun is_same_type(other: Object): Bool is intern
 
+	# Return true if `self` and `other` are the same instance.
+	# Unless specific code, you should use `==` instead.
+	fun is_same_instance(other: nullable Object): Bool is intern
+
 	# Have `self` and `other` the same value?
 	##
 	# The exact meaning of "same value" is let to the subclasses.
-	# Implicitly, the default implementation, is `is`
-	fun ==(other: nullable Object): Bool do return self is other
+	# Implicitly, the default implementation, is `is_same_instance`
+	fun ==(other: nullable Object): Bool do return self.is_same_instance(other)
 
 	# Have `self` and `other` different values?
 	##
@@ -66,6 +70,12 @@ interface Object
 
 	# Return the global sys object, the only instance of the `Sys` class.
 	protected fun sys: Sys is intern
+
+	# The hash code of the object.
+	# Assuming that a == b -> a.hash == b.hash
+	##
+	# Without redefinition, it is based on the `object_id` of the instance.
+	fun hash: Int do return object_id / 8
 end
 
 # The main class of the program.
@@ -199,6 +209,14 @@ universal Bool
 	redef fun ==(b) is intern
 	redef fun !=(b) is intern
 	redef fun output is intern
+	redef fun hash
+	do
+		if self then
+			return 1
+		else
+			return 0
+		end
+	end
 end
 
 # Native floating point numbers.
@@ -234,6 +252,7 @@ universal Int
 	redef type OTHER: Int
 
 	redef fun object_id is intern
+	redef fun hash do return self
 	redef fun ==(i) is intern
 	redef fun !=(i) is intern
 	redef fun output is intern
@@ -385,28 +404,6 @@ universal Int
 		end
 	end
 
-	# Execute 'each' for each integer in [self..last]
-	fun enumerate_to(last: Int)
-		!each(i: Int)
-	do
-		var cur = self
-		while cur <= last do
-			each(cur)
-			cur += 1
-		end
-	end
-
-	# Execute 'each' for each integer in [self..after[
-	fun enumerate_before(after: Int)
-		!each(i: Int)
-	do
-		var cur = self
-		while cur < after do
-			each(cur)
-			cur += 1
-		end
-	end
-
 	# The absolute value of self
 	#
 	#     assert (-10).abs   == 10
@@ -431,6 +428,7 @@ universal Char
 	redef type OTHER: Char
 
 	redef fun object_id is intern
+	redef fun hash do return ascii
 	redef fun ==(o) is intern
 	redef fun !=(o) is intern
 	redef fun output is intern
@@ -464,7 +462,7 @@ universal Char
 		else if is_digit then
 			return self.ascii - '0'.ascii
 		else
-			return self.to_lower.ascii - ('a'.ascii + 10)
+			return self.to_lower.ascii - 'a'.ascii + 10
 		end
 	end
 
@@ -553,4 +551,6 @@ end
 
 # Pointer classes are used to manipulate extern C structures.
 extern Pointer
+	# Is the address behind this Object at NULL?
+	fun address_is_null: Bool `{ return recv == NULL; `}
 end

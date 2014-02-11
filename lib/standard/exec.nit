@@ -5,7 +5,7 @@
 #
 # This file is free software, which comes along with NIT.  This software is
 # distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-# without  even  the implied warranty of  MERCHANTABILITY or  FITNESS FOR A 
+# without  even  the implied warranty of  MERCHANTABILITY or  FITNESS FOR A
 # PARTICULAR PURPOSE.  You can modify it is you want,  provided this header
 # is kept unaltered, and a notification of the changes is added.
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
@@ -31,7 +31,7 @@ class Process
 		data.wait
 		assert is_finished
 	end
-	
+
 	# The status once finished
 	fun status: Int
 	do
@@ -51,6 +51,11 @@ class Process
 		execute(command, null, 0)
 	end
 
+	init from_a(command: String, arguments: Array[String])
+	do
+		execute(command, arguments, 0)
+	end
+
 	# Internal code to handle execution
 	protected init execute(command: String, arguments: nullable Array[String], pipeflags: Int)
 	do
@@ -66,7 +71,7 @@ class Process
 		end
 		data = basic_exec_execute(command.to_cstring, args.to_s.to_cstring, l, pipeflags)
 	end
-	
+
 	private var data: NativeProcess
 	private fun basic_exec_execute(p: NativeString, av: NativeString, ac: Int, pf: Int): NativeProcess is extern "exec_Process_Process_basic_exec_execute_4"
 end
@@ -76,9 +81,9 @@ class IProcess
 	super Process
 	super IStream
 	var stream_in: FDIStream
-	
+
 	redef fun close do stream_in.close
-	
+
 	redef fun read_char do return stream_in.read_char
 
 	redef fun eof do return stream_in.eof
@@ -88,10 +93,16 @@ class IProcess
 		execute(command, arguments, 2)
 		stream_in = new FDIStream(data.out_fd)
 	end
-	
+
 	init init_(command: String)
 	do
 		execute(command, null, 2)
+		stream_in = new FDIStream(data.out_fd)
+	end
+
+	init from_a(command: String, arguments: Array[String])
+	do
+		execute(command, arguments, 2)
 		stream_in = new FDIStream(data.out_fd)
 	end
 end
@@ -107,16 +118,22 @@ class OProcess
 	redef fun is_writable do return stream_out.is_writable
 
 	redef fun write(s) do stream_out.write(s)
-	
+
 	init(command: String, arguments: String...)
 	do
 		execute(command, arguments, 1)
 		stream_out = new FDOStream(data.in_fd)
 	end
-	
+
 	init init_(command: String)
 	do
 		execute(command, null, 1)
+		stream_out = new FDOStream(data.in_fd)
+	end
+
+	init from_a(command: String, arguments: Array[String])
+	do
+		execute(command, arguments, 1)
 		stream_out = new FDOStream(data.in_fd)
 	end
 end
@@ -139,10 +156,17 @@ class IOProcess
 		stream_in = new FDIStream(data.out_fd)
 		stream_out = new FDOStream(data.in_fd)
 	end
-	
+
 	init init_(command: String)
 	do
 		execute(command, null, 3)
+		stream_in = new FDIStream(data.out_fd)
+		stream_out = new FDOStream(data.in_fd)
+	end
+
+	init from_a(command: String, arguments: Array[String])
+	do
+		execute(command, arguments, 3)
 		stream_in = new FDIStream(data.out_fd)
 		stream_out = new FDOStream(data.in_fd)
 	end
@@ -152,7 +176,7 @@ redef class Sys
 	# Execute a shell command and return its error code
 	fun system(command: String): Int
 	do
-		return command.to_cstring.system	
+		return command.to_cstring.system
 	end
 end
 

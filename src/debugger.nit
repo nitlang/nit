@@ -19,8 +19,105 @@ module debugger
 
 import breakpoint
 intrude import naive_interpreter
+import nitx
+intrude import local_var_init
+intrude import scope
+intrude import toolcontext
+
+redef class Model
+	# Cleans the model to remove a module and what it defines when semantic analysis fails on injected code
+	private fun try_remove_module(m: MModule): Bool
+	do
+		var index = -1
+		for i in [0 .. mmodules.length[ do
+			if mmodules[i] == m then
+				index = i
+				break
+			end
+		end
+		if index == -1 then return false
+		var mmodule = mmodules[index]
+		mmodules.remove_at(index)
+		for classdef in mmodule.mclassdefs do
+			var mclass = classdef.mclass
+			for i in [0 .. mclass.mclassdefs.length[ do
+				if mclass.mclassdefs[i] == classdef then
+					index = i
+					break
+				end
+			end
+			mclass.mclassdefs.remove_at(index)
+			var propdefs = classdef.mpropdefs
+			for propdef in propdefs do
+				var prop = propdef.mproperty
+				for i in [0..prop.mpropdefs.length[ do
+					if prop.mpropdefs[i] == propdef then
+						index = i
+						break
+					end
+				end
+				prop.mpropdefs.remove_at(index)
+			end
+		end
+		return true
+	end
+end
+
+redef class ScopeVisitor
+
+	redef init(toolcontext)
+	do
+		super
+		if toolcontext.dbg != null then
+			var localvars = toolcontext.dbg.frame.map
+			for i in localvars.keys do
+				scopes.first.variables[i.to_s] = i
+			end
+		end
+	end
+
+end
+
+redef class LocalVarInitVisitor
+	redef fun mark_is_unset(node: AExpr, variable: nullable Variable)
+	do
+		super
+		if toolcontext.dbg != null then
+			var varname = variable.to_s
+			var instmap = toolcontext.dbg.frame.map
+			for i in instmap.keys do
+				if i.to_s == varname then
+					mark_is_set(node, variable)
+				end
+			end
+		end
+	end
+
+end
 
 redef class ToolContext
+	private var dbg: nullable Debugger = null
+
+	private var had_error: Bool = false
+
+	redef fun check_errors
+	do
+		if dbg == null then
+			super
+		else
+			if messages.length > 0 then
+				message_sorter.sort(messages)
+
+				for m in messages do
+					if "Warning".search_in(m.text, 0) == null then had_error = true
+					stderr.write("{m.to_color_string}\n")
+				end
+			end
+
+			messages.clear
+		end
+	end
+
 	# -d
 	var opt_debugger_mode: OptionBool = new OptionBool("Launches the target program with the debugger attached to it", "-d")
 	# -c
@@ -144,22 +241,129 @@ class Debugger
 		frame.current_node = old
 	end
 
+	# Does the same as an usual send, except it will modify the call chain on the first call when injecting code at Runtime using the debugger.
+	# Instead of creating a pristine Frame, it will copy the actual values of the frame, and re-inject them after execution in the current context.
+	fun rt_send(mproperty: MMethod, args: Array[Instance]): nullable Instance
+	do
+		var recv = args.first
+		var mtype = recv.mtype
+		var ret = send_commons(mproperty, args, mtype)
+		if ret != null then return ret
+		var propdef = mproperty.lookup_first_definition(self.mainmodule, mtype)
+		return self.rt_call(propdef, args)
+	end
+
+	# Same as a regular call but for a runtime injected module
+	#
+	fun rt_call(mpropdef: MMethodDef, args: Array[Instance]): nullable Instance
+	do
+		args = call_commons(mpropdef, args)
+		return rt_call_without_varargs(mpropdef, args)
+	end
+
+	# Common code to call and this function
+	#
+	# Call only executes the variadic part, this avoids
+	# double encapsulation of variadic parameters into an Array
+	fun rt_call_without_varargs(mpropdef: MMethodDef, args: Array[Instance]): nullable Instance
+	do
+		if self.modelbuilder.toolcontext.opt_discover_call_trace.value and not self.discover_call_trace.has(mpropdef) then
+			self.discover_call_trace.add mpropdef
+			self.debug("Discovered {mpropdef}")
+		end
+		if args.length < mpropdef.msignature.arity + 1 or args.length > mpropdef.msignature.arity + 1 then
+			fatal("NOT YET IMPLEMENTED: Invalid arity for {mpropdef}. {args.length} arguments given.")
+		end
+		if args.length < mpropdef.msignature.arity + 1 then
+			fatal("NOT YET IMPLEMENTED: default closures")
+		end
+
+		# Look for the AST node that implements the property
+		var mproperty = mpropdef.mproperty
+		if self.modelbuilder.mpropdef2npropdef.has_key(mpropdef) then
+			var npropdef = self.modelbuilder.mpropdef2npropdef[mpropdef]
+			self.parameter_check(npropdef, mpropdef, args)
+			if npropdef isa AConcreteMethPropdef then
+				return npropdef.rt_call(self, mpropdef, args)
+			else
+				print "Error, invalid propdef to call at runtime !"
+				return null
+			end
+		else if mproperty.name == "init" then
+			var nclassdef = self.modelbuilder.mclassdef2nclassdef[mpropdef.mclassdef]
+			self.parameter_check(nclassdef, mpropdef, args)
+			return nclassdef.call(self, mpropdef, args)
+		else
+			fatal("Fatal Error: method {mpropdef} not found in the AST")
+			abort
+		end
+	end
+
+	# Evaluates dynamically a snippet of Nit code
+	# `nit_code` : Nit code to be executed
+	fun eval(nit_code: String)
+	do
+		var local_toolctx = modelbuilder.toolcontext
+		local_toolctx.dbg = self
+		var e = local_toolctx.parse_something(nit_code)
+		if e isa AExpr then
+			nit_code = "print " + nit_code
+			e = local_toolctx.parse_something(nit_code)
+		end
+		if e isa AModule then
+			local_toolctx.had_error = false
+			modelbuilder.load_rt_module(self.mainmodule, e, "rt_module")
+			local_toolctx.run_phases([e])
+			if local_toolctx.had_error then
+				modelbuilder.model.try_remove_module(e.mmodule.as(not null))
+				local_toolctx.dbg = null
+				return
+			end
+			var mmod = e.mmodule
+			if mmod != null then
+				self.mainmodule = mmod
+				var local_classdefs = mmod.mclassdefs
+				var sys_type = mmod.sys_type
+				if sys_type == null then
+					print "Fatal error, cannot find Class Sys !\nAborting"
+					abort
+				end
+				var mobj = new MutableInstance(sys_type)
+				init_instance(mobj)
+				var initprop = mmod.try_get_primitive_method("init", sys_type.mclass)
+				if initprop != null then
+					self.send(initprop, [mobj])
+				end
+				self.check_init_instance(mobj)
+				var mainprop = mmod.try_get_primitive_method("main", sys_type.mclass)
+				if mainprop != null then
+					self.rt_send(mainprop, [mobj])
+				end
+			else
+				print "Error while loading_rt_module"
+			end
+		else
+			print "Error when parsing, e = {e.class_name}"
+		end
+		local_toolctx.dbg = null
+	end
+
 	# Encpasulates the behaviour for step over/out
 	private fun steps_fun_call(n: AExpr)
 	do
 		if self.stop_after_step_over_trigger then
 			if self.frames.length <= self.step_stack_count then
 				n.debug("Execute stmt {n.to_s}")
-				while process_debug_command(gets) do end
+				while read_cmd do end
 			end
 		else if self.stop_after_step_out_trigger then
 			if frames.length < self.step_stack_count then
 				n.debug("Execute stmt {n.to_s}")
-				while process_debug_command(gets) do end
+				while read_cmd do end
 			end
 		else if step_in_trigger then
 			n.debug("Execute stmt {n.to_s}")
-			while process_debug_command(gets) do end
+			while read_cmd do end
 		end
 	end
 
@@ -182,7 +386,7 @@ class Debugger
 			end
 
 			n.debug("Execute stmt {n.to_s}")
-			while process_debug_command(gets) do end
+			while read_cmd do end
 		end
 	end
 
@@ -197,7 +401,7 @@ class Debugger
 			for j in self.traces do
 				if j.is_variable_traced_in_frame(i, frame) then
 					n.debug("Traced variable {i} used")
-					if j.break_on_encounter then while process_debug_command(gets) do end
+					if j.break_on_encounter then while read_cmd do end
 					break
 				end
 			end
@@ -249,20 +453,20 @@ class Debugger
 	##                   Processing commands functions                   ##
 	#######################################################################
 
+	fun read_cmd: Bool
+	do
+		printn "> "
+		return process_debug_command(gets)
+	end
+
 	# Takes a user command as a parameter
 	#
 	# Returns a boolean value, representing whether or not to
 	# continue reading commands from the console input
 	fun process_debug_command(command:String): Bool
 	do
-		# For lisibility
-		print "\n"
-
-		# Kills the current program
-		if command == "kill" then
-			abort
 		# Step-out command
-		else if command == "finish"
+		if command == "finish"
 		then
 			return step_out
 		# Step-in command
@@ -272,9 +476,30 @@ class Debugger
 		# Step-over command
 		else if command == "n" then
 			return step_over
+		# Opens a new NitIndex prompt on current model
+		else if command == "nitx" then
+			new NitIndex.with_infos(modelbuilder, self.mainmodule).prompt
+			return true
 		# Continues execution until the end
 		else if command == "c" then
 			return continue_exec
+		else if command == "nit" then
+			printn "$~> "
+			command = gets
+			var nit_buf = new FlatBuffer
+			while not command == ":q" do
+				nit_buf.append(command)
+				nit_buf.append("\n")
+				printn "$~> "
+				command = gets
+			end
+			step_in
+			eval(nit_buf.to_s)
+		else if command == "quit" then
+			exit(0)
+		else if command == "abort" then
+			print stack_trace
+			exit(0)
 		else
 			var parts_of_command = command.split_with(' ')
 			# Shows the value of a variable in the current frame
@@ -304,9 +529,8 @@ class Debugger
 			# Untraces the modifications on a variable
 			else if parts_of_command.length == 2 and parts_of_command[0] == "untrace" then
 				process_untrace_command(parts_of_command)
-			# Lists all the commands available
 			else
-				list_commands
+				print "Unknown command \"{command}\""
 			end
 		end
 		return true
@@ -393,8 +617,6 @@ class Debugger
 		var bp = get_breakpoint_from_command(parts_of_command)
 		if bp != null then
 			place_breakpoint(bp)
-		else
-			list_commands
 		end
 	end
 
@@ -417,8 +639,6 @@ class Debugger
 			remove_breakpoint(self.curr_file, parts_of_command[1].to_i)
 		else if parts_of_command.length >= 3 and parts_of_command[2].is_numeric then
 			remove_breakpoint(parts_of_command[1], parts_of_command[2].to_i)
-		else
-			list_commands
 		end
 	end
 
@@ -1004,8 +1224,6 @@ class Debugger
 		then
 			bp.set_max_breaks(1)
 			place_breakpoint(bp)
-		else
-			list_commands
 		end
 	end
 
@@ -1146,35 +1364,35 @@ class Debugger
 		end
 	end
 
-	#######################################################################
-	##                     Command listing function                      ##
-	#######################################################################
+end
 
-	# Lists the commands available when using the debugger
-	fun list_commands
+redef class AConcreteMethPropdef
+
+	# Same as call except it will copy local variables of the parent frame to the frame defined in this call.
+	# Not supposed to be used by anyone else than the Debugger.
+	private fun rt_call(v: Debugger, mpropdef: MMethodDef, args: Array[Instance]): nullable Instance
 	do
-		print "\nCommand not recognized\n"
-		print "Commands accepted : \n"
-		print "[break/b] line : Adds a breakpoint on line *line_nb* of the current file\n"
-		print "[break/b] file_name line_nb : Adds a breakpoint on line *line_nb* of file *file_name* \n"
-		print "[p/print] variable : [p/print] * shows the status of all the variables\n"
-		print "[p/print] variable[i] : Prints the value of the variable contained at position *i* in SequenceRead collection *variable*\n"
-		print "[p/print] variable[i..j]: Prints the value of all the variables contained between positions *i* and *j* in SequenceRead collection *variable*\n"
-		print "[p/print] stack: Prints a stack trace at current instruction\n"
-		print "Note : The arrays can be multi-dimensional (Ex : variable[i..j][k] will print all the values at position *k* of all the SequenceRead collections contained between positions *i* and *j* in SequenceRead collection *variable*)\n"
-		print "s : steps in on the current function\n"
-		print "n : steps-over the current instruction\n"
-		print "finish : steps out of the current function\n"
-		print "variable as alias : Adds an alias called *alias* for the variable *variable*"
-		print "An alias can reference another alias\n"
-		print "variable = value : Sets the value of *variable* to *value*\n"
-		print "[d/delete] line_nb : Removes a breakpoint on line *line_nb* of the current file \n"
-		print "[d/delete] file_name line_nb : Removes a breakpoint on line *line_nb* of file *file_name* \n"
-		print "trace variable_name [break/print] : Traces the uses of the variable you chose to trace by printing the statement it appears in or by breaking on each use."
-		print "untrace variable_name : Removes the trace on the variable you chose to trace earlier in the program"
-		print "kill : kills the current program (Exits with an error and stack trace)\n"
-	end
+		var f = new Frame(self, self.mpropdef.as(not null), args)
+		var curr_instances = v.frame.map
+		for i in curr_instances.keys do
+			f.map[i] = curr_instances[i]
+		end
+		call_commons(v,mpropdef,args,f)
+		var currFra = v.frames.shift
+		for i in curr_instances.keys do
+			if currFra.map.keys.has(i) then
+				curr_instances[i] = currFra.map[i]
+			end
+		end
+		if v.returnmark == f then
+			v.returnmark = null
+			var res = v.escapevalue
+			v.escapevalue = null
+			return res
+		end
+		return null
 
+	end
 end
 
 # Traces the modifications of an object linked to a certain frame

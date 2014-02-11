@@ -21,8 +21,6 @@ import parser
 import toolcontext
 import phase
 
-import modelbuilder #FIXME useless
-
 redef class ToolContext
 	var scope_phase: Phase = new ScopePhase(self, null)
 end
@@ -42,18 +40,13 @@ class Variable
 	redef fun to_s do return self.name
 end
 
-# A local variable associated to a closure definition
-class ClosureVariable
-	super Variable
-end
-
 # Mark where break and continue will branch.
 # Marks are either associated with a label of with a for_loop structure
 class EscapeMark
 	# The name of the label (unless the mark is an anonymous loop mark)
 	var name: nullable String
 
-	# Is the mark atached to a loop (loop, while, for, closure)
+	# Is the mark atached to a loop (loop, while, for)
 	# Such a mark is a candidate to a labelless 'continue' or 'break'
 	var for_loop: Bool
 
@@ -65,10 +58,9 @@ class EscapeMark
 end
 
 # Visit a npropdef and:
-#  * Identify variables, closures and labels
+#  * Identify variables and labels
 #  * Associate each break and continue to its escapemark
 #  * Transform `ACallFormExpr` that access a variable into `AVarFormExpr`
-#  * Transform `ACallFormExpr` that call a closure into `AClosureCallExpr`
 # FIXME: Should the class be private?
 private class ScopeVisitor
 	super Visitor
@@ -148,7 +140,6 @@ private class ScopeVisitor
 	# Display an error on toolcontext if a label with the same name is masked.
 	private fun make_escape_mark(nlabel: nullable ALabel, for_loop: Bool): EscapeMark
 	do
-		assert named_or_for_loop: nlabel != null or for_loop
 		var name: nullable String
 		if nlabel != null then
 			name = nlabel.n_id.text
@@ -181,7 +172,7 @@ private class ScopeVisitor
 		else
 			for scope in scopes do
 				var res = scope.escapemark
-				if res != null and res.for_loop then
+				if res != null then
 					return res
 				end
 			end
@@ -236,18 +227,6 @@ redef class AParam
 		super
 		var nid = self.n_id
 		var variable = new Variable(nid.text)
-		v.register_variable(nid, variable)
-		self.variable = variable
-	end
-end
-
-redef class AClosureDecl
-	# The variable associated with the closure declaration
-	var variable: nullable ClosureVariable
-	redef fun accept_scope_visitor(v)
-	do
-		var nid = self.n_id
-		var variable = new ClosureVariable(nid.text)
 		v.register_variable(nid, variable)
 		self.variable = variable
 	end
@@ -311,9 +290,7 @@ redef class ADoExpr
 	var escapemark: nullable EscapeMark
 	redef fun accept_scope_visitor(v)
 	do
-		if n_label != null then
-			self.escapemark = v.make_escape_mark(n_label, false)
-		end
+		self.escapemark = v.make_escape_mark(n_label, false)
 		v.enter_visit_block(n_block, self.escapemark)
 	end
 end
@@ -394,17 +371,12 @@ redef class ACallFormExpr
 			var variable = v.search_variable(name)
 			if variable != null then
 				var n: AExpr
-				if variable isa ClosureVariable then
-					n = new AClosureCallExpr.init_aclosurecallexpr(n_id, n_args, n_closure_defs)
-					n.variable = variable
-				else
-					if not n_args.n_exprs.is_empty or n_args isa AParExprs then
-						v.error(self, "Error: {name} is variable, not a function.")
-						return
-					end
-					n = variable_create(variable)
-					n.variable = variable
+				if not n_args.n_exprs.is_empty or n_args isa AParExprs then
+					v.error(self, "Error: {name} is variable, not a function.")
+					return
 				end
+				n = variable_create(variable)
+				n.variable = variable
 				replace_with(n)
 				n.accept_scope_visitor(v)
 				return
@@ -436,51 +408,5 @@ redef class ACallReassignExpr
 	redef fun variable_create(variable)
 	do
 		return new AVarReassignExpr.init_avarreassignexpr(n_id, n_assign_op, n_value)
-	end
-end
-
-redef class AClosureCallExpr
-	# the associate closure variable
-	var variable: nullable ClosureVariable
-end
-
-redef class ASendExpr
-	# The escape mark used with the closures if any
-	var escapemark: nullable EscapeMark
-
-	redef fun accept_scope_visitor(v)
-	do
-		if self.n_closure_defs.length > 0 then
-			var escapemark = v.make_escape_mark(self.n_closure_defs.last.n_label, true)
-			self.escapemark = escapemark
-		end
-		super
-	end
-end
-
-redef class AClosureDef
-	# The automatic variables in order
-	var variables: nullable Array[Variable]
-
-	# The escape mark used with the closure
-	var escapemark: nullable EscapeMark
-
-	redef fun accept_scope_visitor(v)
-	do
-		v.scopes.unshift(new Scope)
-
-		var variables = new Array[Variable]
-		self.variables = variables
-
-		for nid in self.n_ids do
-			var va = new Variable(nid.text)
-			v.register_variable(nid, va)
-			variables.add(va)
-		end
-
-		self.escapemark = self.parent.as(ASendExpr).escapemark
-		v.enter_visit_block(self.n_expr, escapemark)
-
-		v.scopes.shift
 	end
 end

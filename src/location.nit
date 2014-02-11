@@ -50,18 +50,18 @@ class Location
 	super Comparable
 	redef type OTHER: Location
 
-	readable var _file: nullable SourceFile
-	readable var _line_start: Int
-	readable var _line_end: Int
-	readable var _column_start: Int
-	readable var _column_end: Int
+	var file: nullable SourceFile
+	var line_start: Int
+	var line_end: Int
+	var column_start: Int
+	var column_end: Int
 
 	init(f: nullable SourceFile, line_s: Int, line_e: Int, column_s: Int, column_e: Int) do
-		_file = f
-		_line_start = line_s
-		_line_end = line_e
-		_column_start = column_s
-		_column_end = column_e
+		file = f
+		line_start = line_s
+		line_end = line_e
+		column_start = column_s
+		column_end = column_e
 	end
 
 	# The index in the start character in the source

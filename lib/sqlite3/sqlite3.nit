@@ -18,7 +18,7 @@
 module sqlite3
 
 in "C header" `{
-	#include "sqlite3.h"
+	#include <sqlite3.h>
 `}
 
 extern class Sqlite3Code `{int`}

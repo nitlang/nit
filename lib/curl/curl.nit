@@ -429,15 +429,7 @@ class HeaderMap
 		return res
 	end
 
-	fun iterate !each(k, v: String)
-	do
-		var i = arr.iterator
-		while i.is_ok do
-			var item = i.item
-			each(item.first, item.second)
-			i.next
-		end
-	end
+	fun iterator: MapIterator[String, String] do return new HeaderMapIterator(self)
 
 	# Convert Self to a single string used to post http fields
 	fun to_url_encoded(curl: CCurl): String
@@ -470,4 +462,16 @@ class HeaderMap
 
 	fun length: Int do return arr.length
 	fun is_empty: Bool do return arr.is_empty
+end
+
+class HeaderMapIterator
+	super MapIterator[String, String]
+
+	private var iterator: Iterator[Couple[String, String]]
+	init(map: HeaderMap) do self.iterator = map.arr.iterator
+
+	redef fun is_ok do return self.iterator.is_ok
+	redef fun next do self.iterator.next
+	redef fun item do return self.iterator.item.second
+	redef fun key do return self.iterator.item.first
 end

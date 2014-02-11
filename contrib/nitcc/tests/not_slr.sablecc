@@ -1,0 +1,7 @@
+Grammar not_slr;
+
+Parser
+
+s = g '=' d | d ;
+g = '*' d | 'id' ;
+d = g ;

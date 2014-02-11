@@ -18,7 +18,7 @@ NITCOPT=
 
 all: tools doc/stdlib/index.html
 
-docs: doc/stdlib/index.html doc/nitc/index.html doc/newmodel/index.html
+docs: doc/stdlib/index.html doc/nitc/index.html
 	#cd doc; make
 
 tools:
@@ -31,30 +31,31 @@ doc/stdlib/index.html: bin/nitdoc
 	@echo '***************************************************************'
 	@echo '* Generate doc for NIT standard library                       *'
 	@echo '***************************************************************'
-	bin/nitdoc lib/*.nit $$(find lib/* -maxdepth 0 -type d ) -d doc/stdlib \
+	bin/nitdoc lib/*.nit $$(find lib/*/*.nit -maxdepth 0 -type f ) -d doc/stdlib \
 		--custom-title "Nit Standard Library" \
 		--custom-menu-items "<li><a href=\"http://nitlanguage.org/\">Nitlanguage.org</a></li>" \
 		--custom-overview-text "<p>Documentation for the standard library of Nit<br/>Version $$(git describe)<br/>Date: $$(git show --format="%cd" | head -1)</p>" \
 		--custom-footer-text "Nit standard library. Version $$(git describe)." \
-		--github nit \
-		--source "https://github.com/privat/nit/blob/$$(git show --format="%H" | head -1)/%f#L%l-%L"
+		--github-upstream "privat:nit:master" \
+		--github-base-sha1 "$$(git rev-parse HEAD)" \
+		--github-gitdir "." \
+		--source "https://github.com/privat/nit/blob/$$(git rev-parse HEAD)/%f#L%l-%L" \
+		--piwik-tracker "pratchett.info.uqam.ca/piwik/" \
+		--piwik-site-id "2"
 
 doc/nitc/index.html: bin/nitdoc
-	bin/nitdoc src/nitc.nit src/nitdoc.nit src/nits.nit -d doc/nitc \
-		--custom-title "Nit Compiler and Tools" \
+	bin/nitdoc src/nit.nit src/nitmetrics.nit src/nitg.nit src/nitx.nit src/nitunit.nit src/nitlight.nit src/dbgcli.nit src/netdbg.nit -d doc/nitc \
+		--private \
+		--custom-title "Nit Compilers and Tools" \
 		--custom-menu-items "<li><a href=\"http://nitlanguage.org/\">Nitlanguage.org</a></li>" \
-		--custom-overview-text "<p>Documentation for the Nit compiler and tools<br/>Version $$(git describe)<br/>Date: $$(git show --format="%cd" | head -1)</p>" \
-		--custom-footer-text "Nit compiler. Version $$(git describe)." \
-		--github nit \
-		--source "https://github.com/privat/nit/blob/$$(git show --format="%H" | head -1)/%f#L%l-%L"
-
-doc/newmodel/index.html: bin/nitdoc
-	bin/nitdox src/nit.nit src/nitmetrics.nit src/nitg.nit src/nitx.nit src/nitunit.nit src/nitlight.nit src/ni_nitdoc.nit src/dbgcli.nit src/netdbg.nit -d doc/newmodel \
-		--custom-title "Nit New Model" \
-		--custom-menu-items "<li><a href=\"http://nitlanguage.org/\">Nitlanguage.org</a></li>" \
-		--custom-overview-text "<p>Documentation for the Nit tools based on the new metamodel<br/>Version $$(git describe)<br/>Date: $$(git show --format="%cd" | head -1)</p>" \
-		--custom-footer-text "Nit new metamodel. Version $$(git describe)." \
-		--source "https://github.com/privat/nit/blob/$$(git show --format="%H" | head -1)/%f#L%l-%L"
+		--custom-overview-text "<p>Documentation for the Nit tools<br/>Version $$(git describe)<br/>Date: $$(git show --format="%cd" | head -1)</p>" \
+		--custom-footer-text "Nit tools. Version $$(git describe)." \
+		--github-upstream "privat:nit:master" \
+		--github-base-sha1 "$$(git rev-parse HEAD)" \
+		--github-gitdir "." \
+		--source "https://github.com/privat/nit/blob/$$(git rev-parse HEAD)/%f#L%l-%L" \
+		--piwik-tracker "pratchett.info.uqam.ca/piwik/" \
+		--piwik-site-id "3"
 
 clean:
 	rm -rf -- .nit_compile 2> /dev/null || true
@@ -64,7 +65,7 @@ clean:
 	cd tests; make clean
 
 distclean: clean
-	rm -rf -- bin/nitc bin/nitdoc bin/nits doc/stdlib doc/nitc/ 2> /dev/null || true
+	rm -rf -- bin/nitdoc bin/nits doc/stdlib 2> /dev/null || true
 	cd c_src; make distclean
 	cd src/parser; make distclean
 	cd doc; make distclean

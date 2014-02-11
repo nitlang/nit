@@ -1,0 +1,10 @@
+Grammar empty;
+Parser
+ps = ps p | p;
+p = 'q' q 'r' r 's' s 't' t 'u' u 'v' v ;
+q = Empty;
+r = ;
+s = '1' | Empty;
+t = '1' | ;
+u = '1' | '2' | Empty;
+v = '1' | '2' | ;

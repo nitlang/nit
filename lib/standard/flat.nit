@@ -26,27 +26,6 @@ intrude import text
 
 redef class Text
 	fun flatten: FlatText is abstract
-end
-
-redef class String
-
-	redef fun to_s do return self
-
-	redef fun to_cstring
-	do
-		if self isa FlatString then
-			if _index_from > 0 or _index_to != _items.cstring_length - 1 then
-				var newItems = calloc_string(_length + 1)
-				self.items.copy_to(newItems, _length, _index_from, 0)
-				newItems[length] = '\0'
-				self._real_items = newItems
-				return _real_items.as(not null)
-			end
-			return _items
-		end
-		# Should never happen
-		return super
-	end
 
 	# Mangles a string to be a unique string only made of alphanumeric characters
 	fun to_cmangle: String
@@ -104,6 +83,112 @@ redef class String
 			end
 		end
 		return b.to_s
+	end
+
+	# Escape to c plus braces
+	#
+	#     assert "\n\"'\\\{\}".escape_to_nit == "\\n\\\"\\'\\\\\\\{\\\}"
+	fun escape_to_nit: String
+	do
+		var b = new FlatBuffer
+		for c in self.chars do
+			if c == '\n' then
+				b.append("\\n")
+			else if c == '\0' then
+				b.append("\\0")
+			else if c == '"' then
+				b.append("\\\"")
+			else if c == '\'' then
+				b.append("\\\'")
+			else if c == '\\' then
+				b.append("\\\\")
+			else if c == '\{' then
+				b.append("\\\{")
+			else if c == '\}' then
+				b.append("\\\}")
+			else if c.ascii < 32 then
+				b.append("\\{c.ascii.to_base(8, false)}")
+			else
+				b.add(c)
+			end
+		end
+		return b.to_s
+	end
+
+	# Escape additional characters.
+	#
+	# The result might not be legal in C, but can be used for other languages (e.g. dot)
+	#
+	#     assert "ab|\{\}".escape_more_to_c("|\{\}") == "ab\\|\\\{\\\}"
+	fun escape_more_to_c(chars: String): String
+	do
+		var b = new FlatBuffer
+		for c in escape_to_c.chars do
+			if chars.chars.has(c) then
+				b.add('\\')
+			end
+			b.add(c)
+		end
+		return b.to_s
+	end
+
+	# Return a string where Nit escape sequences are transformed.
+	#
+	# Example:
+	#     var s = "\\n"
+	#     assert s.length        ==  2
+	#     var u = s.unescape_nit
+	#     assert u.length        ==  1
+	#     assert u.chars[0].ascii      ==  10 # (the ASCII value of the "new line" character)
+	fun unescape_nit: String
+	do
+		var res = new FlatBuffer.with_capacity(self.length)
+		var was_slash = false
+		for c in self.chars do
+			if not was_slash then
+				if c == '\\' then
+					was_slash = true
+				else
+					res.add(c)
+				end
+				continue
+			end
+			was_slash = false
+			if c == 'n' then
+				res.add('\n')
+			else if c == 'r' then
+				res.add('\r')
+			else if c == 't' then
+				res.add('\t')
+			else if c == '0' then
+				res.add('\0')
+			else
+				res.add(c)
+			end
+		end
+		return res.to_s
+	end
+
+end
+
+redef class String
+
+	redef fun to_s do return self
+
+	redef fun to_cstring
+	do
+		if self isa FlatString then
+			if _index_from > 0 or _index_to != _items.cstring_length - 1 then
+				var newItems = calloc_string(_length + 1)
+				self.items.copy_to(newItems, _length, _index_from, 0)
+				newItems[length] = '\0'
+				self._real_items = newItems
+				return _real_items.as(not null)
+			end
+			return _items
+		end
+		# Should never happen
+		return super
 	end
 
 end

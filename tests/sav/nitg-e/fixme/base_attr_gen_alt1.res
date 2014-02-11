@@ -1,1 +1,1 @@
-Runtime error: Cast failed (alt/base_attr_gen_alt1.nit:8)
+Runtime error: Cast failed (alt/base_attr_gen_alt1.nit:26)

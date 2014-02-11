@@ -501,12 +501,6 @@ redef class AConcreteMethPropdef
 			assert variable != null
 			variable.declared_type = mtype
 		end
-		for i in [0..mmethoddef.msignature.mclosures.length[ do
-			var mclosure = mmethoddef.msignature.mclosures[i]
-			var variable = self.n_signature.n_closure_decls[i].variable
-			assert variable != null
-			variable.declared_type = mclosure.mtype
-		end
 		v.visit_stmt(nblock)
 
 		if not nblock.after_flow_context.is_unreachable and mmethoddef.msignature.return_mtype != null then
@@ -830,16 +824,44 @@ redef class AForExpr
 
 	private fun do_type_iterator(v: TypeVisitor, mtype: MType)
 	do
+		# get obj class
 		var objcla = v.get_mclass(self, "Object")
 		if objcla == null then return
 
+		# check iterator method
+		var unsafe_type = v.anchor_to(mtype)
+		if v.try_get_mproperty_by_name2(self, unsafe_type, "iterator") == null then
+			if v.try_get_mproperty_by_name2(self, unsafe_type, "iterate") == null then
+				v.error(self, "Type Error: Expected method 'iterator' in type {mtype}")
+			else
+				v.modelbuilder.error(self, "NOT YET IMPLEMENTED: Do 'for' on {mtype}")
+			end
+			return
+		end
+
+		var itdef = v.get_method(self, mtype, "iterator", true)
+		if itdef == null then
+			v.error(self, "Type Error: Expected method 'iterator' in type {mtype}")
+			return
+		end
+		self.method_iterator = itdef.mproperty
+
+		# check that iterator return something
+		var ittype = itdef.msignature.return_mtype
+		if ittype == null then
+			v.error(self, "Type Error: Expected method 'iterator' to return an Iterator or MapIterator type")
+			return
+		end
+
+		# get iterator type
+		var colit_cla = v.try_get_mclass(self, "Iterator")
+		var mapit_cla = v.try_get_mclass(self, "MapIterator")
 		var is_col = false
 		var is_map = false
 
-		var colcla = v.try_get_mclass(self, "Collection")
-		if colcla != null and v.is_subtype(mtype, colcla.get_mtype([objcla.mclass_type.as_nullable])) then
-			var coltype = mtype.supertype_to(v.mmodule, v.anchor, colcla)
-			self.coltype = coltype
+		if colit_cla != null and v.is_subtype(ittype, colit_cla.get_mtype([objcla.mclass_type.as_nullable])) then
+			# Iterator
+			var coltype = ittype.supertype_to(v.mmodule, v.anchor, colit_cla)
 			var variables =  self.variables
 			if variables.length != 1 then
 				v.error(self, "Type Error: Expected one variable")
@@ -849,10 +871,9 @@ redef class AForExpr
 			is_col = true
 		end
 
-		var mapcla = v.try_get_mclass(self, "Map")
-		if mapcla != null and v.is_subtype(mtype, mapcla.get_mtype([objcla.mclass_type.as_nullable, objcla.mclass_type.as_nullable])) then
-			var coltype = mtype.supertype_to(v.mmodule, v.anchor, mapcla)
-			self.coltype = coltype
+		if mapit_cla != null and v.is_subtype(ittype, mapit_cla.get_mtype([objcla.mclass_type, objcla.mclass_type.as_nullable])) then
+			# Map Iterator
+			var coltype = ittype.supertype_to(v.mmodule, v.anchor, mapit_cla)
 			var variables = self.variables
 			if variables.length != 2 then
 				v.error(self, "Type Error: Expected two variables")
@@ -863,57 +884,46 @@ redef class AForExpr
 			is_map = true
 		end
 
-		if is_col or is_map then
-			# get iterator method
-			var coltype = self.coltype.as(not null)
-			var itdef = v.get_method(self, coltype, "iterator", true)
-			if itdef == null then
-				v.error(self, "Type Error: Expected method 'iterator' in type {coltype}")
-				return
-			end
-			self.method_iterator = itdef.mproperty
-
-			# get iterator type
-			var ittype = itdef.msignature.return_mtype
-			if ittype == null then
-				v.error(self, "Type Error: Expected method 'iterator' to return an Iterator type")
-				return
-			end
-
-			# get methods is_ok, next, item
-			var ikdef = v.get_method(self, ittype, "is_ok", false)
-			if ikdef == null then
-				v.error(self, "Type Error: Expected method 'is_ok' in Iterator type {ittype}")
-				return
-			end
-			self.method_is_ok = ikdef.mproperty
-
-			var itemdef = v.get_method(self, ittype, "item", false)
-			if itemdef == null then
-				v.error(self, "Type Error: Expected method 'item' in Iterator type {ittype}")
-				return
-			end
-			self.method_item = itemdef.mproperty
-
-			var nextdef = v.get_method(self, ittype, "next", false)
-			if nextdef == null then
-				v.error(self, "Type Error: Expected method 'next' in Iterator type {ittype}")
-				return
-			end
-			self.method_next = nextdef.mproperty
-
-			if is_map then
-				var keydef = v.get_method(self, ittype, "key", false)
-				if keydef == null then
-					v.error(self, "Type Error: Expected method 'key' in Iterator type {ittype}")
-					return
-				end
-				self.method_key = keydef.mproperty
-			end
+		if not is_col and not is_map then
+			v.error(self, "Type Error: Expected method 'iterator' to return an Iterator of MapIterator type")
 			return
 		end
 
-		v.modelbuilder.error(self, "NOT YET IMPLEMENTED: Do 'for' on {mtype}")
+		# anchor formal and virtual types
+		if mtype.need_anchor then mtype = v.anchor_to(mtype)
+
+		self.coltype = mtype.as(MClassType)
+
+		# get methods is_ok, next, item
+		var ikdef = v.get_method(self, ittype, "is_ok", false)
+		if ikdef == null then
+			v.error(self, "Type Error: Expected method 'is_ok' in Iterator type {ittype}")
+			return
+		end
+		self.method_is_ok = ikdef.mproperty
+
+		var itemdef = v.get_method(self, ittype, "item", false)
+		if itemdef == null then
+			v.error(self, "Type Error: Expected method 'item' in Iterator type {ittype}")
+			return
+		end
+		self.method_item = itemdef.mproperty
+
+		var nextdef = v.get_method(self, ittype, "next", false)
+		if nextdef == null then
+			v.error(self, "Type Error: Expected method 'next' in Iterator type {ittype}")
+			return
+		end
+		self.method_next = nextdef.mproperty
+
+		if is_map then
+			var keydef = v.get_method(self, ittype, "key", false)
+			if keydef == null then
+				v.error(self, "Type Error: Expected method 'key' in Iterator type {ittype}")
+				return
+			end
+			self.method_key = keydef.mproperty
+		end
 	end
 
 	redef fun accept_typing(v)
@@ -990,18 +1000,13 @@ redef class AOrElseExpr
 
 		var t = v.merge_types(self, [t1, t2])
 		if t == null then
-			v.error(self, "Type Error: ambiguous type {t1} vs {t2}")
+			t = v.mmodule.object_type
+			if t2 isa MNullableType then
+				t = t.as_nullable
+			end
+			#v.error(self, "Type Error: ambiguous type {t1} vs {t2}")
 		end
 		self.mtype = t
-	end
-end
-
-redef class AEeExpr
-	redef fun accept_typing(v)
-	do
-		v.visit_expr(n_expr)
-		v.visit_expr(n_expr2)
-		self.mtype = v.type_bool(self)
 	end
 end
 
@@ -1222,14 +1227,6 @@ redef class ASendExpr
 			self.mtype = ret
 		else
 			self.is_typed = true
-		end
-
-		if self.n_closure_defs.length == msignature.mclosures.length then
-			for i in [0..self.n_closure_defs.length[ do
-				self.n_closure_defs[i].accept_typing(v, msignature.mclosures[i])
-			end
-		else
-			debug("closure: got {self.n_closure_defs.length}, want {msignature.mclosures.length}")
 		end
 	end
 
@@ -1529,6 +1526,14 @@ redef class ANewExpr
 				v.error(self, "Type error: cannot instantiate the formal type {recvtype}.")
 				return
 			end
+		else
+			if recvtype.mclass.kind == abstract_kind then
+				v.error(self, "Cannot instantiate abstract class {recvtype}.")
+				return
+			else if recvtype.mclass.kind == interface_kind then
+				v.error(self, "Cannot instantiate interface {recvtype}.")
+				return
+			end
 		end
 
 		var name: String
@@ -1637,50 +1642,6 @@ redef class AIssetAttrExpr
 			v.error(self, "Error: isset on a nullable attribute.")
 		end
 		self.mtype = v.type_bool(self)
-	end
-end
-
-###
-
-redef class AClosureCallExpr
-	redef fun accept_typing(v)
-	do
-		var variable = self.variable
-		if variable == null then return # Skip error
-
-		var recvtype = v.nclassdef.mclassdef.bound_mtype
-		var msignature = variable.declared_type.as(not null)
-		msignature = v.resolve_for(msignature, recvtype, false).as(MSignature)
-
-		var args = n_args.to_a
-		v.check_signature(self, args, variable.name, msignature)
-
-		self.is_typed = true
-		self.mtype = msignature.return_mtype
-	end
-end
-
-redef class AClosureDef
-	var mclosure: nullable MParameter
-
-	private fun accept_typing(v: TypeVisitor, mparameter: MParameter)
-	do
-		var variables = self.variables
-		if variables == null then return
-
-		self.mclosure = mparameter
-		var msignature = mparameter.mtype.as(MSignature)
-
-		if msignature.arity != variables.length then
-			v.error(self, "Type error: closure {mparameter.name} expects {msignature.arity} parameters, {variables.length} given")
-			return
-		end
-
-		for i in [0..variables.length[ do
-			variables[i].declared_type = msignature.mparameters[i].mtype
-		end
-
-		v.visit_stmt(self.n_expr)
 	end
 end
 

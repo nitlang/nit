@@ -1,0 +1,8 @@
+Grammar modif;
+
+Parser
+
+p = 'a' q* 'a';
+q = 'b' r+ 'b';
+r = 'c' s? 'c';
+s = 'd';

@@ -1,0 +1,14 @@
+Start
+  p
+    Nodes[Nt]
+      t_0
+        identifier@(1:1-1:4)='z10'
+      t_1
+        hexinteger@(2:1-2:6)='00ff1'
+      t_0
+        identifier@(3:1-3:4)='fff'
+      t_1
+        hexinteger@(4:1-4:4)='00f'
+      t_0
+        identifier@(4:4-4:6)='g1'
+  Eof@(5:1-5:1)=''

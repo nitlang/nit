@@ -304,10 +304,6 @@ redef class ASignature
 			if self.ret_type == null then return false # Skip errir
 		end
 
-		for nclosure in self.n_closure_decls do
-			if not nclosure.n_signature.visit_signature(modelbuilder, nclassdef) then return false
-		end
-
 		self.is_visited = true
 		return true
 	end
@@ -482,16 +478,6 @@ redef class AMethPropdef
 		msignature = new MSignature(mparameters, ret_type)
 		mpropdef.msignature = msignature
 		mpropdef.is_abstract = self isa ADeferredMethPropdef
-
-		if nsig != null then
-			for nclosure in nsig.n_closure_decls do
-				var clos_signature = nclosure.n_signature.build_signature(modelbuilder, nclassdef)
-				if clos_signature == null then return
-				var mparameter = new MParameter(nclosure.n_id.text, clos_signature, false)
-				msignature.mclosures.add(mparameter)
-			end
-		end
-
 	end
 
 	redef fun check_signature(modelbuilder, nclassdef)
@@ -687,8 +673,8 @@ redef class AAttrPropdef
 			if mtype == null then return
 		end
 
+		var nexpr = self.n_expr
 		if mtype == null then
-			var nexpr = self.n_expr
 			if nexpr != null then
 				if nexpr isa ANewExpr then
 					mtype = modelbuilder.resolve_mtype(nclassdef, nexpr.n_type)
@@ -716,6 +702,14 @@ redef class AAttrPropdef
 
 			else
 				modelbuilder.error(self, "Error: Untyped attribute {mpropdef}")
+			end
+		else
+			assert ntype != null
+			if nexpr isa ANewExpr then
+				var xmtype = modelbuilder.resolve_mtype(nclassdef, nexpr.n_type)
+				if xmtype == mtype and modelbuilder.toolcontext.opt_warn.value >= 2 then
+					modelbuilder.warning(ntype, "Warning: useless type definition")
+				end
 			end
 		end
 
@@ -837,6 +831,10 @@ redef class ATypePropdef
 		if mprop == null then
 			var mvisibility = new_property_visibility(modelbuilder, nclassdef, self.n_visibility)
 			mprop = new MVirtualTypeProp(mclassdef, name, mvisibility)
+			for c in name.chars do if c >= 'a' and c<= 'z' then
+				modelbuilder.warning(n_id, "Warning: lowercase in the virtual type {name}")
+				break
+			end
 			if not self.check_redef_keyword(modelbuilder, nclassdef, self.n_kwredef, false, mprop) then return
 		else
 			if not self.check_redef_keyword(modelbuilder, nclassdef, self.n_kwredef, true, mprop) then return

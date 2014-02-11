@@ -48,6 +48,8 @@ extern int string_NativeString_NativeString_file_delete_0(char *f);
 #define file_FileStat_FileStat_size_0(self) (((struct stat*)self)->st_size)
 
 #define string_NativeString_NativeString_file_mkdir_0(p) (mkdir(p, 0777))
+#define string_NativeString_NativeString_file_getcwd_0(p) (getcwd(NULL, 0))
+#define string_NativeString_NativeString_file_chdir_0(p) (chdir(p)?-1:0) /* hack to avoid warn_unused_result */
 
 #define file_stdin_poll_in(self) file_stdin_poll_in_()
 int file_stdin_poll_in_(void);

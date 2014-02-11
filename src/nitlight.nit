@@ -20,10 +20,12 @@ import highlight
 var toolcontext = new ToolContext
 
 var opt_fragment = new OptionBool("Omit document header and footer", "-f", "--fragment")
+var opt_first_line = new OptionInt("Start the source file at this line (default: 1)", 0, "--first-line")
+var opt_last_line = new OptionInt("End the source file at this line (default: to the end)", 0, "--last-line")
 var opt_dir = new OptionString("Output html files in a specific directory (required if more than one module)", "-d", "--dir")
 var opt_full = new OptionBool("Process also imported modules", "--full")
 var opt_ast = new OptionBool("Generate specific HTML elements for each Node of the AST", "--ast")
-toolcontext.option_context.add_option(opt_fragment, opt_dir, opt_full)
+toolcontext.option_context.add_option(opt_fragment, opt_first_line, opt_last_line, opt_dir, opt_full)
 
 var model = new Model
 var modelbuilder = new ModelBuilder(model, toolcontext)
@@ -54,6 +56,9 @@ for mm in mmodules do
 	if dir != null then toolcontext.info("write {dir}/{mm.name}.html", 1)
 
 	var v = new HighlightVisitor
+
+	if opt_first_line.value != 0 then v.first_line = opt_first_line.value
+	if opt_last_line.value != 0 then v.last_line = opt_last_line.value
 	if opt_ast.value then v.with_ast = true
 	var page = null
 	if not opt_fragment.value then

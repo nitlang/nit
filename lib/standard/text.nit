@@ -13,7 +13,6 @@ module text
 
 import kernel
 import collection
-import hash
 
 # StringCapable objects can create native strings
 interface StringCapable

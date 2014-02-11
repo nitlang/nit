@@ -1,0 +1,9 @@
+Grammar pire_cout;
+Lexer
+  a = 'a';
+  b = 'a'* 'b';
+blank = ' ' | #9 | #10 | #13;
+Parser
+  Ignored blank;
+  p = t*;
+  t = a | b;

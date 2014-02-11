@@ -37,19 +37,4 @@ redef class ToolContext
 		phases.add_edge(scope_phase, simple_misc_analysis_phase)
 		return true
 	end
-
-	fun run_global_phases(mainmodule: MModule)
-	do
-		for phase in phases_list do
-			phase.process_mainmodule(mainmodule)
-		end
-	end
 end
-
-redef class Phase
-	# Specific action to execute on the whole program
-	# Called by the `ToolContext::run_global_phases`
-	# @toimplement
-	fun process_mainmodule(mainmodule: MModule) do end
-end
-

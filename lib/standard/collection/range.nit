@@ -42,17 +42,6 @@ class Range[E: Discrete]
 
 	redef fun iterator do return new IteratorRange[E](self)
 
-	redef fun iterate
-		!each(e: E)
-	do
-		var c = _first
-		var l = _last
-		while c <= l do
-			each(c)
-			c = c.succ
-		end
-	end
-
 	redef fun length
 	do
 		var nb = _first.distance(_after)
@@ -99,4 +88,17 @@ class IteratorRange[E: Discrete]
 		_range = r
 		_item = r.first
 	end
+end
+
+redef class Int
+	# Returns the range from 0 to `self-1`, is used to do:
+	#
+	#    var s = new Array[String]
+	#    for i in 3.times do s.add "cool"
+	#    assert s.join(" ") == "cool cool cool"
+	#
+	#    s.clear
+	#    for i in 10.times do s.add(i.to_s)
+	#    assert s.to_s == "0123456789"
+	fun times: Range[Int] do return [0 .. self[
 end

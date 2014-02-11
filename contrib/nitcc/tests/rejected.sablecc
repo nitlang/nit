@@ -1,0 +1,8 @@
+Grammar rejected;
+Lexer
+a = 'a';
+b = 'b';
+Parser
+Rejected
+  b, 'y'; //alt1 a; //alt2 'x'; //alt3 'y'; //alt4 p; //alt5 b, b;
+p = a 'x';
