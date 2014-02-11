@@ -109,6 +109,8 @@ class ImageSet
 	var start_over_img : Image
 	fun start_over_path : String is abstract
 
+	var numbers: NumberImages
+
 	init ( app : App )
 	do
 		javelin_img = app.load_image( "images/javelin.png" )
@@ -127,9 +129,10 @@ class ImageSet
 		you_won_img = app.load_image( "images/you_won.png" )
 		you_lost_img = app.load_image( "images/you_lost.png" )
 		start_over_img = app.load_image( start_over_path )
+
+		numbers = app.load_numbers("images/#.png")
 	end
 end
-
 
 redef class Game
 	fun draw( display : Display, imgs : ImageSet, turn : Turn )
@@ -154,6 +157,9 @@ redef class Game
 		for empty in [life_out_of_ten..10[ do
 			display.blit_centered( imgs.life_empty_img, display.width*(empty+1)/11, display.top_offset )
 		end
+
+		# display score
+		display.blit_number(imgs.numbers, score.item,  display.width/11, display.top_offset+32)
 
 		# game over messages
 		if over then

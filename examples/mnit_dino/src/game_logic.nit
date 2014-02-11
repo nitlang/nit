@@ -34,6 +34,8 @@ class Game
 
 	var over_since = 0
 
+	var score: Container[Int]
+
 	var random_radius_min = 200
 	var random_radius_max = 400
 	protected var random_radius_diff : Int =
@@ -41,9 +43,11 @@ class Game
 
 	var entities_sorter = new EntitiesSorter
 
-	init( cavemen_nbr : Int )
+	init( cavemen_nbr : Int, score: Container[Int] )
 	do
 		srand_from(cavemen_nbr)
+
+		self.score = score
 
 		nbr_wanted_cavemen = cavemen_nbr
 
@@ -69,6 +73,7 @@ class Game
 			man.do_turn( turn )
 			if not man.is_alive then
 				cavemen.remove( man )
+				score.item += 1
 			end
 		end
 
