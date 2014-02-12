@@ -70,12 +70,13 @@ else
 	mainmodule.set_imported_mmodules(mmodules)
 end
 
-var analysis = modelbuilder.do_rapid_type_analysis(mainmodule)
 
 if toolcontext.opt_erasure.value then
-	modelbuilder.run_separate_erasure_compiler(mainmodule, analysis)
+	modelbuilder.run_separate_erasure_compiler(mainmodule, null)
 else if opt_global.value then
+	var analysis = modelbuilder.do_rapid_type_analysis(mainmodule)
 	modelbuilder.run_global_compiler(mainmodule, analysis)
 else
+	var analysis = modelbuilder.do_rapid_type_analysis(mainmodule)
 	modelbuilder.run_separate_compiler(mainmodule, analysis)
 end
