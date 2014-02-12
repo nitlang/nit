@@ -94,6 +94,9 @@ abstract class Text
 	# Sets the length of the Text
 	private fun length=(size: Int) is abstract
 
+	# Returns self as a Buffer
+	fun to_buffer: Buffer is abstract
+
 	#######################################################################
 	# Generic Methods                                                     #
 	#######################################################################
@@ -344,6 +347,8 @@ abstract class Buffer
 	fun append(other: Text) do is_dirty = true
 
 	fun clear do is_dirty = true
+
+	redef fun to_buffer do return self
 
 	redef fun hash
 	do

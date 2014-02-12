@@ -84,6 +84,12 @@ end
 
 redef class String
 
+	redef fun to_buffer
+	do
+		if self isa RopeString then return new RopeBuffer.from(self)
+		return super
+	end
+
 	redef fun to_cstring
 	do
 		if self isa RopeString then
@@ -96,7 +102,7 @@ redef class String
 	redef fun ropeize
 	do
 		if self isa FlatText then
-			return new RopeBuffer.from(self)
+			return new RopeString.from(self)
 		else if self isa Rope then
 			return self
 		end
@@ -166,7 +172,7 @@ abstract class Rope
 	end
 
 	# Initializes a new Rope with a text embedded in directly
-	init from(str: Text) do
+	private init from(str: Text) do
 		self.parent_node = new ConcatNode
 		parent_node.right_child = new LeafNode(str.to_s)
 		parent_node.update_data

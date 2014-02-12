@@ -20,23 +20,23 @@ var numstr = "1001"
 #alt1 var trimable = spaces + str + spaces
 #alt1 var num = numstr
 
-#alt2 var txt = new FlatBuffer.from(str)
-#alt2 var trimable = new FlatBuffer.from(spaces)
+#alt2 var txt = str.to_buffer
+#alt2 var trimable = spaces.to_buffer
 #alt2 trimable.append(str)
 #alt2 trimable.append(spaces)
-#alt2 var num: Text = new FlatBuffer.from(numstr)
+#alt2 var num: Text = numstr.to_buffer
 
-#alt3 var txt = new RopeString.from(str)
-#alt3 var trimable = new RopeString.from(spaces)
-#alt3 trimable = trimable + str
-#alt3 trimable = trimable + spaces
-#alt3 var num = new RopeString.from(numstr)
+var txt = str.ropeize
+var trimable = spaces.ropeize
+trimable += str
+trimable += spaces
+var num = numstr.ropeize
 
-#alt4 var txt = new RopeBuffer.from(str)
-#alt4 var trimable = new RopeBuffer.from(spaces)
+#alt4 var txt = str.ropeize.to_buffer
+#alt4 var trimable = spaces.ropeize.to_buffer
 #alt4 trimable.append(str)
 #alt4 trimable.append(spaces)
-#alt4 var num = new RopeBuffer.from(numstr)
+#alt4 var num = numstr.ropeize.to_buffer
 
 # Test Text methods on all types of receivers
 

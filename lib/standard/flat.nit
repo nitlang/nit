@@ -175,6 +175,13 @@ redef class String
 
 	redef fun to_s do return self
 
+	redef fun to_buffer
+	do
+		if self isa FlatString then return new FlatBuffer.from(self)
+		# Should never ever happen
+		return super
+	end
+
 	redef fun to_cstring
 	do
 		if self isa FlatString then
@@ -544,7 +551,7 @@ class FlatBuffer
 		return new FlatBuffer.from(native_buf.to_s_with_length(count))
 	end
 
-	#     assert new FlatBuffer.from("Hello World!").to_upper == "HELLO WORLD!"
+	#     assert "Hello World!".to_buffer.to_upper == "HELLO WORLD!"
 	redef fun to_upper
 	do
 		var new_buf = new FlatBuffer.with_capacity(self.length)
@@ -554,7 +561,7 @@ class FlatBuffer
 		return new_buf
 	end
 
-	#     assert new FlatBuffer.from("Hello World!").to_lower == "hello world!"
+	#     assert "Hello World!".to_buffer.to_lower == "hello world!"
 	redef fun to_lower
 	do
 		var new_buf = new FlatBuffer.with_capacity(self.length)
@@ -577,7 +584,7 @@ class FlatBuffer
 		with_capacity(5)
 	end
 
-	init from(s: Text)
+	private init from(s: Text)
 	do
 		_capacity = s.length + 1
 		_length = s.length

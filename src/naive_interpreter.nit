@@ -250,7 +250,7 @@ private class NaiveInterpreter
 	# Return a new native string initialized with `txt`
 	fun native_string_instance(txt: String): Instance
 	do
-		var val = new FlatBuffer.from(txt)
+		var val = txt.to_buffer
 		val.add('\0')
 		var ic = self.mainmodule.get_primitive_class("NativeString")
 		return new PrimitiveInstance[Buffer](ic.mclass_type, val)
@@ -895,7 +895,7 @@ redef class AExternMethPropdef
 			else if pname == "io_read" then
 				var str = recvval.as(IStream).read(args[2].to_i)
 				var a1 = args[1].val.as(Buffer)
-				new FlatBuffer.from(str).copy(0, str.length, a1.as(FlatBuffer), 0)
+				str.to_buffer.copy(0, str.length, a1.as(FlatBuffer), 0)
 				return v.int_instance(str.length)
 			else if pname == "io_close" then
 				recvval.as(IOS).close

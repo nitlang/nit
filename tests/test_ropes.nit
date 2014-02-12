@@ -22,9 +22,9 @@ var space = " "
 
 var test = "Je suis ici."
 
-var rope_uniq_test = new RopeString.from("zzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+var rope_uniq_test = "zzzzzzzzzzzzzzzzzzzzzzzzzzzz".ropeize
 
-var not_rope_uniq_test = new RopeString.from("zzzzzzzzzzzzzezzzzzzzzzzzzzz")
+var not_rope_uniq_test = "zzzzzzzzzzzzzezzzzzzzzzzzzzz".ropeize
 
 ################################
 #      Rope methods tests      #
@@ -50,7 +50,7 @@ buf_rope.append(space)
 buf_rope.append(str_part_3)
 buf_rope.append(str_part_4)
 
-var buf_rope_with_str = new RopeBuffer.from(test)
+var buf_rope_with_str = test.ropeize.to_buffer
 
 var reviter = buf_rope.chars.reverse_iterator
 while reviter.is_ok do
@@ -58,7 +58,7 @@ while reviter.is_ok do
 	reviter.next
 end
 
-var str_rope: String = new RopeString.from(str_part_1)
+var str_rope: String = str_part_1.ropeize
 
 str_rope += space
 str_rope += str_part_2
@@ -112,7 +112,7 @@ assert rope_uniq_test.chars.has_only('z')
 
 assert not not_rope_uniq_test.chars.has_only('z')
 
-assert new RopeBuffer.from("l").chars.has_only('l')
+assert "l".ropeize.to_buffer.chars.has_only('l')
 
 print buf_rope.to_lower
 
