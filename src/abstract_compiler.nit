@@ -382,7 +382,7 @@ abstract class AbstractCompiler
 		compile_header_structs
 
 		# Signal handler function prototype
-		if not toolctx.opt_no_stacktrace.value then self.header.add_decl("void show_backtrace(int);")
+		self.header.add_decl("void show_backtrace(int);")
 
 		# Global variable used by the legacy native interface
 		self.header.add_decl("extern int glob_argc;")
