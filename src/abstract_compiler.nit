@@ -366,17 +366,9 @@ abstract class AbstractCompiler
 	fun compile_header do
 		var v = self.header
 		var toolctx = modelbuilder.toolcontext
-		if not toolctx.opt_no_stacktrace.value then self.header.add_decl("#define UNW_LOCAL_ONLY")
 		self.header.add_decl("#include <stdlib.h>")
 		self.header.add_decl("#include <stdio.h>")
 		self.header.add_decl("#include <string.h>")
-		if toolctx.opt_stacktrace.value then
-			self.header.add_decl("#include \"c_functions_hash.h\"")
-		end
-		self.header.add_decl("#include <signal.h>")
-		if not toolctx.opt_no_stacktrace.value then
-			self.header.add_decl("#include <libunwind.h>")
-		end
 		self.header.add_decl("#include <gc_chooser.h>")
 
 		compile_header_structs
@@ -401,6 +393,14 @@ abstract class AbstractCompiler
 	fun compile_main_function
 	do
 		var v = self.new_visitor
+		if modelbuilder.toolcontext.opt_stacktrace.value then
+			v.add_decl("#include \"c_functions_hash.h\"")
+		end
+		v.add_decl("#include <signal.h>")
+		if not modelbuilder.toolcontext.opt_no_stacktrace.value then
+			v.add_decl("#define UNW_LOCAL_ONLY")
+			v.add_decl("#include <libunwind.h>")
+		end
 		v.add_decl("int glob_argc;")
 		v.add_decl("char **glob_argv;")
 		v.add_decl("val *glob_sys;")
