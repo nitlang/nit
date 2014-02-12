@@ -14,7 +14,7 @@ require.config({
 define([
 	"plugins/folding",
 	"plugins/clipboard",
-	"plugins/ui",
+	"plugins/filtering",
 	"plugins/quicksearch",
 	"plugins/github",
 ], function() {});

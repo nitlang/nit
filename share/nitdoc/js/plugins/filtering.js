@@ -17,16 +17,17 @@
 */
 
 /*
- * Nitdoc UI module
+ * Nitdoc Filtering
  *
- * Enhance nitdoc usability with JS features
+ * Allow user to filter sidebar entries and search page
  */
 define([
 	"jquery",
+	'jQueryUI',
 	"plugins/utils"
-], function($, utils) {
+], function($, UI, Utils) {
 
-	var UI = {
+	var Filtering = {
 
 		// Allow user to filter sidebar box entries by name
 		enableSidebarTextFilters: function(filterSelector) {
@@ -63,7 +64,7 @@ define([
 
 		// Prealod filters using search query
 		preloadSidebarTextFilters: function() {
-			var anchor = utils.extractAnchor(document.location.hash);
+			var anchor = Utils.extractAnchor(document.location.hash);
 			if(!anchor || anchor.indexOf("q=") == -1) return;
 
 			var query = anchor.substring(2);
@@ -145,7 +146,7 @@ define([
 
 		// Prealod filter using search query
 		preloadSearchPageField: function() {
-			var anchor = utils.extractAnchor(document.location.hash);
+			var anchor = Utils.extractAnchor(document.location.hash);
 			if(!anchor || anchor.indexOf("q=") == -1) return;
 
 			var query = anchor.substring(2);
@@ -158,7 +159,9 @@ define([
 		}
 	};
 
-	UI.enableSidebarTextFilters("nav.filterable h3");
-	UI.enableSidebarTypeFilters("nav.filterable");
-	UI.enableSearchPageField(".content.fullpage h1:contains('Search')");
+	Filtering.enableSidebarTextFilters("nav.filterable h3");
+	Filtering.enableSidebarTypeFilters("nav.filterable");
+	Filtering.enableSearchPageField(".content.fullpage h1:contains('Search')");
+
+	return Filtering;
 });
