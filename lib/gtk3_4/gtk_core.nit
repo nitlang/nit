@@ -94,6 +94,32 @@ extern GtkWidget `{GtkWidget *`}
 	fun fg_color=( state : GtkStateType, color : GdkRGBA ) is extern `{
 		gtk_widget_override_color( recv, state, color);
 	`}
+	
+	# Sets the sensitivity of a widget. sensitive -> the user can interact with it.
+	# Insensitive -> widget "grayed out" and the user can"t interact with them
+	fun sensitive=(sensitive : Bool) is extern `{
+		gtk_widget_set_sensitive(recv, sensitive);
+	`}
+	
+	# return the sensitivity of the widget
+	fun sensitive: Bool is extern `{
+		return gtk_widget_get_sensitive(recv);
+	`}
+	
+	# Set the visibility of the widget
+	fun visible=(visible: Bool) is extern `{
+		gtk_widget_set_visible(recv, visible);
+	`}
+
+	# Get the visibility of the widget only
+	fun visible_self: Bool is extern `{
+		return gtk_widget_get_visible(recv);
+	`}
+	
+	# Get the visibility of the widget, check if it's parents are visible too
+	fun visible: Bool is extern `{
+		return gtk_widget_is_visible(recv);
+	`}
 end
 
 #Base class for widgets which contain other widgets
@@ -101,9 +127,25 @@ end
 extern GtkContainer `{GtkContainer *`}
 	super GtkWidget
 
+	# Add a widget to the container
 	fun add( widget : GtkWidget ) is extern `{
 		gtk_container_add( recv, widget );
 	`}
+	# Remove the widget from the container
+	fun remove_widget( widget : GtkWidget ) is extern `{
+		gtk_container_remove( recv, widget );
+	`}
+
+	# Get the resize mode of the container
+	fun resize_mode : GtkResizeMode is extern `{
+		return gtk_container_get_resize_mode( recv );
+	`}
+
+	# Set the resize mode of the container
+	fun resize_mode=( resize_mode: GtkResizeMode ) is extern `{
+		gtk_container_set_resize_mode( recv, resize_mode );
+	`}
+
 end
 
 #A container with just one child
@@ -293,6 +335,21 @@ extern GtkGrid `{GtkGrid *`}
 	fun attach( child : GtkWidget, left, top, width, height : Int ) `{
 		gtk_grid_attach( recv, child, left, top, width, height );
 	`}
+
+	# Get the child of the Grid at the given position
+	fun get_child_at( left : Int, top : Int ): GtkWidget is extern `{
+		return gtk_grid_get_child_at( recv, left, top );
+	`}
+
+	# Insert a row at the specified position
+	fun insert_row( position :Int ) is extern `{
+		gtk_grid_insert_row( recv, position );
+	`}
+
+	# Insert a column at the specified position
+	fun insert_column( position : Int ) is extern `{
+		gtk_grid_insert_column( recv, position );
+	`}
 end
 
 #The tree interface used by GtkTreeView
@@ -341,11 +398,14 @@ extern GtkEntry `{GtkEntry *`}
 		gtk_entry_set_text( recv, String_to_cstring( value ) );
 	`}
 
-	fun visible : Bool is extern `{
+	# Is the text visible or is it the invisible char (such as '*')?
+	fun visiblility: Bool is extern `{
 		return gtk_entry_get_visibility( recv );
 	`}
 
-	fun visible=( is_visible : Bool) is extern `{
+	# Set the text visiblility
+	# If false, will use the invisible char (such as '*')
+	fun visibility=( is_visible : Bool) is extern `{
 		gtk_entry_set_visibility( recv, is_visible );
 	`}
 
