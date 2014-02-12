@@ -110,6 +110,7 @@ end
 abstract class Rope
 	super Text
 
+	redef type SELFTYPE: Rope
 
 	# Gets the total length of the Rope
 	redef fun length: Int do return parent_node.length
