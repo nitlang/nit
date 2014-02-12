@@ -14,5 +14,6 @@ require.config({
 define([
 	"plugins/ui",
 	"plugins/quicksearch",
+	"plugins/github",
 ], function() {});
 
