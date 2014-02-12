@@ -19,12 +19,12 @@ Ignored blank;
 value =
 	{object:} '{' members? '}' |
 	{array:} '[' elements? ']' |
-	number |
-	string |
-	'true' |
-	'false' |
-	'null' ;
+	{number:} number |
+	{string:} string |
+	{true:} 'true' |
+	{false:} 'false' |
+	{null:} 'null' ;
 
-members = members ',' pair | pair ;
+members = {tail:} members ',' pair | {head:} pair ;
 pair = string ':' value ;
-elements = elements ',' value | value ;
+elements = {tail:} elements ',' value | {head:} value ;
