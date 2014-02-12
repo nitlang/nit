@@ -18,6 +18,7 @@ module separate_compiler
 import abstract_compiler
 import layout_builders
 import rapid_type_analysis
+import collect_super_sends
 
 # Add separate compiler specific options
 redef class ToolContext
@@ -56,7 +57,7 @@ redef class ToolContext
 end
 
 redef class ModelBuilder
-	fun run_separate_compiler(mainmodule: MModule, runtime_type_analysis: RapidTypeAnalysis)
+	fun run_separate_compiler(mainmodule: MModule, runtime_type_analysis: nullable RapidTypeAnalysis)
 	do
 		var time0 = get_time
 		self.toolcontext.info("*** GENERATING C ***", 1)
@@ -109,7 +110,7 @@ class SeparateCompiler
 	redef type VISITOR: SeparateCompilerVisitor
 
 	# The result of the RTA (used to know live types and methods)
-	var runtime_type_analysis: RapidTypeAnalysis
+	var runtime_type_analysis: nullable RapidTypeAnalysis
 
 	private var undead_types: Set[MType] = new HashSet[MType]
 	private var partial_types: Set[MType] = new HashSet[MType]
@@ -120,7 +121,7 @@ class SeparateCompiler
 	protected var method_layout: nullable Layout[PropertyLayoutElement]
 	protected var attr_layout: nullable Layout[MAttribute]
 
-	init(mainmodule: MModule, mmbuilder: ModelBuilder, runtime_type_analysis: RapidTypeAnalysis) do
+	init(mainmodule: MModule, mmbuilder: ModelBuilder, runtime_type_analysis: nullable RapidTypeAnalysis) do
 		super(mainmodule, mmbuilder)
 		var file = new_file("nit.common")
 		self.header = new CodeWriter(file)
@@ -270,7 +271,12 @@ class SeparateCompiler
 		end
 
 		# lookup super calls and add it to the list of mmethods to build layout with
-		var super_calls = runtime_type_analysis.live_super_sends
+		var super_calls
+		if runtime_type_analysis != null then
+			super_calls = runtime_type_analysis.live_super_sends
+		else
+			super_calls = modelbuilder.collect_super_sends
+		end
 		for mmethoddef in super_calls do
 			var mclass = mmethoddef.mclassdef.mclass
 			mmethods[mclass].add(mmethoddef)
@@ -722,7 +728,7 @@ class SeparateCompiler
 		var attrs = self.attr_tables[mclass]
 		var v = new_visitor
 
-		var is_dead = not runtime_type_analysis.live_classes.has(mclass) and mtype.ctype == "val*" and mclass.name != "NativeArray"
+		var is_dead = runtime_type_analysis != null and not runtime_type_analysis.live_classes.has(mclass) and mtype.ctype == "val*" and mclass.name != "NativeArray"
 
 		v.add_decl("/* runtime class {c_name} */")
 
@@ -923,7 +929,7 @@ class SeparateCompilerVisitor
 		else if mtype.ctype == "val*" then
 			var valtype = value.mtype.as(MClassType)
 			var res = self.new_var(mtype)
-			if not compiler.runtime_type_analysis.live_types.has(valtype) then
+			if compiler.runtime_type_analysis != null and not compiler.runtime_type_analysis.live_types.has(valtype) then
 				self.add("/*no autobox from {value.mtype} to {mtype}: {value.mtype} is not live! */")
 				self.add("printf(\"Dead code executed!\\n\"); show_backtrace(1);")
 				return res

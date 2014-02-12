@@ -112,9 +112,9 @@ class RapidTypeAnalysis
 				#elttype = elttype.anchor_to(self.mainmodule, v.receiver)
 				var vararg = self.mainmodule.get_primitive_class("Array").get_mtype([elttype])
 				v.add_type(vararg)
-				v.add_monomorphic_send(vararg, self.modelbuilder.force_get_primitive_method(node, "with_native", vararg.mclass, self.mainmodule))
 				var native = self.mainmodule.get_primitive_class("NativeArray").get_mtype([elttype])
 				v.add_type(native)
+				v.add_monomorphic_send(vararg, self.modelbuilder.force_get_primitive_method(node, "with_native", vararg.mclass, self.mainmodule))
 			end
 
 
@@ -428,7 +428,7 @@ redef class AStringFormExpr
 	do
 		var native = v.get_class("NativeString").mclass_type
 		v.add_type(native)
-		var prop = v.get_method(native, "to_s")
+		var prop = v.get_method(native, "to_s_with_length")
 		v.add_monomorphic_send(native, prop)
 	end
 end
