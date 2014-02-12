@@ -23,30 +23,10 @@
  */
 define([
 	"jquery",
-	"ZeroClipboard",
 	"plugins/utils"
-], function($, ZeroClipboard, utils) {
+], function($, utils) {
 
 	var UI = {
-
-		// Allow user to copy signatures to clipboard with ZeroClipboard flahs plugin
-		// See: https://github.com/zeroclipboard/ZeroClipboard
-		enableCopyToClipboard: function(copySelector) {
-			$(copySelector).each(function() {
-				var btn = $(document.createElement("button"))
-				.addClass("nitdoc-ui-copy")
-				.attr("data-clipboard-text", $(this).attr("data-untyped-signature"))
-				.append(
-					$(document.createElement("img"))
-					.attr("src", './resources/icons/copy.png')
-				);
-				$(this).append(btn);
-			});
-
-			var clip = new ZeroClipboard($("button.nitdoc-ui-copy"), {
-				moviePath: "./ZeroClipboard.swf"
-			});
-		},
 
 		// Allow user to filter sidebar box entries by name
 		enableSidebarTextFilters: function(filterSelector) {
@@ -178,7 +158,6 @@ define([
 		}
 	};
 
-	UI.enableCopyToClipboard(".signature");
 	UI.enableSidebarTextFilters("nav.filterable h3");
 	UI.enableSidebarTypeFilters("nav.filterable");
 	UI.enableSearchPageField(".content.fullpage h1:contains('Search')");
