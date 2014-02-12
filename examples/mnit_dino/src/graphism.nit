@@ -148,7 +148,7 @@ end
 redef class Game
 	fun draw( display : Display, imgs : ImageSet, turn : Turn )
 	do
-		display.clear( 0.0, 0.5, 0.1 )
+		display.clear(0.05, 0.45, 0.1)
 
 		# entities (dino, cavemen and javelins)
 		for e in entities do
