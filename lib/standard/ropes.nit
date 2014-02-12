@@ -110,10 +110,6 @@ end
 abstract class Rope
 	super Text
 
-	private var _chars: SELFVIEW
-
-	# Returns a view on the rope
-	redef fun chars do return _chars
 
 	# Gets the total length of the Rope
 	redef fun length: Int do return parent_node.length
@@ -121,11 +117,6 @@ abstract class Rope
 	init
 	do
 		self.parent_node = new ConcatNode
-		if self isa RopeString then
-			self._chars = new RopeStringCharView(self)
-		else if self isa RopeBuffer then
-			self._chars = new RopeBufferCharView(self)
-		end
 	end
 
 	private fun substring_intern(index_from: Int, count: Int): RopeBuffer
@@ -178,11 +169,6 @@ abstract class Rope
 		self.parent_node = new ConcatNode
 		parent_node.right_child = new LeafNode(str.to_s)
 		parent_node.update_data
-		if self isa RopeString then
-			self._chars = new RopeStringCharView(self)
-		else if self isa RopeBuffer then
-			self._chars = new RopeBufferCharView(self)
-		end
 	end
 
 	# Cached version of self as a flat String
@@ -313,6 +299,8 @@ class RopeString
 
 	redef type SELFTYPE : RopeString
 
+	redef var chars: SELFVIEW = new RopeStringCharView(self)
+
 	# Returns a flat version of self
 	redef fun to_s
 	do
@@ -369,6 +357,8 @@ class RopeBuffer
 	super Buffer
 
 	redef type SELFTYPE: RopeBuffer
+
+	redef var chars: SELFVIEW = new RopeBufferCharView(self)
 
 	# Performs a right rotation on a node of the Rope
 	#

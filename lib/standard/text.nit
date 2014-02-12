@@ -54,8 +54,6 @@ abstract class Text
 
 	private var hash_cache: nullable Int = null
 
-	private var char_view: nullable SELFVIEW = null
-
 	#######################################################################
 	# Methods that need redefinition in subclasses                        #
 	#######################################################################
@@ -102,7 +100,7 @@ abstract class Text
 
 	# Returns an iterable view on the chars of self
 	# Needs to be created when instantiating self
-	fun chars: SELFVIEW do return char_view.as(not null)
+	fun chars: SELFVIEW is abstract
 
 	# If `self` contains only digits, return the corresponding integer
 	#     assert "123".to_i        == 123

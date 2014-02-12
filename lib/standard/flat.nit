@@ -263,6 +263,8 @@ class FlatString
 	# Index in _items of the last item of the string
 	readable private var _index_to: Int
 
+	redef var chars: SELFVIEW = new FlatStringCharView(self)
+
 	# Creates a new FlatString with all the informations
 	#
 	# /!\ To be used by no one except NativeString /!\
@@ -273,7 +275,6 @@ class FlatString
 		_length = len
 		_index_from = from
 		_index_to = to
-		self.char_view = new FlatStringCharView(self)
 	end
 
 	redef fun empty do return "".as(FlatString)
@@ -519,6 +520,8 @@ class FlatBuffer
 
 	redef fun length=(size) do _length = size
 
+	redef var chars: SELFVIEW = new FlatBufferCharView(self)
+
 	redef fun substring(from, count)
 	do
 		assert count >= 0
@@ -582,7 +585,6 @@ class FlatBuffer
 			_items = calloc_string(_capacity)
 			s.items.copy_to(_items, _length, s._index_from, 0)
 		end
-		self.char_view = new FlatBufferCharView(self)
 	end
 
 	# Create a new empty string with a given capacity.
@@ -593,7 +595,6 @@ class FlatBuffer
 		_items = calloc_string(cap+1)
 		_capacity = cap
 		_length = 0
-		self.char_view = new FlatBufferCharView(self)
 	end
 
 	fun enlarge(cap: Int)
