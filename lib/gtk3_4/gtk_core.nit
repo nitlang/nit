@@ -400,14 +400,6 @@ extern GtkEntry `{GtkEntry *`}
 		gtk_entry_set_text( recv, String_to_cstring( value ) );
 	`}
 
-	fun visible : Bool is extern `{
-		return gtk_entry_get_visibility( recv );
-	`}
-
-	fun visible=( is_visible : Bool) is extern `{
-		gtk_entry_set_visibility( recv, is_visible );
-	`}
-
 	fun max_length : Int is extern `{
 		return gtk_entry_get_max_length( recv );
 	`}
