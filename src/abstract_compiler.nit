@@ -50,6 +50,8 @@ redef class ToolContext
 	var opt_no_check_other: OptionBool = new OptionBool("Disable implicit tests: unset attribute, null receiver (dangerous)", "--no-check-other")
 	# --typing-test-metrics
 	var opt_typing_test_metrics: OptionBool = new OptionBool("Enable static and dynamic count of all type tests", "--typing-test-metrics")
+	# --no-stacktrace
+	var opt_no_stacktrace: OptionBool = new OptionBool("Disables libunwind and generation of C stack traces (can be problematic when compiling to targets such as Android or NaCl)", "--no-stacktrace")
 	# --stack-trace-C-to-Nit-name-binding
 	var opt_stacktrace: OptionBool = new OptionBool("Enables the use of gperf to bind C to Nit function names when encountering a Stack trace at runtime", "--nit-stacktrace")
 
@@ -60,6 +62,7 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_no_check_covariance, self.opt_no_check_initialization, self.opt_no_check_assert, self.opt_no_check_autocast, self.opt_no_check_other)
 		self.option_context.add_option(self.opt_typing_test_metrics)
 		self.option_context.add_option(self.opt_stacktrace)
+		self.option_context.add_option(self.opt_no_stacktrace)
 	end
 end
 
@@ -88,6 +91,11 @@ redef class ModelBuilder
 
 		if cc_paths.is_empty then
 			toolcontext.error(null, "Cannot determine the nit clib path. define envvar NIT_DIR.")
+		end
+
+		if toolcontext.opt_no_stacktrace.value and toolcontext.opt_stacktrace.value then
+			print "Cannot use --nit-stacktrace when --no-stacktrace is activated"
+			exit(1)
 		end
 
 		# Add user defined cc_paths
@@ -199,7 +207,11 @@ redef class ModelBuilder
 			p = orig_dir.join_path(p).simplify_path
 			cc_includes += " -I \"" + p + "\""
 		end
-		makefile.write("CC = ccache cc\nCFLAGS = -g -O2\nCINCL = {cc_includes}\nLDFLAGS ?= \nLDLIBS  ?= -lunwind -lm -lgc\n\n")
+		if toolcontext.opt_no_stacktrace.value then
+			makefile.write("CC = ccache cc\nCFLAGS = -g -O2\nCINCL = {cc_includes}\nLDFLAGS ?= \nLDLIBS  ?= -lm -lgc\n\n")
+		else
+			makefile.write("CC = ccache cc\nCFLAGS = -g -O2\nCINCL = {cc_includes}\nLDFLAGS ?= \nLDLIBS  ?= -lunwind -lm -lgc\n\n")
+		end
 		makefile.write("all: {outpath}\n\n")
 
 		var ofiles = new Array[String]
@@ -353,21 +365,24 @@ abstract class AbstractCompiler
 	# This method call compile_header_strucs method that has to be refined
 	fun compile_header do
 		var v = self.header
-		self.header.add_decl("#define UNW_LOCAL_ONLY")
+		var toolctx = modelbuilder.toolcontext
+		if not toolctx.opt_no_stacktrace.value then self.header.add_decl("#define UNW_LOCAL_ONLY")
 		self.header.add_decl("#include <stdlib.h>")
 		self.header.add_decl("#include <stdio.h>")
 		self.header.add_decl("#include <string.h>")
-		if modelbuilder.toolcontext.opt_stacktrace.value then
+		if toolctx.opt_stacktrace.value then
 			self.header.add_decl("#include \"c_functions_hash.h\"")
 		end
-		self.header.add_decl("#include <libunwind.h>")
 		self.header.add_decl("#include <signal.h>")
+		if not toolctx.opt_no_stacktrace.value then
+			self.header.add_decl("#include <libunwind.h>")
+		end
 		self.header.add_decl("#include <gc_chooser.h>")
 
 		compile_header_structs
 
 		# Signal handler function prototype
-		self.header.add_decl("void show_backtrace(int);")
+		if not toolctx.opt_no_stacktrace.value then self.header.add_decl("void show_backtrace(int);")
 
 		# Global variable used by the legacy native interface
 		self.header.add_decl("extern int glob_argc;")
@@ -402,33 +417,36 @@ abstract class AbstractCompiler
 		end
 
 		v.add_decl("void show_backtrace (int signo) \{")
-		v.add_decl("char* opt = getenv(\"NIT_NO_STACK\");")
-		v.add_decl("unw_cursor_t cursor;")
-		v.add_decl("if(opt==NULL)\{")
-		v.add_decl("unw_context_t uc;")
-		v.add_decl("unw_word_t ip;")
-		v.add_decl("char* procname = malloc(sizeof(char) * 100);")
-		v.add_decl("unw_getcontext(&uc);")
-		v.add_decl("unw_init_local(&cursor, &uc);")
-		v.add_decl("printf(\"-------------------------------------------------\\n\");")
-		v.add_decl("printf(\"--   Stack Trace   ------------------------------\\n\");")
-		v.add_decl("printf(\"-------------------------------------------------\\n\");")
-		v.add_decl("while (unw_step(&cursor) > 0) \{")
-		v.add_decl("	unw_get_proc_name(&cursor, procname, 100, &ip);")
-		if modelbuilder.toolcontext.opt_stacktrace.value then
-		v.add_decl("	const C_Nit_Names* recv = get_nit_name(procname, strlen(procname));")
-		v.add_decl("	if (recv != 0)\{")
-		v.add_decl("		printf(\"` %s\\n\", recv->nit_name);")
-		v.add_decl("	\}else\{")
-		v.add_decl("		printf(\"` %s\\n\", procname);")
-		v.add_decl("	\}")
-		else
-		v.add_decl("	printf(\"` %s \\n\",procname);")
+		if not modelbuilder.toolcontext.opt_no_stacktrace.value then
+			v.add_decl("if(signo == 0)\{exit(0);\}")
+			v.add_decl("char* opt = getenv(\"NIT_NO_STACK\");")
+			v.add_decl("unw_cursor_t cursor;")
+			v.add_decl("if(opt==NULL)\{")
+			v.add_decl("unw_context_t uc;")
+			v.add_decl("unw_word_t ip;")
+			v.add_decl("char* procname = malloc(sizeof(char) * 100);")
+			v.add_decl("unw_getcontext(&uc);")
+			v.add_decl("unw_init_local(&cursor, &uc);")
+			v.add_decl("printf(\"-------------------------------------------------\\n\");")
+			v.add_decl("printf(\"--   Stack Trace   ------------------------------\\n\");")
+			v.add_decl("printf(\"-------------------------------------------------\\n\");")
+			v.add_decl("while (unw_step(&cursor) > 0) \{")
+			v.add_decl("	unw_get_proc_name(&cursor, procname, 100, &ip);")
+			if modelbuilder.toolcontext.opt_stacktrace.value then
+			v.add_decl("	const C_Nit_Names* recv = get_nit_name(procname, strlen(procname));")
+			v.add_decl("	if (recv != 0)\{")
+			v.add_decl("		printf(\"` %s\\n\", recv->nit_name);")
+			v.add_decl("	\}else\{")
+			v.add_decl("		printf(\"` %s\\n\", procname);")
+			v.add_decl("	\}")
+			else
+			v.add_decl("	printf(\"` %s \\n\",procname);")
+			end
+			v.add_decl("\}")
+			v.add_decl("printf(\"-------------------------------------------------\\n\");")
+			v.add_decl("free(procname);")
+			v.add_decl("\}")
 		end
-		v.add_decl("\}")
-		v.add_decl("printf(\"-------------------------------------------------\\n\");")
-		v.add_decl("free(procname);")
-		v.add_decl("\}")
 		v.add_decl("exit(signo);")
 		v.add_decl("\}")
 
