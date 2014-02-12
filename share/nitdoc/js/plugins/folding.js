@@ -22,33 +22,45 @@
  * Allow user to fold sidebar blocks
  */
 define([
-	"jquery"
+	'jquery',
+	'jQueryUI'
 ], function($) {
+	$.widget("nitdoc.folding", {
 
-	var Folding = {
-		enable: function(containerSelector) {
-			var container = $(containerSelector);
-			var foldLink = $(document.createElement("a"))
-			.addClass("nitdoc-ui-fold")
-			.html("-");
+		options: {
+			foldText: "-",
+			unfoldText: "+",
+			linkHolder: "h3",
+			linkClass: "nitdoc-ui-fold",
+			linkCSS: {
+				"cursor": "pointer"
+			}
+		},
 
-			container.find("nav h3")
-			.prepend(foldLink)
-			.css("cursor", "pointer")
+		_create: function() {
+			this._foldLink = $("<a/>")
+				.addClass(this.options.linkClass)
+				.text(this.options.foldText);
+
+			this.element.find(this.options.linkHolder)
+			.prepend(this._foldLink)
+			.css(this.options.linkCSS)
 			.toggle(
-				function() {
-					$(this).find("a.nitdoc-ui-fold").html("+");
-					$(this).nextAll().toggle();
-				},
-				function() {
-					$(this).find("a.nitdoc-ui-fold").html("-");
-					$(this).nextAll().toggle();
-				}
+				$.proxy(this._fold, this),
+				$.proxy(this._unfold, this)
 			);
+		},
+
+		_fold: function(event) {
+			this._foldLink.text(this.options.unfoldText);
+			this.element.find(this.options.linkHolder).nextAll().toggle();
+		},
+
+		_unfold: function() {
+			this._foldLink.text(this.options.foldText);
+			this.element.find(this.options.linkHolder).nextAll().toggle();
 		}
-	};
+	});
 
-	Folding.enable(".sidebar");
-
-	return Folding;
+	$(".sidebar nav").folding();
 });
