@@ -5,9 +5,16 @@ var searchList = href.substring(0, href.lastIndexOf('/')) + '/quicksearch-list';
 require.config({
 	baseUrl: baseUrl,
 	paths: {
-		quicksearchList: searchList,
 		plugins: '../plugins',
-    }
+		quicksearchList: searchList,
+		jQueryUI: "jquery-ui",
+    },
+	shim: {
+		"jQueryUI": {
+		    export: "$",
+		    deps: ['jquery']
+		}
+	}
 });
 
 // nitdoc main module
