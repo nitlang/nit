@@ -418,7 +418,6 @@ abstract class AbstractCompiler
 
 		v.add_decl("void show_backtrace (int signo) \{")
 		if not modelbuilder.toolcontext.opt_no_stacktrace.value then
-			v.add_decl("if(signo == 0)\{exit(0);\}")
 			v.add_decl("char* opt = getenv(\"NIT_NO_STACK\");")
 			v.add_decl("unw_cursor_t cursor;")
 			v.add_decl("if(opt==NULL)\{")
@@ -1664,7 +1663,7 @@ redef class AInternMethPropdef
 			return
 		end
 		if pname == "exit" then
-			v.add("show_backtrace({arguments[1]});")
+			v.add("exit({arguments[1]});")
 			return
 		else if pname == "sys" then
 			v.ret(v.new_expr("glob_sys", ret.as(not null)))
