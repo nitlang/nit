@@ -428,7 +428,7 @@ redef class AStringFormExpr
 	do
 		var native = v.get_class("NativeString").mclass_type
 		v.add_type(native)
-		var prop = v.get_method(native, "to_s")
+		var prop = v.get_method(native, "to_s_with_length")
 		v.add_monomorphic_send(native, prop)
 	end
 end
