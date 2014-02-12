@@ -120,8 +120,6 @@ extern GtkWidget `{GtkWidget *`}
 	fun visible: Bool is extern `{
 		return gtk_widget_is_visible(recv);
 	`}
-
-
 end
 
 #Base class for widgets which contain other widgets
@@ -400,11 +398,14 @@ extern GtkEntry `{GtkEntry *`}
 		gtk_entry_set_text( recv, String_to_cstring( value ) );
 	`}
 
-	fun visible : Bool is extern `{
+	# Is the text visible or is it the invisible char (such as '*')?
+	fun visiblility: Bool is extern `{
 		return gtk_entry_get_visibility( recv );
 	`}
 
-	fun visible=( is_visible : Bool) is extern `{
+	# Set the text visiblility
+	# If false, will use the invisible char (such as '*')
+	fun visibility=( is_visible : Bool) is extern `{
 		gtk_entry_set_visibility( recv, is_visible );
 	`}
 
