@@ -1,239 +1,239 @@
 Start
   value_object
     '{'@(1:1-1:2)
-    members_1
+    members_head
       pair
         string@(1:2-1:10)='\"albums\"'
         ':'@(1:10-1:11)
         value_array
           '['@(1:12-1:13)
-          elements_0
-            elements_0
-              elements_0
-                elements_0
-                  elements_1
+          elements_tail
+            elements_tail
+              elements_tail
+                elements_tail
+                  elements_head
                     value_object
                       '{'@(2:5-2:6)
-                      members_0
-                        members_0
-                          members_0
-                            members_0
-                              members_0
-                                members_1
+                      members_tail
+                        members_tail
+                          members_tail
+                            members_tail
+                              members_tail
+                                members_head
                                   pair
                                     string@(3:9-3:13)='\"id\"'
                                     ':'@(3:13-3:14)
-                                    value_3
+                                    value_string
                                       string@(3:15-3:18)='\"1\"'
                                 ','@(3:18-3:19)
                                 pair
                                   string@(4:9-4:16)='\"title\"'
                                   ':'@(4:16-4:17)
-                                  value_3
+                                  value_string
                                     string@(4:18-4:35)='\"Hide your heart\"'
                               ','@(4:35-4:36)
                               pair
                                 string@(5:9-5:17)='\"artist\"'
                                 ':'@(5:17-5:18)
-                                value_3
+                                value_string
                                   string@(5:19-5:33)='\"Bonnie Tyler\"'
                             ','@(5:33-5:34)
                             pair
                               string@(6:9-6:18)='\"instock\"'
                               ':'@(6:18-6:19)
-                              value_5
+                              value_false
                                 'false'@(6:20-6:25)
                           ','@(6:25-6:26)
                           pair
                             string@(7:9-7:16)='\"price\"'
                             ':'@(7:16-7:17)
-                            value_2
+                            value_number
                               number@(7:18-7:21)='9.9'
                         ','@(7:21-7:22)
                         pair
                           string@(8:9-8:15)='\"year\"'
                           ':'@(8:15-8:16)
-                          value_2
+                          value_number
                             number@(8:17-8:21)='1988'
                       '}'@(9:5-9:6)
                   ','@(9:6-9:7)
                   value_object
                     '{'@(10:5-10:6)
-                    members_0
-                      members_0
-                        members_0
-                          members_0
-                            members_0
-                              members_1
+                    members_tail
+                      members_tail
+                        members_tail
+                          members_tail
+                            members_tail
+                              members_head
                                 pair
                                   string@(11:9-11:13)='\"id\"'
                                   ':'@(11:13-11:14)
-                                  value_3
+                                  value_string
                                     string@(11:15-11:18)='\"2\"'
                               ','@(11:18-11:19)
                               pair
                                 string@(12:9-12:16)='\"title\"'
                                 ':'@(12:16-12:17)
-                                value_3
+                                value_string
                                   string@(12:18-12:33)='\"Greatest Hits\"'
                             ','@(12:33-12:34)
                             pair
                               string@(13:9-13:17)='\"artist\"'
                               ':'@(13:17-13:18)
-                              value_3
+                              value_string
                                 string@(13:19-13:33)='\"Dolly Parton\"'
                           ','@(13:33-13:34)
                           pair
                             string@(14:9-14:18)='\"instock\"'
                             ':'@(14:18-14:19)
-                            value_4
+                            value_true
                               'true'@(14:20-14:24)
                         ','@(14:24-14:25)
                         pair
                           string@(15:9-15:16)='\"price\"'
                           ':'@(15:16-15:17)
-                          value_2
+                          value_number
                             number@(15:18-15:21)='9.9'
                       ','@(15:21-15:22)
                       pair
                         string@(16:9-16:15)='\"year\"'
                         ':'@(16:15-16:16)
-                        value_2
+                        value_number
                           number@(16:17-16:21)='1982'
                     '}'@(17:5-17:6)
                 ','@(17:6-17:7)
                 value_object
                   '{'@(18:5-18:6)
-                  members_0
-                    members_0
-                      members_0
-                        members_0
-                          members_0
-                            members_1
+                  members_tail
+                    members_tail
+                      members_tail
+                        members_tail
+                          members_tail
+                            members_head
                               pair
                                 string@(19:9-19:13)='\"id\"'
                                 ':'@(19:13-19:14)
-                                value_3
+                                value_string
                                   string@(19:15-19:18)='\"3\"'
                             ','@(19:18-19:19)
                             pair
                               string@(20:9-20:16)='\"title\"'
                               ':'@(20:16-20:17)
-                              value_3
+                              value_string
                                 string@(20:18-20:39)='\"Still got the blues\"'
                           ','@(20:39-20:40)
                           pair
                             string@(21:9-21:17)='\"artist\"'
                             ':'@(21:17-21:18)
-                            value_3
+                            value_string
                               string@(21:19-21:31)='\"Gary Moore\"'
                         ','@(21:31-21:32)
                         pair
                           string@(22:9-22:18)='\"instock\"'
                           ':'@(22:18-22:19)
-                          value_4
+                          value_true
                             'true'@(22:20-22:24)
                       ','@(22:24-22:25)
                       pair
                         string@(23:9-23:16)='\"price\"'
                         ':'@(23:16-23:17)
-                        value_2
+                        value_number
                           number@(23:18-23:22)='10.2'
                     ','@(23:22-23:23)
                     pair
                       string@(24:9-24:15)='\"year\"'
                       ':'@(24:15-24:16)
-                      value_2
+                      value_number
                         number@(24:17-24:21)='1990'
                   '}'@(25:5-25:6)
               ','@(25:6-25:7)
               value_object
                 '{'@(26:5-26:6)
-                members_0
-                  members_0
-                    members_0
-                      members_0
-                        members_0
-                          members_1
+                members_tail
+                  members_tail
+                    members_tail
+                      members_tail
+                        members_tail
+                          members_head
                             pair
                               string@(27:9-27:13)='\"id\"'
                               ':'@(27:13-27:14)
-                              value_3
+                              value_string
                                 string@(27:15-27:18)='\"4\"'
                           ','@(27:18-27:19)
                           pair
                             string@(28:9-28:16)='\"title\"'
                             ':'@(28:16-28:17)
-                            value_3
+                            value_string
                               string@(28:18-28:24)='\"Eros\"'
                         ','@(28:24-28:25)
                         pair
                           string@(29:9-29:17)='\"artist\"'
                           ':'@(29:17-29:18)
-                          value_3
+                          value_string
                             string@(29:19-29:36)='\"Eros Ramazzotti\"'
                       ','@(29:36-29:37)
                       pair
                         string@(30:9-30:18)='\"instock\"'
                         ':'@(30:18-30:19)
-                        value_4
+                        value_true
                           'true'@(30:20-30:24)
                     ','@(30:24-30:25)
                     pair
                       string@(31:9-31:16)='\"price\"'
                       ':'@(31:16-31:17)
-                      value_2
+                      value_number
                         number@(31:18-31:21)='9.9'
                   ','@(31:21-31:22)
                   pair
                     string@(32:9-32:15)='\"year\"'
                     ':'@(32:15-32:16)
-                    value_2
+                    value_number
                       number@(32:17-32:21)='1997'
                 '}'@(33:5-33:6)
             ','@(33:6-33:7)
             value_object
               '{'@(34:5-34:6)
-              members_0
-                members_0
-                  members_0
-                    members_0
-                      members_0
-                        members_1
+              members_tail
+                members_tail
+                  members_tail
+                    members_tail
+                      members_tail
+                        members_head
                           pair
                             string@(35:9-35:13)='\"id\"'
                             ':'@(35:13-35:14)
-                            value_3
+                            value_string
                               string@(35:15-35:18)='\"5\"'
                         ','@(35:18-35:19)
                         pair
                           string@(36:9-36:16)='\"title\"'
                           ':'@(36:16-36:17)
-                          value_3
+                          value_string
                             string@(36:18-36:34)='\"One night only\"'
                       ','@(36:34-36:35)
                       pair
                         string@(37:9-37:17)='\"artist\"'
                         ':'@(37:17-37:18)
-                        value_3
+                        value_string
                           string@(37:19-37:29)='\"Bee Gees\"'
                     ','@(37:29-37:30)
                     pair
                       string@(38:9-38:18)='\"instock\"'
                       ':'@(38:18-38:19)
-                      value_5
+                      value_false
                         'false'@(38:20-38:25)
                   ','@(38:25-38:26)
                   pair
                     string@(39:9-39:16)='\"price\"'
                     ':'@(39:16-39:17)
-                    value_2
+                    value_number
                       number@(39:18-39:22)='10.9'
                 ','@(39:22-39:23)
                 pair
                   string@(40:9-40:15)='\"year\"'
                   ':'@(40:15-40:16)
-                  value_2
+                  value_number
                     number@(40:17-40:21)='1998'
               '}'@(41:5-41:6)
           ']'@(42:1-42:2)

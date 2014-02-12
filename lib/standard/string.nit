@@ -1060,15 +1060,15 @@ redef class Map[K,V]
 		var i = iterator
 		var k = i.key
 		var e = i.item
-		if e != null then s.append("{k}{couple_sep}{e}")
-		
+		s.append("{k}{couple_sep}{e or else "<null>"}")
+
 		# Concat other items
 		i.next
 		while i.is_ok do
 			s.append(sep)
 			k = i.key
 			e = i.item
-			if e != null then s.append("{k}{couple_sep}{e}")
+			s.append("{k}{couple_sep}{e or else "<null>"}")
 			i.next
 		end
 		return s.to_s
