@@ -400,6 +400,17 @@ extern GtkEntry `{GtkEntry *`}
 		gtk_entry_set_text( recv, String_to_cstring( value ) );
 	`}
 
+	# Is the text visible or is it the invisible char (such as '*')?
+	fun visiblility: Bool is extern `{
+		return gtk_entry_get_visibility( recv );
+	`}
+
+	# Set the text visiblility
+	# If false, will use the invisible char (such as '*')
+	fun visibility=( is_visible : Bool) is extern `{
+		gtk_entry_set_visibility( recv, is_visible );
+	`}
+
 	fun max_length : Int is extern `{
 		return gtk_entry_get_max_length( recv );
 	`}
