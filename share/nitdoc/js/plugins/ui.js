@@ -29,28 +29,6 @@ define([
 
 	var UI = {
 
-		// Allow user to fold sidebar nav elements on click
-		enableFolding: function(containerSelector) {
-			var container = $(containerSelector);
-			var foldLink = $(document.createElement("a"))
-			.addClass("nitdoc-ui-fold")
-			.html("-");
-
-			container.find("nav h3")
-			.prepend(foldLink)
-			.css("cursor", "pointer")
-			.toggle(
-				function() {
-					$(this).find("a.nitdoc-ui-fold").html("+");
-					$(this).nextAll().toggle();
-				},
-				function() {
-					$(this).find("a.nitdoc-ui-fold").html("-");
-					$(this).nextAll().toggle();
-				}
-			);
-		},
-
 		// Allow user to copy signatures to clipboard with ZeroClipboard flahs plugin
 		// See: https://github.com/zeroclipboard/ZeroClipboard
 		enableCopyToClipboard: function(copySelector) {
@@ -200,7 +178,6 @@ define([
 		}
 	};
 
-	UI.enableFolding(".sidebar");
 	UI.enableCopyToClipboard(".signature");
 	UI.enableSidebarTextFilters("nav.filterable h3");
 	UI.enableSidebarTypeFilters("nav.filterable");

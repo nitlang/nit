@@ -12,6 +12,7 @@ require.config({
 
 // nitdoc main module
 define([
+	"plugins/folding",
 	"plugins/ui",
 	"plugins/quicksearch",
 	"plugins/github",
