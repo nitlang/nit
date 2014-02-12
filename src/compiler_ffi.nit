@@ -491,7 +491,7 @@ redef class MExplicitCast
 		#
 
 		# In nitni files, declare internal function as extern
-		full_friendly_csignature = "{to.cname} {v.compiler.mainmodule.name }___{from.mangled_cname}_as_{to.mangled_cname}({from.cname_blind})"
+		full_friendly_csignature = "{to.cname_blind} {v.compiler.mainmodule.name }___{from.mangled_cname}_as_{to.mangled_cname}({from.cname_blind})"
 		ccu.header_decl.add("extern {full_friendly_csignature};\n")
 
 		# In nitni files, #define friendly as extern
