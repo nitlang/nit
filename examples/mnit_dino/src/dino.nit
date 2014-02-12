@@ -90,7 +90,10 @@ class DinoApp
 				var next_nbr_caveman = game.nbr_wanted_cavemen
 				if game.won then
 					next_nbr_caveman += cavemen_incr
-				else score = new Container[Int](0)
+				else
+					score = new Container[Int](0)
+					next_nbr_caveman = cavemen_at_first_level
+				end
 				game = new Game( next_nbr_caveman, score )
 			else
 				# normal play
