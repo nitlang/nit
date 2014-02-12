@@ -159,6 +159,7 @@ end
 class Entity
 	super Turnable
 
+	fun run_over_distance: Int do return 500
 	var pos = new GamePos( 0, 0 )
 
 	fun squared_dist_with_dino( game : Game ) : Int
@@ -230,6 +231,14 @@ class Dino
 		if is_alive then
 			super
 		end
+
+		for i in t.game.items_on_ground do
+			var dwd = i.squared_dist_with_dino(t.game)
+			if dwd < i.run_over_distance then
+				t.game.items_on_ground.remove i
+				t.game.entities.remove i
+			end
+		end
 	end
 end
 
@@ -243,7 +252,6 @@ class Caveman
 	var throw_distance : Int = 400*40+10.rand
 	var fear_distance : Int = 300*20+8.rand
 	var flee_distance : Int = 600*60+16.rand
-	var run_over_distance = 500
 
 	var fear_duration : Int = 80+40.rand
 	var throw_period : Int = 40+8.rand
