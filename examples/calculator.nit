@@ -113,9 +113,9 @@ class CalculatorGui
 		if user_data isa Char then # is an operation
 			var c = user_data
 			if c == '.' then
-					but_dot.sensitive= false
-					context.switch_to_decimals
-					lbl_disp.text = "{context.current.to_i}."
+				but_dot.sensitive= false
+				context.switch_to_decimals
+				lbl_disp.text = "{context.current.to_i}."
 			else
 				but_dot.sensitive= true
 				context.push_op( c )

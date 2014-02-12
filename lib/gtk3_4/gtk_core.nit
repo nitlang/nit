@@ -120,8 +120,6 @@ extern GtkWidget `{GtkWidget *`}
 	fun visible: Bool is extern `{
 		return gtk_widget_is_visible(recv);
 	`}
-
-
 end
 
 #Base class for widgets which contain other widgets
