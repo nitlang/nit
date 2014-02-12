@@ -19,36 +19,36 @@
 /*
  * Nitdoc Clipboard
  *
- * Allow user to copy signatures to clipboard
+ * Allow user to copy signatures to clipboard with ZeroClipboard flahs plugin
+ * See: https://github.com/zeroclipboard/ZeroClipboard
  */
 define([
 	"jquery",
+	"jQueryUI",
 	"ZeroClipboard"
-], function($, ZeroClipboard) {
-
+], function($, ui, ZeroClipboard) {
 	//FIXME mouseover makes button disappear
-	var Clipboard = {
-		// Allow user to copy signatures to clipboard with ZeroClipboard flahs plugin
-		// See: https://github.com/zeroclipboard/ZeroClipboard
-		enable: function(copySelector) {
-			$(copySelector).each(function() {
-				var btn = $(document.createElement("button"))
-				.addClass("nitdoc-ui-copy")
-				.attr("data-clipboard-text", $(this).attr("data-untyped-signature"))
-				.append(
-					$(document.createElement("img"))
-					.attr("src", './resources/icons/copy.png')
-				);
-				$(this).append(btn);
-			});
-
-			var clip = new ZeroClipboard($("button.nitdoc-ui-copy"), {
+	$.widget("nitdoc.clipboard", {
+		options: {
+			btnClass: "nitdoc-ui-copy",
+			btnImage: "./resources/icons/copy.png",
+			dataKey: "data-untyped-signature",
+			zeroConfig: {
 				moviePath: "./ZeroClipboard.swf"
-			});
+			}
+		},
+
+		_create: function() {
+			this.btn = $("<button/>")
+				.addClass(this.options.btnClass)
+				.attr("data-clipboard-text", this.element.attr(this.options.dataKey))
+				.append(
+					$("<img/>").attr("src", this.options.btnImage)
+				);
+			this.element.append(this.btn);
+			new ZeroClipboard(this.btn, this.options.zeroConfig);
 		}
-	}
+	});
 
-	Clipboard.enable(".signature");
-
-	return Clipboard;
+	$(".signature").clipboard();
 });
