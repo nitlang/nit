@@ -99,7 +99,7 @@ define([
 					this.closeTable();
 					break;
 				default: // Other keys
-					this.search();
+					utils.delayEvent($.proxy(this.search, this));
 					break;
 			}
 		},

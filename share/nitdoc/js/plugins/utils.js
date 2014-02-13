@@ -69,6 +69,15 @@ define([
 				return url.substring(index + 1);
 			}
 			return null;
+		},
+
+		delayEvent: function(handler, event) {
+			if(this.delayEvent.timeout) {
+				clearTimeout(this.delayEvent.timeout);
+			}
+			this.delayEvent.timeout = setTimeout(function() {
+			    handler.call(event);
+			}, 50);
 		}
 	};
 });
