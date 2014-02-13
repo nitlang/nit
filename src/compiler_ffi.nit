@@ -483,7 +483,7 @@ redef class MExplicitCast
 		# special checks
 		if from == to.as_nullable then
 			# format A_is_null
-			ccu.header_decl.add("#define {from.mangled_cname}_is_null {from.mangled_cname}_is_a_{to.mangled_cname}\n")
+			ccu.header_decl.add("#define {from.mangled_cname}_is_null !{from.mangled_cname}_is_a_{to.mangled_cname}\n")
 		end
 
 		#
