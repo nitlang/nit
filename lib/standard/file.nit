@@ -207,6 +207,21 @@ redef class String
 	# Remove a file, return true if success
 	fun file_delete: Bool do return to_cstring.file_delete
 
+	# Copy content of file at `self` to `dest`
+	fun file_copy_to(dest: String)
+	do
+		var input = new IFStream.open(self)
+		var output = new OFStream.open(dest)
+
+		while not input.eof do
+			var buffer = input.read(1024)
+			output.write buffer
+		end
+
+		input.close
+		output.close
+	end
+
 	# remove the trailing extension "ext"
 	fun strip_extension(ext: String): String
 	do
