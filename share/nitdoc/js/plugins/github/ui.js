@@ -27,8 +27,9 @@ define([
 	"plugins/github/utils",
 	"plugins/github/commentbox",
 	"plugins/github/modalbox",
+	"plugins/github/commitbox",
 	"base64"
-], function($, UI, User, GithubAPI, Utils, CommentBox, ModalBox, Base64) {
+], function($, UI, User, GithubAPI, Utils, CommentBox, ModalBox, CommitBox, Base64) {
 	var UI = {
 		openedComments: 0,	// currently edited comments count
 		user: false,		// logged user
@@ -90,6 +91,7 @@ define([
 
 		// Attach edit button on each comment
 		attachCommentEvents: function() {
+			$("body").commitbox();
 			// Blocks without comment
 			$("span.noComment").each(function() {
 				//FIXME this should be done by nitdoc
@@ -136,6 +138,11 @@ define([
 					}
 
 					baseTextarea.commentbox();
+					baseTextarea.bind("commentbox_commit", function(event, data) {
+						$("body").commitbox("open", infos.namespace, infos.user, infos.isNew ? true : false)
+						//infos.message = $("#nitdoc-github-commit-message").val() + "\n\n" + infos.user.signedOff;
+						//UI.saveChanges(infos);
+					});
 					baseTextarea.bind("commentbox_preview", function(event, data) {
 						var converter = new Markdown.Converter()
 						var html = converter.makeHtml(data.value);

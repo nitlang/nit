@@ -11,79 +11,68 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-
-   Documentation generator for the nit language.
-   Generate API documentation in HTML format from nit source code.
 */
 
 /*
- * Nitdoc.GitHub.CommitBox instance
+ * CommitBox allows user to add a message and sign its commit
  */
 define([
 	"jquery",
-	"plugins/github/ui",
-], function($, UI) {
-console.log(UI);
-	// Init new commit box instance
-	var CommitBox = {
-		
-		// Open commit box instance
-		open: function(infos) {
-			$("body").append(
-				$(document.createElement("div"))
-				.attr("id", "nitdoc-github-commitBox-fade")
-				.addClass("nitdoc-github-fade")
-			);
-			$("body").append(
-				$(document.createElement("div"))
+	"jQueryUI"
+], function($) {
+	$.widget("nitdoc.commitbox", {
+
+		options: {
+			title: "Commit changes"
+		},
+
+		_create: function() {
+			this._fade = this._buildFade();
+			$("body").append(this._fade);
+			this._commitBox = $("<div/>")
+				.hide()
 				.attr("id", "nitdoc-github-commitBox")
 				.addClass("nitdoc-github-modal")
 				.append(
-					$(document.createElement("a"))
+					$("<a/>")
 					.addClass("nitdoc-github-close")
 					.attr("title", "Close")
 					.append("x")
-					.click(function() { CommitBox.close() })
+					.click($.proxy(this.close, this))
 				)
-				.append("<h3>Commit changes</h3>")
+				.append("<h3>" + this.options.title + "</h3>")
 				.append(
-					$(document.createElement("div"))
+					$("<div/>")
 					.append(
-						$(document.createElement("label"))
+						$("<label/>")
 						.attr("for", "nitdoc-github-commit-message")
 					)
-					.append("<br/>")
+					.append($("<br/>"))
 					.append(
-						$(document.createElement("textarea"))
+						$("<textarea/>")
 						.attr("id", "nitdoc-github-commit-message")
-						.append("doc: " + (infos.isNew ? "added" : "modified") + " comment for " + infos.namespace)
 					)
-					.append("<br/>")
+					.append($("<br/>"))
 					.append(
-						$(document.createElement("input"))
+						$("<input/>")
 						.attr({
 							id: "nitdoc-github-commit-signedoff",
-							type: "checkbox",
-							value: "Signed-off-by: " + infos.user.signedOff
+							type: "checkbox"
 						})
-						.change(function(e) {
-							if ($(this).is(':checked')) {
-								$("#nitdoc-github-commit-button").removeAttr("disabled");
-							} else {
-								$("#nitdoc-github-commit-button").attr("disabled", "disabled");
-							}
-						})
+						.change($.proxy(this._doSignedChange, this))
 					)
 					.append(
-						$(document.createElement("label"))
-						.attr("for", "nitdoc-github-commit-signedoff")
-						.text("Signed-off-by: " + infos.user.signedOff)
+						$("<label/>")
+						.attr({
+							"id": "nitdoc-github-commit-signedoff-label",
+							"for": "nitdoc-github-commit-signedoff"
+						})
 					)
 				).append(
-					$(document.createElement("div"))
+					$("<div/>")
 					.addClass("nitdoc-github-buttons")
 					.append(
-						$(document.createElement("button"))
+						$("<button/>")
 						.attr({
 							id: "nitdoc-github-commit-button",
 							disabled: "disabled"
@@ -94,33 +83,79 @@ console.log(UI);
 							.attr("src", "resources/icons/github-icon.png")
 						)
 						.append("Commit")
-						.mousedown(function() {
-							$(this).text("Commiting...");
-						})
-						.mouseup(function() {
-							infos.message = $("#nitdoc-github-commit-message").val() + "\n\n" + infos.user.signedOff;
-							UI.saveChanges(infos);
-						})
+						.click($.proxy(this._doCommitClick, this))
 					)
-				)
-			);
+				);
+			$("body").append(this._commitBox);
+		},
 
-			$("#nitdoc-github-commitBox")
-			.css({
+		open: function(namespace, user, isNew) {
+			var message = "doc: " + (isNew ? "added" : "modified") + " comment for " + namespace;
+			this._setMessage(message);
+			this._setSignedOff(user.signedOff);
+			this._fade.show();
+			this._commitBox.show();
+			this._commitBox.css({
 				top: "50%",
-				marginTop: -($("#nitdoc-github-commitBox").outerHeight() / 2) + "px",
+				marginTop: -(this._commitBox.outerHeight() / 2) + "px",
 				left: "50%",
-				marginLeft: -($("#nitdoc-github-commitBox").outerWidth() / 2) + "px"
+				marginLeft: -(this._commitBox.outerWidth() / 2) + "px"
 			})
 			.find("#nitdoc-github-commit-message").focus();
 		},
 
-		// Close commit box instance
 		close: function() {
-			$("#nitdoc-github-commitBox").remove();
-			$("#nitdoc-github-commitBox-fade").remove();
-		}
-	}
+			this._commitBox.hide();
+			this._fade.hide();
+		},
 
-	return CommitBox;
+		/* internals */
+
+		_buildFade: function() {
+			return $("<div/>")
+				.hide()
+				.attr("id", "nitdoc-github-commitBox-fade")
+				.addClass("nitdoc-github-fade")
+		},
+
+		_getMessage: function() {
+			return $("#nitdoc-github-commit-message").val();
+		},
+
+		_setMessage: function(message) {
+			$("#nitdoc-github-commit-message").val(message);
+		},
+
+		_getSignedOff: function() {
+			return $("#nitdoc-github-commit-message").val();
+		},
+
+		_setSignedOff: function(signedoff) {
+			$("#nitdoc-github-commit-signedoff").val(signedoff);
+			$("#nitdoc-github-commit-signedoff-label").text(signedoff);
+		},
+
+		/* events */
+
+		_doSignedChange: function(event) {
+			if ($(event.currentTarget).is(':checked')) {
+				$("#nitdoc-github-commit-button").removeAttr("disabled");
+			} else {
+				$("#nitdoc-github-commit-button").attr("disabled", "disabled");
+			}
+		},
+
+		_doCommitClick: function(event) {
+			$(event.target).text("Commiting...");
+			$(event.target).attr("disabled", "disabled");
+			this._trigger("_commit", event, {
+				message: this._getMessage(),
+				signedoff: this._getSignedOff()
+			});
+		},
+
+		_doCancelClick: function(event) {
+			this._trigger("_cancel", event);
+		}
+	});
 });
