@@ -30,6 +30,8 @@ abstract class AbstractString
 
 	readable private var _items: NativeString
 
+	fun chars: StringCharView is abstract
+
 	# Access a character at `index` in the string.
 	#
 	#     assert "abcd"[2]         == 'c'
@@ -357,6 +359,44 @@ abstract class AbstractString
 	end
 end
 
+# Abstract class for the SequenceRead compatible
+# views on String and Buffer objects
+abstract class StringCharView
+	super SequenceRead[Char]
+
+	type SELFTYPE: AbstractString
+
+	private var target: SELFTYPE
+
+	private init(tgt: SELFTYPE)
+	do
+		target = tgt
+	end
+
+	redef fun is_empty do return target.is_empty
+
+	redef fun length do return target.length
+
+	redef fun has(c: Char): Bool
+	do
+		for i in self do
+			if i == c then return true
+		end
+		return false
+	end
+
+end
+
+# View on Buffer objects, extends Sequence
+# for mutation operations
+abstract class BufferCharView
+	super StringCharView
+	super Sequence[Char]
+
+	redef type SELFTYPE: Buffer
+
+end
+
 # Immutable strings of characters.
 class String
 	super Comparable
@@ -370,6 +410,8 @@ class String
 
 	# Indes in _items of the last item of the string
 	readable var _index_to: Int
+
+	redef var chars: StringCharView = new FlatStringCharView(self)
 
 	################################################
 	#       AbstractString specific methods        #
@@ -676,6 +718,50 @@ class String
 	end
 end
 
+private class FlatStringIterator
+	super IndexedIterator[Char]
+
+	var target: String
+
+	var target_items: NativeString
+
+	var curr_pos: Int
+
+	init with_pos(tgt: String, pos: Int)
+	do
+		target = tgt
+		target_items = tgt.items
+		curr_pos = pos + target.index_from
+	end
+
+	redef fun is_ok do return curr_pos <= target.index_to
+
+	redef fun item do return target_items[curr_pos]
+
+	redef fun next do curr_pos += 1
+
+	redef fun index do return curr_pos - target.index_from
+
+end
+
+private class FlatStringCharView
+	super StringCharView
+
+	redef type SELFTYPE: String
+
+	redef fun [](index)
+	do
+		# Check that the index (+ index_from) is not larger than indexTo
+		# In other terms, if the index is valid
+		assert index >= 0
+		assert (index + target._index_from) <= target._index_to
+		return target._items[index + target._index_from]
+	end
+
+	redef fun iterator: IndexedIterator[Char] do return new FlatStringIterator.with_pos(target, 0)
+
+end
+
 # Mutable strings of characters.
 class Buffer
 	super AbstractString
@@ -684,6 +770,8 @@ class Buffer
 	super AbstractArray[Char]
 
 	redef type OTHER: String
+
+	redef var chars: BufferCharView = new FlatBufferCharView(self)
 
 	redef fun []=(index, item)
 	do
@@ -799,6 +887,81 @@ class Buffer
 	end
 
 	readable private var _capacity: Int
+end
+
+private class FlatBufferCharView
+	super BufferCharView
+	super StringCapable
+
+	redef type SELFTYPE: Buffer
+
+	init(tgt: Buffer)
+	do
+		self.target = tgt
+	end
+
+	redef fun [](index) do return target._items[index]
+
+	redef fun []=(index, item)
+	do
+		assert index >= 0 and index <= length
+		if index == length then
+			add(item)
+			return
+		end
+		target._items[index] = item
+	end
+
+	redef fun push(c)
+	do
+		target.add(c)
+	end
+
+	redef fun add(c)
+	do
+		target.add(c)
+	end
+
+	fun enlarge(cap: Int)
+	do
+		target.enlarge(cap)
+	end
+
+	redef fun append(s)
+	do
+		var my_items = target.items
+		var s_length = s.length
+		if target.capacity < s.length then enlarge(s_length + target.length)
+	end
+
+	redef fun iterator: IndexedIterator[Char] do return new FlatBufferIterator.with_pos(target, 0)
+
+end
+
+private class FlatBufferIterator
+	super IndexedIterator[Char]
+
+	var target: Buffer
+
+	var target_items: NativeString
+
+	var curr_pos: Int
+
+	init with_pos(tgt: Buffer, pos: Int)
+	do
+		target = tgt
+		target_items = tgt.items
+		curr_pos = pos
+	end
+
+	redef fun index do return curr_pos
+
+	redef fun is_ok do return curr_pos < target.length
+
+	redef fun item do return target_items[curr_pos]
+
+	redef fun next do curr_pos += 1
+
 end
 
 ###############################################################################
