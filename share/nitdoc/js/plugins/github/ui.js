@@ -21,12 +21,14 @@
  */
 define([
 	"jquery",
+	"jQueryUI",
 	"plugins/github/user",
 	"plugins/github/github_api",
 	"plugins/github/utils",
 	"plugins/github/commentbox",
-	"base64",
-], function($, User, GithubAPI, Utils, CommentBox, Base64) {
+	"plugins/github/modalbox",
+	"base64"
+], function($, UI, User, GithubAPI, Utils, CommentBox, ModalBox, Base64) {
 	var UI = {
 		openedComments: 0,	// currently edited comments count
 		user: false,		// logged user
@@ -57,7 +59,7 @@ define([
 
 		// clear storage
 		disactivate: function() {
-			if(UI.getOpenedComments() > 0){
+			if(this.openedComments > 0){
 				if(!confirm('There is uncommited modified comments. Are you sure you want to leave this page?')) {
 					return false;
 				}
@@ -124,8 +126,37 @@ define([
 					infos.location = Utils.parseLocation(baseTextarea.attr("data-comment-location"));
 					infos.namespace = baseTextarea.attr("data-comment-namespace");
 					infos.oldComment = baseTextarea.val();
-					var box = new CommentBox(infos);
-					box.open(baseTextarea);
+
+					if(infos.requestID) {
+						// get comment from last pull request
+						var requests = JSON.parse(localStorage.requests);
+						infos.newComment = Base64.decode(requests[infos.requestID].comment);
+					} else {
+						infos.newComment = false;
+					}
+
+					baseTextarea.commentbox();
+					baseTextarea.bind("commentbox_preview", function(event, data) {
+						var converter = new Markdown.Converter()
+						var html = converter.makeHtml(data.value);
+						ModalBox.open("Preview", html, false);
+					});
+					baseTextarea.bind("commentbox_open", function() {
+						UI.openedComments++;
+					});
+					baseTextarea.bind("commentbox_close", function(event, data) {
+						UI.openedComments--;
+						if(infos.isNew) {
+							data.commentBox.commentBox.next().find("span.nitdoc-github-editComment").show();
+						} else if(infos.requestID) {
+							data.commentBox.commentBox.next().show();
+							data.commentBox.commentBox.next().next().show();
+						} else {
+							data.commentBox.commentBox.next().show();
+							data.commentBox.commentBox.next().next().find("span.nitdoc-github-editComment").show();
+						}
+					});
+					baseTextarea.commentbox("open", baseTextarea.val());
 				});
 			});
 		},

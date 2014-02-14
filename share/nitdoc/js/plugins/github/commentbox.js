@@ -11,111 +11,121 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-
-   Documentation generator for the nit language.
-   Generate API documentation in HTML format from nit source code.
 */
 
 /*
- * Nitdoc.GitHub.CommentBox class
+ * CommentBox allows user to edit comments then preview, commit or cancel the changes
  */
 define([
 	"jquery",
-	"base64",
-	"Markdown.Converter",
-	"plugins/github/ui",
-	"plugins/github/commitbox",
-], function($, Base64, mkdown, UI, CommitBox) {
+	"jQueryUI"
+], function($) {
+	$.widget("nitdoc.commentbox", {
 
-	// Init new modal box instance
-	var CommentBox = function(infos) {
-		this.infos = infos;
-		this.commentBoxDiv;
-	};
+		options: {
+			previewTxt: "preview",
+			commitTxt: "Commit...",
+			cancelTxt: "Cancel"
+		},
 
-	CommentBox.prototype.open = function(baseArea) {
-		//TODO redo
-		//UI.addOpenedComments();
-		var instance = this;
+		_create: function() {
+			this.commentBox = $("<div/>")
+			.addClass("nitdoc-github-commentbox")
+			.append(
+				$("<textarea/>")
+				.addClass("nitdoc-github-commentarea")
+				.keyup($.proxy(this._doKeyUp, this))
+				.keydown($.proxy(this._doKeyDown, this))
+			)
+			.append(
+				$("<a/>")
+				.addClass("nitdoc-github-preview")
+				.html(this.options.previewTxt)
+				.click($.proxy(this._doPreviewClick, this))
+			)
+			.append(
+				$("<button/>")
+				.addClass("nitdoc-github-button")
+				.addClass("nitdoc-github-commit")
+				.html(this.options.commitTxt)
+				.click($.proxy(this._doCommitClick, this))
+			)
+			.append(
+				$("<button/>")
+				.addClass("nitdoc-github-button")
+				.addClass("nitdoc-github-cancel")
+				.html(this.options.cancelTxt)
+				.click($.proxy(this._doCancelClick, this))
+			);
 
-		if(this.infos.requestID) {
-			// get comment from last pull request
-			var requests = JSON.parse(localStorage.requests);
-			this.infos.newComment = Base64.decode(requests[this.infos.requestID].comment);
-		} else {
-			this.infos.newComment = false;
-		}
+			this.element.after(this.commentBox);
+		},
 
-		// create comment box
-		var tarea = $(document.createElement("textarea"))
-		.append(this.infos.newComment === false? this.infos.oldComment: this.infos.newComment)
-		.keyup(function(event) {
-			$(event.target).css("height", (event.target.value.split(/\r|\n/).length * 16) + "px");
-			if ( (!instance.infos.requestID && $(event.target).val() != instance.infos.oldComment) || (instance.infos.requestID && $(event.target).val() != instance.infos.oldComment && $(event.target).val() != instance.infos.newComment) ) {
-				$(event.target).parent().find("button.nitdoc-github-commit").removeAttr("disabled");
+		/* public actions */
+
+		open: function(value) {
+			this._originalValue = value;
+			this._setValue(value);
+			this._autosize();
+			this.commentBox.show();
+			var cbw = this.commentBox.innerWidth();
+			var taw = this._getArea().outerWidth();
+			this._getArea().width(cbw - (taw - cbw));
+			this.commentBox.find("textarea").trigger("keyup");
+			this.commentBox.find("textarea").focus();
+			this._trigger("_open", null, {commentBox: this});
+		},
+
+		close: function() {
+			this.commentBox.hide();
+			this._trigger("_close", null, {commentBox: this});
+		},
+
+		/* internals */
+
+		_autosize: function() {
+			this._getArea().height(this._getArea().val().split(/\r|\n/).length * 16);
+		},
+
+		_getArea: function() {
+			return this.commentBox.find("textarea.nitdoc-github-commentarea");
+		},
+
+		_setValue: function(value) {
+			this._getArea().val(value);
+		},
+
+		_getValue: function() {
+			return this._getArea().val();
+		},
+
+		/* events */
+
+		_doKeyUp: function() {
+			if(this._getValue() == this._originalValue) {
+				this.commentBox.find("button.nitdoc-github-commit").attr("disabled", "disabled");
 			} else {
-				$(event.target).parent().find("button.nitdoc-github-commit").attr("disabled", "disabled");
+				this.commentBox.find("button.nitdoc-github-commit").removeAttr("disabled");
 			}
-		})
-		.keydown(function(event) {
+			this._autosize();
+		},
+
+		_doKeyDown: function(event) {
 			if(event.keyCode == 13){
-				$(event.target).css("height", ($(event.target).outerHeight() + 6) + "px");
+				this._getArea().css("height", (this._getArea().outerHeight() + 6) + "px");
 			}
-		});
+		},
 
-		this.commentBoxDiv = $(document.createElement("div"))
-		.addClass("nitdoc-github-commentbox")
-		.append(tarea)
-		.append(
-			$(document.createElement("a"))
-			.addClass("nitdoc-github-preview")
-			.click(function() {
-				var converter = new Markdown.Converter()
-				var html = converter.makeHtml(tarea.val());
-				ModalBox.open("Preview", html, false);
-			})
-		)
-		.append(
-			$(document.createElement("button"))
-			.addClass("nitdoc-github-button")
-			.addClass("nitdoc-github-commit")
-			.append("Commit")
-			.click(function() {
-				instance.infos.newComment = tarea.val();
-				instance.infos.commentBox = instance;
-				CommitBox.open(instance.infos);
-			})
-		)
-		.append(
-			$(document.createElement("button"))
-			.addClass("nitdoc-github-button")
-			.addClass("nitdoc-github-cancel")
-			.append("Cancel")
-			.click(function() {instance.close()})
-		);
+		_doPreviewClick: function(event) {
+			this._trigger("_preview", event, {value: this._getValue()});
+		},
 
-		baseArea.after(this.commentBoxDiv);
-		var cbWidth = this.commentBoxDiv.innerWidth();
-		var taWidth = tarea.outerWidth();
-		tarea.width(cbWidth - (taWidth - cbWidth));
-		tarea.trigger("keyup");
-		tarea.focus();
-	};
+		_doCommitClick: function() {
+			this._trigger("_commit", {value: this._getValue()});
+		},
 
-	CommentBox.prototype.close = function() {
-		//TODO redo
-		//UI.remOpenedComments();
-		if(this.infos.isNew) {
-			this.commentBoxDiv.next().find("span.nitdoc-github-editComment").show();
-		} else if(this.infos.requestID) {
-			this.commentBoxDiv.next().show();
-			this.commentBoxDiv.next().next().show();
-		} else {
-			this.commentBoxDiv.next().show();
-			this.commentBoxDiv.next().next().find("span.nitdoc-github-editComment").show();
+		_doCancelClick: function() {
+			this.close();
 		}
-		this.commentBoxDiv.remove();
-	};
-
-	return CommentBox;
+	});
 });
