@@ -618,12 +618,12 @@ at_arg~nopar {-> at_arg}
 	;
 
 atid~forclass {-> atid}
-	= {id} qualified? id {-> New atid.id(id)}
+	= {id}  id {-> New atid.id(id)}
 //!forclass	| {kwextern} qualified? kwextern {-> New atid.kwextern(kwextern)}
 //!forclass	| {kwintern} qualified? kwintern {-> New atid.kwintern(kwintern)}
-!forclass	| {kwreadable} qualified? kwreadable {-> New atid.kwreadable(kwreadable)}
-!forclass	| {kwwritable} qualified? kwwritable {-> New atid.kwwritable(kwwritable)}
-	| {kwimport} qualified? kwimport {-> New atid.kwimport(kwimport)}
+!forclass	| {kwreadable} kwreadable {-> New atid.kwreadable(kwreadable)}
+!forclass	| {kwwritable} kwwritable {-> New atid.kwwritable(kwwritable)}
+	| {kwimport} kwimport {-> New atid.kwimport(kwimport)}
 	;
 
 /* MISC **********************************************************************/
