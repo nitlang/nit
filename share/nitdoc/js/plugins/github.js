@@ -26,12 +26,40 @@ define([
 	"base64",
 	"plugins/github/ui",
 	"plugins/github/loginbox",
-], function($, Base64, UI, LoginBox) {
+	"plugins/github/modalbox",
+], function($, Base64, UI, LoginBox, ModalBox) {
 	// Load GitHub UI
 	var upstream = $("body").attr("data-github-upstream");
 	var basesha1 = $("body").attr("data-github-base-sha1");
 	if(upstream && basesha1) {
-		console.log("init GitHub module (upstream: "+ upstream +", base: " + basesha1 + ")");
+		console.info("Github plugin: init GitHub module (upstream: "+ upstream +", base: " + basesha1 + ")");
+
+		$("nav.main ul").append(
+			$("<li/>").attr("id", "nitdoc-github-li")
+		);
+		$("#nitdoc-github-li")
+		.loginbox()
+		.bind( "loginbox_logoff", function() {
+			UI.disactivate();
+			$("#nitdoc-github-li").loginbox("toggle");
+		})
+		.bind( "loginbox_login", function(event, infos) {
+			if(!infos.login || !infos.password || !infos.repo || !infos.branch) {
+				ModalBox.open("Sign in error", "Please enter your GitHub username, password, repository and branch.", true);
+			} else {
+				var user = UI.tryLogin(infos.login, infos.password, infos.repo, infos.branch);
+				if(user == "error:login") {
+					ModalBox.open("Sign in error", "The username, password, repo or branch you entered is incorrect.", true);
+				} else if(user == "error:sha") {
+					ModalBox.open("Base commit not found", "The provided GitHub repository must contains the base commit '" + UI.origin.sha + "'", true);
+				} else if(user == "error:profile") {
+					ModalBox.open("Incomplete GitHub profile", "Please set your public name and email in your <a href='https://github.com/settings/profile'>GitHub profile</a>.<br/><br/>Your public profile informations are used to sign-off your commits.", true);
+				} else {
+					UI.activate(user);
+					$("#nitdoc-github-li").loginbox("displayLogout", UI.origin, UI.user);
+				}
+			}
+		});
 
 		// parse origin
 		var parts = upstream.split(":");
@@ -48,20 +76,18 @@ define([
 			var session = JSON.parse(localStorage.user);
 			UI.user = UI.tryLogin(session.login, Base64.decode(session.password), session.repo, session.branch);
 			if(!UI.user.login) {
-				console.log("Session found but authentification failed");
+				console.debug("Github plugin: Session found but authentification failed");
 				localStorage.clear();
 			}
 
 			// activate ui
-			LoginBox.init("nav.main ul");
 			if(UI.user && UI.user.login) {
-				LoginBox.displayLogout(UI.origin, UI.user);
+				$("#nitdoc-github-li").loginbox("displayLogout", UI.origin, UI.user);
 				UI.activate(UI.user);
-			} else {
-				LoginBox.displayLogin();
 			}
 		} else {
-			console.log("No session found");
+			console.debug("Github plugin: No session found");
+			$("#nitdoc-github-li").loginbox("displayLogin");
 		}
 	}
 });
