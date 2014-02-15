@@ -24,7 +24,7 @@
 define([
 	"jquery",
 	"base64",
-	"plugins/github/github_api",
+	"github-api",
 	"plugins/github/loginbox",
 	"plugins/github/modalbox",
 	"plugins/github/commentbox",
