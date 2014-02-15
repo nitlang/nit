@@ -1824,11 +1824,13 @@ redef class AModule
 		return ""
 	end
 
+	# The doc location or the first line of the block if doc node is null
 	private fun doc_location: Location do
 		if n_moduledecl != null and n_moduledecl.n_doc != null then
 			return n_moduledecl.n_doc.location
 		end
-		return location
+		var l = location
+		return new Location(l.file, l.line_start, l.line_start, l.column_start, l.column_start)
 	end
 end
 
@@ -1848,9 +1850,11 @@ redef class AStdClassdef
 		return ""
 	end
 
+	# The doc location or the first line of the block if doc node is null
 	private fun doc_location: Location do
 		if n_doc != null then return n_doc.location
-		return location
+		var l = location
+		return new Location(l.file, l.line_start, l.line_start, l.column_start, l.column_start)
 	end
 end
 
@@ -1872,7 +1876,9 @@ redef class APropdef
 
 	private fun doc_location: Location do
 		if n_doc != null then return n_doc.location
-		return location
+		var l = location
+		return new Location(l.file, l.line_start, l.line_start, l.column_start, l.column_start)
+
 	end
 end
 
