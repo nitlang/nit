@@ -240,14 +240,40 @@ button.nitdoc-github-button img {
 /* Comment editing */
 
 .nitdoc-github-commentbox {
+	margin: 1em 5px;
+	border:	1px solid #eee;
+	padding: 1em;
+	background: #fff;
+	-moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+	-webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.nitdoc-github-commentbox h3 {
+	margin: 0;
+}
+
+.nitdoc-github-commentbox-buttons {
 	text-align: right;
 }
 
+.nitdoc-github-commentbox dl {
+	margin-bottom: 0;
+}
+
+.nitdoc-github-commentbox dt {
+	margin-bottom: 0.5em;
+}
+
+.nitdoc-github-commentbox dd {
+	margin: 0 0 1em 0;
+}
+
 .nitdoc-github-commentbox textarea {
+	display: block;
 	font-family: monospace;
 	font-size: 1em;
 	width: 100%;
-	margin-top: 1em;
 	padding: 4px;
 	padding-left: 11px;
 	overflow-y: hidden;
