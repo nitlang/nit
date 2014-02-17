@@ -16,7 +16,6 @@
 module standard
 
 import posix
-import ropes
 import environ 
 import time
 import string_search
