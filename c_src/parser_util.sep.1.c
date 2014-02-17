@@ -45,15 +45,12 @@ var2 = var5;
 varonce = var2;
 }
 ((void (*)(val*, val*, val*))(var1->class->vft[COLOR_location__SourceFile__from_string]))(var1, var2, var_string) /* from_string on <var1:SourceFile>*/;
-CHECK_NEW_location__SourceFile(var1);
 var_source = var1;
 var6 = NEW_lexer__Lexer(&type_lexer__Lexer);
 ((void (*)(val*, val*))(var6->class->vft[COLOR_lexer__Lexer__init]))(var6, var_source) /* init on <var6:Lexer>*/;
-CHECK_NEW_lexer__Lexer(var6);
 var_lexer = var6;
 var7 = NEW_parser__Parser(&type_parser__Parser);
 ((void (*)(val*, val*))(var7->class->vft[COLOR_parser__Parser__init]))(var7, var_lexer) /* init on <var7:Parser>*/;
-CHECK_NEW_parser__Parser(var7);
 var_parser = var7;
 var8 = ((val* (*)(val*))(var_parser->class->vft[COLOR_parser__Parser__parse]))(var_parser) /* parse on <var_parser:Parser>*/;
 var_tree = var8;
@@ -86,20 +83,19 @@ var20 = NEW_array__NativeArray(var19, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var20)->values[0] = (val*) var13;
 ((struct instance_array__NativeArray*)var20)->values[1] = (val*) var17;
 ((void (*)(val*, val*, long))(var18->class->vft[COLOR_array__Array__with_native]))(var18, var20, var19) /* with_native on <var18:Array[Object]>*/;
-CHECK_NEW_array__Array(var18);
 }
 var21 = ((val* (*)(val*))(var18->class->vft[COLOR_string__Object__to_s]))(var18) /* to_s on <var18:Array[Object]>*/;
 ((void (*)(val*, val*, val*))(self->class->vft[COLOR_toolcontext__ToolContext__fatal_error]))(self, var11, var21) /* fatal_error on <self:ToolContext>*/;
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser_util.nit", 34);
-exit(1);
+show_backtrace(1);
 } else {
 }
 var22 = ((val* (*)(val*))(var_tree->class->vft[COLOR_parser_nodes__Start__n_base]))(var_tree) /* n_base on <var_tree:Start>*/;
 if (var22 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser_util.nit", 36);
-exit(1);
+show_backtrace(1);
 }
 var = var22;
 goto RET_LABEL;
@@ -163,7 +159,7 @@ varonce = var10;
 ((void (*)(val*, val*, val*))(self->class->vft[COLOR_toolcontext__ToolContext__fatal_error]))(self, var9, var10) /* fatal_error on <self:ToolContext>*/;
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser_util.nit", 47);
-exit(1);
+show_backtrace(1);
 } else {
 }
 var14 = ((val* (*)(val*))(var_nclassdefs->class->vft[COLOR_abstract_collection__Collection__first]))(var_nclassdefs) /* first on <var_nclassdefs:ANodes[AClassdef]>*/;
@@ -220,7 +216,6 @@ var_string = p0;
 var1 = NEW_array__Array(&type_array__Arraykernel__Object);
 var2 = 3;
 ((void (*)(val*, long))(var1->class->vft[COLOR_array__Array__with_capacity]))(var1, var2) /* with_capacity on <var1:Array[Object]>*/;
-CHECK_NEW_array__Array(var1);
 var_ = var1;
 if (varonce) {
 var3 = varonce;
@@ -272,7 +267,7 @@ varonce22 = var23;
 ((void (*)(val*, val*, val*))(self->class->vft[COLOR_toolcontext__ToolContext__fatal_error]))(self, var21, var23) /* fatal_error on <self:ToolContext>*/;
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser_util.nit", 61);
-exit(1);
+show_backtrace(1);
 } else {
 }
 var27 = ((val* (*)(val*))(var_npropdefs->class->vft[COLOR_abstract_collection__Collection__first]))(var_npropdefs) /* first on <var_npropdefs:ANodes[APropdef]>*/;
@@ -336,7 +331,6 @@ var_string = p0;
 var1 = NEW_array__Array(&type_array__Arraykernel__Object);
 var2 = 3;
 ((void (*)(val*, long))(var1->class->vft[COLOR_array__Array__with_capacity]))(var1, var2) /* with_capacity on <var1:Array[Object]>*/;
-CHECK_NEW_array__Array(var1);
 var_ = var1;
 if (varonce) {
 var3 = varonce;
@@ -379,7 +373,7 @@ if (!var18) {
 var_class_name = var17 == NULL ? "null" : var17->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "AMainMethPropdef", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "src/parser_util.nit", 72);
-exit(1);
+show_backtrace(1);
 }
 var19 = ((val* (*)(val*))(var17->class->vft[COLOR_parser_nodes__AConcreteMethPropdef__n_block]))(var17) /* n_block on <var17:APropdef(AMainMethPropdef)>*/;
 /* <var19:nullable AExpr> isa ABlockExpr */
@@ -398,7 +392,7 @@ if (!var20) {
 var_class_name23 = var19 == NULL ? "null" : var19->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "ABlockExpr", var_class_name23);
 fprintf(stderr, " (%s:%d)\n", "src/parser_util.nit", 72);
-exit(1);
+show_backtrace(1);
 }
 var24 = ((val* (*)(val*))(var19->class->vft[COLOR_parser_nodes__ABlockExpr__n_expr]))(var19) /* n_expr on <var19:nullable AExpr(ABlockExpr)>*/;
 var25 = ((val* (*)(val*))(var24->class->vft[COLOR_abstract_collection__Collection__first]))(var24) /* first on <var24:ANodes[AExpr]>*/;
@@ -414,13 +408,13 @@ if (!var26) {
 var_class_name29 = var25 == NULL ? "null" : var25->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "ADoExpr", var_class_name29);
 fprintf(stderr, " (%s:%d)\n", "src/parser_util.nit", 72);
-exit(1);
+show_backtrace(1);
 }
 var30 = ((val* (*)(val*))(var25->class->vft[COLOR_parser_nodes__ADoExpr__n_block]))(var25) /* n_block on <var25:AExpr(ADoExpr)>*/;
 if (var30 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser_util.nit", 72);
-exit(1);
+show_backtrace(1);
 }
 var_nblock = var30;
 var = var_nblock;
@@ -483,7 +477,6 @@ var_string = p0;
 var1 = NEW_array__Array(&type_array__Arraykernel__Object);
 var2 = 3;
 ((void (*)(val*, long))(var1->class->vft[COLOR_array__Array__with_capacity]))(var1, var2) /* with_capacity on <var1:Array[Object]>*/;
-CHECK_NEW_array__Array(var1);
 var_ = var1;
 if (varonce) {
 var3 = varonce;
@@ -526,7 +519,7 @@ if (!var18) {
 var_class_name = var17 == NULL ? "null" : var17->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "AMainMethPropdef", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "src/parser_util.nit", 82);
-exit(1);
+show_backtrace(1);
 }
 var19 = ((val* (*)(val*))(var17->class->vft[COLOR_parser_nodes__AConcreteMethPropdef__n_block]))(var17) /* n_block on <var17:APropdef(AMainMethPropdef)>*/;
 /* <var19:nullable AExpr> isa ABlockExpr */
@@ -545,7 +538,7 @@ if (!var20) {
 var_class_name23 = var19 == NULL ? "null" : var19->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "ABlockExpr", var_class_name23);
 fprintf(stderr, " (%s:%d)\n", "src/parser_util.nit", 82);
-exit(1);
+show_backtrace(1);
 }
 var24 = ((val* (*)(val*))(var19->class->vft[COLOR_parser_nodes__ABlockExpr__n_expr]))(var19) /* n_expr on <var19:nullable AExpr(ABlockExpr)>*/;
 var25 = ((val* (*)(val*))(var24->class->vft[COLOR_abstract_collection__Collection__first]))(var24) /* first on <var24:ANodes[AExpr]>*/;
@@ -561,13 +554,13 @@ if (!var26) {
 var_class_name29 = var25 == NULL ? "null" : var25->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "AVardeclExpr", var_class_name29);
 fprintf(stderr, " (%s:%d)\n", "src/parser_util.nit", 82);
-exit(1);
+show_backtrace(1);
 }
 var30 = ((val* (*)(val*))(var25->class->vft[COLOR_parser_nodes__AVardeclExpr__n_expr]))(var25) /* n_expr on <var25:AExpr(AVardeclExpr)>*/;
 if (var30 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser_util.nit", 82);
-exit(1);
+show_backtrace(1);
 }
 var_nexpr = var30;
 var = var_nexpr;
@@ -770,45 +763,36 @@ var2 = var5;
 varonce = var2;
 }
 ((void (*)(val*, val*, val*))(var1->class->vft[COLOR_location__SourceFile__from_string]))(var1, var2, var_string) /* from_string on <var1:SourceFile>*/;
-CHECK_NEW_location__SourceFile(var1);
 var_source = var1;
 var6 = NEW_parser_util__InjectedLexer(&type_parser_util__InjectedLexer);
 ((void (*)(val*, val*))(var6->class->vft[COLOR_lexer__Lexer__init]))(var6, var_source) /* init on <var6:InjectedLexer>*/;
-CHECK_NEW_parser_util__InjectedLexer(var6);
 var_lexer = var6;
 var7 = ((val* (*)(val*))(var_lexer->class->vft[COLOR_parser_util__InjectedLexer__injected_before]))(var_lexer) /* injected_before on <var_lexer:nullable Object(InjectedLexer)>*/;
 var8 = NEW_parser_nodes__TKwvar(&type_parser_nodes__TKwvar);
 ((void (*)(val*))(var8->class->vft[COLOR_parser_nodes__TKwvar__init]))(var8) /* init on <var8:TKwvar>*/;
-CHECK_NEW_parser_nodes__TKwvar(var8);
 ((void (*)(val*, val*))(var7->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var7, var8) /* add on <var7:List[Token]>*/;
 var9 = ((val* (*)(val*))(var_lexer->class->vft[COLOR_parser_util__InjectedLexer__injected_before]))(var_lexer) /* injected_before on <var_lexer:nullable Object(InjectedLexer)>*/;
 var10 = NEW_parser_nodes__TId(&type_parser_nodes__TId);
 ((void (*)(val*))(var10->class->vft[COLOR_parser_nodes__TId__init]))(var10) /* init on <var10:TId>*/;
-CHECK_NEW_parser_nodes__TId(var10);
 ((void (*)(val*, val*))(var9->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var9, var10) /* add on <var9:List[Token]>*/;
 var11 = ((val* (*)(val*))(var_lexer->class->vft[COLOR_parser_util__InjectedLexer__injected_before]))(var_lexer) /* injected_before on <var_lexer:nullable Object(InjectedLexer)>*/;
 var12 = NEW_parser_nodes__TColumn(&type_parser_nodes__TColumn);
 ((void (*)(val*))(var12->class->vft[COLOR_parser_nodes__TColumn__init]))(var12) /* init on <var12:TColumn>*/;
-CHECK_NEW_parser_nodes__TColumn(var12);
 ((void (*)(val*, val*))(var11->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var11, var12) /* add on <var11:List[Token]>*/;
 var13 = ((val* (*)(val*))(var_lexer->class->vft[COLOR_parser_util__InjectedLexer__injected_before]))(var_lexer) /* injected_before on <var_lexer:nullable Object(InjectedLexer)>*/;
 var14 = NEW_parser_nodes__TClassid(&type_parser_nodes__TClassid);
 ((void (*)(val*))(var14->class->vft[COLOR_parser_nodes__TClassid__init]))(var14) /* init on <var14:TClassid>*/;
-CHECK_NEW_parser_nodes__TClassid(var14);
 ((void (*)(val*, val*))(var13->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var13, var14) /* add on <var13:List[Token]>*/;
 var15 = ((val* (*)(val*))(var_lexer->class->vft[COLOR_parser_util__InjectedLexer__injected_before]))(var_lexer) /* injected_before on <var_lexer:nullable Object(InjectedLexer)>*/;
 var16 = NEW_parser_nodes__TObra(&type_parser_nodes__TObra);
 ((void (*)(val*))(var16->class->vft[COLOR_parser_nodes__TObra__init]))(var16) /* init on <var16:TObra>*/;
-CHECK_NEW_parser_nodes__TObra(var16);
 ((void (*)(val*, val*))(var15->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var15, var16) /* add on <var15:List[Token]>*/;
 var17 = ((val* (*)(val*))(var_lexer->class->vft[COLOR_parser_util__InjectedLexer__injected_after]))(var_lexer) /* injected_after on <var_lexer:nullable Object(InjectedLexer)>*/;
 var18 = NEW_parser_nodes__TCbra(&type_parser_nodes__TCbra);
 ((void (*)(val*))(var18->class->vft[COLOR_parser_nodes__TCbra__init]))(var18) /* init on <var18:TCbra>*/;
-CHECK_NEW_parser_nodes__TCbra(var18);
 ((void (*)(val*, val*))(var17->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var17, var18) /* add on <var17:List[Token]>*/;
 var19 = NEW_parser__Parser(&type_parser__Parser);
 ((void (*)(val*, val*))(var19->class->vft[COLOR_parser__Parser__init]))(var19, var_lexer) /* init on <var19:Parser>*/;
-CHECK_NEW_parser__Parser(var19);
 var20 = ((val* (*)(val*))(var19->class->vft[COLOR_parser__Parser__parse]))(var19) /* parse on <var19:Parser>*/;
 var_tree = var20;
 var21 = ((val* (*)(val*))(var_tree->class->vft[COLOR_parser_nodes__Start__n_eof]))(var_tree) /* n_eof on <var_tree:nullable Object(Start)>*/;
@@ -827,7 +811,7 @@ var24 = ((val* (*)(val*))(var_tree->class->vft[COLOR_parser_nodes__Start__n_base
 if (var24 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser_util.nit", 114);
-exit(1);
+show_backtrace(1);
 } else {
 var25 = ((val* (*)(val*))(var24->class->vft[COLOR_parser_nodes__AModule__n_classdefs]))(var24) /* n_classdefs on <var24:nullable AModule>*/;
 }
@@ -846,7 +830,7 @@ if (!var29) {
 var_class_name = var28 == NULL ? "null" : var28->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "AMainMethPropdef", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "src/parser_util.nit", 114);
-exit(1);
+show_backtrace(1);
 }
 var32 = ((val* (*)(val*))(var28->class->vft[COLOR_parser_nodes__AConcreteMethPropdef__n_block]))(var28) /* n_block on <var28:APropdef(AMainMethPropdef)>*/;
 /* <var32:nullable AExpr> isa ABlockExpr */
@@ -865,7 +849,7 @@ if (!var33) {
 var_class_name36 = var32 == NULL ? "null" : var32->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "ABlockExpr", var_class_name36);
 fprintf(stderr, " (%s:%d)\n", "src/parser_util.nit", 114);
-exit(1);
+show_backtrace(1);
 }
 var37 = ((val* (*)(val*))(var32->class->vft[COLOR_parser_nodes__ABlockExpr__n_expr]))(var32) /* n_expr on <var32:nullable AExpr(ABlockExpr)>*/;
 var38 = ((val* (*)(val*))(var37->class->vft[COLOR_abstract_collection__Collection__first]))(var37) /* first on <var37:ANodes[AExpr]>*/;
@@ -881,13 +865,13 @@ if (!var39) {
 var_class_name42 = var38 == NULL ? "null" : var38->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "AVardeclExpr", var_class_name42);
 fprintf(stderr, " (%s:%d)\n", "src/parser_util.nit", 114);
-exit(1);
+show_backtrace(1);
 }
 var43 = ((val* (*)(val*))(var38->class->vft[COLOR_parser_nodes__AVardeclExpr__n_type]))(var38) /* n_type on <var38:AExpr(AVardeclExpr)>*/;
 if (var43 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser_util.nit", 114);
-exit(1);
+show_backtrace(1);
 } else {
 var44 = ((val* (*)(val*))(var43->class->vft[COLOR_parser_nodes__AType__n_types]))(var43) /* n_types on <var43:nullable AType>*/;
 }
@@ -900,7 +884,6 @@ goto RET_LABEL;
 var_error = var_eof;
 var46 = NEW_lexer__Lexer(&type_lexer__Lexer);
 ((void (*)(val*, val*))(var46->class->vft[COLOR_lexer__Lexer__init]))(var46, var_source) /* init on <var46:Lexer>*/;
-CHECK_NEW_lexer__Lexer(var46);
 var_lexer = var46;
 var47 = ((val* (*)(val*))(var_lexer->class->vft[COLOR_lexer__Lexer__next]))(var_lexer) /* next on <var_lexer:nullable Object(Lexer)>*/;
 var_first = var47;
@@ -948,36 +931,29 @@ goto RET_LABEL;
 }
 var61 = NEW_parser_util__InjectedLexer(&type_parser_util__InjectedLexer);
 ((void (*)(val*, val*))(var61->class->vft[COLOR_lexer__Lexer__init]))(var61, var_source) /* init on <var61:InjectedLexer>*/;
-CHECK_NEW_parser_util__InjectedLexer(var61);
 var_lexer = var61;
 var62 = ((val* (*)(val*))(var_lexer->class->vft[COLOR_parser_util__InjectedLexer__injected_before]))(var_lexer) /* injected_before on <var_lexer:nullable Object(InjectedLexer)>*/;
 var63 = NEW_parser_nodes__TKwvar(&type_parser_nodes__TKwvar);
 ((void (*)(val*))(var63->class->vft[COLOR_parser_nodes__TKwvar__init]))(var63) /* init on <var63:TKwvar>*/;
-CHECK_NEW_parser_nodes__TKwvar(var63);
 ((void (*)(val*, val*))(var62->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var62, var63) /* add on <var62:List[Token]>*/;
 var64 = ((val* (*)(val*))(var_lexer->class->vft[COLOR_parser_util__InjectedLexer__injected_before]))(var_lexer) /* injected_before on <var_lexer:nullable Object(InjectedLexer)>*/;
 var65 = NEW_parser_nodes__TId(&type_parser_nodes__TId);
 ((void (*)(val*))(var65->class->vft[COLOR_parser_nodes__TId__init]))(var65) /* init on <var65:TId>*/;
-CHECK_NEW_parser_nodes__TId(var65);
 ((void (*)(val*, val*))(var64->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var64, var65) /* add on <var64:List[Token]>*/;
 var66 = ((val* (*)(val*))(var_lexer->class->vft[COLOR_parser_util__InjectedLexer__injected_before]))(var_lexer) /* injected_before on <var_lexer:nullable Object(InjectedLexer)>*/;
 var67 = NEW_parser_nodes__TAssign(&type_parser_nodes__TAssign);
 ((void (*)(val*))(var67->class->vft[COLOR_parser_nodes__TAssign__init]))(var67) /* init on <var67:TAssign>*/;
-CHECK_NEW_parser_nodes__TAssign(var67);
 ((void (*)(val*, val*))(var66->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var66, var67) /* add on <var66:List[Token]>*/;
 var68 = ((val* (*)(val*))(var_lexer->class->vft[COLOR_parser_util__InjectedLexer__injected_before]))(var_lexer) /* injected_before on <var_lexer:nullable Object(InjectedLexer)>*/;
 var69 = NEW_parser_nodes__TOpar(&type_parser_nodes__TOpar);
 ((void (*)(val*))(var69->class->vft[COLOR_parser_nodes__TOpar__init]))(var69) /* init on <var69:TOpar>*/;
-CHECK_NEW_parser_nodes__TOpar(var69);
 ((void (*)(val*, val*))(var68->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var68, var69) /* add on <var68:List[Token]>*/;
 var70 = ((val* (*)(val*))(var_lexer->class->vft[COLOR_parser_util__InjectedLexer__injected_after]))(var_lexer) /* injected_after on <var_lexer:nullable Object(InjectedLexer)>*/;
 var71 = NEW_parser_nodes__TCpar(&type_parser_nodes__TCpar);
 ((void (*)(val*))(var71->class->vft[COLOR_parser_nodes__TCpar__init]))(var71) /* init on <var71:TCpar>*/;
-CHECK_NEW_parser_nodes__TCpar(var71);
 ((void (*)(val*, val*))(var70->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var70, var71) /* add on <var70:List[Token]>*/;
 var72 = NEW_parser__Parser(&type_parser__Parser);
 ((void (*)(val*, val*))(var72->class->vft[COLOR_parser__Parser__init]))(var72, var_lexer) /* init on <var72:Parser>*/;
-CHECK_NEW_parser__Parser(var72);
 var73 = ((val* (*)(val*))(var72->class->vft[COLOR_parser__Parser__parse]))(var72) /* parse on <var72:Parser>*/;
 var_tree = var73;
 var74 = ((val* (*)(val*))(var_tree->class->vft[COLOR_parser_nodes__Start__n_eof]))(var_tree) /* n_eof on <var_tree:nullable Object(Start)>*/;
@@ -996,7 +972,7 @@ var79 = ((val* (*)(val*))(var_tree->class->vft[COLOR_parser_nodes__Start__n_base
 if (var79 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser_util.nit", 137);
-exit(1);
+show_backtrace(1);
 } else {
 var80 = ((val* (*)(val*))(var79->class->vft[COLOR_parser_nodes__AModule__n_classdefs]))(var79) /* n_classdefs on <var79:nullable AModule>*/;
 }
@@ -1015,7 +991,7 @@ if (!var84) {
 var_class_name87 = var83 == NULL ? "null" : var83->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "AMainMethPropdef", var_class_name87);
 fprintf(stderr, " (%s:%d)\n", "src/parser_util.nit", 137);
-exit(1);
+show_backtrace(1);
 }
 var88 = ((val* (*)(val*))(var83->class->vft[COLOR_parser_nodes__AConcreteMethPropdef__n_block]))(var83) /* n_block on <var83:APropdef(AMainMethPropdef)>*/;
 /* <var88:nullable AExpr> isa ABlockExpr */
@@ -1034,7 +1010,7 @@ if (!var89) {
 var_class_name92 = var88 == NULL ? "null" : var88->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "ABlockExpr", var_class_name92);
 fprintf(stderr, " (%s:%d)\n", "src/parser_util.nit", 137);
-exit(1);
+show_backtrace(1);
 }
 var93 = ((val* (*)(val*))(var88->class->vft[COLOR_parser_nodes__ABlockExpr__n_expr]))(var88) /* n_expr on <var88:nullable AExpr(ABlockExpr)>*/;
 var94 = ((val* (*)(val*))(var93->class->vft[COLOR_abstract_collection__Collection__first]))(var93) /* first on <var93:ANodes[AExpr]>*/;
@@ -1050,7 +1026,7 @@ if (!var95) {
 var_class_name98 = var94 == NULL ? "null" : var94->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "AVardeclExpr", var_class_name98);
 fprintf(stderr, " (%s:%d)\n", "src/parser_util.nit", 137);
-exit(1);
+show_backtrace(1);
 }
 var99 = ((val* (*)(val*))(var94->class->vft[COLOR_parser_nodes__AVardeclExpr__n_expr]))(var94) /* n_expr on <var94:AExpr(AVardeclExpr)>*/;
 /* <var99:nullable AExpr> isa AParExpr */
@@ -1069,7 +1045,7 @@ if (!var100) {
 var_class_name103 = var99 == NULL ? "null" : var99->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "AParExpr", var_class_name103);
 fprintf(stderr, " (%s:%d)\n", "src/parser_util.nit", 137);
-exit(1);
+show_backtrace(1);
 }
 var104 = ((val* (*)(val*))(var99->class->vft[COLOR_parser_nodes__AProxyExpr__n_expr]))(var99) /* n_expr on <var99:nullable AExpr(AParExpr)>*/;
 var_nexpr = var104;
@@ -1086,21 +1062,17 @@ var_error = var_eof;
 }
 var108 = NEW_parser_util__InjectedLexer(&type_parser_util__InjectedLexer);
 ((void (*)(val*, val*))(var108->class->vft[COLOR_lexer__Lexer__init]))(var108, var_source) /* init on <var108:InjectedLexer>*/;
-CHECK_NEW_parser_util__InjectedLexer(var108);
 var_lexer = var108;
 var109 = ((val* (*)(val*))(var_lexer->class->vft[COLOR_parser_util__InjectedLexer__injected_before]))(var_lexer) /* injected_before on <var_lexer:nullable Object(InjectedLexer)>*/;
 var110 = NEW_parser_nodes__TKwdo(&type_parser_nodes__TKwdo);
 ((void (*)(val*))(var110->class->vft[COLOR_parser_nodes__TKwdo__init]))(var110) /* init on <var110:TKwdo>*/;
-CHECK_NEW_parser_nodes__TKwdo(var110);
 ((void (*)(val*, val*))(var109->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var109, var110) /* add on <var109:List[Token]>*/;
 var111 = ((val* (*)(val*))(var_lexer->class->vft[COLOR_parser_util__InjectedLexer__injected_after]))(var_lexer) /* injected_after on <var_lexer:nullable Object(InjectedLexer)>*/;
 var112 = NEW_parser_nodes__TKwend(&type_parser_nodes__TKwend);
 ((void (*)(val*))(var112->class->vft[COLOR_parser_nodes__TKwend__init]))(var112) /* init on <var112:TKwend>*/;
-CHECK_NEW_parser_nodes__TKwend(var112);
 ((void (*)(val*, val*))(var111->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var111, var112) /* add on <var111:List[Token]>*/;
 var113 = NEW_parser__Parser(&type_parser__Parser);
 ((void (*)(val*, val*))(var113->class->vft[COLOR_parser__Parser__init]))(var113, var_lexer) /* init on <var113:Parser>*/;
-CHECK_NEW_parser__Parser(var113);
 var114 = ((val* (*)(val*))(var113->class->vft[COLOR_parser__Parser__parse]))(var113) /* parse on <var113:Parser>*/;
 var_tree = var114;
 var115 = ((val* (*)(val*))(var_tree->class->vft[COLOR_parser_nodes__Start__n_eof]))(var_tree) /* n_eof on <var_tree:nullable Object(Start)>*/;
@@ -1119,7 +1091,7 @@ var120 = ((val* (*)(val*))(var_tree->class->vft[COLOR_parser_nodes__Start__n_bas
 if (var120 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser_util.nit", 148);
-exit(1);
+show_backtrace(1);
 } else {
 var121 = ((val* (*)(val*))(var120->class->vft[COLOR_parser_nodes__AModule__n_classdefs]))(var120) /* n_classdefs on <var120:nullable AModule>*/;
 }
@@ -1138,7 +1110,7 @@ if (!var125) {
 var_class_name128 = var124 == NULL ? "null" : var124->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "AMainMethPropdef", var_class_name128);
 fprintf(stderr, " (%s:%d)\n", "src/parser_util.nit", 148);
-exit(1);
+show_backtrace(1);
 }
 var129 = ((val* (*)(val*))(var124->class->vft[COLOR_parser_nodes__AConcreteMethPropdef__n_block]))(var124) /* n_block on <var124:APropdef(AMainMethPropdef)>*/;
 /* <var129:nullable AExpr> isa ABlockExpr */
@@ -1157,7 +1129,7 @@ if (!var130) {
 var_class_name133 = var129 == NULL ? "null" : var129->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "ABlockExpr", var_class_name133);
 fprintf(stderr, " (%s:%d)\n", "src/parser_util.nit", 148);
-exit(1);
+show_backtrace(1);
 }
 var134 = ((val* (*)(val*))(var129->class->vft[COLOR_parser_nodes__ABlockExpr__n_expr]))(var129) /* n_expr on <var129:nullable AExpr(ABlockExpr)>*/;
 var135 = ((val* (*)(val*))(var134->class->vft[COLOR_abstract_collection__Collection__first]))(var134) /* first on <var134:ANodes[AExpr]>*/;
@@ -1173,13 +1145,13 @@ if (!var136) {
 var_class_name139 = var135 == NULL ? "null" : var135->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "ADoExpr", var_class_name139);
 fprintf(stderr, " (%s:%d)\n", "src/parser_util.nit", 148);
-exit(1);
+show_backtrace(1);
 }
 var140 = ((val* (*)(val*))(var135->class->vft[COLOR_parser_nodes__ADoExpr__n_block]))(var135) /* n_block on <var135:AExpr(ADoExpr)>*/;
 if (var140 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser_util.nit", 148);
-exit(1);
+show_backtrace(1);
 }
 var_nblock = var140;
 var = var_nblock;
@@ -1195,11 +1167,9 @@ var_error = var_eof;
 }
 var144 = NEW_lexer__Lexer(&type_lexer__Lexer);
 ((void (*)(val*, val*))(var144->class->vft[COLOR_lexer__Lexer__init]))(var144, var_source) /* init on <var144:Lexer>*/;
-CHECK_NEW_lexer__Lexer(var144);
 var_lexer = var144;
 var145 = NEW_parser__Parser(&type_parser__Parser);
 ((void (*)(val*, val*))(var145->class->vft[COLOR_parser__Parser__init]))(var145, var_lexer) /* init on <var145:Parser>*/;
-CHECK_NEW_parser__Parser(var145);
 var146 = ((val* (*)(val*))(var145->class->vft[COLOR_parser__Parser__parse]))(var145) /* parse on <var145:Parser>*/;
 var_tree = var146;
 var147 = ((val* (*)(val*))(var_tree->class->vft[COLOR_parser_nodes__Start__n_eof]))(var_tree) /* n_eof on <var_tree:nullable Object(Start)>*/;
@@ -1218,7 +1188,7 @@ var152 = ((val* (*)(val*))(var_tree->class->vft[COLOR_parser_nodes__Start__n_bas
 if (var152 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser_util.nit", 157);
-exit(1);
+show_backtrace(1);
 }
 var = var152;
 goto RET_LABEL;
@@ -1253,7 +1223,7 @@ var1 = self->attrs[COLOR_parser_util__InjectedLexer___64dinjected_before].val; /
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @injected_before");
 fprintf(stderr, " (%s:%d)\n", "src/parser_util.nit", 168);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1286,7 +1256,7 @@ var1 = self->attrs[COLOR_parser_util__InjectedLexer___64dinjected_after].val; /*
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @injected_after");
 fprintf(stderr, " (%s:%d)\n", "src/parser_util.nit", 169);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1401,7 +1371,6 @@ var12 = 1;
 var13 = 1;
 var14 = 0;
 ((void (*)(val*, val*, long, long, long, long))(var9->class->vft[COLOR_location__Location__init]))(var9, var10, var11, var12, var13, var14) /* init on <var9:Location>*/;
-CHECK_NEW_location__Location(var9);
 var_tok->attrs[COLOR_parser_nodes__ANode___location].val = var9; /* _location on <var_tok:Token> */
 } else {
 }
@@ -1456,7 +1425,6 @@ var31 = 1;
 var32 = 1;
 var33 = 0;
 ((void (*)(val*, val*, long, long, long, long))(var28->class->vft[COLOR_location__Location__init]))(var28, var29, var30, var31, var32, var33) /* init on <var28:Location>*/;
-CHECK_NEW_location__Location(var28);
 var_tok24->attrs[COLOR_parser_nodes__ANode___location].val = var28; /* _location on <var_tok24:Token> */
 } else {
 }
@@ -1484,7 +1452,6 @@ val* var2 /* : Array[Token] */;
 var_text = p0;
 var1 = NEW_parser_util__CollectTokensByTextVisitor(&type_parser_util__CollectTokensByTextVisitor);
 ((void (*)(val*, val*))(var1->class->vft[COLOR_parser_util__CollectTokensByTextVisitor__init]))(var1, var_text) /* init on <var1:CollectTokensByTextVisitor>*/;
-CHECK_NEW_parser_util__CollectTokensByTextVisitor(var1);
 var_v = var1;
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, self) /* enter_visit on <var_v:CollectTokensByTextVisitor>*/;
 var2 = ((val* (*)(val*))(var_v->class->vft[COLOR_parser_util__CollectTokensByTextVisitor__result]))(var_v) /* result on <var_v:CollectTokensByTextVisitor>*/;
@@ -1512,7 +1479,6 @@ val* var2 /* : Array[AAnnotation] */;
 var_name = p0;
 var1 = NEW_parser_util__CollectAnnotationsByNameVisitor(&type_parser_util__CollectAnnotationsByNameVisitor);
 ((void (*)(val*, val*))(var1->class->vft[COLOR_parser_util__CollectAnnotationsByNameVisitor__init]))(var1, var_name) /* init on <var1:CollectAnnotationsByNameVisitor>*/;
-CHECK_NEW_parser_util__CollectAnnotationsByNameVisitor(var1);
 var_v = var1;
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, self) /* enter_visit on <var_v:CollectAnnotationsByNameVisitor>*/;
 var2 = ((val* (*)(val*))(var_v->class->vft[COLOR_parser_util__CollectAnnotationsByNameVisitor__result]))(var_v) /* result on <var_v:CollectAnnotationsByNameVisitor>*/;
@@ -1538,7 +1504,7 @@ var1 = self->attrs[COLOR_parser_util__CollectTokensByTextVisitor___64dtext].val;
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @text");
 fprintf(stderr, " (%s:%d)\n", "src/parser_util.nit", 213);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1584,7 +1550,7 @@ var1 = self->attrs[COLOR_parser_util__CollectTokensByTextVisitor___64dresult].va
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @result");
 fprintf(stderr, " (%s:%d)\n", "src/parser_util.nit", 215);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1660,7 +1626,7 @@ var1 = self->attrs[COLOR_parser_util__CollectAnnotationsByNameVisitor___64dname]
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @name");
 fprintf(stderr, " (%s:%d)\n", "src/parser_util.nit", 225);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1706,7 +1672,7 @@ var1 = self->attrs[COLOR_parser_util__CollectAnnotationsByNameVisitor___64dresul
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @result");
 fprintf(stderr, " (%s:%d)\n", "src/parser_util.nit", 227);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;

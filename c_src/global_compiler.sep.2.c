@@ -386,7 +386,6 @@ var47 = NEW_array__NativeArray(var46, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var47)->values[4] = (val*) var_value2;
 ((struct instance_array__NativeArray*)var47)->values[5] = (val*) var41;
 ((void (*)(val*, val*, long))(var45->class->vft[COLOR_array__Array__with_native]))(var45, var47, var46) /* with_native on <var45:Array[Object]>*/;
-CHECK_NEW_array__Array(var45);
 }
 var48 = ((val* (*)(val*))(var45->class->vft[COLOR_string__Object__to_s]))(var45) /* to_s on <var45:Array[Object]>*/;
 ((void (*)(val*, val*))(self->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__add]))(self, var48) /* add on <self:GlobalCompilerVisitor>*/;
@@ -444,7 +443,6 @@ var76 = NEW_array__NativeArray(var75, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var76)->values[4] = (val*) var68;
 ((struct instance_array__NativeArray*)var76)->values[5] = (val*) var70;
 ((void (*)(val*, val*, long))(var74->class->vft[COLOR_array__Array__with_native]))(var74, var76, var75) /* with_native on <var74:Array[Object]>*/;
-CHECK_NEW_array__Array(var74);
 }
 var77 = ((val* (*)(val*))(var74->class->vft[COLOR_string__Object__to_s]))(var74) /* to_s on <var74:Array[Object]>*/;
 ((void (*)(val*, val*))(self->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__add]))(self, var77) /* add on <self:GlobalCompilerVisitor>*/;
@@ -461,8 +459,8 @@ var79 = var78->type->type_table[cltype] == idtype;
 if (!var79) {
 var_class_name = var78 == NULL ? "null" : var78->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MClassType", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 807);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 793);
+show_backtrace(1);
 }
 var_mtype1 = var78;
 if (varonce80) {
@@ -516,7 +514,6 @@ var104 = NEW_array__NativeArray(var103, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var104)->values[6] = (val*) var96;
 ((struct instance_array__NativeArray*)var104)->values[7] = (val*) var98;
 ((void (*)(val*, val*, long))(var102->class->vft[COLOR_array__Array__with_native]))(var102, var104, var103) /* with_native on <var102:Array[Object]>*/;
-CHECK_NEW_array__Array(var102);
 }
 var105 = ((val* (*)(val*))(var102->class->vft[COLOR_string__Object__to_s]))(var102) /* to_s on <var102:Array[Object]>*/;
 ((void (*)(val*, val*))(self->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__add]))(self, var105) /* add on <self:GlobalCompilerVisitor>*/;
@@ -546,7 +543,6 @@ var118 = NEW_array__NativeArray(var117, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var118)->values[1] = (val*) var_res;
 ((struct instance_array__NativeArray*)var118)->values[2] = (val*) var112;
 ((void (*)(val*, val*, long))(var116->class->vft[COLOR_array__Array__with_native]))(var116, var118, var117) /* with_native on <var116:Array[Object]>*/;
-CHECK_NEW_array__Array(var116);
 }
 var119 = ((val* (*)(val*))(var116->class->vft[COLOR_string__Object__to_s]))(var116) /* to_s on <var116:Array[Object]>*/;
 ((void (*)(val*, val*))(self->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__add]))(self, var119) /* add on <self:GlobalCompilerVisitor>*/;
@@ -590,7 +586,6 @@ var139 = NEW_array__NativeArray(var138, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var139)->values[4] = (val*) var_value1;
 ((struct instance_array__NativeArray*)var139)->values[5] = (val*) var133;
 ((void (*)(val*, val*, long))(var137->class->vft[COLOR_array__Array__with_native]))(var137, var139, var138) /* with_native on <var137:Array[Object]>*/;
-CHECK_NEW_array__Array(var137);
 }
 var140 = ((val* (*)(val*))(var137->class->vft[COLOR_string__Object__to_s]))(var137) /* to_s on <var137:Array[Object]>*/;
 ((void (*)(val*, val*))(self->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__add]))(self, var140) /* add on <self:GlobalCompilerVisitor>*/;
@@ -609,7 +604,6 @@ varonce141 = var142;
 } else {
 var146 = NEW_array__Array(&type_array__Arraystring__String);
 ((void (*)(val*))(var146->class->vft[COLOR_array__Array__init]))(var146) /* init on <var146:Array[String]>*/;
-CHECK_NEW_array__Array(var146);
 var_s = var146;
 var147 = ((val* (*)(val*))(self->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__compiler]))(self) /* compiler on <self:GlobalCompilerVisitor>*/;
 var148 = ((val* (*)(val*))(var147->class->vft[COLOR_global_compiler__GlobalCompiler__live_primitive_types]))(var147) /* live_primitive_types on <var147:AbstractCompiler(GlobalCompiler)>*/;
@@ -724,7 +718,6 @@ var205 = NEW_array__NativeArray(var204, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var205)->values[11] = (val*) var_value2;
 ((struct instance_array__NativeArray*)var205)->values[12] = (val*) var199;
 ((void (*)(val*, val*, long))(var203->class->vft[COLOR_array__Array__with_native]))(var203, var205, var204) /* with_native on <var203:Array[Object]>*/;
-CHECK_NEW_array__Array(var203);
 }
 var206 = ((val* (*)(val*))(var203->class->vft[COLOR_string__Object__to_s]))(var203) /* to_s on <var203:Array[Object]>*/;
 ((void (*)(val*, val*))(var_s->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_s, var206) /* add on <var_s:Array[String]>*/;
@@ -772,7 +765,6 @@ var225 = NEW_array__NativeArray(var224, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var225)->values[4] = (val*) var_value2;
 ((struct instance_array__NativeArray*)var225)->values[5] = (val*) var219;
 ((void (*)(val*, val*, long))(var223->class->vft[COLOR_array__Array__with_native]))(var223, var225, var224) /* with_native on <var223:Array[Object]>*/;
-CHECK_NEW_array__Array(var223);
 }
 var226 = ((val* (*)(val*))(var223->class->vft[COLOR_string__Object__to_s]))(var223) /* to_s on <var223:Array[Object]>*/;
 ((void (*)(val*, val*))(self->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__add]))(self, var226) /* add on <self:GlobalCompilerVisitor>*/;
@@ -880,7 +872,6 @@ var275 = NEW_array__NativeArray(var274, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var275)->values[14] = (val*) var267;
 ((struct instance_array__NativeArray*)var275)->values[15] = (val*) var269;
 ((void (*)(val*, val*, long))(var273->class->vft[COLOR_array__Array__with_native]))(var273, var275, var274) /* with_native on <var273:Array[Object]>*/;
-CHECK_NEW_array__Array(var273);
 }
 var276 = ((val* (*)(val*))(var273->class->vft[COLOR_string__Object__to_s]))(var273) /* to_s on <var273:Array[Object]>*/;
 ((void (*)(val*, val*))(self->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__add]))(self, var276) /* add on <self:GlobalCompilerVisitor>*/;
@@ -899,175 +890,6 @@ var1 = global_compiler__GlobalCompilerVisitor__equal_test(self, p0, p1);
 var = var1;
 RET_LABEL:;
 return var;
-}
-/* method global_compiler#GlobalCompilerVisitor#check_init_instance for (self: GlobalCompilerVisitor, RuntimeVariable, MClassType) */
-void global_compiler__GlobalCompilerVisitor__check_init_instance(val* self, val* p0, val* p1) {
-val* var_recv /* var recv: RuntimeVariable */;
-val* var_mtype /* var mtype: MClassType */;
-val* var /* : AbstractCompiler */;
-val* var1 /* : ModelBuilder */;
-val* var2 /* : ToolContext */;
-val* var3 /* : OptionBool */;
-val* var4 /* : nullable Object */;
-short int var5 /* : Bool */;
-val* var6 /* : MType */;
-short int var7 /* : Bool */;
-int cltype;
-int idtype;
-const char* var_class_name;
-val* var8 /* : AbstractCompiler */;
-val* var9 /* : RapidTypeAnalysis */;
-val* var10 /* : HashSet[MClassType] */;
-short int var11 /* : Bool */;
-short int var12 /* : Bool */;
-static val* varonce;
-val* var13 /* : String */;
-char* var14 /* : NativeString */;
-long var15 /* : Int */;
-val* var16 /* : String */;
-static val* varonce17;
-val* var18 /* : String */;
-char* var19 /* : NativeString */;
-long var20 /* : Int */;
-val* var21 /* : String */;
-val* var22 /* : Array[Object] */;
-long var23 /* : Int */;
-val* var24 /* : NativeArray[Object] */;
-val* var25 /* : String */;
-static val* varonce26;
-val* var27 /* : String */;
-char* var28 /* : NativeString */;
-long var29 /* : Int */;
-val* var30 /* : String */;
-val* var31 /* : String */;
-static val* varonce32;
-val* var33 /* : String */;
-char* var34 /* : NativeString */;
-long var35 /* : Int */;
-val* var36 /* : String */;
-static val* varonce37;
-val* var38 /* : String */;
-char* var39 /* : NativeString */;
-long var40 /* : Int */;
-val* var41 /* : String */;
-val* var42 /* : Array[Object] */;
-long var43 /* : Int */;
-val* var44 /* : NativeArray[Object] */;
-val* var45 /* : String */;
-var_recv = p0;
-var_mtype = p1;
-var = ((val* (*)(val*))(self->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__compiler]))(self) /* compiler on <self:GlobalCompilerVisitor>*/;
-var1 = ((val* (*)(val*))(var->class->vft[COLOR_abstract_compiler__AbstractCompiler__modelbuilder]))(var) /* modelbuilder on <var:AbstractCompiler(GlobalCompiler)>*/;
-var2 = ((val* (*)(val*))(var1->class->vft[COLOR_modelbuilder__ModelBuilder__toolcontext]))(var1) /* toolcontext on <var1:ModelBuilder>*/;
-var3 = ((val* (*)(val*))(var2->class->vft[COLOR_abstract_compiler__ToolContext__opt_no_check_initialization]))(var2) /* opt_no_check_initialization on <var2:ToolContext>*/;
-var4 = ((val* (*)(val*))(var3->class->vft[COLOR_opts__Option__value]))(var3) /* value on <var3:OptionBool>*/;
-var5 = ((struct instance_kernel__Bool*)var4)->value; /* autounbox from nullable Object to Bool */;
-if (var5){
-goto RET_LABEL;
-} else {
-}
-var6 = ((val* (*)(val*, val*))(self->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__anchor]))(self, var_mtype) /* anchor on <self:GlobalCompilerVisitor>*/;
-/* <var6:MType> isa MClassType */
-cltype = type_model__MClassType.color;
-idtype = type_model__MClassType.id;
-if(cltype >= var6->type->table_size) {
-var7 = 0;
-} else {
-var7 = var6->type->type_table[cltype] == idtype;
-}
-if (!var7) {
-var_class_name = var6 == NULL ? "null" : var6->type->name;
-fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MClassType", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 833);
-exit(1);
-}
-var_mtype = var6;
-var8 = ((val* (*)(val*))(self->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__compiler]))(self) /* compiler on <self:GlobalCompilerVisitor>*/;
-var9 = ((val* (*)(val*))(var8->class->vft[COLOR_global_compiler__GlobalCompiler__runtime_type_analysis]))(var8) /* runtime_type_analysis on <var8:AbstractCompiler(GlobalCompiler)>*/;
-var10 = ((val* (*)(val*))(var9->class->vft[COLOR_rapid_type_analysis__RapidTypeAnalysis__live_types]))(var9) /* live_types on <var9:RapidTypeAnalysis>*/;
-var11 = ((short int (*)(val*, val*))(var10->class->vft[COLOR_abstract_collection__Collection__has]))(var10, var_mtype) /* has on <var10:HashSet[MClassType]>*/;
-var12 = !var11;
-if (var12){
-if (varonce) {
-var13 = varonce;
-} else {
-var14 = "problem: ";
-var15 = 9;
-var16 = string__NativeString__to_s_with_length(var14, var15);
-var13 = var16;
-varonce = var13;
-}
-if (varonce17) {
-var18 = varonce17;
-} else {
-var19 = " was detected dead";
-var20 = 18;
-var21 = string__NativeString__to_s_with_length(var19, var20);
-var18 = var21;
-varonce17 = var18;
-}
-var22 = NEW_array__Array(&type_array__Arraykernel__Object);
-{ /* var22 = array_instance Array[Object] */
-var23 = 3;
-var24 = NEW_array__NativeArray(var23, &type_array__NativeArraykernel__Object);
-((struct instance_array__NativeArray*)var24)->values[0] = (val*) var13;
-((struct instance_array__NativeArray*)var24)->values[1] = (val*) var_mtype;
-((struct instance_array__NativeArray*)var24)->values[2] = (val*) var18;
-((void (*)(val*, val*, long))(var22->class->vft[COLOR_array__Array__with_native]))(var22, var24, var23) /* with_native on <var22:Array[Object]>*/;
-CHECK_NEW_array__Array(var22);
-}
-var25 = ((val* (*)(val*))(var22->class->vft[COLOR_string__Object__to_s]))(var22) /* to_s on <var22:Array[Object]>*/;
-((void (*)(val*, val*))(self->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__debug]))(self, var25) /* debug on <self:GlobalCompilerVisitor>*/;
-} else {
-}
-if (varonce26) {
-var27 = varonce26;
-} else {
-var28 = "CHECK_NEW_";
-var29 = 10;
-var30 = string__NativeString__to_s_with_length(var28, var29);
-var27 = var30;
-varonce26 = var27;
-}
-var31 = ((val* (*)(val*))(var_mtype->class->vft[COLOR_abstract_compiler__MType__c_name]))(var_mtype) /* c_name on <var_mtype:MClassType>*/;
-if (varonce32) {
-var33 = varonce32;
-} else {
-var34 = "(";
-var35 = 1;
-var36 = string__NativeString__to_s_with_length(var34, var35);
-var33 = var36;
-varonce32 = var33;
-}
-if (varonce37) {
-var38 = varonce37;
-} else {
-var39 = ");";
-var40 = 2;
-var41 = string__NativeString__to_s_with_length(var39, var40);
-var38 = var41;
-varonce37 = var38;
-}
-var42 = NEW_array__Array(&type_array__Arraykernel__Object);
-{ /* var42 = array_instance Array[Object] */
-var43 = 5;
-var44 = NEW_array__NativeArray(var43, &type_array__NativeArraykernel__Object);
-((struct instance_array__NativeArray*)var44)->values[0] = (val*) var27;
-((struct instance_array__NativeArray*)var44)->values[1] = (val*) var31;
-((struct instance_array__NativeArray*)var44)->values[2] = (val*) var33;
-((struct instance_array__NativeArray*)var44)->values[3] = (val*) var_recv;
-((struct instance_array__NativeArray*)var44)->values[4] = (val*) var38;
-((void (*)(val*, val*, long))(var42->class->vft[COLOR_array__Array__with_native]))(var42, var44, var43) /* with_native on <var42:Array[Object]>*/;
-CHECK_NEW_array__Array(var42);
-}
-var45 = ((val* (*)(val*))(var42->class->vft[COLOR_string__Object__to_s]))(var42) /* to_s on <var42:Array[Object]>*/;
-((void (*)(val*, val*))(self->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__add]))(self, var45) /* add on <self:GlobalCompilerVisitor>*/;
-RET_LABEL:;
-}
-/* method global_compiler#GlobalCompilerVisitor#check_init_instance for (self: Object, RuntimeVariable, MClassType) */
-void VIRTUAL_global_compiler__GlobalCompilerVisitor__check_init_instance(val* self, val* p0, val* p1) {
-global_compiler__GlobalCompilerVisitor__check_init_instance(self, p0, p1);
-RET_LABEL:;
 }
 /* method global_compiler#GlobalCompilerVisitor#array_instance for (self: GlobalCompilerVisitor, Array[RuntimeVariable], MType): RuntimeVariable */
 val* global_compiler__GlobalCompilerVisitor__array_instance(val* self, val* p0, val* p1) {
@@ -1226,7 +1048,6 @@ var8 = 1;
 var9 = NEW_array__NativeArray(var8, &type_array__NativeArraymodel__MType);
 ((struct instance_array__NativeArray*)var9)->values[0] = (val*) var_elttype;
 ((void (*)(val*, val*, long))(var7->class->vft[COLOR_array__Array__with_native]))(var7, var9, var8) /* with_native on <var7:Array[MType]>*/;
-CHECK_NEW_array__Array(var7);
 }
 var10 = ((val* (*)(val*, val*))(var6->class->vft[COLOR_model__MClass__get_mtype]))(var6, var7) /* get_mtype on <var6:MClass>*/;
 var_arraytype = var10;
@@ -1269,7 +1090,6 @@ var29 = NEW_array__NativeArray(var28, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var29)->values[3] = (val*) var_elttype;
 ((struct instance_array__NativeArray*)var29)->values[4] = (val*) var23;
 ((void (*)(val*, val*, long))(var27->class->vft[COLOR_array__Array__with_native]))(var27, var29, var28) /* with_native on <var27:Array[Object]>*/;
-CHECK_NEW_array__Array(var27);
 }
 var30 = ((val* (*)(val*))(var27->class->vft[COLOR_string__Object__to_s]))(var27) /* to_s on <var27:Array[Object]>*/;
 ((void (*)(val*, val*))(self->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__add]))(self, var30) /* add on <self:GlobalCompilerVisitor>*/;
@@ -1289,7 +1109,6 @@ var38 = 1;
 var39 = NEW_array__NativeArray(var38, &type_array__NativeArraymodel__MType);
 ((struct instance_array__NativeArray*)var39)->values[0] = (val*) var_elttype;
 ((void (*)(val*, val*, long))(var37->class->vft[COLOR_array__Array__with_native]))(var37, var39, var38) /* with_native on <var37:Array[MType]>*/;
-CHECK_NEW_array__Array(var37);
 }
 var40 = ((val* (*)(val*, val*))(var36->class->vft[COLOR_model__MClass__get_mtype]))(var36, var37) /* get_mtype on <var36:MClass>*/;
 var41 = ((val* (*)(val*, val*))(self->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__new_var]))(self, var40) /* new_var on <self:GlobalCompilerVisitor>*/;
@@ -1338,7 +1157,6 @@ var64 = BOX_kernel__Int(var55); /* autobox from Int to Object */
 ((struct instance_array__NativeArray*)var63)->values[4] = (val*) var64;
 ((struct instance_array__NativeArray*)var63)->values[5] = (val*) var57;
 ((void (*)(val*, val*, long))(var61->class->vft[COLOR_array__Array__with_native]))(var61, var63, var62) /* with_native on <var61:Array[Object]>*/;
-CHECK_NEW_array__Array(var61);
 }
 var65 = ((val* (*)(val*))(var61->class->vft[COLOR_string__Object__to_s]))(var61) /* to_s on <var61:Array[Object]>*/;
 ((void (*)(val*, val*))(self->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__add]))(self, var65) /* add on <self:GlobalCompilerVisitor>*/;
@@ -1348,7 +1166,6 @@ var68 = ((long (*)(val*))(var_array->class->vft[COLOR_abstract_collection__Colle
 var69 = BOX_kernel__Int(var67); /* autobox from Int to Discrete */
 var70 = BOX_kernel__Int(var68); /* autobox from Int to Discrete */
 ((void (*)(val*, val*, val*))(var66->class->vft[COLOR_range__Range__without_last]))(var66, var69, var70) /* without_last on <var66:Range[Int]>*/;
-CHECK_NEW_range__Range(var66);
 var71 = ((val* (*)(val*))(var66->class->vft[COLOR_abstract_collection__Collection__iterator]))(var66) /* iterator on <var66:Range[Int]>*/;
 for(;;) {
 var72 = ((short int (*)(val*))(var71->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var71) /* is_ok on <var71:Iterator[nullable Object]>*/;
@@ -1421,7 +1238,6 @@ var107 = BOX_kernel__Int(var_i); /* autobox from Int to Object */
 ((struct instance_array__NativeArray*)var106)->values[7] = (val*) var_r;
 ((struct instance_array__NativeArray*)var106)->values[8] = (val*) var100;
 ((void (*)(val*, val*, long))(var104->class->vft[COLOR_array__Array__with_native]))(var104, var106, var105) /* with_native on <var104:Array[Object]>*/;
-CHECK_NEW_array__Array(var104);
 }
 var108 = ((val* (*)(val*))(var104->class->vft[COLOR_string__Object__to_s]))(var104) /* to_s on <var104:Array[Object]>*/;
 ((void (*)(val*, val*))(self->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__add]))(self, var108) /* add on <self:GlobalCompilerVisitor>*/;
@@ -1450,11 +1266,9 @@ var119 = NEW_array__NativeArray(var118, &type_array__NativeArrayabstract_compile
 ((struct instance_array__NativeArray*)var119)->values[1] = (val*) var_nat;
 ((struct instance_array__NativeArray*)var119)->values[2] = (val*) var_length;
 ((void (*)(val*, val*, long))(var117->class->vft[COLOR_array__Array__with_native]))(var117, var119, var118) /* with_native on <var117:Array[RuntimeVariable]>*/;
-CHECK_NEW_array__Array(var117);
 }
 var120 = ((val* (*)(val*, val*, val*))(self->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__send]))(self, var116, var117) /* send on <self:GlobalCompilerVisitor>*/;
 var120;
-((void (*)(val*, val*, val*))(self->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__check_init_instance]))(self, var_res, var_arraytype) /* check_init_instance on <self:GlobalCompilerVisitor>*/;
 if (varonce121) {
 var122 = varonce121;
 } else {
@@ -1486,8 +1300,8 @@ val* var1 /* : MClassType */;
 var1 = self->attrs[COLOR_global_compiler__CustomizedRuntimeFunction___64drecv].val; /* @recv on <self:CustomizedRuntimeFunction> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @recv");
-fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 869);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 842);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1590,7 +1404,6 @@ var_res = var10;
 var11 = NEW_array__Array(&type_array__Arraykernel__Object);
 var12 = 5;
 ((void (*)(val*, long))(var11->class->vft[COLOR_array__Array__with_capacity]))(var11, var12) /* with_capacity on <var11:Array[Object]>*/;
-CHECK_NEW_array__Array(var11);
 var_ = var11;
 if (varonce) {
 var13 = varonce;
@@ -1795,7 +1608,6 @@ goto RET_LABEL;
 var8 = NEW_array__Array(&type_array__Arraykernel__Object);
 var9 = 5;
 ((void (*)(val*, long))(var8->class->vft[COLOR_array__Array__with_capacity]))(var8, var9) /* with_capacity on <var8:Array[Object]>*/;
-CHECK_NEW_array__Array(var8);
 var_ = var8;
 if (varonce) {
 var10 = varonce;
@@ -2137,6 +1949,60 @@ val* var266 /* : String */;
 char* var267 /* : NativeString */;
 long var268 /* : Int */;
 val* var269 /* : String */;
+val* var270 /* : String */;
+static val* varonce271;
+val* var272 /* : String */;
+char* var273 /* : NativeString */;
+long var274 /* : Int */;
+val* var275 /* : String */;
+long var276 /* : Int */;
+short int var277 /* : Bool */;
+short int var278 /* : Bool */;
+val* var279 /* : HashMap[String, String] */;
+val* var280 /* : String */;
+val* var281 /* : MClassDef */;
+val* var282 /* : MModule */;
+val* var283 /* : String */;
+static val* varonce284;
+val* var285 /* : String */;
+char* var286 /* : NativeString */;
+long var287 /* : Int */;
+val* var288 /* : String */;
+val* var289 /* : MClassDef */;
+val* var290 /* : MClass */;
+val* var291 /* : String */;
+static val* varonce292;
+val* var293 /* : String */;
+char* var294 /* : NativeString */;
+long var295 /* : Int */;
+val* var296 /* : String */;
+val* var297 /* : MProperty */;
+val* var298 /* : String */;
+static val* varonce299;
+val* var300 /* : String */;
+char* var301 /* : NativeString */;
+long var302 /* : Int */;
+val* var303 /* : String */;
+val* var304 /* : Location */;
+val* var305 /* : nullable SourceFile */;
+val* var306 /* : String */;
+static val* varonce307;
+val* var308 /* : String */;
+char* var309 /* : NativeString */;
+long var310 /* : Int */;
+val* var311 /* : String */;
+val* var312 /* : Location */;
+long var313 /* : Int */;
+static val* varonce314;
+val* var315 /* : String */;
+char* var316 /* : NativeString */;
+long var317 /* : Int */;
+val* var318 /* : String */;
+val* var319 /* : Array[Object] */;
+long var320 /* : Int */;
+val* var321 /* : NativeArray[Object] */;
+val* var322 /* : Object */;
+val* var323 /* : String */;
 /* Covariant cast for argument 0 (compiler) <p0:GlobalCompiler> isa COMPILER */
 /* <p0:GlobalCompiler> isa COMPILER */
 type_struct = self->type->resolution_table->types[COLOR_abstract_compiler__AbstractRuntimeFunction_VTCOMPILER];
@@ -2150,8 +2016,8 @@ var = p0->type->type_table[cltype] == idtype;
 if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "COMPILER", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 913);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 886);
+show_backtrace(1);
 }
 var_compiler = p0;
 var1 = ((val* (*)(val*))(self->class->vft[COLOR_global_compiler__CustomizedRuntimeFunction__recv]))(self) /* recv on <self:CustomizedRuntimeFunction>*/;
@@ -2202,13 +2068,12 @@ var25 = NEW_array__NativeArray(var24, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var25)->values[3] = (val*) var_recv;
 ((struct instance_array__NativeArray*)var25)->values[4] = (val*) var19;
 ((void (*)(val*, val*, long))(var23->class->vft[COLOR_array__Array__with_native]))(var23, var25, var24) /* with_native on <var23:Array[Object]>*/;
-CHECK_NEW_array__Array(var23);
 }
 var26 = ((val* (*)(val*))(var23->class->vft[COLOR_string__Object__to_s]))(var23) /* to_s on <var23:Array[Object]>*/;
 ((void (*)(val*, val*))(self->class->vft[COLOR_file__Object__print]))(self, var26) /* print on <self:CustomizedRuntimeFunction>*/;
 fprintf(stderr, "Runtime error: %s", "Aborted");
-fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 920);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 893);
+show_backtrace(1);
 } else {
 }
 var27 = ((val* (*)(val*))(var_compiler->class->vft[COLOR_abstract_compiler__AbstractCompiler__new_visitor]))(var_compiler) /* new_visitor on <var_compiler:GlobalCompiler>*/;
@@ -2224,7 +2089,6 @@ var30 = var33;
 varonce29 = var30;
 }
 ((void (*)(val*, val*, val*, val*))(var28->class->vft[COLOR_abstract_compiler__RuntimeVariable__init]))(var28, var30, var_recv, var_recv) /* init on <var28:RuntimeVariable>*/;
-CHECK_NEW_abstract_compiler__RuntimeVariable(var28);
 var_selfvar = var28;
 var34 = ((val* (*)(val*))(var_compiler->class->vft[COLOR_global_compiler__GlobalCompiler__runtime_type_analysis]))(var_compiler) /* runtime_type_analysis on <var_compiler:GlobalCompiler>*/;
 var35 = ((val* (*)(val*))(var34->class->vft[COLOR_rapid_type_analysis__RapidTypeAnalysis__live_types]))(var34) /* live_types on <var34:RapidTypeAnalysis>*/;
@@ -2236,26 +2100,22 @@ var37 = 1;
 }
 var38 = NEW_array__Array(&type_array__Arrayabstract_compiler__RuntimeVariable);
 ((void (*)(val*))(var38->class->vft[COLOR_array__Array__init]))(var38) /* init on <var38:Array[RuntimeVariable]>*/;
-CHECK_NEW_array__Array(var38);
 var_arguments = var38;
 var39 = NEW_abstract_compiler__Frame(&type_abstract_compiler__Frame);
 ((void (*)(val*, val*, val*, val*, val*))(var39->class->vft[COLOR_abstract_compiler__Frame__init]))(var39, var_v, var_mmethoddef, var_recv, var_arguments) /* init on <var39:Frame>*/;
-CHECK_NEW_abstract_compiler__Frame(var39);
 var_frame = var39;
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__frame_61d]))(var_v, var_frame) /* frame= on <var_v:GlobalCompilerVisitor>*/;
 var40 = NEW_string__Buffer(&type_string__Buffer);
 ((void (*)(val*))(var40->class->vft[COLOR_string__Buffer__init]))(var40) /* init on <var40:Buffer>*/;
-CHECK_NEW_string__Buffer(var40);
 var_sig = var40;
 var41 = NEW_string__Buffer(&type_string__Buffer);
 ((void (*)(val*))(var41->class->vft[COLOR_string__Buffer__init]))(var41) /* init on <var41:Buffer>*/;
-CHECK_NEW_string__Buffer(var41);
 var_comment = var41;
 var42 = ((val* (*)(val*))(var_mmethoddef->class->vft[COLOR_model__MMethodDef__msignature]))(var_mmethoddef) /* msignature on <var_mmethoddef:MMethodDef>*/;
 if (var42 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 934);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 907);
+show_backtrace(1);
 } else {
 var43 = ((val* (*)(val*))(var42->class->vft[COLOR_model__MSignature__return_mtype]))(var42) /* return_mtype on <var42:nullable MSignature>*/;
 }
@@ -2286,7 +2146,6 @@ var55 = NEW_array__NativeArray(var54, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var55)->values[0] = (val*) var47;
 ((struct instance_array__NativeArray*)var55)->values[1] = (val*) var49;
 ((void (*)(val*, val*, long))(var53->class->vft[COLOR_array__Array__with_native]))(var53, var55, var54) /* with_native on <var53:Array[Object]>*/;
-CHECK_NEW_array__Array(var53);
 }
 var56 = ((val* (*)(val*))(var53->class->vft[COLOR_string__Object__to_s]))(var53) /* to_s on <var53:Array[Object]>*/;
 ((void (*)(val*, val*))(var_sig->class->vft[COLOR_abstract_collection__Sequence__append]))(var_sig, var56) /* append on <var_sig:Buffer>*/;
@@ -2312,7 +2171,6 @@ var67 = NEW_array__NativeArray(var66, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var67)->values[0] = (val*) var59;
 ((struct instance_array__NativeArray*)var67)->values[1] = (val*) var61;
 ((void (*)(val*, val*, long))(var65->class->vft[COLOR_array__Array__with_native]))(var65, var67, var66) /* with_native on <var65:Array[Object]>*/;
-CHECK_NEW_array__Array(var65);
 }
 var68 = ((val* (*)(val*))(var65->class->vft[COLOR_string__Object__to_s]))(var65) /* to_s on <var65:Array[Object]>*/;
 ((void (*)(val*, val*))(var_sig->class->vft[COLOR_abstract_collection__Sequence__append]))(var_sig, var68) /* append on <var_sig:Buffer>*/;
@@ -2359,7 +2217,6 @@ var88 = NEW_array__NativeArray(var87, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var88)->values[2] = (val*) var82;
 ((struct instance_array__NativeArray*)var88)->values[3] = (val*) var_selfvar;
 ((void (*)(val*, val*, long))(var86->class->vft[COLOR_array__Array__with_native]))(var86, var88, var87) /* with_native on <var86:Array[Object]>*/;
-CHECK_NEW_array__Array(var86);
 }
 var89 = ((val* (*)(val*))(var86->class->vft[COLOR_string__Object__to_s]))(var86) /* to_s on <var86:Array[Object]>*/;
 ((void (*)(val*, val*))(var_sig->class->vft[COLOR_abstract_collection__Sequence__append]))(var_sig, var89) /* append on <var_sig:Buffer>*/;
@@ -2379,7 +2236,6 @@ var97 = NEW_array__NativeArray(var96, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var97)->values[0] = (val*) var91;
 ((struct instance_array__NativeArray*)var97)->values[1] = (val*) var_recv;
 ((void (*)(val*, val*, long))(var95->class->vft[COLOR_array__Array__with_native]))(var95, var97, var96) /* with_native on <var95:Array[Object]>*/;
-CHECK_NEW_array__Array(var95);
 }
 var98 = ((val* (*)(val*))(var95->class->vft[COLOR_string__Object__to_s]))(var95) /* to_s on <var95:Array[Object]>*/;
 ((void (*)(val*, val*))(var_comment->class->vft[COLOR_abstract_collection__Sequence__append]))(var_comment, var98) /* append on <var_comment:Buffer>*/;
@@ -2389,15 +2245,14 @@ var100 = 0;
 var101 = ((val* (*)(val*))(var_mmethoddef->class->vft[COLOR_model__MMethodDef__msignature]))(var_mmethoddef) /* msignature on <var_mmethoddef:MMethodDef>*/;
 if (var101 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 948);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 921);
+show_backtrace(1);
 } else {
 var102 = ((long (*)(val*))(var101->class->vft[COLOR_model__MSignature__arity]))(var101) /* arity on <var101:nullable MSignature>*/;
 }
 var103 = BOX_kernel__Int(var100); /* autobox from Int to Discrete */
 var104 = BOX_kernel__Int(var102); /* autobox from Int to Discrete */
 ((void (*)(val*, val*, val*))(var99->class->vft[COLOR_range__Range__without_last]))(var99, var103, var104) /* without_last on <var99:Range[Int]>*/;
-CHECK_NEW_range__Range(var99);
 var105 = ((val* (*)(val*))(var99->class->vft[COLOR_abstract_collection__Collection__iterator]))(var99) /* iterator on <var99:Range[Int]>*/;
 for(;;) {
 var106 = ((short int (*)(val*))(var105->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var105) /* is_ok on <var105:Iterator[nullable Object]>*/;
@@ -2408,8 +2263,8 @@ var_i = var108;
 var109 = ((val* (*)(val*))(var_mmethoddef->class->vft[COLOR_model__MMethodDef__msignature]))(var_mmethoddef) /* msignature on <var_mmethoddef:MMethodDef>*/;
 if (var109 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 949);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 922);
+show_backtrace(1);
 } else {
 var110 = ((val* (*)(val*))(var109->class->vft[COLOR_model__MSignature__mparameters]))(var109) /* mparameters on <var109:nullable MSignature>*/;
 }
@@ -2419,8 +2274,8 @@ var_mtype = var112;
 var113 = ((val* (*)(val*))(var_mmethoddef->class->vft[COLOR_model__MMethodDef__msignature]))(var_mmethoddef) /* msignature on <var_mmethoddef:MMethodDef>*/;
 if (var113 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 950);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 923);
+show_backtrace(1);
 } else {
 var114 = ((long (*)(val*))(var113->class->vft[COLOR_model__MSignature__vararg_rank]))(var113) /* vararg_rank on <var113:nullable MSignature>*/;
 }
@@ -2447,7 +2302,6 @@ var125 = 1;
 var126 = NEW_array__NativeArray(var125, &type_array__NativeArraymodel__MType);
 ((struct instance_array__NativeArray*)var126)->values[0] = (val*) var_mtype;
 ((void (*)(val*, val*, long))(var124->class->vft[COLOR_array__Array__with_native]))(var124, var126, var125) /* with_native on <var124:Array[MType]>*/;
-CHECK_NEW_array__Array(var124);
 }
 var127 = ((val* (*)(val*, val*))(var123->class->vft[COLOR_model__MClass__get_mtype]))(var123, var124) /* get_mtype on <var123:MClass>*/;
 var_mtype = var127;
@@ -2471,7 +2325,6 @@ var136 = NEW_array__NativeArray(var135, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var136)->values[0] = (val*) var130;
 ((struct instance_array__NativeArray*)var136)->values[1] = (val*) var_mtype;
 ((void (*)(val*, val*, long))(var134->class->vft[COLOR_array__Array__with_native]))(var134, var136, var135) /* with_native on <var134:Array[Object]>*/;
-CHECK_NEW_array__Array(var134);
 }
 var137 = ((val* (*)(val*))(var134->class->vft[COLOR_string__Object__to_s]))(var134) /* to_s on <var134:Array[Object]>*/;
 ((void (*)(val*, val*))(var_comment->class->vft[COLOR_abstract_collection__Sequence__append]))(var_comment, var137) /* append on <var_comment:Buffer>*/;
@@ -2504,7 +2357,6 @@ var151 = NEW_array__NativeArray(var150, &type_array__NativeArraykernel__Object);
 var152 = BOX_kernel__Int(var_i); /* autobox from Int to Object */
 ((struct instance_array__NativeArray*)var151)->values[3] = (val*) var152;
 ((void (*)(val*, val*, long))(var149->class->vft[COLOR_array__Array__with_native]))(var149, var151, var150) /* with_native on <var149:Array[Object]>*/;
-CHECK_NEW_array__Array(var149);
 }
 var153 = ((val* (*)(val*))(var149->class->vft[COLOR_string__Object__to_s]))(var149) /* to_s on <var149:Array[Object]>*/;
 ((void (*)(val*, val*))(var_sig->class->vft[COLOR_abstract_collection__Sequence__append]))(var_sig, var153) /* append on <var_sig:Buffer>*/;
@@ -2512,7 +2364,6 @@ var154 = NEW_abstract_compiler__RuntimeVariable(&type_abstract_compiler__Runtime
 var155 = NEW_array__Array(&type_array__Arraykernel__Object);
 var156 = 3;
 ((void (*)(val*, long))(var155->class->vft[COLOR_array__Array__with_capacity]))(var155, var156) /* with_capacity on <var155:Array[Object]>*/;
-CHECK_NEW_array__Array(var155);
 var_ = var155;
 if (varonce157) {
 var158 = varonce157;
@@ -2538,7 +2389,6 @@ varonce163 = var164;
 ((void (*)(val*, val*))(var_->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_, var164) /* add on <var_:Array[Object]>*/;
 var168 = ((val* (*)(val*))(var_->class->vft[COLOR_string__Object__to_s]))(var_) /* to_s on <var_:Array[Object]>*/;
 ((void (*)(val*, val*, val*, val*))(var154->class->vft[COLOR_abstract_compiler__RuntimeVariable__init]))(var154, var168, var_mtype, var_mtype) /* init on <var154:RuntimeVariable>*/;
-CHECK_NEW_abstract_compiler__RuntimeVariable(var154);
 var_argvar = var154;
 ((void (*)(val*, val*))(var_arguments->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_arguments, var_argvar) /* add on <var_arguments:Array[RuntimeVariable]>*/;
 CONTINUE_label: (void)0;
@@ -2588,7 +2438,6 @@ var188 = NEW_array__NativeArray(var187, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var188)->values[0] = (val*) var182;
 ((struct instance_array__NativeArray*)var188)->values[1] = (val*) var_ret;
 ((void (*)(val*, val*, long))(var186->class->vft[COLOR_array__Array__with_native]))(var186, var188, var187) /* with_native on <var186:Array[Object]>*/;
-CHECK_NEW_array__Array(var186);
 }
 var189 = ((val* (*)(val*))(var186->class->vft[COLOR_string__Object__to_s]))(var186) /* to_s on <var186:Array[Object]>*/;
 ((void (*)(val*, val*))(var_comment->class->vft[COLOR_abstract_collection__Sequence__append]))(var_comment, var189) /* append on <var_comment:Buffer>*/;
@@ -2611,7 +2460,6 @@ var198 = NEW_array__NativeArray(var197, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var198)->values[0] = (val*) var_sig;
 ((struct instance_array__NativeArray*)var198)->values[1] = (val*) var192;
 ((void (*)(val*, val*, long))(var196->class->vft[COLOR_array__Array__with_native]))(var196, var198, var197) /* with_native on <var196:Array[Object]>*/;
-CHECK_NEW_array__Array(var196);
 }
 var199 = ((val* (*)(val*))(var196->class->vft[COLOR_string__Object__to_s]))(var196) /* to_s on <var196:Array[Object]>*/;
 ((void (*)(val*, val*))(var190->class->vft[COLOR_abstract_compiler__CodeWriter__add_decl]))(var190, var199) /* add_decl on <var190:CodeWriter>*/;
@@ -2652,7 +2500,6 @@ var217 = NEW_array__NativeArray(var216, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var217)->values[3] = (val*) var_comment;
 ((struct instance_array__NativeArray*)var217)->values[4] = (val*) var211;
 ((void (*)(val*, val*, long))(var215->class->vft[COLOR_array__Array__with_native]))(var215, var217, var216) /* with_native on <var215:Array[Object]>*/;
-CHECK_NEW_array__Array(var215);
 }
 var218 = ((val* (*)(val*))(var215->class->vft[COLOR_string__Object__to_s]))(var215) /* to_s on <var215:Array[Object]>*/;
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__add_decl]))(var_v, var218) /* add_decl on <var_v:GlobalCompilerVisitor>*/;
@@ -2672,7 +2519,6 @@ var226 = NEW_array__NativeArray(var225, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var226)->values[0] = (val*) var_sig;
 ((struct instance_array__NativeArray*)var226)->values[1] = (val*) var220;
 ((void (*)(val*, val*, long))(var224->class->vft[COLOR_array__Array__with_native]))(var224, var226, var225) /* with_native on <var224:Array[Object]>*/;
-CHECK_NEW_array__Array(var224);
 }
 var227 = ((val* (*)(val*))(var224->class->vft[COLOR_string__Object__to_s]))(var224) /* to_s on <var224:Array[Object]>*/;
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__add_decl]))(var_v, var227) /* add_decl on <var_v:GlobalCompilerVisitor>*/;
@@ -2703,8 +2549,8 @@ var237;
 var238 = ((val* (*)(val*))(var_frame->class->vft[COLOR_abstract_compiler__Frame__returnlabel]))(var_frame) /* returnlabel on <var_frame:Frame>*/;
 if (var238 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
-fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 976);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 949);
+show_backtrace(1);
 }
 if (varonce239) {
 var240 = varonce239;
@@ -2722,7 +2568,6 @@ var246 = NEW_array__NativeArray(var245, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var246)->values[0] = (val*) var238;
 ((struct instance_array__NativeArray*)var246)->values[1] = (val*) var240;
 ((void (*)(val*, val*, long))(var244->class->vft[COLOR_array__Array__with_native]))(var244, var246, var245) /* with_native on <var244:Array[Object]>*/;
-CHECK_NEW_array__Array(var244);
 }
 var247 = ((val* (*)(val*))(var244->class->vft[COLOR_string__Object__to_s]))(var244) /* to_s on <var244:Array[Object]>*/;
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__add]))(var_v, var247) /* add on <var_v:GlobalCompilerVisitor>*/;
@@ -2745,8 +2590,8 @@ varonce250 = var251;
 var255 = ((val* (*)(val*))(var_frame->class->vft[COLOR_abstract_compiler__Frame__returnvar]))(var_frame) /* returnvar on <var_frame:Frame>*/;
 if (var255 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
-fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 978);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 951);
+show_backtrace(1);
 }
 if (varonce256) {
 var257 = varonce256;
@@ -2765,7 +2610,6 @@ var263 = NEW_array__NativeArray(var262, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var263)->values[1] = (val*) var255;
 ((struct instance_array__NativeArray*)var263)->values[2] = (val*) var257;
 ((void (*)(val*, val*, long))(var261->class->vft[COLOR_array__Array__with_native]))(var261, var263, var262) /* with_native on <var261:Array[Object]>*/;
-CHECK_NEW_array__Array(var261);
 }
 var264 = ((val* (*)(val*))(var261->class->vft[COLOR_string__Object__to_s]))(var261) /* to_s on <var261:Array[Object]>*/;
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__add]))(var_v, var264) /* add on <var_v:GlobalCompilerVisitor>*/;
@@ -2781,6 +2625,107 @@ var266 = var269;
 varonce265 = var266;
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__add]))(var_v, var266) /* add on <var_v:GlobalCompilerVisitor>*/;
+var270 = ((val* (*)(val*))(self->class->vft[COLOR_abstract_compiler__AbstractRuntimeFunction__c_name]))(self) /* c_name on <self:CustomizedRuntimeFunction>*/;
+if (varonce271) {
+var272 = varonce271;
+} else {
+var273 = "VIRTUAL";
+var274 = 7;
+var275 = string__NativeString__to_s_with_length(var273, var274);
+var272 = var275;
+varonce271 = var272;
+}
+var276 = 0;
+var277 = ((short int (*)(val*, val*, long))(var270->class->vft[COLOR_string__AbstractString__has_substring]))(var270, var272, var276) /* has_substring on <var270:String>*/;
+var278 = !var277;
+if (var278){
+var279 = ((val* (*)(val*))(var_compiler->class->vft[COLOR_abstract_compiler__AbstractCompiler__names]))(var_compiler) /* names on <var_compiler:GlobalCompiler>*/;
+var280 = ((val* (*)(val*))(self->class->vft[COLOR_abstract_compiler__AbstractRuntimeFunction__c_name]))(self) /* c_name on <self:CustomizedRuntimeFunction>*/;
+var281 = ((val* (*)(val*))(var_mmethoddef->class->vft[COLOR_model__MPropDef__mclassdef]))(var_mmethoddef) /* mclassdef on <var_mmethoddef:MMethodDef>*/;
+var282 = ((val* (*)(val*))(var281->class->vft[COLOR_model__MClassDef__mmodule]))(var281) /* mmodule on <var281:MClassDef>*/;
+var283 = ((val* (*)(val*))(var282->class->vft[COLOR_mmodule__MModule__name]))(var282) /* name on <var282:MModule>*/;
+if (varonce284) {
+var285 = varonce284;
+} else {
+var286 = "::";
+var287 = 2;
+var288 = string__NativeString__to_s_with_length(var286, var287);
+var285 = var288;
+varonce284 = var285;
+}
+var289 = ((val* (*)(val*))(var_mmethoddef->class->vft[COLOR_model__MPropDef__mclassdef]))(var_mmethoddef) /* mclassdef on <var_mmethoddef:MMethodDef>*/;
+var290 = ((val* (*)(val*))(var289->class->vft[COLOR_model__MClassDef__mclass]))(var289) /* mclass on <var289:MClassDef>*/;
+var291 = ((val* (*)(val*))(var290->class->vft[COLOR_model__MClass__name]))(var290) /* name on <var290:MClass>*/;
+if (varonce292) {
+var293 = varonce292;
+} else {
+var294 = "::";
+var295 = 2;
+var296 = string__NativeString__to_s_with_length(var294, var295);
+var293 = var296;
+varonce292 = var293;
+}
+var297 = ((val* (*)(val*))(var_mmethoddef->class->vft[COLOR_model__MPropDef__mproperty]))(var_mmethoddef) /* mproperty on <var_mmethoddef:MMethodDef>*/;
+var298 = ((val* (*)(val*))(var297->class->vft[COLOR_model__MProperty__name]))(var297) /* name on <var297:MProperty(MMethod)>*/;
+if (varonce299) {
+var300 = varonce299;
+} else {
+var301 = " (";
+var302 = 2;
+var303 = string__NativeString__to_s_with_length(var301, var302);
+var300 = var303;
+varonce299 = var300;
+}
+var304 = ((val* (*)(val*))(var_mmethoddef->class->vft[COLOR_model__MPropDef__location]))(var_mmethoddef) /* location on <var_mmethoddef:MMethodDef>*/;
+var305 = ((val* (*)(val*))(var304->class->vft[COLOR_location__Location__file]))(var304) /* file on <var304:Location>*/;
+if (var305 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Reciever is null");
+fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 954);
+show_backtrace(1);
+} else {
+var306 = ((val* (*)(val*))(var305->class->vft[COLOR_location__SourceFile__filename]))(var305) /* filename on <var305:nullable SourceFile>*/;
+}
+if (varonce307) {
+var308 = varonce307;
+} else {
+var309 = ":";
+var310 = 1;
+var311 = string__NativeString__to_s_with_length(var309, var310);
+var308 = var311;
+varonce307 = var308;
+}
+var312 = ((val* (*)(val*))(var_mmethoddef->class->vft[COLOR_model__MPropDef__location]))(var_mmethoddef) /* location on <var_mmethoddef:MMethodDef>*/;
+var313 = ((long (*)(val*))(var312->class->vft[COLOR_location__Location__line_start]))(var312) /* line_start on <var312:Location>*/;
+if (varonce314) {
+var315 = varonce314;
+} else {
+var316 = ")";
+var317 = 1;
+var318 = string__NativeString__to_s_with_length(var316, var317);
+var315 = var318;
+varonce314 = var315;
+}
+var319 = NEW_array__Array(&type_array__Arraykernel__Object);
+{ /* var319 = array_instance Array[Object] */
+var320 = 10;
+var321 = NEW_array__NativeArray(var320, &type_array__NativeArraykernel__Object);
+((struct instance_array__NativeArray*)var321)->values[0] = (val*) var283;
+((struct instance_array__NativeArray*)var321)->values[1] = (val*) var285;
+((struct instance_array__NativeArray*)var321)->values[2] = (val*) var291;
+((struct instance_array__NativeArray*)var321)->values[3] = (val*) var293;
+((struct instance_array__NativeArray*)var321)->values[4] = (val*) var298;
+((struct instance_array__NativeArray*)var321)->values[5] = (val*) var300;
+((struct instance_array__NativeArray*)var321)->values[6] = (val*) var306;
+((struct instance_array__NativeArray*)var321)->values[7] = (val*) var308;
+var322 = BOX_kernel__Int(var313); /* autobox from Int to Object */
+((struct instance_array__NativeArray*)var321)->values[8] = (val*) var322;
+((struct instance_array__NativeArray*)var321)->values[9] = (val*) var315;
+((void (*)(val*, val*, long))(var319->class->vft[COLOR_array__Array__with_native]))(var319, var321, var320) /* with_native on <var319:Array[Object]>*/;
+}
+var323 = ((val* (*)(val*))(var319->class->vft[COLOR_string__Object__to_s]))(var319) /* to_s on <var319:Array[Object]>*/;
+((void (*)(val*, val*, val*))(var279->class->vft[COLOR_abstract_collection__Map___91d_93d_61d]))(var279, var280, var323) /* []= on <var279:HashMap[String, String]>*/;
+} else {
+}
 RET_LABEL:;
 }
 /* method global_compiler#CustomizedRuntimeFunction#compile_to_c for (self: Object, AbstractCompiler) */
@@ -2937,8 +2882,8 @@ var1 = p0->type->type_table[cltype] == idtype;
 if (!var1) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "VISITOR", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 983);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 957);
+show_backtrace(1);
 }
 var_v = p0;
 var_arguments = p1;
@@ -2946,8 +2891,8 @@ var2 = ((val* (*)(val*))(self->class->vft[COLOR_abstract_compiler__AbstractRunti
 var3 = ((val* (*)(val*))(var2->class->vft[COLOR_model__MMethodDef__msignature]))(var2) /* msignature on <var2:MMethodDef>*/;
 if (var3 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 985);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 959);
+show_backtrace(1);
 } else {
 var4 = ((val* (*)(val*))(var3->class->vft[COLOR_model__MSignature__return_mtype]))(var3) /* return_mtype on <var3:nullable MSignature>*/;
 }
@@ -2979,7 +2924,6 @@ var15 = NEW_abstract_compiler__Frame(&type_abstract_compiler__Frame);
 var16 = ((val* (*)(val*))(self->class->vft[COLOR_abstract_compiler__AbstractRuntimeFunction__mmethoddef]))(self) /* mmethoddef on <self:CustomizedRuntimeFunction>*/;
 var17 = ((val* (*)(val*))(self->class->vft[COLOR_global_compiler__CustomizedRuntimeFunction__recv]))(self) /* recv on <self:CustomizedRuntimeFunction>*/;
 ((void (*)(val*, val*, val*, val*, val*))(var15->class->vft[COLOR_abstract_compiler__Frame__init]))(var15, var_v, var16, var17, var_arguments) /* init on <var15:Frame>*/;
-CHECK_NEW_abstract_compiler__Frame(var15);
 var_frame = var15;
 if (varonce) {
 var18 = varonce;
@@ -3053,7 +2997,6 @@ var50 = NEW_array__NativeArray(var49, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var50)->values[3] = (val*) var42;
 ((struct instance_array__NativeArray*)var50)->values[4] = (val*) var44;
 ((void (*)(val*, val*, long))(var48->class->vft[COLOR_array__Array__with_native]))(var48, var50, var49) /* with_native on <var48:Array[Object]>*/;
-CHECK_NEW_array__Array(var48);
 }
 var51 = ((val* (*)(val*))(var48->class->vft[COLOR_string__Object__to_s]))(var48) /* to_s on <var48:Array[Object]>*/;
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__add]))(var_v, var51) /* add on <var_v:GlobalCompilerVisitor>*/;
@@ -3063,8 +3006,8 @@ var53;
 var54 = ((val* (*)(val*))(var_frame->class->vft[COLOR_abstract_compiler__Frame__returnlabel]))(var_frame) /* returnlabel on <var_frame:Frame>*/;
 if (var54 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
-fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 1002);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/global_compiler.nit", 976);
+show_backtrace(1);
 }
 if (varonce55) {
 var56 = varonce55;
@@ -3082,7 +3025,6 @@ var62 = NEW_array__NativeArray(var61, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var62)->values[0] = (val*) var54;
 ((struct instance_array__NativeArray*)var62)->values[1] = (val*) var56;
 ((void (*)(val*, val*, long))(var60->class->vft[COLOR_array__Array__with_native]))(var60, var62, var61) /* with_native on <var60:Array[Object]>*/;
-CHECK_NEW_array__Array(var60);
 }
 var63 = ((val* (*)(val*))(var60->class->vft[COLOR_string__Object__to_s]))(var60) /* to_s on <var60:Array[Object]>*/;
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__add]))(var_v, var63) /* add on <var_v:GlobalCompilerVisitor>*/;
@@ -3151,7 +3093,6 @@ var93 = NEW_array__NativeArray(var92, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var93)->values[2] = (val*) var85;
 ((struct instance_array__NativeArray*)var93)->values[3] = (val*) var87;
 ((void (*)(val*, val*, long))(var91->class->vft[COLOR_array__Array__with_native]))(var91, var93, var92) /* with_native on <var91:Array[Object]>*/;
-CHECK_NEW_array__Array(var91);
 }
 var94 = ((val* (*)(val*))(var91->class->vft[COLOR_string__Object__to_s]))(var91) /* to_s on <var91:Array[Object]>*/;
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__add]))(var_v, var94) /* add on <var_v:GlobalCompilerVisitor>*/;
@@ -3210,7 +3151,6 @@ var121 = NEW_array__NativeArray(var120, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var121)->values[4] = (val*) var113;
 ((struct instance_array__NativeArray*)var121)->values[5] = (val*) var115;
 ((void (*)(val*, val*, long))(var119->class->vft[COLOR_array__Array__with_native]))(var119, var121, var120) /* with_native on <var119:Array[Object]>*/;
-CHECK_NEW_array__Array(var119);
 }
 var122 = ((val* (*)(val*))(var119->class->vft[COLOR_string__Object__to_s]))(var119) /* to_s on <var119:Array[Object]>*/;
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_abstract_compiler__AbstractCompilerVisitor__add]))(var_v, var122) /* add on <var_v:GlobalCompilerVisitor>*/;

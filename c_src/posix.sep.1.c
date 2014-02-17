@@ -3,7 +3,7 @@
 short int posix__Sys__uid_61d(val* self, long p0) {
 short int var /* : Bool */;
 fprintf(stderr, "NOT YET IMPLEMENTED nitni for posix#Sys#uid= at lib/standard/posix.nit:30,2--51\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -20,7 +20,7 @@ return var;
 long posix__Sys__uid(val* self) {
 long var /* : Int */;
 fprintf(stderr, "NOT YET IMPLEMENTED nitni for posix#Sys#uid at lib/standard/posix.nit:31,2--36\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -37,7 +37,7 @@ return var;
 short int posix__Sys__gid_61d(val* self, long p0) {
 short int var /* : Bool */;
 fprintf(stderr, "NOT YET IMPLEMENTED nitni for posix#Sys#gid= at lib/standard/posix.nit:33,2--51\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -54,7 +54,7 @@ return var;
 long posix__Sys__gid(val* self) {
 long var /* : Int */;
 fprintf(stderr, "NOT YET IMPLEMENTED nitni for posix#Sys#gid at lib/standard/posix.nit:34,2--36\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -71,7 +71,7 @@ return var;
 short int posix__Sys__euid_61d(val* self, long p0) {
 short int var /* : Bool */;
 fprintf(stderr, "NOT YET IMPLEMENTED nitni for posix#Sys#euid= at lib/standard/posix.nit:36,2--53\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -88,7 +88,7 @@ return var;
 long posix__Sys__euid(val* self) {
 long var /* : Int */;
 fprintf(stderr, "NOT YET IMPLEMENTED nitni for posix#Sys#euid at lib/standard/posix.nit:37,2--38\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -105,7 +105,7 @@ return var;
 short int posix__Sys__egid_61d(val* self, long p0) {
 short int var /* : Bool */;
 fprintf(stderr, "NOT YET IMPLEMENTED nitni for posix#Sys#egid= at lib/standard/posix.nit:39,2--53\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -122,7 +122,7 @@ return var;
 long posix__Sys__egid(val* self) {
 long var /* : Int */;
 fprintf(stderr, "NOT YET IMPLEMENTED nitni for posix#Sys#egid at lib/standard/posix.nit:40,2--38\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -139,7 +139,7 @@ return var;
 void* posix__Passwd__from_uid(void* self, long p0) {
 void* var /* : Passwd */;
 printf("NOT YET IMPLEMENTED nitni for posix#Passwd#from_uid at lib/standard/posix.nit:44,2--51\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -160,7 +160,7 @@ return var;
 void* posix__Passwd__from_name(void* self, val* p0) {
 void* var /* : Passwd */;
 printf("NOT YET IMPLEMENTED nitni for posix#Passwd#from_name at lib/standard/posix.nit:45,2--104\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -181,7 +181,7 @@ return var;
 val* posix__Passwd__name(void* self) {
 val* var /* : String */;
 fprintf(stderr, "NOT YET IMPLEMENTED nitni for posix#Passwd#name at lib/standard/posix.nit:47,2--90\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -200,7 +200,7 @@ return var;
 val* posix__Passwd__passwd(void* self) {
 val* var /* : String */;
 fprintf(stderr, "NOT YET IMPLEMENTED nitni for posix#Passwd#passwd at lib/standard/posix.nit:48,2--94\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -219,7 +219,7 @@ return var;
 long posix__Passwd__uid(void* self) {
 long var /* : Int */;
 fprintf(stderr, "NOT YET IMPLEMENTED nitni for posix#Passwd#uid at lib/standard/posix.nit:49,2--40\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -238,7 +238,7 @@ return var;
 long posix__Passwd__gid(void* self) {
 long var /* : Int */;
 fprintf(stderr, "NOT YET IMPLEMENTED nitni for posix#Passwd#gid at lib/standard/posix.nit:50,2--40\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -257,7 +257,7 @@ return var;
 val* posix__Passwd__gecos(void* self) {
 val* var /* : String */;
 fprintf(stderr, "NOT YET IMPLEMENTED nitni for posix#Passwd#gecos at lib/standard/posix.nit:51,2--92\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -276,7 +276,7 @@ return var;
 val* posix__Passwd__dir(void* self) {
 val* var /* : String */;
 fprintf(stderr, "NOT YET IMPLEMENTED nitni for posix#Passwd#dir at lib/standard/posix.nit:52,2--88\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -295,7 +295,7 @@ return var;
 val* posix__Passwd__shell(void* self) {
 val* var /* : String */;
 fprintf(stderr, "NOT YET IMPLEMENTED nitni for posix#Passwd#shell at lib/standard/posix.nit:53,2--92\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -314,7 +314,7 @@ return var;
 void* posix__Group__from_gid(void* self, long p0) {
 void* var /* : Group */;
 printf("NOT YET IMPLEMENTED nitni for posix#Group#from_gid at lib/standard/posix.nit:57,2--51\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -335,7 +335,7 @@ return var;
 void* posix__Group__from_name(void* self, val* p0) {
 void* var /* : Group */;
 printf("NOT YET IMPLEMENTED nitni for posix#Group#from_name at lib/standard/posix.nit:58,2--104\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -356,7 +356,7 @@ return var;
 val* posix__Group__name(void* self) {
 val* var /* : String */;
 fprintf(stderr, "NOT YET IMPLEMENTED nitni for posix#Group#name at lib/standard/posix.nit:60,2--90\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -375,7 +375,7 @@ return var;
 val* posix__Group__passwd(void* self) {
 val* var /* : String */;
 fprintf(stderr, "NOT YET IMPLEMENTED nitni for posix#Group#passwd at lib/standard/posix.nit:61,2--94\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -394,7 +394,7 @@ return var;
 long posix__Group__gid(void* self) {
 long var /* : Int */;
 fprintf(stderr, "NOT YET IMPLEMENTED nitni for posix#Group#gid at lib/standard/posix.nit:62,2--40\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -413,7 +413,7 @@ return var;
 val* posix__Group__mem(void* self) {
 val* var /* : Array[String] */;
 fprintf(stderr, "NOT YET IMPLEMENTED nitni for posix#Group#mem at lib/standard/posix.nit:63,2--75,3\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }

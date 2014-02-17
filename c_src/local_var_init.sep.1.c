@@ -7,7 +7,7 @@ var1 = self->attrs[COLOR_local_var_init__ToolContext___64dlocal_var_init_phase].
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @local_var_init_phase");
 fprintf(stderr, " (%s:%d)\n", "src/local_var_init.nit", 26);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -54,7 +54,6 @@ val* var_v /* var v: LocalVarInitVisitor */;
 var_toolcontext = p0;
 var = NEW_local_var_init__LocalVarInitVisitor(&type_local_var_init__LocalVarInitVisitor);
 ((void (*)(val*, val*))(var->class->vft[COLOR_local_var_init__LocalVarInitVisitor__init]))(var, var_toolcontext) /* init on <var:LocalVarInitVisitor>*/;
-CHECK_NEW_local_var_init__LocalVarInitVisitor(var);
 var_v = var;
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, self) /* enter_visit on <var_v:LocalVarInitVisitor>*/;
 RET_LABEL:;
@@ -72,7 +71,7 @@ var1 = self->attrs[COLOR_local_var_init__LocalVarInitVisitor___64dtoolcontext].v
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @toolcontext");
 fprintf(stderr, " (%s:%d)\n", "src/local_var_init.nit", 47);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -118,7 +117,7 @@ var1 = self->attrs[COLOR_local_var_init__LocalVarInitVisitor___64dmaybe_unset_va
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @maybe_unset_vars");
 fprintf(stderr, " (%s:%d)\n", "src/local_var_init.nit", 54);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -161,7 +160,7 @@ var1 = 1; /* arg is null and recv is not */
 if (!var1) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/local_var_init.nit", 59);
-exit(1);
+show_backtrace(1);
 }
 var2 = ((val* (*)(val*))(self->class->vft[COLOR_local_var_init__LocalVarInitVisitor__maybe_unset_vars]))(self) /* maybe_unset_vars on <self:LocalVarInitVisitor>*/;
 ((void (*)(val*, val*))(var2->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var2, var_variable) /* add on <var2:Set[Variable]>*/;
@@ -195,7 +194,7 @@ var1 = 1; /* arg is null and recv is not */
 if (!var1) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/local_var_init.nit", 65);
-exit(1);
+show_backtrace(1);
 }
 var2 = ((val* (*)(val*))(self->class->vft[COLOR_local_var_init__LocalVarInitVisitor__maybe_unset_vars]))(self) /* maybe_unset_vars on <self:LocalVarInitVisitor>*/;
 var3 = ((short int (*)(val*, val*))(var2->class->vft[COLOR_abstract_collection__Collection__has]))(var2, var_variable) /* has on <var2:Set[Variable]>*/;
@@ -208,7 +207,7 @@ var5 = ((val* (*)(val*))(var_node->class->vft[COLOR_flow__AExpr__after_flow_cont
 if (var5 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/local_var_init.nit", 68);
-exit(1);
+show_backtrace(1);
 }
 var_flow = var5;
 var6 = ((val* (*)(val*))(var_flow->class->vft[COLOR_local_var_init__FlowContext__set_vars]))(var_flow) /* set_vars on <var_flow:FlowContext>*/;
@@ -261,7 +260,7 @@ var1 = 1; /* arg is null and recv is not */
 if (!var1) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/local_var_init.nit", 74);
-exit(1);
+show_backtrace(1);
 }
 var2 = ((val* (*)(val*))(self->class->vft[COLOR_local_var_init__LocalVarInitVisitor__maybe_unset_vars]))(self) /* maybe_unset_vars on <self:LocalVarInitVisitor>*/;
 var3 = ((short int (*)(val*, val*))(var2->class->vft[COLOR_abstract_collection__Collection__has]))(var2, var_variable) /* has on <var2:Set[Variable]>*/;
@@ -274,7 +273,7 @@ var5 = ((val* (*)(val*))(var_node->class->vft[COLOR_flow__AExpr__after_flow_cont
 if (var5 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/local_var_init.nit", 77);
-exit(1);
+show_backtrace(1);
 }
 var_flow = var5;
 var6 = ((short int (*)(val*, val*))(var_flow->class->vft[COLOR_local_var_init__FlowContext__is_variable_set]))(var_flow, var_variable) /* is_variable_set on <var_flow:FlowContext>*/;
@@ -308,7 +307,6 @@ var21 = NEW_array__NativeArray(var20, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var21)->values[1] = (val*) var_variable;
 ((struct instance_array__NativeArray*)var21)->values[2] = (val*) var15;
 ((void (*)(val*, val*, long))(var19->class->vft[COLOR_array__Array__with_native]))(var19, var21, var20) /* with_native on <var19:Array[Object]>*/;
-CHECK_NEW_array__Array(var19);
 }
 var22 = ((val* (*)(val*))(var19->class->vft[COLOR_string__Object__to_s]))(var19) /* to_s on <var19:Array[Object]>*/;
 ((void (*)(val*, val*, val*))(var8->class->vft[COLOR_toolcontext__ToolContext__error]))(var8, var9, var22) /* error on <var8:ToolContext>*/;
@@ -343,7 +341,7 @@ var1 = self->attrs[COLOR_local_var_init__FlowContext___64dset_vars].val; /* @set
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @set_vars");
 fprintf(stderr, " (%s:%d)\n", "src/local_var_init.nit", 92);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;

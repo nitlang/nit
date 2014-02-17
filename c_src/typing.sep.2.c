@@ -42,44 +42,80 @@ val* var32 /* : Array[Object] */;
 long var33 /* : Int */;
 val* var34 /* : NativeArray[Object] */;
 val* var35 /* : String */;
-val* var36 /* : nullable TId */;
-val* var_nid /* var nid: nullable TId */;
-val* var37 /* : null */;
-short int var38 /* : Bool */;
-val* var39 /* : String */;
-val* var_name /* var name: String */;
+val* var36 /* : MClass */;
+val* var37 /* : MClassKind */;
+val* var38 /* : MClassKind */;
+short int var39 /* : Bool */;
 static val* varonce40;
 val* var41 /* : String */;
 char* var42 /* : NativeString */;
 long var43 /* : Int */;
 val* var44 /* : String */;
-short int var45 /* : Bool */;
-val* var46 /* : nullable CallSite */;
-val* var_callsite /* var callsite: nullable CallSite */;
-val* var47 /* : null */;
-short int var48 /* : Bool */;
-val* var49 /* : MMethod */;
-val* var50 /* : MClass */;
-short int var51 /* : Bool */;
-short int var52 /* : Bool */;
-static val* varonce53;
-val* var54 /* : String */;
-char* var55 /* : NativeString */;
-long var56 /* : Int */;
-val* var57 /* : String */;
+static val* varonce45;
+val* var46 /* : String */;
+char* var47 /* : NativeString */;
+long var48 /* : Int */;
+val* var49 /* : String */;
+val* var50 /* : Array[Object] */;
+long var51 /* : Int */;
+val* var52 /* : NativeArray[Object] */;
+val* var53 /* : String */;
+val* var54 /* : MClass */;
+val* var55 /* : MClassKind */;
+val* var56 /* : MClassKind */;
+short int var57 /* : Bool */;
 static val* varonce58;
 val* var59 /* : String */;
 char* var60 /* : NativeString */;
 long var61 /* : Int */;
 val* var62 /* : String */;
-val* var63 /* : Array[Object] */;
-long var64 /* : Int */;
-val* var65 /* : NativeArray[Object] */;
-val* var66 /* : String */;
-val* var67 /* : AExprs */;
-val* var68 /* : Array[AExpr] */;
+static val* varonce63;
+val* var64 /* : String */;
+char* var65 /* : NativeString */;
+long var66 /* : Int */;
+val* var67 /* : String */;
+val* var68 /* : Array[Object] */;
+long var69 /* : Int */;
+val* var70 /* : NativeArray[Object] */;
+val* var71 /* : String */;
+val* var72 /* : nullable TId */;
+val* var_nid /* var nid: nullable TId */;
+val* var73 /* : null */;
+short int var74 /* : Bool */;
+val* var75 /* : String */;
+val* var_name /* var name: String */;
+static val* varonce76;
+val* var77 /* : String */;
+char* var78 /* : NativeString */;
+long var79 /* : Int */;
+val* var80 /* : String */;
+short int var81 /* : Bool */;
+val* var82 /* : nullable CallSite */;
+val* var_callsite /* var callsite: nullable CallSite */;
+val* var83 /* : null */;
+short int var84 /* : Bool */;
+val* var85 /* : MMethod */;
+val* var86 /* : MClass */;
+short int var87 /* : Bool */;
+short int var88 /* : Bool */;
+static val* varonce89;
+val* var90 /* : String */;
+char* var91 /* : NativeString */;
+long var92 /* : Int */;
+val* var93 /* : String */;
+static val* varonce94;
+val* var95 /* : String */;
+char* var96 /* : NativeString */;
+long var97 /* : Int */;
+val* var98 /* : String */;
+val* var99 /* : Array[Object] */;
+long var100 /* : Int */;
+val* var101 /* : NativeArray[Object] */;
+val* var102 /* : String */;
+val* var103 /* : AExprs */;
+val* var104 /* : Array[AExpr] */;
 val* var_args /* var args: Array[AExpr] */;
-short int var69 /* : Bool */;
+short int var105 /* : Bool */;
 var_v = p0;
 var = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ANewExpr__n_type]))(self) /* n_type on <self:ANewExpr>*/;
 var1 = ((val* (*)(val*, val*))(var_v->class->vft[COLOR_typing__TypeVisitor__resolve_mtype]))(var_v, var) /* resolve_mtype on <var_v:TypeVisitor>*/;
@@ -140,7 +176,6 @@ var20 = NEW_array__NativeArray(var19, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var20)->values[1] = (val*) var_recvtype;
 ((struct instance_array__NativeArray*)var20)->values[2] = (val*) var14;
 ((void (*)(val*, val*, long))(var18->class->vft[COLOR_array__Array__with_native]))(var18, var20, var19) /* with_native on <var18:Array[Object]>*/;
-CHECK_NEW_array__Array(var18);
 }
 var21 = ((val* (*)(val*))(var18->class->vft[COLOR_string__Object__to_s]))(var18) /* to_s on <var18:Array[Object]>*/;
 ((void (*)(val*, val*, val*))(var_v->class->vft[COLOR_typing__TypeVisitor__error]))(var_v, self, var21) /* error on <var_v:TypeVisitor>*/;
@@ -172,94 +207,166 @@ var34 = NEW_array__NativeArray(var33, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var34)->values[1] = (val*) var_recvtype;
 ((struct instance_array__NativeArray*)var34)->values[2] = (val*) var28;
 ((void (*)(val*, val*, long))(var32->class->vft[COLOR_array__Array__with_native]))(var32, var34, var33) /* with_native on <var32:Array[Object]>*/;
-CHECK_NEW_array__Array(var32);
 }
 var35 = ((val* (*)(val*))(var32->class->vft[COLOR_string__Object__to_s]))(var32) /* to_s on <var32:Array[Object]>*/;
 ((void (*)(val*, val*, val*))(var_v->class->vft[COLOR_typing__TypeVisitor__error]))(var_v, self, var35) /* error on <var_v:TypeVisitor>*/;
 goto RET_LABEL;
 }
 } else {
-}
-var36 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ANewExpr__n_id]))(self) /* n_id on <self:ANewExpr>*/;
-var_nid = var36;
-var37 = NULL;
-if (var_nid == NULL) {
-var38 = 0; /* is null */
-} else {
-var38 = 1; /* arg is null and recv is not */
-}
-if (var38){
-var39 = ((val* (*)(val*))(var_nid->class->vft[COLOR_parser_nodes__Token__text]))(var_nid) /* text on <var_nid:nullable TId(TId)>*/;
-var_name = var39;
-} else {
+var36 = ((val* (*)(val*))(var_recvtype->class->vft[COLOR_model__MClassType__mclass]))(var_recvtype) /* mclass on <var_recvtype:nullable MType(MClassType)>*/;
+var37 = ((val* (*)(val*))(var36->class->vft[COLOR_model__MClass__kind]))(var36) /* kind on <var36:MClass>*/;
+var38 = ((val* (*)(val*))(self->class->vft[COLOR_model__Object__abstract_kind]))(self) /* abstract_kind on <self:ANewExpr>*/;
+var39 = ((short int (*)(val*, val*))(var37->class->vft[COLOR_kernel__Object___61d_61d]))(var37, var38) /* == on <var37:MClassKind>*/;
+if (var39){
 if (varonce40) {
 var41 = varonce40;
 } else {
-var42 = "init";
-var43 = 4;
+var42 = "Cannot instantiate abstract class ";
+var43 = 34;
 var44 = string__NativeString__to_s_with_length(var42, var43);
 var41 = var44;
 varonce40 = var41;
 }
-var_name = var41;
-}
-var45 = 0;
-var46 = ((val* (*)(val*, val*, val*, val*, short int))(var_v->class->vft[COLOR_typing__TypeVisitor__get_method]))(var_v, self, var_recvtype, var_name, var45) /* get_method on <var_v:TypeVisitor>*/;
-var_callsite = var46;
-var47 = NULL;
-if (var_callsite == NULL) {
-var48 = 1; /* is null */
+if (varonce45) {
+var46 = varonce45;
 } else {
-var48 = 0; /* arg is null but recv is not */
+var47 = ".";
+var48 = 1;
+var49 = string__NativeString__to_s_with_length(var47, var48);
+var46 = var49;
+varonce45 = var46;
 }
-if (var48){
+var50 = NEW_array__Array(&type_array__Arraykernel__Object);
+{ /* var50 = array_instance Array[Object] */
+var51 = 3;
+var52 = NEW_array__NativeArray(var51, &type_array__NativeArraykernel__Object);
+((struct instance_array__NativeArray*)var52)->values[0] = (val*) var41;
+((struct instance_array__NativeArray*)var52)->values[1] = (val*) var_recvtype;
+((struct instance_array__NativeArray*)var52)->values[2] = (val*) var46;
+((void (*)(val*, val*, long))(var50->class->vft[COLOR_array__Array__with_native]))(var50, var52, var51) /* with_native on <var50:Array[Object]>*/;
+}
+var53 = ((val* (*)(val*))(var50->class->vft[COLOR_string__Object__to_s]))(var50) /* to_s on <var50:Array[Object]>*/;
+((void (*)(val*, val*, val*))(var_v->class->vft[COLOR_typing__TypeVisitor__error]))(var_v, self, var53) /* error on <var_v:TypeVisitor>*/;
 goto RET_LABEL;
 } else {
-}
-((void (*)(val*, val*))(self->class->vft[COLOR_typing__ANewExpr__callsite_61d]))(self, var_callsite) /* callsite= on <self:ANewExpr>*/;
-var49 = ((val* (*)(val*))(var_callsite->class->vft[COLOR_typing__CallSite__mproperty]))(var_callsite) /* mproperty on <var_callsite:nullable CallSite(CallSite)>*/;
-var50 = ((val* (*)(val*))(var_recvtype->class->vft[COLOR_model__MClassType__mclass]))(var_recvtype) /* mclass on <var_recvtype:nullable MType(MClassType)>*/;
-var51 = ((short int (*)(val*, val*))(var49->class->vft[COLOR_model__MMethod__is_init_for]))(var49, var50) /* is_init_for on <var49:MMethod>*/;
-var52 = !var51;
-if (var52){
-if (varonce53) {
-var54 = varonce53;
-} else {
-var55 = "Error: ";
-var56 = 7;
-var57 = string__NativeString__to_s_with_length(var55, var56);
-var54 = var57;
-varonce53 = var54;
-}
+var54 = ((val* (*)(val*))(var_recvtype->class->vft[COLOR_model__MClassType__mclass]))(var_recvtype) /* mclass on <var_recvtype:nullable MType(MClassType)>*/;
+var55 = ((val* (*)(val*))(var54->class->vft[COLOR_model__MClass__kind]))(var54) /* kind on <var54:MClass>*/;
+var56 = ((val* (*)(val*))(self->class->vft[COLOR_model__Object__interface_kind]))(self) /* interface_kind on <self:ANewExpr>*/;
+var57 = ((short int (*)(val*, val*))(var55->class->vft[COLOR_kernel__Object___61d_61d]))(var55, var56) /* == on <var55:MClassKind>*/;
+if (var57){
 if (varonce58) {
 var59 = varonce58;
 } else {
-var60 = " is not a constructor.";
-var61 = 22;
+var60 = "Cannot instantiate interface ";
+var61 = 29;
 var62 = string__NativeString__to_s_with_length(var60, var61);
 var59 = var62;
 varonce58 = var59;
 }
-var63 = NEW_array__Array(&type_array__Arraykernel__Object);
-{ /* var63 = array_instance Array[Object] */
-var64 = 3;
-var65 = NEW_array__NativeArray(var64, &type_array__NativeArraykernel__Object);
-((struct instance_array__NativeArray*)var65)->values[0] = (val*) var54;
-((struct instance_array__NativeArray*)var65)->values[1] = (val*) var_name;
-((struct instance_array__NativeArray*)var65)->values[2] = (val*) var59;
-((void (*)(val*, val*, long))(var63->class->vft[COLOR_array__Array__with_native]))(var63, var65, var64) /* with_native on <var63:Array[Object]>*/;
-CHECK_NEW_array__Array(var63);
+if (varonce63) {
+var64 = varonce63;
+} else {
+var65 = ".";
+var66 = 1;
+var67 = string__NativeString__to_s_with_length(var65, var66);
+var64 = var67;
+varonce63 = var64;
 }
-var66 = ((val* (*)(val*))(var63->class->vft[COLOR_string__Object__to_s]))(var63) /* to_s on <var63:Array[Object]>*/;
-((void (*)(val*, val*, val*))(var_v->class->vft[COLOR_typing__TypeVisitor__error]))(var_v, self, var66) /* error on <var_v:TypeVisitor>*/;
+var68 = NEW_array__Array(&type_array__Arraykernel__Object);
+{ /* var68 = array_instance Array[Object] */
+var69 = 3;
+var70 = NEW_array__NativeArray(var69, &type_array__NativeArraykernel__Object);
+((struct instance_array__NativeArray*)var70)->values[0] = (val*) var59;
+((struct instance_array__NativeArray*)var70)->values[1] = (val*) var_recvtype;
+((struct instance_array__NativeArray*)var70)->values[2] = (val*) var64;
+((void (*)(val*, val*, long))(var68->class->vft[COLOR_array__Array__with_native]))(var68, var70, var69) /* with_native on <var68:Array[Object]>*/;
+}
+var71 = ((val* (*)(val*))(var68->class->vft[COLOR_string__Object__to_s]))(var68) /* to_s on <var68:Array[Object]>*/;
+((void (*)(val*, val*, val*))(var_v->class->vft[COLOR_typing__TypeVisitor__error]))(var_v, self, var71) /* error on <var_v:TypeVisitor>*/;
 goto RET_LABEL;
 } else {
 }
-var67 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ANewExpr__n_args]))(self) /* n_args on <self:ANewExpr>*/;
-var68 = ((val* (*)(val*))(var67->class->vft[COLOR_typing__AExprs__to_a]))(var67) /* to_a on <var67:AExprs>*/;
-var_args = var68;
-var69 = ((short int (*)(val*, val*, val*))(var_callsite->class->vft[COLOR_typing__CallSite__check_signature]))(var_callsite, var_v, var_args) /* check_signature on <var_callsite:nullable CallSite(CallSite)>*/;
-var69;
+}
+}
+var72 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ANewExpr__n_id]))(self) /* n_id on <self:ANewExpr>*/;
+var_nid = var72;
+var73 = NULL;
+if (var_nid == NULL) {
+var74 = 0; /* is null */
+} else {
+var74 = 1; /* arg is null and recv is not */
+}
+if (var74){
+var75 = ((val* (*)(val*))(var_nid->class->vft[COLOR_parser_nodes__Token__text]))(var_nid) /* text on <var_nid:nullable TId(TId)>*/;
+var_name = var75;
+} else {
+if (varonce76) {
+var77 = varonce76;
+} else {
+var78 = "init";
+var79 = 4;
+var80 = string__NativeString__to_s_with_length(var78, var79);
+var77 = var80;
+varonce76 = var77;
+}
+var_name = var77;
+}
+var81 = 0;
+var82 = ((val* (*)(val*, val*, val*, val*, short int))(var_v->class->vft[COLOR_typing__TypeVisitor__get_method]))(var_v, self, var_recvtype, var_name, var81) /* get_method on <var_v:TypeVisitor>*/;
+var_callsite = var82;
+var83 = NULL;
+if (var_callsite == NULL) {
+var84 = 1; /* is null */
+} else {
+var84 = 0; /* arg is null but recv is not */
+}
+if (var84){
+goto RET_LABEL;
+} else {
+}
+((void (*)(val*, val*))(self->class->vft[COLOR_typing__ANewExpr__callsite_61d]))(self, var_callsite) /* callsite= on <self:ANewExpr>*/;
+var85 = ((val* (*)(val*))(var_callsite->class->vft[COLOR_typing__CallSite__mproperty]))(var_callsite) /* mproperty on <var_callsite:nullable CallSite(CallSite)>*/;
+var86 = ((val* (*)(val*))(var_recvtype->class->vft[COLOR_model__MClassType__mclass]))(var_recvtype) /* mclass on <var_recvtype:nullable MType(MClassType)>*/;
+var87 = ((short int (*)(val*, val*))(var85->class->vft[COLOR_model__MMethod__is_init_for]))(var85, var86) /* is_init_for on <var85:MMethod>*/;
+var88 = !var87;
+if (var88){
+if (varonce89) {
+var90 = varonce89;
+} else {
+var91 = "Error: ";
+var92 = 7;
+var93 = string__NativeString__to_s_with_length(var91, var92);
+var90 = var93;
+varonce89 = var90;
+}
+if (varonce94) {
+var95 = varonce94;
+} else {
+var96 = " is not a constructor.";
+var97 = 22;
+var98 = string__NativeString__to_s_with_length(var96, var97);
+var95 = var98;
+varonce94 = var95;
+}
+var99 = NEW_array__Array(&type_array__Arraykernel__Object);
+{ /* var99 = array_instance Array[Object] */
+var100 = 3;
+var101 = NEW_array__NativeArray(var100, &type_array__NativeArraykernel__Object);
+((struct instance_array__NativeArray*)var101)->values[0] = (val*) var90;
+((struct instance_array__NativeArray*)var101)->values[1] = (val*) var_name;
+((struct instance_array__NativeArray*)var101)->values[2] = (val*) var95;
+((void (*)(val*, val*, long))(var99->class->vft[COLOR_array__Array__with_native]))(var99, var101, var100) /* with_native on <var99:Array[Object]>*/;
+}
+var102 = ((val* (*)(val*))(var99->class->vft[COLOR_string__Object__to_s]))(var99) /* to_s on <var99:Array[Object]>*/;
+((void (*)(val*, val*, val*))(var_v->class->vft[COLOR_typing__TypeVisitor__error]))(var_v, self, var102) /* error on <var_v:TypeVisitor>*/;
+goto RET_LABEL;
+} else {
+}
+var103 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ANewExpr__n_args]))(self) /* n_args on <self:ANewExpr>*/;
+var104 = ((val* (*)(val*))(var103->class->vft[COLOR_typing__AExprs__to_a]))(var103) /* to_a on <var103:AExprs>*/;
+var_args = var104;
+var105 = ((short int (*)(val*, val*, val*))(var_callsite->class->vft[COLOR_typing__CallSite__check_signature]))(var_callsite, var_v, var_args) /* check_signature on <var_callsite:nullable CallSite(CallSite)>*/;
+var105;
 RET_LABEL:;
 }
 /* method typing#ANewExpr#accept_typing for (self: Object, TypeVisitor) */
@@ -448,7 +555,6 @@ var18 = NEW_array__NativeArray(var17, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var18)->values[1] = (val*) var_name;
 ((struct instance_array__NativeArray*)var18)->values[2] = (val*) var12;
 ((void (*)(val*, val*, long))(var16->class->vft[COLOR_array__Array__with_native]))(var16, var18, var17) /* with_native on <var16:Array[Object]>*/;
-CHECK_NEW_array__Array(var16);
 }
 var19 = ((val* (*)(val*))(var16->class->vft[COLOR_string__Object__to_s]))(var16) /* to_s on <var16:Array[Object]>*/;
 ((void (*)(val*, val*, val*))(var_v->class->vft[COLOR_typing__TypeVisitor__error]))(var_v, self, var19) /* error on <var_v:TypeVisitor>*/;
@@ -504,7 +610,6 @@ var42 = NEW_array__NativeArray(var41, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var42)->values[3] = (val*) var_recvtype;
 ((struct instance_array__NativeArray*)var42)->values[4] = (val*) var36;
 ((void (*)(val*, val*, long))(var40->class->vft[COLOR_array__Array__with_native]))(var40, var42, var41) /* with_native on <var40:Array[Object]>*/;
-CHECK_NEW_array__Array(var40);
 }
 var43 = ((val* (*)(val*))(var40->class->vft[COLOR_string__Object__to_s]))(var40) /* to_s on <var40:Array[Object]>*/;
 ((void (*)(val*, val*, val*))(var24->class->vft[COLOR_modelbuilder__ModelBuilder__error]))(var24, self, var43) /* error on <var24:ModelBuilder>*/;
@@ -521,8 +626,8 @@ var44 = var_mproperty->type->type_table[cltype45] == idtype46;
 }
 if (!var44) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/typing.nit", 1579);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/typing.nit", 1589);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(self->class->vft[COLOR_typing__AAttrFormExpr__mproperty_61d]))(self, var_mproperty) /* mproperty= on <self:AAttrFormExpr>*/;
 var47 = ((val* (*)(val*))(var_v->class->vft[COLOR_typing__TypeVisitor__mmodule]))(var_v) /* mmodule on <var_v:TypeVisitor>*/;
@@ -538,16 +643,16 @@ RET_LABEL52:(void)0;
 }
 if (!var51) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/typing.nit", 1583);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/typing.nit", 1593);
+show_backtrace(1);
 }
 var54 = ((val* (*)(val*))(var_mpropdefs->class->vft[COLOR_abstract_collection__Collection__first]))(var_mpropdefs) /* first on <var_mpropdefs:Array[MAttributeDef]>*/;
 var_mpropdef = var54;
 var55 = ((val* (*)(val*))(var_mpropdef->class->vft[COLOR_model__MAttributeDef__static_mtype]))(var_mpropdef) /* static_mtype on <var_mpropdef:MAttributeDef>*/;
 if (var55 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
-fprintf(stderr, " (%s:%d)\n", "src/typing.nit", 1585);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/typing.nit", 1595);
+show_backtrace(1);
 }
 var_attr_type = var55;
 var56 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AAttrFormExpr__n_expr]))(self) /* n_expr on <self:AAttrFormExpr>*/;
@@ -682,8 +787,8 @@ var3 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AAttrFormExpr__n_e
 var4 = ((val* (*)(val*))(var3->class->vft[COLOR_typing__AExpr__mtype]))(var3) /* mtype on <var3:AExpr>*/;
 if (var4 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
-fprintf(stderr, " (%s:%d)\n", "src/typing.nit", 1631);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/typing.nit", 1641);
+show_backtrace(1);
 }
 var_recvtype = var4;
 var5 = 0;
@@ -867,7 +972,6 @@ var39 = NEW_array__NativeArray(var38, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var39)->values[7] = (val*) var_umtype;
 ((struct instance_array__NativeArray*)var39)->values[8] = (val*) var33;
 ((void (*)(val*, val*, long))(var37->class->vft[COLOR_array__Array__with_native]))(var37, var39, var38) /* with_native on <var37:Array[Object]>*/;
-CHECK_NEW_array__Array(var37);
 }
 var40 = ((val* (*)(val*))(var37->class->vft[COLOR_string__Object__to_s]))(var37) /* to_s on <var37:Array[Object]>*/;
 ((void (*)(val*, val*, val*))(var12->class->vft[COLOR_modelbuilder__ModelBuilder__warning]))(var12, self, var40) /* warning on <var12:ModelBuilder>*/;

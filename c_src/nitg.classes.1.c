@@ -54,38 +54,37 @@ const int COLOR_kernel__Discrete__prec = 51;
 const int COLOR_kernel__Discrete___43d = 52;
 const int COLOR_kernel__Discrete___45d = 53;
 const int COLOR_kernel__Discrete__distance = 54;
-const int COLOR_range__Discrete__times = 55;
-const int COLOR_string_search__Pattern__search_index_in = 56;
-const int COLOR_string_search__Pattern__search_in = 57;
-const int COLOR_string_search__Pattern__search_all_in = 58;
-const int COLOR_string_search__Pattern__split_in = 59;
-const int COLOR_kernel__Char__to_i = 60;
-const int COLOR_kernel__Char__ascii = 61;
-const int COLOR_kernel__Char__to_lower = 62;
-const int COLOR_kernel__Char__to_upper = 63;
-const int COLOR_kernel__Char__is_digit = 64;
-const int COLOR_kernel__Char__is_lower = 65;
-const int COLOR_kernel__Char__is_upper = 66;
-const int COLOR_kernel__Char__is_letter = 67;
-const int COLOR_string__Char__is_numeric = 68;
-const int COLOR_string__Char__is_alpha = 69;
-const int COLOR_string__Char__is_alphanumeric = 70;
-const int COLOR_abstract_collection__Collection__iterator = 60;
-const int COLOR_abstract_collection__Collection__is_empty = 61;
-const int COLOR_abstract_collection__Collection__length = 62;
-const int COLOR_abstract_collection__Collection__has = 63;
-const int COLOR_abstract_collection__Collection__has_only = 64;
-const int COLOR_abstract_collection__Collection__count = 65;
-const int COLOR_abstract_collection__Collection__first = 66;
-const int COLOR_abstract_collection__Collection__has_all = 67;
-const int COLOR_array__Collection__to_a = 68;
-const int COLOR_string__Collection__join = 69;
-const int COLOR_math__Collection__rand = 70;
-const int COLOR_abstract_collection__RemovableCollection__clear = 71;
-const int COLOR_abstract_collection__RemovableCollection__remove = 72;
-const int COLOR_abstract_collection__RemovableCollection__remove_all = 73;
-const int COLOR_abstract_collection__SimpleCollection__add = 74;
-const int COLOR_abstract_collection__SimpleCollection__add_all = 75;
+const int COLOR_string_search__Pattern__search_index_in = 55;
+const int COLOR_string_search__Pattern__search_in = 56;
+const int COLOR_string_search__Pattern__search_all_in = 57;
+const int COLOR_string_search__Pattern__split_in = 58;
+const int COLOR_kernel__Char__to_i = 59;
+const int COLOR_kernel__Char__ascii = 60;
+const int COLOR_kernel__Char__to_lower = 61;
+const int COLOR_kernel__Char__to_upper = 62;
+const int COLOR_kernel__Char__is_digit = 63;
+const int COLOR_kernel__Char__is_lower = 64;
+const int COLOR_kernel__Char__is_upper = 65;
+const int COLOR_kernel__Char__is_letter = 66;
+const int COLOR_string__Char__is_numeric = 67;
+const int COLOR_string__Char__is_alpha = 68;
+const int COLOR_string__Char__is_alphanumeric = 69;
+const int COLOR_abstract_collection__Collection__iterator = 59;
+const int COLOR_abstract_collection__Collection__is_empty = 60;
+const int COLOR_abstract_collection__Collection__length = 61;
+const int COLOR_abstract_collection__Collection__has = 62;
+const int COLOR_abstract_collection__Collection__has_only = 63;
+const int COLOR_abstract_collection__Collection__count = 64;
+const int COLOR_abstract_collection__Collection__first = 65;
+const int COLOR_abstract_collection__Collection__has_all = 66;
+const int COLOR_array__Collection__to_a = 67;
+const int COLOR_string__Collection__join = 68;
+const int COLOR_math__Collection__rand = 69;
+const int COLOR_abstract_collection__RemovableCollection__clear = 70;
+const int COLOR_abstract_collection__RemovableCollection__remove = 71;
+const int COLOR_abstract_collection__RemovableCollection__remove_all = 72;
+const int COLOR_abstract_collection__SimpleCollection__add = 73;
+const int COLOR_abstract_collection__SimpleCollection__add_all = 74;
 const int COLOR_abstract_collection__MapRead___91d_93d = 42;
 const int COLOR_abstract_collection__MapRead__get_or_default = 43;
 const int COLOR_abstract_collection__MapRead__has_key = 44;
@@ -98,101 +97,102 @@ const int COLOR_abstract_collection__Map___91d_93d_61d = 50;
 const int COLOR_abstract_collection__Map__recover_with = 51;
 const int COLOR_abstract_collection__Map__clear = 52;
 const int COLOR_string__Map__join = 53;
-const int COLOR_abstract_collection__SequenceRead___91d_93d = 76;
-const int COLOR_abstract_collection__SequenceRead__last = 77;
-const int COLOR_abstract_collection__SequenceRead__index_of = 78;
-const int COLOR_abstract_collection__Sequence__first_61d = 79;
-const int COLOR_abstract_collection__Sequence__last_61d = 80;
-const int COLOR_abstract_collection__Sequence__push = 81;
-const int COLOR_abstract_collection__Sequence__append = 82;
-const int COLOR_abstract_collection__Sequence__pop = 83;
-const int COLOR_abstract_collection__Sequence__unshift = 84;
-const int COLOR_abstract_collection__Sequence__shift = 85;
-const int COLOR_abstract_collection__Sequence___91d_93d_61d = 86;
-const int COLOR_abstract_collection__Sequence__remove_at = 87;
-const int COLOR_collection__Sequence__subarray = 88;
-const int COLOR_array__AbstractArrayRead__last_index_of = 89;
-const int COLOR_array__AbstractArrayRead__index_of_from = 90;
-const int COLOR_array__AbstractArrayRead__last_index_of_from = 91;
-const int COLOR_array__AbstractArrayRead__reversed = 92;
-const int COLOR_array__AbstractArrayRead__copy_to = 93;
-const int COLOR_array__AbstractArrayRead__init = 94;
-const int COLOR_array__AbstractArray__enlarge = 95;
-const int COLOR_array__AbstractArray__insert = 96;
-const int COLOR_array__AbstractArray__swap_at = 97;
-const int COLOR_array__AbstractArray__init = 98;
-const int COLOR_array__ArrayCapable__calloc_array = 99;
-const int COLOR_array__Array__init = 100;
-const int COLOR_array__Array__from = 101;
-const int COLOR_array__Array__with_items = 102;
-const int COLOR_array__Array__with_capacity = 103;
-const int COLOR_array__Array__filled_with = 104;
-const int COLOR_array__Array__with_native = 105;
-const int COLOR_array__Array__intern_items = 106;
-const int COLOR_abstract_compiler__Array___45d = 107;
-const int COLOR_sorter__AbstractSorter__compare = 71;
-const int COLOR_sorter__AbstractSorter__sort = 72;
-const int COLOR_sorter__AbstractSorter__sub_sort = 73;
-const int COLOR_sorter__AbstractSorter__quick_sort = 74;
-const int COLOR_sorter__AbstractSorter__bubble_sort = 75;
-const int COLOR_hash_collection__HashCollection__first_item = 100;
-const int COLOR_hash_collection__HashCollection__index_at = 101;
-const int COLOR_hash_collection__HashCollection__node_at = 102;
-const int COLOR_hash_collection__HashCollection__node_at_idx = 103;
-const int COLOR_hash_collection__HashCollection__store = 104;
-const int COLOR_hash_collection__HashCollection__remove_node = 105;
-const int COLOR_hash_collection__HashCollection__raz = 106;
-const int COLOR_hash_collection__HashCollection__enlarge = 107;
-const int COLOR_hash_collection__HashCollection__init = 108;
-const int COLOR_hash_collection__HashMap__init = 109;
-const int COLOR_hash_collection__HashMap__keys_61d = 110;
-const int COLOR_hash_collection__HashMap__values_61d = 111;
-const int COLOR_hash_collection__HashSet__init = 109;
-const int COLOR_hash_collection__HashSet__from = 110;
-const int COLOR_string__AbstractString__items = 99;
-const int COLOR_string__AbstractString__substring = 100;
-const int COLOR_string__AbstractString__substring_from = 101;
-const int COLOR_string__AbstractString__has_substring = 102;
-const int COLOR_string__AbstractString__has_prefix = 103;
-const int COLOR_string__AbstractString__has_suffix = 104;
-const int COLOR_string__AbstractString__to_i = 105;
-const int COLOR_string__AbstractString__to_f = 106;
-const int COLOR_string__AbstractString__to_hex = 107;
-const int COLOR_string__AbstractString__a_to = 108;
-const int COLOR_string__AbstractString__is_numeric = 109;
-const int COLOR_string__AbstractString__to_upper = 110;
-const int COLOR_string__AbstractString__to_lower = 111;
-const int COLOR_string__AbstractString__trim = 112;
-const int COLOR_string__AbstractString__to_cmangle = 113;
-const int COLOR_string__AbstractString__escape_to_c = 114;
-const int COLOR_string__AbstractString__escape_more_to_c = 115;
-const int COLOR_string__AbstractString__escape_to_nit = 116;
-const int COLOR_string__AbstractString__unescape_nit = 117;
-const int COLOR_string__AbstractString__init = 118;
-const int COLOR_string__StringCapable__calloc_string = 119;
-const int COLOR_string__String__index_from = 120;
-const int COLOR_string__String__index_to = 121;
-const int COLOR_string__String__from_substring = 122;
-const int COLOR_string__String__with_infos = 123;
-const int COLOR_string__String__to_cstring = 124;
-const int COLOR_string__String___43d = 125;
-const int COLOR_string__String___42d = 126;
-const int COLOR_string_search__String__search = 127;
-const int COLOR_string_search__String__search_from = 128;
-const int COLOR_string_search__String__search_all = 129;
-const int COLOR_string_search__String__split = 130;
-const int COLOR_string_search__String__split_with = 131;
-const int COLOR_string_search__String__replace = 132;
-const int COLOR_string_search__String__html_escape = 133;
-const int COLOR_environ__String__environ = 134;
-const int COLOR_environ__String__setenv = 135;
-const int COLOR_file__String__file_exists = 136;
-const int COLOR_file__String__file_stat = 137;
-const int COLOR_file__String__file_lstat = 138;
-const int COLOR_file__String__file_delete = 139;
-const int COLOR_file__String__strip_extension = 140;
-const int COLOR_file__String__basename = 141;
-const int COLOR_file__String__dirname = 142;
+const int COLOR_abstract_collection__SequenceRead___91d_93d = 75;
+const int COLOR_abstract_collection__SequenceRead__last = 76;
+const int COLOR_abstract_collection__SequenceRead__index_of = 77;
+const int COLOR_abstract_collection__Sequence__first_61d = 78;
+const int COLOR_abstract_collection__Sequence__last_61d = 79;
+const int COLOR_abstract_collection__Sequence__push = 80;
+const int COLOR_abstract_collection__Sequence__append = 81;
+const int COLOR_abstract_collection__Sequence__pop = 82;
+const int COLOR_abstract_collection__Sequence__unshift = 83;
+const int COLOR_abstract_collection__Sequence__shift = 84;
+const int COLOR_abstract_collection__Sequence___91d_93d_61d = 85;
+const int COLOR_abstract_collection__Sequence__remove_at = 86;
+const int COLOR_collection__Sequence__subarray = 87;
+const int COLOR_array__AbstractArrayRead__last_index_of = 88;
+const int COLOR_array__AbstractArrayRead__index_of_from = 89;
+const int COLOR_array__AbstractArrayRead__last_index_of_from = 90;
+const int COLOR_array__AbstractArrayRead__reversed = 91;
+const int COLOR_array__AbstractArrayRead__copy_to = 92;
+const int COLOR_array__AbstractArrayRead__init = 93;
+const int COLOR_array__AbstractArray__enlarge = 94;
+const int COLOR_array__AbstractArray__insert = 95;
+const int COLOR_array__AbstractArray__swap_at = 96;
+const int COLOR_array__AbstractArray__init = 97;
+const int COLOR_array__ArrayCapable__calloc_array = 98;
+const int COLOR_array__Array__init = 99;
+const int COLOR_array__Array__from = 100;
+const int COLOR_array__Array__with_items = 101;
+const int COLOR_array__Array__with_capacity = 102;
+const int COLOR_array__Array__filled_with = 103;
+const int COLOR_array__Array__with_native = 104;
+const int COLOR_array__Array__intern_items = 105;
+const int COLOR_abstract_compiler__Array___45d = 106;
+const int COLOR_sorter__AbstractSorter__compare = 70;
+const int COLOR_sorter__AbstractSorter__sort = 71;
+const int COLOR_sorter__AbstractSorter__sub_sort = 72;
+const int COLOR_sorter__AbstractSorter__quick_sort = 73;
+const int COLOR_sorter__AbstractSorter__bubble_sort = 74;
+const int COLOR_hash_collection__HashCollection__first_item = 99;
+const int COLOR_hash_collection__HashCollection__index_at = 100;
+const int COLOR_hash_collection__HashCollection__node_at = 101;
+const int COLOR_hash_collection__HashCollection__node_at_idx = 102;
+const int COLOR_hash_collection__HashCollection__store = 103;
+const int COLOR_hash_collection__HashCollection__remove_node = 104;
+const int COLOR_hash_collection__HashCollection__raz = 105;
+const int COLOR_hash_collection__HashCollection__enlarge = 106;
+const int COLOR_hash_collection__HashCollection__init = 107;
+const int COLOR_hash_collection__HashMap__init = 108;
+const int COLOR_hash_collection__HashMap__keys_61d = 109;
+const int COLOR_hash_collection__HashMap__values_61d = 110;
+const int COLOR_hash_collection__HashSet__init = 108;
+const int COLOR_hash_collection__HashSet__from = 109;
+const int COLOR_string__AbstractString__items = 98;
+const int COLOR_string__AbstractString__substring = 99;
+const int COLOR_string__AbstractString__substring_from = 100;
+const int COLOR_string__AbstractString__has_substring = 101;
+const int COLOR_string__AbstractString__has_prefix = 102;
+const int COLOR_string__AbstractString__has_suffix = 103;
+const int COLOR_string__AbstractString__to_i = 104;
+const int COLOR_string__AbstractString__to_f = 105;
+const int COLOR_string__AbstractString__to_hex = 106;
+const int COLOR_string__AbstractString__a_to = 107;
+const int COLOR_string__AbstractString__is_numeric = 108;
+const int COLOR_string__AbstractString__to_upper = 109;
+const int COLOR_string__AbstractString__to_lower = 110;
+const int COLOR_string__AbstractString__trim = 111;
+const int COLOR_string__AbstractString__to_cmangle = 112;
+const int COLOR_string__AbstractString__escape_to_c = 113;
+const int COLOR_string__AbstractString__escape_more_to_c = 114;
+const int COLOR_string__AbstractString__escape_to_nit = 115;
+const int COLOR_string__AbstractString__unescape_nit = 116;
+const int COLOR_string__AbstractString__init = 117;
+const int COLOR_string__StringCapable__calloc_string = 118;
+const int COLOR_string__String__index_from = 119;
+const int COLOR_string__String__index_to = 120;
+const int COLOR_string__String__from_substring = 121;
+const int COLOR_string__String__with_infos = 122;
+const int COLOR_string__String__to_cstring = 123;
+const int COLOR_string__String___43d = 124;
+const int COLOR_string__String___42d = 125;
+const int COLOR_string_search__String__search = 126;
+const int COLOR_string_search__String__search_from = 127;
+const int COLOR_string_search__String__search_all = 128;
+const int COLOR_string_search__String__split = 129;
+const int COLOR_string_search__String__split_with = 130;
+const int COLOR_string_search__String__replace = 131;
+const int COLOR_string_search__String__html_escape = 132;
+const int COLOR_environ__String__environ = 133;
+const int COLOR_environ__String__setenv = 134;
+const int COLOR_file__String__file_exists = 135;
+const int COLOR_file__String__file_stat = 136;
+const int COLOR_file__String__file_lstat = 137;
+const int COLOR_file__String__file_delete = 138;
+const int COLOR_file__String__strip_extension = 139;
+const int COLOR_file__String__basename = 140;
+const int COLOR_file__String__dirname = 141;
+const int COLOR_file__String__realpath = 142;
 const int COLOR_file__String__simplify_path = 143;
 const int COLOR_file__String__join_path = 144;
 const int COLOR_file__String__mkdir = 145;
@@ -200,12 +200,12 @@ const int COLOR_file__String__chdir = 146;
 const int COLOR_file__String__file_extension = 147;
 const int COLOR_file__String__files = 148;
 const int COLOR_ropes__String___61d_61d = 149;
-const int COLOR_string__Buffer__init = 120;
-const int COLOR_string__Buffer__from = 121;
-const int COLOR_string__Buffer__with_capacity = 122;
-const int COLOR_string__Buffer__capacity = 123;
-const int COLOR_ropes__Buffer___61d_61d = 124;
-const int COLOR_string__Buffer__append = 125;
+const int COLOR_string__Buffer__init = 119;
+const int COLOR_string__Buffer__from = 120;
+const int COLOR_string__Buffer__with_capacity = 121;
+const int COLOR_string__Buffer__capacity = 122;
+const int COLOR_ropes__Buffer___61d_61d = 123;
+const int COLOR_string__Buffer__append = 124;
 const int COLOR_stream__IOS__close = 42;
 const int COLOR_stream__IStream__read_char = 43;
 const int COLOR_stream__IStream__read = 44;
@@ -267,32 +267,32 @@ const int COLOR_file__OFStream__write_native = 56;
 const int COLOR_file__OFStream__open = 57;
 const int COLOR_file__OFStream__init = 58;
 const int COLOR_file__OFStream__without_file = 59;
-const int COLOR_ropes__Rope__str_representation = 120;
-const int COLOR_ropes__Rope__str_representation_61d = 121;
-const int COLOR_ropes__Rope__parent_node = 122;
-const int COLOR_ropes__Rope__parent_node_61d = 123;
-const int COLOR_ropes__Rope__init = 124;
-const int COLOR_ropes__Rope__with_string = 125;
-const int COLOR_ropes__Rope__chars = 126;
-const int COLOR_ropes__Rope__length = 127;
-const int COLOR_ropes__Rope__flatten = 128;
-const int COLOR_ropes__Rope__get_node_for_pos = 129;
-const int COLOR_ropes__Rope___43d = 130;
-const int COLOR_ropes__Rope__multi_concat = 131;
-const int COLOR_ropes__Rope___42d = 132;
-const int COLOR_ropes__Rope__iterator = 133;
-const int COLOR_ropes__Rope__subrope = 134;
-const int COLOR_ropes__Rope__to_upper = 135;
-const int COLOR_ropes__Rope__to_lower = 136;
-const int COLOR_poset__POSet__elements = 76;
-const int COLOR_poset__POSet__elements_61d = 77;
-const int COLOR_poset__POSet__add_node = 78;
-const int COLOR_poset__POSet___91d_93d = 79;
-const int COLOR_poset__POSet__add_edge = 80;
-const int COLOR_poset__POSet__has_edge = 81;
-const int COLOR_poset__POSet__has_direct_edge = 82;
-const int COLOR_poset__POSet__show_dot = 83;
-const int COLOR_poset__POSet__init = 84;
+const int COLOR_ropes__Rope__str_representation = 119;
+const int COLOR_ropes__Rope__str_representation_61d = 120;
+const int COLOR_ropes__Rope__parent_node = 121;
+const int COLOR_ropes__Rope__parent_node_61d = 122;
+const int COLOR_ropes__Rope__init = 123;
+const int COLOR_ropes__Rope__with_string = 124;
+const int COLOR_ropes__Rope__chars = 125;
+const int COLOR_ropes__Rope__length = 126;
+const int COLOR_ropes__Rope__flatten = 127;
+const int COLOR_ropes__Rope__get_node_for_pos = 128;
+const int COLOR_ropes__Rope___43d = 129;
+const int COLOR_ropes__Rope__multi_concat = 130;
+const int COLOR_ropes__Rope___42d = 131;
+const int COLOR_ropes__Rope__iterator = 132;
+const int COLOR_ropes__Rope__subrope = 133;
+const int COLOR_ropes__Rope__to_upper = 134;
+const int COLOR_ropes__Rope__to_lower = 135;
+const int COLOR_poset__POSet__elements = 75;
+const int COLOR_poset__POSet__elements_61d = 76;
+const int COLOR_poset__POSet__add_node = 77;
+const int COLOR_poset__POSet___91d_93d = 78;
+const int COLOR_poset__POSet__add_edge = 79;
+const int COLOR_poset__POSet__has_edge = 80;
+const int COLOR_poset__POSet__has_direct_edge = 81;
+const int COLOR_poset__POSet__show_dot = 82;
+const int COLOR_poset__POSet__init = 83;
 const int COLOR_parser_nodes__ANode__location = 42;
 const int COLOR_parser_nodes__ANode__hot_location = 43;
 const int COLOR_parser_nodes__ANode__debug = 44;
@@ -647,18 +647,19 @@ const int COLOR_math__Float__log = 62;
 const int COLOR_math__Float__exp = 63;
 const int COLOR_math__Float__rand = 64;
 const int COLOR_math__Float__hypot_with = 65;
-const int COLOR_kernel__Int__unary_32d_45d = 56;
-const int COLOR_kernel__Int___42d = 57;
-const int COLOR_kernel__Int___47d = 58;
-const int COLOR_kernel__Int___37d = 59;
-const int COLOR_kernel__Int__lshift = 60;
-const int COLOR_kernel__Int__rshift = 61;
-const int COLOR_kernel__Int__to_f = 62;
-const int COLOR_kernel__Int__ascii = 63;
-const int COLOR_kernel__Int__digit_count = 64;
-const int COLOR_kernel__Int__digit_count_base_95d10 = 65;
-const int COLOR_kernel__Int__to_c = 66;
-const int COLOR_kernel__Int__abs = 67;
+const int COLOR_kernel__Int__unary_32d_45d = 55;
+const int COLOR_kernel__Int___42d = 56;
+const int COLOR_kernel__Int___47d = 57;
+const int COLOR_kernel__Int___37d = 58;
+const int COLOR_kernel__Int__lshift = 59;
+const int COLOR_kernel__Int__rshift = 60;
+const int COLOR_kernel__Int__to_f = 61;
+const int COLOR_kernel__Int__ascii = 62;
+const int COLOR_kernel__Int__digit_count = 63;
+const int COLOR_kernel__Int__digit_count_base_95d10 = 64;
+const int COLOR_kernel__Int__to_c = 65;
+const int COLOR_kernel__Int__abs = 66;
+const int COLOR_range__Int__times = 67;
 const int COLOR_string__Int__fill_buffer = 68;
 const int COLOR_string__Int__native_int_to_s = 69;
 const int COLOR_string__Int__to_hex = 70;
@@ -675,9 +676,9 @@ const int COLOR_abstract_collection__Iterator__item = 42;
 const int COLOR_abstract_collection__Iterator__next = 43;
 const int COLOR_abstract_collection__Iterator__is_ok = 44;
 const int COLOR_array__Iterator__to_a = 45;
-const int COLOR_abstract_collection__Container__init = 71;
-const int COLOR_abstract_collection__Container__item = 72;
-const int COLOR_abstract_collection__Container__item_61d = 73;
+const int COLOR_abstract_collection__Container__init = 70;
+const int COLOR_abstract_collection__Container__item = 71;
+const int COLOR_abstract_collection__Container__item_61d = 72;
 const int COLOR_abstract_collection__ContainerIterator__init = 46;
 const int COLOR_abstract_collection__MapIterator__item = 42;
 const int COLOR_abstract_collection__MapIterator__key = 43;
@@ -697,33 +698,33 @@ const int COLOR_abstract_collection__Couple__first_61d = 43;
 const int COLOR_abstract_collection__Couple__second = 44;
 const int COLOR_abstract_collection__Couple__second_61d = 45;
 const int COLOR_abstract_collection__Couple__init = 46;
-const int COLOR_range__Range__last = 71;
-const int COLOR_range__Range__after = 72;
-const int COLOR_range__Range__init = 73;
-const int COLOR_range__Range__without_last = 74;
+const int COLOR_range__Range__last = 70;
+const int COLOR_range__Range__after = 71;
+const int COLOR_range__Range__init = 72;
+const int COLOR_range__Range__without_last = 73;
 const int COLOR_range__IteratorRange__init = 46;
-const int COLOR_list__List__slice = 89;
-const int COLOR_list__List__link = 90;
-const int COLOR_list__List__init = 91;
-const int COLOR_list__List__from = 92;
-const int COLOR_list__List__get_node = 93;
-const int COLOR_list__List__search_node_after = 94;
-const int COLOR_list__List__remove_node = 95;
-const int COLOR_list__List__insert_before = 96;
+const int COLOR_list__List__slice = 88;
+const int COLOR_list__List__link = 89;
+const int COLOR_list__List__init = 90;
+const int COLOR_list__List__from = 91;
+const int COLOR_list__List__get_node = 92;
+const int COLOR_list__List__search_node_after = 93;
+const int COLOR_list__List__remove_node = 94;
+const int COLOR_list__List__insert_before = 95;
 const int COLOR_list__ListIterator__item_61d = 47;
 const int COLOR_list__ListIterator__init = 48;
 const int COLOR_list__ListIterator__delete = 49;
 const int COLOR_list__ListIterator__insert_before = 50;
-const int COLOR_list__ListNode__init = 74;
-const int COLOR_list__ListNode__next = 75;
-const int COLOR_list__ListNode__next_61d = 76;
-const int COLOR_list__ListNode__prev = 77;
-const int COLOR_list__ListNode__prev_61d = 78;
+const int COLOR_list__ListNode__init = 73;
+const int COLOR_list__ListNode__next = 74;
+const int COLOR_list__ListNode__next_61d = 75;
+const int COLOR_list__ListNode__prev = 76;
+const int COLOR_list__ListNode__prev_61d = 77;
 const int COLOR_array__ArrayIterator__init = 47;
-const int COLOR_array__ArraySet__enlarge = 76;
-const int COLOR_array__ArraySet__remove_at = 77;
-const int COLOR_array__ArraySet__init = 78;
-const int COLOR_array__ArraySet__with_capacity = 79;
+const int COLOR_array__ArraySet__enlarge = 75;
+const int COLOR_array__ArraySet__remove_at = 76;
+const int COLOR_array__ArraySet__init = 77;
+const int COLOR_array__ArraySet__with_capacity = 78;
 const int COLOR_array__ArraySetIterator__init = 46;
 const int COLOR_array__ArrayMap__keys_61d = 55;
 const int COLOR_array__ArrayMap__values_61d = 56;
@@ -731,49 +732,50 @@ const int COLOR_array__ArrayMap__enlarge = 57;
 const int COLOR_array__ArrayMap__remove_at_index = 58;
 const int COLOR_array__ArrayMap__index = 59;
 const int COLOR_array__ArrayMap__init = 60;
-const int COLOR_array__ArrayMapKeys__map = 74;
-const int COLOR_array__ArrayMapKeys__map_61d = 75;
-const int COLOR_array__ArrayMapKeys__init = 76;
-const int COLOR_array__ArrayMapValues__map = 74;
-const int COLOR_array__ArrayMapValues__map_61d = 75;
-const int COLOR_array__ArrayMapValues__init = 76;
+const int COLOR_array__ArrayMapKeys__map = 73;
+const int COLOR_array__ArrayMapKeys__map_61d = 74;
+const int COLOR_array__ArrayMapKeys__init = 75;
+const int COLOR_array__ArrayMapValues__map = 73;
+const int COLOR_array__ArrayMapValues__map_61d = 74;
+const int COLOR_array__ArrayMapValues__init = 75;
 const int COLOR_array__NativeArray___91d_93d = 42;
 const int COLOR_array__NativeArray___91d_93d_61d = 43;
 const int COLOR_array__NativeArray__copy_to = 44;
-const int COLOR_sorter__ComparableSorter__init = 76;
+const int COLOR_sorter__ComparableSorter__init = 75;
 const int COLOR_hash_collection__HashNode__next_item = 42;
 const int COLOR_hash_collection__HashNode__next_item_61d = 43;
 const int COLOR_hash_collection__HashNode__prev_item = 44;
 const int COLOR_hash_collection__HashNode__prev_item_61d = 45;
 const int COLOR_hash_collection__HashNode__init = 46;
-const int COLOR_hash_collection__HashMapKeys__map = 74;
-const int COLOR_hash_collection__HashMapKeys__map_61d = 75;
-const int COLOR_hash_collection__HashMapKeys__init = 76;
-const int COLOR_hash_collection__HashMapValues__map = 74;
-const int COLOR_hash_collection__HashMapValues__map_61d = 75;
-const int COLOR_hash_collection__HashMapValues__init = 76;
+const int COLOR_hash_collection__HashMapKeys__map = 73;
+const int COLOR_hash_collection__HashMapKeys__map_61d = 74;
+const int COLOR_hash_collection__HashMapKeys__init = 75;
+const int COLOR_hash_collection__HashMapValues__map = 73;
+const int COLOR_hash_collection__HashMapValues__map_61d = 74;
+const int COLOR_hash_collection__HashMapValues__init = 75;
 const int COLOR_hash_collection__HashMapNode__init = 47;
 const int COLOR_hash_collection__HashMapIterator__init = 46;
 const int COLOR_hash_collection__HashSetNode__init = 47;
 const int COLOR_hash_collection__HashSetIterator__init = 46;
-const int COLOR_string__NativeString___91d_93d = 120;
-const int COLOR_string__NativeString___91d_93d_61d = 121;
-const int COLOR_string__NativeString__copy_to = 122;
-const int COLOR_string__NativeString__cstring_length = 123;
-const int COLOR_string__NativeString__atoi = 124;
-const int COLOR_string__NativeString__atof = 125;
-const int COLOR_string__NativeString__to_s_with_length = 126;
-const int COLOR_string__NativeString__to_s_with_copy = 127;
-const int COLOR_string__NativeString__init = 128;
-const int COLOR_environ__NativeString__get_environ = 129;
-const int COLOR_environ__NativeString__setenv = 130;
-const int COLOR_exec__NativeString__system = 131;
-const int COLOR_file__NativeString__file_exists = 132;
-const int COLOR_file__NativeString__file_stat = 133;
-const int COLOR_file__NativeString__file_lstat = 134;
-const int COLOR_file__NativeString__file_mkdir = 135;
-const int COLOR_file__NativeString__file_delete = 136;
-const int COLOR_file__NativeString__file_chdir = 137;
+const int COLOR_string__NativeString___91d_93d = 119;
+const int COLOR_string__NativeString___91d_93d_61d = 120;
+const int COLOR_string__NativeString__copy_to = 121;
+const int COLOR_string__NativeString__cstring_length = 122;
+const int COLOR_string__NativeString__atoi = 123;
+const int COLOR_string__NativeString__atof = 124;
+const int COLOR_string__NativeString__to_s_with_length = 125;
+const int COLOR_string__NativeString__to_s_with_copy = 126;
+const int COLOR_string__NativeString__init = 127;
+const int COLOR_environ__NativeString__get_environ = 128;
+const int COLOR_environ__NativeString__setenv = 129;
+const int COLOR_exec__NativeString__system = 130;
+const int COLOR_file__NativeString__file_exists = 131;
+const int COLOR_file__NativeString__file_stat = 132;
+const int COLOR_file__NativeString__file_lstat = 133;
+const int COLOR_file__NativeString__file_mkdir = 134;
+const int COLOR_file__NativeString__file_delete = 135;
+const int COLOR_file__NativeString__file_chdir = 136;
+const int COLOR_file__NativeString__file_realpath = 137;
 const int COLOR_posix__Passwd__from_uid = 43;
 const int COLOR_posix__Passwd__from_name = 44;
 const int COLOR_posix__Passwd__name = 45;
@@ -789,11 +791,14 @@ const int COLOR_posix__Group__name = 45;
 const int COLOR_posix__Group__passwd = 46;
 const int COLOR_posix__Group__gid = 47;
 const int COLOR_posix__Group__mem = 48;
-const int COLOR_string_search__BM_Pattern__init = 60;
-const int COLOR_string_search__BM_Pattern__bc = 61;
-const int COLOR_string_search__BM_Pattern__compute_bc = 62;
-const int COLOR_string_search__BM_Pattern__suffixes = 63;
-const int COLOR_string_search__BM_Pattern__compute_gs = 64;
+const int COLOR_stream__StringOStream__content = 51;
+const int COLOR_stream__StringOStream__content_61d = 52;
+const int COLOR_stream__StringOStream__init = 53;
+const int COLOR_string_search__BM_Pattern__init = 59;
+const int COLOR_string_search__BM_Pattern__bc = 60;
+const int COLOR_string_search__BM_Pattern__compute_bc = 61;
+const int COLOR_string_search__BM_Pattern__suffixes = 62;
+const int COLOR_string_search__BM_Pattern__compute_gs = 63;
 const int COLOR_string_search__Match__string = 42;
 const int COLOR_string_search__Match__from = 43;
 const int COLOR_string_search__Match__length = 44;
@@ -860,26 +865,26 @@ const int COLOR_ropes__TupleLeafNodePos__corrected_pos_61d = 45;
 const int COLOR_ropes__TupleLeafNodePos__visit_stack = 46;
 const int COLOR_ropes__TupleLeafNodePos__visit_stack_61d = 47;
 const int COLOR_ropes__TupleLeafNodePos__init = 48;
-const int COLOR_ropes__BufferRope__is_dirty = 137;
-const int COLOR_ropes__BufferRope__is_dirty_61d = 138;
-const int COLOR_ropes__BufferRope__init = 139;
-const int COLOR_ropes__BufferRope__with_string = 140;
-const int COLOR_ropes__BufferRope__rotate_right = 141;
-const int COLOR_ropes__BufferRope__rotate_left = 142;
-const int COLOR_ropes__BufferRope__balance_from_node = 143;
-const int COLOR_ropes__BufferRope__balance_node = 144;
-const int COLOR_ropes__BufferRope__append = 145;
-const int COLOR_ropes__BufferRope__append_multi = 146;
-const int COLOR_ropes__BufferRope__prepend = 147;
-const int COLOR_ropes__BufferRope__prepend_multi = 148;
-const int COLOR_ropes__BufferRope__concat = 149;
-const int COLOR_ropes__BufferRope__freeze = 150;
-const int COLOR_ropes__BufferRope__to_immutable = 151;
-const int COLOR_ropes__ImmutableRope__init = 137;
-const int COLOR_ropes__ImmutableRope__with_string = 138;
-const int COLOR_ropes__CharRopeView__target = 79;
-const int COLOR_ropes__CharRopeView__target_61d = 80;
-const int COLOR_ropes__CharRopeView__init = 81;
+const int COLOR_ropes__BufferRope__is_dirty = 136;
+const int COLOR_ropes__BufferRope__is_dirty_61d = 137;
+const int COLOR_ropes__BufferRope__init = 138;
+const int COLOR_ropes__BufferRope__with_string = 139;
+const int COLOR_ropes__BufferRope__rotate_right = 140;
+const int COLOR_ropes__BufferRope__rotate_left = 141;
+const int COLOR_ropes__BufferRope__balance_from_node = 142;
+const int COLOR_ropes__BufferRope__balance_node = 143;
+const int COLOR_ropes__BufferRope__append = 144;
+const int COLOR_ropes__BufferRope__append_multi = 145;
+const int COLOR_ropes__BufferRope__prepend = 146;
+const int COLOR_ropes__BufferRope__prepend_multi = 147;
+const int COLOR_ropes__BufferRope__concat = 148;
+const int COLOR_ropes__BufferRope__freeze = 149;
+const int COLOR_ropes__BufferRope__to_immutable = 150;
+const int COLOR_ropes__ImmutableRope__init = 136;
+const int COLOR_ropes__ImmutableRope__with_string = 137;
+const int COLOR_ropes__CharRopeView__target = 78;
+const int COLOR_ropes__CharRopeView__target_61d = 79;
+const int COLOR_ropes__CharRopeView__init = 80;
 const int COLOR_ropes__TupleVisitNode__init = 42;
 const int COLOR_ropes__TupleVisitNode__node = 43;
 const int COLOR_ropes__TupleVisitNode__node_61d = 44;
@@ -978,8 +983,45 @@ const int COLOR_poset__POSetElement__direct_smallers = 59;
 const int COLOR_poset__POSetElement___60d_61d = 60;
 const int COLOR_poset__POSetElement___60d = 61;
 const int COLOR_poset__POSetElement__init = 62;
-const int COLOR_more_collections__MultiHashMap__add_one = 112;
-const int COLOR_more_collections__MultiHashMap__init = 113;
+const int COLOR_model_base__Model__init = 42;
+const int COLOR_mproject__Model__mprojects = 43;
+const int COLOR_mproject__Model__mprojects_61d = 44;
+const int COLOR_mproject__Model__mproject_by_name = 45;
+const int COLOR_mproject__Model__mproject_by_name_61d = 46;
+const int COLOR_mproject__Model__get_mprojects_by_name = 47;
+const int COLOR_mmodule__Model__mmodules = 48;
+const int COLOR_mmodule__Model__mmodules_61d = 49;
+const int COLOR_mmodule__Model__mmodule_nesting_hierarchy = 50;
+const int COLOR_mmodule__Model__mmodule_nesting_hierarchy_61d = 51;
+const int COLOR_mmodule__Model__mmodule_importation_hierarchy = 52;
+const int COLOR_mmodule__Model__mmodule_importation_hierarchy_61d = 53;
+const int COLOR_mmodule__Model__mmodules_by_name = 54;
+const int COLOR_mmodule__Model__mmodules_by_name_61d = 55;
+const int COLOR_mmodule__Model__get_mmodules_by_name = 56;
+const int COLOR_model__Model__mclasses = 57;
+const int COLOR_model__Model__mclasses_61d = 58;
+const int COLOR_model__Model__mproperties = 59;
+const int COLOR_model__Model__mproperties_61d = 60;
+const int COLOR_model__Model__mclassdef_hierarchy = 61;
+const int COLOR_model__Model__mclassdef_hierarchy_61d = 62;
+const int COLOR_model__Model__intro_mtype_specialization_hierarchy = 63;
+const int COLOR_model__Model__intro_mtype_specialization_hierarchy_61d = 64;
+const int COLOR_model__Model__full_mtype_specialization_hierarchy = 65;
+const int COLOR_model__Model__full_mtype_specialization_hierarchy_61d = 66;
+const int COLOR_model__Model__mclasses_by_name = 67;
+const int COLOR_model__Model__mclasses_by_name_61d = 68;
+const int COLOR_model__Model__get_mclasses_by_name = 69;
+const int COLOR_model__Model__mproperties_by_name = 70;
+const int COLOR_model__Model__mproperties_by_name_61d = 71;
+const int COLOR_model__Model__get_mproperties_by_name = 72;
+const int COLOR_model__Model__null_type = 73;
+const int COLOR_model__Model__null_type_61d = 74;
+const int COLOR_model_base__MVisibility__to_s_61d = 50;
+const int COLOR_model_base__MVisibility__level = 51;
+const int COLOR_model_base__MVisibility__level_61d = 52;
+const int COLOR_model_base__MVisibility__init = 53;
+const int COLOR_more_collections__MultiHashMap__add_one = 111;
+const int COLOR_more_collections__MultiHashMap__init = 112;
 const int COLOR_more_collections__HashMap2__level1 = 42;
 const int COLOR_more_collections__HashMap2__level1_61d = 43;
 const int COLOR_more_collections__HashMap2___91d_93d = 44;
@@ -1030,13 +1072,13 @@ const int COLOR_opts__OptionContext__add_option = 48;
 const int COLOR_opts__OptionContext__init = 49;
 const int COLOR_opts__OptionContext__build = 50;
 const int COLOR_opts__OptionContext__get_errors = 51;
-const int COLOR_parser_nodes__ANodes__parent = 89;
-const int COLOR_parser_nodes__ANodes__parent_61d = 90;
-const int COLOR_parser_nodes__ANodes__items = 91;
-const int COLOR_parser_nodes__ANodes__items_61d = 92;
-const int COLOR_parser_nodes__ANodes__hook_add = 93;
-const int COLOR_parser_nodes__ANodes__hook_remove = 94;
-const int COLOR_parser_nodes__ANodes__init = 95;
+const int COLOR_parser_nodes__ANodes__parent = 88;
+const int COLOR_parser_nodes__ANodes__parent_61d = 89;
+const int COLOR_parser_nodes__ANodes__items = 90;
+const int COLOR_parser_nodes__ANodes__items_61d = 91;
+const int COLOR_parser_nodes__ANodes__hook_add = 92;
+const int COLOR_parser_nodes__ANodes__hook_remove = 93;
+const int COLOR_parser_nodes__ANodes__init = 94;
 const int COLOR_parser_nodes__Token__text = 64;
 const int COLOR_parser_nodes__Token__text_61d = 65;
 const int COLOR_parser_nodes__Token__prev_token = 66;
@@ -1472,17 +1514,17 @@ const int COLOR_parser_nodes__ALocalPropExternCall__n_methid_61d = 75;
 const int COLOR_parser_nodes__ALocalPropExternCall__init = 76;
 const int COLOR_parser_prod__ALocalPropExternCall__empty_init = 77;
 const int COLOR_parser_prod__ALocalPropExternCall__init_alocalpropexterncall = 78;
-const int COLOR_parser_nodes__AFullPropExternCall__n_classid = 74;
-const int COLOR_parser_nodes__AFullPropExternCall__n_classid_61d = 75;
-const int COLOR_parser_nodes__AFullPropExternCall__n_quad = 76;
-const int COLOR_parser_nodes__AFullPropExternCall__n_quad_61d = 77;
+const int COLOR_parser_nodes__AFullPropExternCall__n_type = 74;
+const int COLOR_parser_nodes__AFullPropExternCall__n_type_61d = 75;
+const int COLOR_parser_nodes__AFullPropExternCall__n_dot = 76;
+const int COLOR_parser_nodes__AFullPropExternCall__n_dot_61d = 77;
 const int COLOR_parser_nodes__AFullPropExternCall__n_methid = 78;
 const int COLOR_parser_nodes__AFullPropExternCall__n_methid_61d = 79;
 const int COLOR_parser_nodes__AFullPropExternCall__init = 80;
 const int COLOR_parser_prod__AFullPropExternCall__empty_init = 81;
 const int COLOR_parser_prod__AFullPropExternCall__init_afullpropexterncall = 82;
-const int COLOR_parser_nodes__AInitPropExternCall__n_classid = 74;
-const int COLOR_parser_nodes__AInitPropExternCall__n_classid_61d = 75;
+const int COLOR_parser_nodes__AInitPropExternCall__n_type = 74;
+const int COLOR_parser_nodes__AInitPropExternCall__n_type_61d = 75;
 const int COLOR_parser_nodes__AInitPropExternCall__init = 76;
 const int COLOR_parser_prod__AInitPropExternCall__empty_init = 77;
 const int COLOR_parser_prod__AInitPropExternCall__init_ainitpropexterncall = 78;
@@ -1494,13 +1536,15 @@ const int COLOR_parser_prod__ASuperExternCall__init_asuperexterncall = 77;
 const int COLOR_parser_nodes__ACastExternCall__init = 73;
 const int COLOR_parser_nodes__ACastAsExternCall__n_from_type = 74;
 const int COLOR_parser_nodes__ACastAsExternCall__n_from_type_61d = 75;
-const int COLOR_parser_nodes__ACastAsExternCall__n_kwas = 76;
-const int COLOR_parser_nodes__ACastAsExternCall__n_kwas_61d = 77;
-const int COLOR_parser_nodes__ACastAsExternCall__n_to_type = 78;
-const int COLOR_parser_nodes__ACastAsExternCall__n_to_type_61d = 79;
-const int COLOR_parser_nodes__ACastAsExternCall__init = 80;
-const int COLOR_parser_prod__ACastAsExternCall__empty_init = 81;
-const int COLOR_parser_prod__ACastAsExternCall__init_acastasexterncall = 82;
+const int COLOR_parser_nodes__ACastAsExternCall__n_dot = 76;
+const int COLOR_parser_nodes__ACastAsExternCall__n_dot_61d = 77;
+const int COLOR_parser_nodes__ACastAsExternCall__n_kwas = 78;
+const int COLOR_parser_nodes__ACastAsExternCall__n_kwas_61d = 79;
+const int COLOR_parser_nodes__ACastAsExternCall__n_to_type = 80;
+const int COLOR_parser_nodes__ACastAsExternCall__n_to_type_61d = 81;
+const int COLOR_parser_nodes__ACastAsExternCall__init = 82;
+const int COLOR_parser_prod__ACastAsExternCall__empty_init = 83;
+const int COLOR_parser_prod__ACastAsExternCall__init_acastasexterncall = 84;
 const int COLOR_parser_nodes__AAsNullableExternCall__n_type = 74;
 const int COLOR_parser_nodes__AAsNullableExternCall__n_type_61d = 75;
 const int COLOR_parser_nodes__AAsNullableExternCall__n_kwas = 76;
@@ -2277,87 +2321,93 @@ const int COLOR_scope__ToolContext__scope_phase = 95;
 const int COLOR_scope__ToolContext__scope_phase_61d = 96;
 const int COLOR_flow__ToolContext__flow_phase = 97;
 const int COLOR_flow__ToolContext__flow_phase_61d = 98;
-const int COLOR_local_var_init__ToolContext__local_var_init_phase = 99;
-const int COLOR_local_var_init__ToolContext__local_var_init_phase_61d = 100;
-const int COLOR_modelbuilder__ToolContext__opt_path = 101;
-const int COLOR_modelbuilder__ToolContext__opt_path_61d = 102;
-const int COLOR_modelbuilder__ToolContext__opt_only_metamodel = 103;
-const int COLOR_modelbuilder__ToolContext__opt_only_metamodel_61d = 104;
-const int COLOR_modelbuilder__ToolContext__opt_only_parse = 105;
-const int COLOR_modelbuilder__ToolContext__opt_only_parse_61d = 106;
-const int COLOR_modelbuilder__ToolContext__modelbuilder = 107;
-const int COLOR_modelbuilder__ToolContext__modelbuilder_real = 108;
-const int COLOR_modelbuilder__ToolContext__modelbuilder_real_61d = 109;
-const int COLOR_modelize_class__ToolContext__modelize_class_phase = 110;
-const int COLOR_modelize_class__ToolContext__modelize_class_phase_61d = 111;
-const int COLOR_modelize_property__ToolContext__modelize_property_phase = 112;
-const int COLOR_modelize_property__ToolContext__modelize_property_phase_61d = 113;
-const int COLOR_cached__ToolContext__cached_phase = 114;
-const int COLOR_cached__ToolContext__cached_phase_61d = 115;
-const int COLOR_typing__ToolContext__typing_phase = 116;
-const int COLOR_typing__ToolContext__typing_phase_61d = 117;
-const int COLOR_auto_super_init__ToolContext__auto_super_init_phase = 118;
-const int COLOR_auto_super_init__ToolContext__auto_super_init_phase_61d = 119;
-const int COLOR_div_by_zero__ToolContext__div_by_zero_phase = 120;
-const int COLOR_div_by_zero__ToolContext__div_by_zero_phase_61d = 121;
-const int COLOR_transform__ToolContext__transform_phase = 122;
-const int COLOR_transform__ToolContext__transform_phase_61d = 123;
-const int COLOR_frontend__ToolContext__dummy = 124;
-const int COLOR_frontend__ToolContext__dummy_61d = 125;
-const int COLOR_frontend__ToolContext__do_dummy = 126;
-const int COLOR_frontend__ToolContext__run_global_phases = 127;
-const int COLOR_abstract_compiler__ToolContext__opt_output = 128;
-const int COLOR_abstract_compiler__ToolContext__opt_output_61d = 129;
-const int COLOR_abstract_compiler__ToolContext__opt_no_cc = 130;
-const int COLOR_abstract_compiler__ToolContext__opt_no_cc_61d = 131;
-const int COLOR_abstract_compiler__ToolContext__opt_cc_path = 132;
-const int COLOR_abstract_compiler__ToolContext__opt_cc_path_61d = 133;
-const int COLOR_abstract_compiler__ToolContext__opt_make_flags = 134;
-const int COLOR_abstract_compiler__ToolContext__opt_make_flags_61d = 135;
-const int COLOR_abstract_compiler__ToolContext__opt_compile_dir = 136;
-const int COLOR_abstract_compiler__ToolContext__opt_compile_dir_61d = 137;
-const int COLOR_abstract_compiler__ToolContext__opt_hardening = 138;
-const int COLOR_abstract_compiler__ToolContext__opt_hardening_61d = 139;
-const int COLOR_abstract_compiler__ToolContext__opt_no_shortcut_range = 140;
-const int COLOR_abstract_compiler__ToolContext__opt_no_shortcut_range_61d = 141;
-const int COLOR_abstract_compiler__ToolContext__opt_no_check_covariance = 142;
-const int COLOR_abstract_compiler__ToolContext__opt_no_check_covariance_61d = 143;
-const int COLOR_abstract_compiler__ToolContext__opt_no_check_initialization = 144;
-const int COLOR_abstract_compiler__ToolContext__opt_no_check_initialization_61d = 145;
-const int COLOR_abstract_compiler__ToolContext__opt_no_check_assert = 146;
-const int COLOR_abstract_compiler__ToolContext__opt_no_check_assert_61d = 147;
-const int COLOR_abstract_compiler__ToolContext__opt_no_check_autocast = 148;
-const int COLOR_abstract_compiler__ToolContext__opt_no_check_autocast_61d = 149;
-const int COLOR_abstract_compiler__ToolContext__opt_no_check_other = 150;
-const int COLOR_abstract_compiler__ToolContext__opt_no_check_other_61d = 151;
-const int COLOR_abstract_compiler__ToolContext__opt_typing_test_metrics = 152;
-const int COLOR_abstract_compiler__ToolContext__opt_typing_test_metrics_61d = 153;
-const int COLOR_separate_compiler__ToolContext__opt_separate = 154;
-const int COLOR_separate_compiler__ToolContext__opt_separate_61d = 155;
-const int COLOR_separate_compiler__ToolContext__opt_no_inline_intern = 156;
-const int COLOR_separate_compiler__ToolContext__opt_no_inline_intern_61d = 157;
-const int COLOR_separate_compiler__ToolContext__opt_no_union_attribute = 158;
-const int COLOR_separate_compiler__ToolContext__opt_no_union_attribute_61d = 159;
-const int COLOR_separate_compiler__ToolContext__opt_no_shortcut_equate = 160;
-const int COLOR_separate_compiler__ToolContext__opt_no_shortcut_equate_61d = 161;
-const int COLOR_separate_compiler__ToolContext__opt_inline_coloring_numbers = 162;
-const int COLOR_separate_compiler__ToolContext__opt_inline_coloring_numbers_61d = 163;
-const int COLOR_separate_compiler__ToolContext__opt_bm_typing = 164;
-const int COLOR_separate_compiler__ToolContext__opt_bm_typing_61d = 165;
-const int COLOR_separate_compiler__ToolContext__opt_phmod_typing = 166;
-const int COLOR_separate_compiler__ToolContext__opt_phmod_typing_61d = 167;
-const int COLOR_separate_compiler__ToolContext__opt_phand_typing = 168;
-const int COLOR_separate_compiler__ToolContext__opt_phand_typing_61d = 169;
-const int COLOR_separate_compiler__ToolContext__opt_tables_metrics = 170;
-const int COLOR_separate_compiler__ToolContext__opt_tables_metrics_61d = 171;
-const int COLOR_separate_erasure_compiler__ToolContext__opt_erasure = 172;
-const int COLOR_separate_erasure_compiler__ToolContext__opt_erasure_61d = 173;
-const int COLOR_separate_erasure_compiler__ToolContext__opt_no_check_erasure_cast = 174;
-const int COLOR_separate_erasure_compiler__ToolContext__opt_no_check_erasure_cast_61d = 175;
-const int COLOR_separate_erasure_compiler__ToolContext__init = 176;
-const int COLOR_separate_compiler__ToolContext__init = 177;
-const int COLOR_abstract_compiler__ToolContext__init = 178;
-const int COLOR_modelbuilder__ToolContext__init = 179;
+const int COLOR_serialization_phase__ToolContext__serialization_phase = 99;
+const int COLOR_serialization_phase__ToolContext__serialization_phase_61d = 100;
+const int COLOR_local_var_init__ToolContext__local_var_init_phase = 101;
+const int COLOR_local_var_init__ToolContext__local_var_init_phase_61d = 102;
+const int COLOR_modelbuilder__ToolContext__opt_path = 103;
+const int COLOR_modelbuilder__ToolContext__opt_path_61d = 104;
+const int COLOR_modelbuilder__ToolContext__opt_only_metamodel = 105;
+const int COLOR_modelbuilder__ToolContext__opt_only_metamodel_61d = 106;
+const int COLOR_modelbuilder__ToolContext__opt_only_parse = 107;
+const int COLOR_modelbuilder__ToolContext__opt_only_parse_61d = 108;
+const int COLOR_modelbuilder__ToolContext__modelbuilder = 109;
+const int COLOR_modelbuilder__ToolContext__modelbuilder_real = 110;
+const int COLOR_modelbuilder__ToolContext__modelbuilder_real_61d = 111;
+const int COLOR_modelbuilder__ToolContext__run_global_phases = 112;
+const int COLOR_modelize_class__ToolContext__modelize_class_phase = 113;
+const int COLOR_modelize_class__ToolContext__modelize_class_phase_61d = 114;
+const int COLOR_modelize_property__ToolContext__modelize_property_phase = 115;
+const int COLOR_modelize_property__ToolContext__modelize_property_phase_61d = 116;
+const int COLOR_cached__ToolContext__cached_phase = 117;
+const int COLOR_cached__ToolContext__cached_phase_61d = 118;
+const int COLOR_typing__ToolContext__typing_phase = 119;
+const int COLOR_typing__ToolContext__typing_phase_61d = 120;
+const int COLOR_auto_super_init__ToolContext__auto_super_init_phase = 121;
+const int COLOR_auto_super_init__ToolContext__auto_super_init_phase_61d = 122;
+const int COLOR_div_by_zero__ToolContext__div_by_zero_phase = 123;
+const int COLOR_div_by_zero__ToolContext__div_by_zero_phase_61d = 124;
+const int COLOR_transform__ToolContext__transform_phase = 125;
+const int COLOR_transform__ToolContext__transform_phase_61d = 126;
+const int COLOR_frontend__ToolContext__dummy = 127;
+const int COLOR_frontend__ToolContext__dummy_61d = 128;
+const int COLOR_frontend__ToolContext__do_dummy = 129;
+const int COLOR_abstract_compiler__ToolContext__opt_output = 130;
+const int COLOR_abstract_compiler__ToolContext__opt_output_61d = 131;
+const int COLOR_abstract_compiler__ToolContext__opt_no_cc = 132;
+const int COLOR_abstract_compiler__ToolContext__opt_no_cc_61d = 133;
+const int COLOR_abstract_compiler__ToolContext__opt_cc_path = 134;
+const int COLOR_abstract_compiler__ToolContext__opt_cc_path_61d = 135;
+const int COLOR_abstract_compiler__ToolContext__opt_make_flags = 136;
+const int COLOR_abstract_compiler__ToolContext__opt_make_flags_61d = 137;
+const int COLOR_abstract_compiler__ToolContext__opt_compile_dir = 138;
+const int COLOR_abstract_compiler__ToolContext__opt_compile_dir_61d = 139;
+const int COLOR_abstract_compiler__ToolContext__opt_hardening = 140;
+const int COLOR_abstract_compiler__ToolContext__opt_hardening_61d = 141;
+const int COLOR_abstract_compiler__ToolContext__opt_no_shortcut_range = 142;
+const int COLOR_abstract_compiler__ToolContext__opt_no_shortcut_range_61d = 143;
+const int COLOR_abstract_compiler__ToolContext__opt_no_check_covariance = 144;
+const int COLOR_abstract_compiler__ToolContext__opt_no_check_covariance_61d = 145;
+const int COLOR_abstract_compiler__ToolContext__opt_no_check_initialization = 146;
+const int COLOR_abstract_compiler__ToolContext__opt_no_check_initialization_61d = 147;
+const int COLOR_abstract_compiler__ToolContext__opt_no_check_assert = 148;
+const int COLOR_abstract_compiler__ToolContext__opt_no_check_assert_61d = 149;
+const int COLOR_abstract_compiler__ToolContext__opt_no_check_autocast = 150;
+const int COLOR_abstract_compiler__ToolContext__opt_no_check_autocast_61d = 151;
+const int COLOR_abstract_compiler__ToolContext__opt_no_check_other = 152;
+const int COLOR_abstract_compiler__ToolContext__opt_no_check_other_61d = 153;
+const int COLOR_abstract_compiler__ToolContext__opt_typing_test_metrics = 154;
+const int COLOR_abstract_compiler__ToolContext__opt_typing_test_metrics_61d = 155;
+const int COLOR_abstract_compiler__ToolContext__opt_no_stacktrace = 156;
+const int COLOR_abstract_compiler__ToolContext__opt_no_stacktrace_61d = 157;
+const int COLOR_abstract_compiler__ToolContext__opt_stacktrace = 158;
+const int COLOR_abstract_compiler__ToolContext__opt_stacktrace_61d = 159;
+const int COLOR_separate_compiler__ToolContext__opt_separate = 160;
+const int COLOR_separate_compiler__ToolContext__opt_separate_61d = 161;
+const int COLOR_separate_compiler__ToolContext__opt_no_inline_intern = 162;
+const int COLOR_separate_compiler__ToolContext__opt_no_inline_intern_61d = 163;
+const int COLOR_separate_compiler__ToolContext__opt_no_union_attribute = 164;
+const int COLOR_separate_compiler__ToolContext__opt_no_union_attribute_61d = 165;
+const int COLOR_separate_compiler__ToolContext__opt_no_shortcut_equate = 166;
+const int COLOR_separate_compiler__ToolContext__opt_no_shortcut_equate_61d = 167;
+const int COLOR_separate_compiler__ToolContext__opt_inline_coloring_numbers = 168;
+const int COLOR_separate_compiler__ToolContext__opt_inline_coloring_numbers_61d = 169;
+const int COLOR_separate_compiler__ToolContext__opt_bm_typing = 170;
+const int COLOR_separate_compiler__ToolContext__opt_bm_typing_61d = 171;
+const int COLOR_separate_compiler__ToolContext__opt_phmod_typing = 172;
+const int COLOR_separate_compiler__ToolContext__opt_phmod_typing_61d = 173;
+const int COLOR_separate_compiler__ToolContext__opt_phand_typing = 174;
+const int COLOR_separate_compiler__ToolContext__opt_phand_typing_61d = 175;
+const int COLOR_separate_compiler__ToolContext__opt_tables_metrics = 176;
+const int COLOR_separate_compiler__ToolContext__opt_tables_metrics_61d = 177;
+const int COLOR_separate_erasure_compiler__ToolContext__opt_erasure = 178;
+const int COLOR_separate_erasure_compiler__ToolContext__opt_erasure_61d = 179;
+const int COLOR_separate_erasure_compiler__ToolContext__opt_no_check_erasure_cast = 180;
+const int COLOR_separate_erasure_compiler__ToolContext__opt_no_check_erasure_cast_61d = 181;
+const int COLOR_separate_erasure_compiler__ToolContext__init = 182;
+const int COLOR_separate_compiler__ToolContext__init = 183;
+const int COLOR_abstract_compiler__ToolContext__init = 184;
+const int COLOR_modelbuilder__ToolContext__init = 185;
 const int COLOR_lexer__Lexer__file = 46;
 const int COLOR_lexer__Lexer__state_initial = 47;
 const int COLOR_lexer__Lexer__init = 48;
@@ -2366,92 +2416,101 @@ const int COLOR_lexer__Lexer__last_token_61d = 50;
 const int COLOR_lexer__Lexer__peek = 51;
 const int COLOR_lexer__Lexer__next = 52;
 const int COLOR_lexer__Lexer__get_token = 53;
-const int COLOR_model_base__Model__mmodules = 42;
-const int COLOR_model_base__Model__mmodules_61d = 43;
-const int COLOR_model_base__Model__mmodule_nesting_hierarchy = 44;
-const int COLOR_model_base__Model__mmodule_nesting_hierarchy_61d = 45;
-const int COLOR_model_base__Model__mmodule_importation_hierarchy = 46;
-const int COLOR_model_base__Model__mmodule_importation_hierarchy_61d = 47;
-const int COLOR_model_base__Model__mmodules_by_name = 48;
-const int COLOR_model_base__Model__mmodules_by_name_61d = 49;
-const int COLOR_model_base__Model__get_mmodules_by_name = 50;
-const int COLOR_model_base__Model__init = 51;
-const int COLOR_model__Model__mclasses = 52;
-const int COLOR_model__Model__mclasses_61d = 53;
-const int COLOR_model__Model__mproperties = 54;
-const int COLOR_model__Model__mproperties_61d = 55;
-const int COLOR_model__Model__mclassdef_hierarchy = 56;
-const int COLOR_model__Model__mclassdef_hierarchy_61d = 57;
-const int COLOR_model__Model__intro_mtype_specialization_hierarchy = 58;
-const int COLOR_model__Model__intro_mtype_specialization_hierarchy_61d = 59;
-const int COLOR_model__Model__full_mtype_specialization_hierarchy = 60;
-const int COLOR_model__Model__full_mtype_specialization_hierarchy_61d = 61;
-const int COLOR_model__Model__mclasses_by_name = 62;
-const int COLOR_model__Model__mclasses_by_name_61d = 63;
-const int COLOR_model__Model__get_mclasses_by_name = 64;
-const int COLOR_model__Model__mproperties_by_name = 65;
-const int COLOR_model__Model__mproperties_by_name_61d = 66;
-const int COLOR_model__Model__get_mproperties_by_name = 67;
-const int COLOR_model__Model__null_type = 68;
-const int COLOR_model__Model__null_type_61d = 69;
-const int COLOR_model_base__MModule__model = 42;
-const int COLOR_model_base__MModule__model_61d = 43;
-const int COLOR_model_base__MModule__direct_owner = 44;
-const int COLOR_model_base__MModule__direct_owner_61d = 45;
-const int COLOR_model_base__MModule__name = 46;
-const int COLOR_model_base__MModule__name_61d = 47;
-const int COLOR_model_base__MModule__location = 48;
-const int COLOR_model_base__MModule__location_61d = 49;
-const int COLOR_model_base__MModule__in_nesting = 50;
-const int COLOR_model_base__MModule__in_nesting_61d = 51;
-const int COLOR_model_base__MModule__in_importation = 52;
-const int COLOR_model_base__MModule__in_importation_61d = 53;
-const int COLOR_model_base__MModule__full_name = 54;
-const int COLOR_model_base__MModule__init = 55;
-const int COLOR_model_base__MModule__set_imported_mmodules = 56;
-const int COLOR_model_base__MModule__intrude_mmodules = 57;
-const int COLOR_model_base__MModule__intrude_mmodules_61d = 58;
-const int COLOR_model_base__MModule__public_mmodules = 59;
-const int COLOR_model_base__MModule__public_mmodules_61d = 60;
-const int COLOR_model_base__MModule__private_mmodules = 61;
-const int COLOR_model_base__MModule__private_mmodules_61d = 62;
-const int COLOR_model_base__MModule__visibility_for = 63;
-const int COLOR_model_base__MModule__set_visibility_for = 64;
-const int COLOR_model_base__MModule__public_owner = 65;
-const int COLOR_model_base__MModule__is_visible = 66;
-const int COLOR_model__MModule__intro_mclasses = 67;
-const int COLOR_model__MModule__intro_mclasses_61d = 68;
-const int COLOR_model__MModule__mclassdefs = 69;
-const int COLOR_model__MModule__mclassdefs_61d = 70;
-const int COLOR_model__MModule__has_mclass = 71;
-const int COLOR_model__MModule__flatten_mclass_hierarchy = 72;
-const int COLOR_model__MModule__linearize_mclasses = 73;
-const int COLOR_model__MModule__linearize_mclassdefs = 74;
-const int COLOR_model__MModule__linearize_mpropdefs = 75;
-const int COLOR_model__MModule__flatten_mclass_hierarchy_cache = 76;
-const int COLOR_model__MModule__flatten_mclass_hierarchy_cache_61d = 77;
-const int COLOR_model__MModule__object_type = 78;
-const int COLOR_model__MModule__object_type_cache = 79;
-const int COLOR_model__MModule__object_type_cache_61d = 80;
-const int COLOR_model__MModule__bool_type = 81;
-const int COLOR_model__MModule__bool_type_cache = 82;
-const int COLOR_model__MModule__bool_type_cache_61d = 83;
-const int COLOR_model__MModule__sys_type = 84;
-const int COLOR_model__MModule__get_primitive_class = 85;
-const int COLOR_model__MModule__try_get_primitive_method = 86;
-const int COLOR_abstract_compiler__MModule__properties = 87;
-const int COLOR_abstract_compiler__MModule__properties_cache = 88;
-const int COLOR_abstract_compiler__MModule__properties_cache_61d = 89;
-const int COLOR_model_base__MVisibility__to_s_61d = 50;
-const int COLOR_model_base__MVisibility__level = 51;
-const int COLOR_model_base__MVisibility__level_61d = 52;
-const int COLOR_model_base__MVisibility__init = 53;
-const int COLOR_model__MClassDefSorter__mmodule = 76;
-const int COLOR_model__MClassDefSorter__mmodule_61d = 77;
-const int COLOR_model__MClassDefSorter__init = 78;
-const int COLOR_model__MPropDefSorter__mmodule = 76;
-const int COLOR_model__MPropDefSorter__mmodule_61d = 77;
-const int COLOR_model__MPropDefSorter__init = 78;
+const int COLOR_mproject__MProject__name = 42;
+const int COLOR_mproject__MProject__name_61d = 43;
+const int COLOR_mproject__MProject__model = 44;
+const int COLOR_mproject__MProject__model_61d = 45;
+const int COLOR_mproject__MProject__root = 46;
+const int COLOR_mproject__MProject__root_61d = 47;
+const int COLOR_mproject__MProject__mgroups = 48;
+const int COLOR_mproject__MProject__mgroups_61d = 49;
+const int COLOR_mproject__MProject__init = 50;
+const int COLOR_mproject__MGroup__name = 42;
+const int COLOR_mproject__MGroup__name_61d = 43;
+const int COLOR_mproject__MGroup__mproject = 44;
+const int COLOR_mproject__MGroup__mproject_61d = 45;
+const int COLOR_mproject__MGroup__parent = 46;
+const int COLOR_mproject__MGroup__parent_61d = 47;
+const int COLOR_mproject__MGroup__full_name = 48;
+const int COLOR_mproject__MGroup__in_nesting = 49;
+const int COLOR_mproject__MGroup__in_nesting_61d = 50;
+const int COLOR_mproject__MGroup__filepath = 51;
+const int COLOR_mproject__MGroup__filepath_61d = 52;
+const int COLOR_mproject__MGroup__init = 53;
+const int COLOR_mmodule__MGroup__mmodules = 54;
+const int COLOR_mmodule__MGroup__mmodules_61d = 55;
+const int COLOR_parser__State__state = 42;
+const int COLOR_parser__State__state_61d = 43;
+const int COLOR_parser__State__nodes = 44;
+const int COLOR_parser__State__nodes_61d = 45;
+const int COLOR_parser__State__init = 46;
+const int COLOR_parser__Parser__init = 46;
+const int COLOR_parser__Parser__go_to = 47;
+const int COLOR_parser__Parser__push = 48;
+const int COLOR_parser__Parser__state = 49;
+const int COLOR_parser__Parser__pop = 50;
+const int COLOR_parser__Parser__parse = 51;
+const int COLOR_parser__Parser__build_reduce_table = 52;
+const int COLOR_parser__ComputeProdLocationVisitor__init = 47;
+const int COLOR_parser__ReduceAction__action = 42;
+const int COLOR_parser__ReduceAction__concat = 43;
+const int COLOR_parser__ReduceAction__init = 44;
+const int COLOR_mmodule__MModule__model = 42;
+const int COLOR_mmodule__MModule__model_61d = 43;
+const int COLOR_mmodule__MModule__direct_owner = 44;
+const int COLOR_mmodule__MModule__direct_owner_61d = 45;
+const int COLOR_mmodule__MModule__mgroup = 46;
+const int COLOR_mmodule__MModule__mgroup_61d = 47;
+const int COLOR_mmodule__MModule__name = 48;
+const int COLOR_mmodule__MModule__name_61d = 49;
+const int COLOR_mmodule__MModule__location = 50;
+const int COLOR_mmodule__MModule__location_61d = 51;
+const int COLOR_mmodule__MModule__in_nesting = 52;
+const int COLOR_mmodule__MModule__in_nesting_61d = 53;
+const int COLOR_mmodule__MModule__in_importation = 54;
+const int COLOR_mmodule__MModule__in_importation_61d = 55;
+const int COLOR_mmodule__MModule__full_name = 56;
+const int COLOR_mmodule__MModule__init = 57;
+const int COLOR_mmodule__MModule__set_imported_mmodules = 58;
+const int COLOR_mmodule__MModule__intrude_mmodules = 59;
+const int COLOR_mmodule__MModule__intrude_mmodules_61d = 60;
+const int COLOR_mmodule__MModule__public_mmodules = 61;
+const int COLOR_mmodule__MModule__public_mmodules_61d = 62;
+const int COLOR_mmodule__MModule__private_mmodules = 63;
+const int COLOR_mmodule__MModule__private_mmodules_61d = 64;
+const int COLOR_mmodule__MModule__visibility_for = 65;
+const int COLOR_mmodule__MModule__set_visibility_for = 66;
+const int COLOR_mmodule__MModule__public_owner = 67;
+const int COLOR_mmodule__MModule__is_visible = 68;
+const int COLOR_model__MModule__intro_mclasses = 69;
+const int COLOR_model__MModule__intro_mclasses_61d = 70;
+const int COLOR_model__MModule__mclassdefs = 71;
+const int COLOR_model__MModule__mclassdefs_61d = 72;
+const int COLOR_model__MModule__has_mclass = 73;
+const int COLOR_model__MModule__flatten_mclass_hierarchy = 74;
+const int COLOR_model__MModule__linearize_mclasses = 75;
+const int COLOR_model__MModule__linearize_mclassdefs = 76;
+const int COLOR_model__MModule__linearize_mpropdefs = 77;
+const int COLOR_model__MModule__flatten_mclass_hierarchy_cache = 78;
+const int COLOR_model__MModule__flatten_mclass_hierarchy_cache_61d = 79;
+const int COLOR_model__MModule__object_type = 80;
+const int COLOR_model__MModule__object_type_cache = 81;
+const int COLOR_model__MModule__object_type_cache_61d = 82;
+const int COLOR_model__MModule__bool_type = 83;
+const int COLOR_model__MModule__bool_type_cache = 84;
+const int COLOR_model__MModule__bool_type_cache_61d = 85;
+const int COLOR_model__MModule__sys_type = 86;
+const int COLOR_model__MModule__get_primitive_class = 87;
+const int COLOR_model__MModule__try_get_primitive_method = 88;
+const int COLOR_abstract_compiler__MModule__properties = 89;
+const int COLOR_abstract_compiler__MModule__properties_cache = 90;
+const int COLOR_abstract_compiler__MModule__properties_cache_61d = 91;
+const int COLOR_model__MClassDefSorter__mmodule = 75;
+const int COLOR_model__MClassDefSorter__mmodule_61d = 76;
+const int COLOR_model__MClassDefSorter__init = 77;
+const int COLOR_model__MPropDefSorter__mmodule = 75;
+const int COLOR_model__MPropDefSorter__mmodule_61d = 76;
+const int COLOR_model__MPropDefSorter__init = 77;
 const int COLOR_model__MClass__intro_mmodule = 42;
 const int COLOR_model__MClass__intro_mmodule_61d = 43;
 const int COLOR_model__MClass__name = 44;
@@ -2646,22 +2705,6 @@ const int COLOR_model__MClassKind__to_s_61d = 42;
 const int COLOR_model__MClassKind__need_init = 43;
 const int COLOR_model__MClassKind__need_init_61d = 44;
 const int COLOR_model__MClassKind__init = 45;
-const int COLOR_parser__State__state = 42;
-const int COLOR_parser__State__state_61d = 43;
-const int COLOR_parser__State__nodes = 44;
-const int COLOR_parser__State__nodes_61d = 45;
-const int COLOR_parser__State__init = 46;
-const int COLOR_parser__Parser__init = 46;
-const int COLOR_parser__Parser__go_to = 47;
-const int COLOR_parser__Parser__push = 48;
-const int COLOR_parser__Parser__state = 49;
-const int COLOR_parser__Parser__pop = 50;
-const int COLOR_parser__Parser__parse = 51;
-const int COLOR_parser__Parser__build_reduce_table = 52;
-const int COLOR_parser__ComputeProdLocationVisitor__init = 47;
-const int COLOR_parser__ReduceAction__action = 42;
-const int COLOR_parser__ReduceAction__concat = 43;
-const int COLOR_parser__ReduceAction__init = 44;
 const int COLOR_parser_util__InjectedLexer__injected_before = 54;
 const int COLOR_parser_util__InjectedLexer__injected_before_61d = 55;
 const int COLOR_parser_util__InjectedLexer__injected_after = 56;
@@ -2690,7 +2733,7 @@ const int COLOR_phase__Phase__process_nmodule = 47;
 const int COLOR_phase__Phase__process_nclassdef = 48;
 const int COLOR_phase__Phase__process_npropdef = 49;
 const int COLOR_phase__Phase__process_annotated_node = 50;
-const int COLOR_frontend__Phase__process_mainmodule = 51;
+const int COLOR_modelbuilder__Phase__process_mainmodule = 51;
 const int COLOR_simple_misc_analysis__SimpleMiscVisitor__once_count = 47;
 const int COLOR_simple_misc_analysis__SimpleMiscVisitor__once_count_61d = 48;
 const int COLOR_simple_misc_analysis__SimpleMiscVisitor__toolcontext = 49;
@@ -2783,6 +2826,7 @@ const int COLOR_typing__FlowContext__cache = 69;
 const int COLOR_typing__FlowContext__cache_61d = 70;
 const int COLOR_typing__FlowContext__set_var = 71;
 const int COLOR_typing__FlowContext__collect_types = 72;
+const int COLOR_serialization_phase__SerializationPhase__generate_serialization_method = 52;
 const int COLOR_local_var_init__LocalVarInitVisitor__toolcontext = 47;
 const int COLOR_local_var_init__LocalVarInitVisitor__toolcontext_61d = 48;
 const int COLOR_local_var_init__LocalVarInitVisitor__init = 49;
@@ -2806,39 +2850,56 @@ const int COLOR_modelbuilder__ModelBuilder__try_get_mproperty_by_name = 53;
 const int COLOR_modelbuilder__ModelBuilder__paths = 54;
 const int COLOR_modelbuilder__ModelBuilder__paths_61d = 55;
 const int COLOR_modelbuilder__ModelBuilder__get_mmodule_by_name = 56;
-const int COLOR_modelbuilder__ModelBuilder__module_absolute_path = 57;
-const int COLOR_modelbuilder__ModelBuilder__loaded_nmodules = 58;
-const int COLOR_modelbuilder__ModelBuilder__loaded_nmodules_61d = 59;
-const int COLOR_modelbuilder__ModelBuilder__load_module = 60;
-const int COLOR_modelbuilder__ModelBuilder__build_module_importation = 61;
-const int COLOR_modelbuilder__ModelBuilder__nmodules = 62;
-const int COLOR_modelbuilder__ModelBuilder__nmodules_61d = 63;
-const int COLOR_modelbuilder__ModelBuilder__mmodule2nmodule = 64;
-const int COLOR_modelbuilder__ModelBuilder__mmodule2nmodule_61d = 65;
-const int COLOR_modelbuilder__ModelBuilder__error = 66;
-const int COLOR_modelbuilder__ModelBuilder__warning = 67;
-const int COLOR_modelbuilder__ModelBuilder__force_get_primitive_method = 68;
-const int COLOR_modelize_class__ModelBuilder__build_a_mclass = 69;
-const int COLOR_modelize_class__ModelBuilder__build_a_mclassdef = 70;
-const int COLOR_modelize_class__ModelBuilder__collect_a_mclassdef_inheritance = 71;
-const int COLOR_modelize_class__ModelBuilder__check_supertypes = 72;
-const int COLOR_modelize_class__ModelBuilder__build_classes = 73;
-const int COLOR_modelize_class__ModelBuilder__mclassdef2nclassdef = 74;
-const int COLOR_modelize_class__ModelBuilder__mclassdef2nclassdef_61d = 75;
-const int COLOR_modelize_class__ModelBuilder__resolve_mtype_unchecked = 76;
-const int COLOR_modelize_class__ModelBuilder__resolve_mtype = 77;
-const int COLOR_modelize_property__ModelBuilder__mpropdef2npropdef = 78;
-const int COLOR_modelize_property__ModelBuilder__mpropdef2npropdef_61d = 79;
-const int COLOR_modelize_property__ModelBuilder__build_properties = 80;
-const int COLOR_modelize_property__ModelBuilder__process_default_constructors = 81;
-const int COLOR_rapid_type_analysis__ModelBuilder__do_rapid_type_analysis = 82;
-const int COLOR_abstract_compiler__ModelBuilder__cc_paths = 83;
-const int COLOR_abstract_compiler__ModelBuilder__cc_paths_61d = 84;
-const int COLOR_abstract_compiler__ModelBuilder__write_and_make = 85;
-const int COLOR_global_compiler__ModelBuilder__run_global_compiler = 86;
-const int COLOR_separate_compiler__ModelBuilder__run_separate_compiler = 87;
-const int COLOR_separate_erasure_compiler__ModelBuilder__run_separate_erasure_compiler = 88;
-const int COLOR_abstract_compiler__ModelBuilder__init = 89;
+const int COLOR_modelbuilder__ModelBuilder__identified_files = 57;
+const int COLOR_modelbuilder__ModelBuilder__identified_files_61d = 58;
+const int COLOR_modelbuilder__ModelBuilder__identify_file = 59;
+const int COLOR_modelbuilder__ModelBuilder__mgroups = 60;
+const int COLOR_modelbuilder__ModelBuilder__mgroups_61d = 61;
+const int COLOR_modelbuilder__ModelBuilder__get_mgroup = 62;
+const int COLOR_modelbuilder__ModelBuilder__module_absolute_path = 63;
+const int COLOR_modelbuilder__ModelBuilder__load_module_ast = 64;
+const int COLOR_modelbuilder__ModelBuilder__load_module = 65;
+const int COLOR_modelbuilder__ModelBuilder__load_rt_module = 66;
+const int COLOR_modelbuilder__ModelBuilder__build_a_mmodule = 67;
+const int COLOR_modelbuilder__ModelBuilder__build_module_importation = 68;
+const int COLOR_modelbuilder__ModelBuilder__nmodules = 69;
+const int COLOR_modelbuilder__ModelBuilder__nmodules_61d = 70;
+const int COLOR_modelbuilder__ModelBuilder__mmodule2nmodule = 71;
+const int COLOR_modelbuilder__ModelBuilder__mmodule2nmodule_61d = 72;
+const int COLOR_modelbuilder__ModelBuilder__error = 73;
+const int COLOR_modelbuilder__ModelBuilder__warning = 74;
+const int COLOR_modelbuilder__ModelBuilder__force_get_primitive_method = 75;
+const int COLOR_modelize_class__ModelBuilder__build_a_mclass = 76;
+const int COLOR_modelize_class__ModelBuilder__build_a_mclassdef = 77;
+const int COLOR_modelize_class__ModelBuilder__collect_a_mclassdef_inheritance = 78;
+const int COLOR_modelize_class__ModelBuilder__check_supertypes = 79;
+const int COLOR_modelize_class__ModelBuilder__build_classes = 80;
+const int COLOR_modelize_class__ModelBuilder__mclassdef2nclassdef = 81;
+const int COLOR_modelize_class__ModelBuilder__mclassdef2nclassdef_61d = 82;
+const int COLOR_modelize_class__ModelBuilder__resolve_mtype_unchecked = 83;
+const int COLOR_modelize_class__ModelBuilder__resolve_mtype = 84;
+const int COLOR_modelize_property__ModelBuilder__mpropdef2npropdef = 85;
+const int COLOR_modelize_property__ModelBuilder__mpropdef2npropdef_61d = 86;
+const int COLOR_modelize_property__ModelBuilder__build_properties = 87;
+const int COLOR_modelize_property__ModelBuilder__process_default_constructors = 88;
+const int COLOR_collect_super_sends__ModelBuilder__collect_super_sends = 89;
+const int COLOR_rapid_type_analysis__ModelBuilder__do_rapid_type_analysis = 90;
+const int COLOR_abstract_compiler__ModelBuilder__cc_paths = 91;
+const int COLOR_abstract_compiler__ModelBuilder__cc_paths_61d = 92;
+const int COLOR_abstract_compiler__ModelBuilder__write_and_make = 93;
+const int COLOR_global_compiler__ModelBuilder__run_global_compiler = 94;
+const int COLOR_separate_compiler__ModelBuilder__run_separate_compiler = 95;
+const int COLOR_separate_erasure_compiler__ModelBuilder__run_separate_erasure_compiler = 96;
+const int COLOR_abstract_compiler__ModelBuilder__init = 97;
+const int COLOR_modelbuilder__ModulePath__name = 42;
+const int COLOR_modelbuilder__ModulePath__name_61d = 43;
+const int COLOR_modelbuilder__ModulePath__filepath = 44;
+const int COLOR_modelbuilder__ModulePath__filepath_61d = 45;
+const int COLOR_modelbuilder__ModulePath__mgroup = 46;
+const int COLOR_modelbuilder__ModulePath__mgroup_61d = 47;
+const int COLOR_modelbuilder__ModulePath__mmodule = 48;
+const int COLOR_modelbuilder__ModulePath__mmodule_61d = 49;
+const int COLOR_modelbuilder__ModulePath__init = 50;
 const int COLOR_modelize_property__TextCollectorVisitor__text = 47;
 const int COLOR_modelize_property__TextCollectorVisitor__text_61d = 48;
 const int COLOR_modelize_property__TextCollectorVisitor__init = 49;
@@ -2895,6 +2956,13 @@ const int COLOR_typing__CallSite__init = 57;
 const int COLOR_auto_super_init__AutoSuperInitVisitor__init = 47;
 const int COLOR_auto_super_init__AutoSuperInitVisitor__has_explicit_super_init = 48;
 const int COLOR_auto_super_init__AutoSuperInitVisitor__has_explicit_super_init_61d = 49;
+const int COLOR_collect_super_sends__CollectSuperSends__modelbuilder = 47;
+const int COLOR_collect_super_sends__CollectSuperSends__modelbuilder_61d = 48;
+const int COLOR_collect_super_sends__CollectSuperSends__res = 49;
+const int COLOR_collect_super_sends__CollectSuperSends__res_61d = 50;
+const int COLOR_collect_super_sends__CollectSuperSends__mpropdef = 51;
+const int COLOR_collect_super_sends__CollectSuperSends__mpropdef_61d = 52;
+const int COLOR_collect_super_sends__CollectSuperSends__init = 53;
 const int COLOR_div_by_zero__DivByZeroVisitor__toolcontext = 47;
 const int COLOR_div_by_zero__DivByZeroVisitor__toolcontext_61d = 48;
 const int COLOR_div_by_zero__DivByZeroVisitor__mmodule = 49;
@@ -2983,44 +3051,46 @@ const int COLOR_transform__TransformVisitor__builder_61d = 56;
 const int COLOR_transform__TransformVisitor__init = 57;
 const int COLOR_transform__TransformVisitor__get_class = 58;
 const int COLOR_transform__TransformVisitor__get_method = 59;
-const int COLOR_abstract_compiler__AbstractCompiler__mainmodule = 42;
-const int COLOR_abstract_compiler__AbstractCompiler__mainmodule_61d = 43;
-const int COLOR_abstract_compiler__AbstractCompiler__realmainmodule = 44;
-const int COLOR_abstract_compiler__AbstractCompiler__realmainmodule_61d = 45;
-const int COLOR_abstract_compiler__AbstractCompiler__modelbuilder = 46;
-const int COLOR_abstract_compiler__AbstractCompiler__modelbuilder_61d = 47;
-const int COLOR_abstract_compiler__AbstractCompiler__hardening = 48;
-const int COLOR_abstract_compiler__AbstractCompiler__init = 49;
-const int COLOR_abstract_compiler__AbstractCompiler__new_file = 50;
-const int COLOR_abstract_compiler__AbstractCompiler__files = 51;
-const int COLOR_abstract_compiler__AbstractCompiler__files_61d = 52;
-const int COLOR_abstract_compiler__AbstractCompiler__new_visitor = 53;
-const int COLOR_abstract_compiler__AbstractCompiler__header = 54;
-const int COLOR_abstract_compiler__AbstractCompiler__header_61d = 55;
-const int COLOR_abstract_compiler__AbstractCompiler__provide_declaration = 56;
-const int COLOR_abstract_compiler__AbstractCompiler__provided_declarations = 57;
-const int COLOR_abstract_compiler__AbstractCompiler__provided_declarations_61d = 58;
-const int COLOR_abstract_compiler__AbstractCompiler__compile_header = 59;
-const int COLOR_abstract_compiler__AbstractCompiler__compile_header_structs = 60;
-const int COLOR_abstract_compiler__AbstractCompiler__compile_main_function = 61;
-const int COLOR_abstract_compiler__AbstractCompiler__extern_bodies = 62;
-const int COLOR_abstract_compiler__AbstractCompiler__extern_bodies_61d = 63;
-const int COLOR_abstract_compiler__AbstractCompiler__seen_extern = 64;
-const int COLOR_abstract_compiler__AbstractCompiler__seen_extern_61d = 65;
-const int COLOR_abstract_compiler__AbstractCompiler__generate_check_init_instance = 66;
-const int COLOR_abstract_compiler__AbstractCompiler__generate_init_attr = 67;
-const int COLOR_abstract_compiler__AbstractCompiler__generate_check_attr = 68;
-const int COLOR_abstract_compiler__AbstractCompiler__count_type_test_tags = 69;
-const int COLOR_abstract_compiler__AbstractCompiler__count_type_test_tags_61d = 70;
-const int COLOR_abstract_compiler__AbstractCompiler__count_type_test_resolved = 71;
-const int COLOR_abstract_compiler__AbstractCompiler__count_type_test_resolved_61d = 72;
-const int COLOR_abstract_compiler__AbstractCompiler__count_type_test_unresolved = 73;
-const int COLOR_abstract_compiler__AbstractCompiler__count_type_test_unresolved_61d = 74;
-const int COLOR_abstract_compiler__AbstractCompiler__count_type_test_skipped = 75;
-const int COLOR_abstract_compiler__AbstractCompiler__count_type_test_skipped_61d = 76;
-const int COLOR_abstract_compiler__AbstractCompiler__init_count_type_test_tags = 77;
-const int COLOR_abstract_compiler__AbstractCompiler__display_stats = 78;
-const int COLOR_abstract_compiler__AbstractCompiler__div = 79;
+const int COLOR_abstract_compiler__AbstractCompiler__names = 42;
+const int COLOR_abstract_compiler__AbstractCompiler__names_61d = 43;
+const int COLOR_abstract_compiler__AbstractCompiler__mainmodule = 44;
+const int COLOR_abstract_compiler__AbstractCompiler__mainmodule_61d = 45;
+const int COLOR_abstract_compiler__AbstractCompiler__realmainmodule = 46;
+const int COLOR_abstract_compiler__AbstractCompiler__realmainmodule_61d = 47;
+const int COLOR_abstract_compiler__AbstractCompiler__modelbuilder = 48;
+const int COLOR_abstract_compiler__AbstractCompiler__modelbuilder_61d = 49;
+const int COLOR_abstract_compiler__AbstractCompiler__hardening = 50;
+const int COLOR_abstract_compiler__AbstractCompiler__init = 51;
+const int COLOR_abstract_compiler__AbstractCompiler__new_file = 52;
+const int COLOR_abstract_compiler__AbstractCompiler__files = 53;
+const int COLOR_abstract_compiler__AbstractCompiler__files_61d = 54;
+const int COLOR_abstract_compiler__AbstractCompiler__new_visitor = 55;
+const int COLOR_abstract_compiler__AbstractCompiler__header = 56;
+const int COLOR_abstract_compiler__AbstractCompiler__header_61d = 57;
+const int COLOR_abstract_compiler__AbstractCompiler__provide_declaration = 58;
+const int COLOR_abstract_compiler__AbstractCompiler__provided_declarations = 59;
+const int COLOR_abstract_compiler__AbstractCompiler__provided_declarations_61d = 60;
+const int COLOR_abstract_compiler__AbstractCompiler__build_c_to_nit_bindings = 61;
+const int COLOR_abstract_compiler__AbstractCompiler__compile_header = 62;
+const int COLOR_abstract_compiler__AbstractCompiler__compile_header_structs = 63;
+const int COLOR_abstract_compiler__AbstractCompiler__compile_main_function = 64;
+const int COLOR_abstract_compiler__AbstractCompiler__extern_bodies = 65;
+const int COLOR_abstract_compiler__AbstractCompiler__extern_bodies_61d = 66;
+const int COLOR_abstract_compiler__AbstractCompiler__seen_extern = 67;
+const int COLOR_abstract_compiler__AbstractCompiler__seen_extern_61d = 68;
+const int COLOR_abstract_compiler__AbstractCompiler__generate_init_attr = 69;
+const int COLOR_abstract_compiler__AbstractCompiler__generate_check_attr = 70;
+const int COLOR_abstract_compiler__AbstractCompiler__count_type_test_tags = 71;
+const int COLOR_abstract_compiler__AbstractCompiler__count_type_test_tags_61d = 72;
+const int COLOR_abstract_compiler__AbstractCompiler__count_type_test_resolved = 73;
+const int COLOR_abstract_compiler__AbstractCompiler__count_type_test_resolved_61d = 74;
+const int COLOR_abstract_compiler__AbstractCompiler__count_type_test_unresolved = 75;
+const int COLOR_abstract_compiler__AbstractCompiler__count_type_test_unresolved_61d = 76;
+const int COLOR_abstract_compiler__AbstractCompiler__count_type_test_skipped = 77;
+const int COLOR_abstract_compiler__AbstractCompiler__count_type_test_skipped_61d = 78;
+const int COLOR_abstract_compiler__AbstractCompiler__init_count_type_test_tags = 79;
+const int COLOR_abstract_compiler__AbstractCompiler__display_stats = 80;
+const int COLOR_abstract_compiler__AbstractCompiler__div = 81;
 const int COLOR_abstract_compiler__CodeFile__name = 42;
 const int COLOR_abstract_compiler__CodeFile__name_61d = 43;
 const int COLOR_abstract_compiler__CodeFile__writers = 44;
@@ -3066,11 +3136,11 @@ const int COLOR_abstract_compiler__AbstractCompilerVisitor__equal_test = 67;
 const int COLOR_abstract_compiler__AbstractCompilerVisitor__call = 68;
 const int COLOR_abstract_compiler__AbstractCompilerVisitor__send = 69;
 const int COLOR_abstract_compiler__AbstractCompilerVisitor__monomorphic_send = 70;
-const int COLOR_abstract_compiler__AbstractCompilerVisitor__isset_attribute = 71;
-const int COLOR_abstract_compiler__AbstractCompilerVisitor__read_attribute = 72;
-const int COLOR_abstract_compiler__AbstractCompilerVisitor__write_attribute = 73;
-const int COLOR_abstract_compiler__AbstractCompilerVisitor__check_recv_notnull = 74;
-const int COLOR_abstract_compiler__AbstractCompilerVisitor__check_init_instance = 75;
+const int COLOR_abstract_compiler__AbstractCompilerVisitor__monomorphic_super_send = 71;
+const int COLOR_abstract_compiler__AbstractCompilerVisitor__isset_attribute = 72;
+const int COLOR_abstract_compiler__AbstractCompilerVisitor__read_attribute = 73;
+const int COLOR_abstract_compiler__AbstractCompilerVisitor__write_attribute = 74;
+const int COLOR_abstract_compiler__AbstractCompilerVisitor__check_recv_notnull = 75;
 const int COLOR_abstract_compiler__AbstractCompilerVisitor__names = 76;
 const int COLOR_abstract_compiler__AbstractCompilerVisitor__names_61d = 77;
 const int COLOR_abstract_compiler__AbstractCompilerVisitor__last = 78;
@@ -3226,25 +3296,25 @@ const int COLOR_layout_builders__PHModOperator__init = 44;
 const int COLOR_layout_builders__PHAndOperator__init = 44;
 const int COLOR_layout_builders__MTypeHasher__init = 59;
 const int COLOR_layout_builders__MClassHasher__init = 59;
-const int COLOR_global_compiler__GlobalCompiler__runtime_type_analysis = 80;
-const int COLOR_global_compiler__GlobalCompiler__runtime_type_analysis_61d = 81;
-const int COLOR_global_compiler__GlobalCompiler__init = 82;
-const int COLOR_global_compiler__GlobalCompiler__compile_class_names = 83;
-const int COLOR_global_compiler__GlobalCompiler__classid = 84;
-const int COLOR_global_compiler__GlobalCompiler__classids = 85;
-const int COLOR_global_compiler__GlobalCompiler__classids_61d = 86;
-const int COLOR_global_compiler__GlobalCompiler__live_primitive_types = 87;
-const int COLOR_global_compiler__GlobalCompiler__live_primitive_types_61d = 88;
-const int COLOR_global_compiler__GlobalCompiler__todo = 89;
-const int COLOR_global_compiler__GlobalCompiler__todos = 90;
-const int COLOR_global_compiler__GlobalCompiler__todos_61d = 91;
-const int COLOR_global_compiler__GlobalCompiler__seen = 92;
-const int COLOR_global_compiler__GlobalCompiler__seen_61d = 93;
-const int COLOR_global_compiler__GlobalCompiler__declare_runtimeclass = 94;
-const int COLOR_global_compiler__GlobalCompiler__generate_init_instance = 95;
-const int COLOR_global_compiler__GlobalCompiler__generate_box_instance = 96;
-const int COLOR_global_compiler__GlobalCompiler__collect_types_cache = 97;
-const int COLOR_global_compiler__GlobalCompiler__collect_types_cache_61d = 98;
+const int COLOR_global_compiler__GlobalCompiler__runtime_type_analysis = 82;
+const int COLOR_global_compiler__GlobalCompiler__runtime_type_analysis_61d = 83;
+const int COLOR_global_compiler__GlobalCompiler__init = 84;
+const int COLOR_global_compiler__GlobalCompiler__compile_class_names = 85;
+const int COLOR_global_compiler__GlobalCompiler__classid = 86;
+const int COLOR_global_compiler__GlobalCompiler__classids = 87;
+const int COLOR_global_compiler__GlobalCompiler__classids_61d = 88;
+const int COLOR_global_compiler__GlobalCompiler__live_primitive_types = 89;
+const int COLOR_global_compiler__GlobalCompiler__live_primitive_types_61d = 90;
+const int COLOR_global_compiler__GlobalCompiler__todo = 91;
+const int COLOR_global_compiler__GlobalCompiler__todos = 92;
+const int COLOR_global_compiler__GlobalCompiler__todos_61d = 93;
+const int COLOR_global_compiler__GlobalCompiler__seen = 94;
+const int COLOR_global_compiler__GlobalCompiler__seen_61d = 95;
+const int COLOR_global_compiler__GlobalCompiler__declare_runtimeclass = 96;
+const int COLOR_global_compiler__GlobalCompiler__generate_init_instance = 97;
+const int COLOR_global_compiler__GlobalCompiler__generate_box_instance = 98;
+const int COLOR_global_compiler__GlobalCompiler__collect_types_cache = 99;
+const int COLOR_global_compiler__GlobalCompiler__collect_types_cache_61d = 100;
 const int COLOR_global_compiler__GlobalCompilerVisitor__collect_types = 110;
 const int COLOR_global_compiler__GlobalCompilerVisitor__check_valid_reciever = 111;
 const int COLOR_global_compiler__GlobalCompilerVisitor__get_recvtype = 112;
@@ -3255,74 +3325,74 @@ const int COLOR_global_compiler__GlobalCompilerVisitor__bugtype = 116;
 const int COLOR_global_compiler__CustomizedRuntimeFunction__recv = 51;
 const int COLOR_global_compiler__CustomizedRuntimeFunction__recv_61d = 52;
 const int COLOR_global_compiler__CustomizedRuntimeFunction__init = 53;
-const int COLOR_separate_compiler__SeparateCompiler__runtime_type_analysis = 80;
-const int COLOR_separate_compiler__SeparateCompiler__runtime_type_analysis_61d = 81;
-const int COLOR_separate_compiler__SeparateCompiler__undead_types = 82;
-const int COLOR_separate_compiler__SeparateCompiler__undead_types_61d = 83;
-const int COLOR_separate_compiler__SeparateCompiler__partial_types = 84;
-const int COLOR_separate_compiler__SeparateCompiler__partial_types_61d = 85;
-const int COLOR_separate_compiler__SeparateCompiler__live_unresolved_types = 86;
-const int COLOR_separate_compiler__SeparateCompiler__live_unresolved_types_61d = 87;
-const int COLOR_separate_compiler__SeparateCompiler__type_layout = 88;
-const int COLOR_separate_compiler__SeparateCompiler__type_layout_61d = 89;
-const int COLOR_separate_compiler__SeparateCompiler__resolution_layout = 90;
-const int COLOR_separate_compiler__SeparateCompiler__resolution_layout_61d = 91;
-const int COLOR_separate_compiler__SeparateCompiler__method_layout = 92;
-const int COLOR_separate_compiler__SeparateCompiler__method_layout_61d = 93;
-const int COLOR_separate_compiler__SeparateCompiler__attr_layout = 94;
-const int COLOR_separate_compiler__SeparateCompiler__attr_layout_61d = 95;
-const int COLOR_separate_compiler__SeparateCompiler__init = 96;
-const int COLOR_separate_compiler__SeparateCompiler__compile_header_attribute_structs = 97;
-const int COLOR_separate_compiler__SeparateCompiler__compile_box_kinds = 98;
-const int COLOR_separate_compiler__SeparateCompiler__box_kinds = 99;
-const int COLOR_separate_compiler__SeparateCompiler__box_kinds_61d = 100;
-const int COLOR_separate_compiler__SeparateCompiler__box_kind_of = 101;
-const int COLOR_separate_compiler__SeparateCompiler__compile_color_consts = 102;
-const int COLOR_separate_compiler__SeparateCompiler__compile_color_const = 103;
-const int COLOR_separate_compiler__SeparateCompiler__color_consts_done = 104;
-const int COLOR_separate_compiler__SeparateCompiler__color_consts_done_61d = 105;
-const int COLOR_separate_compiler__SeparateCompiler__do_property_coloring = 106;
-const int COLOR_separate_compiler__SeparateCompiler__build_method_tables = 107;
-const int COLOR_separate_compiler__SeparateCompiler__build_attr_tables = 108;
-const int COLOR_separate_compiler__SeparateCompiler__do_type_coloring = 109;
-const int COLOR_separate_compiler__SeparateCompiler__build_type_tables = 110;
-const int COLOR_separate_compiler__SeparateCompiler__compile_resolution_tables = 111;
-const int COLOR_separate_compiler__SeparateCompiler__build_resolution_tables = 112;
-const int COLOR_separate_compiler__SeparateCompiler__retrieve_partial_types = 113;
-const int COLOR_separate_compiler__SeparateCompiler__compile_module_to_c = 114;
-const int COLOR_separate_compiler__SeparateCompiler__compile_type_to_c = 115;
-const int COLOR_separate_compiler__SeparateCompiler__compile_type_resolution_table = 116;
-const int COLOR_separate_compiler__SeparateCompiler__compile_class_to_c = 117;
-const int COLOR_separate_compiler__SeparateCompiler__hardening_live_type = 118;
-const int COLOR_separate_compiler__SeparateCompiler__type_tables = 119;
-const int COLOR_separate_compiler__SeparateCompiler__type_tables_61d = 120;
-const int COLOR_separate_compiler__SeparateCompiler__resolution_tables = 121;
-const int COLOR_separate_compiler__SeparateCompiler__resolution_tables_61d = 122;
-const int COLOR_separate_compiler__SeparateCompiler__method_tables = 123;
-const int COLOR_separate_compiler__SeparateCompiler__method_tables_61d = 124;
-const int COLOR_separate_compiler__SeparateCompiler__attr_tables = 125;
-const int COLOR_separate_compiler__SeparateCompiler__attr_tables_61d = 126;
-const int COLOR_separate_compiler__SeparateCompiler__display_sizes = 127;
-const int COLOR_separate_compiler__SeparateCompiler__display_stats = 128;
+const int COLOR_separate_compiler__SeparateCompiler__runtime_type_analysis = 82;
+const int COLOR_separate_compiler__SeparateCompiler__runtime_type_analysis_61d = 83;
+const int COLOR_separate_compiler__SeparateCompiler__undead_types = 84;
+const int COLOR_separate_compiler__SeparateCompiler__undead_types_61d = 85;
+const int COLOR_separate_compiler__SeparateCompiler__partial_types = 86;
+const int COLOR_separate_compiler__SeparateCompiler__partial_types_61d = 87;
+const int COLOR_separate_compiler__SeparateCompiler__live_unresolved_types = 88;
+const int COLOR_separate_compiler__SeparateCompiler__live_unresolved_types_61d = 89;
+const int COLOR_separate_compiler__SeparateCompiler__type_layout = 90;
+const int COLOR_separate_compiler__SeparateCompiler__type_layout_61d = 91;
+const int COLOR_separate_compiler__SeparateCompiler__resolution_layout = 92;
+const int COLOR_separate_compiler__SeparateCompiler__resolution_layout_61d = 93;
+const int COLOR_separate_compiler__SeparateCompiler__method_layout = 94;
+const int COLOR_separate_compiler__SeparateCompiler__method_layout_61d = 95;
+const int COLOR_separate_compiler__SeparateCompiler__attr_layout = 96;
+const int COLOR_separate_compiler__SeparateCompiler__attr_layout_61d = 97;
+const int COLOR_separate_compiler__SeparateCompiler__init = 98;
+const int COLOR_separate_compiler__SeparateCompiler__compile_header_attribute_structs = 99;
+const int COLOR_separate_compiler__SeparateCompiler__compile_box_kinds = 100;
+const int COLOR_separate_compiler__SeparateCompiler__box_kinds = 101;
+const int COLOR_separate_compiler__SeparateCompiler__box_kinds_61d = 102;
+const int COLOR_separate_compiler__SeparateCompiler__box_kind_of = 103;
+const int COLOR_separate_compiler__SeparateCompiler__compile_color_consts = 104;
+const int COLOR_separate_compiler__SeparateCompiler__compile_color_const = 105;
+const int COLOR_separate_compiler__SeparateCompiler__color_consts_done = 106;
+const int COLOR_separate_compiler__SeparateCompiler__color_consts_done_61d = 107;
+const int COLOR_separate_compiler__SeparateCompiler__do_property_coloring = 108;
+const int COLOR_separate_compiler__SeparateCompiler__build_method_tables = 109;
+const int COLOR_separate_compiler__SeparateCompiler__build_attr_tables = 110;
+const int COLOR_separate_compiler__SeparateCompiler__do_type_coloring = 111;
+const int COLOR_separate_compiler__SeparateCompiler__build_type_tables = 112;
+const int COLOR_separate_compiler__SeparateCompiler__compile_resolution_tables = 113;
+const int COLOR_separate_compiler__SeparateCompiler__build_resolution_tables = 114;
+const int COLOR_separate_compiler__SeparateCompiler__retrieve_partial_types = 115;
+const int COLOR_separate_compiler__SeparateCompiler__compile_module_to_c = 116;
+const int COLOR_separate_compiler__SeparateCompiler__compile_type_to_c = 117;
+const int COLOR_separate_compiler__SeparateCompiler__compile_type_resolution_table = 118;
+const int COLOR_separate_compiler__SeparateCompiler__compile_class_to_c = 119;
+const int COLOR_separate_compiler__SeparateCompiler__hardening_live_type = 120;
+const int COLOR_separate_compiler__SeparateCompiler__type_tables = 121;
+const int COLOR_separate_compiler__SeparateCompiler__type_tables_61d = 122;
+const int COLOR_separate_compiler__SeparateCompiler__resolution_tables = 123;
+const int COLOR_separate_compiler__SeparateCompiler__resolution_tables_61d = 124;
+const int COLOR_separate_compiler__SeparateCompiler__method_tables = 125;
+const int COLOR_separate_compiler__SeparateCompiler__method_tables_61d = 126;
+const int COLOR_separate_compiler__SeparateCompiler__attr_tables = 127;
+const int COLOR_separate_compiler__SeparateCompiler__attr_tables_61d = 128;
+const int COLOR_separate_compiler__SeparateCompiler__display_sizes = 129;
+const int COLOR_separate_compiler__SeparateCompiler__display_stats = 130;
 const int COLOR_separate_compiler__SeparateCompilerVisitor__type_info = 110;
 const int COLOR_separate_compiler__SeparateCompilerVisitor__table_send = 111;
 const int COLOR_separate_compiler__SeparateCompilerVisitor__can_be_primitive = 112;
 const int COLOR_separate_compiler__SeparateCompilerVisitor__maybe_null = 113;
 const int COLOR_separate_compiler__SeparateCompilerVisitor__native_array_instance = 114;
 const int COLOR_separate_compiler__SeparateCompilerVisitor__link_unresolved_type = 115;
-const int COLOR_separate_erasure_compiler__SeparateErasureCompiler__class_layout = 129;
-const int COLOR_separate_erasure_compiler__SeparateErasureCompiler__class_layout_61d = 130;
-const int COLOR_separate_erasure_compiler__SeparateErasureCompiler__vt_layout = 131;
-const int COLOR_separate_erasure_compiler__SeparateErasureCompiler__vt_layout_61d = 132;
-const int COLOR_separate_erasure_compiler__SeparateErasureCompiler__init = 133;
-const int COLOR_separate_erasure_compiler__SeparateErasureCompiler__build_vt_tables = 134;
-const int COLOR_separate_erasure_compiler__SeparateErasureCompiler__build_class_typing_tables = 135;
-const int COLOR_separate_erasure_compiler__SeparateErasureCompiler__build_class_vts_table = 136;
-const int COLOR_separate_erasure_compiler__SeparateErasureCompiler__retrieve_vt_bound = 137;
-const int COLOR_separate_erasure_compiler__SeparateErasureCompiler__class_tables = 138;
-const int COLOR_separate_erasure_compiler__SeparateErasureCompiler__class_tables_61d = 139;
-const int COLOR_separate_erasure_compiler__SeparateErasureCompiler__vt_tables = 140;
-const int COLOR_separate_erasure_compiler__SeparateErasureCompiler__vt_tables_61d = 141;
+const int COLOR_separate_erasure_compiler__SeparateErasureCompiler__class_layout = 131;
+const int COLOR_separate_erasure_compiler__SeparateErasureCompiler__class_layout_61d = 132;
+const int COLOR_separate_erasure_compiler__SeparateErasureCompiler__vt_layout = 133;
+const int COLOR_separate_erasure_compiler__SeparateErasureCompiler__vt_layout_61d = 134;
+const int COLOR_separate_erasure_compiler__SeparateErasureCompiler__init = 135;
+const int COLOR_separate_erasure_compiler__SeparateErasureCompiler__build_vt_tables = 136;
+const int COLOR_separate_erasure_compiler__SeparateErasureCompiler__build_class_typing_tables = 137;
+const int COLOR_separate_erasure_compiler__SeparateErasureCompiler__build_class_vts_table = 138;
+const int COLOR_separate_erasure_compiler__SeparateErasureCompiler__retrieve_vt_bound = 139;
+const int COLOR_separate_erasure_compiler__SeparateErasureCompiler__class_tables = 140;
+const int COLOR_separate_erasure_compiler__SeparateErasureCompiler__class_tables_61d = 141;
+const int COLOR_separate_erasure_compiler__SeparateErasureCompiler__vt_tables = 142;
+const int COLOR_separate_erasure_compiler__SeparateErasureCompiler__vt_tables_61d = 143;
 const int COLOR_separate_erasure_compiler__SeparateErasureCompilerVisitor__compile_callsite = 116;
 const int COLOR_ropes__BufferRope__subrope = -1;
 const int COLOR_ropes__BufferRope___42d = -1;
@@ -3488,6 +3558,7 @@ const int COLOR_hash_collection__HashMapIterator___map = 0;
 const int COLOR_hash_collection__HashMapIterator___node = 1;
 const int COLOR_hash_collection__HashSetIterator___set = 0;
 const int COLOR_hash_collection__HashSetIterator___node = 1;
+const int COLOR_stream__StringOStream___64dcontent = 0;
 const int COLOR_string_search__BM_Pattern___motif = 0;
 const int COLOR_string_search__BM_Pattern___length = 1;
 const int COLOR_string_search__BM_Pattern___gs = 2;
@@ -3533,6 +3604,22 @@ const int COLOR_poset__POSetElement___64dfroms = 3;
 const int COLOR_poset__POSetElement___64ddtos = 4;
 const int COLOR_poset__POSetElement___64ddfroms = 5;
 const int COLOR_poset__POSetElement___64dcount = 6;
+const int COLOR_mproject__Model___64dmprojects = 0;
+const int COLOR_mproject__Model___64dmproject_by_name = 1;
+const int COLOR_mmodule__Model___64dmmodules = 2;
+const int COLOR_mmodule__Model___64dmmodule_nesting_hierarchy = 3;
+const int COLOR_mmodule__Model___64dmmodule_importation_hierarchy = 4;
+const int COLOR_mmodule__Model___64dmmodules_by_name = 5;
+const int COLOR_model__Model___64dmclasses = 6;
+const int COLOR_model__Model___64dmproperties = 7;
+const int COLOR_model__Model___64dmclassdef_hierarchy = 8;
+const int COLOR_model__Model___64dintro_mtype_specialization_hierarchy = 9;
+const int COLOR_model__Model___64dfull_mtype_specialization_hierarchy = 10;
+const int COLOR_model__Model___64dmclasses_by_name = 11;
+const int COLOR_model__Model___64dmproperties_by_name = 12;
+const int COLOR_model__Model___64dnull_type = 13;
+const int COLOR_model_base__MVisibility___64dto_s = 0;
+const int COLOR_model_base__MVisibility___64dlevel = 1;
 const int COLOR_more_collections__HashMap2___64dlevel1 = 0;
 const int COLOR_more_collections__HashMap3___64dlevel1 = 0;
 const int COLOR_opts__Option___names = 0;
@@ -3625,14 +3712,15 @@ const int COLOR_parser_nodes__AExternMethPropdef___n_kwmeth = 16;
 const int COLOR_parser_nodes__AExternCalls___n_kwimport = 4;
 const int COLOR_parser_nodes__AExternCalls___n_extern_calls = 5;
 const int COLOR_parser_nodes__ALocalPropExternCall___n_methid = 4;
-const int COLOR_parser_nodes__AFullPropExternCall___n_classid = 4;
-const int COLOR_parser_nodes__AFullPropExternCall___n_quad = 5;
+const int COLOR_parser_nodes__AFullPropExternCall___n_type = 4;
+const int COLOR_parser_nodes__AFullPropExternCall___n_dot = 5;
 const int COLOR_parser_nodes__AFullPropExternCall___n_methid = 6;
-const int COLOR_parser_nodes__AInitPropExternCall___n_classid = 4;
+const int COLOR_parser_nodes__AInitPropExternCall___n_type = 4;
 const int COLOR_parser_nodes__ASuperExternCall___n_kwsuper = 4;
 const int COLOR_parser_nodes__ACastAsExternCall___n_from_type = 4;
-const int COLOR_parser_nodes__ACastAsExternCall___n_kwas = 5;
-const int COLOR_parser_nodes__ACastAsExternCall___n_to_type = 6;
+const int COLOR_parser_nodes__ACastAsExternCall___n_dot = 5;
+const int COLOR_parser_nodes__ACastAsExternCall___n_kwas = 6;
+const int COLOR_parser_nodes__ACastAsExternCall___n_to_type = 7;
 const int COLOR_parser_nodes__AAsNullableExternCall___n_type = 4;
 const int COLOR_parser_nodes__AAsNullableExternCall___n_kwas = 5;
 const int COLOR_parser_nodes__AAsNullableExternCall___n_kwnullable = 6;
@@ -3839,43 +3927,46 @@ const int COLOR_simple_misc_analysis__ToolContext___64dsimple_misc_analysis_phas
 const int COLOR_literal__ToolContext___64dliteral_phase = 18;
 const int COLOR_scope__ToolContext___64dscope_phase = 19;
 const int COLOR_flow__ToolContext___64dflow_phase = 20;
-const int COLOR_local_var_init__ToolContext___64dlocal_var_init_phase = 21;
-const int COLOR_modelbuilder__ToolContext___64dopt_path = 22;
-const int COLOR_modelbuilder__ToolContext___64dopt_only_metamodel = 23;
-const int COLOR_modelbuilder__ToolContext___64dopt_only_parse = 24;
-const int COLOR_modelbuilder__ToolContext___64dmodelbuilder_real = 25;
-const int COLOR_modelize_class__ToolContext___64dmodelize_class_phase = 26;
-const int COLOR_modelize_property__ToolContext___64dmodelize_property_phase = 27;
-const int COLOR_cached__ToolContext___64dcached_phase = 28;
-const int COLOR_typing__ToolContext___64dtyping_phase = 29;
-const int COLOR_auto_super_init__ToolContext___64dauto_super_init_phase = 30;
-const int COLOR_div_by_zero__ToolContext___64ddiv_by_zero_phase = 31;
-const int COLOR_transform__ToolContext___64dtransform_phase = 32;
-const int COLOR_frontend__ToolContext___64ddummy = 33;
-const int COLOR_abstract_compiler__ToolContext___64dopt_output = 34;
-const int COLOR_abstract_compiler__ToolContext___64dopt_no_cc = 35;
-const int COLOR_abstract_compiler__ToolContext___64dopt_cc_path = 36;
-const int COLOR_abstract_compiler__ToolContext___64dopt_make_flags = 37;
-const int COLOR_abstract_compiler__ToolContext___64dopt_compile_dir = 38;
-const int COLOR_abstract_compiler__ToolContext___64dopt_hardening = 39;
-const int COLOR_abstract_compiler__ToolContext___64dopt_no_shortcut_range = 40;
-const int COLOR_abstract_compiler__ToolContext___64dopt_no_check_covariance = 41;
-const int COLOR_abstract_compiler__ToolContext___64dopt_no_check_initialization = 42;
-const int COLOR_abstract_compiler__ToolContext___64dopt_no_check_assert = 43;
-const int COLOR_abstract_compiler__ToolContext___64dopt_no_check_autocast = 44;
-const int COLOR_abstract_compiler__ToolContext___64dopt_no_check_other = 45;
-const int COLOR_abstract_compiler__ToolContext___64dopt_typing_test_metrics = 46;
-const int COLOR_separate_compiler__ToolContext___64dopt_separate = 47;
-const int COLOR_separate_compiler__ToolContext___64dopt_no_inline_intern = 48;
-const int COLOR_separate_compiler__ToolContext___64dopt_no_union_attribute = 49;
-const int COLOR_separate_compiler__ToolContext___64dopt_no_shortcut_equate = 50;
-const int COLOR_separate_compiler__ToolContext___64dopt_inline_coloring_numbers = 51;
-const int COLOR_separate_compiler__ToolContext___64dopt_bm_typing = 52;
-const int COLOR_separate_compiler__ToolContext___64dopt_phmod_typing = 53;
-const int COLOR_separate_compiler__ToolContext___64dopt_phand_typing = 54;
-const int COLOR_separate_compiler__ToolContext___64dopt_tables_metrics = 55;
-const int COLOR_separate_erasure_compiler__ToolContext___64dopt_erasure = 56;
-const int COLOR_separate_erasure_compiler__ToolContext___64dopt_no_check_erasure_cast = 57;
+const int COLOR_serialization_phase__ToolContext___64dserialization_phase = 21;
+const int COLOR_local_var_init__ToolContext___64dlocal_var_init_phase = 22;
+const int COLOR_modelbuilder__ToolContext___64dopt_path = 23;
+const int COLOR_modelbuilder__ToolContext___64dopt_only_metamodel = 24;
+const int COLOR_modelbuilder__ToolContext___64dopt_only_parse = 25;
+const int COLOR_modelbuilder__ToolContext___64dmodelbuilder_real = 26;
+const int COLOR_modelize_class__ToolContext___64dmodelize_class_phase = 27;
+const int COLOR_modelize_property__ToolContext___64dmodelize_property_phase = 28;
+const int COLOR_cached__ToolContext___64dcached_phase = 29;
+const int COLOR_typing__ToolContext___64dtyping_phase = 30;
+const int COLOR_auto_super_init__ToolContext___64dauto_super_init_phase = 31;
+const int COLOR_div_by_zero__ToolContext___64ddiv_by_zero_phase = 32;
+const int COLOR_transform__ToolContext___64dtransform_phase = 33;
+const int COLOR_frontend__ToolContext___64ddummy = 34;
+const int COLOR_abstract_compiler__ToolContext___64dopt_output = 35;
+const int COLOR_abstract_compiler__ToolContext___64dopt_no_cc = 36;
+const int COLOR_abstract_compiler__ToolContext___64dopt_cc_path = 37;
+const int COLOR_abstract_compiler__ToolContext___64dopt_make_flags = 38;
+const int COLOR_abstract_compiler__ToolContext___64dopt_compile_dir = 39;
+const int COLOR_abstract_compiler__ToolContext___64dopt_hardening = 40;
+const int COLOR_abstract_compiler__ToolContext___64dopt_no_shortcut_range = 41;
+const int COLOR_abstract_compiler__ToolContext___64dopt_no_check_covariance = 42;
+const int COLOR_abstract_compiler__ToolContext___64dopt_no_check_initialization = 43;
+const int COLOR_abstract_compiler__ToolContext___64dopt_no_check_assert = 44;
+const int COLOR_abstract_compiler__ToolContext___64dopt_no_check_autocast = 45;
+const int COLOR_abstract_compiler__ToolContext___64dopt_no_check_other = 46;
+const int COLOR_abstract_compiler__ToolContext___64dopt_typing_test_metrics = 47;
+const int COLOR_abstract_compiler__ToolContext___64dopt_no_stacktrace = 48;
+const int COLOR_abstract_compiler__ToolContext___64dopt_stacktrace = 49;
+const int COLOR_separate_compiler__ToolContext___64dopt_separate = 50;
+const int COLOR_separate_compiler__ToolContext___64dopt_no_inline_intern = 51;
+const int COLOR_separate_compiler__ToolContext___64dopt_no_union_attribute = 52;
+const int COLOR_separate_compiler__ToolContext___64dopt_no_shortcut_equate = 53;
+const int COLOR_separate_compiler__ToolContext___64dopt_inline_coloring_numbers = 54;
+const int COLOR_separate_compiler__ToolContext___64dopt_bm_typing = 55;
+const int COLOR_separate_compiler__ToolContext___64dopt_phmod_typing = 56;
+const int COLOR_separate_compiler__ToolContext___64dopt_phand_typing = 57;
+const int COLOR_separate_compiler__ToolContext___64dopt_tables_metrics = 58;
+const int COLOR_separate_erasure_compiler__ToolContext___64dopt_erasure = 59;
+const int COLOR_separate_erasure_compiler__ToolContext___64dopt_no_check_erasure_cast = 60;
 const int COLOR_lexer__Lexer___token = 0;
 const int COLOR_lexer__Lexer___state = 1;
 const int COLOR_lexer__Lexer___file = 2;
@@ -3884,35 +3975,42 @@ const int COLOR_lexer__Lexer___line = 4;
 const int COLOR_lexer__Lexer___pos = 5;
 const int COLOR_lexer__Lexer___cr = 6;
 const int COLOR_lexer__Lexer___64dlast_token = 7;
-const int COLOR_model_base__Model___64dmmodules = 0;
-const int COLOR_model_base__Model___64dmmodule_nesting_hierarchy = 1;
-const int COLOR_model_base__Model___64dmmodule_importation_hierarchy = 2;
-const int COLOR_model_base__Model___64dmmodules_by_name = 3;
-const int COLOR_model__Model___64dmclasses = 4;
-const int COLOR_model__Model___64dmproperties = 5;
-const int COLOR_model__Model___64dmclassdef_hierarchy = 6;
-const int COLOR_model__Model___64dintro_mtype_specialization_hierarchy = 7;
-const int COLOR_model__Model___64dfull_mtype_specialization_hierarchy = 8;
-const int COLOR_model__Model___64dmclasses_by_name = 9;
-const int COLOR_model__Model___64dmproperties_by_name = 10;
-const int COLOR_model__Model___64dnull_type = 11;
-const int COLOR_model_base__MModule___64dmodel = 0;
-const int COLOR_model_base__MModule___64ddirect_owner = 1;
-const int COLOR_model_base__MModule___64dname = 2;
-const int COLOR_model_base__MModule___64dlocation = 3;
-const int COLOR_model_base__MModule___64din_nesting = 4;
-const int COLOR_model_base__MModule___64din_importation = 5;
-const int COLOR_model_base__MModule___64dintrude_mmodules = 6;
-const int COLOR_model_base__MModule___64dpublic_mmodules = 7;
-const int COLOR_model_base__MModule___64dprivate_mmodules = 8;
-const int COLOR_model__MModule___64dintro_mclasses = 9;
-const int COLOR_model__MModule___64dmclassdefs = 10;
-const int COLOR_model__MModule___64dflatten_mclass_hierarchy_cache = 11;
-const int COLOR_model__MModule___64dobject_type_cache = 12;
-const int COLOR_model__MModule___64dbool_type_cache = 13;
-const int COLOR_abstract_compiler__MModule___64dproperties_cache = 14;
-const int COLOR_model_base__MVisibility___64dto_s = 0;
-const int COLOR_model_base__MVisibility___64dlevel = 1;
+const int COLOR_mproject__MProject___64dname = 0;
+const int COLOR_mproject__MProject___64dmodel = 1;
+const int COLOR_mproject__MProject___64droot = 2;
+const int COLOR_mproject__MProject___64dmgroups = 3;
+const int COLOR_mproject__MGroup___64dname = 0;
+const int COLOR_mproject__MGroup___64dmproject = 1;
+const int COLOR_mproject__MGroup___64dparent = 2;
+const int COLOR_mproject__MGroup___64din_nesting = 3;
+const int COLOR_mproject__MGroup___64dfilepath = 4;
+const int COLOR_mmodule__MGroup___64dmmodules = 5;
+const int COLOR_parser__State___state = 0;
+const int COLOR_parser__State___nodes = 1;
+const int COLOR_parser__Parser___lexer = 0;
+const int COLOR_parser__Parser___stack = 1;
+const int COLOR_parser__Parser___stack_pos = 2;
+const int COLOR_parser__Parser___reduce_table = 3;
+const int COLOR_parser__ComputeProdLocationVisitor___need_first_prods = 1;
+const int COLOR_parser__ComputeProdLocationVisitor___need_after_epsilons = 2;
+const int COLOR_parser__ComputeProdLocationVisitor___last_location = 3;
+const int COLOR_parser__ReduceAction___goto = 0;
+const int COLOR_mmodule__MModule___64dmodel = 0;
+const int COLOR_mmodule__MModule___64ddirect_owner = 1;
+const int COLOR_mmodule__MModule___64dmgroup = 2;
+const int COLOR_mmodule__MModule___64dname = 3;
+const int COLOR_mmodule__MModule___64dlocation = 4;
+const int COLOR_mmodule__MModule___64din_nesting = 5;
+const int COLOR_mmodule__MModule___64din_importation = 6;
+const int COLOR_mmodule__MModule___64dintrude_mmodules = 7;
+const int COLOR_mmodule__MModule___64dpublic_mmodules = 8;
+const int COLOR_mmodule__MModule___64dprivate_mmodules = 9;
+const int COLOR_model__MModule___64dintro_mclasses = 10;
+const int COLOR_model__MModule___64dmclassdefs = 11;
+const int COLOR_model__MModule___64dflatten_mclass_hierarchy_cache = 12;
+const int COLOR_model__MModule___64dobject_type_cache = 13;
+const int COLOR_model__MModule___64dbool_type_cache = 14;
+const int COLOR_abstract_compiler__MModule___64dproperties_cache = 15;
 const int COLOR_model__MClassDefSorter___64dmmodule = 0;
 const int COLOR_model__MPropDefSorter___64dmmodule = 0;
 const int COLOR_model__MClass___64dintro_mmodule = 0;
@@ -3980,16 +4078,6 @@ const int COLOR_model__MAttributeDef___64dstatic_mtype = 6;
 const int COLOR_model__MVirtualTypeDef___64dbound = 6;
 const int COLOR_model__MClassKind___64dto_s = 0;
 const int COLOR_model__MClassKind___64dneed_init = 1;
-const int COLOR_parser__State___state = 0;
-const int COLOR_parser__State___nodes = 1;
-const int COLOR_parser__Parser___lexer = 0;
-const int COLOR_parser__Parser___stack = 1;
-const int COLOR_parser__Parser___stack_pos = 2;
-const int COLOR_parser__Parser___reduce_table = 3;
-const int COLOR_parser__ComputeProdLocationVisitor___need_first_prods = 1;
-const int COLOR_parser__ComputeProdLocationVisitor___need_after_epsilons = 2;
-const int COLOR_parser__ComputeProdLocationVisitor___last_location = 3;
-const int COLOR_parser__ReduceAction___goto = 0;
 const int COLOR_parser_util__InjectedLexer___64dinjected_before = 8;
 const int COLOR_parser_util__InjectedLexer___64dinjected_after = 9;
 const int COLOR_parser_util__InjectedLexer___64dis_finished = 10;
@@ -4036,12 +4124,17 @@ const int COLOR_modelbuilder__ModelBuilder___64dmodel = 0;
 const int COLOR_modelbuilder__ModelBuilder___64dtoolcontext = 1;
 const int COLOR_modelbuilder__ModelBuilder___64dtry_get_mproperty_by_name2_cache = 2;
 const int COLOR_modelbuilder__ModelBuilder___64dpaths = 3;
-const int COLOR_modelbuilder__ModelBuilder___64dloaded_nmodules = 4;
-const int COLOR_modelbuilder__ModelBuilder___64dnmodules = 5;
-const int COLOR_modelbuilder__ModelBuilder___64dmmodule2nmodule = 6;
-const int COLOR_modelize_class__ModelBuilder___64dmclassdef2nclassdef = 7;
-const int COLOR_modelize_property__ModelBuilder___64dmpropdef2npropdef = 8;
-const int COLOR_abstract_compiler__ModelBuilder___64dcc_paths = 9;
+const int COLOR_modelbuilder__ModelBuilder___64didentified_files = 4;
+const int COLOR_modelbuilder__ModelBuilder___64dmgroups = 5;
+const int COLOR_modelbuilder__ModelBuilder___64dnmodules = 6;
+const int COLOR_modelbuilder__ModelBuilder___64dmmodule2nmodule = 7;
+const int COLOR_modelize_class__ModelBuilder___64dmclassdef2nclassdef = 8;
+const int COLOR_modelize_property__ModelBuilder___64dmpropdef2npropdef = 9;
+const int COLOR_abstract_compiler__ModelBuilder___64dcc_paths = 10;
+const int COLOR_modelbuilder__ModulePath___64dname = 0;
+const int COLOR_modelbuilder__ModulePath___64dfilepath = 1;
+const int COLOR_modelbuilder__ModulePath___64dmgroup = 2;
+const int COLOR_modelbuilder__ModulePath___64dmmodule = 3;
 const int COLOR_modelize_property__TextCollectorVisitor___64dtext = 1;
 const int COLOR_typing__TypeVisitor___64dmodelbuilder = 0;
 const int COLOR_typing__TypeVisitor___64dnclassdef = 1;
@@ -4055,6 +4148,9 @@ const int COLOR_typing__CallSite___64dmpropdef = 4;
 const int COLOR_typing__CallSite___64dmsignature = 5;
 const int COLOR_typing__CallSite___64derasure_cast = 6;
 const int COLOR_auto_super_init__AutoSuperInitVisitor___64dhas_explicit_super_init = 1;
+const int COLOR_collect_super_sends__CollectSuperSends___64dmodelbuilder = 1;
+const int COLOR_collect_super_sends__CollectSuperSends___64dres = 2;
+const int COLOR_collect_super_sends__CollectSuperSends___64dmpropdef = 3;
 const int COLOR_div_by_zero__DivByZeroVisitor___64dtoolcontext = 1;
 const int COLOR_div_by_zero__DivByZeroVisitor___64dmmodule = 2;
 const int COLOR_astbuilder__ASTBuilder___64dmmodule = 0;
@@ -4081,18 +4177,19 @@ const int COLOR_transform__TransformVisitor___64dmmodule = 2;
 const int COLOR_transform__TransformVisitor___64dmclassdef = 3;
 const int COLOR_transform__TransformVisitor___64dmpropdef = 4;
 const int COLOR_transform__TransformVisitor___64dbuilder = 5;
-const int COLOR_abstract_compiler__AbstractCompiler___64dmainmodule = 0;
-const int COLOR_abstract_compiler__AbstractCompiler___64drealmainmodule = 1;
-const int COLOR_abstract_compiler__AbstractCompiler___64dmodelbuilder = 2;
-const int COLOR_abstract_compiler__AbstractCompiler___64dfiles = 3;
-const int COLOR_abstract_compiler__AbstractCompiler___64dheader = 4;
-const int COLOR_abstract_compiler__AbstractCompiler___64dprovided_declarations = 5;
-const int COLOR_abstract_compiler__AbstractCompiler___64dextern_bodies = 6;
-const int COLOR_abstract_compiler__AbstractCompiler___64dseen_extern = 7;
-const int COLOR_abstract_compiler__AbstractCompiler___64dcount_type_test_tags = 8;
-const int COLOR_abstract_compiler__AbstractCompiler___64dcount_type_test_resolved = 9;
-const int COLOR_abstract_compiler__AbstractCompiler___64dcount_type_test_unresolved = 10;
-const int COLOR_abstract_compiler__AbstractCompiler___64dcount_type_test_skipped = 11;
+const int COLOR_abstract_compiler__AbstractCompiler___64dnames = 0;
+const int COLOR_abstract_compiler__AbstractCompiler___64dmainmodule = 1;
+const int COLOR_abstract_compiler__AbstractCompiler___64drealmainmodule = 2;
+const int COLOR_abstract_compiler__AbstractCompiler___64dmodelbuilder = 3;
+const int COLOR_abstract_compiler__AbstractCompiler___64dfiles = 4;
+const int COLOR_abstract_compiler__AbstractCompiler___64dheader = 5;
+const int COLOR_abstract_compiler__AbstractCompiler___64dprovided_declarations = 6;
+const int COLOR_abstract_compiler__AbstractCompiler___64dextern_bodies = 7;
+const int COLOR_abstract_compiler__AbstractCompiler___64dseen_extern = 8;
+const int COLOR_abstract_compiler__AbstractCompiler___64dcount_type_test_tags = 9;
+const int COLOR_abstract_compiler__AbstractCompiler___64dcount_type_test_resolved = 10;
+const int COLOR_abstract_compiler__AbstractCompiler___64dcount_type_test_unresolved = 11;
+const int COLOR_abstract_compiler__AbstractCompiler___64dcount_type_test_skipped = 12;
 const int COLOR_abstract_compiler__CodeFile___64dname = 0;
 const int COLOR_abstract_compiler__CodeFile___64dwriters = 1;
 const int COLOR_abstract_compiler__CodeFile___64drequired_declarations = 2;
@@ -4144,31 +4241,31 @@ const int COLOR_layout_builders__MPropertyColorer___64dclass_colorer = 1;
 const int COLOR_layout_builders__MPropertyColorer___64dcoloration_result = 2;
 const int COLOR_layout_builders__ResolutionColorer___64dcoloration_result = 0;
 const int COLOR_layout_builders__ResolutionColorer___64dconflicts_graph = 1;
-const int COLOR_global_compiler__GlobalCompiler___64druntime_type_analysis = 12;
-const int COLOR_global_compiler__GlobalCompiler___64dclassids = 13;
-const int COLOR_global_compiler__GlobalCompiler___64dlive_primitive_types = 14;
-const int COLOR_global_compiler__GlobalCompiler___64dtodos = 15;
-const int COLOR_global_compiler__GlobalCompiler___64dseen = 16;
-const int COLOR_global_compiler__GlobalCompiler___64dcollect_types_cache = 17;
+const int COLOR_global_compiler__GlobalCompiler___64druntime_type_analysis = 13;
+const int COLOR_global_compiler__GlobalCompiler___64dclassids = 14;
+const int COLOR_global_compiler__GlobalCompiler___64dlive_primitive_types = 15;
+const int COLOR_global_compiler__GlobalCompiler___64dtodos = 16;
+const int COLOR_global_compiler__GlobalCompiler___64dseen = 17;
+const int COLOR_global_compiler__GlobalCompiler___64dcollect_types_cache = 18;
 const int COLOR_global_compiler__CustomizedRuntimeFunction___64drecv = 2;
-const int COLOR_separate_compiler__SeparateCompiler___64druntime_type_analysis = 12;
-const int COLOR_separate_compiler__SeparateCompiler___64dundead_types = 13;
-const int COLOR_separate_compiler__SeparateCompiler___64dpartial_types = 14;
-const int COLOR_separate_compiler__SeparateCompiler___64dlive_unresolved_types = 15;
-const int COLOR_separate_compiler__SeparateCompiler___64dtype_layout = 16;
-const int COLOR_separate_compiler__SeparateCompiler___64dresolution_layout = 17;
-const int COLOR_separate_compiler__SeparateCompiler___64dmethod_layout = 18;
-const int COLOR_separate_compiler__SeparateCompiler___64dattr_layout = 19;
-const int COLOR_separate_compiler__SeparateCompiler___64dbox_kinds = 20;
-const int COLOR_separate_compiler__SeparateCompiler___64dcolor_consts_done = 21;
-const int COLOR_separate_compiler__SeparateCompiler___64dtype_tables = 22;
-const int COLOR_separate_compiler__SeparateCompiler___64dresolution_tables = 23;
-const int COLOR_separate_compiler__SeparateCompiler___64dmethod_tables = 24;
-const int COLOR_separate_compiler__SeparateCompiler___64dattr_tables = 25;
-const int COLOR_separate_erasure_compiler__SeparateErasureCompiler___64dclass_layout = 26;
-const int COLOR_separate_erasure_compiler__SeparateErasureCompiler___64dvt_layout = 27;
-const int COLOR_separate_erasure_compiler__SeparateErasureCompiler___64dclass_tables = 28;
-const int COLOR_separate_erasure_compiler__SeparateErasureCompiler___64dvt_tables = 29;
+const int COLOR_separate_compiler__SeparateCompiler___64druntime_type_analysis = 13;
+const int COLOR_separate_compiler__SeparateCompiler___64dundead_types = 14;
+const int COLOR_separate_compiler__SeparateCompiler___64dpartial_types = 15;
+const int COLOR_separate_compiler__SeparateCompiler___64dlive_unresolved_types = 16;
+const int COLOR_separate_compiler__SeparateCompiler___64dtype_layout = 17;
+const int COLOR_separate_compiler__SeparateCompiler___64dresolution_layout = 18;
+const int COLOR_separate_compiler__SeparateCompiler___64dmethod_layout = 19;
+const int COLOR_separate_compiler__SeparateCompiler___64dattr_layout = 20;
+const int COLOR_separate_compiler__SeparateCompiler___64dbox_kinds = 21;
+const int COLOR_separate_compiler__SeparateCompiler___64dcolor_consts_done = 22;
+const int COLOR_separate_compiler__SeparateCompiler___64dtype_tables = 23;
+const int COLOR_separate_compiler__SeparateCompiler___64dresolution_tables = 24;
+const int COLOR_separate_compiler__SeparateCompiler___64dmethod_tables = 25;
+const int COLOR_separate_compiler__SeparateCompiler___64dattr_tables = 26;
+const int COLOR_separate_erasure_compiler__SeparateErasureCompiler___64dclass_layout = 27;
+const int COLOR_separate_erasure_compiler__SeparateErasureCompiler___64dvt_layout = 28;
+const int COLOR_separate_erasure_compiler__SeparateErasureCompiler___64dclass_tables = 29;
+const int COLOR_separate_erasure_compiler__SeparateErasureCompiler___64dvt_tables = 30;
 /* runtime class modelbuilder__ModelBuilder */
 const struct class class_modelbuilder__ModelBuilder = {
 0, /* box_kind */
@@ -4230,10 +4327,17 @@ const struct class class_modelbuilder__ModelBuilder = {
 (nitmethod_t)VIRTUAL_modelbuilder__ModelBuilder__paths, /* pointer to modelbuilder:ModelBuilder:modelbuilder#ModelBuilder#paths */
 (nitmethod_t)VIRTUAL_modelbuilder__ModelBuilder__paths_61d, /* pointer to modelbuilder:ModelBuilder:modelbuilder#ModelBuilder#paths= */
 (nitmethod_t)VIRTUAL_modelbuilder__ModelBuilder__get_mmodule_by_name, /* pointer to modelbuilder:ModelBuilder:modelbuilder#ModelBuilder#get_mmodule_by_name */
+(nitmethod_t)VIRTUAL_modelbuilder__ModelBuilder__identified_files, /* pointer to modelbuilder:ModelBuilder:modelbuilder#ModelBuilder#identified_files */
+(nitmethod_t)VIRTUAL_modelbuilder__ModelBuilder__identified_files_61d, /* pointer to modelbuilder:ModelBuilder:modelbuilder#ModelBuilder#identified_files= */
+(nitmethod_t)VIRTUAL_modelbuilder__ModelBuilder__identify_file, /* pointer to modelbuilder:ModelBuilder:modelbuilder#ModelBuilder#identify_file */
+(nitmethod_t)VIRTUAL_modelbuilder__ModelBuilder__mgroups, /* pointer to modelbuilder:ModelBuilder:modelbuilder#ModelBuilder#mgroups */
+(nitmethod_t)VIRTUAL_modelbuilder__ModelBuilder__mgroups_61d, /* pointer to modelbuilder:ModelBuilder:modelbuilder#ModelBuilder#mgroups= */
+(nitmethod_t)VIRTUAL_modelbuilder__ModelBuilder__get_mgroup, /* pointer to modelbuilder:ModelBuilder:modelbuilder#ModelBuilder#get_mgroup */
 (nitmethod_t)VIRTUAL_modelbuilder__ModelBuilder__module_absolute_path, /* pointer to modelbuilder:ModelBuilder:modelbuilder#ModelBuilder#module_absolute_path */
-(nitmethod_t)VIRTUAL_modelbuilder__ModelBuilder__loaded_nmodules, /* pointer to modelbuilder:ModelBuilder:modelbuilder#ModelBuilder#loaded_nmodules */
-(nitmethod_t)VIRTUAL_modelbuilder__ModelBuilder__loaded_nmodules_61d, /* pointer to modelbuilder:ModelBuilder:modelbuilder#ModelBuilder#loaded_nmodules= */
+(nitmethod_t)VIRTUAL_modelbuilder__ModelBuilder__load_module_ast, /* pointer to modelbuilder:ModelBuilder:modelbuilder#ModelBuilder#load_module_ast */
 (nitmethod_t)VIRTUAL_modelbuilder__ModelBuilder__load_module, /* pointer to modelbuilder:ModelBuilder:modelbuilder#ModelBuilder#load_module */
+(nitmethod_t)VIRTUAL_modelbuilder__ModelBuilder__load_rt_module, /* pointer to modelbuilder:ModelBuilder:modelbuilder#ModelBuilder#load_rt_module */
+(nitmethod_t)VIRTUAL_modelbuilder__ModelBuilder__build_a_mmodule, /* pointer to modelbuilder:ModelBuilder:modelbuilder#ModelBuilder#build_a_mmodule */
 (nitmethod_t)VIRTUAL_modelbuilder__ModelBuilder__build_module_importation, /* pointer to modelbuilder:ModelBuilder:modelbuilder#ModelBuilder#build_module_importation */
 (nitmethod_t)VIRTUAL_modelbuilder__ModelBuilder__nmodules, /* pointer to modelbuilder:ModelBuilder:modelbuilder#ModelBuilder#nmodules */
 (nitmethod_t)VIRTUAL_modelbuilder__ModelBuilder__nmodules_61d, /* pointer to modelbuilder:ModelBuilder:modelbuilder#ModelBuilder#nmodules= */
@@ -4255,6 +4359,7 @@ const struct class class_modelbuilder__ModelBuilder = {
 (nitmethod_t)VIRTUAL_modelize_property__ModelBuilder__mpropdef2npropdef_61d, /* pointer to modelbuilder:ModelBuilder:modelize_property#ModelBuilder#mpropdef2npropdef= */
 (nitmethod_t)VIRTUAL_modelize_property__ModelBuilder__build_properties, /* pointer to modelbuilder:ModelBuilder:modelize_property#ModelBuilder#build_properties */
 (nitmethod_t)VIRTUAL_modelize_property__ModelBuilder__process_default_constructors, /* pointer to modelbuilder:ModelBuilder:modelize_property#ModelBuilder#process_default_constructors */
+(nitmethod_t)VIRTUAL_collect_super_sends__ModelBuilder__collect_super_sends, /* pointer to modelbuilder:ModelBuilder:collect_super_sends#ModelBuilder#collect_super_sends */
 (nitmethod_t)VIRTUAL_rapid_type_analysis__ModelBuilder__do_rapid_type_analysis, /* pointer to modelbuilder:ModelBuilder:rapid_type_analysis#ModelBuilder#do_rapid_type_analysis */
 (nitmethod_t)VIRTUAL_abstract_compiler__ModelBuilder__cc_paths, /* pointer to modelbuilder:ModelBuilder:abstract_compiler#ModelBuilder#cc_paths */
 (nitmethod_t)VIRTUAL_abstract_compiler__ModelBuilder__cc_paths_61d, /* pointer to modelbuilder:ModelBuilder:abstract_compiler#ModelBuilder#cc_paths= */
@@ -4270,65 +4375,112 @@ val* NEW_modelbuilder__ModelBuilder(const struct type* type) {
 val* self /* : ModelBuilder */;
 val* var /* : HashMap3[MModule, MType, String, nullable MProperty] */;
 val* var1 /* : Array[String] */;
-val* var2 /* : HashMap[String, AModule] */;
-val* var3 /* : Array[AModule] */;
-val* var4 /* : HashMap[MModule, AModule] */;
-val* var5 /* : HashMap[MClassDef, AClassdef] */;
-val* var6 /* : HashMap[MPropDef, APropdef] */;
-val* var7 /* : Array[String] */;
-self = nit_alloc(sizeof(struct instance) + 10*sizeof(nitattribute_t));
+val* var2 /* : HashMap[String, nullable ModulePath] */;
+val* var3 /* : HashMap[String, nullable MGroup] */;
+val* var4 /* : Array[AModule] */;
+val* var5 /* : HashMap[MModule, AModule] */;
+val* var6 /* : HashMap[MClassDef, AClassdef] */;
+val* var7 /* : HashMap[MPropDef, APropdef] */;
+val* var8 /* : Array[String] */;
+self = nit_alloc(sizeof(struct instance) + 11*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_modelbuilder__ModelBuilder;
-var = NEW_more_collections__HashMap3(&type_more_collections__HashMap3model_base__MModulemodel__MTypestring__Stringnullable_model__MProperty);
+var = NEW_more_collections__HashMap3(&type_more_collections__HashMap3mmodule__MModulemodel__MTypestring__Stringnullable_model__MProperty);
 ((void (*)(val*))(var->class->vft[COLOR_more_collections__HashMap3__init]))(var) /* init on <var:HashMap3[MModule, MType, String, nullable MProperty]>*/;
-CHECK_NEW_more_collections__HashMap3(var);
 self->attrs[COLOR_modelbuilder__ModelBuilder___64dtry_get_mproperty_by_name2_cache].val = var; /* @try_get_mproperty_by_name2_cache on <self:ModelBuilder exact> */
 var1 = NEW_array__Array(&type_array__Arraystring__String);
 ((void (*)(val*))(var1->class->vft[COLOR_array__Array__init]))(var1) /* init on <var1:Array[String]>*/;
-CHECK_NEW_array__Array(var1);
 self->attrs[COLOR_modelbuilder__ModelBuilder___64dpaths].val = var1; /* @paths on <self:ModelBuilder exact> */
-var2 = NEW_hash_collection__HashMap(&type_hash_collection__HashMapstring__Stringparser_nodes__AModule);
-((void (*)(val*))(var2->class->vft[COLOR_hash_collection__HashMap__init]))(var2) /* init on <var2:HashMap[String, AModule]>*/;
-CHECK_NEW_hash_collection__HashMap(var2);
-self->attrs[COLOR_modelbuilder__ModelBuilder___64dloaded_nmodules].val = var2; /* @loaded_nmodules on <self:ModelBuilder exact> */
-var3 = NEW_array__Array(&type_array__Arrayparser_nodes__AModule);
-((void (*)(val*))(var3->class->vft[COLOR_array__Array__init]))(var3) /* init on <var3:Array[AModule]>*/;
-CHECK_NEW_array__Array(var3);
-self->attrs[COLOR_modelbuilder__ModelBuilder___64dnmodules].val = var3; /* @nmodules on <self:ModelBuilder exact> */
-var4 = NEW_hash_collection__HashMap(&type_hash_collection__HashMapmodel_base__MModuleparser_nodes__AModule);
-((void (*)(val*))(var4->class->vft[COLOR_hash_collection__HashMap__init]))(var4) /* init on <var4:HashMap[MModule, AModule]>*/;
-CHECK_NEW_hash_collection__HashMap(var4);
-self->attrs[COLOR_modelbuilder__ModelBuilder___64dmmodule2nmodule].val = var4; /* @mmodule2nmodule on <self:ModelBuilder exact> */
-var5 = NEW_hash_collection__HashMap(&type_hash_collection__HashMapmodel__MClassDefparser_nodes__AClassdef);
-((void (*)(val*))(var5->class->vft[COLOR_hash_collection__HashMap__init]))(var5) /* init on <var5:HashMap[MClassDef, AClassdef]>*/;
-CHECK_NEW_hash_collection__HashMap(var5);
-self->attrs[COLOR_modelize_class__ModelBuilder___64dmclassdef2nclassdef].val = var5; /* @mclassdef2nclassdef on <self:ModelBuilder exact> */
-var6 = NEW_hash_collection__HashMap(&type_hash_collection__HashMapmodel__MPropDefparser_nodes__APropdef);
-((void (*)(val*))(var6->class->vft[COLOR_hash_collection__HashMap__init]))(var6) /* init on <var6:HashMap[MPropDef, APropdef]>*/;
-CHECK_NEW_hash_collection__HashMap(var6);
-self->attrs[COLOR_modelize_property__ModelBuilder___64dmpropdef2npropdef].val = var6; /* @mpropdef2npropdef on <self:ModelBuilder exact> */
-var7 = NEW_array__Array(&type_array__Arraystring__String);
-((void (*)(val*))(var7->class->vft[COLOR_array__Array__init]))(var7) /* init on <var7:Array[String]>*/;
-CHECK_NEW_array__Array(var7);
-self->attrs[COLOR_abstract_compiler__ModelBuilder___64dcc_paths].val = var7; /* @cc_paths on <self:ModelBuilder exact> */
+var2 = NEW_hash_collection__HashMap(&type_hash_collection__HashMapstring__Stringnullable_modelbuilder__ModulePath);
+((void (*)(val*))(var2->class->vft[COLOR_hash_collection__HashMap__init]))(var2) /* init on <var2:HashMap[String, nullable ModulePath]>*/;
+self->attrs[COLOR_modelbuilder__ModelBuilder___64didentified_files].val = var2; /* @identified_files on <self:ModelBuilder exact> */
+var3 = NEW_hash_collection__HashMap(&type_hash_collection__HashMapstring__Stringnullable_mproject__MGroup);
+((void (*)(val*))(var3->class->vft[COLOR_hash_collection__HashMap__init]))(var3) /* init on <var3:HashMap[String, nullable MGroup]>*/;
+self->attrs[COLOR_modelbuilder__ModelBuilder___64dmgroups].val = var3; /* @mgroups on <self:ModelBuilder exact> */
+var4 = NEW_array__Array(&type_array__Arrayparser_nodes__AModule);
+((void (*)(val*))(var4->class->vft[COLOR_array__Array__init]))(var4) /* init on <var4:Array[AModule]>*/;
+self->attrs[COLOR_modelbuilder__ModelBuilder___64dnmodules].val = var4; /* @nmodules on <self:ModelBuilder exact> */
+var5 = NEW_hash_collection__HashMap(&type_hash_collection__HashMapmmodule__MModuleparser_nodes__AModule);
+((void (*)(val*))(var5->class->vft[COLOR_hash_collection__HashMap__init]))(var5) /* init on <var5:HashMap[MModule, AModule]>*/;
+self->attrs[COLOR_modelbuilder__ModelBuilder___64dmmodule2nmodule].val = var5; /* @mmodule2nmodule on <self:ModelBuilder exact> */
+var6 = NEW_hash_collection__HashMap(&type_hash_collection__HashMapmodel__MClassDefparser_nodes__AClassdef);
+((void (*)(val*))(var6->class->vft[COLOR_hash_collection__HashMap__init]))(var6) /* init on <var6:HashMap[MClassDef, AClassdef]>*/;
+self->attrs[COLOR_modelize_class__ModelBuilder___64dmclassdef2nclassdef].val = var6; /* @mclassdef2nclassdef on <self:ModelBuilder exact> */
+var7 = NEW_hash_collection__HashMap(&type_hash_collection__HashMapmodel__MPropDefparser_nodes__APropdef);
+((void (*)(val*))(var7->class->vft[COLOR_hash_collection__HashMap__init]))(var7) /* init on <var7:HashMap[MPropDef, APropdef]>*/;
+self->attrs[COLOR_modelize_property__ModelBuilder___64dmpropdef2npropdef].val = var7; /* @mpropdef2npropdef on <self:ModelBuilder exact> */
+var8 = NEW_array__Array(&type_array__Arraystring__String);
+((void (*)(val*))(var8->class->vft[COLOR_array__Array__init]))(var8) /* init on <var8:Array[String]>*/;
+self->attrs[COLOR_abstract_compiler__ModelBuilder___64dcc_paths].val = var8; /* @cc_paths on <self:ModelBuilder exact> */
 return self;
 }
-/* allocate ModelBuilder */
-void CHECK_NEW_modelbuilder__ModelBuilder(val* self) {
-val* var /* : Model */;
-val* var1 /* : ToolContext */;
-var = self->attrs[COLOR_modelbuilder__ModelBuilder___64dmodel].val; /* @model on <self:ModelBuilder> */
-if (var == NULL) {
-fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @model");
-fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 59);
-exit(1);
+/* runtime class modelbuilder__ModulePath */
+const struct class class_modelbuilder__ModulePath = {
+0, /* box_kind */
+{
+(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to modelbuilder:ModulePath:kernel#Object#object_id */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to modelbuilder:ModulePath:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to modelbuilder:ModulePath:kernel#Object#is_same_instance */
+(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to modelbuilder:ModulePath:kernel#Object#== */
+(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to modelbuilder:ModulePath:kernel#Object#!= */
+(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to modelbuilder:ModulePath:kernel#Object#output */
+(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to modelbuilder:ModulePath:kernel#Object#output_class_name */
+(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to modelbuilder:ModulePath:kernel#Object#exit */
+(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to modelbuilder:ModulePath:kernel#Object#sys */
+(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to modelbuilder:ModulePath:kernel#Object#hash */
+(nitmethod_t)VIRTUAL_modelbuilder__ModulePath__to_s, /* pointer to modelbuilder:ModulePath:modelbuilder#ModulePath#to_s */
+(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to modelbuilder:ModulePath:string#Object#native_class_name */
+(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to modelbuilder:ModulePath:string#Object#class_name */
+(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to modelbuilder:ModulePath:string#Object#inspect */
+(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to modelbuilder:ModulePath:string#Object#inspect_head */
+(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to modelbuilder:ModulePath:string#Object#args */
+(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to modelbuilder:ModulePath:math#Object#atan2 */
+(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to modelbuilder:ModulePath:math#Object#pi */
+(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to modelbuilder:ModulePath:math#Object#srand_from */
+(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to modelbuilder:ModulePath:math#Object#srand */
+(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to modelbuilder:ModulePath:stream#Object#poll */
+(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to modelbuilder:ModulePath:stream#Object#intern_poll */
+(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to modelbuilder:ModulePath:time#Object#get_time */
+(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to modelbuilder:ModulePath:file#Object#printn */
+(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to modelbuilder:ModulePath:file#Object#print */
+(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to modelbuilder:ModulePath:file#Object#getc */
+(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to modelbuilder:ModulePath:file#Object#gets */
+(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to modelbuilder:ModulePath:file#Object#getcwd */
+(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to modelbuilder:ModulePath:file#Object#file_getcwd */
+(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to modelbuilder:ModulePath:file#Object#stdin */
+(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to modelbuilder:ModulePath:file#Object#stdout */
+(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to modelbuilder:ModulePath:file#Object#stderr */
+(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to modelbuilder:ModulePath:model_base#Object#intrude_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to modelbuilder:ModulePath:model_base#Object#public_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to modelbuilder:ModulePath:model_base#Object#protected_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to modelbuilder:ModulePath:model_base#Object#private_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to modelbuilder:ModulePath:model_base#Object#none_visibility */
+(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to modelbuilder:ModulePath:model#Object#abstract_kind */
+(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to modelbuilder:ModulePath:model#Object#concrete_kind */
+(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to modelbuilder:ModulePath:model#Object#interface_kind */
+(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to modelbuilder:ModulePath:model#Object#enum_kind */
+(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to modelbuilder:ModulePath:model#Object#extern_kind */
+(nitmethod_t)VIRTUAL_modelbuilder__ModulePath__name, /* pointer to modelbuilder:ModulePath:modelbuilder#ModulePath#name */
+(nitmethod_t)VIRTUAL_modelbuilder__ModulePath__name_61d, /* pointer to modelbuilder:ModulePath:modelbuilder#ModulePath#name= */
+(nitmethod_t)VIRTUAL_modelbuilder__ModulePath__filepath, /* pointer to modelbuilder:ModulePath:modelbuilder#ModulePath#filepath */
+(nitmethod_t)VIRTUAL_modelbuilder__ModulePath__filepath_61d, /* pointer to modelbuilder:ModulePath:modelbuilder#ModulePath#filepath= */
+(nitmethod_t)VIRTUAL_modelbuilder__ModulePath__mgroup, /* pointer to modelbuilder:ModulePath:modelbuilder#ModulePath#mgroup */
+(nitmethod_t)VIRTUAL_modelbuilder__ModulePath__mgroup_61d, /* pointer to modelbuilder:ModulePath:modelbuilder#ModulePath#mgroup= */
+(nitmethod_t)VIRTUAL_modelbuilder__ModulePath__mmodule, /* pointer to modelbuilder:ModulePath:modelbuilder#ModulePath#mmodule */
+(nitmethod_t)VIRTUAL_modelbuilder__ModulePath__mmodule_61d, /* pointer to modelbuilder:ModulePath:modelbuilder#ModulePath#mmodule= */
+(nitmethod_t)VIRTUAL_modelbuilder__ModulePath__init, /* pointer to modelbuilder:ModulePath:modelbuilder#ModulePath#init */
 }
-var1 = self->attrs[COLOR_modelbuilder__ModelBuilder___64dtoolcontext].val; /* @toolcontext on <self:ModelBuilder> */
-if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @toolcontext");
-fprintf(stderr, " (%s:%d)\n", "src/modelbuilder.nit", 62);
-exit(1);
-}
+};
+/* allocate ModulePath */
+val* NEW_modelbuilder__ModulePath(const struct type* type) {
+val* self /* : ModulePath */;
+val* var /* : null */;
+self = nit_alloc(sizeof(struct instance) + 4*sizeof(nitattribute_t));
+self->type = type;
+self->class = &class_modelbuilder__ModulePath;
+var = NULL;
+self->attrs[COLOR_modelbuilder__ModulePath___64dmmodule].val = var; /* @mmodule on <self:ModulePath exact> */
+return self;
 }
 /* runtime class parser__State */
 const struct class class_parser__State = {
@@ -4390,13 +4542,6 @@ self = nit_alloc(sizeof(struct instance) + 2*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser__State;
 return self;
-}
-/* allocate State */
-void CHECK_NEW_parser__State(val* self) {
-long var /* : Int */;
-val* var1 /* : nullable Object */;
-var = self->attrs[COLOR_parser__State___state].l; /* _state on <self:State> */
-var1 = self->attrs[COLOR_parser__State___nodes].val; /* _nodes on <self:State> */
 }
 /* runtime class parser__Parser */
 const struct class class_parser__Parser = {
@@ -4464,32 +4609,6 @@ self = nit_alloc(sizeof(struct instance) + 4*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser__Parser;
 return self;
-}
-/* allocate Parser */
-void CHECK_NEW_parser__Parser(val* self) {
-val* var /* : Lexer */;
-val* var1 /* : Array[State] */;
-long var2 /* : Int */;
-val* var3 /* : Array[ReduceAction] */;
-var = self->attrs[COLOR_parser__Parser___lexer].val; /* _lexer on <self:Parser> */
-if (var == NULL) {
-fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _lexer");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 25);
-exit(1);
-}
-var1 = self->attrs[COLOR_parser__Parser___stack].val; /* _stack on <self:Parser> */
-if (var1 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _stack");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 28);
-exit(1);
-}
-var2 = self->attrs[COLOR_parser__Parser___stack_pos].l; /* _stack_pos on <self:Parser> */
-var3 = self->attrs[COLOR_parser__Parser___reduce_table].val; /* _reduce_table on <self:Parser> */
-if (var3 == NULL) {
-fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _reduce_table");
-fprintf(stderr, " (%s:%d)\n", "src/parser/parser.nit", 151);
-exit(1);
-}
 }
 /* runtime class parser__ComputeProdLocationVisitor */
 const struct class class_parser__ComputeProdLocationVisitor = {
@@ -4559,18 +4678,13 @@ var = NULL;
 self->attrs[COLOR_parser_nodes__Visitor___current_node].val = var; /* _current_node on <self:ComputeProdLocationVisitor exact> */
 var1 = NEW_array__Array(&type_array__Arrayparser_nodes__Prod);
 ((void (*)(val*))(var1->class->vft[COLOR_array__Array__init]))(var1) /* init on <var1:Array[Prod]>*/;
-CHECK_NEW_array__Array(var1);
 self->attrs[COLOR_parser__ComputeProdLocationVisitor___need_first_prods].val = var1; /* _need_first_prods on <self:ComputeProdLocationVisitor exact> */
 var2 = NEW_array__Array(&type_array__Arrayparser_nodes__Prod);
 ((void (*)(val*))(var2->class->vft[COLOR_array__Array__init]))(var2) /* init on <var2:Array[Prod]>*/;
-CHECK_NEW_array__Array(var2);
 self->attrs[COLOR_parser__ComputeProdLocationVisitor___need_after_epsilons].val = var2; /* _need_after_epsilons on <self:ComputeProdLocationVisitor exact> */
 var3 = NULL;
 self->attrs[COLOR_parser__ComputeProdLocationVisitor___last_location].val = var3; /* _last_location on <self:ComputeProdLocationVisitor exact> */
 return self;
-}
-/* allocate ComputeProdLocationVisitor */
-void CHECK_NEW_parser__ComputeProdLocationVisitor(val* self) {
 }
 /* runtime class parser__ReduceAction0 */
 const struct class class_parser__ReduceAction0 = {
@@ -4631,11 +4745,6 @@ self->type = type;
 self->class = &class_parser__ReduceAction0;
 return self;
 }
-/* allocate ReduceAction0 */
-void CHECK_NEW_parser__ReduceAction0(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction0> */
-}
 /* runtime class parser__ReduceAction1 */
 const struct class class_parser__ReduceAction1 = {
 0, /* box_kind */
@@ -4694,11 +4803,6 @@ self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser__ReduceAction1;
 return self;
-}
-/* allocate ReduceAction1 */
-void CHECK_NEW_parser__ReduceAction1(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction1> */
 }
 /* runtime class parser__ReduceAction2 */
 const struct class class_parser__ReduceAction2 = {
@@ -4759,11 +4863,6 @@ self->type = type;
 self->class = &class_parser__ReduceAction2;
 return self;
 }
-/* allocate ReduceAction2 */
-void CHECK_NEW_parser__ReduceAction2(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction2> */
-}
 /* runtime class parser__ReduceAction3 */
 const struct class class_parser__ReduceAction3 = {
 0, /* box_kind */
@@ -4822,11 +4921,6 @@ self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser__ReduceAction3;
 return self;
-}
-/* allocate ReduceAction3 */
-void CHECK_NEW_parser__ReduceAction3(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction3> */
 }
 /* runtime class parser__ReduceAction4 */
 const struct class class_parser__ReduceAction4 = {
@@ -4887,11 +4981,6 @@ self->type = type;
 self->class = &class_parser__ReduceAction4;
 return self;
 }
-/* allocate ReduceAction4 */
-void CHECK_NEW_parser__ReduceAction4(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction4> */
-}
 /* runtime class parser__ReduceAction5 */
 const struct class class_parser__ReduceAction5 = {
 0, /* box_kind */
@@ -4950,11 +5039,6 @@ self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser__ReduceAction5;
 return self;
-}
-/* allocate ReduceAction5 */
-void CHECK_NEW_parser__ReduceAction5(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction5> */
 }
 /* runtime class parser__ReduceAction6 */
 const struct class class_parser__ReduceAction6 = {
@@ -5015,11 +5099,6 @@ self->type = type;
 self->class = &class_parser__ReduceAction6;
 return self;
 }
-/* allocate ReduceAction6 */
-void CHECK_NEW_parser__ReduceAction6(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction6> */
-}
 /* runtime class parser__ReduceAction7 */
 const struct class class_parser__ReduceAction7 = {
 0, /* box_kind */
@@ -5078,11 +5157,6 @@ self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser__ReduceAction7;
 return self;
-}
-/* allocate ReduceAction7 */
-void CHECK_NEW_parser__ReduceAction7(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction7> */
 }
 /* runtime class parser__ReduceAction8 */
 const struct class class_parser__ReduceAction8 = {
@@ -5143,11 +5217,6 @@ self->type = type;
 self->class = &class_parser__ReduceAction8;
 return self;
 }
-/* allocate ReduceAction8 */
-void CHECK_NEW_parser__ReduceAction8(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction8> */
-}
 /* runtime class parser__ReduceAction9 */
 const struct class class_parser__ReduceAction9 = {
 0, /* box_kind */
@@ -5206,11 +5275,6 @@ self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser__ReduceAction9;
 return self;
-}
-/* allocate ReduceAction9 */
-void CHECK_NEW_parser__ReduceAction9(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction9> */
 }
 /* runtime class parser__ReduceAction10 */
 const struct class class_parser__ReduceAction10 = {
@@ -5271,11 +5335,6 @@ self->type = type;
 self->class = &class_parser__ReduceAction10;
 return self;
 }
-/* allocate ReduceAction10 */
-void CHECK_NEW_parser__ReduceAction10(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction10> */
-}
 /* runtime class parser__ReduceAction11 */
 const struct class class_parser__ReduceAction11 = {
 0, /* box_kind */
@@ -5334,11 +5393,6 @@ self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser__ReduceAction11;
 return self;
-}
-/* allocate ReduceAction11 */
-void CHECK_NEW_parser__ReduceAction11(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction11> */
 }
 /* runtime class parser__ReduceAction12 */
 const struct class class_parser__ReduceAction12 = {
@@ -5399,11 +5453,6 @@ self->type = type;
 self->class = &class_parser__ReduceAction12;
 return self;
 }
-/* allocate ReduceAction12 */
-void CHECK_NEW_parser__ReduceAction12(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction12> */
-}
 /* runtime class parser__ReduceAction13 */
 const struct class class_parser__ReduceAction13 = {
 0, /* box_kind */
@@ -5462,11 +5511,6 @@ self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser__ReduceAction13;
 return self;
-}
-/* allocate ReduceAction13 */
-void CHECK_NEW_parser__ReduceAction13(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction13> */
 }
 /* runtime class parser__ReduceAction14 */
 const struct class class_parser__ReduceAction14 = {
@@ -5527,11 +5571,6 @@ self->type = type;
 self->class = &class_parser__ReduceAction14;
 return self;
 }
-/* allocate ReduceAction14 */
-void CHECK_NEW_parser__ReduceAction14(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction14> */
-}
 /* runtime class parser__ReduceAction15 */
 const struct class class_parser__ReduceAction15 = {
 0, /* box_kind */
@@ -5590,11 +5629,6 @@ self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser__ReduceAction15;
 return self;
-}
-/* allocate ReduceAction15 */
-void CHECK_NEW_parser__ReduceAction15(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction15> */
 }
 /* runtime class parser__ReduceAction16 */
 const struct class class_parser__ReduceAction16 = {
@@ -5655,11 +5689,6 @@ self->type = type;
 self->class = &class_parser__ReduceAction16;
 return self;
 }
-/* allocate ReduceAction16 */
-void CHECK_NEW_parser__ReduceAction16(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction16> */
-}
 /* runtime class parser__ReduceAction17 */
 const struct class class_parser__ReduceAction17 = {
 0, /* box_kind */
@@ -5718,11 +5747,6 @@ self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser__ReduceAction17;
 return self;
-}
-/* allocate ReduceAction17 */
-void CHECK_NEW_parser__ReduceAction17(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction17> */
 }
 /* runtime class parser__ReduceAction18 */
 const struct class class_parser__ReduceAction18 = {
@@ -5783,11 +5807,6 @@ self->type = type;
 self->class = &class_parser__ReduceAction18;
 return self;
 }
-/* allocate ReduceAction18 */
-void CHECK_NEW_parser__ReduceAction18(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction18> */
-}
 /* runtime class parser__ReduceAction19 */
 const struct class class_parser__ReduceAction19 = {
 0, /* box_kind */
@@ -5846,11 +5865,6 @@ self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser__ReduceAction19;
 return self;
-}
-/* allocate ReduceAction19 */
-void CHECK_NEW_parser__ReduceAction19(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction19> */
 }
 /* runtime class parser__ReduceAction20 */
 const struct class class_parser__ReduceAction20 = {
@@ -5911,11 +5925,6 @@ self->type = type;
 self->class = &class_parser__ReduceAction20;
 return self;
 }
-/* allocate ReduceAction20 */
-void CHECK_NEW_parser__ReduceAction20(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction20> */
-}
 /* runtime class parser__ReduceAction21 */
 const struct class class_parser__ReduceAction21 = {
 0, /* box_kind */
@@ -5974,11 +5983,6 @@ self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser__ReduceAction21;
 return self;
-}
-/* allocate ReduceAction21 */
-void CHECK_NEW_parser__ReduceAction21(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction21> */
 }
 /* runtime class parser__ReduceAction22 */
 const struct class class_parser__ReduceAction22 = {
@@ -6039,11 +6043,6 @@ self->type = type;
 self->class = &class_parser__ReduceAction22;
 return self;
 }
-/* allocate ReduceAction22 */
-void CHECK_NEW_parser__ReduceAction22(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction22> */
-}
 /* runtime class parser__ReduceAction23 */
 const struct class class_parser__ReduceAction23 = {
 0, /* box_kind */
@@ -6102,11 +6101,6 @@ self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser__ReduceAction23;
 return self;
-}
-/* allocate ReduceAction23 */
-void CHECK_NEW_parser__ReduceAction23(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction23> */
 }
 /* runtime class parser__ReduceAction24 */
 const struct class class_parser__ReduceAction24 = {
@@ -6167,11 +6161,6 @@ self->type = type;
 self->class = &class_parser__ReduceAction24;
 return self;
 }
-/* allocate ReduceAction24 */
-void CHECK_NEW_parser__ReduceAction24(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction24> */
-}
 /* runtime class parser__ReduceAction25 */
 const struct class class_parser__ReduceAction25 = {
 0, /* box_kind */
@@ -6230,11 +6219,6 @@ self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser__ReduceAction25;
 return self;
-}
-/* allocate ReduceAction25 */
-void CHECK_NEW_parser__ReduceAction25(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction25> */
 }
 /* runtime class parser__ReduceAction26 */
 const struct class class_parser__ReduceAction26 = {
@@ -6295,11 +6279,6 @@ self->type = type;
 self->class = &class_parser__ReduceAction26;
 return self;
 }
-/* allocate ReduceAction26 */
-void CHECK_NEW_parser__ReduceAction26(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction26> */
-}
 /* runtime class parser__ReduceAction27 */
 const struct class class_parser__ReduceAction27 = {
 0, /* box_kind */
@@ -6358,11 +6337,6 @@ self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser__ReduceAction27;
 return self;
-}
-/* allocate ReduceAction27 */
-void CHECK_NEW_parser__ReduceAction27(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction27> */
 }
 /* runtime class parser__ReduceAction28 */
 const struct class class_parser__ReduceAction28 = {
@@ -6423,11 +6397,6 @@ self->type = type;
 self->class = &class_parser__ReduceAction28;
 return self;
 }
-/* allocate ReduceAction28 */
-void CHECK_NEW_parser__ReduceAction28(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction28> */
-}
 /* runtime class parser__ReduceAction29 */
 const struct class class_parser__ReduceAction29 = {
 0, /* box_kind */
@@ -6486,11 +6455,6 @@ self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser__ReduceAction29;
 return self;
-}
-/* allocate ReduceAction29 */
-void CHECK_NEW_parser__ReduceAction29(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction29> */
 }
 /* runtime class parser__ReduceAction30 */
 const struct class class_parser__ReduceAction30 = {
@@ -6551,11 +6515,6 @@ self->type = type;
 self->class = &class_parser__ReduceAction30;
 return self;
 }
-/* allocate ReduceAction30 */
-void CHECK_NEW_parser__ReduceAction30(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction30> */
-}
 /* runtime class parser__ReduceAction31 */
 const struct class class_parser__ReduceAction31 = {
 0, /* box_kind */
@@ -6614,11 +6573,6 @@ self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser__ReduceAction31;
 return self;
-}
-/* allocate ReduceAction31 */
-void CHECK_NEW_parser__ReduceAction31(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction31> */
 }
 /* runtime class parser__ReduceAction32 */
 const struct class class_parser__ReduceAction32 = {
@@ -6679,11 +6633,6 @@ self->type = type;
 self->class = &class_parser__ReduceAction32;
 return self;
 }
-/* allocate ReduceAction32 */
-void CHECK_NEW_parser__ReduceAction32(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction32> */
-}
 /* runtime class parser__ReduceAction33 */
 const struct class class_parser__ReduceAction33 = {
 0, /* box_kind */
@@ -6742,11 +6691,6 @@ self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser__ReduceAction33;
 return self;
-}
-/* allocate ReduceAction33 */
-void CHECK_NEW_parser__ReduceAction33(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction33> */
 }
 /* runtime class parser__ReduceAction34 */
 const struct class class_parser__ReduceAction34 = {
@@ -6807,11 +6751,6 @@ self->type = type;
 self->class = &class_parser__ReduceAction34;
 return self;
 }
-/* allocate ReduceAction34 */
-void CHECK_NEW_parser__ReduceAction34(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction34> */
-}
 /* runtime class parser__ReduceAction35 */
 const struct class class_parser__ReduceAction35 = {
 0, /* box_kind */
@@ -6870,11 +6809,6 @@ self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser__ReduceAction35;
 return self;
-}
-/* allocate ReduceAction35 */
-void CHECK_NEW_parser__ReduceAction35(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction35> */
 }
 /* runtime class parser__ReduceAction36 */
 const struct class class_parser__ReduceAction36 = {
@@ -6935,11 +6869,6 @@ self->type = type;
 self->class = &class_parser__ReduceAction36;
 return self;
 }
-/* allocate ReduceAction36 */
-void CHECK_NEW_parser__ReduceAction36(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction36> */
-}
 /* runtime class parser__ReduceAction37 */
 const struct class class_parser__ReduceAction37 = {
 0, /* box_kind */
@@ -6998,11 +6927,6 @@ self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser__ReduceAction37;
 return self;
-}
-/* allocate ReduceAction37 */
-void CHECK_NEW_parser__ReduceAction37(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction37> */
 }
 /* runtime class parser__ReduceAction38 */
 const struct class class_parser__ReduceAction38 = {
@@ -7063,11 +6987,6 @@ self->type = type;
 self->class = &class_parser__ReduceAction38;
 return self;
 }
-/* allocate ReduceAction38 */
-void CHECK_NEW_parser__ReduceAction38(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction38> */
-}
 /* runtime class parser__ReduceAction39 */
 const struct class class_parser__ReduceAction39 = {
 0, /* box_kind */
@@ -7126,11 +7045,6 @@ self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser__ReduceAction39;
 return self;
-}
-/* allocate ReduceAction39 */
-void CHECK_NEW_parser__ReduceAction39(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction39> */
 }
 /* runtime class parser__ReduceAction40 */
 const struct class class_parser__ReduceAction40 = {
@@ -7191,11 +7105,6 @@ self->type = type;
 self->class = &class_parser__ReduceAction40;
 return self;
 }
-/* allocate ReduceAction40 */
-void CHECK_NEW_parser__ReduceAction40(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction40> */
-}
 /* runtime class parser__ReduceAction41 */
 const struct class class_parser__ReduceAction41 = {
 0, /* box_kind */
@@ -7254,11 +7163,6 @@ self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser__ReduceAction41;
 return self;
-}
-/* allocate ReduceAction41 */
-void CHECK_NEW_parser__ReduceAction41(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction41> */
 }
 /* runtime class parser__ReduceAction42 */
 const struct class class_parser__ReduceAction42 = {
@@ -7319,11 +7223,6 @@ self->type = type;
 self->class = &class_parser__ReduceAction42;
 return self;
 }
-/* allocate ReduceAction42 */
-void CHECK_NEW_parser__ReduceAction42(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction42> */
-}
 /* runtime class parser__ReduceAction43 */
 const struct class class_parser__ReduceAction43 = {
 0, /* box_kind */
@@ -7382,11 +7281,6 @@ self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser__ReduceAction43;
 return self;
-}
-/* allocate ReduceAction43 */
-void CHECK_NEW_parser__ReduceAction43(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction43> */
 }
 /* runtime class parser__ReduceAction44 */
 const struct class class_parser__ReduceAction44 = {
@@ -7447,11 +7341,6 @@ self->type = type;
 self->class = &class_parser__ReduceAction44;
 return self;
 }
-/* allocate ReduceAction44 */
-void CHECK_NEW_parser__ReduceAction44(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction44> */
-}
 /* runtime class parser__ReduceAction45 */
 const struct class class_parser__ReduceAction45 = {
 0, /* box_kind */
@@ -7510,11 +7399,6 @@ self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser__ReduceAction45;
 return self;
-}
-/* allocate ReduceAction45 */
-void CHECK_NEW_parser__ReduceAction45(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction45> */
 }
 /* runtime class parser__ReduceAction46 */
 const struct class class_parser__ReduceAction46 = {
@@ -7575,11 +7459,6 @@ self->type = type;
 self->class = &class_parser__ReduceAction46;
 return self;
 }
-/* allocate ReduceAction46 */
-void CHECK_NEW_parser__ReduceAction46(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction46> */
-}
 /* runtime class parser__ReduceAction47 */
 const struct class class_parser__ReduceAction47 = {
 0, /* box_kind */
@@ -7638,11 +7517,6 @@ self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser__ReduceAction47;
 return self;
-}
-/* allocate ReduceAction47 */
-void CHECK_NEW_parser__ReduceAction47(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction47> */
 }
 /* runtime class parser__ReduceAction48 */
 const struct class class_parser__ReduceAction48 = {
@@ -7703,11 +7577,6 @@ self->type = type;
 self->class = &class_parser__ReduceAction48;
 return self;
 }
-/* allocate ReduceAction48 */
-void CHECK_NEW_parser__ReduceAction48(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction48> */
-}
 /* runtime class parser__ReduceAction49 */
 const struct class class_parser__ReduceAction49 = {
 0, /* box_kind */
@@ -7766,11 +7635,6 @@ self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser__ReduceAction49;
 return self;
-}
-/* allocate ReduceAction49 */
-void CHECK_NEW_parser__ReduceAction49(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction49> */
 }
 /* runtime class parser__ReduceAction50 */
 const struct class class_parser__ReduceAction50 = {
@@ -7831,11 +7695,6 @@ self->type = type;
 self->class = &class_parser__ReduceAction50;
 return self;
 }
-/* allocate ReduceAction50 */
-void CHECK_NEW_parser__ReduceAction50(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction50> */
-}
 /* runtime class parser__ReduceAction51 */
 const struct class class_parser__ReduceAction51 = {
 0, /* box_kind */
@@ -7894,11 +7753,6 @@ self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser__ReduceAction51;
 return self;
-}
-/* allocate ReduceAction51 */
-void CHECK_NEW_parser__ReduceAction51(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction51> */
 }
 /* runtime class parser__ReduceAction52 */
 const struct class class_parser__ReduceAction52 = {
@@ -7959,11 +7813,6 @@ self->type = type;
 self->class = &class_parser__ReduceAction52;
 return self;
 }
-/* allocate ReduceAction52 */
-void CHECK_NEW_parser__ReduceAction52(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction52> */
-}
 /* runtime class parser__ReduceAction53 */
 const struct class class_parser__ReduceAction53 = {
 0, /* box_kind */
@@ -8022,11 +7871,6 @@ self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser__ReduceAction53;
 return self;
-}
-/* allocate ReduceAction53 */
-void CHECK_NEW_parser__ReduceAction53(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction53> */
 }
 /* runtime class parser__ReduceAction54 */
 const struct class class_parser__ReduceAction54 = {
@@ -8087,11 +7931,6 @@ self->type = type;
 self->class = &class_parser__ReduceAction54;
 return self;
 }
-/* allocate ReduceAction54 */
-void CHECK_NEW_parser__ReduceAction54(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction54> */
-}
 /* runtime class parser__ReduceAction55 */
 const struct class class_parser__ReduceAction55 = {
 0, /* box_kind */
@@ -8150,11 +7989,6 @@ self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser__ReduceAction55;
 return self;
-}
-/* allocate ReduceAction55 */
-void CHECK_NEW_parser__ReduceAction55(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction55> */
 }
 /* runtime class parser__ReduceAction56 */
 const struct class class_parser__ReduceAction56 = {
@@ -8215,11 +8049,6 @@ self->type = type;
 self->class = &class_parser__ReduceAction56;
 return self;
 }
-/* allocate ReduceAction56 */
-void CHECK_NEW_parser__ReduceAction56(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction56> */
-}
 /* runtime class parser__ReduceAction57 */
 const struct class class_parser__ReduceAction57 = {
 0, /* box_kind */
@@ -8278,11 +8107,6 @@ self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser__ReduceAction57;
 return self;
-}
-/* allocate ReduceAction57 */
-void CHECK_NEW_parser__ReduceAction57(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction57> */
 }
 /* runtime class parser__ReduceAction58 */
 const struct class class_parser__ReduceAction58 = {
@@ -8343,11 +8167,6 @@ self->type = type;
 self->class = &class_parser__ReduceAction58;
 return self;
 }
-/* allocate ReduceAction58 */
-void CHECK_NEW_parser__ReduceAction58(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction58> */
-}
 /* runtime class parser__ReduceAction59 */
 const struct class class_parser__ReduceAction59 = {
 0, /* box_kind */
@@ -8406,11 +8225,6 @@ self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser__ReduceAction59;
 return self;
-}
-/* allocate ReduceAction59 */
-void CHECK_NEW_parser__ReduceAction59(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction59> */
 }
 /* runtime class parser__ReduceAction60 */
 const struct class class_parser__ReduceAction60 = {
@@ -8471,11 +8285,6 @@ self->type = type;
 self->class = &class_parser__ReduceAction60;
 return self;
 }
-/* allocate ReduceAction60 */
-void CHECK_NEW_parser__ReduceAction60(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction60> */
-}
 /* runtime class parser__ReduceAction61 */
 const struct class class_parser__ReduceAction61 = {
 0, /* box_kind */
@@ -8534,11 +8343,6 @@ self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser__ReduceAction61;
 return self;
-}
-/* allocate ReduceAction61 */
-void CHECK_NEW_parser__ReduceAction61(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction61> */
 }
 /* runtime class parser__ReduceAction62 */
 const struct class class_parser__ReduceAction62 = {
@@ -8599,11 +8403,6 @@ self->type = type;
 self->class = &class_parser__ReduceAction62;
 return self;
 }
-/* allocate ReduceAction62 */
-void CHECK_NEW_parser__ReduceAction62(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction62> */
-}
 /* runtime class parser__ReduceAction63 */
 const struct class class_parser__ReduceAction63 = {
 0, /* box_kind */
@@ -8662,11 +8461,6 @@ self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser__ReduceAction63;
 return self;
-}
-/* allocate ReduceAction63 */
-void CHECK_NEW_parser__ReduceAction63(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction63> */
 }
 /* runtime class parser__ReduceAction64 */
 const struct class class_parser__ReduceAction64 = {
@@ -8727,11 +8521,6 @@ self->type = type;
 self->class = &class_parser__ReduceAction64;
 return self;
 }
-/* allocate ReduceAction64 */
-void CHECK_NEW_parser__ReduceAction64(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction64> */
-}
 /* runtime class parser__ReduceAction65 */
 const struct class class_parser__ReduceAction65 = {
 0, /* box_kind */
@@ -8790,11 +8579,6 @@ self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser__ReduceAction65;
 return self;
-}
-/* allocate ReduceAction65 */
-void CHECK_NEW_parser__ReduceAction65(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction65> */
 }
 /* runtime class parser__ReduceAction66 */
 const struct class class_parser__ReduceAction66 = {
@@ -8855,11 +8639,6 @@ self->type = type;
 self->class = &class_parser__ReduceAction66;
 return self;
 }
-/* allocate ReduceAction66 */
-void CHECK_NEW_parser__ReduceAction66(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction66> */
-}
 /* runtime class parser__ReduceAction67 */
 const struct class class_parser__ReduceAction67 = {
 0, /* box_kind */
@@ -8918,11 +8697,6 @@ self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser__ReduceAction67;
 return self;
-}
-/* allocate ReduceAction67 */
-void CHECK_NEW_parser__ReduceAction67(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction67> */
 }
 /* runtime class parser__ReduceAction68 */
 const struct class class_parser__ReduceAction68 = {
@@ -8983,11 +8757,6 @@ self->type = type;
 self->class = &class_parser__ReduceAction68;
 return self;
 }
-/* allocate ReduceAction68 */
-void CHECK_NEW_parser__ReduceAction68(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction68> */
-}
 /* runtime class parser__ReduceAction69 */
 const struct class class_parser__ReduceAction69 = {
 0, /* box_kind */
@@ -9046,11 +8815,6 @@ self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser__ReduceAction69;
 return self;
-}
-/* allocate ReduceAction69 */
-void CHECK_NEW_parser__ReduceAction69(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction69> */
 }
 /* runtime class parser__ReduceAction70 */
 const struct class class_parser__ReduceAction70 = {
@@ -9111,11 +8875,6 @@ self->type = type;
 self->class = &class_parser__ReduceAction70;
 return self;
 }
-/* allocate ReduceAction70 */
-void CHECK_NEW_parser__ReduceAction70(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction70> */
-}
 /* runtime class parser__ReduceAction71 */
 const struct class class_parser__ReduceAction71 = {
 0, /* box_kind */
@@ -9174,11 +8933,6 @@ self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser__ReduceAction71;
 return self;
-}
-/* allocate ReduceAction71 */
-void CHECK_NEW_parser__ReduceAction71(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction71> */
 }
 /* runtime class parser__ReduceAction73 */
 const struct class class_parser__ReduceAction73 = {
@@ -9239,11 +8993,6 @@ self->type = type;
 self->class = &class_parser__ReduceAction73;
 return self;
 }
-/* allocate ReduceAction73 */
-void CHECK_NEW_parser__ReduceAction73(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction73> */
-}
 /* runtime class parser__ReduceAction74 */
 const struct class class_parser__ReduceAction74 = {
 0, /* box_kind */
@@ -9302,11 +9051,6 @@ self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser__ReduceAction74;
 return self;
-}
-/* allocate ReduceAction74 */
-void CHECK_NEW_parser__ReduceAction74(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction74> */
 }
 /* runtime class parser__ReduceAction75 */
 const struct class class_parser__ReduceAction75 = {
@@ -9367,11 +9111,6 @@ self->type = type;
 self->class = &class_parser__ReduceAction75;
 return self;
 }
-/* allocate ReduceAction75 */
-void CHECK_NEW_parser__ReduceAction75(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction75> */
-}
 /* runtime class parser__ReduceAction76 */
 const struct class class_parser__ReduceAction76 = {
 0, /* box_kind */
@@ -9430,11 +9169,6 @@ self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser__ReduceAction76;
 return self;
-}
-/* allocate ReduceAction76 */
-void CHECK_NEW_parser__ReduceAction76(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction76> */
 }
 /* runtime class parser__ReduceAction78 */
 const struct class class_parser__ReduceAction78 = {
@@ -9495,11 +9229,6 @@ self->type = type;
 self->class = &class_parser__ReduceAction78;
 return self;
 }
-/* allocate ReduceAction78 */
-void CHECK_NEW_parser__ReduceAction78(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction78> */
-}
 /* runtime class parser__ReduceAction79 */
 const struct class class_parser__ReduceAction79 = {
 0, /* box_kind */
@@ -9558,11 +9287,6 @@ self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser__ReduceAction79;
 return self;
-}
-/* allocate ReduceAction79 */
-void CHECK_NEW_parser__ReduceAction79(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction79> */
 }
 /* runtime class parser__ReduceAction81 */
 const struct class class_parser__ReduceAction81 = {
@@ -9623,11 +9347,6 @@ self->type = type;
 self->class = &class_parser__ReduceAction81;
 return self;
 }
-/* allocate ReduceAction81 */
-void CHECK_NEW_parser__ReduceAction81(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction81> */
-}
 /* runtime class parser__ReduceAction82 */
 const struct class class_parser__ReduceAction82 = {
 0, /* box_kind */
@@ -9686,11 +9405,6 @@ self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser__ReduceAction82;
 return self;
-}
-/* allocate ReduceAction82 */
-void CHECK_NEW_parser__ReduceAction82(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction82> */
 }
 /* runtime class parser__ReduceAction83 */
 const struct class class_parser__ReduceAction83 = {
@@ -9751,11 +9465,6 @@ self->type = type;
 self->class = &class_parser__ReduceAction83;
 return self;
 }
-/* allocate ReduceAction83 */
-void CHECK_NEW_parser__ReduceAction83(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction83> */
-}
 /* runtime class parser__ReduceAction84 */
 const struct class class_parser__ReduceAction84 = {
 0, /* box_kind */
@@ -9814,11 +9523,6 @@ self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
 self->type = type;
 self->class = &class_parser__ReduceAction84;
 return self;
-}
-/* allocate ReduceAction84 */
-void CHECK_NEW_parser__ReduceAction84(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction84> */
 }
 /* runtime class parser__ReduceAction86 */
 const struct class class_parser__ReduceAction86 = {
@@ -9879,11 +9583,6 @@ self->type = type;
 self->class = &class_parser__ReduceAction86;
 return self;
 }
-/* allocate ReduceAction86 */
-void CHECK_NEW_parser__ReduceAction86(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction86> */
-}
 /* runtime class parser__ReduceAction87 */
 const struct class class_parser__ReduceAction87 = {
 0, /* box_kind */
@@ -9943,8 +9642,357 @@ self->type = type;
 self->class = &class_parser__ReduceAction87;
 return self;
 }
-/* allocate ReduceAction87 */
-void CHECK_NEW_parser__ReduceAction87(val* self) {
-long var /* : Int */;
-var = self->attrs[COLOR_parser__ReduceAction___goto].l; /* _goto on <self:ReduceAction87> */
+/* runtime class parser__ReduceAction89 */
+const struct class class_parser__ReduceAction89 = {
+0, /* box_kind */
+{
+(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction89:kernel#Object#object_id */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction89:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction89:kernel#Object#is_same_instance */
+(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction89:kernel#Object#== */
+(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction89:kernel#Object#!= */
+(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction89:kernel#Object#output */
+(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to parser:ReduceAction89:kernel#Object#output_class_name */
+(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to parser:ReduceAction89:kernel#Object#exit */
+(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to parser:ReduceAction89:kernel#Object#sys */
+(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to parser:ReduceAction89:kernel#Object#hash */
+(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to parser:ReduceAction89:string#Object#to_s */
+(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to parser:ReduceAction89:string#Object#native_class_name */
+(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to parser:ReduceAction89:string#Object#class_name */
+(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to parser:ReduceAction89:string#Object#inspect */
+(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to parser:ReduceAction89:string#Object#inspect_head */
+(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to parser:ReduceAction89:string#Object#args */
+(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to parser:ReduceAction89:math#Object#atan2 */
+(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to parser:ReduceAction89:math#Object#pi */
+(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to parser:ReduceAction89:math#Object#srand_from */
+(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to parser:ReduceAction89:math#Object#srand */
+(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to parser:ReduceAction89:stream#Object#poll */
+(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to parser:ReduceAction89:stream#Object#intern_poll */
+(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to parser:ReduceAction89:time#Object#get_time */
+(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to parser:ReduceAction89:file#Object#printn */
+(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to parser:ReduceAction89:file#Object#print */
+(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to parser:ReduceAction89:file#Object#getc */
+(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to parser:ReduceAction89:file#Object#gets */
+(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to parser:ReduceAction89:file#Object#getcwd */
+(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to parser:ReduceAction89:file#Object#file_getcwd */
+(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to parser:ReduceAction89:file#Object#stdin */
+(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to parser:ReduceAction89:file#Object#stdout */
+(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to parser:ReduceAction89:file#Object#stderr */
+(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to parser:ReduceAction89:model_base#Object#intrude_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to parser:ReduceAction89:model_base#Object#public_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to parser:ReduceAction89:model_base#Object#protected_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to parser:ReduceAction89:model_base#Object#private_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to parser:ReduceAction89:model_base#Object#none_visibility */
+(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to parser:ReduceAction89:model#Object#abstract_kind */
+(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to parser:ReduceAction89:model#Object#concrete_kind */
+(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to parser:ReduceAction89:model#Object#interface_kind */
+(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to parser:ReduceAction89:model#Object#enum_kind */
+(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to parser:ReduceAction89:model#Object#extern_kind */
+(nitmethod_t)VIRTUAL_parser__ReduceAction89__action, /* pointer to parser:ReduceAction89:parser#ReduceAction89#action */
+(nitmethod_t)VIRTUAL_parser__ReduceAction__concat, /* pointer to parser:ReduceAction89:parser#ReduceAction#concat */
+(nitmethod_t)VIRTUAL_parser__ReduceAction__init, /* pointer to parser:ReduceAction89:parser#ReduceAction#init */
+}
+};
+/* allocate ReduceAction89 */
+val* NEW_parser__ReduceAction89(const struct type* type) {
+val* self /* : ReduceAction89 */;
+self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
+self->type = type;
+self->class = &class_parser__ReduceAction89;
+return self;
+}
+/* runtime class parser__ReduceAction90 */
+const struct class class_parser__ReduceAction90 = {
+0, /* box_kind */
+{
+(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction90:kernel#Object#object_id */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction90:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction90:kernel#Object#is_same_instance */
+(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction90:kernel#Object#== */
+(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction90:kernel#Object#!= */
+(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction90:kernel#Object#output */
+(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to parser:ReduceAction90:kernel#Object#output_class_name */
+(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to parser:ReduceAction90:kernel#Object#exit */
+(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to parser:ReduceAction90:kernel#Object#sys */
+(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to parser:ReduceAction90:kernel#Object#hash */
+(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to parser:ReduceAction90:string#Object#to_s */
+(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to parser:ReduceAction90:string#Object#native_class_name */
+(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to parser:ReduceAction90:string#Object#class_name */
+(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to parser:ReduceAction90:string#Object#inspect */
+(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to parser:ReduceAction90:string#Object#inspect_head */
+(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to parser:ReduceAction90:string#Object#args */
+(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to parser:ReduceAction90:math#Object#atan2 */
+(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to parser:ReduceAction90:math#Object#pi */
+(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to parser:ReduceAction90:math#Object#srand_from */
+(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to parser:ReduceAction90:math#Object#srand */
+(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to parser:ReduceAction90:stream#Object#poll */
+(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to parser:ReduceAction90:stream#Object#intern_poll */
+(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to parser:ReduceAction90:time#Object#get_time */
+(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to parser:ReduceAction90:file#Object#printn */
+(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to parser:ReduceAction90:file#Object#print */
+(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to parser:ReduceAction90:file#Object#getc */
+(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to parser:ReduceAction90:file#Object#gets */
+(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to parser:ReduceAction90:file#Object#getcwd */
+(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to parser:ReduceAction90:file#Object#file_getcwd */
+(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to parser:ReduceAction90:file#Object#stdin */
+(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to parser:ReduceAction90:file#Object#stdout */
+(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to parser:ReduceAction90:file#Object#stderr */
+(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to parser:ReduceAction90:model_base#Object#intrude_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to parser:ReduceAction90:model_base#Object#public_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to parser:ReduceAction90:model_base#Object#protected_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to parser:ReduceAction90:model_base#Object#private_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to parser:ReduceAction90:model_base#Object#none_visibility */
+(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to parser:ReduceAction90:model#Object#abstract_kind */
+(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to parser:ReduceAction90:model#Object#concrete_kind */
+(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to parser:ReduceAction90:model#Object#interface_kind */
+(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to parser:ReduceAction90:model#Object#enum_kind */
+(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to parser:ReduceAction90:model#Object#extern_kind */
+(nitmethod_t)VIRTUAL_parser__ReduceAction90__action, /* pointer to parser:ReduceAction90:parser#ReduceAction90#action */
+(nitmethod_t)VIRTUAL_parser__ReduceAction__concat, /* pointer to parser:ReduceAction90:parser#ReduceAction#concat */
+(nitmethod_t)VIRTUAL_parser__ReduceAction__init, /* pointer to parser:ReduceAction90:parser#ReduceAction#init */
+}
+};
+/* allocate ReduceAction90 */
+val* NEW_parser__ReduceAction90(const struct type* type) {
+val* self /* : ReduceAction90 */;
+self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
+self->type = type;
+self->class = &class_parser__ReduceAction90;
+return self;
+}
+/* runtime class parser__ReduceAction91 */
+const struct class class_parser__ReduceAction91 = {
+0, /* box_kind */
+{
+(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction91:kernel#Object#object_id */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction91:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction91:kernel#Object#is_same_instance */
+(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction91:kernel#Object#== */
+(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction91:kernel#Object#!= */
+(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction91:kernel#Object#output */
+(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to parser:ReduceAction91:kernel#Object#output_class_name */
+(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to parser:ReduceAction91:kernel#Object#exit */
+(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to parser:ReduceAction91:kernel#Object#sys */
+(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to parser:ReduceAction91:kernel#Object#hash */
+(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to parser:ReduceAction91:string#Object#to_s */
+(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to parser:ReduceAction91:string#Object#native_class_name */
+(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to parser:ReduceAction91:string#Object#class_name */
+(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to parser:ReduceAction91:string#Object#inspect */
+(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to parser:ReduceAction91:string#Object#inspect_head */
+(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to parser:ReduceAction91:string#Object#args */
+(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to parser:ReduceAction91:math#Object#atan2 */
+(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to parser:ReduceAction91:math#Object#pi */
+(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to parser:ReduceAction91:math#Object#srand_from */
+(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to parser:ReduceAction91:math#Object#srand */
+(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to parser:ReduceAction91:stream#Object#poll */
+(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to parser:ReduceAction91:stream#Object#intern_poll */
+(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to parser:ReduceAction91:time#Object#get_time */
+(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to parser:ReduceAction91:file#Object#printn */
+(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to parser:ReduceAction91:file#Object#print */
+(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to parser:ReduceAction91:file#Object#getc */
+(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to parser:ReduceAction91:file#Object#gets */
+(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to parser:ReduceAction91:file#Object#getcwd */
+(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to parser:ReduceAction91:file#Object#file_getcwd */
+(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to parser:ReduceAction91:file#Object#stdin */
+(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to parser:ReduceAction91:file#Object#stdout */
+(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to parser:ReduceAction91:file#Object#stderr */
+(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to parser:ReduceAction91:model_base#Object#intrude_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to parser:ReduceAction91:model_base#Object#public_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to parser:ReduceAction91:model_base#Object#protected_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to parser:ReduceAction91:model_base#Object#private_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to parser:ReduceAction91:model_base#Object#none_visibility */
+(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to parser:ReduceAction91:model#Object#abstract_kind */
+(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to parser:ReduceAction91:model#Object#concrete_kind */
+(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to parser:ReduceAction91:model#Object#interface_kind */
+(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to parser:ReduceAction91:model#Object#enum_kind */
+(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to parser:ReduceAction91:model#Object#extern_kind */
+(nitmethod_t)VIRTUAL_parser__ReduceAction91__action, /* pointer to parser:ReduceAction91:parser#ReduceAction91#action */
+(nitmethod_t)VIRTUAL_parser__ReduceAction__concat, /* pointer to parser:ReduceAction91:parser#ReduceAction#concat */
+(nitmethod_t)VIRTUAL_parser__ReduceAction__init, /* pointer to parser:ReduceAction91:parser#ReduceAction#init */
+}
+};
+/* allocate ReduceAction91 */
+val* NEW_parser__ReduceAction91(const struct type* type) {
+val* self /* : ReduceAction91 */;
+self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
+self->type = type;
+self->class = &class_parser__ReduceAction91;
+return self;
+}
+/* runtime class parser__ReduceAction92 */
+const struct class class_parser__ReduceAction92 = {
+0, /* box_kind */
+{
+(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction92:kernel#Object#object_id */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction92:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction92:kernel#Object#is_same_instance */
+(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction92:kernel#Object#== */
+(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction92:kernel#Object#!= */
+(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction92:kernel#Object#output */
+(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to parser:ReduceAction92:kernel#Object#output_class_name */
+(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to parser:ReduceAction92:kernel#Object#exit */
+(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to parser:ReduceAction92:kernel#Object#sys */
+(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to parser:ReduceAction92:kernel#Object#hash */
+(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to parser:ReduceAction92:string#Object#to_s */
+(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to parser:ReduceAction92:string#Object#native_class_name */
+(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to parser:ReduceAction92:string#Object#class_name */
+(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to parser:ReduceAction92:string#Object#inspect */
+(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to parser:ReduceAction92:string#Object#inspect_head */
+(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to parser:ReduceAction92:string#Object#args */
+(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to parser:ReduceAction92:math#Object#atan2 */
+(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to parser:ReduceAction92:math#Object#pi */
+(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to parser:ReduceAction92:math#Object#srand_from */
+(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to parser:ReduceAction92:math#Object#srand */
+(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to parser:ReduceAction92:stream#Object#poll */
+(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to parser:ReduceAction92:stream#Object#intern_poll */
+(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to parser:ReduceAction92:time#Object#get_time */
+(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to parser:ReduceAction92:file#Object#printn */
+(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to parser:ReduceAction92:file#Object#print */
+(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to parser:ReduceAction92:file#Object#getc */
+(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to parser:ReduceAction92:file#Object#gets */
+(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to parser:ReduceAction92:file#Object#getcwd */
+(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to parser:ReduceAction92:file#Object#file_getcwd */
+(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to parser:ReduceAction92:file#Object#stdin */
+(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to parser:ReduceAction92:file#Object#stdout */
+(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to parser:ReduceAction92:file#Object#stderr */
+(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to parser:ReduceAction92:model_base#Object#intrude_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to parser:ReduceAction92:model_base#Object#public_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to parser:ReduceAction92:model_base#Object#protected_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to parser:ReduceAction92:model_base#Object#private_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to parser:ReduceAction92:model_base#Object#none_visibility */
+(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to parser:ReduceAction92:model#Object#abstract_kind */
+(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to parser:ReduceAction92:model#Object#concrete_kind */
+(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to parser:ReduceAction92:model#Object#interface_kind */
+(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to parser:ReduceAction92:model#Object#enum_kind */
+(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to parser:ReduceAction92:model#Object#extern_kind */
+(nitmethod_t)VIRTUAL_parser__ReduceAction92__action, /* pointer to parser:ReduceAction92:parser#ReduceAction92#action */
+(nitmethod_t)VIRTUAL_parser__ReduceAction__concat, /* pointer to parser:ReduceAction92:parser#ReduceAction#concat */
+(nitmethod_t)VIRTUAL_parser__ReduceAction__init, /* pointer to parser:ReduceAction92:parser#ReduceAction#init */
+}
+};
+/* allocate ReduceAction92 */
+val* NEW_parser__ReduceAction92(const struct type* type) {
+val* self /* : ReduceAction92 */;
+self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
+self->type = type;
+self->class = &class_parser__ReduceAction92;
+return self;
+}
+/* runtime class parser__ReduceAction94 */
+const struct class class_parser__ReduceAction94 = {
+0, /* box_kind */
+{
+(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction94:kernel#Object#object_id */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction94:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction94:kernel#Object#is_same_instance */
+(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction94:kernel#Object#== */
+(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction94:kernel#Object#!= */
+(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction94:kernel#Object#output */
+(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to parser:ReduceAction94:kernel#Object#output_class_name */
+(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to parser:ReduceAction94:kernel#Object#exit */
+(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to parser:ReduceAction94:kernel#Object#sys */
+(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to parser:ReduceAction94:kernel#Object#hash */
+(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to parser:ReduceAction94:string#Object#to_s */
+(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to parser:ReduceAction94:string#Object#native_class_name */
+(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to parser:ReduceAction94:string#Object#class_name */
+(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to parser:ReduceAction94:string#Object#inspect */
+(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to parser:ReduceAction94:string#Object#inspect_head */
+(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to parser:ReduceAction94:string#Object#args */
+(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to parser:ReduceAction94:math#Object#atan2 */
+(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to parser:ReduceAction94:math#Object#pi */
+(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to parser:ReduceAction94:math#Object#srand_from */
+(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to parser:ReduceAction94:math#Object#srand */
+(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to parser:ReduceAction94:stream#Object#poll */
+(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to parser:ReduceAction94:stream#Object#intern_poll */
+(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to parser:ReduceAction94:time#Object#get_time */
+(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to parser:ReduceAction94:file#Object#printn */
+(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to parser:ReduceAction94:file#Object#print */
+(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to parser:ReduceAction94:file#Object#getc */
+(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to parser:ReduceAction94:file#Object#gets */
+(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to parser:ReduceAction94:file#Object#getcwd */
+(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to parser:ReduceAction94:file#Object#file_getcwd */
+(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to parser:ReduceAction94:file#Object#stdin */
+(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to parser:ReduceAction94:file#Object#stdout */
+(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to parser:ReduceAction94:file#Object#stderr */
+(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to parser:ReduceAction94:model_base#Object#intrude_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to parser:ReduceAction94:model_base#Object#public_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to parser:ReduceAction94:model_base#Object#protected_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to parser:ReduceAction94:model_base#Object#private_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to parser:ReduceAction94:model_base#Object#none_visibility */
+(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to parser:ReduceAction94:model#Object#abstract_kind */
+(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to parser:ReduceAction94:model#Object#concrete_kind */
+(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to parser:ReduceAction94:model#Object#interface_kind */
+(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to parser:ReduceAction94:model#Object#enum_kind */
+(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to parser:ReduceAction94:model#Object#extern_kind */
+(nitmethod_t)VIRTUAL_parser__ReduceAction94__action, /* pointer to parser:ReduceAction94:parser#ReduceAction94#action */
+(nitmethod_t)VIRTUAL_parser__ReduceAction__concat, /* pointer to parser:ReduceAction94:parser#ReduceAction#concat */
+(nitmethod_t)VIRTUAL_parser__ReduceAction__init, /* pointer to parser:ReduceAction94:parser#ReduceAction#init */
+}
+};
+/* allocate ReduceAction94 */
+val* NEW_parser__ReduceAction94(const struct type* type) {
+val* self /* : ReduceAction94 */;
+self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
+self->type = type;
+self->class = &class_parser__ReduceAction94;
+return self;
+}
+/* runtime class parser__ReduceAction95 */
+const struct class class_parser__ReduceAction95 = {
+0, /* box_kind */
+{
+(nitmethod_t)VIRTUAL_kernel__Object__object_id, /* pointer to parser:ReduceAction95:kernel#Object#object_id */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_type, /* pointer to parser:ReduceAction95:kernel#Object#is_same_type */
+(nitmethod_t)VIRTUAL_kernel__Object__is_same_instance, /* pointer to parser:ReduceAction95:kernel#Object#is_same_instance */
+(nitmethod_t)VIRTUAL_kernel__Object___61d_61d, /* pointer to parser:ReduceAction95:kernel#Object#== */
+(nitmethod_t)VIRTUAL_kernel__Object___33d_61d, /* pointer to parser:ReduceAction95:kernel#Object#!= */
+(nitmethod_t)VIRTUAL_kernel__Object__output, /* pointer to parser:ReduceAction95:kernel#Object#output */
+(nitmethod_t)VIRTUAL_kernel__Object__output_class_name, /* pointer to parser:ReduceAction95:kernel#Object#output_class_name */
+(nitmethod_t)VIRTUAL_kernel__Object__exit, /* pointer to parser:ReduceAction95:kernel#Object#exit */
+(nitmethod_t)VIRTUAL_kernel__Object__sys, /* pointer to parser:ReduceAction95:kernel#Object#sys */
+(nitmethod_t)VIRTUAL_kernel__Object__hash, /* pointer to parser:ReduceAction95:kernel#Object#hash */
+(nitmethod_t)VIRTUAL_string__Object__to_s, /* pointer to parser:ReduceAction95:string#Object#to_s */
+(nitmethod_t)VIRTUAL_string__Object__native_class_name, /* pointer to parser:ReduceAction95:string#Object#native_class_name */
+(nitmethod_t)VIRTUAL_string__Object__class_name, /* pointer to parser:ReduceAction95:string#Object#class_name */
+(nitmethod_t)VIRTUAL_string__Object__inspect, /* pointer to parser:ReduceAction95:string#Object#inspect */
+(nitmethod_t)VIRTUAL_string__Object__inspect_head, /* pointer to parser:ReduceAction95:string#Object#inspect_head */
+(nitmethod_t)VIRTUAL_string__Object__args, /* pointer to parser:ReduceAction95:string#Object#args */
+(nitmethod_t)VIRTUAL_math__Object__atan2, /* pointer to parser:ReduceAction95:math#Object#atan2 */
+(nitmethod_t)VIRTUAL_math__Object__pi, /* pointer to parser:ReduceAction95:math#Object#pi */
+(nitmethod_t)VIRTUAL_math__Object__srand_from, /* pointer to parser:ReduceAction95:math#Object#srand_from */
+(nitmethod_t)VIRTUAL_math__Object__srand, /* pointer to parser:ReduceAction95:math#Object#srand */
+(nitmethod_t)VIRTUAL_stream__Object__poll, /* pointer to parser:ReduceAction95:stream#Object#poll */
+(nitmethod_t)VIRTUAL_stream__Object__intern_poll, /* pointer to parser:ReduceAction95:stream#Object#intern_poll */
+(nitmethod_t)VIRTUAL_time__Object__get_time, /* pointer to parser:ReduceAction95:time#Object#get_time */
+(nitmethod_t)VIRTUAL_file__Object__printn, /* pointer to parser:ReduceAction95:file#Object#printn */
+(nitmethod_t)VIRTUAL_file__Object__print, /* pointer to parser:ReduceAction95:file#Object#print */
+(nitmethod_t)VIRTUAL_file__Object__getc, /* pointer to parser:ReduceAction95:file#Object#getc */
+(nitmethod_t)VIRTUAL_file__Object__gets, /* pointer to parser:ReduceAction95:file#Object#gets */
+(nitmethod_t)VIRTUAL_file__Object__getcwd, /* pointer to parser:ReduceAction95:file#Object#getcwd */
+(nitmethod_t)VIRTUAL_file__Object__file_getcwd, /* pointer to parser:ReduceAction95:file#Object#file_getcwd */
+(nitmethod_t)VIRTUAL_file__Object__stdin, /* pointer to parser:ReduceAction95:file#Object#stdin */
+(nitmethod_t)VIRTUAL_file__Object__stdout, /* pointer to parser:ReduceAction95:file#Object#stdout */
+(nitmethod_t)VIRTUAL_file__Object__stderr, /* pointer to parser:ReduceAction95:file#Object#stderr */
+(nitmethod_t)VIRTUAL_model_base__Object__intrude_visibility, /* pointer to parser:ReduceAction95:model_base#Object#intrude_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__public_visibility, /* pointer to parser:ReduceAction95:model_base#Object#public_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__protected_visibility, /* pointer to parser:ReduceAction95:model_base#Object#protected_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__private_visibility, /* pointer to parser:ReduceAction95:model_base#Object#private_visibility */
+(nitmethod_t)VIRTUAL_model_base__Object__none_visibility, /* pointer to parser:ReduceAction95:model_base#Object#none_visibility */
+(nitmethod_t)VIRTUAL_model__Object__abstract_kind, /* pointer to parser:ReduceAction95:model#Object#abstract_kind */
+(nitmethod_t)VIRTUAL_model__Object__concrete_kind, /* pointer to parser:ReduceAction95:model#Object#concrete_kind */
+(nitmethod_t)VIRTUAL_model__Object__interface_kind, /* pointer to parser:ReduceAction95:model#Object#interface_kind */
+(nitmethod_t)VIRTUAL_model__Object__enum_kind, /* pointer to parser:ReduceAction95:model#Object#enum_kind */
+(nitmethod_t)VIRTUAL_model__Object__extern_kind, /* pointer to parser:ReduceAction95:model#Object#extern_kind */
+(nitmethod_t)VIRTUAL_parser__ReduceAction95__action, /* pointer to parser:ReduceAction95:parser#ReduceAction95#action */
+(nitmethod_t)VIRTUAL_parser__ReduceAction__concat, /* pointer to parser:ReduceAction95:parser#ReduceAction#concat */
+(nitmethod_t)VIRTUAL_parser__ReduceAction__init, /* pointer to parser:ReduceAction95:parser#ReduceAction#init */
+}
+};
+/* allocate ReduceAction95 */
+val* NEW_parser__ReduceAction95(const struct type* type) {
+val* self /* : ReduceAction95 */;
+self = nit_alloc(sizeof(struct instance) + 1*sizeof(nitattribute_t));
+self->type = type;
+self->class = &class_parser__ReduceAction95;
+return self;
 }
