@@ -76,12 +76,12 @@ class BM_Pattern
 		var j = from
 		while j < n - m + 1 do
 			var i = m - 1 # Cursor in the pattern
-			while i >= 0 and _motif[i] == s[i + j] do i -= 1
+			while i >= 0 and _motif.chars[i] == s.chars[i + j] do i -= 1
 			if i < 0 then
 				return j
 			else
 				var gs = _gs[i] # Good shift
-				var bc = bc(s[i+j]) - m + 1 + i # Bad char
+				var bc = bc(s.chars[i+j]) - m + 1 + i # Bad char
 				# Both are true, do move to the best
 				if gs > bc then
 					j += gs
@@ -142,7 +142,7 @@ class BM_Pattern
 		var m = _length
 		var i = 0
 		while i < m - 1 do
-			_bc_table[x[i]] = m - i - 1
+			_bc_table[x.chars[i]] = m - i - 1
 			i += 1
 		end
 	end
@@ -162,7 +162,7 @@ class BM_Pattern
 			else
 				if i < g then g = i
 				f = i
-				while g >= 0 and x[g] == x[g + m - 1 - f] do g -= 1
+				while g >= 0 and x.chars[g] == x.chars[g + m - 1 - f] do g -= 1
 				suff[i] = f - g
 			end
 			i -= 1
@@ -239,7 +239,7 @@ redef class Char
 	do
 		var stop = s.length
 		while from < stop do
-			if s[from] == self then return from
+			if s.chars[from] == self then return from
 			from += 1
 		end
 		return -1
@@ -265,7 +265,7 @@ redef class String
 		var stop = s.length - length + 1
 		while from < stop do
 			var i = length - 1
-			while i >= 0 and self[i] == s[i + from] do i -= 1
+			while i >= 0 and self.chars[i] == s.chars[i + from] do i -= 1
 			# Test if we found
 			if i < 0 then return from
 			# Not found so try next one
@@ -330,10 +330,10 @@ redef class String
 	fun html_escape: String
 	do
 		var ret = self
-		if ret.has('&') then ret = ret.replace('&', "&amp;")
-		if ret.has('<') then ret = ret.replace('<', "&lt;")
-		if ret.has('>') then ret = ret.replace('>', "&gt;")
-		if ret.has('"') then ret = ret.replace('"', "&quot;")
+		if ret.chars.has('&') then ret = ret.replace('&', "&amp;")
+		if ret.chars.has('<') then ret = ret.replace('<', "&lt;")
+		if ret.chars.has('>') then ret = ret.replace('>', "&gt;")
+		if ret.chars.has('"') then ret = ret.replace('"', "&quot;")
 		return ret
 	end
 end

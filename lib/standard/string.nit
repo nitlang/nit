@@ -56,7 +56,7 @@ abstract class AbstractString
 		if from < count then
 			var r = new Buffer.with_capacity(count - from)
 			while from < count do
-				r.push(_items[from])
+				r.chars.push(_items[from])
 				from += 1
 			end
 			return r.to_s
@@ -144,7 +144,7 @@ abstract class AbstractString
 		var i = 0
 		var neg = false
 
-		for c in self
+		for c in self.chars
 		do
 			var v = c.to_i
 			if v > base then
@@ -175,7 +175,7 @@ abstract class AbstractString
 	fun is_numeric: Bool
 	do
 		var has_point_or_comma = false
-		for i in self
+		for i in self.chars
 		do
 			if not i.is_numeric
 			then
@@ -196,7 +196,7 @@ abstract class AbstractString
 	fun to_upper: String
 	do
 		var s = new Buffer.with_capacity(length)
-		for i in self do s.add(i.to_upper)
+		for i in self.chars do s.add(i.to_upper)
 		return s.to_s
 	end
 
@@ -206,7 +206,7 @@ abstract class AbstractString
 	fun to_lower : String
 	do
 		var s = new Buffer.with_capacity(length)
-		for i in self do s.add(i.to_lower)
+		for i in self.chars do s.add(i.to_lower)
 		return s.to_s
 	end
 
@@ -217,18 +217,18 @@ abstract class AbstractString
 	#     assert "\na\nb\tc\t".trim          == "a\nb\tc"
 	fun trim: String
 	do
-		if self._length == 0 then return self.to_s
+		if self.length == 0 then return self.to_s
 		# find position of the first non white space char (ascii < 32) from the start of the string
 		var start_pos = 0
-		while self[start_pos].ascii <= 32 do
+		while self.chars[start_pos].ascii <= 32 do
 			start_pos += 1
-			if start_pos == _length then return ""
+			if start_pos == length then return ""
 		end
 		# find position of the first non white space char from the end of the string
 		var end_pos = length - 1
-		while self[end_pos].ascii <= 32 do
+		while self.chars[end_pos].ascii <= 32 do
 			end_pos -= 1
-			if end_pos == start_pos then return self[start_pos].to_s
+			if end_pos == start_pos then return self.chars[start_pos].to_s
 		end
 		return self.substring(start_pos, end_pos - start_pos + 1)
 	end
@@ -247,7 +247,7 @@ abstract class AbstractString
 	do
 		var res = new Buffer
 		var underscore = false
-		for c in self do
+		for c in self.chars do
 			if (c >= 'a' and c <= 'z') or (c >='A' and c <= 'Z') then
 				res.add(c)
 				underscore = false
@@ -280,7 +280,7 @@ abstract class AbstractString
 	fun escape_to_c: String
 	do
 		var b = new Buffer
-		for c in self do
+		for c in self.chars do
 			if c == '\n' then
 				b.append("\\n")
 			else if c == '\0' then
@@ -819,8 +819,8 @@ class Buffer
 		var l1 = length
 		var l2 = s.length
 		while i < l1 and i < l2 do
-			var c1 = self[i].ascii
-			var c2 = s[i].ascii
+			var c1 = self.chars[i].ascii
+			var c2 = s.chars[i].ascii
 			if c1 < c2 then
 				return true
 			else if c2 < c1 then
@@ -1010,9 +1010,9 @@ redef class Int
 		# Sign
 		if self < 0 then
 			n = - self
-			s[0] = '-'
+			s.chars[0] = '-'
 		else if self == 0 then
-			s[0] = '0'
+			s.chars[0] = '0'
 			return
 		else
 			n = self
@@ -1020,7 +1020,7 @@ redef class Int
 		# Fill digits
 		var pos = digit_count(base) - 1
 		while pos >= 0 and n > 0 do 
-			s[pos] = (n % base).to_c
+			s.chars[pos] = (n % base).to_c
 			n = n / base # /
 			pos -= 1
 		end
@@ -1058,7 +1058,7 @@ redef class Float
 		var len = str.length
 		for i in [0..len-1] do
 			var j = len-1-i
-			var c = str[j]
+			var c = str.chars[j]
 			if c == '0' then
 				continue
 			else if c == '.' then
@@ -1111,7 +1111,7 @@ redef class Char
 	redef fun to_s
 	do
 		var s = new Buffer.with_capacity(1)
-		s[0] = self
+		s.chars[0] = self
 		return s.to_s
 	end
 

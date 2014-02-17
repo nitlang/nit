@@ -34,10 +34,10 @@ print("has_suffix: {s.has_suffix(p)}")
 
 var test = "test"
 
-print("test[0] == 't' => {test[0] == 't'}")
-print("test[1] == 'e' => {test[1] == 'e'}")
-print("test[2] == 's' => {test[2] == 's'}")
-print("test[3] == 't' => {test[3] == 't'}")
+print("test[0] == 't' => {test.chars[0] == 't'}")
+print("test[1] == 'e' => {test.chars[1] == 'e'}")
+print("test[2] == 's' => {test.chars[2] == 's'}")
+print("test[3] == 't' => {test.chars[3] == 't'}")
 
 print("test.substring(0,1) == \"t\" => {test.substring(0,1) == "t"}")
 print("test.substring(0,2) == \"te\" => {test.substring(0,2) == "te"}")

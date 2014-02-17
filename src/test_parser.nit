@@ -45,7 +45,7 @@ var only_lexer = false
 var need_help = false
 var no_file = false
 
-while not args.is_empty and args.first.first == '-' do
+while not args.is_empty and args.first.chars.first == '-' do
 	if args.first == "-n" then
 		no_print = true
 	else if args.first == "-l" then

@@ -174,7 +174,7 @@ class Location
 		var line_start = l.file.line_starts[i-1]
 		var line_end = line_start
 		var string = l.file.string
-		while line_end+1 < string.length and string[line_end+1] != '\n' and string[line_end+1] != '\r' do
+		while line_end+1 < string.length and string.chars[line_end+1] != '\n' and string.chars[line_end+1] != '\r' do
 			line_end += 1
 		end
 		var lstart = string.substring(line_start, l.column_start - 1)
@@ -195,7 +195,7 @@ class Location
 		end
 		var indent = new Buffer
 		for j in [line_start..line_start+l.column_start-1[ do
-			if string[j] == '\t' then
+			if string.chars[j] == '\t' then
 				indent.add '\t'
 			else
 				indent.add ' '

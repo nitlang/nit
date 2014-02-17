@@ -17,7 +17,7 @@ import string
 redef class String
 	redef fun output
 	do
-		for c in self do c.output
+		for c in self.chars do c.output
 	end
 end
 
