@@ -130,11 +130,11 @@ extern GtkProgressBar `{GtkProgressBar *`}
 		gtk_progress_bar_set_show_text( recv, show );
 	`}
 
-	fun text : String is extern import String::to_cstring`{
+	fun text : String is extern import String.to_cstring`{
 		return NativeString_to_s( (char *)gtk_progress_bar_get_text( recv ) );
 	`}
 
-	fun text=( value : String) is extern import String::to_cstring`{
+	fun text=( value : String) is extern import String.to_cstring`{
 		gtk_progress_bar_set_text( recv, String_to_cstring( value ) );
 	`}
 
@@ -144,7 +144,7 @@ end
 
 extern GtkColorSelectionDialog
 	super GtkWidget
-	new ( title : String, parent : GtkWindow ) is extern  import String::to_cstring `{
+	new ( title : String, parent : GtkWindow ) is extern  import String.to_cstring `{
 		 return gtk_color_chooser_dialog_new( String_to_cstring( title ), parent );
 	`}
 

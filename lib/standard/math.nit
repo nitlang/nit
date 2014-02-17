@@ -38,6 +38,7 @@ redef class Float
 	fun acos: Float is extern "kernel_Float_Float_acos_0"
 	fun asin: Float is extern "kernel_Float_Float_asin_0"
 	fun atan: Float is extern "kernel_Float_Float_atan_0"
+	fun abs: Float `{ return abs(recv); `}
 
 	fun pow(e: Float): Float is extern "kernel_Float_Float_pow_1"
 	fun log: Float is extern "kernel_Float_Float_log_0"

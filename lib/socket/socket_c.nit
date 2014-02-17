@@ -114,9 +114,9 @@ extern FFSocket `{ S_DESCRIPTOR* `}
 	fun descriptor: Int `{ return *recv; `}
 	fun errno: Int `{ return errno; `}
 
-	fun gethostbyname(n: String): FFSocketHostent import String::to_cstring `{ return gethostbyname(String_to_cstring(n)); `}
+	fun gethostbyname(n: String): FFSocketHostent import String.to_cstring `{ return gethostbyname(String_to_cstring(n)); `}
 	fun connect(addrIn: FFSocketAddrIn): Int `{ return connect( *recv, (S_ADDR*)addrIn, sizeof(*addrIn) ); `}
-	fun write(buffer: String): Int import String::to_cstring, String::length `{ return write(*recv, (char*)String_to_cstring(buffer), String_length(buffer)); `}
+	fun write(buffer: String): Int import String.to_cstring, String.length `{ return write(*recv, (char*)String_to_cstring(buffer), String_length(buffer)); `}
 
 	fun read: String `{
 		char *c = (char*)malloc(1024);

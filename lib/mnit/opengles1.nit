@@ -462,7 +462,7 @@ extern Opengles1Image in "C" `{struct mnit_opengles_Texture *`}
     redef fun blended: Bool is extern `{ return recv->blended; `}
 
     # inherits scale and blend from source
-    redef fun subimage( x, y, w, h: Int ): Image is extern import Opengles1Image as ( Image ) `{
+    redef fun subimage( x, y, w, h: Int ): Image is extern import Opengles1Image.as( Image ) `{
 		struct mnit_opengles_Texture* image =
 			malloc( sizeof( struct mnit_opengles_Texture ) );
 
