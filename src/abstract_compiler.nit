@@ -22,6 +22,7 @@ import typing
 import auto_super_init
 import frontend
 import common_ffi
+import platform
 
 # Add compiling options
 redef class ToolContext
@@ -84,7 +85,7 @@ redef class ModelBuilder
 	# Simple indirection to `Toolchain::write_and_make`
 	protected fun write_and_make(compiler: AbstractCompiler)
 	do
-		var platform = compiler.mainmodule.target_platform(toolcontext)
+		var platform = compiler.mainmodule.target_platform
 		var toolchain
 		if platform == null then
 			toolchain = new MakefileToolchain(toolcontext)
