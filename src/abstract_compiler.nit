@@ -123,6 +123,31 @@ redef class ModelBuilder
 
 		compile_dir.mkdir
 
+		var cfiles = new Array[String]
+		write_files(compiler, compile_dir, cfiles)
+
+		# Generate the Makefile
+
+		write_makefile(compiler, compile_dir, cfiles)
+
+		var time1 = get_time
+		self.toolcontext.info("*** END WRITING C: {time1-time0} ***", 2)
+
+		# Execute the Makefile
+
+		if self.toolcontext.opt_no_cc.value then return
+
+		time0 = time1
+		self.toolcontext.info("*** COMPILING C ***", 1)
+
+		compile_c_code(compiler, compile_dir)
+
+		time1 = get_time
+		self.toolcontext.info("*** END COMPILING C: {time1-time0} ***", 2)
+	end
+
+	fun write_files(compiler: AbstractCompiler, compile_dir: String, cfiles: Array[String])
+	do
 		if self.toolcontext.opt_stacktrace.value then compiler.build_c_to_nit_bindings
 
 		# Add gc_choser.h to aditionnal bodies
@@ -138,14 +163,6 @@ redef class ModelBuilder
 			src.file_copy_to dst
 		end
 
-		var orig_dir=".." # FIXME only works if `compile_dir` is a subdirectory of cwd
-
-		var outname = self.toolcontext.opt_output.value
-		if outname == null then
-			outname = "{mainmodule.name}"
-		end
-		var outpath = orig_dir.join_path(outname).simplify_path
-
 		var hfilename = compiler.header.file.name + ".h"
 		var hfilepath = "{compile_dir}/{hfilename}"
 		var h = new OFStream.open(hfilepath)
@@ -158,8 +175,6 @@ redef class ModelBuilder
 			h.write "\n"
 		end
 		h.close
-
-		var cfiles = new Array[String]
 
 		for f in compiler.files do
 			var i = 0
@@ -208,10 +223,18 @@ redef class ModelBuilder
 		end
 
 		self.toolcontext.info("Total C source files to compile: {cfiles.length}", 2)
+	end
 
-		# Generate the Makefile
+	fun write_makefile(compiler: AbstractCompiler, compile_dir: String, cfiles: Array[String])
+	do
+		var outname = self.toolcontext.opt_output.value
+		if outname == null then
+			outname = "{compiler.mainmodule.name}"
+		end
 
-		var makename = "{mainmodule.name}.mk"
+		var orig_dir=".." # FIXME only works if `compile_dir` is a subdirectory of cwd
+		var outpath = orig_dir.join_path(outname).simplify_path
+		var makename = "{compiler.mainmodule.name}.mk"
 		var makepath = "{compile_dir}/{makename}"
 		var makefile = new OFStream.open(makepath)
 
@@ -249,16 +272,12 @@ redef class ModelBuilder
 		makefile.write("clean:\n\trm {ofiles.join(" ")} 2>/dev/null\n\n")
 		makefile.close
 		self.toolcontext.info("Generated makefile: {makepath}", 2)
+	end
 
-		var time1 = get_time
-		self.toolcontext.info("*** END WRITING C: {time1-time0} ***", 2)
+	fun compile_c_code(compiler: AbstractCompiler, compile_dir: String)
+	do
+		var makename = "{compiler.mainmodule.name}.mk" # FIXME duplicated from write_makefile
 
-		# Execute the Makefile
-
-		if self.toolcontext.opt_no_cc.value then return
-
-		time0 = time1
-		self.toolcontext.info("*** COMPILING C ***", 1)
 		var makeflags = self.toolcontext.opt_make_flags.value
 		if makeflags == null then makeflags = ""
 		self.toolcontext.info("make -B -C {compile_dir} -f {makename} -j 4 {makeflags}", 2)
@@ -272,9 +291,6 @@ redef class ModelBuilder
 		if res != 0 then
 			toolcontext.error(null, "make failed! Error code: {res}.")
 		end
-
-		time1 = get_time
-		self.toolcontext.info("*** END COMPILING C: {time1-time0} ***", 2)
 	end
 end
 
