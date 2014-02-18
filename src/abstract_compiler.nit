@@ -126,7 +126,7 @@ redef class ModelBuilder
 		if self.toolcontext.opt_stacktrace.value then compiler.build_c_to_nit_bindings
 
 		# Add gc_choser.h to aditionnal bodies
-		var gc_chooser = new ExternCFile("{cc_paths.first}/gc_chooser.c", "-DWITH_LIBGC")
+		var gc_chooser = new ExternCFile("gc_chooser.c", "-DWITH_LIBGC")
 		compiler.extern_bodies.add(gc_chooser)
 		compiler.files_to_copy.add "{cc_paths.first}/gc_chooser.c"
 		compiler.files_to_copy.add "{cc_paths.first}/gc_chooser.h"
@@ -217,7 +217,6 @@ redef class ModelBuilder
 
 		var cc_includes = ""
 		for p in cc_paths do
-			p = orig_dir.join_path(p).simplify_path
 			cc_includes += " -I \"" + p + "\""
 		end
 		if toolcontext.opt_no_stacktrace.value then
@@ -239,7 +238,7 @@ redef class ModelBuilder
 		for f in compiler.extern_bodies do
 			var basename = f.filename.basename(".c")
 			var o = "{basename}.extern.o"
-			var ff = orig_dir.join_path(f.filename).simplify_path
+			var ff = f.filename
 			makefile.write("{o}: {ff}\n\t$(CC) $(CFLAGS) -D NONITCNI {f.cflags} -c -o {o} {ff}\n\n")
 			ofiles.add(o)
 		end
@@ -378,7 +377,7 @@ abstract class AbstractCompiler
 		self.header.add_decl("#include <stdlib.h>")
 		self.header.add_decl("#include <stdio.h>")
 		self.header.add_decl("#include <string.h>")
-		self.header.add_decl("#include <gc_chooser.h>")
+		self.header.add_decl("#include \"gc_chooser.h\"")
 
 		compile_header_structs
 
@@ -988,12 +987,12 @@ abstract class AbstractCompilerVisitor
 		file = file.strip_extension(".nit")
 		var tryfile = file + ".nit.h"
 		if tryfile.file_exists then
-			self.declare_once("#include \"{"..".join_path(tryfile)}\"")
+			self.declare_once("#include \"{tryfile.basename("")}\"")
 			self.compiler.files_to_copy.add(tryfile)
 		end
 		tryfile = file + "_nit.h"
 		if tryfile.file_exists then
-			self.declare_once("#include \"{"..".join_path(tryfile)}\"")
+			self.declare_once("#include \"{tryfile.basename("")}\"")
 			self.compiler.files_to_copy.add(tryfile)
 		end
 
@@ -1004,7 +1003,7 @@ abstract class AbstractCompilerVisitor
 			tryfile = file + "_nit.c"
 			if not tryfile.file_exists then return
 		end
-		var f = new ExternCFile(tryfile, "")
+		var f = new ExternCFile(tryfile.basename(""), "")
 		self.compiler.extern_bodies.add(f)
 		self.compiler.files_to_copy.add(tryfile)
 	end
