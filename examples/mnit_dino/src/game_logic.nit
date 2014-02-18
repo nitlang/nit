@@ -347,6 +347,12 @@ class Javelin
 		else
 			if z <= 0 then
 				hit_ground = true
+				if thrown_angle_xy.cos > 0.0 then
+					angle = pi*5.0/8.0+(pi/4.0).rand
+				else
+					# left of the screen
+					angle = pi*9.0/8.0+(pi/4.0).rand
+				end
 			else
 				# in the air
 				speed_z += gravity
