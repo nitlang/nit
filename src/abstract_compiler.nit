@@ -125,6 +125,10 @@ redef class ModelBuilder
 
 		if self.toolcontext.opt_stacktrace.value then compiler.build_c_to_nit_bindings
 
+		# Add gc_choser.h to aditionnal bodies
+		var gc_chooser = new ExternCFile("{cc_paths.first}/gc_chooser.c", "-DWITH_LIBGC")
+		compiler.extern_bodies.add(gc_chooser)
+
 		# Copy original .[ch] files to compile_dir
 		for src in compiler.files_to_copy do
 			var basename = src.basename("")
@@ -228,10 +232,6 @@ redef class ModelBuilder
 			makefile.write("{o}: {f}\n\t$(CC) $(CFLAGS) $(CINCL) -D NONITCNI -c -o {o} {f}\n\n")
 			ofiles.add(o)
 		end
-
-		# Add gc_choser.h to aditionnal bodies
-		var gc_chooser = new ExternCFile("{cc_paths.first}/gc_chooser.c", "-DWITH_LIBGC")
-		compiler.extern_bodies.add(gc_chooser)
 
 		# Compile each required extern body into a specific .o
 		for f in compiler.extern_bodies do
