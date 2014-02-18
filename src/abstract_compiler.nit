@@ -128,6 +128,8 @@ redef class ModelBuilder
 		# Add gc_choser.h to aditionnal bodies
 		var gc_chooser = new ExternCFile("{cc_paths.first}/gc_chooser.c", "-DWITH_LIBGC")
 		compiler.extern_bodies.add(gc_chooser)
+		compiler.files_to_copy.add "{cc_paths.first}/gc_chooser.c"
+		compiler.files_to_copy.add "{cc_paths.first}/gc_chooser.h"
 
 		# Copy original .[ch] files to compile_dir
 		for src in compiler.files_to_copy do
