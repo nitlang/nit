@@ -1612,12 +1612,12 @@ abstract class MProperty
 				var cd2 = pd2.mclassdef
 				var c2 = cd2.mclass
 				if c2.mclass_type == c1.mclass_type then
-					if cd2.mmodule.in_importation <= cd1.mmodule then
+					if cd2.mmodule.in_importation < cd1.mmodule then
 						# cd2 refines cd1; therefore we skip pd1
 						keep = false
 						break
 					end
-				else if cd2.bound_mtype.is_subtype(mmodule, null, cd1.bound_mtype) then
+				else if cd2.bound_mtype.is_subtype(mmodule, null, cd1.bound_mtype) and cd2.bound_mtype != cd1.bound_mtype then
 					# cd2 < cd1; therefore we skip pd1
 					keep = false
 					break
