@@ -508,6 +508,9 @@ abstract class AbstractCompiler
 	# List of additional .c files required to compile (native interface)
 	var extern_bodies = new Array[ExternCFile]
 
+	# List of source files to copy over to the compile dir
+	var files_to_copy = new Array[String]
+
 	# This is used to avoid adding an extern file more than once
 	private var seen_extern = new ArraySet[String]
 
@@ -977,10 +980,12 @@ abstract class AbstractCompilerVisitor
 		var tryfile = file + ".nit.h"
 		if tryfile.file_exists then
 			self.declare_once("#include \"{"..".join_path(tryfile)}\"")
+			self.compiler.files_to_copy.add(tryfile)
 		end
 		tryfile = file + "_nit.h"
 		if tryfile.file_exists then
 			self.declare_once("#include \"{"..".join_path(tryfile)}\"")
+			self.compiler.files_to_copy.add(tryfile)
 		end
 
 		if self.compiler.seen_extern.has(file) then return
@@ -992,6 +997,7 @@ abstract class AbstractCompilerVisitor
 		end
 		var f = new ExternCFile(tryfile, "")
 		self.compiler.extern_bodies.add(f)
+		self.compiler.files_to_copy.add(tryfile)
 	end
 
 	# Return a new local runtime_variable initialized with the C expression `cexpr`.
