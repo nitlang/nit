@@ -235,11 +235,11 @@ abstract class NitdocPage
 
 	protected fun head do
 		append("<meta charset='utf-8'/>")
-		append("<link rel='stylesheet' href='{shareurl}/styles/main.css' type='text/css' media='screen'/>")
-		append("<link rel='stylesheet' href='{shareurl}/styles/Nitdoc.UI.css' type='text/css' media='screen'/>")
-		append("<link rel='stylesheet' href='{shareurl}/styles/Nitdoc.QuickSearch.css' type='text/css' media='screen'/>")
-		append("<link rel='stylesheet' href='{shareurl}/styles/Nitdoc.GitHub.css' type='text/css' media='screen'/>")
-		append("<link rel='stylesheet' href='{shareurl}/styles/Nitdoc.ModalBox.css' type='text/css' media='screen'/>")
+		append("<link rel='stylesheet' href='{shareurl}/css/main.css' type='text/css'/>")
+		append("<link rel='stylesheet' href='{shareurl}/css/Nitdoc.UI.css' type='text/css''/>")
+		append("<link rel='stylesheet' href='{shareurl}/css/Nitdoc.QuickSearch.css' type='text/css'/>")
+		append("<link rel='stylesheet' href='{shareurl}/css/Nitdoc.GitHub.css' type='text/css'/>")
+		append("<link rel='stylesheet' href='{shareurl}/css/Nitdoc.ModalBox.css' type='text/css'/>")
 		var title = ""
 		if ctx.opt_custom_title.value != null then
 			title = " | {ctx.opt_custom_title.value.to_s}"

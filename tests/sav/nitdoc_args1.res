@@ -4,6 +4,7 @@ class_module_0_Object.html
 class_module_0_Sys.html
 class_module_1_A.html
 class_module_1_B.html
+css/
 dep.dot
 dep.map
 dep.png
@@ -43,4 +44,3 @@ module_module_1.html
 quicksearch-list.js
 resources/
 search.html
-styles/
