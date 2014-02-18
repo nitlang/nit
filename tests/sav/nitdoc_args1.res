@@ -37,10 +37,10 @@ dep_module_1.map
 dep_module_1.png
 dep_module_1.s.dot
 index.html
+js/
 module_module_0.html
 module_module_1.html
 quicksearch-list.js
 resources/
-scripts/
 search.html
 styles/

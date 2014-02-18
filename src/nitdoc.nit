@@ -235,14 +235,6 @@ abstract class NitdocPage
 
 	protected fun head do
 		append("<meta charset='utf-8'/>")
-		append("<script type='text/javascript' src='{shareurl}/scripts/jquery-1.7.1.min.js'></script>")
-		append("<script type='text/javascript' src='{shareurl}/scripts/ZeroClipboard.min.js'></script>")
-		append("<script type='text/javascript' src='{shareurl}/scripts/Nitdoc.UI.js'></script>")
-		append("<script type='text/javascript' src='{shareurl}/scripts/Markdown.Converter.js'></script>")
-		append("<script type='text/javascript' src='{shareurl}/scripts/base64.js'></script>")
-		append("<script type='text/javascript' src='{shareurl}/scripts/Nitdoc.GitHub.js'></script>")
-		append("<script type='text/javascript' src='quicksearch-list.js'></script>")
-		append("<script type='text/javascript' src='{shareurl}/scripts/Nitdoc.QuickSearch.js'></script>")
 		append("<link rel='stylesheet' href='{shareurl}/styles/main.css' type='text/css' media='screen'/>")
 		append("<link rel='stylesheet' href='{shareurl}/styles/Nitdoc.UI.css' type='text/css' media='screen'/>")
 		append("<link rel='stylesheet' href='{shareurl}/styles/Nitdoc.QuickSearch.css' type='text/css' media='screen'/>")
@@ -320,6 +312,7 @@ abstract class NitdocPage
 		head
 		append("</head>")
 		append("<body")
+		append(" data-bootstrap-share='{shareurl}'")
 		if ctx.opt_github_upstream.value != null and ctx.opt_github_base_sha1.value != null then
 			append(" data-github-upstream='{ctx.opt_github_upstream.value.as(not null)}'")
 			append(" data-github-base-sha1='{ctx.opt_github_base_sha1.value.as(not null)}'")
@@ -332,6 +325,7 @@ abstract class NitdocPage
 		content
 		append("</div>")
 		footer
+		append("<script data-main=\"{shareurl}/js/nitdoc\" src=\"{shareurl}/js/lib/require.js\"></script>")
 
 		# piwik tracking
 		var tracker_url = ctx.opt_piwik_tracker.value
