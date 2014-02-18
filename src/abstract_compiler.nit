@@ -125,6 +125,13 @@ redef class ModelBuilder
 
 		if self.toolcontext.opt_stacktrace.value then compiler.build_c_to_nit_bindings
 
+		# Copy original .[ch] files to compile_dir
+		for src in compiler.files_to_copy do
+			var basename = src.basename("")
+			var dst = "{compile_dir}/{basename}"
+			src.file_copy_to dst
+		end
+
 		var orig_dir=".." # FIXME only works if `compile_dir` is a subdirectory of cwd
 
 		var outname = self.toolcontext.opt_output.value
