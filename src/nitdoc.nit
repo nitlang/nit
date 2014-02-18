@@ -148,7 +148,6 @@ class NitdocContext
 		if opt_shareurl.value == null then
 			sys.system("cp -r {share_dir.to_s}/* {output_dir.to_s}/")
 		else
-			sys.system("cp -r {share_dir.to_s}/ZeroClipboard.swf {output_dir.to_s}/")
 			sys.system("cp -r {share_dir.to_s}/resources/ {output_dir.to_s}/resources/")
 		end
 		self.dot_dir = null

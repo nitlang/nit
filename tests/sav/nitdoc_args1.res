@@ -1,4 +1,3 @@
-ZeroClipboard.swf
 class_module_0_Int.html
 class_module_0_Object.html
 class_module_0_Sys.html
