@@ -239,6 +239,7 @@ abstract class NitdocPage
 		append("<link rel='stylesheet' href='{shareurl}/styles/Nitdoc.UI.css' type='text/css' media='screen'/>")
 		append("<link rel='stylesheet' href='{shareurl}/styles/Nitdoc.QuickSearch.css' type='text/css' media='screen'/>")
 		append("<link rel='stylesheet' href='{shareurl}/styles/Nitdoc.GitHub.css' type='text/css' media='screen'/>")
+		append("<link rel='stylesheet' href='{shareurl}/styles/Nitdoc.ModalBox.css' type='text/css' media='screen'/>")
 		var title = ""
 		if ctx.opt_custom_title.value != null then
 			title = " | {ctx.opt_custom_title.value.to_s}"

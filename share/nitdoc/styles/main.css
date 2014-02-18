@@ -76,7 +76,7 @@ body {
 
 header {
 	position: fixed;
-	z-index: 600;
+	z-index: 50;
 	left: 0;
 	right: 0;
 }
@@ -88,7 +88,7 @@ header {
 
 .sidebar {
 	position: fixed;
-	z-index: 500;
+	z-index: 10;
 	top: 50px;
 	bottom: 1em;
 	width: 250px;
@@ -101,7 +101,7 @@ header {
 
 .content {
 	position: fixed;
-	z-index: 500;
+	z-index: 10;
 	top: 50px;
 	bottom: 1em;
 	left: 0;
@@ -123,7 +123,7 @@ header {
 
 footer {
 	position: fixed;
-	z-index: 500;
+	z-index: 50;
 	bottom: 0;
 	width: 100%;
 }

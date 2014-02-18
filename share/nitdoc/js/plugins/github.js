@@ -24,12 +24,12 @@
 define([
 	"jquery",
 	"github-api",
+	"plugins/modalbox",
 	"plugins/github/loginbox",
-	"plugins/github/modalbox",
 	"plugins/github/commentbox",
 	"utils",
 	"Markdown.Converter"
-], function($, GithubAPI, LoginBox, ModalBox, CommentBox) {
+], function($, GithubAPI) {
 	var GithubUser = function(login, password, repo, branch) {
 		this.login = login;
 		this.password = password;
@@ -92,11 +92,13 @@ define([
 
 		_checkLoginInfos: function(infos) {
 			if(!infos.login || !infos.password || !infos.repo || !infos.branch) {
-				ModalBox.open(
-					"Sign in error",
-					"Please enter your GitHub username, password, repository and branch.",
-					true
-				);
+				$("<p/>")
+				.text("Please enter your GitHub username, password, repository and branch.")
+				.modalbox({
+					title: "Sign in error",
+					isError: true
+				})
+				.modalbox("open");
 				return false;
 			} else {
 				return true;
@@ -110,25 +112,31 @@ define([
 					this.activate(this.user, this.origin);
 				} else {
 					if(isok == "error:login") {
-						ModalBox.open(
-							"Sign in error",
-							"The username, password, repo or branch you entered is incorrect.",
-							true
-						);
+						$("<p/>")
+						.text("The username, password, repo or branch you entered is incorrect.")
+						.modalbox({
+							title: "Github sign in error",
+							isError: true
+						})
+						.modalbox("open");
 					} else if(isok == "error:sha") {
-						ModalBox.open(
-							"Base commit not found",
-							"The provided Github repository must contain the base commit '" + UI.origin.sha + "'",
-							true
-						);
+						$("<p/>")
+						.text("The provided Github repository must contain the base commit '" + UI.origin.sha + "'.")
+						.modalbox({
+							title: "Github base commit error",
+							isError: true
+						})
+						.modalbox("open");
 					} else if(isok == "error:profile") {
-						ModalBox.open(
-							"Incomplete Github profile",
-							"Please set your public name and email in your " +
+						$("<p/>")
+						.text("Please set your public name and email in your " +
 							"<a href='https://github.com/settings/profile'>GitHub profile</a>." +
-							"<br/><br/>Your public profile informations are used to sign-off your commits.",
-							true
-						);
+							"<br/><br/>Your public profile informations are used to sign-off your commits.")
+						.modalbox({
+							title: "Github profile error",
+							isError: true
+						})
+						.modalbox("open");
 					}
 				}
 			}
@@ -223,7 +231,12 @@ define([
 				.bind("commentbox_preview", function(event, data) {
 					var converter = new Markdown.Converter()
 					var html = converter.makeHtml(data.value);
-					ModalBox.open("Preview", html, false);
+					$("<p/>")
+					.html(html)
+					.modalbox({
+						title: "Preview comment"
+					})
+					.modalbox("open");
 				})
 				.bind("commentbox_open", function(event, data) {
 					GithubUI.openedComments++;
@@ -318,7 +331,13 @@ define([
 			edit.newContent = this._mergeComment(edit.oldContent, edit.newComment, edit.location);
 			edit.request = this._pushChanges(edit)
 			if(!edit.request) {
-				ModalBox.open("Unable to commit changes!", response, true);
+				$("<p/>")
+				.text("Unable to commit changes.<br/>" + response)
+				.modalbox({
+					title: "Github commit error",
+					isError: true
+				})
+				.modalbox("open");
 				return;
 			}
 			this._saveRequest(edit);
@@ -349,31 +368,61 @@ define([
 		_pushChanges: function(edit) {
 			var baseTree = GithubAPI.getTree(this.user, this.origin.sha);
 			if(!baseTree.sha) {
-				ModalBox.open("Unable to locate base tree!", baseTree.status + ": " + baseTree.statusText, true);
+				$("<p/>")
+				.text("Unable to locate base tree.<br/>" + baseTree.status + ": " + baseTree.statusText)
+				.modalbox({
+					title: "Github commit error",
+					isError: true
+				})
+				.modalbox("open");
 				return false;
 			}
 			console.log("Base tree: " + baseTree.url);
 			var newBlob = GithubAPI.createBlob(this.user, edit.newContent);
 			if(!newBlob.sha) {
-				ModalBox.open("Unable to create new blob!", newBlob.status + ": " + newBlob.statusText, true);
+				$("<p/>")
+				.text("Unable to create new blob.<br/>" + newBlob.status + ": " + newBlob.statusText)
+				.modalbox({
+					title: "Github commit error",
+					isError: true
+				})
+				.modalbox("open");
 				return false;
 			}
 			console.log("New blob: " + newBlob.url);
 			var newTree = GithubAPI.createTree(this.user, baseTree, edit.location.path, newBlob);
 			if(!newTree.sha) {
-				ModalBox.open("Unable to create new tree!", newTree.status + ": " + newTree.statusText, true);
+				$("<p/>")
+				.text("Unable to create new tree.<br/>" + newTree.status + ": " + newTree.statusText)
+				.modalbox({
+					title: "Github commit error",
+					isError: true
+				})
+				.modalbox("open");
 				return false;
 			}
 			console.log("New tree: " + newTree.url);
 			var newCommit = GithubAPI.createCommit(this.user, edit.message, baseTree.sha, newTree);
 			if(!newCommit.sha) {
-				ModalBox.open("Unable to create new commit!", newCommit.status + ": " + newCommit.statusText, true);
+				$("<p/>")
+				.text("Unable to create new commit.<br/>" + newCommit.status + ": " + newCommit.statusText)
+				.modalbox({
+					title: "Github commit error",
+					isError: true
+				})
+				.modalbox("open");
 				return false;
 			}
 			console.log("New commit: " + newCommit.url);
 			var pullRequest = GithubAPI.createPullRequest(this.user, edit.title, "Pull request from Nitdoc", this.origin, newCommit.sha);
 			if(!pullRequest.number) {
-				ModalBox.open("Unable to create pull request!", pullRequest.status + ": " + pullRequest.statusText, true);
+				$("<p/>")
+				.text("Unable to create pull request.<br/>" + pullRequest.status + ": " + pullRequest.statusText)
+				.modalbox({
+					title: "Github commit error",
+					isError: true
+				})
+				.modalbox("open");
 				return false;
 			}
 			console.log("New pull request: " + pullRequest.url);
@@ -384,13 +433,25 @@ define([
 		_closePullRequest: function(number) {
 			var requests = JSON.parse(localStorage.requests);
 			if(!requests[number]) {
-				ModalBox.open("Unable to close pull request!", "Pull request " + number + "not found", true);
+				$("<p/>")
+				.text("Unable to close pull request.<br/>" + "Pull request " + number + "not found")
+				.modalbox({
+					title: "Github commit error",
+					isError: true
+				})
+				.modalbox("open");
 				return false;
 			}
 			// close pull request
 			var res = GithubAPI.updatePullRequest(this.user, "Closed from Nitdoc", "", "closed", requests[number].request);
 			if(!res.id) {
-				ModalBox.open("Unable to close pull request!", res.status + ": " + res.statusText, true);
+				$("<p/>")
+				.text("Unable to close pull request.<br/>" + res.status + ": " + res.statusText)
+				.modalbox({
+					title: "Github commit error",
+					isError: true
+				})
+				.modalbox("open");
 				return false;
 			}
 			// update in localstorage
@@ -413,7 +474,13 @@ define([
 		_getFileContent: function(githubUrl) {
 			var origFile = GithubAPI.getFile(this.user, githubUrl);
 			if(!origFile.content) {
-				ModalBox.open("Unable to locate source file!", origFile.status + ": " + origFile.statusText, true);
+				$("<p/>")
+				.text("Unable to locate source file.<br/>" + origFile.status + ": " + origFile.statusText)
+				.modalbox({
+					title: "Github commit error",
+					isError: true
+				})
+				.modalbox("open");
 				return;
 			}
 			var base64Content = origFile.content.substring(0, origFile.content.length - 1)
@@ -458,7 +525,7 @@ define([
 
 		_doUpdateRequest: function(event, baseArea, request) {
 			baseArea.commentbox("open", this.user, request.request.number);
-		}
+		},
 	}
 
 	// Get github plugin data

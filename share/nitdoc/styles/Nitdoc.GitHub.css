@@ -130,7 +130,7 @@
  * Nitdoc Github buttons
  */
 
-button.nitdoc-github-button {
+.nitdoc-github-button {
 	display: inline-block;
 	cursor: pointer;
 	background-color: #92C929;
@@ -175,66 +175,6 @@ button.nitdoc-github-button img {
 	margin-bottom: -3px;
 	height: 16px;
 	width: 16px;
-}
-
-/*
- * Modal Box
- */
-
-.nitdoc-github-fade {
-	background: #000;
-	position: fixed; left: 0; top: 0;
-	width: 100%; height: 100%;
-	opacity: .80;
-	filter: alpha(opacity=80);
-	z-index: 9999;
-}
-
-.nitdoc-github-modal {
-	background: #fff;
-	padding: 20px;
-	border: 1px solid #ddd;
-	float: left;
-	position: fixed;
-	z-index: 99999;
-	/* fix Box Shadow CSS3 */
-	-webkit-box-shadow: 0px 0px 20px #000;
-	-moz-box-shadow: 0px 0px 20px #000;
-	box-shadow: 0px 0px 20px #000;
-	/* round corners CSS3 */
-	-webkit-border-radius: 2px;
-	-moz-border-radius: 2px;
-	border-radius: 2px;
-	text-align: left;
-}
-
-.nitdoc-github-buttons, .nitdoc-github-modal h3 {
-	text-align: center;
-}
-
-.nitdoc-github-modal.nitdoc-github-error h3 {
-	color: red;
-}
-
-.nitdoc-github-modal textarea {
-	min-width: 300px;
-	width: 100%;
-}
-
-.nitdoc-github-modal button {
-	line-height: 20px;
-	margin-bottom: 0;
-	padding: 4px 12px;
-	margin-top: 20px;
-}
-
-.nitdoc-github-close {
-	float: right;
-	margin: -22px -17px 0 0;
-	cursor: pointer;
-	font-size: 1.3em;
-	font-weight: bold;
-	text-transform: lowercase;
 }
 
 /* Comment editing */
