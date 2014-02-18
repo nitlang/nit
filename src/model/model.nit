@@ -1561,37 +1561,7 @@ abstract class MProperty
 		end
 
 		# Second, filter the most specific ones
-		var res = new Array[MPROPDEF]
-		for pd1 in candidates do
-			var cd1 = pd1.mclassdef
-			var c1 = cd1.mclass
-			var keep = true
-			for pd2 in candidates do
-				if pd2 == pd1 then continue # do not compare with self!
-				var cd2 = pd2.mclassdef
-				var c2 = cd2.mclass
-				if c2.mclass_type == c1.mclass_type then
-					if cd2.mmodule.in_importation <= cd1.mmodule then
-						# cd2 refines cd1; therefore we skip pd1
-						keep = false
-						break
-					end
-				else if cd2.bound_mtype.is_subtype(mmodule, null, cd1.bound_mtype) then
-					# cd2 < cd1; therefore we skip pd1
-					keep = false
-					break
-				end
-			end
-			if keep then
-				res.add(pd1)
-			end
-		end
-		if res.is_empty then
-			print "All lost! {candidates.join(", ")}"
-			# FIXME: should be abort!
-		end
-		self.lookup_definitions_cache[mmodule, mtype] = res
-		return res
+		return select_most_specific(mmodule, candidates)
 	end
 
 	private var lookup_definitions_cache: HashMap2[MModule, MType, Array[MPROPDEF]] = new HashMap2[MModule, MType, Array[MPROPDEF]]
@@ -1604,13 +1574,13 @@ abstract class MProperty
 	# If you want the really most specific property, then look at `lookup_next_definition`
 	#
 	# FIXME: Move to `MPropDef`?
-	fun lookup_super_definitions(mmodule: MModule, mtype: MType): Array[MPropDef]
+	fun lookup_super_definitions(mmodule: MModule, mtype: MType): Array[MPROPDEF]
 	do
 		assert not mtype.need_anchor
 		if mtype isa MNullableType then mtype = mtype.mtype
 
 		# First, select all candidates
-		var candidates = new Array[MPropDef]
+		var candidates = new Array[MPROPDEF]
 		for mpropdef in self.mpropdefs do
 			# If the definition is not imported by the module, then skip
 			if not mmodule.in_importation <= mpropdef.mclassdef.mmodule then continue
@@ -1625,7 +1595,14 @@ abstract class MProperty
 		if candidates.length <= 1 then return candidates
 
 		# Second, filter the most specific ones
-		var res = new Array[MPropDef]
+		return select_most_specific(mmodule, candidates)
+	end
+
+	# Return an array containing olny the most specific property definitions
+	# This is an helper function for `lookup_definitions` and `lookup_super_definitions`
+	private fun select_most_specific(mmodule: MModule, candidates: Array[MPROPDEF]): Array[MPROPDEF]
+	do
+		var res = new Array[MPROPDEF]
 		for pd1 in candidates do
 			var cd1 = pd1.mclassdef
 			var c1 = cd1.mclass
