@@ -31,7 +31,7 @@ end
 fun in1(i: Int) do print "Back in Nit: in1 {i}"
 fun in2(i: Float) do print "Back in Nit: in2"
 
-fun out(i: Int, f: Float): Int import in1, in2, A, A::alt, A::to_i `{
+fun out(i: Int, f: Float): Int import in1, in2, A, A.alt, A.to_i `{
 	printf("From C, beginning out: %ld\n", i);
 	Object_in1(recv, i);
 	A a = new_A();

@@ -69,7 +69,7 @@ extern Monkey `{ CMonkey * `}
 	
 	# Object method which will get a callback in wokeUp method, defined in MonkeyActionCallable interface
 	# Must be defined as Nit/C method because of C call inside
-	fun wokeUpAction( toCall: MonkeyActionCallable, message: Object ) is extern import MonkeyActionCallable::wokeUp `{
+	fun wokeUpAction( toCall: MonkeyActionCallable, message: Object ) is extern import MonkeyActionCallable.wokeUp `{
 
 		// Allocating memory to keep reference of received parameters :
 		// - Object receiver

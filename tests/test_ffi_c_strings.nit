@@ -22,11 +22,11 @@ fun get_cstring: NativeString `{
 	return "char* from C";
 `}
 
-fun print_string(str: String) import String::to_cstring `{
+fun print_string(str: String) import String.to_cstring `{
 	printf("str-> %s\n", String_to_cstring(str) );
 `}
 
-fun get_string: String import NativeString::to_s, String::output `{
+fun get_string: String import NativeString.to_s, String.output `{
 	String str = NativeString_to_s("Nit string from C");
 	String_output(str);
 	printf("\n");

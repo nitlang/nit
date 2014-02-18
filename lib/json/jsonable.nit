@@ -27,7 +27,7 @@ interface Jsonable
 end
 
 # Main object type used by C library
-private extern JsonObject `{ json_object* `}
+private extern JsonObject `{ struct json_object* `}
 	# Give up ownership of this object and decrease the reference count.
 	fun put `{ json_object_put( recv ); `}
 

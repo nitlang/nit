@@ -42,34 +42,34 @@ end
 
 extern class Passwd `{struct passwd*`}
 	new from_uid(uid: Int) `{ return getpwuid(uid); `}
-	new from_name(name: String) import String::to_cstring `{ return getpwnam( String_to_cstring(name) ); `}
+	new from_name(name: String) import String.to_cstring `{ return getpwnam( String_to_cstring(name) ); `}
 
-	fun name: String import NativeString::to_s `{ return NativeString_to_s(recv->pw_name); `}
-	fun passwd: String import NativeString::to_s `{ return NativeString_to_s(recv->pw_passwd); `}
+	fun name: String import NativeString.to_s `{ return NativeString_to_s(recv->pw_name); `}
+	fun passwd: String import NativeString.to_s `{ return NativeString_to_s(recv->pw_passwd); `}
 	fun uid: Int `{ return recv->pw_uid; `}
 	fun gid: Int `{ return recv->pw_gid; `}
-	fun gecos: String import NativeString::to_s `{ return NativeString_to_s(recv->pw_gecos); `}
-	fun dir: String import NativeString::to_s `{ return NativeString_to_s(recv->pw_dir); `}
-	fun shell: String import NativeString::to_s `{ return NativeString_to_s(recv->pw_shell); `}
+	fun gecos: String import NativeString.to_s `{ return NativeString_to_s(recv->pw_gecos); `}
+	fun dir: String import NativeString.to_s `{ return NativeString_to_s(recv->pw_dir); `}
+	fun shell: String import NativeString.to_s `{ return NativeString_to_s(recv->pw_shell); `}
 end
 
 extern class Group `{struct group*`}
 	new from_gid(gid: Int) `{ return getgrgid(gid); `}
-	new from_name(name: String) import String::to_cstring `{ return getgrnam( String_to_cstring(name) ); `}
+	new from_name(name: String) import String.to_cstring `{ return getgrnam( String_to_cstring(name) ); `}
 
-	fun name: String import NativeString::to_s `{ return NativeString_to_s(recv->gr_name); `}
-	fun passwd: String import NativeString::to_s `{ return NativeString_to_s(recv->gr_passwd); `}
+	fun name: String import NativeString.to_s `{ return NativeString_to_s(recv->gr_name); `}
+	fun passwd: String import NativeString.to_s `{ return NativeString_to_s(recv->gr_passwd); `}
 	fun gid: Int `{ return recv->gr_gid; `}
-	fun mem: Array[String] import Array, Array::add, NativeString::to_s, String as (nullable Object) `{
+	fun mem: Array[String] import Array[String], Array[String].add, NativeString.to_s `{
 		char **mem;
 		int m;
-		Array ret;
+		Array_of_String ret;
 
 		mem = recv->gr_mem;
-		ret = new_Array();
+		ret = new_Array_of_String();
 
 		for (m = 0; mem[m] != NULL; m++)
-			Array_add(ret, String_as_nullable_Object( NativeString_to_s(mem[m]) ));
+			Array_of_String_add(ret, NativeString_to_s(mem[m]));
 
 		return ret;
 	`}
