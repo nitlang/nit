@@ -35,23 +35,29 @@ extern Window `{WINDOW *`}
 		return res;
 	`}
 
-	# print a string somewhere
-	# NOTE: as with the curses API, the position is (y,x)
-	fun mvaddstr(y,x: Int, str: String) import String::to_cstring `{
+	# Move the cursor at the position (y,x) and print a string
+	fun move_print_string(y,x: Int, str: String) import String::to_cstring `{
 		char *c_string = String_to_cstring( str );
 		mvaddstr(y, x, c_string);
 	`}
 
+	# Update the window
 	fun refresh `{
 		refresh();
 	`}
-	fun wclear `{
+	
+	# Clear the entire window so it can be repainted from scratch with a refresh
+	fun clear `{
 		wclear(recv);
 	`}
-	fun delwin `{
+	
+	# Delete the window
+	fun delete `{
 		delwin(recv);
 	`}
-	fun endwin `{
+	
+	# Suspend the curses session and restore the previous terminal
+	fun end_session `{
 		endwin();
 	`}
 end
