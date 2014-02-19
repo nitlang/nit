@@ -328,6 +328,8 @@ abstract class NitdocPage
 		if ctx.opt_custom_footer_text.value != null then footed = "footed"
 		append("<div class='page {footed}'>")
 		content
+		append("</div>")
+		footer
 
 		# piwik tracking
 		var tracker_url = ctx.opt_piwik_tracker.value
@@ -348,8 +350,6 @@ abstract class NitdocPage
 			append(" </script>")
 			append("<!-- End Piwik Code -->")
 		end
-		append("</div>")
-		footer
 		append("</body>")
 	end
 
