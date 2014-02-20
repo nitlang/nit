@@ -93,6 +93,10 @@ private class SerializationPhase
 		code.add "	v.notify_of_creation self"
 
 		for attribute in npropdefs do if attribute isa AAttrPropdef then
+			if attribute.n_type == null then
+				toolcontext.error(attribute.location, "NOT YET IMPLEMENTED: all attributes of an auto_serialized class definition must define a type.")
+				continue
+			end
 			var name = attribute.name
 			var type_name = attribute.type_name
 			code.add ""
