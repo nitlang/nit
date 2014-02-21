@@ -509,7 +509,7 @@ redef class AMethPropdef
 					var prt = msignature.mparameters[i].mtype
 					if not myt.is_subtype(mmodule, nclassdef.mclassdef.bound_mtype, prt) or
 							not prt.is_subtype(mmodule, nclassdef.mclassdef.bound_mtype, myt) then
-						modelbuilder.error(nsig.n_params[i], "Redef Error: Wrong type for parameter `{mysignature.mparameters[i].name}'. found {myt}, expected {prt}.")
+						modelbuilder.error(nsig.n_params[i], "Redef Error: Wrong type for parameter `{mysignature.mparameters[i].name}'. found {myt}, expected {prt} as in {mpropdef.mproperty.intro}.")
 					end
 				end
 			end
@@ -518,7 +518,7 @@ redef class AMethPropdef
 					# Inherit the return type
 					ret_type = precursor_ret_type
 				else if not ret_type.is_subtype(mmodule, nclassdef.mclassdef.bound_mtype, precursor_ret_type) then
-					modelbuilder.error(nsig.n_type.as(not null), "Redef Error: Wrong return type. found {ret_type}, expected {precursor_ret_type}.")
+					modelbuilder.error(nsig.n_type.as(not null), "Redef Error: Wrong return type. found {ret_type}, expected {precursor_ret_type} as in {mpropdef.mproperty.intro}.")
 				end
 			end
 		end
