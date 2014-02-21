@@ -1447,7 +1447,6 @@ redef class ASuperExpr
 		end
 		# FIXME: covariance of return type in linear extension?
 		var superprop = superprops.first
-		assert superprop isa MMethodDef
 
 		var msignature = v.resolve_signature_for(superprop, recvtype, true)
 		var args = self.n_args.to_a
