@@ -158,6 +158,10 @@ redef class MClass
 	var inherit_init_from: nullable MClass = null
 end
 
+redef class MClassDef
+	private var propdef_names = new HashSet[String]
+end
+
 redef class AClassdef
 	var build_properties_is_done: Bool = false
 	# The list of super-constructor to call at the start of the free constructor
@@ -391,6 +395,20 @@ redef class AMethPropdef
 		nclassdef.mprop2npropdef[mprop] = self
 
 		var mpropdef = new MMethodDef(mclassdef, mprop, self.location)
+
+		if mclassdef.propdef_names.has(mprop.name) then
+			var loc: nullable Location = null
+			for i in mclassdef.mpropdefs do
+				if i.mproperty.name == mprop.name then
+					loc = i.location
+					break
+				end
+			end
+			if loc == null then abort
+			modelbuilder.error(self, "Error: a property {mprop} is already defined in class {mclassdef.mclass} at {loc}")
+		end
+
+		mclassdef.propdef_names.add(mpropdef.mproperty.name)
 
 		self.mpropdef = mpropdef
 		modelbuilder.mpropdef2npropdef[mpropdef] = self
