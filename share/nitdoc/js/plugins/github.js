@@ -24,11 +24,11 @@
 define([
 	"jquery",
 	"github-api",
+	"marked",
 	"plugins/modalbox",
 	"plugins/github/loginbox",
 	"plugins/github/commentbox",
 	"utils",
-	"Markdown.Converter"
 ], function($, GithubAPI) {
 	var GithubUser = function(login, password, repo, branch) {
 		this.login = login;
@@ -42,6 +42,7 @@ define([
 		init: function(upstream, basesha1) {
 			console.info("Github plugin: init GitHub module (upstream: "+ upstream +", base: " + basesha1 + ")");
 			this.origin = this._parseUpstream(upstream);
+			this._initMarked();
 			// Add github menu
 			$("nav.main ul").append(
 				$("<li/>")
@@ -229,12 +230,36 @@ define([
 					GithubUI._reloadComments();
 				})
 				.bind("commentbox_preview", function(event, data) {
-					var converter = new Markdown.Converter()
-					var html = converter.makeHtml(data.value);
-					$("<p/>")
-					.html(html)
+					$("<div/>")
+					.append($("<h4/>").text("Comment:"))
+					.append(
+						$("<div/>")
+						.addClass("description")
+						.append(
+							$("<div/>")
+							.addClass("comment")
+							.append(
+								$("<div/>")
+								.addClass("nitdoc")
+								.html(marked(data.value))
+							)
+						)
+					)
+					.append($("<h4/>").text("Message:"))
+					.append(
+						$("<div/>")
+						.addClass("description")
+						.append(
+							$("<div/>")
+							.addClass("comment")
+							.append(
+								$("<div/>").html(marked(data.message))
+							)
+						)
+					)
 					.modalbox({
-						title: "Preview comment"
+						title: "Preview comment",
+						css: {"min-width": "500px"}
 					})
 					.modalbox("open");
 				})
@@ -253,7 +278,6 @@ define([
 		_reloadComments: function() {
 			if(!localStorage.requests){ return; }
 			$("p.pullRequest").remove();
-			var converter = new Markdown.Converter();
 			var requests = JSON.parse(localStorage.requests);
 			// Look for modified comments in page
 			for(i in requests) {
@@ -262,7 +286,7 @@ define([
 				$("textarea[data-comment-location=\"" + request.location + "\"]").each(function () {
 					if(request.isClosed) {
 						var oldComment = request.oldComment.base64Decode();
-						var htmlComment = converter.makeHtml(oldComment);
+						var htmlComment = marked(oldComment);
 						$(this).val(oldComment);
 						if(!$(this).val()) {
 							$(this).nextAll("div.comment:first").hide();
@@ -273,7 +297,7 @@ define([
 						$(this).nextAll("p.info").find("a.nitdoc-github-editComment").show();
 					} else {
 						var newComment = request.comment.base64Decode();
-						var htmlComment = converter.makeHtml(newComment);
+						var htmlComment = marked(newComment);
 						$(this).val(newComment);
 						if(!$(this).val()) {
 							$(this).nextAll("div.comment:first").hide();
@@ -460,6 +484,17 @@ define([
 		},
 
 		/* internals */
+
+			marked.setOptions({
+				gfm: true,
+				tables: true,
+				breaks: true,
+				pedantic: false,
+				sanitize: true,
+				smartLists: true,
+				smartypants: false
+			});
+		},
 
 		_parseUpstream: function(upstream) {
 			var parts = upstream.split(":");

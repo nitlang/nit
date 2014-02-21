@@ -206,7 +206,10 @@ define([
 		},
 
 		_doPreviewClick: function(event) {
-			this._trigger("_preview", event, {value: this._getComment()});
+			this._trigger("_preview", event, {
+				value: this._getComment(),
+				message: this._getMessage() + "\n\n" + this._getSignedOff()
+			});
 		},
 
 		_doCommitClick: function() {

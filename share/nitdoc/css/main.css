@@ -422,20 +422,29 @@ nav.main input[type=text] {
 
 /* New comments style */
 
-.content .nitdoc {
+.nitdoc {
   background: #F7F7F7;
   padding: 5px;
   color: black;
   overflow: auto;
 }
 
-.content .nitdoc pre {
+.nitdoc pre {
   background: #EEE;
 }
 
-.content .nitdoc code {
+.nitdoc code {
   background: #DDD;
   padding: 0 1px;
+}
+
+.nitdoc pre code {
+	background: none;
+}
+
+.nitdoc .synopsys, .nitdoc p:first-child {
+	font-weight: bold;
+	color: #6c6c6c;
 }
 
 .rawcode {

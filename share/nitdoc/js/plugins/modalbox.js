@@ -23,6 +23,8 @@ define([
 	$.widget("nitdoc.modalbox", {
 		options: {
 			id: "nitdoc-dialog",
+			classes: "nitdoc-dialog",
+			css: {},
 			title: "Title",
 			isError: false,
 		},
@@ -63,7 +65,8 @@ define([
 			this._dialog = $("<div/>")
 			.hide()
 			.attr("id", this.options.id)
-			.addClass("nitdoc-dialog")
+			.addClass(this.options.classes)
+			.css(this.options.css)
 			.append(
 				$("<div/>")
 				.addClass("nitdoc-dialog-header")
