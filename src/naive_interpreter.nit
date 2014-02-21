@@ -1103,7 +1103,7 @@ redef class AVarReassignExpr
 		var vari = v.frame.map[self.variable.as(not null)]
 		var value = v.expr(self.n_value)
 		if value == null then return
-		var res = v.send(reassign_property.mproperty, [vari, value])
+		var res = v.send(reassign_callsite.mproperty, [vari, value])
 		assert res != null
 		v.frame.map[self.variable.as(not null)] = res
 	end
@@ -1517,9 +1517,8 @@ redef class ASendExpr
 			if i == null then return null
 			args.add(i)
 		end
-		var mproperty = self.mproperty.as(not null)
 
-		var res = v.send(mproperty, args)
+		var res = v.send(callsite.mproperty, args)
 		return res
 	end
 end
@@ -1538,16 +1537,15 @@ redef class ASendReassignFormExpr
 		var value = v.expr(self.n_value)
 		if value == null then return
 
-		var mproperty = self.mproperty.as(not null)
-		var read = v.send(mproperty, args)
+		var read = v.send(callsite.mproperty, args)
 		assert read != null
 
-		var write = v.send(self.reassign_property.mproperty, [read, value])
+		var write = v.send(reassign_callsite.mproperty, [read, value])
 		assert write != null
 
 		args.add(write)
 
-		v.send(self.write_mproperty.as(not null), args)
+		v.send(write_callsite.mproperty, args)
 	end
 end
 
@@ -1565,13 +1563,13 @@ redef class ASuperExpr
 			args = v.frame.arguments
 		end
 
-		var mproperty = self.mproperty
-		if mproperty != null then
-			if mproperty.intro.msignature.arity == 0 then
+		var callsite = self.callsite
+		if callsite != null then
+			if callsite.mproperty.intro.msignature.arity == 0 then
 				args = [recv]
 			end
 			# Super init call
-			var res = v.send(mproperty, args)
+			var res = v.send(callsite.mproperty, args)
 			return res
 		end
 
@@ -1596,8 +1594,7 @@ redef class ANewExpr
 			if i == null then return null
 			args.add(i)
 		end
-		var mproperty = self.mproperty.as(not null)
-		var res2 = v.send(mproperty, args)
+		var res2 = v.send(callsite.mproperty, args)
 		if res2 != null then
 			#self.debug("got {res2} from {mproperty}. drop {recv}")
 			return res2
@@ -1641,7 +1638,7 @@ redef class AAttrReassignExpr
 		if value == null then return
 		var mproperty = self.mproperty.as(not null)
 		var attr = v.read_attribute(mproperty, recv)
-		var res = v.send(reassign_property.mproperty, [attr, value])
+		var res = v.send(reassign_callsite.mproperty, [attr, value])
 		assert res != null
 		assert recv isa MutableInstance
 		recv.attributes[mproperty] = res
