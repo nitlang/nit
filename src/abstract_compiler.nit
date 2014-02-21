@@ -107,7 +107,13 @@ redef class ModelBuilder
 			cc_paths.append(path_env.split_with(':'))
 		end
 
+		var compile_dir = toolcontext.opt_compile_dir.value
+		if compile_dir == null then compile_dir = ".nit_compile"
+		self.compile_dir = compile_dir
 	end
+
+	# The compilation directory
+	var compile_dir: String
 
 	protected fun write_and_make(compiler: AbstractCompiler)
 	do
@@ -118,9 +124,6 @@ redef class ModelBuilder
 		# Note that we do not try to be clever an a small change in a Nit source file may change the content of all the generated .c files
 		var time0 = get_time
 		self.toolcontext.info("*** WRITING C ***", 1)
-
-		var compile_dir = toolcontext.opt_compile_dir.value
-		if compile_dir == null then compile_dir = ".nit_compile"
 
 		compile_dir.mkdir
 
@@ -349,8 +352,7 @@ abstract class AbstractCompiler
 	# Binds the generated C function names to Nit function names
 	fun build_c_to_nit_bindings
 	do
-		var compile_dir = modelbuilder.toolcontext.opt_compile_dir.value
-		if compile_dir == null then compile_dir = ".nit_compile"
+		var compile_dir = modelbuilder.compile_dir
 
 		var stream = new OFStream.open("{compile_dir}/C_fun_names")
 		stream.write("%\{\n#include \"c_functions_hash.h\"\n%\}\n")
