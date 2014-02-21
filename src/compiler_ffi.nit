@@ -29,7 +29,7 @@ redef class AModule
 
 	redef fun finalize_ffi(v: AbstractCompilerVisitor, modelbuilder: ModelBuilder)
 	do
-		finalize_ffi_wrapper(".nit_compile", v.compiler.mainmodule)
+		finalize_ffi_wrapper(v.compiler.modelbuilder.compile_dir, v.compiler.mainmodule)
 		for file in ffi_files do v.compiler.extern_bodies.add(file)
 	end
 
@@ -46,7 +46,7 @@ redef class AModule
 
 		nitni_ccu.header_c_types.add("#include \"{mmodule.name}._ffi.h\"\n")
 
-		nitni_ccu.write_as_nitni(self, ".nit_compile")
+		nitni_ccu.write_as_nitni(self, v.compiler.modelbuilder.compile_dir)
 
 		for file in nitni_ccu.files do
 			v.compiler.extern_bodies.add(new ExternCFile(file, c_compiler_options))

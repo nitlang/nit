@@ -1,6 +1,6 @@
 #!/bin/bash
 cd ..
-out=c_src2
+out=c_src
 rm -r "$out/" 2> /dev/null
 set -e
 set -x
