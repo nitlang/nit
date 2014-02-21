@@ -124,7 +124,7 @@ end
 redef class ASendExpr
 	redef fun accept_auto_super_init(v)
 	do
-		var mproperty = self.mproperty
+		var mproperty = self.callsite.mproperty
 		if mproperty == null then return
 		if mproperty.is_init then
 			v.has_explicit_super_init = true

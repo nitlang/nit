@@ -1428,6 +1428,10 @@ redef class ASuperExpr
 	# Note: if the super is a normal call-next-method, then this attribute is null
 	var mproperty: nullable MMethod
 
+	# The method to call if the super is in fact a 'super init call'
+	# Note: if the super is a normal call-next-method, then this attribute is null
+	var callsite: nullable CallSite
+
 	redef fun accept_typing(v)
 	do
 		var recvtype = v.nclassdef.mclassdef.bound_mtype
@@ -1493,10 +1497,13 @@ redef class ASuperExpr
 		end
 		self.mproperty = superprop.mproperty
 
-		var args = self.n_args.to_a
 		var msignature = v.resolve_signature_for(superprop, recvtype, true)
+		var callsite = new CallSite(self, recvtype, true, superprop.mproperty, superprop, msignature, false)
+		self.callsite = callsite
+
+		var args = self.n_args.to_a
 		if args.length > 0 then
-			v.check_signature(self, args, mproperty.name, msignature)
+			callsite.check_signature(v, args)
 		else
 			# TODO: Check signature
 		end
