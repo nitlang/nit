@@ -507,7 +507,7 @@ redef class AMethPropdef
 				for i in [0..mysignature.arity[ do
 					var myt = mysignature.mparameters[i].mtype
 					var prt = msignature.mparameters[i].mtype
-					if not myt.is_subtype(mmodule, nclassdef.mclassdef.bound_mtype, prt) and
+					if not myt.is_subtype(mmodule, nclassdef.mclassdef.bound_mtype, prt) or
 							not prt.is_subtype(mmodule, nclassdef.mclassdef.bound_mtype, myt) then
 						modelbuilder.error(nsig.n_params[i], "Redef Error: Wrong type for parameter `{mysignature.mparameters[i].name}'. found {myt}, expected {prt}.")
 					end
