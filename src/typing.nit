@@ -640,9 +640,6 @@ redef class AVarAssignExpr
 end
 
 redef class AReassignFormExpr
-	# @depreciated use `reassign_callsite`
-	fun reassign_property: nullable MMethodDef do return self.reassign_callsite.mpropdef
-
 	# The method designed by the reassign operator.
 	var reassign_callsite: nullable CallSite
 
@@ -1190,9 +1187,6 @@ end
 ## MESSAGE SENDING AND PROPERTY
 
 redef class ASendExpr
-	# @depreciated: use `callsite`
-	fun mproperty: nullable MMethod do return callsite.mproperty
-
 	# The property invoked by the send.
 	var callsite: nullable CallSite
 
@@ -1353,9 +1347,6 @@ redef class ABraAssignExpr
 end
 
 redef class ASendReassignFormExpr
-	# @depreciated use `write_callsite`
-	fun write_mproperty: nullable MMethod do return write_callsite.mproperty
-
 	# The property invoked for the writing
 	var write_callsite: nullable CallSite
 
@@ -1426,10 +1417,6 @@ end
 redef class ASuperExpr
 	# The method to call if the super is in fact a 'super init call'
 	# Note: if the super is a normal call-next-method, then this attribute is null
-	var mproperty: nullable MMethod
-
-	# The method to call if the super is in fact a 'super init call'
-	# Note: if the super is a normal call-next-method, then this attribute is null
 	var callsite: nullable CallSite
 
 	redef fun accept_typing(v)
@@ -1495,7 +1482,6 @@ redef class ASuperExpr
 			v.error(self, "Error: No super method to call for {mproperty}.")
 			return
 		end
-		self.mproperty = superprop.mproperty
 
 		var msignature = v.resolve_signature_for(superprop, recvtype, true)
 		var callsite = new CallSite(self, recvtype, true, superprop.mproperty, superprop, msignature, false)
@@ -1515,9 +1501,6 @@ end
 ####
 
 redef class ANewExpr
-	# @depreciated use `callsite`
-	fun mproperty: nullable MMethod do return self.callsite.mproperty
-
 	# The constructor invoked by the new.
 	var callsite: nullable CallSite
 
