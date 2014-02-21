@@ -321,7 +321,7 @@ Number of live runtime classes: 6
 	Sys Bool Int A B C
 Number of live runtime types (instantied resolved type): 6
 	Sys Bool Int A B C
-Number of live methods: 11
+Number of live methods: 14
 Number of live method definitions: 14
 Number of live runtime cast types (ie used in as and isa): 0
 	
