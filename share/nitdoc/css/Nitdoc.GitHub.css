@@ -253,3 +253,54 @@ a.nitdoc-github-update {
 	color: orange;
 	cursor: pointer;
 }
+
+.nitdoc-dialog h4 {
+	font-weight: bold;
+}
+
+/* hljs */
+
+.hljs.nitcode {
+	padding-left: 10px;
+}
+
+.hljs-comment, .hljs-comment-block {
+	color: #777;
+}
+
+.hljs-keyword {
+	color: #000;
+	font-weight: bold;
+}
+
+.hljs-title {
+	font-weight: bold;
+}
+
+.hljs-module {
+	color: #3762E4;
+}
+
+.hljs-class .hljs-title {
+	color: #3762E4;
+}
+
+.hljs-type {
+	color: #3762E4;
+}
+
+.hljs-string {
+	color: #8F1546;
+}
+
+.hljs-subst {
+	color: #9E6BEB;
+}
+
+.hljs-fun .hljs-title {
+	color: #3762E4;
+}
+
+.hljs-char, .hljs-number {
+	color: #009999;
+}

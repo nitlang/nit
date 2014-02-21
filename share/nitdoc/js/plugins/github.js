@@ -24,12 +24,14 @@
 define([
 	"jquery",
 	"github-api",
+	"highlight",
 	"marked",
+	"nit",
 	"plugins/modalbox",
 	"plugins/github/loginbox",
 	"plugins/github/commentbox",
-	"utils",
-], function($, GithubAPI) {
+	"utils"
+], function($, GithubAPI, hljs, marked) {
 	var GithubUser = function(login, password, repo, branch) {
 		this.login = login;
 		this.password = password;
@@ -485,7 +487,16 @@ define([
 
 		/* internals */
 
+		_initMarked: function() {
+			var renderer = new marked.Renderer();
+			renderer.code = function(code) {
+				return '<pre class="nitcode hljs">' + hljs.highlight('nit', code).value + '</pre>';
+			}
+			renderer.codespan = function(code) {
+				return '<code class="nitcode hljs">' + hljs.highlight('nit', code).value + '</code>';
+			}
 			marked.setOptions({
+				renderer: renderer,
 				gfm: true,
 				tables: true,
 				breaks: true,
