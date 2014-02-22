@@ -23,6 +23,7 @@ class A
 	super Serializable
 
 	var b: Bool
+	var c: Char
 	var f: Float
 	var i: Int
 	var s: String
@@ -31,12 +32,13 @@ class A
 	init(b: Bool, c: Char, f: Float, i: Int, s: String, n: nullable Int)
 	do
 		self.b = b
+		self.c = c
 		self.f = f
 		self.i = i
 		self.s = s
 	end
 
-	redef fun to_s do return "<A: {b} {f} {i} {s} {n != null}>"
+	redef fun to_s do return "<A: {b} {c} {f} {i} {s} {n != null}>"
 end
 
 # Sub-class of A
