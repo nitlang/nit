@@ -188,10 +188,11 @@ redef class String
 	redef fun serialize_to_json(v) do v.stream.write("\"{to_json_s}\"")
 
 	private fun to_json_s: String do return self.replace("\\", "\\\\").
-		replace("\"", "\\\"").replace("\b", "\\b").replace("/", "\\/").
+		replace("\"", "\\\"").replace("/", "\\/").
 		replace("\n", "\\n").replace("\r", "\\r").replace("\t", "\\t")
 		# FIXME add support for unicode char when supported by Nit strings
 		# FIXME add support for \f! # .replace("\f", "\\f")
+		# FIXME add support for \b .replace("\b", "\\b")
 end
 
 redef class NativeString
