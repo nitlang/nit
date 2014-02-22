@@ -146,7 +146,16 @@ class JsonDeserializer
 				return value
 			end
 
-			# char? TODO
+			# char?
+			if kind == "char" then
+				assert object.keys.has("__val")
+				var val = object["__val"]
+				assert val isa String
+
+				if val.length != 1 then print "Error: expected a single char when deserializing '{val}'."
+				
+				return val.first
+			end
 
 			print "Malformed Json string: unexpected Json Object kind '{kind}'"
 			abort
@@ -181,7 +190,7 @@ redef class Bool
 end
 
 redef class Char
-	redef fun serialize_to_json(v) do v.stream.write("'{to_s}'")
+	redef fun serialize_to_json(v) do v.stream.write "\{\"__kind\": \"char\", \"__val\": \"{to_s.to_json_s}\"\}"
 end
 
 redef class String
