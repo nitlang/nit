@@ -17,6 +17,7 @@ struct type { int id; const char *name; int color; short int is_nullable; const 
 struct instance { const struct type *type; const struct class *class; nitattribute_t attrs[]; }; /* general C type representing a Nit instance. */
 struct types { int dummy; const struct type *types[]; }; /* a list types (used for vts, fts and unresolved lists). */
 typedef struct instance val; /* general C type representing a Nit instance. */
+void show_backtrace(int);
 extern int glob_argc;
 extern char **glob_argv;
 extern val *glob_sys;
@@ -96,3 +97,4 @@ const struct type *type;
 const struct class *class;
 void* value;
 };
+val* BOX_exec__NativeProcess(void*);

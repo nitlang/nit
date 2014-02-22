@@ -16,7 +16,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Phase generating methods to 
+# Phase generating methods to serialize Nit objects to different formats
 module serialization_phase
 
 import phase

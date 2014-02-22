@@ -18,6 +18,7 @@ module separate_compiler
 import abstract_compiler
 import layout_builders
 import rapid_type_analysis
+import collect_super_sends
 
 # Add separate compiler specific options
 redef class ToolContext
@@ -56,7 +57,7 @@ redef class ToolContext
 end
 
 redef class ModelBuilder
-	fun run_separate_compiler(mainmodule: MModule, runtime_type_analysis: RapidTypeAnalysis)
+	fun run_separate_compiler(mainmodule: MModule, runtime_type_analysis: nullable RapidTypeAnalysis)
 	do
 		var time0 = get_time
 		self.toolcontext.info("*** GENERATING C ***", 1)
@@ -109,7 +110,7 @@ class SeparateCompiler
 	redef type VISITOR: SeparateCompilerVisitor
 
 	# The result of the RTA (used to know live types and methods)
-	var runtime_type_analysis: RapidTypeAnalysis
+	var runtime_type_analysis: nullable RapidTypeAnalysis
 
 	private var undead_types: Set[MType] = new HashSet[MType]
 	private var partial_types: Set[MType] = new HashSet[MType]
@@ -120,7 +121,7 @@ class SeparateCompiler
 	protected var method_layout: nullable Layout[PropertyLayoutElement]
 	protected var attr_layout: nullable Layout[MAttribute]
 
-	init(mainmodule: MModule, mmbuilder: ModelBuilder, runtime_type_analysis: RapidTypeAnalysis) do
+	init(mainmodule: MModule, mmbuilder: ModelBuilder, runtime_type_analysis: nullable RapidTypeAnalysis) do
 		super(mainmodule, mmbuilder)
 		var file = new_file("nit.common")
 		self.header = new CodeWriter(file)
@@ -270,7 +271,12 @@ class SeparateCompiler
 		end
 
 		# lookup super calls and add it to the list of mmethods to build layout with
-		var super_calls = runtime_type_analysis.live_super_sends
+		var super_calls
+		if runtime_type_analysis != null then
+			super_calls = runtime_type_analysis.live_super_sends
+		else
+			super_calls = modelbuilder.collect_super_sends
+		end
 		for mmethoddef in super_calls do
 			var mclass = mmethoddef.mclassdef.mclass
 			mmethods[mclass].add(mmethoddef)
@@ -722,7 +728,7 @@ class SeparateCompiler
 		var attrs = self.attr_tables[mclass]
 		var v = new_visitor
 
-		var is_dead = not runtime_type_analysis.live_classes.has(mclass) and mtype.ctype == "val*" and mclass.name != "NativeArray"
+		var is_dead = runtime_type_analysis != null and not runtime_type_analysis.live_classes.has(mclass) and mtype.ctype == "val*" and mclass.name != "NativeArray"
 
 		v.add_decl("/* runtime class {c_name} */")
 
@@ -814,8 +820,6 @@ class SeparateCompiler
 			v.add("return {res};")
 		end
 		v.add("\}")
-
-		generate_check_init_instance(mtype)
 	end
 
 	# Add a dynamic test to ensure that the type referenced by `t` is a live type
@@ -828,24 +832,6 @@ class SeparateCompiler
 		v.add("if({t}->resolution_table == NULL) \{")
 		v.add("fprintf(stderr, \"Insantiation of a dead type: %s\\n\", {t}->name);")
 		v.add_abort("type dead")
-		v.add("\}")
-	end
-
-	redef fun generate_check_init_instance(mtype)
-	do
-		if self.modelbuilder.toolcontext.opt_no_check_initialization.value then return
-
-		var v = self.new_visitor
-		var c_name = mtype.mclass.c_name
-		var res = new RuntimeVariable("self", mtype, mtype)
-		self.provide_declaration("CHECK_NEW_{c_name}", "void CHECK_NEW_{c_name}({mtype.ctype});")
-		v.add_decl("/* allocate {mtype} */")
-		v.add_decl("void CHECK_NEW_{c_name}({mtype.ctype} {res}) \{")
-		if runtime_type_analysis.live_classes.has(mtype.mclass) then
-			self.generate_check_attr(v, res, mtype)
-		else
-			v.add_abort("{mtype.mclass} is DEAD")
-		end
 		v.add("\}")
 	end
 
@@ -943,7 +929,7 @@ class SeparateCompilerVisitor
 		else if mtype.ctype == "val*" then
 			var valtype = value.mtype.as(MClassType)
 			var res = self.new_var(mtype)
-			if not compiler.runtime_type_analysis.live_types.has(valtype) then
+			if compiler.runtime_type_analysis != null and not compiler.runtime_type_analysis.live_types.has(valtype) then
 				self.add("/*no autobox from {value.mtype} to {mtype}: {value.mtype} is not live! */")
 				self.add("printf(\"Dead code executed!\\n\"); show_backtrace(1);")
 				return res
@@ -1286,13 +1272,6 @@ class SeparateCompilerVisitor
 		return self.new_expr("NEW_{mtype.mclass.c_name}(&type_{mtype.c_name})", mtype)
 	end
 
-	redef fun check_init_instance(value, mtype)
-	do
-		if self.compiler.modelbuilder.toolcontext.opt_no_check_initialization.value then return
-		self.require_declaration("CHECK_NEW_{mtype.mclass.c_name}")
-		self.add("CHECK_NEW_{mtype.mclass.c_name}({value});")
-	end
-
 	redef fun type_test(value, mtype, tag)
 	do
 		self.add("/* {value.inspect} isa {mtype} */")
@@ -1543,7 +1522,6 @@ class SeparateCompilerVisitor
 			self.add("((struct instance_{nclass.c_name}*){nat})->values[{i}] = (val*) {r};")
 		end
 		self.send(self.get_property("with_native", arrayclass.intro.bound_mtype), [res, nat, length])
-		self.check_init_instance(res, arraytype)
 		self.add("\}")
 		return res
 	end
@@ -1700,6 +1678,7 @@ class SeparateRuntimeFunction
 			v.add("return {frame.returnvar.as(not null)};")
 		end
 		v.add("\}")
+		if not self.c_name.has_substring("VIRTUAL", 0) then compiler.names[self.c_name] = "{mmethoddef.mclassdef.mmodule.name}::{mmethoddef.mclassdef.mclass.name}::{mmethoddef.mproperty.name} ({mmethoddef.location.file.filename}:{mmethoddef.location.line_start})"
 	end
 end
 
@@ -1777,6 +1756,7 @@ class VirtualRuntimeFunction
 			v.add("return {frame.returnvar.as(not null)};")
 		end
 		v.add("\}")
+		if not self.c_name.has_substring("VIRTUAL", 0) then compiler.names[self.c_name] = "{mmethoddef.mclassdef.mmodule.name}::{mmethoddef.mclassdef.mclass.name}::{mmethoddef.mproperty.name} ({mmethoddef.location.file.filename}--{mmethoddef.location.line_start})"
 	end
 
 	# TODO ?

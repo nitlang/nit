@@ -7,7 +7,7 @@ var1 = self->attrs[COLOR_cached__ToolContext___64dcached_phase].val; /* @cached_
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @cached_phase");
 fprintf(stderr, " (%s:%d)\n", "src/cached.nit", 26);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -303,14 +303,14 @@ var17 = ((val* (*)(val*))(var_npropdef->class->vft[COLOR_modelize_property__APro
 if (var17 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/cached.nit", 54);
-exit(1);
+show_backtrace(1);
 }
 var_mpropdef = var17;
 var18 = ((val* (*)(val*))(var_mpropdef->class->vft[COLOR_model__MMethodDef__msignature]))(var_mpropdef) /* msignature on <var_mpropdef:MMethodDef>*/;
 if (var18 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/cached.nit", 56);
-exit(1);
+show_backtrace(1);
 } else {
 var19 = ((val* (*)(val*))(var18->class->vft[COLOR_model__MSignature__return_mtype]))(var18) /* return_mtype on <var18:nullable MSignature>*/;
 }
@@ -339,7 +339,7 @@ var27 = ((val* (*)(val*))(var_npropdef->class->vft[COLOR_parser_nodes__AMethProp
 if (var27 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/cached.nit", 62);
-exit(1);
+show_backtrace(1);
 } else {
 var28 = ((val* (*)(val*))(var27->class->vft[COLOR_parser_nodes__ASignature__n_params]))(var27) /* n_params on <var27:nullable ASignature>*/;
 }
@@ -381,14 +381,14 @@ if (!var40) {
 var_class_name = var39 == NULL ? "null" : var39->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "AStdClassdef", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "src/cached.nit", 71);
-exit(1);
+show_backtrace(1);
 }
 var_nclassdef = var39;
 var43 = ((val* (*)(val*))(var_nclassdef->class->vft[COLOR_modelize_class__AClassdef__mclassdef]))(var_nclassdef) /* mclassdef on <var_nclassdef:AStdClassdef>*/;
 if (var43 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/cached.nit", 72);
-exit(1);
+show_backtrace(1);
 }
 var_mclassdef = var43;
 var44 = NEW_model__MAttributeDef(&type_model__MAttributeDef);
@@ -396,7 +396,6 @@ var45 = NEW_model__MAttribute(&type_model__MAttribute);
 var46 = NEW_array__Array(&type_array__Arraykernel__Object);
 var47 = 3;
 ((void (*)(val*, long))(var46->class->vft[COLOR_array__Array__with_capacity]))(var46, var47) /* with_capacity on <var46:Array[Object]>*/;
-CHECK_NEW_array__Array(var46);
 var_ = var46;
 if (varonce48) {
 var49 = varonce48;
@@ -422,9 +421,7 @@ varonce53 = var54;
 var58 = ((val* (*)(val*))(var_->class->vft[COLOR_string__Object__to_s]))(var_) /* to_s on <var_:Array[Object]>*/;
 var59 = ((val* (*)(val*))(self->class->vft[COLOR_model_base__Object__private_visibility]))(self) /* private_visibility on <self:CachedPhase>*/;
 ((void (*)(val*, val*, val*, val*))(var45->class->vft[COLOR_model__MAttribute__init]))(var45, var_mclassdef, var58, var59) /* init on <var45:MAttribute>*/;
-CHECK_NEW_model__MAttribute(var45);
 ((void (*)(val*, val*, val*, val*))(var44->class->vft[COLOR_model__MAttributeDef__init]))(var44, var_mclassdef, var45, var_location) /* init on <var44:MAttributeDef>*/;
-CHECK_NEW_model__MAttributeDef(var44);
 var_cache_mpropdef = var44;
 var60 = ((val* (*)(val*))(var_mtype->class->vft[COLOR_model__MType__as_nullable]))(var_mtype) /* as_nullable on <var_mtype:nullable MType(MType)>*/;
 ((void (*)(val*, val*))(var_cache_mpropdef->class->vft[COLOR_model__MAttributeDef__static_mtype_61d]))(var_cache_mpropdef, var60) /* static_mtype= on <var_cache_mpropdef:MAttributeDef>*/;
@@ -433,7 +430,6 @@ var62 = NEW_model__MAttribute(&type_model__MAttribute);
 var63 = NEW_array__Array(&type_array__Arraykernel__Object);
 var64 = 3;
 ((void (*)(val*, long))(var63->class->vft[COLOR_array__Array__with_capacity]))(var63, var64) /* with_capacity on <var63:Array[Object]>*/;
-CHECK_NEW_array__Array(var63);
 var_65 = var63;
 if (varonce66) {
 var67 = varonce66;
@@ -459,9 +455,7 @@ varonce71 = var72;
 var76 = ((val* (*)(val*))(var_65->class->vft[COLOR_string__Object__to_s]))(var_65) /* to_s on <var_65:Array[Object]>*/;
 var77 = ((val* (*)(val*))(self->class->vft[COLOR_model_base__Object__private_visibility]))(self) /* private_visibility on <self:CachedPhase>*/;
 ((void (*)(val*, val*, val*, val*))(var62->class->vft[COLOR_model__MAttribute__init]))(var62, var_mclassdef, var76, var77) /* init on <var62:MAttribute>*/;
-CHECK_NEW_model__MAttribute(var62);
 ((void (*)(val*, val*, val*, val*))(var61->class->vft[COLOR_model__MAttributeDef__init]))(var61, var_mclassdef, var62, var_location) /* init on <var61:MAttributeDef>*/;
-CHECK_NEW_model__MAttributeDef(var61);
 var_is_cached_mpropdef = var61;
 var78 = ((val* (*)(val*))(var_mclassdef->class->vft[COLOR_model__MClassDef__mmodule]))(var_mclassdef) /* mmodule on <var_mclassdef:MClassDef>*/;
 if (varonce79) {
@@ -499,7 +493,7 @@ if (!var93) {
 var_class_name96 = var92 == NULL ? "null" : var92->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "AAttrPropdef", var_class_name96);
 fprintf(stderr, " (%s:%d)\n", "src/cached.nit", 83);
-exit(1);
+show_backtrace(1);
 }
 var_is_cached_npropdef = var92;
 ((void (*)(val*, val*, val*))(self->class->vft[COLOR_cached__CachedPhase__associate_propdef]))(self, var_is_cached_mpropdef, var_is_cached_npropdef) /* associate_propdef on <self:CachedPhase>*/;
@@ -508,7 +502,6 @@ var98 = NEW_model__MMethod(&type_model__MMethod);
 var99 = NEW_array__Array(&type_array__Arraykernel__Object);
 var100 = 3;
 ((void (*)(val*, long))(var99->class->vft[COLOR_array__Array__with_capacity]))(var99, var100) /* with_capacity on <var99:Array[Object]>*/;
-CHECK_NEW_array__Array(var99);
 var_101 = var99;
 if (varonce102) {
 var103 = varonce102;
@@ -534,9 +527,7 @@ varonce107 = var108;
 var112 = ((val* (*)(val*))(var_101->class->vft[COLOR_string__Object__to_s]))(var_101) /* to_s on <var_101:Array[Object]>*/;
 var113 = ((val* (*)(val*))(self->class->vft[COLOR_model_base__Object__private_visibility]))(self) /* private_visibility on <self:CachedPhase>*/;
 ((void (*)(val*, val*, val*, val*))(var98->class->vft[COLOR_model__MMethod__init]))(var98, var_mclassdef, var112, var113) /* init on <var98:MMethod>*/;
-CHECK_NEW_model__MMethod(var98);
 ((void (*)(val*, val*, val*, val*))(var97->class->vft[COLOR_model__MMethodDef__init]))(var97, var_mclassdef, var98, var_location) /* init on <var97:MMethodDef>*/;
-CHECK_NEW_model__MMethodDef(var97);
 var_real_mpropdef = var97;
 var114 = ((val* (*)(val*))(var_mpropdef->class->vft[COLOR_model__MMethodDef__msignature]))(var_mpropdef) /* msignature on <var_mpropdef:MMethodDef>*/;
 ((void (*)(val*, val*))(var_real_mpropdef->class->vft[COLOR_model__MMethodDef__msignature_61d]))(var_real_mpropdef, var114) /* msignature= on <var_real_mpropdef:MMethodDef>*/;
@@ -563,7 +554,7 @@ if (!var122) {
 var_class_name125 = var121 == NULL ? "null" : var121->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "AConcreteMethPropdef", var_class_name125);
 fprintf(stderr, " (%s:%d)\n", "src/cached.nit", 90);
-exit(1);
+show_backtrace(1);
 }
 var_real_npropdef = var121;
 ((void (*)(val*, val*, val*))(self->class->vft[COLOR_cached__CachedPhase__associate_propdef]))(self, var_real_mpropdef, var_real_npropdef) /* associate_propdef on <self:CachedPhase>*/;
@@ -571,7 +562,7 @@ var126 = ((val* (*)(val*))(var_npropdef->class->vft[COLOR_parser_nodes__AConcret
 if (var126 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/cached.nit", 95);
-exit(1);
+show_backtrace(1);
 }
 var_real_body = var126;
 var127 = ((val* (*)(val*))(self->class->vft[COLOR_phase__Phase__toolcontext]))(self) /* toolcontext on <self:CachedPhase>*/;
@@ -661,7 +652,7 @@ var179 = ((val* (*)(val*))(var_real_npropdef->class->vft[COLOR_parser_nodes__ACo
 if (var179 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/cached.nit", 115);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var179->class->vft[COLOR_parser_nodes__ANode__replace_with]))(var179, var_real_body) /* replace_with on <var179:nullable AExpr>*/;
 }
@@ -712,7 +703,7 @@ var2 = 0; /* arg is null but recv is not */
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/cached.nit", 128);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_n->class->vft[COLOR_modelize_property__APropdef__mpropdef_61d]))(var_n, var_m) /* mpropdef= on <var_n:APropdef>*/;
 var3 = ((val* (*)(val*))(self->class->vft[COLOR_phase__Phase__toolcontext]))(self) /* toolcontext on <self:CachedPhase>*/;
@@ -723,7 +714,7 @@ var7 = !var6;
 if (!var7) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/cached.nit", 132);
-exit(1);
+show_backtrace(1);
 }
 var8 = ((val* (*)(val*))(self->class->vft[COLOR_phase__Phase__toolcontext]))(self) /* toolcontext on <self:CachedPhase>*/;
 var9 = ((val* (*)(val*))(var8->class->vft[COLOR_modelbuilder__ToolContext__modelbuilder]))(var8) /* modelbuilder on <var8:ToolContext>*/;
@@ -745,7 +736,7 @@ var17 = ((short int (*)(val*, val*))(var16->class->vft[COLOR_kernel__Object___61
 if (!var17) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/cached.nit", 138);
-exit(1);
+show_backtrace(1);
 }
 var18 = ((val* (*)(val*))(var_nclassdef->class->vft[COLOR_parser_nodes__AClassdef__n_propdefs]))(var_nclassdef) /* n_propdefs on <var_nclassdef:AClassdef>*/;
 var19 = ((short int (*)(val*, val*))(var18->class->vft[COLOR_abstract_collection__Collection__has]))(var18, var_n) /* has on <var18:ANodes[APropdef]>*/;

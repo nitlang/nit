@@ -73,7 +73,7 @@ class Range[E: Discrete]
 	end
 end
 
-class IteratorRange[E: Discrete]
+private class IteratorRange[E: Discrete]
 	# Iterator on ranges.
 	super Iterator[E]
 	var _range: Range[E]

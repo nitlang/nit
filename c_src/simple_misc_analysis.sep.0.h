@@ -8,7 +8,6 @@ void simple_misc_analysis__SimpleMiscAnalysisPhase__process_nmodule(val* self, v
 val* NEW_simple_misc_analysis__SimpleMiscVisitor(const struct type* type);
 extern const struct type type_simple_misc_analysis__SimpleMiscVisitor;
 extern const int COLOR_simple_misc_analysis__SimpleMiscVisitor__init;
-void CHECK_NEW_simple_misc_analysis__SimpleMiscVisitor(val*);
 extern const int COLOR_parser_nodes__Visitor__enter_visit;
 void simple_misc_analysis__AModule__do_simple_misc_analysis(val* self, val* p0);
 extern const int COLOR_simple_misc_analysis__ANode__accept_simple_misc;

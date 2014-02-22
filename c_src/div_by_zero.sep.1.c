@@ -7,7 +7,7 @@ var1 = self->attrs[COLOR_div_by_zero__ToolContext___64ddiv_by_zero_phase].val; /
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @div_by_zero_phase");
 fprintf(stderr, " (%s:%d)\n", "src/div_by_zero.nit", 26);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -45,13 +45,12 @@ var = ((val* (*)(val*))(var_nmodule->class->vft[COLOR_modelbuilder__AModule__mmo
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/div_by_zero.nit", 41);
-exit(1);
+show_backtrace(1);
 }
 var_mmodule = var;
 var1 = NEW_div_by_zero__DivByZeroVisitor(&type_div_by_zero__DivByZeroVisitor);
 var2 = ((val* (*)(val*))(self->class->vft[COLOR_phase__Phase__toolcontext]))(self) /* toolcontext on <self:DivByZeroPhase>*/;
 ((void (*)(val*, val*, val*))(var1->class->vft[COLOR_div_by_zero__DivByZeroVisitor__init]))(var1, var2, var_mmodule) /* init on <var1:DivByZeroVisitor>*/;
-CHECK_NEW_div_by_zero__DivByZeroVisitor(var1);
 var_visitor = var1;
 ((void (*)(val*, val*))(var_visitor->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_visitor, var_nmodule) /* enter_visit on <var_visitor:DivByZeroVisitor>*/;
 RET_LABEL:;
@@ -69,7 +68,7 @@ var1 = self->attrs[COLOR_div_by_zero__DivByZeroVisitor___64dtoolcontext].val; /*
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @toolcontext");
 fprintf(stderr, " (%s:%d)\n", "src/div_by_zero.nit", 53);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -102,7 +101,7 @@ var1 = self->attrs[COLOR_div_by_zero__DivByZeroVisitor___64dmmodule].val; /* @mm
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @mmodule");
 fprintf(stderr, " (%s:%d)\n", "src/div_by_zero.nit", 56);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -246,7 +245,7 @@ var21 = NULL;
 if (var19 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/div_by_zero.nit", 86);
-exit(1);
+show_backtrace(1);
 } else {
 var22 = ((short int (*)(val*, val*, val*, val*))(var19->class->vft[COLOR_model__MType__is_subtype]))(var19, var20, var21, var_int_type) /* is_subtype on <var19:nullable MType>*/;
 }

@@ -112,9 +112,9 @@ class RapidTypeAnalysis
 				#elttype = elttype.anchor_to(self.mainmodule, v.receiver)
 				var vararg = self.mainmodule.get_primitive_class("Array").get_mtype([elttype])
 				v.add_type(vararg)
-				v.add_monomorphic_send(vararg, self.modelbuilder.force_get_primitive_method(node, "with_native", vararg.mclass, self.mainmodule))
 				var native = self.mainmodule.get_primitive_class("NativeArray").get_mtype([elttype])
 				v.add_type(native)
+				v.add_monomorphic_send(vararg, self.modelbuilder.force_get_primitive_method(node, "with_native", vararg.mclass, self.mainmodule))
 			end
 
 
@@ -153,12 +153,16 @@ class RapidTypeAnalysis
 						v.add_monomorphic_send(v.receiver, auto_super_init)
 					end
 				end
-			else if npropdef isa AInternMethPropdef or npropdef isa AExternMethPropdef then
+			else if npropdef isa AInternMethPropdef or
+			  (npropdef isa AExternMethPropdef and npropdef.n_extern != null) then
 				# UGLY: We force the "instantation" of the concrete return type if any
 				var ret = mmethoddef.msignature.return_mtype
 				if ret != null and ret isa MClassType and ret.mclass.kind != abstract_kind and ret.mclass.kind != interface_kind then
 					v.add_type(ret)
 				end
+			else if npropdef isa AExternMethPropdef then
+				var nclassdef = npropdef.parent.as(AClassdef)
+				v.enter_visit(npropdef)
 			else if npropdef isa AExternInitPropdef then
 				v.add_type(v.receiver)
 			else
@@ -428,7 +432,7 @@ redef class AStringFormExpr
 	do
 		var native = v.get_class("NativeString").mclass_type
 		v.add_type(native)
-		var prop = v.get_method(native, "to_s")
+		var prop = v.get_method(native, "to_s_with_length")
 		v.add_monomorphic_send(native, prop)
 	end
 end

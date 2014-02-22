@@ -28,7 +28,7 @@ class StringTest
 		referenced_str = null
 	end
 
-	fun get_c_string import String::items, NativeString::to_s, NativeString::to_s_with_copy, StringTest::ref_test, StringTest::copy_test `{
+	fun get_c_string import String.items, NativeString.to_s, NativeString.to_s_with_copy, StringTest.ref_test, StringTest.copy_test `{
 		char* string = "This is a test string";
 
 		String ref_string = NativeString_to_s(string);

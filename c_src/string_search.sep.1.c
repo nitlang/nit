@@ -6,7 +6,7 @@ const char* var_class_name;
 var_class_name = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "search_index_in", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/string_search.nit", 20);
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -26,7 +26,7 @@ const char* var_class_name;
 var_class_name = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "search_in", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/string_search.nit", 25);
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -55,7 +55,6 @@ val* var7 /* : nullable Match */;
 var_s = p0;
 var1 = NEW_array__Array(&type_array__Arraystring_search__Match);
 ((void (*)(val*))(var1->class->vft[COLOR_array__Array__init]))(var1) /* init on <var1:Array[Match]>*/;
-CHECK_NEW_array__Array(var1);
 var_res = var1;
 var2 = 0;
 var3 = ((val* (*)(val*, val*, long))(self->class->vft[COLOR_string_search__Pattern__search_in]))(self, var_s, var2) /* search_in on <self:Pattern>*/;
@@ -116,7 +115,6 @@ long var18 /* : Int */;
 var_s = p0;
 var1 = NEW_array__Array(&type_array__Arraystring_search__Match);
 ((void (*)(val*))(var1->class->vft[COLOR_array__Array__init]))(var1) /* init on <var1:Array[Match]>*/;
-CHECK_NEW_array__Array(var1);
 var_res = var1;
 var2 = 0;
 var_i = var2;
@@ -141,7 +139,6 @@ RET_LABEL9:(void)0;
 var_len = var8;
 var11 = NEW_string_search__Match(&type_string_search__Match);
 ((void (*)(val*, val*, long, long))(var11->class->vft[COLOR_string_search__Match__init]))(var11, var_s, var_i, var_len) /* init on <var11:Match>*/;
-CHECK_NEW_string_search__Match(var11);
 ((void (*)(val*, val*))(var_res->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_res, var11) /* add on <var_res:Array[Match]>*/;
 var12 = ((long (*)(val*))(var_match->class->vft[COLOR_string_search__Match__after]))(var_match) /* after on <var_match:nullable Match(Match)>*/;
 var_i = var12;
@@ -159,7 +156,6 @@ goto RET_LABEL17;
 RET_LABEL17:(void)0;
 }
 ((void (*)(val*, val*, long, long))(var14->class->vft[COLOR_string_search__Match__init]))(var14, var_s, var_i, var16) /* init on <var14:Match>*/;
-CHECK_NEW_string_search__Match(var14);
 ((void (*)(val*, val*))(var_res->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_res, var14) /* add on <var_res:Array[Match]>*/;
 var = var_res;
 goto RET_LABEL;
@@ -183,7 +179,7 @@ var1 = self->attrs[COLOR_string_search__BM_Pattern___motif].val; /* _motif on <s
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _motif");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/string_search.nit", 67);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 goto RET_LABEL;
@@ -298,7 +294,7 @@ if (!var4) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var5 = var_from >= var1;
 var2 = var5;
@@ -308,7 +304,7 @@ RET_LABEL3:(void)0;
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/string_search.nit", 72);
-exit(1);
+show_backtrace(1);
 }
 var6 = ((long (*)(val*))(var_s->class->vft[COLOR_abstract_collection__Collection__length]))(var_s) /* length on <var_s:String>*/;
 var_n = var6;
@@ -337,7 +333,7 @@ if (!var17) {
 var_class_name20 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name20);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var21 = var_j < var12;
 var15 = var21;
@@ -363,7 +359,7 @@ if (!var30) {
 var_class_name33 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name33);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var34 = var_i >= var27;
 var28 = var34;
@@ -376,7 +372,7 @@ var35 = self->attrs[COLOR_string_search__BM_Pattern___motif].val; /* _motif on <
 if (var35 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _motif");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/string_search.nit", 79);
-exit(1);
+show_backtrace(1);
 }
 var36 = ((val* (*)(val*, long))(var35->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var35, var_i) /* [] on <var35:String>*/;
 { /* Inline kernel#Int#+ (var_i,var_j) */
@@ -417,7 +413,7 @@ if (!var51) {
 var_class_name54 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name54);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var55 = var_i < var48;
 var49 = var55;
@@ -432,7 +428,7 @@ var56 = self->attrs[COLOR_string_search__BM_Pattern___gs].val; /* _gs on <self:B
 if (var56 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _gs");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/string_search.nit", 83);
-exit(1);
+show_backtrace(1);
 }
 var57 = ((val* (*)(val*, long))(var56->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var56, var_i) /* [] on <var56:Array[Int]>*/;
 var58 = ((struct instance_kernel__Int*)var57)->value; /* autounbox from nullable Object to Int */;
@@ -474,7 +470,7 @@ if (!var77) {
 var_class_name80 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name80);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var81 = var_gs > var_bc;
 var75 = var81;
@@ -553,7 +549,7 @@ if (!var5) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var6 = var_to < var2;
 var3 = var6;
@@ -568,7 +564,6 @@ goto RET_LABEL;
 var8 = NEW_string_search__Match(&type_string_search__Match);
 var9 = self->attrs[COLOR_string_search__BM_Pattern___length].l; /* _length on <self:BM_Pattern> */
 ((void (*)(val*, val*, long, long))(var8->class->vft[COLOR_string_search__Match__init]))(var8, var_s, var_to, var9) /* init on <var8:Match>*/;
-CHECK_NEW_string_search__Match(var8);
 var = var8;
 goto RET_LABEL;
 }
@@ -598,11 +593,9 @@ self->attrs[COLOR_string_search__BM_Pattern___length].l = var; /* _length on <se
 var1 = NEW_array__Array(&type_array__Arraykernel__Int);
 var2 = self->attrs[COLOR_string_search__BM_Pattern___length].l; /* _length on <self:BM_Pattern> */
 ((void (*)(val*, long))(var1->class->vft[COLOR_array__Array__with_capacity]))(var1, var2) /* with_capacity on <var1:Array[Int]>*/;
-CHECK_NEW_array__Array(var1);
 self->attrs[COLOR_string_search__BM_Pattern___gs].val = var1; /* _gs on <self:BM_Pattern> */
 var3 = NEW_array__ArrayMap(&type_array__ArrayMapkernel__Charkernel__Int);
 ((void (*)(val*))(var3->class->vft[COLOR_array__ArrayMap__init]))(var3) /* init on <var3:ArrayMap[Char, Int]>*/;
-CHECK_NEW_array__ArrayMap(var3);
 self->attrs[COLOR_string_search__BM_Pattern___bc_table].val = var3; /* _bc_table on <self:BM_Pattern> */
 ((void (*)(val*))(self->class->vft[COLOR_string_search__BM_Pattern__compute_gs]))(self) /* compute_gs on <self:BM_Pattern>*/;
 ((void (*)(val*))(self->class->vft[COLOR_string_search__BM_Pattern__compute_bc]))(self) /* compute_bc on <self:BM_Pattern>*/;
@@ -630,7 +623,7 @@ var1 = self->attrs[COLOR_string_search__BM_Pattern___bc_table].val; /* _bc_table
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _bc_table");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/string_search.nit", 126);
-exit(1);
+show_backtrace(1);
 }
 var3 = BOX_kernel__Char(var_e); /* autobox from Char to Object */
 var2 = ((short int (*)(val*, val*))(var1->class->vft[COLOR_abstract_collection__MapRead__has_key]))(var1, var3) /* has_key on <var1:Map[Char, Int]>*/;
@@ -639,7 +632,7 @@ var4 = self->attrs[COLOR_string_search__BM_Pattern___bc_table].val; /* _bc_table
 if (var4 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _bc_table");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/string_search.nit", 127);
-exit(1);
+show_backtrace(1);
 }
 var6 = BOX_kernel__Char(var_e); /* autobox from Char to Object */
 var5 = ((val* (*)(val*, val*))(var4->class->vft[COLOR_abstract_collection__MapRead___91d_93d]))(var4, var6) /* [] on <var4:Map[Char, Int]>*/;
@@ -695,7 +688,7 @@ var = self->attrs[COLOR_string_search__BM_Pattern___motif].val; /* _motif on <se
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _motif");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/string_search.nit", 141);
-exit(1);
+show_backtrace(1);
 }
 var_x = var;
 var1 = self->attrs[COLOR_string_search__BM_Pattern___length].l; /* _length on <self:BM_Pattern> */
@@ -718,7 +711,7 @@ if (!var9) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var10 = var_i < var4;
 var7 = var10;
@@ -730,7 +723,7 @@ var11 = self->attrs[COLOR_string_search__BM_Pattern___bc_table].val; /* _bc_tabl
 if (var11 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _bc_table");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/string_search.nit", 145);
-exit(1);
+show_backtrace(1);
 }
 var12 = ((val* (*)(val*, long))(var_x->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var_x, var_i) /* [] on <var_x:String>*/;
 { /* Inline kernel#Int#- (var_m,var_i) */
@@ -865,7 +858,7 @@ var1 = self->attrs[COLOR_string_search__BM_Pattern___motif].val; /* _motif on <s
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _motif");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/string_search.nit", 152);
-exit(1);
+show_backtrace(1);
 }
 var_x = var1;
 var2 = self->attrs[COLOR_string_search__BM_Pattern___length].l; /* _length on <self:BM_Pattern> */
@@ -873,7 +866,6 @@ var_m = var2;
 var3 = NEW_array__Array(&type_array__Arraykernel__Int);
 var4 = BOX_kernel__Int(var_m); /* autobox from Int to nullable Object */
 ((void (*)(val*, val*, long))(var3->class->vft[COLOR_array__Array__filled_with]))(var3, var4, var_m) /* filled_with on <var3:Array[Int]>*/;
-CHECK_NEW_array__Array(var3);
 var_suff = var3;
 var5 = 0;
 var_f = var5;
@@ -903,7 +895,7 @@ if (!var17) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var18 = var_i >= var14;
 var15 = var18;
@@ -919,7 +911,7 @@ if (!var22) {
 var_class_name25 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name25);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var26 = var_i > var_g;
 var20 = var26;
@@ -962,7 +954,7 @@ if (!var43) {
 var_class_name46 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name46);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var47 = ((struct instance_kernel__Int*)var37)->value; /* autounbox from nullable Object to Int */;
 var48 = var47 < var38;
@@ -1005,7 +997,7 @@ if (!var62) {
 var_class_name65 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name65);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var66 = var_i < var_g;
 var60 = var66;
@@ -1027,7 +1019,7 @@ if (!var71) {
 var_class_name74 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name74);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var75 = var_g >= var68;
 var69 = var75;
@@ -1222,7 +1214,7 @@ var = self->attrs[COLOR_string_search__BM_Pattern___motif].val; /* _motif on <se
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _motif");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/string_search.nit", 175);
-exit(1);
+show_backtrace(1);
 }
 var_x = var;
 var1 = self->attrs[COLOR_string_search__BM_Pattern___length].l; /* _length on <self:BM_Pattern> */
@@ -1240,7 +1232,7 @@ if (!var6) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var7 = var_i < var_m;
 var4 = var7;
@@ -1252,7 +1244,7 @@ var8 = self->attrs[COLOR_string_search__BM_Pattern___gs].val; /* _gs on <self:BM
 if (var8 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _gs");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/string_search.nit", 180);
-exit(1);
+show_backtrace(1);
 }
 var9 = BOX_kernel__Int(var_m); /* autobox from Int to nullable Object */
 ((void (*)(val*, long, val*))(var8->class->vft[COLOR_abstract_collection__Sequence___91d_93d_61d]))(var8, var_i, var9) /* []= on <var8:Array[Int]>*/;
@@ -1293,7 +1285,7 @@ if (!var25) {
 var_class_name28 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name28);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var29 = var_i >= var20;
 var23 = var29;
@@ -1361,7 +1353,7 @@ if (!var56) {
 var_class_name59 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name59);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var60 = var_j < var51;
 var54 = var60;
@@ -1373,7 +1365,7 @@ var61 = self->attrs[COLOR_string_search__BM_Pattern___gs].val; /* _gs on <self:B
 if (var61 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _gs");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/string_search.nit", 188);
-exit(1);
+show_backtrace(1);
 }
 var62 = ((val* (*)(val*, long))(var61->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var61, var_j) /* [] on <var61:Array[Int]>*/;
 { /* Inline kernel#Int#== (var62,var_m) */
@@ -1391,7 +1383,7 @@ var67 = self->attrs[COLOR_string_search__BM_Pattern___gs].val; /* _gs on <self:B
 if (var67 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _gs");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/string_search.nit", 188);
-exit(1);
+show_backtrace(1);
 }
 var68 = 1;
 { /* Inline kernel#Int#- (var_m,var68) */
@@ -1452,7 +1444,7 @@ if (!var93) {
 var_class_name96 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name96);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var97 = var_i < var88;
 var91 = var97;
@@ -1464,7 +1456,7 @@ var98 = self->attrs[COLOR_string_search__BM_Pattern___gs].val; /* _gs on <self:B
 if (var98 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _gs");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/string_search.nit", 196);
-exit(1);
+show_backtrace(1);
 }
 var99 = 1;
 { /* Inline kernel#Int#- (var_m,var99) */
@@ -1523,7 +1515,7 @@ var1 = self->attrs[COLOR_string_search__BM_Pattern___motif].val; /* _motif on <s
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _motif");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/string_search.nit", 201);
-exit(1);
+show_backtrace(1);
 }
 var2 = ((long (*)(val*))(var1->class->vft[COLOR_kernel__Object__hash]))(var1) /* hash on <var1:String>*/;
 var = var2;
@@ -1571,13 +1563,13 @@ var3 = var_o->attrs[COLOR_string_search__BM_Pattern___motif].val; /* _motif on <
 if (var3 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _motif");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/string_search.nit", 202);
-exit(1);
+show_backtrace(1);
 }
 var4 = self->attrs[COLOR_string_search__BM_Pattern___motif].val; /* _motif on <self:BM_Pattern> */
 if (var4 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _motif");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/string_search.nit", 202);
-exit(1);
+show_backtrace(1);
 }
 var5 = ((short int (*)(val*, val*))(var3->class->vft[COLOR_kernel__Object___61d_61d]))(var3, var4) /* == on <var3:String>*/;
 var1 = var5;
@@ -1606,7 +1598,7 @@ var1 = self->attrs[COLOR_string_search__Match___string].val; /* _string on <self
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _string");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/string_search.nit", 207);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1697,7 +1689,7 @@ var1 = self->attrs[COLOR_string_search__Match___string].val; /* _string on <self
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _string");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/string_search.nit", 221);
-exit(1);
+show_backtrace(1);
 }
 var2 = self->attrs[COLOR_string_search__Match___from].l; /* _from on <self:Match> */
 var3 = self->attrs[COLOR_string_search__Match___length].l; /* _length on <self:Match> */
@@ -1756,7 +1748,7 @@ if (!var3) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var4 = var_len >= var;
 var1 = var4;
@@ -1766,7 +1758,7 @@ RET_LABEL2:(void)0;
 if (!var1) {
 fprintf(stderr, "Runtime error: %s", "Assert \'positive_length\' failed");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/string_search.nit", 226);
-exit(1);
+show_backtrace(1);
 }
 var5 = 0;
 { /* Inline kernel#Int#>= (var_f,var5) */
@@ -1777,7 +1769,7 @@ if (!var8) {
 var_class_name11 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name11);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var12 = var_f >= var5;
 var6 = var12;
@@ -1787,7 +1779,7 @@ RET_LABEL7:(void)0;
 if (!var6) {
 fprintf(stderr, "Runtime error: %s", "Assert \'valid_from\' failed");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/string_search.nit", 227);
-exit(1);
+show_backtrace(1);
 }
 { /* Inline kernel#Int#+ (var_f,var_len) */
 var15 = var_f + var_len;
@@ -1804,7 +1796,7 @@ if (!var19) {
 var_class_name22 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name22);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
-exit(1);
+show_backtrace(1);
 }
 var23 = var13 <= var16;
 var17 = var23;
@@ -1814,7 +1806,7 @@ RET_LABEL18:(void)0;
 if (!var17) {
 fprintf(stderr, "Runtime error: %s", "Assert \'valid_after\' failed");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/string_search.nit", 228);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_string_search__Match___string].val = var_s; /* _string on <self:Match> */
 self->attrs[COLOR_string_search__Match___from].l = var_f; /* _from on <self:Match> */
@@ -1862,7 +1854,7 @@ if (!var4) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var5 = var_from < var_stop;
 var2 = var5;
@@ -1950,7 +1942,7 @@ if (!var5) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var6 = var_pos < var2;
 var3 = var6;
@@ -1965,7 +1957,6 @@ goto RET_LABEL;
 var8 = NEW_string_search__Match(&type_string_search__Match);
 var9 = 1;
 ((void (*)(val*, val*, long, long))(var8->class->vft[COLOR_string_search__Match__init]))(var8, var_s, var_pos, var9) /* init on <var8:Match>*/;
-CHECK_NEW_string_search__Match(var8);
 var = var8;
 goto RET_LABEL;
 }
@@ -2056,7 +2047,7 @@ if (!var4) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var5 = var_from >= var1;
 var2 = var5;
@@ -2066,7 +2057,7 @@ RET_LABEL3:(void)0;
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/string_search.nit", 264);
-exit(1);
+show_backtrace(1);
 }
 var6 = ((long (*)(val*))(var_s->class->vft[COLOR_abstract_collection__Collection__length]))(var_s) /* length on <var_s:String>*/;
 var7 = ((long (*)(val*))(self->class->vft[COLOR_abstract_collection__Collection__length]))(self) /* length on <self:String>*/;
@@ -2093,7 +2084,7 @@ if (!var17) {
 var_class_name20 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name20);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var21 = var_from < var_stop;
 var15 = var21;
@@ -2120,7 +2111,7 @@ if (!var31) {
 var_class_name34 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name34);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var35 = var_i >= var28;
 var29 = var35;
@@ -2168,7 +2159,7 @@ if (!var51) {
 var_class_name54 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name54);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var55 = var_i < var48;
 var49 = var55;
@@ -2242,7 +2233,7 @@ if (!var5) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var6 = var_pos < var2;
 var3 = var6;
@@ -2257,7 +2248,6 @@ goto RET_LABEL;
 var8 = NEW_string_search__Match(&type_string_search__Match);
 var9 = ((long (*)(val*))(self->class->vft[COLOR_abstract_collection__Collection__length]))(self) /* length on <self:String>*/;
 ((void (*)(val*, val*, long, long))(var8->class->vft[COLOR_string_search__Match__init]))(var8, var_s, var_pos, var9) /* init on <var8:Match>*/;
-CHECK_NEW_string_search__Match(var8);
 var = var8;
 goto RET_LABEL;
 }
@@ -2360,7 +2350,6 @@ var_matches = var1;
 var2 = NEW_array__Array(&type_array__Arraystring__String);
 var3 = ((long (*)(val*))(var_matches->class->vft[COLOR_abstract_collection__Collection__length]))(var_matches) /* length on <var_matches:Array[Match]>*/;
 ((void (*)(val*, long))(var2->class->vft[COLOR_array__Array__with_capacity]))(var2, var3) /* with_capacity on <var2:Array[String]>*/;
-CHECK_NEW_array__Array(var2);
 var_res = var2;
 var4 = ((val* (*)(val*))(var_matches->class->vft[COLOR_abstract_collection__Collection__iterator]))(var_matches) /* iterator on <var_matches:Array[Match]>*/;
 for(;;) {

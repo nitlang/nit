@@ -8,7 +8,6 @@ val* var_analysis /* var analysis: RapidTypeAnalysis */;
 var_mainmodule = p0;
 var1 = NEW_rapid_type_analysis__RapidTypeAnalysis(&type_rapid_type_analysis__RapidTypeAnalysis);
 ((void (*)(val*, val*, val*))(var1->class->vft[COLOR_rapid_type_analysis__RapidTypeAnalysis__init]))(var1, self, var_mainmodule) /* init on <var1:RapidTypeAnalysis>*/;
-CHECK_NEW_rapid_type_analysis__RapidTypeAnalysis(var1);
 var_analysis = var1;
 ((void (*)(val*))(var_analysis->class->vft[COLOR_rapid_type_analysis__RapidTypeAnalysis__run_analysis]))(var_analysis) /* run_analysis on <var_analysis:RapidTypeAnalysis>*/;
 var = var_analysis;
@@ -33,7 +32,7 @@ var1 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___64dmodelbuilde
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @modelbuilder");
 fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 43);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -66,7 +65,7 @@ var1 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___64dmainmodule]
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @mainmodule");
 fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 46);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -99,7 +98,7 @@ var1 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___64dlive_types]
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @live_types");
 fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 50);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -132,7 +131,7 @@ var1 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___64dlive_open_t
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @live_open_types");
 fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 55);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -165,7 +164,7 @@ var1 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___64dlive_classe
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @live_classes");
 fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 59);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -198,7 +197,7 @@ var1 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___64dlive_cast_t
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @live_cast_types");
 fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 62);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -231,7 +230,7 @@ var1 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___64dlive_open_c
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @live_open_cast_types");
 fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 65);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -264,7 +263,7 @@ var1 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___64dlive_method
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @live_methoddefs");
 fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 69);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -297,7 +296,7 @@ var1 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___64dlive_method
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @live_methods");
 fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 72);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -330,7 +329,7 @@ var1 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___64dlive_super_
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @live_super_sends");
 fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 75);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -363,7 +362,7 @@ var1 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___64dtotry_metho
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @totry_methods");
 fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 78);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -396,7 +395,7 @@ var1 = self->attrs[COLOR_rapid_type_analysis__RapidTypeAnalysis___64dtodo].val; 
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @todo");
 fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 81);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -510,27 +509,27 @@ long var71 /* : Int */;
 val* var72 /* : NativeArray[MType] */;
 val* var73 /* : MClassType */;
 val* var_vararg /* var vararg: MClassType */;
-val* var74 /* : ModelBuilder */;
+val* var74 /* : MModule */;
 static val* varonce75;
 val* var76 /* : String */;
 char* var77 /* : NativeString */;
 long var78 /* : Int */;
 val* var79 /* : String */;
 val* var80 /* : MClass */;
-val* var81 /* : MModule */;
-val* var82 /* : MMethod */;
-val* var83 /* : MModule */;
-static val* varonce84;
-val* var85 /* : String */;
-char* var86 /* : NativeString */;
-long var87 /* : Int */;
-val* var88 /* : String */;
-val* var89 /* : MClass */;
-val* var90 /* : Array[MType] */;
-long var91 /* : Int */;
-val* var92 /* : NativeArray[MType] */;
-val* var93 /* : MClassType */;
+val* var81 /* : Array[MType] */;
+long var82 /* : Int */;
+val* var83 /* : NativeArray[MType] */;
+val* var84 /* : MClassType */;
 val* var_native /* var native: MClassType */;
+val* var85 /* : ModelBuilder */;
+static val* varonce86;
+val* var87 /* : String */;
+char* var88 /* : NativeString */;
+long var89 /* : Int */;
+val* var90 /* : String */;
+val* var91 /* : MClass */;
+val* var92 /* : MModule */;
+val* var93 /* : MMethod */;
 val* var94 /* : Range[Int] */;
 long var95 /* : Int */;
 val* var96 /* : nullable MSignature */;
@@ -604,79 +603,93 @@ int cltype158;
 int idtype159;
 short int var_ /* var : Bool */;
 short int var160 /* : Bool */;
-int cltype161;
-int idtype162;
-val* var163 /* : nullable MSignature */;
-val* var164 /* : nullable MType */;
-val* var_ret /* var ret: nullable MType */;
-short int var165 /* : Bool */;
-short int var166 /* : Bool */;
+short int var161 /* : Bool */;
+int cltype162;
+int idtype163;
+short int var_164 /* var : Bool */;
+val* var165 /* : nullable TString */;
+val* var166 /* : null */;
 short int var167 /* : Bool */;
-val* var168 /* : null */;
-short int var169 /* : Bool */;
-short int var_170 /* var : Bool */;
+val* var168 /* : nullable MSignature */;
+val* var169 /* : nullable MType */;
+val* var_ret /* var ret: nullable MType */;
+short int var170 /* : Bool */;
 short int var171 /* : Bool */;
-int cltype172;
-int idtype173;
-short int var_174 /* var : Bool */;
-val* var175 /* : MClass */;
-val* var176 /* : MClassKind */;
-val* var177 /* : MClassKind */;
-short int var178 /* : Bool */;
+short int var172 /* : Bool */;
+val* var173 /* : null */;
+short int var174 /* : Bool */;
+short int var_175 /* var : Bool */;
+short int var176 /* : Bool */;
+int cltype177;
+int idtype178;
 short int var_179 /* var : Bool */;
 val* var180 /* : MClass */;
 val* var181 /* : MClassKind */;
 val* var182 /* : MClassKind */;
 short int var183 /* : Bool */;
-short int var184 /* : Bool */;
-int cltype185;
-int idtype186;
-val* var187 /* : MClassType */;
-val* var188 /* : List[MClassType] */;
-val* var_todo_types /* var todo_types: List[MClassType] */;
-val* var189 /* : HashSet[MClassType] */;
-short int var190 /* : Bool */;
-short int var191 /* : Bool */;
-val* var192 /* : nullable Object */;
-val* var_t /* var t: MClassType */;
-val* var193 /* : HashSet[MClassType] */;
-val* var194 /* : Iterator[nullable Object] */;
-short int var195 /* : Bool */;
-val* var196 /* : nullable Object */;
-val* var_ot /* var ot: MClassType */;
-val* var197 /* : MModule */;
+short int var_184 /* var : Bool */;
+val* var185 /* : MClass */;
+val* var186 /* : MClassKind */;
+val* var187 /* : MClassKind */;
+short int var188 /* : Bool */;
+short int var189 /* : Bool */;
+int cltype190;
+int idtype191;
+val* var192 /* : nullable ANode */;
+short int var193 /* : Bool */;
+int cltype194;
+int idtype195;
+const char* var_class_name196;
+val* var_nclassdef197 /* var nclassdef: AClassdef */;
 short int var198 /* : Bool */;
-short int var199 /* : Bool */;
-val* var201 /* : MModule */;
-val* var202 /* : MType */;
-val* var_rt /* var rt: MClassType */;
+int cltype199;
+int idtype200;
+val* var201 /* : MClassType */;
+val* var202 /* : List[MClassType] */;
+val* var_todo_types /* var todo_types: List[MClassType] */;
 val* var203 /* : HashSet[MClassType] */;
 short int var204 /* : Bool */;
-val* var205 /* : HashSet[MClassType] */;
-val* var207 /* : HashSet[MType] */;
+short int var205 /* : Bool */;
+val* var206 /* : nullable Object */;
+val* var_t /* var t: MClassType */;
+val* var207 /* : HashSet[MClassType] */;
 val* var208 /* : Iterator[nullable Object] */;
 short int var209 /* : Bool */;
 val* var210 /* : nullable Object */;
-val* var_ot211 /* var ot: MType */;
-val* var212 /* : HashSet[MClassType] */;
-val* var213 /* : Iterator[nullable Object] */;
-short int var214 /* : Bool */;
-val* var215 /* : nullable Object */;
-val* var_t216 /* var t: MClassType */;
-val* var217 /* : MModule */;
+val* var_ot /* var ot: MClassType */;
+val* var211 /* : MModule */;
+short int var212 /* : Bool */;
+short int var213 /* : Bool */;
+val* var215 /* : MModule */;
+val* var216 /* : MType */;
+val* var_rt /* var rt: MClassType */;
+val* var217 /* : HashSet[MClassType] */;
 short int var218 /* : Bool */;
-short int var219 /* : Bool */;
-val* var221 /* : MModule */;
-val* var222 /* : MType */;
-val* var_rt223 /* var rt: MType */;
-short int var224 /* : Bool */;
-int cltype225;
-int idtype226;
-val* var227 /* : MType */;
+val* var219 /* : HashSet[MClassType] */;
+val* var221 /* : HashSet[MType] */;
+val* var222 /* : Iterator[nullable Object] */;
+short int var223 /* : Bool */;
+val* var224 /* : nullable Object */;
+val* var_ot225 /* var ot: MType */;
+val* var226 /* : HashSet[MClassType] */;
+val* var227 /* : Iterator[nullable Object] */;
 short int var228 /* : Bool */;
-int cltype229;
-int idtype230;
-val* var231 /* : HashSet[MClassType] */;
+val* var229 /* : nullable Object */;
+val* var_t230 /* var t: MClassType */;
+val* var231 /* : MModule */;
+short int var232 /* : Bool */;
+short int var233 /* : Bool */;
+val* var235 /* : MModule */;
+val* var236 /* : MType */;
+val* var_rt237 /* var rt: MType */;
+short int var238 /* : Bool */;
+int cltype239;
+int idtype240;
+val* var241 /* : MType */;
+short int var242 /* : Bool */;
+int cltype243;
+int idtype244;
+val* var245 /* : HashSet[MClassType] */;
 var = ((val* (*)(val*))(self->class->vft[COLOR_rapid_type_analysis__RapidTypeAnalysis__mainmodule]))(self) /* mainmodule on <self:RapidTypeAnalysis>*/;
 var1 = ((val* (*)(val*))(var->class->vft[COLOR_model__MModule__sys_type]))(var) /* sys_type on <var:MModule>*/;
 var_maintype = var1;
@@ -784,13 +797,12 @@ var43 = NEW_rapid_type_analysis__RapidTypeVisitor(&type_rapid_type_analysis__Rap
 var44 = ((val* (*)(val*))(var_mmethoddef->class->vft[COLOR_model__MPropDef__mclassdef]))(var_mmethoddef) /* mclassdef on <var_mmethoddef:MMethodDef>*/;
 var45 = ((val* (*)(val*))(var44->class->vft[COLOR_model__MClassDef__bound_mtype]))(var44) /* bound_mtype on <var44:MClassDef>*/;
 ((void (*)(val*, val*, val*, val*))(var43->class->vft[COLOR_rapid_type_analysis__RapidTypeVisitor__init]))(var43, self, var45, var_mmethoddef) /* init on <var43:RapidTypeVisitor>*/;
-CHECK_NEW_rapid_type_analysis__RapidTypeVisitor(var43);
 var_v = var43;
 var46 = ((val* (*)(val*))(var_mmethoddef->class->vft[COLOR_model__MMethodDef__msignature]))(var_mmethoddef) /* msignature on <var_mmethoddef:MMethodDef>*/;
 if (var46 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 108);
-exit(1);
+show_backtrace(1);
 } else {
 var47 = ((long (*)(val*))(var46->class->vft[COLOR_model__MSignature__vararg_rank]))(var46) /* vararg_rank on <var46:nullable MSignature>*/;
 }
@@ -810,7 +822,7 @@ if (!var54) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var55 = var_vararg_rank > var49;
 var52 = var55;
@@ -826,7 +838,7 @@ var59 = ((val* (*)(val*))(var_mmethoddef->class->vft[COLOR_model__MMethodDef__ms
 if (var59 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 111);
-exit(1);
+show_backtrace(1);
 } else {
 var60 = ((val* (*)(val*))(var59->class->vft[COLOR_model__MSignature__mparameters]))(var59) /* mparameters on <var59:nullable MSignature>*/;
 }
@@ -850,47 +862,45 @@ var71 = 1;
 var72 = NEW_array__NativeArray(var71, &type_array__NativeArraymodel__MType);
 ((struct instance_array__NativeArray*)var72)->values[0] = (val*) var_elttype;
 ((void (*)(val*, val*, long))(var70->class->vft[COLOR_array__Array__with_native]))(var70, var72, var71) /* with_native on <var70:Array[MType]>*/;
-CHECK_NEW_array__Array(var70);
 }
 var73 = ((val* (*)(val*, val*))(var69->class->vft[COLOR_model__MClass__get_mtype]))(var69, var70) /* get_mtype on <var69:MClass>*/;
 var_vararg = var73;
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_rapid_type_analysis__RapidTypeVisitor__add_type]))(var_v, var_vararg) /* add_type on <var_v:RapidTypeVisitor>*/;
-var74 = ((val* (*)(val*))(self->class->vft[COLOR_rapid_type_analysis__RapidTypeAnalysis__modelbuilder]))(self) /* modelbuilder on <self:RapidTypeAnalysis>*/;
+var74 = ((val* (*)(val*))(self->class->vft[COLOR_rapid_type_analysis__RapidTypeAnalysis__mainmodule]))(self) /* mainmodule on <self:RapidTypeAnalysis>*/;
 if (varonce75) {
 var76 = varonce75;
 } else {
-var77 = "with_native";
+var77 = "NativeArray";
 var78 = 11;
 var79 = string__NativeString__to_s_with_length(var77, var78);
 var76 = var79;
 varonce75 = var76;
 }
-var80 = ((val* (*)(val*))(var_vararg->class->vft[COLOR_model__MClassType__mclass]))(var_vararg) /* mclass on <var_vararg:MClassType>*/;
-var81 = ((val* (*)(val*))(self->class->vft[COLOR_rapid_type_analysis__RapidTypeAnalysis__mainmodule]))(self) /* mainmodule on <self:RapidTypeAnalysis>*/;
-var82 = ((val* (*)(val*, val*, val*, val*, val*))(var74->class->vft[COLOR_modelbuilder__ModelBuilder__force_get_primitive_method]))(var74, var_node, var76, var80, var81) /* force_get_primitive_method on <var74:ModelBuilder>*/;
-((void (*)(val*, val*, val*))(var_v->class->vft[COLOR_rapid_type_analysis__RapidTypeVisitor__add_monomorphic_send]))(var_v, var_vararg, var82) /* add_monomorphic_send on <var_v:RapidTypeVisitor>*/;
-var83 = ((val* (*)(val*))(self->class->vft[COLOR_rapid_type_analysis__RapidTypeAnalysis__mainmodule]))(self) /* mainmodule on <self:RapidTypeAnalysis>*/;
-if (varonce84) {
-var85 = varonce84;
-} else {
-var86 = "NativeArray";
-var87 = 11;
-var88 = string__NativeString__to_s_with_length(var86, var87);
-var85 = var88;
-varonce84 = var85;
+var80 = ((val* (*)(val*, val*))(var74->class->vft[COLOR_model__MModule__get_primitive_class]))(var74, var76) /* get_primitive_class on <var74:MModule>*/;
+var81 = NEW_array__Array(&type_array__Arraymodel__MType);
+{ /* var81 = array_instance Array[MType] */
+var82 = 1;
+var83 = NEW_array__NativeArray(var82, &type_array__NativeArraymodel__MType);
+((struct instance_array__NativeArray*)var83)->values[0] = (val*) var_elttype;
+((void (*)(val*, val*, long))(var81->class->vft[COLOR_array__Array__with_native]))(var81, var83, var82) /* with_native on <var81:Array[MType]>*/;
 }
-var89 = ((val* (*)(val*, val*))(var83->class->vft[COLOR_model__MModule__get_primitive_class]))(var83, var85) /* get_primitive_class on <var83:MModule>*/;
-var90 = NEW_array__Array(&type_array__Arraymodel__MType);
-{ /* var90 = array_instance Array[MType] */
-var91 = 1;
-var92 = NEW_array__NativeArray(var91, &type_array__NativeArraymodel__MType);
-((struct instance_array__NativeArray*)var92)->values[0] = (val*) var_elttype;
-((void (*)(val*, val*, long))(var90->class->vft[COLOR_array__Array__with_native]))(var90, var92, var91) /* with_native on <var90:Array[MType]>*/;
-CHECK_NEW_array__Array(var90);
-}
-var93 = ((val* (*)(val*, val*))(var89->class->vft[COLOR_model__MClass__get_mtype]))(var89, var90) /* get_mtype on <var89:MClass>*/;
-var_native = var93;
+var84 = ((val* (*)(val*, val*))(var80->class->vft[COLOR_model__MClass__get_mtype]))(var80, var81) /* get_mtype on <var80:MClass>*/;
+var_native = var84;
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_rapid_type_analysis__RapidTypeVisitor__add_type]))(var_v, var_native) /* add_type on <var_v:RapidTypeVisitor>*/;
+var85 = ((val* (*)(val*))(self->class->vft[COLOR_rapid_type_analysis__RapidTypeAnalysis__modelbuilder]))(self) /* modelbuilder on <self:RapidTypeAnalysis>*/;
+if (varonce86) {
+var87 = varonce86;
+} else {
+var88 = "with_native";
+var89 = 11;
+var90 = string__NativeString__to_s_with_length(var88, var89);
+var87 = var90;
+varonce86 = var87;
+}
+var91 = ((val* (*)(val*))(var_vararg->class->vft[COLOR_model__MClassType__mclass]))(var_vararg) /* mclass on <var_vararg:MClassType>*/;
+var92 = ((val* (*)(val*))(self->class->vft[COLOR_rapid_type_analysis__RapidTypeAnalysis__mainmodule]))(self) /* mainmodule on <self:RapidTypeAnalysis>*/;
+var93 = ((val* (*)(val*, val*, val*, val*, val*))(var85->class->vft[COLOR_modelbuilder__ModelBuilder__force_get_primitive_method]))(var85, var_node, var87, var91, var92) /* force_get_primitive_method on <var85:ModelBuilder>*/;
+((void (*)(val*, val*, val*))(var_v->class->vft[COLOR_rapid_type_analysis__RapidTypeVisitor__add_monomorphic_send]))(var_v, var_vararg, var93) /* add_monomorphic_send on <var_v:RapidTypeVisitor>*/;
 } else {
 }
 var94 = NEW_range__Range(&type_range__Rangekernel__Int);
@@ -899,14 +909,13 @@ var96 = ((val* (*)(val*))(var_mmethoddef->class->vft[COLOR_model__MMethodDef__ms
 if (var96 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 121);
-exit(1);
+show_backtrace(1);
 } else {
 var97 = ((long (*)(val*))(var96->class->vft[COLOR_model__MSignature__arity]))(var96) /* arity on <var96:nullable MSignature>*/;
 }
 var98 = BOX_kernel__Int(var95); /* autobox from Int to Discrete */
 var99 = BOX_kernel__Int(var97); /* autobox from Int to Discrete */
 ((void (*)(val*, val*, val*))(var94->class->vft[COLOR_range__Range__without_last]))(var94, var98, var99) /* without_last on <var94:Range[Int]>*/;
-CHECK_NEW_range__Range(var94);
 var100 = ((val* (*)(val*))(var94->class->vft[COLOR_abstract_collection__Collection__iterator]))(var94) /* iterator on <var94:Range[Int]>*/;
 for(;;) {
 var101 = ((short int (*)(val*))(var100->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var100) /* is_ok on <var100:Iterator[nullable Object]>*/;
@@ -920,7 +929,7 @@ var106 = ((val* (*)(val*))(var105->class->vft[COLOR_model__MMethodDef__msignatur
 if (var106 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 122);
-exit(1);
+show_backtrace(1);
 } else {
 var107 = ((val* (*)(val*))(var106->class->vft[COLOR_model__MSignature__mparameters]))(var106) /* mparameters on <var106:nullable MSignature>*/;
 }
@@ -937,7 +946,7 @@ var113 = ((val* (*)(val*))(var_mmethoddef->class->vft[COLOR_model__MMethodDef__m
 if (var113 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 124);
-exit(1);
+show_backtrace(1);
 } else {
 var114 = ((val* (*)(val*))(var113->class->vft[COLOR_model__MSignature__mparameters]))(var113) /* mparameters on <var113:nullable MSignature>*/;
 }
@@ -998,7 +1007,7 @@ BREAK_label140: (void)0;
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 142);
-exit(1);
+show_backtrace(1);
 }
 goto CONTINUE_label141;
 } else {
@@ -1053,82 +1062,127 @@ if (var157){
 var156 = var_;
 } else {
 /* <var_npropdef:APropdef> isa AExternMethPropdef */
-cltype161 = type_parser_nodes__AExternMethPropdef.color;
-idtype162 = type_parser_nodes__AExternMethPropdef.id;
-if(cltype161 >= var_npropdef->type->table_size) {
-var160 = 0;
+cltype162 = type_parser_nodes__AExternMethPropdef.color;
+idtype163 = type_parser_nodes__AExternMethPropdef.id;
+if(cltype162 >= var_npropdef->type->table_size) {
+var161 = 0;
 } else {
-var160 = var_npropdef->type->type_table[cltype161] == idtype162;
+var161 = var_npropdef->type->type_table[cltype162] == idtype163;
+}
+var_164 = var161;
+if (var161){
+var165 = ((val* (*)(val*))(var_npropdef->class->vft[COLOR_parser_nodes__AExternPropdef__n_extern]))(var_npropdef) /* n_extern on <var_npropdef:APropdef(AExternMethPropdef)>*/;
+var166 = NULL;
+if (var165 == NULL) {
+var167 = 0; /* is null */
+} else {
+var167 = 1; /* arg is null and recv is not */
+}
+var160 = var167;
+} else {
+var160 = var_164;
 }
 var156 = var160;
 }
 if (var156){
-var163 = ((val* (*)(val*))(var_mmethoddef->class->vft[COLOR_model__MMethodDef__msignature]))(var_mmethoddef) /* msignature on <var_mmethoddef:MMethodDef>*/;
-if (var163 == NULL) {
+var168 = ((val* (*)(val*))(var_mmethoddef->class->vft[COLOR_model__MMethodDef__msignature]))(var_mmethoddef) /* msignature on <var_mmethoddef:MMethodDef>*/;
+if (var168 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 158);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 159);
+show_backtrace(1);
 } else {
-var164 = ((val* (*)(val*))(var163->class->vft[COLOR_model__MSignature__return_mtype]))(var163) /* return_mtype on <var163:nullable MSignature>*/;
+var169 = ((val* (*)(val*))(var168->class->vft[COLOR_model__MSignature__return_mtype]))(var168) /* return_mtype on <var168:nullable MSignature>*/;
 }
-var_ret = var164;
-var168 = NULL;
+var_ret = var169;
+var173 = NULL;
 if (var_ret == NULL) {
-var169 = 0; /* is null */
+var174 = 0; /* is null */
 } else {
-var169 = 1; /* arg is null and recv is not */
+var174 = 1; /* arg is null and recv is not */
 }
-var_170 = var169;
-if (var169){
+var_175 = var174;
+if (var174){
 /* <var_ret:nullable MType(MType)> isa MClassType */
-cltype172 = type_model__MClassType.color;
-idtype173 = type_model__MClassType.id;
-if(cltype172 >= var_ret->type->table_size) {
-var171 = 0;
+cltype177 = type_model__MClassType.color;
+idtype178 = type_model__MClassType.id;
+if(cltype177 >= var_ret->type->table_size) {
+var176 = 0;
 } else {
-var171 = var_ret->type->type_table[cltype172] == idtype173;
+var176 = var_ret->type->type_table[cltype177] == idtype178;
 }
-var167 = var171;
+var172 = var176;
 } else {
-var167 = var_170;
+var172 = var_175;
 }
-var_174 = var167;
-if (var167){
-var175 = ((val* (*)(val*))(var_ret->class->vft[COLOR_model__MClassType__mclass]))(var_ret) /* mclass on <var_ret:nullable MType(MClassType)>*/;
-var176 = ((val* (*)(val*))(var175->class->vft[COLOR_model__MClass__kind]))(var175) /* kind on <var175:MClass>*/;
-var177 = ((val* (*)(val*))(self->class->vft[COLOR_model__Object__abstract_kind]))(self) /* abstract_kind on <self:RapidTypeAnalysis>*/;
-var178 = ((short int (*)(val*, val*))(var176->class->vft[COLOR_kernel__Object___33d_61d]))(var176, var177) /* != on <var176:MClassKind>*/;
-var166 = var178;
-} else {
-var166 = var_174;
-}
-var_179 = var166;
-if (var166){
+var_179 = var172;
+if (var172){
 var180 = ((val* (*)(val*))(var_ret->class->vft[COLOR_model__MClassType__mclass]))(var_ret) /* mclass on <var_ret:nullable MType(MClassType)>*/;
 var181 = ((val* (*)(val*))(var180->class->vft[COLOR_model__MClass__kind]))(var180) /* kind on <var180:MClass>*/;
-var182 = ((val* (*)(val*))(self->class->vft[COLOR_model__Object__interface_kind]))(self) /* interface_kind on <self:RapidTypeAnalysis>*/;
+var182 = ((val* (*)(val*))(self->class->vft[COLOR_model__Object__abstract_kind]))(self) /* abstract_kind on <self:RapidTypeAnalysis>*/;
 var183 = ((short int (*)(val*, val*))(var181->class->vft[COLOR_kernel__Object___33d_61d]))(var181, var182) /* != on <var181:MClassKind>*/;
-var165 = var183;
+var171 = var183;
 } else {
-var165 = var_179;
+var171 = var_179;
 }
-if (var165){
+var_184 = var171;
+if (var171){
+var185 = ((val* (*)(val*))(var_ret->class->vft[COLOR_model__MClassType__mclass]))(var_ret) /* mclass on <var_ret:nullable MType(MClassType)>*/;
+var186 = ((val* (*)(val*))(var185->class->vft[COLOR_model__MClass__kind]))(var185) /* kind on <var185:MClass>*/;
+var187 = ((val* (*)(val*))(self->class->vft[COLOR_model__Object__interface_kind]))(self) /* interface_kind on <self:RapidTypeAnalysis>*/;
+var188 = ((short int (*)(val*, val*))(var186->class->vft[COLOR_kernel__Object___33d_61d]))(var186, var187) /* != on <var186:MClassKind>*/;
+var170 = var188;
+} else {
+var170 = var_184;
+}
+if (var170){
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_rapid_type_analysis__RapidTypeVisitor__add_type]))(var_v, var_ret) /* add_type on <var_v:RapidTypeVisitor>*/;
 } else {
 }
 } else {
-/* <var_npropdef:APropdef> isa AExternInitPropdef */
-cltype185 = type_parser_nodes__AExternInitPropdef.color;
-idtype186 = type_parser_nodes__AExternInitPropdef.id;
-if(cltype185 >= var_npropdef->type->table_size) {
-var184 = 0;
+/* <var_npropdef:APropdef> isa AExternMethPropdef */
+cltype190 = type_parser_nodes__AExternMethPropdef.color;
+idtype191 = type_parser_nodes__AExternMethPropdef.id;
+if(cltype190 >= var_npropdef->type->table_size) {
+var189 = 0;
 } else {
-var184 = var_npropdef->type->type_table[cltype185] == idtype186;
+var189 = var_npropdef->type->type_table[cltype190] == idtype191;
 }
-if (var184){
-var187 = ((val* (*)(val*))(var_v->class->vft[COLOR_rapid_type_analysis__RapidTypeVisitor__receiver]))(var_v) /* receiver on <var_v:RapidTypeVisitor>*/;
-((void (*)(val*, val*))(var_v->class->vft[COLOR_rapid_type_analysis__RapidTypeVisitor__add_type]))(var_v, var187) /* add_type on <var_v:RapidTypeVisitor>*/;
+if (var189){
+var192 = ((val* (*)(val*))(var_npropdef->class->vft[COLOR_parser_nodes__ANode__parent]))(var_npropdef) /* parent on <var_npropdef:APropdef(AExternMethPropdef)>*/;
+/* <var192:nullable ANode> isa AClassdef */
+cltype194 = type_parser_nodes__AClassdef.color;
+idtype195 = type_parser_nodes__AClassdef.id;
+if(var192 == NULL) {
+var193 = 0;
 } else {
+if(cltype194 >= var192->type->table_size) {
+var193 = 0;
+} else {
+var193 = var192->type->type_table[cltype194] == idtype195;
+}
+}
+if (!var193) {
+var_class_name196 = var192 == NULL ? "null" : var192->type->name;
+fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "AClassdef", var_class_name196);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 164);
+show_backtrace(1);
+}
+var_nclassdef197 = var192;
+((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var_npropdef) /* enter_visit on <var_v:RapidTypeVisitor>*/;
+} else {
+/* <var_npropdef:APropdef> isa AExternInitPropdef */
+cltype199 = type_parser_nodes__AExternInitPropdef.color;
+idtype200 = type_parser_nodes__AExternInitPropdef.id;
+if(cltype199 >= var_npropdef->type->table_size) {
+var198 = 0;
+} else {
+var198 = var_npropdef->type->type_table[cltype199] == idtype200;
+}
+if (var198){
+var201 = ((val* (*)(val*))(var_v->class->vft[COLOR_rapid_type_analysis__RapidTypeVisitor__receiver]))(var_v) /* receiver on <var_v:RapidTypeVisitor>*/;
+((void (*)(val*, val*))(var_v->class->vft[COLOR_rapid_type_analysis__RapidTypeVisitor__add_type]))(var_v, var201) /* add_type on <var_v:RapidTypeVisitor>*/;
+} else {
+}
 }
 }
 }
@@ -1136,112 +1190,111 @@ var187 = ((val* (*)(val*))(var_v->class->vft[COLOR_rapid_type_analysis__RapidTyp
 CONTINUE_label141: (void)0;
 }
 BREAK_label141: (void)0;
-var188 = NEW_list__List(&type_list__Listmodel__MClassType);
-((void (*)(val*))(var188->class->vft[COLOR_list__List__init]))(var188) /* init on <var188:List[MClassType]>*/;
-CHECK_NEW_list__List(var188);
-var_todo_types = var188;
-var189 = ((val* (*)(val*))(self->class->vft[COLOR_rapid_type_analysis__RapidTypeAnalysis__live_types]))(self) /* live_types on <self:RapidTypeAnalysis>*/;
-((void (*)(val*, val*))(var_todo_types->class->vft[COLOR_abstract_collection__SimpleCollection__add_all]))(var_todo_types, var189) /* add_all on <var_todo_types:List[MClassType]>*/;
-for(;;) {
-var190 = ((short int (*)(val*))(var_todo_types->class->vft[COLOR_abstract_collection__Collection__is_empty]))(var_todo_types) /* is_empty on <var_todo_types:List[MClassType]>*/;
-var191 = !var190;
-if (!var191) break;
-var192 = ((val* (*)(val*))(var_todo_types->class->vft[COLOR_abstract_collection__Sequence__shift]))(var_todo_types) /* shift on <var_todo_types:List[MClassType]>*/;
-var_t = var192;
-var193 = ((val* (*)(val*))(self->class->vft[COLOR_rapid_type_analysis__RapidTypeAnalysis__live_open_types]))(self) /* live_open_types on <self:RapidTypeAnalysis>*/;
-var194 = ((val* (*)(val*))(var193->class->vft[COLOR_abstract_collection__Collection__iterator]))(var193) /* iterator on <var193:HashSet[MClassType]>*/;
-for(;;) {
-var195 = ((short int (*)(val*))(var194->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var194) /* is_ok on <var194:Iterator[nullable Object]>*/;
-if(!var195) break;
-var196 = ((val* (*)(val*))(var194->class->vft[COLOR_abstract_collection__Iterator__item]))(var194) /* item on <var194:Iterator[nullable Object]>*/;
-var_ot = var196;
-var197 = ((val* (*)(val*))(self->class->vft[COLOR_rapid_type_analysis__RapidTypeAnalysis__mainmodule]))(self) /* mainmodule on <self:RapidTypeAnalysis>*/;
-var198 = ((short int (*)(val*, val*, val*, val*))(var_ot->class->vft[COLOR_model__MType__can_resolve_for]))(var_ot, var_t, var_t, var197) /* can_resolve_for on <var_ot:MClassType>*/;
-var199 = !var198;
-if (var199){
-goto CONTINUE_label200;
-} else {
-}
-var201 = ((val* (*)(val*))(self->class->vft[COLOR_rapid_type_analysis__RapidTypeAnalysis__mainmodule]))(self) /* mainmodule on <self:RapidTypeAnalysis>*/;
-var202 = ((val* (*)(val*, val*, val*))(var_ot->class->vft[COLOR_model__MType__anchor_to]))(var_ot, var201, var_t) /* anchor_to on <var_ot:MClassType>*/;
-var_rt = var202;
+var202 = NEW_list__List(&type_list__Listmodel__MClassType);
+((void (*)(val*))(var202->class->vft[COLOR_list__List__init]))(var202) /* init on <var202:List[MClassType]>*/;
+var_todo_types = var202;
 var203 = ((val* (*)(val*))(self->class->vft[COLOR_rapid_type_analysis__RapidTypeAnalysis__live_types]))(self) /* live_types on <self:RapidTypeAnalysis>*/;
-var204 = ((short int (*)(val*, val*))(var203->class->vft[COLOR_abstract_collection__Collection__has]))(var203, var_rt) /* has on <var203:HashSet[MClassType]>*/;
-if (var204){
-goto CONTINUE_label200;
-} else {
-}
-var205 = ((val* (*)(val*))(self->class->vft[COLOR_rapid_type_analysis__RapidTypeAnalysis__live_types]))(self) /* live_types on <self:RapidTypeAnalysis>*/;
-((void (*)(val*, val*))(var205->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var205, var_rt) /* add on <var205:HashSet[MClassType]>*/;
-((void (*)(val*, val*))(var_todo_types->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_todo_types, var_rt) /* add on <var_todo_types:List[MClassType]>*/;
-((void (*)(val*, val*))(self->class->vft[COLOR_rapid_type_analysis__RapidTypeAnalysis__check_depth]))(self, var_rt) /* check_depth on <self:RapidTypeAnalysis>*/;
-CONTINUE_label200: (void)0;
-((void (*)(val*))(var194->class->vft[COLOR_abstract_collection__Iterator__next]))(var194) /* next on <var194:Iterator[nullable Object]>*/;
-}
-BREAK_label200: (void)0;
-CONTINUE_label206: (void)0;
-}
-BREAK_label206: (void)0;
-var207 = ((val* (*)(val*))(self->class->vft[COLOR_rapid_type_analysis__RapidTypeAnalysis__live_open_cast_types]))(self) /* live_open_cast_types on <self:RapidTypeAnalysis>*/;
-var208 = ((val* (*)(val*))(var207->class->vft[COLOR_abstract_collection__Collection__iterator]))(var207) /* iterator on <var207:HashSet[MType]>*/;
+((void (*)(val*, val*))(var_todo_types->class->vft[COLOR_abstract_collection__SimpleCollection__add_all]))(var_todo_types, var203) /* add_all on <var_todo_types:List[MClassType]>*/;
+for(;;) {
+var204 = ((short int (*)(val*))(var_todo_types->class->vft[COLOR_abstract_collection__Collection__is_empty]))(var_todo_types) /* is_empty on <var_todo_types:List[MClassType]>*/;
+var205 = !var204;
+if (!var205) break;
+var206 = ((val* (*)(val*))(var_todo_types->class->vft[COLOR_abstract_collection__Sequence__shift]))(var_todo_types) /* shift on <var_todo_types:List[MClassType]>*/;
+var_t = var206;
+var207 = ((val* (*)(val*))(self->class->vft[COLOR_rapid_type_analysis__RapidTypeAnalysis__live_open_types]))(self) /* live_open_types on <self:RapidTypeAnalysis>*/;
+var208 = ((val* (*)(val*))(var207->class->vft[COLOR_abstract_collection__Collection__iterator]))(var207) /* iterator on <var207:HashSet[MClassType]>*/;
 for(;;) {
 var209 = ((short int (*)(val*))(var208->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var208) /* is_ok on <var208:Iterator[nullable Object]>*/;
 if(!var209) break;
 var210 = ((val* (*)(val*))(var208->class->vft[COLOR_abstract_collection__Iterator__item]))(var208) /* item on <var208:Iterator[nullable Object]>*/;
-var_ot211 = var210;
-var212 = ((val* (*)(val*))(self->class->vft[COLOR_rapid_type_analysis__RapidTypeAnalysis__live_types]))(self) /* live_types on <self:RapidTypeAnalysis>*/;
-var213 = ((val* (*)(val*))(var212->class->vft[COLOR_abstract_collection__Collection__iterator]))(var212) /* iterator on <var212:HashSet[MClassType]>*/;
-for(;;) {
-var214 = ((short int (*)(val*))(var213->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var213) /* is_ok on <var213:Iterator[nullable Object]>*/;
-if(!var214) break;
-var215 = ((val* (*)(val*))(var213->class->vft[COLOR_abstract_collection__Iterator__item]))(var213) /* item on <var213:Iterator[nullable Object]>*/;
-var_t216 = var215;
-var217 = ((val* (*)(val*))(self->class->vft[COLOR_rapid_type_analysis__RapidTypeAnalysis__mainmodule]))(self) /* mainmodule on <self:RapidTypeAnalysis>*/;
-var218 = ((short int (*)(val*, val*, val*, val*))(var_ot211->class->vft[COLOR_model__MType__can_resolve_for]))(var_ot211, var_t216, var_t216, var217) /* can_resolve_for on <var_ot211:MType>*/;
-var219 = !var218;
-if (var219){
-goto CONTINUE_label220;
+var_ot = var210;
+var211 = ((val* (*)(val*))(self->class->vft[COLOR_rapid_type_analysis__RapidTypeAnalysis__mainmodule]))(self) /* mainmodule on <self:RapidTypeAnalysis>*/;
+var212 = ((short int (*)(val*, val*, val*, val*))(var_ot->class->vft[COLOR_model__MType__can_resolve_for]))(var_ot, var_t, var_t, var211) /* can_resolve_for on <var_ot:MClassType>*/;
+var213 = !var212;
+if (var213){
+goto CONTINUE_label214;
 } else {
 }
-var221 = ((val* (*)(val*))(self->class->vft[COLOR_rapid_type_analysis__RapidTypeAnalysis__mainmodule]))(self) /* mainmodule on <self:RapidTypeAnalysis>*/;
-var222 = ((val* (*)(val*, val*, val*))(var_ot211->class->vft[COLOR_model__MType__anchor_to]))(var_ot211, var221, var_t216) /* anchor_to on <var_ot211:MType>*/;
-var_rt223 = var222;
-/* <var_rt223:MType> isa MNullableType */
-cltype225 = type_model__MNullableType.color;
-idtype226 = type_model__MNullableType.id;
-if(cltype225 >= var_rt223->type->table_size) {
-var224 = 0;
-} else {
-var224 = var_rt223->type->type_table[cltype225] == idtype226;
-}
-if (var224){
-var227 = ((val* (*)(val*))(var_rt223->class->vft[COLOR_model__MNullableType__mtype]))(var_rt223) /* mtype on <var_rt223:MType(MNullableType)>*/;
-var_rt223 = var227;
+var215 = ((val* (*)(val*))(self->class->vft[COLOR_rapid_type_analysis__RapidTypeAnalysis__mainmodule]))(self) /* mainmodule on <self:RapidTypeAnalysis>*/;
+var216 = ((val* (*)(val*, val*, val*))(var_ot->class->vft[COLOR_model__MType__anchor_to]))(var_ot, var215, var_t) /* anchor_to on <var_ot:MClassType>*/;
+var_rt = var216;
+var217 = ((val* (*)(val*))(self->class->vft[COLOR_rapid_type_analysis__RapidTypeAnalysis__live_types]))(self) /* live_types on <self:RapidTypeAnalysis>*/;
+var218 = ((short int (*)(val*, val*))(var217->class->vft[COLOR_abstract_collection__Collection__has]))(var217, var_rt) /* has on <var217:HashSet[MClassType]>*/;
+if (var218){
+goto CONTINUE_label214;
 } else {
 }
-/* <var_rt223:MType> isa MClassType */
-cltype229 = type_model__MClassType.color;
-idtype230 = type_model__MClassType.id;
-if(cltype229 >= var_rt223->type->table_size) {
-var228 = 0;
-} else {
-var228 = var_rt223->type->type_table[cltype229] == idtype230;
-}
-if (!var228) {
-fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 199);
-exit(1);
-}
-var231 = ((val* (*)(val*))(self->class->vft[COLOR_rapid_type_analysis__RapidTypeAnalysis__live_cast_types]))(self) /* live_cast_types on <self:RapidTypeAnalysis>*/;
-((void (*)(val*, val*))(var231->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var231, var_rt223) /* add on <var231:HashSet[MClassType]>*/;
-CONTINUE_label220: (void)0;
-((void (*)(val*))(var213->class->vft[COLOR_abstract_collection__Iterator__next]))(var213) /* next on <var213:Iterator[nullable Object]>*/;
-}
-BREAK_label220: (void)0;
-CONTINUE_label232: (void)0;
+var219 = ((val* (*)(val*))(self->class->vft[COLOR_rapid_type_analysis__RapidTypeAnalysis__live_types]))(self) /* live_types on <self:RapidTypeAnalysis>*/;
+((void (*)(val*, val*))(var219->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var219, var_rt) /* add on <var219:HashSet[MClassType]>*/;
+((void (*)(val*, val*))(var_todo_types->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_todo_types, var_rt) /* add on <var_todo_types:List[MClassType]>*/;
+((void (*)(val*, val*))(self->class->vft[COLOR_rapid_type_analysis__RapidTypeAnalysis__check_depth]))(self, var_rt) /* check_depth on <self:RapidTypeAnalysis>*/;
+CONTINUE_label214: (void)0;
 ((void (*)(val*))(var208->class->vft[COLOR_abstract_collection__Iterator__next]))(var208) /* next on <var208:Iterator[nullable Object]>*/;
 }
-BREAK_label232: (void)0;
+BREAK_label214: (void)0;
+CONTINUE_label220: (void)0;
+}
+BREAK_label220: (void)0;
+var221 = ((val* (*)(val*))(self->class->vft[COLOR_rapid_type_analysis__RapidTypeAnalysis__live_open_cast_types]))(self) /* live_open_cast_types on <self:RapidTypeAnalysis>*/;
+var222 = ((val* (*)(val*))(var221->class->vft[COLOR_abstract_collection__Collection__iterator]))(var221) /* iterator on <var221:HashSet[MType]>*/;
+for(;;) {
+var223 = ((short int (*)(val*))(var222->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var222) /* is_ok on <var222:Iterator[nullable Object]>*/;
+if(!var223) break;
+var224 = ((val* (*)(val*))(var222->class->vft[COLOR_abstract_collection__Iterator__item]))(var222) /* item on <var222:Iterator[nullable Object]>*/;
+var_ot225 = var224;
+var226 = ((val* (*)(val*))(self->class->vft[COLOR_rapid_type_analysis__RapidTypeAnalysis__live_types]))(self) /* live_types on <self:RapidTypeAnalysis>*/;
+var227 = ((val* (*)(val*))(var226->class->vft[COLOR_abstract_collection__Collection__iterator]))(var226) /* iterator on <var226:HashSet[MClassType]>*/;
+for(;;) {
+var228 = ((short int (*)(val*))(var227->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var227) /* is_ok on <var227:Iterator[nullable Object]>*/;
+if(!var228) break;
+var229 = ((val* (*)(val*))(var227->class->vft[COLOR_abstract_collection__Iterator__item]))(var227) /* item on <var227:Iterator[nullable Object]>*/;
+var_t230 = var229;
+var231 = ((val* (*)(val*))(self->class->vft[COLOR_rapid_type_analysis__RapidTypeAnalysis__mainmodule]))(self) /* mainmodule on <self:RapidTypeAnalysis>*/;
+var232 = ((short int (*)(val*, val*, val*, val*))(var_ot225->class->vft[COLOR_model__MType__can_resolve_for]))(var_ot225, var_t230, var_t230, var231) /* can_resolve_for on <var_ot225:MType>*/;
+var233 = !var232;
+if (var233){
+goto CONTINUE_label234;
+} else {
+}
+var235 = ((val* (*)(val*))(self->class->vft[COLOR_rapid_type_analysis__RapidTypeAnalysis__mainmodule]))(self) /* mainmodule on <self:RapidTypeAnalysis>*/;
+var236 = ((val* (*)(val*, val*, val*))(var_ot225->class->vft[COLOR_model__MType__anchor_to]))(var_ot225, var235, var_t230) /* anchor_to on <var_ot225:MType>*/;
+var_rt237 = var236;
+/* <var_rt237:MType> isa MNullableType */
+cltype239 = type_model__MNullableType.color;
+idtype240 = type_model__MNullableType.id;
+if(cltype239 >= var_rt237->type->table_size) {
+var238 = 0;
+} else {
+var238 = var_rt237->type->type_table[cltype239] == idtype240;
+}
+if (var238){
+var241 = ((val* (*)(val*))(var_rt237->class->vft[COLOR_model__MNullableType__mtype]))(var_rt237) /* mtype on <var_rt237:MType(MNullableType)>*/;
+var_rt237 = var241;
+} else {
+}
+/* <var_rt237:MType> isa MClassType */
+cltype243 = type_model__MClassType.color;
+idtype244 = type_model__MClassType.id;
+if(cltype243 >= var_rt237->type->table_size) {
+var242 = 0;
+} else {
+var242 = var_rt237->type->type_table[cltype243] == idtype244;
+}
+if (!var242) {
+fprintf(stderr, "Runtime error: %s", "Assert failed");
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 203);
+show_backtrace(1);
+}
+var245 = ((val* (*)(val*))(self->class->vft[COLOR_rapid_type_analysis__RapidTypeAnalysis__live_cast_types]))(self) /* live_cast_types on <self:RapidTypeAnalysis>*/;
+((void (*)(val*, val*))(var245->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var245, var_rt237) /* add on <var245:HashSet[MClassType]>*/;
+CONTINUE_label234: (void)0;
+((void (*)(val*))(var227->class->vft[COLOR_abstract_collection__Iterator__next]))(var227) /* next on <var227:Iterator[nullable Object]>*/;
+}
+BREAK_label234: (void)0;
+CONTINUE_label246: (void)0;
+((void (*)(val*))(var222->class->vft[COLOR_abstract_collection__Iterator__next]))(var222) /* next on <var222:Iterator[nullable Object]>*/;
+}
+BREAK_label246: (void)0;
 RET_LABEL:;
 }
 /* method rapid_type_analysis#RapidTypeAnalysis#run_analysis for (self: Object) */
@@ -1296,7 +1349,7 @@ if (!var4) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var5 = var_d > var1;
 var2 = var5;
@@ -1345,7 +1398,6 @@ var26 = BOX_kernel__Int(var_d); /* autobox from Int to Object */
 ((struct instance_array__NativeArray*)var25)->values[3] = (val*) var_mtype;
 ((struct instance_array__NativeArray*)var25)->values[4] = (val*) var19;
 ((void (*)(val*, val*, long))(var23->class->vft[COLOR_array__Array__with_native]))(var23, var25, var24) /* with_native on <var23:Array[Object]>*/;
-CHECK_NEW_array__Array(var23);
 }
 var27 = ((val* (*)(val*))(var23->class->vft[COLOR_string__Object__to_s]))(var23) /* to_s on <var23:Array[Object]>*/;
 ((void (*)(val*, val*, val*))(var7->class->vft[COLOR_toolcontext__ToolContext__fatal_error]))(var7, var8, var27) /* fatal_error on <var7:ToolContext>*/;
@@ -1426,8 +1478,8 @@ var = ((short int (*)(val*))(var_recv->class->vft[COLOR_model__MType__need_ancho
 var1 = !var;
 if (!var1) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 217);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 221);
+show_backtrace(1);
 }
 var2 = ((short int (*)(val*))(var_mtype->class->vft[COLOR_model__MType__need_anchor]))(var_mtype) /* need_anchor on <var_mtype:MClassType>*/;
 if (var2){
@@ -1541,13 +1593,12 @@ goto CONTINUE_label44;
 var48 = ((val* (*)(val*))(var_npropdef->class->vft[COLOR_modelize_property__APropdef__mpropdef]))(var_npropdef) /* mpropdef on <var_npropdef:APropdef(AAttrPropdef)>*/;
 if (var48 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 242);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 246);
+show_backtrace(1);
 }
 var_mpropdef = var48;
 var49 = NEW_rapid_type_analysis__RapidTypeVisitor(&type_rapid_type_analysis__RapidTypeVisitor);
 ((void (*)(val*, val*, val*, val*))(var49->class->vft[COLOR_rapid_type_analysis__RapidTypeVisitor__init]))(var49, self, var_bound_mtype, var_mpropdef) /* init on <var49:RapidTypeVisitor>*/;
-CHECK_NEW_rapid_type_analysis__RapidTypeVisitor(var49);
 var_v = var49;
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var_nexpr) /* enter_visit on <var_v:RapidTypeVisitor>*/;
 CONTINUE_label44: (void)0;
@@ -1607,8 +1658,8 @@ var4 = var_mtype->type->type_table[cltype5] == idtype6;
 }
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 256);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 260);
+show_backtrace(1);
 }
 var7 = ((val* (*)(val*))(self->class->vft[COLOR_rapid_type_analysis__RapidTypeAnalysis__live_cast_types]))(self) /* live_cast_types on <self:RapidTypeAnalysis>*/;
 ((void (*)(val*, val*))(var7->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var7, var_mtype) /* add on <var7:HashSet[MClassType]>*/;
@@ -1710,7 +1761,7 @@ if (!var10) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
-exit(1);
+show_backtrace(1);
 }
 var11 = var6 <= var7;
 var8 = var11;
@@ -1927,8 +1978,8 @@ val* var1 /* : RapidTypeAnalysis */;
 var1 = self->attrs[COLOR_rapid_type_analysis__RapidTypeVisitor___64danalysis].val; /* @analysis on <self:RapidTypeVisitor> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @analysis");
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 327);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 331);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1960,8 +2011,8 @@ val* var1 /* : MClassType */;
 var1 = self->attrs[COLOR_rapid_type_analysis__RapidTypeVisitor___64dreceiver].val; /* @receiver on <self:RapidTypeVisitor> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @receiver");
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 328);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 332);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1993,8 +2044,8 @@ val* var1 /* : MPropDef */;
 var1 = self->attrs[COLOR_rapid_type_analysis__RapidTypeVisitor___64dmpropdef].val; /* @mpropdef on <self:RapidTypeVisitor> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @mpropdef");
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 329);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 333);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -2037,8 +2088,8 @@ var = ((short int (*)(val*))(var_receiver->class->vft[COLOR_model__MType__need_a
 var1 = !var;
 if (!var1) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 336);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 340);
+show_backtrace(1);
 }
 RET_LABEL:;
 }
@@ -2170,15 +2221,15 @@ var11 = var_mtype->type->type_table[cltype12] == idtype13;
 }
 if (!var11) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 358);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 362);
+show_backtrace(1);
 }
 var14 = ((short int (*)(val*))(var_mtype->class->vft[COLOR_model__MType__need_anchor]))(var_mtype) /* need_anchor on <var_mtype:MType(MClassType)>*/;
 var15 = !var14;
 if (!var15) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 359);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 363);
+show_backtrace(1);
 }
 var = var_mtype;
 goto RET_LABEL;
@@ -2247,16 +2298,16 @@ var3 = 1; /* arg is null and recv is not */
 }
 if (!var3) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 371);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 375);
+show_backtrace(1);
 }
 var4 = ((val* (*)(val*))(self->class->vft[COLOR_rapid_type_analysis__RapidTypeVisitor__analysis]))(self) /* analysis on <self:RapidTypeVisitor>*/;
 var5 = ((val* (*)(val*))(var4->class->vft[COLOR_rapid_type_analysis__RapidTypeAnalysis__modelbuilder]))(var4) /* modelbuilder on <var4:RapidTypeAnalysis>*/;
 var6 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__Visitor__current_node]))(self) /* current_node on <self:RapidTypeVisitor>*/;
 if (var6 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 372);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 376);
+show_backtrace(1);
 }
 var7 = ((val* (*)(val*))(var_mtype->class->vft[COLOR_model__MClassType__mclass]))(var_mtype) /* mclass on <var_mtype:nullable MClassType(MClassType)>*/;
 var8 = ((val* (*)(val*))(self->class->vft[COLOR_rapid_type_analysis__RapidTypeVisitor__analysis]))(self) /* analysis on <self:RapidTypeVisitor>*/;
@@ -2315,8 +2366,8 @@ var1 = var_mtype->type->type_table[cltype] == idtype;
 if (!var1) {
 var_class_name = var_mtype == NULL ? "null" : var_mtype->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MClassType", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 377);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 381);
+show_backtrace(1);
 }
 ((void (*)(val*, val*, val*))(var->class->vft[COLOR_rapid_type_analysis__RapidTypeAnalysis__try_send]))(var, var_mtype, var_mproperty) /* try_send on <var:RapidTypeAnalysis>*/;
 RET_LABEL:;
@@ -2392,8 +2443,8 @@ var1 = var->type->type_table[cltype] == idtype;
 if (!var1) {
 var_class_name = var == NULL ? "null" : var->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MClassType", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 395);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 399);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_rapid_type_analysis__RapidTypeVisitor__add_type]))(var_v, var) /* add_type on <var_v:RapidTypeVisitor>*/;
 RET_LABEL:;
@@ -2428,8 +2479,8 @@ var1 = var->type->type_table[cltype] == idtype;
 if (!var1) {
 var_class_name = var == NULL ? "null" : var->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MClassType", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 402);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 406);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_rapid_type_analysis__RapidTypeVisitor__add_type]))(var_v, var) /* add_type on <var_v:RapidTypeVisitor>*/;
 RET_LABEL:;
@@ -2464,8 +2515,8 @@ var1 = var->type->type_table[cltype] == idtype;
 if (!var1) {
 var_class_name = var == NULL ? "null" : var->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MClassType", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 409);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 413);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_rapid_type_analysis__RapidTypeVisitor__add_type]))(var_v, var) /* add_type on <var_v:RapidTypeVisitor>*/;
 RET_LABEL:;
@@ -2524,8 +2575,8 @@ var1 = var->type->type_table[cltype] == idtype;
 if (!var1) {
 var_class_name = var == NULL ? "null" : var->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MClassType", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 416);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 420);
+show_backtrace(1);
 }
 var_mtype = var;
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_rapid_type_analysis__RapidTypeVisitor__add_type]))(var_v, var_mtype) /* add_type on <var_v:RapidTypeVisitor>*/;
@@ -2549,7 +2600,6 @@ var12 = 1;
 var13 = NEW_array__NativeArray(var12, &type_array__NativeArraymodel__MType);
 ((struct instance_array__NativeArray*)var13)->values[0] = (val*) var10;
 ((void (*)(val*, val*, long))(var11->class->vft[COLOR_array__Array__with_native]))(var11, var13, var12) /* with_native on <var11:Array[MType]>*/;
-CHECK_NEW_array__Array(var11);
 }
 var14 = ((val* (*)(val*, val*))(var8->class->vft[COLOR_model__MClass__get_mtype]))(var8, var11) /* get_mtype on <var8:MClass>*/;
 var_native = var14;
@@ -2557,8 +2607,8 @@ var_native = var14;
 var15 = ((val* (*)(val*, val*))(var_v->class->vft[COLOR_rapid_type_analysis__RapidTypeVisitor__cleanup_type]))(var_v, var_mtype) /* cleanup_type on <var_v:RapidTypeVisitor>*/;
 if (var15 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 420);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 424);
+show_backtrace(1);
 }
 var_mtype = var15;
 if (varonce16) {
@@ -2615,8 +2665,8 @@ var_native = var5;
 if (varonce6) {
 var7 = varonce6;
 } else {
-var8 = "to_s";
-var9 = 4;
+var8 = "to_s_with_length";
+var9 = 16;
 var10 = string__NativeString__to_s_with_length(var8, var9);
 var7 = var10;
 varonce6 = var7;
@@ -2711,7 +2761,6 @@ var13 = 1;
 var14 = NEW_array__NativeArray(var13, &type_array__NativeArraymodel__MClassType);
 ((struct instance_array__NativeArray*)var14)->values[0] = (val*) var11;
 ((void (*)(val*, val*, long))(var12->class->vft[COLOR_array__Array__with_native]))(var12, var14, var13) /* with_native on <var12:Array[MClassType]>*/;
-CHECK_NEW_array__Array(var12);
 }
 var15 = ((val* (*)(val*, val*))(var4->class->vft[COLOR_model__MClass__get_mtype]))(var4, var12) /* get_mtype on <var4:MClass>*/;
 var_arraytype = var15;
@@ -2743,7 +2792,6 @@ var30 = 1;
 var31 = NEW_array__NativeArray(var30, &type_array__NativeArraymodel__MClassType);
 ((struct instance_array__NativeArray*)var31)->values[0] = (val*) var28;
 ((void (*)(val*, val*, long))(var29->class->vft[COLOR_array__Array__with_native]))(var29, var31, var30) /* with_native on <var29:Array[MClassType]>*/;
-CHECK_NEW_array__Array(var29);
 }
 var32 = ((val* (*)(val*, val*))(var21->class->vft[COLOR_model__MClass__get_mtype]))(var21, var29) /* get_mtype on <var21:MClass>*/;
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_rapid_type_analysis__RapidTypeVisitor__add_type]))(var_v, var32) /* add_type on <var_v:RapidTypeVisitor>*/;
@@ -2811,8 +2859,8 @@ var1 = var->type->type_table[cltype] == idtype;
 if (!var1) {
 var_class_name = var == NULL ? "null" : var->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MClassType", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 452);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 456);
+show_backtrace(1);
 }
 var_mtype = var;
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_rapid_type_analysis__RapidTypeVisitor__add_type]))(var_v, var_mtype) /* add_type on <var_v:RapidTypeVisitor>*/;
@@ -2868,8 +2916,8 @@ var1 = var->type->type_table[cltype] == idtype;
 if (!var1) {
 var_class_name = var == NULL ? "null" : var->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MClassType", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 462);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 466);
+show_backtrace(1);
 }
 var_mtype = var;
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_rapid_type_analysis__RapidTypeVisitor__add_type]))(var_v, var_mtype) /* add_type on <var_v:RapidTypeVisitor>*/;
@@ -2917,8 +2965,8 @@ var1 = var->type->type_table[cltype] == idtype;
 if (!var1) {
 var_class_name = var == NULL ? "null" : var->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MClassType", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 472);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 476);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_rapid_type_analysis__RapidTypeVisitor__add_type]))(var_v, var) /* add_type on <var_v:RapidTypeVisitor>*/;
 RET_LABEL:;
@@ -2953,8 +3001,8 @@ var1 = var->type->type_table[cltype] == idtype;
 if (!var1) {
 var_class_name = var == NULL ? "null" : var->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MClassType", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 479);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 483);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_rapid_type_analysis__RapidTypeVisitor__add_type]))(var_v, var) /* add_type on <var_v:RapidTypeVisitor>*/;
 RET_LABEL:;
@@ -2972,8 +3020,8 @@ var_v = p0;
 var = ((val* (*)(val*))(self->class->vft[COLOR_typing__AIsaExpr__cast_type]))(self) /* cast_type on <self:AIsaExpr>*/;
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 486);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 490);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_rapid_type_analysis__RapidTypeVisitor__add_cast_type]))(var_v, var) /* add_cast_type on <var_v:RapidTypeVisitor>*/;
 RET_LABEL:;
@@ -2991,8 +3039,8 @@ var_v = p0;
 var = ((val* (*)(val*))(self->class->vft[COLOR_typing__AExpr__mtype]))(self) /* mtype on <self:AAsCastExpr>*/;
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 493);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 497);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_rapid_type_analysis__RapidTypeVisitor__add_cast_type]))(var_v, var) /* add_cast_type on <var_v:RapidTypeVisitor>*/;
 RET_LABEL:;
@@ -3014,16 +3062,16 @@ var_v = p0;
 var = ((val* (*)(val*))(self->class->vft[COLOR_typing__ASendExpr__mproperty]))(self) /* mproperty on <self:ASendExpr>*/;
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 500);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 504);
+show_backtrace(1);
 }
 var_mproperty = var;
 var1 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ASendExpr__n_expr]))(self) /* n_expr on <self:ASendExpr>*/;
 var2 = ((val* (*)(val*))(var1->class->vft[COLOR_typing__AExpr__mtype]))(var1) /* mtype on <var1:AExpr>*/;
 if (var2 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 501);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 505);
+show_backtrace(1);
 }
 var_recvtype = var2;
 ((void (*)(val*, val*, val*))(var_v->class->vft[COLOR_rapid_type_analysis__RapidTypeVisitor__add_send]))(var_v, var_recvtype, var_mproperty) /* add_send on <var_v:RapidTypeVisitor>*/;
@@ -3057,14 +3105,14 @@ var_v = p0;
 var = ((val* (*)(val*))(self->class->vft[COLOR_typing__AReassignFormExpr__read_type]))(self) /* read_type on <self:ASendReassignFormExpr>*/;
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 510);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 514);
+show_backtrace(1);
 }
 var1 = ((val* (*)(val*))(self->class->vft[COLOR_typing__AReassignFormExpr__reassign_property]))(self) /* reassign_property on <self:ASendReassignFormExpr>*/;
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 510);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 514);
+show_backtrace(1);
 } else {
 var2 = ((val* (*)(val*))(var1->class->vft[COLOR_model__MPropDef__mproperty]))(var1) /* mproperty on <var1:nullable MMethodDef>*/;
 }
@@ -3072,15 +3120,15 @@ var2 = ((val* (*)(val*))(var1->class->vft[COLOR_model__MPropDef__mproperty]))(va
 var3 = ((val* (*)(val*))(self->class->vft[COLOR_typing__ASendExpr__mproperty]))(self) /* mproperty on <self:ASendReassignFormExpr>*/;
 if (var3 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 511);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 515);
+show_backtrace(1);
 }
 var_mproperty = var3;
 var4 = ((val* (*)(val*))(self->class->vft[COLOR_typing__ASendReassignFormExpr__write_mproperty]))(self) /* write_mproperty on <self:ASendReassignFormExpr>*/;
 if (var4 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 512);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 516);
+show_backtrace(1);
 }
 var_write_mproperty = var4;
 var5 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ASendExpr__n_expr]))(self) /* n_expr on <self:ASendReassignFormExpr>*/;
@@ -3102,8 +3150,8 @@ var9 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ASendExpr__n_expr]
 var10 = ((val* (*)(val*))(var9->class->vft[COLOR_typing__AExpr__mtype]))(var9) /* mtype on <var9:AExpr>*/;
 if (var10 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 517);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 521);
+show_backtrace(1);
 }
 var_recvtype = var10;
 ((void (*)(val*, val*, val*))(var_v->class->vft[COLOR_rapid_type_analysis__RapidTypeVisitor__add_send]))(var_v, var_recvtype, var_mproperty) /* add_send on <var_v:RapidTypeVisitor>*/;
@@ -3126,14 +3174,14 @@ var_v = p0;
 var = ((val* (*)(val*))(self->class->vft[COLOR_typing__AReassignFormExpr__read_type]))(self) /* read_type on <self:AVarReassignExpr>*/;
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 527);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 531);
+show_backtrace(1);
 }
 var1 = ((val* (*)(val*))(self->class->vft[COLOR_typing__AReassignFormExpr__reassign_property]))(self) /* reassign_property on <self:AVarReassignExpr>*/;
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 527);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 531);
+show_backtrace(1);
 } else {
 var2 = ((val* (*)(val*))(var1->class->vft[COLOR_model__MPropDef__mproperty]))(var1) /* mproperty on <var1:nullable MMethodDef>*/;
 }
@@ -3155,14 +3203,14 @@ var_v = p0;
 var = ((val* (*)(val*))(self->class->vft[COLOR_typing__AReassignFormExpr__read_type]))(self) /* read_type on <self:AAttrReassignExpr>*/;
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 534);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 538);
+show_backtrace(1);
 }
 var1 = ((val* (*)(val*))(self->class->vft[COLOR_typing__AReassignFormExpr__reassign_property]))(self) /* reassign_property on <self:AAttrReassignExpr>*/;
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 534);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 538);
+show_backtrace(1);
 } else {
 var2 = ((val* (*)(val*))(var1->class->vft[COLOR_model__MPropDef__mproperty]))(var1) /* mproperty on <var1:nullable MMethodDef>*/;
 }
@@ -3218,8 +3266,8 @@ var7 = var6->type->type_table[cltype] == idtype;
 if (!var7) {
 var_class_name = var6 == NULL ? "null" : var6->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MMethodDef", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 547);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 551);
+show_backtrace(1);
 }
 ((void (*)(val*, val*, val*))(var4->class->vft[COLOR_rapid_type_analysis__RapidTypeAnalysis__add_super_send]))(var4, var5, var6) /* add_super_send on <var4:RapidTypeAnalysis>*/;
 RET_LABEL:;
@@ -3308,15 +3356,15 @@ var = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AForExpr__n_expr]))
 var1 = ((val* (*)(val*))(var->class->vft[COLOR_typing__AExpr__mtype]))(var) /* mtype on <var:AExpr>*/;
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 554);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 558);
+show_backtrace(1);
 }
 var_recvtype = var1;
 var2 = ((val* (*)(val*))(self->class->vft[COLOR_typing__AForExpr__coltype]))(self) /* coltype on <self:AForExpr>*/;
 if (var2 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 555);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 559);
+show_backtrace(1);
 }
 var_colltype = var2;
 if (varonce) {
@@ -3335,8 +3383,8 @@ var8 = ((val* (*)(val*))(var_itmeth->class->vft[COLOR_model__MProperty__intro]))
 var9 = ((val* (*)(val*))(var8->class->vft[COLOR_model__MMethodDef__msignature]))(var8) /* msignature on <var8:MPropDef(MMethodDef)>*/;
 if (var9 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 558);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 562);
+show_backtrace(1);
 } else {
 var10 = ((val* (*)(val*))(var9->class->vft[COLOR_model__MSignature__return_mtype]))(var9) /* return_mtype on <var9:nullable MSignature>*/;
 }
@@ -3355,8 +3403,8 @@ var11 = var10->type->type_table[cltype] == idtype;
 if (!var11) {
 var_class_name = var10 == NULL ? "null" : var10->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MClassType", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 558);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 562);
+show_backtrace(1);
 }
 var12 = ((val* (*)(val*))(var10->class->vft[COLOR_model__MClassType__mclass]))(var10) /* mclass on <var10:nullable MType(MClassType)>*/;
 var13 = ((val* (*)(val*))(var12->class->vft[COLOR_model__MClass__intro]))(var12) /* intro on <var12:MClass>*/;
@@ -3388,8 +3436,8 @@ var27 = ((val* (*)(val*, val*, val*))(var_v->class->vft[COLOR_rapid_type_analysi
 var28 = ((val* (*)(val*))(self->class->vft[COLOR_scope__AForExpr__variables]))(self) /* variables on <self:AForExpr>*/;
 if (var28 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 561);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 565);
+show_backtrace(1);
 } else {
 var29 = ((long (*)(val*))(var28->class->vft[COLOR_abstract_collection__Collection__length]))(var28) /* length on <var28:nullable Array[Variable]>*/;
 }
@@ -3416,8 +3464,8 @@ var39 = ((val* (*)(val*, val*, val*))(var_v->class->vft[COLOR_rapid_type_analysi
 var40 = ((val* (*)(val*))(self->class->vft[COLOR_scope__AForExpr__variables]))(self) /* variables on <self:AForExpr>*/;
 if (var40 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 563);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 567);
+show_backtrace(1);
 } else {
 var41 = ((long (*)(val*))(var40->class->vft[COLOR_abstract_collection__Collection__length]))(var40) /* length on <var40:nullable Array[Variable]>*/;
 }
@@ -3453,8 +3501,8 @@ var57 = ((val* (*)(val*, val*, val*))(var_v->class->vft[COLOR_rapid_type_analysi
 ((void (*)(val*, val*, val*))(var_v->class->vft[COLOR_rapid_type_analysis__RapidTypeVisitor__add_send]))(var_v, var_objtype, var57) /* add_send on <var_v:RapidTypeVisitor>*/;
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 567);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 571);
+show_backtrace(1);
 }
 }
 if (varonce58) {
@@ -3503,16 +3551,16 @@ var1 = var->type->type_table[cltype] == idtype;
 if (!var1) {
 var_class_name = var == NULL ? "null" : var->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MClassType", var_class_name);
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 576);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 580);
+show_backtrace(1);
 }
 var_mtype = var;
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_rapid_type_analysis__RapidTypeVisitor__add_type]))(var_v, var_mtype) /* add_type on <var_v:RapidTypeVisitor>*/;
 var2 = ((val* (*)(val*))(self->class->vft[COLOR_typing__ANewExpr__mproperty]))(self) /* mproperty on <self:ANewExpr>*/;
 if (var2 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
-fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 578);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/rapid_type_analysis.nit", 582);
+show_backtrace(1);
 }
 var_mproperty = var2;
 ((void (*)(val*, val*, val*))(var_v->class->vft[COLOR_rapid_type_analysis__RapidTypeVisitor__add_monomorphic_send]))(var_v, var_mtype, var_mproperty) /* add_monomorphic_send on <var_v:RapidTypeVisitor>*/;

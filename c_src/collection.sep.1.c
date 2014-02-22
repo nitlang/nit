@@ -21,7 +21,6 @@ var_start = p0;
 var_len = p1;
 var1 = NEW_array__Array(self->type->resolution_table->types[COLOR_array__Arrayabstract_collection__Sequence_FT0]);
 ((void (*)(val*, long))(var1->class->vft[COLOR_array__Array__with_capacity]))(var1, var_len) /* with_capacity on <var1:Array[nullable Object]>*/;
-CHECK_NEW_array__Array(var1);
 var_a = var1;
 var2 = NEW_range__Range(&type_range__Rangekernel__Int);
 { /* Inline kernel#Int#+ (var_start,var_len) */
@@ -33,7 +32,6 @@ RET_LABEL4:(void)0;
 var6 = BOX_kernel__Int(var_start); /* autobox from Int to Discrete */
 var7 = BOX_kernel__Int(var3); /* autobox from Int to Discrete */
 ((void (*)(val*, val*, val*))(var2->class->vft[COLOR_range__Range__without_last]))(var2, var6, var7) /* without_last on <var2:Range[Int]>*/;
-CHECK_NEW_range__Range(var2);
 var8 = ((val* (*)(val*))(var2->class->vft[COLOR_abstract_collection__Collection__iterator]))(var2) /* iterator on <var2:Range[Int]>*/;
 for(;;) {
 var9 = ((short int (*)(val*))(var8->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var8) /* is_ok on <var8:Iterator[nullable Object]>*/;

@@ -92,7 +92,7 @@ redef extern Opengles1Image
 	`}
 
 	# using sdl
-	new from_file( path: String ) is extern import String::to_cstring `{
+	new from_file( path: String ) is extern import String.to_cstring `{
 		SDL_Surface *sdl_image;
 		struct mnit_opengles_Texture *opengles_image;
 

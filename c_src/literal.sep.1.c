@@ -7,7 +7,7 @@ var1 = self->attrs[COLOR_literal__ToolContext___64dliteral_phase].val; /* @liter
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @literal_phase");
 fprintf(stderr, " (%s:%d)\n", "src/literal.nit", 25);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -54,7 +54,6 @@ val* var_v /* var v: LiteralVisitor */;
 var_toolcontext = p0;
 var = NEW_literal__LiteralVisitor(&type_literal__LiteralVisitor);
 ((void (*)(val*, val*))(var->class->vft[COLOR_literal__LiteralVisitor__init]))(var, var_toolcontext) /* init on <var:LiteralVisitor>*/;
-CHECK_NEW_literal__LiteralVisitor(var);
 var_v = var;
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, self) /* enter_visit on <var_v:LiteralVisitor>*/;
 RET_LABEL:;
@@ -72,7 +71,7 @@ var1 = self->attrs[COLOR_literal__LiteralVisitor___64dtoolcontext].val; /* @tool
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @toolcontext");
 fprintf(stderr, " (%s:%d)\n", "src/literal.nit", 47);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -316,7 +315,6 @@ var17 = NEW_array__NativeArray(var16, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var17)->values[0] = (val*) var11;
 ((struct instance_array__NativeArray*)var17)->values[1] = (val*) var_txt;
 ((void (*)(val*, val*, long))(var15->class->vft[COLOR_array__Array__with_native]))(var15, var17, var16) /* with_native on <var15:Array[Object]>*/;
-CHECK_NEW_array__Array(var15);
 }
 var18 = ((val* (*)(val*))(var15->class->vft[COLOR_string__Object__to_s]))(var15) /* to_s on <var15:Array[Object]>*/;
 ((void (*)(val*, val*, val*))(var9->class->vft[COLOR_toolcontext__ToolContext__error]))(var9, var10, var18) /* error on <var9:ToolContext>*/;
@@ -422,7 +420,7 @@ if (!var15) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var16 = var11 >= var12;
 var13 = var16;

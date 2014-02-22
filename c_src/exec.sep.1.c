@@ -51,7 +51,7 @@ var1 = ((short int (*)(val*))(self->class->vft[COLOR_exec__Process__is_finished]
 if (!var1) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/exec.nit", 32);
-exit(1);
+show_backtrace(1);
 }
 RET_LABEL:;
 }
@@ -70,7 +70,7 @@ var1 = ((short int (*)(val*))(self->class->vft[COLOR_exec__Process__is_finished]
 if (!var1) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/exec.nit", 38);
-exit(1);
+show_backtrace(1);
 }
 var2 = ((void* (*)(val*))(self->class->vft[COLOR_exec__Process__data]))(self) /* data on <self:Process>*/;
 var3 = exec__NativeProcess__status(var2);
@@ -165,7 +165,6 @@ var_arguments = p1;
 var_pipeflags = p2;
 var = NEW_string__Buffer(&type_string__Buffer);
 ((void (*)(val*))(var->class->vft[COLOR_string__Buffer__init]))(var) /* init on <var:Buffer>*/;
-CHECK_NEW_string__Buffer(var);
 var_args = var;
 var1 = 1;
 var_l = var1;
@@ -268,7 +267,7 @@ var1 = self->attrs[COLOR_exec__IProcess___64dstream_in].val; /* @stream_in on <s
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @stream_in");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/exec.nit", 83);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -363,7 +362,6 @@ var1 = NEW_stream__FDIStream(&type_stream__FDIStream);
 var2 = ((void* (*)(val*))(self->class->vft[COLOR_exec__Process__data]))(self) /* data on <self:IProcess>*/;
 var3 = exec__NativeProcess__out_fd(var2);
 ((void (*)(val*, long))(var1->class->vft[COLOR_stream__FDIStream__init]))(var1, var3) /* init on <var1:FDIStream>*/;
-CHECK_NEW_stream__FDIStream(var1);
 ((void (*)(val*, val*))(self->class->vft[COLOR_exec__IProcess__stream_in_61d]))(self, var1) /* stream_in= on <self:IProcess>*/;
 RET_LABEL:;
 }
@@ -388,7 +386,6 @@ var2 = NEW_stream__FDIStream(&type_stream__FDIStream);
 var3 = ((void* (*)(val*))(self->class->vft[COLOR_exec__Process__data]))(self) /* data on <self:IProcess>*/;
 var4 = exec__NativeProcess__out_fd(var3);
 ((void (*)(val*, long))(var2->class->vft[COLOR_stream__FDIStream__init]))(var2, var4) /* init on <var2:FDIStream>*/;
-CHECK_NEW_stream__FDIStream(var2);
 ((void (*)(val*, val*))(self->class->vft[COLOR_exec__IProcess__stream_in_61d]))(self, var2) /* stream_in= on <self:IProcess>*/;
 RET_LABEL:;
 }
@@ -413,7 +410,6 @@ var1 = NEW_stream__FDIStream(&type_stream__FDIStream);
 var2 = ((void* (*)(val*))(self->class->vft[COLOR_exec__Process__data]))(self) /* data on <self:IProcess>*/;
 var3 = exec__NativeProcess__out_fd(var2);
 ((void (*)(val*, long))(var1->class->vft[COLOR_stream__FDIStream__init]))(var1, var3) /* init on <var1:FDIStream>*/;
-CHECK_NEW_stream__FDIStream(var1);
 ((void (*)(val*, val*))(self->class->vft[COLOR_exec__IProcess__stream_in_61d]))(self, var1) /* stream_in= on <self:IProcess>*/;
 RET_LABEL:;
 }
@@ -430,7 +426,7 @@ var1 = self->attrs[COLOR_exec__OProcess___64dstream_out].val; /* @stream_out on 
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @stream_out");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/exec.nit", 114);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -518,7 +514,6 @@ var1 = NEW_stream__FDOStream(&type_stream__FDOStream);
 var2 = ((void* (*)(val*))(self->class->vft[COLOR_exec__Process__data]))(self) /* data on <self:OProcess>*/;
 var3 = exec__NativeProcess__in_fd(var2);
 ((void (*)(val*, long))(var1->class->vft[COLOR_stream__FDOStream__init]))(var1, var3) /* init on <var1:FDOStream>*/;
-CHECK_NEW_stream__FDOStream(var1);
 ((void (*)(val*, val*))(self->class->vft[COLOR_exec__OProcess__stream_out_61d]))(self, var1) /* stream_out= on <self:OProcess>*/;
 RET_LABEL:;
 }
@@ -543,7 +538,6 @@ var2 = NEW_stream__FDOStream(&type_stream__FDOStream);
 var3 = ((void* (*)(val*))(self->class->vft[COLOR_exec__Process__data]))(self) /* data on <self:OProcess>*/;
 var4 = exec__NativeProcess__in_fd(var3);
 ((void (*)(val*, long))(var2->class->vft[COLOR_stream__FDOStream__init]))(var2, var4) /* init on <var2:FDOStream>*/;
-CHECK_NEW_stream__FDOStream(var2);
 ((void (*)(val*, val*))(self->class->vft[COLOR_exec__OProcess__stream_out_61d]))(self, var2) /* stream_out= on <self:OProcess>*/;
 RET_LABEL:;
 }
@@ -568,7 +562,6 @@ var1 = NEW_stream__FDOStream(&type_stream__FDOStream);
 var2 = ((void* (*)(val*))(self->class->vft[COLOR_exec__Process__data]))(self) /* data on <self:OProcess>*/;
 var3 = exec__NativeProcess__in_fd(var2);
 ((void (*)(val*, long))(var1->class->vft[COLOR_stream__FDOStream__init]))(var1, var3) /* init on <var1:FDOStream>*/;
-CHECK_NEW_stream__FDOStream(var1);
 ((void (*)(val*, val*))(self->class->vft[COLOR_exec__OProcess__stream_out_61d]))(self, var1) /* stream_out= on <self:OProcess>*/;
 RET_LABEL:;
 }
@@ -611,13 +604,11 @@ var1 = NEW_stream__FDIStream(&type_stream__FDIStream);
 var2 = ((void* (*)(val*))(self->class->vft[COLOR_exec__Process__data]))(self) /* data on <self:IOProcess>*/;
 var3 = exec__NativeProcess__out_fd(var2);
 ((void (*)(val*, long))(var1->class->vft[COLOR_stream__FDIStream__init]))(var1, var3) /* init on <var1:FDIStream>*/;
-CHECK_NEW_stream__FDIStream(var1);
 ((void (*)(val*, val*))(self->class->vft[COLOR_exec__IProcess__stream_in_61d]))(self, var1) /* stream_in= on <self:IOProcess>*/;
 var4 = NEW_stream__FDOStream(&type_stream__FDOStream);
 var5 = ((void* (*)(val*))(self->class->vft[COLOR_exec__Process__data]))(self) /* data on <self:IOProcess>*/;
 var6 = exec__NativeProcess__in_fd(var5);
 ((void (*)(val*, long))(var4->class->vft[COLOR_stream__FDOStream__init]))(var4, var6) /* init on <var4:FDOStream>*/;
-CHECK_NEW_stream__FDOStream(var4);
 ((void (*)(val*, val*))(self->class->vft[COLOR_exec__OProcess__stream_out_61d]))(self, var4) /* stream_out= on <self:IOProcess>*/;
 RET_LABEL:;
 }
@@ -645,13 +636,11 @@ var2 = NEW_stream__FDIStream(&type_stream__FDIStream);
 var3 = ((void* (*)(val*))(self->class->vft[COLOR_exec__Process__data]))(self) /* data on <self:IOProcess>*/;
 var4 = exec__NativeProcess__out_fd(var3);
 ((void (*)(val*, long))(var2->class->vft[COLOR_stream__FDIStream__init]))(var2, var4) /* init on <var2:FDIStream>*/;
-CHECK_NEW_stream__FDIStream(var2);
 ((void (*)(val*, val*))(self->class->vft[COLOR_exec__IProcess__stream_in_61d]))(self, var2) /* stream_in= on <self:IOProcess>*/;
 var5 = NEW_stream__FDOStream(&type_stream__FDOStream);
 var6 = ((void* (*)(val*))(self->class->vft[COLOR_exec__Process__data]))(self) /* data on <self:IOProcess>*/;
 var7 = exec__NativeProcess__in_fd(var6);
 ((void (*)(val*, long))(var5->class->vft[COLOR_stream__FDOStream__init]))(var5, var7) /* init on <var5:FDOStream>*/;
-CHECK_NEW_stream__FDOStream(var5);
 ((void (*)(val*, val*))(self->class->vft[COLOR_exec__OProcess__stream_out_61d]))(self, var5) /* stream_out= on <self:IOProcess>*/;
 RET_LABEL:;
 }
@@ -679,13 +668,11 @@ var1 = NEW_stream__FDIStream(&type_stream__FDIStream);
 var2 = ((void* (*)(val*))(self->class->vft[COLOR_exec__Process__data]))(self) /* data on <self:IOProcess>*/;
 var3 = exec__NativeProcess__out_fd(var2);
 ((void (*)(val*, long))(var1->class->vft[COLOR_stream__FDIStream__init]))(var1, var3) /* init on <var1:FDIStream>*/;
-CHECK_NEW_stream__FDIStream(var1);
 ((void (*)(val*, val*))(self->class->vft[COLOR_exec__IProcess__stream_in_61d]))(self, var1) /* stream_in= on <self:IOProcess>*/;
 var4 = NEW_stream__FDOStream(&type_stream__FDOStream);
 var5 = ((void* (*)(val*))(self->class->vft[COLOR_exec__Process__data]))(self) /* data on <self:IOProcess>*/;
 var6 = exec__NativeProcess__in_fd(var5);
 ((void (*)(val*, long))(var4->class->vft[COLOR_stream__FDOStream__init]))(var4, var6) /* init on <var4:FDOStream>*/;
-CHECK_NEW_stream__FDOStream(var4);
 ((void (*)(val*, val*))(self->class->vft[COLOR_exec__OProcess__stream_out_61d]))(self, var4) /* stream_out= on <self:IOProcess>*/;
 RET_LABEL:;
 }

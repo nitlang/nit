@@ -51,15 +51,18 @@ sstr_body = sstr_char*;
 
 long_str_char = str_char | cr | lf;
 
+// because no substraction in sablecc3, complex long strings are difficult to express
+ls1 = '"' '"'? ;
+ls2 = '{' '{'? ;
+ls12 = ls1? (ls2 ls1)* ls2?;
+
 long_str_part
-        = long_str_char
-        | '"' long_str_char
-        | '"' '"' long_str_char
-        | '{' long_str_char
-        | '{' '{' long_str_char
+        = ls12 long_str_char
         ;
 
 long_str_body = long_str_part*;
+lsend1 = ls2? (ls1 ls2)* '"""';
+lsend2 = ls1? (ls2 ls1)* '{{{';
 
 long_sstr_char = sstr_char | cr | lf;
 long_sstr_part
@@ -180,10 +183,10 @@ attrid = '_' lowercase letter*;
 
 number = digit+;
 float = digit* '.' digit+;
-string = '"' str_body '"' | '"' '"' '"' long_str_body '"' '"' '"' | ''' ''' ''' long_sstr_body ''' ''' ''';
-start_string = '"' str_body '{' | '"' '"' '"' long_str_body '{' '{' '{';
-mid_string = '}' str_body '{' | '}' '}' '}' long_str_body '{' '{' '{';
-end_string = '}' str_body '"' | '}' '}' '}' long_str_body '"' '"' '"';
+string = '"' str_body '"' | '"' '"' '"' long_str_body lsend1 | ''' ''' ''' long_sstr_body ''' ''' ''';
+start_string = '"' str_body '{' | '"' '"' '"' long_str_body lsend2;
+mid_string = '}' str_body '{' | '}' '}' '}' long_str_body lsend2;
+end_string = '}' str_body '"' | '}' '}' '}' long_str_body lsend1;
 char = (''' [[any - '''] - '\'] ''') | (''' '\' any ''');
 bad_string = ('"'|'}') str_body | '"' '"' '"' long_str_body | ''' ''' ''' long_sstr_body;
 bad_char = ''' '\'? any;
@@ -347,13 +350,14 @@ extern_call {-> extern_call}
     ;
 extern_call_prop {-> extern_call}
     = {local} methid {-> New extern_call.local_prop( methid )}
-	| {full} classid quad methid {-> New extern_call.full_prop( classid, quad, methid )}
-	| {init} classid {-> New extern_call.init_prop( classid )}
+	| {full} type quad methid {-> New extern_call.full_prop( type, Null, methid )}
+	| {full2} type dot methid {-> New extern_call.full_prop( type, dot, methid )}
+	| {init} type {-> New extern_call.init_prop( type )}
 	;
 extern_call_cast {-> extern_call}
-    = {as_cast} [from_type]:type kwas [n2]:no opar [n3]:no [to_type]:type [n4]:no cpar {-> New extern_call.cast_as(from_type, kwas, to_type)}
-	| {as_nullable} type kwas [n2]:no kwnullable {-> New extern_call.as_nullable( type, kwas, kwnullable)}
-	| {as_not_nullable} type kwas [n2]:no kwnot [n3]:no kwnullable {-> New extern_call.as_not_nullable( type, kwas, kwnot, kwnullable)}
+    = {as_cast} [from_type]:type dot? kwas [n2]:no opar [n3]:no [to_type]:type [n4]:no cpar {-> New extern_call.cast_as(from_type, dot, kwas, to_type)}
+	| {as_nullable} type dot? kwas [n2]:no kwnullable {-> New extern_call.as_nullable( type, kwas, kwnullable)}
+	| {as_not_nullable} type dot? kwas [n2]:no kwnot [n3]:no kwnullable {-> New extern_call.as_not_nullable( type, kwas, kwnot, kwnullable)}
 	;
 
 in_language = kwin string;
@@ -618,12 +622,12 @@ at_arg~nopar {-> at_arg}
 	;
 
 atid~forclass {-> atid}
-	= {id} qualified? id {-> New atid.id(id)}
+	= {id}  id {-> New atid.id(id)}
 //!forclass	| {kwextern} qualified? kwextern {-> New atid.kwextern(kwextern)}
 //!forclass	| {kwintern} qualified? kwintern {-> New atid.kwintern(kwintern)}
-!forclass	| {kwreadable} qualified? kwreadable {-> New atid.kwreadable(kwreadable)}
-!forclass	| {kwwritable} qualified? kwwritable {-> New atid.kwwritable(kwwritable)}
-	| {kwimport} qualified? kwimport {-> New atid.kwimport(kwimport)}
+!forclass	| {kwreadable} kwreadable {-> New atid.kwreadable(kwreadable)}
+!forclass	| {kwwritable} kwwritable {-> New atid.kwwritable(kwwritable)}
+	| {kwimport} kwimport {-> New atid.kwimport(kwimport)}
 	;
 
 /* MISC **********************************************************************/
@@ -842,9 +846,9 @@ extern_calls = kwimport [extern_calls]:extern_call*
 extern_call =
 	| {super} kwsuper
 	| {local_prop} methid
-	| {full_prop} classid quad? methid
-	| {init_prop} classid
-	| {cast_as} [from_type]:type kwas [to_type]:type
+	| {full_prop} type dot? methid
+	| {init_prop} type
+	| {cast_as} [from_type]:type dot? kwas [to_type]:type
 	| {as_nullable} type kwas kwnullable
 	| {as_not_nullable} type kwas kwnot kwnullable
 	;

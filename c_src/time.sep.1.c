@@ -32,7 +32,7 @@ RET_LABEL:;
 void* time__TimeT__init(void* self) {
 void* var /* : TimeT */;
 printf("NOT YET IMPLEMENTED nitni for time#TimeT#init at lib/standard/time.nit:34,2--29\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -53,7 +53,7 @@ return var;
 void* time__TimeT__from_i(void* self, long p0) {
 void* var /* : TimeT */;
 printf("NOT YET IMPLEMENTED nitni for time#TimeT#from_i at lib/standard/time.nit:35,2--35\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -73,7 +73,7 @@ return var;
 /* method time#TimeT#update for (self: TimeT) */
 void time__TimeT__update(void* self) {
 fprintf(stderr, "NOT YET IMPLEMENTED nitni for time#TimeT#update at lib/standard/time.nit:37,2--30\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 }
 /* method time#TimeT#update for (self: Object) */
@@ -87,7 +87,7 @@ RET_LABEL:;
 val* time__TimeT__ctime(void* self) {
 val* var /* : String */;
 fprintf(stderr, "NOT YET IMPLEMENTED nitni for time#TimeT#ctime at lib/standard/time.nit:39,2--41,3\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -106,7 +106,7 @@ return var;
 double time__TimeT__difftime(void* self, void* p0) {
 double var /* : Float */;
 fprintf(stderr, "NOT YET IMPLEMENTED nitni for time#TimeT#difftime at lib/standard/time.nit:43,2--44,70\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -176,7 +176,7 @@ return var;
 long time__TimeT__to_i(void* self) {
 long var /* : Int */;
 fprintf(stderr, "NOT YET IMPLEMENTED nitni for time#TimeT#to_i at lib/standard/time.nit:47,2--38\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -195,7 +195,7 @@ return var;
 void* time__Tm__gmtime(void* self) {
 void* var /* : Tm */;
 printf("NOT YET IMPLEMENTED nitni for time#Tm#gmtime at lib/standard/time.nit:52,2--57,3\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -216,7 +216,7 @@ return var;
 void* time__Tm__gmtime_from_timet(void* self, void* p0) {
 void* var /* : Tm */;
 printf("NOT YET IMPLEMENTED nitni for time#Tm#gmtime_from_timet at lib/standard/time.nit:58,2--62,3\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -237,7 +237,7 @@ return var;
 void* time__Tm__localtime(void* self) {
 void* var /* : Tm */;
 printf("NOT YET IMPLEMENTED nitni for time#Tm#localtime at lib/standard/time.nit:64,2--69,3\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -258,7 +258,7 @@ return var;
 void* time__Tm__localtime_from_timet(void* self, void* p0) {
 void* var /* : Tm */;
 printf("NOT YET IMPLEMENTED nitni for time#Tm#localtime_from_timet at lib/standard/time.nit:70,2--74,3\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -279,7 +279,7 @@ return var;
 void* time__Tm__to_timet(void* self) {
 void* var /* : TimeT */;
 fprintf(stderr, "NOT YET IMPLEMENTED nitni for time#Tm#to_timet at lib/standard/time.nit:76,2--47\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -298,7 +298,7 @@ return var;
 long time__Tm__sec(void* self) {
 long var /* : Int */;
 fprintf(stderr, "NOT YET IMPLEMENTED nitni for time#Tm#sec at lib/standard/time.nit:78,2--40\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -317,7 +317,7 @@ return var;
 long time__Tm__min(void* self) {
 long var /* : Int */;
 fprintf(stderr, "NOT YET IMPLEMENTED nitni for time#Tm#min at lib/standard/time.nit:79,2--40\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -336,7 +336,7 @@ return var;
 long time__Tm__hour(void* self) {
 long var /* : Int */;
 fprintf(stderr, "NOT YET IMPLEMENTED nitni for time#Tm#hour at lib/standard/time.nit:80,2--42\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -355,7 +355,7 @@ return var;
 long time__Tm__mday(void* self) {
 long var /* : Int */;
 fprintf(stderr, "NOT YET IMPLEMENTED nitni for time#Tm#mday at lib/standard/time.nit:81,2--42\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -374,7 +374,7 @@ return var;
 long time__Tm__mon(void* self) {
 long var /* : Int */;
 fprintf(stderr, "NOT YET IMPLEMENTED nitni for time#Tm#mon at lib/standard/time.nit:82,2--40\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -393,7 +393,7 @@ return var;
 long time__Tm__year(void* self) {
 long var /* : Int */;
 fprintf(stderr, "NOT YET IMPLEMENTED nitni for time#Tm#year at lib/standard/time.nit:83,2--42\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -412,7 +412,7 @@ return var;
 long time__Tm__wday(void* self) {
 long var /* : Int */;
 fprintf(stderr, "NOT YET IMPLEMENTED nitni for time#Tm#wday at lib/standard/time.nit:84,2--42\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -431,7 +431,7 @@ return var;
 long time__Tm__yday(void* self) {
 long var /* : Int */;
 fprintf(stderr, "NOT YET IMPLEMENTED nitni for time#Tm#yday at lib/standard/time.nit:85,2--42\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -450,7 +450,7 @@ return var;
 short int time__Tm__is_dst(void* self) {
 short int var /* : Bool */;
 fprintf(stderr, "NOT YET IMPLEMENTED nitni for time#Tm#is_dst at lib/standard/time.nit:86,2--46\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -469,7 +469,7 @@ return var;
 val* time__Tm__asctime(void* self) {
 val* var /* : String */;
 fprintf(stderr, "NOT YET IMPLEMENTED nitni for time#Tm#asctime at lib/standard/time.nit:88,2--90,3\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -488,7 +488,7 @@ return var;
 val* time__Tm__strftime(void* self, val* p0) {
 val* var /* : String */;
 fprintf(stderr, "NOT YET IMPLEMENTED nitni for time#Tm#strftime at lib/standard/time.nit:91,2--100,3\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }

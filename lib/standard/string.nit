@@ -943,7 +943,7 @@ redef class Float
 		end
 	end
 
-	fun to_precision_native(nb: Int): String import NativeString::to_s `{
+	fun to_precision_native(nb: Int): String import NativeString.to_s `{
 		int size;
 		char *str;
 

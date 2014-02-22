@@ -48,7 +48,6 @@ redef class ModelBuilder
 		for t in runtime_type_analysis.live_types do
 			if t.ctype == "val*" then
 				compiler.generate_init_instance(t)
-				compiler.generate_check_init_instance(t)
 			else
 				compiler.generate_box_instance(t)
 			end
@@ -220,19 +219,6 @@ class GlobalCompiler
 
 		self.generate_init_attr(v, res, mtype)
 		v.add("return {res};")
-		v.add("\}")
-	end
-
-	redef fun generate_check_init_instance(mtype)
-	do
-		if self.modelbuilder.toolcontext.opt_no_check_initialization.value then return
-
-		var v = self.new_visitor
-		var res = new RuntimeVariable("self", mtype, mtype)
-		self.header.add_decl("void CHECK_NEW_{mtype.c_name}({mtype.ctype});")
-		v.add_decl("/* allocate {mtype} */")
-		v.add_decl("void CHECK_NEW_{mtype.c_name}({mtype.ctype} {res}) \{")
-		self.generate_check_attr(v, res, mtype)
 		v.add("\}")
 	end
 
@@ -826,18 +812,6 @@ class GlobalCompilerVisitor
 		return res
 	end
 
-	redef fun check_init_instance(recv, mtype)
-	do
-		if self.compiler.modelbuilder.toolcontext.opt_no_check_initialization.value then return
-
-		mtype = self.anchor(mtype).as(MClassType)
-		if not self.compiler.runtime_type_analysis.live_types.has(mtype) then
-			debug "problem: {mtype} was detected dead"
-		end
-
-		self.add("CHECK_NEW_{mtype.c_name}({recv});")
-	end
-
 	redef fun array_instance(array, elttype)
 	do
 		elttype = self.anchor(elttype)
@@ -853,7 +827,6 @@ class GlobalCompilerVisitor
 		end
 		var length = self.int_instance(array.length)
 		self.send(self.get_property("with_native", arraytype), [res, nat, length])
-		self.check_init_instance(res, arraytype)
 		self.add("\}")
 		return res
 	end
@@ -978,6 +951,7 @@ private class CustomizedRuntimeFunction
 			v.add("return {frame.returnvar.as(not null)};")
 		end
 		v.add("\}")
+		if not self.c_name.has_substring("VIRTUAL", 0) then compiler.names[self.c_name] = "{mmethoddef.mclassdef.mmodule.name}::{mmethoddef.mclassdef.mclass.name}::{mmethoddef.mproperty.name} ({mmethoddef.location.file.filename}:{mmethoddef.location.line_start})"
 	end
 
 	redef fun call(v: VISITOR, arguments: Array[RuntimeVariable]): nullable RuntimeVariable

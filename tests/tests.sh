@@ -176,7 +176,7 @@ function process_result()
 		fi
 		echo >>$xml "<error message='fail out/$pattern.res $NSAV'/>"
 		echo >>$xml "<system-out><![CDATA["
-		head >>$xml -n 50 out/$pattern.diff.sav.log
+		cat -v out/$pattern.diff.sav.log | head >>$xml -n 50
 		echo >>$xml "]]></system-out>"
 		nok="$nok $pattern"
 		echo "$ii" >> "$ERRLIST"
@@ -188,7 +188,7 @@ function process_result()
 		fi
 		echo >>$xml "<error message='changed out/$pattern.res $NFIXME'/>"
 		echo >>$xml "<system-out><![CDATA["
-		head >>$xml -n 50 out/$pattern.diff.sav.log
+		cat -v out/$pattern.diff.sav.log | head >>$xml -n 50
 		echo >>$xml "]]></system-out>"
 		nok="$nok $pattern"
 		echo "$ii" >> "$ERRLIST"
@@ -200,13 +200,13 @@ function process_result()
 		fi
 		echo >>$xml "<skipped/>"
 		echo >>$xml "<system-out><![CDATA["
-		cat  >>$xml out/$pattern.res
+		cat -v >>$xml out/$pattern.res
 		echo >>$xml "]]></system-out>"
 		nos="$nos $pattern"
 	fi
 	if test -s out/$pattern.cmp.err; then
 		echo >>$xml "<system-err><![CDATA["
-		cat  >>$xml out/$pattern.cmp.err
+		cat -v >>$xml out/$pattern.cmp.err
 		echo >>$xml "]]></system-err>"
 	fi
 	echo >>$xml "</testcase>"
@@ -456,7 +456,7 @@ END
 					test -z "$tap" && echo -n "==> $name "
 					echo "./$ff.bin $args" > "./$fff.bin"
 					chmod +x "./$fff.bin"
-					sh -c "NIT_NO_STACK=1 $TIMEOUT ./$fff.bin < $inputs > $fff.res 2>$fff.err"
+					WRITE="$fff.write" sh -c "NIT_NO_STACK=1 $TIMEOUT ./$fff.bin < $inputs > $fff.res 2>$fff.err"
 					if [ "x$verbose" = "xtrue" ]; then
 						cat "$fff.res"
 						cat >&2 "$fff.err"
