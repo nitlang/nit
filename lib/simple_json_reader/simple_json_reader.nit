@@ -50,7 +50,10 @@ end
 
 redef class Nstring
 	# FIXME support \n, etc.
-	fun to_nit_string: String do return text.substring(1, text.length-2)
+	fun to_nit_string: String do return text.substring(1, text.length-2).
+		replace("\\\\", "\\").replace("\\\"", "\"").replace("\\b", "\b").
+		replace("\\/", "/").replace("\\n", "\n").replace("\\r", "\r").
+		replace("\\t", "\t")
 end
 
 redef class Nvalue_object
