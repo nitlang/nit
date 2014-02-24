@@ -2402,13 +2402,13 @@ redef class ASuperExpr
 			args = v.frame.arguments
 		end
 
-		var mproperty = self.mproperty
-		if mproperty != null then
-			if mproperty.intro.msignature.arity == 0 then
+		var callsite = self.callsite
+		if callsite != null then
+			if callsite.mproperty.intro.msignature.arity == 0 then
 				args = [recv]
 			end
 			# Super init call
-			var res = v.send(mproperty, args)
+			var res = v.compile_callsite(callsite, args)
 			return res
 		end
 
