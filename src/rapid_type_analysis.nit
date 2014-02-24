@@ -81,6 +81,12 @@ class RapidTypeAnalysis
 	# The method definitions that remain to visit
 	private var todo = new List[MMethodDef]
 
+	private fun force_alive(classname: String)
+	do
+		var classes = self.modelbuilder.model.get_mclasses_by_name(classname)
+		if classes != null then for c in classes do self.add_new(c.mclass_type, c.mclass_type)
+	end
+
 	# Run the analysis until all visitable method definitions are visited.
 	fun run_analysis
 	do
@@ -96,9 +102,11 @@ class RapidTypeAnalysis
 			add_send(maintype, mainprop)
 		end
 
-		# Force Bool
-		var classes = self.modelbuilder.model.get_mclasses_by_name("Bool")
-		if classes != null then for c in classes do self.add_new(c.mclass_type, c.mclass_type)
+		# Force primitive types
+		force_alive("Bool")
+		force_alive("Int")
+		force_alive("Float")
+		force_alive("Char")
 
 		while not todo.is_empty do
 			var mmethoddef = todo.shift
