@@ -1,7 +1,6 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2011-2013 Alexis Laferrière <alexis.laf@xymus.net>
-# Copyright 2013 Nathan Heu <heu.nathan@courrier.uqam.ca>
+# Copyright 2013 Alexis Laferrière <alexis.laf@xymus.net>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,8 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module gtk3_4 is pkgconfig("gtk+-3.0")
-
-import gtk_widgets_ext
-import gtk_dialogs
-import gtk_assistant
+#alt0# module error_annot_pkgconfig_alt0 is pkgconfig() # 0 arg
+#alt1# module error_annot_pkgconfig_alt1 is pkgconfig("missing-lib")
+#alt2# module error_annot_pkgconfig_alt2 is pkgconfig("too many args", 123)
+#alt3# module error_annot_pkgconfig_alt3 is pkgconfig(1234) # not a string

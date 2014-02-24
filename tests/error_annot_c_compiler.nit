@@ -1,7 +1,6 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2011-2013 Alexis Laferrière <alexis.laf@xymus.net>
-# Copyright 2013 Nathan Heu <heu.nathan@courrier.uqam.ca>
+# Copyright 2013 Alexis Laferrière <alexis.laf@xymus.net>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,8 +14,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module gtk3_4 is pkgconfig("gtk+-3.0")
+#alt1#	module error_annot_c_compiler_alt1 is c_compiler_option
+#alt2#	module error_annot_c_compiler_alt2 is c_compiler_option(foo("llvm-config"))
+#alt3#	module error_annot_c_compiler_alt3 is c_compiler_option(foo("llvm-config", "2nd arg"))
+#alt4#	module error_annot_c_compiler_alt4 is c_linker_option
+#alt5#	module error_annot_c_compiler_alt5 is c_compiler_option(exec("invalid-program"))
+#alt6#	module error_annot_c_compiler_alt6 is c_compiler_option(exec)
 
-import gtk_widgets_ext
-import gtk_dialogs
-import gtk_assistant
+fun foo `{ printf("nothing...\n"); `}
+
+foo

@@ -1,7 +1,6 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2011-2013 Alexis Laferrière <alexis.laf@xymus.net>
-# Copyright 2013 Nathan Heu <heu.nathan@courrier.uqam.ca>
+# Copyright 2013 Alexis Laferrière <alexis.laf@xymus.net>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,8 +14,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module gtk3_4 is pkgconfig("gtk+-3.0")
+module test_annot_c_compiler is
+	c_compiler_option("-I /usr/include")
+	c_compiler_option(exec("pkg-config", "--cflags", "sdl"))
+	c_linker_option("-lm")
+	c_linker_option("-lm", "-L /usr/bin")
+end
 
-import gtk_widgets_ext
-import gtk_dialogs
-import gtk_assistant
+fun dummy `{ printf("nothing...\n"); `}
+
+dummy
