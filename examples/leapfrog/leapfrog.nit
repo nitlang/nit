@@ -17,6 +17,7 @@
 # This module is an example of a simple game using a curses backend
 module leapfrog
 
+import quadtree
 import scene2d
 
 # A falling apple
@@ -116,22 +117,41 @@ class Duck
 	end
 end
 
+class FootBar 
+	super Sprite
+	
+	init
+	do
+		self.x = 0
+		self.y = 2000
+		self.width = 7000
+		self.height = 10
+	end
+
+end
+
 class PlayScene
 	super Scene
 
+	var bar = new FootBar
 	var apples = new LiveGroup[Apple]
 	var duck = new Duck
 	var sheep = new Sheep
-
 	var score = 0
-
 	var sprites = new LiveGroup[LiveObject]
+	var qd = new Quadtree[Sprite].with(0, 0, 8000, 2000, 0, 3, null)
 
 	init
 	do
+		qd.nw
+		sprites.add(bar)
+		qd.addItem(bar)
 		sprites.add(apples)
 		sprites.add(duck)
 		sprites.add(sheep)
+		for a in apples do qd.addItem(a)
+		qd.addItem(duck)
+		qd.addItem(sheep)
 	end
 
 	redef fun update
@@ -139,6 +159,38 @@ class PlayScene
 
 		# Call update on all sprites
 		sprites.update
+		updateQuadTree
+
+		var spritesWithSheep = qd.retrieve(sheep)
+		for sp in spritesWithSheep
+		do
+			# Eat apple or fallen apple
+			if sp isa Apple then
+				if sp.overlaps(sheep)  and sp.exists then
+					score += 1
+					sp.exists = false
+					qd.remove(sp)
+				end
+			end
+
+			# Sheep vs duck
+			if sp isa Duck then
+				if sp.overlaps(sheep) then
+					if sheep.is_jumping and sheep.vy > 0 then
+						sp.stunt_ttl = 5
+						sheep.vy = -150
+					else
+						if sheep.x < sp.x then
+							sheep.x = sp.x - sheep.width
+						else
+							sheep.x = sp.x + sp.width
+						end
+						sheep.vx = - sheep.vx
+						sp.vx = - sp.vx
+					end
+				end
+			end
+		end
 
 		# Need a new apple
 		if 10.rand < 2  then
@@ -148,35 +200,28 @@ class PlayScene
 			a.vx = 0
 			a.vy = 70.rand + 30
 			apples.add(a)
+			qd.addItem(a)
 		end
-
-		# Eat apple or fallen apple
+		
 		for a in apples do
-			if not a.exists then continue
-			if a.overlaps(sheep) then
-				score += 1
-				a.exists = false
+			if not a.exists then 
+				qd.remove(a) 
+				continue
 			end
 			if a.y > 2000 then
 				a.exists = false
+				qd.remove(a)
 			end
-		end
+		end		
 
-		# Sheep vs duck
-		if sheep.overlaps(duck) then
-			if sheep.is_jumping and sheep.vy > 0 then
-				duck.stunt_ttl = 5
-				sheep.vy = -150
-			else
-				if sheep.x < duck.x then
-					sheep.x = duck.x - sheep.width
-				else
-					sheep.x = duck.x + duck.width
-				end
-				sheep.vx = - sheep.vx
-				duck.vx = - duck.vx
-			end
-		end
+	end
+
+	fun updateQuadTree
+	do
+		qd.clear
+		for a in apples do qd.updatePosition(a)
+		qd.updatePosition(sheep)
+		qd.updatePosition(duck)
 	end
 
 end

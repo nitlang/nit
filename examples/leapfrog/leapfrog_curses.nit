@@ -105,6 +105,15 @@ redef class Duck
 	end
 end
 
+redef class FootBar
+	redef fun draw_on_curses(window)
+	do	
+		var x = self.x/100
+		var y = self.y/100
+		window.mvaddstr(y, x, "#"*80)
+	end
+end
+
 redef class PlayScene
 	fun draw_on_curses(view: CursesView)
 	do
@@ -114,7 +123,6 @@ redef class PlayScene
 		window.wclear
 		sprites.draw(view)
 		window.mvaddstr(0, 0,   "'q' to quit - score: {score}")
-		window.mvaddstr(20, 0,   "#"*80)
 		window.refresh
 
 		# Wait the next frame

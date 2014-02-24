@@ -1,2 +1,4 @@
+EXEC=leapfrog
+all: $(EXEC)
 leapfrog:
-	../../bin/nitc leapfrog.nit --cc-lib-name curses
+	nitc -I ../../lib/ leapfrog_curses.nit --cc-lib-name curses
