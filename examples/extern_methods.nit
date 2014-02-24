@@ -21,11 +21,11 @@ module extern_methods
 redef enum Int
 	# Returns self'th fibonnaci number
 	# implemented here in C for optimization purposes
-	fun fib : Int `{
+	fun fib : Int import fib `{
 		if ( recv < 2 )
 			return recv;
 		else
-			return Int_fib___impl( recv-1 ) + Int_fib___impl( recv-2 );
+			return Int_fib( recv-1 ) + Int_fib( recv-2 );
 	`}
 
 	# System call to sleep for "self" seconds
@@ -43,8 +43,8 @@ redef enum Int
 	# * the local fib method
 	# * the + operator, a method of Int
 	# * to_s, a method of all objects
-	# * String::to_cstring, a method of String to return an equivalent char*
-	fun foo import fib, +, to_s, String::to_cstring `{
+	# * String.to_cstring, a method of String to return an equivalent char*
+	fun foo import fib, +, to_s, String.to_cstring `{
 		long recv_fib = Int_fib( recv );
 		long recv_plus_fib = Int__plus( recv, recv_fib );
 

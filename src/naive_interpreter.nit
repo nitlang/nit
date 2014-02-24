@@ -21,6 +21,7 @@ import literal
 import typing
 import auto_super_init
 import frontend
+import common_ffi
 
 redef class ToolContext
 	# --discover-call-trace
