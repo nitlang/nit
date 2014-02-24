@@ -383,6 +383,8 @@ class RapidTypeVisitor
 	fun add_send(mtype: MType, mproperty: MMethod) do analysis.add_send(mtype, mproperty)
 
 	fun add_cast_type(mtype: MType) do analysis.add_cast(mtype)
+
+	fun add_callsite(callsite: nullable CallSite) do if callsite != null then analysis.add_send(callsite.recv, callsite.mproperty)
 end
 
 ###
@@ -501,9 +503,7 @@ end
 redef class ASendExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		var mproperty = self.mproperty.as(not null)
-		var recvtype = self.n_expr.mtype.as(not null)
-		v.add_send(recvtype, mproperty)
+		v.add_callsite(callsite)
 	end
 end
 
@@ -511,40 +511,32 @@ end
 redef class ASendReassignFormExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		v.add_send(self.read_type.as(not null), self.reassign_property.mproperty)
-		var mproperty = self.mproperty.as(not null)
-		var write_mproperty = self.write_mproperty.as(not null)
-		if n_expr isa ASelfExpr then
-			v.add_monomorphic_send(v.receiver, mproperty)
-			v.add_monomorphic_send(v.receiver, write_mproperty)
-		else
-			var recvtype = self.n_expr.mtype.as(not null)
-			v.add_send(recvtype, mproperty)
-			v.add_send(recvtype, write_mproperty)
-		end
+		v.add_callsite(callsite)
+		v.add_callsite(reassign_callsite)
+		v.add_callsite(write_callsite)
 	end
 end
 
 redef class AVarReassignExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		v.add_send(self.read_type.as(not null), self.reassign_property.mproperty)
+		v.add_callsite(reassign_callsite)
 	end
 end
 
 redef class AAttrReassignExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		v.add_send(self.read_type.as(not null), self.reassign_property.mproperty)
+		v.add_callsite(reassign_callsite)
 	end
 end
 
 redef class ASuperExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		var mproperty = self.mproperty
-		if mproperty != null then
-			v.add_monomorphic_send(v.receiver, mproperty)
+		var callsite = self.callsite
+		if callsite != null then
+			v.add_callsite(callsite)
 			return
 		end
 
@@ -579,7 +571,6 @@ redef class ANewExpr
 	do
 		var mtype = self.mtype.as(MClassType)
 		v.add_type(mtype)
-		var mproperty = self.mproperty.as(not null)
-		v.add_monomorphic_send(mtype, mproperty)
+		v.add_callsite(callsite)
 	end
 end
