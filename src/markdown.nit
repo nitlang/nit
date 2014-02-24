@@ -51,7 +51,7 @@ private class Doc2Mdwn
 			# Count the number of spaces
 			lastindent = indent
 			indent = 0
-			while text.length > indent and text[indent] == ' ' do indent += 1
+			while text.length > indent and text.chars[indent] == ' ' do indent += 1
 
 			# Is codeblock? Then just collect them
 			if indent > 4 then

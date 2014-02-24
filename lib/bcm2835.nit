@@ -440,7 +440,7 @@ class HD44780
 		clear
 		return_home
 		var count = 0
-		for c in v do
+		for c in v.chars do
 			if c == '\n' then
 				# FIXME, this should work
 				#write(true, "C0".to_hex)

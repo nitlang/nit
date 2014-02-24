@@ -77,7 +77,7 @@ interface IStream
 				if eof then return
 			else
 				var c = x.ascii
-				s.push(c)
+				s.chars.push(c)
 				if c == '\n' then return
 			end
 		end
@@ -110,7 +110,7 @@ abstract class BufferedIStream
 		if _buffer_pos >= _buffer.length then
 			return -1
 		end
-		var c = _buffer[_buffer_pos]
+		var c = _buffer.chars[_buffer_pos]
 		_buffer_pos += 1
 		return c.ascii
 	end
@@ -128,7 +128,7 @@ abstract class BufferedIStream
 				k = _buffer.length
 			end
 			while j < k and i > 0 do
-				s.add(_buffer[j])
+				s.add(_buffer.chars[j])
 				j +=  1
 				i -= 1
 			end
@@ -144,7 +144,7 @@ abstract class BufferedIStream
 			var j = _buffer_pos
 			var k = _buffer.length
 			while j < k do
-				s.add(_buffer[j])
+				s.add(_buffer.chars[j])
 				j += 1
 			end
 			_buffer_pos = j
@@ -158,7 +158,7 @@ abstract class BufferedIStream
 		loop
 			# First phase: look for a '\n'
 			var i = _buffer_pos
-			while i < _buffer.length and _buffer[i] != '\n' do i += 1
+			while i < _buffer.length and _buffer.chars[i] != '\n' do i += 1
 
 			# if there is something to append
 			if i > _buffer_pos then
@@ -168,7 +168,7 @@ abstract class BufferedIStream
 				# Copy from the buffer to the string
 				var j = _buffer_pos
 				while j < i do
-					s.add(_buffer[j])
+					s.add(_buffer.chars[j])
 					j += 1
 				end
 			end
