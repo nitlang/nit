@@ -29,6 +29,9 @@ redef class ToolContext
 
 	# --mmodules
 	var opt_mmodules = new OptionBool("Compute metrics about mmodules", "--mmodules")
+	# --mclassses
+	var opt_mclasses = new OptionBool("Compute metrics about mclasses", "--mclasses")
+
 	# --inheritance
 	var opt_inheritance = new OptionBool("Compute metrics about inheritance usage", "--inheritance")
 	# --genericity
@@ -60,6 +63,7 @@ redef class ToolContext
 		super
 		self.option_context.add_option(opt_all)
 		self.option_context.add_option(opt_mmodules)
+		self.option_context.add_option(opt_mclasses)
 		self.option_context.add_option(opt_inheritance)
 		self.option_context.add_option(opt_refinement)
 		self.option_context.add_option(opt_self)
