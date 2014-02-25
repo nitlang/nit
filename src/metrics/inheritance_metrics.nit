@@ -26,6 +26,7 @@ redef class ToolContext
 	var inheritance_metrics_phase = new InheritanceMetricsPhase(self, null)
 end
 
+# Extract metrics about module and class hierarchies.
 private class InheritanceMetricsPhase
 	super Phase
 	redef fun process_mainmodule(mainmodule)

@@ -196,7 +196,7 @@ Start ../src/test_parser.nit:17,1--110,1
               TKwfalse "false" ../src/test_parser.nit:46,15--19
           AWhileExpr ../src/test_parser.nit:48,1--64,3
             TKwwhile "while" ../src/test_parser.nit:48,1--5
-            AAndExpr ../src/test_parser.nit:48,7--51
+            AAndExpr ../src/test_parser.nit:48,7--57
               ANotExpr ../src/test_parser.nit:48,7--23
                 TKwnot "not" ../src/test_parser.nit:48,7--9
                 ACallExpr ../src/test_parser.nit:48,11--23
@@ -206,20 +206,23 @@ Start ../src/test_parser.nit:17,1--110,1
                     AListExprs ../src/test_parser.nit:48,14
                   TId "is_empty" ../src/test_parser.nit:48,16--23
                   AListExprs ../src/test_parser.nit:48,23
-              AEqExpr ../src/test_parser.nit:48,29--51
-                ACallExpr ../src/test_parser.nit:48,29--44
-                  ACallExpr ../src/test_parser.nit:48,29--38
-                    ACallExpr ../src/test_parser.nit:48,29--32
-                      AImplicitSelfExpr ../src/test_parser.nit:48,29
-                      TId "args" ../src/test_parser.nit:48,29--32
-                      AListExprs ../src/test_parser.nit:48,32
-                    TId "first" ../src/test_parser.nit:48,34--38
-                    AListExprs ../src/test_parser.nit:48,38
-                  TId "first" ../src/test_parser.nit:48,40--44
-                  AListExprs ../src/test_parser.nit:48,44
-                ACharExpr ../src/test_parser.nit:48,49--51
-                  TChar "\'-\'" ../src/test_parser.nit:48,49--51
-            TKwdo "do" ../src/test_parser.nit:48,53--54
+              AEqExpr ../src/test_parser.nit:48,29--57
+                ACallExpr ../src/test_parser.nit:48,29--50
+                  ACallExpr ../src/test_parser.nit:48,29--44
+                    ACallExpr ../src/test_parser.nit:48,29--38
+                      ACallExpr ../src/test_parser.nit:48,29--32
+                        AImplicitSelfExpr ../src/test_parser.nit:48,29
+                        TId "args" ../src/test_parser.nit:48,29--32
+                        AListExprs ../src/test_parser.nit:48,32
+                      TId "first" ../src/test_parser.nit:48,34--38
+                      AListExprs ../src/test_parser.nit:48,38
+                    TId "chars" ../src/test_parser.nit:48,40--44
+                    AListExprs ../src/test_parser.nit:48,44
+                  TId "first" ../src/test_parser.nit:48,46--50
+                  AListExprs ../src/test_parser.nit:48,50
+                ACharExpr ../src/test_parser.nit:48,55--57
+                  TChar "\'-\'" ../src/test_parser.nit:48,55--57
+            TKwdo "do" ../src/test_parser.nit:48,59--60
             ABlockExpr ../src/test_parser.nit:49,2--64,3
               AIfExpr ../src/test_parser.nit:49,2--62,4
                 TKwif "if" ../src/test_parser.nit:49,2--3

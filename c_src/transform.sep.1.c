@@ -7,7 +7,7 @@ var1 = self->attrs[COLOR_transform__ToolContext___64dtransform_phase].val; /* @t
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @transform_phase");
 fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 24);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -42,12 +42,10 @@ val* var_val /* var val: nullable Object */;
 var_npropdef = p0;
 var = NEW_transform__TransformVisitor(&type_transform__TransformVisitor);
 ((void (*)(val*, val*, val*))(var->class->vft[COLOR_transform__TransformVisitor__init]))(var, self, var_npropdef) /* init on <var:TransformVisitor>*/;
-CHECK_NEW_transform__TransformVisitor(var);
 var_v = var;
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var_npropdef) /* enter_visit on <var_v:TransformVisitor>*/;
 var1 = NEW_astvalidation__ASTValidationVisitor(&type_astvalidation__ASTValidationVisitor);
 ((void (*)(val*))(var1->class->vft[COLOR_astvalidation__ASTValidationVisitor__init]))(var1) /* init on <var1:ASTValidationVisitor>*/;
-CHECK_NEW_astvalidation__ASTValidationVisitor(var1);
 var_val = var1;
 ((void (*)(val*, val*))(var_val->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_val, var_npropdef) /* enter_visit on <var_val:nullable Object(ASTValidationVisitor)>*/;
 RET_LABEL:;
@@ -65,7 +63,7 @@ var1 = self->attrs[COLOR_transform__TransformVisitor___64dphase].val; /* @phase 
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @phase");
 fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 45);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -98,7 +96,7 @@ var1 = self->attrs[COLOR_transform__TransformVisitor___64dmmodule].val; /* @mmod
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @mmodule");
 fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 46);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -131,7 +129,7 @@ var1 = self->attrs[COLOR_transform__TransformVisitor___64dmclassdef].val; /* @mc
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @mclassdef");
 fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 47);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -164,7 +162,7 @@ var1 = self->attrs[COLOR_transform__TransformVisitor___64dmpropdef].val; /* @mpr
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @mpropdef");
 fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 48);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -197,7 +195,7 @@ var1 = self->attrs[COLOR_transform__TransformVisitor___64dbuilder].val; /* @buil
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @builder");
 fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 49);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -244,7 +242,7 @@ var = ((val* (*)(val*))(var_npropdef->class->vft[COLOR_modelize_property__APropd
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 54);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(self->class->vft[COLOR_transform__TransformVisitor__mpropdef_61d]))(self, var) /* mpropdef= on <self:TransformVisitor>*/;
 var1 = ((val* (*)(val*))(self->class->vft[COLOR_transform__TransformVisitor__mpropdef]))(self) /* mpropdef on <self:TransformVisitor>*/;
@@ -259,7 +257,6 @@ var7 = ((val* (*)(val*))(self->class->vft[COLOR_transform__TransformVisitor__mpr
 var8 = ((val* (*)(val*))(var7->class->vft[COLOR_model__MPropDef__mclassdef]))(var7) /* mclassdef on <var7:MPropDef>*/;
 var9 = ((val* (*)(val*))(var8->class->vft[COLOR_model__MClassDef__bound_mtype]))(var8) /* bound_mtype on <var8:MClassDef>*/;
 ((void (*)(val*, val*, val*))(var5->class->vft[COLOR_astbuilder__ASTBuilder__init]))(var5, var6, var9) /* init on <var5:ASTBuilder>*/;
-CHECK_NEW_astbuilder__ASTBuilder(var5);
 ((void (*)(val*, val*))(self->class->vft[COLOR_transform__TransformVisitor__builder_61d]))(self, var5) /* builder= on <self:TransformVisitor>*/;
 RET_LABEL:;
 }
@@ -393,7 +390,7 @@ var4 = ((val* (*)(val*))(self->class->vft[COLOR_scope__AVardeclExpr__variable]))
 if (var4 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 99);
-exit(1);
+show_backtrace(1);
 }
 var5 = ((val* (*)(val*, val*, val*))(var3->class->vft[COLOR_astbuilder__ASTBuilder__make_var_assign]))(var3, var4, var_nexpr) /* make_var_assign on <var3:ASTBuilder>*/;
 var_nvar = var5;
@@ -429,7 +426,7 @@ var5 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AIfexprExpr__n_the
 if (var4 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 112);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var4->class->vft[COLOR_astbuilder__AExpr__add]))(var4, var5) /* add on <var4:nullable AExpr>*/;
 }
@@ -438,7 +435,7 @@ var7 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AIfexprExpr__n_els
 if (var6 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 113);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var6->class->vft[COLOR_astbuilder__AExpr__add]))(var6, var7) /* add on <var6:nullable AExpr>*/;
 }
@@ -475,7 +472,7 @@ var6 = ((val* (*)(val*))(var5->class->vft[COLOR_astbuilder__AExpr__make_var_read
 if (var4 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 124);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var4->class->vft[COLOR_astbuilder__AExpr__add]))(var4, var6) /* add on <var4:nullable AExpr>*/;
 }
@@ -484,7 +481,7 @@ var8 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AOrExpr__n_expr2])
 if (var7 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 125);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var7->class->vft[COLOR_astbuilder__AExpr__add]))(var7, var8) /* add on <var7:nullable AExpr>*/;
 }
@@ -531,7 +528,7 @@ var5 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AAndExpr__n_expr2]
 if (var4 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 143);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var4->class->vft[COLOR_astbuilder__AExpr__add]))(var4, var5) /* add on <var4:nullable AExpr>*/;
 }
@@ -541,7 +538,7 @@ var8 = ((val* (*)(val*))(var7->class->vft[COLOR_astbuilder__AExpr__make_var_read
 if (var6 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 144);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var6->class->vft[COLOR_astbuilder__AExpr__add]))(var6, var8) /* add on <var6:nullable AExpr>*/;
 }
@@ -647,7 +644,7 @@ if (!var1) {
 var_class_name = var == NULL ? "null" : var->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MClassType", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 173);
-exit(1);
+show_backtrace(1);
 }
 var_mtype = var;
 var2 = ((val* (*)(val*))(var_v->class->vft[COLOR_transform__TransformVisitor__builder]))(var_v) /* builder on <var_v:TransformVisitor>*/;
@@ -677,7 +674,6 @@ var17 = 1;
 var18 = NEW_array__NativeArray(var17, &type_array__NativeArrayparser_nodes__AIntExpr);
 ((struct instance_array__NativeArray*)var18)->values[0] = (val*) var15;
 ((void (*)(val*, val*, long))(var16->class->vft[COLOR_array__Array__with_native]))(var16, var18, var17) /* with_native on <var16:Array[AIntExpr]>*/;
-CHECK_NEW_array__Array(var16);
 }
 var19 = ((val* (*)(val*, val*, val*, val*))(var10->class->vft[COLOR_astbuilder__ASTBuilder__make_new]))(var10, var_mtype, var_meth, var16) /* make_new on <var10:ASTBuilder>*/;
 var_nnew = var19;
@@ -710,7 +706,6 @@ var35 = 1;
 var36 = NEW_array__NativeArray(var35, &type_array__NativeArrayparser_nodes__AExpr);
 ((struct instance_array__NativeArray*)var36)->values[0] = (val*) var_nexpr;
 ((void (*)(val*, val*, long))(var34->class->vft[COLOR_array__Array__with_native]))(var34, var36, var35) /* with_native on <var34:Array[AExpr]>*/;
-CHECK_NEW_array__Array(var34);
 }
 var37 = ((val* (*)(val*, val*, val*, val*))(var32->class->vft[COLOR_astbuilder__ASTBuilder__make_call]))(var32, var33, var_madd, var34) /* make_call on <var32:ASTBuilder>*/;
 var_nadd = var37;
@@ -836,7 +831,6 @@ var15 = 1;
 var16 = NEW_array__NativeArray(var15, &type_array__NativeArraymodel__MClassType);
 ((struct instance_array__NativeArray*)var16)->values[0] = (val*) var13;
 ((void (*)(val*, val*, long))(var14->class->vft[COLOR_array__Array__with_native]))(var14, var16, var15) /* with_native on <var14:Array[MClassType]>*/;
-CHECK_NEW_array__Array(var14);
 }
 var17 = ((val* (*)(val*, val*))(var6->class->vft[COLOR_model__MClass__get_mtype]))(var6, var14) /* get_mtype on <var6:MClass>*/;
 var_arraytype = var17;
@@ -863,7 +857,6 @@ var31 = 1;
 var32 = NEW_array__NativeArray(var31, &type_array__NativeArrayparser_nodes__AIntExpr);
 ((struct instance_array__NativeArray*)var32)->values[0] = (val*) var29;
 ((void (*)(val*, val*, long))(var30->class->vft[COLOR_array__Array__with_native]))(var30, var32, var31) /* with_native on <var30:Array[AIntExpr]>*/;
-CHECK_NEW_array__Array(var30);
 }
 var33 = ((val* (*)(val*, val*, val*, val*))(var25->class->vft[COLOR_astbuilder__ASTBuilder__make_new]))(var25, var_arraytype, var_meth, var30) /* make_new on <var25:ASTBuilder>*/;
 var_nnew = var33;
@@ -895,7 +888,6 @@ var48 = 1;
 var49 = NEW_array__NativeArray(var48, &type_array__NativeArrayparser_nodes__AExpr);
 ((struct instance_array__NativeArray*)var49)->values[0] = (val*) var_nexpr;
 ((void (*)(val*, val*, long))(var47->class->vft[COLOR_array__Array__with_native]))(var47, var49, var48) /* with_native on <var47:Array[AExpr]>*/;
-CHECK_NEW_array__Array(var47);
 }
 var50 = ((val* (*)(val*, val*, val*, val*))(var45->class->vft[COLOR_astbuilder__ASTBuilder__make_call]))(var45, var46, var_madd, var47) /* make_call on <var45:ASTBuilder>*/;
 var_nadd = var50;
@@ -972,7 +964,7 @@ if (!var1) {
 var_class_name = var == NULL ? "null" : var->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MClassType", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 227);
-exit(1);
+show_backtrace(1);
 }
 var_mtype = var;
 if (varonce) {
@@ -997,7 +989,6 @@ var13 = NEW_array__NativeArray(var12, &type_array__NativeArrayparser_nodes__AExp
 ((struct instance_array__NativeArray*)var13)->values[0] = (val*) var9;
 ((struct instance_array__NativeArray*)var13)->values[1] = (val*) var10;
 ((void (*)(val*, val*, long))(var11->class->vft[COLOR_array__Array__with_native]))(var11, var13, var12) /* with_native on <var11:Array[AExpr]>*/;
-CHECK_NEW_array__Array(var11);
 }
 var14 = ((val* (*)(val*, val*, val*, val*))(var8->class->vft[COLOR_astbuilder__ASTBuilder__make_new]))(var8, var_mtype, var_meth, var11) /* make_new on <var8:ASTBuilder>*/;
 ((void (*)(val*, val*))(self->class->vft[COLOR_parser_nodes__ANode__replace_with]))(self, var14) /* replace_with on <self:ACrangeExpr>*/;
@@ -1050,7 +1041,7 @@ if (!var1) {
 var_class_name = var == NULL ? "null" : var->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MClassType", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 238);
-exit(1);
+show_backtrace(1);
 }
 var_mtype = var;
 if (varonce) {
@@ -1075,7 +1066,6 @@ var13 = NEW_array__NativeArray(var12, &type_array__NativeArrayparser_nodes__AExp
 ((struct instance_array__NativeArray*)var13)->values[0] = (val*) var9;
 ((struct instance_array__NativeArray*)var13)->values[1] = (val*) var10;
 ((void (*)(val*, val*, long))(var11->class->vft[COLOR_array__Array__with_native]))(var11, var13, var12) /* with_native on <var11:Array[AExpr]>*/;
-CHECK_NEW_array__Array(var11);
 }
 var14 = ((val* (*)(val*, val*, val*, val*))(var8->class->vft[COLOR_astbuilder__ASTBuilder__make_new]))(var8, var_mtype, var_meth, var11) /* make_new on <var8:ASTBuilder>*/;
 ((void (*)(val*, val*))(self->class->vft[COLOR_parser_nodes__ANode__replace_with]))(self, var14) /* replace_with on <self:AOrangeExpr>*/;
@@ -1149,17 +1139,15 @@ var2 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__ASendExpr__n_expr]
 ((void (*)(val*, val*))(var_nblock->class->vft[COLOR_astbuilder__AExpr__add]))(var_nblock, var2) /* add on <var_nblock:ABlockExpr>*/;
 var3 = NEW_array__Array(&type_array__Arrayparser_nodes__AExpr);
 ((void (*)(val*))(var3->class->vft[COLOR_array__Array__init]))(var3) /* init on <var3:Array[AExpr]>*/;
-CHECK_NEW_array__Array(var3);
 var_read_args = var3;
 var4 = NEW_array__Array(&type_array__Arrayparser_nodes__AExpr);
 ((void (*)(val*))(var4->class->vft[COLOR_array__Array__init]))(var4) /* init on <var4:Array[AExpr]>*/;
-CHECK_NEW_array__Array(var4);
 var_write_args = var4;
 var5 = ((val* (*)(val*))(self->class->vft[COLOR_typing__ASendExpr__raw_arguments]))(self) /* raw_arguments on <self:ASendReassignFormExpr>*/;
 if (var5 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 268);
-exit(1);
+show_backtrace(1);
 }
 var6 = ((val* (*)(val*))(var5->class->vft[COLOR_abstract_collection__Collection__iterator]))(var5) /* iterator on <var5:nullable Array[AExpr](Array[AExpr])>*/;
 for(;;) {
@@ -1183,7 +1171,7 @@ var14 = ((val* (*)(val*))(self->class->vft[COLOR_typing__ASendExpr__callsite]))(
 if (var14 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 274);
-exit(1);
+show_backtrace(1);
 } else {
 var15 = ((val* (*)(val*))(var14->class->vft[COLOR_typing__CallSite__mproperty]))(var14) /* mproperty on <var14:nullable CallSite>*/;
 }
@@ -1194,7 +1182,7 @@ var18 = ((val* (*)(val*))(self->class->vft[COLOR_typing__AReassignFormExpr__reas
 if (var18 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 276);
-exit(1);
+show_backtrace(1);
 } else {
 var19 = ((val* (*)(val*))(var18->class->vft[COLOR_typing__CallSite__mproperty]))(var18) /* mproperty on <var18:nullable CallSite>*/;
 }
@@ -1205,7 +1193,6 @@ var22 = 1;
 var23 = NEW_array__NativeArray(var22, &type_array__NativeArrayparser_nodes__AExpr);
 ((struct instance_array__NativeArray*)var23)->values[0] = (val*) var20;
 ((void (*)(val*, val*, long))(var21->class->vft[COLOR_array__Array__with_native]))(var21, var23, var22) /* with_native on <var21:Array[AExpr]>*/;
-CHECK_NEW_array__Array(var21);
 }
 var24 = ((val* (*)(val*, val*, val*, val*))(var17->class->vft[COLOR_astbuilder__ASTBuilder__make_call]))(var17, var_nread, var19, var21) /* make_call on <var17:ASTBuilder>*/;
 var_nnewvalue = var24;
@@ -1217,7 +1204,7 @@ var28 = ((val* (*)(val*))(self->class->vft[COLOR_typing__ASendReassignFormExpr__
 if (var28 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 279);
-exit(1);
+show_backtrace(1);
 } else {
 var29 = ((val* (*)(val*))(var28->class->vft[COLOR_typing__CallSite__mproperty]))(var28) /* mproperty on <var28:nullable CallSite>*/;
 }
@@ -1238,54 +1225,60 @@ val* var_v /* var v: TransformVisitor */;
 val* var /* : nullable Variable */;
 val* var_variable /* var variable: Variable */;
 val* var1 /* : ASTBuilder */;
-val* var2 /* : AVarExpr */;
+val* var2 /* : nullable MType */;
+val* var3 /* : AVarExpr */;
 val* var_nread /* var nread: AVarExpr */;
-val* var3 /* : ASTBuilder */;
-val* var4 /* : nullable CallSite */;
-val* var5 /* : MMethod */;
-val* var6 /* : AExpr */;
-val* var7 /* : Array[AExpr] */;
-long var8 /* : Int */;
-val* var9 /* : NativeArray[AExpr] */;
-val* var10 /* : ACallExpr */;
+val* var4 /* : ASTBuilder */;
+val* var5 /* : nullable CallSite */;
+val* var6 /* : MMethod */;
+val* var7 /* : AExpr */;
+val* var8 /* : Array[AExpr] */;
+long var9 /* : Int */;
+val* var10 /* : NativeArray[AExpr] */;
+val* var11 /* : ACallExpr */;
 val* var_nnewvalue /* var nnewvalue: ACallExpr */;
-val* var11 /* : ASTBuilder */;
-val* var12 /* : AVarAssignExpr */;
+val* var12 /* : ASTBuilder */;
+val* var13 /* : AVarAssignExpr */;
 val* var_nwrite /* var nwrite: AVarAssignExpr */;
 var_v = p0;
 var = ((val* (*)(val*))(self->class->vft[COLOR_scope__AVarFormExpr__variable]))(self) /* variable on <self:AVarReassignExpr>*/;
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 290);
-exit(1);
+show_backtrace(1);
 }
 var_variable = var;
 var1 = ((val* (*)(val*))(var_v->class->vft[COLOR_transform__TransformVisitor__builder]))(var_v) /* builder on <var_v:TransformVisitor>*/;
-var2 = ((val* (*)(val*, val*))(var1->class->vft[COLOR_astbuilder__ASTBuilder__make_var_read]))(var1, var_variable) /* make_var_read on <var1:ASTBuilder>*/;
-var_nread = var2;
-var3 = ((val* (*)(val*))(var_v->class->vft[COLOR_transform__TransformVisitor__builder]))(var_v) /* builder on <var_v:TransformVisitor>*/;
-var4 = ((val* (*)(val*))(self->class->vft[COLOR_typing__AReassignFormExpr__reassign_callsite]))(self) /* reassign_callsite on <self:AVarReassignExpr>*/;
-if (var4 == NULL) {
+var2 = ((val* (*)(val*))(self->class->vft[COLOR_typing__AReassignFormExpr__read_type]))(self) /* read_type on <self:AVarReassignExpr>*/;
+if (var2 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 292);
+show_backtrace(1);
+}
+var3 = ((val* (*)(val*, val*, val*))(var1->class->vft[COLOR_astbuilder__ASTBuilder__make_var_read]))(var1, var_variable, var2) /* make_var_read on <var1:ASTBuilder>*/;
+var_nread = var3;
+var4 = ((val* (*)(val*))(var_v->class->vft[COLOR_transform__TransformVisitor__builder]))(var_v) /* builder on <var_v:TransformVisitor>*/;
+var5 = ((val* (*)(val*))(self->class->vft[COLOR_typing__AReassignFormExpr__reassign_callsite]))(self) /* reassign_callsite on <self:AVarReassignExpr>*/;
+if (var5 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 293);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 294);
+show_backtrace(1);
 } else {
-var5 = ((val* (*)(val*))(var4->class->vft[COLOR_typing__CallSite__mproperty]))(var4) /* mproperty on <var4:nullable CallSite>*/;
+var6 = ((val* (*)(val*))(var5->class->vft[COLOR_typing__CallSite__mproperty]))(var5) /* mproperty on <var5:nullable CallSite>*/;
 }
-var6 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AReassignFormExpr__n_value]))(self) /* n_value on <self:AVarReassignExpr>*/;
-var7 = NEW_array__Array(&type_array__Arrayparser_nodes__AExpr);
-{ /* var7 = array_instance Array[AExpr] */
-var8 = 1;
-var9 = NEW_array__NativeArray(var8, &type_array__NativeArrayparser_nodes__AExpr);
-((struct instance_array__NativeArray*)var9)->values[0] = (val*) var6;
-((void (*)(val*, val*, long))(var7->class->vft[COLOR_array__Array__with_native]))(var7, var9, var8) /* with_native on <var7:Array[AExpr]>*/;
-CHECK_NEW_array__Array(var7);
+var7 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AReassignFormExpr__n_value]))(self) /* n_value on <self:AVarReassignExpr>*/;
+var8 = NEW_array__Array(&type_array__Arrayparser_nodes__AExpr);
+{ /* var8 = array_instance Array[AExpr] */
+var9 = 1;
+var10 = NEW_array__NativeArray(var9, &type_array__NativeArrayparser_nodes__AExpr);
+((struct instance_array__NativeArray*)var10)->values[0] = (val*) var7;
+((void (*)(val*, val*, long))(var8->class->vft[COLOR_array__Array__with_native]))(var8, var10, var9) /* with_native on <var8:Array[AExpr]>*/;
 }
-var10 = ((val* (*)(val*, val*, val*, val*))(var3->class->vft[COLOR_astbuilder__ASTBuilder__make_call]))(var3, var_nread, var5, var7) /* make_call on <var3:ASTBuilder>*/;
-var_nnewvalue = var10;
-var11 = ((val* (*)(val*))(var_v->class->vft[COLOR_transform__TransformVisitor__builder]))(var_v) /* builder on <var_v:TransformVisitor>*/;
-var12 = ((val* (*)(val*, val*, val*))(var11->class->vft[COLOR_astbuilder__ASTBuilder__make_var_assign]))(var11, var_variable, var_nnewvalue) /* make_var_assign on <var11:ASTBuilder>*/;
-var_nwrite = var12;
+var11 = ((val* (*)(val*, val*, val*, val*))(var4->class->vft[COLOR_astbuilder__ASTBuilder__make_call]))(var4, var_nread, var6, var8) /* make_call on <var4:ASTBuilder>*/;
+var_nnewvalue = var11;
+var12 = ((val* (*)(val*))(var_v->class->vft[COLOR_transform__TransformVisitor__builder]))(var_v) /* builder on <var_v:TransformVisitor>*/;
+var13 = ((val* (*)(val*, val*, val*))(var12->class->vft[COLOR_astbuilder__ASTBuilder__make_var_assign]))(var12, var_variable, var_nnewvalue) /* make_var_assign on <var12:ASTBuilder>*/;
+var_nwrite = var13;
 ((void (*)(val*, val*))(self->class->vft[COLOR_parser_nodes__ANode__replace_with]))(self, var_nwrite) /* replace_with on <self:AVarReassignExpr>*/;
 RET_LABEL:;
 }
@@ -1331,8 +1324,8 @@ var2 = ((val* (*)(val*))(self->class->vft[COLOR_parser_nodes__AAttrFormExpr__n_e
 var3 = ((val* (*)(val*))(self->class->vft[COLOR_typing__AAttrFormExpr__mproperty]))(self) /* mproperty on <self:AAttrReassignExpr>*/;
 if (var3 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
-fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 306);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 307);
+show_backtrace(1);
 }
 var_attribute = var3;
 var4 = ((val* (*)(val*))(var_v->class->vft[COLOR_transform__TransformVisitor__builder]))(var_v) /* builder on <var_v:TransformVisitor>*/;
@@ -1344,8 +1337,8 @@ var8 = ((val* (*)(val*))(var_v->class->vft[COLOR_transform__TransformVisitor__bu
 var9 = ((val* (*)(val*))(self->class->vft[COLOR_typing__AReassignFormExpr__reassign_callsite]))(self) /* reassign_callsite on <self:AAttrReassignExpr>*/;
 if (var9 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
-fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 309);
-exit(1);
+fprintf(stderr, " (%s:%d)\n", "src/transform.nit", 310);
+show_backtrace(1);
 } else {
 var10 = ((val* (*)(val*))(var9->class->vft[COLOR_typing__CallSite__mproperty]))(var9) /* mproperty on <var9:nullable CallSite>*/;
 }
@@ -1356,7 +1349,6 @@ var13 = 1;
 var14 = NEW_array__NativeArray(var13, &type_array__NativeArrayparser_nodes__AExpr);
 ((struct instance_array__NativeArray*)var14)->values[0] = (val*) var11;
 ((void (*)(val*, val*, long))(var12->class->vft[COLOR_array__Array__with_native]))(var12, var14, var13) /* with_native on <var12:Array[AExpr]>*/;
-CHECK_NEW_array__Array(var12);
 }
 var15 = ((val* (*)(val*, val*, val*, val*))(var8->class->vft[COLOR_astbuilder__ASTBuilder__make_call]))(var8, var_nread, var10, var12) /* make_call on <var8:ASTBuilder>*/;
 var_nnewvalue = var15;

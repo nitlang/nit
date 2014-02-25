@@ -20,6 +20,14 @@ intrude import string
 import string_search
 import time
 
+in "C Header" `{
+	#include <dirent.h>
+	#include <string.h>
+	#include <sys/types.h>
+	#include <sys/stat.h>
+	#include <unistd.h>
+`}
+
 redef class Object
 # Simple I/O
 
@@ -255,7 +263,7 @@ redef class String
 	fun dirname: String
 	do
 		var l = _length - 1 # Index of the last char
-		if l > 0 and self[l] == '/' then l -= 1 # remove trailing `/`
+		if l > 0 and self.chars[l] == '/' then l -= 1 # remove trailing `/`
 		var pos = last_index_of_from('/', l)
 		if pos > 0 then
 			return substring(0, pos)
@@ -324,7 +332,7 @@ redef class String
 	do
 		if path.is_empty then return self
 		if self.is_empty then return path
-		if path[0] == '/' then return path
+		if path.chars[0] == '/' then return path
 		return "{self}/{path}"
 	end
 
@@ -368,7 +376,36 @@ redef class String
 	end
 
 	# returns files contained within the directory represented by self
-	fun files : Set[ String ] is extern import HashSet, HashSet::add, NativeString::to_s, String::to_cstring, HashSet[String] as( Set[String] ), String as( Object )
+	fun files : Set[ String ] is extern import HashSet[String], HashSet[String].add, NativeString.to_s, String.to_cstring, HashSet[String].as(Set[String]) `{
+		char *dir_path;
+		DIR *dir;
+
+		dir_path = String_to_cstring( recv );
+		if ((dir = opendir(dir_path)) == NULL)
+		{
+			perror( dir_path );
+			exit( 1 );
+		}
+		else
+		{
+			HashSet_of_String results;
+			String file_name;
+			struct dirent *de;
+
+			results = new_HashSet_of_String();
+
+			while ( ( de = readdir( dir ) ) != NULL )
+				if ( strcmp( de->d_name, ".." ) != 0 &&
+					strcmp( de->d_name, "." ) != 0 )
+				{
+					file_name = NativeString_to_s( strdup( de->d_name ) );
+					HashSet_of_String_add( results, file_name );
+				}
+
+			closedir( dir );
+			return HashSet_of_String_as_Set_of_String( results );
+		}
+	`}
 end
 
 redef class NativeString

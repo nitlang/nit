@@ -208,7 +208,7 @@ redef interface Object
 	# Check signals for safe operation
 	# will callback receiver of raised signals
 	# can callback any instance of SignalHandler, not just this one
-	protected fun check_signals: Bool is extern import SignalHandler::receive_signal `{
+	protected fun check_signals: Bool is extern import SignalHandler.receive_signal `{
 		int sig;
 		int raised_something = 0;
 

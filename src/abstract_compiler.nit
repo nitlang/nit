@@ -21,6 +21,7 @@ import literal
 import typing
 import auto_super_init
 import frontend
+import common_ffi
 
 # Add compiling options
 redef class ToolContext
@@ -106,7 +107,13 @@ redef class ModelBuilder
 			cc_paths.append(path_env.split_with(':'))
 		end
 
+		var compile_dir = toolcontext.opt_compile_dir.value
+		if compile_dir == null then compile_dir = ".nit_compile"
+		self.compile_dir = compile_dir
 	end
+
+	# The compilation directory
+	var compile_dir: String
 
 	protected fun write_and_make(compiler: AbstractCompiler)
 	do
@@ -117,9 +124,6 @@ redef class ModelBuilder
 		# Note that we do not try to be clever an a small change in a Nit source file may change the content of all the generated .c files
 		var time0 = get_time
 		self.toolcontext.info("*** WRITING C ***", 1)
-
-		var compile_dir = toolcontext.opt_compile_dir.value
-		if compile_dir == null then compile_dir = ".nit_compile"
 
 		compile_dir.mkdir
 
@@ -155,6 +159,14 @@ redef class ModelBuilder
 		compiler.extern_bodies.add(gc_chooser)
 		compiler.files_to_copy.add "{cc_paths.first}/gc_chooser.c"
 		compiler.files_to_copy.add "{cc_paths.first}/gc_chooser.h"
+
+		# FFI
+		for m in compiler.mainmodule.in_importation.greaters do if mmodule2nmodule.keys.has(m) then
+			var amodule = mmodule2nmodule[m]
+			if m.uses_ffi or amodule.uses_legacy_ni then
+				compiler.finalize_ffi_for_module(amodule)
+			end
+		end
 
 		# Copy original .[ch] files to compile_dir
 		for src in compiler.files_to_copy do
@@ -242,11 +254,16 @@ redef class ModelBuilder
 		for p in cc_paths do
 			cc_includes += " -I \"" + p + "\""
 		end
-		if toolcontext.opt_no_stacktrace.value then
-			makefile.write("CC = ccache cc\nCFLAGS = -g -O2\nCINCL = {cc_includes}\nLDFLAGS ?= \nLDLIBS  ?= -lm -lgc\n\n")
-		else
-			makefile.write("CC = ccache cc\nCFLAGS = -g -O2\nCINCL = {cc_includes}\nLDFLAGS ?= \nLDLIBS  ?= -lunwind -lm -lgc\n\n")
+
+		var linker_options = new HashSet[String]
+		for m in compiler.mainmodule.in_importation.greaters do if mmodule2nmodule.keys.has(m) then
+			var amod = mmodule2nmodule[m]
+			linker_options.add(amod.c_linker_options)
 		end
+
+		if not toolcontext.opt_no_stacktrace.value then linker_options.add("-lunwind")
+
+		makefile.write("CC = ccache cc\nCFLAGS = -g -O2\nCINCL = {cc_includes}\nLDFLAGS ?= \nLDLIBS  ?= -lm -lgc {linker_options.join(" ")}\n\n")
 		makefile.write("all: {outpath}\n\n")
 
 		var ofiles = new Array[String]
@@ -259,11 +276,13 @@ redef class ModelBuilder
 
 		# Compile each required extern body into a specific .o
 		for f in compiler.extern_bodies do
-			var basename = f.filename.basename(".c")
-			var o = "{basename}.extern.o"
-			var ff = f.filename
-			makefile.write("{o}: {ff}\n\t$(CC) $(CFLAGS) -D NONITCNI {f.cflags} -c -o {o} {ff}\n\n")
-			ofiles.add(o)
+			if f isa ExternCFile then
+				var basename = f.filename.basename(".c")
+				var o = "{basename}.extern.o"
+				var ff = f.filename.basename("")
+				makefile.write("{o}: {ff}\n\t$(CC) $(CFLAGS) -D NONITCNI {f.cflags} -c -o {o} {ff}\n\n")
+				ofiles.add(o)
+			end
 		end
 
 		# Link edition
@@ -355,8 +374,7 @@ abstract class AbstractCompiler
 	# Binds the generated C function names to Nit function names
 	fun build_c_to_nit_bindings
 	do
-		var compile_dir = modelbuilder.toolcontext.opt_compile_dir.value
-		if compile_dir == null then compile_dir = ".nit_compile"
+		var compile_dir = modelbuilder.compile_dir
 
 		var stream = new OFStream.open("{compile_dir}/C_fun_names")
 		stream.write("%\{\n#include \"c_functions_hash.h\"\n%\}\n")
@@ -396,18 +414,22 @@ abstract class AbstractCompiler
 		self.header.add_decl("#include \"gc_chooser.h\"")
 
 		compile_header_structs
+		compile_nitni_structs
 
 		# Signal handler function prototype
 		self.header.add_decl("void show_backtrace(int);")
 
-		# Global variable used by the legacy native interface
+		# Global variable used by intern methods
 		self.header.add_decl("extern int glob_argc;")
 		self.header.add_decl("extern char **glob_argv;")
 		self.header.add_decl("extern val *glob_sys;")
 	end
 
-	# Declaration of structures the live Nit types
+	# Declaration of structures for live Nit types
 	protected fun compile_header_structs is abstract
+
+	# Declaration of structures for nitni undelying the FFI
+	protected fun compile_nitni_structs is abstract
 
 	# Generate the main C function.
 	# This function:
@@ -529,8 +551,8 @@ abstract class AbstractCompiler
 		v.add("\}")
 	end
 
-	# List of additional .c files required to compile (native interface)
-	var extern_bodies = new Array[ExternCFile]
+	# List of additional files required to compile (FFI)
+	var extern_bodies = new Array[ExternFile]
 
 	# List of source files to copy over to the compile dir
 	var files_to_copy = new Array[String]
@@ -629,6 +651,16 @@ abstract class AbstractCompiler
 		if b == 0 then return "n/a"
 		return ((a*10000/b).to_f / 100.0).to_precision(2)
 	end
+
+	fun finalize_ffi_for_module(nmodule: AModule)
+	do
+		var visitor = new_visitor
+		nmodule.finalize_ffi(visitor, modelbuilder)
+		nmodule.finalize_nitni(visitor)
+	end
+
+	# Does this compiler support the FFI?
+	fun supports_ffi: Bool do return false
 end
 
 # A file unit (may be more than one file if
@@ -1220,14 +1252,6 @@ class Frame
 
 	# The label at the end of the property
 	var returnlabel: nullable String writable = null
-end
-
-# An extern C file to compile
-class ExternCFile
-	# The filename of the file
-	var filename: String
-	# Additionnal specific CC compiler -c flags
-	var cflags: String
 end
 
 redef class MType
@@ -2406,13 +2430,13 @@ redef class ASuperExpr
 			args = v.frame.arguments
 		end
 
-		var mproperty = self.mproperty
-		if mproperty != null then
-			if mproperty.intro.msignature.arity == 0 then
+		var callsite = self.callsite
+		if callsite != null then
+			if callsite.mproperty.intro.msignature.arity == 0 then
 				args = [recv]
 			end
 			# Super init call
-			var res = v.send(mproperty, args)
+			var res = v.compile_callsite(callsite, args)
 			return res
 		end
 
@@ -2529,4 +2553,15 @@ redef class MModule
 		return properties_cache[mclass]
 	end
 	private var properties_cache: Map[MClass, Set[MProperty]] = new HashMap[MClass, Set[MProperty]]
+end
+
+redef class AModule
+	# Does this module use the legacy native interface?
+	fun uses_legacy_ni: Bool is abstract
+
+	# Write FFI results to file
+	fun finalize_ffi(v: AbstractCompilerVisitor, modelbuilder: ModelBuilder) is abstract
+
+	# Write nitni results to file
+	fun finalize_nitni(v: AbstractCompilerVisitor) is abstract
 end

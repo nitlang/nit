@@ -17,5 +17,5 @@
 var a = "éè"
 print(a.length)
 for i in [0..a.length[ do
-	print("{i} is {a[i]} ({a[i].ascii})")
+	print("{i} is {a.chars[i]} ({a.chars[i].ascii})")
 end

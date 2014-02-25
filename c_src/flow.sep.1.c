@@ -7,7 +7,7 @@ var1 = self->attrs[COLOR_flow__ToolContext___64dflow_phase].val; /* @flow_phase 
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @flow_phase");
 fprintf(stderr, " (%s:%d)\n", "src/flow.nit", 26);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -54,7 +54,7 @@ var1 = self->attrs[COLOR_flow__FlowVisitor___64dcurrent_flow_context].val; /* @c
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @current_flow_context");
 fprintf(stderr, " (%s:%d)\n", "src/flow.nit", 39);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -87,7 +87,7 @@ var1 = self->attrs[COLOR_flow__FlowVisitor___64dtoolcontext].val; /* @toolcontex
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @toolcontext");
 fprintf(stderr, " (%s:%d)\n", "src/flow.nit", 41);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -125,7 +125,6 @@ var_toolcontext = p0;
 ((void (*)(val*, val*))(self->class->vft[COLOR_flow__FlowVisitor__toolcontext_61d]))(self, var_toolcontext) /* toolcontext= on <self:FlowVisitor>*/;
 var = NEW_flow__FlowContext(&type_flow__FlowContext);
 ((void (*)(val*))(var->class->vft[COLOR_flow__FlowContext__init]))(var) /* init on <var:FlowContext>*/;
-CHECK_NEW_flow__FlowContext(var);
 ((void (*)(val*, val*))(self->class->vft[COLOR_flow__FlowVisitor__current_flow_context_61d]))(self, var) /* current_flow_context= on <self:FlowVisitor>*/;
 var1 = ((val* (*)(val*))(self->class->vft[COLOR_flow__FlowVisitor__flows]))(self) /* flows on <self:FlowVisitor>*/;
 var2 = ((val* (*)(val*))(self->class->vft[COLOR_flow__FlowVisitor__current_flow_context]))(self) /* current_flow_context on <self:FlowVisitor>*/;
@@ -292,7 +291,7 @@ var1 = ((val* (*)(val*))(var_node->class->vft[COLOR_flow__AExpr__after_flow_cont
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/flow.nit", 77);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 goto RET_LABEL;
@@ -316,7 +315,7 @@ var1 = self->attrs[COLOR_flow__FlowVisitor___64dflows].val; /* @flows on <self:F
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @flows");
 fprintf(stderr, " (%s:%d)\n", "src/flow.nit", 80);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -531,7 +530,6 @@ var1 = var4;
 varonce = var1;
 }
 ((void (*)(val*, val*))(var->class->vft[COLOR_file__OFStream__open]))(var, var1) /* open on <var:OFStream>*/;
-CHECK_NEW_file__OFStream(var);
 var_file = var;
 if (varonce5) {
 var6 = varonce5;
@@ -577,7 +575,6 @@ if (var20){
 var21 = NEW_array__Array(&type_array__Arraykernel__Object);
 var22 = 3;
 ((void (*)(val*, long))(var21->class->vft[COLOR_array__Array__with_capacity]))(var21, var22) /* with_capacity on <var21:Array[Object]>*/;
-CHECK_NEW_array__Array(var21);
 var_ = var21;
 if (varonce23) {
 var24 = varonce23;
@@ -606,13 +603,13 @@ if (!var29) {
 var_class_name = var28 == NULL ? "null" : var28->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "AExpr", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "src/flow.nit", 89);
-exit(1);
+show_backtrace(1);
 }
 var32 = ((val* (*)(val*))(var28->class->vft[COLOR_flow__AExpr__after_flow_context]))(var28) /* after_flow_context on <var28:nullable ANode(AExpr)>*/;
 if (var32 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/flow.nit", 89);
-exit(1);
+show_backtrace(1);
 } else {
 var33 = ((long (*)(val*))(var32->class->vft[COLOR_kernel__Object__object_id]))(var32) /* object_id on <var32:nullable FlowContext>*/;
 }
@@ -665,7 +662,7 @@ var58 = ((val* (*)(val*))(var_f->class->vft[COLOR_flow__FlowContext__node]))(var
 if (var58 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/flow.nit", 91);
-exit(1);
+show_backtrace(1);
 } else {
 var59 = ((val* (*)(val*))(var58->class->vft[COLOR_parser_nodes__ANode__location]))(var58) /* location on <var58:nullable ANode>*/;
 }
@@ -682,7 +679,7 @@ var65 = ((val* (*)(val*))(var_f->class->vft[COLOR_flow__FlowContext__node]))(var
 if (var65 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/flow.nit", 91);
-exit(1);
+show_backtrace(1);
 } else {
 var66 = ((val* (*)(val*))(var65->class->vft[COLOR_string__Object__class_name]))(var65) /* class_name on <var65:nullable ANode>*/;
 }
@@ -724,7 +721,6 @@ var82 = BOX_kernel__Int(var52); /* autobox from Int to Object */
 ((struct instance_array__NativeArray*)var80)->values[10] = (val*) var_s;
 ((struct instance_array__NativeArray*)var80)->values[11] = (val*) var74;
 ((void (*)(val*, val*, long))(var78->class->vft[COLOR_array__Array__with_native]))(var78, var80, var79) /* with_native on <var78:Array[Object]>*/;
-CHECK_NEW_array__Array(var78);
 }
 var83 = ((val* (*)(val*))(var78->class->vft[COLOR_string__Object__to_s]))(var78) /* to_s on <var78:Array[Object]>*/;
 ((void (*)(val*, val*))(var_file->class->vft[COLOR_stream__OStream__write]))(var_file, var83) /* write on <var_file:OFStream>*/;
@@ -776,7 +772,6 @@ var109 = BOX_kernel__Int(var99); /* autobox from Int to Object */
 ((struct instance_array__NativeArray*)var107)->values[3] = (val*) var109;
 ((struct instance_array__NativeArray*)var107)->values[4] = (val*) var101;
 ((void (*)(val*, val*, long))(var105->class->vft[COLOR_array__Array__with_native]))(var105, var107, var106) /* with_native on <var105:Array[Object]>*/;
-CHECK_NEW_array__Array(var105);
 }
 var110 = ((val* (*)(val*))(var105->class->vft[COLOR_string__Object__to_s]))(var105) /* to_s on <var105:Array[Object]>*/;
 ((void (*)(val*, val*))(var_file->class->vft[COLOR_stream__OStream__write]))(var_file, var110) /* write on <var_file:OFStream>*/;
@@ -829,7 +824,6 @@ var135 = BOX_kernel__Int(var125); /* autobox from Int to Object */
 ((struct instance_array__NativeArray*)var133)->values[3] = (val*) var135;
 ((struct instance_array__NativeArray*)var133)->values[4] = (val*) var127;
 ((void (*)(val*, val*, long))(var131->class->vft[COLOR_array__Array__with_native]))(var131, var133, var132) /* with_native on <var131:Array[Object]>*/;
-CHECK_NEW_array__Array(var131);
 }
 var136 = ((val* (*)(val*))(var131->class->vft[COLOR_string__Object__to_s]))(var131) /* to_s on <var131:Array[Object]>*/;
 ((void (*)(val*, val*))(var_file->class->vft[COLOR_stream__OStream__write]))(var_file, var136) /* write on <var_file:OFStream>*/;
@@ -880,7 +874,6 @@ var161 = BOX_kernel__Int(var151); /* autobox from Int to Object */
 ((struct instance_array__NativeArray*)var159)->values[3] = (val*) var161;
 ((struct instance_array__NativeArray*)var159)->values[4] = (val*) var153;
 ((void (*)(val*, val*, long))(var157->class->vft[COLOR_array__Array__with_native]))(var157, var159, var158) /* with_native on <var157:Array[Object]>*/;
-CHECK_NEW_array__Array(var157);
 }
 var162 = ((val* (*)(val*))(var157->class->vft[COLOR_string__Object__to_s]))(var157) /* to_s on <var157:Array[Object]>*/;
 ((void (*)(val*, val*))(var_file->class->vft[COLOR_stream__OStream__write]))(var_file, var162) /* write on <var_file:OFStream>*/;
@@ -918,7 +911,6 @@ val* var3 /* : nullable ANode */;
 val* var4 /* : FlowContext */;
 var1 = NEW_flow__FlowContext(&type_flow__FlowContext);
 ((void (*)(val*))(var1->class->vft[COLOR_flow__FlowContext__init]))(var1) /* init on <var1:FlowContext>*/;
-CHECK_NEW_flow__FlowContext(var1);
 var_flow = var1;
 var2 = ((val* (*)(val*))(self->class->vft[COLOR_flow__FlowVisitor__flows]))(self) /* flows on <self:FlowVisitor>*/;
 ((void (*)(val*, val*))(var2->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var2, var_flow) /* add on <var2:Array[FlowContext]>*/;
@@ -954,7 +946,6 @@ var_flow1 = p0;
 var_flow2 = p1;
 var1 = NEW_flow__FlowContext(&type_flow__FlowContext);
 ((void (*)(val*))(var1->class->vft[COLOR_flow__FlowContext__init]))(var1) /* init on <var1:FlowContext>*/;
-CHECK_NEW_flow__FlowContext(var1);
 var_flow = var1;
 var2 = ((val* (*)(val*))(self->class->vft[COLOR_flow__FlowVisitor__flows]))(self) /* flows on <self:FlowVisitor>*/;
 ((void (*)(val*, val*))(var2->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var2, var_flow) /* add on <var2:Array[FlowContext]>*/;
@@ -990,7 +981,6 @@ var_true_flow = p0;
 var_false_flow = p1;
 var1 = NEW_flow__FlowContext(&type_flow__FlowContext);
 ((void (*)(val*))(var1->class->vft[COLOR_flow__FlowContext__init]))(var1) /* init on <var1:FlowContext>*/;
-CHECK_NEW_flow__FlowContext(var1);
 var_flow = var1;
 var2 = ((val* (*)(val*))(self->class->vft[COLOR_flow__FlowVisitor__flows]))(self) /* flows on <self:FlowVisitor>*/;
 ((void (*)(val*, val*))(var2->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var2, var_flow) /* add on <var2:Array[FlowContext]>*/;
@@ -1043,7 +1033,6 @@ var1 = ((val* (*)(val*))(self->class->vft[COLOR_flow__FlowVisitor__current_flow_
 var_orig_flow = var1;
 var2 = NEW_flow__FlowContext(&type_flow__FlowContext);
 ((void (*)(val*))(var2->class->vft[COLOR_flow__FlowContext__init]))(var2) /* init on <var2:FlowContext>*/;
-CHECK_NEW_flow__FlowContext(var2);
 var_true_flow = var2;
 var3 = ((val* (*)(val*))(self->class->vft[COLOR_flow__FlowVisitor__flows]))(self) /* flows on <self:FlowVisitor>*/;
 ((void (*)(val*, val*))(var3->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var3, var_true_flow) /* add on <var3:Array[FlowContext]>*/;
@@ -1062,7 +1051,6 @@ varonce = var5;
 ((void (*)(val*, val*))(var_true_flow->class->vft[COLOR_flow__FlowContext__name_61d]))(var_true_flow, var5) /* name= on <var_true_flow:FlowContext>*/;
 var9 = NEW_flow__FlowContext(&type_flow__FlowContext);
 ((void (*)(val*))(var9->class->vft[COLOR_flow__FlowContext__init]))(var9) /* init on <var9:FlowContext>*/;
-CHECK_NEW_flow__FlowContext(var9);
 var_false_flow = var9;
 var10 = ((val* (*)(val*))(self->class->vft[COLOR_flow__FlowVisitor__flows]))(self) /* flows on <self:FlowVisitor>*/;
 ((void (*)(val*, val*))(var10->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var10, var_false_flow) /* add on <var10:Array[FlowContext]>*/;
@@ -1105,7 +1093,6 @@ val* var4 /* : FlowContext */;
 short int var5 /* : Bool */;
 var1 = NEW_flow__FlowContext(&type_flow__FlowContext);
 ((void (*)(val*))(var1->class->vft[COLOR_flow__FlowContext__init]))(var1) /* init on <var1:FlowContext>*/;
-CHECK_NEW_flow__FlowContext(var1);
 var_flow = var1;
 var2 = ((val* (*)(val*))(self->class->vft[COLOR_flow__FlowVisitor__flows]))(self) /* flows on <self:FlowVisitor>*/;
 ((void (*)(val*, val*))(var2->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var2, var_flow) /* add on <var2:Array[FlowContext]>*/;
@@ -1256,7 +1243,7 @@ var1 = self->attrs[COLOR_flow__FlowContext___64dprevious].val; /* @previous on <
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @previous");
 fprintf(stderr, " (%s:%d)\n", "src/flow.nit", 192);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1289,7 +1276,7 @@ var1 = self->attrs[COLOR_flow__FlowContext___64dloops].val; /* @loops on <self:F
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @loops");
 fprintf(stderr, " (%s:%d)\n", "src/flow.nit", 195);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1492,7 +1479,7 @@ var1 = self->attrs[COLOR_flow__FlowContext___64dname].val; /* @name on <self:Flo
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @name");
 fprintf(stderr, " (%s:%d)\n", "src/flow.nit", 225);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1525,7 +1512,7 @@ var1 = self->attrs[COLOR_flow__FlowContext___64dwhen_true].val; /* @when_true on
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @when_true");
 fprintf(stderr, " (%s:%d)\n", "src/flow.nit", 228);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1558,7 +1545,7 @@ var1 = self->attrs[COLOR_flow__FlowContext___64dwhen_false].val; /* @when_false 
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @when_false");
 fprintf(stderr, " (%s:%d)\n", "src/flow.nit", 231);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1682,7 +1669,6 @@ val* var_v /* var v: FlowVisitor */;
 var_toolcontext = p0;
 var = NEW_flow__FlowVisitor(&type_flow__FlowVisitor);
 ((void (*)(val*, val*))(var->class->vft[COLOR_flow__FlowVisitor__init]))(var, var_toolcontext) /* init on <var:FlowVisitor>*/;
-CHECK_NEW_flow__FlowVisitor(var);
 var_v = var;
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, self) /* enter_visit on <var_v:FlowVisitor>*/;
 RET_LABEL:;

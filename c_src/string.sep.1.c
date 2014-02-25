@@ -118,7 +118,7 @@ if (!var4) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var5 = var_count >= var1;
 var2 = var5;
@@ -128,7 +128,7 @@ RET_LABEL3:(void)0;
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/string.nit", 50);
-exit(1);
+show_backtrace(1);
 }
 { /* Inline kernel#Int#+ (var_count,var_from) */
 var8 = var_count + var_from;
@@ -146,7 +146,7 @@ if (!var12) {
 var_class_name15 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name15);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var16 = var_from < var9;
 var10 = var16;
@@ -167,7 +167,7 @@ if (!var21) {
 var_class_name24 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name24);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var25 = var_count > var18;
 var19 = var25;
@@ -187,7 +187,7 @@ if (!var29) {
 var_class_name32 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name32);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var33 = var_from < var_count;
 var27 = var33;
@@ -203,7 +203,6 @@ goto RET_LABEL36;
 RET_LABEL36:(void)0;
 }
 ((void (*)(val*, long))(var34->class->vft[COLOR_string__Buffer__with_capacity]))(var34, var35) /* with_capacity on <var34:Buffer>*/;
-CHECK_NEW_string__Buffer(var34);
 var_r = var34;
 for(;;) {
 { /* Inline kernel#Int#< (var_from,var_count) */
@@ -214,7 +213,7 @@ if (!var40) {
 var_class_name43 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name43);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var44 = var_from < var_count;
 var38 = var44;
@@ -295,7 +294,7 @@ if (!var4) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var5 = var_from < var1;
 var2 = var5;
@@ -305,7 +304,7 @@ RET_LABEL3:(void)0;
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/string.nit", 75);
-exit(1);
+show_backtrace(1);
 }
 var6 = ((long (*)(val*))(self->class->vft[COLOR_abstract_collection__Collection__length]))(self) /* length on <self:AbstractString>*/;
 { /* Inline kernel#Int#- (var6,var_from) */
@@ -418,7 +417,7 @@ if (!var15) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var16 = var_myindex > var12;
 var13 = var16;
@@ -437,7 +436,7 @@ if (!var19) {
 var_class_name22 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name22);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var23 = var_itsindex > var_myindex;
 var17 = var23;
@@ -470,7 +469,7 @@ if (!var31) {
 var_class_name34 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name34);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var35 = var_itsindex >= var_its_index_from;
 var29 = var35;
@@ -725,7 +724,7 @@ if (!var10) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var11 = var_v > var_base;
 var8 = var11;
@@ -756,7 +755,7 @@ if (!var18) {
 var_class_name21 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name21);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var22 = var_v < var15;
 var16 = var22;
@@ -922,7 +921,6 @@ val* var9 /* : String */;
 var1 = NEW_string__Buffer(&type_string__Buffer);
 var2 = ((long (*)(val*))(self->class->vft[COLOR_abstract_collection__Collection__length]))(self) /* length on <self:AbstractString>*/;
 ((void (*)(val*, long))(var1->class->vft[COLOR_string__Buffer__with_capacity]))(var1, var2) /* with_capacity on <var1:Buffer>*/;
-CHECK_NEW_string__Buffer(var1);
 var_s = var1;
 var3 = ((val* (*)(val*))(self->class->vft[COLOR_abstract_collection__Collection__iterator]))(self) /* iterator on <self:AbstractString>*/;
 for(;;) {
@@ -970,7 +968,6 @@ val* var9 /* : String */;
 var1 = NEW_string__Buffer(&type_string__Buffer);
 var2 = ((long (*)(val*))(self->class->vft[COLOR_abstract_collection__Collection__length]))(self) /* length on <self:AbstractString>*/;
 ((void (*)(val*, long))(var1->class->vft[COLOR_string__Buffer__with_capacity]))(var1, var2) /* with_capacity on <var1:Buffer>*/;
-CHECK_NEW_string__Buffer(var1);
 var_s = var1;
 var3 = ((val* (*)(val*))(self->class->vft[COLOR_abstract_collection__Collection__iterator]))(self) /* iterator on <self:AbstractString>*/;
 for(;;) {
@@ -1097,7 +1094,7 @@ if (!var16) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
-exit(1);
+show_backtrace(1);
 }
 var17 = var9 <= var13;
 var14 = var17;
@@ -1164,7 +1161,7 @@ if (!var43) {
 var_class_name46 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name46);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
-exit(1);
+show_backtrace(1);
 }
 var47 = var36 <= var40;
 var41 = var47;
@@ -1254,7 +1251,7 @@ if (!var4) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var5 = var_i < var1;
 var2 = var5;
@@ -1379,7 +1376,6 @@ short int var84 /* : Bool */;
 val* var85 /* : String */;
 var1 = NEW_string__Buffer(&type_string__Buffer);
 ((void (*)(val*))(var1->class->vft[COLOR_string__Buffer__init]))(var1) /* init on <var1:Buffer>*/;
-CHECK_NEW_string__Buffer(var1);
 var_res = var1;
 var2 = 0;
 var_underscore = var2;
@@ -1399,7 +1395,7 @@ if (!var12) {
 var_class_name = type_kernel__Char.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 438);
-exit(1);
+show_backtrace(1);
 }
 var13 = var_c >= var9;
 var10 = var13;
@@ -1417,7 +1413,7 @@ if (!var17) {
 var_class_name20 = type_kernel__Char.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name20);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 436);
-exit(1);
+show_backtrace(1);
 }
 var21 = var_c <= var14;
 var15 = var21;
@@ -1441,7 +1437,7 @@ if (!var27) {
 var_class_name30 = type_kernel__Char.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name30);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 438);
-exit(1);
+show_backtrace(1);
 }
 var31 = var_c >= var24;
 var25 = var31;
@@ -1459,7 +1455,7 @@ if (!var36) {
 var_class_name39 = type_kernel__Char.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name39);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 436);
-exit(1);
+show_backtrace(1);
 }
 var40 = var_c <= var33;
 var34 = var40;
@@ -1504,7 +1500,7 @@ if (!var54) {
 var_class_name57 = type_kernel__Char.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name57);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 438);
-exit(1);
+show_backtrace(1);
 }
 var58 = var_c >= var51;
 var52 = var58;
@@ -1522,7 +1518,7 @@ if (!var63) {
 var_class_name66 = type_kernel__Char.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name66);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 436);
-exit(1);
+show_backtrace(1);
 }
 var67 = var_c <= var60;
 var61 = var67;
@@ -1666,7 +1662,6 @@ val* var73 /* : nullable Object */;
 val* var74 /* : String */;
 var1 = NEW_string__Buffer(&type_string__Buffer);
 ((void (*)(val*))(var1->class->vft[COLOR_string__Buffer__init]))(var1) /* init on <var1:Buffer>*/;
-CHECK_NEW_string__Buffer(var1);
 var_b = var1;
 var2 = ((val* (*)(val*))(self->class->vft[COLOR_abstract_collection__Collection__iterator]))(self) /* iterator on <self:AbstractString>*/;
 for(;;) {
@@ -1785,7 +1780,7 @@ if (!var56) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var57 = var50 < var53;
 var54 = var57;
@@ -1818,7 +1813,6 @@ var71 = NEW_array__NativeArray(var70, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var71)->values[0] = (val*) var59;
 ((struct instance_array__NativeArray*)var71)->values[1] = (val*) var68;
 ((void (*)(val*, val*, long))(var69->class->vft[COLOR_array__Array__with_native]))(var69, var71, var70) /* with_native on <var69:Array[Object]>*/;
-CHECK_NEW_array__Array(var69);
 }
 var72 = ((val* (*)(val*))(var69->class->vft[COLOR_string__Object__to_s]))(var69) /* to_s on <var69:Array[Object]>*/;
 ((void (*)(val*, val*))(var_b->class->vft[COLOR_abstract_collection__Sequence__append]))(var_b, var72) /* append on <var_b:Buffer>*/;
@@ -1871,7 +1865,6 @@ val* var12 /* : String */;
 var_chars = p0;
 var1 = NEW_string__Buffer(&type_string__Buffer);
 ((void (*)(val*))(var1->class->vft[COLOR_string__Buffer__init]))(var1) /* init on <var1:Buffer>*/;
-CHECK_NEW_string__Buffer(var1);
 var_b = var1;
 var2 = ((val* (*)(val*))(self->class->vft[COLOR_string__AbstractString__escape_to_c]))(self) /* escape_to_c on <self:AbstractString>*/;
 var3 = ((val* (*)(val*))(var2->class->vft[COLOR_abstract_collection__Collection__iterator]))(var2) /* iterator on <var2:String>*/;
@@ -1988,7 +1981,6 @@ val* var41 /* : String */;
 var1 = NEW_string__Buffer(&type_string__Buffer);
 var2 = ((long (*)(val*))(self->class->vft[COLOR_abstract_collection__Collection__length]))(self) /* length on <self:AbstractString>*/;
 ((void (*)(val*, long))(var1->class->vft[COLOR_string__Buffer__with_capacity]))(var1, var2) /* with_capacity on <var1:Buffer>*/;
-CHECK_NEW_string__Buffer(var1);
 var_res = var1;
 var3 = 0;
 var_was_slash = var3;
@@ -2176,7 +2168,7 @@ if (!var4) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var5 = var_index >= var1;
 var2 = var5;
@@ -2186,7 +2178,7 @@ RET_LABEL3:(void)0;
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/string.nit", 379);
-exit(1);
+show_backtrace(1);
 }
 var6 = self->attrs[COLOR_string__String___index_from].l; /* _index_from on <self:String> */
 { /* Inline kernel#Int#+ (var_index,var6) */
@@ -2204,7 +2196,7 @@ if (!var13) {
 var_class_name16 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name16);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
-exit(1);
+show_backtrace(1);
 }
 var17 = var7 <= var10;
 var11 = var17;
@@ -2214,7 +2206,7 @@ RET_LABEL12:(void)0;
 if (!var11) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/string.nit", 382);
-exit(1);
+show_backtrace(1);
 }
 var18 = self->attrs[COLOR_string__AbstractString___items].str; /* _items on <self:String> */
 var19 = self->attrs[COLOR_string__String___index_from].l; /* _index_from on <self:String> */
@@ -2318,7 +2310,7 @@ if (!var4) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var5 = var_count >= var1;
 var2 = var5;
@@ -2328,7 +2320,7 @@ RET_LABEL3:(void)0;
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/string.nit", 388);
-exit(1);
+show_backtrace(1);
 }
 var6 = 0;
 { /* Inline kernel#Int#< (var_from,var6) */
@@ -2339,7 +2331,7 @@ if (!var9) {
 var_class_name12 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name12);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var13 = var_from < var6;
 var7 = var13;
@@ -2363,7 +2355,7 @@ if (!var20) {
 var_class_name23 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name23);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var24 = var_count < var17;
 var18 = var24;
@@ -2402,7 +2394,7 @@ if (!var37) {
 var_class_name40 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name40);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var41 = var31 > var34;
 var35 = var41;
@@ -2414,7 +2406,6 @@ var42 = NEW_string__String(&type_string__String);
 var43 = self->attrs[COLOR_string__String___index_to].l; /* _index_to on <self:String> */
 var44 = self->attrs[COLOR_string__AbstractString___items].str; /* _items on <self:String> */
 ((void (*)(val*, long, long, char*))(var42->class->vft[COLOR_string__String__from_substring]))(var42, var_realFrom, var43, var44) /* from_substring on <var42:String>*/;
-CHECK_NEW_string__String(var42);
 var = var42;
 goto RET_LABEL;
 } else {
@@ -2456,7 +2447,6 @@ RET_LABEL59:(void)0;
 }
 var61 = self->attrs[COLOR_string__AbstractString___items].str; /* _items on <self:String> */
 ((void (*)(val*, long, long, char*))(var53->class->vft[COLOR_string__String__from_substring]))(var53, var_realFrom, var58, var61) /* from_substring on <var53:String>*/;
-CHECK_NEW_string__String(var53);
 var = var53;
 goto RET_LABEL;
 RET_LABEL:;
@@ -2507,7 +2497,7 @@ if (!var4) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var5 = var_from > var1;
 var2 = var5;
@@ -2537,7 +2527,7 @@ if (!var13) {
 var_class_name16 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name16);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var17 = var_from < var10;
 var11 = var17;
@@ -2657,7 +2647,7 @@ if (!var15) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var16 = var_myindex > var12;
 var13 = var16;
@@ -2676,7 +2666,7 @@ if (!var19) {
 var_class_name22 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name22);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var23 = var_itsindex > var_myindex;
 var17 = var23;
@@ -2717,7 +2707,7 @@ if (!var35) {
 var_class_name38 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name38);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var39 = var_itsindex >= var_itsindexfrom;
 var33 = var39;
@@ -2847,7 +2837,7 @@ if (!var13) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
-exit(1);
+show_backtrace(1);
 }
 var14 = var_index_from <= var_max;
 var11 = var14;
@@ -2970,7 +2960,7 @@ if (!var13) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
-exit(1);
+show_backtrace(1);
 }
 var14 = var_index_from <= var_max;
 var11 = var14;
@@ -3138,7 +3128,7 @@ if (!var17) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
-exit(1);
+show_backtrace(1);
 }
 var18 = var11 <= var14;
 var15 = var18;
@@ -3210,7 +3200,7 @@ if (!var46) {
 var_class_name49 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name49);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
-exit(1);
+show_backtrace(1);
 }
 var50 = var40 <= var43;
 var44 = var50;
@@ -3323,7 +3313,7 @@ if (!var4) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
-exit(1);
+show_backtrace(1);
 }
 var5 = var_i <= var_imax;
 var2 = var5;
@@ -3465,7 +3455,7 @@ if (!var6) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var7 = var2 > var3;
 var4 = var7;
@@ -3666,7 +3656,7 @@ if (!var26) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var29 = var_my_index < var_last_iteration;
 var24 = var29;
@@ -3811,7 +3801,7 @@ if (!var1) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/string.nit", 571);
-exit(1);
+show_backtrace(1);
 }
 var_other = p0;
 var2 = ((long (*)(val*))(self->class->vft[COLOR_kernel__Object__object_id]))(self) /* object_id on <self:String>*/;
@@ -3856,7 +3846,7 @@ if (!var19) {
 var_class_name22 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name22);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var23 = var_curr_id_self < var_max_iterations;
 var17 = var23;
@@ -3894,7 +3884,7 @@ if (!var36) {
 var_class_name39 = type_kernel__Char.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name39);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 437);
-exit(1);
+show_backtrace(1);
 }
 var40 = var_my_curr_char < var_its_curr_char;
 var34 = var40;
@@ -3939,7 +3929,7 @@ if (!var53) {
 var_class_name56 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name56);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var57 = var_my_length < var_its_length;
 var51 = var57;
@@ -4094,7 +4084,7 @@ if (!var4) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var5 = var_i >= var1;
 var2 = var5;
@@ -4104,7 +4094,7 @@ RET_LABEL3:(void)0;
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/string.nit", 635);
-exit(1);
+show_backtrace(1);
 }
 var6 = self->attrs[COLOR_array__AbstractArrayRead___length].l; /* _length on <self:String> */
 var_my_length = var6;
@@ -4138,7 +4128,6 @@ var20 = 1;
 var21 = BOX_kernel__Int(var20); /* autobox from Int to Discrete */
 var22 = BOX_kernel__Int(var_i); /* autobox from Int to Discrete */
 ((void (*)(val*, val*, val*))(var19->class->vft[COLOR_range__Range__init]))(var19, var21, var22) /* init on <var19:Range[Int]>*/;
-CHECK_NEW_range__Range(var19);
 var23 = ((val* (*)(val*))(var19->class->vft[COLOR_abstract_collection__Collection__iterator]))(var19) /* iterator on <var19:Range[Int]>*/;
 for(;;) {
 var24 = ((short int (*)(val*))(var23->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var23) /* is_ok on <var23:Iterator[nullable Object]>*/;
@@ -4262,7 +4251,7 @@ if (!var14) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var15 = var_i >= var_strStart;
 var12 = var15;
@@ -4364,7 +4353,7 @@ if (!var) {
 var_class_name = type_kernel__Char.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Sequence#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/string.nit", 688);
-exit(1);
+show_backtrace(1);
 }
 var_index = p0;
 var_item = p1;
@@ -4390,7 +4379,7 @@ if (!var10) {
 var_class_name13 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name13);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var14 = var_index >= var7;
 var8 = var14;
@@ -4408,7 +4397,7 @@ if (!var18) {
 var_class_name21 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name21);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var22 = var_index < var15;
 var16 = var22;
@@ -4422,7 +4411,7 @@ var6 = var_;
 if (!var6) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/string.nit", 694);
-exit(1);
+show_backtrace(1);
 }
 var23 = self->attrs[COLOR_string__AbstractString___items].str; /* _items on <self:Buffer> */
 { /* Inline string#NativeString#[]= (var23,var_index,var_item) */
@@ -4471,7 +4460,7 @@ if (!var) {
 var_class_name = type_kernel__Char.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "SimpleCollection#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/string.nit", 698);
-exit(1);
+show_backtrace(1);
 }
 var_c = p0;
 var1 = self->attrs[COLOR_string__Buffer___capacity].l; /* _capacity on <self:Buffer> */
@@ -4484,7 +4473,7 @@ if (!var5) {
 var_class_name8 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name8);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
-exit(1);
+show_backtrace(1);
 }
 var9 = var1 <= var2;
 var3 = var9;
@@ -4571,7 +4560,7 @@ if (!var3) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
-exit(1);
+show_backtrace(1);
 }
 var4 = var_cap <= var_c;
 var1 = var4;
@@ -4591,7 +4580,7 @@ if (!var7) {
 var_class_name10 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name10);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
-exit(1);
+show_backtrace(1);
 }
 var11 = var_c <= var_cap;
 var5 = var11;
@@ -4683,7 +4672,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Collection[Sequence#0]", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/string.nit", 716);
-exit(1);
+show_backtrace(1);
 }
 var_s = p0;
 /* <var_s:Collection[Char]> isa String */
@@ -4713,7 +4702,7 @@ if (!var12) {
 var_class_name15 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name15);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var16 = var5 < var7;
 var10 = var16;
@@ -4893,7 +4882,7 @@ if (!var1) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/string.nit", 740);
-exit(1);
+show_backtrace(1);
 }
 var_s = p0;
 var2 = 0;
@@ -4911,7 +4900,7 @@ if (!var8) {
 var_class_name11 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name11);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var12 = var_i < var_l1;
 var6 = var12;
@@ -4928,7 +4917,7 @@ if (!var15) {
 var_class_name18 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name18);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var19 = var_i < var_l2;
 var13 = var19;
@@ -4966,7 +4955,7 @@ if (!var32) {
 var_class_name35 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name35);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var36 = var_c1 < var_c2;
 var30 = var36;
@@ -4986,7 +4975,7 @@ if (!var40) {
 var_class_name43 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name43);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var44 = var_c2 < var_c1;
 var38 = var44;
@@ -5019,7 +5008,7 @@ if (!var52) {
 var_class_name55 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name55);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var56 = var_l1 < var_l2;
 var50 = var56;
@@ -5134,7 +5123,7 @@ if (!var3) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var4 = var_cap >= var;
 var1 = var4;
@@ -5144,7 +5133,7 @@ RET_LABEL2:(void)0;
 if (!var1) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/string.nit", 779);
-exit(1);
+show_backtrace(1);
 }
 var5 = 1;
 { /* Inline kernel#Int#+ (var_cap,var5) */
@@ -5256,7 +5245,7 @@ if (!var16) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var19 = var_i < var_l;
 var14 = var19;
@@ -5423,7 +5412,6 @@ val* var13 /* : String */;
 var1 = NEW_array__Array(&type_array__Arraykernel__Object);
 var2 = 3;
 ((void (*)(val*, long))(var1->class->vft[COLOR_array__Array__with_capacity]))(var1, var2) /* with_capacity on <var1:Array[Object]>*/;
-CHECK_NEW_array__Array(var1);
 var_ = var1;
 if (varonce) {
 var3 = varonce;
@@ -5490,7 +5478,6 @@ val* var20 /* : String */;
 var1 = NEW_array__Array(&type_array__Arraykernel__Object);
 var2 = 5;
 ((void (*)(val*, long))(var1->class->vft[COLOR_array__Array__with_capacity]))(var1, var2) /* with_capacity on <var1:Array[Object]>*/;
-CHECK_NEW_array__Array(var1);
 var_ = var1;
 if (varonce) {
 var3 = varonce;
@@ -5701,7 +5688,7 @@ if (!var3) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var4 = self < var;
 var1 = var4;
@@ -5757,7 +5744,7 @@ if (!var27) {
 var_class_name30 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name30);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var31 = var_pos >= var24;
 var25 = var31;
@@ -5775,7 +5762,7 @@ if (!var35) {
 var_class_name38 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name38);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var39 = var_n > var32;
 var33 = var39;
@@ -5930,7 +5917,6 @@ varonce = var3;
 }
 var7 = ((val* (*)(val*, long))(var3->class->vft[COLOR_string__String___42d]))(var3, var_l) /* * on <var3:String>*/;
 ((void (*)(val*, val*))(var2->class->vft[COLOR_string__Buffer__from]))(var2, var7) /* from on <var2:Buffer>*/;
-CHECK_NEW_string__Buffer(var2);
 var_s = var2;
 string__Int__fill_buffer(self, var_s, var_base, var_signed);
 var8 = ((val* (*)(val*))(var_s->class->vft[COLOR_string__Object__to_s]))(var_s) /* to_s on <var_s:Buffer>*/;
@@ -6012,7 +5998,6 @@ RET_LABEL8:(void)0;
 var10 = BOX_kernel__Int(var5); /* autobox from Int to Discrete */
 var11 = BOX_kernel__Int(var7); /* autobox from Int to Discrete */
 ((void (*)(val*, val*, val*))(var4->class->vft[COLOR_range__Range__init]))(var4, var10, var11) /* init on <var4:Range[Int]>*/;
-CHECK_NEW_range__Range(var4);
 var12 = ((val* (*)(val*))(var4->class->vft[COLOR_abstract_collection__Collection__iterator]))(var4) /* iterator on <var4:Range[Int]>*/;
 for(;;) {
 var13 = ((short int (*)(val*))(var12->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var12) /* is_ok on <var12:Iterator[nullable Object]>*/;
@@ -6212,7 +6197,6 @@ var10 = 0;
 var11 = BOX_kernel__Int(var10); /* autobox from Int to Discrete */
 var12 = BOX_kernel__Int(var_nb); /* autobox from Int to Discrete */
 ((void (*)(val*, val*, val*))(var9->class->vft[COLOR_range__Range__without_last]))(var9, var11, var12) /* without_last on <var9:Range[Int]>*/;
-CHECK_NEW_range__Range(var9);
 var13 = ((val* (*)(val*))(var9->class->vft[COLOR_abstract_collection__Collection__iterator]))(var9) /* iterator on <var9:Range[Int]>*/;
 for(;;) {
 var14 = ((short int (*)(val*))(var13->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var13) /* is_ok on <var13:Iterator[nullable Object]>*/;
@@ -6298,7 +6282,7 @@ if (!var49) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var50 = var_sl > var_nb;
 var47 = var50;
@@ -6387,7 +6371,7 @@ return var;
 val* string__Float__to_precision_native(double self, long p0) {
 val* var /* : String */;
 fprintf(stderr, "NOT YET IMPLEMENTED nitni for string#Float#to_precision_native at lib/standard/string.nit:946,2--955,3\n");
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 return var;
 }
@@ -6414,7 +6398,6 @@ val* var5 /* : String */;
 var1 = NEW_string__Buffer(&type_string__Buffer);
 var2 = 1;
 ((void (*)(val*, long))(var1->class->vft[COLOR_string__Buffer__with_capacity]))(var1, var2) /* with_capacity on <var1:Buffer>*/;
-CHECK_NEW_string__Buffer(var1);
 var_s = var1;
 var3 = 0;
 var4 = BOX_kernel__Char(self); /* autobox from Char to nullable Object */
@@ -6466,7 +6449,7 @@ if (!var5) {
 var_class_name = type_kernel__Char.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 438);
-exit(1);
+show_backtrace(1);
 }
 var6 = self >= var2;
 var3 = var6;
@@ -6484,7 +6467,7 @@ if (!var10) {
 var_class_name13 = type_kernel__Char.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name13);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 436);
-exit(1);
+show_backtrace(1);
 }
 var14 = self <= var7;
 var8 = var14;
@@ -6566,7 +6549,7 @@ if (!var6) {
 var_class_name = type_kernel__Char.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 438);
-exit(1);
+show_backtrace(1);
 }
 var7 = self >= var3;
 var4 = var7;
@@ -6584,7 +6567,7 @@ if (!var11) {
 var_class_name14 = type_kernel__Char.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name14);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 436);
-exit(1);
+show_backtrace(1);
 }
 var15 = self <= var8;
 var9 = var15;
@@ -6608,7 +6591,7 @@ if (!var21) {
 var_class_name24 = type_kernel__Char.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name24);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 438);
-exit(1);
+show_backtrace(1);
 }
 var25 = self >= var18;
 var19 = var25;
@@ -6626,7 +6609,7 @@ if (!var30) {
 var_class_name33 = type_kernel__Char.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name33);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 436);
-exit(1);
+show_backtrace(1);
 }
 var34 = self <= var27;
 var28 = var34;
@@ -6717,7 +6700,6 @@ val* var7 /* : String */;
 val* var8 /* : String */;
 var1 = NEW_string__Buffer(&type_string__Buffer);
 ((void (*)(val*))(var1->class->vft[COLOR_string__Buffer__init]))(var1) /* init on <var1:Buffer>*/;
-CHECK_NEW_string__Buffer(var1);
 var_s = var1;
 var2 = ((val* (*)(val*))(self->class->vft[COLOR_abstract_collection__Collection__iterator]))(self) /* iterator on <self:Collection[nullable Object]>*/;
 for(;;) {
@@ -6735,7 +6717,7 @@ if (var6){
 if (var_e == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/string.nit", 997);
-exit(1);
+show_backtrace(1);
 } else {
 var7 = ((val* (*)(val*))(var_e->class->vft[COLOR_string__Object__to_s]))(var_e) /* to_s on <var_e:nullable Object>*/;
 }
@@ -6804,7 +6786,6 @@ goto RET_LABEL;
 }
 var6 = NEW_string__Buffer(&type_string__Buffer);
 ((void (*)(val*))(var6->class->vft[COLOR_string__Buffer__init]))(var6) /* init on <var6:Buffer>*/;
-CHECK_NEW_string__Buffer(var6);
 var_s = var6;
 var7 = ((val* (*)(val*))(self->class->vft[COLOR_abstract_collection__Collection__iterator]))(self) /* iterator on <self:Collection[nullable Object]>*/;
 var_i = var7;
@@ -6820,7 +6801,7 @@ if (var10){
 if (var_e == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/string.nit", 1014);
-exit(1);
+show_backtrace(1);
 } else {
 var11 = ((val* (*)(val*))(var_e->class->vft[COLOR_string__Object__to_s]))(var_e) /* to_s on <var_e:nullable Object>*/;
 }
@@ -6844,7 +6825,7 @@ if (var15){
 if (var_e == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/string.nit", 1021);
-exit(1);
+show_backtrace(1);
 } else {
 var16 = ((val* (*)(val*))(var_e->class->vft[COLOR_string__Object__to_s]))(var_e) /* to_s on <var_e:nullable Object>*/;
 }
@@ -6896,7 +6877,6 @@ long var15 /* : Int */;
 val* var16 /* : String */;
 var1 = NEW_string__Buffer(&type_string__Buffer);
 ((void (*)(val*))(var1->class->vft[COLOR_string__Buffer__init]))(var1) /* init on <var1:Buffer>*/;
-CHECK_NEW_string__Buffer(var1);
 var_s = var1;
 var2 = 0;
 var_i = var2;
@@ -6911,7 +6891,7 @@ if (!var6) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var7 = var_i < var_l;
 var4 = var7;
@@ -6931,7 +6911,7 @@ if (var10){
 if (var_e == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/string.nit", 1037);
-exit(1);
+show_backtrace(1);
 } else {
 var11 = ((val* (*)(val*))(var_e->class->vft[COLOR_string__Object__to_s]))(var_e) /* to_s on <var_e:nullable Object>*/;
 }
@@ -6983,22 +6963,30 @@ val* var8 /* : Object */;
 val* var_k /* var k: Object */;
 val* var9 /* : nullable Object */;
 val* var_e /* var e: nullable Object */;
-val* var10 /* : null */;
-short int var11 /* : Bool */;
-val* var12 /* : Array[Object] */;
-long var13 /* : Int */;
-val* var14 /* : NativeArray[Object] */;
+val* var10 /* : Object */;
+static val* varonce11;
+val* var12 /* : String */;
+char* var13 /* : NativeString */;
+long var14 /* : Int */;
 val* var15 /* : String */;
-short int var16 /* : Bool */;
-val* var17 /* : Object */;
-val* var18 /* : nullable Object */;
-val* var19 /* : null */;
+val* var16 /* : Array[Object] */;
+long var17 /* : Int */;
+val* var18 /* : NativeArray[Object] */;
+val* var19 /* : String */;
 short int var20 /* : Bool */;
-val* var21 /* : Array[Object] */;
-long var22 /* : Int */;
-val* var23 /* : NativeArray[Object] */;
-val* var24 /* : String */;
+val* var21 /* : Object */;
+val* var22 /* : nullable Object */;
+val* var23 /* : Object */;
+static val* varonce24;
 val* var25 /* : String */;
+char* var26 /* : NativeString */;
+long var27 /* : Int */;
+val* var28 /* : String */;
+val* var29 /* : Array[Object] */;
+long var30 /* : Int */;
+val* var31 /* : NativeArray[Object] */;
+val* var32 /* : String */;
+val* var33 /* : String */;
 var_sep = p0;
 var_couple_sep = p1;
 var1 = ((short int (*)(val*))(self->class->vft[COLOR_abstract_collection__MapRead__is_empty]))(self) /* is_empty on <self:Map[Object, nullable Object]>*/;
@@ -7018,7 +7006,6 @@ goto RET_LABEL;
 }
 var6 = NEW_string__Buffer(&type_string__Buffer);
 ((void (*)(val*))(var6->class->vft[COLOR_string__Buffer__init]))(var6) /* init on <var6:Buffer>*/;
-CHECK_NEW_string__Buffer(var6);
 var_s = var6;
 var7 = ((val* (*)(val*))(self->class->vft[COLOR_abstract_collection__MapRead__iterator]))(self) /* iterator on <self:Map[Object, nullable Object]>*/;
 var_i = var7;
@@ -7026,63 +7013,71 @@ var8 = ((val* (*)(val*))(var_i->class->vft[COLOR_abstract_collection__MapIterato
 var_k = var8;
 var9 = ((val* (*)(val*))(var_i->class->vft[COLOR_abstract_collection__MapIterator__item]))(var_i) /* item on <var_i:MapIterator[Object, nullable Object]>*/;
 var_e = var9;
-var10 = NULL;
-if (var_e == NULL) {
-var11 = 0; /* is null */
+if (var_e!=NULL) {
+var10 = var_e;
 } else {
-var11 = 1; /* arg is null and recv is not */
-}
-if (var11){
-var12 = NEW_array__Array(&type_array__Arraykernel__Object);
-{ /* var12 = array_instance Array[Object] */
-var13 = 3;
-var14 = NEW_array__NativeArray(var13, &type_array__NativeArraykernel__Object);
-((struct instance_array__NativeArray*)var14)->values[0] = (val*) var_k;
-((struct instance_array__NativeArray*)var14)->values[1] = (val*) var_couple_sep;
-((struct instance_array__NativeArray*)var14)->values[2] = (val*) var_e;
-((void (*)(val*, val*, long))(var12->class->vft[COLOR_array__Array__with_native]))(var12, var14, var13) /* with_native on <var12:Array[Object]>*/;
-CHECK_NEW_array__Array(var12);
-}
-var15 = ((val* (*)(val*))(var12->class->vft[COLOR_string__Object__to_s]))(var12) /* to_s on <var12:Array[Object]>*/;
-((void (*)(val*, val*))(var_s->class->vft[COLOR_abstract_collection__Sequence__append]))(var_s, var15) /* append on <var_s:Buffer>*/;
+if (varonce11) {
+var12 = varonce11;
 } else {
+var13 = "<null>";
+var14 = 6;
+var15 = string__NativeString__to_s_with_length(var13, var14);
+var12 = var15;
+varonce11 = var12;
 }
+var10 = var12;
+}
+var16 = NEW_array__Array(&type_array__Arraykernel__Object);
+{ /* var16 = array_instance Array[Object] */
+var17 = 3;
+var18 = NEW_array__NativeArray(var17, &type_array__NativeArraykernel__Object);
+((struct instance_array__NativeArray*)var18)->values[0] = (val*) var_k;
+((struct instance_array__NativeArray*)var18)->values[1] = (val*) var_couple_sep;
+((struct instance_array__NativeArray*)var18)->values[2] = (val*) var10;
+((void (*)(val*, val*, long))(var16->class->vft[COLOR_array__Array__with_native]))(var16, var18, var17) /* with_native on <var16:Array[Object]>*/;
+}
+var19 = ((val* (*)(val*))(var16->class->vft[COLOR_string__Object__to_s]))(var16) /* to_s on <var16:Array[Object]>*/;
+((void (*)(val*, val*))(var_s->class->vft[COLOR_abstract_collection__Sequence__append]))(var_s, var19) /* append on <var_s:Buffer>*/;
 ((void (*)(val*))(var_i->class->vft[COLOR_abstract_collection__MapIterator__next]))(var_i) /* next on <var_i:MapIterator[Object, nullable Object]>*/;
 for(;;) {
-var16 = ((short int (*)(val*))(var_i->class->vft[COLOR_abstract_collection__MapIterator__is_ok]))(var_i) /* is_ok on <var_i:MapIterator[Object, nullable Object]>*/;
-if (!var16) break;
+var20 = ((short int (*)(val*))(var_i->class->vft[COLOR_abstract_collection__MapIterator__is_ok]))(var_i) /* is_ok on <var_i:MapIterator[Object, nullable Object]>*/;
+if (!var20) break;
 ((void (*)(val*, val*))(var_s->class->vft[COLOR_abstract_collection__Sequence__append]))(var_s, var_sep) /* append on <var_s:Buffer>*/;
-var17 = ((val* (*)(val*))(var_i->class->vft[COLOR_abstract_collection__MapIterator__key]))(var_i) /* key on <var_i:MapIterator[Object, nullable Object]>*/;
-var_k = var17;
-var18 = ((val* (*)(val*))(var_i->class->vft[COLOR_abstract_collection__MapIterator__item]))(var_i) /* item on <var_i:MapIterator[Object, nullable Object]>*/;
-var_e = var18;
-var19 = NULL;
-if (var_e == NULL) {
-var20 = 0; /* is null */
+var21 = ((val* (*)(val*))(var_i->class->vft[COLOR_abstract_collection__MapIterator__key]))(var_i) /* key on <var_i:MapIterator[Object, nullable Object]>*/;
+var_k = var21;
+var22 = ((val* (*)(val*))(var_i->class->vft[COLOR_abstract_collection__MapIterator__item]))(var_i) /* item on <var_i:MapIterator[Object, nullable Object]>*/;
+var_e = var22;
+if (var_e!=NULL) {
+var23 = var_e;
 } else {
-var20 = 1; /* arg is null and recv is not */
-}
-if (var20){
-var21 = NEW_array__Array(&type_array__Arraykernel__Object);
-{ /* var21 = array_instance Array[Object] */
-var22 = 3;
-var23 = NEW_array__NativeArray(var22, &type_array__NativeArraykernel__Object);
-((struct instance_array__NativeArray*)var23)->values[0] = (val*) var_k;
-((struct instance_array__NativeArray*)var23)->values[1] = (val*) var_couple_sep;
-((struct instance_array__NativeArray*)var23)->values[2] = (val*) var_e;
-((void (*)(val*, val*, long))(var21->class->vft[COLOR_array__Array__with_native]))(var21, var23, var22) /* with_native on <var21:Array[Object]>*/;
-CHECK_NEW_array__Array(var21);
-}
-var24 = ((val* (*)(val*))(var21->class->vft[COLOR_string__Object__to_s]))(var21) /* to_s on <var21:Array[Object]>*/;
-((void (*)(val*, val*))(var_s->class->vft[COLOR_abstract_collection__Sequence__append]))(var_s, var24) /* append on <var_s:Buffer>*/;
+if (varonce24) {
+var25 = varonce24;
 } else {
+var26 = "<null>";
+var27 = 6;
+var28 = string__NativeString__to_s_with_length(var26, var27);
+var25 = var28;
+varonce24 = var25;
 }
+var23 = var25;
+}
+var29 = NEW_array__Array(&type_array__Arraykernel__Object);
+{ /* var29 = array_instance Array[Object] */
+var30 = 3;
+var31 = NEW_array__NativeArray(var30, &type_array__NativeArraykernel__Object);
+((struct instance_array__NativeArray*)var31)->values[0] = (val*) var_k;
+((struct instance_array__NativeArray*)var31)->values[1] = (val*) var_couple_sep;
+((struct instance_array__NativeArray*)var31)->values[2] = (val*) var23;
+((void (*)(val*, val*, long))(var29->class->vft[COLOR_array__Array__with_native]))(var29, var31, var30) /* with_native on <var29:Array[Object]>*/;
+}
+var32 = ((val* (*)(val*))(var29->class->vft[COLOR_string__Object__to_s]))(var29) /* to_s on <var29:Array[Object]>*/;
+((void (*)(val*, val*))(var_s->class->vft[COLOR_abstract_collection__Sequence__append]))(var_s, var32) /* append on <var_s:Buffer>*/;
 ((void (*)(val*))(var_i->class->vft[COLOR_abstract_collection__MapIterator__next]))(var_i) /* next on <var_i:MapIterator[Object, nullable Object]>*/;
 CONTINUE_label: (void)0;
 }
 BREAK_label: (void)0;
-var25 = ((val* (*)(val*))(var_s->class->vft[COLOR_string__Object__to_s]))(var_s) /* to_s on <var_s:Buffer>*/;
-var = var25;
+var33 = ((val* (*)(val*))(var_s->class->vft[COLOR_string__Object__to_s]))(var_s) /* to_s on <var_s:Buffer>*/;
+var = var33;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -7309,7 +7304,7 @@ if (!var4) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var5 = var_length >= var1;
 var2 = var5;
@@ -7319,7 +7314,7 @@ RET_LABEL3:(void)0;
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/string.nit", 1107);
-exit(1);
+show_backtrace(1);
 }
 var6 = NEW_string__String(&type_string__String);
 var7 = 0;
@@ -7331,7 +7326,6 @@ goto RET_LABEL10;
 RET_LABEL10:(void)0;
 }
 ((void (*)(val*, char*, long, long, long))(var6->class->vft[COLOR_string__String__with_infos]))(var6, self, var_length, var7, var9) /* with_infos on <var6:String>*/;
-CHECK_NEW_string__String(var6);
 var = var6;
 goto RET_LABEL;
 RET_LABEL:;
@@ -7400,7 +7394,6 @@ goto RET_LABEL17;
 RET_LABEL17:(void)0;
 }
 ((void (*)(val*, char*, long, long, long))(var13->class->vft[COLOR_string__String__with_infos]))(var13, var_new_self, var_length, var14, var16) /* with_infos on <var13:String>*/;
-CHECK_NEW_string__String(var13);
 var = var13;
 goto RET_LABEL;
 RET_LABEL:;
@@ -7475,7 +7468,7 @@ var4 = self->attrs[COLOR_string__Sys___args_cache].val; /* _args_cache on <self:
 if (var4 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/string.nit", 1132);
-exit(1);
+show_backtrace(1);
 }
 var = var4;
 goto RET_LABEL;
@@ -7542,7 +7535,6 @@ var_argc = var;
 var1 = NEW_array__Array(&type_array__Arraystring__String);
 var2 = 0;
 ((void (*)(val*, long))(var1->class->vft[COLOR_array__Array__with_capacity]))(var1, var2) /* with_capacity on <var1:Array[String]>*/;
-CHECK_NEW_array__Array(var1);
 var_args = var1;
 var3 = 1;
 var_i = var3;
@@ -7555,7 +7547,7 @@ if (!var6) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var7 = var_i < var_argc;
 var4 = var7;

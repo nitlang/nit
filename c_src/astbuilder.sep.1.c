@@ -7,7 +7,7 @@ var1 = self->attrs[COLOR_astbuilder__ASTBuilder___64dmmodule].val; /* @mmodule o
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @mmodule");
 fprintf(stderr, " (%s:%d)\n", "src/astbuilder.nit", 25);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -88,7 +88,6 @@ varonce = var3;
 var7 = ((val* (*)(val*, val*))(var2->class->vft[COLOR_model__MModule__get_primitive_class]))(var2, var3) /* get_primitive_class on <var2:MModule>*/;
 var8 = ((val* (*)(val*))(var7->class->vft[COLOR_model__MClass__mclass_type]))(var7) /* mclass_type on <var7:MClass>*/;
 ((void (*)(val*, long, val*))(var1->class->vft[COLOR_astbuilder__AIntExpr__make]))(var1, var_value, var8) /* make on <var1:AIntExpr>*/;
-CHECK_NEW_parser_nodes__AIntExpr(var1);
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -115,7 +114,6 @@ var_constructor = p1;
 var_args = p2;
 var1 = NEW_parser_nodes__ANewExpr(&type_parser_nodes__ANewExpr);
 ((void (*)(val*, val*, val*, val*))(var1->class->vft[COLOR_astbuilder__ANewExpr__make]))(var1, var_mtype, var_constructor, var_args) /* make on <var1:ANewExpr>*/;
-CHECK_NEW_parser_nodes__ANewExpr(var1);
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -156,7 +154,7 @@ var2 = ((val* (*)(val*))(var1->class->vft[COLOR_model__MMethodDef__msignature]))
 if (var2 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/astbuilder.nit", 47);
-exit(1);
+show_backtrace(1);
 } else {
 var3 = ((val* (*)(val*))(var2->class->vft[COLOR_model__MSignature__return_mtype]))(var2) /* return_mtype on <var2:nullable MSignature>*/;
 }
@@ -172,7 +170,7 @@ var6 = ((val* (*)(val*))(var_recv->class->vft[COLOR_typing__AExpr__mtype]))(var_
 if (var6 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/astbuilder.nit", 48);
-exit(1);
+show_backtrace(1);
 }
 var7 = ((val* (*)(val*))(self->class->vft[COLOR_astbuilder__ASTBuilder__anchor]))(self) /* anchor on <self:ASTBuilder>*/;
 var8 = ((val* (*)(val*))(self->class->vft[COLOR_astbuilder__ASTBuilder__mmodule]))(self) /* mmodule on <self:ASTBuilder>*/;
@@ -183,7 +181,6 @@ var_mtype = var10;
 }
 var11 = NEW_parser_nodes__ACallExpr(&type_parser_nodes__ACallExpr);
 ((void (*)(val*, val*, val*, val*, val*))(var11->class->vft[COLOR_astbuilder__ACallExpr__make]))(var11, var_recv, var_mmethod, var_args, var_mtype) /* make on <var11:ACallExpr>*/;
-CHECK_NEW_parser_nodes__ACallExpr(var11);
 var = var11;
 goto RET_LABEL;
 RET_LABEL:;
@@ -204,7 +201,6 @@ val* var /* : ABlockExpr */;
 val* var1 /* : ABlockExpr */;
 var1 = NEW_parser_nodes__ABlockExpr(&type_parser_nodes__ABlockExpr);
 ((void (*)(val*))(var1->class->vft[COLOR_astbuilder__ABlockExpr__make]))(var1) /* make on <var1:ABlockExpr>*/;
-CHECK_NEW_parser_nodes__ABlockExpr(var1);
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -219,25 +215,26 @@ var = var1;
 RET_LABEL:;
 return var;
 }
-/* method astbuilder#ASTBuilder#make_var_read for (self: ASTBuilder, Variable): AVarExpr */
-val* astbuilder__ASTBuilder__make_var_read(val* self, val* p0) {
+/* method astbuilder#ASTBuilder#make_var_read for (self: ASTBuilder, Variable, MType): AVarExpr */
+val* astbuilder__ASTBuilder__make_var_read(val* self, val* p0, val* p1) {
 val* var /* : AVarExpr */;
 val* var_variable /* var variable: Variable */;
+val* var_mtype /* var mtype: MType */;
 val* var1 /* : AVarExpr */;
 var_variable = p0;
+var_mtype = p1;
 var1 = NEW_parser_nodes__AVarExpr(&type_parser_nodes__AVarExpr);
-((void (*)(val*, val*))(var1->class->vft[COLOR_astbuilder__AVarExpr__make]))(var1, var_variable) /* make on <var1:AVarExpr>*/;
-CHECK_NEW_parser_nodes__AVarExpr(var1);
+((void (*)(val*, val*, val*))(var1->class->vft[COLOR_astbuilder__AVarExpr__make]))(var1, var_variable, var_mtype) /* make on <var1:AVarExpr>*/;
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method astbuilder#ASTBuilder#make_var_read for (self: Object, Variable): AVarExpr */
-val* VIRTUAL_astbuilder__ASTBuilder__make_var_read(val* self, val* p0) {
+/* method astbuilder#ASTBuilder#make_var_read for (self: Object, Variable, MType): AVarExpr */
+val* VIRTUAL_astbuilder__ASTBuilder__make_var_read(val* self, val* p0, val* p1) {
 val* var /* : AVarExpr */;
 val* var1 /* : AVarExpr */;
-var1 = astbuilder__ASTBuilder__make_var_read(self, p0);
+var1 = astbuilder__ASTBuilder__make_var_read(self, p0, p1);
 var = var1;
 RET_LABEL:;
 return var;
@@ -252,7 +249,6 @@ var_variable = p0;
 var_value = p1;
 var1 = NEW_parser_nodes__AVarAssignExpr(&type_parser_nodes__AVarAssignExpr);
 ((void (*)(val*, val*, val*))(var1->class->vft[COLOR_astbuilder__AVarAssignExpr__make]))(var1, var_variable, var_value) /* make on <var1:AVarAssignExpr>*/;
-CHECK_NEW_parser_nodes__AVarAssignExpr(var1);
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -289,7 +285,7 @@ var3 = ((val* (*)(val*))(var_recv->class->vft[COLOR_typing__AExpr__mtype]))(var_
 if (var3 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/astbuilder.nit", 73);
-exit(1);
+show_backtrace(1);
 }
 var4 = ((val* (*)(val*))(self->class->vft[COLOR_astbuilder__ASTBuilder__anchor]))(self) /* anchor on <self:ASTBuilder>*/;
 var5 = ((val* (*)(val*))(self->class->vft[COLOR_astbuilder__ASTBuilder__mmodule]))(self) /* mmodule on <self:ASTBuilder>*/;
@@ -297,14 +293,13 @@ var6 = 1;
 if (var2 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/astbuilder.nit", 73);
-exit(1);
+show_backtrace(1);
 } else {
 var7 = ((val* (*)(val*, val*, val*, val*, short int))(var2->class->vft[COLOR_model__MType__resolve_for]))(var2, var3, var4, var5, var6) /* resolve_for on <var2:nullable MType>*/;
 }
 var_mtype = var7;
 var8 = NEW_parser_nodes__AAttrExpr(&type_parser_nodes__AAttrExpr);
 ((void (*)(val*, val*, val*, val*))(var8->class->vft[COLOR_astbuilder__AAttrExpr__make]))(var8, var_recv, var_attribute, var_mtype) /* make on <var8:AAttrExpr>*/;
-CHECK_NEW_parser_nodes__AAttrExpr(var8);
 var = var8;
 goto RET_LABEL;
 RET_LABEL:;
@@ -331,7 +326,6 @@ var_attribute = p1;
 var_value = p2;
 var1 = NEW_parser_nodes__AAttrAssignExpr(&type_parser_nodes__AAttrAssignExpr);
 ((void (*)(val*, val*, val*, val*))(var1->class->vft[COLOR_astbuilder__AAttrAssignExpr__make]))(var1, var_recv, var_attribute, var_value) /* make on <var1:AAttrAssignExpr>*/;
-CHECK_NEW_parser_nodes__AAttrAssignExpr(var1);
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -352,7 +346,6 @@ val* var /* : ADoExpr */;
 val* var1 /* : ADoExpr */;
 var1 = NEW_parser_nodes__ADoExpr(&type_parser_nodes__ADoExpr);
 ((void (*)(val*))(var1->class->vft[COLOR_astbuilder__ADoExpr__make]))(var1) /* make on <var1:ADoExpr>*/;
-CHECK_NEW_parser_nodes__ADoExpr(var1);
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -377,7 +370,6 @@ var_condition = p0;
 var_mtype = p1;
 var1 = NEW_parser_nodes__AIfExpr(&type_parser_nodes__AIfExpr);
 ((void (*)(val*, val*, val*))(var1->class->vft[COLOR_astbuilder__AIfExpr__make]))(var1, var_condition, var_mtype) /* make on <var1:AIfExpr>*/;
-CHECK_NEW_parser_nodes__AIfExpr(var1);
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -425,6 +417,7 @@ val* var13 /* : nullable MType */;
 val* var14 /* : AVarAssignExpr */;
 val* var_nvar /* var nvar: AVarAssignExpr */;
 val* var15 /* : AVarExpr */;
+val* var16 /* : nullable MType */;
 var1 = ((val* (*)(val*))(self->class->vft[COLOR_astbuilder__AExpr__variable_cache]))(self) /* variable_cache on <self:AExpr>*/;
 var_variable = var1;
 var2 = NULL;
@@ -444,7 +437,7 @@ var6 = 1; /* arg is null and recv is not */
 if (!var6) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/astbuilder.nit", 107);
-exit(1);
+show_backtrace(1);
 }
 var7 = ((val* (*)(val*))(self->class->vft[COLOR_astbuilder__AExpr__detach_with_placeholder]))(self) /* detach_with_placeholder on <self:AExpr>*/;
 var_place = var7;
@@ -459,21 +452,24 @@ var9 = var12;
 varonce = var9;
 }
 ((void (*)(val*, val*))(var8->class->vft[COLOR_scope__Variable__init]))(var8, var9) /* init on <var8:Variable>*/;
-CHECK_NEW_scope__Variable(var8);
 var_variable = var8;
 var13 = ((val* (*)(val*))(self->class->vft[COLOR_typing__AExpr__mtype]))(self) /* mtype on <self:AExpr>*/;
 ((void (*)(val*, val*))(var_variable->class->vft[COLOR_typing__Variable__declared_type_61d]))(var_variable, var13) /* declared_type= on <var_variable:nullable Variable(Variable)>*/;
 var14 = NEW_parser_nodes__AVarAssignExpr(&type_parser_nodes__AVarAssignExpr);
 ((void (*)(val*, val*, val*))(var14->class->vft[COLOR_astbuilder__AVarAssignExpr__make]))(var14, var_variable, self) /* make on <var14:AVarAssignExpr>*/;
-CHECK_NEW_parser_nodes__AVarAssignExpr(var14);
 var_nvar = var14;
 ((void (*)(val*, val*))(var_place->class->vft[COLOR_parser_nodes__ANode__replace_with]))(var_place, var_nvar) /* replace_with on <var_place:AExpr>*/;
 ((void (*)(val*, val*))(self->class->vft[COLOR_astbuilder__AExpr__variable_cache_61d]))(self, var_variable) /* variable_cache= on <self:AExpr>*/;
 } else {
 }
 var15 = NEW_parser_nodes__AVarExpr(&type_parser_nodes__AVarExpr);
-((void (*)(val*, val*))(var15->class->vft[COLOR_astbuilder__AVarExpr__make]))(var15, var_variable) /* make on <var15:AVarExpr>*/;
-CHECK_NEW_parser_nodes__AVarExpr(var15);
+var16 = ((val* (*)(val*))(var_variable->class->vft[COLOR_typing__Variable__declared_type]))(var_variable) /* declared_type on <var_variable:nullable Variable(Variable)>*/;
+if (var16 == NULL) {
+fprintf(stderr, "Runtime error: %s", "Cast failed");
+fprintf(stderr, " (%s:%d)\n", "src/astbuilder.nit", 115);
+show_backtrace(1);
+}
+((void (*)(val*, val*, val*))(var15->class->vft[COLOR_astbuilder__AVarExpr__make]))(var15, var_variable, var16) /* make on <var15:AVarExpr>*/;
 var = var15;
 goto RET_LABEL;
 RET_LABEL:;
@@ -523,7 +519,6 @@ val* var1 /* : APlaceholderExpr */;
 val* var_h /* var h: APlaceholderExpr */;
 var1 = NEW_astbuilder__APlaceholderExpr(&type_astbuilder__APlaceholderExpr);
 ((void (*)(val*))(var1->class->vft[COLOR_astbuilder__APlaceholderExpr__make]))(var1) /* make on <var1:APlaceholderExpr>*/;
-CHECK_NEW_astbuilder__APlaceholderExpr(var1);
 var_h = var1;
 ((void (*)(val*, val*))(self->class->vft[COLOR_parser_nodes__ANode__replace_with]))(self, var_h) /* replace_with on <self:AExpr>*/;
 var = var_h;
@@ -546,7 +541,7 @@ val* var_expr /* var expr: AExpr */;
 var_expr = p0;
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/astbuilder.nit", 147);
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 }
 /* method astbuilder#AExpr#add for (self: Object, AExpr) */
@@ -598,13 +593,11 @@ val* var2 /* : null */;
 short int var3 /* : Bool */;
 var = NEW_parser_nodes__TKwdo(&type_parser_nodes__TKwdo);
 ((void (*)(val*))(var->class->vft[COLOR_parser_nodes__TKwdo__init]))(var) /* init on <var:TKwdo>*/;
-CHECK_NEW_parser_nodes__TKwdo(var);
 self->attrs[COLOR_parser_nodes__ADoExpr___n_kwdo].val = var; /* _n_kwdo on <self:ADoExpr> */
 var1 = NEW_scope__EscapeMark(&type_scope__EscapeMark);
 var2 = NULL;
 var3 = 0;
 ((void (*)(val*, val*, short int))(var1->class->vft[COLOR_scope__EscapeMark__init]))(var1, var2, var3) /* init on <var1:EscapeMark>*/;
-CHECK_NEW_scope__EscapeMark(var1);
 ((void (*)(val*, val*))(self->class->vft[COLOR_scope__ADoExpr__escapemark_61d]))(self, var1) /* escapemark= on <self:ADoExpr>*/;
 RET_LABEL:;
 }
@@ -637,14 +630,12 @@ var4 = NEW_scope__EscapeMark(&type_scope__EscapeMark);
 var5 = NULL;
 var6 = 0;
 ((void (*)(val*, val*, short int))(var4->class->vft[COLOR_scope__EscapeMark__init]))(var4, var5, var6) /* init on <var4:EscapeMark>*/;
-CHECK_NEW_scope__EscapeMark(var4);
 var_escapemark = var4;
 ((void (*)(val*, val*))(self->class->vft[COLOR_scope__ADoExpr__escapemark_61d]))(self, var_escapemark) /* escapemark= on <self:ADoExpr>*/;
 } else {
 }
 var7 = NEW_parser_nodes__ABreakExpr(&type_parser_nodes__ABreakExpr);
 ((void (*)(val*, val*))(var7->class->vft[COLOR_astbuilder__ABreakExpr__make]))(var7, var_escapemark) /* make on <var7:ABreakExpr>*/;
-CHECK_NEW_parser_nodes__ABreakExpr(var7);
 var = var7;
 goto RET_LABEL;
 RET_LABEL:;
@@ -684,23 +675,20 @@ var_condition = p0;
 var_mtype = p1;
 var = NEW_parser_nodes__TKwif(&type_parser_nodes__TKwif);
 ((void (*)(val*))(var->class->vft[COLOR_parser_nodes__TKwif__init]))(var) /* init on <var:TKwif>*/;
-CHECK_NEW_parser_nodes__TKwif(var);
 self->attrs[COLOR_parser_nodes__AIfExpr___n_kwif].val = var; /* _n_kwif on <self:AIfExpr> */
 self->attrs[COLOR_parser_nodes__AIfExpr___n_expr].val = var_condition; /* _n_expr on <self:AIfExpr> */
 var1 = self->attrs[COLOR_parser_nodes__AIfExpr___n_expr].val; /* _n_expr on <self:AIfExpr> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_expr");
 fprintf(stderr, " (%s:%d)\n", "src/astbuilder.nit", 208);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var1->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var1, self) /* parent= on <var1:AExpr>*/;
 var2 = NEW_parser_nodes__ABlockExpr(&type_parser_nodes__ABlockExpr);
 ((void (*)(val*))(var2->class->vft[COLOR_astbuilder__ABlockExpr__make]))(var2) /* make on <var2:ABlockExpr>*/;
-CHECK_NEW_parser_nodes__ABlockExpr(var2);
 self->attrs[COLOR_parser_nodes__AIfExpr___n_then].val = var2; /* _n_then on <self:AIfExpr> */
 var3 = NEW_parser_nodes__ABlockExpr(&type_parser_nodes__ABlockExpr);
 ((void (*)(val*))(var3->class->vft[COLOR_astbuilder__ABlockExpr__make]))(var3) /* make on <var3:ABlockExpr>*/;
-CHECK_NEW_parser_nodes__ABlockExpr(var3);
 self->attrs[COLOR_parser_nodes__AIfExpr___n_else].val = var3; /* _n_else on <self:AIfExpr> */
 ((void (*)(val*, val*))(self->class->vft[COLOR_typing__AExpr__mtype_61d]))(self, var_mtype) /* mtype= on <self:AIfExpr>*/;
 var4 = 1;
@@ -717,7 +705,6 @@ void astbuilder__AType__make(val* self) {
 val* var /* : TClassid */;
 var = NEW_parser_nodes__TClassid(&type_parser_nodes__TClassid);
 ((void (*)(val*))(var->class->vft[COLOR_parser_nodes__TClassid__init]))(var) /* init on <var:TClassid>*/;
-CHECK_NEW_parser_nodes__TClassid(var);
 self->attrs[COLOR_parser_nodes__AType___n_id].val = var; /* _n_id on <self:AType> */
 RET_LABEL:;
 }
@@ -738,7 +725,6 @@ var = BOX_kernel__Int(var_value); /* autobox from Int to nullable Int */
 ((void (*)(val*, val*))(self->class->vft[COLOR_literal__AIntExpr__value_61d]))(self, var) /* value= on <self:AIntExpr>*/;
 var1 = NEW_parser_nodes__TNumber(&type_parser_nodes__TNumber);
 ((void (*)(val*))(var1->class->vft[COLOR_parser_nodes__TNumber__init]))(var1) /* init on <var1:TNumber>*/;
-CHECK_NEW_parser_nodes__TNumber(var1);
 self->attrs[COLOR_parser_nodes__AIntExpr___n_number].val = var1; /* _n_number on <self:AIntExpr> */
 ((void (*)(val*, val*))(self->class->vft[COLOR_typing__AExpr__mtype_61d]))(self, var_t) /* mtype= on <self:AIntExpr>*/;
 RET_LABEL:;
@@ -771,15 +757,12 @@ var_mmethod = p1;
 var_args = p2;
 var = NEW_parser_nodes__TKwnew(&type_parser_nodes__TKwnew);
 ((void (*)(val*))(var->class->vft[COLOR_parser_nodes__TKwnew__init]))(var) /* init on <var:TKwnew>*/;
-CHECK_NEW_parser_nodes__TKwnew(var);
 self->attrs[COLOR_parser_nodes__ANewExpr___n_kwnew].val = var; /* _n_kwnew on <self:ANewExpr> */
 var1 = NEW_parser_nodes__AType(&type_parser_nodes__AType);
 ((void (*)(val*))(var1->class->vft[COLOR_astbuilder__AType__make]))(var1) /* make on <var1:AType>*/;
-CHECK_NEW_parser_nodes__AType(var1);
 self->attrs[COLOR_parser_nodes__ANewExpr___n_type].val = var1; /* _n_type on <self:ANewExpr> */
 var2 = NEW_parser_nodes__AListExprs(&type_parser_nodes__AListExprs);
 ((void (*)(val*))(var2->class->vft[COLOR_parser_nodes__AListExprs__init]))(var2) /* init on <var2:AListExprs>*/;
-CHECK_NEW_parser_nodes__AListExprs(var2);
 self->attrs[COLOR_parser_nodes__ANewExpr___n_args].val = var2; /* _n_args on <self:ANewExpr> */
 var3 = NULL;
 if (var_args == NULL) {
@@ -801,11 +784,10 @@ var11 = ((val* (*)(val*))(var10->class->vft[COLOR_model__MMethodDef__msignature]
 if (var11 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/astbuilder.nit", 241);
-exit(1);
+show_backtrace(1);
 }
 var12 = 0;
 ((void (*)(val*, val*, val*, short int, val*, val*, val*, short int))(var7->class->vft[COLOR_typing__CallSite__init]))(var7, self, var_mtype, var8, var_mmethod, var9, var11, var12) /* init on <var7:CallSite>*/;
-CHECK_NEW_typing__CallSite(var7);
 ((void (*)(val*, val*))(self->class->vft[COLOR_typing__ANewExpr__callsite_61d]))(self, var7) /* callsite= on <self:ANewExpr>*/;
 ((void (*)(val*, val*))(self->class->vft[COLOR_typing__AExpr__mtype_61d]))(self, var_mtype) /* mtype= on <self:ANewExpr>*/;
 RET_LABEL:;
@@ -849,17 +831,14 @@ var = var_args;
 } else {
 var1 = NEW_array__Array(&type_array__Arrayparser_nodes__AExpr);
 ((void (*)(val*))(var1->class->vft[COLOR_array__Array__init]))(var1) /* init on <var1:Array[AExpr]>*/;
-CHECK_NEW_array__Array(var1);
 var = var1;
 }
 ((void (*)(val*, val*))(self->class->vft[COLOR_typing__ASendExpr__raw_arguments_61d]))(self, var) /* raw_arguments= on <self:ACallExpr>*/;
 var2 = NEW_parser_nodes__AListExprs(&type_parser_nodes__AListExprs);
 ((void (*)(val*))(var2->class->vft[COLOR_parser_nodes__AListExprs__init]))(var2) /* init on <var2:AListExprs>*/;
-CHECK_NEW_parser_nodes__AListExprs(var2);
 self->attrs[COLOR_parser_nodes__ACallFormExpr___n_args].val = var2; /* _n_args on <self:ACallExpr> */
 var3 = NEW_parser_nodes__TId(&type_parser_nodes__TId);
 ((void (*)(val*))(var3->class->vft[COLOR_parser_nodes__TId__init]))(var3) /* init on <var3:TId>*/;
-CHECK_NEW_parser_nodes__TId(var3);
 self->attrs[COLOR_parser_nodes__ACallFormExpr___n_id].val = var3; /* _n_id on <self:ACallExpr> */
 var4 = NULL;
 if (var_args == NULL) {
@@ -877,7 +856,7 @@ var8 = ((val* (*)(val*))(var_recv->class->vft[COLOR_typing__AExpr__mtype]))(var_
 if (var8 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/astbuilder.nit", 257);
-exit(1);
+show_backtrace(1);
 }
 var_mtype = var8;
 var9 = NEW_typing__CallSite(&type_typing__CallSite);
@@ -888,11 +867,10 @@ var13 = ((val* (*)(val*))(var12->class->vft[COLOR_model__MMethodDef__msignature]
 if (var13 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/astbuilder.nit", 258);
-exit(1);
+show_backtrace(1);
 }
 var14 = 0;
 ((void (*)(val*, val*, val*, short int, val*, val*, val*, short int))(var9->class->vft[COLOR_typing__CallSite__init]))(var9, self, var_mtype, var10, var_mmethod, var11, var13, var14) /* init on <var9:CallSite>*/;
-CHECK_NEW_typing__CallSite(var9);
 ((void (*)(val*, val*))(self->class->vft[COLOR_typing__ASendExpr__callsite_61d]))(self, var9) /* callsite= on <self:ACallExpr>*/;
 ((void (*)(val*, val*))(self->class->vft[COLOR_typing__AExpr__mtype_61d]))(self, var_t) /* mtype= on <self:ACallExpr>*/;
 var15 = 1;
@@ -917,7 +895,6 @@ self->attrs[COLOR_parser_nodes__AAttrFormExpr___n_expr].val = var_recv; /* _n_ex
 ((void (*)(val*, val*))(var_recv->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_recv, self) /* parent= on <var_recv:AExpr>*/;
 var = NEW_parser_nodes__TAttrid(&type_parser_nodes__TAttrid);
 ((void (*)(val*))(var->class->vft[COLOR_parser_nodes__TAttrid__init]))(var) /* init on <var:TAttrid>*/;
-CHECK_NEW_parser_nodes__TAttrid(var);
 self->attrs[COLOR_parser_nodes__AAttrFormExpr___n_id].val = var; /* _n_id on <self:AAttrExpr> */
 ((void (*)(val*, val*))(self->class->vft[COLOR_typing__AAttrFormExpr__mproperty_61d]))(self, var_attribute) /* mproperty= on <self:AAttrExpr>*/;
 ((void (*)(val*, val*))(self->class->vft[COLOR_typing__AExpr__mtype_61d]))(self, var_t) /* mtype= on <self:AAttrExpr>*/;
@@ -943,13 +920,11 @@ self->attrs[COLOR_parser_nodes__AAttrFormExpr___n_expr].val = var_recv; /* _n_ex
 ((void (*)(val*, val*))(var_recv->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_recv, self) /* parent= on <var_recv:AExpr>*/;
 var = NEW_parser_nodes__TAttrid(&type_parser_nodes__TAttrid);
 ((void (*)(val*))(var->class->vft[COLOR_parser_nodes__TAttrid__init]))(var) /* init on <var:TAttrid>*/;
-CHECK_NEW_parser_nodes__TAttrid(var);
 self->attrs[COLOR_parser_nodes__AAttrFormExpr___n_id].val = var; /* _n_id on <self:AAttrAssignExpr> */
 self->attrs[COLOR_parser_nodes__AAssignFormExpr___n_value].val = var_value; /* _n_value on <self:AAttrAssignExpr> */
 ((void (*)(val*, val*))(var_value->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_value, self) /* parent= on <var_value:AExpr>*/;
 var1 = NEW_parser_nodes__TAssign(&type_parser_nodes__TAssign);
 ((void (*)(val*))(var1->class->vft[COLOR_parser_nodes__TAssign__init]))(var1) /* init on <var1:TAssign>*/;
-CHECK_NEW_parser_nodes__TAssign(var1);
 self->attrs[COLOR_parser_nodes__AAssignFormExpr___n_assign].val = var1; /* _n_assign on <self:AAttrAssignExpr> */
 ((void (*)(val*, val*))(self->class->vft[COLOR_typing__AAttrFormExpr__mproperty_61d]))(self, var_attribute) /* mproperty= on <self:AAttrAssignExpr>*/;
 var2 = ((val* (*)(val*))(var_value->class->vft[COLOR_typing__AExpr__mtype]))(var_value) /* mtype on <var_value:AExpr>*/;
@@ -961,24 +936,23 @@ void VIRTUAL_astbuilder__AAttrAssignExpr__make(val* self, val* p0, val* p1, val*
 astbuilder__AAttrAssignExpr__make(self, p0, p1, p2);
 RET_LABEL:;
 }
-/* method astbuilder#AVarExpr#make for (self: AVarExpr, Variable) */
-void astbuilder__AVarExpr__make(val* self, val* p0) {
+/* method astbuilder#AVarExpr#make for (self: AVarExpr, Variable, MType) */
+void astbuilder__AVarExpr__make(val* self, val* p0, val* p1) {
 val* var_v /* var v: Variable */;
+val* var_mtype /* var mtype: MType */;
 val* var /* : TId */;
-val* var1 /* : nullable MType */;
 var_v = p0;
+var_mtype = p1;
 var = NEW_parser_nodes__TId(&type_parser_nodes__TId);
 ((void (*)(val*))(var->class->vft[COLOR_parser_nodes__TId__init]))(var) /* init on <var:TId>*/;
-CHECK_NEW_parser_nodes__TId(var);
 self->attrs[COLOR_parser_nodes__AVarFormExpr___n_id].val = var; /* _n_id on <self:AVarExpr> */
 ((void (*)(val*, val*))(self->class->vft[COLOR_scope__AVarFormExpr__variable_61d]))(self, var_v) /* variable= on <self:AVarExpr>*/;
-var1 = ((val* (*)(val*))(var_v->class->vft[COLOR_typing__Variable__declared_type]))(var_v) /* declared_type on <var_v:Variable>*/;
-((void (*)(val*, val*))(self->class->vft[COLOR_typing__AExpr__mtype_61d]))(self, var1) /* mtype= on <self:AVarExpr>*/;
+((void (*)(val*, val*))(self->class->vft[COLOR_typing__AExpr__mtype_61d]))(self, var_mtype) /* mtype= on <self:AVarExpr>*/;
 RET_LABEL:;
 }
-/* method astbuilder#AVarExpr#make for (self: Object, Variable) */
-void VIRTUAL_astbuilder__AVarExpr__make(val* self, val* p0) {
-astbuilder__AVarExpr__make(self, p0);
+/* method astbuilder#AVarExpr#make for (self: Object, Variable, MType) */
+void VIRTUAL_astbuilder__AVarExpr__make(val* self, val* p0, val* p1) {
+astbuilder__AVarExpr__make(self, p0, p1);
 RET_LABEL:;
 }
 /* method astbuilder#AVarAssignExpr#make for (self: AVarAssignExpr, Variable, AExpr) */
@@ -992,13 +966,11 @@ var_v = p0;
 var_value = p1;
 var = NEW_parser_nodes__TId(&type_parser_nodes__TId);
 ((void (*)(val*))(var->class->vft[COLOR_parser_nodes__TId__init]))(var) /* init on <var:TId>*/;
-CHECK_NEW_parser_nodes__TId(var);
 self->attrs[COLOR_parser_nodes__AVarFormExpr___n_id].val = var; /* _n_id on <self:AVarAssignExpr> */
 self->attrs[COLOR_parser_nodes__AAssignFormExpr___n_value].val = var_value; /* _n_value on <self:AVarAssignExpr> */
 ((void (*)(val*, val*))(var_value->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_value, self) /* parent= on <var_value:AExpr>*/;
 var1 = NEW_parser_nodes__TAssign(&type_parser_nodes__TAssign);
 ((void (*)(val*))(var1->class->vft[COLOR_parser_nodes__TAssign__init]))(var1) /* init on <var1:TAssign>*/;
-CHECK_NEW_parser_nodes__TAssign(var1);
 self->attrs[COLOR_parser_nodes__AAssignFormExpr___n_assign].val = var1; /* _n_assign on <self:AVarAssignExpr> */
 ((void (*)(val*, val*))(self->class->vft[COLOR_scope__AVarFormExpr__variable_61d]))(self, var_v) /* variable= on <self:AVarAssignExpr>*/;
 var2 = ((val* (*)(val*))(var_value->class->vft[COLOR_typing__AExpr__mtype]))(var_value) /* mtype on <var_value:AExpr>*/;

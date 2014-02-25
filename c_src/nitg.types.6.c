@@ -1,7 +1,1042 @@
 #include "nitg.types.0.h"
+const struct types resolution_table_hash_collection__HashMapstring__Stringnullable_model__MProperty = {
+0, /* dummy */
+{
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+&type_hash_collection__HashMapKeysstring__Stringnullable_model__MProperty, /* HashMapKeys[HashMap#0, HashMap#1]: HashMapKeys[String, nullable MProperty] */
+&type_hash_collection__HashMapValuesstring__Stringnullable_model__MProperty, /* HashMapValues[HashMap#0, HashMap#1]: HashMapValues[String, nullable MProperty] */
+&type_array__NativeArraynullable_hash_collection__HashMapNodestring__Stringnullable_model__MProperty, /* NativeArray[ArrayCapable#0]: NativeArray[nullable HashMapNode[String, nullable MProperty]] */
+&type_string__String, /* MapRead#0: String */
+&type_hash_collection__HashMapIteratorstring__Stringnullable_model__MProperty, /* HashMapIterator[HashMap#0, HashMap#1]: HashMapIterator[String, nullable MProperty] */
+&type_string__String, /* Map#0: String */
+&type_nullable_model__MProperty, /* Map#1: nullable MProperty */
+&type_hash_collection__HashMapNodestring__Stringnullable_model__MProperty, /* HashMapNode[HashMap#0, HashMap#1]: HashMapNode[String, nullable MProperty] */
+NULL, /* empty (Map[Map#0, Map#1]: Map[String, nullable MProperty] not a live type) */
+&type_nullable_model__MProperty, /* MapRead#1: nullable MProperty */
+&type_string__String, /* HashCollection#0: String */
+&type_hash_collection__HashMapNodestring__Stringnullable_model__MProperty, /* HashCollection#1: HashMapNode[String, nullable MProperty] */
+}
+};
+/* runtime type MapKeysIterator[String, nullable ModulePath] */
+const struct type type_abstract_collection__MapKeysIteratorstring__Stringnullable_modelbuilder__ModulePath = {
+438,
+"MapKeysIterator[String, nullable ModulePath]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__MapKeysIteratorstring__Stringnullable_modelbuilder__ModulePath,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+438, /* MapKeysIterator[String, nullable ModulePath] */
+},
+};
+const struct types resolution_table_abstract_collection__MapKeysIteratorstring__Stringnullable_modelbuilder__ModulePath = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratorstring__Stringnullable_modelbuilder__ModulePath, /* MapIterator[MapKeysIterator#0, MapKeysIterator#1]: MapIterator[String, nullable ModulePath] */
+&type_array__Arraystring__String, /* Array[Iterator#0]: Array[String] */
+}
+};
+/* runtime type MapValuesIterator[String, nullable ModulePath] */
+const struct type type_abstract_collection__MapValuesIteratorstring__Stringnullable_modelbuilder__ModulePath = {
+439,
+"MapValuesIterator[String, nullable ModulePath]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__MapValuesIteratorstring__Stringnullable_modelbuilder__ModulePath,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+439, /* MapValuesIterator[String, nullable ModulePath] */
+},
+};
+const struct types resolution_table_abstract_collection__MapValuesIteratorstring__Stringnullable_modelbuilder__ModulePath = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratorstring__Stringnullable_modelbuilder__ModulePath, /* MapIterator[MapValuesIterator#0, MapValuesIterator#1]: MapIterator[String, nullable ModulePath] */
+&type_array__Arraynullable_modelbuilder__ModulePath, /* Array[Iterator#0]: Array[nullable ModulePath] */
+}
+};
+/* runtime type MapKeysIterator[String, nullable MGroup] */
+const struct type type_abstract_collection__MapKeysIteratorstring__Stringnullable_mproject__MGroup = {
+440,
+"MapKeysIterator[String, nullable MGroup]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__MapKeysIteratorstring__Stringnullable_mproject__MGroup,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+440, /* MapKeysIterator[String, nullable MGroup] */
+},
+};
+const struct types resolution_table_abstract_collection__MapKeysIteratorstring__Stringnullable_mproject__MGroup = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratorstring__Stringnullable_mproject__MGroup, /* MapIterator[MapKeysIterator#0, MapKeysIterator#1]: MapIterator[String, nullable MGroup] */
+&type_array__Arraystring__String, /* Array[Iterator#0]: Array[String] */
+}
+};
+/* runtime type MapValuesIterator[String, nullable MGroup] */
+const struct type type_abstract_collection__MapValuesIteratorstring__Stringnullable_mproject__MGroup = {
+441,
+"MapValuesIterator[String, nullable MGroup]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__MapValuesIteratorstring__Stringnullable_mproject__MGroup,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+441, /* MapValuesIterator[String, nullable MGroup] */
+},
+};
+const struct types resolution_table_abstract_collection__MapValuesIteratorstring__Stringnullable_mproject__MGroup = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratorstring__Stringnullable_mproject__MGroup, /* MapIterator[MapValuesIterator#0, MapValuesIterator#1]: MapIterator[String, nullable MGroup] */
+&type_array__Arraynullable_mproject__MGroup, /* Array[Iterator#0]: Array[nullable MGroup] */
+}
+};
+/* runtime type MapKeysIterator[MModule, AModule] */
+const struct type type_abstract_collection__MapKeysIteratormmodule__MModuleparser_nodes__AModule = {
+442,
+"MapKeysIterator[MModule, AModule]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__MapKeysIteratormmodule__MModuleparser_nodes__AModule,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+442, /* MapKeysIterator[MModule, AModule] */
+},
+};
+const struct types resolution_table_abstract_collection__MapKeysIteratormmodule__MModuleparser_nodes__AModule = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratormmodule__MModuleparser_nodes__AModule, /* MapIterator[MapKeysIterator#0, MapKeysIterator#1]: MapIterator[MModule, AModule] */
+&type_array__Arraymmodule__MModule, /* Array[Iterator#0]: Array[MModule] */
+}
+};
+/* runtime type MapValuesIterator[MModule, AModule] */
+const struct type type_abstract_collection__MapValuesIteratormmodule__MModuleparser_nodes__AModule = {
+443,
+"MapValuesIterator[MModule, AModule]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__MapValuesIteratormmodule__MModuleparser_nodes__AModule,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+443, /* MapValuesIterator[MModule, AModule] */
+},
+};
+const struct types resolution_table_abstract_collection__MapValuesIteratormmodule__MModuleparser_nodes__AModule = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratormmodule__MModuleparser_nodes__AModule, /* MapIterator[MapValuesIterator#0, MapValuesIterator#1]: MapIterator[MModule, AModule] */
+&type_array__Arrayparser_nodes__AModule, /* Array[Iterator#0]: Array[AModule] */
+}
+};
+/* runtime type MapKeysIterator[MClassDef, AClassdef] */
+const struct type type_abstract_collection__MapKeysIteratormodel__MClassDefparser_nodes__AClassdef = {
+444,
+"MapKeysIterator[MClassDef, AClassdef]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__MapKeysIteratormodel__MClassDefparser_nodes__AClassdef,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+444, /* MapKeysIterator[MClassDef, AClassdef] */
+},
+};
+const struct types resolution_table_abstract_collection__MapKeysIteratormodel__MClassDefparser_nodes__AClassdef = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratormodel__MClassDefparser_nodes__AClassdef, /* MapIterator[MapKeysIterator#0, MapKeysIterator#1]: MapIterator[MClassDef, AClassdef] */
+&type_array__Arraymodel__MClassDef, /* Array[Iterator#0]: Array[MClassDef] */
+}
+};
+/* runtime type MapValuesIterator[MClassDef, AClassdef] */
+const struct type type_abstract_collection__MapValuesIteratormodel__MClassDefparser_nodes__AClassdef = {
+445,
+"MapValuesIterator[MClassDef, AClassdef]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__MapValuesIteratormodel__MClassDefparser_nodes__AClassdef,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+445, /* MapValuesIterator[MClassDef, AClassdef] */
+},
+};
+const struct types resolution_table_abstract_collection__MapValuesIteratormodel__MClassDefparser_nodes__AClassdef = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratormodel__MClassDefparser_nodes__AClassdef, /* MapIterator[MapValuesIterator#0, MapValuesIterator#1]: MapIterator[MClassDef, AClassdef] */
+&type_array__Arrayparser_nodes__AClassdef, /* Array[Iterator#0]: Array[AClassdef] */
+}
+};
+/* runtime type MapKeysIterator[MPropDef, APropdef] */
+const struct type type_abstract_collection__MapKeysIteratormodel__MPropDefparser_nodes__APropdef = {
+446,
+"MapKeysIterator[MPropDef, APropdef]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__MapKeysIteratormodel__MPropDefparser_nodes__APropdef,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+446, /* MapKeysIterator[MPropDef, APropdef] */
+},
+};
+const struct types resolution_table_abstract_collection__MapKeysIteratormodel__MPropDefparser_nodes__APropdef = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratormodel__MPropDefparser_nodes__APropdef, /* MapIterator[MapKeysIterator#0, MapKeysIterator#1]: MapIterator[MPropDef, APropdef] */
+&type_array__Arraymodel__MPropDef, /* Array[Iterator#0]: Array[MPropDef] */
+}
+};
+/* runtime type MapValuesIterator[MPropDef, APropdef] */
+const struct type type_abstract_collection__MapValuesIteratormodel__MPropDefparser_nodes__APropdef = {
+447,
+"MapValuesIterator[MPropDef, APropdef]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__MapValuesIteratormodel__MPropDefparser_nodes__APropdef,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+447, /* MapValuesIterator[MPropDef, APropdef] */
+},
+};
+const struct types resolution_table_abstract_collection__MapValuesIteratormodel__MPropDefparser_nodes__APropdef = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratormodel__MPropDefparser_nodes__APropdef, /* MapIterator[MapValuesIterator#0, MapValuesIterator#1]: MapIterator[MPropDef, APropdef] */
+&type_array__Arrayparser_nodes__APropdef, /* Array[Iterator#0]: Array[APropdef] */
+}
+};
+/* runtime type MapKeysIterator[MClass, Set[MProperty]] */
+const struct type type_abstract_collection__MapKeysIteratormodel__MClassabstract_collection__Setmodel__MProperty = {
+1642,
+"MapKeysIterator[MClass, Set[MProperty]]", /* class_name_string */
+3,
+0,
+&resolution_table_abstract_collection__MapKeysIteratormodel__MClassabstract_collection__Setmodel__MProperty,
+4,
+{
+0, /* nullable Object */
+1, /* Object */
+448, /* MapKeysIterator[MClass, Set[PropertyLayoutElement]] */
+1642, /* MapKeysIterator[MClass, Set[MProperty]] */
+},
+};
+const struct types resolution_table_abstract_collection__MapKeysIteratormodel__MClassabstract_collection__Setmodel__MProperty = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratormodel__MClassabstract_collection__Setmodel__MProperty, /* MapIterator[MapKeysIterator#0, MapKeysIterator#1]: MapIterator[MClass, Set[MProperty]] */
+&type_array__Arraymodel__MClass, /* Array[Iterator#0]: Array[MClass] */
+}
+};
+/* runtime type MapKeysIterator[MClass, Set[PropertyLayoutElement]] */
+const struct type type_abstract_collection__MapKeysIteratormodel__MClassabstract_collection__Setlayout_builders__PropertyLayoutElement = {
+448,
+"MapKeysIterator[MClass, Set[PropertyLayoutElement]]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__MapKeysIteratormodel__MClassabstract_collection__Setlayout_builders__PropertyLayoutElement,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+448, /* MapKeysIterator[MClass, Set[PropertyLayoutElement]] */
+},
+};
+const struct types resolution_table_abstract_collection__MapKeysIteratormodel__MClassabstract_collection__Setlayout_builders__PropertyLayoutElement = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratormodel__MClassabstract_collection__Setlayout_builders__PropertyLayoutElement, /* MapIterator[MapKeysIterator#0, MapKeysIterator#1]: MapIterator[MClass, Set[PropertyLayoutElement]] */
+&type_array__Arraymodel__MClass, /* Array[Iterator#0]: Array[MClass] */
+}
+};
+/* runtime type MapValuesIterator[MClass, Set[MProperty]] */
+const struct type type_abstract_collection__MapValuesIteratormodel__MClassabstract_collection__Setmodel__MProperty = {
+1643,
+"MapValuesIterator[MClass, Set[MProperty]]", /* class_name_string */
+3,
+0,
+&resolution_table_abstract_collection__MapValuesIteratormodel__MClassabstract_collection__Setmodel__MProperty,
+4,
+{
+0, /* nullable Object */
+1, /* Object */
+449, /* MapValuesIterator[MClass, Set[PropertyLayoutElement]] */
+1643, /* MapValuesIterator[MClass, Set[MProperty]] */
+},
+};
+const struct types resolution_table_abstract_collection__MapValuesIteratormodel__MClassabstract_collection__Setmodel__MProperty = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratormodel__MClassabstract_collection__Setmodel__MProperty, /* MapIterator[MapValuesIterator#0, MapValuesIterator#1]: MapIterator[MClass, Set[MProperty]] */
+&type_array__Arrayabstract_collection__Setmodel__MProperty, /* Array[Iterator#0]: Array[Set[MProperty]] */
+}
+};
+/* runtime type MapValuesIterator[MClass, Set[PropertyLayoutElement]] */
+const struct type type_abstract_collection__MapValuesIteratormodel__MClassabstract_collection__Setlayout_builders__PropertyLayoutElement = {
+449,
+"MapValuesIterator[MClass, Set[PropertyLayoutElement]]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__MapValuesIteratormodel__MClassabstract_collection__Setlayout_builders__PropertyLayoutElement,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+449, /* MapValuesIterator[MClass, Set[PropertyLayoutElement]] */
+},
+};
+const struct types resolution_table_abstract_collection__MapValuesIteratormodel__MClassabstract_collection__Setlayout_builders__PropertyLayoutElement = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratormodel__MClassabstract_collection__Setlayout_builders__PropertyLayoutElement, /* MapIterator[MapValuesIterator#0, MapValuesIterator#1]: MapIterator[MClass, Set[PropertyLayoutElement]] */
+&type_array__Arrayabstract_collection__Setlayout_builders__PropertyLayoutElement, /* Array[Iterator#0]: Array[Set[PropertyLayoutElement]] */
+}
+};
+/* runtime type NativeArray[Char] */
+const struct type type_array__NativeArraykernel__Char = {
+1644,
+"NativeArray[Char]", /* class_name_string */
+3,
+0,
+&resolution_table_array__NativeArraykernel__Char,
+4,
+{
+0, /* nullable Object */
+1, /* Object */
+193, /* NativeArray[Object] */
+1644, /* NativeArray[Char] */
+},
+};
+const struct types resolution_table_array__NativeArraykernel__Char = {
+0, /* dummy */
+{
+&type_kernel__Char, /* NativeArray#0: Char */
+&type_array__NativeArraykernel__Char, /* NativeArray[NativeArray#0]: NativeArray[Char] */
+}
+};
+/* runtime type MapKeysIterator[String, Option] */
+const struct type type_abstract_collection__MapKeysIteratorstring__Stringopts__Option = {
+450,
+"MapKeysIterator[String, Option]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__MapKeysIteratorstring__Stringopts__Option,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+450, /* MapKeysIterator[String, Option] */
+},
+};
+const struct types resolution_table_abstract_collection__MapKeysIteratorstring__Stringopts__Option = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratorstring__Stringopts__Option, /* MapIterator[MapKeysIterator#0, MapKeysIterator#1]: MapIterator[String, Option] */
+&type_array__Arraystring__String, /* Array[Iterator#0]: Array[String] */
+}
+};
+/* runtime type MapValuesIterator[String, Option] */
+const struct type type_abstract_collection__MapValuesIteratorstring__Stringopts__Option = {
+451,
+"MapValuesIterator[String, Option]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__MapValuesIteratorstring__Stringopts__Option,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+451, /* MapValuesIterator[String, Option] */
+},
+};
+const struct types resolution_table_abstract_collection__MapValuesIteratorstring__Stringopts__Option = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratorstring__Stringopts__Option, /* MapIterator[MapValuesIterator#0, MapValuesIterator#1]: MapIterator[String, Option] */
+&type_array__Arrayopts__Option, /* Array[Iterator#0]: Array[Option] */
+}
+};
+/* runtime type MapKeysIterator[MClassDef, HashSet[MType]] */
+const struct type type_abstract_collection__MapKeysIteratormodel__MClassDefhash_collection__HashSetmodel__MType = {
+452,
+"MapKeysIterator[MClassDef, HashSet[MType]]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__MapKeysIteratormodel__MClassDefhash_collection__HashSetmodel__MType,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+452, /* MapKeysIterator[MClassDef, HashSet[MType]] */
+},
+};
+const struct types resolution_table_abstract_collection__MapKeysIteratormodel__MClassDefhash_collection__HashSetmodel__MType = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratormodel__MClassDefhash_collection__HashSetmodel__MType, /* MapIterator[MapKeysIterator#0, MapKeysIterator#1]: MapIterator[MClassDef, HashSet[MType]] */
+&type_array__Arraymodel__MClassDef, /* Array[Iterator#0]: Array[MClassDef] */
+}
+};
+/* runtime type MapValuesIterator[MClassDef, HashSet[MType]] */
+const struct type type_abstract_collection__MapValuesIteratormodel__MClassDefhash_collection__HashSetmodel__MType = {
+453,
+"MapValuesIterator[MClassDef, HashSet[MType]]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__MapValuesIteratormodel__MClassDefhash_collection__HashSetmodel__MType,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+453, /* MapValuesIterator[MClassDef, HashSet[MType]] */
+},
+};
+const struct types resolution_table_abstract_collection__MapValuesIteratormodel__MClassDefhash_collection__HashSetmodel__MType = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratormodel__MClassDefhash_collection__HashSetmodel__MType, /* MapIterator[MapValuesIterator#0, MapValuesIterator#1]: MapIterator[MClassDef, HashSet[MType]] */
+&type_array__Arrayhash_collection__HashSetmodel__MType, /* Array[Iterator#0]: Array[HashSet[MType]] */
+}
+};
+/* runtime type MapKeysIterator[MClass, Int] */
+const struct type type_abstract_collection__MapKeysIteratormodel__MClasskernel__Int = {
+454,
+"MapKeysIterator[MClass, Int]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__MapKeysIteratormodel__MClasskernel__Int,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+454, /* MapKeysIterator[MClass, Int] */
+},
+};
+const struct types resolution_table_abstract_collection__MapKeysIteratormodel__MClasskernel__Int = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratormodel__MClasskernel__Int, /* MapIterator[MapKeysIterator#0, MapKeysIterator#1]: MapIterator[MClass, Int] */
+&type_array__Arraymodel__MClass, /* Array[Iterator#0]: Array[MClass] */
+}
+};
+/* runtime type MapValuesIterator[MClass, Int] */
+const struct type type_abstract_collection__MapValuesIteratormodel__MClasskernel__Int = {
+455,
+"MapValuesIterator[MClass, Int]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__MapValuesIteratormodel__MClasskernel__Int,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+455, /* MapValuesIterator[MClass, Int] */
+},
+};
+const struct types resolution_table_abstract_collection__MapValuesIteratormodel__MClasskernel__Int = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratormodel__MClasskernel__Int, /* MapIterator[MapValuesIterator#0, MapValuesIterator#1]: MapIterator[MClass, Int] */
+&type_array__Arraykernel__Int, /* Array[Iterator#0]: Array[Int] */
+}
+};
+/* runtime type MapKeysIterator[MType, Array[nullable MType]] */
+const struct type type_abstract_collection__MapKeysIteratormodel__MTypearray__Arraynullable_model__MType = {
+456,
+"MapKeysIterator[MType, Array[nullable MType]]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__MapKeysIteratormodel__MTypearray__Arraynullable_model__MType,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+456, /* MapKeysIterator[MType, Array[nullable MType]] */
+},
+};
+const struct types resolution_table_abstract_collection__MapKeysIteratormodel__MTypearray__Arraynullable_model__MType = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratormodel__MTypearray__Arraynullable_model__MType, /* MapIterator[MapKeysIterator#0, MapKeysIterator#1]: MapIterator[MType, Array[nullable MType]] */
+&type_array__Arraymodel__MType, /* Array[Iterator#0]: Array[MType] */
+}
+};
+/* runtime type MapValuesIterator[MType, Array[nullable MType]] */
+const struct type type_abstract_collection__MapValuesIteratormodel__MTypearray__Arraynullable_model__MType = {
+457,
+"MapValuesIterator[MType, Array[nullable MType]]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__MapValuesIteratormodel__MTypearray__Arraynullable_model__MType,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+457, /* MapValuesIterator[MType, Array[nullable MType]] */
+},
+};
+const struct types resolution_table_abstract_collection__MapValuesIteratormodel__MTypearray__Arraynullable_model__MType = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratormodel__MTypearray__Arraynullable_model__MType, /* MapIterator[MapValuesIterator#0, MapValuesIterator#1]: MapIterator[MType, Array[nullable MType]] */
+&type_array__Arrayarray__Arraynullable_model__MType, /* Array[Iterator#0]: Array[Array[nullable MType]] */
+}
+};
+/* runtime type MapKeysIterator[MClassType, Array[nullable MType]] */
+const struct type type_abstract_collection__MapKeysIteratormodel__MClassTypearray__Arraynullable_model__MType = {
+1645,
+"MapKeysIterator[MClassType, Array[nullable MType]]", /* class_name_string */
+3,
+0,
+&resolution_table_abstract_collection__MapKeysIteratormodel__MClassTypearray__Arraynullable_model__MType,
+4,
+{
+0, /* nullable Object */
+1, /* Object */
+456, /* MapKeysIterator[MType, Array[nullable MType]] */
+1645, /* MapKeysIterator[MClassType, Array[nullable MType]] */
+},
+};
+const struct types resolution_table_abstract_collection__MapKeysIteratormodel__MClassTypearray__Arraynullable_model__MType = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratormodel__MClassTypearray__Arraynullable_model__MType, /* MapIterator[MapKeysIterator#0, MapKeysIterator#1]: MapIterator[MClassType, Array[nullable MType]] */
+&type_array__Arraymodel__MClassType, /* Array[Iterator#0]: Array[MClassType] */
+}
+};
+/* runtime type MapValuesIterator[MClassType, Array[nullable MType]] */
+const struct type type_abstract_collection__MapValuesIteratormodel__MClassTypearray__Arraynullable_model__MType = {
+1646,
+"MapValuesIterator[MClassType, Array[nullable MType]]", /* class_name_string */
+3,
+0,
+&resolution_table_abstract_collection__MapValuesIteratormodel__MClassTypearray__Arraynullable_model__MType,
+4,
+{
+0, /* nullable Object */
+1, /* Object */
+457, /* MapValuesIterator[MType, Array[nullable MType]] */
+1646, /* MapValuesIterator[MClassType, Array[nullable MType]] */
+},
+};
+const struct types resolution_table_abstract_collection__MapValuesIteratormodel__MClassTypearray__Arraynullable_model__MType = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratormodel__MClassTypearray__Arraynullable_model__MType, /* MapIterator[MapValuesIterator#0, MapValuesIterator#1]: MapIterator[MClassType, Array[nullable MType]] */
+&type_array__Arrayarray__Arraynullable_model__MType, /* Array[Iterator#0]: Array[Array[nullable MType]] */
+}
+};
+/* runtime type MapKeysIterator[MClass, Array[nullable MPropDef]] */
+const struct type type_abstract_collection__MapKeysIteratormodel__MClassarray__Arraynullable_model__MPropDef = {
+458,
+"MapKeysIterator[MClass, Array[nullable MPropDef]]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__MapKeysIteratormodel__MClassarray__Arraynullable_model__MPropDef,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+458, /* MapKeysIterator[MClass, Array[nullable MPropDef]] */
+},
+};
+const struct types resolution_table_abstract_collection__MapKeysIteratormodel__MClassarray__Arraynullable_model__MPropDef = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratormodel__MClassarray__Arraynullable_model__MPropDef, /* MapIterator[MapKeysIterator#0, MapKeysIterator#1]: MapIterator[MClass, Array[nullable MPropDef]] */
+&type_array__Arraymodel__MClass, /* Array[Iterator#0]: Array[MClass] */
+}
+};
+/* runtime type MapValuesIterator[MClass, Array[nullable MPropDef]] */
+const struct type type_abstract_collection__MapValuesIteratormodel__MClassarray__Arraynullable_model__MPropDef = {
+459,
+"MapValuesIterator[MClass, Array[nullable MPropDef]]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__MapValuesIteratormodel__MClassarray__Arraynullable_model__MPropDef,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+459, /* MapValuesIterator[MClass, Array[nullable MPropDef]] */
+},
+};
+const struct types resolution_table_abstract_collection__MapValuesIteratormodel__MClassarray__Arraynullable_model__MPropDef = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratormodel__MClassarray__Arraynullable_model__MPropDef, /* MapIterator[MapValuesIterator#0, MapValuesIterator#1]: MapIterator[MClass, Array[nullable MPropDef]] */
+&type_array__Arrayarray__Arraynullable_model__MPropDef, /* Array[Iterator#0]: Array[Array[nullable MPropDef]] */
+}
+};
+/* runtime type MapKeysIterator[String, String] */
+const struct type type_abstract_collection__MapKeysIteratorstring__Stringstring__String = {
+460,
+"MapKeysIterator[String, String]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__MapKeysIteratorstring__Stringstring__String,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+460, /* MapKeysIterator[String, String] */
+},
+};
+const struct types resolution_table_abstract_collection__MapKeysIteratorstring__Stringstring__String = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratorstring__Stringstring__String, /* MapIterator[MapKeysIterator#0, MapKeysIterator#1]: MapIterator[String, String] */
+&type_array__Arraystring__String, /* Array[Iterator#0]: Array[String] */
+}
+};
+/* runtime type MapValuesIterator[String, String] */
+const struct type type_abstract_collection__MapValuesIteratorstring__Stringstring__String = {
+461,
+"MapValuesIterator[String, String]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__MapValuesIteratorstring__Stringstring__String,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+461, /* MapValuesIterator[String, String] */
+},
+};
+const struct types resolution_table_abstract_collection__MapValuesIteratorstring__Stringstring__String = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratorstring__Stringstring__String, /* MapIterator[MapValuesIterator#0, MapValuesIterator#1]: MapIterator[String, String] */
+&type_array__Arraystring__String, /* Array[Iterator#0]: Array[String] */
+}
+};
+/* runtime type ContainerIterator[CodeFile] */
+const struct type type_abstract_collection__ContainerIteratorabstract_compiler__CodeFile = {
+462,
+"ContainerIterator[CodeFile]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__ContainerIteratorabstract_compiler__CodeFile,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+462, /* ContainerIterator[CodeFile] */
+},
+};
+const struct types resolution_table_abstract_collection__ContainerIteratorabstract_compiler__CodeFile = {
+0, /* dummy */
+{
+&type_abstract_collection__Containerabstract_compiler__CodeFile, /* Container[ContainerIterator#0]: Container[CodeFile] */
+&type_array__Arrayabstract_compiler__CodeFile, /* Array[Iterator#0]: Array[CodeFile] */
+}
+};
+/* runtime type Array[CodeFile] */
+const struct type type_array__Arrayabstract_compiler__CodeFile = {
+2583,
+"Array[CodeFile]", /* class_name_string */
+7,
+0,
+&resolution_table_array__Arrayabstract_compiler__CodeFile,
+10,
+{
+0, /* nullable Object */
+1, /* Object */
+642, /* Collection[CodeFile] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
+2444, /* AbstractArrayRead[CodeFile] */
+1782, /* AbstractArrayRead[Object] */
+2583, /* Array[CodeFile] */
+-1, /* empty */
+1973, /* Array[Object] */
+},
+};
+const struct types resolution_table_array__Arrayabstract_compiler__CodeFile = {
+0, /* dummy */
+{
+&type_array__Arrayabstract_compiler__CodeFile, /* Array[Array#0]: Array[CodeFile] */
+&type_array__NativeArrayabstract_compiler__CodeFile, /* NativeArray[Array#0]: NativeArray[CodeFile] */
+&type_abstract_compiler__CodeFile, /* Sequence#0: CodeFile */
+&type_abstract_compiler__CodeFile, /* SimpleCollection#0: CodeFile */
+&type_abstract_collection__Collectionabstract_compiler__CodeFile, /* Collection[Array#0]: Collection[CodeFile] */
+&type_abstract_compiler__CodeFile, /* Array#0: CodeFile */
+&type_array__NativeArrayabstract_compiler__CodeFile, /* NativeArray[ArrayCapable#0]: NativeArray[CodeFile] */
+&type_abstract_compiler__CodeFile, /* AbstractArray#0: CodeFile */
+&type_abstract_compiler__CodeFile, /* RemovableCollection#0: CodeFile */
+&type_abstract_collection__Collectionabstract_compiler__CodeFile, /* Collection[Sequence#0]: Collection[CodeFile] */
+&type_array__Arrayabstract_compiler__CodeFile, /* Array[Sequence#0]: Array[CodeFile] */
+&type_abstract_collection__Collectionabstract_compiler__CodeFile, /* Collection[SimpleCollection#0]: Collection[CodeFile] */
+&type_abstract_compiler__CodeFile, /* Collection#0: CodeFile */
+&type_abstract_collection__Collectionabstract_compiler__CodeFile, /* Collection[Collection#0]: Collection[CodeFile] */
+&type_abstract_compiler__CodeFile, /* SequenceRead#0: CodeFile */
+&type_abstract_compiler__CodeFile, /* AbstractArrayRead#0: CodeFile */
+&type_array__Arrayabstract_compiler__CodeFile, /* Array[AbstractArrayRead#0]: Array[CodeFile] */
+NULL, /* empty (AbstractArray[AbstractArrayRead#0]: AbstractArray[CodeFile] not a live type) */
+&type_array__ArrayIteratorabstract_compiler__CodeFile, /* ArrayIterator[AbstractArrayRead#0]: ArrayIterator[CodeFile] */
+}
+};
+/* runtime type AbstractArrayRead[CodeFile] */
+const struct type type_array__AbstractArrayReadabstract_compiler__CodeFile = {
+2444,
+"AbstractArrayRead[CodeFile]", /* class_name_string */
+5,
+0,
+NULL,
+7,
+{
+0, /* nullable Object */
+1, /* Object */
+642, /* Collection[CodeFile] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
+2444, /* AbstractArrayRead[CodeFile] */
+1782, /* AbstractArrayRead[Object] */
+},
+};
+/* runtime type ContainerIterator[MMethodDef] */
+const struct type type_abstract_collection__ContainerIteratormodel__MMethodDef = {
+463,
+"ContainerIterator[MMethodDef]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__ContainerIteratormodel__MMethodDef,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+463, /* ContainerIterator[MMethodDef] */
+},
+};
+const struct types resolution_table_abstract_collection__ContainerIteratormodel__MMethodDef = {
+0, /* dummy */
+{
+&type_abstract_collection__Containermodel__MMethodDef, /* Container[ContainerIterator#0]: Container[MMethodDef] */
+&type_array__Arraymodel__MMethodDef, /* Array[Iterator#0]: Array[MMethodDef] */
+}
+};
+/* runtime type MapKeysIterator[MClassType, String] */
+const struct type type_abstract_collection__MapKeysIteratormodel__MClassTypestring__String = {
+464,
+"MapKeysIterator[MClassType, String]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__MapKeysIteratormodel__MClassTypestring__String,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+464, /* MapKeysIterator[MClassType, String] */
+},
+};
+const struct types resolution_table_abstract_collection__MapKeysIteratormodel__MClassTypestring__String = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratormodel__MClassTypestring__String, /* MapIterator[MapKeysIterator#0, MapKeysIterator#1]: MapIterator[MClassType, String] */
+&type_array__Arraymodel__MClassType, /* Array[Iterator#0]: Array[MClassType] */
+}
+};
+/* runtime type MapValuesIterator[MClassType, String] */
+const struct type type_abstract_collection__MapValuesIteratormodel__MClassTypestring__String = {
+465,
+"MapValuesIterator[MClassType, String]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__MapValuesIteratormodel__MClassTypestring__String,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+465, /* MapValuesIterator[MClassType, String] */
+},
+};
+const struct types resolution_table_abstract_collection__MapValuesIteratormodel__MClassTypestring__String = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratormodel__MClassTypestring__String, /* MapIterator[MapValuesIterator#0, MapValuesIterator#1]: MapIterator[MClassType, String] */
+&type_array__Arraystring__String, /* Array[Iterator#0]: Array[String] */
+}
+};
+/* runtime type ContainerIterator[AbstractRuntimeFunction] */
+const struct type type_abstract_collection__ContainerIteratorabstract_compiler__AbstractRuntimeFunction = {
+466,
+"ContainerIterator[AbstractRuntimeFunction]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__ContainerIteratorabstract_compiler__AbstractRuntimeFunction,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+466, /* ContainerIterator[AbstractRuntimeFunction] */
+},
+};
+const struct types resolution_table_abstract_collection__ContainerIteratorabstract_compiler__AbstractRuntimeFunction = {
+0, /* dummy */
+{
+&type_abstract_collection__Containerabstract_compiler__AbstractRuntimeFunction, /* Container[ContainerIterator#0]: Container[AbstractRuntimeFunction] */
+&type_array__Arrayabstract_compiler__AbstractRuntimeFunction, /* Array[Iterator#0]: Array[AbstractRuntimeFunction] */
+}
+};
+/* runtime type Array[AbstractRuntimeFunction] */
+const struct type type_array__Arrayabstract_compiler__AbstractRuntimeFunction = {
+2584,
+"Array[AbstractRuntimeFunction]", /* class_name_string */
+7,
+0,
+&resolution_table_array__Arrayabstract_compiler__AbstractRuntimeFunction,
+10,
+{
+0, /* nullable Object */
+1, /* Object */
+645, /* Collection[AbstractRuntimeFunction] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
+2445, /* AbstractArrayRead[AbstractRuntimeFunction] */
+1782, /* AbstractArrayRead[Object] */
+2584, /* Array[AbstractRuntimeFunction] */
+-1, /* empty */
+1973, /* Array[Object] */
+},
+};
+const struct types resolution_table_array__Arrayabstract_compiler__AbstractRuntimeFunction = {
+0, /* dummy */
+{
+&type_array__Arrayabstract_compiler__AbstractRuntimeFunction, /* Array[Array#0]: Array[AbstractRuntimeFunction] */
+&type_array__NativeArrayabstract_compiler__AbstractRuntimeFunction, /* NativeArray[Array#0]: NativeArray[AbstractRuntimeFunction] */
+&type_abstract_compiler__AbstractRuntimeFunction, /* Sequence#0: AbstractRuntimeFunction */
+&type_abstract_compiler__AbstractRuntimeFunction, /* SimpleCollection#0: AbstractRuntimeFunction */
+&type_abstract_collection__Collectionabstract_compiler__AbstractRuntimeFunction, /* Collection[Array#0]: Collection[AbstractRuntimeFunction] */
+&type_abstract_compiler__AbstractRuntimeFunction, /* Array#0: AbstractRuntimeFunction */
+&type_array__NativeArrayabstract_compiler__AbstractRuntimeFunction, /* NativeArray[ArrayCapable#0]: NativeArray[AbstractRuntimeFunction] */
+&type_abstract_compiler__AbstractRuntimeFunction, /* AbstractArray#0: AbstractRuntimeFunction */
+&type_abstract_compiler__AbstractRuntimeFunction, /* RemovableCollection#0: AbstractRuntimeFunction */
+&type_abstract_collection__Collectionabstract_compiler__AbstractRuntimeFunction, /* Collection[Sequence#0]: Collection[AbstractRuntimeFunction] */
+&type_array__Arrayabstract_compiler__AbstractRuntimeFunction, /* Array[Sequence#0]: Array[AbstractRuntimeFunction] */
+&type_abstract_collection__Collectionabstract_compiler__AbstractRuntimeFunction, /* Collection[SimpleCollection#0]: Collection[AbstractRuntimeFunction] */
+&type_abstract_compiler__AbstractRuntimeFunction, /* Collection#0: AbstractRuntimeFunction */
+&type_abstract_collection__Collectionabstract_compiler__AbstractRuntimeFunction, /* Collection[Collection#0]: Collection[AbstractRuntimeFunction] */
+&type_abstract_compiler__AbstractRuntimeFunction, /* SequenceRead#0: AbstractRuntimeFunction */
+&type_abstract_compiler__AbstractRuntimeFunction, /* AbstractArrayRead#0: AbstractRuntimeFunction */
+&type_array__Arrayabstract_compiler__AbstractRuntimeFunction, /* Array[AbstractArrayRead#0]: Array[AbstractRuntimeFunction] */
+NULL, /* empty (AbstractArray[AbstractArrayRead#0]: AbstractArray[AbstractRuntimeFunction] not a live type) */
+&type_array__ArrayIteratorabstract_compiler__AbstractRuntimeFunction, /* ArrayIterator[AbstractArrayRead#0]: ArrayIterator[AbstractRuntimeFunction] */
+}
+};
+/* runtime type AbstractArrayRead[AbstractRuntimeFunction] */
+const struct type type_array__AbstractArrayReadabstract_compiler__AbstractRuntimeFunction = {
+2445,
+"AbstractArrayRead[AbstractRuntimeFunction]", /* class_name_string */
+5,
+0,
+NULL,
+7,
+{
+0, /* nullable Object */
+1, /* Object */
+645, /* Collection[AbstractRuntimeFunction] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
+2445, /* AbstractArrayRead[AbstractRuntimeFunction] */
+1782, /* AbstractArrayRead[Object] */
+},
+};
+/* runtime type MapKeysIterator[MType, Array[MClassType]] */
+const struct type type_abstract_collection__MapKeysIteratormodel__MTypearray__Arraymodel__MClassType = {
+1920,
+"MapKeysIterator[MType, Array[MClassType]]", /* class_name_string */
+4,
+0,
+&resolution_table_abstract_collection__MapKeysIteratormodel__MTypearray__Arraymodel__MClassType,
+5,
+{
+0, /* nullable Object */
+1, /* Object */
+456, /* MapKeysIterator[MType, Array[nullable MType]] */
+1647, /* MapKeysIterator[MType, Array[MType]] */
+1920, /* MapKeysIterator[MType, Array[MClassType]] */
+},
+};
+const struct types resolution_table_abstract_collection__MapKeysIteratormodel__MTypearray__Arraymodel__MClassType = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratormodel__MTypearray__Arraymodel__MClassType, /* MapIterator[MapKeysIterator#0, MapKeysIterator#1]: MapIterator[MType, Array[MClassType]] */
+&type_array__Arraymodel__MType, /* Array[Iterator#0]: Array[MType] */
+}
+};
+/* runtime type MapKeysIterator[MType, Array[MType]] */
+const struct type type_abstract_collection__MapKeysIteratormodel__MTypearray__Arraymodel__MType = {
+1647,
+"MapKeysIterator[MType, Array[MType]]", /* class_name_string */
+3,
+0,
+&resolution_table_abstract_collection__MapKeysIteratormodel__MTypearray__Arraymodel__MType,
+4,
+{
+0, /* nullable Object */
+1, /* Object */
+456, /* MapKeysIterator[MType, Array[nullable MType]] */
+1647, /* MapKeysIterator[MType, Array[MType]] */
+},
+};
+const struct types resolution_table_abstract_collection__MapKeysIteratormodel__MTypearray__Arraymodel__MType = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratormodel__MTypearray__Arraymodel__MType, /* MapIterator[MapKeysIterator#0, MapKeysIterator#1]: MapIterator[MType, Array[MType]] */
+&type_array__Arraymodel__MType, /* Array[Iterator#0]: Array[MType] */
+}
+};
+/* runtime type MapValuesIterator[MType, Array[MClassType]] */
+const struct type type_abstract_collection__MapValuesIteratormodel__MTypearray__Arraymodel__MClassType = {
+1921,
+"MapValuesIterator[MType, Array[MClassType]]", /* class_name_string */
+4,
+0,
+&resolution_table_abstract_collection__MapValuesIteratormodel__MTypearray__Arraymodel__MClassType,
+5,
+{
+0, /* nullable Object */
+1, /* Object */
+457, /* MapValuesIterator[MType, Array[nullable MType]] */
+1648, /* MapValuesIterator[MType, Array[MType]] */
+1921, /* MapValuesIterator[MType, Array[MClassType]] */
+},
+};
+const struct types resolution_table_abstract_collection__MapValuesIteratormodel__MTypearray__Arraymodel__MClassType = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratormodel__MTypearray__Arraymodel__MClassType, /* MapIterator[MapValuesIterator#0, MapValuesIterator#1]: MapIterator[MType, Array[MClassType]] */
+&type_array__Arrayarray__Arraymodel__MClassType, /* Array[Iterator#0]: Array[Array[MClassType]] */
+}
+};
+/* runtime type MapValuesIterator[MType, Array[MType]] */
+const struct type type_abstract_collection__MapValuesIteratormodel__MTypearray__Arraymodel__MType = {
+1648,
+"MapValuesIterator[MType, Array[MType]]", /* class_name_string */
+3,
+0,
+&resolution_table_abstract_collection__MapValuesIteratormodel__MTypearray__Arraymodel__MType,
+4,
+{
+0, /* nullable Object */
+1, /* Object */
+457, /* MapValuesIterator[MType, Array[nullable MType]] */
+1648, /* MapValuesIterator[MType, Array[MType]] */
+},
+};
+const struct types resolution_table_abstract_collection__MapValuesIteratormodel__MTypearray__Arraymodel__MType = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratormodel__MTypearray__Arraymodel__MType, /* MapIterator[MapValuesIterator#0, MapValuesIterator#1]: MapIterator[MType, Array[MType]] */
+&type_array__Arrayarray__Arraymodel__MType, /* Array[Iterator#0]: Array[Array[MType]] */
+}
+};
+/* runtime type MapKeysIterator[String, Int] */
+const struct type type_abstract_collection__MapKeysIteratorstring__Stringkernel__Int = {
+467,
+"MapKeysIterator[String, Int]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__MapKeysIteratorstring__Stringkernel__Int,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+467, /* MapKeysIterator[String, Int] */
+},
+};
+const struct types resolution_table_abstract_collection__MapKeysIteratorstring__Stringkernel__Int = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratorstring__Stringkernel__Int, /* MapIterator[MapKeysIterator#0, MapKeysIterator#1]: MapIterator[String, Int] */
+&type_array__Arraystring__String, /* Array[Iterator#0]: Array[String] */
+}
+};
+/* runtime type MapValuesIterator[String, Int] */
+const struct type type_abstract_collection__MapValuesIteratorstring__Stringkernel__Int = {
+468,
+"MapValuesIterator[String, Int]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__MapValuesIteratorstring__Stringkernel__Int,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+468, /* MapValuesIterator[String, Int] */
+},
+};
+const struct types resolution_table_abstract_collection__MapValuesIteratorstring__Stringkernel__Int = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratorstring__Stringkernel__Int, /* MapIterator[MapValuesIterator#0, MapValuesIterator#1]: MapIterator[String, Int] */
+&type_array__Arraykernel__Int, /* Array[Iterator#0]: Array[Int] */
+}
+};
+/* runtime type HashMapKeys[MClass, Array[MClass]] */
+const struct type type_hash_collection__HashMapKeysmodel__MClassarray__Arraymodel__MClass = {
+2446,
+"HashMapKeys[MClass, Array[MClass]]", /* class_name_string */
+6,
+0,
+&resolution_table_hash_collection__HashMapKeysmodel__MClassarray__Arraymodel__MClass,
+7,
+{
+0, /* nullable Object */
+1, /* Object */
+178, /* Collection[nullable MClass] */
+2166, /* HashMapKeys[MClass, Array[nullable MClass]] */
+170, /* Collection[Object] */
+1787, /* Collection[MClass] */
+2446, /* HashMapKeys[MClass, Array[MClass]] */
+},
+};
+const struct types resolution_table_hash_collection__HashMapKeysmodel__MClassarray__Arraymodel__MClass = {
+0, /* dummy */
+{
+&type_hash_collection__HashMapmodel__MClassarray__Arraymodel__MClass, /* HashMap[HashMapKeys#0, HashMapKeys#1]: HashMap[MClass, Array[MClass]] */
+&type_abstract_collection__MapKeysIteratormodel__MClassarray__Arraymodel__MClass, /* MapKeysIterator[HashMapKeys#0, HashMapKeys#1]: MapKeysIterator[MClass, Array[MClass]] */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+&type_model__MClass, /* RemovableCollection#0: MClass */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+&type_model__MClass, /* Collection#0: MClass */
+&type_abstract_collection__Collectionmodel__MClass, /* Collection[Collection#0]: Collection[MClass] */
+}
+};
 /* runtime type HashMapValues[MClass, Array[MClass]] */
 const struct type type_hash_collection__HashMapValuesmodel__MClassarray__Arraymodel__MClass = {
-2382,
+2447,
 "HashMapValues[MClass, Array[MClass]]", /* class_name_string */
 6,
 0,
@@ -10,11 +1045,11 @@ const struct type type_hash_collection__HashMapValuesmodel__MClassarray__Arraymo
 {
 0, /* nullable Object */
 1, /* Object */
-1439, /* Collection[Array[nullable MClass]] */
-1842, /* HashMapValues[MClass, Array[nullable MClass]] */
-164, /* Collection[Object] */
-1787, /* Collection[Array[MClass]] */
-2382, /* HashMapValues[MClass, Array[MClass]] */
+1479, /* Collection[Array[nullable MClass]] */
+1893, /* HashMapValues[MClass, Array[nullable MClass]] */
+170, /* Collection[Object] */
+1843, /* Collection[Array[MClass]] */
+2447, /* HashMapValues[MClass, Array[MClass]] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapValuesmodel__MClassarray__Arraymodel__MClass = {
@@ -38,7 +1073,7 @@ NULL, /* empty */
 };
 /* runtime type NativeArray[nullable HashMapNode[MClass, Array[MClass]]] */
 const struct type type_array__NativeArraynullable_hash_collection__HashMapNodemodel__MClassarray__Arraymodel__MClass = {
-1605,
+1649,
 "NativeArray[nullable HashMapNode[MClass, Array[MClass]]]", /* class_name_string */
 3,
 0,
@@ -47,8 +1082,8 @@ const struct type type_array__NativeArraynullable_hash_collection__HashMapNodemo
 {
 0, /* nullable Object */
 1, /* Object */
-365, /* NativeArray[nullable HashMapNode[MClass, Array[nullable MClass]]] */
-1605, /* NativeArray[nullable HashMapNode[MClass, Array[MClass]]] */
+377, /* NativeArray[nullable HashMapNode[MClass, Array[nullable MClass]]] */
+1649, /* NativeArray[nullable HashMapNode[MClass, Array[MClass]]] */
 },
 };
 const struct types resolution_table_array__NativeArraynullable_hash_collection__HashMapNodemodel__MClassarray__Arraymodel__MClass = {
@@ -60,7 +1095,7 @@ const struct types resolution_table_array__NativeArraynullable_hash_collection__
 };
 /* runtime type HashMapNode[MClass, Array[MClass]] */
 const struct type type_hash_collection__HashMapNodemodel__MClassarray__Arraymodel__MClass = {
-2128,
+2193,
 "HashMapNode[MClass, Array[MClass]]", /* class_name_string */
 5,
 0,
@@ -69,10 +1104,10 @@ const struct type type_hash_collection__HashMapNodemodel__MClassarray__Arraymode
 {
 0, /* nullable Object */
 1, /* Object */
-131, /* nullable HashMapNode[MClass, Array[nullable MClass]] */
-445, /* nullable HashMapNode[MClass, Array[MClass]] */
-1541, /* HashMapNode[MClass, Array[nullable MClass]] */
-2128, /* HashMapNode[MClass, Array[MClass]] */
+133, /* nullable HashMapNode[MClass, Array[nullable MClass]] */
+469, /* nullable HashMapNode[MClass, Array[MClass]] */
+1575, /* HashMapNode[MClass, Array[nullable MClass]] */
+2193, /* HashMapNode[MClass, Array[MClass]] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapNodemodel__MClassarray__Arraymodel__MClass = {
@@ -86,7 +1121,7 @@ const struct types resolution_table_hash_collection__HashMapNodemodel__MClassarr
 };
 /* runtime type nullable HashMapNode[MClass, Array[MClass]] */
 const struct type type_nullable_hash_collection__HashMapNodemodel__MClassarray__Arraymodel__MClass = {
-445,
+469,
 "nullable HashMapNode[MClass, Array[MClass]]", /* class_name_string */
 3,
 1,
@@ -95,8 +1130,8 @@ const struct type type_nullable_hash_collection__HashMapNodemodel__MClassarray__
 {
 0, /* nullable Object */
 -1, /* empty */
-131, /* nullable HashMapNode[MClass, Array[nullable MClass]] */
-445, /* nullable HashMapNode[MClass, Array[MClass]] */
+133, /* nullable HashMapNode[MClass, Array[nullable MClass]] */
+469, /* nullable HashMapNode[MClass, Array[MClass]] */
 },
 };
 const struct types resolution_table_nullable_hash_collection__HashMapNodemodel__MClassarray__Arraymodel__MClass = {
@@ -110,7 +1145,7 @@ const struct types resolution_table_nullable_hash_collection__HashMapNodemodel__
 };
 /* runtime type HashMapIterator[MClass, Array[MClass]] */
 const struct type type_hash_collection__HashMapIteratormodel__MClassarray__Arraymodel__MClass = {
-2129,
+2194,
 "HashMapIterator[MClass, Array[MClass]]", /* class_name_string */
 5,
 0,
@@ -119,10 +1154,10 @@ const struct type type_hash_collection__HashMapIteratormodel__MClassarray__Array
 {
 0, /* nullable Object */
 1, /* Object */
-366, /* MapIterator[MClass, Array[nullable MClass]] */
-1542, /* HashMapIterator[MClass, Array[nullable MClass]] */
-1606, /* MapIterator[MClass, Array[MClass]] */
-2129, /* HashMapIterator[MClass, Array[MClass]] */
+378, /* MapIterator[MClass, Array[nullable MClass]] */
+1576, /* HashMapIterator[MClass, Array[nullable MClass]] */
+1650, /* MapIterator[MClass, Array[MClass]] */
+2194, /* HashMapIterator[MClass, Array[MClass]] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapIteratormodel__MClassarray__Arraymodel__MClass = {
@@ -133,7 +1168,7 @@ const struct types resolution_table_hash_collection__HashMapIteratormodel__MClas
 };
 /* runtime type MapIterator[MClass, Array[MClass]] */
 const struct type type_abstract_collection__MapIteratormodel__MClassarray__Arraymodel__MClass = {
-1606,
+1650,
 "MapIterator[MClass, Array[MClass]]", /* class_name_string */
 4,
 0,
@@ -142,14 +1177,14 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-366, /* MapIterator[MClass, Array[nullable MClass]] */
+378, /* MapIterator[MClass, Array[nullable MClass]] */
 -1, /* empty */
-1606, /* MapIterator[MClass, Array[MClass]] */
+1650, /* MapIterator[MClass, Array[MClass]] */
 },
 };
 /* runtime type HashMapKeys[MClass, HashSet[MClass]] */
 const struct type type_hash_collection__HashMapKeysmodel__MClasshash_collection__HashSetmodel__MClass = {
-2383,
+2448,
 "HashMapKeys[MClass, HashSet[MClass]]", /* class_name_string */
 6,
 0,
@@ -158,11 +1193,11 @@ const struct type type_hash_collection__HashMapKeysmodel__MClasshash_collection_
 {
 0, /* nullable Object */
 1, /* Object */
-171, /* Collection[nullable MClass] */
-2130, /* HashMapKeys[MClass, Set[MClass]] */
-164, /* Collection[Object] */
-1733, /* Collection[MClass] */
-2383, /* HashMapKeys[MClass, HashSet[MClass]] */
+178, /* Collection[nullable MClass] */
+2195, /* HashMapKeys[MClass, Set[MClass]] */
+170, /* Collection[Object] */
+1787, /* Collection[MClass] */
+2448, /* HashMapKeys[MClass, HashSet[MClass]] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapKeysmodel__MClasshash_collection__HashSetmodel__MClass = {
@@ -186,7 +1221,7 @@ NULL, /* empty */
 };
 /* runtime type HashMapKeys[MClass, Set[MClass]] */
 const struct type type_hash_collection__HashMapKeysmodel__MClassabstract_collection__Setmodel__MClass = {
-2130,
+2195,
 "HashMapKeys[MClass, Set[MClass]]", /* class_name_string */
 3,
 0,
@@ -195,10 +1230,10 @@ const struct type type_hash_collection__HashMapKeysmodel__MClassabstract_collect
 {
 0, /* nullable Object */
 1, /* Object */
-171, /* Collection[nullable MClass] */
-2130, /* HashMapKeys[MClass, Set[MClass]] */
-164, /* Collection[Object] */
-1733, /* Collection[MClass] */
+178, /* Collection[nullable MClass] */
+2195, /* HashMapKeys[MClass, Set[MClass]] */
+170, /* Collection[Object] */
+1787, /* Collection[MClass] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapKeysmodel__MClassabstract_collection__Setmodel__MClass = {
@@ -222,7 +1257,7 @@ NULL, /* empty */
 };
 /* runtime type HashMapValues[MClass, HashSet[MClass]] */
 const struct type type_hash_collection__HashMapValuesmodel__MClasshash_collection__HashSetmodel__MClass = {
-2384,
+2449,
 "HashMapValues[MClass, HashSet[MClass]]", /* class_name_string */
 6,
 0,
@@ -231,11 +1266,11 @@ const struct type type_hash_collection__HashMapValuesmodel__MClasshash_collectio
 {
 0, /* nullable Object */
 1, /* Object */
-1536, /* Collection[Set[MClass]] */
-1865, /* HashMapValues[MClass, Set[MClass]] */
-164, /* Collection[Object] */
-1866, /* Collection[HashSet[MClass]] */
-2384, /* HashMapValues[MClass, HashSet[MClass]] */
+1580, /* Collection[Set[MClass]] */
+1922, /* HashMapValues[MClass, Set[MClass]] */
+170, /* Collection[Object] */
+1923, /* Collection[HashSet[MClass]] */
+2449, /* HashMapValues[MClass, HashSet[MClass]] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapValuesmodel__MClasshash_collection__HashSetmodel__MClass = {
@@ -259,7 +1294,7 @@ NULL, /* empty */
 };
 /* runtime type HashMapValues[MClass, Set[MClass]] */
 const struct type type_hash_collection__HashMapValuesmodel__MClassabstract_collection__Setmodel__MClass = {
-1865,
+1922,
 "HashMapValues[MClass, Set[MClass]]", /* class_name_string */
 3,
 0,
@@ -268,9 +1303,9 @@ const struct type type_hash_collection__HashMapValuesmodel__MClassabstract_colle
 {
 0, /* nullable Object */
 1, /* Object */
-1536, /* Collection[Set[MClass]] */
-1865, /* HashMapValues[MClass, Set[MClass]] */
-164, /* Collection[Object] */
+1580, /* Collection[Set[MClass]] */
+1922, /* HashMapValues[MClass, Set[MClass]] */
+170, /* Collection[Object] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapValuesmodel__MClassabstract_collection__Setmodel__MClass = {
@@ -294,7 +1329,7 @@ NULL, /* empty */
 };
 /* runtime type Collection[HashSet[MClass]] */
 const struct type type_abstract_collection__Collectionhash_collection__HashSetmodel__MClass = {
-1866,
+1923,
 "Collection[HashSet[MClass]]", /* class_name_string */
 5,
 0,
@@ -303,15 +1338,15 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-1536, /* Collection[Set[MClass]] */
+1580, /* Collection[Set[MClass]] */
 -1, /* empty */
-164, /* Collection[Object] */
-1866, /* Collection[HashSet[MClass]] */
+170, /* Collection[Object] */
+1923, /* Collection[HashSet[MClass]] */
 },
 };
 /* runtime type NativeArray[nullable HashMapNode[MClass, HashSet[MClass]]] */
 const struct type type_array__NativeArraynullable_hash_collection__HashMapNodemodel__MClasshash_collection__HashSetmodel__MClass = {
-1607,
+1651,
 "NativeArray[nullable HashMapNode[MClass, HashSet[MClass]]]", /* class_name_string */
 3,
 0,
@@ -320,8 +1355,8 @@ const struct type type_array__NativeArraynullable_hash_collection__HashMapNodemo
 {
 0, /* nullable Object */
 1, /* Object */
-446, /* NativeArray[nullable HashMapNode[MClass, Set[MClass]]] */
-1607, /* NativeArray[nullable HashMapNode[MClass, HashSet[MClass]]] */
+470, /* NativeArray[nullable HashMapNode[MClass, Set[MClass]]] */
+1651, /* NativeArray[nullable HashMapNode[MClass, HashSet[MClass]]] */
 },
 };
 const struct types resolution_table_array__NativeArraynullable_hash_collection__HashMapNodemodel__MClasshash_collection__HashSetmodel__MClass = {
@@ -333,7 +1368,7 @@ const struct types resolution_table_array__NativeArraynullable_hash_collection__
 };
 /* runtime type NativeArray[nullable HashMapNode[MClass, Set[MClass]]] */
 const struct type type_array__NativeArraynullable_hash_collection__HashMapNodemodel__MClassabstract_collection__Setmodel__MClass = {
-446,
+470,
 "NativeArray[nullable HashMapNode[MClass, Set[MClass]]]", /* class_name_string */
 2,
 0,
@@ -342,7 +1377,7 @@ const struct type type_array__NativeArraynullable_hash_collection__HashMapNodemo
 {
 0, /* nullable Object */
 1, /* Object */
-446, /* NativeArray[nullable HashMapNode[MClass, Set[MClass]]] */
+470, /* NativeArray[nullable HashMapNode[MClass, Set[MClass]]] */
 },
 };
 const struct types resolution_table_array__NativeArraynullable_hash_collection__HashMapNodemodel__MClassabstract_collection__Setmodel__MClass = {
@@ -354,7 +1389,7 @@ const struct types resolution_table_array__NativeArraynullable_hash_collection__
 };
 /* runtime type HashMapNode[MClass, HashSet[MClass]] */
 const struct type type_hash_collection__HashMapNodemodel__MClasshash_collection__HashSetmodel__MClass = {
-2131,
+2196,
 "HashMapNode[MClass, HashSet[MClass]]", /* class_name_string */
 5,
 0,
@@ -363,10 +1398,10 @@ const struct type type_hash_collection__HashMapNodemodel__MClasshash_collection_
 {
 0, /* nullable Object */
 1, /* Object */
-145, /* nullable HashMapNode[MClass, Set[MClass]] */
-447, /* nullable HashMapNode[MClass, HashSet[MClass]] */
-1608, /* HashMapNode[MClass, Set[MClass]] */
-2131, /* HashMapNode[MClass, HashSet[MClass]] */
+150, /* nullable HashMapNode[MClass, Set[MClass]] */
+471, /* nullable HashMapNode[MClass, HashSet[MClass]] */
+1652, /* HashMapNode[MClass, Set[MClass]] */
+2196, /* HashMapNode[MClass, HashSet[MClass]] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapNodemodel__MClasshash_collection__HashSetmodel__MClass = {
@@ -380,7 +1415,7 @@ const struct types resolution_table_hash_collection__HashMapNodemodel__MClasshas
 };
 /* runtime type HashMapNode[MClass, Set[MClass]] */
 const struct type type_hash_collection__HashMapNodemodel__MClassabstract_collection__Setmodel__MClass = {
-1608,
+1652,
 "HashMapNode[MClass, Set[MClass]]", /* class_name_string */
 4,
 0,
@@ -389,9 +1424,9 @@ const struct type type_hash_collection__HashMapNodemodel__MClassabstract_collect
 {
 0, /* nullable Object */
 1, /* Object */
-145, /* nullable HashMapNode[MClass, Set[MClass]] */
+150, /* nullable HashMapNode[MClass, Set[MClass]] */
 -1, /* empty */
-1608, /* HashMapNode[MClass, Set[MClass]] */
+1652, /* HashMapNode[MClass, Set[MClass]] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapNodemodel__MClassabstract_collection__Setmodel__MClass = {
@@ -405,7 +1440,7 @@ const struct types resolution_table_hash_collection__HashMapNodemodel__MClassabs
 };
 /* runtime type nullable HashMapNode[MClass, HashSet[MClass]] */
 const struct type type_nullable_hash_collection__HashMapNodemodel__MClasshash_collection__HashSetmodel__MClass = {
-447,
+471,
 "nullable HashMapNode[MClass, HashSet[MClass]]", /* class_name_string */
 3,
 1,
@@ -414,8 +1449,8 @@ const struct type type_nullable_hash_collection__HashMapNodemodel__MClasshash_co
 {
 0, /* nullable Object */
 -1, /* empty */
-145, /* nullable HashMapNode[MClass, Set[MClass]] */
-447, /* nullable HashMapNode[MClass, HashSet[MClass]] */
+150, /* nullable HashMapNode[MClass, Set[MClass]] */
+471, /* nullable HashMapNode[MClass, HashSet[MClass]] */
 },
 };
 const struct types resolution_table_nullable_hash_collection__HashMapNodemodel__MClasshash_collection__HashSetmodel__MClass = {
@@ -429,7 +1464,7 @@ const struct types resolution_table_nullable_hash_collection__HashMapNodemodel__
 };
 /* runtime type nullable HashMapNode[MClass, Set[MClass]] */
 const struct type type_nullable_hash_collection__HashMapNodemodel__MClassabstract_collection__Setmodel__MClass = {
-145,
+150,
 "nullable HashMapNode[MClass, Set[MClass]]", /* class_name_string */
 2,
 1,
@@ -438,7 +1473,7 @@ const struct type type_nullable_hash_collection__HashMapNodemodel__MClassabstrac
 {
 0, /* nullable Object */
 -1, /* empty */
-145, /* nullable HashMapNode[MClass, Set[MClass]] */
+150, /* nullable HashMapNode[MClass, Set[MClass]] */
 },
 };
 const struct types resolution_table_nullable_hash_collection__HashMapNodemodel__MClassabstract_collection__Setmodel__MClass = {
@@ -452,7 +1487,7 @@ const struct types resolution_table_nullable_hash_collection__HashMapNodemodel__
 };
 /* runtime type HashMapIterator[MClass, HashSet[MClass]] */
 const struct type type_hash_collection__HashMapIteratormodel__MClasshash_collection__HashSetmodel__MClass = {
-2132,
+2197,
 "HashMapIterator[MClass, HashSet[MClass]]", /* class_name_string */
 5,
 0,
@@ -461,10 +1496,10 @@ const struct type type_hash_collection__HashMapIteratormodel__MClasshash_collect
 {
 0, /* nullable Object */
 1, /* Object */
-448, /* MapIterator[MClass, Set[MClass]] */
-1609, /* HashMapIterator[MClass, Set[MClass]] */
-1610, /* MapIterator[MClass, HashSet[MClass]] */
-2132, /* HashMapIterator[MClass, HashSet[MClass]] */
+472, /* MapIterator[MClass, Set[MClass]] */
+1653, /* HashMapIterator[MClass, Set[MClass]] */
+1654, /* MapIterator[MClass, HashSet[MClass]] */
+2197, /* HashMapIterator[MClass, HashSet[MClass]] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapIteratormodel__MClasshash_collection__HashSetmodel__MClass = {
@@ -475,7 +1510,7 @@ const struct types resolution_table_hash_collection__HashMapIteratormodel__MClas
 };
 /* runtime type HashMapIterator[MClass, Set[MClass]] */
 const struct type type_hash_collection__HashMapIteratormodel__MClassabstract_collection__Setmodel__MClass = {
-1609,
+1653,
 "HashMapIterator[MClass, Set[MClass]]", /* class_name_string */
 3,
 0,
@@ -484,8 +1519,8 @@ const struct type type_hash_collection__HashMapIteratormodel__MClassabstract_col
 {
 0, /* nullable Object */
 1, /* Object */
-448, /* MapIterator[MClass, Set[MClass]] */
-1609, /* HashMapIterator[MClass, Set[MClass]] */
+472, /* MapIterator[MClass, Set[MClass]] */
+1653, /* HashMapIterator[MClass, Set[MClass]] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapIteratormodel__MClassabstract_collection__Setmodel__MClass = {
@@ -496,7 +1531,7 @@ const struct types resolution_table_hash_collection__HashMapIteratormodel__MClas
 };
 /* runtime type MapIterator[MClass, HashSet[MClass]] */
 const struct type type_abstract_collection__MapIteratormodel__MClasshash_collection__HashSetmodel__MClass = {
-1610,
+1654,
 "MapIterator[MClass, HashSet[MClass]]", /* class_name_string */
 4,
 0,
@@ -505,14 +1540,14 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-448, /* MapIterator[MClass, Set[MClass]] */
+472, /* MapIterator[MClass, Set[MClass]] */
 -1, /* empty */
-1610, /* MapIterator[MClass, HashSet[MClass]] */
+1654, /* MapIterator[MClass, HashSet[MClass]] */
 },
 };
 /* runtime type MapIterator[MClass, Set[MClass]] */
 const struct type type_abstract_collection__MapIteratormodel__MClassabstract_collection__Setmodel__MClass = {
-448,
+472,
 "MapIterator[MClass, Set[MClass]]", /* class_name_string */
 2,
 0,
@@ -521,12 +1556,12 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-448, /* MapIterator[MClass, Set[MClass]] */
+472, /* MapIterator[MClass, Set[MClass]] */
 },
 };
 /* runtime type HashMapKeys[MClass, Map[MClass, Int]] */
 const struct type type_hash_collection__HashMapKeysmodel__MClassabstract_collection__Mapmodel__MClasskernel__Int = {
-2133,
+2198,
 "HashMapKeys[MClass, Map[MClass, Int]]", /* class_name_string */
 3,
 0,
@@ -535,10 +1570,10 @@ const struct type type_hash_collection__HashMapKeysmodel__MClassabstract_collect
 {
 0, /* nullable Object */
 1, /* Object */
-171, /* Collection[nullable MClass] */
-2133, /* HashMapKeys[MClass, Map[MClass, Int]] */
-164, /* Collection[Object] */
-1733, /* Collection[MClass] */
+178, /* Collection[nullable MClass] */
+2198, /* HashMapKeys[MClass, Map[MClass, Int]] */
+170, /* Collection[Object] */
+1787, /* Collection[MClass] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapKeysmodel__MClassabstract_collection__Mapmodel__MClasskernel__Int = {
@@ -562,7 +1597,7 @@ NULL, /* empty */
 };
 /* runtime type HashMapValues[MClass, Map[MClass, Int]] */
 const struct type type_hash_collection__HashMapValuesmodel__MClassabstract_collection__Mapmodel__MClasskernel__Int = {
-1867,
+1924,
 "HashMapValues[MClass, Map[MClass, Int]]", /* class_name_string */
 3,
 0,
@@ -571,9 +1606,9 @@ const struct type type_hash_collection__HashMapValuesmodel__MClassabstract_colle
 {
 0, /* nullable Object */
 1, /* Object */
-1611, /* Collection[Map[MClass, Int]] */
-1867, /* HashMapValues[MClass, Map[MClass, Int]] */
-164, /* Collection[Object] */
+1655, /* Collection[Map[MClass, Int]] */
+1924, /* HashMapValues[MClass, Map[MClass, Int]] */
+170, /* Collection[Object] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapValuesmodel__MClassabstract_collection__Mapmodel__MClasskernel__Int = {
@@ -597,7 +1632,7 @@ NULL, /* empty */
 };
 /* runtime type Collection[Map[MClass, Int]] */
 const struct type type_abstract_collection__Collectionabstract_collection__Mapmodel__MClasskernel__Int = {
-1611,
+1655,
 "Collection[Map[MClass, Int]]", /* class_name_string */
 2,
 0,
@@ -606,14 +1641,14 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-1611, /* Collection[Map[MClass, Int]] */
+1655, /* Collection[Map[MClass, Int]] */
 -1, /* empty */
-164, /* Collection[Object] */
+170, /* Collection[Object] */
 },
 };
 /* runtime type NativeArray[nullable HashMapNode[MClass, Map[MClass, Int]]] */
 const struct type type_array__NativeArraynullable_hash_collection__HashMapNodemodel__MClassabstract_collection__Mapmodel__MClasskernel__Int = {
-449,
+473,
 "NativeArray[nullable HashMapNode[MClass, Map[MClass, Int]]]", /* class_name_string */
 2,
 0,
@@ -622,7 +1657,7 @@ const struct type type_array__NativeArraynullable_hash_collection__HashMapNodemo
 {
 0, /* nullable Object */
 1, /* Object */
-449, /* NativeArray[nullable HashMapNode[MClass, Map[MClass, Int]]] */
+473, /* NativeArray[nullable HashMapNode[MClass, Map[MClass, Int]]] */
 },
 };
 const struct types resolution_table_array__NativeArraynullable_hash_collection__HashMapNodemodel__MClassabstract_collection__Mapmodel__MClasskernel__Int = {
@@ -634,7 +1669,7 @@ const struct types resolution_table_array__NativeArraynullable_hash_collection__
 };
 /* runtime type HashMapNode[MClass, Map[MClass, Int]] */
 const struct type type_hash_collection__HashMapNodemodel__MClassabstract_collection__Mapmodel__MClasskernel__Int = {
-1612,
+1656,
 "HashMapNode[MClass, Map[MClass, Int]]", /* class_name_string */
 3,
 0,
@@ -643,8 +1678,8 @@ const struct type type_hash_collection__HashMapNodemodel__MClassabstract_collect
 {
 0, /* nullable Object */
 1, /* Object */
-146, /* nullable HashMapNode[MClass, Map[MClass, Int]] */
-1612, /* HashMapNode[MClass, Map[MClass, Int]] */
+151, /* nullable HashMapNode[MClass, Map[MClass, Int]] */
+1656, /* HashMapNode[MClass, Map[MClass, Int]] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapNodemodel__MClassabstract_collection__Mapmodel__MClasskernel__Int = {
@@ -658,7 +1693,7 @@ const struct types resolution_table_hash_collection__HashMapNodemodel__MClassabs
 };
 /* runtime type nullable HashMapNode[MClass, Map[MClass, Int]] */
 const struct type type_nullable_hash_collection__HashMapNodemodel__MClassabstract_collection__Mapmodel__MClasskernel__Int = {
-146,
+151,
 "nullable HashMapNode[MClass, Map[MClass, Int]]", /* class_name_string */
 2,
 1,
@@ -667,7 +1702,7 @@ const struct type type_nullable_hash_collection__HashMapNodemodel__MClassabstrac
 {
 0, /* nullable Object */
 -1, /* empty */
-146, /* nullable HashMapNode[MClass, Map[MClass, Int]] */
+151, /* nullable HashMapNode[MClass, Map[MClass, Int]] */
 },
 };
 const struct types resolution_table_nullable_hash_collection__HashMapNodemodel__MClassabstract_collection__Mapmodel__MClasskernel__Int = {
@@ -681,7 +1716,7 @@ const struct types resolution_table_nullable_hash_collection__HashMapNodemodel__
 };
 /* runtime type HashMapIterator[MClass, Map[MClass, Int]] */
 const struct type type_hash_collection__HashMapIteratormodel__MClassabstract_collection__Mapmodel__MClasskernel__Int = {
-1613,
+1657,
 "HashMapIterator[MClass, Map[MClass, Int]]", /* class_name_string */
 3,
 0,
@@ -690,8 +1725,8 @@ const struct type type_hash_collection__HashMapIteratormodel__MClassabstract_col
 {
 0, /* nullable Object */
 1, /* Object */
-450, /* MapIterator[MClass, Map[MClass, Int]] */
-1613, /* HashMapIterator[MClass, Map[MClass, Int]] */
+474, /* MapIterator[MClass, Map[MClass, Int]] */
+1657, /* HashMapIterator[MClass, Map[MClass, Int]] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapIteratormodel__MClassabstract_collection__Mapmodel__MClasskernel__Int = {
@@ -702,7 +1737,7 @@ const struct types resolution_table_hash_collection__HashMapIteratormodel__MClas
 };
 /* runtime type MapIterator[MClass, Map[MClass, Int]] */
 const struct type type_abstract_collection__MapIteratormodel__MClassabstract_collection__Mapmodel__MClasskernel__Int = {
-450,
+474,
 "MapIterator[MClass, Map[MClass, Int]]", /* class_name_string */
 2,
 0,
@@ -711,12 +1746,12 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-450, /* MapIterator[MClass, Map[MClass, Int]] */
+474, /* MapIterator[MClass, Map[MClass, Int]] */
 },
 };
 /* runtime type MapKeysIterator[MClass, Set[MVirtualTypeProp]] */
 const struct type type_abstract_collection__MapKeysIteratormodel__MClassabstract_collection__Setmodel__MVirtualTypeProp = {
-1868,
+1925,
 "MapKeysIterator[MClass, Set[MVirtualTypeProp]]", /* class_name_string */
 4,
 0,
@@ -725,9 +1760,9 @@ const struct type type_abstract_collection__MapKeysIteratormodel__MClassabstract
 {
 0, /* nullable Object */
 1, /* Object */
-423, /* MapKeysIterator[MClass, Set[PropertyLayoutElement]] */
-1598, /* MapKeysIterator[MClass, Set[MProperty]] */
-1868, /* MapKeysIterator[MClass, Set[MVirtualTypeProp]] */
+448, /* MapKeysIterator[MClass, Set[PropertyLayoutElement]] */
+1642, /* MapKeysIterator[MClass, Set[MProperty]] */
+1925, /* MapKeysIterator[MClass, Set[MVirtualTypeProp]] */
 },
 };
 const struct types resolution_table_abstract_collection__MapKeysIteratormodel__MClassabstract_collection__Setmodel__MVirtualTypeProp = {
@@ -739,7 +1774,7 @@ const struct types resolution_table_abstract_collection__MapKeysIteratormodel__M
 };
 /* runtime type MapValuesIterator[MClass, Set[MVirtualTypeProp]] */
 const struct type type_abstract_collection__MapValuesIteratormodel__MClassabstract_collection__Setmodel__MVirtualTypeProp = {
-1869,
+1926,
 "MapValuesIterator[MClass, Set[MVirtualTypeProp]]", /* class_name_string */
 4,
 0,
@@ -748,9 +1783,9 @@ const struct type type_abstract_collection__MapValuesIteratormodel__MClassabstra
 {
 0, /* nullable Object */
 1, /* Object */
-424, /* MapValuesIterator[MClass, Set[PropertyLayoutElement]] */
-1599, /* MapValuesIterator[MClass, Set[MProperty]] */
-1869, /* MapValuesIterator[MClass, Set[MVirtualTypeProp]] */
+449, /* MapValuesIterator[MClass, Set[PropertyLayoutElement]] */
+1643, /* MapValuesIterator[MClass, Set[MProperty]] */
+1926, /* MapValuesIterator[MClass, Set[MVirtualTypeProp]] */
 },
 };
 const struct types resolution_table_abstract_collection__MapValuesIteratormodel__MClassabstract_collection__Setmodel__MVirtualTypeProp = {
@@ -762,7 +1797,7 @@ const struct types resolution_table_abstract_collection__MapValuesIteratormodel_
 };
 /* runtime type Array[MVirtualTypeProp] */
 const struct type type_array__Arraymodel__MVirtualTypeProp = {
-2639,
+2718,
 "Array[MVirtualTypeProp]", /* class_name_string */
 17,
 0,
@@ -771,22 +1806,22 @@ const struct type type_array__Arraymodel__MVirtualTypeProp = {
 {
 0, /* nullable Object */
 1, /* Object */
-172, /* Collection[nullable MProperty] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-590, /* Collection[PropertyLayoutElement] */
-1728, /* AbstractArrayRead[Object] */
-1735, /* AbstractArrayRead[nullable MProperty] */
-1913, /* Array[nullable MProperty] */
-1911, /* Array[Object] */
-1914, /* Collection[MProperty] */
-2194, /* AbstractArrayRead[PropertyLayoutElement] */
-2209, /* Collection[MVirtualTypeProp] */
-2481, /* Array[PropertyLayoutElement] */
-2552, /* AbstractArrayRead[MProperty] */
-2603, /* AbstractArrayRead[MVirtualTypeProp] */
-2607, /* Array[MProperty] */
-2639, /* Array[MVirtualTypeProp] */
+179, /* Collection[nullable MProperty] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
+626, /* Collection[PropertyLayoutElement] */
+1782, /* AbstractArrayRead[Object] */
+1789, /* AbstractArrayRead[nullable MProperty] */
+1975, /* Array[nullable MProperty] */
+1973, /* Array[Object] */
+1976, /* Collection[MProperty] */
+2264, /* AbstractArrayRead[PropertyLayoutElement] */
+2277, /* Collection[MVirtualTypeProp] */
+2553, /* Array[PropertyLayoutElement] */
+2630, /* AbstractArrayRead[MProperty] */
+2682, /* AbstractArrayRead[MVirtualTypeProp] */
+2686, /* Array[MProperty] */
+2718, /* Array[MVirtualTypeProp] */
 },
 };
 const struct types resolution_table_array__Arraymodel__MVirtualTypeProp = {
@@ -815,7 +1850,7 @@ NULL, /* empty (AbstractArray[AbstractArrayRead#0]: AbstractArray[MVirtualTypePr
 };
 /* runtime type AbstractArrayRead[MVirtualTypeProp] */
 const struct type type_array__AbstractArrayReadmodel__MVirtualTypeProp = {
-2603,
+2682,
 "AbstractArrayRead[MVirtualTypeProp]", /* class_name_string */
 15,
 0,
@@ -824,25 +1859,25 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-172, /* Collection[nullable MProperty] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-590, /* Collection[PropertyLayoutElement] */
-1728, /* AbstractArrayRead[Object] */
-1735, /* AbstractArrayRead[nullable MProperty] */
+179, /* Collection[nullable MProperty] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
+626, /* Collection[PropertyLayoutElement] */
+1782, /* AbstractArrayRead[Object] */
+1789, /* AbstractArrayRead[nullable MProperty] */
 -1, /* empty */
 -1, /* empty */
-1914, /* Collection[MProperty] */
-2194, /* AbstractArrayRead[PropertyLayoutElement] */
-2209, /* Collection[MVirtualTypeProp] */
+1976, /* Collection[MProperty] */
+2264, /* AbstractArrayRead[PropertyLayoutElement] */
+2277, /* Collection[MVirtualTypeProp] */
 -1, /* empty */
-2552, /* AbstractArrayRead[MProperty] */
-2603, /* AbstractArrayRead[MVirtualTypeProp] */
+2630, /* AbstractArrayRead[MProperty] */
+2682, /* AbstractArrayRead[MVirtualTypeProp] */
 },
 };
 /* runtime type HashMapKeys[MVirtualTypeProp, Int] */
 const struct type type_hash_collection__HashMapKeysmodel__MVirtualTypePropkernel__Int = {
-2512,
+2585,
 "HashMapKeys[MVirtualTypeProp, Int]", /* class_name_string */
 6,
 0,
@@ -851,17 +1886,17 @@ const struct type type_hash_collection__HashMapKeysmodel__MVirtualTypePropkernel
 {
 0, /* nullable Object */
 1, /* Object */
-172, /* Collection[nullable MProperty] */
-1870, /* HashMapKeys[PropertyLayoutElement, Int] */
-164, /* Collection[Object] */
-590, /* Collection[PropertyLayoutElement] */
-2512, /* HashMapKeys[MVirtualTypeProp, Int] */
+179, /* Collection[nullable MProperty] */
+1927, /* HashMapKeys[PropertyLayoutElement, Int] */
+170, /* Collection[Object] */
+626, /* Collection[PropertyLayoutElement] */
+2585, /* HashMapKeys[MVirtualTypeProp, Int] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-1914, /* Collection[MProperty] */
+1976, /* Collection[MProperty] */
 -1, /* empty */
-2209, /* Collection[MVirtualTypeProp] */
+2277, /* Collection[MVirtualTypeProp] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapKeysmodel__MVirtualTypePropkernel__Int = {
@@ -885,7 +1920,7 @@ NULL, /* empty */
 };
 /* runtime type HashMapKeys[PropertyLayoutElement, Int] */
 const struct type type_hash_collection__HashMapKeyslayout_builders__PropertyLayoutElementkernel__Int = {
-1870,
+1927,
 "HashMapKeys[PropertyLayoutElement, Int]", /* class_name_string */
 3,
 0,
@@ -895,9 +1930,9 @@ const struct type type_hash_collection__HashMapKeyslayout_builders__PropertyLayo
 0, /* nullable Object */
 1, /* Object */
 -1, /* empty */
-1870, /* HashMapKeys[PropertyLayoutElement, Int] */
-164, /* Collection[Object] */
-590, /* Collection[PropertyLayoutElement] */
+1927, /* HashMapKeys[PropertyLayoutElement, Int] */
+170, /* Collection[Object] */
+626, /* Collection[PropertyLayoutElement] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapKeyslayout_builders__PropertyLayoutElementkernel__Int = {
@@ -921,7 +1956,7 @@ NULL, /* empty */
 };
 /* runtime type HashMapValues[MVirtualTypeProp, Int] */
 const struct type type_hash_collection__HashMapValuesmodel__MVirtualTypePropkernel__Int = {
-2134,
+2199,
 "HashMapValues[MVirtualTypeProp, Int]", /* class_name_string */
 5,
 0,
@@ -930,10 +1965,10 @@ const struct type type_hash_collection__HashMapValuesmodel__MVirtualTypePropkern
 {
 0, /* nullable Object */
 1, /* Object */
-612, /* Collection[Int] */
-1871, /* HashMapValues[PropertyLayoutElement, Int] */
-164, /* Collection[Object] */
-2134, /* HashMapValues[MVirtualTypeProp, Int] */
+653, /* Collection[Int] */
+1928, /* HashMapValues[PropertyLayoutElement, Int] */
+170, /* Collection[Object] */
+2199, /* HashMapValues[MVirtualTypeProp, Int] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapValuesmodel__MVirtualTypePropkernel__Int = {
@@ -957,7 +1992,7 @@ NULL, /* empty */
 };
 /* runtime type HashMapValues[PropertyLayoutElement, Int] */
 const struct type type_hash_collection__HashMapValueslayout_builders__PropertyLayoutElementkernel__Int = {
-1871,
+1928,
 "HashMapValues[PropertyLayoutElement, Int]", /* class_name_string */
 3,
 0,
@@ -966,9 +2001,9 @@ const struct type type_hash_collection__HashMapValueslayout_builders__PropertyLa
 {
 0, /* nullable Object */
 1, /* Object */
-612, /* Collection[Int] */
-1871, /* HashMapValues[PropertyLayoutElement, Int] */
-164, /* Collection[Object] */
+653, /* Collection[Int] */
+1928, /* HashMapValues[PropertyLayoutElement, Int] */
+170, /* Collection[Object] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapValueslayout_builders__PropertyLayoutElementkernel__Int = {
@@ -992,7 +2027,7 @@ NULL, /* empty */
 };
 /* runtime type NativeArray[nullable HashMapNode[MVirtualTypeProp, Int]] */
 const struct type type_array__NativeArraynullable_hash_collection__HashMapNodemodel__MVirtualTypePropkernel__Int = {
-1614,
+1658,
 "NativeArray[nullable HashMapNode[MVirtualTypeProp, Int]]", /* class_name_string */
 3,
 0,
@@ -1001,8 +2036,8 @@ const struct type type_array__NativeArraynullable_hash_collection__HashMapNodemo
 {
 0, /* nullable Object */
 1, /* Object */
-451, /* NativeArray[nullable HashMapNode[PropertyLayoutElement, Int]] */
-1614, /* NativeArray[nullable HashMapNode[MVirtualTypeProp, Int]] */
+475, /* NativeArray[nullable HashMapNode[PropertyLayoutElement, Int]] */
+1658, /* NativeArray[nullable HashMapNode[MVirtualTypeProp, Int]] */
 },
 };
 const struct types resolution_table_array__NativeArraynullable_hash_collection__HashMapNodemodel__MVirtualTypePropkernel__Int = {
@@ -1014,7 +2049,7 @@ const struct types resolution_table_array__NativeArraynullable_hash_collection__
 };
 /* runtime type NativeArray[nullable HashMapNode[PropertyLayoutElement, Int]] */
 const struct type type_array__NativeArraynullable_hash_collection__HashMapNodelayout_builders__PropertyLayoutElementkernel__Int = {
-451,
+475,
 "NativeArray[nullable HashMapNode[PropertyLayoutElement, Int]]", /* class_name_string */
 2,
 0,
@@ -1023,7 +2058,7 @@ const struct type type_array__NativeArraynullable_hash_collection__HashMapNodela
 {
 0, /* nullable Object */
 1, /* Object */
-451, /* NativeArray[nullable HashMapNode[PropertyLayoutElement, Int]] */
+475, /* NativeArray[nullable HashMapNode[PropertyLayoutElement, Int]] */
 },
 };
 const struct types resolution_table_array__NativeArraynullable_hash_collection__HashMapNodelayout_builders__PropertyLayoutElementkernel__Int = {
@@ -1035,7 +2070,7 @@ const struct types resolution_table_array__NativeArraynullable_hash_collection__
 };
 /* runtime type HashMapNode[MVirtualTypeProp, Int] */
 const struct type type_hash_collection__HashMapNodemodel__MVirtualTypePropkernel__Int = {
-2135,
+2200,
 "HashMapNode[MVirtualTypeProp, Int]", /* class_name_string */
 5,
 0,
@@ -1044,10 +2079,10 @@ const struct type type_hash_collection__HashMapNodemodel__MVirtualTypePropkernel
 {
 0, /* nullable Object */
 1, /* Object */
-147, /* nullable HashMapNode[PropertyLayoutElement, Int] */
-452, /* nullable HashMapNode[MVirtualTypeProp, Int] */
-1615, /* HashMapNode[PropertyLayoutElement, Int] */
-2135, /* HashMapNode[MVirtualTypeProp, Int] */
+152, /* nullable HashMapNode[PropertyLayoutElement, Int] */
+476, /* nullable HashMapNode[MVirtualTypeProp, Int] */
+1659, /* HashMapNode[PropertyLayoutElement, Int] */
+2200, /* HashMapNode[MVirtualTypeProp, Int] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapNodemodel__MVirtualTypePropkernel__Int = {
@@ -1061,7 +2096,7 @@ const struct types resolution_table_hash_collection__HashMapNodemodel__MVirtualT
 };
 /* runtime type HashMapNode[PropertyLayoutElement, Int] */
 const struct type type_hash_collection__HashMapNodelayout_builders__PropertyLayoutElementkernel__Int = {
-1615,
+1659,
 "HashMapNode[PropertyLayoutElement, Int]", /* class_name_string */
 4,
 0,
@@ -1070,9 +2105,9 @@ const struct type type_hash_collection__HashMapNodelayout_builders__PropertyLayo
 {
 0, /* nullable Object */
 1, /* Object */
-147, /* nullable HashMapNode[PropertyLayoutElement, Int] */
+152, /* nullable HashMapNode[PropertyLayoutElement, Int] */
 -1, /* empty */
-1615, /* HashMapNode[PropertyLayoutElement, Int] */
+1659, /* HashMapNode[PropertyLayoutElement, Int] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapNodelayout_builders__PropertyLayoutElementkernel__Int = {
@@ -1086,7 +2121,7 @@ const struct types resolution_table_hash_collection__HashMapNodelayout_builders_
 };
 /* runtime type nullable HashMapNode[MVirtualTypeProp, Int] */
 const struct type type_nullable_hash_collection__HashMapNodemodel__MVirtualTypePropkernel__Int = {
-452,
+476,
 "nullable HashMapNode[MVirtualTypeProp, Int]", /* class_name_string */
 3,
 1,
@@ -1095,8 +2130,8 @@ const struct type type_nullable_hash_collection__HashMapNodemodel__MVirtualTypeP
 {
 0, /* nullable Object */
 -1, /* empty */
-147, /* nullable HashMapNode[PropertyLayoutElement, Int] */
-452, /* nullable HashMapNode[MVirtualTypeProp, Int] */
+152, /* nullable HashMapNode[PropertyLayoutElement, Int] */
+476, /* nullable HashMapNode[MVirtualTypeProp, Int] */
 },
 };
 const struct types resolution_table_nullable_hash_collection__HashMapNodemodel__MVirtualTypePropkernel__Int = {
@@ -1110,7 +2145,7 @@ const struct types resolution_table_nullable_hash_collection__HashMapNodemodel__
 };
 /* runtime type nullable HashMapNode[PropertyLayoutElement, Int] */
 const struct type type_nullable_hash_collection__HashMapNodelayout_builders__PropertyLayoutElementkernel__Int = {
-147,
+152,
 "nullable HashMapNode[PropertyLayoutElement, Int]", /* class_name_string */
 2,
 1,
@@ -1119,7 +2154,7 @@ const struct type type_nullable_hash_collection__HashMapNodelayout_builders__Pro
 {
 0, /* nullable Object */
 -1, /* empty */
-147, /* nullable HashMapNode[PropertyLayoutElement, Int] */
+152, /* nullable HashMapNode[PropertyLayoutElement, Int] */
 },
 };
 const struct types resolution_table_nullable_hash_collection__HashMapNodelayout_builders__PropertyLayoutElementkernel__Int = {
@@ -1133,7 +2168,7 @@ const struct types resolution_table_nullable_hash_collection__HashMapNodelayout_
 };
 /* runtime type HashMapIterator[MVirtualTypeProp, Int] */
 const struct type type_hash_collection__HashMapIteratormodel__MVirtualTypePropkernel__Int = {
-2136,
+2201,
 "HashMapIterator[MVirtualTypeProp, Int]", /* class_name_string */
 5,
 0,
@@ -1142,10 +2177,10 @@ const struct type type_hash_collection__HashMapIteratormodel__MVirtualTypePropke
 {
 0, /* nullable Object */
 1, /* Object */
-453, /* MapIterator[PropertyLayoutElement, Int] */
-1616, /* HashMapIterator[PropertyLayoutElement, Int] */
-1617, /* MapIterator[MVirtualTypeProp, Int] */
-2136, /* HashMapIterator[MVirtualTypeProp, Int] */
+477, /* MapIterator[PropertyLayoutElement, Int] */
+1660, /* HashMapIterator[PropertyLayoutElement, Int] */
+1661, /* MapIterator[MVirtualTypeProp, Int] */
+2201, /* HashMapIterator[MVirtualTypeProp, Int] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapIteratormodel__MVirtualTypePropkernel__Int = {
@@ -1156,7 +2191,7 @@ const struct types resolution_table_hash_collection__HashMapIteratormodel__MVirt
 };
 /* runtime type HashMapIterator[PropertyLayoutElement, Int] */
 const struct type type_hash_collection__HashMapIteratorlayout_builders__PropertyLayoutElementkernel__Int = {
-1616,
+1660,
 "HashMapIterator[PropertyLayoutElement, Int]", /* class_name_string */
 3,
 0,
@@ -1165,8 +2200,8 @@ const struct type type_hash_collection__HashMapIteratorlayout_builders__Property
 {
 0, /* nullable Object */
 1, /* Object */
-453, /* MapIterator[PropertyLayoutElement, Int] */
-1616, /* HashMapIterator[PropertyLayoutElement, Int] */
+477, /* MapIterator[PropertyLayoutElement, Int] */
+1660, /* HashMapIterator[PropertyLayoutElement, Int] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapIteratorlayout_builders__PropertyLayoutElementkernel__Int = {
@@ -1177,7 +2212,7 @@ const struct types resolution_table_hash_collection__HashMapIteratorlayout_build
 };
 /* runtime type MapIterator[MVirtualTypeProp, Int] */
 const struct type type_abstract_collection__MapIteratormodel__MVirtualTypePropkernel__Int = {
-1617,
+1661,
 "MapIterator[MVirtualTypeProp, Int]", /* class_name_string */
 4,
 0,
@@ -1186,14 +2221,14 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-453, /* MapIterator[PropertyLayoutElement, Int] */
+477, /* MapIterator[PropertyLayoutElement, Int] */
 -1, /* empty */
-1617, /* MapIterator[MVirtualTypeProp, Int] */
+1661, /* MapIterator[MVirtualTypeProp, Int] */
 },
 };
 /* runtime type MapIterator[PropertyLayoutElement, Int] */
 const struct type type_abstract_collection__MapIteratorlayout_builders__PropertyLayoutElementkernel__Int = {
-453,
+477,
 "MapIterator[PropertyLayoutElement, Int]", /* class_name_string */
 2,
 0,
@@ -1202,12 +2237,12 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-453, /* MapIterator[PropertyLayoutElement, Int] */
+477, /* MapIterator[PropertyLayoutElement, Int] */
 },
 };
 /* runtime type HashMapKeys[MAttribute, Int] */
 const struct type type_hash_collection__HashMapKeysmodel__MAttributekernel__Int = {
-2513,
+2586,
 "HashMapKeys[MAttribute, Int]", /* class_name_string */
 6,
 0,
@@ -1216,17 +2251,17 @@ const struct type type_hash_collection__HashMapKeysmodel__MAttributekernel__Int 
 {
 0, /* nullable Object */
 1, /* Object */
-172, /* Collection[nullable MProperty] */
-1870, /* HashMapKeys[PropertyLayoutElement, Int] */
-164, /* Collection[Object] */
-590, /* Collection[PropertyLayoutElement] */
-2513, /* HashMapKeys[MAttribute, Int] */
+179, /* Collection[nullable MProperty] */
+1927, /* HashMapKeys[PropertyLayoutElement, Int] */
+170, /* Collection[Object] */
+626, /* Collection[PropertyLayoutElement] */
+2586, /* HashMapKeys[MAttribute, Int] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-1914, /* Collection[MProperty] */
+1976, /* Collection[MProperty] */
 -1, /* empty */
-2213, /* Collection[MAttribute] */
+2281, /* Collection[MAttribute] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapKeysmodel__MAttributekernel__Int = {
@@ -1250,7 +2285,7 @@ NULL, /* empty */
 };
 /* runtime type HashMapValues[MAttribute, Int] */
 const struct type type_hash_collection__HashMapValuesmodel__MAttributekernel__Int = {
-2137,
+2202,
 "HashMapValues[MAttribute, Int]", /* class_name_string */
 5,
 0,
@@ -1259,10 +2294,10 @@ const struct type type_hash_collection__HashMapValuesmodel__MAttributekernel__In
 {
 0, /* nullable Object */
 1, /* Object */
-612, /* Collection[Int] */
-1871, /* HashMapValues[PropertyLayoutElement, Int] */
-164, /* Collection[Object] */
-2137, /* HashMapValues[MAttribute, Int] */
+653, /* Collection[Int] */
+1928, /* HashMapValues[PropertyLayoutElement, Int] */
+170, /* Collection[Object] */
+2202, /* HashMapValues[MAttribute, Int] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapValuesmodel__MAttributekernel__Int = {
@@ -1286,7 +2321,7 @@ NULL, /* empty */
 };
 /* runtime type NativeArray[nullable HashMapNode[MAttribute, Int]] */
 const struct type type_array__NativeArraynullable_hash_collection__HashMapNodemodel__MAttributekernel__Int = {
-1618,
+1662,
 "NativeArray[nullable HashMapNode[MAttribute, Int]]", /* class_name_string */
 3,
 0,
@@ -1295,8 +2330,8 @@ const struct type type_array__NativeArraynullable_hash_collection__HashMapNodemo
 {
 0, /* nullable Object */
 1, /* Object */
-451, /* NativeArray[nullable HashMapNode[PropertyLayoutElement, Int]] */
-1618, /* NativeArray[nullable HashMapNode[MAttribute, Int]] */
+475, /* NativeArray[nullable HashMapNode[PropertyLayoutElement, Int]] */
+1662, /* NativeArray[nullable HashMapNode[MAttribute, Int]] */
 },
 };
 const struct types resolution_table_array__NativeArraynullable_hash_collection__HashMapNodemodel__MAttributekernel__Int = {
@@ -1308,7 +2343,7 @@ const struct types resolution_table_array__NativeArraynullable_hash_collection__
 };
 /* runtime type HashMapNode[MAttribute, Int] */
 const struct type type_hash_collection__HashMapNodemodel__MAttributekernel__Int = {
-2138,
+2203,
 "HashMapNode[MAttribute, Int]", /* class_name_string */
 5,
 0,
@@ -1317,10 +2352,10 @@ const struct type type_hash_collection__HashMapNodemodel__MAttributekernel__Int 
 {
 0, /* nullable Object */
 1, /* Object */
-147, /* nullable HashMapNode[PropertyLayoutElement, Int] */
-454, /* nullable HashMapNode[MAttribute, Int] */
-1615, /* HashMapNode[PropertyLayoutElement, Int] */
-2138, /* HashMapNode[MAttribute, Int] */
+152, /* nullable HashMapNode[PropertyLayoutElement, Int] */
+478, /* nullable HashMapNode[MAttribute, Int] */
+1659, /* HashMapNode[PropertyLayoutElement, Int] */
+2203, /* HashMapNode[MAttribute, Int] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapNodemodel__MAttributekernel__Int = {
@@ -1334,7 +2369,7 @@ const struct types resolution_table_hash_collection__HashMapNodemodel__MAttribut
 };
 /* runtime type nullable HashMapNode[MAttribute, Int] */
 const struct type type_nullable_hash_collection__HashMapNodemodel__MAttributekernel__Int = {
-454,
+478,
 "nullable HashMapNode[MAttribute, Int]", /* class_name_string */
 3,
 1,
@@ -1343,8 +2378,8 @@ const struct type type_nullable_hash_collection__HashMapNodemodel__MAttributeker
 {
 0, /* nullable Object */
 -1, /* empty */
-147, /* nullable HashMapNode[PropertyLayoutElement, Int] */
-454, /* nullable HashMapNode[MAttribute, Int] */
+152, /* nullable HashMapNode[PropertyLayoutElement, Int] */
+478, /* nullable HashMapNode[MAttribute, Int] */
 },
 };
 const struct types resolution_table_nullable_hash_collection__HashMapNodemodel__MAttributekernel__Int = {
@@ -1358,7 +2393,7 @@ const struct types resolution_table_nullable_hash_collection__HashMapNodemodel__
 };
 /* runtime type HashMapIterator[MAttribute, Int] */
 const struct type type_hash_collection__HashMapIteratormodel__MAttributekernel__Int = {
-2139,
+2204,
 "HashMapIterator[MAttribute, Int]", /* class_name_string */
 5,
 0,
@@ -1367,10 +2402,10 @@ const struct type type_hash_collection__HashMapIteratormodel__MAttributekernel__
 {
 0, /* nullable Object */
 1, /* Object */
-453, /* MapIterator[PropertyLayoutElement, Int] */
-1616, /* HashMapIterator[PropertyLayoutElement, Int] */
-1619, /* MapIterator[MAttribute, Int] */
-2139, /* HashMapIterator[MAttribute, Int] */
+477, /* MapIterator[PropertyLayoutElement, Int] */
+1660, /* HashMapIterator[PropertyLayoutElement, Int] */
+1663, /* MapIterator[MAttribute, Int] */
+2204, /* HashMapIterator[MAttribute, Int] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapIteratormodel__MAttributekernel__Int = {
@@ -1381,7 +2416,7 @@ const struct types resolution_table_hash_collection__HashMapIteratormodel__MAttr
 };
 /* runtime type MapIterator[MAttribute, Int] */
 const struct type type_abstract_collection__MapIteratormodel__MAttributekernel__Int = {
-1619,
+1663,
 "MapIterator[MAttribute, Int]", /* class_name_string */
 4,
 0,
@@ -1390,14 +2425,14 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-453, /* MapIterator[PropertyLayoutElement, Int] */
+477, /* MapIterator[PropertyLayoutElement, Int] */
 -1, /* empty */
-1619, /* MapIterator[MAttribute, Int] */
+1663, /* MapIterator[MAttribute, Int] */
 },
 };
 /* runtime type MapKeysIterator[MClass, Set[MAttribute]] */
 const struct type type_abstract_collection__MapKeysIteratormodel__MClassabstract_collection__Setmodel__MAttribute = {
-1872,
+1929,
 "MapKeysIterator[MClass, Set[MAttribute]]", /* class_name_string */
 4,
 0,
@@ -1406,9 +2441,9 @@ const struct type type_abstract_collection__MapKeysIteratormodel__MClassabstract
 {
 0, /* nullable Object */
 1, /* Object */
-423, /* MapKeysIterator[MClass, Set[PropertyLayoutElement]] */
-1598, /* MapKeysIterator[MClass, Set[MProperty]] */
-1872, /* MapKeysIterator[MClass, Set[MAttribute]] */
+448, /* MapKeysIterator[MClass, Set[PropertyLayoutElement]] */
+1642, /* MapKeysIterator[MClass, Set[MProperty]] */
+1929, /* MapKeysIterator[MClass, Set[MAttribute]] */
 },
 };
 const struct types resolution_table_abstract_collection__MapKeysIteratormodel__MClassabstract_collection__Setmodel__MAttribute = {
@@ -1420,7 +2455,7 @@ const struct types resolution_table_abstract_collection__MapKeysIteratormodel__M
 };
 /* runtime type MapValuesIterator[MClass, Set[MAttribute]] */
 const struct type type_abstract_collection__MapValuesIteratormodel__MClassabstract_collection__Setmodel__MAttribute = {
-1873,
+1930,
 "MapValuesIterator[MClass, Set[MAttribute]]", /* class_name_string */
 4,
 0,
@@ -1429,9 +2464,9 @@ const struct type type_abstract_collection__MapValuesIteratormodel__MClassabstra
 {
 0, /* nullable Object */
 1, /* Object */
-424, /* MapValuesIterator[MClass, Set[PropertyLayoutElement]] */
-1599, /* MapValuesIterator[MClass, Set[MProperty]] */
-1873, /* MapValuesIterator[MClass, Set[MAttribute]] */
+449, /* MapValuesIterator[MClass, Set[PropertyLayoutElement]] */
+1643, /* MapValuesIterator[MClass, Set[MProperty]] */
+1930, /* MapValuesIterator[MClass, Set[MAttribute]] */
 },
 };
 const struct types resolution_table_abstract_collection__MapValuesIteratormodel__MClassabstract_collection__Setmodel__MAttribute = {
@@ -1443,7 +2478,7 @@ const struct types resolution_table_abstract_collection__MapValuesIteratormodel_
 };
 /* runtime type Array[MAttribute] */
 const struct type type_array__Arraymodel__MAttribute = {
-2640,
+2719,
 "Array[MAttribute]", /* class_name_string */
 17,
 0,
@@ -1452,22 +2487,22 @@ const struct type type_array__Arraymodel__MAttribute = {
 {
 0, /* nullable Object */
 1, /* Object */
-172, /* Collection[nullable MProperty] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-590, /* Collection[PropertyLayoutElement] */
-1728, /* AbstractArrayRead[Object] */
-1735, /* AbstractArrayRead[nullable MProperty] */
-1913, /* Array[nullable MProperty] */
-1911, /* Array[Object] */
-1914, /* Collection[MProperty] */
-2194, /* AbstractArrayRead[PropertyLayoutElement] */
-2213, /* Collection[MAttribute] */
-2481, /* Array[PropertyLayoutElement] */
-2552, /* AbstractArrayRead[MProperty] */
-2604, /* AbstractArrayRead[MAttribute] */
-2607, /* Array[MProperty] */
-2640, /* Array[MAttribute] */
+179, /* Collection[nullable MProperty] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
+626, /* Collection[PropertyLayoutElement] */
+1782, /* AbstractArrayRead[Object] */
+1789, /* AbstractArrayRead[nullable MProperty] */
+1975, /* Array[nullable MProperty] */
+1973, /* Array[Object] */
+1976, /* Collection[MProperty] */
+2264, /* AbstractArrayRead[PropertyLayoutElement] */
+2281, /* Collection[MAttribute] */
+2553, /* Array[PropertyLayoutElement] */
+2630, /* AbstractArrayRead[MProperty] */
+2683, /* AbstractArrayRead[MAttribute] */
+2686, /* Array[MProperty] */
+2719, /* Array[MAttribute] */
 },
 };
 const struct types resolution_table_array__Arraymodel__MAttribute = {
@@ -1496,7 +2531,7 @@ NULL, /* empty (AbstractArray[AbstractArrayRead#0]: AbstractArray[MAttribute] no
 };
 /* runtime type AbstractArrayRead[MAttribute] */
 const struct type type_array__AbstractArrayReadmodel__MAttribute = {
-2604,
+2683,
 "AbstractArrayRead[MAttribute]", /* class_name_string */
 15,
 0,
@@ -1505,25 +2540,46 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-172, /* Collection[nullable MProperty] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-590, /* Collection[PropertyLayoutElement] */
-1728, /* AbstractArrayRead[Object] */
-1735, /* AbstractArrayRead[nullable MProperty] */
+179, /* Collection[nullable MProperty] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
+626, /* Collection[PropertyLayoutElement] */
+1782, /* AbstractArrayRead[Object] */
+1789, /* AbstractArrayRead[nullable MProperty] */
 -1, /* empty */
 -1, /* empty */
-1914, /* Collection[MProperty] */
-2194, /* AbstractArrayRead[PropertyLayoutElement] */
-2213, /* Collection[MAttribute] */
+1976, /* Collection[MProperty] */
+2264, /* AbstractArrayRead[PropertyLayoutElement] */
+2281, /* Collection[MAttribute] */
 -1, /* empty */
-2552, /* AbstractArrayRead[MProperty] */
-2604, /* AbstractArrayRead[MAttribute] */
+2630, /* AbstractArrayRead[MProperty] */
+2683, /* AbstractArrayRead[MAttribute] */
 },
+};
+/* runtime type ContainerIterator[MClassType] */
+const struct type type_abstract_collection__ContainerIteratormodel__MClassType = {
+479,
+"ContainerIterator[MClassType]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__ContainerIteratormodel__MClassType,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+479, /* ContainerIterator[MClassType] */
+},
+};
+const struct types resolution_table_abstract_collection__ContainerIteratormodel__MClassType = {
+0, /* dummy */
+{
+&type_abstract_collection__Containermodel__MClassType, /* Container[ContainerIterator#0]: Container[MClassType] */
+&type_array__Arraymodel__MClassType, /* Array[Iterator#0]: Array[MClassType] */
+}
 };
 /* runtime type ContainerIterator[String] */
 const struct type type_abstract_collection__ContainerIteratorstring__String = {
-455,
+480,
 "ContainerIterator[String]", /* class_name_string */
 2,
 0,
@@ -1532,7 +2588,7 @@ const struct type type_abstract_collection__ContainerIteratorstring__String = {
 {
 0, /* nullable Object */
 1, /* Object */
-455, /* ContainerIterator[String] */
+480, /* ContainerIterator[String] */
 },
 };
 const struct types resolution_table_abstract_collection__ContainerIteratorstring__String = {
@@ -1544,7 +2600,7 @@ const struct types resolution_table_abstract_collection__ContainerIteratorstring
 };
 /* runtime type HashMapKeys[MType, Map[MType, Int]] */
 const struct type type_hash_collection__HashMapKeysmodel__MTypeabstract_collection__Mapmodel__MTypekernel__Int = {
-2140,
+2205,
 "HashMapKeys[MType, Map[MType, Int]]", /* class_name_string */
 2,
 0,
@@ -1553,12 +2609,12 @@ const struct type type_hash_collection__HashMapKeysmodel__MTypeabstract_collecti
 {
 0, /* nullable Object */
 1, /* Object */
-2140, /* HashMapKeys[MType, Map[MType, Int]] */
+2205, /* HashMapKeys[MType, Map[MType, Int]] */
 -1, /* empty */
-164, /* Collection[Object] */
-173, /* Collection[nullable MType] */
+170, /* Collection[Object] */
+180, /* Collection[nullable MType] */
 -1, /* empty */
-1737, /* Collection[MType] */
+1791, /* Collection[MType] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapKeysmodel__MTypeabstract_collection__Mapmodel__MTypekernel__Int = {
@@ -1582,7 +2638,7 @@ NULL, /* empty */
 };
 /* runtime type HashMapValues[MType, Map[MType, Int]] */
 const struct type type_hash_collection__HashMapValuesmodel__MTypeabstract_collection__Mapmodel__MTypekernel__Int = {
-1874,
+1931,
 "HashMapValues[MType, Map[MType, Int]]", /* class_name_string */
 3,
 0,
@@ -1591,9 +2647,9 @@ const struct type type_hash_collection__HashMapValuesmodel__MTypeabstract_collec
 {
 0, /* nullable Object */
 1, /* Object */
-1620, /* Collection[Map[MType, Int]] */
-1874, /* HashMapValues[MType, Map[MType, Int]] */
-164, /* Collection[Object] */
+1664, /* Collection[Map[MType, Int]] */
+1931, /* HashMapValues[MType, Map[MType, Int]] */
+170, /* Collection[Object] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapValuesmodel__MTypeabstract_collection__Mapmodel__MTypekernel__Int = {
@@ -1617,7 +2673,7 @@ NULL, /* empty */
 };
 /* runtime type Collection[Map[MType, Int]] */
 const struct type type_abstract_collection__Collectionabstract_collection__Mapmodel__MTypekernel__Int = {
-1620,
+1664,
 "Collection[Map[MType, Int]]", /* class_name_string */
 2,
 0,
@@ -1626,14 +2682,14 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-1620, /* Collection[Map[MType, Int]] */
+1664, /* Collection[Map[MType, Int]] */
 -1, /* empty */
-164, /* Collection[Object] */
+170, /* Collection[Object] */
 },
 };
 /* runtime type NativeArray[nullable HashMapNode[MType, Map[MType, Int]]] */
 const struct type type_array__NativeArraynullable_hash_collection__HashMapNodemodel__MTypeabstract_collection__Mapmodel__MTypekernel__Int = {
-456,
+481,
 "NativeArray[nullable HashMapNode[MType, Map[MType, Int]]]", /* class_name_string */
 2,
 0,
@@ -1642,7 +2698,7 @@ const struct type type_array__NativeArraynullable_hash_collection__HashMapNodemo
 {
 0, /* nullable Object */
 1, /* Object */
-456, /* NativeArray[nullable HashMapNode[MType, Map[MType, Int]]] */
+481, /* NativeArray[nullable HashMapNode[MType, Map[MType, Int]]] */
 },
 };
 const struct types resolution_table_array__NativeArraynullable_hash_collection__HashMapNodemodel__MTypeabstract_collection__Mapmodel__MTypekernel__Int = {
@@ -1654,7 +2710,7 @@ const struct types resolution_table_array__NativeArraynullable_hash_collection__
 };
 /* runtime type HashMapNode[MType, Map[MType, Int]] */
 const struct type type_hash_collection__HashMapNodemodel__MTypeabstract_collection__Mapmodel__MTypekernel__Int = {
-1621,
+1665,
 "HashMapNode[MType, Map[MType, Int]]", /* class_name_string */
 4,
 0,
@@ -1663,9 +2719,9 @@ const struct type type_hash_collection__HashMapNodemodel__MTypeabstract_collecti
 {
 0, /* nullable Object */
 1, /* Object */
-148, /* nullable HashMapNode[MType, Map[MType, Int]] */
+153, /* nullable HashMapNode[MType, Map[MType, Int]] */
 -1, /* empty */
-1621, /* HashMapNode[MType, Map[MType, Int]] */
+1665, /* HashMapNode[MType, Map[MType, Int]] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapNodemodel__MTypeabstract_collection__Mapmodel__MTypekernel__Int = {
@@ -1679,7 +2735,7 @@ const struct types resolution_table_hash_collection__HashMapNodemodel__MTypeabst
 };
 /* runtime type nullable HashMapNode[MType, Map[MType, Int]] */
 const struct type type_nullable_hash_collection__HashMapNodemodel__MTypeabstract_collection__Mapmodel__MTypekernel__Int = {
-148,
+153,
 "nullable HashMapNode[MType, Map[MType, Int]]", /* class_name_string */
 2,
 1,
@@ -1688,7 +2744,7 @@ const struct type type_nullable_hash_collection__HashMapNodemodel__MTypeabstract
 {
 0, /* nullable Object */
 -1, /* empty */
-148, /* nullable HashMapNode[MType, Map[MType, Int]] */
+153, /* nullable HashMapNode[MType, Map[MType, Int]] */
 },
 };
 const struct types resolution_table_nullable_hash_collection__HashMapNodemodel__MTypeabstract_collection__Mapmodel__MTypekernel__Int = {
@@ -1702,7 +2758,7 @@ const struct types resolution_table_nullable_hash_collection__HashMapNodemodel__
 };
 /* runtime type HashMapIterator[MType, Map[MType, Int]] */
 const struct type type_hash_collection__HashMapIteratormodel__MTypeabstract_collection__Mapmodel__MTypekernel__Int = {
-1622,
+1666,
 "HashMapIterator[MType, Map[MType, Int]]", /* class_name_string */
 3,
 0,
@@ -1711,8 +2767,8 @@ const struct type type_hash_collection__HashMapIteratormodel__MTypeabstract_coll
 {
 0, /* nullable Object */
 1, /* Object */
-457, /* MapIterator[MType, Map[MType, Int]] */
-1622, /* HashMapIterator[MType, Map[MType, Int]] */
+482, /* MapIterator[MType, Map[MType, Int]] */
+1666, /* HashMapIterator[MType, Map[MType, Int]] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapIteratormodel__MTypeabstract_collection__Mapmodel__MTypekernel__Int = {
@@ -1723,7 +2779,7 @@ const struct types resolution_table_hash_collection__HashMapIteratormodel__MType
 };
 /* runtime type MapIterator[MType, Map[MType, Int]] */
 const struct type type_abstract_collection__MapIteratormodel__MTypeabstract_collection__Mapmodel__MTypekernel__Int = {
-457,
+482,
 "MapIterator[MType, Map[MType, Int]]", /* class_name_string */
 2,
 0,
@@ -1732,12 +2788,12 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-457, /* MapIterator[MType, Map[MType, Int]] */
+482, /* MapIterator[MType, Map[MType, Int]] */
 },
 };
 /* runtime type HashMapKeys[MType, HashSet[MType]] */
 const struct type type_hash_collection__HashMapKeysmodel__MTypehash_collection__HashSetmodel__MType = {
-2385,
+2450,
 "HashMapKeys[MType, HashSet[MType]]", /* class_name_string */
 3,
 0,
@@ -1746,12 +2802,12 @@ const struct type type_hash_collection__HashMapKeysmodel__MTypehash_collection__
 {
 0, /* nullable Object */
 1, /* Object */
-2106, /* HashMapKeys[MType, Set[MType]] */
-2385, /* HashMapKeys[MType, HashSet[MType]] */
-164, /* Collection[Object] */
-173, /* Collection[nullable MType] */
+2171, /* HashMapKeys[MType, Set[MType]] */
+2450, /* HashMapKeys[MType, HashSet[MType]] */
+170, /* Collection[Object] */
+180, /* Collection[nullable MType] */
 -1, /* empty */
-1737, /* Collection[MType] */
+1791, /* Collection[MType] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapKeysmodel__MTypehash_collection__HashSetmodel__MType = {
@@ -1775,7 +2831,7 @@ NULL, /* empty */
 };
 /* runtime type HashMapValues[MType, HashSet[MType]] */
 const struct type type_hash_collection__HashMapValuesmodel__MTypehash_collection__HashSetmodel__MType = {
-2386,
+2451,
 "HashMapValues[MType, HashSet[MType]]", /* class_name_string */
 6,
 0,
@@ -1784,11 +2840,11 @@ const struct type type_hash_collection__HashMapValuesmodel__MTypehash_collection
 {
 0, /* nullable Object */
 1, /* Object */
-1479, /* Collection[Set[MType]] */
-1843, /* HashMapValues[MType, Set[MType]] */
-164, /* Collection[Object] */
-1807, /* Collection[HashSet[MType]] */
-2386, /* HashMapValues[MType, HashSet[MType]] */
+1516, /* Collection[Set[MType]] */
+1900, /* HashMapValues[MType, Set[MType]] */
+170, /* Collection[Object] */
+1857, /* Collection[HashSet[MType]] */
+2451, /* HashMapValues[MType, HashSet[MType]] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapValuesmodel__MTypehash_collection__HashSetmodel__MType = {
@@ -1812,7 +2868,7 @@ NULL, /* empty */
 };
 /* runtime type NativeArray[nullable HashMapNode[MType, HashSet[MType]]] */
 const struct type type_array__NativeArraynullable_hash_collection__HashMapNodemodel__MTypehash_collection__HashSetmodel__MType = {
-1623,
+1667,
 "NativeArray[nullable HashMapNode[MType, HashSet[MType]]]", /* class_name_string */
 3,
 0,
@@ -1821,8 +2877,8 @@ const struct type type_array__NativeArraynullable_hash_collection__HashMapNodemo
 {
 0, /* nullable Object */
 1, /* Object */
-368, /* NativeArray[nullable HashMapNode[MType, Set[MType]]] */
-1623, /* NativeArray[nullable HashMapNode[MType, HashSet[MType]]] */
+389, /* NativeArray[nullable HashMapNode[MType, Set[MType]]] */
+1667, /* NativeArray[nullable HashMapNode[MType, HashSet[MType]]] */
 },
 };
 const struct types resolution_table_array__NativeArraynullable_hash_collection__HashMapNodemodel__MTypehash_collection__HashSetmodel__MType = {
@@ -1834,7 +2890,7 @@ const struct types resolution_table_array__NativeArraynullable_hash_collection__
 };
 /* runtime type HashMapNode[MType, HashSet[MType]] */
 const struct type type_hash_collection__HashMapNodemodel__MTypehash_collection__HashSetmodel__MType = {
-2141,
+2206,
 "HashMapNode[MType, HashSet[MType]]", /* class_name_string */
 5,
 0,
@@ -1843,10 +2899,10 @@ const struct type type_hash_collection__HashMapNodemodel__MTypehash_collection__
 {
 0, /* nullable Object */
 1, /* Object */
-132, /* nullable HashMapNode[MType, Set[MType]] */
-458, /* nullable HashMapNode[MType, HashSet[MType]] */
-1546, /* HashMapNode[MType, Set[MType]] */
-2141, /* HashMapNode[MType, HashSet[MType]] */
+137, /* nullable HashMapNode[MType, Set[MType]] */
+483, /* nullable HashMapNode[MType, HashSet[MType]] */
+1588, /* HashMapNode[MType, Set[MType]] */
+2206, /* HashMapNode[MType, HashSet[MType]] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapNodemodel__MTypehash_collection__HashSetmodel__MType = {
@@ -1860,7 +2916,7 @@ const struct types resolution_table_hash_collection__HashMapNodemodel__MTypehash
 };
 /* runtime type nullable HashMapNode[MType, HashSet[MType]] */
 const struct type type_nullable_hash_collection__HashMapNodemodel__MTypehash_collection__HashSetmodel__MType = {
-458,
+483,
 "nullable HashMapNode[MType, HashSet[MType]]", /* class_name_string */
 3,
 1,
@@ -1869,8 +2925,8 @@ const struct type type_nullable_hash_collection__HashMapNodemodel__MTypehash_col
 {
 0, /* nullable Object */
 -1, /* empty */
-132, /* nullable HashMapNode[MType, Set[MType]] */
-458, /* nullable HashMapNode[MType, HashSet[MType]] */
+137, /* nullable HashMapNode[MType, Set[MType]] */
+483, /* nullable HashMapNode[MType, HashSet[MType]] */
 },
 };
 const struct types resolution_table_nullable_hash_collection__HashMapNodemodel__MTypehash_collection__HashSetmodel__MType = {
@@ -1884,7 +2940,7 @@ const struct types resolution_table_nullable_hash_collection__HashMapNodemodel__
 };
 /* runtime type HashMapIterator[MType, HashSet[MType]] */
 const struct type type_hash_collection__HashMapIteratormodel__MTypehash_collection__HashSetmodel__MType = {
-2142,
+2207,
 "HashMapIterator[MType, HashSet[MType]]", /* class_name_string */
 5,
 0,
@@ -1893,10 +2949,10 @@ const struct type type_hash_collection__HashMapIteratormodel__MTypehash_collecti
 {
 0, /* nullable Object */
 1, /* Object */
-370, /* MapIterator[MType, Set[MType]] */
-1547, /* HashMapIterator[MType, Set[MType]] */
-1624, /* MapIterator[MType, HashSet[MType]] */
-2142, /* HashMapIterator[MType, HashSet[MType]] */
+391, /* MapIterator[MType, Set[MType]] */
+1589, /* HashMapIterator[MType, Set[MType]] */
+1668, /* MapIterator[MType, HashSet[MType]] */
+2207, /* HashMapIterator[MType, HashSet[MType]] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapIteratormodel__MTypehash_collection__HashSetmodel__MType = {
@@ -1907,7 +2963,7 @@ const struct types resolution_table_hash_collection__HashMapIteratormodel__MType
 };
 /* runtime type MapIterator[MType, HashSet[MType]] */
 const struct type type_abstract_collection__MapIteratormodel__MTypehash_collection__HashSetmodel__MType = {
-1624,
+1668,
 "MapIterator[MType, HashSet[MType]]", /* class_name_string */
 4,
 0,
@@ -1916,14 +2972,14 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-370, /* MapIterator[MType, Set[MType]] */
+391, /* MapIterator[MType, Set[MType]] */
 -1, /* empty */
-1624, /* MapIterator[MType, HashSet[MType]] */
+1668, /* MapIterator[MType, HashSet[MType]] */
 },
 };
 /* runtime type MapKeysIterator[EscapeMark, String] */
 const struct type type_abstract_collection__MapKeysIteratorscope__EscapeMarkstring__String = {
-459,
+484,
 "MapKeysIterator[EscapeMark, String]", /* class_name_string */
 2,
 0,
@@ -1932,7 +2988,7 @@ const struct type type_abstract_collection__MapKeysIteratorscope__EscapeMarkstri
 {
 0, /* nullable Object */
 1, /* Object */
-459, /* MapKeysIterator[EscapeMark, String] */
+484, /* MapKeysIterator[EscapeMark, String] */
 },
 };
 const struct types resolution_table_abstract_collection__MapKeysIteratorscope__EscapeMarkstring__String = {
@@ -1944,7 +3000,7 @@ const struct types resolution_table_abstract_collection__MapKeysIteratorscope__E
 };
 /* runtime type MapValuesIterator[EscapeMark, String] */
 const struct type type_abstract_collection__MapValuesIteratorscope__EscapeMarkstring__String = {
-460,
+485,
 "MapValuesIterator[EscapeMark, String]", /* class_name_string */
 2,
 0,
@@ -1953,7 +3009,7 @@ const struct type type_abstract_collection__MapValuesIteratorscope__EscapeMarkst
 {
 0, /* nullable Object */
 1, /* Object */
-460, /* MapValuesIterator[EscapeMark, String] */
+485, /* MapValuesIterator[EscapeMark, String] */
 },
 };
 const struct types resolution_table_abstract_collection__MapValuesIteratorscope__EscapeMarkstring__String = {
@@ -1965,7 +3021,7 @@ const struct types resolution_table_abstract_collection__MapValuesIteratorscope_
 };
 /* runtime type MapKeysIterator[Variable, RuntimeVariable] */
 const struct type type_abstract_collection__MapKeysIteratorscope__Variableabstract_compiler__RuntimeVariable = {
-461,
+486,
 "MapKeysIterator[Variable, RuntimeVariable]", /* class_name_string */
 2,
 0,
@@ -1974,7 +3030,7 @@ const struct type type_abstract_collection__MapKeysIteratorscope__Variableabstra
 {
 0, /* nullable Object */
 1, /* Object */
-461, /* MapKeysIterator[Variable, RuntimeVariable] */
+486, /* MapKeysIterator[Variable, RuntimeVariable] */
 },
 };
 const struct types resolution_table_abstract_collection__MapKeysIteratorscope__Variableabstract_compiler__RuntimeVariable = {
@@ -1986,7 +3042,7 @@ const struct types resolution_table_abstract_collection__MapKeysIteratorscope__V
 };
 /* runtime type MapValuesIterator[Variable, RuntimeVariable] */
 const struct type type_abstract_collection__MapValuesIteratorscope__Variableabstract_compiler__RuntimeVariable = {
-462,
+487,
 "MapValuesIterator[Variable, RuntimeVariable]", /* class_name_string */
 2,
 0,
@@ -1995,7 +3051,7 @@ const struct type type_abstract_collection__MapValuesIteratorscope__Variableabst
 {
 0, /* nullable Object */
 1, /* Object */
-462, /* MapValuesIterator[Variable, RuntimeVariable] */
+487, /* MapValuesIterator[Variable, RuntimeVariable] */
 },
 };
 const struct types resolution_table_abstract_collection__MapValuesIteratorscope__Variableabstract_compiler__RuntimeVariable = {
@@ -2005,9 +3061,239 @@ const struct types resolution_table_abstract_collection__MapValuesIteratorscope_
 &type_array__Arrayabstract_compiler__RuntimeVariable, /* Array[Iterator#0]: Array[RuntimeVariable] */
 }
 };
+/* runtime type HashMapKeys[MGroup, POSetElement[MGroup]] */
+const struct type type_hash_collection__HashMapKeysmproject__MGroupposet__POSetElementmproject__MGroup = {
+2208,
+"HashMapKeys[MGroup, POSetElement[MGroup]]", /* class_name_string */
+3,
+0,
+&resolution_table_hash_collection__HashMapKeysmproject__MGroupposet__POSetElementmproject__MGroup,
+6,
+{
+0, /* nullable Object */
+1, /* Object */
+227, /* Collection[nullable MGroup] */
+2208, /* HashMapKeys[MGroup, POSetElement[MGroup]] */
+170, /* Collection[Object] */
+1800, /* Collection[MGroup] */
+},
+};
+const struct types resolution_table_hash_collection__HashMapKeysmproject__MGroupposet__POSetElementmproject__MGroup = {
+0, /* dummy */
+{
+&type_hash_collection__HashMapmproject__MGroupposet__POSetElementmproject__MGroup, /* HashMap[HashMapKeys#0, HashMapKeys#1]: HashMap[MGroup, POSetElement[MGroup]] */
+&type_abstract_collection__MapKeysIteratormproject__MGroupposet__POSetElementmproject__MGroup, /* MapKeysIterator[HashMapKeys#0, HashMapKeys#1]: MapKeysIterator[MGroup, POSetElement[MGroup]] */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+&type_mproject__MGroup, /* RemovableCollection#0: MGroup */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+&type_mproject__MGroup, /* Collection#0: MGroup */
+&type_abstract_collection__Collectionmproject__MGroup, /* Collection[Collection#0]: Collection[MGroup] */
+}
+};
+/* runtime type HashMapValues[MGroup, POSetElement[MGroup]] */
+const struct type type_hash_collection__HashMapValuesmproject__MGroupposet__POSetElementmproject__MGroup = {
+1932,
+"HashMapValues[MGroup, POSetElement[MGroup]]", /* class_name_string */
+3,
+0,
+&resolution_table_hash_collection__HashMapValuesmproject__MGroupposet__POSetElementmproject__MGroup,
+5,
+{
+0, /* nullable Object */
+1, /* Object */
+1669, /* Collection[POSetElement[MGroup]] */
+1932, /* HashMapValues[MGroup, POSetElement[MGroup]] */
+170, /* Collection[Object] */
+},
+};
+const struct types resolution_table_hash_collection__HashMapValuesmproject__MGroupposet__POSetElementmproject__MGroup = {
+0, /* dummy */
+{
+&type_hash_collection__HashMapmproject__MGroupposet__POSetElementmproject__MGroup, /* HashMap[HashMapValues#0, HashMapValues#1]: HashMap[MGroup, POSetElement[MGroup]] */
+&type_abstract_collection__MapValuesIteratormproject__MGroupposet__POSetElementmproject__MGroup, /* MapValuesIterator[HashMapValues#0, HashMapValues#1]: MapValuesIterator[MGroup, POSetElement[MGroup]] */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+&type_poset__POSetElementmproject__MGroup, /* RemovableCollection#0: POSetElement[MGroup] */
+NULL, /* empty */
+NULL, /* empty */
+NULL, /* empty */
+&type_poset__POSetElementmproject__MGroup, /* Collection#0: POSetElement[MGroup] */
+&type_abstract_collection__Collectionposet__POSetElementmproject__MGroup, /* Collection[Collection#0]: Collection[POSetElement[MGroup]] */
+}
+};
+/* runtime type Collection[POSetElement[MGroup]] */
+const struct type type_abstract_collection__Collectionposet__POSetElementmproject__MGroup = {
+1669,
+"Collection[POSetElement[MGroup]]", /* class_name_string */
+2,
+0,
+NULL,
+5,
+{
+0, /* nullable Object */
+1, /* Object */
+1669, /* Collection[POSetElement[MGroup]] */
+-1, /* empty */
+170, /* Collection[Object] */
+},
+};
+/* runtime type NativeArray[nullable HashMapNode[MGroup, POSetElement[MGroup]]] */
+const struct type type_array__NativeArraynullable_hash_collection__HashMapNodemproject__MGroupposet__POSetElementmproject__MGroup = {
+488,
+"NativeArray[nullable HashMapNode[MGroup, POSetElement[MGroup]]]", /* class_name_string */
+2,
+0,
+&resolution_table_array__NativeArraynullable_hash_collection__HashMapNodemproject__MGroupposet__POSetElementmproject__MGroup,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+488, /* NativeArray[nullable HashMapNode[MGroup, POSetElement[MGroup]]] */
+},
+};
+const struct types resolution_table_array__NativeArraynullable_hash_collection__HashMapNodemproject__MGroupposet__POSetElementmproject__MGroup = {
+0, /* dummy */
+{
+&type_nullable_hash_collection__HashMapNodemproject__MGroupposet__POSetElementmproject__MGroup, /* NativeArray#0: nullable HashMapNode[MGroup, POSetElement[MGroup]] */
+&type_array__NativeArraynullable_hash_collection__HashMapNodemproject__MGroupposet__POSetElementmproject__MGroup, /* NativeArray[NativeArray#0]: NativeArray[nullable HashMapNode[MGroup, POSetElement[MGroup]]] */
+}
+};
+/* runtime type HashMapNode[MGroup, POSetElement[MGroup]] */
+const struct type type_hash_collection__HashMapNodemproject__MGroupposet__POSetElementmproject__MGroup = {
+1670,
+"HashMapNode[MGroup, POSetElement[MGroup]]", /* class_name_string */
+3,
+0,
+&resolution_table_hash_collection__HashMapNodemproject__MGroupposet__POSetElementmproject__MGroup,
+4,
+{
+0, /* nullable Object */
+1, /* Object */
+154, /* nullable HashMapNode[MGroup, POSetElement[MGroup]] */
+1670, /* HashMapNode[MGroup, POSetElement[MGroup]] */
+},
+};
+const struct types resolution_table_hash_collection__HashMapNodemproject__MGroupposet__POSetElementmproject__MGroup = {
+0, /* dummy */
+{
+&type_mproject__MGroup, /* HashMapNode#0: MGroup */
+&type_poset__POSetElementmproject__MGroup, /* HashMapNode#1: POSetElement[MGroup] */
+&type_hash_collection__HashMapNodemproject__MGroupposet__POSetElementmproject__MGroup, /* N: HashMapNode[MGroup, POSetElement[MGroup]] */
+&type_mproject__MGroup, /* HashNode#0: MGroup */
+}
+};
+/* runtime type nullable HashMapNode[MGroup, POSetElement[MGroup]] */
+const struct type type_nullable_hash_collection__HashMapNodemproject__MGroupposet__POSetElementmproject__MGroup = {
+154,
+"nullable HashMapNode[MGroup, POSetElement[MGroup]]", /* class_name_string */
+2,
+1,
+&resolution_table_nullable_hash_collection__HashMapNodemproject__MGroupposet__POSetElementmproject__MGroup,
+3,
+{
+0, /* nullable Object */
+-1, /* empty */
+154, /* nullable HashMapNode[MGroup, POSetElement[MGroup]] */
+},
+};
+const struct types resolution_table_nullable_hash_collection__HashMapNodemproject__MGroupposet__POSetElementmproject__MGroup = {
+0, /* dummy */
+{
+&type_mproject__MGroup, /* HashMapNode#0: MGroup */
+&type_poset__POSetElementmproject__MGroup, /* HashMapNode#1: POSetElement[MGroup] */
+&type_hash_collection__HashMapNodemproject__MGroupposet__POSetElementmproject__MGroup, /* N: HashMapNode[MGroup, POSetElement[MGroup]] */
+&type_mproject__MGroup, /* HashNode#0: MGroup */
+}
+};
+/* runtime type HashMapIterator[MGroup, POSetElement[MGroup]] */
+const struct type type_hash_collection__HashMapIteratormproject__MGroupposet__POSetElementmproject__MGroup = {
+1671,
+"HashMapIterator[MGroup, POSetElement[MGroup]]", /* class_name_string */
+3,
+0,
+&resolution_table_hash_collection__HashMapIteratormproject__MGroupposet__POSetElementmproject__MGroup,
+4,
+{
+0, /* nullable Object */
+1, /* Object */
+489, /* MapIterator[MGroup, POSetElement[MGroup]] */
+1671, /* HashMapIterator[MGroup, POSetElement[MGroup]] */
+},
+};
+const struct types resolution_table_hash_collection__HashMapIteratormproject__MGroupposet__POSetElementmproject__MGroup = {
+0, /* dummy */
+{
+&type_hash_collection__HashMapmproject__MGroupposet__POSetElementmproject__MGroup, /* HashMap[HashMapIterator#0, HashMapIterator#1]: HashMap[MGroup, POSetElement[MGroup]] */
+}
+};
+/* runtime type MapIterator[MGroup, POSetElement[MGroup]] */
+const struct type type_abstract_collection__MapIteratormproject__MGroupposet__POSetElementmproject__MGroup = {
+489,
+"MapIterator[MGroup, POSetElement[MGroup]]", /* class_name_string */
+2,
+0,
+NULL,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+489, /* MapIterator[MGroup, POSetElement[MGroup]] */
+},
+};
+/* runtime type HashSet[MGroup] */
+const struct type type_hash_collection__HashSetmproject__MGroup = {
+2545,
+"HashSet[MGroup]", /* class_name_string */
+7,
+0,
+&resolution_table_hash_collection__HashSetmproject__MGroup,
+8,
+{
+0, /* nullable Object */
+1, /* Object */
+227, /* Collection[nullable MGroup] */
+633, /* Set[Object] */
+170, /* Collection[Object] */
+1800, /* Collection[MGroup] */
+1794, /* HashSet[Object] */
+2545, /* HashSet[MGroup] */
+},
+};
+const struct types resolution_table_hash_collection__HashSetmproject__MGroup = {
+0, /* dummy */
+{
+&type_hash_collection__HashSetNodemproject__MGroup, /* HashSetNode[HashSet#0]: HashSetNode[MGroup] */
+&type_hash_collection__HashSetIteratormproject__MGroup, /* HashSetIterator[HashSet#0]: HashSetIterator[MGroup] */
+&type_abstract_collection__Collectionmproject__MGroup, /* Collection[HashSet#0]: Collection[MGroup] */
+&type_mproject__MGroup, /* SimpleCollection#0: MGroup */
+&type_abstract_collection__Collectionmproject__MGroup, /* Collection[Set#0]: Collection[MGroup] */
+NULL, /* empty */
+&type_array__NativeArraynullable_hash_collection__HashSetNodemproject__MGroup, /* NativeArray[ArrayCapable#0]: NativeArray[nullable HashSetNode[MGroup]] */
+NULL, /* empty */
+&type_mproject__MGroup, /* RemovableCollection#0: MGroup */
+NULL, /* empty */
+NULL, /* empty */
+&type_abstract_collection__Collectionmproject__MGroup, /* Collection[SimpleCollection#0]: Collection[MGroup] */
+&type_mproject__MGroup, /* Collection#0: MGroup */
+&type_abstract_collection__Collectionmproject__MGroup, /* Collection[Collection#0]: Collection[MGroup] */
+&type_mproject__MGroup, /* HashCollection#0: MGroup */
+&type_hash_collection__HashSetNodemproject__MGroup, /* HashCollection#1: HashSetNode[MGroup] */
+}
+};
 /* runtime type ArrayIterator[AClassdef] */
 const struct type type_array__ArrayIteratorparser_nodes__AClassdef = {
-2143,
+2209,
 "ArrayIterator[AClassdef]", /* class_name_string */
 5,
 0,
@@ -2016,10 +3302,10 @@ const struct type type_array__ArrayIteratorparser_nodes__AClassdef = {
 {
 0, /* nullable Object */
 1, /* Object */
-277, /* ArrayIterator[Object] */
-1448, /* ArrayIterator[ANode] */
-1791, /* ArrayIterator[Prod] */
-2143, /* ArrayIterator[AClassdef] */
+289, /* ArrayIterator[Object] */
+1492, /* ArrayIterator[ANode] */
+1848, /* ArrayIterator[Prod] */
+2209, /* ArrayIterator[AClassdef] */
 },
 };
 const struct types resolution_table_array__ArrayIteratorparser_nodes__AClassdef = {
@@ -2031,7 +3317,7 @@ const struct types resolution_table_array__ArrayIteratorparser_nodes__AClassdef 
 };
 /* runtime type NativeArray[AClassdef] */
 const struct type type_array__NativeArrayparser_nodes__AClassdef = {
-2144,
+2210,
 "NativeArray[AClassdef]", /* class_name_string */
 5,
 0,
@@ -2040,10 +3326,10 @@ const struct type type_array__NativeArrayparser_nodes__AClassdef = {
 {
 0, /* nullable Object */
 1, /* Object */
-185, /* NativeArray[Object] */
-1449, /* NativeArray[ANode] */
-1792, /* NativeArray[Prod] */
-2144, /* NativeArray[AClassdef] */
+193, /* NativeArray[Object] */
+1493, /* NativeArray[ANode] */
+1849, /* NativeArray[Prod] */
+2210, /* NativeArray[AClassdef] */
 },
 };
 const struct types resolution_table_array__NativeArrayparser_nodes__AClassdef = {
@@ -2055,7 +3341,7 @@ const struct types resolution_table_array__NativeArrayparser_nodes__AClassdef = 
 };
 /* runtime type ArrayIterator[APropdef] */
 const struct type type_array__ArrayIteratorparser_nodes__APropdef = {
-2145,
+2211,
 "ArrayIterator[APropdef]", /* class_name_string */
 5,
 0,
@@ -2064,10 +3350,10 @@ const struct type type_array__ArrayIteratorparser_nodes__APropdef = {
 {
 0, /* nullable Object */
 1, /* Object */
-277, /* ArrayIterator[Object] */
-1448, /* ArrayIterator[ANode] */
-1791, /* ArrayIterator[Prod] */
-2145, /* ArrayIterator[APropdef] */
+289, /* ArrayIterator[Object] */
+1492, /* ArrayIterator[ANode] */
+1848, /* ArrayIterator[Prod] */
+2211, /* ArrayIterator[APropdef] */
 },
 };
 const struct types resolution_table_array__ArrayIteratorparser_nodes__APropdef = {
@@ -2079,7 +3365,7 @@ const struct types resolution_table_array__ArrayIteratorparser_nodes__APropdef =
 };
 /* runtime type NativeArray[APropdef] */
 const struct type type_array__NativeArrayparser_nodes__APropdef = {
-2146,
+2212,
 "NativeArray[APropdef]", /* class_name_string */
 5,
 0,
@@ -2088,10 +3374,10 @@ const struct type type_array__NativeArrayparser_nodes__APropdef = {
 {
 0, /* nullable Object */
 1, /* Object */
-185, /* NativeArray[Object] */
-1449, /* NativeArray[ANode] */
-1792, /* NativeArray[Prod] */
-2146, /* NativeArray[APropdef] */
+193, /* NativeArray[Object] */
+1493, /* NativeArray[ANode] */
+1849, /* NativeArray[Prod] */
+2212, /* NativeArray[APropdef] */
 },
 };
 const struct types resolution_table_array__NativeArrayparser_nodes__APropdef = {
@@ -2103,7 +3389,7 @@ const struct types resolution_table_array__NativeArrayparser_nodes__APropdef = {
 };
 /* runtime type ContainerIterator[ANode] */
 const struct type type_abstract_collection__ContainerIteratorparser_nodes__ANode = {
-463,
+490,
 "ContainerIterator[ANode]", /* class_name_string */
 2,
 0,
@@ -2112,7 +3398,7 @@ const struct type type_abstract_collection__ContainerIteratorparser_nodes__ANode
 {
 0, /* nullable Object */
 1, /* Object */
-463, /* ContainerIterator[ANode] */
+490, /* ContainerIterator[ANode] */
 },
 };
 const struct types resolution_table_abstract_collection__ContainerIteratorparser_nodes__ANode = {
@@ -2122,135 +3408,9 @@ const struct types resolution_table_abstract_collection__ContainerIteratorparser
 &type_array__Arrayparser_nodes__ANode, /* Array[Iterator#0]: Array[ANode] */
 }
 };
-/* runtime type MapKeysIterator[MModule, Set[MClassDef]] */
-const struct type type_abstract_collection__MapKeysIteratormodel_base__MModuleabstract_collection__Setmodel__MClassDef = {
-464,
-"MapKeysIterator[MModule, Set[MClassDef]]", /* class_name_string */
-2,
-0,
-&resolution_table_abstract_collection__MapKeysIteratormodel_base__MModuleabstract_collection__Setmodel__MClassDef,
-3,
-{
-0, /* nullable Object */
-1, /* Object */
-464, /* MapKeysIterator[MModule, Set[MClassDef]] */
-},
-};
-const struct types resolution_table_abstract_collection__MapKeysIteratormodel_base__MModuleabstract_collection__Setmodel__MClassDef = {
-0, /* dummy */
-{
-&type_abstract_collection__MapIteratormodel_base__MModuleabstract_collection__Setmodel__MClassDef, /* MapIterator[MapKeysIterator#0, MapKeysIterator#1]: MapIterator[MModule, Set[MClassDef]] */
-&type_array__Arraymodel_base__MModule, /* Array[Iterator#0]: Array[MModule] */
-}
-};
-/* runtime type MapValuesIterator[MModule, Set[MClassDef]] */
-const struct type type_abstract_collection__MapValuesIteratormodel_base__MModuleabstract_collection__Setmodel__MClassDef = {
-465,
-"MapValuesIterator[MModule, Set[MClassDef]]", /* class_name_string */
-2,
-0,
-&resolution_table_abstract_collection__MapValuesIteratormodel_base__MModuleabstract_collection__Setmodel__MClassDef,
-3,
-{
-0, /* nullable Object */
-1, /* Object */
-465, /* MapValuesIterator[MModule, Set[MClassDef]] */
-},
-};
-const struct types resolution_table_abstract_collection__MapValuesIteratormodel_base__MModuleabstract_collection__Setmodel__MClassDef = {
-0, /* dummy */
-{
-&type_abstract_collection__MapIteratormodel_base__MModuleabstract_collection__Setmodel__MClassDef, /* MapIterator[MapValuesIterator#0, MapValuesIterator#1]: MapIterator[MModule, Set[MClassDef]] */
-&type_array__Arrayabstract_collection__Setmodel__MClassDef, /* Array[Iterator#0]: Array[Set[MClassDef]] */
-}
-};
-/* runtime type MapKeysIterator[MModule, Set[MClass]] */
-const struct type type_abstract_collection__MapKeysIteratormodel_base__MModuleabstract_collection__Setmodel__MClass = {
-466,
-"MapKeysIterator[MModule, Set[MClass]]", /* class_name_string */
-2,
-0,
-&resolution_table_abstract_collection__MapKeysIteratormodel_base__MModuleabstract_collection__Setmodel__MClass,
-3,
-{
-0, /* nullable Object */
-1, /* Object */
-466, /* MapKeysIterator[MModule, Set[MClass]] */
-},
-};
-const struct types resolution_table_abstract_collection__MapKeysIteratormodel_base__MModuleabstract_collection__Setmodel__MClass = {
-0, /* dummy */
-{
-&type_abstract_collection__MapIteratormodel_base__MModuleabstract_collection__Setmodel__MClass, /* MapIterator[MapKeysIterator#0, MapKeysIterator#1]: MapIterator[MModule, Set[MClass]] */
-&type_array__Arraymodel_base__MModule, /* Array[Iterator#0]: Array[MModule] */
-}
-};
-/* runtime type MapValuesIterator[MModule, Set[MClass]] */
-const struct type type_abstract_collection__MapValuesIteratormodel_base__MModuleabstract_collection__Setmodel__MClass = {
-467,
-"MapValuesIterator[MModule, Set[MClass]]", /* class_name_string */
-2,
-0,
-&resolution_table_abstract_collection__MapValuesIteratormodel_base__MModuleabstract_collection__Setmodel__MClass,
-3,
-{
-0, /* nullable Object */
-1, /* Object */
-467, /* MapValuesIterator[MModule, Set[MClass]] */
-},
-};
-const struct types resolution_table_abstract_collection__MapValuesIteratormodel_base__MModuleabstract_collection__Setmodel__MClass = {
-0, /* dummy */
-{
-&type_abstract_collection__MapIteratormodel_base__MModuleabstract_collection__Setmodel__MClass, /* MapIterator[MapValuesIterator#0, MapValuesIterator#1]: MapIterator[MModule, Set[MClass]] */
-&type_array__Arrayabstract_collection__Setmodel__MClass, /* Array[Iterator#0]: Array[Set[MClass]] */
-}
-};
-/* runtime type MapKeysIterator[MModule, Set[MClassType]] */
-const struct type type_abstract_collection__MapKeysIteratormodel_base__MModuleabstract_collection__Setmodel__MClassType = {
-468,
-"MapKeysIterator[MModule, Set[MClassType]]", /* class_name_string */
-2,
-0,
-&resolution_table_abstract_collection__MapKeysIteratormodel_base__MModuleabstract_collection__Setmodel__MClassType,
-3,
-{
-0, /* nullable Object */
-1, /* Object */
-468, /* MapKeysIterator[MModule, Set[MClassType]] */
-},
-};
-const struct types resolution_table_abstract_collection__MapKeysIteratormodel_base__MModuleabstract_collection__Setmodel__MClassType = {
-0, /* dummy */
-{
-&type_abstract_collection__MapIteratormodel_base__MModuleabstract_collection__Setmodel__MClassType, /* MapIterator[MapKeysIterator#0, MapKeysIterator#1]: MapIterator[MModule, Set[MClassType]] */
-&type_array__Arraymodel_base__MModule, /* Array[Iterator#0]: Array[MModule] */
-}
-};
-/* runtime type MapValuesIterator[MModule, Set[MClassType]] */
-const struct type type_abstract_collection__MapValuesIteratormodel_base__MModuleabstract_collection__Setmodel__MClassType = {
-469,
-"MapValuesIterator[MModule, Set[MClassType]]", /* class_name_string */
-2,
-0,
-&resolution_table_abstract_collection__MapValuesIteratormodel_base__MModuleabstract_collection__Setmodel__MClassType,
-3,
-{
-0, /* nullable Object */
-1, /* Object */
-469, /* MapValuesIterator[MModule, Set[MClassType]] */
-},
-};
-const struct types resolution_table_abstract_collection__MapValuesIteratormodel_base__MModuleabstract_collection__Setmodel__MClassType = {
-0, /* dummy */
-{
-&type_abstract_collection__MapIteratormodel_base__MModuleabstract_collection__Setmodel__MClassType, /* MapIterator[MapValuesIterator#0, MapValuesIterator#1]: MapIterator[MModule, Set[MClassType]] */
-&type_array__Arrayabstract_collection__Setmodel__MClassType, /* Array[Iterator#0]: Array[Set[MClassType]] */
-}
-};
 /* runtime type MapKeysIterator[MClass, Array[nullable MClass]] */
 const struct type type_abstract_collection__MapKeysIteratormodel__MClassarray__Arraynullable_model__MClass = {
-470,
+491,
 "MapKeysIterator[MClass, Array[nullable MClass]]", /* class_name_string */
 2,
 0,
@@ -2259,7 +3419,7 @@ const struct type type_abstract_collection__MapKeysIteratormodel__MClassarray__A
 {
 0, /* nullable Object */
 1, /* Object */
-470, /* MapKeysIterator[MClass, Array[nullable MClass]] */
+491, /* MapKeysIterator[MClass, Array[nullable MClass]] */
 },
 };
 const struct types resolution_table_abstract_collection__MapKeysIteratormodel__MClassarray__Arraynullable_model__MClass = {
@@ -2271,7 +3431,7 @@ const struct types resolution_table_abstract_collection__MapKeysIteratormodel__M
 };
 /* runtime type MapValuesIterator[MClass, Array[nullable MClass]] */
 const struct type type_abstract_collection__MapValuesIteratormodel__MClassarray__Arraynullable_model__MClass = {
-471,
+492,
 "MapValuesIterator[MClass, Array[nullable MClass]]", /* class_name_string */
 2,
 0,
@@ -2280,7 +3440,7 @@ const struct type type_abstract_collection__MapValuesIteratormodel__MClassarray_
 {
 0, /* nullable Object */
 1, /* Object */
-471, /* MapValuesIterator[MClass, Array[nullable MClass]] */
+492, /* MapValuesIterator[MClass, Array[nullable MClass]] */
 },
 };
 const struct types resolution_table_abstract_collection__MapValuesIteratormodel__MClassarray__Arraynullable_model__MClass = {
@@ -2290,9 +3450,185 @@ const struct types resolution_table_abstract_collection__MapValuesIteratormodel_
 &type_array__Arrayarray__Arraynullable_model__MClass, /* Array[Iterator#0]: Array[Array[nullable MClass]] */
 }
 };
+/* runtime type ArrayIterator[MMethodDef] */
+const struct type type_array__ArrayIteratormodel__MMethodDef = {
+2452,
+"ArrayIterator[MMethodDef]", /* class_name_string */
+6,
+0,
+&resolution_table_array__ArrayIteratormodel__MMethodDef,
+7,
+{
+0, /* nullable Object */
+1, /* Object */
+289, /* ArrayIterator[Object] */
+379, /* ArrayIterator[nullable MPropDef] */
+1475, /* ArrayIterator[PropertyLayoutElement] */
+2167, /* ArrayIterator[MPropDef] */
+2452, /* ArrayIterator[MMethodDef] */
+},
+};
+const struct types resolution_table_array__ArrayIteratormodel__MMethodDef = {
+0, /* dummy */
+{
+&type_array__AbstractArrayReadmodel__MMethodDef, /* AbstractArrayRead[ArrayIterator#0]: AbstractArrayRead[MMethodDef] */
+&type_array__Arraymodel__MMethodDef, /* Array[Iterator#0]: Array[MMethodDef] */
+}
+};
+/* runtime type NativeArray[MMethodDef] */
+const struct type type_array__NativeArraymodel__MMethodDef = {
+2453,
+"NativeArray[MMethodDef]", /* class_name_string */
+6,
+0,
+&resolution_table_array__NativeArraymodel__MMethodDef,
+7,
+{
+0, /* nullable Object */
+1, /* Object */
+193, /* NativeArray[Object] */
+380, /* NativeArray[nullable MPropDef] */
+1476, /* NativeArray[PropertyLayoutElement] */
+2168, /* NativeArray[MPropDef] */
+2453, /* NativeArray[MMethodDef] */
+},
+};
+const struct types resolution_table_array__NativeArraymodel__MMethodDef = {
+0, /* dummy */
+{
+&type_model__MMethodDef, /* NativeArray#0: MMethodDef */
+&type_array__NativeArraymodel__MMethodDef, /* NativeArray[NativeArray#0]: NativeArray[MMethodDef] */
+}
+};
+/* runtime type MapKeysIterator[MModule, Set[MClassDef]] */
+const struct type type_abstract_collection__MapKeysIteratormmodule__MModuleabstract_collection__Setmodel__MClassDef = {
+493,
+"MapKeysIterator[MModule, Set[MClassDef]]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__MapKeysIteratormmodule__MModuleabstract_collection__Setmodel__MClassDef,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+493, /* MapKeysIterator[MModule, Set[MClassDef]] */
+},
+};
+const struct types resolution_table_abstract_collection__MapKeysIteratormmodule__MModuleabstract_collection__Setmodel__MClassDef = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratormmodule__MModuleabstract_collection__Setmodel__MClassDef, /* MapIterator[MapKeysIterator#0, MapKeysIterator#1]: MapIterator[MModule, Set[MClassDef]] */
+&type_array__Arraymmodule__MModule, /* Array[Iterator#0]: Array[MModule] */
+}
+};
+/* runtime type MapValuesIterator[MModule, Set[MClassDef]] */
+const struct type type_abstract_collection__MapValuesIteratormmodule__MModuleabstract_collection__Setmodel__MClassDef = {
+494,
+"MapValuesIterator[MModule, Set[MClassDef]]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__MapValuesIteratormmodule__MModuleabstract_collection__Setmodel__MClassDef,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+494, /* MapValuesIterator[MModule, Set[MClassDef]] */
+},
+};
+const struct types resolution_table_abstract_collection__MapValuesIteratormmodule__MModuleabstract_collection__Setmodel__MClassDef = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratormmodule__MModuleabstract_collection__Setmodel__MClassDef, /* MapIterator[MapValuesIterator#0, MapValuesIterator#1]: MapIterator[MModule, Set[MClassDef]] */
+&type_array__Arrayabstract_collection__Setmodel__MClassDef, /* Array[Iterator#0]: Array[Set[MClassDef]] */
+}
+};
+/* runtime type MapKeysIterator[MModule, Set[MClass]] */
+const struct type type_abstract_collection__MapKeysIteratormmodule__MModuleabstract_collection__Setmodel__MClass = {
+495,
+"MapKeysIterator[MModule, Set[MClass]]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__MapKeysIteratormmodule__MModuleabstract_collection__Setmodel__MClass,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+495, /* MapKeysIterator[MModule, Set[MClass]] */
+},
+};
+const struct types resolution_table_abstract_collection__MapKeysIteratormmodule__MModuleabstract_collection__Setmodel__MClass = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratormmodule__MModuleabstract_collection__Setmodel__MClass, /* MapIterator[MapKeysIterator#0, MapKeysIterator#1]: MapIterator[MModule, Set[MClass]] */
+&type_array__Arraymmodule__MModule, /* Array[Iterator#0]: Array[MModule] */
+}
+};
+/* runtime type MapValuesIterator[MModule, Set[MClass]] */
+const struct type type_abstract_collection__MapValuesIteratormmodule__MModuleabstract_collection__Setmodel__MClass = {
+496,
+"MapValuesIterator[MModule, Set[MClass]]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__MapValuesIteratormmodule__MModuleabstract_collection__Setmodel__MClass,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+496, /* MapValuesIterator[MModule, Set[MClass]] */
+},
+};
+const struct types resolution_table_abstract_collection__MapValuesIteratormmodule__MModuleabstract_collection__Setmodel__MClass = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratormmodule__MModuleabstract_collection__Setmodel__MClass, /* MapIterator[MapValuesIterator#0, MapValuesIterator#1]: MapIterator[MModule, Set[MClass]] */
+&type_array__Arrayabstract_collection__Setmodel__MClass, /* Array[Iterator#0]: Array[Set[MClass]] */
+}
+};
+/* runtime type MapKeysIterator[MModule, Set[MClassType]] */
+const struct type type_abstract_collection__MapKeysIteratormmodule__MModuleabstract_collection__Setmodel__MClassType = {
+497,
+"MapKeysIterator[MModule, Set[MClassType]]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__MapKeysIteratormmodule__MModuleabstract_collection__Setmodel__MClassType,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+497, /* MapKeysIterator[MModule, Set[MClassType]] */
+},
+};
+const struct types resolution_table_abstract_collection__MapKeysIteratormmodule__MModuleabstract_collection__Setmodel__MClassType = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratormmodule__MModuleabstract_collection__Setmodel__MClassType, /* MapIterator[MapKeysIterator#0, MapKeysIterator#1]: MapIterator[MModule, Set[MClassType]] */
+&type_array__Arraymmodule__MModule, /* Array[Iterator#0]: Array[MModule] */
+}
+};
+/* runtime type MapValuesIterator[MModule, Set[MClassType]] */
+const struct type type_abstract_collection__MapValuesIteratormmodule__MModuleabstract_collection__Setmodel__MClassType = {
+498,
+"MapValuesIterator[MModule, Set[MClassType]]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__MapValuesIteratormmodule__MModuleabstract_collection__Setmodel__MClassType,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+498, /* MapValuesIterator[MModule, Set[MClassType]] */
+},
+};
+const struct types resolution_table_abstract_collection__MapValuesIteratormmodule__MModuleabstract_collection__Setmodel__MClassType = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratormmodule__MModuleabstract_collection__Setmodel__MClassType, /* MapIterator[MapValuesIterator#0, MapValuesIterator#1]: MapIterator[MModule, Set[MClassType]] */
+&type_array__Arrayabstract_collection__Setmodel__MClassType, /* Array[Iterator#0]: Array[Set[MClassType]] */
+}
+};
 /* runtime type MapKeysIterator[MClassType, Set[MType]] */
 const struct type type_abstract_collection__MapKeysIteratormodel__MClassTypeabstract_collection__Setmodel__MType = {
-1625,
+1672,
 "MapKeysIterator[MClassType, Set[MType]]", /* class_name_string */
 3,
 0,
@@ -2301,8 +3637,8 @@ const struct type type_abstract_collection__MapKeysIteratormodel__MClassTypeabst
 {
 0, /* nullable Object */
 1, /* Object */
-472, /* MapKeysIterator[MType, Set[MType]] */
-1625, /* MapKeysIterator[MClassType, Set[MType]] */
+499, /* MapKeysIterator[MType, Set[MType]] */
+1672, /* MapKeysIterator[MClassType, Set[MType]] */
 },
 };
 const struct types resolution_table_abstract_collection__MapKeysIteratormodel__MClassTypeabstract_collection__Setmodel__MType = {
@@ -2314,7 +3650,7 @@ const struct types resolution_table_abstract_collection__MapKeysIteratormodel__M
 };
 /* runtime type MapKeysIterator[MType, Set[MType]] */
 const struct type type_abstract_collection__MapKeysIteratormodel__MTypeabstract_collection__Setmodel__MType = {
-472,
+499,
 "MapKeysIterator[MType, Set[MType]]", /* class_name_string */
 2,
 0,
@@ -2323,7 +3659,7 @@ const struct type type_abstract_collection__MapKeysIteratormodel__MTypeabstract_
 {
 0, /* nullable Object */
 1, /* Object */
-472, /* MapKeysIterator[MType, Set[MType]] */
+499, /* MapKeysIterator[MType, Set[MType]] */
 },
 };
 const struct types resolution_table_abstract_collection__MapKeysIteratormodel__MTypeabstract_collection__Setmodel__MType = {
@@ -2335,7 +3671,7 @@ const struct types resolution_table_abstract_collection__MapKeysIteratormodel__M
 };
 /* runtime type MapValuesIterator[MClassType, Set[MType]] */
 const struct type type_abstract_collection__MapValuesIteratormodel__MClassTypeabstract_collection__Setmodel__MType = {
-1626,
+1673,
 "MapValuesIterator[MClassType, Set[MType]]", /* class_name_string */
 3,
 0,
@@ -2344,8 +3680,8 @@ const struct type type_abstract_collection__MapValuesIteratormodel__MClassTypeab
 {
 0, /* nullable Object */
 1, /* Object */
-473, /* MapValuesIterator[MType, Set[MType]] */
-1626, /* MapValuesIterator[MClassType, Set[MType]] */
+500, /* MapValuesIterator[MType, Set[MType]] */
+1673, /* MapValuesIterator[MClassType, Set[MType]] */
 },
 };
 const struct types resolution_table_abstract_collection__MapValuesIteratormodel__MClassTypeabstract_collection__Setmodel__MType = {
@@ -2357,7 +3693,7 @@ const struct types resolution_table_abstract_collection__MapValuesIteratormodel_
 };
 /* runtime type MapValuesIterator[MType, Set[MType]] */
 const struct type type_abstract_collection__MapValuesIteratormodel__MTypeabstract_collection__Setmodel__MType = {
-473,
+500,
 "MapValuesIterator[MType, Set[MType]]", /* class_name_string */
 2,
 0,
@@ -2366,7 +3702,7 @@ const struct type type_abstract_collection__MapValuesIteratormodel__MTypeabstrac
 {
 0, /* nullable Object */
 1, /* Object */
-473, /* MapValuesIterator[MType, Set[MType]] */
+500, /* MapValuesIterator[MType, Set[MType]] */
 },
 };
 const struct types resolution_table_abstract_collection__MapValuesIteratormodel__MTypeabstract_collection__Setmodel__MType = {
@@ -2378,7 +3714,7 @@ const struct types resolution_table_abstract_collection__MapValuesIteratormodel_
 };
 /* runtime type HashMapKeys[MClassType, Int] */
 const struct type type_hash_collection__HashMapKeysmodel__MClassTypekernel__Int = {
-2475,
+2546,
 "HashMapKeys[MClassType, Int]", /* class_name_string */
 3,
 0,
@@ -2387,15 +3723,15 @@ const struct type type_hash_collection__HashMapKeysmodel__MClassTypekernel__Int 
 {
 0, /* nullable Object */
 1, /* Object */
-2112, /* HashMapKeys[MType, Int] */
-2475, /* HashMapKeys[MClassType, Int] */
-164, /* Collection[Object] */
-173, /* Collection[nullable MType] */
+2177, /* HashMapKeys[MType, Int] */
+2546, /* HashMapKeys[MClassType, Int] */
+170, /* Collection[Object] */
+180, /* Collection[nullable MType] */
 -1, /* empty */
-1737, /* Collection[MType] */
+1791, /* Collection[MType] */
 -1, /* empty */
 -1, /* empty */
-1916, /* Collection[MClassType] */
+1978, /* Collection[MClassType] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapKeysmodel__MClassTypekernel__Int = {
@@ -2419,7 +3755,7 @@ NULL, /* empty */
 };
 /* runtime type HashMapValues[MClassType, Int] */
 const struct type type_hash_collection__HashMapValuesmodel__MClassTypekernel__Int = {
-2147,
+2213,
 "HashMapValues[MClassType, Int]", /* class_name_string */
 5,
 0,
@@ -2428,10 +3764,10 @@ const struct type type_hash_collection__HashMapValuesmodel__MClassTypekernel__In
 {
 0, /* nullable Object */
 1, /* Object */
-612, /* Collection[Int] */
-1844, /* HashMapValues[MType, Int] */
-164, /* Collection[Object] */
-2147, /* HashMapValues[MClassType, Int] */
+653, /* Collection[Int] */
+1901, /* HashMapValues[MType, Int] */
+170, /* Collection[Object] */
+2213, /* HashMapValues[MClassType, Int] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapValuesmodel__MClassTypekernel__Int = {
@@ -2455,7 +3791,7 @@ NULL, /* empty */
 };
 /* runtime type NativeArray[nullable HashMapNode[MClassType, Int]] */
 const struct type type_array__NativeArraynullable_hash_collection__HashMapNodemodel__MClassTypekernel__Int = {
-1627,
+1674,
 "NativeArray[nullable HashMapNode[MClassType, Int]]", /* class_name_string */
 3,
 0,
@@ -2464,8 +3800,8 @@ const struct type type_array__NativeArraynullable_hash_collection__HashMapNodemo
 {
 0, /* nullable Object */
 1, /* Object */
-371, /* NativeArray[nullable HashMapNode[MType, Int]] */
-1627, /* NativeArray[nullable HashMapNode[MClassType, Int]] */
+392, /* NativeArray[nullable HashMapNode[MType, Int]] */
+1674, /* NativeArray[nullable HashMapNode[MClassType, Int]] */
 },
 };
 const struct types resolution_table_array__NativeArraynullable_hash_collection__HashMapNodemodel__MClassTypekernel__Int = {
@@ -2477,7 +3813,7 @@ const struct types resolution_table_array__NativeArraynullable_hash_collection__
 };
 /* runtime type HashMapNode[MClassType, Int] */
 const struct type type_hash_collection__HashMapNodemodel__MClassTypekernel__Int = {
-2148,
+2214,
 "HashMapNode[MClassType, Int]", /* class_name_string */
 5,
 0,
@@ -2486,10 +3822,10 @@ const struct type type_hash_collection__HashMapNodemodel__MClassTypekernel__Int 
 {
 0, /* nullable Object */
 1, /* Object */
-133, /* nullable HashMapNode[MType, Int] */
-474, /* nullable HashMapNode[MClassType, Int] */
-1551, /* HashMapNode[MType, Int] */
-2148, /* HashMapNode[MClassType, Int] */
+138, /* nullable HashMapNode[MType, Int] */
+501, /* nullable HashMapNode[MClassType, Int] */
+1593, /* HashMapNode[MType, Int] */
+2214, /* HashMapNode[MClassType, Int] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapNodemodel__MClassTypekernel__Int = {
@@ -2503,7 +3839,7 @@ const struct types resolution_table_hash_collection__HashMapNodemodel__MClassTyp
 };
 /* runtime type nullable HashMapNode[MClassType, Int] */
 const struct type type_nullable_hash_collection__HashMapNodemodel__MClassTypekernel__Int = {
-474,
+501,
 "nullable HashMapNode[MClassType, Int]", /* class_name_string */
 3,
 1,
@@ -2512,8 +3848,8 @@ const struct type type_nullable_hash_collection__HashMapNodemodel__MClassTypeker
 {
 0, /* nullable Object */
 -1, /* empty */
-133, /* nullable HashMapNode[MType, Int] */
-474, /* nullable HashMapNode[MClassType, Int] */
+138, /* nullable HashMapNode[MType, Int] */
+501, /* nullable HashMapNode[MClassType, Int] */
 },
 };
 const struct types resolution_table_nullable_hash_collection__HashMapNodemodel__MClassTypekernel__Int = {
@@ -2527,7 +3863,7 @@ const struct types resolution_table_nullable_hash_collection__HashMapNodemodel__
 };
 /* runtime type HashMapIterator[MClassType, Int] */
 const struct type type_hash_collection__HashMapIteratormodel__MClassTypekernel__Int = {
-2149,
+2215,
 "HashMapIterator[MClassType, Int]", /* class_name_string */
 5,
 0,
@@ -2536,10 +3872,10 @@ const struct type type_hash_collection__HashMapIteratormodel__MClassTypekernel__
 {
 0, /* nullable Object */
 1, /* Object */
-372, /* MapIterator[MType, Int] */
-1552, /* HashMapIterator[MType, Int] */
-1628, /* MapIterator[MClassType, Int] */
-2149, /* HashMapIterator[MClassType, Int] */
+393, /* MapIterator[MType, Int] */
+1594, /* HashMapIterator[MType, Int] */
+1675, /* MapIterator[MClassType, Int] */
+2215, /* HashMapIterator[MClassType, Int] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapIteratormodel__MClassTypekernel__Int = {
@@ -2550,7 +3886,7 @@ const struct types resolution_table_hash_collection__HashMapIteratormodel__MClas
 };
 /* runtime type MapIterator[MClassType, Int] */
 const struct type type_abstract_collection__MapIteratormodel__MClassTypekernel__Int = {
-1628,
+1675,
 "MapIterator[MClassType, Int]", /* class_name_string */
 4,
 0,
@@ -2559,14 +3895,14 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-372, /* MapIterator[MType, Int] */
+393, /* MapIterator[MType, Int] */
 -1, /* empty */
-1628, /* MapIterator[MClassType, Int] */
+1675, /* MapIterator[MClassType, Int] */
 },
 };
 /* runtime type HashMapKeys[MClassType, Map[MType, Int]] */
 const struct type type_hash_collection__HashMapKeysmodel__MClassTypeabstract_collection__Mapmodel__MTypekernel__Int = {
-2476,
+2547,
 "HashMapKeys[MClassType, Map[MType, Int]]", /* class_name_string */
 3,
 0,
@@ -2575,15 +3911,15 @@ const struct type type_hash_collection__HashMapKeysmodel__MClassTypeabstract_col
 {
 0, /* nullable Object */
 1, /* Object */
-2140, /* HashMapKeys[MType, Map[MType, Int]] */
-2476, /* HashMapKeys[MClassType, Map[MType, Int]] */
-164, /* Collection[Object] */
-173, /* Collection[nullable MType] */
+2205, /* HashMapKeys[MType, Map[MType, Int]] */
+2547, /* HashMapKeys[MClassType, Map[MType, Int]] */
+170, /* Collection[Object] */
+180, /* Collection[nullable MType] */
 -1, /* empty */
-1737, /* Collection[MType] */
+1791, /* Collection[MType] */
 -1, /* empty */
 -1, /* empty */
-1916, /* Collection[MClassType] */
+1978, /* Collection[MClassType] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapKeysmodel__MClassTypeabstract_collection__Mapmodel__MTypekernel__Int = {
@@ -2607,7 +3943,7 @@ NULL, /* empty */
 };
 /* runtime type HashMapValues[MClassType, Map[MType, Int]] */
 const struct type type_hash_collection__HashMapValuesmodel__MClassTypeabstract_collection__Mapmodel__MTypekernel__Int = {
-2150,
+2216,
 "HashMapValues[MClassType, Map[MType, Int]]", /* class_name_string */
 5,
 0,
@@ -2616,10 +3952,10 @@ const struct type type_hash_collection__HashMapValuesmodel__MClassTypeabstract_c
 {
 0, /* nullable Object */
 1, /* Object */
-1620, /* Collection[Map[MType, Int]] */
-1874, /* HashMapValues[MType, Map[MType, Int]] */
-164, /* Collection[Object] */
-2150, /* HashMapValues[MClassType, Map[MType, Int]] */
+1664, /* Collection[Map[MType, Int]] */
+1931, /* HashMapValues[MType, Map[MType, Int]] */
+170, /* Collection[Object] */
+2216, /* HashMapValues[MClassType, Map[MType, Int]] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapValuesmodel__MClassTypeabstract_collection__Mapmodel__MTypekernel__Int = {
@@ -2643,7 +3979,7 @@ NULL, /* empty */
 };
 /* runtime type NativeArray[nullable HashMapNode[MClassType, Map[MType, Int]]] */
 const struct type type_array__NativeArraynullable_hash_collection__HashMapNodemodel__MClassTypeabstract_collection__Mapmodel__MTypekernel__Int = {
-1629,
+1676,
 "NativeArray[nullable HashMapNode[MClassType, Map[MType, Int]]]", /* class_name_string */
 3,
 0,
@@ -2652,8 +3988,8 @@ const struct type type_array__NativeArraynullable_hash_collection__HashMapNodemo
 {
 0, /* nullable Object */
 1, /* Object */
-456, /* NativeArray[nullable HashMapNode[MType, Map[MType, Int]]] */
-1629, /* NativeArray[nullable HashMapNode[MClassType, Map[MType, Int]]] */
+481, /* NativeArray[nullable HashMapNode[MType, Map[MType, Int]]] */
+1676, /* NativeArray[nullable HashMapNode[MClassType, Map[MType, Int]]] */
 },
 };
 const struct types resolution_table_array__NativeArraynullable_hash_collection__HashMapNodemodel__MClassTypeabstract_collection__Mapmodel__MTypekernel__Int = {
@@ -2665,7 +4001,7 @@ const struct types resolution_table_array__NativeArraynullable_hash_collection__
 };
 /* runtime type HashMapNode[MClassType, Map[MType, Int]] */
 const struct type type_hash_collection__HashMapNodemodel__MClassTypeabstract_collection__Mapmodel__MTypekernel__Int = {
-2151,
+2217,
 "HashMapNode[MClassType, Map[MType, Int]]", /* class_name_string */
 5,
 0,
@@ -2674,10 +4010,10 @@ const struct type type_hash_collection__HashMapNodemodel__MClassTypeabstract_col
 {
 0, /* nullable Object */
 1, /* Object */
-148, /* nullable HashMapNode[MType, Map[MType, Int]] */
-475, /* nullable HashMapNode[MClassType, Map[MType, Int]] */
-1621, /* HashMapNode[MType, Map[MType, Int]] */
-2151, /* HashMapNode[MClassType, Map[MType, Int]] */
+153, /* nullable HashMapNode[MType, Map[MType, Int]] */
+502, /* nullable HashMapNode[MClassType, Map[MType, Int]] */
+1665, /* HashMapNode[MType, Map[MType, Int]] */
+2217, /* HashMapNode[MClassType, Map[MType, Int]] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapNodemodel__MClassTypeabstract_collection__Mapmodel__MTypekernel__Int = {
@@ -2691,7 +4027,7 @@ const struct types resolution_table_hash_collection__HashMapNodemodel__MClassTyp
 };
 /* runtime type nullable HashMapNode[MClassType, Map[MType, Int]] */
 const struct type type_nullable_hash_collection__HashMapNodemodel__MClassTypeabstract_collection__Mapmodel__MTypekernel__Int = {
-475,
+502,
 "nullable HashMapNode[MClassType, Map[MType, Int]]", /* class_name_string */
 3,
 1,
@@ -2700,8 +4036,8 @@ const struct type type_nullable_hash_collection__HashMapNodemodel__MClassTypeabs
 {
 0, /* nullable Object */
 -1, /* empty */
-148, /* nullable HashMapNode[MType, Map[MType, Int]] */
-475, /* nullable HashMapNode[MClassType, Map[MType, Int]] */
+153, /* nullable HashMapNode[MType, Map[MType, Int]] */
+502, /* nullable HashMapNode[MClassType, Map[MType, Int]] */
 },
 };
 const struct types resolution_table_nullable_hash_collection__HashMapNodemodel__MClassTypeabstract_collection__Mapmodel__MTypekernel__Int = {
@@ -2715,7 +4051,7 @@ const struct types resolution_table_nullable_hash_collection__HashMapNodemodel__
 };
 /* runtime type HashMapIterator[MClassType, Map[MType, Int]] */
 const struct type type_hash_collection__HashMapIteratormodel__MClassTypeabstract_collection__Mapmodel__MTypekernel__Int = {
-2152,
+2218,
 "HashMapIterator[MClassType, Map[MType, Int]]", /* class_name_string */
 5,
 0,
@@ -2724,10 +4060,10 @@ const struct type type_hash_collection__HashMapIteratormodel__MClassTypeabstract
 {
 0, /* nullable Object */
 1, /* Object */
-457, /* MapIterator[MType, Map[MType, Int]] */
-1622, /* HashMapIterator[MType, Map[MType, Int]] */
-1630, /* MapIterator[MClassType, Map[MType, Int]] */
-2152, /* HashMapIterator[MClassType, Map[MType, Int]] */
+482, /* MapIterator[MType, Map[MType, Int]] */
+1666, /* HashMapIterator[MType, Map[MType, Int]] */
+1677, /* MapIterator[MClassType, Map[MType, Int]] */
+2218, /* HashMapIterator[MClassType, Map[MType, Int]] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapIteratormodel__MClassTypeabstract_collection__Mapmodel__MTypekernel__Int = {
@@ -2738,7 +4074,7 @@ const struct types resolution_table_hash_collection__HashMapIteratormodel__MClas
 };
 /* runtime type MapIterator[MClassType, Map[MType, Int]] */
 const struct type type_abstract_collection__MapIteratormodel__MClassTypeabstract_collection__Mapmodel__MTypekernel__Int = {
-1630,
+1677,
 "MapIterator[MClassType, Map[MType, Int]]", /* class_name_string */
 4,
 0,
@@ -2747,14 +4083,14 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-457, /* MapIterator[MType, Map[MType, Int]] */
+482, /* MapIterator[MType, Map[MType, Int]] */
 -1, /* empty */
-1630, /* MapIterator[MClassType, Map[MType, Int]] */
+1677, /* MapIterator[MClassType, Map[MType, Int]] */
 },
 };
 /* runtime type MapKeysIterator[MType, Int] */
 const struct type type_abstract_collection__MapKeysIteratormodel__MTypekernel__Int = {
-476,
+503,
 "MapKeysIterator[MType, Int]", /* class_name_string */
 2,
 0,
@@ -2763,7 +4099,7 @@ const struct type type_abstract_collection__MapKeysIteratormodel__MTypekernel__I
 {
 0, /* nullable Object */
 1, /* Object */
-476, /* MapKeysIterator[MType, Int] */
+503, /* MapKeysIterator[MType, Int] */
 },
 };
 const struct types resolution_table_abstract_collection__MapKeysIteratormodel__MTypekernel__Int = {
@@ -2775,7 +4111,7 @@ const struct types resolution_table_abstract_collection__MapKeysIteratormodel__M
 };
 /* runtime type MapValuesIterator[MType, Int] */
 const struct type type_abstract_collection__MapValuesIteratormodel__MTypekernel__Int = {
-477,
+504,
 "MapValuesIterator[MType, Int]", /* class_name_string */
 2,
 0,
@@ -2784,7 +4120,7 @@ const struct type type_abstract_collection__MapValuesIteratormodel__MTypekernel_
 {
 0, /* nullable Object */
 1, /* Object */
-477, /* MapValuesIterator[MType, Int] */
+504, /* MapValuesIterator[MType, Int] */
 },
 };
 const struct types resolution_table_abstract_collection__MapValuesIteratormodel__MTypekernel__Int = {
@@ -2794,57 +4130,9 @@ const struct types resolution_table_abstract_collection__MapValuesIteratormodel_
 &type_array__Arraykernel__Int, /* Array[Iterator#0]: Array[Int] */
 }
 };
-/* runtime type ArrayIterator[AImport] */
-const struct type type_array__ArrayIteratorparser_nodes__AImport = {
-2153,
-"ArrayIterator[AImport]", /* class_name_string */
-5,
-0,
-&resolution_table_array__ArrayIteratorparser_nodes__AImport,
-6,
-{
-0, /* nullable Object */
-1, /* Object */
-277, /* ArrayIterator[Object] */
-1448, /* ArrayIterator[ANode] */
-1791, /* ArrayIterator[Prod] */
-2153, /* ArrayIterator[AImport] */
-},
-};
-const struct types resolution_table_array__ArrayIteratorparser_nodes__AImport = {
-0, /* dummy */
-{
-&type_array__AbstractArrayReadparser_nodes__AImport, /* AbstractArrayRead[ArrayIterator#0]: AbstractArrayRead[AImport] */
-&type_array__Arrayparser_nodes__AImport, /* Array[Iterator#0]: Array[AImport] */
-}
-};
-/* runtime type NativeArray[AImport] */
-const struct type type_array__NativeArrayparser_nodes__AImport = {
-2154,
-"NativeArray[AImport]", /* class_name_string */
-5,
-0,
-&resolution_table_array__NativeArrayparser_nodes__AImport,
-6,
-{
-0, /* nullable Object */
-1, /* Object */
-185, /* NativeArray[Object] */
-1449, /* NativeArray[ANode] */
-1792, /* NativeArray[Prod] */
-2154, /* NativeArray[AImport] */
-},
-};
-const struct types resolution_table_array__NativeArrayparser_nodes__AImport = {
-0, /* dummy */
-{
-&type_parser_nodes__AImport, /* NativeArray#0: AImport */
-&type_array__NativeArrayparser_nodes__AImport, /* NativeArray[NativeArray#0]: NativeArray[AImport] */
-}
-};
 /* runtime type MapKeysIterator[MClass, MClassType] */
 const struct type type_abstract_collection__MapKeysIteratormodel__MClassmodel__MClassType = {
-478,
+505,
 "MapKeysIterator[MClass, MClassType]", /* class_name_string */
 2,
 0,
@@ -2853,7 +4141,7 @@ const struct type type_abstract_collection__MapKeysIteratormodel__MClassmodel__M
 {
 0, /* nullable Object */
 1, /* Object */
-478, /* MapKeysIterator[MClass, MClassType] */
+505, /* MapKeysIterator[MClass, MClassType] */
 },
 };
 const struct types resolution_table_abstract_collection__MapKeysIteratormodel__MClassmodel__MClassType = {
@@ -2865,7 +4153,7 @@ const struct types resolution_table_abstract_collection__MapKeysIteratormodel__M
 };
 /* runtime type MapValuesIterator[MClass, MClassType] */
 const struct type type_abstract_collection__MapValuesIteratormodel__MClassmodel__MClassType = {
-479,
+506,
 "MapValuesIterator[MClass, MClassType]", /* class_name_string */
 2,
 0,
@@ -2874,7 +4162,7 @@ const struct type type_abstract_collection__MapValuesIteratormodel__MClassmodel_
 {
 0, /* nullable Object */
 1, /* Object */
-479, /* MapValuesIterator[MClass, MClassType] */
+506, /* MapValuesIterator[MClass, MClassType] */
 },
 };
 const struct types resolution_table_abstract_collection__MapValuesIteratormodel__MClassmodel__MClassType = {
@@ -2886,7 +4174,7 @@ const struct types resolution_table_abstract_collection__MapValuesIteratormodel_
 };
 /* runtime type MapKeysIterator[MClass, AType] */
 const struct type type_abstract_collection__MapKeysIteratormodel__MClassparser_nodes__AType = {
-480,
+507,
 "MapKeysIterator[MClass, AType]", /* class_name_string */
 2,
 0,
@@ -2895,7 +4183,7 @@ const struct type type_abstract_collection__MapKeysIteratormodel__MClassparser_n
 {
 0, /* nullable Object */
 1, /* Object */
-480, /* MapKeysIterator[MClass, AType] */
+507, /* MapKeysIterator[MClass, AType] */
 },
 };
 const struct types resolution_table_abstract_collection__MapKeysIteratormodel__MClassparser_nodes__AType = {
@@ -2907,7 +4195,7 @@ const struct types resolution_table_abstract_collection__MapKeysIteratormodel__M
 };
 /* runtime type MapValuesIterator[MClass, AType] */
 const struct type type_abstract_collection__MapValuesIteratormodel__MClassparser_nodes__AType = {
-481,
+508,
 "MapValuesIterator[MClass, AType]", /* class_name_string */
 2,
 0,
@@ -2916,7 +4204,7 @@ const struct type type_abstract_collection__MapValuesIteratormodel__MClassparser
 {
 0, /* nullable Object */
 1, /* Object */
-481, /* MapValuesIterator[MClass, AType] */
+508, /* MapValuesIterator[MClass, AType] */
 },
 };
 const struct types resolution_table_abstract_collection__MapValuesIteratormodel__MClassparser_nodes__AType = {
@@ -2928,7 +4216,7 @@ const struct types resolution_table_abstract_collection__MapValuesIteratormodel_
 };
 /* runtime type ArrayIterator[Couple[MClass, AType]] */
 const struct type type_array__ArrayIteratorabstract_collection__Couplemodel__MClassparser_nodes__AType = {
-1875,
+1933,
 "ArrayIterator[Couple[MClass, AType]]", /* class_name_string */
 4,
 0,
@@ -2937,9 +4225,9 @@ const struct type type_array__ArrayIteratorabstract_collection__Couplemodel__MCl
 {
 0, /* nullable Object */
 1, /* Object */
-277, /* ArrayIterator[Object] */
-482, /* Iterator[Couple[MClass, AType]] */
-1875, /* ArrayIterator[Couple[MClass, AType]] */
+289, /* ArrayIterator[Object] */
+509, /* Iterator[Couple[MClass, AType]] */
+1933, /* ArrayIterator[Couple[MClass, AType]] */
 },
 };
 const struct types resolution_table_array__ArrayIteratorabstract_collection__Couplemodel__MClassparser_nodes__AType = {
@@ -2951,7 +4239,7 @@ const struct types resolution_table_array__ArrayIteratorabstract_collection__Cou
 };
 /* runtime type Iterator[Couple[MClass, AType]] */
 const struct type type_abstract_collection__Iteratorabstract_collection__Couplemodel__MClassparser_nodes__AType = {
-482,
+509,
 "Iterator[Couple[MClass, AType]]", /* class_name_string */
 3,
 0,
@@ -2961,12 +4249,12 @@ NULL,
 0, /* nullable Object */
 1, /* Object */
 -1, /* empty */
-482, /* Iterator[Couple[MClass, AType]] */
+509, /* Iterator[Couple[MClass, AType]] */
 },
 };
 /* runtime type NativeArray[Couple[MClass, AType]] */
 const struct type type_array__NativeArrayabstract_collection__Couplemodel__MClassparser_nodes__AType = {
-1631,
+1678,
 "NativeArray[Couple[MClass, AType]]", /* class_name_string */
 3,
 0,
@@ -2975,8 +4263,8 @@ const struct type type_array__NativeArrayabstract_collection__Couplemodel__MClas
 {
 0, /* nullable Object */
 1, /* Object */
-185, /* NativeArray[Object] */
-1631, /* NativeArray[Couple[MClass, AType]] */
+193, /* NativeArray[Object] */
+1678, /* NativeArray[Couple[MClass, AType]] */
 },
 };
 const struct types resolution_table_array__NativeArrayabstract_collection__Couplemodel__MClassparser_nodes__AType = {
@@ -2988,7 +4276,7 @@ const struct types resolution_table_array__NativeArrayabstract_collection__Coupl
 };
 /* runtime type ContainerIterator[Scope] */
 const struct type type_abstract_collection__ContainerIteratorscope__Scope = {
-483,
+510,
 "ContainerIterator[Scope]", /* class_name_string */
 2,
 0,
@@ -2997,7 +4285,7 @@ const struct type type_abstract_collection__ContainerIteratorscope__Scope = {
 {
 0, /* nullable Object */
 1, /* Object */
-483, /* ContainerIterator[Scope] */
+510, /* ContainerIterator[Scope] */
 },
 };
 const struct types resolution_table_abstract_collection__ContainerIteratorscope__Scope = {
@@ -3009,7 +4297,7 @@ const struct types resolution_table_abstract_collection__ContainerIteratorscope_
 };
 /* runtime type Array[Scope] */
 const struct type type_array__Arrayscope__Scope = {
-2514,
+2587,
 "Array[Scope]", /* class_name_string */
 7,
 0,
@@ -3018,14 +4306,14 @@ const struct type type_array__Arrayscope__Scope = {
 {
 0, /* nullable Object */
 1, /* Object */
-1420, /* Collection[Scope] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-2387, /* AbstractArrayRead[Scope] */
-1728, /* AbstractArrayRead[Object] */
-2514, /* Array[Scope] */
+673, /* Collection[Scope] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
+2454, /* AbstractArrayRead[Scope] */
+1782, /* AbstractArrayRead[Object] */
+2587, /* Array[Scope] */
 -1, /* empty */
-1911, /* Array[Object] */
+1973, /* Array[Object] */
 },
 };
 const struct types resolution_table_array__Arrayscope__Scope = {
@@ -3054,7 +4342,7 @@ NULL, /* empty (AbstractArray[AbstractArrayRead#0]: AbstractArray[Scope] not a l
 };
 /* runtime type AbstractArrayRead[Scope] */
 const struct type type_array__AbstractArrayReadscope__Scope = {
-2387,
+2454,
 "AbstractArrayRead[Scope]", /* class_name_string */
 5,
 0,
@@ -3063,16 +4351,16 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-1420, /* Collection[Scope] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-2387, /* AbstractArrayRead[Scope] */
-1728, /* AbstractArrayRead[Object] */
+673, /* Collection[Scope] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
+2454, /* AbstractArrayRead[Scope] */
+1782, /* AbstractArrayRead[Object] */
 },
 };
 /* runtime type HashMapKeys[MClass, POSetElement[MClass]] */
 const struct type type_hash_collection__HashMapKeysmodel__MClassposet__POSetElementmodel__MClass = {
-2155,
+2219,
 "HashMapKeys[MClass, POSetElement[MClass]]", /* class_name_string */
 3,
 0,
@@ -3081,10 +4369,10 @@ const struct type type_hash_collection__HashMapKeysmodel__MClassposet__POSetElem
 {
 0, /* nullable Object */
 1, /* Object */
-171, /* Collection[nullable MClass] */
-2155, /* HashMapKeys[MClass, POSetElement[MClass]] */
-164, /* Collection[Object] */
-1733, /* Collection[MClass] */
+178, /* Collection[nullable MClass] */
+2219, /* HashMapKeys[MClass, POSetElement[MClass]] */
+170, /* Collection[Object] */
+1787, /* Collection[MClass] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapKeysmodel__MClassposet__POSetElementmodel__MClass = {
@@ -3108,7 +4396,7 @@ NULL, /* empty */
 };
 /* runtime type HashMapValues[MClass, POSetElement[MClass]] */
 const struct type type_hash_collection__HashMapValuesmodel__MClassposet__POSetElementmodel__MClass = {
-1876,
+1934,
 "HashMapValues[MClass, POSetElement[MClass]]", /* class_name_string */
 3,
 0,
@@ -3117,9 +4405,9 @@ const struct type type_hash_collection__HashMapValuesmodel__MClassposet__POSetEl
 {
 0, /* nullable Object */
 1, /* Object */
-1632, /* Collection[POSetElement[MClass]] */
-1876, /* HashMapValues[MClass, POSetElement[MClass]] */
-164, /* Collection[Object] */
+1679, /* Collection[POSetElement[MClass]] */
+1934, /* HashMapValues[MClass, POSetElement[MClass]] */
+170, /* Collection[Object] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapValuesmodel__MClassposet__POSetElementmodel__MClass = {
@@ -3143,7 +4431,7 @@ NULL, /* empty */
 };
 /* runtime type Collection[POSetElement[MClass]] */
 const struct type type_abstract_collection__Collectionposet__POSetElementmodel__MClass = {
-1632,
+1679,
 "Collection[POSetElement[MClass]]", /* class_name_string */
 2,
 0,
@@ -3152,14 +4440,14 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-1632, /* Collection[POSetElement[MClass]] */
+1679, /* Collection[POSetElement[MClass]] */
 -1, /* empty */
-164, /* Collection[Object] */
+170, /* Collection[Object] */
 },
 };
 /* runtime type NativeArray[nullable HashMapNode[MClass, POSetElement[MClass]]] */
 const struct type type_array__NativeArraynullable_hash_collection__HashMapNodemodel__MClassposet__POSetElementmodel__MClass = {
-484,
+511,
 "NativeArray[nullable HashMapNode[MClass, POSetElement[MClass]]]", /* class_name_string */
 2,
 0,
@@ -3168,7 +4456,7 @@ const struct type type_array__NativeArraynullable_hash_collection__HashMapNodemo
 {
 0, /* nullable Object */
 1, /* Object */
-484, /* NativeArray[nullable HashMapNode[MClass, POSetElement[MClass]]] */
+511, /* NativeArray[nullable HashMapNode[MClass, POSetElement[MClass]]] */
 },
 };
 const struct types resolution_table_array__NativeArraynullable_hash_collection__HashMapNodemodel__MClassposet__POSetElementmodel__MClass = {
@@ -3180,7 +4468,7 @@ const struct types resolution_table_array__NativeArraynullable_hash_collection__
 };
 /* runtime type HashMapNode[MClass, POSetElement[MClass]] */
 const struct type type_hash_collection__HashMapNodemodel__MClassposet__POSetElementmodel__MClass = {
-1633,
+1680,
 "HashMapNode[MClass, POSetElement[MClass]]", /* class_name_string */
 3,
 0,
@@ -3189,8 +4477,8 @@ const struct type type_hash_collection__HashMapNodemodel__MClassposet__POSetElem
 {
 0, /* nullable Object */
 1, /* Object */
-149, /* nullable HashMapNode[MClass, POSetElement[MClass]] */
-1633, /* HashMapNode[MClass, POSetElement[MClass]] */
+155, /* nullable HashMapNode[MClass, POSetElement[MClass]] */
+1680, /* HashMapNode[MClass, POSetElement[MClass]] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapNodemodel__MClassposet__POSetElementmodel__MClass = {
@@ -3204,7 +4492,7 @@ const struct types resolution_table_hash_collection__HashMapNodemodel__MClasspos
 };
 /* runtime type nullable HashMapNode[MClass, POSetElement[MClass]] */
 const struct type type_nullable_hash_collection__HashMapNodemodel__MClassposet__POSetElementmodel__MClass = {
-149,
+155,
 "nullable HashMapNode[MClass, POSetElement[MClass]]", /* class_name_string */
 2,
 1,
@@ -3213,7 +4501,7 @@ const struct type type_nullable_hash_collection__HashMapNodemodel__MClassposet__
 {
 0, /* nullable Object */
 -1, /* empty */
-149, /* nullable HashMapNode[MClass, POSetElement[MClass]] */
+155, /* nullable HashMapNode[MClass, POSetElement[MClass]] */
 },
 };
 const struct types resolution_table_nullable_hash_collection__HashMapNodemodel__MClassposet__POSetElementmodel__MClass = {
@@ -3227,7 +4515,7 @@ const struct types resolution_table_nullable_hash_collection__HashMapNodemodel__
 };
 /* runtime type HashMapIterator[MClass, POSetElement[MClass]] */
 const struct type type_hash_collection__HashMapIteratormodel__MClassposet__POSetElementmodel__MClass = {
-1634,
+1681,
 "HashMapIterator[MClass, POSetElement[MClass]]", /* class_name_string */
 3,
 0,
@@ -3236,8 +4524,8 @@ const struct type type_hash_collection__HashMapIteratormodel__MClassposet__POSet
 {
 0, /* nullable Object */
 1, /* Object */
-485, /* MapIterator[MClass, POSetElement[MClass]] */
-1634, /* HashMapIterator[MClass, POSetElement[MClass]] */
+512, /* MapIterator[MClass, POSetElement[MClass]] */
+1681, /* HashMapIterator[MClass, POSetElement[MClass]] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapIteratormodel__MClassposet__POSetElementmodel__MClass = {
@@ -3248,7 +4536,7 @@ const struct types resolution_table_hash_collection__HashMapIteratormodel__MClas
 };
 /* runtime type MapIterator[MClass, POSetElement[MClass]] */
 const struct type type_abstract_collection__MapIteratormodel__MClassposet__POSetElementmodel__MClass = {
-485,
+512,
 "MapIterator[MClass, POSetElement[MClass]]", /* class_name_string */
 2,
 0,
@@ -3257,144 +4545,60 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-485, /* MapIterator[MClass, POSetElement[MClass]] */
+512, /* MapIterator[MClass, POSetElement[MClass]] */
 },
 };
-/* runtime type ArrayIterator[AExternCodeBlock] */
-const struct type type_array__ArrayIteratorparser_nodes__AExternCodeBlock = {
-2156,
-"ArrayIterator[AExternCodeBlock]", /* class_name_string */
+/* runtime type ArrayIterator[AImport] */
+const struct type type_array__ArrayIteratorparser_nodes__AImport = {
+2220,
+"ArrayIterator[AImport]", /* class_name_string */
 5,
 0,
-&resolution_table_array__ArrayIteratorparser_nodes__AExternCodeBlock,
+&resolution_table_array__ArrayIteratorparser_nodes__AImport,
 6,
 {
 0, /* nullable Object */
 1, /* Object */
-277, /* ArrayIterator[Object] */
-1448, /* ArrayIterator[ANode] */
-1791, /* ArrayIterator[Prod] */
-2156, /* ArrayIterator[AExternCodeBlock] */
+289, /* ArrayIterator[Object] */
+1492, /* ArrayIterator[ANode] */
+1848, /* ArrayIterator[Prod] */
+2220, /* ArrayIterator[AImport] */
 },
 };
-const struct types resolution_table_array__ArrayIteratorparser_nodes__AExternCodeBlock = {
+const struct types resolution_table_array__ArrayIteratorparser_nodes__AImport = {
 0, /* dummy */
 {
-&type_array__AbstractArrayReadparser_nodes__AExternCodeBlock, /* AbstractArrayRead[ArrayIterator#0]: AbstractArrayRead[AExternCodeBlock] */
-&type_array__Arrayparser_nodes__AExternCodeBlock, /* Array[Iterator#0]: Array[AExternCodeBlock] */
+&type_array__AbstractArrayReadparser_nodes__AImport, /* AbstractArrayRead[ArrayIterator#0]: AbstractArrayRead[AImport] */
+&type_array__Arrayparser_nodes__AImport, /* Array[Iterator#0]: Array[AImport] */
 }
 };
-/* runtime type NativeArray[AExternCodeBlock] */
-const struct type type_array__NativeArrayparser_nodes__AExternCodeBlock = {
-2157,
-"NativeArray[AExternCodeBlock]", /* class_name_string */
+/* runtime type NativeArray[AImport] */
+const struct type type_array__NativeArrayparser_nodes__AImport = {
+2221,
+"NativeArray[AImport]", /* class_name_string */
 5,
 0,
-&resolution_table_array__NativeArrayparser_nodes__AExternCodeBlock,
+&resolution_table_array__NativeArrayparser_nodes__AImport,
 6,
 {
 0, /* nullable Object */
 1, /* Object */
-185, /* NativeArray[Object] */
-1449, /* NativeArray[ANode] */
-1792, /* NativeArray[Prod] */
-2157, /* NativeArray[AExternCodeBlock] */
+193, /* NativeArray[Object] */
+1493, /* NativeArray[ANode] */
+1849, /* NativeArray[Prod] */
+2221, /* NativeArray[AImport] */
 },
 };
-const struct types resolution_table_array__NativeArrayparser_nodes__AExternCodeBlock = {
+const struct types resolution_table_array__NativeArrayparser_nodes__AImport = {
 0, /* dummy */
 {
-&type_parser_nodes__AExternCodeBlock, /* NativeArray#0: AExternCodeBlock */
-&type_array__NativeArrayparser_nodes__AExternCodeBlock, /* NativeArray[NativeArray#0]: NativeArray[AExternCodeBlock] */
-}
-};
-/* runtime type MapKeysIterator[MClass, AClassdef] */
-const struct type type_abstract_collection__MapKeysIteratormodel__MClassparser_nodes__AClassdef = {
-486,
-"MapKeysIterator[MClass, AClassdef]", /* class_name_string */
-2,
-0,
-&resolution_table_abstract_collection__MapKeysIteratormodel__MClassparser_nodes__AClassdef,
-3,
-{
-0, /* nullable Object */
-1, /* Object */
-486, /* MapKeysIterator[MClass, AClassdef] */
-},
-};
-const struct types resolution_table_abstract_collection__MapKeysIteratormodel__MClassparser_nodes__AClassdef = {
-0, /* dummy */
-{
-&type_abstract_collection__MapIteratormodel__MClassparser_nodes__AClassdef, /* MapIterator[MapKeysIterator#0, MapKeysIterator#1]: MapIterator[MClass, AClassdef] */
-&type_array__Arraymodel__MClass, /* Array[Iterator#0]: Array[MClass] */
-}
-};
-/* runtime type MapValuesIterator[MClass, AClassdef] */
-const struct type type_abstract_collection__MapValuesIteratormodel__MClassparser_nodes__AClassdef = {
-487,
-"MapValuesIterator[MClass, AClassdef]", /* class_name_string */
-2,
-0,
-&resolution_table_abstract_collection__MapValuesIteratormodel__MClassparser_nodes__AClassdef,
-3,
-{
-0, /* nullable Object */
-1, /* Object */
-487, /* MapValuesIterator[MClass, AClassdef] */
-},
-};
-const struct types resolution_table_abstract_collection__MapValuesIteratormodel__MClassparser_nodes__AClassdef = {
-0, /* dummy */
-{
-&type_abstract_collection__MapIteratormodel__MClassparser_nodes__AClassdef, /* MapIterator[MapValuesIterator#0, MapValuesIterator#1]: MapIterator[MClass, AClassdef] */
-&type_array__Arrayparser_nodes__AClassdef, /* Array[Iterator#0]: Array[AClassdef] */
-}
-};
-/* runtime type MapKeysIterator[MProperty, APropdef] */
-const struct type type_abstract_collection__MapKeysIteratormodel__MPropertyparser_nodes__APropdef = {
-488,
-"MapKeysIterator[MProperty, APropdef]", /* class_name_string */
-2,
-0,
-&resolution_table_abstract_collection__MapKeysIteratormodel__MPropertyparser_nodes__APropdef,
-3,
-{
-0, /* nullable Object */
-1, /* Object */
-488, /* MapKeysIterator[MProperty, APropdef] */
-},
-};
-const struct types resolution_table_abstract_collection__MapKeysIteratormodel__MPropertyparser_nodes__APropdef = {
-0, /* dummy */
-{
-&type_abstract_collection__MapIteratormodel__MPropertyparser_nodes__APropdef, /* MapIterator[MapKeysIterator#0, MapKeysIterator#1]: MapIterator[MProperty, APropdef] */
-&type_array__Arraymodel__MProperty, /* Array[Iterator#0]: Array[MProperty] */
-}
-};
-/* runtime type MapValuesIterator[MProperty, APropdef] */
-const struct type type_abstract_collection__MapValuesIteratormodel__MPropertyparser_nodes__APropdef = {
-489,
-"MapValuesIterator[MProperty, APropdef]", /* class_name_string */
-2,
-0,
-&resolution_table_abstract_collection__MapValuesIteratormodel__MPropertyparser_nodes__APropdef,
-3,
-{
-0, /* nullable Object */
-1, /* Object */
-489, /* MapValuesIterator[MProperty, APropdef] */
-},
-};
-const struct types resolution_table_abstract_collection__MapValuesIteratormodel__MPropertyparser_nodes__APropdef = {
-0, /* dummy */
-{
-&type_abstract_collection__MapIteratormodel__MPropertyparser_nodes__APropdef, /* MapIterator[MapValuesIterator#0, MapValuesIterator#1]: MapIterator[MProperty, APropdef] */
-&type_array__Arrayparser_nodes__APropdef, /* Array[Iterator#0]: Array[APropdef] */
+&type_parser_nodes__AImport, /* NativeArray#0: AImport */
+&type_array__NativeArrayparser_nodes__AImport, /* NativeArray[NativeArray#0]: NativeArray[AImport] */
 }
 };
 /* runtime type ArrayIterator[AFormaldef] */
 const struct type type_array__ArrayIteratorparser_nodes__AFormaldef = {
-2158,
+2222,
 "ArrayIterator[AFormaldef]", /* class_name_string */
 5,
 0,
@@ -3403,10 +4607,10 @@ const struct type type_array__ArrayIteratorparser_nodes__AFormaldef = {
 {
 0, /* nullable Object */
 1, /* Object */
-277, /* ArrayIterator[Object] */
-1448, /* ArrayIterator[ANode] */
-1791, /* ArrayIterator[Prod] */
-2158, /* ArrayIterator[AFormaldef] */
+289, /* ArrayIterator[Object] */
+1492, /* ArrayIterator[ANode] */
+1848, /* ArrayIterator[Prod] */
+2222, /* ArrayIterator[AFormaldef] */
 },
 };
 const struct types resolution_table_array__ArrayIteratorparser_nodes__AFormaldef = {
@@ -3418,7 +4622,7 @@ const struct types resolution_table_array__ArrayIteratorparser_nodes__AFormaldef
 };
 /* runtime type NativeArray[AFormaldef] */
 const struct type type_array__NativeArrayparser_nodes__AFormaldef = {
-2159,
+2223,
 "NativeArray[AFormaldef]", /* class_name_string */
 5,
 0,
@@ -3427,10 +4631,10 @@ const struct type type_array__NativeArrayparser_nodes__AFormaldef = {
 {
 0, /* nullable Object */
 1, /* Object */
-185, /* NativeArray[Object] */
-1449, /* NativeArray[ANode] */
-1792, /* NativeArray[Prod] */
-2159, /* NativeArray[AFormaldef] */
+193, /* NativeArray[Object] */
+1493, /* NativeArray[ANode] */
+1849, /* NativeArray[Prod] */
+2223, /* NativeArray[AFormaldef] */
 },
 };
 const struct types resolution_table_array__NativeArrayparser_nodes__AFormaldef = {
@@ -3442,7 +4646,7 @@ const struct types resolution_table_array__NativeArrayparser_nodes__AFormaldef =
 };
 /* runtime type ArrayIterator[ASuperclass] */
 const struct type type_array__ArrayIteratorparser_nodes__ASuperclass = {
-2160,
+2224,
 "ArrayIterator[ASuperclass]", /* class_name_string */
 5,
 0,
@@ -3451,10 +4655,10 @@ const struct type type_array__ArrayIteratorparser_nodes__ASuperclass = {
 {
 0, /* nullable Object */
 1, /* Object */
-277, /* ArrayIterator[Object] */
-1448, /* ArrayIterator[ANode] */
-1791, /* ArrayIterator[Prod] */
-2160, /* ArrayIterator[ASuperclass] */
+289, /* ArrayIterator[Object] */
+1492, /* ArrayIterator[ANode] */
+1848, /* ArrayIterator[Prod] */
+2224, /* ArrayIterator[ASuperclass] */
 },
 };
 const struct types resolution_table_array__ArrayIteratorparser_nodes__ASuperclass = {
@@ -3466,7 +4670,7 @@ const struct types resolution_table_array__ArrayIteratorparser_nodes__ASuperclas
 };
 /* runtime type NativeArray[ASuperclass] */
 const struct type type_array__NativeArrayparser_nodes__ASuperclass = {
-2161,
+2225,
 "NativeArray[ASuperclass]", /* class_name_string */
 5,
 0,
@@ -3475,10 +4679,10 @@ const struct type type_array__NativeArrayparser_nodes__ASuperclass = {
 {
 0, /* nullable Object */
 1, /* Object */
-185, /* NativeArray[Object] */
-1449, /* NativeArray[ANode] */
-1792, /* NativeArray[Prod] */
-2161, /* NativeArray[ASuperclass] */
+193, /* NativeArray[Object] */
+1493, /* NativeArray[ANode] */
+1849, /* NativeArray[Prod] */
+2225, /* NativeArray[ASuperclass] */
 },
 };
 const struct types resolution_table_array__NativeArrayparser_nodes__ASuperclass = {
@@ -3488,430 +4692,44 @@ const struct types resolution_table_array__NativeArrayparser_nodes__ASuperclass 
 &type_array__NativeArrayparser_nodes__ASuperclass, /* NativeArray[NativeArray#0]: NativeArray[ASuperclass] */
 }
 };
-/* runtime type ArrayIterator[AAnnotation] */
-const struct type type_array__ArrayIteratorparser_nodes__AAnnotation = {
-2162,
-"ArrayIterator[AAnnotation]", /* class_name_string */
-5,
-0,
-&resolution_table_array__ArrayIteratorparser_nodes__AAnnotation,
-6,
-{
-0, /* nullable Object */
-1, /* Object */
-277, /* ArrayIterator[Object] */
-1448, /* ArrayIterator[ANode] */
-1791, /* ArrayIterator[Prod] */
-2162, /* ArrayIterator[AAnnotation] */
-},
-};
-const struct types resolution_table_array__ArrayIteratorparser_nodes__AAnnotation = {
-0, /* dummy */
-{
-&type_array__AbstractArrayReadparser_nodes__AAnnotation, /* AbstractArrayRead[ArrayIterator#0]: AbstractArrayRead[AAnnotation] */
-&type_array__Arrayparser_nodes__AAnnotation, /* Array[Iterator#0]: Array[AAnnotation] */
-}
-};
-/* runtime type NativeArray[AAnnotation] */
-const struct type type_array__NativeArrayparser_nodes__AAnnotation = {
-2163,
-"NativeArray[AAnnotation]", /* class_name_string */
-5,
-0,
-&resolution_table_array__NativeArrayparser_nodes__AAnnotation,
-6,
-{
-0, /* nullable Object */
-1, /* Object */
-185, /* NativeArray[Object] */
-1449, /* NativeArray[ANode] */
-1792, /* NativeArray[Prod] */
-2163, /* NativeArray[AAnnotation] */
-},
-};
-const struct types resolution_table_array__NativeArrayparser_nodes__AAnnotation = {
-0, /* dummy */
-{
-&type_parser_nodes__AAnnotation, /* NativeArray#0: AAnnotation */
-&type_array__NativeArrayparser_nodes__AAnnotation, /* NativeArray[NativeArray#0]: NativeArray[AAnnotation] */
-}
-};
-/* runtime type ArrayIterator[AParam] */
-const struct type type_array__ArrayIteratorparser_nodes__AParam = {
-2164,
-"ArrayIterator[AParam]", /* class_name_string */
-5,
-0,
-&resolution_table_array__ArrayIteratorparser_nodes__AParam,
-6,
-{
-0, /* nullable Object */
-1, /* Object */
-277, /* ArrayIterator[Object] */
-1448, /* ArrayIterator[ANode] */
-1791, /* ArrayIterator[Prod] */
-2164, /* ArrayIterator[AParam] */
-},
-};
-const struct types resolution_table_array__ArrayIteratorparser_nodes__AParam = {
-0, /* dummy */
-{
-&type_array__AbstractArrayReadparser_nodes__AParam, /* AbstractArrayRead[ArrayIterator#0]: AbstractArrayRead[AParam] */
-&type_array__Arrayparser_nodes__AParam, /* Array[Iterator#0]: Array[AParam] */
-}
-};
-/* runtime type NativeArray[AParam] */
-const struct type type_array__NativeArrayparser_nodes__AParam = {
-2165,
-"NativeArray[AParam]", /* class_name_string */
-5,
-0,
-&resolution_table_array__NativeArrayparser_nodes__AParam,
-6,
-{
-0, /* nullable Object */
-1, /* Object */
-185, /* NativeArray[Object] */
-1449, /* NativeArray[ANode] */
-1792, /* NativeArray[Prod] */
-2165, /* NativeArray[AParam] */
-},
-};
-const struct types resolution_table_array__NativeArrayparser_nodes__AParam = {
-0, /* dummy */
-{
-&type_parser_nodes__AParam, /* NativeArray#0: AParam */
-&type_array__NativeArrayparser_nodes__AParam, /* NativeArray[NativeArray#0]: NativeArray[AParam] */
-}
-};
-/* runtime type ArrayIterator[AExternCall] */
-const struct type type_array__ArrayIteratorparser_nodes__AExternCall = {
-2166,
-"ArrayIterator[AExternCall]", /* class_name_string */
-5,
-0,
-&resolution_table_array__ArrayIteratorparser_nodes__AExternCall,
-6,
-{
-0, /* nullable Object */
-1, /* Object */
-277, /* ArrayIterator[Object] */
-1448, /* ArrayIterator[ANode] */
-1791, /* ArrayIterator[Prod] */
-2166, /* ArrayIterator[AExternCall] */
-},
-};
-const struct types resolution_table_array__ArrayIteratorparser_nodes__AExternCall = {
-0, /* dummy */
-{
-&type_array__AbstractArrayReadparser_nodes__AExternCall, /* AbstractArrayRead[ArrayIterator#0]: AbstractArrayRead[AExternCall] */
-&type_array__Arrayparser_nodes__AExternCall, /* Array[Iterator#0]: Array[AExternCall] */
-}
-};
-/* runtime type NativeArray[AExternCall] */
-const struct type type_array__NativeArrayparser_nodes__AExternCall = {
-2167,
-"NativeArray[AExternCall]", /* class_name_string */
-5,
-0,
-&resolution_table_array__NativeArrayparser_nodes__AExternCall,
-6,
-{
-0, /* nullable Object */
-1, /* Object */
-185, /* NativeArray[Object] */
-1449, /* NativeArray[ANode] */
-1792, /* NativeArray[Prod] */
-2167, /* NativeArray[AExternCall] */
-},
-};
-const struct types resolution_table_array__NativeArrayparser_nodes__AExternCall = {
-0, /* dummy */
-{
-&type_parser_nodes__AExternCall, /* NativeArray#0: AExternCall */
-&type_array__NativeArrayparser_nodes__AExternCall, /* NativeArray[NativeArray#0]: NativeArray[AExternCall] */
-}
-};
-/* runtime type ArrayIterator[AType] */
-const struct type type_array__ArrayIteratorparser_nodes__AType = {
-2168,
-"ArrayIterator[AType]", /* class_name_string */
-5,
-0,
-&resolution_table_array__ArrayIteratorparser_nodes__AType,
-6,
-{
-0, /* nullable Object */
-1, /* Object */
-277, /* ArrayIterator[Object] */
-1448, /* ArrayIterator[ANode] */
-1791, /* ArrayIterator[Prod] */
-2168, /* ArrayIterator[AType] */
-},
-};
-const struct types resolution_table_array__ArrayIteratorparser_nodes__AType = {
-0, /* dummy */
-{
-&type_array__AbstractArrayReadparser_nodes__AType, /* AbstractArrayRead[ArrayIterator#0]: AbstractArrayRead[AType] */
-&type_array__Arrayparser_nodes__AType, /* Array[Iterator#0]: Array[AType] */
-}
-};
-/* runtime type NativeArray[AType] */
-const struct type type_array__NativeArrayparser_nodes__AType = {
-2169,
-"NativeArray[AType]", /* class_name_string */
-5,
-0,
-&resolution_table_array__NativeArrayparser_nodes__AType,
-6,
-{
-0, /* nullable Object */
-1, /* Object */
-185, /* NativeArray[Object] */
-1449, /* NativeArray[ANode] */
-1792, /* NativeArray[Prod] */
-2169, /* NativeArray[AType] */
-},
-};
-const struct types resolution_table_array__NativeArrayparser_nodes__AType = {
-0, /* dummy */
-{
-&type_parser_nodes__AType, /* NativeArray#0: AType */
-&type_array__NativeArrayparser_nodes__AType, /* NativeArray[NativeArray#0]: NativeArray[AType] */
-}
-};
-/* runtime type ArrayIterator[TId] */
-const struct type type_array__ArrayIteratorparser_nodes__TId = {
-2170,
-"ArrayIterator[TId]", /* class_name_string */
-5,
-0,
-&resolution_table_array__ArrayIteratorparser_nodes__TId,
-6,
-{
-0, /* nullable Object */
-1, /* Object */
-277, /* ArrayIterator[Object] */
-1448, /* ArrayIterator[ANode] */
-1851, /* ArrayIterator[Token] */
-2170, /* ArrayIterator[TId] */
-},
-};
-const struct types resolution_table_array__ArrayIteratorparser_nodes__TId = {
-0, /* dummy */
-{
-&type_array__AbstractArrayReadparser_nodes__TId, /* AbstractArrayRead[ArrayIterator#0]: AbstractArrayRead[TId] */
-&type_array__Arrayparser_nodes__TId, /* Array[Iterator#0]: Array[TId] */
-}
-};
-/* runtime type NativeArray[TId] */
-const struct type type_array__NativeArrayparser_nodes__TId = {
-2171,
-"NativeArray[TId]", /* class_name_string */
-5,
-0,
-&resolution_table_array__NativeArrayparser_nodes__TId,
-6,
-{
-0, /* nullable Object */
-1, /* Object */
-185, /* NativeArray[Object] */
-1449, /* NativeArray[ANode] */
-1852, /* NativeArray[Token] */
-2171, /* NativeArray[TId] */
-},
-};
-const struct types resolution_table_array__NativeArrayparser_nodes__TId = {
-0, /* dummy */
-{
-&type_parser_nodes__TId, /* NativeArray#0: TId */
-&type_array__NativeArrayparser_nodes__TId, /* NativeArray[NativeArray#0]: NativeArray[TId] */
-}
-};
-/* runtime type ArrayIterator[AAtArg] */
-const struct type type_array__ArrayIteratorparser_nodes__AAtArg = {
-2172,
-"ArrayIterator[AAtArg]", /* class_name_string */
-5,
-0,
-&resolution_table_array__ArrayIteratorparser_nodes__AAtArg,
-6,
-{
-0, /* nullable Object */
-1, /* Object */
-277, /* ArrayIterator[Object] */
-1448, /* ArrayIterator[ANode] */
-1791, /* ArrayIterator[Prod] */
-2172, /* ArrayIterator[AAtArg] */
-},
-};
-const struct types resolution_table_array__ArrayIteratorparser_nodes__AAtArg = {
-0, /* dummy */
-{
-&type_array__AbstractArrayReadparser_nodes__AAtArg, /* AbstractArrayRead[ArrayIterator#0]: AbstractArrayRead[AAtArg] */
-&type_array__Arrayparser_nodes__AAtArg, /* Array[Iterator#0]: Array[AAtArg] */
-}
-};
-/* runtime type NativeArray[AAtArg] */
-const struct type type_array__NativeArrayparser_nodes__AAtArg = {
-2173,
-"NativeArray[AAtArg]", /* class_name_string */
-5,
-0,
-&resolution_table_array__NativeArrayparser_nodes__AAtArg,
-6,
-{
-0, /* nullable Object */
-1, /* Object */
-185, /* NativeArray[Object] */
-1449, /* NativeArray[ANode] */
-1792, /* NativeArray[Prod] */
-2173, /* NativeArray[AAtArg] */
-},
-};
-const struct types resolution_table_array__NativeArrayparser_nodes__AAtArg = {
-0, /* dummy */
-{
-&type_parser_nodes__AAtArg, /* NativeArray#0: AAtArg */
-&type_array__NativeArrayparser_nodes__AAtArg, /* NativeArray[NativeArray#0]: NativeArray[AAtArg] */
-}
-};
-/* runtime type ArrayIterator[TComment] */
-const struct type type_array__ArrayIteratorparser_nodes__TComment = {
-2174,
-"ArrayIterator[TComment]", /* class_name_string */
-5,
-0,
-&resolution_table_array__ArrayIteratorparser_nodes__TComment,
-6,
-{
-0, /* nullable Object */
-1, /* Object */
-277, /* ArrayIterator[Object] */
-1448, /* ArrayIterator[ANode] */
-1851, /* ArrayIterator[Token] */
-2174, /* ArrayIterator[TComment] */
-},
-};
-const struct types resolution_table_array__ArrayIteratorparser_nodes__TComment = {
-0, /* dummy */
-{
-&type_array__AbstractArrayReadparser_nodes__TComment, /* AbstractArrayRead[ArrayIterator#0]: AbstractArrayRead[TComment] */
-&type_array__Arrayparser_nodes__TComment, /* Array[Iterator#0]: Array[TComment] */
-}
-};
-/* runtime type NativeArray[TComment] */
-const struct type type_array__NativeArrayparser_nodes__TComment = {
-2175,
-"NativeArray[TComment]", /* class_name_string */
-5,
-0,
-&resolution_table_array__NativeArrayparser_nodes__TComment,
-6,
-{
-0, /* nullable Object */
-1, /* Object */
-185, /* NativeArray[Object] */
-1449, /* NativeArray[ANode] */
-1852, /* NativeArray[Token] */
-2175, /* NativeArray[TComment] */
-},
-};
-const struct types resolution_table_array__NativeArrayparser_nodes__TComment = {
-0, /* dummy */
-{
-&type_parser_nodes__TComment, /* NativeArray#0: TComment */
-&type_array__NativeArrayparser_nodes__TComment, /* NativeArray[NativeArray#0]: NativeArray[TComment] */
-}
-};
-/* runtime type ArrayIterator[MMethodDef] */
-const struct type type_array__ArrayIteratormodel__MMethodDef = {
-2388,
-"ArrayIterator[MMethodDef]", /* class_name_string */
-6,
-0,
-&resolution_table_array__ArrayIteratormodel__MMethodDef,
-7,
-{
-0, /* nullable Object */
-1, /* Object */
-277, /* ArrayIterator[Object] */
-363, /* ArrayIterator[nullable MPropDef] */
-1435, /* ArrayIterator[PropertyLayoutElement] */
-2102, /* ArrayIterator[MPropDef] */
-2388, /* ArrayIterator[MMethodDef] */
-},
-};
-const struct types resolution_table_array__ArrayIteratormodel__MMethodDef = {
-0, /* dummy */
-{
-&type_array__AbstractArrayReadmodel__MMethodDef, /* AbstractArrayRead[ArrayIterator#0]: AbstractArrayRead[MMethodDef] */
-&type_array__Arraymodel__MMethodDef, /* Array[Iterator#0]: Array[MMethodDef] */
-}
-};
-/* runtime type NativeArray[MMethodDef] */
-const struct type type_array__NativeArraymodel__MMethodDef = {
-2389,
-"NativeArray[MMethodDef]", /* class_name_string */
-6,
-0,
-&resolution_table_array__NativeArraymodel__MMethodDef,
-7,
-{
-0, /* nullable Object */
-1, /* Object */
-185, /* NativeArray[Object] */
-364, /* NativeArray[nullable MPropDef] */
-1436, /* NativeArray[PropertyLayoutElement] */
-2103, /* NativeArray[MPropDef] */
-2389, /* NativeArray[MMethodDef] */
-},
-};
-const struct types resolution_table_array__NativeArraymodel__MMethodDef = {
-0, /* dummy */
-{
-&type_model__MMethodDef, /* NativeArray#0: MMethodDef */
-&type_array__NativeArraymodel__MMethodDef, /* NativeArray[NativeArray#0]: NativeArray[MMethodDef] */
-}
-};
 /* runtime type HashMap[MModule, HashMap[MType, Array[MMethodDef]]] */
-const struct type type_hash_collection__HashMapmodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef = {
-490,
+const struct type type_hash_collection__HashMapmmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef = {
+513,
 "HashMap[MModule, HashMap[MType, Array[MMethodDef]]]", /* class_name_string */
 2,
 0,
-&resolution_table_hash_collection__HashMapmodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef,
+&resolution_table_hash_collection__HashMapmmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef,
 3,
 {
 0, /* nullable Object */
 1, /* Object */
-490, /* HashMap[MModule, HashMap[MType, Array[MMethodDef]]] */
+513, /* HashMap[MModule, HashMap[MType, Array[MMethodDef]]] */
 },
 };
-const struct types resolution_table_hash_collection__HashMapmodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef = {
+const struct types resolution_table_hash_collection__HashMapmmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef = {
 0, /* dummy */
 {
 NULL, /* empty */
 NULL, /* empty */
 NULL, /* empty */
 NULL, /* empty */
-&type_hash_collection__HashMapKeysmodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef, /* HashMapKeys[HashMap#0, HashMap#1]: HashMapKeys[MModule, HashMap[MType, Array[MMethodDef]]] */
-&type_hash_collection__HashMapValuesmodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef, /* HashMapValues[HashMap#0, HashMap#1]: HashMapValues[MModule, HashMap[MType, Array[MMethodDef]]] */
-&type_array__NativeArraynullable_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef, /* NativeArray[ArrayCapable#0]: NativeArray[nullable HashMapNode[MModule, HashMap[MType, Array[MMethodDef]]]] */
-&type_model_base__MModule, /* MapRead#0: MModule */
-&type_hash_collection__HashMapIteratormodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef, /* HashMapIterator[HashMap#0, HashMap#1]: HashMapIterator[MModule, HashMap[MType, Array[MMethodDef]]] */
-&type_model_base__MModule, /* Map#0: MModule */
+&type_hash_collection__HashMapKeysmmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef, /* HashMapKeys[HashMap#0, HashMap#1]: HashMapKeys[MModule, HashMap[MType, Array[MMethodDef]]] */
+&type_hash_collection__HashMapValuesmmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef, /* HashMapValues[HashMap#0, HashMap#1]: HashMapValues[MModule, HashMap[MType, Array[MMethodDef]]] */
+&type_array__NativeArraynullable_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef, /* NativeArray[ArrayCapable#0]: NativeArray[nullable HashMapNode[MModule, HashMap[MType, Array[MMethodDef]]]] */
+&type_mmodule__MModule, /* MapRead#0: MModule */
+&type_hash_collection__HashMapIteratormmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef, /* HashMapIterator[HashMap#0, HashMap#1]: HashMapIterator[MModule, HashMap[MType, Array[MMethodDef]]] */
+&type_mmodule__MModule, /* Map#0: MModule */
 &type_hash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef, /* Map#1: HashMap[MType, Array[MMethodDef]] */
-&type_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef, /* HashMapNode[HashMap#0, HashMap#1]: HashMapNode[MModule, HashMap[MType, Array[MMethodDef]]] */
+&type_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef, /* HashMapNode[HashMap#0, HashMap#1]: HashMapNode[MModule, HashMap[MType, Array[MMethodDef]]] */
 NULL, /* empty (Map[Map#0, Map#1]: Map[MModule, HashMap[MType, Array[MMethodDef]]] not a live type) */
 &type_hash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef, /* MapRead#1: HashMap[MType, Array[MMethodDef]] */
-&type_model_base__MModule, /* HashCollection#0: MModule */
-&type_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef, /* HashCollection#1: HashMapNode[MModule, HashMap[MType, Array[MMethodDef]]] */
+&type_mmodule__MModule, /* HashCollection#0: MModule */
+&type_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef, /* HashCollection#1: HashMapNode[MModule, HashMap[MType, Array[MMethodDef]]] */
 }
 };
 /* runtime type HashMap[MType, Array[MMethodDef]] */
 const struct type type_hash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef = {
-491,
+514,
 "HashMap[MType, Array[MMethodDef]]", /* class_name_string */
 2,
 0,
@@ -3920,7 +4738,7 @@ const struct type type_hash_collection__HashMapmodel__MTypearray__Arraymodel__MM
 {
 0, /* nullable Object */
 1, /* Object */
-491, /* HashMap[MType, Array[MMethodDef]] */
+514, /* HashMap[MType, Array[MMethodDef]] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef = {
@@ -3946,7 +4764,7 @@ NULL, /* empty (Map[Map#0, Map#1]: Map[MType, Array[MMethodDef]] not a live type
 };
 /* runtime type MapKeysIterator[String, Variable] */
 const struct type type_abstract_collection__MapKeysIteratorstring__Stringscope__Variable = {
-492,
+515,
 "MapKeysIterator[String, Variable]", /* class_name_string */
 2,
 0,
@@ -3955,7 +4773,7 @@ const struct type type_abstract_collection__MapKeysIteratorstring__Stringscope__
 {
 0, /* nullable Object */
 1, /* Object */
-492, /* MapKeysIterator[String, Variable] */
+515, /* MapKeysIterator[String, Variable] */
 },
 };
 const struct types resolution_table_abstract_collection__MapKeysIteratorstring__Stringscope__Variable = {
@@ -3967,7 +4785,7 @@ const struct types resolution_table_abstract_collection__MapKeysIteratorstring__
 };
 /* runtime type MapValuesIterator[String, Variable] */
 const struct type type_abstract_collection__MapValuesIteratorstring__Stringscope__Variable = {
-493,
+516,
 "MapValuesIterator[String, Variable]", /* class_name_string */
 2,
 0,
@@ -3976,7 +4794,7 @@ const struct type type_abstract_collection__MapValuesIteratorstring__Stringscope
 {
 0, /* nullable Object */
 1, /* Object */
-493, /* MapValuesIterator[String, Variable] */
+516, /* MapValuesIterator[String, Variable] */
 },
 };
 const struct types resolution_table_abstract_collection__MapValuesIteratorstring__Stringscope__Variable = {
@@ -3988,7 +4806,7 @@ const struct types resolution_table_abstract_collection__MapValuesIteratorstring
 };
 /* runtime type MapKeysIterator[Variable, nullable MType] */
 const struct type type_abstract_collection__MapKeysIteratorscope__Variablenullable_model__MType = {
-494,
+517,
 "MapKeysIterator[Variable, nullable MType]", /* class_name_string */
 2,
 0,
@@ -3997,7 +4815,7 @@ const struct type type_abstract_collection__MapKeysIteratorscope__Variablenullab
 {
 0, /* nullable Object */
 1, /* Object */
-494, /* MapKeysIterator[Variable, nullable MType] */
+517, /* MapKeysIterator[Variable, nullable MType] */
 },
 };
 const struct types resolution_table_abstract_collection__MapKeysIteratorscope__Variablenullable_model__MType = {
@@ -4009,7 +4827,7 @@ const struct types resolution_table_abstract_collection__MapKeysIteratorscope__V
 };
 /* runtime type MapValuesIterator[Variable, nullable MType] */
 const struct type type_abstract_collection__MapValuesIteratorscope__Variablenullable_model__MType = {
-495,
+518,
 "MapValuesIterator[Variable, nullable MType]", /* class_name_string */
 2,
 0,
@@ -4018,7 +4836,7 @@ const struct type type_abstract_collection__MapValuesIteratorscope__Variablenull
 {
 0, /* nullable Object */
 1, /* Object */
-495, /* MapValuesIterator[Variable, nullable MType] */
+518, /* MapValuesIterator[Variable, nullable MType] */
 },
 };
 const struct types resolution_table_abstract_collection__MapValuesIteratorscope__Variablenullable_model__MType = {
@@ -4030,7 +4848,7 @@ const struct types resolution_table_abstract_collection__MapValuesIteratorscope_
 };
 /* runtime type MapKeysIterator[Variable, nullable Array[nullable MType]] */
 const struct type type_abstract_collection__MapKeysIteratorscope__Variablenullable_array__Arraynullable_model__MType = {
-496,
+519,
 "MapKeysIterator[Variable, nullable Array[nullable MType]]", /* class_name_string */
 2,
 0,
@@ -4039,7 +4857,7 @@ const struct type type_abstract_collection__MapKeysIteratorscope__Variablenullab
 {
 0, /* nullable Object */
 1, /* Object */
-496, /* MapKeysIterator[Variable, nullable Array[nullable MType]] */
+519, /* MapKeysIterator[Variable, nullable Array[nullable MType]] */
 },
 };
 const struct types resolution_table_abstract_collection__MapKeysIteratorscope__Variablenullable_array__Arraynullable_model__MType = {
@@ -4051,7 +4869,7 @@ const struct types resolution_table_abstract_collection__MapKeysIteratorscope__V
 };
 /* runtime type MapValuesIterator[Variable, nullable Array[nullable MType]] */
 const struct type type_abstract_collection__MapValuesIteratorscope__Variablenullable_array__Arraynullable_model__MType = {
-497,
+520,
 "MapValuesIterator[Variable, nullable Array[nullable MType]]", /* class_name_string */
 2,
 0,
@@ -4060,7 +4878,7 @@ const struct type type_abstract_collection__MapValuesIteratorscope__Variablenull
 {
 0, /* nullable Object */
 1, /* Object */
-497, /* MapValuesIterator[Variable, nullable Array[nullable MType]] */
+520, /* MapValuesIterator[Variable, nullable Array[nullable MType]] */
 },
 };
 const struct types resolution_table_abstract_collection__MapValuesIteratorscope__Variablenullable_array__Arraynullable_model__MType = {
@@ -4072,7 +4890,7 @@ const struct types resolution_table_abstract_collection__MapValuesIteratorscope_
 };
 /* runtime type ArrayIterator[MAttributeDef] */
 const struct type type_array__ArrayIteratormodel__MAttributeDef = {
-2390,
+2455,
 "ArrayIterator[MAttributeDef]", /* class_name_string */
 6,
 0,
@@ -4081,11 +4899,11 @@ const struct type type_array__ArrayIteratormodel__MAttributeDef = {
 {
 0, /* nullable Object */
 1, /* Object */
-277, /* ArrayIterator[Object] */
-363, /* ArrayIterator[nullable MPropDef] */
-1435, /* ArrayIterator[PropertyLayoutElement] */
-2102, /* ArrayIterator[MPropDef] */
-2390, /* ArrayIterator[MAttributeDef] */
+289, /* ArrayIterator[Object] */
+379, /* ArrayIterator[nullable MPropDef] */
+1475, /* ArrayIterator[PropertyLayoutElement] */
+2167, /* ArrayIterator[MPropDef] */
+2455, /* ArrayIterator[MAttributeDef] */
 },
 };
 const struct types resolution_table_array__ArrayIteratormodel__MAttributeDef = {
@@ -4097,7 +4915,7 @@ const struct types resolution_table_array__ArrayIteratormodel__MAttributeDef = {
 };
 /* runtime type NativeArray[MAttributeDef] */
 const struct type type_array__NativeArraymodel__MAttributeDef = {
-2391,
+2456,
 "NativeArray[MAttributeDef]", /* class_name_string */
 6,
 0,
@@ -4106,11 +4924,11 @@ const struct type type_array__NativeArraymodel__MAttributeDef = {
 {
 0, /* nullable Object */
 1, /* Object */
-185, /* NativeArray[Object] */
-364, /* NativeArray[nullable MPropDef] */
-1436, /* NativeArray[PropertyLayoutElement] */
-2103, /* NativeArray[MPropDef] */
-2391, /* NativeArray[MAttributeDef] */
+193, /* NativeArray[Object] */
+380, /* NativeArray[nullable MPropDef] */
+1476, /* NativeArray[PropertyLayoutElement] */
+2168, /* NativeArray[MPropDef] */
+2456, /* NativeArray[MAttributeDef] */
 },
 };
 const struct types resolution_table_array__NativeArraymodel__MAttributeDef = {
@@ -4121,43 +4939,43 @@ const struct types resolution_table_array__NativeArraymodel__MAttributeDef = {
 }
 };
 /* runtime type HashMap[MModule, HashMap[MType, Array[MAttributeDef]]] */
-const struct type type_hash_collection__HashMapmodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef = {
-498,
+const struct type type_hash_collection__HashMapmmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef = {
+521,
 "HashMap[MModule, HashMap[MType, Array[MAttributeDef]]]", /* class_name_string */
 2,
 0,
-&resolution_table_hash_collection__HashMapmodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef,
+&resolution_table_hash_collection__HashMapmmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef,
 3,
 {
 0, /* nullable Object */
 1, /* Object */
-498, /* HashMap[MModule, HashMap[MType, Array[MAttributeDef]]] */
+521, /* HashMap[MModule, HashMap[MType, Array[MAttributeDef]]] */
 },
 };
-const struct types resolution_table_hash_collection__HashMapmodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef = {
+const struct types resolution_table_hash_collection__HashMapmmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef = {
 0, /* dummy */
 {
 NULL, /* empty */
 NULL, /* empty */
 NULL, /* empty */
 NULL, /* empty */
-&type_hash_collection__HashMapKeysmodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef, /* HashMapKeys[HashMap#0, HashMap#1]: HashMapKeys[MModule, HashMap[MType, Array[MAttributeDef]]] */
-&type_hash_collection__HashMapValuesmodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef, /* HashMapValues[HashMap#0, HashMap#1]: HashMapValues[MModule, HashMap[MType, Array[MAttributeDef]]] */
-&type_array__NativeArraynullable_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef, /* NativeArray[ArrayCapable#0]: NativeArray[nullable HashMapNode[MModule, HashMap[MType, Array[MAttributeDef]]]] */
-&type_model_base__MModule, /* MapRead#0: MModule */
-&type_hash_collection__HashMapIteratormodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef, /* HashMapIterator[HashMap#0, HashMap#1]: HashMapIterator[MModule, HashMap[MType, Array[MAttributeDef]]] */
-&type_model_base__MModule, /* Map#0: MModule */
+&type_hash_collection__HashMapKeysmmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef, /* HashMapKeys[HashMap#0, HashMap#1]: HashMapKeys[MModule, HashMap[MType, Array[MAttributeDef]]] */
+&type_hash_collection__HashMapValuesmmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef, /* HashMapValues[HashMap#0, HashMap#1]: HashMapValues[MModule, HashMap[MType, Array[MAttributeDef]]] */
+&type_array__NativeArraynullable_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef, /* NativeArray[ArrayCapable#0]: NativeArray[nullable HashMapNode[MModule, HashMap[MType, Array[MAttributeDef]]]] */
+&type_mmodule__MModule, /* MapRead#0: MModule */
+&type_hash_collection__HashMapIteratormmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef, /* HashMapIterator[HashMap#0, HashMap#1]: HashMapIterator[MModule, HashMap[MType, Array[MAttributeDef]]] */
+&type_mmodule__MModule, /* Map#0: MModule */
 &type_hash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef, /* Map#1: HashMap[MType, Array[MAttributeDef]] */
-&type_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef, /* HashMapNode[HashMap#0, HashMap#1]: HashMapNode[MModule, HashMap[MType, Array[MAttributeDef]]] */
+&type_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef, /* HashMapNode[HashMap#0, HashMap#1]: HashMapNode[MModule, HashMap[MType, Array[MAttributeDef]]] */
 NULL, /* empty (Map[Map#0, Map#1]: Map[MModule, HashMap[MType, Array[MAttributeDef]]] not a live type) */
 &type_hash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef, /* MapRead#1: HashMap[MType, Array[MAttributeDef]] */
-&type_model_base__MModule, /* HashCollection#0: MModule */
-&type_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef, /* HashCollection#1: HashMapNode[MModule, HashMap[MType, Array[MAttributeDef]]] */
+&type_mmodule__MModule, /* HashCollection#0: MModule */
+&type_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef, /* HashCollection#1: HashMapNode[MModule, HashMap[MType, Array[MAttributeDef]]] */
 }
 };
 /* runtime type HashMap[MType, Array[MAttributeDef]] */
 const struct type type_hash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef = {
-499,
+522,
 "HashMap[MType, Array[MAttributeDef]]", /* class_name_string */
 2,
 0,
@@ -4166,7 +4984,7 @@ const struct type type_hash_collection__HashMapmodel__MTypearray__Arraymodel__MA
 {
 0, /* nullable Object */
 1, /* Object */
-499, /* HashMap[MType, Array[MAttributeDef]] */
+522, /* HashMap[MType, Array[MAttributeDef]] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef = {
@@ -4192,7 +5010,7 @@ NULL, /* empty (Map[Map#0, Map#1]: Map[MType, Array[MAttributeDef]] not a live t
 };
 /* runtime type ContainerIterator[Int] */
 const struct type type_abstract_collection__ContainerIteratorkernel__Int = {
-500,
+523,
 "ContainerIterator[Int]", /* class_name_string */
 2,
 0,
@@ -4201,7 +5019,7 @@ const struct type type_abstract_collection__ContainerIteratorkernel__Int = {
 {
 0, /* nullable Object */
 1, /* Object */
-500, /* ContainerIterator[Int] */
+523, /* ContainerIterator[Int] */
 },
 };
 const struct types resolution_table_abstract_collection__ContainerIteratorkernel__Int = {
@@ -4211,9 +5029,477 @@ const struct types resolution_table_abstract_collection__ContainerIteratorkernel
 &type_array__Arraykernel__Int, /* Array[Iterator#0]: Array[Int] */
 }
 };
+/* runtime type ArrayIterator[AExternCodeBlock] */
+const struct type type_array__ArrayIteratorparser_nodes__AExternCodeBlock = {
+2226,
+"ArrayIterator[AExternCodeBlock]", /* class_name_string */
+5,
+0,
+&resolution_table_array__ArrayIteratorparser_nodes__AExternCodeBlock,
+6,
+{
+0, /* nullable Object */
+1, /* Object */
+289, /* ArrayIterator[Object] */
+1492, /* ArrayIterator[ANode] */
+1848, /* ArrayIterator[Prod] */
+2226, /* ArrayIterator[AExternCodeBlock] */
+},
+};
+const struct types resolution_table_array__ArrayIteratorparser_nodes__AExternCodeBlock = {
+0, /* dummy */
+{
+&type_array__AbstractArrayReadparser_nodes__AExternCodeBlock, /* AbstractArrayRead[ArrayIterator#0]: AbstractArrayRead[AExternCodeBlock] */
+&type_array__Arrayparser_nodes__AExternCodeBlock, /* Array[Iterator#0]: Array[AExternCodeBlock] */
+}
+};
+/* runtime type NativeArray[AExternCodeBlock] */
+const struct type type_array__NativeArrayparser_nodes__AExternCodeBlock = {
+2227,
+"NativeArray[AExternCodeBlock]", /* class_name_string */
+5,
+0,
+&resolution_table_array__NativeArrayparser_nodes__AExternCodeBlock,
+6,
+{
+0, /* nullable Object */
+1, /* Object */
+193, /* NativeArray[Object] */
+1493, /* NativeArray[ANode] */
+1849, /* NativeArray[Prod] */
+2227, /* NativeArray[AExternCodeBlock] */
+},
+};
+const struct types resolution_table_array__NativeArrayparser_nodes__AExternCodeBlock = {
+0, /* dummy */
+{
+&type_parser_nodes__AExternCodeBlock, /* NativeArray#0: AExternCodeBlock */
+&type_array__NativeArrayparser_nodes__AExternCodeBlock, /* NativeArray[NativeArray#0]: NativeArray[AExternCodeBlock] */
+}
+};
+/* runtime type MapKeysIterator[MClass, AClassdef] */
+const struct type type_abstract_collection__MapKeysIteratormodel__MClassparser_nodes__AClassdef = {
+524,
+"MapKeysIterator[MClass, AClassdef]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__MapKeysIteratormodel__MClassparser_nodes__AClassdef,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+524, /* MapKeysIterator[MClass, AClassdef] */
+},
+};
+const struct types resolution_table_abstract_collection__MapKeysIteratormodel__MClassparser_nodes__AClassdef = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratormodel__MClassparser_nodes__AClassdef, /* MapIterator[MapKeysIterator#0, MapKeysIterator#1]: MapIterator[MClass, AClassdef] */
+&type_array__Arraymodel__MClass, /* Array[Iterator#0]: Array[MClass] */
+}
+};
+/* runtime type MapValuesIterator[MClass, AClassdef] */
+const struct type type_abstract_collection__MapValuesIteratormodel__MClassparser_nodes__AClassdef = {
+525,
+"MapValuesIterator[MClass, AClassdef]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__MapValuesIteratormodel__MClassparser_nodes__AClassdef,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+525, /* MapValuesIterator[MClass, AClassdef] */
+},
+};
+const struct types resolution_table_abstract_collection__MapValuesIteratormodel__MClassparser_nodes__AClassdef = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratormodel__MClassparser_nodes__AClassdef, /* MapIterator[MapValuesIterator#0, MapValuesIterator#1]: MapIterator[MClass, AClassdef] */
+&type_array__Arrayparser_nodes__AClassdef, /* Array[Iterator#0]: Array[AClassdef] */
+}
+};
+/* runtime type MapKeysIterator[MProperty, APropdef] */
+const struct type type_abstract_collection__MapKeysIteratormodel__MPropertyparser_nodes__APropdef = {
+526,
+"MapKeysIterator[MProperty, APropdef]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__MapKeysIteratormodel__MPropertyparser_nodes__APropdef,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+526, /* MapKeysIterator[MProperty, APropdef] */
+},
+};
+const struct types resolution_table_abstract_collection__MapKeysIteratormodel__MPropertyparser_nodes__APropdef = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratormodel__MPropertyparser_nodes__APropdef, /* MapIterator[MapKeysIterator#0, MapKeysIterator#1]: MapIterator[MProperty, APropdef] */
+&type_array__Arraymodel__MProperty, /* Array[Iterator#0]: Array[MProperty] */
+}
+};
+/* runtime type MapValuesIterator[MProperty, APropdef] */
+const struct type type_abstract_collection__MapValuesIteratormodel__MPropertyparser_nodes__APropdef = {
+527,
+"MapValuesIterator[MProperty, APropdef]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__MapValuesIteratormodel__MPropertyparser_nodes__APropdef,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+527, /* MapValuesIterator[MProperty, APropdef] */
+},
+};
+const struct types resolution_table_abstract_collection__MapValuesIteratormodel__MPropertyparser_nodes__APropdef = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratormodel__MPropertyparser_nodes__APropdef, /* MapIterator[MapValuesIterator#0, MapValuesIterator#1]: MapIterator[MProperty, APropdef] */
+&type_array__Arrayparser_nodes__APropdef, /* Array[Iterator#0]: Array[APropdef] */
+}
+};
+/* runtime type ArrayIterator[AAnnotation] */
+const struct type type_array__ArrayIteratorparser_nodes__AAnnotation = {
+2228,
+"ArrayIterator[AAnnotation]", /* class_name_string */
+5,
+0,
+&resolution_table_array__ArrayIteratorparser_nodes__AAnnotation,
+6,
+{
+0, /* nullable Object */
+1, /* Object */
+289, /* ArrayIterator[Object] */
+1492, /* ArrayIterator[ANode] */
+1848, /* ArrayIterator[Prod] */
+2228, /* ArrayIterator[AAnnotation] */
+},
+};
+const struct types resolution_table_array__ArrayIteratorparser_nodes__AAnnotation = {
+0, /* dummy */
+{
+&type_array__AbstractArrayReadparser_nodes__AAnnotation, /* AbstractArrayRead[ArrayIterator#0]: AbstractArrayRead[AAnnotation] */
+&type_array__Arrayparser_nodes__AAnnotation, /* Array[Iterator#0]: Array[AAnnotation] */
+}
+};
+/* runtime type NativeArray[AAnnotation] */
+const struct type type_array__NativeArrayparser_nodes__AAnnotation = {
+2229,
+"NativeArray[AAnnotation]", /* class_name_string */
+5,
+0,
+&resolution_table_array__NativeArrayparser_nodes__AAnnotation,
+6,
+{
+0, /* nullable Object */
+1, /* Object */
+193, /* NativeArray[Object] */
+1493, /* NativeArray[ANode] */
+1849, /* NativeArray[Prod] */
+2229, /* NativeArray[AAnnotation] */
+},
+};
+const struct types resolution_table_array__NativeArrayparser_nodes__AAnnotation = {
+0, /* dummy */
+{
+&type_parser_nodes__AAnnotation, /* NativeArray#0: AAnnotation */
+&type_array__NativeArrayparser_nodes__AAnnotation, /* NativeArray[NativeArray#0]: NativeArray[AAnnotation] */
+}
+};
+/* runtime type ArrayIterator[AParam] */
+const struct type type_array__ArrayIteratorparser_nodes__AParam = {
+2230,
+"ArrayIterator[AParam]", /* class_name_string */
+5,
+0,
+&resolution_table_array__ArrayIteratorparser_nodes__AParam,
+6,
+{
+0, /* nullable Object */
+1, /* Object */
+289, /* ArrayIterator[Object] */
+1492, /* ArrayIterator[ANode] */
+1848, /* ArrayIterator[Prod] */
+2230, /* ArrayIterator[AParam] */
+},
+};
+const struct types resolution_table_array__ArrayIteratorparser_nodes__AParam = {
+0, /* dummy */
+{
+&type_array__AbstractArrayReadparser_nodes__AParam, /* AbstractArrayRead[ArrayIterator#0]: AbstractArrayRead[AParam] */
+&type_array__Arrayparser_nodes__AParam, /* Array[Iterator#0]: Array[AParam] */
+}
+};
+/* runtime type NativeArray[AParam] */
+const struct type type_array__NativeArrayparser_nodes__AParam = {
+2231,
+"NativeArray[AParam]", /* class_name_string */
+5,
+0,
+&resolution_table_array__NativeArrayparser_nodes__AParam,
+6,
+{
+0, /* nullable Object */
+1, /* Object */
+193, /* NativeArray[Object] */
+1493, /* NativeArray[ANode] */
+1849, /* NativeArray[Prod] */
+2231, /* NativeArray[AParam] */
+},
+};
+const struct types resolution_table_array__NativeArrayparser_nodes__AParam = {
+0, /* dummy */
+{
+&type_parser_nodes__AParam, /* NativeArray#0: AParam */
+&type_array__NativeArrayparser_nodes__AParam, /* NativeArray[NativeArray#0]: NativeArray[AParam] */
+}
+};
+/* runtime type ArrayIterator[AExternCall] */
+const struct type type_array__ArrayIteratorparser_nodes__AExternCall = {
+2232,
+"ArrayIterator[AExternCall]", /* class_name_string */
+5,
+0,
+&resolution_table_array__ArrayIteratorparser_nodes__AExternCall,
+6,
+{
+0, /* nullable Object */
+1, /* Object */
+289, /* ArrayIterator[Object] */
+1492, /* ArrayIterator[ANode] */
+1848, /* ArrayIterator[Prod] */
+2232, /* ArrayIterator[AExternCall] */
+},
+};
+const struct types resolution_table_array__ArrayIteratorparser_nodes__AExternCall = {
+0, /* dummy */
+{
+&type_array__AbstractArrayReadparser_nodes__AExternCall, /* AbstractArrayRead[ArrayIterator#0]: AbstractArrayRead[AExternCall] */
+&type_array__Arrayparser_nodes__AExternCall, /* Array[Iterator#0]: Array[AExternCall] */
+}
+};
+/* runtime type NativeArray[AExternCall] */
+const struct type type_array__NativeArrayparser_nodes__AExternCall = {
+2233,
+"NativeArray[AExternCall]", /* class_name_string */
+5,
+0,
+&resolution_table_array__NativeArrayparser_nodes__AExternCall,
+6,
+{
+0, /* nullable Object */
+1, /* Object */
+193, /* NativeArray[Object] */
+1493, /* NativeArray[ANode] */
+1849, /* NativeArray[Prod] */
+2233, /* NativeArray[AExternCall] */
+},
+};
+const struct types resolution_table_array__NativeArrayparser_nodes__AExternCall = {
+0, /* dummy */
+{
+&type_parser_nodes__AExternCall, /* NativeArray#0: AExternCall */
+&type_array__NativeArrayparser_nodes__AExternCall, /* NativeArray[NativeArray#0]: NativeArray[AExternCall] */
+}
+};
+/* runtime type ArrayIterator[AType] */
+const struct type type_array__ArrayIteratorparser_nodes__AType = {
+2234,
+"ArrayIterator[AType]", /* class_name_string */
+5,
+0,
+&resolution_table_array__ArrayIteratorparser_nodes__AType,
+6,
+{
+0, /* nullable Object */
+1, /* Object */
+289, /* ArrayIterator[Object] */
+1492, /* ArrayIterator[ANode] */
+1848, /* ArrayIterator[Prod] */
+2234, /* ArrayIterator[AType] */
+},
+};
+const struct types resolution_table_array__ArrayIteratorparser_nodes__AType = {
+0, /* dummy */
+{
+&type_array__AbstractArrayReadparser_nodes__AType, /* AbstractArrayRead[ArrayIterator#0]: AbstractArrayRead[AType] */
+&type_array__Arrayparser_nodes__AType, /* Array[Iterator#0]: Array[AType] */
+}
+};
+/* runtime type NativeArray[AType] */
+const struct type type_array__NativeArrayparser_nodes__AType = {
+2235,
+"NativeArray[AType]", /* class_name_string */
+5,
+0,
+&resolution_table_array__NativeArrayparser_nodes__AType,
+6,
+{
+0, /* nullable Object */
+1, /* Object */
+193, /* NativeArray[Object] */
+1493, /* NativeArray[ANode] */
+1849, /* NativeArray[Prod] */
+2235, /* NativeArray[AType] */
+},
+};
+const struct types resolution_table_array__NativeArrayparser_nodes__AType = {
+0, /* dummy */
+{
+&type_parser_nodes__AType, /* NativeArray#0: AType */
+&type_array__NativeArrayparser_nodes__AType, /* NativeArray[NativeArray#0]: NativeArray[AType] */
+}
+};
+/* runtime type ArrayIterator[TId] */
+const struct type type_array__ArrayIteratorparser_nodes__TId = {
+2236,
+"ArrayIterator[TId]", /* class_name_string */
+5,
+0,
+&resolution_table_array__ArrayIteratorparser_nodes__TId,
+6,
+{
+0, /* nullable Object */
+1, /* Object */
+289, /* ArrayIterator[Object] */
+1492, /* ArrayIterator[ANode] */
+1908, /* ArrayIterator[Token] */
+2236, /* ArrayIterator[TId] */
+},
+};
+const struct types resolution_table_array__ArrayIteratorparser_nodes__TId = {
+0, /* dummy */
+{
+&type_array__AbstractArrayReadparser_nodes__TId, /* AbstractArrayRead[ArrayIterator#0]: AbstractArrayRead[TId] */
+&type_array__Arrayparser_nodes__TId, /* Array[Iterator#0]: Array[TId] */
+}
+};
+/* runtime type NativeArray[TId] */
+const struct type type_array__NativeArrayparser_nodes__TId = {
+2237,
+"NativeArray[TId]", /* class_name_string */
+5,
+0,
+&resolution_table_array__NativeArrayparser_nodes__TId,
+6,
+{
+0, /* nullable Object */
+1, /* Object */
+193, /* NativeArray[Object] */
+1493, /* NativeArray[ANode] */
+1909, /* NativeArray[Token] */
+2237, /* NativeArray[TId] */
+},
+};
+const struct types resolution_table_array__NativeArrayparser_nodes__TId = {
+0, /* dummy */
+{
+&type_parser_nodes__TId, /* NativeArray#0: TId */
+&type_array__NativeArrayparser_nodes__TId, /* NativeArray[NativeArray#0]: NativeArray[TId] */
+}
+};
+/* runtime type ArrayIterator[AAtArg] */
+const struct type type_array__ArrayIteratorparser_nodes__AAtArg = {
+2238,
+"ArrayIterator[AAtArg]", /* class_name_string */
+5,
+0,
+&resolution_table_array__ArrayIteratorparser_nodes__AAtArg,
+6,
+{
+0, /* nullable Object */
+1, /* Object */
+289, /* ArrayIterator[Object] */
+1492, /* ArrayIterator[ANode] */
+1848, /* ArrayIterator[Prod] */
+2238, /* ArrayIterator[AAtArg] */
+},
+};
+const struct types resolution_table_array__ArrayIteratorparser_nodes__AAtArg = {
+0, /* dummy */
+{
+&type_array__AbstractArrayReadparser_nodes__AAtArg, /* AbstractArrayRead[ArrayIterator#0]: AbstractArrayRead[AAtArg] */
+&type_array__Arrayparser_nodes__AAtArg, /* Array[Iterator#0]: Array[AAtArg] */
+}
+};
+/* runtime type NativeArray[AAtArg] */
+const struct type type_array__NativeArrayparser_nodes__AAtArg = {
+2239,
+"NativeArray[AAtArg]", /* class_name_string */
+5,
+0,
+&resolution_table_array__NativeArrayparser_nodes__AAtArg,
+6,
+{
+0, /* nullable Object */
+1, /* Object */
+193, /* NativeArray[Object] */
+1493, /* NativeArray[ANode] */
+1849, /* NativeArray[Prod] */
+2239, /* NativeArray[AAtArg] */
+},
+};
+const struct types resolution_table_array__NativeArrayparser_nodes__AAtArg = {
+0, /* dummy */
+{
+&type_parser_nodes__AAtArg, /* NativeArray#0: AAtArg */
+&type_array__NativeArrayparser_nodes__AAtArg, /* NativeArray[NativeArray#0]: NativeArray[AAtArg] */
+}
+};
+/* runtime type ArrayIterator[TComment] */
+const struct type type_array__ArrayIteratorparser_nodes__TComment = {
+2240,
+"ArrayIterator[TComment]", /* class_name_string */
+5,
+0,
+&resolution_table_array__ArrayIteratorparser_nodes__TComment,
+6,
+{
+0, /* nullable Object */
+1, /* Object */
+289, /* ArrayIterator[Object] */
+1492, /* ArrayIterator[ANode] */
+1908, /* ArrayIterator[Token] */
+2240, /* ArrayIterator[TComment] */
+},
+};
+const struct types resolution_table_array__ArrayIteratorparser_nodes__TComment = {
+0, /* dummy */
+{
+&type_array__AbstractArrayReadparser_nodes__TComment, /* AbstractArrayRead[ArrayIterator#0]: AbstractArrayRead[TComment] */
+&type_array__Arrayparser_nodes__TComment, /* Array[Iterator#0]: Array[TComment] */
+}
+};
+/* runtime type NativeArray[TComment] */
+const struct type type_array__NativeArrayparser_nodes__TComment = {
+2241,
+"NativeArray[TComment]", /* class_name_string */
+5,
+0,
+&resolution_table_array__NativeArrayparser_nodes__TComment,
+6,
+{
+0, /* nullable Object */
+1, /* Object */
+193, /* NativeArray[Object] */
+1493, /* NativeArray[ANode] */
+1909, /* NativeArray[Token] */
+2241, /* NativeArray[TComment] */
+},
+};
+const struct types resolution_table_array__NativeArrayparser_nodes__TComment = {
+0, /* dummy */
+{
+&type_parser_nodes__TComment, /* NativeArray#0: TComment */
+&type_array__NativeArrayparser_nodes__TComment, /* NativeArray[NativeArray#0]: NativeArray[TComment] */
+}
+};
 /* runtime type ArrayIterator[MVirtualTypeDef] */
 const struct type type_array__ArrayIteratormodel__MVirtualTypeDef = {
-2392,
+2457,
 "ArrayIterator[MVirtualTypeDef]", /* class_name_string */
 6,
 0,
@@ -4222,11 +5508,11 @@ const struct type type_array__ArrayIteratormodel__MVirtualTypeDef = {
 {
 0, /* nullable Object */
 1, /* Object */
-277, /* ArrayIterator[Object] */
-363, /* ArrayIterator[nullable MPropDef] */
-1435, /* ArrayIterator[PropertyLayoutElement] */
-2102, /* ArrayIterator[MPropDef] */
-2392, /* ArrayIterator[MVirtualTypeDef] */
+289, /* ArrayIterator[Object] */
+379, /* ArrayIterator[nullable MPropDef] */
+1475, /* ArrayIterator[PropertyLayoutElement] */
+2167, /* ArrayIterator[MPropDef] */
+2457, /* ArrayIterator[MVirtualTypeDef] */
 },
 };
 const struct types resolution_table_array__ArrayIteratormodel__MVirtualTypeDef = {
@@ -4238,7 +5524,7 @@ const struct types resolution_table_array__ArrayIteratormodel__MVirtualTypeDef =
 };
 /* runtime type NativeArray[MVirtualTypeDef] */
 const struct type type_array__NativeArraymodel__MVirtualTypeDef = {
-2393,
+2458,
 "NativeArray[MVirtualTypeDef]", /* class_name_string */
 6,
 0,
@@ -4247,11 +5533,11 @@ const struct type type_array__NativeArraymodel__MVirtualTypeDef = {
 {
 0, /* nullable Object */
 1, /* Object */
-185, /* NativeArray[Object] */
-364, /* NativeArray[nullable MPropDef] */
-1436, /* NativeArray[PropertyLayoutElement] */
-2103, /* NativeArray[MPropDef] */
-2393, /* NativeArray[MVirtualTypeDef] */
+193, /* NativeArray[Object] */
+380, /* NativeArray[nullable MPropDef] */
+1476, /* NativeArray[PropertyLayoutElement] */
+2168, /* NativeArray[MPropDef] */
+2458, /* NativeArray[MVirtualTypeDef] */
 },
 };
 const struct types resolution_table_array__NativeArraymodel__MVirtualTypeDef = {
@@ -4262,43 +5548,43 @@ const struct types resolution_table_array__NativeArraymodel__MVirtualTypeDef = {
 }
 };
 /* runtime type HashMap[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
-const struct type type_hash_collection__HashMapmodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef = {
-501,
+const struct type type_hash_collection__HashMapmmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef = {
+528,
 "HashMap[MModule, HashMap[MType, Array[MVirtualTypeDef]]]", /* class_name_string */
 2,
 0,
-&resolution_table_hash_collection__HashMapmodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef,
+&resolution_table_hash_collection__HashMapmmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef,
 3,
 {
 0, /* nullable Object */
 1, /* Object */
-501, /* HashMap[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
+528, /* HashMap[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
 },
 };
-const struct types resolution_table_hash_collection__HashMapmodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef = {
+const struct types resolution_table_hash_collection__HashMapmmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef = {
 0, /* dummy */
 {
 NULL, /* empty */
 NULL, /* empty */
 NULL, /* empty */
 NULL, /* empty */
-&type_hash_collection__HashMapKeysmodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef, /* HashMapKeys[HashMap#0, HashMap#1]: HashMapKeys[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
-&type_hash_collection__HashMapValuesmodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef, /* HashMapValues[HashMap#0, HashMap#1]: HashMapValues[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
-&type_array__NativeArraynullable_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef, /* NativeArray[ArrayCapable#0]: NativeArray[nullable HashMapNode[MModule, HashMap[MType, Array[MVirtualTypeDef]]]] */
-&type_model_base__MModule, /* MapRead#0: MModule */
-&type_hash_collection__HashMapIteratormodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef, /* HashMapIterator[HashMap#0, HashMap#1]: HashMapIterator[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
-&type_model_base__MModule, /* Map#0: MModule */
+&type_hash_collection__HashMapKeysmmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef, /* HashMapKeys[HashMap#0, HashMap#1]: HashMapKeys[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
+&type_hash_collection__HashMapValuesmmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef, /* HashMapValues[HashMap#0, HashMap#1]: HashMapValues[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
+&type_array__NativeArraynullable_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef, /* NativeArray[ArrayCapable#0]: NativeArray[nullable HashMapNode[MModule, HashMap[MType, Array[MVirtualTypeDef]]]] */
+&type_mmodule__MModule, /* MapRead#0: MModule */
+&type_hash_collection__HashMapIteratormmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef, /* HashMapIterator[HashMap#0, HashMap#1]: HashMapIterator[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
+&type_mmodule__MModule, /* Map#0: MModule */
 &type_hash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef, /* Map#1: HashMap[MType, Array[MVirtualTypeDef]] */
-&type_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef, /* HashMapNode[HashMap#0, HashMap#1]: HashMapNode[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
+&type_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef, /* HashMapNode[HashMap#0, HashMap#1]: HashMapNode[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
 NULL, /* empty (Map[Map#0, Map#1]: Map[MModule, HashMap[MType, Array[MVirtualTypeDef]]] not a live type) */
 &type_hash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef, /* MapRead#1: HashMap[MType, Array[MVirtualTypeDef]] */
-&type_model_base__MModule, /* HashCollection#0: MModule */
-&type_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef, /* HashCollection#1: HashMapNode[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
+&type_mmodule__MModule, /* HashCollection#0: MModule */
+&type_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef, /* HashCollection#1: HashMapNode[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
 }
 };
 /* runtime type HashMap[MType, Array[MVirtualTypeDef]] */
 const struct type type_hash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef = {
-502,
+529,
 "HashMap[MType, Array[MVirtualTypeDef]]", /* class_name_string */
 2,
 0,
@@ -4307,7 +5593,7 @@ const struct type type_hash_collection__HashMapmodel__MTypearray__Arraymodel__MV
 {
 0, /* nullable Object */
 1, /* Object */
-502, /* HashMap[MType, Array[MVirtualTypeDef]] */
+529, /* HashMap[MType, Array[MVirtualTypeDef]] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef = {
@@ -4333,7 +5619,7 @@ NULL, /* empty (Map[Map#0, Map#1]: Map[MType, Array[MVirtualTypeDef]] not a live
 };
 /* runtime type MapKeysIterator[Phase, POSetElement[Phase]] */
 const struct type type_abstract_collection__MapKeysIteratorphase__Phaseposet__POSetElementphase__Phase = {
-503,
+530,
 "MapKeysIterator[Phase, POSetElement[Phase]]", /* class_name_string */
 2,
 0,
@@ -4342,7 +5628,7 @@ const struct type type_abstract_collection__MapKeysIteratorphase__Phaseposet__PO
 {
 0, /* nullable Object */
 1, /* Object */
-503, /* MapKeysIterator[Phase, POSetElement[Phase]] */
+530, /* MapKeysIterator[Phase, POSetElement[Phase]] */
 },
 };
 const struct types resolution_table_abstract_collection__MapKeysIteratorphase__Phaseposet__POSetElementphase__Phase = {
@@ -4354,7 +5640,7 @@ const struct types resolution_table_abstract_collection__MapKeysIteratorphase__P
 };
 /* runtime type MapValuesIterator[Phase, POSetElement[Phase]] */
 const struct type type_abstract_collection__MapValuesIteratorphase__Phaseposet__POSetElementphase__Phase = {
-504,
+531,
 "MapValuesIterator[Phase, POSetElement[Phase]]", /* class_name_string */
 2,
 0,
@@ -4363,7 +5649,7 @@ const struct type type_abstract_collection__MapValuesIteratorphase__Phaseposet__
 {
 0, /* nullable Object */
 1, /* Object */
-504, /* MapValuesIterator[Phase, POSetElement[Phase]] */
+531, /* MapValuesIterator[Phase, POSetElement[Phase]] */
 },
 };
 const struct types resolution_table_abstract_collection__MapValuesIteratorphase__Phaseposet__POSetElementphase__Phase = {
@@ -4375,7 +5661,7 @@ const struct types resolution_table_abstract_collection__MapValuesIteratorphase_
 };
 /* runtime type HashSetNode[Phase] */
 const struct type type_hash_collection__HashSetNodephase__Phase = {
-2176,
+2242,
 "HashSetNode[Phase]", /* class_name_string */
 5,
 0,
@@ -4384,10 +5670,10 @@ const struct type type_hash_collection__HashSetNodephase__Phase = {
 {
 0, /* nullable Object */
 1, /* Object */
-116, /* nullable HashSetNode[Object] */
-505, /* nullable HashSetNode[Phase] */
-1456, /* HashSetNode[Object] */
-2176, /* HashSetNode[Phase] */
+121, /* nullable HashSetNode[Object] */
+532, /* nullable HashSetNode[Phase] */
+1500, /* HashSetNode[Object] */
+2242, /* HashSetNode[Phase] */
 },
 };
 const struct types resolution_table_hash_collection__HashSetNodephase__Phase = {
@@ -4401,7 +5687,7 @@ NULL, /* empty */
 };
 /* runtime type nullable HashSetNode[Phase] */
 const struct type type_nullable_hash_collection__HashSetNodephase__Phase = {
-505,
+532,
 "nullable HashSetNode[Phase]", /* class_name_string */
 3,
 1,
@@ -4410,8 +5696,8 @@ const struct type type_nullable_hash_collection__HashSetNodephase__Phase = {
 {
 0, /* nullable Object */
 -1, /* empty */
-116, /* nullable HashSetNode[Object] */
-505, /* nullable HashSetNode[Phase] */
+121, /* nullable HashSetNode[Object] */
+532, /* nullable HashSetNode[Phase] */
 },
 };
 const struct types resolution_table_nullable_hash_collection__HashSetNodephase__Phase = {
@@ -4425,7 +5711,7 @@ NULL, /* empty */
 };
 /* runtime type HashSetIterator[Phase] */
 const struct type type_hash_collection__HashSetIteratorphase__Phase = {
-1635,
+1682,
 "HashSetIterator[Phase]", /* class_name_string */
 3,
 0,
@@ -4434,8 +5720,8 @@ const struct type type_hash_collection__HashSetIteratorphase__Phase = {
 {
 0, /* nullable Object */
 1, /* Object */
-307, /* HashSetIterator[Object] */
-1635, /* HashSetIterator[Phase] */
+324, /* HashSetIterator[Object] */
+1682, /* HashSetIterator[Phase] */
 },
 };
 const struct types resolution_table_hash_collection__HashSetIteratorphase__Phase = {
@@ -4447,7 +5733,7 @@ const struct types resolution_table_hash_collection__HashSetIteratorphase__Phase
 };
 /* runtime type NativeArray[nullable HashSetNode[Phase]] */
 const struct type type_array__NativeArraynullable_hash_collection__HashSetNodephase__Phase = {
-1636,
+1683,
 "NativeArray[nullable HashSetNode[Phase]]", /* class_name_string */
 3,
 0,
@@ -4456,8 +5742,8 @@ const struct type type_array__NativeArraynullable_hash_collection__HashSetNodeph
 {
 0, /* nullable Object */
 1, /* Object */
-308, /* NativeArray[nullable HashSetNode[Object]] */
-1636, /* NativeArray[nullable HashSetNode[Phase]] */
+325, /* NativeArray[nullable HashSetNode[Object]] */
+1683, /* NativeArray[nullable HashSetNode[Phase]] */
 },
 };
 const struct types resolution_table_array__NativeArraynullable_hash_collection__HashSetNodephase__Phase = {
@@ -4467,96 +5753,159 @@ const struct types resolution_table_array__NativeArraynullable_hash_collection__
 &type_array__NativeArraynullable_hash_collection__HashSetNodephase__Phase, /* NativeArray[NativeArray#0]: NativeArray[nullable HashSetNode[Phase]] */
 }
 };
-/* runtime type MapKeysIterator[MModule, POSetElement[MModule]] */
-const struct type type_abstract_collection__MapKeysIteratormodel_base__MModuleposet__POSetElementmodel_base__MModule = {
-506,
-"MapKeysIterator[MModule, POSetElement[MModule]]", /* class_name_string */
-2,
-0,
-&resolution_table_abstract_collection__MapKeysIteratormodel_base__MModuleposet__POSetElementmodel_base__MModule,
-3,
-{
-0, /* nullable Object */
-1, /* Object */
-506, /* MapKeysIterator[MModule, POSetElement[MModule]] */
-},
-};
-const struct types resolution_table_abstract_collection__MapKeysIteratormodel_base__MModuleposet__POSetElementmodel_base__MModule = {
-0, /* dummy */
-{
-&type_abstract_collection__MapIteratormodel_base__MModuleposet__POSetElementmodel_base__MModule, /* MapIterator[MapKeysIterator#0, MapKeysIterator#1]: MapIterator[MModule, POSetElement[MModule]] */
-&type_array__Arraymodel_base__MModule, /* Array[Iterator#0]: Array[MModule] */
-}
-};
-/* runtime type MapValuesIterator[MModule, POSetElement[MModule]] */
-const struct type type_abstract_collection__MapValuesIteratormodel_base__MModuleposet__POSetElementmodel_base__MModule = {
-507,
-"MapValuesIterator[MModule, POSetElement[MModule]]", /* class_name_string */
-2,
-0,
-&resolution_table_abstract_collection__MapValuesIteratormodel_base__MModuleposet__POSetElementmodel_base__MModule,
-3,
-{
-0, /* nullable Object */
-1, /* Object */
-507, /* MapValuesIterator[MModule, POSetElement[MModule]] */
-},
-};
-const struct types resolution_table_abstract_collection__MapValuesIteratormodel_base__MModuleposet__POSetElementmodel_base__MModule = {
-0, /* dummy */
-{
-&type_abstract_collection__MapIteratormodel_base__MModuleposet__POSetElementmodel_base__MModule, /* MapIterator[MapValuesIterator#0, MapValuesIterator#1]: MapIterator[MModule, POSetElement[MModule]] */
-&type_array__Arrayposet__POSetElementmodel_base__MModule, /* Array[Iterator#0]: Array[POSetElement[MModule]] */
-}
-};
-/* runtime type Array[Array[MModule]] */
-const struct type type_array__Arrayarray__Arraymodel_base__MModule = {
-2515,
-"Array[Array[MModule]]", /* class_name_string */
+/* runtime type Array[Array[MProject]] */
+const struct type type_array__Arrayarray__Arraymproject__MProject = {
+2588,
+"Array[Array[MProject]]", /* class_name_string */
 7,
 0,
-&resolution_table_array__Arrayarray__Arraymodel_base__MModule,
+&resolution_table_array__Arrayarray__Arraymproject__MProject,
 10,
 {
 0, /* nullable Object */
 1, /* Object */
-1432, /* Collection[Array[MModule]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-2394, /* AbstractArrayRead[Array[MModule]] */
-1728, /* AbstractArrayRead[Object] */
-2515, /* Array[Array[MModule]] */
+1467, /* Collection[Array[MProject]] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
+2459, /* AbstractArrayRead[Array[MProject]] */
+1782, /* AbstractArrayRead[Object] */
+2588, /* Array[Array[MProject]] */
 -1, /* empty */
-1911, /* Array[Object] */
+1973, /* Array[Object] */
 },
 };
-const struct types resolution_table_array__Arrayarray__Arraymodel_base__MModule = {
+const struct types resolution_table_array__Arrayarray__Arraymproject__MProject = {
 0, /* dummy */
 {
-&type_array__Arrayarray__Arraymodel_base__MModule, /* Array[Array#0]: Array[Array[MModule]] */
-&type_array__NativeArrayarray__Arraymodel_base__MModule, /* NativeArray[Array#0]: NativeArray[Array[MModule]] */
-&type_array__Arraymodel_base__MModule, /* Sequence#0: Array[MModule] */
-&type_array__Arraymodel_base__MModule, /* SimpleCollection#0: Array[MModule] */
-&type_abstract_collection__Collectionarray__Arraymodel_base__MModule, /* Collection[Array#0]: Collection[Array[MModule]] */
-&type_array__Arraymodel_base__MModule, /* Array#0: Array[MModule] */
-&type_array__NativeArrayarray__Arraymodel_base__MModule, /* NativeArray[ArrayCapable#0]: NativeArray[Array[MModule]] */
-&type_array__Arraymodel_base__MModule, /* AbstractArray#0: Array[MModule] */
-&type_array__Arraymodel_base__MModule, /* RemovableCollection#0: Array[MModule] */
-&type_abstract_collection__Collectionarray__Arraymodel_base__MModule, /* Collection[Sequence#0]: Collection[Array[MModule]] */
-&type_array__Arrayarray__Arraymodel_base__MModule, /* Array[Sequence#0]: Array[Array[MModule]] */
-&type_abstract_collection__Collectionarray__Arraymodel_base__MModule, /* Collection[SimpleCollection#0]: Collection[Array[MModule]] */
-&type_array__Arraymodel_base__MModule, /* Collection#0: Array[MModule] */
-&type_abstract_collection__Collectionarray__Arraymodel_base__MModule, /* Collection[Collection#0]: Collection[Array[MModule]] */
-&type_array__Arraymodel_base__MModule, /* SequenceRead#0: Array[MModule] */
-&type_array__Arraymodel_base__MModule, /* AbstractArrayRead#0: Array[MModule] */
-&type_array__Arrayarray__Arraymodel_base__MModule, /* Array[AbstractArrayRead#0]: Array[Array[MModule]] */
+&type_array__Arrayarray__Arraymproject__MProject, /* Array[Array#0]: Array[Array[MProject]] */
+&type_array__NativeArrayarray__Arraymproject__MProject, /* NativeArray[Array#0]: NativeArray[Array[MProject]] */
+&type_array__Arraymproject__MProject, /* Sequence#0: Array[MProject] */
+&type_array__Arraymproject__MProject, /* SimpleCollection#0: Array[MProject] */
+&type_abstract_collection__Collectionarray__Arraymproject__MProject, /* Collection[Array#0]: Collection[Array[MProject]] */
+&type_array__Arraymproject__MProject, /* Array#0: Array[MProject] */
+&type_array__NativeArrayarray__Arraymproject__MProject, /* NativeArray[ArrayCapable#0]: NativeArray[Array[MProject]] */
+&type_array__Arraymproject__MProject, /* AbstractArray#0: Array[MProject] */
+&type_array__Arraymproject__MProject, /* RemovableCollection#0: Array[MProject] */
+&type_abstract_collection__Collectionarray__Arraymproject__MProject, /* Collection[Sequence#0]: Collection[Array[MProject]] */
+&type_array__Arrayarray__Arraymproject__MProject, /* Array[Sequence#0]: Array[Array[MProject]] */
+&type_abstract_collection__Collectionarray__Arraymproject__MProject, /* Collection[SimpleCollection#0]: Collection[Array[MProject]] */
+&type_array__Arraymproject__MProject, /* Collection#0: Array[MProject] */
+&type_abstract_collection__Collectionarray__Arraymproject__MProject, /* Collection[Collection#0]: Collection[Array[MProject]] */
+&type_array__Arraymproject__MProject, /* SequenceRead#0: Array[MProject] */
+&type_array__Arraymproject__MProject, /* AbstractArrayRead#0: Array[MProject] */
+&type_array__Arrayarray__Arraymproject__MProject, /* Array[AbstractArrayRead#0]: Array[Array[MProject]] */
+NULL, /* empty (AbstractArray[AbstractArrayRead#0]: AbstractArray[Array[MProject]] not a live type) */
+&type_array__ArrayIteratorarray__Arraymproject__MProject, /* ArrayIterator[AbstractArrayRead#0]: ArrayIterator[Array[MProject]] */
+}
+};
+/* runtime type AbstractArrayRead[Array[MProject]] */
+const struct type type_array__AbstractArrayReadarray__Arraymproject__MProject = {
+2459,
+"AbstractArrayRead[Array[MProject]]", /* class_name_string */
+5,
+0,
+NULL,
+7,
+{
+0, /* nullable Object */
+1, /* Object */
+1467, /* Collection[Array[MProject]] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
+2459, /* AbstractArrayRead[Array[MProject]] */
+1782, /* AbstractArrayRead[Object] */
+},
+};
+/* runtime type MapKeysIterator[MModule, POSetElement[MModule]] */
+const struct type type_abstract_collection__MapKeysIteratormmodule__MModuleposet__POSetElementmmodule__MModule = {
+533,
+"MapKeysIterator[MModule, POSetElement[MModule]]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__MapKeysIteratormmodule__MModuleposet__POSetElementmmodule__MModule,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+533, /* MapKeysIterator[MModule, POSetElement[MModule]] */
+},
+};
+const struct types resolution_table_abstract_collection__MapKeysIteratormmodule__MModuleposet__POSetElementmmodule__MModule = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratormmodule__MModuleposet__POSetElementmmodule__MModule, /* MapIterator[MapKeysIterator#0, MapKeysIterator#1]: MapIterator[MModule, POSetElement[MModule]] */
+&type_array__Arraymmodule__MModule, /* Array[Iterator#0]: Array[MModule] */
+}
+};
+/* runtime type MapValuesIterator[MModule, POSetElement[MModule]] */
+const struct type type_abstract_collection__MapValuesIteratormmodule__MModuleposet__POSetElementmmodule__MModule = {
+534,
+"MapValuesIterator[MModule, POSetElement[MModule]]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__MapValuesIteratormmodule__MModuleposet__POSetElementmmodule__MModule,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+534, /* MapValuesIterator[MModule, POSetElement[MModule]] */
+},
+};
+const struct types resolution_table_abstract_collection__MapValuesIteratormmodule__MModuleposet__POSetElementmmodule__MModule = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratormmodule__MModuleposet__POSetElementmmodule__MModule, /* MapIterator[MapValuesIterator#0, MapValuesIterator#1]: MapIterator[MModule, POSetElement[MModule]] */
+&type_array__Arrayposet__POSetElementmmodule__MModule, /* Array[Iterator#0]: Array[POSetElement[MModule]] */
+}
+};
+/* runtime type Array[Array[MModule]] */
+const struct type type_array__Arrayarray__Arraymmodule__MModule = {
+2589,
+"Array[Array[MModule]]", /* class_name_string */
+7,
+0,
+&resolution_table_array__Arrayarray__Arraymmodule__MModule,
+10,
+{
+0, /* nullable Object */
+1, /* Object */
+1472, /* Collection[Array[MModule]] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
+2460, /* AbstractArrayRead[Array[MModule]] */
+1782, /* AbstractArrayRead[Object] */
+2589, /* Array[Array[MModule]] */
+-1, /* empty */
+1973, /* Array[Object] */
+},
+};
+const struct types resolution_table_array__Arrayarray__Arraymmodule__MModule = {
+0, /* dummy */
+{
+&type_array__Arrayarray__Arraymmodule__MModule, /* Array[Array#0]: Array[Array[MModule]] */
+&type_array__NativeArrayarray__Arraymmodule__MModule, /* NativeArray[Array#0]: NativeArray[Array[MModule]] */
+&type_array__Arraymmodule__MModule, /* Sequence#0: Array[MModule] */
+&type_array__Arraymmodule__MModule, /* SimpleCollection#0: Array[MModule] */
+&type_abstract_collection__Collectionarray__Arraymmodule__MModule, /* Collection[Array#0]: Collection[Array[MModule]] */
+&type_array__Arraymmodule__MModule, /* Array#0: Array[MModule] */
+&type_array__NativeArrayarray__Arraymmodule__MModule, /* NativeArray[ArrayCapable#0]: NativeArray[Array[MModule]] */
+&type_array__Arraymmodule__MModule, /* AbstractArray#0: Array[MModule] */
+&type_array__Arraymmodule__MModule, /* RemovableCollection#0: Array[MModule] */
+&type_abstract_collection__Collectionarray__Arraymmodule__MModule, /* Collection[Sequence#0]: Collection[Array[MModule]] */
+&type_array__Arrayarray__Arraymmodule__MModule, /* Array[Sequence#0]: Array[Array[MModule]] */
+&type_abstract_collection__Collectionarray__Arraymmodule__MModule, /* Collection[SimpleCollection#0]: Collection[Array[MModule]] */
+&type_array__Arraymmodule__MModule, /* Collection#0: Array[MModule] */
+&type_abstract_collection__Collectionarray__Arraymmodule__MModule, /* Collection[Collection#0]: Collection[Array[MModule]] */
+&type_array__Arraymmodule__MModule, /* SequenceRead#0: Array[MModule] */
+&type_array__Arraymmodule__MModule, /* AbstractArrayRead#0: Array[MModule] */
+&type_array__Arrayarray__Arraymmodule__MModule, /* Array[AbstractArrayRead#0]: Array[Array[MModule]] */
 NULL, /* empty (AbstractArray[AbstractArrayRead#0]: AbstractArray[Array[MModule]] not a live type) */
-&type_array__ArrayIteratorarray__Arraymodel_base__MModule, /* ArrayIterator[AbstractArrayRead#0]: ArrayIterator[Array[MModule]] */
+&type_array__ArrayIteratorarray__Arraymmodule__MModule, /* ArrayIterator[AbstractArrayRead#0]: ArrayIterator[Array[MModule]] */
 }
 };
 /* runtime type AbstractArrayRead[Array[MModule]] */
-const struct type type_array__AbstractArrayReadarray__Arraymodel_base__MModule = {
-2394,
+const struct type type_array__AbstractArrayReadarray__Arraymmodule__MModule = {
+2460,
 "AbstractArrayRead[Array[MModule]]", /* class_name_string */
 5,
 0,
@@ -4565,16 +5914,16 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-1432, /* Collection[Array[MModule]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-2394, /* AbstractArrayRead[Array[MModule]] */
-1728, /* AbstractArrayRead[Object] */
+1472, /* Collection[Array[MModule]] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
+2460, /* AbstractArrayRead[Array[MModule]] */
+1782, /* AbstractArrayRead[Object] */
 },
 };
 /* runtime type MapKeysIterator[MClassDef, POSetElement[MClassDef]] */
 const struct type type_abstract_collection__MapKeysIteratormodel__MClassDefposet__POSetElementmodel__MClassDef = {
-508,
+535,
 "MapKeysIterator[MClassDef, POSetElement[MClassDef]]", /* class_name_string */
 2,
 0,
@@ -4583,7 +5932,7 @@ const struct type type_abstract_collection__MapKeysIteratormodel__MClassDefposet
 {
 0, /* nullable Object */
 1, /* Object */
-508, /* MapKeysIterator[MClassDef, POSetElement[MClassDef]] */
+535, /* MapKeysIterator[MClassDef, POSetElement[MClassDef]] */
 },
 };
 const struct types resolution_table_abstract_collection__MapKeysIteratormodel__MClassDefposet__POSetElementmodel__MClassDef = {
@@ -4595,7 +5944,7 @@ const struct types resolution_table_abstract_collection__MapKeysIteratormodel__M
 };
 /* runtime type MapValuesIterator[MClassDef, POSetElement[MClassDef]] */
 const struct type type_abstract_collection__MapValuesIteratormodel__MClassDefposet__POSetElementmodel__MClassDef = {
-509,
+536,
 "MapValuesIterator[MClassDef, POSetElement[MClassDef]]", /* class_name_string */
 2,
 0,
@@ -4604,7 +5953,7 @@ const struct type type_abstract_collection__MapValuesIteratormodel__MClassDefpos
 {
 0, /* nullable Object */
 1, /* Object */
-509, /* MapValuesIterator[MClassDef, POSetElement[MClassDef]] */
+536, /* MapValuesIterator[MClassDef, POSetElement[MClassDef]] */
 },
 };
 const struct types resolution_table_abstract_collection__MapValuesIteratormodel__MClassDefposet__POSetElementmodel__MClassDef = {
@@ -4616,7 +5965,7 @@ const struct types resolution_table_abstract_collection__MapValuesIteratormodel_
 };
 /* runtime type MapKeysIterator[MClassType, POSetElement[MClassType]] */
 const struct type type_abstract_collection__MapKeysIteratormodel__MClassTypeposet__POSetElementmodel__MClassType = {
-1637,
+1684,
 "MapKeysIterator[MClassType, POSetElement[MClassType]]", /* class_name_string */
 3,
 0,
@@ -4625,8 +5974,8 @@ const struct type type_abstract_collection__MapKeysIteratormodel__MClassTypepose
 {
 0, /* nullable Object */
 1, /* Object */
-510, /* MapKeysIterator[MType, POSetElement[MType]] */
-1637, /* MapKeysIterator[MClassType, POSetElement[MClassType]] */
+537, /* MapKeysIterator[MType, POSetElement[MType]] */
+1684, /* MapKeysIterator[MClassType, POSetElement[MClassType]] */
 },
 };
 const struct types resolution_table_abstract_collection__MapKeysIteratormodel__MClassTypeposet__POSetElementmodel__MClassType = {
@@ -4638,7 +5987,7 @@ const struct types resolution_table_abstract_collection__MapKeysIteratormodel__M
 };
 /* runtime type MapKeysIterator[MType, POSetElement[MType]] */
 const struct type type_abstract_collection__MapKeysIteratormodel__MTypeposet__POSetElementmodel__MType = {
-510,
+537,
 "MapKeysIterator[MType, POSetElement[MType]]", /* class_name_string */
 2,
 0,
@@ -4647,7 +5996,7 @@ const struct type type_abstract_collection__MapKeysIteratormodel__MTypeposet__PO
 {
 0, /* nullable Object */
 1, /* Object */
-510, /* MapKeysIterator[MType, POSetElement[MType]] */
+537, /* MapKeysIterator[MType, POSetElement[MType]] */
 },
 };
 const struct types resolution_table_abstract_collection__MapKeysIteratormodel__MTypeposet__POSetElementmodel__MType = {
@@ -4659,7 +6008,7 @@ const struct types resolution_table_abstract_collection__MapKeysIteratormodel__M
 };
 /* runtime type MapValuesIterator[MClassType, POSetElement[MClassType]] */
 const struct type type_abstract_collection__MapValuesIteratormodel__MClassTypeposet__POSetElementmodel__MClassType = {
-1638,
+1685,
 "MapValuesIterator[MClassType, POSetElement[MClassType]]", /* class_name_string */
 3,
 0,
@@ -4668,8 +6017,8 @@ const struct type type_abstract_collection__MapValuesIteratormodel__MClassTypepo
 {
 0, /* nullable Object */
 1, /* Object */
-511, /* MapValuesIterator[MType, POSetElement[MType]] */
-1638, /* MapValuesIterator[MClassType, POSetElement[MClassType]] */
+538, /* MapValuesIterator[MType, POSetElement[MType]] */
+1685, /* MapValuesIterator[MClassType, POSetElement[MClassType]] */
 },
 };
 const struct types resolution_table_abstract_collection__MapValuesIteratormodel__MClassTypeposet__POSetElementmodel__MClassType = {
@@ -4681,7 +6030,7 @@ const struct types resolution_table_abstract_collection__MapValuesIteratormodel_
 };
 /* runtime type MapValuesIterator[MType, POSetElement[MType]] */
 const struct type type_abstract_collection__MapValuesIteratormodel__MTypeposet__POSetElementmodel__MType = {
-511,
+538,
 "MapValuesIterator[MType, POSetElement[MType]]", /* class_name_string */
 2,
 0,
@@ -4690,7 +6039,7 @@ const struct type type_abstract_collection__MapValuesIteratormodel__MTypeposet__
 {
 0, /* nullable Object */
 1, /* Object */
-511, /* MapValuesIterator[MType, POSetElement[MType]] */
+538, /* MapValuesIterator[MType, POSetElement[MType]] */
 },
 };
 const struct types resolution_table_abstract_collection__MapValuesIteratormodel__MTypeposet__POSetElementmodel__MType = {
@@ -4702,7 +6051,7 @@ const struct types resolution_table_abstract_collection__MapValuesIteratormodel_
 };
 /* runtime type Array[Array[MClass]] */
 const struct type type_array__Arrayarray__Arraymodel__MClass = {
-2584,
+2662,
 "Array[Array[MClass]]", /* class_name_string */
 11,
 0,
@@ -4711,16 +6060,16 @@ const struct type type_array__Arrayarray__Arraymodel__MClass = {
 {
 0, /* nullable Object */
 1, /* Object */
-1439, /* Collection[Array[nullable MClass]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-1787, /* Collection[Array[MClass]] */
-1728, /* AbstractArrayRead[Object] */
-2395, /* AbstractArrayRead[Array[nullable MClass]] */
-2516, /* Array[Array[nullable MClass]] */
-1911, /* Array[Object] */
-2517, /* AbstractArrayRead[Array[MClass]] */
-2584, /* Array[Array[MClass]] */
+1479, /* Collection[Array[nullable MClass]] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
+1843, /* Collection[Array[MClass]] */
+1782, /* AbstractArrayRead[Object] */
+2461, /* AbstractArrayRead[Array[nullable MClass]] */
+2590, /* Array[Array[nullable MClass]] */
+1973, /* Array[Object] */
+2591, /* AbstractArrayRead[Array[MClass]] */
+2662, /* Array[Array[MClass]] */
 },
 };
 const struct types resolution_table_array__Arrayarray__Arraymodel__MClass = {
@@ -4749,7 +6098,7 @@ NULL, /* empty (AbstractArray[AbstractArrayRead#0]: AbstractArray[Array[MClass]]
 };
 /* runtime type Array[Array[nullable MClass]] */
 const struct type type_array__Arrayarray__Arraynullable_model__MClass = {
-2516,
+2590,
 "Array[Array[nullable MClass]]", /* class_name_string */
 8,
 0,
@@ -4758,14 +6107,14 @@ const struct type type_array__Arrayarray__Arraynullable_model__MClass = {
 {
 0, /* nullable Object */
 1, /* Object */
-1439, /* Collection[Array[nullable MClass]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
+1479, /* Collection[Array[nullable MClass]] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
 -1, /* empty */
-1728, /* AbstractArrayRead[Object] */
-2395, /* AbstractArrayRead[Array[nullable MClass]] */
-2516, /* Array[Array[nullable MClass]] */
-1911, /* Array[Object] */
+1782, /* AbstractArrayRead[Object] */
+2461, /* AbstractArrayRead[Array[nullable MClass]] */
+2590, /* Array[Array[nullable MClass]] */
+1973, /* Array[Object] */
 },
 };
 const struct types resolution_table_array__Arrayarray__Arraynullable_model__MClass = {
@@ -4794,7 +6143,7 @@ NULL, /* empty (AbstractArray[AbstractArrayRead#0]: AbstractArray[Array[nullable
 };
 /* runtime type AbstractArrayRead[Array[MClass]] */
 const struct type type_array__AbstractArrayReadarray__Arraymodel__MClass = {
-2517,
+2591,
 "AbstractArrayRead[Array[MClass]]", /* class_name_string */
 10,
 0,
@@ -4803,20 +6152,20 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-1439, /* Collection[Array[nullable MClass]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-1787, /* Collection[Array[MClass]] */
-1728, /* AbstractArrayRead[Object] */
-2395, /* AbstractArrayRead[Array[nullable MClass]] */
+1479, /* Collection[Array[nullable MClass]] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
+1843, /* Collection[Array[MClass]] */
+1782, /* AbstractArrayRead[Object] */
+2461, /* AbstractArrayRead[Array[nullable MClass]] */
 -1, /* empty */
 -1, /* empty */
-2517, /* AbstractArrayRead[Array[MClass]] */
+2591, /* AbstractArrayRead[Array[MClass]] */
 },
 };
 /* runtime type AbstractArrayRead[Array[nullable MClass]] */
 const struct type type_array__AbstractArrayReadarray__Arraynullable_model__MClass = {
-2395,
+2461,
 "AbstractArrayRead[Array[nullable MClass]]", /* class_name_string */
 7,
 0,
@@ -4825,17 +6174,17 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-1439, /* Collection[Array[nullable MClass]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
+1479, /* Collection[Array[nullable MClass]] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
 -1, /* empty */
-1728, /* AbstractArrayRead[Object] */
-2395, /* AbstractArrayRead[Array[nullable MClass]] */
+1782, /* AbstractArrayRead[Object] */
+2461, /* AbstractArrayRead[Array[nullable MClass]] */
 },
 };
 /* runtime type Array[Array[MProperty]] */
 const struct type type_array__Arrayarray__Arraymodel__MProperty = {
-2518,
+2592,
 "Array[Array[MProperty]]", /* class_name_string */
 7,
 0,
@@ -4844,14 +6193,14 @@ const struct type type_array__Arrayarray__Arraymodel__MProperty = {
 {
 0, /* nullable Object */
 1, /* Object */
-1442, /* Collection[Array[MProperty]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-2396, /* AbstractArrayRead[Array[MProperty]] */
-1728, /* AbstractArrayRead[Object] */
-2518, /* Array[Array[MProperty]] */
+1482, /* Collection[Array[MProperty]] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
+2462, /* AbstractArrayRead[Array[MProperty]] */
+1782, /* AbstractArrayRead[Object] */
+2592, /* Array[Array[MProperty]] */
 -1, /* empty */
-1911, /* Array[Object] */
+1973, /* Array[Object] */
 },
 };
 const struct types resolution_table_array__Arrayarray__Arraymodel__MProperty = {
@@ -4880,7 +6229,7 @@ NULL, /* empty (AbstractArray[AbstractArrayRead#0]: AbstractArray[Array[MPropert
 };
 /* runtime type AbstractArrayRead[Array[MProperty]] */
 const struct type type_array__AbstractArrayReadarray__Arraymodel__MProperty = {
-2396,
+2462,
 "AbstractArrayRead[Array[MProperty]]", /* class_name_string */
 5,
 0,
@@ -4889,58 +6238,58 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-1442, /* Collection[Array[MProperty]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-2396, /* AbstractArrayRead[Array[MProperty]] */
-1728, /* AbstractArrayRead[Object] */
+1482, /* Collection[Array[MProperty]] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
+2462, /* AbstractArrayRead[Array[MProperty]] */
+1782, /* AbstractArrayRead[Object] */
 },
 };
 /* runtime type MapKeysIterator[MModule, HashMap2[MType, String, nullable MProperty]] */
-const struct type type_abstract_collection__MapKeysIteratormodel_base__MModulemore_collections__HashMap2model__MTypestring__Stringnullable_model__MProperty = {
-512,
+const struct type type_abstract_collection__MapKeysIteratormmodule__MModulemore_collections__HashMap2model__MTypestring__Stringnullable_model__MProperty = {
+539,
 "MapKeysIterator[MModule, HashMap2[MType, String, nullable MProperty]]", /* class_name_string */
 2,
 0,
-&resolution_table_abstract_collection__MapKeysIteratormodel_base__MModulemore_collections__HashMap2model__MTypestring__Stringnullable_model__MProperty,
+&resolution_table_abstract_collection__MapKeysIteratormmodule__MModulemore_collections__HashMap2model__MTypestring__Stringnullable_model__MProperty,
 3,
 {
 0, /* nullable Object */
 1, /* Object */
-512, /* MapKeysIterator[MModule, HashMap2[MType, String, nullable MProperty]] */
+539, /* MapKeysIterator[MModule, HashMap2[MType, String, nullable MProperty]] */
 },
 };
-const struct types resolution_table_abstract_collection__MapKeysIteratormodel_base__MModulemore_collections__HashMap2model__MTypestring__Stringnullable_model__MProperty = {
+const struct types resolution_table_abstract_collection__MapKeysIteratormmodule__MModulemore_collections__HashMap2model__MTypestring__Stringnullable_model__MProperty = {
 0, /* dummy */
 {
-&type_abstract_collection__MapIteratormodel_base__MModulemore_collections__HashMap2model__MTypestring__Stringnullable_model__MProperty, /* MapIterator[MapKeysIterator#0, MapKeysIterator#1]: MapIterator[MModule, HashMap2[MType, String, nullable MProperty]] */
-&type_array__Arraymodel_base__MModule, /* Array[Iterator#0]: Array[MModule] */
+&type_abstract_collection__MapIteratormmodule__MModulemore_collections__HashMap2model__MTypestring__Stringnullable_model__MProperty, /* MapIterator[MapKeysIterator#0, MapKeysIterator#1]: MapIterator[MModule, HashMap2[MType, String, nullable MProperty]] */
+&type_array__Arraymmodule__MModule, /* Array[Iterator#0]: Array[MModule] */
 }
 };
 /* runtime type MapValuesIterator[MModule, HashMap2[MType, String, nullable MProperty]] */
-const struct type type_abstract_collection__MapValuesIteratormodel_base__MModulemore_collections__HashMap2model__MTypestring__Stringnullable_model__MProperty = {
-513,
+const struct type type_abstract_collection__MapValuesIteratormmodule__MModulemore_collections__HashMap2model__MTypestring__Stringnullable_model__MProperty = {
+540,
 "MapValuesIterator[MModule, HashMap2[MType, String, nullable MProperty]]", /* class_name_string */
 2,
 0,
-&resolution_table_abstract_collection__MapValuesIteratormodel_base__MModulemore_collections__HashMap2model__MTypestring__Stringnullable_model__MProperty,
+&resolution_table_abstract_collection__MapValuesIteratormmodule__MModulemore_collections__HashMap2model__MTypestring__Stringnullable_model__MProperty,
 3,
 {
 0, /* nullable Object */
 1, /* Object */
-513, /* MapValuesIterator[MModule, HashMap2[MType, String, nullable MProperty]] */
+540, /* MapValuesIterator[MModule, HashMap2[MType, String, nullable MProperty]] */
 },
 };
-const struct types resolution_table_abstract_collection__MapValuesIteratormodel_base__MModulemore_collections__HashMap2model__MTypestring__Stringnullable_model__MProperty = {
+const struct types resolution_table_abstract_collection__MapValuesIteratormmodule__MModulemore_collections__HashMap2model__MTypestring__Stringnullable_model__MProperty = {
 0, /* dummy */
 {
-&type_abstract_collection__MapIteratormodel_base__MModulemore_collections__HashMap2model__MTypestring__Stringnullable_model__MProperty, /* MapIterator[MapValuesIterator#0, MapValuesIterator#1]: MapIterator[MModule, HashMap2[MType, String, nullable MProperty]] */
+&type_abstract_collection__MapIteratormmodule__MModulemore_collections__HashMap2model__MTypestring__Stringnullable_model__MProperty, /* MapIterator[MapValuesIterator#0, MapValuesIterator#1]: MapIterator[MModule, HashMap2[MType, String, nullable MProperty]] */
 &type_array__Arraymore_collections__HashMap2model__MTypestring__Stringnullable_model__MProperty, /* Array[Iterator#0]: Array[HashMap2[MType, String, nullable MProperty]] */
 }
 };
 /* runtime type HashMapKeys[MType, HashMap[String, nullable MProperty]] */
 const struct type type_hash_collection__HashMapKeysmodel__MTypehash_collection__HashMapstring__Stringnullable_model__MProperty = {
-2177,
+2243,
 "HashMapKeys[MType, HashMap[String, nullable MProperty]]", /* class_name_string */
 2,
 0,
@@ -4949,12 +6298,12 @@ const struct type type_hash_collection__HashMapKeysmodel__MTypehash_collection__
 {
 0, /* nullable Object */
 1, /* Object */
-2177, /* HashMapKeys[MType, HashMap[String, nullable MProperty]] */
+2243, /* HashMapKeys[MType, HashMap[String, nullable MProperty]] */
 -1, /* empty */
-164, /* Collection[Object] */
-173, /* Collection[nullable MType] */
+170, /* Collection[Object] */
+180, /* Collection[nullable MType] */
 -1, /* empty */
-1737, /* Collection[MType] */
+1791, /* Collection[MType] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapKeysmodel__MTypehash_collection__HashMapstring__Stringnullable_model__MProperty = {
@@ -4978,7 +6327,7 @@ NULL, /* empty */
 };
 /* runtime type HashMapValues[MType, HashMap[String, nullable MProperty]] */
 const struct type type_hash_collection__HashMapValuesmodel__MTypehash_collection__HashMapstring__Stringnullable_model__MProperty = {
-1877,
+1935,
 "HashMapValues[MType, HashMap[String, nullable MProperty]]", /* class_name_string */
 3,
 0,
@@ -4987,9 +6336,9 @@ const struct type type_hash_collection__HashMapValuesmodel__MTypehash_collection
 {
 0, /* nullable Object */
 1, /* Object */
-1639, /* Collection[HashMap[String, nullable MProperty]] */
-1877, /* HashMapValues[MType, HashMap[String, nullable MProperty]] */
-164, /* Collection[Object] */
+1686, /* Collection[HashMap[String, nullable MProperty]] */
+1935, /* HashMapValues[MType, HashMap[String, nullable MProperty]] */
+170, /* Collection[Object] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapValuesmodel__MTypehash_collection__HashMapstring__Stringnullable_model__MProperty = {
@@ -5013,7 +6362,7 @@ NULL, /* empty */
 };
 /* runtime type Collection[HashMap[String, nullable MProperty]] */
 const struct type type_abstract_collection__Collectionhash_collection__HashMapstring__Stringnullable_model__MProperty = {
-1639,
+1686,
 "Collection[HashMap[String, nullable MProperty]]", /* class_name_string */
 2,
 0,
@@ -5022,14 +6371,14 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-1639, /* Collection[HashMap[String, nullable MProperty]] */
+1686, /* Collection[HashMap[String, nullable MProperty]] */
 -1, /* empty */
-164, /* Collection[Object] */
+170, /* Collection[Object] */
 },
 };
 /* runtime type NativeArray[nullable HashMapNode[MType, HashMap[String, nullable MProperty]]] */
 const struct type type_array__NativeArraynullable_hash_collection__HashMapNodemodel__MTypehash_collection__HashMapstring__Stringnullable_model__MProperty = {
-514,
+541,
 "NativeArray[nullable HashMapNode[MType, HashMap[String, nullable MProperty]]]", /* class_name_string */
 2,
 0,
@@ -5038,7 +6387,7 @@ const struct type type_array__NativeArraynullable_hash_collection__HashMapNodemo
 {
 0, /* nullable Object */
 1, /* Object */
-514, /* NativeArray[nullable HashMapNode[MType, HashMap[String, nullable MProperty]]] */
+541, /* NativeArray[nullable HashMapNode[MType, HashMap[String, nullable MProperty]]] */
 },
 };
 const struct types resolution_table_array__NativeArraynullable_hash_collection__HashMapNodemodel__MTypehash_collection__HashMapstring__Stringnullable_model__MProperty = {
@@ -5050,7 +6399,7 @@ const struct types resolution_table_array__NativeArraynullable_hash_collection__
 };
 /* runtime type HashMapNode[MType, HashMap[String, nullable MProperty]] */
 const struct type type_hash_collection__HashMapNodemodel__MTypehash_collection__HashMapstring__Stringnullable_model__MProperty = {
-1640,
+1687,
 "HashMapNode[MType, HashMap[String, nullable MProperty]]", /* class_name_string */
 3,
 0,
@@ -5059,8 +6408,8 @@ const struct type type_hash_collection__HashMapNodemodel__MTypehash_collection__
 {
 0, /* nullable Object */
 1, /* Object */
-150, /* nullable HashMapNode[MType, HashMap[String, nullable MProperty]] */
-1640, /* HashMapNode[MType, HashMap[String, nullable MProperty]] */
+156, /* nullable HashMapNode[MType, HashMap[String, nullable MProperty]] */
+1687, /* HashMapNode[MType, HashMap[String, nullable MProperty]] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapNodemodel__MTypehash_collection__HashMapstring__Stringnullable_model__MProperty = {
@@ -5074,7 +6423,7 @@ const struct types resolution_table_hash_collection__HashMapNodemodel__MTypehash
 };
 /* runtime type nullable HashMapNode[MType, HashMap[String, nullable MProperty]] */
 const struct type type_nullable_hash_collection__HashMapNodemodel__MTypehash_collection__HashMapstring__Stringnullable_model__MProperty = {
-150,
+156,
 "nullable HashMapNode[MType, HashMap[String, nullable MProperty]]", /* class_name_string */
 2,
 1,
@@ -5083,7 +6432,7 @@ const struct type type_nullable_hash_collection__HashMapNodemodel__MTypehash_col
 {
 0, /* nullable Object */
 -1, /* empty */
-150, /* nullable HashMapNode[MType, HashMap[String, nullable MProperty]] */
+156, /* nullable HashMapNode[MType, HashMap[String, nullable MProperty]] */
 },
 };
 const struct types resolution_table_nullable_hash_collection__HashMapNodemodel__MTypehash_collection__HashMapstring__Stringnullable_model__MProperty = {
@@ -5097,7 +6446,7 @@ const struct types resolution_table_nullable_hash_collection__HashMapNodemodel__
 };
 /* runtime type HashMapIterator[MType, HashMap[String, nullable MProperty]] */
 const struct type type_hash_collection__HashMapIteratormodel__MTypehash_collection__HashMapstring__Stringnullable_model__MProperty = {
-1641,
+1688,
 "HashMapIterator[MType, HashMap[String, nullable MProperty]]", /* class_name_string */
 3,
 0,
@@ -5106,8 +6455,8 @@ const struct type type_hash_collection__HashMapIteratormodel__MTypehash_collecti
 {
 0, /* nullable Object */
 1, /* Object */
-515, /* MapIterator[MType, HashMap[String, nullable MProperty]] */
-1641, /* HashMapIterator[MType, HashMap[String, nullable MProperty]] */
+542, /* MapIterator[MType, HashMap[String, nullable MProperty]] */
+1688, /* HashMapIterator[MType, HashMap[String, nullable MProperty]] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapIteratormodel__MTypehash_collection__HashMapstring__Stringnullable_model__MProperty = {
@@ -5118,7 +6467,7 @@ const struct types resolution_table_hash_collection__HashMapIteratormodel__MType
 };
 /* runtime type MapIterator[MType, HashMap[String, nullable MProperty]] */
 const struct type type_abstract_collection__MapIteratormodel__MTypehash_collection__HashMapstring__Stringnullable_model__MProperty = {
-515,
+542,
 "MapIterator[MType, HashMap[String, nullable MProperty]]", /* class_name_string */
 2,
 0,
@@ -5127,12 +6476,12 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-515, /* MapIterator[MType, HashMap[String, nullable MProperty]] */
+542, /* MapIterator[MType, HashMap[String, nullable MProperty]] */
 },
 };
 /* runtime type HashMapKeys[String, nullable MProperty] */
 const struct type type_hash_collection__HashMapKeysstring__Stringnullable_model__MProperty = {
-1878,
+1936,
 "HashMapKeys[String, nullable MProperty]", /* class_name_string */
 3,
 0,
@@ -5141,9 +6490,9 @@ const struct type type_hash_collection__HashMapKeysstring__Stringnullable_model_
 {
 0, /* nullable Object */
 1, /* Object */
-595, /* Collection[String] */
-1878, /* HashMapKeys[String, nullable MProperty] */
-164, /* Collection[Object] */
+631, /* Collection[String] */
+1936, /* HashMapKeys[String, nullable MProperty] */
+170, /* Collection[Object] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapKeysstring__Stringnullable_model__MProperty = {
@@ -5167,7 +6516,7 @@ NULL, /* empty */
 };
 /* runtime type HashMapValues[String, nullable MProperty] */
 const struct type type_hash_collection__HashMapValuesstring__Stringnullable_model__MProperty = {
-1642,
+1689,
 "HashMapValues[String, nullable MProperty]", /* class_name_string */
 3,
 0,
@@ -5176,8 +6525,8 @@ const struct type type_hash_collection__HashMapValuesstring__Stringnullable_mode
 {
 0, /* nullable Object */
 1, /* Object */
-172, /* Collection[nullable MProperty] */
-1642, /* HashMapValues[String, nullable MProperty] */
+179, /* Collection[nullable MProperty] */
+1689, /* HashMapValues[String, nullable MProperty] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapValuesstring__Stringnullable_model__MProperty = {
@@ -5201,7 +6550,7 @@ NULL, /* empty */
 };
 /* runtime type NativeArray[nullable HashMapNode[String, nullable MProperty]] */
 const struct type type_array__NativeArraynullable_hash_collection__HashMapNodestring__Stringnullable_model__MProperty = {
-516,
+543,
 "NativeArray[nullable HashMapNode[String, nullable MProperty]]", /* class_name_string */
 2,
 0,
@@ -5210,7 +6559,7 @@ const struct type type_array__NativeArraynullable_hash_collection__HashMapNodest
 {
 0, /* nullable Object */
 1, /* Object */
-516, /* NativeArray[nullable HashMapNode[String, nullable MProperty]] */
+543, /* NativeArray[nullable HashMapNode[String, nullable MProperty]] */
 },
 };
 const struct types resolution_table_array__NativeArraynullable_hash_collection__HashMapNodestring__Stringnullable_model__MProperty = {
@@ -5222,7 +6571,7 @@ const struct types resolution_table_array__NativeArraynullable_hash_collection__
 };
 /* runtime type HashMapNode[String, nullable MProperty] */
 const struct type type_hash_collection__HashMapNodestring__Stringnullable_model__MProperty = {
-1643,
+1690,
 "HashMapNode[String, nullable MProperty]", /* class_name_string */
 3,
 0,
@@ -5231,8 +6580,8 @@ const struct type type_hash_collection__HashMapNodestring__Stringnullable_model_
 {
 0, /* nullable Object */
 1, /* Object */
-151, /* nullable HashMapNode[String, nullable MProperty] */
-1643, /* HashMapNode[String, nullable MProperty] */
+157, /* nullable HashMapNode[String, nullable MProperty] */
+1690, /* HashMapNode[String, nullable MProperty] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapNodestring__Stringnullable_model__MProperty = {
@@ -5246,7 +6595,7 @@ const struct types resolution_table_hash_collection__HashMapNodestring__Stringnu
 };
 /* runtime type nullable HashMapNode[String, nullable MProperty] */
 const struct type type_nullable_hash_collection__HashMapNodestring__Stringnullable_model__MProperty = {
-151,
+157,
 "nullable HashMapNode[String, nullable MProperty]", /* class_name_string */
 2,
 1,
@@ -5255,7 +6604,7 @@ const struct type type_nullable_hash_collection__HashMapNodestring__Stringnullab
 {
 0, /* nullable Object */
 -1, /* empty */
-151, /* nullable HashMapNode[String, nullable MProperty] */
+157, /* nullable HashMapNode[String, nullable MProperty] */
 },
 };
 const struct types resolution_table_nullable_hash_collection__HashMapNodestring__Stringnullable_model__MProperty = {
@@ -5269,7 +6618,7 @@ const struct types resolution_table_nullable_hash_collection__HashMapNodestring_
 };
 /* runtime type HashMapIterator[String, nullable MProperty] */
 const struct type type_hash_collection__HashMapIteratorstring__Stringnullable_model__MProperty = {
-1644,
+1691,
 "HashMapIterator[String, nullable MProperty]", /* class_name_string */
 3,
 0,
@@ -5278,8 +6627,8 @@ const struct type type_hash_collection__HashMapIteratorstring__Stringnullable_mo
 {
 0, /* nullable Object */
 1, /* Object */
-517, /* MapIterator[String, nullable MProperty] */
-1644, /* HashMapIterator[String, nullable MProperty] */
+544, /* MapIterator[String, nullable MProperty] */
+1691, /* HashMapIterator[String, nullable MProperty] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapIteratorstring__Stringnullable_model__MProperty = {
@@ -5290,7 +6639,7 @@ const struct types resolution_table_hash_collection__HashMapIteratorstring__Stri
 };
 /* runtime type MapIterator[String, nullable MProperty] */
 const struct type type_abstract_collection__MapIteratorstring__Stringnullable_model__MProperty = {
-517,
+544,
 "MapIterator[String, nullable MProperty]", /* class_name_string */
 2,
 0,
@@ -5299,12 +6648,132 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-517, /* MapIterator[String, nullable MProperty] */
+544, /* MapIterator[String, nullable MProperty] */
+},
+};
+/* runtime type Array[nullable ModulePath] */
+const struct type type_array__Arraynullable_modelbuilder__ModulePath = {
+2244,
+"Array[nullable ModulePath]", /* class_name_string */
+5,
+0,
+&resolution_table_array__Arraynullable_modelbuilder__ModulePath,
+6,
+{
+0, /* nullable Object */
+1, /* Object */
+312, /* Collection[nullable ModulePath] */
+169, /* SequenceRead[nullable Object] */
+1937, /* AbstractArrayRead[nullable ModulePath] */
+2244, /* Array[nullable ModulePath] */
+},
+};
+const struct types resolution_table_array__Arraynullable_modelbuilder__ModulePath = {
+0, /* dummy */
+{
+&type_array__Arraynullable_modelbuilder__ModulePath, /* Array[Array#0]: Array[nullable ModulePath] */
+&type_array__NativeArraynullable_modelbuilder__ModulePath, /* NativeArray[Array#0]: NativeArray[nullable ModulePath] */
+&type_nullable_modelbuilder__ModulePath, /* Sequence#0: nullable ModulePath */
+&type_nullable_modelbuilder__ModulePath, /* SimpleCollection#0: nullable ModulePath */
+&type_abstract_collection__Collectionnullable_modelbuilder__ModulePath, /* Collection[Array#0]: Collection[nullable ModulePath] */
+&type_nullable_modelbuilder__ModulePath, /* Array#0: nullable ModulePath */
+&type_array__NativeArraynullable_modelbuilder__ModulePath, /* NativeArray[ArrayCapable#0]: NativeArray[nullable ModulePath] */
+&type_nullable_modelbuilder__ModulePath, /* AbstractArray#0: nullable ModulePath */
+&type_nullable_modelbuilder__ModulePath, /* RemovableCollection#0: nullable ModulePath */
+&type_abstract_collection__Collectionnullable_modelbuilder__ModulePath, /* Collection[Sequence#0]: Collection[nullable ModulePath] */
+&type_array__Arraynullable_modelbuilder__ModulePath, /* Array[Sequence#0]: Array[nullable ModulePath] */
+&type_abstract_collection__Collectionnullable_modelbuilder__ModulePath, /* Collection[SimpleCollection#0]: Collection[nullable ModulePath] */
+&type_nullable_modelbuilder__ModulePath, /* Collection#0: nullable ModulePath */
+&type_abstract_collection__Collectionnullable_modelbuilder__ModulePath, /* Collection[Collection#0]: Collection[nullable ModulePath] */
+&type_nullable_modelbuilder__ModulePath, /* SequenceRead#0: nullable ModulePath */
+&type_nullable_modelbuilder__ModulePath, /* AbstractArrayRead#0: nullable ModulePath */
+&type_array__Arraynullable_modelbuilder__ModulePath, /* Array[AbstractArrayRead#0]: Array[nullable ModulePath] */
+NULL, /* empty (AbstractArray[AbstractArrayRead#0]: AbstractArray[nullable ModulePath] not a live type) */
+&type_array__ArrayIteratornullable_modelbuilder__ModulePath, /* ArrayIterator[AbstractArrayRead#0]: ArrayIterator[nullable ModulePath] */
+}
+};
+/* runtime type AbstractArrayRead[nullable ModulePath] */
+const struct type type_array__AbstractArrayReadnullable_modelbuilder__ModulePath = {
+1937,
+"AbstractArrayRead[nullable ModulePath]", /* class_name_string */
+4,
+0,
+NULL,
+5,
+{
+0, /* nullable Object */
+1, /* Object */
+312, /* Collection[nullable ModulePath] */
+169, /* SequenceRead[nullable Object] */
+1937, /* AbstractArrayRead[nullable ModulePath] */
+},
+};
+/* runtime type Array[nullable MGroup] */
+const struct type type_array__Arraynullable_mproject__MGroup = {
+2245,
+"Array[nullable MGroup]", /* class_name_string */
+8,
+0,
+&resolution_table_array__Arraynullable_mproject__MGroup,
+9,
+{
+0, /* nullable Object */
+1, /* Object */
+227, /* Collection[nullable MGroup] */
+169, /* SequenceRead[nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1938, /* AbstractArrayRead[nullable MGroup] */
+2245, /* Array[nullable MGroup] */
+},
+};
+const struct types resolution_table_array__Arraynullable_mproject__MGroup = {
+0, /* dummy */
+{
+&type_array__Arraynullable_mproject__MGroup, /* Array[Array#0]: Array[nullable MGroup] */
+&type_array__NativeArraynullable_mproject__MGroup, /* NativeArray[Array#0]: NativeArray[nullable MGroup] */
+&type_nullable_mproject__MGroup, /* Sequence#0: nullable MGroup */
+&type_nullable_mproject__MGroup, /* SimpleCollection#0: nullable MGroup */
+&type_abstract_collection__Collectionnullable_mproject__MGroup, /* Collection[Array#0]: Collection[nullable MGroup] */
+&type_nullable_mproject__MGroup, /* Array#0: nullable MGroup */
+&type_array__NativeArraynullable_mproject__MGroup, /* NativeArray[ArrayCapable#0]: NativeArray[nullable MGroup] */
+&type_nullable_mproject__MGroup, /* AbstractArray#0: nullable MGroup */
+&type_nullable_mproject__MGroup, /* RemovableCollection#0: nullable MGroup */
+&type_abstract_collection__Collectionnullable_mproject__MGroup, /* Collection[Sequence#0]: Collection[nullable MGroup] */
+&type_array__Arraynullable_mproject__MGroup, /* Array[Sequence#0]: Array[nullable MGroup] */
+&type_abstract_collection__Collectionnullable_mproject__MGroup, /* Collection[SimpleCollection#0]: Collection[nullable MGroup] */
+&type_nullable_mproject__MGroup, /* Collection#0: nullable MGroup */
+&type_abstract_collection__Collectionnullable_mproject__MGroup, /* Collection[Collection#0]: Collection[nullable MGroup] */
+&type_nullable_mproject__MGroup, /* SequenceRead#0: nullable MGroup */
+&type_nullable_mproject__MGroup, /* AbstractArrayRead#0: nullable MGroup */
+&type_array__Arraynullable_mproject__MGroup, /* Array[AbstractArrayRead#0]: Array[nullable MGroup] */
+NULL, /* empty (AbstractArray[AbstractArrayRead#0]: AbstractArray[nullable MGroup] not a live type) */
+&type_array__ArrayIteratornullable_mproject__MGroup, /* ArrayIterator[AbstractArrayRead#0]: ArrayIterator[nullable MGroup] */
+}
+};
+/* runtime type AbstractArrayRead[nullable MGroup] */
+const struct type type_array__AbstractArrayReadnullable_mproject__MGroup = {
+1938,
+"AbstractArrayRead[nullable MGroup]", /* class_name_string */
+7,
+0,
+NULL,
+8,
+{
+0, /* nullable Object */
+1, /* Object */
+227, /* Collection[nullable MGroup] */
+169, /* SequenceRead[nullable Object] */
+-1, /* empty */
+-1, /* empty */
+-1, /* empty */
+1938, /* AbstractArrayRead[nullable MGroup] */
 },
 };
 /* runtime type Array[Set[MProperty]] */
 const struct type type_array__Arrayabstract_collection__Setmodel__MProperty = {
-2585,
+2663,
 "Array[Set[MProperty]]", /* class_name_string */
 13,
 0,
@@ -5313,18 +6782,18 @@ const struct type type_array__Arrayabstract_collection__Setmodel__MProperty = {
 {
 0, /* nullable Object */
 1, /* Object */
-1461, /* Collection[Set[PropertyLayoutElement]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-1796, /* Collection[Set[MProperty]] */
-1728, /* AbstractArrayRead[Object] */
+1505, /* Collection[Set[PropertyLayoutElement]] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
+1853, /* Collection[Set[MProperty]] */
+1782, /* AbstractArrayRead[Object] */
 -1, /* empty */
-2397, /* AbstractArrayRead[Set[PropertyLayoutElement]] */
-1911, /* Array[Object] */
-2519, /* Array[Set[PropertyLayoutElement]] */
-2520, /* AbstractArrayRead[Set[MProperty]] */
+2463, /* AbstractArrayRead[Set[PropertyLayoutElement]] */
+1973, /* Array[Object] */
+2593, /* Array[Set[PropertyLayoutElement]] */
+2594, /* AbstractArrayRead[Set[MProperty]] */
 -1, /* empty */
-2585, /* Array[Set[MProperty]] */
+2663, /* Array[Set[MProperty]] */
 },
 };
 const struct types resolution_table_array__Arrayabstract_collection__Setmodel__MProperty = {
@@ -5353,7 +6822,7 @@ NULL, /* empty (AbstractArray[AbstractArrayRead#0]: AbstractArray[Set[MProperty]
 };
 /* runtime type Array[Set[PropertyLayoutElement]] */
 const struct type type_array__Arrayabstract_collection__Setlayout_builders__PropertyLayoutElement = {
-2519,
+2593,
 "Array[Set[PropertyLayoutElement]]", /* class_name_string */
 10,
 0,
@@ -5362,15 +6831,15 @@ const struct type type_array__Arrayabstract_collection__Setlayout_builders__Prop
 {
 0, /* nullable Object */
 1, /* Object */
-1461, /* Collection[Set[PropertyLayoutElement]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
+1505, /* Collection[Set[PropertyLayoutElement]] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
 -1, /* empty */
-1728, /* AbstractArrayRead[Object] */
+1782, /* AbstractArrayRead[Object] */
 -1, /* empty */
-2397, /* AbstractArrayRead[Set[PropertyLayoutElement]] */
-1911, /* Array[Object] */
-2519, /* Array[Set[PropertyLayoutElement]] */
+2463, /* AbstractArrayRead[Set[PropertyLayoutElement]] */
+1973, /* Array[Object] */
+2593, /* Array[Set[PropertyLayoutElement]] */
 },
 };
 const struct types resolution_table_array__Arrayabstract_collection__Setlayout_builders__PropertyLayoutElement = {
@@ -5399,7 +6868,7 @@ NULL, /* empty (AbstractArray[AbstractArrayRead#0]: AbstractArray[Set[PropertyLa
 };
 /* runtime type AbstractArrayRead[Set[MProperty]] */
 const struct type type_array__AbstractArrayReadabstract_collection__Setmodel__MProperty = {
-2520,
+2594,
 "AbstractArrayRead[Set[MProperty]]", /* class_name_string */
 11,
 0,
@@ -5408,21 +6877,21 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-1461, /* Collection[Set[PropertyLayoutElement]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-1796, /* Collection[Set[MProperty]] */
-1728, /* AbstractArrayRead[Object] */
+1505, /* Collection[Set[PropertyLayoutElement]] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
+1853, /* Collection[Set[MProperty]] */
+1782, /* AbstractArrayRead[Object] */
 -1, /* empty */
-2397, /* AbstractArrayRead[Set[PropertyLayoutElement]] */
+2463, /* AbstractArrayRead[Set[PropertyLayoutElement]] */
 -1, /* empty */
 -1, /* empty */
-2520, /* AbstractArrayRead[Set[MProperty]] */
+2594, /* AbstractArrayRead[Set[MProperty]] */
 },
 };
 /* runtime type AbstractArrayRead[Set[PropertyLayoutElement]] */
 const struct type type_array__AbstractArrayReadabstract_collection__Setlayout_builders__PropertyLayoutElement = {
-2397,
+2463,
 "AbstractArrayRead[Set[PropertyLayoutElement]]", /* class_name_string */
 8,
 0,
@@ -5431,18 +6900,18 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-1461, /* Collection[Set[PropertyLayoutElement]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
+1505, /* Collection[Set[PropertyLayoutElement]] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
 -1, /* empty */
-1728, /* AbstractArrayRead[Object] */
+1782, /* AbstractArrayRead[Object] */
 -1, /* empty */
-2397, /* AbstractArrayRead[Set[PropertyLayoutElement]] */
+2463, /* AbstractArrayRead[Set[PropertyLayoutElement]] */
 },
 };
 /* runtime type Array[HashSet[MType]] */
 const struct type type_array__Arrayhash_collection__HashSetmodel__MType = {
-2586,
+2664,
 "Array[HashSet[MType]]", /* class_name_string */
 11,
 0,
@@ -5451,16 +6920,16 @@ const struct type type_array__Arrayhash_collection__HashSetmodel__MType = {
 {
 0, /* nullable Object */
 1, /* Object */
-1479, /* Collection[Set[MType]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-1807, /* Collection[HashSet[MType]] */
-1728, /* AbstractArrayRead[Object] */
-2398, /* AbstractArrayRead[Set[MType]] */
-2521, /* Array[Set[MType]] */
-1911, /* Array[Object] */
-2522, /* AbstractArrayRead[HashSet[MType]] */
-2586, /* Array[HashSet[MType]] */
+1516, /* Collection[Set[MType]] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
+1857, /* Collection[HashSet[MType]] */
+1782, /* AbstractArrayRead[Object] */
+2464, /* AbstractArrayRead[Set[MType]] */
+2595, /* Array[Set[MType]] */
+1973, /* Array[Object] */
+2596, /* AbstractArrayRead[HashSet[MType]] */
+2664, /* Array[HashSet[MType]] */
 },
 };
 const struct types resolution_table_array__Arrayhash_collection__HashSetmodel__MType = {
@@ -5489,7 +6958,7 @@ NULL, /* empty (AbstractArray[AbstractArrayRead#0]: AbstractArray[HashSet[MType]
 };
 /* runtime type Array[Set[MType]] */
 const struct type type_array__Arrayabstract_collection__Setmodel__MType = {
-2521,
+2595,
 "Array[Set[MType]]", /* class_name_string */
 8,
 0,
@@ -5498,14 +6967,14 @@ const struct type type_array__Arrayabstract_collection__Setmodel__MType = {
 {
 0, /* nullable Object */
 1, /* Object */
-1479, /* Collection[Set[MType]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
+1516, /* Collection[Set[MType]] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
 -1, /* empty */
-1728, /* AbstractArrayRead[Object] */
-2398, /* AbstractArrayRead[Set[MType]] */
-2521, /* Array[Set[MType]] */
-1911, /* Array[Object] */
+1782, /* AbstractArrayRead[Object] */
+2464, /* AbstractArrayRead[Set[MType]] */
+2595, /* Array[Set[MType]] */
+1973, /* Array[Object] */
 },
 };
 const struct types resolution_table_array__Arrayabstract_collection__Setmodel__MType = {
@@ -5534,7 +7003,7 @@ NULL, /* empty (AbstractArray[AbstractArrayRead#0]: AbstractArray[Set[MType]] no
 };
 /* runtime type AbstractArrayRead[HashSet[MType]] */
 const struct type type_array__AbstractArrayReadhash_collection__HashSetmodel__MType = {
-2522,
+2596,
 "AbstractArrayRead[HashSet[MType]]", /* class_name_string */
 10,
 0,
@@ -5543,20 +7012,20 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-1479, /* Collection[Set[MType]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-1807, /* Collection[HashSet[MType]] */
-1728, /* AbstractArrayRead[Object] */
-2398, /* AbstractArrayRead[Set[MType]] */
+1516, /* Collection[Set[MType]] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
+1857, /* Collection[HashSet[MType]] */
+1782, /* AbstractArrayRead[Object] */
+2464, /* AbstractArrayRead[Set[MType]] */
 -1, /* empty */
 -1, /* empty */
-2522, /* AbstractArrayRead[HashSet[MType]] */
+2596, /* AbstractArrayRead[HashSet[MType]] */
 },
 };
 /* runtime type AbstractArrayRead[Set[MType]] */
 const struct type type_array__AbstractArrayReadabstract_collection__Setmodel__MType = {
-2398,
+2464,
 "AbstractArrayRead[Set[MType]]", /* class_name_string */
 7,
 0,
@@ -5565,17 +7034,17 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-1479, /* Collection[Set[MType]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
+1516, /* Collection[Set[MType]] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
 -1, /* empty */
-1728, /* AbstractArrayRead[Object] */
-2398, /* AbstractArrayRead[Set[MType]] */
+1782, /* AbstractArrayRead[Object] */
+2464, /* AbstractArrayRead[Set[MType]] */
 },
 };
 /* runtime type Array[Array[nullable MType]] */
 const struct type type_array__Arrayarray__Arraynullable_model__MType = {
-2587,
+2665,
 "Array[Array[nullable MType]]", /* class_name_string */
 14,
 0,
@@ -5584,19 +7053,19 @@ const struct type type_array__Arrayarray__Arraynullable_model__MType = {
 {
 0, /* nullable Object */
 1, /* Object */
-322, /* Collection[nullable Array[nullable MType]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-1809, /* Collection[Array[nullable MType]] */
-1728, /* AbstractArrayRead[Object] */
-1879, /* AbstractArrayRead[nullable Array[nullable MType]] */
+337, /* Collection[nullable Array[nullable MType]] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
+1859, /* Collection[Array[nullable MType]] */
+1782, /* AbstractArrayRead[Object] */
+1939, /* AbstractArrayRead[nullable Array[nullable MType]] */
 -1, /* empty */
-1911, /* Array[Object] */
-2178, /* Array[nullable Array[nullable MType]] */
+1973, /* Array[Object] */
+2246, /* Array[nullable Array[nullable MType]] */
 -1, /* empty */
-2523, /* AbstractArrayRead[Array[nullable MType]] */
+2597, /* AbstractArrayRead[Array[nullable MType]] */
 -1, /* empty */
-2587, /* Array[Array[nullable MType]] */
+2665, /* Array[Array[nullable MType]] */
 },
 };
 const struct types resolution_table_array__Arrayarray__Arraynullable_model__MType = {
@@ -5625,7 +7094,7 @@ NULL, /* empty (AbstractArray[AbstractArrayRead#0]: AbstractArray[Array[nullable
 };
 /* runtime type Array[nullable Array[nullable MType]] */
 const struct type type_array__Arraynullable_array__Arraynullable_model__MType = {
-2178,
+2246,
 "Array[nullable Array[nullable MType]]", /* class_name_string */
 10,
 0,
@@ -5634,15 +7103,15 @@ const struct type type_array__Arraynullable_array__Arraynullable_model__MType = 
 {
 0, /* nullable Object */
 1, /* Object */
-322, /* Collection[nullable Array[nullable MType]] */
-163, /* SequenceRead[nullable Object] */
+337, /* Collection[nullable Array[nullable MType]] */
+169, /* SequenceRead[nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-1879, /* AbstractArrayRead[nullable Array[nullable MType]] */
+1939, /* AbstractArrayRead[nullable Array[nullable MType]] */
 -1, /* empty */
 -1, /* empty */
-2178, /* Array[nullable Array[nullable MType]] */
+2246, /* Array[nullable Array[nullable MType]] */
 },
 };
 const struct types resolution_table_array__Arraynullable_array__Arraynullable_model__MType = {
@@ -5671,7 +7140,7 @@ NULL, /* empty (AbstractArray[AbstractArrayRead#0]: AbstractArray[nullable Array
 };
 /* runtime type AbstractArrayRead[Array[nullable MType]] */
 const struct type type_array__AbstractArrayReadarray__Arraynullable_model__MType = {
-2523,
+2597,
 "AbstractArrayRead[Array[nullable MType]]", /* class_name_string */
 12,
 0,
@@ -5680,22 +7149,22 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-322, /* Collection[nullable Array[nullable MType]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-1809, /* Collection[Array[nullable MType]] */
-1728, /* AbstractArrayRead[Object] */
-1879, /* AbstractArrayRead[nullable Array[nullable MType]] */
+337, /* Collection[nullable Array[nullable MType]] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
+1859, /* Collection[Array[nullable MType]] */
+1782, /* AbstractArrayRead[Object] */
+1939, /* AbstractArrayRead[nullable Array[nullable MType]] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2523, /* AbstractArrayRead[Array[nullable MType]] */
+2597, /* AbstractArrayRead[Array[nullable MType]] */
 },
 };
 /* runtime type AbstractArrayRead[nullable Array[nullable MType]] */
 const struct type type_array__AbstractArrayReadnullable_array__Arraynullable_model__MType = {
-1879,
+1939,
 "AbstractArrayRead[nullable Array[nullable MType]]", /* class_name_string */
 7,
 0,
@@ -5704,17 +7173,17 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-322, /* Collection[nullable Array[nullable MType]] */
-163, /* SequenceRead[nullable Object] */
+337, /* Collection[nullable Array[nullable MType]] */
+169, /* SequenceRead[nullable Object] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-1879, /* AbstractArrayRead[nullable Array[nullable MType]] */
+1939, /* AbstractArrayRead[nullable Array[nullable MType]] */
 },
 };
 /* runtime type Array[Array[nullable MPropDef]] */
 const struct type type_array__Arrayarray__Arraynullable_model__MPropDef = {
-2524,
+2598,
 "Array[Array[nullable MPropDef]]", /* class_name_string */
 8,
 0,
@@ -5723,14 +7192,14 @@ const struct type type_array__Arrayarray__Arraynullable_model__MPropDef = {
 {
 0, /* nullable Object */
 1, /* Object */
-1488, /* Collection[Array[nullable MPropDef]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
+1525, /* Collection[Array[nullable MPropDef]] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
 -1, /* empty */
-1728, /* AbstractArrayRead[Object] */
-2399, /* AbstractArrayRead[Array[nullable MPropDef]] */
-2524, /* Array[Array[nullable MPropDef]] */
-1911, /* Array[Object] */
+1782, /* AbstractArrayRead[Object] */
+2465, /* AbstractArrayRead[Array[nullable MPropDef]] */
+2598, /* Array[Array[nullable MPropDef]] */
+1973, /* Array[Object] */
 },
 };
 const struct types resolution_table_array__Arrayarray__Arraynullable_model__MPropDef = {
@@ -5759,7 +7228,7 @@ NULL, /* empty (AbstractArray[AbstractArrayRead#0]: AbstractArray[Array[nullable
 };
 /* runtime type AbstractArrayRead[Array[nullable MPropDef]] */
 const struct type type_array__AbstractArrayReadarray__Arraynullable_model__MPropDef = {
-2399,
+2465,
 "AbstractArrayRead[Array[nullable MPropDef]]", /* class_name_string */
 7,
 0,
@@ -5768,17 +7237,17 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-1488, /* Collection[Array[nullable MPropDef]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
+1525, /* Collection[Array[nullable MPropDef]] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
 -1, /* empty */
-1728, /* AbstractArrayRead[Object] */
-2399, /* AbstractArrayRead[Array[nullable MPropDef]] */
+1782, /* AbstractArrayRead[Object] */
+2465, /* AbstractArrayRead[Array[nullable MPropDef]] */
 },
 };
 /* runtime type ArrayIterator[CodeFile] */
 const struct type type_array__ArrayIteratorabstract_compiler__CodeFile = {
-1645,
+1692,
 "ArrayIterator[CodeFile]", /* class_name_string */
 3,
 0,
@@ -5787,8 +7256,8 @@ const struct type type_array__ArrayIteratorabstract_compiler__CodeFile = {
 {
 0, /* nullable Object */
 1, /* Object */
-277, /* ArrayIterator[Object] */
-1645, /* ArrayIterator[CodeFile] */
+289, /* ArrayIterator[Object] */
+1692, /* ArrayIterator[CodeFile] */
 },
 };
 const struct types resolution_table_array__ArrayIteratorabstract_compiler__CodeFile = {
@@ -5800,7 +7269,7 @@ const struct types resolution_table_array__ArrayIteratorabstract_compiler__CodeF
 };
 /* runtime type NativeArray[CodeFile] */
 const struct type type_array__NativeArrayabstract_compiler__CodeFile = {
-1646,
+1693,
 "NativeArray[CodeFile]", /* class_name_string */
 3,
 0,
@@ -5809,8 +7278,8 @@ const struct type type_array__NativeArrayabstract_compiler__CodeFile = {
 {
 0, /* nullable Object */
 1, /* Object */
-185, /* NativeArray[Object] */
-1646, /* NativeArray[CodeFile] */
+193, /* NativeArray[Object] */
+1693, /* NativeArray[CodeFile] */
 },
 };
 const struct types resolution_table_array__NativeArrayabstract_compiler__CodeFile = {
@@ -5822,7 +7291,7 @@ const struct types resolution_table_array__NativeArrayabstract_compiler__CodeFil
 };
 /* runtime type ArrayIterator[AbstractRuntimeFunction] */
 const struct type type_array__ArrayIteratorabstract_compiler__AbstractRuntimeFunction = {
-1647,
+1694,
 "ArrayIterator[AbstractRuntimeFunction]", /* class_name_string */
 3,
 0,
@@ -5831,8 +7300,8 @@ const struct type type_array__ArrayIteratorabstract_compiler__AbstractRuntimeFun
 {
 0, /* nullable Object */
 1, /* Object */
-277, /* ArrayIterator[Object] */
-1647, /* ArrayIterator[AbstractRuntimeFunction] */
+289, /* ArrayIterator[Object] */
+1694, /* ArrayIterator[AbstractRuntimeFunction] */
 },
 };
 const struct types resolution_table_array__ArrayIteratorabstract_compiler__AbstractRuntimeFunction = {
@@ -5844,7 +7313,7 @@ const struct types resolution_table_array__ArrayIteratorabstract_compiler__Abstr
 };
 /* runtime type NativeArray[AbstractRuntimeFunction] */
 const struct type type_array__NativeArrayabstract_compiler__AbstractRuntimeFunction = {
-1648,
+1695,
 "NativeArray[AbstractRuntimeFunction]", /* class_name_string */
 3,
 0,
@@ -5853,8 +7322,8 @@ const struct type type_array__NativeArrayabstract_compiler__AbstractRuntimeFunct
 {
 0, /* nullable Object */
 1, /* Object */
-185, /* NativeArray[Object] */
-1648, /* NativeArray[AbstractRuntimeFunction] */
+193, /* NativeArray[Object] */
+1695, /* NativeArray[AbstractRuntimeFunction] */
 },
 };
 const struct types resolution_table_array__NativeArrayabstract_compiler__AbstractRuntimeFunction = {
@@ -5866,7 +7335,7 @@ const struct types resolution_table_array__NativeArrayabstract_compiler__Abstrac
 };
 /* runtime type Array[Array[MClassType]] */
 const struct type type_array__Arrayarray__Arraymodel__MClassType = {
-2641,
+2720,
 "Array[Array[MClassType]]", /* class_name_string */
 17,
 0,
@@ -5875,22 +7344,22 @@ const struct type type_array__Arrayarray__Arraymodel__MClassType = {
 {
 0, /* nullable Object */
 1, /* Object */
-322, /* Collection[nullable Array[nullable MType]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-1809, /* Collection[Array[nullable MType]] */
-1728, /* AbstractArrayRead[Object] */
-1879, /* AbstractArrayRead[nullable Array[nullable MType]] */
-2084, /* Collection[Array[MType]] */
-1911, /* Array[Object] */
-2178, /* Array[nullable Array[nullable MType]] */
-2357, /* Collection[Array[MClassType]] */
-2523, /* AbstractArrayRead[Array[nullable MType]] */
-2575, /* AbstractArrayRead[Array[MType]] */
-2587, /* Array[Array[nullable MType]] */
-2605, /* AbstractArrayRead[Array[MClassType]] */
-2626, /* Array[Array[MType]] */
-2641, /* Array[Array[MClassType]] */
+337, /* Collection[nullable Array[nullable MType]] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
+1859, /* Collection[Array[nullable MType]] */
+1782, /* AbstractArrayRead[Object] */
+1939, /* AbstractArrayRead[nullable Array[nullable MType]] */
+2149, /* Collection[Array[MType]] */
+1973, /* Array[Object] */
+2246, /* Array[nullable Array[nullable MType]] */
+2422, /* Collection[Array[MClassType]] */
+2597, /* AbstractArrayRead[Array[nullable MType]] */
+2653, /* AbstractArrayRead[Array[MType]] */
+2665, /* Array[Array[nullable MType]] */
+2684, /* AbstractArrayRead[Array[MClassType]] */
+2705, /* Array[Array[MType]] */
+2720, /* Array[Array[MClassType]] */
 },
 };
 const struct types resolution_table_array__Arrayarray__Arraymodel__MClassType = {
@@ -5919,7 +7388,7 @@ NULL, /* empty (AbstractArray[AbstractArrayRead#0]: AbstractArray[Array[MClassTy
 };
 /* runtime type Array[Array[MType]] */
 const struct type type_array__Arrayarray__Arraymodel__MType = {
-2626,
+2705,
 "Array[Array[MType]]", /* class_name_string */
 16,
 0,
@@ -5928,21 +7397,21 @@ const struct type type_array__Arrayarray__Arraymodel__MType = {
 {
 0, /* nullable Object */
 1, /* Object */
-322, /* Collection[nullable Array[nullable MType]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-1809, /* Collection[Array[nullable MType]] */
-1728, /* AbstractArrayRead[Object] */
-1879, /* AbstractArrayRead[nullable Array[nullable MType]] */
-2084, /* Collection[Array[MType]] */
-1911, /* Array[Object] */
-2178, /* Array[nullable Array[nullable MType]] */
+337, /* Collection[nullable Array[nullable MType]] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
+1859, /* Collection[Array[nullable MType]] */
+1782, /* AbstractArrayRead[Object] */
+1939, /* AbstractArrayRead[nullable Array[nullable MType]] */
+2149, /* Collection[Array[MType]] */
+1973, /* Array[Object] */
+2246, /* Array[nullable Array[nullable MType]] */
 -1, /* empty */
-2523, /* AbstractArrayRead[Array[nullable MType]] */
-2575, /* AbstractArrayRead[Array[MType]] */
-2587, /* Array[Array[nullable MType]] */
+2597, /* AbstractArrayRead[Array[nullable MType]] */
+2653, /* AbstractArrayRead[Array[MType]] */
+2665, /* Array[Array[nullable MType]] */
 -1, /* empty */
-2626, /* Array[Array[MType]] */
+2705, /* Array[Array[MType]] */
 },
 };
 const struct types resolution_table_array__Arrayarray__Arraymodel__MType = {
@@ -5971,7 +7440,7 @@ NULL, /* empty (AbstractArray[AbstractArrayRead#0]: AbstractArray[Array[MType]] 
 };
 /* runtime type AbstractArrayRead[Array[MClassType]] */
 const struct type type_array__AbstractArrayReadarray__Arraymodel__MClassType = {
-2605,
+2684,
 "AbstractArrayRead[Array[MClassType]]", /* class_name_string */
 15,
 0,
@@ -5980,25 +7449,25 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-322, /* Collection[nullable Array[nullable MType]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-1809, /* Collection[Array[nullable MType]] */
-1728, /* AbstractArrayRead[Object] */
-1879, /* AbstractArrayRead[nullable Array[nullable MType]] */
-2084, /* Collection[Array[MType]] */
+337, /* Collection[nullable Array[nullable MType]] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
+1859, /* Collection[Array[nullable MType]] */
+1782, /* AbstractArrayRead[Object] */
+1939, /* AbstractArrayRead[nullable Array[nullable MType]] */
+2149, /* Collection[Array[MType]] */
 -1, /* empty */
 -1, /* empty */
-2357, /* Collection[Array[MClassType]] */
-2523, /* AbstractArrayRead[Array[nullable MType]] */
-2575, /* AbstractArrayRead[Array[MType]] */
+2422, /* Collection[Array[MClassType]] */
+2597, /* AbstractArrayRead[Array[nullable MType]] */
+2653, /* AbstractArrayRead[Array[MType]] */
 -1, /* empty */
-2605, /* AbstractArrayRead[Array[MClassType]] */
+2684, /* AbstractArrayRead[Array[MClassType]] */
 },
 };
 /* runtime type AbstractArrayRead[Array[MType]] */
 const struct type type_array__AbstractArrayReadarray__Arraymodel__MType = {
-2575,
+2653,
 "AbstractArrayRead[Array[MType]]", /* class_name_string */
 13,
 0,
@@ -6007,23 +7476,23 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-322, /* Collection[nullable Array[nullable MType]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-1809, /* Collection[Array[nullable MType]] */
-1728, /* AbstractArrayRead[Object] */
-1879, /* AbstractArrayRead[nullable Array[nullable MType]] */
-2084, /* Collection[Array[MType]] */
+337, /* Collection[nullable Array[nullable MType]] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
+1859, /* Collection[Array[nullable MType]] */
+1782, /* AbstractArrayRead[Object] */
+1939, /* AbstractArrayRead[nullable Array[nullable MType]] */
+2149, /* Collection[Array[MType]] */
 -1, /* empty */
 -1, /* empty */
 -1, /* empty */
-2523, /* AbstractArrayRead[Array[nullable MType]] */
-2575, /* AbstractArrayRead[Array[MType]] */
+2597, /* AbstractArrayRead[Array[nullable MType]] */
+2653, /* AbstractArrayRead[Array[MType]] */
 },
 };
 /* runtime type MapKeysIterator[MClass, Array[MClass]] */
 const struct type type_abstract_collection__MapKeysIteratormodel__MClassarray__Arraymodel__MClass = {
-1649,
+1696,
 "MapKeysIterator[MClass, Array[MClass]]", /* class_name_string */
 3,
 0,
@@ -6032,8 +7501,8 @@ const struct type type_abstract_collection__MapKeysIteratormodel__MClassarray__A
 {
 0, /* nullable Object */
 1, /* Object */
-470, /* MapKeysIterator[MClass, Array[nullable MClass]] */
-1649, /* MapKeysIterator[MClass, Array[MClass]] */
+491, /* MapKeysIterator[MClass, Array[nullable MClass]] */
+1696, /* MapKeysIterator[MClass, Array[MClass]] */
 },
 };
 const struct types resolution_table_abstract_collection__MapKeysIteratormodel__MClassarray__Arraymodel__MClass = {
@@ -6045,7 +7514,7 @@ const struct types resolution_table_abstract_collection__MapKeysIteratormodel__M
 };
 /* runtime type MapValuesIterator[MClass, Array[MClass]] */
 const struct type type_abstract_collection__MapValuesIteratormodel__MClassarray__Arraymodel__MClass = {
-1650,
+1697,
 "MapValuesIterator[MClass, Array[MClass]]", /* class_name_string */
 3,
 0,
@@ -6054,8 +7523,8 @@ const struct type type_abstract_collection__MapValuesIteratormodel__MClassarray_
 {
 0, /* nullable Object */
 1, /* Object */
-471, /* MapValuesIterator[MClass, Array[nullable MClass]] */
-1650, /* MapValuesIterator[MClass, Array[MClass]] */
+492, /* MapValuesIterator[MClass, Array[nullable MClass]] */
+1697, /* MapValuesIterator[MClass, Array[MClass]] */
 },
 };
 const struct types resolution_table_abstract_collection__MapValuesIteratormodel__MClassarray__Arraymodel__MClass = {
@@ -6067,7 +7536,7 @@ const struct types resolution_table_abstract_collection__MapValuesIteratormodel_
 };
 /* runtime type MapKeysIterator[MClass, HashSet[MClass]] */
 const struct type type_abstract_collection__MapKeysIteratormodel__MClasshash_collection__HashSetmodel__MClass = {
-1651,
+1698,
 "MapKeysIterator[MClass, HashSet[MClass]]", /* class_name_string */
 3,
 0,
@@ -6076,8 +7545,8 @@ const struct type type_abstract_collection__MapKeysIteratormodel__MClasshash_col
 {
 0, /* nullable Object */
 1, /* Object */
-518, /* MapKeysIterator[MClass, Set[MClass]] */
-1651, /* MapKeysIterator[MClass, HashSet[MClass]] */
+545, /* MapKeysIterator[MClass, Set[MClass]] */
+1698, /* MapKeysIterator[MClass, HashSet[MClass]] */
 },
 };
 const struct types resolution_table_abstract_collection__MapKeysIteratormodel__MClasshash_collection__HashSetmodel__MClass = {
@@ -6089,7 +7558,7 @@ const struct types resolution_table_abstract_collection__MapKeysIteratormodel__M
 };
 /* runtime type MapKeysIterator[MClass, Set[MClass]] */
 const struct type type_abstract_collection__MapKeysIteratormodel__MClassabstract_collection__Setmodel__MClass = {
-518,
+545,
 "MapKeysIterator[MClass, Set[MClass]]", /* class_name_string */
 2,
 0,
@@ -6098,7 +7567,7 @@ const struct type type_abstract_collection__MapKeysIteratormodel__MClassabstract
 {
 0, /* nullable Object */
 1, /* Object */
-518, /* MapKeysIterator[MClass, Set[MClass]] */
+545, /* MapKeysIterator[MClass, Set[MClass]] */
 },
 };
 const struct types resolution_table_abstract_collection__MapKeysIteratormodel__MClassabstract_collection__Setmodel__MClass = {
@@ -6110,7 +7579,7 @@ const struct types resolution_table_abstract_collection__MapKeysIteratormodel__M
 };
 /* runtime type MapValuesIterator[MClass, HashSet[MClass]] */
 const struct type type_abstract_collection__MapValuesIteratormodel__MClasshash_collection__HashSetmodel__MClass = {
-1652,
+1699,
 "MapValuesIterator[MClass, HashSet[MClass]]", /* class_name_string */
 3,
 0,
@@ -6119,8 +7588,8 @@ const struct type type_abstract_collection__MapValuesIteratormodel__MClasshash_c
 {
 0, /* nullable Object */
 1, /* Object */
-519, /* MapValuesIterator[MClass, Set[MClass]] */
-1652, /* MapValuesIterator[MClass, HashSet[MClass]] */
+546, /* MapValuesIterator[MClass, Set[MClass]] */
+1699, /* MapValuesIterator[MClass, HashSet[MClass]] */
 },
 };
 const struct types resolution_table_abstract_collection__MapValuesIteratormodel__MClasshash_collection__HashSetmodel__MClass = {
@@ -6132,7 +7601,7 @@ const struct types resolution_table_abstract_collection__MapValuesIteratormodel_
 };
 /* runtime type MapValuesIterator[MClass, Set[MClass]] */
 const struct type type_abstract_collection__MapValuesIteratormodel__MClassabstract_collection__Setmodel__MClass = {
-519,
+546,
 "MapValuesIterator[MClass, Set[MClass]]", /* class_name_string */
 2,
 0,
@@ -6141,7 +7610,7 @@ const struct type type_abstract_collection__MapValuesIteratormodel__MClassabstra
 {
 0, /* nullable Object */
 1, /* Object */
-519, /* MapValuesIterator[MClass, Set[MClass]] */
+546, /* MapValuesIterator[MClass, Set[MClass]] */
 },
 };
 const struct types resolution_table_abstract_collection__MapValuesIteratormodel__MClassabstract_collection__Setmodel__MClass = {
@@ -6153,7 +7622,7 @@ const struct types resolution_table_abstract_collection__MapValuesIteratormodel_
 };
 /* runtime type MapKeysIterator[MClass, Map[MClass, Int]] */
 const struct type type_abstract_collection__MapKeysIteratormodel__MClassabstract_collection__Mapmodel__MClasskernel__Int = {
-520,
+547,
 "MapKeysIterator[MClass, Map[MClass, Int]]", /* class_name_string */
 2,
 0,
@@ -6162,7 +7631,7 @@ const struct type type_abstract_collection__MapKeysIteratormodel__MClassabstract
 {
 0, /* nullable Object */
 1, /* Object */
-520, /* MapKeysIterator[MClass, Map[MClass, Int]] */
+547, /* MapKeysIterator[MClass, Map[MClass, Int]] */
 },
 };
 const struct types resolution_table_abstract_collection__MapKeysIteratormodel__MClassabstract_collection__Mapmodel__MClasskernel__Int = {
@@ -6174,7 +7643,7 @@ const struct types resolution_table_abstract_collection__MapKeysIteratormodel__M
 };
 /* runtime type MapValuesIterator[MClass, Map[MClass, Int]] */
 const struct type type_abstract_collection__MapValuesIteratormodel__MClassabstract_collection__Mapmodel__MClasskernel__Int = {
-521,
+548,
 "MapValuesIterator[MClass, Map[MClass, Int]]", /* class_name_string */
 2,
 0,
@@ -6183,7 +7652,7 @@ const struct type type_abstract_collection__MapValuesIteratormodel__MClassabstra
 {
 0, /* nullable Object */
 1, /* Object */
-521, /* MapValuesIterator[MClass, Map[MClass, Int]] */
+548, /* MapValuesIterator[MClass, Map[MClass, Int]] */
 },
 };
 const struct types resolution_table_abstract_collection__MapValuesIteratormodel__MClassabstract_collection__Mapmodel__MClasskernel__Int = {
@@ -6195,7 +7664,7 @@ const struct types resolution_table_abstract_collection__MapValuesIteratormodel_
 };
 /* runtime type Array[Set[MVirtualTypeProp]] */
 const struct type type_array__Arrayabstract_collection__Setmodel__MVirtualTypeProp = {
-2627,
+2706,
 "Array[Set[MVirtualTypeProp]]", /* class_name_string */
 14,
 0,
@@ -6204,19 +7673,19 @@ const struct type type_array__Arrayabstract_collection__Setmodel__MVirtualTypePr
 {
 0, /* nullable Object */
 1, /* Object */
-1461, /* Collection[Set[PropertyLayoutElement]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-1796, /* Collection[Set[MProperty]] */
-1728, /* AbstractArrayRead[Object] */
-2087, /* Collection[Set[MVirtualTypeProp]] */
-2397, /* AbstractArrayRead[Set[PropertyLayoutElement]] */
-1911, /* Array[Object] */
-2519, /* Array[Set[PropertyLayoutElement]] */
-2520, /* AbstractArrayRead[Set[MProperty]] */
-2576, /* AbstractArrayRead[Set[MVirtualTypeProp]] */
-2585, /* Array[Set[MProperty]] */
-2627, /* Array[Set[MVirtualTypeProp]] */
+1505, /* Collection[Set[PropertyLayoutElement]] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
+1853, /* Collection[Set[MProperty]] */
+1782, /* AbstractArrayRead[Object] */
+2152, /* Collection[Set[MVirtualTypeProp]] */
+2463, /* AbstractArrayRead[Set[PropertyLayoutElement]] */
+1973, /* Array[Object] */
+2593, /* Array[Set[PropertyLayoutElement]] */
+2594, /* AbstractArrayRead[Set[MProperty]] */
+2654, /* AbstractArrayRead[Set[MVirtualTypeProp]] */
+2663, /* Array[Set[MProperty]] */
+2706, /* Array[Set[MVirtualTypeProp]] */
 },
 };
 const struct types resolution_table_array__Arrayabstract_collection__Setmodel__MVirtualTypeProp = {
@@ -6245,7 +7714,7 @@ NULL, /* empty (AbstractArray[AbstractArrayRead#0]: AbstractArray[Set[MVirtualTy
 };
 /* runtime type AbstractArrayRead[Set[MVirtualTypeProp]] */
 const struct type type_array__AbstractArrayReadabstract_collection__Setmodel__MVirtualTypeProp = {
-2576,
+2654,
 "AbstractArrayRead[Set[MVirtualTypeProp]]", /* class_name_string */
 12,
 0,
@@ -6254,22 +7723,22 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-1461, /* Collection[Set[PropertyLayoutElement]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-1796, /* Collection[Set[MProperty]] */
-1728, /* AbstractArrayRead[Object] */
-2087, /* Collection[Set[MVirtualTypeProp]] */
-2397, /* AbstractArrayRead[Set[PropertyLayoutElement]] */
+1505, /* Collection[Set[PropertyLayoutElement]] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
+1853, /* Collection[Set[MProperty]] */
+1782, /* AbstractArrayRead[Object] */
+2152, /* Collection[Set[MVirtualTypeProp]] */
+2463, /* AbstractArrayRead[Set[PropertyLayoutElement]] */
 -1, /* empty */
 -1, /* empty */
-2520, /* AbstractArrayRead[Set[MProperty]] */
-2576, /* AbstractArrayRead[Set[MVirtualTypeProp]] */
+2594, /* AbstractArrayRead[Set[MProperty]] */
+2654, /* AbstractArrayRead[Set[MVirtualTypeProp]] */
 },
 };
 /* runtime type ArrayIterator[MVirtualTypeProp] */
 const struct type type_array__ArrayIteratormodel__MVirtualTypeProp = {
-2400,
+2466,
 "ArrayIterator[MVirtualTypeProp]", /* class_name_string */
 6,
 0,
@@ -6278,11 +7747,11 @@ const struct type type_array__ArrayIteratormodel__MVirtualTypeProp = {
 {
 0, /* nullable Object */
 1, /* Object */
-277, /* ArrayIterator[Object] */
-286, /* ArrayIterator[nullable MProperty] */
-1435, /* ArrayIterator[PropertyLayoutElement] */
-2060, /* ArrayIterator[MProperty] */
-2400, /* ArrayIterator[MVirtualTypeProp] */
+289, /* ArrayIterator[Object] */
+300, /* ArrayIterator[nullable MProperty] */
+1475, /* ArrayIterator[PropertyLayoutElement] */
+2125, /* ArrayIterator[MProperty] */
+2466, /* ArrayIterator[MVirtualTypeProp] */
 },
 };
 const struct types resolution_table_array__ArrayIteratormodel__MVirtualTypeProp = {
@@ -6294,7 +7763,7 @@ const struct types resolution_table_array__ArrayIteratormodel__MVirtualTypeProp 
 };
 /* runtime type NativeArray[MVirtualTypeProp] */
 const struct type type_array__NativeArraymodel__MVirtualTypeProp = {
-2401,
+2467,
 "NativeArray[MVirtualTypeProp]", /* class_name_string */
 6,
 0,
@@ -6303,11 +7772,11 @@ const struct type type_array__NativeArraymodel__MVirtualTypeProp = {
 {
 0, /* nullable Object */
 1, /* Object */
-185, /* NativeArray[Object] */
-287, /* NativeArray[nullable MProperty] */
-1436, /* NativeArray[PropertyLayoutElement] */
-2061, /* NativeArray[MProperty] */
-2401, /* NativeArray[MVirtualTypeProp] */
+193, /* NativeArray[Object] */
+301, /* NativeArray[nullable MProperty] */
+1476, /* NativeArray[PropertyLayoutElement] */
+2126, /* NativeArray[MProperty] */
+2467, /* NativeArray[MVirtualTypeProp] */
 },
 };
 const struct types resolution_table_array__NativeArraymodel__MVirtualTypeProp = {
@@ -6319,7 +7788,7 @@ const struct types resolution_table_array__NativeArraymodel__MVirtualTypeProp = 
 };
 /* runtime type MapKeysIterator[MVirtualTypeProp, Int] */
 const struct type type_abstract_collection__MapKeysIteratormodel__MVirtualTypePropkernel__Int = {
-1653,
+1700,
 "MapKeysIterator[MVirtualTypeProp, Int]", /* class_name_string */
 3,
 0,
@@ -6328,8 +7797,8 @@ const struct type type_abstract_collection__MapKeysIteratormodel__MVirtualTypePr
 {
 0, /* nullable Object */
 1, /* Object */
-522, /* MapKeysIterator[PropertyLayoutElement, Int] */
-1653, /* MapKeysIterator[MVirtualTypeProp, Int] */
+549, /* MapKeysIterator[PropertyLayoutElement, Int] */
+1700, /* MapKeysIterator[MVirtualTypeProp, Int] */
 },
 };
 const struct types resolution_table_abstract_collection__MapKeysIteratormodel__MVirtualTypePropkernel__Int = {
@@ -6341,7 +7810,7 @@ const struct types resolution_table_abstract_collection__MapKeysIteratormodel__M
 };
 /* runtime type MapKeysIterator[PropertyLayoutElement, Int] */
 const struct type type_abstract_collection__MapKeysIteratorlayout_builders__PropertyLayoutElementkernel__Int = {
-522,
+549,
 "MapKeysIterator[PropertyLayoutElement, Int]", /* class_name_string */
 2,
 0,
@@ -6350,7 +7819,7 @@ const struct type type_abstract_collection__MapKeysIteratorlayout_builders__Prop
 {
 0, /* nullable Object */
 1, /* Object */
-522, /* MapKeysIterator[PropertyLayoutElement, Int] */
+549, /* MapKeysIterator[PropertyLayoutElement, Int] */
 },
 };
 const struct types resolution_table_abstract_collection__MapKeysIteratorlayout_builders__PropertyLayoutElementkernel__Int = {
@@ -6362,7 +7831,7 @@ const struct types resolution_table_abstract_collection__MapKeysIteratorlayout_b
 };
 /* runtime type MapValuesIterator[MVirtualTypeProp, Int] */
 const struct type type_abstract_collection__MapValuesIteratormodel__MVirtualTypePropkernel__Int = {
-1654,
+1701,
 "MapValuesIterator[MVirtualTypeProp, Int]", /* class_name_string */
 3,
 0,
@@ -6371,8 +7840,8 @@ const struct type type_abstract_collection__MapValuesIteratormodel__MVirtualType
 {
 0, /* nullable Object */
 1, /* Object */
-523, /* MapValuesIterator[PropertyLayoutElement, Int] */
-1654, /* MapValuesIterator[MVirtualTypeProp, Int] */
+550, /* MapValuesIterator[PropertyLayoutElement, Int] */
+1701, /* MapValuesIterator[MVirtualTypeProp, Int] */
 },
 };
 const struct types resolution_table_abstract_collection__MapValuesIteratormodel__MVirtualTypePropkernel__Int = {
@@ -6384,7 +7853,7 @@ const struct types resolution_table_abstract_collection__MapValuesIteratormodel_
 };
 /* runtime type MapValuesIterator[PropertyLayoutElement, Int] */
 const struct type type_abstract_collection__MapValuesIteratorlayout_builders__PropertyLayoutElementkernel__Int = {
-523,
+550,
 "MapValuesIterator[PropertyLayoutElement, Int]", /* class_name_string */
 2,
 0,
@@ -6393,7 +7862,7 @@ const struct type type_abstract_collection__MapValuesIteratorlayout_builders__Pr
 {
 0, /* nullable Object */
 1, /* Object */
-523, /* MapValuesIterator[PropertyLayoutElement, Int] */
+550, /* MapValuesIterator[PropertyLayoutElement, Int] */
 },
 };
 const struct types resolution_table_abstract_collection__MapValuesIteratorlayout_builders__PropertyLayoutElementkernel__Int = {
@@ -6405,7 +7874,7 @@ const struct types resolution_table_abstract_collection__MapValuesIteratorlayout
 };
 /* runtime type MapKeysIterator[MAttribute, Int] */
 const struct type type_abstract_collection__MapKeysIteratormodel__MAttributekernel__Int = {
-1655,
+1702,
 "MapKeysIterator[MAttribute, Int]", /* class_name_string */
 3,
 0,
@@ -6414,8 +7883,8 @@ const struct type type_abstract_collection__MapKeysIteratormodel__MAttributekern
 {
 0, /* nullable Object */
 1, /* Object */
-522, /* MapKeysIterator[PropertyLayoutElement, Int] */
-1655, /* MapKeysIterator[MAttribute, Int] */
+549, /* MapKeysIterator[PropertyLayoutElement, Int] */
+1702, /* MapKeysIterator[MAttribute, Int] */
 },
 };
 const struct types resolution_table_abstract_collection__MapKeysIteratormodel__MAttributekernel__Int = {
@@ -6427,7 +7896,7 @@ const struct types resolution_table_abstract_collection__MapKeysIteratormodel__M
 };
 /* runtime type MapValuesIterator[MAttribute, Int] */
 const struct type type_abstract_collection__MapValuesIteratormodel__MAttributekernel__Int = {
-1656,
+1703,
 "MapValuesIterator[MAttribute, Int]", /* class_name_string */
 3,
 0,
@@ -6436,8 +7905,8 @@ const struct type type_abstract_collection__MapValuesIteratormodel__MAttributeke
 {
 0, /* nullable Object */
 1, /* Object */
-523, /* MapValuesIterator[PropertyLayoutElement, Int] */
-1656, /* MapValuesIterator[MAttribute, Int] */
+550, /* MapValuesIterator[PropertyLayoutElement, Int] */
+1703, /* MapValuesIterator[MAttribute, Int] */
 },
 };
 const struct types resolution_table_abstract_collection__MapValuesIteratormodel__MAttributekernel__Int = {
@@ -6449,7 +7918,7 @@ const struct types resolution_table_abstract_collection__MapValuesIteratormodel_
 };
 /* runtime type Array[Set[MAttribute]] */
 const struct type type_array__Arrayabstract_collection__Setmodel__MAttribute = {
-2628,
+2707,
 "Array[Set[MAttribute]]", /* class_name_string */
 14,
 0,
@@ -6458,19 +7927,19 @@ const struct type type_array__Arrayabstract_collection__Setmodel__MAttribute = {
 {
 0, /* nullable Object */
 1, /* Object */
-1461, /* Collection[Set[PropertyLayoutElement]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-1796, /* Collection[Set[MProperty]] */
-1728, /* AbstractArrayRead[Object] */
-2093, /* Collection[Set[MAttribute]] */
-2397, /* AbstractArrayRead[Set[PropertyLayoutElement]] */
-1911, /* Array[Object] */
-2519, /* Array[Set[PropertyLayoutElement]] */
-2520, /* AbstractArrayRead[Set[MProperty]] */
-2577, /* AbstractArrayRead[Set[MAttribute]] */
-2585, /* Array[Set[MProperty]] */
-2628, /* Array[Set[MAttribute]] */
+1505, /* Collection[Set[PropertyLayoutElement]] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
+1853, /* Collection[Set[MProperty]] */
+1782, /* AbstractArrayRead[Object] */
+2158, /* Collection[Set[MAttribute]] */
+2463, /* AbstractArrayRead[Set[PropertyLayoutElement]] */
+1973, /* Array[Object] */
+2593, /* Array[Set[PropertyLayoutElement]] */
+2594, /* AbstractArrayRead[Set[MProperty]] */
+2655, /* AbstractArrayRead[Set[MAttribute]] */
+2663, /* Array[Set[MProperty]] */
+2707, /* Array[Set[MAttribute]] */
 },
 };
 const struct types resolution_table_array__Arrayabstract_collection__Setmodel__MAttribute = {
@@ -6499,7 +7968,7 @@ NULL, /* empty (AbstractArray[AbstractArrayRead#0]: AbstractArray[Set[MAttribute
 };
 /* runtime type AbstractArrayRead[Set[MAttribute]] */
 const struct type type_array__AbstractArrayReadabstract_collection__Setmodel__MAttribute = {
-2577,
+2655,
 "AbstractArrayRead[Set[MAttribute]]", /* class_name_string */
 12,
 0,
@@ -6508,22 +7977,22 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-1461, /* Collection[Set[PropertyLayoutElement]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-1796, /* Collection[Set[MProperty]] */
-1728, /* AbstractArrayRead[Object] */
-2093, /* Collection[Set[MAttribute]] */
-2397, /* AbstractArrayRead[Set[PropertyLayoutElement]] */
+1505, /* Collection[Set[PropertyLayoutElement]] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
+1853, /* Collection[Set[MProperty]] */
+1782, /* AbstractArrayRead[Object] */
+2158, /* Collection[Set[MAttribute]] */
+2463, /* AbstractArrayRead[Set[PropertyLayoutElement]] */
 -1, /* empty */
 -1, /* empty */
-2520, /* AbstractArrayRead[Set[MProperty]] */
-2577, /* AbstractArrayRead[Set[MAttribute]] */
+2594, /* AbstractArrayRead[Set[MProperty]] */
+2655, /* AbstractArrayRead[Set[MAttribute]] */
 },
 };
 /* runtime type ArrayIterator[MAttribute] */
 const struct type type_array__ArrayIteratormodel__MAttribute = {
-2402,
+2468,
 "ArrayIterator[MAttribute]", /* class_name_string */
 6,
 0,
@@ -6532,11 +8001,11 @@ const struct type type_array__ArrayIteratormodel__MAttribute = {
 {
 0, /* nullable Object */
 1, /* Object */
-277, /* ArrayIterator[Object] */
-286, /* ArrayIterator[nullable MProperty] */
-1435, /* ArrayIterator[PropertyLayoutElement] */
-2060, /* ArrayIterator[MProperty] */
-2402, /* ArrayIterator[MAttribute] */
+289, /* ArrayIterator[Object] */
+300, /* ArrayIterator[nullable MProperty] */
+1475, /* ArrayIterator[PropertyLayoutElement] */
+2125, /* ArrayIterator[MProperty] */
+2468, /* ArrayIterator[MAttribute] */
 },
 };
 const struct types resolution_table_array__ArrayIteratormodel__MAttribute = {
@@ -6548,7 +8017,7 @@ const struct types resolution_table_array__ArrayIteratormodel__MAttribute = {
 };
 /* runtime type NativeArray[MAttribute] */
 const struct type type_array__NativeArraymodel__MAttribute = {
-2403,
+2469,
 "NativeArray[MAttribute]", /* class_name_string */
 6,
 0,
@@ -6557,11 +8026,11 @@ const struct type type_array__NativeArraymodel__MAttribute = {
 {
 0, /* nullable Object */
 1, /* Object */
-185, /* NativeArray[Object] */
-287, /* NativeArray[nullable MProperty] */
-1436, /* NativeArray[PropertyLayoutElement] */
-2061, /* NativeArray[MProperty] */
-2403, /* NativeArray[MAttribute] */
+193, /* NativeArray[Object] */
+301, /* NativeArray[nullable MProperty] */
+1476, /* NativeArray[PropertyLayoutElement] */
+2126, /* NativeArray[MProperty] */
+2469, /* NativeArray[MAttribute] */
 },
 };
 const struct types resolution_table_array__NativeArraymodel__MAttribute = {
@@ -6573,7 +8042,7 @@ const struct types resolution_table_array__NativeArraymodel__MAttribute = {
 };
 /* runtime type MapKeysIterator[MType, Map[MType, Int]] */
 const struct type type_abstract_collection__MapKeysIteratormodel__MTypeabstract_collection__Mapmodel__MTypekernel__Int = {
-524,
+551,
 "MapKeysIterator[MType, Map[MType, Int]]", /* class_name_string */
 2,
 0,
@@ -6582,7 +8051,7 @@ const struct type type_abstract_collection__MapKeysIteratormodel__MTypeabstract_
 {
 0, /* nullable Object */
 1, /* Object */
-524, /* MapKeysIterator[MType, Map[MType, Int]] */
+551, /* MapKeysIterator[MType, Map[MType, Int]] */
 },
 };
 const struct types resolution_table_abstract_collection__MapKeysIteratormodel__MTypeabstract_collection__Mapmodel__MTypekernel__Int = {
@@ -6594,7 +8063,7 @@ const struct types resolution_table_abstract_collection__MapKeysIteratormodel__M
 };
 /* runtime type MapValuesIterator[MType, Map[MType, Int]] */
 const struct type type_abstract_collection__MapValuesIteratormodel__MTypeabstract_collection__Mapmodel__MTypekernel__Int = {
-525,
+552,
 "MapValuesIterator[MType, Map[MType, Int]]", /* class_name_string */
 2,
 0,
@@ -6603,7 +8072,7 @@ const struct type type_abstract_collection__MapValuesIteratormodel__MTypeabstrac
 {
 0, /* nullable Object */
 1, /* Object */
-525, /* MapValuesIterator[MType, Map[MType, Int]] */
+552, /* MapValuesIterator[MType, Map[MType, Int]] */
 },
 };
 const struct types resolution_table_abstract_collection__MapValuesIteratormodel__MTypeabstract_collection__Mapmodel__MTypekernel__Int = {
@@ -6615,7 +8084,7 @@ const struct types resolution_table_abstract_collection__MapValuesIteratormodel_
 };
 /* runtime type MapKeysIterator[MType, HashSet[MType]] */
 const struct type type_abstract_collection__MapKeysIteratormodel__MTypehash_collection__HashSetmodel__MType = {
-1657,
+1704,
 "MapKeysIterator[MType, HashSet[MType]]", /* class_name_string */
 3,
 0,
@@ -6624,8 +8093,8 @@ const struct type type_abstract_collection__MapKeysIteratormodel__MTypehash_coll
 {
 0, /* nullable Object */
 1, /* Object */
-472, /* MapKeysIterator[MType, Set[MType]] */
-1657, /* MapKeysIterator[MType, HashSet[MType]] */
+499, /* MapKeysIterator[MType, Set[MType]] */
+1704, /* MapKeysIterator[MType, HashSet[MType]] */
 },
 };
 const struct types resolution_table_abstract_collection__MapKeysIteratormodel__MTypehash_collection__HashSetmodel__MType = {
@@ -6637,7 +8106,7 @@ const struct types resolution_table_abstract_collection__MapKeysIteratormodel__M
 };
 /* runtime type MapValuesIterator[MType, HashSet[MType]] */
 const struct type type_abstract_collection__MapValuesIteratormodel__MTypehash_collection__HashSetmodel__MType = {
-1658,
+1705,
 "MapValuesIterator[MType, HashSet[MType]]", /* class_name_string */
 3,
 0,
@@ -6646,8 +8115,8 @@ const struct type type_abstract_collection__MapValuesIteratormodel__MTypehash_co
 {
 0, /* nullable Object */
 1, /* Object */
-473, /* MapValuesIterator[MType, Set[MType]] */
-1658, /* MapValuesIterator[MType, HashSet[MType]] */
+500, /* MapValuesIterator[MType, Set[MType]] */
+1705, /* MapValuesIterator[MType, HashSet[MType]] */
 },
 };
 const struct types resolution_table_abstract_collection__MapValuesIteratormodel__MTypehash_collection__HashSetmodel__MType = {
@@ -6659,7 +8128,7 @@ const struct types resolution_table_abstract_collection__MapValuesIteratormodel_
 };
 /* runtime type Array[EscapeMark] */
 const struct type type_array__Arrayscope__EscapeMark = {
-2525,
+2599,
 "Array[EscapeMark]", /* class_name_string */
 7,
 0,
@@ -6668,14 +8137,14 @@ const struct type type_array__Arrayscope__EscapeMark = {
 {
 0, /* nullable Object */
 1, /* Object */
-1524, /* Collection[EscapeMark] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-2404, /* AbstractArrayRead[EscapeMark] */
-1728, /* AbstractArrayRead[Object] */
-2525, /* Array[EscapeMark] */
+1566, /* Collection[EscapeMark] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
+2470, /* AbstractArrayRead[EscapeMark] */
+1782, /* AbstractArrayRead[Object] */
+2599, /* Array[EscapeMark] */
 -1, /* empty */
-1911, /* Array[Object] */
+1973, /* Array[Object] */
 },
 };
 const struct types resolution_table_array__Arrayscope__EscapeMark = {
@@ -6704,7 +8173,7 @@ NULL, /* empty (AbstractArray[AbstractArrayRead#0]: AbstractArray[EscapeMark] no
 };
 /* runtime type AbstractArrayRead[EscapeMark] */
 const struct type type_array__AbstractArrayReadscope__EscapeMark = {
-2404,
+2470,
 "AbstractArrayRead[EscapeMark]", /* class_name_string */
 5,
 0,
@@ -6713,16 +8182,152 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-1524, /* Collection[EscapeMark] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-2404, /* AbstractArrayRead[EscapeMark] */
-1728, /* AbstractArrayRead[Object] */
+1566, /* Collection[EscapeMark] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
+2470, /* AbstractArrayRead[EscapeMark] */
+1782, /* AbstractArrayRead[Object] */
 },
+};
+/* runtime type MapKeysIterator[MGroup, POSetElement[MGroup]] */
+const struct type type_abstract_collection__MapKeysIteratormproject__MGroupposet__POSetElementmproject__MGroup = {
+553,
+"MapKeysIterator[MGroup, POSetElement[MGroup]]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__MapKeysIteratormproject__MGroupposet__POSetElementmproject__MGroup,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+553, /* MapKeysIterator[MGroup, POSetElement[MGroup]] */
+},
+};
+const struct types resolution_table_abstract_collection__MapKeysIteratormproject__MGroupposet__POSetElementmproject__MGroup = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratormproject__MGroupposet__POSetElementmproject__MGroup, /* MapIterator[MapKeysIterator#0, MapKeysIterator#1]: MapIterator[MGroup, POSetElement[MGroup]] */
+&type_array__Arraymproject__MGroup, /* Array[Iterator#0]: Array[MGroup] */
+}
+};
+/* runtime type MapValuesIterator[MGroup, POSetElement[MGroup]] */
+const struct type type_abstract_collection__MapValuesIteratormproject__MGroupposet__POSetElementmproject__MGroup = {
+554,
+"MapValuesIterator[MGroup, POSetElement[MGroup]]", /* class_name_string */
+2,
+0,
+&resolution_table_abstract_collection__MapValuesIteratormproject__MGroupposet__POSetElementmproject__MGroup,
+3,
+{
+0, /* nullable Object */
+1, /* Object */
+554, /* MapValuesIterator[MGroup, POSetElement[MGroup]] */
+},
+};
+const struct types resolution_table_abstract_collection__MapValuesIteratormproject__MGroupposet__POSetElementmproject__MGroup = {
+0, /* dummy */
+{
+&type_abstract_collection__MapIteratormproject__MGroupposet__POSetElementmproject__MGroup, /* MapIterator[MapValuesIterator#0, MapValuesIterator#1]: MapIterator[MGroup, POSetElement[MGroup]] */
+&type_array__Arrayposet__POSetElementmproject__MGroup, /* Array[Iterator#0]: Array[POSetElement[MGroup]] */
+}
+};
+/* runtime type HashSetNode[MGroup] */
+const struct type type_hash_collection__HashSetNodemproject__MGroup = {
+2247,
+"HashSetNode[MGroup]", /* class_name_string */
+5,
+0,
+&resolution_table_hash_collection__HashSetNodemproject__MGroup,
+6,
+{
+0, /* nullable Object */
+1, /* Object */
+121, /* nullable HashSetNode[Object] */
+555, /* nullable HashSetNode[MGroup] */
+1500, /* HashSetNode[Object] */
+2247, /* HashSetNode[MGroup] */
+},
+};
+const struct types resolution_table_hash_collection__HashSetNodemproject__MGroup = {
+0, /* dummy */
+{
+&type_mproject__MGroup, /* HashSetNode#0: MGroup */
+NULL, /* empty */
+&type_hash_collection__HashSetNodemproject__MGroup, /* N: HashSetNode[MGroup] */
+&type_mproject__MGroup, /* HashNode#0: MGroup */
+}
+};
+/* runtime type nullable HashSetNode[MGroup] */
+const struct type type_nullable_hash_collection__HashSetNodemproject__MGroup = {
+555,
+"nullable HashSetNode[MGroup]", /* class_name_string */
+3,
+1,
+&resolution_table_nullable_hash_collection__HashSetNodemproject__MGroup,
+4,
+{
+0, /* nullable Object */
+-1, /* empty */
+121, /* nullable HashSetNode[Object] */
+555, /* nullable HashSetNode[MGroup] */
+},
+};
+const struct types resolution_table_nullable_hash_collection__HashSetNodemproject__MGroup = {
+0, /* dummy */
+{
+&type_mproject__MGroup, /* HashSetNode#0: MGroup */
+NULL, /* empty */
+&type_hash_collection__HashSetNodemproject__MGroup, /* N: HashSetNode[MGroup] */
+&type_mproject__MGroup, /* HashNode#0: MGroup */
+}
+};
+/* runtime type HashSetIterator[MGroup] */
+const struct type type_hash_collection__HashSetIteratormproject__MGroup = {
+1706,
+"HashSetIterator[MGroup]", /* class_name_string */
+3,
+0,
+&resolution_table_hash_collection__HashSetIteratormproject__MGroup,
+4,
+{
+0, /* nullable Object */
+1, /* Object */
+324, /* HashSetIterator[Object] */
+1706, /* HashSetIterator[MGroup] */
+},
+};
+const struct types resolution_table_hash_collection__HashSetIteratormproject__MGroup = {
+0, /* dummy */
+{
+&type_hash_collection__HashSetmproject__MGroup, /* HashSet[HashSetIterator#0]: HashSet[MGroup] */
+&type_array__Arraymproject__MGroup, /* Array[Iterator#0]: Array[MGroup] */
+}
+};
+/* runtime type NativeArray[nullable HashSetNode[MGroup]] */
+const struct type type_array__NativeArraynullable_hash_collection__HashSetNodemproject__MGroup = {
+1707,
+"NativeArray[nullable HashSetNode[MGroup]]", /* class_name_string */
+3,
+0,
+&resolution_table_array__NativeArraynullable_hash_collection__HashSetNodemproject__MGroup,
+4,
+{
+0, /* nullable Object */
+1, /* Object */
+325, /* NativeArray[nullable HashSetNode[Object]] */
+1707, /* NativeArray[nullable HashSetNode[MGroup]] */
+},
+};
+const struct types resolution_table_array__NativeArraynullable_hash_collection__HashSetNodemproject__MGroup = {
+0, /* dummy */
+{
+&type_nullable_hash_collection__HashSetNodemproject__MGroup, /* NativeArray#0: nullable HashSetNode[MGroup] */
+&type_array__NativeArraynullable_hash_collection__HashSetNodemproject__MGroup, /* NativeArray[NativeArray#0]: NativeArray[nullable HashSetNode[MGroup]] */
+}
 };
 /* runtime type Array[Set[MClassDef]] */
 const struct type type_array__Arrayabstract_collection__Setmodel__MClassDef = {
-2526,
+2600,
 "Array[Set[MClassDef]]", /* class_name_string */
 7,
 0,
@@ -6731,14 +8336,14 @@ const struct type type_array__Arrayabstract_collection__Setmodel__MClassDef = {
 {
 0, /* nullable Object */
 1, /* Object */
-1533, /* Collection[Set[MClassDef]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-2405, /* AbstractArrayRead[Set[MClassDef]] */
-1728, /* AbstractArrayRead[Object] */
-2526, /* Array[Set[MClassDef]] */
+1577, /* Collection[Set[MClassDef]] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
+2471, /* AbstractArrayRead[Set[MClassDef]] */
+1782, /* AbstractArrayRead[Object] */
+2600, /* Array[Set[MClassDef]] */
 -1, /* empty */
-1911, /* Array[Object] */
+1973, /* Array[Object] */
 },
 };
 const struct types resolution_table_array__Arrayabstract_collection__Setmodel__MClassDef = {
@@ -6767,7 +8372,7 @@ NULL, /* empty (AbstractArray[AbstractArrayRead#0]: AbstractArray[Set[MClassDef]
 };
 /* runtime type AbstractArrayRead[Set[MClassDef]] */
 const struct type type_array__AbstractArrayReadabstract_collection__Setmodel__MClassDef = {
-2405,
+2471,
 "AbstractArrayRead[Set[MClassDef]]", /* class_name_string */
 5,
 0,
@@ -6776,16 +8381,16 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-1533, /* Collection[Set[MClassDef]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-2405, /* AbstractArrayRead[Set[MClassDef]] */
-1728, /* AbstractArrayRead[Object] */
+1577, /* Collection[Set[MClassDef]] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
+2471, /* AbstractArrayRead[Set[MClassDef]] */
+1782, /* AbstractArrayRead[Object] */
 },
 };
 /* runtime type Array[Set[MClass]] */
 const struct type type_array__Arrayabstract_collection__Setmodel__MClass = {
-2527,
+2601,
 "Array[Set[MClass]]", /* class_name_string */
 8,
 0,
@@ -6794,14 +8399,14 @@ const struct type type_array__Arrayabstract_collection__Setmodel__MClass = {
 {
 0, /* nullable Object */
 1, /* Object */
-1536, /* Collection[Set[MClass]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
+1580, /* Collection[Set[MClass]] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
 -1, /* empty */
-1728, /* AbstractArrayRead[Object] */
-2406, /* AbstractArrayRead[Set[MClass]] */
-2527, /* Array[Set[MClass]] */
-1911, /* Array[Object] */
+1782, /* AbstractArrayRead[Object] */
+2472, /* AbstractArrayRead[Set[MClass]] */
+2601, /* Array[Set[MClass]] */
+1973, /* Array[Object] */
 },
 };
 const struct types resolution_table_array__Arrayabstract_collection__Setmodel__MClass = {
@@ -6830,7 +8435,7 @@ NULL, /* empty (AbstractArray[AbstractArrayRead#0]: AbstractArray[Set[MClass]] n
 };
 /* runtime type AbstractArrayRead[Set[MClass]] */
 const struct type type_array__AbstractArrayReadabstract_collection__Setmodel__MClass = {
-2406,
+2472,
 "AbstractArrayRead[Set[MClass]]", /* class_name_string */
 7,
 0,
@@ -6839,17 +8444,17 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-1536, /* Collection[Set[MClass]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
+1580, /* Collection[Set[MClass]] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
 -1, /* empty */
-1728, /* AbstractArrayRead[Object] */
-2406, /* AbstractArrayRead[Set[MClass]] */
+1782, /* AbstractArrayRead[Object] */
+2472, /* AbstractArrayRead[Set[MClass]] */
 },
 };
 /* runtime type Array[Set[MClassType]] */
 const struct type type_array__Arrayabstract_collection__Setmodel__MClassType = {
-2588,
+2666,
 "Array[Set[MClassType]]", /* class_name_string */
 11,
 0,
@@ -6858,16 +8463,16 @@ const struct type type_array__Arrayabstract_collection__Setmodel__MClassType = {
 {
 0, /* nullable Object */
 1, /* Object */
-1479, /* Collection[Set[MType]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-1841, /* Collection[Set[MClassType]] */
-1728, /* AbstractArrayRead[Object] */
-2398, /* AbstractArrayRead[Set[MType]] */
-2521, /* Array[Set[MType]] */
-1911, /* Array[Object] */
-2528, /* AbstractArrayRead[Set[MClassType]] */
-2588, /* Array[Set[MClassType]] */
+1516, /* Collection[Set[MType]] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
+1899, /* Collection[Set[MClassType]] */
+1782, /* AbstractArrayRead[Object] */
+2464, /* AbstractArrayRead[Set[MType]] */
+2595, /* Array[Set[MType]] */
+1973, /* Array[Object] */
+2602, /* AbstractArrayRead[Set[MClassType]] */
+2666, /* Array[Set[MClassType]] */
 },
 };
 const struct types resolution_table_array__Arrayabstract_collection__Setmodel__MClassType = {
@@ -6896,7 +8501,7 @@ NULL, /* empty (AbstractArray[AbstractArrayRead#0]: AbstractArray[Set[MClassType
 };
 /* runtime type AbstractArrayRead[Set[MClassType]] */
 const struct type type_array__AbstractArrayReadabstract_collection__Setmodel__MClassType = {
-2528,
+2602,
 "AbstractArrayRead[Set[MClassType]]", /* class_name_string */
 10,
 0,
@@ -6905,20 +8510,20 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-1479, /* Collection[Set[MType]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-1841, /* Collection[Set[MClassType]] */
-1728, /* AbstractArrayRead[Object] */
-2398, /* AbstractArrayRead[Set[MType]] */
+1516, /* Collection[Set[MType]] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
+1899, /* Collection[Set[MClassType]] */
+1782, /* AbstractArrayRead[Object] */
+2464, /* AbstractArrayRead[Set[MType]] */
 -1, /* empty */
 -1, /* empty */
-2528, /* AbstractArrayRead[Set[MClassType]] */
+2602, /* AbstractArrayRead[Set[MClassType]] */
 },
 };
 /* runtime type MapKeysIterator[MClassType, Int] */
 const struct type type_abstract_collection__MapKeysIteratormodel__MClassTypekernel__Int = {
-1659,
+1708,
 "MapKeysIterator[MClassType, Int]", /* class_name_string */
 3,
 0,
@@ -6927,8 +8532,8 @@ const struct type type_abstract_collection__MapKeysIteratormodel__MClassTypekern
 {
 0, /* nullable Object */
 1, /* Object */
-476, /* MapKeysIterator[MType, Int] */
-1659, /* MapKeysIterator[MClassType, Int] */
+503, /* MapKeysIterator[MType, Int] */
+1708, /* MapKeysIterator[MClassType, Int] */
 },
 };
 const struct types resolution_table_abstract_collection__MapKeysIteratormodel__MClassTypekernel__Int = {
@@ -6940,7 +8545,7 @@ const struct types resolution_table_abstract_collection__MapKeysIteratormodel__M
 };
 /* runtime type MapValuesIterator[MClassType, Int] */
 const struct type type_abstract_collection__MapValuesIteratormodel__MClassTypekernel__Int = {
-1660,
+1709,
 "MapValuesIterator[MClassType, Int]", /* class_name_string */
 3,
 0,
@@ -6949,8 +8554,8 @@ const struct type type_abstract_collection__MapValuesIteratormodel__MClassTypeke
 {
 0, /* nullable Object */
 1, /* Object */
-477, /* MapValuesIterator[MType, Int] */
-1660, /* MapValuesIterator[MClassType, Int] */
+504, /* MapValuesIterator[MType, Int] */
+1709, /* MapValuesIterator[MClassType, Int] */
 },
 };
 const struct types resolution_table_abstract_collection__MapValuesIteratormodel__MClassTypekernel__Int = {
@@ -6962,7 +8567,7 @@ const struct types resolution_table_abstract_collection__MapValuesIteratormodel_
 };
 /* runtime type MapKeysIterator[MClassType, Map[MType, Int]] */
 const struct type type_abstract_collection__MapKeysIteratormodel__MClassTypeabstract_collection__Mapmodel__MTypekernel__Int = {
-1661,
+1710,
 "MapKeysIterator[MClassType, Map[MType, Int]]", /* class_name_string */
 3,
 0,
@@ -6971,8 +8576,8 @@ const struct type type_abstract_collection__MapKeysIteratormodel__MClassTypeabst
 {
 0, /* nullable Object */
 1, /* Object */
-524, /* MapKeysIterator[MType, Map[MType, Int]] */
-1661, /* MapKeysIterator[MClassType, Map[MType, Int]] */
+551, /* MapKeysIterator[MType, Map[MType, Int]] */
+1710, /* MapKeysIterator[MClassType, Map[MType, Int]] */
 },
 };
 const struct types resolution_table_abstract_collection__MapKeysIteratormodel__MClassTypeabstract_collection__Mapmodel__MTypekernel__Int = {
@@ -6984,7 +8589,7 @@ const struct types resolution_table_abstract_collection__MapKeysIteratormodel__M
 };
 /* runtime type MapValuesIterator[MClassType, Map[MType, Int]] */
 const struct type type_abstract_collection__MapValuesIteratormodel__MClassTypeabstract_collection__Mapmodel__MTypekernel__Int = {
-1662,
+1711,
 "MapValuesIterator[MClassType, Map[MType, Int]]", /* class_name_string */
 3,
 0,
@@ -6993,8 +8598,8 @@ const struct type type_abstract_collection__MapValuesIteratormodel__MClassTypeab
 {
 0, /* nullable Object */
 1, /* Object */
-525, /* MapValuesIterator[MType, Map[MType, Int]] */
-1662, /* MapValuesIterator[MClassType, Map[MType, Int]] */
+552, /* MapValuesIterator[MType, Map[MType, Int]] */
+1711, /* MapValuesIterator[MClassType, Map[MType, Int]] */
 },
 };
 const struct types resolution_table_abstract_collection__MapValuesIteratormodel__MClassTypeabstract_collection__Mapmodel__MTypekernel__Int = {
@@ -7006,7 +8611,7 @@ const struct types resolution_table_abstract_collection__MapValuesIteratormodel_
 };
 /* runtime type ArrayIterator[Scope] */
 const struct type type_array__ArrayIteratorscope__Scope = {
-1663,
+1712,
 "ArrayIterator[Scope]", /* class_name_string */
 3,
 0,
@@ -7015,8 +8620,8 @@ const struct type type_array__ArrayIteratorscope__Scope = {
 {
 0, /* nullable Object */
 1, /* Object */
-277, /* ArrayIterator[Object] */
-1663, /* ArrayIterator[Scope] */
+289, /* ArrayIterator[Object] */
+1712, /* ArrayIterator[Scope] */
 },
 };
 const struct types resolution_table_array__ArrayIteratorscope__Scope = {
@@ -7028,7 +8633,7 @@ const struct types resolution_table_array__ArrayIteratorscope__Scope = {
 };
 /* runtime type NativeArray[Scope] */
 const struct type type_array__NativeArrayscope__Scope = {
-1664,
+1713,
 "NativeArray[Scope]", /* class_name_string */
 3,
 0,
@@ -7037,8 +8642,8 @@ const struct type type_array__NativeArrayscope__Scope = {
 {
 0, /* nullable Object */
 1, /* Object */
-185, /* NativeArray[Object] */
-1664, /* NativeArray[Scope] */
+193, /* NativeArray[Object] */
+1713, /* NativeArray[Scope] */
 },
 };
 const struct types resolution_table_array__NativeArrayscope__Scope = {
@@ -7050,7 +8655,7 @@ const struct types resolution_table_array__NativeArrayscope__Scope = {
 };
 /* runtime type MapKeysIterator[MClass, POSetElement[MClass]] */
 const struct type type_abstract_collection__MapKeysIteratormodel__MClassposet__POSetElementmodel__MClass = {
-526,
+556,
 "MapKeysIterator[MClass, POSetElement[MClass]]", /* class_name_string */
 2,
 0,
@@ -7059,7 +8664,7 @@ const struct type type_abstract_collection__MapKeysIteratormodel__MClassposet__P
 {
 0, /* nullable Object */
 1, /* Object */
-526, /* MapKeysIterator[MClass, POSetElement[MClass]] */
+556, /* MapKeysIterator[MClass, POSetElement[MClass]] */
 },
 };
 const struct types resolution_table_abstract_collection__MapKeysIteratormodel__MClassposet__POSetElementmodel__MClass = {
@@ -7071,7 +8676,7 @@ const struct types resolution_table_abstract_collection__MapKeysIteratormodel__M
 };
 /* runtime type MapValuesIterator[MClass, POSetElement[MClass]] */
 const struct type type_abstract_collection__MapValuesIteratormodel__MClassposet__POSetElementmodel__MClass = {
-527,
+557,
 "MapValuesIterator[MClass, POSetElement[MClass]]", /* class_name_string */
 2,
 0,
@@ -7080,7 +8685,7 @@ const struct type type_abstract_collection__MapValuesIteratormodel__MClassposet_
 {
 0, /* nullable Object */
 1, /* Object */
-527, /* MapValuesIterator[MClass, POSetElement[MClass]] */
+557, /* MapValuesIterator[MClass, POSetElement[MClass]] */
 },
 };
 const struct types resolution_table_abstract_collection__MapValuesIteratormodel__MClassposet__POSetElementmodel__MClass = {
@@ -7091,61 +8696,61 @@ const struct types resolution_table_abstract_collection__MapValuesIteratormodel_
 }
 };
 /* runtime type HashMapKeys[MModule, HashMap[MType, Array[MMethodDef]]] */
-const struct type type_hash_collection__HashMapKeysmodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef = {
-1880,
+const struct type type_hash_collection__HashMapKeysmmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef = {
+1940,
 "HashMapKeys[MModule, HashMap[MType, Array[MMethodDef]]]", /* class_name_string */
 3,
 0,
-&resolution_table_hash_collection__HashMapKeysmodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef,
+&resolution_table_hash_collection__HashMapKeysmmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef,
 5,
 {
 0, /* nullable Object */
 1, /* Object */
-588, /* Collection[MModule] */
-1880, /* HashMapKeys[MModule, HashMap[MType, Array[MMethodDef]]] */
-164, /* Collection[Object] */
+624, /* Collection[MModule] */
+1940, /* HashMapKeys[MModule, HashMap[MType, Array[MMethodDef]]] */
+170, /* Collection[Object] */
 },
 };
-const struct types resolution_table_hash_collection__HashMapKeysmodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef = {
+const struct types resolution_table_hash_collection__HashMapKeysmmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef = {
 0, /* dummy */
 {
-&type_hash_collection__HashMapmodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef, /* HashMap[HashMapKeys#0, HashMapKeys#1]: HashMap[MModule, HashMap[MType, Array[MMethodDef]]] */
-&type_abstract_collection__MapKeysIteratormodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef, /* MapKeysIterator[HashMapKeys#0, HashMapKeys#1]: MapKeysIterator[MModule, HashMap[MType, Array[MMethodDef]]] */
+&type_hash_collection__HashMapmmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef, /* HashMap[HashMapKeys#0, HashMapKeys#1]: HashMap[MModule, HashMap[MType, Array[MMethodDef]]] */
+&type_abstract_collection__MapKeysIteratormmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef, /* MapKeysIterator[HashMapKeys#0, HashMapKeys#1]: MapKeysIterator[MModule, HashMap[MType, Array[MMethodDef]]] */
 NULL, /* empty */
 NULL, /* empty */
 NULL, /* empty */
 NULL, /* empty */
 NULL, /* empty */
 NULL, /* empty */
-&type_model_base__MModule, /* RemovableCollection#0: MModule */
+&type_mmodule__MModule, /* RemovableCollection#0: MModule */
 NULL, /* empty */
 NULL, /* empty */
 NULL, /* empty */
-&type_model_base__MModule, /* Collection#0: MModule */
-&type_abstract_collection__Collectionmodel_base__MModule, /* Collection[Collection#0]: Collection[MModule] */
+&type_mmodule__MModule, /* Collection#0: MModule */
+&type_abstract_collection__Collectionmmodule__MModule, /* Collection[Collection#0]: Collection[MModule] */
 }
 };
 /* runtime type HashMapValues[MModule, HashMap[MType, Array[MMethodDef]]] */
-const struct type type_hash_collection__HashMapValuesmodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef = {
-1881,
+const struct type type_hash_collection__HashMapValuesmmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef = {
+1941,
 "HashMapValues[MModule, HashMap[MType, Array[MMethodDef]]]", /* class_name_string */
 3,
 0,
-&resolution_table_hash_collection__HashMapValuesmodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef,
+&resolution_table_hash_collection__HashMapValuesmmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef,
 5,
 {
 0, /* nullable Object */
 1, /* Object */
-1665, /* Collection[HashMap[MType, Array[MMethodDef]]] */
-1881, /* HashMapValues[MModule, HashMap[MType, Array[MMethodDef]]] */
-164, /* Collection[Object] */
+1714, /* Collection[HashMap[MType, Array[MMethodDef]]] */
+1941, /* HashMapValues[MModule, HashMap[MType, Array[MMethodDef]]] */
+170, /* Collection[Object] */
 },
 };
-const struct types resolution_table_hash_collection__HashMapValuesmodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef = {
+const struct types resolution_table_hash_collection__HashMapValuesmmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef = {
 0, /* dummy */
 {
-&type_hash_collection__HashMapmodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef, /* HashMap[HashMapValues#0, HashMapValues#1]: HashMap[MModule, HashMap[MType, Array[MMethodDef]]] */
-&type_abstract_collection__MapValuesIteratormodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef, /* MapValuesIterator[HashMapValues#0, HashMapValues#1]: MapValuesIterator[MModule, HashMap[MType, Array[MMethodDef]]] */
+&type_hash_collection__HashMapmmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef, /* HashMap[HashMapValues#0, HashMapValues#1]: HashMap[MModule, HashMap[MType, Array[MMethodDef]]] */
+&type_abstract_collection__MapValuesIteratormmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef, /* MapValuesIterator[HashMapValues#0, HashMapValues#1]: MapValuesIterator[MModule, HashMap[MType, Array[MMethodDef]]] */
 NULL, /* empty */
 NULL, /* empty */
 NULL, /* empty */
@@ -7162,7 +8767,7 @@ NULL, /* empty */
 };
 /* runtime type Collection[HashMap[MType, Array[MMethodDef]]] */
 const struct type type_abstract_collection__Collectionhash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef = {
-1665,
+1714,
 "Collection[HashMap[MType, Array[MMethodDef]]]", /* class_name_string */
 2,
 0,
@@ -7171,103 +8776,103 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-1665, /* Collection[HashMap[MType, Array[MMethodDef]]] */
+1714, /* Collection[HashMap[MType, Array[MMethodDef]]] */
 -1, /* empty */
-164, /* Collection[Object] */
+170, /* Collection[Object] */
 },
 };
 /* runtime type NativeArray[nullable HashMapNode[MModule, HashMap[MType, Array[MMethodDef]]]] */
-const struct type type_array__NativeArraynullable_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef = {
-528,
+const struct type type_array__NativeArraynullable_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef = {
+558,
 "NativeArray[nullable HashMapNode[MModule, HashMap[MType, Array[MMethodDef]]]]", /* class_name_string */
 2,
 0,
-&resolution_table_array__NativeArraynullable_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef,
+&resolution_table_array__NativeArraynullable_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef,
 3,
 {
 0, /* nullable Object */
 1, /* Object */
-528, /* NativeArray[nullable HashMapNode[MModule, HashMap[MType, Array[MMethodDef]]]] */
+558, /* NativeArray[nullable HashMapNode[MModule, HashMap[MType, Array[MMethodDef]]]] */
 },
 };
-const struct types resolution_table_array__NativeArraynullable_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef = {
+const struct types resolution_table_array__NativeArraynullable_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef = {
 0, /* dummy */
 {
-&type_nullable_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef, /* NativeArray#0: nullable HashMapNode[MModule, HashMap[MType, Array[MMethodDef]]] */
-&type_array__NativeArraynullable_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef, /* NativeArray[NativeArray#0]: NativeArray[nullable HashMapNode[MModule, HashMap[MType, Array[MMethodDef]]]] */
+&type_nullable_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef, /* NativeArray#0: nullable HashMapNode[MModule, HashMap[MType, Array[MMethodDef]]] */
+&type_array__NativeArraynullable_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef, /* NativeArray[NativeArray#0]: NativeArray[nullable HashMapNode[MModule, HashMap[MType, Array[MMethodDef]]]] */
 }
 };
 /* runtime type HashMapNode[MModule, HashMap[MType, Array[MMethodDef]]] */
-const struct type type_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef = {
-1666,
+const struct type type_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef = {
+1715,
 "HashMapNode[MModule, HashMap[MType, Array[MMethodDef]]]", /* class_name_string */
 3,
 0,
-&resolution_table_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef,
+&resolution_table_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-152, /* nullable HashMapNode[MModule, HashMap[MType, Array[MMethodDef]]] */
-1666, /* HashMapNode[MModule, HashMap[MType, Array[MMethodDef]]] */
+158, /* nullable HashMapNode[MModule, HashMap[MType, Array[MMethodDef]]] */
+1715, /* HashMapNode[MModule, HashMap[MType, Array[MMethodDef]]] */
 },
 };
-const struct types resolution_table_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef = {
+const struct types resolution_table_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef = {
 0, /* dummy */
 {
-&type_model_base__MModule, /* HashMapNode#0: MModule */
+&type_mmodule__MModule, /* HashMapNode#0: MModule */
 &type_hash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef, /* HashMapNode#1: HashMap[MType, Array[MMethodDef]] */
-&type_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef, /* N: HashMapNode[MModule, HashMap[MType, Array[MMethodDef]]] */
-&type_model_base__MModule, /* HashNode#0: MModule */
+&type_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef, /* N: HashMapNode[MModule, HashMap[MType, Array[MMethodDef]]] */
+&type_mmodule__MModule, /* HashNode#0: MModule */
 }
 };
 /* runtime type nullable HashMapNode[MModule, HashMap[MType, Array[MMethodDef]]] */
-const struct type type_nullable_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef = {
-152,
+const struct type type_nullable_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef = {
+158,
 "nullable HashMapNode[MModule, HashMap[MType, Array[MMethodDef]]]", /* class_name_string */
 2,
 1,
-&resolution_table_nullable_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef,
+&resolution_table_nullable_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef,
 3,
 {
 0, /* nullable Object */
 -1, /* empty */
-152, /* nullable HashMapNode[MModule, HashMap[MType, Array[MMethodDef]]] */
+158, /* nullable HashMapNode[MModule, HashMap[MType, Array[MMethodDef]]] */
 },
 };
-const struct types resolution_table_nullable_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef = {
+const struct types resolution_table_nullable_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef = {
 0, /* dummy */
 {
-&type_model_base__MModule, /* HashMapNode#0: MModule */
+&type_mmodule__MModule, /* HashMapNode#0: MModule */
 &type_hash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef, /* HashMapNode#1: HashMap[MType, Array[MMethodDef]] */
-&type_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef, /* N: HashMapNode[MModule, HashMap[MType, Array[MMethodDef]]] */
-&type_model_base__MModule, /* HashNode#0: MModule */
+&type_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef, /* N: HashMapNode[MModule, HashMap[MType, Array[MMethodDef]]] */
+&type_mmodule__MModule, /* HashNode#0: MModule */
 }
 };
 /* runtime type HashMapIterator[MModule, HashMap[MType, Array[MMethodDef]]] */
-const struct type type_hash_collection__HashMapIteratormodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef = {
-1667,
+const struct type type_hash_collection__HashMapIteratormmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef = {
+1716,
 "HashMapIterator[MModule, HashMap[MType, Array[MMethodDef]]]", /* class_name_string */
 3,
 0,
-&resolution_table_hash_collection__HashMapIteratormodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef,
+&resolution_table_hash_collection__HashMapIteratormmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-529, /* MapIterator[MModule, HashMap[MType, Array[MMethodDef]]] */
-1667, /* HashMapIterator[MModule, HashMap[MType, Array[MMethodDef]]] */
+559, /* MapIterator[MModule, HashMap[MType, Array[MMethodDef]]] */
+1716, /* HashMapIterator[MModule, HashMap[MType, Array[MMethodDef]]] */
 },
 };
-const struct types resolution_table_hash_collection__HashMapIteratormodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef = {
+const struct types resolution_table_hash_collection__HashMapIteratormmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef = {
 0, /* dummy */
 {
-&type_hash_collection__HashMapmodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef, /* HashMap[HashMapIterator#0, HashMapIterator#1]: HashMap[MModule, HashMap[MType, Array[MMethodDef]]] */
+&type_hash_collection__HashMapmmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef, /* HashMap[HashMapIterator#0, HashMapIterator#1]: HashMap[MModule, HashMap[MType, Array[MMethodDef]]] */
 }
 };
 /* runtime type MapIterator[MModule, HashMap[MType, Array[MMethodDef]]] */
-const struct type type_abstract_collection__MapIteratormodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef = {
-529,
+const struct type type_abstract_collection__MapIteratormmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef = {
+559,
 "MapIterator[MModule, HashMap[MType, Array[MMethodDef]]]", /* class_name_string */
 2,
 0,
@@ -7276,12 +8881,12 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-529, /* MapIterator[MModule, HashMap[MType, Array[MMethodDef]]] */
+559, /* MapIterator[MModule, HashMap[MType, Array[MMethodDef]]] */
 },
 };
 /* runtime type HashMapKeys[MType, Array[MMethodDef]] */
 const struct type type_hash_collection__HashMapKeysmodel__MTypearray__Arraymodel__MMethodDef = {
-2179,
+2248,
 "HashMapKeys[MType, Array[MMethodDef]]", /* class_name_string */
 2,
 0,
@@ -7290,12 +8895,12 @@ const struct type type_hash_collection__HashMapKeysmodel__MTypearray__Arraymodel
 {
 0, /* nullable Object */
 1, /* Object */
-2179, /* HashMapKeys[MType, Array[MMethodDef]] */
+2248, /* HashMapKeys[MType, Array[MMethodDef]] */
 -1, /* empty */
-164, /* Collection[Object] */
-173, /* Collection[nullable MType] */
+170, /* Collection[Object] */
+180, /* Collection[nullable MType] */
 -1, /* empty */
-1737, /* Collection[MType] */
+1791, /* Collection[MType] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapKeysmodel__MTypearray__Arraymodel__MMethodDef = {
@@ -7319,7 +8924,7 @@ NULL, /* empty */
 };
 /* runtime type HashMapValues[MType, Array[MMethodDef]] */
 const struct type type_hash_collection__HashMapValuesmodel__MTypearray__Arraymodel__MMethodDef = {
-2180,
+2249,
 "HashMapValues[MType, Array[MMethodDef]]", /* class_name_string */
 3,
 0,
@@ -7328,10 +8933,10 @@ const struct type type_hash_collection__HashMapValuesmodel__MTypearray__Arraymod
 {
 0, /* nullable Object */
 1, /* Object */
-1488, /* Collection[Array[nullable MPropDef]] */
-2180, /* HashMapValues[MType, Array[MMethodDef]] */
-164, /* Collection[Object] */
-1882, /* Collection[Array[MMethodDef]] */
+1525, /* Collection[Array[nullable MPropDef]] */
+2249, /* HashMapValues[MType, Array[MMethodDef]] */
+170, /* Collection[Object] */
+1942, /* Collection[Array[MMethodDef]] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapValuesmodel__MTypearray__Arraymodel__MMethodDef = {
@@ -7355,7 +8960,7 @@ NULL, /* empty */
 };
 /* runtime type Collection[Array[MMethodDef]] */
 const struct type type_abstract_collection__Collectionarray__Arraymodel__MMethodDef = {
-1882,
+1942,
 "Collection[Array[MMethodDef]]", /* class_name_string */
 5,
 0,
@@ -7364,15 +8969,15 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-1488, /* Collection[Array[nullable MPropDef]] */
+1525, /* Collection[Array[nullable MPropDef]] */
 -1, /* empty */
-164, /* Collection[Object] */
-1882, /* Collection[Array[MMethodDef]] */
+170, /* Collection[Object] */
+1942, /* Collection[Array[MMethodDef]] */
 },
 };
 /* runtime type NativeArray[nullable HashMapNode[MType, Array[MMethodDef]]] */
 const struct type type_array__NativeArraynullable_hash_collection__HashMapNodemodel__MTypearray__Arraymodel__MMethodDef = {
-530,
+560,
 "NativeArray[nullable HashMapNode[MType, Array[MMethodDef]]]", /* class_name_string */
 2,
 0,
@@ -7381,7 +8986,7 @@ const struct type type_array__NativeArraynullable_hash_collection__HashMapNodemo
 {
 0, /* nullable Object */
 1, /* Object */
-530, /* NativeArray[nullable HashMapNode[MType, Array[MMethodDef]]] */
+560, /* NativeArray[nullable HashMapNode[MType, Array[MMethodDef]]] */
 },
 };
 const struct types resolution_table_array__NativeArraynullable_hash_collection__HashMapNodemodel__MTypearray__Arraymodel__MMethodDef = {
@@ -7393,7 +8998,7 @@ const struct types resolution_table_array__NativeArraynullable_hash_collection__
 };
 /* runtime type HashMapNode[MType, Array[MMethodDef]] */
 const struct type type_hash_collection__HashMapNodemodel__MTypearray__Arraymodel__MMethodDef = {
-1668,
+1717,
 "HashMapNode[MType, Array[MMethodDef]]", /* class_name_string */
 3,
 0,
@@ -7402,8 +9007,8 @@ const struct type type_hash_collection__HashMapNodemodel__MTypearray__Arraymodel
 {
 0, /* nullable Object */
 1, /* Object */
-153, /* nullable HashMapNode[MType, Array[MMethodDef]] */
-1668, /* HashMapNode[MType, Array[MMethodDef]] */
+159, /* nullable HashMapNode[MType, Array[MMethodDef]] */
+1717, /* HashMapNode[MType, Array[MMethodDef]] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapNodemodel__MTypearray__Arraymodel__MMethodDef = {
@@ -7417,7 +9022,7 @@ const struct types resolution_table_hash_collection__HashMapNodemodel__MTypearra
 };
 /* runtime type nullable HashMapNode[MType, Array[MMethodDef]] */
 const struct type type_nullable_hash_collection__HashMapNodemodel__MTypearray__Arraymodel__MMethodDef = {
-153,
+159,
 "nullable HashMapNode[MType, Array[MMethodDef]]", /* class_name_string */
 2,
 1,
@@ -7426,7 +9031,7 @@ const struct type type_nullable_hash_collection__HashMapNodemodel__MTypearray__A
 {
 0, /* nullable Object */
 -1, /* empty */
-153, /* nullable HashMapNode[MType, Array[MMethodDef]] */
+159, /* nullable HashMapNode[MType, Array[MMethodDef]] */
 },
 };
 const struct types resolution_table_nullable_hash_collection__HashMapNodemodel__MTypearray__Arraymodel__MMethodDef = {
@@ -7440,7 +9045,7 @@ const struct types resolution_table_nullable_hash_collection__HashMapNodemodel__
 };
 /* runtime type HashMapIterator[MType, Array[MMethodDef]] */
 const struct type type_hash_collection__HashMapIteratormodel__MTypearray__Arraymodel__MMethodDef = {
-1669,
+1718,
 "HashMapIterator[MType, Array[MMethodDef]]", /* class_name_string */
 3,
 0,
@@ -7449,8 +9054,8 @@ const struct type type_hash_collection__HashMapIteratormodel__MTypearray__Arraym
 {
 0, /* nullable Object */
 1, /* Object */
-531, /* MapIterator[MType, Array[MMethodDef]] */
-1669, /* HashMapIterator[MType, Array[MMethodDef]] */
+561, /* MapIterator[MType, Array[MMethodDef]] */
+1718, /* HashMapIterator[MType, Array[MMethodDef]] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapIteratormodel__MTypearray__Arraymodel__MMethodDef = {
@@ -7461,7 +9066,7 @@ const struct types resolution_table_hash_collection__HashMapIteratormodel__MType
 };
 /* runtime type MapIterator[MType, Array[MMethodDef]] */
 const struct type type_abstract_collection__MapIteratormodel__MTypearray__Arraymodel__MMethodDef = {
-531,
+561,
 "MapIterator[MType, Array[MMethodDef]]", /* class_name_string */
 2,
 0,
@@ -7470,65 +9075,65 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-531, /* MapIterator[MType, Array[MMethodDef]] */
+561, /* MapIterator[MType, Array[MMethodDef]] */
 },
 };
 /* runtime type HashMapKeys[MModule, HashMap[MType, Array[MAttributeDef]]] */
-const struct type type_hash_collection__HashMapKeysmodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef = {
-1883,
+const struct type type_hash_collection__HashMapKeysmmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef = {
+1943,
 "HashMapKeys[MModule, HashMap[MType, Array[MAttributeDef]]]", /* class_name_string */
 3,
 0,
-&resolution_table_hash_collection__HashMapKeysmodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef,
+&resolution_table_hash_collection__HashMapKeysmmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef,
 5,
 {
 0, /* nullable Object */
 1, /* Object */
-588, /* Collection[MModule] */
-1883, /* HashMapKeys[MModule, HashMap[MType, Array[MAttributeDef]]] */
-164, /* Collection[Object] */
+624, /* Collection[MModule] */
+1943, /* HashMapKeys[MModule, HashMap[MType, Array[MAttributeDef]]] */
+170, /* Collection[Object] */
 },
 };
-const struct types resolution_table_hash_collection__HashMapKeysmodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef = {
+const struct types resolution_table_hash_collection__HashMapKeysmmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef = {
 0, /* dummy */
 {
-&type_hash_collection__HashMapmodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef, /* HashMap[HashMapKeys#0, HashMapKeys#1]: HashMap[MModule, HashMap[MType, Array[MAttributeDef]]] */
-&type_abstract_collection__MapKeysIteratormodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef, /* MapKeysIterator[HashMapKeys#0, HashMapKeys#1]: MapKeysIterator[MModule, HashMap[MType, Array[MAttributeDef]]] */
+&type_hash_collection__HashMapmmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef, /* HashMap[HashMapKeys#0, HashMapKeys#1]: HashMap[MModule, HashMap[MType, Array[MAttributeDef]]] */
+&type_abstract_collection__MapKeysIteratormmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef, /* MapKeysIterator[HashMapKeys#0, HashMapKeys#1]: MapKeysIterator[MModule, HashMap[MType, Array[MAttributeDef]]] */
 NULL, /* empty */
 NULL, /* empty */
 NULL, /* empty */
 NULL, /* empty */
 NULL, /* empty */
 NULL, /* empty */
-&type_model_base__MModule, /* RemovableCollection#0: MModule */
+&type_mmodule__MModule, /* RemovableCollection#0: MModule */
 NULL, /* empty */
 NULL, /* empty */
 NULL, /* empty */
-&type_model_base__MModule, /* Collection#0: MModule */
-&type_abstract_collection__Collectionmodel_base__MModule, /* Collection[Collection#0]: Collection[MModule] */
+&type_mmodule__MModule, /* Collection#0: MModule */
+&type_abstract_collection__Collectionmmodule__MModule, /* Collection[Collection#0]: Collection[MModule] */
 }
 };
 /* runtime type HashMapValues[MModule, HashMap[MType, Array[MAttributeDef]]] */
-const struct type type_hash_collection__HashMapValuesmodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef = {
-1884,
+const struct type type_hash_collection__HashMapValuesmmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef = {
+1944,
 "HashMapValues[MModule, HashMap[MType, Array[MAttributeDef]]]", /* class_name_string */
 3,
 0,
-&resolution_table_hash_collection__HashMapValuesmodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef,
+&resolution_table_hash_collection__HashMapValuesmmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef,
 5,
 {
 0, /* nullable Object */
 1, /* Object */
-1670, /* Collection[HashMap[MType, Array[MAttributeDef]]] */
-1884, /* HashMapValues[MModule, HashMap[MType, Array[MAttributeDef]]] */
-164, /* Collection[Object] */
+1719, /* Collection[HashMap[MType, Array[MAttributeDef]]] */
+1944, /* HashMapValues[MModule, HashMap[MType, Array[MAttributeDef]]] */
+170, /* Collection[Object] */
 },
 };
-const struct types resolution_table_hash_collection__HashMapValuesmodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef = {
+const struct types resolution_table_hash_collection__HashMapValuesmmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef = {
 0, /* dummy */
 {
-&type_hash_collection__HashMapmodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef, /* HashMap[HashMapValues#0, HashMapValues#1]: HashMap[MModule, HashMap[MType, Array[MAttributeDef]]] */
-&type_abstract_collection__MapValuesIteratormodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef, /* MapValuesIterator[HashMapValues#0, HashMapValues#1]: MapValuesIterator[MModule, HashMap[MType, Array[MAttributeDef]]] */
+&type_hash_collection__HashMapmmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef, /* HashMap[HashMapValues#0, HashMapValues#1]: HashMap[MModule, HashMap[MType, Array[MAttributeDef]]] */
+&type_abstract_collection__MapValuesIteratormmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef, /* MapValuesIterator[HashMapValues#0, HashMapValues#1]: MapValuesIterator[MModule, HashMap[MType, Array[MAttributeDef]]] */
 NULL, /* empty */
 NULL, /* empty */
 NULL, /* empty */
@@ -7545,7 +9150,7 @@ NULL, /* empty */
 };
 /* runtime type Collection[HashMap[MType, Array[MAttributeDef]]] */
 const struct type type_abstract_collection__Collectionhash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef = {
-1670,
+1719,
 "Collection[HashMap[MType, Array[MAttributeDef]]]", /* class_name_string */
 2,
 0,
@@ -7554,103 +9159,103 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-1670, /* Collection[HashMap[MType, Array[MAttributeDef]]] */
+1719, /* Collection[HashMap[MType, Array[MAttributeDef]]] */
 -1, /* empty */
-164, /* Collection[Object] */
+170, /* Collection[Object] */
 },
 };
 /* runtime type NativeArray[nullable HashMapNode[MModule, HashMap[MType, Array[MAttributeDef]]]] */
-const struct type type_array__NativeArraynullable_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef = {
-532,
+const struct type type_array__NativeArraynullable_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef = {
+562,
 "NativeArray[nullable HashMapNode[MModule, HashMap[MType, Array[MAttributeDef]]]]", /* class_name_string */
 2,
 0,
-&resolution_table_array__NativeArraynullable_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef,
+&resolution_table_array__NativeArraynullable_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef,
 3,
 {
 0, /* nullable Object */
 1, /* Object */
-532, /* NativeArray[nullable HashMapNode[MModule, HashMap[MType, Array[MAttributeDef]]]] */
+562, /* NativeArray[nullable HashMapNode[MModule, HashMap[MType, Array[MAttributeDef]]]] */
 },
 };
-const struct types resolution_table_array__NativeArraynullable_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef = {
+const struct types resolution_table_array__NativeArraynullable_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef = {
 0, /* dummy */
 {
-&type_nullable_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef, /* NativeArray#0: nullable HashMapNode[MModule, HashMap[MType, Array[MAttributeDef]]] */
-&type_array__NativeArraynullable_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef, /* NativeArray[NativeArray#0]: NativeArray[nullable HashMapNode[MModule, HashMap[MType, Array[MAttributeDef]]]] */
+&type_nullable_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef, /* NativeArray#0: nullable HashMapNode[MModule, HashMap[MType, Array[MAttributeDef]]] */
+&type_array__NativeArraynullable_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef, /* NativeArray[NativeArray#0]: NativeArray[nullable HashMapNode[MModule, HashMap[MType, Array[MAttributeDef]]]] */
 }
 };
 /* runtime type HashMapNode[MModule, HashMap[MType, Array[MAttributeDef]]] */
-const struct type type_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef = {
-1671,
+const struct type type_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef = {
+1720,
 "HashMapNode[MModule, HashMap[MType, Array[MAttributeDef]]]", /* class_name_string */
 3,
 0,
-&resolution_table_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef,
+&resolution_table_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-154, /* nullable HashMapNode[MModule, HashMap[MType, Array[MAttributeDef]]] */
-1671, /* HashMapNode[MModule, HashMap[MType, Array[MAttributeDef]]] */
+160, /* nullable HashMapNode[MModule, HashMap[MType, Array[MAttributeDef]]] */
+1720, /* HashMapNode[MModule, HashMap[MType, Array[MAttributeDef]]] */
 },
 };
-const struct types resolution_table_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef = {
+const struct types resolution_table_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef = {
 0, /* dummy */
 {
-&type_model_base__MModule, /* HashMapNode#0: MModule */
+&type_mmodule__MModule, /* HashMapNode#0: MModule */
 &type_hash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef, /* HashMapNode#1: HashMap[MType, Array[MAttributeDef]] */
-&type_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef, /* N: HashMapNode[MModule, HashMap[MType, Array[MAttributeDef]]] */
-&type_model_base__MModule, /* HashNode#0: MModule */
+&type_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef, /* N: HashMapNode[MModule, HashMap[MType, Array[MAttributeDef]]] */
+&type_mmodule__MModule, /* HashNode#0: MModule */
 }
 };
 /* runtime type nullable HashMapNode[MModule, HashMap[MType, Array[MAttributeDef]]] */
-const struct type type_nullable_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef = {
-154,
+const struct type type_nullable_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef = {
+160,
 "nullable HashMapNode[MModule, HashMap[MType, Array[MAttributeDef]]]", /* class_name_string */
 2,
 1,
-&resolution_table_nullable_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef,
+&resolution_table_nullable_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef,
 3,
 {
 0, /* nullable Object */
 -1, /* empty */
-154, /* nullable HashMapNode[MModule, HashMap[MType, Array[MAttributeDef]]] */
+160, /* nullable HashMapNode[MModule, HashMap[MType, Array[MAttributeDef]]] */
 },
 };
-const struct types resolution_table_nullable_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef = {
+const struct types resolution_table_nullable_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef = {
 0, /* dummy */
 {
-&type_model_base__MModule, /* HashMapNode#0: MModule */
+&type_mmodule__MModule, /* HashMapNode#0: MModule */
 &type_hash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef, /* HashMapNode#1: HashMap[MType, Array[MAttributeDef]] */
-&type_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef, /* N: HashMapNode[MModule, HashMap[MType, Array[MAttributeDef]]] */
-&type_model_base__MModule, /* HashNode#0: MModule */
+&type_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef, /* N: HashMapNode[MModule, HashMap[MType, Array[MAttributeDef]]] */
+&type_mmodule__MModule, /* HashNode#0: MModule */
 }
 };
 /* runtime type HashMapIterator[MModule, HashMap[MType, Array[MAttributeDef]]] */
-const struct type type_hash_collection__HashMapIteratormodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef = {
-1672,
+const struct type type_hash_collection__HashMapIteratormmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef = {
+1721,
 "HashMapIterator[MModule, HashMap[MType, Array[MAttributeDef]]]", /* class_name_string */
 3,
 0,
-&resolution_table_hash_collection__HashMapIteratormodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef,
+&resolution_table_hash_collection__HashMapIteratormmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-533, /* MapIterator[MModule, HashMap[MType, Array[MAttributeDef]]] */
-1672, /* HashMapIterator[MModule, HashMap[MType, Array[MAttributeDef]]] */
+563, /* MapIterator[MModule, HashMap[MType, Array[MAttributeDef]]] */
+1721, /* HashMapIterator[MModule, HashMap[MType, Array[MAttributeDef]]] */
 },
 };
-const struct types resolution_table_hash_collection__HashMapIteratormodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef = {
+const struct types resolution_table_hash_collection__HashMapIteratormmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef = {
 0, /* dummy */
 {
-&type_hash_collection__HashMapmodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef, /* HashMap[HashMapIterator#0, HashMapIterator#1]: HashMap[MModule, HashMap[MType, Array[MAttributeDef]]] */
+&type_hash_collection__HashMapmmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef, /* HashMap[HashMapIterator#0, HashMapIterator#1]: HashMap[MModule, HashMap[MType, Array[MAttributeDef]]] */
 }
 };
 /* runtime type MapIterator[MModule, HashMap[MType, Array[MAttributeDef]]] */
-const struct type type_abstract_collection__MapIteratormodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef = {
-533,
+const struct type type_abstract_collection__MapIteratormmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef = {
+563,
 "MapIterator[MModule, HashMap[MType, Array[MAttributeDef]]]", /* class_name_string */
 2,
 0,
@@ -7659,12 +9264,12 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-533, /* MapIterator[MModule, HashMap[MType, Array[MAttributeDef]]] */
+563, /* MapIterator[MModule, HashMap[MType, Array[MAttributeDef]]] */
 },
 };
 /* runtime type HashMapKeys[MType, Array[MAttributeDef]] */
 const struct type type_hash_collection__HashMapKeysmodel__MTypearray__Arraymodel__MAttributeDef = {
-2181,
+2250,
 "HashMapKeys[MType, Array[MAttributeDef]]", /* class_name_string */
 2,
 0,
@@ -7673,12 +9278,12 @@ const struct type type_hash_collection__HashMapKeysmodel__MTypearray__Arraymodel
 {
 0, /* nullable Object */
 1, /* Object */
-2181, /* HashMapKeys[MType, Array[MAttributeDef]] */
+2250, /* HashMapKeys[MType, Array[MAttributeDef]] */
 -1, /* empty */
-164, /* Collection[Object] */
-173, /* Collection[nullable MType] */
+170, /* Collection[Object] */
+180, /* Collection[nullable MType] */
 -1, /* empty */
-1737, /* Collection[MType] */
+1791, /* Collection[MType] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapKeysmodel__MTypearray__Arraymodel__MAttributeDef = {
@@ -7702,7 +9307,7 @@ NULL, /* empty */
 };
 /* runtime type HashMapValues[MType, Array[MAttributeDef]] */
 const struct type type_hash_collection__HashMapValuesmodel__MTypearray__Arraymodel__MAttributeDef = {
-2182,
+2251,
 "HashMapValues[MType, Array[MAttributeDef]]", /* class_name_string */
 3,
 0,
@@ -7711,10 +9316,10 @@ const struct type type_hash_collection__HashMapValuesmodel__MTypearray__Arraymod
 {
 0, /* nullable Object */
 1, /* Object */
-1488, /* Collection[Array[nullable MPropDef]] */
-2182, /* HashMapValues[MType, Array[MAttributeDef]] */
-164, /* Collection[Object] */
-1885, /* Collection[Array[MAttributeDef]] */
+1525, /* Collection[Array[nullable MPropDef]] */
+2251, /* HashMapValues[MType, Array[MAttributeDef]] */
+170, /* Collection[Object] */
+1945, /* Collection[Array[MAttributeDef]] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapValuesmodel__MTypearray__Arraymodel__MAttributeDef = {
@@ -7738,7 +9343,7 @@ NULL, /* empty */
 };
 /* runtime type Collection[Array[MAttributeDef]] */
 const struct type type_abstract_collection__Collectionarray__Arraymodel__MAttributeDef = {
-1885,
+1945,
 "Collection[Array[MAttributeDef]]", /* class_name_string */
 5,
 0,
@@ -7747,15 +9352,15 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-1488, /* Collection[Array[nullable MPropDef]] */
+1525, /* Collection[Array[nullable MPropDef]] */
 -1, /* empty */
-164, /* Collection[Object] */
-1885, /* Collection[Array[MAttributeDef]] */
+170, /* Collection[Object] */
+1945, /* Collection[Array[MAttributeDef]] */
 },
 };
 /* runtime type NativeArray[nullable HashMapNode[MType, Array[MAttributeDef]]] */
 const struct type type_array__NativeArraynullable_hash_collection__HashMapNodemodel__MTypearray__Arraymodel__MAttributeDef = {
-534,
+564,
 "NativeArray[nullable HashMapNode[MType, Array[MAttributeDef]]]", /* class_name_string */
 2,
 0,
@@ -7764,7 +9369,7 @@ const struct type type_array__NativeArraynullable_hash_collection__HashMapNodemo
 {
 0, /* nullable Object */
 1, /* Object */
-534, /* NativeArray[nullable HashMapNode[MType, Array[MAttributeDef]]] */
+564, /* NativeArray[nullable HashMapNode[MType, Array[MAttributeDef]]] */
 },
 };
 const struct types resolution_table_array__NativeArraynullable_hash_collection__HashMapNodemodel__MTypearray__Arraymodel__MAttributeDef = {
@@ -7776,7 +9381,7 @@ const struct types resolution_table_array__NativeArraynullable_hash_collection__
 };
 /* runtime type HashMapNode[MType, Array[MAttributeDef]] */
 const struct type type_hash_collection__HashMapNodemodel__MTypearray__Arraymodel__MAttributeDef = {
-1673,
+1722,
 "HashMapNode[MType, Array[MAttributeDef]]", /* class_name_string */
 3,
 0,
@@ -7785,8 +9390,8 @@ const struct type type_hash_collection__HashMapNodemodel__MTypearray__Arraymodel
 {
 0, /* nullable Object */
 1, /* Object */
-155, /* nullable HashMapNode[MType, Array[MAttributeDef]] */
-1673, /* HashMapNode[MType, Array[MAttributeDef]] */
+161, /* nullable HashMapNode[MType, Array[MAttributeDef]] */
+1722, /* HashMapNode[MType, Array[MAttributeDef]] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapNodemodel__MTypearray__Arraymodel__MAttributeDef = {
@@ -7800,7 +9405,7 @@ const struct types resolution_table_hash_collection__HashMapNodemodel__MTypearra
 };
 /* runtime type nullable HashMapNode[MType, Array[MAttributeDef]] */
 const struct type type_nullable_hash_collection__HashMapNodemodel__MTypearray__Arraymodel__MAttributeDef = {
-155,
+161,
 "nullable HashMapNode[MType, Array[MAttributeDef]]", /* class_name_string */
 2,
 1,
@@ -7809,7 +9414,7 @@ const struct type type_nullable_hash_collection__HashMapNodemodel__MTypearray__A
 {
 0, /* nullable Object */
 -1, /* empty */
-155, /* nullable HashMapNode[MType, Array[MAttributeDef]] */
+161, /* nullable HashMapNode[MType, Array[MAttributeDef]] */
 },
 };
 const struct types resolution_table_nullable_hash_collection__HashMapNodemodel__MTypearray__Arraymodel__MAttributeDef = {
@@ -7823,7 +9428,7 @@ const struct types resolution_table_nullable_hash_collection__HashMapNodemodel__
 };
 /* runtime type HashMapIterator[MType, Array[MAttributeDef]] */
 const struct type type_hash_collection__HashMapIteratormodel__MTypearray__Arraymodel__MAttributeDef = {
-1674,
+1723,
 "HashMapIterator[MType, Array[MAttributeDef]]", /* class_name_string */
 3,
 0,
@@ -7832,8 +9437,8 @@ const struct type type_hash_collection__HashMapIteratormodel__MTypearray__Arraym
 {
 0, /* nullable Object */
 1, /* Object */
-535, /* MapIterator[MType, Array[MAttributeDef]] */
-1674, /* HashMapIterator[MType, Array[MAttributeDef]] */
+565, /* MapIterator[MType, Array[MAttributeDef]] */
+1723, /* HashMapIterator[MType, Array[MAttributeDef]] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapIteratormodel__MTypearray__Arraymodel__MAttributeDef = {
@@ -7844,7 +9449,7 @@ const struct types resolution_table_hash_collection__HashMapIteratormodel__MType
 };
 /* runtime type MapIterator[MType, Array[MAttributeDef]] */
 const struct type type_abstract_collection__MapIteratormodel__MTypearray__Arraymodel__MAttributeDef = {
-535,
+565,
 "MapIterator[MType, Array[MAttributeDef]]", /* class_name_string */
 2,
 0,
@@ -7853,65 +9458,65 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-535, /* MapIterator[MType, Array[MAttributeDef]] */
+565, /* MapIterator[MType, Array[MAttributeDef]] */
 },
 };
 /* runtime type HashMapKeys[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
-const struct type type_hash_collection__HashMapKeysmodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef = {
-1886,
+const struct type type_hash_collection__HashMapKeysmmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef = {
+1946,
 "HashMapKeys[MModule, HashMap[MType, Array[MVirtualTypeDef]]]", /* class_name_string */
 3,
 0,
-&resolution_table_hash_collection__HashMapKeysmodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef,
+&resolution_table_hash_collection__HashMapKeysmmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef,
 5,
 {
 0, /* nullable Object */
 1, /* Object */
-588, /* Collection[MModule] */
-1886, /* HashMapKeys[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
-164, /* Collection[Object] */
+624, /* Collection[MModule] */
+1946, /* HashMapKeys[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
+170, /* Collection[Object] */
 },
 };
-const struct types resolution_table_hash_collection__HashMapKeysmodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef = {
+const struct types resolution_table_hash_collection__HashMapKeysmmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef = {
 0, /* dummy */
 {
-&type_hash_collection__HashMapmodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef, /* HashMap[HashMapKeys#0, HashMapKeys#1]: HashMap[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
-&type_abstract_collection__MapKeysIteratormodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef, /* MapKeysIterator[HashMapKeys#0, HashMapKeys#1]: MapKeysIterator[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
+&type_hash_collection__HashMapmmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef, /* HashMap[HashMapKeys#0, HashMapKeys#1]: HashMap[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
+&type_abstract_collection__MapKeysIteratormmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef, /* MapKeysIterator[HashMapKeys#0, HashMapKeys#1]: MapKeysIterator[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
 NULL, /* empty */
 NULL, /* empty */
 NULL, /* empty */
 NULL, /* empty */
 NULL, /* empty */
 NULL, /* empty */
-&type_model_base__MModule, /* RemovableCollection#0: MModule */
+&type_mmodule__MModule, /* RemovableCollection#0: MModule */
 NULL, /* empty */
 NULL, /* empty */
 NULL, /* empty */
-&type_model_base__MModule, /* Collection#0: MModule */
-&type_abstract_collection__Collectionmodel_base__MModule, /* Collection[Collection#0]: Collection[MModule] */
+&type_mmodule__MModule, /* Collection#0: MModule */
+&type_abstract_collection__Collectionmmodule__MModule, /* Collection[Collection#0]: Collection[MModule] */
 }
 };
 /* runtime type HashMapValues[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
-const struct type type_hash_collection__HashMapValuesmodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef = {
-1887,
+const struct type type_hash_collection__HashMapValuesmmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef = {
+1947,
 "HashMapValues[MModule, HashMap[MType, Array[MVirtualTypeDef]]]", /* class_name_string */
 3,
 0,
-&resolution_table_hash_collection__HashMapValuesmodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef,
+&resolution_table_hash_collection__HashMapValuesmmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef,
 5,
 {
 0, /* nullable Object */
 1, /* Object */
-1675, /* Collection[HashMap[MType, Array[MVirtualTypeDef]]] */
-1887, /* HashMapValues[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
-164, /* Collection[Object] */
+1724, /* Collection[HashMap[MType, Array[MVirtualTypeDef]]] */
+1947, /* HashMapValues[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
+170, /* Collection[Object] */
 },
 };
-const struct types resolution_table_hash_collection__HashMapValuesmodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef = {
+const struct types resolution_table_hash_collection__HashMapValuesmmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef = {
 0, /* dummy */
 {
-&type_hash_collection__HashMapmodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef, /* HashMap[HashMapValues#0, HashMapValues#1]: HashMap[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
-&type_abstract_collection__MapValuesIteratormodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef, /* MapValuesIterator[HashMapValues#0, HashMapValues#1]: MapValuesIterator[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
+&type_hash_collection__HashMapmmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef, /* HashMap[HashMapValues#0, HashMapValues#1]: HashMap[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
+&type_abstract_collection__MapValuesIteratormmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef, /* MapValuesIterator[HashMapValues#0, HashMapValues#1]: MapValuesIterator[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
 NULL, /* empty */
 NULL, /* empty */
 NULL, /* empty */
@@ -7928,7 +9533,7 @@ NULL, /* empty */
 };
 /* runtime type Collection[HashMap[MType, Array[MVirtualTypeDef]]] */
 const struct type type_abstract_collection__Collectionhash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef = {
-1675,
+1724,
 "Collection[HashMap[MType, Array[MVirtualTypeDef]]]", /* class_name_string */
 2,
 0,
@@ -7937,103 +9542,103 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-1675, /* Collection[HashMap[MType, Array[MVirtualTypeDef]]] */
+1724, /* Collection[HashMap[MType, Array[MVirtualTypeDef]]] */
 -1, /* empty */
-164, /* Collection[Object] */
+170, /* Collection[Object] */
 },
 };
 /* runtime type NativeArray[nullable HashMapNode[MModule, HashMap[MType, Array[MVirtualTypeDef]]]] */
-const struct type type_array__NativeArraynullable_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef = {
-536,
+const struct type type_array__NativeArraynullable_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef = {
+566,
 "NativeArray[nullable HashMapNode[MModule, HashMap[MType, Array[MVirtualTypeDef]]]]", /* class_name_string */
 2,
 0,
-&resolution_table_array__NativeArraynullable_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef,
+&resolution_table_array__NativeArraynullable_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef,
 3,
 {
 0, /* nullable Object */
 1, /* Object */
-536, /* NativeArray[nullable HashMapNode[MModule, HashMap[MType, Array[MVirtualTypeDef]]]] */
+566, /* NativeArray[nullable HashMapNode[MModule, HashMap[MType, Array[MVirtualTypeDef]]]] */
 },
 };
-const struct types resolution_table_array__NativeArraynullable_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef = {
+const struct types resolution_table_array__NativeArraynullable_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef = {
 0, /* dummy */
 {
-&type_nullable_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef, /* NativeArray#0: nullable HashMapNode[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
-&type_array__NativeArraynullable_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef, /* NativeArray[NativeArray#0]: NativeArray[nullable HashMapNode[MModule, HashMap[MType, Array[MVirtualTypeDef]]]] */
+&type_nullable_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef, /* NativeArray#0: nullable HashMapNode[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
+&type_array__NativeArraynullable_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef, /* NativeArray[NativeArray#0]: NativeArray[nullable HashMapNode[MModule, HashMap[MType, Array[MVirtualTypeDef]]]] */
 }
 };
 /* runtime type HashMapNode[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
-const struct type type_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef = {
-1676,
+const struct type type_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef = {
+1725,
 "HashMapNode[MModule, HashMap[MType, Array[MVirtualTypeDef]]]", /* class_name_string */
 3,
 0,
-&resolution_table_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef,
+&resolution_table_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-156, /* nullable HashMapNode[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
-1676, /* HashMapNode[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
+162, /* nullable HashMapNode[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
+1725, /* HashMapNode[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
 },
 };
-const struct types resolution_table_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef = {
+const struct types resolution_table_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef = {
 0, /* dummy */
 {
-&type_model_base__MModule, /* HashMapNode#0: MModule */
+&type_mmodule__MModule, /* HashMapNode#0: MModule */
 &type_hash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef, /* HashMapNode#1: HashMap[MType, Array[MVirtualTypeDef]] */
-&type_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef, /* N: HashMapNode[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
-&type_model_base__MModule, /* HashNode#0: MModule */
+&type_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef, /* N: HashMapNode[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
+&type_mmodule__MModule, /* HashNode#0: MModule */
 }
 };
 /* runtime type nullable HashMapNode[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
-const struct type type_nullable_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef = {
-156,
+const struct type type_nullable_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef = {
+162,
 "nullable HashMapNode[MModule, HashMap[MType, Array[MVirtualTypeDef]]]", /* class_name_string */
 2,
 1,
-&resolution_table_nullable_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef,
+&resolution_table_nullable_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef,
 3,
 {
 0, /* nullable Object */
 -1, /* empty */
-156, /* nullable HashMapNode[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
+162, /* nullable HashMapNode[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
 },
 };
-const struct types resolution_table_nullable_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef = {
+const struct types resolution_table_nullable_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef = {
 0, /* dummy */
 {
-&type_model_base__MModule, /* HashMapNode#0: MModule */
+&type_mmodule__MModule, /* HashMapNode#0: MModule */
 &type_hash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef, /* HashMapNode#1: HashMap[MType, Array[MVirtualTypeDef]] */
-&type_hash_collection__HashMapNodemodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef, /* N: HashMapNode[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
-&type_model_base__MModule, /* HashNode#0: MModule */
+&type_hash_collection__HashMapNodemmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef, /* N: HashMapNode[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
+&type_mmodule__MModule, /* HashNode#0: MModule */
 }
 };
 /* runtime type HashMapIterator[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
-const struct type type_hash_collection__HashMapIteratormodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef = {
-1677,
+const struct type type_hash_collection__HashMapIteratormmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef = {
+1726,
 "HashMapIterator[MModule, HashMap[MType, Array[MVirtualTypeDef]]]", /* class_name_string */
 3,
 0,
-&resolution_table_hash_collection__HashMapIteratormodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef,
+&resolution_table_hash_collection__HashMapIteratormmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef,
 4,
 {
 0, /* nullable Object */
 1, /* Object */
-537, /* MapIterator[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
-1677, /* HashMapIterator[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
+567, /* MapIterator[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
+1726, /* HashMapIterator[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
 },
 };
-const struct types resolution_table_hash_collection__HashMapIteratormodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef = {
+const struct types resolution_table_hash_collection__HashMapIteratormmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef = {
 0, /* dummy */
 {
-&type_hash_collection__HashMapmodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef, /* HashMap[HashMapIterator#0, HashMapIterator#1]: HashMap[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
+&type_hash_collection__HashMapmmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef, /* HashMap[HashMapIterator#0, HashMapIterator#1]: HashMap[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
 }
 };
 /* runtime type MapIterator[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
-const struct type type_abstract_collection__MapIteratormodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef = {
-537,
+const struct type type_abstract_collection__MapIteratormmodule__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MVirtualTypeDef = {
+567,
 "MapIterator[MModule, HashMap[MType, Array[MVirtualTypeDef]]]", /* class_name_string */
 2,
 0,
@@ -8042,12 +9647,12 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-537, /* MapIterator[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
+567, /* MapIterator[MModule, HashMap[MType, Array[MVirtualTypeDef]]] */
 },
 };
 /* runtime type HashMapKeys[MType, Array[MVirtualTypeDef]] */
 const struct type type_hash_collection__HashMapKeysmodel__MTypearray__Arraymodel__MVirtualTypeDef = {
-2183,
+2252,
 "HashMapKeys[MType, Array[MVirtualTypeDef]]", /* class_name_string */
 2,
 0,
@@ -8056,12 +9661,12 @@ const struct type type_hash_collection__HashMapKeysmodel__MTypearray__Arraymodel
 {
 0, /* nullable Object */
 1, /* Object */
-2183, /* HashMapKeys[MType, Array[MVirtualTypeDef]] */
+2252, /* HashMapKeys[MType, Array[MVirtualTypeDef]] */
 -1, /* empty */
-164, /* Collection[Object] */
-173, /* Collection[nullable MType] */
+170, /* Collection[Object] */
+180, /* Collection[nullable MType] */
 -1, /* empty */
-1737, /* Collection[MType] */
+1791, /* Collection[MType] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapKeysmodel__MTypearray__Arraymodel__MVirtualTypeDef = {
@@ -8085,7 +9690,7 @@ NULL, /* empty */
 };
 /* runtime type HashMapValues[MType, Array[MVirtualTypeDef]] */
 const struct type type_hash_collection__HashMapValuesmodel__MTypearray__Arraymodel__MVirtualTypeDef = {
-2184,
+2253,
 "HashMapValues[MType, Array[MVirtualTypeDef]]", /* class_name_string */
 3,
 0,
@@ -8094,10 +9699,10 @@ const struct type type_hash_collection__HashMapValuesmodel__MTypearray__Arraymod
 {
 0, /* nullable Object */
 1, /* Object */
-1488, /* Collection[Array[nullable MPropDef]] */
-2184, /* HashMapValues[MType, Array[MVirtualTypeDef]] */
-164, /* Collection[Object] */
-1888, /* Collection[Array[MVirtualTypeDef]] */
+1525, /* Collection[Array[nullable MPropDef]] */
+2253, /* HashMapValues[MType, Array[MVirtualTypeDef]] */
+170, /* Collection[Object] */
+1948, /* Collection[Array[MVirtualTypeDef]] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapValuesmodel__MTypearray__Arraymodel__MVirtualTypeDef = {
@@ -8121,7 +9726,7 @@ NULL, /* empty */
 };
 /* runtime type Collection[Array[MVirtualTypeDef]] */
 const struct type type_abstract_collection__Collectionarray__Arraymodel__MVirtualTypeDef = {
-1888,
+1948,
 "Collection[Array[MVirtualTypeDef]]", /* class_name_string */
 5,
 0,
@@ -8130,15 +9735,15 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-1488, /* Collection[Array[nullable MPropDef]] */
+1525, /* Collection[Array[nullable MPropDef]] */
 -1, /* empty */
-164, /* Collection[Object] */
-1888, /* Collection[Array[MVirtualTypeDef]] */
+170, /* Collection[Object] */
+1948, /* Collection[Array[MVirtualTypeDef]] */
 },
 };
 /* runtime type NativeArray[nullable HashMapNode[MType, Array[MVirtualTypeDef]]] */
 const struct type type_array__NativeArraynullable_hash_collection__HashMapNodemodel__MTypearray__Arraymodel__MVirtualTypeDef = {
-538,
+568,
 "NativeArray[nullable HashMapNode[MType, Array[MVirtualTypeDef]]]", /* class_name_string */
 2,
 0,
@@ -8147,7 +9752,7 @@ const struct type type_array__NativeArraynullable_hash_collection__HashMapNodemo
 {
 0, /* nullable Object */
 1, /* Object */
-538, /* NativeArray[nullable HashMapNode[MType, Array[MVirtualTypeDef]]] */
+568, /* NativeArray[nullable HashMapNode[MType, Array[MVirtualTypeDef]]] */
 },
 };
 const struct types resolution_table_array__NativeArraynullable_hash_collection__HashMapNodemodel__MTypearray__Arraymodel__MVirtualTypeDef = {
@@ -8159,7 +9764,7 @@ const struct types resolution_table_array__NativeArraynullable_hash_collection__
 };
 /* runtime type HashMapNode[MType, Array[MVirtualTypeDef]] */
 const struct type type_hash_collection__HashMapNodemodel__MTypearray__Arraymodel__MVirtualTypeDef = {
-1678,
+1727,
 "HashMapNode[MType, Array[MVirtualTypeDef]]", /* class_name_string */
 3,
 0,
@@ -8168,8 +9773,8 @@ const struct type type_hash_collection__HashMapNodemodel__MTypearray__Arraymodel
 {
 0, /* nullable Object */
 1, /* Object */
-157, /* nullable HashMapNode[MType, Array[MVirtualTypeDef]] */
-1678, /* HashMapNode[MType, Array[MVirtualTypeDef]] */
+163, /* nullable HashMapNode[MType, Array[MVirtualTypeDef]] */
+1727, /* HashMapNode[MType, Array[MVirtualTypeDef]] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapNodemodel__MTypearray__Arraymodel__MVirtualTypeDef = {
@@ -8183,7 +9788,7 @@ const struct types resolution_table_hash_collection__HashMapNodemodel__MTypearra
 };
 /* runtime type nullable HashMapNode[MType, Array[MVirtualTypeDef]] */
 const struct type type_nullable_hash_collection__HashMapNodemodel__MTypearray__Arraymodel__MVirtualTypeDef = {
-157,
+163,
 "nullable HashMapNode[MType, Array[MVirtualTypeDef]]", /* class_name_string */
 2,
 1,
@@ -8192,7 +9797,7 @@ const struct type type_nullable_hash_collection__HashMapNodemodel__MTypearray__A
 {
 0, /* nullable Object */
 -1, /* empty */
-157, /* nullable HashMapNode[MType, Array[MVirtualTypeDef]] */
+163, /* nullable HashMapNode[MType, Array[MVirtualTypeDef]] */
 },
 };
 const struct types resolution_table_nullable_hash_collection__HashMapNodemodel__MTypearray__Arraymodel__MVirtualTypeDef = {
@@ -8206,7 +9811,7 @@ const struct types resolution_table_nullable_hash_collection__HashMapNodemodel__
 };
 /* runtime type HashMapIterator[MType, Array[MVirtualTypeDef]] */
 const struct type type_hash_collection__HashMapIteratormodel__MTypearray__Arraymodel__MVirtualTypeDef = {
-1679,
+1728,
 "HashMapIterator[MType, Array[MVirtualTypeDef]]", /* class_name_string */
 3,
 0,
@@ -8215,8 +9820,8 @@ const struct type type_hash_collection__HashMapIteratormodel__MTypearray__Arraym
 {
 0, /* nullable Object */
 1, /* Object */
-539, /* MapIterator[MType, Array[MVirtualTypeDef]] */
-1679, /* HashMapIterator[MType, Array[MVirtualTypeDef]] */
+569, /* MapIterator[MType, Array[MVirtualTypeDef]] */
+1728, /* HashMapIterator[MType, Array[MVirtualTypeDef]] */
 },
 };
 const struct types resolution_table_hash_collection__HashMapIteratormodel__MTypearray__Arraymodel__MVirtualTypeDef = {
@@ -8227,7 +9832,7 @@ const struct types resolution_table_hash_collection__HashMapIteratormodel__MType
 };
 /* runtime type MapIterator[MType, Array[MVirtualTypeDef]] */
 const struct type type_abstract_collection__MapIteratormodel__MTypearray__Arraymodel__MVirtualTypeDef = {
-539,
+569,
 "MapIterator[MType, Array[MVirtualTypeDef]]", /* class_name_string */
 2,
 0,
@@ -8236,12 +9841,12 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-539, /* MapIterator[MType, Array[MVirtualTypeDef]] */
+569, /* MapIterator[MType, Array[MVirtualTypeDef]] */
 },
 };
 /* runtime type Array[POSetElement[Phase]] */
 const struct type type_array__Arrayposet__POSetElementphase__Phase = {
-2529,
+2603,
 "Array[POSetElement[Phase]]", /* class_name_string */
 7,
 0,
@@ -8250,14 +9855,14 @@ const struct type type_array__Arrayposet__POSetElementphase__Phase = {
 {
 0, /* nullable Object */
 1, /* Object */
-1581, /* Collection[POSetElement[Phase]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-2407, /* AbstractArrayRead[POSetElement[Phase]] */
-1728, /* AbstractArrayRead[Object] */
-2529, /* Array[POSetElement[Phase]] */
+1625, /* Collection[POSetElement[Phase]] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
+2473, /* AbstractArrayRead[POSetElement[Phase]] */
+1782, /* AbstractArrayRead[Object] */
+2603, /* Array[POSetElement[Phase]] */
 -1, /* empty */
-1911, /* Array[Object] */
+1973, /* Array[Object] */
 },
 };
 const struct types resolution_table_array__Arrayposet__POSetElementphase__Phase = {
@@ -8286,7 +9891,7 @@ NULL, /* empty (AbstractArray[AbstractArrayRead#0]: AbstractArray[POSetElement[P
 };
 /* runtime type AbstractArrayRead[POSetElement[Phase]] */
 const struct type type_array__AbstractArrayReadposet__POSetElementphase__Phase = {
-2407,
+2473,
 "AbstractArrayRead[POSetElement[Phase]]", /* class_name_string */
 5,
 0,
@@ -8295,1706 +9900,99 @@ NULL,
 {
 0, /* nullable Object */
 1, /* Object */
-1581, /* Collection[POSetElement[Phase]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-2407, /* AbstractArrayRead[POSetElement[Phase]] */
-1728, /* AbstractArrayRead[Object] */
+1625, /* Collection[POSetElement[Phase]] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
+2473, /* AbstractArrayRead[POSetElement[Phase]] */
+1782, /* AbstractArrayRead[Object] */
 },
 };
+/* runtime type ArrayIterator[Array[MProject]] */
+const struct type type_array__ArrayIteratorarray__Arraymproject__MProject = {
+1729,
+"ArrayIterator[Array[MProject]]", /* class_name_string */
+3,
+0,
+&resolution_table_array__ArrayIteratorarray__Arraymproject__MProject,
+4,
+{
+0, /* nullable Object */
+1, /* Object */
+289, /* ArrayIterator[Object] */
+1729, /* ArrayIterator[Array[MProject]] */
+},
+};
+const struct types resolution_table_array__ArrayIteratorarray__Arraymproject__MProject = {
+0, /* dummy */
+{
+&type_array__AbstractArrayReadarray__Arraymproject__MProject, /* AbstractArrayRead[ArrayIterator#0]: AbstractArrayRead[Array[MProject]] */
+&type_array__Arrayarray__Arraymproject__MProject, /* Array[Iterator#0]: Array[Array[MProject]] */
+}
+};
+/* runtime type NativeArray[Array[MProject]] */
+const struct type type_array__NativeArrayarray__Arraymproject__MProject = {
+1730,
+"NativeArray[Array[MProject]]", /* class_name_string */
+3,
+0,
+&resolution_table_array__NativeArrayarray__Arraymproject__MProject,
+4,
+{
+0, /* nullable Object */
+1, /* Object */
+193, /* NativeArray[Object] */
+1730, /* NativeArray[Array[MProject]] */
+},
+};
+const struct types resolution_table_array__NativeArrayarray__Arraymproject__MProject = {
+0, /* dummy */
+{
+&type_array__Arraymproject__MProject, /* NativeArray#0: Array[MProject] */
+&type_array__NativeArrayarray__Arraymproject__MProject, /* NativeArray[NativeArray#0]: NativeArray[Array[MProject]] */
+}
+};
 /* runtime type Array[POSetElement[MModule]] */
-const struct type type_array__Arrayposet__POSetElementmodel_base__MModule = {
-2530,
+const struct type type_array__Arrayposet__POSetElementmmodule__MModule = {
+2604,
 "Array[POSetElement[MModule]]", /* class_name_string */
 7,
 0,
-&resolution_table_array__Arrayposet__POSetElementmodel_base__MModule,
+&resolution_table_array__Arrayposet__POSetElementmmodule__MModule,
 10,
 {
 0, /* nullable Object */
 1, /* Object */
-1584, /* Collection[POSetElement[MModule]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-2408, /* AbstractArrayRead[POSetElement[MModule]] */
-1728, /* AbstractArrayRead[Object] */
-2530, /* Array[POSetElement[MModule]] */
+1628, /* Collection[POSetElement[MModule]] */
+169, /* SequenceRead[nullable Object] */
+170, /* Collection[Object] */
+2474, /* AbstractArrayRead[POSetElement[MModule]] */
+1782, /* AbstractArrayRead[Object] */
+2604, /* Array[POSetElement[MModule]] */
 -1, /* empty */
-1911, /* Array[Object] */
+1973, /* Array[Object] */
 },
 };
-const struct types resolution_table_array__Arrayposet__POSetElementmodel_base__MModule = {
+const struct types resolution_table_array__Arrayposet__POSetElementmmodule__MModule = {
 0, /* dummy */
 {
-&type_array__Arrayposet__POSetElementmodel_base__MModule, /* Array[Array#0]: Array[POSetElement[MModule]] */
-&type_array__NativeArrayposet__POSetElementmodel_base__MModule, /* NativeArray[Array#0]: NativeArray[POSetElement[MModule]] */
-&type_poset__POSetElementmodel_base__MModule, /* Sequence#0: POSetElement[MModule] */
-&type_poset__POSetElementmodel_base__MModule, /* SimpleCollection#0: POSetElement[MModule] */
-&type_abstract_collection__Collectionposet__POSetElementmodel_base__MModule, /* Collection[Array#0]: Collection[POSetElement[MModule]] */
-&type_poset__POSetElementmodel_base__MModule, /* Array#0: POSetElement[MModule] */
-&type_array__NativeArrayposet__POSetElementmodel_base__MModule, /* NativeArray[ArrayCapable#0]: NativeArray[POSetElement[MModule]] */
-&type_poset__POSetElementmodel_base__MModule, /* AbstractArray#0: POSetElement[MModule] */
-&type_poset__POSetElementmodel_base__MModule, /* RemovableCollection#0: POSetElement[MModule] */
-&type_abstract_collection__Collectionposet__POSetElementmodel_base__MModule, /* Collection[Sequence#0]: Collection[POSetElement[MModule]] */
-&type_array__Arrayposet__POSetElementmodel_base__MModule, /* Array[Sequence#0]: Array[POSetElement[MModule]] */
-&type_abstract_collection__Collectionposet__POSetElementmodel_base__MModule, /* Collection[SimpleCollection#0]: Collection[POSetElement[MModule]] */
-&type_poset__POSetElementmodel_base__MModule, /* Collection#0: POSetElement[MModule] */
-&type_abstract_collection__Collectionposet__POSetElementmodel_base__MModule, /* Collection[Collection#0]: Collection[POSetElement[MModule]] */
-&type_poset__POSetElementmodel_base__MModule, /* SequenceRead#0: POSetElement[MModule] */
-&type_poset__POSetElementmodel_base__MModule, /* AbstractArrayRead#0: POSetElement[MModule] */
-&type_array__Arrayposet__POSetElementmodel_base__MModule, /* Array[AbstractArrayRead#0]: Array[POSetElement[MModule]] */
+&type_array__Arrayposet__POSetElementmmodule__MModule, /* Array[Array#0]: Array[POSetElement[MModule]] */
+&type_array__NativeArrayposet__POSetElementmmodule__MModule, /* NativeArray[Array#0]: NativeArray[POSetElement[MModule]] */
+&type_poset__POSetElementmmodule__MModule, /* Sequence#0: POSetElement[MModule] */
+&type_poset__POSetElementmmodule__MModule, /* SimpleCollection#0: POSetElement[MModule] */
+&type_abstract_collection__Collectionposet__POSetElementmmodule__MModule, /* Collection[Array#0]: Collection[POSetElement[MModule]] */
+&type_poset__POSetElementmmodule__MModule, /* Array#0: POSetElement[MModule] */
+&type_array__NativeArrayposet__POSetElementmmodule__MModule, /* NativeArray[ArrayCapable#0]: NativeArray[POSetElement[MModule]] */
+&type_poset__POSetElementmmodule__MModule, /* AbstractArray#0: POSetElement[MModule] */
+&type_poset__POSetElementmmodule__MModule, /* RemovableCollection#0: POSetElement[MModule] */
+&type_abstract_collection__Collectionposet__POSetElementmmodule__MModule, /* Collection[Sequence#0]: Collection[POSetElement[MModule]] */
+&type_array__Arrayposet__POSetElementmmodule__MModule, /* Array[Sequence#0]: Array[POSetElement[MModule]] */
+&type_abstract_collection__Collectionposet__POSetElementmmodule__MModule, /* Collection[SimpleCollection#0]: Collection[POSetElement[MModule]] */
+&type_poset__POSetElementmmodule__MModule, /* Collection#0: POSetElement[MModule] */
+&type_abstract_collection__Collectionposet__POSetElementmmodule__MModule, /* Collection[Collection#0]: Collection[POSetElement[MModule]] */
+&type_poset__POSetElementmmodule__MModule, /* SequenceRead#0: POSetElement[MModule] */
+&type_poset__POSetElementmmodule__MModule, /* AbstractArrayRead#0: POSetElement[MModule] */
+&type_array__Arrayposet__POSetElementmmodule__MModule, /* Array[AbstractArrayRead#0]: Array[POSetElement[MModule]] */
 NULL, /* empty (AbstractArray[AbstractArrayRead#0]: AbstractArray[POSetElement[MModule]] not a live type) */
-&type_array__ArrayIteratorposet__POSetElementmodel_base__MModule, /* ArrayIterator[AbstractArrayRead#0]: ArrayIterator[POSetElement[MModule]] */
-}
-};
-/* runtime type AbstractArrayRead[POSetElement[MModule]] */
-const struct type type_array__AbstractArrayReadposet__POSetElementmodel_base__MModule = {
-2408,
-"AbstractArrayRead[POSetElement[MModule]]", /* class_name_string */
-5,
-0,
-NULL,
-7,
-{
-0, /* nullable Object */
-1, /* Object */
-1584, /* Collection[POSetElement[MModule]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-2408, /* AbstractArrayRead[POSetElement[MModule]] */
-1728, /* AbstractArrayRead[Object] */
-},
-};
-/* runtime type ArrayIterator[Array[MModule]] */
-const struct type type_array__ArrayIteratorarray__Arraymodel_base__MModule = {
-1680,
-"ArrayIterator[Array[MModule]]", /* class_name_string */
-3,
-0,
-&resolution_table_array__ArrayIteratorarray__Arraymodel_base__MModule,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-277, /* ArrayIterator[Object] */
-1680, /* ArrayIterator[Array[MModule]] */
-},
-};
-const struct types resolution_table_array__ArrayIteratorarray__Arraymodel_base__MModule = {
-0, /* dummy */
-{
-&type_array__AbstractArrayReadarray__Arraymodel_base__MModule, /* AbstractArrayRead[ArrayIterator#0]: AbstractArrayRead[Array[MModule]] */
-&type_array__Arrayarray__Arraymodel_base__MModule, /* Array[Iterator#0]: Array[Array[MModule]] */
-}
-};
-/* runtime type NativeArray[Array[MModule]] */
-const struct type type_array__NativeArrayarray__Arraymodel_base__MModule = {
-1681,
-"NativeArray[Array[MModule]]", /* class_name_string */
-3,
-0,
-&resolution_table_array__NativeArrayarray__Arraymodel_base__MModule,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-185, /* NativeArray[Object] */
-1681, /* NativeArray[Array[MModule]] */
-},
-};
-const struct types resolution_table_array__NativeArrayarray__Arraymodel_base__MModule = {
-0, /* dummy */
-{
-&type_array__Arraymodel_base__MModule, /* NativeArray#0: Array[MModule] */
-&type_array__NativeArrayarray__Arraymodel_base__MModule, /* NativeArray[NativeArray#0]: NativeArray[Array[MModule]] */
-}
-};
-/* runtime type Array[POSetElement[MClassDef]] */
-const struct type type_array__Arrayposet__POSetElementmodel__MClassDef = {
-2531,
-"Array[POSetElement[MClassDef]]", /* class_name_string */
-7,
-0,
-&resolution_table_array__Arrayposet__POSetElementmodel__MClassDef,
-10,
-{
-0, /* nullable Object */
-1, /* Object */
-1587, /* Collection[POSetElement[MClassDef]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-2409, /* AbstractArrayRead[POSetElement[MClassDef]] */
-1728, /* AbstractArrayRead[Object] */
-2531, /* Array[POSetElement[MClassDef]] */
--1, /* empty */
-1911, /* Array[Object] */
-},
-};
-const struct types resolution_table_array__Arrayposet__POSetElementmodel__MClassDef = {
-0, /* dummy */
-{
-&type_array__Arrayposet__POSetElementmodel__MClassDef, /* Array[Array#0]: Array[POSetElement[MClassDef]] */
-&type_array__NativeArrayposet__POSetElementmodel__MClassDef, /* NativeArray[Array#0]: NativeArray[POSetElement[MClassDef]] */
-&type_poset__POSetElementmodel__MClassDef, /* Sequence#0: POSetElement[MClassDef] */
-&type_poset__POSetElementmodel__MClassDef, /* SimpleCollection#0: POSetElement[MClassDef] */
-&type_abstract_collection__Collectionposet__POSetElementmodel__MClassDef, /* Collection[Array#0]: Collection[POSetElement[MClassDef]] */
-&type_poset__POSetElementmodel__MClassDef, /* Array#0: POSetElement[MClassDef] */
-&type_array__NativeArrayposet__POSetElementmodel__MClassDef, /* NativeArray[ArrayCapable#0]: NativeArray[POSetElement[MClassDef]] */
-&type_poset__POSetElementmodel__MClassDef, /* AbstractArray#0: POSetElement[MClassDef] */
-&type_poset__POSetElementmodel__MClassDef, /* RemovableCollection#0: POSetElement[MClassDef] */
-&type_abstract_collection__Collectionposet__POSetElementmodel__MClassDef, /* Collection[Sequence#0]: Collection[POSetElement[MClassDef]] */
-&type_array__Arrayposet__POSetElementmodel__MClassDef, /* Array[Sequence#0]: Array[POSetElement[MClassDef]] */
-&type_abstract_collection__Collectionposet__POSetElementmodel__MClassDef, /* Collection[SimpleCollection#0]: Collection[POSetElement[MClassDef]] */
-&type_poset__POSetElementmodel__MClassDef, /* Collection#0: POSetElement[MClassDef] */
-&type_abstract_collection__Collectionposet__POSetElementmodel__MClassDef, /* Collection[Collection#0]: Collection[POSetElement[MClassDef]] */
-&type_poset__POSetElementmodel__MClassDef, /* SequenceRead#0: POSetElement[MClassDef] */
-&type_poset__POSetElementmodel__MClassDef, /* AbstractArrayRead#0: POSetElement[MClassDef] */
-&type_array__Arrayposet__POSetElementmodel__MClassDef, /* Array[AbstractArrayRead#0]: Array[POSetElement[MClassDef]] */
-NULL, /* empty (AbstractArray[AbstractArrayRead#0]: AbstractArray[POSetElement[MClassDef]] not a live type) */
-&type_array__ArrayIteratorposet__POSetElementmodel__MClassDef, /* ArrayIterator[AbstractArrayRead#0]: ArrayIterator[POSetElement[MClassDef]] */
-}
-};
-/* runtime type AbstractArrayRead[POSetElement[MClassDef]] */
-const struct type type_array__AbstractArrayReadposet__POSetElementmodel__MClassDef = {
-2409,
-"AbstractArrayRead[POSetElement[MClassDef]]", /* class_name_string */
-5,
-0,
-NULL,
-7,
-{
-0, /* nullable Object */
-1, /* Object */
-1587, /* Collection[POSetElement[MClassDef]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-2409, /* AbstractArrayRead[POSetElement[MClassDef]] */
-1728, /* AbstractArrayRead[Object] */
-},
-};
-/* runtime type Array[POSetElement[MClassType]] */
-const struct type type_array__Arrayposet__POSetElementmodel__MClassType = {
-2589,
-"Array[POSetElement[MClassType]]", /* class_name_string */
-11,
-0,
-&resolution_table_array__Arrayposet__POSetElementmodel__MClassType,
-12,
-{
-0, /* nullable Object */
-1, /* Object */
-1590, /* Collection[POSetElement[MType]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-1860, /* Collection[POSetElement[MClassType]] */
-1728, /* AbstractArrayRead[Object] */
-2410, /* AbstractArrayRead[POSetElement[MType]] */
-2532, /* Array[POSetElement[MType]] */
-1911, /* Array[Object] */
-2533, /* AbstractArrayRead[POSetElement[MClassType]] */
-2589, /* Array[POSetElement[MClassType]] */
-},
-};
-const struct types resolution_table_array__Arrayposet__POSetElementmodel__MClassType = {
-0, /* dummy */
-{
-&type_array__Arrayposet__POSetElementmodel__MClassType, /* Array[Array#0]: Array[POSetElement[MClassType]] */
-&type_array__NativeArrayposet__POSetElementmodel__MClassType, /* NativeArray[Array#0]: NativeArray[POSetElement[MClassType]] */
-&type_poset__POSetElementmodel__MClassType, /* Sequence#0: POSetElement[MClassType] */
-&type_poset__POSetElementmodel__MClassType, /* SimpleCollection#0: POSetElement[MClassType] */
-&type_abstract_collection__Collectionposet__POSetElementmodel__MClassType, /* Collection[Array#0]: Collection[POSetElement[MClassType]] */
-&type_poset__POSetElementmodel__MClassType, /* Array#0: POSetElement[MClassType] */
-&type_array__NativeArrayposet__POSetElementmodel__MClassType, /* NativeArray[ArrayCapable#0]: NativeArray[POSetElement[MClassType]] */
-&type_poset__POSetElementmodel__MClassType, /* AbstractArray#0: POSetElement[MClassType] */
-&type_poset__POSetElementmodel__MClassType, /* RemovableCollection#0: POSetElement[MClassType] */
-&type_abstract_collection__Collectionposet__POSetElementmodel__MClassType, /* Collection[Sequence#0]: Collection[POSetElement[MClassType]] */
-&type_array__Arrayposet__POSetElementmodel__MClassType, /* Array[Sequence#0]: Array[POSetElement[MClassType]] */
-&type_abstract_collection__Collectionposet__POSetElementmodel__MClassType, /* Collection[SimpleCollection#0]: Collection[POSetElement[MClassType]] */
-&type_poset__POSetElementmodel__MClassType, /* Collection#0: POSetElement[MClassType] */
-&type_abstract_collection__Collectionposet__POSetElementmodel__MClassType, /* Collection[Collection#0]: Collection[POSetElement[MClassType]] */
-&type_poset__POSetElementmodel__MClassType, /* SequenceRead#0: POSetElement[MClassType] */
-&type_poset__POSetElementmodel__MClassType, /* AbstractArrayRead#0: POSetElement[MClassType] */
-&type_array__Arrayposet__POSetElementmodel__MClassType, /* Array[AbstractArrayRead#0]: Array[POSetElement[MClassType]] */
-NULL, /* empty (AbstractArray[AbstractArrayRead#0]: AbstractArray[POSetElement[MClassType]] not a live type) */
-&type_array__ArrayIteratorposet__POSetElementmodel__MClassType, /* ArrayIterator[AbstractArrayRead#0]: ArrayIterator[POSetElement[MClassType]] */
-}
-};
-/* runtime type Array[POSetElement[MType]] */
-const struct type type_array__Arrayposet__POSetElementmodel__MType = {
-2532,
-"Array[POSetElement[MType]]", /* class_name_string */
-8,
-0,
-&resolution_table_array__Arrayposet__POSetElementmodel__MType,
-10,
-{
-0, /* nullable Object */
-1, /* Object */
-1590, /* Collection[POSetElement[MType]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
--1, /* empty */
-1728, /* AbstractArrayRead[Object] */
-2410, /* AbstractArrayRead[POSetElement[MType]] */
-2532, /* Array[POSetElement[MType]] */
-1911, /* Array[Object] */
-},
-};
-const struct types resolution_table_array__Arrayposet__POSetElementmodel__MType = {
-0, /* dummy */
-{
-&type_array__Arrayposet__POSetElementmodel__MType, /* Array[Array#0]: Array[POSetElement[MType]] */
-&type_array__NativeArrayposet__POSetElementmodel__MType, /* NativeArray[Array#0]: NativeArray[POSetElement[MType]] */
-&type_poset__POSetElementmodel__MType, /* Sequence#0: POSetElement[MType] */
-&type_poset__POSetElementmodel__MType, /* SimpleCollection#0: POSetElement[MType] */
-&type_abstract_collection__Collectionposet__POSetElementmodel__MType, /* Collection[Array#0]: Collection[POSetElement[MType]] */
-&type_poset__POSetElementmodel__MType, /* Array#0: POSetElement[MType] */
-&type_array__NativeArrayposet__POSetElementmodel__MType, /* NativeArray[ArrayCapable#0]: NativeArray[POSetElement[MType]] */
-&type_poset__POSetElementmodel__MType, /* AbstractArray#0: POSetElement[MType] */
-&type_poset__POSetElementmodel__MType, /* RemovableCollection#0: POSetElement[MType] */
-&type_abstract_collection__Collectionposet__POSetElementmodel__MType, /* Collection[Sequence#0]: Collection[POSetElement[MType]] */
-&type_array__Arrayposet__POSetElementmodel__MType, /* Array[Sequence#0]: Array[POSetElement[MType]] */
-&type_abstract_collection__Collectionposet__POSetElementmodel__MType, /* Collection[SimpleCollection#0]: Collection[POSetElement[MType]] */
-&type_poset__POSetElementmodel__MType, /* Collection#0: POSetElement[MType] */
-&type_abstract_collection__Collectionposet__POSetElementmodel__MType, /* Collection[Collection#0]: Collection[POSetElement[MType]] */
-&type_poset__POSetElementmodel__MType, /* SequenceRead#0: POSetElement[MType] */
-&type_poset__POSetElementmodel__MType, /* AbstractArrayRead#0: POSetElement[MType] */
-&type_array__Arrayposet__POSetElementmodel__MType, /* Array[AbstractArrayRead#0]: Array[POSetElement[MType]] */
-NULL, /* empty (AbstractArray[AbstractArrayRead#0]: AbstractArray[POSetElement[MType]] not a live type) */
-&type_array__ArrayIteratorposet__POSetElementmodel__MType, /* ArrayIterator[AbstractArrayRead#0]: ArrayIterator[POSetElement[MType]] */
-}
-};
-/* runtime type AbstractArrayRead[POSetElement[MClassType]] */
-const struct type type_array__AbstractArrayReadposet__POSetElementmodel__MClassType = {
-2533,
-"AbstractArrayRead[POSetElement[MClassType]]", /* class_name_string */
-10,
-0,
-NULL,
-11,
-{
-0, /* nullable Object */
-1, /* Object */
-1590, /* Collection[POSetElement[MType]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-1860, /* Collection[POSetElement[MClassType]] */
-1728, /* AbstractArrayRead[Object] */
-2410, /* AbstractArrayRead[POSetElement[MType]] */
--1, /* empty */
--1, /* empty */
-2533, /* AbstractArrayRead[POSetElement[MClassType]] */
-},
-};
-/* runtime type AbstractArrayRead[POSetElement[MType]] */
-const struct type type_array__AbstractArrayReadposet__POSetElementmodel__MType = {
-2410,
-"AbstractArrayRead[POSetElement[MType]]", /* class_name_string */
-7,
-0,
-NULL,
-8,
-{
-0, /* nullable Object */
-1, /* Object */
-1590, /* Collection[POSetElement[MType]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
--1, /* empty */
-1728, /* AbstractArrayRead[Object] */
-2410, /* AbstractArrayRead[POSetElement[MType]] */
-},
-};
-/* runtime type ArrayIterator[Array[MClass]] */
-const struct type type_array__ArrayIteratorarray__Arraymodel__MClass = {
-1889,
-"ArrayIterator[Array[MClass]]", /* class_name_string */
-4,
-0,
-&resolution_table_array__ArrayIteratorarray__Arraymodel__MClass,
-5,
-{
-0, /* nullable Object */
-1, /* Object */
-277, /* ArrayIterator[Object] */
-1682, /* ArrayIterator[Array[nullable MClass]] */
-1889, /* ArrayIterator[Array[MClass]] */
-},
-};
-const struct types resolution_table_array__ArrayIteratorarray__Arraymodel__MClass = {
-0, /* dummy */
-{
-&type_array__AbstractArrayReadarray__Arraymodel__MClass, /* AbstractArrayRead[ArrayIterator#0]: AbstractArrayRead[Array[MClass]] */
-&type_array__Arrayarray__Arraymodel__MClass, /* Array[Iterator#0]: Array[Array[MClass]] */
-}
-};
-/* runtime type ArrayIterator[Array[nullable MClass]] */
-const struct type type_array__ArrayIteratorarray__Arraynullable_model__MClass = {
-1682,
-"ArrayIterator[Array[nullable MClass]]", /* class_name_string */
-3,
-0,
-&resolution_table_array__ArrayIteratorarray__Arraynullable_model__MClass,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-277, /* ArrayIterator[Object] */
-1682, /* ArrayIterator[Array[nullable MClass]] */
-},
-};
-const struct types resolution_table_array__ArrayIteratorarray__Arraynullable_model__MClass = {
-0, /* dummy */
-{
-&type_array__AbstractArrayReadarray__Arraynullable_model__MClass, /* AbstractArrayRead[ArrayIterator#0]: AbstractArrayRead[Array[nullable MClass]] */
-&type_array__Arrayarray__Arraynullable_model__MClass, /* Array[Iterator#0]: Array[Array[nullable MClass]] */
-}
-};
-/* runtime type NativeArray[Array[MClass]] */
-const struct type type_array__NativeArrayarray__Arraymodel__MClass = {
-1890,
-"NativeArray[Array[MClass]]", /* class_name_string */
-4,
-0,
-&resolution_table_array__NativeArrayarray__Arraymodel__MClass,
-5,
-{
-0, /* nullable Object */
-1, /* Object */
-185, /* NativeArray[Object] */
-1683, /* NativeArray[Array[nullable MClass]] */
-1890, /* NativeArray[Array[MClass]] */
-},
-};
-const struct types resolution_table_array__NativeArrayarray__Arraymodel__MClass = {
-0, /* dummy */
-{
-&type_array__Arraymodel__MClass, /* NativeArray#0: Array[MClass] */
-&type_array__NativeArrayarray__Arraymodel__MClass, /* NativeArray[NativeArray#0]: NativeArray[Array[MClass]] */
-}
-};
-/* runtime type NativeArray[Array[nullable MClass]] */
-const struct type type_array__NativeArrayarray__Arraynullable_model__MClass = {
-1683,
-"NativeArray[Array[nullable MClass]]", /* class_name_string */
-3,
-0,
-&resolution_table_array__NativeArrayarray__Arraynullable_model__MClass,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-185, /* NativeArray[Object] */
-1683, /* NativeArray[Array[nullable MClass]] */
-},
-};
-const struct types resolution_table_array__NativeArrayarray__Arraynullable_model__MClass = {
-0, /* dummy */
-{
-&type_array__Arraynullable_model__MClass, /* NativeArray#0: Array[nullable MClass] */
-&type_array__NativeArrayarray__Arraynullable_model__MClass, /* NativeArray[NativeArray#0]: NativeArray[Array[nullable MClass]] */
-}
-};
-/* runtime type ArrayIterator[Array[MProperty]] */
-const struct type type_array__ArrayIteratorarray__Arraymodel__MProperty = {
-1684,
-"ArrayIterator[Array[MProperty]]", /* class_name_string */
-3,
-0,
-&resolution_table_array__ArrayIteratorarray__Arraymodel__MProperty,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-277, /* ArrayIterator[Object] */
-1684, /* ArrayIterator[Array[MProperty]] */
-},
-};
-const struct types resolution_table_array__ArrayIteratorarray__Arraymodel__MProperty = {
-0, /* dummy */
-{
-&type_array__AbstractArrayReadarray__Arraymodel__MProperty, /* AbstractArrayRead[ArrayIterator#0]: AbstractArrayRead[Array[MProperty]] */
-&type_array__Arrayarray__Arraymodel__MProperty, /* Array[Iterator#0]: Array[Array[MProperty]] */
-}
-};
-/* runtime type NativeArray[Array[MProperty]] */
-const struct type type_array__NativeArrayarray__Arraymodel__MProperty = {
-1685,
-"NativeArray[Array[MProperty]]", /* class_name_string */
-3,
-0,
-&resolution_table_array__NativeArrayarray__Arraymodel__MProperty,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-185, /* NativeArray[Object] */
-1685, /* NativeArray[Array[MProperty]] */
-},
-};
-const struct types resolution_table_array__NativeArrayarray__Arraymodel__MProperty = {
-0, /* dummy */
-{
-&type_array__Arraymodel__MProperty, /* NativeArray#0: Array[MProperty] */
-&type_array__NativeArrayarray__Arraymodel__MProperty, /* NativeArray[NativeArray#0]: NativeArray[Array[MProperty]] */
-}
-};
-/* runtime type Array[HashMap2[MType, String, nullable MProperty]] */
-const struct type type_array__Arraymore_collections__HashMap2model__MTypestring__Stringnullable_model__MProperty = {
-2534,
-"Array[HashMap2[MType, String, nullable MProperty]]", /* class_name_string */
-7,
-0,
-&resolution_table_array__Arraymore_collections__HashMap2model__MTypestring__Stringnullable_model__MProperty,
-10,
-{
-0, /* nullable Object */
-1, /* Object */
-1595, /* Collection[HashMap2[MType, String, nullable MProperty]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-2411, /* AbstractArrayRead[HashMap2[MType, String, nullable MProperty]] */
-1728, /* AbstractArrayRead[Object] */
-2534, /* Array[HashMap2[MType, String, nullable MProperty]] */
--1, /* empty */
-1911, /* Array[Object] */
-},
-};
-const struct types resolution_table_array__Arraymore_collections__HashMap2model__MTypestring__Stringnullable_model__MProperty = {
-0, /* dummy */
-{
-&type_array__Arraymore_collections__HashMap2model__MTypestring__Stringnullable_model__MProperty, /* Array[Array#0]: Array[HashMap2[MType, String, nullable MProperty]] */
-&type_array__NativeArraymore_collections__HashMap2model__MTypestring__Stringnullable_model__MProperty, /* NativeArray[Array#0]: NativeArray[HashMap2[MType, String, nullable MProperty]] */
-&type_more_collections__HashMap2model__MTypestring__Stringnullable_model__MProperty, /* Sequence#0: HashMap2[MType, String, nullable MProperty] */
-&type_more_collections__HashMap2model__MTypestring__Stringnullable_model__MProperty, /* SimpleCollection#0: HashMap2[MType, String, nullable MProperty] */
-&type_abstract_collection__Collectionmore_collections__HashMap2model__MTypestring__Stringnullable_model__MProperty, /* Collection[Array#0]: Collection[HashMap2[MType, String, nullable MProperty]] */
-&type_more_collections__HashMap2model__MTypestring__Stringnullable_model__MProperty, /* Array#0: HashMap2[MType, String, nullable MProperty] */
-&type_array__NativeArraymore_collections__HashMap2model__MTypestring__Stringnullable_model__MProperty, /* NativeArray[ArrayCapable#0]: NativeArray[HashMap2[MType, String, nullable MProperty]] */
-&type_more_collections__HashMap2model__MTypestring__Stringnullable_model__MProperty, /* AbstractArray#0: HashMap2[MType, String, nullable MProperty] */
-&type_more_collections__HashMap2model__MTypestring__Stringnullable_model__MProperty, /* RemovableCollection#0: HashMap2[MType, String, nullable MProperty] */
-&type_abstract_collection__Collectionmore_collections__HashMap2model__MTypestring__Stringnullable_model__MProperty, /* Collection[Sequence#0]: Collection[HashMap2[MType, String, nullable MProperty]] */
-&type_array__Arraymore_collections__HashMap2model__MTypestring__Stringnullable_model__MProperty, /* Array[Sequence#0]: Array[HashMap2[MType, String, nullable MProperty]] */
-&type_abstract_collection__Collectionmore_collections__HashMap2model__MTypestring__Stringnullable_model__MProperty, /* Collection[SimpleCollection#0]: Collection[HashMap2[MType, String, nullable MProperty]] */
-&type_more_collections__HashMap2model__MTypestring__Stringnullable_model__MProperty, /* Collection#0: HashMap2[MType, String, nullable MProperty] */
-&type_abstract_collection__Collectionmore_collections__HashMap2model__MTypestring__Stringnullable_model__MProperty, /* Collection[Collection#0]: Collection[HashMap2[MType, String, nullable MProperty]] */
-&type_more_collections__HashMap2model__MTypestring__Stringnullable_model__MProperty, /* SequenceRead#0: HashMap2[MType, String, nullable MProperty] */
-&type_more_collections__HashMap2model__MTypestring__Stringnullable_model__MProperty, /* AbstractArrayRead#0: HashMap2[MType, String, nullable MProperty] */
-&type_array__Arraymore_collections__HashMap2model__MTypestring__Stringnullable_model__MProperty, /* Array[AbstractArrayRead#0]: Array[HashMap2[MType, String, nullable MProperty]] */
-NULL, /* empty (AbstractArray[AbstractArrayRead#0]: AbstractArray[HashMap2[MType, String, nullable MProperty]] not a live type) */
-&type_array__ArrayIteratormore_collections__HashMap2model__MTypestring__Stringnullable_model__MProperty, /* ArrayIterator[AbstractArrayRead#0]: ArrayIterator[HashMap2[MType, String, nullable MProperty]] */
-}
-};
-/* runtime type AbstractArrayRead[HashMap2[MType, String, nullable MProperty]] */
-const struct type type_array__AbstractArrayReadmore_collections__HashMap2model__MTypestring__Stringnullable_model__MProperty = {
-2411,
-"AbstractArrayRead[HashMap2[MType, String, nullable MProperty]]", /* class_name_string */
-5,
-0,
-NULL,
-7,
-{
-0, /* nullable Object */
-1, /* Object */
-1595, /* Collection[HashMap2[MType, String, nullable MProperty]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-2411, /* AbstractArrayRead[HashMap2[MType, String, nullable MProperty]] */
-1728, /* AbstractArrayRead[Object] */
-},
-};
-/* runtime type MapKeysIterator[MType, HashMap[String, nullable MProperty]] */
-const struct type type_abstract_collection__MapKeysIteratormodel__MTypehash_collection__HashMapstring__Stringnullable_model__MProperty = {
-540,
-"MapKeysIterator[MType, HashMap[String, nullable MProperty]]", /* class_name_string */
-2,
-0,
-&resolution_table_abstract_collection__MapKeysIteratormodel__MTypehash_collection__HashMapstring__Stringnullable_model__MProperty,
-3,
-{
-0, /* nullable Object */
-1, /* Object */
-540, /* MapKeysIterator[MType, HashMap[String, nullable MProperty]] */
-},
-};
-const struct types resolution_table_abstract_collection__MapKeysIteratormodel__MTypehash_collection__HashMapstring__Stringnullable_model__MProperty = {
-0, /* dummy */
-{
-&type_abstract_collection__MapIteratormodel__MTypehash_collection__HashMapstring__Stringnullable_model__MProperty, /* MapIterator[MapKeysIterator#0, MapKeysIterator#1]: MapIterator[MType, HashMap[String, nullable MProperty]] */
-&type_array__Arraymodel__MType, /* Array[Iterator#0]: Array[MType] */
-}
-};
-/* runtime type MapValuesIterator[MType, HashMap[String, nullable MProperty]] */
-const struct type type_abstract_collection__MapValuesIteratormodel__MTypehash_collection__HashMapstring__Stringnullable_model__MProperty = {
-541,
-"MapValuesIterator[MType, HashMap[String, nullable MProperty]]", /* class_name_string */
-2,
-0,
-&resolution_table_abstract_collection__MapValuesIteratormodel__MTypehash_collection__HashMapstring__Stringnullable_model__MProperty,
-3,
-{
-0, /* nullable Object */
-1, /* Object */
-541, /* MapValuesIterator[MType, HashMap[String, nullable MProperty]] */
-},
-};
-const struct types resolution_table_abstract_collection__MapValuesIteratormodel__MTypehash_collection__HashMapstring__Stringnullable_model__MProperty = {
-0, /* dummy */
-{
-&type_abstract_collection__MapIteratormodel__MTypehash_collection__HashMapstring__Stringnullable_model__MProperty, /* MapIterator[MapValuesIterator#0, MapValuesIterator#1]: MapIterator[MType, HashMap[String, nullable MProperty]] */
-&type_array__Arrayhash_collection__HashMapstring__Stringnullable_model__MProperty, /* Array[Iterator#0]: Array[HashMap[String, nullable MProperty]] */
-}
-};
-/* runtime type MapKeysIterator[String, nullable MProperty] */
-const struct type type_abstract_collection__MapKeysIteratorstring__Stringnullable_model__MProperty = {
-542,
-"MapKeysIterator[String, nullable MProperty]", /* class_name_string */
-2,
-0,
-&resolution_table_abstract_collection__MapKeysIteratorstring__Stringnullable_model__MProperty,
-3,
-{
-0, /* nullable Object */
-1, /* Object */
-542, /* MapKeysIterator[String, nullable MProperty] */
-},
-};
-const struct types resolution_table_abstract_collection__MapKeysIteratorstring__Stringnullable_model__MProperty = {
-0, /* dummy */
-{
-&type_abstract_collection__MapIteratorstring__Stringnullable_model__MProperty, /* MapIterator[MapKeysIterator#0, MapKeysIterator#1]: MapIterator[String, nullable MProperty] */
-&type_array__Arraystring__String, /* Array[Iterator#0]: Array[String] */
-}
-};
-/* runtime type MapValuesIterator[String, nullable MProperty] */
-const struct type type_abstract_collection__MapValuesIteratorstring__Stringnullable_model__MProperty = {
-543,
-"MapValuesIterator[String, nullable MProperty]", /* class_name_string */
-2,
-0,
-&resolution_table_abstract_collection__MapValuesIteratorstring__Stringnullable_model__MProperty,
-3,
-{
-0, /* nullable Object */
-1, /* Object */
-543, /* MapValuesIterator[String, nullable MProperty] */
-},
-};
-const struct types resolution_table_abstract_collection__MapValuesIteratorstring__Stringnullable_model__MProperty = {
-0, /* dummy */
-{
-&type_abstract_collection__MapIteratorstring__Stringnullable_model__MProperty, /* MapIterator[MapValuesIterator#0, MapValuesIterator#1]: MapIterator[String, nullable MProperty] */
-&type_array__Arraynullable_model__MProperty, /* Array[Iterator#0]: Array[nullable MProperty] */
-}
-};
-/* runtime type ArrayIterator[Set[MProperty]] */
-const struct type type_array__ArrayIteratorabstract_collection__Setmodel__MProperty = {
-1891,
-"ArrayIterator[Set[MProperty]]", /* class_name_string */
-4,
-0,
-&resolution_table_array__ArrayIteratorabstract_collection__Setmodel__MProperty,
-5,
-{
-0, /* nullable Object */
-1, /* Object */
-277, /* ArrayIterator[Object] */
-1686, /* ArrayIterator[Set[PropertyLayoutElement]] */
-1891, /* ArrayIterator[Set[MProperty]] */
-},
-};
-const struct types resolution_table_array__ArrayIteratorabstract_collection__Setmodel__MProperty = {
-0, /* dummy */
-{
-&type_array__AbstractArrayReadabstract_collection__Setmodel__MProperty, /* AbstractArrayRead[ArrayIterator#0]: AbstractArrayRead[Set[MProperty]] */
-&type_array__Arrayabstract_collection__Setmodel__MProperty, /* Array[Iterator#0]: Array[Set[MProperty]] */
-}
-};
-/* runtime type ArrayIterator[Set[PropertyLayoutElement]] */
-const struct type type_array__ArrayIteratorabstract_collection__Setlayout_builders__PropertyLayoutElement = {
-1686,
-"ArrayIterator[Set[PropertyLayoutElement]]", /* class_name_string */
-3,
-0,
-&resolution_table_array__ArrayIteratorabstract_collection__Setlayout_builders__PropertyLayoutElement,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-277, /* ArrayIterator[Object] */
-1686, /* ArrayIterator[Set[PropertyLayoutElement]] */
-},
-};
-const struct types resolution_table_array__ArrayIteratorabstract_collection__Setlayout_builders__PropertyLayoutElement = {
-0, /* dummy */
-{
-&type_array__AbstractArrayReadabstract_collection__Setlayout_builders__PropertyLayoutElement, /* AbstractArrayRead[ArrayIterator#0]: AbstractArrayRead[Set[PropertyLayoutElement]] */
-&type_array__Arrayabstract_collection__Setlayout_builders__PropertyLayoutElement, /* Array[Iterator#0]: Array[Set[PropertyLayoutElement]] */
-}
-};
-/* runtime type NativeArray[Set[MProperty]] */
-const struct type type_array__NativeArrayabstract_collection__Setmodel__MProperty = {
-1892,
-"NativeArray[Set[MProperty]]", /* class_name_string */
-4,
-0,
-&resolution_table_array__NativeArrayabstract_collection__Setmodel__MProperty,
-5,
-{
-0, /* nullable Object */
-1, /* Object */
-185, /* NativeArray[Object] */
-1687, /* NativeArray[Set[PropertyLayoutElement]] */
-1892, /* NativeArray[Set[MProperty]] */
-},
-};
-const struct types resolution_table_array__NativeArrayabstract_collection__Setmodel__MProperty = {
-0, /* dummy */
-{
-&type_abstract_collection__Setmodel__MProperty, /* NativeArray#0: Set[MProperty] */
-&type_array__NativeArrayabstract_collection__Setmodel__MProperty, /* NativeArray[NativeArray#0]: NativeArray[Set[MProperty]] */
-}
-};
-/* runtime type NativeArray[Set[PropertyLayoutElement]] */
-const struct type type_array__NativeArrayabstract_collection__Setlayout_builders__PropertyLayoutElement = {
-1687,
-"NativeArray[Set[PropertyLayoutElement]]", /* class_name_string */
-3,
-0,
-&resolution_table_array__NativeArrayabstract_collection__Setlayout_builders__PropertyLayoutElement,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-185, /* NativeArray[Object] */
-1687, /* NativeArray[Set[PropertyLayoutElement]] */
-},
-};
-const struct types resolution_table_array__NativeArrayabstract_collection__Setlayout_builders__PropertyLayoutElement = {
-0, /* dummy */
-{
-&type_abstract_collection__Setlayout_builders__PropertyLayoutElement, /* NativeArray#0: Set[PropertyLayoutElement] */
-&type_array__NativeArrayabstract_collection__Setlayout_builders__PropertyLayoutElement, /* NativeArray[NativeArray#0]: NativeArray[Set[PropertyLayoutElement]] */
-}
-};
-/* runtime type ArrayIterator[HashSet[MType]] */
-const struct type type_array__ArrayIteratorhash_collection__HashSetmodel__MType = {
-1893,
-"ArrayIterator[HashSet[MType]]", /* class_name_string */
-4,
-0,
-&resolution_table_array__ArrayIteratorhash_collection__HashSetmodel__MType,
-5,
-{
-0, /* nullable Object */
-1, /* Object */
-277, /* ArrayIterator[Object] */
-1688, /* ArrayIterator[Set[MType]] */
-1893, /* ArrayIterator[HashSet[MType]] */
-},
-};
-const struct types resolution_table_array__ArrayIteratorhash_collection__HashSetmodel__MType = {
-0, /* dummy */
-{
-&type_array__AbstractArrayReadhash_collection__HashSetmodel__MType, /* AbstractArrayRead[ArrayIterator#0]: AbstractArrayRead[HashSet[MType]] */
-&type_array__Arrayhash_collection__HashSetmodel__MType, /* Array[Iterator#0]: Array[HashSet[MType]] */
-}
-};
-/* runtime type ArrayIterator[Set[MType]] */
-const struct type type_array__ArrayIteratorabstract_collection__Setmodel__MType = {
-1688,
-"ArrayIterator[Set[MType]]", /* class_name_string */
-3,
-0,
-&resolution_table_array__ArrayIteratorabstract_collection__Setmodel__MType,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-277, /* ArrayIterator[Object] */
-1688, /* ArrayIterator[Set[MType]] */
-},
-};
-const struct types resolution_table_array__ArrayIteratorabstract_collection__Setmodel__MType = {
-0, /* dummy */
-{
-&type_array__AbstractArrayReadabstract_collection__Setmodel__MType, /* AbstractArrayRead[ArrayIterator#0]: AbstractArrayRead[Set[MType]] */
-&type_array__Arrayabstract_collection__Setmodel__MType, /* Array[Iterator#0]: Array[Set[MType]] */
-}
-};
-/* runtime type NativeArray[HashSet[MType]] */
-const struct type type_array__NativeArrayhash_collection__HashSetmodel__MType = {
-1894,
-"NativeArray[HashSet[MType]]", /* class_name_string */
-4,
-0,
-&resolution_table_array__NativeArrayhash_collection__HashSetmodel__MType,
-5,
-{
-0, /* nullable Object */
-1, /* Object */
-185, /* NativeArray[Object] */
-1689, /* NativeArray[Set[MType]] */
-1894, /* NativeArray[HashSet[MType]] */
-},
-};
-const struct types resolution_table_array__NativeArrayhash_collection__HashSetmodel__MType = {
-0, /* dummy */
-{
-&type_hash_collection__HashSetmodel__MType, /* NativeArray#0: HashSet[MType] */
-&type_array__NativeArrayhash_collection__HashSetmodel__MType, /* NativeArray[NativeArray#0]: NativeArray[HashSet[MType]] */
-}
-};
-/* runtime type NativeArray[Set[MType]] */
-const struct type type_array__NativeArrayabstract_collection__Setmodel__MType = {
-1689,
-"NativeArray[Set[MType]]", /* class_name_string */
-3,
-0,
-&resolution_table_array__NativeArrayabstract_collection__Setmodel__MType,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-185, /* NativeArray[Object] */
-1689, /* NativeArray[Set[MType]] */
-},
-};
-const struct types resolution_table_array__NativeArrayabstract_collection__Setmodel__MType = {
-0, /* dummy */
-{
-&type_abstract_collection__Setmodel__MType, /* NativeArray#0: Set[MType] */
-&type_array__NativeArrayabstract_collection__Setmodel__MType, /* NativeArray[NativeArray#0]: NativeArray[Set[MType]] */
-}
-};
-/* runtime type ArrayIterator[Array[nullable MType]] */
-const struct type type_array__ArrayIteratorarray__Arraynullable_model__MType = {
-1895,
-"ArrayIterator[Array[nullable MType]]", /* class_name_string */
-4,
-0,
-&resolution_table_array__ArrayIteratorarray__Arraynullable_model__MType,
-5,
-{
-0, /* nullable Object */
-1, /* Object */
-277, /* ArrayIterator[Object] */
-544, /* ArrayIterator[nullable Array[nullable MType]] */
-1895, /* ArrayIterator[Array[nullable MType]] */
-},
-};
-const struct types resolution_table_array__ArrayIteratorarray__Arraynullable_model__MType = {
-0, /* dummy */
-{
-&type_array__AbstractArrayReadarray__Arraynullable_model__MType, /* AbstractArrayRead[ArrayIterator#0]: AbstractArrayRead[Array[nullable MType]] */
-&type_array__Arrayarray__Arraynullable_model__MType, /* Array[Iterator#0]: Array[Array[nullable MType]] */
-}
-};
-/* runtime type ArrayIterator[nullable Array[nullable MType]] */
-const struct type type_array__ArrayIteratornullable_array__Arraynullable_model__MType = {
-544,
-"ArrayIterator[nullable Array[nullable MType]]", /* class_name_string */
-3,
-0,
-&resolution_table_array__ArrayIteratornullable_array__Arraynullable_model__MType,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
--1, /* empty */
-544, /* ArrayIterator[nullable Array[nullable MType]] */
-},
-};
-const struct types resolution_table_array__ArrayIteratornullable_array__Arraynullable_model__MType = {
-0, /* dummy */
-{
-&type_array__AbstractArrayReadnullable_array__Arraynullable_model__MType, /* AbstractArrayRead[ArrayIterator#0]: AbstractArrayRead[nullable Array[nullable MType]] */
-&type_array__Arraynullable_array__Arraynullable_model__MType, /* Array[Iterator#0]: Array[nullable Array[nullable MType]] */
-}
-};
-/* runtime type NativeArray[Array[nullable MType]] */
-const struct type type_array__NativeArrayarray__Arraynullable_model__MType = {
-1896,
-"NativeArray[Array[nullable MType]]", /* class_name_string */
-4,
-0,
-&resolution_table_array__NativeArrayarray__Arraynullable_model__MType,
-5,
-{
-0, /* nullable Object */
-1, /* Object */
-185, /* NativeArray[Object] */
-545, /* NativeArray[nullable Array[nullable MType]] */
-1896, /* NativeArray[Array[nullable MType]] */
-},
-};
-const struct types resolution_table_array__NativeArrayarray__Arraynullable_model__MType = {
-0, /* dummy */
-{
-&type_array__Arraynullable_model__MType, /* NativeArray#0: Array[nullable MType] */
-&type_array__NativeArrayarray__Arraynullable_model__MType, /* NativeArray[NativeArray#0]: NativeArray[Array[nullable MType]] */
-}
-};
-/* runtime type NativeArray[nullable Array[nullable MType]] */
-const struct type type_array__NativeArraynullable_array__Arraynullable_model__MType = {
-545,
-"NativeArray[nullable Array[nullable MType]]", /* class_name_string */
-3,
-0,
-&resolution_table_array__NativeArraynullable_array__Arraynullable_model__MType,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
--1, /* empty */
-545, /* NativeArray[nullable Array[nullable MType]] */
-},
-};
-const struct types resolution_table_array__NativeArraynullable_array__Arraynullable_model__MType = {
-0, /* dummy */
-{
-&type_nullable_array__Arraynullable_model__MType, /* NativeArray#0: nullable Array[nullable MType] */
-&type_array__NativeArraynullable_array__Arraynullable_model__MType, /* NativeArray[NativeArray#0]: NativeArray[nullable Array[nullable MType]] */
-}
-};
-/* runtime type ArrayIterator[Array[nullable MPropDef]] */
-const struct type type_array__ArrayIteratorarray__Arraynullable_model__MPropDef = {
-1690,
-"ArrayIterator[Array[nullable MPropDef]]", /* class_name_string */
-3,
-0,
-&resolution_table_array__ArrayIteratorarray__Arraynullable_model__MPropDef,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-277, /* ArrayIterator[Object] */
-1690, /* ArrayIterator[Array[nullable MPropDef]] */
-},
-};
-const struct types resolution_table_array__ArrayIteratorarray__Arraynullable_model__MPropDef = {
-0, /* dummy */
-{
-&type_array__AbstractArrayReadarray__Arraynullable_model__MPropDef, /* AbstractArrayRead[ArrayIterator#0]: AbstractArrayRead[Array[nullable MPropDef]] */
-&type_array__Arrayarray__Arraynullable_model__MPropDef, /* Array[Iterator#0]: Array[Array[nullable MPropDef]] */
-}
-};
-/* runtime type NativeArray[Array[nullable MPropDef]] */
-const struct type type_array__NativeArrayarray__Arraynullable_model__MPropDef = {
-1691,
-"NativeArray[Array[nullable MPropDef]]", /* class_name_string */
-3,
-0,
-&resolution_table_array__NativeArrayarray__Arraynullable_model__MPropDef,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-185, /* NativeArray[Object] */
-1691, /* NativeArray[Array[nullable MPropDef]] */
-},
-};
-const struct types resolution_table_array__NativeArrayarray__Arraynullable_model__MPropDef = {
-0, /* dummy */
-{
-&type_array__Arraynullable_model__MPropDef, /* NativeArray#0: Array[nullable MPropDef] */
-&type_array__NativeArrayarray__Arraynullable_model__MPropDef, /* NativeArray[NativeArray#0]: NativeArray[Array[nullable MPropDef]] */
-}
-};
-/* runtime type ArrayIterator[Array[MClassType]] */
-const struct type type_array__ArrayIteratorarray__Arraymodel__MClassType = {
-2412,
-"ArrayIterator[Array[MClassType]]", /* class_name_string */
-6,
-0,
-&resolution_table_array__ArrayIteratorarray__Arraymodel__MClassType,
-7,
-{
-0, /* nullable Object */
-1, /* Object */
-277, /* ArrayIterator[Object] */
-544, /* ArrayIterator[nullable Array[nullable MType]] */
-1895, /* ArrayIterator[Array[nullable MType]] */
-2185, /* ArrayIterator[Array[MType]] */
-2412, /* ArrayIterator[Array[MClassType]] */
-},
-};
-const struct types resolution_table_array__ArrayIteratorarray__Arraymodel__MClassType = {
-0, /* dummy */
-{
-&type_array__AbstractArrayReadarray__Arraymodel__MClassType, /* AbstractArrayRead[ArrayIterator#0]: AbstractArrayRead[Array[MClassType]] */
-&type_array__Arrayarray__Arraymodel__MClassType, /* Array[Iterator#0]: Array[Array[MClassType]] */
-}
-};
-/* runtime type ArrayIterator[Array[MType]] */
-const struct type type_array__ArrayIteratorarray__Arraymodel__MType = {
-2185,
-"ArrayIterator[Array[MType]]", /* class_name_string */
-5,
-0,
-&resolution_table_array__ArrayIteratorarray__Arraymodel__MType,
-6,
-{
-0, /* nullable Object */
-1, /* Object */
-277, /* ArrayIterator[Object] */
-544, /* ArrayIterator[nullable Array[nullable MType]] */
-1895, /* ArrayIterator[Array[nullable MType]] */
-2185, /* ArrayIterator[Array[MType]] */
-},
-};
-const struct types resolution_table_array__ArrayIteratorarray__Arraymodel__MType = {
-0, /* dummy */
-{
-&type_array__AbstractArrayReadarray__Arraymodel__MType, /* AbstractArrayRead[ArrayIterator#0]: AbstractArrayRead[Array[MType]] */
-&type_array__Arrayarray__Arraymodel__MType, /* Array[Iterator#0]: Array[Array[MType]] */
-}
-};
-/* runtime type NativeArray[Array[MClassType]] */
-const struct type type_array__NativeArrayarray__Arraymodel__MClassType = {
-2413,
-"NativeArray[Array[MClassType]]", /* class_name_string */
-6,
-0,
-&resolution_table_array__NativeArrayarray__Arraymodel__MClassType,
-7,
-{
-0, /* nullable Object */
-1, /* Object */
-185, /* NativeArray[Object] */
-545, /* NativeArray[nullable Array[nullable MType]] */
-1896, /* NativeArray[Array[nullable MType]] */
-2186, /* NativeArray[Array[MType]] */
-2413, /* NativeArray[Array[MClassType]] */
-},
-};
-const struct types resolution_table_array__NativeArrayarray__Arraymodel__MClassType = {
-0, /* dummy */
-{
-&type_array__Arraymodel__MClassType, /* NativeArray#0: Array[MClassType] */
-&type_array__NativeArrayarray__Arraymodel__MClassType, /* NativeArray[NativeArray#0]: NativeArray[Array[MClassType]] */
-}
-};
-/* runtime type NativeArray[Array[MType]] */
-const struct type type_array__NativeArrayarray__Arraymodel__MType = {
-2186,
-"NativeArray[Array[MType]]", /* class_name_string */
-5,
-0,
-&resolution_table_array__NativeArrayarray__Arraymodel__MType,
-6,
-{
-0, /* nullable Object */
-1, /* Object */
-185, /* NativeArray[Object] */
-545, /* NativeArray[nullable Array[nullable MType]] */
-1896, /* NativeArray[Array[nullable MType]] */
-2186, /* NativeArray[Array[MType]] */
-},
-};
-const struct types resolution_table_array__NativeArrayarray__Arraymodel__MType = {
-0, /* dummy */
-{
-&type_array__Arraymodel__MType, /* NativeArray#0: Array[MType] */
-&type_array__NativeArrayarray__Arraymodel__MType, /* NativeArray[NativeArray#0]: NativeArray[Array[MType]] */
-}
-};
-/* runtime type Array[HashSet[MClass]] */
-const struct type type_array__Arrayhash_collection__HashSetmodel__MClass = {
-2590,
-"Array[HashSet[MClass]]", /* class_name_string */
-11,
-0,
-&resolution_table_array__Arrayhash_collection__HashSetmodel__MClass,
-12,
-{
-0, /* nullable Object */
-1, /* Object */
-1536, /* Collection[Set[MClass]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-1866, /* Collection[HashSet[MClass]] */
-1728, /* AbstractArrayRead[Object] */
-2406, /* AbstractArrayRead[Set[MClass]] */
-2527, /* Array[Set[MClass]] */
-1911, /* Array[Object] */
-2535, /* AbstractArrayRead[HashSet[MClass]] */
-2590, /* Array[HashSet[MClass]] */
-},
-};
-const struct types resolution_table_array__Arrayhash_collection__HashSetmodel__MClass = {
-0, /* dummy */
-{
-&type_array__Arrayhash_collection__HashSetmodel__MClass, /* Array[Array#0]: Array[HashSet[MClass]] */
-&type_array__NativeArrayhash_collection__HashSetmodel__MClass, /* NativeArray[Array#0]: NativeArray[HashSet[MClass]] */
-&type_hash_collection__HashSetmodel__MClass, /* Sequence#0: HashSet[MClass] */
-&type_hash_collection__HashSetmodel__MClass, /* SimpleCollection#0: HashSet[MClass] */
-&type_abstract_collection__Collectionhash_collection__HashSetmodel__MClass, /* Collection[Array#0]: Collection[HashSet[MClass]] */
-&type_hash_collection__HashSetmodel__MClass, /* Array#0: HashSet[MClass] */
-&type_array__NativeArrayhash_collection__HashSetmodel__MClass, /* NativeArray[ArrayCapable#0]: NativeArray[HashSet[MClass]] */
-&type_hash_collection__HashSetmodel__MClass, /* AbstractArray#0: HashSet[MClass] */
-&type_hash_collection__HashSetmodel__MClass, /* RemovableCollection#0: HashSet[MClass] */
-&type_abstract_collection__Collectionhash_collection__HashSetmodel__MClass, /* Collection[Sequence#0]: Collection[HashSet[MClass]] */
-&type_array__Arrayhash_collection__HashSetmodel__MClass, /* Array[Sequence#0]: Array[HashSet[MClass]] */
-&type_abstract_collection__Collectionhash_collection__HashSetmodel__MClass, /* Collection[SimpleCollection#0]: Collection[HashSet[MClass]] */
-&type_hash_collection__HashSetmodel__MClass, /* Collection#0: HashSet[MClass] */
-&type_abstract_collection__Collectionhash_collection__HashSetmodel__MClass, /* Collection[Collection#0]: Collection[HashSet[MClass]] */
-&type_hash_collection__HashSetmodel__MClass, /* SequenceRead#0: HashSet[MClass] */
-&type_hash_collection__HashSetmodel__MClass, /* AbstractArrayRead#0: HashSet[MClass] */
-&type_array__Arrayhash_collection__HashSetmodel__MClass, /* Array[AbstractArrayRead#0]: Array[HashSet[MClass]] */
-NULL, /* empty (AbstractArray[AbstractArrayRead#0]: AbstractArray[HashSet[MClass]] not a live type) */
-&type_array__ArrayIteratorhash_collection__HashSetmodel__MClass, /* ArrayIterator[AbstractArrayRead#0]: ArrayIterator[HashSet[MClass]] */
-}
-};
-/* runtime type AbstractArrayRead[HashSet[MClass]] */
-const struct type type_array__AbstractArrayReadhash_collection__HashSetmodel__MClass = {
-2535,
-"AbstractArrayRead[HashSet[MClass]]", /* class_name_string */
-10,
-0,
-NULL,
-11,
-{
-0, /* nullable Object */
-1, /* Object */
-1536, /* Collection[Set[MClass]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-1866, /* Collection[HashSet[MClass]] */
-1728, /* AbstractArrayRead[Object] */
-2406, /* AbstractArrayRead[Set[MClass]] */
--1, /* empty */
--1, /* empty */
-2535, /* AbstractArrayRead[HashSet[MClass]] */
-},
-};
-/* runtime type Array[Map[MClass, Int]] */
-const struct type type_array__Arrayabstract_collection__Mapmodel__MClasskernel__Int = {
-2536,
-"Array[Map[MClass, Int]]", /* class_name_string */
-7,
-0,
-&resolution_table_array__Arrayabstract_collection__Mapmodel__MClasskernel__Int,
-10,
-{
-0, /* nullable Object */
-1, /* Object */
-1611, /* Collection[Map[MClass, Int]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-2414, /* AbstractArrayRead[Map[MClass, Int]] */
-1728, /* AbstractArrayRead[Object] */
-2536, /* Array[Map[MClass, Int]] */
--1, /* empty */
-1911, /* Array[Object] */
-},
-};
-const struct types resolution_table_array__Arrayabstract_collection__Mapmodel__MClasskernel__Int = {
-0, /* dummy */
-{
-&type_array__Arrayabstract_collection__Mapmodel__MClasskernel__Int, /* Array[Array#0]: Array[Map[MClass, Int]] */
-&type_array__NativeArrayabstract_collection__Mapmodel__MClasskernel__Int, /* NativeArray[Array#0]: NativeArray[Map[MClass, Int]] */
-&type_abstract_collection__Mapmodel__MClasskernel__Int, /* Sequence#0: Map[MClass, Int] */
-&type_abstract_collection__Mapmodel__MClasskernel__Int, /* SimpleCollection#0: Map[MClass, Int] */
-&type_abstract_collection__Collectionabstract_collection__Mapmodel__MClasskernel__Int, /* Collection[Array#0]: Collection[Map[MClass, Int]] */
-&type_abstract_collection__Mapmodel__MClasskernel__Int, /* Array#0: Map[MClass, Int] */
-&type_array__NativeArrayabstract_collection__Mapmodel__MClasskernel__Int, /* NativeArray[ArrayCapable#0]: NativeArray[Map[MClass, Int]] */
-&type_abstract_collection__Mapmodel__MClasskernel__Int, /* AbstractArray#0: Map[MClass, Int] */
-&type_abstract_collection__Mapmodel__MClasskernel__Int, /* RemovableCollection#0: Map[MClass, Int] */
-&type_abstract_collection__Collectionabstract_collection__Mapmodel__MClasskernel__Int, /* Collection[Sequence#0]: Collection[Map[MClass, Int]] */
-&type_array__Arrayabstract_collection__Mapmodel__MClasskernel__Int, /* Array[Sequence#0]: Array[Map[MClass, Int]] */
-&type_abstract_collection__Collectionabstract_collection__Mapmodel__MClasskernel__Int, /* Collection[SimpleCollection#0]: Collection[Map[MClass, Int]] */
-&type_abstract_collection__Mapmodel__MClasskernel__Int, /* Collection#0: Map[MClass, Int] */
-&type_abstract_collection__Collectionabstract_collection__Mapmodel__MClasskernel__Int, /* Collection[Collection#0]: Collection[Map[MClass, Int]] */
-&type_abstract_collection__Mapmodel__MClasskernel__Int, /* SequenceRead#0: Map[MClass, Int] */
-&type_abstract_collection__Mapmodel__MClasskernel__Int, /* AbstractArrayRead#0: Map[MClass, Int] */
-&type_array__Arrayabstract_collection__Mapmodel__MClasskernel__Int, /* Array[AbstractArrayRead#0]: Array[Map[MClass, Int]] */
-NULL, /* empty (AbstractArray[AbstractArrayRead#0]: AbstractArray[Map[MClass, Int]] not a live type) */
-&type_array__ArrayIteratorabstract_collection__Mapmodel__MClasskernel__Int, /* ArrayIterator[AbstractArrayRead#0]: ArrayIterator[Map[MClass, Int]] */
-}
-};
-/* runtime type AbstractArrayRead[Map[MClass, Int]] */
-const struct type type_array__AbstractArrayReadabstract_collection__Mapmodel__MClasskernel__Int = {
-2414,
-"AbstractArrayRead[Map[MClass, Int]]", /* class_name_string */
-5,
-0,
-NULL,
-7,
-{
-0, /* nullable Object */
-1, /* Object */
-1611, /* Collection[Map[MClass, Int]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-2414, /* AbstractArrayRead[Map[MClass, Int]] */
-1728, /* AbstractArrayRead[Object] */
-},
-};
-/* runtime type ArrayIterator[Set[MVirtualTypeProp]] */
-const struct type type_array__ArrayIteratorabstract_collection__Setmodel__MVirtualTypeProp = {
-2187,
-"ArrayIterator[Set[MVirtualTypeProp]]", /* class_name_string */
-5,
-0,
-&resolution_table_array__ArrayIteratorabstract_collection__Setmodel__MVirtualTypeProp,
-6,
-{
-0, /* nullable Object */
-1, /* Object */
-277, /* ArrayIterator[Object] */
-1686, /* ArrayIterator[Set[PropertyLayoutElement]] */
-1891, /* ArrayIterator[Set[MProperty]] */
-2187, /* ArrayIterator[Set[MVirtualTypeProp]] */
-},
-};
-const struct types resolution_table_array__ArrayIteratorabstract_collection__Setmodel__MVirtualTypeProp = {
-0, /* dummy */
-{
-&type_array__AbstractArrayReadabstract_collection__Setmodel__MVirtualTypeProp, /* AbstractArrayRead[ArrayIterator#0]: AbstractArrayRead[Set[MVirtualTypeProp]] */
-&type_array__Arrayabstract_collection__Setmodel__MVirtualTypeProp, /* Array[Iterator#0]: Array[Set[MVirtualTypeProp]] */
-}
-};
-/* runtime type NativeArray[Set[MVirtualTypeProp]] */
-const struct type type_array__NativeArrayabstract_collection__Setmodel__MVirtualTypeProp = {
-2188,
-"NativeArray[Set[MVirtualTypeProp]]", /* class_name_string */
-5,
-0,
-&resolution_table_array__NativeArrayabstract_collection__Setmodel__MVirtualTypeProp,
-6,
-{
-0, /* nullable Object */
-1, /* Object */
-185, /* NativeArray[Object] */
-1687, /* NativeArray[Set[PropertyLayoutElement]] */
-1892, /* NativeArray[Set[MProperty]] */
-2188, /* NativeArray[Set[MVirtualTypeProp]] */
-},
-};
-const struct types resolution_table_array__NativeArrayabstract_collection__Setmodel__MVirtualTypeProp = {
-0, /* dummy */
-{
-&type_abstract_collection__Setmodel__MVirtualTypeProp, /* NativeArray#0: Set[MVirtualTypeProp] */
-&type_array__NativeArrayabstract_collection__Setmodel__MVirtualTypeProp, /* NativeArray[NativeArray#0]: NativeArray[Set[MVirtualTypeProp]] */
-}
-};
-/* runtime type ArrayIterator[Set[MAttribute]] */
-const struct type type_array__ArrayIteratorabstract_collection__Setmodel__MAttribute = {
-2189,
-"ArrayIterator[Set[MAttribute]]", /* class_name_string */
-5,
-0,
-&resolution_table_array__ArrayIteratorabstract_collection__Setmodel__MAttribute,
-6,
-{
-0, /* nullable Object */
-1, /* Object */
-277, /* ArrayIterator[Object] */
-1686, /* ArrayIterator[Set[PropertyLayoutElement]] */
-1891, /* ArrayIterator[Set[MProperty]] */
-2189, /* ArrayIterator[Set[MAttribute]] */
-},
-};
-const struct types resolution_table_array__ArrayIteratorabstract_collection__Setmodel__MAttribute = {
-0, /* dummy */
-{
-&type_array__AbstractArrayReadabstract_collection__Setmodel__MAttribute, /* AbstractArrayRead[ArrayIterator#0]: AbstractArrayRead[Set[MAttribute]] */
-&type_array__Arrayabstract_collection__Setmodel__MAttribute, /* Array[Iterator#0]: Array[Set[MAttribute]] */
-}
-};
-/* runtime type NativeArray[Set[MAttribute]] */
-const struct type type_array__NativeArrayabstract_collection__Setmodel__MAttribute = {
-2190,
-"NativeArray[Set[MAttribute]]", /* class_name_string */
-5,
-0,
-&resolution_table_array__NativeArrayabstract_collection__Setmodel__MAttribute,
-6,
-{
-0, /* nullable Object */
-1, /* Object */
-185, /* NativeArray[Object] */
-1687, /* NativeArray[Set[PropertyLayoutElement]] */
-1892, /* NativeArray[Set[MProperty]] */
-2190, /* NativeArray[Set[MAttribute]] */
-},
-};
-const struct types resolution_table_array__NativeArrayabstract_collection__Setmodel__MAttribute = {
-0, /* dummy */
-{
-&type_abstract_collection__Setmodel__MAttribute, /* NativeArray#0: Set[MAttribute] */
-&type_array__NativeArrayabstract_collection__Setmodel__MAttribute, /* NativeArray[NativeArray#0]: NativeArray[Set[MAttribute]] */
-}
-};
-/* runtime type Array[Map[MType, Int]] */
-const struct type type_array__Arrayabstract_collection__Mapmodel__MTypekernel__Int = {
-2537,
-"Array[Map[MType, Int]]", /* class_name_string */
-7,
-0,
-&resolution_table_array__Arrayabstract_collection__Mapmodel__MTypekernel__Int,
-10,
-{
-0, /* nullable Object */
-1, /* Object */
-1620, /* Collection[Map[MType, Int]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-2415, /* AbstractArrayRead[Map[MType, Int]] */
-1728, /* AbstractArrayRead[Object] */
-2537, /* Array[Map[MType, Int]] */
--1, /* empty */
-1911, /* Array[Object] */
-},
-};
-const struct types resolution_table_array__Arrayabstract_collection__Mapmodel__MTypekernel__Int = {
-0, /* dummy */
-{
-&type_array__Arrayabstract_collection__Mapmodel__MTypekernel__Int, /* Array[Array#0]: Array[Map[MType, Int]] */
-&type_array__NativeArrayabstract_collection__Mapmodel__MTypekernel__Int, /* NativeArray[Array#0]: NativeArray[Map[MType, Int]] */
-&type_abstract_collection__Mapmodel__MTypekernel__Int, /* Sequence#0: Map[MType, Int] */
-&type_abstract_collection__Mapmodel__MTypekernel__Int, /* SimpleCollection#0: Map[MType, Int] */
-&type_abstract_collection__Collectionabstract_collection__Mapmodel__MTypekernel__Int, /* Collection[Array#0]: Collection[Map[MType, Int]] */
-&type_abstract_collection__Mapmodel__MTypekernel__Int, /* Array#0: Map[MType, Int] */
-&type_array__NativeArrayabstract_collection__Mapmodel__MTypekernel__Int, /* NativeArray[ArrayCapable#0]: NativeArray[Map[MType, Int]] */
-&type_abstract_collection__Mapmodel__MTypekernel__Int, /* AbstractArray#0: Map[MType, Int] */
-&type_abstract_collection__Mapmodel__MTypekernel__Int, /* RemovableCollection#0: Map[MType, Int] */
-&type_abstract_collection__Collectionabstract_collection__Mapmodel__MTypekernel__Int, /* Collection[Sequence#0]: Collection[Map[MType, Int]] */
-&type_array__Arrayabstract_collection__Mapmodel__MTypekernel__Int, /* Array[Sequence#0]: Array[Map[MType, Int]] */
-&type_abstract_collection__Collectionabstract_collection__Mapmodel__MTypekernel__Int, /* Collection[SimpleCollection#0]: Collection[Map[MType, Int]] */
-&type_abstract_collection__Mapmodel__MTypekernel__Int, /* Collection#0: Map[MType, Int] */
-&type_abstract_collection__Collectionabstract_collection__Mapmodel__MTypekernel__Int, /* Collection[Collection#0]: Collection[Map[MType, Int]] */
-&type_abstract_collection__Mapmodel__MTypekernel__Int, /* SequenceRead#0: Map[MType, Int] */
-&type_abstract_collection__Mapmodel__MTypekernel__Int, /* AbstractArrayRead#0: Map[MType, Int] */
-&type_array__Arrayabstract_collection__Mapmodel__MTypekernel__Int, /* Array[AbstractArrayRead#0]: Array[Map[MType, Int]] */
-NULL, /* empty (AbstractArray[AbstractArrayRead#0]: AbstractArray[Map[MType, Int]] not a live type) */
-&type_array__ArrayIteratorabstract_collection__Mapmodel__MTypekernel__Int, /* ArrayIterator[AbstractArrayRead#0]: ArrayIterator[Map[MType, Int]] */
-}
-};
-/* runtime type AbstractArrayRead[Map[MType, Int]] */
-const struct type type_array__AbstractArrayReadabstract_collection__Mapmodel__MTypekernel__Int = {
-2415,
-"AbstractArrayRead[Map[MType, Int]]", /* class_name_string */
-5,
-0,
-NULL,
-7,
-{
-0, /* nullable Object */
-1, /* Object */
-1620, /* Collection[Map[MType, Int]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-2415, /* AbstractArrayRead[Map[MType, Int]] */
-1728, /* AbstractArrayRead[Object] */
-},
-};
-/* runtime type ArrayIterator[EscapeMark] */
-const struct type type_array__ArrayIteratorscope__EscapeMark = {
-1692,
-"ArrayIterator[EscapeMark]", /* class_name_string */
-3,
-0,
-&resolution_table_array__ArrayIteratorscope__EscapeMark,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-277, /* ArrayIterator[Object] */
-1692, /* ArrayIterator[EscapeMark] */
-},
-};
-const struct types resolution_table_array__ArrayIteratorscope__EscapeMark = {
-0, /* dummy */
-{
-&type_array__AbstractArrayReadscope__EscapeMark, /* AbstractArrayRead[ArrayIterator#0]: AbstractArrayRead[EscapeMark] */
-&type_array__Arrayscope__EscapeMark, /* Array[Iterator#0]: Array[EscapeMark] */
-}
-};
-/* runtime type NativeArray[EscapeMark] */
-const struct type type_array__NativeArrayscope__EscapeMark = {
-1693,
-"NativeArray[EscapeMark]", /* class_name_string */
-3,
-0,
-&resolution_table_array__NativeArrayscope__EscapeMark,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-185, /* NativeArray[Object] */
-1693, /* NativeArray[EscapeMark] */
-},
-};
-const struct types resolution_table_array__NativeArrayscope__EscapeMark = {
-0, /* dummy */
-{
-&type_scope__EscapeMark, /* NativeArray#0: EscapeMark */
-&type_array__NativeArrayscope__EscapeMark, /* NativeArray[NativeArray#0]: NativeArray[EscapeMark] */
-}
-};
-/* runtime type ArrayIterator[Set[MClassDef]] */
-const struct type type_array__ArrayIteratorabstract_collection__Setmodel__MClassDef = {
-1694,
-"ArrayIterator[Set[MClassDef]]", /* class_name_string */
-3,
-0,
-&resolution_table_array__ArrayIteratorabstract_collection__Setmodel__MClassDef,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-277, /* ArrayIterator[Object] */
-1694, /* ArrayIterator[Set[MClassDef]] */
-},
-};
-const struct types resolution_table_array__ArrayIteratorabstract_collection__Setmodel__MClassDef = {
-0, /* dummy */
-{
-&type_array__AbstractArrayReadabstract_collection__Setmodel__MClassDef, /* AbstractArrayRead[ArrayIterator#0]: AbstractArrayRead[Set[MClassDef]] */
-&type_array__Arrayabstract_collection__Setmodel__MClassDef, /* Array[Iterator#0]: Array[Set[MClassDef]] */
-}
-};
-/* runtime type NativeArray[Set[MClassDef]] */
-const struct type type_array__NativeArrayabstract_collection__Setmodel__MClassDef = {
-1695,
-"NativeArray[Set[MClassDef]]", /* class_name_string */
-3,
-0,
-&resolution_table_array__NativeArrayabstract_collection__Setmodel__MClassDef,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-185, /* NativeArray[Object] */
-1695, /* NativeArray[Set[MClassDef]] */
-},
-};
-const struct types resolution_table_array__NativeArrayabstract_collection__Setmodel__MClassDef = {
-0, /* dummy */
-{
-&type_abstract_collection__Setmodel__MClassDef, /* NativeArray#0: Set[MClassDef] */
-&type_array__NativeArrayabstract_collection__Setmodel__MClassDef, /* NativeArray[NativeArray#0]: NativeArray[Set[MClassDef]] */
-}
-};
-/* runtime type ArrayIterator[Set[MClass]] */
-const struct type type_array__ArrayIteratorabstract_collection__Setmodel__MClass = {
-1696,
-"ArrayIterator[Set[MClass]]", /* class_name_string */
-3,
-0,
-&resolution_table_array__ArrayIteratorabstract_collection__Setmodel__MClass,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-277, /* ArrayIterator[Object] */
-1696, /* ArrayIterator[Set[MClass]] */
-},
-};
-const struct types resolution_table_array__ArrayIteratorabstract_collection__Setmodel__MClass = {
-0, /* dummy */
-{
-&type_array__AbstractArrayReadabstract_collection__Setmodel__MClass, /* AbstractArrayRead[ArrayIterator#0]: AbstractArrayRead[Set[MClass]] */
-&type_array__Arrayabstract_collection__Setmodel__MClass, /* Array[Iterator#0]: Array[Set[MClass]] */
-}
-};
-/* runtime type NativeArray[Set[MClass]] */
-const struct type type_array__NativeArrayabstract_collection__Setmodel__MClass = {
-1697,
-"NativeArray[Set[MClass]]", /* class_name_string */
-3,
-0,
-&resolution_table_array__NativeArrayabstract_collection__Setmodel__MClass,
-4,
-{
-0, /* nullable Object */
-1, /* Object */
-185, /* NativeArray[Object] */
-1697, /* NativeArray[Set[MClass]] */
-},
-};
-const struct types resolution_table_array__NativeArrayabstract_collection__Setmodel__MClass = {
-0, /* dummy */
-{
-&type_abstract_collection__Setmodel__MClass, /* NativeArray#0: Set[MClass] */
-&type_array__NativeArrayabstract_collection__Setmodel__MClass, /* NativeArray[NativeArray#0]: NativeArray[Set[MClass]] */
-}
-};
-/* runtime type ArrayIterator[Set[MClassType]] */
-const struct type type_array__ArrayIteratorabstract_collection__Setmodel__MClassType = {
-1897,
-"ArrayIterator[Set[MClassType]]", /* class_name_string */
-4,
-0,
-&resolution_table_array__ArrayIteratorabstract_collection__Setmodel__MClassType,
-5,
-{
-0, /* nullable Object */
-1, /* Object */
-277, /* ArrayIterator[Object] */
-1688, /* ArrayIterator[Set[MType]] */
-1897, /* ArrayIterator[Set[MClassType]] */
-},
-};
-const struct types resolution_table_array__ArrayIteratorabstract_collection__Setmodel__MClassType = {
-0, /* dummy */
-{
-&type_array__AbstractArrayReadabstract_collection__Setmodel__MClassType, /* AbstractArrayRead[ArrayIterator#0]: AbstractArrayRead[Set[MClassType]] */
-&type_array__Arrayabstract_collection__Setmodel__MClassType, /* Array[Iterator#0]: Array[Set[MClassType]] */
-}
-};
-/* runtime type NativeArray[Set[MClassType]] */
-const struct type type_array__NativeArrayabstract_collection__Setmodel__MClassType = {
-1898,
-"NativeArray[Set[MClassType]]", /* class_name_string */
-4,
-0,
-&resolution_table_array__NativeArrayabstract_collection__Setmodel__MClassType,
-5,
-{
-0, /* nullable Object */
-1, /* Object */
-185, /* NativeArray[Object] */
-1689, /* NativeArray[Set[MType]] */
-1898, /* NativeArray[Set[MClassType]] */
-},
-};
-const struct types resolution_table_array__NativeArrayabstract_collection__Setmodel__MClassType = {
-0, /* dummy */
-{
-&type_abstract_collection__Setmodel__MClassType, /* NativeArray#0: Set[MClassType] */
-&type_array__NativeArrayabstract_collection__Setmodel__MClassType, /* NativeArray[NativeArray#0]: NativeArray[Set[MClassType]] */
-}
-};
-/* runtime type Array[POSetElement[MClass]] */
-const struct type type_array__Arrayposet__POSetElementmodel__MClass = {
-2538,
-"Array[POSetElement[MClass]]", /* class_name_string */
-7,
-0,
-&resolution_table_array__Arrayposet__POSetElementmodel__MClass,
-10,
-{
-0, /* nullable Object */
-1, /* Object */
-1632, /* Collection[POSetElement[MClass]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-2416, /* AbstractArrayRead[POSetElement[MClass]] */
-1728, /* AbstractArrayRead[Object] */
-2538, /* Array[POSetElement[MClass]] */
--1, /* empty */
-1911, /* Array[Object] */
-},
-};
-const struct types resolution_table_array__Arrayposet__POSetElementmodel__MClass = {
-0, /* dummy */
-{
-&type_array__Arrayposet__POSetElementmodel__MClass, /* Array[Array#0]: Array[POSetElement[MClass]] */
-&type_array__NativeArrayposet__POSetElementmodel__MClass, /* NativeArray[Array#0]: NativeArray[POSetElement[MClass]] */
-&type_poset__POSetElementmodel__MClass, /* Sequence#0: POSetElement[MClass] */
-&type_poset__POSetElementmodel__MClass, /* SimpleCollection#0: POSetElement[MClass] */
-&type_abstract_collection__Collectionposet__POSetElementmodel__MClass, /* Collection[Array#0]: Collection[POSetElement[MClass]] */
-&type_poset__POSetElementmodel__MClass, /* Array#0: POSetElement[MClass] */
-&type_array__NativeArrayposet__POSetElementmodel__MClass, /* NativeArray[ArrayCapable#0]: NativeArray[POSetElement[MClass]] */
-&type_poset__POSetElementmodel__MClass, /* AbstractArray#0: POSetElement[MClass] */
-&type_poset__POSetElementmodel__MClass, /* RemovableCollection#0: POSetElement[MClass] */
-&type_abstract_collection__Collectionposet__POSetElementmodel__MClass, /* Collection[Sequence#0]: Collection[POSetElement[MClass]] */
-&type_array__Arrayposet__POSetElementmodel__MClass, /* Array[Sequence#0]: Array[POSetElement[MClass]] */
-&type_abstract_collection__Collectionposet__POSetElementmodel__MClass, /* Collection[SimpleCollection#0]: Collection[POSetElement[MClass]] */
-&type_poset__POSetElementmodel__MClass, /* Collection#0: POSetElement[MClass] */
-&type_abstract_collection__Collectionposet__POSetElementmodel__MClass, /* Collection[Collection#0]: Collection[POSetElement[MClass]] */
-&type_poset__POSetElementmodel__MClass, /* SequenceRead#0: POSetElement[MClass] */
-&type_poset__POSetElementmodel__MClass, /* AbstractArrayRead#0: POSetElement[MClass] */
-&type_array__Arrayposet__POSetElementmodel__MClass, /* Array[AbstractArrayRead#0]: Array[POSetElement[MClass]] */
-NULL, /* empty (AbstractArray[AbstractArrayRead#0]: AbstractArray[POSetElement[MClass]] not a live type) */
-&type_array__ArrayIteratorposet__POSetElementmodel__MClass, /* ArrayIterator[AbstractArrayRead#0]: ArrayIterator[POSetElement[MClass]] */
-}
-};
-/* runtime type AbstractArrayRead[POSetElement[MClass]] */
-const struct type type_array__AbstractArrayReadposet__POSetElementmodel__MClass = {
-2416,
-"AbstractArrayRead[POSetElement[MClass]]", /* class_name_string */
-5,
-0,
-NULL,
-7,
-{
-0, /* nullable Object */
-1, /* Object */
-1632, /* Collection[POSetElement[MClass]] */
-163, /* SequenceRead[nullable Object] */
-164, /* Collection[Object] */
-2416, /* AbstractArrayRead[POSetElement[MClass]] */
-1728, /* AbstractArrayRead[Object] */
-},
-};
-/* runtime type MapKeysIterator[MModule, HashMap[MType, Array[MMethodDef]]] */
-const struct type type_abstract_collection__MapKeysIteratormodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef = {
-546,
-"MapKeysIterator[MModule, HashMap[MType, Array[MMethodDef]]]", /* class_name_string */
-2,
-0,
-&resolution_table_abstract_collection__MapKeysIteratormodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef,
-3,
-{
-0, /* nullable Object */
-1, /* Object */
-546, /* MapKeysIterator[MModule, HashMap[MType, Array[MMethodDef]]] */
-},
-};
-const struct types resolution_table_abstract_collection__MapKeysIteratormodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef = {
-0, /* dummy */
-{
-&type_abstract_collection__MapIteratormodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef, /* MapIterator[MapKeysIterator#0, MapKeysIterator#1]: MapIterator[MModule, HashMap[MType, Array[MMethodDef]]] */
-&type_array__Arraymodel_base__MModule, /* Array[Iterator#0]: Array[MModule] */
-}
-};
-/* runtime type MapValuesIterator[MModule, HashMap[MType, Array[MMethodDef]]] */
-const struct type type_abstract_collection__MapValuesIteratormodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef = {
-547,
-"MapValuesIterator[MModule, HashMap[MType, Array[MMethodDef]]]", /* class_name_string */
-2,
-0,
-&resolution_table_abstract_collection__MapValuesIteratormodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef,
-3,
-{
-0, /* nullable Object */
-1, /* Object */
-547, /* MapValuesIterator[MModule, HashMap[MType, Array[MMethodDef]]] */
-},
-};
-const struct types resolution_table_abstract_collection__MapValuesIteratormodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef = {
-0, /* dummy */
-{
-&type_abstract_collection__MapIteratormodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef, /* MapIterator[MapValuesIterator#0, MapValuesIterator#1]: MapIterator[MModule, HashMap[MType, Array[MMethodDef]]] */
-&type_array__Arrayhash_collection__HashMapmodel__MTypearray__Arraymodel__MMethodDef, /* Array[Iterator#0]: Array[HashMap[MType, Array[MMethodDef]]] */
-}
-};
-/* runtime type MapKeysIterator[MType, Array[MMethodDef]] */
-const struct type type_abstract_collection__MapKeysIteratormodel__MTypearray__Arraymodel__MMethodDef = {
-548,
-"MapKeysIterator[MType, Array[MMethodDef]]", /* class_name_string */
-2,
-0,
-&resolution_table_abstract_collection__MapKeysIteratormodel__MTypearray__Arraymodel__MMethodDef,
-3,
-{
-0, /* nullable Object */
-1, /* Object */
-548, /* MapKeysIterator[MType, Array[MMethodDef]] */
-},
-};
-const struct types resolution_table_abstract_collection__MapKeysIteratormodel__MTypearray__Arraymodel__MMethodDef = {
-0, /* dummy */
-{
-&type_abstract_collection__MapIteratormodel__MTypearray__Arraymodel__MMethodDef, /* MapIterator[MapKeysIterator#0, MapKeysIterator#1]: MapIterator[MType, Array[MMethodDef]] */
-&type_array__Arraymodel__MType, /* Array[Iterator#0]: Array[MType] */
-}
-};
-/* runtime type MapValuesIterator[MType, Array[MMethodDef]] */
-const struct type type_abstract_collection__MapValuesIteratormodel__MTypearray__Arraymodel__MMethodDef = {
-549,
-"MapValuesIterator[MType, Array[MMethodDef]]", /* class_name_string */
-2,
-0,
-&resolution_table_abstract_collection__MapValuesIteratormodel__MTypearray__Arraymodel__MMethodDef,
-3,
-{
-0, /* nullable Object */
-1, /* Object */
-549, /* MapValuesIterator[MType, Array[MMethodDef]] */
-},
-};
-const struct types resolution_table_abstract_collection__MapValuesIteratormodel__MTypearray__Arraymodel__MMethodDef = {
-0, /* dummy */
-{
-&type_abstract_collection__MapIteratormodel__MTypearray__Arraymodel__MMethodDef, /* MapIterator[MapValuesIterator#0, MapValuesIterator#1]: MapIterator[MType, Array[MMethodDef]] */
-&type_array__Arrayarray__Arraymodel__MMethodDef, /* Array[Iterator#0]: Array[Array[MMethodDef]] */
-}
-};
-/* runtime type MapKeysIterator[MModule, HashMap[MType, Array[MAttributeDef]]] */
-const struct type type_abstract_collection__MapKeysIteratormodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef = {
-550,
-"MapKeysIterator[MModule, HashMap[MType, Array[MAttributeDef]]]", /* class_name_string */
-2,
-0,
-&resolution_table_abstract_collection__MapKeysIteratormodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef,
-3,
-{
-0, /* nullable Object */
-1, /* Object */
-550, /* MapKeysIterator[MModule, HashMap[MType, Array[MAttributeDef]]] */
-},
-};
-const struct types resolution_table_abstract_collection__MapKeysIteratormodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef = {
-0, /* dummy */
-{
-&type_abstract_collection__MapIteratormodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef, /* MapIterator[MapKeysIterator#0, MapKeysIterator#1]: MapIterator[MModule, HashMap[MType, Array[MAttributeDef]]] */
-&type_array__Arraymodel_base__MModule, /* Array[Iterator#0]: Array[MModule] */
-}
-};
-/* runtime type MapValuesIterator[MModule, HashMap[MType, Array[MAttributeDef]]] */
-const struct type type_abstract_collection__MapValuesIteratormodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef = {
-551,
-"MapValuesIterator[MModule, HashMap[MType, Array[MAttributeDef]]]", /* class_name_string */
-2,
-0,
-&resolution_table_abstract_collection__MapValuesIteratormodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef,
-3,
-{
-0, /* nullable Object */
-1, /* Object */
-551, /* MapValuesIterator[MModule, HashMap[MType, Array[MAttributeDef]]] */
-},
-};
-const struct types resolution_table_abstract_collection__MapValuesIteratormodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef = {
-0, /* dummy */
-{
-&type_abstract_collection__MapIteratormodel_base__MModulehash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef, /* MapIterator[MapValuesIterator#0, MapValuesIterator#1]: MapIterator[MModule, HashMap[MType, Array[MAttributeDef]]] */
-&type_array__Arrayhash_collection__HashMapmodel__MTypearray__Arraymodel__MAttributeDef, /* Array[Iterator#0]: Array[HashMap[MType, Array[MAttributeDef]]] */
-}
-};
-/* runtime type MapKeysIterator[MType, Array[MAttributeDef]] */
-const struct type type_abstract_collection__MapKeysIteratormodel__MTypearray__Arraymodel__MAttributeDef = {
-552,
-"MapKeysIterator[MType, Array[MAttributeDef]]", /* class_name_string */
-2,
-0,
-&resolution_table_abstract_collection__MapKeysIteratormodel__MTypearray__Arraymodel__MAttributeDef,
-3,
-{
-0, /* nullable Object */
-1, /* Object */
-552, /* MapKeysIterator[MType, Array[MAttributeDef]] */
-},
-};
-const struct types resolution_table_abstract_collection__MapKeysIteratormodel__MTypearray__Arraymodel__MAttributeDef = {
-0, /* dummy */
-{
-&type_abstract_collection__MapIteratormodel__MTypearray__Arraymodel__MAttributeDef, /* MapIterator[MapKeysIterator#0, MapKeysIterator#1]: MapIterator[MType, Array[MAttributeDef]] */
-&type_array__Arraymodel__MType, /* Array[Iterator#0]: Array[MType] */
-}
-};
-/* runtime type MapValuesIterator[MType, Array[MAttributeDef]] */
-const struct type type_abstract_collection__MapValuesIteratormodel__MTypearray__Arraymodel__MAttributeDef = {
-553,
-"MapValuesIterator[MType, Array[MAttributeDef]]", /* class_name_string */
-2,
-0,
-&resolution_table_abstract_collection__MapValuesIteratormodel__MTypearray__Arraymodel__MAttributeDef,
-3,
-{
-0, /* nullable Object */
-1, /* Object */
-553, /* MapValuesIterator[MType, Array[MAttributeDef]] */
-},
-};
-const struct types resolution_table_abstract_collection__MapValuesIteratormodel__MTypearray__Arraymodel__MAttributeDef = {
-0, /* dummy */
-{
-&type_abstract_collection__MapIteratormodel__MTypearray__Arraymodel__MAttributeDef, /* MapIterator[MapValuesIterator#0, MapValuesIterator#1]: MapIterator[MType, Array[MAttributeDef]] */
-&type_array__Arrayarray__Arraymodel__MAttributeDef, /* Array[Iterator#0]: Array[Array[MAttributeDef]] */
+&type_array__ArrayIteratorposet__POSetElementmmodule__MModule, /* ArrayIterator[AbstractArrayRead#0]: ArrayIterator[POSetElement[MModule]] */
 }
 };

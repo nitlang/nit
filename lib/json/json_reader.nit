@@ -15,13 +15,18 @@ module json_reader
 
 intrude import jsonable
 
+in "C Header" `{
+	#define __STRICT_ANSI__
+	#include <json/json.h>
+`}
+
 redef class String
 	# Deserializes this String and return its value as a Map[String, nullable Jsonable]
 	# On error, null is returned.
-	fun json_to_object : nullable Map[String, nullable Jsonable] import NativeString::to_s, JsonObject::json_to_map `{
+	fun json_to_object : nullable Map[String, nullable Jsonable] import NativeString.to_s, JsonObject.json_to_map `{
 		char *native_recv;
 		json_object *jobj;
-		nullable_Map map;
+		nullable_Map_of_String_nullable_Jsonable map;
 
 		native_recv = String_to_cstring( recv );
 		jobj = json_tokener_parse( native_recv );
@@ -34,13 +39,13 @@ end
 
 redef extern JsonObject
 	# Get this json object as a Map
-	private fun json_to_map : nullable Map[String, nullable Jsonable] import NativeString::to_s, String::to_cstring, HashMap, HashMap::[]=, json_cross, HashMap[String,nullable Jsonable] as( nullable Map[String,nullable Jsonable] ), String as ( Object ), nullable Jsonable as (nullable Object) `{
-		HashMap map;
+	private fun json_to_map : nullable Map[String, nullable Jsonable] import NativeString.to_s, String.to_cstring, HashMap[String,nullable Jsonable], HashMap[String,nullable Jsonable].[]=, json_cross, HashMap[String, nullable Jsonable].as(nullable Map[String, nullable Jsonable]) `{
+		HashMap_of_String_nullable_Jsonable map;
 		String nit_key;
 		nullable_Jsonable nit_val;
 		enum json_type type;
 
-		map = new_HashMap();
+		map = new_HashMap_of_String_nullable_Jsonable();
 
 		{ /* prevents "mixed declaration and code" warning for C90 */
 		json_object_object_foreach( recv, key, val ) {
@@ -51,11 +56,11 @@ redef extern JsonObject
 
 			nit_val = JsonObject_json_cross( val, type );
 
-			HashMap__index_assign( map, String_as_Object( nit_key ), nullable_Jsonable_as_nullable_Object( nit_val ) );
+			HashMap_of_String_nullable_Jsonable__index_assign( map, nit_key, nit_val );
 		}
 		}
 
-		return HashMap_as_nullable_Map( map );
+		return HashMap_of_String_nullable_Jsonable_as_nullable_Map_of_String_nullable_Jsonable( map );
 	`}
 
 	# Get this json object as a Bool
@@ -74,31 +79,31 @@ redef extern JsonObject
 	`}
 
 	# Get this json object as a Sequence
-	private fun json_to_sequence : Sequence[Jsonable] import Array, Array::push, Array[nullable Jsonable] as ( Sequence[nullable Jsonable] ), json_cross `{
+	private fun json_to_sequence : Sequence[nullable Jsonable] import Array[nullable Jsonable], Array[nullable Jsonable].push, json_cross, Array[nullable Jsonable].as(Sequence[nullable Jsonable]) `{
 		array_list* jlist;
 		json_object* jobj;
 		nullable_Jsonable obj;
-		Array dest;
+		Array_of_nullable_Jsonable dest;
 		int i;
 		int len;
 		enum json_type type;
 
 		jlist = json_object_get_array( recv );
 		len = json_object_array_length( recv );
-		dest = new_Array();
+		dest = new_Array_of_nullable_Jsonable();
 		for ( i = 0; i < len; i ++ ) {
 			jobj = json_object_array_get_idx( recv, i );
 			if ( jobj == NULL ) type = json_type_null;
 			else type = json_object_get_type( jobj );
 			obj = JsonObject_json_cross( jobj, type );
-			Array_push( dest, nullable_Jsonable_as_nullable_Object( obj ) );
+			Array_of_nullable_Jsonable_push( dest, obj );
 		}
 
-		return Array_as_Sequence( dest );
+		return Array_of_nullable_Jsonable_as_Sequence_of_nullable_Jsonable( dest );
 	`}
 
 	# Get this json object as a String
-	private fun json_to_string : String import NativeString::to_s `{
+	private fun json_to_string : String import NativeString.to_s `{
 		const char *cstring;
 		cstring = json_object_get_string( recv );
 		return NativeString_to_s( (char*)cstring );

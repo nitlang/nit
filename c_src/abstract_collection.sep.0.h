@@ -31,7 +31,6 @@ long abstract_collection__Container__count(val* self, val* p0);
 val* NEW_abstract_collection__ContainerIterator(const struct type* type);
 extern const int COLOR_abstract_collection__ContainerIteratorabstract_collection__Container_FT0;
 extern const int COLOR_abstract_collection__ContainerIterator__init;
-void CHECK_NEW_abstract_collection__ContainerIterator(val*);
 val* abstract_collection__Container__iterator(val* self);
 extern const int COLOR_abstract_collection__Container_FT0;
 void abstract_collection__Container__init(val* self, val* p0);

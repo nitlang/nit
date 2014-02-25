@@ -29,7 +29,7 @@ extern Test
         return foobar;
     `}
 
-    fun test_me is extern import Test::foo, NativeString::to_s `{
+    fun test_me is extern import Test.foo, NativeString.to_s `{
         int i;
         for(i = 0; i < 2000; ++i) {
             printf("%d\n", i);

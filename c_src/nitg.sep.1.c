@@ -96,16 +96,18 @@ val* var80 /* : nullable Object */;
 val* var81 /* : String */;
 val* var82 /* : nullable Object */;
 val* var83 /* : Location */;
-val* var84 /* : RapidTypeAnalysis */;
-val* var_analysis /* var analysis: RapidTypeAnalysis */;
-val* var85 /* : OptionBool */;
-val* var86 /* : nullable Object */;
-short int var87 /* : Bool */;
+val* var84 /* : OptionBool */;
+val* var85 /* : nullable Object */;
+short int var86 /* : Bool */;
+val* var87 /* : null */;
 val* var88 /* : nullable Object */;
 short int var89 /* : Bool */;
+val* var90 /* : RapidTypeAnalysis */;
+val* var_analysis /* var analysis: RapidTypeAnalysis */;
+val* var91 /* : RapidTypeAnalysis */;
+val* var_analysis92 /* var analysis: RapidTypeAnalysis */;
 var = NEW_toolcontext__ToolContext(&type_toolcontext__ToolContext);
 ((void (*)(val*))(var->class->vft[COLOR_toolcontext__ToolContext__init]))(var) /* init on <var:ToolContext>*/;
-CHECK_NEW_toolcontext__ToolContext(var);
 var_toolcontext = var;
 var1 = NEW_opts__OptionBool(&type_opts__OptionBool);
 if (varonce) {
@@ -132,10 +134,8 @@ var12 = 1;
 var13 = NEW_array__NativeArray(var12, &type_array__NativeArraystring__String);
 ((struct instance_array__NativeArray*)var13)->values[0] = (val*) var7;
 ((void (*)(val*, val*, long))(var11->class->vft[COLOR_array__Array__with_native]))(var11, var13, var12) /* with_native on <var11:Array[String]>*/;
-CHECK_NEW_array__Array(var11);
 }
 ((void (*)(val*, val*, val*))(var1->class->vft[COLOR_opts__OptionBool__init]))(var1, var2, var11) /* init on <var1:OptionBool>*/;
-CHECK_NEW_opts__OptionBool(var1);
 var_opt_global = var1;
 var14 = ((val* (*)(val*))(var_toolcontext->class->vft[COLOR_toolcontext__ToolContext__option_context]))(var_toolcontext) /* option_context on <var_toolcontext:ToolContext>*/;
 var15 = NEW_array__Array(&type_array__Arrayopts__Option);
@@ -144,7 +144,6 @@ var16 = 1;
 var17 = NEW_array__NativeArray(var16, &type_array__NativeArrayopts__Option);
 ((struct instance_array__NativeArray*)var17)->values[0] = (val*) var_opt_global;
 ((void (*)(val*, val*, long))(var15->class->vft[COLOR_array__Array__with_native]))(var15, var17, var16) /* with_native on <var15:Array[Option]>*/;
-CHECK_NEW_array__Array(var15);
 }
 ((void (*)(val*, val*))(var14->class->vft[COLOR_opts__OptionContext__add_option]))(var14, var15) /* add_option on <var14:OptionContext>*/;
 var18 = NEW_opts__OptionArray(&type_opts__OptionArray);
@@ -172,10 +171,8 @@ var30 = 1;
 var31 = NEW_array__NativeArray(var30, &type_array__NativeArraystring__String);
 ((struct instance_array__NativeArray*)var31)->values[0] = (val*) var25;
 ((void (*)(val*, val*, long))(var29->class->vft[COLOR_array__Array__with_native]))(var29, var31, var30) /* with_native on <var29:Array[String]>*/;
-CHECK_NEW_array__Array(var29);
 }
 ((void (*)(val*, val*, val*))(var18->class->vft[COLOR_opts__OptionArray__init]))(var18, var20, var29) /* init on <var18:OptionArray>*/;
-CHECK_NEW_opts__OptionArray(var18);
 var_opt_mixins = var18;
 var32 = ((val* (*)(val*))(var_toolcontext->class->vft[COLOR_toolcontext__ToolContext__option_context]))(var_toolcontext) /* option_context on <var_toolcontext:ToolContext>*/;
 var33 = NEW_array__Array(&type_array__Arrayopts__Option);
@@ -184,17 +181,14 @@ var34 = 1;
 var35 = NEW_array__NativeArray(var34, &type_array__NativeArrayopts__Option);
 ((struct instance_array__NativeArray*)var35)->values[0] = (val*) var_opt_mixins;
 ((void (*)(val*, val*, long))(var33->class->vft[COLOR_array__Array__with_native]))(var33, var35, var34) /* with_native on <var33:Array[Option]>*/;
-CHECK_NEW_array__Array(var33);
 }
 ((void (*)(val*, val*))(var32->class->vft[COLOR_opts__OptionContext__add_option]))(var32, var33) /* add_option on <var32:OptionContext>*/;
 ((void (*)(val*))(var_toolcontext->class->vft[COLOR_toolcontext__ToolContext__process_options]))(var_toolcontext) /* process_options on <var_toolcontext:ToolContext>*/;
 var36 = NEW_model_base__Model(&type_model_base__Model);
 ((void (*)(val*))(var36->class->vft[COLOR_model_base__Model__init]))(var36) /* init on <var36:Model>*/;
-CHECK_NEW_model_base__Model(var36);
 var_model = var36;
 var37 = NEW_modelbuilder__ModelBuilder(&type_modelbuilder__ModelBuilder);
 ((void (*)(val*, val*, val*))(var37->class->vft[COLOR_modelbuilder__ModelBuilder__init]))(var37, var_model, var_toolcontext) /* init on <var37:ModelBuilder>*/;
-CHECK_NEW_modelbuilder__ModelBuilder(var37);
 var_modelbuilder = var37;
 var38 = ((val* (*)(val*))(var_toolcontext->class->vft[COLOR_toolcontext__ToolContext__option_context]))(var_toolcontext) /* option_context on <var_toolcontext:ToolContext>*/;
 var39 = ((val* (*)(val*))(var38->class->vft[COLOR_opts__OptionContext__rest]))(var38) /* rest on <var38:OptionContext>*/;
@@ -216,7 +210,7 @@ if (!var46) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var47 = var42 > var43;
 var44 = var47;
@@ -250,7 +244,6 @@ var61 = NEW_array__NativeArray(var60, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var61)->values[0] = (val*) var49;
 ((struct instance_array__NativeArray*)var61)->values[1] = (val*) var58;
 ((void (*)(val*, val*, long))(var59->class->vft[COLOR_array__Array__with_native]))(var59, var61, var60) /* with_native on <var59:Array[Object]>*/;
-CHECK_NEW_array__Array(var59);
 }
 var62 = ((val* (*)(val*))(var59->class->vft[COLOR_string__Object__to_s]))(var59) /* to_s on <var59:Array[Object]>*/;
 ((void (*)(val*, val*))(self->class->vft[COLOR_file__Object__print]))(self, var62) /* print on <self:Sys>*/;
@@ -267,7 +260,6 @@ var66 = 1;
 var67 = NEW_array__NativeArray(var66, &type_array__NativeArraystring__String);
 ((struct instance_array__NativeArray*)var67)->values[0] = (val*) var_progname;
 ((void (*)(val*, val*, long))(var65->class->vft[COLOR_array__Array__with_native]))(var65, var67, var66) /* with_native on <var65:Array[String]>*/;
-CHECK_NEW_array__Array(var65);
 }
 var68 = ((val* (*)(val*, val*))(var_modelbuilder->class->vft[COLOR_modelbuilder__ModelBuilder__parse]))(var_modelbuilder, var65) /* parse on <var_modelbuilder:ModelBuilder>*/;
 var_mmodules = var68;
@@ -292,31 +284,33 @@ if (var74){
 var77 = ((val* (*)(val*))(var_mmodules->class->vft[COLOR_abstract_collection__Collection__first]))(var_mmodules) /* first on <var_mmodules:Array[MModule]>*/;
 var_mainmodule = var77;
 } else {
-var78 = NEW_model_base__MModule(&type_model_base__MModule);
+var78 = NEW_mmodule__MModule(&type_mmodule__MModule);
 var79 = NULL;
 var80 = ((val* (*)(val*))(var_mmodules->class->vft[COLOR_abstract_collection__Collection__first]))(var_mmodules) /* first on <var_mmodules:Array[MModule]>*/;
-var81 = ((val* (*)(val*))(var80->class->vft[COLOR_model_base__MModule__name]))(var80) /* name on <var80:nullable Object(MModule)>*/;
+var81 = ((val* (*)(val*))(var80->class->vft[COLOR_mmodule__MModule__name]))(var80) /* name on <var80:nullable Object(MModule)>*/;
 var82 = ((val* (*)(val*))(var_mmodules->class->vft[COLOR_abstract_collection__Collection__first]))(var_mmodules) /* first on <var_mmodules:Array[MModule]>*/;
-var83 = ((val* (*)(val*))(var82->class->vft[COLOR_model_base__MModule__location]))(var82) /* location on <var82:nullable Object(MModule)>*/;
-((void (*)(val*, val*, val*, val*, val*))(var78->class->vft[COLOR_model_base__MModule__init]))(var78, var_model, var79, var81, var83) /* init on <var78:MModule>*/;
-CHECK_NEW_model_base__MModule(var78);
+var83 = ((val* (*)(val*))(var82->class->vft[COLOR_mmodule__MModule__location]))(var82) /* location on <var82:nullable Object(MModule)>*/;
+((void (*)(val*, val*, val*, val*, val*))(var78->class->vft[COLOR_mmodule__MModule__init]))(var78, var_model, var79, var81, var83) /* init on <var78:MModule>*/;
 var_mainmodule = var78;
-((void (*)(val*, val*))(var_mainmodule->class->vft[COLOR_model_base__MModule__set_imported_mmodules]))(var_mainmodule, var_mmodules) /* set_imported_mmodules on <var_mainmodule:nullable Object(MModule)>*/;
+((void (*)(val*, val*))(var_mainmodule->class->vft[COLOR_mmodule__MModule__set_imported_mmodules]))(var_mainmodule, var_mmodules) /* set_imported_mmodules on <var_mainmodule:nullable Object(MModule)>*/;
 }
-var84 = ((val* (*)(val*, val*))(var_modelbuilder->class->vft[COLOR_rapid_type_analysis__ModelBuilder__do_rapid_type_analysis]))(var_modelbuilder, var_mainmodule) /* do_rapid_type_analysis on <var_modelbuilder:ModelBuilder>*/;
-var_analysis = var84;
-var85 = ((val* (*)(val*))(var_toolcontext->class->vft[COLOR_separate_erasure_compiler__ToolContext__opt_erasure]))(var_toolcontext) /* opt_erasure on <var_toolcontext:ToolContext>*/;
-var86 = ((val* (*)(val*))(var85->class->vft[COLOR_opts__Option__value]))(var85) /* value on <var85:OptionBool>*/;
-var87 = ((struct instance_kernel__Bool*)var86)->value; /* autounbox from nullable Object to Bool */;
-if (var87){
-((void (*)(val*, val*, val*))(var_modelbuilder->class->vft[COLOR_separate_erasure_compiler__ModelBuilder__run_separate_erasure_compiler]))(var_modelbuilder, var_mainmodule, var_analysis) /* run_separate_erasure_compiler on <var_modelbuilder:ModelBuilder>*/;
+var84 = ((val* (*)(val*))(var_toolcontext->class->vft[COLOR_separate_erasure_compiler__ToolContext__opt_erasure]))(var_toolcontext) /* opt_erasure on <var_toolcontext:ToolContext>*/;
+var85 = ((val* (*)(val*))(var84->class->vft[COLOR_opts__Option__value]))(var84) /* value on <var84:OptionBool>*/;
+var86 = ((struct instance_kernel__Bool*)var85)->value; /* autounbox from nullable Object to Bool */;
+if (var86){
+var87 = NULL;
+((void (*)(val*, val*, val*))(var_modelbuilder->class->vft[COLOR_separate_erasure_compiler__ModelBuilder__run_separate_erasure_compiler]))(var_modelbuilder, var_mainmodule, var87) /* run_separate_erasure_compiler on <var_modelbuilder:ModelBuilder>*/;
 } else {
 var88 = ((val* (*)(val*))(var_opt_global->class->vft[COLOR_opts__Option__value]))(var_opt_global) /* value on <var_opt_global:OptionBool>*/;
 var89 = ((struct instance_kernel__Bool*)var88)->value; /* autounbox from nullable Object to Bool */;
 if (var89){
+var90 = ((val* (*)(val*, val*))(var_modelbuilder->class->vft[COLOR_rapid_type_analysis__ModelBuilder__do_rapid_type_analysis]))(var_modelbuilder, var_mainmodule) /* do_rapid_type_analysis on <var_modelbuilder:ModelBuilder>*/;
+var_analysis = var90;
 ((void (*)(val*, val*, val*))(var_modelbuilder->class->vft[COLOR_global_compiler__ModelBuilder__run_global_compiler]))(var_modelbuilder, var_mainmodule, var_analysis) /* run_global_compiler on <var_modelbuilder:ModelBuilder>*/;
 } else {
-((void (*)(val*, val*, val*))(var_modelbuilder->class->vft[COLOR_separate_compiler__ModelBuilder__run_separate_compiler]))(var_modelbuilder, var_mainmodule, var_analysis) /* run_separate_compiler on <var_modelbuilder:ModelBuilder>*/;
+var91 = ((val* (*)(val*, val*))(var_modelbuilder->class->vft[COLOR_rapid_type_analysis__ModelBuilder__do_rapid_type_analysis]))(var_modelbuilder, var_mainmodule) /* do_rapid_type_analysis on <var_modelbuilder:ModelBuilder>*/;
+var_analysis92 = var91;
+((void (*)(val*, val*, val*))(var_modelbuilder->class->vft[COLOR_separate_compiler__ModelBuilder__run_separate_compiler]))(var_modelbuilder, var_mainmodule, var_analysis92) /* run_separate_compiler on <var_modelbuilder:ModelBuilder>*/;
 }
 }
 RET_LABEL:;

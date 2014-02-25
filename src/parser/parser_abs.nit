@@ -1118,17 +1118,18 @@ class ALocalPropExternCall
 end
 class AFullPropExternCall
 	super AExternCall
-    readable var _n_classid: TClassid
-    readable var _n_quad: nullable TQuad = null
+    readable var _n_type: AType
+    readable var _n_dot: nullable TDot = null
     readable var _n_methid: AMethid
 end
 class AInitPropExternCall
 	super AExternCall
-    readable var _n_classid: TClassid
+    readable var _n_type: AType
 end
 class ACastAsExternCall
 	super AExternCall
     readable var _n_from_type: AType
+    readable var _n_dot: nullable TDot = null
     readable var _n_kwas: TKwas
     readable var _n_to_type: AType
 end

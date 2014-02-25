@@ -7,7 +7,7 @@ var1 = self->attrs[COLOR_auto_super_init__ToolContext___64dauto_super_init_phase
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @auto_super_init_phase");
 fprintf(stderr, " (%s:%d)\n", "src/auto_super_init.nit", 26);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -300,20 +300,20 @@ if (!var1) {
 var_class_name = var == NULL ? "null" : var->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "AClassdef", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "src/auto_super_init.nit", 56);
-exit(1);
+show_backtrace(1);
 }
 var2 = ((val* (*)(val*))(var->class->vft[COLOR_modelize_class__AClassdef__mclassdef]))(var) /* mclassdef on <var:nullable ANode(AClassdef)>*/;
 if (var2 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/auto_super_init.nit", 56);
-exit(1);
+show_backtrace(1);
 }
 var_mclassdef = var2;
 var3 = ((val* (*)(val*))(self->class->vft[COLOR_modelize_property__APropdef__mpropdef]))(self) /* mpropdef on <self:AConcreteMethPropdef>*/;
 if (var3 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/auto_super_init.nit", 57);
-exit(1);
+show_backtrace(1);
 }
 var_mpropdef = var3;
 var4 = ((val* (*)(val*))(var_mpropdef->class->vft[COLOR_model__MPropDef__mclassdef]))(var_mpropdef) /* mclassdef on <var_mpropdef:MMethodDef>*/;
@@ -339,7 +339,7 @@ var13 = ((val* (*)(val*))(var_mclassdef->class->vft[COLOR_model__MClassDef__in_h
 if (var13 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/auto_super_init.nit", 68);
-exit(1);
+show_backtrace(1);
 } else {
 var14 = ((val* (*)(val*))(var13->class->vft[COLOR_poset__POSetElement__direct_greaters]))(var13) /* direct_greaters on <var13:nullable POSetElement[MClassDef]>*/;
 }
@@ -376,7 +376,6 @@ var24 = 1; /* arg is null and recv is not */
 if (var24){
 var25 = NEW_auto_super_init__AutoSuperInitVisitor(&type_auto_super_init__AutoSuperInitVisitor);
 ((void (*)(val*))(var25->class->vft[COLOR_auto_super_init__AutoSuperInitVisitor__init]))(var25) /* init on <var25:AutoSuperInitVisitor>*/;
-CHECK_NEW_auto_super_init__AutoSuperInitVisitor(var25);
 var_v = var25;
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var_nblock) /* enter_visit on <var_v:AutoSuperInitVisitor>*/;
 var26 = ((short int (*)(val*))(var_v->class->vft[COLOR_auto_super_init__AutoSuperInitVisitor__has_explicit_super_init]))(var_v) /* has_explicit_super_init on <var_v:AutoSuperInitVisitor>*/;
@@ -388,7 +387,6 @@ goto RET_LABEL;
 }
 var27 = NEW_array__Array(&type_array__Arraymodel__MMethod);
 ((void (*)(val*))(var27->class->vft[COLOR_array__Array__init]))(var27) /* init on <var27:Array[MMethod]>*/;
-CHECK_NEW_array__Array(var27);
 var_auto_super_inits = var27;
 var28 = ((val* (*)(val*))(var_mclassdef->class->vft[COLOR_model__MClassDef__supertypes]))(var_mclassdef) /* supertypes on <var_mclassdef:MClassDef>*/;
 var29 = ((val* (*)(val*))(var28->class->vft[COLOR_abstract_collection__Collection__iterator]))(var28) /* iterator on <var28:Array[MClassType]>*/;
@@ -489,7 +487,6 @@ var75 = NEW_array__NativeArray(var74, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var75)->values[5] = (val*) var_msupertype;
 ((struct instance_array__NativeArray*)var75)->values[6] = (val*) var69;
 ((void (*)(val*, val*, long))(var73->class->vft[COLOR_array__Array__with_native]))(var73, var75, var74) /* with_native on <var73:Array[Object]>*/;
-CHECK_NEW_array__Array(var73);
 }
 var76 = ((val* (*)(val*))(var73->class->vft[COLOR_string__Object__to_s]))(var73) /* to_s on <var73:Array[Object]>*/;
 ((void (*)(val*, val*, val*))(var_modelbuilder->class->vft[COLOR_modelbuilder__ModelBuilder__error]))(var_modelbuilder, self, var76) /* error on <var_modelbuilder:ModelBuilder>*/;
@@ -507,7 +504,7 @@ var77 = var_candidate->type->type_table[cltype78] == idtype79;
 if (!var77) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/auto_super_init.nit", 98);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_auto_super_inits->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var_auto_super_inits, var_candidate) /* add on <var_auto_super_inits:Array[MMethod]>*/;
 CONTINUE_label36: (void)0;
@@ -541,21 +538,21 @@ var90 = ((val* (*)(val*))(var_mpropdef->class->vft[COLOR_model__MMethodDef__msig
 if (var90 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/auto_super_init.nit", 107);
-exit(1);
+show_backtrace(1);
 }
 var_msig = var90;
 var91 = ((val* (*)(val*))(var_auto_super_init_def->class->vft[COLOR_model__MMethodDef__msignature]))(var_auto_super_init_def) /* msignature on <var_auto_super_init_def:MMethodDef>*/;
 if (var91 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/auto_super_init.nit", 108);
-exit(1);
+show_backtrace(1);
 }
 var_supermsig = var91;
 var93 = ((val* (*)(val*))(var_auto_super_init_def->class->vft[COLOR_model__MMethodDef__msignature]))(var_auto_super_init_def) /* msignature on <var_auto_super_init_def:MMethodDef>*/;
 if (var93 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/auto_super_init.nit", 109);
-exit(1);
+show_backtrace(1);
 } else {
 var94 = ((long (*)(val*))(var93->class->vft[COLOR_model__MSignature__arity]))(var93) /* arity on <var93:nullable MSignature>*/;
 }
@@ -573,7 +570,7 @@ var100 = ((val* (*)(val*))(var_auto_super_init_def->class->vft[COLOR_model__MMet
 if (var100 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/auto_super_init.nit", 109);
-exit(1);
+show_backtrace(1);
 } else {
 var101 = ((long (*)(val*))(var100->class->vft[COLOR_model__MSignature__arity]))(var100) /* arity on <var100:nullable MSignature>*/;
 }
@@ -581,7 +578,7 @@ var102 = ((val* (*)(val*))(var_mpropdef->class->vft[COLOR_model__MMethodDef__msi
 if (var102 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/auto_super_init.nit", 109);
-exit(1);
+show_backtrace(1);
 } else {
 var103 = ((long (*)(val*))(var102->class->vft[COLOR_model__MSignature__arity]))(var102) /* arity on <var102:nullable MSignature>*/;
 }
@@ -625,7 +622,6 @@ var120 = NEW_array__NativeArray(var119, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var120)->values[3] = (val*) var114;
 ((struct instance_array__NativeArray*)var120)->values[4] = (val*) var_msig;
 ((void (*)(val*, val*, long))(var118->class->vft[COLOR_array__Array__with_native]))(var118, var120, var119) /* with_native on <var118:Array[Object]>*/;
-CHECK_NEW_array__Array(var118);
 }
 var121 = ((val* (*)(val*))(var118->class->vft[COLOR_string__Object__to_s]))(var118) /* to_s on <var118:Array[Object]>*/;
 ((void (*)(val*, val*, val*))(var_modelbuilder->class->vft[COLOR_modelbuilder__ModelBuilder__error]))(var_modelbuilder, self, var121) /* error on <var_modelbuilder:ModelBuilder>*/;
