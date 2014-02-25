@@ -239,14 +239,16 @@ redef class ModelBuilder
 
 	fun write_makefile(compiler: AbstractCompiler, compile_dir: String, cfiles: Array[String])
 	do
+		var mainmodule = compiler.mainmodule
+
 		var outname = self.toolcontext.opt_output.value
 		if outname == null then
-			outname = "{compiler.mainmodule.name}"
+			outname = "{mainmodule.name}"
 		end
 
 		var orig_dir=".." # FIXME only works if `compile_dir` is a subdirectory of cwd
 		var outpath = orig_dir.join_path(outname).simplify_path
-		var makename = "{compiler.mainmodule.name}.mk"
+		var makename = "{mainmodule.name}.mk"
 		var makepath = "{compile_dir}/{makename}"
 		var makefile = new OFStream.open(makepath)
 
@@ -256,7 +258,7 @@ redef class ModelBuilder
 		end
 
 		var linker_options = new HashSet[String]
-		for m in compiler.mainmodule.in_importation.greaters do if mmodule2nmodule.keys.has(m) then
+		for m in mainmodule.in_importation.greaters do if mmodule2nmodule.keys.has(m) then
 			var amod = mmodule2nmodule[m]
 			linker_options.add(amod.c_linker_options)
 		end
