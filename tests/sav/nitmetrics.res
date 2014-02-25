@@ -11,6 +11,7 @@
   --only-parse            Only proceed to parse step of loaders
   --only-metamodel        Stop after meta-model processing
   --all                   Compute all metrics
+  --mmodules              Compute metrics about mmodules
   --inheritance           Compute metrics about inheritance usage
   --refinement            Compute metrics about refinement usage
   --self                  Compute metrics about the usage of explicit and implicit self
