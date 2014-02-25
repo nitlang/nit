@@ -123,14 +123,16 @@ redef class Model
 end
 
 redef class MClass
-	fun is_user_defined: Bool do
-		return self.intro_mmodule.is_user_defined
+	# is the class imported from standard lib?
+	fun is_standard: Bool do
+		return self.intro_mmodule.mgroup.mproject.name == "standard"
 	end
 end
 
 redef class MModule
-	fun is_user_defined: Bool do
-		return not self.model.std_modules.has(self.name)
+	# is the module imported from standard lib?
+	fun is_standard: Bool do
+		return self.mgroup.mproject.name == "standard"
 	end
 end
 

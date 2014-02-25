@@ -40,10 +40,10 @@ redef class MType
 	private var nlvt: Int = 0
 	private var nlct: Int = 0
 
-	private fun is_user_defined: Bool do
+	private fun is_standard: Bool do
 		var mtype = self
 		if mtype isa MNullableType then mtype = mtype.mtype
-		return self.as(MClassType).mclass.is_user_defined
+		return self.as(MClassType).mclass.is_standard
 	end
 
 	private fun get_depth: Int do
@@ -93,7 +93,7 @@ do
 		mtype.mclass.nlvt += 1
 		mtype.mclass.live_types.add(mtype)
 		if mtype isa MGenericType then nlvtg += 1
-		if mtype.is_user_defined then
+		if not mtype.is_standard then
 			nlvtudud += 1
 			if mtype isa MGenericType then nlvtgudud += 1
 		else
@@ -108,7 +108,7 @@ do
 		mtype.mclass.nlct += 1
 		mtype.mclass.cast_types.add(mtype)
 		if mtype isa MGenericType then nlctg += 1
-		if mtype.is_user_defined then
+		if not mtype.is_standard then
 			nlctudud += 1
 			if mtype isa MGenericType then nlctgudud += 1
 		else
@@ -134,7 +134,7 @@ do
 		for mtype in mtypes do
 			var arity = 0
 			if mtype isa MGenericType then arity = mtype.arguments.length
-			if mtype.is_user_defined then
+			if not mtype.is_standard then
 				udscalarCSV.add_line(mtype, arity, mtype.get_depth, mtype.nlvt, mtype.nlct)
 			end
 			scalarCSV.add_line(mtype, arity, mtype.get_depth, mtype.nlvt, mtype.nlct)
@@ -149,7 +149,7 @@ do
 
 		for mclass in modelbuilder.model.mclasses do
 			if not mclass.is_class or mclass.is_abstract then continue
-			if mclass.is_user_defined then
+			if not mclass.is_standard then
 				udscalarCSV.add_line(mclass.mclass_type, mclass.arity, mclass.live_types.length, mclass.nlvt)
 			end
 			scalarCSV.add_line(mclass.mclass_type, mclass.arity, mclass.live_types.length, mclass.nlvt)
