@@ -90,38 +90,6 @@ redef class ToolContext
 	end
 end
 
-redef class Model
-
-	# List of modules in std lib
-	# FIXME this is quite ugly, find a dynamic way...
-	fun std_modules: Set[String] do
-		if self.std_modules_cache == null then
-			self.std_modules_cache = new HashSet[String]
-			self.std_modules_cache.add("collection")
-			self.std_modules_cache.add("abstract_collection")
-			self.std_modules_cache.add("array")
-			self.std_modules_cache.add("hash_collection")
-			self.std_modules_cache.add("list")
-			self.std_modules_cache.add("range")
-			self.std_modules_cache.add("sorter")
-			self.std_modules_cache.add("environ")
-			self.std_modules_cache.add("exec")
-			self.std_modules_cache.add("file")
-			self.std_modules_cache.add("gc")
-			self.std_modules_cache.add("hash")
-			self.std_modules_cache.add("kernel")
-			self.std_modules_cache.add("math")
-			self.std_modules_cache.add("standard")
-			self.std_modules_cache.add("stream")
-			self.std_modules_cache.add("string")
-			self.std_modules_cache.add("string_search")
-			self.std_modules_cache.add("time")
-		end
-		return self.std_modules_cache.as(not null)
-	end
-	private var std_modules_cache: nullable Set[String]
-end
-
 redef class MClass
 	# is the class imported from standard lib?
 	fun is_standard: Bool do
