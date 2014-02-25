@@ -84,20 +84,23 @@ redef class ModelBuilder
 	# Simple indirection to `Toolchain::write_and_make`
 	protected fun write_and_make(compiler: AbstractCompiler)
 	do
-		var toolchain = new MakefileToolchain(toolcontext)
+		var platform = compiler.mainmodule.target_platform(toolcontext)
+		var toolchain
+		if platform == null then
+			toolchain = new MakefileToolchain(toolcontext)
+		else
+			toolchain = platform.toolchain(toolcontext)
+		end
 		compile_dir = toolchain.compile_dir
 		toolchain.write_and_make compiler
 	end
 end
 
-class MakefileToolchain
-	# The list of directories to search for included C headers (-I for C compilers)
-	# The list is initially set with :
-	#   * the toolcontext --cc-path option
-	#   * the NIT_CC_PATH environment variable
-	#   * some heuristics including the NIT_DIR environment variable and the progname of the process
-	# Path can be added (or removed) by the client
-	var cc_paths = new Array[String]
+redef class Platform
+	fun toolchain(toolcontext: ToolContext): Toolchain is abstract
+end
+
+class Toolchain
 	var toolcontext: ToolContext
 
 	fun compile_dir: String
@@ -106,6 +109,19 @@ class MakefileToolchain
 		if compile_dir == null then compile_dir = ".nit_compile"
 		return compile_dir
 	end
+
+	fun write_and_make(compiler: AbstractCompiler) is abstract
+end
+
+class MakefileToolchain
+	super Toolchain
+	# The list of directories to search for included C headers (-I for C compilers)
+	# The list is initially set with :
+	#   * the toolcontext --cc-path option
+	#   * the NIT_CC_PATH environment variable
+	#   * some heuristics including the NIT_DIR environment variable and the progname of the process
+	# Path can be added (or removed) by the client
+	var cc_paths = new Array[String]
 
 	protected fun gather_cc_paths
 	do
@@ -132,7 +148,7 @@ class MakefileToolchain
 		end
 	end
 
-	fun write_and_make(compiler: AbstractCompiler)
+	redef fun write_and_make(compiler)
 	do
 		gather_cc_paths
 
