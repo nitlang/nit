@@ -24,7 +24,7 @@
 define([
 	"jquery",
 	'jQueryUI',
-	"plugins/utils"
+	"utils"
 ], function($, UI, Utils) {
 
 	var Filtering = {

@@ -21,8 +21,8 @@
  */
 define([
 	"jquery",
-	"base64"
-], function($, Base64) {
+	"utils"
+], function($, Utils) {
 	return {
 
 		// try to login the user to github API
@@ -148,7 +148,7 @@ define([
 				async: false,
 				dataType: 'json',
 				data: JSON.stringify({
-					content: Base64.encode(content),
+					content: content.base64Encode(),
 					encoding: "base64"
 				}),
 				success: function(response) {

@@ -22,7 +22,7 @@
 define([
 	"jquery",
 	"jQueryUI",
-	"plugins/utils",
+	"utils",
 	"quicksearchList",
 ], function($, ui, utils) {
 	$.widget("nitdoc.quicksearch", {

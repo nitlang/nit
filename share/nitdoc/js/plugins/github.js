@@ -23,18 +23,18 @@
  */
 define([
 	"jquery",
-	"base64",
 	"github-api",
 	"plugins/github/loginbox",
 	"plugins/github/modalbox",
 	"plugins/github/commentbox",
-	"Markdown.Converter",
-], function($, Base64, GithubAPI, LoginBox, ModalBox, CommentBox) {
+	"utils",
+	"Markdown.Converter"
+], function($, GithubAPI, LoginBox, ModalBox, CommentBox) {
 	var GithubUser = function(login, password, repo, branch) {
 		this.login = login;
 		this.password = password;
 		this.repo = repo;
-		this.auth = "Basic " +  Base64.encode(login + ':' + password);
+		this.auth = "Basic " +  (login + ':' + password).base64Encode();
 		this.branch = branch;
 	}
 
@@ -139,7 +139,7 @@ define([
 				var session = JSON.parse(localStorage.user);
 				var isok = this._tryLogin(
 					session.login,
-					Base64.decode(session.password),
+					session.password.base64Decode(),
 					session.repo,
 					session.branch
 				);
@@ -173,7 +173,7 @@ define([
 		_saveSession: function(user) {
 			localStorage.user = JSON.stringify({
 				login: user.login,
-				password: Base64.encode(user.password),
+				password: user.password.base64Encode(),
 				repo: user.repo,
 				branch: user.branch,
 			});
@@ -248,7 +248,7 @@ define([
 				var request = requests[i];
 				$("textarea[data-comment-location=\"" + request.location + "\"]").each(function () {
 					if(request.isClosed) {
-						var oldComment = Base64.decode(request.oldComment);
+						var oldComment = request.oldComment.base64Decode();
 						var htmlComment = converter.makeHtml(oldComment);
 						$(this).val(oldComment);
 						if(!$(this).val()) {
@@ -259,7 +259,7 @@ define([
 						$(this).nextAll("div.comment").find("div.nitdoc").empty().html(htmlComment);
 						$(this).nextAll("p.info").find("a.nitdoc-github-editComment").show();
 					} else {
-						var newComment = Base64.decode(request.comment);
+						var newComment = request.comment.base64Decode();
 						var htmlComment = converter.makeHtml(newComment);
 						$(this).val(newComment);
 						if(!$(this).val()) {
@@ -331,8 +331,8 @@ define([
 			requests[edit.request.number] = {
 				request: edit.request,
 				location: edit.location.origin,
-				comment: Base64.encode(edit.newComment),
-				oldComment: Base64.encode(edit.oldComment)
+				comment: edit.newComment.base64Encode(),
+				oldComment: edit.oldComment.base64Encode()
 			};
 			localStorage.requests = JSON.stringify(requests);
 		},
@@ -417,7 +417,7 @@ define([
 				return;
 			}
 			var base64Content = origFile.content.substring(0, origFile.content.length - 1)
-			return Base64.decode(base64Content);
+			return base64Content.base64Decode();
 		},
 
 		_mergeComment: function(fileContent, comment, location) {
