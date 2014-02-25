@@ -449,45 +449,37 @@ class BufferRope
 	############################################################################
 
 	# Appends a new Collection[Char] at the end of the current rope
-	fun append(str: Collection[Char]): BufferRope
+	fun append(str: String): BufferRope
 	do
-		if str isa AbstractString then
-			var last_node = parent_node
+		var last_node = parent_node
 
-			while last_node isa ConcatNode and last_node.right_child != null do
-				last_node = last_node.right_child.as(not null)
-			end
-
-			if last_node isa ConcatNode then
-				last_node.right_child = new LeafNode(str.to_s)
-			else if last_node isa LeafNode then
-				var last_node_parent = last_node.parent
-				var new_concat = new ConcatNode
-				last_node_parent.right_child = new_concat
-				new_concat.left_child = last_node
-				new_concat.right_child = new LeafNode(str.to_s)
-				last_node = new_concat
-			else
-				print "Fatal Error, please report to the developers for more insight."
-				abort
-			end
-
-			balance_from_node(last_node)
-		else
-			var buf = new Buffer.with_capacity(str.length)
-			for i in str do
-				buf.add(i)
-			end
-			append(buf)
+		while last_node isa ConcatNode and last_node.right_child != null do
+			last_node = last_node.right_child.as(not null)
 		end
 
-		if not is_dirty then is_dirty = true
+		if last_node isa ConcatNode then
+			last_node.right_child = new LeafNode(str.to_s)
+		else if last_node isa LeafNode then
+			var last_node_parent = last_node.parent
+			var new_concat = new ConcatNode
+			last_node_parent.right_child = new_concat
+			new_concat.left_child = last_node
+			new_concat.right_child = new LeafNode(str.to_s)
+			last_node = new_concat
+		else
+			print "Fatal Error, please report to the developers for more insight."
+			abort
+		end
+
+		balance_from_node(last_node)
+
+		is_dirty = true
 
 		return self
 	end
 
 	# Variatic function to append several collections of Chars
-	fun append_multi(strs: Collection[Char]...): BufferRope
+	fun append_multi(strs: String...): BufferRope
 	do
 		for i in strs do
 			append(i)
@@ -496,46 +488,38 @@ class BufferRope
 	end
 
 	# Adds a new Collection[Char] at the beginning of the rope
-	fun prepend(str: Collection[Char]): BufferRope
+	fun prepend(str: String): BufferRope
 	do
-		if str isa AbstractString then
-			var curr_node = parent_node
+		var curr_node = parent_node
 
-			while curr_node isa ConcatNode and curr_node.left_child != null do
-				curr_node = curr_node.left_child.as(not null)
-			end
-
-			if curr_node isa ConcatNode then
-				curr_node.left_child = new LeafNode(str.to_s)
-			else if curr_node isa LeafNode then
-				var parent = curr_node.parent
-				var new_concat = new ConcatNode
-				var new_leaf = new LeafNode(str.to_s)
-				new_concat.left_child = new_leaf
-				new_concat.right_child = curr_node
-				parent.left_child = new_concat
-				curr_node = new_concat
-			else
-				print "Fatal Error"
-				abort
-			end
-
-			balance_from_node(curr_node)
-		else
-			var buf = new Buffer.with_capacity(str.length)
-			for i in str do
-				buf.add(i)
-			end
-			prepend(buf.to_s)
+		while curr_node isa ConcatNode and curr_node.left_child != null do
+			curr_node = curr_node.left_child.as(not null)
 		end
 
-		if not is_dirty then is_dirty = true
+		if curr_node isa ConcatNode then
+			curr_node.left_child = new LeafNode(str.to_s)
+		else if curr_node isa LeafNode then
+			var parent = curr_node.parent
+			var new_concat = new ConcatNode
+			var new_leaf = new LeafNode(str.to_s)
+			new_concat.left_child = new_leaf
+			new_concat.right_child = curr_node
+			parent.left_child = new_concat
+			curr_node = new_concat
+		else
+			print "Fatal Error"
+			abort
+		end
+
+		balance_from_node(curr_node)
+
+		is_dirty = true
 
 		return self
 	end
 
 	# Variatic function to prepend several collections of Chars
-	fun prepend_multi(strs: Collection[Char]...): BufferRope
+	fun prepend_multi(strs: String...): BufferRope
 	do
 		for i in strs do
 			prepend(i)
