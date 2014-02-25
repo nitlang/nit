@@ -1,4 +1,4 @@
-Runtime error: Reciever is null (alt/base_primitive_null_alt3.nit:52)
+Runtime error: Receiver is null (alt/base_primitive_null_alt3.nit:52)
 I
 true
 true

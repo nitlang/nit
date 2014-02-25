@@ -1,3 +1,3 @@
-Runtime error: Reciever is null (alt/rterror_null_receiver_alt1.nit:26)
+Runtime error: Receiver is null (alt/rterror_null_receiver_alt1.nit:26)
 true
 false

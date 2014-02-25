@@ -398,8 +398,8 @@ private class NaiveInterpreter
 			else if mproperty.name == "!=" then
 				return self.bool_instance(args[0] != args[1])
 			end
-			#fatal("Reciever is null. {mproperty}. {args.join(" ")} {self.frame.current_node.class_name}")
-			fatal("Reciever is null")
+			#fatal("Receiver is null. {mproperty}. {args.join(" ")} {self.frame.current_node.class_name}")
+			fatal("Receiver is null")
 		end
 		return null
 	end
@@ -1241,6 +1241,8 @@ redef class AForExpr
 	do
 		var col = v.expr(self.n_expr)
 		if col == null then return
+		if col.mtype isa MNullType then fatal(v, "Receiver is null")
+
 		#self.debug("col {col}")
 		var iter = v.send(v.force_get_primitive_method("iterator", col.mtype), [col]).as(not null)
 		#self.debug("iter {iter}")
@@ -1609,7 +1611,7 @@ redef class AAttrExpr
 	do
 		var recv = v.expr(self.n_expr)
 		if recv == null then return null
-		if recv.mtype isa MNullType then fatal(v, "Reciever is null")
+		if recv.mtype isa MNullType then fatal(v, "Receiver is null")
 		var mproperty = self.mproperty.as(not null)
 		return v.read_attribute(mproperty, recv)
 	end
@@ -1620,7 +1622,7 @@ redef class AAttrAssignExpr
 	do
 		var recv = v.expr(self.n_expr)
 		if recv == null then return
-		if recv.mtype isa MNullType then fatal(v, "Reciever is null")
+		if recv.mtype isa MNullType then fatal(v, "Receiver is null")
 		var i = v.expr(self.n_value)
 		if i == null then return
 		var mproperty = self.mproperty.as(not null)
@@ -1634,7 +1636,7 @@ redef class AAttrReassignExpr
 	do
 		var recv = v.expr(self.n_expr)
 		if recv == null then return
-		if recv.mtype isa MNullType then fatal(v, "Reciever is null")
+		if recv.mtype isa MNullType then fatal(v, "Receiver is null")
 		var value = v.expr(self.n_value)
 		if value == null then return
 		var mproperty = self.mproperty.as(not null)
@@ -1651,7 +1653,7 @@ redef class AIssetAttrExpr
 	do
 		var recv = v.expr(self.n_expr)
 		if recv == null then return null
-		if recv.mtype isa MNullType then fatal(v, "Reciever is null")
+		if recv.mtype isa MNullType then fatal(v, "Receiver is null")
 		var mproperty = self.mproperty.as(not null)
 		assert recv isa MutableInstance
 		return v.bool_instance(recv.attributes.has_key(mproperty))

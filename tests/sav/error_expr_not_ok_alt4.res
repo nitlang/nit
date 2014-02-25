@@ -21,7 +21,7 @@ alt/error_expr_not_ok_alt4.nit:66,7--10: Type error: expected Bool, got Int
 alt/error_expr_not_ok_alt4.nit:66,21: Type error: expected A, got Int
 alt/error_expr_not_ok_alt4.nit:67,1--18: Warning: use 'loop' instead of 'while true do'.
 alt/error_expr_not_ok_alt4.nit:69,24: Type error: expected A, got Int
-alt/error_expr_not_ok_alt4.nit:69,1--25: Type Error: Expected method 'iterator' in type Int
+alt/error_expr_not_ok_alt4.nit:69,1--25: Type Error: 'for' expects a type providing 'iterator' method, got 'Int'.
 alt/error_expr_not_ok_alt4.nit:71,8--11: Type error: expected Bool, got Int
 alt/error_expr_not_ok_alt4.nit:72,7--15: Type error: expected A, got Int
 alt/error_expr_not_ok_alt4.nit:73,7--10: Type error: expected Bool, got Int
