@@ -903,8 +903,10 @@ class SeparateCompiler
 	
 	redef fun finalize_ffi_for_module(nmodule)
 	do
+		var old_module = self.mainmodule
 		self.mainmodule = nmodule.mmodule.as(not null)
 		super
+		self.mainmodule = old_module
 	end
 end
 
