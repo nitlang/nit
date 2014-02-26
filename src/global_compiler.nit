@@ -456,11 +456,7 @@ class GlobalCompilerVisitor
 	# Finalizes a call to a method ´m´ on type ´recvtype´ with arguments ´args´
 	private fun finalize_call(m: MMethodDef, recvtype: MClassType, args: Array[RuntimeVariable]): nullable RuntimeVariable
 	do
-		if args.length != m.msignature.arity + 1 then # because of self
-			add("printf(\"NOT YET IMPLEMENTED: Invalid arity for {m}. {args.length} arguments given.\\n\"); show_backtrace(1);")
-			debug("NOT YET IMPLEMENTED: Invalid arity for {m}. {args.length} arguments given.")
-			return null
-		end
+		assert args.length == m.msignature.arity + 1 else debug("Invalid arity for {m}. {args.length} arguments given.")
 
 		var rm = new CustomizedRuntimeFunction(m, recvtype)
 		return rm.call(self, args)
