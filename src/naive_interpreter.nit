@@ -347,9 +347,7 @@ private class NaiveInterpreter
 			self.discover_call_trace.add mpropdef
 			self.debug("Discovered {mpropdef}")
 		end
-		if args.length < mpropdef.msignature.arity + 1 or args.length > mpropdef.msignature.arity + 1 then
-			fatal("NOT YET IMPLEMENTED: Invalid arity for {mpropdef}. {args.length} arguments given.")
-		end
+		assert args.length == mpropdef.msignature.arity + 1 else debug("Invalid arity for {mpropdef}. {args.length} arguments given.")
 
 		# Look for the AST node that implements the property
 		var mproperty = mpropdef.mproperty

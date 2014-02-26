@@ -992,6 +992,8 @@ class SeparateCompilerVisitor
 
 	private fun table_send(mmethod: MMethod, arguments: Array[RuntimeVariable], const_color: String): nullable RuntimeVariable
 	do
+		assert arguments.length == mmethod.intro.msignature.arity + 1 else debug("Invalid arity for {mmethod}. {arguments.length} arguments given.")
+
 		var res: nullable RuntimeVariable
 		var msignature = mmethod.intro.msignature.resolve_for(mmethod.intro.mclassdef.bound_mtype, mmethod.intro.mclassdef.bound_mtype, mmethod.intro.mclassdef.mmodule, true)
 		var ret = msignature.return_mtype
@@ -1087,6 +1089,8 @@ class SeparateCompilerVisitor
 
 	redef fun call(mmethoddef, recvtype, arguments)
 	do
+		assert arguments.length == mmethoddef.msignature.arity + 1 else debug("Invalid arity for {mmethoddef}. {arguments.length} arguments given.")
+
 		var res: nullable RuntimeVariable
 		var ret = mmethoddef.msignature.return_mtype
 		if mmethoddef.mproperty.is_new then
