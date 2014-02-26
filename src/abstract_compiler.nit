@@ -127,15 +127,53 @@ redef class ModelBuilder
 
 		compile_dir.mkdir
 
+		var cfiles = new Array[String]
+		write_files(compiler, compile_dir, cfiles)
+
+		# Generate the Makefile
+
+		write_makefile(compiler, compile_dir, cfiles)
+
+		var time1 = get_time
+		self.toolcontext.info("*** END WRITING C: {time1-time0} ***", 2)
+
+		# Execute the Makefile
+
+		if self.toolcontext.opt_no_cc.value then return
+
+		time0 = time1
+		self.toolcontext.info("*** COMPILING C ***", 1)
+
+		compile_c_code(compiler, compile_dir)
+
+		time1 = get_time
+		self.toolcontext.info("*** END COMPILING C: {time1-time0} ***", 2)
+	end
+
+	fun write_files(compiler: AbstractCompiler, compile_dir: String, cfiles: Array[String])
+	do
 		if self.toolcontext.opt_stacktrace.value then compiler.build_c_to_nit_bindings
 
-		var orig_dir=".." # FIXME only works if `compile_dir` is a subdirectory of cwd
+		# Add gc_choser.h to aditionnal bodies
+		var gc_chooser = new ExternCFile("gc_chooser.c", "-DWITH_LIBGC")
+		compiler.extern_bodies.add(gc_chooser)
+		compiler.files_to_copy.add "{cc_paths.first}/gc_chooser.c"
+		compiler.files_to_copy.add "{cc_paths.first}/gc_chooser.h"
 
-		var outname = self.toolcontext.opt_output.value
-		if outname == null then
-			outname = "{mainmodule.name}"
+		# FFI
+		for m in compiler.mainmodule.in_importation.greaters do if mmodule2nmodule.keys.has(m) then
+			var amodule = mmodule2nmodule[m]
+			if m.uses_ffi or amodule.uses_legacy_ni then
+				compiler.finalize_ffi_for_module(amodule)
+			end
 		end
-		var outpath = orig_dir.join_path(outname).simplify_path
+
+		# Copy original .[ch] files to compile_dir
+		for src in compiler.files_to_copy do
+			var basename = src.basename("")
+			var dst = "{compile_dir}/{basename}"
+			src.file_copy_to dst
+		end
 
 		var hfilename = compiler.header.file.name + ".h"
 		var hfilepath = "{compile_dir}/{hfilename}"
@@ -149,8 +187,6 @@ redef class ModelBuilder
 			h.write "\n"
 		end
 		h.close
-
-		var cfiles = new Array[String]
 
 		for f in compiler.files do
 			var i = 0
@@ -199,24 +235,25 @@ redef class ModelBuilder
 		end
 
 		self.toolcontext.info("Total C source files to compile: {cfiles.length}", 2)
+	end
 
-		# FFI
-		for m in mainmodule.in_importation.greaters do if mmodule2nmodule.keys.has(m) then
-			var amodule = mmodule2nmodule[m]
-			if m.uses_ffi or amodule.uses_legacy_ni then
-				compiler.finalize_ffi_for_module(amodule)
-			end
+	fun write_makefile(compiler: AbstractCompiler, compile_dir: String, cfiles: Array[String])
+	do
+		var mainmodule = compiler.mainmodule
+
+		var outname = self.toolcontext.opt_output.value
+		if outname == null then
+			outname = "{mainmodule.name}"
 		end
 
-		# Generate the Makefile
-
+		var orig_dir=".." # FIXME only works if `compile_dir` is a subdirectory of cwd
+		var outpath = orig_dir.join_path(outname).simplify_path
 		var makename = "{mainmodule.name}.mk"
 		var makepath = "{compile_dir}/{makename}"
 		var makefile = new OFStream.open(makepath)
 
 		var cc_includes = ""
 		for p in cc_paths do
-			p = orig_dir.join_path(p).simplify_path
 			cc_includes += " -I \"" + p + "\""
 		end
 
@@ -226,9 +263,7 @@ redef class ModelBuilder
 			linker_options.add(amod.c_linker_options)
 		end
 
-		if not toolcontext.opt_no_stacktrace.value then
-			linker_options.add("-lunwind")
-    end
+		if not toolcontext.opt_no_stacktrace.value then linker_options.add("-lunwind")
 
 		makefile.write("CC = ccache cc\nCFLAGS = -g -O2\nCINCL = {cc_includes}\nLDFLAGS ?= \nLDLIBS  ?= -lm -lgc {linker_options.join(" ")}\n\n")
 		makefile.write("all: {outpath}\n\n")
@@ -241,16 +276,12 @@ redef class ModelBuilder
 			ofiles.add(o)
 		end
 
-		# Add gc_choser.h to aditionnal bodies
-		var gc_chooser = new ExternCFile("{cc_paths.first}/gc_chooser.c", "-DWITH_LIBGC")
-		compiler.extern_bodies.add(gc_chooser)
-
 		# Compile each required extern body into a specific .o
 		for f in compiler.extern_bodies do
 			if f isa ExternCFile then
 				var basename = f.filename.basename(".c")
 				var o = "{basename}.extern.o"
-				var ff = orig_dir.join_path(f.filename).simplify_path
+				var ff = f.filename.basename("")
 				makefile.write("{o}: {ff}\n\t$(CC) $(CFLAGS) -D NONITCNI {f.cflags} -c -o {o} {ff}\n\n")
 				ofiles.add(o)
 			end
@@ -262,16 +293,12 @@ redef class ModelBuilder
 		makefile.write("clean:\n\trm {ofiles.join(" ")} 2>/dev/null\n\n")
 		makefile.close
 		self.toolcontext.info("Generated makefile: {makepath}", 2)
+	end
 
-		var time1 = get_time
-		self.toolcontext.info("*** END WRITING C: {time1-time0} ***", 2)
+	fun compile_c_code(compiler: AbstractCompiler, compile_dir: String)
+	do
+		var makename = "{compiler.mainmodule.name}.mk" # FIXME duplicated from write_makefile
 
-		# Execute the Makefile
-
-		if self.toolcontext.opt_no_cc.value then return
-
-		time0 = time1
-		self.toolcontext.info("*** COMPILING C ***", 1)
 		var makeflags = self.toolcontext.opt_make_flags.value
 		if makeflags == null then makeflags = ""
 		self.toolcontext.info("make -B -C {compile_dir} -f {makename} -j 4 {makeflags}", 2)
@@ -285,9 +312,6 @@ redef class ModelBuilder
 		if res != 0 then
 			toolcontext.error(null, "make failed! Error code: {res}.")
 		end
-
-		time1 = get_time
-		self.toolcontext.info("*** END COMPILING C: {time1-time0} ***", 2)
 	end
 end
 
@@ -389,7 +413,7 @@ abstract class AbstractCompiler
 		self.header.add_decl("#include <stdlib.h>")
 		self.header.add_decl("#include <stdio.h>")
 		self.header.add_decl("#include <string.h>")
-		self.header.add_decl("#include <gc_chooser.h>")
+		self.header.add_decl("#include \"gc_chooser.h\"")
 
 		compile_header_structs
 		compile_nitni_structs
@@ -531,6 +555,9 @@ abstract class AbstractCompiler
 
 	# List of additional files required to compile (FFI)
 	var extern_bodies = new Array[ExternFile]
+
+	# List of source files to copy over to the compile dir
+	var files_to_copy = new Array[String]
 
 	# This is used to avoid adding an extern file more than once
 	private var seen_extern = new ArraySet[String]
@@ -1010,11 +1037,13 @@ abstract class AbstractCompilerVisitor
 		file = file.strip_extension(".nit")
 		var tryfile = file + ".nit.h"
 		if tryfile.file_exists then
-			self.declare_once("#include \"{"..".join_path(tryfile)}\"")
+			self.declare_once("#include \"{tryfile.basename("")}\"")
+			self.compiler.files_to_copy.add(tryfile)
 		end
 		tryfile = file + "_nit.h"
 		if tryfile.file_exists then
-			self.declare_once("#include \"{"..".join_path(tryfile)}\"")
+			self.declare_once("#include \"{tryfile.basename("")}\"")
+			self.compiler.files_to_copy.add(tryfile)
 		end
 
 		if self.compiler.seen_extern.has(file) then return
@@ -1024,8 +1053,9 @@ abstract class AbstractCompilerVisitor
 			tryfile = file + "_nit.c"
 			if not tryfile.file_exists then return
 		end
-		var f = new ExternCFile(tryfile, "")
+		var f = new ExternCFile(tryfile.basename(""), "")
 		self.compiler.extern_bodies.add(f)
+		self.compiler.files_to_copy.add(tryfile)
 	end
 
 	# Return a new local runtime_variable initialized with the C expression `cexpr`.
