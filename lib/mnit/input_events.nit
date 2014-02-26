@@ -17,7 +17,7 @@
 # Defines abstract classes for user inputs
 module input_events
 
-# General type of inputs
+# Input to the App, propagated through `App::input`.
 interface InputEvent
 end
 
