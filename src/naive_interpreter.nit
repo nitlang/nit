@@ -602,12 +602,12 @@ redef class AConcreteMethPropdef
 		return null
 	end
 
-	private fun call_commons(v: NaiveInterpreter, mpropdef: MMethodDef, args: Array[Instance], f: Frame)
+	private fun call_commons(v: NaiveInterpreter, mpropdef: MMethodDef, arguments: Array[Instance], f: Frame)
 	do
 		for i in [0..mpropdef.msignature.arity[ do
 			var variable = self.n_signature.n_params[i].variable
 			assert variable != null
-			f.map[variable] = args[i+1]
+			f.map[variable] = arguments[i+1]
 		end
 
 		v.frames.unshift(f)
@@ -615,13 +615,13 @@ redef class AConcreteMethPropdef
 		# Call the implicit super-init
 		var auto_super_inits = self.auto_super_inits
 		if auto_super_inits != null then
-			var selfarg = [args.first]
+			var args = [arguments.first]
 			for auto_super_init in auto_super_inits do
-				if auto_super_init.intro.msignature.arity == 0 then
-					v.send(auto_super_init, selfarg)
-				else
-					v.send(auto_super_init, args)
+				args.clear
+				for i in [0..auto_super_init.intro.msignature.arity+1[ do
+					args.add(arguments[i])
 				end
+				v.send(auto_super_init, args)
 			end
 		end
 
@@ -1562,18 +1562,22 @@ redef class ASuperExpr
 			if i == null then return null
 			args.add(i)
 		end
-		if args.length == 1 then
-			args = v.frame.arguments
-		end
 
 		var callsite = self.callsite
 		if callsite != null then
-			if callsite.mproperty.intro.msignature.arity == 0 then
-				args = [recv]
+			# Add additionnals arguments for the super init call
+			if args.length == 1 then
+				for i in [0..callsite.mproperty.intro.msignature.arity[ do
+					args.add(v.frame.arguments[i+1])
+				end
 			end
 			# Super init call
 			var res = v.send(callsite.mproperty, args)
 			return res
+		end
+
+		if args.length == 1 then
+			args = v.frame.arguments
 		end
 
 		# stantard call-next-method
