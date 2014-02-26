@@ -1,6 +1,7 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
 # Copyright 2012 Jean Privat <jean@pryen.org>
+# Copyright 2014 Alexandre Terrasa <alexandre@moz-code.org>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -124,4 +125,109 @@ redef class MModule
 	fun is_user_defined: Bool do
 		return not self.model.std_modules.has(self.name)
 	end
+end
+
+# A Metric is used to collect data about things
+#
+# The concept is reified here for a better organization and documentation
+interface Metric
+	fun name: String is abstract
+	fun desc: String is abstract
+	# clear all results for this metric
+	fun clear is abstract
+end
+
+# A Metric that collects integer data
+#
+# Used to count things
+class IntMetric[E: Object]
+	super Metric
+
+	var values = new Counter[E]
+
+	redef fun clear do values.clear
+
+	# Return the couple with the highest value
+	fun max: Couple[E, Int] do
+		assert not values.is_empty
+		var elem = values.max.as(not null)
+		var value = values[elem]
+		return new Couple[E, Int](elem, value)
+	end
+
+	# Return the couple with the lowest value
+	fun min: Couple[E, Int] do
+		assert not values.is_empty
+		var elem = values.min.as(not null)
+		var value = values[elem]
+		return new Couple[E, Int](elem, value)
+	end
+
+	# Values average
+	fun avg: Float do return values.avg
+end
+
+# A Metric that collects float datas
+#
+# Used sor summarization
+class FloatMetric[E: Object]
+	super Metric
+
+	var values: Map[E, Float] = new HashMap[E, Float]
+
+	redef fun clear do values.clear
+
+	# Return the couple with the highest value
+	fun max: Couple[E, Float] do
+		assert not values.is_empty
+		var max: nullable Float = null
+		var elem: nullable E = null
+		for e, v in values do
+			if max == null or v > max then
+				max = v
+				elem = e
+			end
+		end
+		return new Couple[E, Float](elem.as(not null), max.as(not null))
+	end
+
+	# Return the couple with the lowest value
+	fun min: Couple[E, Float] do
+		assert not values.is_empty
+		var min: nullable Float = null
+		var elem: nullable E = null
+		for e, v in values do
+			if min == null or v < min then
+				min = v
+				elem = e
+			end
+		end
+		return new Couple[E, Float](elem.as(not null), min.as(not null))
+	end
+
+	# Values average
+	fun avg: Float do
+		if values.is_empty then return 0.0
+		var sum = 0.0
+		for value in values.values do
+			sum += value
+		end
+		return sum / values.length.to_f
+	end
+end
+
+# A MetricSet is a metric holder
+#
+# It purpose is to be extended with a metric collect service
+class MetricSet
+	type METRIC: Metric
+
+	# Metrics to compute
+	var metrics: Map[String, METRIC] = new HashMap[String, METRIC]
+
+	# Add a metric to the set
+	fun register(metrics: METRIC...) do for metric in metrics do self.metrics[metric.name] = metric
+
+	# Clear all results for all metrics
+	fun clear do for metric in metrics.values do metric.clear
 end
