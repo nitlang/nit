@@ -464,6 +464,11 @@ abstract class AbstractCompiler
 			end
 		end
 
+		v.add_decl("void sig_handler(int signo)\{")
+		v.add_decl("printf(\"Caught signal : %s\\n\", strsignal(signo));")
+		v.add_decl("show_backtrace(signo);")
+		v.add_decl("\}")
+
 		v.add_decl("void show_backtrace (int signo) \{")
 		if not modelbuilder.toolcontext.opt_no_stacktrace.value then
 			v.add_decl("char* opt = getenv(\"NIT_NO_STACK\");")
@@ -499,12 +504,12 @@ abstract class AbstractCompiler
 
 		v.add_decl("int main(int argc, char** argv) \{")
 
-		v.add("signal(SIGABRT, show_backtrace);")
-		v.add("signal(SIGFPE, show_backtrace);")
-		v.add("signal(SIGILL, show_backtrace);")
-		v.add("signal(SIGINT, show_backtrace);")
-		v.add("signal(SIGTERM, show_backtrace);")
-		v.add("signal(SIGSEGV, show_backtrace);")
+		v.add("signal(SIGABRT, sig_handler);")
+		v.add("signal(SIGFPE, sig_handler);")
+		v.add("signal(SIGILL, sig_handler);")
+		v.add("signal(SIGINT, sig_handler);")
+		v.add("signal(SIGTERM, sig_handler);")
+		v.add("signal(SIGSEGV, sig_handler);")
 
 		v.add("glob_argc = argc; glob_argv = argv;")
 		v.add("initialize_gc_option();")
