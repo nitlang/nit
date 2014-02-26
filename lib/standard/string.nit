@@ -883,11 +883,6 @@ private class FlatBufferCharView
 
 	redef type SELFTYPE: Buffer
 
-	init(tgt: Buffer)
-	do
-		self.target = tgt
-	end
-
 	redef fun [](index) do return target._items[index]
 
 	redef fun []=(index, item)
