@@ -38,7 +38,7 @@ extern SDLDisplay in "C" `{SDL_Surface *`}
 
 	redef type I: SDLImage
 
-        # Initialize a surface with width and height
+	# Initialize a surface with width and height
 	new ( w, h: Int) is extern `{
 		SDL_Init(SDL_INIT_VIDEO);
 
@@ -53,7 +53,7 @@ extern SDLDisplay in "C" `{SDL_Surface *`}
 		return SDL_SetVideoMode( w, h, 24, SDL_HWSURFACE );
 	`}
 
-        # Destroy the surface
+	# Destroy the surface
 	fun destroy is extern `{
 	if ( SDL_WasInit( SDL_INIT_VIDEO ) )
 		SDL_Quit();
@@ -155,7 +155,7 @@ extern SDLDisplay in "C" `{SDL_Surface *`}
 	# Set the position of the cursor to x,y
 	fun warp_mouse( x,y: Int ) `{ SDL_WarpMouse( x, y ); `}
 
-        # Show or hide the cursor
+	# Show or hide the cursor
 	fun show_cursor( show: Bool ) `{ SDL_ShowCursor( show ); `}
 end
 
@@ -199,7 +199,7 @@ extern SDLImage in "C" `{SDL_Surface*`} # TODO remove
 		return NULL;
 	`}
 
-        # Copy of an existing SDLImage
+	# Copy of an existing SDLImage
 	new copy_of( image: SDLImage ) is extern `{
 		SDL_Surface *new_image = SDL_CreateRGBSurface( image->flags, image->w, image->h, 24,
 							  0, 0, 0, 0 );
@@ -217,7 +217,7 @@ extern SDLImage in "C" `{SDL_Surface*`} # TODO remove
 	# Save the image into the specified file
 	fun save_to_file( path: String ) is extern import String::to_cstring `{ `}
 
-        # Destroy the image and free the memory
+	# Destroy the image and free the memory
 	redef fun destroy is extern `{ SDL_FreeSurface( recv ); `}
 
 	redef fun width: Int is extern `{ return recv->w; `}
@@ -228,7 +228,7 @@ end
 
 # A simple rectangle
 extern SDLRectangle in "C" `{SDL_Rect*`}
-        # Constructor with x,y positions width and height of the rectangle
+	# Constructor with x,y positions width and height of the rectangle
 	new ( x: Int, y: Int, w: Int, h: Int ) is extern `{
 		SDL_Rect *rect = malloc( sizeof( SDL_Rect ) );
 		rect->x = (Sint16)x;
@@ -346,10 +346,10 @@ class SDLKeyEvent
 		end
 	end
 
-        # Return true if the key is down, false otherwise
+	# Return true if the key is down, false otherwise
 	redef fun is_down do return down
 
-        # Return true if the key is the up arrow
+	# Return true if the key is the up arrow
 	redef fun is_arrow_up do return key_name == "up"
 	# Return true if the key is the left arrow
 	redef fun is_arrow_left do return key_name == "left"
@@ -430,7 +430,7 @@ extern SDLFont in "C" `{TTF_Font *`}
 		return TTF_FontLineSkip( recv );
 	`}
 
-        # Return true is the font used fixed width for each char
+	# Return true is the font used fixed width for each char
 	fun is_fixed_width: Bool is extern `{
 		return TTF_FontFaceIsFixedWidth( recv );
 	`}
@@ -466,5 +466,28 @@ extern SDLFont in "C" `{TTF_Font *`}
 		}
 		else
 			return w;
+	`}
+end
+
+# Information on the SDL window
+# Used in other modules to get window handle
+extern class SDLSystemWindowManagerInfo `{SDL_SysWMinfo *`}
+
+	new `{
+		SDL_SysWMinfo *val = malloc(sizeof(SDL_SysWMinfo));
+
+		SDL_VERSION(&val->version);
+
+		if(SDL_GetWMInfo(val) <= 0) {
+			printf("Unable to get window handle");
+			return 0;
+		}
+
+		return val;
+	`}
+
+	# Returns the handle of this window on a X11 window system
+	fun x11_window_handle: Pointer `{
+		return (void*)recv->info.x11.window;
 	`}
 end
