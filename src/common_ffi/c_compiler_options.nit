@@ -20,6 +20,7 @@
 module c_compiler_options
 
 import c
+import cpp
 
 redef class ToolContext
 	var c_compiler_options_phase: Phase = new CCompilerOptionsPhase(self, null)
@@ -30,13 +31,15 @@ private class CCompilerOptionsPhase
 
 	fun compiler_annotation_name: String do return "c_compiler_option"
 	fun linker_annotation_name: String do return "c_linker_option"
+	fun cpp_compiler_annotation_name: String do return "cpp_compiler_option"
 
 	redef fun process_annotated_node(nmoduledecl, nat)
 	do
 		# Skip if we are not interested
 		var annotation_name = nat.n_atid.n_id.text
 		if annotation_name != compiler_annotation_name and
-		   annotation_name != linker_annotation_name then return
+		   annotation_name != linker_annotation_name and
+		   annotation_name != cpp_compiler_annotation_name then return
 
 		# Do some validity checks and print errors if the annotation is used incorrectly
 		var modelbuilder = toolcontext.modelbuilder
@@ -139,6 +142,8 @@ private class CCompilerOptionsPhase
 				process_c_compiler_annotation(nmodule, cmd)
 			else if annotation_name == linker_annotation_name then
 				process_c_linker_annotation(nmodule, cmd)
+			else if annotation_name == cpp_compiler_annotation_name then
+				process_cpp_compiler_annotation(nmodule, cmd)
 			else abort
 		end
 	end
@@ -151,6 +156,11 @@ private class CCompilerOptionsPhase
 	fun process_c_linker_annotation(nmodule: AModule, opt: String)
 	do
 		nmodule.c_linker_options = "{nmodule.c_linker_options} {opt}"
+	end
+
+	fun process_cpp_compiler_annotation(nmodule: AModule, opt: String)
+	do
+		nmodule.cpp_compiler_options = "{nmodule.cpp_compiler_options} {opt}"
 	end
 end
 

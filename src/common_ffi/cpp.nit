@@ -1,0 +1,262 @@
+# This file is part of NIT ( http://www.nitlanguage.org ).
+#
+# Copyright 2013 Alexis Laferrière <alexis.laf@xymus.net>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Supports the use of the C++ language through the FFI
+module cpp
+
+import extern_classes
+import c
+
+redef class FFILanguageAssignationPhase
+	var cpp_language: FFILanguage = new CPPLanguage(self)
+end
+
+redef class AModule
+	private var cpp_file: nullable CPPCompilationUnit = null
+	var cpp_compiler_options writable = ""
+end
+
+class CPPLanguage
+	super FFILanguage
+
+	redef fun identify_language(n) do return n.is_cpp
+
+	redef fun compile_module_block(block, ecc, nmodule)
+	do
+		if nmodule.cpp_file == null then nmodule.cpp_file = new CPPCompilationUnit
+
+		if block.is_cpp_header then
+			nmodule.cpp_file.header_custom.add(block.location.as_line_pragma)
+			nmodule.cpp_file.header_custom.add(block.code)
+		else if block.is_cpp_body then
+			nmodule.cpp_file.body_custom.add( block.location.as_line_pragma )
+			nmodule.cpp_file.body_custom.add( block.code )
+		end
+	end
+
+	# We call C++ from C using 2 more files (_ffi.c and _ffi.cpp) and multiple generated functions:
+	# 1. The standard C implementation function (___impl) expected by the common FFI
+	# 2. The indirection function (___cpp_impl_mid) is a C function, called from C but implemented as `extern "C"` in C++
+	# 3. The actual C++ implementation function (___cpp_impl)
+	redef fun compile_extern_method(block, m, ecc, nmodule)
+	do
+		if nmodule.cpp_file == null then nmodule.cpp_file = new CPPCompilationUnit
+
+		var mmodule = nmodule.mmodule.as(not null)
+		var mclass_type = m.parent.as(AClassdef).mclass.mclass_type
+		var mproperty = m.mpropdef.mproperty
+
+		# Signature of the indirection function implemented as `extern "C"` in C++
+		var indirection_sig = mproperty.build_csignature(mclass_type, mmodule, "___cpp_impl_mid", long_signature, internal_call_context)
+
+		## In C file (__ffi.c)
+		
+		# Declare the indirection function in C
+		ecc.body_decl.add("{indirection_sig};\n")
+
+		# Call the indirection function from C (___impl)
+		var fc: CFunction = new ExternCFunction(m, mmodule)
+		fc.exprs.add(mproperty.build_ccall(mclass_type, mmodule, "___cpp_impl_mid", long_signature, cpp_call_context, null))
+		fc.exprs.add("\n")
+		ecc.add_exported_function( fc )
+
+		## In C++ file (__ffi.cpp)
+
+		# Declare the indirection function in C++
+		nmodule.cpp_file.header_decl.add("extern \"C\" \{\n")
+		nmodule.cpp_file.header_decl.add("{indirection_sig};\n")
+		nmodule.cpp_file.header_decl.add("\}\n")
+
+		# Implement the indirection function as extern in C++
+		# Will convert C arguments to C++ and call the C++ implementation function.
+		fc = new CFunction(indirection_sig)
+		if not mproperty.is_init then
+			var param_name = "recv"
+			var type_name = to_cpp_call_context.name_mtype(mclass_type)
+			if mclass_type.mclass.ftype isa ForeignCppType then
+				fc.exprs.add("{type_name} {param_name}_for_cpp = static_cast<{type_name}>({param_name});\n")
+			else
+				fc.exprs.add("{type_name} {param_name}_for_cpp = {param_name};\n")
+			end
+		end
+		for param in m.mpropdef.msignature.mparameters do
+			var param_name = param.name
+			var type_name = to_cpp_call_context.name_mtype(param.mtype)
+			if mclass_type.mclass.ftype isa ForeignCppType then
+				fc.exprs.add("{type_name} {param_name}_for_cpp = static_cast<{type_name}>({param_name});\n")
+			else
+				fc.exprs.add("{type_name} {param_name}_for_cpp = {param_name};\n")
+			end
+		end
+		fc.exprs.add(mproperty.build_ccall(mclass_type, mmodule, "___cpp_impl", long_signature, cpp_call_context, "_for_cpp"))
+		fc.exprs.add("\n")
+		nmodule.cpp_file.add_local_function(fc)
+
+		# Custom C++, the body of the Nit C++ method is copied to its own C++ function
+		var cpp_signature = mproperty.build_csignature(mclass_type, mmodule, "___cpp_impl", long_signature, cpp_call_context)
+		fc = new CFunction(cpp_signature)
+		fc.decls.add( block.location.as_line_pragma )
+		fc.exprs.add( block.code )
+		nmodule.cpp_file.add_local_function( fc )
+	end
+
+	redef fun compile_extern_class(block, m, ecc, nmodule) do end
+
+	redef fun get_ftype(block, m) do return new ForeignCppType(block.code)
+
+	redef fun compile_to_files(nmodule, compdir)
+	do
+		var cpp_file = nmodule.cpp_file
+		assert cpp_file != null
+
+		# write .cpp and .hpp file
+		cpp_file.header_custom.add("extern \"C\" \{\n")
+		cpp_file.header_custom.add("#include \"{nmodule.mmodule.name}._ffi.h\"\n")
+		cpp_file.header_custom.add("\}\n")
+
+		var file = cpp_file.write_to_files(nmodule, compdir)
+
+		# add complation to makefile
+		nmodule.ffi_files.add(file)
+
+		# add linked option to support C++
+		nmodule.c_linker_options = "{nmodule.c_linker_options} -lstdc++"
+	end
+
+	redef fun compile_callback(callback, nmodule, mmodule, ecc)
+	do
+		callback.compile_callback_to_cpp(nmodule, mmodule)
+	end
+end
+
+redef class AExternCodeBlock
+	fun is_cpp : Bool do return language_name != null and
+		(language_name_lowered == "c++" or language_name_lowered.has_prefix("c++ "))
+
+	fun is_cpp_body : Bool do return language_name != null and
+		(language_name_lowered == "c++" or language_name_lowered == "c++ body")
+
+	fun is_cpp_header : Bool do return language_name != null and
+		(language_name_lowered == "c++ header")
+end
+
+class CPPCompilationUnit
+	super CCompilationUnit
+
+	fun write_to_files(amodule: AModule, compdir: String): ExternCppFile
+	do
+		var base_name = "{amodule.mmodule.name}._ffi"
+
+		var h_file = "{base_name}.hpp"
+		var guard = "{amodule.cname.to_s.to_upper}_NIT_HPP"
+
+		write_header_to_file(amodule, "{compdir}/{h_file}", new Array[String], guard)
+
+		var c_file = "{base_name}.cpp"
+		write_body_to_file(amodule, "{compdir}/{c_file}", ["<string>", "<iostream>", "\"{h_file}\""])
+
+		files.add("{compdir}/{c_file}")
+
+		return new ExternCppFile("{compdir}/{c_file}", amodule)
+	end
+end
+
+class ExternCppFile
+	super ExternFile
+
+	var amodule: AModule
+	init(path: String, amodule: AModule)
+	do
+		super
+		self.amodule = amodule
+	end
+
+	redef fun makefile_rule_name do return "{filename.basename("")}.o"
+	redef fun makefile_rule_content do return "g++ {amodule.cpp_compiler_options} -c {filename.basename("")} -o {filename.basename("")}.o"
+end
+
+class ForeignCppType
+	super ForeignType
+
+	var cpp_type: String
+
+	init (cpp_type: String)
+	do
+		self.cpp_type = cpp_type
+	end
+end
+
+redef class NitniCallback
+	fun compile_callback_to_cpp(nmodule: AModule, mmodule: MModule) do end
+end
+
+redef class Object
+	private fun cpp_call_context: CppCallContext do return once new CppCallContext
+	private fun to_cpp_call_context: ToCppCallContext do return once new ToCppCallContext
+	private fun from_cpp_call_context: FromCppCallContext do return once new FromCppCallContext
+end
+
+redef class MExplicitCall
+	redef fun compile_callback_to_cpp(nmodule, mmodule)
+	do
+		var mproperty = mproperty
+		assert mproperty isa MMethod
+
+		var cpp_signature = mproperty.build_csignature(recv_mtype, mmodule, null, short_signature, from_cpp_call_context)
+		var ccall = mproperty.build_ccall(recv_mtype, mmodule, null, long_signature, from_cpp_call_context, null)
+		var fc = new CFunction(cpp_signature)
+		fc.exprs.add(ccall)
+		nmodule.cpp_file.add_local_function( fc )
+	end
+end
+
+private class CppCallContext
+	super CallContext
+
+	redef fun name_mtype(mtype)
+	do
+		if mtype isa MClassType then
+			var ftype = mtype.mclass.ftype
+			if ftype isa ForeignCppType then
+				return ftype.cpp_type
+			end
+		end
+
+		return mtype.cname
+	end
+end
+
+class ToCppCallContext
+	super CppCallContext
+
+	redef fun cast_to(mtype, name)
+	do
+		if mtype isa MClassType and mtype.mclass.ftype isa ForeignCppType then
+			return "(void*)({name})"
+		else return name
+	end
+end
+
+private class FromCppCallContext
+	super CppCallContext
+
+	redef fun cast_from(mtype, name)
+	do
+		if mtype isa MClassType and mtype.mclass.ftype isa ForeignCppType then
+			return "static_cast<{name_mtype(mtype)}>({name})"
+		else return name
+	end
+end
