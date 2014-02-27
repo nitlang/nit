@@ -16,6 +16,9 @@
 
 module string_ffi_ref_test
 
+intrude import string
+import file
+
 class StringTest
 
 	var copied_str: nullable String

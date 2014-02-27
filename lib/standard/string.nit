@@ -427,9 +427,9 @@ end
 abstract class AbstractString
 	super Text
 
-	readable private var _items: NativeString
+	private var items: NativeString
 
-	redef readable private var _length: Int
+	redef var length: Int
 
 	init do end
 
@@ -437,7 +437,7 @@ abstract class AbstractString
 	do
 		var i = 0
 		while i < length do
-			_items[i].output
+			items[i].output
 			i += 1
 		end
 	end
@@ -528,10 +528,10 @@ class String
 	redef type OTHER: String
 
 	# Index in _items of the start of the string
-	readable var _index_from: Int
+	private var index_from: Int
 
 	# Indes in _items of the last item of the string
-	readable var _index_to: Int
+	private var index_to: Int
 
 	redef var chars: StringCharView = new FlatStringCharView(self)
 
@@ -543,8 +543,8 @@ class String
 		assert index >= 0
 		# Check that the index (+ index_from) is not larger than indexTo
 		# In other terms, if the index is valid
-		assert (index + _index_from) <= _index_to
-		return _items[index + _index_from]
+		assert (index + index_from) <= index_to
+		return items[index + index_from]
 	end
 
 	redef fun substring(from: Int, count: Int): String
@@ -557,26 +557,25 @@ class String
 			from = 0
 		end
 
-		var realFrom = _index_from + from
+		var realFrom = index_from + from
 
-		if (realFrom + count) > _index_to then return new String.with_infos(_items, _index_to - realFrom + 1, realFrom, _index_to)
+		if (realFrom + count) > index_to then return new String.with_infos(items, index_to - realFrom + 1, realFrom, index_to)
 
 		if count == 0 then return ""
 
 		var to = realFrom + count - 1
 
-		return new String.with_infos(_items, to - realFrom + 1, realFrom, to)
+		return new String.with_infos(items, to - realFrom + 1, realFrom, to)
 	end
-
 
 	redef fun to_upper: String
 	do
-		var outstr = calloc_string(self._length + 1)
+		var outstr = calloc_string(self.length + 1)
 		var out_index = 0
 
-		var myitems = self._items
-		var index_from = self._index_from
-		var max = self._index_to
+		var myitems = self.items
+		var index_from = self.index_from
+		var max = self.index_to
 
 		while index_from <= max do
 			outstr[out_index] = myitems[index_from].to_upper
@@ -586,17 +585,17 @@ class String
 
 		outstr[self.length] = '\0'
 
-		return outstr.to_s_with_length(self._length)
+		return outstr.to_s_with_length(self.length)
 	end
 
 	redef fun to_lower : String
 	do
-		var outstr = calloc_string(self._length + 1)
+		var outstr = calloc_string(self.length + 1)
 		var out_index = 0
 
-		var myitems = self._items
-		var index_from = self._index_from
-		var max = self._index_to
+		var myitems = self.items
+		var index_from = self.index_from
+		var max = self.index_to
 
 		while index_from <= max do
 			outstr[out_index] = myitems[index_from].to_lower
@@ -606,23 +605,23 @@ class String
 
 		outstr[self.length] = '\0'
 
-		return outstr.to_s_with_length(self._length)
+		return outstr.to_s_with_length(self.length)
 	end
 
 	redef fun trim: String
 	do
-		if self._length == 0 then return self
+		if self.length == 0 then return self
 		# find position of the first non white space char (ascii < 32) from the start of the string
-		var start_pos = self._index_from
-		while _items[start_pos].ascii <= 32 do
+		var start_pos = self.index_from
+		while items[start_pos].ascii <= 32 do
 			start_pos += 1
-			if start_pos == _index_to + 1 then return ""
+			if start_pos == index_to + 1 then return ""
 		end
 		# find position of the first non white space char from the end of the string
-		var end_pos = _index_to
-		while _items[end_pos].ascii <= 32 do
+		var end_pos = index_to
+		while items[end_pos].ascii <= 32 do
 			end_pos -= 1
-			if end_pos == start_pos then return _items[start_pos].to_s
+			if end_pos == start_pos then return items[start_pos].to_s
 		end
 		start_pos -= index_from
 		end_pos -= index_from
@@ -631,10 +630,10 @@ class String
 
 	redef fun output
 	do
-		var i = self._index_from
-		var imax = self._index_to
+		var i = self.index_from
+		var imax = self.index_to
 		while i <= imax do
-			_items[i].output
+			items[i].output
 			i += 1
 		end
 	end
@@ -645,22 +644,22 @@ class String
 
 	private init with_infos(items: NativeString, len: Int, from: Int, to: Int)
 	do
-		self._items = items
-		_length = len
-		_index_from = from
-		_index_to = to
+		self.items = items
+		length = len
+		index_from = from
+		index_to = to
 	end
 
 	# Return a null terminated char *
 	fun to_cstring: NativeString
 	do
-		if _index_from > 0 or _index_to != items.cstring_length - 1 then
-			var newItems = calloc_string(_length + 1)
-			self.items.copy_to(newItems, _length, _index_from, 0)
+		if index_from > 0 or index_to != items.cstring_length - 1 then
+			var newItems = calloc_string(length + 1)
+			self.items.copy_to(newItems, length, index_from, 0)
 			newItems[length] = '\0'
 			return newItems
 		end
-		return _items
+		return items
 	end
 
 	redef fun ==(other)
@@ -669,17 +668,17 @@ class String
 
 		if self.object_id == other.object_id then return true
 
-		var my_length = _length
+		var my_length = length
 
-		if other._length != my_length then return false
+		if other.length != my_length then return false
 
-		var my_index = _index_from
-		var its_index = other._index_from
+		var my_index = index_from
+		var its_index = other.index_from
 
 		var last_iteration = my_index + my_length
 
-		var itsitems = other._items
-		var myitems = self._items
+		var itsitems = other.items
+		var myitems = self.items
 
 		while my_index < last_iteration do
 			if myitems[my_index] != itsitems[its_index] then return false
@@ -700,14 +699,14 @@ class String
 		var my_curr_char : Char
 		var its_curr_char : Char
 
-		var curr_id_self = self._index_from
-		var curr_id_other = other._index_from
+		var curr_id_self = self.index_from
+		var curr_id_other = other.index_from
 
-		var my_items = self._items
-		var its_items = other._items
+		var my_items = self.items
+		var its_items = other.items
 
-		var my_length = self._length
-		var its_length = other._length
+		var my_length = self.length
+		var its_length = other.length
 
 		var max_iterations = curr_id_self + my_length
 
@@ -732,15 +731,15 @@ class String
 	#     assert "hello " + "world!"         == "hello world!"
 	fun +(s: String): String
 	do
-		var my_length = self._length
-		var its_length = s._length
+		var my_length = self.length
+		var its_length = s.length
 
 		var total_length = my_length + its_length
 
 		var target_string = calloc_string(my_length + its_length + 1)
 
-		self._items.copy_to(target_string, my_length, _index_from, 0)
-		s._items.copy_to(target_string, its_length, s._index_from, my_length)
+		self.items.copy_to(target_string, my_length, index_from, 0)
+		s.items.copy_to(target_string, its_length, s.index_from, my_length)
 
 		target_string[total_length] = '\0'
 
@@ -756,11 +755,11 @@ class String
 	do
 		assert i >= 0
 
-		var my_length = self._length
+		var my_length = self.length
 
 		var final_length = my_length * i
 
-		var my_items = self._items
+		var my_items = self.items
 
 		var target_string = calloc_string((final_length) + 1)
 
@@ -782,15 +781,15 @@ class String
 	do
 		# djb2 hash algorythm
 		var h = 5381
-		var i = _length - 1
+		var i = length - 1
 
-		var myitems = _items
-		var strStart = _index_from
+		var myitems = items
+		var strStart = index_from
 
 		i += strStart
 
 		while i >= strStart do
-			h = (h * 32) + h + self._items[i].ascii
+			h = (h * 32) + h + self.items[i].ascii
 			i -= 1
 		end
 
@@ -860,8 +859,8 @@ private class FlatStringCharView
 		# Check that the index (+ index_from) is not larger than indexTo
 		# In other terms, if the index is valid
 		assert index >= 0
-		assert (index + target._index_from) <= target._index_to
-		return target._items[index + target._index_from]
+		assert (index + target.index_from) <= target.index_to
+		return target.items[index + target.index_from]
 	end
 
 	redef fun iterator_from(start) do return new FlatStringIterator.with_pos(target, start)
@@ -880,6 +879,8 @@ class Buffer
 
 	redef var chars: BufferCharView = new FlatBufferCharView(self)
 
+	var capacity: Int
+
 	# Modifies the char contained at pos `index`
 	#
 	# DEPRECATED : Use self.chars.[]= instead
@@ -890,7 +891,7 @@ class Buffer
 			return
 		end
 		assert index >= 0 and index < length
-		_items[index] = item
+		items[index] = item
 	end
 
 	# Adds a char `c` at the end of self
@@ -898,24 +899,24 @@ class Buffer
 	# DEPRECATED : Use self.chars.add instead
 	fun add(c: Char)
 	do
-		if _capacity <= length then enlarge(length + 5)
-		_items[length] = c
-		_length += 1
+		if capacity <= length then enlarge(length + 5)
+		items[length] = c
+		length += 1
 	end
 
 	# Clears the buffer
-	fun clear do _length = 0
+	fun clear do length = 0
 
 	# Enlarges the subsequent array containing the chars of self
 	fun enlarge(cap: Int)
 	do
-		var c = _capacity
+		var c = capacity
 		if cap <= c then return
 		while c <= cap do c = c * 2 + 2
 		var a = calloc_string(c+1)
-		_items.copy_to(a, length, 0, 0)
-		_items = a
-		_capacity = c
+		items.copy_to(a, length, 0, 0)
+		items = a
+		capacity = c
 		items.copy_to(a, length, 0, 0)
 	end
 
@@ -923,7 +924,7 @@ class Buffer
 	do
 		var l = length
 		var a = calloc_string(l+1)
-		_items.copy_to(a, l, 0, 0)
+		items.copy_to(a, l, 0, 0)
 
 		# Ensure the afterlast byte is '\0' to nul-terminated char *
 		a[length] = '\0'
@@ -961,10 +962,10 @@ class Buffer
 
 	init from(s: String)
 	do
-		_capacity = s.length + 1
-		_length = s.length
-		_items = calloc_string(_capacity)
-		s.items.copy_to(_items, _length, s._index_from, 0)
+		capacity = s.length + 1
+		length = s.length
+		items = calloc_string(capacity)
+		s.items.copy_to(items, length, s.index_from, 0)
 	end
 
 	# Create a new empty string with a given capacity.
@@ -972,9 +973,9 @@ class Buffer
 	do
 		assert cap >= 0
 		# _items = new NativeString.calloc(cap)
-		_items = calloc_string(cap+1)
-		_capacity = cap
-		_length = 0
+		items = calloc_string(cap+1)
+		capacity = cap
+		length = 0
 	end
 
 	# Adds the content of string `s` at the end of self
@@ -983,7 +984,7 @@ class Buffer
 		var sl = s.length
 		if capacity < length + sl then enlarge(length + sl)
 		s.items.copy_to(items, sl, s.index_from, length)
-		_length += sl
+		length += sl
 	end
 
 	redef fun ==(o)
@@ -992,16 +993,14 @@ class Buffer
 		var l = length
 		if o.length != l then return false
 		var i = 0
-		var it = _items
-		var oit = o._items
+		var it = items
+		var oit = o.items
 		while i < l do
 			if it[i] != oit[i] then return false
 			i += 1
 		end
 		return true
 	end
-
-	readable private var _capacity: Int
 
 	# Copies the content of self in `dest`
 	fun copy(start: Int, len: Int, dest: Buffer, new_start: Int)
@@ -1022,7 +1021,7 @@ class Buffer
 		if from < count then
 			var r = new Buffer.with_capacity(count - from)
 			while from < count do
-				r.chars.push(_items[from])
+				r.chars.push(items[from])
 				from += 1
 			end
 			return r.to_s
@@ -1064,7 +1063,7 @@ private class FlatBufferCharView
 
 	redef type SELFTYPE: Buffer
 
-	redef fun [](index) do return target._items[index]
+	redef fun [](index) do return target.items[index]
 
 	redef fun []=(index, item)
 	do
@@ -1073,7 +1072,7 @@ private class FlatBufferCharView
 			add(item)
 			return
 		end
-		target._items[index] = item
+		target.items[index] = item
 	end
 
 	redef fun push(c)

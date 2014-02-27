@@ -27,4 +27,4 @@ assert 'd'.object_id.to_s.is_numeric
 assert 1.0.object_id.to_s.is_numeric
 
 # Check NativeString.object_id
-assert "Test"._items.object_id.to_s.is_numeric
+assert "Test".items.object_id.to_s.is_numeric

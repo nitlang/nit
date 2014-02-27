@@ -99,12 +99,12 @@ class IFStream
 
 	redef fun fill_buffer
 	do
-		var nb = _file.io_read(_buffer._items, _buffer._capacity)
+		var nb = _file.io_read(_buffer.items, _buffer.capacity)
 		if nb <= 0 then
 			_end_reached = true
 			nb = 0
 		end
-		_buffer._length = nb
+		_buffer.length = nb
 		_buffer_pos = 0
 	end
 	
@@ -242,7 +242,7 @@ redef class String
 	# Extract the basename of a path and remove the extension
 	fun basename(ext: String): String
 	do
-		var pos = last_index_of_from('/', _length - 1)
+		var pos = last_index_of_from('/', length - 1)
 		var n = self
 		if pos >= 0 then
 			n = substring_from(pos+1)
@@ -262,7 +262,7 @@ redef class String
 	#     assert "".dirname                            == "."
 	fun dirname: String
 	do
-		var l = _length - 1 # Index of the last char
+		var l = length - 1 # Index of the last char
 		if l > 0 and self.chars[l] == '/' then l -= 1 # remove trailing `/`
 		var pos = last_index_of_from('/', l)
 		if pos > 0 then
