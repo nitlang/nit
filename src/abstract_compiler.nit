@@ -1498,13 +1498,13 @@ redef class AConcreteMethPropdef
 		# Call the implicit super-init
 		var auto_super_inits = self.auto_super_inits
 		if auto_super_inits != null then
-			var selfarg = [arguments.first]
+			var args = [arguments.first]
 			for auto_super_init in auto_super_inits do
-				if auto_super_init.intro.msignature.arity == 0 then
-					v.send(auto_super_init, selfarg)
-				else
-					v.send(auto_super_init, arguments)
+				args.clear
+				for i in [0..auto_super_init.intro.msignature.arity+1[ do
+					args.add(arguments[i])
 				end
+				v.send(auto_super_init, args)
 			end
 		end
 		v.stmt(self.n_block)
@@ -2433,18 +2433,22 @@ redef class ASuperExpr
 		for a in self.n_args.n_exprs do
 			args.add(v.expr(a, null))
 		end
-		if args.length == 1 then
-			args = v.frame.arguments
-		end
 
 		var callsite = self.callsite
 		if callsite != null then
-			if callsite.mproperty.intro.msignature.arity == 0 then
-				args = [recv]
+			# Add additionnals arguments for the super init call
+			if args.length == 1 then
+				for i in [0..callsite.mproperty.intro.msignature.arity[ do
+					args.add(v.frame.arguments[i+1])
+				end
 			end
 			# Super init call
 			var res = v.compile_callsite(callsite, args)
 			return res
+		end
+
+		if args.length == 1 then
+			args = v.frame.arguments
 		end
 
 		# stantard call-next-method

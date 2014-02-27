@@ -1458,7 +1458,9 @@ redef class ASuperExpr
 	private fun process_superinit(v: TypeVisitor)
 	do
 		var recvtype = v.nclassdef.mclassdef.bound_mtype
-		var mproperty = v.mpropdef.mproperty
+		var mpropdef = v.mpropdef
+		assert mpropdef isa MMethodDef
+		var mproperty = mpropdef.mproperty
 		var superprop: nullable MMethodDef = null
 		for msupertype in v.nclassdef.mclassdef.supertypes do
 			msupertype = msupertype.anchor_to(v.mmodule, recvtype)
@@ -1496,7 +1498,21 @@ redef class ASuperExpr
 		if args.length > 0 then
 			callsite.check_signature(v, args)
 		else
-			# TODO: Check signature
+			# Check there is at least enough parameters
+			if mpropdef.msignature.arity < msignature.arity then
+				v.error(self, "Error: Not enough implicit arguments to pass. Got {mpropdef.msignature.arity}, expected at least {msignature.arity}. Signature is {msignature}")
+				return
+			end
+			# Check that each needed parameter is conform
+			var i = 0
+			for sp in msignature.mparameters do
+				var p = mpropdef.msignature.mparameters[i]
+				if not v.is_subtype(p.mtype, sp.mtype) then
+					v.error(self, "Type error: expected argument #{i} of type {sp.mtype}, got implicit argument {p.name} of type {p.mtype}. Signature is {msignature}")
+					return
+				end
+				i += 1
+			end
 		end
 
 		self.is_typed = true
