@@ -882,6 +882,9 @@ redef class ATypePropdef
 
 	redef fun check_signature(modelbuilder, nclassdef)
 	do
+		var mpropdef = self.mpropdef
+		if mpropdef == null then return # Error thus skiped
+
 		var bound = self.mpropdef.bound
 
 		# Fast case: the bound is not a formal type
