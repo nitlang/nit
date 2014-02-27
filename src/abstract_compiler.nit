@@ -289,7 +289,7 @@ redef class ModelBuilder
 				dep_rules.add(o)
 			else
 				var o = f.makefile_rule_name
-				var ff = orig_dir.join_path(f.filename).simplify_path
+				var ff = f.filename.basename("")
 				makefile.write("{o}: {ff}\n")
 				makefile.write("\t{f.makefile_rule_content}\n")
 				dep_rules.add(f.makefile_rule_name)
