@@ -708,10 +708,7 @@ class GlobalCompilerVisitor
 	redef fun type_test(value, mtype, tag)
 	do
 		mtype = self.anchor(mtype)
-		var mclasstype = mtype
-		if mtype isa MNullableType then mclasstype = mtype.mtype
-		assert mclasstype isa MClassType
-		if not self.compiler.runtime_type_analysis.live_cast_types.has(mclasstype) then
+		if not self.compiler.runtime_type_analysis.live_cast_types.has(mtype) then
 			debug "problem: {mtype} was detected cast-dead"
 			abort
 		end
