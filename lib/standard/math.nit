@@ -21,6 +21,7 @@ in "C header" `{
 `}
 
 redef class Int
+	# Returns a random `Int` in `[0 .. self[`.
 	fun rand: Int is extern "kernel_Int_Int_rand_0"
 	fun bin_and(i: Int): Int is extern "kernel_Int_Int_binand_0"
 	fun bin_or(i: Int): Int is extern "kernel_Int_Int_binor_0"
