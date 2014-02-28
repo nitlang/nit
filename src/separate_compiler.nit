@@ -119,7 +119,6 @@ class SeparateCompiler
 	var runtime_type_analysis: nullable RapidTypeAnalysis
 
 	private var undead_types: Set[MType] = new HashSet[MType]
-	private var partial_types: Set[MType] = new HashSet[MType]
 	private var live_unresolved_types: Map[MClassDef, Set[MType]] = new HashMap[MClassDef, HashSet[MType]]
 
 	private var type_layout: nullable Layout[MType]
@@ -452,11 +451,6 @@ class SeparateCompiler
 			mtypes.add(c.mclass_type)
 		end
 
-		for mtype in mtypes do
-			retrieve_partial_types(mtype)
-		end
-		mtypes.add_all(self.partial_types)
-
 		# Typing Layout
 		var layout_builder: TypingLayoutBuilder[MType]
 		if modelbuilder.toolcontext.opt_bm_typing.value then
@@ -583,34 +577,6 @@ class SeparateCompiler
 			tables[mclasstype] = table
 		end
 		return tables
-	end
-
-	fun retrieve_partial_types(mtype: MType) do
-		# add formal types arguments to mtypes
-		if mtype isa MGenericType then
-			for ft in mtype.arguments do
-				if ft.need_anchor then
-					print("Why do we need anchor here ?")
-					abort
-				end
-				self.partial_types.add(ft)
-				retrieve_partial_types(ft)
-			end
-		end
-		var mclass_type: MClassType
-		if mtype isa MNullableType then
-			mclass_type = mtype.mtype.as(MClassType)
-		else
-			mclass_type = mtype.as(MClassType)
-		end
-
-		# add virtual types to mtypes
-		for vt in self.mainmodule.properties(mclass_type.mclass) do
-			if vt isa MVirtualTypeProp then
-				var anchored = vt.mvirtualtype.lookup_bound(self.mainmodule, mclass_type).anchor_to(self.mainmodule, mclass_type)
-				self.partial_types.add(anchored)
-			end
-		end
 	end
 
 	# Separately compile all the method definitions of the module
