@@ -830,7 +830,7 @@ class SeparateCompiler
 		v.add("if({t} == NULL) \{")
 		v.add_abort("type null")
 		v.add("\}")
-		v.add("if({t}->resolution_table == NULL) \{")
+		v.add("if({t}->table_size == 0) \{")
 		v.add("fprintf(stderr, \"Insantiation of a dead type: %s\\n\", {t}->name);")
 		v.add_abort("type dead")
 		v.add("\}")
