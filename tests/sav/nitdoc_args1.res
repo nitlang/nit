@@ -1,9 +1,9 @@
-ZeroClipboard.swf
 class_module_0_Int.html
 class_module_0_Object.html
 class_module_0_Sys.html
 class_module_1_A.html
 class_module_1_B.html
+css/
 dep.dot
 dep.map
 dep.png
@@ -37,10 +37,9 @@ dep_module_1.map
 dep_module_1.png
 dep_module_1.s.dot
 index.html
+js/
 module_module_0.html
 module_module_1.html
 quicksearch-list.js
 resources/
-scripts/
 search.html
-styles/

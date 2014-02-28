@@ -31,33 +31,6 @@ a.nitdoc-ui-fold {
 	font-size: 120%;
 }
 
-/* Copy signature to clipboard */
-
-button.nitdoc-ui-copy.zeroclipboard-is-active {
-	border-color: #0D8921;
-}
-
-button.nitdoc-ui-copy {
-	visibility: hidden;
-	vertical-align: middle;
-	margin: -2px 0px 0px 10px;
-	width: 22px;
-	height: 19px;
-	padding: 1px;
-	cursor: pointer;
-	background: #eee;
-	border: 1px solid #ccc;
-	box-shadow: none;
-}
-
-button.nitdoc-ui-copy img {
-	width: 16px;
-}
-
-article:hover > .signature button.nitdoc-ui-copy, button.nitdoc-ui-copy.zeroclipboard-is-hover {
-	visibility: visible;
-}
-
 /* Search page field */
 
 .nitdoc-ui-searchpage-field {
