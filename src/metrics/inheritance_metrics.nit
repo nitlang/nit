@@ -34,7 +34,7 @@ private class InheritanceMetricsPhase
 	do
 		if not toolcontext.opt_inheritance.value and not toolcontext.opt_all.value then return
 
-		print "\n# Inheritance metrics".yellow.bold
+		print toolcontext.format_h1("\n# Inheritance metrics")
 
 		var hmetrics = new InheritanceMetricSet
 		hmetrics.register(new MDUI, new MDUIC, new MDUII, new MIF, new MIFC, new MIFI)
@@ -49,13 +49,13 @@ private class InheritanceMetricsPhase
 		var mclasses = new HashSet[MClass]
 		for mproject in model.mprojects do
 
-			print "\n ## project {mproject}".bold
+			print toolcontext.format_h2("\n ## project {mproject}")
 
 			for mgroup in mproject.mgroups do
 				if mgroup.mmodules.is_empty then continue
 
 				# Scalar metrics
-				print "  `- group {mgroup.full_name}"
+				print toolcontext.format_h3("  `- group {mgroup.full_name}")
 
 				var mod_mclasses = new HashSet[MClass]
 				for mmodule in mgroup.mmodules do mod_mclasses.add_all(mmodule.intro_mclasses)
@@ -64,44 +64,44 @@ private class InheritanceMetricsPhase
 				mclasses.add_all(mod_mclasses)
 				cmetrics.collect(new HashSet[MClass].from(mod_mclasses), mainmodule)
 				for name, metric in cmetrics.metrics do
-					print "\t{name}: {metric.desc}".green
-					print "\t    avg: {metric.avg}".light_gray
+					print toolcontext.format_h4("\t{name}: {metric.desc}")
+					print toolcontext.format_p("\t    avg: {metric.avg}")
 					var max = metric.max
-					print "\t    max: {max.first} ({max.second})".light_gray
+					print toolcontext.format_p("\t    max: {max.first} ({max.second})")
 					var min = metric.min
-					print "\t    min: {min.first} ({min.second})".light_gray
+					print toolcontext.format_p("\t    min: {min.first} ({min.second})")
 				end
 				hmetrics.collect(new HashSet[MModule].from(mgroup.mmodules), mainmodule)
 				for name, metric in hmetrics.metrics do
-					print "\t{name}: {metric.desc}".green
-					print "\t    avg: {metric.avg}".light_gray
+					print toolcontext.format_h4("\t{name}: {metric.desc}")
+					print toolcontext.format_p("\t    avg: {metric.avg}")
 					var max = metric.max
-					print "\t    max: {max.first} ({max.second})".light_gray
+					print toolcontext.format_p("\t    max: {max.first} ({max.second})")
 					var min = metric.min
-					print "\t    min: {min.first} ({min.second})".light_gray
+					print toolcontext.format_p("\t    min: {min.first} ({min.second})")
 				end
 			end
 		end
 		if not mclasses.is_empty then
 			# Global metrics
-			print "\n ## global metrics".bold
+			print toolcontext.format_h2("\n ## global metrics")
 			cmetrics.collect(mclasses, mainmodule)
 			for name, metric in cmetrics.metrics do
-				print "\t{name}: {metric.desc}".green
-				print "\t    avg: {metric.avg}".light_gray
+				print toolcontext.format_h4("\t{name}: {metric.desc}")
+				print toolcontext.format_p("\t    avg: {metric.avg}")
 				var max = metric.max
-				print "\t    max: {max.first} ({max.second})".light_gray
+				print toolcontext.format_p("\t    max: {max.first} ({max.second})")
 				var min = metric.min
-				print "\t    min: {min.first} ({min.second})".light_gray
+				print toolcontext.format_p("\t    min: {min.first} ({min.second})")
 			end
 			hmetrics.collect(mmodules, mainmodule)
 			for name, metric in hmetrics.metrics do
-				print "\t{name}: {metric.desc}".green
-				print "\t    avg: {metric.avg}".light_gray
+				print toolcontext.format_h4("\t{name}: {metric.desc}")
+				print toolcontext.format_p("\t    avg: {metric.avg}")
 				var max = metric.max
-				print "\t    max: {max.first} ({max.second})".light_gray
+				print toolcontext.format_p("\t    max: {max.first} ({max.second})")
 				var min = metric.min
-				print "\t    min: {min.first} ({min.second})".light_gray
+				print toolcontext.format_p("\t    min: {min.first} ({min.second})")
 			end
 		end
 	end

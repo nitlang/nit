@@ -33,7 +33,7 @@ private class MClassesMetricsPhase
 	do
 		if not toolcontext.opt_mclasses.value and not toolcontext.opt_all.value then return
 
-		print "\n# MClasses metrics".yellow.bold
+		print toolcontext.format_h1("\n# MClasses metrics")
 
 		var metrics = new MClassMetricSet
 		metrics.register(new CNOA, new CNOP, new CNOC, new CNOD, new CDIT)
@@ -47,13 +47,13 @@ private class MClassesMetricsPhase
 		var mclasses = new HashSet[MClass]
 		for mproject in model.mprojects do
 
-			print "\n ## project {mproject}".bold
+			print toolcontext.format_h2("\n ## project {mproject}")
 
 			for mgroup in mproject.mgroups do
 				if mgroup.mmodules.is_empty then continue
 
 				# Scalar metrics
-				print "  `- group {mgroup.full_name}"
+				print toolcontext.format_h3("  `- group {mgroup.full_name}")
 
 				var mod_mclasses = new HashSet[MClass]
 				for mmodule in mgroup.mmodules do mod_mclasses.add_all(mmodule.intro_mclasses)
@@ -61,27 +61,27 @@ private class MClassesMetricsPhase
 				mclasses.add_all(mod_mclasses)
 				metrics.collect(new HashSet[MClass].from(mod_mclasses), mainmodule)
 				for name, metric in metrics.metrics do
-					print "\t{name}: {metric.desc}".green
-					print "\t    avg: {metric.avg}".light_gray
+					print toolcontext.format_h4("\t{name}: {metric.desc}")
+					print toolcontext.format_p("\t    avg: {metric.avg}")
 					var max = metric.max
-					print "\t    max: {max.first} ({max.second})".light_gray
+					print toolcontext.format_p("\t    max: {max.first} ({max.second})")
 					var min = metric.min
-					print "\t    min: {min.first} ({min.second})".light_gray
+					print toolcontext.format_p("\t    min: {min.first} ({min.second})")
 				end
 			end
 		end
 		if not mclasses.is_empty then
 			# Global metrics
-			print "\n ## global metrics".bold
+			print toolcontext.format_h2("\n ## global metrics")
 
 			metrics.collect(mclasses, mainmodule)
 			for name, metric in metrics.metrics do
-				print "\t{name}: {metric.desc}".green
-				print "\t    avg: {metric.avg}".light_gray
+				print toolcontext.format_h4("\t{name}: {metric.desc}")
+				print toolcontext.format_p("\t    avg: {metric.avg}")
 				var max = metric.max
-				print "\t    max: {max.first} ({max.second})".light_gray
+				print toolcontext.format_p("\t    max: {max.first} ({max.second})")
 				var min = metric.min
-				print "\t    min: {min.first} ({min.second})".light_gray
+				print toolcontext.format_p("\t    min: {min.first} ({min.second})")
 			end
 		end
 	end

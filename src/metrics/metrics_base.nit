@@ -21,6 +21,7 @@ module metrics_base
 import model_utils
 import csv
 import counter
+import console
 
 redef class ToolContext
 
@@ -55,6 +56,10 @@ redef class ToolContext
 	# --poset
 	var opt_poset = new OptionBool("Complete metrics on posets", "--poset")
 
+	# --no-colors
+	var opt_nocolors = new OptionBool("Disable colors in console outputs", "--no-colors")
+
+
 	var opt_dir = new OptionString("Directory where some statistics files are generated", "-d", "--dir")
 	var output_dir: String = "."
 
@@ -76,6 +81,7 @@ redef class ToolContext
 		self.option_context.add_option(opt_generate_hyperdoc)
 		self.option_context.add_option(opt_poset)
 		self.option_context.add_option(opt_dir)
+		self.option_context.add_option(opt_nocolors)
 	end
 
 	redef fun process_options
@@ -88,6 +94,33 @@ redef class ToolContext
 			self.output_dir = val
 		end
 	end
+
+	# colorize heading 1 for console output
+	fun format_h1(str: String): String do
+		if opt_nocolors.value then return str
+		return str.yellow.bold
+	end
+
+	fun format_h2(str: String): String do
+		if opt_nocolors.value then return str
+		return str.bold
+	end
+
+	fun format_h3(str: String): String do
+		if opt_nocolors.value then return str
+		return str
+	end
+
+	fun format_h4(str: String): String do
+		if opt_nocolors.value then return str
+		return str.green
+	end
+
+	fun format_p(str: String): String do
+		if opt_nocolors.value then return str
+		return str.light_gray
+	end
+
 end
 
 redef class MClass
