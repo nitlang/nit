@@ -25,3 +25,4 @@
   --generate_hyperdoc     Generate Hyperdoc
   --poset                 Complete metrics on posets
   -d, --dir               Directory where some statistics files are generated
+  --no-colors             Disable colors in console outputs

@@ -1,4 +1,162 @@
 *** METRICS ***
+
+# MModules metrics
+
+ ## project base_simple3
+  `- group base_simple3
+	mnoa: number of ancestor modules
+	    avg: 0.0
+	    max: base_simple3 (0)
+	    min: base_simple3 (0)
+	mnop: number of parent modules
+	    avg: 0.0
+	    max: base_simple3 (0)
+	    min: base_simple3 (0)
+	mnoc: number of child modules
+	    avg: 0.0
+	    max: base_simple3 (0)
+	    min: base_simple3 (0)
+	mnod: number of descendant modules
+	    avg: 0.0
+	    max: base_simple3 (0)
+	    min: base_simple3 (0)
+	mdit: depth in module tree
+	    avg: 0.0
+	    max: base_simple3 (0)
+	    min: base_simple3 (0)
+	mnbi: number of introduction in module
+	    avg: 7.0
+	    max: base_simple3 (7)
+	    min: base_simple3 (7)
+	mnbr: number of refinement in module
+	    avg: 1.0
+	    max: base_simple3 (1)
+	    min: base_simple3 (1)
+	mnbcc: number of concrete class in module (intro + redef)
+	    avg: 4.0
+	    max: base_simple3 (4)
+	    min: base_simple3 (4)
+	mnbac: number of abstract class in module (intro + redef)
+	    avg: 0.0
+	    max: base_simple3 (0)
+	    min: base_simple3 (0)
+	mnbic: number of interface in module (intro + redef)
+	    avg: 2.0
+	    max: base_simple3 (2)
+	    min: base_simple3 (2)
+
+ ## global metrics
+	mnoa: number of ancestor modules
+	    avg: 0.0
+	    max: base_simple3 (0)
+	    min: base_simple3 (0)
+	mnop: number of parent modules
+	    avg: 0.0
+	    max: base_simple3 (0)
+	    min: base_simple3 (0)
+	mnoc: number of child modules
+	    avg: 0.0
+	    max: base_simple3 (0)
+	    min: base_simple3 (0)
+	mnod: number of descendant modules
+	    avg: 0.0
+	    max: base_simple3 (0)
+	    min: base_simple3 (0)
+	mdit: depth in module tree
+	    avg: 0.0
+	    max: base_simple3 (0)
+	    min: base_simple3 (0)
+	mnbi: number of introduction in module
+	    avg: 7.0
+	    max: base_simple3 (7)
+	    min: base_simple3 (7)
+	mnbr: number of refinement in module
+	    avg: 1.0
+	    max: base_simple3 (1)
+	    min: base_simple3 (1)
+	mnbcc: number of concrete class in module (intro + redef)
+	    avg: 4.0
+	    max: base_simple3 (4)
+	    min: base_simple3 (4)
+	mnbac: number of abstract class in module (intro + redef)
+	    avg: 0.0
+	    max: base_simple3 (0)
+	    min: base_simple3 (0)
+	mnbic: number of interface in module (intro + redef)
+	    avg: 2.0
+	    max: base_simple3 (2)
+	    min: base_simple3 (2)
+
+# MClasses metrics
+
+ ## project base_simple3
+  `- group base_simple3
+	cnoa: number of ancestor classes
+	    avg: 0.857
+	    max: Bool (1)
+	    min: Object (0)
+	cnop: number of parent classes
+	    avg: 0.857
+	    max: Bool (1)
+	    min: Object (0)
+	cnoc: number of child classes
+	    avg: 0.857
+	    max: Object (6)
+	    min: Bool (0)
+	cnod: number of descendant classes
+	    avg: 0.857
+	    max: Object (6)
+	    min: Bool (0)
+	cdit: depth in class tree
+	    avg: 0.857
+	    max: Bool (1)
+	    min: Object (0)
+	cnbip: number of introduced properties
+	    avg: 2.714
+	    max: C (7)
+	    min: Bool (0)
+	cnbrp: number of redefined properties
+	    avg: 0.0
+	    max: Object (0)
+	    min: Object (0)
+	cnbhp: number of inherited properties
+	    avg: 2.571
+	    max: Bool (3)
+	    min: Object (0)
+
+ ## global metrics
+	cnoa: number of ancestor classes
+	    avg: 0.857
+	    max: Bool (1)
+	    min: Object (0)
+	cnop: number of parent classes
+	    avg: 0.857
+	    max: Bool (1)
+	    min: Object (0)
+	cnoc: number of child classes
+	    avg: 0.857
+	    max: Object (6)
+	    min: Bool (0)
+	cnod: number of descendant classes
+	    avg: 0.857
+	    max: Object (6)
+	    min: Bool (0)
+	cdit: depth in class tree
+	    avg: 0.857
+	    max: Bool (1)
+	    min: Object (0)
+	cnbip: number of introduced properties
+	    avg: 2.714
+	    max: C (7)
+	    min: Bool (0)
+	cnbrp: number of redefined properties
+	    avg: 0.0
+	    max: Object (0)
+	    min: Object (0)
+	cnbhp: number of inherited properties
+	    avg: 2.571
+	    max: Bool (3)
+	    min: Object (0)
 --- Poset metrics ---
 ## Module importation hierarchy
 Number of nodes: 1
@@ -186,86 +344,6 @@ Distribution of direct smallers
   b: 2 (3.70%)
   Object: 1 (1.85%)
   Bool: 1 (1.85%)
---- Global Summary metrics ---
-(NMD) Number of Modules: 1
-(NC)  Number of Classes: 4
-(NI)  Number of Interfaces: 1
-(NAC)  Number of Abstract Classes: 0
-(NGC)  Number of Generic Classes: 0
-(NGI)  Number of Generic Interfaces: 0
---- (SL) Std-Lib Summary metrics ---
-(NMDSL) Number of Modules: 0
-(NCSL)  Number of Classes: 0
-(NISL)  Number of Interfaces: 0
-(NACSL)  Number of Abstract Classes: 0
-(NGCSL)  Number of Generic Classes: 0
-(NGISL)  Number of Generic Interfaces: 0
---- (UD) User-Defined Summary metrics ---
-(NMDUD) Number of Modules: 1
-(NCUD)  Number of Classes: 4
-(NIUD)  Number of Interfaces: 1
-(NACUD)  Number of Abstract Classes: 0
-(NGCUD)  Number of Generic Classes: 0
-(NGIUD)  Number of Generic Interfaces: 0
-
---- Global Inheritance metrics ---
-(DIT) Global Depth in Inheritance Tree: 0.85
-(DUI) Proportion of types inheriting another type other than Object: 0.0%
-(CCDUI) Proportion of classes that extend some other class: 0.0%
-(CIDUI) Proportion of classes that implement some other interface: 0.0%
-(IIDUI) Proportion of interfaces that extend some other interface: 0.0%
-(IF) Proportion of types Inherited From: 20.00%
-(CCIF) Proportion of classes extended by class: 0.0%
-(ICIF) Proportion of interfaces implemented by class: 100.00%
-(IIIF) Proportion of interfaces extended by interface: 100.00%
-
---- (SL -> *) Std-Lib Inheritance metrics ---
-(SLDUI) Proportion of SL types inheriting another type other than Object: na%
-(SLCCDUI) Proportion of SL classes that extend some other class: na%
-(SLCIDUI) Proportion of SL classes that implement some other interface: na%
-(SLIIDUI) Proportion of SL interfaces that extend some other interface: na%
-(SLIF) Proportion of SL types Inherited From: na%
-(SLCCIF) Proportion of SL classes extended by class: na%
-(SLICIF) Proportion of SL interfaces implemented by class: na%
-(SLIIIF) Proportion of SL interfaces extended by interface: na%
-
---- (SL -> SL) Std-Lib Inheritance metrics ---
-(SLIFSL) Proportion of SL types Inherited From by SL type: na%
-(SLCCIFSL) Proportion of SL classes extended by SL class: na%
-(SLICIFSL) Proportion of SL interfaces implemented by SL class: na%
-(SLIIIFSL) Proportion of SL interfaces extended by SL interface: na%
-
---- (SL->UD) Std-Lib Inheritance metrics ---
-(SLIFUD) Proportion of SL types Inherited From by UD type: na%
-(SLCCIFUD) Proportion of SL classes extended by UD class: na%
-(SLICIFUD) Proportion of SL interfaces implemented by UD class: na%
-(SLIIIFUD) Proportion of SL interfaces extended by UD interface: na%
-
---- (UD->*) User-Defined Inheritance metrics ---
-(UDDUI) Proportion of UD types inheriting another type other than Object: 0.0%
-(UDCCDUI) Proportion of UD classes that extend some other class: 0.0%
-(UDCIDUI) Proportion of UD classes that implement some other interface: 0.0%
-(UDIIDUI) Proportion of UD interfaces that extend some other interface: 0.0%
-(UDIF) Proportion of UD types Inherited From: 20.00%
-(UDCCIF) Proportion of UD classes extended by class: 0.0%
-(UDICIF) Proportion of UD interfaces implemented by class: 100.00%
-(UDIIIF) Proportion of UD interfaces extended by interface: 100.00%
-
---- (UD -> SL) User-Defined Inheritance metrics ---
-(UDDUISL) Proportion of UD types inheriting another type other SL type: 0.0%
-(UDCCDUISL) Proportion of UD classes that extend some other SL class: 0.0%
-(UDCIDUISL) Proportion of UD classes that implement some other SL interface: 0.0%
-(UDIIDUISL) Proportion of UD interfaces that extend some other SL interface: 0.0%
-
---- (UD -> UD) User-Defined Inheritance metrics ---
-(UDDUIUD) Proportion of UD types inheriting another type other UD type: 0.0%
-(UDCCDUIUD) Proportion of UD classes that extend some other UD class: 0.0%
-(UDCIDUIUD) Proportion of UD classes that implement some other UD interface: 0.0%
-(UDIIDUIUD) Proportion of UD interfaces that extend some other UD interface: 0.0%
-(UDIFUD) Proportion of UD types Inherited From: 20.00%
-(UDCCIFUD) Proportion of UD classes extended by UD class: 0.0%
-(UDICIFUD) Proportion of UD interfaces implemented by UD class: 100.00%
-(UDIIIFUD) Proportion of UD interfaces extended by UD interface: 100.00%
 --- Metrics of refinement usage ---
 Number of modules: 1
 
@@ -328,6 +406,117 @@ Number of live runtime cast types (ie used in as and isa): 0
 Number of dead method definitions of live methods: 0
 generating out/nitmetrics_args1.write/project_hierarchy.dot
 generating out/nitmetrics_args1.write/module_hierarchy.dot
+
+# Inheritance metrics
+
+ ## project base_simple3
+  `- group base_simple3
+	cnoa: number of ancestor classes
+	    avg: 0.857
+	    max: Bool (1)
+	    min: Object (0)
+	cnop: number of parent classes
+	    avg: 0.857
+	    max: Bool (1)
+	    min: Object (0)
+	cnoc: number of child classes
+	    avg: 0.857
+	    max: Object (6)
+	    min: Bool (0)
+	cnodc: number of class_kind descendants
+	    avg: 0.571
+	    max: Object (4)
+	    min: Bool (0)
+	cnodi: number of interface_kind descendants
+	    avg: 0.0
+	    max: Object (0)
+	    min: Object (0)
+	cdit: depth in class tree
+	    avg: 0.857
+	    max: Bool (1)
+	    min: Object (0)
+	cditi: depth in class tree following only interface_kind
+	    avg: 0.857
+	    max: Bool (1)
+	    min: Object (0)
+	mdui: proportion of mclass defined using inheritance (has other parent than Object)
+	    avg: 0.0
+	    max: base_simple3 (0.0)
+	    min: base_simple3 (0.0)
+	mduic: proportion of class_kind defined using inheritance
+	    avg: 0.0
+	    max: base_simple3 (0.0)
+	    min: base_simple3 (0.0)
+	mduii: proportion of interface_kind defined using inheritance
+	    avg: 0.0
+	    max: base_simple3 (0.0)
+	    min: base_simple3 (0.0)
+	mif: proportion of mclass inherited from
+	    avg: 0.143
+	    max: base_simple3 (0.143)
+	    min: base_simple3 (0.143)
+	mifc: proportion of class_kind inherited from
+	    avg: 0.0
+	    max: base_simple3 (0.0)
+	    min: base_simple3 (0.0)
+	mifi: proportion of interface_kind inherited from
+	    avg: 0.143
+	    max: base_simple3 (0.143)
+	    min: base_simple3 (0.143)
+
+ ## global metrics
+	cnoa: number of ancestor classes
+	    avg: 0.857
+	    max: Bool (1)
+	    min: Object (0)
+	cnop: number of parent classes
+	    avg: 0.857
+	    max: Bool (1)
+	    min: Object (0)
+	cnoc: number of child classes
+	    avg: 0.857
+	    max: Object (6)
+	    min: Bool (0)
+	cnodc: number of class_kind descendants
+	    avg: 0.571
+	    max: Object (4)
+	    min: Bool (0)
+	cnodi: number of interface_kind descendants
+	    avg: 0.0
+	    max: Object (0)
+	    min: Object (0)
+	cdit: depth in class tree
+	    avg: 0.857
+	    max: Bool (1)
+	    min: Object (0)
+	cditi: depth in class tree following only interface_kind
+	    avg: 0.857
+	    max: Bool (1)
+	    min: Object (0)
+	mdui: proportion of mclass defined using inheritance (has other parent than Object)
+	    avg: 0.0
+	    max: base_simple3 (0.0)
+	    min: base_simple3 (0.0)
+	mduic: proportion of class_kind defined using inheritance
+	    avg: 0.0
+	    max: base_simple3 (0.0)
+	    min: base_simple3 (0.0)
+	mduii: proportion of interface_kind defined using inheritance
+	    avg: 0.0
+	    max: base_simple3 (0.0)
+	    min: base_simple3 (0.0)
+	mif: proportion of mclass inherited from
+	    avg: 0.143
+	    max: base_simple3 (0.143)
+	    min: base_simple3 (0.143)
+	mifc: proportion of class_kind inherited from
+	    avg: 0.0
+	    max: base_simple3 (0.0)
+	    min: base_simple3 (0.0)
+	mifi: proportion of interface_kind inherited from
+	    avg: 0.143
+	    max: base_simple3 (0.143)
+	    min: base_simple3 (0.143)
 class_hierarchy.dot
 classdef_hierarchy.dot
 model.html
