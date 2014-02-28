@@ -103,6 +103,8 @@ do
 	end
 
 	for mtype in analysis.live_cast_types do
+		if mtype isa MNullableType then mtype = mtype.mtype
+		if not mtype isa MClassType then continue
 		mtypes.add(mtype)
 		nlct += 1
 		mtype.mclass.nlct += 1
