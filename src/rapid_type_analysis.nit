@@ -60,7 +60,7 @@ class RapidTypeAnalysis
 	var live_classes = new HashSet[MClass]
 
 	# The pool of types used to perform type checks (isa and as).
-	var live_cast_types = new HashSet[MClassType]
+	var live_cast_types = new HashSet[MType]
 
 	# The pool of undesolved types used to perform type checks (isa and as).
 	# They are globally resolved at the end of the analaysis
@@ -207,8 +207,6 @@ class RapidTypeAnalysis
 			for t in live_types do
 				if not ot.can_resolve_for(t, t, mainmodule) then continue
 				var rt = ot.anchor_to(mainmodule, t)
-				if rt isa MNullableType then rt = rt.mtype
-				assert rt isa MClassType
 				live_cast_types.add(rt)
 				#print "  {ot}/{t} -> {rt}"
 			end
@@ -261,11 +259,9 @@ class RapidTypeAnalysis
 
 	fun add_cast(mtype: MType)
 	do
-		if mtype isa MNullableType then mtype = mtype.mtype
 		if mtype.need_anchor then
 			live_open_cast_types.add(mtype)
 		else
-			assert mtype isa MClassType
 			live_cast_types.add(mtype)
 		end
 	end

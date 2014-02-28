@@ -95,6 +95,11 @@ redef class ModelBuilder
 		for t in mtypes do
 			compiler.compile_type_to_c(t)
 		end
+		# compile remaining types structures (useless but needed for the symbol resolution at link-time)
+		for t in compiler.undead_types do
+			if mtypes.has(t) then continue
+			compiler.compile_type_to_c(t)
+		end
 
 		compiler.display_stats
 
@@ -114,7 +119,6 @@ class SeparateCompiler
 	var runtime_type_analysis: nullable RapidTypeAnalysis
 
 	private var undead_types: Set[MType] = new HashSet[MType]
-	private var partial_types: Set[MType] = new HashSet[MType]
 	private var live_unresolved_types: Map[MClassDef, Set[MType]] = new HashMap[MClassDef, HashSet[MType]]
 
 	private var type_layout: nullable Layout[MType]
@@ -443,15 +447,9 @@ class SeparateCompiler
 		var mtypes = new HashSet[MType]
 		mtypes.add_all(self.runtime_type_analysis.live_types)
 		mtypes.add_all(self.runtime_type_analysis.live_cast_types)
-		mtypes.add_all(self.undead_types)
 		for c in self.box_kinds.keys do
 			mtypes.add(c.mclass_type)
 		end
-
-		for mtype in mtypes do
-			retrieve_partial_types(mtype)
-		end
-		mtypes.add_all(self.partial_types)
 
 		# Typing Layout
 		var layout_builder: TypingLayoutBuilder[MType]
@@ -581,34 +579,6 @@ class SeparateCompiler
 		return tables
 	end
 
-	fun retrieve_partial_types(mtype: MType) do
-		# add formal types arguments to mtypes
-		if mtype isa MGenericType then
-			for ft in mtype.arguments do
-				if ft.need_anchor then
-					print("Why do we need anchor here ?")
-					abort
-				end
-				self.partial_types.add(ft)
-				retrieve_partial_types(ft)
-			end
-		end
-		var mclass_type: MClassType
-		if mtype isa MNullableType then
-			mclass_type = mtype.mtype.as(MClassType)
-		else
-			mclass_type = mtype.as(MClassType)
-		end
-
-		# add virtual types to mtypes
-		for vt in self.mainmodule.properties(mclass_type.mclass) do
-			if vt isa MVirtualTypeProp then
-				var anchored = vt.mvirtualtype.lookup_bound(self.mainmodule, mclass_type).anchor_to(self.mainmodule, mclass_type)
-				self.partial_types.add(anchored)
-			end
-		end
-	end
-
 	# Separately compile all the method definitions of the module
 	fun compile_module_to_c(mmodule: MModule)
 	do
@@ -630,6 +600,10 @@ class SeparateCompiler
 	# Globaly compile the type structure of a live type
 	fun compile_type_to_c(mtype: MType)
 	do
+		assert not mtype.need_anchor
+		var layout = self.type_layout
+		var is_live = mtype isa MClassType and runtime_type_analysis.live_types.has(mtype)
+		var is_cast_live = runtime_type_analysis.live_cast_types.has(mtype)
 		var c_name = mtype.c_name
 		var v = new SeparateCompilerVisitor(self)
 		v.add_decl("/* runtime type {mtype} */")
@@ -639,39 +613,70 @@ class SeparateCompiler
 
 		# const struct type_X
 		v.add_decl("const struct type type_{c_name} = \{")
-		v.add_decl("{self.type_layout.ids[mtype]},")
-		v.add_decl("\"{mtype}\", /* class_name_string */")
-		var layout = self.type_layout
-		if layout isa PHLayout[MType, MType] then
-			v.add_decl("{layout.masks[mtype]},")
+
+		# type id (for cast target)
+		if is_cast_live then
+			v.add_decl("{layout.ids[mtype]},")
 		else
-			v.add_decl("{layout.pos[mtype]},")
+			v.add_decl("-1, /*CAST DEAD*/")
 		end
+
+		# type name
+		v.add_decl("\"{mtype}\", /* class_name_string */")
+
+		# type color (for cast target)
+		if is_cast_live then
+			if layout isa PHLayout[MType, MType] then
+				v.add_decl("{layout.masks[mtype]},")
+			else
+				v.add_decl("{layout.pos[mtype]},")
+			end
+		else
+			v.add_decl("-1, /*CAST DEAD*/")
+		end
+
+		# is_nullable bit
 		if mtype isa MNullableType then
 			v.add_decl("1,")
 		else
 			v.add_decl("0,")
 		end
-		if compile_type_resolution_table(mtype) then
-			v.require_declaration("resolution_table_{c_name}")
-			v.add_decl("&resolution_table_{c_name},")
-		else
-			v.add_decl("NULL,")
-		end
-		v.add_decl("{self.type_tables[mtype].length},")
-		v.add_decl("\{")
-		for stype in self.type_tables[mtype] do
-			if stype == null then
-				v.add_decl("-1, /* empty */")
+
+		# resolution table (for receiver)
+		if is_live then
+			var mclass_type = mtype
+			if mclass_type isa MNullableType then mclass_type = mclass_type.mtype
+			assert mclass_type isa MClassType
+			if resolution_tables[mclass_type].is_empty then
+				v.add_decl("NULL, /*NO RESOLUTIONS*/")
 			else
-				v.add_decl("{self.type_layout.ids[stype]}, /* {stype} */")
+				compile_type_resolution_table(mtype)
+				v.require_declaration("resolution_table_{c_name}")
+				v.add_decl("&resolution_table_{c_name},")
 			end
+		else
+			v.add_decl("NULL, /*DEAD*/")
 		end
-		v.add_decl("\},")
+
+		# cast table (for receiver)
+		if is_live then
+			v.add_decl("{self.type_tables[mtype].length},")
+			v.add_decl("\{")
+			for stype in self.type_tables[mtype] do
+				if stype == null then
+					v.add_decl("-1, /* empty */")
+				else
+					v.add_decl("{layout.ids[stype]}, /* {stype} */")
+				end
+			end
+			v.add_decl("\},")
+		else
+			v.add_decl("0, \{\}, /*DEAD TYPE*/")
+		end
 		v.add_decl("\};")
 	end
 
-	fun compile_type_resolution_table(mtype: MType): Bool do
+	fun compile_type_resolution_table(mtype: MType) do
 
 		var mclass_type: MClassType
 		if mtype isa MNullableType then
@@ -679,7 +684,6 @@ class SeparateCompiler
 		else
 			mclass_type = mtype.as(MClassType)
 		end
-		if not self.resolution_tables.has_key(mclass_type) then return false
 
 		var layout = self.resolution_layout
 
@@ -714,7 +718,6 @@ class SeparateCompiler
 		end
 		v.add_decl("\}")
 		v.add_decl("\};")
-		return true
 	end
 
 	# Globally compile the table of the class mclass
@@ -830,7 +833,7 @@ class SeparateCompiler
 		v.add("if({t} == NULL) \{")
 		v.add_abort("type null")
 		v.add("\}")
-		v.add("if({t}->resolution_table == NULL) \{")
+		v.add("if({t}->table_size == 0) \{")
 		v.add("fprintf(stderr, \"Insantiation of a dead type: %s\\n\", {t}->name);")
 		v.add_abort("type dead")
 		v.add("\}")
@@ -1272,11 +1275,37 @@ class SeparateCompilerVisitor
 		end
 	end
 
+	# Check that mtype is a live open type
+	fun hardening_live_open_type(mtype: MType)
+	do
+		if not compiler.modelbuilder.toolcontext.opt_hardening.value then return
+		self.require_declaration(mtype.const_color)
+		var col = mtype.const_color
+		self.add("if({col} == -1) \{")
+		self.add("fprintf(stderr, \"Resolution of a dead open type: %s\\n\", \"{mtype.to_s.escape_to_c}\");")
+		self.add_abort("open type dead")
+		self.add("\}")
+	end
+
+	# Check that mtype it a pointer to a live cast type
+	fun hardening_cast_type(t: String)
+	do
+		if not compiler.modelbuilder.toolcontext.opt_hardening.value then return
+		add("if({t} == NULL) \{")
+		add_abort("cast type null")
+		add("\}")
+		add("if({t}->id == -1 || {t}->color == -1) \{")
+		add("fprintf(stderr, \"Try to cast on a dead cast type: %s\\n\", {t}->name);")
+		add_abort("cast type dead")
+		add("\}")
+	end
+
 	redef fun init_instance(mtype)
 	do
 		self.require_declaration("NEW_{mtype.mclass.c_name}")
 		var compiler = self.compiler
 		if mtype isa MGenericType and mtype.need_anchor then
+			hardening_live_open_type(mtype)
 			link_unresolved_type(self.frame.mpropdef.mclassdef, mtype)
 			var recv = self.frame.arguments.first
 			var recv_type_info = self.type_info(recv)
@@ -1329,17 +1358,19 @@ class SeparateCompilerVisitor
 			self.add_decl("const struct type* {type_struct};")
 
 			# Either with resolution_table with a direct resolution
-			link_unresolved_type(self.frame.mpropdef.mclassdef, ntype)
-			self.require_declaration(ntype.const_color)
+			hardening_live_open_type(mtype)
+			link_unresolved_type(self.frame.mpropdef.mclassdef, mtype)
+			self.require_declaration(mtype.const_color)
 			if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
-				self.add("{type_struct} = {recv_type_info}->resolution_table->types[HASH({recv_type_info}->resolution_table->mask, {ntype.const_color})];")
+				self.add("{type_struct} = {recv_type_info}->resolution_table->types[HASH({recv_type_info}->resolution_table->mask, {mtype.const_color})];")
 			else
-				self.add("{type_struct} = {recv_type_info}->resolution_table->types[{ntype.const_color}];")
+				self.add("{type_struct} = {recv_type_info}->resolution_table->types[{mtype.const_color}];")
 			end
 			if compiler.modelbuilder.toolcontext.opt_typing_test_metrics.value then
 				self.compiler.count_type_test_unresolved[tag] += 1
 				self.add("count_type_test_unresolved_{tag}++;")
 			end
+			hardening_cast_type(type_struct)
 			self.add("{cltype} = {type_struct}->color;")
 			self.add("{idtype} = {type_struct}->id;")
 			if maybe_null and accept_null == "0" then
@@ -1351,6 +1382,7 @@ class SeparateCompilerVisitor
 		else if ntype isa MClassType then
 			compiler.undead_types.add(mtype)
 			self.require_declaration("type_{mtype.c_name}")
+			hardening_cast_type("(&type_{mtype.c_name})")
 			self.add("{cltype} = type_{mtype.c_name}.color;")
 			self.add("{idtype} = type_{mtype.c_name}.id;")
 			if compiler.modelbuilder.toolcontext.opt_typing_test_metrics.value then
@@ -1553,6 +1585,7 @@ class SeparateCompilerVisitor
 		assert mtype isa MGenericType
 		var compiler = self.compiler
 		if mtype.need_anchor then
+			hardening_live_open_type(mtype)
 			link_unresolved_type(self.frame.mpropdef.mclassdef, mtype)
 			var recv = self.frame.arguments.first
 			var recv_type_info = self.type_info(recv)
