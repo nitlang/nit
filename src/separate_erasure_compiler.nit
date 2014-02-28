@@ -32,7 +32,7 @@ redef class ToolContext
 end
 
 redef class ModelBuilder
-	fun run_separate_erasure_compiler(mainmodule: MModule, runtime_type_analysis: RapidTypeAnalysis)
+	fun run_separate_erasure_compiler(mainmodule: MModule, runtime_type_analysis: nullable RapidTypeAnalysis)
 	do
 		var time0 = get_time
 		self.toolcontext.info("*** GENERATING C ***", 1)
@@ -76,7 +76,7 @@ class SeparateErasureCompiler
 	private var class_layout: nullable Layout[MClass]
 	protected var vt_layout: nullable Layout[MVirtualTypeProp]
 
-	init(mainmodule: MModule, mmbuilder: ModelBuilder, runtime_type_analysis: RapidTypeAnalysis) do
+	init(mainmodule: MModule, mmbuilder: ModelBuilder, runtime_type_analysis: nullable RapidTypeAnalysis) do
 		super
 
 		var mclasses = new HashSet[MClass].from(mmbuilder.model.mclasses)
@@ -333,8 +333,6 @@ class SeparateErasureCompiler
 		self.generate_init_attr(v, res, mtype)
 		v.add("return {res};")
 		v.add("\}")
-
-		generate_check_init_instance(mtype)
 	end
 
 	private fun build_class_vts_table(mclass: MClass): Bool do
@@ -604,7 +602,6 @@ class SeparateErasureCompilerVisitor
 		end
 		var length = self.int_instance(array.length)
 		self.send(self.get_property("with_native", arraytype), [res, nat, length])
-		self.check_init_instance(res, arraytype)
 		self.add("\}")
 		return res
 	end

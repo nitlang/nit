@@ -158,6 +158,10 @@ redef class MClass
 	var inherit_init_from: nullable MClass = null
 end
 
+redef class MClassDef
+	private var propdef_names = new HashSet[String]
+end
+
 redef class AClassdef
 	var build_properties_is_done: Bool = false
 	# The list of super-constructor to call at the start of the free constructor
@@ -392,6 +396,20 @@ redef class AMethPropdef
 
 		var mpropdef = new MMethodDef(mclassdef, mprop, self.location)
 
+		if mclassdef.propdef_names.has(mprop.name) then
+			var loc: nullable Location = null
+			for i in mclassdef.mpropdefs do
+				if i.mproperty.name == mprop.name then
+					loc = i.location
+					break
+				end
+			end
+			if loc == null then abort
+			modelbuilder.error(self, "Error: a property {mprop} is already defined in class {mclassdef.mclass} at {loc}")
+		end
+
+		mclassdef.propdef_names.add(mpropdef.mproperty.name)
+
 		self.mpropdef = mpropdef
 		modelbuilder.mpropdef2npropdef[mpropdef] = self
 		if mpropdef.is_intro then
@@ -507,9 +525,9 @@ redef class AMethPropdef
 				for i in [0..mysignature.arity[ do
 					var myt = mysignature.mparameters[i].mtype
 					var prt = msignature.mparameters[i].mtype
-					if not myt.is_subtype(mmodule, nclassdef.mclassdef.bound_mtype, prt) and
+					if not myt.is_subtype(mmodule, nclassdef.mclassdef.bound_mtype, prt) or
 							not prt.is_subtype(mmodule, nclassdef.mclassdef.bound_mtype, myt) then
-						modelbuilder.error(nsig.n_params[i], "Redef Error: Wrong type for parameter `{mysignature.mparameters[i].name}'. found {myt}, expected {prt}.")
+						modelbuilder.error(nsig.n_params[i], "Redef Error: Wrong type for parameter `{mysignature.mparameters[i].name}'. found {myt}, expected {prt} as in {mpropdef.mproperty.intro}.")
 					end
 				end
 			end
@@ -518,7 +536,7 @@ redef class AMethPropdef
 					# Inherit the return type
 					ret_type = precursor_ret_type
 				else if not ret_type.is_subtype(mmodule, nclassdef.mclassdef.bound_mtype, precursor_ret_type) then
-					modelbuilder.error(nsig.n_type.as(not null), "Redef Error: Wrong return type. found {ret_type}, expected {precursor_ret_type}.")
+					modelbuilder.error(nsig.n_type.as(not null), "Redef Error: Wrong return type. found {ret_type}, expected {precursor_ret_type} as in {mpropdef.mproperty.intro}.")
 				end
 			end
 		end
@@ -864,6 +882,9 @@ redef class ATypePropdef
 
 	redef fun check_signature(modelbuilder, nclassdef)
 	do
+		var mpropdef = self.mpropdef
+		if mpropdef == null then return # Error thus skiped
+
 		var bound = self.mpropdef.bound
 
 		# Fast case: the bound is not a formal type

@@ -7,7 +7,7 @@ var1 = self->attrs[COLOR_location__SourceFile___64dfilename].val; /* @filename o
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @filename");
 fprintf(stderr, " (%s:%d)\n", "src/location.nit", 22);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -40,7 +40,7 @@ var1 = self->attrs[COLOR_location__SourceFile___64dstring].val; /* @string on <s
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @string");
 fprintf(stderr, " (%s:%d)\n", "src/location.nit", 25);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -123,7 +123,7 @@ var1 = self->attrs[COLOR_location__SourceFile___64dline_starts].val; /* @line_st
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @line_starts");
 fprintf(stderr, " (%s:%d)\n", "src/location.nit", 44);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -333,7 +333,7 @@ var1 = ((val* (*)(val*))(self->class->vft[COLOR_location__Location__file]))(self
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/location.nit", 68);
-exit(1);
+show_backtrace(1);
 } else {
 var2 = ((val* (*)(val*))(var1->class->vft[COLOR_location__SourceFile__line_starts]))(var1) /* line_starts on <var1:nullable SourceFile>*/;
 }
@@ -396,7 +396,7 @@ var1 = ((val* (*)(val*))(self->class->vft[COLOR_location__Location__file]))(self
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/location.nit", 71);
-exit(1);
+show_backtrace(1);
 } else {
 var2 = ((val* (*)(val*))(var1->class->vft[COLOR_location__SourceFile__line_starts]))(var1) /* line_starts on <var1:nullable SourceFile>*/;
 }
@@ -480,7 +480,7 @@ var6 = ((val* (*)(val*))(var_l->class->vft[COLOR_location__Location__file]))(var
 if (var6 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/location.nit", 81);
-exit(1);
+show_backtrace(1);
 } else {
 var7 = ((val* (*)(val*))(var6->class->vft[COLOR_location__SourceFile__string]))(var6) /* string on <var6:nullable SourceFile>*/;
 }
@@ -814,7 +814,7 @@ if (!var8) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var9 = var4 < var5;
 var6 = var9;
@@ -837,7 +837,7 @@ if (!var15) {
 var_class_name18 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name18);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var19 = var11 > var12;
 var13 = var19;
@@ -860,7 +860,7 @@ if (!var25) {
 var_class_name28 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name28);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var29 = var21 > var22;
 var23 = var29;
@@ -892,7 +892,7 @@ if (!var40) {
 var_class_name43 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name43);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var44 = var36 < var37;
 var38 = var44;
@@ -915,7 +915,7 @@ if (!var50) {
 var_class_name53 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name53);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var54 = var46 > var47;
 var48 = var54;
@@ -950,7 +950,7 @@ if (!var66) {
 var_class_name69 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name69);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var70 = var62 > var63;
 var64 = var70;
@@ -1147,7 +1147,7 @@ var8 = ((val* (*)(val*))(self->class->vft[COLOR_location__Location__file]))(self
 if (var8 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/location.nit", 124);
-exit(1);
+show_backtrace(1);
 } else {
 var9 = ((val* (*)(val*))(var8->class->vft[COLOR_location__SourceFile__filename]))(var8) /* filename on <var8:nullable SourceFile>*/;
 }
@@ -1156,7 +1156,7 @@ var10 = ((val* (*)(val*))(self->class->vft[COLOR_location__Location__file]))(sel
 if (var10 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/location.nit", 125);
-exit(1);
+show_backtrace(1);
 } else {
 var11 = ((val* (*)(val*))(var10->class->vft[COLOR_location__SourceFile__filename]))(var10) /* filename on <var10:nullable SourceFile>*/;
 }
@@ -1170,7 +1170,7 @@ if (!var16) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var17 = var12 > var13;
 var14 = var17;
@@ -1214,7 +1214,6 @@ if (var31){
 var34 = NEW_array__Array(&type_array__Arraykernel__Object);
 var35 = 7;
 ((void (*)(val*, long))(var34->class->vft[COLOR_array__Array__with_capacity]))(var34, var35) /* with_capacity on <var34:Array[Object]>*/;
-CHECK_NEW_array__Array(var34);
 var_ = var34;
 if (varonce36) {
 var37 = varonce36;
@@ -1270,7 +1269,6 @@ goto RET_LABEL;
 var61 = NEW_array__Array(&type_array__Arraykernel__Object);
 var62 = 9;
 ((void (*)(val*, long))(var61->class->vft[COLOR_array__Array__with_capacity]))(var61, var62) /* with_capacity on <var61:Array[Object]>*/;
-CHECK_NEW_array__Array(var61);
 var_63 = var61;
 if (varonce64) {
 var65 = varonce64;
@@ -1340,7 +1338,6 @@ goto RET_LABEL;
 var96 = NEW_array__Array(&type_array__Arraykernel__Object);
 var97 = 11;
 ((void (*)(val*, long))(var96->class->vft[COLOR_array__Array__with_capacity]))(var96, var97) /* with_capacity on <var96:Array[Object]>*/;
-CHECK_NEW_array__Array(var96);
 var_98 = var96;
 if (varonce99) {
 var100 = varonce99;
@@ -1482,7 +1479,6 @@ var10 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__line_end]))
 var11 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__column_start]))(self) /* column_start on <self:Location>*/;
 var12 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__column_end]))(self) /* column_end on <self:Location>*/;
 ((void (*)(val*, val*, long, long, long, long))(var7->class->vft[COLOR_location__Location__init]))(var7, var8, var9, var10, var11, var12) /* init on <var7:Location>*/;
-CHECK_NEW_location__Location(var7);
 var_relative = var7;
 } else {
 var13 = NEW_location__Location(&type_location__Location);
@@ -1492,7 +1488,6 @@ var16 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__line_end]))
 var17 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__column_start]))(self) /* column_start on <self:Location>*/;
 var18 = ((long (*)(val*))(self->class->vft[COLOR_location__Location__column_end]))(self) /* column_end on <self:Location>*/;
 ((void (*)(val*, val*, long, long, long, long))(var13->class->vft[COLOR_location__Location__init]))(var13, var14, var15, var16, var17, var18) /* init on <var13:Location>*/;
-CHECK_NEW_location__Location(var13);
 var_relative = var13;
 }
 var19 = ((val* (*)(val*))(var_relative->class->vft[COLOR_string__Object__to_s]))(var_relative) /* to_s on <var_relative:Location>*/;
@@ -1586,7 +1581,7 @@ if (!var1) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "src/location.nit", 149);
-exit(1);
+show_backtrace(1);
 }
 var_other = p0;
 var2 = ((short int (*)(val*, val*))(self->class->vft[COLOR_kernel__Object___61d_61d]))(self, var_other) /* == on <self:Location>*/;
@@ -1630,7 +1625,7 @@ if (!var18) {
 var_class_name21 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name21);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var22 = var14 < var15;
 var16 = var22;
@@ -1661,7 +1656,7 @@ if (!var33) {
 var_class_name36 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name36);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var37 = var29 < var30;
 var31 = var37;
@@ -1692,7 +1687,7 @@ if (!var48) {
 var_class_name51 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name51);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var52 = var44 < var45;
 var46 = var52;
@@ -1713,7 +1708,7 @@ if (!var57) {
 var_class_name60 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name60);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var61 = var53 < var54;
 var55 = var61;
@@ -1972,7 +1967,6 @@ var_esc = var2;
 var5 = NEW_array__Array(&type_array__Arraykernel__Object);
 var6 = 3;
 ((void (*)(val*, long))(var5->class->vft[COLOR_array__Array__with_capacity]))(var5, var6) /* with_capacity on <var5:Array[Object]>*/;
-CHECK_NEW_array__Array(var5);
 var_ = var5;
 if (varonce) {
 var7 = varonce;
@@ -2001,7 +1995,6 @@ var_def = var17;
 var18 = NEW_array__Array(&type_array__Arraykernel__Object);
 var19 = 5;
 ((void (*)(val*, long))(var18->class->vft[COLOR_array__Array__with_capacity]))(var18, var19) /* with_capacity on <var18:Array[Object]>*/;
-CHECK_NEW_array__Array(var18);
 var_20 = var18;
 if (varonce21) {
 var22 = varonce21;
@@ -2045,7 +2038,7 @@ var39 = ((val* (*)(val*))(var_l->class->vft[COLOR_location__Location__file]))(va
 if (var39 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/location.nit", 174);
-exit(1);
+show_backtrace(1);
 } else {
 var40 = ((val* (*)(val*))(var39->class->vft[COLOR_location__SourceFile__line_starts]))(var39) /* line_starts on <var39:nullable SourceFile>*/;
 }
@@ -2064,7 +2057,7 @@ var47 = ((val* (*)(val*))(var_l->class->vft[COLOR_location__Location__file]))(va
 if (var47 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/location.nit", 176);
-exit(1);
+show_backtrace(1);
 } else {
 var48 = ((val* (*)(val*))(var47->class->vft[COLOR_location__SourceFile__string]))(var47) /* string on <var47:nullable SourceFile>*/;
 }
@@ -2086,7 +2079,7 @@ if (!var58) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var59 = var52 < var55;
 var56 = var59;
@@ -2212,7 +2205,7 @@ if (!var116) {
 var_class_name119 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name119);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
-exit(1);
+show_backtrace(1);
 }
 var120 = var109 <= var113;
 var114 = var120;
@@ -2304,7 +2297,6 @@ var_lend = var161;
 }
 var165 = NEW_string__Buffer(&type_string__Buffer);
 ((void (*)(val*))(var165->class->vft[COLOR_string__Buffer__init]))(var165) /* init on <var165:Buffer>*/;
-CHECK_NEW_string__Buffer(var165);
 var_indent = var165;
 var166 = NEW_range__Range(&type_range__Rangekernel__Int);
 var167 = ((long (*)(val*))(var_l->class->vft[COLOR_location__Location__column_start]))(var_l) /* column_start on <var_l:Location>*/;
@@ -2324,7 +2316,6 @@ RET_LABEL173:(void)0;
 var175 = BOX_kernel__Int(var_line_start); /* autobox from Int to Discrete */
 var176 = BOX_kernel__Int(var172); /* autobox from Int to Discrete */
 ((void (*)(val*, val*, val*))(var166->class->vft[COLOR_range__Range__without_last]))(var166, var175, var176) /* without_last on <var166:Range[Int]>*/;
-CHECK_NEW_range__Range(var166);
 var177 = ((val* (*)(val*))(var166->class->vft[COLOR_abstract_collection__Collection__iterator]))(var166) /* iterator on <var166:Range[Int]>*/;
 for(;;) {
 var178 = ((short int (*)(val*))(var177->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var177) /* is_ok on <var177:Iterator[nullable Object]>*/;
@@ -2360,7 +2351,6 @@ BREAK_label191: (void)0;
 var192 = NEW_array__Array(&type_array__Arraykernel__Object);
 var193 = 13;
 ((void (*)(val*, long))(var192->class->vft[COLOR_array__Array__with_capacity]))(var192, var193) /* with_capacity on <var192:Array[Object]>*/;
-CHECK_NEW_array__Array(var192);
 var_194 = var192;
 if (varonce195) {
 var196 = varonce195;

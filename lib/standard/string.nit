@@ -30,6 +30,8 @@ abstract class AbstractString
 
 	readable private var _items: NativeString
 
+	fun chars: StringCharView is abstract
+
 	# Access a character at `index` in the string.
 	#
 	#     assert "abcd"[2]         == 'c'
@@ -54,7 +56,7 @@ abstract class AbstractString
 		if from < count then
 			var r = new Buffer.with_capacity(count - from)
 			while from < count do
-				r.push(_items[from])
+				r.chars.push(_items[from])
 				from += 1
 			end
 			return r.to_s
@@ -142,7 +144,7 @@ abstract class AbstractString
 		var i = 0
 		var neg = false
 
-		for c in self
+		for c in self.chars
 		do
 			var v = c.to_i
 			if v > base then
@@ -173,7 +175,7 @@ abstract class AbstractString
 	fun is_numeric: Bool
 	do
 		var has_point_or_comma = false
-		for i in self
+		for i in self.chars
 		do
 			if not i.is_numeric
 			then
@@ -194,7 +196,7 @@ abstract class AbstractString
 	fun to_upper: String
 	do
 		var s = new Buffer.with_capacity(length)
-		for i in self do s.add(i.to_upper)
+		for i in self.chars do s.add(i.to_upper)
 		return s.to_s
 	end
 
@@ -204,7 +206,7 @@ abstract class AbstractString
 	fun to_lower : String
 	do
 		var s = new Buffer.with_capacity(length)
-		for i in self do s.add(i.to_lower)
+		for i in self.chars do s.add(i.to_lower)
 		return s.to_s
 	end
 
@@ -215,18 +217,18 @@ abstract class AbstractString
 	#     assert "\na\nb\tc\t".trim          == "a\nb\tc"
 	fun trim: String
 	do
-		if self._length == 0 then return self.to_s
+		if self.length == 0 then return self.to_s
 		# find position of the first non white space char (ascii < 32) from the start of the string
 		var start_pos = 0
-		while self[start_pos].ascii <= 32 do
+		while self.chars[start_pos].ascii <= 32 do
 			start_pos += 1
-			if start_pos == _length then return ""
+			if start_pos == length then return ""
 		end
 		# find position of the first non white space char from the end of the string
 		var end_pos = length - 1
-		while self[end_pos].ascii <= 32 do
+		while self.chars[end_pos].ascii <= 32 do
 			end_pos -= 1
-			if end_pos == start_pos then return self[start_pos].to_s
+			if end_pos == start_pos then return self.chars[start_pos].to_s
 		end
 		return self.substring(start_pos, end_pos - start_pos + 1)
 	end
@@ -245,7 +247,7 @@ abstract class AbstractString
 	do
 		var res = new Buffer
 		var underscore = false
-		for c in self do
+		for c in self.chars do
 			if (c >= 'a' and c <= 'z') or (c >='A' and c <= 'Z') then
 				res.add(c)
 				underscore = false
@@ -278,7 +280,7 @@ abstract class AbstractString
 	fun escape_to_c: String
 	do
 		var b = new Buffer
-		for c in self do
+		for c in self.chars do
 			if c == '\n' then
 				b.append("\\n")
 			else if c == '\0' then
@@ -357,6 +359,44 @@ abstract class AbstractString
 	end
 end
 
+# Abstract class for the SequenceRead compatible
+# views on String and Buffer objects
+abstract class StringCharView
+	super SequenceRead[Char]
+
+	type SELFTYPE: AbstractString
+
+	private var target: SELFTYPE
+
+	private init(tgt: SELFTYPE)
+	do
+		target = tgt
+	end
+
+	redef fun is_empty do return target.is_empty
+
+	redef fun length do return target.length
+
+	redef fun has(c: Char): Bool
+	do
+		for i in self do
+			if i == c then return true
+		end
+		return false
+	end
+
+end
+
+# View on Buffer objects, extends Sequence
+# for mutation operations
+abstract class BufferCharView
+	super StringCharView
+	super Sequence[Char]
+
+	redef type SELFTYPE: Buffer
+
+end
+
 # Immutable strings of characters.
 class String
 	super Comparable
@@ -370,6 +410,8 @@ class String
 
 	# Indes in _items of the last item of the string
 	readable var _index_to: Int
+
+	redef var chars: StringCharView = new FlatStringCharView(self)
 
 	################################################
 	#       AbstractString specific methods        #
@@ -395,11 +437,13 @@ class String
 
 		var realFrom = _index_from + from
 
-		if (realFrom + count) > _index_to then return new String.from_substring(realFrom, _index_to, _items)
+		if (realFrom + count) > _index_to then return new String.with_infos(_items, _index_to - realFrom + 1, realFrom, _index_to)
 
 		if count == 0 then return ""
 
-		return new String.from_substring(realFrom, realFrom + count - 1, _items)
+		var to = realFrom + count - 1
+
+		return new String.with_infos(_items, to - realFrom + 1, realFrom, to)
 	end
 
 	redef fun substring_from(from: Int): String
@@ -506,20 +550,6 @@ class String
 	##################################################
 	#              String Specific Methods           #
 	##################################################
-
-	# Creates a String object as a substring of another String
-	#
-	# From : index to start at
-	#
-	# To : Index to stop at (from + count -1)
-	#
-	private init from_substring(from: Int, to: Int, internalString: NativeString)
-	do
-		_items = internalString
-		_index_from = from
-		_index_to = to
-		_length = to - from + 1
-	end
 
 	private init with_infos(items: NativeString, len: Int, from: Int, to: Int)
 	do
@@ -676,6 +706,50 @@ class String
 	end
 end
 
+private class FlatStringIterator
+	super IndexedIterator[Char]
+
+	var target: String
+
+	var target_items: NativeString
+
+	var curr_pos: Int
+
+	init with_pos(tgt: String, pos: Int)
+	do
+		target = tgt
+		target_items = tgt.items
+		curr_pos = pos + target.index_from
+	end
+
+	redef fun is_ok do return curr_pos <= target.index_to
+
+	redef fun item do return target_items[curr_pos]
+
+	redef fun next do curr_pos += 1
+
+	redef fun index do return curr_pos - target.index_from
+
+end
+
+private class FlatStringCharView
+	super StringCharView
+
+	redef type SELFTYPE: String
+
+	redef fun [](index)
+	do
+		# Check that the index (+ index_from) is not larger than indexTo
+		# In other terms, if the index is valid
+		assert index >= 0
+		assert (index + target._index_from) <= target._index_to
+		return target._items[index + target._index_from]
+	end
+
+	redef fun iterator: IndexedIterator[Char] do return new FlatStringIterator.with_pos(target, 0)
+
+end
+
 # Mutable strings of characters.
 class Buffer
 	super AbstractString
@@ -684,6 +758,8 @@ class Buffer
 	super AbstractArray[Char]
 
 	redef type OTHER: String
+
+	redef var chars: BufferCharView = new FlatBufferCharView(self)
 
 	redef fun []=(index, item)
 	do
@@ -743,8 +819,8 @@ class Buffer
 		var l1 = length
 		var l2 = s.length
 		while i < l1 and i < l2 do
-			var c1 = self[i].ascii
-			var c2 = s[i].ascii
+			var c1 = self.chars[i].ascii
+			var c2 = s.chars[i].ascii
 			if c1 < c2 then
 				return true
 			else if c2 < c1 then
@@ -799,6 +875,76 @@ class Buffer
 	end
 
 	readable private var _capacity: Int
+end
+
+private class FlatBufferCharView
+	super BufferCharView
+	super StringCapable
+
+	redef type SELFTYPE: Buffer
+
+	redef fun [](index) do return target._items[index]
+
+	redef fun []=(index, item)
+	do
+		assert index >= 0 and index <= length
+		if index == length then
+			add(item)
+			return
+		end
+		target._items[index] = item
+	end
+
+	redef fun push(c)
+	do
+		target.add(c)
+	end
+
+	redef fun add(c)
+	do
+		target.add(c)
+	end
+
+	fun enlarge(cap: Int)
+	do
+		target.enlarge(cap)
+	end
+
+	redef fun append(s)
+	do
+		var my_items = target.items
+		var s_length = s.length
+		if target.capacity < s.length then enlarge(s_length + target.length)
+	end
+
+	redef fun iterator: IndexedIterator[Char] do return new FlatBufferIterator.with_pos(target, 0)
+
+end
+
+private class FlatBufferIterator
+	super IndexedIterator[Char]
+
+	var target: Buffer
+
+	var target_items: NativeString
+
+	var curr_pos: Int
+
+	init with_pos(tgt: Buffer, pos: Int)
+	do
+		target = tgt
+		target_items = tgt.items
+		curr_pos = pos
+	end
+
+	redef fun index do return curr_pos
+
+	redef fun is_ok do return curr_pos < target.length
+
+	redef fun item do return target_items[curr_pos]
+
+	redef fun next do curr_pos += 1
+
 end
 
 ###############################################################################
@@ -859,9 +1005,9 @@ redef class Int
 		# Sign
 		if self < 0 then
 			n = - self
-			s[0] = '-'
+			s.chars[0] = '-'
 		else if self == 0 then
-			s[0] = '0'
+			s.chars[0] = '0'
 			return
 		else
 			n = self
@@ -869,7 +1015,7 @@ redef class Int
 		# Fill digits
 		var pos = digit_count(base) - 1
 		while pos >= 0 and n > 0 do 
-			s[pos] = (n % base).to_c
+			s.chars[pos] = (n % base).to_c
 			n = n / base # /
 			pos -= 1
 		end
@@ -907,7 +1053,7 @@ redef class Float
 		var len = str.length
 		for i in [0..len-1] do
 			var j = len-1-i
-			var c = str[j]
+			var c = str.chars[j]
 			if c == '0' then
 				continue
 			else if c == '.' then
@@ -943,7 +1089,7 @@ redef class Float
 		end
 	end
 
-	fun to_precision_native(nb: Int): String import NativeString::to_s `{
+	fun to_precision_native(nb: Int): String import NativeString.to_s `{
 		int size;
 		char *str;
 
@@ -960,7 +1106,7 @@ redef class Char
 	redef fun to_s
 	do
 		var s = new Buffer.with_capacity(1)
-		s[0] = self
+		s.chars[0] = self
 		return s.to_s
 	end
 
@@ -1060,15 +1206,15 @@ redef class Map[K,V]
 		var i = iterator
 		var k = i.key
 		var e = i.item
-		if e != null then s.append("{k}{couple_sep}{e}")
-		
+		s.append("{k}{couple_sep}{e or else "<null>"}")
+
 		# Concat other items
 		i.next
 		while i.is_ok do
 			s.append(sep)
 			k = i.key
 			e = i.item
-			if e != null then s.append("{k}{couple_sep}{e}")
+			s.append("{k}{couple_sep}{e or else "<null>"}")
 			i.next
 		end
 		return s.to_s

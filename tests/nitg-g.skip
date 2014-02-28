@@ -5,3 +5,4 @@ inline
 test_extern
 nitc
 nitg
+test_json

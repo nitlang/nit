@@ -1,4 +1,4 @@
-Runtime error: Uninitialized attribute _a2 (alt/base_attr_isset_alt3.nit:101)
+Runtime error: Uninitialized attribute _a2 (alt/base_attr_isset_alt3.nit:43)
 1
 false
 false
@@ -8,3 +8,20 @@ false
 3
 true
 false
+4
+false
+false
+false
+5
+true
+false
+false
+6
+true
+true
+false
+7
+true
+true
+true
+1

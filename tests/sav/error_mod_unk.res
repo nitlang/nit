@@ -1,1 +1,1 @@
-error_mod_unk.nit:17,8--11: Error: cannot find module dfgd from error_mod_unk. tried ./dfgd.nit, dfgd.nit, ../lib/standard/dfgd.nit, ../lib/standard/collection/dfgd.nit, alt/dfgd.nit, ../lib/dfgd.nit, ../lib/dfgd.nit
+error_mod_unk.nit:17,8--11: Error: cannot find module dfgd from error_mod_unk. tried dfgd.nit, ../lib/standard/dfgd.nit, ../lib/standard/collection/dfgd.nit, alt/dfgd.nit, ../lib/dfgd.nit, ../lib/dfgd.nit

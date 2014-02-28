@@ -92,7 +92,7 @@ if (!var1) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Collection#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 28);
-exit(1);
+show_backtrace(1);
 }
 var_item = p0;
 var2 = 0;
@@ -108,7 +108,7 @@ if (!var6) {
 var_class_name9 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name9);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var10 = var_i < var_l;
 var4 = var10;
@@ -200,7 +200,7 @@ if (!var1) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Collection#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 39);
-exit(1);
+show_backtrace(1);
 }
 var_item = p0;
 var2 = 0;
@@ -216,7 +216,7 @@ if (!var6) {
 var_class_name9 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name9);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var10 = var_i < var_l;
 var4 = var10;
@@ -311,7 +311,7 @@ if (!var1) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Collection#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 50);
-exit(1);
+show_backtrace(1);
 }
 var_item = p0;
 var2 = 0;
@@ -329,7 +329,7 @@ if (!var7) {
 var_class_name10 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name10);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var11 = var_i < var_l;
 var5 = var11;
@@ -410,7 +410,7 @@ if (!var1) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "SequenceRead#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 62);
-exit(1);
+show_backtrace(1);
 }
 var_item = p0;
 var2 = 0;
@@ -463,7 +463,7 @@ if (!var1) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "AbstractArrayRead#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 64);
-exit(1);
+show_backtrace(1);
 }
 var_item = p0;
 var2 = ((long (*)(val*))(self->class->vft[COLOR_abstract_collection__Collection__length]))(self) /* length on <self:AbstractArrayRead[nullable Object]>*/;
@@ -536,7 +536,7 @@ if (!var1) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "AbstractArrayRead#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 68);
-exit(1);
+show_backtrace(1);
 }
 var_item = p0;
 var_pos = p1;
@@ -552,7 +552,7 @@ if (!var5) {
 var_class_name8 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name8);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var9 = var_i < var_len;
 var3 = var9;
@@ -649,7 +649,7 @@ if (!var1) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "AbstractArrayRead#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 83);
-exit(1);
+show_backtrace(1);
 }
 var_item = p0;
 var_pos = p1;
@@ -664,7 +664,7 @@ if (!var5) {
 var_class_name8 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name8);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var9 = var_i >= var2;
 var3 = var9;
@@ -737,7 +737,6 @@ var1 = self->attrs[COLOR_array__AbstractArrayRead___length].l; /* _length on <se
 var_cmp = var1;
 var2 = NEW_array__Array(self->type->resolution_table->types[COLOR_array__Arrayarray__AbstractArrayRead_FT0]);
 ((void (*)(val*, long))(var2->class->vft[COLOR_array__Array__with_capacity]))(var2, var_cmp) /* with_capacity on <var2:Array[nullable Object]>*/;
-CHECK_NEW_array__Array(var2);
 var_result = var2;
 for(;;) {
 var3 = 0;
@@ -749,7 +748,7 @@ if (!var6) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var7 = var_cmp > var3;
 var4 = var7;
@@ -825,7 +824,7 @@ if (!var) {
 var_class_name = p2 == NULL ? "null" : p2->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "AbstractArray[AbstractArrayRead#0]", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 112);
-exit(1);
+show_backtrace(1);
 }
 var_start = p0;
 var_len = p1;
@@ -842,7 +841,7 @@ if (!var4) {
 var_class_name7 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name7);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var8 = var_i > var1;
 var2 = var8;
@@ -914,7 +913,7 @@ if (!var4) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var5 = var_i < var_l;
 var2 = var5;
@@ -934,7 +933,7 @@ if (var8){
 if (var_e == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 134);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*))(var_e->class->vft[COLOR_kernel__Object__output]))(var_e) /* output on <var_e:nullable Object>*/;
 }
@@ -964,7 +963,6 @@ val* var /* : ArrayIterator[nullable Object] */;
 val* var1 /* : ArrayIterator[nullable Object] */;
 var1 = NEW_array__ArrayIterator(self->type->resolution_table->types[COLOR_array__ArrayIteratorarray__AbstractArrayRead_FT0]);
 ((void (*)(val*, val*))(var1->class->vft[COLOR_array__ArrayIterator__init]))(var1, self) /* init on <var1:ArrayIterator[nullable Object]>*/;
-CHECK_NEW_array__ArrayIterator(var1);
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -994,7 +992,7 @@ const char* var_class_name;
 var_class_name = self == NULL ? "null" : self->type->name;
 fprintf(stderr, "Runtime error: Abstract method `%s` called on `%s`", "enlarge", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 147);
-exit(1);
+show_backtrace(1);
 RET_LABEL:;
 }
 /* method array#AbstractArray#enlarge for (self: Object, Int) */
@@ -1030,7 +1028,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Sequence#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 152);
-exit(1);
+show_backtrace(1);
 }
 var_item = p0;
 ((void (*)(val*, val*))(self->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(self, var_item) /* add on <self:AbstractArray[nullable Object]>*/;
@@ -1058,7 +1056,7 @@ var2 = !var1;
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert \'not_empty\' failed");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 156);
-exit(1);
+show_backtrace(1);
 }
 var3 = ((val* (*)(val*))(self->class->vft[COLOR_abstract_collection__SequenceRead__last]))(self) /* last on <self:AbstractArray[nullable Object]>*/;
 var_r = var3;
@@ -1118,7 +1116,7 @@ var2 = !var1;
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert \'not_empty\' failed");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 164);
-exit(1);
+show_backtrace(1);
 }
 var3 = ((val* (*)(val*))(self->class->vft[COLOR_abstract_collection__Collection__first]))(self) /* first on <self:AbstractArray[nullable Object]>*/;
 var_r = var3;
@@ -1135,7 +1133,7 @@ if (!var8) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var9 = var_i < var_l;
 var6 = var9;
@@ -1233,7 +1231,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Sequence#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 176);
-exit(1);
+show_backtrace(1);
 }
 var_item = p0;
 var1 = ((long (*)(val*))(self->class->vft[COLOR_abstract_collection__Collection__length]))(self) /* length on <self:AbstractArray[nullable Object]>*/;
@@ -1255,7 +1253,7 @@ if (!var9) {
 var_class_name12 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name12);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var13 = var_i > var6;
 var7 = var13;
@@ -1331,7 +1329,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "AbstractArray#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 186);
-exit(1);
+show_backtrace(1);
 }
 var_item = p0;
 var_pos = p1;
@@ -1396,7 +1394,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "SimpleCollection#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 198);
-exit(1);
+show_backtrace(1);
 }
 var_item = p0;
 var1 = ((long (*)(val*))(self->class->vft[COLOR_abstract_collection__Collection__length]))(self) /* length on <self:AbstractArray[nullable Object]>*/;
@@ -1449,7 +1447,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "RemovableCollection#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 202);
-exit(1);
+show_backtrace(1);
 }
 var_item = p0;
 var1 = ((long (*)(val*, val*))(self->class->vft[COLOR_abstract_collection__SequenceRead__index_of]))(self, var_item) /* index_of on <self:AbstractArray[nullable Object]>*/;
@@ -1499,7 +1497,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "RemovableCollection#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 204);
-exit(1);
+show_backtrace(1);
 }
 var_item = p0;
 var1 = ((long (*)(val*, val*))(self->class->vft[COLOR_abstract_collection__SequenceRead__index_of]))(self, var_item) /* index_of on <self:AbstractArray[nullable Object]>*/;
@@ -1514,7 +1512,7 @@ if (!var5) {
 var_class_name8 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name8);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var9 = var_i >= var2;
 var3 = var9;
@@ -1587,7 +1585,7 @@ if (!var5) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var6 = var_i >= var2;
 var3 = var6;
@@ -1604,7 +1602,7 @@ if (!var9) {
 var_class_name12 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name12);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var13 = var_i < var_l;
 var7 = var13;
@@ -1633,7 +1631,7 @@ if (!var20) {
 var_class_name23 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name23);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var24 = var_j < var_l;
 var18 = var24;
@@ -1741,7 +1739,7 @@ if (!var5) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var6 = var_index >= var2;
 var3 = var6;
@@ -1759,7 +1757,7 @@ if (!var10) {
 var_class_name13 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name13);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var14 = var_index < var7;
 var8 = var14;
@@ -1773,13 +1771,13 @@ var1 = var_;
 if (!var1) {
 fprintf(stderr, "Runtime error: %s", "Assert \'index\' failed");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 255);
-exit(1);
+show_backtrace(1);
 }
 var15 = self->attrs[COLOR_array__Array___items].val; /* _items on <self:Array[nullable Object]> */
 if (var15 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 256);
-exit(1);
+show_backtrace(1);
 } else {
 var16 = ((val* (*)(val*, long))(var15->class->vft[COLOR_array__NativeArray___91d_93d]))(var15, var_index) /* [] on <var15:nullable NativeArray[nullable Object]>*/;
 }
@@ -1866,7 +1864,7 @@ if (!var) {
 var_class_name = p1 == NULL ? "null" : p1->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Sequence#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 259);
-exit(1);
+show_backtrace(1);
 }
 var_index = p0;
 var_item = p1;
@@ -1879,7 +1877,7 @@ if (!var5) {
 var_class_name8 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name8);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var9 = var_index >= var2;
 var3 = var9;
@@ -1904,7 +1902,7 @@ if (!var17) {
 var_class_name20 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name20);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var21 = var_index < var12;
 var15 = var21;
@@ -1918,7 +1916,7 @@ var1 = var_;
 if (!var1) {
 fprintf(stderr, "Runtime error: %s", "Assert \'index\' failed");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var22 = self->attrs[COLOR_array__Array___capacity].l; /* _capacity on <self:Array[nullable Object]> */
 { /* Inline kernel#Int#<= (var22,var_index) */
@@ -1929,7 +1927,7 @@ if (!var25) {
 var_class_name28 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name28);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
-exit(1);
+show_backtrace(1);
 }
 var29 = var22 <= var_index;
 var23 = var29;
@@ -1956,7 +1954,7 @@ if (!var37) {
 var_class_name40 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name40);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
-exit(1);
+show_backtrace(1);
 }
 var41 = var34 <= var_index;
 var35 = var41;
@@ -1978,7 +1976,7 @@ var46 = self->attrs[COLOR_array__Array___items].val; /* _items on <self:Array[nu
 if (var46 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 268);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, long, val*))(var46->class->vft[COLOR_array__NativeArray___91d_93d_61d]))(var46, var_index, var_item) /* []= on <var46:nullable NativeArray[nullable Object]>*/;
 }
@@ -2033,7 +2031,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "SimpleCollection#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 271);
-exit(1);
+show_backtrace(1);
 }
 var_item = p0;
 var1 = self->attrs[COLOR_array__AbstractArrayRead___length].l; /* _length on <self:Array[nullable Object]> */
@@ -2047,7 +2045,7 @@ if (!var5) {
 var_class_name8 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name8);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
-exit(1);
+show_backtrace(1);
 }
 var9 = var2 <= var_l;
 var3 = var9;
@@ -2077,7 +2075,7 @@ var18 = self->attrs[COLOR_array__Array___items].val; /* _items on <self:Array[nu
 if (var18 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 278);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, long, val*))(var18->class->vft[COLOR_array__NativeArray___91d_93d_61d]))(var18, var_l, var_item) /* []= on <var18:nullable NativeArray[nullable Object]>*/;
 }
@@ -2134,7 +2132,7 @@ if (!var3) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
-exit(1);
+show_backtrace(1);
 }
 var4 = var_cap <= var_c;
 var1 = var4;
@@ -2154,7 +2152,7 @@ if (!var7) {
 var_class_name10 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name10);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 260);
-exit(1);
+show_backtrace(1);
 }
 var11 = var_c <= var_cap;
 var5 = var11;
@@ -2192,7 +2190,7 @@ if (!var25) {
 var_class_name28 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name28);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var29 = var21 > var22;
 var23 = var29;
@@ -2205,7 +2203,7 @@ var31 = self->attrs[COLOR_array__AbstractArrayRead___length].l; /* _length on <s
 if (var30 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 287);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*, long))(var30->class->vft[COLOR_array__NativeArray__copy_to]))(var30, var_a, var31) /* copy_to on <var30:nullable NativeArray[nullable Object]>*/;
 }
@@ -2259,7 +2257,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Collection[Array#0]", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 299);
-exit(1);
+show_backtrace(1);
 }
 var_items = p0;
 var1 = ((long (*)(val*))(var_items->class->vft[COLOR_abstract_collection__Collection__length]))(var_items) /* length on <var_items:Collection[nullable Object]>*/;
@@ -2316,7 +2314,7 @@ if (!var3) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var4 = var_cap >= var;
 var1 = var4;
@@ -2326,7 +2324,7 @@ RET_LABEL2:(void)0;
 if (!var1) {
 fprintf(stderr, "Runtime error: %s", "Assert \'positive\' failed");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 316);
-exit(1);
+show_backtrace(1);
 }
 var5 = ((val* (*)(val*, long))(self->class->vft[COLOR_array__ArrayCapable__calloc_array]))(self, var_cap) /* calloc_array on <self:Array[nullable Object]>*/;
 self->attrs[COLOR_array__Array___items].val = var5; /* _items on <self:Array[nullable Object]> */
@@ -2388,7 +2386,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Array#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 322);
-exit(1);
+show_backtrace(1);
 }
 var_value = p0;
 var_count = p1;
@@ -2402,7 +2400,7 @@ if (!var4) {
 var_class_name7 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name7);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var8 = var_count >= var1;
 var2 = var8;
@@ -2412,7 +2410,7 @@ RET_LABEL3:(void)0;
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert \'positive\' failed");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 325);
-exit(1);
+show_backtrace(1);
 }
 var9 = ((val* (*)(val*, long))(self->class->vft[COLOR_array__ArrayCapable__calloc_array]))(self, var_count) /* calloc_array on <self:Array[nullable Object]>*/;
 self->attrs[COLOR_array__Array___items].val = var9; /* _items on <self:Array[nullable Object]> */
@@ -2429,7 +2427,7 @@ if (!var13) {
 var_class_name16 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name16);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var17 = var_i < var_count;
 var11 = var17;
@@ -2486,7 +2484,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "NativeArray[Array#0]", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 336);
-exit(1);
+show_backtrace(1);
 }
 var_nat = p0;
 var_size = p1;
@@ -2500,7 +2498,7 @@ if (!var4) {
 var_class_name7 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name7);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var8 = var_size >= var1;
 var2 = var8;
@@ -2510,7 +2508,7 @@ RET_LABEL3:(void)0;
 if (!var2) {
 fprintf(stderr, "Runtime error: %s", "Assert \'positive\' failed");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 339);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_array__Array___items].val = var_nat; /* _items on <self:Array[nullable Object]> */
 self->attrs[COLOR_array__Array___capacity].l = var_size; /* _capacity on <self:Array[nullable Object]> */
@@ -2530,7 +2528,7 @@ var1 = self->attrs[COLOR_array__Array___items].val; /* _items on <self:Array[nul
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 350);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 goto RET_LABEL;
@@ -2556,7 +2554,7 @@ var1 = self->attrs[COLOR_array__ArrayIterator___array].val; /* _array on <self:A
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _array");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 360);
-exit(1);
+show_backtrace(1);
 }
 var2 = self->attrs[COLOR_array__ArrayIterator___index].l; /* _index on <self:ArrayIterator[nullable Object]> */
 var3 = ((val* (*)(val*, long))(var1->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var1, var2) /* [] on <var1:AbstractArrayRead[nullable Object]>*/;
@@ -2591,7 +2589,7 @@ var2 = self->attrs[COLOR_array__ArrayIterator___array].val; /* _array on <self:A
 if (var2 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _array");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 364);
-exit(1);
+show_backtrace(1);
 }
 var3 = ((long (*)(val*))(var2->class->vft[COLOR_abstract_collection__Collection__length]))(var2) /* length on <var2:AbstractArrayRead[nullable Object]>*/;
 { /* Inline kernel#Int#< (var1,var3) */
@@ -2602,7 +2600,7 @@ if (!var6) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var7 = var1 < var3;
 var4 = var7;
@@ -2670,7 +2668,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "AbstractArrayRead[ArrayIterator#0]", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 368);
-exit(1);
+show_backtrace(1);
 }
 var_a = p0;
 self->attrs[COLOR_array__ArrayIterator___array].val = var_a; /* _array on <self:ArrayIterator[nullable Object]> */
@@ -2726,14 +2724,14 @@ if (!var1) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Collection#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 387);
-exit(1);
+show_backtrace(1);
 }
 var_e = p0;
 var2 = self->attrs[COLOR_array__ArraySet___array].val; /* _array on <self:ArraySet[Object]> */
 if (var2 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _array");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 387);
-exit(1);
+show_backtrace(1);
 }
 var3 = ((short int (*)(val*, val*))(var2->class->vft[COLOR_abstract_collection__Collection__has]))(var2, var_e) /* has on <var2:Array[Object]>*/;
 var = var3;
@@ -2776,14 +2774,14 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "SimpleCollection#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 389);
-exit(1);
+show_backtrace(1);
 }
 var_e = p0;
 var1 = self->attrs[COLOR_array__ArraySet___array].val; /* _array on <self:ArraySet[Object]> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _array");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 389);
-exit(1);
+show_backtrace(1);
 }
 var2 = ((short int (*)(val*, val*))(var1->class->vft[COLOR_abstract_collection__Collection__has]))(var1, var_e) /* has on <var1:Array[Object]>*/;
 var3 = !var2;
@@ -2792,7 +2790,7 @@ var4 = self->attrs[COLOR_array__ArraySet___array].val; /* _array on <self:ArrayS
 if (var4 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _array");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 389);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var4->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var4, var_e) /* add on <var4:Array[Object]>*/;
 } else {
@@ -2813,7 +2811,7 @@ var1 = self->attrs[COLOR_array__ArraySet___array].val; /* _array on <self:ArrayS
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _array");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 391);
-exit(1);
+show_backtrace(1);
 }
 var2 = ((short int (*)(val*))(var1->class->vft[COLOR_abstract_collection__Collection__is_empty]))(var1) /* is_empty on <var1:Array[Object]>*/;
 var = var2;
@@ -2839,7 +2837,7 @@ var1 = self->attrs[COLOR_array__ArraySet___array].val; /* _array on <self:ArrayS
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _array");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 393);
-exit(1);
+show_backtrace(1);
 }
 var2 = ((long (*)(val*))(var1->class->vft[COLOR_abstract_collection__Collection__length]))(var1) /* length on <var1:Array[Object]>*/;
 var = var2;
@@ -2874,7 +2872,7 @@ var1 = self->attrs[COLOR_array__ArraySet___array].val; /* _array on <self:ArrayS
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _array");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 397);
-exit(1);
+show_backtrace(1);
 }
 var2 = ((long (*)(val*))(var1->class->vft[COLOR_abstract_collection__Collection__length]))(var1) /* length on <var1:Array[Object]>*/;
 var3 = 0;
@@ -2886,7 +2884,7 @@ if (!var6) {
 var_class_name = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 263);
-exit(1);
+show_backtrace(1);
 }
 var7 = var2 > var3;
 var4 = var7;
@@ -2896,13 +2894,13 @@ RET_LABEL5:(void)0;
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 397);
-exit(1);
+show_backtrace(1);
 }
 var8 = self->attrs[COLOR_array__ArraySet___array].val; /* _array on <self:ArraySet[Object]> */
 if (var8 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _array");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 398);
-exit(1);
+show_backtrace(1);
 }
 var9 = ((val* (*)(val*))(var8->class->vft[COLOR_abstract_collection__Collection__first]))(var8) /* first on <var8:Array[Object]>*/;
 var = var9;
@@ -2951,14 +2949,14 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "RemovableCollection#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 401);
-exit(1);
+show_backtrace(1);
 }
 var_item = p0;
 var1 = self->attrs[COLOR_array__ArraySet___array].val; /* _array on <self:ArraySet[Object]> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _array");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 403);
-exit(1);
+show_backtrace(1);
 }
 var2 = ((long (*)(val*, val*))(var1->class->vft[COLOR_abstract_collection__SequenceRead__index_of]))(var1, var_item) /* index_of on <var1:Array[Object]>*/;
 var_i = var2;
@@ -2971,7 +2969,7 @@ if (!var6) {
 var_class_name9 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name9);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var10 = var_i >= var3;
 var4 = var10;
@@ -3011,7 +3009,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "RemovableCollection#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 407);
-exit(1);
+show_backtrace(1);
 }
 var_item = p0;
 ((void (*)(val*, val*))(self->class->vft[COLOR_abstract_collection__RemovableCollection__remove]))(self, var_item) /* remove on <self:ArraySet[Object]>*/;
@@ -3029,7 +3027,7 @@ var = self->attrs[COLOR_array__ArraySet___array].val; /* _array on <self:ArraySe
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _array");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 409);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*))(var->class->vft[COLOR_abstract_collection__RemovableCollection__clear]))(var) /* clear on <var:Array[Object]>*/;
 RET_LABEL:;
@@ -3050,11 +3048,10 @@ var2 = self->attrs[COLOR_array__ArraySet___array].val; /* _array on <self:ArrayS
 if (var2 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _array");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 411);
-exit(1);
+show_backtrace(1);
 }
 var3 = ((val* (*)(val*))(var2->class->vft[COLOR_abstract_collection__Collection__iterator]))(var2) /* iterator on <var2:Array[Object]>*/;
 ((void (*)(val*, val*))(var1->class->vft[COLOR_array__ArraySetIterator__init]))(var1, var3) /* init on <var1:ArraySetIterator[Object]>*/;
-CHECK_NEW_array__ArraySetIterator(var1);
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -3078,7 +3075,7 @@ var = self->attrs[COLOR_array__ArraySet___array].val; /* _array on <self:ArraySe
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _array");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 414);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, long))(var->class->vft[COLOR_array__AbstractArray__enlarge]))(var, var_cap) /* enlarge on <var:Array[Object]>*/;
 RET_LABEL:;
@@ -3101,13 +3098,13 @@ var = self->attrs[COLOR_array__ArraySet___array].val; /* _array on <self:ArraySe
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _array");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 418);
-exit(1);
+show_backtrace(1);
 }
 var1 = self->attrs[COLOR_array__ArraySet___array].val; /* _array on <self:ArraySet[Object]> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _array");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 418);
-exit(1);
+show_backtrace(1);
 }
 var2 = ((val* (*)(val*))(var1->class->vft[COLOR_abstract_collection__SequenceRead__last]))(var1) /* last on <var1:Array[Object]>*/;
 ((void (*)(val*, long, val*))(var->class->vft[COLOR_abstract_collection__Sequence___91d_93d_61d]))(var, var_i, var2) /* []= on <var:Array[Object]>*/;
@@ -3115,7 +3112,7 @@ var3 = self->attrs[COLOR_array__ArraySet___array].val; /* _array on <self:ArrayS
 if (var3 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _array");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 419);
-exit(1);
+show_backtrace(1);
 }
 var4 = ((val* (*)(val*))(var3->class->vft[COLOR_abstract_collection__Sequence__pop]))(var3) /* pop on <var3:Array[Object]>*/;
 var4;
@@ -3131,7 +3128,6 @@ void array__ArraySet__init(val* self) {
 val* var /* : Array[Object] */;
 var = NEW_array__Array(self->type->resolution_table->types[COLOR_array__Arrayarray__ArraySet_FT0]);
 ((void (*)(val*))(var->class->vft[COLOR_array__Array__init]))(var) /* init on <var:Array[Object]>*/;
-CHECK_NEW_array__Array(var);
 self->attrs[COLOR_array__ArraySet___array].val = var; /* _array on <self:ArraySet[Object]> */
 RET_LABEL:;
 }
@@ -3147,7 +3143,6 @@ val* var /* : Array[Object] */;
 var_i = p0;
 var = NEW_array__Array(self->type->resolution_table->types[COLOR_array__Arrayarray__ArraySet_FT0]);
 ((void (*)(val*, long))(var->class->vft[COLOR_array__Array__with_capacity]))(var, var_i) /* with_capacity on <var:Array[Object]>*/;
-CHECK_NEW_array__Array(var);
 self->attrs[COLOR_array__ArraySet___array].val = var; /* _array on <self:ArraySet[Object]> */
 RET_LABEL:;
 }
@@ -3165,7 +3160,7 @@ var1 = self->attrs[COLOR_array__ArraySetIterator___iter].val; /* _iter on <self:
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _iter");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 433);
-exit(1);
+show_backtrace(1);
 }
 var2 = ((short int (*)(val*))(var1->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var1) /* is_ok on <var1:ArrayIterator[Object]>*/;
 var = var2;
@@ -3189,7 +3184,7 @@ var = self->attrs[COLOR_array__ArraySetIterator___iter].val; /* _iter on <self:A
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _iter");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 435);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*))(var->class->vft[COLOR_abstract_collection__Iterator__next]))(var) /* next on <var:ArrayIterator[Object]>*/;
 RET_LABEL:;
@@ -3208,7 +3203,7 @@ var1 = self->attrs[COLOR_array__ArraySetIterator___iter].val; /* _iter on <self:
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _iter");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 437);
-exit(1);
+show_backtrace(1);
 }
 var2 = ((val* (*)(val*))(var1->class->vft[COLOR_abstract_collection__Iterator__item]))(var1) /* item on <var1:ArrayIterator[Object]>*/;
 var = var2;
@@ -3247,7 +3242,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "ArrayIterator[ArraySetIterator#0]", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 439);
-exit(1);
+show_backtrace(1);
 }
 var_iter = p0;
 self->attrs[COLOR_array__ArraySetIterator___iter].val = var_iter; /* _iter on <self:ArraySetIterator[Object]> */
@@ -3293,7 +3288,7 @@ if (!var1) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "MapRead#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 449);
-exit(1);
+show_backtrace(1);
 }
 var_key = p0;
 var2 = ((long (*)(val*, val*))(self->class->vft[COLOR_array__ArrayMap__index]))(self, var_key) /* index on <self:ArrayMap[Object, nullable Object]>*/;
@@ -3307,7 +3302,7 @@ if (!var6) {
 var_class_name9 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name9);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var10 = var_i >= var3;
 var4 = var10;
@@ -3319,7 +3314,7 @@ var11 = self->attrs[COLOR_array__ArrayMap___items].val; /* _items on <self:Array
 if (var11 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _items");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 454);
-exit(1);
+show_backtrace(1);
 }
 var12 = ((val* (*)(val*, long))(var11->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var11, var_i) /* [] on <var11:Array[Couple[Object, nullable Object]]>*/;
 var13 = ((val* (*)(val*))(var12->class->vft[COLOR_abstract_collection__Couple__second]))(var12) /* second on <var12:nullable Object(Couple[Object, nullable Object])>*/;
@@ -3328,7 +3323,7 @@ goto RET_LABEL;
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 456);
-exit(1);
+show_backtrace(1);
 }
 RET_LABEL:;
 return var;
@@ -3384,7 +3379,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Map#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 460);
-exit(1);
+show_backtrace(1);
 }
 /* Covariant cast for argument 1 (item) <p1:nullable Object> isa Map#1 */
 /* <p1:nullable Object> isa Map#1 */
@@ -3405,7 +3400,7 @@ if (!var1) {
 var_class_name5 = p1 == NULL ? "null" : p1->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Map#1", var_class_name5);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 460);
-exit(1);
+show_backtrace(1);
 }
 var_key = p0;
 var_item = p1;
@@ -3420,7 +3415,7 @@ if (!var10) {
 var_class_name13 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name13);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var14 = var_i >= var7;
 var8 = var14;
@@ -3432,7 +3427,7 @@ var15 = self->attrs[COLOR_array__ArrayMap___items].val; /* _items on <self:Array
 if (var15 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _items");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 465);
-exit(1);
+show_backtrace(1);
 }
 var16 = ((val* (*)(val*, long))(var15->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var15, var_i) /* [] on <var15:Array[Couple[Object, nullable Object]]>*/;
 ((void (*)(val*, val*))(var16->class->vft[COLOR_abstract_collection__Couple__second_61d]))(var16, var_item) /* second= on <var16:nullable Object(Couple[Object, nullable Object])>*/;
@@ -3441,11 +3436,10 @@ var17 = self->attrs[COLOR_array__ArrayMap___items].val; /* _items on <self:Array
 if (var17 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _items");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 467);
-exit(1);
+show_backtrace(1);
 }
 var18 = NEW_abstract_collection__Couple(self->type->resolution_table->types[COLOR_abstract_collection__Couplearray__ArrayMap_FT0array__ArrayMap_FT1]);
 ((void (*)(val*, val*, val*))(var18->class->vft[COLOR_abstract_collection__Couple__init]))(var18, var_key, var_item) /* init on <var18:Couple[Object, nullable Object]>*/;
-CHECK_NEW_abstract_collection__Couple(var18);
 ((void (*)(val*, val*))(var17->class->vft[COLOR_abstract_collection__Sequence__push]))(var17, var18) /* push on <var17:Array[Couple[Object, nullable Object]]>*/;
 }
 RET_LABEL:;
@@ -3463,7 +3457,7 @@ var1 = self->attrs[COLOR_array__ArrayMap___64dkeys].val; /* @keys on <self:Array
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @keys");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 471);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -3499,7 +3493,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "ArrayMapKeys[ArrayMap#0, ArrayMap#1]", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 471);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_array__ArrayMap___64dkeys].val = p0; /* @keys on <self:ArrayMap[Object, nullable Object]> */
 RET_LABEL:;
@@ -3517,7 +3511,7 @@ var1 = self->attrs[COLOR_array__ArrayMap___64dvalues].val; /* @values on <self:A
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @values");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 472);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -3553,7 +3547,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "ArrayMapValues[ArrayMap#0, ArrayMap#1]", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 472);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_array__ArrayMap___64dvalues].val = p0; /* @values on <self:ArrayMap[Object, nullable Object]> */
 RET_LABEL:;
@@ -3572,7 +3566,7 @@ var1 = self->attrs[COLOR_array__ArrayMap___items].val; /* _items on <self:ArrayM
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _items");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 475);
-exit(1);
+show_backtrace(1);
 }
 var2 = ((long (*)(val*))(var1->class->vft[COLOR_abstract_collection__Collection__length]))(var1) /* length on <var1:Array[Couple[Object, nullable Object]]>*/;
 var = var2;
@@ -3600,11 +3594,10 @@ var2 = self->attrs[COLOR_array__ArrayMap___items].val; /* _items on <self:ArrayM
 if (var2 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _items");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 477);
-exit(1);
+show_backtrace(1);
 }
 var3 = ((val* (*)(val*))(var2->class->vft[COLOR_abstract_collection__Collection__iterator]))(var2) /* iterator on <var2:Array[Couple[Object, nullable Object]]>*/;
 ((void (*)(val*, val*))(var1->class->vft[COLOR_abstract_collection__CoupleMapIterator__init]))(var1, var3) /* init on <var1:CoupleMapIterator[Object, nullable Object]>*/;
-CHECK_NEW_abstract_collection__CoupleMapIterator(var1);
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -3628,7 +3621,7 @@ var1 = self->attrs[COLOR_array__ArrayMap___items].val; /* _items on <self:ArrayM
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _items");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 479);
-exit(1);
+show_backtrace(1);
 }
 var2 = ((short int (*)(val*))(var1->class->vft[COLOR_abstract_collection__Collection__is_empty]))(var1) /* is_empty on <var1:Array[Couple[Object, nullable Object]]>*/;
 var = var2;
@@ -3652,7 +3645,7 @@ var = self->attrs[COLOR_array__ArrayMap___items].val; /* _items on <self:ArrayMa
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _items");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 481);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*))(var->class->vft[COLOR_abstract_collection__RemovableCollection__clear]))(var) /* clear on <var:Array[Couple[Object, nullable Object]]>*/;
 RET_LABEL:;
@@ -3671,7 +3664,7 @@ var = self->attrs[COLOR_array__ArrayMap___items].val; /* _items on <self:ArrayMa
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _items");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 484);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, long))(var->class->vft[COLOR_array__AbstractArray__enlarge]))(var, var_cap) /* enlarge on <var:Array[Couple[Object, nullable Object]]>*/;
 RET_LABEL:;
@@ -3716,7 +3709,7 @@ if (!var1) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "CoupleMap#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 486);
-exit(1);
+show_backtrace(1);
 }
 var_key = p0;
 var2 = ((long (*)(val*, val*))(self->class->vft[COLOR_array__ArrayMap__index]))(self, var_key) /* index on <self:ArrayMap[Object, nullable Object]>*/;
@@ -3730,7 +3723,7 @@ if (!var6) {
 var_class_name9 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name9);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var10 = var_i >= var3;
 var4 = var10;
@@ -3742,7 +3735,7 @@ var11 = self->attrs[COLOR_array__ArrayMap___items].val; /* _items on <self:Array
 if (var11 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _items");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 490);
-exit(1);
+show_backtrace(1);
 }
 var12 = ((val* (*)(val*, long))(var11->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var11, var_i) /* [] on <var11:Array[Couple[Object, nullable Object]]>*/;
 var = var12;
@@ -3777,13 +3770,13 @@ var = self->attrs[COLOR_array__ArrayMap___items].val; /* _items on <self:ArrayMa
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _items");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 502);
-exit(1);
+show_backtrace(1);
 }
 var1 = self->attrs[COLOR_array__ArrayMap___items].val; /* _items on <self:ArrayMap[Object, nullable Object]> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _items");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 502);
-exit(1);
+show_backtrace(1);
 }
 var2 = ((val* (*)(val*))(var1->class->vft[COLOR_abstract_collection__SequenceRead__last]))(var1) /* last on <var1:Array[Couple[Object, nullable Object]]>*/;
 ((void (*)(val*, long, val*))(var->class->vft[COLOR_abstract_collection__Sequence___91d_93d_61d]))(var, var_i, var2) /* []= on <var:Array[Couple[Object, nullable Object]]>*/;
@@ -3791,7 +3784,7 @@ var3 = self->attrs[COLOR_array__ArrayMap___items].val; /* _items on <self:ArrayM
 if (var3 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _items");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 503);
-exit(1);
+show_backtrace(1);
 }
 var4 = ((val* (*)(val*))(var3->class->vft[COLOR_abstract_collection__Sequence__pop]))(var3) /* pop on <var3:Array[Couple[Object, nullable Object]]>*/;
 var4;
@@ -3861,7 +3854,7 @@ if (!var1) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "ArrayMap#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 509);
-exit(1);
+show_backtrace(1);
 }
 var_key = p0;
 var2 = self->attrs[COLOR_array__ArrayMap___last_index].l; /* _last_index on <self:ArrayMap[Object, nullable Object]> */
@@ -3870,7 +3863,7 @@ var4 = self->attrs[COLOR_array__ArrayMap___items].val; /* _items on <self:ArrayM
 if (var4 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _items");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 514);
-exit(1);
+show_backtrace(1);
 }
 var5 = ((long (*)(val*))(var4->class->vft[COLOR_abstract_collection__Collection__length]))(var4) /* length on <var4:Array[Couple[Object, nullable Object]]>*/;
 { /* Inline kernel#Int#< (var_l,var5) */
@@ -3881,7 +3874,7 @@ if (!var8) {
 var_class_name11 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name11);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var12 = var_l < var5;
 var6 = var12;
@@ -3894,7 +3887,7 @@ var13 = self->attrs[COLOR_array__ArrayMap___items].val; /* _items on <self:Array
 if (var13 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _items");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 514);
-exit(1);
+show_backtrace(1);
 }
 var14 = ((val* (*)(val*, long))(var13->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var13, var_l) /* [] on <var13:Array[Couple[Object, nullable Object]]>*/;
 var15 = ((val* (*)(val*))(var14->class->vft[COLOR_abstract_collection__Couple__first]))(var14) /* first on <var14:nullable Object(Couple[Object, nullable Object])>*/;
@@ -3915,7 +3908,7 @@ var18 = self->attrs[COLOR_array__ArrayMap___items].val; /* _items on <self:Array
 if (var18 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _items");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 517);
-exit(1);
+show_backtrace(1);
 }
 var19 = ((long (*)(val*))(var18->class->vft[COLOR_abstract_collection__Collection__length]))(var18) /* length on <var18:Array[Couple[Object, nullable Object]]>*/;
 { /* Inline kernel#Int#< (var_i,var19) */
@@ -3926,7 +3919,7 @@ if (!var22) {
 var_class_name25 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name25);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 var26 = var_i < var19;
 var20 = var26;
@@ -3938,7 +3931,7 @@ var27 = self->attrs[COLOR_array__ArrayMap___items].val; /* _items on <self:Array
 if (var27 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _items");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 518);
-exit(1);
+show_backtrace(1);
 }
 var28 = ((val* (*)(val*, long))(var27->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var27, var_i) /* [] on <var27:Array[Couple[Object, nullable Object]]>*/;
 var29 = ((val* (*)(val*))(var28->class->vft[COLOR_abstract_collection__Couple__first]))(var28) /* first on <var28:nullable Object(Couple[Object, nullable Object])>*/;
@@ -3986,7 +3979,6 @@ void array__ArrayMap__init(val* self) {
 val* var /* : Array[Couple[Object, nullable Object]] */;
 var = NEW_array__Array(self->type->resolution_table->types[COLOR_array__Arrayabstract_collection__Couplearray__ArrayMap_FT0array__ArrayMap_FT1]);
 ((void (*)(val*))(var->class->vft[COLOR_array__Array__init]))(var) /* init on <var:Array[Couple[Object, nullable Object]]>*/;
-CHECK_NEW_array__Array(var);
 self->attrs[COLOR_array__ArrayMap___items].val = var; /* _items on <self:ArrayMap[Object, nullable Object]> */
 RET_LABEL:;
 }
@@ -4003,7 +3995,7 @@ var1 = self->attrs[COLOR_array__ArrayMapKeys___64dmap].val; /* @map on <self:Arr
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @map");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 536);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -4039,7 +4031,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "ArrayMap[ArrayMapKeys#0, ArrayMapKeys#1]", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 536);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_array__ArrayMapKeys___64dmap].val = p0; /* @map on <self:ArrayMapKeys[Object, nullable Object]> */
 RET_LABEL:;
@@ -4075,7 +4067,7 @@ if (!var1) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Collection#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 538);
-exit(1);
+show_backtrace(1);
 }
 var_k = p0;
 var2 = ((short int (*)(val*, val*))(self->class->vft[COLOR_abstract_collection__Collection__has]))(self, var_k) /* has on <self:ArrayMapKeys[Object, nullable Object]>*/;
@@ -4112,7 +4104,7 @@ var2 = var1->attrs[COLOR_array__ArrayMap___items].val; /* _items on <var1:ArrayM
 if (var2 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _items");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 539);
-exit(1);
+show_backtrace(1);
 }
 var3 = ((val* (*)(val*))(var2->class->vft[COLOR_abstract_collection__Collection__first]))(var2) /* first on <var2:Array[Couple[Object, nullable Object]]>*/;
 var4 = ((val* (*)(val*))(var3->class->vft[COLOR_abstract_collection__Couple__first]))(var3) /* first on <var3:nullable Object(Couple[Object, nullable Object])>*/;
@@ -4162,7 +4154,7 @@ if (!var1) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Collection#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 540);
-exit(1);
+show_backtrace(1);
 }
 var_k = p0;
 var2 = ((val* (*)(val*))(self->class->vft[COLOR_array__ArrayMapKeys__map]))(self) /* map on <self:ArrayMapKeys[Object, nullable Object]>*/;
@@ -4176,7 +4168,7 @@ if (!var7) {
 var_class_name10 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name10);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var11 = var3 >= var4;
 var5 = var11;
@@ -4230,7 +4222,7 @@ if (!var1) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Collection#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 541);
-exit(1);
+show_backtrace(1);
 }
 var_k = p0;
 var4 = ((short int (*)(val*, val*))(self->class->vft[COLOR_abstract_collection__Collection__has]))(self, var_k) /* has on <self:ArrayMapKeys[Object, nullable Object]>*/;
@@ -4321,7 +4313,6 @@ var1 = NEW_abstract_collection__MapKeysIterator(self->type->resolution_table->ty
 var2 = ((val* (*)(val*))(self->class->vft[COLOR_array__ArrayMapKeys__map]))(self) /* map on <self:ArrayMapKeys[Object, nullable Object]>*/;
 var3 = ((val* (*)(val*))(var2->class->vft[COLOR_abstract_collection__MapRead__iterator]))(var2) /* iterator on <var2:ArrayMap[Object, nullable Object]>*/;
 ((void (*)(val*, val*))(var1->class->vft[COLOR_abstract_collection__MapKeysIterator__init]))(var1, var3) /* init on <var1:MapKeysIterator[Object, nullable Object]>*/;
-CHECK_NEW_abstract_collection__MapKeysIterator(var1);
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -4381,7 +4372,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "RemovableCollection#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 546);
-exit(1);
+show_backtrace(1);
 }
 var_key = p0;
 var1 = ((val* (*)(val*))(self->class->vft[COLOR_array__ArrayMapKeys__map]))(self) /* map on <self:ArrayMapKeys[Object, nullable Object]>*/;
@@ -4396,7 +4387,7 @@ if (!var6) {
 var_class_name9 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name9);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var10 = var_i >= var3;
 var4 = var10;
@@ -4437,7 +4428,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "RemovableCollection#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 551);
-exit(1);
+show_backtrace(1);
 }
 var_key = p0;
 ((void (*)(val*, val*))(self->class->vft[COLOR_abstract_collection__RemovableCollection__remove]))(self, var_key) /* remove on <self:ArrayMapKeys[Object, nullable Object]>*/;
@@ -4469,7 +4460,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "ArrayMap[ArrayMapKeys#0, ArrayMapKeys#1]", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 534);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_array__ArrayMapKeys___64dmap].val = p0; /* @map on <self:ArrayMapKeys[Object, nullable Object]> */
 RET_LABEL:;
@@ -4487,7 +4478,7 @@ var1 = self->attrs[COLOR_array__ArrayMapValues___64dmap].val; /* @map on <self:A
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @map");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 556);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -4523,7 +4514,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "ArrayMap[ArrayMapValues#0, ArrayMapValues#1]", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 556);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_array__ArrayMapValues___64dmap].val = p0; /* @map on <self:ArrayMapValues[Object, nullable Object]> */
 RET_LABEL:;
@@ -4545,7 +4536,7 @@ var2 = var1->attrs[COLOR_array__ArrayMap___items].val; /* _items on <var1:ArrayM
 if (var2 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _items");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 558);
-exit(1);
+show_backtrace(1);
 }
 var3 = ((val* (*)(val*))(var2->class->vft[COLOR_abstract_collection__Collection__first]))(var2) /* first on <var2:Array[Couple[Object, nullable Object]]>*/;
 var4 = ((val* (*)(val*))(var3->class->vft[COLOR_abstract_collection__Couple__second]))(var3) /* second on <var3:nullable Object(Couple[Object, nullable Object])>*/;
@@ -4615,7 +4606,6 @@ var1 = NEW_abstract_collection__MapValuesIterator(self->type->resolution_table->
 var2 = ((val* (*)(val*))(self->class->vft[COLOR_array__ArrayMapValues__map]))(self) /* map on <self:ArrayMapValues[Object, nullable Object]>*/;
 var3 = ((val* (*)(val*))(var2->class->vft[COLOR_abstract_collection__MapRead__iterator]))(var2) /* iterator on <var2:ArrayMap[Object, nullable Object]>*/;
 ((void (*)(val*, val*))(var1->class->vft[COLOR_abstract_collection__MapValuesIterator__init]))(var1, var3) /* init on <var1:MapValuesIterator[Object, nullable Object]>*/;
-CHECK_NEW_abstract_collection__MapValuesIterator(var1);
 var = var1;
 goto RET_LABEL;
 RET_LABEL:;
@@ -4669,7 +4659,7 @@ if (!var1) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Collection#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 563);
-exit(1);
+show_backtrace(1);
 }
 var_item = p0;
 var2 = ((val* (*)(val*))(self->class->vft[COLOR_array__ArrayMapValues__map]))(self) /* map on <self:ArrayMapValues[Object, nullable Object]>*/;
@@ -4677,7 +4667,7 @@ var3 = var2->attrs[COLOR_array__ArrayMap___items].val; /* _items on <var2:ArrayM
 if (var3 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _items");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 566);
-exit(1);
+show_backtrace(1);
 }
 var4 = ((val* (*)(val*))(var3->class->vft[COLOR_abstract_collection__Collection__iterator]))(var3) /* iterator on <var3:Array[Couple[Object, nullable Object]]>*/;
 for(;;) {
@@ -4755,7 +4745,7 @@ if (!var1) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Collection#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 570);
-exit(1);
+show_backtrace(1);
 }
 var_item = p0;
 var2 = ((val* (*)(val*))(self->class->vft[COLOR_array__ArrayMapValues__map]))(self) /* map on <self:ArrayMapValues[Object, nullable Object]>*/;
@@ -4763,7 +4753,7 @@ var3 = var2->attrs[COLOR_array__ArrayMap___items].val; /* _items on <var2:ArrayM
 if (var3 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _items");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 573);
-exit(1);
+show_backtrace(1);
 }
 var4 = ((val* (*)(val*))(var3->class->vft[COLOR_abstract_collection__Collection__iterator]))(var3) /* iterator on <var3:Array[Couple[Object, nullable Object]]>*/;
 for(;;) {
@@ -4844,7 +4834,7 @@ if (!var1) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Collection#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 577);
-exit(1);
+show_backtrace(1);
 }
 var_item = p0;
 var2 = 0;
@@ -4854,7 +4844,7 @@ var4 = var3->attrs[COLOR_array__ArrayMap___items].val; /* _items on <var3:ArrayM
 if (var4 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _items");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 581);
-exit(1);
+show_backtrace(1);
 }
 var5 = ((val* (*)(val*))(var4->class->vft[COLOR_abstract_collection__Collection__iterator]))(var4) /* iterator on <var4:Array[Couple[Object, nullable Object]]>*/;
 for(;;) {
@@ -4959,7 +4949,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "RemovableCollection#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 587);
-exit(1);
+show_backtrace(1);
 }
 var_item = p0;
 var1 = ((val* (*)(val*))(self->class->vft[COLOR_array__ArrayMapValues__map]))(self) /* map on <self:ArrayMapValues[Object, nullable Object]>*/;
@@ -4968,7 +4958,7 @@ var2 = var_map->attrs[COLOR_array__ArrayMap___items].val; /* _items on <var_map:
 if (var2 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _items");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 590);
-exit(1);
+show_backtrace(1);
 }
 var3 = ((long (*)(val*))(var2->class->vft[COLOR_abstract_collection__Collection__length]))(var2) /* length on <var2:Array[Couple[Object, nullable Object]]>*/;
 var4 = 1;
@@ -4989,7 +4979,7 @@ if (!var11) {
 var_class_name14 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name14);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var15 = var_i >= var8;
 var9 = var15;
@@ -5001,7 +4991,7 @@ var16 = var_map->attrs[COLOR_array__ArrayMap___items].val; /* _items on <var_map
 if (var16 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _items");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 592);
-exit(1);
+show_backtrace(1);
 }
 var17 = ((val* (*)(val*, long))(var16->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var16, var_i) /* [] on <var16:Array[Couple[Object, nullable Object]]>*/;
 var18 = ((val* (*)(val*))(var17->class->vft[COLOR_abstract_collection__Couple__second]))(var17) /* second on <var17:nullable Object(Couple[Object, nullable Object])>*/;
@@ -5083,7 +5073,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "RemovableCollection#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 600);
-exit(1);
+show_backtrace(1);
 }
 var_item = p0;
 var1 = ((val* (*)(val*))(self->class->vft[COLOR_array__ArrayMapValues__map]))(self) /* map on <self:ArrayMapValues[Object, nullable Object]>*/;
@@ -5092,7 +5082,7 @@ var2 = var_map->attrs[COLOR_array__ArrayMap___items].val; /* _items on <var_map:
 if (var2 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _items");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 603);
-exit(1);
+show_backtrace(1);
 }
 var3 = ((long (*)(val*))(var2->class->vft[COLOR_abstract_collection__Collection__length]))(var2) /* length on <var2:Array[Couple[Object, nullable Object]]>*/;
 var4 = 1;
@@ -5113,7 +5103,7 @@ if (!var11) {
 var_class_name14 = type_kernel__Int.name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name14);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/kernel.nit", 262);
-exit(1);
+show_backtrace(1);
 }
 var15 = var_i >= var8;
 var9 = var15;
@@ -5125,7 +5115,7 @@ var16 = var_map->attrs[COLOR_array__ArrayMap___items].val; /* _items on <var_map
 if (var16 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _items");
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 605);
-exit(1);
+show_backtrace(1);
 }
 var17 = ((val* (*)(val*, long))(var16->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var16, var_i) /* [] on <var16:Array[Couple[Object, nullable Object]]>*/;
 var18 = ((val* (*)(val*))(var17->class->vft[COLOR_abstract_collection__Couple__second]))(var17) /* second on <var17:nullable Object(Couple[Object, nullable Object])>*/;
@@ -5177,7 +5167,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "ArrayMap[ArrayMapValues#0, ArrayMapValues#1]", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 554);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_array__ArrayMapValues___64dmap].val = p0; /* @map on <self:ArrayMapValues[Object, nullable Object]> */
 RET_LABEL:;
@@ -5196,7 +5186,6 @@ short int var2 /* : Bool */;
 val* var3 /* : nullable Object */;
 var1 = NEW_array__Array(self->type->resolution_table->types[COLOR_array__Arrayabstract_collection__Iterator_FT0]);
 ((void (*)(val*))(var1->class->vft[COLOR_array__Array__init]))(var1) /* init on <var1:Array[nullable Object]>*/;
-CHECK_NEW_array__Array(var1);
 var_res = var1;
 for(;;) {
 var2 = ((short int (*)(val*))(self->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(self) /* is_ok on <self:Iterator[nullable Object]>*/;
@@ -5319,7 +5308,7 @@ if (!var) {
 var_class_name = p1 == NULL ? "null" : p1->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "NativeArray#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 648);
-exit(1);
+show_backtrace(1);
 }
 ((struct instance_array__NativeArray*)self)->values[p0]=p1;
 RET_LABEL:;
@@ -5352,7 +5341,7 @@ if (!var) {
 var_class_name = p1 == NULL ? "null" : p1->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "NativeArray#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 648);
-exit(1);
+show_backtrace(1);
 }
 ((struct instance_array__NativeArray*)self)->values[p0]=p1;
 RET_LABEL1:(void)0;
@@ -5380,7 +5369,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "NativeArray[NativeArray#0]", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 649);
-exit(1);
+show_backtrace(1);
 }
 memcpy(((struct instance_array__NativeArray*)p0)->values, ((struct instance_array__NativeArray*)self)->values, p1*sizeof(val*));
 RET_LABEL:;
@@ -5407,7 +5396,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "NativeArray[NativeArray#0]", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/standard/collection/array.nit", 649);
-exit(1);
+show_backtrace(1);
 }
 memcpy(((struct instance_array__NativeArray*)p0)->values, ((struct instance_array__NativeArray*)self)->values, p1*sizeof(val*));
 RET_LABEL1:(void)0;

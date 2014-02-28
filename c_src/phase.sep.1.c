@@ -7,7 +7,7 @@ var1 = self->attrs[COLOR_phase__ToolContext___64dphases].val; /* @phases on <sel
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @phases");
 fprintf(stderr, " (%s:%d)\n", "src/phase.nit", 23);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -227,7 +227,6 @@ var18 = NEW_array__NativeArray(var17, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var18)->values[0] = (val*) var11;
 ((struct instance_array__NativeArray*)var18)->values[1] = (val*) var15;
 ((void (*)(val*, val*, long))(var16->class->vft[COLOR_array__Array__with_native]))(var16, var18, var17) /* with_native on <var16:Array[Object]>*/;
-CHECK_NEW_array__Array(var16);
 }
 var19 = ((val* (*)(val*))(var16->class->vft[COLOR_string__Object__to_s]))(var16) /* to_s on <var16:Array[Object]>*/;
 var20 = 2;
@@ -256,7 +255,7 @@ var30 = ((val* (*)(val*))(var29->class->vft[COLOR_location__Location__file]))(va
 if (var30 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/phase.nit", 51);
-exit(1);
+show_backtrace(1);
 } else {
 var31 = ((val* (*)(val*))(var30->class->vft[COLOR_location__SourceFile__filename]))(var30) /* filename on <var30:nullable SourceFile>*/;
 }
@@ -267,7 +266,6 @@ var34 = NEW_array__NativeArray(var33, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var34)->values[0] = (val*) var25;
 ((struct instance_array__NativeArray*)var34)->values[1] = (val*) var31;
 ((void (*)(val*, val*, long))(var32->class->vft[COLOR_array__Array__with_native]))(var32, var34, var33) /* with_native on <var32:Array[Object]>*/;
-CHECK_NEW_array__Array(var32);
 }
 var35 = ((val* (*)(val*))(var32->class->vft[COLOR_string__Object__to_s]))(var32) /* to_s on <var32:Array[Object]>*/;
 var36 = 2;
@@ -295,7 +293,6 @@ var49 = NEW_array__NativeArray(var48, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var49)->values[0] = (val*) var42;
 ((struct instance_array__NativeArray*)var49)->values[1] = (val*) var46;
 ((void (*)(val*, val*, long))(var47->class->vft[COLOR_array__Array__with_native]))(var47, var49, var48) /* with_native on <var47:Array[Object]>*/;
-CHECK_NEW_array__Array(var47);
 }
 var50 = ((val* (*)(val*))(var47->class->vft[COLOR_string__Object__to_s]))(var47) /* to_s on <var47:Array[Object]>*/;
 var51 = 3;
@@ -305,7 +302,7 @@ var53 = ((short int (*)(val*, val*))(var52->class->vft[COLOR_kernel__Object___61
 if (!var53) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/phase.nit", 54);
-exit(1);
+show_backtrace(1);
 }
 var54 = ((long (*)(val*))(self->class->vft[COLOR_toolcontext__ToolContext__error_count]))(self) /* error_count on <self:ToolContext>*/;
 var_errcount = var54;
@@ -361,7 +358,6 @@ var80 = NEW_array__NativeArray(var79, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var80)->values[2] = (val*) var73;
 ((struct instance_array__NativeArray*)var80)->values[3] = (val*) var77;
 ((void (*)(val*, val*, long))(var78->class->vft[COLOR_array__Array__with_native]))(var78, var80, var79) /* with_native on <var78:Array[Object]>*/;
-CHECK_NEW_array__Array(var78);
 }
 var81 = ((val* (*)(val*))(var78->class->vft[COLOR_string__Object__to_s]))(var78) /* to_s on <var78:Array[Object]>*/;
 var82 = 3;
@@ -371,7 +367,7 @@ var84 = ((short int (*)(val*, val*))(var83->class->vft[COLOR_kernel__Object___61
 if (!var84) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/phase.nit", 64);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_phase40->class->vft[COLOR_phase__Phase__process_nclassdef]))(var_phase40, var_nclassdef) /* process_nclassdef on <var_phase40:Phase>*/;
 var85 = ((val* (*)(val*))(var_nclassdef->class->vft[COLOR_parser_nodes__AClassdef__n_propdefs]))(var_nclassdef) /* n_propdefs on <var_nclassdef:AClassdef>*/;
@@ -386,7 +382,7 @@ var90 = ((short int (*)(val*, val*))(var89->class->vft[COLOR_kernel__Object___61
 if (!var90) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/phase.nit", 67);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_phase40->class->vft[COLOR_phase__Phase__process_npropdef]))(var_phase40, var_npropdef) /* process_npropdef on <var_phase40:Phase>*/;
 CONTINUE_label91: (void)0;
@@ -412,7 +408,6 @@ goto BREAK_label60;
 }
 var98 = NEW_phase__AnnotationPhaseVisitor(&type_phase__AnnotationPhaseVisitor);
 ((void (*)(val*, val*))(var98->class->vft[COLOR_phase__AnnotationPhaseVisitor__init]))(var98, var_phase40) /* init on <var98:AnnotationPhaseVisitor>*/;
-CHECK_NEW_phase__AnnotationPhaseVisitor(var98);
 var_v = var98;
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var_nmodule) /* enter_visit on <var_v:AnnotationPhaseVisitor>*/;
 var99 = ((long (*)(val*))(self->class->vft[COLOR_toolcontext__ToolContext__error_count]))(self) /* error_count on <self:ToolContext>*/;
@@ -472,7 +467,6 @@ var122 = BOX_kernel__Int(var111); /* autobox from Int to Object */
 ((struct instance_array__NativeArray*)var121)->values[1] = (val*) var122;
 ((struct instance_array__NativeArray*)var121)->values[2] = (val*) var115;
 ((void (*)(val*, val*, long))(var119->class->vft[COLOR_array__Array__with_native]))(var119, var121, var120) /* with_native on <var119:Array[Object]>*/;
-CHECK_NEW_array__Array(var119);
 }
 var123 = ((val* (*)(val*))(var119->class->vft[COLOR_string__Object__to_s]))(var119) /* to_s on <var119:Array[Object]>*/;
 var124 = 2;
@@ -492,7 +486,7 @@ var1 = self->attrs[COLOR_phase__AnnotationPhaseVisitor___64dphase].val; /* @phas
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @phase");
 fprintf(stderr, " (%s:%d)\n", "src/phase.nit", 93);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -555,14 +549,14 @@ var2 = ((val* (*)(val*))(var_n->class->vft[COLOR_parser_nodes__ANode__parent]))(
 if (var2 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/phase.nit", 100);
-exit(1);
+show_backtrace(1);
 } else {
 var3 = ((val* (*)(val*))(var2->class->vft[COLOR_parser_nodes__ANode__parent]))(var2) /* parent on <var2:nullable ANode>*/;
 }
 if (var3 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/phase.nit", 100);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*, val*))(var1->class->vft[COLOR_phase__Phase__process_annotated_node]))(var1, var3, var_n) /* process_annotated_node on <var1:Phase>*/;
 } else {
@@ -582,7 +576,7 @@ var1 = self->attrs[COLOR_phase__Phase___64dtoolcontext].val; /* @toolcontext on 
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @toolcontext");
 fprintf(stderr, " (%s:%d)\n", "src/phase.nit", 107);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -615,7 +609,7 @@ var1 = self->attrs[COLOR_phase__Phase___64din_hierarchy].val; /* @in_hierarchy o
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @in_hierarchy");
 fprintf(stderr, " (%s:%d)\n", "src/phase.nit", 110);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;

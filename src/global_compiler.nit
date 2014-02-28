@@ -25,6 +25,7 @@ module global_compiler
 
 import abstract_compiler
 import rapid_type_analysis
+import compiler_ffi
 
 redef class ModelBuilder
 	# Entry point to performs a global compilation on the AST of a complete program.
@@ -48,7 +49,6 @@ redef class ModelBuilder
 		for t in runtime_type_analysis.live_types do
 			if t.ctype == "val*" then
 				compiler.generate_init_instance(t)
-				compiler.generate_check_init_instance(t)
 			else
 				compiler.generate_box_instance(t)
 			end
@@ -223,19 +223,6 @@ class GlobalCompiler
 		v.add("\}")
 	end
 
-	redef fun generate_check_init_instance(mtype)
-	do
-		if self.modelbuilder.toolcontext.opt_no_check_initialization.value then return
-
-		var v = self.new_visitor
-		var res = new RuntimeVariable("self", mtype, mtype)
-		self.header.add_decl("void CHECK_NEW_{mtype.c_name}({mtype.ctype});")
-		v.add_decl("/* allocate {mtype} */")
-		v.add_decl("void CHECK_NEW_{mtype.c_name}({mtype.ctype} {res}) \{")
-		self.generate_check_attr(v, res, mtype)
-		v.add("\}")
-	end
-
 	fun generate_box_instance(mtype: MClassType)
 	do
 		assert self.runtime_type_analysis.live_types.has(mtype)
@@ -250,12 +237,18 @@ class GlobalCompiler
 		v.add("res->value = value;")
 		v.add("return (val*)res;")
 		v.add("\}")
-
 	end
 
 	redef fun new_visitor do return new GlobalCompilerVisitor(self)
 
 	private var collect_types_cache: HashMap[MType, Array[MClassType]] = new HashMap[MType, Array[MClassType]]
+
+	redef fun compile_nitni_structs
+	do
+		self.header.add_decl("struct nitni_instance \{ val *value; \};")
+	end
+
+	redef fun supports_ffi do return true
 end
 
 # A visitor on the AST of property definition that generate the C code.
@@ -283,6 +276,8 @@ class GlobalCompilerVisitor
 			end
 			self.add("{res} = BOX_{valtype.c_name}({value}); /* autobox from {value.mtype} to {mtype} */")
 			return res
+		else if value.mtype.cname_blind == "void*" and mtype.cname_blind == "void*" then
+			return value
 		else
 			# Bad things will appen!
 			var res = self.new_var(mtype)
@@ -389,7 +384,7 @@ class GlobalCompilerVisitor
 					self.add("{res} = 1; /* {args[1].inspect} cannot be null */")
 				end
 			else
-				self.add_abort("Reciever is null")
+				self.add_abort("Receiver is null")
 			end
 			self.add "\} else"
 		end
@@ -461,11 +456,7 @@ class GlobalCompilerVisitor
 	# Finalizes a call to a method ´m´ on type ´recvtype´ with arguments ´args´
 	private fun finalize_call(m: MMethodDef, recvtype: MClassType, args: Array[RuntimeVariable]): nullable RuntimeVariable
 	do
-		if args.length != m.msignature.arity + 1 then # because of self
-			add("printf(\"NOT YET IMPLEMENTED: Invalid arity for {m}. {args.length} arguments given.\\n\"); show_backtrace(1);")
-			debug("NOT YET IMPLEMENTED: Invalid arity for {m}. {args.length} arguments given.")
-			return null
-		end
+		assert args.length == m.msignature.arity + 1 else debug("Invalid arity for {m}. {args.length} arguments given.")
 
 		var rm = new CustomizedRuntimeFunction(m, recvtype)
 		return rm.call(self, args)
@@ -826,18 +817,6 @@ class GlobalCompilerVisitor
 		return res
 	end
 
-	redef fun check_init_instance(recv, mtype)
-	do
-		if self.compiler.modelbuilder.toolcontext.opt_no_check_initialization.value then return
-
-		mtype = self.anchor(mtype).as(MClassType)
-		if not self.compiler.runtime_type_analysis.live_types.has(mtype) then
-			debug "problem: {mtype} was detected dead"
-		end
-
-		self.add("CHECK_NEW_{mtype.c_name}({recv});")
-	end
-
 	redef fun array_instance(array, elttype)
 	do
 		elttype = self.anchor(elttype)
@@ -853,7 +832,6 @@ class GlobalCompilerVisitor
 		end
 		var length = self.int_instance(array.length)
 		self.send(self.get_property("with_native", arraytype), [res, nat, length])
-		self.check_init_instance(res, arraytype)
 		self.add("\}")
 		return res
 	end
@@ -978,6 +956,7 @@ private class CustomizedRuntimeFunction
 			v.add("return {frame.returnvar.as(not null)};")
 		end
 		v.add("\}")
+		if not self.c_name.has_substring("VIRTUAL", 0) then compiler.names[self.c_name] = "{mmethoddef.mclassdef.mmodule.name}::{mmethoddef.mclassdef.mclass.name}::{mmethoddef.mproperty.name} ({mmethoddef.location.file.filename}:{mmethoddef.location.line_start})"
 	end
 
 	redef fun call(v: VISITOR, arguments: Array[RuntimeVariable]): nullable RuntimeVariable

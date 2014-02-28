@@ -15,6 +15,13 @@ module stream
 
 import string
 
+in "C" `{
+	#include <unistd.h>
+	#include <poll.h>
+	#include <errno.h>
+	#include <string.h>
+`}
+
 # Abstract stream class
 interface IOS
 	# close the stream
@@ -70,13 +77,14 @@ interface IStream
 				if eof then return
 			else
 				var c = x.ascii
-				s.push(c)
+				s.chars.push(c)
 				if c == '\n' then return
 			end
 		end
 	end
 
 	# Is there something to read.
+	# This function returns 'false' if there is something to read.
 	fun eof: Bool is abstract
 end
 
@@ -102,7 +110,7 @@ abstract class BufferedIStream
 		if _buffer_pos >= _buffer.length then
 			return -1
 		end
-		var c = _buffer[_buffer_pos]
+		var c = _buffer.chars[_buffer_pos]
 		_buffer_pos += 1
 		return c.ascii
 	end
@@ -120,7 +128,7 @@ abstract class BufferedIStream
 				k = _buffer.length
 			end
 			while j < k and i > 0 do
-				s.add(_buffer[j])
+				s.add(_buffer.chars[j])
 				j +=  1
 				i -= 1
 			end
@@ -136,7 +144,7 @@ abstract class BufferedIStream
 			var j = _buffer_pos
 			var k = _buffer.length
 			while j < k do
-				s.add(_buffer[j])
+				s.add(_buffer.chars[j])
 				j += 1
 			end
 			_buffer_pos = j
@@ -150,7 +158,7 @@ abstract class BufferedIStream
 		loop
 			# First phase: look for a '\n'
 			var i = _buffer_pos
-			while i < _buffer.length and _buffer[i] != '\n' do i += 1
+			while i < _buffer.length and _buffer.chars[i] != '\n' do i += 1
 
 			# if there is something to append
 			if i > _buffer_pos then
@@ -160,7 +168,7 @@ abstract class BufferedIStream
 				# Copy from the buffer to the string
 				var j = _buffer_pos
 				while j < i do
-					s.add(_buffer[j])
+					s.add(_buffer.chars[j])
 					j += 1
 				end
 			end
@@ -294,5 +302,65 @@ redef interface Object
 		end
 	end
 
-	private fun intern_poll( in_fds : Array[Int], out_fds : Array[Int] ) : nullable Int is extern import Array::length, Array::[], nullable Object as ( Int ), Int as nullable
+	private fun intern_poll(in_fds: Array[Int], out_fds: Array[Int]) : nullable Int is extern import Array[Int].length, Array[Int].[], Int.as(nullable Int) `{
+		int in_len, out_len, total_len;
+		struct pollfd *c_fds;
+		sigset_t sigmask;
+		int i;
+		int first_polled_fd = -1;
+		int result;
+
+		in_len = Array_of_Int_length( in_fds );
+		out_len = Array_of_Int_length( out_fds );
+		total_len = in_len + out_len;
+		c_fds = malloc( sizeof(struct pollfd) * total_len );
+
+		/* input streams */
+		for ( i=0; i<in_len; i ++ ) {
+			int fd;
+			fd = Array_of_Int__index( in_fds, i );
+
+			c_fds[i].fd = fd;
+			c_fds[i].events = POLLIN;
+		}
+
+		/* output streams */
+		for ( i=0; i<out_len; i ++ ) {
+			int fd;
+			fd = Array_of_Int__index( out_fds, i );
+
+			c_fds[i].fd = fd;
+			c_fds[i].events = POLLOUT;
+		}
+
+		/* poll all fds, unlimited timeout */
+		result = poll( c_fds, total_len, -1 );
+
+		if ( result > 0 ) {
+			/* analyse results */
+			for ( i=0; i<total_len; i++ )
+				if ( c_fds[i].revents & c_fds[i].events || /* awaited event */
+					 c_fds[i].revents & POLLHUP ) /* closed */
+				{
+					first_polled_fd = c_fds[i].fd;
+					break;
+				}
+
+			return Int_as_nullable( first_polled_fd );
+		}
+		else if ( result < 0 )
+			fprintf( stderr, "Error in Stream:poll: %s\n", strerror( errno ) );
+
+		return null_Int();
+	`}
+end
+
+# Stream to a String. Mainly used for compatibility with OStream type and tests.
+class StringOStream
+	super OStream
+
+	private var content = new Array[String]
+	redef fun to_s do return content.to_s
+	redef fun is_writable do return true
+	redef fun write(str) do content.add(str)
 end

@@ -21,6 +21,7 @@ in "C header" `{
 `}
 
 redef class Int
+	# Returns a random `Int` in `[0 .. self[`.
 	fun rand: Int is extern "kernel_Int_Int_rand_0"
 	fun bin_and(i: Int): Int is extern "kernel_Int_Int_binand_0"
 	fun bin_or(i: Int): Int is extern "kernel_Int_Int_binor_0"
@@ -38,11 +39,13 @@ redef class Float
 	fun acos: Float is extern "kernel_Float_Float_acos_0"
 	fun asin: Float is extern "kernel_Float_Float_asin_0"
 	fun atan: Float is extern "kernel_Float_Float_atan_0"
+	fun abs: Float `{ return abs(recv); `}
 
 	fun pow(e: Float): Float is extern "kernel_Float_Float_pow_1"
 	fun log: Float is extern "kernel_Float_Float_log_0"
 	fun exp: Float is extern "kernel_Float_Float_exp_0"
 	
+	# Returns a random `Float` in `[0.0 .. self[`.
 	fun rand: Float is extern "kernel_Float_Float_rand_0"
 	fun hypot_with( b : Float ) : Float is extern "hypotf"
 end

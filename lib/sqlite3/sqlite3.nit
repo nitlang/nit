@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module sqlite3
+module sqlite3 is pkgconfig("sqlite3")
 
 in "C header" `{
 	#include <sqlite3.h>
@@ -60,7 +60,7 @@ extern class Sqlite3Code `{int`}
 	new done `{ return SQLITE_DONE; `} #       101  /* sqlite3_step() has finished executing */
 	fun is_done: Bool `{ return recv == SQLITE_DONE; `}
 
-	redef fun to_s: String import NativeString::to_s `{
+	redef fun to_s: String import NativeString.to_s `{
 #if SQLITE_VERSION_NUMBER >= 3007015
 		char *err = (char *)sqlite3_errstr(recv);
 #else
@@ -77,7 +77,7 @@ extern class Statement `{sqlite3_stmt*`}
 		return sqlite3_step(recv);
 	`}
 
-	fun column_name(i: Int) : String import NativeString::to_s `{
+	fun column_name(i: Int) : String import NativeString.to_s `{
 		const char * name = (sqlite3_column_name(recv, i));
 		if(name == NULL){
 			name = "";
@@ -98,7 +98,7 @@ extern class Statement `{sqlite3_stmt*`}
 		return sqlite3_column_int(recv, i);
 	`}
 
-	fun column_text(i: Int) : String import NativeString::to_s `{
+	fun column_text(i: Int) : String import NativeString.to_s `{
 		char * ret = (char *) sqlite3_column_text(recv, i);
 		if( ret == NULL ){
 			ret = "";
@@ -120,7 +120,7 @@ extern class Statement `{sqlite3_stmt*`}
 end
 
 extern class Sqlite3 `{sqlite3 *`}
-	new open(filename: String) import String::to_cstring `{
+	new open(filename: String) import String.to_cstring `{
 		sqlite3 *self;
 		sqlite3_open(String_to_cstring(filename), &self);
 		return self;
@@ -130,11 +130,11 @@ extern class Sqlite3 `{sqlite3 *`}
 
 	fun close `{ sqlite3_close(recv); `}
 
-	fun exec(sql : String): Sqlite3Code import String::to_cstring `{
+	fun exec(sql : String): Sqlite3Code import String.to_cstring `{
 		return sqlite3_exec(recv, String_to_cstring(sql), 0, 0, 0);
 	`}
 
-	fun prepare(sql: String): nullable Statement import String::to_cstring, Statement as nullable `{
+	fun prepare(sql: String): nullable Statement import String.to_cstring, Statement as nullable `{
 		sqlite3_stmt *stmt;
 		int res = sqlite3_prepare_v2(recv, String_to_cstring(sql), -1, &stmt, 0);
 		if (res == SQLITE_OK)

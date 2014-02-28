@@ -114,11 +114,11 @@ extern FFSocket `{ S_DESCRIPTOR* `}
 	fun descriptor: Int `{ return *recv; `}
 	fun errno: Int `{ return errno; `}
 
-	fun gethostbyname(n: String): FFSocketHostent import String::to_cstring `{ return gethostbyname(String_to_cstring(n)); `}
+	fun gethostbyname(n: String): FFSocketHostent import String.to_cstring `{ return gethostbyname(String_to_cstring(n)); `}
 	fun connect(addrIn: FFSocketAddrIn): Int `{ return connect( *recv, (S_ADDR*)addrIn, sizeof(*addrIn) ); `}
-	fun write(buffer: String): Int import String::to_cstring, String::length `{ return write(*recv, (char*)String_to_cstring(buffer), String_length(buffer)); `}
+	fun write(buffer: String): Int import String.to_cstring, String.length `{ return write(*recv, (char*)String_to_cstring(buffer), String_length(buffer)); `}
 
-	fun read: String `{
+	fun read: String import NativeString.to_s `{
 		char *c = (char*)malloc(1024);
 		int n = read(*recv, c, 1023);
 		if(n < 0) exit(-1);
@@ -207,14 +207,14 @@ extern FFSocketAddrIn `{ S_ADDR_IN* `}
 		memcpy( (char*)&sai->sin_addr.s_addr, (char*)hostent->h_addr, hostent->h_length );
 		return sai;
 	`}
-	fun address: String `{ return NativeString_to_s( (char*)inet_ntoa(recv->sin_addr) ); `}
+	fun address: String import NativeString.to_s `{ return NativeString_to_s( (char*)inet_ntoa(recv->sin_addr) ); `}
 	fun family: FFSocketAddressFamilies `{ return recv->sin_family; `}
 	fun port: Int `{ return ntohs(recv->sin_port); `}
 	fun destroy `{ free(recv); `}
 end
 
 extern FFSocketHostent `{ S_HOSTENT* `}
-	private fun i_h_aliases(i: Int): String `{ return NativeString_to_s(recv->h_aliases[i]); `}
+	private fun i_h_aliases(i: Int): String import NativeString.to_s `{ return NativeString_to_s(recv->h_aliases[i]); `}
 	private fun i_h_aliases_reachable(i: Int): Bool `{ return (recv->h_aliases[i] != NULL); `}
 	fun h_aliases: Array[String]
 	do
@@ -227,10 +227,10 @@ extern FFSocketHostent `{ S_HOSTENT* `}
 		end
 		return d
 	end
-	fun h_addr: String `{ return NativeString_to_s( (char*)inet_ntoa(*(S_IN_ADDR*)recv->h_addr) ); `}
+	fun h_addr: String import NativeString.to_s `{ return NativeString_to_s( (char*)inet_ntoa(*(S_IN_ADDR*)recv->h_addr) ); `}
 	fun h_addrtype: Int `{ return recv->h_addrtype; `}
 	fun h_length: Int `{ return recv->h_length; `}
-	fun h_name: String `{ return NativeString_to_s(recv->h_name); `}
+	fun h_name: String import NativeString.to_s `{ return NativeString_to_s(recv->h_name); `}
 end
 
 extern FFTimeval `{ S_TIMEVAL* `}

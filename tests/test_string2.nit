@@ -15,9 +15,9 @@
 fun test(s: String)
 do
 	print s.length
-	print s.first
-	print s.last
-	print s[2]
+	print s.chars.first
+	print s.chars.last
+	print s.chars[2]
 	print s.substring(1, 2)
 	print s.substring(-1, 2)
 	print s.substring(1, 0)

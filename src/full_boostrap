@@ -1,0 +1,20 @@
+set -e
+set -x
+
+# Check c_src is up-to-date
+make -C ../c_src
+
+# Compile nitg
+time ../c_src/nitg nitg.nit
+
+# delete old c_src
+rm -rf ../c_src
+
+# Regenerate c_src
+./mkcsrc
+
+# Compile new c_src
+time make -C ../c_src
+
+# Remake all
+make

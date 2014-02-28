@@ -113,7 +113,7 @@ interface Collection[E]
 		return nb
 	end
 
-	# Return one the item of the collection
+	# Return the first item of the collection
 	#
 	#    assert [1,2,3].first                == 1
 	fun first: E
@@ -151,6 +151,7 @@ interface Iterator[E]
 end
 
 # A collection that contains only one item.
+# Used to pass arguments by reference
 class Container[E]
 	super Collection[E]
 
@@ -222,7 +223,7 @@ end
 
 # Abstract sets.
 #
-# Set contains contains only one element with the same value (according to ==).
+# Set is a collection without ducplicates (according to ==)
 #      var s: Set[String] = new ArraySet[String]
 #      var a = "Hello"
 #      var b = "Hel" + "lo"

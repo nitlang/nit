@@ -30,7 +30,7 @@ var1 = self->attrs[COLOR_poset__POSet___64delements].val; /* @elements on <self:
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @elements");
 fprintf(stderr, " (%s:%d)\n", "lib/poset.nit", 31);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -66,7 +66,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashMap[POSet#0, POSetElement[POSet#0]]", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/poset.nit", 31);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_poset__POSet___64delements].val = p0; /* @elements on <self:POSet[Object]> */
 RET_LABEL:;
@@ -102,7 +102,7 @@ if (!var1) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "Collection#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/poset.nit", 34);
-exit(1);
+show_backtrace(1);
 }
 var_e = p0;
 var2 = ((val* (*)(val*))(self->class->vft[COLOR_poset__POSet__elements]))(self) /* elements on <self:POSet[Object]>*/;
@@ -157,7 +157,7 @@ if (!var1) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "POSet#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/poset.nit", 36);
-exit(1);
+show_backtrace(1);
 }
 var_e = p0;
 var2 = ((val* (*)(val*))(self->class->vft[COLOR_poset__POSet__elements]))(self) /* elements on <self:POSet[Object]>*/;
@@ -174,7 +174,6 @@ var7 = NEW_poset__POSetElement(self->type->resolution_table->types[COLOR_poset__
 var8 = ((val* (*)(val*))(self->class->vft[COLOR_poset__POSet__elements]))(self) /* elements on <self:POSet[Object]>*/;
 var9 = ((long (*)(val*))(var8->class->vft[COLOR_abstract_collection__MapRead__length]))(var8) /* length on <var8:HashMap[Object, POSetElement[Object]]>*/;
 ((void (*)(val*, val*, val*, long))(var7->class->vft[COLOR_poset__POSetElement__init]))(var7, self, var_e, var9) /* init on <var7:POSetElement[Object]>*/;
-CHECK_NEW_poset__POSetElement(var7);
 var_poe = var7;
 var10 = ((val* (*)(val*))(var_poe->class->vft[COLOR_poset__POSetElement__tos]))(var_poe) /* tos on <var_poe:POSetElement[Object]>*/;
 ((void (*)(val*, val*))(var10->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var10, var_e) /* add on <var10:HashSet[Object]>*/;
@@ -224,7 +223,7 @@ if (!var1) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "POSet#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/poset.nit", 50);
-exit(1);
+show_backtrace(1);
 }
 var_e = p0;
 var2 = ((val* (*)(val*))(self->class->vft[COLOR_poset__POSet__elements]))(self) /* elements on <self:POSet[Object]>*/;
@@ -233,7 +232,7 @@ var4 = ((short int (*)(val*, val*))(var3->class->vft[COLOR_abstract_collection__
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "lib/poset.nit", 63);
-exit(1);
+show_backtrace(1);
 }
 var5 = ((val* (*)(val*))(self->class->vft[COLOR_poset__POSet__elements]))(self) /* elements on <self:POSet[Object]>*/;
 var6 = ((val* (*)(val*, val*))(var5->class->vft[COLOR_abstract_collection__MapRead___91d_93d]))(var5, var_e) /* [] on <var5:HashMap[Object, POSetElement[Object]]>*/;
@@ -333,7 +332,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "POSet#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/poset.nit", 67);
-exit(1);
+show_backtrace(1);
 }
 /* Covariant cast for argument 1 (t) <p1:Object> isa POSet#0 */
 /* <p1:Object> isa POSet#0 */
@@ -349,7 +348,7 @@ if (!var1) {
 var_class_name5 = p1 == NULL ? "null" : p1->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "POSet#0", var_class_name5);
 fprintf(stderr, " (%s:%d)\n", "lib/poset.nit", 67);
-exit(1);
+show_backtrace(1);
 }
 var_f = p0;
 var_t = p1;
@@ -499,7 +498,7 @@ if (!var1) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "POSet#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/poset.nit", 109);
-exit(1);
+show_backtrace(1);
 }
 /* Covariant cast for argument 1 (t) <p1:Object> isa POSet#0 */
 /* <p1:Object> isa POSet#0 */
@@ -515,7 +514,7 @@ if (!var2) {
 var_class_name6 = p1 == NULL ? "null" : p1->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "POSet#0", var_class_name6);
 fprintf(stderr, " (%s:%d)\n", "lib/poset.nit", 109);
-exit(1);
+show_backtrace(1);
 }
 var_f = p0;
 var_t = p1;
@@ -587,7 +586,7 @@ if (!var1) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "POSet#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/poset.nit", 118);
-exit(1);
+show_backtrace(1);
 }
 /* Covariant cast for argument 1 (t) <p1:Object> isa POSet#0 */
 /* <p1:Object> isa POSet#0 */
@@ -603,7 +602,7 @@ if (!var2) {
 var_class_name6 = p1 == NULL ? "null" : p1->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "POSet#0", var_class_name6);
 fprintf(stderr, " (%s:%d)\n", "lib/poset.nit", 118);
-exit(1);
+show_backtrace(1);
 }
 var_f = p0;
 var_t = p1;
@@ -755,10 +754,8 @@ var11 = 1;
 var12 = NEW_array__NativeArray(var11, &type_array__NativeArraystring__String);
 ((struct instance_array__NativeArray*)var12)->values[0] = (val*) var6;
 ((void (*)(val*, val*, long))(var10->class->vft[COLOR_array__Array__with_native]))(var10, var12, var11) /* with_native on <var10:Array[String]>*/;
-CHECK_NEW_array__Array(var10);
 }
 ((void (*)(val*, val*, val*))(var->class->vft[COLOR_exec__OProcess__init]))(var, var1, var10) /* init on <var:OProcess>*/;
-CHECK_NEW_exec__OProcess(var);
 var_f = var;
 if (varonce13) {
 var14 = varonce13;
@@ -804,7 +801,6 @@ var35 = NEW_array__NativeArray(var34, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var35)->values[1] = (val*) var_x;
 ((struct instance_array__NativeArray*)var35)->values[2] = (val*) var29;
 ((void (*)(val*, val*, long))(var33->class->vft[COLOR_array__Array__with_native]))(var33, var35, var34) /* with_native on <var33:Array[Object]>*/;
-CHECK_NEW_array__Array(var33);
 }
 var36 = ((val* (*)(val*))(var33->class->vft[COLOR_string__Object__to_s]))(var33) /* to_s on <var33:Array[Object]>*/;
 ((void (*)(val*, val*))(var_f->class->vft[COLOR_stream__OStream__write]))(var_f, var36) /* write on <var_f:OProcess>*/;
@@ -857,7 +853,6 @@ var61 = NEW_array__NativeArray(var60, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var61)->values[3] = (val*) var_y;
 ((struct instance_array__NativeArray*)var61)->values[4] = (val*) var55;
 ((void (*)(val*, val*, long))(var59->class->vft[COLOR_array__Array__with_native]))(var59, var61, var60) /* with_native on <var59:Array[Object]>*/;
-CHECK_NEW_array__Array(var59);
 }
 var62 = ((val* (*)(val*))(var59->class->vft[COLOR_string__Object__to_s]))(var59) /* to_s on <var59:Array[Object]>*/;
 ((void (*)(val*, val*))(var_f->class->vft[COLOR_stream__OStream__write]))(var_f, var62) /* write on <var_f:OProcess>*/;
@@ -899,7 +894,6 @@ var80 = NEW_array__NativeArray(var79, &type_array__NativeArraykernel__Object);
 ((struct instance_array__NativeArray*)var80)->values[3] = (val*) var_y;
 ((struct instance_array__NativeArray*)var80)->values[4] = (val*) var74;
 ((void (*)(val*, val*, long))(var78->class->vft[COLOR_array__Array__with_native]))(var78, var80, var79) /* with_native on <var78:Array[Object]>*/;
-CHECK_NEW_array__Array(var78);
 }
 var81 = ((val* (*)(val*))(var78->class->vft[COLOR_string__Object__to_s]))(var78) /* to_s on <var78:Array[Object]>*/;
 ((void (*)(val*, val*))(var_f->class->vft[COLOR_stream__OStream__write]))(var_f, var81) /* write on <var_f:OProcess>*/;
@@ -981,7 +975,7 @@ if (!var1) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "POSet#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/poset.nit", 151);
-exit(1);
+show_backtrace(1);
 }
 /* Covariant cast for argument 1 (b) <p1:Object> isa POSet#0 */
 /* <p1:Object> isa POSet#0 */
@@ -997,7 +991,7 @@ if (!var2) {
 var_class_name6 = p1 == NULL ? "null" : p1->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "POSet#0", var_class_name6);
 fprintf(stderr, " (%s:%d)\n", "lib/poset.nit", 151);
-exit(1);
+show_backtrace(1);
 }
 var_a = p0;
 var_b = p1;
@@ -1064,7 +1058,7 @@ var1 = self->attrs[COLOR_poset__POSetElement___64dposet].val; /* @poset on <self
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @poset");
 fprintf(stderr, " (%s:%d)\n", "lib/poset.nit", 181);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1100,7 +1094,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "POSet[POSetElement#0]", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/poset.nit", 181);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_poset__POSetElement___64dposet].val = p0; /* @poset on <self:POSetElement[Object]> */
 RET_LABEL:;
@@ -1118,7 +1112,7 @@ var1 = self->attrs[COLOR_poset__POSetElement___64delement].val; /* @element on <
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @element");
 fprintf(stderr, " (%s:%d)\n", "lib/poset.nit", 184);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1154,7 +1148,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "POSetElement#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/poset.nit", 184);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_poset__POSetElement___64delement].val = p0; /* @element on <self:POSetElement[Object]> */
 RET_LABEL:;
@@ -1172,7 +1166,7 @@ var1 = self->attrs[COLOR_poset__POSetElement___64dtos].val; /* @tos on <self:POS
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @tos");
 fprintf(stderr, " (%s:%d)\n", "lib/poset.nit", 187);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1208,7 +1202,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashSet[POSetElement#0]", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/poset.nit", 187);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_poset__POSetElement___64dtos].val = p0; /* @tos on <self:POSetElement[Object]> */
 RET_LABEL:;
@@ -1226,7 +1220,7 @@ var1 = self->attrs[COLOR_poset__POSetElement___64dfroms].val; /* @froms on <self
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @froms");
 fprintf(stderr, " (%s:%d)\n", "lib/poset.nit", 188);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1262,7 +1256,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashSet[POSetElement#0]", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/poset.nit", 188);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_poset__POSetElement___64dfroms].val = p0; /* @froms on <self:POSetElement[Object]> */
 RET_LABEL:;
@@ -1280,7 +1274,7 @@ var1 = self->attrs[COLOR_poset__POSetElement___64ddtos].val; /* @dtos on <self:P
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @dtos");
 fprintf(stderr, " (%s:%d)\n", "lib/poset.nit", 189);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1316,7 +1310,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashSet[POSetElement#0]", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/poset.nit", 189);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_poset__POSetElement___64ddtos].val = p0; /* @dtos on <self:POSetElement[Object]> */
 RET_LABEL:;
@@ -1334,7 +1328,7 @@ var1 = self->attrs[COLOR_poset__POSetElement___64ddfroms].val; /* @dfroms on <se
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute @dfroms");
 fprintf(stderr, " (%s:%d)\n", "lib/poset.nit", 190);
-exit(1);
+show_backtrace(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1370,7 +1364,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "HashSet[POSetElement#0]", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/poset.nit", 190);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_poset__POSetElement___64ddfroms].val = p0; /* @dfroms on <self:POSetElement[Object]> */
 RET_LABEL:;
@@ -1509,7 +1503,7 @@ if (!var1) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "POSetElement#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/poset.nit", 222);
-exit(1);
+show_backtrace(1);
 }
 var_t = p0;
 var2 = ((val* (*)(val*))(self->class->vft[COLOR_poset__POSetElement__tos]))(self) /* tos on <self:POSetElement[Object]>*/;
@@ -1557,7 +1551,7 @@ if (!var1) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "POSetElement#0", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/poset.nit", 228);
-exit(1);
+show_backtrace(1);
 }
 var_t = p0;
 var3 = ((val* (*)(val*))(self->class->vft[COLOR_poset__POSetElement__element]))(self) /* element on <self:POSetElement[Object]>*/;
@@ -1610,7 +1604,7 @@ if (!var) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "POSet[POSetElement#0]", var_class_name);
 fprintf(stderr, " (%s:%d)\n", "lib/poset.nit", 168);
-exit(1);
+show_backtrace(1);
 }
 /* Covariant cast for argument 1 (element) <p1:Object> isa POSetElement#0 */
 /* <p1:Object> isa POSetElement#0 */
@@ -1626,7 +1620,7 @@ if (!var1) {
 var_class_name5 = p1 == NULL ? "null" : p1->type->name;
 fprintf(stderr, "Runtime error: Cast failed. Expected `%s`, got `%s`", "POSetElement#0", var_class_name5);
 fprintf(stderr, " (%s:%d)\n", "lib/poset.nit", 168);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_poset__POSetElement___64dposet].val = p0; /* @poset on <self:POSetElement[Object]> */
 self->attrs[COLOR_poset__POSetElement___64delement].val = p1; /* @element on <self:POSetElement[Object]> */

@@ -76,7 +76,7 @@ end
 # Visit the AST and print metrics about the usage of send on nullable reciever.
 fun compute_nullables_metrics(modelbuilder: ModelBuilder)
 do
-	print "--- Sends on Nullable Reciever ---"
+	print "--- Sends on Nullable Receiver ---"
 	var total_sends = 0
 	var nullable_sends = 0
 	var buggy_sends = 0

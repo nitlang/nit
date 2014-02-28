@@ -56,6 +56,7 @@ redef class AConcreteMethPropdef
 		var mclassdef = self.parent.as(AClassdef).mclassdef.as(not null)
 		var mpropdef = self.mpropdef.as(not null)
 		var mmodule = mpropdef.mclassdef.mmodule
+		var anchor = mclassdef.bound_mtype
 
 		# Collect only for constructors
 		if not mpropdef.mproperty.is_init then return
@@ -92,23 +93,34 @@ redef class AConcreteMethPropdef
 				candidate = modelbuilder.try_get_mproperty_by_name2(self, mmodule, msupertype, "init")
 			end
 			if candidate == null then
-				modelbuilder.error(self, "Cannot do an implicit constructor call for {mpropdef}: there is no costructor named {mpropdef.mproperty.name} in {msupertype}.")
+				modelbuilder.error(self, "Error: Cannot do an implicit constructor call in {mpropdef}; there is no constructor named {mpropdef.mproperty.name} in {msupertype}.")
 				return
 			end
 			assert candidate isa MMethod
 			auto_super_inits.add(candidate)
 		end
 		if auto_super_inits.is_empty then
-			modelbuilder.error(self, "No constructors to call implicitely. Call one explicitely.")
+			modelbuilder.error(self, "Error: No constructors to call implicitely in {mpropdef}. Call one explicitely.")
 			return
 		end
 		for auto_super_init in auto_super_inits do
 			var auto_super_init_def = auto_super_init.intro
 			var msig = mpropdef.msignature.as(not null)
 			var supermsig = auto_super_init_def.msignature.as(not null)
-			if auto_super_init_def.msignature.arity != 0 and auto_super_init_def.msignature.arity != mpropdef.msignature.arity then
-				# TODO: Better check of the signature
-				modelbuilder.error(self, "Problem with signature of constructor {auto_super_init_def}{supermsig}. Expected {msig}")
+			if auto_super_init_def.msignature.arity > mpropdef.msignature.arity then
+				modelbuilder.error(self, "Error: Cannot do an implicit constructor call to {auto_super_init_def}{supermsig}. Expected at least {auto_super_init_def.msignature.arity} arguments, got {mpropdef.msignature.arity}.")
+				continue
+			end
+			var i = 0
+			for sp in auto_super_init_def.msignature.mparameters do
+				var p = mpropdef.msignature.mparameters[i]
+				var sub = p.mtype
+				var sup = sp.mtype
+				if not sub.is_subtype(mmodule, anchor, sup) then
+					modelbuilder.error(self, "Error: Cannot do an implicit constructor call to {auto_super_init_def}{supermsig}. Expected argument #{i} of type {sp.mtype}, got implicit argument {p.name} of type {p.mtype}.")
+					break
+				end
+				i += 1
 			end
 		end
 		self.auto_super_inits = auto_super_inits
@@ -124,7 +136,7 @@ end
 redef class ASendExpr
 	redef fun accept_auto_super_init(v)
 	do
-		var mproperty = self.mproperty
+		var mproperty = self.callsite.mproperty
 		if mproperty == null then return
 		if mproperty.is_init then
 			v.has_explicit_super_init = true

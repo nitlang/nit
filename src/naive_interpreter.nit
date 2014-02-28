@@ -21,6 +21,7 @@ import literal
 import typing
 import auto_super_init
 import frontend
+import common_ffi
 
 redef class ToolContext
 	# --discover-call-trace
@@ -62,7 +63,6 @@ redef class ModelBuilder
 		if initprop != null then
 			interpreter.send(initprop, [mainobj])
 		end
-		interpreter.check_init_instance(mainobj)
 		var mainprop = mainmodule.try_get_primitive_method("main", sys_type.mclass)
 		if mainprop != null then
 			interpreter.send(mainprop, [mainobj])
@@ -243,7 +243,6 @@ private class NaiveInterpreter
 		var res = new MutableInstance(mtype)
 		self.init_instance(res)
 		self.send(self.force_get_primitive_method("with_native", mtype), [res, nat, self.int_instance(values.length)])
-		self.check_init_instance(res)
 		return res
 	end
 
@@ -348,9 +347,7 @@ private class NaiveInterpreter
 			self.discover_call_trace.add mpropdef
 			self.debug("Discovered {mpropdef}")
 		end
-		if args.length < mpropdef.msignature.arity + 1 or args.length > mpropdef.msignature.arity + 1 then
-			fatal("NOT YET IMPLEMENTED: Invalid arity for {mpropdef}. {args.length} arguments given.")
-		end
+		assert args.length == mpropdef.msignature.arity + 1 else debug("Invalid arity for {mpropdef}. {args.length} arguments given.")
 
 		# Look for the AST node that implements the property
 		var mproperty = mpropdef.mproperty
@@ -399,8 +396,8 @@ private class NaiveInterpreter
 			else if mproperty.name == "!=" then
 				return self.bool_instance(args[0] != args[1])
 			end
-			#fatal("Reciever is null. {mproperty}. {args.join(" ")} {self.frame.current_node.class_name}")
-			fatal("Reciever is null")
+			#fatal("Receiver is null. {mproperty}. {args.join(" ")} {self.frame.current_node.class_name}")
+			fatal("Receiver is null")
 		end
 		return null
 	end
@@ -460,19 +457,6 @@ private class NaiveInterpreter
 	do
 		for npropdef in collect_attr_propdef(recv.mtype) do
 			npropdef.init_expr(self, recv)
-		end
-	end
-
-	# Check that non nullable attributes of `recv` are correctly initialized.
-	# This function is used as the last instruction of a new
-	fun check_init_instance(recv: Instance)
-	do
-		if not recv isa MutableInstance then return
-		for npropdef in collect_attr_propdef(recv.mtype) do
-			if npropdef.n_expr == null then
-				# Force read to check the initialization
-				self.read_attribute(npropdef.mpropdef.mproperty, recv)
-			end
 		end
 	end
 
@@ -616,12 +600,12 @@ redef class AConcreteMethPropdef
 		return null
 	end
 
-	private fun call_commons(v: NaiveInterpreter, mpropdef: MMethodDef, args: Array[Instance], f: Frame)
+	private fun call_commons(v: NaiveInterpreter, mpropdef: MMethodDef, arguments: Array[Instance], f: Frame)
 	do
 		for i in [0..mpropdef.msignature.arity[ do
 			var variable = self.n_signature.n_params[i].variable
 			assert variable != null
-			f.map[variable] = args[i+1]
+			f.map[variable] = arguments[i+1]
 		end
 
 		v.frames.unshift(f)
@@ -629,13 +613,13 @@ redef class AConcreteMethPropdef
 		# Call the implicit super-init
 		var auto_super_inits = self.auto_super_inits
 		if auto_super_inits != null then
-			var selfarg = [args.first]
+			var args = [arguments.first]
 			for auto_super_init in auto_super_inits do
-				if auto_super_init.intro.msignature.arity == 0 then
-					v.send(auto_super_init, selfarg)
-				else
-					v.send(auto_super_init, args)
+				args.clear
+				for i in [0..auto_super_init.intro.msignature.arity+1[ do
+					args.add(arguments[i])
 				end
+				v.send(auto_super_init, args)
 			end
 		end
 
@@ -766,13 +750,13 @@ redef class AInternMethPropdef
 				if arg1 >= recvval.length or arg1 < 0 then
 					debug("Illegal access on {recvval} for element {arg1}/{recvval.length}")
 				end
-				return v.char_instance(recvval[arg1])
+				return v.char_instance(recvval.chars[arg1])
 			else if pname == "[]=" then
 				var arg1 = args[1].to_i
 				if arg1 >= recvval.length or arg1 < 0 then
 					debug("Illegal access on {recvval} for element {arg1}/{recvval.length}")
 				end
-				recvval[arg1] = args[2].val.as(Char)
+				recvval.chars[arg1] = args[2].val.as(Char)
 				return null
 			else if pname == "copy_to" then
 				# sig= copy_to(dest: NativeString, length: Int, from: Int, to: Int)
@@ -1118,7 +1102,7 @@ redef class AVarReassignExpr
 		var vari = v.frame.map[self.variable.as(not null)]
 		var value = v.expr(self.n_value)
 		if value == null then return
-		var res = v.send(reassign_property.mproperty, [vari, value])
+		var res = v.send(reassign_callsite.mproperty, [vari, value])
 		assert res != null
 		v.frame.map[self.variable.as(not null)] = res
 	end
@@ -1255,6 +1239,8 @@ redef class AForExpr
 	do
 		var col = v.expr(self.n_expr)
 		if col == null then return
+		if col.mtype isa MNullType then fatal(v, "Receiver is null")
+
 		#self.debug("col {col}")
 		var iter = v.send(v.force_get_primitive_method("iterator", col.mtype), [col]).as(not null)
 		#self.debug("iter {iter}")
@@ -1423,7 +1409,6 @@ redef class ACrangeExpr
 		var res = new MutableInstance(mtype)
 		v.init_instance(res)
 		v.send(v.force_get_primitive_method("init", mtype), [res, e1, e2])
-		v.check_init_instance(res)
 		return res
 	end
 end
@@ -1439,7 +1424,6 @@ redef class AOrangeExpr
 		var res = new MutableInstance(mtype)
 		v.init_instance(res)
 		v.send(v.force_get_primitive_method("without_last", mtype), [res, e1, e2])
-		v.check_init_instance(res)
 		return res
 	end
 end
@@ -1534,9 +1518,8 @@ redef class ASendExpr
 			if i == null then return null
 			args.add(i)
 		end
-		var mproperty = self.mproperty.as(not null)
 
-		var res = v.send(mproperty, args)
+		var res = v.send(callsite.mproperty, args)
 		return res
 	end
 end
@@ -1555,16 +1538,15 @@ redef class ASendReassignFormExpr
 		var value = v.expr(self.n_value)
 		if value == null then return
 
-		var mproperty = self.mproperty.as(not null)
-		var read = v.send(mproperty, args)
+		var read = v.send(callsite.mproperty, args)
 		assert read != null
 
-		var write = v.send(self.reassign_property.mproperty, [read, value])
+		var write = v.send(reassign_callsite.mproperty, [read, value])
 		assert write != null
 
 		args.add(write)
 
-		v.send(self.write_mproperty.as(not null), args)
+		v.send(write_callsite.mproperty, args)
 	end
 end
 
@@ -1578,18 +1560,22 @@ redef class ASuperExpr
 			if i == null then return null
 			args.add(i)
 		end
-		if args.length == 1 then
-			args = v.frame.arguments
-		end
 
-		var mproperty = self.mproperty
-		if mproperty != null then
-			if mproperty.intro.msignature.arity == 0 then
-				args = [recv]
+		var callsite = self.callsite
+		if callsite != null then
+			# Add additionnals arguments for the super init call
+			if args.length == 1 then
+				for i in [0..callsite.mproperty.intro.msignature.arity[ do
+					args.add(v.frame.arguments[i+1])
+				end
 			end
 			# Super init call
-			var res = v.send(mproperty, args)
+			var res = v.send(callsite.mproperty, args)
 			return res
+		end
+
+		if args.length == 1 then
+			args = v.frame.arguments
 		end
 
 		# stantard call-next-method
@@ -1613,13 +1599,11 @@ redef class ANewExpr
 			if i == null then return null
 			args.add(i)
 		end
-		var mproperty = self.mproperty.as(not null)
-		var res2 = v.send(mproperty, args)
+		var res2 = v.send(callsite.mproperty, args)
 		if res2 != null then
 			#self.debug("got {res2} from {mproperty}. drop {recv}")
 			return res2
 		end
-		v.check_init_instance(recv)
 		return recv
 	end
 end
@@ -1629,7 +1613,7 @@ redef class AAttrExpr
 	do
 		var recv = v.expr(self.n_expr)
 		if recv == null then return null
-		if recv.mtype isa MNullType then fatal(v, "Reciever is null")
+		if recv.mtype isa MNullType then fatal(v, "Receiver is null")
 		var mproperty = self.mproperty.as(not null)
 		return v.read_attribute(mproperty, recv)
 	end
@@ -1640,7 +1624,7 @@ redef class AAttrAssignExpr
 	do
 		var recv = v.expr(self.n_expr)
 		if recv == null then return
-		if recv.mtype isa MNullType then fatal(v, "Reciever is null")
+		if recv.mtype isa MNullType then fatal(v, "Receiver is null")
 		var i = v.expr(self.n_value)
 		if i == null then return
 		var mproperty = self.mproperty.as(not null)
@@ -1654,12 +1638,12 @@ redef class AAttrReassignExpr
 	do
 		var recv = v.expr(self.n_expr)
 		if recv == null then return
-		if recv.mtype isa MNullType then fatal(v, "Reciever is null")
+		if recv.mtype isa MNullType then fatal(v, "Receiver is null")
 		var value = v.expr(self.n_value)
 		if value == null then return
 		var mproperty = self.mproperty.as(not null)
 		var attr = v.read_attribute(mproperty, recv)
-		var res = v.send(reassign_property.mproperty, [attr, value])
+		var res = v.send(reassign_callsite.mproperty, [attr, value])
 		assert res != null
 		assert recv isa MutableInstance
 		recv.attributes[mproperty] = res
@@ -1671,7 +1655,7 @@ redef class AIssetAttrExpr
 	do
 		var recv = v.expr(self.n_expr)
 		if recv == null then return null
-		if recv.mtype isa MNullType then fatal(v, "Reciever is null")
+		if recv.mtype isa MNullType then fatal(v, "Receiver is null")
 		var mproperty = self.mproperty.as(not null)
 		assert recv isa MutableInstance
 		return v.bool_instance(recv.attributes.has_key(mproperty))

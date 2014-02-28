@@ -73,13 +73,13 @@ var5 = var_n->type->type_table[cltype] == idtype;
 if (!var5) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 25);
-exit(1);
+show_backtrace(1);
 }
 var6 = self->attrs[COLOR_parser_nodes__AModule___n_imports].val; /* _n_imports on <self:AModule> */
 if (var6 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_imports");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 26);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var6->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var6, var_n) /* add on <var6:ANodes[AImport]>*/;
 ((void (*)(val*, val*))(var_n->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n, self) /* parent= on <var_n:Object(AImport)>*/;
@@ -104,13 +104,13 @@ var11 = var_n10->type->type_table[cltype12] == idtype13;
 if (!var11) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 30);
-exit(1);
+show_backtrace(1);
 }
 var14 = self->attrs[COLOR_parser_nodes__AModule___n_extern_code_blocks].val; /* _n_extern_code_blocks on <self:AModule> */
 if (var14 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_extern_code_blocks");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 31);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var14->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var14, var_n10) /* add on <var14:ANodes[AExternCodeBlock]>*/;
 ((void (*)(val*, val*))(var_n10->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n10, self) /* parent= on <var_n10:Object(AExternCodeBlock)>*/;
@@ -135,13 +135,13 @@ var20 = var_n19->type->type_table[cltype21] == idtype22;
 if (!var20) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 35);
-exit(1);
+show_backtrace(1);
 }
 var23 = self->attrs[COLOR_parser_nodes__AModule___n_classdefs].val; /* _n_classdefs on <self:AModule> */
 if (var23 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_classdefs");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 36);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var23->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var23, var_n19) /* add on <var23:ANodes[AClassdef]>*/;
 ((void (*)(val*, val*))(var_n19->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n19, self) /* parent= on <var_n19:Object(AClassdef)>*/;
@@ -259,7 +259,7 @@ var4 = var_new_child->type->type_table[cltype] == idtype;
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 46);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AModule___n_moduledecl].val = var_new_child; /* _n_moduledecl on <self:AModule> */
 } else {
@@ -275,13 +275,12 @@ var8 = self->attrs[COLOR_parser_nodes__AModule___n_imports].val; /* _n_imports o
 if (var8 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_imports");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 53);
-exit(1);
+show_backtrace(1);
 }
 var9 = ((long (*)(val*))(var8->class->vft[COLOR_abstract_collection__Collection__length]))(var8) /* length on <var8:ANodes[AImport]>*/;
 var10 = BOX_kernel__Int(var7); /* autobox from Int to Discrete */
 var11 = BOX_kernel__Int(var9); /* autobox from Int to Discrete */
 ((void (*)(val*, val*, val*))(var6->class->vft[COLOR_range__Range__without_last]))(var6, var10, var11) /* without_last on <var6:Range[Int]>*/;
-CHECK_NEW_range__Range(var6);
 var12 = ((val* (*)(val*))(var6->class->vft[COLOR_abstract_collection__Collection__iterator]))(var6) /* iterator on <var6:Range[Int]>*/;
 for(;;) {
 var13 = ((short int (*)(val*))(var12->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var12) /* is_ok on <var12:Iterator[nullable Object]>*/;
@@ -293,7 +292,7 @@ var16 = self->attrs[COLOR_parser_nodes__AModule___n_imports].val; /* _n_imports 
 if (var16 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_imports");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 54);
-exit(1);
+show_backtrace(1);
 }
 var17 = ((val* (*)(val*, long))(var16->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var16, var_i) /* [] on <var16:ANodes[AImport]>*/;
 var18 = ((short int (*)(val*, val*))(var17->class->vft[COLOR_kernel__Object___61d_61d]))(var17, var_old_child) /* == on <var17:nullable Object(AImport)>*/;
@@ -316,13 +315,13 @@ var21 = var_new_child->type->type_table[cltype22] == idtype23;
 if (!var21) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 56);
-exit(1);
+show_backtrace(1);
 }
 var24 = self->attrs[COLOR_parser_nodes__AModule___n_imports].val; /* _n_imports on <self:AModule> */
 if (var24 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_imports");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 57);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, long, val*))(var24->class->vft[COLOR_abstract_collection__Sequence___91d_93d_61d]))(var24, var_i, var_new_child) /* []= on <var24:ANodes[AImport]>*/;
 ((void (*)(val*, val*))(var_new_child->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_new_child, self) /* parent= on <var_new_child:nullable ANode(AImport)>*/;
@@ -331,7 +330,7 @@ var25 = self->attrs[COLOR_parser_nodes__AModule___n_imports].val; /* _n_imports 
 if (var25 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_imports");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 60);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, long))(var25->class->vft[COLOR_abstract_collection__Sequence__remove_at]))(var25, var_i) /* remove_at on <var25:ANodes[AImport]>*/;
 }
@@ -348,13 +347,12 @@ var28 = self->attrs[COLOR_parser_nodes__AModule___n_extern_code_blocks].val; /* 
 if (var28 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_extern_code_blocks");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 65);
-exit(1);
+show_backtrace(1);
 }
 var29 = ((long (*)(val*))(var28->class->vft[COLOR_abstract_collection__Collection__length]))(var28) /* length on <var28:ANodes[AExternCodeBlock]>*/;
 var30 = BOX_kernel__Int(var27); /* autobox from Int to Discrete */
 var31 = BOX_kernel__Int(var29); /* autobox from Int to Discrete */
 ((void (*)(val*, val*, val*))(var26->class->vft[COLOR_range__Range__without_last]))(var26, var30, var31) /* without_last on <var26:Range[Int]>*/;
-CHECK_NEW_range__Range(var26);
 var32 = ((val* (*)(val*))(var26->class->vft[COLOR_abstract_collection__Collection__iterator]))(var26) /* iterator on <var26:Range[Int]>*/;
 for(;;) {
 var33 = ((short int (*)(val*))(var32->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var32) /* is_ok on <var32:Iterator[nullable Object]>*/;
@@ -366,7 +364,7 @@ var37 = self->attrs[COLOR_parser_nodes__AModule___n_extern_code_blocks].val; /* 
 if (var37 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_extern_code_blocks");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 66);
-exit(1);
+show_backtrace(1);
 }
 var38 = ((val* (*)(val*, long))(var37->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var37, var_i35) /* [] on <var37:ANodes[AExternCodeBlock]>*/;
 var39 = ((short int (*)(val*, val*))(var38->class->vft[COLOR_kernel__Object___61d_61d]))(var38, var_old_child) /* == on <var38:nullable Object(AExternCodeBlock)>*/;
@@ -389,13 +387,13 @@ var42 = var_new_child->type->type_table[cltype43] == idtype44;
 if (!var42) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 68);
-exit(1);
+show_backtrace(1);
 }
 var45 = self->attrs[COLOR_parser_nodes__AModule___n_extern_code_blocks].val; /* _n_extern_code_blocks on <self:AModule> */
 if (var45 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_extern_code_blocks");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 69);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, long, val*))(var45->class->vft[COLOR_abstract_collection__Sequence___91d_93d_61d]))(var45, var_i35, var_new_child) /* []= on <var45:ANodes[AExternCodeBlock]>*/;
 ((void (*)(val*, val*))(var_new_child->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_new_child, self) /* parent= on <var_new_child:nullable ANode(AExternCodeBlock)>*/;
@@ -404,7 +402,7 @@ var46 = self->attrs[COLOR_parser_nodes__AModule___n_extern_code_blocks].val; /* 
 if (var46 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_extern_code_blocks");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 72);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, long))(var46->class->vft[COLOR_abstract_collection__Sequence__remove_at]))(var46, var_i35) /* remove_at on <var46:ANodes[AExternCodeBlock]>*/;
 }
@@ -421,13 +419,12 @@ var50 = self->attrs[COLOR_parser_nodes__AModule___n_classdefs].val; /* _n_classd
 if (var50 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_classdefs");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 77);
-exit(1);
+show_backtrace(1);
 }
 var51 = ((long (*)(val*))(var50->class->vft[COLOR_abstract_collection__Collection__length]))(var50) /* length on <var50:ANodes[AClassdef]>*/;
 var52 = BOX_kernel__Int(var49); /* autobox from Int to Discrete */
 var53 = BOX_kernel__Int(var51); /* autobox from Int to Discrete */
 ((void (*)(val*, val*, val*))(var48->class->vft[COLOR_range__Range__without_last]))(var48, var52, var53) /* without_last on <var48:Range[Int]>*/;
-CHECK_NEW_range__Range(var48);
 var54 = ((val* (*)(val*))(var48->class->vft[COLOR_abstract_collection__Collection__iterator]))(var48) /* iterator on <var48:Range[Int]>*/;
 for(;;) {
 var55 = ((short int (*)(val*))(var54->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var54) /* is_ok on <var54:Iterator[nullable Object]>*/;
@@ -439,7 +436,7 @@ var59 = self->attrs[COLOR_parser_nodes__AModule___n_classdefs].val; /* _n_classd
 if (var59 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_classdefs");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 78);
-exit(1);
+show_backtrace(1);
 }
 var60 = ((val* (*)(val*, long))(var59->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var59, var_i57) /* [] on <var59:ANodes[AClassdef]>*/;
 var61 = ((short int (*)(val*, val*))(var60->class->vft[COLOR_kernel__Object___61d_61d]))(var60, var_old_child) /* == on <var60:nullable Object(AClassdef)>*/;
@@ -462,13 +459,13 @@ var64 = var_new_child->type->type_table[cltype65] == idtype66;
 if (!var64) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 80);
-exit(1);
+show_backtrace(1);
 }
 var67 = self->attrs[COLOR_parser_nodes__AModule___n_classdefs].val; /* _n_classdefs on <self:AModule> */
 if (var67 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_classdefs");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 81);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, long, val*))(var67->class->vft[COLOR_abstract_collection__Sequence___91d_93d_61d]))(var67, var_i57, var_new_child) /* []= on <var67:ANodes[AClassdef]>*/;
 ((void (*)(val*, val*))(var_new_child->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_new_child, self) /* parent= on <var_new_child:nullable ANode(AClassdef)>*/;
@@ -477,7 +474,7 @@ var68 = self->attrs[COLOR_parser_nodes__AModule___n_classdefs].val; /* _n_classd
 if (var68 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_classdefs");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 84);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, long))(var68->class->vft[COLOR_abstract_collection__Sequence__remove_at]))(var68, var_i57) /* remove_at on <var68:ANodes[AClassdef]>*/;
 }
@@ -554,7 +551,7 @@ var3 = self->attrs[COLOR_parser_nodes__AModule___n_moduledecl].val; /* _n_module
 if (var3 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 103);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var3) /* enter_visit on <var_v:Visitor>*/;
 } else {
@@ -563,7 +560,7 @@ var4 = self->attrs[COLOR_parser_nodes__AModule___n_imports].val; /* _n_imports o
 if (var4 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_imports");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 105);
-exit(1);
+show_backtrace(1);
 }
 var5 = ((val* (*)(val*))(var4->class->vft[COLOR_abstract_collection__Collection__iterator]))(var4) /* iterator on <var4:ANodes[AImport]>*/;
 for(;;) {
@@ -580,7 +577,7 @@ var8 = self->attrs[COLOR_parser_nodes__AModule___n_extern_code_blocks].val; /* _
 if (var8 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_extern_code_blocks");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 108);
-exit(1);
+show_backtrace(1);
 }
 var9 = ((val* (*)(val*))(var8->class->vft[COLOR_abstract_collection__Collection__iterator]))(var8) /* iterator on <var8:ANodes[AExternCodeBlock]>*/;
 for(;;) {
@@ -597,7 +594,7 @@ var14 = self->attrs[COLOR_parser_nodes__AModule___n_classdefs].val; /* _n_classd
 if (var14 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_classdefs");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 111);
-exit(1);
+show_backtrace(1);
 }
 var15 = ((val* (*)(val*))(var14->class->vft[COLOR_abstract_collection__Collection__iterator]))(var14) /* iterator on <var14:ANodes[AClassdef]>*/;
 for(;;) {
@@ -655,26 +652,26 @@ if (var1){
 if (var_n_kwmodule == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 131);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AModuledecl___n_kwmodule].val = var_n_kwmodule; /* _n_kwmodule on <self:AModuledecl> */
 if (var_n_kwmodule == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 132);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_kwmodule->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_kwmodule, self) /* parent= on <var_n_kwmodule:nullable TKwmodule>*/;
 }
 if (var_n_name == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 133);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AModuledecl___n_name].val = var_n_name; /* _n_name on <self:AModuledecl> */
 if (var_n_name == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 134);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_name->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_name, self) /* parent= on <var_n_name:nullable AModuleName>*/;
 }
@@ -758,7 +755,7 @@ var4 = var_new_child->type->type_table[cltype] == idtype;
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 146);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AModuledecl___n_doc].val = var_new_child; /* _n_doc on <self:AModuledecl> */
 } else {
@@ -772,7 +769,7 @@ var6 = self->attrs[COLOR_parser_nodes__AModuledecl___n_kwmodule].val; /* _n_kwmo
 if (var6 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwmodule");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 153);
-exit(1);
+show_backtrace(1);
 }
 var7 = ((short int (*)(val*, val*))(var6->class->vft[COLOR_kernel__Object___61d_61d]))(var6, var_old_child) /* == on <var6:TKwmodule>*/;
 if (var7){
@@ -795,13 +792,13 @@ var10 = var_new_child->type->type_table[cltype11] == idtype12;
 if (!var10) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 156);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AModuledecl___n_kwmodule].val = var_new_child; /* _n_kwmodule on <self:AModuledecl> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 159);
-exit(1);
+show_backtrace(1);
 }
 goto RET_LABEL;
 } else {
@@ -810,7 +807,7 @@ var13 = self->attrs[COLOR_parser_nodes__AModuledecl___n_name].val; /* _n_name on
 if (var13 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_name");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 163);
-exit(1);
+show_backtrace(1);
 }
 var14 = ((short int (*)(val*, val*))(var13->class->vft[COLOR_kernel__Object___61d_61d]))(var13, var_old_child) /* == on <var13:AModuleName>*/;
 if (var14){
@@ -833,13 +830,13 @@ var17 = var_new_child->type->type_table[cltype18] == idtype19;
 if (!var17) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 166);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AModuledecl___n_name].val = var_new_child; /* _n_name on <self:AModuledecl> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 169);
-exit(1);
+show_backtrace(1);
 }
 goto RET_LABEL;
 } else {
@@ -870,7 +867,7 @@ var24 = var_new_child->type->type_table[cltype25] == idtype26;
 if (!var24) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 176);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__Prod___n_annotations].val = var_new_child; /* _n_annotations on <self:AModuledecl> */
 } else {
@@ -987,7 +984,7 @@ var3 = self->attrs[COLOR_parser_nodes__AModuledecl___n_doc].val; /* _n_doc on <s
 if (var3 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 214);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var3) /* enter_visit on <var_v:Visitor>*/;
 } else {
@@ -996,14 +993,14 @@ var4 = self->attrs[COLOR_parser_nodes__AModuledecl___n_kwmodule].val; /* _n_kwmo
 if (var4 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwmodule");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 216);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var4) /* enter_visit on <var_v:Visitor>*/;
 var5 = self->attrs[COLOR_parser_nodes__AModuledecl___n_name].val; /* _n_name on <self:AModuledecl> */
 if (var5 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_name");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 217);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var5) /* enter_visit on <var_v:Visitor>*/;
 var6 = self->attrs[COLOR_parser_nodes__Prod___n_annotations].val; /* _n_annotations on <self:AModuledecl> */
@@ -1018,7 +1015,7 @@ var9 = self->attrs[COLOR_parser_nodes__Prod___n_annotations].val; /* _n_annotati
 if (var9 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 219);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var9) /* enter_visit on <var_v:Visitor>*/;
 } else {
@@ -1055,39 +1052,39 @@ var_n_annotations = p3;
 if (var_n_visibility == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 234);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AStdImport___n_visibility].val = var_n_visibility; /* _n_visibility on <self:AStdImport> */
 if (var_n_visibility == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 235);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_visibility->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_visibility, self) /* parent= on <var_n_visibility:nullable AVisibility>*/;
 }
 if (var_n_kwimport == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 236);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AStdImport___n_kwimport].val = var_n_kwimport; /* _n_kwimport on <self:AStdImport> */
 if (var_n_kwimport == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 237);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_kwimport->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_kwimport, self) /* parent= on <var_n_kwimport:nullable TKwimport>*/;
 }
 if (var_n_name == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 238);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AStdImport___n_name].val = var_n_name; /* _n_name on <self:AStdImport> */
 if (var_n_name == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 239);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_name->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_name, self) /* parent= on <var_n_name:nullable AModuleName>*/;
 }
@@ -1148,7 +1145,7 @@ var = self->attrs[COLOR_parser_nodes__AStdImport___n_visibility].val; /* _n_visi
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_visibility");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 248);
-exit(1);
+show_backtrace(1);
 }
 var1 = ((short int (*)(val*, val*))(var->class->vft[COLOR_kernel__Object___61d_61d]))(var, var_old_child) /* == on <var:AVisibility>*/;
 if (var1){
@@ -1171,13 +1168,13 @@ var4 = var_new_child->type->type_table[cltype] == idtype;
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 251);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AStdImport___n_visibility].val = var_new_child; /* _n_visibility on <self:AStdImport> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 254);
-exit(1);
+show_backtrace(1);
 }
 goto RET_LABEL;
 } else {
@@ -1186,7 +1183,7 @@ var5 = self->attrs[COLOR_parser_nodes__AStdImport___n_kwimport].val; /* _n_kwimp
 if (var5 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwimport");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 258);
-exit(1);
+show_backtrace(1);
 }
 var6 = ((short int (*)(val*, val*))(var5->class->vft[COLOR_kernel__Object___61d_61d]))(var5, var_old_child) /* == on <var5:TKwimport>*/;
 if (var6){
@@ -1209,13 +1206,13 @@ var9 = var_new_child->type->type_table[cltype10] == idtype11;
 if (!var9) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 261);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AStdImport___n_kwimport].val = var_new_child; /* _n_kwimport on <self:AStdImport> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 264);
-exit(1);
+show_backtrace(1);
 }
 goto RET_LABEL;
 } else {
@@ -1224,7 +1221,7 @@ var12 = self->attrs[COLOR_parser_nodes__AStdImport___n_name].val; /* _n_name on 
 if (var12 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_name");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 268);
-exit(1);
+show_backtrace(1);
 }
 var13 = ((short int (*)(val*, val*))(var12->class->vft[COLOR_kernel__Object___61d_61d]))(var12, var_old_child) /* == on <var12:AModuleName>*/;
 if (var13){
@@ -1247,13 +1244,13 @@ var16 = var_new_child->type->type_table[cltype17] == idtype18;
 if (!var16) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 271);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AStdImport___n_name].val = var_new_child; /* _n_name on <self:AStdImport> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 274);
-exit(1);
+show_backtrace(1);
 }
 goto RET_LABEL;
 } else {
@@ -1284,7 +1281,7 @@ var23 = var_new_child->type->type_table[cltype24] == idtype25;
 if (!var23) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 281);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__Prod___n_annotations].val = var_new_child; /* _n_annotations on <self:AStdImport> */
 } else {
@@ -1379,21 +1376,21 @@ var = self->attrs[COLOR_parser_nodes__AStdImport___n_visibility].val; /* _n_visi
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_visibility");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 316);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var) /* enter_visit on <var_v:Visitor>*/;
 var1 = self->attrs[COLOR_parser_nodes__AStdImport___n_kwimport].val; /* _n_kwimport on <self:AStdImport> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwimport");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 317);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var1) /* enter_visit on <var_v:Visitor>*/;
 var2 = self->attrs[COLOR_parser_nodes__AStdImport___n_name].val; /* _n_name on <self:AStdImport> */
 if (var2 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_name");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 318);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var2) /* enter_visit on <var_v:Visitor>*/;
 var3 = self->attrs[COLOR_parser_nodes__Prod___n_annotations].val; /* _n_annotations on <self:AStdImport> */
@@ -1408,7 +1405,7 @@ var6 = self->attrs[COLOR_parser_nodes__Prod___n_annotations].val; /* _n_annotati
 if (var6 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 320);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var6) /* enter_visit on <var_v:Visitor>*/;
 } else {
@@ -1441,39 +1438,39 @@ var_n_kwend = p2;
 if (var_n_visibility == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 334);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__ANoImport___n_visibility].val = var_n_visibility; /* _n_visibility on <self:ANoImport> */
 if (var_n_visibility == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 335);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_visibility->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_visibility, self) /* parent= on <var_n_visibility:nullable AVisibility>*/;
 }
 if (var_n_kwimport == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 336);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__ANoImport___n_kwimport].val = var_n_kwimport; /* _n_kwimport on <self:ANoImport> */
 if (var_n_kwimport == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 337);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_kwimport->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_kwimport, self) /* parent= on <var_n_kwimport:nullable TKwimport>*/;
 }
 if (var_n_kwend == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 338);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__ANoImport___n_kwend].val = var_n_kwend; /* _n_kwend on <self:ANoImport> */
 if (var_n_kwend == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 339);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_kwend->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_kwend, self) /* parent= on <var_n_kwend:nullable TKwend>*/;
 }
@@ -1515,7 +1512,7 @@ var = self->attrs[COLOR_parser_nodes__ANoImport___n_visibility].val; /* _n_visib
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_visibility");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 344);
-exit(1);
+show_backtrace(1);
 }
 var1 = ((short int (*)(val*, val*))(var->class->vft[COLOR_kernel__Object___61d_61d]))(var, var_old_child) /* == on <var:AVisibility>*/;
 if (var1){
@@ -1538,13 +1535,13 @@ var4 = var_new_child->type->type_table[cltype] == idtype;
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 347);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__ANoImport___n_visibility].val = var_new_child; /* _n_visibility on <self:ANoImport> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 350);
-exit(1);
+show_backtrace(1);
 }
 goto RET_LABEL;
 } else {
@@ -1553,7 +1550,7 @@ var5 = self->attrs[COLOR_parser_nodes__ANoImport___n_kwimport].val; /* _n_kwimpo
 if (var5 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwimport");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 354);
-exit(1);
+show_backtrace(1);
 }
 var6 = ((short int (*)(val*, val*))(var5->class->vft[COLOR_kernel__Object___61d_61d]))(var5, var_old_child) /* == on <var5:TKwimport>*/;
 if (var6){
@@ -1576,13 +1573,13 @@ var9 = var_new_child->type->type_table[cltype10] == idtype11;
 if (!var9) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 357);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__ANoImport___n_kwimport].val = var_new_child; /* _n_kwimport on <self:ANoImport> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 360);
-exit(1);
+show_backtrace(1);
 }
 goto RET_LABEL;
 } else {
@@ -1591,7 +1588,7 @@ var12 = self->attrs[COLOR_parser_nodes__ANoImport___n_kwend].val; /* _n_kwend on
 if (var12 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwend");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 364);
-exit(1);
+show_backtrace(1);
 }
 var13 = ((short int (*)(val*, val*))(var12->class->vft[COLOR_kernel__Object___61d_61d]))(var12, var_old_child) /* == on <var12:TKwend>*/;
 if (var13){
@@ -1614,13 +1611,13 @@ var16 = var_new_child->type->type_table[cltype17] == idtype18;
 if (!var16) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 367);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__ANoImport___n_kwend].val = var_new_child; /* _n_kwend on <self:ANoImport> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 370);
-exit(1);
+show_backtrace(1);
 }
 goto RET_LABEL;
 } else {
@@ -1682,21 +1679,21 @@ var = self->attrs[COLOR_parser_nodes__ANoImport___n_visibility].val; /* _n_visib
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_visibility");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 395);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var) /* enter_visit on <var_v:Visitor>*/;
 var1 = self->attrs[COLOR_parser_nodes__ANoImport___n_kwimport].val; /* _n_kwimport on <self:ANoImport> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwimport");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 396);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var1) /* enter_visit on <var_v:Visitor>*/;
 var2 = self->attrs[COLOR_parser_nodes__ANoImport___n_kwend].val; /* _n_kwend on <self:ANoImport> */
 if (var2 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwend");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 397);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var2) /* enter_visit on <var_v:Visitor>*/;
 RET_LABEL:;
@@ -1766,13 +1763,13 @@ var_n_kwprivate = p0;
 if (var_n_kwprivate == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 426);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__APrivateVisibility___n_kwprivate].val = var_n_kwprivate; /* _n_kwprivate on <self:APrivateVisibility> */
 if (var_n_kwprivate == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 427);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_kwprivate->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_kwprivate, self) /* parent= on <var_n_kwprivate:nullable TKwprivate>*/;
 }
@@ -1800,7 +1797,7 @@ var = self->attrs[COLOR_parser_nodes__APrivateVisibility___n_kwprivate].val; /* 
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwprivate");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 432);
-exit(1);
+show_backtrace(1);
 }
 var1 = ((short int (*)(val*, val*))(var->class->vft[COLOR_kernel__Object___61d_61d]))(var, var_old_child) /* == on <var:TKwprivate>*/;
 if (var1){
@@ -1823,13 +1820,13 @@ var4 = var_new_child->type->type_table[cltype] == idtype;
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 435);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__APrivateVisibility___n_kwprivate].val = var_new_child; /* _n_kwprivate on <self:APrivateVisibility> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 438);
-exit(1);
+show_backtrace(1);
 }
 goto RET_LABEL;
 } else {
@@ -1863,7 +1860,7 @@ var = self->attrs[COLOR_parser_nodes__APrivateVisibility___n_kwprivate].val; /* 
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwprivate");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 453);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var) /* enter_visit on <var_v:Visitor>*/;
 RET_LABEL:;
@@ -1890,13 +1887,13 @@ var_n_kwprotected = p0;
 if (var_n_kwprotected == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 464);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AProtectedVisibility___n_kwprotected].val = var_n_kwprotected; /* _n_kwprotected on <self:AProtectedVisibility> */
 if (var_n_kwprotected == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 465);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_kwprotected->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_kwprotected, self) /* parent= on <var_n_kwprotected:nullable TKwprotected>*/;
 }
@@ -1924,7 +1921,7 @@ var = self->attrs[COLOR_parser_nodes__AProtectedVisibility___n_kwprotected].val;
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwprotected");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 470);
-exit(1);
+show_backtrace(1);
 }
 var1 = ((short int (*)(val*, val*))(var->class->vft[COLOR_kernel__Object___61d_61d]))(var, var_old_child) /* == on <var:TKwprotected>*/;
 if (var1){
@@ -1947,13 +1944,13 @@ var4 = var_new_child->type->type_table[cltype] == idtype;
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 473);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AProtectedVisibility___n_kwprotected].val = var_new_child; /* _n_kwprotected on <self:AProtectedVisibility> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 476);
-exit(1);
+show_backtrace(1);
 }
 goto RET_LABEL;
 } else {
@@ -1987,7 +1984,7 @@ var = self->attrs[COLOR_parser_nodes__AProtectedVisibility___n_kwprotected].val;
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwprotected");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 491);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var) /* enter_visit on <var_v:Visitor>*/;
 RET_LABEL:;
@@ -2014,13 +2011,13 @@ var_n_kwintrude = p0;
 if (var_n_kwintrude == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 502);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AIntrudeVisibility___n_kwintrude].val = var_n_kwintrude; /* _n_kwintrude on <self:AIntrudeVisibility> */
 if (var_n_kwintrude == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 503);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_kwintrude->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_kwintrude, self) /* parent= on <var_n_kwintrude:nullable TKwintrude>*/;
 }
@@ -2048,7 +2045,7 @@ var = self->attrs[COLOR_parser_nodes__AIntrudeVisibility___n_kwintrude].val; /* 
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwintrude");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 508);
-exit(1);
+show_backtrace(1);
 }
 var1 = ((short int (*)(val*, val*))(var->class->vft[COLOR_kernel__Object___61d_61d]))(var, var_old_child) /* == on <var:TKwintrude>*/;
 if (var1){
@@ -2071,13 +2068,13 @@ var4 = var_new_child->type->type_table[cltype] == idtype;
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 511);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AIntrudeVisibility___n_kwintrude].val = var_new_child; /* _n_kwintrude on <self:AIntrudeVisibility> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 514);
-exit(1);
+show_backtrace(1);
 }
 goto RET_LABEL;
 } else {
@@ -2111,7 +2108,7 @@ var = self->attrs[COLOR_parser_nodes__AIntrudeVisibility___n_kwintrude].val; /* 
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwintrude");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 529);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var) /* enter_visit on <var_v:Visitor>*/;
 RET_LABEL:;
@@ -2214,26 +2211,26 @@ if (var3){
 if (var_n_visibility == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 558);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AStdClassdef___n_visibility].val = var_n_visibility; /* _n_visibility on <self:AStdClassdef> */
 if (var_n_visibility == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 559);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_visibility->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_visibility, self) /* parent= on <var_n_visibility:nullable AVisibility>*/;
 }
 if (var_n_classkind == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 560);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AStdClassdef___n_classkind].val = var_n_classkind; /* _n_classkind on <self:AStdClassdef> */
 if (var_n_classkind == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 561);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_classkind->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_classkind, self) /* parent= on <var_n_classkind:nullable AClasskind>*/;
 }
@@ -2265,13 +2262,13 @@ var9 = var_n->type->type_table[cltype] == idtype;
 if (!var9) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 567);
-exit(1);
+show_backtrace(1);
 }
 var10 = self->attrs[COLOR_parser_nodes__AStdClassdef___n_formaldefs].val; /* _n_formaldefs on <self:AStdClassdef> */
 if (var10 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_formaldefs");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 568);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var10->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var10, var_n) /* add on <var10:ANodes[AFormaldef]>*/;
 ((void (*)(val*, val*))(var_n->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n, self) /* parent= on <var_n:Object(AFormaldef)>*/;
@@ -2318,13 +2315,13 @@ var19 = var_n18->type->type_table[cltype20] == idtype21;
 if (!var19) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 580);
-exit(1);
+show_backtrace(1);
 }
 var22 = self->attrs[COLOR_parser_nodes__AStdClassdef___n_superclasses].val; /* _n_superclasses on <self:AStdClassdef> */
 if (var22 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_superclasses");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 581);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var22->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var22, var_n18) /* add on <var22:ANodes[ASuperclass]>*/;
 ((void (*)(val*, val*))(var_n18->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n18, self) /* parent= on <var_n18:Object(ASuperclass)>*/;
@@ -2349,13 +2346,13 @@ var28 = var_n27->type->type_table[cltype29] == idtype30;
 if (!var28) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 585);
-exit(1);
+show_backtrace(1);
 }
 var31 = self->attrs[COLOR_parser_nodes__AClassdef___n_propdefs].val; /* _n_propdefs on <self:AStdClassdef> */
 if (var31 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_propdefs");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 586);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var31->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var31, var_n27) /* add on <var31:ANodes[APropdef]>*/;
 ((void (*)(val*, val*))(var_n27->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n27, self) /* parent= on <var_n27:Object(APropdef)>*/;
@@ -2366,13 +2363,13 @@ BREAK_label32: (void)0;
 if (var_n_kwend == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 589);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AStdClassdef___n_kwend].val = var_n_kwend; /* _n_kwend on <self:AStdClassdef> */
 if (var_n_kwend == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 590);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_kwend->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_kwend, self) /* parent= on <var_n_kwend:nullable TKwend>*/;
 }
@@ -2539,7 +2536,7 @@ var4 = var_new_child->type->type_table[cltype] == idtype;
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 598);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AStdClassdef___n_doc].val = var_new_child; /* _n_doc on <self:AStdClassdef> */
 } else {
@@ -2575,7 +2572,7 @@ var10 = var_new_child->type->type_table[cltype11] == idtype12;
 if (!var10) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 608);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AStdClassdef___n_kwredef].val = var_new_child; /* _n_kwredef on <self:AStdClassdef> */
 } else {
@@ -2589,7 +2586,7 @@ var14 = self->attrs[COLOR_parser_nodes__AStdClassdef___n_visibility].val; /* _n_
 if (var14 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_visibility");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 615);
-exit(1);
+show_backtrace(1);
 }
 var15 = ((short int (*)(val*, val*))(var14->class->vft[COLOR_kernel__Object___61d_61d]))(var14, var_old_child) /* == on <var14:AVisibility>*/;
 if (var15){
@@ -2612,13 +2609,13 @@ var18 = var_new_child->type->type_table[cltype19] == idtype20;
 if (!var18) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 618);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AStdClassdef___n_visibility].val = var_new_child; /* _n_visibility on <self:AStdClassdef> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 621);
-exit(1);
+show_backtrace(1);
 }
 goto RET_LABEL;
 } else {
@@ -2627,7 +2624,7 @@ var21 = self->attrs[COLOR_parser_nodes__AStdClassdef___n_classkind].val; /* _n_c
 if (var21 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_classkind");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 625);
-exit(1);
+show_backtrace(1);
 }
 var22 = ((short int (*)(val*, val*))(var21->class->vft[COLOR_kernel__Object___61d_61d]))(var21, var_old_child) /* == on <var21:AClasskind>*/;
 if (var22){
@@ -2650,13 +2647,13 @@ var25 = var_new_child->type->type_table[cltype26] == idtype27;
 if (!var25) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 628);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AStdClassdef___n_classkind].val = var_new_child; /* _n_classkind on <self:AStdClassdef> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 631);
-exit(1);
+show_backtrace(1);
 }
 goto RET_LABEL;
 } else {
@@ -2687,7 +2684,7 @@ var32 = var_new_child->type->type_table[cltype33] == idtype34;
 if (!var32) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 638);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AStdClassdef___n_id].val = var_new_child; /* _n_id on <self:AStdClassdef> */
 } else {
@@ -2703,13 +2700,12 @@ var38 = self->attrs[COLOR_parser_nodes__AStdClassdef___n_formaldefs].val; /* _n_
 if (var38 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_formaldefs");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 645);
-exit(1);
+show_backtrace(1);
 }
 var39 = ((long (*)(val*))(var38->class->vft[COLOR_abstract_collection__Collection__length]))(var38) /* length on <var38:ANodes[AFormaldef]>*/;
 var40 = BOX_kernel__Int(var37); /* autobox from Int to Discrete */
 var41 = BOX_kernel__Int(var39); /* autobox from Int to Discrete */
 ((void (*)(val*, val*, val*))(var36->class->vft[COLOR_range__Range__without_last]))(var36, var40, var41) /* without_last on <var36:Range[Int]>*/;
-CHECK_NEW_range__Range(var36);
 var42 = ((val* (*)(val*))(var36->class->vft[COLOR_abstract_collection__Collection__iterator]))(var36) /* iterator on <var36:Range[Int]>*/;
 for(;;) {
 var43 = ((short int (*)(val*))(var42->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var42) /* is_ok on <var42:Iterator[nullable Object]>*/;
@@ -2721,7 +2717,7 @@ var46 = self->attrs[COLOR_parser_nodes__AStdClassdef___n_formaldefs].val; /* _n_
 if (var46 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_formaldefs");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 646);
-exit(1);
+show_backtrace(1);
 }
 var47 = ((val* (*)(val*, long))(var46->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var46, var_i) /* [] on <var46:ANodes[AFormaldef]>*/;
 var48 = ((short int (*)(val*, val*))(var47->class->vft[COLOR_kernel__Object___61d_61d]))(var47, var_old_child) /* == on <var47:nullable Object(AFormaldef)>*/;
@@ -2744,13 +2740,13 @@ var51 = var_new_child->type->type_table[cltype52] == idtype53;
 if (!var51) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 648);
-exit(1);
+show_backtrace(1);
 }
 var54 = self->attrs[COLOR_parser_nodes__AStdClassdef___n_formaldefs].val; /* _n_formaldefs on <self:AStdClassdef> */
 if (var54 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_formaldefs");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 649);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, long, val*))(var54->class->vft[COLOR_abstract_collection__Sequence___91d_93d_61d]))(var54, var_i, var_new_child) /* []= on <var54:ANodes[AFormaldef]>*/;
 ((void (*)(val*, val*))(var_new_child->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_new_child, self) /* parent= on <var_new_child:nullable ANode(AFormaldef)>*/;
@@ -2759,7 +2755,7 @@ var55 = self->attrs[COLOR_parser_nodes__AStdClassdef___n_formaldefs].val; /* _n_
 if (var55 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_formaldefs");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 652);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, long))(var55->class->vft[COLOR_abstract_collection__Sequence__remove_at]))(var55, var_i) /* remove_at on <var55:ANodes[AFormaldef]>*/;
 }
@@ -2796,7 +2792,7 @@ var60 = var_new_child->type->type_table[cltype61] == idtype62;
 if (!var60) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 660);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__Prod___n_annotations].val = var_new_child; /* _n_annotations on <self:AStdClassdef> */
 } else {
@@ -2832,7 +2828,7 @@ var68 = var_new_child->type->type_table[cltype69] == idtype70;
 if (!var68) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 670);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AStdClassdef___n_extern_code_block].val = var_new_child; /* _n_extern_code_block on <self:AStdClassdef> */
 } else {
@@ -2848,13 +2844,12 @@ var74 = self->attrs[COLOR_parser_nodes__AStdClassdef___n_superclasses].val; /* _
 if (var74 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_superclasses");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 677);
-exit(1);
+show_backtrace(1);
 }
 var75 = ((long (*)(val*))(var74->class->vft[COLOR_abstract_collection__Collection__length]))(var74) /* length on <var74:ANodes[ASuperclass]>*/;
 var76 = BOX_kernel__Int(var73); /* autobox from Int to Discrete */
 var77 = BOX_kernel__Int(var75); /* autobox from Int to Discrete */
 ((void (*)(val*, val*, val*))(var72->class->vft[COLOR_range__Range__without_last]))(var72, var76, var77) /* without_last on <var72:Range[Int]>*/;
-CHECK_NEW_range__Range(var72);
 var78 = ((val* (*)(val*))(var72->class->vft[COLOR_abstract_collection__Collection__iterator]))(var72) /* iterator on <var72:Range[Int]>*/;
 for(;;) {
 var79 = ((short int (*)(val*))(var78->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var78) /* is_ok on <var78:Iterator[nullable Object]>*/;
@@ -2866,7 +2861,7 @@ var83 = self->attrs[COLOR_parser_nodes__AStdClassdef___n_superclasses].val; /* _
 if (var83 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_superclasses");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 678);
-exit(1);
+show_backtrace(1);
 }
 var84 = ((val* (*)(val*, long))(var83->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var83, var_i81) /* [] on <var83:ANodes[ASuperclass]>*/;
 var85 = ((short int (*)(val*, val*))(var84->class->vft[COLOR_kernel__Object___61d_61d]))(var84, var_old_child) /* == on <var84:nullable Object(ASuperclass)>*/;
@@ -2889,13 +2884,13 @@ var88 = var_new_child->type->type_table[cltype89] == idtype90;
 if (!var88) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 680);
-exit(1);
+show_backtrace(1);
 }
 var91 = self->attrs[COLOR_parser_nodes__AStdClassdef___n_superclasses].val; /* _n_superclasses on <self:AStdClassdef> */
 if (var91 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_superclasses");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 681);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, long, val*))(var91->class->vft[COLOR_abstract_collection__Sequence___91d_93d_61d]))(var91, var_i81, var_new_child) /* []= on <var91:ANodes[ASuperclass]>*/;
 ((void (*)(val*, val*))(var_new_child->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_new_child, self) /* parent= on <var_new_child:nullable ANode(ASuperclass)>*/;
@@ -2904,7 +2899,7 @@ var92 = self->attrs[COLOR_parser_nodes__AStdClassdef___n_superclasses].val; /* _
 if (var92 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_superclasses");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 684);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, long))(var92->class->vft[COLOR_abstract_collection__Sequence__remove_at]))(var92, var_i81) /* remove_at on <var92:ANodes[ASuperclass]>*/;
 }
@@ -2921,13 +2916,12 @@ var96 = self->attrs[COLOR_parser_nodes__AClassdef___n_propdefs].val; /* _n_propd
 if (var96 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_propdefs");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 689);
-exit(1);
+show_backtrace(1);
 }
 var97 = ((long (*)(val*))(var96->class->vft[COLOR_abstract_collection__Collection__length]))(var96) /* length on <var96:ANodes[APropdef]>*/;
 var98 = BOX_kernel__Int(var95); /* autobox from Int to Discrete */
 var99 = BOX_kernel__Int(var97); /* autobox from Int to Discrete */
 ((void (*)(val*, val*, val*))(var94->class->vft[COLOR_range__Range__without_last]))(var94, var98, var99) /* without_last on <var94:Range[Int]>*/;
-CHECK_NEW_range__Range(var94);
 var100 = ((val* (*)(val*))(var94->class->vft[COLOR_abstract_collection__Collection__iterator]))(var94) /* iterator on <var94:Range[Int]>*/;
 for(;;) {
 var101 = ((short int (*)(val*))(var100->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var100) /* is_ok on <var100:Iterator[nullable Object]>*/;
@@ -2939,7 +2933,7 @@ var105 = self->attrs[COLOR_parser_nodes__AClassdef___n_propdefs].val; /* _n_prop
 if (var105 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_propdefs");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 690);
-exit(1);
+show_backtrace(1);
 }
 var106 = ((val* (*)(val*, long))(var105->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var105, var_i103) /* [] on <var105:ANodes[APropdef]>*/;
 var107 = ((short int (*)(val*, val*))(var106->class->vft[COLOR_kernel__Object___61d_61d]))(var106, var_old_child) /* == on <var106:nullable Object(APropdef)>*/;
@@ -2962,13 +2956,13 @@ var110 = var_new_child->type->type_table[cltype111] == idtype112;
 if (!var110) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 692);
-exit(1);
+show_backtrace(1);
 }
 var113 = self->attrs[COLOR_parser_nodes__AClassdef___n_propdefs].val; /* _n_propdefs on <self:AStdClassdef> */
 if (var113 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_propdefs");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 693);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, long, val*))(var113->class->vft[COLOR_abstract_collection__Sequence___91d_93d_61d]))(var113, var_i103, var_new_child) /* []= on <var113:ANodes[APropdef]>*/;
 ((void (*)(val*, val*))(var_new_child->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_new_child, self) /* parent= on <var_new_child:nullable ANode(APropdef)>*/;
@@ -2977,7 +2971,7 @@ var114 = self->attrs[COLOR_parser_nodes__AClassdef___n_propdefs].val; /* _n_prop
 if (var114 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_propdefs");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 696);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, long))(var114->class->vft[COLOR_abstract_collection__Sequence__remove_at]))(var114, var_i103) /* remove_at on <var114:ANodes[APropdef]>*/;
 }
@@ -2992,7 +2986,7 @@ var116 = self->attrs[COLOR_parser_nodes__AStdClassdef___n_kwend].val; /* _n_kwen
 if (var116 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwend");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 701);
-exit(1);
+show_backtrace(1);
 }
 var117 = ((short int (*)(val*, val*))(var116->class->vft[COLOR_kernel__Object___61d_61d]))(var116, var_old_child) /* == on <var116:TKwend>*/;
 if (var117){
@@ -3015,13 +3009,13 @@ var120 = var_new_child->type->type_table[cltype121] == idtype122;
 if (!var120) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 704);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AStdClassdef___n_kwend].val = var_new_child; /* _n_kwend on <self:AStdClassdef> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 707);
-exit(1);
+show_backtrace(1);
 }
 goto RET_LABEL;
 } else {
@@ -3246,7 +3240,7 @@ var3 = self->attrs[COLOR_parser_nodes__AStdClassdef___n_doc].val; /* _n_doc on <
 if (var3 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 768);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var3) /* enter_visit on <var_v:Visitor>*/;
 } else {
@@ -3263,7 +3257,7 @@ var7 = self->attrs[COLOR_parser_nodes__AStdClassdef___n_kwredef].val; /* _n_kwre
 if (var7 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 771);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var7) /* enter_visit on <var_v:Visitor>*/;
 } else {
@@ -3272,14 +3266,14 @@ var8 = self->attrs[COLOR_parser_nodes__AStdClassdef___n_visibility].val; /* _n_v
 if (var8 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_visibility");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 773);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var8) /* enter_visit on <var_v:Visitor>*/;
 var9 = self->attrs[COLOR_parser_nodes__AStdClassdef___n_classkind].val; /* _n_classkind on <self:AStdClassdef> */
 if (var9 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_classkind");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 774);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var9) /* enter_visit on <var_v:Visitor>*/;
 var10 = self->attrs[COLOR_parser_nodes__AStdClassdef___n_id].val; /* _n_id on <self:AStdClassdef> */
@@ -3294,7 +3288,7 @@ var13 = self->attrs[COLOR_parser_nodes__AStdClassdef___n_id].val; /* _n_id on <s
 if (var13 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 776);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var13) /* enter_visit on <var_v:Visitor>*/;
 } else {
@@ -3303,7 +3297,7 @@ var14 = self->attrs[COLOR_parser_nodes__AStdClassdef___n_formaldefs].val; /* _n_
 if (var14 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_formaldefs");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 778);
-exit(1);
+show_backtrace(1);
 }
 var15 = ((val* (*)(val*))(var14->class->vft[COLOR_abstract_collection__Collection__iterator]))(var14) /* iterator on <var14:ANodes[AFormaldef]>*/;
 for(;;) {
@@ -3328,7 +3322,7 @@ var21 = self->attrs[COLOR_parser_nodes__Prod___n_annotations].val; /* _n_annotat
 if (var21 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 782);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var21) /* enter_visit on <var_v:Visitor>*/;
 } else {
@@ -3345,7 +3339,7 @@ var25 = self->attrs[COLOR_parser_nodes__AStdClassdef___n_extern_code_block].val;
 if (var25 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 785);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var25) /* enter_visit on <var_v:Visitor>*/;
 } else {
@@ -3354,7 +3348,7 @@ var26 = self->attrs[COLOR_parser_nodes__AStdClassdef___n_superclasses].val; /* _
 if (var26 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_superclasses");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 787);
-exit(1);
+show_backtrace(1);
 }
 var27 = ((val* (*)(val*))(var26->class->vft[COLOR_abstract_collection__Collection__iterator]))(var26) /* iterator on <var26:ANodes[ASuperclass]>*/;
 for(;;) {
@@ -3371,7 +3365,7 @@ var32 = self->attrs[COLOR_parser_nodes__AClassdef___n_propdefs].val; /* _n_propd
 if (var32 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_propdefs");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 790);
-exit(1);
+show_backtrace(1);
 }
 var33 = ((val* (*)(val*))(var32->class->vft[COLOR_abstract_collection__Collection__iterator]))(var32) /* iterator on <var32:ANodes[APropdef]>*/;
 for(;;) {
@@ -3388,7 +3382,7 @@ var38 = self->attrs[COLOR_parser_nodes__AStdClassdef___n_kwend].val; /* _n_kwend
 if (var38 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwend");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 793);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var38) /* enter_visit on <var_v:Visitor>*/;
 RET_LABEL:;
@@ -3437,13 +3431,13 @@ var3 = var_n->type->type_table[cltype] == idtype;
 if (!var3) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 805);
-exit(1);
+show_backtrace(1);
 }
 var4 = self->attrs[COLOR_parser_nodes__AClassdef___n_propdefs].val; /* _n_propdefs on <self:ATopClassdef> */
 if (var4 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_propdefs");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 806);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var4->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var4, var_n) /* add on <var4:ANodes[APropdef]>*/;
 ((void (*)(val*, val*))(var_n->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n, self) /* parent= on <var_n:Object(APropdef)>*/;
@@ -3491,13 +3485,12 @@ var2 = self->attrs[COLOR_parser_nodes__AClassdef___n_propdefs].val; /* _n_propde
 if (var2 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_propdefs");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 813);
-exit(1);
+show_backtrace(1);
 }
 var3 = ((long (*)(val*))(var2->class->vft[COLOR_abstract_collection__Collection__length]))(var2) /* length on <var2:ANodes[APropdef]>*/;
 var4 = BOX_kernel__Int(var1); /* autobox from Int to Discrete */
 var5 = BOX_kernel__Int(var3); /* autobox from Int to Discrete */
 ((void (*)(val*, val*, val*))(var->class->vft[COLOR_range__Range__without_last]))(var, var4, var5) /* without_last on <var:Range[Int]>*/;
-CHECK_NEW_range__Range(var);
 var6 = ((val* (*)(val*))(var->class->vft[COLOR_abstract_collection__Collection__iterator]))(var) /* iterator on <var:Range[Int]>*/;
 for(;;) {
 var7 = ((short int (*)(val*))(var6->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var6) /* is_ok on <var6:Iterator[nullable Object]>*/;
@@ -3509,7 +3502,7 @@ var10 = self->attrs[COLOR_parser_nodes__AClassdef___n_propdefs].val; /* _n_propd
 if (var10 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_propdefs");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 814);
-exit(1);
+show_backtrace(1);
 }
 var11 = ((val* (*)(val*, long))(var10->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var10, var_i) /* [] on <var10:ANodes[APropdef]>*/;
 var12 = ((short int (*)(val*, val*))(var11->class->vft[COLOR_kernel__Object___61d_61d]))(var11, var_old_child) /* == on <var11:nullable Object(APropdef)>*/;
@@ -3532,13 +3525,13 @@ var15 = var_new_child->type->type_table[cltype] == idtype;
 if (!var15) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 816);
-exit(1);
+show_backtrace(1);
 }
 var16 = self->attrs[COLOR_parser_nodes__AClassdef___n_propdefs].val; /* _n_propdefs on <self:ATopClassdef> */
 if (var16 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_propdefs");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 817);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, long, val*))(var16->class->vft[COLOR_abstract_collection__Sequence___91d_93d_61d]))(var16, var_i, var_new_child) /* []= on <var16:ANodes[APropdef]>*/;
 ((void (*)(val*, val*))(var_new_child->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_new_child, self) /* parent= on <var_new_child:nullable ANode(APropdef)>*/;
@@ -3547,7 +3540,7 @@ var17 = self->attrs[COLOR_parser_nodes__AClassdef___n_propdefs].val; /* _n_propd
 if (var17 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_propdefs");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 820);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, long))(var17->class->vft[COLOR_abstract_collection__Sequence__remove_at]))(var17, var_i) /* remove_at on <var17:ANodes[APropdef]>*/;
 }
@@ -3578,7 +3571,7 @@ var = self->attrs[COLOR_parser_nodes__AClassdef___n_propdefs].val; /* _n_propdef
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_propdefs");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 831);
-exit(1);
+show_backtrace(1);
 }
 var1 = ((val* (*)(val*))(var->class->vft[COLOR_abstract_collection__Collection__iterator]))(var) /* iterator on <var:ANodes[APropdef]>*/;
 for(;;) {
@@ -3637,13 +3630,13 @@ var3 = var_n->type->type_table[cltype] == idtype;
 if (!var3) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 845);
-exit(1);
+show_backtrace(1);
 }
 var4 = self->attrs[COLOR_parser_nodes__AClassdef___n_propdefs].val; /* _n_propdefs on <self:AMainClassdef> */
 if (var4 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_propdefs");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 846);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var4->class->vft[COLOR_abstract_collection__SimpleCollection__add]))(var4, var_n) /* add on <var4:ANodes[APropdef]>*/;
 ((void (*)(val*, val*))(var_n->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n, self) /* parent= on <var_n:Object(APropdef)>*/;
@@ -3691,13 +3684,12 @@ var2 = self->attrs[COLOR_parser_nodes__AClassdef___n_propdefs].val; /* _n_propde
 if (var2 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_propdefs");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 853);
-exit(1);
+show_backtrace(1);
 }
 var3 = ((long (*)(val*))(var2->class->vft[COLOR_abstract_collection__Collection__length]))(var2) /* length on <var2:ANodes[APropdef]>*/;
 var4 = BOX_kernel__Int(var1); /* autobox from Int to Discrete */
 var5 = BOX_kernel__Int(var3); /* autobox from Int to Discrete */
 ((void (*)(val*, val*, val*))(var->class->vft[COLOR_range__Range__without_last]))(var, var4, var5) /* without_last on <var:Range[Int]>*/;
-CHECK_NEW_range__Range(var);
 var6 = ((val* (*)(val*))(var->class->vft[COLOR_abstract_collection__Collection__iterator]))(var) /* iterator on <var:Range[Int]>*/;
 for(;;) {
 var7 = ((short int (*)(val*))(var6->class->vft[COLOR_abstract_collection__Iterator__is_ok]))(var6) /* is_ok on <var6:Iterator[nullable Object]>*/;
@@ -3709,7 +3701,7 @@ var10 = self->attrs[COLOR_parser_nodes__AClassdef___n_propdefs].val; /* _n_propd
 if (var10 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_propdefs");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 854);
-exit(1);
+show_backtrace(1);
 }
 var11 = ((val* (*)(val*, long))(var10->class->vft[COLOR_abstract_collection__SequenceRead___91d_93d]))(var10, var_i) /* [] on <var10:ANodes[APropdef]>*/;
 var12 = ((short int (*)(val*, val*))(var11->class->vft[COLOR_kernel__Object___61d_61d]))(var11, var_old_child) /* == on <var11:nullable Object(APropdef)>*/;
@@ -3732,13 +3724,13 @@ var15 = var_new_child->type->type_table[cltype] == idtype;
 if (!var15) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 856);
-exit(1);
+show_backtrace(1);
 }
 var16 = self->attrs[COLOR_parser_nodes__AClassdef___n_propdefs].val; /* _n_propdefs on <self:AMainClassdef> */
 if (var16 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_propdefs");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 857);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, long, val*))(var16->class->vft[COLOR_abstract_collection__Sequence___91d_93d_61d]))(var16, var_i, var_new_child) /* []= on <var16:ANodes[APropdef]>*/;
 ((void (*)(val*, val*))(var_new_child->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_new_child, self) /* parent= on <var_new_child:nullable ANode(APropdef)>*/;
@@ -3747,7 +3739,7 @@ var17 = self->attrs[COLOR_parser_nodes__AClassdef___n_propdefs].val; /* _n_propd
 if (var17 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_propdefs");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 860);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, long))(var17->class->vft[COLOR_abstract_collection__Sequence__remove_at]))(var17, var_i) /* remove_at on <var17:ANodes[APropdef]>*/;
 }
@@ -3778,7 +3770,7 @@ var = self->attrs[COLOR_parser_nodes__AClassdef___n_propdefs].val; /* _n_propdef
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_propdefs");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 871);
-exit(1);
+show_backtrace(1);
 }
 var1 = ((val* (*)(val*))(var->class->vft[COLOR_abstract_collection__Collection__iterator]))(var) /* iterator on <var:ANodes[APropdef]>*/;
 for(;;) {
@@ -3815,13 +3807,13 @@ var_n_kwclass = p0;
 if (var_n_kwclass == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 884);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AConcreteClasskind___n_kwclass].val = var_n_kwclass; /* _n_kwclass on <self:AConcreteClasskind> */
 if (var_n_kwclass == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 885);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_kwclass->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_kwclass, self) /* parent= on <var_n_kwclass:nullable TKwclass>*/;
 }
@@ -3849,7 +3841,7 @@ var = self->attrs[COLOR_parser_nodes__AConcreteClasskind___n_kwclass].val; /* _n
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwclass");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 890);
-exit(1);
+show_backtrace(1);
 }
 var1 = ((short int (*)(val*, val*))(var->class->vft[COLOR_kernel__Object___61d_61d]))(var, var_old_child) /* == on <var:TKwclass>*/;
 if (var1){
@@ -3872,13 +3864,13 @@ var4 = var_new_child->type->type_table[cltype] == idtype;
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 893);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AConcreteClasskind___n_kwclass].val = var_new_child; /* _n_kwclass on <self:AConcreteClasskind> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 896);
-exit(1);
+show_backtrace(1);
 }
 goto RET_LABEL;
 } else {
@@ -3912,7 +3904,7 @@ var = self->attrs[COLOR_parser_nodes__AConcreteClasskind___n_kwclass].val; /* _n
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwclass");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 911);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var) /* enter_visit on <var_v:Visitor>*/;
 RET_LABEL:;
@@ -3941,26 +3933,26 @@ var_n_kwclass = p1;
 if (var_n_kwabstract == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 923);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AAbstractClasskind___n_kwabstract].val = var_n_kwabstract; /* _n_kwabstract on <self:AAbstractClasskind> */
 if (var_n_kwabstract == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 924);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_kwabstract->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_kwabstract, self) /* parent= on <var_n_kwabstract:nullable TKwabstract>*/;
 }
 if (var_n_kwclass == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 925);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AAbstractClasskind___n_kwclass].val = var_n_kwclass; /* _n_kwclass on <self:AAbstractClasskind> */
 if (var_n_kwclass == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 926);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_kwclass->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_kwclass, self) /* parent= on <var_n_kwclass:nullable TKwclass>*/;
 }
@@ -3995,7 +3987,7 @@ var = self->attrs[COLOR_parser_nodes__AAbstractClasskind___n_kwabstract].val; /*
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwabstract");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 931);
-exit(1);
+show_backtrace(1);
 }
 var1 = ((short int (*)(val*, val*))(var->class->vft[COLOR_kernel__Object___61d_61d]))(var, var_old_child) /* == on <var:TKwabstract>*/;
 if (var1){
@@ -4018,13 +4010,13 @@ var4 = var_new_child->type->type_table[cltype] == idtype;
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 934);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AAbstractClasskind___n_kwabstract].val = var_new_child; /* _n_kwabstract on <self:AAbstractClasskind> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 937);
-exit(1);
+show_backtrace(1);
 }
 goto RET_LABEL;
 } else {
@@ -4033,7 +4025,7 @@ var5 = self->attrs[COLOR_parser_nodes__AAbstractClasskind___n_kwclass].val; /* _
 if (var5 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwclass");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 941);
-exit(1);
+show_backtrace(1);
 }
 var6 = ((short int (*)(val*, val*))(var5->class->vft[COLOR_kernel__Object___61d_61d]))(var5, var_old_child) /* == on <var5:TKwclass>*/;
 if (var6){
@@ -4056,13 +4048,13 @@ var9 = var_new_child->type->type_table[cltype10] == idtype11;
 if (!var9) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 944);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AAbstractClasskind___n_kwclass].val = var_new_child; /* _n_kwclass on <self:AAbstractClasskind> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 947);
-exit(1);
+show_backtrace(1);
 }
 goto RET_LABEL;
 } else {
@@ -4110,14 +4102,14 @@ var = self->attrs[COLOR_parser_nodes__AAbstractClasskind___n_kwabstract].val; /*
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwabstract");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 967);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var) /* enter_visit on <var_v:Visitor>*/;
 var1 = self->attrs[COLOR_parser_nodes__AAbstractClasskind___n_kwclass].val; /* _n_kwclass on <self:AAbstractClasskind> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwclass");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 968);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var1) /* enter_visit on <var_v:Visitor>*/;
 RET_LABEL:;
@@ -4144,13 +4136,13 @@ var_n_kwinterface = p0;
 if (var_n_kwinterface == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 979);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AInterfaceClasskind___n_kwinterface].val = var_n_kwinterface; /* _n_kwinterface on <self:AInterfaceClasskind> */
 if (var_n_kwinterface == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 980);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_kwinterface->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_kwinterface, self) /* parent= on <var_n_kwinterface:nullable TKwinterface>*/;
 }
@@ -4178,7 +4170,7 @@ var = self->attrs[COLOR_parser_nodes__AInterfaceClasskind___n_kwinterface].val; 
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwinterface");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 985);
-exit(1);
+show_backtrace(1);
 }
 var1 = ((short int (*)(val*, val*))(var->class->vft[COLOR_kernel__Object___61d_61d]))(var, var_old_child) /* == on <var:TKwinterface>*/;
 if (var1){
@@ -4201,13 +4193,13 @@ var4 = var_new_child->type->type_table[cltype] == idtype;
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 988);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AInterfaceClasskind___n_kwinterface].val = var_new_child; /* _n_kwinterface on <self:AInterfaceClasskind> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 991);
-exit(1);
+show_backtrace(1);
 }
 goto RET_LABEL;
 } else {
@@ -4241,7 +4233,7 @@ var = self->attrs[COLOR_parser_nodes__AInterfaceClasskind___n_kwinterface].val; 
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwinterface");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1006);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var) /* enter_visit on <var_v:Visitor>*/;
 RET_LABEL:;
@@ -4268,13 +4260,13 @@ var_n_kwenum = p0;
 if (var_n_kwenum == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1017);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AEnumClasskind___n_kwenum].val = var_n_kwenum; /* _n_kwenum on <self:AEnumClasskind> */
 if (var_n_kwenum == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1018);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_kwenum->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_kwenum, self) /* parent= on <var_n_kwenum:nullable TKwenum>*/;
 }
@@ -4302,7 +4294,7 @@ var = self->attrs[COLOR_parser_nodes__AEnumClasskind___n_kwenum].val; /* _n_kwen
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwenum");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1023);
-exit(1);
+show_backtrace(1);
 }
 var1 = ((short int (*)(val*, val*))(var->class->vft[COLOR_kernel__Object___61d_61d]))(var, var_old_child) /* == on <var:TKwenum>*/;
 if (var1){
@@ -4325,13 +4317,13 @@ var4 = var_new_child->type->type_table[cltype] == idtype;
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1026);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AEnumClasskind___n_kwenum].val = var_new_child; /* _n_kwenum on <self:AEnumClasskind> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1029);
-exit(1);
+show_backtrace(1);
 }
 goto RET_LABEL;
 } else {
@@ -4365,7 +4357,7 @@ var = self->attrs[COLOR_parser_nodes__AEnumClasskind___n_kwenum].val; /* _n_kwen
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwenum");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1044);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var) /* enter_visit on <var_v:Visitor>*/;
 RET_LABEL:;
@@ -4396,13 +4388,13 @@ var_n_kwclass = p1;
 if (var_n_kwextern == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1056);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AExternClasskind___n_kwextern].val = var_n_kwextern; /* _n_kwextern on <self:AExternClasskind> */
 if (var_n_kwextern == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1057);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_kwextern->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_kwextern, self) /* parent= on <var_n_kwextern:nullable TKwextern>*/;
 }
@@ -4449,7 +4441,7 @@ var = self->attrs[COLOR_parser_nodes__AExternClasskind___n_kwextern].val; /* _n_
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwextern");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1066);
-exit(1);
+show_backtrace(1);
 }
 var1 = ((short int (*)(val*, val*))(var->class->vft[COLOR_kernel__Object___61d_61d]))(var, var_old_child) /* == on <var:TKwextern>*/;
 if (var1){
@@ -4472,13 +4464,13 @@ var4 = var_new_child->type->type_table[cltype] == idtype;
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1069);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AExternClasskind___n_kwextern].val = var_new_child; /* _n_kwextern on <self:AExternClasskind> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1072);
-exit(1);
+show_backtrace(1);
 }
 goto RET_LABEL;
 } else {
@@ -4509,7 +4501,7 @@ var9 = var_new_child->type->type_table[cltype10] == idtype11;
 if (!var9) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1079);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AExternClasskind___n_kwclass].val = var_new_child; /* _n_kwclass on <self:AExternClasskind> */
 } else {
@@ -4576,7 +4568,7 @@ var = self->attrs[COLOR_parser_nodes__AExternClasskind___n_kwextern].val; /* _n_
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwextern");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1104);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var) /* enter_visit on <var_v:Visitor>*/;
 var1 = self->attrs[COLOR_parser_nodes__AExternClasskind___n_kwclass].val; /* _n_kwclass on <self:AExternClasskind> */
@@ -4591,7 +4583,7 @@ var4 = self->attrs[COLOR_parser_nodes__AExternClasskind___n_kwclass].val; /* _n_
 if (var4 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1106);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var4) /* enter_visit on <var_v:Visitor>*/;
 } else {
@@ -4628,13 +4620,13 @@ var_n_annotations = p2;
 if (var_n_id == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1120);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AFormaldef___n_id].val = var_n_id; /* _n_id on <self:AFormaldef> */
 if (var_n_id == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1121);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_id->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_id, self) /* parent= on <var_n_id:nullable TClassid>*/;
 }
@@ -4700,7 +4692,7 @@ var = self->attrs[COLOR_parser_nodes__AFormaldef___n_id].val; /* _n_id on <self:
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_id");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1134);
-exit(1);
+show_backtrace(1);
 }
 var1 = ((short int (*)(val*, val*))(var->class->vft[COLOR_kernel__Object___61d_61d]))(var, var_old_child) /* == on <var:TClassid>*/;
 if (var1){
@@ -4723,13 +4715,13 @@ var4 = var_new_child->type->type_table[cltype] == idtype;
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1137);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AFormaldef___n_id].val = var_new_child; /* _n_id on <self:AFormaldef> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1140);
-exit(1);
+show_backtrace(1);
 }
 goto RET_LABEL;
 } else {
@@ -4760,7 +4752,7 @@ var9 = var_new_child->type->type_table[cltype10] == idtype11;
 if (!var9) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1147);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AFormaldef___n_type].val = var_new_child; /* _n_type on <self:AFormaldef> */
 } else {
@@ -4796,7 +4788,7 @@ var17 = var_new_child->type->type_table[cltype18] == idtype19;
 if (!var17) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1157);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__Prod___n_annotations].val = var_new_child; /* _n_annotations on <self:AFormaldef> */
 } else {
@@ -4891,7 +4883,7 @@ var = self->attrs[COLOR_parser_nodes__AFormaldef___n_id].val; /* _n_id on <self:
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_id");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1189);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var) /* enter_visit on <var_v:Visitor>*/;
 var1 = self->attrs[COLOR_parser_nodes__AFormaldef___n_type].val; /* _n_type on <self:AFormaldef> */
@@ -4906,7 +4898,7 @@ var4 = self->attrs[COLOR_parser_nodes__AFormaldef___n_type].val; /* _n_type on <
 if (var4 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1191);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var4) /* enter_visit on <var_v:Visitor>*/;
 } else {
@@ -4923,7 +4915,7 @@ var8 = self->attrs[COLOR_parser_nodes__Prod___n_annotations].val; /* _n_annotati
 if (var8 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1194);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var8) /* enter_visit on <var_v:Visitor>*/;
 } else {
@@ -4958,26 +4950,26 @@ var_n_annotations = p2;
 if (var_n_kwsuper == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1208);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__ASuperclass___n_kwsuper].val = var_n_kwsuper; /* _n_kwsuper on <self:ASuperclass> */
 if (var_n_kwsuper == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1209);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_kwsuper->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_kwsuper, self) /* parent= on <var_n_kwsuper:nullable TKwsuper>*/;
 }
 if (var_n_type == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1210);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__ASuperclass___n_type].val = var_n_type; /* _n_type on <self:ASuperclass> */
 if (var_n_type == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1211);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_type->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_type, self) /* parent= on <var_n_type:nullable AType>*/;
 }
@@ -5031,7 +5023,7 @@ var = self->attrs[COLOR_parser_nodes__ASuperclass___n_kwsuper].val; /* _n_kwsupe
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwsuper");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1220);
-exit(1);
+show_backtrace(1);
 }
 var1 = ((short int (*)(val*, val*))(var->class->vft[COLOR_kernel__Object___61d_61d]))(var, var_old_child) /* == on <var:TKwsuper>*/;
 if (var1){
@@ -5054,13 +5046,13 @@ var4 = var_new_child->type->type_table[cltype] == idtype;
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1223);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__ASuperclass___n_kwsuper].val = var_new_child; /* _n_kwsuper on <self:ASuperclass> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1226);
-exit(1);
+show_backtrace(1);
 }
 goto RET_LABEL;
 } else {
@@ -5069,7 +5061,7 @@ var5 = self->attrs[COLOR_parser_nodes__ASuperclass___n_type].val; /* _n_type on 
 if (var5 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_type");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1230);
-exit(1);
+show_backtrace(1);
 }
 var6 = ((short int (*)(val*, val*))(var5->class->vft[COLOR_kernel__Object___61d_61d]))(var5, var_old_child) /* == on <var5:AType>*/;
 if (var6){
@@ -5092,13 +5084,13 @@ var9 = var_new_child->type->type_table[cltype10] == idtype11;
 if (!var9) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1233);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__ASuperclass___n_type].val = var_new_child; /* _n_type on <self:ASuperclass> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1236);
-exit(1);
+show_backtrace(1);
 }
 goto RET_LABEL;
 } else {
@@ -5129,7 +5121,7 @@ var16 = var_new_child->type->type_table[cltype17] == idtype18;
 if (!var16) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1243);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__Prod___n_annotations].val = var_new_child; /* _n_annotations on <self:ASuperclass> */
 } else {
@@ -5210,14 +5202,14 @@ var = self->attrs[COLOR_parser_nodes__ASuperclass___n_kwsuper].val; /* _n_kwsupe
 if (var == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwsuper");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1273);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var) /* enter_visit on <var_v:Visitor>*/;
 var1 = self->attrs[COLOR_parser_nodes__ASuperclass___n_type].val; /* _n_type on <self:ASuperclass> */
 if (var1 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_type");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1274);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var1) /* enter_visit on <var_v:Visitor>*/;
 var2 = self->attrs[COLOR_parser_nodes__Prod___n_annotations].val; /* _n_annotations on <self:ASuperclass> */
@@ -5232,7 +5224,7 @@ var5 = self->attrs[COLOR_parser_nodes__Prod___n_annotations].val; /* _n_annotati
 if (var5 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1276);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var5) /* enter_visit on <var_v:Visitor>*/;
 } else {
@@ -5343,26 +5335,26 @@ if (var7){
 if (var_n_visibility == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1314);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AAttrPropdef___n_visibility].val = var_n_visibility; /* _n_visibility on <self:AAttrPropdef> */
 if (var_n_visibility == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1315);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_visibility->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_visibility, self) /* parent= on <var_n_visibility:nullable AVisibility>*/;
 }
 if (var_n_kwvar == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1316);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AAttrPropdef___n_kwvar].val = var_n_kwvar; /* _n_kwvar on <self:AAttrPropdef> */
 if (var_n_kwvar == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1317);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_kwvar->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_kwvar, self) /* parent= on <var_n_kwvar:nullable TKwvar>*/;
 }
@@ -5546,7 +5538,7 @@ var4 = var_new_child->type->type_table[cltype] == idtype;
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1345);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__APropdef___n_doc].val = var_new_child; /* _n_doc on <self:AAttrPropdef> */
 } else {
@@ -5582,7 +5574,7 @@ var10 = var_new_child->type->type_table[cltype11] == idtype12;
 if (!var10) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1355);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AAttrPropdef___n_readable].val = var_new_child; /* _n_readable on <self:AAttrPropdef> */
 } else {
@@ -5618,7 +5610,7 @@ var18 = var_new_child->type->type_table[cltype19] == idtype20;
 if (!var18) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1365);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AAttrPropdef___n_writable].val = var_new_child; /* _n_writable on <self:AAttrPropdef> */
 } else {
@@ -5654,7 +5646,7 @@ var26 = var_new_child->type->type_table[cltype27] == idtype28;
 if (!var26) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1375);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AAttrPropdef___n_kwredef].val = var_new_child; /* _n_kwredef on <self:AAttrPropdef> */
 } else {
@@ -5668,7 +5660,7 @@ var30 = self->attrs[COLOR_parser_nodes__AAttrPropdef___n_visibility].val; /* _n_
 if (var30 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_visibility");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1382);
-exit(1);
+show_backtrace(1);
 }
 var31 = ((short int (*)(val*, val*))(var30->class->vft[COLOR_kernel__Object___61d_61d]))(var30, var_old_child) /* == on <var30:AVisibility>*/;
 if (var31){
@@ -5691,13 +5683,13 @@ var34 = var_new_child->type->type_table[cltype35] == idtype36;
 if (!var34) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1385);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AAttrPropdef___n_visibility].val = var_new_child; /* _n_visibility on <self:AAttrPropdef> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1388);
-exit(1);
+show_backtrace(1);
 }
 goto RET_LABEL;
 } else {
@@ -5706,7 +5698,7 @@ var37 = self->attrs[COLOR_parser_nodes__AAttrPropdef___n_kwvar].val; /* _n_kwvar
 if (var37 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwvar");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1392);
-exit(1);
+show_backtrace(1);
 }
 var38 = ((short int (*)(val*, val*))(var37->class->vft[COLOR_kernel__Object___61d_61d]))(var37, var_old_child) /* == on <var37:TKwvar>*/;
 if (var38){
@@ -5729,13 +5721,13 @@ var41 = var_new_child->type->type_table[cltype42] == idtype43;
 if (!var41) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1395);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AAttrPropdef___n_kwvar].val = var_new_child; /* _n_kwvar on <self:AAttrPropdef> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1398);
-exit(1);
+show_backtrace(1);
 }
 goto RET_LABEL;
 } else {
@@ -5766,7 +5758,7 @@ var48 = var_new_child->type->type_table[cltype49] == idtype50;
 if (!var48) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1405);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AAttrPropdef___n_id].val = var_new_child; /* _n_id on <self:AAttrPropdef> */
 } else {
@@ -5802,7 +5794,7 @@ var56 = var_new_child->type->type_table[cltype57] == idtype58;
 if (!var56) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1415);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AAttrPropdef___n_id2].val = var_new_child; /* _n_id2 on <self:AAttrPropdef> */
 } else {
@@ -5838,7 +5830,7 @@ var64 = var_new_child->type->type_table[cltype65] == idtype66;
 if (!var64) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1425);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AAttrPropdef___n_type].val = var_new_child; /* _n_type on <self:AAttrPropdef> */
 } else {
@@ -5874,7 +5866,7 @@ var72 = var_new_child->type->type_table[cltype73] == idtype74;
 if (!var72) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1435);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__Prod___n_annotations].val = var_new_child; /* _n_annotations on <self:AAttrPropdef> */
 } else {
@@ -5910,7 +5902,7 @@ var80 = var_new_child->type->type_table[cltype81] == idtype82;
 if (!var80) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1445);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AAttrPropdef___n_expr].val = var_new_child; /* _n_expr on <self:AAttrPropdef> */
 } else {
@@ -6223,7 +6215,7 @@ var3 = self->attrs[COLOR_parser_nodes__APropdef___n_doc].val; /* _n_doc on <self
 if (var3 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1532);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var3) /* enter_visit on <var_v:Visitor>*/;
 } else {
@@ -6240,7 +6232,7 @@ var7 = self->attrs[COLOR_parser_nodes__AAttrPropdef___n_readable].val; /* _n_rea
 if (var7 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1535);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var7) /* enter_visit on <var_v:Visitor>*/;
 } else {
@@ -6257,7 +6249,7 @@ var11 = self->attrs[COLOR_parser_nodes__AAttrPropdef___n_writable].val; /* _n_wr
 if (var11 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1538);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var11) /* enter_visit on <var_v:Visitor>*/;
 } else {
@@ -6274,7 +6266,7 @@ var15 = self->attrs[COLOR_parser_nodes__AAttrPropdef___n_kwredef].val; /* _n_kwr
 if (var15 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1541);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var15) /* enter_visit on <var_v:Visitor>*/;
 } else {
@@ -6283,14 +6275,14 @@ var16 = self->attrs[COLOR_parser_nodes__AAttrPropdef___n_visibility].val; /* _n_
 if (var16 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_visibility");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1543);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var16) /* enter_visit on <var_v:Visitor>*/;
 var17 = self->attrs[COLOR_parser_nodes__AAttrPropdef___n_kwvar].val; /* _n_kwvar on <self:AAttrPropdef> */
 if (var17 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwvar");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1544);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var17) /* enter_visit on <var_v:Visitor>*/;
 var18 = self->attrs[COLOR_parser_nodes__AAttrPropdef___n_id].val; /* _n_id on <self:AAttrPropdef> */
@@ -6305,7 +6297,7 @@ var21 = self->attrs[COLOR_parser_nodes__AAttrPropdef___n_id].val; /* _n_id on <s
 if (var21 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1546);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var21) /* enter_visit on <var_v:Visitor>*/;
 } else {
@@ -6322,7 +6314,7 @@ var25 = self->attrs[COLOR_parser_nodes__AAttrPropdef___n_id2].val; /* _n_id2 on 
 if (var25 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1549);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var25) /* enter_visit on <var_v:Visitor>*/;
 } else {
@@ -6339,7 +6331,7 @@ var29 = self->attrs[COLOR_parser_nodes__AAttrPropdef___n_type].val; /* _n_type o
 if (var29 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1552);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var29) /* enter_visit on <var_v:Visitor>*/;
 } else {
@@ -6356,7 +6348,7 @@ var33 = self->attrs[COLOR_parser_nodes__Prod___n_annotations].val; /* _n_annotat
 if (var33 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1555);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var33) /* enter_visit on <var_v:Visitor>*/;
 } else {
@@ -6373,7 +6365,7 @@ var37 = self->attrs[COLOR_parser_nodes__AAttrPropdef___n_expr].val; /* _n_expr o
 if (var37 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1558);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var37) /* enter_visit on <var_v:Visitor>*/;
 } else {
@@ -6436,39 +6428,39 @@ if (var3){
 if (var_n_visibility == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1582);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AMethPropdef___n_visibility].val = var_n_visibility; /* _n_visibility on <self:AMethPropdef> */
 if (var_n_visibility == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1583);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_visibility->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_visibility, self) /* parent= on <var_n_visibility:nullable AVisibility>*/;
 }
 if (var_n_methid == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1584);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AMethPropdef___n_methid].val = var_n_methid; /* _n_methid on <self:AMethPropdef> */
 if (var_n_methid == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1585);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_methid->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_methid, self) /* parent= on <var_n_methid:nullable AMethid>*/;
 }
 if (var_n_signature == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1586);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AMethPropdef___n_signature].val = var_n_signature; /* _n_signature on <self:AMethPropdef> */
 if (var_n_signature == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1587);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_signature->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_signature, self) /* parent= on <var_n_signature:nullable ASignature>*/;
 }
@@ -6548,7 +6540,7 @@ var4 = var_new_child->type->type_table[cltype] == idtype;
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1595);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__APropdef___n_doc].val = var_new_child; /* _n_doc on <self:AMethPropdef> */
 } else {
@@ -6584,7 +6576,7 @@ var10 = var_new_child->type->type_table[cltype11] == idtype12;
 if (!var10) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1605);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AMethPropdef___n_kwredef].val = var_new_child; /* _n_kwredef on <self:AMethPropdef> */
 } else {
@@ -6620,13 +6612,13 @@ var18 = var_new_child->type->type_table[cltype19] == idtype20;
 if (!var18) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1615);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AMethPropdef___n_visibility].val = var_new_child; /* _n_visibility on <self:AMethPropdef> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1618);
-exit(1);
+show_backtrace(1);
 }
 goto RET_LABEL;
 } else {
@@ -6657,13 +6649,13 @@ var25 = var_new_child->type->type_table[cltype26] == idtype27;
 if (!var25) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1625);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AMethPropdef___n_methid].val = var_new_child; /* _n_methid on <self:AMethPropdef> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1628);
-exit(1);
+show_backtrace(1);
 }
 goto RET_LABEL;
 } else {
@@ -6694,13 +6686,13 @@ var32 = var_new_child->type->type_table[cltype33] == idtype34;
 if (!var32) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1635);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AMethPropdef___n_signature].val = var_new_child; /* _n_signature on <self:AMethPropdef> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1638);
-exit(1);
+show_backtrace(1);
 }
 goto RET_LABEL;
 } else {
@@ -6768,7 +6760,7 @@ self->attrs[COLOR_parser_nodes__AMethPropdef___n_visibility].val = var_node; /* 
 if (var_node == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1661);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_node->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_node, self) /* parent= on <var_node:nullable AVisibility>*/;
 }
@@ -6787,7 +6779,7 @@ self->attrs[COLOR_parser_nodes__AMethPropdef___n_methid].val = var_node; /* _n_m
 if (var_node == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1666);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_node->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_node, self) /* parent= on <var_node:nullable AMethid>*/;
 }
@@ -6806,7 +6798,7 @@ self->attrs[COLOR_parser_nodes__AMethPropdef___n_signature].val = var_node; /* _
 if (var_node == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1671);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_node->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_node, self) /* parent= on <var_node:nullable ASignature>*/;
 }
@@ -6844,7 +6836,7 @@ var3 = self->attrs[COLOR_parser_nodes__APropdef___n_doc].val; /* _n_doc on <self
 if (var3 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1678);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var3) /* enter_visit on <var_v:Visitor>*/;
 } else {
@@ -6861,7 +6853,7 @@ var7 = self->attrs[COLOR_parser_nodes__AMethPropdef___n_kwredef].val; /* _n_kwre
 if (var7 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1681);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var7) /* enter_visit on <var_v:Visitor>*/;
 } else {
@@ -6936,52 +6928,52 @@ if (var3){
 if (var_n_visibility == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1710);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AMethPropdef___n_visibility].val = var_n_visibility; /* _n_visibility on <self:ADeferredMethPropdef> */
 if (var_n_visibility == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1711);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_visibility->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_visibility, self) /* parent= on <var_n_visibility:nullable AVisibility>*/;
 }
 if (var_n_kwmeth == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1712);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__ADeferredMethPropdef___n_kwmeth].val = var_n_kwmeth; /* _n_kwmeth on <self:ADeferredMethPropdef> */
 if (var_n_kwmeth == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1713);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_kwmeth->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_kwmeth, self) /* parent= on <var_n_kwmeth:nullable TKwmeth>*/;
 }
 if (var_n_methid == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1714);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AMethPropdef___n_methid].val = var_n_methid; /* _n_methid on <self:ADeferredMethPropdef> */
 if (var_n_methid == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1715);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_methid->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_methid, self) /* parent= on <var_n_methid:nullable AMethid>*/;
 }
 if (var_n_signature == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1716);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AMethPropdef___n_signature].val = var_n_signature; /* _n_signature on <self:ADeferredMethPropdef> */
 if (var_n_signature == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1717);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_signature->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_signature, self) /* parent= on <var_n_signature:nullable ASignature>*/;
 }
@@ -7087,7 +7079,7 @@ var4 = var_new_child->type->type_table[cltype] == idtype;
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1729);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__APropdef___n_doc].val = var_new_child; /* _n_doc on <self:ADeferredMethPropdef> */
 } else {
@@ -7123,7 +7115,7 @@ var10 = var_new_child->type->type_table[cltype11] == idtype12;
 if (!var10) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1739);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AMethPropdef___n_kwredef].val = var_new_child; /* _n_kwredef on <self:ADeferredMethPropdef> */
 } else {
@@ -7159,13 +7151,13 @@ var18 = var_new_child->type->type_table[cltype19] == idtype20;
 if (!var18) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1749);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AMethPropdef___n_visibility].val = var_new_child; /* _n_visibility on <self:ADeferredMethPropdef> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1752);
-exit(1);
+show_backtrace(1);
 }
 goto RET_LABEL;
 } else {
@@ -7174,7 +7166,7 @@ var21 = self->attrs[COLOR_parser_nodes__ADeferredMethPropdef___n_kwmeth].val; /*
 if (var21 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwmeth");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1756);
-exit(1);
+show_backtrace(1);
 }
 var22 = ((short int (*)(val*, val*))(var21->class->vft[COLOR_kernel__Object___61d_61d]))(var21, var_old_child) /* == on <var21:TKwmeth>*/;
 if (var22){
@@ -7197,13 +7189,13 @@ var25 = var_new_child->type->type_table[cltype26] == idtype27;
 if (!var25) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1759);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__ADeferredMethPropdef___n_kwmeth].val = var_new_child; /* _n_kwmeth on <self:ADeferredMethPropdef> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1762);
-exit(1);
+show_backtrace(1);
 }
 goto RET_LABEL;
 } else {
@@ -7234,13 +7226,13 @@ var32 = var_new_child->type->type_table[cltype33] == idtype34;
 if (!var32) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1769);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AMethPropdef___n_methid].val = var_new_child; /* _n_methid on <self:ADeferredMethPropdef> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1772);
-exit(1);
+show_backtrace(1);
 }
 goto RET_LABEL;
 } else {
@@ -7271,13 +7263,13 @@ var39 = var_new_child->type->type_table[cltype40] == idtype41;
 if (!var39) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1779);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AMethPropdef___n_signature].val = var_new_child; /* _n_signature on <self:ADeferredMethPropdef> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1782);
-exit(1);
+show_backtrace(1);
 }
 goto RET_LABEL;
 } else {
@@ -7308,7 +7300,7 @@ var46 = var_new_child->type->type_table[cltype47] == idtype48;
 if (!var46) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1789);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__Prod___n_annotations].val = var_new_child; /* _n_annotations on <self:ADeferredMethPropdef> */
 } else {
@@ -7381,7 +7373,7 @@ self->attrs[COLOR_parser_nodes__AMethPropdef___n_visibility].val = var_node; /* 
 if (var_node == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1815);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_node->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_node, self) /* parent= on <var_node:nullable AVisibility>*/;
 }
@@ -7413,7 +7405,7 @@ self->attrs[COLOR_parser_nodes__AMethPropdef___n_methid].val = var_node; /* _n_m
 if (var_node == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1825);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_node->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_node, self) /* parent= on <var_node:nullable AMethid>*/;
 }
@@ -7432,7 +7424,7 @@ self->attrs[COLOR_parser_nodes__AMethPropdef___n_signature].val = var_node; /* _
 if (var_node == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1830);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_node->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_node, self) /* parent= on <var_node:nullable ASignature>*/;
 }
@@ -7499,7 +7491,7 @@ var3 = self->attrs[COLOR_parser_nodes__APropdef___n_doc].val; /* _n_doc on <self
 if (var3 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1844);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var3) /* enter_visit on <var_v:Visitor>*/;
 } else {
@@ -7516,7 +7508,7 @@ var7 = self->attrs[COLOR_parser_nodes__AMethPropdef___n_kwredef].val; /* _n_kwre
 if (var7 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1847);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var7) /* enter_visit on <var_v:Visitor>*/;
 } else {
@@ -7527,7 +7519,7 @@ var9 = self->attrs[COLOR_parser_nodes__ADeferredMethPropdef___n_kwmeth].val; /* 
 if (var9 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwmeth");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1850);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var9) /* enter_visit on <var_v:Visitor>*/;
 var10 = self->attrs[COLOR_parser_nodes__AMethPropdef___n_methid].val; /* _n_methid on <self:ADeferredMethPropdef> */
@@ -7546,7 +7538,7 @@ var15 = self->attrs[COLOR_parser_nodes__Prod___n_annotations].val; /* _n_annotat
 if (var15 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1854);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var15) /* enter_visit on <var_v:Visitor>*/;
 } else {
@@ -7611,52 +7603,52 @@ if (var3){
 if (var_n_visibility == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1879);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AMethPropdef___n_visibility].val = var_n_visibility; /* _n_visibility on <self:AInternMethPropdef> */
 if (var_n_visibility == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1880);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_visibility->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_visibility, self) /* parent= on <var_n_visibility:nullable AVisibility>*/;
 }
 if (var_n_kwmeth == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1881);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AInternMethPropdef___n_kwmeth].val = var_n_kwmeth; /* _n_kwmeth on <self:AInternMethPropdef> */
 if (var_n_kwmeth == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1882);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_kwmeth->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_kwmeth, self) /* parent= on <var_n_kwmeth:nullable TKwmeth>*/;
 }
 if (var_n_methid == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1883);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AMethPropdef___n_methid].val = var_n_methid; /* _n_methid on <self:AInternMethPropdef> */
 if (var_n_methid == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1884);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_methid->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_methid, self) /* parent= on <var_n_methid:nullable AMethid>*/;
 }
 if (var_n_signature == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1885);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AMethPropdef___n_signature].val = var_n_signature; /* _n_signature on <self:AInternMethPropdef> */
 if (var_n_signature == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1886);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_signature->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_signature, self) /* parent= on <var_n_signature:nullable ASignature>*/;
 }
@@ -7743,7 +7735,7 @@ var4 = var_new_child->type->type_table[cltype] == idtype;
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1894);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__APropdef___n_doc].val = var_new_child; /* _n_doc on <self:AInternMethPropdef> */
 } else {
@@ -7779,7 +7771,7 @@ var10 = var_new_child->type->type_table[cltype11] == idtype12;
 if (!var10) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1904);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AMethPropdef___n_kwredef].val = var_new_child; /* _n_kwredef on <self:AInternMethPropdef> */
 } else {
@@ -7815,13 +7807,13 @@ var18 = var_new_child->type->type_table[cltype19] == idtype20;
 if (!var18) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1914);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AMethPropdef___n_visibility].val = var_new_child; /* _n_visibility on <self:AInternMethPropdef> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1917);
-exit(1);
+show_backtrace(1);
 }
 goto RET_LABEL;
 } else {
@@ -7830,7 +7822,7 @@ var21 = self->attrs[COLOR_parser_nodes__AInternMethPropdef___n_kwmeth].val; /* _
 if (var21 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwmeth");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1921);
-exit(1);
+show_backtrace(1);
 }
 var22 = ((short int (*)(val*, val*))(var21->class->vft[COLOR_kernel__Object___61d_61d]))(var21, var_old_child) /* == on <var21:TKwmeth>*/;
 if (var22){
@@ -7853,13 +7845,13 @@ var25 = var_new_child->type->type_table[cltype26] == idtype27;
 if (!var25) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1924);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AInternMethPropdef___n_kwmeth].val = var_new_child; /* _n_kwmeth on <self:AInternMethPropdef> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1927);
-exit(1);
+show_backtrace(1);
 }
 goto RET_LABEL;
 } else {
@@ -7890,13 +7882,13 @@ var32 = var_new_child->type->type_table[cltype33] == idtype34;
 if (!var32) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1934);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AMethPropdef___n_methid].val = var_new_child; /* _n_methid on <self:AInternMethPropdef> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1937);
-exit(1);
+show_backtrace(1);
 }
 goto RET_LABEL;
 } else {
@@ -7927,13 +7919,13 @@ var39 = var_new_child->type->type_table[cltype40] == idtype41;
 if (!var39) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1944);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AMethPropdef___n_signature].val = var_new_child; /* _n_signature on <self:AInternMethPropdef> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1947);
-exit(1);
+show_backtrace(1);
 }
 goto RET_LABEL;
 } else {
@@ -8001,7 +7993,7 @@ self->attrs[COLOR_parser_nodes__AMethPropdef___n_visibility].val = var_node; /* 
 if (var_node == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1970);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_node->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_node, self) /* parent= on <var_node:nullable AVisibility>*/;
 }
@@ -8033,7 +8025,7 @@ self->attrs[COLOR_parser_nodes__AMethPropdef___n_methid].val = var_node; /* _n_m
 if (var_node == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1980);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_node->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_node, self) /* parent= on <var_node:nullable AMethid>*/;
 }
@@ -8052,7 +8044,7 @@ self->attrs[COLOR_parser_nodes__AMethPropdef___n_signature].val = var_node; /* _
 if (var_node == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1985);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_node->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_node, self) /* parent= on <var_node:nullable ASignature>*/;
 }
@@ -8091,7 +8083,7 @@ var3 = self->attrs[COLOR_parser_nodes__APropdef___n_doc].val; /* _n_doc on <self
 if (var3 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1992);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var3) /* enter_visit on <var_v:Visitor>*/;
 } else {
@@ -8108,7 +8100,7 @@ var7 = self->attrs[COLOR_parser_nodes__AMethPropdef___n_kwredef].val; /* _n_kwre
 if (var7 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1995);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var7) /* enter_visit on <var_v:Visitor>*/;
 } else {
@@ -8119,7 +8111,7 @@ var9 = self->attrs[COLOR_parser_nodes__AInternMethPropdef___n_kwmeth].val; /* _n
 if (var9 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwmeth");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 1998);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var9) /* enter_visit on <var_v:Visitor>*/;
 var10 = self->attrs[COLOR_parser_nodes__AMethPropdef___n_methid].val; /* _n_methid on <self:AInternMethPropdef> */
@@ -8198,52 +8190,52 @@ if (var3){
 if (var_n_visibility == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2027);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AMethPropdef___n_visibility].val = var_n_visibility; /* _n_visibility on <self:AExternMethPropdef> */
 if (var_n_visibility == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2028);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_visibility->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_visibility, self) /* parent= on <var_n_visibility:nullable AVisibility>*/;
 }
 if (var_n_kwmeth == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2029);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AExternMethPropdef___n_kwmeth].val = var_n_kwmeth; /* _n_kwmeth on <self:AExternMethPropdef> */
 if (var_n_kwmeth == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2030);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_kwmeth->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_kwmeth, self) /* parent= on <var_n_kwmeth:nullable TKwmeth>*/;
 }
 if (var_n_methid == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2031);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AMethPropdef___n_methid].val = var_n_methid; /* _n_methid on <self:AExternMethPropdef> */
 if (var_n_methid == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2032);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_methid->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_methid, self) /* parent= on <var_n_methid:nullable AMethid>*/;
 }
 if (var_n_signature == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2033);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AMethPropdef___n_signature].val = var_n_signature; /* _n_signature on <self:AExternMethPropdef> */
 if (var_n_signature == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2034);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_signature->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_signature, self) /* parent= on <var_n_signature:nullable ASignature>*/;
 }
@@ -8387,7 +8379,7 @@ var4 = var_new_child->type->type_table[cltype] == idtype;
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2054);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__APropdef___n_doc].val = var_new_child; /* _n_doc on <self:AExternMethPropdef> */
 } else {
@@ -8423,7 +8415,7 @@ var10 = var_new_child->type->type_table[cltype11] == idtype12;
 if (!var10) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2064);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AMethPropdef___n_kwredef].val = var_new_child; /* _n_kwredef on <self:AExternMethPropdef> */
 } else {
@@ -8459,13 +8451,13 @@ var18 = var_new_child->type->type_table[cltype19] == idtype20;
 if (!var18) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2074);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AMethPropdef___n_visibility].val = var_new_child; /* _n_visibility on <self:AExternMethPropdef> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2077);
-exit(1);
+show_backtrace(1);
 }
 goto RET_LABEL;
 } else {
@@ -8474,7 +8466,7 @@ var21 = self->attrs[COLOR_parser_nodes__AExternMethPropdef___n_kwmeth].val; /* _
 if (var21 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwmeth");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2081);
-exit(1);
+show_backtrace(1);
 }
 var22 = ((short int (*)(val*, val*))(var21->class->vft[COLOR_kernel__Object___61d_61d]))(var21, var_old_child) /* == on <var21:TKwmeth>*/;
 if (var22){
@@ -8497,13 +8489,13 @@ var25 = var_new_child->type->type_table[cltype26] == idtype27;
 if (!var25) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2084);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AExternMethPropdef___n_kwmeth].val = var_new_child; /* _n_kwmeth on <self:AExternMethPropdef> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2087);
-exit(1);
+show_backtrace(1);
 }
 goto RET_LABEL;
 } else {
@@ -8534,13 +8526,13 @@ var32 = var_new_child->type->type_table[cltype33] == idtype34;
 if (!var32) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2094);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AMethPropdef___n_methid].val = var_new_child; /* _n_methid on <self:AExternMethPropdef> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2097);
-exit(1);
+show_backtrace(1);
 }
 goto RET_LABEL;
 } else {
@@ -8571,13 +8563,13 @@ var39 = var_new_child->type->type_table[cltype40] == idtype41;
 if (!var39) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2104);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AMethPropdef___n_signature].val = var_new_child; /* _n_signature on <self:AExternMethPropdef> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2107);
-exit(1);
+show_backtrace(1);
 }
 goto RET_LABEL;
 } else {
@@ -8608,7 +8600,7 @@ var46 = var_new_child->type->type_table[cltype47] == idtype48;
 if (!var46) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2114);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AExternPropdef___n_extern].val = var_new_child; /* _n_extern on <self:AExternMethPropdef> */
 } else {
@@ -8644,7 +8636,7 @@ var54 = var_new_child->type->type_table[cltype55] == idtype56;
 if (!var54) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2124);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AExternPropdef___n_extern_calls].val = var_new_child; /* _n_extern_calls on <self:AExternMethPropdef> */
 } else {
@@ -8680,7 +8672,7 @@ var62 = var_new_child->type->type_table[cltype63] == idtype64;
 if (!var62) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2134);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AExternPropdef___n_extern_code_block].val = var_new_child; /* _n_extern_code_block on <self:AExternMethPropdef> */
 } else {
@@ -8753,7 +8745,7 @@ self->attrs[COLOR_parser_nodes__AMethPropdef___n_visibility].val = var_node; /* 
 if (var_node == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2160);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_node->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_node, self) /* parent= on <var_node:nullable AVisibility>*/;
 }
@@ -8785,7 +8777,7 @@ self->attrs[COLOR_parser_nodes__AMethPropdef___n_methid].val = var_node; /* _n_m
 if (var_node == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2170);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_node->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_node, self) /* parent= on <var_node:nullable AMethid>*/;
 }
@@ -8804,7 +8796,7 @@ self->attrs[COLOR_parser_nodes__AMethPropdef___n_signature].val = var_node; /* _
 if (var_node == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2175);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_node->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_node, self) /* parent= on <var_node:nullable ASignature>*/;
 }
@@ -8927,7 +8919,7 @@ var3 = self->attrs[COLOR_parser_nodes__APropdef___n_doc].val; /* _n_doc on <self
 if (var3 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2203);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var3) /* enter_visit on <var_v:Visitor>*/;
 } else {
@@ -8944,7 +8936,7 @@ var7 = self->attrs[COLOR_parser_nodes__AMethPropdef___n_kwredef].val; /* _n_kwre
 if (var7 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2206);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var7) /* enter_visit on <var_v:Visitor>*/;
 } else {
@@ -8955,7 +8947,7 @@ var9 = self->attrs[COLOR_parser_nodes__AExternMethPropdef___n_kwmeth].val; /* _n
 if (var9 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Uninitialized attribute _n_kwmeth");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2209);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var9) /* enter_visit on <var_v:Visitor>*/;
 var10 = self->attrs[COLOR_parser_nodes__AMethPropdef___n_methid].val; /* _n_methid on <self:AExternMethPropdef> */
@@ -8974,7 +8966,7 @@ var15 = self->attrs[COLOR_parser_nodes__AExternPropdef___n_extern].val; /* _n_ex
 if (var15 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2213);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var15) /* enter_visit on <var_v:Visitor>*/;
 } else {
@@ -8991,7 +8983,7 @@ var19 = self->attrs[COLOR_parser_nodes__AExternPropdef___n_extern_calls].val; /*
 if (var19 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2216);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var19) /* enter_visit on <var_v:Visitor>*/;
 } else {
@@ -9008,7 +9000,7 @@ var23 = self->attrs[COLOR_parser_nodes__AExternPropdef___n_extern_code_block].va
 if (var23 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2219);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var23) /* enter_visit on <var_v:Visitor>*/;
 } else {
@@ -9081,52 +9073,52 @@ if (var3){
 if (var_n_visibility == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2246);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AMethPropdef___n_visibility].val = var_n_visibility; /* _n_visibility on <self:AConcreteMethPropdef> */
 if (var_n_visibility == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2247);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_visibility->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_visibility, self) /* parent= on <var_n_visibility:nullable AVisibility>*/;
 }
 if (var_n_kwmeth == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2248);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AConcreteMethPropdef___n_kwmeth].val = var_n_kwmeth; /* _n_kwmeth on <self:AConcreteMethPropdef> */
 if (var_n_kwmeth == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2249);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_kwmeth->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_kwmeth, self) /* parent= on <var_n_kwmeth:nullable TKwmeth>*/;
 }
 if (var_n_methid == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2250);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AMethPropdef___n_methid].val = var_n_methid; /* _n_methid on <self:AConcreteMethPropdef> */
 if (var_n_methid == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2251);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_methid->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_methid, self) /* parent= on <var_n_methid:nullable AMethid>*/;
 }
 if (var_n_signature == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2252);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AMethPropdef___n_signature].val = var_n_signature; /* _n_signature on <self:AConcreteMethPropdef> */
 if (var_n_signature == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2253);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_signature->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_signature, self) /* parent= on <var_n_signature:nullable ASignature>*/;
 }
@@ -9251,7 +9243,7 @@ var4 = var_new_child->type->type_table[cltype] == idtype;
 if (!var4) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2269);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__APropdef___n_doc].val = var_new_child; /* _n_doc on <self:AConcreteMethPropdef> */
 } else {
@@ -9287,7 +9279,7 @@ var10 = var_new_child->type->type_table[cltype11] == idtype12;
 if (!var10) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2279);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AMethPropdef___n_kwredef].val = var_new_child; /* _n_kwredef on <self:AConcreteMethPropdef> */
 } else {
@@ -9323,13 +9315,13 @@ var18 = var_new_child->type->type_table[cltype19] == idtype20;
 if (!var18) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2289);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AMethPropdef___n_visibility].val = var_new_child; /* _n_visibility on <self:AConcreteMethPropdef> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2292);
-exit(1);
+show_backtrace(1);
 }
 goto RET_LABEL;
 } else {
@@ -9360,13 +9352,13 @@ var25 = var_new_child->type->type_table[cltype26] == idtype27;
 if (!var25) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2299);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AConcreteMethPropdef___n_kwmeth].val = var_new_child; /* _n_kwmeth on <self:AConcreteMethPropdef> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2302);
-exit(1);
+show_backtrace(1);
 }
 goto RET_LABEL;
 } else {
@@ -9397,13 +9389,13 @@ var32 = var_new_child->type->type_table[cltype33] == idtype34;
 if (!var32) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2309);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AMethPropdef___n_methid].val = var_new_child; /* _n_methid on <self:AConcreteMethPropdef> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2312);
-exit(1);
+show_backtrace(1);
 }
 goto RET_LABEL;
 } else {
@@ -9434,13 +9426,13 @@ var39 = var_new_child->type->type_table[cltype40] == idtype41;
 if (!var39) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2319);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AMethPropdef___n_signature].val = var_new_child; /* _n_signature on <self:AConcreteMethPropdef> */
 } else {
 fprintf(stderr, "Runtime error: %s", "Aborted");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2322);
-exit(1);
+show_backtrace(1);
 }
 goto RET_LABEL;
 } else {
@@ -9471,7 +9463,7 @@ var46 = var_new_child->type->type_table[cltype47] == idtype48;
 if (!var46) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2329);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__Prod___n_annotations].val = var_new_child; /* _n_annotations on <self:AConcreteMethPropdef> */
 } else {
@@ -9507,7 +9499,7 @@ var54 = var_new_child->type->type_table[cltype55] == idtype56;
 if (!var54) {
 fprintf(stderr, "Runtime error: %s", "Assert failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2339);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AConcreteMethPropdef___n_block].val = var_new_child; /* _n_block on <self:AConcreteMethPropdef> */
 } else {
@@ -9580,7 +9572,7 @@ self->attrs[COLOR_parser_nodes__AMethPropdef___n_visibility].val = var_node; /* 
 if (var_node == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2365);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_node->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_node, self) /* parent= on <var_node:nullable AVisibility>*/;
 }
@@ -9599,7 +9591,7 @@ self->attrs[COLOR_parser_nodes__AConcreteMethPropdef___n_kwmeth].val = var_node;
 if (var_node == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2370);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_node->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_node, self) /* parent= on <var_node:nullable TKwmeth>*/;
 }
@@ -9618,7 +9610,7 @@ self->attrs[COLOR_parser_nodes__AMethPropdef___n_methid].val = var_node; /* _n_m
 if (var_node == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2375);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_node->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_node, self) /* parent= on <var_node:nullable AMethid>*/;
 }
@@ -9637,7 +9629,7 @@ self->attrs[COLOR_parser_nodes__AMethPropdef___n_signature].val = var_node; /* _
 if (var_node == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2380);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_node->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_node, self) /* parent= on <var_node:nullable ASignature>*/;
 }
@@ -9732,7 +9724,7 @@ var3 = self->attrs[COLOR_parser_nodes__APropdef___n_doc].val; /* _n_doc on <self
 if (var3 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2401);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var3) /* enter_visit on <var_v:Visitor>*/;
 } else {
@@ -9749,7 +9741,7 @@ var7 = self->attrs[COLOR_parser_nodes__AMethPropdef___n_kwredef].val; /* _n_kwre
 if (var7 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2404);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var7) /* enter_visit on <var_v:Visitor>*/;
 } else {
@@ -9774,7 +9766,7 @@ var15 = self->attrs[COLOR_parser_nodes__Prod___n_annotations].val; /* _n_annotat
 if (var15 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2411);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var15) /* enter_visit on <var_v:Visitor>*/;
 } else {
@@ -9791,7 +9783,7 @@ var19 = self->attrs[COLOR_parser_nodes__AConcreteMethPropdef___n_block].val; /* 
 if (var19 == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2414);
-exit(1);
+show_backtrace(1);
 }
 ((void (*)(val*, val*))(var_v->class->vft[COLOR_parser_nodes__Visitor__enter_visit]))(var_v, var19) /* enter_visit on <var_v:Visitor>*/;
 } else {
@@ -9866,26 +9858,26 @@ if (var3){
 if (var_n_visibility == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2441);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AMethPropdef___n_visibility].val = var_n_visibility; /* _n_visibility on <self:AConcreteInitPropdef> */
 if (var_n_visibility == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2442);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_visibility->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_visibility, self) /* parent= on <var_n_visibility:nullable AVisibility>*/;
 }
 if (var_n_kwinit == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2443);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AConcreteInitPropdef___n_kwinit].val = var_n_kwinit; /* _n_kwinit on <self:AConcreteInitPropdef> */
 if (var_n_kwinit == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2444);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_kwinit->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_kwinit, self) /* parent= on <var_n_kwinit:nullable TKwinit>*/;
 }
@@ -9903,13 +9895,13 @@ if (var5){
 if (var_n_signature == NULL) {
 fprintf(stderr, "Runtime error: %s", "Cast failed");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2449);
-exit(1);
+show_backtrace(1);
 }
 self->attrs[COLOR_parser_nodes__AMethPropdef___n_signature].val = var_n_signature; /* _n_signature on <self:AConcreteInitPropdef> */
 if (var_n_signature == NULL) {
 fprintf(stderr, "Runtime error: %s", "Reciever is null");
 fprintf(stderr, " (%s:%d)\n", "src/parser/parser_prod.nit", 2450);
-exit(1);
+show_backtrace(1);
 } else {
 ((void (*)(val*, val*))(var_n_signature->class->vft[COLOR_parser_nodes__ANode__parent_61d]))(var_n_signature, self) /* parent= on <var_n_signature:nullable ASignature>*/;
 }

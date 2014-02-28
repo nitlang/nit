@@ -36,42 +36,6 @@ Distribution of direct smallers
  average value: 0.0
  distribution:
   <=0: sub-population=1 (100.00%); cumulated value=0 (na%)
-## Module nesting hierarchy
-Number of nodes: 1
-Number of edges: 1 (1.00 per node)
-Number of direct edges: 0 (0.0 per node)
-Distribution of greaters
- population: 1
- minimum value: 1
- maximum value: 1
- total value: 1
- average value: 1.00
- distribution:
-  <=1: sub-population=1 (100.00%); cumulated value=1 (100.00%)
-Distribution of direct greaters
- population: 1
- minimum value: 0
- maximum value: 0
- total value: 0
- average value: 0.0
- distribution:
-  <=0: sub-population=1 (100.00%); cumulated value=0 (na%)
-Distribution of smallers
- population: 1
- minimum value: 1
- maximum value: 1
- total value: 1
- average value: 1.00
- distribution:
-  <=1: sub-population=1 (100.00%); cumulated value=1 (100.00%)
-Distribution of direct smallers
- population: 1
- minimum value: 0
- maximum value: 0
- total value: 0
- average value: 0.0
- distribution:
-  <=0: sub-population=1 (100.00%); cumulated value=0 (na%)
 ## Classdef hierarchy
 Number of nodes: 8
 Number of edges: 22 (2.75 per node)
@@ -339,7 +303,7 @@ Statistics of type usage:
   C: 1 (11.11%)
   B: 1 (11.11%)
   A: 1 (11.11%)
---- Sends on Nullable Reciever ---
+--- Sends on Nullable Receiver ---
 Total number of sends: 19
 Number of sends on a nullable receiver: 0 (0.0%)
 Number of buggy sends (cannot determine the type of the receiver): 0 (0.0%)
@@ -357,12 +321,15 @@ Number of live runtime classes: 6
 	Sys Bool Int A B C
 Number of live runtime types (instantied resolved type): 6
 	Sys Bool Int A B C
-Number of live methods: 11
+Number of live methods: 14
 Number of live method definitions: 14
 Number of live runtime cast types (ie used in as and isa): 0
 	
 Number of dead method definitions of live methods: 0
+generating out/nitmetrics_args1.write/project_hierarchy.dot
+generating out/nitmetrics_args1.write/module_hierarchy.dot
 class_hierarchy.dot
 classdef_hierarchy.dot
 model.html
 module_hierarchy.dot
+project_hierarchy.dot

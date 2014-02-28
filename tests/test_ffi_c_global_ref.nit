@@ -27,7 +27,7 @@ class ToBePreserved
 end
 
 class A
-	fun save_as_global( tbp : ToBePreserved, i : Int ) import ToBePreserved::output `{
+	fun save_as_global( tbp : ToBePreserved, i : Int ) import ToBePreserved.output `{
 		if ( global_tbps[i] != NULL )
 			ToBePreserved_decr_ref( global_tbps[i] );
 

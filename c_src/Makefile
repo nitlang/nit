@@ -2,7 +2,7 @@ CC = ccache cc
 CFLAGS = -g -O2
 CINCL =  -I "."
 LDFLAGS ?= 
-LDLIBS  ?= -lm -lgc
+LDLIBS  ?= -lunwind -lm -lgc
 
 all: nitg
 
@@ -35,9 +35,6 @@ nitg.classes.9.o: nitg.classes.9.c
 
 nitg.classes.10.o: nitg.classes.10.c
 	$(CC) $(CFLAGS) $(CINCL) -D NONITCNI -c -o nitg.classes.10.o nitg.classes.10.c
-
-nitg.classes.11.o: nitg.classes.11.c
-	$(CC) $(CFLAGS) $(CINCL) -D NONITCNI -c -o nitg.classes.11.o nitg.classes.11.c
 
 nitg.main.1.o: nitg.main.1.c
 	$(CC) $(CFLAGS) $(CINCL) -D NONITCNI -c -o nitg.main.1.o nitg.main.1.c
@@ -92,9 +89,6 @@ parser.sep.14.o: parser.sep.14.c
 
 parser.sep.15.o: parser.sep.15.c
 	$(CC) $(CFLAGS) $(CINCL) -D NONITCNI -c -o parser.sep.15.o parser.sep.15.c
-
-parser.sep.16.o: parser.sep.16.c
-	$(CC) $(CFLAGS) $(CINCL) -D NONITCNI -c -o parser.sep.16.o parser.sep.16.c
 
 parser_prod.sep.1.o: parser_prod.sep.1.c
 	$(CC) $(CFLAGS) $(CINCL) -D NONITCNI -c -o parser_prod.sep.1.o parser_prod.sep.1.c
@@ -189,6 +183,12 @@ model.sep.1.o: model.sep.1.c
 poset.sep.1.o: poset.sep.1.c
 	$(CC) $(CFLAGS) $(CINCL) -D NONITCNI -c -o poset.sep.1.o poset.sep.1.c
 
+mmodule.sep.1.o: mmodule.sep.1.c
+	$(CC) $(CFLAGS) $(CINCL) -D NONITCNI -c -o mmodule.sep.1.o mmodule.sep.1.c
+
+mproject.sep.1.o: mproject.sep.1.c
+	$(CC) $(CFLAGS) $(CINCL) -D NONITCNI -c -o mproject.sep.1.o mproject.sep.1.c
+
 model_base.sep.1.o: model_base.sep.1.c
 	$(CC) $(CFLAGS) $(CINCL) -D NONITCNI -c -o model_base.sep.1.o model_base.sep.1.c
 
@@ -246,6 +246,9 @@ cached.sep.1.o: cached.sep.1.c
 parser_util.sep.1.o: parser_util.sep.1.c
 	$(CC) $(CFLAGS) $(CINCL) -D NONITCNI -c -o parser_util.sep.1.o parser_util.sep.1.c
 
+serialization_phase.sep.1.o: serialization_phase.sep.1.c
+	$(CC) $(CFLAGS) $(CINCL) -D NONITCNI -c -o serialization_phase.sep.1.o serialization_phase.sep.1.c
+
 transform.sep.1.o: transform.sep.1.c
 	$(CC) $(CFLAGS) $(CINCL) -D NONITCNI -c -o transform.sep.1.o transform.sep.1.c
 
@@ -287,6 +290,9 @@ separate_compiler.sep.3.o: separate_compiler.sep.3.c
 
 layout_builders.sep.1.o: layout_builders.sep.1.c
 	$(CC) $(CFLAGS) $(CINCL) -D NONITCNI -c -o layout_builders.sep.1.o layout_builders.sep.1.c
+
+collect_super_sends.sep.1.o: collect_super_sends.sep.1.c
+	$(CC) $(CFLAGS) $(CINCL) -D NONITCNI -c -o collect_super_sends.sep.1.o collect_super_sends.sep.1.c
 
 nitg.types.1.o: nitg.types.1.c
 	$(CC) $(CFLAGS) $(CINCL) -D NONITCNI -c -o nitg.types.1.o nitg.types.1.c
@@ -330,9 +336,9 @@ tables_nit.extern.o: tables_nit.c
 gc_chooser.extern.o: gc_chooser.c
 	$(CC) $(CFLAGS) -D NONITCNI -DWITH_LIBGC -c -o gc_chooser.extern.o gc_chooser.c
 
-nitg: nitg.classes.1.o nitg.classes.2.o nitg.classes.3.o nitg.classes.4.o nitg.classes.5.o nitg.classes.6.o nitg.classes.7.o nitg.classes.8.o nitg.classes.9.o nitg.classes.10.o nitg.classes.11.o nitg.main.1.o nitg.sep.1.o modelbuilder.sep.1.o parser.sep.1.o parser.sep.2.o parser.sep.3.o parser.sep.4.o parser.sep.5.o parser.sep.6.o parser.sep.7.o parser.sep.8.o parser.sep.9.o parser.sep.10.o parser.sep.11.o parser.sep.12.o parser.sep.13.o parser.sep.14.o parser.sep.15.o parser.sep.16.o parser_prod.sep.1.o parser_prod.sep.2.o parser_prod.sep.3.o parser_prod.sep.4.o parser_prod.sep.5.o lexer.sep.1.o parser_nodes.sep.1.o parser_nodes.sep.2.o location.sep.1.o posix.sep.1.o string.sep.1.o collection.sep.1.o abstract_collection.sep.1.o kernel.sep.1.o range.sep.1.o list.sep.1.o array.sep.1.o sorter.sep.1.o hash_collection.sep.1.o ropes.sep.1.o file.sep.1.o stream.sep.1.o string_search.sep.1.o time.sep.1.o environ.sep.1.o exec.sep.1.o math.sep.1.o gc.sep.1.o tables.sep.1.o model.sep.1.o poset.sep.1.o model_base.sep.1.o more_collections.sep.1.o opts.sep.1.o toolcontext.sep.1.o phase.sep.1.o frontend.sep.1.o simple_misc_analysis.sep.1.o literal.sep.1.o scope.sep.1.o flow.sep.1.o local_var_init.sep.1.o typing.sep.1.o typing.sep.2.o modelize_property.sep.1.o modelize_class.sep.1.o auto_super_init.sep.1.o div_by_zero.sep.1.o cached.sep.1.o parser_util.sep.1.o transform.sep.1.o astbuilder.sep.1.o astvalidation.sep.1.o rapid_type_analysis.sep.1.o global_compiler.sep.1.o global_compiler.sep.2.o abstract_compiler.sep.1.o abstract_compiler.sep.2.o abstract_compiler.sep.3.o separate_erasure_compiler.sep.1.o separate_compiler.sep.1.o separate_compiler.sep.2.o separate_compiler.sep.3.o layout_builders.sep.1.o nitg.types.1.o nitg.types.2.o nitg.types.3.o nitg.types.4.o nitg.types.5.o nitg.types.6.o nitg.types.7.o string_nit.extern.o file_nit.extern.o stream_nit.extern.o time_nit.extern.o exec_nit.extern.o tables_nit.extern.o gc_chooser.extern.o
-	$(CC) $(LDFLAGS) -o nitg nitg.classes.1.o nitg.classes.2.o nitg.classes.3.o nitg.classes.4.o nitg.classes.5.o nitg.classes.6.o nitg.classes.7.o nitg.classes.8.o nitg.classes.9.o nitg.classes.10.o nitg.classes.11.o nitg.main.1.o nitg.sep.1.o modelbuilder.sep.1.o parser.sep.1.o parser.sep.2.o parser.sep.3.o parser.sep.4.o parser.sep.5.o parser.sep.6.o parser.sep.7.o parser.sep.8.o parser.sep.9.o parser.sep.10.o parser.sep.11.o parser.sep.12.o parser.sep.13.o parser.sep.14.o parser.sep.15.o parser.sep.16.o parser_prod.sep.1.o parser_prod.sep.2.o parser_prod.sep.3.o parser_prod.sep.4.o parser_prod.sep.5.o lexer.sep.1.o parser_nodes.sep.1.o parser_nodes.sep.2.o location.sep.1.o posix.sep.1.o string.sep.1.o collection.sep.1.o abstract_collection.sep.1.o kernel.sep.1.o range.sep.1.o list.sep.1.o array.sep.1.o sorter.sep.1.o hash_collection.sep.1.o ropes.sep.1.o file.sep.1.o stream.sep.1.o string_search.sep.1.o time.sep.1.o environ.sep.1.o exec.sep.1.o math.sep.1.o gc.sep.1.o tables.sep.1.o model.sep.1.o poset.sep.1.o model_base.sep.1.o more_collections.sep.1.o opts.sep.1.o toolcontext.sep.1.o phase.sep.1.o frontend.sep.1.o simple_misc_analysis.sep.1.o literal.sep.1.o scope.sep.1.o flow.sep.1.o local_var_init.sep.1.o typing.sep.1.o typing.sep.2.o modelize_property.sep.1.o modelize_class.sep.1.o auto_super_init.sep.1.o div_by_zero.sep.1.o cached.sep.1.o parser_util.sep.1.o transform.sep.1.o astbuilder.sep.1.o astvalidation.sep.1.o rapid_type_analysis.sep.1.o global_compiler.sep.1.o global_compiler.sep.2.o abstract_compiler.sep.1.o abstract_compiler.sep.2.o abstract_compiler.sep.3.o separate_erasure_compiler.sep.1.o separate_compiler.sep.1.o separate_compiler.sep.2.o separate_compiler.sep.3.o layout_builders.sep.1.o nitg.types.1.o nitg.types.2.o nitg.types.3.o nitg.types.4.o nitg.types.5.o nitg.types.6.o nitg.types.7.o string_nit.extern.o file_nit.extern.o stream_nit.extern.o time_nit.extern.o exec_nit.extern.o tables_nit.extern.o gc_chooser.extern.o $(LDLIBS)
+nitg: nitg.classes.1.o nitg.classes.2.o nitg.classes.3.o nitg.classes.4.o nitg.classes.5.o nitg.classes.6.o nitg.classes.7.o nitg.classes.8.o nitg.classes.9.o nitg.classes.10.o nitg.main.1.o nitg.sep.1.o modelbuilder.sep.1.o parser.sep.1.o parser.sep.2.o parser.sep.3.o parser.sep.4.o parser.sep.5.o parser.sep.6.o parser.sep.7.o parser.sep.8.o parser.sep.9.o parser.sep.10.o parser.sep.11.o parser.sep.12.o parser.sep.13.o parser.sep.14.o parser.sep.15.o parser_prod.sep.1.o parser_prod.sep.2.o parser_prod.sep.3.o parser_prod.sep.4.o parser_prod.sep.5.o lexer.sep.1.o parser_nodes.sep.1.o parser_nodes.sep.2.o location.sep.1.o posix.sep.1.o string.sep.1.o collection.sep.1.o abstract_collection.sep.1.o kernel.sep.1.o range.sep.1.o list.sep.1.o array.sep.1.o sorter.sep.1.o hash_collection.sep.1.o ropes.sep.1.o file.sep.1.o stream.sep.1.o string_search.sep.1.o time.sep.1.o environ.sep.1.o exec.sep.1.o math.sep.1.o gc.sep.1.o tables.sep.1.o model.sep.1.o poset.sep.1.o mmodule.sep.1.o mproject.sep.1.o model_base.sep.1.o more_collections.sep.1.o opts.sep.1.o toolcontext.sep.1.o phase.sep.1.o frontend.sep.1.o simple_misc_analysis.sep.1.o literal.sep.1.o scope.sep.1.o flow.sep.1.o local_var_init.sep.1.o typing.sep.1.o typing.sep.2.o modelize_property.sep.1.o modelize_class.sep.1.o auto_super_init.sep.1.o div_by_zero.sep.1.o cached.sep.1.o parser_util.sep.1.o serialization_phase.sep.1.o transform.sep.1.o astbuilder.sep.1.o astvalidation.sep.1.o rapid_type_analysis.sep.1.o global_compiler.sep.1.o global_compiler.sep.2.o abstract_compiler.sep.1.o abstract_compiler.sep.2.o abstract_compiler.sep.3.o separate_erasure_compiler.sep.1.o separate_compiler.sep.1.o separate_compiler.sep.2.o separate_compiler.sep.3.o layout_builders.sep.1.o collect_super_sends.sep.1.o nitg.types.1.o nitg.types.2.o nitg.types.3.o nitg.types.4.o nitg.types.5.o nitg.types.6.o nitg.types.7.o string_nit.extern.o file_nit.extern.o stream_nit.extern.o time_nit.extern.o exec_nit.extern.o tables_nit.extern.o gc_chooser.extern.o
+	$(CC) $(LDFLAGS) -o nitg nitg.classes.1.o nitg.classes.2.o nitg.classes.3.o nitg.classes.4.o nitg.classes.5.o nitg.classes.6.o nitg.classes.7.o nitg.classes.8.o nitg.classes.9.o nitg.classes.10.o nitg.main.1.o nitg.sep.1.o modelbuilder.sep.1.o parser.sep.1.o parser.sep.2.o parser.sep.3.o parser.sep.4.o parser.sep.5.o parser.sep.6.o parser.sep.7.o parser.sep.8.o parser.sep.9.o parser.sep.10.o parser.sep.11.o parser.sep.12.o parser.sep.13.o parser.sep.14.o parser.sep.15.o parser_prod.sep.1.o parser_prod.sep.2.o parser_prod.sep.3.o parser_prod.sep.4.o parser_prod.sep.5.o lexer.sep.1.o parser_nodes.sep.1.o parser_nodes.sep.2.o location.sep.1.o posix.sep.1.o string.sep.1.o collection.sep.1.o abstract_collection.sep.1.o kernel.sep.1.o range.sep.1.o list.sep.1.o array.sep.1.o sorter.sep.1.o hash_collection.sep.1.o ropes.sep.1.o file.sep.1.o stream.sep.1.o string_search.sep.1.o time.sep.1.o environ.sep.1.o exec.sep.1.o math.sep.1.o gc.sep.1.o tables.sep.1.o model.sep.1.o poset.sep.1.o mmodule.sep.1.o mproject.sep.1.o model_base.sep.1.o more_collections.sep.1.o opts.sep.1.o toolcontext.sep.1.o phase.sep.1.o frontend.sep.1.o simple_misc_analysis.sep.1.o literal.sep.1.o scope.sep.1.o flow.sep.1.o local_var_init.sep.1.o typing.sep.1.o typing.sep.2.o modelize_property.sep.1.o modelize_class.sep.1.o auto_super_init.sep.1.o div_by_zero.sep.1.o cached.sep.1.o parser_util.sep.1.o serialization_phase.sep.1.o transform.sep.1.o astbuilder.sep.1.o astvalidation.sep.1.o rapid_type_analysis.sep.1.o global_compiler.sep.1.o global_compiler.sep.2.o abstract_compiler.sep.1.o abstract_compiler.sep.2.o abstract_compiler.sep.3.o separate_erasure_compiler.sep.1.o separate_compiler.sep.1.o separate_compiler.sep.2.o separate_compiler.sep.3.o layout_builders.sep.1.o collect_super_sends.sep.1.o nitg.types.1.o nitg.types.2.o nitg.types.3.o nitg.types.4.o nitg.types.5.o nitg.types.6.o nitg.types.7.o string_nit.extern.o file_nit.extern.o stream_nit.extern.o time_nit.extern.o exec_nit.extern.o tables_nit.extern.o gc_chooser.extern.o $(LDLIBS)
 
 clean:
-	rm nitg.classes.1.o nitg.classes.2.o nitg.classes.3.o nitg.classes.4.o nitg.classes.5.o nitg.classes.6.o nitg.classes.7.o nitg.classes.8.o nitg.classes.9.o nitg.classes.10.o nitg.classes.11.o nitg.main.1.o nitg.sep.1.o modelbuilder.sep.1.o parser.sep.1.o parser.sep.2.o parser.sep.3.o parser.sep.4.o parser.sep.5.o parser.sep.6.o parser.sep.7.o parser.sep.8.o parser.sep.9.o parser.sep.10.o parser.sep.11.o parser.sep.12.o parser.sep.13.o parser.sep.14.o parser.sep.15.o parser.sep.16.o parser_prod.sep.1.o parser_prod.sep.2.o parser_prod.sep.3.o parser_prod.sep.4.o parser_prod.sep.5.o lexer.sep.1.o parser_nodes.sep.1.o parser_nodes.sep.2.o location.sep.1.o posix.sep.1.o string.sep.1.o collection.sep.1.o abstract_collection.sep.1.o kernel.sep.1.o range.sep.1.o list.sep.1.o array.sep.1.o sorter.sep.1.o hash_collection.sep.1.o ropes.sep.1.o file.sep.1.o stream.sep.1.o string_search.sep.1.o time.sep.1.o environ.sep.1.o exec.sep.1.o math.sep.1.o gc.sep.1.o tables.sep.1.o model.sep.1.o poset.sep.1.o model_base.sep.1.o more_collections.sep.1.o opts.sep.1.o toolcontext.sep.1.o phase.sep.1.o frontend.sep.1.o simple_misc_analysis.sep.1.o literal.sep.1.o scope.sep.1.o flow.sep.1.o local_var_init.sep.1.o typing.sep.1.o typing.sep.2.o modelize_property.sep.1.o modelize_class.sep.1.o auto_super_init.sep.1.o div_by_zero.sep.1.o cached.sep.1.o parser_util.sep.1.o transform.sep.1.o astbuilder.sep.1.o astvalidation.sep.1.o rapid_type_analysis.sep.1.o global_compiler.sep.1.o global_compiler.sep.2.o abstract_compiler.sep.1.o abstract_compiler.sep.2.o abstract_compiler.sep.3.o separate_erasure_compiler.sep.1.o separate_compiler.sep.1.o separate_compiler.sep.2.o separate_compiler.sep.3.o layout_builders.sep.1.o nitg.types.1.o nitg.types.2.o nitg.types.3.o nitg.types.4.o nitg.types.5.o nitg.types.6.o nitg.types.7.o string_nit.extern.o file_nit.extern.o stream_nit.extern.o time_nit.extern.o exec_nit.extern.o tables_nit.extern.o gc_chooser.extern.o 2>/dev/null
+	rm nitg.classes.1.o nitg.classes.2.o nitg.classes.3.o nitg.classes.4.o nitg.classes.5.o nitg.classes.6.o nitg.classes.7.o nitg.classes.8.o nitg.classes.9.o nitg.classes.10.o nitg.main.1.o nitg.sep.1.o modelbuilder.sep.1.o parser.sep.1.o parser.sep.2.o parser.sep.3.o parser.sep.4.o parser.sep.5.o parser.sep.6.o parser.sep.7.o parser.sep.8.o parser.sep.9.o parser.sep.10.o parser.sep.11.o parser.sep.12.o parser.sep.13.o parser.sep.14.o parser.sep.15.o parser_prod.sep.1.o parser_prod.sep.2.o parser_prod.sep.3.o parser_prod.sep.4.o parser_prod.sep.5.o lexer.sep.1.o parser_nodes.sep.1.o parser_nodes.sep.2.o location.sep.1.o posix.sep.1.o string.sep.1.o collection.sep.1.o abstract_collection.sep.1.o kernel.sep.1.o range.sep.1.o list.sep.1.o array.sep.1.o sorter.sep.1.o hash_collection.sep.1.o ropes.sep.1.o file.sep.1.o stream.sep.1.o string_search.sep.1.o time.sep.1.o environ.sep.1.o exec.sep.1.o math.sep.1.o gc.sep.1.o tables.sep.1.o model.sep.1.o poset.sep.1.o mmodule.sep.1.o mproject.sep.1.o model_base.sep.1.o more_collections.sep.1.o opts.sep.1.o toolcontext.sep.1.o phase.sep.1.o frontend.sep.1.o simple_misc_analysis.sep.1.o literal.sep.1.o scope.sep.1.o flow.sep.1.o local_var_init.sep.1.o typing.sep.1.o typing.sep.2.o modelize_property.sep.1.o modelize_class.sep.1.o auto_super_init.sep.1.o div_by_zero.sep.1.o cached.sep.1.o parser_util.sep.1.o serialization_phase.sep.1.o transform.sep.1.o astbuilder.sep.1.o astvalidation.sep.1.o rapid_type_analysis.sep.1.o global_compiler.sep.1.o global_compiler.sep.2.o abstract_compiler.sep.1.o abstract_compiler.sep.2.o abstract_compiler.sep.3.o separate_erasure_compiler.sep.1.o separate_compiler.sep.1.o separate_compiler.sep.2.o separate_compiler.sep.3.o layout_builders.sep.1.o collect_super_sends.sep.1.o nitg.types.1.o nitg.types.2.o nitg.types.3.o nitg.types.4.o nitg.types.5.o nitg.types.6.o nitg.types.7.o string_nit.extern.o file_nit.extern.o stream_nit.extern.o time_nit.extern.o exec_nit.extern.o tables_nit.extern.o gc_chooser.extern.o 2>/dev/null
 

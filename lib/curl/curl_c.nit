@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Binding of C libCurl which allow us to interact with network.
-module curl_c
+module curl_c is pkgconfig("libcurl")
 
 import pipeline
 
@@ -101,7 +101,7 @@ extern CCurl `{ CURL * `}
 	# Internal method to set options to CURL using CURLSList parameter.
 	private fun i_setopt_slist(opt: CURLOption, list: CURLSList):CURLCode `{ return curl_easy_setopt( recv, opt, list); `}
 	# Internal method to set options to CURL using String parameter.
-	private fun i_setopt_string(opt: CURLOption, str: String):CURLCode import String::to_cstring `{
+	private fun i_setopt_string(opt: CURLOption, str: String):CURLCode import String.to_cstring `{
 		char *rStr = String_to_cstring(str);
 		return curl_easy_setopt( recv, opt, rStr);
 	`}
@@ -113,7 +113,7 @@ extern CCurl `{ CURL * `}
 		 return answ
 	end
 	# Internal method used to get String object information initially knowns as C Chars type
-	private fun i_getinfo_chars(opt: CURLInfoChars, res: CURLInfoResponseString):CURLCode import CURLInfoResponseString::response=, NativeString::to_s_with_copy `{
+	private fun i_getinfo_chars(opt: CURLInfoChars, res: CURLInfoResponseString):CURLCode import CURLInfoResponseString.response=, NativeString.to_s_with_copy `{
 		char *r = NULL;
 		CURLcode c = curl_easy_getinfo( recv, opt, &r);
 		if((c == CURLE_OK) && r != NULL){
@@ -130,7 +130,7 @@ extern CCurl `{ CURL * `}
 		 return answ
 	end
 	# Internal method used to get Int object information initially knowns as C Long type
-	private fun i_getinfo_long(opt: CURLInfoLong, res: CURLInfoResponseLong):CURLCode import CURLInfoResponseLong::response= `{
+	private fun i_getinfo_long(opt: CURLInfoLong, res: CURLInfoResponseLong):CURLCode import CURLInfoResponseLong.response= `{
 		long *r = NULL;
 		r = malloc(sizeof(long));
 		CURLcode c = curl_easy_getinfo( recv, opt, r);
@@ -146,7 +146,7 @@ extern CCurl `{ CURL * `}
 		 return answ
 	end
 	# Internal method used to get Int object information initially knowns as C Double type
-	private fun i_getinfo_double(opt: CURLInfoDouble, res: CURLInfoResponseDouble):CURLCode import CURLInfoResponseDouble::response= `{
+	private fun i_getinfo_double(opt: CURLInfoDouble, res: CURLInfoResponseDouble):CURLCode import CURLInfoResponseDouble.response= `{
 		double *r = NULL;
 		r = malloc(sizeof(double));
 		CURLcode c = curl_easy_getinfo( recv, opt, r);
@@ -164,7 +164,7 @@ extern CCurl `{ CURL * `}
 		return answ
 	end
 	# Internal method used to get Array[String] object information initially knowns as C SList type
-	private fun i_getinfo_slist(opt: CURLInfoSList, res: CURLInfoResponseArray):CURLCode import CURLInfoResponseArray::prim_response=`{
+	private fun i_getinfo_slist(opt: CURLInfoSList, res: CURLInfoResponseArray):CURLCode import CURLInfoResponseArray.prim_response=`{
 		struct curl_slist* csl = NULL;
 		CURLcode ce = curl_easy_getinfo( recv, opt, &csl);
 		CURLInfoResponseArray_prim_response__assign(res, csl);
@@ -185,7 +185,7 @@ extern CCurl `{ CURL * `}
 		return once new CURLCode.unknown_option
 	end
 	# Internal method used to configure read callback
-	private fun i_register_read_datas_callback(delegate: CCurlCallbacks, datas: String, size: Int):CURLCode import String::to_cstring `{
+	private fun i_register_read_datas_callback(delegate: CCurlCallbacks, datas: String, size: Int):CURLCode import String.to_cstring `{
 		CURLCallbackReadDatas *d = NULL;
 		d = malloc(sizeof(CURLCallbackReadDatas));
 		d->data = (char*)String_to_cstring(datas);
@@ -194,7 +194,7 @@ extern CCurl `{ CURL * `}
 		return curl_easy_setopt( recv, CURLOPT_READDATA, d);
 	`}
 	# Internal method used to configure callbacks in terms of given type
-	private fun i_register_callback(delegate: CCurlCallbacks, cbtype: CURLCallbackType):CURLCode is extern import CCurlCallbacks::header_callback,	CCurlCallbacks::body_callback, CCurlCallbacks::stream_callback	`{
+	private fun i_register_callback(delegate: CCurlCallbacks, cbtype: CURLCallbackType):CURLCode is extern import CCurlCallbacks.header_callback, CCurlCallbacks.body_callback, CCurlCallbacks.stream_callback, NativeString.to_s_with_copy, NativeString.to_s `{
 		CURLCallbackDatas *d = malloc(sizeof(CURLCallbackDatas));
 		CCurlCallbacks_incr_ref(delegate);
 		d->type = cbtype;
@@ -220,7 +220,7 @@ extern CCurl `{ CURL * `}
 		return e;
 	`}
 	# Convert given string to URL encoded string
-	fun escape(url: String):String import String::to_cstring, NativeString::to_s_with_copy `{
+	fun escape(url: String):String import String.to_cstring, NativeString.to_s_with_copy `{
 		char *orig_url, *encoded_url = NULL;
 		orig_url = String_to_cstring(url);
 		encoded_url = curl_easy_escape( recv, orig_url, strlen(orig_url));
@@ -281,7 +281,7 @@ extern CURLCode `{ CURLcode `}
 	fun is_valid_protocol:Bool `{ return recv == CURLE_UNSUPPORTED_PROTOCOL; `}
 	fun is_valid_init:Bool `{ return recv == CURLE_FAILED_INIT; `}
 	fun to_i:Int do return code end
-	redef fun to_s import NativeString::to_s_with_copy `{
+	redef fun to_s import NativeString.to_s_with_copy `{
 		char *c = (char*)curl_easy_strerror(recv);
 		return NativeString_to_s_with_copy(c);
 	`}
@@ -292,7 +292,7 @@ extern CURLSList `{ struct curl_slist * `}
 	# Empty constructor which allow us to avoid the use of Nit NULLABLE type
 	private new `{ return NULL; `}
 	# Constructor allow us to get list instancied by appending an element inside.
-	new with_str(s: String) import String::to_cstring `{
+	new with_str(s: String) import String.to_cstring `{
 		struct curl_slist *l = NULL;
 		l = curl_slist_append(l, String_to_cstring(s));
 		return l;
@@ -300,7 +300,7 @@ extern CURLSList `{ struct curl_slist * `}
 	# Check for initialization
 	fun is_init:Bool `{ return (recv != NULL); `}
 	# Append an element in the linked list
-	fun append(key: String) import String::to_cstring `{
+	fun append(key: String) import String.to_cstring `{
 		 char *k = String_to_cstring(key);
 		 curl_slist_append(recv, (char*)k);
 	`}
@@ -309,7 +309,7 @@ extern CURLSList `{ struct curl_slist * `}
 	# Internal method to check for reachability of next element
 	private fun i_next_reachable(c: CURLSList):Bool `{ return (c != NULL && c->next != NULL); `}
 	# Internal method to get current data
-	private fun i_data(c: CURLSList):String `{ return NativeString_to_s(c->data); `}
+	private fun i_data(c: CURLSList):String import NativeString.to_s `{ return NativeString_to_s(c->data); `}
 	# Internal method to get next element
 	private fun i_next(c: CURLSList):CURLSList `{ return c->next; `}
 	# Convert current low level List to an Array[String] object
@@ -341,18 +341,18 @@ redef class Collection[E]
 	end
 end
 
-# Array Response type of CCurl::easy_getinfo method
+# Array Response type of CCurl.easy_getinfo method
 class CURLInfoResponseArray
 	var response:Array[String] = new Array[String]
 	private var prim_response:CURLSList = new CURLSList
 end
 
-# Long Response type of CCurl::easy_getinfo method
+# Long Response type of CCurl.easy_getinfo method
 class CURLInfoResponseLong
 	var response:Int=0
 end
 
-# Double Response type of CCurl::easy_getinfo method
+# Double Response type of CCurl.easy_getinfo method
 class CURLInfoResponseDouble
 	var response:Int=0
 end
@@ -362,13 +362,13 @@ class CURLInfoResponseString
 	var response:String = ""
 end
 
-# Reproduce Enum of available CURL SList information, used for CCurl::easy_getinfo
+# Reproduce Enum of available CURL SList information, used for CCurl.easy_getinfo
 extern CURLInfoSList `{ CURLINFO `}
 	new ssl_engines `{ return CURLINFO_SSL_ENGINES; `}
 	new cookielist `{ return CURLINFO_COOKIELIST; `}
 end
 
-# Reproduce Enum of available CURL Long information, used for CCurl::easy_getinfo
+# Reproduce Enum of available CURL Long information, used for CCurl.easy_getinfo
 extern CURLInfoLong `{ CURLINFO `}
 	new response_code `{ return CURLINFO_RESPONSE_CODE; `}
 	new header_size `{ return CURLINFO_HEADER_SIZE; `}
@@ -390,7 +390,7 @@ extern CURLInfoLong `{ CURLINFO `}
 	new rtsp_cseq_recv `{ return CURLINFO_RTSP_CSEQ_RECV; `}
 end
 
-# Reproduce Enum of available CURL Double information, used for CCurl::easy_getinfo
+# Reproduce Enum of available CURL Double information, used for CCurl.easy_getinfo
 extern CURLInfoDouble `{ CURLINFO `}
 	new total_time `{ return CURLINFO_TOTAL_TIME; `}
 	new namelookup_time `{ return CURLINFO_NAMELOOKUP_TIME; `}
@@ -407,7 +407,7 @@ extern CURLInfoDouble `{ CURLINFO `}
 	new content_length_upload `{ return CURLINFO_CONTENT_LENGTH_UPLOAD; `}
 end
 
-# Reproduce Enum of available CURL Chars information, used for CCurl::easy_getinfo
+# Reproduce Enum of available CURL Chars information, used for CCurl.easy_getinfo
 extern CURLInfoChars `{ CURLINFO `}
 	new content_type `{ return CURLINFO_CONTENT_TYPE; `}
 	new effective_url `{ return CURLINFO_EFFECTIVE_URL; `}
@@ -461,7 +461,7 @@ extern CURLStatusCode `{ int `}
 	fun to_i:Int `{ return recv; `}
 end
 
-# Reproduce Enum of CURL Options usable, used for CCurl::easy_setopt
+# Reproduce Enum of CURL Options usable, used for CCurl.easy_setopt
 extern CURLOption `{ CURLoption `}
 	new write_function `{ return CURLOPT_WRITEFUNCTION; `}
 	new write_data `{ return CURLOPT_WRITEDATA; `}

@@ -10407,17 +10407,17 @@ redef class AFullPropExternCall
     private init empty_init do end
 
     init init_afullpropexterncall (
-            n_classid: nullable TClassid,
-            n_quad: nullable TQuad,
+            n_type: nullable AType,
+            n_dot: nullable TDot,
             n_methid: nullable AMethid
     )
     do
         empty_init
-        _n_classid = n_classid.as(not null)
-	n_classid.parent = self
-        _n_quad = n_quad
-	if n_quad != null then
-		n_quad.parent = self
+        _n_type = n_type.as(not null)
+	n_type.parent = self
+        _n_dot = n_dot
+	if n_dot != null then
+		n_dot.parent = self
 	end
         _n_methid = n_methid.as(not null)
 	n_methid.parent = self
@@ -10425,23 +10425,23 @@ redef class AFullPropExternCall
 
     redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
-        if _n_classid == old_child then
+        if _n_type == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa TClassid
-                _n_classid = new_child
+		assert new_child isa AType
+                _n_type = new_child
 	    else
 		abort
             end
             return
 	end
-        if _n_quad == old_child then
+        if _n_dot == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa TQuad
-                _n_quad = new_child
+		assert new_child isa TDot
+                _n_dot = new_child
 	    else
-		_n_quad = null
+		_n_dot = null
             end
             return
 	end
@@ -10457,14 +10457,14 @@ redef class AFullPropExternCall
 	end
     end
 
-		redef fun n_classid=(node)
+		redef fun n_type=(node)
 		do
-			_n_classid = node
+			_n_type = node
 			node.parent = self
 		end
-		redef fun n_quad=(node)
+		redef fun n_dot=(node)
 		do
-			_n_quad = node
+			_n_dot = node
 			if node != null then
 				node.parent = self
 			end
@@ -10478,9 +10478,9 @@ redef class AFullPropExternCall
 
     redef fun visit_all(v: Visitor)
     do
-        v.enter_visit(_n_classid)
-        if _n_quad != null then
-            v.enter_visit(_n_quad.as(not null))
+        v.enter_visit(_n_type)
+        if _n_dot != null then
+            v.enter_visit(_n_dot.as(not null))
         end
         v.enter_visit(_n_methid)
     end
@@ -10489,21 +10489,21 @@ redef class AInitPropExternCall
     private init empty_init do end
 
     init init_ainitpropexterncall (
-            n_classid: nullable TClassid
+            n_type: nullable AType
     )
     do
         empty_init
-        _n_classid = n_classid.as(not null)
-	n_classid.parent = self
+        _n_type = n_type.as(not null)
+	n_type.parent = self
     end
 
     redef fun replace_child(old_child: ANode, new_child: nullable ANode)
     do
-        if _n_classid == old_child then
+        if _n_type == old_child then
             if new_child != null then
                 new_child.parent = self
-		assert new_child isa TClassid
-                _n_classid = new_child
+		assert new_child isa AType
+                _n_type = new_child
 	    else
 		abort
             end
@@ -10511,16 +10511,16 @@ redef class AInitPropExternCall
 	end
     end
 
-		redef fun n_classid=(node)
+		redef fun n_type=(node)
 		do
-			_n_classid = node
+			_n_type = node
 			node.parent = self
 		end
 
 
     redef fun visit_all(v: Visitor)
     do
-        v.enter_visit(_n_classid)
+        v.enter_visit(_n_type)
     end
 end
 redef class ACastAsExternCall
@@ -10528,6 +10528,7 @@ redef class ACastAsExternCall
 
     init init_acastasexterncall (
             n_from_type: nullable AType,
+            n_dot: nullable TDot,
             n_kwas: nullable TKwas,
             n_to_type: nullable AType
     )
@@ -10535,6 +10536,10 @@ redef class ACastAsExternCall
         empty_init
         _n_from_type = n_from_type.as(not null)
 	n_from_type.parent = self
+        _n_dot = n_dot
+	if n_dot != null then
+		n_dot.parent = self
+	end
         _n_kwas = n_kwas.as(not null)
 	n_kwas.parent = self
         _n_to_type = n_to_type.as(not null)
@@ -10550,6 +10555,16 @@ redef class ACastAsExternCall
                 _n_from_type = new_child
 	    else
 		abort
+            end
+            return
+	end
+        if _n_dot == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TDot
+                _n_dot = new_child
+	    else
+		_n_dot = null
             end
             return
 	end
@@ -10580,6 +10595,13 @@ redef class ACastAsExternCall
 			_n_from_type = node
 			node.parent = self
 		end
+		redef fun n_dot=(node)
+		do
+			_n_dot = node
+			if node != null then
+				node.parent = self
+			end
+		end
 		redef fun n_kwas=(node)
 		do
 			_n_kwas = node
@@ -10595,6 +10617,9 @@ redef class ACastAsExternCall
     redef fun visit_all(v: Visitor)
     do
         v.enter_visit(_n_from_type)
+        if _n_dot != null then
+            v.enter_visit(_n_dot.as(not null))
+        end
         v.enter_visit(_n_kwas)
         v.enter_visit(_n_to_type)
     end

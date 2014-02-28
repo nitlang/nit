@@ -24,7 +24,6 @@ extern const struct type type_array__Arraykernel__Object;
 val* NEW_array__NativeArray(int length, const struct type* type);
 extern const struct type type_array__NativeArraykernel__Object;
 extern const int COLOR_array__Array__with_native;
-void CHECK_NEW_array__Array(val*);
 extern const int COLOR_string__Object__to_s;
 extern const int COLOR_parser_nodes__ANode__debug;
 extern const int COLOR_astvalidation__ASTValidationVisitor__seen;
