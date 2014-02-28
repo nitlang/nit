@@ -1349,13 +1349,13 @@ class SeparateCompilerVisitor
 			self.add_decl("const struct type* {type_struct};")
 
 			# Either with resolution_table with a direct resolution
-			hardening_live_open_type(ntype)
-			link_unresolved_type(self.frame.mpropdef.mclassdef, ntype)
-			self.require_declaration(ntype.const_color)
+			hardening_live_open_type(mtype)
+			link_unresolved_type(self.frame.mpropdef.mclassdef, mtype)
+			self.require_declaration(mtype.const_color)
 			if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
-				self.add("{type_struct} = {recv_type_info}->resolution_table->types[HASH({recv_type_info}->resolution_table->mask, {ntype.const_color})];")
+				self.add("{type_struct} = {recv_type_info}->resolution_table->types[HASH({recv_type_info}->resolution_table->mask, {mtype.const_color})];")
 			else
-				self.add("{type_struct} = {recv_type_info}->resolution_table->types[{ntype.const_color}];")
+				self.add("{type_struct} = {recv_type_info}->resolution_table->types[{mtype.const_color}];")
 			end
 			if compiler.modelbuilder.toolcontext.opt_typing_test_metrics.value then
 				self.compiler.count_type_test_unresolved[tag] += 1
