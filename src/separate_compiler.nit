@@ -95,6 +95,11 @@ redef class ModelBuilder
 		for t in mtypes do
 			compiler.compile_type_to_c(t)
 		end
+		# compile remaining types structures (useless but needed for the symbol resolution at link-time)
+		for t in compiler.undead_types do
+			if mtypes.has(t) then continue
+			compiler.compile_type_to_c(t)
+		end
 
 		compiler.display_stats
 
@@ -443,7 +448,6 @@ class SeparateCompiler
 		var mtypes = new HashSet[MType]
 		mtypes.add_all(self.runtime_type_analysis.live_types)
 		mtypes.add_all(self.runtime_type_analysis.live_cast_types)
-		mtypes.add_all(self.undead_types)
 		for c in self.box_kinds.keys do
 			mtypes.add(c.mclass_type)
 		end
