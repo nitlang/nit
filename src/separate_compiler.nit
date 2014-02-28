@@ -630,6 +630,10 @@ class SeparateCompiler
 	# Globaly compile the type structure of a live type
 	fun compile_type_to_c(mtype: MType)
 	do
+		assert not mtype.need_anchor
+		var layout = self.type_layout
+		var is_live = mtype isa MClassType and runtime_type_analysis.live_types.has(mtype)
+		var is_cast_live = runtime_type_analysis.live_cast_types.has(mtype)
 		var c_name = mtype.c_name
 		var v = new SeparateCompilerVisitor(self)
 		v.add_decl("/* runtime type {mtype} */")
@@ -639,39 +643,70 @@ class SeparateCompiler
 
 		# const struct type_X
 		v.add_decl("const struct type type_{c_name} = \{")
-		v.add_decl("{self.type_layout.ids[mtype]},")
-		v.add_decl("\"{mtype}\", /* class_name_string */")
-		var layout = self.type_layout
-		if layout isa PHLayout[MType, MType] then
-			v.add_decl("{layout.masks[mtype]},")
+
+		# type id (for cast target)
+		if is_cast_live then
+			v.add_decl("{layout.ids[mtype]},")
 		else
-			v.add_decl("{layout.pos[mtype]},")
+			v.add_decl("-1, /*CAST DEAD*/")
 		end
+
+		# type name
+		v.add_decl("\"{mtype}\", /* class_name_string */")
+
+		# type color (for cast target)
+		if is_cast_live then
+			if layout isa PHLayout[MType, MType] then
+				v.add_decl("{layout.masks[mtype]},")
+			else
+				v.add_decl("{layout.pos[mtype]},")
+			end
+		else
+			v.add_decl("-1, /*CAST DEAD*/")
+		end
+
+		# is_nullable bit
 		if mtype isa MNullableType then
 			v.add_decl("1,")
 		else
 			v.add_decl("0,")
 		end
-		if compile_type_resolution_table(mtype) then
-			v.require_declaration("resolution_table_{c_name}")
-			v.add_decl("&resolution_table_{c_name},")
-		else
-			v.add_decl("NULL,")
-		end
-		v.add_decl("{self.type_tables[mtype].length},")
-		v.add_decl("\{")
-		for stype in self.type_tables[mtype] do
-			if stype == null then
-				v.add_decl("-1, /* empty */")
+
+		# resolution table (for receiver)
+		if is_live then
+			var mclass_type = mtype
+			if mclass_type isa MNullableType then mclass_type = mclass_type.mtype
+			assert mclass_type isa MClassType
+			if resolution_tables[mclass_type].is_empty then
+				v.add_decl("NULL, /*NO RESOLUTIONS*/")
 			else
-				v.add_decl("{self.type_layout.ids[stype]}, /* {stype} */")
+				compile_type_resolution_table(mtype)
+				v.require_declaration("resolution_table_{c_name}")
+				v.add_decl("&resolution_table_{c_name},")
 			end
+		else
+			v.add_decl("NULL, /*DEAD*/")
 		end
-		v.add_decl("\},")
+
+		# cast table (for receiver)
+		if is_live then
+			v.add_decl("{self.type_tables[mtype].length},")
+			v.add_decl("\{")
+			for stype in self.type_tables[mtype] do
+				if stype == null then
+					v.add_decl("-1, /* empty */")
+				else
+					v.add_decl("{layout.ids[stype]}, /* {stype} */")
+				end
+			end
+			v.add_decl("\},")
+		else
+			v.add_decl("0, \{\}, /*DEAD TYPE*/")
+		end
 		v.add_decl("\};")
 	end
 
-	fun compile_type_resolution_table(mtype: MType): Bool do
+	fun compile_type_resolution_table(mtype: MType) do
 
 		var mclass_type: MClassType
 		if mtype isa MNullableType then
@@ -679,7 +714,6 @@ class SeparateCompiler
 		else
 			mclass_type = mtype.as(MClassType)
 		end
-		if not self.resolution_tables.has_key(mclass_type) then return false
 
 		var layout = self.resolution_layout
 
@@ -714,7 +748,6 @@ class SeparateCompiler
 		end
 		v.add_decl("\}")
 		v.add_decl("\};")
-		return true
 	end
 
 	# Globally compile the table of the class mclass
