@@ -1266,11 +1266,37 @@ class SeparateCompilerVisitor
 		end
 	end
 
+	# Check that mtype is a live open type
+	fun hardening_live_open_type(mtype: MType)
+	do
+		if not compiler.modelbuilder.toolcontext.opt_hardening.value then return
+		self.require_declaration(mtype.const_color)
+		var col = mtype.const_color
+		self.add("if({col} == -1) \{")
+		self.add("fprintf(stderr, \"Resolution of a dead open type: %s\\n\", \"{mtype.to_s.escape_to_c}\");")
+		self.add_abort("open type dead")
+		self.add("\}")
+	end
+
+	# Check that mtype it a pointer to a live cast type
+	fun hardening_cast_type(t: String)
+	do
+		if not compiler.modelbuilder.toolcontext.opt_hardening.value then return
+		add("if({t} == NULL) \{")
+		add_abort("cast type null")
+		add("\}")
+		add("if({t}->id == -1 || {t}->color == -1) \{")
+		add("fprintf(stderr, \"Try to cast on a dead cast type: %s\\n\", {t}->name);")
+		add_abort("cast type dead")
+		add("\}")
+	end
+
 	redef fun init_instance(mtype)
 	do
 		self.require_declaration("NEW_{mtype.mclass.c_name}")
 		var compiler = self.compiler
 		if mtype isa MGenericType and mtype.need_anchor then
+			hardening_live_open_type(mtype)
 			link_unresolved_type(self.frame.mpropdef.mclassdef, mtype)
 			var recv = self.frame.arguments.first
 			var recv_type_info = self.type_info(recv)
@@ -1323,6 +1349,7 @@ class SeparateCompilerVisitor
 			self.add_decl("const struct type* {type_struct};")
 
 			# Either with resolution_table with a direct resolution
+			hardening_live_open_type(ntype)
 			link_unresolved_type(self.frame.mpropdef.mclassdef, ntype)
 			self.require_declaration(ntype.const_color)
 			if compiler.modelbuilder.toolcontext.opt_phmod_typing.value or compiler.modelbuilder.toolcontext.opt_phand_typing.value then
@@ -1334,6 +1361,7 @@ class SeparateCompilerVisitor
 				self.compiler.count_type_test_unresolved[tag] += 1
 				self.add("count_type_test_unresolved_{tag}++;")
 			end
+			hardening_cast_type(type_struct)
 			self.add("{cltype} = {type_struct}->color;")
 			self.add("{idtype} = {type_struct}->id;")
 			if maybe_null and accept_null == "0" then
@@ -1345,6 +1373,7 @@ class SeparateCompilerVisitor
 		else if ntype isa MClassType then
 			compiler.undead_types.add(mtype)
 			self.require_declaration("type_{mtype.c_name}")
+			hardening_cast_type("(&type_{mtype.c_name})")
 			self.add("{cltype} = type_{mtype.c_name}.color;")
 			self.add("{idtype} = type_{mtype.c_name}.id;")
 			if compiler.modelbuilder.toolcontext.opt_typing_test_metrics.value then
@@ -1547,6 +1576,7 @@ class SeparateCompilerVisitor
 		assert mtype isa MGenericType
 		var compiler = self.compiler
 		if mtype.need_anchor then
+			hardening_live_open_type(mtype)
 			link_unresolved_type(self.frame.mpropdef.mclassdef, mtype)
 			var recv = self.frame.arguments.first
 			var recv_type_info = self.type_info(recv)
