@@ -17,39 +17,42 @@
 # Services related to pathfinding of graphs using A*
 # A single graph may have different properties according to the `PathContext` used
 #
+#
 # Usage:
 #
-#    # Weighted graph (letters are nodes, digits are weights):
-#    #
-#    #     a -2- b
-#    #    /     /
-#    #   3     1
-#    #  /     /
-#    # c -3- d -8- e
-#    #
-#    var graph = new Graph[Node,WeigthedLink[Node]]
+# ~~~
+# # Weighted graph (letters are nodes, digits are weights):
+# #
+# #     a -2- b
+# #    /     /
+# #   3     1
+# #  /     /
+# # c -3- d -8- e
+# #
+# var graph = new Graph[Node,WeigthedLink[Node]]
 #
-#    var na = new Node(graph)
-#    var nb = new Node(graph)
-#    var nc = new Node(graph)
-#    var nd = new Node(graph)
-#    var ne = new Node(graph)
+# var na = new Node(graph)
+# var nb = new Node(graph)
+# var nc = new Node(graph)
+# var nd = new Node(graph)
+# var ne = new Node(graph)
 #
-#    var lab = new WeightedLink(graph, na, nb, 2)
-#    var lac = new WeightedLink(graph, na, nc, 3)
-#    var lbd = new WeightedLink(graph, nb, nd, 1)
-#    var lcd = new WeightedLink(graph, nc, nd, 3)
-#    var lde = new WeightedLink(graph, nd, ne, 8)
+# var lab = new WeightedLink(graph, na, nb, 2)
+# var lac = new WeightedLink(graph, na, nc, 3)
+# var lbd = new WeightedLink(graph, nb, nd, 1)
+# var lcd = new WeightedLink(graph, nc, nd, 3)
+# var lde = new WeightedLink(graph, nd, ne, 8)
 #
-#    var context = new WeightedPathContext(graph)
+# var context = new WeightedPathContext(graph)
 #
-#    var path = na.path_to(ne, 100, context)
-#    assert path != null else print "No possible path"
+# var path = na.path_to(ne, 100, context)
+# assert path != null else print "No possible path"
 #
-#    assert path.step == nb
-#    assert path.step == nd
-#    assert path.step == ne
-#    assert path.at_end_of_path
+# assert path.step == nb
+# assert path.step == nd
+# assert path.step == ne
+# assert path.at_end_of_path
+# ~~~
 module a_star
 
 redef class Object
