@@ -48,23 +48,7 @@ abstract class AbstractString
 	# A `from` index < 0 will be replaced by 0.
 	# Unless a `count` value is > 0 at the same time.
 	# In this case, `from += count` and `count -= from`.
-	fun substring(from: Int, count: Int): String
-	do
-		assert count >= 0
-		count += from
-		if from < 0 then from = 0
-		if count > length then count = length
-		if from < count then
-			var r = new Buffer.with_capacity(count - from)
-			while from < count do
-				r.chars.push(_items[from])
-				from += 1
-			end
-			return r.to_s
-		else
-			return ""
-		end
-	end
+	fun substring(from: Int, count: Int): String is abstract
 
 	# Create a substring from `self` beginning at the `from` position
 	#
@@ -942,6 +926,25 @@ class Buffer
 	end
 
 	readable private var _capacity: Int
+
+	redef fun substring(from, count)
+	do
+		assert count >= 0
+		count += from
+		if from < 0 then from = 0
+		if count > length then count = length
+		if from < count then
+			var r = new Buffer.with_capacity(count - from)
+			while from < count do
+				r.chars.push(_items[from])
+				from += 1
+			end
+			return r.to_s
+		else
+			return ""
+		end
+	end
+
 end
 
 private class FlatBufferReverseIterator
