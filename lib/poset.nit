@@ -230,4 +230,20 @@ class POSetElement[E: Object]
 	do
 		return t != self.element and self.tos.has(t)
 	end
+
+	# The length of the shortest path to the root of the poset hierarchy
+	fun depth: Int do
+		if direct_greaters.is_empty then
+			return 0
+		end
+		var min = -1
+		for p in direct_greaters do
+			var d = poset[p].depth + 1
+			if min == -1 or d < min then
+				min = d
+			end
+		end
+		return min
+
+	end
 end

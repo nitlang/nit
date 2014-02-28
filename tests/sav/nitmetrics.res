@@ -11,6 +11,8 @@
   --only-parse            Only proceed to parse step of loaders
   --only-metamodel        Stop after meta-model processing
   --all                   Compute all metrics
+  --mmodules              Compute metrics about mmodules
+  --mclasses              Compute metrics about mclasses
   --inheritance           Compute metrics about inheritance usage
   --refinement            Compute metrics about refinement usage
   --self                  Compute metrics about the usage of explicit and implicit self
@@ -23,3 +25,4 @@
   --generate_hyperdoc     Generate Hyperdoc
   --poset                 Complete metrics on posets
   -d, --dir               Directory where some statistics files are generated
+  --no-colors             Disable colors in console outputs

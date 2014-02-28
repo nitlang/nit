@@ -27,6 +27,8 @@ class Counter[E: Object]
 
 	private var map = new HashMap[E, Int]
 
+	redef fun iterator do return map.iterator
+
 	# The number of counted occurrences of `e`
 	redef fun [](e: E): Int
 	do
@@ -45,6 +47,12 @@ class Counter[E: Object]
 	redef fun keys do return map.keys
 
 	redef fun values do return map.values
+
+	redef fun length do return map.length
+
+	redef fun is_empty do return map.is_empty
+
+	redef fun clear do map.clear
 
 	# Count one more occurrence of `e`
 	fun inc(e: E)
@@ -117,6 +125,42 @@ class Counter[E: Object]
 			var t = list[min-i-1]
 			print "  {element_to_s(t)}: {self[t]} ({div(self[t]*100,self.total)}%)"
 		end
+	end
+
+	# Return the element with the highest value
+	fun max: nullable E do
+		var max: nullable Int = null
+		var elem: nullable E = null
+		for e, v in map do
+			if max == null or v > max then
+				max = v
+				elem = e
+			end
+		end
+		return elem
+	end
+
+	# Return the couple with the lowest value
+	fun min: nullable E do
+		var min: nullable Int = null
+		var elem: nullable E = null
+		for e, v in map do
+			if min == null or v < min then
+				min = v
+				elem = e
+			end
+		end
+		return elem
+	end
+
+	# Values average
+	fun avg: Float do
+		if values.is_empty then return 0.0
+		var sum = 0
+		for value in map.values do
+			sum += value
+		end
+		return sum.to_f / values.length.to_f
 	end
 end
 
