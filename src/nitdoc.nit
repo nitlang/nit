@@ -42,6 +42,7 @@ class NitdocContext
 	private var opt_dir = new OptionString("Directory where doc is generated", "-d", "--dir")
 	private var opt_source = new OptionString("What link for source (%f for filename, %l for first line, %L for last line)", "--source")
 	private var opt_sharedir = new OptionString("Directory containing the nitdoc files", "--sharedir")
+	private var opt_shareurl = new OptionString("Do not copy shared files, link JS and CSS file to share url instead", "--shareurl")
 	private var opt_nodot = new OptionBool("Do not generate graphes with graphviz", "--no-dot")
 	private var opt_private: OptionBool = new OptionBool("Generate the private API", "--private")
 
@@ -60,7 +61,7 @@ class NitdocContext
 	init do
 		toolcontext.option_context.add_option(opt_dir)
 		toolcontext.option_context.add_option(opt_source)
-		toolcontext.option_context.add_option(opt_sharedir)
+		toolcontext.option_context.add_option(opt_sharedir, opt_shareurl)
 		toolcontext.option_context.add_option(opt_nodot)
 		toolcontext.option_context.add_option(opt_private)
 		toolcontext.option_context.add_option(opt_custom_title)
@@ -119,17 +120,11 @@ class NitdocContext
 				print "Error: Cannot locate nitdoc share files. Uses --sharedir or envvar NIT_DIR"
 				abort
 			end
-			dir = "{share_dir.to_s}/scripts/js-facilities.js"
-			if share_dir == null then
-				print "Error: Invalid nitdoc share files. Check --sharedir or envvar NIT_DIR"
-				abort
-			end
-
-			if opt_private.value then
-				min_visibility = none_visibility
-			else
-				min_visibility = protected_visibility
-			end
+		end
+		if opt_private.value then
+			min_visibility = none_visibility
+		else
+			min_visibility = protected_visibility
 		end
 		var gh_upstream = opt_github_upstream.value
 		var gh_base_sha = opt_github_base_sha1.value
@@ -150,7 +145,11 @@ class NitdocContext
 	fun generate_nitdoc do
 		# Create destination dir if it's necessary
 		if not output_dir.file_exists then output_dir.mkdir
-		sys.system("cp -r {share_dir.to_s}/* {output_dir.to_s}/")
+		if opt_shareurl.value == null then
+			sys.system("cp -r {share_dir.to_s}/* {output_dir.to_s}/")
+		else
+			sys.system("cp -r {share_dir.to_s}/resources/ {output_dir.to_s}/resources/")
+		end
 		self.dot_dir = null
 		if not opt_nodot.value then self.dot_dir = output_dir.to_s
 		overview
@@ -224,25 +223,20 @@ end
 abstract class NitdocPage
 
 	var ctx: NitdocContext
+	var shareurl = "."
 
 	init(ctx: NitdocContext) do
 		self.ctx = ctx
+		if ctx.opt_shareurl.value != null then shareurl = ctx.opt_shareurl.value.as(not null)
 	end
 
 	protected fun head do
 		append("<meta charset='utf-8'/>")
-		append("<script type='text/javascript' src='scripts/jquery-1.7.1.min.js'></script>")
-		append("<script type='text/javascript' src='scripts/ZeroClipboard.min.js'></script>")
-		append("<script type='text/javascript' src='scripts/Nitdoc.UI.js'></script>")
-		append("<script type='text/javascript' src='scripts/Markdown.Converter.js'></script>")
-		append("<script type='text/javascript' src='scripts/base64.js'></script>")
-		append("<script type='text/javascript' src='scripts/Nitdoc.GitHub.js'></script>")
-		append("<script type='text/javascript' src='quicksearch-list.js'></script>")
-		append("<script type='text/javascript' src='scripts/Nitdoc.QuickSearch.js'></script>")
-		append("<link rel='stylesheet' href='styles/main.css' type='text/css' media='screen'/>")
-		append("<link rel='stylesheet' href='styles/Nitdoc.UI.css' type='text/css' media='screen'/>")
-		append("<link rel='stylesheet' href='styles/Nitdoc.QuickSearch.css' type='text/css' media='screen'/>")
-		append("<link rel='stylesheet' href='styles/Nitdoc.GitHub.css' type='text/css' media='screen'/>")
+		append("<link rel='stylesheet' href='{shareurl}/css/main.css' type='text/css'/>")
+		append("<link rel='stylesheet' href='{shareurl}/css/Nitdoc.UI.css' type='text/css''/>")
+		append("<link rel='stylesheet' href='{shareurl}/css/Nitdoc.QuickSearch.css' type='text/css'/>")
+		append("<link rel='stylesheet' href='{shareurl}/css/Nitdoc.GitHub.css' type='text/css'/>")
+		append("<link rel='stylesheet' href='{shareurl}/css/Nitdoc.ModalBox.css' type='text/css'/>")
 		var title = ""
 		if ctx.opt_custom_title.value != null then
 			title = " | {ctx.opt_custom_title.value.to_s}"
@@ -318,6 +312,7 @@ abstract class NitdocPage
 		head
 		append("</head>")
 		append("<body")
+		append(" data-bootstrap-share='{shareurl}'")
 		if ctx.opt_github_upstream.value != null and ctx.opt_github_base_sha1.value != null then
 			append(" data-github-upstream='{ctx.opt_github_upstream.value.as(not null)}'")
 			append(" data-github-base-sha1='{ctx.opt_github_base_sha1.value.as(not null)}'")
@@ -328,6 +323,9 @@ abstract class NitdocPage
 		if ctx.opt_custom_footer_text.value != null then footed = "footed"
 		append("<div class='page {footed}'>")
 		content
+		append("</div>")
+		footer
+		append("<script data-main=\"{shareurl}/js/nitdoc\" src=\"{shareurl}/js/lib/require.js\"></script>")
 
 		# piwik tracking
 		var tracker_url = ctx.opt_piwik_tracker.value
@@ -348,8 +346,6 @@ abstract class NitdocPage
 			append(" </script>")
 			append("<!-- End Piwik Code -->")
 		end
-		append("</div>")
-		footer
 		append("</body>")
 	end
 
@@ -1823,11 +1819,13 @@ redef class AModule
 		return ""
 	end
 
+	# The doc location or the first line of the block if doc node is null
 	private fun doc_location: Location do
 		if n_moduledecl != null and n_moduledecl.n_doc != null then
 			return n_moduledecl.n_doc.location
 		end
-		return location
+		var l = location
+		return new Location(l.file, l.line_start, l.line_start, l.column_start, l.column_start)
 	end
 end
 
@@ -1847,9 +1845,11 @@ redef class AStdClassdef
 		return ""
 	end
 
+	# The doc location or the first line of the block if doc node is null
 	private fun doc_location: Location do
 		if n_doc != null then return n_doc.location
-		return location
+		var l = location
+		return new Location(l.file, l.line_start, l.line_start, l.column_start, l.column_start)
 	end
 end
 
@@ -1871,7 +1871,9 @@ redef class APropdef
 
 	private fun doc_location: Location do
 		if n_doc != null then return n_doc.location
-		return location
+		var l = location
+		return new Location(l.file, l.line_start, l.line_start, l.column_start, l.column_start)
+
 	end
 end
 

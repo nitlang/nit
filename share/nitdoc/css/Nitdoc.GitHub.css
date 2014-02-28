@@ -21,9 +21,9 @@
  */
 
 #nitdoc-github-li {
-	float: right;
+	float: left;
 	padding: 0;
-	margin: -2px 15px 5px 5px;
+	margin: -2px 5px 5px 15px;
 }
 
 #nitdoc-github-li.current {
@@ -40,7 +40,7 @@
 	position: absolute;
 	width : 220px;
 	margin-top: 2px;
-	margin-left: -208px;
+	margin-left: -10px;
 	display: block;
 	padding: 10px;
 	text-align: left;
@@ -68,8 +68,7 @@
 	border-style: solid;
 	border-width: 7px;
 	top: -7px;
-	left: 50%;
-	margin-left: 90px;
+	margin-left: 2px;
 	border-bottom-color: #999;
 	border-bottom-color: rgba(0, 0, 0, 0.25);
 	border-top-width: 0;
@@ -120,6 +119,7 @@
 	margin-bottom: 20px;
 }
 
+
 #nitdoc-github-loginbox a.nitdoc-github-loginbox-githublink {
 	display: block;
 	margin: 10px;
@@ -130,7 +130,7 @@
  * Nitdoc Github buttons
  */
 
-button.nitdoc-github-button {
+.nitdoc-github-button {
 	display: inline-block;
 	cursor: pointer;
 	background-color: #92C929;
@@ -177,77 +177,43 @@ button.nitdoc-github-button img {
 	width: 16px;
 }
 
-/*
- * Modal Box
- */
-
-.nitdoc-github-fade {
-	background: #000;
-	position: fixed; left: 0; top: 0;
-	width: 100%; height: 100%;
-	opacity: .80;
-	filter: alpha(opacity=80);
-	z-index: 9999;
-}
-
-.nitdoc-github-modal {
-	background: #fff;
-	padding: 20px;
-	border: 1px solid #ddd;
-	float: left;
-	position: fixed;
-	z-index: 99999;
-	/* fix Box Shadow CSS3 */
-	-webkit-box-shadow: 0px 0px 20px #000;
-	-moz-box-shadow: 0px 0px 20px #000;
-	box-shadow: 0px 0px 20px #000;
-	/* round corners CSS3 */
-	-webkit-border-radius: 2px;
-	-moz-border-radius: 2px;
-	border-radius: 2px;
-	text-align: left;
-}
-
-.nitdoc-github-buttons, .nitdoc-github-modal h3 {
-	text-align: center;
-}
-
-.nitdoc-github-modal.nitdoc-github-error h3 {
-	color: red;
-}
-
-.nitdoc-github-modal textarea {
-	min-width: 300px;
-	width: 100%;
-}
-
-.nitdoc-github-modal button {
-	line-height: 20px;
-	margin-bottom: 0;
-	padding: 4px 12px;
-	margin-top: 20px;
-}
-
-.nitdoc-github-close {
-	float: right;
-	margin: -22px -17px 0 0;
-	cursor: pointer;
-	font-size: 1.3em;
-	font-weight: bold;
-	text-transform: lowercase;
-}
-
 /* Comment editing */
 
 .nitdoc-github-commentbox {
+	margin: 1em 5px;
+	border:	1px solid #eee;
+	padding: 1em;
+	background: #fff;
+	-moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+	-webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.nitdoc-github-commentbox h3 {
+	margin: 0;
+}
+
+.nitdoc-github-commentbox-buttons {
 	text-align: right;
 }
 
+.nitdoc-github-commentbox dl {
+	margin-bottom: 0;
+}
+
+.nitdoc-github-commentbox dt {
+	margin-bottom: 0.5em;
+}
+
+.nitdoc-github-commentbox dd {
+	margin: 0 0 1em 0;
+}
+
 .nitdoc-github-commentbox textarea {
+	display: block;
 	font-family: monospace;
 	font-size: 1em;
 	width: 100%;
-	margin-top: 1em;
 	padding: 4px;
 	padding-left: 11px;
 	overflow-y: hidden;
@@ -286,4 +252,55 @@ a.nitdoc-github-cancel {
 a.nitdoc-github-update {
 	color: orange;
 	cursor: pointer;
+}
+
+.nitdoc-dialog h4 {
+	font-weight: bold;
+}
+
+/* hljs */
+
+.hljs.nitcode {
+	padding-left: 10px;
+}
+
+.hljs-comment, .hljs-comment-block {
+	color: #777;
+}
+
+.hljs-keyword {
+	color: #000;
+	font-weight: bold;
+}
+
+.hljs-title {
+	font-weight: bold;
+}
+
+.hljs-module {
+	color: #3762E4;
+}
+
+.hljs-class .hljs-title {
+	color: #3762E4;
+}
+
+.hljs-type {
+	color: #3762E4;
+}
+
+.hljs-string {
+	color: #8F1546;
+}
+
+.hljs-subst {
+	color: #9E6BEB;
+}
+
+.hljs-fun .hljs-title {
+	color: #3762E4;
+}
+
+.hljs-char, .hljs-number {
+	color: #009999;
 }
