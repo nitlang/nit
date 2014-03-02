@@ -67,7 +67,7 @@ class AndroidToolchain
 	do
 		var normal_compile_dir = super
 		android_project_root = normal_compile_dir
-		return "{normal_compile_dir}/jni/"
+		return "{normal_compile_dir}/jni/nit_compile/"
 	end
 
 	redef fun write_files(compiler, compile_dir, cfiles)
@@ -85,6 +85,9 @@ class AndroidToolchain
 		var dir = "{android_project_root}/jni/"
 		if not dir.file_exists then dir.mkdir
 
+		dir = compile_dir
+		if not dir.file_exists then dir.mkdir
+
 		# compile normal C files
 		super(compiler, compile_dir, cfiles)
 
@@ -93,9 +96,17 @@ class AndroidToolchain
 			if f isa ExternCFile then cfiles.add(f.filename.basename(""))
 		end
 
-		### generate makefile into "{compile_dir}/Android.mk"
-		if not dir.file_exists then dir.mkdir
+		## Generate delagating makefile
+		dir = "{android_project_root}/jni/"
 		var file = new OFStream.open("{dir}/Android.mk")
+		file.write """
+include $(call all-subdir-makefiles)
+"""
+		file.close
+
+		### generate makefile into "{compile_dir}/Android.mk"
+		dir = compile_dir
+		file = new OFStream.open("{dir}/Android.mk")
 		file.write """
 LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
