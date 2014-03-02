@@ -116,7 +116,7 @@ LOCAL_MODULE    := main
 LOCAL_SRC_FILES := \\
 {{{cfiles.join(" \\\n")}}}
 LOCAL_LDLIBS    := -llog -landroid -lEGL -lGLESv1_CM -lz
-LOCAL_STATIC_LIBRARIES := android_native_app_glue
+LOCAL_STATIC_LIBRARIES := android_native_app_glue png
 
 include $(BUILD_SHARED_LIBRARY)
 
@@ -172,6 +172,26 @@ $(call import-module,android/native_app_glue)
     <string name="app_name">{{{app_name}}}</string>
 </resources>"""
 		file.close
+
+		### Link to png sources
+		# libpng is not available on Android NDK
+		# FIXME make obtionnal when we have alternatives to mnit
+		var nit_dir = "NIT_DIR".environ
+		var share_dir
+		if not nit_dir.is_empty then
+			share_dir = "{nit_dir}/share/"
+		else
+			share_dir = "{sys.program_name.dirname}/../share/"
+		end
+		if not share_dir.file_exists then 
+			print "Android project error: Nit share directory not found, please use the environment variable NIT_DIR"
+			exit 1
+		end
+		share_dir = share_dir.realpath
+		var target_png_dir = "{android_project_root}/jni/png"
+		if not target_png_dir.file_exists then
+			toolcontext.exec_and_check(["ln", "-s", "{share_dir}/png/", target_png_dir])
+		end
 	end
 
 	redef fun write_makefile(compiler, compile_dir, cfiles)
