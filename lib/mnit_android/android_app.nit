@@ -18,6 +18,7 @@
 module android_app
 
 import android_opengles1
+import android
 
 in "C header" `{
 	#include <jni.h>
