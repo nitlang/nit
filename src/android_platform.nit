@@ -192,6 +192,19 @@ $(call import-module,android/native_app_glue)
 		if not target_png_dir.file_exists then
 			toolcontext.exec_and_check(["ln", "-s", "{share_dir}/png/", target_png_dir])
 		end
+
+		### Link to assets (for mnit and others)
+		# This will be accessed from `android_project_root`
+		var mainmodule_dir = compiler.mainmodule.location.file.filename.dirname
+		var assets_dir = "{mainmodule_dir}/../assets"
+		if not assets_dir.file_exists then assets_dir = "{mainmodule_dir}/assets"
+		if assets_dir.file_exists then
+			assets_dir = share_dir.realpath
+			var target_assets_dir = "{android_project_root}/assets"
+			if not target_assets_dir.file_exists then
+				toolcontext.exec_and_check(["ln", "-s", assets_dir, target_assets_dir])
+			end
+		end
 	end
 
 	redef fun write_makefile(compiler, compile_dir, cfiles)
