@@ -2,7 +2,7 @@ default: linux
 
 linux:
 	mkdir -p bin
-	../../bin/nitc -o bin/dino src/dino_linux.nit
+	../../bin/nitg --global -o bin/dino src/dino_linux.nit
 
 doc:
 	mkdir -p doc

@@ -119,6 +119,7 @@ class Screen
 	var empty_img : Image
 	var up_img : Image
 	var hit_img : Image
+	var numbers: NumberImages
 
 	var game : Game = new Game
 
@@ -127,6 +128,7 @@ class Screen
 		empty_img = app.load_asset( "images/empty.png" ).as(Image)
 		up_img = app.load_asset( "images/up.png" ).as(Image)
 		hit_img = app.load_asset( "images/hit.png" ).as(Image)
+		numbers = app.load_numbers("images/#.png")
 
 		var scale = game.img_dim.to_f / game.img_ori_dim.to_f
 		empty_img.scale = scale
@@ -151,6 +153,8 @@ class Screen
 
 			display.blit( img, hole.x, hole.y-64 )
 		end
+
+		display.blit_number(numbers, game.points, 20, 20)
 	end
 
 	fun input( event : InputEvent ) : Bool
