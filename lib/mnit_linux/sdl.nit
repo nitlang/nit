@@ -39,7 +39,7 @@ extern SDLDisplay in "C" `{SDL_Surface *`}
 	redef type I: SDLImage
 
 	# Initialize a surface with width and height
-	new ( w, h: Int) is extern `{
+	new ( w, h: Int) is extern import enable_mouse_motion_events `{
 		SDL_Init(SDL_INIT_VIDEO);
 
 		if(TTF_Init()==-1) {
@@ -47,11 +47,20 @@ extern SDLDisplay in "C" `{SDL_Surface *`}
 			exit(2);
 		}
 
-		/* ignores mousemotion for performance reasons */
-		SDL_EventState( SDL_MOUSEMOTION, SDL_IGNORE );
+ 		SDL_Surface *self = SDL_SetVideoMode( w, h, 24, SDL_HWSURFACE );
 
-		return SDL_SetVideoMode( w, h, 24, SDL_HWSURFACE );
+		if (!SDLDisplay_enable_mouse_motion_events(self)) {
+			/* ignores mousemotion for performance reasons */
+			SDL_EventState( SDL_MOUSEMOTION, SDL_IGNORE );
+		}
+
+		return self;
 	`}
+
+	# Indicates wether we want the SDL mouse motion event (or only clicks).
+	# Disabled by defaut for performance reason. To activate, redef this method
+	# andd return true
+	fun enable_mouse_motion_events: Bool do return false
 
 	# Destroy the surface
 	fun destroy is extern `{
@@ -129,7 +138,7 @@ extern SDLDisplay in "C" `{SDL_Surface *`}
 
 					return SDLMouseMotionEvent_as_nullable_InputEvent(
 							new_SDLMouseMotionEvent( event.motion.x, event.motion.y,
-								event.motion.xrel, event.motion.yrel ) );
+								event.motion.xrel, event.motion.yrel, SDL_GetMouseState(NULL, NULL)&SDL_BUTTON(1)) );
 
 				case SDL_MOUSEBUTTONDOWN:
 				case SDL_MOUSEBUTTONUP:
@@ -306,12 +315,16 @@ class SDLMouseMotionEvent
 	var rel_x: Float
 	var rel_y: Float
 
-	init ( x, y, rel_x, rel_y: Float )
+	redef var pressed: Bool
+	redef fun depressed: Bool do return not pressed
+
+	init ( x, y, rel_x, rel_y: Float, pressed: Bool )
 	do
 		super( x, y )
 
 		self.rel_x = rel_x
 		self.rel_y = rel_y
+		self.pressed = pressed
 	end
 
 	redef fun to_s do return "MouseMotionEvent at {x}, {y}"
