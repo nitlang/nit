@@ -231,7 +231,7 @@ function bench_nitg-g_options()
 
 	plot "$name.gnu"
 }
-bench_nitg-g_options "hardening" --hardening
+bench_nitg-g_options "slower" --hardening
 bench_nitg-g_options "nocheck" --no-check-covariance --no-check-initialization --no-check-assert --no-check-autocast --no-check-other
 
 function bench_nitg-s_options()
