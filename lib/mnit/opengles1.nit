@@ -62,10 +62,6 @@ in "C header" `{
 		GLuint fbo;
 		GLuint depth;
 		GLuint color;
-		/*
-		EGLSurface surface;
-		int width, height;
-		*/
 	};
 
 	GLenum mnit_opengles_error_code;
@@ -275,7 +271,6 @@ class Opengles1Display
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 		glOrthof(x, x+w, y+h, y, 0.0f, 1.0f);
-		/*glOrthof(0.0f, w, h, 0.0f, 0.0f, 1.0f);*/
 		mnit_zoom = ((float)w)/mnit_width;
 		glMatrixMode(GL_MODELVIEW);
 		glFrontFace( GL_CW );
@@ -373,29 +368,22 @@ class Opengles1Display
 		   LOGW ("error drawing: %i", mnit_opengles_error_code);
 		}
 	`}
-#    fun clear( r, g, b: Int ) is extern `{
-#	glClear(GL_COLOR_BUFFER_BIT);
-#    `}
 
 	# a = top left, b = bottom left, c = bottom right, d = top right
 	redef fun blit_stretched( image, ax, ay, bx, by, cx, cy, dx, dy ) is extern  `{
-		GLfloat texture_coord[6][2] =
+		GLfloat texture_coord[4][2] =
 		{
-			{image->src_xo, image->src_yo},
 			{image->src_xo, image->src_yi},
 			{image->src_xi, image->src_yi},
 			{image->src_xo, image->src_yo},
-			{image->src_xi, image->src_yi},
 			{image->src_xi, image->src_yo}
 		};
 
 		GLfloat mnit_opengles_vertices_stretched[6][3] =
 		{
-			{ax, ay, 0.0f},
 			{bx, by, 0.0f},
 			{cx, cy, 0.0f},
 			{ax, ay, 0.0f},
-			{cx, cy, 0.0f},
 			{dx, dy, 0.0f},
 		};
 
@@ -483,38 +471,13 @@ extern Opengles1Image in "C" `{struct mnit_opengles_Texture *`}
     `}
 end
 
-
+# FIXME this class is broken
 extern Opengles1DrawableImage in "C" `{struct mnit_opengles_DrawableTexture*`}
 	super DrawableImage
     new ( w, h: Int ) is extern `{
 		struct mnit_opengles_DrawableTexture *image =
 			malloc( sizeof(struct mnit_opengles_DrawableTexture) );
 
-		#ifdef a
-		const EGLint attribs[] = {
-			EGL_WIDTH, w,
-			EGL_HEIGHT, h,
-			EGL_TEXTURE_FORMAT, EGL_TEXTURE_RGBA,
-			EGL_TEXTURE_TARGET, EGL_TEXTURE_2D,
-			EGL_NONE
-		};
-
-		image->surface = eglCreatePbufferSurface( andronit.display,
-								 andronit.config,
-								 attribs );
-		if ( eglGetError() )
-			LOGW( "eglCreatePbuffer error" );
-
-		image->width = w;
-		image->height = h;
-		image->center_x = w/2;
-		image->center_y = h/2;
-		eglMakeCurrent( andronit.display,
-						surface,
-						surface,
-						andronit.context );
-
-	#else
 		/* texture */
 		glGenTextures(1, &image->super.texture);
 		glBindTexture(GL_TEXTURE_2D, image->super.texture);
@@ -572,29 +535,17 @@ extern Opengles1DrawableImage in "C" `{struct mnit_opengles_DrawableTexture*`}
 		image->super.scale = 1.0f;
 		image->super.blended = 0;
 
-		#endif
-
 		if (glGetError() != GL_NO_ERROR) LOGW( "gl error");
 
 		return image;
 	`}
 
-#    fun image: I is extern `{
-#        struct mnit_opengles_Texture *image;
-#        const uint_least32_t *pixels;
-#        pixels = malloc( sizeof(uint_least32_t)*recv->width*recv->height );
-#        glReadPixels( 0, 0, recv->width, recv->height,
-#                      GL_RGBA, GL_UNSIGNED_BYTE, pixels );
-#        image = mnit_opengles_load_image( pixels, recv->width, recv->height );
-#        return image;
-
     fun set_as_target is extern `{
 		LOGI( "sat %i", recv->fbo );
 		glBindFramebufferOES(GL_FRAMEBUFFER_OES, recv->fbo);
-		/*glBindRenderbufferOES(GL_FRAMEBUFFER_OES, recv->color);*/
 		if (glGetError() != GL_NO_ERROR) LOGW( "gl error 0");
 		/*glGetIntegerv(GL_FRAMEBUFFER_BINDING_OES,&recv->fbo);
-		//if (glGetError() != GL_NO_ERROR) LOGW( "gl error a");*/
+		if (glGetError() != GL_NO_ERROR) LOGW( "gl error a");*/
 		glViewport(0, 0, recv->super.width, recv->super.height);
 
 		glMatrixMode(GL_PROJECTION);

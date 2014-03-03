@@ -42,7 +42,7 @@ redef class Display
 	fun wanted_height: Int do return 600
 end
 
-redef class Opengles1Display # in "C" `{struct mnit_opengles_Texture *`}
+redef class Opengles1Display
 
 	# display managing the window, events, fonts? and image loading?
 	var sdl_display: SDLDisplay
