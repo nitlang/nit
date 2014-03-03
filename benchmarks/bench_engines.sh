@@ -176,43 +176,15 @@ fi
 
 ## COMPILE ENGINES
 
-test -f ../src/nitc_3 || ../src/ncall.sh -O
-test -f ./nitg || ../src/nitc_3 ../src/nitg.nit -O -v
+# force to use the last nitg, not the bootstraped one
+test -f ./nitg || ../bin/nitg ../src/nitg.nit -v
 
 ## EFFECTIVE BENCHS ##
-
-function bench_nitg_bootstrap()
-{
-	name="$FUNCNAME"
-	skip_test "$name" && return
-	prepare_res "$name.dat" "" "Steps of the bootstrap of nitg by nitc"
-	rm nit?_nit*
-	cp ../src/nitc_3 ./nitc_nitc.bin
-	bench_command "c/c c" "nitc_nitc ../src/nitc.nit -> nitc_nitc (stability)" ./nitc_nitc.bin -O ../src/nitc.nit -o nitc_nitc.bin
-	bench_command "c/c g" "nitc_nitc ../src/nitg.nit -> nitg_nitc" ./nitc_nitc.bin -O ../src/nitg.nit -o nitg_nitc.bin
-	bench_command "g/c g" "nitg_nitc ../src/nitg.nit -> nitg_nitg" ./nitg_nitc.bin ../src/nitg.nit -o nitg_nitg.bin
-	bench_command "g/g g" "nitg_nitg ../src/nitg.nit -> nitg_nitg (stability)" ./nitg_nitg.bin ../src/nitg.nit -o nitg_nitg.bin
-
-	plot "$name.gnu"
-}
-bench_nitg_bootstrap
 
 function bench_steps()
 {
 	name="$FUNCNAME"
 	skip_test "$name" && return
-	prepare_res "$name-nitc.dat" "nitc" "Various steps of nitc"
-	bench_command "parse" "" ../src/nitc_3 --only-parse ../src/nitg.nit
-	bench_command "metamodel" "" ../src/nitc_3 --only-metamodel ../src/nitg.nit
-	bench_command "generate c" "" ../src/nitc_3 --no-cc ../src/nitg.nit
-	bench_command "full" "" ../src/nitc_3 -O ../src/nitg.nit -o "nitg_nitg.bin"
-
-	prepare_res "$name-nitc-g.dat" "nitc-g" "Various steps of nitc --global"
-	bench_command "parse" "" ../src/nitc_3 --global --only-parse ../src/nitg.nit
-	bench_command "metamodel" "" ../src/nitc_3 --global --only-metamodel ../src/nitg.nit
-	bench_command "generate c" "" ../src/nitc_3 --global --no-cc ../src/nitg.nit
-	bench_command "full" "" ../src/nitc_3 -O --global ../src/nitg.nit -o "nitg_nitc-g.bin"
-
 	prepare_res "$name-nitg.dat" "nitg-g" "Various steps of nitg --global"
 	bench_command "parse" "" ./nitg --global --only-parse ../src/nitg.nit
 	bench_command "metamodel" "" ./nitg --global --only-metamodel ../src/nitg.nit
@@ -259,7 +231,7 @@ function bench_nitg-g_options()
 
 	plot "$name.gnu"
 }
-bench_nitg-g_options "hardening" --hardening
+bench_nitg-g_options "slower" --hardening
 bench_nitg-g_options "nocheck" --no-check-covariance --no-check-initialization --no-check-assert --no-check-autocast --no-check-other
 
 function bench_nitg-s_options()
@@ -318,41 +290,10 @@ bench_nitg-e_options "nocheck" --no-check-covariance --no-check-initialization -
 bench_nitg-e_options "faster" --inline-coloring-numbers
 bench_nitg-e_options "typing" NOALL --bm-typing # --phand-typing
 
-function bench_nitc_gc()
-{
-	name="$FUNCNAME"
-	skip_test "$name" && return
-	for gc in nitgc boehm malloc large; do
-		prepare_res "$name-$gc.dat" "$gc" "nitc with gc=$gc"
-		export NIT_GC_OPTION="$gc"
-		run_compiler "nitc" ../src/nitc_3 -O
-	done
-
-	plot "$name.gnu"
-}
-bench_nitc_gc
-
-function bench_nitc_boost()
-{
-	name="$FUNCNAME"
-	skip_test "$name" && return
-	prepare_res "$name-slow.dat" "no -O" "nitc without -O"
-	run_compiler "nitc_slow" ../src/nitc_3
-	prepare_res "$name-fast.dat" "-O" "nitc with -O"
-	run_compiler "nitc" ../src/nitc_3 -O
-
-	plot "$name.gnu"
-}
-bench_nitc_boost
-
 function bench_engines()
 {
 	name="$FUNCNAME"
 	skip_test "$name" && return
-	prepare_res "$name-nitc.dat" "nitc" "nitc"
-	run_compiler "nitc" ../src/nitc_3 -O
-	prepare_res "$name-nitc-g.dat" "nitc-g" "nitc with --global"
-	run_compiler "nitc-g" ../src/nitc_3 -O --global
 	prepare_res "$name-nitg-g.dat" "nitg-g" "nitg with --global"
 	run_compiler "nitg-g" ./nitg --global
 	prepare_res "$name-nitg-s.dat" "nitg-s" "nitg with --separate"
@@ -362,26 +303,6 @@ function bench_engines()
 	plot "$name.gnu"
 }
 bench_engines
-
-function bench_nitc_vc_nitg-e()
-{
-	name="$FUNCNAME"
-	skip_test "$name" && return
-	prepare_res "$name-nitc.dat" "nitc" "nitc"
-	run_compiler "nitc" ../src/nitc_3 -O
-	prepare_res "$name-nitc-malloc.dat" "nitc-malloc" "nitc with malloc"
-	NIT_GC_OPTION="malloc" run_compiler "nitc" ../src/nitc_3 -O
-	prepare_res "$name-nitc-bohem.dat" "nitc-boehm" "nitc with boehm"
-	NIT_GC_OPTION="boehm" run_compiler "nitc" ../src/nitc_3 -O
-	prepare_res "$name-nitg-e-nockeck-malloc.dat" "nitg-e-nc-malloc" "nitg with --erasure --no-check-autocast --no-check-erasure-cast and malloc"
-	NIT_GC_OPTION="malloc" run_compiler "nitg-e-nc-malloc" ./nitg --erasure --no-check-autocast --no-check-erasure-cast
-	prepare_res "$name-nitg-e-nockeck.dat" "nitg-e-nc" "nitg with --erasure --no-check-autocast --no-check-erasure-cast"
-	run_compiler "nitg-e-nc" ./nitg --erasure --no-check-autocast --no-check-erasure-cast
-	prepare_res "$name-nitg-e.dat" "nitg-e" "nitg with --erasure"
-	run_compiler "nitg-e" ./nitg --erasure
-	plot "$name.gnu"
-}
-bench_nitc_vc_nitg-e
 
 function bench_nitg-e_gc()
 {
@@ -429,15 +350,11 @@ function bench_compilation_time
 {
 	name="$FUNCNAME"
 	skip_test "$name" && return
-	prepare_res "$name-nitc.dat" "nitc" "nitc"
-	for i in ../examples/hello_world.nit ../src/test_parser.nit ../src/nitg.nit; do
-		bench_command `basename "$i" .nit` "" ../src/nitc_3 -O "$i" --no-cc
-	done
-	prepare_res "$name-nitg.dat" "nitg-g" "nitg --global"
+	prepare_res "$name-nitg-g.dat" "nitg-g" "nitg --global"
 	for i in ../examples/hello_world.nit ../src/test_parser.nit ../src/nitg.nit; do
 		bench_command `basename "$i" .nit` "" ./nitg --global "$i" --no-cc
 	done
-	prepare_res "$name-nitg-e.dat" "nitg-e" "nitg --separate"
+	prepare_res "$name-nitg-s.dat" "nitg-s" "nitg --separate"
 	for i in ../examples/hello_world.nit ../src/test_parser.nit ../src/nitg.nit; do
 		bench_command `basename "$i" .nit` "" ./nitg --separate "$i" --no-cc
 	done
