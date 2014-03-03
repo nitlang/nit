@@ -29,7 +29,7 @@ redef class AnalysisManager
 		var files = opts.rest
 
 		if files.is_empty or opt_help.value then
-			print "Usage: {sys.program_name} [options] file.pep [other_file.pep [...]]"
+			print "Usage: pep8analysis [options] file.pep [other_file.pep [...]]"
 			print "Options:"
 			opts.usage
 			return
