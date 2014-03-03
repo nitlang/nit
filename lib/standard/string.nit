@@ -793,13 +793,15 @@ class Buffer
 	super AbstractString
 	super Comparable
 	super StringCapable
-	super AbstractArray[Char]
 
 	redef type OTHER: String
 
 	redef var chars: BufferCharView = new FlatBufferCharView(self)
 
-	redef fun []=(index, item)
+	# Modifies the char contained at pos `index`
+	#
+	# DEPRECATED : Use self.chars.[]= instead
+	fun []=(index: Int, item: Char)
 	do
 		if index == length then
 			add(item)
@@ -809,14 +811,21 @@ class Buffer
 		_items[index] = item
 	end
 
-	redef fun add(c)
+	# Adds a char `c` at the end of self
+	#
+	# DEPRECATED : Use self.chars.add instead
+	fun add(c: Char)
 	do
 		if _capacity <= length then enlarge(length + 5)
 		_items[length] = c
 		_length += 1
 	end
 
-	redef fun enlarge(cap)
+	# Clears the buffer
+	fun clear do _length = 0
+
+	# Enlarges the subsequent array containing the chars of self
+	fun enlarge(cap: Int)
 	do
 		var c = _capacity
 		if cap <= c then return
@@ -825,18 +834,7 @@ class Buffer
 		_items.copy_to(a, length, 0, 0)
 		_items = a
 		_capacity = c
-	end
-
-	redef fun append(s)
-	do
-		if s isa String then
-			var sl = s.length
-			if _capacity < _length + sl then enlarge(_length + sl)
-			s.items.copy_to(_items, sl, s._index_from, _length)
-			_length += sl
-		else
-			super
-		end
+		items.copy_to(a, length, 0, 0)
 	end
 
 	redef fun to_s: String
@@ -897,6 +895,15 @@ class Buffer
 		_length = 0
 	end
 
+	# Adds the content of string `s` at the end of self
+	fun append(s: String)
+	do
+		var sl = s.length
+		if capacity < length + sl then enlarge(length + sl)
+		s.items.copy_to(items, sl, s.index_from, length)
+		_length += sl
+	end
+
 	redef fun ==(o)
 	do
 		if not o isa Buffer then return false
@@ -913,6 +920,16 @@ class Buffer
 	end
 
 	readable private var _capacity: Int
+
+	# Copies the content of self in `dest`
+	fun copy(start: Int, len: Int, dest: Buffer, new_start: Int)
+	do
+		var self_chars = self.chars
+		var dest_chars = dest.chars
+		for i in [0..len-1] do
+			dest_chars[new_start+i] = self_chars[start+i]
+		end
+	end
 
 	redef fun substring(from, count)
 	do
