@@ -75,11 +75,9 @@ in "C" `{
 
 	GLfloat mnit_opengles_vertices[6][3] =
 	{
-		{0.0f, 0.0f, 0.0f},
 		{0.0f, 1.0f, 0.0f},
 		{1.0f, 1.0f, 0.0f},
 		{0.0f, 0.0f, 0.0f},
-		{1.0f, 1.0f, 0.0f},
 		{1.0f, 0.0f, 0.0f},
 	};
 	GLfloat mnit_opengles_texture[6][2] =
@@ -277,13 +275,11 @@ class Opengles1Display
 	`}
 
 	redef fun blit( image, x, y ) is extern  `{
-		GLfloat texture_coord[6][2] =
+		GLfloat texture_coord[4][2] =
 		{
-			{image->src_xo, image->src_yo},
 			{image->src_xo, image->src_yi},
 			{image->src_xi, image->src_yi},
 			{image->src_xo, image->src_yo},
-			{image->src_xi, image->src_yi},
 			{image->src_xi, image->src_yo}
 		};
 
@@ -305,9 +301,9 @@ class Opengles1Display
 		glDisable(GL_DEPTH_TEST);
 
 		glVertexPointer(3, GL_FLOAT, 0, mnit_opengles_vertices);
-		glTexCoordPointer(2, GL_FLOAT, 0, texture_coord ); /* mnit_opengles_texture); */
+		glTexCoordPointer(2, GL_FLOAT, 0, texture_coord );
 
-		glDrawArrays(GL_TRIANGLE_STRIP, 0, 6);
+		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
 		glDisableClientState(GL_VERTEX_ARRAY);
 		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
@@ -327,13 +323,11 @@ class Opengles1Display
     end
 
 	redef fun blit_rotated( image, x, y, angle ) is extern  `{
-		GLfloat texture_coord[6][2] =
+		GLfloat texture_coord[4][2] =
 		{
-			{image->src_xo, image->src_yo},
 			{image->src_xo, image->src_yi},
 			{image->src_xi, image->src_yi},
 			{image->src_xo, image->src_yo},
-			{image->src_xi, image->src_yi},
 			{image->src_xi, image->src_yo}
 		};
 
@@ -357,7 +351,7 @@ class Opengles1Display
 		glVertexPointer(3, GL_FLOAT, 0, mnit_opengles_vertices);
 		glTexCoordPointer(2, GL_FLOAT, 0, texture_coord );
 
-		glDrawArrays(GL_TRIANGLE_STRIP, 0, 6);
+		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
 		glDisableClientState(GL_VERTEX_ARRAY);
 		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
@@ -405,7 +399,7 @@ class Opengles1Display
 		glVertexPointer(3, GL_FLOAT, 0, mnit_opengles_vertices_stretched);
 		glTexCoordPointer(2, GL_FLOAT, 0, texture_coord );
 
-		glDrawArrays(GL_TRIANGLE_STRIP, 0, 6);
+		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
 		glDisableClientState(GL_VERTEX_ARRAY);
 		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
@@ -464,8 +458,8 @@ extern Opengles1Image in "C" `{struct mnit_opengles_Texture *`}
 
 		image->src_xo = ((float)x)/recv->width;
 		image->src_yo = ((float)y)/recv->height;
-		image->src_xi = ((float)w+w)/recv->width;
-		image->src_yi = ((float)x+h)/recv->height;
+		image->src_xi = ((float)x+w)/recv->width;
+		image->src_yi = ((float)y+h)/recv->height;
 
 		return Opengles1Image_as_Image( image );
     `}
