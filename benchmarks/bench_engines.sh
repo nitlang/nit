@@ -176,8 +176,8 @@ fi
 
 ## COMPILE ENGINES
 
-test -f ../src/nitc_3 || ../src/ncall.sh -O
-test -f ./nitg || ../src/nitc_3 ../src/nitg.nit -O -v
+# force to use the last nitg, not the bootstraped one
+test -f ./nitg || ../bin/nitg ../src/nitg.nit -v
 
 ## EFFECTIVE BENCHS ##
 
