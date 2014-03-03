@@ -21,7 +21,7 @@ import sdl
 import linux_opengles1
 
 in "C" `{
-#include <EGL/egl.h>
+	#include <EGL/egl.h>
 `}
 
 redef class App
