@@ -350,15 +350,11 @@ function bench_compilation_time
 {
 	name="$FUNCNAME"
 	skip_test "$name" && return
-	prepare_res "$name-nitc.dat" "nitc" "nitc"
-	for i in ../examples/hello_world.nit ../src/test_parser.nit ../src/nitg.nit; do
-		bench_command `basename "$i" .nit` "" ../src/nitc_3 -O "$i" --no-cc
-	done
-	prepare_res "$name-nitg.dat" "nitg-g" "nitg --global"
+	prepare_res "$name-nitg-g.dat" "nitg-g" "nitg --global"
 	for i in ../examples/hello_world.nit ../src/test_parser.nit ../src/nitg.nit; do
 		bench_command `basename "$i" .nit` "" ./nitg --global "$i" --no-cc
 	done
-	prepare_res "$name-nitg-e.dat" "nitg-e" "nitg --separate"
+	prepare_res "$name-nitg-s.dat" "nitg-s" "nitg --separate"
 	for i in ../examples/hello_world.nit ../src/test_parser.nit ../src/nitg.nit; do
 		bench_command `basename "$i" .nit` "" ./nitg --separate "$i" --no-cc
 	done
