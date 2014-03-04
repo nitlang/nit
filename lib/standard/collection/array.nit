@@ -453,7 +453,7 @@ class ArrayMap[K: Object, E]
 		if i >= 0 then
 			return _items[i].second
 		else
-			abort
+			return provide_default_value(key)
 		end
 	end
 
