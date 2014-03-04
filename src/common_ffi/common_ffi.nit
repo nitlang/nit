@@ -67,11 +67,6 @@ redef class AModule
 
 		ffi_ccu.header_c_base.add( "#include \"{mmodule.name}._nitni.h\"\n" )
 
-		# include dependancies FFI
-		for mod in mmodule.header_dependencies do
-			if mod.uses_ffi then ffi_ccu.header_custom.add("#include \"{mod.name}._ffi.h\"\n")
-		end
-
 		for nclassdef in n_classdefs do
 			# Does it declares an extern type?
 			if nclassdef isa AStdClassdef and nclassdef.n_extern_code_block != null then
@@ -96,6 +91,11 @@ redef class AModule
 			end
 
 			language.compile_to_files(self, compdir)
+		end
+
+		# include dependancies FFI
+		for mod in mmodule.header_dependencies do
+			if mod.uses_ffi then ffi_ccu.header_custom.add("#include \"{mod.name}._ffi.h\"\n")
 		end
 
 		ffi_ccu.write_as_impl(self, compdir)
