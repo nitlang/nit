@@ -151,6 +151,11 @@ class Game
 
 	var buckets: Buckets[G] = new Buckets[G]
 
+	# Last turn executed in this game
+	# Can be used to consult the latest events (by the display for example),
+	# but cannot be used to add new Events.
+	var last_turn: nullable ThinGameTurn[G] = null
+
 	init do end
 
 	fun do_turn: GameTurn[G]
@@ -160,6 +165,8 @@ class Game
 		do_pre_turn(turn)
 		buckets.do_turn(turn)
 		do_post_turn(turn)
+
+		last_turn = turn
 
 		tick += 1
 
