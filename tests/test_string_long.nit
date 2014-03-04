@@ -16,8 +16,8 @@
 
 
 var s = "Bonjour !\n"
-var r = new Buffer.with_capacity(50)
-var r2 = new Buffer
+var r = new FlatBuffer.with_capacity(50)
+var r2 = new FlatBuffer
 
 var i = 0
 while i < 5000 do
