@@ -267,7 +267,7 @@ abstract class Text
 	#     assert "Hello World!".to_upper     == "HELLO WORLD!"
 	fun to_upper: String
 	do
-		var s = new Buffer.with_capacity(length)
+		var s = new FlatBuffer.with_capacity(length)
 		for i in self.chars do s.add(i.to_upper)
 		return s.to_s
 	end
@@ -277,7 +277,7 @@ abstract class Text
 	#     assert "Hello World!".to_lower     == "hello world!"
 	fun to_lower : String
 	do
-		var s = new Buffer.with_capacity(length)
+		var s = new FlatBuffer.with_capacity(length)
 		for i in self.chars do s.add(i.to_lower)
 		return s.to_s
 	end
@@ -308,7 +308,7 @@ abstract class Text
 	# Mangle a string to be a unique string only made of alphanumeric characters
 	fun to_cmangle: String
 	do
-		var res = new Buffer
+		var res = new FlatBuffer
 		var underscore = false
 		for c in self.chars do
 			if (c >= 'a' and c <= 'z') or (c >='A' and c <= 'Z') then
@@ -342,7 +342,7 @@ abstract class Text
 	#     assert "\n\"'\\".escape_to_c         == "\\n\\\"\\'\\\\"
 	fun escape_to_c: String
 	do
-		var b = new Buffer
+		var b = new FlatBuffer
 		for c in self.chars do
 			if c == '\n' then
 				b.append("\\n")
@@ -369,7 +369,7 @@ abstract class Text
 	#     assert "ab|\{\}".escape_more_to_c("|\{\}") == "ab\\|\\\{\\\}"
 	fun escape_more_to_c(chars: String): String
 	do
-		var b = new Buffer
+		var b = new FlatBuffer
 		for c in escape_to_c do
 			if chars.chars.has(c) then
 				b.add('\\')
@@ -394,7 +394,7 @@ abstract class Text
 	#     assert u[0].ascii      ==  10 # (the ASCII value of the "new line" character)
 	fun unescape_nit: String
 	do
-		var res = new Buffer.with_capacity(self.length)
+		var res = new FlatBuffer.with_capacity(self.length)
 		var was_slash = false
 		for c in self do
 			if not was_slash then
@@ -869,22 +869,45 @@ private class FlatStringCharView
 
 end
 
-# Mutable strings of characters.
-class Buffer
-	super AbstractString
-	super Comparable
-	super StringCapable
-
-	redef type OTHER: String
-
-	redef var chars: BufferCharView = new FlatBufferCharView(self)
-
-	var capacity: Int
+abstract class Buffer
+	super Text
 
 	# Modifies the char contained at pos `index`
 	#
 	# DEPRECATED : Use self.chars.[]= instead
-	fun []=(index: Int, item: Char)
+	fun []=(index: Int, item: Char) is abstract
+
+	# Adds a char `c` at the end of self
+	#
+	# DEPRECATED : Use self.chars.add instead
+	fun add(c: Char) is abstract
+
+	# Clears the buffer
+	fun clear is abstract
+
+	# Enlarges the subsequent array containing the chars of self
+	fun enlarge(cap: Int) is abstract
+
+	# Adds the content of string `s` at the end of self
+	fun append(s: String) is abstract
+
+	redef fun chars: BufferCharView is abstract
+end
+
+# Mutable strings of characters.
+class FlatBuffer
+	super AbstractString
+	super Comparable
+	super StringCapable
+	super Buffer
+
+	redef type OTHER: String
+
+	redef var chars: FlatBufferCharView = new FlatBufferCharView(self)
+
+	var capacity: Int
+
+	redef fun []=(index, item)
 	do
 		if index == length then
 			add(item)
@@ -894,21 +917,16 @@ class Buffer
 		items[index] = item
 	end
 
-	# Adds a char `c` at the end of self
-	#
-	# DEPRECATED : Use self.chars.add instead
-	fun add(c: Char)
+	redef fun add(c)
 	do
 		if capacity <= length then enlarge(length + 5)
 		items[length] = c
 		length += 1
 	end
 
-	# Clears the buffer
-	fun clear do length = 0
+	redef fun clear do length = 0
 
-	# Enlarges the subsequent array containing the chars of self
-	fun enlarge(cap: Int)
+	redef fun enlarge(cap)
 	do
 		var c = capacity
 		if cap <= c then return
@@ -978,8 +996,7 @@ class Buffer
 		length = 0
 	end
 
-	# Adds the content of string `s` at the end of self
-	fun append(s: String)
+	redef fun append(s)
 	do
 		var sl = s.length
 		if capacity < length + sl then enlarge(length + sl)
@@ -989,7 +1006,7 @@ class Buffer
 
 	redef fun ==(o)
 	do
-		if not o isa Buffer then return false
+		if not o isa FlatBuffer then return false
 		var l = length
 		if o.length != l then return false
 		var i = 0
@@ -1019,7 +1036,7 @@ class Buffer
 		if from < 0 then from = 0
 		if count > length then count = length
 		if from < count then
-			var r = new Buffer.with_capacity(count - from)
+			var r = new FlatBuffer.with_capacity(count - from)
 			while from < count do
 				r.chars.push(items[from])
 				from += 1
@@ -1034,13 +1051,13 @@ end
 private class FlatBufferReverseIterator
 	super IndexedIterator[Char]
 
-	var target: Buffer
+	var target: FlatBuffer
 
 	var target_items: NativeString
 
 	var curr_pos: Int
 
-	init with_pos(tgt: Buffer, pos: Int)
+	init with_pos(tgt: FlatBuffer, pos: Int)
 	do
 		target = tgt
 		target_items = tgt.items
@@ -1061,7 +1078,7 @@ private class FlatBufferCharView
 	super BufferCharView
 	super StringCapable
 
-	redef type SELFTYPE: Buffer
+	redef type SELFTYPE: FlatBuffer
 
 	redef fun [](index) do return target.items[index]
 
@@ -1106,13 +1123,13 @@ end
 private class FlatBufferIterator
 	super IndexedIterator[Char]
 
-	var target: Buffer
+	var target: FlatBuffer
 
 	var target_items: NativeString
 
 	var curr_pos: Int
 
-	init with_pos(tgt: Buffer, pos: Int)
+	init with_pos(tgt: FlatBuffer, pos: Int)
 	do
 		target = tgt
 		target_items = tgt.items
@@ -1222,7 +1239,7 @@ redef class Int
 	fun to_base(base: Int, signed: Bool): String
 	do
 		var l = digit_count(base)
-		var s = new Buffer.from(" " * l)
+		var s = new FlatBuffer.from(" " * l)
 		fill_buffer(s, base, signed)
 		return s.to_s
 	end
@@ -1297,7 +1314,7 @@ redef class Char
 	#     assert 'x'.to_s    == "x"
 	redef fun to_s
 	do
-		var s = new Buffer.with_capacity(1)
+		var s = new FlatBuffer.with_capacity(1)
 		s.chars[0] = self
 		return s.to_s
 	end
@@ -1331,7 +1348,7 @@ redef class Collection[E]
 	# Concatenate elements.
 	redef fun to_s
 	do
-		var s = new Buffer
+		var s = new FlatBuffer
 		for e in self do if e != null then s.append(e.to_s)
 		return s.to_s
 	end
@@ -1344,7 +1361,7 @@ redef class Collection[E]
 	do
 		if is_empty then return ""
 
-		var s = new Buffer # Result
+		var s = new FlatBuffer # Result
 
 		# Concat first item
 		var i = iterator
@@ -1367,7 +1384,7 @@ redef class Array[E]
 	# Fast implementation
 	redef fun to_s
 	do
-		var s = new Buffer
+		var s = new FlatBuffer
 		var i = 0
 		var l = length
 		while i < l do
@@ -1392,7 +1409,7 @@ redef class Map[K,V]
 	do
 		if is_empty then return ""
 
-		var s = new Buffer # Result
+		var s = new FlatBuffer # Result
 
 		# Concat first item
 		var i = iterator

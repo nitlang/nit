@@ -7,7 +7,7 @@ class TypeTestFtsNestingGenerator
 
 	fun clanit(i: Int): String
 	do
-		var s = new Buffer
+		var s = new FlatBuffer
 		s.append("{classes.first}[" * i)
 		s.append("Root")
 		s.append("]" * i)
@@ -29,7 +29,7 @@ class TypeTestFtsNestingGenerator
 
 	fun clajava(i: Int): String
 	do
-		var s = new Buffer
+		var s = new FlatBuffer
 		s.append("{classes.first}<" * i)
 		s.append("Root")
 		s.append(">" * i)
@@ -81,7 +81,7 @@ class TypeTestFtsNestingGenerator
 
 	fun clacpp(i: Int): String
 	do
-		var s = new Buffer
+		var s = new FlatBuffer
 		s.append("{classes.first}<" * i)
 		s.append("Root")
 		s.append("*>" * i)
@@ -103,7 +103,7 @@ class TypeTestFtsNestingGenerator
 
 	fun clae(i: Int): String
 	do
-		var s = new Buffer
+		var s = new FlatBuffer
 		s.append("{classes.first}[" * i)
 		s.append("ROOT")
 		s.append("]" * i)

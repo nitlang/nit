@@ -193,7 +193,7 @@ class Location
 			lmid = ""
 			lend = ""
 		end
-		var indent = new Buffer
+		var indent = new FlatBuffer
 		for j in [line_start..line_start+l.column_start-1[ do
 			if string.chars[j] == '\t' then
 				indent.add '\t'

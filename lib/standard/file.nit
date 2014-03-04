@@ -340,7 +340,7 @@ redef class String
 	fun mkdir
 	do
 		var dirs = self.split_with("/")
-		var path = new Buffer
+		var path = new FlatBuffer
 		if dirs.is_empty then return
 		if dirs[0].is_empty then
 			# it was a starting /
