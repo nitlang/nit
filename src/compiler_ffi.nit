@@ -408,7 +408,7 @@ redef class MExplicitSuper
 		var mmodule = from.mclassdef.mmodule
 
 		# In nitni files, declare internal function as extern
-		var internal_csignature = mproperty.build_csignature(mclass_type, v.compiler.mainmodule, null, long_signature, from_c_call_context)
+		var internal_csignature = mproperty.build_csignature(mclass_type, v.compiler.mainmodule, "___super", long_signature, internal_call_context)
 		ccu.header_decl.add("extern {internal_csignature};\n")
 
 		# In nitni files, #define friendly as extern
@@ -483,7 +483,7 @@ redef class MExplicitCast
 		# special checks
 		if from == to.as_nullable then
 			# format A_is_null
-			ccu.header_decl.add("#define {from.mangled_cname}_is_null {from.mangled_cname}_is_a_{to.mangled_cname}\n")
+			ccu.header_decl.add("#define {from.mangled_cname}_is_null !{from.mangled_cname}_is_a_{to.mangled_cname}\n")
 		end
 
 		#
@@ -491,7 +491,7 @@ redef class MExplicitCast
 		#
 
 		# In nitni files, declare internal function as extern
-		full_friendly_csignature = "{to.cname} {v.compiler.mainmodule.name }___{from.mangled_cname}_as_{to.mangled_cname}({from.cname_blind})"
+		full_friendly_csignature = "{to.cname_blind} {v.compiler.mainmodule.name }___{from.mangled_cname}_as_{to.mangled_cname}({from.cname_blind})"
 		ccu.header_decl.add("extern {full_friendly_csignature};\n")
 
 		# In nitni files, #define friendly as extern
