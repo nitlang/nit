@@ -280,6 +280,20 @@ interface MapRead[K: Object, E]
 	# Get the item at `key`.
 	fun [](key: K): E is abstract
 
+	# Get the item at `key` or null if `key` is not in the map.
+	#
+	#     var x = new HashMap[String, Int]
+	#     x["four"] = 4
+	#     assert x.get_or_null("four") == 4
+	#     assert x.get_or_null("five") == null
+	#
+	# Note: use `has_key` and `[]` if you need the distinction bewteen a key associated with null, and no key.
+	fun get_or_null(key: K): nullable E
+	do
+		if has_key(key) then return self[key]
+		return null
+	end
+
 	# Get the item at `key` or return `default` if not in map
 	fun get_or_default(key: K, default: E): E
 	do
