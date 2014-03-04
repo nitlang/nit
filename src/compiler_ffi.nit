@@ -408,7 +408,7 @@ redef class MExplicitSuper
 		var mmodule = from.mclassdef.mmodule
 
 		# In nitni files, declare internal function as extern
-		var internal_csignature = mproperty.build_csignature(mclass_type, v.compiler.mainmodule, null, long_signature, from_c_call_context)
+		var internal_csignature = mproperty.build_csignature(mclass_type, v.compiler.mainmodule, "___super", long_signature, internal_call_context)
 		ccu.header_decl.add("extern {internal_csignature};\n")
 
 		# In nitni files, #define friendly as extern
