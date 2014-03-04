@@ -72,7 +72,7 @@ extern GtkAssistant `{GtkAssistant *`}
 		gtk_assistant_set_page_type( recv, page, t );
 	`}
 
-	fun get_page_title( page : GtkWidget ) : String is extern `{
+	fun get_page_title( page : GtkWidget ) : String import NativeString.to_s `{
 		return NativeString_to_s( (char *)gtk_assistant_get_page_title( recv, page ) );
 	`}
 

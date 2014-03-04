@@ -51,7 +51,7 @@ extern GtkAboutDialog `{GtkAboutDialog *`}
 		return (GtkAboutDialog *)gtk_about_dialog_new( );
 	`}
 
-	fun program_name : String is extern`{
+	fun program_name : String import NativeString.to_s `{
 		return NativeString_to_s( (char *)gtk_about_dialog_get_program_name( recv ) );
 	`}
 
@@ -59,7 +59,7 @@ extern GtkAboutDialog `{GtkAboutDialog *`}
 		gtk_about_dialog_set_program_name( recv, String_to_cstring( name ) );
 	`}
 
-	fun version : String is extern`{
+	fun version : String import NativeString.to_s `{
 		return NativeString_to_s( (char *)gtk_about_dialog_get_version( recv ) );
 	`}
 
@@ -67,7 +67,7 @@ extern GtkAboutDialog `{GtkAboutDialog *`}
 		gtk_about_dialog_set_version( recv, String_to_cstring( v ) );
 	`}
 
-	fun copyright : String is extern`{
+	fun copyright : String import NativeString.to_s `{
 		return NativeString_to_s( (char *)gtk_about_dialog_get_copyright( recv ) );
 	`}
 
@@ -75,7 +75,7 @@ extern GtkAboutDialog `{GtkAboutDialog *`}
 		gtk_about_dialog_set_copyright( recv, String_to_cstring( c ) );
 	`}
 
-	fun comments : String is extern`{
+	fun comments : String import NativeString.to_s `{
 		return NativeString_to_s( (char *)gtk_about_dialog_get_comments( recv ) );
 	`}
 
@@ -83,7 +83,7 @@ extern GtkAboutDialog `{GtkAboutDialog *`}
 		gtk_about_dialog_set_comments( recv, String_to_cstring( com ) );
 	`}
 
-	fun license : String is extern`{
+	fun license : String import NativeString.to_s `{
 		return NativeString_to_s( (char *)gtk_about_dialog_get_license( recv ) );
 	`}
 
@@ -93,7 +93,7 @@ extern GtkAboutDialog `{GtkAboutDialog *`}
 
 	#license_type
 
-	fun website : String is extern`{
+	fun website : String import NativeString.to_s `{
 		return NativeString_to_s( (char *)gtk_about_dialog_get_website( recv ) );
 	`}
 
@@ -101,7 +101,7 @@ extern GtkAboutDialog `{GtkAboutDialog *`}
 		gtk_about_dialog_set_website( recv, String_to_cstring( link ) );
 	`}
 
-	fun website_label : String is extern`{
+	fun website_label : String import NativeString.to_s `{
 		return NativeString_to_s( (char *) gtk_about_dialog_get_website_label( recv ) );
 	`}
 
@@ -140,7 +140,7 @@ extern GtkAppChooserDialog `{GtkAppChooserDialog *`}
 
 	fun widget : GtkWidget is extern `{ return gtk_app_chooser_dialog_get_widget( recv ); `}
 
-	fun heading : String is extern `{
+	fun heading : String import NativeString.to_s `{
 		return NativeString_to_s( (char *)gtk_app_chooser_dialog_get_heading( recv ) );
 	`}
 
