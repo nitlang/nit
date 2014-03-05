@@ -16,6 +16,19 @@
 module more_collections
 
 # Simple way to store an `HashMap[K, Array[V]]`
+#
+# Unlike standard HashMap, MultiHashMap provides a new
+# empty array on the first access on a unknown key.
+#
+#     var m = new MultiHashMap[String, Char]
+#     assert not m.has_key("four")
+#     m["four"].add('i')
+#     m["four"].add('i')
+#     m["four"].add('i')
+#     m["four"].add('i')
+#     assert m.has_key("four")
+#     assert m["four"] == ['i', 'i', 'i', 'i']
+#     assert m["zzz"] == new Array[Char]
 class MultiHashMap[K: Object, V]
 	super HashMap[K, Array[V]]
 
@@ -28,6 +41,12 @@ class MultiHashMap[K: Object, V]
 		else
 			self[k] = [v]
 		end
+	end
+
+	redef fun provide_default_value(key) do
+		var res = new Array[V]
+		self[key] = res
+		return res
 	end
 
 	init do end
