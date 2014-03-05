@@ -48,6 +48,22 @@ redef class Float
 	# Returns a random `Float` in `[0.0 .. self[`.
 	fun rand: Float is extern "kernel_Float_Float_rand_0"
 	fun hypot_with( b : Float ) : Float is extern "hypotf"
+
+	# Is the float an infinite value
+	# this function returns:
+	#
+	#  * 1 if self is positive infinity
+	#  * -1 if self is negative infinity
+	#  * 0 otherwise
+	fun is_inf: Int do
+		if is_inf_extern then
+			if self < 0.0 then return -1
+			return 1
+		end
+		return 0
+	end
+
+	private fun is_inf_extern: Bool is extern "isinf"
 end
 
 redef class Collection[ E ]

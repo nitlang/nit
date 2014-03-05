@@ -14,6 +14,7 @@
 # Basic manipulations of strings of characters
 module string
 
+import math
 intrude import collection # FIXME should be collection::array
 
 `{
@@ -1068,6 +1069,13 @@ redef class Float
 	# `self` representation with `nb` digits after the '.'.
 	fun to_precision(nb: Int): String
 	do
+		var isinf = self.is_inf
+		if isinf == 1 then
+			return "inf"
+		else if isinf == -1 then
+			return  "-inf"
+		end
+
 		if nb == 0 then return self.to_i.to_s
 		var f = self
 		for i in [0..nb[ do f = f * 10.0
