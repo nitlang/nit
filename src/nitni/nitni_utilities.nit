@@ -53,7 +53,8 @@ redef class MMethod
 	# * The `call_context` identifying which types and casts to use (see `CallContext` and its instances)
 	fun build_csignature(recv_mtype: MClassType, from_mmodule: MModule, suffix: nullable String, length: SignatureLength, call_context: CallContext): String
 	do
-		var signature = self.intro.msignature
+		var mmethoddef = lookup_first_definition(from_mmodule, recv_mtype)
+		var signature = mmethoddef.msignature
 		assert signature != null
 
 		var creturn_type
@@ -93,7 +94,8 @@ redef class MMethod
 	do
 		if param_suffix == null then param_suffix = ""
 
-		var signature = self.intro.msignature
+		var mmethoddef = lookup_first_definition(from_mmodule, recv_mtype)
+		var signature = mmethoddef.msignature
 		assert signature != null
 
 		var return_mtype = null

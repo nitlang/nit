@@ -352,7 +352,7 @@ redef class MExplicitCall
 		# Internally, implement internal function
 		var nitni_visitor = v.compiler.new_visitor
 		nitni_visitor.frame = v.frame
-		var msignature = mproperty.intro.msignature
+		var msignature = mproperty.lookup_first_definition(v.compiler.mainmodule, recv_mtype).msignature
 		var csignature_blind = mproperty.build_csignature(recv_mtype, v.compiler.mainmodule, null, long_signature, internal_call_context)
 
 		nitni_visitor.add_decl("/* nitni callback for {mproperty.full_name} */")
@@ -420,7 +420,7 @@ redef class MExplicitSuper
 		# Internally, implement internal function
 		var nitni_visitor = v.compiler.new_visitor
 		nitni_visitor.frame = v.frame
-		var msignature = mproperty.intro.msignature
+		var msignature = mproperty.lookup_first_definition(v.compiler.mainmodule, mclass_type).msignature
 
 		var csignature_blind = mproperty.build_csignature(mclass_type, v.compiler.mainmodule, "___super", long_signature, internal_call_context)
 
