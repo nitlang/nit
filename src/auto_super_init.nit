@@ -106,14 +106,14 @@ redef class AConcreteMethPropdef
 		for auto_super_init in auto_super_inits do
 			var auto_super_init_def = auto_super_init.intro
 			var msig = mpropdef.msignature.as(not null)
-			var supermsig = auto_super_init_def.msignature.as(not null)
-			if auto_super_init_def.msignature.arity > mpropdef.msignature.arity then
-				modelbuilder.error(self, "Error: Cannot do an implicit constructor call to {auto_super_init_def}{supermsig}. Expected at least {auto_super_init_def.msignature.arity} arguments, got {mpropdef.msignature.arity}.")
+			var supermsig = auto_super_init.msignature
+			if supermsig.arity > msig.arity then
+				modelbuilder.error(self, "Error: Cannot do an implicit constructor call to {auto_super_init_def}{supermsig}. Expected at least {supermsig.arity} arguments, got {msig.arity}.")
 				continue
 			end
 			var i = 0
-			for sp in auto_super_init_def.msignature.mparameters do
-				var p = mpropdef.msignature.mparameters[i]
+			for sp in supermsig.mparameters do
+				var p = msig.mparameters[i]
 				var sub = p.mtype
 				var sup = sp.mtype
 				if not sub.is_subtype(mmodule, anchor, sup) then
