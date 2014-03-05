@@ -5,7 +5,7 @@
 #
 # This file is free software, which comes along with NIT.  This software is
 # distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-# without  even  the implied warranty of  MERCHANTABILITY or  FITNESS FOR A 
+# without  even  the implied warranty of  MERCHANTABILITY or  FITNESS FOR A
 # PARTICULAR PURPOSE.  You can modify it is you want,  provided this header
 # is kept unaltered, and a notification of the changes is added.
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
@@ -14,6 +14,7 @@
 # Basic manipulations of strings of characters
 module string
 
+import math
 intrude import collection # FIXME should be collection::array
 
 `{
@@ -987,13 +988,13 @@ redef class Bool
 	#     assert true.to_s         == "true"
 	#     assert false.to_s        == "false"
 	redef fun to_s
-	do 
-		if self then 
-			return once "true" 
-		else 
-			return once "false" 
+	do
+		if self then
+			return once "true"
+		else
+			return once "false"
 		end
-	end   
+	end
 end
 
 redef class Int
@@ -1014,7 +1015,7 @@ redef class Int
 		end
 		# Fill digits
 		var pos = digit_count(base) - 1
-		while pos >= 0 and n > 0 do 
+		while pos >= 0 and n > 0 do
 			s.chars[pos] = (n % base).to_c
 			n = n / base # /
 			pos -= 1
@@ -1050,6 +1051,7 @@ redef class Float
 	# Pretty print self, print needoed decimals up to a max of 3.
 	redef fun to_s do
 		var str = to_precision( 3 )
+		if is_inf != 0 or is_nan then return str
 		var len = str.length
 		for i in [0..len-1] do
 			var j = len-1-i
@@ -1068,6 +1070,15 @@ redef class Float
 	# `self` representation with `nb` digits after the '.'.
 	fun to_precision(nb: Int): String
 	do
+		if is_nan then return "nan"
+
+		var isinf = self.is_inf
+		if isinf == 1 then
+			return "inf"
+		else if isinf == -1 then
+			return  "-inf"
+		end
+
 		if nb == 0 then return self.to_i.to_s
 		var f = self
 		for i in [0..nb[ do f = f * 10.0
@@ -1151,14 +1162,14 @@ redef class Collection[E]
 	fun join(sep: String): String
 	do
 		if is_empty then return ""
-		
+
 		var s = new Buffer # Result
 
 		# Concat first item
 		var i = iterator
 		var e = i.item
 		if e != null then s.append(e.to_s)
-		
+
 		# Concat other items
 		i.next
 		while i.is_ok do
@@ -1199,7 +1210,7 @@ redef class Map[K,V]
 	fun join(sep: String, couple_sep: String): String
 	do
 		if is_empty then return ""
-		
+
 		var s = new Buffer # Result
 
 		# Concat first item
