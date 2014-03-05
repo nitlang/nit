@@ -158,7 +158,7 @@ class RapidTypeAnalysis
 				var auto_super_inits = npropdef.auto_super_inits
 				if auto_super_inits != null then
 					for auto_super_init in auto_super_inits do
-						v.add_monomorphic_send(v.receiver, auto_super_init)
+						v.add_callsite(auto_super_init)
 					end
 				end
 			else if npropdef isa AInternMethPropdef or

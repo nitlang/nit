@@ -1512,10 +1512,10 @@ redef class AConcreteMethPropdef
 			var args = [arguments.first]
 			for auto_super_init in auto_super_inits do
 				args.clear
-				for i in [0..auto_super_init.intro.msignature.arity+1[ do
+				for i in [0..auto_super_init.msignature.arity+1[ do
 					args.add(arguments[i])
 				end
-				v.send(auto_super_init, args)
+				v.compile_callsite(auto_super_init, args)
 			end
 		end
 		v.stmt(self.n_block)
