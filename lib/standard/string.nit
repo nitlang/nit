@@ -1051,7 +1051,7 @@ redef class Float
 	# Pretty print self, print needoed decimals up to a max of 3.
 	redef fun to_s do
 		var str = to_precision( 3 )
-		if is_inf != 0 then return str
+		if is_inf != 0 or is_nan then return str
 		var len = str.length
 		for i in [0..len-1] do
 			var j = len-1-i
@@ -1070,6 +1070,8 @@ redef class Float
 	# `self` representation with `nb` digits after the '.'.
 	fun to_precision(nb: Int): String
 	do
+		if is_nan then return "nan"
+
 		var isinf = self.is_inf
 		if isinf == 1 then
 			return "inf"

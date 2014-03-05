@@ -49,6 +49,8 @@ redef class Float
 	fun rand: Float is extern "kernel_Float_Float_rand_0"
 	fun hypot_with( b : Float ) : Float is extern "hypotf"
 
+	fun is_nan: Bool is extern "isnan"
+
 	# Is the float an infinite value
 	# this function returns:
 	#
