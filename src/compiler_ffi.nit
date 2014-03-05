@@ -393,6 +393,7 @@ redef class MExplicitCall
 		if return_mtype != null then
 			assert ret_var != null
 			return_mtype = return_mtype.anchor_to(v.compiler.mainmodule, recv_mtype)
+			ret_var = nitni_visitor.autobox(ret_var, return_mtype)
 			nitni_visitor.ret_to_c(ret_var, return_mtype)
 		end
 		nitni_visitor.add("\}")
