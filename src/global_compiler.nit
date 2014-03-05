@@ -247,8 +247,6 @@ class GlobalCompiler
 	do
 		self.header.add_decl("struct nitni_instance \{ val *value; \};")
 	end
-
-	redef fun supports_ffi do return true
 end
 
 # A visitor on the AST of property definition that generate the C code.
