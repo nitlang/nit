@@ -208,7 +208,7 @@ class HashMap[K: Object, V]
 	do
 		var c = node_at(key)
 		if c == null then
-			abort
+			return provide_default_value(key)
 		else
 			return c._value
 		end
