@@ -17,7 +17,6 @@ module nitx
 
 import model_utils
 import modelize_property
-import frontend
 
 # Main class of the nit index tool
 # NitIndex build the model using the toolcontext argument
@@ -265,7 +264,7 @@ end
 # Code Analysis
 
 redef class ToolContext
-	private var nitx_phase: NitxPhase = new NitxPhase(self, [typing_phase])
+	private var nitx_phase: NitxPhase = new NitxPhase(self, [modelize_property_phase])
 end
 
 # Compiler phase for nitx
