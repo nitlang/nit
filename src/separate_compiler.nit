@@ -36,9 +36,9 @@ redef class ToolContext
 	# --use-naive-coloring
 	var opt_bm_typing: OptionBool = new OptionBool("Colorize items incrementaly, used to simulate binary matrix typing", "--bm-typing")
 	# --use-mod-perfect-hashing
-	var opt_phmod_typing: OptionBool = new OptionBool("Replace coloration by perfect hashing (with mod operator)", "--phmod-typing")
+	var opt_phmod_typing: OptionBool = new OptionBool("Perfect hashing (with mod operator), used to simulate dynamic loading", "--phmod-typing")
 	# --use-and-perfect-hashing
-	var opt_phand_typing: OptionBool = new OptionBool("Replace coloration by perfect hashing (with and operator)", "--phand-typing")
+	var opt_phand_typing: OptionBool = new OptionBool("Perfect hashing (with and operator), used to simulate dynamic loading", "--phand-typing")
 	# --tables-metrics
 	var opt_tables_metrics: OptionBool = new OptionBool("Enable static size measuring of tables used for vft, typing and resolution", "--tables-metrics")
 
