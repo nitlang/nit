@@ -402,6 +402,13 @@ private class NaiveInterpreter
 		return null
 	end
 
+	# Execute a full `callsite` for given `args`
+	# Use this method, instead of `send` to execute and control the aditionnal behavior of the call-sites
+	fun callsite(callsite: nullable CallSite, arguments: Array[Instance]): nullable Instance
+	do
+		return send(callsite.mproperty, arguments)
+	end
+
 	# Execute `mproperty` for a `args` (where `args[0]` is the receiver).
 	# Return a falue if `mproperty` is a function, or null if it is a procedure.
 	# The call is polimotphic. There is a message-seding/late-bindng according to te receiver (args[0]).
@@ -616,10 +623,10 @@ redef class AConcreteMethPropdef
 			var args = [arguments.first]
 			for auto_super_init in auto_super_inits do
 				args.clear
-				for i in [0..auto_super_init.intro.msignature.arity+1[ do
+				for i in [0..auto_super_init.msignature.arity+1[ do
 					args.add(arguments[i])
 				end
-				v.send(auto_super_init, args)
+				v.callsite(auto_super_init, args)
 			end
 		end
 
@@ -1102,7 +1109,7 @@ redef class AVarReassignExpr
 		var vari = v.frame.map[self.variable.as(not null)]
 		var value = v.expr(self.n_value)
 		if value == null then return
-		var res = v.send(reassign_callsite.mproperty, [vari, value])
+		var res = v.callsite(reassign_callsite, [vari, value])
 		assert res != null
 		v.frame.map[self.variable.as(not null)] = res
 	end
@@ -1519,7 +1526,7 @@ redef class ASendExpr
 			args.add(i)
 		end
 
-		var res = v.send(callsite.mproperty, args)
+		var res = v.callsite(callsite, args)
 		return res
 	end
 end
@@ -1538,15 +1545,15 @@ redef class ASendReassignFormExpr
 		var value = v.expr(self.n_value)
 		if value == null then return
 
-		var read = v.send(callsite.mproperty, args)
+		var read = v.callsite(callsite, args)
 		assert read != null
 
-		var write = v.send(reassign_callsite.mproperty, [read, value])
+		var write = v.callsite(reassign_callsite, [read, value])
 		assert write != null
 
 		args.add(write)
 
-		v.send(write_callsite.mproperty, args)
+		v.callsite(write_callsite, args)
 	end
 end
 
@@ -1570,7 +1577,7 @@ redef class ASuperExpr
 				end
 			end
 			# Super init call
-			var res = v.send(callsite.mproperty, args)
+			var res = v.callsite(callsite, args)
 			return res
 		end
 
@@ -1599,7 +1606,7 @@ redef class ANewExpr
 			if i == null then return null
 			args.add(i)
 		end
-		var res2 = v.send(callsite.mproperty, args)
+		var res2 = v.callsite(callsite, args)
 		if res2 != null then
 			#self.debug("got {res2} from {mproperty}. drop {recv}")
 			return res2
@@ -1643,7 +1650,7 @@ redef class AAttrReassignExpr
 		if value == null then return
 		var mproperty = self.mproperty.as(not null)
 		var attr = v.read_attribute(mproperty, recv)
-		var res = v.send(reassign_callsite.mproperty, [attr, value])
+		var res = v.callsite(reassign_callsite, [attr, value])
 		assert res != null
 		assert recv isa MutableInstance
 		recv.attributes[mproperty] = res

@@ -49,7 +49,7 @@ end
 
 redef class AConcreteMethPropdef
 	# In case of constructor, the list of implicit auto super init constructors invoked (if needed)
-	var auto_super_inits: nullable Array[MMethod] = null
+	var auto_super_inits: nullable Array[CallSite] = null
 
 	fun do_auto_super_init(modelbuilder: ModelBuilder)
 	do
@@ -57,6 +57,7 @@ redef class AConcreteMethPropdef
 		var mpropdef = self.mpropdef.as(not null)
 		var mmodule = mpropdef.mclassdef.mmodule
 		var anchor = mclassdef.bound_mtype
+		var recvtype = mclassdef.mclass.mclass_type
 
 		# Collect only for constructors
 		if not mpropdef.mproperty.is_init then return
@@ -83,7 +84,7 @@ redef class AConcreteMethPropdef
 
 		# Still here? So it means that we must determine what super inits need to be automatically invoked
 
-		var auto_super_inits = new Array[MMethod]
+		var auto_super_inits = new Array[CallSite]
 		for msupertype in mclassdef.supertypes do
 			# FIXME: the order is quite arbitrary
 			if not msupertype.mclass.kind.need_init then continue
@@ -97,23 +98,32 @@ redef class AConcreteMethPropdef
 				return
 			end
 			assert candidate isa MMethod
-			auto_super_inits.add(candidate)
+
+			var candidatedefs = candidate.lookup_definitions(mmodule, anchor)
+			var candidatedef = candidatedefs.first
+			# TODO, we drop the others propdefs in the callsite, that is not great :(
+
+			var msignature = candidatedef.msignature
+			msignature = msignature.resolve_for(recvtype, anchor, mmodule, true)
+
+			var callsite = new CallSite(self, recvtype, true, candidate, candidatedef, msignature, false)
+			auto_super_inits.add(callsite)
 		end
 		if auto_super_inits.is_empty then
 			modelbuilder.error(self, "Error: No constructors to call implicitely in {mpropdef}. Call one explicitely.")
 			return
 		end
 		for auto_super_init in auto_super_inits do
-			var auto_super_init_def = auto_super_init.intro
+			var auto_super_init_def = auto_super_init.mpropdef
 			var msig = mpropdef.msignature.as(not null)
-			var supermsig = auto_super_init_def.msignature.as(not null)
-			if auto_super_init_def.msignature.arity > mpropdef.msignature.arity then
-				modelbuilder.error(self, "Error: Cannot do an implicit constructor call to {auto_super_init_def}{supermsig}. Expected at least {auto_super_init_def.msignature.arity} arguments, got {mpropdef.msignature.arity}.")
+			var supermsig = auto_super_init.msignature
+			if supermsig.arity > msig.arity then
+				modelbuilder.error(self, "Error: Cannot do an implicit constructor call to {auto_super_init_def}{supermsig}. Expected at least {supermsig.arity} arguments, got {msig.arity}.")
 				continue
 			end
 			var i = 0
-			for sp in auto_super_init_def.msignature.mparameters do
-				var p = mpropdef.msignature.mparameters[i]
+			for sp in supermsig.mparameters do
+				var p = msig.mparameters[i]
 				var sub = p.mtype
 				var sup = sp.mtype
 				if not sub.is_subtype(mmodule, anchor, sup) then
