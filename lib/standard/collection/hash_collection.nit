@@ -178,6 +178,7 @@ private abstract class HashCollection[K: Object, N: HashNode[Object]]
 			# Then store it in the array
 			var next = new_array[index]
 			new_array[index] = node
+			node._prev_in_bucklet = null
 			node._next_in_bucklet = next
 			if next != null then next._prev_in_bucklet = node
 			node = node._next_item
