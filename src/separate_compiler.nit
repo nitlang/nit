@@ -33,7 +33,9 @@ redef class ToolContext
 	var opt_no_shortcut_equate: OptionBool = new OptionBool("Always call == in a polymorphic way", "--no-shortcut-equal")
 	# --inline-coloring-numbers
 	var opt_inline_coloring_numbers: OptionBool = new OptionBool("Inline colors and ids", "--inline-coloring-numbers")
-	# --use-naive-coloring
+	# --use-col-typing
+	var opt_colo_typing: OptionBool = new OptionBool("Global coloration, used to minimize table size", "--colo-typing")
+	# --use-bm-typing
 	var opt_bm_typing: OptionBool = new OptionBool("Colorize items incrementaly, used to simulate binary matrix typing", "--bm-typing")
 	# --use-mod-perfect-hashing
 	var opt_phmod_typing: OptionBool = new OptionBool("Perfect hashing (with mod operator), used to simulate dynamic loading", "--phmod-typing")
@@ -50,6 +52,7 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_no_union_attribute)
 		self.option_context.add_option(self.opt_no_shortcut_equate)
 		self.option_context.add_option(self.opt_inline_coloring_numbers)
+		self.option_context.add_option(self.opt_colo_typing)
 		self.option_context.add_option(self.opt_bm_typing)
 		self.option_context.add_option(self.opt_phmod_typing)
 		self.option_context.add_option(self.opt_phand_typing)
