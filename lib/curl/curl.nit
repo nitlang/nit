@@ -34,29 +34,6 @@ class Curl
 	# Check for correct initialization
 	fun is_ok: Bool do return self.prim_curl.is_init
 
-	# Get an HTTP Request object to perform your own
-	fun http_request(url: String): nullable CurlRequest
-	do
-		var err
-		err = self.prim_curl.easy_setopt(new CURLOption.follow_location, 1)
-		if not err.is_ok then return null
-
-		err = self.prim_curl.easy_setopt(new CURLOption.url, url)
-		if not err.is_ok then return null
-
-		return new CurlHTTPRequest(url, self)
-	end
-
-	# Get a MAIL Request Object
-	fun mail_request: nullable CurlMailRequest
-	do
-		var err: CURLCode
-		err = self.prim_curl.easy_setopt(new CURLOption.follow_location, 1)
-		if not err.is_ok then return null
-
-		return new CurlMailRequest(self)
-	end
-
 	# Release Curl instance
 	fun destroy do self.prim_curl.easy_clean
 end
@@ -120,6 +97,12 @@ class CurlHTTPRequest
 
 		var err
 
+		err = self.curl.prim_curl.easy_setopt(new CURLOption.follow_location, 1)
+		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
+
+		err = self.curl.prim_curl.easy_setopt(new CURLOption.url, url)
+		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
+
 		# Callbacks
 		err = self.curl.prim_curl.register_callback(callback_receiver, new CURLCallbackType.header)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
@@ -159,6 +142,13 @@ class CurlHTTPRequest
 		if self.delegate != null then callback_receiver = self.delegate.as(not null)
 
 		var err
+
+		err = self.curl.prim_curl.easy_setopt(new CURLOption.follow_location, 1)
+		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
+
+		err = self.curl.prim_curl.easy_setopt(new CURLOption.url, url)
+		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
+
 		err = self.curl.prim_curl.register_callback(callback_receiver, new CURLCallbackType.header)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
@@ -298,6 +288,10 @@ class CurlMailRequest
 		if g_rec.length < 1 then return answer_failure(0, "The mail recipients can not be empty")
 
 		var err
+
+		err = self.curl.prim_curl.easy_setopt(new CURLOption.follow_location, 1)
+		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
+
 		err = self.curl.prim_curl.easy_setopt(new CURLOption.mail_rcpt, g_rec.to_curlslist)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
