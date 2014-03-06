@@ -162,6 +162,16 @@ class Counter[E: Object]
 		end
 		return sum.to_f / values.length.to_f
 	end
+
+	# The standard derivation of the counter values
+	fun std_dev: Float do
+		var avg = self.avg
+		var sum = 0.0
+		for value in map.values do
+			sum += (value.to_f - avg).pow(2.0)
+		end
+		return (sum / map.length.to_f).sqrt
+	end
 end
 
 private class CounterSorter[E: Object]
