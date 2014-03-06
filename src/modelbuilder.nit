@@ -485,6 +485,9 @@ class ModelBuilder
 		# Update the file information
 		file.mmodule = mmodule
 
+		# Load imported module
+		build_module_importation(nmodule)
+
 		return nmodule
 	end
 
@@ -507,7 +510,6 @@ class ModelBuilder
 	end
 
 	# Visit the AST and create the `MModule` object
-	# Then, recursively load imported modules
 	private fun build_a_mmodule(mgroup: nullable MGroup, mod_name: String, nmodule: AModule): nullable MModule
 	do
 		# Check the module name
@@ -526,8 +528,6 @@ class ModelBuilder
 		nmodule.mmodule = mmodule
 		nmodules.add(nmodule)
 		self.mmodule2nmodule[mmodule] = nmodule
-
-		build_module_importation(nmodule)
 
 		return mmodule
 	end
@@ -553,6 +553,13 @@ class ModelBuilder
 			var mvisibility = aimport.n_visibility.mvisibility
 			if mvisibility == protected_visibility then
 				error(aimport.n_visibility, "Error: only properties can be protected.")
+				return
+			end
+			if sup == mmodule then
+				error(aimport.n_name, "Error: Dependency loop in module {mmodule}.")
+			end
+			if sup.in_importation < mmodule then
+				error(aimport.n_name, "Error: Dependency loop between modules {mmodule} and {sup}.")
 				return
 			end
 			mmodule.set_visibility_for(sup, mvisibility)
