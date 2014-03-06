@@ -28,6 +28,7 @@ intrude import collection # FIXME should be collection::array
 # High-level abstraction for all text representations
 abstract class Text
 	super Comparable
+	super StringCapable
 
 	redef type OTHER: Text
 
@@ -579,7 +580,6 @@ end
 # Immutable strings of characters.
 class String
 	super FlatText
-	super StringCapable
 
 	redef type SELFTYPE: String
 	redef type SELFVIEW: FlatStringCharView
@@ -940,7 +940,6 @@ end
 # Mutable strings of characters.
 class FlatBuffer
 	super FlatText
-	super StringCapable
 	super Buffer
 
 	redef type SELFVIEW: FlatBufferCharView
