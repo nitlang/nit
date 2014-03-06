@@ -31,6 +31,9 @@ abstract class Text
 
 	redef type OTHER: Text
 
+	type SELFVIEW: StringCharView
+	type SELFTYPE: Text
+
 	# Gets a view on the chars of the Text object
 	fun chars: StringCharView is abstract
 
@@ -542,6 +545,9 @@ class String
 	super FlatText
 	super StringCapable
 
+	redef type SELFTYPE: String
+	redef type SELFVIEW: FlatStringCharView
+
 	# Index in _items of the start of the string
 	private var index_from: Int
 
@@ -823,6 +829,9 @@ end
 abstract class Buffer
 	super Text
 
+	redef type SELFVIEW: BufferCharView
+	redef type SELFTYPE: Buffer
+
 	# Modifies the char contained at pos `index`
 	#
 	# DEPRECATED : Use self.chars.[]= instead
@@ -850,6 +859,9 @@ class FlatBuffer
 	super FlatText
 	super StringCapable
 	super Buffer
+
+	redef type SELFVIEW: FlatBufferCharView
+	redef type SELFTYPE: FlatBuffer
 
 	redef var chars: FlatBufferCharView = new FlatBufferCharView(self)
 
