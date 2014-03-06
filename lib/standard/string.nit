@@ -25,18 +25,12 @@ intrude import collection # FIXME should be collection::array
 # String                                                                      #
 ###############################################################################
 
-# Common subclass for String and Buffer
-abstract class AbstractString
+# High-level abstraction for all text representations
+abstract class Text
 	super AbstractArrayRead[Char]
 
-	readable private var _items: NativeString
-
+	# Gets a view on the chars of the Text object
 	fun chars: StringCharView is abstract
-
-	# Access a character at `index` in the string.
-	#
-	#     assert "abcd"[2]         == 'c'
-	redef fun [](index) do return _items[index]
 
 	# Create a substring.
 	#
@@ -49,6 +43,51 @@ abstract class AbstractString
 	# Unless a `count` value is > 0 at the same time.
 	# In this case, `from += count` and `count -= from`.
 	fun substring(from: Int, count: Int): String is abstract
+
+	redef fun is_empty: Bool do return self.length == 0
+
+	redef fun index_of(c: Char): Int
+	do
+		return index_of_from(c, 0)
+	end
+
+	redef fun last: Char do return self.chars[length-1]
+
+	redef fun index_of_from(c: Char, pos: Int): Int
+	do
+		var iter = self.chars.iterator_from(pos)
+		while iter.is_ok do
+			if iter.item == c then return iter.index
+		end
+		return -1
+	end
+
+	redef fun last_index_of(c: Char): Int
+	do
+		return last_index_of_from(c, length - 1)
+	end
+
+	redef fun last_index_of_from(item: Char, pos: Int): Int
+	do
+		var iter = self.chars.reverse_iterator_from(pos)
+		while iter.is_ok do
+			if iter.item == item then return iter.index
+			iter.next
+		end
+		return -1
+	end
+
+	redef fun iterator: Iterator[Char]
+	do
+		return self.chars.iterator
+	end
+
+	redef fun has(c: Char): Bool
+	do
+		return self.chars.has(c)
+	end
+
+	redef fun to_a: Array[Char] do return chars.to_a
 
 	# Create a substring from `self` beginning at the `from` position
 	#
@@ -69,18 +108,14 @@ abstract class AbstractString
 	#     assert "abcd".has_substring("bc",2)	     ==  false
 	fun has_substring(str: String, pos: Int): Bool
 	do
-		var itsindex = str.length - 1
-		var myindex = pos + itsindex
-		var myitems = _items
-		var itsitems = str._items
-		if myindex > length or itsindex > myindex  then return false
-		var its_index_from = str._index_from
-		itsindex += its_index_from
-		while itsindex >= its_index_from do
-			if myitems[myindex] != itsitems[itsindex] then return false
-			myindex -= 1
-			itsindex -= 1
+		var myiter = self.chars.iterator_from(pos)
+		var itsiter = str.iterator
+		while myiter.is_ok and itsiter.is_ok do
+			if myiter.item != itsiter.item then return false
+			myiter.next
+			itsiter.next
 		end
+		if itsiter.is_ok then return false
 		return true
 	end
 
@@ -218,15 +253,6 @@ abstract class AbstractString
 		return self.substring(start_pos, end_pos - start_pos + 1)
 	end
 
-	redef fun output
-	do
-		var i = 0
-		while i < length do
-			_items[i].output
-			i += 1
-		end
-	end
-
 	# Mangle a string to be a unique string only made of alphanumeric characters
 	fun to_cmangle: String
 	do
@@ -293,7 +319,7 @@ abstract class AbstractString
 	do
 		var b = new Buffer
 		for c in escape_to_c do
-			if chars.has(c) then
+			if chars.chars.has(c) then
 				b.add('\\')
 			end
 			b.add(c)
@@ -342,6 +368,27 @@ abstract class AbstractString
 		end
 		return res.to_s
 	end
+
+end
+
+# Common subclass for String and Buffer
+abstract class AbstractString
+	super Text
+
+	readable private var _items: NativeString
+
+	redef var _length: Int
+
+	init do end
+
+	redef fun output
+	do
+		var i = 0
+		while i < length do
+			_items[i].output
+			i += 1
+		end
+	end
 end
 
 # Abstract class for the SequenceRead compatible
@@ -349,7 +396,7 @@ end
 abstract class StringCharView
 	super SequenceRead[Char]
 
-	type SELFTYPE: AbstractString
+	type SELFTYPE: Text
 
 	private var target: SELFTYPE
 
@@ -439,36 +486,6 @@ class String
 		return new String.with_infos(_items, to - realFrom + 1, realFrom, to)
 	end
 
-	redef fun substring_from(from: Int): String
-	do
-		if from > _length then return ""
-		if from < 0 then from = 0
-		return substring(from, _length)
-	end
-
-	redef fun has_substring(str: String, pos: Int): Bool
-	do
-		var itsindex = str._length - 1
-
-		var myindex = pos + itsindex
-		var myitems = _items
-
-		var itsitems = str._items
-
-		if myindex > _length or itsindex > myindex then return false
-
-		var itsindexfrom = str.index_from
-		itsindex += itsindexfrom
-		myindex += index_from
-
-		while itsindex >= itsindexfrom do
-			if myitems[myindex] != itsitems[itsindex] then return false
-			myindex -= 1
-			itsindex -= 1
-		end
-
-		return true
-	end
 
 	redef fun to_upper: String
 	do
@@ -914,7 +931,6 @@ class Buffer
 			return ""
 		end
 	end
-
 end
 
 private class FlatBufferReverseIterator
