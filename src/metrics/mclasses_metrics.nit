@@ -235,3 +235,24 @@ class CNBHP
 	end
 end
 
+# Class Metric: Number of Local MProperties (Intro + Redef)
+class CNBLP
+	super MClassMetric
+	super IntMetric
+	redef fun name do return "cnblp"
+	redef fun desc do return "number of local properties (intro + redef)"
+
+	var mainmodule: MModule
+	var min_visibility: MVisibility
+
+	init(mainmodule: MModule, min_visibility: MVisibility) do
+		self.mainmodule = mainmodule
+		self.min_visibility = min_visibility
+	end
+
+	redef fun collect(mclasses) do
+		for mclass in mclasses do
+			values[mclass] = mclass.local_mproperties(min_visibility).length
+		end
+	end
+end
