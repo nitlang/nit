@@ -214,12 +214,11 @@ class CurlMailRequest
 	var bcc: nullable Array[String] writable = null
 	var subject: nullable String writable = ""
 	var body: nullable String writable = ""
-	private var supported_outgoing_protocol: Array[String]
+	private var supported_outgoing_protocol: Array[String] = ["smtp", "smtps"]
 
 	init (curl: nullable Curl)
 	do
 		self.curl = curl
-		self.supported_outgoing_protocol = once ["smtp", "smtps"]
 	end
 
 	# Helper method to add conventional space while building entire mail
