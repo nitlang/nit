@@ -32,6 +32,9 @@ private class MModulesMetricsPhase
 	redef fun process_mainmodule(mainmodule)
 	do
 		if not toolcontext.opt_mmodules.value and not toolcontext.opt_all.value then return
+		var csv = toolcontext.opt_csv.value
+		var out = "{toolcontext.opt_dir.value or else "metrics"}/mmodules"
+		out.mkdir
 
 		print toolcontext.format_h1("\n# MModules metrics")
 
@@ -52,6 +55,7 @@ private class MModulesMetricsPhase
 				mmodules.add_all(mgroup.mmodules)
 				metrics.collect(new HashSet[MModule].from(mgroup.mmodules))
 				metrics.to_console(1, not toolcontext.opt_nocolors.value)
+				if csv then metrics.to_csv.save("{out}/{mgroup}.csv")
 			end
 		end
 		if not mmodules.is_empty then
@@ -60,6 +64,7 @@ private class MModulesMetricsPhase
 			metrics.clear
 			metrics.collect(mmodules)
 			metrics.to_console(1, not toolcontext.opt_nocolors.value)
+			if csv then metrics.to_csv.save("{out}/summary.csv")
 		end
 	end
 end

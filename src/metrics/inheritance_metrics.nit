@@ -33,6 +33,9 @@ private class InheritanceMetricsPhase
 	redef fun process_mainmodule(mainmodule)
 	do
 		if not toolcontext.opt_inheritance.value and not toolcontext.opt_all.value then return
+		var csv = toolcontext.opt_csv.value
+		var out = "{toolcontext.opt_dir.value or else "metrics"}/inheritance"
+		out.mkdir
 
 		print toolcontext.format_h1("\n# Inheritance metrics")
 
@@ -75,8 +78,10 @@ private class InheritanceMetricsPhase
 				mclasses.add_all(mod_mclasses)
 				cmetrics.collect(new HashSet[MClass].from(mod_mclasses))
 				cmetrics.to_console(1, not toolcontext.opt_nocolors.value)
+				if csv then cmetrics.to_csv.save("{out}/{mgroup}_classes.csv")
 				hmetrics.collect(new HashSet[MModule].from(mgroup.mmodules))
 				hmetrics.to_console(1, not toolcontext.opt_nocolors.value)
+				if csv then hmetrics.to_csv.save("{out}/{mgroup}_inheritance.csv")
 			end
 		end
 		if not mclasses.is_empty then
@@ -85,9 +90,11 @@ private class InheritanceMetricsPhase
 			cmetrics.clear
 			cmetrics.collect(mclasses)
 			cmetrics.to_console(1, not toolcontext.opt_nocolors.value)
+			if csv then cmetrics.to_csv.save("{out}/summary_classes.csv")
 			hmetrics.clear
 			hmetrics.collect(mmodules)
 			hmetrics.to_console(1, not toolcontext.opt_nocolors.value)
+			if csv then hmetrics.to_csv.save("{out}/summary_inheritance.csv")
 		end
 	end
 end

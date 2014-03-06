@@ -50,7 +50,7 @@ redef class ToolContext
 	# --rta
 	var opt_rta = new OptionBool("Compute RTA metrics", "--rta")
 	# --generate-csv
-	var opt_generate_csv = new OptionBool("Generate CVS format metrics", "--generate-csv")
+	var opt_csv = new OptionBool("Export metrics in CSV format", "--csv")
 	# --generate_hyperdoc
 	var opt_generate_hyperdoc = new OptionBool("Generate Hyperdoc", "--generate_hyperdoc")
 	# --poset
@@ -77,7 +77,7 @@ redef class ToolContext
 		self.option_context.add_option(opt_static_types)
 		self.option_context.add_option(opt_tables)
 		self.option_context.add_option(opt_rta)
-		self.option_context.add_option(opt_generate_csv)
+		self.option_context.add_option(opt_csv)
 		self.option_context.add_option(opt_generate_hyperdoc)
 		self.option_context.add_option(opt_poset)
 		self.option_context.add_option(opt_dir)
@@ -309,4 +309,32 @@ class MetricSet
 		for metric in metrics do metric.to_console(indent, colors)
 	end
 
+	# Export the metric set in CSV format
+	fun to_csv: CSVDocument do
+		var csv = new CSVDocument
+
+		# set csv headers
+		csv.header.add("entry")
+		for metric in metrics do csv.header.add(metric.name)
+
+		# collect all entries to merge metric results
+		var entries = new HashSet[ELM]
+		for metric in metrics do
+			for entry in metric.values.keys do entries.add(entry)
+		end
+
+		# collect results
+		for entry in entries do
+			var line = [entry.to_s]
+			for metric in metrics do
+				if metric.has_element(entry) then
+					line.add(metric[entry].to_s)
+				else
+					line.add("n/a")
+				end
+			end
+			csv.lines.add(line)
+		end
+		return csv
+	end
 end

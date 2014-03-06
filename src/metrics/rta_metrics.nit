@@ -120,7 +120,7 @@ do
 	end
 
 	# CSV generation
-	if modelbuilder.toolcontext.opt_generate_csv.value then
+	if modelbuilder.toolcontext.opt_csv.value then
 		var summaryCSV = new CSVDocument
 		summaryCSV.set_header("scope", "NLVT", "NLVTG", "NLCT", "NLVCTG")
 		summaryCSV.add_line("global", nlvt, nlvtg, nlct, nlctg)
