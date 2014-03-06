@@ -29,9 +29,10 @@
   --no-union-attribute        Put primitive attibutes in a box instead of an union
   --no-shortcut-equal         Always call == in a polymorphic way
   --inline-coloring-numbers   Inline colors and ids
-  --bm-typing                 Colorize items incrementaly, used to simulate binary matrix typing
-  --phmod-typing              Replace coloration by perfect hashing (with mod operator)
-  --phand-typing              Replace coloration by perfect hashing (with and operator)
+  --colo-typing               Global coloration, used to minimize table size
+  --bm-typing                 Colorize items incrementaly, used to simulate binary matrix typing (default)
+  --phmod-typing              Perfect hashing (with mod operator), used to simulate dynamic loading
+  --phand-typing              Perfect hashing (with and operator), used to simulate dynamic loading
   --tables-metrics            Enable static size measuring of tables used for vft, typing and resolution
   --erasure                   Erase generic types
   --no-check-erasure-cast     Disable implicit casts on unsafe return with erasure-typing policy (dangerous)
