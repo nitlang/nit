@@ -36,7 +36,7 @@ redef class ToolContext
 	# --use-col-typing
 	var opt_colo_typing: OptionBool = new OptionBool("Global coloration, used to minimize table size", "--colo-typing")
 	# --use-bm-typing
-	var opt_bm_typing: OptionBool = new OptionBool("Colorize items incrementaly, used to simulate binary matrix typing", "--bm-typing")
+	var opt_bm_typing: OptionBool = new OptionBool("Colorize items incrementaly, used to simulate binary matrix typing (default)", "--bm-typing")
 	# --use-mod-perfect-hashing
 	var opt_phmod_typing: OptionBool = new OptionBool("Perfect hashing (with mod operator), used to simulate dynamic loading", "--phmod-typing")
 	# --use-and-perfect-hashing
@@ -456,14 +456,14 @@ class SeparateCompiler
 
 		# Typing Layout
 		var layout_builder: TypingLayoutBuilder[MType]
-		if modelbuilder.toolcontext.opt_bm_typing.value then
-			layout_builder = new MTypeBMizer(self.mainmodule)
+		if modelbuilder.toolcontext.opt_colo_typing.value then
+			layout_builder = new MTypeColorer(self.mainmodule)
 		else if modelbuilder.toolcontext.opt_phmod_typing.value then
 			layout_builder = new MTypeHasher(new PHModOperator, self.mainmodule)
 		else if modelbuilder.toolcontext.opt_phand_typing.value then
 			layout_builder = new MTypeHasher(new PHAndOperator, self.mainmodule)
 		else
-			layout_builder = new MTypeColorer(self.mainmodule)
+			layout_builder = new MTypeBMizer(self.mainmodule)
 		end
 
 		# colorize types
