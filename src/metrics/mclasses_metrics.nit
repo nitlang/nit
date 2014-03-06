@@ -36,8 +36,9 @@ private class MClassesMetricsPhase
 		print toolcontext.format_h1("\n# MClasses metrics")
 
 		var metrics = new MClassMetricSet
+		var min_vis = private_visibility
 		metrics.register(new CNOA, new CNOP, new CNOC, new CNOD, new CDIT)
-		metrics.register(new CNBIP, new CNBRP, new CNBHP)
+		metrics.register(new CNBIP(min_vis), new CNBRP(min_vis), new CNBHP(min_vis))
 		#TODO metrics.register(new CNBI) # nb init
 		#TODO metrics.register(new CNBA) # nb attrs
 		#TODO metrics.register(new CNBM) # nb methods
@@ -171,8 +172,11 @@ class CNBIP
 	redef fun name do return "cnbip"
 	redef fun desc do return "number of introduced properties"
 
+	var min_visibility: MVisibility
+	init(min_visibility: MVisibility) do self.min_visibility = min_visibility
+
 	redef fun collect(mclass, mainmodule) do
-		values[mclass] = mclass.intro_mproperties.length
+		values[mclass] = mclass.intro_mproperties(min_visibility).length
 	end
 end
 
@@ -182,8 +186,11 @@ class CNBRP
 	redef fun name do return "cnbrp"
 	redef fun desc do return "number of redefined properties"
 
+	var min_visibility: MVisibility
+	init(min_visibility: MVisibility) do self.min_visibility = min_visibility
+
 	redef fun collect(mclass, mainmodule) do
-		values[mclass] = mclass.redef_mproperties.length
+		values[mclass] = mclass.redef_mproperties(min_visibility).length
 	end
 end
 
@@ -193,39 +200,11 @@ class CNBHP
 	redef fun name do return "cnbhp"
 	redef fun desc do return "number of inherited properties"
 
+	var min_visibility: MVisibility
+	init(min_visibility: MVisibility) do self.min_visibility = min_visibility
+
 	redef fun collect(mclass, mainmodule) do
-		values[mclass] = mclass.inherited_mproperties2(mainmodule).length
+		values[mclass] = mclass.inherited_mproperties(mainmodule, min_visibility).length
 	end
 end
 
-redef class MClass
-	# FIXME wait for cleaning in model_utils
-	redef fun intro_mproperties: Set[MProperty] do
-		var set = new HashSet[MProperty]
-		for mclassdef in mclassdefs do
-			set.add_all(mclassdef.intro_mproperties)
-		end
-		return set
-	end
-
-	# FIXME wait for cleaning in model_utils
-	redef fun redef_mproperties: Set[MProperty] do
-		var set = new HashSet[MProperty]
-		for mclassdef in mclassdefs do
-			for mpropdef in mclassdef.mpropdefs do
-				if mpropdef.mproperty.intro_mclassdef.mclass != self then set.add(mpropdef.mproperty)
-			end
-		end
-		return set
-	end
-
-	# FIXME wait for cleaning in model_utils
-	fun inherited_mproperties2(mainmodule: MModule): Set[MProperty] do
-		var set = new HashSet[MProperty]
-		for parent in in_hierarchy(mainmodule).direct_greaters do
-			set.add_all(parent.intro_mproperties)
-			set.add_all(parent.inherited_mproperties2(mainmodule))
-		end
-		return set
-	end
-end
