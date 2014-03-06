@@ -17,12 +17,14 @@ module csv
 
 # A CSV document representation
 class CSVDocument
-	private var header: Array[String] = new Array[String]
-	private var lines: Array[Array[String]] = new Array[Array[String]]
+	var header: Array[String] writable = new Array[String]
+	var lines: Array[Array[String]] = new Array[Array[String]]
 
 	fun set_header(values: Object...) do
 		header.clear
-		for value in values do header.add(value.to_s)
+		for value in values do
+			header.add(value.to_s)
+		end
 	end
 
 	fun add_line(values: Object...) do
@@ -31,7 +33,9 @@ class CSVDocument
 			abort
 		end
 		var line = new Array[String]
-		for value in values do line.add(value.to_s)
+		for value in values do
+			line.add(value.to_s)
+		end
 		lines.add(line)
 	end
 
