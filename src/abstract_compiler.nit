@@ -22,6 +22,7 @@ import typing
 import auto_super_init
 import frontend
 import common_ffi
+import platform
 
 # Add compiling options
 redef class ToolContext
@@ -68,6 +69,53 @@ redef class ToolContext
 end
 
 redef class ModelBuilder
+	redef init(model, toolcontext)
+	do
+		if toolcontext.opt_no_stacktrace.value and toolcontext.opt_stacktrace.value then
+			print "Cannot use --nit-stacktrace when --no-stacktrace is activated"
+			exit(1)
+		end
+
+		super
+	end
+
+	# The compilation directory
+	var compile_dir: String
+
+	# Simple indirection to `Toolchain::write_and_make`
+	protected fun write_and_make(compiler: AbstractCompiler)
+	do
+		var platform = compiler.mainmodule.target_platform
+		var toolchain
+		if platform == null then
+			toolchain = new MakefileToolchain(toolcontext)
+		else
+			toolchain = platform.toolchain(toolcontext)
+		end
+		compile_dir = toolchain.compile_dir
+		toolchain.write_and_make compiler
+	end
+end
+
+redef class Platform
+	fun toolchain(toolcontext: ToolContext): Toolchain is abstract
+end
+
+class Toolchain
+	var toolcontext: ToolContext
+
+	fun compile_dir: String
+	do
+		var compile_dir = toolcontext.opt_compile_dir.value
+		if compile_dir == null then compile_dir = ".nit_compile"
+		return compile_dir
+	end
+
+	fun write_and_make(compiler: AbstractCompiler) is abstract
+end
+
+class MakefileToolchain
+	super Toolchain
 	# The list of directories to search for included C headers (-I for C compilers)
 	# The list is initially set with :
 	#   * the toolcontext --cc-path option
@@ -76,10 +124,8 @@ redef class ModelBuilder
 	# Path can be added (or removed) by the client
 	var cc_paths = new Array[String]
 
-	redef init(model, toolcontext)
+	protected fun gather_cc_paths
 	do
-		super
-
 		# Look for the the Nit clib path
 		var path_env = "NIT_DIR".environ
 		if not path_env.is_empty then
@@ -94,11 +140,6 @@ redef class ModelBuilder
 			toolcontext.error(null, "Cannot determine the nit clib path. define envvar NIT_DIR.")
 		end
 
-		if toolcontext.opt_no_stacktrace.value and toolcontext.opt_stacktrace.value then
-			print "Cannot use --nit-stacktrace when --no-stacktrace is activated"
-			exit(1)
-		end
-
 		# Add user defined cc_paths
 		cc_paths.append(toolcontext.opt_cc_path.value)
 
@@ -106,18 +147,14 @@ redef class ModelBuilder
 		if not path_env.is_empty then
 			cc_paths.append(path_env.split_with(':'))
 		end
-
-		var compile_dir = toolcontext.opt_compile_dir.value
-		if compile_dir == null then compile_dir = ".nit_compile"
-		self.compile_dir = compile_dir
 	end
 
-	# The compilation directory
-	var compile_dir: String
-
-	protected fun write_and_make(compiler: AbstractCompiler)
+	redef fun write_and_make(compiler)
 	do
+		gather_cc_paths
+
 		var mainmodule = compiler.mainmodule
+		var compile_dir = compile_dir
 
 		# Generate the .h and .c files
 		# A single C file regroups many compiled rumtime functions
@@ -161,8 +198,9 @@ redef class ModelBuilder
 		compiler.files_to_copy.add "{cc_paths.first}/gc_chooser.h"
 
 		# FFI
-		for m in compiler.mainmodule.in_importation.greaters do if mmodule2nmodule.keys.has(m) then
-			var amodule = mmodule2nmodule[m]
+		var m2m = toolcontext.modelbuilder.mmodule2nmodule
+		for m in compiler.mainmodule.in_importation.greaters do if m2m.keys.has(m) then
+			var amodule = m2m[m]
 			if m.uses_ffi or amodule.uses_legacy_ni then
 				compiler.finalize_ffi_for_module(amodule)
 			end
@@ -258,8 +296,9 @@ redef class ModelBuilder
 		end
 
 		var linker_options = new HashSet[String]
-		for m in mainmodule.in_importation.greaters do if mmodule2nmodule.keys.has(m) then
-			var amod = mmodule2nmodule[m]
+		var m2m = toolcontext.modelbuilder.mmodule2nmodule
+		for m in mainmodule.in_importation.greaters do if m2m.keys.has(m) then
+			var amod = m2m[m]
 			linker_options.add(amod.c_linker_options)
 		end
 

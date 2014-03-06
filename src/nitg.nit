@@ -24,6 +24,7 @@ import rapid_type_analysis
 import global_compiler
 import separate_erasure_compiler
 import separate_compiler
+import android_platform
 
 # Create a tool context to handle options and paths
 var toolcontext = new ToolContext
