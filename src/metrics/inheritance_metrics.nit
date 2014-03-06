@@ -37,12 +37,23 @@ private class InheritanceMetricsPhase
 		print toolcontext.format_h1("\n# Inheritance metrics")
 
 		var hmetrics = new InheritanceMetricSet
-		hmetrics.register(new MDUI, new MDUIC, new MDUII, new MIF, new MIFC, new MIFI)
-		
+		hmetrics.register(new MDUI(mainmodule))
+		hmetrics.register(new MDUIC(mainmodule))
+		hmetrics.register(new MDUII(mainmodule))
+		hmetrics.register(new MIF(mainmodule))
+		hmetrics.register(new MIFC(mainmodule))
+		hmetrics.register(new MIFI(mainmodule))
+
 		var cmetrics = new MClassMetricSet
-		cmetrics.register(new CNOA, new CNOP, new CNOC, new CNODC)
-		cmetrics.register(new CNOA, new CNOP, new CNOC, new CNODI)
-		cmetrics.register(new CDIT, new CDITI)
+		cmetrics.register(new CNOAC(mainmodule))
+		cmetrics.register(new CNOPC(mainmodule))
+		cmetrics.register(new CNOCC(mainmodule))
+		cmetrics.register(new CNODC(mainmodule))
+		cmetrics.register(new CNOPI(mainmodule))
+		cmetrics.register(new CNOCI(mainmodule))
+		cmetrics.register(new CNODI(mainmodule))
+		cmetrics.register(new CDITC(mainmodule))
+		cmetrics.register(new CDITI(mainmodule))
 
 		var model = toolcontext.modelbuilder.model
 		var mmodules = new HashSet[MModule]
@@ -122,9 +133,7 @@ class InheritanceMetricSet
 	fun collect(mmodules: Set[MModule], mainmodule: MModule) do
 		clear
 		for metric in metrics.values do
-			for mmodule in mmodules do
-				metric.collect(mmodule, mainmodule)
-			end
+			metric.collect(mmodules)
 		end
 	end
 end
@@ -138,15 +147,20 @@ class MDUI
 	redef fun name do return "mdui"
 	redef fun desc do return "proportion of mclass defined using inheritance (has other parent than Object)"
 
-	redef fun collect(mmodule, mainmodule) do
-		var count = 0
-		for mclass in mmodule.intro_mclasses do
-			if mclass.in_hierarchy(mainmodule).greaters.length > 2 then count += 1
-		end
-		if mmodule.intro_mclasses.is_empty then
-			values[mmodule] = 0.0
-		else
-			values[mmodule] = count.to_f / mmodule.intro_mclasses.length.to_f
+	var mainmodule: MModule
+	init(mainmodule: MModule) do self.mainmodule = mainmodule
+
+	redef fun collect(mmodules) do
+		for mmodule in mmodules do
+			var count = 0
+			for mclass in mmodule.intro_mclasses do
+				if mclass.in_hierarchy(mainmodule).greaters.length > 2 then count += 1
+			end
+			if mmodule.intro_mclasses.is_empty then
+				values[mmodule] = 0.0
+			else
+				values[mmodule] = count.to_f / mmodule.intro_mclasses.length.to_f
+			end
 		end
 	end
 end
@@ -160,19 +174,24 @@ class MDUIC
 	redef fun name do return "mduic"
 	redef fun desc do return "proportion of class_kind defined using inheritance"
 
-	redef fun collect(mmodule, mainmodule) do
-		var count = 0
-		var nb = 0
-		for mclass in mmodule.intro_mclasses do
-			if mclass.kind == abstract_kind or mclass.kind == concrete_kind or mclass.kind == extern_kind then
-				if mclass.in_hierarchy(mainmodule).greaters.length > 2 then count += 1
+	var mainmodule: MModule
+	init(mainmodule: MModule) do self.mainmodule = mainmodule
+
+	redef fun collect(mmodules) do
+		for mmodule in mmodules do
+			var count = 0
+			var nb = 0
+			for mclass in mmodule.intro_mclasses do
+				if mclass.kind == abstract_kind or mclass.kind == concrete_kind or mclass.kind == extern_kind then
+					if mclass.in_hierarchy(mainmodule).greaters.length > 2 then count += 1
+				end
+				nb += 1
 			end
-			nb += 1
-		end
-		if mmodule.intro_mclasses.is_empty then
-			values[mmodule] = 0.0
-		else
-			values[mmodule] = count.to_f / nb.to_f
+			if mmodule.intro_mclasses.is_empty then
+				values[mmodule] = 0.0
+			else
+				values[mmodule] = count.to_f / nb.to_f
+			end
 		end
 	end
 end
@@ -186,19 +205,24 @@ class MDUII
 	redef fun name do return "mduii"
 	redef fun desc do return "proportion of interface_kind defined using inheritance"
 
-	redef fun collect(mmodule, mainmodule) do
-		var count = 0
-		var nb = 0
-		for mclass in mmodule.intro_mclasses do
-			if mclass.kind == interface_kind then
-				if mclass.in_hierarchy(mainmodule).greaters.length > 2 then count += 1
+	var mainmodule: MModule
+	init(mainmodule: MModule) do self.mainmodule = mainmodule
+
+	redef fun collect(mmodules) do
+		for mmodule in mmodules do
+			var count = 0
+			var nb = 0
+			for mclass in mmodule.intro_mclasses do
+				if mclass.kind == interface_kind then
+					if mclass.in_hierarchy(mainmodule).greaters.length > 2 then count += 1
+				end
+				nb += 1
 			end
-			nb += 1
-		end
-		if mmodule.intro_mclasses.is_empty then
-			values[mmodule] = 0.0
-		else
-			values[mmodule] = count.to_f / nb.to_f
+			if mmodule.intro_mclasses.is_empty then
+				values[mmodule] = 0.0
+			else
+				values[mmodule] = count.to_f / nb.to_f
+			end
 		end
 	end
 end
@@ -212,15 +236,20 @@ class MIF
 	redef fun name do return "mif"
 	redef fun desc do return "proportion of mclass inherited from"
 
-	redef fun collect(mmodule, mainmodule) do
-		var count = 0
-		for mclass in mmodule.intro_mclasses do
-			if mclass.in_hierarchy(mainmodule).direct_smallers.length > 0 then count += 1
-		end
-		if mmodule.intro_mclasses.is_empty then
-			values[mmodule] = 0.0
-		else
-			values[mmodule] = count.to_f / mmodule.intro_mclasses.length.to_f
+	var mainmodule: MModule
+	init(mainmodule: MModule) do self.mainmodule = mainmodule
+
+	redef fun collect(mmodules) do
+		for mmodule in mmodules do
+			var count = 0
+			for mclass in mmodule.intro_mclasses do
+				if mclass.in_hierarchy(mainmodule).direct_smallers.length > 0 then count += 1
+			end
+			if mmodule.intro_mclasses.is_empty then
+				values[mmodule] = 0.0
+			else
+				values[mmodule] = count.to_f / mmodule.intro_mclasses.length.to_f
+			end
 		end
 	end
 end
@@ -234,19 +263,24 @@ class MIFC
 	redef fun name do return "mifc"
 	redef fun desc do return "proportion of class_kind inherited from"
 
-	redef fun collect(mmodule, mainmodule) do
-		var count = 0
-		var nb = 0
-		for mclass in mmodule.intro_mclasses do
-			if mclass.kind == abstract_kind or mclass.kind == concrete_kind or mclass.kind == extern_kind then
-				if mclass.in_hierarchy(mainmodule).direct_smallers.length > 0 then count += 1
+	var mainmodule: MModule
+	init(mainmodule: MModule) do self.mainmodule = mainmodule
+
+	redef fun collect(mmodules) do
+		for mmodule in mmodules do
+			var count = 0
+			var nb = 0
+			for mclass in mmodule.intro_mclasses do
+				if mclass.kind == abstract_kind or mclass.kind == concrete_kind or mclass.kind == extern_kind then
+					if mclass.in_hierarchy(mainmodule).direct_smallers.length > 0 then count += 1
+				end
+				nb += 1
 			end
-			nb += 1
-		end
-		if mmodule.intro_mclasses.is_empty then
-			values[mmodule] = 0.0
-		else
-			values[mmodule] = count.to_f / nb.to_f
+			if mmodule.intro_mclasses.is_empty then
+				values[mmodule] = 0.0
+			else
+				values[mmodule] = count.to_f / nb.to_f
+			end
 		end
 	end
 end
@@ -260,19 +294,24 @@ class MIFI
 	redef fun name do return "mifi"
 	redef fun desc do return "proportion of interface_kind inherited from"
 
-	redef fun collect(mmodule, mainmodule) do
-		var count = 0
-		var nb = 0
-		for mclass in mmodule.intro_mclasses do
-			if mclass.kind == interface_kind then
-				if mclass.in_hierarchy(mainmodule).direct_smallers.length > 0 then count += 1
+	var mainmodule: MModule
+	init(mainmodule: MModule) do self.mainmodule = mainmodule
+
+	redef fun collect(mmodules) do
+		for mmodule in mmodules do
+			var count = 0
+			var nb = 0
+			for mclass in mmodule.intro_mclasses do
+				if mclass.kind == interface_kind then
+					if mclass.in_hierarchy(mainmodule).direct_smallers.length > 0 then count += 1
+				end
+				nb += 1
 			end
-			nb += 1
-		end
-		if mmodule.intro_mclasses.is_empty then
-			values[mmodule] = 0.0
-		else
-			values[mmodule] = count.to_f / nb.to_f
+			if mmodule.intro_mclasses.is_empty then
+				values[mmodule] = 0.0
+			else
+				values[mmodule] = count.to_f / nb.to_f
+			end
 		end
 	end
 end
@@ -286,15 +325,20 @@ class CNOAC
 	redef fun name do return "cnoac"
 	redef fun desc do return "number of class_kind ancestor"
 
-	redef fun collect(mclass, mainmodule) do
-		var count = 0
-		for parent in mclass.in_hierarchy(mainmodule).greaters do
-			if parent == mclass then continue
-			if parent.kind == abstract_kind or parent.kind == concrete_kind or parent.kind == extern_kind then
-				count += 1
+	var mainmodule: MModule
+	init(mainmodule: MModule) do self.mainmodule = mainmodule
+
+	redef fun collect(mclasses) do
+		for mclass in mclasses do
+			var count = 0
+			for parent in mclass.in_hierarchy(mainmodule).greaters do
+				if parent == mclass then continue
+				if parent.kind == abstract_kind or parent.kind == concrete_kind or parent.kind == extern_kind then
+					count += 1
+				end
 			end
+			values[mclass] = count
 		end
-		values[mclass] = count
 	end
 end
 
@@ -307,15 +351,20 @@ class CNOPC
 	redef fun name do return "cnopc"
 	redef fun desc do return "number of class_kind parent"
 
-	redef fun collect(mclass, mainmodule) do
-		var count = 0
-		for parent in mclass.in_hierarchy(mainmodule).direct_greaters do
-			if parent == mclass then continue
-			if parent.kind == abstract_kind or parent.kind == concrete_kind or parent.kind == extern_kind then
-				count += 1
+	var mainmodule: MModule
+	init(mainmodule: MModule) do self.mainmodule = mainmodule
+
+	redef fun collect(mclasses) do
+		for mclass in mclasses do
+			var count = 0
+			for parent in mclass.in_hierarchy(mainmodule).direct_greaters do
+				if parent == mclass then continue
+				if parent.kind == abstract_kind or parent.kind == concrete_kind or parent.kind == extern_kind then
+					count += 1
+				end
 			end
+			values[mclass] = count
 		end
-		values[mclass] = count
 	end
 end
 
@@ -328,15 +377,20 @@ class CNOCC
 	redef fun name do return "cnocc"
 	redef fun desc do return "number of class_kind children"
 
-	redef fun collect(mclass, mainmodule) do
-		var count = 0
-		for parent in mclass.in_hierarchy(mainmodule).direct_smallers do
-			if parent == mclass then continue
-			if parent.kind == abstract_kind or parent.kind == concrete_kind or parent.kind == extern_kind then
-				count += 1
+	var mainmodule: MModule
+	init(mainmodule: MModule) do self.mainmodule = mainmodule
+
+	redef fun collect(mclasses) do
+		for mclass in mclasses do
+			var count = 0
+			for parent in mclass.in_hierarchy(mainmodule).direct_smallers do
+				if parent == mclass then continue
+				if parent.kind == abstract_kind or parent.kind == concrete_kind or parent.kind == extern_kind then
+					count += 1
+				end
 			end
+			values[mclass] = count
 		end
-		values[mclass] = count
 	end
 end
 
@@ -349,15 +403,20 @@ class CNODC
 	redef fun name do return "cnodc"
 	redef fun desc do return "number of class_kind descendants"
 
-	redef fun collect(mclass, mainmodule) do
-		var count = 0
-		for parent in mclass.in_hierarchy(mainmodule).smallers do
-			if parent == mclass then continue
-			if parent.kind == abstract_kind or parent.kind == concrete_kind or parent.kind == extern_kind then
-				count += 1
+	var mainmodule: MModule
+	init(mainmodule: MModule) do self.mainmodule = mainmodule
+
+	redef fun collect(mclasses) do
+		for mclass in mclasses do
+			var count = 0
+			for parent in mclass.in_hierarchy(mainmodule).smallers do
+				if parent == mclass then continue
+				if parent.kind == abstract_kind or parent.kind == concrete_kind or parent.kind == extern_kind then
+					count += 1
+				end
 			end
+			values[mclass] = count
 		end
-		values[mclass] = count
 	end
 end
 
@@ -370,15 +429,20 @@ class CNOAI
 	redef fun name do return "cnoai"
 	redef fun desc do return "number of interface_kind ancestor"
 
-	redef fun collect(mclass, mainmodule) do
-		var count = 0
-		for parent in mclass.in_hierarchy(mainmodule).greaters do
-			if parent == mclass then continue
-			if parent.kind == interface_kind then
-				count += 1
+	var mainmodule: MModule
+	init(mainmodule: MModule) do self.mainmodule = mainmodule
+
+	redef fun collect(mclasses) do
+		for mclass in mclasses do
+			var count = 0
+			for parent in mclass.in_hierarchy(mainmodule).greaters do
+				if parent == mclass then continue
+				if parent.kind == interface_kind then
+					count += 1
+				end
 			end
+			values[mclass] = count
 		end
-		values[mclass] = count
 	end
 end
 
@@ -391,15 +455,20 @@ class CNOPI
 	redef fun name do return "cnopi"
 	redef fun desc do return "number of interface_kind parent"
 
-	redef fun collect(mclass, mainmodule) do
-		var count = 0
-		for parent in mclass.in_hierarchy(mainmodule).direct_greaters do
-			if parent == mclass then continue
-			if parent.kind == interface_kind then
-				count += 1
+	var mainmodule: MModule
+	init(mainmodule: MModule) do self.mainmodule = mainmodule
+
+	redef fun collect(mclasses) do
+		for mclass in mclasses do
+			var count = 0
+			for parent in mclass.in_hierarchy(mainmodule).direct_greaters do
+				if parent == mclass then continue
+				if parent.kind == interface_kind then
+					count += 1
+				end
 			end
+			values[mclass] = count
 		end
-		values[mclass] = count
 	end
 end
 
@@ -412,15 +481,20 @@ class CNOCI
 	redef fun name do return "cnoci"
 	redef fun desc do return "number of interface_kind children"
 
-	redef fun collect(mclass, mainmodule) do
-		var count = 0
-		for parent in mclass.in_hierarchy(mainmodule).direct_smallers do
-			if parent == mclass then continue
-			if parent.kind == interface_kind then
-				count += 1
+	var mainmodule: MModule
+	init(mainmodule: MModule) do self.mainmodule = mainmodule
+
+	redef fun collect(mclasses) do
+		for mclass in mclasses do
+			var count = 0
+			for parent in mclass.in_hierarchy(mainmodule).direct_smallers do
+				if parent == mclass then continue
+				if parent.kind == interface_kind then
+					count += 1
+				end
 			end
+			values[mclass] = count
 		end
-		values[mclass] = count
 	end
 end
 
@@ -433,15 +507,20 @@ class CNODI
 	redef fun name do return "cnodi"
 	redef fun desc do return "number of interface_kind descendants"
 
-	redef fun collect(mclass, mainmodule) do
-		var count = 0
-		for parent in mclass.in_hierarchy(mainmodule).smallers do
-			if parent == mclass then continue
-			if parent.kind == interface_kind then
-				count += 1
+	var mainmodule: MModule
+	init(mainmodule: MModule) do self.mainmodule = mainmodule
+
+	redef fun collect(mclasses) do
+		for mclass in mclasses do
+			var count = 0
+			for parent in mclass.in_hierarchy(mainmodule).smallers do
+				if parent == mclass then continue
+				if parent.kind == interface_kind then
+					count += 1
+				end
 			end
+			values[mclass] = count
 		end
-		values[mclass] = count
 	end
 end
 
@@ -454,8 +533,13 @@ class CDITC
 	redef fun name do return "cditc"
 	redef fun desc do return "depth in class tree following only class, abstract, extern kind"
 
-	redef fun collect(mclass, mainmodule) do
-		values[mclass] = mclass.ditc(mainmodule)
+	var mainmodule: MModule
+	init(mainmodule: MModule) do self.mainmodule = mainmodule
+
+	redef fun collect(mclasses) do
+		for mclass in mclasses do
+			values[mclass] = mclass.ditc(mainmodule)
+		end
 	end
 end
 
@@ -468,8 +552,13 @@ class CDITI
 	redef fun name do return "cditi"
 	redef fun desc do return "depth in class tree following only interface_kind"
 
-	redef fun collect(mclass, mainmodule) do
-		values[mclass] = mclass.diti(mainmodule)
+	var mainmodule: MModule
+	init(mainmodule: MModule) do self.mainmodule = mainmodule
+
+	redef fun collect(mclasses) do
+		for mclass in mclasses do
+			values[mclass] = mclass.diti(mainmodule)
+		end
 	end
 end
 

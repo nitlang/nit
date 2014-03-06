@@ -37,8 +37,14 @@ private class MClassesMetricsPhase
 
 		var metrics = new MClassMetricSet
 		var min_vis = private_visibility
-		metrics.register(new CNOA, new CNOP, new CNOC, new CNOD, new CDIT)
-		metrics.register(new CNBIP(min_vis), new CNBRP(min_vis), new CNBHP(min_vis))
+		metrics.register(new CNOA(mainmodule))
+		metrics.register(new CNOP(mainmodule))
+		metrics.register(new CNOC(mainmodule))
+		metrics.register(new CNOD(mainmodule))
+		metrics.register(new CDIT(mainmodule))
+		metrics.register(new CNBIP(mainmodule, min_vis))
+		metrics.register(new CNBRP(mainmodule, min_vis))
+		metrics.register(new CNBHP(mainmodule, min_vis))
 		#TODO metrics.register(new CNBI) # nb init
 		#TODO metrics.register(new CNBA) # nb attrs
 		#TODO metrics.register(new CNBM) # nb methods
@@ -101,9 +107,7 @@ class MClassMetricSet
 	fun collect(mclasses: Set[MClass], mainmodule: MModule) do
 		clear
 		for metric in metrics.values do
-			for mclass in mclasses do
-				metric.collect(mclass, mainmodule)
-			end
+			metric.collect(mclasses)
 		end
 	end
 end
@@ -112,9 +116,6 @@ end
 interface MClassMetric
 	super Metric
 	redef type ELM: MClass
-
-	# Collect the metric value for this mclass
-	fun collect(mclass: MClass, mainmodule: MModule) is abstract
 end
 
 # Class Metric: Number of Ancestors
@@ -124,8 +125,13 @@ class CNOA
 	redef fun name do return "cnoa"
 	redef fun desc do return "number of ancestor classes"
 
-	redef fun collect(mclass, mainmodule) do
-		values[mclass] = mclass.in_hierarchy(mainmodule).greaters.length - 1
+	var mainmodule: MModule
+	init(mainmodule: MModule) do self.mainmodule = mainmodule
+
+	redef fun collect(mclasses) do
+		for mclass in mclasses do
+			values[mclass] = mclass.in_hierarchy(mainmodule).greaters.length - 1
+		end
 	end
 end
 
@@ -136,8 +142,13 @@ class CNOP
 	redef fun name do return "cnop"
 	redef fun desc do return "number of parent classes"
 
-	redef fun collect(mclass, mainmodule) do
-		values[mclass] = mclass.in_hierarchy(mainmodule).direct_greaters.length
+	var mainmodule: MModule
+	init(mainmodule: MModule) do self.mainmodule = mainmodule
+
+	redef fun collect(mclasses) do
+		for mclass in mclasses do
+			values[mclass] = mclass.in_hierarchy(mainmodule).direct_greaters.length
+		end
 	end
 end
 
@@ -148,8 +159,13 @@ class CNOC
 	redef fun name do return "cnoc"
 	redef fun desc do return "number of child classes"
 
-	redef fun collect(mclass, mainmodule) do
-		values[mclass] = mclass.in_hierarchy(mainmodule).direct_smallers.length
+	var mainmodule: MModule
+	init(mainmodule: MModule) do self.mainmodule = mainmodule
+
+	redef fun collect(mclasses) do
+		for mclass in mclasses do
+			values[mclass] = mclass.in_hierarchy(mainmodule).direct_smallers.length
+		end
 	end
 end
 
@@ -160,8 +176,13 @@ class CNOD
 	redef fun name do return "cnod"
 	redef fun desc do return "number of descendant classes"
 
-	redef fun collect(mclass, mainmodule) do
-		values[mclass] = mclass.in_hierarchy(mainmodule).smallers.length - 1
+	var mainmodule: MModule
+	init(mainmodule: MModule) do self.mainmodule = mainmodule
+
+	redef fun collect(mclasses) do
+		for mclass in mclasses do
+			values[mclass] = mclass.in_hierarchy(mainmodule).smallers.length - 1
+		end
 	end
 end
 
@@ -172,8 +193,13 @@ class CDIT
 	redef fun name do return "cdit"
 	redef fun desc do return "depth in class tree"
 
-	redef fun collect(mclass, mainmodule) do
-		values[mclass] = mclass.in_hierarchy(mainmodule).depth
+	var mainmodule: MModule
+	init(mainmodule: MModule) do self.mainmodule = mainmodule
+
+	redef fun collect(mclasses) do
+		for mclass in mclasses do
+			values[mclass] = mclass.in_hierarchy(mainmodule).depth
+		end
 	end
 end
 
@@ -184,11 +210,18 @@ class CNBIP
 	redef fun name do return "cnbip"
 	redef fun desc do return "number of introduced properties"
 
+	var mainmodule: MModule
 	var min_visibility: MVisibility
-	init(min_visibility: MVisibility) do self.min_visibility = min_visibility
 
-	redef fun collect(mclass, mainmodule) do
-		values[mclass] = mclass.intro_mproperties(min_visibility).length
+	init(mainmodule: MModule, min_visibility: MVisibility) do
+		self.mainmodule = mainmodule
+		self.min_visibility = min_visibility
+	end
+
+	redef fun collect(mclasses) do
+		for mclass in mclasses do
+			values[mclass] = mclass.intro_mproperties(min_visibility).length
+		end
 	end
 end
 
@@ -199,11 +232,18 @@ class CNBRP
 	redef fun name do return "cnbrp"
 	redef fun desc do return "number of redefined properties"
 
+	var mainmodule: MModule
 	var min_visibility: MVisibility
-	init(min_visibility: MVisibility) do self.min_visibility = min_visibility
 
-	redef fun collect(mclass, mainmodule) do
-		values[mclass] = mclass.redef_mproperties(min_visibility).length
+	init(mainmodule: MModule, min_visibility: MVisibility) do
+		self.mainmodule = mainmodule
+		self.min_visibility = min_visibility
+	end
+
+	redef fun collect(mclasses) do
+		for mclass in mclasses do
+			values[mclass] = mclass.redef_mproperties(min_visibility).length
+		end
 	end
 end
 
@@ -214,11 +254,18 @@ class CNBHP
 	redef fun name do return "cnbhp"
 	redef fun desc do return "number of inherited properties"
 
+	var mainmodule: MModule
 	var min_visibility: MVisibility
-	init(min_visibility: MVisibility) do self.min_visibility = min_visibility
 
-	redef fun collect(mclass, mainmodule) do
-		values[mclass] = mclass.inherited_mproperties(mainmodule, min_visibility).length
+	init(mainmodule: MModule, min_visibility: MVisibility) do
+		self.mainmodule = mainmodule
+		self.min_visibility = min_visibility
+	end
+
+	redef fun collect(mclasses) do
+		for mclass in mclasses do
+			values[mclass] = mclass.inherited_mproperties(mainmodule, min_visibility).length
+		end
 	end
 end
 

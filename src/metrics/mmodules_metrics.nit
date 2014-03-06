@@ -93,9 +93,7 @@ class MModuleMetricSet
 	fun collect(mmodules: Set[MModule], mainmodule: MModule) do
 		clear
 		for metric in metrics.values do
-			for mmodule in mmodules do
-				metric.collect(mmodule, mainmodule)
-			end
+			metric.collect(mmodules)
 		end
 	end
 end
@@ -104,10 +102,6 @@ end
 abstract class MModuleMetric
 	super Metric
 	redef type ELM: MModule
-	# Collect the metric on the MModule
-	#
-	# Results are stored in the property `values`
-	fun collect(mmodule: MModule, mainmodule: MModule) is abstract
 end
 
 # Module Metric: Number of Ancestors
@@ -117,8 +111,10 @@ class MNOA
 	redef fun name do return "mnoa"
 	redef fun desc do return "number of ancestor modules"
 
-	redef fun collect(mmodule, main) do
-		values[mmodule] = mmodule.in_importation.greaters.length - 1
+	redef fun collect(mmodules) do
+		for mmodule in mmodules do
+			values[mmodule] = mmodule.in_importation.greaters.length - 1
+		end
 	end
 end
 
@@ -129,8 +125,10 @@ class MNOP
 	redef fun name do return "mnop"
 	redef fun desc do return "number of parent modules"
 
-	redef fun collect(mmodule, main) do
-		values[mmodule] = mmodule.in_importation.direct_greaters.length
+	redef fun collect(mmodules) do
+		for mmodule in mmodules do
+			values[mmodule] = mmodule.in_importation.direct_greaters.length
+		end
 	end
 end
 
@@ -141,8 +139,10 @@ class MNOC
 	redef fun name do return "mnoc"
 	redef fun desc do return "number of child modules"
 
-	redef fun collect(mmodule, main) do
-		values[mmodule] = mmodule.in_importation.direct_smallers.length
+	redef fun collect(mmodules) do
+		for mmodule in mmodules do
+			values[mmodule] = mmodule.in_importation.direct_smallers.length
+		end
 	end
 end
 
@@ -153,8 +153,10 @@ class MNOD
 	redef fun name do return "mnod"
 	redef fun desc do return "number of descendant modules"
 
-	redef fun collect(mmodule, main) do
-		values[mmodule] = mmodule.in_importation.smallers.length - 1
+	redef fun collect(mmodules) do
+		for mmodule in mmodules do
+			values[mmodule] = mmodule.in_importation.smallers.length - 1
+		end
 	end
 end
 
@@ -165,8 +167,10 @@ class MDIT
 	redef fun name do return "mdit"
 	redef fun desc do return "depth in module tree"
 
-	redef fun collect(mmodule, main) do
-		values[mmodule] = mmodule.in_importation.depth
+	redef fun collect(mmodules) do
+		for mmodule in mmodules do
+			values[mmodule] = mmodule.in_importation.depth
+		end
 	end
 end
 
@@ -179,8 +183,10 @@ class MNBI
 	redef fun name do return "mnbi"
 	redef fun desc do return "number of introduction in module"
 
-	redef fun collect(mmodule, main) do
-		values[mmodule] = mmodule.intro_mclasses.length
+	redef fun collect(mmodules) do
+		for mmodule in mmodules do
+			values[mmodule] = mmodule.intro_mclasses.length
+		end
 	end
 end
 
@@ -193,12 +199,14 @@ class MNBR
 	redef fun name do return "mnbr"
 	redef fun desc do return "number of refinement in module"
 
-	redef fun collect(mmodule, main) do
-		var value = 0
-		for mclassdef in mmodule.mclassdefs do
-			if not mclassdef.is_intro then value += 1
+	redef fun collect(mmodules) do
+		for mmodule in mmodules do
+			var value = 0
+			for mclassdef in mmodule.mclassdefs do
+				if not mclassdef.is_intro then value += 1
+			end
+			values[mmodule] = value
 		end
-		values[mmodule] = value
 	end
 end
 
@@ -209,12 +217,14 @@ class MNBCC
 	redef fun name do return "mnbcc"
 	redef fun desc do return "number of concrete class in module (intro + redef)"
 
-	redef fun collect(mmodule, main) do
-		var value = 0
-		for mclassdef in mmodule.mclassdefs do
-			if mclassdef.mclass.kind == concrete_kind then value += 1
+	redef fun collect(mmodules) do
+		for mmodule in mmodules do
+			var value = 0
+			for mclassdef in mmodule.mclassdefs do
+				if mclassdef.mclass.kind == concrete_kind then value += 1
+			end
+			values[mmodule] = value
 		end
-		values[mmodule] = value
 	end
 end
 
@@ -225,12 +235,14 @@ class MNBAC
 	redef fun name do return "mnbac"
 	redef fun desc do return "number of abstract class in module (intro + redef)"
 
-	redef fun collect(mmodule, main) do
-		var value = 0
-		for mclassdef in mmodule.mclassdefs do
-			if mclassdef.mclass.kind == abstract_kind then value += 1
+	redef fun collect(mmodules) do
+		for mmodule in mmodules do
+			var value = 0
+			for mclassdef in mmodule.mclassdefs do
+				if mclassdef.mclass.kind == abstract_kind then value += 1
+			end
+			values[mmodule] = value
 		end
-		values[mmodule] = value
 	end
 end
 
@@ -241,12 +253,14 @@ class MNBIC
 	redef fun name do return "mnbic"
 	redef fun desc do return "number of interface in module (intro + redef)"
 
-	redef fun collect(mmodule, main) do
-		var value = 0
-		for mclassdef in mmodule.mclassdefs do
-			if mclassdef.mclass.kind == interface_kind then value += 1
+	redef fun collect(mmodules) do
+		for mmodule in mmodules do
+			var value = 0
+			for mclassdef in mmodule.mclassdefs do
+				if mclassdef.mclass.kind == interface_kind then value += 1
+			end
+			values[mmodule] = value
 		end
-		values[mmodule] = value
 	end
 end
 
@@ -257,12 +271,14 @@ class MNBEC
 	redef fun name do return "mnbec"
 	redef fun desc do return "number of enum in module (intro + redef)"
 
-	redef fun collect(mmodule, main) do
-		var value = 0
-		for mclassdef in mmodule.mclassdefs do
-			if mclassdef.mclass.kind == enum_kind then value += 1
+	redef fun collect(mmodules) do
+		for mmodule in mmodules do
+			var value = 0
+			for mclassdef in mmodule.mclassdefs do
+				if mclassdef.mclass.kind == enum_kind then value += 1
+			end
+			values[mmodule] = value
 		end
-		values[mmodule] = value
 	end
 end
 
