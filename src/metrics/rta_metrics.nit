@@ -121,15 +121,15 @@ do
 
 	# CSV generation
 	if modelbuilder.toolcontext.opt_generate_csv.value then
-		var summaryCSV = new CSVDocument(modelbuilder.toolcontext.output_dir.join_path("rta_sum_metrics.csv"))
+		var summaryCSV = new CSVDocument
 		summaryCSV.set_header("scope", "NLVT", "NLVTG", "NLCT", "NLVCTG")
 		summaryCSV.add_line("global", nlvt, nlvtg, nlct, nlctg)
 		summaryCSV.add_line("SLUD", nlvtslud, nlvtgslud, nlctslud, nlctgslud)
 		summaryCSV.add_line("UDUD", nlvtudud, nlvtgudud, nlctudud, nlctgudud)
-		summaryCSV.save
+		summaryCSV.save(modelbuilder.toolcontext.output_dir.join_path("rta_sum_metrics.csv"))
 
-		var scalarCSV = new CSVDocument(modelbuilder.toolcontext.output_dir.join_path("rta_scalar_metrics.csv"))
-		var udscalarCSV = new CSVDocument(modelbuilder.toolcontext.output_dir.join_path("rta_ud_scalar_metrics.csv"))
+		var scalarCSV = new CSVDocument
+		var udscalarCSV = new CSVDocument
 		scalarCSV.set_header("Type", "AGS", "DGS", "NLVT", "NLCT")
 		udscalarCSV.set_header("Type", "AGS", "DGS", "NLVT", "NLCT")
 
@@ -141,11 +141,11 @@ do
 			end
 			scalarCSV.add_line(mtype, arity, mtype.get_depth, mtype.nlvt, mtype.nlct)
 		end
-		scalarCSV.save
-		udscalarCSV.save
+		scalarCSV.save(modelbuilder.toolcontext.output_dir.join_path("rta_scalar_metrics.csv"))
+		udscalarCSV.save(modelbuilder.toolcontext.output_dir.join_path("rta_ud_scalar_metrics.csv"))
 
-		scalarCSV = new CSVDocument(modelbuilder.toolcontext.output_dir.join_path("rta_scalar_class_metrics.csv"))
-		udscalarCSV = new CSVDocument(modelbuilder.toolcontext.output_dir.join_path("rta_ud_scalar_class_metrics.csv"))
+		scalarCSV = new CSVDocument
+		udscalarCSV = new CSVDocument
 		scalarCSV.set_header("Class", "AGS", "NLVV", "NLVT")
 		udscalarCSV.set_header("Class", "AGS", "NLVV", "inst")
 
@@ -156,8 +156,8 @@ do
 			end
 			scalarCSV.add_line(mclass.mclass_type, mclass.arity, mclass.live_types.length, mclass.nlvt)
 		end
-		scalarCSV.save
-		udscalarCSV.save
+		scalarCSV.save(modelbuilder.toolcontext.output_dir.join_path("rta_scalar_class_metrics.csv"))
+		udscalarCSV.save(modelbuilder.toolcontext.output_dir.join_path("rta_ud_scalar_class_metrics.csv"))
 	end
 
 	print "--- RTA metrics ---"

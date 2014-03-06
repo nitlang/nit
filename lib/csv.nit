@@ -17,11 +17,8 @@ module csv
 
 # A CSV document representation
 class CSVDocument
-	private var file: String
 	private var header: Array[String] = new Array[String]
 	private var lines: Array[Array[String]] = new Array[Array[String]]
-
-	init(file: String) do self.file = file
 
 	fun set_header(values: Object...) do
 		header.clear
@@ -44,8 +41,8 @@ class CSVDocument
 		return str
 	end
 
-	fun save do
-		var out = new OFStream.open(self.file)
+	fun save(file: String) do
+		var out = new OFStream.open(file)
 		out.write(self.to_s)
 		out.close
 	end
