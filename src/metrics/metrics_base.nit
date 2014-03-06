@@ -256,14 +256,20 @@ end
 #
 # It purpose is to be extended with a metric collect service
 class MetricSet
-	type METRIC: Metric
+	type ELM: Object
 
 	# Metrics to compute
-	var metrics: Map[String, METRIC] = new HashMap[String, METRIC]
+	var metrics: Set[Metric] = new HashSet[Metric]
 
 	# Add a metric to the set
-	fun register(metrics: METRIC...) do for metric in metrics do self.metrics[metric.name] = metric
+	fun register(metrics: Metric...) do for metric in metrics do self.metrics.add(metric)
 
 	# Clear all results for all metrics
-	fun clear do for metric in metrics.values do metric.clear
+	fun clear do for metric in metrics do metric.clear
+
+	# Collect all metrics for this set of class
+	fun collect(elements: Set[ELM]) do
+		for metric in metrics do metric.collect(elements)
+	end
+
 end

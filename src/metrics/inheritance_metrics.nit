@@ -36,7 +36,7 @@ private class InheritanceMetricsPhase
 
 		print toolcontext.format_h1("\n# Inheritance metrics")
 
-		var hmetrics = new InheritanceMetricSet
+		var hmetrics = new MetricSet
 		hmetrics.register(new MDUI(mainmodule))
 		hmetrics.register(new MDUIC(mainmodule))
 		hmetrics.register(new MDUII(mainmodule))
@@ -44,7 +44,7 @@ private class InheritanceMetricsPhase
 		hmetrics.register(new MIFC(mainmodule))
 		hmetrics.register(new MIFI(mainmodule))
 
-		var cmetrics = new MClassMetricSet
+		var cmetrics = new MetricSet
 		cmetrics.register(new CNOAC(mainmodule))
 		cmetrics.register(new CNOPC(mainmodule))
 		cmetrics.register(new CNOCC(mainmodule))
@@ -73,10 +73,10 @@ private class InheritanceMetricsPhase
 				if mod_mclasses.is_empty then continue
 				mmodules.add_all(mgroup.mmodules)
 				mclasses.add_all(mod_mclasses)
-				cmetrics.collect(new HashSet[MClass].from(mod_mclasses), mainmodule)
-				for name, metric in cmetrics.metrics do
+				cmetrics.collect(new HashSet[MClass].from(mod_mclasses))
+				for metric in cmetrics.metrics do
 					if metric isa IntMetric then
-						print toolcontext.format_h4("\t{name}: {metric.desc}")
+						print toolcontext.format_h4("\t{metric.name}: {metric.desc}")
 						print toolcontext.format_p("\t    avg: {metric.avg}")
 						var max = metric.max
 						print toolcontext.format_p("\t    max: {max.first} ({max.second})")
@@ -84,10 +84,10 @@ private class InheritanceMetricsPhase
 						print toolcontext.format_p("\t    min: {min.first} ({min.second})")
 					end
 				end
-				hmetrics.collect(new HashSet[MModule].from(mgroup.mmodules), mainmodule)
-				for name, metric in hmetrics.metrics do
+				hmetrics.collect(new HashSet[MModule].from(mgroup.mmodules))
+				for metric in hmetrics.metrics do
 					if metric isa FloatMetric then
-						print toolcontext.format_h4("\t{name}: {metric.desc}")
+						print toolcontext.format_h4("\t{metric.name}: {metric.desc}")
 						print toolcontext.format_p("\t    avg: {metric.avg}")
 						var max = metric.max
 						print toolcontext.format_p("\t    max: {max.first} ({max.second})")
@@ -100,10 +100,11 @@ private class InheritanceMetricsPhase
 		if not mclasses.is_empty then
 			# Global metrics
 			print toolcontext.format_h2("\n ## global metrics")
-			cmetrics.collect(mclasses, mainmodule)
-			for name, metric in cmetrics.metrics do
+			cmetrics.clear
+			cmetrics.collect(mclasses)
+			for metric in cmetrics.metrics do
 				if metric isa IntMetric then
-					print toolcontext.format_h4("\t{name}: {metric.desc}")
+					print toolcontext.format_h4("\t{metric.name}: {metric.desc}")
 					print toolcontext.format_p("\t    avg: {metric.avg}")
 					var max = metric.max
 					print toolcontext.format_p("\t    max: {max.first} ({max.second})")
@@ -111,10 +112,11 @@ private class InheritanceMetricsPhase
 					print toolcontext.format_p("\t    min: {min.first} ({min.second})")
 				end
 			end
-			hmetrics.collect(mmodules, mainmodule)
-			for name, metric in hmetrics.metrics do
+			hmetrics.clear
+			hmetrics.collect(mmodules)
+			for metric in hmetrics.metrics do
 				if metric isa FloatMetric then
-					print toolcontext.format_h4("\t{name}: {metric.desc}")
+					print toolcontext.format_h4("\t{metric.name}: {metric.desc}")
 					print toolcontext.format_p("\t    avg: {metric.avg}")
 					var max = metric.max
 					print toolcontext.format_p("\t    max: {max.first} ({max.second})")
@@ -122,18 +124,6 @@ private class InheritanceMetricsPhase
 					print toolcontext.format_p("\t    min: {min.first} ({min.second})")
 				end
 			end
-		end
-	end
-end
-
-# Metric Set used to collect data about inheritance in each module
-class InheritanceMetricSet
-	super MetricSet
-	redef type METRIC: MModuleMetric
-	fun collect(mmodules: Set[MModule], mainmodule: MModule) do
-		clear
-		for metric in metrics.values do
-			metric.collect(mmodules)
 		end
 	end
 end

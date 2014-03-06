@@ -35,7 +35,7 @@ private class MModulesMetricsPhase
 
 		print toolcontext.format_h1("\n# MModules metrics")
 
-		var metrics = new MModuleMetricSet
+		var metrics = new MetricSet
 		metrics.register(new MNOA, new MNOP, new MNOC, new MNOD, new MDIT)
 		metrics.register(new MNBI, new MNBR, new MNBCC, new MNBAC, new MNBIC)
 
@@ -52,10 +52,10 @@ private class MModulesMetricsPhase
 				print  toolcontext.format_h3("  `- group {mgroup.full_name}")
 
 				mmodules.add_all(mgroup.mmodules)
-				metrics.collect(new HashSet[MModule].from(mgroup.mmodules), mainmodule)
-				for name, metric in metrics.metrics do
+				metrics.collect(new HashSet[MModule].from(mgroup.mmodules))
+				for metric in metrics.metrics do
 					if metric isa IntMetric then
-						print toolcontext.format_h4("\t{name}: {metric.desc}")
+						print toolcontext.format_h4("\t{metric.name}: {metric.desc}")
 						print toolcontext.format_p("\t    avg: {metric.avg}")
 						var max = metric.max
 						print  toolcontext.format_p("\t    max: {max.first} ({max.second})")
@@ -68,11 +68,11 @@ private class MModulesMetricsPhase
 		if not mmodules.is_empty then
 			# Global metrics
 			print  toolcontext.format_h2("\n ## global metrics")
-
-			metrics.collect(mmodules, mainmodule)
-			for name, metric in metrics.metrics do
+			metrics.clear
+			metrics.collect(mmodules)
+			for metric in metrics.metrics do
 				if metric isa IntMetric then
-					print toolcontext.format_h4( "\t{name}: {metric.desc}")
+					print toolcontext.format_h4( "\t{metric.name}: {metric.desc}")
 					print  toolcontext.format_p("\t    avg: {metric.avg}")
 					var max = metric.max
 						print  toolcontext.format_p("\t    max: {max.first} ({max.second})")
@@ -84,22 +84,8 @@ private class MModulesMetricsPhase
 	end
 end
 
-# A MetricSet for metrics about MModules
-class MModuleMetricSet
-	super MetricSet
-	redef type METRIC: MModuleMetric
-
-	# Collect all the metrics on the set of MModules
-	fun collect(mmodules: Set[MModule], mainmodule: MModule) do
-		clear
-		for metric in metrics.values do
-			metric.collect(mmodules)
-		end
-	end
-end
-
-# An abstract Metric on MModules
-abstract class MModuleMetric
+# A metric about MModule
+interface MModuleMetric
 	super Metric
 	redef type ELM: MModule
 end
