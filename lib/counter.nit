@@ -23,7 +23,7 @@ class Counter[E: Object]
 	super Map[E, Int]
 
 	# Total number of counted occurrences
-	var total: Int = 0
+	var sum: Int = 0
 
 	private var map = new HashMap[E, Int]
 
@@ -39,9 +39,9 @@ class Counter[E: Object]
 
 	redef fun []=(e: E, value: Int)
 	do
-		total -= self[e]
+		sum -= self[e]
 		self.map[e] = value
-		total += value
+		sum += value
 	end
 
 	redef fun keys do return map.keys
@@ -58,7 +58,7 @@ class Counter[E: Object]
 	fun inc(e: E)
 	do
 		self.map[e] = self[e] + 1
-		total += 1
+		sum += 1
 	end
 
 	# Return an array of elements sorted by occurrences
@@ -85,15 +85,15 @@ class Counter[E: Object]
 		if list.is_empty then return
 		print " minimum value: {self[list.first]}"
 		print " maximum value: {self[list.last]}"
-		print " total value: {self.total}"
-		print " average value: {div(self.total,list.length)}"
+		print " total value: {self.sum}"
+		print " average value: {div(self.sum,list.length)}"
 		print " distribution:"
 		var count = 0
 		var sum = 0
 		var limit = self[list.first]
 		for t in list do
 			if self[t] > limit then
-				print "  <={limit}: sub-population={count} ({div(count*100,list.length)}%); cumulated value={sum} ({div(sum*100,self.total)}%)"
+				print "  <={limit}: sub-population={count} ({div(count*100,list.length)}%); cumulated value={sum} ({div(sum*100,self.sum)}%)"
 				count = 0
 				sum = 0
 				while self[t] > limit do
@@ -104,7 +104,7 @@ class Counter[E: Object]
 			count += 1
 			sum += self[t]
 		end
-		print "  <={limit}: sub-population={count} ({div(count*100,list.length)}%); cumulated value={sum} ({div(sum*100,self.total)}%)"
+		print "  <={limit}: sub-population={count} ({div(count*100,list.length)}%); cumulated value={sum} ({div(sum*100,self.sum)}%)"
 	end
 
 	# Display up to `count` most used elements and `count` least used elements
@@ -117,13 +117,13 @@ class Counter[E: Object]
 		if list.length <= count*2 then min = list.length
 		for i in [0..min[ do
 			var t = list[list.length-i-1]
-			print "  {element_to_s(t)}: {self[t]} ({div(self[t]*100,self.total)}%)"
+			print "  {element_to_s(t)}: {self[t]} ({div(self[t]*100,self.sum)}%)"
 		end
 		if list.length <= count*2 then return
 		print "  ..."
 		for i in [0..min[ do
 			var t = list[min-i-1]
-			print "  {element_to_s(t)}: {self[t]} ({div(self[t]*100,self.total)}%)"
+			print "  {element_to_s(t)}: {self[t]} ({div(self[t]*100,self.sum)}%)"
 		end
 	end
 
@@ -156,11 +156,17 @@ class Counter[E: Object]
 	# Values average
 	fun avg: Float do
 		if values.is_empty then return 0.0
-		var sum = 0
+		return (sum / values.length).to_f
+	end
+
+	# The standard derivation of the counter values
+	fun std_dev: Float do
+		var avg = self.avg
+		var sum = 0.0
 		for value in map.values do
-			sum += value
+			sum += (value.to_f - avg).pow(2.0)
 		end
-		return sum.to_f / values.length.to_f
+		return (sum / map.length.to_f).sqrt
 	end
 end
 
@@ -176,7 +182,7 @@ redef class POSet[E]
 		var list = c.sort
 		(new ComparableSorter[Int]).sort(list)
 		for e in list do
-			print " {e} -> {c[e]} times ({div(c[e]*100, c.total)}%)"
+			print " {e} -> {c[e]} times ({div(c[e]*100, c.sum)}%)"
 		end
 	end
 

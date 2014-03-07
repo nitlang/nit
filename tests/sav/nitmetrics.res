@@ -13,6 +13,7 @@
   --all                   Compute all metrics
   --mmodules              Compute metrics about mmodules
   --mclasses              Compute metrics about mclasses
+  --mendel                Compute mendel metrics
   --inheritance           Compute metrics about inheritance usage
   --refinement            Compute metrics about refinement usage
   --self                  Compute metrics about the usage of explicit and implicit self
@@ -21,7 +22,7 @@
   --static-types          Compute explicit static types metrics
   --tables                Compute tables metrics
   --rta                   Compute RTA metrics
-  --generate-csv          Generate CVS format metrics
+  --csv                   Export metrics in CSV format
   --generate_hyperdoc     Generate Hyperdoc
   --poset                 Complete metrics on posets
   -d, --dir               Directory where some statistics files are generated

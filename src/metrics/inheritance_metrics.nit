@@ -33,16 +33,30 @@ private class InheritanceMetricsPhase
 	redef fun process_mainmodule(mainmodule)
 	do
 		if not toolcontext.opt_inheritance.value and not toolcontext.opt_all.value then return
+		var csv = toolcontext.opt_csv.value
+		var out = "{toolcontext.opt_dir.value or else "metrics"}/inheritance"
+		out.mkdir
 
 		print toolcontext.format_h1("\n# Inheritance metrics")
 
-		var hmetrics = new InheritanceMetricSet
-		hmetrics.register(new MDUI, new MDUIC, new MDUII, new MIF, new MIFC, new MIFI)
-		
-		var cmetrics = new MClassMetricSet
-		cmetrics.register(new CNOA, new CNOP, new CNOC, new CNODC)
-		cmetrics.register(new CNOA, new CNOP, new CNOC, new CNODI)
-		cmetrics.register(new CDIT, new CDITI)
+		var hmetrics = new MetricSet
+		hmetrics.register(new MDUI(mainmodule))
+		hmetrics.register(new MDUIC(mainmodule))
+		hmetrics.register(new MDUII(mainmodule))
+		hmetrics.register(new MIF(mainmodule))
+		hmetrics.register(new MIFC(mainmodule))
+		hmetrics.register(new MIFI(mainmodule))
+
+		var cmetrics = new MetricSet
+		cmetrics.register(new CNOAC(mainmodule))
+		cmetrics.register(new CNOPC(mainmodule))
+		cmetrics.register(new CNOCC(mainmodule))
+		cmetrics.register(new CNODC(mainmodule))
+		cmetrics.register(new CNOPI(mainmodule))
+		cmetrics.register(new CNOCI(mainmodule))
+		cmetrics.register(new CNODI(mainmodule))
+		cmetrics.register(new CDITC(mainmodule))
+		cmetrics.register(new CDITI(mainmodule))
 
 		var model = toolcontext.modelbuilder.model
 		var mmodules = new HashSet[MModule]
@@ -62,90 +76,52 @@ private class InheritanceMetricsPhase
 				if mod_mclasses.is_empty then continue
 				mmodules.add_all(mgroup.mmodules)
 				mclasses.add_all(mod_mclasses)
-				cmetrics.collect(new HashSet[MClass].from(mod_mclasses), mainmodule)
-				for name, metric in cmetrics.metrics do
-					print toolcontext.format_h4("\t{name}: {metric.desc}")
-					print toolcontext.format_p("\t    avg: {metric.avg}")
-					var max = metric.max
-					print toolcontext.format_p("\t    max: {max.first} ({max.second})")
-					var min = metric.min
-					print toolcontext.format_p("\t    min: {min.first} ({min.second})")
-				end
-				hmetrics.collect(new HashSet[MModule].from(mgroup.mmodules), mainmodule)
-				for name, metric in hmetrics.metrics do
-					print toolcontext.format_h4("\t{name}: {metric.desc}")
-					print toolcontext.format_p("\t    avg: {metric.avg}")
-					var max = metric.max
-					print toolcontext.format_p("\t    max: {max.first} ({max.second})")
-					var min = metric.min
-					print toolcontext.format_p("\t    min: {min.first} ({min.second})")
-				end
+				cmetrics.collect(new HashSet[MClass].from(mod_mclasses))
+				cmetrics.to_console(1, not toolcontext.opt_nocolors.value)
+				if csv then cmetrics.to_csv.save("{out}/{mgroup}_classes.csv")
+				hmetrics.collect(new HashSet[MModule].from(mgroup.mmodules))
+				hmetrics.to_console(1, not toolcontext.opt_nocolors.value)
+				if csv then hmetrics.to_csv.save("{out}/{mgroup}_inheritance.csv")
 			end
 		end
 		if not mclasses.is_empty then
 			# Global metrics
 			print toolcontext.format_h2("\n ## global metrics")
-			cmetrics.collect(mclasses, mainmodule)
-			for name, metric in cmetrics.metrics do
-				print toolcontext.format_h4("\t{name}: {metric.desc}")
-				print toolcontext.format_p("\t    avg: {metric.avg}")
-				var max = metric.max
-				print toolcontext.format_p("\t    max: {max.first} ({max.second})")
-				var min = metric.min
-				print toolcontext.format_p("\t    min: {min.first} ({min.second})")
-			end
-			hmetrics.collect(mmodules, mainmodule)
-			for name, metric in hmetrics.metrics do
-				print toolcontext.format_h4("\t{name}: {metric.desc}")
-				print toolcontext.format_p("\t    avg: {metric.avg}")
-				var max = metric.max
-				print toolcontext.format_p("\t    max: {max.first} ({max.second})")
-				var min = metric.min
-				print toolcontext.format_p("\t    min: {min.first} ({min.second})")
-			end
+			cmetrics.clear
+			cmetrics.collect(mclasses)
+			cmetrics.to_console(1, not toolcontext.opt_nocolors.value)
+			if csv then cmetrics.to_csv.save("{out}/summary_classes.csv")
+			hmetrics.clear
+			hmetrics.collect(mmodules)
+			hmetrics.to_console(1, not toolcontext.opt_nocolors.value)
+			if csv then hmetrics.to_csv.save("{out}/summary_inheritance.csv")
 		end
 	end
-end
-
-# Metric Set used to collect data about inheritance in each module
-class InheritanceMetricSet
-	super MetricSet
-	redef type METRIC: InheritanceMetric
-	fun collect(mmodules: Set[MModule], mainmodule: MModule) do
-		clear
-		for metric in metrics.values do
-			for mmodule in mmodules do
-				metric.collect(mmodule, mainmodule)
-			end
-		end
-	end
-end
-
-# An abstract metric used to collect data about inheritance usage
-#
-# The metric is based on a module
-abstract class InheritanceMetric
-	super FloatMetric[MModule]
-	fun collect(mmodule: MModule, mainmodule: MModule) is abstract
 end
 
 # Module metric: proportion of MClasses Defined Using Inheritance
 #
 # Count MClasses that have another parents than Object
 class MDUI
-	super InheritanceMetric
+	super MModuleMetric
+	super FloatMetric
 	redef fun name do return "mdui"
 	redef fun desc do return "proportion of mclass defined using inheritance (has other parent than Object)"
 
-	redef fun collect(mmodule, mainmodule) do
-		var count = 0
-		for mclass in mmodule.intro_mclasses do
-			if mclass.in_hierarchy(mainmodule).greaters.length > 2 then count += 1
-		end
-		if mmodule.intro_mclasses.is_empty then
-			values[mmodule] = 0.0
-		else
-			values[mmodule] = count.to_f / mmodule.intro_mclasses.length.to_f
+	var mainmodule: MModule
+	init(mainmodule: MModule) do self.mainmodule = mainmodule
+
+	redef fun collect(mmodules) do
+		for mmodule in mmodules do
+			var count = 0
+			for mclass in mmodule.intro_mclasses do
+				if mclass.in_hierarchy(mainmodule).greaters.length > 2 then count += 1
+			end
+			if mmodule.intro_mclasses.is_empty then
+				values[mmodule] = 0.0
+			else
+				values[mmodule] = count.to_f / mmodule.intro_mclasses.length.to_f
+			end
 		end
 	end
 end
@@ -154,23 +130,29 @@ end
 #
 # Count classes that have another parents than Object
 class MDUIC
-	super InheritanceMetric
+	super MModuleMetric
+	super FloatMetric
 	redef fun name do return "mduic"
 	redef fun desc do return "proportion of class_kind defined using inheritance"
 
-	redef fun collect(mmodule, mainmodule) do
-		var count = 0
-		var nb = 0
-		for mclass in mmodule.intro_mclasses do
-			if mclass.kind == abstract_kind or mclass.kind == concrete_kind or mclass.kind == extern_kind then
-				if mclass.in_hierarchy(mainmodule).greaters.length > 2 then count += 1
+	var mainmodule: MModule
+	init(mainmodule: MModule) do self.mainmodule = mainmodule
+
+	redef fun collect(mmodules) do
+		for mmodule in mmodules do
+			var count = 0
+			var nb = 0
+			for mclass in mmodule.intro_mclasses do
+				if mclass.kind == abstract_kind or mclass.kind == concrete_kind or mclass.kind == extern_kind then
+					if mclass.in_hierarchy(mainmodule).greaters.length > 2 then count += 1
+				end
+				nb += 1
 			end
-			nb += 1
-		end
-		if mmodule.intro_mclasses.is_empty then
-			values[mmodule] = 0.0
-		else
-			values[mmodule] = count.to_f / nb.to_f
+			if mmodule.intro_mclasses.is_empty then
+				values[mmodule] = 0.0
+			else
+				values[mmodule] = count.to_f / nb.to_f
+			end
 		end
 	end
 end
@@ -179,23 +161,29 @@ end
 #
 # Count interface that have another parents than Object
 class MDUII
-	super InheritanceMetric
+	super MModuleMetric
+	super FloatMetric
 	redef fun name do return "mduii"
 	redef fun desc do return "proportion of interface_kind defined using inheritance"
 
-	redef fun collect(mmodule, mainmodule) do
-		var count = 0
-		var nb = 0
-		for mclass in mmodule.intro_mclasses do
-			if mclass.kind == interface_kind then
-				if mclass.in_hierarchy(mainmodule).greaters.length > 2 then count += 1
+	var mainmodule: MModule
+	init(mainmodule: MModule) do self.mainmodule = mainmodule
+
+	redef fun collect(mmodules) do
+		for mmodule in mmodules do
+			var count = 0
+			var nb = 0
+			for mclass in mmodule.intro_mclasses do
+				if mclass.kind == interface_kind then
+					if mclass.in_hierarchy(mainmodule).greaters.length > 2 then count += 1
+				end
+				nb += 1
 			end
-			nb += 1
-		end
-		if mmodule.intro_mclasses.is_empty then
-			values[mmodule] = 0.0
-		else
-			values[mmodule] = count.to_f / nb.to_f
+			if mmodule.intro_mclasses.is_empty then
+				values[mmodule] = 0.0
+			else
+				values[mmodule] = count.to_f / nb.to_f
+			end
 		end
 	end
 end
@@ -204,19 +192,25 @@ end
 #
 # Count classes that have at least a child
 class MIF
-	super InheritanceMetric
+	super MModuleMetric
+	super FloatMetric
 	redef fun name do return "mif"
 	redef fun desc do return "proportion of mclass inherited from"
 
-	redef fun collect(mmodule, mainmodule) do
-		var count = 0
-		for mclass in mmodule.intro_mclasses do
-			if mclass.in_hierarchy(mainmodule).direct_smallers.length > 0 then count += 1
-		end
-		if mmodule.intro_mclasses.is_empty then
-			values[mmodule] = 0.0
-		else
-			values[mmodule] = count.to_f / mmodule.intro_mclasses.length.to_f
+	var mainmodule: MModule
+	init(mainmodule: MModule) do self.mainmodule = mainmodule
+
+	redef fun collect(mmodules) do
+		for mmodule in mmodules do
+			var count = 0
+			for mclass in mmodule.intro_mclasses do
+				if mclass.in_hierarchy(mainmodule).direct_smallers.length > 0 then count += 1
+			end
+			if mmodule.intro_mclasses.is_empty then
+				values[mmodule] = 0.0
+			else
+				values[mmodule] = count.to_f / mmodule.intro_mclasses.length.to_f
+			end
 		end
 	end
 end
@@ -225,23 +219,29 @@ end
 #
 # Count classes that have at least a child
 class MIFC
-	super InheritanceMetric
+	super MModuleMetric
+	super FloatMetric
 	redef fun name do return "mifc"
 	redef fun desc do return "proportion of class_kind inherited from"
 
-	redef fun collect(mmodule, mainmodule) do
-		var count = 0
-		var nb = 0
-		for mclass in mmodule.intro_mclasses do
-			if mclass.kind == abstract_kind or mclass.kind == concrete_kind or mclass.kind == extern_kind then
-				if mclass.in_hierarchy(mainmodule).direct_smallers.length > 0 then count += 1
+	var mainmodule: MModule
+	init(mainmodule: MModule) do self.mainmodule = mainmodule
+
+	redef fun collect(mmodules) do
+		for mmodule in mmodules do
+			var count = 0
+			var nb = 0
+			for mclass in mmodule.intro_mclasses do
+				if mclass.kind == abstract_kind or mclass.kind == concrete_kind or mclass.kind == extern_kind then
+					if mclass.in_hierarchy(mainmodule).direct_smallers.length > 0 then count += 1
+				end
+				nb += 1
 			end
-			nb += 1
-		end
-		if mmodule.intro_mclasses.is_empty then
-			values[mmodule] = 0.0
-		else
-			values[mmodule] = count.to_f / nb.to_f
+			if mmodule.intro_mclasses.is_empty then
+				values[mmodule] = 0.0
+			else
+				values[mmodule] = count.to_f / nb.to_f
+			end
 		end
 	end
 end
@@ -250,23 +250,29 @@ end
 #
 # Count interfaces that have at least a child
 class MIFI
-	super InheritanceMetric
+	super MModuleMetric
+	super FloatMetric
 	redef fun name do return "mifi"
 	redef fun desc do return "proportion of interface_kind inherited from"
 
-	redef fun collect(mmodule, mainmodule) do
-		var count = 0
-		var nb = 0
-		for mclass in mmodule.intro_mclasses do
-			if mclass.kind == interface_kind then
-				if mclass.in_hierarchy(mainmodule).direct_smallers.length > 0 then count += 1
+	var mainmodule: MModule
+	init(mainmodule: MModule) do self.mainmodule = mainmodule
+
+	redef fun collect(mmodules) do
+		for mmodule in mmodules do
+			var count = 0
+			var nb = 0
+			for mclass in mmodule.intro_mclasses do
+				if mclass.kind == interface_kind then
+					if mclass.in_hierarchy(mainmodule).direct_smallers.length > 0 then count += 1
+				end
+				nb += 1
 			end
-			nb += 1
-		end
-		if mmodule.intro_mclasses.is_empty then
-			values[mmodule] = 0.0
-		else
-			values[mmodule] = count.to_f / nb.to_f
+			if mmodule.intro_mclasses.is_empty then
+				values[mmodule] = 0.0
+			else
+				values[mmodule] = count.to_f / nb.to_f
+			end
 		end
 	end
 end
@@ -276,18 +282,24 @@ end
 # Count only absrtract, concrete and extern classes
 class CNOAC
 	super MClassMetric
+	super IntMetric
 	redef fun name do return "cnoac"
 	redef fun desc do return "number of class_kind ancestor"
 
-	redef fun collect(mclass, mainmodule) do
-		var count = 0
-		for parent in mclass.in_hierarchy(mainmodule).greaters do
-			if parent == mclass then continue
-			if parent.kind == abstract_kind or parent.kind == concrete_kind or parent.kind == extern_kind then
-				count += 1
+	var mainmodule: MModule
+	init(mainmodule: MModule) do self.mainmodule = mainmodule
+
+	redef fun collect(mclasses) do
+		for mclass in mclasses do
+			var count = 0
+			for parent in mclass.in_hierarchy(mainmodule).greaters do
+				if parent == mclass then continue
+				if parent.kind == abstract_kind or parent.kind == concrete_kind or parent.kind == extern_kind then
+					count += 1
+				end
 			end
+			values[mclass] = count
 		end
-		values[mclass] = count
 	end
 end
 
@@ -296,18 +308,24 @@ end
 # Count only absrtract, concrete and extern classes
 class CNOPC
 	super MClassMetric
+	super IntMetric
 	redef fun name do return "cnopc"
 	redef fun desc do return "number of class_kind parent"
 
-	redef fun collect(mclass, mainmodule) do
-		var count = 0
-		for parent in mclass.in_hierarchy(mainmodule).direct_greaters do
-			if parent == mclass then continue
-			if parent.kind == abstract_kind or parent.kind == concrete_kind or parent.kind == extern_kind then
-				count += 1
+	var mainmodule: MModule
+	init(mainmodule: MModule) do self.mainmodule = mainmodule
+
+	redef fun collect(mclasses) do
+		for mclass in mclasses do
+			var count = 0
+			for parent in mclass.in_hierarchy(mainmodule).direct_greaters do
+				if parent == mclass then continue
+				if parent.kind == abstract_kind or parent.kind == concrete_kind or parent.kind == extern_kind then
+					count += 1
+				end
 			end
+			values[mclass] = count
 		end
-		values[mclass] = count
 	end
 end
 
@@ -316,18 +334,24 @@ end
 # Count only absrtract, concrete and extern classes
 class CNOCC
 	super MClassMetric
+	super IntMetric
 	redef fun name do return "cnocc"
 	redef fun desc do return "number of class_kind children"
 
-	redef fun collect(mclass, mainmodule) do
-		var count = 0
-		for parent in mclass.in_hierarchy(mainmodule).direct_smallers do
-			if parent == mclass then continue
-			if parent.kind == abstract_kind or parent.kind == concrete_kind or parent.kind == extern_kind then
-				count += 1
+	var mainmodule: MModule
+	init(mainmodule: MModule) do self.mainmodule = mainmodule
+
+	redef fun collect(mclasses) do
+		for mclass in mclasses do
+			var count = 0
+			for parent in mclass.in_hierarchy(mainmodule).direct_smallers do
+				if parent == mclass then continue
+				if parent.kind == abstract_kind or parent.kind == concrete_kind or parent.kind == extern_kind then
+					count += 1
+				end
 			end
+			values[mclass] = count
 		end
-		values[mclass] = count
 	end
 end
 
@@ -336,18 +360,24 @@ end
 # Count only absrtract, concrete and extern classes
 class CNODC
 	super MClassMetric
+	super IntMetric
 	redef fun name do return "cnodc"
 	redef fun desc do return "number of class_kind descendants"
 
-	redef fun collect(mclass, mainmodule) do
-		var count = 0
-		for parent in mclass.in_hierarchy(mainmodule).smallers do
-			if parent == mclass then continue
-			if parent.kind == abstract_kind or parent.kind == concrete_kind or parent.kind == extern_kind then
-				count += 1
+	var mainmodule: MModule
+	init(mainmodule: MModule) do self.mainmodule = mainmodule
+
+	redef fun collect(mclasses) do
+		for mclass in mclasses do
+			var count = 0
+			for parent in mclass.in_hierarchy(mainmodule).smallers do
+				if parent == mclass then continue
+				if parent.kind == abstract_kind or parent.kind == concrete_kind or parent.kind == extern_kind then
+					count += 1
+				end
 			end
+			values[mclass] = count
 		end
-		values[mclass] = count
 	end
 end
 
@@ -356,18 +386,24 @@ end
 # Count only interfaces
 class CNOAI
 	super MClassMetric
+	super IntMetric
 	redef fun name do return "cnoai"
 	redef fun desc do return "number of interface_kind ancestor"
 
-	redef fun collect(mclass, mainmodule) do
-		var count = 0
-		for parent in mclass.in_hierarchy(mainmodule).greaters do
-			if parent == mclass then continue
-			if parent.kind == interface_kind then
-				count += 1
+	var mainmodule: MModule
+	init(mainmodule: MModule) do self.mainmodule = mainmodule
+
+	redef fun collect(mclasses) do
+		for mclass in mclasses do
+			var count = 0
+			for parent in mclass.in_hierarchy(mainmodule).greaters do
+				if parent == mclass then continue
+				if parent.kind == interface_kind then
+					count += 1
+				end
 			end
+			values[mclass] = count
 		end
-		values[mclass] = count
 	end
 end
 
@@ -376,18 +412,24 @@ end
 # Count only interfaces
 class CNOPI
 	super MClassMetric
+	super IntMetric
 	redef fun name do return "cnopi"
 	redef fun desc do return "number of interface_kind parent"
 
-	redef fun collect(mclass, mainmodule) do
-		var count = 0
-		for parent in mclass.in_hierarchy(mainmodule).direct_greaters do
-			if parent == mclass then continue
-			if parent.kind == interface_kind then
-				count += 1
+	var mainmodule: MModule
+	init(mainmodule: MModule) do self.mainmodule = mainmodule
+
+	redef fun collect(mclasses) do
+		for mclass in mclasses do
+			var count = 0
+			for parent in mclass.in_hierarchy(mainmodule).direct_greaters do
+				if parent == mclass then continue
+				if parent.kind == interface_kind then
+					count += 1
+				end
 			end
+			values[mclass] = count
 		end
-		values[mclass] = count
 	end
 end
 
@@ -396,18 +438,24 @@ end
 # Count only interfaces
 class CNOCI
 	super MClassMetric
+	super IntMetric
 	redef fun name do return "cnoci"
 	redef fun desc do return "number of interface_kind children"
 
-	redef fun collect(mclass, mainmodule) do
-		var count = 0
-		for parent in mclass.in_hierarchy(mainmodule).direct_smallers do
-			if parent == mclass then continue
-			if parent.kind == interface_kind then
-				count += 1
+	var mainmodule: MModule
+	init(mainmodule: MModule) do self.mainmodule = mainmodule
+
+	redef fun collect(mclasses) do
+		for mclass in mclasses do
+			var count = 0
+			for parent in mclass.in_hierarchy(mainmodule).direct_smallers do
+				if parent == mclass then continue
+				if parent.kind == interface_kind then
+					count += 1
+				end
 			end
+			values[mclass] = count
 		end
-		values[mclass] = count
 	end
 end
 
@@ -416,18 +464,24 @@ end
 # Count only interfaces
 class CNODI
 	super MClassMetric
+	super IntMetric
 	redef fun name do return "cnodi"
 	redef fun desc do return "number of interface_kind descendants"
 
-	redef fun collect(mclass, mainmodule) do
-		var count = 0
-		for parent in mclass.in_hierarchy(mainmodule).smallers do
-			if parent == mclass then continue
-			if parent.kind == interface_kind then
-				count += 1
+	var mainmodule: MModule
+	init(mainmodule: MModule) do self.mainmodule = mainmodule
+
+	redef fun collect(mclasses) do
+		for mclass in mclasses do
+			var count = 0
+			for parent in mclass.in_hierarchy(mainmodule).smallers do
+				if parent == mclass then continue
+				if parent.kind == interface_kind then
+					count += 1
+				end
 			end
+			values[mclass] = count
 		end
-		values[mclass] = count
 	end
 end
 
@@ -436,11 +490,17 @@ end
 # Following the longest path composed only of extends edges from self to Object
 class CDITC
 	super MClassMetric
+	super IntMetric
 	redef fun name do return "cditc"
 	redef fun desc do return "depth in class tree following only class, abstract, extern kind"
 
-	redef fun collect(mclass, mainmodule) do
-		values[mclass] = mclass.ditc(mainmodule)
+	var mainmodule: MModule
+	init(mainmodule: MModule) do self.mainmodule = mainmodule
+
+	redef fun collect(mclasses) do
+		for mclass in mclasses do
+			values[mclass] = mclass.ditc(mainmodule)
+		end
 	end
 end
 
@@ -449,11 +509,17 @@ end
 # Following the longest path composed only of implements edges from self to Object
 class CDITI
 	super MClassMetric
+	super IntMetric
 	redef fun name do return "cditi"
 	redef fun desc do return "depth in class tree following only interface_kind"
 
-	redef fun collect(mclass, mainmodule) do
-		values[mclass] = mclass.diti(mainmodule)
+	var mainmodule: MModule
+	init(mainmodule: MModule) do self.mainmodule = mainmodule
+
+	redef fun collect(mclasses) do
+		for mclass in mclasses do
+			values[mclass] = mclass.diti(mainmodule)
+		end
 	end
 end
 
