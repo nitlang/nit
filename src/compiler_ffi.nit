@@ -124,11 +124,6 @@ redef class AExternMethPropdef
 			return
 		end
 
-		if not v.compiler.supports_ffi then
-			super
-			return
-		end
-
 		amodule.mmodule.uses_ffi = true
 
 		var mclass_type = mpropdef.mclassdef.bound_mtype
@@ -192,11 +187,6 @@ redef class AExternInitPropdef
 		var nextern = self.n_extern
 		if nextern != null then
 			amodule.uses_legacy_ni = true
-			super
-			return
-		end
-
-		if not v.compiler.supports_ffi then
 			super
 			return
 		end
@@ -352,7 +342,7 @@ redef class MExplicitCall
 		# Internally, implement internal function
 		var nitni_visitor = v.compiler.new_visitor
 		nitni_visitor.frame = v.frame
-		var msignature = mproperty.intro.msignature
+		var msignature = mproperty.lookup_first_definition(v.compiler.mainmodule, recv_mtype).msignature
 		var csignature_blind = mproperty.build_csignature(recv_mtype, v.compiler.mainmodule, null, long_signature, internal_call_context)
 
 		nitni_visitor.add_decl("/* nitni callback for {mproperty.full_name} */")
@@ -393,6 +383,7 @@ redef class MExplicitCall
 		if return_mtype != null then
 			assert ret_var != null
 			return_mtype = return_mtype.anchor_to(v.compiler.mainmodule, recv_mtype)
+			ret_var = nitni_visitor.autobox(ret_var, return_mtype)
 			nitni_visitor.ret_to_c(ret_var, return_mtype)
 		end
 		nitni_visitor.add("\}")
@@ -419,7 +410,7 @@ redef class MExplicitSuper
 		# Internally, implement internal function
 		var nitni_visitor = v.compiler.new_visitor
 		nitni_visitor.frame = v.frame
-		var msignature = mproperty.intro.msignature
+		var msignature = mproperty.lookup_first_definition(v.compiler.mainmodule, mclass_type).msignature
 
 		var csignature_blind = mproperty.build_csignature(mclass_type, v.compiler.mainmodule, "___super", long_signature, internal_call_context)
 
