@@ -41,7 +41,7 @@ private class CollectSuperSends
 			return
 		end
 		n.visit_all(self)
-		if n isa ASuperExpr and n.callsite == null then
+		if (n isa ASuperExpr and n.callsite == null) or n isa ASuperExternCall then
 			var mprop = mpropdef
 			assert mprop != null
 			res.add(mprop)
