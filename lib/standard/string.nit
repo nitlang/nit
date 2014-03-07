@@ -1012,6 +1012,12 @@ abstract class Buffer
 	# Adds the content of text `s` at the end of self
 	fun append(s: Text) is abstract
 
+	redef fun hash
+	do
+		if is_dirty then hash_cache = null
+		return super
+	end
+
 end
 
 # Mutable strings of characters.
