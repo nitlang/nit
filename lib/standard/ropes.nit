@@ -45,7 +45,7 @@ abstract class Rope
 	end
 
 	# Initializes a new Rope with a text embedded in directly
-	init with_string(str: AbstractString) do
+	init with_string(str: String) do
 		self.parent_node = new ConcatNode
 		parent_node.as(ConcatNode).right_child = new LeafNode(str)
 		parent_node.as(ConcatNode).update_data
@@ -276,7 +276,7 @@ abstract class Rope
 	# Compares the current Rope to another object (either another rope or a String)
 	redef fun == (other)
 	do
-		if other == null or not (other isa Rope or other isa AbstractString) then return false
+		if other == null or not (other isa Rope or other isa FlatText) then return false
 		var self_iter = new RopeCharIterator(self)
 		if other isa Rope then
 			if self.length != other.length then return false
@@ -286,7 +286,7 @@ abstract class Rope
 				self_iter.next
 				other_iterator.next
 			end
-		else if other isa AbstractString then
+		else if other isa FlatText then
 			var pos = 0
 			if self.length != other.length then return false
 			while self_iter.is_ok do
@@ -1039,7 +1039,7 @@ private class LeafNode
 	# Encapsulated string in the leaf node
 	private var _value: String
 
-	init(val: AbstractString)
+	init(val: String)
 	do
 		self._value = val.to_s
 		self.length = val.length
