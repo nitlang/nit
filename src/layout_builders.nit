@@ -626,6 +626,8 @@ class TypingHasher[E: Object]
 	private var poset_builder: POSetBuilder[E]
 	private var poset_cache: nullable POSet[E]
 
+	redef fun poset do return poset_cache
+
 	private init(mmodule: MModule, poset_builder: POSetBuilder[E], operator: PHOperator) do
 		self.operator = operator
 		self.mmodule = mmodule
