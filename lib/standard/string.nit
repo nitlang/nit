@@ -423,8 +423,8 @@ abstract class Text
 
 end
 
-# Common subclass for String and Buffer
-abstract class AbstractString
+# All kinds of array-based text representations.
+abstract class FlatText
 	super Text
 
 	private var items: NativeString
@@ -522,7 +522,7 @@ end
 # Immutable strings of characters.
 class String
 	super Comparable
-	super AbstractString
+	super FlatText
 	super StringCapable
 
 	redef type OTHER: String
@@ -896,7 +896,7 @@ end
 
 # Mutable strings of characters.
 class FlatBuffer
-	super AbstractString
+	super FlatText
 	super Comparable
 	super StringCapable
 	super Buffer

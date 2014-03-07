@@ -818,7 +818,7 @@ class Debugger
 
 	# Gets all the identifiers of an instruction (uses the rules of Nit as of Mar 05 2013)
 	#
-	fun get_identifiers_in_current_instruction(instruction: AbstractString): Array[String]
+	fun get_identifiers_in_current_instruction(instruction: Text): Array[String]
 	do
 		var result_array = new Array[String]
 		var instruction_buffer = new FlatBuffer
@@ -866,7 +866,7 @@ class Debugger
 
 	# Takes a function call or declaration and strips all but the arguments
 	#
-	fun get_function_arguments(function: AbstractString): String
+	fun get_function_arguments(function: Text): String
 	do
 		var buf = new FlatBuffer
 		var trigger_copy = false
