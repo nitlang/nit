@@ -33,12 +33,14 @@ redef class ToolContext
 	var opt_no_shortcut_equate: OptionBool = new OptionBool("Always call == in a polymorphic way", "--no-shortcut-equal")
 	# --inline-coloring-numbers
 	var opt_inline_coloring_numbers: OptionBool = new OptionBool("Inline colors and ids", "--inline-coloring-numbers")
-	# --use-naive-coloring
-	var opt_bm_typing: OptionBool = new OptionBool("Colorize items incrementaly, used to simulate binary matrix typing", "--bm-typing")
+	# --use-col-typing
+	var opt_colo_typing: OptionBool = new OptionBool("Global coloration, used to minimize table size", "--colo-typing")
+	# --use-bm-typing
+	var opt_bm_typing: OptionBool = new OptionBool("Colorize items incrementaly, used to simulate binary matrix typing (default)", "--bm-typing")
 	# --use-mod-perfect-hashing
-	var opt_phmod_typing: OptionBool = new OptionBool("Replace coloration by perfect hashing (with mod operator)", "--phmod-typing")
+	var opt_phmod_typing: OptionBool = new OptionBool("Perfect hashing (with mod operator), used to simulate dynamic loading", "--phmod-typing")
 	# --use-and-perfect-hashing
-	var opt_phand_typing: OptionBool = new OptionBool("Replace coloration by perfect hashing (with and operator)", "--phand-typing")
+	var opt_phand_typing: OptionBool = new OptionBool("Perfect hashing (with and operator), used to simulate dynamic loading", "--phand-typing")
 	# --tables-metrics
 	var opt_tables_metrics: OptionBool = new OptionBool("Enable static size measuring of tables used for vft, typing and resolution", "--tables-metrics")
 
@@ -50,6 +52,7 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_no_union_attribute)
 		self.option_context.add_option(self.opt_no_shortcut_equate)
 		self.option_context.add_option(self.opt_inline_coloring_numbers)
+		self.option_context.add_option(self.opt_colo_typing)
 		self.option_context.add_option(self.opt_bm_typing)
 		self.option_context.add_option(self.opt_phmod_typing)
 		self.option_context.add_option(self.opt_phand_typing)
@@ -453,14 +456,14 @@ class SeparateCompiler
 
 		# Typing Layout
 		var layout_builder: TypingLayoutBuilder[MType]
-		if modelbuilder.toolcontext.opt_bm_typing.value then
-			layout_builder = new MTypeBMizer(self.mainmodule)
+		if modelbuilder.toolcontext.opt_colo_typing.value then
+			layout_builder = new MTypeColorer(self.mainmodule)
 		else if modelbuilder.toolcontext.opt_phmod_typing.value then
 			layout_builder = new MTypeHasher(new PHModOperator, self.mainmodule)
 		else if modelbuilder.toolcontext.opt_phand_typing.value then
 			layout_builder = new MTypeHasher(new PHAndOperator, self.mainmodule)
 		else
-			layout_builder = new MTypeColorer(self.mainmodule)
+			layout_builder = new MTypeBMizer(self.mainmodule)
 		end
 
 		# colorize types

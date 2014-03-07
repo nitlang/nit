@@ -89,11 +89,11 @@ class SeparateErasureCompiler
 		else if modelbuilder.toolcontext.opt_phand_typing.value then
 			layout_builder = new MClassHasher(new PHAndOperator, mainmodule)
 			class_colorer.build_layout(mclasses)
-		else if modelbuilder.toolcontext.opt_bm_typing.value then
+		else if modelbuilder.toolcontext.opt_colo_typing.value then
+			layout_builder = class_colorer
+		else
 			layout_builder = new MClassBMizer(mainmodule)
 			class_colorer.build_layout(mclasses)
-		else
-			layout_builder = class_colorer
 		end
 		self.class_layout = layout_builder.build_layout(mclasses)
 		self.class_tables = self.build_class_typing_tables(mclasses)
