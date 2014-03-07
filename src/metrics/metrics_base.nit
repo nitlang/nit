@@ -187,6 +187,12 @@ interface Metric
 
 	# The values standard derivation
 	fun std_dev: Float is abstract
+
+	# The element with the highest value
+	fun max: ELM is abstract
+
+	# The element with the lowest value
+	fun min: ELM is abstract
 end
 
 # A Metric that collects integer data
@@ -205,20 +211,14 @@ class IntMetric
 
 	fun sum: Int do return values_cache.sum
 
-	# Return the couple with the highest value
-	fun max: Couple[ELM, Int] do
+	redef fun max do
 		assert not values_cache.is_empty
-		var elem = values_cache.max.as(not null)
-		var value = values_cache[elem]
-		return new Couple[ELM, Int](elem, value)
+		return values_cache.max.as(not null)
 	end
 
-	# Return the couple with the lowest value
-	fun min: Couple[ELM, Int] do
+	redef fun min do
 		assert not values_cache.is_empty
-		var elem = values_cache.min.as(not null)
-		var value = values_cache[elem]
-		return new Couple[ELM, Int](elem, value)
+		return values_cache.min.as(not null)
 	end
 
 	# Values average
@@ -246,8 +246,7 @@ class FloatMetric
 		return sum
 	end
 
-	# Return the couple with the highest value
-	fun max: Couple[ELM, Float] do
+	redef fun max do
 		assert not values.is_empty
 		var max: nullable Float = null
 		var elem: nullable ELM = null
@@ -257,11 +256,10 @@ class FloatMetric
 				elem = e
 			end
 		end
-		return new Couple[ELM, Float](elem.as(not null), max.as(not null))
+		return elem.as(not null)
 	end
 
-	# Return the couple with the lowest value
-	fun min: Couple[ELM, Float] do
+	redef fun min do
 		assert not values.is_empty
 		var min: nullable Float = null
 		var elem: nullable ELM = null
@@ -271,7 +269,7 @@ class FloatMetric
 				elem = e
 			end
 		end
-		return new Couple[ELM, Float](elem.as(not null), min.as(not null))
+		return elem.as(not null)
 	end
 
 	redef fun avg do
