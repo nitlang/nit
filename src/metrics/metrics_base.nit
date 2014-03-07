@@ -203,6 +203,8 @@ class IntMetric
 
 	redef fun clear do values_cache.clear
 
+	fun sum: Int do return values_cache.sum
+
 	# Return the couple with the highest value
 	fun max: Couple[ELM, Int] do
 		assert not values_cache.is_empty
@@ -238,6 +240,12 @@ class FloatMetric
 
 	redef fun clear do values_cache.clear
 
+	fun sum: Float do
+		var sum = 0.0
+		for v in values.values do sum += v
+		return sum
+	end
+
 	# Return the couple with the highest value
 	fun max: Couple[ELM, Float] do
 		assert not values.is_empty
@@ -268,10 +276,6 @@ class FloatMetric
 
 	redef fun avg do
 		if values.is_empty then return 0.0
-		var sum = 0.0
-		for value in values.values do
-			sum += value
-		end
 		return sum / values.length.to_f
 	end
 
