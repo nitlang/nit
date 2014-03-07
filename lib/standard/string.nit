@@ -169,7 +169,8 @@ abstract class Text
 	# As with substring, a `from` index < 0 will be replaced by 0
 	fun substring_from(from: Int): SELFTYPE
 	do
-		assert from < length
+		if from > self.length then return empty
+		if from < 0 then from = 0
 		return substring(from, length - from)
 	end
 
