@@ -548,11 +548,21 @@ abstract class BufferCharView
 
 end
 
-# Immutable strings of characters.
-class String
-	super FlatText
+abstract class String
+	super Text
 
 	redef type SELFTYPE: String
+
+	redef fun to_s do return self
+
+end
+
+# Immutable strings of characters.
+class FlatString
+	super FlatText
+	super String
+
+	redef type SELFTYPE: FlatString
 	redef type SELFVIEW: FlatStringCharView
 
 	# Index in _items of the start of the string
@@ -587,16 +597,16 @@ class String
 
 		var realFrom = index_from + from
 
-		if (realFrom + count) > index_to then return new String.with_infos(items, index_to - realFrom + 1, realFrom, index_to)
+		if (realFrom + count) > index_to then return new FlatString.with_infos(items, index_to - realFrom + 1, realFrom, index_to)
 
-		if count == 0 then return ""
+		if count == 0 then return empty
 
 		var to = realFrom + count - 1
 
-		return new String.with_infos(items, to - realFrom + 1, realFrom, to)
+		return new FlatString.with_infos(items, to - realFrom + 1, realFrom, to)
 	end
 
-	redef fun empty do return "".as(String)
+	redef fun empty do return "".as(FlatString)
 
 	redef fun to_upper
 	do
@@ -683,7 +693,7 @@ class String
 		var target_string = calloc_string(my_length + its_length + 1)
 
 		self.items.copy_to(target_string, my_length, index_from, 0)
-		if s isa String then
+		if s isa FlatString then
 			s.items.copy_to(target_string, its_length, s.index_from, my_length)
 		else if s isa FlatBuffer then
 			s.items.copy_to(target_string, its_length, 0, my_length)
@@ -724,8 +734,6 @@ class String
 		return target_string.to_s_with_length(final_length)
 	end
 
-	redef fun to_s do return self
-
 	redef fun hash
 	do
 		# djb2 hash algorythm
@@ -749,13 +757,13 @@ end
 private class FlatStringReverseIterator
 	super IndexedIterator[Char]
 
-	var target: String
+	var target: FlatString
 
 	var target_items: NativeString
 
 	var curr_pos: Int
 
-	init with_pos(tgt: String, pos: Int)
+	init with_pos(tgt: FlatString, pos: Int)
 	do
 		target = tgt
 		target_items = tgt.items
@@ -775,13 +783,13 @@ end
 private class FlatStringIterator
 	super IndexedIterator[Char]
 
-	var target: String
+	var target: FlatString
 
 	var target_items: NativeString
 
 	var curr_pos: Int
 
-	init with_pos(tgt: String, pos: Int)
+	init with_pos(tgt: FlatString, pos: Int)
 	do
 		target = tgt
 		target_items = tgt.items
@@ -801,7 +809,7 @@ end
 private class FlatStringCharView
 	super StringCharView
 
-	redef type SELFTYPE: String
+	redef type SELFTYPE: FlatString
 
 	redef fun [](index)
 	do
@@ -930,7 +938,7 @@ class FlatBuffer
 	do
 		var sl = s.length
 		if capacity < length + sl then enlarge(length + sl)
-		if s isa String then
+		if s isa FlatString then
 			s.items.copy_to(items, sl, s.index_from, length)
 		else if s isa FlatBuffer then
 			s.items.copy_to(items, sl, 0, length)
@@ -1396,18 +1404,18 @@ class NativeString
 		return to_s_with_length(cstring_length)
 	end
 
-	fun to_s_with_length(length: Int): String
+	fun to_s_with_length(length: Int): FlatString
 	do
 		assert length >= 0
-		return new String.with_infos(self, length, 0, length - 1)
+		return new FlatString.with_infos(self, length, 0, length - 1)
 	end
 
-	fun to_s_with_copy: String
+	fun to_s_with_copy: FlatString
 	do
 		var length = cstring_length
 		var new_self = calloc_string(length + 1)
 		copy_to(new_self, length, 0, 0)
-		return new String.with_infos(new_self, length, 0, length - 1)
+		return new FlatString.with_infos(new_self, length, 0, length - 1)
 	end
 
 end
