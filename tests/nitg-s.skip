@@ -4,4 +4,5 @@ init_linext
 inline
 test_extern
 nitc
+test_json
 opengles2_hello_triangle
