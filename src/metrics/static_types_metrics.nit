@@ -79,8 +79,8 @@ do
 
 	# Display data
 	print "--- Metrics of the explitic static types ---"
-	print "Total number of explicit static types: {typecount.total}"
-	if typecount.total == 0 then return
+	print "Total number of explicit static types: {typecount.sum}"
+	if typecount.sum == 0 then return
 
 	print "Statistics of type usage:"
 	typecount.print_summary

@@ -20,6 +20,8 @@ module rta_metrics
 import modelbuilder
 private import rapid_type_analysis
 private import metrics_base
+import mmodules_metrics
+import mclasses_metrics
 import frontend
 
 redef class ToolContext
@@ -31,153 +33,336 @@ private class RTAMetricsPhase
 	redef fun process_mainmodule(mainmodule)
 	do
 		if not toolcontext.opt_rta.value and not toolcontext.opt_all.value then return
-		compute_rta_metrics(toolcontext.modelbuilder, mainmodule)
+		var csv = toolcontext.opt_csv.value
+		var out = "{toolcontext.opt_dir.value or else "metrics"}/rta"
+		out.mkdir
+
+		print toolcontext.format_h1("\n# RTA metrics")
+
+		print toolcontext.format_h2("\n ## Live instances by mainmodules")
+		var mmetrics = new MetricSet
+		mmetrics.register(new MNLC(toolcontext.modelbuilder))
+		mmetrics.register(new MNLT(toolcontext.modelbuilder))
+		mmetrics.register(new MNCT(toolcontext.modelbuilder))
+		mmetrics.register(new MNLI(toolcontext.modelbuilder))
+		mmetrics.register(new MNLM(toolcontext.modelbuilder))
+		mmetrics.register(new MNLMD(toolcontext.modelbuilder))
+		mmetrics.register(new MNLDD(toolcontext.modelbuilder))
+		mmetrics.collect(new HashSet[MModule].from([mainmodule]))
+		mmetrics.to_console(1, not toolcontext.opt_nocolors.value)
+		if csv then mmetrics.to_csv.save("{out}/{mainmodule}.csv")
+
+		var mtypes = new HashSet[MType]
+		var analysis = new RapidTypeAnalysis(toolcontext.modelbuilder, mainmodule)
+		analysis.run_analysis
+		mtypes.add_all(analysis.live_types)
+		mtypes.add_all(analysis.live_cast_types)
+
+		print toolcontext.format_h2("\n ## Total live instances by mclasses")
+		var cmetrics = new MetricSet
+		cmetrics.register(analysis.cnli)
+		cmetrics.register(analysis.cnlc)
+		cmetrics.to_console(1, not toolcontext.opt_nocolors.value)
+		if csv then cmetrics.to_csv.save("{out}/mclasses.csv")
+
+		print toolcontext.format_h2("\n ## Total live instances by mtypes")
+		var tmetrics = new MetricSet
+		tmetrics.register(analysis.tnli)
+		tmetrics.register(analysis.tnlc)
+		tmetrics.to_console(1, not toolcontext.opt_nocolors.value)
+		if csv then tmetrics.to_csv.save("{out}/mtypes.csv")
+
+		print toolcontext.format_h2("\n ## MType complexity")
+		var gmetrics = new MetricSet
+		gmetrics.register(new TAGS)
+		gmetrics.register(new TDGS)
+		gmetrics.collect(mtypes)
+		gmetrics.to_console(1, not toolcontext.opt_nocolors.value)
+		if csv then gmetrics.to_csv.save("{out}/complexity.csv")
 	end
 end
 
+# Summary metrics
 
-redef class MType
-	private var nlvt: Int = 0
-	private var nlct: Int = 0
+# MModule Metric: Number of Live Types
+class MNLI
+	super MModuleMetric
+	super IntMetric
+	redef fun name do return "mnli"
+	redef fun desc do return "number of live instances in a mmodule"
 
-	private fun is_standard: Bool do
-		var mtype = self
-		if mtype isa MNullableType then mtype = mtype.mtype
-		return self.as(MClassType).mclass.is_standard
+	var modelbuilder: ModelBuilder
+	init(modelbuilder: ModelBuilder) do self.modelbuilder = modelbuilder
+
+	redef fun collect(mainmodules) do
+		for mainmodule in mainmodules do
+			var analysis = new RapidTypeAnalysis(modelbuilder, mainmodule)
+			analysis.run_analysis
+			values[mainmodule] = analysis.tnli.sum
+		end
+	end
+end
+
+# MModule Metric: Number of Live Types
+class MNLT
+	super MModuleMetric
+	super IntMetric
+	redef fun name do return "mnlt"
+	redef fun desc do return "number of live mtypes in a mmodule"
+
+	var modelbuilder: ModelBuilder
+	init(modelbuilder: ModelBuilder) do self.modelbuilder = modelbuilder
+
+	redef fun collect(mainmodules) do
+		for mainmodule in mainmodules do
+			var analysis = new RapidTypeAnalysis(modelbuilder, mainmodule)
+			analysis.run_analysis
+			values[mainmodule] = analysis.live_types.length
+		end
+	end
+end
+
+# MModule Metric: Number of Live Cast Types
+class MNCT
+	super MModuleMetric
+	super IntMetric
+	redef fun name do return "mnct"
+	redef fun desc do return "number of live cast mtypes in a mmodule"
+
+	var modelbuilder: ModelBuilder
+	init(modelbuilder: ModelBuilder) do self.modelbuilder = modelbuilder
+
+	redef fun collect(mainmodules) do
+		for mainmodule in mainmodules do
+			var analysis = new RapidTypeAnalysis(modelbuilder, mainmodule)
+			analysis.run_analysis
+			values[mainmodule] = analysis.live_cast_types.length
+		end
+	end
+end
+
+# MModule Metric: Number of Live Classes
+class MNLC
+	super MModuleMetric
+	super IntMetric
+	redef fun name do return "mnlc"
+	redef fun desc do return "number of live mclasses in a mmodule"
+
+	var modelbuilder: ModelBuilder
+	init(modelbuilder: ModelBuilder) do self.modelbuilder = modelbuilder
+
+	redef fun collect(mainmodules) do
+		for mainmodule in mainmodules do
+			var live = new HashSet[MClass]
+			var analysis = new RapidTypeAnalysis(modelbuilder, mainmodule)
+			analysis.run_analysis
+			for mtype in analysis.live_types do
+				live.add(mtype.mclass)
+			end
+			values[mainmodule] = live.length
+		end
+	end
+end
+
+# MModule Metric: Number of Live Methods
+class MNLM
+	super MModuleMetric
+	super IntMetric
+	redef fun name do return "mnlm"
+	redef fun desc do return "number of live methods in a mmodule"
+
+	var modelbuilder: ModelBuilder
+	init(modelbuilder: ModelBuilder) do self.modelbuilder = modelbuilder
+
+	redef fun collect(mainmodules) do
+		for mainmodule in mainmodules do
+			var analysis = new RapidTypeAnalysis(modelbuilder, mainmodule)
+			analysis.run_analysis
+			values[mainmodule] = analysis.live_methods.length
+		end
+	end
+end
+
+# MModule Metric: Number of Live MethodDefs
+class MNLMD
+	super MModuleMetric
+	super IntMetric
+	redef fun name do return "mnlmd"
+	redef fun desc do return "number of live method definitions in a mmodule"
+
+	var modelbuilder: ModelBuilder
+	init(modelbuilder: ModelBuilder) do self.modelbuilder = modelbuilder
+
+	redef fun collect(mainmodules) do
+		for mainmodule in mainmodules do
+			var analysis = new RapidTypeAnalysis(modelbuilder, mainmodule)
+			analysis.run_analysis
+			values[mainmodule] = analysis.live_methoddefs.length
+		end
+	end
+end
+
+# MModule Metric: Number of Dead MethodDefs
+class MNLDD
+	super MModuleMetric
+	super IntMetric
+	redef fun name do return "mnldd"
+	redef fun desc do return "number of dead method definitions in a mmodule"
+
+	var modelbuilder: ModelBuilder
+	init(modelbuilder: ModelBuilder) do self.modelbuilder = modelbuilder
+
+	redef fun collect(mainmodules) do
+		for mainmodule in mainmodules do
+			var dead = 0
+			var analysis = new RapidTypeAnalysis(modelbuilder, mainmodule)
+			analysis.run_analysis
+			for mmethod in analysis.live_methods do
+				for mdef in mmethod.mpropdefs do
+					if analysis.live_methoddefs.has(mdef) or mdef.is_abstract then continue
+					dead += 1
+				end
+			end
+			values[mainmodule] = dead
+		end
+	end
+end
+
+# MClass metrics
+
+# Class Metric: Number of Live Instances
+#
+# count all the `new` made on each mclass
+class CNLI
+	super MClassMetric
+	super IntMetric
+	redef fun name do return "cnli"
+	redef fun desc do return "number of live instances for a mclass"
+
+	redef fun collect(mclasses) do end
+end
+
+# Class Metric: Number of Live Cast
+#
+# count all the cast made on each mclass type
+class CNLC
+	super MClassMetric
+	super IntMetric
+	redef fun name do return "cnlc"
+	redef fun desc do return "number of live cast for a mclass type"
+
+	redef fun collect(mclasses) do end
+end
+
+# MType metrics
+
+# A metric about MType
+interface MTypeMetric
+	super Metric
+	redef type ELM: MType
+end
+
+# Type Metric: Number of Live Instances
+#
+# count all the `new` made on each types
+class TNLI
+	super MTypeMetric
+	super IntMetric
+	redef fun name do return "tnli"
+	redef fun desc do return "number of live instances for a mtype"
+
+	redef fun collect(mtypes) do end
+end
+
+# Type Metric: Number of Live Cast
+#
+# count all the cast made to each types
+class TNLC
+	super MTypeMetric
+	super IntMetric
+	redef fun name do return "tnlc"
+	redef fun desc do return "number of live casts to a mtype"
+
+	redef fun collect(mtypes) do end
+end
+
+# Type Metric: Arity of Generic Signature
+#
+# tags(List[X]) = 1
+# tags(Map[X, Y]) = 2
+class TAGS
+	super MTypeMetric
+	super IntMetric
+	redef fun name do return "tags"
+	redef fun desc do return "arity of generic signature"
+
+	redef fun collect(mtypes) do
+		for mtype in mtypes do
+			if mtype isa MGenericType then
+				values[mtype] = mtype.arguments.length
+			else
+				values[mtype] = 0
+			end
+		end
+	end
+end
+
+# Type Metric: Depth of Generic Signature
+#
+# tdgs(List[X]) = 1
+# tdgs(Map[X, List[Y]]) = 2
+class TDGS
+	super MTypeMetric
+	super IntMetric
+	redef fun name do return "tdos"
+	redef fun desc do return "depth of generic signature"
+
+	redef fun collect(mtypes) do
+		for mtype in mtypes do
+			values[mtype] = mtype.signature_depth
+		end
+	end
+end
+
+# rta redef
+
+redef class RapidTypeAnalysis
+	var cnli = new CNLI
+	var cnlc = new CNLC
+	var tnli = new TNLI
+	var tnlc = new TNLC
+
+	redef fun add_new(recv, mtype) do
+		super
+		tnli.values.inc(mtype)
+		cnli.values.inc(mtype.mclass)
 	end
 
-	private fun get_depth: Int do
+	redef fun add_cast(mtype) do
+		super
+		tnlc.values.inc(mtype)
+
+		if mtype isa MNullableType then mtype = mtype.mtype
+		if mtype isa MClassType then
+			cnlc.values.inc(mtype.mclass)
+		end
+	end
+end
+
+# model redefs
+
+redef class MType
+	private fun signature_depth: Int do
 		var mtype = self
 		if mtype isa MNullableType then mtype = mtype.mtype
 		if not mtype isa MGenericType then return 0
 
 		var depth = 0
 		for ft in mtype.arguments do
-			if ft.get_depth > depth then depth = ft.get_depth
+			var ftd = ft.signature_depth
+			if ftd > depth then depth = ftd
 		end
 		return depth + 1
 	end
 end
 
-redef class MClass
-	private var nlvt: Int = 0
-	private var nlct: Int = 0
-	private var live_types: Set[MType] = new HashSet[MType]
-	private var cast_types: Set[MType] = new HashSet[MType]
-end
-
-# Run a runtime type analysis and print metrics
-fun compute_rta_metrics(modelbuilder: ModelBuilder, mainmodule: MModule)
-do
-	var analysis = modelbuilder.do_rapid_type_analysis(mainmodule)
-
-	var nlvt = 0		# NLVT Number of Live Type
-	var nlvtg = 0		# NLVTG Number of Generic Live Type
-	var nlvtslud = 0	# NLCTSLUD Number of Live Type defined in SL and init in UD
-	var nlvtgslud = 0	# NLVTGSLUD Number of Generic Live Type defined in SL and init in UD
-	var nlvtudud = 0	# NLVTUDUD Number of Live Type defined in UD and init in UD
-	var nlvtgudud = 0	# NLVTGUDUD Number of Generic Live Type defined in UD and init in UD
-
-	var nlct = 0		# NLCT Number of Live Cast Type
-	var nlctg = 0		# NLCTG Number of Generic Live Cast Type
-	var nlctslud = 0	# NLCTSLUD Number of Live Cast Type defined in SL and init in UD
-	var nlctgslud = 0	# NLCTGSLUD Number of Generic Live Cast Type defined in SL and init in UD
-	var nlctudud = 0	# NLCTUDUD Number of Live Cast Type defined in UD and init in UD
-	var nlctgudud = 0	# NLCTGUDUD Number of Generic Live Cast Type defined in UD and init in UD
-
-	var mtypes = new HashSet[MClassType]
-
-	for mtype in analysis.live_types do
-		mtypes.add(mtype)
-		nlvt += 1
-		mtype.mclass.nlvt += 1
-		mtype.mclass.live_types.add(mtype)
-		if mtype isa MGenericType then nlvtg += 1
-		if not mtype.is_standard then
-			nlvtudud += 1
-			if mtype isa MGenericType then nlvtgudud += 1
-		else
-			nlvtslud += 1
-			if mtype isa MGenericType then nlvtgslud += 1
-		end
-	end
-
-	for mtype in analysis.live_cast_types do
-		if mtype isa MNullableType then mtype = mtype.mtype
-		if not mtype isa MClassType then continue
-		mtypes.add(mtype)
-		nlct += 1
-		mtype.mclass.nlct += 1
-		mtype.mclass.cast_types.add(mtype)
-		if mtype isa MGenericType then nlctg += 1
-		if not mtype.is_standard then
-			nlctudud += 1
-			if mtype isa MGenericType then nlctgudud += 1
-		else
-			nlctslud += 1
-			if mtype isa MGenericType then nlctgslud += 1
-		end
-	end
-
-	# CSV generation
-	if modelbuilder.toolcontext.opt_generate_csv.value then
-		var summaryCSV = new CSVDocument(modelbuilder.toolcontext.output_dir.join_path("rta_sum_metrics.csv"))
-		summaryCSV.set_header("scope", "NLVT", "NLVTG", "NLCT", "NLVCTG")
-		summaryCSV.add_line("global", nlvt, nlvtg, nlct, nlctg)
-		summaryCSV.add_line("SLUD", nlvtslud, nlvtgslud, nlctslud, nlctgslud)
-		summaryCSV.add_line("UDUD", nlvtudud, nlvtgudud, nlctudud, nlctgudud)
-		summaryCSV.save
-
-		var scalarCSV = new CSVDocument(modelbuilder.toolcontext.output_dir.join_path("rta_scalar_metrics.csv"))
-		var udscalarCSV = new CSVDocument(modelbuilder.toolcontext.output_dir.join_path("rta_ud_scalar_metrics.csv"))
-		scalarCSV.set_header("Type", "AGS", "DGS", "NLVT", "NLCT")
-		udscalarCSV.set_header("Type", "AGS", "DGS", "NLVT", "NLCT")
-
-		for mtype in mtypes do
-			var arity = 0
-			if mtype isa MGenericType then arity = mtype.arguments.length
-			if not mtype.is_standard then
-				udscalarCSV.add_line(mtype, arity, mtype.get_depth, mtype.nlvt, mtype.nlct)
-			end
-			scalarCSV.add_line(mtype, arity, mtype.get_depth, mtype.nlvt, mtype.nlct)
-		end
-		scalarCSV.save
-		udscalarCSV.save
-
-		scalarCSV = new CSVDocument(modelbuilder.toolcontext.output_dir.join_path("rta_scalar_class_metrics.csv"))
-		udscalarCSV = new CSVDocument(modelbuilder.toolcontext.output_dir.join_path("rta_ud_scalar_class_metrics.csv"))
-		scalarCSV.set_header("Class", "AGS", "NLVV", "NLVT")
-		udscalarCSV.set_header("Class", "AGS", "NLVV", "inst")
-
-		for mclass in modelbuilder.model.mclasses do
-			if not mclass.is_class or mclass.is_abstract then continue
-			if not mclass.is_standard then
-				udscalarCSV.add_line(mclass.mclass_type, mclass.arity, mclass.live_types.length, mclass.nlvt)
-			end
-			scalarCSV.add_line(mclass.mclass_type, mclass.arity, mclass.live_types.length, mclass.nlvt)
-		end
-		scalarCSV.save
-		udscalarCSV.save
-	end
-
-	print "--- RTA metrics ---"
-	print "Number of live runtime classes: {analysis.live_classes.length}"
-	if analysis.live_classes.length < 8 then print "\t{analysis.live_classes.join(" ")}"
-	print "Number of live runtime types (instantied resolved type): {analysis.live_types.length}"
-	if analysis.live_types.length < 8 then print "\t{analysis.live_types.join(" ")}"
-	print "Number of live methods: {analysis.live_methods.length}"
-	if analysis.live_methods.length < 8 then print "\t{analysis.live_methods.join(" ")}"
-	print "Number of live method definitions: {analysis.live_methoddefs.length}"
-	if analysis.live_methoddefs.length < 8 then print "\t{analysis.live_methoddefs.join(" ")}"
-	print "Number of live runtime cast types (ie used in as and isa): {analysis.live_cast_types.length}"
-	if analysis.live_cast_types.length < 8 then print "\t{analysis.live_cast_types.join(" ")}"
-
-	var x = 0
-	for p in analysis.live_methods do
-		for d in p.mpropdefs do
-			if analysis.live_methoddefs.has(d) or d.is_abstract then continue
-			x += 1
-		end
-	end
-	print "Number of dead method definitions of live methods: {x}"
-end

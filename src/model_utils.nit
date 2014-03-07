@@ -125,16 +125,56 @@ redef class MClass
 		return res
 	end
 
-	# Get the set of properties introduced in 'self'.
-	fun intro_mproperties: Set[MProperty] do
-		var res = new HashSet[MProperty]
+	# the set of properties introduced in 'self'.
+	fun intro_mproperties(min_visibility: MVisibility): Set[MProperty] do
+		var set = new HashSet[MProperty]
 		for mclassdef in mclassdefs do
-			for mpropdef in mclassdef.mpropdefs do
-				if mpropdef.is_intro then res.add(mpropdef.mproperty)
+			for mprop in mclassdef.intro_mproperties do
+				if mprop.visibility < min_visibility then continue
+				set.add(mprop)
 			end
 		end
-		return res
+		return set
 	end
+
+	# the set of locally refined properties in 'self'.
+	fun redef_mproperties(min_visibility: MVisibility): Set[MProperty] do
+		var set = new HashSet[MProperty]
+		for mclassdef in mclassdefs do
+			for mpropdef in mclassdef.mpropdefs do
+				if mpropdef.mproperty.visibility < min_visibility then continue
+				if mpropdef.mproperty.intro_mclassdef.mclass != self then set.add(mpropdef.mproperty)
+			end
+		end
+		return set
+	end
+
+	# the set of methods inherited by 'self'.
+	fun inherited_mproperties(mainmodule: MModule, min_visibility: MVisibility): Set[MProperty] do
+		var set = new HashSet[MProperty]
+		for parent in in_hierarchy(mainmodule).direct_greaters do
+			set.add_all(parent.intro_mproperties(min_visibility))
+			set.add_all(parent.inherited_mproperties(mainmodule, min_visibility))
+		end
+		return set
+	end
+
+	# the set of introduced and redefined mproperties
+	fun local_mproperties(min_visibility: MVisibility): Set[MProperty] do
+		var set = new HashSet[MProperty]
+		set.add_all(intro_mproperties(min_visibility))
+		set.add_all(redef_mproperties(min_visibility))
+		return set
+	end
+
+	# the set of all accessible mproperties for this class
+	fun all_mproperties(mainmodule: MModule, min_visibility: MVisibility): Set[MProperty] do
+		var set = new HashSet[MProperty]
+		set.add_all(local_mproperties(min_visibility))
+		set.add_all(inherited_mproperties(mainmodule, min_visibility))
+		return set
+	end
+
 
 	# Get the list of locally refined methods in 'self'.
 	fun redef_methods: Set[MMethod] do
@@ -149,34 +189,11 @@ redef class MClass
 		return res
 	end
 
-	# Get the set of locally refined properties in 'self'.
-	fun redef_mproperties: Set[MProperty] do
-		var res = new HashSet[MProperty]
-		for mclassdef in mclassdefs do
-			for mpropdef in mclassdef.mpropdefs do
-				if not mpropdef.is_intro then res.add(mpropdef.mproperty)
-			end
-		end
-		return res
-	end
-
-	# Get the list of methods inherited by 'self'.
 	fun inherited_methods: Set[MMethod] do
 		var res = new HashSet[MMethod]
 		for s in ancestors do
 			for m in s.intro_methods do
 				if not self.intro_methods.has(m) and not self.redef_methods.has(m) then res.add(m)
-			end
-		end
-		return res
-	end
-
-	# Get the set of all properties inherited by self
-	fun inherited_mproperties: Set[MProperty] do
-		var res = new HashSet[MProperty]
-		for s in ancestors do
-			for m in s.intro_mproperties do
-				if not self.intro_mproperties.has(m) and not self.redef_mproperties.has(m) then res.add(m)
 			end
 		end
 		return res
