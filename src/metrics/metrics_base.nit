@@ -175,13 +175,18 @@ interface Metric
 			print "{"\t" * indent}  avg: {avg}".light_gray
 			print "{"\t" * indent}  max: {max} ({self[max]})".light_gray
 			print "{"\t" * indent}  min: {min} ({self[min]})".light_gray
+			print "{"\t" * indent}  std: {std_dev}".light_gray
 		else
 			print "{"\t" * indent}{name}: {desc}"
 			print "{"\t" * indent}  avg: {avg}"
 			print "{"\t" * indent}  max: {max} ({self[max]})"
 			print "{"\t" * indent}  min: {min} ({self[min]})"
+			print "{"\t" * indent}  std: {std_dev}"
 		end
 	end
+
+	# The values standard derivation
+	fun std_dev: Float is abstract
 end
 
 # A Metric that collects integer data
@@ -216,6 +221,8 @@ class IntMetric
 
 	# Values average
 	redef fun avg: Float do return values_cache.avg
+
+	redef fun std_dev: Float do return values_cache.std_dev
 end
 
 # A Metric that collects float datas
@@ -266,6 +273,14 @@ class FloatMetric
 			sum += value
 		end
 		return sum / values.length.to_f
+	end
+
+	redef fun std_dev: Float do
+		var sum = 0.0
+		for value in values.values do
+			sum += (value - avg).pow(2.to_f)
+		end
+		return (sum / values.length.to_f).sqrt
 	end
 end
 
