@@ -34,29 +34,6 @@ class Curl
 	# Check for correct initialization
 	fun is_ok: Bool do return self.prim_curl.is_init
 
-	# Get an HTTP Request object to perform your own
-	fun http_request(url: String): nullable CurlRequest
-	do
-		var err: CURLCode
-		err = self.prim_curl.easy_setopt(new CURLOption.follow_location, 1)
-		if not err.is_ok then return null
-
-		err = self.prim_curl.easy_setopt(new CURLOption.url, url)
-		if not err.is_ok then return null
-
-		return new CurlHTTPRequest(url, self)
-	end
-
-  # Get a MAIL Request Object
-  fun mail_request: nullable CurlMailRequest
-  do
-    var err: CURLCode
-    err = self.prim_curl.easy_setopt(new CURLOption.follow_location, 1)
-    if not err.is_ok then return null
-
-    return new CurlMailRequest(self)
-  end
-
 	# Release Curl instance
 	fun destroy do self.prim_curl.easy_clean
 end
@@ -75,7 +52,7 @@ class CurlRequest
 	do
 		if not self.curl.is_ok then return answer_failure(0, "Curl instance is not correctly initialized")
 
-		var err: CURLCode
+		var err
 
 		err = self.curl.prim_curl.easy_setopt(new CURLOption.verbose, self.verbose)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
@@ -96,45 +73,51 @@ end
 # CURL HTTP Request
 class CurlHTTPRequest
 	super CurlRequest
-  super CCurlCallbacks
-  super CurlCallbacksRegisterIntern
+	super CCurlCallbacks
+	super CurlCallbacksRegisterIntern
 
-  var url: String
+	var url: String
 	var datas: nullable HeaderMap writable = null
 	var headers: nullable HeaderMap writable = null
 
-  init (url: String, curl: nullable Curl)
-  do
-    self.url = url
-    self.curl = curl
-  end
+	init (url: String, curl: nullable Curl)
+	do
+		self.url = url
+		self.curl = curl
+	end
 
 	# Execute HTTP request with settings configured through attribute
-	redef fun execute: CurlResponse
+	redef fun execute
 	do
 		if not self.curl.is_ok then return answer_failure(0, "Curl instance is not correctly initialized")
 
-		var success_response: CurlResponseSuccess = new CurlResponseSuccess
-
+		var success_response = new CurlResponseSuccess
 		var callback_receiver: CurlCallbacks = success_response
 		if self.delegate != null then callback_receiver = self.delegate.as(not null)
 
-		var err: CURLCode
-    # Callbacks
+		var err
+
+		err = self.curl.prim_curl.easy_setopt(new CURLOption.follow_location, 1)
+		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
+
+		err = self.curl.prim_curl.easy_setopt(new CURLOption.url, url)
+		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
+
+		# Callbacks
 		err = self.curl.prim_curl.register_callback(callback_receiver, new CURLCallbackType.header)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
 		err = self.curl.prim_curl.register_callback(callback_receiver, new CURLCallbackType.body)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
-    # HTTP Header
+		# HTTP Header
 		if self.headers != null then
 			var headers_joined = self.headers.join_pairs(": ")
 			err = self.curl.prim_curl.easy_setopt(new CURLOption.httpheader, headers_joined.to_curlslist)
 			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 		end
 
-    # Datas
+		# Datas
 		if self.datas != null then
 			var postdatas = self.datas.to_url_encoded(self.curl.prim_curl)
 			err = self.curl.prim_curl.easy_setopt(new CURLOption.postfields, postdatas)
@@ -153,19 +136,26 @@ class CurlHTTPRequest
 	# Download to file given resource
 	fun download_to_file(output_file_name: nullable String): CurlResponse
 	do
-		var success_response: CurlFileResponseSuccess = new CurlFileResponseSuccess
+		var success_response = new CurlFileResponseSuccess
 
 		var callback_receiver: CurlCallbacks = success_response
 		if self.delegate != null then callback_receiver = self.delegate.as(not null)
 
-		var err: CURLCode
+		var err
+
+		err = self.curl.prim_curl.easy_setopt(new CURLOption.follow_location, 1)
+		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
+
+		err = self.curl.prim_curl.easy_setopt(new CURLOption.url, url)
+		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
+
 		err = self.curl.prim_curl.register_callback(callback_receiver, new CURLCallbackType.header)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
 		err = self.curl.prim_curl.register_callback(callback_receiver, new CURLCallbackType.stream)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
-		var opt_name:nullable String
+		var opt_name
 		if not output_file_name == null then
 			opt_name = output_file_name
 		else if not self.url.substring(self.url.length-1, self.url.length) == "/" then
@@ -203,10 +193,10 @@ end
 
 # CURL Mail Request
 class CurlMailRequest
-  super CurlRequest
-  super CCurlCallbacks
+	super CurlRequest
+	super CCurlCallbacks
 
-  var headers: nullable HeaderMap writable = null
+	var headers: nullable HeaderMap writable = null
 	var headers_body: nullable HeaderMap writable = null
 	var from: nullable String writable = null
 	var to: nullable Array[String] writable = null
@@ -214,13 +204,12 @@ class CurlMailRequest
 	var bcc: nullable Array[String] writable = null
 	var subject: nullable String writable = ""
 	var body: nullable String writable = ""
-	private var supported_outgoing_protocol: Array[String]
+	private var supported_outgoing_protocol: Array[String] = ["smtp", "smtps"]
 
-  init (curl: nullable Curl)
-  do
-    self.curl = curl
-		self.supported_outgoing_protocol = once ["smtp", "smtps"]
-  end
+	init (curl: nullable Curl)
+	do
+		self.curl = curl
+	end
 
 	# Helper method to add conventional space while building entire mail
 	private fun add_conventional_space(str: String):String do return "{str}\n" end
@@ -232,12 +221,12 @@ class CurlMailRequest
 		return "{str}{att}\n"
 	end
 
-  # Helper method to add entire list of pairs to mail content
-  private fun add_pairs_to_content(content: String, pairs: HeaderMap):String
-  do
-    for h_key, h_val in pairs do content = add_pair_to_content(content, h_key, h_val)
-    return content
-  end
+	# Helper method to add entire list of pairs to mail content
+	private fun add_pairs_to_content(content: String, pairs: HeaderMap):String
+	do
+		for h_key, h_val in pairs do content = add_pair_to_content(content, h_key, h_val)
+		return content
+	end
 
 	# Check for host and protocol availability
 	private fun is_supported_outgoing_protocol(host: String):CURLCode
@@ -253,9 +242,9 @@ class CurlMailRequest
 		# Check Curl initialisation
 		if not self.curl.is_ok then return answer_failure(0, "Curl instance is not correctly initialized")
 
-		var err: CURLCode
+		var err
 
-    # Host & Protocol
+		# Host & Protocol
 		err = is_supported_outgoing_protocol(host)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 		err = self.curl.prim_curl.easy_setopt(new CURLOption.url, host)
@@ -273,16 +262,15 @@ class CurlMailRequest
 	end
 
 	# Execute Mail request with settings configured through attribute
-	redef fun execute: CurlResponse
+	redef fun execute
 	do
 		if not self.curl.is_ok then return answer_failure(0, "Curl instance is not correctly initialized")
 
-		var success_response: CurlMailResponseSuccess = new CurlMailResponseSuccess
-		var err: CURLCode
-    var content = ""
-    # Headers
+		var success_response = new CurlMailResponseSuccess
+		var content = ""
+		# Headers
 		if self.headers != null then
-      content = add_pairs_to_content(content, self.headers.as(not null))
+			content = add_pairs_to_content(content, self.headers.as(not null))
 		end
 
 		# Recipients
@@ -298,10 +286,16 @@ class CurlMailRequest
 		if self.bcc != null and self.bcc.length > 0 then g_rec.append(self.bcc.as(not null))
 
 		if g_rec.length < 1 then return answer_failure(0, "The mail recipients can not be empty")
+
+		var err
+
+		err = self.curl.prim_curl.easy_setopt(new CURLOption.follow_location, 1)
+		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
+
 		err = self.curl.prim_curl.easy_setopt(new CURLOption.mail_rcpt, g_rec.to_curlslist)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
-    # From
+		# From
 		if not self.from == null then
 			content = add_pair_to_content(content, "From:", self.from)
 			err = self.curl.prim_curl.easy_setopt(new CURLOption.mail_from, self.from.as(not null))
@@ -311,9 +305,9 @@ class CurlMailRequest
 		# Subject
 		content = add_pair_to_content(content, "Subject:", self.subject)
 
-    # Headers body
+		# Headers body
 		if self.headers_body != null then
-      content = add_pairs_to_content(content, self.headers_body.as(not null))
+			content = add_pairs_to_content(content, self.headers_body.as(not null))
 		end
 
 		# Body
@@ -339,7 +333,7 @@ end
 
 # Callbacks attributes
 abstract class CurlCallbacksRegisterIntern
-  var delegate: nullable CurlCallbacks writable = null
+	var delegate: nullable CurlCallbacks writable = null
 end
 
 # Abstract Curl request response
@@ -365,10 +359,10 @@ abstract class CurlResponseSuccessIntern
 	super CurlCallbacks
 	super CurlResponse
 
-	var headers: HashMap[String, String] = new HashMap[String, String]
+	var headers = new HashMap[String, String]
 
 	# Receive headers from request due to headers callback registering
-	redef fun header_callback(line: String)
+	redef fun header_callback(line)
 	do
 		var splitted = line.split_with(':')
 		if splitted.length > 1 then
@@ -382,8 +376,8 @@ end
 class CurlResponseSuccess
 	super CurlResponseSuccessIntern
 
-	var body_str: String = ""
-	var status_code: Int = 0
+	var body_str = ""
+	var status_code = 0
 
 	# Receive body from request due to body callback registering
 	redef fun body_callback(line: String)
@@ -394,21 +388,21 @@ end
 
 # Success Response Class of mail request
 class CurlMailResponseSuccess
-  super CurlResponseSuccessIntern
+	super CurlResponseSuccessIntern
 end
 
 # Success Response Class of a downloaded File
 class CurlFileResponseSuccess
 	super CurlResponseSuccessIntern
 
-	var status_code: Int = 0
-	var speed_download: Int = 0
-	var size_download: Int = 0
-	var total_time: Int = 0
+	var status_code = 0
+	var speed_download = 0
+	var size_download = 0
+	var total_time = 0
 	private var i_file: nullable OFile = null
 
 	# Receive bytes stream from request due to stream callback registering
-	redef fun stream_callback(buffer: String, size: Int, count: Int)
+	redef fun stream_callback(buffer, size, count)
 	do
 		self.i_file.write(buffer, size, count)
 	end
@@ -437,7 +431,7 @@ class HeaderMap
 		assert curlNotInitialized: curl.is_init else
 			print "to_url_encoded required a valid instance of CCurl Object."
 		end
-		var str: String = ""
+		var str = ""
 		var length = self.length
 		var i = 0
 		for k, v in self do
