@@ -219,5 +219,10 @@ $(call import-module,android/native_app_glue)
 
 		# Generate the apk
 		toolcontext.exec_and_check(["ant", "-q", "debug", "-f", android_project_root+"/build.xml"])
+
+		# Move the apk to the target
+		var outname = toolcontext.opt_output.value
+		if outname == null then outname = "{compiler.mainmodule.name}.apk"
+		toolcontext.exec_and_check(["mv", "{android_project_root}/bin/{compiler.mainmodule.name}-debug.apk", outname])
 	end
 end
