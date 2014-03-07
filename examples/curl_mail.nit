@@ -20,13 +20,13 @@ module curl_mail
 import curl
 
 var curl = new Curl
-var mail_request = curl.mail_request
+var mail_request = new CurlMailRequest(curl)
 
 # Networks
 var response = mail_request.set_outgoing_server("smtps://smtp.example.org:465", "user@example.org", "mypassword")
 if response isa CurlResponseFailed then
-  print "Error code : {response.error_code}"
-  print "Error msg : {response.error_msg}"
+	print "Error code : {response.error_code}"
+	print "Error msg : {response.error_msg}"
 end
 
 # Headers
@@ -50,10 +50,10 @@ mail_request.verbose = false
 # Send mail
 response = mail_request.execute
 if response isa CurlResponseFailed then
-  print "Error code : {response.error_code}"
-  print "Error msg : {response.error_msg}"
+	print "Error code : {response.error_code}"
+	print "Error msg : {response.error_msg}"
 else if response isa CurlMailResponseSuccess then
-  print "Mail Sent"
+	print "Mail Sent"
 else
-  print "Unknown Curl Response type"
+	print "Unknown Curl Response type"
 end
