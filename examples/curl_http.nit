@@ -26,12 +26,10 @@ class MyHttpFetcher
 	var curl: Curl
 	var our_body: String = ""
 
-	init do self.curl = new Curl
+	init(curl: Curl) do self.curl = curl
 
 	# Release curl object
 	fun destroy do self.curl.destroy
-
-	fun request(url: String): nullable CurlRequest do return self.curl.http_request(url)
 
 	# Header callback
 	redef fun header_callback(line: String) do
@@ -51,84 +49,64 @@ end
 if args.length < 2 then
 	print "Usage: curl_http <method wished [POST, GET, GET_FILE]> <target url>"
 else
-
-	var myHttpFetcher = new MyHttpFetcher
+	var curl = new Curl
 	var url = args[1]
+	var request = new CurlHTTPRequest(url, curl)
 
 	# HTTP Get Request
 	if args[0] == "GET" then
-		var getContentRequest = myHttpFetcher.request(url)
-		if getContentRequest isa CurlHTTPRequest then
+		request.verbose = false
+		var getResponse = request.execute
 
-			getContentRequest.verbose = false
-			var getResponse = getContentRequest.execute
-
-			if getResponse isa CurlResponseSuccess then
-				print "Status code : {getResponse.status_code}"
-				print "Body : {getResponse.body_str}"
-			else if getResponse isa CurlResponseFailed then
-				print "Error code : {getResponse.error_code}"
-				print "Error msg : {getResponse.error_msg}"
-			end
-
-		else
-			print "Wrong init with Curl HTTP request"
+		if getResponse isa CurlResponseSuccess then
+			print "Status code : {getResponse.status_code}"
+			print "Body : {getResponse.body_str}"
+		else if getResponse isa CurlResponseFailed then
+			print "Error code : {getResponse.error_code}"
+			print "Error msg : {getResponse.error_msg}"
 		end
 
-		# HTTP Post Request
+	# HTTP Post Request
 	else if args[0] == "POST" then
-		var postContentRequest = myHttpFetcher.request(url)
-		if postContentRequest isa CurlHTTPRequest then
+		var myHttpFetcher = new MyHttpFetcher(curl)
+		request.delegate = myHttpFetcher
 
-			postContentRequest.delegate = myHttpFetcher
-			var postDatas = new HeaderMap
-			postDatas["Bugs Bunny"] = "Daffy Duck"
-			postDatas["Batman"] = "Robin likes special characters @#ùà!è§'(\"é&://,;<>∞~*"
-			postDatas["Batman"] = "Yes you can set multiple identical keys, but APACHE will consider only once, the last one"
-			postContentRequest.datas = postDatas
-			postContentRequest.verbose = false
-			var postResponse = postContentRequest.execute
+		var postDatas = new HeaderMap
+		postDatas["Bugs Bunny"] = "Daffy Duck"
+		postDatas["Batman"] = "Robin likes special characters @#ùà!è§'(\"é&://,;<>∞~*"
+		postDatas["Batman"] = "Yes you can set multiple identical keys, but APACHE will consider only once, the last one"
+		request.datas = postDatas
+		request.verbose = false
+		var postResponse = request.execute
 
-			print "Our body from the callback : {myHttpFetcher.our_body}"
+		print "Our body from the callback : {myHttpFetcher.our_body}"
 
-			if postResponse isa CurlResponseSuccess then
-				print "*** Answer ***"
-				print "Status code : {postResponse.status_code}"
-				print "Body should be empty, because we decided to manage callbacks : {postResponse.body_str.length}"
-			else if postResponse isa CurlResponseFailed then
-				print "Error code : {postResponse.error_code}"
-				print "Error msg : {postResponse.error_msg}"
-			end
-
-		else
-			print "Wrong init with Curl HTTP request"
+		if postResponse isa CurlResponseSuccess then
+			print "*** Answer ***"
+			print "Status code : {postResponse.status_code}"
+			print "Body should be empty, because we decided to manage callbacks : {postResponse.body_str.length}"
+		else if postResponse isa CurlResponseFailed then
+			print "Error code : {postResponse.error_code}"
+			print "Error msg : {postResponse.error_msg}"
 		end
 
-		# HTTP Get to file Request
+	# HTTP Get to file Request
 	else if args[0] == "GET_FILE" then
-		var downloadFileRequest = myHttpFetcher.request(url)
-		if downloadFileRequest isa CurlHTTPRequest then
+		var headers = new HeaderMap
+		headers["Accept"] = "Moo"
+		request.headers = headers
+		request.verbose = false
+		var downloadResponse = request.download_to_file(null)
 
-			var headers = new HeaderMap
-			headers["Accept"] = "Moo"
-			downloadFileRequest.headers = headers
-			downloadFileRequest.verbose = false
-			var downloadResponse = downloadFileRequest.download_to_file(null)
-
-			if downloadResponse isa CurlFileResponseSuccess then
-				print "*** Answer ***"
-				print "Status code : {downloadResponse.status_code}"
-				print "Size downloaded : {downloadResponse.size_download}"
-			else if downloadResponse isa CurlResponseFailed then
-				print "Error code : {downloadResponse.error_code}"
-				print "Error msg : {downloadResponse.error_msg}"
-			end
-
-		else
-			print "Wrong init with Curl HTTP request"
+		if downloadResponse isa CurlFileResponseSuccess then
+			print "*** Answer ***"
+			print "Status code : {downloadResponse.status_code}"
+			print "Size downloaded : {downloadResponse.size_download}"
+		else if downloadResponse isa CurlResponseFailed then
+			print "Error code : {downloadResponse.error_code}"
+			print "Error msg : {downloadResponse.error_msg}"
 		end
-
-		# Program logic
+	# Program logic
 	else
 		print "Usage : Method[POST, GET, GET_FILE]"
 	end
