@@ -55,6 +55,9 @@ abstract class Text
 	# Is the current Text empty (== "")
 	fun is_empty: Bool do return self.length == 0
 
+	# Returns an empty Text of the right type
+	fun empty: SELFTYPE is abstract
+
 	# Gets the first char of the Text
 	#
 	# DEPRECATED : Use self.chars.first instead
@@ -589,6 +592,8 @@ class String
 		return new String.with_infos(items, to - realFrom + 1, realFrom, to)
 	end
 
+	redef fun empty do return "".as(String)
+
 	redef fun to_upper: String
 	do
 		var outstr = calloc_string(self.length + 1)
@@ -885,6 +890,8 @@ class FlatBuffer
 	end
 
 	redef fun clear do length = 0
+
+	redef fun empty do return new FlatBuffer
 
 	redef fun enlarge(cap)
 	do
