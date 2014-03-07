@@ -27,6 +27,9 @@ intrude import collection # FIXME should be collection::array
 
 # High-level abstraction for all text representations
 abstract class Text
+	super Comparable
+
+	redef type OTHER: Text
 
 	# Gets a view on the chars of the Text object
 	fun chars: StringCharView is abstract
@@ -419,6 +422,20 @@ abstract class Text
 		return res.to_s
 	end
 
+	redef fun ==(o)
+	do
+		if o == null then return false
+		if not o isa Text then return false
+		if self.is_same_instance(o) then return true
+		if self.length != o.length then return false
+		return self.chars == o.chars
+	end
+
+	redef fun <(o)
+	do
+		return self.chars < o.chars
+	end
+
 end
 
 # All kinds of array-based text representations.
@@ -445,8 +462,11 @@ end
 # views on String and Buffer objects
 abstract class StringCharView
 	super SequenceRead[Char]
+	super Comparable
 
 	type SELFTYPE: Text
+
+	redef type OTHER: StringCharView
 
 	private var target: SELFTYPE
 
@@ -475,6 +495,36 @@ abstract class StringCharView
 		return false
 	end
 
+	redef fun ==(other)
+	do
+		if other == null then return false
+		if not other isa StringCharView then return false
+		var other_chars = other.iterator
+		for i in self do
+			if i != other_chars.item then return false
+			other_chars.next
+		end
+		return true
+	end
+
+	redef fun <(other)
+	do
+		var self_chars = self.iterator
+		var other_chars = other.iterator
+
+		while self_chars.is_ok and other_chars.is_ok do
+			if self_chars.item < other_chars.item then return true
+			if self_chars.item > other_chars.item then return false
+			self_chars.next
+			other_chars.next
+		end
+
+		if self_chars.is_ok then
+			return false
+		else
+			return true
+		end
+	end
 end
 
 # View on Buffer objects, extends Sequence
@@ -489,11 +539,8 @@ end
 
 # Immutable strings of characters.
 class String
-	super Comparable
 	super FlatText
 	super StringCapable
-
-	redef type OTHER: String
 
 	# Index in _items of the start of the string
 	private var index_from: Int
@@ -628,70 +675,6 @@ class String
 			return newItems
 		end
 		return items
-	end
-
-	redef fun ==(other)
-	do
-		if not other isa String then return false
-
-		if self.object_id == other.object_id then return true
-
-		var my_length = length
-
-		if other.length != my_length then return false
-
-		var my_index = index_from
-		var its_index = other.index_from
-
-		var last_iteration = my_index + my_length
-
-		var itsitems = other.items
-		var myitems = self.items
-
-		while my_index < last_iteration do
-			if myitems[my_index] != itsitems[its_index] then return false
-			my_index += 1
-			its_index += 1
-		end
-
-		return true
-	end
-
-	# The comparison between two strings is done on a lexicographical basis
-	#
-	#     assert ("aa" < "b")      ==  true
-	redef fun <(other)
-	do
-		if self.object_id == other.object_id then return false
-
-		var my_curr_char : Char
-		var its_curr_char : Char
-
-		var curr_id_self = self.index_from
-		var curr_id_other = other.index_from
-
-		var my_items = self.items
-		var its_items = other.items
-
-		var my_length = self.length
-		var its_length = other.length
-
-		var max_iterations = curr_id_self + my_length
-
-		while curr_id_self < max_iterations do
-			my_curr_char = my_items[curr_id_self]
-			its_curr_char = its_items[curr_id_other]
-
-			if my_curr_char != its_curr_char then
-				if my_curr_char < its_curr_char then return true
-				return false
-			end
-
-			curr_id_self += 1
-			curr_id_other += 1
-		end
-
-		return my_length < its_length
 	end
 
 	# The concatenation of `self` with `s`
@@ -865,11 +848,8 @@ end
 # Mutable strings of characters.
 class FlatBuffer
 	super FlatText
-	super Comparable
 	super StringCapable
 	super Buffer
-
-	redef type OTHER: String
 
 	redef var chars: FlatBufferCharView = new FlatBufferCharView(self)
 
@@ -918,28 +898,6 @@ class FlatBuffer
 		return a.to_s_with_length(length)
 	end
 
-	redef fun <(s)
-	do
-		var i = 0
-		var l1 = length
-		var l2 = s.length
-		while i < l1 and i < l2 do
-			var c1 = self.chars[i].ascii
-			var c2 = s.chars[i].ascii
-			if c1 < c2 then
-				return true
-			else if c2 < c1 then
-				return false
-			end
-			i += 1
-		end
-		if l1 < l2 then
-			return true
-		else
-			return false
-		end
-	end
-
 	# Create a new empty string.
 	init
 	do
@@ -970,21 +928,6 @@ class FlatBuffer
 		if capacity < length + sl then enlarge(length + sl)
 		s.items.copy_to(items, sl, s.index_from, length)
 		length += sl
-	end
-
-	redef fun ==(o)
-	do
-		if not o isa FlatBuffer then return false
-		var l = length
-		if o.length != l then return false
-		var i = 0
-		var it = items
-		var oit = o.items
-		while i < l do
-			if it[i] != oit[i] then return false
-			i += 1
-		end
-		return true
 	end
 
 	# Copies the content of self in `dest`
