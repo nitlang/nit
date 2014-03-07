@@ -74,27 +74,9 @@ private class InheritanceMetricsPhase
 				mmodules.add_all(mgroup.mmodules)
 				mclasses.add_all(mod_mclasses)
 				cmetrics.collect(new HashSet[MClass].from(mod_mclasses))
-				for metric in cmetrics.metrics do
-					if metric isa IntMetric then
-						print toolcontext.format_h4("\t{metric.name}: {metric.desc}")
-						print toolcontext.format_p("\t    avg: {metric.avg}")
-						var max = metric.max
-						print toolcontext.format_p("\t    max: {max.first} ({max.second})")
-						var min = metric.min
-						print toolcontext.format_p("\t    min: {min.first} ({min.second})")
-					end
-				end
+				cmetrics.to_console(1, not toolcontext.opt_nocolors.value)
 				hmetrics.collect(new HashSet[MModule].from(mgroup.mmodules))
-				for metric in hmetrics.metrics do
-					if metric isa FloatMetric then
-						print toolcontext.format_h4("\t{metric.name}: {metric.desc}")
-						print toolcontext.format_p("\t    avg: {metric.avg}")
-						var max = metric.max
-						print toolcontext.format_p("\t    max: {max.first} ({max.second})")
-						var min = metric.min
-						print toolcontext.format_p("\t    min: {min.first} ({min.second})")
-					end
-				end
+				hmetrics.to_console(1, not toolcontext.opt_nocolors.value)
 			end
 		end
 		if not mclasses.is_empty then
@@ -102,28 +84,10 @@ private class InheritanceMetricsPhase
 			print toolcontext.format_h2("\n ## global metrics")
 			cmetrics.clear
 			cmetrics.collect(mclasses)
-			for metric in cmetrics.metrics do
-				if metric isa IntMetric then
-					print toolcontext.format_h4("\t{metric.name}: {metric.desc}")
-					print toolcontext.format_p("\t    avg: {metric.avg}")
-					var max = metric.max
-					print toolcontext.format_p("\t    max: {max.first} ({max.second})")
-					var min = metric.min
-					print toolcontext.format_p("\t    min: {min.first} ({min.second})")
-				end
-			end
+			cmetrics.to_console(1, not toolcontext.opt_nocolors.value)
 			hmetrics.clear
 			hmetrics.collect(mmodules)
-			for metric in hmetrics.metrics do
-				if metric isa FloatMetric then
-					print toolcontext.format_h4("\t{metric.name}: {metric.desc}")
-					print toolcontext.format_p("\t    avg: {metric.avg}")
-					var max = metric.max
-					print toolcontext.format_p("\t    max: {max.first} ({max.second})")
-					var min = metric.min
-					print toolcontext.format_p("\t    min: {min.first} ({min.second})")
-				end
-			end
+			hmetrics.to_console(1, not toolcontext.opt_nocolors.value)
 		end
 	end
 end

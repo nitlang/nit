@@ -44,25 +44,14 @@ private class MModulesMetricsPhase
 		for mproject in model.mprojects do
 
 			print  toolcontext.format_h2("\n ## project {mproject}")
-
 			for mgroup in mproject.mgroups do
 				if mgroup.mmodules.is_empty then continue
 
 				# Scalar metrics
 				print  toolcontext.format_h3("  `- group {mgroup.full_name}")
-
 				mmodules.add_all(mgroup.mmodules)
 				metrics.collect(new HashSet[MModule].from(mgroup.mmodules))
-				for metric in metrics.metrics do
-					if metric isa IntMetric then
-						print toolcontext.format_h4("\t{metric.name}: {metric.desc}")
-						print toolcontext.format_p("\t    avg: {metric.avg}")
-						var max = metric.max
-						print  toolcontext.format_p("\t    max: {max.first} ({max.second})")
-						var min = metric.min
-						print  toolcontext.format_p("\t    min: {min.first} ({min.second})")
-					end
-				end
+				metrics.to_console(1, not toolcontext.opt_nocolors.value)
 			end
 		end
 		if not mmodules.is_empty then
@@ -70,16 +59,7 @@ private class MModulesMetricsPhase
 			print  toolcontext.format_h2("\n ## global metrics")
 			metrics.clear
 			metrics.collect(mmodules)
-			for metric in metrics.metrics do
-				if metric isa IntMetric then
-					print toolcontext.format_h4( "\t{metric.name}: {metric.desc}")
-					print  toolcontext.format_p("\t    avg: {metric.avg}")
-					var max = metric.max
-						print  toolcontext.format_p("\t    max: {max.first} ({max.second})")
-					var min = metric.min
-					print  toolcontext.format_p("\t    min: {min.first} ({min.second})")
-				end
-			end
+			metrics.to_console(1, not toolcontext.opt_nocolors.value)
 		end
 	end
 end

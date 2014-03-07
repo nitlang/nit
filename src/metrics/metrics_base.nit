@@ -165,6 +165,23 @@ interface Metric
 
 	# The values average
 	fun avg: Float is abstract
+
+	# Pretty print the metric results in console
+	fun to_console(indent: Int, colors: Bool) do
+		var max = self.max
+		var min = self.min
+		if colors then
+			print "{"\t" * indent}{name}: {desc}".green
+			print "{"\t" * indent}  avg: {avg}".light_gray
+			print "{"\t" * indent}  max: {max} ({self[max]})".light_gray
+			print "{"\t" * indent}  min: {min} ({self[min]})".light_gray
+		else
+			print "{"\t" * indent}{name}: {desc}"
+			print "{"\t" * indent}  avg: {avg}"
+			print "{"\t" * indent}  max: {max} ({self[max]})"
+			print "{"\t" * indent}  min: {min} ({self[min]})"
+		end
+	end
 end
 
 # A Metric that collects integer data
@@ -270,6 +287,11 @@ class MetricSet
 	# Collect all metrics for this set of class
 	fun collect(elements: Set[ELM]) do
 		for metric in metrics do metric.collect(elements)
+	end
+
+	# Pretty print the resuls in console
+	fun to_console(indent: Int, colors: Bool) do
+		for metric in metrics do metric.to_console(indent, colors)
 	end
 
 end

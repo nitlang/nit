@@ -61,38 +61,19 @@ private class MClassesMetricsPhase
 
 				# Scalar metrics
 				print toolcontext.format_h3("  `- group {mgroup.full_name}")
-
 				var mod_mclasses = new HashSet[MClass]
 				for mmodule in mgroup.mmodules do mod_mclasses.add_all(mmodule.intro_mclasses)
 				if mod_mclasses.is_empty then continue
 				mclasses.add_all(mod_mclasses)
 				metrics.collect(new HashSet[MClass].from(mod_mclasses))
-				for metric in metrics.metrics do
-					if metric isa IntMetric then
-						print toolcontext.format_h4("\t{metric.name}: {metric.desc}")
-						print toolcontext.format_p("\t    avg: {metric.avg}")
-						var max = metric.max
-						print toolcontext.format_p("\t    max: {max.first} ({max.second})")
-						var min = metric.min
-						print toolcontext.format_p("\t    min: {min.first} ({min.second})")
-					end
-				end
+				metrics.to_console(1, not toolcontext.opt_nocolors.value)
 			end
 		end
 		if not mclasses.is_empty then
 			# Global metrics
 			print toolcontext.format_h2("\n ## global metrics")
 			metrics.collect(mclasses)
-			for metric in metrics.metrics do
-				if metric isa IntMetric then
-					print toolcontext.format_h4("\t{metric.name}: {metric.desc}")
-					print toolcontext.format_p("\t    avg: {metric.avg}")
-					var max = metric.max
-					print toolcontext.format_p("\t    max: {max.first} ({max.second})")
-					var min = metric.min
-					print toolcontext.format_p("\t    min: {min.first} ({min.second})")
-				end
-			end
+			metrics.to_console(1, not toolcontext.opt_nocolors.value)
 		end
 	end
 end
