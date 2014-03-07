@@ -116,6 +116,9 @@ abstract class Text
 		return last_index_of_from(c, length - 1)
 	end
 
+	# Return a null terminated char *
+	fun to_cstring: NativeString is abstract
+
 	# The index of the last occurrence of an element starting from pos (in reverse order).
 	# Example :
 	#		assert "/etc/bin/test/test.nit".last_index_of_from('/', length-1) == 13
@@ -556,6 +559,23 @@ abstract class String
 
 	redef fun to_s do return self
 
+	redef fun to_cstring
+	do
+		if self isa FlatString then
+			if index_from > 0 or index_to != items.cstring_length - 1 then
+				var newItems = calloc_string(length + 1)
+				self.items.copy_to(newItems, length, index_from, 0)
+				newItems[length] = '\0'
+				return newItems
+			end
+			return items
+		end
+
+		# Should never happen
+		return super
+	end
+
+
 end
 
 # Immutable strings of characters.
@@ -669,18 +689,6 @@ class FlatString
 		length = len
 		index_from = from
 		index_to = to
-	end
-
-	# Return a null terminated char *
-	fun to_cstring: NativeString
-	do
-		if index_from > 0 or index_to != items.cstring_length - 1 then
-			var newItems = calloc_string(length + 1)
-			self.items.copy_to(newItems, length, index_from, 0)
-			newItems[length] = '\0'
-			return newItems
-		end
-		return items
 	end
 
 	#     assert "hello " + "world!"         == "hello world!"
@@ -851,6 +859,18 @@ abstract class Buffer
 
 	# Adds the content of text `s` at the end of self
 	fun append(s: Text) is abstract
+
+	redef fun to_cstring do
+		if self isa FlatBuffer then
+			var new_native = calloc_string(length + 1)
+			new_native[length] = '\0'
+			items.copy_to(new_native, length, 0, 0)
+			return new_native
+		end
+
+		# Should never happen
+		return super
+	end
 
 end
 
