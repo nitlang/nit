@@ -870,7 +870,7 @@ redef class AExternMethPropdef
 			var recvval = args.first.val
 			if pname == "io_write" then
 				var a1 = args[1].val.as(Buffer)
-				recvval.as(OStream).write(a1.substring(0, args[2].to_i))
+				recvval.as(OStream).write(a1.substring(0, args[2].to_i).to_s)
 				return args[2]
 			else if pname == "io_read" then
 				var str = recvval.as(IStream).read(args[2].to_i)

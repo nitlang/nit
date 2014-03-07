@@ -38,7 +38,7 @@ abstract class Text
 	type SELFTYPE: Text
 
 	# Gets a view on the chars of the Text object
-	fun chars: StringCharView is abstract
+	fun chars: SELFVIEW is abstract
 
 	# Number of characters contained in self.
 	fun length: Int is abstract
@@ -53,7 +53,7 @@ abstract class Text
 	# A `from` index < 0 will be replaced by 0.
 	# Unless a `count` value is > 0 at the same time.
 	# In this case, `from += count` and `count -= from`.
-	fun substring(from: Int, count: Int): String is abstract
+	fun substring(from: Int, count: Int): SELFTYPE is abstract
 
 	# Is the current Text empty (== "")
 	#	assert "".is_empty
@@ -160,7 +160,7 @@ abstract class Text
 	#     assert "abcd".substring_from(2)    ==  "cd"
 	#
 	# As with substring, a `from` index < 0 will be replaced by 0
-	fun substring_from(from: Int): String
+	fun substring_from(from: Int): SELFTYPE
 	do
 		assert from < length
 		return substring(from, length - from)
@@ -277,21 +277,35 @@ abstract class Text
 	# A upper case version of `self`
 	#
 	#     assert "Hello World!".to_upper     == "HELLO WORLD!"
-	fun to_upper: String
-	do
-		var s = new FlatBuffer.with_capacity(length)
-		for i in self.chars do s.add(i.to_upper)
-		return s.to_s
-	end
+	fun to_upper: SELFTYPE is abstract
 
 	# A lower case version of `self`
 	#
 	#     assert "Hello World!".to_lower     == "hello world!"
-	fun to_lower : String
+	fun to_lower : SELFTYPE is abstract
+
+	# Removes the whitespaces at the beginning of self
+	fun l_trim: SELFTYPE
 	do
-		var s = new FlatBuffer.with_capacity(length)
-		for i in self.chars do s.add(i.to_lower)
-		return s.to_s
+		var iter = self.chars.iterator
+		while iter.is_ok do
+			if iter.item.ascii > 32 then break
+			iter.next
+		end
+		if iter.index == length then return self.empty
+		return self.substring_from(iter.index)
+	end
+
+	# Removes the whitespaces at the end of self
+	fun r_trim: SELFTYPE
+	do
+		var iter = self.chars.reverse_iterator
+		while iter.is_ok do
+			if iter.item.ascii > 32 then break
+			iter.next
+		end
+		if iter.index == length then return self.empty
+		return self.substring(0, iter.index + 1)
 	end
 
 	# Trims trailing and preceding white spaces
@@ -299,23 +313,7 @@ abstract class Text
 	#
 	#     assert "  Hello  World !  ".trim   == "Hello  World !"
 	#     assert "\na\nb\tc\t".trim          == "a\nb\tc"
-	fun trim: String
-	do
-		if self.length == 0 then return self.to_s
-		# find position of the first non white space char (ascii < 32) from the start of the string
-		var start_pos = 0
-		while self.chars[start_pos].ascii <= 32 do
-			start_pos += 1
-			if start_pos == length then return ""
-		end
-		# find position of the first non white space char from the end of the string
-		var end_pos = length - 1
-		while self.chars[end_pos].ascii <= 32 do
-			end_pos -= 1
-			if end_pos == start_pos then return self.chars[start_pos].to_s
-		end
-		return self.substring(start_pos, end_pos - start_pos + 1)
-	end
+	fun trim: SELFTYPE do return (self.l_trim).r_trim
 
 	# Mangle a string to be a unique string only made of alphanumeric characters
 	fun to_cmangle: String
@@ -592,7 +590,7 @@ class String
 	# Indes in _items of the last item of the string
 	private var index_to: Int
 
-	redef var chars: StringCharView = new FlatStringCharView(self)
+	redef var chars: SELFVIEW = new FlatStringCharView(self)
 
 	################################################
 	#       AbstractString specific methods        #
@@ -606,7 +604,7 @@ class String
 		return items[index + index_from]
 	end
 
-	redef fun substring(from: Int, count: Int): String
+	redef fun substring(from, count)
 	do
 		assert count >= 0
 
@@ -629,7 +627,7 @@ class String
 
 	redef fun empty do return "".as(String)
 
-	redef fun to_upper: String
+	redef fun to_upper
 	do
 		var outstr = calloc_string(self.length + 1)
 		var out_index = 0
@@ -649,7 +647,7 @@ class String
 		return outstr.to_s_with_length(self.length)
 	end
 
-	redef fun to_lower : String
+	redef fun to_lower
 	do
 		var outstr = calloc_string(self.length + 1)
 		var out_index = 0
@@ -667,26 +665,6 @@ class String
 		outstr[self.length] = '\0'
 
 		return outstr.to_s_with_length(self.length)
-	end
-
-	redef fun trim: String
-	do
-		if self.length == 0 then return self
-		# find position of the first non white space char (ascii < 32) from the start of the string
-		var start_pos = self.index_from
-		while items[start_pos].ascii <= 32 do
-			start_pos += 1
-			if start_pos == index_to + 1 then return ""
-		end
-		# find position of the first non white space char from the end of the string
-		var end_pos = index_to
-		while items[end_pos].ascii <= 32 do
-			end_pos -= 1
-			if end_pos == start_pos then return items[start_pos].to_s
-		end
-		start_pos -= index_from
-		end_pos -= index_from
-		return self.substring(start_pos, end_pos - start_pos + 1)
 	end
 
 	redef fun output
@@ -957,7 +935,6 @@ abstract class Buffer
 	# Adds the content of string `s` at the end of self
 	fun append(s: String) is abstract
 
-	redef fun chars: BufferCharView is abstract
 end
 
 # Mutable strings of characters.
@@ -969,7 +946,7 @@ class FlatBuffer
 	redef type SELFVIEW: FlatBufferCharView
 	redef type SELFTYPE: FlatBuffer
 
-	redef var chars: FlatBufferCharView = new FlatBufferCharView(self)
+	redef var chars: SELFVIEW = new FlatBufferCharView(self)
 
 	var capacity: Int
 
@@ -1072,9 +1049,9 @@ class FlatBuffer
 				r.chars.push(items[from])
 				from += 1
 			end
-			return r.to_s
+			return r
 		else
-			return ""
+			return new FlatBuffer
 		end
 	end
 end
