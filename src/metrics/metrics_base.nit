@@ -32,7 +32,8 @@ redef class ToolContext
 	var opt_mmodules = new OptionBool("Compute metrics about mmodules", "--mmodules")
 	# --mclassses
 	var opt_mclasses = new OptionBool("Compute metrics about mclasses", "--mclasses")
-
+	# --mendel
+	var opt_mendel = new OptionBool("Compute mendel metrics", "--mendel")
 	# --inheritance
 	var opt_inheritance = new OptionBool("Compute metrics about inheritance usage", "--inheritance")
 	# --genericity
@@ -69,6 +70,7 @@ redef class ToolContext
 		self.option_context.add_option(opt_all)
 		self.option_context.add_option(opt_mmodules)
 		self.option_context.add_option(opt_mclasses)
+		self.option_context.add_option(opt_mendel)
 		self.option_context.add_option(opt_inheritance)
 		self.option_context.add_option(opt_refinement)
 		self.option_context.add_option(opt_self)
@@ -193,6 +195,12 @@ interface Metric
 
 	# The element with the lowest value
 	fun min: ELM is abstract
+
+	# The value threshold above what elements are considered as 'interesting'
+	fun threshold: Float do return avg + std_dev
+
+	# The set of element above the threshold
+	fun above_threshold: Set[ELM] is abstract
 end
 
 # A Metric that collects integer data
@@ -225,6 +233,15 @@ class IntMetric
 	redef fun avg: Float do return values_cache.avg
 
 	redef fun std_dev: Float do return values_cache.std_dev
+
+	redef fun above_threshold do
+		var above = new HashSet[ELM]
+		var threshold = threshold
+		for element, value in values do
+			if value.to_f > threshold then above.add(element)
+		end
+		return above
+	end
 end
 
 # A Metric that collects float datas
@@ -283,6 +300,15 @@ class FloatMetric
 			sum += (value - avg).pow(2.to_f)
 		end
 		return (sum / values.length.to_f).sqrt
+	end
+
+	redef fun above_threshold do
+		var above = new HashSet[ELM]
+		var threshold = threshold
+		for element, value in values do
+			if value > threshold then above.add(element)
+		end
+		return above
 	end
 end
 
