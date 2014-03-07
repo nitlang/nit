@@ -35,6 +35,8 @@ abstract class Text
 	type SELFVIEW: StringCharView
 	type SELFTYPE: Text
 
+	var hash_cache: nullable Int = null
+
 	# Gets a view on the chars of the Text object
 	fun chars: SELFVIEW is abstract
 
@@ -457,6 +459,23 @@ abstract class Text
 	# Flat representation of self
 	fun flatten: FlatText is abstract
 
+	redef fun hash
+	do
+		if hash_cache == null then
+			# djb2 hash algorithm
+			var h = 5381
+			var i = length - 1
+
+			for char in self.chars do
+				h = (h * 32) + h + char.ascii
+				i -= 1
+			end
+
+			hash_cache = h
+		end
+		return hash_cache.as(not null)
+	end
+
 end
 
 # All kinds of array-based text representations.
@@ -767,25 +786,6 @@ class FlatString
 		end
 
 		return target_string.to_s_with_length(final_length)
-	end
-
-	redef fun hash
-	do
-		# djb2 hash algorythm
-		var h = 5381
-		var i = length - 1
-
-		var myitems = items
-		var strStart = index_from
-
-		i += strStart
-
-		while i >= strStart do
-			h = (h * 32) + h + self.items[i].ascii
-			i -= 1
-		end
-
-		return h
 	end
 end
 
