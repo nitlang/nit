@@ -219,6 +219,7 @@ class SeparateErasureCompiler
 	do
 		var mtype = mclass.intro.bound_mtype
 		var c_name = mclass.c_name
+		var c_instance_name = mclass.c_instance_name
 
 		var vft = self.method_tables[mclass]
 		var attrs = self.attr_tables[mclass]
@@ -282,17 +283,19 @@ class SeparateErasureCompiler
 		v.add_decl("\};")
 
 		if mtype.ctype != "val*" then
-			#Build instance struct
-			self.header.add_decl("struct instance_{c_name} \{")
-			self.header.add_decl("const struct class *class;")
-			self.header.add_decl("{mtype.ctype} value;")
-			self.header.add_decl("\};")
+			if mtype.mclass.name == "Pointer" or mtype.mclass.kind != extern_kind then
+				#Build instance struct
+				self.header.add_decl("struct instance_{c_instance_name} \{")
+				self.header.add_decl("const struct class *class;")
+				self.header.add_decl("{mtype.ctype} value;")
+				self.header.add_decl("\};")
+			end
 
 			#Build BOX
-			self.header.add_decl("val* BOX_{c_name}({mtype.ctype});")
+			self.provide_declaration("BOX_{c_name}", "val* BOX_{c_name}({mtype.ctype});")
 			v.add_decl("/* allocate {mtype} */")
 			v.add_decl("val* BOX_{mtype.c_name}({mtype.ctype} value) \{")
-			v.add("struct instance_{c_name}*res = nit_alloc(sizeof(struct instance_{c_name}));")
+			v.add("struct instance_{c_instance_name}*res = nit_alloc(sizeof(struct instance_{c_instance_name}));")
 			v.require_declaration("class_{c_name}")
 			v.add("res->class = &class_{c_name};")
 			v.add("res->value = value;")
@@ -598,7 +601,7 @@ class SeparateErasureCompilerVisitor
 		self.add("{nat} = NEW_{nclass.c_name}({array.length});")
 		for i in [0..array.length[ do
 			var r = self.autobox(array[i], self.object_type)
-			self.add("((struct instance_{nclass.c_name}*){nat})->values[{i}] = (val*) {r};")
+			self.add("((struct instance_{nclass.c_instance_name}*){nat})->values[{i}] = (val*) {r};")
 		end
 		var length = self.int_instance(array.length)
 		self.send(self.get_property("with_native", arraytype), [res, nat, length])

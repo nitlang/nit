@@ -4,4 +4,4 @@ init_linext
 inline
 test_extern
 nitc
-opengles2_hello_triangle
+test_json

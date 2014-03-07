@@ -715,9 +715,6 @@ abstract class AbstractCompiler
 		nmodule.finalize_ffi(visitor, modelbuilder)
 		nmodule.finalize_nitni(visitor)
 	end
-
-	# Does this compiler support the FFI?
-	fun supports_ffi: Bool do return false
 end
 
 # A file unit (may be more than one file if

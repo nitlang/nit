@@ -443,7 +443,7 @@ extern FileStat `{ struct stat * `}
 end
 
 # Instance of this class are standard FILE * pointers
-private extern NativeFile
+private extern NativeFile `{ FILE* `}
 	fun io_read(buf: NativeString, len: Int): Int is extern "file_NativeFile_NativeFile_io_read_2"
 	fun io_write(buf: NativeString, len: Int): Int is extern "file_NativeFile_NativeFile_io_write_2"
 	fun io_close: Int is extern "file_NativeFile_NativeFile_io_close_0"

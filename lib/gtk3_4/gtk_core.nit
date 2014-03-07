@@ -116,11 +116,6 @@ extern GtkWidget `{GtkWidget *`}
 	fun visible_self: Bool is extern `{
 		return gtk_widget_get_visible(recv);
 	`}
-	
-	# Get the visibility of the widget, check if it's parents are visible too
-	fun visible: Bool is extern `{
-		return gtk_widget_is_visible(recv);
-	`}
 end
 
 #Base class for widgets which contain other widgets
