@@ -62,12 +62,14 @@ private class MClassesMetricsPhase
 				mclasses.add_all(mod_mclasses)
 				metrics.collect(new HashSet[MClass].from(mod_mclasses), mainmodule)
 				for name, metric in metrics.metrics do
-					print toolcontext.format_h4("\t{name}: {metric.desc}")
-					print toolcontext.format_p("\t    avg: {metric.avg}")
-					var max = metric.max
-					print toolcontext.format_p("\t    max: {max.first} ({max.second})")
-					var min = metric.min
-					print toolcontext.format_p("\t    min: {min.first} ({min.second})")
+					if metric isa IntMetric then
+						print toolcontext.format_h4("\t{name}: {metric.desc}")
+						print toolcontext.format_p("\t    avg: {metric.avg}")
+						var max = metric.max
+						print toolcontext.format_p("\t    max: {max.first} ({max.second})")
+						var min = metric.min
+						print toolcontext.format_p("\t    min: {min.first} ({min.second})")
+					end
 				end
 			end
 		end
@@ -77,12 +79,14 @@ private class MClassesMetricsPhase
 
 			metrics.collect(mclasses, mainmodule)
 			for name, metric in metrics.metrics do
-				print toolcontext.format_h4("\t{name}: {metric.desc}")
-				print toolcontext.format_p("\t    avg: {metric.avg}")
-				var max = metric.max
-				print toolcontext.format_p("\t    max: {max.first} ({max.second})")
-				var min = metric.min
-				print toolcontext.format_p("\t    min: {min.first} ({min.second})")
+				if metric isa IntMetric then
+					print toolcontext.format_h4("\t{name}: {metric.desc}")
+					print toolcontext.format_p("\t    avg: {metric.avg}")
+					var max = metric.max
+					print toolcontext.format_p("\t    max: {max.first} ({max.second})")
+					var min = metric.min
+					print toolcontext.format_p("\t    min: {min.first} ({min.second})")
+				end
 			end
 		end
 	end
@@ -104,9 +108,11 @@ class MClassMetricSet
 	end
 end
 
-# An abstract metric about MClass
-abstract class MClassMetric
-	super IntMetric[MClass]
+# A metric about MClass
+interface MClassMetric
+	super Metric
+	redef type ELM: MClass
+
 	# Collect the metric value for this mclass
 	fun collect(mclass: MClass, mainmodule: MModule) is abstract
 end
@@ -114,6 +120,7 @@ end
 # Class Metric: Number of Ancestors
 class CNOA
 	super MClassMetric
+	super IntMetric
 	redef fun name do return "cnoa"
 	redef fun desc do return "number of ancestor classes"
 
@@ -125,6 +132,7 @@ end
 # Class Metric: Number of Parents
 class CNOP
 	super MClassMetric
+	super IntMetric
 	redef fun name do return "cnop"
 	redef fun desc do return "number of parent classes"
 
@@ -136,6 +144,7 @@ end
 # Class Metric: Number of Children
 class CNOC
 	super MClassMetric
+	super IntMetric
 	redef fun name do return "cnoc"
 	redef fun desc do return "number of child classes"
 
@@ -147,6 +156,7 @@ end
 # Class Metric: Number of Descendants
 class CNOD
 	super MClassMetric
+	super IntMetric
 	redef fun name do return "cnod"
 	redef fun desc do return "number of descendant classes"
 
@@ -158,6 +168,7 @@ end
 # Class Metric: Depth in Inheritance Tree
 class CDIT
 	super MClassMetric
+	super IntMetric
 	redef fun name do return "cdit"
 	redef fun desc do return "depth in class tree"
 
@@ -169,6 +180,7 @@ end
 # Class Metric: Number of Introduced MProperties
 class CNBIP
 	super MClassMetric
+	super IntMetric
 	redef fun name do return "cnbip"
 	redef fun desc do return "number of introduced properties"
 
@@ -183,6 +195,7 @@ end
 # Class Metric: Number of Refined MProperties
 class CNBRP
 	super MClassMetric
+	super IntMetric
 	redef fun name do return "cnbrp"
 	redef fun desc do return "number of redefined properties"
 
@@ -197,6 +210,7 @@ end
 # Class Metric: Number of Inherited MProperties
 class CNBHP
 	super MClassMetric
+	super IntMetric
 	redef fun name do return "cnbhp"
 	redef fun desc do return "number of inherited properties"
 

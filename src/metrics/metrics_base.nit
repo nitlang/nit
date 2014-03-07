@@ -141,82 +141,106 @@ end
 #
 # The concept is reified here for a better organization and documentation
 interface Metric
+	type ELM: Object
+	type VAL: Object
+	type RES: Map[ELM, VAL]
+
 	fun name: String is abstract
 	fun desc: String is abstract
-	# clear all results for this metric
+
+	# Clear all results for this metric
 	fun clear is abstract
+
+	# Values for each element
+	fun values: RES is abstract
+
+
+	# The value calculated for the element
+	fun [](element: ELM): VAL do return values[element]
+
+	# Does the element have a value for this metric?
+	fun has_element(element: ELM): Bool do return values.has_key(element)
+
+	# The values average
+	fun avg: Float is abstract
 end
 
 # A Metric that collects integer data
 #
 # Used to count things
-class IntMetric[E: Object]
+class IntMetric
 	super Metric
 
-	var values = new Counter[E]
+	redef type VAL: Int
+	redef type RES: Counter[ELM]
 
-	redef fun clear do values.clear
+	protected var values_cache = new Counter[ELM]
+	redef fun values do return values_cache
+
+	redef fun clear do values_cache.clear
 
 	# Return the couple with the highest value
-	fun max: Couple[E, Int] do
-		assert not values.is_empty
-		var elem = values.max.as(not null)
-		var value = values[elem]
-		return new Couple[E, Int](elem, value)
+	fun max: Couple[ELM, Int] do
+		assert not values_cache.is_empty
+		var elem = values_cache.max.as(not null)
+		var value = values_cache[elem]
+		return new Couple[ELM, Int](elem, value)
 	end
 
 	# Return the couple with the lowest value
-	fun min: Couple[E, Int] do
-		assert not values.is_empty
-		var elem = values.min.as(not null)
-		var value = values[elem]
-		return new Couple[E, Int](elem, value)
+	fun min: Couple[ELM, Int] do
+		assert not values_cache.is_empty
+		var elem = values_cache.min.as(not null)
+		var value = values_cache[elem]
+		return new Couple[ELM, Int](elem, value)
 	end
 
 	# Values average
-	fun avg: Float do return values.avg
+	redef fun avg: Float do return values_cache.avg
 end
 
 # A Metric that collects float datas
 #
 # Used sor summarization
-class FloatMetric[E: Object]
+class FloatMetric
 	super Metric
 
-	var values: Map[E, Float] = new HashMap[E, Float]
+	redef type VAL: Float
 
-	redef fun clear do values.clear
+	protected var values_cache = new HashMap[ELM, VAL]
+	redef fun values do return values_cache
+
+	redef fun clear do values_cache.clear
 
 	# Return the couple with the highest value
-	fun max: Couple[E, Float] do
+	fun max: Couple[ELM, Float] do
 		assert not values.is_empty
 		var max: nullable Float = null
-		var elem: nullable E = null
+		var elem: nullable ELM = null
 		for e, v in values do
 			if max == null or v > max then
 				max = v
 				elem = e
 			end
 		end
-		return new Couple[E, Float](elem.as(not null), max.as(not null))
+		return new Couple[ELM, Float](elem.as(not null), max.as(not null))
 	end
 
 	# Return the couple with the lowest value
-	fun min: Couple[E, Float] do
+	fun min: Couple[ELM, Float] do
 		assert not values.is_empty
 		var min: nullable Float = null
-		var elem: nullable E = null
+		var elem: nullable ELM = null
 		for e, v in values do
 			if min == null or v < min then
 				min = v
 				elem = e
 			end
 		end
-		return new Couple[E, Float](elem.as(not null), min.as(not null))
+		return new Couple[ELM, Float](elem.as(not null), min.as(not null))
 	end
 
-	# Values average
-	fun avg: Float do
+	redef fun avg do
 		if values.is_empty then return 0.0
 		var sum = 0.0
 		for value in values.values do

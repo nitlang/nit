@@ -64,21 +64,25 @@ private class InheritanceMetricsPhase
 				mclasses.add_all(mod_mclasses)
 				cmetrics.collect(new HashSet[MClass].from(mod_mclasses), mainmodule)
 				for name, metric in cmetrics.metrics do
-					print toolcontext.format_h4("\t{name}: {metric.desc}")
-					print toolcontext.format_p("\t    avg: {metric.avg}")
-					var max = metric.max
-					print toolcontext.format_p("\t    max: {max.first} ({max.second})")
-					var min = metric.min
-					print toolcontext.format_p("\t    min: {min.first} ({min.second})")
+					if metric isa IntMetric then
+						print toolcontext.format_h4("\t{name}: {metric.desc}")
+						print toolcontext.format_p("\t    avg: {metric.avg}")
+						var max = metric.max
+						print toolcontext.format_p("\t    max: {max.first} ({max.second})")
+						var min = metric.min
+						print toolcontext.format_p("\t    min: {min.first} ({min.second})")
+					end
 				end
 				hmetrics.collect(new HashSet[MModule].from(mgroup.mmodules), mainmodule)
 				for name, metric in hmetrics.metrics do
-					print toolcontext.format_h4("\t{name}: {metric.desc}")
-					print toolcontext.format_p("\t    avg: {metric.avg}")
-					var max = metric.max
-					print toolcontext.format_p("\t    max: {max.first} ({max.second})")
-					var min = metric.min
-					print toolcontext.format_p("\t    min: {min.first} ({min.second})")
+					if metric isa FloatMetric then
+						print toolcontext.format_h4("\t{name}: {metric.desc}")
+						print toolcontext.format_p("\t    avg: {metric.avg}")
+						var max = metric.max
+						print toolcontext.format_p("\t    max: {max.first} ({max.second})")
+						var min = metric.min
+						print toolcontext.format_p("\t    min: {min.first} ({min.second})")
+					end
 				end
 			end
 		end
@@ -87,21 +91,25 @@ private class InheritanceMetricsPhase
 			print toolcontext.format_h2("\n ## global metrics")
 			cmetrics.collect(mclasses, mainmodule)
 			for name, metric in cmetrics.metrics do
-				print toolcontext.format_h4("\t{name}: {metric.desc}")
-				print toolcontext.format_p("\t    avg: {metric.avg}")
-				var max = metric.max
-				print toolcontext.format_p("\t    max: {max.first} ({max.second})")
-				var min = metric.min
-				print toolcontext.format_p("\t    min: {min.first} ({min.second})")
+				if metric isa IntMetric then
+					print toolcontext.format_h4("\t{name}: {metric.desc}")
+					print toolcontext.format_p("\t    avg: {metric.avg}")
+					var max = metric.max
+					print toolcontext.format_p("\t    max: {max.first} ({max.second})")
+					var min = metric.min
+					print toolcontext.format_p("\t    min: {min.first} ({min.second})")
+				end
 			end
 			hmetrics.collect(mmodules, mainmodule)
 			for name, metric in hmetrics.metrics do
-				print toolcontext.format_h4("\t{name}: {metric.desc}")
-				print toolcontext.format_p("\t    avg: {metric.avg}")
-				var max = metric.max
-				print toolcontext.format_p("\t    max: {max.first} ({max.second})")
-				var min = metric.min
-				print toolcontext.format_p("\t    min: {min.first} ({min.second})")
+				if metric isa FloatMetric then
+					print toolcontext.format_h4("\t{name}: {metric.desc}")
+					print toolcontext.format_p("\t    avg: {metric.avg}")
+					var max = metric.max
+					print toolcontext.format_p("\t    max: {max.first} ({max.second})")
+					var min = metric.min
+					print toolcontext.format_p("\t    min: {min.first} ({min.second})")
+				end
 			end
 		end
 	end
@@ -110,7 +118,7 @@ end
 # Metric Set used to collect data about inheritance in each module
 class InheritanceMetricSet
 	super MetricSet
-	redef type METRIC: InheritanceMetric
+	redef type METRIC: MModuleMetric
 	fun collect(mmodules: Set[MModule], mainmodule: MModule) do
 		clear
 		for metric in metrics.values do
@@ -121,19 +129,12 @@ class InheritanceMetricSet
 	end
 end
 
-# An abstract metric used to collect data about inheritance usage
-#
-# The metric is based on a module
-abstract class InheritanceMetric
-	super FloatMetric[MModule]
-	fun collect(mmodule: MModule, mainmodule: MModule) is abstract
-end
-
 # Module metric: proportion of MClasses Defined Using Inheritance
 #
 # Count MClasses that have another parents than Object
 class MDUI
-	super InheritanceMetric
+	super MModuleMetric
+	super FloatMetric
 	redef fun name do return "mdui"
 	redef fun desc do return "proportion of mclass defined using inheritance (has other parent than Object)"
 
@@ -154,7 +155,8 @@ end
 #
 # Count classes that have another parents than Object
 class MDUIC
-	super InheritanceMetric
+	super MModuleMetric
+	super FloatMetric
 	redef fun name do return "mduic"
 	redef fun desc do return "proportion of class_kind defined using inheritance"
 
@@ -179,7 +181,8 @@ end
 #
 # Count interface that have another parents than Object
 class MDUII
-	super InheritanceMetric
+	super MModuleMetric
+	super FloatMetric
 	redef fun name do return "mduii"
 	redef fun desc do return "proportion of interface_kind defined using inheritance"
 
@@ -204,7 +207,8 @@ end
 #
 # Count classes that have at least a child
 class MIF
-	super InheritanceMetric
+	super MModuleMetric
+	super FloatMetric
 	redef fun name do return "mif"
 	redef fun desc do return "proportion of mclass inherited from"
 
@@ -225,7 +229,8 @@ end
 #
 # Count classes that have at least a child
 class MIFC
-	super InheritanceMetric
+	super MModuleMetric
+	super FloatMetric
 	redef fun name do return "mifc"
 	redef fun desc do return "proportion of class_kind inherited from"
 
@@ -250,7 +255,8 @@ end
 #
 # Count interfaces that have at least a child
 class MIFI
-	super InheritanceMetric
+	super MModuleMetric
+	super FloatMetric
 	redef fun name do return "mifi"
 	redef fun desc do return "proportion of interface_kind inherited from"
 
@@ -276,6 +282,7 @@ end
 # Count only absrtract, concrete and extern classes
 class CNOAC
 	super MClassMetric
+	super IntMetric
 	redef fun name do return "cnoac"
 	redef fun desc do return "number of class_kind ancestor"
 
@@ -296,6 +303,7 @@ end
 # Count only absrtract, concrete and extern classes
 class CNOPC
 	super MClassMetric
+	super IntMetric
 	redef fun name do return "cnopc"
 	redef fun desc do return "number of class_kind parent"
 
@@ -316,6 +324,7 @@ end
 # Count only absrtract, concrete and extern classes
 class CNOCC
 	super MClassMetric
+	super IntMetric
 	redef fun name do return "cnocc"
 	redef fun desc do return "number of class_kind children"
 
@@ -336,6 +345,7 @@ end
 # Count only absrtract, concrete and extern classes
 class CNODC
 	super MClassMetric
+	super IntMetric
 	redef fun name do return "cnodc"
 	redef fun desc do return "number of class_kind descendants"
 
@@ -356,6 +366,7 @@ end
 # Count only interfaces
 class CNOAI
 	super MClassMetric
+	super IntMetric
 	redef fun name do return "cnoai"
 	redef fun desc do return "number of interface_kind ancestor"
 
@@ -376,6 +387,7 @@ end
 # Count only interfaces
 class CNOPI
 	super MClassMetric
+	super IntMetric
 	redef fun name do return "cnopi"
 	redef fun desc do return "number of interface_kind parent"
 
@@ -396,6 +408,7 @@ end
 # Count only interfaces
 class CNOCI
 	super MClassMetric
+	super IntMetric
 	redef fun name do return "cnoci"
 	redef fun desc do return "number of interface_kind children"
 
@@ -416,6 +429,7 @@ end
 # Count only interfaces
 class CNODI
 	super MClassMetric
+	super IntMetric
 	redef fun name do return "cnodi"
 	redef fun desc do return "number of interface_kind descendants"
 
@@ -436,6 +450,7 @@ end
 # Following the longest path composed only of extends edges from self to Object
 class CDITC
 	super MClassMetric
+	super IntMetric
 	redef fun name do return "cditc"
 	redef fun desc do return "depth in class tree following only class, abstract, extern kind"
 
@@ -449,6 +464,7 @@ end
 # Following the longest path composed only of implements edges from self to Object
 class CDITI
 	super MClassMetric
+	super IntMetric
 	redef fun name do return "cditi"
 	redef fun desc do return "depth in class tree following only interface_kind"
 
