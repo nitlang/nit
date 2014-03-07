@@ -867,31 +867,37 @@ abstract class Buffer
 	redef type SELFVIEW: BufferCharView
 	redef type SELFTYPE: Buffer
 
+	var is_dirty = true
+
 	# Modifies the char contained at pos `index`
 	#
 	# DEPRECATED : Use self.chars.[]= instead
-	fun []=(index: Int, item: Char) is abstract
+	fun []=(index: Int, item: Char) do is_dirty = true
 
 	# Adds a char `c` at the end of self
 	#
 	# DEPRECATED : Use self.chars.add instead
-	fun add(c: Char) is abstract
+	fun add(c: Char) do is_dirty = true
 
 	# Clears the buffer
-	fun clear is abstract
+	fun clear do is_dirty = true
 
 	# Enlarges the subsequent array containing the chars of self
-	fun enlarge(cap: Int) is abstract
+	fun enlarge(cap: Int) do is_dirty = true
 
 	# Adds the content of text `s` at the end of self
-	fun append(s: Text) is abstract
+	fun append(s: Text) do is_dirty = true
 
 	redef fun to_cstring do
 		if self isa FlatBuffer then
-			var new_native = calloc_string(length + 1)
-			new_native[length] = '\0'
-			items.copy_to(new_native, length, 0, 0)
-			return new_native
+			if is_dirty then
+				var new_native = calloc_string(length + 1)
+				new_native[length] = '\0'
+				items.copy_to(new_native, length, 0, 0)
+				real_items = new_native
+				is_dirty = false
+			end
+			return real_items.as(not null)
 		end
 
 		# Should never happen
@@ -914,6 +920,7 @@ class FlatBuffer
 
 	redef fun []=(index, item)
 	do
+		super
 		if index == length then
 			add(item)
 			return
@@ -924,17 +931,22 @@ class FlatBuffer
 
 	redef fun add(c)
 	do
+		super
 		if capacity <= length then enlarge(length + 5)
 		items[length] = c
 		length += 1
 	end
 
-	redef fun clear do length = 0
+	redef fun clear do
+		super
+		length = 0
+	end
 
 	redef fun empty do return new FlatBuffer
 
 	redef fun enlarge(cap)
 	do
+		super
 		var c = capacity
 		if cap <= c then return
 		while c <= cap do c = c * 2 + 2
@@ -947,14 +959,7 @@ class FlatBuffer
 
 	redef fun to_s: String
 	do
-		var l = length
-		var a = calloc_string(l+1)
-		items.copy_to(a, l, 0, 0)
-
-		# Ensure the afterlast byte is '\0' to nul-terminated char *
-		a[length] = '\0'
-
-		return a.to_s_with_length(length)
+		return to_cstring.to_s_with_length(length)
 	end
 
 	# Create a new empty string.
@@ -990,6 +995,7 @@ class FlatBuffer
 
 	redef fun append(s)
 	do
+		super
 		var sl = s.length
 		if capacity < length + sl then enlarge(length + sl)
 		if s isa FlatString then
