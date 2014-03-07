@@ -20,7 +20,7 @@ module curl_mail
 import curl
 
 var curl = new Curl
-var mail_request = curl.mail_request
+var mail_request = new CurlMailRequest(curl)
 
 # Networks
 var response = mail_request.set_outgoing_server("smtps://smtp.example.org:465", "user@example.org", "mypassword")
