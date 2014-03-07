@@ -904,6 +904,12 @@ abstract class Buffer
 		return super
 	end
 
+	redef fun hash
+	do
+		if is_dirty then hash_cache = null
+		return super
+	end
+
 end
 
 # Mutable strings of characters.
