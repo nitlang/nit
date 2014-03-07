@@ -454,6 +454,9 @@ abstract class Text
 		return self.chars < o.chars
 	end
 
+	# Flat representation of self
+	fun flatten: FlatText is abstract
+
 end
 
 # All kinds of array-based text representations.
@@ -474,6 +477,8 @@ abstract class FlatText
 			i += 1
 		end
 	end
+
+	redef fun flatten do return self
 end
 
 # Abstract class for the SequenceRead compatible
