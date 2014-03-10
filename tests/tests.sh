@@ -145,6 +145,7 @@ function process_result()
 			remains="$remains $OLD"
 		else
 			echo "[fixme] out/$pattern.res $FIXME"
+			echo >>$xml "<skipped/>"
 		fi
 		todos="$todos $pattern"
 	elif [ -n "$SOSO" ]; then
@@ -159,6 +160,7 @@ function process_result()
 			echo "not ok - $description # TODO not yet implemented"
 		else
 			echo "[todo] out/$pattern.res -> not yet implemented"
+			echo >>$xml "<skipped/>"
 		fi
 		todos="$todos $pattern"
 	elif [ -n "$SOSOF" ]; then
@@ -166,6 +168,7 @@ function process_result()
 			echo "not ok - $description # TODO SOSO expected failure"
 		else
 			echo "[fixme soso] out/$pattern.res $SOSOF"
+			echo >>$xml "<skipped/>"
 		fi
 		todos="$todos $pattern"
 	elif [ -n "$NSAV" ]; then
