@@ -199,7 +199,7 @@ $(call import-module,android/native_app_glue)
 		var assets_dir = "{mainmodule_dir}/../assets"
 		if not assets_dir.file_exists then assets_dir = "{mainmodule_dir}/assets"
 		if assets_dir.file_exists then
-			assets_dir = share_dir.realpath
+			assets_dir = assets_dir.realpath
 			var target_assets_dir = "{android_project_root}/assets"
 			if not target_assets_dir.file_exists then
 				toolcontext.exec_and_check(["ln", "-s", assets_dir, target_assets_dir])
