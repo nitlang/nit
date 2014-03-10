@@ -61,8 +61,8 @@ long_str_part
         ;
 
 long_str_body = long_str_part*;
-lsend1 = ls2? (ls1 ls2)* '"""';
-lsend2 = ls1? (ls2 ls1)* '{{{';
+lsend1 = ls2? (ls1 ls2)* '"""' '"'*;
+lsend2 = ls1? (ls2 ls1)* '{{{' '{'*;
 
 long_sstr_char = sstr_char | cr | lf;
 long_sstr_part
