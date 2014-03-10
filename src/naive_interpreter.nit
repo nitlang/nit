@@ -716,6 +716,10 @@ redef class AInternMethPropdef
 				return v.char_instance(recv.succ)
 			else if pname == "prec" then
 				return v.char_instance(recv.prec)
+			else if pname == "+" then
+				return v.char_instance(recv + args[1].to_i)
+			else if pname == "-" then
+				return v.char_instance(recv - args[1].to_i)
 			else if pname == "<" then
 				return v.bool_instance(recv < args[1].val.as(Char))
 			else if pname == ">" then
@@ -929,6 +933,14 @@ redef class AExternMethPropdef
 				return v.float_instance(args[0].to_f.pow(args[1].to_f))
 			else if pname == "rand" then
 				return v.float_instance(args[0].to_f.rand)
+			else if pname == "abs" then
+				return v.float_instance(args[0].to_f.abs)
+			else if pname == "hypot_with" then
+				return v.float_instance(args[0].to_f.hypot_with(args[1].to_f))
+			else if pname == "is_nan" then
+				return v.bool_instance(args[0].to_f.is_nan)
+			else if pname == "is_inf_extern" then
+				return v.bool_instance(args[0].to_f.is_inf != 0)
 			end
 		else if pname == "native_argc" then
 			return v.int_instance(v.arguments.length)
