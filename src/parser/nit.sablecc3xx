@@ -562,11 +562,15 @@ expr_atom~nopar~nobra {-> expr}
 superstring {-> expr} 
 	= superstring_start superstring_middle* superstring_end annotations? {-> New expr.superstring([superstring_start.expr, superstring_middle.expr, superstring_end.expr], annotations)};
 superstring_start {-> expr*}
-	= start_string_p no expr [n2]:no {-> [start_string_p.expr, expr]};
+	= start_string_p no expr [n2]:no {-> [start_string_p.expr, expr]}
+	| {noexpr} start_string_p no {-> [start_string_p.expr]}
+	;
 start_string_p {-> expr}
 	= start_string {-> New expr.start_string(start_string)};
 superstring_middle {-> expr*}
-	= mid_string_p no expr [n2]:no {-> [mid_string_p.expr, expr]};
+	= mid_string_p no expr [n2]:no {-> [mid_string_p.expr, expr]}
+	| {noexpr} mid_string_p no {-> [mid_string_p.expr]}
+	;
 mid_string_p {-> expr}
 	= mid_string {-> New expr.mid_string(mid_string)};
 superstring_end {-> expr}
