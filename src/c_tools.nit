@@ -17,32 +17,32 @@
 # provides tools to write C .c and .h files
 module c_tools
 
-import compiling_writer
+import template
 
 # Accumulates all C code for a compilation unit
 class CCompilationUnit
 	## header
 	# comments and native interface imports
-	var header_c_base : Writer = new Writer
+	var header_c_base = new Template
 
 	# custom C header code or generated for other languages
-	var header_custom : Writer = new Writer
+	var header_custom = new Template
 
 	# types of extern classes and friendly types
-	var header_c_types : Writer = new Writer
+	var header_c_types = new Template
 
 	# implementation declaration for extern methods
-	var header_decl : Writer = new Writer
+	var header_decl = new Template
 
 	## body
 	# comments, imports, etc
-	var body_decl : Writer = new Writer
+	var body_decl = new Template
 
 	# custom code and generated for ffi
-	var body_custom : Writer = new Writer
+	var body_custom = new Template
 
 	# implementation body of extern methods
-	var body_impl : Writer = new Writer
+	var body_impl = new Template
 
 	# files to compile TODO check is appropriate
 	var files = new Array[String]
@@ -51,29 +51,29 @@ class CCompilationUnit
 	do
 		body_decl.add( "{efc.signature};\n" )
 		body_impl.add( "\n" )
-		body_impl.append( efc.to_writer )
+		body_impl.add( efc.to_writer )
 	end
 
 	fun add_exported_function( efc : CFunction )
 	do
 		header_decl.add( "{efc.signature};\n" )
 		body_impl.add( "\n" )
-		body_impl.append( efc.to_writer )
+		body_impl.add( efc.to_writer )
 	end
 
 	fun compile_header_core( stream : OStream )
 	do
-		header_c_base.write_to_stream( stream )
-		header_custom.write_to_stream( stream )
-		header_c_types.write_to_stream( stream )
-		header_decl.write_to_stream( stream )
+		header_c_base.write_to( stream )
+		header_custom.write_to( stream )
+		header_c_types.write_to( stream )
+		header_decl.write_to( stream )
 	end
 
 	fun compile_body_core( stream : OStream )
 	do
-		body_decl.write_to_stream( stream )
-		body_custom.write_to_stream( stream )
-		body_impl.write_to_stream( stream )
+		body_decl.write_to( stream )
+		body_custom.write_to( stream )
+		body_impl.write_to( stream )
 	end
 end
 
@@ -81,20 +81,19 @@ end
 class CFunction
 	var signature : String
 
-	var decls : Writer = new Writer
-	var exprs : Writer = new Writer
+	var decls = new Template
+	var exprs = new Template
 
-	fun to_writer : Writer
+	fun to_writer: Template
 	do
-		var w = new Writer
+		var w = new Template
 
-		w.add( "{signature}\n\{\n" )
-
-		w.append( decls )
-		w.add( "\n" )
-		w.append( exprs )
-
-		w.add( "\}\n" )
+		w.add(signature)
+		w.add("\n\{\n")
+		w.add(decls)
+		w.add("\n")
+		w.add(exprs)
+		w.add("\}\n")
 
 		return w
 	end
