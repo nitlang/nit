@@ -98,6 +98,21 @@ interface OStream
 	fun is_writable: Bool is abstract
 end
 
+# Things that can be efficienlty writen to a OStream
+#
+# The point of this interface it to allow is instance to be efficenty
+# writen into a OStream without having to allocate a big String object
+interface Streamable
+	# Write itself to a `stream`
+	# The specific logic it let to the concrete subclasses
+	fun write_to(stream: OStream) is abstract
+end
+
+redef class String
+	super Streamable
+	redef fun write_to(stream) do stream.write(self)
+end
+
 # Input streams with a buffer
 abstract class BufferedIStream
 	super IStream
