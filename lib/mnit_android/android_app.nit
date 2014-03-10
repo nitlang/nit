@@ -397,7 +397,7 @@ redef class App
 		return handled
 	end
 	
-	redef fun main_loop is extern import full_frame, save, pause, resume, gained_focus, lost_focus, init_window, term_window, extern_input_key, extern_input_motion `{
+	redef fun main_loop is extern import full_frame, generate_input `{
 		LOGI("nitni loop");
 		
 		nit_app = recv;
@@ -407,24 +407,9 @@ redef class App
 		mnit_java_app->onInputEvent = mnit_handle_input;
 		
 		while (1) {
-			int ident;
-			int events;
-			static int block = 0;
-			struct android_poll_source* source;
+			App_generate_input(recv);
 
-			while ((ident=ALooper_pollAll(0, NULL, &events,
-					(void**)&source)) >= 0) { /* first 0 is for non-blocking */ 
-
-				// Process this event.
-				if (source != NULL)
-					source->process(mnit_java_app, source);
-
-				// Check if we are exiting.
-				if (mnit_java_app->destroyRequested != 0) {
-					mnit_term_display();
-					return;
-				}
-			}
+			if (mnit_java_app->destroyRequested != 0) return;
 			
 			if (mnit_animating == 1) {
 				mnit_frame();
@@ -433,6 +418,27 @@ redef class App
 		}
 		
 	   /* App_exit(); // this is unreachable anyway*/
+	`}
+
+	redef fun generate_input import save, pause, resume, gained_focus, lost_focus, init_window, term_window, extern_input_key, extern_input_motion `{
+		int ident;
+		int events;
+		static int block = 0;
+		struct android_poll_source* source;
+
+		while ((ident=ALooper_pollAll(0, NULL, &events,
+				(void**)&source)) >= 0) { /* first 0 is for non-blocking */ 
+
+			// Process this event.
+			if (source != NULL)
+				source->process(mnit_java_app, source);
+
+			// Check if we are exiting.
+			if (mnit_java_app->destroyRequested != 0) {
+				mnit_term_display();
+				return;
+			}
+		}
 	`}
 end
 
