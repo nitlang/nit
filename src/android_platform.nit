@@ -67,7 +67,7 @@ class AndroidToolchain
 	do
 		var normal_compile_dir = super
 		android_project_root = normal_compile_dir
-		return "{normal_compile_dir}/jni/"
+		return "{normal_compile_dir}/jni/nit_compile/"
 	end
 
 	redef fun write_files(compiler, compile_dir, cfiles)
@@ -85,6 +85,9 @@ class AndroidToolchain
 		var dir = "{android_project_root}/jni/"
 		if not dir.file_exists then dir.mkdir
 
+		dir = compile_dir
+		if not dir.file_exists then dir.mkdir
+
 		# compile normal C files
 		super(compiler, compile_dir, cfiles)
 
@@ -93,9 +96,17 @@ class AndroidToolchain
 			if f isa ExternCFile then cfiles.add(f.filename.basename(""))
 		end
 
-		### generate makefile into "{compile_dir}/Android.mk"
-		if not dir.file_exists then dir.mkdir
+		## Generate delagating makefile
+		dir = "{android_project_root}/jni/"
 		var file = new OFStream.open("{dir}/Android.mk")
+		file.write """
+include $(call all-subdir-makefiles)
+"""
+		file.close
+
+		### generate makefile into "{compile_dir}/Android.mk"
+		dir = compile_dir
+		file = new OFStream.open("{dir}/Android.mk")
 		file.write """
 LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
@@ -105,7 +116,7 @@ LOCAL_MODULE    := main
 LOCAL_SRC_FILES := \\
 {{{cfiles.join(" \\\n")}}}
 LOCAL_LDLIBS    := -llog -landroid -lEGL -lGLESv1_CM -lz
-LOCAL_STATIC_LIBRARIES := android_native_app_glue
+LOCAL_STATIC_LIBRARIES := android_native_app_glue png
 
 include $(BUILD_SHARED_LIBRARY)
 
@@ -161,6 +172,39 @@ $(call import-module,android/native_app_glue)
     <string name="app_name">{{{app_name}}}</string>
 </resources>"""
 		file.close
+
+		### Link to png sources
+		# libpng is not available on Android NDK
+		# FIXME make obtionnal when we have alternatives to mnit
+		var nit_dir = "NIT_DIR".environ
+		var share_dir
+		if not nit_dir.is_empty then
+			share_dir = "{nit_dir}/share/"
+		else
+			share_dir = "{sys.program_name.dirname}/../share/"
+		end
+		if not share_dir.file_exists then 
+			print "Android project error: Nit share directory not found, please use the environment variable NIT_DIR"
+			exit 1
+		end
+		share_dir = share_dir.realpath
+		var target_png_dir = "{android_project_root}/jni/png"
+		if not target_png_dir.file_exists then
+			toolcontext.exec_and_check(["ln", "-s", "{share_dir}/png/", target_png_dir])
+		end
+
+		### Link to assets (for mnit and others)
+		# This will be accessed from `android_project_root`
+		var mainmodule_dir = compiler.mainmodule.location.file.filename.dirname
+		var assets_dir = "{mainmodule_dir}/../assets"
+		if not assets_dir.file_exists then assets_dir = "{mainmodule_dir}/assets"
+		if assets_dir.file_exists then
+			assets_dir = share_dir.realpath
+			var target_assets_dir = "{android_project_root}/assets"
+			if not target_assets_dir.file_exists then
+				toolcontext.exec_and_check(["ln", "-s", assets_dir, target_assets_dir])
+			end
+		end
 	end
 
 	redef fun write_makefile(compiler, compile_dir, cfiles)
@@ -175,5 +219,10 @@ $(call import-module,android/native_app_glue)
 
 		# Generate the apk
 		toolcontext.exec_and_check(["ant", "-q", "debug", "-f", android_project_root+"/build.xml"])
+
+		# Move the apk to the target
+		var outname = toolcontext.opt_output.value
+		if outname == null then outname = "{compiler.mainmodule.name}.apk"
+		toolcontext.exec_and_check(["mv", "{android_project_root}/bin/{compiler.mainmodule.name}-debug.apk", outname])
 	end
 end
