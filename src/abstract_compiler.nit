@@ -236,7 +236,12 @@ class MakefileToolchain
 			hfile.write "#include \"{hfilename}\"\n"
 			for key in f.required_declarations do
 				if not compiler.provided_declarations.has_key(key) then
-					print "No provided declaration for {key}"
+					var node = compiler.requirers_of_declarations.get_or_null(key)
+					if node != null then
+						node.debug "No provided declaration for {key}"
+					else
+						print "No provided declaration for {key}"
+					end
 					abort
 				end
 				hfile.write compiler.provided_declarations[key]
@@ -421,6 +426,8 @@ abstract class AbstractCompiler
 	end
 
 	private var provided_declarations = new HashMap[String, String]
+
+	private var requirers_of_declarations = new HashMap[String, ANode]
 
 	# Builds the .c and .h files to be used when generating a Stack Trace
 	# Binds the generated C function names to Nit function names
@@ -1071,7 +1078,11 @@ abstract class AbstractCompilerVisitor
 	# Request the presence of a global declaration
 	fun require_declaration(key: String)
 	do
-		self.writer.file.required_declarations.add(key)
+		var reqs = self.writer.file.required_declarations
+		if reqs.has(key) then return
+		reqs.add(key)
+		var node = current_node
+		if node != null then compiler.requirers_of_declarations[key] = node
 	end
 
 	# Add a declaration in the local-header
