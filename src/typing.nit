@@ -27,11 +27,6 @@ redef class ToolContext
 	var typing_phase: Phase = new TypingPhase(self, [flow_phase, modelize_property_phase, local_var_init_phase])
 end
 
-redef class MPropDef
-	# Does the MPropDef contains a call to super or a call of a super-constructor?
-	var has_supercall: Bool = false
-end
-
 private class TypingPhase
 	super Phase
 	redef fun process_npropdef(npropdef) do npropdef.do_typing(toolcontext.modelbuilder)
@@ -1425,6 +1420,10 @@ redef class ASuperExpr
 	# Note: if the super is a normal call-next-method, then this attribute is null
 	var callsite: nullable CallSite
 
+	# The method to call is the super is a standard `call-next-method` super-call
+	# Note: if the super is a special super-init-call, then this attribute is null
+	var mpropdef: nullable MMethodDef
+
 	redef fun accept_typing(v)
 	do
 		var recvtype = v.nclassdef.mclassdef.bound_mtype
@@ -1453,6 +1452,7 @@ redef class ASuperExpr
 		self.mtype = msignature.return_mtype
 		self.is_typed = true
 		v.mpropdef.has_supercall = true
+		mpropdef = v.mpropdef.as(MMethodDef)
 	end
 
 	private fun process_superinit(v: TypeVisitor)

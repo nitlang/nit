@@ -362,6 +362,7 @@ redef class ASuperExternCall
 	do
 		callback_set.supers.add( new MExplicitSuper( npropdef.mpropdef.as(not null) ) )
 		callback_set.types.add( npropdef.mpropdef.mclassdef.mclass.mclass_type )
+		npropdef.mpropdef.has_supercall = true
 	end
 end
 

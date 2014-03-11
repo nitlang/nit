@@ -162,6 +162,12 @@ redef class MClassDef
 	private var propdef_names = new HashSet[String]
 end
 
+redef class MPropDef
+	# Does the MPropDef contains a call to super or a call of a super-constructor?
+	# Subsequent phases of the frontend (esp. typing) set it if required
+	var has_supercall: Bool writable = false
+end
+
 redef class AClassdef
 	var build_properties_is_done: Bool = false
 	# The list of super-constructor to call at the start of the free constructor
