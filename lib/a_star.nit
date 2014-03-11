@@ -82,17 +82,16 @@ class Node
 	private var last_pathfinding_evocation: Int = 0
 
 	# cost up to in current evocation
-	# lifetime limited to evocation of path_to
+	# lifetime limited to evocation of `path_to`
 	private var best_cost_up_to: Int = 0
 
 	# source node
-	# lifetime limited to evocation of path_to
+	# lifetime limited to evocation of `path_to`
 	private var best_source: nullable N = null
 
 	# is in frontier or buckets
-	# lifetime limited to evocation of path_to
+	# lifetime limited to evocation of `path_to`
 	private var open: Bool = false
-
 
 	# Main functionnality, returns path from `self` to `dest`
 	fun path_to(dest: N, max_cost: Int, context: PathContext): nullable Path[N]
