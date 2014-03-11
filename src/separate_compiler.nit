@@ -18,7 +18,6 @@ module separate_compiler
 import abstract_compiler
 import layout_builders
 import rapid_type_analysis
-import collect_super_sends
 import compiler_ffi
 
 # Add separate compiler specific options
@@ -275,13 +274,27 @@ class SeparateCompiler
 			end
 		end
 
+		# Collect all super calls (dead or not)
+		var all_super_calls = new HashSet[MMethodDef]
+		for mmodule in self.mainmodule.in_importation.greaters do
+			for mclassdef in mmodule.mclassdefs do
+				for mpropdef in mclassdef.mpropdefs do
+					if not mpropdef isa MMethodDef then continue
+					if mpropdef.has_supercall then
+						all_super_calls.add(mpropdef)
+					end
+				end
+			end
+		end
+
 		# lookup super calls and add it to the list of mmethods to build layout with
 		var super_calls
 		if runtime_type_analysis != null then
 			super_calls = runtime_type_analysis.live_super_sends
 		else
-			super_calls = modelbuilder.collect_super_sends
+			super_calls = all_super_calls
 		end
+
 		for mmethoddef in super_calls do
 			var mclass = mmethoddef.mclassdef.mclass
 			mmethods[mclass].add(mmethoddef)
@@ -296,14 +309,9 @@ class SeparateCompiler
 		self.compile_color_consts(method_layout.pos)
 
 		# attribute null color to dead supercalls
-		for mmodule in self.mainmodule.in_importation.greaters do
-			for mclassdef in mmodule.mclassdefs do
-				for mpropdef in mclassdef.mpropdefs do
-					if mpropdef.has_supercall then
-						compile_color_const(new_visitor, mpropdef, -1)
-					end
-				end
-			end
+		for mpropdef in all_super_calls do
+			if super_calls.has(mpropdef) then continue
+			compile_color_const(new_visitor, mpropdef, -1)
 		end
 
 		# attributes coloration

@@ -1598,9 +1598,8 @@ redef class ASuperExpr
 		end
 
 		# stantard call-next-method
-		var mpropdef = v.frame.mpropdef
+		var mpropdef = self.mpropdef
 		mpropdef = mpropdef.lookup_next_definition(v.mainmodule, recv.mtype)
-		assert mpropdef isa MMethodDef
 		var res = v.call_without_varargs(mpropdef, args)
 		return res
 	end
