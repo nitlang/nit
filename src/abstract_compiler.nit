@@ -2499,7 +2499,7 @@ redef class ASuperExpr
 		end
 
 		# stantard call-next-method
-		return v.supercall(v.frame.mpropdef.as(MMethodDef), recv.mtype.as(MClassType), args)
+		return v.supercall(mpropdef.as(not null), recv.mtype.as(MClassType), args)
 	end
 end
 

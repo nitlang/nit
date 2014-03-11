@@ -544,7 +544,7 @@ redef class ASuperExpr
 			return
 		end
 
-		v.analysis.add_super_send(v.receiver, v.mpropdef.as(MMethodDef))
+		v.analysis.add_super_send(v.receiver, mpropdef.as(not null))
 	end
 end
 
