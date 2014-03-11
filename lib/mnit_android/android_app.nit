@@ -17,7 +17,7 @@
 # Impements the services of `mnit:app` using the API from the Android ndk
 module android_app
 
-import android_opengles1
+import mnit
 import android
 
 in "C header" `{
@@ -25,6 +25,13 @@ in "C header" `{
 	#include <errno.h>
 	#include <android/log.h>
 	#include <android_native_app_glue.h>
+
+	#define LOGW(...) ((void)__android_log_print(ANDROID_LOG_WARN, "mnit", __VA_ARGS__))
+	#ifdef DEBUG
+		#define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO, "mnit", __VA_ARGS__))
+	#else
+		#define LOGI(...) (void)0
+	#endif
 `}
 
 in "C" `{
@@ -33,13 +40,6 @@ in "C" `{
 	#define GL_GLEXT_PROTOTYPES 1
 	#include <GLES/glext.h>
 	#include <errno.h>
-
-	#define LOGW(...) ((void)__android_log_print(ANDROID_LOG_WARN, "mnit", __VA_ARGS__))
-	#ifdef DEBUG
-		#define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO, "mnit", __VA_ARGS__))
-	#else
-		#define LOGI(...) (void)0
-	#endif
 
 	extern EGLDisplay mnit_display;
 	extern EGLSurface mnit_surface;
