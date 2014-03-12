@@ -145,7 +145,8 @@ $(call import-module,android/native_app_glue)
              This will take care of integrating with our NDK code. -->
         <activity android:name="android.app.NativeActivity"
                 android:label="@string/app_name"
-                android:configChanges="orientation|keyboardHidden">
+                android:configChanges="orientation|keyboardHidden"
+                android:screenOrientation="portrait">
             <!-- Tell NativeActivity the name of or .so -->
             <meta-data android:name=\"{{{app_package}}}\"
                     android:value=\"{{{app_name}}}\" />
