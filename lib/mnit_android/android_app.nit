@@ -255,6 +255,19 @@ extern InnerAndroidMotionEvent in "C" `{AInputEvent *`}
 		return (a & AMOTION_EVENT_ACTION_POINTER_INDEX_MASK) >> AMOTION_EVENT_ACTION_POINTER_INDEX_SHIFT;
 	else return -1;
 	`}
+
+	private fun action: AMotionEventAction `{ return AMotionEvent_getAction(recv); `}
+end
+
+extern class AMotionEventAction `{ int32_t `}
+	protected fun action: Int `{ return recv & AMOTION_EVENT_ACTION_MASK; `}
+	fun is_down: Bool do return action == 0
+	fun is_up: Bool do return action == 1
+	fun is_move: Bool do return action == 2
+	fun is_cancel: Bool do return action == 3
+	fun is_outside: Bool do return action == 4
+	fun is_pointer_down: Bool do return action == 5
+	fun is_pointer_up: Bool do return action == 6
 end
 
 interface AndroidInputEvent
