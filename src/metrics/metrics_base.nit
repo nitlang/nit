@@ -170,6 +170,15 @@ interface Metric
 
 	# Pretty print the metric results in console
 	fun to_console(indent: Int, colors: Bool) do
+		if values.is_empty then
+			if colors then
+				print "{"\t" * indent}{name}: {desc} -- nothing".green
+			else
+				print "{"\t" * indent}{name}: {desc} -- nothing"
+			end
+			return
+		end
+
 		var max = self.max
 		var min = self.min
 		if colors then
