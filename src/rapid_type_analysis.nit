@@ -28,6 +28,8 @@ import modelbuilder
 import typing
 import auto_super_init
 
+import csv # for live_types_to_csv
+
 redef class ModelBuilder
 	fun do_rapid_type_analysis(mainmodule: MModule): RapidTypeAnalysis
 	do
@@ -74,6 +76,33 @@ class RapidTypeAnalysis
 
 	# Live call-to-super.
 	var live_super_sends = new HashSet[MMethodDef]
+
+	# Return a ready-to-save CSV document objet that agregates informations about live types.
+	# Each discovered type is listed in a line, with its status: resolution, liveness, cast-liveness.
+	# Note: types are listed in an alphanumeric order to improve human reading.
+	fun live_types_to_csv: CSVDocument
+	do
+		# Gather all kind of type
+		var typeset = new HashSet[MType]
+		typeset.add_all(live_types)
+		typeset.add_all(live_open_types)
+		typeset.add_all(live_cast_types)
+		typeset.add_all(live_open_cast_types)
+		var types = typeset.to_a
+		(new CachedAlphaComparator).sort(types)
+		var res = new CSVDocument
+		res.header = ["Type", "Resolution", "Liveness", "Cast-liveness"]
+		for t in types do
+			var reso
+			if t.need_anchor then reso = "OPEN " else reso = "CLOSED"
+			var live
+			if t isa MClassType and (live_types.has(t) or live_open_types.has(t)) then live = "LIVE" else live = "DEAD"
+			var cast
+			if live_cast_types.has(t) or live_open_cast_types.has(t) then cast = "CAST LIVE" else cast = "CAST DEAD"
+			res.add_line(t, reso, live, cast)
+		end
+		return res
+	end
 
 	# Methods that are are still candidate to the try_send
 	private var totry_methods = new HashSet[MMethod]
