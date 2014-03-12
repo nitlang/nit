@@ -19,6 +19,7 @@
 module android_opengles1
 
 import mnit
+import android_app
 
 in "C" `{
 	#include <android_native_app_glue.h>
@@ -36,4 +37,3 @@ redef class Opengles1Display
 		}
 	`}
 end
-
