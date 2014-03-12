@@ -79,6 +79,15 @@ private class RTAMetricsPhase
 		gmetrics.collect(mtypes)
 		gmetrics.to_console(1, not toolcontext.opt_nocolors.value)
 		if csv then gmetrics.to_csv.save("{out}/complexity.csv")
+
+		# dump type and method infos
+		if csv then
+			analysis.live_types_to_csv.save("{out}/rta_types.csv")
+
+			var s = new OFStream.open("{out}/rta_methods.dat")
+			analysis.live_methods_to_tree.pretty(s)
+			s.close
+		end
 	end
 end
 
