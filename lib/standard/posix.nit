@@ -48,7 +48,6 @@ extern class Passwd `{struct passwd*`}
 	fun passwd: String import NativeString.to_s `{ return NativeString_to_s(recv->pw_passwd); `}
 	fun uid: Int `{ return recv->pw_uid; `}
 	fun gid: Int `{ return recv->pw_gid; `}
-	fun gecos: String import NativeString.to_s `{ return NativeString_to_s(recv->pw_gecos); `}
 	fun dir: String import NativeString.to_s `{ return NativeString_to_s(recv->pw_dir); `}
 	fun shell: String import NativeString.to_s `{ return NativeString_to_s(recv->pw_shell); `}
 end
