@@ -334,8 +334,13 @@ class AndroidPointerEvent
 		return AMotionEvent_getPressure(motion_event, pointer_id);
 	`}
 
-	redef fun pressed do return true
-	redef fun depressed do return false
+	redef fun pressed
+	do
+		var action = motion_event.inner_event.action
+		return action.is_down or action.is_move
+	end
+
+	redef fun depressed do return not pressed
 end
 
 extern AndroidKeyEvent in "C" `{AInputEvent *`}
