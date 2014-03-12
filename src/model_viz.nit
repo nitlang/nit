@@ -224,6 +224,7 @@ class MProjectDot
 		# Collect interessing nodes
 		for m in model.mmodules do
 			# filter out modules outside wanted projects
+			if m.mgroup == null then continue
 			if not mprojects.has(m.mgroup.mproject) then continue
 
 			mmodules.add(m)
