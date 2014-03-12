@@ -29,6 +29,7 @@ import typing
 import auto_super_init
 
 import csv # for live_types_to_csv
+import ordered_tree # for live_methods_to_tree
 
 redef class ModelBuilder
 	fun do_rapid_type_analysis(mainmodule: MModule): RapidTypeAnalysis
@@ -102,6 +103,30 @@ class RapidTypeAnalysis
 			res.add_line(t, reso, live, cast)
 		end
 		return res
+	end
+
+	# Return a ready-to-save OrderedTree object that agregates infomration about live methods.
+	# Note: methods are listed in an alphanumeric order to improve human reading.
+	fun live_methods_to_tree: OrderedTree[Object]
+	do
+		var tree = new OrderedTree[Object]
+		for x in live_methods do
+			var xn = x.full_name
+			tree.add(null, xn)
+			for z in x.mpropdefs do
+				var zn = z.to_s
+				if live_methoddefs.has(z) then
+					tree.add(xn, zn)
+					if live_super_sends.has(z) then
+						tree.add(zn, zn + "(super)")
+					end
+				else if live_super_sends.has(z) then
+					tree.add(xn, zn + "(super)")
+				end
+			end
+		end
+		tree.sort_with(alpha_comparator)
+		return tree
 	end
 
 	# Methods that are are still candidate to the try_send
