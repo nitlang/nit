@@ -451,6 +451,13 @@ END
 					# Sould we skip the input for this engine?
 					need_skip $bff "  $name" $pack && continue
 
+					# use a specific inputs file, if required
+					if [ -f "$bff.inputs" ]; then
+						ffinputs="$bff.inputs"
+					else
+						ffinputs=$inputs
+					fi
+
 					rm -rf "$fff.res" "$fff.err" "$fff.write" 2> /dev/null
 					if [ "x$verbose" = "xtrue" ]; then
 						echo ""
@@ -459,7 +466,7 @@ END
 					test -z "$tap" && echo -n "==> $name "
 					echo "./$ff.bin $args" > "./$fff.bin"
 					chmod +x "./$fff.bin"
-					WRITE="$fff.write" sh -c "NIT_NO_STACK=1 $TIMEOUT ./$fff.bin < $inputs > $fff.res 2>$fff.err"
+					WRITE="$fff.write" sh -c "NIT_NO_STACK=1 $TIMEOUT ./$fff.bin < $ffinputs > $fff.res 2>$fff.err"
 					if [ "x$verbose" = "xtrue" ]; then
 						cat "$fff.res"
 						cat >&2 "$fff.err"
