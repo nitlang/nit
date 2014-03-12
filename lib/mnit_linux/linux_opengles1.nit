@@ -25,15 +25,6 @@ import mnit # for
 
 import sdl
 
-in "C Header" `{
-	#define LOGW(...) ((void)fprintf(stderr, "# warn: %s", __VA_ARGS__))
-	#ifdef DEBUG
-		#define LOGI(...) ((void)fprintf(stderr, "# info: %s", __VA_ARGS__))
-	#else
-		#define LOGI(...) (void)0
-	#endif
-`}
-
 in "C" `{
 	NativeWindowType mnit_window;
 	EGLNativeDisplayType mnit_native_display;
@@ -102,7 +93,7 @@ redef extern Opengles1Image
 
 		sdl_image = IMG_Load( String_to_cstring( path ) );
 		if ( !sdl_image ) {
-			LOGW( "SDL failed to load image <%s>: %s\n", String_to_cstring( path ), IMG_GetError() );
+			fprintf(stderr, "SDL failed to load image <%s>: %s\n", String_to_cstring(path), IMG_GetError());
 			return NULL;
 		} else {
 			opengles_image = mnit_opengles_load_image( sdl_image->pixels, sdl_image->w, sdl_image->h, sdl_image->format->Amask );

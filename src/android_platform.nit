@@ -145,7 +145,8 @@ $(call import-module,android/native_app_glue)
              This will take care of integrating with our NDK code. -->
         <activity android:name="android.app.NativeActivity"
                 android:label="@string/app_name"
-                android:configChanges="orientation|keyboardHidden">
+                android:configChanges="orientation|keyboardHidden"
+                android:screenOrientation="portrait">
             <!-- Tell NativeActivity the name of or .so -->
             <meta-data android:name=\"{{{app_package}}}\"
                     android:value=\"{{{app_name}}}\" />
@@ -199,7 +200,7 @@ $(call import-module,android/native_app_glue)
 		var assets_dir = "{mainmodule_dir}/../assets"
 		if not assets_dir.file_exists then assets_dir = "{mainmodule_dir}/assets"
 		if assets_dir.file_exists then
-			assets_dir = share_dir.realpath
+			assets_dir = assets_dir.realpath
 			var target_assets_dir = "{android_project_root}/assets"
 			if not target_assets_dir.file_exists then
 				toolcontext.exec_and_check(["ln", "-s", assets_dir, target_assets_dir])

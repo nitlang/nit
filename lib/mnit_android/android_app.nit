@@ -17,7 +17,7 @@
 # Impements the services of `mnit:app` using the API from the Android ndk
 module android_app
 
-import android_opengles1
+import mnit
 import android
 
 in "C header" `{
@@ -25,6 +25,13 @@ in "C header" `{
 	#include <errno.h>
 	#include <android/log.h>
 	#include <android_native_app_glue.h>
+
+	#define LOGW(...) ((void)__android_log_print(ANDROID_LOG_WARN, "mnit", __VA_ARGS__))
+	#ifdef DEBUG
+		#define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO, "mnit", __VA_ARGS__))
+	#else
+		#define LOGI(...) (void)0
+	#endif
 `}
 
 in "C" `{
@@ -33,13 +40,6 @@ in "C" `{
 	#define GL_GLEXT_PROTOTYPES 1
 	#include <GLES/glext.h>
 	#include <errno.h>
-
-	#define LOGW(...) ((void)__android_log_print(ANDROID_LOG_WARN, "mnit", __VA_ARGS__))
-	#ifdef DEBUG
-		#define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO, "mnit", __VA_ARGS__))
-	#else
-		#define LOGI(...) (void)0
-	#endif
 
 	extern EGLDisplay mnit_display;
 	extern EGLSurface mnit_surface;
@@ -255,6 +255,19 @@ extern InnerAndroidMotionEvent in "C" `{AInputEvent *`}
 		return (a & AMOTION_EVENT_ACTION_POINTER_INDEX_MASK) >> AMOTION_EVENT_ACTION_POINTER_INDEX_SHIFT;
 	else return -1;
 	`}
+
+	private fun action: AMotionEventAction `{ return AMotionEvent_getAction(recv); `}
+end
+
+extern class AMotionEventAction `{ int32_t `}
+	protected fun action: Int `{ return recv & AMOTION_EVENT_ACTION_MASK; `}
+	fun is_down: Bool do return action == 0
+	fun is_up: Bool do return action == 1
+	fun is_move: Bool do return action == 2
+	fun is_cancel: Bool do return action == 3
+	fun is_outside: Bool do return action == 4
+	fun is_pointer_down: Bool do return action == 5
+	fun is_pointer_up: Bool do return action == 6
 end
 
 interface AndroidInputEvent
@@ -321,8 +334,13 @@ class AndroidPointerEvent
 		return AMotionEvent_getPressure(motion_event, pointer_id);
 	`}
 
-	redef fun pressed do return true
-	redef fun depressed do return false
+	redef fun pressed
+	do
+		var action = motion_event.inner_event.action
+		return action.is_down or action.is_move
+	end
+
+	redef fun depressed do return not pressed
 end
 
 extern AndroidKeyEvent in "C" `{AInputEvent *`}
@@ -356,7 +374,7 @@ end
 redef class Object
 	# Uses Android logs for every print
 	redef fun print(text: Object) is extern import Object.to_s, String.to_cstring `{
-		__android_log_print(ANDROID_LOG_INFO, "mnit print", "%s", String_to_cstring(Object_to_s(object)));
+		__android_log_print(ANDROID_LOG_INFO, "mnit print", "%s", String_to_cstring(Object_to_s(text)));
 	`}
 end
 
@@ -397,7 +415,7 @@ redef class App
 		return handled
 	end
 	
-	redef fun main_loop is extern import full_frame, save, pause, resume, gained_focus, lost_focus, init_window, term_window, extern_input_key, extern_input_motion `{
+	redef fun main_loop is extern import full_frame, generate_input `{
 		LOGI("nitni loop");
 		
 		nit_app = recv;
@@ -407,24 +425,9 @@ redef class App
 		mnit_java_app->onInputEvent = mnit_handle_input;
 		
 		while (1) {
-			int ident;
-			int events;
-			static int block = 0;
-			struct android_poll_source* source;
+			App_generate_input(recv);
 
-			while ((ident=ALooper_pollAll(0, NULL, &events,
-					(void**)&source)) >= 0) { /* first 0 is for non-blocking */ 
-
-				// Process this event.
-				if (source != NULL)
-					source->process(mnit_java_app, source);
-
-				// Check if we are exiting.
-				if (mnit_java_app->destroyRequested != 0) {
-					mnit_term_display();
-					return;
-				}
-			}
+			if (mnit_java_app->destroyRequested != 0) return;
 			
 			if (mnit_animating == 1) {
 				mnit_frame();
@@ -433,6 +436,27 @@ redef class App
 		}
 		
 	   /* App_exit(); // this is unreachable anyway*/
+	`}
+
+	redef fun generate_input import save, pause, resume, gained_focus, lost_focus, init_window, term_window, extern_input_key, extern_input_motion `{
+		int ident;
+		int events;
+		static int block = 0;
+		struct android_poll_source* source;
+
+		while ((ident=ALooper_pollAll(0, NULL, &events,
+				(void**)&source)) >= 0) { /* first 0 is for non-blocking */ 
+
+			// Process this event.
+			if (source != NULL)
+				source->process(mnit_java_app, source);
+
+			// Check if we are exiting.
+			if (mnit_java_app->destroyRequested != 0) {
+				mnit_term_display();
+				return;
+			}
+		}
 	`}
 end
 
