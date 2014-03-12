@@ -112,4 +112,5 @@ end
 #
 # Services will be added to this class in other modules.
 abstract class Platform
+	fun supports_libunwind: Bool do return true
 end

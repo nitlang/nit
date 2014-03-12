@@ -71,6 +71,11 @@ else
 	mainmodule.set_imported_mmodules(mmodules)
 end
 
+var platform = mainmodule.target_platform
+if platform != null and not platform.supports_libunwind then
+	toolcontext.opt_no_stacktrace.value = true
+	toolcontext.opt_stacktrace.value = false
+end
 
 if toolcontext.opt_erasure.value then
 	modelbuilder.run_separate_erasure_compiler(mainmodule, null)
