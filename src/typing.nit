@@ -524,7 +524,7 @@ end
 
 redef class AExpr
 	# The static type of the expression.
-	# null if self is a statement of in case of error
+	# null if self is a statement or in case of error
 	var mtype: nullable MType = null
 
 	# Is the statement correctly typed?
