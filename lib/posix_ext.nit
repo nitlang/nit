@@ -18,5 +18,6 @@
 module posix_ext
 
 redef extern class Passwd
+	# User information
 	fun gecos: String import NativeString.to_s `{ return NativeString_to_s(recv->pw_gecos); `}
 end

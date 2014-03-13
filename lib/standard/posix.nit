@@ -41,14 +41,28 @@ redef class Sys
 end
 
 extern class Passwd `{struct passwd*`}
+	# Get the `Passwd` of the user with the `uid`
 	new from_uid(uid: Int) `{ return getpwuid(uid); `}
+
+	# Get the `Passwd` of the user with the `name`
 	new from_name(name: String) import String.to_cstring `{ return getpwnam( String_to_cstring(name) ); `}
 
+	# Username
 	fun name: String import NativeString.to_s `{ return NativeString_to_s(recv->pw_name); `}
+
+	# User password
 	fun passwd: String import NativeString.to_s `{ return NativeString_to_s(recv->pw_passwd); `}
+
+	# User ID
 	fun uid: Int `{ return recv->pw_uid; `}
+
+	# Group ID
 	fun gid: Int `{ return recv->pw_gid; `}
+
+	# Home directory
 	fun dir: String import NativeString.to_s `{ return NativeString_to_s(recv->pw_dir); `}
+
+	# Shell program
 	fun shell: String import NativeString.to_s `{ return NativeString_to_s(recv->pw_shell); `}
 end
 
