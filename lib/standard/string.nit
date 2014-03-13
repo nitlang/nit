@@ -1315,3 +1315,47 @@ redef class Sys
 	private fun native_argv(i: Int): NativeString is intern
 end
 
+# Comparator that efficienlty use `to_s` to compare things
+#
+# The comparaison call `to_s` on object and use the result to order things.
+#
+#     var a = [1, 2, 3, 10, 20]
+#     (new CachedAlphaComparator).sort(a)
+#     assert a == [1, 10, 2, 20, 3]
+#
+# Internally the result of `to_s` is cached in a HashMap to counter
+# uneficient implementation of `to_s`.
+#
+# Note: it caching is not usefull, see `alpha_comparator`
+class CachedAlphaComparator
+	super AbstractSorter[Object]
+
+	private var cache = new HashMap[Object, String]
+
+	private fun do_to_s(a: Object): String do
+		if cache.has_key(a) then return cache[a]
+		var res = a.to_s
+		cache[a] = res
+		return res
+	end
+
+	redef fun compare(a, b) do
+		return do_to_s(a) <=> do_to_s(b)
+	end
+end
+
+# see `alpha_comparator`
+private class AlphaComparator
+	super AbstractSorter[Object]
+	redef fun compare(a, b) do return a.to_s <=> b.to_s
+end
+
+# Stateless comparator that naively use `to_s` to compare things.
+#
+# Note: the result of `to_s` is not cached, thus can be invoked a lot
+# on a single instace. See `CachedAlphaComparator` as an alternative.
+#
+#     var a = [1, 2, 3, 10, 20]
+#     alpha_comparator.sort(a)
+#     assert a == [1, 10, 2, 20, 3]
+fun alpha_comparator: AbstractSorter[Object] do return once new AlphaComparator

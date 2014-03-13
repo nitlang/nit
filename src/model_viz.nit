@@ -39,8 +39,6 @@ class MProjectTree
 		end
 	end
 
-	var alpha_comparator = new AlphaComparator
-
 	var linex_comparator: nullable LinexComparator = null
 
 	# Sort modules and groups with their names
@@ -59,12 +57,6 @@ class MProjectTree
 		end
 		sort_with(c)
 	end
-end
-
-# Just compare objects by using the `to_s` method
-private class AlphaComparator
-	super AbstractSorter[Object]
-	redef fun compare(a,b) do return a.to_s <=> b.to_s
 end
 
 # Compare modules and groups using the
