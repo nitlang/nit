@@ -26,7 +26,7 @@ redef class Int
 	fun bin_and(i: Int): Int is extern "kernel_Int_Int_binand_0"
 	fun bin_or(i: Int): Int is extern "kernel_Int_Int_binor_0"
 	fun bin_xor(i: Int): Int is extern "kernel_Int_Int_binxor_0"
-	fun sqrt : Int is extern `{ return sqrtl(recv); `}
+	fun sqrt: Int `{ return sqrt(recv); `}
 end
 
 redef class Float
