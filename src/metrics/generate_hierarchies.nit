@@ -49,11 +49,13 @@ do
 
 	var projectpath = toolcontext.output_dir.join_path("project_hierarchy.dot")
 	dot.mprojects.add(model.mprojects.first)
-	dot.render(projectpath)
+	print "generating {projectpath}"
+	dot.write_to_file(projectpath)
 
 	var modulepath = toolcontext.output_dir.join_path("module_hierarchy.dot")
 	dot.mprojects.add_all(model.mprojects)
-	dot.render(modulepath)
+	print "generating {modulepath}"
+	dot.write_to_file(modulepath)
 end
 
 # Create a dot file representing the class hierarchy of a model.

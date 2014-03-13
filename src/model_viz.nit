@@ -135,6 +135,8 @@ end
 # Interessing elements must be selected. See `mmodules`, ``
 # Display configuration can be set. See `cluster_group`, `project_group`
 class MProjectDot
+	super Streamable
+
 	# The model where to look for information
 	var model: Model
 
@@ -210,8 +212,8 @@ class MProjectDot
 		end
 	end
 
-	# Generate the dot-file named `filepath` with the current configuration
-	fun render(filepath: String)
+	# Generate the dot content with the current configuration
+	redef fun write_to(stream)
 	do
 		# Collect interessing nodes
 		for m in model.mmodules do
@@ -235,13 +237,11 @@ class MProjectDot
 			end
 		end
 
-		print "generating {filepath}"
-		var dot = new OFStream.open(filepath)
-		dot.write("digraph g \{\n")
-		dot.write("rankdir=BT;node[shape=box];\n")
+		stream.write("digraph g \{\n")
+		stream.write("rankdir=BT;node[shape=box];\n")
 		# Generate the nodes
 		for p in model.mprojects do
-			dot_cluster(dot, p.root.as(not null))
+			dot_cluster(stream, p.root.as(not null))
 		end
 		# Generate the edges
 		for m in mmodules do
@@ -249,14 +249,12 @@ class MProjectDot
 				var nm = node_for(m)
 				var nsm = node_for(sm)
 				if m.in_importation.direct_greaters.has(sm) then
-					dot.write("\t{nm} -> {nsm}[style=bold]\n")
+					stream.write("\t{nm} -> {nsm}[style=bold]\n")
 				else
-					dot.write("\t{nm} -> {nsm}[style=solid]\n")
+					stream.write("\t{nm} -> {nsm}[style=solid]\n")
 				end
 			end
 		end
-		dot.write("\}\n")
-		dot.close
-		# sys.system("xdot -f dot {filepath}")
+		stream.write("\}\n")
 	end
 end
