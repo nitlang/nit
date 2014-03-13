@@ -55,6 +55,8 @@ end
 class AndroidPlatform
 	super Platform
 
+	redef fun supports_libunwind do return false
+
 	redef fun toolchain(toolcontext) do return new AndroidToolchain(toolcontext)
 end
 
