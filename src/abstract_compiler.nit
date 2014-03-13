@@ -335,7 +335,7 @@ class MakefileToolchain
 				var o = f.makefile_rule_name
 				var ff = f.filename.basename("")
 				makefile.write("{o}: {ff}\n")
-				makefile.write("\t{f.makefile_rule_content}\n")
+				makefile.write("\t{f.makefile_rule_content}\n\n")
 				dep_rules.add(f.makefile_rule_name)
 
 				if f isa ExternCppFile then ofiles.add(o)
