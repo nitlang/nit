@@ -205,6 +205,16 @@ end
 
 ###############################################################################
 
+redef class Streamable
+	# Like `write_to` but take care of creating the file
+	fun write_to_file(filepath: String)
+	do
+		var stream = new OFStream.open(filepath)
+		write_to(stream)
+		stream.close
+	end
+end
+
 redef class String
 	# return true if a file with this names exists
 	fun file_exists: Bool do return to_cstring.file_exists
