@@ -483,6 +483,9 @@ END
 					process_result $bff "  $name" $pack
 				done < $fargs
 			fi
+		elif [ -f "./$ff.bin" ]; then
+			echo "Not executable (platform?)" > "$ff.res"
+			process_result $bf "$bf" $pack
 		else
 			test -z "$tap" && echo -n "! "
 			cat "$ff.cmp.err" > "$ff.res"
