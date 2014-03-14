@@ -77,7 +77,7 @@ class OrderedTree[E: Object]
 
 	# Sort roots and other elements using a comparator method
 	# This method basically sorts roots then each group of children
-	fun sort_with(comparator: AbstractSorter[E])
+	fun sort_with(comparator: Comparator[E])
 	do
 		comparator.sort(roots)
 		for a in sub.values do

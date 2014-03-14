@@ -1328,7 +1328,7 @@ end
 #
 # Note: it caching is not usefull, see `alpha_comparator`
 class CachedAlphaComparator
-	super AbstractSorter[Object]
+	super Comparator[Object]
 
 	private var cache = new HashMap[Object, String]
 
@@ -1346,7 +1346,7 @@ end
 
 # see `alpha_comparator`
 private class AlphaComparator
-	super AbstractSorter[Object]
+	super Comparator[Object]
 	redef fun compare(a, b) do return a.to_s <=> b.to_s
 end
 
@@ -1358,4 +1358,4 @@ end
 #     var a = [1, 2, 3, 10, 20]
 #     alpha_comparator.sort(a)
 #     assert a == [1, 10, 2, 20, 3]
-fun alpha_comparator: AbstractSorter[Object] do return once new AlphaComparator
+fun alpha_comparator: Comparator[Object] do return once new AlphaComparator

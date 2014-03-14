@@ -26,7 +26,7 @@
 module pipeline
 
 redef interface Collection[E]
-	# Filter: sort with ComparableSorter.
+	# Filter: sort with `default_comparator`.
 	# SEE: `sort_with` for details
 	# REQUIRE: self isa Iterator[Comparable]
 	#
@@ -34,18 +34,17 @@ redef interface Collection[E]
 	fun sort_filter: Collection[E]
 	do
 		assert self isa Collection[Comparable]
-		var sorter = new ComparableSorter[Comparable]
 		var a = self.to_a
-		sorter.sort(a)
+		default_comparator.sort(a)
 		return a
 	end
 
-	# Filter: sort with a given `sorter`.
+	# Filter: sort with a given `comparator`.
 	# Important: require O(n) memory.
-	fun sort_with(sorter: AbstractSorter[E]): Collection[E]
+	fun sort_with(comparator: Comparator[E]): Collection[E]
 	do
 		var a = self.to_a
-		sorter.sort(a)
+		comparator.sort(a)
 		return a
 	end
 

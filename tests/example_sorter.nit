@@ -15,8 +15,8 @@
 # limitations under the License.
 
 
-class BackIntSorter
-	super AbstractSorter[Int]
+class BackIntComparator
+	super Comparator[Int]
 	redef fun compare(a: Int, b: Int): Int
 	do
 		return b <=> a
@@ -25,8 +25,8 @@ class BackIntSorter
 	init do end
 end
 
-class DecimalSorter
-	super AbstractSorter[Int]
+class DecimalComparator
+	super Comparator[Int]
 	redef fun compare(a: Int, b: Int): Int
 	do
 		return (a%10) <=> (b%10)
@@ -51,11 +51,11 @@ end
 
 var q = get_an_array(50)
 print(q.join(" "))
-(new ComparableSorter[Int]).sort(q)
+(new DefaultComparator[Int]).sort(q)
 print(q.join(" "))
-(new DecimalSorter).sort(q)
+(new DecimalComparator).sort(q)
 print(q.join(" "))
-(new BackIntSorter).sort(q)
+(new BackIntComparator).sort(q)
 print(q.join(" "))
-(new DecimalSorter).sort(q)
+(new DecimalComparator).sort(q)
 print(q.join(" "))
